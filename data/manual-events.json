@@ -1,6 +1,5 @@
 {
-  "_comment": "Hand-curated events for sources we cannot scrape. To use: (1) add an entry to the 'events' array below following the _example_schema, (2) edit scripts/sources.json to set fetcher='manual' for the source you want this file to handle. The fetcher reads only the 'events' array; any other keys (including _comment, _example_schema) are ignored.",
-
+  "_comment": "Hand-curated events for sources we cannot scrape, OR archival lectures preserved on the seminars page beyond their date. To add: append an entry to the 'events' array following the _example_schema. The fetcher reads only the 'events' array; other keys (_comment, _example_schema) are ignored.",
   "_example_schema": {
     "source_id": "MUST match a source id in scripts/sources.json",
     "date": "ISO 8601 datetime with timezone offset. Example: 2026-06-15T18:00:00-04:00",
@@ -12,6 +11,80 @@
     "attendance_confirmed": "Optional boolean. For screenings, true means filmmaker is present for Q and A.",
     "description": "Optional. Brief description shown in the RSS feed item body."
   },
-
-  "events": []
+  "events": [
+    {
+      "source_id": "manual-curated",
+      "date": "2026-04-17T18:00:00-04:00",
+      "title": "Rebecca Comay on Mourning Sickness",
+      "venue": "University of Toronto Department of Comparative Literature",
+      "type": "lecture",
+      "speaker_or_director": "Rebecca Comay",
+      "source_url": "https://seminarschools.com/seminars/",
+      "description": "Hand-curated lecture. Comay on melancholia, mourning, and the dialectic of grief as developed in Mourning Sickness: Hegel and the French Revolution."
+    },
+    {
+      "source_id": "manual-curated",
+      "date": "2026-04-22T18:00:00-04:00",
+      "title": "TPL Salon Series at Appel Salon",
+      "venue": "Toronto Reference Library, Appel Salon, 789 Yonge Street",
+      "type": "lecture",
+      "source_url": "https://seminarschools.com/seminars/",
+      "description": "Toronto Public Library Salon Series."
+    },
+    {
+      "source_id": "manual-curated",
+      "date": "2026-04-25T18:00:00-04:00",
+      "title": "Massey Dialogues",
+      "venue": "Massey College, 4 Devonshire Place, Toronto",
+      "type": "lecture",
+      "source_url": "https://seminarschools.com/seminars/",
+      "description": "Massey College Dialogues series."
+    },
+    {
+      "source_id": "manual-curated",
+      "date": "2026-05-02T18:00:00-04:00",
+      "title": "Cheryl Misak on Frank Ramsey",
+      "venue": "University of Toronto Department of Philosophy",
+      "type": "lecture",
+      "speaker_or_director": "Cheryl Misak",
+      "source_url": "https://seminarschools.com/seminars/",
+      "description": "Hand-curated lecture. Misak on Frank Ramsey, the Cambridge philosopher whose biography she wrote (Frank Ramsey: A Sheer Excess of Powers, Oxford 2020)."
+    },
+    {
+      "source_id": "manual-curated",
+      "date": "2026-05-09T18:00:00-04:00",
+      "title": "Ian Hacking Memorial Symposium",
+      "venue": "Victoria College, University of Toronto",
+      "type": "panel",
+      "source_url": "https://seminarschools.com/seminars/",
+      "description": "Memorial symposium for Ian Hacking, the late philosopher of science."
+    },
+    {
+      "source_id": "manual-curated",
+      "date": "2026-05-14T18:00:00-04:00",
+      "title": "ROM Speaks on archaeology and memory",
+      "venue": "Royal Ontario Museum, 100 Queens Park, Toronto",
+      "type": "lecture",
+      "source_url": "https://seminarschools.com/seminars/",
+      "description": "ROM Speaks public lecture series, theme: archaeology and memory."
+    },
+    {
+      "source_id": "manual-curated",
+      "date": "2026-05-21T12:30:00-04:00",
+      "title": "Ethics@Noon-ish weekly talk",
+      "venue": "Centre for Ethics, University of Toronto, Larkin Building, 15 Devonshire Place",
+      "type": "lecture",
+      "source_url": "https://seminarschools.com/seminars/",
+      "description": "Weekly Ethics@Noon-ish series. The Centre for Ethics workhorse seminar."
+    },
+    {
+      "source_id": "manual-curated",
+      "date": "2026-06-05T18:00:00-04:00",
+      "title": "Jackman Humanities Annual Lecture",
+      "venue": "Jackman Humanities Institute, 170 St. George Street, Toronto",
+      "type": "lecture",
+      "source_url": "https://seminarschools.com/seminars/",
+      "description": "Annual lecture of the Jackman Humanities Institute."
+    }
+  ]
 }

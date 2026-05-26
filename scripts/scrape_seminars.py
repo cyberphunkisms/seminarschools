@@ -449,7 +449,8 @@ def fetch_manual_events(source_config):
         return []
 
     records = []
-    today = datetime.now(timezone.utc)
+    # Note: no past-date filter for manual events. Curator decides what to include.
+    # The seminars page UI distinguishes past from upcoming visually.
     for entry in data.get("events", []):
         if entry.get("source_id") != source_config["id"]:
             continue
@@ -458,8 +459,6 @@ def fetch_manual_events(source_config):
             if dt.tzinfo is None:
                 dt = dt.replace(tzinfo=timezone(-datetime.now().astimezone().utcoffset()))
         except Exception:
-            continue
-        if dt < today:
             continue
 
         iso = dt.isoformat(timespec="minutes")

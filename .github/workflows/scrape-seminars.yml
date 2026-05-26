@@ -20,6 +20,13 @@ on:
 permissions:
   contents: write
 
+# Opt into Node.js 24 ahead of GitHub's forced cutover on June 2, 2026.
+# Silences the deprecation warning for actions/checkout@v4 and actions/setup-python@v5.
+# When GitHub releases newer action versions (v5/v6) that natively support Node 24,
+# this env var can be removed and the action versions bumped instead.
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   scrape:
     runs-on: ubuntu-latest

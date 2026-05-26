@@ -1,11 +1,172 @@
 {
   "$schema_ref": "/data/seminars-schema.json",
-  "generated_at": "2026-05-26T16:46:54+00:00",
-  "count": 56,
+  "generated_at": "2026-05-26T16:57:37+00:00",
+  "count": 65,
   "events": [
     {
-      "id": "30a1a5fcaa29",
-      "date": "2026-05-29T18:30+00:00",
+      "id": "dfce4a646e20",
+      "date": "2026-04-17T18:00-04:00",
+      "end_date": null,
+      "title": "Rebecca Comay on Mourning Sickness",
+      "venue": "University of Toronto Department of Comparative Literature",
+      "source_url": "https://seminarschools.com/seminars/",
+      "source_id": "manual-curated",
+      "type": "lecture",
+      "speaker_or_director": "Rebecca Comay",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Hand-curated lecture. Comay on melancholia, mourning, and the dialectic of grief as developed in Mourning Sickness: Hegel and the French Revolution.",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
+      "review_status": "auto-published",
+      "marginalia_url": null
+    },
+    {
+      "id": "fad819a8f83c",
+      "date": "2026-04-22T18:00-04:00",
+      "end_date": null,
+      "title": "TPL Salon Series at Appel Salon",
+      "venue": "Toronto Reference Library, Appel Salon, 789 Yonge Street",
+      "source_url": "https://seminarschools.com/seminars/",
+      "source_id": "manual-curated",
+      "type": "lecture",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Toronto Public Library Salon Series.",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
+      "review_status": "auto-published",
+      "marginalia_url": null
+    },
+    {
+      "id": "bc63bc3dda5f",
+      "date": "2026-04-25T18:00-04:00",
+      "end_date": null,
+      "title": "Massey Dialogues",
+      "venue": "Massey College, 4 Devonshire Place, Toronto",
+      "source_url": "https://seminarschools.com/seminars/",
+      "source_id": "manual-curated",
+      "type": "lecture",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Massey College Dialogues series.",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
+      "review_status": "auto-published",
+      "marginalia_url": null
+    },
+    {
+      "id": "c0ca14162944",
+      "date": "2026-05-02T18:00-04:00",
+      "end_date": null,
+      "title": "Cheryl Misak on Frank Ramsey",
+      "venue": "University of Toronto Department of Philosophy",
+      "source_url": "https://seminarschools.com/seminars/",
+      "source_id": "manual-curated",
+      "type": "lecture",
+      "speaker_or_director": "Cheryl Misak",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Hand-curated lecture. Misak on Frank Ramsey, the Cambridge philosopher whose biography she wrote (Frank Ramsey: A Sheer Excess of Powers, Oxford 2020).",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
+      "review_status": "auto-published",
+      "marginalia_url": null
+    },
+    {
+      "id": "b0d5a15b836b",
+      "date": "2026-05-09T18:00-04:00",
+      "end_date": null,
+      "title": "Ian Hacking Memorial Symposium",
+      "venue": "Victoria College, University of Toronto",
+      "source_url": "https://seminarschools.com/seminars/",
+      "source_id": "manual-curated",
+      "type": "panel",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Memorial symposium for Ian Hacking, the late philosopher of science.",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
+      "review_status": "auto-published",
+      "marginalia_url": null
+    },
+    {
+      "id": "80b73904f5f9",
+      "date": "2026-05-14T18:00-04:00",
+      "end_date": null,
+      "title": "ROM Speaks on archaeology and memory",
+      "venue": "Royal Ontario Museum, 100 Queens Park, Toronto",
+      "source_url": "https://seminarschools.com/seminars/",
+      "source_id": "manual-curated",
+      "type": "lecture",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "ROM Speaks public lecture series, theme: archaeology and memory.",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
+      "review_status": "auto-published",
+      "marginalia_url": null
+    },
+    {
+      "id": "0ec5132e22ee",
+      "date": "2026-05-21T12:30-04:00",
+      "end_date": null,
+      "title": "Ethics@Noon-ish weekly talk",
+      "venue": "Centre for Ethics, University of Toronto, Larkin Building, 15 Devonshire Place",
+      "source_url": "https://seminarschools.com/seminars/",
+      "source_id": "manual-curated",
+      "type": "lecture",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Weekly Ethics@Noon-ish series. The Centre for Ethics workhorse seminar.",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
+      "review_status": "auto-published",
+      "marginalia_url": null
+    },
+    {
+      "id": "32b39bbc2d80",
+      "date": "2026-05-29T18:30+04:00",
       "end_date": null,
       "title": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -22,13 +183,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "7585fa2c233c",
-      "date": "2026-05-30T13:00+00:00",
+      "id": "b7385087cc3d",
+      "date": "2026-05-30T13:00+04:00",
       "end_date": null,
       "title": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -45,13 +206,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "db11867f99de",
-      "date": "2026-05-30T21:30+00:00",
+      "id": "5207f6884cd1",
+      "date": "2026-05-30T21:30+04:00",
       "end_date": null,
       "title": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -68,13 +229,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "32f7187545b3",
-      "date": "2026-05-31T13:00+00:00",
+      "id": "f27cc21392a6",
+      "date": "2026-05-31T13:00+04:00",
       "end_date": null,
       "title": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -91,13 +252,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "216501504fe7",
-      "date": "2026-05-31T16:00+00:00",
+      "id": "ca4055daec57",
+      "date": "2026-05-31T16:00+04:00",
       "end_date": null,
       "title": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -114,13 +275,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "302d11d48ad6",
-      "date": "2026-05-31T16:00+00:00",
+      "id": "4da0e09e25d8",
+      "date": "2026-05-31T16:00+04:00",
       "end_date": null,
       "title": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -137,13 +298,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "28642367e3dd",
-      "date": "2026-05-31T19:00+00:00",
+      "id": "57deac77538c",
+      "date": "2026-05-31T19:00+04:00",
       "end_date": null,
       "title": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -160,13 +321,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "bf1e350e1e81",
-      "date": "2026-05-31T19:00+00:00",
+      "id": "979e7d152c11",
+      "date": "2026-05-31T19:00+04:00",
       "end_date": null,
       "title": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -183,13 +344,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "ecd3c2d37a79",
-      "date": "2026-06-01T18:45+00:00",
+      "id": "5c8192c02a4c",
+      "date": "2026-06-01T18:45+04:00",
       "end_date": null,
       "title": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -206,13 +367,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "f1e59bee1e69",
-      "date": "2026-06-01T18:45+00:00",
+      "id": "7e600d3d8e16",
+      "date": "2026-06-01T18:45+04:00",
       "end_date": null,
       "title": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -229,13 +390,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "22de89fc148c",
-      "date": "2026-06-01T18:45+00:00",
+      "id": "c9a3b2cc44f7",
+      "date": "2026-06-01T18:45+04:00",
       "end_date": null,
       "title": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -252,13 +413,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "bcc73649e49f",
-      "date": "2026-06-01T21:30+00:00",
+      "id": "aba57b168572",
+      "date": "2026-06-01T21:30+04:00",
       "end_date": null,
       "title": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -275,13 +436,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "691c1bafd08f",
-      "date": "2026-06-01T21:30+00:00",
+      "id": "b1e570e66100",
+      "date": "2026-06-01T21:30+04:00",
       "end_date": null,
       "title": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -298,13 +459,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "f3aa9047967c",
-      "date": "2026-06-02T18:45+00:00",
+      "id": "51169da57a62",
+      "date": "2026-06-02T18:45+04:00",
       "end_date": null,
       "title": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -321,13 +482,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "e9dd513fdcc4",
-      "date": "2026-06-02T18:45+00:00",
+      "id": "9d976480b4f8",
+      "date": "2026-06-02T18:45+04:00",
       "end_date": null,
       "title": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -344,13 +505,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "d1cdc1e58a6b",
-      "date": "2026-06-02T18:45+00:00",
+      "id": "fe70b28547f5",
+      "date": "2026-06-02T18:45+04:00",
       "end_date": null,
       "title": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -367,13 +528,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "4451d8d1ba9c",
-      "date": "2026-06-02T18:45+00:00",
+      "id": "a90a1d81de15",
+      "date": "2026-06-02T18:45+04:00",
       "end_date": null,
       "title": "Bleak Week: DARKEST MIRIAM \u2013 Q&A with director Naomi Jaye!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -390,13 +551,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: DARKEST MIRIAM \u2013 Q&A with director Naomi Jaye!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "5dd58cbf72d2",
-      "date": "2026-06-02T21:30+00:00",
+      "id": "a1d3911d7519",
+      "date": "2026-06-02T21:30+04:00",
       "end_date": null,
       "title": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -413,13 +574,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "985f2ed4a4dc",
-      "date": "2026-06-02T21:30+00:00",
+      "id": "a3f6a87d20e4",
+      "date": "2026-06-02T21:30+04:00",
       "end_date": null,
       "title": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -436,13 +597,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "a0d6c66e2e0b",
-      "date": "2026-06-02T21:30+00:00",
+      "id": "2b4603e9c160",
+      "date": "2026-06-02T21:30+04:00",
       "end_date": null,
       "title": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -459,13 +620,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "f0552b846002",
-      "date": "2026-06-02T21:30+00:00",
+      "id": "0b73b8477f5e",
+      "date": "2026-06-02T21:30+04:00",
       "end_date": null,
       "title": "Bleak Week: DARKEST MIRIAM \u2013 Q&A with director Naomi Jaye!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -482,13 +643,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: DARKEST MIRIAM \u2013 Q&A with director Naomi Jaye!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "f930087353a6",
-      "date": "2026-06-02T21:30+00:00",
+      "id": "dff488ebd5d2",
+      "date": "2026-06-02T21:30+04:00",
       "end_date": null,
       "title": "Bleak Week: SUDDEN FURY (1975) \u2013 Q&A with director Brian Damude",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -505,13 +666,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: SUDDEN FURY (1975) \u2013 Q&A with director Brian Damude",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "abb12a54768f",
-      "date": "2026-06-03T19:00+00:00",
+      "id": "e6e756a9d0f0",
+      "date": "2026-06-03T19:00+04:00",
       "end_date": null,
       "title": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -528,13 +689,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "e7513dddb0e9",
-      "date": "2026-06-03T19:00+00:00",
+      "id": "fa38a589370a",
+      "date": "2026-06-03T19:00+04:00",
       "end_date": null,
       "title": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -551,13 +712,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "c9e9810e5c6d",
-      "date": "2026-06-03T19:00+00:00",
+      "id": "4525ac097380",
+      "date": "2026-06-03T19:00+04:00",
       "end_date": null,
       "title": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -574,13 +735,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "9126f559ed9d",
-      "date": "2026-06-03T19:00+00:00",
+      "id": "6d9ba941ad22",
+      "date": "2026-06-03T19:00+04:00",
       "end_date": null,
       "title": "Bleak Week: DARKEST MIRIAM \u2013 Q&A with director Naomi Jaye!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -597,13 +758,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: DARKEST MIRIAM \u2013 Q&A with director Naomi Jaye!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "c9231ff74d0c",
-      "date": "2026-06-03T19:00+00:00",
+      "id": "06bd1f0ae656",
+      "date": "2026-06-03T19:00+04:00",
       "end_date": null,
       "title": "Bleak Week: SUDDEN FURY (1975) \u2013 Q&A with director Brian Damude",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -620,13 +781,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: SUDDEN FURY (1975) \u2013 Q&A with director Brian Damude",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "7a37224a67f7",
-      "date": "2026-06-03T21:30+00:00",
+      "id": "54452edcfa5a",
+      "date": "2026-06-03T21:30+04:00",
       "end_date": null,
       "title": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -643,13 +804,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "0af99aef5442",
-      "date": "2026-06-03T21:30+00:00",
+      "id": "832f8fe7655c",
+      "date": "2026-06-03T21:30+04:00",
       "end_date": null,
       "title": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -666,13 +827,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "2d838c53e429",
-      "date": "2026-06-03T21:30+00:00",
+      "id": "96e5400ece49",
+      "date": "2026-06-03T21:30+04:00",
       "end_date": null,
       "title": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -689,13 +850,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "33f7ca8a13e3",
-      "date": "2026-06-03T21:30+00:00",
+      "id": "dfad785bce53",
+      "date": "2026-06-03T21:30+04:00",
       "end_date": null,
       "title": "Bleak Week: DARKEST MIRIAM \u2013 Q&A with director Naomi Jaye!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -712,13 +873,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: DARKEST MIRIAM \u2013 Q&A with director Naomi Jaye!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "2b95c3dfc615",
-      "date": "2026-06-03T21:30+00:00",
+      "id": "c5df1783770b",
+      "date": "2026-06-03T21:30+04:00",
       "end_date": null,
       "title": "Bleak Week: SUDDEN FURY (1975) \u2013 Q&A with director Brian Damude",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -735,13 +896,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: SUDDEN FURY (1975) \u2013 Q&A with director Brian Damude",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "2db9ec6f5e4b",
-      "date": "2026-06-04T18:45+00:00",
+      "id": "46c47b52b354",
+      "date": "2026-06-04T18:45+04:00",
       "end_date": null,
       "title": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -758,13 +919,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "6577add3e014",
-      "date": "2026-06-04T18:45+00:00",
+      "id": "023585c7d70c",
+      "date": "2026-06-04T18:45+04:00",
       "end_date": null,
       "title": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -781,13 +942,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "bd55ce65acea",
-      "date": "2026-06-04T18:45+00:00",
+      "id": "4f6dd3a2089a",
+      "date": "2026-06-04T18:45+04:00",
       "end_date": null,
       "title": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -804,13 +965,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "0c52e360a83a",
-      "date": "2026-06-04T18:45+00:00",
+      "id": "0f97e55b1f11",
+      "date": "2026-06-04T18:45+04:00",
       "end_date": null,
       "title": "Bleak Week: DARKEST MIRIAM \u2013 Q&A with director Naomi Jaye!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -827,13 +988,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: DARKEST MIRIAM \u2013 Q&A with director Naomi Jaye!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "4d6b6f8080dd",
-      "date": "2026-06-04T18:45+00:00",
+      "id": "e3acdd54bfb4",
+      "date": "2026-06-04T18:45+04:00",
       "end_date": null,
       "title": "Bleak Week: SUDDEN FURY (1975) \u2013 Q&A with director Brian Damude",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -850,13 +1011,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: SUDDEN FURY (1975) \u2013 Q&A with director Brian Damude",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "46b0c49ccb41",
-      "date": "2026-06-04T18:45+00:00",
+      "id": "89ae0761fa79",
+      "date": "2026-06-04T18:45+04:00",
       "end_date": null,
       "title": "Bleak Week: CUBE (1997) \u2013 Q&A with director Vincenzo Natali, cast & crew!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -873,13 +1034,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: CUBE (1997) \u2013 Q&A with director Vincenzo Natali, cast & crew!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "242cbe5eb458",
-      "date": "2026-06-04T21:30+00:00",
+      "id": "7095155c7c78",
+      "date": "2026-06-04T21:30+04:00",
       "end_date": null,
       "title": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -896,13 +1057,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "07ba17664b87",
-      "date": "2026-06-04T21:30+00:00",
+      "id": "0cc568dc926d",
+      "date": "2026-06-04T21:30+04:00",
       "end_date": null,
       "title": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -919,13 +1080,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "281c1635e1fa",
-      "date": "2026-06-04T21:30+00:00",
+      "id": "a7cdaca9d2c2",
+      "date": "2026-06-04T21:30+04:00",
       "end_date": null,
       "title": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -942,13 +1103,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "77150f606551",
-      "date": "2026-06-04T21:30+00:00",
+      "id": "c43631eb2c94",
+      "date": "2026-06-04T21:30+04:00",
       "end_date": null,
       "title": "Bleak Week: DARKEST MIRIAM \u2013 Q&A with director Naomi Jaye!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -965,13 +1126,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: DARKEST MIRIAM \u2013 Q&A with director Naomi Jaye!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "ade288e8fcb9",
-      "date": "2026-06-04T21:30+00:00",
+      "id": "2292a18ca1cf",
+      "date": "2026-06-04T21:30+04:00",
       "end_date": null,
       "title": "Bleak Week: SUDDEN FURY (1975) \u2013 Q&A with director Brian Damude",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -988,13 +1149,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: SUDDEN FURY (1975) \u2013 Q&A with director Brian Damude",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "4d7577d1a1fa",
-      "date": "2026-06-04T21:30+00:00",
+      "id": "be3b7d6524fc",
+      "date": "2026-06-04T21:30+04:00",
       "end_date": null,
       "title": "Bleak Week: CUBE (1997) \u2013 Q&A with director Vincenzo Natali, cast & crew!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -1011,13 +1172,36 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: CUBE (1997) \u2013 Q&A with director Vincenzo Natali, cast & crew!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "e919da9c9145",
-      "date": "2026-06-05T18:30+00:00",
+      "id": "2c3f6a25dbe1",
+      "date": "2026-06-05T18:00-04:00",
+      "end_date": null,
+      "title": "Jackman Humanities Annual Lecture",
+      "venue": "Jackman Humanities Institute, 170 St. George Street, Toronto",
+      "source_url": "https://seminarschools.com/seminars/",
+      "source_id": "manual-curated",
+      "type": "lecture",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Annual lecture of the Jackman Humanities Institute.",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
+      "review_status": "auto-published",
+      "marginalia_url": null
+    },
+    {
+      "id": "facf9c866db6",
+      "date": "2026-06-05T18:30+04:00",
       "end_date": null,
       "title": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -1034,13 +1218,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "c3229dc26dae",
-      "date": "2026-06-05T18:30+00:00",
+      "id": "e8e9643dc512",
+      "date": "2026-06-05T18:30+04:00",
       "end_date": null,
       "title": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -1057,13 +1241,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "f4abb270bb13",
-      "date": "2026-06-05T18:30+00:00",
+      "id": "97124916f2c5",
+      "date": "2026-06-05T18:30+04:00",
       "end_date": null,
       "title": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -1080,13 +1264,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "a121d04f3489",
-      "date": "2026-06-05T18:30+00:00",
+      "id": "3df5e708ca98",
+      "date": "2026-06-05T18:30+04:00",
       "end_date": null,
       "title": "Bleak Week: DARKEST MIRIAM \u2013 Q&A with director Naomi Jaye!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -1103,13 +1287,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: DARKEST MIRIAM \u2013 Q&A with director Naomi Jaye!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "77ee5fa71958",
-      "date": "2026-06-05T18:30+00:00",
+      "id": "4990d0b0e3b4",
+      "date": "2026-06-05T18:30+04:00",
       "end_date": null,
       "title": "Bleak Week: SUDDEN FURY (1975) \u2013 Q&A with director Brian Damude",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -1126,13 +1310,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: SUDDEN FURY (1975) \u2013 Q&A with director Brian Damude",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "c7d870ccc86a",
-      "date": "2026-06-05T18:30+00:00",
+      "id": "6097de065b9f",
+      "date": "2026-06-05T18:30+04:00",
       "end_date": null,
       "title": "Bleak Week: CUBE (1997) \u2013 Q&A with director Vincenzo Natali, cast & crew!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -1149,13 +1333,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: CUBE (1997) \u2013 Q&A with director Vincenzo Natali, cast & crew!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "8f1aa6a83630",
-      "date": "2026-06-05T21:30+00:00",
+      "id": "18a983dd7af1",
+      "date": "2026-06-05T21:30+04:00",
       "end_date": null,
       "title": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -1172,13 +1356,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: THE END OF THE INTERNET \u2013 director in attendance + Hybrid Installation!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "020344964b2e",
-      "date": "2026-06-05T21:30+00:00",
+      "id": "bcaab6aafab0",
+      "date": "2026-06-05T21:30+04:00",
       "end_date": null,
       "title": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -1195,13 +1379,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Revue Event: BLIND COP 2 \u2013 Director In Attendance!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "2b5d63cf3138",
-      "date": "2026-06-05T21:30+00:00",
+      "id": "cee4154f2842",
+      "date": "2026-06-05T21:30+04:00",
       "end_date": null,
       "title": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -1218,13 +1402,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: LAST NIGHT (1998) \u2013 Q&A with director Don McKellar!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "93185f8aa656",
-      "date": "2026-06-05T21:30+00:00",
+      "id": "8c0aa0851b75",
+      "date": "2026-06-05T21:30+04:00",
       "end_date": null,
       "title": "Bleak Week: DARKEST MIRIAM \u2013 Q&A with director Naomi Jaye!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -1241,13 +1425,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: DARKEST MIRIAM \u2013 Q&A with director Naomi Jaye!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "bb1822978613",
-      "date": "2026-06-05T21:30+00:00",
+      "id": "a6ab2d887ba0",
+      "date": "2026-06-05T21:30+04:00",
       "end_date": null,
       "title": "Bleak Week: SUDDEN FURY (1975) \u2013 Q&A with director Brian Damude",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -1264,13 +1448,13 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: SUDDEN FURY (1975) \u2013 Q&A with director Brian Damude",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     },
     {
-      "id": "c4c9a052df11",
-      "date": "2026-06-05T21:30+00:00",
+      "id": "187d8812e933",
+      "date": "2026-06-05T21:30+04:00",
       "end_date": null,
       "title": "Bleak Week: CUBE (1997) \u2013 Q&A with director Vincenzo Natali, cast & crew!",
       "venue": "Revue Cinema, 400 Roncesvalles Avenue",
@@ -1287,7 +1471,30 @@
         "intellectual_stake": null
       },
       "raw_excerpt": "Bleak Week: CUBE (1997) \u2013 Q&A with director Vincenzo Natali, cast & crew!",
-      "scraped_at": "2026-05-26T16:46:54+00:00",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
+      "review_status": "auto-published",
+      "marginalia_url": null
+    },
+    {
+      "id": "34ccf5decfa8",
+      "date": "2026-06-09T12:00+04:00",
+      "end_date": null,
+      "title": "Sulpicia: Life, Love, and Literature in Ancient Rome",
+      "venue": "Jackman Humanities Building, 170 St. George St.",
+      "source_url": "https://humanities.utoronto.ca/events/sulpicia-life-love-and-literature-ancient-rome",
+      "source_id": "jhi",
+      "type": "lecture",
+      "speaker_or_director": null,
+      "attendance_confirmed": false,
+      "confidence": 75,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": null,
+        "substantive_engagement": null,
+        "intellectual_stake": null
+      },
+      "raw_excerpt": "Sulpicia: Life, Love, and Literature in Ancient Rome June 9, 2026 You're invited to celebrate the publication of Sulpicia: Life, Love, and Literature in Ancient Rome , by Alison Keith.",
+      "scraped_at": "2026-05-26T16:57:37+00:00",
       "review_status": "auto-published",
       "marginalia_url": null
     }

@@ -1,6 +1,6 @@
 {
   "$schema_note": "Source roster for /scripts/scrape_seminars.py. Each entry declares the venue, its event-list URL, render mode, known hazards, and per-source extraction rules. Selectors and parser functions get filled in as each source is implemented (TODO markers in extraction.status).",
-  "$updated": "2026-05-24",
+  "$updated": "2026-05-26",
   "$categories": [
     "lecture",
     "screening",
@@ -122,7 +122,9 @@
       "base_url": "https://www.masseycollege.ca/",
       "events_url": "https://www.masseycollege.ca/events/",
       "render_mode": "static",
-      "extraction": { "status": "todo" }
+      "extraction": {
+        "status": "todo"
+      }
     },
     {
       "id": "rom-speaks",
@@ -135,7 +137,9 @@
       "hazards": [
         "Mixed program: ROM Speaks lectures sit alongside non-seminar events (kids programs, exhibition openings). Filter by category."
       ],
-      "extraction": { "status": "todo" }
+      "extraction": {
+        "status": "todo"
+      }
     },
     {
       "id": "victoria",
@@ -145,7 +149,9 @@
       "base_url": "https://www.vic.utoronto.ca/",
       "events_url": "https://www.vic.utoronto.ca/about/events",
       "render_mode": "static",
-      "extraction": { "status": "todo" }
+      "extraction": {
+        "status": "todo"
+      }
     },
     {
       "id": "hart-house",
@@ -156,7 +162,9 @@
       "events_url": "https://harthouse.ca/events/",
       "render_mode": "static",
       "notes": "Covers Hart House Lecture (annual named-honorific), chapel-philosophy series, and Hart House Debates. Multiple types from one source.",
-      "extraction": { "status": "todo" }
+      "extraction": {
+        "status": "todo"
+      }
     },
     {
       "id": "revue",
@@ -171,7 +179,11 @@
       ],
       "extraction": {
         "status": "in-progress",
-        "director_flag_keywords": ["director in attendance", "Q&A with director", "Q&A with"],
+        "director_flag_keywords": [
+          "director in attendance",
+          "Q&A with director",
+          "Q&A with"
+        ],
         "filter_to_director_only": true
       },
       "notes": "Most reliable cinema source for director-attendance signals."
@@ -187,7 +199,9 @@
       "hazards": [
         "Mixed program: cinema, comedy, music. Filter to director-Q&A events only."
       ],
-      "extraction": { "status": "todo" }
+      "extraction": {
+        "status": "todo"
+      }
     },
     {
       "id": "paradise",
@@ -215,7 +229,9 @@
       "events_url": "https://hotdocs.ca/whats-on",
       "render_mode": "javascript",
       "notes": "Most director-attendance happens during the April-May Festival window. Year-round programming has fewer Q&A events.",
-      "extraction": { "status": "todo" }
+      "extraction": {
+        "status": "todo"
+      }
     },
     {
       "id": "tiff-lightbox",
@@ -228,7 +244,9 @@
       "hazards": [
         "Large calendar covering festival programming, repertory, curated series. Filter to MDFF Selects plus events with explicit Q&A flag."
       ],
-      "extraction": { "status": "todo" }
+      "extraction": {
+        "status": "todo"
+      }
     },
     {
       "id": "type-books",
@@ -238,7 +256,9 @@
       "base_url": "https://www.typebooks.ca/",
       "events_url": "https://www.typebooks.ca/events",
       "render_mode": "static",
-      "extraction": { "status": "todo" }
+      "extraction": {
+        "status": "todo"
+      }
     },
     {
       "id": "ifoa",
@@ -249,7 +269,9 @@
       "events_url": "https://festivalofauthors.ca/events/",
       "render_mode": "javascript",
       "notes": "Festival window is October-November; year-round programming is thinner.",
-      "extraction": { "status": "todo" }
+      "extraction": {
+        "status": "todo"
+      }
     },
     {
       "id": "glad-day",
@@ -259,7 +281,9 @@
       "base_url": "https://gladdaybookshop.com/",
       "events_url": "https://gladdaybookshop.com/events",
       "render_mode": "static",
-      "extraction": { "status": "todo" }
+      "extraction": {
+        "status": "todo"
+      }
     },
     {
       "id": "power-plant",
@@ -269,7 +293,9 @@
       "base_url": "https://www.thepowerplant.org/",
       "events_url": "https://www.thepowerplant.org/Programmes.aspx",
       "render_mode": "static",
-      "extraction": { "status": "todo" }
+      "extraction": {
+        "status": "todo"
+      }
     },
     {
       "id": "ago",
@@ -282,7 +308,9 @@
       "hazards": [
         "Mixed program: exhibitions, kids events, member parties. Filter to artist talks, panel discussions, and curator-led conversations."
       ],
-      "extraction": { "status": "todo" }
+      "extraction": {
+        "status": "todo"
+      }
     },
     {
       "id": "moca",
@@ -292,7 +320,9 @@
       "base_url": "https://moca.ca/",
       "events_url": "https://moca.ca/programs/",
       "render_mode": "javascript",
-      "extraction": { "status": "todo" }
+      "extraction": {
+        "status": "todo"
+      }
     },
     {
       "id": "philosophy-cafe-toronto",
@@ -306,7 +336,9 @@
         "Toronto philosophy cafe groups are scattered across Meetup, Facebook Groups, mailing lists, and Eventbrite. Discovery method needs research before extraction can be built.",
         "Many cafes are member-only; filter to publicly-advertised open sessions."
       ],
-      "extraction": { "status": "research-needed" }
+      "extraction": {
+        "status": "research-needed"
+      }
     },
     {
       "id": "agora-self",
@@ -317,7 +349,24 @@
       "events_url": "https://seminarschools.com/agora/",
       "render_mode": "static",
       "notes": "Saul-hosted outdoor philosophy gathering at Barry Zukerman Amphitheatre, Earl Bales Park. Self-source; pulls from agora page directly.",
-      "extraction": { "status": "todo" }
+      "extraction": {
+        "status": "todo"
+      }
+    },
+    {
+      "id": "manual-curated",
+      "name": "Curated lectures (hand-maintained)",
+      "tier_priority": 1,
+      "default_type": "lecture",
+      "base_url": "https://seminarschools.com/seminars/",
+      "events_url": "manual",
+      "fetcher": "manual",
+      "render_mode": "manual",
+      "extraction": {
+        "status": "manual",
+        "venue_default": "Various (per-event)"
+      },
+      "notes": "Hand-curated events from data/manual-events.json. Used for lectures the auto-scraper cannot reliably capture (UofT departments without public RSS, special symposia, the Agora self-source) and for archival lectures the curator wants preserved on the seminars page."
     }
   ],
   "deferred_candidates": {

@@ -7,7 +7,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seminarschools.com/seminars/">
 <meta property="og:title" content="Toronto Seminars and Talks. An aggregated calendar.">
-<meta property="og:description" content="Upcoming public lectures, author readings, artist talks, panel discussions, philosophy cafes, gatherings, and cinema events with director Q and A across the Greater Toronto Area.">
+<meta property="og:description" content="Public lectures, author readings, artist talks, panel discussions, philosophy cafes, gatherings, and cinema events with director Q and A across the Greater Toronto Area.">
 <meta property="og:image" content="https://seminarschools.com/og-image.png">
 <meta property="og:site_name" content="Seminar Schools">
 <meta name="twitter:card" content="summary_large_image">
@@ -210,6 +210,31 @@
   font-size: 0.9rem; z-index: 100;
 }
 .skip-link:focus { left: 1rem; top: 1rem; }
+
+.day-group-past {
+  opacity: 0.55;
+}
+.day-group-past .event-title a {
+  color: var(--fg-soft);
+  text-decoration: line-through;
+  text-decoration-color: var(--muted);
+  text-decoration-thickness: 1px;
+}
+.day-group-past .event-title a:hover {
+  opacity: 0.9;
+}
+.day-past-tag {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-left: 0.6rem;
+  vertical-align: middle;
+  border: 1px solid var(--muted);
+  padding: 0.1rem 0.4rem;
+  border-radius: 2px;
+}
 </style>
 </head>
 <body>
@@ -316,7 +341,8 @@
       'ago': 'AGO',
       'moca': 'MOCA',
       'philosophy-cafe-toronto': 'Philosophy Cafe',
-      'agora-self': 'The Agora'
+      'agora-self': 'The Agora',
+      'manual-curated': 'Curated'
     };
     return labels[srcId] || srcId;
   }
@@ -335,8 +361,11 @@
       return;
     }
 
-    countEl.textContent = filtered.length + (filtered.length === 1 ? ' event' : ' events') +
-      (currentFilter === 'all' ? '' : ' (filtered)');
+    var todayKeyC = new Date().toISOString().slice(0,10);
+    var upcoming = filtered.filter(function(e) { return dayKey(e.date) >= todayKeyC; }).length;
+    var past = filtered.length - upcoming;
+    countEl.textContent = upcoming + ' upcoming, ' + past + ' past' +
+      (currentFilter === 'all' ? '' : ' (filtered to ' + typeLabel(currentFilter) + ')');
 
     var groups = {};
     var groupOrder = [];
@@ -374,7 +403,9 @@
           '</li>'
         ].join('');
       }).join('');
-      return '<div class="day-group"><div class="day-header">' + g.header + '</div><ol style="margin:0;padding:0;list-style:none">' + cards + '</ol></div>';
+      var todayKey = new Date().toISOString().slice(0,10);
+      var isPast = key < todayKey;
+      return '<div class="day-group' + (isPast ? ' day-group-past' : '') + '"><div class="day-header">' + g.header + (isPast ? ' <span class="day-past-tag">past</span>' : '') + '</div><ol style="margin:0;padding:0;list-style:none">' + cards + '</ol></div>';
     }).join('');
 
     listEl.innerHTML = html;
@@ -395,10 +426,20 @@
   fetch('/seminars/events.json', { cache: 'no-cache' })
     .then(function(r) { return r.json(); })
     .then(function(data) {
-      events = (data.events || []).filter(function(e) {
-        return new Date(e.date) >= new Date(Date.now() - 86400000); // include today
+      // Show ALL events past and future. Sort chronologically.
+      events = (data.events || []).slice().sort(function(a, b) {
+        return new Date(a.date) - new Date(b.date);
       });
       render();
+      // After rendering scroll to first upcoming event (first not-past day-group).
+      requestAnimationFrame(function() {
+        var firstUpcoming = listEl.querySelector('.day-group:not(.day-group-past)');
+        if (firstUpcoming) {
+          var rect = firstUpcoming.getBoundingClientRect();
+          var top = window.pageYOffset + rect.top - 120; // offset for header breathing room
+          window.scrollTo({ top: top, behavior: 'instant' });
+        }
+      });
     })
     .catch(function(err) {
       listEl.innerHTML = '<div class="seminars-empty"><p>Could not load events right now.</p><p>Try again, or subscribe to the <a href="/seminars/feed.xml">RSS feed</a>.</p></div>';
