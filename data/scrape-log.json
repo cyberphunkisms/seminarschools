@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-05-26T14:03:04+00:00",
+  "run_at": "2026-05-26T16:34:52+00:00",
   "sources": [
     {
       "id": "c4e",
@@ -8,8 +8,9 @@
     },
     {
       "id": "jhi",
-      "status": "ok",
-      "count": 1
+      "status": "error",
+      "error": "403 Client Error: Forbidden for url: https://humanities.utoronto.ca/events",
+      "count": 0
     },
     {
       "id": "munk",
