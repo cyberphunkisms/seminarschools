@@ -746,6 +746,19 @@
   .lecture:hover::before { width: 2rem; }
   .lecture.next { padding: 2rem 0; border-bottom: 1px solid var(--accent); }
   .lecture.next .title { font-size: 1.6rem; }
+  .lecture.past {
+    opacity: 0.45;
+  }
+  .lecture.past .title {
+    text-decoration: line-through;
+    text-decoration-color: var(--muted);
+    text-decoration-thickness: 1px;
+  }
+  .lecture.past .date,
+  .lecture.past .venue {
+    opacity: 0.7;
+  }
+  .lecture.past:hover { opacity: 0.7; }
   .lecture.next::after {
     content: "Next";
     position: absolute;
@@ -1317,15 +1330,8 @@ input[type="button"] {
   <div class="tier-label-vertical"><span class="num">ii</span><span class="label">Lectures</span></div>
   <h2 class="compound words">Upcoming GTA <em>Lectures.</em></h2>
   <p class="body reveal delay-2">Toronto holds a free public lecture almost every weeknight. Universities, libraries, and museums host more talks in any given week than any one person can attend. This page tracks the ones worth attending. The longer-form commentary on each one lives at <a href="/marginalia">Marginalia</a>.</p>
-  <div class="lecture-list stagger reveal delay-3">
-    <div class="lecture next"><div class="num">i</div><div class="date">17.04.2026</div><div class="title">Rebecca Comay on Mourning Sickness</div><div class="venue">UofT Comparative Literature</div></div>
-    <div class="lecture"><div class="num">ii</div><div class="date">22.04.2026</div><div class="title">TPL Salon Series at Appel Salon</div><div class="venue">Toronto Reference Library</div></div>
-    <div class="lecture"><div class="num">iii</div><div class="date">25.04.2026</div><div class="title">Massey Dialogues</div><div class="venue">Massey College</div></div>
-    <div class="lecture"><div class="num">iv</div><div class="date">02.05.2026</div><div class="title">Cheryl Misak on Frank Ramsey</div><div class="venue">UofT Philosophy</div></div>
-    <div class="lecture"><div class="num">v</div><div class="date">09.05.2026</div><div class="title">Ian Hacking Memorial Symposium</div><div class="venue">Victoria College</div></div>
-    <div class="lecture"><div class="num">vi</div><div class="date">14.05.2026</div><div class="title">ROM Speaks on archaeology and memory</div><div class="venue">Royal Ontario Museum</div></div>
-    <div class="lecture"><div class="num">vii</div><div class="date">21.05.2026</div><div class="title">Ethics@Noon-ish weekly talk</div><div class="venue">Centre for Ethics</div></div>
-    <div class="lecture"><div class="num">viii</div><div class="date">05.06.2026</div><div class="title">Jackman Humanities Annual Lecture</div><div class="venue">Jackman Humanities Institute</div></div>
+  <div class="lecture-list stagger reveal delay-3" id="featured-lectures">
+    <div class="lecture-loading" style="grid-column:1/-1;padding:2rem 0;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)">Loading lectures…</div>
     <div class="lecture-tail"><span>Updated as talks are attended</span><a href="/marginalia">Full archive &rarr;</a></div>
   </div>
 </section>
@@ -2325,5 +2331,98 @@ input[type="button"] {
 })();
 </script>
 <script src="/js/theme.js" defer></script>
+
+<script>
+(function() {
+  var container = document.getElementById('featured-lectures');
+  if (!container) return;
+  var tail = container.querySelector('.lecture-tail');
+
+  function roman(n) {
+    var map = [
+      [10,'x'],[9,'ix'],[5,'v'],[4,'iv'],[1,'i']
+    ];
+    var out = '';
+    for (var i = 0; i < map.length; i++) {
+      while (n >= map[i][0]) {
+        out += map[i][1];
+        n -= map[i][0];
+      }
+    }
+    return out;
+  }
+
+  function fmtDate(iso) {
+    var d = new Date(iso);
+    var dd = String(d.getDate()).padStart(2, '0');
+    var mm = String(d.getMonth() + 1).padStart(2, '0');
+    var yyyy = d.getFullYear();
+    return dd + '.' + mm + '.' + yyyy;
+  }
+
+  function escapeHtml(s) {
+    return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  fetch('/seminars/events.json', { cache: 'no-cache' })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var lectures = (data.events || [])
+        .filter(function(e) { return e.source_id === 'manual-curated'; })
+        .sort(function(a, b) { return new Date(a.date) - new Date(b.date); });
+
+      // Remove loading placeholder
+      var loading = container.querySelector('.lecture-loading');
+      if (loading) loading.remove();
+
+      if (lectures.length === 0) {
+        var empty = document.createElement('div');
+        empty.style.cssText = 'grid-column:1/-1;padding:2rem 0;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)';
+        empty.textContent = 'No curated lectures yet';
+        container.insertBefore(empty, tail);
+        return;
+      }
+
+      var todayKey = new Date().toISOString().slice(0, 10);
+      var firstFutureIdx = -1;
+      for (var i = 0; i < lectures.length; i++) {
+        if (lectures[i].date.slice(0, 10) >= todayKey) {
+          firstFutureIdx = i;
+          break;
+        }
+      }
+
+      var html = lectures.map(function(e, idx) {
+        var isPast = e.date.slice(0, 10) < todayKey;
+        var isNext = idx === firstFutureIdx;
+        var cls = 'lecture' + (isPast ? ' past' : '') + (isNext ? ' next' : '');
+        var titleText = e.title;
+        if (e.speaker_or_director && titleText.indexOf(e.speaker_or_director) === -1) {
+          titleText = e.speaker_or_director + ': ' + titleText;
+        }
+        return '<div class="' + cls + '">' +
+          '<div class="num">' + roman(idx + 1) + '</div>' +
+          '<div class="date">' + fmtDate(e.date) + '</div>' +
+          '<div class="title">' + escapeHtml(titleText) + '</div>' +
+          '<div class="venue">' + escapeHtml(e.venue || '') + '</div>' +
+          '</div>';
+      }).join('');
+
+      // Insert all lectures before the tail
+      var wrapper = document.createElement('div');
+      wrapper.innerHTML = html;
+      while (wrapper.firstChild) {
+        container.insertBefore(wrapper.firstChild, tail);
+      }
+    })
+    .catch(function(err) {
+      var loading = container.querySelector('.lecture-loading');
+      if (loading) {
+        loading.textContent = 'Lectures unavailable. See /seminars/ for the full list.';
+      }
+    });
+})();
+</script>
+
 </body>
 </html>
