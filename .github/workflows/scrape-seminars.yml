@@ -1,0 +1,61 @@
+name: Scrape seminars
+
+# Runs the daily seminar aggregator.
+#
+# Why GitHub Actions and not Netlify Background Function (the prior choice):
+# Netlify deploys serve a read-only filesystem at runtime. A Background
+# Function cannot write /seminars/events.json and have the deployed page
+# read it back. The data must re-enter the repo to reach the deploy.
+# GitHub Actions has full filesystem access, can run the Python scraper,
+# and can git-commit the result. The commit triggers Netlify auto-deploy.
+#
+# Schedule: daily at 11:00 UTC (07:00 Toronto). Manual trigger also enabled
+# for testing.
+
+on:
+  schedule:
+    - cron: '0 11 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install scraper dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Run scraper
+        run: python3 scripts/scrape_seminars.py
+
+      - name: Commit and push if changed
+        run: |
+          set -x
+          git config user.name "seminars-bot"
+          git config user.email "saul+seminarsbot@seminarschools.com"
+          echo "--- Pre-commit status ---"
+          git status
+          git add -A seminars/ data/
+          echo "--- Staged for commit ---"
+          git diff --cached --stat
+          if git diff --cached --quiet; then
+            echo "No changes to commit. Scraper produced identical output."
+            exit 0
+          fi
+          git commit -m "Update seminars calendar ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+          # Re-runs can land on stale tip. Rebase before push.
+          git pull --rebase origin main
+          # Push. Real failures show red so we know to fix them. No defensive
+          # exit 0 hiding broken state.
+          git push origin main
+          echo "Push succeeded."

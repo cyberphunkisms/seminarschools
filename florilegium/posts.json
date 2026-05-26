@@ -1,0 +1,31 @@
+{
+  "_schema": {
+    "comment": "Source of truth for /blog/ aggregator. Each entry surfaces in /blog/ AND lives at its canonical postUrl. Article-tagging discipline: only entries explicitly added here appear in the blog. See ml* entry on Article-tagging discipline.",
+    "fields": {
+      "id": "kebab-case unique identifier",
+      "title": "the article title",
+      "date": "ISO date YYYY-MM-DD",
+      "sectionId": "the parent section slug (e.g. nutrition, marginalia)",
+      "sectionLabel": "the human-readable section name",
+      "sectionUrl": "URL to the parent section index",
+      "postUrl": "canonical URL to the article itself",
+      "excerpt": "one or two sentences for the listing",
+      "tags": "array of topic tags"
+    }
+  },
+  "posts": [
+    {
+      "id": "marginalia-example-review",
+      "title": "Example review",
+      "date": "2026-05-06",
+      "sectionId": "marginalia",
+      "sectionLabel": "Marginalia",
+      "sectionUrl": "/marginalia/",
+      "postUrl": "/marginalia/example-review/",
+      "excerpt": "A stub. Replace this file with a lecture review. Or delete it.",
+      "tags": [
+        "lecture-review"
+      ]
+    }
+  ]
+}

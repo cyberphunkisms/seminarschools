@@ -1,0 +1,82 @@
+# robots.txt for seminarschools.com
+# Last updated: 2026-05-20
+
+# ============================================================
+# Default policy
+# ============================================================
+User-agent: *
+Allow: /
+Disallow: /leizu/booking-success
+Disallow: /leizu/account
+Disallow: /leizu/admin
+Disallow: /apply/success
+Disallow: /bookwormcard/success
+
+# ============================================================
+# AI training / retrieval crawlers — explicitly welcomed
+# ============================================================
+# The polymyth framework files (/llms.txt, /polymyth/methodologylist*.txt,
+# /polymyth/manifest.txt, etc.) are designed for AI consumption. Explicit
+# Allow rules signal intent to AI crawlers that respect specific user-agents.
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+# ============================================================
+# Sitemap
+# ============================================================
+Sitemap: https://seminarschools.com/sitemap.xml

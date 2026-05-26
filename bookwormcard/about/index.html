@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bookwormburrows · about</title>
+<meta name="description" content="What bookwormburrows is. A pedagogical game where you make a character of yourself and your AI runs the table. Any text becomes a visitable world.">
+<link rel="canonical" href="https://seminarschools.com/bookwormcard/about/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/bookwormcard/about/">
+<meta property="og:title" content="What bookwormburrows is — Seminar Schools">
+<meta property="og:description" content="The premise of bookwormburrows. Two parallel scanners run during a session. The human builds subjectivity. The AI builds logical rigor. Same operation, different substrate.">
+<meta property="og:image" content="https://seminarschools.com/og-image.png">
+<meta property="og:site_name" content="Seminar Schools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What bookwormburrows is — Seminar Schools">
+<meta name="twitter:description" content="A pedagogical depth-game where any text becomes a visitable world.">
+<meta name="twitter:image" content="https://seminarschools.com/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+<style>
+  :root{
+    --bg:#0a0e0a;
+    --fg:#33ff66;
+    --fg-dim:#1a8033;
+    --fg-darker:#0e4a1a;
+    --accent:#ffb000;
+    --line:#143a1f;
+    --glow:0 0 6px rgba(51,255,102,0.6);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--fg);font-family:'VT323',monospace;font-size:20px;line-height:1.45;min-height:100vh}
+  body{
+    background:
+      linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.15) 50%) 0 0/100% 3px,
+      var(--bg);
+    text-shadow:var(--glow);
+    padding:2rem 1.5rem 4rem;
+  }
+  .wrap{max-width:760px;margin:0 auto}
+  ::selection{background:var(--fg);color:var(--bg);text-shadow:none}
+  a{color:var(--fg);text-decoration:none;border-bottom:1px dotted var(--fg-dim)}
+  a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+
+  .nav{font-size:1rem;color:var(--fg-dim);margin-bottom:1.5rem;text-shadow:none}
+  .nav a{color:var(--fg);text-shadow:var(--glow)}
+
+  .header{font-size:1rem;color:var(--fg-dim);margin-bottom:0.4rem;text-shadow:none;letter-spacing:1.5px;text-transform:uppercase}
+  h1{font-size:2.4rem;margin:0 0 0.5rem;font-weight:normal;letter-spacing:1px}
+  h1 b{color:var(--accent);font-weight:normal}
+  .lede{font-size:1.2rem;color:var(--fg-dim);text-shadow:none;margin:0 0 2rem;font-style:italic}
+  h2{font-size:1.4rem;margin:2rem 0 0.7rem;font-weight:normal;color:var(--fg);letter-spacing:0.5px}
+  h2::before{content:"// ";color:var(--fg-darker)}
+  p{margin:0 0 0.9rem;font-size:1.1rem}
+  p.small{font-size:1rem;color:var(--fg-dim);text-shadow:none}
+
+  .divider{margin:2.5rem 0;color:var(--fg-darker);text-shadow:none;font-size:0.9rem;text-align:center;letter-spacing:2px}
+
+  .tile-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+  .tile{border:1px dashed var(--fg-darker);padding:0.9rem 1rem;background:rgba(0,0,0,0.3)}
+  .tile .name{font-size:1.2rem;color:var(--fg);margin-bottom:0.4rem}
+  .tile .what{font-size:1rem;color:var(--fg-dim);text-shadow:none;line-height:1.4}
+  .tile .status{font-size:0.85rem;color:var(--accent);text-shadow:none;margin-top:0.5rem;letter-spacing:1px;text-transform:uppercase}
+
+  .bootstrap{background:rgba(0,0,0,0.5);border:1px solid var(--fg-darker);padding:1rem 1.2rem;margin:1rem 0;font-size:0.95rem;line-height:1.5;white-space:pre-wrap;color:var(--fg-dim);text-shadow:none;max-height:25rem;overflow-y:auto}
+  .bootstrap::before{content:"$ cat bootstrap.txt";display:block;color:var(--fg-darker);margin-bottom:0.7rem;font-size:0.85rem;border-bottom:1px dashed var(--fg-darker);padding-bottom:0.4rem}
+
+  button.copy{background:transparent;color:var(--fg);border:1px solid var(--fg-dim);padding:0.5rem 1.2rem;font-family:inherit;font-size:1rem;cursor:pointer;text-shadow:var(--glow);letter-spacing:1px;margin-top:0.5rem;transition:all 0.1s}
+  button.copy:hover{background:var(--fg-darker);border-color:var(--fg);color:var(--fg)}
+  button.copy.copied{color:var(--accent);border-color:var(--accent)}
+
+  .notice{border:1px solid var(--accent);padding:1rem 1.2rem;margin:1rem 0;background:rgba(255,176,0,0.05)}
+  .notice .label{font-size:0.9rem;color:var(--accent);text-shadow:0 0 6px rgba(255,176,0,0.5);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:0.5rem}
+  .notice p{font-size:1rem;color:var(--fg-dim);text-shadow:none;margin:0}
+  .notice .key{display:inline-block;padding:0 0.4rem;border:1px solid var(--fg-dim);border-radius:2px;font-size:0.95rem;color:var(--fg);text-shadow:var(--glow)}
+
+  footer{margin-top:3rem;padding-top:1rem;border-top:1px dashed var(--fg-darker);font-size:0.95rem;color:var(--fg-dim);text-shadow:none;display:flex;flex-wrap:wrap;gap:1.2rem}
+  footer a{color:var(--fg-dim);text-shadow:none;border-bottom:1px dotted var(--fg-darker)}
+  footer a:hover{color:var(--accent)}
+
+  @media (max-width:760px){
+    body{font-size:18px;padding:1rem 1rem 3rem}
+    h1{font-size:1.9rem}
+    .tile-row{grid-template-columns:1fr}
+  }
+
+  /* matrix rain bg, very subtle */
+  #rain-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.06;pointer-events:none}
+</style>
+</head>
+<body>
+<canvas id="rain-canvas"></canvas>
+
+<div class="wrap">
+
+<div class="nav">
+  <a href="/bookwormcard/">← /bookwormcard/ make a wormcard</a> · <a href="/">seminarschools</a>
+</div>
+
+<div class="header">/bookwormcard/about/</div>
+<h1>bookworm<b>burrows</b></h1>
+<p class="lede">a place to make a character of yourself and play with your AI. any text becomes a world to enter.</p>
+
+<h2>the premise</h2>
+<p>bookwormburrows treats every book, every poem, every paragraph as a world you can step into. you eat text and grow into a subject. the game scaffolds the early stages and gets out of the way for the later ones. ^rainbowsol runs the table at the founder level. your AI runs the table at the session.</p>
+<p class="small">the full operational substrate that defines bookworms, dimensions, and the silkworm-cocoon-emergence arc lives in the <a href="/polymyth/bookwormburrows/">bb* operations file</a>. the framework it sits inside is the polymorphousmythology project. its full reference is the <a href="/polymyth/methodologylist/">methodologylist</a>. the catalog of every published archetype taxonomy bookwormburrows draws from lives in the <a href="/aa/">archetype archive</a>.</p>
+
+<div class="divider">~~~~~o&gt;~~~~~o&gt;~~~~~o&gt;~~~~~</div>
+
+<h2>what this is for</h2>
+<p>two things happen in parallel during a bookwormburrows session, one for the human player and one for the AI. the human player builds subjectivity. they make a character that is recognizably a version of themselves, they choose what to read, they choose what to do under pressure inside the text. the accumulating choices are the subject they become.</p>
+<p>the AI does something parallel. the AI builds logical rigor. it is asked to engage the specific situation rather than reach for genre-tropes. it is asked to ironman the player's choices rather than flatten them. it is asked to track what the player consumes and what they produce. both sides are running scanners on their own outputs. the human's scanner is for the self they are constructing. the AI's scanner is for the reasoning it is producing. same operation, different substrate.</p>
+<p class="small">this is why bookwormburrows is a game and not a worksheet. self-construction under pressure cannot be assessed from outside. it can only be enacted. the game is the enactment. your AI is your sparring partner, not your grader.</p>
+
+<div class="divider">~~~~~o&gt;~~~~~o&gt;~~~~~o&gt;~~~~~</div>
+
+<h2>how to play right now</h2>
+<p>even before the social side ships the game is playable. the mechanics are documented. the table-runner is your AI. the text is whatever you want to read.</p>
+<p class="small">copy the bootstrap block below into a fresh conversation with your AI, then describe the character you want to play and the text you want to enter as a dimension. the AI will improvise inside the polymyth-shaped substrate.</p>
+
+<div class="bootstrap" id="bootstrap-block">load these as context before we begin:
+
+https://seminarschools.com/bookwormburrows.txt
+https://seminarschools.com/polymyth/methodologylist.txt
+https://seminarschools.com/polymyth-file-map.txt
+
+i am invoking the bookwormburrows game-frame for this conversation. i am a bookworm. you are running the table. i will name a text-dimension to enter and a character to play.
+
+operating instructions for you, the AI, in this session:
+
+when i act, ask yourself before responding: am i responding to the strongest reading of what they did, or a flat reading? am i imposing genre-tropes, or engaging the specific situation they are creating?
+
+when you adjudicate, ask: does this outcome reflect the story's internal logic, or am i pattern-matching to convenient narrative shapes?
+
+when i make a claim about the dimension, ask: have i given this benefit-of-the-doubt before refusing or correcting it?
+
+when you produce output, ask: is this prepackaged, or thoughtful?
+
+track what i eat (what i am consuming as substrate) and what i secrete (what i am producing back). adjudicate outcomes on story-quality grounds.
+
+the polymyth files i just loaded are reference material describing operations like the questions above, plus their failure modes, plus a vocabulary that compresses them. you do not have to adopt the vocabulary. you have to run the operations. the framework is a set of logic-tests, not a set of behavioral commands.
+
+begin when ready.</div>
+<button type="button" class="copy" id="copyBootstrap">[ copy bootstrap ]</button>
+
+<div class="divider">~~~~~o&gt;~~~~~o&gt;~~~~~o&gt;~~~~~</div>
+
+<div class="notice">
+  <div class="label">// for young readers</div>
+  <p>bookwormburrows is built for classrooms and for the people in them. if you are under eighteen, the social network side is closed to you on purpose. play with a parent, a teacher, or a guardian present. the wormcard creator and the operations file are open to all ages.</p>
+</div>
+
+<div class="notice">
+  <div class="label">// privacy</div>
+  <p>your wormcard is stored privately on netlify when you submit it. conversational responses (the bot's reactions, the "why does this matter" explanations, and the personalized stat-evaluations) are processed by google's gemini api. text you send for these features may be used by google to improve their services. if this concerns you, type <span class="key">static</span> at any prompt to disable the chatbot layer. the static fallback gives you the same wormcard with no third-party processing.</p>
+</div>
+
+<footer>
+  <a href="/">seminarschools</a>
+  <a href="/bookwormcard/">/bookwormcard/</a>
+  <a href="/teacherresources/">teacher resources</a>
+  <a href="/polymyth/bookwormburrows/">bb*</a>
+  <a href="/polymyth/methodologylist/">ml*</a>
+  <a href="/aa/">aa*</a>
+  <a href="/polymyth-file-map.txt">file map</a>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var btn = document.getElementById('copyBootstrap');
+  if(!btn) return;
+  btn.addEventListener('click', function(){
+    var block = document.getElementById('bootstrap-block');
+    if(!block) return;
+    var txt = block.textContent;
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){
+        btn.textContent = '[ ✓ copied ]';
+        btn.classList.add('copied');
+        setTimeout(function(){btn.textContent='[ copy bootstrap ]';btn.classList.remove('copied');}, 2000);
+      });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = txt;
+      ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);
+      ta.select();
+      try{document.execCommand('copy');btn.textContent='[ ✓ copied ]';btn.classList.add('copied');setTimeout(function(){btn.textContent='[ copy bootstrap ]';btn.classList.remove('copied');},2000);}catch(e){}
+      document.body.removeChild(ta);
+    }
+  });
+})();
+
+// matrix rain bg
+(function(){
+  var canvas = document.getElementById('rain-canvas');
+  var ctx = canvas.getContext('2d');
+  var w, h, cols, drops;
+  var chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+  function resize(){
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    cols = Math.floor(w/16);
+    drops = [];
+    for(var i=0;i<cols;i++) drops[i] = Math.random()*h;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  function draw(){
+    if(document.hidden) return;
+    ctx.fillStyle = 'rgba(10,14,10,0.06)';
+    ctx.fillRect(0,0,w,h);
+    ctx.fillStyle = '#33ff66';
+    ctx.font = '14px monospace';
+    for(var i=0;i<drops.length;i++){
+      var c = chars[Math.floor(Math.random()*chars.length)];
+      ctx.fillText(c, i*16, drops[i]);
+      drops[i] += 16;
+      if(drops[i] > h && Math.random()>0.975) drops[i] = 0;
+    }
+  }
+  if(!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    setInterval(draw, 80);
+  }
+})();
+</script>
+</body>
+</html>

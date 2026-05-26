@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ohm Dome. Seminar Schools.</title>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/ohm-dome">
+<meta property="og:title" content="Ohm Dome. A biometric public-art installation.">
+<meta property="og:description" content="A geodesic dome that responds to the heart rates and breathing of the people inside it. Toronto.">
+<meta property="og:image" content="https://seminarschools.com/og-image.png">
+<meta name="twitter:image" content="https://seminarschools.com/og-image.png">
+<meta property="og:site_name" content="Seminar Schools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ohm Dome. A biometric public-art installation.">
+<meta name="description" content="Ohm Dome is a biometric-responsive LED installation proposed for public space in Toronto. Audience heart-rate, breath, and proximity drive a generative light pattern.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0E1418">
+<link rel="canonical" href="https://seminarschools.com/ohm-dome/">
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css">
+<script src="/js/mandala.js" defer></script>
+<script src="/js/site.js" defer></script>
+<style>
+:root {
+  --display: 'Major Mono Display', monospace;
+  --body: 'Inter', system-ui, sans-serif;
+  --sans: 'Inter', system-ui, sans-serif;
+  --mono: 'Space Mono', ui-monospace, monospace;
+  --accent-light: #2a6878;
+  --accent-dark: #5DA8A8;
+  --accent: var(--accent-light);
+  --accent-rgb: 93,168,168;
+  --bg: #0E1418;
+  --geo-density: 0.18;
+  --geo2-density: 0.10;
+}
+
+  /* ============================================================
+   * REDUCED MOTION (WCAG 2.3.3 + accessibility best practice)
+   * Honor user OS preference for reduced animation. Suppresses
+   * mandala canvas animation, .reveal entry transitions, geometric
+   * watermark pulses, and any @keyframes-driven motion.
+   * Added 2026-05-20 per audit CL-T98 medium-tier item #10.
+   * ============================================================ */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+    .mandala-canvas,
+    canvas.mandala,
+    .geo,
+    .geo svg,
+    [data-animate] {
+      animation: none !important;
+      transform: none !important;
+    }
+    .reveal,
+    .reveal-up,
+    .reveal-down,
+    .reveal-left,
+    .reveal-right,
+    [class*="delay-"] {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+  /* ============================================================
+   * TOUCH TARGETS (WCAG 2.5.5 / Apple HIG / Material Design)
+   * Ensure minimum 44x44 touch target size on mobile breakpoints.
+   * Critical for users with motor impairment and small-screen
+   * accuracy. Applies only at mobile widths where finger-tap is
+   * the primary input mode.
+   * Added 2026-05-20 per audit CL-T98 low-tier item #14.
+   * ============================================================ */
+  @media (max-width: 768px) {
+    button,
+    .btn,
+    [role="button"],
+    a.cta, .cta,
+    .mode-btn,
+    .ctrl-chip,
+    .filter-pill,
+    input[type="checkbox"],
+    input[type="radio"],
+    select {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Ohm Dome",
+  "url": "https://seminarschools.com/ohm-dome/",
+  "description": "Biometric-responsive LED public art project. Toronto.",
+  "creator": {
+    "@type": "Person",
+    "name": "Saul Karim NMH",
+    "alternateName": "Saul Nassau",
+    "url": "https://seminarschools.com/saul/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/css/theme.css">
+<link rel="stylesheet" href="/css/mobile-overlay.css">
+</head>
+<body class="theme-dark">
+
+<!-- Theme toggle (light/dark mode). System preference is the default;
+     clicking flips. localStorage persists the choice. -->
+<button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+  <span class="sun" aria-hidden="true">☀</span>
+  <span class="moon" aria-hidden="true">☾</span>
+</button>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+<div class="descent-marker" id="marker">
+  <span class="roman">i</span>
+  <span class="name">Threshold</span>
+  <div class="ticks">
+    <div class="tick active"></div><div class="tick"></div><div class="tick"></div>
+    <div class="tick"></div><div class="tick"></div><div class="tick"></div>
+  </div>
+</div>
+<div id="geo"></div>
+<div id="geo2"></div>
+<div class="wrap">
+
+<header class="topbar" id="topbar">
+  <a href="/" class="brand"><span class="seal" aria-hidden="true"></span>Seminar <em>Schools</em></a>
+  <span class="right">Ohm Dome</span>
+</header>
+<main id="main-content">
+<nav class="project-nav" aria-label="Projects"><a href="/">Home</a><a href="/agora/">Agora</a><a href="/marginalia/">Marginalia</a><a href="/sabachtan-seminar/">Sabachtan</a><a href="/ohm-dome/" class="current">Ohm Dome</a><a href="/nutrition/">Nutrition</a><a href="/teacherresources/">Resources</a><a href="/florilegium/">Florilegium</a></nav>
+
+
+<div class="threshold-status">In development</div>
+  <div class="eyebrow">An installation in development</div>
+<h1 class="titanic words">Ohm <em>Dome.</em></h1>
+<p class="lede">A geodesic dome that responds to the heart rates and breathing of the people inside it.</p>
+  <div class="threshold-coords reveal delay-3">
+    <div class="row"><span class="lbl">Type</span><span class="val">Public art installation.</span></div>
+    <div class="row"><span class="lbl">Medium</span><span class="val">LED, biometric sensors, public space.</span></div>
+    <div class="row"><span class="lbl">Status</span><span class="val">In development.</span></div>
+    <div class="row"><span class="lbl">Looking for</span><span class="val">Grants, sponsorship, venue.</span></div>
+  </div>
+
+<section class="section tier reveal" data-tier="1" data-roman="i">
+  <div class="tier-label-vertical"><span class="num">i</span><span class="label">The piece</span></div>
+  <div class="section-meta">i. The piece</div>
+  <h2 class="compound words">A biometric-responsive LED installation <em>in public space.</em></h2>
+  <p>Visitors enter a geodesic dome. Sensors read their pulse and breath. The dome's LED skin shifts color, brightness, and rhythm in response to the bodies inside it. The longer a group stays, the more the dome's light becomes a portrait of that group.</p>
+  <p>The piece is meant for public space. Not a gallery. The intended viewer is the passerby who wandered in without a reason and left changed.</p>
+</section>
+
+<section class="section tier reveal" data-tier="2" data-roman="ii">
+  <div class="tier-label-vertical"><span class="num">ii</span><span class="label">Why public, not ga</span></div>
+  <div class="section-meta">ii. Why public, not gallery</div>
+  <h2 class="compound words">The audience <em>is the artwork.</em></h2>
+  <p>A gallery installation reads its visitors as a sequence: one ticket holder after another. The piece adapts to each, but the visitors don't shape the piece for the next. Public installation breaks that. Strangers who don't know each other generate a single shared output. The shape of the dome's response is downstream of who happens to be standing in it together.</p>
+  <p>That is the point. Public space is the substrate the piece is about.</p>
+</section>
+
+<section class="section tier reveal" data-tier="3" data-roman="iii">
+  <div class="tier-label-vertical"><span class="num">iii</span><span class="label">Status</span></div>
+  <div class="section-meta">iii. Status</div>
+  <h2>In development. Seeking grant support and venue partnership.</h2>
+</section>
+
+<section class="section tier reveal" data-tier="4" data-roman="iv">
+  <div class="tier-label-vertical"><span class="num">iv</span><span class="label">Funding</span></div>
+  <div class="section-meta">iv. Funding</div>
+  <h2>Open to grants, sponsorship, and commission. Inquire through <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener"><span class="prompt">&gt;</span>open_transmission<span class="cursor">_</span></a>.</h2>
+  <p>The Ohm Dome is being developed with applications to StreetARToronto and the Toronto Arts Council Animating Toronto Parks program. Private sponsorship and venue partnerships are also welcome.</p>
+  <div class="cta-row">
+    <a href="mailto:saulnassau@protonmail.com?subject=Ohm%20Dome%20inquiry" class="cta accent">Inquire about Ohm Dome</a>
+  </div>
+</section>
+
+<section class="section tier reveal" data-tier="5" data-roman="v">
+  <div class="tier-label-vertical"><span class="num">v</span><span class="label">Technical</span></div>
+  <div class="section-meta">v. Technical</div>
+  <h2 class="compound words">The dome reads pulse and breath. <em>Nothing is recorded.</em></h2>
+  <p>Sensors read live biometric signals from visitors. The signals drive the lighting in real time. No data is stored. No video or audio is captured. When the visitor walks away, the signal is gone.</p>
+  <p>The piece is pseudonymous by design. The bodies in the dome are not identified, recognized, or remembered.</p>
+</section>
+
+
+</main>
+
+<section class="articles-section">
+  <div class="tier-label-vertical"><span class="num">vi</span><span class="label">Writing</span></div>
+  <h2 class="articles-head">Writing</h2>
+  <p class="articles-intro">Writing about the project as it develops.</p>
+  <ul class="article-list" id="article-list">
+    <li class="articles-empty" id="articles-empty">No articles yet.</li>
+  </ul>
+  <div class="blog-link-row">
+    <a class="blog-link" href="/florilegium/">Read the florilegium &rarr;</a>
+  </div>
+</section>
+
+<footer class="foot foot-rich">
+  <div class="foot-row foot-row-main">
+    <div class="foot-col">
+      <div class="foot-label">Seminar Schools</div>
+      <div class="foot-text">A Toronto-based educational practice. Free seminars, public lectures, working notes.</div>
+    </div>
+    <div class="foot-col">
+      <div class="foot-label">Practice</div>
+      <ul class="foot-list">
+        <li><a href="/agora/">The Agora</a></li>
+        <li><a href="/sabachtan-seminar/">Sabachtan Seminar</a></li>
+        <li><a href="/marginalia/">Marginalia</a></li>
+        <li><a href="/ohm-dome/">Ohm Dome</a></li>
+        <li><a href="/nutrition/">Nutrition</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <div class="foot-label">Resources</div>
+      <ul class="foot-list">
+        <li><a href="/teacherresources/">Teacher Resources</a></li>
+        <li><a href="/leizu/">Leizu Academy</a></li>
+        <li><a href="/florilegium/">Florilegium</a></li>
+        <li><a href="/saul/">Founder</a></li>
+        <li><a href="/polymyth/sitemap/">Sitemap</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-row foot-row-bottom">
+    <span>&copy; 2026 Seminar Schools &middot; Toronto</span>
+    <span><a href="/">&larr; Home</a></span>
+  </div>
+</footer>
+
+</div>
+
+
+<script>document.addEventListener('DOMContentLoaded', function(){ if(window.PolymythMandala) PolymythMandala.initForProject('ohm-dome'); });</script>
+<script src="/js/theme.js" defer></script>
+</body>
+</html>

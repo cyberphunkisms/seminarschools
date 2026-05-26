@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sitemap (graph). Seminar Schools.</title>
+<meta name="description" content="Interactive force-directed graph of every cross-page link across seminarschools.com.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://seminarschools.com/polymyth/sitemap/graph/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2A1A14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" defer></script>
+<style>
+:root {
+  --display: 'Fraunces', Georgia, serif;
+  --body: 'Newsreader', Georgia, serif;
+  --mono: 'JetBrains Mono', monospace;
+  --bg: #F5EBE4;
+  --fg: #2A1A14;
+  --fg-soft: #5A4A40;
+  --fg-fade: #8A7A70;
+  --accent: #B85638;
+  --rule: rgba(42, 26, 20, 0.18);
+  --rule-soft: rgba(42, 26, 20, 0.08);
+  --cat-home: #C49A3C;
+  --cat-practice: #B85638;
+  --cat-resources: #4A7A4A;
+  --cat-framework: #5A6A8A;
+  --cat-instruments: #6A5A8A;
+  --cat-about: #8A7A70;
+  --cat-utility: #B0A099;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  height: 100vh;
+}
+a { color: inherit; text-decoration: none; }
+a.skip-link { position: absolute; top: -40px; left: 0; background: var(--accent); color: var(--bg); padding: 0.5rem 1rem; z-index: 200; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; }
+a.skip-link:focus { top: 0; }
+
+.topbar { display: flex; justify-content: space-between; padding: 1rem 2rem; border-bottom: 1px solid var(--rule); font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; background: var(--bg); }
+.topbar .brand em { font-style: italic; color: var(--accent); }
+.topbar .right { color: var(--fg-soft); }
+
+.view-toggle { position: sticky; top: 0; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--rule); padding: 0.7rem 2rem; display: flex; gap: 1rem; align-items: center; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; }
+.view-toggle .label { color: var(--fg-fade); }
+.view-toggle a { padding: 0.3rem 0.8rem; border: 1px solid var(--rule); border-radius: 999px; color: var(--fg-soft); transition: all 0.15s; }
+.view-toggle a:hover { border-color: var(--accent); color: var(--accent); }
+.view-toggle a.current { border-color: var(--accent); color: var(--accent); background: rgba(184, 86, 56, 0.08); }
+
+.graph-frame { position: relative; width: 100%; height: calc(100vh - 100px); overflow: hidden; }
+#graph-svg { width: 100%; height: 100%; cursor: grab; background: var(--bg); }
+#graph-svg:active { cursor: grabbing; }
+
+/* Edge styling */
+.link { stroke: var(--rule); stroke-width: 1; fill: none; opacity: 0.4; pointer-events: none; transition: stroke 0.2s, stroke-width 0.2s, opacity 0.2s; }
+.link.outbound { stroke: var(--accent); stroke-width: 2; opacity: 0.85; }
+.link.inbound { stroke: #5A6A8A; stroke-width: 2; opacity: 0.85; }
+.link.dimmed { opacity: 0.06; }
+
+/* Node styling */
+.node-circle { cursor: pointer; transition: stroke-width 0.15s; stroke: var(--bg); stroke-width: 2; }
+.node-circle:hover { stroke-width: 4; }
+.node-circle.dimmed { opacity: 0.18; }
+.node-circle.highlighted { stroke: var(--fg); stroke-width: 3; }
+.node-label { font-family: var(--mono); font-size: 10px; fill: var(--fg-soft); pointer-events: none; text-anchor: middle; }
+.node-label.dimmed { opacity: 0.18; }
+.node-label.highlighted { fill: var(--fg); font-weight: 500; }
+
+/* Legend */
+.legend { position: absolute; top: 1rem; left: 1rem; background: rgba(245, 235, 228, 0.94); border: 1px solid var(--rule); border-radius: 8px; padding: 0.8rem 1rem; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; max-width: 200px; backdrop-filter: blur(4px); }
+.legend h3 { font-size: 0.65rem; letter-spacing: 0.16em; margin-bottom: 0.5rem; color: var(--fg-fade); }
+.legend ul { list-style: none; }
+.legend li { display: flex; align-items: center; gap: 0.5rem; padding: 0.18rem 0; }
+.legend .swatch { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+/* Search + controls */
+.controls { position: absolute; top: 1rem; right: 1rem; background: rgba(245, 235, 228, 0.94); border: 1px solid var(--rule); border-radius: 8px; padding: 0.6rem 0.8rem; font-family: var(--mono); font-size: 0.7rem; backdrop-filter: blur(4px); display: flex; flex-direction: column; gap: 0.4rem; min-width: 200px; }
+.controls input { font-family: var(--mono); font-size: 0.72rem; padding: 0.4rem 0.6rem; border: 1px solid var(--rule); border-radius: 999px; background: var(--bg); color: var(--fg); outline: none; width: 100%; }
+.controls input:focus { border-color: var(--accent); }
+.controls button { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; padding: 0.4rem 0.7rem; border: 1px solid var(--rule); border-radius: 999px; background: transparent; color: var(--fg-soft); cursor: pointer; transition: all 0.15s; }
+.controls button:hover { border-color: var(--accent); color: var(--accent); }
+.controls .stats { color: var(--fg-fade); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding-top: 0.2rem; }
+
+/* Detail panel */
+.detail-panel { position: absolute; bottom: 1rem; right: 1rem; left: 1rem; max-width: 480px; margin-left: auto; background: var(--bg); border: 1px solid var(--rule); border-radius: 10px; padding: 1.2rem 1.4rem 1.4rem; box-shadow: 0 6px 20px rgba(42, 26, 20, 0.12); transform: translateY(120%); opacity: 0; transition: transform 0.25s ease, opacity 0.25s ease; pointer-events: none; }
+.detail-panel.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.detail-panel .close { position: absolute; top: 0.7rem; right: 1rem; background: transparent; border: none; cursor: pointer; font-family: var(--mono); font-size: 0.9rem; color: var(--fg-fade); }
+.detail-panel .close:hover { color: var(--accent); }
+.detail-panel h3 { font-family: var(--display); font-size: 1.3rem; font-weight: 500; color: var(--fg); margin-bottom: 0.3rem; padding-right: 1.5rem; line-height: 1.2; }
+.detail-panel .panel-path { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 0.7rem; }
+.detail-panel .panel-desc { font-size: 0.92rem; color: var(--fg-soft); font-style: italic; line-height: 1.5; margin-bottom: 0.8rem; }
+.detail-panel .panel-stats { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-fade); margin-bottom: 0.9rem; display: flex; gap: 1.4rem; flex-wrap: wrap; }
+.detail-panel .panel-stats strong { color: var(--fg); font-weight: 500; }
+.detail-panel .actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.detail-panel .actions a { display: inline-block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.5rem 0.9rem; border: 1px solid var(--accent); color: var(--accent); border-radius: 999px; transition: all 0.15s; }
+.detail-panel .actions a:hover { background: var(--accent); color: var(--bg); }
+.detail-panel .actions a.secondary { border-color: var(--rule); color: var(--fg-soft); }
+.detail-panel .actions a.secondary:hover { border-color: var(--fg-soft); background: transparent; color: var(--fg); }
+
+.connections { margin-top: 0.7rem; font-family: var(--mono); font-size: 0.62rem; color: var(--fg-fade); max-height: 90px; overflow-y: auto; padding-top: 0.4rem; border-top: 1px solid var(--rule-soft); }
+.connections strong { display: block; color: var(--fg-soft); letter-spacing: 0.16em; text-transform: uppercase; margin-top: 0.5rem; margin-bottom: 0.2rem; font-size: 0.55rem; }
+.connections a { display: inline-block; padding: 0.1rem 0.4rem; margin: 0.1rem 0.2rem 0.1rem 0; border: 1px solid var(--rule-soft); border-radius: 4px; color: var(--fg-soft); }
+.connections a:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Mobile */
+@media (max-width: 720px) {
+  .topbar { padding: 0.7rem 1rem; }
+  .view-toggle { padding: 0.6rem 1rem; font-size: 0.62rem; gap: 0.6rem; }
+  .legend { top: auto; bottom: 1rem; left: 1rem; right: 1rem; max-width: none; }
+  .controls { top: 0.6rem; left: 0.6rem; right: 0.6rem; max-width: none; }
+  .detail-panel { left: 0.6rem; right: 0.6rem; }
+  .graph-frame { height: calc(100vh - 90px); }
+}
+</style>
+<link rel="stylesheet" href="/css/mobile-overlay.css">
+<script src="/js/site.js" defer></script>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="topbar">
+  <a href="/" class="brand">Seminar <em>Schools</em></a>
+  <span class="right">Sitemap &middot; Graph</span>
+</header>
+
+<nav class="view-toggle" aria-label="Sitemap view selector">
+  <span class="label">View:</span>
+  <a href="/polymyth/sitemap/">Tree</a>
+  <a href="/polymyth/sitemap/graph/" class="current">Graph</a>
+  <a href="/sitemap.xml">XML</a>
+  <span class="label" style="margin-left:auto"><a href="/polymyth/methodologylist/" style="border:none">&larr; back to ml*</a></span>
+</nav>
+
+<main id="main" class="graph-frame">
+  <svg id="graph-svg" role="img" aria-label="Interactive force-directed graph of site pages and their cross-links"></svg>
+
+  <aside class="legend" aria-label="Node category legend">
+    <h3>Categories</h3>
+    <ul>
+      <li><span class="swatch" style="background:var(--cat-home)"></span> Home</li>
+      <li><span class="swatch" style="background:var(--cat-practice)"></span> Practice</li>
+      <li><span class="swatch" style="background:var(--cat-resources)"></span> Resources</li>
+      <li><span class="swatch" style="background:var(--cat-framework)"></span> Framework</li>
+      <li><span class="swatch" style="background:var(--cat-instruments)"></span> Instruments</li>
+      <li><span class="swatch" style="background:var(--cat-about)"></span> About</li>
+      <li><span class="swatch" style="background:var(--cat-utility)"></span> Utility</li>
+    </ul>
+  </aside>
+
+  <div class="controls" aria-label="Graph controls">
+    <input id="search" type="text" placeholder="Filter by path or title&hellip;" aria-label="Filter graph">
+    <button id="btn-reset" type="button">Reset view</button>
+    <div class="stats" id="stats">Loading&hellip;</div>
+  </div>
+
+  <section class="detail-panel" id="detail" aria-live="polite">
+    <button class="close" id="detail-close" aria-label="Close detail panel">&times;</button>
+    <h3 id="d-title">Page</h3>
+    <div class="panel-path" id="d-path">/path/</div>
+    <p class="panel-desc" id="d-desc">Description</p>
+    <div class="panel-stats">
+      <span><strong id="d-in">0</strong> inbound</span>
+      <span><strong id="d-out">0</strong> outbound</span>
+      <span><strong id="d-cat">category</strong></span>
+    </div>
+    <div class="actions">
+      <a id="d-visit" href="#" target="_blank" rel="noopener">Open page &rarr;</a>
+      <a id="d-focus" href="#" class="secondary">Focus this node</a>
+    </div>
+    <div class="connections" id="d-connections"></div>
+  </section>
+</main>
+
+<script id="graph-data" type="application/json">{"nodes": [{"id": "/404.html", "title": "Not found &mdash; Seminar Schools", "desc": "The page you were looking for has moved or never existed.", "category": "about", "in": 2, "out": 3}, {"id": "/aa/cloud/", "title": "aa* / cloud \u2014 recursive growth", "desc": "aa* archetype archive in cloud-growth mode. Empty until you click. Every concept spawns related concepts. Build your own taxonomy by walking it.", "category": "instruments", "in": 4, "out": 2}, {"id": "/aa/editorial.html", "title": "aa* \u2014 Editorial Log", "desc": "Editorial decisions log for the aa* archetype archive. Schema versions, routing decisions, refusals.", "category": "instruments", "in": 3, "out": 1}, {"id": "/aa/", "title": "aa* \u2014 Archetype Archive", "desc": "A comprehensive reference catalog of every existing archetype taxonomy across depth psychology, comparative mythology, folklore, dramaturgy, religion, gaming, and indigenous traditions. Search by taxo", "category": "instruments", "in": 13, "out": 4}, {"id": "/aa/views/", "title": "aa* \u2014 alternative views", "desc": "aa* derivation views. Five lenses over the archetype catalog: originator index, timeline, cross-tradition heatmap, co-occurrence weighting, tradition-pair affinity matrix.", "category": "instruments", "in": 4, "out": 2}, {"id": "/agora/", "title": "The Agora. Seminar Schools.", "desc": "The Agora is a monthly outdoor philosophy gathering at the Barry Zukerman Amphitheatre in Earl Bales Park, Toronto. Part of the Seminar Schools practice.", "category": "practice", "in": 10, "out": 10}, {"id": "/apply/success/", "title": "application received \u00b7 Leizu Academy", "desc": "Your application to Leizu Academy has been received.", "category": "utility", "in": 2, "out": 5}, {"id": "/bb/", "title": "bookwormburrows \u00b7 two paths in", "desc": "bookwormburrows. Two paths in. The character-creation game lives at /bookwormcard/. The teacher operation file lives at /polymyth/bookwormburrows/.", "category": "practice", "in": 2, "out": 4}, {"id": "/bookwormcard/about/", "title": "bookwormburrows \u00b7 about", "desc": "What bookwormburrows is. A pedagogical game where you make a character of yourself and your AI runs the table. Any text becomes a visitable world.", "category": "instruments", "in": 4, "out": 5}, {"id": "/bookwormcard/glossary/", "title": "bookwormburrows \u00b7 glossary", "desc": "The vocabulary of the bookwormburrows depth-engine.", "category": "instruments", "in": 3, "out": 1}, {"id": "/bookwormcard/", "title": "bookwormburrows", "desc": "bookwormburrows. Make a wormcard. Eleven cosmological traditions over your birth-data. Thirty-eight burrowing animals. Character-smashing without limit. Matrix terminal interface.", "category": "instruments", "in": 15, "out": 3}, {"id": "/bookwormcard/pdf/", "title": "The Bookwormcard \u00b7 bookwormburrows", "desc": "The Bookwormcard. A character punch card for bookwormburrows. Carry it through seminars, fill it as you read, scan it back into the matrix when full. Download the PDF or use the in-browser printable v", "category": "instruments", "in": 3, "out": 3}, {"id": "/bookwormcard/print/", "title": "The Bookwormcard", "desc": "The Bookwormcard, in-browser printable version. A character punch card for bookwormburrows. Fill it as you read; scan it back into the matrix when full.", "category": "instruments", "in": 4, "out": 2}, {"id": "/bookwormcard/success/", "title": "transmission complete \u00b7 bookwormburrows", "desc": "Your wormcard has been received.", "category": "utility", "in": 2, "out": 6}, {"id": "/campaigns/", "title": "Campaigns. Seminar Schools.", "desc": "Bookwormburrows campaigns. Each campaign is a dimensionally-rendered reading of a specific text or text-set.", "category": "practice", "in": 4, "out": 4}, {"id": "/campaigns/thank-you-mam/", "title": "Thank You M'am \u2014 48 Hours in Harlem, September 1958", "desc": "A pedagogical RPG campaign set in Harlem on September 20\u201322, 1958. Built around Langston Hughes's short story Thank You M'am. Forty-eight hours of exploration around a single canonical encounter, with", "category": "practice", "in": 4, "out": 9}, {"id": "/campaigns/thank-you-mam/pregame/", "title": "Pregame Arena \u00b7 Thank You M'am \u00b7 Session Zero DM Brief", "desc": "DM-facing session-zero runbook for the Thank You M'am bookwormburrows campaign. Pre-session checklist, opening script, dimension introduction, burrow-point protocol, first scene, Mrs Jones NPC quick-c", "category": "practice", "in": 3, "out": 7}, {"id": "/florilegium/", "title": "Florilegium. Seminar Schools.", "desc": "Articles from across Seminar Schools. Lecture commentary, polymyth analyses, nutrition writing, and other pieces from the practice. Every article also lives in its canonical section.", "category": "resources", "in": 11, "out": 7}, {"id": "/", "title": "Seminar Schools", "desc": "A Toronto institution of seminars, lectures, and tutoring.", "category": "home", "in": 24, "out": 6}, {"id": "/leizu/booking-success/", "title": "Payment received. Booking your session.", "desc": "Payment confirmed. Forwarding you to schedule your session.", "category": "utility", "in": 2, "out": 0}, {"id": "/leizu/cloud/", "title": "Leizu Academy / cloud \u2014 curriculum growth", "desc": "Leizu Academy curriculum in cloud-growth mode. Five subjects of the productive cycle expand into courses, routes, and cross-subject thematic threads.", "category": "resources", "in": 3, "out": 1}, {"id": "/leizu/donate/", "title": "Mulberry Fund. Support Leizu Scholars.", "desc": "The Mulberry Fund supports Leizu Scholars: tuition-free education for students who can't afford regular fees.", "category": "resources", "in": 2, "out": 1}, {"id": "/leizu/", "title": "\u5ad8\u7956\u5b78\u9662 / Leizu Academy", "desc": "\u5ad8\u7956\u5b78\u9662. The tutoring practice within Seminar Schools.", "category": "resources", "in": 10, "out": 3}, {"id": "/leizu/policies/", "title": "Policies / Leizu Academy / \u5ad8\u7956\u5b78\u9662", "desc": "Leizu Academy policies. Cancellations, rescheduling, no-shows, seminar gating.", "category": "resources", "in": 2, "out": 0}, {"id": "/leizu/scholarship/", "title": "Leizu Scholars. Need-based learning at Leizu Academy.", "desc": "Leizu Scholars is a need-based program offering tuition-free education at Leizu Academy. Apply with a letter.", "category": "resources", "in": 2, "out": 1}, {"id": "/leizu/teach/", "title": "Teach at Leizu Academy / \u5ad8\u7956\u5b78\u9662", "desc": "Teaching at Leizu Academy. Eighty percent of session rate, small student loads, the seminar method.", "category": "resources", "in": 2, "out": 1}, {"id": "/marginalia/example-review/", "title": "Example review \u2014 Marginalia. Seminar Schools.", "desc": "A stub. Replace this file with a lecture review. Or delete it.", "category": "practice", "in": 2, "out": 3}, {"id": "/marginalia/", "title": "Marginalia. Seminar Schools.", "desc": "Long-form written attention to free public lectures attended around Toronto. Commentary essays from Seminar Schools.", "category": "practice", "in": 9, "out": 7}, {"id": "/nutrition/", "title": "Nutrition. Substrate over proxy.", "desc": "Food writing from Saul Nassau. Substrate over proxy. Bang-for-buck cooking. Toronto diaspora groceries.", "category": "practice", "in": 9, "out": 11}, {"id": "/ohm-dome/", "title": "Ohm Dome. Seminar Schools.", "desc": "Ohm Dome. A biometric-responsive LED installation in public space, Toronto.", "category": "practice", "in": 9, "out": 10}, {"id": "/polymyth/bookwormburrows/", "title": "Bookwormburrows*", "desc": "Bookwormburrows. A pedagogical dimensional-traveling game where bookworms eat text to gain subjectivity. Rainbowsol is the DM. Any book becomes a visitable dimension.", "category": "framework", "in": 9, "out": 6}, {"id": "/polymyth/campaigncodex/", "title": "Campaigncodex*", "desc": "Campaigncodex. D&D-based OSSD English curriculum. Sibling file to bb* (pedagogy substrate) and mc* (academic curriculum specs). v1 scaffold with 7 course stubs, 3 framework citations, 5 pending entrie", "category": "framework", "in": 8, "out": 6}, {"id": "/polymyth/methodologylist/", "title": "Polymyth Methodologylist*", "desc": "polymorphousmythology methodologylist. A living framework for cultural pattern analysis, gorgonification diagnosis, and degorgonification operations.", "category": "framework", "in": 10, "out": 6}, {"id": "/polymyth/modulecanon/", "title": "Modulecanon*", "desc": "Modulecanon. Curriculum modules independent of delivery vehicle. Sibling file to ml* (methodologylist) and bb* (bookwormburrows). v1 trimmed schema with 24 Leizu seed entries; pending slots track prim", "category": "framework", "in": 7, "out": 5}, {"id": "/polymyth/polymythdnd/", "title": "Polymythdnd compatibility landscape", "desc": "Polymythdnd compatibility landscape. 33 D&D and OSR mechanics from 10 systems, ranked by polymyth-compatibility, mapped to four table functions. A reference for any DM building a richer, agency-respec", "category": "framework", "in": 2, "out": 6}, {"id": "/sabachtan-seminar/", "title": "Sabachtan Gnosticism Seminar. Seminar Schools.", "desc": "Sabachtan Gnosticism Philosophy Seminar. Toronto.", "category": "practice", "in": 8, "out": 10}, {"id": "/saul/", "title": "Saul Karim NMH. CV.", "desc": "Saul Karim NMH. Curriculum vitae. Toronto-based educator and philosopher. Founder of Leizu Academy and Seminar Schools.", "category": "about", "in": 9, "out": 0}, {"id": "/polymyth/sitemap/", "title": "Sitemap (tree). Seminar Schools.", "desc": "Hierarchical tree of every page across seminarschools.com.", "category": "about", "in": 13, "out": 39}, {"id": "/teacherresources/", "title": "Teacher Resources. Seminar Schools.", "desc": "A curated, growing index of teaching resources for ELA and beyond. Subscribe via RSS for updates.", "category": "resources", "in": 13, "out": 10}, {"id": "/polymyth/sitemap/graph/", "title": "Sitemap (graph). Seminar Schools.", "desc": "Interactive force-directed graph of every cross-page link on the site.", "category": "about", "in": 1, "out": 39}], "edges": [{"source": "/404.html", "target": "/"}, {"source": "/404.html", "target": "/polymyth/sitemap/"}, {"source": "/404.html", "target": "/florilegium/"}, {"source": "/aa/cloud/", "target": "/aa/"}, {"source": "/aa/cloud/", "target": "/aa/views/"}, {"source": "/aa/editorial.html", "target": "/aa/"}, {"source": "/aa/", "target": "/"}, {"source": "/aa/", "target": "/aa/cloud/"}, {"source": "/aa/", "target": "/aa/editorial.html"}, {"source": "/aa/", "target": "/aa/views/"}, {"source": "/aa/views/", "target": "/aa/"}, {"source": "/aa/views/", "target": "/aa/cloud/"}, {"source": "/agora/", "target": "/"}, {"source": "/agora/", "target": "/marginalia/"}, {"source": "/agora/", "target": "/sabachtan-seminar/"}, {"source": "/agora/", "target": "/ohm-dome/"}, {"source": "/agora/", "target": "/nutrition/"}, {"source": "/agora/", "target": "/teacherresources/"}, {"source": "/agora/", "target": "/florilegium/"}, {"source": "/agora/", "target": "/leizu/"}, {"source": "/agora/", "target": "/saul/"}, {"source": "/agora/", "target": "/polymyth/sitemap/"}, {"source": "/apply/success/", "target": "/"}, {"source": "/apply/success/", "target": "/leizu/"}, {"source": "/apply/success/", "target": "/bookwormcard/"}, {"source": "/apply/success/", "target": "/aa/"}, {"source": "/apply/success/", "target": "/agora/"}, {"source": "/bb/", "target": "/bookwormcard/"}, {"source": "/bb/", "target": "/polymyth/bookwormburrows/"}, {"source": "/bb/", "target": "/"}, {"source": "/bb/", "target": "/polymyth/sitemap/"}, {"source": "/bookwormcard/about/", "target": "/bookwormcard/"}, {"source": "/bookwormcard/about/", "target": "/"}, {"source": "/bookwormcard/about/", "target": "/polymyth/methodologylist/"}, {"source": "/bookwormcard/about/", "target": "/aa/"}, {"source": "/bookwormcard/about/", "target": "/teacherresources/"}, {"source": "/bookwormcard/glossary/", "target": "/bookwormcard/"}, {"source": "/bookwormcard/", "target": "/bookwormcard/about/"}, {"source": "/bookwormcard/", "target": "/bookwormcard/glossary/"}, {"source": "/bookwormcard/", "target": "/bookwormcard/print/"}, {"source": "/bookwormcard/pdf/", "target": "/bookwormcard/"}, {"source": "/bookwormcard/pdf/", "target": "/bookwormcard/print/"}, {"source": "/bookwormcard/pdf/", "target": "/"}, {"source": "/bookwormcard/print/", "target": "/bookwormcard/pdf/"}, {"source": "/bookwormcard/print/", "target": "/bookwormcard/"}, {"source": "/bookwormcard/success/", "target": "/bookwormcard/"}, {"source": "/bookwormcard/success/", "target": "/bookwormcard/about/"}, {"source": "/bookwormcard/success/", "target": "/aa/"}, {"source": "/bookwormcard/success/", "target": "/teacherresources/"}, {"source": "/bookwormcard/success/", "target": "/leizu/"}, {"source": "/bookwormcard/success/", "target": "/"}, {"source": "/campaigns/", "target": "/polymyth/campaigncodex/"}, {"source": "/campaigns/", "target": "/campaigns/thank-you-mam/"}, {"source": "/campaigns/", "target": "/"}, {"source": "/campaigns/", "target": "/polymyth/sitemap/"}, {"source": "/campaigns/thank-you-mam/", "target": "/bookwormcard/"}, {"source": "/campaigns/thank-you-mam/", "target": "/"}, {"source": "/campaigns/thank-you-mam/", "target": "/campaigns/"}, {"source": "/campaigns/thank-you-mam/", "target": "/teacherresources/"}, {"source": "/campaigns/thank-you-mam/", "target": "/polymyth/bookwormburrows/"}, {"source": "/campaigns/thank-you-mam/", "target": "/campaigns/thank-you-mam/pregame/"}, {"source": "/campaigns/thank-you-mam/", "target": "/polymyth/campaigncodex/"}, {"source": "/campaigns/thank-you-mam/", "target": "/polymyth/methodologylist/"}, {"source": "/campaigns/thank-you-mam/", "target": "/polymyth/modulecanon/"}, {"source": "/campaigns/thank-you-mam/pregame/", "target": "/bookwormcard/"}, {"source": "/campaigns/thank-you-mam/pregame/", "target": "/"}, {"source": "/campaigns/thank-you-mam/pregame/", "target": "/campaigns/"}, {"source": "/campaigns/thank-you-mam/pregame/", "target": "/campaigns/thank-you-mam/"}, {"source": "/campaigns/thank-you-mam/pregame/", "target": "/polymyth/campaigncodex/"}, {"source": "/campaigns/thank-you-mam/pregame/", "target": "/polymyth/bookwormburrows/"}, {"source": "/campaigns/thank-you-mam/pregame/", "target": "/polymyth/methodologylist/"}, {"source": "/florilegium/", "target": "/"}, {"source": "/florilegium/", "target": "/agora/"}, {"source": "/florilegium/", "target": "/marginalia/"}, {"source": "/florilegium/", "target": "/sabachtan-seminar/"}, {"source": "/florilegium/", "target": "/ohm-dome/"}, {"source": "/florilegium/", "target": "/nutrition/"}, {"source": "/florilegium/", "target": "/teacherresources/"}, {"source": "/", "target": "/teacherresources/"}, {"source": "/", "target": "/florilegium/"}, {"source": "/", "target": "/agora/"}, {"source": "/", "target": "/ohm-dome/"}, {"source": "/", "target": "/bookwormcard/"}, {"source": "/", "target": "/aa/"}, {"source": "/leizu/cloud/", "target": "/leizu/"}, {"source": "/leizu/donate/", "target": "/"}, {"source": "/leizu/", "target": "/leizu/cloud/"}, {"source": "/leizu/", "target": "/saul/"}, {"source": "/leizu/", "target": "/teacherresources/"}, {"source": "/leizu/scholarship/", "target": "/"}, {"source": "/leizu/teach/", "target": "/"}, {"source": "/marginalia/example-review/", "target": "/"}, {"source": "/marginalia/example-review/", "target": "/marginalia/"}, {"source": "/marginalia/example-review/", "target": "/florilegium/"}, {"source": "/marginalia/", "target": "/"}, {"source": "/marginalia/", "target": "/agora/"}, {"source": "/marginalia/", "target": "/sabachtan-seminar/"}, {"source": "/marginalia/", "target": "/ohm-dome/"}, {"source": "/marginalia/", "target": "/nutrition/"}, {"source": "/marginalia/", "target": "/teacherresources/"}, {"source": "/marginalia/", "target": "/florilegium/"}, {"source": "/nutrition/", "target": "/"}, {"source": "/nutrition/", "target": "/agora/"}, {"source": "/nutrition/", "target": "/marginalia/"}, {"source": "/nutrition/", "target": "/sabachtan-seminar/"}, {"source": "/nutrition/", "target": "/ohm-dome/"}, {"source": "/nutrition/", "target": "/teacherresources/"}, {"source": "/nutrition/", "target": "/florilegium/"}, {"source": "/nutrition/", "target": "/polymyth/methodologylist/"}, {"source": "/nutrition/", "target": "/saul/"}, {"source": "/nutrition/", "target": "/leizu/"}, {"source": "/nutrition/", "target": "/polymyth/sitemap/"}, {"source": "/ohm-dome/", "target": "/"}, {"source": "/ohm-dome/", "target": "/agora/"}, {"source": "/ohm-dome/", "target": "/marginalia/"}, {"source": "/ohm-dome/", "target": "/sabachtan-seminar/"}, {"source": "/ohm-dome/", "target": "/nutrition/"}, {"source": "/ohm-dome/", "target": "/teacherresources/"}, {"source": "/ohm-dome/", "target": "/florilegium/"}, {"source": "/ohm-dome/", "target": "/leizu/"}, {"source": "/ohm-dome/", "target": "/saul/"}, {"source": "/ohm-dome/", "target": "/polymyth/sitemap/"}, {"source": "/polymyth/bookwormburrows/", "target": "/polymyth/methodologylist/"}, {"source": "/polymyth/bookwormburrows/", "target": "/polymyth/modulecanon/"}, {"source": "/polymyth/bookwormburrows/", "target": "/polymyth/campaigncodex/"}, {"source": "/polymyth/bookwormburrows/", "target": "/aa/"}, {"source": "/polymyth/bookwormburrows/", "target": "/polymyth/sitemap/"}, {"source": "/polymyth/bookwormburrows/", "target": "/bookwormcard/"}, {"source": "/polymyth/campaigncodex/", "target": "/polymyth/bookwormburrows/"}, {"source": "/polymyth/campaigncodex/", "target": "/polymyth/modulecanon/"}, {"source": "/polymyth/campaigncodex/", "target": "/polymyth/methodologylist/"}, {"source": "/polymyth/campaigncodex/", "target": "/polymyth/sitemap/"}, {"source": "/polymyth/campaigncodex/", "target": "/bookwormcard/"}, {"source": "/polymyth/campaigncodex/", "target": "/aa/"}, {"source": "/polymyth/methodologylist/", "target": "/polymyth/bookwormburrows/"}, {"source": "/polymyth/methodologylist/", "target": "/polymyth/modulecanon/"}, {"source": "/polymyth/methodologylist/", "target": "/aa/"}, {"source": "/polymyth/methodologylist/", "target": "/polymyth/sitemap/"}, {"source": "/polymyth/methodologylist/", "target": "/nutrition/"}, {"source": "/polymyth/methodologylist/", "target": "/saul/"}, {"source": "/polymyth/modulecanon/", "target": "/polymyth/bookwormburrows/"}, {"source": "/polymyth/modulecanon/", "target": "/polymyth/methodologylist/"}, {"source": "/polymyth/modulecanon/", "target": "/polymyth/campaigncodex/"}, {"source": "/polymyth/modulecanon/", "target": "/aa/"}, {"source": "/polymyth/modulecanon/", "target": "/polymyth/sitemap/"}, {"source": "/polymyth/polymythdnd/", "target": "/polymyth/methodologylist/"}, {"source": "/polymyth/polymythdnd/", "target": "/polymyth/bookwormburrows/"}, {"source": "/polymyth/polymythdnd/", "target": "/polymyth/campaigncodex/"}, {"source": "/polymyth/polymythdnd/", "target": "/bookwormcard/"}, {"source": "/polymyth/polymythdnd/", "target": "/polymyth/modulecanon/"}, {"source": "/polymyth/polymythdnd/", "target": "/"}, {"source": "/sabachtan-seminar/", "target": "/"}, {"source": "/sabachtan-seminar/", "target": "/agora/"}, {"source": "/sabachtan-seminar/", "target": "/marginalia/"}, {"source": "/sabachtan-seminar/", "target": "/ohm-dome/"}, {"source": "/sabachtan-seminar/", "target": "/nutrition/"}, {"source": "/sabachtan-seminar/", "target": "/teacherresources/"}, {"source": "/sabachtan-seminar/", "target": "/florilegium/"}, {"source": "/sabachtan-seminar/", "target": "/leizu/"}, {"source": "/sabachtan-seminar/", "target": "/saul/"}, {"source": "/sabachtan-seminar/", "target": "/polymyth/sitemap/"}, {"source": "/polymyth/sitemap/", "target": "/"}, {"source": "/polymyth/sitemap/", "target": "/bb/"}, {"source": "/polymyth/sitemap/", "target": "/agora/"}, {"source": "/polymyth/sitemap/", "target": "/sabachtan-seminar/"}, {"source": "/polymyth/sitemap/", "target": "/ohm-dome/"}, {"source": "/polymyth/sitemap/", "target": "/marginalia/"}, {"source": "/polymyth/sitemap/", "target": "/marginalia/example-review/"}, {"source": "/polymyth/sitemap/", "target": "/nutrition/"}, {"source": "/polymyth/sitemap/", "target": "/campaigns/"}, {"source": "/polymyth/sitemap/", "target": "/campaigns/thank-you-mam/"}, {"source": "/polymyth/sitemap/", "target": "/campaigns/thank-you-mam/pregame/"}, {"source": "/polymyth/sitemap/", "target": "/teacherresources/"}, {"source": "/polymyth/sitemap/", "target": "/florilegium/"}, {"source": "/polymyth/sitemap/", "target": "/leizu/"}, {"source": "/polymyth/sitemap/", "target": "/leizu/teach/"}, {"source": "/polymyth/sitemap/", "target": "/leizu/scholarship/"}, {"source": "/polymyth/sitemap/", "target": "/leizu/donate/"}, {"source": "/polymyth/sitemap/", "target": "/leizu/cloud/"}, {"source": "/polymyth/sitemap/", "target": "/leizu/policies/"}, {"source": "/polymyth/sitemap/", "target": "/leizu/booking-success/"}, {"source": "/polymyth/sitemap/", "target": "/polymyth/methodologylist/"}, {"source": "/polymyth/sitemap/", "target": "/polymyth/modulecanon/"}, {"source": "/polymyth/sitemap/", "target": "/polymyth/bookwormburrows/"}, {"source": "/polymyth/sitemap/", "target": "/polymyth/campaigncodex/"}, {"source": "/polymyth/sitemap/", "target": "/polymyth/polymythdnd/"}, {"source": "/polymyth/sitemap/", "target": "/bookwormcard/"}, {"source": "/polymyth/sitemap/", "target": "/bookwormcard/about/"}, {"source": "/polymyth/sitemap/", "target": "/bookwormcard/pdf/"}, {"source": "/polymyth/sitemap/", "target": "/bookwormcard/print/"}, {"source": "/polymyth/sitemap/", "target": "/bookwormcard/glossary/"}, {"source": "/polymyth/sitemap/", "target": "/bookwormcard/success/"}, {"source": "/polymyth/sitemap/", "target": "/aa/"}, {"source": "/polymyth/sitemap/", "target": "/aa/cloud/"}, {"source": "/polymyth/sitemap/", "target": "/aa/views/"}, {"source": "/polymyth/sitemap/", "target": "/aa/editorial.html"}, {"source": "/polymyth/sitemap/", "target": "/saul/"}, {"source": "/polymyth/sitemap/", "target": "/404.html"}, {"source": "/polymyth/sitemap/", "target": "/apply/success/"}, {"source": "/teacherresources/", "target": "/"}, {"source": "/teacherresources/", "target": "/agora/"}, {"source": "/teacherresources/", "target": "/marginalia/"}, {"source": "/teacherresources/", "target": "/sabachtan-seminar/"}, {"source": "/teacherresources/", "target": "/ohm-dome/"}, {"source": "/teacherresources/", "target": "/nutrition/"}, {"source": "/teacherresources/", "target": "/florilegium/"}, {"source": "/teacherresources/", "target": "/leizu/"}, {"source": "/teacherresources/", "target": "/saul/"}, {"source": "/teacherresources/", "target": "/polymyth/sitemap/"}, {"source": "/polymyth/sitemap/", "target": "/polymyth/sitemap/graph/"}, {"source": "/polymyth/sitemap/graph/", "target": "/polymyth/sitemap/"}, {"source": "/polymyth/sitemap/graph/", "target": "/404.html"}, {"source": "/polymyth/sitemap/graph/", "target": "/aa/cloud/"}, {"source": "/polymyth/sitemap/graph/", "target": "/aa/editorial.html"}, {"source": "/polymyth/sitemap/graph/", "target": "/aa/"}, {"source": "/polymyth/sitemap/graph/", "target": "/aa/views/"}, {"source": "/polymyth/sitemap/graph/", "target": "/agora/"}, {"source": "/polymyth/sitemap/graph/", "target": "/apply/success/"}, {"source": "/polymyth/sitemap/graph/", "target": "/bb/"}, {"source": "/polymyth/sitemap/graph/", "target": "/bookwormcard/about/"}, {"source": "/polymyth/sitemap/graph/", "target": "/bookwormcard/glossary/"}, {"source": "/polymyth/sitemap/graph/", "target": "/bookwormcard/"}, {"source": "/polymyth/sitemap/graph/", "target": "/bookwormcard/pdf/"}, {"source": "/polymyth/sitemap/graph/", "target": "/bookwormcard/print/"}, {"source": "/polymyth/sitemap/graph/", "target": "/bookwormcard/success/"}, {"source": "/polymyth/sitemap/graph/", "target": "/campaigns/"}, {"source": "/polymyth/sitemap/graph/", "target": "/campaigns/thank-you-mam/"}, {"source": "/polymyth/sitemap/graph/", "target": "/campaigns/thank-you-mam/pregame/"}, {"source": "/polymyth/sitemap/graph/", "target": "/florilegium/"}, {"source": "/polymyth/sitemap/graph/", "target": "/"}, {"source": "/polymyth/sitemap/graph/", "target": "/leizu/booking-success/"}, {"source": "/polymyth/sitemap/graph/", "target": "/leizu/cloud/"}, {"source": "/polymyth/sitemap/graph/", "target": "/leizu/donate/"}, {"source": "/polymyth/sitemap/graph/", "target": "/leizu/"}, {"source": "/polymyth/sitemap/graph/", "target": "/leizu/policies/"}, {"source": "/polymyth/sitemap/graph/", "target": "/leizu/scholarship/"}, {"source": "/polymyth/sitemap/graph/", "target": "/leizu/teach/"}, {"source": "/polymyth/sitemap/graph/", "target": "/marginalia/example-review/"}, {"source": "/polymyth/sitemap/graph/", "target": "/marginalia/"}, {"source": "/polymyth/sitemap/graph/", "target": "/nutrition/"}, {"source": "/polymyth/sitemap/graph/", "target": "/ohm-dome/"}, {"source": "/polymyth/sitemap/graph/", "target": "/polymyth/bookwormburrows/"}, {"source": "/polymyth/sitemap/graph/", "target": "/polymyth/campaigncodex/"}, {"source": "/polymyth/sitemap/graph/", "target": "/polymyth/methodologylist/"}, {"source": "/polymyth/sitemap/graph/", "target": "/polymyth/modulecanon/"}, {"source": "/polymyth/sitemap/graph/", "target": "/polymyth/polymythdnd/"}, {"source": "/polymyth/sitemap/graph/", "target": "/sabachtan-seminar/"}, {"source": "/polymyth/sitemap/graph/", "target": "/saul/"}, {"source": "/polymyth/sitemap/graph/", "target": "/teacherresources/"}]}</script>
+
+<script>
+(function() {
+  function init() {
+    if (typeof d3 === 'undefined') { setTimeout(init, 50); return; }
+
+    const raw = JSON.parse(document.getElementById('graph-data').textContent);
+    const nodes = raw.nodes.map(n => Object.assign({}, n));
+    const links = raw.edges.map(e => ({ source: e.source, target: e.target }));
+
+    const catColor = {
+      home: 'var(--cat-home)',
+      practice: 'var(--cat-practice)',
+      resources: 'var(--cat-resources)',
+      framework: 'var(--cat-framework)',
+      instruments: 'var(--cat-instruments)',
+      about: 'var(--cat-about)',
+      utility: 'var(--cat-utility)'
+    };
+
+    const svg = d3.select('#graph-svg');
+    const container = svg.node().parentNode;
+    let width = container.clientWidth;
+    let height = container.clientHeight;
+
+    svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+    // Zoomable group
+    const zoomLayer = svg.append('g');
+    const zoom = d3.zoom().scaleExtent([0.2, 6]).on('zoom', (event) => {
+      zoomLayer.attr('transform', event.transform);
+    });
+    svg.call(zoom);
+
+    // Click empty space resets
+    svg.on('click', (event) => {
+      if (event.target.tagName === 'svg' || event.target.tagName === 'SVG') {
+        clearSelection();
+      }
+    });
+
+    // Simulation
+    const sim = d3.forceSimulation(nodes)
+      .force('link', d3.forceLink(links).id(d => d.id).distance(70).strength(0.5))
+      .force('charge', d3.forceManyBody().strength(-180))
+      .force('center', d3.forceCenter(width / 2, height / 2))
+      .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 4));
+
+    function nodeRadius(d) {
+      return Math.max(5, Math.min(22, Math.sqrt((d.in || 0) + (d.out || 0)) * 3));
+    }
+
+    // Links
+    const linkSel = zoomLayer.append('g').attr('class', 'links')
+      .selectAll('line')
+      .data(links)
+      .join('line')
+      .attr('class', 'link');
+
+    // Nodes group
+    const nodeG = zoomLayer.append('g').attr('class', 'nodes')
+      .selectAll('g')
+      .data(nodes)
+      .join('g')
+      .attr('class', 'node-group')
+      .call(drag(sim))
+      .on('click', (event, d) => {
+        event.stopPropagation();
+        selectNode(d);
+      });
+
+    nodeG.append('circle')
+      .attr('class', 'node-circle')
+      .attr('r', d => nodeRadius(d))
+      .attr('fill', d => catColor[d.category] || 'var(--cat-utility)');
+
+    nodeG.append('text')
+      .attr('class', 'node-label')
+      .attr('dy', d => -nodeRadius(d) - 6)
+      .text(d => labelFor(d));
+
+    function labelFor(d) {
+      if (d.id === '/') return 'home';
+      const parts = d.id.split('/').filter(x => x);
+      return parts[parts.length - 1].replace(/\.html$/, '').replace(/_/g, ' ');
+    }
+
+    sim.on('tick', () => {
+      linkSel
+        .attr('x1', d => d.source.x)
+        .attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x)
+        .attr('y2', d => d.target.y);
+      nodeG.attr('transform', d => `translate(${d.x},${d.y})`);
+    });
+
+    function drag(simulation) {
+      function dragstarted(event, d) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x; d.fy = d.y;
+      }
+      function dragged(event, d) { d.fx = event.x; d.fy = event.y; }
+      function dragended(event, d) {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null; d.fy = null;
+      }
+      return d3.drag().on('start', dragstarted).on('drag', dragged).on('end', dragended);
+    }
+
+    // Selection / focus logic
+    let selected = null;
+
+    function selectNode(d) {
+      selected = d;
+      // Compute outbound and inbound for this node
+      const out = links.filter(l => (l.source.id || l.source) === d.id);
+      const inc = links.filter(l => (l.target.id || l.target) === d.id);
+      const outIds = new Set(out.map(l => (l.target.id || l.target)));
+      const incIds = new Set(inc.map(l => (l.source.id || l.source)));
+      const connectedIds = new Set([d.id, ...outIds, ...incIds]);
+
+      linkSel
+        .classed('outbound', l => (l.source.id || l.source) === d.id)
+        .classed('inbound', l => (l.target.id || l.target) === d.id)
+        .classed('dimmed', l => {
+          const s = l.source.id || l.source, t = l.target.id || l.target;
+          return s !== d.id && t !== d.id;
+        });
+
+      nodeG.select('.node-circle')
+        .classed('dimmed', n => !connectedIds.has(n.id))
+        .classed('highlighted', n => n.id === d.id);
+      nodeG.select('.node-label')
+        .classed('dimmed', n => !connectedIds.has(n.id))
+        .classed('highlighted', n => n.id === d.id);
+
+      openDetail(d, [...outIds], [...incIds]);
+    }
+
+    function clearSelection() {
+      selected = null;
+      linkSel.classed('outbound', false).classed('inbound', false).classed('dimmed', false);
+      nodeG.select('.node-circle').classed('dimmed', false).classed('highlighted', false);
+      nodeG.select('.node-label').classed('dimmed', false).classed('highlighted', false);
+      document.getElementById('detail').classList.remove('open');
+    }
+
+    // Detail panel
+    function openDetail(d, outIds, incIds) {
+      document.getElementById('d-title').textContent = d.title || d.id;
+      document.getElementById('d-path').textContent = d.id;
+      document.getElementById('d-desc').textContent = d.desc || '(no description)';
+      document.getElementById('d-in').textContent = incIds.length;
+      document.getElementById('d-out').textContent = outIds.length;
+      document.getElementById('d-cat').textContent = d.category;
+      const visit = document.getElementById('d-visit');
+      visit.href = d.id;
+      visit.textContent = 'Open page \u2192';
+
+      const focus = document.getElementById('d-focus');
+      focus.onclick = (e) => {
+        e.preventDefault();
+        const transform = d3.zoomIdentity.translate(width / 2 - d.x * 2, height / 2 - d.y * 2).scale(2);
+        svg.transition().duration(750).call(zoom.transform, transform);
+      };
+
+      const conn = document.getElementById('d-connections');
+      let html = '';
+      if (outIds.length) {
+        html += '<strong>Links out to</strong>';
+        outIds.forEach(id => { html += `<a href="#" data-id="${id}">${id}</a>`; });
+      }
+      if (incIds.length) {
+        html += '<strong>Linked from</strong>';
+        incIds.forEach(id => { html += `<a href="#" data-id="${id}">${id}</a>`; });
+      }
+      conn.innerHTML = html;
+      conn.querySelectorAll('a[data-id]').forEach(a => {
+        a.onclick = (e) => {
+          e.preventDefault();
+          const target = nodes.find(n => n.id === a.dataset.id);
+          if (target) selectNode(target);
+        };
+      });
+
+      document.getElementById('detail').classList.add('open');
+    }
+
+    document.getElementById('detail-close').onclick = clearSelection;
+
+    // Search
+    const searchInput = document.getElementById('search');
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      if (!q) {
+        clearSelection();
+        return;
+      }
+      const matches = new Set(nodes.filter(n =>
+        (n.id || '').toLowerCase().includes(q) ||
+        (n.title || '').toLowerCase().includes(q)
+      ).map(n => n.id));
+      nodeG.select('.node-circle')
+        .classed('dimmed', n => !matches.has(n.id))
+        .classed('highlighted', n => matches.has(n.id) && matches.size <= 5);
+      nodeG.select('.node-label')
+        .classed('dimmed', n => !matches.has(n.id))
+        .classed('highlighted', n => matches.has(n.id));
+      linkSel.classed('dimmed', l => {
+        const s = l.source.id || l.source, t = l.target.id || l.target;
+        return !matches.has(s) || !matches.has(t);
+      });
+    });
+
+    // Reset button
+    document.getElementById('btn-reset').onclick = () => {
+      clearSelection();
+      searchInput.value = '';
+      svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity);
+    };
+
+    // Stats
+    document.getElementById('stats').textContent = `${nodes.length} pages · ${links.length} edges`;
+
+    // Resize handler
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        width = container.clientWidth;
+        height = container.clientHeight;
+        svg.attr('viewBox', `0 0 ${width} ${height}`);
+        sim.force('center', d3.forceCenter(width / 2, height / 2));
+        sim.alpha(0.3).restart();
+      }, 200);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+<footer style="position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:1px solid var(--rule);padding:0.5rem 1rem;font-family:var(--mono);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--fg-fade);display:flex;justify-content:space-between;align-items:center;">
+  <span>&copy; 2026 Seminar Schools &middot; Toronto</span>
+  <span><a href="/" style="color:var(--accent);border-bottom:1px solid var(--accent)">&larr; Home</a></span>
+</footer>
+
+</body>
+</html>

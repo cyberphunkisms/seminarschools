@@ -1,0 +1,338 @@
+{
+  "$schema_note": "Source roster for /scripts/scrape_seminars.py. Each entry declares the venue, its event-list URL, render mode, known hazards, and per-source extraction rules. Selectors and parser functions get filled in as each source is implemented (TODO markers in extraction.status).",
+  "$updated": "2026-05-24",
+  "$categories": [
+    "lecture",
+    "screening",
+    "reading",
+    "artist-talk",
+    "panel",
+    "podcast-live",
+    "scholar-talk",
+    "philosophy-cafe",
+    "gathering"
+  ],
+  "$render_modes": {
+    "static": "Plain HTML, fetch with requests, parse with BeautifulSoup.",
+    "drupal": "Drupal events page. Default sort often shows past events first; URL parameter override required.",
+    "javascript": "Client-side rendered. Either Playwright headless browser, or per-event detail-page fetch by slug (cheaper when slugs are discoverable from a sitemap or API endpoint).",
+    "google-sites": "Google Sites layout. Static-ish but with embedded widgets. Parse with care.",
+    "rss": "Native RSS feed available, fastest path.",
+    "ical": "Native iCal feed available, fastest path.",
+    "api": "Native JSON API endpoint discovered. Cheapest path."
+  },
+  "sources": [
+    {
+      "id": "c4e",
+      "name": "Centre for Ethics, University of Toronto",
+      "tier_priority": 1,
+      "default_type": "lecture",
+      "base_url": "https://sites.google.com/view/uoftc4e",
+      "events_url": "https://sites.google.com/view/uoftc4e",
+      "render_mode": "google-sites",
+      "hazards": [
+        "Google Sites occasionally rebuilds layout. Selectors may break without warning.",
+        "Embedded widgets may not render in static fetch; may need per-event link follow."
+      ],
+      "extraction": {
+        "status": "in-progress",
+        "list_selector": "TODO after live-page inspection",
+        "date_format": "TODO",
+        "title_field": "TODO",
+        "speaker_field": "TODO",
+        "venue_default": "Centre for Ethics, University of Toronto"
+      },
+      "notes": "Documented as most reliable single source for Toronto philosophy lectures. Ethics@Noon-ish weekly series is the workhorse."
+    },
+    {
+      "id": "jhi",
+      "name": "Jackman Humanities Institute",
+      "tier_priority": 1,
+      "default_type": "lecture",
+      "base_url": "https://humanities.utoronto.ca/",
+      "events_url": "https://humanities.utoronto.ca/events",
+      "render_mode": "drupal",
+      "hazards": [
+        "Drupal default sort displays past events first. Must override with sort=date_asc URL parameter or filter in parser.",
+        "Some events listed without speaker name; speaker only on detail page."
+      ],
+      "extraction": {
+        "status": "todo",
+        "list_selector": "TODO",
+        "date_format": "TODO",
+        "venue_default": "Jackman Humanities Building, 170 St. George St."
+      }
+    },
+    {
+      "id": "munk",
+      "name": "Munk School of Global Affairs and Public Policy",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://munkschool.utoronto.ca/",
+      "events_url": "https://munkschool.utoronto.ca/events",
+      "render_mode": "javascript",
+      "hazards": [
+        "Client-side rendered event list. Sitemap-based slug discovery is cheaper than headless browser.",
+        "Many events are panels not lectures; type classification per-event."
+      ],
+      "extraction": {
+        "status": "todo",
+        "discovery_method": "sitemap.xml plus per-event detail fetch",
+        "venue_default": "Munk School, 1 Devonshire Place"
+      }
+    },
+    {
+      "id": "philevents",
+      "name": "PhilEvents (Toronto + Ontario filter)",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://philevents.org/",
+      "events_url": "https://philevents.org/regions/CA-ON",
+      "render_mode": "static",
+      "hazards": [
+        "Stale-rollover: some entries persist past their event date with rolled-forward dates. Filter required to exclude any entry without a 2026+ updated_at field or whose date matches a known previous-year pattern.",
+        "Cross-listed events from C4E, JHI, Munk produce duplicates; deduplication needed."
+      ],
+      "extraction": {
+        "status": "todo"
+      }
+    },
+    {
+      "id": "tpl-appel",
+      "name": "Toronto Public Library Appel Salon Series",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://www.torontopubliclibrary.ca/",
+      "events_url": "https://www.torontopubliclibrary.ca/programs-and-classes/",
+      "render_mode": "javascript",
+      "hazards": [
+        "TPL programs page is large and covers all branches. Filter to Appel Salon + Toronto Reference Library + intellectual-content keywords."
+      ],
+      "extraction": {
+        "status": "todo",
+        "filter_branch": "Toronto Reference Library",
+        "filter_room": "Appel Salon"
+      }
+    },
+    {
+      "id": "massey",
+      "name": "Massey College",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://www.masseycollege.ca/",
+      "events_url": "https://www.masseycollege.ca/events/",
+      "render_mode": "static",
+      "extraction": { "status": "todo" }
+    },
+    {
+      "id": "rom-speaks",
+      "name": "ROM Speaks",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.rom.on.ca/",
+      "events_url": "https://www.rom.on.ca/en/whats-on/events",
+      "render_mode": "javascript",
+      "hazards": [
+        "Mixed program: ROM Speaks lectures sit alongside non-seminar events (kids programs, exhibition openings). Filter by category."
+      ],
+      "extraction": { "status": "todo" }
+    },
+    {
+      "id": "victoria",
+      "name": "Victoria College, University of Toronto",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.vic.utoronto.ca/",
+      "events_url": "https://www.vic.utoronto.ca/about/events",
+      "render_mode": "static",
+      "extraction": { "status": "todo" }
+    },
+    {
+      "id": "hart-house",
+      "name": "Hart House, University of Toronto",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://harthouse.ca/",
+      "events_url": "https://harthouse.ca/events/",
+      "render_mode": "static",
+      "notes": "Covers Hart House Lecture (annual named-honorific), chapel-philosophy series, and Hart House Debates. Multiple types from one source.",
+      "extraction": { "status": "todo" }
+    },
+    {
+      "id": "revue",
+      "name": "Revue Cinema",
+      "tier_priority": 1,
+      "default_type": "screening",
+      "base_url": "https://revuecinema.ca/",
+      "events_url": "https://revuecinema.ca/films/",
+      "render_mode": "static",
+      "hazards": [
+        "Director-in-attendance flagged explicitly in event titles. String-match works reliably for this venue."
+      ],
+      "extraction": {
+        "status": "in-progress",
+        "director_flag_keywords": ["director in attendance", "Q&A with director", "Q&A with"],
+        "filter_to_director_only": true
+      },
+      "notes": "Most reliable cinema source for director-attendance signals."
+    },
+    {
+      "id": "royal",
+      "name": "The Royal Theatre",
+      "tier_priority": 2,
+      "default_type": "screening",
+      "base_url": "https://theroyal.to/",
+      "events_url": "https://theroyal.to/upcoming-events/",
+      "render_mode": "static",
+      "hazards": [
+        "Mixed program: cinema, comedy, music. Filter to director-Q&A events only."
+      ],
+      "extraction": { "status": "todo" }
+    },
+    {
+      "id": "paradise",
+      "name": "Paradise Theatre",
+      "tier_priority": 2,
+      "default_type": "screening",
+      "base_url": "https://paradiseonbloor.com/",
+      "events_url": "https://paradiseonbloor.com/coming-soon/",
+      "render_mode": "static",
+      "hazards": [
+        "Director-attendance rarely flagged in event titles. Verification requires fetching detail page and LLM classification on body copy.",
+        "Sneak previews and Toronto Theatrical Premieres often have director-attendance but the page does not say so explicitly."
+      ],
+      "extraction": {
+        "status": "todo",
+        "verification_required": "always"
+      }
+    },
+    {
+      "id": "hot-docs",
+      "name": "Hot Docs Ted Rogers Cinema",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://hotdocs.ca/",
+      "events_url": "https://hotdocs.ca/whats-on",
+      "render_mode": "javascript",
+      "notes": "Most director-attendance happens during the April-May Festival window. Year-round programming has fewer Q&A events.",
+      "extraction": { "status": "todo" }
+    },
+    {
+      "id": "tiff-lightbox",
+      "name": "TIFF Bell Lightbox",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://tiff.net/",
+      "events_url": "https://tiff.net/calendar",
+      "render_mode": "javascript",
+      "hazards": [
+        "Large calendar covering festival programming, repertory, curated series. Filter to MDFF Selects plus events with explicit Q&A flag."
+      ],
+      "extraction": { "status": "todo" }
+    },
+    {
+      "id": "type-books",
+      "name": "Type Books",
+      "tier_priority": 2,
+      "default_type": "reading",
+      "base_url": "https://www.typebooks.ca/",
+      "events_url": "https://www.typebooks.ca/events",
+      "render_mode": "static",
+      "extraction": { "status": "todo" }
+    },
+    {
+      "id": "ifoa",
+      "name": "International Festival of Authors (Harbourfront)",
+      "tier_priority": 2,
+      "default_type": "reading",
+      "base_url": "https://festivalofauthors.ca/",
+      "events_url": "https://festivalofauthors.ca/events/",
+      "render_mode": "javascript",
+      "notes": "Festival window is October-November; year-round programming is thinner.",
+      "extraction": { "status": "todo" }
+    },
+    {
+      "id": "glad-day",
+      "name": "Glad Day Bookshop",
+      "tier_priority": 3,
+      "default_type": "reading",
+      "base_url": "https://gladdaybookshop.com/",
+      "events_url": "https://gladdaybookshop.com/events",
+      "render_mode": "static",
+      "extraction": { "status": "todo" }
+    },
+    {
+      "id": "power-plant",
+      "name": "The Power Plant Contemporary Art Gallery",
+      "tier_priority": 2,
+      "default_type": "artist-talk",
+      "base_url": "https://www.thepowerplant.org/",
+      "events_url": "https://www.thepowerplant.org/Programmes.aspx",
+      "render_mode": "static",
+      "extraction": { "status": "todo" }
+    },
+    {
+      "id": "ago",
+      "name": "Art Gallery of Ontario",
+      "tier_priority": 3,
+      "default_type": "artist-talk",
+      "base_url": "https://ago.ca/",
+      "events_url": "https://ago.ca/events",
+      "render_mode": "javascript",
+      "hazards": [
+        "Mixed program: exhibitions, kids events, member parties. Filter to artist talks, panel discussions, and curator-led conversations."
+      ],
+      "extraction": { "status": "todo" }
+    },
+    {
+      "id": "moca",
+      "name": "Museum of Contemporary Art Toronto",
+      "tier_priority": 3,
+      "default_type": "artist-talk",
+      "base_url": "https://moca.ca/",
+      "events_url": "https://moca.ca/programs/",
+      "render_mode": "javascript",
+      "extraction": { "status": "todo" }
+    },
+    {
+      "id": "philosophy-cafe-toronto",
+      "name": "Toronto Philosophy Cafe / Philosophy in the Park",
+      "tier_priority": 4,
+      "default_type": "philosophy-cafe",
+      "base_url": "https://www.meetup.com/",
+      "events_url": "TODO - discovery method (Meetup search? FB groups? mailing list?)",
+      "render_mode": "todo",
+      "hazards": [
+        "Toronto philosophy cafe groups are scattered across Meetup, Facebook Groups, mailing lists, and Eventbrite. Discovery method needs research before extraction can be built.",
+        "Many cafes are member-only; filter to publicly-advertised open sessions."
+      ],
+      "extraction": { "status": "research-needed" }
+    },
+    {
+      "id": "agora-self",
+      "name": "The Agora (Seminar Schools)",
+      "tier_priority": 1,
+      "default_type": "gathering",
+      "base_url": "https://seminarschools.com/agora/",
+      "events_url": "https://seminarschools.com/agora/",
+      "render_mode": "static",
+      "notes": "Saul-hosted outdoor philosophy gathering at Barry Zukerman Amphitheatre, Earl Bales Park. Self-source; pulls from agora page directly.",
+      "extraction": { "status": "todo" }
+    }
+  ],
+  "deferred_candidates": {
+    "$note": "Categories the dialectic admitted but no concrete source has been identified yet. Surface when discovery method emerges.",
+    "podcast-live": [
+      "Walrus Talks at Massey College",
+      "Live podcast recordings at TPL"
+    ],
+    "scholar-talk": [
+      "Trinity College theology series",
+      "Hart House chapel-philosophy series",
+      "Synagogue and chaplaincy programs"
+    ],
+    "conference-keynote": [
+      "Open-public sessions at academic conferences hosted at UofT, York, TMU"
+    ]
+  }
+}

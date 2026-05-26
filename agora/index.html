@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Agora. Seminar Schools.</title>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/agora/">
+<meta property="og:title" content="The Agora. An open seminar convened when participants gather.">
+<meta property="og:description" content="Read the text. Show up. Speak when you have something to say. The Agora is convened when participants gather, either at Earl Bales Park or online over Google Meet.">
+<meta property="og:image" content="https://seminarschools.com/og-image.png">
+<meta property="og:site_name" content="Seminar Schools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Agora. Seminar Schools.">
+<meta name="twitter:description" content="An open seminar convened when participants gather. Read the text. Show up.">
+<meta name="twitter:image" content="https://seminarschools.com/og-image.png">
+<meta name="description" content="The Agora is an open seminar convened when participants gather. Held either at the Barry Zukerman Amphitheatre in Earl Bales Park, Toronto, or online over Google Meet. Part of the Seminar Schools practice.">
+<link rel="canonical" href="https://seminarschools.com/agora/">
+<link rel="alternate" type="application/rss+xml" title="The Agora — Seminar Schools" href="/agora/feed.xml">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#1F2A1A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css">
+<script src="/js/mandala.js" defer></script>
+<script src="/js/site.js" defer></script>
+<style>
+:root {
+  --display: 'Cinzel', Georgia, serif;
+  --body: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Cormorant Garamond', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  /* Accent darkened from #B5704A (failed WCAG AA at 3.09:1) to #7a4828
+     (passes AA at 6.54:1). Same ochre/rust hue family, darker for legibility.
+     RGB updated to match. */
+  --accent-light: #7a4828;
+  --accent-dark: #c08858;
+  --accent: var(--accent-light);
+  --accent-rgb: 122,72,40;
+  --bg: #EBE5D0;
+  --geo-density: 0.18;
+  --geo2-density: 0.10;
+}
+.detail-grid {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  font-family: var(--body);
+}
+.detail-grid dt {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+  padding-top: 0.2rem;
+}
+.detail-grid dd {
+  margin: 0;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--fg);
+}
+@media (max-width: 600px) {
+  .detail-grid { grid-template-columns: 1fr; gap: 0.3rem 0; }
+  .detail-grid dd { margin-bottom: 0.8rem; }
+}
+
+  /* ============================================================
+   * REDUCED MOTION (WCAG 2.3.3 + accessibility best practice)
+   * Honor user OS preference for reduced animation. Suppresses
+   * mandala canvas animation, .reveal entry transitions, geometric
+   * watermark pulses, and any @keyframes-driven motion.
+   * Added 2026-05-20 per audit CL-T98 medium-tier item #10.
+   * ============================================================ */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+    .mandala-canvas,
+    canvas.mandala,
+    .geo,
+    .geo svg,
+    [data-animate] {
+      animation: none !important;
+      transform: none !important;
+    }
+    .reveal,
+    .reveal-up,
+    .reveal-down,
+    .reveal-left,
+    .reveal-right,
+    [class*="delay-"] {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+  /* ============================================================
+   * PRINT
+   * Minimal print styling. /agora/ pages get printed-as-flyers
+   * for in-person distribution at events. Hide animation canvas,
+   * use white bg with dark ink, single-column flow.
+   * Added 2026-05-20 per audit CL-T98 low-tier item #17.
+   * ============================================================ */
+  @page { margin: 0.5in; }
+  @media print {
+    body {
+      background: #ffffff !important;
+      color: #1a1a1a !important;
+      font-family: var(--serif, Georgia, serif);
+    }
+    canvas.mandala, .mandala-canvas, .geo, .skip-link, .mode-toggle, nav { display: none !important; }
+    main, .container, article { max-width: 100% !important; padding: 0 !important; }
+    a { color: #1a1a1a !important; text-decoration: underline; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+    a[href^="/"]::after, a[href^="#"]::after { content: ""; }
+    h1, h2, h3 { color: #1a1a1a !important; page-break-after: avoid; }
+    .reveal, [class*="reveal"] { opacity: 1 !important; transform: none !important; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "The Agora",
+  "description": "An open seminar convened when participants gather. Read the text ahead of time. Show up. Sit. Speak when you have something to say.",
+  "url": "https://seminarschools.com/agora/",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Seminar Schools",
+    "url": "https://seminarschools.com"
+  }
+}
+</script>
+<link rel="stylesheet" href="/css/theme.css">
+<link rel="stylesheet" href="/css/mobile-overlay.css">
+</head>
+<body>
+
+<!-- Theme toggle (light/dark mode). System preference is the default;
+     clicking flips. localStorage persists the choice. -->
+<button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+  <span class="sun" aria-hidden="true">☀</span>
+  <span class="moon" aria-hidden="true">☾</span>
+</button>
+
+<div id="geo"></div>
+<div id="geo2"></div>
+
+<div class="descent-marker" id="marker">
+  <span class="roman">i</span>
+  <span class="name">Threshold</span>
+  <div class="ticks">
+    <div class="tick active"></div><div class="tick"></div><div class="tick"></div>
+    <div class="tick"></div><div class="tick"></div><div class="tick"></div>
+    <div class="tick"></div>
+  </div>
+</div>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<div class="wrap has-descent" id="main-content">
+
+<header class="topbar" id="topbar">
+  <a href="/" class="brand"><span class="seal" aria-hidden="true"></span>Seminar <em>Schools</em></a>
+  <span class="right">The Agora</span>
+</header>
+
+<main>
+<nav class="project-nav" aria-label="Projects"><a href="/">Home</a><a href="/agora/" class="current">Agora</a><a href="/marginalia/">Marginalia</a><a href="/sabachtan-seminar/">Sabachtan</a><a href="/ohm-dome/">Ohm Dome</a><a href="/nutrition/">Nutrition</a><a href="/teacherresources/">Resources</a><a href="/florilegium/">Florilegium</a></nav>
+
+<section id="threshold" class="tier reveal" data-tier="1" data-name="Threshold" data-roman="i">
+  <div class="tier-label-vertical"><span class="num">i</span><span class="label">Threshold</span></div>
+  <div class="threshold-status">In development</div>
+  <h1 class="titanic words">The <em>Agora.</em></h1>
+  <div class="threshold-meta reveal delay-2">An open seminar convened when participants gather. Read the text ahead of time. Show up. Sit. Speak when you have something to say.</div>
+  <div class="threshold-coords reveal delay-3">
+    <div class="row"><span class="lbl">Where</span><span class="val">Earl Bales Park, or online over Google Meet</span></div>
+    <div class="row"><span class="lbl">When</span><span class="val">Announced per session. Email to be notified.</span></div>
+    <div class="row"><span class="lbl">Cost</span><span class="val">Free. No registration.</span></div>
+    <div class="row"><span class="lbl">Format</span><span class="val">One text. Everyone has read it. We talk.</span></div>
+  </div>
+
+  <div class="next-session reveal delay-4" style="margin-top:2.5rem;padding:1.5rem 1.75rem;background:rgba(122,72,40,0.10);border-left:3px solid var(--accent,#7a4828);">
+    <div style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent,#7a4828);font-weight:600;margin-bottom:0.5rem;">Next session</div>
+    <div style="font-family:var(--display,'Cinzel',serif);font-style:italic;font-size:1.15rem;line-height:1.4;">To be announced.</div>
+    <a href="/agora/feed.xml" type="application/rss+xml" style="display:inline-block;margin-top:1rem;font-family:var(--mono);font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent,#7a4828);font-weight:600;border-bottom:1px solid var(--accent,#7a4828);padding-bottom:0.2rem;text-decoration:none;">Subscribe to the RSS feed &rarr;</a>
+    <div style="margin-top:0.6rem;font-family:var(--body);font-size:0.85rem;color:var(--fg-soft,#666);font-style:italic;">Add the feed to your RSS reader. New sessions appear there when scheduled.</div>
+  </div>
+
+  <div class="agora-doors reveal delay-5" style="margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+    <div class="door door-leizu" style="padding:1.5rem 1.75rem;background:rgba(0,0,0,0.02);border:1px solid rgba(0,0,0,0.08);">
+      <div style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--fg-soft,#666);font-weight:600;margin-bottom:0.6rem;">From Leizu Academy</div>
+      <p style="font-family:var(--body);font-size:1rem;line-height:1.55;margin:0 0 1rem 0;">Leizu does not offer paid trial classes. The Agora is the open seminar. Free. Open. Where prospective students see how the work happens.</p>
+      <a href="/leizu/" style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent,#7a4828);font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent,#7a4828);padding-bottom:0.15rem;">About Leizu Academy &rarr;</a>
+    </div>
+    <div class="door door-polymyth" style="padding:1.5rem 1.75rem;background:rgba(0,0,0,0.02);border:1px solid rgba(0,0,0,0.08);">
+      <div style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--fg-soft,#666);font-weight:600;margin-bottom:0.6rem;">From Seminar Schools</div>
+      <p style="font-family:var(--body);font-size:1rem;line-height:1.55;margin:0 0 1rem 0;">An open seminar within the practice. Each session has a text. The willingness to be wrong out loud is the ticket.</p>
+      <a href="/" style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent,#7a4828);font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent,#7a4828);padding-bottom:0.15rem;">About Seminar Schools &rarr;</a>
+    </div>
+  </div>
+
+  <style>
+    @media (max-width: 700px) {
+      .agora-doors { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</section>
+
+<section id="format" class="tier reveal" data-tier="2" data-name="Format" data-roman="ii">
+  <div class="tier-label-vertical"><span class="num">ii</span><span class="label">Format</span></div>
+  <div class="micro">II. The format</div>
+  <h2 class="compound words">A seminar held in person or online, open to anyone <em>who reads ahead.</em></h2>
+  <div class="body">
+    <p>The Agora is a philosophy seminar modelled on the original sense of the word. A place where people come together to think out loud about what they have been reading.</p>
+    <p>The format is straightforward. A text is announced in advance. Anyone who wants to attend reads it before the gathering. We meet either in person at the Barry Zukerman Amphitheatre or online over Google Meet. We take turns reading passages aloud. We discuss.</p>
+  </div>
+</section>
+
+<section id="rationale" class="tier reveal" data-tier="3" data-name="Why" data-roman="iii">
+  <div class="tier-label-vertical"><span class="num">iii</span><span class="label">Why</span></div>
+  <div class="micro">III. The philosophical commitment</div>
+  <h2 class="compound words">A room of readers reaches an understanding that <em>none of them could reach alone.</em></h2>
+  <div class="body">
+    <p>The philosophical commitment behind the Agora is that some kinds of understanding are collective. They are not private achievements reached through solitary effort. They are something a group can briefly arrive at together. The group has to have read the same text. The members have to be willing to speak honestly with each other.</p>
+    <p>The Greek word agora named the public space. Citizens gathered there to argue about what mattered. The seminar form inherits the same shape at smaller scale. A circle of readers. A common text. The willingness to be wrong out loud.</p>
+  </div>
+</section>
+
+<section id="venue" class="tier reveal" data-tier="4" data-name="Venue" data-roman="iv">
+  <div class="tier-label-vertical"><span class="num">iv</span><span class="label">Venue</span></div>
+  <div class="micro">IV. Where</div>
+  <h2 class="compound words">The Barry Zukerman Amphitheatre, Earl Bales Park, <em>or online over Google Meet.</em></h2>
+  <div class="body">
+    <p>Each session is held either in person or online. The mode is announced with the date. When in person: Earl Bales Park sits in North York, Toronto, and the Barry Zukerman Amphitheatre is an open-air stage area within the park, with seating built into the landscape. Bring a cushion if the stone seats are unkind to you. When online: a Google Meet link is shared with everyone who has signed up.</p>
+    <dl class="detail-grid">
+      <dt>Address</dt><dd>4169 Bathurst Street, Toronto, ON</dd>
+      <dt>Nearest TTC</dt><dd>Sheppard West Station, then bus 7</dd>
+      <dt>Parking</dt><dd>Free park lot off Bathurst</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="schedule" class="tier reveal" data-tier="5" data-name="When" data-roman="v">
+  <div class="tier-label-vertical"><span class="num">v</span><span class="label">When</span></div>
+  <div class="micro">V. When</div>
+  <h2 class="compound words">Each session is convened when participants gather. <em>Dates announced ahead of time.</em></h2>
+  <div class="body">
+    <p>The Agora is convened as participants gather. There is no fixed cadence. Each session is announced ahead of time with the text, the date, and the mode. Subscribe to the <a class="open-transmission" href="/agora/feed.xml" type="application/rss+xml"><span class="prompt">&gt;</span>rss_feed<span class="cursor">_</span></a> in any RSS reader to receive the announcements.</p>
+  </div>
+</section>
+
+<section id="reading" class="tier reveal" data-tier="6" data-name="Reading" data-roman="vi">
+  <div class="tier-label-vertical"><span class="num">vi</span><span class="label">Reading</span></div>
+  <div class="micro">VI. Reading</div>
+  <h2 class="compound words">Each gathering has one text. <em>Read it before you come.</em></h2>
+  <div class="body">
+    <p>Texts are chosen for portability rather than prestige. Something short enough to carry. Dense enough to talk about for two hours. Accessible enough that someone walking in for the first time can follow.</p>
+  </div>
+</section>
+
+<section id="cost" class="tier reveal" data-tier="7" data-name="Cost" data-roman="vii">
+  <div class="tier-label-vertical"><span class="num">vii</span><span class="label">Cost</span></div>
+  <div class="micro">VII. Cost</div>
+  <h2 class="compound words"><em>Free.</em></h2>
+  <div class="body">
+    <p>The Agora is hosted as part of the Seminar Schools practice. There is no admission. If the gatherings have been useful and you want to support upcoming ones, you can <a href="https://buymeacoffee.com/cyberphunk" target="_blank" rel="noopener">buy a coffee</a>. Entirely optional. The seminar remains free either way.</p>
+  </div>
+</section>
+
+<section id="rules" class="tier reveal" data-tier="8" data-name="Rules" data-roman="viii">
+  <div class="tier-label-vertical"><span class="num">viii</span><span class="label">Rules</span></div>
+  <div class="micro">VIII. The single rule</div>
+  <h2 class="compound words">Read the text. Show up. Sit. <em>Speak when you have something to say.</em></h2>
+  <div class="body">
+    <p>No registration is required. No introductions are needed. The seminar method does not depend on who is in the room. Only on whether the people in the room have read.</p>
+  </div>
+</section>
+
+<section class="articles-section reveal" id="articles">
+  <h2 class="articles-head">Writing</h2>
+  <p class="articles-intro">Pieces written from the Agora gatherings.</p>
+  <ul class="article-list" id="article-list">
+    <li class="articles-empty" id="articles-empty">No pieces yet.</li>
+  </ul>
+  <a class="blog-link" href="/florilegium/">Read the florilegium &rarr;</a>
+</section>
+
+</main>
+
+<footer class="foot foot-rich">
+  <div class="foot-row foot-row-main">
+    <div class="foot-col">
+      <div class="foot-label">Seminar Schools</div>
+      <div class="foot-text">A Toronto-based educational practice. Free seminars, public lectures, working notes.</div>
+    </div>
+    <div class="foot-col">
+      <div class="foot-label">Practice</div>
+      <ul class="foot-list">
+        <li><a href="/agora/">The Agora</a></li>
+        <li><a href="/sabachtan-seminar/">Sabachtan Seminar</a></li>
+        <li><a href="/marginalia/">Marginalia</a></li>
+        <li><a href="/ohm-dome/">Ohm Dome</a></li>
+        <li><a href="/nutrition/">Nutrition</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <div class="foot-label">Resources</div>
+      <ul class="foot-list">
+        <li><a href="/teacherresources/">Teacher Resources</a></li>
+        <li><a href="/leizu/">Leizu Academy</a></li>
+        <li><a href="/florilegium/">Florilegium</a></li>
+        <li><a href="/saul/">Founder</a></li>
+        <li><a href="/polymyth/sitemap/">Sitemap</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-row foot-row-bottom">
+    <span>&copy; 2026 Seminar Schools &middot; Toronto</span>
+    <span><a href="https://buymeacoffee.com/cyberphunk" target="_blank" rel="noopener">Buy me a coffee</a></span>
+    <span><a href="/">&larr; Home</a></span>
+  </div>
+</footer>
+
+</div>
+
+
+<script>document.addEventListener('DOMContentLoaded', function(){ if(window.PolymythMandala) PolymythMandala.initForProject('agora'); });</script>
+<script src="/js/theme.js" defer></script>
+</body>
+</html>

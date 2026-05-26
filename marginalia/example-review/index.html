@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Example review — Marginalia. Seminar Schools.</title>
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://seminarschools.com/marginalia/example-review/">
+<meta property="og:title" content="Example review">
+<meta property="og:description" content="A stub. Replace this file with a lecture review. Or delete it.">
+<meta property="og:image" content="https://seminarschools.com/og-image.png">
+<meta property="og:site_name" content="Marginalia · Seminar Schools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Example review">
+<meta name="twitter:description" content="A stub. Replace this file with a lecture review. Or delete it.">
+<meta name="twitter:image" content="https://seminarschools.com/og-image.png">
+<meta name="description" content="Example review template for Marginalia. Format for write-ups of public lectures attended around Toronto. A model entry, not a real review.">
+<link rel="canonical" href="https://seminarschools.com/marginalia/example-review/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="manifest" href="/manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css">
+<style>
+:root {
+  --display: 'Playfair Display', Georgia, serif;
+  --body: 'Spectral', Georgia, serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --accent: #983425;
+  --accent-rgb: 152,52,37;
+  --bg: #EDE8DC;
+}
+.post-meta-row { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-fade); margin-bottom: 1.25rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+.post-meta-row .post-date { color: var(--fg-soft); }
+.post-meta-row .post-venue, .post-meta-row .post-speaker { font-style: italic; }
+.post-body { margin-top: 2rem; }
+.post-body p { font-family: var(--body); font-size: 1.05rem; line-height: 1.75; margin-bottom: 1.25rem; }
+.post-body p:first-of-type::first-letter { font-family: var(--display); font-weight: 500; font-size: 4em; float: left; line-height: 0.85; margin: 0.1em 0.12em -0.05em 0; color: var(--accent); }
+.post-body h2 { font-family: var(--display); font-weight: 500; font-size: 1.6rem; margin: 2rem 0 1rem; }
+.post-body blockquote { border-left: 3px solid var(--accent); padding-left: 1.25rem; margin: 1.5rem 0; font-style: italic; color: var(--fg-soft); }
+.back-row { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--rule); display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.back-row a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 1px; }
+.back-row a:hover { opacity: 0.7; }
+</style>
+<script src="/js/site.js" defer></script>
+<link rel="stylesheet" href="/css/mobile-overlay.css">
+</head>
+<body>
+<div class="wrap" id="main-content">
+
+<header class="topbar" id="topbar">
+  <a href="/" class="brand"><span class="seal" aria-hidden="true"></span>Seminar <em>Schools</em></a>
+  <a href="/marginalia/" class="right" style="color:var(--accent);text-decoration:none">Marginalia &uarr;</a>
+</header>
+
+<main>
+
+<div class="eyebrow">A lecture review</div>
+<h1>Example review</h1>
+
+<div class="post-meta-row">
+  <span class="post-date">May 6, 2026</span>
+  <span class="post-venue">Seminar Schools</span>
+  <span class="post-speaker">The system</span>
+</div>
+
+<article class="post-body">
+<p>A stub. The first real review goes here.</p>
+<h2>Writing a review</h2>
+<p>Create a Markdown file in `marginalia/posts/`. The filename without `.md` becomes the URL slug.</p>
+<p>The frontmatter holds title, date in ISO format, a one-line excerpt, and optional venue and speaker.</p>
+<p>The body is plain Markdown. Paragraphs separate with blank lines. Headings use `## `. Block quotes use `> `.</p>
+<h2>Building</h2>
+<p>Run `python3 scripts/build_marginalia.py` from the project root.</p>
+<p>The script writes the post HTML at `/marginalia/[slug]/index.html`. It updates `/florilegium/posts.json`. The post then surfaces on `/marginalia/` and on `/florilegium/` simultaneously.</p>
+<p>The script is idempotent. Run it again. Only changed posts rewrite.</p>
+</article>
+
+<div class="back-row">
+  <a href="/marginalia/">&larr; All Marginalia</a>
+  <a href="/florilegium/">In the florilegium</a>
+</div>
+
+</main>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "_comment": "Hand-curated events for sources we cannot scrape. To use: (1) add an entry to the 'events' array below following the _example_schema, (2) edit scripts/sources.json to set fetcher='manual' for the source you want this file to handle. The fetcher reads only the 'events' array; any other keys (including _comment, _example_schema) are ignored.",
+
+  "_example_schema": {
+    "source_id": "MUST match a source id in scripts/sources.json",
+    "date": "ISO 8601 datetime with timezone offset. Example: 2026-06-15T18:00:00-04:00",
+    "title": "Event title in front-facing plain language. Example: Annette Baier Memorial Lecture on Humean Sentimentalism",
+    "venue": "Full venue with address if useful. Example: Jackman Humanities Building, 170 St. George St., Toronto",
+    "type": "One of: lecture, reading, panel, screening, artist-talk, scholar-talk, philosophy-cafe, gathering, other",
+    "speaker_or_director": "Optional. Name of the speaker, author, or director.",
+    "source_url": "Optional. URL to the original event listing.",
+    "attendance_confirmed": "Optional boolean. For screenings, true means filmmaker is present for Q and A.",
+    "description": "Optional. Brief description shown in the RSS feed item body."
+  },
+
+  "events": []
+}

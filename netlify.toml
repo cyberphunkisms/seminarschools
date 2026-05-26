@@ -1,0 +1,81 @@
+# Netlify build configuration
+# seminarschools.com static site
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Form processing: Netlify auto-detects forms with data-netlify="true"
+# attribute in HTML at deploy time. ONE canonical form now:
+#   "bookwormcard" — matrix-chat at /bb/
+# (Old forms "bb-card" and "bb-character-creator" deprecated; their
+# accumulated submissions remain accessible in dashboard but new
+# submissions land in the bookwormcard bucket.)
+#
+# After first deploy, configure in Netlify dashboard:
+#
+# 1. Site Configuration → Forms → confirm "bookwormcard" form detected
+# 2. Site Configuration → Notifications → Form submission notifications
+#    → add Email notification (admin email on every bookwormcard submit)
+# 3. (Optional, autoresponder to submitter) connect Zapier:
+#    Trigger: Netlify Forms → "New Form Submission" → form: bookwormcard
+#    Action: Gmail/your-email-provider → "Send Email"
+#      To: {email field}
+#      Subject: Your wormcard
+#      Body: {card-text field}
+#    Free tier: 100 tasks/month; scales via Zapier paid plans.
+#    Alternative: Netlify Function with Resend/SendGrid/Mailgun.
+
+# Redirect /bb/create/ to /bb/ (matrix chat is the canonical entry now).
+[[redirects]]
+  from = "/bb/create/"
+  to = "/bb/"
+  status = 301
+
+[[redirects]]
+  from = "/bb/create"
+  to = "/bb/"
+  status = 301
+
+# Pretty URL for the Gemini chat function
+[[redirects]]
+  from = "/api/gemini-chat"
+  to = "/.netlify/functions/gemini-chat"
+  status = 200
+
+# Optional: pretty URLs already handled by Netlify default
+# [[redirects]]
+#   from = "/bb"
+#   to = "/bb/"
+#   status = 301
+
+# === Path 2 architecture: block tooling paths from public serving ===
+# Netlify deploys the entire repo. Scraper code, internal audit files, and
+# workflow definitions ship to the deploy because GitHub Actions needs them,
+# but they must not be reachable via the public domain. PM35 substrate vs
+# plumbing at the URL layer.
+[[redirects]]
+  from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/data/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.github/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Headers: standard security baseline
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

@@ -1,0 +1,78 @@
+# Username-alias permanent redirects to canonical CV
+/saulnassau   /saul   301
+/saulkarim    /saul   301
+/saulkarimnmh /saul   301
+/cyberphunkisms /saul 301
+
+# Other domain-shortener redirects
+/leizuacademy /leizu  301
+/teach        /leizu/teach  301
+/journal      /marginalia  301
+/reviews      /marginalia  301
+/scholarship  /leizu/scholarship  301
+/donate       /leizu/donate  301
+
+
+# Lecture Reviews renamed to Marginalia (May 2026)
+/lecture-reviews/*  /marginalia/:splat  301
+/lecture-reviews    /marginalia         301
+
+
+# Collective Transcendence absorbed into The Agora (May 2026)
+/collective-transcendence/*  /agora/  301
+/collective-transcendence    /agora   301
+
+
+
+# /bb/ refactor (May 12 2026 architecture pass)
+# /bb/ now holds the two-card landing (was matrix-terminal character creator)
+# /bookwormcard/ now holds the matrix-terminal game (was /bb/index.html)
+# Old /bb/* paths get 301'd to their new /bookwormcard/* equivalents
+/bb/bookwormcard/*  /bookwormcard/pdf/:splat   301
+/bb/bookwormcard    /bookwormcard/pdf/         301
+/bb/print/*         /bookwormcard/print/:splat 301
+/bb/print           /bookwormcard/print/       301
+/bb/about/*         /bookwormcard/about/:splat 301
+/bb/about           /bookwormcard/about/       301
+/bb/glossary/*      /bookwormcard/glossary/:splat 301
+/bb/glossary        /bookwormcard/glossary/    301
+/bb/success/*       /bookwormcard/success/:splat 301
+/bb/success         /bookwormcard/success/     301
+/bb/tests/*         /bookwormcard/tests/:splat 301
+/bb/tests           /bookwormcard/tests/       301
+
+# Burrow Notebook (Bookwormburrows Series II) short URLs
+/notebook   /polymyth/notebook/   301
+/notebook/  /polymyth/notebook/   301
+/burrow     /polymyth/notebook/   301
+/burrow/    /polymyth/notebook/   301
+
+# Framework-file canonical-URL redirects (architecture refactor)
+/bookwormburrows.html  /polymyth/bookwormburrows/  301
+/bookwormburrows       /polymyth/bookwormburrows/  301
+/bookwormburrows.txt   /polymyth/bookwormburrows.txt  301
+/campaigncodex.html    /polymyth/campaigncodex/    301
+/campaigncodex         /polymyth/campaigncodex/    301
+/campaigncodex.txt     /polymyth/campaigncodex.txt 301
+
+# Hide internal build artifacts from public web (must precede catch-all rewrites)
+/_*           /  404
+/*/_*         /  404
+
+# CV stacked-filter URL rewrites — order-independent slash-stacked categories
+# Examples that all serve /saul/index.html with the URL preserved in the browser:
+#   /saul/kitchen
+#   /saul/kitchen/teaching
+#   /saul/teaching/kitchen           (same outcome as the previous line)
+#   /saul/kitchen/teaching/community/performance
+#   /cv/kitchen, /cv/teaching/kitchen, etc.
+/saul         /saul/index.html  200
+/saul/*       /saul/index.html  200
+/cv           /saul/index.html  200
+/cv/*         /saul/index.html  200
+/blog/* /florilegium/:splat 301
+/blog /florilegium/ 301
+
+# Sitemap moved into polymyth namespace (May 15 2026)
+/sitemap     /polymyth/sitemap     301
+/sitemap/    /polymyth/sitemap/    301

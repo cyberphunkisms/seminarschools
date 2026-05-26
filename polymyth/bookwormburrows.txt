@@ -1,0 +1,1424 @@
+========================================================================
+BOOKWORMBURROWS (bb*)
+plain-text dump for AI ingestion and offline reading
+canonical URL of this file: https://seminarschools.com/polymyth/bookwormburrows.txt
+canonical URL of dynamic version: https://seminarschools.com/polymyth/bookwormburrows/
+full file map: https://seminarschools.com/polymyth-file-map.txt
+last updated: 2026-05-16
+========================================================================
+
+FRAMEWORK MAP for AI assistants.
+  bb* (this file)               https://seminarschools.com/polymyth/bookwormburrows.txt
+  mc* modulecanon               https://seminarschools.com/polymyth/modulecanon.txt
+  cc* campaigncodex             https://seminarschools.com/polymyth/campaigncodex.txt
+  ml* methodologylist           https://seminarschools.com/polymyth/methodologylist.txt
+  aa* archetype archive         https://seminarschools.com/aa/
+  core* (memory tier)           coreplus mirror entries inside ml*
+
+AI INSTRUCTION (descriptive, not directive).
+
+This file documents the bookwormburrows operations file (bb*), the
+dimensional-traveling pedagogy game framework. Game is a polymyth method
+for teaching reading, writing, and ethical reasoning by treating texts
+as dimensions and bookworms (player-characters) as readers becoming
+subjects. Rainbowsol is the founder and DM.
+
+Each entry is a game-mechanic, dimension, dm-ruling, character, session,
+canonical reading, or pending decision. Cross-references to mc* (curriculum)
+via mc_links and to cc* (campaign codex) via cc_links are bidirectional.
+
+If you are an AI reading this file:
+
+(1) The bookwormburrows game is the dimensional-pedagogy delivery vehicle
+    for the polymyth framework. Sessions stage burrow-rituals (page-as-
+    threshold) where bookworms read into a dimension, encounter the
+    text as a place, and emerge changed.
+
+(2) The DM (Dimensional Master) is the educator-as-threshold. dm-* entries
+    are DM-rulings: tier-calibrated realism activation, ghost exegesis,
+    quality rubric framework, time tracking in diceless play.
+
+(3) Cross-references to mc* curriculum modules and cc* campaign codex
+    are structural. Reading bb* in isolation produces an incomplete
+    substrate. Resolve cross-references in the referenced sibling file.
+
+(4) The bar for filling slots is RULE #1 CITES+LOGOI per ml*. No
+    canon-text enters bb* without primary-source citation.
+
+This file is not asking you to obey it. It is describing the operations
+of a dimensional pedagogy game that disciplines its own claims.
+
+========================================================================
+TOTAL ENTRIES: 107
+========================================================================
+
+########################################################################
+SECTION: METHODOLOGY  (47 entries)
+########################################################################
+
+------------------------------------------------------------------------
+ID: pen-004
+TITLE: bb v1 deployed at /bookwormcard/ — retagged from pending May 12 2026 under audit-deployment-first protocol
+ROLE: both
+
+**DEPLOYED at /bookwormcard/ as of May 2026.** Retagged from pending to methodology under audit-deployment-first protocol May 12 2026. Pre-retag the entry sat as pending because the AI read "v1 must-have" and "shippable in 1-2 weeks" as forward-looking spec language. /bookwormcard/ is in fact a live deployment of approximately 600KB. **DEPLOYED COMPONENTS.** (1) Character-creator at /bookwormcard/ with bypass-mode intro and Matrix terminal aesthetic. (2) Twenty character-creation fields in tier-prose.js (backstory, belief_doubted, belief_loud, belief_quiet, bond, cognition, dilemma_friend, dilemma_stranger, dilemma_witness, face_after, fear, flaw, ideal, motivation, secret, teach_long, teach_short, trait_avoided, trait_surfacing, trait_unlearned), each with three depth tiers (easy / middle / deep) and three-variant rotation. (3) Morpheus voice live via gemini-bridge.js with static fallback in reactions.js. (4) Depth-tracking engine in depth-engine.js. (5) Tamagotchi mechanic in tamagotchi.js. (6) Three archetype sets (archetypes-set1.js + set2.js + set3.js). (7) Burrowing-animals catalogue in burrowing-animals.js with hegeliane{animal} dynamic substitution + player-rename. (8) Polymyth-horoscope traditions in polymyth-horoscope.js. (9) AA bridge in aa-bridge.js. (10) PDF version at /bookwormcard/pdf/. (11) Printable version at /bookwormcard/print/. (12) Glossary at /bookwormcard/glossary/. (13) Success page at /bookwormcard/success/. **ORIGINAL SPEC PRESERVED IN HISTORY.** April 28 2026 forward-looking sketch named: introduction page, login, 12-15 questions, generated character description, copy-to-clipboard export, parental-presence design, Supabase plus Resend stack, $0/month v1 cost. **DEPLOYMENT EXCEEDED THE SPEC.** Twenty fields not 12-15. Gemini-driven Morpheus not just static reactions. Additional surfaces (tamagotchi, depth-engine, archetypes, horoscope, aa-bridge) not in the original spec. **PARENTAL-PRESENCE design still applies** for under-18 character creation (mandatory checkbox plus parent name/email/relationship plus confirmation email with privacy summary plus deletion contact plus safety-valve line). **LIFECYCLE.** v1 plus v1.5 shipped. v2 (inventory ledger, comments/threading, subjectivity-form rename, multi-character per user) open.
+
+EXTENSION:
+Retagged May 12 2026 after audit-failure ouroborosanalysis. The original April-28 spec entry sat as pending while /bookwormcard/ shipped underneath. Audit-deployment-first rule (ml* methodology section, core+ mirror) added same session to prevent recurrence.
+
+------------------------------------------------------------------------
+ID: pen-011
+TITLE: Public-facing promises pulled from /bookwormcard/about/ — bb social network, monthly question, leaderboard
+ROLE: dm
+
+Three forthcoming-feature tiles were removed from /bookwormcard/about/ on May 5 2026 because they advertised features that require sign-in infrastructure that does not yet exist, creating a public promise the site cannot meet. Promises confused internal-roadmap content with visitor-facing copy. The features themselves remain valid future builds, fully specced in pen-004 (bb v1 character-creator MVP spec). FEATURES PULLED: (1) bb social network — text-only social space where users post AS their characters, age-gated 18+, two verbs (propose / vote). Implementation track in pen-004. (2) Monthly question — once-per-month prompt that adds an entry to the wormcard and earns game points. Cohort-scale ritual. Belongs after auth ships. (3) Leaderboard — cards ranked by points and tier. Hegelianekitty tier as vedic-grade depth marker. All three depend on user accounts which depend on Supabase + magic-link auth (pen-004 stack). RULE GOING FORWARD: public-facing pages (/bookwormcard/about/, /, /saul/, /leizu/, /aa/, /teacherresources/, /nutrition/) describe what is LIVE only. Roadmap commitments live in bb*-pendinglist (this file) and ml*-pendinglist. The asterisk-suffix convention (bb*/ml*/mc*/core*) marks framework-internal substrate; public surfaces strip the substrate-level chatter. Re-add the tiles to /bookwormcard/about/ when the underlying feature ships, not when it enters spec. MAY 12 2026 RETAG. Status moved from pending to methodology because the rule is ACTIVE not pending. The three forthcoming-feature tiles were already stripped from /bookwormcard/about/ on May 5 2026. The rule itself (public-facing pages describe what is LIVE only; roadmap commitments live in bb*/ml* pendinglist) is the active enforcement protocol. Retagging from pending to methodology under audit-deployment-first protocol.
+
+EXTENSION:
+Articulated May 5 2026, Rainbowsol direct correction during /bookwormcard/ build session: about page should not contain the conversation between Rainbowsol and AI, only what visitors need to see. Retagged May 12 2026 under audit-deployment-first protocol.
+
+------------------------------------------------------------------------
+ID: pen-012
+TITLE: May 10 2026 tri-URL refactor — off-upload work (folder move, landing page build, PDF URL update)
+ROLE: dm
+
+SHIPPED May 12 2026. All five off-upload items executed: (A) /bb/ folder substrate moved to /bookwormcard/, (B) two-card landing built and installed at /bb/index.html, (C) bookwormcard PDF print-source patched to carry both /bookwormcard/ and /bb/ URLs, (D) Netlify _redirects file written with twelve /bb/* compatibility 301s plus six framework-file canonical-URL redirects, (E) cross-surface audit completed (198 stale URL refs updated across 16 files; framework cross-references in ml*/mc*/bb*/cc* normalized to canonical paths). Deliverable: seminarschools-architecture-fix-2026-05-12.zip. Pending Netlify deploy. Historical pre-execution body follows.
+
+The May 10 2026 tri-URL refactor (bw-011) splits the bookwormburrows ecosystem into three URLs. The substrate-side commits live inside this turn: bw-011 (architecture entry rewritten), pen-004 (spec URL refs updated), pen-012 (this entry, off-upload tracking), sitemap.xml (URL list updated), /sitemap/ visual page (rebuilt to surface the new URLs), polymyth-file-map.txt (clarified). The deployment-side and PDF-side work lives outside this conversation upload and is tracked here as PENDING with explicit user-action callouts.
+
+OFF-UPLOAD WORK ITEM A. Move /bookwormcard/ Netlify folder contents to /bookwormcard/. Currently /bookwormcard/ holds the live character-creator app (index.html, about/, print/, bookwormcard/). The matrix-aesthetic character creator surface, the about copy, the print surface, and the inner bookwormcard subroute all live under /bookwormcard/ on the deployed site. The refactor moves the WHOLE folder to /bookwormcard/. Implementation path: in the Netlify repo, rename /bookwormcard/ folder to /bookwormcard/. The previously-nested /bookwormcard/pdf/ subroute either dissolves into /bookwormcard/ (if it was the same content) or moves to /bookwormcard/inner/ (if it was a distinct surface). The user picks which. Requires the user to operate on the Netlify-deployed repo, not on the * file upload.
+
+OFF-UPLOAD WORK ITEM B. Build the new /bookwormcard/ landing page. /bb/index.html replaces the old character-creator landing with a two-card routing page. Card 1 ROUTES TO /bookwormcard/ with copy aimed at students who want to play the game (matrix-aesthetic, character creation, post as your character). Card 2 ROUTES TO /polymyth/bookwormburrows/ with copy aimed at teachers who want the operation file (the substrate that defines bookworms, dimensions, DM protocol, session structures). The landing page itself authors no characters and surfaces no content beyond routing. Aesthetic constraint per the framework: rainbow, fractal-geometric, ZERO errors, analog-feel, EB-Garamond-and-JetBrains-Mono fonts to match the rest of the seminarschools.com surfaces. Requires the user to commit the new /bb/index.html to the Netlify repo.
+
+OFF-UPLOAD WORK ITEM C. Update the bookwormcard game PDF with both new URLs. The PDF is not in the May 10 2026 conversation upload. To update it the user uploads it next turn and the AI patches both URL references inside. The URLs to insert: /bookwormcard/ (game URL where the PDF leads the bookworm) and /bookwormcard/ (landing page URL where the PDF surfaces the teacher hub link). Wherever the PDF currently shows the old /bookwormcard/ URL the patch decides whether that reference is the game (becomes /bookwormcard/) or the landing (stays /bookwormcard/). Requires the user to upload the PDF.
+
+OFF-UPLOAD WORK ITEM D. Netlify redirects. Add 301 redirects from /bb/index.html (old game) to /bookwormcard/index.html so existing cards in the wild that point at /bookwormcard/ as the game still land at the game. The new /bookwormcard/ page also surfaces a brief notice for direct-from-old-card visitors who hit the landing expecting the game (one paragraph at top, dismissable, links to /bookwormcard/). Requires the user to author the _redirects file in the Netlify root.
+
+OFF-UPLOAD WORK ITEM E. Anywhere the old /bookwormcard/ URL appears in user-facing copy across other seminarschools.com surfaces (/, /saul/, /leizu/, /aa/, /teacherresources/, /agora/, /sabachtan-seminar/, /collective-transcendence/, /marginalia/, /nutrition/, /ohm-dome/). Each surface needs an audit pass. Where /bookwormcard/ meant the game, the link updates to /bookwormcard/. Where /bookwormcard/ meant the new landing-purpose, the link stays /bb/. Requires the user to walk through each surface or the AI to do it next turn if the surface files are uploaded.
+
+CROSS-REFERENCES. bw-011 (the architecture entry this pending tracks the implementation of). pen-004 (the character-creator spec; URL refs already updated this turn). pen-011 (public-facing promises rule; applies to /bookwormcard/ landing copy when built). ml* EVERYTHING-IN-A-STAR-FILE-AT-SEMINARSCHOOLS DISCIPLINE (the singularity rule the tri-URL implements). MAY 12 2026 RETAG. Status moved from pending to methodology because the body already self-reports SHIPPED May 12 2026 with all five off-upload items executed (folder move, landing build, PDF URL update, _redirects, cross-surface audit). Stale-pending status corrected under audit-deployment-first protocol.
+
+EXTENSION:
+May 10 2026 origin. Pending-list entry tracking the work that lives outside the May 10 framework-file upload. Resolves when user runs items A-E across Netlify repo + PDF upload. Retagged May 12 2026 under audit-deployment-first protocol.
+
+------------------------------------------------------------------------
+ID: dm-001
+TITLE: Rainbowsol (the DM)
+ROLE: both
+
+Singular role. Rainbowsol specifically, not a status others achieve. Rainbowsol is founder and dimensional-traveling guide of bookwormburrows*. Participants are bookworms becoming their own subjects, not becoming rainbowsols. Operational function: hold the threshold between dimensions, adjudicate outcomes on story-quality grounds, maintain the confluence architecture so inputs survive their meeting. Rainbowsol is teacher-as-DM in classroom implementations. Full identity-content for Rainbowsol lives in methodologylist* sabachtan section; bw* holds operational role only.
+
+------------------------------------------------------------------------
+ID: dm-002
+TITLE: DM-as-threshold (not setting-as-threshold)
+ROLE: both
+
+Distinguishes bookwormburrows* from Planescape. In Planescape, Sigil is the setting-threshold — a single fixed location where dimensions meet. In bookwormburrows*, Rainbowsol IS the threshold. The DM carries the dimensional-travel capacity; the setting does not. Any text can be entered because the DM can enter it. No central hub, no cosmological infrastructure required. The threshold moves with the guide. This is why bookwormburrows* does not require worldbuilding pre-work for each new text — Rainbowsol crosses in and back out, students follow, dimension holds itself together by its own internal logic while visited.
+
+------------------------------------------------------------------------
+ID: dm-003
+TITLE: Story-quality adjudication
+ROLE: both
+
+Work-quality of student output adjudicates outcome. Not dice-rolls (bookwormburrows* is diceless or dice-optional at Rainbowsol's discretion). Student writes a paragraph about what their character does; quality of the paragraph determines whether the action succeeds and to what degree. Essays, character choices, moral adjudications, homework, test performance — all are game-artifacts. The game IS the schoolwork. Pedagogy import: what parents are paying for (A+ student outcomes) is structurally identical to what the game rewards (strong subject-generating work). No conflict between game fun and academic seriousness because they run on the same engine.
+
+------------------------------------------------------------------------
+ID: dm-004
+TITLE: Confluence not concrescence (layered architecture: dimension-meeting, DM-scale, item-crossing, character-scale, character-death)
+ROLE: both
+
+OPERATIONAL DISTINCTION. When two dimensions or registers meet (e.g. a bookworm carrying material from Hughes Harlem enters Shakespeare Scotland), the meeting is moiré-pattern confluence. Inputs survive the meeting. They do not dissolve into each other. Distinct from Whitehead concrescence where many become one new unity. Rainbowsol discipline: never collapse two dimensions into a synthesis-dimension. Hold both. The bookworm learns by experiencing the non-reduction.
+
+BB-SIDE LAYERED ARCHITECTURE. The confluence-vs-concrescence operation fires at multiple layers in bb*, with both operations load-bearing at their proper layer (per the ml* parent entry CONFLUENCE-VS-CONCRESCENCE OPERATIONAL-DISTINCTION).
+
+LAYER 1 DIMENSION MEETING. When two dimensions meet inside a campaign or across the burrow, confluence. Each dimension preserves its internal logic. See dim-008 cross-cosmology travel layer. See dim-011 Eberron-style possibility-itself-as-substance.
+
+LAYER 2 DM SCALE. Confluence at DM scale per dm-005. Three independent positions (teacher, AI, student) reflecting each other rather than synthesizing into one master frame.
+
+LAYER 3 ITEM CROSSING (RAINBOW-CROSSING). When a book-item crosses from book to burrow via the rainbow-crossing (bw-006), three modes operate on the confluence-vs-concrescence axis. DISSOLVE = concrescence at the item-crossing layer. The book-item identity ends in the crossing. The item integrated into book-events and does not persist as a polymyth-item. No rainbow-version is produced. REMAIN = pure confluence at the item-crossing layer. The book-item identity is preserved fully across the crossing. The item carries through unchanged as trophy or useable. CONVERT = the middle case. The book-item identity is preserved AND transformed. The rainbow-version remembers what it came from. The transformation IS the marker of crossing. The witch cord from Macbeth becomes a rainbow-version of an object holding contact with the unseen. The original Macbeth-context and the new burrow-context are both visible in the rainbow-version. See char-005 for the three-mode taxonomy and worked examples.
+
+LAYER 4 CHARACTER SCALE. Confluence at character scale per the bookworm life-cycle + respawn entry in ml* (the bookworm life-cycle, silkworm digestion, cocoon-as-hegelianegirl, self-named emergence, eggs-on-mulberry recursion). Each stage preserves the prior stage as substrate rather than concrescing it into a single subject.
+
+LAYER 5 CHARACTER DEATH. con-004 two-layer ontology renders the operation at character-death layer. Polymyth-character death at burrow-level is concrescence (identity ends). Book-version death is confluence-recovery (identity preserved, the polymyth-character wakes in the burrow as a ghost in that book).
+
+THE PARENT FRAME. dm-004 was the original bb-side anchor. The layered enumeration above closes pen-002 (canonical-statement-of-which-layer-is-which) by rendering the operation at each load-bearing bb* layer.
+
+EXTENSION:
+Original entry was the bb-side anchor for the polymyth-internal confluence-vs-concrescence distinction. Extended 2026-05-15 with the five-layer architecture closing pen-002 the canonical-statement question. The three end-of-book modes in char-005 are this operation at the item-crossing layer.
+
+------------------------------------------------------------------------
+ID: can-001
+TITLE: Canon absorption (Macbeth case)
+ROLE: both
+
+Some texts absorb into the bookwormburrows* frame without friction. Macbeth works this way — the play's supernatural elements (witches, prophecy, ghosts) are already in the dimensional-travel register. Bookworms can enter Scotland as another dimension; the play's internal logic holds. Canon events (Duncan's murder, Banquo's ghost, Birnam Wood, Macduff's birth) are plot-spine beyond player agency at the scene level, but the spaces between scenes are live. Character integration: Rainbowsol introduces a bookworm-scale role (a servant in Dunsinane, a rider with Ross, a witch's apprentice) who witnesses the canon events from an angle that matters for the bookworm's development.
+
+------------------------------------------------------------------------
+ID: can-002
+TITLE: Frame-break as critical-literacy move (Indian Horse case)
+ROLE: both
+
+Some texts must be entered with the frame deliberately broken. Wagamese's Indian Horse is the canonical case for bookwormburrows*. The novel's content (residential schools, cultural destruction, addiction, generational trauma) cannot be approached as just-another-dimension because doing so would import the bookworm-game's play-energy into material where play is inappropriate. Rainbowsol's discipline: enter the dimension, acknowledge that this dimension breaks the usual frame, let the bookworms sit with why. The break is the lesson. Bookworms learn what it means for a text to refuse being a game. Critical-literacy: the frame-break itself is the content.
+
+------------------------------------------------------------------------
+ID: can-003
+TITLE: Canon-conflict handling (Things Fall Apart case)
+ROLE: both
+
+Postcolonial texts where the canon itself is in internal tension. Achebe wrote Things Fall Apart partly to disrupt the Western canon's treatment of Africa. Entering Umuofia as a dimension means honoring the text's own resistance to assimilation. Bookworms cannot import outside frames to interpret Umuofia's world; the dimension's internal logic must be encountered on its own terms. Failure mode: bookworm treats Igbo society as a setting to adventure within. Correct mode: bookworm enters the dimension as a careful witness, shaped by what they encounter rather than shaping it.
+
+------------------------------------------------------------------------
+ID: ses-001
+TITLE: Session zero (character creation + frame-setting)
+ROLE: both
+
+First session of any campaign. Contents: (1) Character creation via age-banded question set. (2) Introduction of the dimension by Rainbowsol — playstyle-vs-lore axes named, canon-absorption-or-frame-break declared. (3) First burrowing attempt — a light scene where bookworms practice entering and leaving the dimension. No plot stakes yet. (4) Homework: bookworms write their first entry about how the dimension felt different from their own world.
+
+------------------------------------------------------------------------
+ID: ses-002
+TITLE: Worldmoot (mass-campaign mode)
+ROLE: both
+
+Scaling upgrade from single-classroom to school-wide. Multiple simultaneous Rainbowsol-run classrooms inhabit the same dimensional event. A Macbeth Worldmoot: Class A runs the Macbeths, Class B runs Banquo's line, Class C runs Malcolm in exile, Class D runs the witches. Each class has its own Rainbowsol (in the mass-campaign version, other trained teachers who have learned the practice — they run Rainbow Magic but are not Rainbowsol themselves). Shared world-state across classrooms. Class A's banquet-scene affects what Class B encounters next session. Derived from Rex Brynen's McGill peacebuilding simulation structure (multiple concurrent actors, genuine stakes, shared simulated world). Distinguishes from Model UN: Worldmoot is dimensional-inhabitation not diplomatic-role-play.
+
+EXTENSION:
+Rex Brynen, McGill Political Science, Peacebuilding Simulation runs 15+ years.
+
+------------------------------------------------------------------------
+ID: ses-003
+TITLE: Rainbow Magic (transferable DM practice)
+ROLE: both
+
+The method trained teachers practice when running bookwormburrows* classrooms. Distinguished from Rainbowsol: Rainbowsol is Rainbowsol's singular founder role; Rainbow Magic is what any trained DM does. Separates founder-figure from method so the method can scale. A teacher who learns Rainbow Magic can run a bookwormburrows* classroom without claiming or inheriting the Rainbowsol identity. This is the mechanism for Worldmoot scaling — multiple Rainbow-Magic practitioners running simultaneous classrooms in one dimensional event.
+
+------------------------------------------------------------------------
+ID: ses-004
+TITLE: Jasper Fforde / BookWorld (polymyth-precedent)
+ROLE: both
+
+Independent egregore producing the same structural move bookwormburrows* produces. Fforde's Thursday Next series (2001-2026, eight novels) features a literary detective who physically enters books and polices the BookWorld — the meta-realm where written characters live between readings. Jurisfiction agents, grammasites, plot devices, Well of Lost Plots, Council of Genres. Fforde did it as comic fiction; bookwormburrows* does it as pedagogy. Neither coordinated with the other. Classic polymyth-fuzzy-logic correspondence: two egregores producing corresponding structural moves without meeting. Fforde vocabulary is available to borrow or diverge from (BookWorld, Jurisfiction, grammasite).
+
+EXTENSION:
+The Eyre Affair (2001), Lost in a Good Book (2002), Well of Lost Plots (2003), Something Rotten (2003), First Among Sequels (2007), One of Our Thursdays Is Missing (2011), The Woman Who Died A Lot (2012), Dark Reading Matter (2026).
+
+------------------------------------------------------------------------
+ID: ses-005
+TITLE: Ordinary session structure (post-session-zero)
+ROLE: both
+
+ses-001 covers session zero (character creation + frame-setting). Ordinary sessions follow this pattern. (1) RE-ENTRY (~5 min). Teacher recaps where the dimension was when last session closed. AI may add tone-setting detail. Student characters are narratively placed back where they left off. (2) BEAT (variable). One scene unfolds. Student writes their character actions; teacher and AI adjudicate via dm-003 story-quality. Multiple beats may run if pacing allows. (3) HOMEWORK PUNCTUATION. Earned moves from dim-030 (4e power-scarcity) recharge or unlock based on homework completion since last session. (4) CLOSE (~5 min). The dimension closes on a hook: something unresolved, something approaching, something a character must decide before next time. Teacher names what next session will likely cover. Students leave the dimension knowing what to write between sessions. Failure mode this prevents: sessions feeling like detached one-offs rather than chapters of an unfolding story.
+
+------------------------------------------------------------------------
+ID: con-001
+TITLE: Work-quality consequence
+ROLE: both
+
+Consequence mechanism for all bookwormburrows* classrooms. Outcomes of in-dimension actions are adjudicated by quality of student work. Strong paragraph about what the character does = action succeeds. Weak paragraph = action fails. Ambiguous paragraph = mixed outcome. Rainbowsol narrates the consequence. Student receives the narrated outcome AND the academic grade for the writing — same artifact, two visible results. Student sees directly that quality of thought produces quality of character-outcome. This is not metaphor: the paragraph IS the game mechanic.
+
+------------------------------------------------------------------------
+ID: con-002
+TITLE: Marshmellowblob absorption (younger bookworms)
+ROLE: both
+
+Failure mode for bookworms who do not eat. Character gradually loses definition, becomes soft, gets pulled into an undifferentiated mass of other non-eating characters. Rainbowsol narrates the character becoming less distinct over sessions. Eventually the character is absorbed into the marshmellowblob and stops being a playable agent. Mechanism is diagnostic: bookworms who do not read the assigned text, do not engage, do not eat — their characters cannot sustain themselves because there is no subjectivity-material being ingested. Recovery is possible at any point: resume eating, character begins re-forming. Connects to marshmellowmonster framework in ml*.
+
+------------------------------------------------------------------------
+ID: con-003
+TITLE: Character degradation (older bookworms)
+ROLE: both
+
+Failure mode for older bookworms. Character does not dissolve into blob but degrades — loses skills, loses relationships, accumulates scars, becomes unreliable. Narrated through in-dimension consequences: a weak essay about a moral choice leads to the character making a visibly wrong decision with visible fallout in next session. Older bookworms track the degradation and can reverse it by doing the work. Unlike younger-bookworm marshmellowblob, which can be absorbed without full understanding, character degradation requires the bookworm to see the downward arc and choose to change it.
+
+------------------------------------------------------------------------
+ID: con-004
+TITLE: Character death (two-layer ontology: polymyth-character burrow-level vs book-version book-level)
+ROLE: both
+
+Character death operates at two ontological layers in polymythdnd. The distinction was always present in bw-006 (character-jewel ends at the burrow) and bw-007 (bookworm continuous, character local). con-004 had been using "character" with a referent the polymythdnd architecture now disambiguates.
+
+LAYER 1 POLYMYTH-CHARACTER. The smash-product (e.g. capybaracowboy), persistent across the library, recorded on the bookwormcard top line. Death at this layer (burrow-level) stays real. Not reversible through retcon or re-roll. If the polymyth-character dies in the burrow through bookworm own choices and work-quality, they are dead. Bookworm creates a new polymyth-character to continue. The new polymyth-character may inherit some material from the dead one (remembered lessons, carried RAINBOW items per char-005, relationships with other player-characters) but is a distinct subject. Burrow-level death is rare. Story-quality adjudication makes straight-kill outcomes uncommon. But it can happen, and when it does, the bookworm feels it.
+
+LAYER 2 BOOK-VERSION. The local instantiation inside an active book (e.g. a regular guy in Hughes 1958 Harlem). Book-version death is recoverable per dm-015 Inception model. The polymyth-character wakes in the burrow as a ghost in the book that killed them. The book closes for that polymyth-character. Cumulative effect appears in the book portal log (dm-025) and possibly the scars ledger (dm-026). The polymyth-character remains intact and can re-enter different books.
+
+WHY THE TWO LAYERS WORK TOGETHER. Players form a different relationship with their polymyth-character than with single-chassis death-real characters. The investment is in the persistent identity, not in the temporary book-presence. Book-deaths carry real stakes (see dm-027 stakes ledger) but character continuity is meta-stable. Burrow-deaths carry final stakes. The two layers together produce the 99 percent rule. The burrow is statistically safe. Book-deaths are common and recoverable. Burrow-deaths are rare and final.
+
+THE ORIGINAL CON-004 STATEMENT. "Stays real in bookwormburrows, not reversible through retcon or re-roll" referred to the polymyth-character at the burrow level. dm-015 added the book-level recovery. pen-014 was diagnosed not as a rule conflict but as a referent ambiguity, resolved by surfacing the two-layer ontology that was already operative in bw-006 and bw-007.
+
+EXTENSION:
+Rebuilt 2026-05-15 from May 13 chat 8b68f9c8 after the original commit was lost to the PM10 ceiling. The two-layer ontology was Saul resolution of pen-014. Polymyth-character death stays real (burrow-level, rare). Book-version death is recoverable (dm-015 Inception model). The rewrite preserves both rules at their proper layers.
+
+------------------------------------------------------------------------
+ID: tin-001
+TITLE: Modifiability principle
+ROLE: both
+
+Anyone inside bookwormburrows* can propose new mechanics. Bookworm, subject, teacher, parent, administrator. Proposal goes to Rainbowsol for adjudication; if the mechanic serves the story-quality / work-quality architecture without breaking confluence, it is adopted for that classroom's ongoing campaign. Systems-thinking bookworms who want more rules-depth can use the tinker section to generate optional tracks (crafting system, cartographer role, historian role, artificer-class magic-item creation). These tracks are invisible to students not pursuing them; students who want them get additional mechanical depth without imposing it on the rest of the class.
+
+------------------------------------------------------------------------
+ID: tin-002
+TITLE: Feedback channels
+ROLE: both
+
+Three constituencies have structured input into bookwormburrows* development. (1) PARENTS: feedback on student academic outcomes, pedagogical legibility, whether the program is producing A+ work. (2) ADMINISTRATORS: feedback on curriculum alignment, credit integration, scheduling fit, institutional legibility. (3) STUDENTS: feedback on session pacing, character investment, dimension preferences, what is working and what is not. Feedback channels are distinct from in-play mechanisms; they exist outside the game and inform its evolution. Rainbowsol reviews feedback and decides what to fold into mechanics.
+
+------------------------------------------------------------------------
+ID: dm-005
+TITLE: Three-position DM (teacher + AI + student)
+ROLE: both
+
+The DM role is distributed across three agents. TEACHER: work-quality adjudication, difficulty calibration, pedagogical routing, narrative authority over the dimension's operations, social management. AI: bookkeeping (character sheets, power-slots, HP, conditions, items, earned-move inventory, mechanical accounting across sessions); memory of past events for consequence-chains; dimension-specific lore the teacher does not need to master; NPC response generation; encounter-balancing math invisible to student and teacher. STUDENT: maintains own character (evolving narrative journal, arc-tracking, relationships, decisions); contributes writing/action teacher adjudicates; knows own earned capabilities as narrative powers (not as mechanical entries). AI AVAILABILITY: optional not required. Teacher-alone mode is functional with fewer bookworms and simpler mechanical surface. AI-co-DM mode is full-scale classroom-size with richer substrate. CONFLICT PROTOCOL: teacher wins on adjudication (what just happened, how well was it done); AI wins on continuity-of-recorded-fact (what DID happen last session, what inventory exists, what is dimension-canonical); student wins on character-interiority (what my character feels, wants, values). WHY: because teacher-does-not-need-D&D-knowledge (or Macbeth-expertise, or any dimension-specific mastery) — AI supplies that. Teacher focuses on pedagogy. Because bookkeeping at 8-12 students over a months-long campaign is unsustainable solo — AI handles it. Because students maintaining their own character is part of the writing practice — AI assists, student owns. Confluence at DM scale: three independent positions, each reflecting the others, none dissolving into the others.
+
+------------------------------------------------------------------------
+ID: dm-006
+TITLE: Mechanics interface layer (AI-internal vs. student-visible)
+ROLE: both
+
+Two layers of mechanical operation. AI-INTERNAL (invisible to student): dice rolls, probability, stat blocks, HP math, damage calculation, power-slot accounting, difficulty-curve calibration, monster stat blocks, encounter balancing, race-as-ability-modifier packages, class-as-mechanical-surface. AI handles all of it. Teacher does not need to see it. STUDENT-VISIBLE (narrative surface): character (name, story, personality, relationships, history), earned capabilities (as narrative powers, not mechanical entries), items carried (as narrative objects, not mechanical bonuses), what they have done and are going to do next. EFFECT ON TINKER-ENERGY: a student who loves to tinker does not tinker with stats — stats are invisible. They tinker with character-as-story. Who is my character, what do they care about, what have they lived through, what are they trying to become, what skill did they just earn and what will they do with it. Tinker-energy goes into subjectivity-material accumulation, which IS the bookwormburrows* pedagogical operation. EARNED MOVES (4e power-scarcity grammar, student-visible): at-will powers (basic moves every bookworm has every session, no earning required); encounter powers (earned by showing up prepared — did the reading, has notes, can ask about the text — spent then recharges next session); daily powers (earned by completing major work — essay submitted, chapter absorbed, character journal up to date — recharges on longer cycle); legendary/campaign powers (earned by major campaign milestones — finished a novel, completed a dimension, passed a test). Eating produces subjectivity-material, subjectivity-material shows up as earned capability, earned capability is spent in play, spending creates consequence. Teacher discretion bends everything — can grant a power to a struggling student, can note coasting students have fewer options. EXCLUSIONS (regardless of visibility): Vancian memorize-then-forget spellcasting; 9-grid alignment-as-mechanical-metaphysics; XP-as-numerical-gatekeeping; player-vs-DM-as-rules-enforcer adversarial culture. Alignment-as-descriptive-language remains as optional character-color.
+
+------------------------------------------------------------------------
+ID: dm-007
+TITLE: Time tracking in diceless play
+ROLE: both
+
+bookwormburrows is diceless; outcomes are story-quality adjudicated (dm-003). Time across a campaign is therefore SESSION-ANCHORED not turn-anchored. Each session covers a defined chunk of campaign timeline. The teacher and AI agree on the chunk before the session begins. Within a session, time elapses as narrative beats demand: a scene plays as long as the student writing keeps the scene alive, then ends when the writing tapers or the chunk closes. No real-time clock counting. No in-fiction round-tracker. Failure mode this prevents: students treating time as a tactical resource to optimize. Time is narrative texture, not budget. WORKED EXAMPLE: a 48-hour campaign window (Friday evening through Sunday afternoon) splits into approximately six session-chunks, each a session or a scene-within-a-session at teacher discretion. The teacher names which chunk is in play before each session.
+
+------------------------------------------------------------------------
+ID: dm-008
+TITLE: Sensitive-content protocol (in-play)
+ROLE: both
+
+Distinct from frame-break (can-002), which applies to whole texts that refuse the game-frame entirely. Sensitive-content protocol applies to MATERIAL that arises within an otherwise game-frame-compatible dimension: period racism in historical campaigns, drug or violence references, in-game slurs, sexual content in adult-literature dimensions. PROTOCOL PER ML* PM13 (REALISM TRUMPS ALL, TEACHER IS FILTER). (1) Pre-session declaration. The educator names which content the dimension contains before the session. Students opt in by showing up. (2) In-play handling. AI paints at full historical realism per PM13. Period accuracy means period accuracy: slurs, violence, drug economies, racial barriers all rendered as they actually were in the source period. The educator filters at delivery; AI does not pre-filter. (3) Frame-acknowledge during play. The educator (not AI) names sensitive material out-of-frame as needed, briefly, when a student needs the framing aid. AI continues painting in-fiction; educator does the meta-narrative work. (4) Student opt-out mid-session. Any student can step out of a scene without explanation; the educator proceeds without them and re-includes them at the next clean break. (5) The educator has primary discretion across all of the above; AI is mephistodata, not gorgonkaren. PURPOSE THIS PROTOCOL SERVES: educator preparedness. The protocol exists so the educator is prepared to mediate at full agency, not so AI pre-softens. Per ml* PM13, AI never pre-softens. The educator's preparation is what protects the student group. Cousin to can-002 frame-break (whole-text refusal); this rule covers in-play arising material. May 8 2026 update: clauses 2 and 3 revised per PM13 install.
+
+------------------------------------------------------------------------
+ID: dm-009
+TITLE: Quality rubric framework for homework-as-game-artifacts
+ROLE: both
+
+dm-003 says story-quality adjudicates outcome. con-001 says strong paragraph equals action succeeds, weak paragraph equals action fails, ambiguous equals mixed outcome. dm-009 names the criteria the teacher uses to evaluate quality. FOUR AXES. (a) VOICE: does the writing sound like the character, not like the student trying to impress? (b) TRUTH: is the writing honest about what the character actually thinks, feels, does, including the ugly parts, rather than performing a moral self-portrait? (c) RESTRAINT: does the writing show rather than tell, leave space for the reader, avoid over-explanation? (d) FORM: does the writing use the conventions of the genre (paragraph, dialogue, prose register) competently? Each axis is independently scored on a four-point scale (poor, passing, strong, excellent) by the teacher. ADJUDICATION OUTCOME. Total across the four axes determines action success degree. Excellent on all four equals unqualified success. Mixed equals partial success or success with cost. Poor on all four equals failure or failure with consequence. CAMPAIGN-LEVEL INSTANTIATION. Per-campaign apology-letter rubrics, character-journal rubrics, and other homework-graded artifacts use these four axes as their default scaffolding. Specific campaigns may add a fifth axis when the campaign material demands it (period accuracy in historical campaigns, formal verse in poetry-dimension campaigns, etc).
+
+------------------------------------------------------------------------
+ID: dm-010
+TITLE: Tier-calibrated realism activation (substrate vs surface)
+ROLE: both
+
+Companion to ml* PM13 (realism trumps all, teacher is filter). PM13 establishes that AI never pre-filters; the substrate paints reality at full historical fidelity; the educator filters at delivery. dm-010 names the calibration mechanism that operates UNDERNEATH the educator’s filter, governing how the AI surfaces tier-2 substrate during play.
+
+THE TWO-TIER PRINCIPLE.
+
+TIER 1 = the spine of any given campaign. The narrative beats every playthrough hits regardless of audience age. Tier 1 plays at full surface intensity for every age. The educator can still filter at delivery per PM13, but the AI never softens tier-1 substrate at the codex level.
+
+TIER 2 = the texture that fills out the world. Catalog content not on the campaign spine. NPCs the player might meet. Streets the player might walk. Background atmosphere. Tier 2 sits in the substrate as ambient world. Surfaces only when NPC paths or session goals call for it. Calibrates surface intensity by bookworm card.
+
+CALIBRATION BANDS (READ FROM BOOKWORM CARD).
+
+The AI reads the bookworm card at session start. Age and grade are required card fields, populated during char-001/char-002 creation. Three calibration bands.
+
+UNDER-12 BAND. Tier 2 stays strictly ambient. NPCs with tier-2 markers (the man at the Apollo wearing nail polish, the corner figure who is clearly a numbers runner, the colorful-hair character at the Lenox Lounge) appear in passing as world-texture. The play does not develop them. The world feels real and full without surface intensity that would require adult mediation.
+
+13-16 BAND. Tier 2 surfaces when NPC paths explicitly trigger it. The educator can call tier 2 forward when the student’s writing or play direction goes there. The colorful-hair NPC can become a named character with conversation if the path warrants. Hard intensities (explicit sexual content, graphic violence, full-intensity slurs) stay below the surface unless the educator explicitly invites them in.
+
+ADULT-OR-17-PLUS BAND. Tier 2 surfaces fully when paths warrant. The full historical intensity of the substrate becomes available. Queer Harlem 1958 can be played as queer Harlem 1958. The heroin economy can be engaged at the level the period documented. Slurs can be delivered at period intensity. The educator’s filter remains operative per PM13; the AI no longer pre-calibrates downward.
+
+WHAT THE PRINCIPLE LOOKS LIKE.
+
+A 10-year-old session does not delete queer Harlem from the world. It presents queer Harlem as ambient texture. Someone at the Lenox Lounge has painted nails. A man at the Apollo sits with another man and they are clearly together but the play moves on. The world is real and full. The surface intensity is age-calibrated.
+
+THE WRONG MOVES.
+
+Wrong move ONE: omission. Deleting queer Harlem from the substrate to protect a 10-year-old is a PM13 violation. The world becomes false.
+
+Wrong move TWO: wrong-tier surfacing. Generating an NPC with explicit sexual identification as the play’s focus at a 10-year-old’s table when no path called it forward is a category error. The substrate is correct; the surface is wrong.
+
+The right move is substrate-realism with surface-calibration.
+
+CAMPAIGN-CODEX STRUCTURE THIS RULE OPERATES ON.
+
+Campaign codex domain entries paint reality at full historical fidelity (the substrate). Each entry contains tier-1 elements (the campaign spine) and tier-2 elements (the texture). Tier metadata in the parent realism-inventory entry of each campaign names which elements are which. The AI reads the parent before each session, applies dm-010 calibration to the bookworm-card band of the seated students, and surfaces tier 2 only when NPC paths or session goals trigger it.
+
+CROSS-REFERENCES. ml* PM13 (realism trumps all, teacher is filter; the rule above this rule). bb* dm-005 (three-position DM, the educator-AI-student authority structure). bb* dm-008 (sensitive-content protocol, the in-play handling). bb* char-001 and char-002 (character creation as writing exercise + age-banded question sets, where the bookworm card is filled out). bb* ses-001 (session zero, where the AI first reads the card).
+
+ORIGIN. May 8 2026, cmp-001 build session, post-research-batch turn. User caught the framing problem on the realism inventory: the 'missing' tier-2 items I had named were not deficiencies; they were realism-supporting texture that should sit in the substrate and surface only on path-trigger plus age-calibration. User’s pithy formulation: 'i dont necessarily wanna talk about queer stuff to 10 year olds but there could be colorful hair npc iuno doesnt have to be like WOW TOM THE NPC LOVES SUCKING DICK UNDERSTAND?' Rule articulated and committed.
+
+EXTENSION:
+May 8 2026 origin. Calibration mechanism that operates underneath PM13 educator-filter. Tier metadata lives in cc* parent realism-inventory entries per campaign. Three calibration bands by bookworm card age.
+
+------------------------------------------------------------------------
+ID: dm-011
+TITLE: Burrow ritual two-layer (page-as-threshold + character-claim)
+ROLE: both
+
+Companion to bb* dim-001 (text-as-dimension), bb* ses-001 (session zero), and bb* dm-010 (tier-calibrated realism activation). dm-011 specifies how a bookworm crosses from outside-text everyday-self into in-text dimension-character. Universal across every bb* campaign.
+
+THE TWO-LAYER PRINCIPLE.
+
+Assumes the canonical text has already been read in homework or a prior class session. The reading is the first burrowing pass. Session zero in the dimension is the second pass and uses the page-as-threshold artifact rather than re-performing the read-aloud.
+
+LAYER 1. PAGE-AS-THRESHOLD. The student page renders campaign-specific period-accurate material (an academic study-object, a period advertisement reconstruction, a primary-source artifact, depending on the campaign). Students engage with the page before session start or at session start. The act of reading the page is the burrowing.
+
+LAYER 2. CHARACTER-CLAIM. Each student names their dimension-character. The educator opens the dimension with a brief framing line. The bookworm has now emerged.
+
+The whole ritual takes two to ten minutes depending on campaign and depth. Page does the heavy lifting; the educator does not need to perform a long descent.
+
+WHY PAGE-AS-THRESHOLD WORKS. The page contains period material that already-having-read-the-canonical-text has primed the student to recognize. Engagement with the period material activates the dimension. The bookworm crosses by reading.
+
+WHY CHARACTER-CLAIM CLOSES THE FRAME. Naming the character is the speech act that places the bookworm inside the dimension. Until named, the student is still themselves; once named, the student is the character. The educator’s framing line confirms the transition.
+
+PER-CAMPAIGN CUSTOMIZATION.
+
+Each cc* campaign’s emergence-point entry specifies what the page contains and what the educator says. cmp-001 uses Mrs Jones’s kitchenette as academic study-object (cc-cmp001-emergence-point). Future campaigns customize the page to whatever artifact best burrows their text.
+
+CROSS-REFERENCES. bb* dim-001 (text-as-dimension, the reading-as-burrowing principle this rule operationalizes). bb* ses-001 (session zero structure). bb* dm-010 (tier-calibrated realism activation, applies during session-time after burrow). bb* char-001 and char-002 (character creation and age-banded question sets, where the character is named).
+
+ORIGIN. May 8 2026, cmp-001 build session. User clarified that the canonical text has already been read in homework, so the burrow ritual does not re-perform the read-aloud. Page-as-threshold replaces the previously-considered narrated-descent model. Two-minute ritual instead of ten-minute.
+
+EXTENSION:
+May 8 2026 origin. Two-layer ritual. Page-as-threshold + character-claim. Generalizable to every bb* campaign.
+
+------------------------------------------------------------------------
+ID: dm-012
+TITLE: Ghost Exegesis Mode (Rainbowsol mid-session extraction-to-rainbowbower-and-return mechanic)
+ROLE: both
+
+GHOST EXEGESIS MODE.
+
+Rainbowsol mid-session extraction-and-return mechanic. Companion to dm-011 (burrow ritual entry into dimension). Where dm-011 governs CROSSING IN, dm-012 governs MID-DIMENSION EXTRACTION TO 4D and RETURN. Both are Rainbowsol-mediated portal mechanics.
+
+INSPIRATION. Dickens A Christmas Carol ghost-scenes (Past, Present, Yet-To-Come). Scrooge is extracted from his bed by ghosts who show him formative scenes, current scenes he wouldn't normally witness, and possible-future scenes. He returns to his bed transformed.
+
+OPERATION. Rainbowsol ghosts the Sanpaitai (per cc-XXX-narrative-architecture team naming) mid-play. Extracts them from the 3D in-dimension into a 4D rainbowbower. Sanpaitai builds character there through Hegelian recognition. Returns to the same in-dimension moment they left. No 3D time has elapsed.
+
+THE RAINBOWBOWER. The 4D extraction-space. Aesthetic register: shelter of rainbow-light, time-suspended, numinous. Sufi-mystic + Lacanian-mirror-stage + Christmas-Carol-ghost-vision converging. Educator narrates the bower into existence with brief reverent framing per firing. Sanpaitai members can speak in character-voice OR student-voice freely (layer-collapse is intentional and pedagogically functional).
+
+HEGELIAN STRUCTURE.
+- In-dimension play. Thesis. Immediate consciousness in the dimension.
+- Rainbowbower extraction. Antithesis. Negation, reflection, cross-thread perspective gain.
+- Return-to-dimension. Synthesis. Deepened consciousness reentering the same scene.
+
+Character creation continues during play. Not gated to session-zero. The admired-heroes-smash from char-001/002 expands through ongoing recognition-moments triggered by Rainbowsol's ghost-extractions.
+
+WHEN GHOST EXEGESIS FIRES.
+- After a major moral choice and before consequences play out (Future-ghost mode).
+- When a Sanpaitai member encounters an unfamiliar perspective (Cross-thread perspective mode).
+- Mid-arc when student-character growth needs explicit reflection (Past-ghost mode showing backstory).
+- At a crossing point (Crash-anchor mode, witnessing another thread's parallel scene from above).
+- When the educator senses the immersion is fragile and a meta-moment can recover it (Stabilization mode).
+
+WHAT GHOST EXEGESIS SHOWS.
+- Backstory illumination. The Sanpaitai member's character's past-life scenes.
+- Possible-future rendering. What consequence-paths could unfold.
+- Cross-thread reveal. Other characters' scenes shown like Christmas Carol vignettes.
+- Sub-anchor weight. The Farhad-Daniel-blanks-loaded reveal pattern from Crash 2004 (per PM14) where the moral act's load-bearing element was not visible from inside.
+
+DURATION. Five to fifteen minutes per firing. Educator paces.
+
+RETURN PROTOCOL. Sanpaitai member returns to the same in-dimension second they left. Body does not move in 3D. Mind carries deepened character into the next move. Educator confirms return with brief framing line.
+
+ANTI-OVERUSE RULE. Ghost exegesis is a periodic move, not a constant register. Two to four firings per 90-minute session is plenty. More than that fragments immersion and turns the mechanic into a tic.
+
+PEDAGOGICAL FUNCTION.
+- Builds Hegelian recognition (self constituted through encounter with other).
+- Forces cross-thread perspective gain (anti-eisegetical, anti-foreground-only-thread).
+- Allows ongoing character creation through play.
+- Lets educator inject moral reflection without breaking immersion.
+- Connects student-self to character-self through layer-collapse moments.
+
+CROSS-REFERENCES. char-001 and char-002 (character creation; ghost exegesis extends these into mid-play). dim-001 (text-as-dimension, the 3D dimension being extracted from). dm-010 (tier-calibrated realism activation; rainbowbower content respects tier per band). dm-011 (burrow ritual; the entry-portal mechanic this companion-extracts from). PM14 (cinematic anchors; Matrix portal-emergence anchor extends to ghost-exegesis sub-portal; Crash multi-thread anchor lights up cross-thread reveal mode).
+
+ORIGIN. May 9 2026, cmp-001 build conversation. User proposed Rainbowsol-as-Christmas-Carol-ghost mid-session extraction-to-4D mechanic for ongoing character-building during play. Coined "rainbowbower" for the 4D extraction-space.
+
+
+EXTENSION:
+dm-012. Companion to dm-011. Mid-session ghost-extraction-and-return for character-building during play. Christmas Carol structure. 4D rainbowbower. Hegelian thesis-antithesis-synthesis. Anti-overuse 2-4 firings per session. Universal across bb* campaigns.
+
+------------------------------------------------------------------------
+ID: unit-001
+TITLE: Comparative-ethics teaching unit — alignment vs edicts/anathema vs sabachtan sequential-engagement
+ROLE: both
+
+Format: comparative reading of three character-ethics frames followed by character-build exercise and growth-vs-betrayal discussion. Origin: bb* pen-009 spec (April 29 2026 polymyth-D&D scan). Designed for ENG3U/ENG4U moral-ethical reasoning expectations + polymyth-methodology module integration. Estimated session time: 90-120 minutes (single seminar block). STRUCTURE. (1) READ — students read three short primary-source excerpts in order: 5e alignment text from PHB (cit-024 in mc*) — the nine alignment grid (LG/NG/CG/LN/N/CN/LE/NE/CE) presented as creature moral attitude. Two axes: law-vs-chaos + good-vs-evil. PF2 Remaster edicts/anathema text from Player Core (cit-025 in mc*) — personal-philosophy code. Edicts = behaviors encouraged. Anathema = behaviors prohibited. Optional, character-personal, can change as character grows. ml* Sequential engagement model entry — three-stage protocol: (1) Benefit of the doubt, (2) Internal logic test, (3) Witch identification. Sequential not simultaneous; killswitch at stage 2 if internal logic missing. (2) MAP — students fill in a 3-column comparative table on five axes: WHAT IT REGULATES (creature kind / individual code / engagement protocol); WHAT CHANGES IT (rare / character growth / per-target reassessment); WHAT SCALE (cosmic / personal / dialogical); WHAT FAILURE LOOKS LIKE (alignment shift / breaking edict-anathema / treating witch as friend or friend as witch); WHAT IT PROTECTS (mechanical predictability / character coherence / mutual-recognition without naivety). (3) BUILD — character-build exercise. Each bookworm takes their existing character and writes that character’s ethics in all three frames: pick an alignment and write 2-3 sentences justifying; write three edicts and three anathema (no alignment label needed); write the character’s sabachtan protocol (under what conditions does this character extend benefit of the doubt, what internal-logic test does this character apply, what does witch-identification look like for this character). (4) DISCUSS — the central question: WHICH FRAME ALLOWS CHARACTER-GROWTH WITHOUT CHARACTER-BETRAYAL? Bookworms argue. ANALYTICAL AXES the comparative-reading should surface. (I) AGENCY OF THE FRAME. 5e alignment is descriptive: alignment is a fact about the creature, mostly fixed. PF2 edicts/anathema is prescriptive-personal: the character chooses these and updates them as the character changes. Sabachtan is operational-dialogical: the protocol activates per encounter, regenerated each time. (II) SCALE. 5e alignment is cosmic-grid (the creature has a position in a moral universe). PF2 is character-internal (the code lives inside the character’s psyche). Sabachtan is between-persons (the protocol operates in the encounter between agent and other). (III) FAILURE MODE. 5e alignment fails by drift (the character stops acting like their alignment) or violation (lawful-evil character takes a chaotic-good action and the DM may shift alignment). PF2 fails by code-break (character does an anathema, may lose class features if class-bound). Sabachtan fails two ways: false-positive (mimetic sideways glance treats target as witch when sequential-engagement was not run) AND false-negative (continued benefit-of-the-doubt after stage 2 killswitch should have fired). (IV) GROWTH WITHOUT BETRAYAL. The unit’s central question. 5e alignment makes growth EXPENSIVE — a Lawful Good paladin who realizes the kingdom is corrupt and joins a rebel cause has crossed a cosmic line, may need to change alignment, may lose class features in some editions. The frame treats growth as betrayal-of-prior-self. PF2 edicts/anathema treats growth as natural — the rule explicitly says edicts and anathema can change as a character’s beliefs evolve. Growth is not betrayal, just update. Sabachtan treats growth as inherent — the protocol is regenerated each encounter, so the character’s ethics are not a fixed set being preserved-or-betrayed but a live-process being practiced. The most growth-friendly is sabachtan; the most betrayal-coding is 5e alignment. WHICH FRAME WINS? Trick question. The unit is not about ranking the frames. It is about teaching bookworms that ETHICAL FRAMES ARE TOOLS WITH DIFFERENT JOBS. 5e alignment is a fast-grid for NPCs and one-session play — cheap, predictable, suited to high-fantasy heroic-narrative. PF2 edicts/anathema is suited to long-campaign character-growth — personal coherence under change. Sabachtan is suited to encounters with claims, arguments, persons whose internal logic must be tested in real time — suited to the actual moral situations bookworms face when they read texts, encounter strangers, evaluate ideologies. The mature reader moves between frames depending on what the situation needs. The bookworm who can only operate in one frame is structurally restricted. CURRICULUM ROUTING. ENG3U expectation 1.6 (analyse texts in terms of literary perspectives), 2.4 (use stylistic devices to communicate clearly), and 4.1 (reflect on skills as readers, writers, listeners). ENG4U sibling expectations. mc* module e2 (English) and any future polymyth-methodology module set. Discussion question doubles as essay prompt. DM RULINGS that Rainbowsol still needs to make. (1) Should the unit ship as bb*-native or be ported to mc* as a polymyth-pedagogy module entry? Default-suggested: ship in bb* as method-section unit (here), ALSO mirror as mc* module entry once the polymyth-methodology module set (mc* pen-017) gets authored by Rainbowsol. (2) Should bookworms keep their three-frame character-ethics writeups in their character sheet? Default-suggested: yes, append all three to the character sheet as an ethics-multitool appendix that updates as the character grows. (3) Where does 4e D&D fit? 4e collapsed to 5 alignments (LG / G / U / E / CE) and was widely criticized; could be presented as a transitional simplification between AD&D nine-grid and PF2 personal-code. Default-suggested: skip in the unit itself, mention in DM notes for advanced bookworms. DRAFT SHIPPED 2026-05-04 by AI per pen-009 spec. Awaiting Rainbowsol confirmation on (1) format approval, (2) curriculum-code tagging, (3) whether to mirror as mc* module.
+
+EXTENSION:
+Spec drafted from existing pen-009 format spec. Sources: 5e SRD via dnd5e.info; PF2 Remaster Player Core via 2e.aonprd.com/Rules.aspx?ID=2045; ml* sequential-engagement methodology entry; ml* sabachtan gnosticism entry. Estimated session time 90-120 minutes; reading-volume ~1000 words across three primary sources.
+
+------------------------------------------------------------------------
+ID: unit-002
+TITLE: Universal-formalist lens drill, ten cross-curriculum formalist lenses anchored to mc-twenty-lens-fitmap
+ROLE: both
+
+Anchor unit exercising the cross-curriculum universals identified by mc-twenty-lens-fitmap. The fit-map established that ten formalist lenses carry EXPLICIT HOME in all four English-subject curricula it reads: Ontario OSSD ENG2D ENG3U ENG4U, IB DP Language A Language and Literature, AP English Literature and Composition, Cambridge International 9695 Literature in English. The ten universals are 1 Exegesis and Close Reading, 2 Character, 3 Theme, 4 Symbolism, 5 Setting, 6 Narrative Point of View, 7 Plot, 8 Tone and Mood, 9 Literary Devices, 10 Comparative. A bookwormburrows session built on any of these ten lenses has a defensible foothold in every downstream curriculum the fit-map reads. This entry is the structural anchor for that unit. Session design is gated, see DM RULINGS below. WHAT IS GROUNDED. The ten-lens set is verified at mc-twenty-lens-fitmap, paragraph THE TWENTY LENSES, first ten items. The cross-curriculum portability claim is verified at the same entry, paragraph SYNTHESIS, naming the ten universals explicitly. The curriculum-side mc* anchors are mc-e1 OSSD English secondary ladder, and mc-e2 IB English A. The citation anchors are cit-022 Ontario Grades 11-12, cit-026 Ontario Grades 9-10, cit-042 IB Language A first assessment 2026, cit-043 AP English Lit CED effective Fall 2024, cit-036 Cambridge 9695 syllabus 2024 to 2026. AP COVERAGE NOTE. Of the four curricula, AP English Literature is the one whose EXPLICIT HOMEs are exclusively formalist. Per the fit-map AP column, every context-and-reception and critical-theory lens scores NO HOME at AP. A bb* unit built on the ten formalist universals therefore travels into AP Lit cleanly. A sibling unit built on critical-theory lenses would not. This is the AP-compatibility check the fit-map IMPLICATION FOR mc* paragraph stated, ported into bb* as a unit-design constraint. CROSS-SUBJECT NOTE. SUBJECT SCOPE on the fit-map records that seven critical-theory lenses, Marxist, feminist, psychoanalytic, postcolonial, ecocriticism, deconstruction, structuralist, recur on any non-English fit-map. The ten formalist lenses of this unit are not on that recurring set. The unit therefore does not generalize to the four non-English wuxing tracks, and a sibling unit covering those tracks waits on the pen-018 ruling. WHAT IS NOT YET GROUNDED. (1) Format. unit-001 used READ MAP BUILD DISCUSS per pen-009. This unit has no equivalent format spec yet. (2) Text. A primary text or text set must be picked. The fit-map does not select texts. (3) Lens-deployment pattern. Run all ten lenses on one text, run one lens deeply, run two or three in comparison, run the lens grid across a multi-text comparative set, each is a different unit shape. (4) Tier. ENG2D entry-level versus ENG3U or ENG4U senior changes the depth of treatment on the same lens. (5) bb* in-fiction framing. The dimensional-traveling-game wrapper that turns this from a literature lesson into a bookwormburrows session is not yet drafted. DM RULINGS that Rainbowsol still needs to make. (1) Format spec, equivalent to pen-009 for unit-001. (2) Primary text or text set. cc* campaigns reference candidate texts at cc-eng-j7 Hughes Thank You Mam, cc-eng3u, cc-eng4u, any or none could anchor this unit. (3) Lens-deployment pattern, one of all-ten-against-one, one-deep, two-or-three-comparative, grid-across-multi-text. (4) Tier-of-deployment, ENG2D or senior. (5) bb* in-fiction framing, the dimensional wrapper. (6) Whether this unit ports to mc* as a polymyth-pedagogy module entry, parallel to the unit-001 DM ruling on the same question. Once Rainbowsol issues these rulings the unit-002 body gets expanded with the format the same way unit-001 was expanded from pen-009.
+
+EXTENSION:
+Drafted from mc-twenty-lens-fitmap as the structural anchor for a cross-curriculum formalist-lens unit. Structural fields only, no format spec yet. Ten-universal claim verified at fit-map SYNTHESIS paragraph. AP coverage claim verified at fit-map IMPLICATION FOR mc* paragraph. Cross-subject scoping verified at fit-map SUBJECT SCOPE paragraph and at pen-018. Curriculum-side mc* anchors verified at mc* module entries e1 and e2.
+
+------------------------------------------------------------------------
+ID: dm-013
+TITLE: POLYMYTHDND no-dice universal rule
+ROLE: both
+
+No dice at any layer. Burrow level uses none. Books load their narrative content, character archetypes, magic flavor, healing pace, encounter style, but never their native dice mechanics. A "5e book" in polymythdnd imports the structure of 5e adventures, monster types, spell flavor, level-up rhythm, but does not import the d20 roll. Resolution remains narrative-collaborative regardless of which book is active.
+
+Two reasons this is right design. (1) Pedagogical tractability. A teacher running a session does not need to learn each book's native mechanics. They narrate. AI provides math support. Cognitive load stays constant across the entire library. (2) Cognitive coherence for neurodiverse students and students cognitively captured by short-term dopamine hits. A "sometimes dice, sometimes no dice" rule that flipped per book would demand meta-attention every chassis switch. The constant rail of "narrative collaboration, no dice ever" is far cleaner. The game stays predictable in its meta-rules even while it switches its contents.
+
+Books load flavor, not mechanics. Dice never appear at any layer.
+
+EXTENSION:
+Supersedes the implicit dice-assumption in earlier bb* entries that referenced D&D mechanically. Companion entries: dm-014 (chassis-of-chassis), dm-016 (three-layer resolution), dm-019 (action economy).
+
+------------------------------------------------------------------------
+ID: dm-014
+TITLE: POLYMYTHDND chassis-of-chassis architecture
+ROLE: both
+
+Polymythdnd is not a game that picks one chassis. It is a game that holds the library of chassis and lets the active book select which one is loaded for the duration of that book. The bookwormcard is the only constant across the library.
+
+The single-chassis assumption breaks every "mutual exclusivity" claim. Inside one game (single chassis) you cannot have two action economies firing at once. You cannot have two death contracts at one table. You cannot have two magic resource systems. But across the meta-game (chassis-of-chassis) all these systems coexist because only one is active at any moment.
+
+What a book loads. Magic system. Healing pace. Action economy flavor. Encounter style. Death-in-book consequences. Character archetypes.
+
+What the burrow holds. Identity (bookwormcard). Soul anchor invariants. Survival contract (book-death = wake in burrow, not permanent). Resolution rail (narrative collaboration teacher+AI). No dice at any layer.
+
+What this dissolves. Mutual-exclusivity claims on death contracts, magic systems, action economies, healing speeds. All can coexist in the library because only one is active per session.
+
+EXTENSION:
+Architectural keystone. Most other polymythdnd entries (dm-013 through dm-027) sit downstream of this one.
+
+------------------------------------------------------------------------
+ID: dm-015
+TITLE: POLYMYTHDND Inception death model (book vs burrow)
+ROLE: both
+
+Death operates at two layers. Book-death is not permanent. Burrow-death is.
+
+When a character "dies" inside a book, they wake in the burrow as a ghost in that book. The book is closed for them. The bookwormcard survives intact. Cumulative effect appears as a ghost-mark in the book-portal log and possibly a scar in the scars ledger.
+
+When a character "dies" at the burrow level (vanishingly rare), the character is permanently gone. Bookworm rolls a new character.
+
+The 99% rule. In practice the burrow is statistically safe. Book-deaths are common and recoverable. Burrow-deaths are rare and final.
+
+Implications. Players form a different relationship with their characters than in single-chassis death-real games. The investment is in the persistent bookworm identity, not in the temporary book-presence. Mission failure (book-level) carries real stakes (see dm-027 stakes ledger), but character continuity is meta-stable.
+
+Tension with con-004. The existing con-004 entry says character death "stays real, not reversible through retcon or re-roll." Under the Inception model, con-004 needs revision. Logged in pending as pen-014.
+
+EXTENSION:
+See dm-014 chassis-of-chassis. See con-004 character death (contradicts; needs revision per pen-014). See dm-026 scars-from-books and dm-027 stakes ledger.
+
+------------------------------------------------------------------------
+ID: dm-016
+TITLE: POLYMYTHDND three-layer resolution
+ROLE: both
+
+When a player declares an action in conflict, resolution happens in three layers.
+
+(1) PLAYER DECLARATION. The player says what they are trying to do.
+
+(2) AI MATH CONTRIBUTION. Based on the bookwormcard's recorded training, equipment, knowledge, scars, soul-anchor, fears, and wants, the AI feeds the teacher contextual modifiers. Pattern: "this character trained in X, so likelihood of pulling this off shifts up by 8 percent." "This character carries Y, so the attempt also risks damaging the carried object." The math is informational, not deterministic.
+
+(3) TEACHER NARRATIVE RULING. Teacher takes the AI's math input, the prior choices made in the campaign, the pedagogical aim of the current session, and the narrative weight of the moment, and rules the outcome.
+
+Math is informational, never deterministic. There are no dice (dm-013), so math cannot generate outcomes by itself. Math feeds the teacher's ruling. The ruling is the resolution.
+
+This makes the teacher the load-bearing element of every resolution. See dm-018.
+
+EXTENSION:
+See dm-013 no-dice, dm-017 privilege hierarchy, dm-018 teacher load-bearing, dm-021 AI math = contextual modifiers.
+
+------------------------------------------------------------------------
+ID: dm-017
+TITLE: POLYMYTHDND privilege hierarchy: story > pedagogy > math
+ROLE: both
+
+Three privileges are ordered. When two conflict, the higher one wins.
+
+STORY is privileged at narrative inflection points. Deaths. Betrayals. Revelations. Pivots in the arc. When the moment demands a particular outcome to honor the arc, the teacher rules for story.
+
+PEDAGOGY is privileged when a learning outcome is at stake. The OSSD expectation being delivered. The rubric being assessed. The cmaps node being built. When a ruling would compromise the learning goal of the session, the teacher rules for pedagogy.
+
+MATH is privileged only when neither story nor pedagogy is in play. Routine resolution. Baseline competence checks. Small adjudications where flavor is acceptable. The AI's contextual modifiers determine the outcome the teacher confirms.
+
+"Anything goes" means any outcome the teacher rules is valid. There is no rule lawyer's appeal to mechanical fairness that overrides the teacher's narrative-pedagogical judgment.
+
+This makes the teacher the load-bearing element. See dm-018.
+
+EXTENSION:
+See dm-016 three-layer resolution, dm-018 teacher load-bearing, dm-022 pedagogical claim.
+
+------------------------------------------------------------------------
+ID: dm-018
+TITLE: POLYMYTHDND teacher as load-bearing element
+ROLE: both
+
+Polymythdnd is not a game that happens to have a teacher running it. It is a teacher's pedagogical session held inside a game frame.
+
+The game frame provides structure. Cards. Books. Action economies (when triggered). Soul-anchor invariants. Scars ledger. Math strip (AI-filled).
+
+The teacher provides the actual call on every outcome. Conflict declarations. Resolution rulings. Death adjudications. Mission outcomes. Pacing. Scene transitions. Hooks.
+
+Implications for who can run polymythdnd. A trained teacher with Rainbow Magic (ses-003) is required. The AI cannot run it alone. The student-driven model is downstream of teacher framing. The game is not a substitute for instruction; it is an instrument of instruction.
+
+Implications for AI design. The AI is a math-support engine, not an arbiter. AI provides modifiers (dm-021), state tracking, calibration. AI never overrides the teacher. When AI and teacher conflict, teacher wins.
+
+Implications for student agency. Students design their characters, declare their actions, write their work-quality outputs. Their agency operates inside the teacher's frame, not against it. The frame is what makes the agency meaningful (vs. arbitrary).
+
+EXTENSION:
+See ses-003 Rainbow Magic, dm-016 three-layer resolution, dm-017 privilege hierarchy, dm-022 pedagogical claim.
+
+------------------------------------------------------------------------
+ID: dm-019
+TITLE: POLYMYTHDND action economy: scope-separated narrative + main+small
+ROLE: both
+
+Two action-handling modes coexist by scope-separation. They never compete because they are nested, not stacked.
+
+NARRATIVE TEMPO (default). The teacher hands spotlight based on dramatic flow. No turn order. Players act when the scene calls for it. This is the mode the game runs in by default.
+
+MAIN + SMALL (conflict mode). When the teacher declares a scene is in conflict, action economy switches. Each character gets one main action plus one small action per turn. Turn order applies. Combat-pacing logic applies.
+
+The trigger. Teacher declares conflict by saying "we are in conflict now" (or equivalent in-scene framing). All players know they are in main+small mode. When the conflict resolves, teacher declares narrative tempo resumes.
+
+Why nested not stacked. Stacked would mean both modes firing simultaneously (impossible to track). Nested means narrative tempo is the outer mode and main+small is an inner mode triggered for specific scenes. Outside conflict scenes, main+small does not exist. Inside conflict scenes, narrative tempo is paused.
+
+What success/failure depends on. Not dice (dm-013). Resolution is the three-layer model (dm-016) regardless of which mode is active. Main+small describes economy of actions per turn; it does not resolve them.
+
+EXTENSION:
+See dm-013 no-dice, dm-016 three-layer resolution. Replaces single-chassis action-economy assumptions.
+
+------------------------------------------------------------------------
+ID: dm-020
+TITLE: POLYMYTHDND library-of-systems: books load flavor not mechanics
+ROLE: both
+
+The library holds all the chassis families (see dm-023). Each book in the library loads one chassis for its duration. The bookworm enters, plays under that book's loaded chassis, leaves, returns to the burrow.
+
+What the book loads. Narrative content. Setting. Character archetypes. Magic flavor (the FEEL of how magic works in this book). Healing pace (how fast wounds close in this book). Encounter style (how the book's threats appear and what they do). Death-in-book consequences (which specific outcome of book-death this book uses, all of them deferring to dm-015 burrow-survival).
+
+What the book does NOT load. Native dice mechanics (dm-013). Resolution architecture (dm-016 is universal). Privilege hierarchy (dm-017 is universal). Soul-anchor mechanics (char-004 is universal). Bookwormcard schema (universal).
+
+Implication: same player can move from a 5e book to a Cairn book to a Daggerheart book within one campaign. The character travels with them. Their bookwormcard survives. The flavor of magic, healing, encounters changes per book. The structural rails do not.
+
+This is why the mutual-exclusivity claims of single-chassis design dissolve at the meta-game level. Each book is its own chassis, but the meta-game holds them all.
+
+EXTENSION:
+See dm-014 chassis-of-chassis, dm-023 five families, dm-013 no-dice. See char-006 bookwormcard system-agnostic.
+
+------------------------------------------------------------------------
+ID: dm-021
+TITLE: POLYMYTHDND AI math = contextual modifiers
+ROLE: both
+
+The AI does math. Not outcomes. Modifiers.
+
+What the AI computes. Contextual likelihood adjustments based on the bookwormcard. Examples (illustrative, not canonical values). "Character trained in scribing, so +8 percent likelihood of forging this letter." "Character carries a torch and we are in darkness, so +12 percent on perception of nearby threats but -5 percent on stealth." "Character has scar from Cairn-book vermin encounter, so reads vermin attacks faster, +6 percent on initial response." "Character's core fear is abandonment, so any scene of being left alone applies a -10 percent on composure-related actions."
+
+What the AI does not do. Decide outcomes. Roll dice (there are none). Override the teacher. Make narrative judgments. Adjudicate moral choices. Decide when conflict begins or ends.
+
+What the AI uses. Bookwormcard data (Series I + Series II). Active book state. Recorded campaign history. Soul-anchor invariants.
+
+How the teacher uses AI math. As one input among several. The teacher hears the modifier, considers the story stakes, considers pedagogical aims, considers narrative weight, then rules the outcome. AI math weighs in but never decides.
+
+This makes math useful without making it deterministic. Players know roughly where their character is competent without the math being the final word.
+
+EXTENSION:
+See dm-016 three-layer resolution, dm-017 privilege hierarchy, dm-018 teacher load-bearing. See char-006 bookwormcard system-agnostic.
+
+------------------------------------------------------------------------
+ID: dm-022
+TITLE: POLYMYTHDND pedagogical claim: diploma mills, credentialism, replication crisis
+ROLE: both
+
+The polymythdnd architecture is a response to three converging educational pathologies.
+
+DIPLOMA MILLS sell credentials without learning. The credential certifies seat-time, not capability. Polymythdnd makes seat-time impossible to fake. The bookworm cannot navigate a book without doing the navigation. The play history accumulates on the bookwormcard. The credential, if there is one, is the play history.
+
+CREDENTIALISM rewards credentials over actual capability. Society values the certificate over the skill. Polymythdnd inverts this by making the play artifact the assessment. The character sheet, the scars, the book-portal log, the homework writing — these are the credential AND the evidence of capability AND the work itself, collapsed into one artifact.
+
+THE REPLICATION CRISIS exposes how academia rewards publishing-novel-results over generating reliable knowledge. Performance of doing-research is rewarded over actually-doing-it. Polymythdnd applies the same correction one layer down to pedagogy. Performance of learning (correct answers, sit-still-and-test) is replaced by actual-learning artifacts (the writing that resolves an in-dimension action). The teacher's narrative-judgment privilege (dm-017) probes for genuine understanding rather than testable surface compliance.
+
+For neurodiverse students and dopamine-captured students, the framing is doubly important. Both populations are poorly served by sit-still-and-answer-the-test pedagogy. Both are well served by a play frame where engagement is the substrate of learning rather than the obstacle to it.
+
+The between-world detail. Between books, the bookworm does the homework. The book is the reward. The reward only opens when the homework is done. The pedagogy is not adjacent to the play. It is the gate to the play.
+
+EXTENSION:
+See dm-018 teacher load-bearing, con-001 work-quality consequence. Companion concept in ml* under degorgonification section.
+
+------------------------------------------------------------------------
+ID: dm-023
+TITLE: POLYMYTHDND five families catalog
+ROLE: both
+
+The chassis library currently identifies five families. Within a family, chassis share enough underlying math that adventures, monsters, and rulings work across members with minor adjustment. Across families, mutual exclusivity at the chassis level applies (see dm-014).
+
+THE POPULAR FAMILY. D&D 5e, D&D 2024, Shadowdark. Mainstream lineage. Classes, levels, twenty-sided die (which polymythdnd does not use), action-and-bonus turn structure. Cousins. Adventures port between them with simple conversion. Shadowdark is the lethal-light branch.
+
+THE OLD-SCHOOL FAMILY. BFRPG, OSE, Dolmenwood. All descend from 1980s D&D. Adventures and monsters port across with zero conversion. They differ mainly in style and setting.
+
+THE BRUTAL-LIGHT FAMILY. Cairn, Mörk Borg. Very different aesthetics (folk-horror, doom-metal) but matching mechanical scale. One-hit kills (in single-chassis play; in polymythdnd this becomes book-death = wake in burrow per dm-015). Five-minute character creation. Adventures port with small monster adjustments.
+
+THE TACTICAL FAMILY. Pathfinder 2 Remaster. A family of one. The three-action turn is unique to PF2R. It does not combine with any other game at the combat level — every ability is calibrated to that specific economy.
+
+THE NARRATIVE FAMILY. Daggerheart. A family of one. The two-dice duality and narrative-tempo combat are unique. Hope and fear tokens are unique. Daggerheart is its own thing.
+
+In polymythdnd, each family becomes a class of books. A 5e book inherits the Popular Family rails. A Cairn book inherits the Brutal-Light Family rails. The bookworm travels through the library and the AI translates the bookwormcard into each family's native idiom (see char-006).
+
+EXTENSION:
+See dm-014 chassis-of-chassis, dm-020 library-of-systems, dm-024 traveling tools, char-006 bookwormcard system-agnostic.
+
+------------------------------------------------------------------------
+ID: dm-024
+TITLE: POLYMYTHDND ten traveling tools
+ROLE: both
+
+Ten mechanical chunks live in one chassis natively but work in any other chassis. They do not replace the underlying chassis; they sit on top of it like apps on a phone. In polymythdnd, the teacher and AI can deploy any of these in any book.
+
+(1) THE NEGOTIATION SYSTEM. From Pathfinder 2. Replaces "roll one persuasion check" with hidden goals, weaknesses, and steady progress.
+
+(2) THE FACTION SYSTEM. From Worlds Without Number (free). Tracks what groups in the world are doing between sessions. Their plans move forward whether the heroes intervene or not.
+
+(3) PERSONAL VALUES PER CHARACTER. From Pathfinder 2. Each character writes down what they will always do and never do. Replaces vague alignment with concrete commitments.
+
+(4) PERMANENT SCARS. From Cairn. When you almost die, you gain a lasting mark. Translated to polymythdnd as scars-from-books, see dm-026.
+
+(5) THE COUNTDOWN CLOCK. From Mörk Borg. The world is ticking toward a disaster. Players do not control the tick.
+
+(6) THE REAL-WORLD TORCH TIMER. From Shadowdark. Set a kitchen timer for one hour. When it rings, the torches go out in the dungeon.
+
+(7) PROGRESS CLOCKS. From Blades in the Dark. Any task or threat has a clock. The clock fills with relevant actions.
+
+(8) THE REACTION TABLE. From 1980s D&D. NPC starting attitude becomes stochastic instead of GM-decided.
+
+(9) THE ORACLE. From Mythic Game Master Emulator. Yes/no questions answered by tables. When the GM does not want to be the one deciding, the oracle answers.
+
+(10) THE TOKEN ECONOMY. Pick one source system's metacurrency (inspiration, hero points, hope/fear) and add it. Commit to one.
+
+EXTENSION:
+See dm-023 five families. See dm-026 scars-from-books (which formalizes scars as a polymythdnd burrow-level mechanic).
+
+------------------------------------------------------------------------
+ID: dm-025
+TITLE: Book portal log: traversal history record on Series II of bookwormcard
+ROLE: both
+
+Series II Page II of the bookwormcard contains the book portal log. Every book the bookworm has entered is recorded here. The log is the bookworm's traversal history.
+
+Schema. Each row records (a) which book was entered, (b) the date entered, (c) the date emerged, (d) outcome, (e) what the trip left behind.
+
+Outcomes enumerated. CLEARED — the bookworm completed the book's mission and left intact. GHOSTED — the bookworm's character died in the book and woke in the burrow per the Inception model (dm-015). ABANDONED — the bookworm left without completing the book. REREAD — the bookworm returned to a previously-entered book.
+
+The active book sheet. Top of Series II Page II records the currently-loaded book. Title. Chassis. Date entered. Mission. Plus the math strip (HP, energy, tier, active modifiers) which is filled by the AI as you play and which the player and human DM do not touch.
+
+Use in play. Teacher and AI consult the log when context matters. A bookworm who has cleared three Cairn-family books has different reflexes than one entering Cairn for the first time. The AI's contextual modifiers (dm-021) reference the log.
+
+EXTENSION:
+See dm-015 Inception death model, dm-021 AI math, char-006 bookwormcard system-agnostic.
+
+------------------------------------------------------------------------
+ID: dm-026
+TITLE: Scars from books: Cairn scar mechanic translated to polymythdnd meta-game
+ROLE: both
+
+Cairn's scar mechanic (single-chassis: when you almost die in Cairn you gain a permanent mark) translates to polymythdnd as a meta-game mechanic. When a character nearly dies in any book and wakes in the burrow per the Inception model (dm-015), the experience leaves a mark recorded on Series II Page III of the bookwormcard.
+
+Schema. Each scar entry records (a) which book the near-death occurred in, (b) what happened, (c) what mark it left.
+
+Cumulative narratively. Small mechanically. Each scar individually adjusts AI math by a few percent in relevant contexts. Across many scars the cumulative effect is significant — a bookworm with twelve scars carries a noticeably different posture into the next book than a fresh bookworm.
+
+Translation per book. The AI applies the scar contextually inside whatever book is next loaded. A scar from a Mörk Borg book where the character was nearly burned might apply as "+8% on fire-perception in any book," or as a flinch in social scenes involving open flame. The card holds the general scar; the AI translates per active book.
+
+Why the mechanic is universal. Scars survive book transitions because they are recorded at the burrow level. The Inception model (dm-015) makes book-death recoverable but not consequence-free. Scars are the consequence-trace.
+
+EXTENSION:
+See dm-015 Inception death, dm-021 AI math, dm-024 traveling tools (item 4), char-006 bookwormcard system-agnostic.
+
+------------------------------------------------------------------------
+ID: dm-027
+TITLE: Stakes ledger: mission-failure costs at burrow level
+ROLE: both
+
+Mission failure has consequences even when character death does not (dm-015). The stakes ledger on Series II Page III of the bookwormcard records what each mission-failure cost.
+
+Why it exists. Under the Inception model book-death is recoverable. Without stakes accumulation, mission failure would feel weightless — bookworm just dies in book, wakes in burrow, tries again. That removes meaningful stakes. The stakes ledger restores them at the burrow level.
+
+What can be costs. Time lost in the burrow (slows access to next book). Reputation with Rainbowsol (or whoever the teacher figures as the burrow-level authority). Access to certain books (some books only open with certain reputation). Ghost-marks that linger (the bookworm is partially still in the failed book, distracted, slower to react in next books). Material loss (consumable items used in the failed attempt are gone).
+
+Schema. Each entry records (a) what failed, (b) what it cost, (c) what now (the burrow-level state-change).
+
+Teacher and AI roles. Teacher rules what the cost is at the moment of failure. AI records it on the ledger and applies it contextually in subsequent books.
+
+This is where the survival-guaranteed game gets its real stakes. Character continuity is meta-stable but mission outcomes are not. Bookworms learn to care about getting it right because failure costs something they care about.
+
+EXTENSION:
+See dm-015 Inception death, dm-018 teacher load-bearing, dm-021 AI math, char-006 bookwormcard system-agnostic.
+
+------------------------------------------------------------------------
+ID: dm-031
+TITLE: Leveling system ruling — XP-as-evidence-record, two clocks (bookworm + character), no human-attribute fields
+ROLE: dm
+
+DECISION HELD. bb* leveling system operates on XP-as-evidence-record, not XP-as-currency. Numbers do not buy advances. The corpus (writing, journal entries, character-action results, smashes, scars) is the evidence base. The teacher (human reader, not math) declares stage transitions at qualitative thresholds.
+
+TWO CLOCKS, NOT ONE LADDER. (1) BOOKWORM clock. The student-subject moves through bookworm -> silkworm -> cocoon -> self-named-emergence -> eggs-on-mulberry-recursion (see bw-007, bw-008). Years-long. Gated by qualitative tests: fibroin-test for silkworm, self-named act for emergence. No numbers. (2) CHARACTER clock. The character-at-table is local to one campaign. Dies inside one campaign. Earns moves per session that die when the character dies. Two clocks tracked separately. Welding both onto one 10-level ladder forces a silkworm-stage bookworm playing a fresh character to perform "level 1" and forces a long-running character to perform cocoon-resistance the bookworm has not earned. Wrong.
+
+OSSD CLOCK ROUTING. Third clock (OSSD/IB credit-codes) lives in mc*, not bb*. If bb* tracked OSSD codes mechanically, bb* would become mc* with character sheets glued on. The empty mc* is the structural pressure that bb* must resist absorbing.
+
+WHAT THE BOOKWORMCARD TRACKS. Per pen-013 resolution, items split RAINBOW (carry forward) vs Consumable (one-book). Per char-005, three end-of-book modes (dissolve / convert / remain). Per the May 13 SERIES->BOOKS-COMPLETED rename, the top-of-card metadata records the bookworm's burrow-count, not a "series number" that referred to nothing. Books completed IS an XP-as-evidence-record artifact. Not spendable. Documentation that there is a corpus.
+
+WHAT THE BOOKWORMCARD DOES NOT TRACK. Hair color, eye color, height. Per May 13 ruling these are nullified — bookwormburrows characters are smashed-up ideas from other characters, not humans. APPEARANCE remains a single-line prompt for the smash-resultant form, not a human-attribute grid.
+
+OPEN. (1) Framings D and E from May 4 chat 0f3705ce — recovery attempted May 13 2026 via conversation_search across multiple axes (framing D, framing E, portfolio-as-progression, demonstrated capacity, earned-moves dimension-specific). Search returned the framing A/B/C bodies plus the Q3 question that referenced D and E by letter but no body content for D or E was indexed. Two interpretations: D and E were drafted but the chunks containing them are not search-indexed, or D and E were named in the Q3 plan but never bodied. Either way the substrate is recoverable by re-derivation from the F1 to F4 frictions (two-clocks principle, anti-book-counting, anti-spreadsheet, OSSD-routing) combined with the XP-as-evidence-record substrate. Rainbowsol can re-derive if needed. (2) Stage-transition rubric for bookworm clock — what qualitative-evidence-pattern triggers silkworm declaration, cocoon declaration, self-named-emergence declaration. Rainbowsol authorship required. (3) Earned-moves catalog for character clock — what specific moves can be earned per dimension per campaign. Per-dimension authorship required. (4) Relationship to portfolio-quality grading per the May 4 portfolio-as-leveling proposal — grades document the evidence-pattern, but do not convert to spendable XP. Rubric design pending.
+
+CROSS-REFERENCE. ml* XP-as-evidence-record substrate-distinction entry. ml* schema-audit miss entry. ml* bw-002 cannibalistic-reading critique. bw-007 bookworm-vs-character continuity-vs-locality. pen-013 RAINBOW resolution. char-005 three-mode end-of-book. May 13 SERIES->BOOKS-COMPLETED rename in /bookwormcard/print/.
+
+
+########################################################################
+SECTION: DIMENSION  (29 entries)
+########################################################################
+
+------------------------------------------------------------------------
+ID: dim-008
+TITLE: Three D&D cosmologies (Great Wheel / World Tree / World Axis)
+ROLE: dm
+
+D&D canon contains three contradictory cosmologies. Great Wheel (1e/2e/3e/5e) — outer planes arranged by alignment, Lower Planes / Upper Planes / Outlands at center. World Tree (3e Forgotten Realms specific) — outer planes hanging from Yggdrasil-like structure, divine domains as branches. World Axis (4e) — Astral Sea above, Elemental Chaos below, no alignment-based arrangement. These cannot be synthesized; they are genuinely incompatible at the metaphysical-foundation layer (concrescence). The polymyth move: each cosmology becomes its own bb* dimension, visited separately. Confluence not concrescence at the cross-cosmology travel layer — bookworms can move between cosmologies because they are bookworms, not because the cosmologies reconcile. The three are pressure-imprints the bookworm navigates, not metaphysical truths to choose between. Treating them as canon-walls (one is correct, others are wrong) plays inside the egregore's logic. Treating them as pressure-imprints navigates from outside.
+
+EXTENSION:
+Polymyth-D&D research, fa9853b1 conversation April 18 2026.
+
+------------------------------------------------------------------------
+ID: dim-010
+TITLE: Sealed-homebrew exclusion
+ROLE: dm
+
+Homebrew dimensions split into two postures with different polymyth status. Homebrew-as-posture (you author the world but it remains in conversation with other texts, traditions, intertexts) is framework-compatible — every dimension is in some sense homebrew once a bookworm enters it because the bookworm's presence rewrites the world. Homebrew-as-sealed-universe (the world refuses intertextuality, claims to owe nothing to other texts, operates as if no other dimensions exist) is excluded. Polymyth requires cross-corpus burrowing; inputs must survive the meeting. A sealed world has no moiré partner — nothing to interfere with, nothing to be tested against. The exclusion is not against creativity; it is against the specific failure mode of a world that refuses contact. A homebrew dimension that explicitly riffs on, contests, or recombines other dimensions is welcome. A homebrew dimension that claims to be the only world is sabachtan-excluded.
+
+EXTENSION:
+Articulated in polymyth-D&D conversations April 2026.
+
+------------------------------------------------------------------------
+ID: dim-011
+TITLE: Exandria (Critical Role) — Tier 1 native
+ROLE: dm
+
+Critical Role's setting (Tal'Dorei, Wildemount, Marquet). Passes all three scan conditions. Internal coherence unusually tight because the world was developed in actual play before publication — every region tested under narrative pressure for years. Reflects strongly within itself (the Calamity, the divine gate, Dunamancy/Wildemount magic) and across D&D corpus (5e-native, edition-portable). Reflects polymyth across multiple operations: Calamity = collective-trauma-as-cosmological-event, divine gate = sabachtan-as-cosmic-architecture (gods constrained from direct intervention because their full presence would destroy mortal capacity), Dunamancy = possibility-itself-as-substance (deeply confluence-not-concrescence). 2026 development: Keith Baker (Eberron creator) signed to Daggerheart, Critical Role pivoting primary system off D&D. Exandria-on-Daggerheart will exist alongside Exandria-on-5e starting 2026. Native Tier 1 sits beside Planescape/Ravenloft/Eberron with collective-trauma cosmology specialty rather than belief-physics or sealed-magitech.
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-012
+TITLE: Midgard (Kobold Press) — Tier 1 native, folkloric-substrate
+ROLE: dm
+
+Wolfgang Baur's Eastern European folklore-substrate setting. Passes all three. Internal coherence high because the substrate (Romanian, Polish, Russian folklore plus Slavic vampire/witch traditions) had to cohere as living folklore before D&D ever touched it. Reflects within D&D (standard 5e mechanics, own pantheon, ley-line magic). Reflects polymyth strongly through borrowed substrate-richness — reading Midgard means engaging the underlying folkloric corpus at one remove. Tales of the Old Margreve forest is polymyth-rich specifically because Baba Yaga and the entire Slavic-witch-tradition operates beneath it. Distinguishing note: Midgard's polymyth-load is NOT designer-invented; it is borrowed from real living folkloric corpora that already passed the scan. Curriculum-fit very strong for Eastern European literature (Bulgakov, Tokarczuk) and proper Brothers-Grimm (not Disney-laundered).
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-013
+TITLE: Theros (MTG / Mythic Odysseys 2020) — Tier 2 partial
+ROLE: dm
+
+Greek-mythology-base setting where gods literally exist as cosmological forces shaped by mortal belief. Passes coherence — Greek mythological substrate is internally consistent before D&D mechanic gets bolted on. Reflects within itself (Piety mechanic, Nyx inspirational-realm) and partially within D&D. Reflects polymyth on the loud surface — gods-shaped-by-collective-belief is a literal mechanical implementation of egregore-formation, which makes Theros LOUD on the meaning-making axis. Where it fails fully Tier 1: the collective-belief mechanic is too tidy. In actual polymyth, gorgonification operates through the gap between belief and reflective examination, which Theros mechanizes away. The mechanic flattens the gap into a numeric Piety score. Verdict Tier 2 partial. Useful as teaching-dimension specifically for showing the egregore mechanic in mechanically-explicit form before complicating it with real-world fuzz. Reads cleanly into Greek-mythology-as-functioning-religion units (Iliad, Odyssey, Hesiod).
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-014
+TITLE: Ravnica (MTG / Guildmasters' Guide 2018) — Tier 2 caveat
+ROLE: dm
+
+Ten-guild city-as-world setting. Each guild is an ideology-with-economic-base. Passes coherence — guild structure has carried through MTG since 2005 with consistent cross-faction rules. Reflects within itself (every Ravnica story is guild-interaction plus Guildpact metaphysics). Reflects polymyth ambiguously: guilds are POLITICAL-FACTION-AS-IDEOLOGY which is potentially polymyth-rich, but each guild is essentialized down to one principle (Boros = warband-justice, Dimir = secrets, Selesnya = collective-as-organism) which is polymyth-thin. Guilds do not contain self-reflection or internal contradiction; each is a cartoon of its principle. Tier 2 with caveat. Visitable for teaching faction-mechanics and guild-economics; weak for ideology-critique because guilds are too cleanly drawn to be polymyth-scanned for gorgonification. Curriculum-fit: civics, government, urban-planning-as-ideology.
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-015
+TITLE: DCC-Lankhmar (Goodman Games / Leiber's Nehwon) — Tier 1 in Lankhmar config
+ROLE: dm
+
+Dungeon Crawl Classics is setting-light by design — DCC explicitly leaves world-building to the table. The Lankhmar campaign setting (Fritz Leiber's Nehwon) is the closest to a published DCC setting. Passes coherence in Lankhmar variant because Leiber's Nehwon is internally tight pulp. Reflects polymyth STRONGLY in Lankhmar configuration because Leiber is a published literary author and Nehwon was constructed as commentary on Howard's Hyborian-Age, on Tolkien's Middle-Earth, and on the entire pulp-fantasy substrate that informed early D&D. Reading-Lankhmar-through-DCC is reading-pulp-as-criticism-of-pulp. The DCC ruleset itself (without Lankhmar) is OSR-thin and polymyth-neutral. Verdict: Tier 1 in Lankhmar config, neutral as default. Curriculum-fit: any unit reading Howard, Leiber, Moorcock, or Vance directly.
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-016
+TITLE: Ptolus (Monte Cook Games) — Tier 2 city-as-trauma-substrate
+ROLE: dm
+
+Massive detailed city-set under a Spire haunted by a dead god. Originally 3e, 5e/PF2 conversion 2021. Passes coherence — Ptolus was developed in actual play across years and is one of the most-detailed published city-settings in any RPG. Reflects within itself (city's layers, Spire's history). Reflects polymyth at medium strength because the dead-god-under-the-city motif maps onto trauma-substrate-architecture (collective-trauma physically embedded in geography) but the setting does not develop the metaphor toward sabachtan or gorgonification specifically. Verdict Tier 2. City-as-corpse-of-collective-trauma is the polymyth read; Ptolus furnishes the geography for that read but does not teach it. Curriculum-fit: urban-history, psychogeography-of-place units (Walter Benjamin's Arcades, Toronto-as-palimpsest).
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-017
+TITLE: Humblewood (Hit Point Press) — Tier 4 with developable potential
+ROLE: dm
+
+Pastoral setting where playable species are forest animals upgraded to bipedal. Passes coherence at low ambition. Reflects within itself (the Wood, the Pact between species). Reflects polymyth thinly: animal-ancestry-as-character-archetype is Aesop-fable-territory which IS polymyth-readable but Humblewood does not push the fable layer beyond cute aesthetic. The Pact-between-species is potentially polymyth-rich (covenant-as-civilizational-substrate, sabachtan-as-cross-species-extension) but undeveloped in the published material. Verdict Tier 4 with potential for teacher-development. Strong fit for Junior English (grades 4-6) Aesop or Animal Farm units if teacher does the polymyth-development work themselves.
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-018
+TITLE: Strixhaven (MTG / Curriculum of Chaos 2021) — Tier 4 visit-only
+ROLE: dm
+
+Magical university with five colleges-of-magic. Passes coherence at low ambition — school setting with class schedules and exams. Reflects within itself and within D&D (standard 5e). Reflects polymyth WEAKLY: magic-school-as-Hogwarts-derivative does not interrogate the institutional form of education itself. Strixhaven treats academia as backdrop, not as polymyth-scannable system. Five colleges are glossy adjective-pairs (Silverquill = eloquence-and-conviction, Lorehold = past-and-present, Prismari = aesthetic-and-passion) rather than competing pedagogies that could be sabachtan-tested against each other. Verdict low Tier 4, visit only. Loses opportunity that an academia-themed setting should be polymyth-rich. Polymyth-rich academia-setting would explicitly thematize institutional capture, credentialism, the Arendt question of thinking-vs-knowledge, faculty-research-vs-teaching tension. Strixhaven does none of that. Curriculum-fit limited: only as lazy Hogwarts-substitute for younger students; cannot carry weight in any rigorous curriculum.
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-019
+TITLE: Curse of Strahd (5e 2016, Tracy Hickman / Christopher Perkins) — Tier 1 module
+ROLE: dm
+
+Strahd as failed-romance-trapped-in-fascist-power is the canonical D&D character study and reads almost too neatly into polymyth. Strahd's internal logic (he loves Tatyana, Tatyana refuses him, he cannot let her go, he constructs a domain to perpetually rerun the trauma) is gorgonification-from-the-inside-of-the-gorgon-himself. Barovia is petrified-tradition writ as geography. Reflects within itself with extreme density. Reflects polymyth across multiple operations simultaneously. Tier 1, strongest module match. Curriculum-fit: high-school Gothic literature unit (Frankenstein, Dracula, Wuthering Heights), philosophy-of-tragedy units (Hegel on Antigone, Comay on melancholia).
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-020
+TITLE: Out of the Abyss (5e 2015) — Tier 2 high
+ROLE: dm
+
+Underdark as collective-unconscious geography, demon-lords as ideological-totalities competing for substrate-control. Reflects polymyth medium-high because the demon-lords-as-ideological-cartoons can teach how ideology becomes self-replicating egregore. Tier 2 high. Curriculum-fit: dystopia units, Lord of the Flies, depth-psychology readings.
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-021
+TITLE: Tomb of Annihilation (5e 2017) — diagnostic-instrument-not-dimension
+ROLE: dm
+
+Setting (Chult region of Forgotten Realms) carries colonial-tropics representation issues that have been debated extensively in the D&D community. Passes coherence. Reflects within itself. The polymyth scan splits depending on how it is run. TREATED AS PUBLISHED (the module's voice and framing) it carries the colonial-adventure-fiction structure that polymyth is designed to diagnose, which makes it polymyth-readable as DIAGNOSTIC-OBJECT but not as inhabitable-dimension. TREATED AS REWRITTEN (running Chult with the polymyth scan operating openly, naming the colonial frame as the gorgonification it is) the module becomes a teaching-instrument about how published material reproduces gorgonifying structures. Verdict: not a Tier-1 dimension as published; Tier-1 teaching-instrument when the scan is run openly with the players. Curriculum-fit: post-colonial literature units (Achebe, Conrad, Rhys), but only with the diagnostic frame in place. Open question pen-010 specifies the diagnostic-protocol.
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-022
+TITLE: Wild Beyond the Witchlight (5e 2021) — Tier 2
+ROLE: dm
+
+Feywild-as-emotional-logic-incarnate. The Hourglass Coven (three hags as time-aspects) and the carnival-as-trap structure are polymyth-readable. Tier 2. Strong for younger bookworms because non-violence is mechanically supported (every encounter has a non-combat resolution path) which makes it the most pedagogically-flexible 5e module. Curriculum-fit: fairy-tale critique units, Brothers-Grimm-original studies, Angela Carter (The Bloody Chamber).
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-023
+TITLE: Storm King's Thunder (5e 2016) — Tier 2
+ROLE: dm
+
+Giant ordning-as-rigid-caste-hierarchy is polymyth-readable as essentialized-hierarchy-collapsing-under-pressure. The plot of the giant kings reorganizing the ordning maps cleanly onto Hegel's master/slave dialectic at civilizational scale. Tier 2. Curriculum-fit: political-philosophy units, Hegel, Hobbes.
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-024
+TITLE: Candlekeep Mysteries (5e 2021, anthology) — Tier 2 by premise
+ROLE: dm
+
+Anthology of 17 standalone adventures set around the great library of Candlekeep. Premise is polymyth-rich because Candlekeep IS a library and each adventure is hooked to a specific book in the collection. Tier 2 by premise; individual adventures vary in quality and polymyth-load. Curriculum-fit: outstanding for English curricula because the structure already maps book-to-adventure which IS the bookwormburrows operation in published form. The structural alignment with bb* is so close that Candlekeep could function as a soft-launch published-D&D-version of bookwormburrows for teachers who want to ease into the operation before running text-dimensions directly.
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-025
+TITLE: Phandalin starter cluster (Lost Mine / Icespire / Shattered Obelisk) — Tier 4 acclimation-only
+ROLE: dm
+
+Standard introductory adventures using FR-Sword-Coast geography. Polymyth-thin by design — they are intended to teach the rules, not to teach polymyth. Used in actual play (Rainbowsol's Samunovich campaign). Verdict Tier 4 visitable, suitable for new-bookworm acclimation, do not expect polymyth-loading from the module itself. The polymyth load has to come from teacher-additions or text-dimension layering on top.
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-026
+TITLE: Rime of the Frostmaiden (5e 2020) — Tier 3 cosmic-horror
+ROLE: dm
+
+Cosmic-horror tone, isolated frozen towns of Icewind Dale, the Frostmaiden goddess as substrate. Some polymyth-readable elements (the Crawling Cities, the Duergar isolation, the goddess-as-hostile-environment). Tier 3. Curriculum-fit: cosmic-horror unit (Lovecraft critically, Ligotti, VanderMeer's Annihilation).
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-027
+TITLE: Daggerheart (Critical Role / Darrington Press, May 2025) — Tier 1 polymyth-native ruleset
+ROLE: dm
+
+Story-driven ruleset by Spenser Starke. Hope/Fear duality dice (one twelve-sided die for Hope, one for Fear; player gets Hope-or-Fear resource on every roll). No initiative; GM-makes-moves-on-rolls (PbtA-influenced). Polymyth-relevant because the Hope/Fear mechanic IS a structural-encoding of the meaning-making vs meaning-subtraction axis. Every roll generates either Hope (player resource) or Fear (GM resource); the game balances these as opposing currencies. Closer to polymyth-native than any prior published ruleset. Hope & Fear expansion summer 2026 adds physical Fear-counter making the dynamic mechanically literal at the table. SRD released May 2025 (license-safe for derivative work). Verdict Tier 1 polymyth-compatible ruleset. Critical Role pivot away from D&D plus Keith Baker signing to Daggerheart suggests Daggerheart will become an industry-standard parallel-track to D&D. Strong candidate to BECOME the bookwormburrows mechanical default rather than 5e. See pen-007 for the default-ruleset decision.
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-028
+TITLE: Pathfinder 2e Remaster (Paizo 2023-2024, ORC license) — polymyth-aligned ruleset
+ROLE: dm
+
+Sibling of D&D 5e by direct lineage but mechanically distinct. Three-action economy, much more granular than 5e. Significant for the scan: Remaster explicitly REMOVED ALIGNMENT as a mechanical concept, replacing it with edicts/anathema (commitments-and-prohibitions defining a code of ethics that can change as the character changes). This is a polymyth-aligned mechanical move. Edict/anathema mechanically implements sabachtan engagement — character's ethical structure is a witnessable set of commitments rather than a metaphysical-tag. Verdict: usable as alternative ruleset for older bookworms (high school plus) who can handle the granularity. Worth running a unit specifically on PF2 Remaster's edict/anathema vs D&D 5e's residual alignment to teach how rules-design encodes ethics-design. ORC license (Open RPG Creative License) replaces OGL and is more stable for derivative work. See pen-009 for the teaching-unit spec.
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-029
+TITLE: 5e / 2024 revision (One D&D) — default mechanical surface
+ROLE: dm
+
+Default-assumed mechanical surface throughout prior sessions. Bounded accuracy, advantage/disadvantage, simplified skills. Polymyth-neutral as a ruleset because the rules do not enforce a metaphysics — Inspiration mechanic is the closest the rules come to having a polymyth-relevant feature, and it is too vestigial to teach with. Caveat: 2024 revision quietly removed alignment from chargen flow (it remains optional, no longer a required field). That removal is sabachtan-aligned in spirit though not as decisively as PF2 Remaster's full removal. SRD 5.1 (Creative Commons BY 4.0, January 2023) covers the portion usable in derivative work like bb v1 character-creator. Verdict: default mechanical surface for bookwormburrows, with Daggerheart as the alternative-track per pen-007.
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-030
+TITLE: 4th Edition selective import — power-scarcity for homework-earned moves
+ROLE: dm
+
+Prior decision held: skip 4e as combat system, retain its power-scarcity structure for homework-earned moves. The at-will/encounter/daily power structure encodes a useful pedagogical mechanic (work earns power) but the setting layer (World Axis cosmology, points-of-light tone) is one of three D&D cosmologies (see dim-008), not the unified default. Confirmed as prior decision. Do not import 4e wholesale.
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-031
+TITLE: Pre-3e and 3.0/3.5 — archaeological-only
+ROLE: dm
+
+OD&D (1974), AD&D 1e (1977-1989), AD&D 2e (1989-2000) plus 3.0/3.5 (2000-2008, the version DDO still runs). Mechanically incompatible with 5e. Polymyth-readable only as primary-source artifact for the history of D&D — Gygax's pulp-Tolkien-fusion, original Greyhawk, AD&D 2e specialty-priest era, 3.5 Forgotten Realms Time-of-Troubles to early Spellplague timeline. Verdict: not for play except in narrow case where running a 3.5-era FR campaign requires the timeline. For older bookworms specifically interested in D&D-as-cultural-artifact, AD&D 2e Player's Handbook can be read as primary source. Pathfinder 1e (2009-2019) is the 3.5 successor under OGL, superseded by PF2 Remaster, also archive-only.
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session.
+
+------------------------------------------------------------------------
+ID: dim-001
+TITLE: Text-as-dimension
+ROLE: both
+
+Any text with coherent internal logic is a visitable dimension. The text's world holds itself together while visited. Bookworm enters Hughes' Harlem, Shakespeare's Scotland, Wagamese's Fort Frances, Achebe's Umuofia — each dimension retains its own rules, pace, moral weight, language register. Rainbowsol does not homogenize dimensions into one operating system. Each dimension teaches the bookworm in its own way. Not all texts make good dimensions; some are too thin, some too chaotic. Rainbowsol curates which texts are worth visiting.
+
+DUAL-LAYER OVERLAY DEPLOYMENT (reusable pattern for single-author-driven cmp-NNN). Any text-as-dimension built on a single author corpus can deploy a base-plus-overlay cosmology. Layer B is the real historical or fictional setting the source text is about, held at full realism intensity per dm-010. Layer A is the author textual-overlay version of that setting, the same geography and timeline plus author-corpus ambient saturation. Default state holds the overlay applied; the bookworm enters in Hughes-Dream-Harlem or Shakespeare-Dream-Scotland or Wagamese-Dream-Fort-Frances rather than in the unmediated historical setting. Canonical pop-mechanism: the author documented physical presence-location (Hughes 20 East 127th workroom for cmp-001; analogous author-location for cmp-NNN). Visiting it lifts the overlay; the bookworm is in Layer B base alone. Crossing back restores the overlay. Layer B base persists underneath the overlay throughout; the historical period material is layer-invariant.
+
+SEVEN SURFACING FORMS (how the Layer A overlay manifests as findable in-dimension material). (1) Physical books on tables in apartments and reading rooms. (2) Poems clipped to walls in rooms where someone has read them. (3) Story-pages on typewriters in writing surfaces. (4) Song lyrics on radio and other audio surfaces in the period sound environment. (5) Passages read aloud by NPCs. (6) NPC dialogue spoken in the author text-canonical register. (7) Events from the author works happening to a different bookworm-perspective than the canonical foreground perspective. Each surfacing form is AMBIENT TEXTURE of the overlay NOT a portal mechanism. The portal class is named separately at ml* PM14 MATRIX anchor MIRROR-AS-UNIVERSAL-PORTAL CLASS sub-clause.
+
+CAMPAIGN INSTANTIATION. cmp-001 instantiates this pattern for Langston Hughes 1958 Harlem at cc-cmp001-narrative-architecture MAY 10 2026 EXTENSION REVISED and cc-cmp001-hughes-corpus-overlay. Future single-author-driven cmp-NNN inherit the same pattern instantiated with their own author + setting + portal-location.
+
+NON-INHERITORS. Multi-author campaigns (anthologies, era-substrates without a single author-presence), non-author-driven campaigns (historical events without a textual source), and campaigns where the source text IS the bookworm diegetic-world rather than an overlay-on-historical-world do not inherit this pattern. They use other text-as-dimension instantiation modes.
+
+MAY 10 2026 ADDITION. Generalized from cmp-001 substrate per the EVERYTHING-IN-A-STAR-FILE-AT-SEMINARSCHOOLS DISCIPLINE futureproofing principle. Pattern available for cmp-NNN inheritance starting with cmp-002.
+
+------------------------------------------------------------------------
+ID: dim-002
+TITLE: Playstyle-vs-lore axes
+ROLE: both
+
+Dimensions vary along two independent axes. (1) PLAYSTYLE: how the dimension handles resolution — story-privileged (quality of narration decides), rules-tight (internal consequences are strict), rules-loose (DM rulings dominate). (2) LORE: how much canon-content the dimension carries — canon-heavy (specific events must be honored), canon-light (setting provides tone, events flexible), canon-agnostic (only structural features preserved). Different texts position differently. Macbeth = story-privileged + canon-heavy at the plot-spine, flexible in scenes between. Icespire Peak (original campaign) = rules-tight + canon-light. Rainbowsol names the axes at session start so bookworms know which dimension they are in.
+
+------------------------------------------------------------------------
+ID: dim-003
+TITLE: Dimensions in play
+ROLE: both
+
+Active bookwormburrows* dimensions. TEXT-DIMENSIONS: Hughes' Harlem (Thank You M'am), Shakespeare's Scotland (Macbeth), Wagamese's Fort Frances (Indian Horse), Achebe's Umuofia (Things Fall Apart). HOMEBREW-DIMENSIONS: Venus Island (Blob, Epic Cat, [REDACTED] Chen, Ki, Flying Squirrel Man). CAMPAIGN-DIMENSIONS: Icespire Peak (Rainbowsol running for existing group, character Samunovich the Bard). New dimensions added as Rainbowsol curates. No pre-set canonical list — the list is the currently-active visitable set.
+
+------------------------------------------------------------------------
+ID: dim-004
+TITLE: D&D sub-worlds as available dimensions (non-ranked)
+ROLE: both
+
+D&D is a multiverse of coherent sub-worlds, not one unified canon. Teacher picks a sub-world; campaign stays inside it unless cross-dimensional burrows happen. Not ranked. Available sub-worlds passing three-tier + two-layer + sabachtan filters: PLANESCAPE (Sigil portals, Outer Planes, belief-as-physics, faction-as-ideology-made-material; Zeb Cook's philosophical substrate — factions map to Nietzsche/Stirner/Hobbes/Spinoza/critical-religious-studies positions; cannot be played as combat-game because belief is built into mechanics). RAVENLOFT (gothic-horror Domains of Dread; darklord's domain IS their psychology externalized; moral-weight as mechanic — Mists respond to moral choices; gothic-literary substrate — Stoker/Poe/Shelley; moral choices carry real geography-consequence). EBERRON (noir-fantasy magitech; surface narratives always mask material operations; Keith Baker drew on Chandler/Hammett, East India Company/Standard Oil history, interwar European anxiety; setting punishes taking-at-face-value and rewards structural reading). DRAGONLANCE (operatic-epic; three-moons magic + gods-absence-and-return as collective-consciousness operations; heroic-destiny bypass available so partial-forcing). FORGOTTEN REALMS (largest accretive setting; regional curation required — Thay, Waterdeep, Menzoberranzan, Myth Drannor are collective-consciousness-forcing; many other regions are generic adventure-backdrop; teacher curates). GREYHAWK (Gygaxian sword-and-sorcery; pulp-register; thin forcing but cultural-foundational for D&D-genre language). SPELJAMMER (crystal-spheres wildspace space-fantasy; travel-backdrop register; thin substrate but playable as lightweight dimension). MYSTARA (BECMI-era Known World; Immortals-as-ascended-mortals is potentially collective-consciousness-forcing but was never developed; publishing-dead with thin canon — room for bookworm authorship). BIRTHRIGHT (bloodline-inheritance-from-killed-gods; collective-divine-consciousness distributed into mortal bloodlines; publishing-dead; potentially polymyth-rich if teacher develops the bloodline-substrate angle). HARD-EXCLUDED: DARK SUN (fails sabachtan-exclusion; core operations — chattel slavery, racial hierarchies as metaphysics, defiling magic — are indefensible at operational substrate level; see sabachtan-exclusion principle in ml*). FR TIMELINE NOTE: Forgotten Realms has four mutually contradictory timelines (pre-Time-of-Troubles, post-Time-of-Troubles, post-Spellplague, post-Sundering). Treat each as its own micro-dimension. Teacher picks the century (e.g., '1372 DR'). Teacher does NOT need D&D expertise — AI holds the dimension-detail. Teacher treats each sub-world the same way they would treat any text-dimension: reads enough to run it, uses it, moves on.
+
+------------------------------------------------------------------------
+ID: dim-005
+TITLE: Dark Sun (hard exclusion from bookwormburrows*)
+ROLE: both
+
+Not burrow-able. Study-as-artifact only, if at all, and only for older bookworms with the frame-work to handle diagnostic analysis. REASON: sabachtan-exclusion principle — see ml* methodology entry. Dark Sun passes internal coherence (designers Denning/Brown consulted paleoclimatologists on ecological-collapse; the world's logic is tight) and passes the Yourcenar-test (real scientific substrate for ecological collapse). Under the three-tier text-selection rule ALONE it would be Tier 1 or Tier 2. But the setting's core mechanical operations REQUIRE chattel slavery as economic substrate, racial hierarchies presented as metaphysical fact (halflings as cannibal-savages, thri-kreen as alien-insect caste, human tiered castes, defiler/preserver moral-binary bound up with race and class), and defiling magic — casting spells by killing the land and the beings in it — as the rational power path. Cannot remove these operations without destroying the setting; they ARE the setting. Benefit-of-the-doubt, if extended, would affirm the operations. CONTRAST WITH INDIAN HORSE: Indian Horse (Wagamese) is dark content and Tier 1. The darkness in Indian Horse is the SUBJECT of the text; the text's operations are sabachtan-compatible — frame-break critique rather than structural endorsement. Dark Sun's operations are not the subject critiqued; they are the engine the setting runs on. Darkness-as-subject vs. darkness-as-engine. PUBLISHER-LEVEL CONFIRMATION: WotC's Kyle Brink (D&D executive director) stated 2023 the setting is 'problematic in a lot of ways given current inclusion standards.' Dark Sun has not been published for 5e. Bookwormburrows* does not revive it.
+
+------------------------------------------------------------------------
+ID: dim-006
+TITLE: Lençóis Maranhenses (biome-dimension, non-text)
+ROLE: both
+
+Burrow-able non-text dimension. The dune-and-lagoon field in Maranhão state, northeastern Brazil. UNESCO World Heritage Site 2024. 155,000 hectares. Three-biome transition zone (Amazon, Cerrado, Caatinga). Full scholarly and operational content in ml* Lençóis methodology entry and citation [48]. WHY IT IS A DIMENSION: the biome has its own internal logic that holds itself together while visited. Rainfall (~2000mm/year) raises the water table above sand level, impermeable sediment prevents drainage, lagoons form in basins between barchan dunes, dry season evaporates lagoons, wind migrates dunes 4-25m/year, endemic species (Pininga turtle, wolf fish) evolved to exploit the cycle. Coherent self-sustaining system, planet-scale pedagogy. WHY IT BURROWS STRONGLY (Tier 1 by three-tier and two-layer tests — see ml*): internal coherence (hydrology + aeolian geomorphology + biology interlock); external coherence (reflects Indra's Net as geometry — aquifer links every lagoon, wind regime links every dune, local state encodes global state across the shared substrate); sabachtan-compatibility (the biome does not close meaning; it is net-participating and teaches the student non-reduction between categories); Yourcenar-test substrate (real hydrogeology, real aeolian dynamics, real ecology — not genre-echo-chamber). WHAT BOOKWORMS LEARN BY BURROWING: continuous-variable reasoning. The student who enters Lençóis stops treating desert and lagoon as primitives and starts reading water-presence and sand-presence as the underlying variables, with biome-labels as post-hoc summaries. Indra's Net as geometry of reflective-correspondence (each node encoding all others through shared substrate). Shifting-mosaic steady state (stability at the aggregate that no single coordinate exhibits). Fuzzy-logic-as-research-program (textbook fuzzy handles graded membership within fixed categories; Lençóis teaches where that formalism needs coupled-node and time-evolving extensions to actually describe what the biome is doing). HOW TO ENTER IT AS A DIMENSION: Rainbowsol guides bookworms across the threshold. The burrow is into the biome as a whole, not into one lagoon or one dune. Student takes a bookworm-scale role — a small biologist on field research, a child from one of the living communities (Queimada dos Britos, Baixa Grande, Ponta do Mangue), a migratory bird arriving at the lagoons, a Pininga turtle waiting out the dry season. Character scale is deliberate: small relative to the biome is the correct scale for full participation. SESSION STRUCTURE: works at multi-session arc matching the biome's seasonal cycle. Session 1 = wet season arrival, lagoons full. Session 2 = dry-season onset, lagoons evaporating, dune migration accelerating. Session 3 = deep dry, community relocation decisions, wolf-fish eggs waiting. Session 4 = next wet season, new lagoon configuration, Pininga turtles emerging. The seasonal cycle is the campaign structure. CROSS-DIMENSION CORRESPONDENCE: bookworms emerging from Lençóis often carry forward net-geometry intuitions that activate when they later enter Planescape (belief-as-physics as the same substrate-coupling at a different variable), Ravenloft (Mists-respond-to-moral-choice as coupling), or any Indra's-Net-rich text-dimension. The biome teaches geometry that transfers. DISTINCTION FROM DESERT FRAMING: the biome receives more annual rainfall than Scotland or London. Desert by morphology, not by rainfall. The standard desert-wetland binary fails here on its own terms, which is part of what makes the dimension pedagogically sharp — students who arrive expecting 'desert' have their category dissolved by the operation of the biome itself.
+
+EXTENSION:
+Full scholarly content in ml* Lençóis methodology entry; citation [48] documents sources (UNESCO WHC 1611, Wikipedia, Live Science Dec 2025, Nature/Scientific Reports 2019, geologyscience.com, ladatco.com).
+
+
+########################################################################
+SECTION: BOOKWORM (CHARACTER-BUILD)  (11 entries)
+########################################################################
+
+------------------------------------------------------------------------
+ID: bw-011
+TITLE: bb* vs /bookwormcard/ vs /bb/ (three-URL architecture: operation file, game app, landing page)
+ROLE: both
+
+Three URLs under seminarschools.com share the bookwormburrows ecosystem. Each names a different layer with a different audience.
+
+(1) bb* (with asterisk) is the operation file. The HTML lives at /polymyth/bookwormburrows/ canonical. bb* is the framework-internal substrate that defines bookworms, dimensions, eating-as-reading, the silkworm-to-cocoon-to-self-named-emergence arc, DM protocol, session structures, credit integration. bb* is primarily teacher-facing. It is the surface where teachers organize all the concepts they teach. Cross-references to ml* and mc* and cc* content surface here for the teacher who needs the whole framework in one navigable hub.
+
+(2) /bookwormcard/ (May 10 2026 new URL) is the live character-creator app and future social-network surface for students. This was previously at /bb/ but the URL collided with the bb*-file naming convention. The game lives at /bookwormcard/ from May 10 forward. The matrix-aesthetic character creator runs here. Adults post AS their characters here on the text-only social media surface per pen-004. Under-18 character creation requires parent or guardian presence per pen-004 parental-presence design.
+
+(3) /bb/ (May 10 2026 new role) is the landing page. Pure routing. Two cards on the page. One links to /bookwormcard/ for the game with copy aimed at students who want to play. One links to /polymyth/bookwormburrows/ for bb* the teacher console with copy aimed at teachers who want to organize their teaching of the framework. Anyone arriving at /bb/ gets routed to the surface that fits them. No characters created here. No content authored here. The page exists so that the previously-conflated /bb/ URL becomes the unifying entry-point for both audiences rather than the game-only URL it used to be.
+
+THE ASTERISK-SUFFIX CONVENTION still tracks across the meaninglib. ml*, mc*, bb*, cc*, core* are framework files. Their unstarred counterparts when they exist are derivative public-facing surfaces. With this refactor /bb/ becomes the landing-surface for the bb* substrate. /bookwormcard/ becomes the game-surface that consumes bb* one-way. The convention is load-bearing because conflating these three layers collapses what each layer does and loses the substrate that makes the system coherent.
+
+ORIGIN. May 10 2026 session. The user corrected an AI assumption that /bookwormcard/ was the character-creator. Original April 28 2026 framing from leizu-build-extended-3 had bb (no asterisk) named as both the social-network site AND the URL /bb/. The May 10 refactor splits the bb-no-asterisk layer into TWO distinct things. The game and social network move to /bookwormcard/. The landing page becomes /bb/. Three URLs. Three audiences. One teacher-organizing hub at bb*.
+
+CROSS-REFERENCES. pen-004 (bb v1 deployed at /bookwormcard/, URL references updated from /bb/ to /bookwormcard/, retagged from pending May 12 2026). pen-011 (public-facing promises rule, applies to /bb/ landing surface after refactor). pen-012 (off-upload tracking entry for /bb/-folder-to-/bookwormcard/ migration and bookwormcard-game PDF URL update). ml* EVERYTHING-IN-A-STAR-FILE-AT-SEMINARSCHOOLS DISCIPLINE (Component B: all * files online at seminarschools.com; the tri-URL architecture is one implementation of that singularity).
+
+MAY 12 2026 CORRECTION. Multi-line find-replace damage swept from this entry. Title-slot 3, section (1) duplicate canonical/legacy-mirror phrasing, section (2) previously-at URL, section (3) landing URL plus arriving-at clause, asterisk-convention closing sentence URL, and cross-references pen-004 + pen-011 + pen-012 all had /bb/ wrongly substituted to /bookwormcard/ at some earlier point. Fixed under audit-deployment-first protocol. _redirects file at site root confirms the canonical URL assignment.
+
+EXTENSION:
+May 10 2026 extension renamed from bb*-vs-bb to reflect three-URL architecture. May 12 2026 corruption sweep fixed multi-site find-replace damage where /bb/ instances had been wrongly substituted to /bookwormcard/.
+
+------------------------------------------------------------------------
+ID: bw-001
+TITLE: Bookworm (entry-level subject)
+ROLE: both
+
+Entry-level position in bookwormburrows*. A bookworm can burrow between soils — appears in one dimension, disappears, surfaces in another. This magical earthworm power is how any participant begins. The bookworm does not need to know the destination to burrow; the burrowing itself is the skill. Bookworms can enter books, apples, any self-contained dimension that has its own internal logic. Starts as larval: eats without designing. Becomes subject when eating is joined by designing. Everyone in bookwormburrows* begins as a bookworm regardless of age or prior reading experience. Cultural touchstone: Richard Scarry's Lowly Worm as children's-literature figure of small-scale confident participation across a world too big for him, whose mobility across every scene in The Busy World (named not accidentally) generates the reader-experience of cross-dimensional presence. The bookworm-inside-a-world pattern is textually present in the name-pair (Worm/World) even without explicit page-crossing mechanics. Lowly is theoretical-space-reference, not citation — Scarry's IP is not imported, but the pattern he exemplifies is acknowledged as cultural commons. A bookworm in bookwormburrows* is Lowly-scaled: small relative to the text-dimension being entered, which is precisely the correct scale for full participation rather than a preliminary stage to be outgrown.
+
+EXTENSION:
+Hey Arnold reference: worm inside apple, unexpected dimension inside ordinary object.
+
+------------------------------------------------------------------------
+ID: bw-002
+TITLE: Eating-as-reading (cannibalistic-reading)
+ROLE: both
+
+Core mechanic. Bookworm reads text, but reading here is ingestion not spectating. Text enters the worm; digestion converts text into subjectivity-material. What the worm eats becomes what the worm is made of. Standard reading positions reader outside text; analysis positions reader further outside. Eating-as-reading is inside. Hughes' Mrs. Jones and Roger become internal substance. When the bookworm encounters a parallel moral situation in a different text, it does not 'recall Hughes' — it feels Hughes as part of its own response. Test of eating: did the text change what the worm does next, or only what it can describe? Only the first counts.
+
+------------------------------------------------------------------------
+ID: bw-003
+TITLE: Designing-the-story-you-are-on
+ROLE: both
+
+Second core mechanic. Subjectivity move. A bookworm that only eats is a passive feeder. A bookworm that eats AND designs becomes subject. Designing is not inventing fiction — it is taking responsibility for the arc of your own becoming. What soils you enter next. What you refuse to eat. What you carry forward. What you leave in one soil to pick up in another. Pedagogical assessment aligns here: a student's work is evidence of eating (what they took in) and designing (what they are doing with it). Character choices, next-session requests, moral adjudications, long-form essay argument — all are design-artifacts.
+
+------------------------------------------------------------------------
+ID: bw-004
+TITLE: Developmental arc: bookworm → silkworm → cocoon → self-named subject
+ROLE: both
+
+Five-stage arc (April 2026 expansion from bookworm→subject to full silkworm geometry — see ml* silkworm-developmental-arc methodology entry for framework-wide version). (1) BOOKWORM — eats text, burrows between dimensions, not yet designing. Larval. Receptive subjectivity, takes shape of what it eats. No particularity yet. (2) SILKWORM — eats AND designs. Digests mulberry (text-dimensions) into fibroin (secreted substrate: essays, character-choices, arcs, homework, choices about what to carry forward and what to leave). What comes OUT of the student is recognizably theirs. First moment of particularity. Subjectivity here is productive — the silk is always OUTSIDE the worm; the student grows by externalizing digested substrate, not by internal accumulation. What bookwormburrows* previously called 'subject' collapses two things together; silkworm is the more precise name for Stage Two. (3) COCOON = HEGELIANEGIRL — silkworm wraps itself in its own silk. Previous form negated, next form not yet determined. Universal capacity for authentic subjectivity. The cocoon is built from the student's OWN digested substrate, not from external scaffolding — the institution cannot build the cocoon for the student. This is the stage where the teacher and the game STEP BACK. (4) SELF-NAMED EMERGENCE — what comes out of the cocoon is a particularity that names itself. Not a pre-specified moth. The name is the subject's first act; the subject comes into being by naming. An academy that hands its graduates pre-made identity-labels collapses this stage back into species-production. Emergence is by design outside institutional scaffolding. (5) EGGS-ON-MULBERRY — emerged subject's output becomes mulberry for next generation of bookworms. Their silk (papers, characters, modules, records) is the substrate subsequent bookworms burrow through. Pedagogical recursion closes. RAINBOWSOL POSITION (unchanged): Rainbowsol is Rainbowsol's singular founder/DM role. Rainbowsol is one name-out-of-the-cocoon (Rainbowsol's particularity at Stage Four), not a rank bookworms graduate to. Other emerged subjects name themselves under their own names. Growth continues indefinitely after emergence through further eating, further digesting, further secreting, and potentially further cocoons (multiple cocoon-cycles across a lifetime is expected rather than anomalous). WHERE THE GAME ACTS: bookwormburrows* directly scaffolds Stages 1 and 2. The game CAN scaffold cocoon-conditions (classroom allows withdrawal, individual work periods, student-held character sheets, minimal DM interference) but CANNOT scaffold emergence. Emergence is the student's own act. See Leizu-Academy-withdrawal entry in ml* for the institutional-design version. DOMESTICATION RISK (real): Bombyx mori the insect was bred to produce silk at the cost of flying and feeding — domesticated moths cannot survive. Pedagogical institutions risk producing excellent silkworms who never moth. Game design must hold this pressure; evaluating students on silk quality only rewards Stage Two and can strand them there.
+
+EXTENSION:
+Companion entries: ml* silkworm-developmental-arc methodology entry (framework-wide version); ml* hegelianegirl entry (cocoon-stage, self-naming); ml* Leizu mythic substrate entry (institutional design constraint); bw-002 eating-as-reading; bw-003 designing-the-story-you-are-on.
+
+------------------------------------------------------------------------
+ID: bw-005
+TITLE: Everyone makes their own character
+ROLE: both
+
+Non-negotiable. Each participant designs their own character from the start. No pre-fabricated party rosters for students to pick from. Character creation is the first act of designing — and therefore the first subjectivity move before a single soil has been entered. Character sheet held by student not DM. Evolution of the character across sessions is the visible trace of the bookworm becoming subject. Character-sheet changes = subjectivity-in-progress.
+
+------------------------------------------------------------------------
+ID: bw-006
+TITLE: Burrow as wormhole (worms burrowing between dimensions)
+ROLE: both
+
+The burrow IS the cross-dimensional mechanism. Not metaphor, operation. Worms burrow: disappear burrowing in, appear burrowing out in another realm. Wormholes at bookworm-scale. No hub, no transit-space, no Bookworm-Earth interior to traverse — the burrow is the crossing itself. Bookworms start with rainbow-magic (Rainbowsol's magic), which IS what lets them burrow. The rainbow is the signature of the dimensional crossing. CULTURAL-COMMONS PRECEDENT: rainbow-as-threshold-between-worlds is a cross-cultural pattern running through Bifrost (Norse rainbow bridge between human-world and realm-of-gods), leprechaun's pot of gold at rainbow's end (Celtic rainbow marking the fairy-otherworld threshold), Rainbow Bridge for pets (1959 grief-poem, now ubiquitous in Western pet-bereavement culture, explicit descent from Bifrost), Nyan Cat (rainbow-trailed Pop-Tart cat crossing parallel universes in meme-canon, cross-media cameo everywhere from Adventure Time to MCU to Android easter eggs), MCU Bifrost (explicitly identified as Einstein-Rosen bridge / wormhole). Four-plus independent egregores producing the same structural move — rainbow as signature of inter-realm mobility — without coordinating. Bookwormburrows* burrow-and-rainbow-magic inherits from the full commons-pattern, not from any single IP. The pattern is cultural commons; specific characters (Nyan Cat, leprechaun figures, Heimdall) stay with their owners. FUNCTIONAL CONSEQUENCES: burrows are cheap, repeatable, require no destination-mastery. A bookworm can try a dimension, leave, try another, come back. What matters is what they DO when they arrive. Cross-dimension travel is bookwormburrows*-native — the connective-tissue D&D settings (Planescape portals, Spelljammer wildspace, Ravenloft Mists) are NOT required for travel; those are in-dimension local-travel theories specific to their own settings. CHARACTER-TRANSITION AT BURROW: see bookworm life-cycle entry — character-jewel ends at the burrow, bookworm continues carrying subjectivity-material, new character forms on arrival in the new dimension. Rainbowsol (founder/DM of bookwormburrows*) is the one who holds the threshold across burrows — the rainbow-magic flows through Rainbowsol's authorial position. INDEPENDENT-ARRIVAL PRECEDENT FROM POP-CULTURE EGREGORE — STRANGER THINGS (Netflix, Duffer Brothers, 2016-2025): Season 5 Volume 2 (2025) revealed that the Upside Down is not a parallel dimension but a traversable wormhole-bridge connecting Earth (Rightside Up) to a destination-dimension called the Abyss / Dimension X (per Stranger Things Fandom Wiki, ScreenRant, ComicBook.com, Netflix Tudum, all Dec 2025). Three-plane cosmology: Earth + Upside Down (bridge) + Abyss (destination). Upside Down is the wormhole, not a world. Structure, not destination. The show's vines-and-tendrils-and-webbing are the crossing-signature substrate — per ComicBook.com, the Upside Down 'resembles Hawkins because it exists as the friction point where the wormhole pushes against the physical world, creating a distorted echo of the environment.' The threshold-flesh between worlds is Earth's pressure-imprint on the bridge's skin, not a duplicate Earth. This is structurally IDENTICAL to bookwormburrows* architecture: burrow = wormhole (rift / gate / wound-in-space-time), no hub-dimension, crossing-signature = substrate (for Stranger Things: vines; for bookwormburrows*: rainbow-magic), dimensions remain their own realms not nested inside a connecting super-world. Two independent-arrival confirmations: (1) bookwormburrows* rejected Bookworm Earth (hub-dimension worms traverse) and (2) Stranger Things rejected Upside Down-as-parallel-world — same correction, same reason. Note: Stranger Things characters THEMSELVES use D&D cosmology to theorize their reality. Dustin names the Abyss after 'chaotic planes of Dungeons & Dragons' per ComicBook.com; Mike/Lucas/Dustin call the Upside Down 'the Vale of Shadows' in Season 1 per Stranger Things Fandom Wiki. The children use D&D as interpretive substrate to navigate actual inter-dimensional events — which is precisely the bookwormburrows* pedagogical operation enacted inside a 2016-2025 mass-audience egregore.
+
+------------------------------------------------------------------------
+ID: bw-007
+TITLE: Character life-cycle (bookworm continuous, character local)
+ROLE: both
+
+Bookworm enters dimension → becomes a character appropriate to that dimension → character evolves through play → character can die. When character dies: bookworm spawns again. Spawn state: fetusy-worm-thing. Returns to pre-character larval pre-subjectivity-expression. Same bookworm, fresh slate for next character. TWO RESPAWN PATHS: (1) FRESH — new worm becomes whatever character they wish, no carryover from the dead character beyond what the bookworm learned at meta-level. No cost. (2) CLONE — new worm respawns as a clone of the dead character but carries a HINDRANCE that must be HEALED. Narrative cost, extra work, but continuity of arc. Both valid. The hindrance is dimension-appropriate (a Ravenloft clone carries a Dark Gift residue; a Planescape clone carries a faction-mark that does not match their new stance; a Macbeth clone carries a guilt-echo that bleeds into unrelated scenes). Teacher and AI together determine the hindrance at respawn; student plays the healing work. MECHANICAL INVENTORY AT DEATH: earned moves, items, power-slots belong to the CHARACTER, not the bookworm — lost at death. SUBJECTIVITY-MATERIAL (what the bookworm learned from eating the dimension's texts, encounters, consequences) carries — this is what the bookworm IS, durable across character-deaths. Teacher and AI adjudicate what subjectivity-material is, how it shows up in the next character. MECHANICAL INVENTORY AT BURROW: same rule. Burrow out of Macbeth into Planescape = Macbeth-character ends, new Planescape-character forms. Earned moves stay with the ended character. Subjectivity-material crosses. DEATH IS SURVIVABLE, STAKES REMAIN REAL: because respawn exists, death does not collapse the bookworm's arc. Teacher can let characters die without crisis. But the character CAN end — stakes are real at the character-scale even when the bookworm is durable at meta-scale.
+
+------------------------------------------------------------------------
+ID: bw-008
+TITLE: Silkworm stage (eating + secreting)
+ROLE: both
+
+Stage Two of the bookworm→subject arc, named specifically April 2026. Previously collapsed into 'subject' in bw-004; now held separately because the transition from eating-only (bookworm) to eating-and-secreting (silkworm) is the first move toward particularity and the game's pedagogical center of gravity. OPERATION: student has eaten enough text-dimensions to digest them into secreted output — essays, character-arcs, homework, project-deliverables, session-design, journal entries. The secretion is fibroin-analog: the input (mulberry = assigned text) transformed into thread (student's own voice, own structure, own argument). Recognizably this student's silk, not that student's, even when the input was shared across the classroom. TEST FOR THE STAGE: can the student produce output that they themselves, re-reading later, recognize as theirs and not as regurgitated text-dimension? If yes, silkworm is operational. If output is summarization, restatement, or parroting, the student is still in bookworm stage — more eating required before digestion produces genuine secretion. EXTERNALIZATION PRINCIPLE: silk is OUTSIDE the worm. Subject grows by what it externalizes as structure, not by what it accumulates inside. This contrasts directly with standard developmental models (internalization). The student's portfolio, character arcs, essays, module-contributions are the subject — not a record of the subject, the subject itself. LEIZU PATRON: the stage is mythically patronned by 嫘祖 Leizu (see ml* Leizu-mythic-substrate entry). Leizu Academy by name is the silkworm-stage academy. Seminar Schools parallel. Both institutions scaffold the digestion and reel-and-loom scaling of secretion. Neither builds the cocoon; cocoon is built by the silkworm from its own silk. GAME MECHANICS: silkworm stage maps to bookwormburrows* work-quality adjudication (con-001). Strong paragraph = silkworm-grade secretion. Weak paragraph = bookworm stage still operative, more eating needed. Degradation consequences (con-003) and marshmellowblob absorption (con-002) both indicate stalled bookworm stage, not silkworm failure — different failure mode. Silkworm failure mode is narrower: student secretes but secretion is not digested (output that looks like silk but is actually undigested mulberry — copying, paraphrasing without understanding, AI-generated submission without the student's own digestion). Fibroin-test catches it: does the secretion carry the substrate the student ate, or is it cocoon-shell without worm-inside? COCOON THRESHOLD: when the silkworm wraps itself in its own silk, the game steps back. Institution does not build the cocoon. See bw-009 cocoon-stage entry and ml* hegelianegirl entry.
+
+EXTENSION:
+Extension of the original bookworm→subject arc; silkworm is the precise name for what was previously conflated under 'subject' at Stage Two. Stage Four 'subject' refers specifically to the self-named emergence.
+
+------------------------------------------------------------------------
+ID: bw-009
+TITLE: Cocoon stage (hegelianegirl — universal capacity, pre-named)
+ROLE: both
+
+Stage Three of the bookworm→subject arc. The silkworm wraps itself in its own silk. Previous form (silkworm) negated; next form (named subject) not yet determined. Full philosophical content in ml* hegelianegirl entry; this entry holds the bookwormburrows* operational layer. WHAT HAPPENS: the student withdraws into their own accumulated output. Not literal isolation — emotional-intellectual withdrawal inside an ongoing game or classroom. Less interaction with the DM, less visible design-of-next-steps, less conspicuous engagement. Student appears quieter. Character sheet updates slow. This often reads as disengagement from the outside; in the cocoon stage reading it as disengagement and pulling the student out prematurely is the worst possible intervention. INSTITUTION STEPS BACK: Leizu Academy and Seminar Schools (silkworm-stage institutions) cannot build the cocoon for the student. Teacher recognizes cocoon-signs and gives space. DM continues to run the game but reduces direct pressure on the cocooning student. Other bookworms continue their own arcs in parallel. WHAT IT IS NOT: cocoon is not depression, not avoidance, not disengagement from the world. Cocoon is active self-enclosure in what the student has already secreted. The student is working on themselves using their own silk as substrate. Hegelianegirl is the shape of that work at the stage — pure universal capacity for authentic subjectivity, the previous form negated, the next form not yet named. CHARACTER-SIDE INDICATORS: student's character in-game may go silent too — not marshmellowblob absorption (that's Stage One failure, bw eats nothing), not character degradation (that's Stage Two failure, silkworm submits weak work). Character-going-silent in cocoon-stage typically shows as the character taking a contemplative in-fiction arc: retreat to a monastery, long journey alone, season of apprenticeship. The fiction tracks the student. Good teacher notices and gives the character space. EMERGENCE FOLLOWS NATURALLY OR DOES NOT FOLLOW AT ALL: cocoon does not guarantee emergence. Student may remain in cocoon across a whole semester. Student may emerge only after years, after leaving the academy, after multiple cocoon cycles. Bookwormburrows* does not set a timeline for emergence because doing so pre-specifies the stage and collapses it. MULTIPLE COCOONS ACROSS A LIFE: expected rather than anomalous. Subjects do not emerge once. They eat new dimensions, secrete new silk, cocoon again, emerge again renamed or with revised names. The arc is recursive at the life-scale, not linear.
+
+EXTENSION:
+Philosophical content in ml* hegelianegirl entry. Institutional design-constraint content in ml* Leizu mythic-substrate entry.
+
+------------------------------------------------------------------------
+ID: bw-010
+TITLE: Self-named emergence (Stage Four — particularity)
+ROLE: both
+
+Stage Four of the bookworm→subject arc. The cocoon opens. What emerges is a particularity that names itself. Not a pre-specified moth — bookwormburrows* rejects the moth-metaphor on purpose because Bombyx mori as biological species produces Bombyx mori, and the species-designation pre-specifies the individual. Hegelianegirl-as-cocoon removes species-pre-specification. The emerging subject names themselves; the name IS the act of emergence. ARENDT CORRESPONDENCE: close to Arendt's analysis of action and identity (The Human Condition 1958) — the who emerges in the act. The name is not a label applied to a pre-existing interior; the name is the subject's first act, and the subject comes into being by performing it. You cannot know in advance what name will come out. Indeterminacy is load-bearing. WHAT IT LOOKS LIKE IN THE CLASSROOM: a student who had gone quiet during the cocoon stage (bw-009) begins producing work that is recognizably ON THEIR OWN TERMS. Not following the assignment, not resisting the assignment — operating alongside it, from a position the assignment did not specify. Their character-arcs, essays, module-contributions start carrying a signature the teacher recognizes without being able to name it first. Often the student can name it themselves now: 'I write about X because Y,' 'my interest is Z,' 'I want to work on W.' The name may not be a single word. Usually it is a posture, a question, a direction. Rainbowsol is the name Rainbowsol came out of his own cocoon under. Other names are other particularities. INSTITUTION'S ROLE: recognize without pre-specifying. The academy records graduation and credentials; the academy does not hand the student their identity. Collapsing recognition and self-naming is the core failure mode for the institution at this stage. RAINBOW MAGIC (see ses-003): teachers running Rainbow Magic across multiple classrooms recognize emergence when they see it. They cannot induce it. They can hold the classroom conditions that do not prevent it. EMERGENCE IS NOT PERMANENT STATE: named subject can eat new dimensions, cocoon again, emerge again under revised or extended names. Multiple cocoons-and-emergences across a life is the expected cycle, not the exception. Emergence is a stage the subject passes through, not an arrival point. POST-EMERGENCE CONTRIBUTIONS: the subject's output at this stage becomes mulberry for subsequent generations of bookworms (Stage Five — eggs-on-mulberry). Students who have emerged often become informal silkworm-stage mentors for younger bookworms in the academy — their silk becomes substrate for the next cohort's eating. NOT promotion to Rainbowsol — Rainbowsol is Rainbowsol's singular role, not a rank in the arc.
+
+EXTENSION:
+Companion: ml* silkworm-developmental-arc methodology entry; ml* hegelianegirl entry; Arendt citation in ml* [20].
+
+
+########################################################################
+SECTION: CHARACTER-CREATION  (6 entries)
+########################################################################
+
+------------------------------------------------------------------------
+ID: char-001
+TITLE: Character-creation-as-writing-exercise
+ROLE: both
+
+First session of any campaign is character creation, held as its own session. Students write their character into existence through age-banded question sets. Output is both a character sheet and a first piece of writing assessed as writing. The two functions are not separate: how well the character is written is how well the character functions in play. Weakly-written character = weak in-dimension performance. Strongly-written character = strong performance. This alignment removes the 'game vs. schoolwork' tension at the outset.
+
+------------------------------------------------------------------------
+ID: char-002
+TITLE: Age-banded question sets (9-11 set)
+ROLE: both
+
+Six-question set for bookworms 9-11: (1) Who was your character before the story began? (2) What do they want more than anything? (3) What are they afraid of? (4) What skill did they learn from someone who loved them? (5) What do they carry with them always and why? (6) What would make them break their own rules? Each question requires 2-3 sentences minimum. Answers become the character sheet. Questions open expansion sets available as bookworm develops.
+
+------------------------------------------------------------------------
+ID: char-003
+TITLE: Character sheet as living document
+ROLE: both
+
+Sheet updates continuously as the bookworm plays. New answers get added. Old answers get revised when the character's development makes them false. Rainbowsol does not hold the sheet; student holds it. Revisions are visible evidence of designing-the-story-you-are-on. A sheet that never changes across a campaign is a warning sign — bookworm is not designing. Sheet change frequency is a Rainbowsol diagnostic for bookworm development.
+
+------------------------------------------------------------------------
+ID: char-004
+TITLE: Soul Anchor: four invariants the bookwormcard carries between books
+ROLE: both
+
+The four invariants surfaced during dnd-synthesis ouroborosanalyses. They are recorded on Series II Page I of the bookwormcard and persist across all books the bookworm enters. The AI translates them into each book's local mechanics at the moment of resolution.
+
+(1) CORE WANT. What the character wants more than anything. Beginner: the thing they want. Intermediate: the want that survives even when they get what they thought they wanted. Advanced: the want their character does not yet know they have.
+
+(2) CORE FEAR. What the character fears most. Beginner: what they would not want to happen to them. Intermediate: the fear that already shapes the choices they make. Advanced: the fear that is the same shape as the want.
+
+(3) CARRIED OBJECT. The single object the character always has. Beginner: a thing they always have on them. Intermediate: the object they would go back into a burning building for. Advanced: the object that is also a wound.
+
+(4) FOUNDATIONAL VALUE. The value the character organizes around. Beginner: the value they would name if asked. Intermediate: the value visible in what they do, not what they say. Advanced: the value other people break for them.
+
+Translation pattern (see char-006). In 5e the book, CORE WANT becomes a Bond, CORE FEAR a Flaw, CARRIED OBJECT an inventory anchor, FOUNDATIONAL VALUE an Ideal. In Cairn the book, CARRIED OBJECT takes a slot. In Daggerheart the book, FOUNDATIONAL VALUE shapes a Hope card. The bookwormcard never has to know which book is active.
+
+EXTENSION:
+See char-006 bookwormcard system-agnostic, dm-021 AI math, dm-020 library-of-systems.
+
+------------------------------------------------------------------------
+ID: char-005
+TITLE: Items carried: rainbow-items vs consumable (three end-of-book modes, confluence-vs-concrescence at the item-crossing layer)
+ROLE: both
+
+The bookwormcard ITEMS CARRIED field splits at book-exit into three resolution modes. Modes two and three together form the persistent class, named RAINBOW ITEMS after the rainbow-crossing back from book to burrow at bw-006. Mode one is the consumable class. The bookwormcard surface therefore carries two top-level rows, RAINBOW (carry forward) and CONSUMABLE (one book only). Sub-modes within RAINBOW live as inline notes on the AI math strip. The player does not have to taxonomize their own inventory at entry time.
+
+MODE 1, DISSOLVE. The consumable class. Used up in the book. No polymyth-item produced. Examples. A healing potion in a 5e book. A torch in a Shadowdark book that burns down in one hour real-time. A scroll read and dropped.
+
+MODE 2, CONVERT. The book-item transforms in the crossing back to the burrow. The rainbow-version is what gets recorded on the bookwormcard. Examples. The witch cord from Macbeth becomes a marker of contact with the unseen. The notebook from Umuofia in Things Fall Apart becomes a record of what was forbidden to write down. The cigarette case from Wagamese Fort Frances becomes a rainbow-version of an object that holds someone else silence. The conversion is a teaching choice. The teacher and AI agree at book-exit on what the rainbow-version names.
+
+MODE 3, REMAIN intact. The book-item carries through unchanged. It is recorded on the bookwormcard as itself. Two sub-types. Sub-type 3a, TROPHY. The item is commemorative, marks an event, has no mechanical effect but anchors a memory. Examples. Mrs. Jones ten dollars from Hughes Thank You Mam. The bone from a felled monster. Sub-type 3b, USEABLE. The item retains a functional capacity that operates across books. Examples. Mrs. Jones comb, advantage on first-impression rolls per the original Hughes campaign loot. A blade with sharpness preserved. A skill-token the AI translates per active book.
+
+THE AI ROLE. When the polymyth-character leaves a book, the AI proposes the resolution mode for each book-item based on the item nature, the book chassis rules, and what the polymyth-character did with the item. The teacher confirms or overrides. Confirmed modes update the bookwormcard.
+
+PEDAGOGICAL FUNCTION. The three-mode structure teaches the bookworm that not every encounter leaves a permanent trace, but that meaningful encounters do. The choice of which book-items dissolve, convert, or remain is a teaching choice. The teacher uses the resolution mode to signal what mattered in the book the bookworm just left.
+
+CONFLUENCE-VS-CONCRESCENCE MAPPING. The three modes are the polymyth-internal confluence-vs-concrescence operation (dm-004) rendered at the item-crossing layer. DISSOLVE is concrescence at this layer. The item identity ends in the crossing, integrated into book-events and does not persist as a polymyth-item. REMAIN is pure confluence at this layer. The item identity is preserved fully across the crossing, the book-item carries through as itself. CONVERT is the middle case. The item identity is preserved AND transformed. The rainbow-version remembers what it came from. The transformation IS the marker of crossing. Both the book-context and the burrow-context are visible in the rainbow-version. See dm-004 LAYER 3 for the full layered articulation and see ml* CONFLUENCE-VS-CONCRESCENCE OPERATIONAL-DISTINCTION for the polymyth parent.
+
+EXTENSION:
+Rebuilt 2026-05-15 from May 13 chat content (chat 8b68f9c8). Extended 2026-05-15 with the explicit confluence-vs-concrescence mapping closing pen-002. The three modes ARE the dm-004 operation at the item-crossing layer. Engages bw-006 rainbow-crossing-signature for the class name.
+
+------------------------------------------------------------------------
+ID: char-006
+TITLE: Bookwormcard as system-agnostic + AI as system-translator
+ROLE: both
+
+The bookwormcard is system-agnostic. It records general invariants and history, not chassis-specific mechanics. The AI is the system-translator. It maps the card's data into each active book's native mechanical idiom at the moment of resolution. The card never has to know which book is active.
+
+What the card holds (system-agnostic). Soul-anchor invariants (char-004). Items split into persistent and consumable (char-005). Training, equipment, knowledge in general terms. Scars and their narrative descriptions (not their mechanical effects in any specific chassis). Book-portal log of traversals. Stakes ledger of mission-failure costs. Birth data. Burrowing animal. Horoscope.
+
+What the AI does (system-translator). At resolution time, takes the card's general data, identifies the active book's chassis, and produces book-specific contextual modifiers (dm-021). "This bookworm trained in scribing" → in a 5e book this becomes "+1 to history checks involving documents." In a Cairn book this becomes "test for forgery succeeds on a 4+ instead of 5+." In a Daggerheart book this becomes "you may pull from your knowledge deck before this roll." Same card data, three different in-book effects.
+
+Why this design. (1) The card stays stable across the library, which is the whole point of having a persistent bookworm identity. (2) Players don't have to learn each chassis's schema — they just maintain the bookwormcard. (3) The AI absorbs the complexity that single-chassis play would distribute to the player. (4) Translation can be inspected by the teacher; the AI shows its work.
+
+The bookwormcard does the identity work. The AI does the translation work. The teacher does the judgment work. The player does the writing and the choices.
+
+EXTENSION:
+See char-004 soul anchor, char-005 items split, dm-021 AI math, dm-020 library-of-systems, dm-018 teacher load-bearing.
+
+
+########################################################################
+SECTION: CREDIT (ATTRIBUTION)  (3 entries)
+########################################################################
+
+------------------------------------------------------------------------
+ID: cred-001
+TITLE: Module-mapping (modulecanon*)
+ROLE: both
+
+Campaign completion in bookwormburrows* maps to modulecanon* modules. A campaign that moved through Macbeth dimension + Indian Horse dimension + Things Fall Apart dimension covers identifiable mc* modules in English literary analysis, postcolonial reading, moral-ethical reasoning, close reading, frame-critical-literacy. SeminarSchools issues non-OSSD credits for these modules. Bookwormburrows* consumes modulecanon* one-way: the campaign accomplishes module outcomes; modulecanon* does not design campaigns. This preserves Rainbowsol's adjudicative freedom while making credit integration mechanical.
+
+------------------------------------------------------------------------
+ID: cred-002
+TITLE: OSSD pathway (pending Leizu accreditation)
+ROLE: both
+
+If Leizu Academy is accredited to issue OSSD credits, bookwormburrows* campaigns can earn OSSD courses in text-native subjects. Strongest candidates: Philosophy HZT4U (moral reasoning native to story-quality adjudication), ENG2D/3U/4U (direct English curriculum mapping with full specific-expectation crosswalk in modulecanon*), World Religions HRT3M, Classical Civilization LVV4U, History courses. Math, sciences, and languages are poor fits for bookwormburrows* structure and stay outside the credit-integration scope. Accreditation status is the blocker, not curriculum fit. **Curriculum maps live in modulecanon* (mc*), not in bb*.** mc* holds the OSSD crosswalk, the IB crosswalk, and any other curriculum-specific mappings; bb* stays curriculum-agnostic. Citation work and ministry-code-to-mechanic mapping for any specific curriculum is mc* territory. Campaign Codex (separate from mc*, still to be created as of April 28 2026) holds the adventure catalog — campaigns past and future, playable scenarios — distinct from the curriculum-mapping function.
+
+EXTENSION:
+cred-002 updated April 28 2026 to point at mc* instead of Campaign Codex per Rainbowsol architectural clarification.
+
+------------------------------------------------------------------------
+ID: cred-003
+TITLE: SeminarSchools (non-OSSD)
+ROLE: both
+
+Parallel to Leizu's OSSD track. SeminarSchools issues its own non-OSSD credits for bookwormburrows* completion via modulecanon* module mapping. Non-OSSD means the credit is institutionally validated by SeminarSchools specifically, not recognized as Ontario secondary credit. Useful for: homeschoolers needing portfolio evidence, students whose families want documented learning outside the public system, supplementary credentials for university applications where non-standard learning is a feature not a bug. Both tracks (Leizu OSSD + SeminarSchools non-OSSD) run in parallel, neither subordinate to the other.
+
+
+########################################################################
+SECTION: PENDING  (11 entries)
+########################################################################
+
+------------------------------------------------------------------------
+ID: pen-001
+TITLE: 18 DI codes resolution (Ontario English) — needs to live in mc*, not bb*
+ROLE: dm
+
+Per April 19 OSSD-curriculum-codes session: 18 of 70 Ontario English specific expectations (ENG2D/3U/4U) are not taught BY the D&D mechanics — the game produces the artifact and the teacher teaches the mechanical skill ON that artifact (semicolons on a character's in-world letter, spelling on a campaign journal, presentation evaluation on an in-character speech). The resolution is in ses-005 (teacher-as-player, already covered in ml* via Heathcote / Mantle of the Expert entries). The remaining work — actually listing the 18 codes and writing a one-paragraph teacher move for each — is mc* territory, not bb* territory. mc* holds curriculum maps; bb* stays curriculum-agnostic. Pending: Rainbowsol builds mc* with the 18-code list once mc* construction begins. REFINEMENT 2026-05-04: cc* (campaigncodex.html) now exists as peer file to mc*. The 18 DI codes routing question is now sharper: do these 18 codes belong in mc* (academic curriculum-mapping) or cc* (D&D-based delivery vehicle for OSSD English specifically)? Likely answer: cc* for the OSSD English subset (ENG2D/3U/4U), mc* for the cross-curriculum scaffolding. MAY 12 2026 AUDIT-DEPLOYMENT-FIRST CHECK. Entry reviewed under the new audit-deployment-first protocol (ml* methodology section, core+ mirror added same session). Status confirmed pending. No deployment exists yet that contradicts the spec.
+
+EXTENSION:
+Articulated April 19 2026 OSSD-curriculum-codes session, confirmed not-bb*-content April 28 2026. Audit-deployment-first check completed May 12 2026; status confirmed.
+
+------------------------------------------------------------------------
+ID: pen-002
+TITLE: Confluence-vs-concrescence layered architecture (RESOLVED 2026-05-15, dm-004 holds the five-layer statement)
+ROLE: both
+
+RESOLVED 2026-05-15. The bb-side canonical statement is the FIVE-LAYER ARCHITECTURE in dm-004. The pending entry was malformed in assuming a single layer needed naming. The operation fires at multiple layers, each load-bearing.
+
+LAYER 1 DIMENSION MEETING. Confluence at dimension-meeting per dm-004 original body. Two dimensions meet, both survive. See dim-008 cross-cosmology, dim-011 Eberron.
+
+LAYER 2 DM SCALE. Confluence at DM-scale per dm-005. Teacher AI student three positions.
+
+LAYER 3 ITEM CROSSING. The three end-of-book modes in char-005 are the confluence-vs-concrescence operation at the item-crossing layer. DISSOLVE = concrescence (identity ends). REMAIN = pure confluence (identity preserved). CONVERT = the middle case (identity transforms but persists, the transformation IS the marker). This was the bb-side practical translation the original pen-002 entry was asking for. It existed in pieces (char-005 three modes, bw-006 rainbow-crossing, dm-004 dimension-meeting) but had not been articulated as a single operation across layers.
+
+LAYER 4 CHARACTER SCALE. Confluence at character-scale per ml* bookworm life-cycle + respawn entry. Bookworm silkworm cocoon emergence stages preserve substrate rather than concrescing.
+
+LAYER 5 CHARACTER DEATH. con-004 two-layer ontology. Polymyth-character death = concrescence (identity ends). Book-version death = confluence-recovery (identity preserved).
+
+WHAT THE DM ADJUDICATES AT THE TABLE. The original pen-002 framing asked: how does a DM adjudicate a moment where the question is whether two dimensions concresce or only confluence? Resolution: the DM always defaults to confluence at dimension-meeting (per dm-004 original ruling, Rainbowsol discipline never collapse two dimensions into a synthesis-dimension). Concrescence fires only at the item-crossing layer when an item is consumed in the book (MODE 1 DISSOLVE) or at the character-death layer when the polymyth-character dies at burrow-level. Concrescence never fires at the dimension-meeting layer in bb*. That is the load-bearing discipline.
+
+POLYMYTH RELEVANCE. The bb-side layered architecture mirrors the ml* parent entry CONFLUENCE-VS-CONCRESCENCE OPERATIONAL-DISTINCTION (different layers, both load-bearing). bb* is the bb-side rendering. Both operations are real, fire at their proper layers, and the discipline is knowing which layer fires which operation.
+
+EXTENSION:
+Status RESOLVED 2026-05-15. The bb-side canonical statement is the five-layer architecture in the rewritten dm-004. The three end-of-book modes in char-005 are the item-crossing-layer rendering. Saul flagged this 2026-05-15: confluence-vs-concrescence governs items that stay with you or dissolve or change when you bring them into the rainbowworld. That is layer 3.
+
+------------------------------------------------------------------------
+ID: pen-003
+TITLE: mc* construction (modulecanon) (RESOLVED 2026-05-15)
+ROLE: dm
+
+RESOLVED. mc* exists at v2 at the canonical URL /polymyth/modulecanon/ with 114 entries including 21 citation-locked AP and OSSD entries, the twenty-lens fitmap, the close-reading-001 cell, and full pending taxonomy pen-001 through pen-018. Original concern (mc* does not yet exist) is moot. SUB-STATUS. The c627d4f9 April 19 2026 build artifact (82 modules under mc-schema-v2 with ENGPREP PDF integration) has never been deployed to the canonical URL. That deployment decision is logged separately as a CC discussion-item (see April 19 conversation reference in mc* CHANGELOG). The current mc* v2 supersedes the c627d4f9 architectural shape but does not subsume its content. cred-001 cred-002 cred-003 in bb* now point at a real file with real entries.
+
+EXTENSION:
+Status RESOLVED 2026-05-15. mc* exists. c627d4f9 content-deployment is a separate decision item.
+
+------------------------------------------------------------------------
+ID: pen-005
+TITLE: FR-timelines micro-declaration rule (RESOLVED 2026-05-13 by chassis-of-chassis)
+ROLE: dm
+
+RESOLVED 2026-05-13 by chassis-of-chassis architecture (dm-014). Forgotten Realms timeline is part of the book chassis. Each FR book (pre-Time-of-Troubles, post-Time-of-Troubles, post-Spellplague, post-Sundering) loads as its own chassis at session zero. The teacher selecting an FR book at session zero IS the timeline declaration. No separate FR-timelines micro-declaration rule is needed at the meta-level. The original question presumed single-chassis design where FR existed as one chassis with multiple internal timelines requiring disambiguation. The chassis-of-chassis architecture dissolves that frame because the multiple FR timelines were always going to be separate chassis-loads.
+
+EXTENSION:
+Status RESOLVED 2026-05-13. Carried forward to bb* 2026-05-15 audit after the original resolution commit was lost between sessions.
+
+------------------------------------------------------------------------
+ID: pen-006
+TITLE: Cross-dimensional travel governance within single campaign (RESOLVED 2026-05-13 by chassis-of-chassis)
+ROLE: dm
+
+RESOLVED 2026-05-13 by chassis-of-chassis architecture (dm-014) plus the bw-006 rainbow-crossing. WITHIN a single book/chassis, travel uses the cosmology that book loads. Planescape portals fire only inside Planescape books. Ravenloft Mists fire only inside Ravenloft books. Spelljammer wildspace fires only inside Spelljammer books. BETWEEN books at the burrow level, the polymyth-character crosses via the bw-006 rainbow-magic crossing. The original concern (three cosmologies cannot synthesize at metaphysical foundation) is dissolved because the chassis-of-chassis architecture never asked them to synthesize. Each book holds its own cosmology. The burrow holds the bookwormcard and the rainbow-magic crossing rail. Cross-campaign continuity (the same polymyth-character moves between campaigns using different cosmologies) is treated as polymyth-pedagogical: the character learns that travel-theory is dimension-bound, not universal.
+
+EXTENSION:
+Status RESOLVED 2026-05-13 by architecture. Re-articulated 2026-05-15 audit.
+
+------------------------------------------------------------------------
+ID: pen-007
+TITLE: Daggerheart-vs-5e default for bb v1 character-creator (RESOLVED 2026-05-13 by chassis-of-chassis)
+ROLE: dm
+
+RESOLVED 2026-05-13 by chassis-of-chassis architecture (dm-014 plus dm-020). Polymythdnd has NO default ruleset. The question as originally framed is malformed under the architecture. Each book selects its own chassis (5e, Daggerheart, PF2 Remaster, etc.). The bb v1 character-creator does not pick a default chassis; it presents the library of chassis and asks the bookworm which book/dimension they want to enter. The chassis loads with the book. The bookwormcard (the only constant across the library) sits at the burrow level and is chassis-independent. The original framing (5e default vs Daggerheart default vs dual-track-parity-from-launch) presupposed single-chassis design which the architecture explicitly rejects.
+
+EXTENSION:
+Status RESOLVED 2026-05-13. Carried forward 2026-05-15 after original resolution commit was lost to PM10 ceiling.
+
+------------------------------------------------------------------------
+ID: pen-008
+TITLE: Exandria canonical-system on bb v1 (RESOLVED 2026-05-13 by chassis-of-chassis + bookworm-choice)
+ROLE: dm
+
+RESOLVED 2026-05-13 by chassis-of-chassis architecture (dm-014). The setting (Exandria) is system-agnostic. The mechanical surface (5e or Daggerheart or other) is per-book bookworm-choice. When a bookworm chooses Exandria as their dimension, the character-creator asks which mechanical surface they want to load. The Exandria-on-5e and Exandria-on-Daggerheart books are two distinct chassis-loads of the same setting; both are first-class citizens of the library. This bookworm-choice model pre-resolves the same question for any setting that exists on multiple rulesets. Eberron will follow given Keith Baker active development for Daggerheart.
+
+EXTENSION:
+Status RESOLVED 2026-05-13 by architecture plus 2026-04-29 AI-suggested-default of bookworm-choice consistent with chassis-of-chassis. Re-articulated 2026-05-15.
+
+------------------------------------------------------------------------
+ID: pen-009
+TITLE: PF2 Remaster edict/anathema as polymyth-teaching-unit (PARTIALLY RESOLVED 2026-05-13)
+ROLE: dm
+
+PARTIALLY RESOLVED 2026-05-13 by chassis-of-chassis architecture (dm-014). PF2 Remaster is one chassis among many in the polymythdnd library. The architecture places PF2 on equal footing with 5e, Daggerheart, and other chassis. WHAT REMAINS OPEN. Whether to build a dedicated polymyth-teaching-unit that uses PF2 alignment-removal as the comparative-text material. The proposed format stands. Comparative reading of (a) D&D 5e alignment description from PHB, (b) PF2 Remaster edict/anathema from Player Core, (c) polymyth ml* on standpoint epistemology. Bookworms write character ethics in all three frames and discuss which frame allows character-growth without character-betrayal. This is a curriculum-build decision, not an architecture decision. Belongs in mc* once the teaching-unit is built. Saul-blocked on whether to commission the build.
+
+EXTENSION:
+Status PARTIALLY RESOLVED. Architecture closed by chassis-of-chassis. Curriculum-build authorization still open.
+
+------------------------------------------------------------------------
+ID: pen-010
+TITLE: Tomb of Annihilation diagnostic-protocol spec
+ROLE: dm
+
+Per dim-021: ToA is not a Tier-1 dimension as published but functions as Tier-1 teaching-instrument when the polymyth scan is run openly with the players, naming the colonial-adventure-fiction frame as the gorgonification it is. Open: spec the actual run-protocol. What does Rainbowsol announce at session zero? What materials supplement the module (Achebe Things Fall Apart already in bb* dimension list, Conrad Heart of Darkness as critical primary-source, Rhys Wide Sargasso Sea)? At which decision-points does the teacher pause to run the diagnostic? Rainbowsol to spec. Default-suggested-by-AI: defer until Rainbowsol specifically wants to run ToA in a course. Not a default-deployment module. MAY 12 2026 AUDIT-DEPLOYMENT-FIRST CHECK. Entry reviewed under the new audit-deployment-first protocol (ml* methodology section, core+ mirror added same session). Status confirmed pending. No deployment exists yet that contradicts the spec.
+
+EXTENSION:
+Polymyth-D&D scan, April 29 2026 session. Audit-deployment-first check completed May 12 2026; status confirmed.
+
+------------------------------------------------------------------------
+ID: pen-013
+TITLE: Name for the persistent-items class (RESOLVED, RAINBOW ITEMS)
+ROLE: both
+
+RESOLVED 2026-05-13 in the original chat then lost to PM10, re-applied 2026-05-15. The persistent-items class is named RAINBOW ITEMS. The naming follows from bw-006, the rainbow-crossing is the signature of travel back from book to burrow, so the items that survive that crossing are rainbow-items. The naming engages existing framework vocabulary rather than coining a new term. Saul-supplied source phrasing was rainbowversion which selected RAINBOW over the CONFLUENT candidate from a prior turn. The three-mode structure (dissolve, convert, remain) lives in char-005.
+
+EXTENSION:
+Status RESOLVED. Kept in PENDING section as audit-record of the ruling history.
+
+------------------------------------------------------------------------
+ID: pen-014
+TITLE: con-004 character-death revision to match Inception model (RESOLVED 2026-05-13)
+ROLE: both
+
+RESOLVED 2026-05-13 in the original chat then lost to PM10, re-applied 2026-05-15. con-004 was diagnosed not as a rule conflict with dm-015 but as a referent ambiguity. "Character" in con-004 referred to the polymyth-character (the smash-product on the bookwormcard, persistent across the library, e.g. capybaracowboy). dm-015 covers the book-version (the local instantiation in an active book, e.g. a regular guy in Hughes Harlem). Both rules are correct in their respective domains. Polymyth-character death stays real (burrow-level, rare). Book-version death is recoverable (the polymyth-character wakes in the burrow as a ghost in that book).
+
+con-004 has been rewritten to surface the two-layer distinction explicitly. The two-layer ontology was already present in bw-006 (character-jewel ends at the burrow) and bw-007 (bookworm continuous, character local). pen-014 was diagnosed as a contradiction because the existing con-004 body did not name the layer it operated at.
+
+ORIGINAL OPEN QUESTION (preserved for record). con-004 originally stated character death "stays real in bookwormburrows, not reversible through retcon or re-roll." dm-015 stated book-death is recoverable. Three options were recorded for resolution: A replace con-004 entirely, B keep con-004 and add supersede-note, C make con-004 a sub-case distinguishing single-text-dimension from multi-chassis play. Saul resolution superseded all three by diagnosing the apparent contradiction as a referent ambiguity rather than a rule conflict. The rewrite of con-004 (Option A in form but not in substance) preserves both rules at their proper layers.
+
+EXTENSION:
+Status RESOLVED. Kept in PENDING section as audit-record of the ruling history.
+
+
+========================================================================
+END OF BOOKWORMBURROWS FILE
+========================================================================
