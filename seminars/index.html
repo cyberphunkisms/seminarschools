@@ -347,10 +347,72 @@
     return labels[srcId] || srcId;
   }
 
+  function aggregateScreenings(events) {
+    // Cinema venues publish each showtime as a separate calendar entry.
+    // This collapses (title, source_id) groups into single events with
+    // multiple showtimes. Non-screenings pass through unchanged.
+    var nonScreenings = [];
+    var groups = {};
+    events.forEach(function(e) {
+      if (e.type !== 'screening') {
+        nonScreenings.push(e);
+        return;
+      }
+      var key = e.title + '|' + (e.source_id || '');
+      if (!groups[key]) {
+        groups[key] = {
+          // Copy fields from first event; we'll override date and add showtimes
+          id: e.id,
+          date: e.date,
+          end_date: e.end_date,
+          title: e.title,
+          venue: e.venue,
+          source_url: e.source_url,
+          source_id: e.source_id,
+          type: e.type,
+          speaker_or_director: e.speaker_or_director,
+          attendance_confirmed: e.attendance_confirmed,
+          confidence: e.confidence,
+          raw_excerpt: e.raw_excerpt,
+          scraped_at: e.scraped_at,
+          review_status: e.review_status,
+          showtimes: [],
+          first_date: e.date,
+          last_date: e.date,
+        };
+      }
+      groups[key].showtimes.push(e.date);
+      if (e.date < groups[key].first_date) groups[key].first_date = e.date;
+      if (e.date > groups[key].last_date) groups[key].last_date = e.date;
+    });
+
+    // Convert groups back to event-shaped objects, using first_date as the primary date
+    var aggregated = Object.keys(groups).map(function(k) {
+      var g = groups[k];
+      g.date = g.first_date;
+      g.showtime_count = g.showtimes.length;
+      return g;
+    });
+
+    return nonScreenings.concat(aggregated);
+  }
+
+  function fmtDateShort(iso) {
+    var d = new Date(iso);
+    var month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];
+    return month + ' ' + d.getDate();
+  }
+
   function render() {
     var filtered = currentFilter === 'all'
       ? events
       : events.filter(function(e) { return e.type === currentFilter; });
+
+    // Aggregate cinema screenings so the same film across multiple showtimes
+    // collapses to a single card. Keeps the calendar readable.
+    filtered = aggregateScreenings(filtered);
+    // Re-sort by date because aggregation changes ordering
+    filtered.sort(function(a, b) { return new Date(a.date) - new Date(b.date); });
 
     if (filtered.length === 0) {
       var msg = events.length === 0
@@ -387,12 +449,23 @@
         var speaker = e.speaker_or_director
           ? '<span>' + escapeHtml(e.speaker_or_director) + '</span>'
           : '';
+        var timeDisplay = fmtTime(e.date);
+        var dateRange = '';
+        if (e.showtime_count && e.showtime_count > 1) {
+          // Aggregated screening — show date range and showtime count instead of single time
+          var first = fmtDateShort(e.first_date);
+          var last = fmtDateShort(e.last_date);
+          var rangeText = (first === last) ? first : first + ' to ' + last;
+          timeDisplay = e.showtime_count + ' showtimes';
+          dateRange = '<p class="event-venue" style="margin-top:0.2rem;font-style:italic">' + rangeText + '</p>';
+        }
         return [
           '<li class="event-card">',
-          '  <div class="event-time">' + fmtTime(e.date) + '</div>',
+          '  <div class="event-time">' + timeDisplay + '</div>',
           '  <div class="event-body">',
           '    <h3 class="event-title"><a href="' + escapeHtml(e.source_url) + '" target="_blank" rel="noopener">' + escapeHtml(e.title) + '</a></h3>',
           '    <p class="event-venue">' + escapeHtml(e.venue) + '</p>',
+          dateRange,
           '    <div class="event-tags">',
           '      <span class="event-tag-type">' + typeLabel(e.type) + '</span>',
           '      <span class="event-tag-source"><a href="' + escapeHtml(e.source_url) + '" target="_blank" rel="noopener">' + sourceLabel(e.source_id) + '</a></span>',
