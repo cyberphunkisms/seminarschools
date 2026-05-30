@@ -5,7 +5,7 @@
   ============================================================================
 
   Companion to the classic /leizu/ catalog view. The five subjects of the
-  productive cycle (木 History / 火 Philosophy / 土 English / 金 AI / 水 Social
+  productive cycle (木 History / 火 Philosophy / 土 English / 金 Media Literacy / 水 Social
   Studies) appear as the first-level children of the seed. Click a subject
   to see its courses. Click a course to see its themes and convergences.
   Concepts that recur across multiple subjects (argumentation, writing-as-
@@ -625,7 +625,7 @@ html,body{
     <div class="leg-item"><span class="leg-swatch" style="background:#8FAB78"></span><span>木 wood · History</span></div>
     <div class="leg-item"><span class="leg-swatch" style="background:#E08AA0"></span><span>火 fire · Philosophy</span></div>
     <div class="leg-item"><span class="leg-swatch" style="background:#D4A076"></span><span>土 earth · English</span></div>
-    <div class="leg-item"><span class="leg-swatch" style="background:#E0B574"></span><span>金 metal · AI</span></div>
+    <div class="leg-item"><span class="leg-swatch" style="background:#E0B574"></span><span>金 metal · Media Literacy</span></div>
     <div class="leg-item"><span class="leg-swatch" style="background:#7CA5B8"></span><span>水 water · Social Studies</span></div>
   </div>
   <div class="leg-types">
@@ -714,8 +714,8 @@ const SUBJECTS = {
     code: 'ai',
     glyph: '金',
     pinyin: 'jīn',
-    label: 'AI',
-    han: '人工智能',
+    label: 'Media Literacy',
+    han: '媒體素養',
     element: 'metal',
     color: '#B8923A',
     gloss: 'The tool, the cut, the precise instrument.'
@@ -783,13 +783,13 @@ const COURSES = [
   { id: 'e6', subject: 'english', label: 'ESL Intensive', han: 'ESL 強化班', codes: '', routes: [],
     desc: 'Reading fluency, written grammar, academic register, oral confidence.' },
 
-  // AI — 金
-  { id: 'a1', subject: 'ai', label: 'Critical AI Literacy', han: '批判性 AI 素養', codes: '', routes: ['forest'],
+  // Media Literacy — 金
+  { id: 'a1', subject: 'ai', label: 'Critical Media Literacy', han: '批判性媒體素養', codes: '', routes: ['forest'],
     desc: 'Whether students use these tools to think better or to avoid thinking is the question this course is built around.' },
-  { id: 'a2', subject: 'ai', label: 'Reading & writing with AI', han: '與 AI 共讀共寫', codes: '', routes: ['forest'],
-    desc: 'The student leaves understanding which moves the AI does well and which moves only a human can do.' },
-  { id: 'a3', subject: 'ai', label: 'AI and academic integrity', han: 'AI 與學術誠信', codes: '', routes: [],
-    desc: 'Where the line is between using AI as a study aid and crossing into academic dishonesty.' },
+  { id: 'a2', subject: 'ai', label: 'Reading and writing with the screen', han: '與媒體共讀共寫', codes: '', routes: ['forest'],
+    desc: 'The student leaves understanding which moves the screen does well and which moves only a human can do.' },
+  { id: 'a3', subject: 'ai', label: 'Academic integrity in the screen age', han: '媒體素養與學術誠信', codes: '', routes: [],
+    desc: 'Where the line is between using contemporary tools as a study aid and crossing into academic dishonesty.' },
 
   // Social Studies — 水
   { id: 's1', subject: 'social', label: 'OSSD Civics', han: 'OSSD 公民', codes: 'CHV2O', routes: ['ossd'],
@@ -2150,12 +2150,12 @@ function showDetailFromNode(node){
   } else if (node.type === 'thread-gateway'){
     kicker = 'archive layer';
     title = 'Cross-subject threads';
-    body = 'Concepts that recur across multiple subjects. Argumentation appears in History, Philosophy, English, and Social Studies. Writing-as-thinking appears in English, Philosophy, AI, and beyond. The threads make visible what the curriculum compounds across the five subjects.';
+    body = 'Concepts that recur across multiple subjects. Argumentation appears in History, Philosophy, English, and Social Studies. Writing-as-thinking appears in English, Philosophy, Media Literacy, and beyond. The threads make visible what the curriculum compounds across the five subjects.';
     extra = (typeof THREADS !== 'undefined' ? THREADS.length : 0) + ' threads catalogued.';
   } else if (node.type === 'seed'){
     kicker = 'archive';
     title = '嫘祖 · Leizu Academy';
-    body = 'A practice within Seminar Schools. Five subjects taught as one curriculum: 木 History, 火 Philosophy, 土 English, 金 AI, 水 Social Studies. Click anything to grow it.';
+    body = 'A practice within Seminar Schools. Five subjects taught as one curriculum: 木 History, 火 Philosophy, 土 English, 金 Media Literacy, 水 Social Studies. Click anything to grow it.';
   }
 
   if (!body) return;

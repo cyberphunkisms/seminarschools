@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="noindex, nofollow">
+<title>Found Papers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Cutive+Mono&family=Limelight&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2b2118; --ink-soft:#5a4a36;
+    --paper:#e9ddc4; --paper-2:#ddcfae; --paper-edge:#cdbb93;
+    --crease:#bca676; --rust:#8a3a1e; --rust-soft:#a8533a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:radial-gradient(120% 90% at 50% 0%, #1a1510 0%, #0d0a07 70%);
+    color:var(--ink); font-family:'Cutive Mono',monospace;
+    min-height:100vh; display:flex; flex-direction:column; align-items:center;
+    padding:clamp(18px,4vw,56px) 16px 60px; overflow-x:hidden;
+  }
+  .drawer{width:min(560px,100%);text-align:center;color:#cbb88f;margin-bottom:34px;animation:fade 1.2s ease both}
+  .drawer h1{font-family:'Limelight',cursive;font-size:clamp(26px,7vw,44px);letter-spacing:.04em;color:#e4cf9c;text-shadow:0 2px 0 #000,0 0 22px rgba(180,140,70,.25)}
+  .drawer p{font-size:13px;line-height:1.7;color:#9c8a64;margin-top:14px;max-width:44ch;margin-inline:auto}
+
+  .gate{width:min(420px,100%);background:#171109;border:1px solid #3a2c19;border-radius:3px;padding:26px 24px 28px;box-shadow:inset 0 0 40px rgba(0,0,0,.6),0 18px 50px rgba(0,0,0,.55);animation:fade 1.2s .2s ease both}
+  .gate label{display:block;font-family:'Special Elite',monospace;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:#a8905e;margin-bottom:14px}
+  .gate-row{display:flex;gap:10px}
+  .gate input{flex:1;background:#0c0805;border:1px solid #4a3820;color:#e9d6a6;font-family:'Cutive Mono',monospace;font-size:21px;letter-spacing:.34em;text-align:center;padding:13px 10px;border-radius:2px;outline:none}
+  .gate input:focus{border-color:var(--rust-soft);box-shadow:0 0 0 2px rgba(168,83,58,.25)}
+  .gate button{background:#6a4d26;border:1px solid #8a6a38;color:#1a120a;font-family:'Special Elite',monospace;letter-spacing:.18em;text-transform:uppercase;font-size:12px;padding:0 18px;border-radius:2px;cursor:pointer;transition:transform .08s,filter .15s}
+  .gate button:hover{filter:brightness(1.14)}
+  .gate button:active{transform:translateY(1px)}
+  .msg{min-height:18px;margin-top:14px;font-family:'Special Elite',monospace;font-size:12px;letter-spacing:.06em;color:#9c6a4a}
+  .msg.bad{color:#b1583c}
+  .msg.good{color:#7e9a6a}
+
+  .wallet{width:min(420px,100%);margin-top:22px;animation:fade 1.2s .35s ease both}
+  .wallet h2{font-family:'Special Elite',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#7a6843;text-align:center;margin-bottom:10px}
+  .wallet-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .chip{font-family:'Special Elite',monospace;font-size:11px;letter-spacing:.1em;color:#cbb88f;background:#1d150b;border:1px solid #3e2f1a;padding:6px 11px;border-radius:2px;cursor:pointer}
+  .chip:hover{border-color:var(--rust-soft);color:#e9d6a6}
+
+  .unlocked{width:min(900px,100%);margin-top:20px;display:none;animation:rise 1s cubic-bezier(.2,.7,.2,1) both}
+  .unlocked.show{display:block}
+
+  .payload{background:#171109;border:1px solid #3a2c19;border-radius:3px;padding:20px 22px;margin-top:18px;box-shadow:inset 0 0 36px rgba(0,0,0,.5),0 14px 40px rgba(0,0,0,.45);color:#d8c69b}
+  .payload h3{font-family:'Limelight',cursive;color:#e4cf9c;font-size:19px;letter-spacing:.03em;margin-bottom:3px}
+  .payload .kind{font-family:'Special Elite',monospace;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#9c6a4a;margin-bottom:14px}
+  .payload .desc{font-family:'Cutive Mono',monospace;font-size:13px;line-height:1.7;color:#bfa977}
+  .payload .spec{margin-top:14px;border-top:1px dashed #3e2f1a;padding-top:12px;font-family:'Cutive Mono',monospace;font-size:12px;line-height:1.7;color:#a8905e}
+  .payload .spec b{color:#cbb88f;font-weight:normal;letter-spacing:.08em}
+
+  .map-frame{position:relative;margin-top:16px;background:radial-gradient(140% 120% at 30% 20%, var(--paper) 0%, var(--paper-2) 55%, var(--paper-edge) 100%);border:1px solid var(--crease);border-radius:2px;box-shadow:0 18px 44px rgba(0,0,0,.5),inset 0 0 80px rgba(120,90,50,.25);overflow:hidden}
+  .map-frame::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 32.8%,rgba(80,60,30,.16) 33%,transparent 33.3%),linear-gradient(90deg,transparent 65.8%,rgba(80,60,30,.14) 66%,transparent 66.3%),linear-gradient(0deg,transparent 48.8%,rgba(80,60,30,.14) 49%,transparent 49.3%);mix-blend-mode:multiply}
+  .real-map{display:block;width:100%;height:auto;position:relative;z-index:2}
+  .map-title{position:relative;z-index:3;font-family:'Limelight',cursive;text-align:center;color:var(--ink);font-size:clamp(17px,3.2vw,24px);letter-spacing:.04em;padding:16px 16px 2px}
+  .map-sub{position:relative;z-index:3;text-align:center;font-family:'Special Elite',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);padding-bottom:10px}
+  .map-svg{display:block;width:100%;height:auto;position:relative;z-index:2}
+  .map-label{font-family:'Special Elite',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9c6a4a;margin-top:18px;margin-bottom:2px}
+  .map-frame-real{min-height:60px}
+  .map-note{font-family:'Cutive Mono',monospace;font-size:11px;line-height:1.6;color:#7a6843;margin-top:8px}
+  .map-note code{background:#0c0805;border:1px solid #3e2f1a;border-radius:2px;padding:1px 5px;color:#cbb88f;font-size:11px}
+
+  .street{stroke:#a89160;stroke-width:1.4;fill:none;opacity:.7}
+  .ave{stroke:#8a7142;stroke-width:2.6;fill:none}
+  .stlabel{font-family:'Cutive Mono',monospace;font-size:10px;fill:#6f5c38;letter-spacing:.04em}
+  .avelabel{font-family:'Special Elite',monospace;font-size:10px;fill:#5a4a2c;letter-spacing:.06em}
+  .civic-l{font-family:'Cutive Mono',monospace;font-size:10px;fill:#3d2e1a}
+  .water{font-family:'Special Elite',monospace;font-size:11px;fill:#5d756b;letter-spacing:.3em}
+  .park{font-family:'Cutive Mono',monospace;font-size:9px;fill:#6a6233;letter-spacing:.05em}
+
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @keyframes rise{from{opacity:0;transform:translateY(26px) scale(.985)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+  <div class="drawer">
+    <h1>Found Papers</h1>
+    <p>You found a number while you were walking. Scratched into wood, pencilled on a wall, folded into a pocket. Type it in. The drawer only opens for the number you actually carry.</p>
+  </div>
+
+  <div class="gate">
+    <label for="code">Enter the number you found</label>
+    <div class="gate-row">
+      <input id="code" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="·····" maxlength="8" aria-label="code">
+      <button id="go">Open</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+  </div>
+
+  <div class="wallet" id="walletBox" style="display:none">
+    <h2>What you have opened</h2>
+    <div class="wallet-chips" id="chips"></div>
+  </div>
+
+  <div class="unlocked" id="u-14128">
+    <div class="payload">
+      <h3>A map of Harlem</h3>
+      <div class="kind">Artifact + assignment</div>
+      <div class="desc">A folded map of Harlem, soft at the creases, carried in a pocket long enough to wear thin. The streets and the places anyone could name. You stop and orient yourself.</div>
+      <div class="map-label">The real map &middot; if a bookworm has the paper in hand</div>
+      <div class="map-frame map-frame-real">
+        <img class="real-map" src="harlem-campbell-1932.jpg" alt="A Night-Club Map of Harlem, E. Simms Campbell, 1932" onerror="this.parentNode.style.display='none'">
+      </div>
+      <div class="map-note">Drop <code>harlem-campbell-1932.jpg</code> beside this page to show the real map here. Until then only the clear map below appears.</div>
+
+      <div class="map-label">The clear map &middot; for finding your way</div>
+      <div class="map-frame">
+        <div class="map-title">Central Harlem</div>
+        <div class="map-sub">Borough of Manhattan</div>
+        <svg class="map-svg" viewBox="0 0 720 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Simple street map of central Harlem">
+          <title>Central Harlem, simplified</title>
+          <desc>Five cross streets, six avenues, the Harlem River to the east, Mount Morris Park, and five landmarks: Hotel Theresa, the Apollo, the Schomburg, Abyssinian Baptist, and Harlem Hospital.</desc>
+          <path d="M650 50 Q678 200 666 360 Q660 440 644 470 L720 470 L720 50 Z" fill="#b9c7c0" opacity="0.45"/>
+          <text x="690" y="260" class="water" text-anchor="middle" transform="rotate(90 690 260)">HARLEM RIVER</text>
+          <rect x="440" y="430" width="100" height="40" fill="#bcae84" opacity="0.5"/>
+          <text x="490" y="455" class="park" text-anchor="middle">MOUNT MORRIS PK</text>
+
+          <line class="ave" x1="140" y1="60" x2="140" y2="470"/>
+          <line class="ave" x1="230" y1="60" x2="230" y2="470"/>
+          <line class="ave" x1="330" y1="60" x2="330" y2="470"/>
+          <line class="ave" x1="440" y1="60" x2="440" y2="430"/>
+          <line class="ave" x1="540" y1="60" x2="540" y2="470"/>
+          <line class="ave" x1="630" y1="60" x2="630" y2="470"/>
+          <text class="avelabel" x="140" y="48" text-anchor="middle">8TH</text>
+          <text class="avelabel" x="230" y="48" text-anchor="middle">7TH</text>
+          <text class="avelabel" x="330" y="48" text-anchor="middle">LENOX</text>
+          <text class="avelabel" x="440" y="48" text-anchor="middle">5TH</text>
+          <text class="avelabel" x="540" y="48" text-anchor="middle">MADISON</text>
+          <text class="avelabel" x="630" y="48" text-anchor="middle">PARK</text>
+
+          <line class="street" x1="90" y1="90" x2="660" y2="90"/>
+          <line class="street" x1="90" y1="170" x2="660" y2="170"/>
+          <line class="street" x1="90" y1="250" x2="660" y2="250"/>
+          <line class="street" x1="90" y1="330" x2="660" y2="330"/>
+          <line class="street" x1="90" y1="410" x2="660" y2="410"/>
+          <text class="stlabel" x="84" y="94" text-anchor="end">138th</text>
+          <text class="stlabel" x="84" y="174" text-anchor="end">135th</text>
+          <text class="stlabel" x="84" y="254" text-anchor="end">130th</text>
+          <text class="stlabel" x="84" y="334" text-anchor="end">127th</text>
+          <text class="stlabel" x="84" y="414" text-anchor="end">125th</text>
+
+          <g><circle cx="230" cy="410" r="6" fill="#8a3a1e"/><text x="244" y="414" class="civic-l" text-anchor="start">Hotel Theresa</text></g>
+          <g><circle cx="195" cy="410" r="6" fill="#8a3a1e"/><text x="183" y="426" class="civic-l" text-anchor="end">Apollo</text></g>
+          <g><circle cx="300" cy="170" r="6" fill="#8a3a1e"/><text x="314" y="174" class="civic-l" text-anchor="start">Schomburg</text></g>
+          <g><circle cx="290" cy="90" r="6" fill="#8a3a1e"/><text x="304" y="94" class="civic-l" text-anchor="start">Abyssinian Baptist</text></g>
+          <g><circle cx="330" cy="120" r="6" fill="#8a3a1e"/><text x="344" y="124" class="civic-l" text-anchor="start">Harlem Hospital</text></g>
+
+          <g transform="translate(625,440)">
+            <circle r="16" fill="none" stroke="#8a7142" stroke-width="1.3"/>
+            <path d="M0 -12 L4 5 L0 0 L-4 5 Z" fill="#5a4a2c"/>
+            <text x="0" y="-20" text-anchor="middle" class="stlabel">N</text>
+          </g>
+        </svg>
+      </div>
+      <div class="spec"><b>Assignment.</b> P-SS0-01 · Crossing-point ekphrastic<br><b>Deliverable.</b> 300-700 words. The place describes itself. The time of day sets the register.</div>
+    </div>
+  </div>
+
+  <div class="unlocked" id="u-31255">
+    <div class="payload">
+      <h3>A photograph from The Sweet Flypaper of Life</h3>
+      <div class="kind">Artifact + assignment</div>
+      <div class="desc">A small photograph slipped inside a book. Roy DeCarava’s Harlem, Langston Hughes’s words. The narrator is an old woman named Sister Mary Bradley who never existed and sees everything.</div>
+      <div class="spec"><b>Assignment.</b> P001-05 · Hughes-DeCarava ekphrastic<br><b>Deliverable.</b> One paragraph in Sister Mary Bradley’s voice, responding to a single photograph.</div>
+    </div>
+  </div>
+
+  <div class="unlocked" id="u-56156">
+    <div class="payload">
+      <h3>A window card for blue suede shoes</h3>
+      <div class="kind">Artifact + assignment</div>
+      <div class="desc">A shoe-store card from a 125th Street window. Carl Perkins cut the song in 1956 on Sun Records. Elvis covered it the same year on RCA. Roger wants the shoes. Ten dollars buys them.</div>
+      <div class="spec"><b>Assignment.</b> P001-03 · Blue suede shoes close reading<br><b>Deliverable.</b> Map the 1956 recordings against Roger’s 1958 desire. What did the shoes mean in this Harlem?</div>
+    </div>
+  </div>
+
+  <div class="unlocked" id="u-15158">
+    <div class="payload">
+      <h3>A loose page of the Amsterdam News</h3>
+      <div class="kind">Artifact + assignment</div>
+      <div class="desc">Fifteen cents at any Seventh Avenue newsstand. The masthead, the column rules, the typography of a Black weekly at the height of its reach.</div>
+      <div class="spec"><b>Assignment.</b> P001-11 / P-SS0-08 / P002-15 · Period newspaper<br><b>Deliverable.</b> Write a period-faithful article. Choose your subject. Match the typography and the reportorial conventions of the paper.</div>
+    </div>
+  </div>
+
+  <div class="unlocked" id="u-91958">
+    <div class="payload">
+      <h3>A handbill for the Theresa sidewalk meeting</h3>
+      <div class="kind">Artifact + assignment</div>
+      <div class="desc">A handbill for Friday, September 19, eight o’clock, the sidewalk outside Hotel Theresa at Seventh and 125th. Documented speakers. A crowd that filled the block.</div>
+      <div class="spec"><b>Assignment.</b> P002-01 · Sunday in-character journal<br><b>Deliverable.</b> 250-400 words. A Harlem resident reflects on the weekend’s events.</div>
+    </div>
+  </div>
+
+  <div class="unlocked" id="u-13821">
+    <div class="payload">
+      <h3>A church bulletin from Abyssinian Baptist</h3>
+      <div class="kind">Artifact + assignment</div>
+      <div class="desc">A Sunday bulletin, September 21, from Abyssinian Baptist on West 138th. The pastor prepared one sermon on Friday and threw it out overnight when the news came.</div>
+      <div class="spec"><b>Assignment.</b> P002-02 · Powell sermon close reading<br><b>Deliverable.</b> Read the pivot. Why was the Friday sermon discarded, and what replaced it?</div>
+    </div>
+  </div>
+
+  <div class="unlocked" id="u-12558">
+    <div class="payload">
+      <h3>A hospital intake card</h3>
+      <div class="kind">Artifact + assignment</div>
+      <div class="desc">An intake card from Harlem Hospital, Saturday afternoon. A book signing at Blumstein’s on West 125th. A letter-opener. The surgeons who worked through the night to save a life.</div>
+      <div class="spec"><b>Assignment.</b> P-SS0-04 · Documented-figure portrait<br><b>Deliverable.</b> Portrait of one documented figure from the day, built only from the record.</div>
+    </div>
+  </div>
+
+  <div class="unlocked" id="u-25358">
+    <div class="payload">
+      <h3>A bill from the Apollo Theater</h3>
+      <div class="kind">Artifact</div>
+      <div class="desc">A theater bill from 253 West 125th. Headliner week. The marquee names and the price of a seat in the fall of 1958.</div>
+      <div class="spec"><b>Anchors.</b> The music and media-studies prompts.</div>
+    </div>
+  </div>
+
+  <div class="unlocked" id="u-20127">
+    <div class="payload">
+      <h3>A page from Hughes’s drafting table</h3>
+      <div class="kind">Artifact + assignment</div>
+      <div class="desc">A discarded page from the workroom at 20 East 127th, one block south of where it all happened. The author lived through the action of his own story without writing it down.</div>
+      <div class="spec"><b>Assignment.</b> P-SS0-13 · 1958 character-arc study<br><b>Deliverable.</b> Trace one character across the four-day window using only what the record allows.</div>
+    </div>
+  </div>
+
+  <div class="unlocked" id="u-11525">
+    <div class="payload">
+      <h3>An inventory of a purse</h3>
+      <div class="kind">Artifact + assignment</div>
+      <div class="desc">What the bag held: a canvas strap, lima beans and ham for supper, a can of cocoa, the day’s tips, the week’s rent, and a ten-dollar bill. Everything a person carries and what they choose to give away.</div>
+      <div class="spec"><b>Assignment.</b> P001-02 · The apology letter<br><b>Deliverable.</b> Write as Roger, twenty years on, to the woman who fed him. Quality decides the empathy badge.</div>
+    </div>
+  </div>
+
+<script>
+  var REGISTRY = {
+    "14128": { id:"u-14128", label:"A map of Harlem" },
+    "31255": { id:"u-31255", label:"Sweet Flypaper photograph" },
+    "56156": { id:"u-56156", label:"Blue suede shoes card" },
+    "15158": { id:"u-15158", label:"Amsterdam News page" },
+    "91958": { id:"u-91958", label:"Theresa meeting handbill" },
+    "13821": { id:"u-13821", label:"Abyssinian church bulletin" },
+    "12558": { id:"u-12558", label:"Hospital intake card" },
+    "25358": { id:"u-25358", label:"Apollo Theater bill" },
+    "20127": { id:"u-20127", label:"Hughes drafting page" },
+    "11525": { id:"u-11525", label:"Inventory of a purse" }
+  };
+  var STORE = "tym-wallet-v1";
+
+  function loadWallet(){ try{ var r=localStorage.getItem(STORE); return r?JSON.parse(r):[]; }catch(e){ return []; } }
+  function saveWallet(a){ try{ localStorage.setItem(STORE, JSON.stringify(a)); }catch(e){} }
+  function reveal(code, scroll){
+    var entry=REGISTRY[code]; if(!entry) return false;
+    var el=document.getElementById(entry.id);
+    if(el){ el.classList.add("show"); if(scroll){ el.scrollIntoView({behavior:"smooth",block:"start"}); } }
+    return true;
+  }
+  function renderWallet(){
+    var w=loadWallet(), box=document.getElementById("walletBox"), chips=document.getElementById("chips");
+    chips.innerHTML="";
+    if(!w.length){ box.style.display="none"; return; }
+    box.style.display="block";
+    w.forEach(function(code){
+      var entry=REGISTRY[code]; if(!entry) return;
+      var c=document.createElement("button");
+      c.className="chip"; c.textContent=entry.label;
+      c.addEventListener("click", function(){ reveal(code,true); });
+      chips.appendChild(c);
+    });
+  }
+  function setMsg(text, cls){ var m=document.getElementById("msg"); m.textContent=text; m.className="msg"+(cls?" "+cls:""); }
+  function attempt(){
+    var code=(document.getElementById("code").value||"").trim();
+    if(!code){ setMsg("Type the number you found.","bad"); return; }
+    if(REGISTRY[code]){
+      var w=loadWallet();
+      if(w.indexOf(code)===-1){ w.push(code); saveWallet(w); }
+      reveal(code,true); renderWallet();
+      setMsg("The paper unfolds.","good");
+      document.getElementById("code").value="";
+    } else {
+      setMsg("The page does not respond.","bad");
+    }
+  }
+  document.getElementById("go").addEventListener("click", attempt);
+  document.getElementById("code").addEventListener("keydown", function(e){ if(e.key==="Enter") attempt(); });
+  (function(){ renderWallet(); })();
+</script>
+</body>
+</html>

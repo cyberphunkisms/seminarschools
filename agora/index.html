@@ -127,6 +127,11 @@
     h1, h2, h3 { color: #1a1a1a !important; page-break-after: avoid; }
     .reveal, [class*="reveal"] { opacity: 1 !important; transform: none !important; }
   }
+
+/* readout layout ported from homepage (unscoped) so threshold-coords labels and values do not collapse */
+.threshold-coords .row{display:grid;grid-template-columns:7rem 1fr;gap:1.2rem;padding:.6rem 0;border-bottom:1px solid var(--rule,rgba(0,0,0,.15));align-items:baseline}
+.threshold-coords .lbl{font-family:var(--sans,var(--body,sans-serif));font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent,inherit);font-weight:500}
+.threshold-coords .val{font-family:var(--mono,monospace);font-size:.78rem;color:var(--fg,inherit);opacity:.85;letter-spacing:.04em}
 </style>
 <script type="application/ld+json">
 {
@@ -177,7 +182,8 @@
 </header>
 
 <main>
-<nav class="project-nav" aria-label="Projects"><a href="/">Home</a><a href="/agora/" class="current">Agora</a><a href="/marginalia/">Marginalia</a><a href="/sabachtan-seminar/">Sabachtan</a><a href="/ohm-dome/">Ohm Dome</a><a href="/nutrition/">Nutrition</a><a href="/teacherresources/">Resources</a><a href="/florilegium/">Florilegium</a></nav>
+<nav class="project-nav" aria-label="Projects"><a href="/">Home</a><a href="/polymythseminars/">Calendar</a>
+<a href="/agora/" class="current">Agora</a><a href="/marginalia/">Marginalia</a><a href="/sabachtan-seminar/">Sabachtan</a><a href="/ohm-dome/">Ohm Dome</a><a href="/nutrition/">Nutrition</a><a href="/teacherresources/">Resources</a><a href="/florilegium/">Florilegium</a></nav>
 
 <section id="threshold" class="tier reveal" data-tier="1" data-name="Threshold" data-roman="i">
   <div class="tier-label-vertical"><span class="num">i</span><span class="label">Threshold</span></div>
@@ -275,7 +281,7 @@
   <div class="micro">VII. Cost</div>
   <h2 class="compound words"><em>Free.</em></h2>
   <div class="body">
-    <p>The Agora is hosted as part of the Seminar Schools practice. There is no admission. If the gatherings have been useful and you want to support upcoming ones, you can <a href="https://buymeacoffee.com/cyberphunk" target="_blank" rel="noopener">buy a coffee</a>. Entirely optional. The seminar remains free either way.</p>
+    <p>The Agora is hosted as part of the Seminar Schools practice. There is no admission. If the gatherings have been useful and you want to support upcoming ones, you can <a href="https://buymeacoffee.com/cyberphunk" target="_blank" rel="noopener noreferrer">buy a coffee</a>. Entirely optional. The seminar remains free either way.</p>
   </div>
 </section>
 
@@ -328,7 +334,7 @@
   </div>
   <div class="foot-row foot-row-bottom">
     <span>&copy; 2026 Seminar Schools &middot; Toronto</span>
-    <span><a href="https://buymeacoffee.com/cyberphunk" target="_blank" rel="noopener">Buy me a coffee</a></span>
+    <span><a href="https://buymeacoffee.com/cyberphunk" target="_blank" rel="noopener noreferrer">Buy me a coffee</a></span>
     <span><a href="/">&larr; Home</a></span>
   </div>
 </footer>

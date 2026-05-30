@@ -1,0 +1,2406 @@
+<!DOCTYPE html>
+<html lang="en" data-class="C" data-page="calendar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendar. Toronto seminars and festivals. Seminar Schools.</title>
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/calendar/">
+<meta property="og:title" content="GO-Transit Calendar. Seminars and festivals across southern Ontario.">
+<meta property="og:description" content="Interactive calendar of lectures, seminars, panels, screenings, and festivals across Toronto, Hamilton, Niagara, Waterloo Region, Guelph, and the GO Transit network. Filter, scrub by date, export to iCal or PDF.">
+<meta property="og:image" content="https://seminarschools.com/og-image.png">
+<meta property="og:site_name" content="Seminar Schools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calendar. Seminar Schools.">
+<meta name="twitter:description" content="Seminars and festivals across the GO Transit network, in one calendar.">
+<meta name="twitter:image" content="https://seminarschools.com/og-image.png">
+<meta name="description" content="Interactive calendar of lectures, seminars, panels, screenings, and festivals across Toronto, Hamilton, Niagara, Waterloo Region, Guelph, and the full GO Transit network of southern Ontario. Filter, search, export to iCal or PDF.">
+<link rel="canonical" href="https://seminarschools.com/calendar/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#1A5276">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Seminar Schools Calendar",
+  "url": "https://seminarschools.com/calendar/",
+  "inLanguage": "en",
+  "description": "Interactive calendar of seminars, lectures, panels, screenings with director Q&A, philosophy cafes, and festivals across Toronto and the GO Transit network of southern Ontario.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Seminar Schools",
+    "url": "https://seminarschools.com/"
+  },
+  "about": [
+    { "@type": "Thing", "name": "Lectures" },
+    { "@type": "Thing", "name": "Seminars" },
+    { "@type": "Thing", "name": "Festivals" },
+    { "@type": "Thing", "name": "Toronto cultural events" }
+  ],
+  "spatialCoverage": {
+    "@type": "Place",
+    "name": "GO Transit network, southern Ontario",
+    "geo": {
+      "@type": "GeoShape",
+      "description": "Toronto, Mississauga, Brampton, Vaughan, Markham, Hamilton, Burlington, Oakville, Milton, Guelph, Kitchener-Waterloo, Barrie, Niagara region"
+    }
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+ * Calendar page — Seminar Schools
+ * Variable-height month grid, density-scaled rows.
+ * Six-category filter pattern from /saul, extended with three
+ * polymyth festival types.
+ * ========================================================= */
+
+:root {
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --body: 'Newsreader', Georgia, serif;
+  --sans: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Light-mode tokens, aligned with the polymyth grammar spec */
+  --bg: #F5EBE4;
+  --bg-panel: #EDE0D4;
+  --bg-sunken: #E3D3C2;
+  --bg-raised: #FBF5EE;
+  --fg: #2A1A14;
+  --fg-soft: #5A4A40;
+  --fg-fade: #705F55;
+  --rule: #C9B8A6;
+  --rule-soft: rgba(42,26,20,0.06);
+  --accent: #1A5276;
+  --accent-deep: #0E3A57;
+  --focus-ring: #1A5276;
+
+  /* Six category colors from /saul */
+  --cat-lecture:      #1A5276;  /* teaching blue, the seminar core */
+  --cat-reading:      #7B2D4E;  /* burgundy, written word */
+  --cat-panel:        #5A5A52;  /* graphite, collective talk */
+  --cat-screening:    #4A3F8A;  /* indigo, projection */
+  --cat-scholar:      #8B6914;  /* ochre, religious-scholar */
+  --cat-cafe:         #1A6E4E;  /* green, philosophy cafe */
+  /* Three polymyth-broadened festival types */
+  --cat-festival:     #B85638;  /* terracotta, festival-of-form */
+  --cat-cultural:     #C8861D;  /* amber, cultural-reproduction */
+  --cat-site-art:     #2D6E6E;  /* teal, site-specific-art */
+  --cat-gathering:    #6B5B7B;  /* muted lavender, gathering */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1A1410;
+    --bg-panel: #221A14;
+    --bg-sunken: #120D08;
+    --bg-raised: #2A2018;
+    --fg: #F5EBE4;
+    --fg-soft: #C9B8A6;
+    --fg-fade: #9A8A7E;
+    --rule: #44362C;
+    --rule-soft: rgba(245,235,228,0.08);
+    --accent: #6BB3E8;
+    --accent-deep: #9BD0F0;
+    --focus-ring: #6BB3E8;
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { overflow-x: hidden; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: 0.6rem 1rem;
+  background: var(--accent);
+  color: var(--bg);
+  z-index: 1000;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.skip-link:focus { left: 0; }
+
+/* ============ TOP BAR ============ */
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.6rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+.brand {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+  color: var(--fg);
+  text-decoration: none;
+}
+.brand em { font-style: italic; color: var(--accent); }
+.nav-links {
+  display: flex;
+  gap: 0.8rem;
+  margin-left: auto;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.nav-links a {
+  color: var(--fg-soft);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding: 0.15rem 0;
+}
+.nav-links a:hover { color: var(--fg); border-bottom-color: var(--fg-soft); }
+.nav-links a.current { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ============ PAGE HEAD ============ */
+.page-head {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.6rem 1.5rem 1rem;
+}
+h1 {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.1;
+  margin-bottom: 0.4rem;
+}
+.subtitle {
+  font-family: var(--body);
+  color: var(--fg-soft);
+  font-size: 1rem;
+  font-style: italic;
+  max-width: 60ch;
+}
+
+/* ============ CONTROLS BAR ============ */
+.controls {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: center;
+  border-top: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--rule-soft);
+}
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+.control-label {
+  text-transform: uppercase;
+  color: var(--fg-fade);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+}
+button.btn, .btn {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.85rem;
+  background: var(--bg-raised);
+  color: var(--fg);
+  border: 1px solid var(--rule);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+button.btn:hover { background: var(--bg-panel); border-color: var(--fg-soft); color: var(--fg); }
+button.btn:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+button.btn[aria-pressed="true"] {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+.search-input {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  padding: 0.45rem 0.7rem;
+  background: var(--bg-raised);
+  border: 1px solid var(--rule);
+  color: var(--fg);
+  width: 220px;
+}
+.search-input:focus {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 0;
+  border-color: var(--focus-ring);
+}
+
+/* ============ FILTER CHIPS (category light-up) ============ */
+.filters {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+.filter-chip {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  padding: 0.35rem 0.7rem 0.35rem 0.55rem;
+  background: var(--bg-raised);
+  color: var(--fg-soft);
+  border: 1px solid var(--rule);
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.filter-chip:hover { color: var(--fg); border-color: var(--fg-soft); }
+.filter-chip:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+.filter-chip .dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--cat-color, var(--fg-soft));
+  display: inline-block;
+  flex: none;
+}
+.filter-chip .count {
+  color: var(--fg-fade);
+  font-size: 0.65rem;
+}
+.filter-chip[aria-pressed="true"] {
+  color: var(--bg);
+  background: var(--cat-color, var(--fg));
+  border-color: var(--cat-color, var(--fg));
+}
+.filter-chip[aria-pressed="true"] .count { color: rgba(245,235,228,0.7); }
+
+.filter-chip[data-filter="all"] .dot { display: none; }
+
+/* Category color assignment */
+.filter-chip[data-filter="lecture"]              { --cat-color: var(--cat-lecture); }
+.filter-chip[data-filter="reading"]              { --cat-color: var(--cat-reading); }
+.filter-chip[data-filter="panel"]                { --cat-color: var(--cat-panel); }
+.filter-chip[data-filter="screening"]            { --cat-color: var(--cat-screening); }
+.filter-chip[data-filter="artist-talk"]          { --cat-color: var(--cat-screening); }
+.filter-chip[data-filter="scholar-talk"]         { --cat-color: var(--cat-scholar); }
+.filter-chip[data-filter="philosophy-cafe"]      { --cat-color: var(--cat-cafe); }
+.filter-chip[data-filter="podcast-live"]         { --cat-color: var(--cat-cafe); }
+.filter-chip[data-filter="gathering"]            { --cat-color: var(--cat-gathering); }
+.filter-chip[data-filter="festival-of-form"]     { --cat-color: var(--cat-festival); }
+.filter-chip[data-filter="cultural-reproduction"]{ --cat-color: var(--cat-cultural); }
+.filter-chip[data-filter="site-specific-art"]    { --cat-color: var(--cat-site-art); }
+.filter-chip[data-filter="other"]                { --cat-color: var(--fg-soft); }
+
+/* ============ DATE SCRUBBER ============ */
+.scrubber-wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.6rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.scrubber-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-fade);
+  white-space: nowrap;
+}
+.scrubber {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-sunken);
+  border: 1px solid var(--rule);
+  position: relative;
+  cursor: pointer;
+}
+.scrubber-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    transparent var(--scrub-start, 0%),
+    var(--accent) var(--scrub-start, 0%),
+    var(--accent) var(--scrub-end, 100%),
+    transparent var(--scrub-end, 100%)
+  );
+  pointer-events: none;
+}
+.scrubber-tick {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 1px;
+  background: var(--fg-fade);
+  pointer-events: none;
+}
+.scrub-readout {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--fg-soft);
+  white-space: nowrap;
+  min-width: 16ch;
+  text-align: right;
+}
+
+/* ============ MONTH GRID ============ */
+.calendar-shell {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+.month-block {
+  margin-bottom: 2.5rem;
+}
+.month-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 2px solid var(--fg);
+}
+.month-title {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+.month-stats {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-fade);
+  margin-left: auto;
+}
+
+.weekday-strip {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-bottom: 1px;
+}
+.weekday-strip > div {
+  background: var(--bg-panel);
+  padding: 0.4rem 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-fade);
+  text-align: left;
+}
+
+.week-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  /* Height scales with the densest day in this row.
+     CSS variable --row-min-h set per-row by JS. */
+  min-height: var(--row-min-h, 90px);
+}
+.day-cell {
+  background: var(--bg);
+  padding: 0.4rem 0.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  overflow: hidden;
+  /* Density wash — heavier days get a faint accent tint */
+  --density: 0;
+  background: color-mix(in oklch, var(--bg), var(--accent) calc(var(--density) * 6%));
+}
+.day-cell.other-month { background: var(--bg-sunken); }
+.day-cell.other-month .day-num { color: var(--fg-fade); opacity: 0.5; }
+.day-cell.today { box-shadow: inset 0 0 0 2px var(--accent); }
+.day-num {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--fg-soft);
+  margin-bottom: 0.2rem;
+}
+.day-cell.today .day-num { color: var(--accent); }
+
+.event-pill {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  line-height: 1.25;
+  padding: 0.2rem 0.4rem;
+  background: var(--bg-raised);
+  border-left: 3px solid var(--pill-color, var(--fg-soft));
+  color: var(--fg);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: background 0.15s;
+  text-decoration: none;
+}
+.event-pill:hover {
+  background: color-mix(in oklch, var(--bg-raised), var(--pill-color) 20%);
+  white-space: normal;
+}
+.event-pill.selected {
+  background: color-mix(in oklch, var(--bg-raised), var(--pill-color) 40%);
+  font-weight: 600;
+}
+/* Multi-day-event continuation marking: middle/end days are dimmer,
+   start day stays full-saturation as the canonical entry point. */
+.event-pill.span-middle, .event-pill.span-end {
+  background: color-mix(in oklch, var(--bg-raised), var(--pill-color) 8%);
+  opacity: 0.72;
+}
+.event-pill.span-middle .pill-title, .event-pill.span-end .pill-title {
+  font-style: italic;
+}
+.event-pill .span-mark {
+  color: var(--pill-color, var(--fg-soft));
+  font-weight: 600;
+  margin-right: 0.2rem;
+  font-size: 0.7rem;
+}
+
+/* Continuation strip: thin bars at bottom of cell for ongoing multi-day events.
+   Distinct from full event-pills, do not contribute to row-height density math. */
+.continuation-strip {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding-top: 0.2rem;
+}
+.continuation-bar {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  line-height: 1.3;
+  padding: 0.08rem 0.35rem;
+  background: color-mix(in oklch, var(--bg), var(--cont-color, var(--fg-soft)) 18%);
+  border-left: 2px solid var(--cont-color, var(--fg-soft));
+  color: var(--fg);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.85;
+  cursor: pointer;
+}
+.continuation-bar:hover {
+  opacity: 1;
+  background: color-mix(in oklch, var(--bg), var(--cont-color) 28%);
+}
+.continuation-label {
+  font-weight: 500;
+  font-style: italic;
+}
+.continuation-bar[data-type="lecture"]              { --cont-color: var(--cat-lecture); }
+.continuation-bar[data-type="reading"]              { --cont-color: var(--cat-reading); }
+.continuation-bar[data-type="panel"]                { --cont-color: var(--cat-panel); }
+.continuation-bar[data-type="screening"]            { --cont-color: var(--cat-screening); }
+.continuation-bar[data-type="artist-talk"]          { --cont-color: var(--cat-screening); }
+.continuation-bar[data-type="scholar-talk"]         { --cont-color: var(--cat-scholar); }
+.continuation-bar[data-type="philosophy-cafe"]      { --cont-color: var(--cat-cafe); }
+.continuation-bar[data-type="podcast-live"]         { --cont-color: var(--cat-cafe); }
+.continuation-bar[data-type="gathering"]            { --cont-color: var(--cat-gathering); }
+.continuation-bar[data-type="festival-of-form"]     { --cont-color: var(--cat-festival); }
+.continuation-bar[data-type="cultural-reproduction"]{ --cont-color: var(--cat-cultural); }
+.continuation-bar[data-type="site-specific-art"]    { --cont-color: var(--cat-site-art); }
+.continuation-more {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  color: var(--fg-fade);
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0 0.35rem;
+}
+.continuation-more:hover { color: var(--fg); }
+.event-pill .pill-time {
+  color: var(--fg-fade);
+  font-size: 0.6rem;
+  margin-right: 0.3rem;
+}
+.event-pill .checkbox {
+  display: none;
+  margin-right: 0.3rem;
+}
+.select-mode .event-pill .checkbox { display: inline-block; }
+.event-pill input[type="checkbox"] {
+  accent-color: var(--pill-color);
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.event-pill[data-type="lecture"]              { --pill-color: var(--cat-lecture); }
+.event-pill[data-type="reading"]              { --pill-color: var(--cat-reading); }
+.event-pill[data-type="panel"]                { --pill-color: var(--cat-panel); }
+.event-pill[data-type="screening"]            { --pill-color: var(--cat-screening); }
+.event-pill[data-type="artist-talk"]          { --pill-color: var(--cat-screening); }
+.event-pill[data-type="scholar-talk"]         { --pill-color: var(--cat-scholar); }
+.event-pill[data-type="philosophy-cafe"]      { --pill-color: var(--cat-cafe); }
+.event-pill[data-type="podcast-live"]         { --pill-color: var(--cat-cafe); }
+.event-pill[data-type="gathering"]            { --pill-color: var(--cat-gathering); }
+.event-pill[data-type="festival-of-form"]     { --pill-color: var(--cat-festival); }
+.event-pill[data-type="cultural-reproduction"]{ --pill-color: var(--cat-cultural); }
+.event-pill[data-type="site-specific-art"]    { --pill-color: var(--cat-site-art); }
+.event-pill[data-type="other"]                { --pill-color: var(--fg-soft); }
+
+.more-link {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--fg-fade);
+  margin-top: 0.1rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+.more-link:hover { color: var(--fg); }
+
+/* ============ LIST VIEW (toggle) ============ */
+.list-view {
+  display: none;
+}
+body.list-mode .calendar-shell .month-grid { display: none; }
+body.list-mode .list-view { display: block; }
+body.list-mode .scrubber-wrap { display: none; }
+.list-item {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.list-item-date {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--fg-soft);
+  padding-top: 0.15rem;
+}
+.list-item-title {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--fg);
+  text-decoration: none;
+  display: block;
+  border-left: 3px solid var(--pill-color, var(--fg-soft));
+  padding-left: 0.7rem;
+}
+.list-item-title:hover { color: var(--accent); }
+.list-item-meta {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--fg-fade);
+  padding-left: 0.7rem;
+  margin-top: 0.3rem;
+}
+.list-item[data-type="lecture"]              { --pill-color: var(--cat-lecture); }
+.list-item[data-type="reading"]              { --pill-color: var(--cat-reading); }
+.list-item[data-type="panel"]                { --pill-color: var(--cat-panel); }
+.list-item[data-type="screening"]            { --pill-color: var(--cat-screening); }
+.list-item[data-type="festival-of-form"]     { --pill-color: var(--cat-festival); }
+.list-item[data-type="cultural-reproduction"]{ --pill-color: var(--cat-cultural); }
+.list-item[data-type="site-specific-art"]    { --pill-color: var(--cat-site-art); }
+.list-item.past { opacity: 0.55; }
+.list-item.past .list-item-title { color: var(--fg-soft); }
+.list-separator {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-fade);
+  padding: 1.5rem 0 0.5rem;
+  margin-top: 1rem;
+  border-top: 1px solid var(--rule);
+  text-align: center;
+}
+
+/* ============ FOOTER ============ */
+.site-footer {
+  padding: 2rem 2rem 3rem;
+  border-top: 1px solid var(--rule);
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--fg-soft);
+}
+.site-footer a {
+  color: var(--fg-soft);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--rule);
+  padding-bottom: 1px;
+}
+.site-footer a:hover { color: var(--fg); border-bottom-color: var(--fg-soft); }
+@media (max-width: 768px) {
+  .site-footer { padding: 1.5rem 1rem 2.5rem; }
+}
+@media print {
+  .site-footer { display: none !important; }
+}
+
+/* ============ EVENT MODAL (hover/click preview) ============ */
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.modal-backdrop.open { display: flex; }
+.modal {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 1.6rem;
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--fg-soft);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+}
+.modal-close:hover { color: var(--fg); border-color: var(--fg); }
+.modal h2 {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+  padding-right: 3rem;
+  border-left: 4px solid var(--pill-color, var(--accent));
+  padding-left: 0.8rem;
+}
+.modal-meta {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--fg-soft);
+  margin: 0.8rem 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.4rem 1rem;
+}
+.modal-meta dt { color: var(--fg-fade); text-transform: uppercase; font-size: 0.65rem; letter-spacing: 0.1em; }
+.modal-excerpt {
+  font-family: var(--body);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--fg-soft);
+  padding: 0.8rem 1rem;
+  border-left: 2px solid var(--rule);
+  margin: 1rem 0;
+}
+.modal-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+/* ============ EXPORT TOOLBAR (sticky bottom) ============ */
+.export-toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-panel);
+  border-top: 1px solid var(--rule);
+  padding: 0.8rem 1.5rem;
+  display: none;
+  align-items: center;
+  gap: 1rem;
+  z-index: 60;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+body.select-mode .export-toolbar { display: flex; }
+.export-toolbar .selected-count {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ============ EMPTY STATE ============ */
+.empty-state {
+  text-align: center;
+  padding: 4rem 1.5rem;
+  color: var(--fg-soft);
+  font-family: var(--body);
+  font-style: italic;
+}
+.empty-state .empty-eyebrow {
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-fade);
+  margin-bottom: 0.5rem;
+}
+.loading-state {
+  text-align: center;
+  padding: 4rem 1.5rem;
+  color: var(--fg-soft);
+  font-family: var(--body);
+  font-style: italic;
+}
+.loading-state .loading-eyebrow {
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  animation: pulse-fade 1.4s ease-in-out infinite;
+}
+@keyframes pulse-fade {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loading-state .loading-eyebrow { animation: none; opacity: 1; }
+}
+
+/* ============ KEYBOARD HELP ============ */
+.kbd-help {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 250;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.kbd-help.open { display: flex; }
+.kbd-help-panel {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  max-width: 500px;
+  width: 100%;
+  padding: 1.5rem;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+.kbd-help-panel h2 {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+}
+.kbd-help-panel dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.4rem 1rem;
+}
+.kbd-help-panel kbd {
+  background: var(--bg-raised);
+  border: 1px solid var(--rule);
+  padding: 0.1rem 0.4rem;
+  font-size: 0.75rem;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .top-bar { padding: 0.5rem 1rem; gap: 0.6rem; flex-wrap: wrap; }
+  .nav-links { font-size: 0.62rem; gap: 0.5rem; }
+  .page-head { padding: 1rem; }
+  .controls { padding: 0.7rem 1rem; gap: 0.5rem; }
+  .calendar-shell { padding: 1rem; }
+  .filters { padding: 0.6rem 1rem; }
+  .scrubber-wrap { flex-wrap: wrap; padding: 0.4rem 1rem; }
+  .scrub-readout { width: 100%; text-align: left; }
+  .weekday-strip > div { font-size: 0.55rem; padding: 0.3rem 0.2rem; }
+  .day-num { font-size: 0.7rem; }
+  .event-pill { font-size: 0.58rem; padding: 0.15rem 0.3rem; }
+  .event-pill .pill-time { display: none; }
+  .month-title { font-size: 1.3rem; }
+}
+
+/* ============ PRINT (calendar export pipeline) ============ */
+@media print {
+  @page {
+    size: letter portrait;
+    margin: 0.5in;
+  }
+  body { background: white; color: black; font-family: 'Newsreader', Georgia, serif; }
+  .top-bar, .controls, .filters, .scrubber-wrap, .export-toolbar, .nav-links,
+  .more-link, .modal-backdrop, .kbd-help, .skip-link,
+  .continuation-strip, .continuation-bar, .continuation-more {
+    display: none !important;
+  }
+  .page-head { padding: 0 0 0.5rem 0; }
+  h1 { font-size: 18pt; color: black; }
+  .subtitle { font-size: 10pt; color: #555; }
+  .month-block { break-inside: avoid; page-break-after: always; margin-bottom: 0; }
+  .month-block:last-child { page-break-after: avoid; }
+  .month-title { font-size: 16pt; color: black; }
+  .weekday-strip > div { font-size: 8pt; color: #333; background: #f0f0f0 !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .day-cell { background: white !important; padding: 0.2rem; }
+  .day-cell.other-month { background: #fafafa !important; }
+  .day-num { font-size: 9pt; color: black; }
+  .event-pill {
+    font-size: 7pt;
+    background: white !important;
+    border-left-width: 3px;
+    padding: 0.1rem 0.3rem;
+    margin-bottom: 0.1rem;
+    white-space: normal;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .event-pill .checkbox, .event-pill input { display: none !important; }
+  .week-row { min-height: 0 !important; }
+}
+
+/* Agenda print variant (body class flips print stylesheet) */
+@media print {
+  body.print-agenda .month-grid { display: none !important; }
+  body.print-agenda .list-view { display: block !important; }
+  body.print-agenda .list-item { break-inside: avoid; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="top-bar">
+  <a href="/" class="brand">Seminar <em>Schools</em></a>
+  <nav class="nav-links" aria-label="Site sections">
+    <a href="/">Home</a>
+    <a href="/calendar/" class="current">Calendar</a>
+    <a href="/seminars/">Seminars list</a>
+    <a href="/festivals/">Festivals list</a>
+    <a href="/agora/">Agora</a>
+    <a href="/marginalia/">Marginalia</a>
+    <a href="/sitemap/">Sitemap</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
+    <h1>GO-Transit Calendar</h1>
+    <p class="subtitle">Lectures, panels, readings, screenings with director Q&amp;A, philosophy cafes, and festivals across Toronto, Hamilton, Niagara, Waterloo Region, Guelph, and the full GO Transit network. Filter by category, scrub by date, pick events and export.</p>
+  </section>
+
+  <section class="controls" aria-label="Calendar controls">
+    <div class="control-group">
+      <span class="control-label">View</span>
+      <button type="button" class="btn" id="btn-view-grid" aria-pressed="true">Grid</button>
+      <button type="button" class="btn" id="btn-view-list" aria-pressed="false">List</button>
+    </div>
+
+    <div class="control-group">
+      <span class="control-label">Time</span>
+      <button type="button" class="btn" id="btn-jump-today" title="Scroll to today">Today</button>
+      <button type="button" class="btn" id="btn-hide-past" aria-pressed="true" title="Show or hide events that have already happened">Hide past</button>
+    </div>
+
+    <div class="control-group">
+      <span class="control-label">Search</span>
+      <input type="search" id="search-input" class="search-input" placeholder="title, venue, speaker..." aria-label="Search events">
+    </div>
+
+    <div class="control-group" style="margin-left:auto;">
+      <button type="button" class="btn" id="btn-select" aria-pressed="false" title="Pick events to export">
+        Pick events
+      </button>
+      <button type="button" class="btn" id="btn-help" title="Keyboard shortcuts">
+        ? Help
+      </button>
+    </div>
+  </section>
+
+  <section class="filters" id="filters" aria-label="Category filters">
+    <button type="button" class="filter-chip" data-filter="all" aria-pressed="true">
+      <span>All</span> <span class="count" id="count-all"></span>
+    </button>
+    <button type="button" class="filter-chip" data-filter="lecture" aria-pressed="false">
+      <span class="dot" aria-hidden="true"></span><span>Lectures</span> <span class="count"></span>
+    </button>
+    <button type="button" class="filter-chip" data-filter="reading" aria-pressed="false">
+      <span class="dot" aria-hidden="true"></span><span>Readings</span> <span class="count"></span>
+    </button>
+    <button type="button" class="filter-chip" data-filter="panel" aria-pressed="false">
+      <span class="dot" aria-hidden="true"></span><span>Panels</span> <span class="count"></span>
+    </button>
+    <button type="button" class="filter-chip" data-filter="screening" aria-pressed="false">
+      <span class="dot" aria-hidden="true"></span><span>Screenings</span> <span class="count"></span>
+    </button>
+    <button type="button" class="filter-chip" data-filter="scholar-talk" aria-pressed="false">
+      <span class="dot" aria-hidden="true"></span><span>Scholar talks</span> <span class="count"></span>
+    </button>
+    <button type="button" class="filter-chip" data-filter="philosophy-cafe" aria-pressed="false">
+      <span class="dot" aria-hidden="true"></span><span>Philosophy cafes</span> <span class="count"></span>
+    </button>
+    <button type="button" class="filter-chip" data-filter="festival-of-form" aria-pressed="false">
+      <span class="dot" aria-hidden="true"></span><span>Festivals</span> <span class="count"></span>
+    </button>
+    <button type="button" class="filter-chip" data-filter="cultural-reproduction" aria-pressed="false">
+      <span class="dot" aria-hidden="true"></span><span>Cultural</span> <span class="count"></span>
+    </button>
+    <button type="button" class="filter-chip" data-filter="site-specific-art" aria-pressed="false">
+      <span class="dot" aria-hidden="true"></span><span>Site-specific art</span> <span class="count"></span>
+    </button>
+    <button type="button" class="filter-chip" data-filter="gathering" aria-pressed="false">
+      <span class="dot" aria-hidden="true"></span><span>Gatherings</span> <span class="count"></span>
+    </button>
+  </section>
+
+  <section class="scrubber-wrap" aria-label="Date range scrubber">
+    <span class="scrubber-label">Range</span>
+    <div class="scrubber" id="scrubber" tabindex="0" role="slider" aria-label="Date range" aria-valuemin="0" aria-valuemax="100">
+      <div class="scrubber-fill" id="scrubber-fill"></div>
+    </div>
+    <span class="scrub-readout" id="scrub-readout">All dates</span>
+    <button type="button" class="btn" id="btn-reset-scrub">Reset</button>
+  </section>
+
+  <section class="calendar-shell" id="calendar-shell">
+    <div class="loading-state" id="loading-state">
+      <div class="loading-eyebrow">Loading</div>
+      <p>Fetching events…</p>
+    </div>
+    <div class="month-grid" id="month-grid" role="grid" aria-label="Events calendar" aria-live="polite" style="display:none;"></div>
+    <div class="list-view" id="list-view" aria-live="polite"></div>
+    <div class="empty-state" id="empty-state" style="display:none;">
+      <div class="empty-eyebrow" id="empty-eyebrow">No events match</div>
+      <p id="empty-message">Adjust filters, clear the search, or reset the date range.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span>© Seminar Schools · seminarschools.com</span>
+  <span><a href="/seminars/">Seminars</a> · <a href="/festivals/">Festivals</a> · <a href="/agora/">Agora</a> · <a href="/sitemap/">Sitemap</a></span>
+</footer>
+
+<!-- Event detail modal -->
+<div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal" id="modal" tabindex="-1">
+    <button type="button" class="modal-close" id="modal-close" aria-label="Close">[ × ]</button>
+    <h2 id="modal-title"></h2>
+    <dl class="modal-meta" id="modal-meta"></dl>
+    <div class="modal-excerpt" id="modal-excerpt"></div>
+    <div class="modal-actions">
+      <a href="#" target="_blank" rel="noopener noreferrer" class="btn" id="modal-source">View source ↗</a>
+      <button type="button" class="btn" id="modal-add">Add to my picks</button>
+      <button type="button" class="btn" id="modal-copylink" title="Copy a shareable link to this event">Copy link</button>
+    </div>
+  </div>
+</div>
+
+<!-- Export toolbar (visible only in select mode) -->
+<div class="export-toolbar" id="export-toolbar" role="toolbar" aria-label="Export selected events">
+  <span><span class="selected-count" id="selected-count">0</span> selected</span>
+  <button type="button" class="btn" id="btn-export-ical">Export iCal (.ics)</button>
+  <button type="button" class="btn" id="btn-export-pdf-cal">Print calendar PDF</button>
+  <button type="button" class="btn" id="btn-export-pdf-agenda">Print agenda PDF</button>
+  <button type="button" class="btn" id="btn-clear-picks">Clear picks</button>
+  <button type="button" class="btn" id="btn-exit-select" style="margin-left:auto;">Done</button>
+</div>
+
+<!-- Keyboard help -->
+<div class="kbd-help" id="kbd-help" role="dialog" aria-modal="true" aria-labelledby="kbd-help-title">
+  <div class="kbd-help-panel">
+    <h2 id="kbd-help-title">Keyboard shortcuts</h2>
+    <dl>
+      <dt><kbd>/</kbd></dt><dd>Focus search</dd>
+      <dt><kbd>g</kbd> then <kbd>g</kbd></dt><dd>Switch to grid view</dd>
+      <dt><kbd>g</kbd> then <kbd>l</kbd></dt><dd>Switch to list view</dd>
+      <dt><kbd>p</kbd></dt><dd>Toggle picks (select) mode</dd>
+      <dt><kbd>t</kbd></dt><dd>Jump to today</dd>
+      <dt><kbd>1</kbd> to <kbd>9</kbd></dt><dd>Toggle category filters</dd>
+      <dt><kbd>Esc</kbd></dt><dd>Close any open dialog</dd>
+      <dt><kbd>?</kbd></dt><dd>Show this help</dd>
+    </dl>
+    <div style="margin-top:1rem;text-align:right;">
+      <button type="button" class="btn" id="kbd-help-close">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+ * CALENDAR LOGIC
+ * Loads /seminars/events.json + /festivals/events.json
+ * Renders month-grid with density-scaled row heights.
+ * Supports filter, search, scrub, pick, export.
+ * ========================================================= */
+
+(function() {
+  'use strict';
+
+  const SEMINARS_URL = '/seminars/events.json';
+  const FESTIVALS_URL = '/festivals/events.json';
+  const PICKS_KEY = 'seminarschools_picks_v1';
+
+  const state = {
+    events: [],
+    filteredEvents: [],
+    activeFilters: new Set(['all']),
+    searchQuery: '',
+    scrubStart: 0,    // 0-100 percent
+    scrubEnd: 100,
+    selectMode: false,
+    hidePast: localStorage.getItem('seminarschools_hide_past_v1') !== 'false',
+    picks: new Set(JSON.parse(localStorage.getItem(PICKS_KEY) || '[]')),
+    minDate: null,
+    maxDate: null,
+  };
+
+  /* -------- Data loading -------- */
+  async function loadEvents() {
+    // The seminars feed contains ALL events including festivals. The
+    // festivals/events.json file is a subset for the dedicated festivals page;
+    // loading it here would duplicate fetch traffic.
+    try {
+      const r = await fetch(SEMINARS_URL);
+      if (!r.ok) return [];
+      const data = await r.json();
+      return Array.isArray(data.events) ? data.events : [];
+    } catch (err) {
+      console.warn('Calendar: events feed failed to load', err);
+      return [];
+    }
+  }
+
+  /* -------- Date helpers -------- */
+  function parseDate(iso) {
+    if (iso == null || iso === '') return null;
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return null;
+    return d;
+  }
+
+  // Fold case and strip accents so "cafe" matches "Café philosophique" and
+  // vice versa. Uses NFD decomposition + diacritic stripping.
+  function normalizeForSearch(s) {
+    return String(s || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+  }
+  function ymd(d) {
+    return d.getFullYear() + '-' +
+           String(d.getMonth() + 1).padStart(2, '0') + '-' +
+           String(d.getDate()).padStart(2, '0');
+  }
+  function monthKey(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+  }
+  function monthLabel(d) {
+    return d.toLocaleString('en-CA', { month: 'long', year: 'numeric' });
+  }
+  function startOfMonth(d) {
+    return new Date(d.getFullYear(), d.getMonth(), 1);
+  }
+  function endOfMonth(d) {
+    return new Date(d.getFullYear(), d.getMonth() + 1, 0);
+  }
+  function addDays(d, n) {
+    const x = new Date(d);
+    x.setDate(x.getDate() + n);
+    return x;
+  }
+
+  /* -------- Filter + search + scrub -------- */
+  function applyFilters() {
+    let result = state.events.slice();
+
+    // Type filter
+    if (!state.activeFilters.has('all')) {
+      result = result.filter(e => state.activeFilters.has(e.type));
+    }
+
+    // Hide past events: if hidePast is on, drop any event whose end_date
+    // (or start date if no end_date) is more than 24h in the past.
+    // The 24h cushion keeps "today's event that already happened this morning"
+    // visible until end of day.
+    if (state.hidePast) {
+      const cutoff = Date.now() - 24 * 60 * 60 * 1000;
+      result = result.filter(e => {
+        const start = parseDate(e.date);
+        if (!start) return true; // unparseable date stays (don't silently drop)
+        const end = parseDate(e.end_date) || start;
+        return end.getTime() >= cutoff;
+      });
+    }
+
+    // Search
+    if (state.searchQuery) {
+      const q = normalizeForSearch(state.searchQuery);
+      result = result.filter(e =>
+        normalizeForSearch(e.title).includes(q) ||
+        normalizeForSearch(e.venue).includes(q) ||
+        normalizeForSearch(e.speaker_or_director).includes(q)
+      );
+    }
+
+    // Scrub range
+    if (state.minDate && state.maxDate) {
+      const span = state.maxDate - state.minDate;
+      const startMs = state.minDate.getTime() + (span * state.scrubStart / 100);
+      const endMs = state.minDate.getTime() + (span * state.scrubEnd / 100);
+      result = result.filter(e => {
+        const d = parseDate(e.date);
+        if (!d) return false;
+        return d.getTime() >= startMs && d.getTime() <= endMs;
+      });
+    }
+
+    state.filteredEvents = result;
+    updateCounts();
+    render();
+  }
+
+  function updateCounts() {
+    // Each chip shows count of events matching that type (within search+scrub+hide-past filters,
+    // ignoring the type filter itself so users see what's available).
+    const typeCounts = {};
+    const cutoff = Date.now() - 24 * 60 * 60 * 1000;
+    const baseResult = state.events.filter(e => {
+      if (state.hidePast) {
+        const start = parseDate(e.date);
+        if (start) {
+          const end = parseDate(e.end_date) || start;
+          if (end.getTime() < cutoff) return false;
+        }
+      }
+      if (state.searchQuery) {
+        const q = normalizeForSearch(state.searchQuery);
+        if (!(normalizeForSearch(e.title).includes(q) ||
+              normalizeForSearch(e.venue).includes(q) ||
+              normalizeForSearch(e.speaker_or_director).includes(q))) return false;
+      }
+      if (state.minDate && state.maxDate) {
+        const span = state.maxDate - state.minDate;
+        const startMs = state.minDate.getTime() + (span * state.scrubStart / 100);
+        const endMs = state.minDate.getTime() + (span * state.scrubEnd / 100);
+        const d = parseDate(e.date);
+        if (!d) return false;
+        if (d.getTime() < startMs || d.getTime() > endMs) return false;
+      }
+      return true;
+    });
+
+    document.getElementById('count-all').textContent = baseResult.length;
+    document.querySelectorAll('.filter-chip[data-filter]').forEach(chip => {
+      const f = chip.dataset.filter;
+      if (f === 'all') return;
+      const n = baseResult.filter(e => e.type === f).length;
+      const countEl = chip.querySelector('.count');
+      if (countEl) countEl.textContent = n;
+      chip.style.display = (n === 0 && !chip.matches('[aria-pressed="true"]')) ? 'none' : '';
+    });
+  }
+
+  /* -------- Rendering: month grid -------- */
+  function render() {
+    const grid = document.getElementById('month-grid');
+    const list = document.getElementById('list-view');
+    const empty = document.getElementById('empty-state');
+    const eyebrow = document.getElementById('empty-eyebrow');
+    const message = document.getElementById('empty-message');
+
+    // Capture scroll position so a filter change doesn't yank the user back to top.
+    // Only restore in list mode (grid mode's month-block heights are stable enough
+    // that filter changes feel intentional).
+    const isListMode = document.body.classList.contains('list-mode');
+    const savedScroll = isListMode ? window.scrollY : null;
+
+    if (state.filteredEvents.length === 0) {
+      empty.style.display = 'block';
+      if (state.events.length === 0) {
+        eyebrow.textContent = 'Calendar is loading';
+        message.textContent = 'No events on file yet. The seminars and festivals scrapers run weekly; first harvest will populate this view.';
+      } else if (state.hidePast && state.events.length > 0) {
+        // Detect: data exists, but hide-past killed it all. Help the user find the toggle.
+        // Only trigger this branch when hide-past alone is the cause (no active type-filter, no search, scrubber full-range).
+        const noOtherFilters = state.activeFilters.has('all') &&
+                               !state.searchQuery &&
+                               state.scrubStart === 0 && state.scrubEnd === 100;
+        if (noOtherFilters) {
+          eyebrow.textContent = 'All events are in the past';
+          message.textContent = 'Turn off Hide past to see what has already happened, or check back as new events are added.';
+        } else {
+          eyebrow.textContent = 'No events match';
+          message.textContent = 'Adjust filters, clear the search, reset the date range, or turn off Hide past.';
+        }
+      } else {
+        eyebrow.textContent = 'No events match';
+        message.textContent = 'Adjust filters, clear the search, or reset the date range.';
+      }
+      grid.innerHTML = '';
+      list.innerHTML = '';
+      return;
+    }
+    empty.style.display = 'none';
+
+    renderGrid(grid);
+    renderList(list);
+
+    // Restore scroll position in list mode (filter changes shouldn't yank the user back to top).
+    if (savedScroll != null) {
+      // Use rAF to wait for layout
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: savedScroll, behavior: 'auto' });
+      });
+    }
+  }
+
+  function renderGrid(grid) {
+    grid.innerHTML = '';
+
+    // Group events by month — multi-day events appear in EVERY month they span
+    const byMonth = new Map();
+    for (const e of state.filteredEvents) {
+      const start = parseDate(e.date);
+      if (!start) continue;
+      const end = e.end_date ? parseDate(e.end_date) : start;
+      // Walk month-by-month from start month to end month
+      let cursor = new Date(start.getFullYear(), start.getMonth(), 1);
+      const endMonth = new Date((end || start).getFullYear(), (end || start).getMonth(), 1);
+      // Safety cap: never iterate more than 24 months for a single event
+      let safety = 0;
+      while (cursor <= endMonth && safety < 24) {
+        const key = monthKey(cursor);
+        if (!byMonth.has(key)) byMonth.set(key, []);
+        byMonth.get(key).push(e);
+        cursor = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1);
+        safety++;
+      }
+    }
+
+    // Sort month keys
+    const monthKeys = [...byMonth.keys()].sort();
+
+    for (const key of monthKeys) {
+      const events = byMonth.get(key);
+      // Use the first day of the month as the anchor date
+      const [yr, mo] = key.split('-').map(Number);
+      const anchor = new Date(yr, mo - 1, 1);
+      grid.appendChild(renderMonth(anchor, events));
+    }
+  }
+
+  function renderMonth(anyDateInMonth, monthEvents) {
+    const block = document.createElement('section');
+    block.className = 'month-block';
+
+    const header = document.createElement('header');
+    header.className = 'month-header';
+    const title = document.createElement('h2');
+    title.className = 'month-title';
+    title.textContent = monthLabel(anyDateInMonth);
+    header.appendChild(title);
+
+    const stats = document.createElement('div');
+    stats.className = 'month-stats';
+    stats.textContent = monthEvents.length + ' event' + (monthEvents.length === 1 ? '' : 's');
+    header.appendChild(stats);
+    block.appendChild(header);
+
+    const strip = document.createElement('div');
+    strip.className = 'weekday-strip';
+    strip.setAttribute('role', 'row');
+    const weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach((d, i) => {
+      const cell = document.createElement('div');
+      cell.textContent = d;
+      cell.setAttribute('role', 'columnheader');
+      cell.setAttribute('aria-label', weekdayNames[i]);
+      strip.appendChild(cell);
+    });
+    block.appendChild(strip);
+
+    // Build day-indexed event map — multi-day events appear on EVERY day they span,
+    // with a 'span_position' tag (start | middle | end | single) so the UI can mark continuation.
+    const eventsByDay = new Map();
+    for (const e of monthEvents) {
+      const start = parseDate(e.date);
+      if (!start) continue;
+      const end = e.end_date ? parseDate(e.end_date) : start;
+      const startKey = ymd(start);
+      const endKey = ymd(end || start);
+      // Walk day by day from start to end, but cap at 90 days per event to prevent runaway
+      let cursor = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+      const endDay = new Date((end || start).getFullYear(), (end || start).getMonth(), (end || start).getDate());
+      let dayCount = 0;
+      while (cursor <= endDay && dayCount < 200) {
+        const key = ymd(cursor);
+        let position = 'middle';
+        if (key === startKey && key === endKey) position = 'single';
+        else if (key === startKey) position = 'start';
+        else if (key === endKey) position = 'end';
+        // Wrap event with position info (don't mutate original)
+        const wrapped = Object.assign({}, e, { __span_position: position, __span_day_key: key });
+        if (!eventsByDay.has(key)) eventsByDay.set(key, []);
+        eventsByDay.get(key).push(wrapped);
+        cursor = addDays(cursor, 1);
+        dayCount++;
+      }
+    }
+
+    // Calculate grid range: start = Sunday of week containing day 1
+    const first = startOfMonth(anyDateInMonth);
+    const last = endOfMonth(anyDateInMonth);
+    const gridStart = addDays(first, -first.getDay());
+    const gridEnd = addDays(last, 6 - last.getDay());
+
+    const today = new Date();
+    const todayKey = ymd(today);
+
+    // Render weeks
+    let cursor = new Date(gridStart);
+    while (cursor <= gridEnd) {
+      const weekRow = document.createElement('div');
+      weekRow.className = 'week-row';
+      weekRow.setAttribute('role', 'row');
+
+      // Density counts ONLY start-day / single-day pills. Continuation pills
+      // (middle/end days of multi-day events) live in a thin strip below and
+      // do not inflate row height.
+      let maxEvents = 0;
+      for (let i = 0; i < 7; i++) {
+        const dayKey = ymd(addDays(cursor, i));
+        const dayEvts = eventsByDay.get(dayKey) || [];
+        const n = dayEvts.filter(e => e.__span_position === 'single' || e.__span_position === 'start').length;
+        if (n > maxEvents) maxEvents = n;
+      }
+      // Row height: base 90px + 22px per event in densest day, capped 360px
+      const rowH = Math.min(90 + maxEvents * 22, 360);
+      weekRow.style.setProperty('--row-min-h', rowH + 'px');
+
+      for (let i = 0; i < 7; i++) {
+        const dayDate = addDays(cursor, i);
+        const dayKey = ymd(dayDate);
+        const isOtherMonth = dayDate.getMonth() !== anyDateInMonth.getMonth();
+        const dayEvents = eventsByDay.get(dayKey) || [];
+
+        // Split into "primary" (start/single) and "continuation" (middle/end)
+        const primary = dayEvents.filter(e => e.__span_position === 'single' || e.__span_position === 'start');
+        const continuation = dayEvents.filter(e => e.__span_position === 'middle' || e.__span_position === 'end');
+
+        const cell = document.createElement('div');
+        cell.className = 'day-cell';
+        cell.setAttribute('role', 'gridcell');
+        if (isOtherMonth) cell.classList.add('other-month');
+        if (dayKey === todayKey) cell.classList.add('today');
+
+        // aria-label: e.g. "Sunday, June 15, 2026. 3 events. Today."
+        const cellLabelParts = [
+          dayDate.toLocaleDateString('en-CA', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })
+        ];
+        if (primary.length > 0) {
+          cellLabelParts.push(primary.length + (primary.length === 1 ? ' event' : ' events'));
+        }
+        if (continuation.length > 0) {
+          cellLabelParts.push(continuation.length + ' ongoing');
+        }
+        if (dayKey === todayKey) cellLabelParts.push('Today');
+        cell.setAttribute('aria-label', cellLabelParts.join(', ') + '.');
+
+        // Density wash: 0-5 scale, based on primary events only
+        cell.style.setProperty('--density', Math.min(primary.length, 5));
+
+        const dayNum = document.createElement('div');
+        dayNum.className = 'day-num';
+        dayNum.textContent = dayDate.getDate();
+        cell.appendChild(dayNum);
+
+        // Render primary pills (up to 4), then "+N more" for primary overflow
+        const MAX_VISIBLE = 4;
+        const visible = primary.slice(0, MAX_VISIBLE);
+        const overflow = primary.length - MAX_VISIBLE;
+
+        for (const e of visible) {
+          cell.appendChild(renderPill(e));
+        }
+        if (overflow > 0) {
+          const more = document.createElement('a');
+          more.className = 'more-link';
+          more.href = '#';
+          more.textContent = '+' + overflow + ' more';
+          more.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            openDayList(dayDate, [...primary, ...continuation]);
+          });
+          cell.appendChild(more);
+        }
+
+        // Continuation strips: thin colored bars for ongoing multi-day events
+        if (continuation.length > 0) {
+          const strip = document.createElement('div');
+          strip.className = 'continuation-strip';
+          // Cap visible continuation stripes at 3, show +N more for the rest
+          const STRIP_MAX = 3;
+          const stripVisible = continuation.slice(0, STRIP_MAX);
+          for (const e of stripVisible) {
+            const bar = document.createElement('a');
+            bar.className = 'continuation-bar';
+            bar.dataset.type = e.type || 'other';
+            bar.href = '#';
+            bar.title = (e.__span_position === 'end' ? '↦ ends today: ' : '↔ continues: ') +
+                        (e.title || '') + (e.venue ? ' · ' + e.venue : '');
+            const label = (e.__span_position === 'end' ? '↦ ' : '') + (e.title || '');
+            bar.innerHTML = '<span class="continuation-label">' + escapeHtml(label) + '</span>';
+            bar.addEventListener('click', (ev) => {
+              ev.preventDefault();
+              openModal(e);
+            });
+            strip.appendChild(bar);
+          }
+          if (continuation.length > STRIP_MAX) {
+            const more = document.createElement('a');
+            more.className = 'continuation-more';
+            more.href = '#';
+            more.textContent = '+' + (continuation.length - STRIP_MAX) + ' ongoing';
+            more.addEventListener('click', (ev) => {
+              ev.preventDefault();
+              openDayList(dayDate, [...primary, ...continuation]);
+            });
+            strip.appendChild(more);
+          }
+          cell.appendChild(strip);
+        }
+
+        weekRow.appendChild(cell);
+      }
+      block.appendChild(weekRow);
+      cursor = addDays(cursor, 7);
+    }
+
+    return block;
+  }
+
+  function renderPill(event) {
+    const a = document.createElement('a');
+    a.className = 'event-pill';
+    a.dataset.type = event.type || 'other';
+    a.dataset.eventId = event.id;
+    a.href = '#';
+    if (state.picks.has(event.id)) a.classList.add('selected');
+
+    const time = parseDate(event.date);
+    const timeStr = time ? time.toLocaleTimeString('en-CA', { hour: 'numeric', minute: '2-digit', hour12: true }) : '';
+
+    // ⇤ prefix indicates this event spans multiple days (continuation shown
+    // as thin strip on subsequent days).
+    const isMultiDay = !!event.end_date && event.end_date !== event.date;
+    const prefix = isMultiDay ? '<span class="span-mark">⇤</span> ' : '';
+
+    a.innerHTML = '<span class="checkbox"><input type="checkbox"' +
+                  (state.picks.has(event.id) ? ' checked' : '') + ' tabindex="-1"></span>' +
+                  (timeStr ? '<span class="pill-time">' + timeStr + '</span>' : '') +
+                  prefix +
+                  '<span class="pill-title">' + escapeHtml(event.title || 'Untitled') + '</span>';
+
+    a.title = event.title + (event.venue ? ' · ' + event.venue : '');
+    // aria-label gives screen readers a full picture: type, title, time, venue, multi-day marker
+    const ariaParts = [
+      (event.type || 'event').replace(/-/g, ' '),
+      event.title || 'Untitled',
+      timeStr || null,
+      event.venue ? 'at ' + event.venue : null,
+      isMultiDay ? 'multi-day event' : null,
+    ].filter(Boolean);
+    a.setAttribute('aria-label', ariaParts.join(', '));
+
+    a.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      if (state.selectMode) {
+        togglePick(event.id);
+        a.classList.toggle('selected');
+        const cb = a.querySelector('input[type="checkbox"]');
+        if (cb) cb.checked = state.picks.has(event.id);
+        updateSelectedCount();
+      } else {
+        openModal(event);
+      }
+    });
+
+    return a;
+  }
+
+  /* -------- List view -------- */
+  function renderList(container) {
+    container.innerHTML = '';
+    // Split filteredEvents into future and past, sort each, future first then past.
+    // Future ascending (soonest first), past descending (most recent first).
+    const now = Date.now();
+    const future = [];
+    const past = [];
+    for (const e of state.filteredEvents) {
+      const d = parseDate(e.date);
+      const end = parseDate(e.end_date) || d;
+      if (!end || end.getTime() >= now - 24 * 60 * 60 * 1000) future.push(e);
+      else past.push(e);
+    }
+    future.sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+    past.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    const sorted = [...future, ...past];
+
+    // If we have both past and future, add a separator
+    let pastSeparatorAdded = false;
+    for (const e of sorted) {
+      const d = parseDate(e.date);
+      const end = parseDate(e.end_date) || d;
+      const isPast = end && end.getTime() < now - 24 * 60 * 60 * 1000;
+      if (isPast && !pastSeparatorAdded && future.length > 0) {
+        const sep = document.createElement('h3');
+        sep.className = 'list-separator';
+        sep.setAttribute('role', 'separator');
+        sep.setAttribute('aria-label', 'Past events follow');
+        sep.textContent = 'past events';
+        container.appendChild(sep);
+        pastSeparatorAdded = true;
+      }
+      const item = document.createElement('div');
+      item.className = 'list-item';
+      if (isPast) item.classList.add('past');
+      item.dataset.type = e.type || 'other';
+
+      const date = parseDate(e.date);
+      const dateStr = date ? date.toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+
+      const dateCol = document.createElement('div');
+      dateCol.className = 'list-item-date';
+      dateCol.textContent = dateStr;
+      item.appendChild(dateCol);
+
+      const content = document.createElement('div');
+      const a = document.createElement('a');
+      a.className = 'list-item-title';
+      a.href = '#';
+      a.textContent = e.title || 'Untitled';
+      a.addEventListener('click', (ev) => { ev.preventDefault(); openModal(e); });
+      content.appendChild(a);
+
+      const meta = document.createElement('div');
+      meta.className = 'list-item-meta';
+      const bits = [];
+      if (e.venue) bits.push(e.venue);
+      if (e.speaker_or_director) bits.push(e.speaker_or_director);
+      if (e.type) bits.push(e.type);
+      meta.textContent = bits.join(' · ');
+      content.appendChild(meta);
+      item.appendChild(content);
+
+      container.appendChild(item);
+    }
+  }
+
+  /* -------- Modal -------- */
+  let modalReturnFocus = null;
+
+  function openModal(event) {
+    // Capture currently focused element only if no modal is already open
+    // (prevents day-list → event-modal transition from losing the original trigger)
+    const backdropAlreadyOpen = document.getElementById('modal-backdrop').classList.contains('open');
+    if (!backdropAlreadyOpen) {
+      modalReturnFocus = document.activeElement;
+    }
+
+    const m = document.getElementById('modal');
+    m.style.setProperty('--pill-color', getCategoryColor(event.type));
+    document.getElementById('modal-title').textContent = event.title || 'Untitled';
+    const meta = document.getElementById('modal-meta');
+    meta.innerHTML = '';
+    const rows = [
+      ['Date', formatFullDate(event.date, event.end_date)],
+      ['Venue', event.venue || 'unspecified'],
+      event.speaker_or_director ? ['Speaker', event.speaker_or_director] : null,
+      ['Type', event.type || 'other'],
+      // Only show confidence when it's below 100 (scraper-verified with uncertainty).
+      // Manual-curated events are 100% by construction; the row would be noise.
+      (event.confidence != null && event.confidence < 100) ? ['Confidence', event.confidence + '%'] : null,
+    ].filter(Boolean);
+    for (const [k, v] of rows) {
+      const dt = document.createElement('dt');
+      dt.textContent = k;
+      const dd = document.createElement('dd');
+      dd.textContent = v;
+      meta.appendChild(dt);
+      meta.appendChild(dd);
+    }
+    document.getElementById('modal-excerpt').textContent = event.raw_excerpt || '';
+    const src = document.getElementById('modal-source');
+    src.style.display = '';
+    src.href = event.source_url || '#';
+    const addBtn = document.getElementById('modal-add');
+    addBtn.style.display = '';
+    addBtn.textContent = state.picks.has(event.id) ? 'Remove from picks' : 'Add to my picks';
+    addBtn.onclick = () => {
+      togglePick(event.id);
+      addBtn.textContent = state.picks.has(event.id) ? 'Remove from picks' : 'Add to my picks';
+      render();
+    };
+
+    // Copy-link button: copies the deep-link URL to clipboard
+    const copyBtn = document.getElementById('modal-copylink');
+    copyBtn.style.display = '';
+    copyBtn.textContent = 'Copy link';
+    copyBtn.onclick = async () => {
+      const url = window.location.origin + window.location.pathname + '#evt-' + event.id;
+      try {
+        await navigator.clipboard.writeText(url);
+        copyBtn.textContent = 'Copied ✓';
+        setTimeout(() => { copyBtn.textContent = 'Copy link'; }, 1800);
+      } catch (err) {
+        // Clipboard API failed (probably permission denied) — fall back to selecting text
+        copyBtn.textContent = url;
+        setTimeout(() => { copyBtn.textContent = 'Copy link'; }, 3000);
+      }
+    };
+
+    // Push history state so browser-back closes the modal first instead of
+    // navigating away from the page. closeModal pops the state if the user
+    // closed the modal via Esc/click rather than back-button.
+    suppressNextHashChange = true;
+    history.pushState({ modal: 'event', eventId: event.id }, '', '#evt-' + event.id);
+
+    document.getElementById('modal-backdrop').classList.add('open');
+    document.getElementById('modal').focus();
+  }
+  function closeModal() {
+    const backdrop = document.getElementById('modal-backdrop');
+    const wasOpen = backdrop.classList.contains('open');
+    backdrop.classList.remove('open');
+    // If the modal was opened via pushState and the user closed it manually
+    // (Esc, click backdrop, click close button), pop the history entry so back
+    // doesn't return to the modal state.
+    if (wasOpen && history.state && history.state.modal === 'event') {
+      suppressNextHashChange = true;
+      history.back();
+    } else if (wasOpen && window.location.hash.startsWith('#evt-')) {
+      // Fallback: clear hash via replaceState (when no pushed state, e.g. deep-link land)
+      suppressNextHashChange = true;
+      history.replaceState(null, '', window.location.pathname);
+    }
+    // Restore focus to the element that triggered the modal
+    if (wasOpen && modalReturnFocus && typeof modalReturnFocus.focus === 'function') {
+      try { modalReturnFocus.focus(); } catch (e) { /* element may be detached */ }
+    }
+    modalReturnFocus = null;
+  }
+  let suppressNextHashChange = false;
+
+  function openDayList(date, events) {
+    // Capture original focus only if no modal is already open
+    const backdropAlreadyOpen = document.getElementById('modal-backdrop').classList.contains('open');
+    if (!backdropAlreadyOpen) {
+      modalReturnFocus = document.activeElement;
+    }
+    // Build an ad-hoc modal showing the day's events as a list
+    const m = document.getElementById('modal');
+    m.style.removeProperty('--pill-color');
+    document.getElementById('modal-title').textContent = date.toLocaleDateString('en-CA', {
+      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+    });
+    const meta = document.getElementById('modal-meta');
+    meta.innerHTML = '';
+    const dd = document.getElementById('modal-excerpt');
+    dd.innerHTML = '';
+    const ul = document.createElement('ul');
+    ul.style.cssText = 'list-style:none;padding:0;margin:0;';
+    for (const e of events) {
+      const li = document.createElement('li');
+      li.style.cssText = 'padding:0.5rem 0;border-bottom:1px solid var(--rule-soft);';
+      const a = document.createElement('a');
+      a.href = '#';
+      a.textContent = e.title;
+      a.style.cssText = 'font-family:var(--display);font-size:1rem;color:var(--fg);text-decoration:none;border-left:3px solid ' + getCategoryColor(e.type) + ';padding-left:0.6rem;display:block;';
+      a.addEventListener('click', (ev) => { ev.preventDefault(); openModal(e); });
+      li.appendChild(a);
+      const sub = document.createElement('div');
+      sub.style.cssText = 'font-family:var(--mono);font-size:0.7rem;color:var(--fg-fade);margin-top:0.2rem;padding-left:0.6rem;';
+      sub.textContent = (e.venue || '') + (e.type ? ' · ' + e.type : '');
+      li.appendChild(sub);
+      ul.appendChild(li);
+    }
+    dd.appendChild(ul);
+    document.getElementById('modal-source').style.display = 'none';
+    document.getElementById('modal-add').style.display = 'none';
+    document.getElementById('modal-copylink').style.display = 'none';
+    document.getElementById('modal-backdrop').classList.add('open');
+  }
+
+  function formatFullDate(iso, endIso) {
+    const d = parseDate(iso);
+    if (!d) return 'date unavailable';
+    const opts = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' };
+    let s = d.toLocaleString('en-CA', opts);
+    if (endIso) {
+      const e = parseDate(endIso);
+      if (e) s += ' to ' + e.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
+    }
+    return s;
+  }
+
+  function getCategoryColor(type) {
+    const map = {
+      'lecture': 'var(--cat-lecture)',
+      'reading': 'var(--cat-reading)',
+      'panel': 'var(--cat-panel)',
+      'screening': 'var(--cat-screening)',
+      'artist-talk': 'var(--cat-screening)',
+      'scholar-talk': 'var(--cat-scholar)',
+      'philosophy-cafe': 'var(--cat-cafe)',
+      'podcast-live': 'var(--cat-cafe)',
+      'gathering': 'var(--cat-gathering)',
+      'festival-of-form': 'var(--cat-festival)',
+      'cultural-reproduction': 'var(--cat-cultural)',
+      'site-specific-art': 'var(--cat-site-art)',
+      'other': 'var(--fg-soft)',
+    };
+    return map[type] || map['other'];
+  }
+
+  /* -------- Picks (multi-select for export) -------- */
+  function togglePick(id) {
+    if (state.picks.has(id)) state.picks.delete(id);
+    else state.picks.add(id);
+    localStorage.setItem(PICKS_KEY, JSON.stringify([...state.picks]));
+  }
+  function updateSelectedCount() {
+    document.getElementById('selected-count').textContent = state.picks.size;
+  }
+  function clearPicks() {
+    state.picks.clear();
+    localStorage.setItem(PICKS_KEY, '[]');
+    updateSelectedCount();
+    render();
+  }
+
+  /* -------- iCal export -------- */
+  function exportIcal() {
+    const picked = state.events.filter(e => state.picks.has(e.id));
+    if (picked.length === 0) {
+      alert('No events selected. Pick some events first.');
+      return;
+    }
+    const lines = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Seminar Schools//Calendar//EN',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+    ];
+    for (const e of picked) {
+      const start = icalDate(e.date);
+      if (!start) continue;
+      // Guarantee a DTEND: end_date if present, else start + 2h
+      let end = e.end_date ? icalDate(e.end_date) : null;
+      if (!end) {
+        const fallback = addHours(e.date, 2);
+        end = fallback ? icalDate(fallback) : start;
+      }
+      lines.push('BEGIN:VEVENT');
+      lines.push('UID:' + (e.id || 'evt-' + Date.now()) + '@seminarschools.com');
+      lines.push('DTSTAMP:' + icalDate(new Date().toISOString()));
+      lines.push('DTSTART:' + start);
+      lines.push('DTEND:' + end);
+      lines.push('SUMMARY:' + icalEscape(e.title || 'Untitled'));
+      if (e.venue) lines.push('LOCATION:' + icalEscape(e.venue));
+      if (e.raw_excerpt) lines.push('DESCRIPTION:' + icalEscape(e.raw_excerpt));
+      if (e.source_url) lines.push('URL:' + icalEscape(e.source_url));
+      if (e.type) lines.push('CATEGORIES:' + icalEscape(e.type));
+      lines.push('END:VEVENT');
+    }
+    lines.push('END:VCALENDAR');
+    // RFC 5545 §3.1: lines must not exceed 75 octets; longer lines fold by
+    // breaking at 75 chars and continuing with CRLF + space.
+    const folded = lines.map(foldIcalLine).join('\r\n');
+    const blob = new Blob([folded], { type: 'text/calendar;charset=utf-8' });
+    const today = new Date();
+    const stamp = today.getFullYear() + '-' +
+                  String(today.getMonth() + 1).padStart(2, '0') + '-' +
+                  String(today.getDate()).padStart(2, '0');
+    downloadBlob(blob, 'seminarschools-picks-' + stamp + '.ics');
+  }
+  function foldIcalLine(line) {
+    // Operates on byte length, not character count, since RFC 5545 specifies
+    // 75 octets. For ASCII this is the same; for UTF-8 we use TextEncoder.
+    const enc = new TextEncoder();
+    if (enc.encode(line).length <= 75) return line;
+    // Greedily slice at character boundaries that keep each chunk ≤75 octets.
+    const out = [];
+    let buf = '';
+    for (const ch of line) {
+      const candidate = buf + ch;
+      if (enc.encode(candidate).length > 75) {
+        out.push(buf);
+        buf = ch;
+      } else {
+        buf = candidate;
+      }
+    }
+    if (buf) out.push(buf);
+    // First line stays as-is; subsequent lines get prefixed with a single space.
+    return out[0] + out.slice(1).map(s => '\r\n ' + s).join('');
+  }
+  function icalDate(iso) {
+    const d = parseDate(iso);
+    if (!d) return null;
+    return d.getUTCFullYear() +
+           String(d.getUTCMonth() + 1).padStart(2, '0') +
+           String(d.getUTCDate()).padStart(2, '0') + 'T' +
+           String(d.getUTCHours()).padStart(2, '0') +
+           String(d.getUTCMinutes()).padStart(2, '0') +
+           String(d.getUTCSeconds()).padStart(2, '0') + 'Z';
+  }
+  function icalEscape(s) {
+    return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+  }
+  function addHours(iso, h) {
+    const d = parseDate(iso);
+    if (!d) return null;
+    d.setHours(d.getHours() + h);
+    return d.toISOString();
+  }
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
+  }
+
+  /* -------- PDF export (via print) -------- */
+  function exportPdfCalendar() {
+    if (state.picks.size === 0) {
+      if (!confirm('No events picked. Print the full filtered view as a calendar?')) return;
+    } else {
+      filterToPicksTemporarily();
+    }
+    document.body.classList.remove('list-mode', 'print-agenda');
+    window.print();
+    setTimeout(restoreAfterPrint, 600);
+  }
+  function exportPdfAgenda() {
+    if (state.picks.size === 0) {
+      if (!confirm('No events picked. Print the full filtered view as an agenda?')) return;
+    } else {
+      filterToPicksTemporarily();
+    }
+    document.body.classList.add('print-agenda');
+    document.body.classList.add('list-mode');
+    window.print();
+    setTimeout(restoreAfterPrint, 600);
+  }
+  let preFilterSnapshot = null;
+  function filterToPicksTemporarily() {
+    preFilterSnapshot = state.filteredEvents;
+    state.filteredEvents = state.events.filter(e => state.picks.has(e.id));
+    render();
+  }
+  function restoreAfterPrint() {
+    document.body.classList.remove('print-agenda');
+    if (preFilterSnapshot) {
+      state.filteredEvents = preFilterSnapshot;
+      preFilterSnapshot = null;
+      render();
+    }
+  }
+
+  /* -------- Jump to today -------- */
+  function jumpToToday() {
+    // First make sure we're in grid view
+    document.body.classList.remove('list-mode');
+    document.getElementById('btn-view-grid').setAttribute('aria-pressed', 'true');
+    document.getElementById('btn-view-list').setAttribute('aria-pressed', 'false');
+    // Respect the user's motion preference — scrollIntoView smooth behavior
+    // does not auto-fall-back per spec.
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const scrollBehavior = reduceMotion ? 'auto' : 'smooth';
+    // Find the today cell after re-render finishes
+    setTimeout(() => {
+      const todayCell = document.querySelector('.day-cell.today');
+      if (todayCell) {
+        todayCell.scrollIntoView({ behavior: scrollBehavior, block: 'center' });
+        // Brief flash so user sees where it landed. Skip for reduced-motion users.
+        if (!reduceMotion) {
+          todayCell.style.transition = 'box-shadow 300ms';
+          const oldShadow = todayCell.style.boxShadow;
+          todayCell.style.boxShadow = 'inset 0 0 0 3px var(--accent), 0 0 0 6px var(--bg-panel)';
+          setTimeout(() => { todayCell.style.boxShadow = oldShadow; }, 1500);
+        }
+      } else {
+        // No today cell visible (today might be filtered out or outside the data range)
+        // Scroll to top of grid as fallback
+        const grid = document.getElementById('month-grid');
+        if (grid) grid.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
+      }
+    }, 50);
+  }
+
+  /* -------- Scrubber -------- */
+  function setupScrubber() {
+    const scrubber = document.getElementById('scrubber');
+    const fill = document.getElementById('scrubber-fill');
+    let dragging = null;
+
+    function update() {
+      fill.style.setProperty('--scrub-start', state.scrubStart + '%');
+      fill.style.setProperty('--scrub-end', state.scrubEnd + '%');
+      updateScrubReadout();
+    }
+
+    function pxToPct(clientX) {
+      const r = scrubber.getBoundingClientRect();
+      return Math.max(0, Math.min(100, ((clientX - r.left) / r.width) * 100));
+    }
+
+    scrubber.addEventListener('mousedown', (e) => {
+      const pct = pxToPct(e.clientX);
+      // Closer to start or end?
+      const distStart = Math.abs(pct - state.scrubStart);
+      const distEnd = Math.abs(pct - state.scrubEnd);
+      dragging = distStart < distEnd ? 'start' : 'end';
+      if (dragging === 'start') state.scrubStart = pct;
+      else state.scrubEnd = pct;
+      update();
+      applyFilters();
+    });
+    window.addEventListener('mousemove', (e) => {
+      if (!dragging) return;
+      const pct = pxToPct(e.clientX);
+      if (dragging === 'start') state.scrubStart = Math.min(pct, state.scrubEnd - 1);
+      else state.scrubEnd = Math.max(pct, state.scrubStart + 1);
+      update();
+      applyFilters();
+    });
+    window.addEventListener('mouseup', () => { dragging = null; });
+
+    document.getElementById('btn-reset-scrub').addEventListener('click', () => {
+      state.scrubStart = 0;
+      state.scrubEnd = 100;
+      update();
+      applyFilters();
+    });
+
+    update();
+  }
+  function updateScrubReadout() {
+    const out = document.getElementById('scrub-readout');
+    const slider = document.getElementById('scrubber');
+    if (!state.minDate || !state.maxDate) {
+      out.textContent = 'All dates';
+      if (slider) {
+        slider.setAttribute('aria-valuenow', '0');
+        slider.setAttribute('aria-valuetext', 'All dates');
+      }
+      return;
+    }
+    const span = state.maxDate - state.minDate;
+    const start = new Date(state.minDate.getTime() + span * state.scrubStart / 100);
+    const end = new Date(state.minDate.getTime() + span * state.scrubEnd / 100);
+    const opts = { month: 'short', day: 'numeric', year: 'numeric' };
+    const startStr = start.toLocaleDateString('en-CA', opts);
+    const endStr = end.toLocaleDateString('en-CA', opts);
+    out.textContent = start.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' }) + ' to ' + end.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
+    if (slider) {
+      slider.setAttribute('aria-valuenow', state.scrubStart);
+      slider.setAttribute('aria-valuetext', 'From ' + startStr + ' to ' + endStr);
+    }
+  }
+
+  /* -------- Setup filters -------- */
+  function setupFilters() {
+    document.querySelectorAll('.filter-chip[data-filter]').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const f = chip.dataset.filter;
+        if (f === 'all') {
+          // Reset to all
+          state.activeFilters = new Set(['all']);
+          document.querySelectorAll('.filter-chip').forEach(c => {
+            c.setAttribute('aria-pressed', c.dataset.filter === 'all' ? 'true' : 'false');
+          });
+        } else {
+          if (state.activeFilters.has('all')) state.activeFilters.delete('all');
+          if (state.activeFilters.has(f)) {
+            state.activeFilters.delete(f);
+            chip.setAttribute('aria-pressed', 'false');
+          } else {
+            state.activeFilters.add(f);
+            chip.setAttribute('aria-pressed', 'true');
+          }
+          if (state.activeFilters.size === 0) {
+            state.activeFilters.add('all');
+            document.querySelector('.filter-chip[data-filter="all"]').setAttribute('aria-pressed', 'true');
+          } else {
+            document.querySelector('.filter-chip[data-filter="all"]').setAttribute('aria-pressed', 'false');
+          }
+        }
+        applyFilters();
+      });
+    });
+  }
+
+  /* -------- Setup search -------- */
+  function setupSearch() {
+    const input = document.getElementById('search-input');
+    let t;
+    input.addEventListener('input', () => {
+      clearTimeout(t);
+      t = setTimeout(() => {
+        state.searchQuery = input.value.trim();
+        applyFilters();
+      }, 200);
+    });
+  }
+
+  /* -------- Setup view toggle -------- */
+  function setupViewToggle() {
+    const gridBtn = document.getElementById('btn-view-grid');
+    const listBtn = document.getElementById('btn-view-list');
+    gridBtn.addEventListener('click', () => {
+      document.body.classList.remove('list-mode');
+      gridBtn.setAttribute('aria-pressed', 'true');
+      listBtn.setAttribute('aria-pressed', 'false');
+    });
+    listBtn.addEventListener('click', () => {
+      document.body.classList.add('list-mode');
+      gridBtn.setAttribute('aria-pressed', 'false');
+      listBtn.setAttribute('aria-pressed', 'true');
+    });
+    document.getElementById('btn-jump-today').addEventListener('click', jumpToToday);
+
+    // Hide past events toggle
+    const hidePastBtn = document.getElementById('btn-hide-past');
+    hidePastBtn.setAttribute('aria-pressed', state.hidePast ? 'true' : 'false');
+    hidePastBtn.textContent = state.hidePast ? 'Hide past' : 'Show past';
+    hidePastBtn.addEventListener('click', () => {
+      state.hidePast = !state.hidePast;
+      localStorage.setItem('seminarschools_hide_past_v1', state.hidePast ? 'true' : 'false');
+      hidePastBtn.setAttribute('aria-pressed', state.hidePast ? 'true' : 'false');
+      hidePastBtn.textContent = state.hidePast ? 'Hide past' : 'Show past';
+      applyFilters();
+    });
+  }
+
+  /* -------- Setup select mode -------- */
+  function setupSelectMode() {
+    const btn = document.getElementById('btn-select');
+    btn.addEventListener('click', () => {
+      state.selectMode = !state.selectMode;
+      btn.setAttribute('aria-pressed', state.selectMode ? 'true' : 'false');
+      document.body.classList.toggle('select-mode', state.selectMode);
+      updateSelectedCount();
+    });
+    document.getElementById('btn-exit-select').addEventListener('click', () => {
+      state.selectMode = false;
+      btn.setAttribute('aria-pressed', 'false');
+      document.body.classList.remove('select-mode');
+    });
+    document.getElementById('btn-export-ical').addEventListener('click', exportIcal);
+    document.getElementById('btn-export-pdf-cal').addEventListener('click', exportPdfCalendar);
+    document.getElementById('btn-export-pdf-agenda').addEventListener('click', exportPdfAgenda);
+    document.getElementById('btn-clear-picks').addEventListener('click', clearPicks);
+  }
+
+  /* -------- Setup modal -------- */
+  function setupModal() {
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+    document.getElementById('modal-backdrop').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeModal();
+    });
+    // Tab trap: when modal is open, Tab from last focusable cycles to first
+    // and Shift+Tab from first cycles to last. Prevents escape to background page.
+    document.getElementById('modal-backdrop').addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab') return;
+      const backdrop = e.currentTarget;
+      if (!backdrop.classList.contains('open')) return;
+      const focusables = backdrop.querySelectorAll(
+        'a[href]:not([style*="display: none"]):not([style*="display:none"]), ' +
+        'button:not([disabled]):not([style*="display: none"]):not([style*="display:none"]), ' +
+        '[tabindex]:not([tabindex="-1"])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+  }
+
+  /* -------- Keyboard shortcuts -------- */
+  function setupKeyboard() {
+    const helpBtn = document.getElementById('btn-help');
+    const helpDialog = document.getElementById('kbd-help');
+    helpBtn.addEventListener('click', () => helpDialog.classList.add('open'));
+    document.getElementById('kbd-help-close').addEventListener('click', () => helpDialog.classList.remove('open'));
+    helpDialog.addEventListener('click', (e) => { if (e.target === e.currentTarget) helpDialog.classList.remove('open'); });
+
+    let gPending = false;
+    document.addEventListener('keydown', (e) => {
+      if (e.target.matches('input, textarea, select')) return;
+      if (e.key === '/') { e.preventDefault(); document.getElementById('search-input').focus(); return; }
+      if (e.key === 'Escape') {
+        closeModal();
+        helpDialog.classList.remove('open');
+        return;
+      }
+      if (e.key === '?') { helpDialog.classList.add('open'); return; }
+      if (e.key === 'p') { document.getElementById('btn-select').click(); return; }
+      if (e.key === 't') { jumpToToday(); return; }
+      // gPending shortcuts (g→g for grid, g→l for list): check the second-key
+      // CONSUMERS first, so the first 'g' doesn't re-fire the pending-setter
+      // before the consumer block can match.
+      if (gPending && e.key === 'g') { document.getElementById('btn-view-grid').click(); gPending = false; return; }
+      if (gPending && e.key === 'l') { document.getElementById('btn-view-list').click(); gPending = false; return; }
+      if (e.key === 'g') { gPending = true; setTimeout(() => gPending = false, 1200); return; }
+      if (/^[1-9]$/.test(e.key)) {
+        const chips = document.querySelectorAll('.filter-chip[data-filter]:not([data-filter="all"])');
+        const idx = parseInt(e.key, 10) - 1;
+        if (chips[idx]) chips[idx].click();
+        return;
+      }
+    });
+  }
+
+  /* -------- Util -------- */
+  function escapeHtml(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  /* -------- Init -------- */
+  async function init() {
+    const events = await loadEvents();
+    state.events = events;
+    if (events.length > 0) {
+      // parseDate now returns null for invalid input; filter strips those.
+      // We also drop any event whose date couldn't parse from the scrubber range calc.
+      const dates = events.map(e => parseDate(e.date)).filter(d => d !== null);
+      if (dates.length > 0) {
+        const minTime = Math.min(...dates.map(d => d.getTime()));
+        const maxTime = Math.max(...dates.map(d => d.getTime()));
+        if (!isNaN(minTime) && !isNaN(maxTime)) {
+          state.minDate = new Date(minTime);
+          state.maxDate = new Date(maxTime);
+        }
+      }
+    }
+    // Hide loading, reveal grid
+    const loadingEl = document.getElementById('loading-state');
+    const gridEl = document.getElementById('month-grid');
+    if (loadingEl) loadingEl.style.display = 'none';
+    if (gridEl) gridEl.style.display = '';
+    // Prune dangling picks: drop any pick whose event ID is no longer in the dataset
+    if (state.picks.size > 0) {
+      const validIds = new Set(events.map(e => e.id).filter(Boolean));
+      const before = state.picks.size;
+      state.picks = new Set([...state.picks].filter(id => validIds.has(id)));
+      if (state.picks.size !== before) {
+        localStorage.setItem(PICKS_KEY, JSON.stringify([...state.picks]));
+        console.info('Pruned ' + (before - state.picks.size) + ' stale picks');
+      }
+    }
+    setupFilters();
+    setupSearch();
+    setupViewToggle();
+    setupSelectMode();
+    setupModal();
+    setupKeyboard();
+    setupScrubber();
+    applyFilters();
+    updateSelectedCount();
+    injectEventJsonLd();
+    handleDeepLink();
+  }
+
+  /* -------- Deep-link routing -------- */
+  // URL fragment patterns supported:
+  //   /calendar/#evt-{event_id}    → opens event modal
+  //   /calendar/#today             → scrolls to today
+  function handleDeepLink() {
+    const hash = window.location.hash;
+    if (!hash) return;
+    if (hash === '#today') {
+      jumpToToday();
+      return;
+    }
+    const evtMatch = hash.match(/^#evt-([a-zA-Z0-9_-]+)$/);
+    if (evtMatch) {
+      const id = evtMatch[1];
+      const event = state.events.find(e => e.id === id);
+      if (event) {
+        // Make sure the event isn't filtered out by hide-past — if it is,
+        // open the modal anyway (the user explicitly asked for this one).
+        openModal(event);
+      } else {
+        console.info('Deep-link event not found:', id);
+      }
+    }
+  }
+
+  // Listen for hash changes so users can navigate back/forward
+  window.addEventListener('hashchange', () => {
+    if (suppressNextHashChange) {
+      suppressNextHashChange = false;
+      return;
+    }
+    handleDeepLink();
+  });
+
+  // Back-button: if a modal is open, popping history closes it cleanly.
+  // The pushState entry from openModal already carries us back to a non-modal
+  // URL; we just need to ensure the visible modal closes.
+  window.addEventListener('popstate', () => {
+    const backdrop = document.getElementById('modal-backdrop');
+    if (backdrop && backdrop.classList.contains('open')) {
+      backdrop.classList.remove('open');
+      // Restore focus to the triggering element if we have one
+      if (modalReturnFocus && typeof modalReturnFocus.focus === 'function') {
+        try { modalReturnFocus.focus(); } catch (e) { /* detached */ }
+      }
+      modalReturnFocus = null;
+    }
+  });
+
+  /* -------- JSON-LD Event injection for SEO -------- */
+  function injectEventJsonLd() {
+    // Inject schema.org Event entries for upcoming events. Cap at 50 to avoid
+    // page-weight bloat. Search engines pick up the structured data even if
+    // it's a subset.
+    const now = Date.now();
+    const upcoming = state.events
+      .filter(e => {
+        // An event counts as "upcoming" if its END is still in the future.
+        // This keeps long-running exhibitions and festival residencies
+        // visible in structured-data even after their opening day.
+        const start = parseDate(e.date);
+        if (!start) return false;
+        const end = parseDate(e.end_date) || start;
+        return end.getTime() >= now;
+      })
+      .sort((a, b) => (a.date || '').localeCompare(b.date || ''))
+      .slice(0, 50);
+    if (upcoming.length === 0) return;
+
+    const events = upcoming.map(e => {
+      const d = parseDate(e.date);
+      const end = parseDate(e.end_date) || d;
+      const obj = {
+        "@type": "Event",
+        "name": e.title || 'Untitled',
+        "startDate": d.toISOString(),
+        "endDate": end.toISOString(),
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": e.venue || 'Toronto'
+        }
+      };
+      if (e.source_url) obj.url = e.source_url;
+      if (e.raw_excerpt) obj.description = e.raw_excerpt;
+      if (e.speaker_or_director) {
+        obj.performer = { "@type": "Person", "name": e.speaker_or_director };
+      }
+      return obj;
+    });
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": events
+    });
+    document.head.appendChild(script);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+</body>
+</html>

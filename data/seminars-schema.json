@@ -3,7 +3,16 @@
   "title": "Seminar event schema",
   "description": "Normalized record for events in the Seminar Schools calendar. Covers lectures, screenings, author readings, artist talks, panels, podcast recordings, religious-tradition scholar talks, and philosophy cafes that satisfy the four-condition test: known time and place, prepared offering by a designated participant, substantive engagement, real intellectual stake.",
   "type": "object",
-  "required": ["id", "date", "title", "venue", "source_url", "type", "scraped_at", "review_status"],
+  "required": [
+    "id",
+    "date",
+    "title",
+    "venue",
+    "source_url",
+    "type",
+    "scraped_at",
+    "review_status"
+  ],
   "properties": {
     "id": {
       "type": "string",
@@ -15,7 +24,10 @@
       "description": "Event start time, ISO 8601 with timezone. Time may be approximate; date must be exact."
     },
     "end_date": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time",
       "description": "Event end time. Null when source does not provide."
     },
@@ -48,12 +60,18 @@
         "scholar-talk",
         "philosophy-cafe",
         "gathering",
+        "festival-of-form",
+        "cultural-reproduction",
+        "site-specific-art",
         "other"
       ],
-      "description": "Operation-type classification per the four-condition synthesis. Drives display label and filtering."
+      "description": "Operation-type classification per the polymyth-broadened seminar test. Original four-condition types: lecture, screening, reading, artist-talk, panel, podcast-live, scholar-talk, philosophy-cafe, gathering. Polymyth-extension types: festival-of-form (cultural festivals enacting non-institutional forms of life), cultural-reproduction (diasporic and community festivals reproducing form-of-life outside dominant order), site-specific-art (festival-scale artistic practice operating outside gallery/commercial circuits, e.g. CONTACT Photography). Drives display label and filtering."
     },
     "speaker_or_director": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Named speaker, author, artist, director, panel members, or host. Null when not yet confirmed."
     },
     "attendance_confirmed": {
@@ -70,10 +88,18 @@
       "type": "object",
       "description": "Pass/fail per condition from the seminar-shape test. Filled by LLM verification pass.",
       "properties": {
-        "time_place": { "type": "boolean" },
-        "prepared_offering": { "type": "boolean" },
-        "substantive_engagement": { "type": "boolean" },
-        "intellectual_stake": { "type": "boolean" }
+        "time_place": {
+          "type": "boolean"
+        },
+        "prepared_offering": {
+          "type": "boolean"
+        },
+        "substantive_engagement": {
+          "type": "boolean"
+        },
+        "intellectual_stake": {
+          "type": "boolean"
+        }
       }
     },
     "raw_excerpt": {
@@ -87,13 +113,32 @@
     },
     "review_status": {
       "type": "string",
-      "enum": ["auto-published", "queued", "rejected", "manual"],
+      "enum": [
+        "auto-published",
+        "queued",
+        "rejected",
+        "manual"
+      ],
       "description": "Where this record lives. auto-published = live feed. queued = review queue at /data/seminars-review.json. rejected = excluded after manual review. manual = hand-curated by Saul, scraper does not overwrite."
     },
     "marginalia_url": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "uri",
       "description": "After-attendance commentary link if a /marginalia/ piece exists for this event. Null until written."
+    },
+    "parent_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "If set, this record is a child event inside a parent festival record. Value is the parent's id. Display layer groups children under parent. Parent records leave this null."
+    },
+    "is_parent_festival": {
+      "type": "boolean",
+      "description": "True when this record represents the umbrella festival itself (with date range spanning the whole festival). False or omitted for one-off events including child events within a festival."
     }
   }
 }

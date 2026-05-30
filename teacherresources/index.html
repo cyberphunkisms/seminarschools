@@ -611,6 +611,11 @@ body.searching details.category[hidden] {
       min-width: 44px;
     }
   }
+
+/* readout layout ported from homepage (unscoped) so threshold-coords labels and values do not collapse */
+.threshold-coords .row{display:grid;grid-template-columns:7rem 1fr;gap:1.2rem;padding:.6rem 0;border-bottom:1px solid var(--rule,rgba(0,0,0,.15));align-items:baseline}
+.threshold-coords .lbl{font-family:var(--sans,var(--body,sans-serif));font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent,inherit);font-weight:500}
+.threshold-coords .val{font-family:var(--mono,monospace);font-size:.78rem;color:var(--fg,inherit);opacity:.85;letter-spacing:.04em}
 </style>
 <script type="application/ld+json">
 {
@@ -665,7 +670,7 @@ body.searching details.category[hidden] {
 <p class="lede">Browse by subject, then by collection, then by individual resource. Or filter across all three at once.</p>
   <div class="threshold-coords reveal delay-3">
     <div class="row"><span class="lbl">Type</span><span class="val">Curated catalog of free teaching materials.</span></div>
-    <div class="row"><span class="lbl">Entries</span><span class="val">554 across 50 collections.</span></div>
+    <div class="row"><span class="lbl">Entries</span><span class="val">560 across 51 collections.</span></div>
     <div class="row"><span class="lbl">Coverage</span><span class="val">K-12, IB, AP. Eleven subjects.</span></div>
     <div class="row"><span class="lbl">Updated</span><span class="val">As materials are vetted.</span></div>
   </div>
@@ -673,7 +678,7 @@ body.searching details.category[hidden] {
 <p class="curatorial">Materials I&rsquo;ve used or vetted, organized for actual classroom use. Strongest in ELA because that&rsquo;s where I teach. Grade 7&ndash;11 weight reflects the active campaign. Indigenous resources surfaced as their own subject, not buried under a generic header. Government and primary-source links favored over aggregator middlemen wherever possible. Add new entries by emailing the link.</p>
 
 <p class="subscribe">
-  Keep an eye out for future updates. Submit a resource via <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener"><span class="prompt">&gt;</span>open_transmission<span class="cursor">_</span></a>.
+  Keep an eye out for future updates. Submit a resource via <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="prompt">&gt;</span>open_transmission<span class="cursor">_</span></a>.
   <a class="rss" href="/teacherresources/feed.xml" type="application/rss+xml">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.5" fill="currentColor"/></svg>
     Subscribe via RSS
@@ -702,7 +707,7 @@ body.searching details.category[hidden] {
 
 <div class="contribute">
   <strong>Know one we should add?</strong> Email
-  <a href="mailto:saul@seminarschools.com">saul@seminarschools.com</a>
+  <a href="mailto:saulnassau@protonmail.com">saulnassau@protonmail.com</a>
   with the link and one line of context.
 </div>
 
@@ -748,8 +753,7 @@ body.searching details.category[hidden] {
      Adding entries: edit the JSON inside this script tag only.
      Re-run _build_feed_from_html.py to regenerate feed.xml.
      ============================================================ -->
-<script type="application/json" id="resources-data">
-{
+<script type="application/json" id="resources-data">{
   "formats": {
     "holt-worktext": "Holt Reader (worktext)",
     "pearson-notebook": "Pearson Notebook",
@@ -1569,9 +1573,77 @@ body.searching details.category[hidden] {
             }
           ]
         }
-      ],
-      "_n_sections": 8,
-      "_n_entries": 76
+      ,
+{
+      "id": "curated-bookworm-assignments",
+      "kicker": "★ Curated · ix. Bookwormburrows writing assignments",
+      "title": "Writing assignments for Thank You, M’am",
+      "blurb": "Every writing task for the Thank You, M’am campaign in one place, built on the Holt McDougal Grade 7 unit and Common Core RL.1, RL.3, L.2b, L.4b, L.6, W.2. Each task produces badge-tier evidence in bookwormburrows play. Run them from the campaign page.",
+      "entries": [
+            {
+                  "title": "Extended response comparing Roger before and after",
+                  "url": "https://seminarschools.com/campaigns/thank-you-mam/",
+                  "format": "lesson-page",
+                  "grade": "7",
+                  "host": "seminarschools.com",
+                  "subject": "ela",
+                  "curriculum": "common-core",
+                  "blurb": "Two or three paragraphs comparing how Roger behaves at the purse-snatch with how he behaves after time with Mrs. Jones, explaining how her belief in his potential helps him show his best self. Holt SE page 75, standard W.2."
+            },
+            {
+                  "title": "In-character apology letter to Mrs. Jones",
+                  "url": "https://seminarschools.com/campaigns/thank-you-mam/",
+                  "format": "lesson-page",
+                  "grade": "7",
+                  "host": "seminarschools.com",
+                  "subject": "ela",
+                  "curriculum": "common-core",
+                  "blurb": "Roger writes Mrs. Luella Bates Washington Jones the morning after. Writing quality sets the badge tier, gold for earned contrition and bronze for a hollow apology. Practices possessive spelling per L.2b."
+            },
+            {
+                  "title": "Found poem from Thank You, M’am",
+                  "url": "https://seminarschools.com/campaigns/thank-you-mam/",
+                  "format": "lesson-page",
+                  "grade": "7",
+                  "host": "seminarschools.com",
+                  "subject": "ela",
+                  "curriculum": "common-core",
+                  "blurb": "Students build a found poem from the language of the story. The technique maps onto bookworm reflection on what mattered in the encounter."
+            },
+            {
+                  "title": "Lasting Legacy essay",
+                  "url": "https://seminarschools.com/campaigns/thank-you-mam/",
+                  "format": "lesson-page",
+                  "grade": "7",
+                  "host": "seminarschools.com",
+                  "subject": "ela",
+                  "curriculum": "common-core",
+                  "blurb": "Short essay on the enduring message Hughes leaves, tied to the theme question and the Emily Dickinson connect-poem."
+            },
+            {
+                  "title": "Inference and conflict charts",
+                  "url": "https://seminarschools.com/campaigns/thank-you-mam/",
+                  "format": "lesson-page",
+                  "grade": "7",
+                  "host": "seminarschools.com",
+                  "subject": "ela",
+                  "curriculum": "common-core",
+                  "blurb": "A two-column inference chart, detail then what the reader infers, and an internal versus external conflict chart that identifies which conflict sets the plot in motion. Standards RL.1 and RL.3."
+            },
+            {
+                  "title": "Vocabulary in context (barren, frail, mistrust, presentable)",
+                  "url": "https://seminarschools.com/campaigns/thank-you-mam/",
+                  "format": "lesson-page",
+                  "grade": "7",
+                  "host": "seminarschools.com",
+                  "subject": "ela",
+                  "curriculum": "common-core",
+                  "blurb": "The four unit words plus the prefixes-that-mean-not strategy across dis, in, un, mis, and non. Standards L.4b and L.6."
+            }
+      ]
+}],
+      "_n_sections": 9,
+      "_n_entries": 82
     },
     {
       "id": "mathematics",
@@ -6589,6 +6661,824 @@ body.searching details.category[hidden] {
       ],
       "_n_sections": 2,
       "_n_entries": 14
+    },
+    {
+      "title": "Thank You M’am Campaign Activities (cmp-001)",
+      "_n_sections": 17,
+      "sections": [
+        {
+          "title": "Saul Nassau Original Assignments",
+          "blurb": "Classroom-tested assignments designed by Saul Nassau for bookwormburrows campaign deployment. These assignments produce badge-tier evidence: writing quality determines in-game capability.",
+          "entries": [
+            {
+              "title": "The Apology Letter: Roger writes Mrs. Luella Bates Washington Jones (Empathy Badge assignment)",
+              "author": "Saul Nassau / Seminar Schools",
+              "url": "https://seminarschools.com/campaigns/thank-you-mam/",
+              "format": "lesson-page",
+              "grade": "7-10",
+              "host": "seminarschools.com",
+              "subject": "ela",
+              "notes": "Students write as Roger, 20 years after the encounter, composing a thank-you and apology letter to Mrs. Jones. Letter quality determines empathy badge tier (bronze/silver/gold/platinum). Badge tier governs in-game capability: gold empathy means the character's empathic moves land and empathy-quests open; bronze means the apology comes off hollow. Parallel assignment: poorly written letter from the kids who locked Margot in the closet (Bradbury, All Summer in a Day). Ontario OSSD: Writing strand D1 Developing Ideas, D2 Creating Texts. IB: Paper 1 guided textual analysis, HL essay."
+            },
+            {
+              "title": "The Bradbury Parallel: apology letter from the children who locked Margot in the closet (All Summer in a Day)",
+              "author": "Saul Nassau / Seminar Schools",
+              "url": "https://seminarschools.com/campaigns/thank-you-mam/",
+              "format": "lesson-page",
+              "grade": "7-10",
+              "host": "seminarschools.com",
+              "subject": "ela",
+              "notes": "Companion to the Roger apology letter. Students write as one of the children from Bradbury's All Summer in a Day, apologizing to Margot for locking her in the closet during the one hour of sunshine on Venus. Same empathy badge mechanic: writing quality determines badge tier. Designed for comparative analysis of two different failures of empathy and two different contexts for apology."
+            }
+          ]
+        },
+        {
+          "title": "Reading Comprehension & Literary Analysis",
+          "blurb": "Published activities for close reading, comprehension, and literary analysis of Thank You M’am. Sources verified May 2026.",
+          "entries": [
+            {
+              "title": "CommonLit: Thank You Ma’am full module (text + guided reading + assessment + paired texts)",
+              "author": "CommonLit",
+              "url": "https://www.commonlit.org/en/texts/thank-you-m-am",
+              "format": "lesson-page",
+              "grade": "7-8",
+              "host": "commonlit.org",
+              "subject": "ela",
+              "notes": "Free with educator account. Full text with guided reading questions, assessment questions, discussion questions, paired text recommendations, parent guide. Text tools include dictionary, read-aloud, translator, highlighter. Single most comprehensive free digital resource for this story."
+            },
+            {
+              "title": "Varsity Tutors: Thank You M’am exemplar lesson (7th grade, text-dependent questions, evidentiary writing)",
+              "author": "Varsity Tutors / englishteacher.org",
+              "url": "https://www.varsitytutors.com/englishteacher/thank-you-mam-lesson-plans",
+              "format": "lesson-page",
+              "grade": "7",
+              "host": "varsitytutors.com",
+              "subject": "ela",
+              "notes": "Designed as exemplar lesson for 7th grade. Includes text-dependent questions with evidence-based answers, academic vocabulary, culminating writing task with writing prompt and structure, model response, and additional learning activities. Also includes Do Now exercises emphasizing language development: vocabulary, irregular verbs, context clues. 11 pages, Adobe Reader required."
+            },
+            {
+              "title": "Study.com: Thank You Ma’am lesson plan (theme identification + thank-you note writing)",
+              "author": "Study.com / Kristen (Ed.D.)",
+              "url": "https://study.com/academy/lesson/langston-hughes-thank-you-maam-lesson-plan.html",
+              "format": "lesson-page",
+              "grade": "7-10",
+              "host": "study.com",
+              "subject": "ela",
+              "notes": "Post-reading lesson. Opens with discussion about whether stealing is ever acceptable. Students identify theme/central idea and write a thank-you note to one of the characters. Aligned to CCSS RL.9-10.2 (determine theme, analyze development). Free preview; full access requires subscription."
+            },
+            {
+              "title": "Hey Natayle: 5-day Thank You M’am unit (story elements, S.T.E.A.L., conflict analysis)",
+              "author": "Natayle / Hey Natayle",
+              "url": "https://heynatayle.com/product/thank-you-mam-by-langston-hughes-short-story-unit/",
+              "format": "lesson-page",
+              "grade": "6-7",
+              "host": "heynatayle.com",
+              "subject": "ela",
+              "notes": "5-day unit for 6th graders. Day 1: character analysis with S.T.E.A.L. method (Speech, Thoughts, Effect on others, Actions, Looks) and Character Carousel group activity. Day 2: internal/external conflict analysis. Day 3-5: theme, empathy, second chances. Includes final quiz with multiple choice and short response. Paid resource. Also published a free blog post teaching walkthrough at heynatayle.com/teaching-thank-you-mam-by-langston-hughes/."
+            },
+            {
+              "title": "Mondays Made Easy: 3 engaging activities (symbolism graphic organizer, Hughes biography, paired poems)",
+              "author": "Mondays Made Easy",
+              "url": "https://mondaysmadeeasy.com/thank-you-maam/",
+              "format": "lesson-page",
+              "grade": "7-8",
+              "host": "mondaysmadeeasy.com",
+              "subject": "ela",
+              "notes": "Three activities: (1) Symbolism graphic organizer where students locate and interpret symbols in the story with pre-reading informational handout defining symbolism. (2) Hughes biography activity tracing formative years and literary influences. (3) Paired poems worksheet with Harlem, Mother to Son, and I Too by Hughes; students annotate each poem then answer short-answer questions. Free blog walkthrough; worksheets available for purchase."
+            }
+          ]
+        },
+        {
+          "title": "Creative Writing & Perspective-Taking",
+          "blurb": "Writing assignments that place students inside the story's moral world. Several independently arrive at the same structure as the bookwormburrows apology-letter assignment.",
+          "entries": [
+            {
+              "title": "Presto Plans: Roger writes Mrs. Jones 10 years later (creative writing letter assignment)",
+              "author": "Krista Mahan / Presto Plans",
+              "url": "https://prestoplans.com/teaching-thank-you-maam-by-langston-hughes/",
+              "format": "lesson-page",
+              "grade": "7-10",
+              "host": "prestoplans.com",
+              "subject": "ela",
+              "notes": "Full pedagogical walkthrough: pre-reading discussion questions (second chances, power of kindness, It takes a village proverb), during-reading comprehension stops, post-reading discussion, then culminating creative writing: students imagine they are Roger 10 years later and write a thank-you letter to Mrs. Jones describing what they did after leaving, what they have been doing since, and what impact her actions had. Independently converges on the same structure as the Seminar Schools apology-letter assignment. Notes the Blue Suede Shoes Elvis Presley allusion and the Harlem conversational dialect as teaching points."
+            },
+            {
+              "title": "TPT: Thank You M’am literary analysis essay (introductory paragraph builder)",
+              "author": "Teachers Pay Teachers seller",
+              "url": "https://www.teacherspayteachers.com/Product/Thank-You-Maam-Langston-Hughes-story-literary-analysis-PDF-Google-Drive-664193",
+              "format": "lesson-page",
+              "grade": "8-10",
+              "host": "teacherspayteachers.com",
+              "subject": "ela",
+              "notes": "One-day lesson plan with six deep-thinking questions (answer key included) and optional writing activity: step-by-step construction of a powerful introductory paragraph for a literary analysis essay. PDF and Google Drive formats. Best for advanced middle school or high school. Paid resource."
+            },
+            {
+              "title": "Lovin Lit: full 2-week Thank You M’am unit (pre/during/post reading, Hughes paired passages, theme comparison)",
+              "author": "Lovin Lit",
+              "url": "https://www.teacherspayteachers.com/Product/Thank-You-Maam-by-Langston-Hughes-Short-Story-Unit-3467187",
+              "format": "lesson-page",
+              "grade": "7-9",
+              "host": "teacherspayteachers.com",
+              "subject": "ela",
+              "notes": "Full unit with Common-Core-aligned worksheets, Hughes poem and Hughes memoir paired passages, theme comparison work, vocabulary exercises, comprehension questions, discussion prompts, creative writing tasks. Focus on characterization, theme, plot structure. Differentiation options for various learning styles. Paid (~$10). If a teacher wants a ready-to-deploy companion alongside the bookwormburrows campaign, this is the most complete commercial option."
+            }
+          ]
+        },
+        {
+          "title": "Drama-in-Education Techniques",
+          "blurb": "Process drama strategies from the Heathcote/O’Neill/Neelands tradition, adapted for Thank You M’am. These techniques map directly onto bookwormburrows session mechanics: hot seating IS character interrogation at the table; conscience alley IS the moral-dilemma beat in a session.",
+          "entries": [
+            {
+              "title": "Hot Seating: interrogate Mrs. Jones or Roger in character",
+              "author": "Dorothy Heathcote tradition / Drama Resource (David Farmer)",
+              "url": "https://dramaresource.com/hot-seating/",
+              "format": "lesson-page",
+              "grade": "6-10",
+              "host": "dramaresource.com",
+              "subject": "ela",
+              "notes": "One student or teacher sits in role as a character and answers questions from the class. For Thank You M’am: teacher-as-Mrs-Jones answers why she brought Roger home instead of calling the police; student-as-Roger answers what he was thinking when he tried to snatch the purse. In bookwormburrows deployment: this IS the NPC interrogation mechanic. The DM plays Mrs. Jones in the hot seat; bookworms ask questions; answers reveal character depth that feeds into the campaign’s moral landscape. Austin ISD published a peer-reviewed case study on hot seating in ELA (2020). Ontario OSSD: Oral Communication strand B1."
+            },
+            {
+              "title": "Conscience Alley: should Roger take the money from Mrs. Jones’s purse?",
+              "author": "Drama Teachers UK / Neelands tradition",
+              "url": "https://drama-teachers.com/drama-techniques/conscience-alley/",
+              "format": "lesson-page",
+              "grade": "6-10",
+              "host": "drama-teachers.com",
+              "subject": "ela",
+              "notes": "Class forms two lines. A student walks between them as Roger at the moment Mrs. Jones leaves her purse unattended on the daybed. One side whispers reasons to take the money; the other side whispers reasons not to. The walker decides at the end. In bookwormburrows deployment: this maps onto any moral-choice beat in a session. The technique externalizes the character’s inner conflict as a physical exercise. Printable A4 resource available free. Ontario OSSD: Oral Communication B1 (speaking to persuade), Reading C3 (critical thinking about character motivation). CCEA Key Stage 3 statutory drama requirement."
+            },
+            {
+              "title": "Freeze Frame / Tableau: key moments from the story frozen and analyzed",
+              "author": "Heathcote/Neelands tradition",
+              "url": "https://dramaresource.com/freeze-frames/",
+              "format": "lesson-page",
+              "grade": "6-10",
+              "host": "dramaresource.com",
+              "subject": "ela",
+              "notes": "Students create physical still images of key story moments: the purse-snatch, Mrs. Jones holding Roger by his shirt, Roger washing his face at the sink, the moment Mrs. Jones gives Roger the money. Teacher taps individual students to voice their character’s thoughts (thought-tracking). In bookwormburrows: freeze frames are the session recap mechanism (re-entry beat at the start of each ordinary session per ses-002). They make the transition from player-world to dimension-world physical."
+            },
+            {
+              "title": "Mantle of the Expert: students as Harlem community journalists investigating the purse-snatch",
+              "author": "Dorothy Heathcote / Gavin Bolton (1995, Drama for Learning, Heinemann)",
+              "url": "https://www.mantleoftheexpert.com/",
+              "format": "lesson-page",
+              "grade": "7-10",
+              "host": "mantleoftheexpert.com",
+              "subject": "ela",
+              "notes": "Heathcote’s approach: students are cast as a team of experts with a commission from a fictional client. For Thank You M’am: students are journalists for the Amsterdam News (Harlem’s Black newspaper, operating in 1958) assigned to investigate a series of purse-snatchings in the neighborhood. Their investigation leads them toward the Roger/Mrs. Jones encounter. They must decide what to report, what to protect, and how to write about poverty and crime in their own community. In bookwormburrows: this IS the campaign’s real-world Harlem layer. Bookworms exploring the neighborhood as characters with a professional purpose. Academic source: Heathcote & Bolton 1995; O’Neill 1995 Drama Worlds (Heinemann); Selderslaghs PhD in progress at Royal Conservatoire Antwerp."
+            },
+            {
+              "title": "Role on the Wall: visual character mapping for Roger and Mrs. Jones",
+              "author": "HFL Education / Heathcote tradition",
+              "url": "https://www.hfleducation.org/blog/drama-techniques-develop-literacy",
+              "format": "lesson-page",
+              "grade": "6-9",
+              "host": "hfleducation.org",
+              "subject": "ela",
+              "notes": "Draw an outline of the character on a large sheet. Outside the outline: what others see (actions, speech, appearance). Inside: what the character feels, thinks, fears, wants. For Roger: outside shows the attempted theft, the blue jeans, the dirty face; inside shows the absent parents, the desire for blue suede shoes, the shame. Supports hot seating by providing pre-work and captures learning for subsequent writing in role (e.g., the apology letter). Ontario OSSD: Reading C1 Knowledge about Texts."
+            }
+          ]
+        },
+        {
+          "title": "Historical Investigation & Primary Sources",
+          "blurb": "Resources for grounding the 1958 Harlem setting in historical reality. These feed the campaign’s real-world layer where bookworms encounter the neighborhood as it actually was.",
+          "entries": [
+            {
+              "title": "Library of Congress: Teaching with Primary Sources (Langston Hughes materials)",
+              "author": "Library of Congress",
+              "url": "https://www.loc.gov/search/?q=langston+hughes&fa=partof:teaching+with+primary+sources",
+              "format": "primary-source",
+              "grade": "7-12",
+              "host": "loc.gov",
+              "subject": "ela",
+              "notes": "LOC teacher guides with primary-source images and audio related to Hughes. Includes photographs, manuscripts, and audio recordings. For the campaign: these become discoverable artifacts in dream-Harlem. A bookworm entering Hughes’s study at 20 East 127th Street might find manuscript pages on the desk. Free, no registration."
+            },
+            {
+              "title": "Schomburg Center for Research in Black Culture: Harlem photographs collection",
+              "author": "New York Public Library / Schomburg Center",
+              "url": "https://digitalcollections.nypl.org/collections/schomburg-center-photographs",
+              "format": "primary-source",
+              "grade": "7-12",
+              "host": "nypl.org",
+              "subject": "history",
+              "notes": "Digital collection of Harlem photographs. The campaign page already uses a ca. 1946 photograph of West 125th Street from this collection. For bookwormburrows: these photographs are the visual substrate of the dimension. Teachers can project them as the DM describes the street the bookworms are walking. Free, digitized."
+            },
+            {
+              "title": "Hughes House at 20 East 127th Street (NYC Landmark, NRHP listed 1982)",
+              "author": "NYC Landmarks Preservation Commission (LP-1135, designated 1981)",
+              "url": "https://s-media.nyc.gov/agencies/lpc/lp/1135.pdf",
+              "format": "gov-resource",
+              "grade": "7-12",
+              "host": "nyc.gov",
+              "subject": "history",
+              "notes": "Official landmark designation report. Hughes occupied the top floor of this 1869 Italianate brownstone as a workroom from 1947 to 1967. The Harpers purchased the house in 1947; Hughes moved in with them. For the campaign: this is the location that pops the dream bubble. If bookworms decide to visit Hughes’s house during the 48-hour window, they transition from dream-Harlem to real-Harlem. The building is now home to the I, Too, Arts Collective. Block renamed Langston Hughes Place."
+            },
+            {
+              "title": "NYC LGBTQ Historic Sites Project: Langston Hughes Residence",
+              "author": "NYC LGBTQ Historic Sites Project / Amanda Davis",
+              "url": "https://www.nyclgbtsites.org/site/langston-hughes-residence/",
+              "format": "primary-source",
+              "grade": "9-12",
+              "host": "nyclgbtsites.org",
+              "subject": "history",
+              "notes": "Detailed entry on Hughes at 20 East 127th Street with notes on the Emerson and Ethel Harper household, the birth-year correction (1901 not 1902 per 2018 research), interior photographs, and references to Rampersad biography vol. II. For advanced students exploring Hughes’s full biography. Citations: Rampersad 2002, Schuessler NYT 2018."
+            },
+            {
+              "title": "Newsela: Langston Hughes biographical articles (lexile-leveled)",
+              "author": "Newsela",
+              "url": "https://newsela.com/",
+              "format": "lesson-page",
+              "grade": "6-10",
+              "host": "newsela.com",
+              "subject": "ela",
+              "notes": "Lexile-leveled biographical articles for differentiated reading. Same content adjusted to multiple reading levels (typically 5 levels from 3rd grade through 12th). For mixed Grade 7 reading levels. Requires school subscription for full access; limited free access available."
+            }
+          ]
+        },
+        {
+          "title": "Paired Texts & Hughes Poetry",
+          "blurb": "Poems and texts commonly taught alongside Thank You M’am. In the campaign, these populate dream-Harlem: a bookworm might hear Mother to Son recited on a stoop, or find the words of Harlem on a wall.",
+          "entries": [
+            {
+              "title": "CommonLit: Mother to Son by Langston Hughes",
+              "author": "CommonLit",
+              "url": "https://www.commonlit.org/en/texts/mother-to-son",
+              "format": "lesson-page",
+              "grade": "6-9",
+              "host": "commonlit.org",
+              "subject": "ela",
+              "notes": "CommonLit module with full text, guided reading questions, discussion questions. Direct paired-poem resource for Thank You M’am: Mrs. Jones as the mother-figure delivering hard-earned wisdom to a young person. In dream-Harlem: a bookworm sitting on the stoop of a boarding house hears an older woman reciting these words to her son. Free with educator account."
+            },
+            {
+              "title": "Harlem (A Dream Deferred) by Langston Hughes",
+              "author": "Langston Hughes (from Montage of a Dream Deferred, 1951)",
+              "url": "https://www.poetryfoundation.org/poems/46548/harlem",
+              "format": "clean-text",
+              "grade": "7-12",
+              "host": "poetryfoundation.org",
+              "subject": "ela",
+              "notes": "The poem that names the campaign’s setting. What happens to a dream deferred? In the campaign: this poem is the dimension’s thematic ground. Roger’s dream of blue suede shoes is a deferred dream. Mrs. Jones’s past (hinted at but never specified) contains deferred dreams. In dream-Harlem: the poem’s images (raisin in the sun, festering sore, heavy load, explosion) might appear literally in the dreamscape. Free, no registration."
+            },
+            {
+              "title": "StoryboardThat: The Treasure of Lemon Brown by Walter Dean Myers (lesson plan)",
+              "author": "StoryboardThat",
+              "url": "https://www.storyboardthat.com/lesson-plans/the-treasure-of-lemon-brown-by-walter-dean-myers",
+              "format": "lesson-page",
+              "grade": "7-8",
+              "host": "storyboardthat.com",
+              "subject": "ela",
+              "notes": "Visual storyboarding lesson for the commonly paired Myers story. Useful for scaffolding paired-reading week. The Treasure of Lemon Brown shares structural DNA with Thank You M’am: a young person encounters an older person who holds wisdom gained through suffering; the older person’s treasure is not material but experiential. In dream-Harlem: Lemon Brown could be an NPC in a condemned tenement the bookworms enter. Free basic access; subscription for full features."
+            }
+          ]
+        },
+        {
+          "title": "TTRPG-in-Education Research (Academic Sources)",
+          "blurb": "Peer-reviewed and professional sources documenting the use of tabletop role-playing games in classroom settings. These support the pedagogical claims of the bookwormburrows framework.",
+          "entries": [
+            {
+              "title": "Kaylor 2017: Dungeons and Dragons and Literacy (Master’s thesis, UNI)",
+              "author": "Stefanie L. B. Kaylor",
+              "url": "https://scholarworks.uni.edu/cgi/viewcontent.cgi?article=1195&context=grp",
+              "format": "lesson-pdf",
+              "grade": "9-12",
+              "host": "scholarworks.uni.edu",
+              "subject": "ela",
+              "notes": "Qualitative study examining how TTRPG play develops literacy skills and reading interests in teenagers. Finds that non-traditional texts used in TRPGs (magazines, graphic novels, rule books) engage students who otherwise may not engage with traditional pieces. Key citations: Glazer 2015, Hergenrader 2011, Zalka 2012. Free PDF."
+            },
+            {
+              "title": "ResearchGate 2025: Effects of Playing TTRPGs on Academic Literacy of Secondary Students (literature review)",
+              "author": "ResearchGate / multiple authors",
+              "url": "https://www.researchgate.net/publication/393412390",
+              "format": "lesson-pdf",
+              "grade": "7-12",
+              "host": "researchgate.net",
+              "subject": "ela",
+              "notes": "April 2025 literature review. Three themes: (1) conceptual framework from play theory, developmental psychology, and literacy research; (2) empirical evidence on reading comprehension, vocabulary, writing skills, narrative competence; (3) engagement and motivation through TTRPGs. Draws on Huizinga 1955 (play rules), Vygotsky ZPD, and implementation barriers research. Free PDF."
+            },
+            {
+              "title": "NGLC: How Tabletop RPGs Teach SEL and Improve Academics for Kids",
+              "author": "Adam (Kentucky Educators for RPGs) / NGLC",
+              "url": "https://www.nextgenlearning.org/articles/dungeons-dragons-durable-skills-sel-academics",
+              "format": "lesson-page",
+              "grade": "K-12",
+              "host": "nextgenlearning.org",
+              "subject": "multi",
+              "notes": "Cites Kade Wells (South Dakota middle school ELA teacher) whose students doubled NWEA MAP growth using D&D as entire instructional framework. Cites foundry10/Game to Grow white paper on TTRPGs and social-emotional learning. Cites CASEL Wheel alignment (self-awareness, self-management, responsible decision-making, relationship skills, social awareness). Free article."
+            },
+            {
+              "title": "NGLC: Polyhedral Pedagogy (Adam’s McFarland book 2025)",
+              "author": "Adam / NGLC / McFarland Publishers",
+              "url": "https://www.nextgenlearning.org/articles/polyhedral-pedagogy-tabletop-role-playing-games-education",
+              "format": "lesson-page",
+              "grade": "K-12",
+              "host": "nextgenlearning.org",
+              "subject": "multi",
+              "notes": "Profile of Sterling Harris at Western High School Louisville (JCPS). Peer-reviewed book: Tabletop Role-Playing Games in the Classroom: Infusing Gameplay into K-12 Instruction (McFarland, 2025). Free article; book is paid."
+            },
+            {
+              "title": "TTRPGkids: scholarly resources bibliography for educational tabletop RPGs",
+              "author": "TTRPGkids",
+              "url": "https://www.ttrpgkids.com/2023/05/22/a-list-of-scholarly-resources-for-utilizing-educational-tabletop-rpgs/",
+              "format": "lesson-page",
+              "grade": "K-12",
+              "host": "ttrpgkids.com",
+              "subject": "multi",
+              "notes": "Curated bibliography of academic sources. Includes: Bowman & Standiford 2015 (Educational LARP in middle school, International Journal of Role-playing); Boysen et al. 2022 and 2023 (playful learning designs in teacher education, Teaching and Teacher Education); Campbell & Madsen 2021 (TRPGs as literacy experiences, Canadian Journal of New Scholar in Education); Kaylor 2017. Free, regularly updated."
+            },
+            {
+              "title": "Heathcote & Bolton 1995: Drama for Learning (Mantle of the Expert, Heinemann)",
+              "author": "Dorothy Heathcote & Gavin Bolton",
+              "url": "https://www.amazon.com/Drama-Learning-Heathcotes-Education-Dimensions/dp/043508643X",
+              "format": "full-book",
+              "grade": "K-12",
+              "host": "amazon.com",
+              "subject": "multi",
+              "notes": "The foundational text for Mantle of the Expert. Students study curriculum as if they were a group of experts with a commission from a fictional client. Directly parallel to bookwormburrows’ structure where the DM gives bookworms a purpose in the dimension. Published 1995, Heinemann Drama. Paid book. Companion: O’Neill 1995, Drama Worlds: A Framework for Process Drama (Heinemann)."
+            }
+          ]
+        },
+        {
+          "title": "Hughes Geography & Place-Based Resources",
+          "blurb": "Physical locations in Harlem that anchor the campaign’s world. Each location is a potential encounter site in dream-Harlem or real-Harlem.",
+          "entries": [
+            {
+              "title": "20 East 127th Street: Langston Hughes House (Langston Hughes Place)",
+              "author": "I, Too, Arts Collective / NYC Tourism",
+              "url": "https://www.nyctourism.com/attractions-tours/the-langston-hughes-house/",
+              "format": "primary-source",
+              "grade": "7-12",
+              "host": "nyctourism.com",
+              "subject": "history",
+              "notes": "Hughes lived on the top floor from 1947 to 1967 with the Emerson and Ethel Harper family. Wrote Montage of a Dream Deferred (1951) and I Wonder as I Wander here. NYC Landmark 1981, NRHP 1982. Now home to I, Too, Arts Collective offering poetry salons and workshops. In the campaign: this is the dream-pop location. Bookworms who decide to visit Hughes’s house transition from dream-Harlem to real-Harlem. The house is open to the public."
+            },
+            {
+              "title": "Schomburg Center for Research in Black Culture (Arthur Schomburg Center, 515 Malcolm X Blvd)",
+              "author": "New York Public Library",
+              "url": "https://www.nypl.org/locations/schomburg",
+              "format": "primary-source",
+              "grade": "7-12",
+              "host": "nypl.org",
+              "subject": "history",
+              "notes": "Hughes’s ashes are interred beneath a medallion in the floor outside the auditorium named for him. The center holds his papers and is the major archival resource for Harlem Renaissance research. In dream-Harlem: a bookworm might visit the library and find it populated with characters from Hughes’s stories. In real-Harlem: the Schomburg is the research hub for investigating the 1958 world."
+            },
+            {
+              "title": "Lenox Avenue (Malcolm X Boulevard): Harlem’s heartbeat (Hughes, Juke Box Love Song)",
+              "author": "Wikipedia / NYC geography",
+              "url": "https://en.wikipedia.org/wiki/Lenox_Avenue",
+              "format": "primary-source",
+              "grade": "7-12",
+              "host": "wikipedia.org",
+              "subject": "history",
+              "notes": "Hughes described Lenox Avenue’s traffic as Harlem’s heartbeat in Juke Box Love Song. Runs from Central Park North (110th) to 147th Street. Mount Morris Park Historic District from 119th to 123rd. In dream-Harlem: Lenox Avenue is the main artery bookworms walk. The jukebox music from Hughes’s poem plays from bars along the avenue."
+            },
+            {
+              "title": "Gothamist: Langston Hughes Lives On In Harlem (walking tour overview)",
+              "author": "Gothamist",
+              "url": "https://gothamist.com/arts-entertainment/langston-hughes-lives-on-in-harlem",
+              "format": "lesson-page",
+              "grade": "7-12",
+              "host": "gothamist.com",
+              "subject": "history",
+              "notes": "Overview of Hughes sites: the brownstone, the Schomburg Center ashes, the block renaming to Langston Hughes Place. Quotes Hughes: I would rather have a kitchenette in Harlem than a mansion in Westchester. For campaign context: the kitchenette reference connects directly to the kitchenette-furnished room Mrs. Jones rents in a boarding house in the story. Free article."
+            }
+          ]
+        },
+        {
+          "title": "Facing History & Ourselves",
+          "blurb": "Moral reasoning and historical empathy frameworks. No Thank You M’am specific lesson exists on Facing History; these are the closest structural fits for the campaign’s themes of empathy, race, perspective-taking, and restorative response.",
+          "entries": [
+            {
+              "title": "ELA Learning Experiences (19 modular Engage/Explore/Extend activities)",
+              "author": "Facing History & Ourselves",
+              "url": "https://www.facinghistory.org/resource-library/teach-facing-history-ela-learning-experiences",
+              "format": "lesson-page",
+              "grade": "7-12",
+              "host": "facinghistory.org",
+              "subject": "ela",
+              "notes": "19 modular learning experiences using head/heart/conscience analytical posture. Each follows Engage/Explore/Extend structure. Insertable into any literature unit. The Mrs. Jones/Roger encounter rewards exactly this posture. Free with educator account. Ontario 2023: strands B (Comprehension) and D (Application)."
+            },
+            {
+              "title": "Coming of Age ELA Unit Planning Toolkit (voices and choices analysis)",
+              "author": "Facing History & Ourselves",
+              "url": "https://facinghistory.org/ela/coming-age/unit-planning-toolkit/teaching-facing-history-learning-experiences",
+              "format": "lesson-page",
+              "grade": "7-10",
+              "host": "facinghistory.org",
+              "subject": "ela",
+              "notes": "Designed around coming-of-age literature. Strategies for teaching setting as moral/social force, perspective-taking activities, voices and choices analysis. Mrs. Jones choosing to feed Roger rather than call police is a textbook voices-and-choices exemplar. Free Google Doc downloads."
+            },
+            {
+              "title": "Strategies for Addressing Racist and Dehumanizing Language in Literature",
+              "author": "Facing History & Ourselves",
+              "url": "https://www.facinghistory.org/resource-library/strategies-addressing-racist-dehumanizing-language-literature",
+              "format": "teacher-guide",
+              "grade": "6-12",
+              "host": "facinghistory.org",
+              "subject": "ela",
+              "notes": "Practical guidance for handling dialect and period-appropriate but now-offensive vocabulary. Relevant because Hughes 1958 story uses period dialect and the broader Harlem 1958 historical record includes period use of the word Negro. Free."
+            },
+            {
+              "title": "How Historical Empathy Helps Students Understand the World Today",
+              "author": "Facing History & Ourselves",
+              "url": "https://www.facinghistory.org/ideas-week/how-historical-empathy-helps-students-understand-world-today",
+              "format": "lesson-page",
+              "grade": "7-12",
+              "host": "facinghistory.org",
+              "subject": "ela",
+              "notes": "Defines historical empathy as understanding people in the past by contextualizing their actions. This is exactly the cognitive move the dream-Harlem / real-1958-Harlem dual layer asks students to make. Free."
+            }
+          ]
+        },
+        {
+          "title": "ReadWriteThink / NCTE",
+          "blurb": "No Thank You M’am specific lesson exists on ReadWriteThink. These Hughes and Harlem Renaissance lessons provide the literary-historical context layer the campaign needs.",
+          "entries": [
+            {
+              "title": "Discovering a Passion for Poetry with Langston Hughes (Literary Graffiti tool)",
+              "author": "ReadWriteThink (NCTE/IRA)",
+              "url": "https://www.readwritethink.org/classroom-resources/lesson-plans/discovering-passion-poetry",
+              "format": "lesson-page",
+              "grade": "7-12",
+              "host": "readwritethink.org",
+              "subject": "ela",
+              "notes": "Students analyze Hughes poems in sociohistorical context then create their own poem on a current issue using the Literary Graffiti interactive tool. Develops literary-historical contextualization, voice, and written composition. Ontario 2023: strand C (Composition). Free."
+            },
+            {
+              "title": "A Harlem Renaissance Retrospective: Connecting Art, Music, Dance, and Poetry",
+              "author": "ReadWriteThink (NCTE/IRA)",
+              "url": "https://www.readwritethink.org/classroom-resources/lesson-plans/harlem-renaissance-retrospective-connecting",
+              "format": "lesson-page",
+              "grade": "7-12",
+              "host": "readwritethink.org",
+              "subject": "ela",
+              "notes": "Students conduct internet research, use interactive Venn diagram tool, build a museum exhibit on a Harlem Renaissance artist. Develops research, synthesis, cross-disciplinary connection. Excellent prep for the campaign dream-Harlem layer where Hughes contemporaries populate the streets. Free."
+            },
+            {
+              "title": "Varying Views of America (Whitman / Hughes / Angelou comparison)",
+              "author": "ReadWriteThink (NCTE/IRA)",
+              "url": "https://www.readwritethink.org/classroom-resources/lesson-plans/varying-views-america",
+              "format": "lesson-page",
+              "grade": "9-12",
+              "host": "readwritethink.org",
+              "subject": "ela",
+              "notes": "Students compare Whitman I Hear America Singing, Hughes I Too Sing America, and Angelou On the Pulse of Morning. Tone, point of view, perspective-taking. Strong scaffold for hot-seating Mrs. Jones vs Roger. Free."
+            },
+            {
+              "title": "Portrait of Langston Hughes (primary-source photograph strategy)",
+              "author": "ReadWriteThink (NCTE/IRA)",
+              "url": "https://www.readwritethink.org/primary-source-strategies/portrait-langston-hughes",
+              "format": "primary-source",
+              "grade": "7-12",
+              "host": "readwritethink.org",
+              "subject": "ela",
+              "notes": "Uses Carl Van Vechten 1936 LOC photograph as primary source for figurative-language and biographical study. Good establishing shot for the dream-Harlem layer. Free."
+            },
+            {
+              "title": "Drafts of Langston Hughes Ballad of Booker T. (revision process primary source)",
+              "author": "ReadWriteThink (NCTE/IRA)",
+              "url": "https://www.readwritethink.org/node/231",
+              "format": "primary-source",
+              "grade": "9-12",
+              "host": "readwritethink.org",
+              "subject": "ela",
+              "notes": "Five typewritten drafts (LOC mcc.024) showing Hughes revision process. Develops the revision strand. Ontario 2023: strand C (Composition). In dream-Harlem: bookworms visiting Hughes workroom at 20 East 127th might find these drafts on the desk. Free."
+            }
+          ]
+        },
+        {
+          "title": "PBS LearningMedia & Video Resources",
+          "blurb": "Documentary segments and lesson plans grounding the Harlem Renaissance context. No Thank You M’am specific lesson exists on PBS LearningMedia.",
+          "entries": [
+            {
+              "title": "The Negro Speaks of Rivers (A Walk Through Harlem series, PBS LearningMedia)",
+              "author": "PBS LearningMedia",
+              "url": "https://www.pbslearningmedia.org/resource/vtl07.la.ws.style.rivers/the-negro-speaks-of-rivers/",
+              "format": "lesson-page",
+              "grade": "6-12",
+              "host": "pbslearningmedia.org",
+              "subject": "ela",
+              "notes": "Hughes biographical clip plus full reading of his first published poem (1922). Develops figurative-language and connotative-meaning standards. Free with educator account."
+            },
+            {
+              "title": "Langston Hughes and the Harlem Renaissance (C-SPAN Classroom, Schomburg Center)",
+              "author": "C-SPAN Classroom",
+              "url": "https://www.c-span.org/classroom/document/?4911=",
+              "format": "lesson-page",
+              "grade": "6-12",
+              "host": "c-span.org",
+              "subject": "history",
+              "notes": "Schomburg Center Director Howard Dodson interview footage. Downloadable graphic organizer. Free."
+            },
+            {
+              "title": "Blues, Poetry, and the Harlem Renaissance (TeachRock, KWL chart)",
+              "author": "TeachRock",
+              "url": "https://teachrock.org/lesson/blues-poetry-and-the-harlem-renaissance/",
+              "format": "lesson-page",
+              "grade": "6-12",
+              "host": "teachrock.org",
+              "subject": "ela",
+              "notes": "Connects Hughes poems (I Too, Negro Speaks of Rivers, Homesick Blues, Harlem) with Blues lyrics. KWL chart handout. Develops media literacy and the place-based Harlem-as-cultural-context strand. Free."
+            },
+            {
+              "title": "Langston Hughes (Voices and Visions documentary, Annenberg Learner)",
+              "author": "Annenberg Learner",
+              "url": "https://www.learner.org/series/voices-visions/langston-hughes/",
+              "format": "lesson-page",
+              "grade": "9-12",
+              "host": "learner.org",
+              "subject": "ela",
+              "notes": "Full documentary with James Baldwin and biographer Arnold Rampersad. Gold-standard background video for teacher prep. Free streaming."
+            }
+          ]
+        },
+        {
+          "title": "Restorative Justice & Ethical Reasoning",
+          "blurb": "Mrs. Jones choosing relationship over punishment is a textbook restorative-justice interaction. No peer-reviewed article explicitly applies RJ theory to this story. This is an authorship opportunity for bookwormburrows.",
+          "entries": [
+            {
+              "title": "Restorative Justice in School: An Overview (Cult of Pedagogy)",
+              "author": "Jennifer Gonzalez / Cult of Pedagogy",
+              "url": "https://www.cultofpedagogy.com/restorative-justice-overview/",
+              "format": "lesson-page",
+              "grade": "6-12",
+              "host": "cultofpedagogy.com",
+              "subject": "multi",
+              "notes": "Practitioner overview of RJ in schools. Comments thread recommends Touching Spirit Bear (Mikaelsen) as narrative RJ parallel. Same logic applies to Thank You M’am: Mrs. Jones substitutes relationship-building for police involvement, community accountability, making whole through trust (leaving purse unguarded). Free."
+            },
+            {
+              "title": "Examples of Restorative Justice (Colorado School Safety Resource Center, PDF)",
+              "author": "Colorado CDPS",
+              "url": "https://cdpsdocs.state.co.us/safeschools/CSSRC%20Documents/CSSRC%20Examples%20of%20Restorative%20Justice.pdf",
+              "format": "lesson-pdf",
+              "grade": "6-12",
+              "host": "state.co.us",
+              "subject": "multi",
+              "notes": "Concrete classroom scenarios usable as parallel readings to Thank You M’am. Free PDF."
+            },
+            {
+              "title": "UNC K-12 Database: Thank You M’am kindness-and-choice role-play lesson (PDF)",
+              "author": "University of North Carolina K-12 Database",
+              "url": "https://k12database.unc.edu/wp-content/uploads/sites/31/2012/05/ThankYouMam.pdf",
+              "format": "lesson-pdf",
+              "grade": "6-8",
+              "host": "unc.edu",
+              "subject": "ela",
+              "notes": "Scripted ethical role-plays (Student A asks Student B to copy on a test; Student C must decide whether to tell teacher) plus alternate-ending creative writing. Direct alignment with the campaign diceless/role-play model. Best free lesson for converting branching narrative into traditional ELA artifacts. Free PDF."
+            }
+          ]
+        },
+        {
+          "title": "Harlem Renaissance Teaching Units (Broader Context)",
+          "blurb": "Comprehensive units providing the cultural and historical substrate for the campaign dream-Harlem layer.",
+          "entries": [
+            {
+              "title": "Harlem Renaissance (National Gallery of Art, Uncovering America)",
+              "author": "National Gallery of Art",
+              "url": "https://www.nga.gov/educational-resources/uncovering-america/harlem-renaissance",
+              "format": "lesson-page",
+              "grade": "9-12",
+              "host": "nga.gov",
+              "subject": "arts",
+              "notes": "Covers Aaron Douglas, Winold Reiss, Alain Locke The New Negro (1925), Harlem Community Art Center. Strong on visual-arts vocabulary for the dream-layer where art populates the streets. Free."
+            },
+            {
+              "title": "A New African American Identity: The Harlem Renaissance (NMAAHC, Smithsonian)",
+              "author": "National Museum of African American History and Culture",
+              "url": "https://nmaahc.si.edu/explore/stories/new-african-american-identity-harlem-renaissance",
+              "format": "primary-source",
+              "grade": "7-12",
+              "host": "si.edu",
+              "subject": "history",
+              "notes": "Authoritative overview. Cites Alain Locke Enter the New Negro, Survey Graphic 6 (March 1925) p. 634, formulating the Harlem Renaissance as a spiritual Coming of Age. Useful as canonical period self-description for dream-Harlem. Free."
+            },
+            {
+              "title": "The Poet’s Voice: Langston Hughes and You (NEH / EDSITEment)",
+              "author": "National Endowment for the Humanities / EDSITEment",
+              "url": "https://edsitement.neh.gov/lesson-plans/poets-voice-langston-hughes-and-you",
+              "format": "lesson-page",
+              "grade": "9-12",
+              "host": "neh.gov",
+              "subject": "ela",
+              "notes": "Five-journal-entry sequence built around Negro Speaks of Rivers, Mother to Son, and others. Defines and develops voice. Notes Hughes 1958 collaboration with Henry Red Allen band, a useful 1958 anchor for the campaign. Free."
+            },
+            {
+              "title": "Teach This Poem: Theme for English B by Langston Hughes (poets.org)",
+              "author": "Academy of American Poets / Dr. Madeleine Fuchs Holzer",
+              "url": "https://poets.org/lesson-plan/teach-poem-theme-english-b-langston-hughes",
+              "format": "lesson-page",
+              "grade": "7-12",
+              "host": "poets.org",
+              "subject": "ela",
+              "notes": "Free lesson plan by Academy Educator in Residence. Theme for English B is the poem where Hughes speaker walks from Columbia down through Harlem, the same geography the campaign bookworms traverse. Free."
+            },
+            {
+              "title": "Teach This Poem: As I Grew Older by Langston Hughes (poets.org, with Ellington audio)",
+              "author": "Academy of American Poets",
+              "url": "https://poets.org/lesson-plan/teach-poem-i-grew-older-langston-hughes",
+              "format": "lesson-page",
+              "grade": "7-12",
+              "host": "poets.org",
+              "subject": "ela",
+              "notes": "Includes Duke Ellington/Johnny Hodges audio integration of Weary Blues. Develops listening and cross-media analysis. In dream-Harlem: bookworms might hear this music from a window on Lenox Avenue. Free."
+            },
+            {
+              "title": "The Harlem Renaissance lesson plan (PBS NewsHour Classroom, found poem activity)",
+              "author": "PBS NewsHour Classroom / Daniella K. Garran",
+              "url": "https://www.pbs.org/newshour/classroom/lesson-plans/2013/02/the-harlem-renissance",
+              "format": "lesson-page",
+              "grade": "9-12",
+              "host": "pbs.org",
+              "subject": "ela",
+              "notes": "Includes Found poem activity and Lasting Legacy essay assignment. The Found poem technique maps onto the campaign: bookworms collecting words and phrases from the dimension to compose a poem is a natural in-game activity. Free."
+            }
+          ]
+        },
+        {
+          "title": "MLK Stabbing at Blumstein’s (September 20 1958, Campaign Historical Anchor)",
+          "blurb": "The real-world event happening the same day as the campaign’s setting. These sources anchor the real-Harlem layer where the literary overlay lifts but real events remain.",
+          "entries": [
+            {
+              "title": "Curry, Izola Ware (Stanford King Institute encyclopedia entry)",
+              "author": "Martin Luther King Jr. Research and Education Institute, Stanford",
+              "url": "https://kinginstitute.stanford.edu/curry-izola-ware",
+              "format": "primary-source",
+              "grade": "9-12",
+              "host": "stanford.edu",
+              "subject": "history",
+              "notes": "Authoritative scholarly entry. Izola Ware Curry stabbed King at Blumstein’s Department Store (230 West 125th Street) on September 20 1958 with a 7-inch steel letter opener. More than two hours of surgery at Harlem Hospital. The famous just a sneeze away from death assessment was by attending surgeon Dr. Emil A. Naclerio, quoted in Jet magazine. Cites Papers 4:498-499, King statement October 24 1958, NYT September 22 1958. Free."
+            },
+            {
+              "title": "How an Assassination Attempt Affirmed MLK’s Faith in Nonviolence (History.com)",
+              "author": "History.com / A&E",
+              "url": "https://www.history.com/articles/martin-luther-king-1958-assassination-attempt",
+              "format": "lesson-page",
+              "grade": "9-12",
+              "host": "history.com",
+              "subject": "history",
+              "notes": "Long-form retrospective. Identifies operating surgeons Drs. Emil A. Naclerio and John W. V. Cordice. Confirms Blumstein’s at 230 West 125th, the letter opener, and King’s nonviolent response statements of September 30 and October 24 1958. Free."
+            },
+            {
+              "title": "Thank You M’am 1976 short film record (NMAAHC, Smithsonian, object 2017.55.45.1a)",
+              "author": "National Museum of African American History and Culture",
+              "url": "https://nmaahc.si.edu/object/nmaahc_2017.55.45.1a",
+              "format": "primary-source",
+              "grade": "7-12",
+              "host": "si.edu",
+              "subject": "ela",
+              "notes": "16mm Eric Jones / Rosetta LeNoire dramatization, transferred from DC Public Library. The canonical short film of the story with NMAAHC provenance. Free record; film availability varies."
+            }
+          ]
+        },
+        {
+          "title": "Harlem 1958 Radio and Music Context",
+          "blurb": "What was playing on the radio in Mrs. Jones’s boarding-house room the night Roger tried to snatch her purse.",
+          "entries": [
+            {
+              "title": "WLIB station history (1190 kHz, Hotel Theresa, Hal Jackson, The House That Jack Built)",
+              "author": "Wikipedia (citing FCC and Inner City Broadcasting records)",
+              "url": "https://en.wikipedia.org/wiki/WLIB",
+              "format": "primary-source",
+              "grade": "7-12",
+              "host": "wikipedia.org",
+              "subject": "history",
+              "notes": "In 1958 WLIB broadcast from the Harlem Radio Center in the Hotel Theresa with pioneering Black DJ Hal Jackson on staff. Jackson anchored The House That Jack Built. Daytime-only. In the campaign: WLIB is the radio station playing in Mrs. Jones’s room. Free."
+            },
+            {
+              "title": "WWRL station history (1600 kHz, competing Black AM station)",
+              "author": "Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/WWRL",
+              "format": "primary-source",
+              "grade": "7-12",
+              "host": "wikipedia.org",
+              "subject": "history",
+              "notes": "The competing Black AM station serving Harlem in 1958. WLIB and WWRL were the two AM radios most likely playing in any Harlem boarding-house room. Free."
+            },
+            {
+              "title": "Apollo Theater history (R&B revue format introduced 1955 by Tommy Dr. Jive Smalls)",
+              "author": "Apollo Theater Foundation",
+              "url": "https://www.apollotheater.org/history",
+              "format": "primary-source",
+              "grade": "7-12",
+              "host": "apollotheater.org",
+              "subject": "history",
+              "notes": "In 1955 DJ Tommy Dr. Jive Smalls brought the R&B Revue concept to Apollo manager Bobby Schiffman. By September 1958 the house was three years into this format with as many as a dozen vocal acts on one bill. Specific September 20 1958 booking not findable in free sources; the Smithsonian Frank Schiffman Collection contains the 5x8 cards that would resolve this. Free."
+            },
+            {
+              "title": "Frank Schiffman Apollo Theatre Collection (Smithsonian NMAH Archives Center)",
+              "author": "Smithsonian National Museum of American History",
+              "url": "https://americanhistory.si.edu/explore/stories/apollo-theater-its-cards",
+              "format": "primary-source",
+              "grade": "9-12",
+              "host": "si.edu",
+              "subject": "history",
+              "notes": "Sixteen boxes including 5x8 cards kept by Frank Schiffman on every act 1946-1976. Documents Chuck Berry March 13 1958 appearance. The specific week-of-September-20-1958 booking is retrievable from this collection by in-person researchers. Free essay; archive requires on-site access."
+            }
+          ]
+        },
+        {
+          "title": "Interactive Fiction, Branching Narrative, and Game-Based Pedagogy (Academic)",
+          "blurb": "Peer-reviewed and professional sources supporting the bookwormburrows diceless/branching-narrative model. These give the campaign academic legitimacy.",
+          "entries": [
+            {
+              "title": "Cook, Gremo & Morgan 2017: We’re Just Playing (Simulation & Gaming, modified TTRPG in middle-school ELA)",
+              "author": "Mike P. Cook, Matthew Gremo, Ryan Morgan",
+              "url": "https://journals.sagepub.com/doi/abs/10.1177/1046878116684570",
+              "format": "lesson-pdf",
+              "grade": "7-9",
+              "host": "sagepub.com",
+              "subject": "ela",
+              "notes": "Qualitative study of 36 middle-school ELA students using a Pathfinder-modified TTRPG paired with Connell The Most Dangerous Game. Found textually grounded gaming decisions, meaningful collaboration, narrative learning through character. The closest published peer-reviewed analogue to what bookwormburrows does. Simulation & Gaming 48(2) 199-218. DOI: 10.1177/1046878116684570. Paid journal; abstract free."
+            },
+            {
+              "title": "Sayers 2011: Mantle of the Expert as Community of Practice (English in Education)",
+              "author": "Ruth Sayers",
+              "url": "https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1754-8845.2010.01084.x",
+              "format": "lesson-pdf",
+              "grade": "K-8",
+              "host": "wiley.com",
+              "subject": "ela",
+              "notes": "Frames Mantle of the Expert as Wenger-style Community of Practice. Directly relevant to the campaign students as literary detectives in Hughes Harlem frame. English in Education 45(1) 20-35. DOI: 10.1111/j.1754-8845.2010.01084.x. Paid journal; abstract free."
+            },
+            {
+              "title": "Salter & Moulthrop 2021: Twining (Amherst College Press, open access)",
+              "author": "Anastasia Salter & Stuart Moulthrop",
+              "url": "https://library.oapen.org/handle/20.500.12657/57785",
+              "format": "full-book",
+              "grade": "9-12",
+              "host": "oapen.org",
+              "subject": "multi",
+              "notes": "Peer-reviewed monograph on Twine as critical, creative, and pedagogical medium. Chapters on classroom integration of branching interactive fiction. DOI: 10.3998/mpub.12255695. Free open access."
+            },
+            {
+              "title": "Kirilloff 2021: Interactive Fiction in the Humanities Classroom (Programming Historian, Twine)",
+              "author": "Gabi Kirilloff",
+              "url": "https://programminghistorian.org/en/lessons/interactive-text-games-using-twine",
+              "format": "lesson-page",
+              "grade": "9-12",
+              "host": "programminghistorian.org",
+              "subject": "multi",
+              "notes": "Open-access peer-reviewed lesson. Surveys prior pedagogical literature on Twine in teaching (Jeremiah McCall on history-classroom Twine, Jonathan Kotchian on composition and reader response). DOI: 10.46430/phen0095. Free."
+            },
+            {
+              "title": "Cawthon, Dawson & Ihorn 2011: Activating Student Engagement Through Drama-Based Instruction (ERIC)",
+              "author": "Stephanie W. Cawthon, Katie Dawson, Shari Ihorn",
+              "url": "https://files.eric.ed.gov/fulltext/EJ985619.pdf",
+              "format": "lesson-pdf",
+              "grade": "6-9",
+              "host": "eric.ed.gov",
+              "subject": "ela",
+              "notes": "Drama for Schools model increases authentic engagement among middle-school students. ERIC: EJ985619. Journal for Learning through the Arts. Free PDF."
+            },
+            {
+              "title": "Anderson & Loughlin: Process Drama Pedagogy for the Literacy Programme (ERIC EJ1139685)",
+              "author": "Anderson & Loughlin",
+              "url": "https://eric.ed.gov/?id=EJ1139685",
+              "format": "lesson-pdf",
+              "grade": "K-8",
+              "host": "eric.ed.gov",
+              "subject": "ela",
+              "notes": "Exploratory study showing process drama expanded students text-user, meaning-maker, and text-analyst practices. Pedagogies: An International Journal. ERIC: EJ1139685. Free abstract."
+            }
+          ]
+        },
+        {
+          "title": "Ontario Curriculum Alignment Documents",
+          "blurb": "Canonical curriculum documents for mapping campaign activities to Ontario expectations.",
+          "entries": [
+            {
+              "title": "Ontario Curriculum Grades 1-8: Language, 2023 (official PDF)",
+              "author": "Ontario Ministry of Education",
+              "url": "https://assets-us-01.kc-usercontent.com/fbd574c4-da36-0066-a0c5-849ffb2de96e/0dabb9f4-e0a9-43fe-8809-b01acf228e77/Language_G1-8_2023_AODA.pdf",
+              "format": "gov-resource",
+              "grade": "1-8",
+              "host": "ontario.ca",
+              "subject": "ela",
+              "notes": "Canonical strand reference. 2023 document orders strands as A (Literacy Connections and Applications), B (Foundations of Language), C (Comprehension: Understanding and Responding to Texts), D (Composition: Expressing Ideas and Creating Texts). Grade 7 expectations begin at p. 185; Grade 8 at p. 198. Free public PDF."
+            },
+            {
+              "title": "TVO Learn Grade 7 Language (Ontario-certified teacher-curated activities)",
+              "author": "TVO Learn / Ontario public broadcaster",
+              "url": "https://tvolearn.com/pages/grade-7-language",
+              "format": "lesson-page",
+              "grade": "7",
+              "host": "tvolearn.com",
+              "subject": "ela",
+              "notes": "Learning activities, vocabulary lists, videos, articles, podcasts aligned to 2023 Ontario curriculum. Free."
+            },
+            {
+              "title": "TVO Learn Grade 8 Language",
+              "author": "TVO Learn / Ontario public broadcaster",
+              "url": "https://tvolearn.com/pages/grade-8-language",
+              "format": "lesson-page",
+              "grade": "8",
+              "host": "tvolearn.com",
+              "subject": "ela",
+              "notes": "Grade 8 page explicitly states students are encouraged to explore issues related to personal identity and community concerns as they interact with increasingly complex and challenging texts. Direct fit with campaign identity/empathy themes. Free."
+            }
+          ]
+        }
+      ]
     }
   ],
   "categories": [
@@ -12266,9 +13156,76 @@ body.searching details.category[hidden] {
         }
       ]
     }
-  ]
-}
-</script>
+  ,
+{
+      "id": "curated-bookworm-assignments",
+      "kicker": "★ Curated · ix. Bookwormburrows writing assignments",
+      "title": "Writing assignments for Thank You, M’am",
+      "blurb": "Every writing task for the Thank You, M’am campaign in one place, built on the Holt McDougal Grade 7 unit and Common Core RL.1, RL.3, L.2b, L.4b, L.6, W.2. Each task produces badge-tier evidence in bookwormburrows play. Run them from the campaign page.",
+      "entries": [
+            {
+                  "title": "Extended response comparing Roger before and after",
+                  "url": "https://seminarschools.com/campaigns/thank-you-mam/",
+                  "format": "lesson-page",
+                  "grade": "7",
+                  "host": "seminarschools.com",
+                  "subject": "ela",
+                  "curriculum": "common-core",
+                  "blurb": "Two or three paragraphs comparing how Roger behaves at the purse-snatch with how he behaves after time with Mrs. Jones, explaining how her belief in his potential helps him show his best self. Holt SE page 75, standard W.2."
+            },
+            {
+                  "title": "In-character apology letter to Mrs. Jones",
+                  "url": "https://seminarschools.com/campaigns/thank-you-mam/",
+                  "format": "lesson-page",
+                  "grade": "7",
+                  "host": "seminarschools.com",
+                  "subject": "ela",
+                  "curriculum": "common-core",
+                  "blurb": "Roger writes Mrs. Luella Bates Washington Jones the morning after. Writing quality sets the badge tier, gold for earned contrition and bronze for a hollow apology. Practices possessive spelling per L.2b."
+            },
+            {
+                  "title": "Found poem from Thank You, M’am",
+                  "url": "https://seminarschools.com/campaigns/thank-you-mam/",
+                  "format": "lesson-page",
+                  "grade": "7",
+                  "host": "seminarschools.com",
+                  "subject": "ela",
+                  "curriculum": "common-core",
+                  "blurb": "Students build a found poem from the language of the story. The technique maps onto bookworm reflection on what mattered in the encounter."
+            },
+            {
+                  "title": "Lasting Legacy essay",
+                  "url": "https://seminarschools.com/campaigns/thank-you-mam/",
+                  "format": "lesson-page",
+                  "grade": "7",
+                  "host": "seminarschools.com",
+                  "subject": "ela",
+                  "curriculum": "common-core",
+                  "blurb": "Short essay on the enduring message Hughes leaves, tied to the theme question and the Emily Dickinson connect-poem."
+            },
+            {
+                  "title": "Inference and conflict charts",
+                  "url": "https://seminarschools.com/campaigns/thank-you-mam/",
+                  "format": "lesson-page",
+                  "grade": "7",
+                  "host": "seminarschools.com",
+                  "subject": "ela",
+                  "curriculum": "common-core",
+                  "blurb": "A two-column inference chart, detail then what the reader infers, and an internal versus external conflict chart that identifies which conflict sets the plot in motion. Standards RL.1 and RL.3."
+            },
+            {
+                  "title": "Vocabulary in context (barren, frail, mistrust, presentable)",
+                  "url": "https://seminarschools.com/campaigns/thank-you-mam/",
+                  "format": "lesson-page",
+                  "grade": "7",
+                  "host": "seminarschools.com",
+                  "subject": "ela",
+                  "curriculum": "common-core",
+                  "blurb": "The four unit words plus the prefixes-that-mean-not strategy across dis, in, un, mis, and non. Standards L.4b and L.6."
+            }
+      ]
+}]
+}</script>
 
 <script>
 (function() {
@@ -12287,7 +13244,7 @@ body.searching details.category[hidden] {
   var FORMATS    = data.formats    || {};
   var SUBJECTS   = data.subjects   || {};
   var CURRICULA  = data.curricula  || {};
-  var GROUPS     = data.groups     || [];
+  var GROUPS = (data.groups || []).filter(function(g){ return g && g.categories; });
 
   // Map format -> stripe class
   var STRIPE = {

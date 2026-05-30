@@ -35,6 +35,11 @@
   --geo-density: 0.18;
   --geo2-density: 0.10;
 }
+
+/* readout layout ported from homepage (unscoped) so threshold-coords labels and values do not collapse */
+.threshold-coords .row{display:grid;grid-template-columns:7rem 1fr;gap:1.2rem;padding:.6rem 0;border-bottom:1px solid var(--rule,rgba(0,0,0,.15));align-items:baseline}
+.threshold-coords .lbl{font-family:var(--sans,var(--body,sans-serif));font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent,inherit);font-weight:500}
+.threshold-coords .val{font-family:var(--mono,monospace);font-size:.78rem;color:var(--fg,inherit);opacity:.85;letter-spacing:.04em}
 </style>
 <script type="application/ld+json">
 {
@@ -71,7 +76,8 @@
   <span class="right">Nutrition</span>
 </header>
 <main>
-<nav class="project-nav" aria-label="Projects"><a href="/">Home</a><a href="/agora/">Agora</a><a href="/marginalia/">Marginalia</a><a href="/sabachtan-seminar/">Sabachtan</a><a href="/ohm-dome/">Ohm Dome</a><a href="/nutrition/" class="current">Nutrition</a><a href="/teacherresources/">Resources</a><a href="/florilegium/">Florilegium</a></nav>
+<nav class="project-nav" aria-label="Projects"><a href="/">Home</a><a href="/calendar/">Calendar</a>
+<a href="/agora/">Agora</a><a href="/marginalia/">Marginalia</a><a href="/sabachtan-seminar/">Sabachtan</a><a href="/ohm-dome/">Ohm Dome</a><a href="/nutrition/" class="current">Nutrition</a><a href="/teacherresources/">Resources</a><a href="/florilegium/">Florilegium</a></nav>
 
 <div class="threshold-status">In development</div>
   <div class="eyebrow">Food &middot; Substrate &middot; Sovereignty</div>
@@ -85,7 +91,7 @@
   </div>
 
 
-  <p class="micro" style="margin: 1.5rem 0 2rem;">Subscribe via <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener"><span class="prompt">&gt;</span>open_transmission<span class="cursor">_</span></a> to follow new pieces.</p>
+  <p class="micro" style="margin: 1.5rem 0 2rem;">Subscribe via <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="prompt">&gt;</span>open_transmission<span class="cursor">_</span></a> to follow new pieces.</p>
   <section class="section tier reveal" data-tier="1" data-roman="i">
   <div class="tier-label-vertical"><span class="num">i</span><span class="label">The principle</span></div>
   <div class="section-meta"><span class="num">i.</span> The principle</div>

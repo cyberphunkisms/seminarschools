@@ -1,0 +1,302 @@
+{
+  "$schema_note": "Festival roster for /scripts/festivals-prompt.md. Two-class architecture: discovery (aggregators used as candidate-list scaffolding, never cited as source_url) and primary (festival's own official site, citation target). Read by Claude headless harvest weekly. Quantity-is-quality: agent should crawl every discovery source for candidates, then verify and extract from primary sites.",
+  "$updated": "2026-05-26",
+  "$architecture": "Two-pass scrape-within-scrape. Pass 1: read every discovery source, build candidate list of festival names + provisional date windows + official URLs. Discard discovery entries after this pass. Pass 2: for each candidate, fetch its primary official site, confirm date, extract program, build record with primary URL as source_url. Drop candidates the primary site does not confirm.",
+  "$audit_rule": "No record's source_url may match a discovery hostname. merge_festivals.py enforces this as defense-in-depth.",
+  "discovery_aggregators": [
+    {
+      "id": "todocanada-toronto",
+      "name": "To Do Canada — Toronto festivals",
+      "events_url": "https://www.todocanada.ca/festivals-in-toronto/",
+      "additional_urls": [
+        "https://www.todocanada.ca/things-to-do-in-toronto-this-weekend/",
+        "https://www.todocanada.ca/festivals-toronto-june/",
+        "https://www.todocanada.ca/festivals-toronto-july/",
+        "https://www.todocanada.ca/festivals-toronto-august/"
+      ],
+      "notes": "Indexes ~50 festivals across the Toronto calendar. Reliable for big-anchor coverage."
+    },
+    {
+      "id": "streets-of-toronto",
+      "name": "Streets Of Toronto — culture index",
+      "events_url": "https://streetsoftoronto.com/category/toronto-culture/",
+      "additional_urls": [
+        "https://streetsoftoronto.com/toronto-culture/76-best-things-to-do-in-toronto-in-may-2026/",
+        "https://streetsoftoronto.com/toronto-culture/best-things-to-do-in-toronto-in-june-2026/",
+        "https://streetsoftoronto.com/toronto-culture/best-things-to-do-in-toronto-in-july-2026/"
+      ],
+      "notes": "Monthly '76 best things' format gives broad small-event coverage."
+    },
+    {
+      "id": "blogto",
+      "name": "BlogTO events",
+      "events_url": "https://www.blogto.com/events/",
+      "additional_urls": [
+        "https://www.blogto.com/events/festivals/",
+        "https://www.blogto.com/best_of/the-best-toronto-summer-festivals/"
+      ],
+      "notes": "Local culture indexing. Pagination is heavy; budget tokens accordingly."
+    },
+    {
+      "id": "festivalstoronto",
+      "name": "festivalstoronto.com",
+      "events_url": "https://festivalstoronto.com/events/",
+      "notes": "Single-purpose aggregator. Direct festival listings."
+    },
+    {
+      "id": "ontariofestivals",
+      "name": "Ontario Festivals — GTA section",
+      "events_url": "https://ontariofestivals.ca/gta-festivals/",
+      "notes": "Suburban festival coverage (Vaughan, Markham, Mississauga, Brampton, Oakville)."
+    },
+    {
+      "id": "musicfestivalwizard-toronto",
+      "name": "Music Festival Wizard — Toronto",
+      "events_url": "https://www.musicfestivalwizard.com/festival-guide/toronto/",
+      "notes": "Music-festival specialist aggregator. Cross-check date claims against primary sites; user flagged false-positive risk."
+    },
+    {
+      "id": "canadiantrainvacations",
+      "name": "Canadian Train Vacations — Toronto summer festivals",
+      "events_url": "https://canadiantrainvacations.com/blog/summer-festivals-toronto",
+      "notes": "Tourism-blog summary. Big-anchor coverage. Travel-industry framing."
+    },
+    {
+      "id": "nowtoronto",
+      "name": "Now Toronto",
+      "events_url": "https://nowtoronto.com/events/",
+      "notes": "Cultural weekly. Festival coverage runs adjacent to event-pick coverage."
+    },
+    {
+      "id": "tourism-toronto",
+      "name": "Destination Toronto official tourism site",
+      "events_url": "https://www.destinationtoronto.com/events-festivals/",
+      "notes": "Tourism authority. Heavy on Tier-1 anchors. Low coverage of fringe events."
+    },
+    {
+      "id": "city-toronto-events",
+      "name": "City of Toronto events calendar",
+      "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/",
+      "notes": "Municipal listing. Doors Open, Nuit Blanche, civic festivals."
+    }
+  ],
+  "primary_sources": [
+    {
+      "id": "contactphoto",
+      "name": "CONTACT Photography Festival",
+      "events_url": "https://contactphoto.com/",
+      "additional_urls": ["https://contactphoto.com/exhibitions/", "https://contactphoto.com/events/"],
+      "default_type": "site-specific-art",
+      "notes": "May 1-31 each year. Hundreds of sub-events at galleries city-wide. Agent should capture parent festival + Featured Exhibitions as separate records, skip the long tail."
+    },
+    {
+      "id": "imaginenative",
+      "name": "imagineNATIVE Film + Media Arts Festival",
+      "events_url": "https://imaginenative.org/festival",
+      "default_type": "screening",
+      "notes": "Indigenous-led film festival. June each year. Films with director Q&A overlap with screening-type criteria."
+    },
+    {
+      "id": "torontojazz",
+      "name": "Toronto Jazz Festival",
+      "events_url": "https://torontojazz.com/",
+      "default_type": "festival-of-form",
+      "notes": "Late June. ~500,000 attendees. Multi-venue. Capture parent festival + key named-artist concerts."
+    },
+    {
+      "id": "pride-toronto",
+      "name": "Pride Toronto",
+      "events_url": "https://www.pridetoronto.com/",
+      "default_type": "festival-of-form",
+      "notes": "Late June. Church-Wellesley. Capture parent festival + major Pride Month events including Trans March, Dyke March, Pride Parade, Streetfair."
+    },
+    {
+      "id": "luminato",
+      "name": "Luminato Festival",
+      "events_url": "https://luminatofestival.com/",
+      "default_type": "site-specific-art",
+      "notes": "Mid-June typically. Interdisciplinary arts. Capture parent + headline performances."
+    },
+    {
+      "id": "nxne",
+      "name": "NXNE (North by Northeast)",
+      "events_url": "https://nxne.com/",
+      "default_type": "festival-of-form",
+      "notes": "Mid-June. Music + interactive + film. Multi-day, multi-venue."
+    },
+    {
+      "id": "tcaf",
+      "name": "Toronto Comic Arts Festival",
+      "events_url": "https://torontocomics.com/",
+      "default_type": "festival-of-form",
+      "notes": "Mid-May to mid-June typically. Toronto Reference Library. Independent comics."
+    },
+    {
+      "id": "tiff-festival",
+      "name": "TIFF (Toronto International Film Festival)",
+      "events_url": "https://www.tiff.net/festival",
+      "default_type": "screening",
+      "notes": "September. Distinct from year-round TIFF Lightbox programming. Heavy director-Q&A density."
+    },
+    {
+      "id": "hotdocs-festival",
+      "name": "Hot Docs Festival",
+      "events_url": "https://hotdocs.ca/whats-on/hot-docs-festival",
+      "default_type": "screening",
+      "notes": "Late April through early May. Documentary festival. Distinct from year-round Hot Docs Ted Rogers Cinema programming."
+    },
+    {
+      "id": "doors-open-toronto",
+      "name": "Doors Open Toronto",
+      "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/doors-open-toronto/",
+      "default_type": "cultural-reproduction",
+      "notes": "Last weekend of May. Free public access to buildings normally closed. Civic-architectural ritual."
+    },
+    {
+      "id": "ifoa",
+      "name": "Toronto International Festival of Authors",
+      "events_url": "https://festivalofauthors.ca/",
+      "default_type": "reading",
+      "notes": "Late October. Harbourfront. Literary readings, panels, talks. Matches both seminar-orthodox and festival-of-form."
+    },
+    {
+      "id": "caribana",
+      "name": "Toronto Caribbean Carnival",
+      "events_url": "https://torontocaribbeancarnival.com/",
+      "default_type": "cultural-reproduction",
+      "notes": "Late July through early August. Caribbean-diasporic festival of form. Multi-week program."
+    },
+    {
+      "id": "sing-toronto",
+      "name": "SING! The Toronto Vocal Arts Festival",
+      "events_url": "https://singtoronto.com/",
+      "default_type": "festival-of-form",
+      "notes": "Late May through early June. A cappella and vocal arts."
+    },
+    {
+      "id": "jewish-music-week",
+      "name": "Jewish Music Week",
+      "events_url": "https://jewishmusicweek.com/",
+      "default_type": "cultural-reproduction",
+      "notes": "Late May. Diasporic-cultural festival of form."
+    },
+    {
+      "id": "nuit-blanche",
+      "name": "Nuit Blanche Toronto",
+      "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/nuit-blanche-toronto/",
+      "default_type": "site-specific-art",
+      "notes": "Early October. City-wide overnight contemporary art."
+    },
+    {
+      "id": "harbourfront-summer",
+      "name": "Harbourfront Centre Summer Music",
+      "events_url": "https://harbourfrontcentre.com/whats-on/",
+      "default_type": "festival-of-form",
+      "notes": "Multi-month summer programming. Many cultural-diasporic anchors (Latin, Caribbean, Afro, etc.)."
+    },
+    {
+      "id": "fringe-toronto",
+      "name": "Toronto Fringe Festival",
+      "events_url": "https://fringetoronto.com/",
+      "default_type": "site-specific-art",
+      "notes": "Early July. Independent theatre. Lottery-selected programming."
+    },
+    {
+      "id": "summerworks",
+      "name": "SummerWorks Performance Festival",
+      "events_url": "https://summerworks.ca/",
+      "default_type": "site-specific-art",
+      "notes": "Early August. Curated contemporary performance. Higher-art-stake counterpart to Fringe."
+    },
+    {
+      "id": "scotiabank-buskerfest",
+      "name": "Toronto Buskerfest",
+      "events_url": "https://torontobuskerfest.com/",
+      "default_type": "festival-of-form",
+      "notes": "Late August. Street performance. Yonge-Dundas Square typical venue."
+    },
+    {
+      "id": "tdsbfilm",
+      "name": "Toronto Black Film Festival",
+      "events_url": "https://torontoblackfilm.com/",
+      "default_type": "screening",
+      "notes": "February. Black-cinema festival. Director Q&A standard."
+    },
+    {
+      "id": "rendezvous-classic",
+      "name": "Toronto Reel Asian Film Festival",
+      "events_url": "https://www.reelasian.com/",
+      "default_type": "screening",
+      "notes": "November. Asian-diasporic cinema."
+    },
+    {
+      "id": "inside-out-film",
+      "name": "Inside Out 2SLGBTQ+ Film Festival",
+      "events_url": "https://insideout.ca/festival/",
+      "default_type": "screening",
+      "notes": "Late May to early June. Queer cinema. Strong director-attendance density."
+    },
+    {
+      "id": "polish-festival-mississauga",
+      "name": "Polish Festival Mississauga",
+      "events_url": "https://polishfestival.ca/",
+      "default_type": "cultural-reproduction",
+      "notes": "Late summer typically. Diasporic-cultural reproduction. Suburban GTA."
+    },
+    {
+      "id": "carassauga",
+      "name": "Carassauga (Mississauga Festival of Cultures)",
+      "events_url": "https://www.carassauga.com/",
+      "default_type": "cultural-reproduction",
+      "notes": "May. Multi-pavilion diasporic-cultural showcase."
+    },
+    {
+      "id": "salsa-on-st-clair",
+      "name": "Salsa on St. Clair",
+      "events_url": "https://salsaintoronto.com/",
+      "default_type": "cultural-reproduction",
+      "notes": "Mid-July. Latin-diasporic street festival."
+    },
+    {
+      "id": "afrofest",
+      "name": "Afrofest",
+      "events_url": "https://music-africa.org/afrofest/",
+      "default_type": "cultural-reproduction",
+      "notes": "Early July. Woodbine Park. African-diasporic music festival."
+    },
+    {
+      "id": "asha-mehrjui-tirgan",
+      "name": "Tirgan Festival",
+      "events_url": "https://tirgan.ca/",
+      "default_type": "cultural-reproduction",
+      "notes": "Late July. Iranian-diasporic festival of form. Harbourfront."
+    },
+    {
+      "id": "iranian-fire-festival",
+      "name": "Chaharshanbe Suri (Iranian fire-jumping festival)",
+      "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/",
+      "notes": "Last Wednesday before Persian New Year (March). Mel Lastman Square typical. Officially-supported festival of form. May lack dedicated primary site; the City of Toronto events page is the closest primary source."
+    },
+    {
+      "id": "taste-of-danforth",
+      "name": "Krinos Taste of the Danforth",
+      "events_url": "https://tasteofthedanforth.com/",
+      "default_type": "cultural-reproduction",
+      "notes": "Early August. Greek-diasporic festival. Largest street festival in Canada."
+    },
+    {
+      "id": "veld",
+      "name": "VELD Music Festival",
+      "events_url": "https://veldmusicfestival.com/",
+      "default_type": "festival-of-form",
+      "notes": "Early August. Downsview Park. EDM. Borderline cultural-form criterion; included for completeness."
+    },
+    {
+      "id": "festival-of-south-asia",
+      "name": "Festival of South Asia",
+      "events_url": "https://festivalofsouthasia.com/",
+      "default_type": "cultural-reproduction",
+      "notes": "Late July. Gerrard India Bazaar. Diasporic festival."
+    }
+  ]
+}

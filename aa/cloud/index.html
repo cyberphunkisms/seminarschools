@@ -37181,7 +37181,7 @@ function showDetailFromNode(node){
       <div class="dt-orig">${escapeHtml(t.originator)} · ${t.year < 0 ? Math.abs(t.year)+' BCE' : t.year}</div>
       ${t.note ? `<div class="dt-note">${escapeHtml(t.note)}</div>` : ''}
       ${t.disputed ? `<div class="dt-disputed">${escapeHtml(t.disputed)}</div>` : ''}
-      ${t.source_url ? `<div class="dt-source"><a href="${escapeHtml(t.source_url)}" target="_blank" rel="noopener">${escapeHtml(t.source_url)}</a></div>` : ''}
+      ${t.source_url ? `<div class="dt-source"><a href="${escapeHtml(t.source_url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t.source_url)}</a></div>` : ''}
     `;
     detail.classList.add('open');
     detail.querySelector('.dt-close').addEventListener('click', () => detail.classList.remove('open'));

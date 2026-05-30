@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://seminarschools.com/og-image.png">
 <meta name="description" content="An aggregated calendar of upcoming public lectures, seminars, author readings, artist talks, panel discussions, philosophy cafes, gatherings, and cinema events with director Q and A across the Greater Toronto Area. Curated for substantive content. Updated daily.">
 <link rel="canonical" href="https://seminarschools.com/seminars/">
-<link rel="alternate" type="application/rss+xml" title="Toronto Seminars and Talks — Seminar Schools" href="/seminars/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Toronto Seminars and Talks. Seminar Schools." href="/seminars/feed.xml">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#2D3F26">
@@ -346,7 +346,7 @@
   <div class="seminars-meta">
     <span id="event-count">Loading events.</span>
     <span><a href="/seminars/feed.xml">RSS feed</a></span>
-    <span><a href="/agora/">The Agora</a></span>
+    <span><a href="/calendar/">Calendar</a> · <a href="/agora/">The Agora</a></span>
     <span><a href="/">Seminar Schools home</a></span>
   </div>
 
@@ -378,9 +378,19 @@
       <li>PhilEvents Ontario filter for academic philosophy events not surfaced elsewhere.</li>
       <li>The Agora at Earl Bales Park, hosted by Seminar Schools.</li>
     </ul>
-    <p>Missing a venue that belongs here? <a href="mailto:saul@seminarschools.com">Write in</a>.</p>
+    <p>Missing a venue that belongs here? <a href="mailto:saulnassau@protonmail.com">Write in</a>.</p>
   </section>
 </main>
+
+<footer style="padding: 2rem; border-top: 1px solid var(--rule-soft); margin-top: 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; font-family: var(--mono); font-size: 0.72rem; color: var(--fg-soft);">
+  <span>© Seminar Schools · seminarschools.com</span>
+  <span>
+    <a href="/calendar/" style="color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor;">Calendar</a> ·
+    <a href="/festivals/" style="color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor;">Festivals</a> ·
+    <a href="/agora/" style="color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor;">Agora</a> ·
+    <a href="/sitemap/" style="color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor;">Sitemap</a>
+  </span>
+</footer>
 
 <script>
 (function() {
@@ -598,8 +608,11 @@
         var eventId = 'evt-' + cardIdx++;
         // Stash data for the toggle handler on a global lookup
         eventLookup[eventId] = e;
-        var attendance = e.attendance_confirmed && (e.type === 'screening' || e.speaker_or_director)
-          ? '<span class="event-tag-attendance">' + (e.type === 'screening' ? 'Filmmaker present' : 'Confirmed') + '</span>'
+        // On screenings, the filmmaker-present tag is redundant — being on this
+        // calendar at all already implies filmmaker presence (the filter criterion).
+        // On lectures, 'Confirmed' conveys real info (vs tentative bookings) so kept.
+        var attendance = (e.type !== 'screening' && e.attendance_confirmed && e.speaker_or_director)
+          ? '<span class="event-tag-attendance">Confirmed</span>'
           : '';
         var speaker = e.speaker_or_director
           ? '<span>' + escapeHtml(e.speaker_or_director) + '</span>'
@@ -620,12 +633,12 @@
           '<li class="' + cardCls + '" data-event-id="' + eventId + '">',
           '  <div class="event-time">' + timeDisplay + '</div>',
           '  <div class="event-body">',
-          '    <h3 class="event-title"><a href="' + escapeHtml(e.source_url) + '" target="_blank" rel="noopener">' + escapeHtml(e.title) + '</a></h3>',
+          '    <h3 class="event-title"><a href="' + escapeHtml(e.source_url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(e.title) + '</a></h3>',
           '    <p class="event-venue">' + escapeHtml(e.venue) + '</p>',
           dateRange,
           '    <div class="event-tags">',
           '      <span class="event-tag-type">' + typeLabel(e.type) + '</span>',
-          '      <span class="event-tag-source"><a href="' + escapeHtml(e.source_url) + '" target="_blank" rel="noopener">' + sourceLabel(e.source_id) + '</a></span>',
+          '      <span class="event-tag-source"><a href="' + escapeHtml(e.source_url) + '" target="_blank" rel="noopener noreferrer">' + sourceLabel(e.source_id) + '</a></span>',
           speaker,
           attendance,
           '    </div>',
@@ -665,7 +678,7 @@
       parts.push('<ul class="showtime-list">' + showtimesHtml + '</ul>');
     }
     if (e.source_url) {
-      parts.push('<a class="source-link" href="' + escapeHtml(e.source_url) + '" target="_blank" rel="noopener">View original source &rarr;</a>');
+      parts.push('<a class="source-link" href="' + escapeHtml(e.source_url) + '" target="_blank" rel="noopener noreferrer">View original source &rarr;</a>');
     }
     if (parts.length === 0) {
       parts.push('<p style="color:var(--muted);font-style:italic">No additional details available.</p>');

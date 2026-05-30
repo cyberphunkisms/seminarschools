@@ -1,0 +1,83 @@
+name: Scrape festivals
+
+# Weekly Toronto-GTA festivals harvest via Claude headless mode (claude -p).
+# Two-pass scrape-within-scrape:
+#   Pass 1: read discovery aggregators (To Do Canada, BlogTO, Streets Of
+#           Toronto, festivalstoronto, Ontario Festivals, Music Festival
+#           Wizard, Now Toronto, Tourism Toronto, City of Toronto, etc.)
+#           Build candidate list. Aggregator URLs NEVER become source_url.
+#   Pass 2: for each candidate, fetch its official site. Confirm dates.
+#           Build records with primary URL as source_url + raw_excerpt
+#           verbatim from the official page.
+#
+# Defense-in-depth: merge_festivals.py drops any record whose source_url
+# hostname matches a discovery aggregator. validate_festivals.py runs the
+# same check before commit.
+#
+# Quantity is quality: --max-budget-usd 10.00, --max-turns 100. The agent
+# is instructed to crawl exhaustively, not selectively.
+#
+# Schedule: weekly Monday 07:00 UTC (one hour after seminars). Pre-dawn
+# Toronto. Manual dispatch also enabled for testing.
+
+on:
+  schedule:
+    - cron: '0 7 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Claude Code (native binary)
+        run: |
+          curl -fsSL https://claude.ai/install.sh | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Verify Claude Code install
+        run: claude --version
+
+      - name: Install Python validator dependencies
+        run: pip install jsonschema
+
+      - name: Run Claude two-pass festivals harvest
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: bash scripts/festivals-prompt-runner.sh
+
+      - name: Validate output against schema and aggregator-leak guard
+        run: python3 scripts/validate_festivals.py
+
+      - name: Commit and push if changed
+        run: |
+          set -x
+          git config user.name "festivals-bot"
+          git config user.email "saul+festivalsbot@seminarschools.com"
+          echo "--- Pre-commit status ---"
+          git status
+          git add -A festivals/ data/
+          echo "--- Staged for commit ---"
+          git diff --cached --stat
+          if git diff --cached --quiet; then
+            echo "No changes to commit. Festivals harvest produced identical output."
+            exit 0
+          fi
+          git commit -m "Update festivals calendar ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+          git pull --rebase origin main
+          git push origin main
+          echo "Push succeeded."

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Polymyth Seminar Calendar. Toronto and GTA lectures, conferences, workshops, readings, festivals, and exhibitions across philosophy, humanities, social sciences, and cultural programming.">
+<title>Polymyth Seminar Calendar</title>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/polymythseminars/">
+<meta property="og:title" content="Polymyth Seminar Calendar">
+<meta property="og:description" content="The seminar calendar for Toronto and the GTA. Academic lectures, conferences, workshops, readings, festivals, and exhibitions.">
+<meta property="og:image" content="https://seminarschools.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="canonical" href="https://seminarschools.com/polymythseminars/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5EBE4;
+    --paper: #FBF6F1;
+    --ink: #2B2520;
+    --dim: #6B5F55;
+    --hairline: #D9CFC6;
+    --accent: #A07A2C;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --display: 'Libre Baskerville', Georgia, serif;
+    --sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); color: var(--ink); margin: 0; padding: 0; font-family: var(--serif); font-size: 18px; line-height: 1.55; }
+  body { padding: 2.2rem 1.4rem 6rem; }
+  main { max-width: 880px; margin: 0 auto; }
+
+  /* ---------- Header ---------- */
+  header.cv-header { text-align: center; margin-bottom: 1.5rem; }
+  header.cv-header h1 {
+    font-family: var(--display); font-weight: 700; font-size: 2.2rem;
+    margin: 0; letter-spacing: 0.01em; line-height: 1.15;
+  }
+  header.cv-header .meta {
+    font-family: var(--sans); font-size: 0.85rem; color: var(--dim);
+    margin-top: 0.45rem; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  header.cv-header .meta a { color: inherit; border-bottom: 1px dotted currentColor; text-decoration: none; }
+  header.cv-header .tag {
+    margin-top: 0.6rem; font-family: var(--serif); font-style: italic; color: var(--dim);
+    font-size: 1.05rem;
+  }
+
+  /* ---------- Filter Nav (mirrors /saul/ pattern) ---------- */
+  .filter-nav {
+    display: flex; flex-wrap: wrap; gap: 0.42rem; justify-content: center;
+    margin: 1.6rem 0 0.5rem; padding: 0 0.4rem;
+  }
+  .filter-nav button {
+    font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.4rem 0.85rem; border: 1px solid var(--hairline); background: transparent;
+    color: var(--dim); border-radius: 999px; cursor: pointer; transition: all 0.15s;
+  }
+  .filter-nav button:hover { color: var(--ink); border-color: var(--ink); }
+  .filter-nav button.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  /* Category color washes — single click applies category accent */
+  .filter-nav button[data-cat="lecture"].on { border-color: #4A3F8A; background: rgba(74,63,138,0.12); color: #4A3F8A; }
+  .filter-nav button[data-cat="conference"].on { border-color: #1a5276; background: rgba(26,82,118,0.12); color: #1a5276; }
+  .filter-nav button[data-cat="workshop"].on { border-color: #1a6e4e; background: rgba(26,110,78,0.12); color: #1a6e4e; }
+  .filter-nav button[data-cat="reading"].on { border-color: #7b2d4e; background: rgba(123,45,78,0.12); color: #7b2d4e; }
+  .filter-nav button[data-cat="festival"].on { border-color: #B85420; background: rgba(184,84,32,0.12); color: #B85420; }
+  .filter-nav button[data-cat="exhibition"].on { border-color: #5A4A2E; background: rgba(90,74,46,0.12); color: #5A4A2E; }
+  .filter-nav button[data-cat="performance"].on { border-color: #8B6914; background: rgba(139,105,20,0.12); color: #8B6914; }
+  .filter-nav button[data-cat="defence"].on { border-color: #2E5230; background: rgba(46,82,48,0.12); color: #2E5230; }
+  .filter-nav button[data-cat="gathering"].on { border-color: #5a5a52; background: rgba(90,90,82,0.12); color: #5a5a52; }
+  .filter-nav button[data-cat="protest"].on { border-color: #A93226; background: rgba(169,50,38,0.12); color: #A93226; }
+  .filter-nav button[data-cat="other"].on { border-color: #6B5F55; background: rgba(107,95,85,0.12); color: #6B5F55; }
+
+  /* ---------- View toggle ---------- */
+  .view-toggle {
+    display: flex; gap: 0.5rem; justify-content: center; margin: 1rem 0 1.6rem;
+    font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .view-toggle button {
+    padding: 0.42rem 1rem; border: 1px solid var(--hairline); background: transparent;
+    color: var(--dim); cursor: pointer; transition: all 0.15s;
+    font-family: inherit; font-size: inherit; letter-spacing: inherit; text-transform: inherit;
+  }
+  .view-toggle button:hover { color: var(--ink); }
+  .view-toggle button.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .view-toggle button:first-child { border-radius: 4px 0 0 4px; }
+  .view-toggle button:last-child { border-radius: 0 4px 4px 0; }
+
+  /* ---------- Count line ---------- */
+  .count-line {
+    text-align: center; font-family: var(--sans); font-size: 0.82rem; color: var(--dim);
+    letter-spacing: 0.04em; margin-bottom: 1.4rem;
+  }
+  .count-line strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Date group header ---------- */
+  .month-group { margin-top: 2.2rem; }
+  .month-group:first-of-type { margin-top: 0.8rem; }
+  .month-head {
+    font-family: var(--display); font-weight: 400; font-size: 0.92rem;
+    text-transform: uppercase; letter-spacing: 0.18em; color: var(--dim);
+    border-bottom: 1px solid var(--hairline); padding-bottom: 0.5rem; margin-bottom: 1.1rem;
+  }
+
+  /* ---------- Event entry ---------- */
+  .event {
+    display: grid; grid-template-columns: 70px 1fr; gap: 1.2rem;
+    padding: 0.95rem 0.4rem; border-bottom: 1px solid var(--hairline);
+    align-items: start;
+  }
+  .event:last-child { border-bottom: none; }
+  .event .date-col {
+    font-family: var(--display); color: var(--dim); text-align: right;
+  }
+  .event .date-col .day { font-size: 1.6rem; font-weight: 400; line-height: 1; color: var(--ink); }
+  .event .date-col .mon { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.2rem; }
+  .event .date-col .time { font-family: var(--sans); font-size: 0.72rem; color: var(--dim); margin-top: 0.3rem; }
+
+  .event .body-col { min-width: 0; }
+  .event .body-col .title {
+    font-family: var(--display); font-size: 1.05rem; font-weight: 400; line-height: 1.35;
+    color: var(--ink); margin-bottom: 0.25rem;
+  }
+  .event .body-col .title a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
+  .event .body-col .title a:hover { border-bottom-color: var(--accent); }
+  .event .body-col .meta {
+    font-family: var(--serif); font-style: italic; font-size: 0.96rem; color: var(--dim);
+    margin-bottom: 0.25rem;
+  }
+  .event .body-col .venue {
+    font-family: var(--sans); font-size: 0.78rem; color: var(--dim); letter-spacing: 0.02em;
+  }
+  .event .body-col .type-tag {
+    display: inline-block; font-family: var(--sans); font-size: 0.66rem; text-transform: uppercase;
+    letter-spacing: 0.1em; padding: 0.15rem 0.5rem; border: 1px solid var(--hairline);
+    border-radius: 999px; color: var(--dim); margin-top: 0.45rem;
+  }
+
+  /* Past events get muted */
+  .event.past { opacity: 0.62; }
+  .event.past .date-col .day, .event.past .body-col .title { color: var(--dim); }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center; font-family: var(--serif); font-style: italic;
+    color: var(--dim); padding: 4rem 1rem;
+  }
+
+  /* ---------- Footer ---------- */
+  footer.cv-footer {
+    margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--hairline);
+    text-align: center; font-family: var(--sans); font-size: 0.78rem; color: var(--dim);
+    letter-spacing: 0.04em;
+  }
+  footer.cv-footer a { color: inherit; border-bottom: 1px dotted currentColor; text-decoration: none; }
+
+  @media (max-width: 640px) {
+    body { padding: 1.6rem 0.9rem 5rem; font-size: 16px; }
+    header.cv-header h1 { font-size: 1.7rem; }
+    .event { grid-template-columns: 56px 1fr; gap: 0.85rem; }
+    .event .date-col .day { font-size: 1.35rem; }
+    .event .body-col .title { font-size: 0.98rem; }
+    .filter-nav button { font-size: 0.72rem; padding: 0.35rem 0.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<main>
+  <header class="cv-header">
+    <h1>Polymyth Seminar Calendar</h1>
+    <div class="meta">Toronto · GTA · Hamilton · Guelph · Waterloo</div>
+    <div class="tag">Lectures, conferences, workshops, readings, festivals, exhibitions</div>
+  </header>
+
+  <nav class="filter-nav" id="filterNav">
+    <button type="button" data-cat="all" class="on">All</button>
+    <button type="button" data-cat="lecture">Lecture</button>
+    <button type="button" data-cat="conference">Conference</button>
+    <button type="button" data-cat="workshop">Workshop</button>
+    <button type="button" data-cat="reading">Reading</button>
+    <button type="button" data-cat="festival">Festival</button>
+    <button type="button" data-cat="exhibition">Exhibition</button>
+    <button type="button" data-cat="performance">Performance</button>
+    <button type="button" data-cat="defence">Defence</button>
+    <button type="button" data-cat="gathering">Gathering</button>
+    <button type="button" data-cat="protest">Protest</button>
+    <button type="button" data-cat="other">Other</button>
+  </nav>
+
+  <div class="view-toggle">
+    <button type="button" data-view="default" class="on">Default view</button>
+    <button type="button" data-view="all">Show all</button>
+  </div>
+
+  <div class="count-line" id="countLine">Loading events…</div>
+
+  <div id="eventsContainer"></div>
+
+  <footer class="cv-footer">
+    <div>seminarschools.com/polymythseminars · <a href="/">home</a> · <a href="/saul/">cv</a> · <a href="/agora/">agora</a></div>
+  </footer>
+</main>
+
+<script>
+/* ============================================================
+   POLYMYTH SEMINAR CALENDAR
+   - Loads /data/polymyth-seminar-events.json
+   - Default view: 1 week back + 1 month forward from today
+   - "Show all" view: all 218 events
+   - Category filter: click pill, list filters; click again deactivates
+   - Mirrors /saul/ filter-nav pattern
+============================================================ */
+
+const TYPE_TO_CATEGORY = {
+  'lecture': 'lecture',
+  'talk': 'lecture',
+  'book-talk': 'lecture',
+  'scholar-talk': 'lecture',
+  'artist-talk': 'lecture',
+  'conference': 'conference',
+  'symposium': 'conference',
+  'colloquium': 'conference',
+  'forum': 'conference',
+  'workshop': 'workshop',
+  'webinar': 'workshop',
+  'meeting': 'workshop',
+  'retreat': 'workshop',
+  'reading': 'reading',
+  'book-launch': 'reading',
+  'residency': 'reading',
+  'festival': 'festival',
+  'festival-of-form': 'festival',
+  'cultural-reproduction': 'festival',
+  'exhibition': 'exhibition',
+  'site-specific-art': 'exhibition',
+  'performance': 'performance',
+  'screening': 'performance',
+  'defence': 'defence',
+  'gathering': 'gathering',
+  'memorial': 'gathering',
+  'celebration': 'gathering',
+  'networking': 'gathering',
+  'panel': 'lecture', 'protest': 'protest', 'demonstration': 'protest', 'march': 'protest', 'rally': 'protest', 'picket': 'protest', 'vigil': 'protest', 'sit-in': 'protest', 'walkout': 'protest'
+};
+
+const MONTHS_LONG = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+let ALL_EVENTS = [];
+let activeCategory = 'all';
+let activeView = 'default';
+
+async function loadEvents() {
+  try {
+    const res = await fetch('/data/polymyth-seminar-events.json');
+    const data = await res.json();
+    ALL_EVENTS = data.events.map(e => ({
+      ...e,
+      _date: new Date(e.date),
+      _category: TYPE_TO_CATEGORY[e.type] || 'other'
+    })).filter(e => !isNaN(e._date.getTime()));
+    ALL_EVENTS.sort((a,b) => a._date - b._date);
+    render();
+  } catch (err) {
+    document.getElementById('eventsContainer').innerHTML = '<div class="empty-state">Could not load events.</div>';
+    console.error(err);
+  }
+}
+
+function getFilteredEvents() {
+  const now = new Date();
+  let events = ALL_EVENTS;
+
+  // Default view: 1 week back, 1 month forward
+  if (activeView === 'default') {
+    const start = new Date(now); start.setDate(start.getDate() - 7);
+    const end = new Date(now); end.setMonth(end.getMonth() + 1);
+    events = events.filter(e => e._date >= start && e._date <= end);
+  }
+
+  // Category filter
+  if (activeCategory !== 'all') {
+    events = events.filter(e => e._category === activeCategory);
+  }
+
+  return events;
+}
+
+function render() {
+  const events = getFilteredEvents();
+  const now = new Date();
+  const container = document.getElementById('eventsContainer');
+  const countLine = document.getElementById('countLine');
+
+  // Update count
+  const totalEvents = ALL_EVENTS.length;
+  const shownEvents = events.length;
+  const viewLabel = activeView === 'default' ? '1 week back · 1 month forward' : 'all events';
+  const catLabel = activeCategory === 'all' ? '' : ` · ${activeCategory}`;
+  countLine.innerHTML = `<strong>${shownEvents}</strong> of ${totalEvents} events &nbsp;·&nbsp; ${viewLabel}${catLabel}`;
+
+  if (events.length === 0) {
+    container.innerHTML = '<div class="empty-state">No events match the current filter.</div>';
+    return;
+  }
+
+  // Group by month
+  const groups = {};
+  events.forEach(e => {
+    const key = `${e._date.getFullYear()}-${String(e._date.getMonth()).padStart(2,'0')}`;
+    if (!groups[key]) groups[key] = { label: `${MONTHS_LONG[e._date.getMonth()]} ${e._date.getFullYear()}`, items: [] };
+    groups[key].items.push(e);
+  });
+
+  let html = '';
+  Object.keys(groups).sort().forEach(key => {
+    const g = groups[key];
+    html += `<div class="month-group"><div class="month-head">${g.label}</div>`;
+    g.items.forEach(e => {
+      const isPast = e._date < now;
+      const day = e._date.getDate();
+      const mon = MONTHS_SHORT[e._date.getMonth()];
+      const hours = e._date.getHours();
+      const mins = e._date.getMinutes();
+      const hasTime = hours !== 0 || mins !== 0;
+      const timeStr = hasTime ? `${(hours%12||12)}:${String(mins).padStart(2,'0')}${hours<12?'a':'p'}` : '';
+
+      const title = e.source_url
+        ? `<a href="${e.source_url}" target="_blank" rel="noopener">${escapeHtml(e.title)}</a>`
+        : escapeHtml(e.title);
+
+      const speaker = e.speaker_or_director ? `<div class="meta">${escapeHtml(e.speaker_or_director)}</div>` : '';
+      const venue = e.venue ? `<div class="venue">${escapeHtml(e.venue)}</div>` : '';
+
+      html += `
+        <div class="event ${isPast ? 'past' : ''}">
+          <div class="date-col">
+            <div class="day">${day}</div>
+            <div class="mon">${mon}</div>
+            ${timeStr ? `<div class="time">${timeStr}</div>` : ''}
+          </div>
+          <div class="body-col">
+            <div class="title">${title}</div>
+            ${speaker}
+            ${venue}
+            <span class="type-tag">${escapeHtml(e.type)}</span>
+          </div>
+        </div>`;
+    });
+    html += `</div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+function escapeHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ============================================================
+   EVENT BINDINGS
+============================================================ */
+document.getElementById('filterNav').addEventListener('click', e => {
+  if (e.target.tagName !== 'BUTTON') return;
+  const cat = e.target.dataset.cat;
+  activeCategory = cat;
+  document.querySelectorAll('#filterNav button').forEach(b => b.classList.toggle('on', b.dataset.cat === cat));
+  render();
+});
+
+document.querySelector('.view-toggle').addEventListener('click', e => {
+  if (e.target.tagName !== 'BUTTON') return;
+  const view = e.target.dataset.view;
+  activeView = view;
+  document.querySelectorAll('.view-toggle button').forEach(b => b.classList.toggle('on', b.dataset.view === view));
+  render();
+});
+
+loadEvents();
+</script>
+
+</body>
+</html>

@@ -76,3 +76,27 @@
 # Sitemap moved into polymyth namespace (May 15 2026)
 /sitemap     /polymyth/sitemap     301
 /sitemap/    /polymyth/sitemap/    301
+
+# Calendar URL aliases — users guess different paths for "what's on"
+/events       /polymythseminars/    301
+/events/      /polymythseminars/    301
+/events/*     /polymythseminars/    301
+/lectures     /polymythseminars/    301
+/lectures/    /polymythseminars/    301
+/talks        /polymythseminars/    301
+/talks/       /polymythseminars/    301
+/whats-on     /polymythseminars/    301
+/whats-on/    /polymythseminars/    301
+
+# Consolidated polymythseminars (May 27 2026) — replaces /calendar/ and /seminars/
+/calendar     /polymythseminars/    301
+/calendar/    /polymythseminars/    301
+/calendar/*   /polymythseminars/    301
+/seminars     /polymythseminars/    301
+/seminars/    /polymythseminars/    301
+/seminars/*   /polymythseminars/    301
+
+# /polymyth-seminar-calendar/ renamed to /polymythseminars/ (May 28 2026)
+/polymyth-seminar-calendar     /polymythseminars/    301
+/polymyth-seminar-calendar/    /polymythseminars/    301
+/polymyth-seminar-calendar/*   /polymythseminars/    301

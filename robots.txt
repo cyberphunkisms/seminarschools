@@ -11,6 +11,7 @@ Disallow: /leizu/account
 Disallow: /leizu/admin
 Disallow: /apply/success
 Disallow: /bookwormcard/success
+Disallow: /campaigns/thank-you-mam/unlocks
 
 # ============================================================
 # AI training / retrieval crawlers — explicitly welcomed
@@ -21,60 +22,79 @@ Disallow: /bookwormcard/success
 
 User-agent: GPTBot
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: GoogleOther
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: Perplexity-User
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: CCBot
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: Bytespider
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: Meta-ExternalAgent
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: cohere-ai
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: Amazonbot
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: DuckAssistBot
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: YouBot
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 User-agent: Diffbot
 Allow: /
+Disallow: /campaigns/thank-you-mam/unlocks
 
 # ============================================================
 # Sitemap

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en" data-class="C" data-page="festivals">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Festivals. Toronto and the GO Transit network. Seminar Schools.</title>
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/festivals/">
+<meta property="og:title" content="Festivals. Toronto and the GO Transit network.">
+<meta property="og:description" content="Festivals across Toronto and the GO Transit network. Three lenses: festival-of-form, cultural-reproduction, site-specific art.">
+<meta property="og:image" content="https://seminarschools.com/og-image.png">
+<meta property="og:site_name" content="Seminar Schools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Festivals. Seminar Schools.">
+<meta name="twitter:description" content="Festivals across the GO Transit network of southern Ontario.">
+<meta name="twitter:image" content="https://seminarschools.com/og-image.png">
+<meta name="description" content="Festivals across Toronto and the GO Transit network of southern Ontario. Three lenses for selection: festival-of-form, cultural-reproduction, site-specific art. Filterable, transit-accessible, curated.">
+<link rel="canonical" href="https://seminarschools.com/festivals/">
+<link rel="alternate" type="application/rss+xml" title="Festivals. Seminar Schools." href="/festivals/feed.xml">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#B85638">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --body: 'Newsreader', Georgia, serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --bg: #F5EBE4;
+  --bg-panel: #EDE0D4;
+  --bg-raised: #FBF5EE;
+  --fg: #2A1A14;
+  --fg-soft: #5A4A40;
+  --fg-fade: #7A6A60;
+  --muted: #8A7A70;
+  --rule: #C9B8A6;
+  --rule-soft: rgba(42,26,20,0.06);
+  --accent: #B85638;
+  --accent-dark: #8E3A24;
+  --accent-line: rgba(184,86,56,0.4);
+  --focus-ring: #1A5276;
+  --cat-festival: #B85638;
+  --cat-cultural: #C8861D;
+  --cat-site-art: #2D6E6E;
+  --cat-other: #5A5A52;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1A1410;
+    --bg-panel: #221A14;
+    --bg-raised: #2A2018;
+    --fg: #F5EBE4;
+    --fg-soft: #C9B8A6;
+    --fg-fade: #9A8A7E;
+    --muted: #8A7A70;
+    --rule: #44362C;
+    --rule-soft: rgba(245,235,228,0.08);
+    --accent: #E0744F;
+    --accent-dark: #F5A88A;
+    --accent-line: rgba(224,116,79,0.4);
+    --focus-ring: #6BB3E8;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.55;
+  min-height: 100vh;
+}
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  padding: 0.6rem 1rem; background: var(--accent); color: var(--bg);
+  z-index: 1000; font-family: var(--mono); font-size: 0.75rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.skip-link:focus { left: 0; }
+
+.top-bar {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.6rem 1.5rem;
+  display: flex; align-items: center; gap: 1.2rem;
+  font-family: var(--mono); font-size: 0.75rem;
+}
+.brand {
+  font-family: var(--display); font-size: 1.05rem;
+  letter-spacing: 0.02em; font-weight: 500;
+  color: var(--fg); text-decoration: none;
+}
+.brand em { font-style: italic; color: var(--accent); }
+.nav-links {
+  display: flex; gap: 0.8rem; margin-left: auto;
+  font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.nav-links a {
+  color: var(--fg-soft); text-decoration: none;
+  border-bottom: 1px solid transparent; padding: 0.15rem 0;
+}
+.nav-links a:hover { color: var(--fg); border-bottom-color: var(--fg-soft); }
+.nav-links a.current { color: var(--accent); border-bottom-color: var(--accent); }
+
+main { max-width: 980px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+h1 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 500; line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: var(--body); font-style: italic;
+  color: var(--fg-soft); font-size: 1.05rem;
+  max-width: 60ch; margin-bottom: 1.5rem;
+}
+.meta {
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--fg-fade); margin-bottom: 1.5rem;
+  display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+}
+.meta a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-line); }
+.meta a:hover { color: var(--accent-dark); border-bottom-color: var(--accent); }
+
+.cta-banner {
+  background: var(--bg-panel);
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1.2rem;
+  margin: 1rem 0 1.5rem;
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+}
+.cta-banner-body { flex: 1; min-width: 250px; }
+.cta-banner h2 {
+  font-family: var(--display); font-size: 1.15rem;
+  font-weight: 500; margin-bottom: 0.2rem;
+}
+.cta-banner p { color: var(--fg-soft); font-size: 0.9rem; margin: 0; }
+.cta-banner a.btn {
+  display: inline-block;
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  background: var(--accent); color: var(--bg);
+  text-decoration: none; border: 1px solid var(--accent);
+  white-space: nowrap;
+}
+.cta-banner a.btn:hover { background: var(--bg); color: var(--accent); }
+
+.controls {
+  display: flex; flex-wrap: wrap;
+  gap: 0.6rem; align-items: center;
+  margin: 0.5rem 0 1rem;
+}
+.search-input {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  padding: 0.45rem 0.7rem;
+  background: var(--bg-raised);
+  border: 1px solid var(--rule);
+  color: var(--fg);
+  width: 240px;
+  flex: 1;
+  min-width: 180px;
+  max-width: 320px;
+}
+.search-input:focus {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 0;
+  border-color: var(--focus-ring);
+}
+.btn-hide-past {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.85rem;
+  background: var(--bg-raised);
+  color: var(--fg);
+  border: 1px solid var(--rule);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.btn-hide-past:hover { background: var(--bg-panel); border-color: var(--fg-soft); }
+.btn-hide-past[aria-pressed="true"] {
+  background: var(--fg); color: var(--bg); border-color: var(--fg);
+}
+
+.filters {
+  display: flex; flex-wrap: wrap;
+  gap: 0.4rem; margin-bottom: 1.5rem;
+}
+.filter-chip {
+  font-family: var(--mono); font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  padding: 0.35rem 0.7rem 0.35rem 0.55rem;
+  background: var(--bg-raised);
+  color: var(--fg-soft);
+  border: 1px solid var(--rule);
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.filter-chip:hover { color: var(--fg); border-color: var(--fg-soft); }
+.filter-chip:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+.filter-chip .dot {
+  width: 0.55rem; height: 0.55rem; border-radius: 50%;
+  background: var(--chip-color, var(--fg-soft));
+  display: inline-block; flex: none;
+}
+.filter-chip .count {
+  color: var(--fg-fade);
+  font-size: 0.65rem;
+}
+.filter-chip[aria-pressed="true"] {
+  background: var(--chip-color, var(--fg));
+  color: var(--bg); border-color: var(--chip-color, var(--fg));
+}
+.filter-chip[aria-pressed="true"] .count { color: rgba(245,235,228,0.7); }
+.filter-chip[data-filter="all"] .dot { display: none; }
+.filter-chip[data-filter="festival-of-form"]      { --chip-color: var(--cat-festival); }
+.filter-chip[data-filter="cultural-reproduction"] { --chip-color: var(--cat-cultural); }
+.filter-chip[data-filter="site-specific-art"]     { --chip-color: var(--cat-site-art); }
+
+.event-list { display: flex; flex-direction: column; }
+.event-card {
+  cursor: pointer;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--rule-soft);
+  border-left: 4px solid var(--card-color, var(--accent));
+  background: var(--bg);
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 1.2rem;
+  transition: background 0.15s;
+}
+.event-card:hover, .event-card.open {
+  background: var(--bg-panel);
+}
+.event-card[data-type="festival-of-form"]      { --card-color: var(--cat-festival); }
+.event-card[data-type="cultural-reproduction"] { --card-color: var(--cat-cultural); }
+.event-card[data-type="site-specific-art"]     { --card-color: var(--cat-site-art); }
+.event-card[data-type="other"]                 { --card-color: var(--cat-other); }
+
+.event-date {
+  font-family: var(--mono);
+  color: var(--fg-soft);
+  letter-spacing: 0.04em;
+  text-align: left;
+}
+.event-date .month {
+  display: block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--fg-fade);
+}
+.event-date .day {
+  font-size: 1.5rem;
+  color: var(--fg);
+  font-weight: 600;
+  font-family: var(--display);
+  line-height: 1.1;
+}
+.event-date .weekday {
+  display: block;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-fade);
+  margin-top: 0.1rem;
+}
+.event-date .range {
+  display: block;
+  font-size: 0.6rem;
+  color: var(--fg-fade);
+  margin-top: 0.2rem;
+  letter-spacing: 0.06em;
+}
+
+.event-body { min-width: 0; }
+.event-title {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--fg);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.event-meta {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--fg-fade);
+  letter-spacing: 0.02em;
+}
+.event-tag-type {
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.event-details {
+  grid-column: 1 / -1;
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  padding-left: calc(90px + 1.2rem);
+  border-top: 1px dashed var(--rule);
+  font-family: var(--body);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--fg);
+}
+.event-details p { margin: 0 0 0.6rem; }
+.event-details .raw-excerpt {
+  font-style: italic;
+  color: var(--muted);
+  border-left: 2px solid var(--rule);
+  padding-left: 0.8rem;
+  margin: 0.6rem 0;
+}
+.event-details .source-link {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+.event-details .source-link:hover { color: var(--accent-dark); }
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: var(--fg-soft);
+  font-family: var(--body);
+  font-style: italic;
+}
+.empty-state .empty-eyebrow {
+  font-family: var(--mono); font-style: normal;
+  font-size: 0.7rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--fg-fade);
+  margin-bottom: 0.5rem;
+}
+
+footer {
+  max-width: 980px; margin: 3rem auto 0;
+  padding: 2rem 1.5rem; border-top: 1px solid var(--rule);
+  font-family: var(--mono); font-size: 0.7rem;
+  color: var(--fg-fade); display: flex; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+footer a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-line); }
+footer a:hover { color: var(--accent-dark); }
+
+@media (max-width: 640px) {
+  .event-card { grid-template-columns: 70px 1fr; gap: 0.8rem; padding: 0.8rem; }
+  .event-date .day { font-size: 1.2rem; }
+  .event-title { font-size: 1.05rem; }
+  .event-details { padding-left: 0; }
+  .controls { flex-direction: column; align-items: stretch; }
+  .search-input { width: 100%; max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.001ms !important; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<header class="top-bar">
+  <a href="/" class="brand">Seminar <em>Schools</em></a>
+  <nav class="nav-links" aria-label="Site sections">
+    <a href="/">Home</a>
+    <a href="/calendar/">Calendar</a>
+    <a href="/seminars/">Seminars</a>
+    <a href="/festivals/" class="current">Festivals</a>
+    <a href="/agora/">Agora</a>
+  </nav>
+</header>
+
+<main id="main-content">
+  <h1>Festivals</h1>
+  <p class="subtitle">Festivals across Toronto and the GO Transit network. Three lenses for selection: festival-of-form (durational non-institutional practice), cultural-reproduction (diasporic form-of-life), site-specific-art (works that exist only in the place that hosts them).</p>
+
+  <div class="meta">
+    <span id="event-count">Loading…</span>
+    <span>·</span>
+    <span>GO-Transit accessible Ontario</span>
+    <span>·</span>
+    <span>Updated weekly</span>
+    <span>·</span>
+    <a href="/festivals/feed.xml">RSS</a>
+  </div>
+
+  <section class="cta-banner">
+    <div class="cta-banner-body">
+      <h2>Browse this in calendar form</h2>
+      <p>Festivals plus seminars, by month, with filters, range scrubber, and PDF or iCal export.</p>
+    </div>
+    <a href="/calendar/" class="btn">Open the calendar →</a>
+  </section>
+
+  <div class="controls">
+    <input type="search" id="search-input" class="search-input" placeholder="Search title, venue…" aria-label="Search festivals">
+    <button type="button" class="btn-hide-past" id="btn-hide-past" aria-pressed="true">Hide past</button>
+  </div>
+
+  <div class="filters" id="filters" role="group" aria-label="Type filters">
+    <button type="button" class="filter-chip" data-filter="all" aria-pressed="true">
+      <span>All</span> <span class="count" id="count-all"></span>
+    </button>
+    <button type="button" class="filter-chip" data-filter="festival-of-form" aria-pressed="false">
+      <span class="dot" aria-hidden="true"></span><span>Festival-of-form</span> <span class="count"></span>
+    </button>
+    <button type="button" class="filter-chip" data-filter="cultural-reproduction" aria-pressed="false">
+      <span class="dot" aria-hidden="true"></span><span>Cultural-reproduction</span> <span class="count"></span>
+    </button>
+    <button type="button" class="filter-chip" data-filter="site-specific-art" aria-pressed="false">
+      <span class="dot" aria-hidden="true"></span><span>Site-specific-art</span> <span class="count"></span>
+    </button>
+  </div>
+
+  <div class="event-list" id="event-list" aria-live="polite"></div>
+  <div class="empty-state" id="empty-state" style="display:none;">
+    <div class="empty-eyebrow" id="empty-eyebrow">No festivals match</div>
+    <p id="empty-message">Adjust filters or clear the search.</p>
+  </div>
+</main>
+
+<footer>
+  <span>© Seminar Schools · seminarschools.com</span>
+  <span><a href="/calendar/">Calendar</a> · <a href="/seminars/">Seminars</a> · <a href="/sitemap/">Sitemap</a></span>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  const state = {
+    events: [],
+    activeFilters: new Set(['all']),
+    searchQuery: '',
+    openId: null,
+    hidePast: localStorage.getItem('seminarschools_hide_past_v1') !== 'false',
+  };
+
+  function parseDate(iso) {
+    if (iso == null || iso === '') return null;
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return null;
+    return d;
+  }
+
+  // Fold case and strip accents so "cafe" matches "Café" and vice versa.
+  function normalizeForSearch(s) {
+    return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  async function load() {
+    try {
+      const r = await fetch('/festivals/events.json');
+      if (!r.ok) throw new Error(r.status);
+      const data = await r.json();
+      state.events = Array.isArray(data.events) ? data.events : [];
+    } catch (err) {
+      console.warn('Festivals load failed', err);
+      state.events = [];
+    }
+    setupFilters();
+    setupSearch();
+    setupHidePast();
+    render();
+  }
+
+  function getFiltered() {
+    let result = state.events.slice();
+    if (!state.activeFilters.has('all')) {
+      result = result.filter(e => state.activeFilters.has(e.type));
+    }
+    if (state.hidePast) {
+      const cutoff = Date.now() - 24 * 60 * 60 * 1000;
+      result = result.filter(e => {
+        const start = parseDate(e.date);
+        if (!start) return true;
+        const end = parseDate(e.end_date) || start;
+        return end.getTime() >= cutoff;
+      });
+    }
+    if (state.searchQuery) {
+      const q = normalizeForSearch(state.searchQuery);
+      result = result.filter(e =>
+        normalizeForSearch(e.title).includes(q) ||
+        normalizeForSearch(e.venue).includes(q) ||
+        normalizeForSearch(e.speaker_or_director).includes(q)
+      );
+    }
+    result.sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+    return result;
+  }
+
+  function updateCounts() {
+    const cutoff = Date.now() - 24 * 60 * 60 * 1000;
+    const baseResult = state.events.filter(e => {
+      if (state.hidePast) {
+        const start = parseDate(e.date);
+        if (start) {
+          const end = parseDate(e.end_date) || start;
+          if (end.getTime() < cutoff) return false;
+        }
+      }
+      if (state.searchQuery) {
+        const q = normalizeForSearch(state.searchQuery);
+        if (!(normalizeForSearch(e.title).includes(q) ||
+              normalizeForSearch(e.venue).includes(q) ||
+              normalizeForSearch(e.speaker_or_director).includes(q))) return false;
+      }
+      return true;
+    });
+    document.getElementById('count-all').textContent = baseResult.length;
+    document.querySelectorAll('.filter-chip[data-filter]').forEach(chip => {
+      const f = chip.dataset.filter;
+      if (f === 'all') return;
+      const n = baseResult.filter(e => e.type === f).length;
+      const countEl = chip.querySelector('.count');
+      if (countEl) countEl.textContent = n;
+    });
+  }
+
+  function render() {
+    const filtered = getFiltered();
+    updateCounts();
+
+    const countEl = document.getElementById('event-count');
+    countEl.textContent = filtered.length + ' festival' + (filtered.length === 1 ? '' : 's');
+
+    const list = document.getElementById('event-list');
+    const empty = document.getElementById('empty-state');
+    list.innerHTML = '';
+
+    if (filtered.length === 0) {
+      const eyebrow = document.getElementById('empty-eyebrow');
+      const message = document.getElementById('empty-message');
+      if (state.events.length === 0) {
+        eyebrow.textContent = 'Festivals calendar is loading';
+        message.textContent = 'No festivals on file yet. The festivals scraper runs weekly; first harvest will populate this view.';
+      } else {
+        eyebrow.textContent = 'No festivals match';
+        message.textContent = 'Adjust filters or clear the search.';
+      }
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+
+    for (const e of filtered) {
+      list.appendChild(renderCard(e));
+    }
+  }
+
+  function renderCard(e) {
+    const card = document.createElement('div');
+    card.className = 'event-card';
+    if (state.openId === e.id) card.classList.add('open');
+    card.dataset.type = e.type || 'other';
+    card.dataset.eventId = e.id || '';
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+
+    const d = e.date ? new Date(e.date) : null;
+    const month = d && !isNaN(d) ? d.toLocaleString('en-CA', { month: 'short' }) : '·';
+    const day = d && !isNaN(d) ? d.getDate() : '';
+    const weekday = d && !isNaN(d) ? d.toLocaleString('en-CA', { weekday: 'short' }) : '';
+
+    let rangeStr = '';
+    if (e.end_date) {
+      const e2 = new Date(e.end_date);
+      if (!isNaN(e2) && d) {
+        const days = Math.round((e2 - d) / 86400000);
+        if (days >= 1) rangeStr = '+' + days + ' days';
+      }
+    }
+
+    const dateCol = document.createElement('div');
+    dateCol.className = 'event-date';
+    dateCol.innerHTML =
+      '<span class="month">' + month + '</span>' +
+      '<span class="day">' + day + '</span>' +
+      (weekday ? '<span class="weekday">' + weekday + '</span>' : '') +
+      (rangeStr ? '<span class="range">' + rangeStr + '</span>' : '');
+    card.appendChild(dateCol);
+
+    const body = document.createElement('div');
+    body.className = 'event-body';
+    const title = document.createElement('span');
+    title.className = 'event-title';
+    title.textContent = e.title || 'Untitled';
+    body.appendChild(title);
+
+    const meta = document.createElement('div');
+    meta.className = 'event-meta';
+    const bits = [];
+    if (e.venue) bits.push(escapeHtml(e.venue));
+    if (e.type) bits.push('<span class="event-tag-type">' + escapeHtml(e.type) + '</span>');
+    meta.innerHTML = bits.join(' · ');
+    body.appendChild(meta);
+    card.appendChild(body);
+
+    if (state.openId === e.id) {
+      const details = document.createElement('div');
+      details.className = 'event-details';
+      const parts = [];
+      if (e.speaker_or_director) {
+        parts.push('<p><strong>' + escapeHtml(e.speaker_or_director) + '</strong></p>');
+      }
+      if (e.raw_excerpt) {
+        parts.push('<p class="raw-excerpt">' + escapeHtml(e.raw_excerpt) + '</p>');
+      }
+      if (e.source_url) {
+        parts.push('<a href="' + escapeHtml(e.source_url) + '" target="_blank" rel="noopener noreferrer" class="source-link">View source ↗</a>');
+      }
+      details.innerHTML = parts.join('');
+      card.appendChild(details);
+    }
+
+    card.addEventListener('click', (ev) => {
+      if (ev.target.tagName === 'A') return;
+      const wasOpen = state.openId === e.id;
+      state.openId = wasOpen ? null : e.id;
+      render();
+      // After re-render, if we just opened this card and its expanded details
+      // would land below the viewport fold, scroll it back into view.
+      if (!wasOpen) {
+        requestAnimationFrame(() => {
+          const reopened = document.querySelector('.event-card[data-event-id="' + e.id + '"]');
+          if (reopened) {
+            const rect = reopened.getBoundingClientRect();
+            const fits = rect.bottom <= window.innerHeight && rect.top >= 0;
+            if (!fits) {
+              const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+              reopened.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest' });
+            }
+          }
+        });
+      }
+    });
+    card.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        state.openId = (state.openId === e.id) ? null : e.id;
+        render();
+      }
+    });
+    return card;
+  }
+
+  function setupFilters() {
+    document.querySelectorAll('.filter-chip[data-filter]').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const f = chip.dataset.filter;
+        if (f === 'all') {
+          state.activeFilters = new Set(['all']);
+          document.querySelectorAll('.filter-chip').forEach(c => {
+            c.setAttribute('aria-pressed', c.dataset.filter === 'all' ? 'true' : 'false');
+          });
+        } else {
+          if (state.activeFilters.has('all')) state.activeFilters.delete('all');
+          if (state.activeFilters.has(f)) {
+            state.activeFilters.delete(f);
+            chip.setAttribute('aria-pressed', 'false');
+          } else {
+            state.activeFilters.add(f);
+            chip.setAttribute('aria-pressed', 'true');
+          }
+          if (state.activeFilters.size === 0) {
+            state.activeFilters.add('all');
+            document.querySelector('.filter-chip[data-filter="all"]').setAttribute('aria-pressed', 'true');
+          } else {
+            document.querySelector('.filter-chip[data-filter="all"]').setAttribute('aria-pressed', 'false');
+          }
+        }
+        render();
+      });
+    });
+  }
+
+  function setupSearch() {
+    const input = document.getElementById('search-input');
+    let t;
+    input.addEventListener('input', () => {
+      clearTimeout(t);
+      t = setTimeout(() => {
+        state.searchQuery = input.value.trim();
+        render();
+      }, 200);
+    });
+  }
+
+  function setupHidePast() {
+    const btn = document.getElementById('btn-hide-past');
+    if (!btn) return;
+    btn.setAttribute('aria-pressed', state.hidePast ? 'true' : 'false');
+    btn.textContent = state.hidePast ? 'Hide past' : 'Show past';
+    btn.addEventListener('click', () => {
+      state.hidePast = !state.hidePast;
+      localStorage.setItem('seminarschools_hide_past_v1', state.hidePast ? 'true' : 'false');
+      btn.setAttribute('aria-pressed', state.hidePast ? 'true' : 'false');
+      btn.textContent = state.hidePast ? 'Hide past' : 'Show past';
+      render();
+    });
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', load);
+  } else {
+    load();
+  }
+})();
+</script>
+
+</body>
+</html>
