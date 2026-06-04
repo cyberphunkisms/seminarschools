@@ -149,8 +149,10 @@
 </script>
 <link rel="stylesheet" href="/css/theme.css">
 <link rel="stylesheet" href="/css/mobile-overlay.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+<style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 
 <!-- Theme toggle (light/dark mode). System preference is the default;
      clicking flips. localStorage persists the choice. -->
@@ -200,7 +202,8 @@
   <div class="next-session reveal delay-4" style="margin-top:2.5rem;padding:1.5rem 1.75rem;background:rgba(122,72,40,0.10);border-left:3px solid var(--accent,#7a4828);">
     <div style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent,#7a4828);font-weight:600;margin-bottom:0.5rem;">Next session</div>
     <div style="font-family:var(--display,'Cinzel',serif);font-style:italic;font-size:1.15rem;line-height:1.4;">To be announced.</div>
-    <a href="/agora/feed.xml" type="application/rss+xml" style="display:inline-block;margin-top:1rem;font-family:var(--mono);font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent,#7a4828);font-weight:600;border-bottom:1px solid var(--accent,#7a4828);padding-bottom:0.2rem;text-decoration:none;">Subscribe to the RSS feed &rarr;</a>
+    <!-- CL-2026-06-04 #1: subscribe CTAs switched from raw RSS to email-notify -->
+    <a href="mailto:saulnassau@protonmail.com?subject=Notify%20me%20about%20the%20next%20Agora%20session" style="display:inline-block;margin-top:1rem;font-family:var(--mono);font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent,#7a4828);font-weight:600;border-bottom:1px solid var(--accent,#7a4828);padding-bottom:0.2rem;text-decoration:none;">Email me about the next session &rarr;</a><a href="/agora/feed.xml" type="application/rss+xml" style="display:inline-block;margin-top:0.55rem;margin-left:1.1rem;font-family:var(--mono);font-size:0.68rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--fg-soft,#9a8f80);font-weight:500;border-bottom:1px solid var(--fg-soft,#9a8f80);padding-bottom:0.15rem;text-decoration:none;">or via RSS</a>
     <div style="margin-top:0.6rem;font-family:var(--body);font-size:0.85rem;color:var(--fg-soft,#666);font-style:italic;">Add the feed to your RSS reader. New sessions appear there when scheduled.</div>
   </div>
 
@@ -263,7 +266,7 @@
   <div class="micro">V. When</div>
   <h2 class="compound words">Each session is convened when participants gather. <em>Dates announced ahead of time.</em></h2>
   <div class="body">
-    <p>The Agora is convened as participants gather. There is no fixed cadence. Each session is announced ahead of time with the text, the date, and the mode. Subscribe to the <a class="open-transmission" href="/agora/feed.xml" type="application/rss+xml"><span class="prompt">&gt;</span>rss_feed<span class="cursor">_</span></a> in any RSS reader to receive the announcements.</p>
+    <p>The Agora is convened as participants gather. There is no fixed cadence. Each session is announced ahead of time with the text, the date, and the mode. <a href="mailto:saulnassau@protonmail.com?subject=Notify%20me%20about%20the%20next%20Agora%20session">Email me</a> to be added to the announcement list, or subscribe to the <a class="open-transmission" href="/agora/feed.xml" type="application/rss+xml"><span class="prompt">&gt;</span>rss_feed<span class="cursor">_</span></a> in any RSS reader.</p>
   </div>
 </section>
 

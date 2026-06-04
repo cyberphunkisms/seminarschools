@@ -38,6 +38,9 @@
 .threshold-coords .row{display:grid;grid-template-columns:7rem 1fr;gap:1.2rem;padding:.6rem 0;border-bottom:1px solid var(--rule,rgba(0,0,0,.15));align-items:baseline}
 .threshold-coords .lbl{font-family:var(--sans,var(--body,sans-serif));font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent,inherit);font-weight:500}
 .threshold-coords .val{font-family:var(--mono,monospace);font-size:.78rem;color:var(--fg,inherit);opacity:.85;letter-spacing:.04em}
+/* a mark left in the margin for the reader who looks */
+.veil{color:var(--accent);opacity:.3;text-decoration:none;font-size:.7em;vertical-align:super;padding-left:.12em;transition:opacity 320ms ease}
+.veil:hover,.veil:focus-visible{opacity:.95;outline:none}
 </style>
 <script type="application/ld+json">
 {
@@ -56,6 +59,7 @@
 <link rel="stylesheet" href="/css/mobile-overlay.css">
 </head>
 <body class="theme-dark">
+<style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 <a href="#main-content" class="skip-link">Skip to content</a>
 <div class="descent-marker" id="marker">
   <span class="roman">i</span>
@@ -90,7 +94,7 @@
   <div class="tier-label-vertical"><span class="num">i</span><span class="label">The frame</span></div>
   <div class="section-meta">i. The frame</div>
   <h2 class="compound words">Why these two <em>together.</em></h2>
-  <p>The cry from the cross (sabachthani, "why have you forsaken me") and the gnostic tradition both refuse the easy synthesis. Both texts ask the reader to sit with abandonment as a structural feature of the inheritance, not as a problem to be solved. The seminar reads them as adjacent rather than identical, looking for what each tradition keeps that the other lets go of.</p>
+  <p>The cry from the cross (sabachthani, "why have you forsaken me") and the gnostic tradition both refuse the easy synthesis. Both texts ask the reader to sit with abandonment as a structural feature of the inheritance, not as a problem to be solved. The seminar reads them as adjacent rather than identical, looking for what each tradition keeps that the other lets go of.<a class="veil" href="/devilsdiary/" aria-label="marginal note">&dagger;</a></p>
 </section>
 <section class="section tier reveal" data-tier="2" data-roman="ii">
   <div class="tier-label-vertical"><span class="num">ii</span><span class="label">Where</span></div>
@@ -167,5 +171,6 @@
 
 
 <script>document.addEventListener('DOMContentLoaded', function(){ if(window.PolymythMandala) PolymythMandala.initForProject('sabachtan-seminar'); });</script>
+<script src="/js/theme.js" defer></script>
 </body>
 </html>

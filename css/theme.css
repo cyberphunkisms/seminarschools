@@ -40,6 +40,13 @@
   /* Page-specific override slot — Leizu, Marshmellow, etc. can
      redefine if their content needs different character sets. */
   --font-multilingual: var(--font-body);
+
+  /* Canonical content width — one reading measure across the site.
+     Added 2026-06-04 per Kira UI review; page widths ranged 600 to 1400px. */
+  --content-width: 768px;
+
+  /* Letter-size scale, driven by the A-/A+ controls in /js/theme.js. */
+  --font-scale: 1;
 }
 
 
@@ -161,7 +168,7 @@
 }
 .theme-toggle .sun, .theme-toggle .moon {
   display: none;
-  font-size: 16px;
+  font-size: calc(16px * var(--font-scale, 1));
   line-height: 1;
 }
 :root:not(.dark) .theme-toggle .moon { display: inline; }
@@ -195,4 +202,22 @@ body {
   .theme-toggle {
     transition: none !important;
   }
+}
+
+
+/* ============================================================
+ * TYPE CANON ALIASES — added 2026-06-04 per Kira UI review.
+ * Pages historically used --display / --serif / --body / --sans /
+ * --mono with divergent values (Fraunces, Newsreader, EB Garamond,
+ * Playfair, Spectral). Map every alias to the one canon so the
+ * whole site shares a type system. Loaded after each page's inline
+ * :root, so these win. Deliberate separate worlds (the Devil's
+ * Diary) do not load this file and keep their own faces.
+ * ============================================================ */
+:root {
+  --display: var(--font-display);
+  --serif:   var(--font-display);
+  --body:    var(--font-body);
+  --sans:    var(--font-sans);
+  --mono:    var(--font-mono);
 }
