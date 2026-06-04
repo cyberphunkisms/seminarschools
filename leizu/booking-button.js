@@ -8,10 +8,10 @@
 //      automatically forwards to the Cal.com booking URL
 //
 // SETUP: After creating Stripe Payment Links and Cal.com event types,
-// URL constants below are the live Stripe Payment Links and Cal.com URLs.
+// fill in the URL constants below with the real values.
 
 // =================================================================
-// PAYMENT LINK CONSTANTS — the live Stripe Payment Links
+// PAYMENT LINK CONSTANTS — REPLACE WITH REAL URLS AFTER STRIPE SETUP
 // =================================================================
 
 const PAYMENT_LINKS = {

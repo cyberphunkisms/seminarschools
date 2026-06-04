@@ -60,14 +60,6 @@
   status = 404
   force = true
 
-# Public exemption: the events feed is fetched by the homepage and the calendar,
-# so it must stay reachable even though the rest of /data/ stays blocked.
-# Exact-path rule MUST precede the wildcard block, first match wins.
-[[redirects]]
-  from = "/data/polymyth-seminar-events.json"
-  to = "/data/polymyth-seminar-events.json"
-  status = 200
-
 [[redirects]]
   from = "/data/*"
   to = "/404.html"
