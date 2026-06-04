@@ -756,6 +756,12 @@
 
     /* Print-scaled disabled. See T115z notes. */
     body.print-scaled .page { zoom: 1 !important; transform: none !important; width: 100% !important; }
+
+    /* PDF fix: overflow-x:hidden on html/body forces the cross axis to auto, so a long page grows a vertical scrollbar that wkhtmltopdf renders into the file and that overlays and clips the right edge. Restore visible and suppress any scrollbar, then pin the column to the printable width so descriptions wrap instead of running past the margin. */
+    html, body { overflow: visible !important; scrollbar-width: none !important; }
+    ::-webkit-scrollbar { width: 0 !important; height: 0 !important; display: none !important; }
+    .page { max-width: 100% !important; width: auto !important; padding-left: 0 !important; padding-right: 0.18in !important; }
+    .entry .desc-print, .entry .note, .entry .title { overflow-wrap: break-word; word-wrap: break-word; }
   }
 
   /* Role subtitle — on-screen when filter is active, also visible in print */
