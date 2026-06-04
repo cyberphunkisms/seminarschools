@@ -399,6 +399,12 @@ section.chapter:last-of-type{border-bottom:none;}
 .tier-gate{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--silk);opacity:0.85;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid rgba(244,239,227,0.15);}
 .tier-han{font-family:var(--han-tc);font-size:1.6rem;font-weight:500;color:var(--mulberry-deep);margin-bottom:0.4rem;}
 [data-lang="zhs"] .tier-han{font-family:var(--han-sc);}
+a.tier{color:inherit;text-decoration:none;cursor:pointer;}
+.tier-go{margin-top:1rem;font-family:var(--mono);font-size:1.25rem;line-height:1;color:var(--accent);align-self:flex-start;transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);}
+.tier.flagship .tier-go{color:var(--paper);}
+a.tier:hover .tier-go{transform:translateX(5px);}
+[data-lang="fa"] .tier-go{transform:scaleX(-1);}
+[data-lang="fa"] a.tier:hover .tier-go{transform:scaleX(-1) translateX(5px);}
 .tier-name{font-family:var(--display);font-size:1.25rem;font-style:italic;font-weight:500;color:var(--ink);margin-bottom:1rem;line-height:1.25;}
 [data-lang="zh"] .tier-name,[data-lang="zhs"] .tier-name,[data-lang="fa"] .tier-name{font-style:normal;}
 .tier-price-strike{font-family:var(--mono);font-size:0.85rem;color:var(--ink-soft);text-decoration:line-through;margin-bottom:0.25rem;opacity:0.85;}
@@ -901,7 +907,7 @@ footer.colophon a{border-bottom-color:var(--rule);}
   /* Reset background to white to save ink */
   body { background: white !important; color: #000 !important; -webkit-print-color-adjust: economy; print-color-adjust: economy; }
   /* Hide interactive UI chrome */
-  .topbar, .nav, nav, .menu, .actions, .filter-nav, .langs, .fz-controls, .mode-toggle, .modeToggle, .geo, .progress, .descent-marker, .live-settings, .booking-button, button, .btn, [role="button"] { display: none !important; }
+  .topbar, .nav, nav, .menu, .actions, .filter-nav, .langs, .fz-controls, .mode-toggle, .modeToggle, .geo, .progress, .descent-marker, .live-settings, .booking-button, .tier-go, button, .btn, [role="button"] { display: none !important; }
   /* Hide trailing footer chrome */
   .colophon, .footer-links, footer { color: #555 !important; border-top: 1px solid #ccc; padding-top: 0.5rem; margin-top: 1rem; }
   /* Make links printable: show URL after link text for printout */
@@ -1109,13 +1115,13 @@ footer.colophon a{border-bottom-color:var(--rule);}
   </div>
   <div class="tiers-wrapper">
     <div class="tiers tiers-simple">
-      <div class="tier"><div class="tier-name" data-i18n="tier1.name">Single sessions</div><div class="tier-price-num">$300</div><div class="tier-price-unit" data-i18n="tier1.unit">3 sessions · $100 each</div><div class="tier-detail" data-i18n="tier1.detail">The minimum to begin.</div></div>
-      <div class="tier"><div class="tier-name" data-i18n="tier2.name">Five sessions</div><div class="tier-price-strike">$575</div><div class="tier-price-num">$510</div><div class="tier-price-unit" data-i18n="tier2.unit">$102 each · 11% off</div><div class="tier-detail" data-i18n="tier2.detail">Extend without committing to a full bundle.</div></div>
-      <div class="tier"><div class="tier-name" data-i18n="tier3.name">Seven-class bundle</div><div class="tier-price-strike">$805</div><div class="tier-price-num">$630</div><div class="tier-price-unit" data-i18n="tier3.unit">$90 each · 22% off</div><div class="tier-detail" data-i18n="tier3.detail">The standard term-long bundle.</div></div>
+      <a class="tier" href="#elements-grid"><div class="tier-name" data-i18n="tier1.name">Single sessions</div><div class="tier-price-num">$300</div><div class="tier-price-unit" data-i18n="tier1.unit">3 sessions · $100 each</div><div class="tier-detail" data-i18n="tier1.detail">The minimum to begin.</div><span class="tier-go" aria-hidden="true">&rarr;</span></a>
+      <a class="tier" href="#elements-grid"><div class="tier-name" data-i18n="tier2.name">Five sessions</div><div class="tier-price-strike">$575</div><div class="tier-price-num">$510</div><div class="tier-price-unit" data-i18n="tier2.unit">$102 each · 11% off</div><div class="tier-detail" data-i18n="tier2.detail">Extend without committing to a full bundle.</div><span class="tier-go" aria-hidden="true">&rarr;</span></a>
+      <a class="tier" href="#elements-grid"><div class="tier-name" data-i18n="tier3.name">Seven-class bundle</div><div class="tier-price-strike">$805</div><div class="tier-price-num">$610</div><div class="tier-price-unit" data-i18n="tier3.unit">$87 each · 24% off</div><div class="tier-detail" data-i18n="tier3.detail">The standard term-long bundle.</div><span class="tier-go" aria-hidden="true">&rarr;</span></a>
     </div>
     <div class="tiers tiers-flagship">
-      <div class="tier flagship"><div class="tier-han">森林・私塾</div><div class="tier-name" data-i18n="tier4.name">The Forest year</div><div class="tier-price-strike">$25,000</div><div class="tier-price-num">$14,400</div><div class="tier-price-unit" data-i18n="tier4.unit">144 contact hours · one-on-one</div><div class="tier-detail" data-i18n="tier4.detail">A full year inside the practice. Three sessions a week across all five subjects. A written account of the student's development at year-end, suitable for sharing with universities.</div></div>
-      <div class="tier flagship flagship-seminar"><div class="tier-han">私塾・講座</div><div class="tier-name" data-i18n="tier5.name">The Seminar year</div><div class="tier-price-strike">$12,500</div><div class="tier-price-num">$7,200</div><div class="tier-price-unit" data-i18n="tier5.unit">144 contact hours · small seminar</div><div class="tier-detail" data-i18n="tier5.detail">For students who have completed at least 20 sessions of one-on-one work. Same yearly practice in seminar format with a small group of prepared peers. Half the per-session rate of the Forest year, because seminar work makes one teaching session reach several students at once.</div><div class="tier-gate" data-i18n="tier5.gate">Unlocks at 20-40 one-on-one sessions</div></div>
+      <a class="tier flagship" href="https://cal.com/seminarschools/forestyear" target="_blank" rel="noopener noreferrer"><div class="tier-han">森林・私塾</div><div class="tier-name" data-i18n="tier4.name">The Forest year</div><div class="tier-price-strike">$25,000</div><div class="tier-price-num">$14,000</div><div class="tier-price-unit" data-i18n="tier4.unit">144 contact hours · one-on-one</div><div class="tier-detail" data-i18n="tier4.detail">A full year inside the practice. Three sessions a week across all five subjects. A written account of the student's development at year-end, suitable for sharing with universities.</div><span class="tier-go" aria-hidden="true">&rarr;</span></a>
+      <a class="tier flagship flagship-seminar" href="https://cal.com/seminarschools/seminaryear" target="_blank" rel="noopener noreferrer"><div class="tier-han">私塾・講座</div><div class="tier-name" data-i18n="tier5.name">The Seminar year</div><div class="tier-price-strike">$12,500</div><div class="tier-price-num">$5,800</div><div class="tier-price-unit" data-i18n="tier5.unit">144 contact hours · small seminar</div><div class="tier-detail" data-i18n="tier5.detail">For students who have completed at least 20 sessions of one-on-one work. Same yearly practice in seminar format with a small group of prepared peers. Half the per-session rate of the Forest year, because seminar work makes one teaching session reach several students at once.</div><div class="tier-gate" data-i18n="tier5.gate">Unlocks at 20-40 one-on-one sessions</div><span class="tier-go" aria-hidden="true">&rarr;</span></a>
     </div>
   </div>
   <div class="policy-block">
@@ -2852,7 +2858,7 @@ try {
 const observer = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting) e.target.classList.add('in');});},{threshold:0.1,rootMargin:'0px 0px -80px 0px'});
 document.querySelectorAll('.chapter-prose,.elements-grid,.tiers,.format-grid,.policy-block,.teacher-cta-small,.contact-block,.chapter-title,.chapter-num').forEach(el=>{el.classList.add('reveal');observer.observe(el);});
 </script>
-<!-- Booking + payment wiring. Replace placeholder URLs in this file with real Stripe/Cal.com URLs after account setup. -->
+<!-- Booking + payment wiring via /leizu/booking-button.js. Stripe Payment Links and Cal.com intake URLs are live. -->
 <script src="/leizu/booking-button.js"></script>
 <script src="/js/theme.js" defer></script>
 </body>
