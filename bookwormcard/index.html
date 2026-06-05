@@ -832,7 +832,7 @@
 <a href="/bookwormcard/about/" class="bypass-help">[ what is this? ]</a>
 
 <!-- HIDDEN STATIC FORM FOR NETLIFY DETECTION -->
-<form name="bookwormcard" data-netlify="true" netlify-honeypot="bot-field" hidden class="nl-form">
+<form name="bookwormcard" hidden class="nl-form" aria-hidden="true">
   <input type="text" name="bot-field">
   <input type="text" name="handle">
   <input type="email" name="email">
@@ -879,7 +879,7 @@
 </form>
 
 <!-- ACTUAL POSTING FORM (hidden, populated and submitted by JS) -->
-<form id="post-form" name="bookwormcard" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/bookwormcard/success/" class="nl-form">
+<form id="post-form" name="bookwormcard" class="nl-form" aria-hidden="true">
   <input type="hidden" name="form-name" value="bookwormcard">
   <input type="text" name="bot-field">
   <input type="hidden" name="handle">
@@ -3173,12 +3173,18 @@ var STATES = {
   email: {
     enter: function(){
       appendLine('where can i reach you?', {gap:false, question:true});
-      setPrompt('email');
+      appendLine('<span class="quiet">your email, optional. it rides inside the saved card and goes nowhere else. type skip to leave it off.</span>', {gap:false, instant:true});
+      setPrompt('email · skip');
     },
     advance: function(input){
-      if(!input){showError('<span class="err">email required.</span>');return;}
+      if(!input || input.toLowerCase()==='skip'){
+        appendLine('<span class="answer quiet">skipped</span>', {gap:false});
+        renderCardPreview();
+        transitionTo('wormhole-1');
+        return;
+      }
       if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(input)){
-        showError('<span class="err">that is not a valid email.</span>');return;
+        showError('<span class="err">that is not a valid email. or type skip.</span>');return;
       }
       data.email = input;
       appendLine('<span class="answer">'+escapeHtml(input)+'</span>', {gap:false});
@@ -3682,7 +3688,7 @@ var STATES = {
         }
       }
 
-      appendLine('press <span class="system">enter</span> to submit.', {gap:false});
+      appendLine('press <span class="system">enter</span> for your pdf.', {gap:false});
       appendLine('your wormcard is one file: a <span class="system">pdf</span>. it carries every paragraph you wrote, prints natively, doubles as your save file, and reads cleanly when you drop it into any AI chat to play with this character.', {gap:true, instant:true});
       // Mobile players see the trial-mode banner at the top of the
       // page already. Repeat the warning here so the player who's
@@ -3705,7 +3711,9 @@ var STATES = {
     advance: function(input){
       var cmd = input.toLowerCase();
       if(cmd==='' || cmd==='enter' || cmd==='submit'){
-        transitionTo('submitting');
+        // PURE PUNCHCARD: finishing prints the card to PDF. No server submit.
+        printCard();
+        appendLine('<span class="system">opening your wormcard. choose save-as-pdf in the print dialog. the pdf is your save file too.</span>', {gap:true, instant:true});
       } else if(cmd==='edit'){
         appendLine('<span class="system">type the name of the field to revise:</span> <span class="quiet">edit one field, return to the seal.</span>', {gap:true, instant:true});
         appendLine('<span class="quiet">identity:</span> handle · email · animal', {gap:false, instant:true});
@@ -4309,7 +4317,7 @@ function submitForm(){
   // any skips.
   form.querySelector('[name=hegeliane-full]').value = isFullyFilled() ? 'true' : 'false';
   clearCheckpoint();
-  form.submit();
+  printCard();
 }
 
 // ============================================================

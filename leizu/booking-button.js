@@ -21,11 +21,11 @@ const PAYMENT_LINKS = {
   seven_sessions:        'https://buy.stripe.com/5kQeVd9Nh3cOfxn22C6oo04',    // $610 CAD — 7 sessions (SeptSession)
 
   // Forest year (144 contact hours, one-on-one)
-  forest_year_upfront:   'https://buy.stripe.com/14A6oHf7B8x82KB4aK6oo01',    // $14,000 CAD upfront (BILLING VERIFICATION PENDING)
+  forest_year_upfront:   'https://buy.stripe.com/14A6oHf7B8x82KB4aK6oo01',    // $14,000 CAD upfront
   forest_year_monthly:   'https://buy.stripe.com/9B69AT0cH3cO98ZePo6oo05',    // $1,400/mo CAD recurring
 
   // Seminar year (144 contact hours, small seminar, gated by 20-40 prior one-on-one sessions)
-  seminar_year_upfront:  'https://buy.stripe.com/00w00j3oT28Kfxn6iS6oo00',    // $5,800 CAD upfront (BILLING VERIFICATION PENDING)
+  seminar_year_upfront:  'https://buy.stripe.com/00w00j3oT28Kfxn6iS6oo00',    // $5,800 CAD upfront
   seminar_year_monthly:  'https://buy.stripe.com/bJe7sLaRlcNo3OFcHg6oo06',    // $600/mo CAD recurring
 
   // Donation (Mulberry Fund). Routed through Saul's existing Buy Me a Coffee
@@ -164,6 +164,13 @@ function buildBookingHandler(){
       }));
     } catch(e){}
 
+    // Guard: a missing or placeholder Payment Link must never strand the
+    // buyer on a raw storage error page. Degrade to the mailto booking flow.
+    if(!paymentLink || paymentLink.indexOf('REPLACE') !== -1 || paymentLink.indexOf('https://buy.stripe.com/') !== 0){
+      if(typeof window.__leizuOpenPolicyModal === 'function'){ window.__leizuOpenPolicyModal(); }
+      else if(typeof buildBookingMailto === 'function'){ window.location.href = buildBookingMailto(); }
+      return;
+    }
     // Open Stripe Payment Link in same window. After payment, Stripe redirects
     // to /leizu/booking-success which forwards to Cal.com.
     window.location.href = paymentLink;

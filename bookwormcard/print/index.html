@@ -51,16 +51,14 @@
   /* ----- Page chassis ----- */
   .page{
     width:8.5in;
-    height:10.3in;
+    min-height:10.3in;
     box-sizing:border-box;
     margin:0 auto;
     padding:0.1in 0.2in 0.55in 0.2in;
     background-color:var(--paper);
     page-break-after:always;
-    page-break-inside:avoid;
     position:relative;
     border:3px solid var(--ink);
-    overflow:hidden;
   }
   .page:last-child{page-break-after:auto}
 
@@ -1143,24 +1141,18 @@
     </div>
     <table class="birth-grid horoscope-grid">
       <tr>
-        <td style="width:50%"><div class="lbl">Chinese zodiac</div><span class="ruled-line"></span></td>
-        <td><div class="lbl">Tibetan element-animal</div><span class="ruled-line"></span></td>
+        <td style="width:20%;vertical-align:top"><div class="lbl">Chinese zodiac</div><span class="ruled-line"></span></td>
+        <td style="width:20%;vertical-align:top"><div class="lbl">Western tropical</div><span class="ruled-line"></span></td>
+        <td style="width:20%;vertical-align:top"><div class="lbl">Hellenistic decanic</div><span class="ruled-line"></span></td>
+        <td style="width:20%;vertical-align:top"><div class="lbl">Mesopotamian</div><span class="ruled-line"></span></td>
+        <td style="width:20%;vertical-align:top"><div class="lbl">Mayan tzolkin</div><span class="ruled-line"></span></td>
       </tr>
       <tr>
-        <td><div class="lbl">Western tropical</div><span class="ruled-line"></span></td>
-        <td><div class="lbl">Celtic tree</div><span class="ruled-line"></span></td>
-      </tr>
-      <tr>
-        <td><div class="lbl">Hellenistic decanic</div><span class="ruled-line"></span></td>
-        <td><div class="lbl">Egyptian decanic</div><span class="ruled-line"></span></td>
-      </tr>
-      <tr>
-        <td><div class="lbl">Mesopotamian</div><span class="ruled-line"></span></td>
-        <td><div class="lbl">Burmese mahabote</div><span class="ruled-line"></span></td>
-      </tr>
-      <tr>
-        <td><div class="lbl">Mayan tzolkin</div><span class="ruled-line"></span></td>
-        <td><div class="lbl">Aztec tonalpohualli</div><span class="ruled-line"></span></td>
+        <td style="vertical-align:top"><div class="lbl">Tibetan element-animal</div><span class="ruled-line"></span></td>
+        <td style="vertical-align:top"><div class="lbl">Celtic tree</div><span class="ruled-line"></span></td>
+        <td style="vertical-align:top"><div class="lbl">Egyptian decanic</div><span class="ruled-line"></span></td>
+        <td style="vertical-align:top"><div class="lbl">Burmese mahabote</div><span class="ruled-line"></span></td>
+        <td style="vertical-align:top"><div class="lbl">Aztec tonalpohualli</div><span class="ruled-line"></span></td>
       </tr>
     </table>
   </div>

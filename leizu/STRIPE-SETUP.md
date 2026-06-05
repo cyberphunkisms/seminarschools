@@ -44,12 +44,12 @@ In the Stripe dashboard, go to Product Catalog. Create one product per tier from
 
 1. **Three sessions** — $300.00 — Description "3 sessions, $100 each. The minimum to begin." One-time payment.
 2. **Five sessions** — $510.00 — Description "5 sessions, $102 each. 11% off list." One-time payment.
-3. **Seven-class bundle** — $630.00 — Description "7 sessions, $90 each. 22% off list." One-time payment.
+3. **Seven-class bundle** — $610.00 — Description "7 sessions. 24% off list." One-time payment.
 
 **Forest year (144 contact hours, one-on-one):**
 
-4. **Forest year — upfront** — $13,000.00 — Description "Full Forest year paid in one transaction. Saves $1,400 vs monthly total." One-time payment.
-5. **Forest year — monthly** — $1,200.00 — Description "Forest year paid monthly across 12 months." Recurring billing, monthly interval, 12 cycles or open-ended (your choice). Total $14,400.
+4. **Forest year — upfront** — $14,000.00 — Description "Full Forest year paid in one transaction." One-time payment.
+5. **Forest year — monthly** — $1,400.00 — Description "Forest year paid monthly across 12 months." Recurring billing, monthly interval, 12 cycles or open-ended (your choice). Total $14,000.
 
 **Seminar year (144 contact hours, small seminar, gated by 20-40 prior sessions):**
 
