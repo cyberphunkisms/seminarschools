@@ -55,6 +55,12 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { overflow-x: hidden; }
+  /* Thin, themed scrollbar so the right bar reads as a hairline, not a grey slab */
+  html { scrollbar-width: thin; scrollbar-color: rgba(160,122,44,0.35) transparent; }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(160,122,44,0.32); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(160,122,44,0.55); }
   body {
     background: var(--bg);
     color: var(--fg);
@@ -415,7 +421,7 @@
     margin-top: 0.35rem;
   }
   .entry .dot.cert { border-radius: 1px; transform: rotate(45deg); }
-  .entry .body-col { flex: 1; }
+  .entry .body-col { flex: 1; min-width: 0; }
   .entry .title {
     font-family: var(--body);
     font-size: 0.78rem;
@@ -664,7 +670,7 @@
     /* Hide the colored dot in print. Was rendering as visual noise between
        the date and title without adding hierarchy information. */
     .entry .dot { display: none !important; }
-    .entry .body-col { flex: 1; padding-left: 0.2rem; }
+    .entry .body-col { flex: 1; min-width: 0; padding-left: 0.2rem; }
     .entry .title {
       font-size: 0.82rem;
       color: #1a1a1a;
