@@ -50,7 +50,7 @@ const longestDate = D.reduce((a, e) => Math.max(a, String(e[1]).length), 0);
 const dateColIn = Math.min(1.7, Math.max(1.3, 0.085 * longestDate)).toFixed(2);
 
 const sections = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-  .map((i) => ({ i, items: D.filter((x) => x[0] === i) }))
+  .map((i) => ({ i, items: D.filter((x) => x[0] === i && !tagsOf(x[2]).includes("seminarschools")) }))
   .filter((g) => g.items.length > 0);
 
 const rows = (items) =>
