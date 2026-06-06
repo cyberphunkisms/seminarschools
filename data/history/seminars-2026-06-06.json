@@ -1,7 +1,6 @@
 {
-  "$schema_ref": "/data/seminars-schema.json",
   "generated_at": "2026-06-06T16:34:57+00:00",
-  "count": 50,
+  "count": 87,
   "events": [
     {
       "id": "a72d244a50b2",
@@ -27,6 +26,52 @@
       "marginalia_url": null
     },
     {
+      "id": "cacd5e05334f",
+      "date": "2026-04-17T18:00-04:00",
+      "end_date": null,
+      "title": "Rebecca Comay on Mourning Sickness",
+      "venue": "University of Toronto Department of Comparative Literature",
+      "source_url": "https://seminarschools.com/seminars/",
+      "source_id": "manual-curated",
+      "type": "lecture",
+      "speaker_or_director": "Rebecca Comay",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Hand-curated lecture. Comay on melancholia, mourning, and the dialectic of grief as developed in Mourning Sickness: Hegel and the French Revolution.",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "2037a5cbcd14",
+      "date": "2026-04-22T18:00-04:00",
+      "end_date": null,
+      "title": "TPL Salon Series at Appel Salon",
+      "venue": "Toronto Reference Library, Appel Salon, 789 Yonge Street",
+      "source_url": "https://seminarschools.com/seminars/",
+      "source_id": "manual-curated",
+      "type": "lecture",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Toronto Public Library Salon Series.",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
       "id": "a386f6d66b8b",
       "date": "2026-04-25T11:00-04:00",
       "end_date": "2026-09-07T18:00-04:00",
@@ -45,6 +90,121 @@
         "intellectual_stake": true
       },
       "raw_excerpt": "",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "ebcb11fc9855",
+      "date": "2026-04-25T18:00-04:00",
+      "end_date": null,
+      "title": "Massey Dialogues",
+      "venue": "Massey College, 4 Devonshire Place, Toronto",
+      "source_url": "https://seminarschools.com/seminars/",
+      "source_id": "manual-curated",
+      "type": "lecture",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Massey College Dialogues series.",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "8084a76319b2",
+      "date": "2026-05-02T18:00-04:00",
+      "end_date": null,
+      "title": "Cheryl Misak on Frank Ramsey",
+      "venue": "University of Toronto Department of Philosophy",
+      "source_url": "https://seminarschools.com/seminars/",
+      "source_id": "manual-curated",
+      "type": "lecture",
+      "speaker_or_director": "Cheryl Misak",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Hand-curated lecture. Misak on Frank Ramsey, the Cambridge philosopher whose biography she wrote (Frank Ramsey: A Sheer Excess of Powers, Oxford 2020).",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "f0d239c2a7d6",
+      "date": "2026-05-09T18:00-04:00",
+      "end_date": null,
+      "title": "Ian Hacking Memorial Symposium",
+      "venue": "Victoria College, University of Toronto",
+      "source_url": "https://seminarschools.com/seminars/",
+      "source_id": "manual-curated",
+      "type": "panel",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Memorial symposium for Ian Hacking, the late philosopher of science.",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "1d20199127a8",
+      "date": "2026-05-14T18:00-04:00",
+      "end_date": null,
+      "title": "ROM Speaks on archaeology and memory",
+      "venue": "Royal Ontario Museum, 100 Queens Park, Toronto",
+      "source_url": "https://seminarschools.com/seminars/",
+      "source_id": "manual-curated",
+      "type": "lecture",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "ROM Speaks public lecture series, theme: archaeology and memory.",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "e44b2f398057",
+      "date": "2026-05-21T12:30-04:00",
+      "end_date": null,
+      "title": "Ethics@Noon-ish weekly talk",
+      "venue": "Centre for Ethics, University of Toronto, Larkin Building, 15 Devonshire Place",
+      "source_url": "https://seminarschools.com/seminars/",
+      "source_id": "manual-curated",
+      "type": "lecture",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Weekly Ethics@Noon-ish series. The Centre for Ethics workhorse seminar.",
       "scraped_at": "2026-06-06T16:34:57+00:00",
       "review_status": "manual",
       "marginalia_url": null
@@ -280,6 +440,98 @@
       "marginalia_url": null
     },
     {
+      "id": "14b77d6a2042",
+      "date": "2026-05-27T15:30-04:00",
+      "end_date": null,
+      "title": "Karolina Krzy\u017canowska on Experimental Epistemology of Figleaves",
+      "venue": "Hagey Hall, University of Waterloo (200 University Ave W, Waterloo)",
+      "source_url": "https://uwaterloo.ca/philosophy/",
+      "source_id": "manual-curated",
+      "type": "scholar-talk",
+      "speaker_or_director": "Karolina Krzy\u017canowska",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "59bdd983498c",
+      "date": "2026-05-27T16:00-04:00",
+      "end_date": null,
+      "title": "The Changing Politics of Language: Europe and Beyond",
+      "venue": "Munk School of Global Affairs and Public Policy, 1 Devonshire Place",
+      "source_url": "https://munkschool.utoronto.ca/event/changing-politics-language-europe-and-beyond",
+      "source_id": "manual-curated",
+      "type": "panel",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "132de871e9d0",
+      "date": "2026-05-27T19:00-04:00",
+      "end_date": null,
+      "title": "Tracey Lindberg: The Cree Word for Love",
+      "venue": "North York Central Library Concourse Event Space, 5120 Yonge Street",
+      "source_url": "https://www.torontopubliclibrary.ca/programs-and-classes/appel-salon/",
+      "source_id": "manual-curated",
+      "type": "reading",
+      "speaker_or_director": "Tracey Lindberg",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "87d1bee80129",
+      "date": "2026-05-28T19:00-04:00",
+      "end_date": null,
+      "title": "Anakana Schofield: Library of Brothel",
+      "venue": "Bram and Bluma Appel Salon, Toronto Reference Library, 789 Yonge Street",
+      "source_url": "https://www.torontopubliclibrary.ca/programs-and-classes/appel-salon/",
+      "source_id": "manual-curated",
+      "type": "reading",
+      "speaker_or_director": "Anakana Schofield",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
       "id": "92752651c756",
       "date": "2026-06-01T10:00-04:00",
       "end_date": "2026-12-31T17:30-05:00",
@@ -326,6 +578,29 @@
       "marginalia_url": null
     },
     {
+      "id": "012938a0f61d",
+      "date": "2026-06-02T19:00-04:00",
+      "end_date": null,
+      "title": "imagineNATIVE Opening Night: AKI",
+      "venue": "TIFF Bell Lightbox, 350 King St W, Toronto",
+      "source_url": "https://imaginenative.org/the-imaginenative-film-media-arts-festival-unveils-its-2026-programming/",
+      "source_id": "manual-curated",
+      "type": "screening",
+      "speaker_or_director": "Darlene Naponse",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Opening night screening of AKI by Darlene Naponse (Anishinaabe). Director-attended Q&A. Welcome Gathering at Spadina Museum.",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
       "id": "dc714fd2df1c",
       "date": "2026-06-03T19:00-04:00",
       "end_date": "2026-06-28T23:00-04:00",
@@ -344,6 +619,98 @@
         "intellectual_stake": true
       },
       "raw_excerpt": "20th anniversary edition. Theme: PLAY. 50+ events, 140+ performances, 1000+ artists. Longest Luminato in history.",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "75fa1e984202",
+      "date": "2026-06-04T12:00-04:00",
+      "end_date": null,
+      "title": "imagineNATIVE Art Crawl",
+      "venue": "Gallery TPW, A Space Gallery, Gallery 44, Market Gallery, YYZ, Vtape, Toronto",
+      "source_url": "https://imaginenative.org/the-imaginenative-film-media-arts-festival-unveils-its-2026-programming/",
+      "source_id": "manual-curated",
+      "type": "artist-talk",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "12th-year Art Crawl across 7 galleries. Features Kent Monkman, Darlene Naponse, Zachery Cameron Longboy, Kay Nadjiwon.",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "5d29e6758e2e",
+      "date": "2026-06-05T10:00-04:00",
+      "end_date": "2026-06-06T18:00-04:00",
+      "title": "MOTIVE Crime & Mystery Festival 2026 (TIFA)",
+      "venue": "Victoria University at the University of Toronto",
+      "source_url": "https://festivalofauthors.ca/whats-on/",
+      "source_id": "manual-curated",
+      "type": "reading",
+      "speaker_or_director": "Johana Gustawsson, Lilja Sigur\u00f0ard\u00f3ttir, Shari Lapena, Steven W. Beattie, Margaret Cannon, Kevin Hardcastle",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Toronto International Festival of Authors crime-and-mystery weekend. Readings, panels, masterclasses.",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "07cadcd38183",
+      "date": "2026-06-05T10:00:00-04:00",
+      "end_date": "2026-06-07T18:00:00-04:00",
+      "title": "Motive Crime & Mystery Festival",
+      "venue": "University of Toronto, Toronto",
+      "source_url": "https://www.cbc.ca/books/toronto-s-motive-crime-and-mystery-literary-festival-gears-up-for-its-fifth-year-9.7201303",
+      "source_id": "ifoa",
+      "type": "reading",
+      "speaker_or_director": "Shari Lapena; Clare Mackintosh; Lilja Sigurdardottir",
+      "attendance_confirmed": true,
+      "confidence": 84,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "With over 55 events, Motive takes place June 5 to 7, 2026 at the University of Toronto. Ontario author Shari Lapena is among the authors set to appear, known for her bestselling domestic noir novels.",
+      "scraped_at": "2026-06-06T16:34:47+00:00",
+      "review_status": "auto-published",
+      "marginalia_url": null
+    },
+    {
+      "id": "dd033bbf9aa0",
+      "date": "2026-06-05T18:00-04:00",
+      "end_date": null,
+      "title": "Jackman Humanities Annual Lecture",
+      "venue": "Jackman Humanities Institute, 170 St. George Street, Toronto",
+      "source_url": "https://seminarschools.com/seminars/",
+      "source_id": "manual-curated",
+      "type": "lecture",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Annual lecture of the Jackman Humanities Institute.",
       "scraped_at": "2026-06-06T16:34:57+00:00",
       "review_status": "manual",
       "marginalia_url": null
@@ -395,6 +762,144 @@
       "marginalia_url": null
     },
     {
+      "id": "c2d265fceea9",
+      "date": "2026-06-06T10:00:00-04:00",
+      "end_date": "2026-06-07T17:00:00-04:00",
+      "title": "Toronto Comic Arts Festival",
+      "venue": "Downtown Toronto",
+      "source_url": "https://www.cbc.ca/books/tcaf-preview-2026-9.7215460",
+      "source_id": "ifoa",
+      "type": "reading",
+      "speaker_or_director": "Tillie Walden; Lee Lai; Michael DeForge; Jay Odjick; Arizona O'Neill",
+      "attendance_confirmed": true,
+      "confidence": 80,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "The annual Toronto Comic Arts Festival is returning to downtown Toronto on June 6-7, 2026. The festival is a celebration of comics and graphic novels, one of the largest independent festivals of its kind in the world.",
+      "scraped_at": "2026-06-06T16:34:47+00:00",
+      "review_status": "auto-published",
+      "marginalia_url": null
+    },
+    {
+      "id": "732d0c0b8307",
+      "date": "2026-06-06T11:00-04:00",
+      "end_date": null,
+      "title": "The Power of Land \u2014 Luminato Indigenous Programming Day",
+      "venue": "Harbourfront Centre, 235 Queens Quay W, Toronto",
+      "source_url": "https://harbourfrontcentre.com/series/luminato/",
+      "source_id": "manual-curated",
+      "type": "gathering",
+      "speaker_or_director": "Elder Duke Redbird (curator)",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "A day of Indigenous-led programming curated by Elder Duke Redbird.",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "1087ab876ffa",
+      "date": "2026-06-06T17:30:00-04:00",
+      "end_date": null,
+      "title": "Bleak Week: GOOD NEIGHBORS (2010) \u2013 Q&A with filmmaker JACOB TIERNEY & star EMILY HAMPSHIRE!",
+      "venue": "Revue Cinema, 400 Roncesvalles Avenue, Toronto",
+      "source_url": "https://revuecinema.ca/films/bleak-week-good-neighbors-2010-qa-with-filmmaker-jacob-tierney/",
+      "source_id": "revue",
+      "type": "screening",
+      "speaker_or_director": "Jacob Tierney; Emily Hampshire",
+      "attendance_confirmed": true,
+      "confidence": 95,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Bleak Week: GOOD NEIGHBORS (2010) \u2013 Q&A with filmmaker JACOB TIERNEY & star EMILY HAMPSHIRE! Sat Jun 06, 05:30 PM",
+      "scraped_at": "2026-06-06T16:34:47+00:00",
+      "review_status": "auto-published",
+      "marginalia_url": null
+    },
+    {
+      "id": "414c1d3d631c",
+      "date": "2026-06-06T21:00:00-04:00",
+      "end_date": null,
+      "title": "Revue Event: EVERYONE IS LYING TO YOU FOR MONEY \u2013 Q&A with Ben McKenzie!",
+      "venue": "Revue Cinema, 400 Roncesvalles Avenue, Toronto",
+      "source_url": "https://revuecinema.ca/films/everyone-is-lying-to-you-for-money/",
+      "source_id": "revue",
+      "type": "screening",
+      "speaker_or_director": "Ben McKenzie",
+      "attendance_confirmed": true,
+      "confidence": 92,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Revue Event: EVERYONE IS LYING TO YOU FOR MONEY \u2013 Q&A with Ben McKenzie! Sat Jun 06, 09:00 PM",
+      "scraped_at": "2026-06-06T16:34:47+00:00",
+      "review_status": "auto-published",
+      "marginalia_url": null
+    },
+    {
+      "id": "3e7eb91f3865",
+      "date": "2026-06-07T19:00:00-04:00",
+      "end_date": null,
+      "title": "Bleak Week: EXOTICA (1995) \u2013 Presented on 35mm \u2013 Q&A with director ATOM EGOYAN!",
+      "venue": "Revue Cinema, 400 Roncesvalles Avenue, Toronto",
+      "source_url": "https://revuecinema.ca/films/bleak-week-exotica-1995-presented-on-35mm-qa-with-director-atom-egoyan/",
+      "source_id": "revue",
+      "type": "screening",
+      "speaker_or_director": "Atom Egoyan",
+      "attendance_confirmed": true,
+      "confidence": 95,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Bleak Week: EXOTICA (1995) \u2013 Presented on 35mm \u2013 Q&A with director ATOM EGOYAN! Sun Jun 07, 07:00 PM",
+      "scraped_at": "2026-06-06T16:34:47+00:00",
+      "review_status": "auto-published",
+      "marginalia_url": null
+    },
+    {
+      "id": "e0eb57aa62dd",
+      "date": "2026-06-08T19:00-04:00",
+      "end_date": null,
+      "title": "Dana A. Williams: Toni at Random",
+      "venue": "Bram and Bluma Appel Salon, Toronto Reference Library, 789 Yonge Street",
+      "source_url": "https://www.torontopubliclibrary.ca/programs-and-classes/appel-salon/",
+      "source_id": "manual-curated",
+      "type": "reading",
+      "speaker_or_director": "Dana A. Williams",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
       "id": "cbaa659cf578",
       "date": "2026-06-10T18:00-04:00",
       "end_date": "2026-06-14T23:00-04:00",
@@ -413,6 +918,75 @@
         "intellectual_stake": true
       },
       "raw_excerpt": "300+ artists across 30+ venues. Free FIFA viewing at Nathan Phillips Square.",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "beed94c6841c",
+      "date": "2026-06-11T19:00-04:00",
+      "end_date": null,
+      "title": "Canadian Sync Awards / NXNE 2026",
+      "venue": "The Concert Hall, 888 Yonge St, Toronto",
+      "source_url": "https://www.nxne.com/",
+      "source_id": "manual-curated",
+      "type": "panel",
+      "speaker_or_director": "Cat Clyde, Miesha and the Spanks, La S\u00e9curit\u00e9; Serena Ryder honoured",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Canadian Sync Awards within NXNE. Serena Ryder receives the GMSC Impact Award.",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "5e80b83a737a",
+      "date": "2026-06-11T19:00-04:00",
+      "end_date": null,
+      "title": "Pete Crighton: The Vinyl Diaries",
+      "venue": "Jack Rabinovitch Reading Room, Toronto Reference Library, 789 Yonge Street",
+      "source_url": "https://www.torontopubliclibrary.ca/programs-and-classes/appel-salon/",
+      "source_id": "manual-curated",
+      "type": "reading",
+      "speaker_or_director": "Pete Crighton",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "0be8cd501a72",
+      "date": "2026-06-12T09:00-04:00",
+      "end_date": "2026-06-13T18:00-04:00",
+      "title": "Third Annual Toronto Bioethics Workshop",
+      "venue": "Jackman Humanities Building, JHB 100, 170 Saint George Street",
+      "source_url": "https://philevents.org/event/show/145014",
+      "source_id": "manual-curated",
+      "type": "panel",
+      "speaker_or_director": "Andrew Franklin-Hall, Eric Mathison (organizers)",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "",
       "scraped_at": "2026-06-06T16:34:57+00:00",
       "review_status": "manual",
       "marginalia_url": null
@@ -464,6 +1038,75 @@
       "marginalia_url": null
     },
     {
+      "id": "c10538295753",
+      "date": "2026-06-13T19:00:00-04:00",
+      "end_date": "2026-06-13T21:00:00-04:00",
+      "title": "Antidiva: The Carole Pope Confessions \u2013 with filmmaker Michelle Mama",
+      "venue": "Hot Docs Ted Rogers Cinema, 506 Bloor Street West, Toronto",
+      "source_url": "https://nowtoronto.com/venue/hot-docs-ted-rogers-cinema/",
+      "source_id": "hot-docs",
+      "type": "screening",
+      "speaker_or_director": "Michelle Mama",
+      "attendance_confirmed": true,
+      "confidence": 78,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "June 13 @ 7:00 pm \u2013 9:00 pm \u00b7 Hot Docs Ted Rogers Cinema 506 Bloor Street West, Toronto \u00b7 Having just joined us at Hot Docs Festival for the world premiere of her new film Antidiva: The Carole Pope Confessions, filmmaker Michelle Mama is",
+      "scraped_at": "2026-06-06T16:34:47+00:00",
+      "review_status": "auto-published",
+      "marginalia_url": null
+    },
+    {
+      "id": "0964c564a241",
+      "date": "2026-06-16T09:30-04:00",
+      "end_date": null,
+      "title": "The Algorithmic State: Sovereignty, Safety, and the Governance of Public Sector AI",
+      "venue": "Online (Munk School)",
+      "source_url": "https://munkschool.utoronto.ca/event/algorithmic-state-sovereignty-safety-and-governance-public-sector-ai",
+      "source_id": "manual-curated",
+      "type": "lecture",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "a8859e8d6142",
+      "date": "2026-06-17T19:00-04:00",
+      "end_date": null,
+      "title": "Terry Tempest Williams: The Glorians",
+      "venue": "Bram and Bluma Appel Salon, Toronto Reference Library, 789 Yonge Street",
+      "source_url": "https://www.torontopubliclibrary.ca/programs-and-classes/appel-salon/",
+      "source_id": "manual-curated",
+      "type": "reading",
+      "speaker_or_director": "Terry Tempest Williams",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
       "id": "159b7d0670c6",
       "date": "2026-06-19T18:00-04:00",
       "end_date": "2026-06-28T23:00-04:00",
@@ -505,6 +1148,29 @@
         "intellectual_stake": true
       },
       "raw_excerpt": "JUNO-winning vocalist Laila Biali with two-night stand at Jazz Bistro.",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "7de268c84f33",
+      "date": "2026-06-22T19:00-04:00",
+      "end_date": null,
+      "title": "Julia Hotz: The Connection Cure",
+      "venue": "Bram and Bluma Appel Salon, Toronto Reference Library, 789 Yonge Street",
+      "source_url": "https://www.torontopubliclibrary.ca/programs-and-classes/appel-salon/",
+      "source_id": "manual-curated",
+      "type": "reading",
+      "speaker_or_director": "Julia Hotz",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "",
       "scraped_at": "2026-06-06T16:34:57+00:00",
       "review_status": "manual",
       "marginalia_url": null
@@ -556,6 +1222,29 @@
       "marginalia_url": null
     },
     {
+      "id": "5d09b288c246",
+      "date": "2026-06-26T19:00-04:00",
+      "end_date": null,
+      "title": "Toronto Trans March (Pride Toronto 2026)",
+      "venue": "Church-Wellesley Village, Toronto",
+      "source_url": "https://www.pridetoronto.com/",
+      "source_id": "manual-curated",
+      "type": "gathering",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
       "id": "122f7b9d9567",
       "date": "2026-06-26T20:30-04:00",
       "end_date": "2026-06-27T01:00-04:00",
@@ -587,6 +1276,29 @@
       "source_url": "https://mississauga.ca/events/",
       "source_id": "manual-curated",
       "type": "cultural-reproduction",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "8764134cca47",
+      "date": "2026-06-27T14:00-04:00",
+      "end_date": null,
+      "title": "Toronto Dyke March (Pride Toronto 2026)",
+      "venue": "Church-Wellesley Village, Toronto",
+      "source_url": "https://www.pridetoronto.com/",
+      "source_id": "manual-curated",
+      "type": "gathering",
       "speaker_or_director": null,
       "attendance_confirmed": true,
       "confidence": 100,
@@ -643,6 +1355,29 @@
         "intellectual_stake": true
       },
       "raw_excerpt": "",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "3e827737a045",
+      "date": "2026-06-28T14:00-04:00",
+      "end_date": null,
+      "title": "Pride Toronto Parade 2026",
+      "venue": "Yonge Street (Bloor & Church to Yonge & Dundas), Toronto",
+      "source_url": "https://www.pridetoronto.com/",
+      "source_id": "manual-curated",
+      "type": "gathering",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Annual Pride Parade. 2:00 PM start, 45th-anniversary edition.",
       "scraped_at": "2026-06-06T16:34:57+00:00",
       "review_status": "manual",
       "marginalia_url": null
@@ -970,6 +1705,29 @@
       "marginalia_url": null
     },
     {
+      "id": "4506b7c6bc56",
+      "date": "2026-09-10T09:00-04:00",
+      "end_date": "2026-09-11T18:00-04:00",
+      "title": "Guelph Jazz Festival Colloquium 2026: Artists On/Off the Record",
+      "venue": "IICSI House, 9 University Avenue East, Guelph",
+      "source_url": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "source_id": "manual-curated",
+      "type": "scholar-talk",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Theme: Living Archives and Embodied Memory. Two-day academic colloquium attached to Guelph Jazz Festival.",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
       "id": "8ddd1aeb6064",
       "date": "2026-09-10T19:00-04:00",
       "end_date": "2026-09-20T23:00-04:00",
@@ -1039,6 +1797,29 @@
       "marginalia_url": null
     },
     {
+      "id": "a2dd5d679962",
+      "date": "2026-09-18T17:00-04:00",
+      "end_date": "2026-09-20T21:00-04:00",
+      "title": "Eden Mills Writers' Festival 2026",
+      "venue": "Eden Mills, ON (shuttle from Guelph downtown)",
+      "source_url": "https://edenmillswritersfestival.ca/",
+      "source_id": "manual-curated",
+      "type": "reading",
+      "speaker_or_director": "Madhur Anand, Catherine Bush, Shalini Abeysekara, Y.S. Lee, M.K. Lobb",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Open air. Open book. Open mind.",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
       "id": "a770f3011889",
       "date": "2026-10-03T19:00-04:00",
       "end_date": "2026-10-04T07:00-04:00",
@@ -1071,6 +1852,75 @@
       "source_id": "manual-curated",
       "type": "site-specific-art",
       "speaker_or_director": "Curated by Julie Crooks and Jason Cyrus",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "674f8af35d92",
+      "date": "2026-10-27T18:00-04:00",
+      "end_date": "2026-11-01T23:00-04:00",
+      "title": "Toronto International Festival of Authors 2026 (TIFA)",
+      "venue": "Victoria University at the University of Toronto, Toronto",
+      "source_url": "https://festivalofauthors.ca/flagship-fall-festival/",
+      "source_id": "manual-curated",
+      "type": "reading",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "New 5-day format. 100+ events: conversations, masterclasses, talks, readings.",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "03ffcc0dec51",
+      "date": "2026-10-29T09:00-04:00",
+      "end_date": "2026-10-31T17:00-04:00",
+      "title": "Toronto-Cologne Graduate Student Colloquium 2026",
+      "venue": "Centre for Medieval Studies, U of T, 125 Queen's Park, 3rd floor",
+      "source_url": "https://www.medieval.utoronto.ca/news/2026-toronto-cologne-graduate-student-colloquium",
+      "source_id": "manual-curated",
+      "type": "panel",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "",
+      "scraped_at": "2026-06-06T16:34:57+00:00",
+      "review_status": "manual",
+      "marginalia_url": null
+    },
+    {
+      "id": "45968637bf14",
+      "date": "2026-11-07T09:00-05:00",
+      "end_date": null,
+      "title": "Toronto Workshop on Moral Psychology and Moral Theory",
+      "venue": "Jackman Humanities Building, U of T (St. George)",
+      "source_url": "https://philevents.org/event/show/147093",
+      "source_id": "manual-curated",
+      "type": "panel",
+      "speaker_or_director": null,
       "attendance_confirmed": true,
       "confidence": 100,
       "four_condition_test": {
