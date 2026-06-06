@@ -214,8 +214,7 @@
   <div id="eventsContainer"></div>
 
   <footer class="cv-footer">
-    <div>seminarschools.com/polymythseminars · <a href="/">home</a> · <a href="/saul/">cv</a> · <a href="/agora/">agora</a></div> &middot; <a href="/polymythseminars/feed.xml" type="application/rss+xml">rss</a>
-  </footer>
+    <div>seminarschools.com/polymythseminars · <a href="/">home</a> · <a href="/saul/">cv</a> · <a href="/agora/">agora</a></div> &middot; <a href="/polymythseminars/feed.xml" type="application/rss+xml">rss</a> &middot; <span class="build-stamp" title="deployed bundle version">build 20260606</span></footer>
 </main>
 
 <script>
@@ -269,7 +268,7 @@ let activeView = 'default';
 
 async function loadEvents() {
   try {
-    const res = await fetch('/data/polymyth-seminar-events.json');
+    const res = await fetch('/data/polymyth-seminar-events.json?v=20260606', { cache: 'no-store' });
     const data = await res.json();
     ALL_EVENTS = data.events.map(e => ({
       ...e,
