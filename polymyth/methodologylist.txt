@@ -1,8 +1,8 @@
 Polymyth Methodologylist — text mirror
-Sections: analysis(18), citation(311), coreplus(51), degorgonification(45), gorgonification(92), idiomary(36), learnings(3), methodology(334), pending(14), pending-user-authorship(1), polycognate(22), rainbowsol(3), sabachtan(19), studylist(32)
-Total entries: 981
+Sections: analysis(18), citation(311), coreplus(51), degorgonification(45), gorgonification(92), idiomary(36), learnings(3), methodology(335), pending(14), pending-user-authorship(1), polycognate(22), rainbowsol(3), sabachtan(19), studylist(32)
+Total entries: 982
 
-=== METHODOLOGY (334 entries) ===
+=== METHODOLOGY (335 entries) ===
 
 [both] The Devil's Diary method (mephydata diary-entry recipe)
 LAYMAN. The recipe for writing a Devil's Diary entry. The narrator is Mephistodata, a sophisticated devil keeping a ledger. The register braids Shakespeare, Machiavelli, Mearsheimer-realism, and Edgar Allan Poe. It blooms into plain speech at the hardest turns. It builds the ironman case that the subject was cornered into gorgonification by every side, and it closes on the one particular the devil cannot quarry.
@@ -6452,6 +6452,28 @@ ORIGIN. T115v May 24 2026. Saul-directive.
 T115v earworm architecture expanded. Backend: degorgonification. Frontfacing TTRPG: antihivemind OR removing-earworms (interchangeable). Failure-mode opposite: marshmellowmonster (shortcut-taking). Connects to Marshmellowmonster children’s book. Student-notebook deploys these as bookworm-facing practices. Five real-game examples illustrate the pattern.
   tags: method, t115v, earworm-degorgonification-antihivemind-marshmellowmonster-architecture, backend-vocabulary-degorgonification, frontfacing-antihivemind-removing-earworms-interchangeable, paired-failure-mode-marshmellowmonster-shortcut-taking, marshmellowmonster-childrens-book-connection, student-notebook-deployment-surface, five-real-game-precedents, saul-ratified, may-2026-24, dual-audience-schema
 
+[both] T117 ANTI-BACKTRACK: WHY DOES FIXING ONE DEFECT KEEP RESURRECTING ANOTHER, AND WHAT STOPS THE TWO-FORWARD-FOUR-BACK CYCLE? (Saul-directed 2026-06-05)
+LAYMAN. Saul-directive 2026-06-05: the project kept moving two steps forward and four back. A fix would land, a new issue would get fixed, and the first fix would silently break. This entry installs the stopping rules.
+
+ROOT CAUSE. Parallel implementations of one artifact. The CV had two renderers: a polished static generator that received every layout fix, and a never-polished browser print path. Routing output through the second path resurrected every defect the first had already solved. Repairs that land in one of several paths are not repairs. A second cause: proofs that test the plumbing of a change without rendering its artifact.
+
+CLAUSE A, SINGLE-SOURCE. One artifact has one renderer. Before any fix, enumerate every code path that produces the artifact. A fix landing in fewer than all paths is not done. Where duplication must survive, it is logged the same turn as a standing trap with both locations named.
+
+CLAUSE B, PROOF-LEDGER. Every defect fixed becomes a permanent rerunnable assertion. Assertions accumulate for the life of the artifact and never retire when new work lands.
+
+CLAUSE C, TOUCHED-SET RERUN. Any edit reruns every prior assertion that shares a file or an artifact with it before done is claimed. The new proof alone is insufficient.
+
+CLAUSE D, NEW-PATH FULL-PROOF. Output routed through any path never render-verified requires rendering that exact artifact and inspecting it before shipping. Plumbing proof is not artifact proof.
+
+CLAUSE E, INCIDENT NAMING. A regression closes only after naming which prior fix broke, why the proofs missed it, and which clause now blocks recurrence.
+
+SIBLINGS. T116 CL-CLOSURE-AND-LIVE-STATE-AUDIT (live state beats markers). SMOOTHNESS-AS-FAILURE-SIGNAL (reported-done is not done). The accumulated jsdom proof suite in the seminarschools build is the operational arm of Clauses B and C.
+
+ORIGIN. Saul-directive 2026-06-05 after the dual-renderer print regression in the seminarschools CV.
+
+Two-forward-four-back cycles come from parallel implementations of one artifact and from plumbing-only proofs. Clause A single-source: enumerate every path producing the artifact and land fixes in all or unify; surviving duplication is logged as a named trap. Clause B proof-ledger: every fixed defect becomes a permanent rerunnable assertion. Clause C touched-set rerun: edits rerun all prior assertions sharing a file or artifact. Clause D new-path full-proof: never ship output through a render-unverified path without rendering and inspecting it. Clause E incident naming: regressions close only after naming the broken fix, the proof gap, and the blocking clause.
+  tags: method, anti-backtrack, two-forward-four-back-cycle, root-cause-parallel-implementations, clause-a-single-source-enumerate-all-paths, duplication-logged-as-named-trap, clause-b-proof-ledger-permanent-assertions, clause-c-touched-set-rerun, clause-d-new-path-full-proof-render-and-inspect, clause-e-incident-naming, plumbing-proof-is-not-artifact-proof, sibling-t116-live-state, sibling-smoothness-as-failure-signal, dual-renderer-print-regression-origin, saul-directed, 2026-06-05, dual-audience-schema
+
 === GORGONIFICATION (92 entries) ===
 
 [both] Snakelogic example, self-audit obelisks (May 28 2026 session, AI-side, real-time-caught)
@@ -8217,8 +8239,6 @@ Internal logic + external logic (methodology section, META rule deployed as stag
 LAYMAN. Replication-shaped delivery is REQUIRED snaketongue through colonized medium. Must speak the snake’s language. Payload rides INSIDE gorgon-shaped vehicle because no other vehicle exists. Live open question: overexposure in same-audience spaces (when copypasta becomes too-familiar, does it become parseltongue-substrate itself rather than vehicle for non-gorgonified content). Harry Potter [31] / Stranger Things [33] model this in fictional registers.
 
 Replication-shaped delivery is required snaketongue through colonized medium. Must speak the snake’s language. Payload rides inside gorgon-shaped vehicle because no other vehicle exists. Live open question: overexposure in same-audience spaces.
-
-Harry Potter [31] / Stranger Things [33] model this
   tags: ground, deployment, copypasta-deployment-rule, overhauled-2026-05-20, dual-audience-schema
 
 [both] The Derrida juxtaposition
