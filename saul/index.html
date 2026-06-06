@@ -1767,6 +1767,9 @@ window.addEventListener("beforeprint", applyOnePageFitScale);
 window.addEventListener("afterprint", clearOnePageFitScale);
 
 document.getElementById("saveBtn").addEventListener("click", () => {
+  // Filtered view: print the page so active subheadings and entries carry into the PDF.
+  // Unfiltered: serve the polished static cv.pdf.
+  if (active.size > 0) { window.print(); return; }
   window.open("/saul/cv.pdf", "_blank", "noopener");
 });
 
