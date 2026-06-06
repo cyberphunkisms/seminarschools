@@ -1307,6 +1307,13 @@ function awardStats(input, phaseLabel){
   // The character ends up with a quantitative profile of how
   // strongly they read on each axis — COMMUNAL: 7, GREGARIOUS: 4,
   // and so on — rather than a flat tally of which stats they touched.
+  // MINIMALIST fires on any answer of forty characters or fewer, which
+  // taxes the terminal's native brevity \u2014 observed at +36 on one card.
+  // Cap its total contribution at one fire (+2) per card. Filtered BEFORE
+  // apply so the tamagotchi chips match what actually lands.
+  r.statsHit = r.statsHit.filter(function(h){
+    return !(h.stat === 'MINIMALIST' && (data.stats['MINIMALIST'] || 0) >= 2);
+  });
   r.statsHit.forEach(function(h){
     var w = h.weight || 1;
     data.stats[h.stat] = (data.stats[h.stat] || 0) + w;
@@ -1826,11 +1833,40 @@ var BB_SAVE_MARKER_START = '<<<BB_SAVE_V1_START>>>';
 var BB_SAVE_MARKER_END = '<<<BB_SAVE_V1_END>>>';
 function extractSaveFromText(text){
   if(!text || typeof text !== 'string') return null;
+
+  // Strategy A (PDF / base64): strip ALL whitespace, then locate the
+  // markers in the whitespace-free string. PDF.js injects spaces between
+  // text runs (including mid-token and inside the markers themselves), so
+  // the markers and the base64 body are only reliably found after stripping.
+  // Base64 carries no meaningful whitespace, so stripping is lossless.
+  var stripped = text.replace(/\s+/g, '');
+  var sStart = stripped.indexOf('<<<BB_SAVE_V1_START>>>');
+  if(sStart >= 0){
+    var sEnd = stripped.indexOf('<<<BB_SAVE_V1_END>>>', sStart);
+    if(sEnd >= 0){
+      var body = stripped.slice(sStart + '<<<BB_SAVE_V1_START>>>'.length, sEnd);
+      if(body.indexOf('B64:') === 0){
+        try {
+          var json = decodeURIComponent(escape(atob(body.slice(4))));
+          return JSON.parse(json);
+        } catch(e){ /* fall through to raw-JSON strategy */ }
+      }
+    }
+  }
+
+  // Strategy B (legacy / .html / .txt with un-mangled raw JSON): do NOT
+  // strip internal whitespace, because save-string values can contain
+  // spaces (e.g. a quality like "his niceness").
   var startIdx = text.indexOf(BB_SAVE_MARKER_START);
   if(startIdx < 0) return null;
   var endIdx = text.indexOf(BB_SAVE_MARKER_END, startIdx);
   if(endIdx < 0) return null;
   var jsonStr = text.slice(startIdx + BB_SAVE_MARKER_START.length, endIdx).trim();
+  if(jsonStr.indexOf('B64:') === 0){
+    try {
+      return JSON.parse(decodeURIComponent(escape(atob(jsonStr.slice(4).replace(/\s+/g,'')))));
+    } catch(e){ return null; }
+  }
   try {
     return JSON.parse(jsonStr);
   } catch(e){
@@ -1945,6 +1981,11 @@ var SAVE_KEY = 'bb_wormcard_checkpoint_v1';
 function saveCheckpoint(){
   try {
     if (typeof assignCardId === 'function') assignCardId();
+    // Carry the computed horoscope readings inside data so the print
+    // template (and the pdf save blob) can fill the ten-tradition grid.
+    try {
+      if (horoscope && horoscope.readings) data.horoscope = horoscope.readings;
+    } catch(e){}
     var payload = {
       data: data,
       currentState: currentState,
@@ -3128,6 +3169,17 @@ var STATES = {
       showAnimalCycleLine('press ← or → to browse the animals.');
     },
     advance: function(input){
+      // UNIVERSAL SKIP (Saul-directed 2026-06-05): every question is
+      // skippable. Skipping leaves the field blank; the horoscope and
+      // completion gates degrade gracefully on blanks.
+      if(/^skip$/i.test((input||'').trim())){
+        data.animal = '';
+        appendLine('<span class="answer quiet">skipped</span>',{gap:true});
+        renderCardPreview();
+        transitionTo('year');
+        return;
+      }
+
       // Players can also type the animal slug directly to jump to it
       // (kept as an escape hatch for kids who know what they want).
       var slug = (input || '').toLowerCase().trim();
@@ -3156,6 +3208,17 @@ var STATES = {
       setPrompt('letters numbers _ -  no spaces');
     },
     advance: function(input){
+      // UNIVERSAL SKIP (Saul-directed 2026-06-05): every question is
+      // skippable. Skipping leaves the field blank; the horoscope and
+      // completion gates degrade gracefully on blanks.
+      if(/^skip$/i.test((input||'').trim())){
+        data.handle = '';
+        appendLine('<span class="answer quiet">skipped</span>',{gap:true});
+        renderCardPreview();
+        transitionTo('email');
+        return;
+      }
+
       if(!input){showError('<span class="err">handle required.</span>');return;}
       if(!/^[A-Za-z0-9_-]+$/.test(input)){
         showError('<span class="err">letters numbers _ - only.</span>');return;
@@ -3206,6 +3269,18 @@ var STATES = {
       setPrompt('1920 - 2030');
     },
     advance: function(input){
+      // UNIVERSAL SKIP (Saul-directed 2026-06-05): every question is
+      // skippable. Skipping leaves the field blank; the horoscope and
+      // completion gates degrade gracefully on blanks.
+      if(/^skip$/i.test((input||'').trim())){
+        data.birthYear = '';
+        appendLine('<span class="answer quiet">skipped</span>',{gap:true});
+        recalcHoroscope();
+        renderCardPreview();
+        transitionTo('month');
+        return;
+      }
+
       var y = parseInt(input,10);
       if(!y || y<1920 || y>2030){
         showError('<span class="err">year between 1920 and 2030.</span>');return;
@@ -3230,6 +3305,18 @@ var STATES = {
       setPrompt('type to filter · arrows · enter');
     },
     advance: function(input){
+      // UNIVERSAL SKIP (Saul-directed 2026-06-05): every question is
+      // skippable. Skipping leaves the field blank; the horoscope and
+      // completion gates degrade gracefully on blanks.
+      if(/^skip$/i.test((input||'').trim())){
+        data.birthMonth = '';
+        appendLine('<span class="answer quiet">skipped</span>',{gap:true});
+        recalcHoroscope();
+        renderCardPreview();
+        transitionTo('day');
+        return;
+      }
+
       var m = parseInt(input,10);
       if(!m || m<1 || m>12){showError('<span class="err">pick a month.</span>');return;}
       data.birthMonth = m;
@@ -3245,6 +3332,18 @@ var STATES = {
       setPrompt('1 - 31');
     },
     advance: function(input){
+      // UNIVERSAL SKIP (Saul-directed 2026-06-05): every question is
+      // skippable. Skipping leaves the field blank; the horoscope and
+      // completion gates degrade gracefully on blanks.
+      if(/^skip$/i.test((input||'').trim())){
+        data.birthDay = '';
+        appendLine('<span class="answer quiet">skipped</span>',{gap:true});
+        recalcHoroscope();
+        renderCardPreview();
+        transitionTo('hour');
+        return;
+      }
+
       var d = parseInt(input,10);
       if(!d || d<1 || d>31){showError('<span class="err">day between 1 and 31.</span>');return;}
       data.birthDay = d;
@@ -3453,6 +3552,17 @@ var STATES = {
       setPrompt('the specific quality');
     },
     advance: function(input){
+      // skip / done / n at the quality stage = abandon this figure
+      // (nothing is smashed) and return to smash-name, where skip
+      // exits the loop. Before this branch existed, the word skip
+      // passed the validators and was recorded as the taken quality,
+      // and done sealed the whole card mid-figure.
+      if(/^(skip|done|n)$/i.test((input||'').trim())){
+        appendLine('<span class="answer quiet">skipped \u2014 nothing taken from '+escapeHtml(smashTemp.name)+'.</span>',{gap:true});
+        smashTemp = {name:'',quality:'',archetype:null};
+        transitionTo('smash-name');
+        return;
+      }
       if(isGlobalEscape(input)){ sealAndReview(input); return; }
       if(!input){showError('<span class="err">name the quality you would take.</span>');return;}
       if(input.length < 4){

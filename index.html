@@ -2365,7 +2365,7 @@ input[type="button"] {
     return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  fetch('/seminars/events.json', { cache: 'no-cache' })
+  fetch('/data/polymyth-seminar-events.json', { cache: 'no-cache' })
     .then(function(r) { return r.json(); })
     .then(function(data) {
       // Date window: 7 days before today through 30 days after.
@@ -2375,7 +2375,6 @@ input[type="button"] {
       var windowStart = new Date(now.getTime() - 7 * 86400000);
       var windowEnd = new Date(now.getTime() + 30 * 86400000);
       var lectures = (data.events || [])
-        .filter(function(e) { return e.source_id === 'manual-curated'; })
         .filter(function(e) {
           var d = new Date(e.date);
           return d >= windowStart && d <= windowEnd;
@@ -2389,7 +2388,7 @@ input[type="button"] {
       if (lectures.length === 0) {
         var empty = document.createElement('div');
         empty.style.cssText = 'grid-column:1/-1;padding:2rem 0;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)';
-        empty.textContent = 'No curated lectures in this window. See full calendar for all.';
+        empty.textContent = 'No events in this window. See the full calendar for all 218.';
         container.insertBefore(empty, tail);
         return;
       }
@@ -2414,7 +2413,9 @@ input[type="button"] {
         return '<div class="' + cls + '">' +
           '<div class="num">' + roman(idx + 1) + '</div>' +
           '<div class="date">' + fmtDate(e.date) + '</div>' +
-          '<div class="title">' + escapeHtml(titleText) + '</div>' +
+          '<div class="title">' + (e.source_url
+            ? '<a href="' + escapeHtml(e.source_url) + '" target="_blank" rel="noopener">' + escapeHtml(titleText) + '</a>'
+            : escapeHtml(titleText)) + '</div>' +
           '<div class="venue">' + escapeHtml(e.venue || '') + '</div>' +
           '</div>';
       }).join('');
@@ -2429,7 +2430,7 @@ input[type="button"] {
     .catch(function(err) {
       var loading = container.querySelector('.lecture-loading');
       if (loading) {
-        loading.textContent = 'Lectures unavailable. See /seminars/ for the full list.';
+        loading.textContent = 'Events unavailable. See /polymythseminars/ for the full calendar.';
       }
     });
 })();
