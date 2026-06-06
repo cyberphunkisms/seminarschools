@@ -20,9 +20,11 @@ name: Scrape festivals
 # Schedule: weekly Monday 07:00 UTC (one hour after seminars). Pre-dawn
 # Toronto. Manual dispatch also enabled for testing.
 
+# CONSOLIDATED June 6 2026: the weekly schedule moved into
+# scrape-seminars.yml, which now runs both harvests in one job with one
+# combined push (one Netlify deploy instead of two). This file is kept
+# for manual dispatch only.
 on:
-  schedule:
-    - cron: '0 7 * * 1'
   workflow_dispatch:
 
 permissions:

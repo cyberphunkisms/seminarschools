@@ -4,6 +4,12 @@
 [build]
   publish = "."
   functions = "netlify/functions"
+  # Credit conservation (June 6 2026): skip the build entirely when a push
+  # touches only non-public plumbing (scraper code, workflows, scrape logs,
+  # history snapshots). Exit 0 = skip, exit 1 = build, mirroring git diff
+  # --quiet semantics. Robot pushes still build because they change
+  # seminars/ and festivals/ alongside the logs.
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)scripts/' ':(exclude).github/' ':(exclude)data/history/' ':(exclude)data/scrape-log.json'"
 
 # Form processing: Netlify auto-detects forms with data-netlify="true"
 # attribute in HTML at deploy time. ONE canonical form now:
