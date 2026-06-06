@@ -42,12 +42,26 @@ const isCert = (item) =>
   tagsOf(item[2]).includes("education") &&
   /Certif|Certificate|Bootcamp|Machine Learning A-Z|Practitioner|TESOL|Bronze Cross/.test(item[3].en);
 
+const firstSentence = (txt) => {
+  const t = String(txt).trim();
+  const m = t.match(/^[\s\S]*?[.!?](?=\s|$)/);
+  let out = m ? m[0] : t;
+  if (out.length > 140) {
+    out = out.slice(0, 120);
+    out = out.slice(0, out.lastIndexOf(" ")) + "\u2026";
+  }
+  return out;
+};
+
 const esc = (s) =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 // Longest date string decides the column width: measured, not guessed.
 const longestDate = D.reduce((a, e) => Math.max(a, String(e[1]).length), 0);
 const dateColIn = Math.min(1.7, Math.max(1.3, 0.085 * longestDate)).toFixed(2);
+const dateColPt = (parseFloat(dateColIn) * 72).toFixed(1);
+const dateTextPt = (parseFloat(dateColPt) - 8).toFixed(1);
+const leftPadPt = (parseFloat(dateColPt) + 12 + 9).toFixed(1);
 
 const sections = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
   .map((i) => ({ i, items: D.filter((x) => x[0] === i && !tagsOf(x[2]).includes("seminarschools")) }))
@@ -59,12 +73,13 @@ const rows = (items) =>
       const cert = isCert(item);
       const color = (CATS[primaryTag(item[2])] || {}).color || "#999";
       const title = esc(item[3].en);
-      const note = item[4] ? esc(item[4].en) : null;
-      return `<tr>
-  <td class="d">${esc(item[1])}</td>
-  <td class="o"><span class="dot${cert ? " sq" : ""}" style="background-color:${color}"></span></td>
-  <td class="b">${cert ? '<span class="caret">&#8227;</span> ' : ""}<span class="t${cert ? " tc" : ""}">${title}</span>${note ? ` <span class="n">${note}</span>` : ""}</td>
-</tr>`;
+      const note = (item[4] && item[4].en && item[4].en.trim())
+        ? esc(item[4].en)
+        : (item[6] && item[6].en && item[6].en.trim() ? esc(firstSentence(item[6].en)) : null);
+      return `<div class="row">
+  <span class="d">${esc(item[1])}</span><span class="o"><span class="dot${cert ? " sq" : ""}" style="background-color:${color}"></span></span>
+  <div class="b">${cert ? '<span class="caret">&#8227;</span> ' : ""}<span class="t${cert ? " tc" : ""}">${title}</span>${note ? ` <span class="n">${note}</span>` : ""}</div>
+</div>`;
     })
     .join("\n");
 
@@ -72,10 +87,9 @@ const sectionHtml = sections
   .map(
     (g) => `<div class="sec">
 <div class="sh">${esc(t.secs[g.i])}</div>
-<table class="e">
-<colgroup><col style="width:${dateColIn}in"><col style="width:16px"><col></colgroup>
+<div class="elist">
 ${rows(g.items)}
-</table>
+</div>
 </div>`
   )
   .join("\n");
@@ -97,16 +111,18 @@ const html = `<!doctype html>
   .sh { font-variant:small-caps; letter-spacing:2.2px; font-size:10pt; color:#7A2632;
         border-bottom:1px solid #9b5560; padding-bottom:2pt; margin-bottom:4pt;
         page-break-after:avoid; }
-  table.e { width:100%; border-collapse:collapse; table-layout:fixed; }
-  table.e tr { page-break-inside:avoid; }
-  td { vertical-align:top; }
-  td.d { text-align:right; white-space:nowrap; font-size:9pt; color:#3a3a3a;
-         padding:3pt 8pt 3pt 0; border-right:1px solid #d9c6c9; }
-  td.o { text-align:center; padding-top:6.5pt; }
+  .elist { width:100%; }
+  .row { position:relative; page-break-inside:avoid; padding:3pt 0 3pt ${leftPadPt}pt; }
+  .row::before { content:""; position:absolute; left:${dateColPt}pt; top:0; bottom:0;
+                 width:1px; background:#d9c6c9; }
+  .row .d { position:absolute; left:0; top:3pt; width:${dateTextPt}pt; text-align:right;
+            white-space:nowrap; font-size:9pt; color:#3a3a3a; }
+  .row .o { position:absolute; left:${dateColPt}pt; top:6.5pt; width:12pt;
+            text-align:center; line-height:0; }
   .dot { display:inline-block; width:5px; height:5px; border-radius:50%; }
   .dot.sq { border-radius:1px; }
-  td.b { padding:3pt 0 3pt 9pt; font-size:11pt; line-height:1.32;
-         overflow-wrap:break-word; word-wrap:break-word; }
+  .row .b { font-size:11pt; line-height:1.32;
+            overflow-wrap:break-word; word-wrap:break-word; }
   .t { font-weight:bold; color:#161616; }
   .t.tc { font-weight:600; color:#33272a; }
   .caret { color:#7A2632; }

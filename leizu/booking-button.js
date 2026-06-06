@@ -220,6 +220,14 @@ function handleBookingSuccess(){
   window.location.href = fullUrl;
 }
 
+function wireTileCtas(){
+  document.querySelectorAll('a[data-payment-key]').forEach(function(a){
+    var u = PAYMENT_LINKS[a.dataset.paymentKey];
+    if (!u || u.indexOf('REPLACE') !== -1 || u.indexOf('https://buy.stripe.com/') !== 0) { a.style.display = 'none'; return; }
+    a.href = u;
+  });
+}
+
 // =================================================================
 // AUTO-INIT
 // =================================================================
@@ -234,5 +242,7 @@ if(document.location.pathname.endsWith('/leizu/booking-success') ||
   // On main /leizu — wire the book button after the page renders
   document.addEventListener('DOMContentLoaded', () => {
     setTimeout(buildBookingHandler, 100);  // slight delay to let updatePricingPanel run first
+    wireTileCtas();
   });
+  wireTileCtas();
 }
