@@ -2334,6 +2334,29 @@ input[type="button"] {
 <script src="/js/theme.js" defer></script>
 
 <script>
+function fetchEventsWithFallback(){
+  // /data/* is force-404'd by netlify.toml (PM35: plumbing stays private).
+  // Public copy lives at /polymythseminars/events.json; the robot's daily
+  // /seminars/events.json is the last-resort source so the lists can never
+  // render empty while the scraper lives.
+  var urls = ['/polymythseminars/events.json?v=20260606',
+              '/data/polymyth-seminar-events.json?v=20260606',
+              '/seminars/events.json?v=20260606'];
+  return (async function(){
+    var lastErr = null;
+    for (var i=0;i<urls.length;i++){
+      try {
+        var r = await fetch(urls[i], { cache: 'no-store' });
+        if (!r.ok) { lastErr = new Error(urls[i]+' \u2192 HTTP '+r.status); continue; }
+        var d = await r.json();
+        if ((d.events||[]).length) { d._loadedFrom = urls[i]; return d; }
+        lastErr = new Error(urls[i]+' \u2192 parsed but empty');
+      } catch(e){ lastErr = new Error(urls[i]+' \u2192 '+(e.message||e)); }
+    }
+    throw lastErr || new Error('all event sources failed');
+  })();
+}
+
 (function() {
   var container = document.getElementById('featured-lectures');
   if (!container) return;
@@ -2365,8 +2388,7 @@ input[type="button"] {
     return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  fetch('/data/polymyth-seminar-events.json', { cache: 'no-cache' })
-    .then(function(r) { return r.json(); })
+  fetchEventsWithFallback()
     .then(function(data) {
       // Date window: 7 days before today through 30 days after.
       // Homepage teaser shows only what's relevant near-term.

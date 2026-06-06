@@ -266,10 +266,33 @@ let ALL_EVENTS = [];
 let activeCategory = 'all';
 let activeView = 'default';
 
+function fetchEventsWithFallback(){
+  // /data/* is force-404'd by netlify.toml (PM35: plumbing stays private).
+  // Public copy lives at /polymythseminars/events.json; the robot's daily
+  // /seminars/events.json is the last-resort source so the lists can never
+  // render empty while the scraper lives.
+  var urls = ['/polymythseminars/events.json?v=20260606',
+              '/data/polymyth-seminar-events.json?v=20260606',
+              '/seminars/events.json?v=20260606'];
+  return (async function(){
+    var lastErr = null;
+    for (var i=0;i<urls.length;i++){
+      try {
+        var r = await fetch(urls[i], { cache: 'no-store' });
+        if (!r.ok) { lastErr = new Error(urls[i]+' \u2192 HTTP '+r.status); continue; }
+        var d = await r.json();
+        if ((d.events||[]).length) { d._loadedFrom = urls[i]; return d; }
+        lastErr = new Error(urls[i]+' \u2192 parsed but empty');
+      } catch(e){ lastErr = new Error(urls[i]+' \u2192 '+(e.message||e)); }
+    }
+    throw lastErr || new Error('all event sources failed');
+  })();
+}
+
 async function loadEvents() {
   try {
-    const res = await fetch('/data/polymyth-seminar-events.json?v=20260606', { cache: 'no-store' });
-    const data = await res.json();
+    const data = await fetchEventsWithFallback();
+    console.log('calendar events loaded from', data._loadedFrom);
     ALL_EVENTS = data.events.map(e => ({
       ...e,
       _date: new Date(e.date),
@@ -278,7 +301,8 @@ async function loadEvents() {
     ALL_EVENTS.sort((a,b) => a._date - b._date);
     render();
   } catch (err) {
-    document.getElementById('eventsContainer').innerHTML = '<div class="empty-state">Could not load events.</div>';
+    document.getElementById('eventsContainer').innerHTML =
+      '<div class="empty-state">Could not load events. Last failure: ' + String(err && err.message || err) + '</div>';
     console.error(err);
   }
 }

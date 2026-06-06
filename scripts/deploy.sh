@@ -8,6 +8,9 @@ set -euo pipefail
 
 ROBOT_PATHS=("seminars/events.json")   # daily-scraper-owned: origin wins
 
+# sync the public events copy (netlify force-404s /data/*)
+cp data/polymyth-seminar-events.json polymythseminars/events.json
+
 node scripts/verify-critical.js
 
 git add -A

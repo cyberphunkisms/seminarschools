@@ -16,5 +16,18 @@ check('rss feed present with items', feed.includes('<item>'));
 let home=''; try{ home=fs.readFileSync('index.html','utf8'); }catch(e){}
 check('homepage reads the 218 file', home.includes('/data/polymyth-seminar-events.json'));
 check('homepage wraps titles in source_url links', home.includes('source_url'));
+let pub=null; try{ pub=JSON.parse(fs.readFileSync('polymythseminars/events.json','utf8')); }catch(e){}
+check('PUBLIC events copy exists at /polymythseminars/events.json', !!pub);
+check('public copy has 200+ events', !!pub && (pub.events||[]).length>=200);
+try{
+  const a=fs.readFileSync('polymythseminars/events.json'), b=fs.readFileSync('data/polymyth-seminar-events.json');
+  check('public copy byte-identical to data/ master', a.equals(b));
+}catch(e){ check('public copy byte-identical to data/ master', false); }
+check('calendar primary fetch targets the PUBLIC path', cal.includes("'/polymythseminars/events.json"));
+check('homepage uses the fallback loader', home.includes('fetchEventsWithFallback'));
+let ntl=''; try{ ntl=fs.readFileSync('netlify.toml','utf8'); }catch(e){}
+check('netlify still blocks /data/* (PM35 guard)', ntl.includes('from = "/data/*"'));
+let robot=null; try{ robot=JSON.parse(fs.readFileSync('seminars/events.json','utf8')); }catch(e){}
+check('robot fallback file parses', !!robot && (robot.events||[]).length>0);
 if(fail){ console.error('\nBLOCKED: calendar-critical files are broken. DO NOT PUSH.'); process.exit(1); }
 console.log('\nALL CRITICAL CHECKS PASS — safe to deploy.');
