@@ -1947,7 +1947,7 @@ function buildPrintCv() {
     ? Array.from(active).sort().map(function (c) { return (t.subheadings || {})[c]; }).filter(function (x) { return x && x.length; })
     : [];
   var secs = '';
-  for (var i = 9; i >= 0; i--) {
+  for (var i = 9; i >= 1; i--) { // tier 0 (Elementary + Middle School) never prints
     var items = inc.filter(function (x) { return x[0] === i; });
     if (!items.length) continue;
     var rows = '';
@@ -1977,7 +1977,7 @@ function buildPrintCv() {
     '#printCv .hd .meta{font-size:10.5pt;letter-spacing:0.6px;color:#2a2a2a;margin:1pt 0;}',
     '#printCv .hd .sub{font-size:10.5pt;font-style:italic;color:#5a4a4d;letter-spacing:0.6px;margin:2pt 0;}',
     '#printCv .hd .em{font-size:9pt;letter-spacing:0.8px;color:#46383a;margin-top:2pt;}',
-    '#printCv .sec{margin-top:11pt;}',
+    '#printCv .sec{margin-top:11pt;page-break-inside:avoid;break-inside:avoid;}',
     '#printCv .sh{font-variant:small-caps;letter-spacing:2.2px;font-size:10pt;color:#7A2632;border-bottom:1px solid #9b5560;padding-bottom:2pt;margin-bottom:4pt;page-break-after:avoid;}',
     '#printCv .elist{width:100%;}',
     '#printCv .row{position:relative;page-break-inside:avoid;padding:3pt 0 3pt ' + LP + 'pt;}',
@@ -2003,7 +2003,55 @@ function buildPrintCv() {
     + secs
     + '<div class="cred"><div class="ch">' + escp(t.certs || UI.en.certs) + '</div><div class="cb">' + escp(t.certL || UI.en.certL) + '</div></div>'
     + '<div class="cred"><div class="ch">' + escp(t.edu || UI.en.edu) + '</div><div class="cb">' + escp(t.eduL || UI.en.eduL) + '</div></div>';
+  fitPrintCvToTwoPages(host);
 }
+// Fit the print document into two pages maximum. Measures once at scale 1,
+// then binary-searches the largest zoom whose greedy section-packing fits the
+// two-page budget. Scaled-height arithmetic overestimates (smaller text wraps
+// less), so the two-page guarantee is conservative. Layout-less environments
+// measure zero and fall through to zoom 1.
+function fitPrintCvToTwoPages(host) {
+  host.style.zoom = '1';
+  var probe = document.createElement('div');
+  probe.style.cssText = 'position:absolute;left:-9999px;top:0;height:253.4mm;width:10px;';
+  document.body.appendChild(probe);
+  var pageH = probe.offsetHeight;
+  document.body.removeChild(probe);
+  if (!pageH) return;
+  var prev = host.getAttribute('style') || '';
+  host.style.position = 'absolute'; host.style.left = '-99999px'; host.style.top = '0';
+  host.style.display = 'block'; host.style.visibility = 'hidden'; host.style.width = '187.9mm';
+  void host.offsetHeight;
+  var blocks = host.querySelectorAll('.sec, .cred');
+  var sizes = [];
+  for (var k = 0; k < blocks.length; k++) {
+    var h = blocks[k].offsetHeight;
+    var mt = parseFloat((window.getComputedStyle(blocks[k]).marginTop) || '0') || 0;
+    if (h > 0) sizes.push(h + mt);
+  }
+  host.setAttribute('style', prev);
+  if (!sizes.length) { host.style.zoom = '1'; return; }
+  var pagesAt = function (z) {
+    var pages = 1, cur = 0;
+    for (var k2 = 0; k2 < sizes.length; k2++) {
+      var need = sizes[k2] * z;
+      if (cur > 0 && cur + need > pageH) { pages++; cur = need; } else { cur += need; }
+    }
+    return pages;
+  };
+  var z = 1;
+  if (pagesAt(1) > 2) {
+    var lo = 0.5, hi = 1;
+    for (var it = 0; it < 10; it++) {
+      var mid = (lo + hi) / 2;
+      if (pagesAt(mid) <= 2) { lo = mid; } else { hi = mid; }
+    }
+    z = Math.floor(lo * 100) / 100;
+    if (pagesAt(z) > 2) z = Math.max(0.5, z - 0.02);
+  }
+  host.style.zoom = String(z);
+}
+
 window.addEventListener('beforeprint', buildPrintCv);
 </script>
 </body>

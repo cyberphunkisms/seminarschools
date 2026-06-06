@@ -63,7 +63,7 @@ const dateColPt = (parseFloat(dateColIn) * 72).toFixed(1);
 const dateTextPt = (parseFloat(dateColPt) - 8).toFixed(1);
 const leftPadPt = (parseFloat(dateColPt) + 12 + 9).toFixed(1);
 
-const sections = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+const sections = [9, 8, 7, 6, 5, 4, 3, 2, 1]  // tier 0 (Elementary + Middle School) never prints
   .map((i) => ({ i, items: D.filter((x) => x[0] === i && !tagsOf(x[2]).includes("seminarschools")) }))
   .filter((g) => g.items.length > 0);
 
@@ -107,7 +107,7 @@ const html = `<!doctype html>
   .hd h1 .post { font-size:11.5pt; letter-spacing:2px; color:#7A2632; }
   .hd .meta { font-size:10.5pt; letter-spacing:0.6px; color:#2a2a2a; margin:1pt 0; }
   .hd .em { font-size:9pt; letter-spacing:0.8px; color:#46383a; margin-top:2pt; }
-  .sec { margin-top:11pt; }
+  .sec { margin-top:11pt; page-break-inside:avoid; break-inside:avoid; }
   .sh { font-variant:small-caps; letter-spacing:2.2px; font-size:10pt; color:#7A2632;
         border-bottom:1px solid #9b5560; padding-bottom:2pt; margin-bottom:4pt;
         page-break-after:avoid; }
