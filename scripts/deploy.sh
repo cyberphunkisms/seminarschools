@@ -6,6 +6,12 @@
 # to push a broken calendar. Run from repo root AFTER extracting the bundle.
 set -euo pipefail
 
+# Branch-agnostic: works whether the repo uses main, master, or anything else.
+BR=$(git branch --show-current)
+echo "repo:   $(git remote get-url origin 2>/dev/null || echo NO-REMOTE)"
+echo "branch: $BR"
+[ -n "$BR" ] || { echo "FATAL: not on a branch (detached HEAD?)"; exit 1; }
+
 ROBOT_PATHS=("seminars/events.json")   # daily-scraper-owned: origin wins
 
 # sync the public events copy (netlify force-404s /data/*)
@@ -16,15 +22,15 @@ node scripts/verify-critical.js
 git add -A
 git commit -m "deploy: canonical tree $(date +%Y-%m-%d_%H%M)" || echo "(nothing new to commit)"
 git fetch origin
-git merge -X ours --no-edit origin/main   # LOCAL tree wins conflicts
+git merge -X ours --no-edit "origin/$BR"   # LOCAL tree wins conflicts
 for p in "${ROBOT_PATHS[@]}"; do
-  git checkout origin/main -- "$p" 2>/dev/null || true
+  git checkout "origin/$BR" -- "$p" 2>/dev/null || true
 done
 git add -A
 git commit -m "deploy: keep robot-owned data from origin" || true
 
 node scripts/verify-critical.js           # verify AGAIN post-merge
 
-git push origin main
+git push origin "$BR"
 echo
 echo "DEPLOYED. Hard-refresh /polymythseminars/ and confirm the footer reads: build 20260606"
