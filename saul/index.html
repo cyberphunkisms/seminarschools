@@ -933,7 +933,7 @@ textarea:focus-visible,
     <div class="meta">416-771-0382 · Toronto</div>
     <h2 id="pdfSubtitle" aria-hidden="true"></h2>
   
-  <div class="cv-header-email" style="margin-top:0.6rem;text-align:center;"><a href="mailto:saulnassau@protonmail.com" style="font-family:var(--sans, system-ui, sans-serif);font-size:0.78rem;letter-spacing:0.04em;color:var(--accent, #A07A2C);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:0.1rem;">saulnassau@protonmail.com</a></div>
+  <div class="cv-header-email" style="margin-top:0.6rem;text-align:center;"><a href="mailto:saulnassau@protonmail.com" style="font-family:var(--sans, system-ui, sans-serif);font-size:0.78rem;letter-spacing:0.04em;color:var(--accent, #A07A2C);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:0.1rem;">saulnassau@protonmail.com</a> <span style="opacity:.5;">·</span> <a href="https://seminarschools.com/saulnassau" style="font-family:var(--sans, system-ui, sans-serif);font-size:0.78rem;letter-spacing:0.04em;color:var(--accent, #A07A2C);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:0.1rem;">seminarschools.com/saulnassau</a></div>
   </header>
 
   <nav class="filter-nav" id="filterNav">
@@ -1943,6 +1943,10 @@ function buildPrintCv() {
     if (out.length > 140) { out = out.slice(0, 120); out = out.slice(0, out.lastIndexOf(' ')) + '\u2026'; }
     return out;
   };
+  var certItems = String(t.certL || UI.en.certL).split(/\s*[·、]\s*/).filter(function (x) { return x; });
+  var certHalf = Math.ceil(certItems.length / 2);
+  var certColFn = function (a) { return '<div class="colh">' + a.map(function (x) { return '<span class="ci">' + escp(x) + '</span>'; }).join('') + '</div>'; };
+  var certCols = certColFn(certItems.slice(0, certHalf)) + certColFn(certItems.slice(certHalf));
   var subLabels = isFiltered
     ? Array.from(active).sort().map(function (c) { return (t.subheadings || {})[c]; }).filter(function (x) { return x && x.length; })
     : [];
@@ -1971,12 +1975,12 @@ function buildPrintCv() {
   }
   var css = [
     '#printCv{font-family:Georgia,\'Times New Roman\',\'Liberation Serif\',serif;color:#1d1d1d;background:#fff;}',
-    '#printCv .hd{text-align:center;border-bottom:1.5px solid #7A2632;padding-bottom:9pt;margin-bottom:4pt;}',
-    '#printCv .hd h1{font-variant:small-caps;font-weight:600;letter-spacing:3.5px;font-size:22pt;color:#5A1A24;margin:0 0 3pt;}',
+    '#printCv .hd{text-align:center;border-bottom:1.5px solid #7A2632;padding-bottom:10pt;margin-bottom:6pt;}',
+    '#printCv .hd h1{font-variant:small-caps;font-weight:600;letter-spacing:3.5px;font-size:22pt;color:#5A1A24;margin:0 0 5pt;}',
     '#printCv .hd h1 .post{font-size:11.5pt;letter-spacing:2px;color:#7A2632;}',
-    '#printCv .hd .meta{font-size:10.5pt;letter-spacing:0.6px;color:#2a2a2a;margin:1pt 0;}',
-    '#printCv .hd .sub{font-size:10.5pt;font-style:italic;color:#5a4a4d;letter-spacing:0.6px;margin:2pt 0;}',
-    '#printCv .hd .em{font-size:9pt;letter-spacing:0.8px;color:#46383a;margin-top:2pt;}',
+    '#printCv .hd .meta{font-size:10.5pt;letter-spacing:1px;color:#2a2a2a;margin:2pt 0;}',
+    '#printCv .hd .sub{font-size:10.5pt;font-style:italic;color:#5a4a4d;letter-spacing:0.6px;margin:3pt 0;}',
+    '#printCv .hd .em{font-size:9pt;letter-spacing:0.8px;color:#46383a;margin-top:3.5pt;}',
     '#printCv .sec{margin-top:11pt;page-break-inside:avoid;break-inside:avoid;}',
     '#printCv .sh{font-variant:small-caps;letter-spacing:2.2px;font-size:10pt;color:#7A2632;border-bottom:1px solid #9b5560;padding-bottom:2pt;margin-bottom:4pt;page-break-after:avoid;}',
     '#printCv .elist{width:100%;}',
@@ -1991,17 +1995,19 @@ function buildPrintCv() {
     '#printCv .t.tc{font-weight:600;color:#33272a;}',
     '#printCv .caret{color:#7A2632;}',
     '#printCv .n{font-style:italic;color:#564a4c;font-size:10pt;}',
-    '#printCv .cred{margin-top:13pt;border-top:0.75px solid #c4a8ab;padding-top:7pt;page-break-inside:avoid;}',
-    '#printCv .cred .ch{font-variant:small-caps;letter-spacing:1.8px;font-size:9.5pt;color:#7A2632;margin:0 0 3pt;}',
-    '#printCv .cred .cb{font-size:9pt;line-height:1.55;color:#2c2c2c;}'
+    '#printCv .cred{margin-top:14pt;border-top:0.75px solid #c4a8ab;padding-top:8pt;page-break-inside:avoid;}',
+    '#printCv .cred .ch{font-variant:small-caps;letter-spacing:1.8px;font-size:9.5pt;color:#7A2632;margin:0 0 4pt;}',
+    '#printCv .cred .cb{font-size:9pt;line-height:1.5;color:#2c2c2c;}',
+    '#printCv .cred .colh{display:inline-block;vertical-align:top;width:48%;margin-right:2%;}',
+    '#printCv .cred .colh .ci{display:block;padding:0.6pt 0;line-height:1.5;}'
   ].join('\n');
   host.innerHTML = '<style>' + css + '</style>'
     + '<div class="hd"><h1>Saul Karim NMH <span class="post">MA</span></h1>'
     + '<div class="meta">416-771-0382 \u00b7 Toronto</div>'
     + (subLabels.length ? '<div class="sub">' + escp(subLabels.join(' \u00b7 ')) + '</div>' : '')
-    + '<div class="em">saulnassau@protonmail.com</div></div>'
+    + '<div class="em">saulnassau@protonmail.com · seminarschools.com/saulnassau</div></div>'
     + secs
-    + '<div class="cred"><div class="ch">' + escp(t.certs || UI.en.certs) + '</div><div class="cb">' + escp(t.certL || UI.en.certL) + '</div></div>'
+    + '<div class="cred"><div class="ch">' + escp(t.certs || UI.en.certs) + '</div><div class="cb">' + certCols + '</div></div>'
     + '<div class="cred"><div class="ch">' + escp(t.edu || UI.en.edu) + '</div><div class="cb">' + escp(t.eduL || UI.en.eduL) + '</div></div>';
   fitPrintCvToTwoPages(host);
 }
