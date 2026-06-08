@@ -1,0 +1,119 @@
+{
+  "run_at": "2026-06-06T18:06:02+00:00",
+  "harvest_count": 55,
+  "aggregator_leaks_dropped": 0,
+  "final_count": 105,
+  "by_source": [
+    {
+      "id": "manual-curated",
+      "count": 50
+    },
+    {
+      "id": "harbourfront-summer",
+      "count": 13
+    },
+    {
+      "id": "luminato",
+      "count": 11
+    },
+    {
+      "id": "torontojazz",
+      "count": 6
+    },
+    {
+      "id": "caribana",
+      "count": 4
+    },
+    {
+      "id": "tdsbfilm",
+      "count": 3
+    },
+    {
+      "id": "imaginenative",
+      "count": 2
+    },
+    {
+      "id": "tcaf",
+      "count": 2
+    },
+    {
+      "id": "nxne",
+      "count": 2
+    },
+    {
+      "id": "pride-toronto",
+      "count": 1
+    },
+    {
+      "id": "fringe-toronto",
+      "count": 1
+    },
+    {
+      "id": "salsa-on-st-clair",
+      "count": 1
+    },
+    {
+      "id": "veld",
+      "count": 1
+    },
+    {
+      "id": "summerworks",
+      "count": 1
+    },
+    {
+      "id": "afrofest",
+      "count": 1
+    },
+    {
+      "id": "scotiabank-buskerfest",
+      "count": 1
+    },
+    {
+      "id": "tiff-festival",
+      "count": 1
+    },
+    {
+      "id": "polish-festival-mississauga",
+      "count": 1
+    },
+    {
+      "id": "nuit-blanche",
+      "count": 1
+    },
+    {
+      "id": "ifoa",
+      "count": 1
+    },
+    {
+      "id": "rendezvous-classic",
+      "count": 1
+    }
+  ],
+  "by_type": [
+    {
+      "type": "festival-of-form",
+      "count": 46
+    },
+    {
+      "type": "cultural-reproduction",
+      "count": 30
+    },
+    {
+      "type": "site-specific-art",
+      "count": 21
+    },
+    {
+      "type": "screening",
+      "count": 5
+    },
+    {
+      "type": "panel",
+      "count": 2
+    },
+    {
+      "type": "reading",
+      "count": 1
+    }
+  ],
+  "aggregator_leak_examples": []
+}
