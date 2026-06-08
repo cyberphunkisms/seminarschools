@@ -221,7 +221,7 @@
 /* ============================================================
    POLYMYTH SEMINAR CALENDAR
    - Loads /data/polymyth-seminar-events.json
-   - Default view: 1 week back + 1 month forward from today
+   - Default view: 1 week back + 1 year forward from today
    - "Show all" view: all 218 events
    - Category filter: click pill, list filters; click again deactivates
    - Mirrors /saul/ filter-nav pattern
@@ -311,10 +311,10 @@ function getFilteredEvents() {
   const now = new Date();
   let events = ALL_EVENTS;
 
-  // Default view: 1 week back, 1 month forward
+  // Default view: 1 week back, 1 year forward
   if (activeView === 'default') {
     const start = new Date(now); start.setDate(start.getDate() - 7);
-    const end = new Date(now); end.setMonth(end.getMonth() + 1);
+    const end = new Date(now); end.setFullYear(end.getFullYear() + 1);
     events = events.filter(e => e._date >= start && e._date <= end);
   }
 
@@ -335,7 +335,7 @@ function render() {
   // Update count
   const totalEvents = ALL_EVENTS.length;
   const shownEvents = events.length;
-  const viewLabel = activeView === 'default' ? '1 week back · 1 month forward' : 'all events';
+  const viewLabel = activeView === 'default' ? '1 week back · 1 year forward' : 'all events';
   const catLabel = activeCategory === 'all' ? '' : ` · ${activeCategory}`;
   countLine.innerHTML = `<strong>${shownEvents}</strong> of ${totalEvents} events &nbsp;·&nbsp; ${viewLabel}${catLabel}`;
 

@@ -1,28 +1,24 @@
 {
-  "run_at": "2026-06-06T17:46:27+00:00",
+  "run_at": "2026-06-06T16:34:57+00:00",
   "harvest_count": 7,
   "manual_count": 81,
-  "final_count": 88,
+  "final_count": 87,
   "by_source": [
     {
-      "id": "c4e",
+      "id": "hot-docs",
       "count": 1
+    },
+    {
+      "id": "ifoa",
+      "count": 2
     },
     {
       "id": "manual-curated",
       "count": 81
     },
     {
-      "id": "paradise",
-      "count": 1
-    },
-    {
       "id": "revue",
-      "count": 4
-    },
-    {
-      "id": "royal",
-      "count": 1
+      "count": 3
     }
   ]
 }
