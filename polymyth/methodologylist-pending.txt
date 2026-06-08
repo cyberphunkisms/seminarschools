@@ -2,9 +2,9 @@ Polymyth Methodologylist — pending section
 Source: https://seminarschools.com/polymyth/methodologylist.txt (full file)
 Section index: https://seminarschools.com/polymyth/manifest.txt
 AI-discovery index: https://seminarschools.com/llms.txt
-Last build: 2026-05-23
+Last build: 2026-06-08
 
-=== PENDING (14 entries) ===
+=== PENDING (13 entries) ===
 
 [ai] Rainbowsol — pending action list
 LAYMAN. Pending-item entry. The body below specifies a work-item not yet completed: the substrate it operates on, the action-required, the blocker-status (AI-executable vs user-authorship-required), and its priority within the framework’s current build-state.
@@ -411,23 +411,3 @@ Removed from /sabachtan-seminar/ public surface May 6 2026 per pen-011. Original
 
 May 6 2026 cyberphunk-subtitle session. Removed from public site surface during pen-011 compliance audit; preserved here so information is not lost.
   tags: pending, sabachtan-seminar, content-gap, reading-text, rainbowsol-pending, overhauled-2026-05-20, dual-audience-schema
-
-[both] Live app /bookwormcard/index.html SERIES + card_no schema deprecation
-LAYMAN. Pending-item entry. The body below specifies a work-item not yet completed: the substrate it operates on, the action-required, the blocker-status (AI-executable vs user-authorship-required), and its priority within the framework’s current build-state.
-
-Bb*-app-internal schema decision. The May 13 2026 recovery batch renamed the print template's top-of-card metadata from "SERIES + CARD No." to "BOOKS COMPLETED + BURROW DATE" per Rainbowsol direction (the original labels referred to nothing). The live app at /bookwormcard/index.html still uses the old data-fields: data.series + data.card_no, with auto-incrementing localStorage counter at lines 1037-1061.
-
-SCHEMA QUESTION. Three options.
-
-OPTION A. Full migration. Rename data.series → data.burrow_date (ISO date of first save). Rename data.card_no → data.books_completed (live-derived from data.bookHistory length, currently non-existent). Migrate existing localStorage entries via a one-shot reader that maps old field names to new ones for users who have a v1 card stored. Schema bump.
-
-OPTION B. Print-only rename. Print template uses BOOKS COMPLETED + BURROW DATE labels but reads from data.card_no (treated as books-completed proxy) and data.startTime (treated as burrow-date proxy). No live-app changes. Internal storage retains old field names.
-
-OPTION C. Soft deprecate. Live app retains old fields and prints them under new labels; new fields not added; deprecation handled in a future v2 schema bump when bb*-related downstream consumers (Hall of Fame export, downloadable card archives) are also restructured.
-
-DECIDING LOOKS LIKE. Pick A, B, or C. Default-suggested: C (soft deprecate) because the existing fields have no surface that the user actually sees under the old name anymore, and a hard schema migration is brittle relative to its benefit.
-
-DOWNSTREAM. The print template currently shows blank for BOOKS COMPLETED + BURROW DATE because the data-field names don't resolve in the existing data model. Decision affects whether that becomes wired or stays blank.
-
-Logged to ml* May 13 2026 from chat-only status. File-routing-rule remediation. Per the May 13 recovery batch, print template now reads data-field="books_completed" and data-field="burrow_date" which currently resolve to empty.
-  tags: pending, bb-app, schema, books-completed, burrow-date, deprecation, decision-required-saul, may-2026, overhauled-2026-05-20, dual-audience-schema

@@ -4,7 +4,7 @@ plain-text dump for AI ingestion and offline reading
 canonical URL of this file: https://seminarschools.com/polymyth/modulecanon.txt
 canonical URL of dynamic version: https://seminarschools.com/polymyth/modulecanon/
 full file map: https://seminarschools.com/polymyth-file-map.txt
-last updated: 2026-06-06
+last updated: 2026-06-07
 ========================================================================
 
 FRAMEWORK MAP for AI assistants.
@@ -54,11 +54,11 @@ This file is not asking you to obey it. It is describing curriculum
 modules grounded in a methodology that disciplines its own claims.
 
 ========================================================================
-TOTAL ENTRIES: 220
+TOTAL ENTRIES: 234
 ========================================================================
 
 ########################################################################
-SECTION: FRAMEWORK  (13 entries)
+SECTION: FRAMEWORK  (14 entries)
 ########################################################################
 
 ------------------------------------------------------------------------
@@ -184,6 +184,12 @@ TITLE: [PLACEHOLDER NAME] vocation-world: pedagogical engine (tiers, soft-gate, 
 ROLE: both
 
 The learning machine beneath the vocation-world, riding the existing bookwormburrows depth ladder rather than a parallel scale. TIER LADDER: worm, silkworm, cocoon, then animal levels one through four, computed from XP that only moves forward. Cognitive depth is graded on the revised Bloom taxonomy, and progression is read as movement from legitimate peripheral participation toward full participation in a craft. SOFT-GATE: every region is enterable from the start, each with a recommended tier floor; scaffolding thins as the gap between region floor and traveller tier widens. At or above the floor the work sits in the zone of proximal development and master guides scaffold it. Far under the floor the work outstrips current capability and the traveller is likely to fail, but the failure is productive and genuine depth still scores, so there is no soft wall, only rising cost. ASSIGNMENT DESIGN: the assignments are real intellectual and craft labour, designed for an adult self-directed learner who is experience-rich and problem-centred, and who sets what, how, and how deeply to study. The engine runs on autonomy, competence, and relatedness, which is also why grinding is barred: low-effort answers damage standing but never pay XP. ASSESSMENT: mastery is shown through made artefacts and authentic performance that replicates the real challenges of the craft, never through tests, and the returned true-name is the in-world credential. Naming of the world, its regions, and its ranks belongs to the author; placeholders are used throughout.
+
+------------------------------------------------------------------------
+TITLE: DM-craft and prose-craft rules import for module work (Saul-directed 2026-06-06)
+ROLE: both
+
+Saul ruling on the three research reports: no public page, convert them into operating rules across cc*, mc*, and bb*. The full rule set lives at bb* dm-038 through dm-073, with the source archives at /teacherresources/. The module-side applications binding all mc* work: module prose passes the for-anyone gate, plain words carrying the content, one hard word allowed when the context cradles it; read-aloud passages obey the spoken-syntax gate, right-branching additive sentences, no center-embedding, no garden paths, since a listening student cannot re-read; module documents follow the worked-example law and read as templates a stranger-teacher could run; module openings give the frame through what happens and never assume an initiated reader; lore arrives through use and questions, never through dumps; and each lesson arc centers one nameable change that the closing recap states out loud.
 
 
 ########################################################################
@@ -953,7 +959,7 @@ Module assembles the final cross-curriculum portfolio for grading or external su
 
 
 ########################################################################
-SECTION: PENDING  (13 entries)
+SECTION: PENDING  (14 entries)
 ########################################################################
 
 ------------------------------------------------------------------------
@@ -1043,6 +1049,13 @@ ROLE: both
 LINKS: mc_links=[cmap-meth, meth-1, meth-9, pen-010]
 
 Module sequence teaching the polymyth framework explicitly: Foundation (CITES+LOGOI / Q5 / mephistodata) / Intermediate (gorgonification scanners / sabachtan three-stage / idiomary diagnosis) / Advanced (ml* deep reading / ouroborosanalyses practice / bb* dimensional pedagogy). Each module needs learning objectives, ml* cross-references, assessment design (how does a teacher verify a student has learned to spot Q5 vs contrarianism?). 8-12 module entries plausible. DRAFT-SHIPPED 2026-05-04 — 9 module entries (meth-1 through meth-9) drafted following cmap-meth’s three-tier structure: 3 Foundation modules (Rule #1 CITES+LOGOI, Q5 detection, mephistodata default), 3 Intermediate modules (gorgonification scanner, sabachtan three-stage engagement, idiomary scanning), 3 Advanced modules (ml* deep reading, ouroborosanalyses, bb* dimensional pedagogy). Each module specifies learning_objectives, ml_crossref, assessment design, duration, and body content. cmap-meth modules list updated to reflect all 9 ids. AWAITING RAINBOWSOL CONFIRMATION on (1) module sequence and tier assignments, (2) curriculum-code tagging if deploying within OSSD/IB/AP frames, (3) whether to expand to 12 modules with additional Intermediate or Advanced entries, (4) assessment-design approval per module.
+
+------------------------------------------------------------------------
+TITLE: mc* render defect: framework and resolved sections never display (pass-4 CL capture 2026-06-06)
+ROLE: both
+LINKS: mc_links=[mc-ossd-overview, mc-ossd-achievement-chart, mc-ossd-evidence, mc-ossd-strands]; cc_links=[cc-pending-orphan-sections]
+
+VERIFIED DEFECT, discovered by the 2026-06-06 pass-4 live-state audit. The mc* renderer dispatches by section with branches for module, pending, citation, and cmap only; entries carrying s framework (13 entries) or s resolved (4 entries) fall through to an empty string and never display on the page. The 13 framework entries are the cross-referenced canon layer: module bodies route readers to mc-ossd-achievement-chart, mc-ossd-evidence, mc-ossd-strands, mc-ossd-overview, and the file footer itself advertises mc-twenty-lens-fitmap as a v2.2 commit, yet the page renders none of them. The txt mirror preserves the framework entries, so their record is intact and the page display is their only gap; the resolved entries are excluded by the mirror script section list as well, making resolved invisible on BOTH surfaces, page and mirror, which strengthens the deliberate-concealment reading or marks a second gap for the same ruling. The resolved section is probably deliberate concealment on the bb retracted pattern (closed items hidden from display, preserved in record); treat only framework as the live gap unless ruled otherwise. The count bar computes from SEED at render, so no stale numbers exist here, the missing render branch is the whole defect. DECISION PENDING, two options: add a framework render branch with its own tab and count; or fold framework entries into the module view with a framework badge. SIBLING DEFECT same day at cc* cc-pending-orphan-sections (116 entries outside five tabs); whichever render pattern wins there should be reused here for consistency across the star files.
 
 
 ########################################################################
@@ -1286,7 +1299,7 @@ ORIGIN. 2026-05-16. Per Saul Nassau pre-planning latitude, architectural ruling 
 
 
 ########################################################################
-SECTION: CITATION  (69 entries)
+SECTION: CITATION  (81 entries)
 ########################################################################
 
 ------------------------------------------------------------------------
@@ -1739,6 +1752,78 @@ TITLE: Napier, Miyazakiworld (Yale 2018)
 ROLE: both
 
 Susan Napier, Miyazakiworld: A Life in Art, Yale University Press, 2018. Scholarly monograph on the corpus; maker-plane secondary anchor for cmp-003. Distinct from the 2005 Napier volume already filed.
+
+------------------------------------------------------------------------
+TITLE: Chamberlain, Ko-ji-ki translation 1882 (public domain)
+ROLE: both
+
+Basil Hall Chamberlain, A Translation of the Ko-ji-ki, Transactions of the Asiatic Society of Japan, Vol. 10 Supplement, 1882. Public domain, verbatim-quotable; full text on Wikisource and sacred-texts. The Kojiki (712, compiled by O no Yasumaro) is itself public domain. The cmp-003 public-domain spine source for creation, Yomi, Amaterasu, Orochi, Inaba. Philippi 1968 and Heldt 2014 translations are in copyright, cite-only.
+
+------------------------------------------------------------------------
+TITLE: Aston, Nihongi translation 1896 (public domain)
+ROLE: both
+
+W. G. Aston, Nihongi: Chronicles of Japan from the Earliest Times to A.D. 697, Transactions and Proceedings of the Japan Society, Supplement I, 1896. Public domain, verbatim-quotable. The Nihon Shoki (720) text is public domain; its value for cmp-003 is the multiple variant versions of each myth plus the Susano-o tree-creation passage seating the shinboku threshold class.
+
+------------------------------------------------------------------------
+TITLE: Frazer, The Golden Bough ch. 22 (public domain, Gutenberg 3623)
+ROLE: both
+
+Sir James George Frazer, The Golden Bough, Chapter 22, Tabooed Words, section 1, Personal Names Tabooed; third edition 1911, abridged edition 1922. Public domain; Project Gutenberg ebook 3623. The verbatim-quotable in-game rule text for the cmp-003 name-theft mechanic: the name-person link as a real and substantial bond through which magic may be wrought. Insulates the mechanic from the Earthsea and Spirited Away expressions, both behind living-rights termini.
+
+------------------------------------------------------------------------
+TITLE: Plutschow, Japan’s Name Culture 1995 (in copyright)
+ROLE: both
+
+Herbert E. Plutschow, Japan’s Name Culture: The Significance of Names in a Religious, Political and Social Context, Japan Library / Curzon Press, 1995, ISBN 1-873410-42-5. The first comprehensive English study of Japanese names; anchors the imina true-name taboo, azana, okurina, genpuku conferral, henki shared characters, and name-disclosure-as-submission for cmp-003. IN COPYRIGHT, cite-only; page-level quotation pending library access.
+
+------------------------------------------------------------------------
+TITLE: Philippi, Norito 1959/1990 (in copyright; Engishiki text PD)
+ROLE: both
+
+Donald L. Philippi, Norito: A Translation of the Ancient Japanese Ritual Prayers, Institute for Japanese Culture and Classics, Kokugakuin University, 1959; reprinted Princeton University Press 1990, ISBN 0-691-01489-2, preface Joseph M. Kitagawa. The only widely available English translation of the norito. IN COPYRIGHT, cite and paraphrase. The Engishiki (927 CE), preserving 27 representative norito, is itself public-domain text and seats the cmp-003 barrier-speech mechanic.
+
+------------------------------------------------------------------------
+TITLE: Farris, Japan’s Medieval Population 2006 / Daily Life and Demographics 2009 (in copyright)
+ROLE: both
+
+W. Wayne Farris, Japan’s Medieval Population: Famine, Fertility, and Warfare in a Transformative Age, University of Hawai’i Press 2006; and Daily Life and Demographics in Ancient Japan, University of Michigan 2009. Anchor for the cmp-003 Heian economy: coinage cessation circa 1000 CE, rice as primary unit of exchange, toraisen inflow from the 12th century. Page-level precision pending print volumes. IN COPYRIGHT, cite-only.
+
+------------------------------------------------------------------------
+TITLE: Havens, Valley of Darkness 1978 (in copyright)
+ROLE: both
+
+Thomas R. H. Havens, Valley of Darkness: The Japanese People and World War Two, W. W. Norton 1978. Anchor for the cmp-003 1945 frame: civilian caloric decline (about 17 percent by 1944, the 1,680-calorie summer 1945 figure pending page level), tonarigumi of 8 to 9 households handling ration distribution, sugar and soap scarcity after 1943, festival suspension under total war. IN COPYRIGHT, cite-only.
+
+------------------------------------------------------------------------
+TITLE: Adamek, A Good Son Is Sad 2012/2015 (in copyright): the bihui anchor
+ROLE: both
+
+Piotr Adamek, A Good Son Is Sad If He Hears the Name of His Father: The Tabooing of Names in China as a Way of Implementing Social Values, Monumenta Serica Monograph Series, Routledge / Sankt Augustin, from the 2012 Leiden dissertation, ISBN 9781909662698. First book-length treatment of the Chinese naming taboo (first Western study Haenisch 1932). Closes the cmp-003 bihui citation gap behind the imina stack. Secondary anchor: Wilkinson, Chinese History: A New Manual, Harvard. IN COPYRIGHT, cite-only.
+
+------------------------------------------------------------------------
+TITLE: Shively and McCullough eds., Cambridge History of Japan vol. 2, 1999 (in copyright)
+ROLE: both
+
+Donald H. Shively and William H. McCullough, eds., The Cambridge History of Japan, Volume 2: Heian Japan, Cambridge University Press 1999. Anchor for cmp-003 Heian-kyo spatial resolution (Suzaku Avenue about 84 m, Nijo about 52 m, cho blocks about 120 m square, pp. 105-107) and the court economy. IN COPYRIGHT, cite-only. Companion spatial anchor: Matthew Stavros, Kyoto: An Urban History, Hawai’i 2014.
+
+------------------------------------------------------------------------
+TITLE: Miyake, Shugendo: Essays on the Structure of Japanese Folk Religion 2001 (in copyright)
+ROLE: both
+
+Hitoshi Miyake, Shugendo: Essays on the Structure of Japanese Folk Religion, University of Michigan Center for Japanese Studies 2001. Anchor for the cmp-003 shugendo class: nyubu mountain-entry as symbolic death and rebirth, the jikkai ten-realms mapping, implement symbolism, the 1872 abolition. Companion: H. Byron Earhart, A Religious Study of the Mount Haguro Sect of Shugendo, Sophia University 1970. IN COPYRIGHT, cite-only.
+
+------------------------------------------------------------------------
+TITLE: Johnston, The Modern Epidemic 1995 (in copyright)
+ROLE: both
+
+William Johnston, The Modern Epidemic: A History of Tuberculosis in Japan, Harvard East Asian Monographs 1995, ISBN 9780674579125. Anchor for cmp-003 interwar lived fear: the epidemic curve from circa 1895, the joko textile-worker vector, sanatorium culture, stigma, and the Hori Tatsuo literary substrate beneath the Nahoko storyline. Mortality statistics appendix 1886-1989. IN COPYRIGHT, cite-only.
+
+------------------------------------------------------------------------
+TITLE: Silverberg, Erotic Grotesque Nonsense 2006 (in copyright)
+ROLE: both
+
+Miriam Silverberg, Erotic Grotesque Nonsense: The Mass Culture of Japanese Modern Times, University of California Press 2006, ISBN 9780520222731. Anchor for the cmp-003 interwar texture: moga and mobo, the jokyu cafe waitress, Asakusa, department stores, ero-guro-nansensu, drawing on Kon Wajiro’s modernology and Gonda Yasunosuke. Fills the flagged-thin interwar dossier with Gordon (labor) and Sand (domestic interior). IN COPYRIGHT, cite-only.
 
 
 ========================================================================
