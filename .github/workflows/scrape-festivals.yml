@@ -20,9 +20,11 @@ name: Scrape festivals
 # Schedule: weekly Monday 07:00 UTC (one hour after seminars). Pre-dawn
 # Toronto. Manual dispatch also enabled for testing.
 
+# CONSOLIDATED June 6 2026: the weekly schedule moved into
+# scrape-seminars.yml, which now runs both harvests in one job with one
+# combined push (one Netlify deploy instead of two). This file is kept
+# for manual dispatch only.
 on:
-  schedule:
-    - cron: '0 7 * * 1'
   workflow_dispatch:
 
 permissions:
@@ -51,17 +53,6 @@ jobs:
 
       - name: Verify Claude Code install
         run: claude --version
-
-      - name: Check Claude auth before the crawl
-        env:
-          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-        run: |
-          if [ -z "${CLAUDE_CODE_OAUTH_TOKEN:-}" ]; then
-            echo "::error title=Auth token missing::CLAUDE_CODE_OAUTH_TOKEN secret is empty or unset. Generate one with 'claude setup-token' and set it under repository Settings, Secrets and variables, Actions."
-            exit 1
-          fi
-          echo "Token present. Auth status (informational):"
-          claude auth status --text || echo "::warning title=Auth status non-zero::If the next step fails fast, the token is likely expired or revoked. Regenerate with 'claude setup-token' and update the secret."
 
       - name: Install Python validator dependencies
         run: pip install jsonschema

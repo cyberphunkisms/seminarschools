@@ -100,3 +100,32 @@
 /polymyth-seminar-calendar     /polymythseminars/    301
 /polymyth-seminar-calendar/    /polymythseminars/    301
 /polymyth-seminar-calendar/*   /polymythseminars/    301
+# Devil's Diary canonical home (June 10 2026) — lives at /polymyth/devilsdiary/
+# All spelling and shortpath aliases 301 here, subpaths preserved. No alias targets
+# /devils-notebook to avoid a redirect loop; that spelling is an alias, not the home.
+/devilsdiary/*              /polymyth/devilsdiary/:splat  301
+/devilsdiary                /polymyth/devilsdiary/        301
+/devils-diary/*             /polymyth/devilsdiary/:splat  301
+/devils-diary               /polymyth/devilsdiary/        301
+/devilsnotebook/*           /polymyth/devilsdiary/:splat  301
+/devilsnotebook             /polymyth/devilsdiary/        301
+/devils-notebook/*          /polymyth/devilsdiary/:splat  301
+/devils-notebook            /polymyth/devilsdiary/        301
+/thedevilsdiary/*           /polymyth/devilsdiary/:splat  301
+/thedevilsdiary             /polymyth/devilsdiary/        301
+/thedevilsnotebook/*        /polymyth/devilsdiary/:splat  301
+/thedevilsnotebook          /polymyth/devilsdiary/        301
+/diary/*                    /polymyth/devilsdiary/:splat  301
+/diary                      /polymyth/devilsdiary/        301
+/mephistodata/*             /polymyth/devilsdiary/:splat  301
+/mephistodata               /polymyth/devilsdiary/        301
+/devilsadvocate/*           /polymyth/devilsdiary/:splat  301
+/devilsadvocate             /polymyth/devilsdiary/        301
+/devils-advocate/*          /polymyth/devilsdiary/:splat  301
+/devils-advocate            /polymyth/devilsdiary/        301
+/polymyth/devils-notebook/* /polymyth/devilsdiary/:splat  301
+/polymyth/devils-notebook   /polymyth/devilsdiary/        301
+/polymyth/devilsnotebook/*  /polymyth/devilsdiary/:splat  301
+/polymyth/devilsnotebook    /polymyth/devilsdiary/        301
+/polymyth/devils-diary/*    /polymyth/devilsdiary/:splat  301
+/polymyth/devils-diary      /polymyth/devilsdiary/        301

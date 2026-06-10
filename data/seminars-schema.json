@@ -59,11 +59,34 @@
         "podcast-live",
         "scholar-talk",
         "philosophy-cafe",
-        "gathering",
-        "festival-of-form",
-        "cultural-reproduction",
+        "conference",
+        "workshop",
+        "symposium",
+        "colloquium",
+        "book-talk",
+        "book-launch",
+        "talk",
+        "forum",
+        "webinar",
+        "exhibition",
         "site-specific-art",
-        "other"
+        "performance",
+        "festival-of-form",
+        "festival",
+        "cultural-reproduction",
+        "gathering",
+        "memorial",
+        "celebration",
+        "networking",
+        "residency",
+        "retreat",
+        "meeting",
+        "protest",
+        "community",
+        "cfp",
+        "defence",
+        "other",
+        "contest"
       ],
       "description": "Operation-type classification per the polymyth-broadened seminar test. Original four-condition types: lecture, screening, reading, artist-talk, panel, podcast-live, scholar-talk, philosophy-cafe, gathering. Polymyth-extension types: festival-of-form (cultural festivals enacting non-institutional forms of life), cultural-reproduction (diasporic and community festivals reproducing form-of-life outside dominant order), site-specific-art (festival-scale artistic practice operating outside gallery/commercial circuits, e.g. CONTACT Photography). Drives display label and filtering."
     },
@@ -139,6 +162,60 @@
     "is_parent_festival": {
       "type": "boolean",
       "description": "True when this record represents the umbrella festival itself (with date range spanning the whole festival). False or omitted for one-off events including child events within a festival."
+    },
+    "secondary_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "lecture",
+          "screening",
+          "reading",
+          "artist-talk",
+          "panel",
+          "podcast-live",
+          "scholar-talk",
+          "philosophy-cafe",
+          "conference",
+          "workshop",
+          "symposium",
+          "colloquium",
+          "book-talk",
+          "book-launch",
+          "talk",
+          "forum",
+          "webinar",
+          "exhibition",
+          "site-specific-art",
+          "performance",
+          "festival-of-form",
+          "festival",
+          "cultural-reproduction",
+          "gathering",
+          "memorial",
+          "celebration",
+          "networking",
+          "residency",
+          "retreat",
+          "meeting",
+          "protest",
+          "community",
+          "cfp",
+          "defence",
+          "other"
+        ]
+      },
+      "default": [],
+      "description": "Additional types when an event is genuinely more than one. Empty for single-type events."
+    },
+    "age_band": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "default": null,
+      "description": "Stated entrant or attendee age band or eligibility. null when unrestricted."
     }
-  }
+  },
+  "$updated": "2026-06-08"
 }

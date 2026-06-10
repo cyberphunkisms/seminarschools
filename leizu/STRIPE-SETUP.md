@@ -44,11 +44,11 @@ In the Stripe dashboard, go to Product Catalog. Create one product per tier from
 
 1. **Three sessions** — $300.00 — Description "3 sessions, $100 each. The minimum to begin." One-time payment.
 2. **Five sessions** — $510.00 — Description "5 sessions, $102 each. 11% off list." One-time payment.
-3. **Seven-class bundle** — $610.00 — Description "7 sessions, $87 each. 24% off list." One-time payment.
+3. **Seven-class bundle** — $610.00 — Description "7 sessions. 24% off list." One-time payment.
 
 **Forest year (144 contact hours, one-on-one):**
 
-4. **Forest year — upfront** — $13,000.00 — Description "Full Forest year paid in one transaction. Saves $1,400 vs monthly total." One-time payment.
+4. **Forest year — upfront** — $14,000.00 — Description "Full Forest year paid in one transaction." One-time payment.
 5. **Forest year — monthly** — $1,400.00 — Description "Forest year paid monthly across 12 months." Recurring billing, monthly interval, 12 cycles or open-ended (your choice). Total $14,000.
 
 **Seminar year (144 contact hours, small seminar, gated by 20-40 prior sessions):**
@@ -121,9 +121,7 @@ Pick what to do first. I will execute when directed.
 
 ## Notes
 
-- The buymeacoffee link (`https://buymeacoffee.com/cyberphunk`) now serves two roles. It is the casual tip channel on the Agora page for the free seminars, and as of May 2026 it is also the interim Mulberry Fund donation button on the /leizu/donate page, standing in until the dedicated Stripe donation Payment Link is created. When that Stripe link goes live, swap the donate-page button from buymeacoffee back to the Stripe link.
+- The buymeacoffee link (`https://buymeacoffee.com/cyberphunk`) is currently on the Agora page only. It is a separate channel from Stripe; buymeacoffee is for casual one-time tips on the free seminars, Stripe is for paid course bookings. Keep them separate.
 - The Mulberry Fund is for student scholarships specifically. If you want to take Mulberry Fund donations via Stripe rather than the current /leizu/donate page setup, that is one more product to create.
-
-- Coupon and promotion codes (later, not yet built). When you want discount codes, here is the sequence. In the Stripe dashboard, create a Coupon, either a percentage off or a fixed amount off. Then generate one or more Promotion Codes tied to that coupon, which are the human-typed codes like WELCOME10. Then, on each Payment Link the code should work on, enable Allow promotion codes in the link settings. Existing Payment Links may need that toggle switched on, or the link regenerated, since it is off by default. Tell me when you want the donate page or the booking flow to show a promo-code field and I wire the page side.
 
 End of guide.

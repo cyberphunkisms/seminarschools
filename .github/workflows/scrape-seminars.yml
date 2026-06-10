@@ -1,29 +1,23 @@
-name: Scrape seminars
+name: Scrape seminars + festivals
 
-# Weekly Toronto-GTA event harvest via Claude headless mode (claude -p).
+# Weekly Toronto-GTA harvest via Claude headless mode (claude -p).
+# CONSOLIDATED June 6 2026 for Netlify credit conservation: the seminars
+# and festivals harvests previously ran as two separate workflows pushing
+# one hour apart, costing two production deploys (2 x 15 credits) every
+# Monday. They now run sequentially in one job with ONE combined commit
+# and push: one deploy, 15 credits.
 #
-# Architecture, May 26 2026 (post-audit):
-# Old design used Python with requests + BeautifulSoup against 23 configured
-# sources. Result: 1 working fetcher, 2 WAF-blocked, 19 stubs returning empty.
-# Total feed: 8 hand-typed events. April 15 2026 Claude-research baseline: 70+.
-#
-# New design: Claude headless CLI reads scripts/seminars-prompt.md (which
-# embeds the venue roster and schema), uses WebFetch to crawl, emits a JSON
-# array conforming to /data/seminars-schema.json, post-processor merges with
-# /data/manual-events.json, validates, commits if changed.
+# Seminars pass: scripts/seminars-prompt.md (venue roster + schema),
+# WebFetch crawl, JSON to /tmp, merge with manual-events, validate.
+# Festivals pass: scripts/festivals-prompt.md two-pass scrape-within-scrape
+# (aggregator discovery, then official-site confirmation; aggregator URLs
+# never become source_url), merge, validate with aggregator-leak guard.
 #
 # Auth: CLAUDE_CODE_OAUTH_TOKEN generated locally via `claude setup-token`.
-# This binds the headless runner to the Max 20x subscription. Post June 15
-# 2026 it draws from the $200/mo Agent SDK credit pool. Using an API key
-# (ANTHROPIC_API_KEY) instead would route through pay-as-you-go billing,
-# not the subscription credit pool.
+# Binds to the Max 20x subscription / Agent SDK credit pool, not API billing.
+# Budget caps live inside each runner script.
 #
-# Per-run cost estimate: $1-3 of Sonnet 4.6 tokens. Hard cap: $5 via
-# --max-budget-usd. Weekly cadence = $4-12/month. Well inside $200 ceiling.
-#
-# Schedule: weekly Monday 06:00 UTC = 02:00 Toronto (EDT). Pre-dawn lets the
-# commit-and-deploy cycle finish before Toronto wakes. Manual dispatch also
-# enabled for testing.
+# Schedule: weekly Monday 06:00 UTC = 02:00 Toronto. Manual dispatch enabled.
 
 on:
   schedule:
@@ -39,7 +33,7 @@ env:
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 75
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -59,45 +53,40 @@ jobs:
       - name: Verify Claude Code install
         run: claude --version
 
-      - name: Check Claude auth before the crawl
-        env:
-          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-        run: |
-          if [ -z "${CLAUDE_CODE_OAUTH_TOKEN:-}" ]; then
-            echo "::error title=Auth token missing::CLAUDE_CODE_OAUTH_TOKEN secret is empty or unset. Generate one with 'claude setup-token' and set it under repository Settings, Secrets and variables, Actions."
-            exit 1
-          fi
-          echo "Token present. Auth status (informational):"
-          claude auth status --text || echo "::warning title=Auth status non-zero::If the next step fails fast, the token is likely expired or revoked. Regenerate with 'claude setup-token' and update the secret."
-
       - name: Install Python validator dependencies
         run: pip install jsonschema
 
-      - name: Run Claude headless scrape
+      - name: Run Claude headless scrape (seminars)
         env:
-          # OAuth token from `claude setup-token`. Authenticates against the
-          # Max 20x subscription credit pool. NOT an API key.
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: bash scripts/seminars-prompt-runner.sh
 
-      - name: Validate output against schema
+      - name: Validate seminars output against schema
         run: python3 scripts/validate_seminars.py
 
-      - name: Commit and push if changed
+      - name: Run Claude headless scrape (festivals)
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: bash scripts/festivals-prompt-runner.sh
+
+      - name: Validate festivals output (schema + aggregator-leak guard)
+        run: python3 scripts/validate_festivals.py
+
+      - name: Commit and push if changed (single combined deploy)
         run: |
           set -x
           git config user.name "seminars-bot"
           git config user.email "saul+seminarsbot@seminarschools.com"
           echo "--- Pre-commit status ---"
           git status
-          git add -A seminars/ data/
+          git add -A seminars/ festivals/ data/
           echo "--- Staged for commit ---"
           git diff --cached --stat
           if git diff --cached --quiet; then
-            echo "No changes to commit. Scrape produced identical output."
+            echo "No changes to commit. Harvest produced identical output."
             exit 0
           fi
-          git commit -m "Update seminars calendar ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+          git commit -m "Update seminars + festivals calendars ($(date -u +'%Y-%m-%d %H:%M UTC'))"
           git pull --rebase origin main
           git push origin main
           echo "Push succeeded."

@@ -4,6 +4,12 @@
 [build]
   publish = "."
   functions = "netlify/functions"
+  # Credit conservation (June 6 2026): skip the build entirely when a push
+  # touches only non-public plumbing (scraper code, workflows, scrape logs,
+  # history snapshots). Exit 0 = skip, exit 1 = build, mirroring git diff
+  # --quiet semantics. Robot pushes still build because they change
+  # seminars/ and festivals/ alongside the logs.
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)scripts/' ':(exclude).github/' ':(exclude)data/history/' ':(exclude)data/scrape-log.json'"
 
 # Form processing: Netlify auto-detects forms with data-netlify="true"
 # attribute in HTML at deploy time. ONE canonical form now:
@@ -60,14 +66,6 @@
   status = 404
   force = true
 
-# Public exemption: the events feed is fetched by the homepage and the calendar,
-# so it must stay reachable even though the rest of /data/ stays blocked.
-# Exact-path rule MUST precede the wildcard block, first match wins.
-[[redirects]]
-  from = "/data/polymyth-seminar-events.json"
-  to = "/data/polymyth-seminar-events.json"
-  status = 200
-
 [[redirects]]
   from = "/data/*"
   to = "/404.html"
@@ -87,3 +85,52 @@
     X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    Permissions-Policy = "camera=(), microphone=(), payment=(), usb=()"
+
+# === Credit conservation (June 7 2026): static-asset cache headers ===
+# Cut repeat-visitor bandwidth by letting browsers hold immutable-ish assets
+# instead of re-pulling them from Netlify. CSS and JS are deliberately left on
+# Netlify's default etag revalidation so a deploy never serves a stale
+# stylesheet. Images and fonts rarely change, so they carry a long max-age with
+# stale-while-revalidate as the safety valve.
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+[[headers]]
+  for = "/*.jpeg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+[[headers]]
+  for = "/*.gif"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+[[headers]]
+  for = "/*.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
+[[headers]]
+  for = "/*.woff"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
+[[headers]]
+  for = "/*.ttf"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"

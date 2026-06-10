@@ -13,7 +13,7 @@ An event qualifies only if all four conditions hold.
 3. **Substantive engagement.** The event invites audience thinking, not pure entertainment, retail, or social mixer. Lectures, readings with Q&A, panels, screenings with director Q&A, philosophy cafes, scholar talks at religious institutions all qualify.
 4. **Intellectual stake.** The content concerns ideas. Humanities, social sciences, philosophy, theology, critical theory, history, political thought, literary criticism, art criticism, science-and-society. Not a job fair, not a how-to workshop, not a product launch.
 
-Cinema screenings qualify **only** when the director, filmmaker, or cast attends for live Q&A. The listing must explicitly state director-in-attendance, Q&A with director, filmmaker in attendance, or equivalent. A normal commercial screening does not qualify.
+Cinema screenings qualify **only** when the director, filmmaker, or cast attends for live Q&A. The listing must explicitly state director-in-attendance, Q&A with director, filmmaker in attendance, or equivalent. A normal commercial screening does not qualify. This gate applies to every festival, TIFF included. A festival screening with no stated director, filmmaker, or cast Q&A does not qualify, however prominent the film.
 
 ## Protests of all sorts
 
@@ -29,7 +29,23 @@ Capture protests across the entire political spectrum. Do not filter by cause, v
 
 Set `type` to `protest`. Fill the `four_condition_test` object honestly against the seminar definition, which for a protest usually means only condition 1 is true. Inclusion rests on the three protest criteria above, not on the seminar test. The same citation discipline applies. Every protest record must carry a `raw_excerpt` and a `source_url` from the listing that confirms it. Do not invent a protest and do not list a rumored or unconfirmed action.
 
-Protest sources are not yet in the venue roster. Surface protests from the candidate channels listed under `deferred_candidates.protest` in `sources.json`, and from any protest announcement you can confirm with a `source_url` and a verbatim `raw_excerpt`. Treat an unconfirmable protest as nonexistent.
+Protest sources are now in the venue roster as `labour-council` and `protest-civic`. Also surface protests from any announcement you can confirm with a `source_url` and a verbatim `raw_excerpt`. Treat an unconfirmable protest as nonexistent.
+
+## Community and charity events
+
+Community and charity events are a separate category and are exempt from the four-condition test above, on a public-benefit basis. Capture organized public community events: charity walks and rides, fundraisers, neighbourhood festivals, mutual-aid drives, and open community gatherings with a named cause or organizer. A community event qualifies when it is public, has a nameable cause or host, and carries a confirmable date and place. Set `type` to `community`. The same citation discipline applies. Every community record must carry a `raw_excerpt` and a `source_url`. Sources are `toronto-events` and `community-discovery` in the roster. Do not invent an event and do not list a rumored one.
+
+## Calls for papers and deadlines
+
+Calls for papers and conference submission deadlines are a separate category, exempt from the four-condition test, on an academic-utility basis. Capture CFPs and submission deadlines in philosophy, the humanities, and the social studies broadly, which includes critical theory, history, political thought, theology, literary and art criticism, and science-and-society. Scope globally: capture reputable calls worldwide in these fields, since a submission deadline is answerable from anywhere and need not name a Toronto or Ontario venue or organizer. Prefer calls a Toronto or Ontario scholar could realistically answer and screen out low-selectivity or predatory multi-topic conferences, but do not restrict to local hosts. The `date` is the submission deadline, not an event date. Set `type` to `cfp`. A CFP usually names no speaker and no venue, so set those to `null` when absent. Record `age_band` or eligibility when the call states one. The same citation discipline applies. Every CFP record carries a `source_url` and a verbatim `raw_excerpt`. Do not invent a CFP.
+
+## Writing and poetry contests
+
+Writing and poetry contests are a separate category, exempt from the four-condition test, on a creative-opportunity basis. Capture poetry, short-story, essay, playwriting, translation, and other creative-writing contests and competitions globally, whether hosted locally, nationally, or internationally, since a submission deadline is answerable from anywhere. The `date` is the submission deadline. Set `type` to `contest`. Record the entrant `age_band` whenever the contest states one, since many contests are scoped by age. Set `speaker_or_director` and `venue` to `null` when absent. The same citation discipline applies. Every contest record carries a `source_url` and a verbatim `raw_excerpt`. Do not invent a contest and do not list one whose deadline has passed.
+
+## Age and eligibility
+
+Record `age_band` on any record whose listing states who may enter or attend: a youth, teen, or adult band, all-ages, a grade range such as `Grades 9-12`, or a status such as `Undergraduate` or `Open`. This matters most for contests and youth programming. Use `null` when the listing states no restriction, and keep the basis in `raw_excerpt` as usual.
 
 ## Venues to crawl
 
@@ -41,6 +57,18 @@ Priority tiers from `sources.json` (`tier_priority` field):
 - Tier 3: crawl if budget permits and lower tiers produced results.
 
 If a fetch returns a 403, a WAF page, or empty content, try once more with the venue's `base_url` instead. Then move on.
+
+## Capture completeness, link specificity, multi-type, nesting, and merging
+
+**Capture every event on a page.** A listing page that names ten talks yields up to ten records, not one. Read the whole listing, expand or paginate where the page hides entries, and emit each distinct qualifying event. Capturing only the first or most prominent item on a multi-event page is a failure.
+
+**Link the most specific URL.** Follow through to the event's own detail page and put that in `source_url`. Use a listing page or a festival homepage only when no per-event page exists.
+
+**One event may hold several types.** When an event genuinely belongs to more than one type, a workshop that is also a panel or a reading that is also a book launch, set `type` to the primary and list the rest in `secondary_types`. One event is one record with several types. Never emit the same event once per type.
+
+**Festivals nest.** For a multi-event festival, emit the umbrella as one record with `is_parent_festival` true, then emit each named, dated sub-event with `parent_id` set to the umbrella's `id`. Capture the umbrella plus the named sub-events and skip the undifferentiated long tail. Jazz, Pride, NXNE, TIFF, and CONTACT all work this way.
+
+**One event, one record.** If the same event surfaces on two source pages, emit it once, keep the richest fields and the most specific `source_url`, and union the extra types into `secondary_types`. The post-processor separately merges your output against the manual file, so never pre-merge manual entries.
 
 ## Hazards to filter
 
@@ -64,12 +92,14 @@ Each `<record>` is an object with these required fields:
 
 - `id`: SHA-1 of `source_url::date_iso`, first 12 hex chars. Compute it.
 - `date`: ISO 8601 with timezone. Toronto is `-04:00` in EDT (April-October).
-- `end_date`: ISO 8601 or `null`.
+- `end_date`: ISO 8601 for any event spanning more than one day, set to the last day. A two-day workshop is one record with `date` on day one and `end_date` on day two. `null` only for single-day events.
 - `title`: exact title as published. No editorial rewriting.
 - `venue`: venue name plus address when knowable.
-- `source_url`: canonical URL of the event detail page (preferred) or listing page.
+- `source_url`: the event's own detail-page URL. Follow through from any listing to the specific event page. Fall back to a listing page only when no per-event page exists, and never to a bare festival homepage when a dated event page exists.
 - `source_id`: the `id` from `sources.json` that this came from.
-- `type`: one of `lecture`, `screening`, `reading`, `artist-talk`, `panel`, `podcast-live`, `scholar-talk`, `philosophy-cafe`, `gathering`, `protest`, `other`.
+- `type`: the primary type, one of `lecture`, `screening`, `reading`, `artist-talk`, `panel`, `scholar-talk`, `philosophy-cafe`, `conference`, `workshop`, `symposium`, `colloquium`, `book-talk`, `book-launch`, `exhibition`, `site-specific-art`, `performance`, `festival-of-form`, `cultural-reproduction`, `gathering`, `protest`, `community`, `cfp`, `contest`, `podcast-live`, `other`. Pick the closest. This drives the event's colour.
+- `secondary_types`: array of additional types from the same set when the event is genuinely more than one. Empty array when it is a single type.
+- `age_band`: stated entrant or attendee age band or eligibility, or `null`. Examples: `Youth (13-18)`, `Grades 9-12`, `Undergraduate`, `All ages`.
 - `speaker_or_director`: named speaker(s) or `null`.
 - `attendance_confirmed`: boolean. Screenings: true only if director attendance is explicit in the listing. Lectures: true if speaker is named.
 - `confidence`: integer 0-100. 90+ = explicitly stated date/title/venue. 70-89 = inferred from context. Below 70 = do not include.
@@ -78,6 +108,8 @@ Each `<record>` is an object with these required fields:
 - `scraped_at`: ISO 8601 timestamp UTC, the moment of fetch.
 - `review_status`: `"auto-published"` for everything you produce.
 - `marginalia_url`: `null` for all new entries.
+- `parent_id`: the `id` of this event's umbrella festival, or `null`. Set on festival sub-events only.
+- `is_parent_festival`: boolean. True on a festival umbrella record, false otherwise.
 
 ## Citation discipline
 
@@ -86,7 +118,8 @@ Each `<record>` is an object with these required fields:
 ## Anti-fabrication rules
 
 - If a venue page is unreachable, log it in the JSON output as an empty result for that `source_id`. Do not invent events.
-- If a date is given as "TBA" or "date forthcoming," skip the entry.
+- If the **date** is "TBA" or "date forthcoming," skip the entry. A missing date is fatal; a missing speaker or venue is not.
+- Do not store the literal string "TBA" in `speaker_or_director` or `venue`. If either is unannounced, run one resolving search; if it stays unknown, set the field to `null` and keep `confidence` in the 70-to-79 band.
 - If the title is generic placeholder text ("Event title" or "Coming soon"), skip.
 - If a date has already passed, skip.
 

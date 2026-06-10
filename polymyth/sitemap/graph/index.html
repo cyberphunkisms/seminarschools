@@ -34,6 +34,8 @@
   --cat-about: #8A7A70;
   --cat-utility: #B0A099;
 }
+:root.dark, :root[data-theme="dark"]{--bg:#1A1410;--fg:#F3EADD;--fg-soft:#C8B6A6;--fg-fade:#9A8678;--accent:#E0857A;--rule:rgba(243,234,221,0.2);--rule-soft:rgba(243,234,221,0.08);}
+@media (prefers-color-scheme: dark){ :root:not(.light){--bg:#1A1410;--fg:#F3EADD;--fg-soft:#C8B6A6;--fg-fade:#9A8678;--accent:#E0857A;--rule:rgba(243,234,221,0.2);--rule-soft:rgba(243,234,221,0.08);} }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   background: var(--bg);

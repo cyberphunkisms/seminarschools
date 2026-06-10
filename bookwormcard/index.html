@@ -22,14 +22,14 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
 <style>
   :root{
-    --bg:#0a0e0a;
-    --fg:#33ff66;
-    --fg-dim:#1a8033;
-    --fg-darker:#0e4a1a;
-    --accent:#ffb000;
+    --bg:#08070d;
+    --fg:#ff3ee0;
+    --fg-dim:#b14fd8;
+    --fg-darker:#5b3a8c;
+    --accent:#8b5cf6;
     --danger:#ff4444;
-    --line:#143a1f;
-    --glow:0 0 6px rgba(51,255,102,0.6);
+    --line:#2a1d3f;
+    --glow:0 0 7px rgba(255,62,224,0.55);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{background:var(--bg);color:var(--fg);font-family:'VT323',monospace;font-size:20px;line-height:1.4;height:100vh;overflow:hidden}
@@ -107,7 +107,7 @@
   /* CRT subtle horizontal flicker */
   body::before{
     content:"";position:fixed;inset:0;pointer-events:none;z-index:4;
-    background:linear-gradient(to bottom, rgba(51,255,102,0.02) 0%, transparent 100%);
+    background:linear-gradient(to bottom, rgba(255,62,224,0.02) 0%, transparent 100%);
     animation:crt-flicker 8s ease-in-out infinite;
   }
   @keyframes crt-flicker{
@@ -257,7 +257,7 @@
   #chat::-webkit-scrollbar-thumb:hover,#card-preview::-webkit-scrollbar-thumb:hover{background:var(--fg-dim)}
 
   /* input area */
-  #input-area{position:relative;margin-top:1.2rem;flex-shrink:0;padding-bottom:3.5rem}
+  #input-area{position:relative;margin-top:1.2rem;flex-shrink:0;padding-bottom:5.5rem}
   #prompt-line{display:flex;align-items:flex-start;gap:0.4rem}
   .prompt-arrow{color:var(--fg);user-select:none;flex-shrink:0;padding-top:0.05rem}
   .prompt-arrow.thinking{animation:none;color:var(--fg-dim)}
@@ -271,7 +271,7 @@
   #placeholder-hint.cycle-pulse{animation:cycle-pulse 0.4s ease-out}
   @keyframes cycle-pulse{
     0%{color:var(--accent);text-shadow:0 0 8px rgba(255,176,0,0.7);transform:translateX(-2px)}
-    50%{color:var(--fg);text-shadow:0 0 4px rgba(51,255,102,0.5);transform:translateX(0)}
+    50%{color:var(--fg);text-shadow:0 0 4px rgba(255,62,224,0.5);transform:translateX(0)}
     100%{color:var(--fg-darker);text-shadow:none;transform:translateX(0)}
   }
   #word-count{
@@ -371,7 +371,7 @@
   .legend-toggle:hover,.legend-toggle.is-open{
     color:var(--accent);
     border-color:var(--accent);
-    background:rgba(51,255,102,0.08);
+    background:rgba(255,62,224,0.08);
   }
   .legend-panel{
     margin-top:0.6rem;
@@ -526,10 +526,10 @@
     cursor:pointer;
     letter-spacing:1px;
     text-transform:lowercase;
-    -webkit-tap-highlight-color:rgba(51,255,102,0.15);
+    -webkit-tap-highlight-color:rgba(255,62,224,0.15);
   }
   #touch-bar .tb-btn:active{
-    background:rgba(51,255,102,0.18);
+    background:rgba(255,62,224,0.18);
     color:var(--accent);
     border-color:var(--accent);
   }
@@ -561,7 +561,7 @@
   }
   #touch-bar .tb-enter{
     flex:0 0 100%;
-    background:rgba(51,255,102,0.08);
+    background:rgba(255,62,224,0.08);
     color:var(--accent);
     border-color:var(--accent);
   }
@@ -698,7 +698,7 @@
   #animal-cinematic.show{display:flex; animation:cinematic-fade 1.4s ease-out forwards}
   #animal-cinematic .creature{
     font-size:12rem; line-height:1;
-    text-shadow:0 0 40px rgba(51,255,102,0.8);
+    text-shadow:0 0 40px rgba(255,62,224,0.8);
     animation:creature-emerge 1.4s cubic-bezier(0.34, 1.56, 0.64, 1)
   }
   @keyframes cinematic-fade{
@@ -737,9 +737,9 @@
      visible without drowning out the louder trait chips. */
   #chat .stat-award-floor{
     color:var(--fg-dim);
-    text-shadow:0 0 6px rgba(51,255,102,0.5);
+    text-shadow:0 0 6px rgba(255,62,224,0.5);
     border-color:var(--fg-darker);
-    background:rgba(51,255,102,0.06);
+    background:rgba(255,62,224,0.06);
     font-size:0.95rem;
     letter-spacing:1px;
   }
@@ -807,8 +807,9 @@
 </style>
 </head>
 <body class="bypass-mode">
+<style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:none;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 <!-- bb* QR logo -->
-<a href="/bookwormcard/" title="Bookwormcard. Scan with phone or click to open." aria-label="Bookwormburrows ouroboros QR. Links to bookwormcard." style="position:fixed;top:20px;right:20px;width:72px;height:72px;z-index:9999;display:block;background:transparent;border:none;line-height:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);border-radius:6px;overflow:hidden;"><img src="/bookwormcard/qr-ouroboros-indra.png" alt="bb* ouroboros QR logo" style="width:100%;height:100%;display:block;"></a>
+<a href="/bookwormcard/" title="Bookwormcard. Scan with phone or click to open." aria-label="Bookwormburrows ouroboros QR. Links to bookwormcard." style="position:fixed;top:20px;right:20px;width:72px;height:72px;z-index:9999;display:none;background:transparent;border:none;line-height:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);border-radius:6px;overflow:hidden;"><img src="/bookwormcard/qr-ouroboros-indra.png" alt="bb* ouroboros QR logo" style="width:100%;height:100%;display:block;"></a>
 
 
 <!-- ============================================================
@@ -831,7 +832,7 @@
 <a href="/bookwormcard/about/" class="bypass-help">[ what is this? ]</a>
 
 <!-- HIDDEN STATIC FORM FOR NETLIFY DETECTION -->
-<form name="bookwormcard" data-netlify="true" netlify-honeypot="bot-field" hidden class="nl-form">
+<form name="bookwormcard" hidden class="nl-form" aria-hidden="true">
   <input type="text" name="bot-field">
   <input type="text" name="handle">
   <input type="email" name="email">
@@ -878,7 +879,7 @@
 </form>
 
 <!-- ACTUAL POSTING FORM (hidden, populated and submitted by JS) -->
-<form id="post-form" name="bookwormcard" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/bookwormcard/success/" class="nl-form">
+<form id="post-form" name="bookwormcard" class="nl-form" aria-hidden="true">
   <input type="hidden" name="form-name" value="bookwormcard">
   <input type="text" name="bot-field">
   <input type="hidden" name="handle">
@@ -1306,6 +1307,13 @@ function awardStats(input, phaseLabel){
   // The character ends up with a quantitative profile of how
   // strongly they read on each axis — COMMUNAL: 7, GREGARIOUS: 4,
   // and so on — rather than a flat tally of which stats they touched.
+  // MINIMALIST fires on any answer of forty characters or fewer, which
+  // taxes the terminal's native brevity \u2014 observed at +36 on one card.
+  // Cap its total contribution at one fire (+2) per card. Filtered BEFORE
+  // apply so the tamagotchi chips match what actually lands.
+  r.statsHit = r.statsHit.filter(function(h){
+    return !(h.stat === 'MINIMALIST' && (data.stats['MINIMALIST'] || 0) >= 2);
+  });
   r.statsHit.forEach(function(h){
     var w = h.weight || 1;
     data.stats[h.stat] = (data.stats[h.stat] || 0) + w;
@@ -1825,11 +1833,40 @@ var BB_SAVE_MARKER_START = '<<<BB_SAVE_V1_START>>>';
 var BB_SAVE_MARKER_END = '<<<BB_SAVE_V1_END>>>';
 function extractSaveFromText(text){
   if(!text || typeof text !== 'string') return null;
+
+  // Strategy A (PDF / base64): strip ALL whitespace, then locate the
+  // markers in the whitespace-free string. PDF.js injects spaces between
+  // text runs (including mid-token and inside the markers themselves), so
+  // the markers and the base64 body are only reliably found after stripping.
+  // Base64 carries no meaningful whitespace, so stripping is lossless.
+  var stripped = text.replace(/\s+/g, '');
+  var sStart = stripped.indexOf('<<<BB_SAVE_V1_START>>>');
+  if(sStart >= 0){
+    var sEnd = stripped.indexOf('<<<BB_SAVE_V1_END>>>', sStart);
+    if(sEnd >= 0){
+      var body = stripped.slice(sStart + '<<<BB_SAVE_V1_START>>>'.length, sEnd);
+      if(body.indexOf('B64:') === 0){
+        try {
+          var json = decodeURIComponent(escape(atob(body.slice(4))));
+          return JSON.parse(json);
+        } catch(e){ /* fall through to raw-JSON strategy */ }
+      }
+    }
+  }
+
+  // Strategy B (legacy / .html / .txt with un-mangled raw JSON): do NOT
+  // strip internal whitespace, because save-string values can contain
+  // spaces (e.g. a quality like "his niceness").
   var startIdx = text.indexOf(BB_SAVE_MARKER_START);
   if(startIdx < 0) return null;
   var endIdx = text.indexOf(BB_SAVE_MARKER_END, startIdx);
   if(endIdx < 0) return null;
   var jsonStr = text.slice(startIdx + BB_SAVE_MARKER_START.length, endIdx).trim();
+  if(jsonStr.indexOf('B64:') === 0){
+    try {
+      return JSON.parse(decodeURIComponent(escape(atob(jsonStr.slice(4).replace(/\s+/g,'')))));
+    } catch(e){ return null; }
+  }
   try {
     return JSON.parse(jsonStr);
   } catch(e){
@@ -1944,6 +1981,11 @@ var SAVE_KEY = 'bb_wormcard_checkpoint_v1';
 function saveCheckpoint(){
   try {
     if (typeof assignCardId === 'function') assignCardId();
+    // Carry the computed horoscope readings inside data so the print
+    // template (and the pdf save blob) can fill the ten-tradition grid.
+    try {
+      if (horoscope && horoscope.readings) data.horoscope = horoscope.readings;
+    } catch(e){}
     var payload = {
       data: data,
       currentState: currentState,
@@ -3127,6 +3169,17 @@ var STATES = {
       showAnimalCycleLine('press ← or → to browse the animals.');
     },
     advance: function(input){
+      // UNIVERSAL SKIP (Saul-directed 2026-06-05): every question is
+      // skippable. Skipping leaves the field blank; the horoscope and
+      // completion gates degrade gracefully on blanks.
+      if(/^skip$/i.test((input||'').trim())){
+        data.animal = '';
+        appendLine('<span class="answer quiet">skipped</span>',{gap:true});
+        renderCardPreview();
+        transitionTo('year');
+        return;
+      }
+
       // Players can also type the animal slug directly to jump to it
       // (kept as an escape hatch for kids who know what they want).
       var slug = (input || '').toLowerCase().trim();
@@ -3155,6 +3208,17 @@ var STATES = {
       setPrompt('letters numbers _ -  no spaces');
     },
     advance: function(input){
+      // UNIVERSAL SKIP (Saul-directed 2026-06-05): every question is
+      // skippable. Skipping leaves the field blank; the horoscope and
+      // completion gates degrade gracefully on blanks.
+      if(/^skip$/i.test((input||'').trim())){
+        data.handle = '';
+        appendLine('<span class="answer quiet">skipped</span>',{gap:true});
+        renderCardPreview();
+        transitionTo('email');
+        return;
+      }
+
       if(!input){showError('<span class="err">handle required.</span>');return;}
       if(!/^[A-Za-z0-9_-]+$/.test(input)){
         showError('<span class="err">letters numbers _ - only.</span>');return;
@@ -3172,12 +3236,18 @@ var STATES = {
   email: {
     enter: function(){
       appendLine('where can i reach you?', {gap:false, question:true});
-      setPrompt('email');
+      appendLine('<span class="quiet">your email, optional. it rides inside the saved card and goes nowhere else. type skip to leave it off.</span>', {gap:false, instant:true});
+      setPrompt('email · skip');
     },
     advance: function(input){
-      if(!input){showError('<span class="err">email required.</span>');return;}
+      if(!input || input.toLowerCase()==='skip'){
+        appendLine('<span class="answer quiet">skipped</span>', {gap:false});
+        renderCardPreview();
+        transitionTo('wormhole-1');
+        return;
+      }
       if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(input)){
-        showError('<span class="err">that is not a valid email.</span>');return;
+        showError('<span class="err">that is not a valid email. or type skip.</span>');return;
       }
       data.email = input;
       appendLine('<span class="answer">'+escapeHtml(input)+'</span>', {gap:false});
@@ -3199,6 +3269,18 @@ var STATES = {
       setPrompt('1920 - 2030');
     },
     advance: function(input){
+      // UNIVERSAL SKIP (Saul-directed 2026-06-05): every question is
+      // skippable. Skipping leaves the field blank; the horoscope and
+      // completion gates degrade gracefully on blanks.
+      if(/^skip$/i.test((input||'').trim())){
+        data.birthYear = '';
+        appendLine('<span class="answer quiet">skipped</span>',{gap:true});
+        recalcHoroscope();
+        renderCardPreview();
+        transitionTo('month');
+        return;
+      }
+
       var y = parseInt(input,10);
       if(!y || y<1920 || y>2030){
         showError('<span class="err">year between 1920 and 2030.</span>');return;
@@ -3223,6 +3305,18 @@ var STATES = {
       setPrompt('type to filter · arrows · enter');
     },
     advance: function(input){
+      // UNIVERSAL SKIP (Saul-directed 2026-06-05): every question is
+      // skippable. Skipping leaves the field blank; the horoscope and
+      // completion gates degrade gracefully on blanks.
+      if(/^skip$/i.test((input||'').trim())){
+        data.birthMonth = '';
+        appendLine('<span class="answer quiet">skipped</span>',{gap:true});
+        recalcHoroscope();
+        renderCardPreview();
+        transitionTo('day');
+        return;
+      }
+
       var m = parseInt(input,10);
       if(!m || m<1 || m>12){showError('<span class="err">pick a month.</span>');return;}
       data.birthMonth = m;
@@ -3238,6 +3332,18 @@ var STATES = {
       setPrompt('1 - 31');
     },
     advance: function(input){
+      // UNIVERSAL SKIP (Saul-directed 2026-06-05): every question is
+      // skippable. Skipping leaves the field blank; the horoscope and
+      // completion gates degrade gracefully on blanks.
+      if(/^skip$/i.test((input||'').trim())){
+        data.birthDay = '';
+        appendLine('<span class="answer quiet">skipped</span>',{gap:true});
+        recalcHoroscope();
+        renderCardPreview();
+        transitionTo('hour');
+        return;
+      }
+
       var d = parseInt(input,10);
       if(!d || d<1 || d>31){showError('<span class="err">day between 1 and 31.</span>');return;}
       data.birthDay = d;
@@ -3446,6 +3552,17 @@ var STATES = {
       setPrompt('the specific quality');
     },
     advance: function(input){
+      // skip / done / n at the quality stage = abandon this figure
+      // (nothing is smashed) and return to smash-name, where skip
+      // exits the loop. Before this branch existed, the word skip
+      // passed the validators and was recorded as the taken quality,
+      // and done sealed the whole card mid-figure.
+      if(/^(skip|done|n)$/i.test((input||'').trim())){
+        appendLine('<span class="answer quiet">skipped \u2014 nothing taken from '+escapeHtml(smashTemp.name)+'.</span>',{gap:true});
+        smashTemp = {name:'',quality:'',archetype:null};
+        transitionTo('smash-name');
+        return;
+      }
       if(isGlobalEscape(input)){ sealAndReview(input); return; }
       if(!input){showError('<span class="err">name the quality you would take.</span>');return;}
       if(input.length < 4){
@@ -3681,7 +3798,7 @@ var STATES = {
         }
       }
 
-      appendLine('press <span class="system">enter</span> to submit.', {gap:false});
+      appendLine('press <span class="system">enter</span> for your pdf.', {gap:false});
       appendLine('your wormcard is one file: a <span class="system">pdf</span>. it carries every paragraph you wrote, prints natively, doubles as your save file, and reads cleanly when you drop it into any AI chat to play with this character.', {gap:true, instant:true});
       // Mobile players see the trial-mode banner at the top of the
       // page already. Repeat the warning here so the player who's
@@ -3704,7 +3821,9 @@ var STATES = {
     advance: function(input){
       var cmd = input.toLowerCase();
       if(cmd==='' || cmd==='enter' || cmd==='submit'){
-        transitionTo('submitting');
+        // PURE PUNCHCARD: finishing prints the card to PDF. No server submit.
+        printCard();
+        appendLine('<span class="system">opening your wormcard. choose save-as-pdf in the print dialog. the pdf is your save file too.</span>', {gap:true, instant:true});
       } else if(cmd==='edit'){
         appendLine('<span class="system">type the name of the field to revise:</span> <span class="quiet">edit one field, return to the seal.</span>', {gap:true, instant:true});
         appendLine('<span class="quiet">identity:</span> handle · email · animal', {gap:false, instant:true});
@@ -4308,7 +4427,7 @@ function submitForm(){
   // any skips.
   form.querySelector('[name=hegeliane-full]').value = isFullyFilled() ? 'true' : 'false';
   clearCheckpoint();
-  form.submit();
+  printCard();
 }
 
 // ============================================================
@@ -4383,9 +4502,9 @@ function buildQualityHistorySummary(){
   window.addEventListener('resize', resize);
   function draw(){
     if(document.hidden) return;
-    ctx.fillStyle = 'rgba(10,14,10,0.06)';
+    ctx.fillStyle = 'rgba(8,7,13,0.06)';
     ctx.fillRect(0,0,w,h);
-    ctx.fillStyle = '#33ff66';
+    ctx.fillStyle = '#ff3ee0';
     ctx.font = '14px monospace';
     for(var i=0;i<drops.length;i++){
       var c = chars[Math.floor(Math.random()*chars.length)];
@@ -4713,5 +4832,6 @@ document.addEventListener('click', function(e){
 
 })();
 </script>
+<script src="/js/theme.js" defer></script>
 </body>
 </html>

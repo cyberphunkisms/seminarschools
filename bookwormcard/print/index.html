@@ -51,16 +51,14 @@
   /* ----- Page chassis ----- */
   .page{
     width:8.5in;
-    height:10.3in;
+    min-height:10.3in;
     box-sizing:border-box;
     margin:0 auto;
     padding:0.1in 0.2in 0.55in 0.2in;
     background-color:var(--paper);
     page-break-after:always;
-    page-break-inside:avoid;
     position:relative;
     border:3px solid var(--ink);
-    overflow:hidden;
   }
   .page:last-child{page-break-after:auto}
 
@@ -1143,24 +1141,18 @@
     </div>
     <table class="birth-grid horoscope-grid">
       <tr>
-        <td style="width:50%"><div class="lbl">Chinese zodiac</div><span class="ruled-line"></span></td>
-        <td><div class="lbl">Tibetan element-animal</div><span class="ruled-line"></span></td>
+        <td style="width:20%;vertical-align:top"><div class="lbl">Chinese zodiac</div><span class="ruled-line" data-fill="hz_chinese"></span></td>
+        <td style="width:20%;vertical-align:top"><div class="lbl">Western tropical</div><span class="ruled-line" data-fill="hz_western"></span></td>
+        <td style="width:20%;vertical-align:top"><div class="lbl">Hellenistic decanic</div><span class="ruled-line" data-fill="hz_hellenistic"></span></td>
+        <td style="width:20%;vertical-align:top"><div class="lbl">Mesopotamian</div><span class="ruled-line" data-fill="hz_mesopotamian"></span></td>
+        <td style="width:20%;vertical-align:top"><div class="lbl">Mayan tzolkin</div><span class="ruled-line" data-fill="hz_mayan"></span></td>
       </tr>
       <tr>
-        <td><div class="lbl">Western tropical</div><span class="ruled-line"></span></td>
-        <td><div class="lbl">Celtic tree</div><span class="ruled-line"></span></td>
-      </tr>
-      <tr>
-        <td><div class="lbl">Hellenistic decanic</div><span class="ruled-line"></span></td>
-        <td><div class="lbl">Egyptian decanic</div><span class="ruled-line"></span></td>
-      </tr>
-      <tr>
-        <td><div class="lbl">Mesopotamian</div><span class="ruled-line"></span></td>
-        <td><div class="lbl">Burmese mahabote</div><span class="ruled-line"></span></td>
-      </tr>
-      <tr>
-        <td><div class="lbl">Mayan tzolkin</div><span class="ruled-line"></span></td>
-        <td><div class="lbl">Aztec tonalpohualli</div><span class="ruled-line"></span></td>
+        <td style="vertical-align:top"><div class="lbl">Tibetan element-animal</div><span class="ruled-line" data-fill="hz_tibetan"></span></td>
+        <td style="vertical-align:top"><div class="lbl">Celtic tree</div><span class="ruled-line" data-fill="hz_celtic"></span></td>
+        <td style="vertical-align:top"><div class="lbl">Egyptian decanic</div><span class="ruled-line" data-fill="hz_egyptian"></span></td>
+        <td style="vertical-align:top"><div class="lbl">Burmese mahabote</div><span class="ruled-line" data-fill="hz_burmese"></span></td>
+        <td style="vertical-align:top"><div class="lbl">Aztec tonalpohualli</div><span class="ruled-line" data-fill="hz_aztec"></span></td>
       </tr>
     </table>
   </div>
@@ -1263,7 +1255,7 @@
       <tr><td class="lvl">Intermediate</td><td>Two sentences: the choice, and the moment when they realized the choice was permanent.</td></tr>
       <tr class="adv"><td class="lvl">Advanced</td><td>The choice as a question: if the same situation happened again, would they make the same call? Why is the answer not "yes" automatically?</td></tr>
     </table>
-    <span class="ruled-line"></span>
+    <span class="ruled-line ruled-multi" data-fill="pivotalEvent"></span>
     <span class="ruled-line"></span>
     <span class="ruled-line"></span>
   </div>
@@ -1271,7 +1263,7 @@
   <div class="stat-block">
     <div class="stat-label">THE UNSAID</div>
     <div class="gloss">One thing this character will never say out loud. They might think it. They will not speak it. Write the line anyway. Other bookworms read this and know what the character is carrying around silence-wrapped.</div>
-    <span class="ruled-line"></span>
+    <span class="ruled-line ruled-multi" data-fill="secret"></span>
     <span class="ruled-line"></span>
   </div>
 
@@ -1583,6 +1575,26 @@
 
 
   <div class="card-footer"><span class="footer-left">Bookwormburrows &middot; Series I</span><span class="footer-mid">Personality</span><span class="footer-right">III &middot; 3 / 10</span></div>
+<div class="question" style="margin-top:0.55em">
+  <div class="ask">A thing you do that no one taught you.</div>
+  <span class="ruled-line ruled-multi" data-fill="trait_unlearned"></span>
+  <span class="ruled-line"></span>
+</div>
+<div class="question" style="margin-top:0.55em">
+  <div class="ask">A trait you saw in someone else and decided never to carry.</div>
+  <span class="ruled-line ruled-multi" data-fill="trait_avoided"></span>
+  <span class="ruled-line"></span>
+</div>
+<div class="question" style="margin-top:0.55em">
+  <div class="ask">A trait only now surfacing, that you do not have a name for yet.</div>
+  <span class="ruled-line ruled-multi" data-fill="trait_surfacing"></span>
+  <span class="ruled-line"></span>
+</div>
+<div class="question" style="margin-top:0.55em">
+  <div class="ask">Where the thinking actually happens.</div>
+  <span class="ruled-line ruled-multi" data-fill="cognition"></span>
+  <span class="ruled-line"></span>
+</div>
 </div>
 
 <!-- ============================================================
@@ -1692,6 +1704,21 @@
 
 
   <div class="card-footer"><span class="footer-left">Bookwormburrows &middot; Series I</span><span class="footer-mid">Beliefs</span><span class="footer-right">IV &middot; 4 / 10</span></div>
+<div class="question" style="margin-top:0.55em">
+  <div class="ask">The conviction that would lose them friends, said anyway.</div>
+  <span class="ruled-line ruled-multi" data-fill="belief_loud"></span>
+  <span class="ruled-line"></span>
+</div>
+<div class="question" style="margin-top:0.55em">
+  <div class="ask">A belief held privately, no longer defended out loud.</div>
+  <span class="ruled-line ruled-multi" data-fill="belief_quiet"></span>
+  <span class="ruled-line"></span>
+</div>
+<div class="question" style="margin-top:0.55em">
+  <div class="ask">A belief they suspect is wrong but have not let go of.</div>
+  <span class="ruled-line ruled-multi" data-fill="belief_doubted"></span>
+  <span class="ruled-line"></span>
+</div>
 </div>
 
 <!-- ============================================================
@@ -1717,7 +1744,7 @@
   <div class="dilemma-block">
     <div class="label">DILEMMA I &middot; THE FRIEND</div>
     <div class="scene">Your character's close friend is doing something that is harming themselves but not anyone else. The friend has not asked for advice. Does your character speak up, or trust the friend to figure it out?</div>
-    <span class="ruled-line"></span>
+    <span class="ruled-line ruled-multi" data-fill="dilemma_friend"></span>
     <span class="ruled-line"></span>
     <span class="ruled-line"></span>
     <span class="ruled-line"></span>
@@ -1729,7 +1756,7 @@
   <div class="dilemma-block">
     <div class="label">DILEMMA II &middot; THE STRANGER</div>
     <div class="scene">A stranger asks your character for shelter for the night. Your character has no reason to trust them, but no reason to suspect them either. Do they let the stranger in?</div>
-    <span class="ruled-line"></span>
+    <span class="ruled-line ruled-multi" data-fill="dilemma_stranger"></span>
     <span class="ruled-line"></span>
     <span class="ruled-line"></span>
     <span class="ruled-line"></span>
@@ -1741,7 +1768,7 @@
   <div class="dilemma-block">
     <div class="label">DILEMMA III &middot; THE WITNESS</div>
     <div class="scene">Your character sees something wrong happening, and could stop it, but stopping it would expose something secret about themselves. What do they do?</div>
-    <span class="ruled-line"></span>
+    <span class="ruled-line ruled-multi" data-fill="dilemma_witness"></span>
     <span class="ruled-line"></span>
     <span class="ruled-line"></span>
     <span class="ruled-line"></span>
@@ -1809,7 +1836,7 @@
             <tr><td class="lvl">Intermediate</td><td>Tell it as a small story. The shaping moment, the people in the room, what was won and what was lost.</td></tr>
             <tr class="adv"><td class="lvl">Advanced</td><td>Tell it as a genealogy. Your character is the inheritor of which lines? What are they passing on, and what are they refusing to pass on?</td></tr>
           </table>
-          <span class="ruled-line"></span>
+          <span class="ruled-line ruled-multi" data-fill="backstory"></span>
           <span class="ruled-line"></span>
           <span class="ruled-line"></span>
           <span class="ruled-line"></span>
@@ -1851,7 +1878,7 @@
             <tr><td class="lvl">Intermediate</td><td>The one they would step in front of. The one they would lose other parts of their life to keep.</td></tr>
             <tr class="adv"><td class="lvl">Advanced</td><td>If your character would protect nothing and no one, why? What did the world teach them to refuse this?</td></tr>
           </table>
-          <span class="ruled-line"></span>
+          <span class="ruled-line ruled-multi" data-fill="bond"></span>
           <span class="ruled-line"></span>
           <span class="ruled-line"></span>
           <span class="ruled-line"></span>
@@ -1935,7 +1962,7 @@
             <tr><td class="lvl">Intermediate</td><td>The fear they hide because admitting it feels childish or shameful.</td></tr>
             <tr class="adv"><td class="lvl">Advanced</td><td>If your character is afraid of nothing, what fear are they covering with that claim?</td></tr>
           </table>
-          <span class="ruled-line"></span>
+          <span class="ruled-line ruled-multi" data-fill="fear"></span>
           <span class="ruled-line"></span>
           <span class="ruled-line"></span>
           <span class="ruled-line"></span>
@@ -1985,7 +2012,8 @@
         <div class="question" style="margin:0">
           <div class="ask">What does your character know how to do, that they could teach someone else?</div>
           <div class="gloss">Even something small. A skill, a craft, a way of seeing, a way of waiting.</div>
-          <span class="ruled-line"></span>
+          <span class="ruled-line ruled-multi" data-fill="teach_short"></span>
+          <span class="ruled-line ruled-multi" data-fill="teach_long"></span>
           <span class="ruled-line"></span>
           <span class="ruled-line"></span>
           <span class="ruled-line"></span>
@@ -2164,7 +2192,7 @@
   <div class="question">
     <div class="ask">The residue. After the collision, what survives that is yours alone?</div>
     <div class="tier-strip"><div><span class="lvl">Beginner</span> A quality that is yours, not theirs.</div><div><span class="lvl">Intermediate</span> A quality that came from the collision itself, that none of them had alone.</div><div class="adv"><span class="lvl">Advanced</span> The one sentence that names your character.</div></div>
-    <span class="ruled-line"></span>
+    <span class="ruled-line ruled-multi" data-fill="smashSynthesis"></span>
     <span class="ruled-line"></span>
     <span class="ruled-line"></span>
   </div>
@@ -2213,6 +2241,10 @@
   <div class="caption">
     Page 1 asked what their face looks like at the start. After the seminars, the smashes, the bonds, draw them again. The face changes when the character changes.
   </div>
+<div class="question" style="margin:0.4em 0 0.45em">
+  <div class="ask">What their face does after the work.</div>
+  <span class="ruled-line ruled-multi" data-fill="face_after"></span>
+</div>
 
   <div class="draw-frame final-portrait">
     <div class="panel-label">Portrait, after the work</div>
@@ -2277,107 +2309,9 @@
   <div class="card-footer"><span class="footer-left">Bookwormburrows &middot; Series I</span><span class="footer-mid">Appendix &middot; Adjective Profile</span><span class="footer-right">X &middot; A1</span></div>
 </div>
 
-<!-- ============================================================
-     PAGE A2 — DEEP QUESTIONS (chat-only data)
-     Six sections from the chat's deeper arc.
-     ============================================================ -->
-<div class="page" id="page-deep-questions" style="display:none">
-  <div class="card-header">
-    <table>
-      <tr>
-        <td class="series">APPENDIX &middot; DEEP QUESTIONS</td>
-        <td class="saul">Bookwormburrows by Saul Nassau</td>
-        <td class="pagenum">seminarschools.com/bookwormcard/ &middot; /bookwormcard/</td>
-      </tr>
-    </table>
-  </div>
-
-  <h2>Personality Traits (chat)</h2>
-  <div class="question">
-    <div class="ask">A thing you do that no one taught you.</div>
-    <span class="ruled-line" data-fill="trait_unlearned"></span>
-  </div>
-  <div class="question">
-    <div class="ask">A thing you avoid that you cannot explain.</div>
-    <span class="ruled-line" data-fill="trait_avoided"></span>
-  </div>
-  <div class="question">
-    <div class="ask">When the polish goes, what surfaces.</div>
-    <span class="ruled-line" data-fill="trait_surfacing"></span>
-  </div>
-
-  <h2>Cognitive Diagram (chat)</h2>
-  <div class="question">
-    <div class="ask">Where the thinking actually happens.</div>
-    <span class="ruled-line" data-fill="cognition"></span>
-  </div>
-
-  <h2>What They Believe (chat)</h2>
-  <div class="question">
-    <div class="ask">The conviction that would lose them friends.</div>
-    <span class="ruled-line" data-fill="belief_loud"></span>
-  </div>
-  <div class="question">
-    <div class="ask">A belief held privately, no longer defended out loud.</div>
-    <span class="ruled-line" data-fill="belief_quiet"></span>
-  </div>
-  <div class="question">
-    <div class="ask">A belief suspected to be wrong but not let go of.</div>
-    <span class="ruled-line" data-fill="belief_doubted"></span>
-  </div>
-
-  <div class="card-footer"><span class="footer-left">Bookwormburrows &middot; Series I</span><span class="footer-mid">Appendix &middot; Deep Questions I</span><span class="footer-right">X &middot; A2</span></div>
-</div>
-
-<!-- ============================================================
-     PAGE A3 — DILEMMAS, TEACHING, FACE AFTER
-     ============================================================ -->
-<div class="page" id="page-deep-questions-2" style="display:none">
-  <div class="card-header">
-    <table>
-      <tr>
-        <td class="series">APPENDIX &middot; DEEP QUESTIONS II</td>
-        <td class="saul">Bookwormburrows by Saul Nassau</td>
-        <td class="pagenum">seminarschools.com/bookwormcard/ &middot; /bookwormcard/</td>
-      </tr>
-    </table>
-  </div>
-
-  <h2>Three Dilemmas (chat)</h2>
-  <div class="question">
-    <div class="ask">The Friend. Harm with no invitation in.</div>
-    <span class="ruled-line ruled-multi" data-fill="dilemma_friend"></span>
-  </div>
-  <div class="question">
-    <div class="ask">The Stranger. Shelter, no signs to read.</div>
-    <span class="ruled-line ruled-multi" data-fill="dilemma_stranger"></span>
-  </div>
-  <div class="question">
-    <div class="ask">The Witness. The wrong, and the cost of stopping it.</div>
-    <span class="ruled-line ruled-multi" data-fill="dilemma_witness"></span>
-  </div>
-
-  <h2>What They Could Teach (chat)</h2>
-  <div class="question">
-    <div class="ask">Something portable. Could teach a stranger in ten minutes.</div>
-    <span class="ruled-line" data-fill="teach_short"></span>
-  </div>
-  <div class="question">
-    <div class="ask">Something only transmittable through time.</div>
-    <span class="ruled-line" data-fill="teach_long"></span>
-  </div>
-
-  <h2>The Face After (chat)</h2>
-  <div class="question">
-    <div class="ask">The self the card is sealing in.</div>
-    <span class="ruled-line ruled-multi" data-fill="face_after"></span>
-  </div>
-
-  <div class="card-footer"><span class="footer-left">Bookwormburrows &middot; Series I</span><span class="footer-mid">Appendix &middot; Deep Questions II</span><span class="footer-right">X &middot; A3</span></div>
-</div>
 
 
-<script>
+  <script>
 /* ============================================================
    bookwormcard integration · reads from bb app localStorage
    ============================================================ */
@@ -2459,6 +2393,12 @@
       face_after: data.face_after || '',
       smashSynthesis: data.smashSynthesis || ''
     };
+
+    // Horoscope readings travel inside data.horoscope (creator writes them
+    // at every checkpoint). Each reading: { tradition, sign, key }.
+    (data.horoscope || []).forEach(function(r){
+      if(r && r.tradition && r.sign) map['hz_' + r.tradition] = r.sign;
+    });
 
     document.querySelectorAll('.ruled-line[data-fill]').forEach(function(el){
       var k = el.getAttribute('data-fill');
@@ -2861,7 +2801,15 @@
       'pointer-events:none;user-select:text';
     // The markers below MUST stay verbatim. The bb chat scans for these
     // when a PDF is dropped back in.
-    holder.textContent = '<<<BB_SAVE_V1_START>>>' + raw + '<<<BB_SAVE_V1_END>>>';
+    // Base64-encode the payload so it survives PDF text extraction. A
+    // browser-printed PDF compresses the marker block (raw byte-scan misses
+    // it) and PDF.js rejoins wrapped text runs with spaces injected mid-token,
+    // which broke a raw-JSON parse. Base64 is whitespace-immune: the reader
+    // strips all whitespace before decoding. Markers stay verbatim.
+    var b64;
+    try { b64 = btoa(unescape(encodeURIComponent(raw))); }
+    catch(e){ b64 = ''; }
+    holder.textContent = '<<<BB_SAVE_V1_START>>>B64:' + b64 + '<<<BB_SAVE_V1_END>>>';
     document.body.appendChild(holder);
   }
 

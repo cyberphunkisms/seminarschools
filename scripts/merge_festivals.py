@@ -279,6 +279,7 @@ def write_rss(records):
         )
     feed = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<?xml-stylesheet type="text/xsl" href="/polymythseminars/feed.xsl"?>\n'
         '<rss version="2.0"><channel>'
         '<title>Seminar Schools — Toronto Festivals</title>'
         '<link>https://seminarschools.com/festivals/</link>'

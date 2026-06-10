@@ -40,6 +40,8 @@
   --han-tc:'Noto Serif TC',serif;
   --mono:'JetBrains Mono',monospace;
 }
+:root.dark, :root[data-theme="dark"]{--paper:#1A2014;--paper-deep:#242C1C;--ink:#E8DEC7;--ink-soft:#B8AC8E;--silk:#5C5340;--silk-pale:#3A3528;--accent:#D4A076;--rule:#5A5240;--shadow:rgba(0,0,0,0.4);}
+@media (prefers-color-scheme: dark){ :root:not(.light){--paper:#1A2014;--paper-deep:#242C1C;--ink:#E8DEC7;--ink-soft:#B8AC8E;--silk:#5C5340;--silk-pale:#3A3528;--accent:#D4A076;--rule:#5A5240;--shadow:rgba(0,0,0,0.4);} }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{
   background:var(--paper);
@@ -160,6 +162,7 @@ p{margin-bottom:1.25rem;color:var(--ink-soft);}
 <link rel="stylesheet" href="/css/mobile-overlay.css">
 </head>
 <body>
+<style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 <main>
 <div class="wrap">
   <span class="checkmark">✓</span>
@@ -178,11 +181,11 @@ p{margin-bottom:1.25rem;color:var(--ink-soft);}
     <h2>Not redirecting?</h2>
     <p>If the page doesn't move automatically, click the link below to schedule your session:</p>
     <p><a href="#" id="manual-link">Open the booking calendar &rarr;</a></p>
-    <p style="font-size:0.92rem;margin-top:1rem;">If you run into any trouble, text or call <a href="tel:+19423804606">942-380-4606</a> and your slot will be reserved manually.</p>
+    <p style="font-size:0.92rem;margin-top:1rem;">If you run into any trouble, text or call <a href="tel:+14167710382">416-771-0382</a> and your slot will be reserved manually.</p>
   </div>
 
   <div class="colophon">
-    <p>嫘祖學院 · Leizu Academy · <a href="/leizu">Back to curriculum</a></p>
+    <p>嫲祖學院 · Leizu Academy · A practice within <a href="/">Seminar Schools</a> · <a href="/leizu/teach">Teach at Leizu</a> · <a href="/teacherresources/">Teacher Resources</a> · <a href="/leizu">Back to curriculum</a> · <a href="mailto:saulnassau@protonmail.com">Contact</a></p>
   </div>
 </div>
 
@@ -258,5 +261,6 @@ function buildAndForward(){
 
 document.addEventListener('DOMContentLoaded', buildAndForward);
 </script>
+<script src="/js/theme.js" defer></script>
 </body>
 </html>

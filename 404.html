@@ -20,6 +20,8 @@
   --accent: #7a4828;
   --bg: #EBE5D0;
 }
+:root.dark, :root[data-theme="dark"]{--bg:#1A1410;--fg:#EDE6DA;--fg-soft:#C8B6A6;--fg-fade:#9A8678;--accent:#D8A574;}
+@media (prefers-color-scheme: dark){ :root:not(.light){--bg:#1A1410;--fg:#EDE6DA;--fg-soft:#C8B6A6;--fg-fade:#9A8678;--accent:#D8A574;} }
 .notfound-wrap {
   min-height: 70vh;
   display: flex;

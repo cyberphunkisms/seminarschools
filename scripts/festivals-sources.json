@@ -1,6 +1,6 @@
 {
   "$schema_note": "Festival roster for /scripts/festivals-prompt.md. Two-class architecture: discovery (aggregators used as candidate-list scaffolding, never cited as source_url) and primary (festival's own official site, citation target). Read by Claude headless harvest weekly. Quantity-is-quality: agent should crawl every discovery source for candidates, then verify and extract from primary sites.",
-  "$updated": "2026-05-26",
+  "$updated": "2026-06-09",
   "$architecture": "Two-pass scrape-within-scrape. Pass 1: read every discovery source, build candidate list of festival names + provisional date windows + official URLs. Discard discovery entries after this pass. Pass 2: for each candidate, fetch its primary official site, confirm date, extract program, build record with primary URL as source_url. Drop candidates the primary site does not confirm.",
   "$audit_rule": "No record's source_url may match a discovery hostname. merge_festivals.py enforces this as defense-in-depth.",
   "discovery_aggregators": [
@@ -78,6 +78,18 @@
       "name": "City of Toronto events calendar",
       "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/",
       "notes": "Municipal listing. Doors Open, Nuit Blanche, civic festivals."
+    },
+    {
+      "id": "akimbo",
+      "name": "Akimbo -- visual-art listings",
+      "events_url": "https://akimbo.ca/listings/",
+      "notes": "Canada-wide gallery/exhibition discovery; strong for GTA shows."
+    },
+    {
+      "id": "destination-toronto",
+      "name": "Destination Toronto events",
+      "events_url": "https://www.destinationtoronto.com/",
+      "notes": "Broad civic/cultural discovery."
     }
   ],
   "primary_sources": [
@@ -85,7 +97,10 @@
       "id": "contactphoto",
       "name": "CONTACT Photography Festival",
       "events_url": "https://contactphoto.com/",
-      "additional_urls": ["https://contactphoto.com/exhibitions/", "https://contactphoto.com/events/"],
+      "additional_urls": [
+        "https://contactphoto.com/exhibitions/",
+        "https://contactphoto.com/events/"
+      ],
       "default_type": "site-specific-art",
       "notes": "May 1-31 each year. Hundreds of sub-events at galleries city-wide. Agent should capture parent festival + Featured Exhibitions as separate records, skip the long tail."
     },
@@ -275,6 +290,7 @@
       "id": "iranian-fire-festival",
       "name": "Chaharshanbe Suri (Iranian fire-jumping festival)",
       "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/",
+      "default_type": "cultural-reproduction",
       "notes": "Last Wednesday before Persian New Year (March). Mel Lastman Square typical. Officially-supported festival of form. May lack dedicated primary site; the City of Toronto events page is the closest primary source."
     },
     {
@@ -297,6 +313,164 @@
       "events_url": "https://festivalofsouthasia.com/",
       "default_type": "cultural-reproduction",
       "notes": "Late July. Gerrard India Bazaar. Diasporic festival."
+    },
+    {
+      "id": "jerkfest",
+      "name": "JerkFest (Canada's Jerk Food Festival)",
+      "events_url": "https://www.jerkfestival.ca/",
+      "default_type": "cultural-reproduction",
+      "notes": "Caribbean jerk cuisine + music; Centennial Park, Etobicoke; early August."
+    },
+    {
+      "id": "taste-little-italy",
+      "name": "Taste of Little Italy",
+      "events_url": "https://tasteoflittleitaly.tolittleitaly.com/",
+      "default_type": "cultural-reproduction",
+      "notes": "College St W (Bathurst-Shaw), Little Italy BIA; mid-June."
+    },
+    {
+      "id": "do-west-fest",
+      "name": "Do West Fest (Little Portugal)",
+      "events_url": "https://dowestfest.com/",
+      "default_type": "cultural-reproduction",
+      "notes": "Dundas St W; Uma Nota Culture. Portugal Day Parade now split off to St. Clair -- track separately."
+    },
+    {
+      "id": "ukrainian-festival",
+      "name": "Toronto Ukrainian Festival (Bloor West Village)",
+      "events_url": "https://ukrainianfestival.com/",
+      "default_type": "cultural-reproduction",
+      "notes": "Bloor St W (Jane-Runnymede); mid-September."
+    },
+    {
+      "id": "taste-of-manila",
+      "name": "Taste of Manila",
+      "events_url": "https://www.eventbrite.ca/e/taste-of-manila-2026-tickets-1989943073300",
+      "default_type": "cultural-reproduction",
+      "notes": "SPARC Canada; Bathurst & Wilson 'Little Manila'; mid-August. Multiple SPARC web properties exist -- disambiguate the Toronto event."
+    },
+    {
+      "id": "toronto-korean-festival",
+      "name": "Toronto Korean Festival",
+      "events_url": "https://www.torontokfest.ca/",
+      "default_type": "cultural-reproduction",
+      "notes": "Mel Lastman Square; formerly 'Korean Harvest Festival' (legacy domain torontokhf.com)."
+    },
+    {
+      "id": "indigenous-arts-festival",
+      "name": "Indigenous Arts Festival & Na-Me-Res Pow Wow",
+      "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/indigenous-arts-festival/",
+      "default_type": "cultural-reproduction",
+      "notes": "City-produced; Fort York / Garrison Common; late June. Verify venue (one listing cites Biidaasige Park)."
+    },
+    {
+      "id": "chinatown-festival",
+      "name": "Toronto Chinatown Festival / Lunar New Year",
+      "events_url": "https://www.chinatownbia.com/",
+      "default_type": "cultural-reproduction",
+      "notes": "Chinatown BIA, Spadina/Dundas; Lunar New Year in February, summer festival in August."
+    },
+    {
+      "id": "panorama-india",
+      "name": "India Day Festival & Grand Parade (Panorama India)",
+      "events_url": "https://panoramaindia.org/",
+      "default_type": "cultural-reproduction",
+      "notes": "Nathan Phillips Square; August."
+    },
+    {
+      "id": "emancipation-toronto",
+      "name": "Emancipation Month (City of Toronto)",
+      "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/",
+      "default_type": "cultural-reproduction",
+      "notes": "City CABR; August-long, Aug 1 Emancipation Day; Underground Freedom Train Ride + Emancipation Walk."
+    },
+    {
+      "id": "beaches-jazz",
+      "name": "Beaches International Jazz Festival",
+      "events_url": "https://beachesjazz.com/",
+      "default_type": "festival",
+      "notes": "Late July, the Beaches."
+    },
+    {
+      "id": "canadian-music-week",
+      "name": "Canadian Music Week",
+      "events_url": "https://cmw.net/",
+      "default_type": "festival",
+      "notes": "Multi-venue music + conference."
+    },
+    {
+      "id": "tjff",
+      "name": "Toronto Jewish Film Festival",
+      "events_url": "https://tjff.com/",
+      "additional_urls": [
+        "https://tjff.com/schedule/",
+        "https://tjff.com/lineup/"
+      ],
+      "default_type": "festival",
+      "notes": "Early-mid June; clean static per-film pages with guests in meta tags."
+    },
+    {
+      "id": "reel-asian",
+      "name": "Toronto Reel Asian International Film Festival",
+      "events_url": "https://www.reelasian.com/",
+      "default_type": "festival",
+      "notes": "Mid-November; 30th anniversary 2026."
+    },
+    {
+      "id": "rendezvous-madness",
+      "name": "Rendezvous with Madness (Workman Arts)",
+      "events_url": "https://workmanarts.com/rendezvous-with-madness/",
+      "default_type": "festival",
+      "notes": "Late October; every screening followed by a panel; PWYW."
+    },
+    {
+      "id": "regent-park-film",
+      "name": "Regent Park Film Festival",
+      "events_url": "https://regentparkfilmfestival.com/",
+      "default_type": "festival",
+      "notes": "November; free community festival + Home Made Visible touring panels."
+    },
+    {
+      "id": "toronto-biennial",
+      "name": "Toronto Biennial of Art",
+      "events_url": "https://torontobiennial.org/",
+      "default_type": "site-specific-art",
+      "notes": "2026 'Things Fall Apart', Sept 26-Dec 20; hub = Art Museum at U of T. Dedupe venue cross-listings by title+venue."
+    },
+    {
+      "id": "word-on-street",
+      "name": "Word on the Street Toronto",
+      "events_url": "https://toronto.thewordonthestreet.ca/",
+      "default_type": "festival",
+      "notes": "Canada's largest free book & magazine festival; late September."
+    },
+    {
+      "id": "markham-village-music",
+      "name": "Markham Village Music Festival",
+      "events_url": "https://www.markhamfestival.com/",
+      "default_type": "festival",
+      "notes": "Main Street Markham; mid-June."
+    },
+    {
+      "id": "td-markham-jazz",
+      "name": "TD Markham Jazz Festival",
+      "events_url": "https://www.markhamjazzfestival.com/",
+      "default_type": "festival",
+      "notes": "Main Street Unionville; late August (official dates over tourism listings)."
+    },
+    {
+      "id": "world-of-threads",
+      "name": "World of Threads Festival (Oakville)",
+      "events_url": "https://worldofthreadsfestival.com/",
+      "default_type": "site-specific-art",
+      "notes": "Fibre/textile art; QEPCCC; Sept-Jan run."
+    },
+    {
+      "id": "taste-of-asia-markham",
+      "name": "Taste of Asia (Markham)",
+      "events_url": "https://visitmarkham.ca/things-to-do/festivals-events/",
+      "default_type": "cultural-reproduction",
+      "notes": "Kennedy Rd, Markham; late June."
     }
   ]
 }

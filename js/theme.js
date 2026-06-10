@@ -126,3 +126,76 @@
     init();
   }
 })();
+
+
+/* ============================================================
+ * LETTER SIZE — persisted font scaling. Added 2026-06-04 per
+ * Kira UI review. Hooks: [data-fz="up" | "down" | "reset"].
+ * Scales the html base size through --font-scale (theme.css
+ * applies the calc) and persists to localStorage. Uses event
+ * delegation and its own data hooks, so it never collides with
+ * any page's bespoke text-size script.
+ * ============================================================ */
+(function () {
+  'use strict';
+  var KEY = 'ss-fontscale';
+  var MIN = 0.85, MAX = 1.45, STEP = 0.0833;
+  var root = document.documentElement;
+
+  function get() {
+    try { var v = parseFloat(localStorage.getItem(KEY)); return isNaN(v) ? 1 : v; }
+    catch (e) { return 1; }
+  }
+  function clamp(v) { return Math.max(MIN, Math.min(MAX, Math.round(v * 1000) / 1000)); }
+  function apply(v) { root.style.setProperty('--font-scale', String(v)); root.style.fontSize = (v === 1 ? '' : (16 * v) + 'px'); }
+  function save(v) {
+    try { if (v === 1) localStorage.removeItem(KEY); else localStorage.setItem(KEY, String(v)); }
+    catch (e) {}
+  }
+  function resetVis(v) {
+    var btns = document.querySelectorAll('[data-fz="reset"]');
+    for (var i = 0; i < btns.length; i++) btns[i].style.display = (v === 1 ? 'none' : '');
+  }
+
+  // Apply stored scale immediately to avoid a flash of unscaled type.
+  apply(get());
+
+  function init() { resetVis(get()); }
+
+  document.addEventListener('click', function (e) {
+    var b = e.target && e.target.closest ? e.target.closest('[data-fz]') : null;
+    if (!b) return;
+    var act = b.getAttribute('data-fz');
+    var v = get();
+    if (act === 'up') v = clamp(v + STEP);
+    else if (act === 'down') v = clamp(v - STEP);
+    else if (act === 'reset') v = 1;
+    else return;
+    apply(v); save(v); resetVis(v);
+  });
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
+
+/* CL-2026-06-04 #6: shared site footer nav. Injected only on pages that have no <footer> of their own. */
+(function(){
+  function inject(){
+    if (document.querySelector('.ss-sitenav') || document.querySelector('footer')) return;
+    var links=[['/','Home'],['/polymythseminars/','Calendar'],['/agora/','Agora'],['/marginalia/','Marginalia'],['/sabachtan-seminar/','Sabachtan'],['/ohm-dome/','Ohm Dome'],['/nutrition/','Nutrition'],['/teacherresources/','Resources'],['/leizu/','Leizu Academy'],['/florilegium/','Florilegium'],['/saul/','Founder']];
+    var here=(location.pathname.replace(/\/+$/,'')||'/');
+    var nav=document.createElement('nav');
+    nav.className='ss-sitenav';
+    nav.setAttribute('aria-label','Site');
+    nav.style.cssText='margin-top:4rem;padding:2.2rem 1.25rem;border-top:1px solid currentColor;opacity:0.8;font-family:var(--font-sans,system-ui,sans-serif);font-size:0.8rem;letter-spacing:0.04em;line-height:2.4;text-align:center;';
+    links.forEach(function(l,i){
+      var path=(l[0].replace(/\/+$/,'')||'/');
+      if(i){var s=document.createElement('span');s.textContent='\u00b7';s.style.cssText='margin:0 0.7rem;opacity:0.4;';nav.appendChild(s);}
+      if(path===here){var c=document.createElement('span');c.textContent=l[1];c.style.opacity='0.5';nav.appendChild(c);}
+      else{var a=document.createElement('a');a.href=l[0];a.textContent=l[1];a.style.cssText='color:inherit;text-decoration:none;border-bottom:1px solid transparent;';a.addEventListener('mouseenter',function(){this.style.borderBottomColor='currentColor';});a.addEventListener('mouseleave',function(){this.style.borderBottomColor='transparent';});nav.appendChild(a);}
+    });
+    document.body.appendChild(nav);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',inject); else inject();
+})();

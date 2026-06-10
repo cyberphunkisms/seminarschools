@@ -1,6 +1,6 @@
 {
   "$schema_note": "Venue roster for /scripts/seminars-prompt.md. Each entry declares the venue, its event-list URL, default event type, tier priority, and render_mode hint. Read by Claude headless harvest weekly. The agent handles extraction; render_mode is a strategy hint for fetch-difficulty, not a parser selector. tier_priority 1 = must crawl, 2 = if budget permits, 3 = low priority, 4 = optional.",
-  "$updated": "2026-05-28",
+  "$updated": "2026-06-09",
   "sources": [
     {
       "id": "c4e",
@@ -215,6 +215,1303 @@
       "events_url": "manual",
       "notes": "Hand-curated events from data/manual-events.json. Used for lectures the auto-scraper cannot reliably capture (UofT departments without public RSS, special symposia, the Agora self-source) and for archival lectures the curator wants preserved on the seminars page.",
       "render_mode": "manual"
+    },
+    {
+      "id": "labour-council",
+      "name": "Toronto & York Region Labour Council",
+      "tier_priority": 3,
+      "default_type": "protest",
+      "base_url": "https://labourcouncil.ca/",
+      "events_url": "https://labourcouncil.ca/events/",
+      "notes": "Union action calendar. Demonstrations, rallies, pickets, strikes. Promoted from deferred_candidates.protest 2026-06.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "protest-civic",
+      "name": "Toronto demonstration callouts (civic discovery)",
+      "tier_priority": 4,
+      "default_type": "protest",
+      "base_url": "https://www.toronto.ca/",
+      "events_url": "discovery - student-union and advocacy action pages plus confirmed demonstration callouts carried by local news; every record needs source_url and raw_excerpt",
+      "notes": "Open-discovery protest channel across the political spectrum. Promoted from deferred_candidates.protest 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "toronto-events",
+      "name": "City of Toronto Festivals and Events",
+      "tier_priority": 3,
+      "default_type": "community",
+      "base_url": "https://www.toronto.ca/explore-enjoy/festivals-events/",
+      "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/festivals-events-calendar/",
+      "notes": "Community events, charity walks and rides, fundraisers, neighbourhood gatherings.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "community-discovery",
+      "name": "Charity and community event discovery",
+      "tier_priority": 4,
+      "default_type": "community",
+      "base_url": "https://www.eventbrite.ca/",
+      "events_url": "discovery - charity rides and walks, fundraisers, community-org events in the GTA; confirm each with source_url and raw_excerpt",
+      "notes": "Open-discovery community channel. Captures events like charity rides that fall outside the discursive seminar roster.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "uoft-philosophy",
+      "name": "U of T Department of Philosophy",
+      "tier_priority": 1,
+      "default_type": "lecture",
+      "base_url": "https://philosophy.utoronto.ca/news-events/",
+      "events_url": "https://philosophy.utoronto.ca/news-events/",
+      "render_mode": "drupal"
+    },
+    {
+      "id": "uoft-history",
+      "name": "U of T Department of History",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://www.history.utoronto.ca/events",
+      "events_url": "https://www.history.utoronto.ca/events",
+      "render_mode": "drupal"
+    },
+    {
+      "id": "uoft-english",
+      "name": "U of T Department of English",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://www.english.utoronto.ca/events",
+      "events_url": "https://www.english.utoronto.ca/events",
+      "notes": "Bot detection may block direct fetch; use headless/snippet fallback.",
+      "render_mode": "drupal"
+    },
+    {
+      "id": "utm-historical",
+      "name": "UTM Department of Historical Studies",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://utm.utoronto.ca/historical-studies/events/events",
+      "events_url": "https://utm.utoronto.ca/historical-studies/events/events",
+      "render_mode": "drupal"
+    },
+    {
+      "id": "cms-medieval",
+      "name": "U of T Centre for Medieval Studies",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.medieval.utoronto.ca/events",
+      "events_url": "https://www.medieval.utoronto.ca/events",
+      "render_mode": "drupal"
+    },
+    {
+      "id": "york-events",
+      "name": "York University central events calendar",
+      "tier_priority": 1,
+      "default_type": "lecture",
+      "base_url": "https://events.yorku.ca/",
+      "events_url": "https://events.yorku.ca/",
+      "notes": "Modern Events Calendar (Webnus) plugin; list views exposed.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "york-philosophy",
+      "name": "York Philosophy Speaker Series",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://www.yorku.ca/laps/phil/experience/speaker-series/philosophy/",
+      "events_url": "https://www.yorku.ca/laps/phil/experience/speaker-series/philosophy/",
+      "render_mode": "wordpress"
+    },
+    {
+      "id": "ycar",
+      "name": "York Centre for Asian Research",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.yorku.ca/research/ycar/ycar-events/",
+      "events_url": "https://www.yorku.ca/research/ycar/ycar-events/",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "tmu-philosophy",
+      "name": "TMU Department of Philosophy",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.torontomu.ca/philosophy/news-events/",
+      "events_url": "https://www.torontomu.ca/philosophy/news-events/",
+      "notes": "Prefer the dept Google Calendar embed and PhilEvents host 17926; main page lags.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "ocadu-events",
+      "name": "OCAD University What's On",
+      "tier_priority": 2,
+      "default_type": "talk",
+      "base_url": "https://www.ocadu.ca/whats-on",
+      "events_url": "https://www.ocadu.ca/whats-on",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "pims",
+      "name": "Pontifical Institute of Mediaeval Studies",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://pims.ca/events-list/calendar-of-events/",
+      "events_url": "https://pims.ca/events-list/calendar-of-events/",
+      "render_mode": "static"
+    },
+    {
+      "id": "tst",
+      "name": "Toronto School of Theology",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.tst.edu/events",
+      "events_url": "https://www.tst.edu/events",
+      "render_mode": "static"
+    },
+    {
+      "id": "rciscience",
+      "name": "Royal Canadian Institute for Science",
+      "tier_priority": 2,
+      "default_type": "scholar-talk",
+      "base_url": "https://www.rciscience.ca/whats-on",
+      "events_url": "https://www.rciscience.ca/whats-on",
+      "render_mode": "static"
+    },
+    {
+      "id": "another-story",
+      "name": "Another Story Bookshop",
+      "tier_priority": 2,
+      "default_type": "reading",
+      "base_url": "https://anotherstory.ca/events",
+      "events_url": "https://anotherstory.ca/events",
+      "notes": "Bookmanager JS; prefer Eventbrite org page.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "queen-books",
+      "name": "Queen Books",
+      "tier_priority": 2,
+      "default_type": "reading",
+      "base_url": "https://shop.queenbooks.ca/events",
+      "events_url": "https://shop.queenbooks.ca/events",
+      "notes": "Bookmanager JS; prefer Eventbrite org page.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "ben-mcnally",
+      "name": "Ben McNally Books",
+      "tier_priority": 3,
+      "default_type": "reading",
+      "base_url": "https://benmcnallybooks.com/",
+      "events_url": "https://benmcnallybooks.com/",
+      "render_mode": "static"
+    },
+    {
+      "id": "a-different-booklist",
+      "name": "A Different Booklist",
+      "tier_priority": 3,
+      "default_type": "reading",
+      "base_url": "http://adifferentbooklist.com",
+      "events_url": "http://adifferentbooklist.com",
+      "render_mode": "static"
+    },
+    {
+      "id": "flying-books",
+      "name": "Flying Books",
+      "tier_priority": 3,
+      "default_type": "reading",
+      "base_url": "https://flyingbooks.ca/",
+      "events_url": "https://flyingbooks.ca/",
+      "render_mode": "static"
+    },
+    {
+      "id": "coach-house",
+      "name": "Coach House Books",
+      "tier_priority": 3,
+      "default_type": "book-launch",
+      "base_url": "https://chbooks.com/Events",
+      "events_url": "https://chbooks.com/Events",
+      "render_mode": "static"
+    },
+    {
+      "id": "brockton-writers",
+      "name": "Brockton Writers Series",
+      "tier_priority": 2,
+      "default_type": "reading",
+      "base_url": "https://brocktonwriters.com/",
+      "events_url": "https://brocktonwriters.com/",
+      "render_mode": "wordpress"
+    },
+    {
+      "id": "junction-reads",
+      "name": "Junction Reads",
+      "tier_priority": 2,
+      "default_type": "reading",
+      "base_url": "https://junctionreads.ca/upcoming-schedule/",
+      "events_url": "https://junctionreads.ca/upcoming-schedule/",
+      "render_mode": "wordpress"
+    },
+    {
+      "id": "griffin-poetry",
+      "name": "Griffin Poetry Prize Readings",
+      "tier_priority": 2,
+      "default_type": "reading",
+      "base_url": "https://griffinpoetryprize.com/",
+      "events_url": "https://griffinpoetryprize.com/",
+      "render_mode": "static"
+    },
+    {
+      "id": "writers-trust",
+      "name": "Writers' Trust of Canada",
+      "tier_priority": 3,
+      "default_type": "reading",
+      "base_url": "https://www.writerstrust.com/events",
+      "events_url": "https://www.writerstrust.com/events",
+      "render_mode": "static"
+    },
+    {
+      "id": "diaspora-dialogues",
+      "name": "Diaspora Dialogues",
+      "tier_priority": 3,
+      "default_type": "reading",
+      "base_url": "https://diasporadialogues.com/category/upcoming-events/",
+      "events_url": "https://diasporadialogues.com/category/upcoming-events/",
+      "render_mode": "wordpress"
+    },
+    {
+      "id": "art-bar",
+      "name": "Art Bar Poetry Series",
+      "tier_priority": 3,
+      "default_type": "reading",
+      "base_url": "https://www.instagram.com/artbarpoetry/",
+      "events_url": "https://www.instagram.com/artbarpoetry/",
+      "notes": "DO NOT scrape artbarpoetryseries.com -- domain hijacked to casino spam. Schedule only via Instagram @artbarpoetry / artbarpoetry@gmail.com.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "royal-inst-philosophy",
+      "name": "Royal Institute of Philosophy",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://royalinstitutephilosophy.org/philosophy-events/",
+      "events_url": "https://royalinstitutephilosophy.org/philosophy-events/",
+      "notes": "GLOBAL online/hybrid; some events ticketed with recording.",
+      "render_mode": "wordpress"
+    },
+    {
+      "id": "iai-live",
+      "name": "Institute of Art and Ideas / IAI Live",
+      "tier_priority": 3,
+      "default_type": "talk",
+      "base_url": "https://iai.tv/",
+      "events_url": "https://iai.tv/",
+      "notes": "GLOBAL online; IAI Live first Monday monthly.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "aristotelian-society",
+      "name": "The Aristotelian Society",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.aristoteliansociety.org.uk/",
+      "events_url": "https://www.aristoteliansociety.org.uk/",
+      "notes": "GLOBAL; fortnightly Monday talks, confirm livestream per event.",
+      "render_mode": "static"
+    },
+    {
+      "id": "arendt-center",
+      "name": "Hannah Arendt Center, Bard College",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://hac.bard.edu/events/",
+      "events_url": "https://hac.bard.edu/events/",
+      "notes": "GLOBAL online/hybrid; fall forum webcast.",
+      "render_mode": "static"
+    },
+    {
+      "id": "bisr",
+      "name": "Brooklyn Institute for Social Research",
+      "tier_priority": 3,
+      "default_type": "workshop",
+      "base_url": "https://thebrooklyninstitute.com/events/",
+      "events_url": "https://thebrooklyninstitute.com/events/",
+      "notes": "GLOBAL online seminars by term.",
+      "render_mode": "static"
+    },
+    {
+      "id": "catherine-project",
+      "name": "The Catherine Project",
+      "tier_priority": 3,
+      "default_type": "workshop",
+      "base_url": "https://catherineproject.org/events/",
+      "events_url": "https://catherineproject.org/events/",
+      "notes": "GLOBAL free Zoom seminars.",
+      "render_mode": "static"
+    },
+    {
+      "id": "long-now",
+      "name": "Long Now Foundation Talks",
+      "tier_priority": 3,
+      "default_type": "talk",
+      "base_url": "https://longnow.org/talks",
+      "events_url": "https://longnow.org/talks",
+      "notes": "GLOBAL; SF in-person + livestream/podcast.",
+      "render_mode": "static"
+    },
+    {
+      "id": "92ny",
+      "name": "92nd Street Y (92NY)",
+      "tier_priority": 3,
+      "default_type": "talk",
+      "base_url": "https://www.92ny.org/talks",
+      "events_url": "https://www.92ny.org/talks",
+      "notes": "GLOBAL; livestream + live podcast tapings.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "nypl-live",
+      "name": "LIVE from NYPL",
+      "tier_priority": 3,
+      "default_type": "talk",
+      "base_url": "https://www.nypl.org/events/live-nypl",
+      "events_url": "https://www.nypl.org/events/live-nypl",
+      "notes": "GLOBAL; in-person + livestream.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "practical-philosophy-on",
+      "name": "Practical Philosophy Club - Ontario",
+      "tier_priority": 1,
+      "default_type": "philosophy-cafe",
+      "base_url": "https://www.meetup.com/practical-philosophy-club-ontario/",
+      "events_url": "https://www.meetup.com/practical-philosophy-club-ontario/",
+      "notes": "Most reliable in-person GTA cafe feed; multiple chapters.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "toronto-philosophy-meetup",
+      "name": "The Toronto Philosophy Meetup",
+      "tier_priority": 2,
+      "default_type": "philosophy-cafe",
+      "base_url": "https://www.meetup.com/the-toronto-philosophy-meetup/",
+      "events_url": "https://www.meetup.com/the-toronto-philosophy-meetup/",
+      "notes": "Largest group but near-term calendar mostly online.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "being-becoming",
+      "name": "Being and Becoming Curiosity Cafe",
+      "tier_priority": 2,
+      "default_type": "philosophy-cafe",
+      "base_url": "https://beingnbecoming.org/curiosity-cafes/",
+      "events_url": "https://beingnbecoming.org/curiosity-cafes/",
+      "notes": "Recurring in-person cafe, Madison Avenue Pub.",
+      "render_mode": "static"
+    },
+    {
+      "id": "empire-club",
+      "name": "Empire Club of Canada",
+      "tier_priority": 1,
+      "default_type": "talk",
+      "base_url": "https://empireclubofcanada.com/upcoming-events/",
+      "events_url": "https://empireclubofcanada.com/upcoming-events/",
+      "notes": "Swoogo cards; page renders empty between seasons.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "canadian-club",
+      "name": "Canadian Club Toronto",
+      "tier_priority": 1,
+      "default_type": "talk",
+      "base_url": "https://www.canadianclub.org/upcoming-events/",
+      "events_url": "https://www.canadianclub.org/upcoming-events/",
+      "render_mode": "wordpress"
+    },
+    {
+      "id": "economic-club",
+      "name": "Economic Club of Canada",
+      "tier_priority": 2,
+      "default_type": "talk",
+      "base_url": "https://www.economicclub.ca/upcomingevents",
+      "events_url": "https://www.economicclub.ca/upcomingevents",
+      "render_mode": "static"
+    },
+    {
+      "id": "board-of-trade",
+      "name": "Toronto Region Board of Trade",
+      "tier_priority": 2,
+      "default_type": "networking",
+      "base_url": "https://bot.com/Events",
+      "events_url": "https://bot.com/Events",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "cic-toronto",
+      "name": "Canadian International Council - Toronto",
+      "tier_priority": 2,
+      "default_type": "talk",
+      "base_url": "https://thecic.org/events/",
+      "events_url": "https://thecic.org/events/",
+      "render_mode": "wordpress"
+    },
+    {
+      "id": "civicaction",
+      "name": "CivicAction (Greater Toronto)",
+      "tier_priority": 3,
+      "default_type": "gathering",
+      "base_url": "https://civicaction.ca/",
+      "events_url": "https://civicaction.ca/",
+      "render_mode": "static"
+    },
+    {
+      "id": "janes-walk",
+      "name": "Jane's Walk Toronto",
+      "tier_priority": 3,
+      "default_type": "gathering",
+      "base_url": "https://www.janeswalkfestivalto.com/",
+      "events_url": "https://www.janeswalkfestivalto.com/",
+      "notes": "Annual, first weekend of May.",
+      "render_mode": "static"
+    },
+    {
+      "id": "trampoline-hall",
+      "name": "Trampoline Hall",
+      "tier_priority": 3,
+      "default_type": "talk",
+      "base_url": "https://www.trampolinehall.net/",
+      "events_url": "https://www.trampolinehall.net/",
+      "notes": "Monthly barroom lectures; dates announced rolling via Luma.",
+      "render_mode": "static"
+    },
+    {
+      "id": "walrus-talks",
+      "name": "The Walrus Talks",
+      "tier_priority": 3,
+      "default_type": "talk",
+      "base_url": "https://thewalrus.ca/the-walrus-talks/",
+      "events_url": "https://thewalrus.ca/the-walrus-talks/",
+      "render_mode": "static"
+    },
+    {
+      "id": "cupe-ontario",
+      "name": "CUPE Ontario",
+      "tier_priority": 1,
+      "default_type": "protest",
+      "base_url": "https://cupe.on.ca/calendar/",
+      "events_url": "https://cupe.on.ca/calendar/",
+      "notes": "iCal export; categorized rallies/conventions.",
+      "render_mode": "static"
+    },
+    {
+      "id": "opseu",
+      "name": "OPSEU/SEFPO",
+      "tier_priority": 1,
+      "default_type": "protest",
+      "base_url": "https://opseu.org/events/",
+      "events_url": "https://opseu.org/events/",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "ofl",
+      "name": "Ontario Federation of Labour",
+      "tier_priority": 2,
+      "default_type": "protest",
+      "base_url": "https://ofl.ca/events/",
+      "events_url": "https://ofl.ca/events/",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "ontario-health-coalition",
+      "name": "Ontario Health Coalition",
+      "tier_priority": 1,
+      "default_type": "protest",
+      "base_url": "https://www.ontariohealthcoalition.ca/",
+      "events_url": "https://www.ontariohealthcoalition.ca/",
+      "render_mode": "static"
+    },
+    {
+      "id": "acorn-toronto",
+      "name": "Toronto ACORN",
+      "tier_priority": 2,
+      "default_type": "protest",
+      "base_url": "https://acorncanada.org/locations/toronto-acorn/",
+      "events_url": "https://acorncanada.org/locations/toronto-acorn/",
+      "render_mode": "static"
+    },
+    {
+      "id": "mwac",
+      "name": "Migrant Workers Alliance for Change",
+      "tier_priority": 3,
+      "default_type": "protest",
+      "base_url": "https://migrantworkersalliance.org/",
+      "events_url": "https://migrantworkersalliance.org/",
+      "render_mode": "static"
+    },
+    {
+      "id": "free-grassy",
+      "name": "Free Grassy Narrows / River Run",
+      "tier_priority": 2,
+      "default_type": "protest",
+      "base_url": "https://freegrassy.net/",
+      "events_url": "https://freegrassy.net/",
+      "notes": "Annual River Run, mid-late September.",
+      "render_mode": "static"
+    },
+    {
+      "id": "kairos",
+      "name": "KAIROS Canada",
+      "tier_priority": 2,
+      "default_type": "protest",
+      "base_url": "https://kairoscanada.org/events/list",
+      "events_url": "https://kairoscanada.org/events/list",
+      "notes": "The Events Calendar with .ics export; only structured faith feed.",
+      "render_mode": "static"
+    },
+    {
+      "id": "toronto350",
+      "name": "Toronto350 / climate action",
+      "tier_priority": 3,
+      "default_type": "protest",
+      "base_url": "https://toronto350.org/",
+      "events_url": "https://toronto350.org/",
+      "render_mode": "static"
+    },
+    {
+      "id": "yfs",
+      "name": "York Federation of Students",
+      "tier_priority": 3,
+      "default_type": "protest",
+      "base_url": "https://yfs.ca/events-home",
+      "events_url": "https://yfs.ca/events-home",
+      "render_mode": "static"
+    },
+    {
+      "id": "philevents-cfp",
+      "name": "PhilEvents -- Calls for Papers",
+      "tier_priority": 1,
+      "default_type": "cfp",
+      "base_url": "https://philevents.org/cfps",
+      "events_url": "https://philevents.org/cfps",
+      "notes": "GLOBAL. RSS/iCal/CSV export per saved search ID; best machine feed in the set.",
+      "render_mode": "static"
+    },
+    {
+      "id": "upenn-cfp",
+      "name": "UPenn Call for Papers (English/lit)",
+      "tier_priority": 1,
+      "default_type": "cfp",
+      "base_url": "https://call-for-papers.sas.upenn.edu/category/all",
+      "events_url": "https://call-for-papers.sas.upenn.edu/category/all",
+      "notes": "GLOBAL. ~40 per-category RSS feeds; explicit deadline field.",
+      "render_mode": "static"
+    },
+    {
+      "id": "hnet-announce",
+      "name": "H-Net H-Announce",
+      "tier_priority": 2,
+      "default_type": "cfp",
+      "base_url": "https://networks.h-net.org/h-announce",
+      "events_url": "https://networks.h-net.org/h-announce",
+      "notes": "GLOBAL. Bot-protected; rate-limit and corroborate at originating institution.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "wikicfp",
+      "name": "WikiCFP (humanities/social sciences)",
+      "tier_priority": 3,
+      "default_type": "cfp",
+      "base_url": "http://www.wikicfp.com/cfp/call?conference=humanities",
+      "events_url": "http://www.wikicfp.com/cfp/call?conference=humanities",
+      "notes": "GLOBAL. Multidisciplinary; humanities coverage uneven.",
+      "render_mode": "static"
+    },
+    {
+      "id": "cfplist",
+      "name": "CFPList.com",
+      "tier_priority": 2,
+      "default_type": "cfp",
+      "base_url": "https://www.cfplist.com/",
+      "events_url": "https://www.cfplist.com/",
+      "notes": "GLOBAL. Curated; powers NeMLA/PAMLA portals (Ballast).",
+      "render_mode": "static"
+    },
+    {
+      "id": "arthist",
+      "name": "ArtHist.net",
+      "tier_priority": 3,
+      "default_type": "cfp",
+      "base_url": "https://arthist.net/",
+      "events_url": "https://arthist.net/",
+      "notes": "GLOBAL art history; CFP subject-line prefix.",
+      "render_mode": "static"
+    },
+    {
+      "id": "mla-cfp",
+      "name": "MLA Calls for Papers",
+      "tier_priority": 2,
+      "default_type": "cfp",
+      "base_url": "https://www.mla.org/Events/Planning-a-Convention-Session/Calls-for-Papers",
+      "events_url": "https://www.mla.org/Events/Planning-a-Convention-Session/Calls-for-Papers",
+      "notes": "GLOBAL literary; just-in-time sessions open June.",
+      "render_mode": "static"
+    },
+    {
+      "id": "aha-cfp",
+      "name": "American Historical Association CFP",
+      "tier_priority": 3,
+      "default_type": "cfp",
+      "base_url": "https://www.historians.org/events/annual-meeting/call-for-proposals/",
+      "events_url": "https://www.historians.org/events/annual-meeting/call-for-proposals/",
+      "notes": "GLOBAL history.",
+      "render_mode": "static"
+    },
+    {
+      "id": "aar-cfp",
+      "name": "American Academy of Religion CFP",
+      "tier_priority": 3,
+      "default_type": "cfp",
+      "base_url": "https://aarweb.org/events/annual-meetings/call-for-papers-proposals/",
+      "events_url": "https://aarweb.org/events/annual-meetings/call-for-papers-proposals/",
+      "notes": "GLOBAL religion/theology.",
+      "render_mode": "static"
+    },
+    {
+      "id": "acla-cfp",
+      "name": "ACLA Calls for Papers",
+      "tier_priority": 3,
+      "default_type": "cfp",
+      "base_url": "https://www.acla.org/resources-links/calls-papers",
+      "events_url": "https://www.acla.org/resources-links/calls-papers",
+      "notes": "GLOBAL comparative literature; seminar portal opens June.",
+      "render_mode": "static"
+    },
+    {
+      "id": "apa-cfp",
+      "name": "American Philosophical Association Calls",
+      "tier_priority": 2,
+      "default_type": "cfp",
+      "base_url": "https://www.apaonline.org/page/calls",
+      "events_url": "https://www.apaonline.org/page/calls",
+      "notes": "GLOBAL philosophy.",
+      "render_mode": "static"
+    },
+    {
+      "id": "4s-cfp",
+      "name": "Society for Social Studies of Science (4S)",
+      "tier_priority": 3,
+      "default_type": "cfp",
+      "base_url": "https://www.4sonline.org/",
+      "events_url": "https://www.4sonline.org/",
+      "notes": "GLOBAL STS; 4S 2026 is in Toronto (Sheraton).",
+      "render_mode": "static"
+    },
+    {
+      "id": "pw-grants",
+      "name": "Poets & Writers -- Grants & Awards",
+      "tier_priority": 1,
+      "default_type": "contest",
+      "base_url": "https://www.pw.org/grants",
+      "events_url": "https://www.pw.org/grants",
+      "notes": "GLOBAL. Deadline-sortable, vetted; strongest legitimacy filter.",
+      "render_mode": "static"
+    },
+    {
+      "id": "reedsy-contests",
+      "name": "Reedsy writing-contests directory",
+      "tier_priority": 1,
+      "default_type": "contest",
+      "base_url": "https://reedsy.com/resources/writing-contests/",
+      "events_url": "https://reedsy.com/resources/writing-contests/",
+      "notes": "GLOBAL. 460+ vetted, genre/deadline/fee filters.",
+      "render_mode": "static"
+    },
+    {
+      "id": "submittable-discover",
+      "name": "Submittable Discover",
+      "tier_priority": 2,
+      "default_type": "contest",
+      "base_url": "https://discover.submittable.com/",
+      "events_url": "https://discover.submittable.com/",
+      "notes": "GLOBAL. Wide net; Submittable-hosted calls only.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "winning-writers",
+      "name": "Winning Writers",
+      "tier_priority": 2,
+      "default_type": "contest",
+      "base_url": "https://winningwriters.com/",
+      "events_url": "https://winningwriters.com/",
+      "notes": "GLOBAL. Best free/no-fee coverage + scam filter.",
+      "render_mode": "static"
+    },
+    {
+      "id": "canadian-authors",
+      "name": "Canadian Authors Association -- Awards",
+      "tier_priority": 2,
+      "default_type": "contest",
+      "base_url": "https://canadianauthors.org/national/links/awards-competitions/",
+      "events_url": "https://canadianauthors.org/national/links/awards-competitions/",
+      "notes": "Month-by-month deadline pages; Canadian + some intl.",
+      "render_mode": "static"
+    },
+    {
+      "id": "cbc-literary",
+      "name": "CBC Literary Prizes",
+      "tier_priority": 2,
+      "default_type": "contest",
+      "base_url": "https://www.cbc.ca/books/literaryprizes",
+      "events_url": "https://www.cbc.ca/books/literaryprizes",
+      "notes": "Canada only; Short Story / Nonfiction / Poetry cycles.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "league-cdn-poets",
+      "name": "League of Canadian Poets -- Awards",
+      "tier_priority": 3,
+      "default_type": "contest",
+      "base_url": "https://poets.ca/offerings/awards/",
+      "events_url": "https://poets.ca/offerings/awards/",
+      "render_mode": "static"
+    },
+    {
+      "id": "writers-union",
+      "name": "The Writers' Union of Canada -- competitions",
+      "tier_priority": 3,
+      "default_type": "contest",
+      "base_url": "https://writersunion.ca/short-prose-competition",
+      "events_url": "https://writersunion.ca/short-prose-competition",
+      "render_mode": "static"
+    },
+    {
+      "id": "fox-theatre",
+      "name": "Fox Theatre (the Beaches)",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://www.foxtheatre.ca/",
+      "events_url": "https://www.foxtheatre.ca/",
+      "notes": "Discussion components intermittent.",
+      "render_mode": "wordpress"
+    },
+    {
+      "id": "innis-csi",
+      "name": "Innis Town Hall / Cinema Studies Institute",
+      "tier_priority": 2,
+      "default_type": "screening",
+      "base_url": "https://innis.utoronto.ca/happening-at-innis/",
+      "events_url": "https://innis.utoronto.ca/happening-at-innis/",
+      "notes": "CLOSED for construction May 4 - Aug 21, 2026; screenings pause that summer.",
+      "render_mode": "static"
+    },
+    {
+      "id": "tmu-image-arts",
+      "name": "TMU School of Image Arts",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://www.torontomu.ca/image-arts/news-events/",
+      "events_url": "https://www.torontomu.ca/image-arts/news-events/",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "york-cinema",
+      "name": "York Cinema & Media Arts / Nat Taylor",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://events.yorku.ca/",
+      "events_url": "https://events.yorku.ca/",
+      "notes": "Includes Cinema Politica @ York.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "ago-cinema",
+      "name": "AGO Art + Cinema (Jackman Hall)",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://ago.ca/ago-art-cinema",
+      "events_url": "https://ago.ca/ago-art-cinema",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "goethe-films",
+      "name": "Goethe-Institut Toronto -- GOETHE FILMS",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://www.goethe.de/ins/ca/en/sta/tor/ver.cfm",
+      "events_url": "https://www.goethe.de/ins/ca/en/sta/tor/ver.cfm",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "massey-rth",
+      "name": "Massey Hall & Roy Thomson Hall",
+      "tier_priority": 1,
+      "default_type": "performance",
+      "base_url": "https://tickets.mhrth.com/events",
+      "events_url": "https://tickets.mhrth.com/events",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "tso",
+      "name": "Toronto Symphony Orchestra",
+      "tier_priority": 1,
+      "default_type": "performance",
+      "base_url": "https://www.tso.ca/concerts-and-events/calendar",
+      "events_url": "https://www.tso.ca/concerts-and-events/calendar",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "coc",
+      "name": "Canadian Opera Company",
+      "tier_priority": 1,
+      "default_type": "performance",
+      "base_url": "https://www.coc.ca/",
+      "events_url": "https://www.coc.ca/",
+      "render_mode": "static"
+    },
+    {
+      "id": "national-ballet",
+      "name": "The National Ballet of Canada",
+      "tier_priority": 1,
+      "default_type": "performance",
+      "base_url": "https://national.ballet.ca/performances/",
+      "events_url": "https://national.ballet.ca/performances/",
+      "render_mode": "static"
+    },
+    {
+      "id": "to-live",
+      "name": "TO Live (Meridian Hall / St. Lawrence Centre)",
+      "tier_priority": 1,
+      "default_type": "performance",
+      "base_url": "https://www.tolive.com/",
+      "events_url": "https://www.tolive.com/",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "koerner-hall",
+      "name": "Koerner Hall / Royal Conservatory",
+      "tier_priority": 1,
+      "default_type": "performance",
+      "base_url": "https://www.rcmusic.com/concerts",
+      "events_url": "https://www.rcmusic.com/concerts",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "harbourfront-centre",
+      "name": "Harbourfront Centre (year-round programming)",
+      "tier_priority": 2,
+      "default_type": "performance",
+      "base_url": "https://harbourfrontcentre.com/whats-on/",
+      "events_url": "https://harbourfrontcentre.com/whats-on/",
+      "render_mode": "static"
+    },
+    {
+      "id": "soulpepper",
+      "name": "Soulpepper / Young Centre",
+      "tier_priority": 1,
+      "default_type": "performance",
+      "base_url": "https://www.soulpepper.ca/",
+      "events_url": "https://www.soulpepper.ca/",
+      "render_mode": "static"
+    },
+    {
+      "id": "mirvish",
+      "name": "Mirvish Productions",
+      "tier_priority": 1,
+      "default_type": "performance",
+      "base_url": "https://www.mirvish.com/whats-on/upcoming-shows",
+      "events_url": "https://www.mirvish.com/whats-on/upcoming-shows",
+      "render_mode": "static"
+    },
+    {
+      "id": "canadian-stage",
+      "name": "Canadian Stage",
+      "tier_priority": 2,
+      "default_type": "performance",
+      "base_url": "https://www.canadianstage.com/shows-events",
+      "events_url": "https://www.canadianstage.com/shows-events",
+      "render_mode": "static"
+    },
+    {
+      "id": "crows-theatre",
+      "name": "Crow's Theatre",
+      "tier_priority": 2,
+      "default_type": "performance",
+      "base_url": "https://www.crowstheatre.com/shows-events",
+      "events_url": "https://www.crowstheatre.com/shows-events",
+      "render_mode": "static"
+    },
+    {
+      "id": "tarragon",
+      "name": "Tarragon Theatre",
+      "tier_priority": 2,
+      "default_type": "performance",
+      "base_url": "https://tarragontheatre.com/whats-on/",
+      "events_url": "https://tarragontheatre.com/whats-on/",
+      "render_mode": "static"
+    },
+    {
+      "id": "buddies",
+      "name": "Buddies in Bad Times Theatre",
+      "tier_priority": 2,
+      "default_type": "performance",
+      "base_url": "https://buddiesinbadtimes.com/",
+      "events_url": "https://buddiesinbadtimes.com/",
+      "render_mode": "static"
+    },
+    {
+      "id": "factory-theatre",
+      "name": "Factory Theatre",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://www.factorytheatre.ca/whats-on/",
+      "events_url": "https://www.factorytheatre.ca/whats-on/",
+      "notes": "Venue calendar partially JS; fetch live for spring/summer dates.",
+      "render_mode": "static"
+    },
+    {
+      "id": "ypt",
+      "name": "Young People's Theatre",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://www.youngpeoplestheatre.org/shows-tickets/",
+      "events_url": "https://www.youngpeoplestheatre.org/shows-tickets/",
+      "render_mode": "static"
+    },
+    {
+      "id": "native-earth",
+      "name": "Native Earth Performing Arts",
+      "tier_priority": 2,
+      "default_type": "performance",
+      "base_url": "https://nativeearth.ca/current-season",
+      "events_url": "https://nativeearth.ca/current-season",
+      "notes": "Ticketing via PatronBase.",
+      "render_mode": "static"
+    },
+    {
+      "id": "tafelmusik",
+      "name": "Tafelmusik Baroque Orchestra",
+      "tier_priority": 2,
+      "default_type": "performance",
+      "base_url": "https://www.tafelmusik.org/",
+      "events_url": "https://www.tafelmusik.org/",
+      "render_mode": "static"
+    },
+    {
+      "id": "opera-atelier",
+      "name": "Opera Atelier",
+      "tier_priority": 2,
+      "default_type": "performance",
+      "base_url": "https://www.operaatelier.com/",
+      "events_url": "https://www.operaatelier.com/",
+      "render_mode": "static"
+    },
+    {
+      "id": "soundstreams",
+      "name": "Soundstreams",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://soundstreams.ca/upcoming-events/",
+      "events_url": "https://soundstreams.ca/upcoming-events/",
+      "render_mode": "wordpress"
+    },
+    {
+      "id": "tdt",
+      "name": "Toronto Dance Theatre",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://tdt.org/whats-on/",
+      "events_url": "https://tdt.org/whats-on/",
+      "render_mode": "static"
+    },
+    {
+      "id": "danceworks",
+      "name": "DanceWorks",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://www.danceworks.ca/upcoming-events",
+      "events_url": "https://www.danceworks.ca/upcoming-events",
+      "render_mode": "static"
+    },
+    {
+      "id": "citadel-cie",
+      "name": "Citadel + Compagnie",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://www.citadelcie.com/",
+      "events_url": "https://www.citadelcie.com/",
+      "render_mode": "static"
+    },
+    {
+      "id": "music-gallery",
+      "name": "The Music Gallery",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://musicgallery.org/events/",
+      "events_url": "https://musicgallery.org/events/",
+      "notes": "WordPress event-category taxonomy; fall X Avant fest needs live fetch.",
+      "render_mode": "wordpress"
+    },
+    {
+      "id": "rom",
+      "name": "Royal Ontario Museum",
+      "tier_priority": 1,
+      "default_type": "exhibition",
+      "base_url": "https://www.rom.on.ca/whats-on/exhibitions",
+      "events_url": "https://www.rom.on.ca/whats-on/exhibitions",
+      "notes": "Also scrape ROM Speaks/Talks for scholar-talks.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "gardiner-museum",
+      "name": "Gardiner Museum",
+      "tier_priority": 2,
+      "default_type": "exhibition",
+      "base_url": "https://www.gardinermuseum.on.ca/whats-on/",
+      "events_url": "https://www.gardinermuseum.on.ca/whats-on/",
+      "render_mode": "static"
+    },
+    {
+      "id": "aga-khan",
+      "name": "Aga Khan Museum",
+      "tier_priority": 1,
+      "default_type": "talk",
+      "base_url": "https://agakhanmuseum.org/whats-on/",
+      "events_url": "https://agakhanmuseum.org/whats-on/",
+      "notes": "Exhibitions + Lectures & Talks + performances; ticketing subdomain is JS.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "textile-museum",
+      "name": "Textile Museum of Canada",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://textilemuseum.ca/",
+      "events_url": "https://textilemuseum.ca/",
+      "render_mode": "static"
+    },
+    {
+      "id": "bata-shoe",
+      "name": "Bata Shoe Museum",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://batashoemuseum.ca/exhibitions/",
+      "events_url": "https://batashoemuseum.ca/exhibitions/",
+      "render_mode": "static"
+    },
+    {
+      "id": "artmuseum-uoft",
+      "name": "Art Museum at the University of Toronto",
+      "tier_priority": 2,
+      "default_type": "exhibition",
+      "base_url": "https://artmuseum.utoronto.ca/exhibitions/",
+      "events_url": "https://artmuseum.utoronto.ca/exhibitions/",
+      "notes": "Main hub for 2026 Toronto Biennial (Sept 26-Dec 20).",
+      "render_mode": "static"
+    },
+    {
+      "id": "onsite-ocadu",
+      "name": "Onsite Gallery, OCAD U",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://www.ocadu.ca/galleries/onsite-gallery",
+      "events_url": "https://www.ocadu.ca/galleries/onsite-gallery",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "agyu-goldfarb",
+      "name": "AGYU / Joan & Martin Goldfarb Gallery",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://thegoldfarbgallery.ca/exhibitions/",
+      "events_url": "https://thegoldfarbgallery.ca/exhibitions/",
+      "render_mode": "static"
+    },
+    {
+      "id": "mcmichael",
+      "name": "McMichael Canadian Art Collection (Kleinburg)",
+      "tier_priority": 2,
+      "default_type": "exhibition",
+      "base_url": "https://mcmichael.com/exhibitions/",
+      "events_url": "https://mcmichael.com/exhibitions/",
+      "render_mode": "wordpress"
+    },
+    {
+      "id": "mercer-union",
+      "name": "Mercer Union",
+      "tier_priority": 2,
+      "default_type": "exhibition",
+      "base_url": "https://www.mercerunion.org/exhibitions",
+      "events_url": "https://www.mercerunion.org/exhibitions",
+      "notes": "Co-presents Toronto Biennial commission; closed summers.",
+      "render_mode": "static"
+    },
+    {
+      "id": "gallery44",
+      "name": "Gallery 44 Centre for Contemporary Photography",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://www.gallery44.org/all-exhibitions",
+      "events_url": "https://www.gallery44.org/all-exhibitions",
+      "render_mode": "static"
+    },
+    {
+      "id": "koffler",
+      "name": "Koffler Arts / Koffler Gallery",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://www.kofflerarts.org/whatson/exhibitions",
+      "events_url": "https://www.kofflerarts.org/whatson/exhibitions",
+      "render_mode": "static"
+    },
+    {
+      "id": "cooper-cole",
+      "name": "Cooper Cole",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://coopercolegallery.com/exhibitions/",
+      "events_url": "https://coopercolegallery.com/exhibitions/",
+      "notes": "Bimonthly cycles; crawl monthly.",
+      "render_mode": "static"
+    },
+    {
+      "id": "daniel-faria",
+      "name": "Daniel Faria Gallery",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "http://www.danielfariagallery.com/exhibitions",
+      "events_url": "http://www.danielfariagallery.com/exhibitions",
+      "render_mode": "static"
+    },
+    {
+      "id": "living-arts-centre",
+      "name": "Living Arts Centre (Mississauga)",
+      "tier_priority": 2,
+      "default_type": "performance",
+      "base_url": "https://www.mississauga.ca/arts-and-culture/locations/living-arts-centre/",
+      "events_url": "https://www.mississauga.ca/arts-and-culture/locations/living-arts-centre/",
+      "notes": "Ticketmaster venue feed.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "the-rose-brampton",
+      "name": "The Rose / Brampton On Stage",
+      "tier_priority": 2,
+      "default_type": "performance",
+      "base_url": "https://tickets.brampton.ca/",
+      "events_url": "https://tickets.brampton.ca/",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "flato-markham",
+      "name": "Flato Markham Theatre",
+      "tier_priority": 2,
+      "default_type": "performance",
+      "base_url": "https://flatomarkhamtheatre.ca/",
+      "events_url": "https://flatomarkhamtheatre.ca/",
+      "notes": "Ticketing feeds AXS.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "rhcpa",
+      "name": "Richmond Hill Centre for the Performing Arts",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://www.rhcentre.ca/",
+      "events_url": "https://www.rhcentre.ca/",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "burlington-pac",
+      "name": "Burlington Performing Arts Centre",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://burlingtonpac.ca/events/",
+      "events_url": "https://burlingtonpac.ca/events/",
+      "notes": "Ticketing via TixHub.",
+      "render_mode": "static"
+    },
+    {
+      "id": "oakville-galleries",
+      "name": "Oakville Galleries",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://www.oakvillegalleries.com/",
+      "events_url": "https://www.oakvillegalleries.com/",
+      "render_mode": "static"
+    },
+    {
+      "id": "pama",
+      "name": "Peel Art Gallery, Museum and Archives",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://www.pama.peelregion.ca/exhibitions",
+      "events_url": "https://www.pama.peelregion.ca/exhibitions",
+      "render_mode": "static"
+    },
+    {
+      "id": "varley",
+      "name": "Varley Art Gallery of Markham",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://varleyartgallery.ca/exhibitions/",
+      "events_url": "https://varleyartgallery.ca/exhibitions/",
+      "render_mode": "static"
+    },
+    {
+      "id": "rmg",
+      "name": "Robert McLaughlin Gallery (Oshawa)",
+      "tier_priority": 2,
+      "default_type": "exhibition",
+      "base_url": "https://rmg.on.ca/exhibitions/",
+      "events_url": "https://rmg.on.ca/exhibitions/",
+      "notes": "Largest public gallery in Durham; admission free.",
+      "render_mode": "static"
+    },
+    {
+      "id": "station-gallery",
+      "name": "Station Gallery (Whitby)",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://stationgallery.ca/exhibitions/",
+      "events_url": "https://stationgallery.ca/exhibitions/",
+      "render_mode": "static"
+    },
+    {
+      "id": "aurora-town-square",
+      "name": "Aurora Cultural Centre / Aurora Town Square",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://www.auroratownsquare.ca/events-tickets/whats-on/",
+      "events_url": "https://www.auroratownsquare.ca/events-tickets/whats-on/",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "ontario-tech-events",
+      "name": "Ontario Tech University events",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://events.ontariotechu.ca/",
+      "events_url": "https://events.ontariotechu.ca/",
+      "notes": "RSS/iCal/JSON feeds.",
+      "render_mode": "static"
+    },
+    {
+      "id": "mississauga-library",
+      "name": "Mississauga Library",
+      "tier_priority": 3,
+      "default_type": "reading",
+      "base_url": "https://mississauga.bibliocommons.com/events/search/",
+      "events_url": "https://mississauga.bibliocommons.com/events/search/",
+      "notes": "BiblioCommons events module.",
+      "render_mode": "javascript"
+    },
+    {
+      "id": "markham-library",
+      "name": "Markham Public Library",
+      "tier_priority": 3,
+      "default_type": "reading",
+      "base_url": "https://markham.bibliocommons.com/events/search/",
+      "events_url": "https://markham.bibliocommons.com/events/search/",
+      "notes": "BiblioCommons events module.",
+      "render_mode": "javascript"
     }
   ],
   "deferred_candidates": {
