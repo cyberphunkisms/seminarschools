@@ -42,6 +42,8 @@
     --type:'Special Elite',ui-monospace,monospace;
     --sans:'DM Sans',system-ui,sans-serif;
   }
+:root.dark, :root[data-theme="dark"]{--paper:#1A1410;--paper-deep:#241C16;--paper-shadow:rgba(0,0,0,0.45);--ink:#F3EADD;--ink-soft:#C8B6A6;--ink-faint:#9A8678;--rule:rgba(243,234,221,0.22);--rule-soft:rgba(243,234,221,0.09);--burgundy:#E0857A;--burgundy-deep:#C86A60;--sepia:#C9A878;--sepia-deep:#A88860;--gold:#D8B65A;}
+@media (prefers-color-scheme: dark){ :root:not(.light){--paper:#1A1410;--paper-deep:#241C16;--paper-shadow:rgba(0,0,0,0.45);--ink:#F3EADD;--ink-soft:#C8B6A6;--ink-faint:#9A8678;--rule:rgba(243,234,221,0.22);--rule-soft:rgba(243,234,221,0.09);--burgundy:#E0857A;--burgundy-deep:#C86A60;--sepia:#C9A878;--sepia-deep:#A88860;--gold:#D8B65A;} }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{

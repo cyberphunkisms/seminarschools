@@ -121,24 +121,66 @@ def load_manual():
             "scraped_at": now_iso(),
             "review_status": "manual",
             "marginalia_url": entry.get("marginalia_url"),
+            "secondary_types": entry.get("secondary_types", []),
+            "parent_id": entry.get("parent_id"),
+            "is_parent_festival": entry.get("is_parent_festival", False),
+            "age_band": entry.get("age_band"),
         })
     return records
 
 
+def _is_midnight(dstr):
+    return "T00:00" in str(dstr)
+
+
+def _url_specificity(url):
+    return (str(url).count("/") + len(str(url))) if url else 0
+
+
+def _fold(into, order, rec):
+    """Fold one record into the keyed map, keyed on (title, calendar day).
+    Unions types on collision and upgrades the base toward the richest values."""
+    key = (normalize_title(rec["title"]), str(rec.get("date", ""))[:10])
+    if key not in into:
+        into[key] = dict(rec)
+        order.append(key)
+        return
+    base = into[key]
+    sec = list(base.get("secondary_types") or [])
+    for t in [rec.get("type")] + list(rec.get("secondary_types") or []):
+        if t and t != base.get("type") and t not in sec:
+            sec.append(t)
+    base["secondary_types"] = sec
+    if _is_midnight(base.get("date", "")) and not _is_midnight(rec.get("date", "")):
+        base["date"] = rec["date"]
+    if not base.get("end_date") and rec.get("end_date"):
+        base["end_date"] = rec["end_date"]
+    if not base.get("speaker_or_director") and rec.get("speaker_or_director"):
+        base["speaker_or_director"] = rec["speaker_or_director"]
+    if not base.get("parent_id") and rec.get("parent_id"):
+        base["parent_id"] = rec["parent_id"]
+    if rec.get("is_parent_festival"):
+        base["is_parent_festival"] = True
+    if len(str(rec.get("venue") or "")) > len(str(base.get("venue") or "")):
+        base["venue"] = rec["venue"]
+    if _url_specificity(rec.get("source_url")) > _url_specificity(base.get("source_url")):
+        base["source_url"] = rec["source_url"]
+    if not base.get("age_band") and rec.get("age_band"):
+        base["age_band"] = rec["age_band"]
+
+
 def merge(harvest_records, manual_records):
-    """Manual wins on (normalized_title, date_rounded_to_hour) collision."""
-    manual_keys = {
-        (normalize_title(r["title"]), round_to_hour(r["date"]))
-        for r in manual_records
-    }
-    deduped = list(manual_records)
+    """One event, one record. Manual wins base fields; collisions union types.
+    Dedupes within each input as well as across them, keyed on
+    (normalized_title, date_rounded_to_hour)."""
+    into, order = {}, []
+    for r in manual_records:
+        _fold(into, order, r)
     for r in harvest_records:
-        key = (normalize_title(r["title"]), round_to_hour(r["date"]))
-        if key in manual_keys:
-            continue
-        deduped.append(r)
-    deduped.sort(key=lambda r: r["date"])
-    return deduped
+        _fold(into, order, r)
+    merged = [into[k] for k in order]
+    merged.sort(key=lambda r: r["date"])
+    return merged
 
 
 def validate(records, schema):

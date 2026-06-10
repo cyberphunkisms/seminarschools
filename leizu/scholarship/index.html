@@ -41,6 +41,8 @@
   --han-tc:'Noto Serif TC',serif;
   --mono:'JetBrains Mono',monospace;
 }
+:root.dark, :root[data-theme="dark"]{--paper:#1A2014;--paper-deep:#242C1C;--ink:#E8DEC7;--ink-soft:#B8AC8E;--silk:#5C5340;--silk-pale:#3A3528;--accent:#D4A076;--rule:#5A5240;--shadow:rgba(0,0,0,0.4);}
+@media (prefers-color-scheme: dark){ :root:not(.light){--paper:#1A2014;--paper-deep:#242C1C;--ink:#E8DEC7;--ink-soft:#B8AC8E;--silk:#5C5340;--silk-pale:#3A3528;--accent:#D4A076;--rule:#5A5240;--shadow:rgba(0,0,0,0.4);} }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{background:var(--paper);color:var(--ink);font-family:var(--display);font-size:1.05rem;line-height:1.65;padding:0;}

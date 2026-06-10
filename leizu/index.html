@@ -51,7 +51,7 @@
   --type-scale:1;
 }
 /* N34 — Dark theme. Inverts paper/ink relationship while preserving the mulberry/forest palette. Element colors brighten slightly so they read against dark backgrounds. Activated via :root[data-theme="dark"]. */
-:root[data-theme="dark"]{
+:root[data-theme="dark"], :root.dark{
   --paper:#1A2014;
   --paper-deep:#242C1C;
   --ink:#E8DEC7;
@@ -74,6 +74,29 @@
   /* ESL tint dark variant. Brighter sage tint readable on deep forest bg. */
   --esl-tint:rgba(143,171,120,0.10);--esl-accent:#A8C887;--esl-accent-soft:rgba(168,200,135,0.15);
 }
+@media (prefers-color-scheme: dark){ :root:not(.light){
+  --paper:#1A2014;
+  --paper-deep:#242C1C;
+  --ink:#E8DEC7;
+  --ink-soft:#B8AC8E;
+  --mulberry-deep:#A8C18E;
+  --mulberry-leaf:#8FAB78;
+  --mulberry-fruit:#C77A8E;
+  --mulberry-fruit-ripe:#E08AA0;
+  --silk:#5C5340;
+  --silk-pale:#3A3528;
+  --accent:#D4A076;
+  --rule:#5A5240;
+  --shadow:rgba(0,0,0,0.4);
+  --element-wood:#8FAB78;
+  --element-fire:#E08AA0;
+  --element-earth:#D4A076;
+  --element-metal:#E0B574;
+  --element-water:#7CA5B8;
+  --in-person:#E08F62;--in-person-deep:#C7754C;
+  /* ESL tint dark variant. Brighter sage tint readable on deep forest bg. */
+  --esl-tint:rgba(143,171,120,0.10);--esl-accent:#A8C887;--esl-accent-soft:rgba(168,200,135,0.15);
+} }
 [data-lang="zh"]{font-family:var(--han-tc);}
 [data-lang="zhs"]{font-family:var(--han-sc);}
 [data-lang="fa"]{font-family:var(--farsi);direction:rtl;}

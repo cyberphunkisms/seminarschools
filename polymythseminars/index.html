@@ -19,15 +19,42 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F5EBE4;
-    --paper: #FBF6F1;
-    --ink: #2B2520;
-    --dim: #6B5F55;
-    --hairline: #D9CFC6;
-    --accent: #A07A2C;
+    /* surfaces + ink aliased to the shared theme (css/theme.css) so they switch day/night */
+    --paper: var(--bg-soft, #FBF6F1);
+    --ink: var(--fg, #2B2520);
+    --dim: var(--muted, #6B5F55);
+    --hairline: var(--rule, #D9CFC6);
+    --accent-light: #A07A2C;
+    --accent-dark: #D8B45C;
+    --accent: var(--accent-light);
+    /* category colors — light */
+    --cat-lecture: #4A3F8A; --cat-conference: #1A5276; --cat-workshop: #1A6E4E;
+    --cat-reading: #7B2D4E; --cat-festival: #B85420; --cat-exhibition: #5A4A2E;
+    --cat-performance: #8B6914; --cat-defence: #2E5230; --cat-gathering: #5A5A52;
+    --cat-protest: #A93226; --cat-community: #157A72; --cat-other: #6B5F55;
+    --cat-screening: #1F7A8C; --cat-cfp: #5D5F8A; --cat-contest: #B0327A;
     --serif: 'Cormorant Garamond', Georgia, serif;
     --display: 'Libre Baskerville', Georgia, serif;
     --sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  }
+  /* category colors + accent lifted for dark; mirrors css/theme.css triggers */
+  @media (prefers-color-scheme: dark) {
+    :root:not(.light) {
+      --accent: var(--accent-dark);
+      --cat-lecture: #9C8FE6; --cat-conference: #6FB1DA; --cat-workshop: #5FC79A;
+      --cat-reading: #DE8FB0; --cat-festival: #E8975C; --cat-exhibition: #CDB48C;
+      --cat-performance: #D8B65A; --cat-defence: #84C088; --cat-gathering: #B8B4A8;
+      --cat-protest: #E58375; --cat-community: #5FC4B8; --cat-other: #BDA899;
+    --cat-screening: #62C0D2; --cat-cfp: #A3A6D6; --cat-contest: #E883C0;
+      --cat-screening: #62C0D2; --cat-cfp: #A3A6D6; --cat-contest: #E883C0;
+    }
+  }
+  :root.dark, :root[data-theme="dark"] {
+    --accent: var(--accent-dark);
+    --cat-lecture: #9C8FE6; --cat-conference: #6FB1DA; --cat-workshop: #5FC79A;
+    --cat-reading: #DE8FB0; --cat-festival: #E8975C; --cat-exhibition: #CDB48C;
+    --cat-performance: #D8B65A; --cat-defence: #84C088; --cat-gathering: #B8B4A8;
+    --cat-protest: #E58375; --cat-community: #5FC4B8; --cat-other: #BDA899;
   }
   * { box-sizing: border-box; }
   html, body { background: var(--bg); color: var(--ink); margin: 0; padding: 0; font-family: var(--serif); font-size: 18px; line-height: 1.55; }
@@ -64,17 +91,36 @@
   .filter-nav button.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
   /* Category color washes — single click applies category accent */
-  .filter-nav button[data-cat="lecture"].on { border-color: #4A3F8A; background: rgba(74,63,138,0.12); color: #4A3F8A; }
-  .filter-nav button[data-cat="conference"].on { border-color: #1a5276; background: rgba(26,82,118,0.12); color: #1a5276; }
-  .filter-nav button[data-cat="workshop"].on { border-color: #1a6e4e; background: rgba(26,110,78,0.12); color: #1a6e4e; }
-  .filter-nav button[data-cat="reading"].on { border-color: #7b2d4e; background: rgba(123,45,78,0.12); color: #7b2d4e; }
-  .filter-nav button[data-cat="festival"].on { border-color: #B85420; background: rgba(184,84,32,0.12); color: #B85420; }
-  .filter-nav button[data-cat="exhibition"].on { border-color: #5A4A2E; background: rgba(90,74,46,0.12); color: #5A4A2E; }
-  .filter-nav button[data-cat="performance"].on { border-color: #8B6914; background: rgba(139,105,20,0.12); color: #8B6914; }
-  .filter-nav button[data-cat="defence"].on { border-color: #2E5230; background: rgba(46,82,48,0.12); color: #2E5230; }
-  .filter-nav button[data-cat="gathering"].on { border-color: #5a5a52; background: rgba(90,90,82,0.12); color: #5a5a52; }
-  .filter-nav button[data-cat="protest"].on { border-color: #A93226; background: rgba(169,50,38,0.12); color: #A93226; }
-  .filter-nav button[data-cat="other"].on { border-color: #6B5F55; background: rgba(107,95,85,0.12); color: #6B5F55; }
+  .filter-nav button[data-cat="lecture"].on { border-color: var(--cat-lecture); background: color-mix(in srgb, var(--cat-lecture) 14%, transparent); color: var(--cat-lecture); }
+  .filter-nav button[data-cat="conference"].on { border-color: var(--cat-conference); background: color-mix(in srgb, var(--cat-conference) 14%, transparent); color: var(--cat-conference); }
+  .filter-nav button[data-cat="workshop"].on { border-color: var(--cat-workshop); background: color-mix(in srgb, var(--cat-workshop) 14%, transparent); color: var(--cat-workshop); }
+  .filter-nav button[data-cat="reading"].on { border-color: var(--cat-reading); background: color-mix(in srgb, var(--cat-reading) 14%, transparent); color: var(--cat-reading); }
+  .filter-nav button[data-cat="festival"].on { border-color: var(--cat-festival); background: color-mix(in srgb, var(--cat-festival) 14%, transparent); color: var(--cat-festival); }
+  .filter-nav button[data-cat="exhibition"].on { border-color: var(--cat-exhibition); background: color-mix(in srgb, var(--cat-exhibition) 14%, transparent); color: var(--cat-exhibition); }
+  .filter-nav button[data-cat="performance"].on { border-color: var(--cat-performance); background: color-mix(in srgb, var(--cat-performance) 14%, transparent); color: var(--cat-performance); }
+  .filter-nav button[data-cat="defence"].on { border-color: var(--cat-defence); background: color-mix(in srgb, var(--cat-defence) 14%, transparent); color: var(--cat-defence); }
+  .filter-nav button[data-cat="gathering"].on { border-color: var(--cat-gathering); background: color-mix(in srgb, var(--cat-gathering) 14%, transparent); color: var(--cat-gathering); }
+  .filter-nav button[data-cat="protest"].on { border-color: var(--cat-protest); background: color-mix(in srgb, var(--cat-protest) 14%, transparent); color: var(--cat-protest); }
+  .filter-nav button[data-cat="community"].on { border-color: var(--cat-community); background: color-mix(in srgb, var(--cat-community) 14%, transparent); color: var(--cat-community); }
+  .filter-nav button[data-cat="other"].on { border-color: var(--cat-other); background: color-mix(in srgb, var(--cat-other) 14%, transparent); color: var(--cat-other); }
+  .filter-nav button[data-cat="screening"].on { border-color: var(--cat-screening); background: color-mix(in srgb, var(--cat-screening) 14%, transparent); color: var(--cat-screening); }
+  .filter-nav button[data-cat="cfp"].on { border-color: var(--cat-cfp); background: color-mix(in srgb, var(--cat-cfp) 14%, transparent); color: var(--cat-cfp); }
+  .filter-nav button[data-cat="contest"].on { border-color: var(--cat-contest); background: color-mix(in srgb, var(--cat-contest) 14%, transparent); color: var(--cat-contest); }
+  /* age filter row */
+  .age-nav { margin-top: -0.7rem; margin-bottom: 1.7rem; }
+  .age-nav .age-label { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); align-self: center; margin-right: 0.3rem; }
+  .age-nav button.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  /* multiday, multi-tag, festival nesting */
+  .event { border-left: 3px solid var(--cat-other); padding-left: 0.9rem; }
+  .event .body-col .daterange { font-family: var(--sans); font-size: 0.74rem; font-weight: 600; letter-spacing: 0.04em; color: var(--accent); margin: 0.1rem 0 0.2rem; }
+  .event .body-col .venue.age { font-style: normal; opacity: 0.9; }
+  .event .body-col .type-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.45rem; }
+  .event .body-col .type-tags .type-tag { margin-top: 0; }
+  .event.is-parent .body-col .title::after { content: " \00B7 festival"; font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); font-weight: 600; }
+  .subevents { margin: 0.5rem 0 0.3rem 1.5rem; padding-left: 1rem; border-left: 1px dashed var(--hairline); }
+  .subevents .event { grid-template-columns: 56px 1fr; gap: 0.85rem; padding-top: 0.7rem; padding-bottom: 0.7rem; }
+  .subevents .event .date-col .day { font-size: 1.25rem; }
+  .subevents .event .body-col .title { font-size: 0.95rem; }
 
   /* ---------- View toggle ---------- */
   .view-toggle {
@@ -90,6 +136,55 @@
   .view-toggle button.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .view-toggle button:first-child { border-radius: 4px 0 0 4px; }
   .view-toggle button:last-child { border-radius: 0 4px 4px 0; }
+
+  /* ---------- Mode toggle (List / Calendar) ---------- */
+  .mode-toggle { display: inline-flex; margin: 0.2rem 0 1.5rem; }
+  .mode-toggle button {
+    font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.42rem 1rem; border: 1px solid var(--hairline); background: transparent;
+    color: var(--dim); cursor: pointer; transition: all 0.15s;
+  }
+  .mode-toggle button:hover { color: var(--ink); }
+  .mode-toggle button.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .mode-toggle button:first-child { border-radius: 4px 0 0 4px; }
+  .mode-toggle button:last-child { border-radius: 0 4px 4px 0; border-left: 0; }
+
+  /* ---------- Calendar grid ---------- */
+  .cal-head { display: flex; align-items: center; justify-content: center; gap: 1.4rem; margin: 0.4rem 0 1.1rem; }
+  .cal-head .cal-title { font-family: var(--serif); font-size: 1.6rem; color: var(--accent); letter-spacing: 0.01em; min-width: 11rem; text-align: center; }
+  .cal-nav {
+    width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--hairline);
+    background: transparent; color: var(--ink); font-size: 1.15rem; line-height: 1; cursor: pointer; transition: all 0.15s;
+  }
+  .cal-nav:hover { border-color: var(--ink); background: color-mix(in srgb, var(--ink) 7%, transparent); }
+  .cal-dow { display: grid; grid-template-columns: repeat(7, 1fr); border-bottom: 1px solid var(--hairline); }
+  .cal-dow span { font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); text-align: center; padding: 0.5rem 0; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+  .cal-cell {
+    min-height: 120px; border-right: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
+    padding: 0.3rem 0.35rem 0.5rem; overflow: hidden;
+  }
+  .cal-cell:nth-child(7n+1) { border-left: 1px solid var(--hairline); }
+  .cal-cell.blank { background: color-mix(in srgb, var(--hairline) 16%, transparent); }
+  .cal-cell .daynum { font-family: var(--sans); font-size: 0.78rem; color: var(--dim); text-align: right; display: block; }
+  .cal-cell.today .daynum { color: var(--paper); background: var(--accent); border-radius: 50%; width: 1.55rem; height: 1.55rem; line-height: 1.55rem; text-align: center; margin-left: auto; }
+  .cal-ev {
+    display: block; font-family: var(--sans); font-size: 0.7rem; line-height: 1.25; margin-top: 0.22rem;
+    padding: 0.13rem 0.32rem; border-left: 3px solid var(--cat-other); border-radius: 2px;
+    background: color-mix(in srgb, var(--cat-other) 9%, transparent); color: var(--ink); text-decoration: none;
+    cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .cal-ev:hover { background: color-mix(in srgb, var(--c, var(--cat-other)) 22%, transparent); }
+  .cal-ev .evtime { font-weight: 700; }
+  .cal-ev.cont { background: transparent; color: var(--dim); border-left-style: dotted; }
+  .cal-ev.cont.is-end { border-left: 0; }
+  .cal-more { font-family: var(--sans); font-size: 0.64rem; color: var(--dim); margin-top: 0.2rem; display: block; }
+  @media (max-width: 640px) {
+    .cal-cell { min-height: 76px; padding: 0.2rem; }
+    .cal-ev { font-size: 0.58rem; padding: 0.1rem 0.22rem; }
+    .cal-dow span { font-size: 0.56rem; }
+    .cal-head .cal-title { font-size: 1.2rem; min-width: 8rem; }
+  }
 
   /* ---------- Count line ---------- */
   .count-line {
@@ -197,10 +292,20 @@
     <button type="button" data-cat="festival">Festival</button>
     <button type="button" data-cat="exhibition">Exhibition</button>
     <button type="button" data-cat="performance">Performance</button>
-    <button type="button" data-cat="defence">Defence</button>
+    <button type="button" data-cat="screening">Screening</button>
     <button type="button" data-cat="gathering">Gathering</button>
     <button type="button" data-cat="protest">Protest</button>
+    <button type="button" data-cat="community">Community</button>
+    <button type="button" data-cat="cfp">Call for Papers</button>
+    <button type="button" data-cat="contest">Contest</button>
     <button type="button" data-cat="other">Other</button>
+  </nav>
+  <nav class="filter-nav age-nav" id="ageNav">
+    <span class="age-label">Age</span>
+    <button type="button" data-age="all" class="on">All</button>
+    <button type="button" data-age="youth">Youth</button>
+    <button type="button" data-age="adult">Adult</button>
+    <button type="button" data-age="allages">All ages</button>
   </nav>
 
   <div class="view-toggle">
@@ -211,7 +316,12 @@
 
   <div class="count-line" id="countLine">Loading events…</div>
 
+  <div class="mode-toggle" role="tablist" aria-label="View mode">
+    <button type="button" data-mode="list" class="on">List</button>
+    <button type="button" data-mode="calendar">Calendar</button>
+  </div>
   <div id="eventsContainer"></div>
+  <div id="calendarContainer" hidden></div>
 
   <footer class="cv-footer">
     <div>seminarschools.com/polymythseminars · <a href="/">home</a> · <a href="/saul/">cv</a> · <a href="/agora/">agora</a></div> &middot; <a href="/polymythseminars/feed.xml" type="application/rss+xml">rss</a> &middot; <span class="build-stamp" title="deployed bundle version">build 20260606</span></footer>
@@ -250,8 +360,10 @@ const TYPE_TO_CATEGORY = {
   'exhibition': 'exhibition',
   'site-specific-art': 'exhibition',
   'performance': 'performance',
-  'screening': 'performance',
-  'defence': 'defence',
+  'screening': 'screening',
+  'cfp': 'cfp',
+  'contest': 'contest',
+  'defence': 'lecture',
   'gathering': 'gathering',
   'memorial': 'gathering',
   'celebration': 'gathering',
@@ -265,6 +377,19 @@ const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 let ALL_EVENTS = [];
 let activeCategory = 'all';
 let activeView = 'default';
+let activeAge = 'all';
+let activeMode = 'list';
+let calMonth = null;
+
+function catOf(type){ return TYPE_TO_CATEGORY[type] || 'other'; }
+function ageBucket(ab){
+  if (!ab) return null;
+  var t = String(ab).toLowerCase();
+  if (/all ?ages|all-ages|family|everyone|open to all|\bopen\b/.test(t)) return 'allages';
+  if (/youth|teen|child|kid|junior|minor|under ?1[0-8]|grade|k-?12|secondary|high ?school|elementary|ages? ?\d{1,2}\s*[\u2013-]\s*1[0-8]\b/.test(t)) return 'youth';
+  if (/adult|18\+|over ?18|undergrad|graduate|emerging|professional|university|post-?secondary/.test(t)) return 'adult';
+  return 'other';
+}
 
 function fetchEventsWithFallback(){
   // /data/* is force-404'd by netlify.toml (PM35: plumbing stays private).
@@ -293,11 +418,10 @@ async function loadEvents() {
   try {
     const data = await fetchEventsWithFallback();
     console.log('calendar events loaded from', data._loadedFrom);
-    ALL_EVENTS = data.events.map(e => ({
-      ...e,
-      _date: new Date(e.date),
-      _category: TYPE_TO_CATEGORY[e.type] || 'other'
-    })).filter(e => !isNaN(e._date.getTime()));
+    ALL_EVENTS = data.events.map(e => {
+      const cats = [e.type].concat(e.secondary_types || []).map(t => TYPE_TO_CATEGORY[t] || 'other').filter((c,i,arr) => arr.indexOf(c) === i);
+      return { ...e, _date: new Date(e.date), _category: TYPE_TO_CATEGORY[e.type] || 'other', _categories: cats, _ageBucket: ageBucket(e.age_band) };
+    }).filter(e => !isNaN(e._date.getTime()));
     ALL_EVENTS.sort((a,b) => a._date - b._date);
     render();
   } catch (err) {
@@ -318,35 +442,105 @@ function getFilteredEvents() {
     events = events.filter(e => e._date >= start && e._date <= end);
   }
 
-  // Category filter
+  // Category filter (matches primary or any secondary type)
   if (activeCategory !== 'all') {
-    events = events.filter(e => e._category === activeCategory);
+    events = events.filter(e => (e._categories || [e._category]).includes(activeCategory));
+  }
+
+  // Age filter
+  if (activeAge !== 'all') {
+    events = events.filter(e => e._ageBucket === activeAge);
   }
 
   return events;
 }
 
+function eventCard(e, isChild) {
+  const now = new Date();
+  const isPast = e._date < now;
+  const day = e._date.getDate();
+  const mon = MONTHS_SHORT[e._date.getMonth()];
+  const hours = e._date.getHours();
+  const mins = e._date.getMinutes();
+  const hasTime = hours !== 0 || mins !== 0;
+  const timeStr = hasTime ? `${(hours%12||12)}:${String(mins).padStart(2,'0')}${hours<12?'a':'p'}` : '';
+
+  let rangeHtml = '';
+  if (e.end_date) {
+    const ed = new Date(e.end_date);
+    if (!isNaN(ed.getTime()) && (ed.getDate() !== day || ed.getMonth() !== e._date.getMonth() || ed.getFullYear() !== e._date.getFullYear())) {
+      const sameMonth = ed.getMonth() === e._date.getMonth() && ed.getFullYear() === e._date.getFullYear();
+      const rs = sameMonth
+        ? `${mon} ${day}\u2013${ed.getDate()}`
+        : `${mon} ${day} \u2013 ${MONTHS_SHORT[ed.getMonth()]} ${ed.getDate()}`;
+      rangeHtml = `<div class="daterange">${rs}</div>`;
+    }
+  }
+
+  const title = e.source_url
+    ? `<a href="${e.source_url}" target="_blank" rel="noopener">${escapeHtml(e.title)}</a>`
+    : escapeHtml(e.title);
+  const speaker = e.speaker_or_director ? `<div class="meta">${escapeHtml(e.speaker_or_director)}</div>` : '';
+  const venue = e.venue ? `<div class="venue">${escapeHtml(e.venue)}</div>` : '';
+  const ageHtml = e.age_band ? `<div class="venue age">${escapeHtml(e.age_band)}</div>` : '';
+
+  const types = [e.type].concat(e.secondary_types || []).filter((t,i,arr) => t && arr.indexOf(t) === i);
+  const tags = types.map(t => {
+    const c = catOf(t);
+    return `<span class="type-tag" style="color:var(--cat-${c});border-color:var(--cat-${c})">${escapeHtml(t)}</span>`;
+  }).join('');
+
+  const primaryCat = e._category || 'other';
+  const parentClass = e.is_parent_festival ? ' is-parent' : '';
+  return `
+    <div class="event${isPast ? ' past' : ''}${parentClass}" style="border-left-color:var(--cat-${primaryCat})">
+      <div class="date-col">
+        <div class="day">${day}</div>
+        <div class="mon">${mon}</div>
+        ${timeStr ? `<div class="time">${timeStr}</div>` : ''}
+      </div>
+      <div class="body-col">
+        <div class="title">${title}</div>
+        ${rangeHtml}
+        ${speaker}
+        ${venue}
+        ${ageHtml}
+        <div class="type-tags">${tags}</div>
+      </div>
+    </div>`;
+}
+
 function render() {
   const events = getFilteredEvents();
-  const now = new Date();
   const container = document.getElementById('eventsContainer');
   const countLine = document.getElementById('countLine');
 
-  // Update count
   const totalEvents = ALL_EVENTS.length;
   const shownEvents = events.length;
-  const viewLabel = activeView === 'default' ? '1 week back · 1 year forward' : 'all events';
-  const catLabel = activeCategory === 'all' ? '' : ` · ${activeCategory}`;
-  countLine.innerHTML = `<strong>${shownEvents}</strong> of ${totalEvents} events &nbsp;·&nbsp; ${viewLabel}${catLabel}`;
+  const viewLabel = activeView === 'default' ? '1 week back \u00b7 1 year forward' : 'all events';
+  const catLabel = activeCategory === 'all' ? '' : ` \u00b7 ${activeCategory}`;
+  const ageLabel = activeAge === 'all' ? '' : ` \u00b7 age: ${activeAge}`;
+  countLine.innerHTML = `<strong>${shownEvents}</strong> of ${totalEvents} events &nbsp;\u00b7&nbsp; ${viewLabel}${catLabel}${ageLabel}`;
 
   if (events.length === 0) {
     container.innerHTML = '<div class="empty-state">No events match the current filter.</div>';
     return;
   }
 
-  // Group by month
-  const groups = {};
+  // Nesting: children whose parent is also in view render under the parent
+  const idsInView = new Set(events.map(e => e.id).filter(Boolean));
+  const childrenByParent = {};
+  const nested = new Set();
   events.forEach(e => {
+    if (e.parent_id && idsInView.has(e.parent_id)) {
+      (childrenByParent[e.parent_id] = childrenByParent[e.parent_id] || []).push(e);
+      nested.add(e);
+    }
+  });
+  const topLevel = events.filter(e => !nested.has(e));
+
+  const groups = {};
+  topLevel.forEach(e => {
     const key = `${e._date.getFullYear()}-${String(e._date.getMonth()).padStart(2,'0')}`;
     if (!groups[key]) groups[key] = { label: `${MONTHS_LONG[e._date.getMonth()]} ${e._date.getFullYear()}`, items: [] };
     groups[key].items.push(e);
@@ -357,40 +551,136 @@ function render() {
     const g = groups[key];
     html += `<div class="month-group"><div class="month-head">${g.label}</div>`;
     g.items.forEach(e => {
-      const isPast = e._date < now;
-      const day = e._date.getDate();
-      const mon = MONTHS_SHORT[e._date.getMonth()];
-      const hours = e._date.getHours();
-      const mins = e._date.getMinutes();
-      const hasTime = hours !== 0 || mins !== 0;
-      const timeStr = hasTime ? `${(hours%12||12)}:${String(mins).padStart(2,'0')}${hours<12?'a':'p'}` : '';
-
-      const title = e.source_url
-        ? `<a href="${e.source_url}" target="_blank" rel="noopener">${escapeHtml(e.title)}</a>`
-        : escapeHtml(e.title);
-
-      const speaker = e.speaker_or_director ? `<div class="meta">${escapeHtml(e.speaker_or_director)}</div>` : '';
-      const venue = e.venue ? `<div class="venue">${escapeHtml(e.venue)}</div>` : '';
-
-      html += `
-        <div class="event ${isPast ? 'past' : ''}">
-          <div class="date-col">
-            <div class="day">${day}</div>
-            <div class="mon">${mon}</div>
-            ${timeStr ? `<div class="time">${timeStr}</div>` : ''}
-          </div>
-          <div class="body-col">
-            <div class="title">${title}</div>
-            ${speaker}
-            ${venue}
-            <span class="type-tag">${escapeHtml(e.type)}</span>
-          </div>
-        </div>`;
+      html += eventCard(e, false);
+      const kids = childrenByParent[e.id];
+      if (kids && kids.length) {
+        kids.sort((a,b) => a._date - b._date);
+        html += `<div class="subevents">` + kids.map(k => eventCard(k, true)).join('') + `</div>`;
+      }
     });
     html += `</div>`;
   });
 
   container.innerHTML = html;
+}
+
+function pad2(n){ return String(n).padStart(2, '0'); }
+function dayKey(d){ return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
+
+function calFilteredEvents(){
+  return ALL_EVENTS.filter(function(e){
+    var catOk = activeCategory === 'all' || (e._categories || [e._category]).indexOf(activeCategory) !== -1;
+    var ageOk = activeAge === 'all' || e._ageBucket === activeAge;
+    return catOk && ageOk;
+  });
+}
+
+function renderCalendar(){
+  var container = document.getElementById('calendarContainer');
+  var countLine = document.getElementById('countLine');
+  var today = new Date();
+  if (!calMonth) calMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  var year = calMonth.getFullYear(), month = calMonth.getMonth();
+  var events = calFilteredEvents();
+
+  // Map YYYY-MM-DD -> [{ e, isStart, isEnd }], walking each event's day span.
+  var byDay = {};
+  events.forEach(function(e){
+    var start = new Date(e._date.getFullYear(), e._date.getMonth(), e._date.getDate());
+    var end = start;
+    if (e.end_date){
+      var ed = new Date(e.end_date);
+      if (!isNaN(ed.getTime())) end = new Date(ed.getFullYear(), ed.getMonth(), ed.getDate());
+    }
+    if (end < start) end = start;
+    var d = new Date(start), guard = 0;
+    while (d <= end && guard < 400){
+      if (d.getFullYear() === year && d.getMonth() === month){
+        var k = dayKey(d);
+        (byDay[k] = byDay[k] || []).push({ e: e, isStart: d.getTime() === start.getTime(), isEnd: d.getTime() === end.getTime() });
+      }
+      d.setDate(d.getDate() + 1); guard++;
+    }
+  });
+
+  var firstDow = new Date(year, month, 1).getDay();
+  var daysInMonth = new Date(year, month + 1, 0).getDate();
+  var todayKey = dayKey(today);
+  var dows = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+
+  var html = '';
+  html += '<div class="cal-head">';
+  html += '<button type="button" class="cal-nav" data-cal="prev" aria-label="Previous month">\u2039</button>';
+  html += '<span class="cal-title">' + MONTHS_LONG[month] + ' ' + year + '</span>';
+  html += '<button type="button" class="cal-nav" data-cal="next" aria-label="Next month">\u203A</button>';
+  html += '</div>';
+  html += '<div class="cal-dow">' + dows.map(function(d){ return '<span>' + d + '</span>'; }).join('') + '</div>';
+  html += '<div class="cal-grid">';
+
+  for (var b = 0; b < firstDow; b++) html += '<div class="cal-cell blank"></div>';
+
+  for (var day = 1; day <= daysInMonth; day++){
+    var dObj = new Date(year, month, day);
+    var k = dayKey(dObj);
+    html += '<div class="cal-cell' + (k === todayKey ? ' today' : '') + '">';
+    html += '<span class="daynum">' + day + '</span>';
+    var list = (byDay[k] || []).slice().sort(function(a, bb){ return a.e._date - bb.e._date; });
+    var shown = list.slice(0, 4);
+    shown.forEach(function(item){
+      var e = item.e;
+      var cat = e._category || 'other';
+      var hrs = e._date.getHours(), mins = e._date.getMinutes();
+      var hasTime = (hrs !== 0 || mins !== 0) && item.isStart;
+      var timeStr = hasTime ? ((hrs % 12 || 12) + (mins ? ':' + pad2(mins) : '') + (hrs < 12 ? 'a' : 'p')) : '';
+      var contClass = item.isStart ? '' : (' cont' + (item.isEnd ? ' is-end' : ''));
+      var label = escapeHtml(e.title);
+      if (item.isStart && e.end_date){
+        var ed2 = new Date(e.end_date);
+        if (!isNaN(ed2.getTime()) && !(ed2.getFullYear() === year && ed2.getMonth() === month && ed2.getDate() === day))
+          label += ' <span style="opacity:.6">(ends ' + MONTHS_SHORT[ed2.getMonth()] + ' ' + ed2.getDate() + ')</span>';
+      }
+      var inner = (timeStr ? '<span class="evtime">' + timeStr + '</span> ' : '') + label;
+      var sc = 'border-left-color:var(--cat-' + cat + ');background:color-mix(in srgb,var(--cat-' + cat + ') 9%,transparent);--c:var(--cat-' + cat + ')';
+      if (e.source_url)
+        html += '<a class="cal-ev' + contClass + '" href="' + e.source_url + '" target="_blank" rel="noopener" style="' + sc + '" title="' + escapeHtml(e.title) + '">' + inner + '</a>';
+      else
+        html += '<span class="cal-ev' + contClass + '" style="' + sc + '" title="' + escapeHtml(e.title) + '">' + inner + '</span>';
+    });
+    if (list.length > shown.length) html += '<span class="cal-more">+' + (list.length - shown.length) + ' more</span>';
+    html += '</div>';
+  }
+
+  var totalCells = firstDow + daysInMonth;
+  var trailing = (7 - (totalCells % 7)) % 7;
+  for (var t = 0; t < trailing; t++) html += '<div class="cal-cell blank"></div>';
+  html += '</div>';
+  container.innerHTML = html;
+
+  var mStart = new Date(year, month, 1), mEnd = new Date(year, month + 1, 0);
+  var inMonth = events.filter(function(e){
+    var s = new Date(e._date.getFullYear(), e._date.getMonth(), e._date.getDate());
+    var en = s;
+    if (e.end_date){ var x = new Date(e.end_date); if (!isNaN(x.getTime())) en = new Date(x.getFullYear(), x.getMonth(), x.getDate()); }
+    return s <= mEnd && en >= mStart;
+  }).length;
+  var catLabel = activeCategory === 'all' ? '' : ' \u00b7 ' + activeCategory;
+  var ageLabel = activeAge === 'all' ? '' : ' \u00b7 age: ' + activeAge;
+  countLine.innerHTML = '<strong>' + inMonth + '</strong> events in ' + MONTHS_LONG[month] + ' ' + year + catLabel + ageLabel;
+}
+
+function dispatchRender(){
+  var ec = document.getElementById('eventsContainer');
+  var cc = document.getElementById('calendarContainer');
+  var vt = document.querySelector('.view-toggle');
+  if (activeMode === 'calendar'){
+    ec.hidden = true; cc.hidden = false;
+    if (vt) vt.style.display = 'none';
+    renderCalendar();
+  } else {
+    ec.hidden = false; cc.hidden = true;
+    if (vt) vt.style.display = '';
+    render();
+  }
 }
 
 function escapeHtml(s) {
@@ -406,7 +696,14 @@ document.getElementById('filterNav').addEventListener('click', e => {
   const cat = e.target.dataset.cat;
   activeCategory = cat;
   document.querySelectorAll('#filterNav button').forEach(b => b.classList.toggle('on', b.dataset.cat === cat));
-  render();
+  dispatchRender();
+});
+
+document.getElementById('ageNav').addEventListener('click', e => {
+  if (e.target.tagName !== 'BUTTON') return;
+  activeAge = e.target.dataset.age;
+  document.querySelectorAll('#ageNav button').forEach(b => b.classList.toggle('on', b.dataset.age === activeAge));
+  dispatchRender();
 });
 
 document.querySelector('.view-toggle').addEventListener('click', e => {
@@ -415,6 +712,21 @@ document.querySelector('.view-toggle').addEventListener('click', e => {
   activeView = view;
   document.querySelectorAll('.view-toggle button').forEach(b => b.classList.toggle('on', b.dataset.view === view));
   render();
+});
+
+document.querySelector('.mode-toggle').addEventListener('click', e => {
+  if (e.target.tagName !== 'BUTTON') return;
+  activeMode = e.target.dataset.mode;
+  document.querySelectorAll('.mode-toggle button').forEach(b => b.classList.toggle('on', b.dataset.mode === activeMode));
+  dispatchRender();
+});
+
+document.getElementById('calendarContainer').addEventListener('click', e => {
+  const nav = e.target.closest('[data-cal]');
+  if (!nav) return;
+  if (!calMonth) calMonth = new Date();
+  calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth() + (nav.dataset.cal === 'next' ? 1 : -1), 1);
+  renderCalendar();
 });
 
 loadEvents();

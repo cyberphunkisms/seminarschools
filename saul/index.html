@@ -202,13 +202,29 @@
     color: var(--accent);
     font-weight: 700;
   }
-  .filter-nav button[data-cat="kitchen"].on { border-color: #8B6914; background: rgba(139,105,20,0.08); color: #8B6914; }
-  .filter-nav button[data-cat="teaching"].on { border-color: #1a5276; background: rgba(26,82,118,0.08); color: #1a5276; }
-  .filter-nav button[data-cat="community"].on { border-color: #1a6e4e; background: rgba(26,110,78,0.08); color: #1a6e4e; }
-  .filter-nav button[data-cat="education"].on { border-color: #7b2d4e; background: rgba(123,45,78,0.08); color: #7b2d4e; }
-  .filter-nav button[data-cat="volunteer"].on { border-color: #5a5a52; background: rgba(90,90,82,0.08); color: #5a5a52; }
-  .filter-nav button[data-cat="performance"].on { border-color: #4a3f8a; background: rgba(74,63,138,0.08); color: #4a3f8a; }
-  .filter-nav button[data-cat="seminarschools"].on { border-color: #7A2632; background: rgba(122,38,50,0.08); color: #7A2632; }
+  /* category colors, theme-aware — light values, dark variants below */
+  :root {
+    --cat-kitchen:#8B6914; --cat-teaching:#1A5276; --cat-community:#1A6E4E;
+    --cat-education:#7B2D4E; --cat-volunteer:#5A5A52; --cat-performance:#4A3F8A;
+    --cat-seminarschools:#7A2632;
+  }
+  @media (prefers-color-scheme: dark) { :root:not(.light) {
+    --cat-kitchen:#D8B65A; --cat-teaching:#6FB1DA; --cat-community:#5FC79A;
+    --cat-education:#DE8FB0; --cat-volunteer:#B8B4A8; --cat-performance:#9C8FE6;
+    --cat-seminarschools:#E58375;
+  } }
+  :root.dark, :root[data-theme="dark"] {
+    --cat-kitchen:#D8B65A; --cat-teaching:#6FB1DA; --cat-community:#5FC79A;
+    --cat-education:#DE8FB0; --cat-volunteer:#B8B4A8; --cat-performance:#9C8FE6;
+    --cat-seminarschools:#E58375;
+  }
+  .filter-nav button[data-cat="kitchen"].on { border-color: var(--cat-kitchen); background: color-mix(in srgb, var(--cat-kitchen) 12%, transparent); color: var(--cat-kitchen); }
+  .filter-nav button[data-cat="teaching"].on { border-color: var(--cat-teaching); background: color-mix(in srgb, var(--cat-teaching) 12%, transparent); color: var(--cat-teaching); }
+  .filter-nav button[data-cat="community"].on { border-color: var(--cat-community); background: color-mix(in srgb, var(--cat-community) 12%, transparent); color: var(--cat-community); }
+  .filter-nav button[data-cat="education"].on { border-color: var(--cat-education); background: color-mix(in srgb, var(--cat-education) 12%, transparent); color: var(--cat-education); }
+  .filter-nav button[data-cat="volunteer"].on { border-color: var(--cat-volunteer); background: color-mix(in srgb, var(--cat-volunteer) 12%, transparent); color: var(--cat-volunteer); }
+  .filter-nav button[data-cat="performance"].on { border-color: var(--cat-performance); background: color-mix(in srgb, var(--cat-performance) 12%, transparent); color: var(--cat-performance); }
+  .filter-nav button[data-cat="seminarschools"].on { border-color: var(--cat-seminarschools); background: color-mix(in srgb, var(--cat-seminarschools) 12%, transparent); color: var(--cat-seminarschools); }
   .entry .title a.ss-prop { color: inherit; text-decoration: none; border-bottom: 1px dotted #7A2632; }
   .entry .title a.ss-prop:hover { color: #7A2632; border-bottom-style: solid; }
 
@@ -971,8 +987,6 @@ textarea:focus-visible,
 
 </main>
 
-<!-- Mode toggle -->
-<button type="button" class="mode-toggle" id="modeToggle" aria-label="Toggle creative mode">creative mode →</button>
 
 <script>
 // ===========================================================================
@@ -1049,7 +1063,7 @@ const CREDS_OVERRIDE = {
       // education: full list (default)
     },
     education: {
-      certs: "TESOL, Indiana University (2016) · IB Theory of Knowledge (2023) · Cognitive Behavioral Therapy (2018) · Berkley Invigilation Standards (2019) · Python for Data Science & ML Bootcamp (Udemy) · Machine Learning A-Z (Udemy) · Mindfulness Practitioner I-III & Master (Udemy)",
+      certs: "TESOL, Indiana University (2016) · IB Theory of Knowledge (2023) · Nonviolent Communication, Rosenberg (2017) · Cognitive Behavioral Therapy (2018) · Berkley Invigilation Standards (2019) · Motivation Coach Certificate (Udemy) · Python for Data Science & ML Bootcamp (Udemy) · Machine Learning A-Z (Udemy) · Mindfulness Practitioner I-III & Master (Udemy)",
     },
     community: {
       certs: "Nonviolent Communication, Rosenberg (2017) · Social Impact Strategy (2012–2014) · Community Building Strategies (2012–2014) · Cognitive Behavioral Therapy (2018) · Motivation Coach Certificate (Udemy)",
@@ -1067,7 +1081,7 @@ const CREDS_OVERRIDE = {
       certs: "TESOL，印第安納大學（2016）· IB 知識論（2023）· 非暴力溝通，Rosenberg（2017）· 認知行為治療（2018）· Berkley 監考標準（2019）· 動機教練證書（Udemy）· 正念修習 I-III 及大師級（Udemy）"
     },
     education: {
-      certs: "TESOL，印第安納大學（2016）· IB 知識論（2023）· 認知行為治療（2018）· Berkley 監考標準（2019）· Python 資料科學與機器學習（Udemy）· Machine Learning A-Z（Udemy）· 正念修習 I-III 及大師級（Udemy）"
+      certs: "TESOL，印第安納大學（2016）· IB 知識論（2023）· 非暴力溝通，Rosenberg（2017）· 認知行為治療（2018）· Berkley 監考標準（2019）· 動機教練證書（Udemy）· Python 資料科學與機器學習（Udemy）· Machine Learning A-Z（Udemy）· 正念修習 I-III 及大師級（Udemy）"
     },
     community: {
       certs: "非暴力溝通，Rosenberg（2017）· 社會影響策略（2012–2014）· 社區建構策略（2012–2014）· 認知行為治療（2018）· 動機教練證書（Udemy）",
@@ -1082,7 +1096,7 @@ const CREDS_OVERRIDE = {
       certs: "TESOL，印第安纳大学（2016）· IB 知识论（2023）· 非暴力沟通，Rosenberg（2017）· 认知行为治疗（2018）· Berkley 监考标准（2019）· 动机教练证书（Udemy）· 正念修习 I-III 及大师级（Udemy）"
     },
     education: {
-      certs: "TESOL，印第安纳大学（2016）· IB 知识论（2023）· 认知行为治疗（2018）· Berkley 监考标准（2019）· Python 数据科学与机器学习（Udemy）· Machine Learning A-Z（Udemy）· 正念修习 I-III 及大师级（Udemy）"
+      certs: "TESOL，印第安纳大学（2016）· IB 知识论（2023）· 非暴力沟通，Rosenberg（2017）· 认知行为治疗（2018）· Berkley 监考标准（2019）· 动机教练证书（Udemy）· Python 数据科学与机器学习（Udemy）· Machine Learning A-Z（Udemy）· 正念修习 I-III 及大师级（Udemy）"
     },
     community: {
       certs: "非暴力沟通，Rosenberg（2017）· 社会影响策略（2012–2014）· 社区建构策略（2012–2014）· 认知行为治疗（2018）· 动机教练证书（Udemy）",
@@ -1097,7 +1111,7 @@ const CREDS_OVERRIDE = {
       certs: "TESOL، دانشگاه ایندیانا (۲۰۱۶) · IB نظریه دانش (۲۰۲۳) · ارتباط بدون خشونت، Rosenberg (۲۰۱۷) · رفتاردرمانی شناختی (۲۰۱۸) · استانداردهای نظارت Berkley (۲۰۱۹) · گواهینامه مربی انگیزشی (Udemy) · دوره ذهن‌آگاهی I-III و استاد (Udemy)"
     },
     education: {
-      certs: "TESOL، دانشگاه ایندیانا (۲۰۱۶) · IB نظریه دانش (۲۰۲۳) · رفتاردرمانی شناختی (۲۰۱۸) · استانداردهای نظارت Berkley (۲۰۱۹) · Python علم داده و یادگیری ماشین (Udemy) · Machine Learning A-Z (Udemy) · دوره ذهن‌آگاهی I-III و استاد (Udemy)"
+      certs: "TESOL، دانشگاه ایندیانا (۲۰۱۶) · IB نظریه دانش (۲۰۲۳) · ارتباط بدون خشونت، Rosenberg (۲۰۱۷) · رفتاردرمانی شناختی (۲۰۱۸) · استانداردهای نظارت Berkley (۲۰۱۹) · گواهینامه مربی انگیزشی (Udemy) · Python علم داده و یادگیری ماشین (Udemy) · Machine Learning A-Z (Udemy) · دوره ذهن‌آگاهی I-III و استاد (Udemy)"
     },
     community: {
       certs: "ارتباط بدون خشونت، Rosenberg (۲۰۱۷) · استراتژی تأثیر اجتماعی (۲۰۱۲–۲۰۱۴) · استراتژی‌های ساخت جامعه (۲۰۱۲–۲۰۱۴) · رفتاردرمانی شناختی (۲۰۱۸) · گواهینامه مربی انگیزشی (Udemy)",
@@ -1112,7 +1126,7 @@ const CREDS_OVERRIDE = {
       certs: "TESOL, Université d'Indiana (2016) · IB Théorie de la connaissance (2023) · Communication non violente, Rosenberg (2017) · Thérapie cognitivo-comportementale (2018) · Normes de surveillance Berkley (2019) · Certificat Coach Motivationnel (Udemy) · Pleine Conscience I-III & Maître (Udemy)"
     },
     education: {
-      certs: "TESOL, Université d'Indiana (2016) · IB Théorie de la connaissance (2023) · Thérapie cognitivo-comportementale (2018) · Normes de surveillance Berkley (2019) · Python Data Science & ML (Udemy) · Machine Learning A-Z (Udemy) · Pleine Conscience I-III & Maître (Udemy)"
+      certs: "TESOL, Université d'Indiana (2016) · IB Théorie de la connaissance (2023) · Communication non violente, Rosenberg (2017) · Thérapie cognitivo-comportementale (2018) · Normes de surveillance Berkley (2019) · Certificat Coach Motivationnel (Udemy) · Python Data Science & ML (Udemy) · Machine Learning A-Z (Udemy) · Pleine Conscience I-III & Maître (Udemy)"
     },
     community: {
       certs: "Communication non violente, Rosenberg (2017) · Stratégie d'impact social (2012–2014) · Stratégies de développement communautaire (2012–2014) · Thérapie cognitivo-comportementale (2018) · Certificat Coach Motivationnel (Udemy)",
@@ -1131,7 +1145,7 @@ const UI = {
     subheadings: { kitchen: "Chef", teaching: "Educator", community: "Community Worker", education: "", volunteer: "Coordinator", performance: "Performer", seminarschools: "Founder & Editor" },
     secs: ["Elementary + Middle School", "High School, Earl Haig, North York", "McGill University, Montreal", "Europe: EGS, Humanitarian, Maritime", "China", "Vancouver + Italy", "Toronto 2019", "Toronto 2020–2022", "Toronto 2023–Present", "Current Projects"],
     certL: "TESOL, Indiana University (2016) · IB Theory of Knowledge (2023) · Nonviolent Communication, Rosenberg (2017) · Cognitive Behavioral Therapy (2018) · Social Impact Strategy (2012–2014) · Community Building Strategies (2012–2014) · Berkley Invigilation Standards (2019) · Food Handlers (2006) · Motivation Coach Certificate (Udemy) · Python for Data Science & ML Bootcamp (Udemy) · Machine Learning A-Z (Udemy) · Mindfulness Practitioner I-III & Master (Udemy)",
-    eduL: "PhD Candidate in Education (Emerging technologies in pedagogy) · PhD Candidate in Philosophy (Hegel-Jung synthesis) · MA Philosophy, Art & Critical Thought, European Graduate School, Switzerland · BA Political Science, Economics, Philosophy, McGill University"
+    eduL: "PhD Candidate in Education (Emerging technologies in pedagogy) · PhD Candidate in Philosophy (Hegel-Jung synthesis) · MA Philosophy, Art & Critical Thought, European Graduate School, Switzerland (faculty incl. Butler, Žižek, Agamben, Ronell) · BA Political Science, Economics, Philosophy, McGill University"
   },
   zh: {
     all: "全部", save: "儲存為 PDF", certs: "專業證照", edu: "學歷",
@@ -1139,7 +1153,7 @@ const UI = {
     subheadings: { kitchen: "廚師", teaching: "教育者", community: "社區工作者", education: "", volunteer: "統籌員", performance: "表演者", seminarschools: "創辦人與編輯" },
     secs: ["小學及國中", "高中, Earl Haig 北約克", "麥基爾大學 蒙特婁", "歐洲, EGS、人道救援、航海", "中國", "溫哥華及義大利", "多倫多 2019", "多倫多 2020–2022", "多倫多 2023–至今", "進行中計畫"],
     certL: "TESOL，印第安納大學（2016）· IB 知識論（2023）· 非暴力溝通，Rosenberg（2017）· 認知行為治療（2018）· 社會影響策略（2012–2014）· 社區建構策略（2012–2014）· Berkley 監考標準（2019）· 食品處理員（2006）· 動機教練證書（Udemy）· Python 資料科學與機器學習（Udemy）· Machine Learning A-Z（Udemy）· 正念修習 I-III 及大師級（Udemy）",
-    eduL: "教育學博士候選人（教學中的新興科技）· 哲學博士候選人（黑格爾-榮格整合）· 哲學、藝術與批判思維碩士，歐洲高等研究院，瑞士 · 政治學、經濟學、哲學學士，麥基爾大學"
+    eduL: "教育學博士候選人（教學中的新興科技）· 哲學博士候選人（黑格爾-榮格整合）· 哲學、藝術與批判思維碩士，歐洲高等研究院，瑞士（師資包括 Butler、Žižek、Agamben、Ronell）· 政治學、經濟學、哲學學士，麥基爾大學"
   },
   zhs: {
     all: "全部", save: "保存为 PDF", certs: "专业证书", edu: "学历",
@@ -1147,7 +1161,7 @@ const UI = {
     subheadings: { kitchen: "厨师", teaching: "教育者", community: "社区工作者", education: "", volunteer: "统筹员", performance: "表演者", seminarschools: "创办人与编辑" },
     secs: ["小学及初中", "高中, Earl Haig 北约克", "麦吉尔大学 蒙特利尔", "欧洲, EGS、人道救援、航海", "中国", "温哥华及意大利", "多伦多 2019", "多伦多 2020–2022", "多伦多 2023–至今", "进行中项目"],
     certL: "TESOL，印第安纳大学（2016）· IB 知识论（2023）· 非暴力沟通，Rosenberg（2017）· 认知行为治疗（2018）· 社会影响策略（2012–2014）· 社区建构策略（2012–2014）· Berkley 监考标准（2019）· 食品处理员（2006）· 动机教练证书（Udemy）· Python 数据科学与机器学习（Udemy）· Machine Learning A-Z（Udemy）· 正念修习 I-III 及大师级（Udemy）",
-    eduL: "教育学博士候选人（教学中的新兴科技）· 哲学博士候选人（黑格尔-荣格整合）· 哲学、艺术与批判思维硕士，欧洲高等研究院，瑞士 · 政治学、经济学、哲学学士，麦吉尔大学"
+    eduL: "教育学博士候选人（教学中的新兴科技）· 哲学博士候选人（黑格尔-荣格整合）· 哲学、艺术与批判思维硕士，欧洲高等研究院，瑞士（师资包括 Butler、Žižek、Agamben、Ronell）· 政治学、经济学、哲学学士，麦吉尔大学"
   },
   fa: {
     all: "همه", save: "ذخیره PDF", certs: "گواهینامه‌ها", edu: "تحصیلات",
@@ -1155,7 +1169,7 @@ const UI = {
     subheadings: { kitchen: "آشپز", teaching: "آموزگار", community: "فعال اجتماعی", education: "", volunteer: "هماهنگ‌کننده", performance: "هنرمند", seminarschools: "بنیان‌گذار و ویراستار" },
     secs: ["دبستان و راهنمایی", "دبیرستان, Earl Haig", "دانشگاه مک‌گیل, مونترال", "اروپا, EGS، بشردوستانه، دریانوردی", "چین", "ونکوور و ایتالیا", "تورنتو ۲۰۱۹", "تورنتو ۲۰۲۰–۲۰۲۲", "تورنتو ۲۰۲۳–اکنون", "پروژه‌های جاری"],
     certL: "TESOL، دانشگاه ایندیانا (۲۰۱۶) · IB نظریه دانش (۲۰۲۳) · ارتباط بدون خشونت، Rosenberg (۲۰۱۷) · رفتاردرمانی شناختی (۲۰۱۸) · استراتژی تأثیر اجتماعی (۲۰۱۲–۲۰۱۴) · استراتژی‌های ساخت جامعه (۲۰۱۲–۲۰۱۴) · استانداردهای نظارت Berkley (۲۰۱۹) · گواهی بهداشت غذا (۲۰۰۶) · گواهینامه مربی انگیزشی (Udemy) · Python علم داده و یادگیری ماشین (Udemy) · Machine Learning A-Z (Udemy) · دوره ذهن‌آگاهی I-III و استاد (Udemy)",
-    eduL: "نامزد دکترای آموزش و پرورش (فناوری‌های نوظهور در آموزش) · نامزد دکترای فلسفه (ترکیب هگل-یونگ) · کارشناسی ارشد فلسفه، هنر و تفکر انتقادی, مدرسه عالی اروپایی، سوئیس · کارشناسی علوم سیاسی، اقتصاد، فلسفه, دانشگاه مک‌گیل"
+    eduL: "نامزد دکترای آموزش و پرورش (فناوری‌های نوظهور در آموزش) · نامزد دکترای فلسفه (ترکیب هگل-یونگ) · کارشناسی ارشد فلسفه، هنر و تفکر انتقادی, مدرسه عالی اروپایی، سوئیس (استادان: Butler، Žižek، Agamben، Ronell) · کارشناسی علوم سیاسی، اقتصاد، فلسفه, دانشگاه مک‌گیل"
   },
   fr: {
     all: "Tout", save: "Enregistrer en PDF", certs: "Certifications", edu: "Formation",
@@ -1163,7 +1177,7 @@ const UI = {
     subheadings: { kitchen: "Chef", teaching: "Éducateur", community: "Travailleur communautaire", education: "", volunteer: "Coordinateur", performance: "Interprète", seminarschools: "Fondateur et éditeur" },
     secs: ["École primaire et secondaire", "École secondaire, Earl Haig", "Université McGill, Montréal", "Europe, EGS, humanitaire, maritime", "Chine", "Vancouver et Italie", "Toronto 2019", "Toronto 2020–2022", "Toronto 2023–présent", "Projets en cours"],
     certL: "TESOL, Université d'Indiana (2016) · IB Théorie de la connaissance (2023) · Communication non violente, Rosenberg (2017) · Thérapie cognitivo-comportementale (2018) · Stratégie d'impact social (2012–2014) · Stratégies de développement communautaire (2012–2014) · Normes de surveillance Berkley (2019) · Certificat de manipulation des aliments (2006) · Certificat Coach Motivationnel (Udemy) · Python Data Science & ML (Udemy) · Machine Learning A-Z (Udemy) · Pleine Conscience I-III & Maître (Udemy)",
-    eduL: "Doctorant en éducation (technologies émergentes en pédagogie) · Doctorant en philosophie (synthèse Hegel-Jung) · MA Philosophie, art et pensée critique, European Graduate School, Suisse · BA Sciences politiques, économie, philosophie, Université McGill"
+    eduL: "Doctorant en éducation (technologies émergentes en pédagogie) · Doctorant en philosophie (synthèse Hegel-Jung) · MA Philosophie, art et pensée critique, European Graduate School, Suisse (professeurs : Butler, Žižek, Agamben, Ronell) · BA Sciences politiques, économie, philosophie, Université McGill"
   }
 };
 
@@ -1360,13 +1374,11 @@ const D = [
   [4,"Early 2016",["education","teaching"],{en:"TESOL Certification, Indiana University",zh:"TESOL 認證, 印第安納大學",zhs:"TESOL 认证, 印第安纳大学",fa:"گواهینامه TESOL, ایندیانا",fr:"Certification TESOL, Indiana"},null,"https://dsls.indiana.edu/graduate/ma-tesol.html",{en:"Teaching English to Speakers of Other Languages certification. Obtained before beginning ESL teaching in China.",zh:"TESOL 認證。赴中國教授 ESL 前取得。",zhs:"TESOL 认证。赴中国教授 ESL 前取得。",fa:"گواهینامه تدریس انگلیسی به گویندگان سایر زبان‌ها.",fr:"Certification TESOL."}],
   [4,"c. Jan–Jun 2016",["teaching","volunteer","education"],{en:"ESL Teacher (Volunteer), Sanxin Schools, Zhongshan",zh:"ESL 教師（志願），三鑫學校, 中山",zhs:"ESL 教师（志愿），三鑫学校, 中山",fa:"معلم ESL، Sanxin, ژونگشان",fr:"Enseignant ALS, Sanxin, Zhongshan"},null,"http://www.sbsid.edu.cn/en/",{en:"Volunteer ESL teaching at this Zhongshan school with a flexible schedule, traveling between assignments across Guangdong province.",zh:"在中山三鑫學校志願教授 ESL，彈性行程，往返廣東省各項任務之間。",zhs:"在中山三鑫学校志愿教授 ESL，弹性行程，往返广东省各项任务之间。",fa:"تدریس داوطلبانه ESL در این مدرسه ژونگشان با برنامه انعطاف‌پذیر.",fr:"Enseignement bénévole d'ALS à Zhongshan."}],
   [4,"c. Jul–Dec 2016",["teaching","education"],{en:"ESL Teacher, Best Learning English (贝乐学科英语), Shenzhen",zh:"ESL 教師，貝樂學科英語, 深圳",zhs:"ESL 教师，贝乐学科英语, 深圳",fa:"معلم ESL، Best Learning, شنژن",fr:"Enseignant ALS, Best Learning, Shenzhen"},{en:"American K12 immersion, ages 2–12",zh:"美式K12沉浸式，2–12歲",zhs:"美式K12沉浸式，2–12岁",fa:"غوطه‌وری K12، ۲–۱۲ سال",fr:"Immersion K12, 2–12 ans"},null,{en:"American K12 immersion curriculum for students aged 2 to 12 in Shenzhen. Full English-language instruction in a structured classroom environment.",zh:"深圳美式 K12 沉浸式課程，對象為 2–12 歲學生。全英語結構化課堂教學。",zhs:"深圳美式 K12 沉浸式课程，对象为 2–12 岁学生。全英语结构化课堂教学。",fa:"برنامه غوطه‌وری K12 آمریکایی برای دانش‌آموزان ۲ تا ۱۲ ساله در شنژن.",fr:"Programme d'immersion américain K12 pour élèves de 2 à 12 ans à Shenzhen."}],
-  [3,"Sep 2014–Aug 2019",["education","teaching"],{en:"MA Philosophy, Art and Critical Thought, EGS, Switzerland",zh:"哲學、藝術與批判思維碩士, 歐洲高等研究院，瑞士",zhs:"哲学、艺术与批判思维硕士, 欧洲高等研究院，瑞士",fa:"کارشناسی ارشد فلسفه، هنر و تفکر انتقادی, EGS، سوئیس",fr:"MA Philosophie, art et pensée critique, EGS, Suisse"},{en:"Summer intensive; thesis: Ritual Studies and Confucianism",zh:"暑期密集；論文：儀式研究／儒學",zhs:"暑期密集；论文：仪式研究／儒学",fa:"فشرده تابستانی",fr:"Intensif d'été"},"https://egs.edu/",{en:"Four-year summer intensive MA at EGS in Saas-Fee, Switzerland. Thesis 'Carrying Over the Burdens of Trace' on Ritual Studies and Confucianism. Faculty included Judith Butler, Slavoj Žižek, Giorgio Agamben, and Avital Ronell.",zh:"瑞士薩斯費 EGS 四年暑期密集碩士。論文：《Carrying Over the Burdens of Trace》。師資包括 Judith Butler、Slavoj Žižek、Giorgio Agamben 和 Avital Ronell。",zhs:"瑞士萨斯费 EGS 四年暑期密集硕士。论文：《Carrying Over the Burdens of Trace》。师资包括 Judith Butler、Slavoj Žižek、Giorgio Agamben 和 Avital Ronell。",fa:"کارشناسی ارشد فشرده تابستانی چهارساله در EGS، ساس‌فه، سوئیس.",fr:"MA intensif d'été sur quatre ans à l'EGS à Saas-Fee, Suisse."}],
   [3,"Sep 2014–Jun 2015",["teaching","education"],{en:"Teaching Assistant, European Graduate School",zh:"教學助理，歐洲高等研究院",zhs:"教学助理，欧洲高等研究院",fa:"دستیار آموزشی، EGS",fr:"Assistant, EGS"},{en:"Switzerland",zh:"瑞士",zhs:"瑞士",fa:"سوئیس",fr:"Suisse"},"https://egs.edu/",{en:"Part of the MA program. Assisted with philosophy and critical theory seminars during the first year of the four-year summer intensive.",zh:"碩士課程的一部分。四年暑期密集課程的第一年，協助哲學及批判理論研討。",zhs:"硕士课程的一部分。四年暑期密集课程的第一年，协助哲学及批判理论研讨。",fa:"بخشی از برنامه کارشناسی ارشد.",fr:"Dans le cadre du MA."}],
   [3,"Feb 2014–Dec 2015",["community","volunteer","teaching"],{en:"Project Manager and Translator, The Refugee Project",zh:"專案經理暨翻譯，The Refugee Project",zhs:"项目经理暨翻译，The Refugee Project",fa:"مدیر پروژه و مترجم، پروژه پناهندگان",fr:"Chef de projet, The Refugee Project"},{en:"Serbia and Croatia; six countries; over $8,000 raised",zh:"塞爾維亞及克羅埃西亞；六國；募款逾八千美元",zhs:"塞尔维亚及克罗地亚；六国；募款逾八千美元",fa:"صربستان و کرواسی",fr:"Serbie et Croatie ; six pays ; plus de 8 000 $ récoltés"},"https://www.unhcr.org/5601b9a66.html",{en:"Coordinated with medical, legal, journalistic, and diplomatic personnel at Opatovac transit camp and across the Balkan route. Remote planning ran February 2014 through August 2015. On-ground operations ran September through December 2015. Featured in documentary coverage of the crisis.",zh:"於 Opatovac 中轉營及巴爾幹路線與醫療、法律、新聞及外交人員協調。",zhs:"于 Opatovac 中转营及巴尔干路线与医疗、法律、新闻及外交人员协调。",fa:"هماهنگی با پرسنل پزشکی، حقوقی، خبرنگاری و دیپلماتیک در اردوگاه ترانزیت Opatovac و مسیر بالکان.",fr:"Coordination avec le personnel médical, juridique, journalistique et diplomatique au camp de transit d'Opatovac et sur la route des Balkans."}],
   [3,"c. Nov–Dec 2015",["volunteer","teaching","community"],{en:"English Language Volunteer, Egypt",zh:"英語教學志工, 埃及",zhs:"英语教学志愿者, 埃及",fa:"داوطلب آموزش انگلیسی, مصر",fr:"Bénévole en enseignement de l'anglais, Égypte"},null,null,{en:"Volunteered at an English learning centre during travel through Egypt following the Balkan route operations.",zh:"巴爾幹路線行動結束後，途經埃及時於英語學習中心擔任志工。",zhs:"巴尔干路线行动结束后，途经埃及时于英语学习中心担任志愿者。",fa:"داوطلبی در مرکز یادگیری انگلیسی هنگام سفر در مصر.",fr:"Bénévolat dans un centre d'anglais lors du voyage en Égypte."}],
   [3,"2015–2016",["kitchen","volunteer","community"],{en:"Ship's Chef and Crew, S/V Hawila",zh:"船上廚師，S/V Hawila",zhs:"船上厨师，S/V Hawila",fa:"سرآشپز کشتی، S/V Hawila",fr:"Chef de bord, S/V Hawila"},{en:"Denmark; gaff-rigged ketch, 135t",zh:"丹麥；斜桁雙桅帆船，排水量135噸",zhs:"丹麦；斜桁双桅帆船，排水量135吨",fa:"دانمارک",fr:"Danemark"},"https://www.hawilaproject.org/",{en:"32-meter gaff-rigged ketch built 1935 in Risør, Norway. Galley chef and general crew during cargo and festival voyages.",zh:"1935 年建於挪威 Risør 的 32 米斜桁雙桅帆船。",zhs:"1935 年建于挪威 Risør 的 32 米斜桁双桅帆船。",fa:"قایق بادبانی ۳۲ متری ساخته‌شده در سال ۱۹۳۵ در ریسور، نروژ.",fr:"Ketch à corne de 32 mètres construit en 1935 à Risør, Norvège."}],
   [3,"2015–2016",["volunteer","community","kitchen","performance"],{en:"Volunteer, Flydende By (Floating City), Copenhagen",zh:"志工，漂浮城市, 哥本哈根",zhs:"志愿者，漂浮城市, 哥本哈根",fa:"داوطلب، شهر شناور, کپنهاگ",fr:"Bénévole, Floating City, Copenhague"},{en:"Sustainable makerspace; cooking, construction, film support",zh:"永續自造空間；烹飪、建造、電影支援",zhs:"可持续创客空间；烹饪、建造、电影支援",fa:"فضای پایدار",fr:"Atelier durable"},"https://www.floatingcity.dk/",{en:"Non-profit art collective building boats from recycled materials since 2008. Cooking, construction, and film production support.",zh:"自 2008 年起以回收材料建造船舶的非營利藝術團體。",zhs:"自 2008 年起以回收材料建造船舶的非营利艺术团体。",fa:"گروه هنری غیرانتفاعی که از سال ۲۰۰۸ قایق از مواد بازیافتی می‌سازد.",fr:"Collectif artistique à but non lucratif construisant des bateaux en matériaux recyclés depuis 2008."}],
-  [2,"Sep 2008–Jun 2014",["education"],{en:"BA Political Science, Economics, Philosophy, McGill University",zh:"政治學、經濟學、哲學學士, 麥基爾大學",zhs:"政治学、经济学、哲学学士, 麦吉尔大学",fa:"کارشناسی علوم سیاسی، اقتصاد، فلسفه, دانشگاه مک‌گیل",fr:"BA Sciences politiques, économie, philosophie, Université McGill"},null,"https://www.mcgill.ca/",{en:"Started in Education, transferred to Arts. Six-year degree spanning political science, economics, and philosophy. Foundation for graduate work in critical theory and pedagogy.",zh:"初入教育學院，後轉入文學院。六年學位，涵蓋政治學、經濟學與哲學。",zhs:"初入教育学院，后转入文学院。六年学位，涵盖政治学、经济学与哲学。",fa:"ابتدا در دانشکده آموزش، سپس انتقال به دانشکده هنر.",fr:"Commencé en éducation, transféré en arts."}],
   [2,"Sep 2011–Aug 2015",["community","volunteer","teaching"],{en:"Community Development Manager, Campus Crops Farmers Market",zh:"社區發展經理，Campus Crops",zhs:"社区发展经理，Campus Crops",fa:"مدیر توسعه، Campus Crops",fr:"Responsable communautaire, Campus Crops"},{en:"Volunteer coordination, budgeting, partner network",zh:"志工協調、預算、夥伴網絡",zhs:"志愿者协调、预算、伙伴网络",fa:"هماهنگی، بودجه، شبکه",fr:"Coordination, budgétisation, réseau"},"https://www.mcgill.ca/sustainability/sp0008-campus-crops-1",{en:"Student-run urban agriculture initiative at McGill. Managed volunteer coordination, budgeting, and partner network development. Continued remotely after leaving Montreal.",zh:"麥基爾大學學生自主都市農業計畫。",zhs:"麦吉尔大学学生自主都市农业计划。",fa:"طرح کشاورزی شهری دانشجویی در مک‌گیل.",fr:"Initiative d'agriculture urbaine étudiante à McGill."}],
   [2,"c. 2009–2014",["kitchen"],{en:"Front-of-House, Kitchen, Event Security at Various Venues",zh:"前場、廚房、安保, 多處場館",zhs:"前场、厨房、安保, 多处场馆",fa:"پذیرایی، آشپزخانه، امنیت",fr:"Service, cuisine, sécurité"},{en:"La Plante and Mile End venues",zh:"La Plante 及 Mile End",zhs:"La Plante 及 Mile End",fa:"La Plante و Mile End",fr:"La Plante et Mile End"},"https://www.songkick.com/venues/4045864-la-plante",{en:"Short-term contracts and event-based work across Montreal's Mile End neighbourhood. Front-of-house service, kitchen work, and event security at venues including La Plante.",zh:"蒙特婁 Mile End 區的短期合約及活動工作。",zhs:"蒙特利尔 Mile End 区的短期合同及活动工作。",fa:"قراردادهای کوتاه‌مدت و کار رویدادمحور در محله Mile End مونترال.",fr:"Contrats courts et travail événementiel dans le quartier Mile End de Montréal."}],
   [2,"c. 2011–2013",["community","education","teaching"],{en:"Conference Organizer, McMUN and SSUNS at IRSAM, McGill",zh:"會議組織者，McMUN 及 SSUNS, IRSAM",zhs:"会议组织者，McMUN 及 SSUNS, IRSAM",fa:"سازمان‌دهنده، McMUN و SSUNS, IRSAM",fr:"Organisateur, McMUN et SSUNS, IRSAM"},{en:"University and secondary school Model UN",zh:"大學及中學模擬聯合國",zhs:"大学及中学模拟联合国",fa:"شبیه‌سازی سازمان ملل",fr:"Simulation des Nations Unies"},"https://www.irsam.ca/",{en:"Organized both McMUN, the university-level conference with around 1600 delegates, and SSUNS, the secondary school version, through IRSAM.",zh:"透過 IRSAM 組織 McMUN（大學級，約 1600 名代表）和 SSUNS（中學級）模擬聯合國會議。",zhs:"通过 IRSAM 组织 McMUN（大学级，约 1600 名代表）和 SSUNS（中学级）模拟联合国会议。",fa:"سازماندهی کنفرانس‌های شبیه‌سازی سازمان ملل از طریق IRSAM.",fr:"Organisation des conférences MUN McMUN et SSUNS via l'IRSAM."}],
@@ -1811,26 +1823,6 @@ window.addEventListener("popstate", () => {
 });
 
 // ===========================================================================
-// MODE TOGGLE (professional / creative)
-// ===========================================================================
-const modeBtn = document.getElementById("modeToggle");
-function setMode(party) {
-  if (party) {
-    document.body.classList.add("party");
-    modeBtn.textContent = "← professional";
-  } else {
-    document.body.classList.remove("party");
-    modeBtn.textContent = "creative mode →";
-  }
-  try { localStorage.setItem("ss-mode", party ? "party" : "pro"); } catch (e) {}
-}
-modeBtn.addEventListener("click", () => setMode(!document.body.classList.contains("party")));
-try {
-  const saved = localStorage.getItem("ss-mode");
-  if (saved === "party") setMode(true);
-} catch (e) {}
-
-// ===========================================================================
 // GEOMETRY (Apollonian gasket - simplified single layer for the CV)
 // ===========================================================================
 function buildGeo() {
@@ -1925,88 +1917,117 @@ function buildPrintCv() {
   if (!host) return;
   var t = UI[lang] || UI.en;
   var isFiltered = active.size > 0;
-  var inc = D.filter(function (x) {
-    return isFiltered ? tagMatches(active, x[2]) : !x[2].includes('seminarschools');
-  });
-  var longest = inc.reduce(function (a, e) { return Math.max(a, String(e[1]).length); }, 0);
-  var dateColIn = Math.min(1.7, Math.max(1.3, 0.085 * longest));
-  var DC = (dateColIn * 72).toFixed(1);
-  var DT = (dateColIn * 72 - 8).toFixed(1);
-  var LP = (dateColIn * 72 + 12 + 9).toFixed(1);
-  var escp = function (v) { return String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
+  var filterKey = (active.size === 1) ? Array.from(active)[0] : null;
+
+  // Professional summary — English only by request. Per-tab variants reshaped from the
+  // 2025 resume summary, the competencies, and the documented entries. No new facts.
+  var SUMMARY = "Education and community development professional with extensive experience across North America, Asia, and Europe. Mentored 1,000+ students through academic development and university admissions processes while coordinating volunteer programs and community initiatives. Applies cross-cultural understanding to develop and assess programs that address performance gaps and improve outcomes. Experienced in resource management, building communication networks, and fostering collaboration in multicultural settings.";
+  var SUMMARY_BY_CAT = {
+    teaching: "Educator with fifteen years across six countries and roughly fifteen curricula, including OSSD, IB, AP, A-level, and ESL. Mentored over a thousand students through academic development and university admissions, teaching English and the humanities in IB World Schools and Ontario diploma programs. IB Theory of Knowledge and TESOL certified.",
+    education: "Education professional and current PhD candidate researching emerging technologies in pedagogy. Mentored over a thousand students through academic development and admissions while developing and assessing programs that close performance gaps. Grounds practice in dialogical, seminar-based learning rather than transmission.",
+    community: "Community development professional experienced in coordinating volunteer programs and community initiatives across multicultural settings. Managed volunteer coordination, budgeting, and partner networks, and organized university and secondary-school conferences at scale. Applies social and economic impact assessment and nonviolent communication to build durable networks.",
+    kitchen: "Hospitality and culinary background spanning private estate kitchens and front-of-house management. Worked as a chef between teaching terms, including a high-end private winery estate outside Florence, alongside shift management and event roles. Food Handlers certified.",
+    volunteer: "Volunteer coordinator experienced in mobilizing programs and people across community settings, from student-run urban agriculture to accessibility-focused walks. Brings resource planning and cross-cultural collaboration to mission-driven work.",
+    performance: "Comfortable in public-facing and performance settings, from competitive select-level athletics to leading seminars and public talks. Brings composure, presence, and teamwork into the room.",
+    seminarschools: "Founder of Seminar Schools, a Toronto practice built on the seminar as a root form of serious learning. Runs Leizu Academy for tutoring toward the Ontario curriculum, the IB Diploma, and university admissions, alongside the polymyth framework and the bookwormburrows pedagogical game. Connects classroom practice to research in dialogical learning."
+  };
+  var COMPETENCIES = ["Resource Planning & Allocation","Consultation & Guidance Expertise","Policy & Procedure Development","Nonviolent Communication","Social & Economic Impact Assessment","Team Development & Leadership","Basic French, Farsi, & Mandarin","Key Performance Indicator (KPI) tracking & Continuous Process Improvement"];
+
+  var esc = function (s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
   var firstSentence = function (txt) {
-    var t2 = String(txt).trim();
-    var m = t2.match(/^[\s\S]*?[.!?](?=\s|$)/);
-    var out = m ? m[0] : t2;
-    if (out.length > 140) { out = out.slice(0, 120); out = out.slice(0, out.lastIndexOf(' ')) + '\u2026'; }
+    var s = String(txt).trim();
+    var m = s.match(/^[\s\S]*?[.!?](?=\s|$)/);
+    var out = m ? m[0] : s;
+    if (out.length > 64) { out = out.slice(0,58); out = out.slice(0, out.lastIndexOf(' ')) + '…'; }
     return out;
   };
-  var certItems = String(t.certL || UI.en.certL).split(/\s*[·、]\s*/).filter(function (x) { return x; });
-  var certHalf = Math.ceil(certItems.length / 2);
-  var certColFn = function (a) { return '<div class="colh">' + a.map(function (x) { return '<span class="ci">' + escp(x) + '</span>'; }).join('') + '</div>'; };
-  var certCols = certColFn(certItems.slice(0, certHalf)) + certColFn(certItems.slice(certHalf));
-  var subLabels = isFiltered
-    ? Array.from(active).sort().map(function (c) { return (t.subheadings || {})[c]; }).filter(function (x) { return x && x.length; })
-    : [];
+  var tagsOf = function (c) { return Array.isArray(c) ? c : [c]; };
+  var longest = D.reduce(function(a,e){ return Math.max(a, String(e[1]).length); }, 0);
+  var dateColPt = Math.min(118, Math.max(92, 6.1*longest)).toFixed(0);
+
+  var rowHtml = function (item) {
+    var prim = tagsOf(item[2])[0];
+    var color = (CATS[prim]||{}).color || '#888';
+    var titleRaw = getText(item[3], lang) || '';
+    var title = esc(titleRaw);
+    var roleLen = titleRaw.length;
+    var sub = item[4] ? getText(item[4], lang) : null;
+    var noteRaw = (sub && String(sub).trim()) ? String(sub).trim()
+      : (item[6] && getText(item[6], lang) && getText(item[6], lang).trim() ? firstSentence(getText(item[6], lang)) : null);
+    if (noteRaw) {
+      var budget = 88 - roleLen;
+      if (budget < 14) { noteRaw = null; }
+      else if (noteRaw.length > budget) { noteRaw = noteRaw.slice(0, budget-1); noteRaw = noteRaw.slice(0, noteRaw.lastIndexOf(' ')).replace(/[.,;:]$/,'') + '…'; }
+    }
+    var note = noteRaw ? esc(noteRaw) : null;
+    return '<tr><td class="d">'+esc(item[1])+'</td>'
+      + '<td class="b" style="border-left-color:'+color+'"><span class="t">'+title+'</span>'+(note?' <span class="n">'+note+'</span>':'')+'</td></tr>';
+  };
+
   var secs = '';
-  for (var i = 9; i >= 1; i--) { // tier 0 (Elementary + Middle School) never prints
-    var items = inc.filter(function (x) { return x[0] === i; });
+  for (var i=9; i>=1; i--) {
+    var items = D.filter(function(x){ return x[0]===i && !tagsOf(x[2]).includes('seminarschools') && !isCert(x) && (!isFiltered || tagMatches(active, x[2])); });
     if (!items.length) continue;
-    var rows = '';
-    items.forEach(function (item) {
-      var cert = isCert(item);
-      var prim = Array.isArray(item[2]) ? item[2][0] : item[2];
-      var color = (CATS[prim] || {}).color || '#999';
-      var title = escp(getText(item[3], 'en') || '');
-      var sub = item[4] ? getText(item[4], 'en') : null;
-      var note = (sub && String(sub).trim())
-        ? escp(sub)
-        : (item[6] && getText(item[6], 'en') ? escp(firstSentence(getText(item[6], 'en'))) : null);
-      rows += '<div class="row"><span class="d">' + escp(item[1]) + '</span>'
-        + '<span class="o"><span class="dot' + (cert ? ' sq' : '') + '" style="background-color:' + color + '"></span></span>'
-        + '<div class="b">' + (cert ? '<span class="caret">\u2023</span> ' : '')
-        + '<span class="t' + (cert ? ' tc' : '') + '">' + title + '</span>'
-        + (note ? ' <span class="n">' + note + '</span>' : '') + '</div></div>';
-    });
-    var secName = (t.secs || UI.en.secs)[i] || UI.en.secs[i];
-    secs += '<div class="sec"><div class="sh">' + escp(secName) + '</div><div class="elist">' + rows + '</div></div>';
+    var secName = esc((t.secs||UI.en.secs)[i] || UI.en.secs[i]);
+    secs += '<div class="sec block"><div class="sh">'+secName+'</div><table class="rows">'+items.map(rowHtml).join('')+'</table></div>';
   }
+
+  var eduLines = String(t.eduL||UI.en.eduL).split(/\s*·\s*/).filter(Boolean).map(function(line){
+    var m = line.match(/^([^(,]+)([,(][\s\S]*)?$/);
+    if (!m) return '<div class="erow"><span class="edeg">'+esc(line)+'</span></div>';
+    var deg = esc(m[1].trim()); var det = m[2]?esc(m[2].trim()):'';
+    var sep = (det.indexOf(',')===0) ? '' : ' ';
+    return '<div class="erow"><span class="edeg">'+deg+'</span>'+(det?sep+'<span class="edet">'+det+'</span>':'')+'</div>';
+  }).join('');
+
+  var certItems = String(t.certL||UI.en.certL).split(/\s*[·、]\s*/).filter(Boolean);
+  var half = Math.ceil(certItems.length/2);
+  var certCol = function(arr){ return '<div class="ccol">'+arr.map(function(c){ return '<span class="ci">'+esc(c)+'</span>'; }).join('')+'</div>'; };
+  var certHtml = certCol(certItems.slice(0,half))+certCol(certItems.slice(half));
+
+  var summaryText = esc(SUMMARY_BY_CAT[filterKey] || SUMMARY);
+  var compHtml = COMPETENCIES.map(function(c,idx){ return (idx?'<span class="m">&#9642;</span>':'<span class="m" style="margin-left:0">&#9642;</span>')+esc(c); }).join('');
+
   var css = [
-    '#printCv{font-family:Georgia,\'Times New Roman\',\'Liberation Serif\',serif;color:#1d1d1d;background:#fff;}',
-    '#printCv .hd{text-align:center;border-bottom:1.5px solid #7A2632;padding-bottom:10pt;margin-bottom:6pt;}',
-    '#printCv .hd h1{font-variant:small-caps;font-weight:600;letter-spacing:3.5px;font-size:22pt;color:#5A1A24;margin:0 0 5pt;}',
-    '#printCv .hd h1 .post{font-size:11.5pt;letter-spacing:2px;color:#7A2632;}',
-    '#printCv .hd .meta{font-size:10.5pt;letter-spacing:1px;color:#2a2a2a;margin:2pt 0;}',
-    '#printCv .hd .sub{font-size:10.5pt;font-style:italic;color:#5a4a4d;letter-spacing:0.6px;margin:3pt 0;}',
-    '#printCv .hd .em{font-size:9pt;letter-spacing:0.8px;color:#46383a;margin-top:3.5pt;}',
-    '#printCv .sec{margin-top:11pt;page-break-inside:avoid;break-inside:avoid;}',
-    '#printCv .sh{font-variant:small-caps;letter-spacing:2.2px;font-size:10pt;color:#7A2632;border-bottom:1px solid #9b5560;padding-bottom:2pt;margin-bottom:4pt;page-break-after:avoid;}',
-    '#printCv .elist{width:100%;}',
-    '#printCv .row{position:relative;page-break-inside:avoid;padding:3pt 0 3pt ' + LP + 'pt;}',
-    '#printCv .row::before{content:"";position:absolute;left:' + DC + 'pt;top:0;bottom:0;width:1px;background:#d9c6c9;}',
-    '#printCv .row .d{position:absolute;left:0;top:3pt;width:' + DT + 'pt;text-align:right;white-space:nowrap;font-size:9pt;color:#3a3a3a;}',
-    '#printCv .row .o{position:absolute;left:' + DC + 'pt;top:6.5pt;width:12pt;text-align:center;line-height:0;}',
-    '#printCv .dot{display:inline-block;width:5px;height:5px;border-radius:50%;}',
-    '#printCv .dot.sq{border-radius:1px;}',
-    '#printCv .row .b{font-size:11pt;line-height:1.32;overflow-wrap:break-word;word-wrap:break-word;}',
-    '#printCv .t{font-weight:bold;color:#161616;}',
-    '#printCv .t.tc{font-weight:600;color:#33272a;}',
-    '#printCv .caret{color:#7A2632;}',
-    '#printCv .n{font-style:italic;color:#564a4c;font-size:10pt;}',
-    '#printCv .cred{margin-top:14pt;border-top:0.75px solid #c4a8ab;padding-top:8pt;page-break-inside:avoid;}',
-    '#printCv .cred .ch{font-variant:small-caps;letter-spacing:1.8px;font-size:9.5pt;color:#7A2632;margin:0 0 4pt;}',
-    '#printCv .cred .cb{font-size:9pt;line-height:1.5;color:#2c2c2c;}',
-    '#printCv .cred .colh{display:inline-block;vertical-align:top;width:48%;margin-right:2%;}',
-    '#printCv .cred .colh .ci{display:block;padding:0.6pt 0;line-height:1.5;}'
+    "#printCv{font-family:Georgia,'Times New Roman','Liberation Serif',serif;color:#1c1c1c;background:#fff;font-size:10.5pt;line-height:1.4;}",
+    "#printCv a{color:inherit;text-decoration:none;}",
+    "#printCv .block{page-break-inside:avoid;break-inside:avoid;}",
+    "#printCv .hd{width:100%;border-collapse:collapse;}",
+    "#printCv .hd td{vertical-align:bottom;padding:0;}",
+    "#printCv .hd .name{font-size:23pt;font-weight:600;letter-spacing:0.4pt;color:#1c1c1c;line-height:1.04;}",
+    "#printCv .hd .name .post{font-size:11pt;font-weight:600;letter-spacing:1pt;color:#7A2632;margin-left:5pt;}",
+    "#printCv .hd .contact{text-align:right;font-size:8.6pt;letter-spacing:0.4pt;color:#5b5b5b;line-height:1.6;}",
+    "#printCv .hd .contact .em{color:#7A2632;}",
+    "#printCv .rule{border-bottom:1.5px solid #7A2632;margin-top:6pt;height:0;font-size:0;}",
+    "#printCv .summary{margin-top:6pt;font-size:9.5pt;line-height:1.38;color:#2b2b2b;text-align:justify;}",
+    "#printCv .comp{margin-top:4pt;font-size:8.9pt;line-height:1.42;color:#454545;}",
+    "#printCv .comp .m{color:#7A2632;margin:0 5pt;}",
+    "#printCv .sec{margin-top:9pt;}",
+    "#printCv .sh{font-size:9.5pt;font-weight:600;letter-spacing:2.2pt;text-transform:uppercase;color:#7A2632;border-bottom:0.75px solid #ddc8cc;padding-bottom:2pt;margin-bottom:3.5pt;page-break-after:avoid;}",
+    "#printCv .rows{width:100%;border-collapse:collapse;}",
+    "#printCv .rows td{vertical-align:top;padding:2.4pt 0;}",
+    "#printCv .rows td.d{width:"+dateColPt+"pt;text-align:right;white-space:nowrap;font-size:8.6pt;color:#6c6c6c;padding-right:12pt;padding-top:3.1pt;letter-spacing:0.2pt;}",
+    "#printCv .rows td.b{border-left:2px solid #888;padding-left:12pt;font-size:10.2pt;line-height:1.28;overflow-wrap:break-word;word-wrap:break-word;}",
+    "#printCv .t{font-weight:bold;color:#171717;}",
+    "#printCv .n{font-style:italic;color:#5c5c5c;font-size:9.6pt;}",
+    "#printCv .edu{margin-top:8pt;}",
+    "#printCv .erow{padding:1.7pt 0;font-size:10.1pt;line-height:1.32;}",
+    "#printCv .edeg{font-weight:bold;color:#171717;}",
+    "#printCv .edet{color:#4f4f4f;}",
+    "#printCv .certs{margin-top:9pt;}",
+    "#printCv .ccol{display:inline-block;vertical-align:top;width:48%;margin-right:2%;}",
+    "#printCv .ccol .ci{display:block;padding:0.6pt 0;font-size:9pt;line-height:1.4;color:#2d2d2d;}"
   ].join('\n');
-  host.innerHTML = '<style>' + css + '</style>'
-    + '<div class="hd"><h1>Saul Karim NMH <span class="post">MA</span></h1>'
-    + '<div class="meta">416-771-0382 \u00b7 Toronto</div>'
-    + (subLabels.length ? '<div class="sub">' + escp(subLabels.join(' \u00b7 ')) + '</div>' : '')
-    + '<div class="em">saulnassau@protonmail.com · seminarschools.com/saulnassau</div></div>'
+
+  host.innerHTML = '<style>'+css+'</style>'
+    + '<table class="hd block"><tr><td><span class="name">Saul Karim NMH<span class="post">MA</span></span></td>'
+    + '<td class="contact"><span class="em">saulnassau@protonmail.com</span><br>seminarschools.com/saulnassau<br>416&middot;771&middot;0382 &nbsp;&middot;&nbsp; Toronto</td></tr></table>'
+    + '<div class="rule"></div>'
+    + '<div class="summary block">'+summaryText+'</div>'
+    + '<div class="comp block">'+compHtml+'</div>'
+    + '<div class="sec edu block"><div class="sh">'+esc(t.edu||UI.en.edu)+'</div>'+eduLines+'</div>'
     + secs
-    + '<div class="cred"><div class="ch">' + escp(t.certs || UI.en.certs) + '</div><div class="cb">' + certCols + '</div></div>'
-    + '<div class="cred"><div class="ch">' + escp(t.edu || UI.en.edu) + '</div><div class="cb">' + escp(t.eduL || UI.en.eduL) + '</div></div>';
+    + '<div class="sec certs block"><div class="sh">'+esc(t.certs||UI.en.certs)+'</div>'+certHtml+'</div>';
   fitPrintCvToTwoPages(host);
 }
 // Fit the print document into two pages maximum. Measures once at scale 1,
@@ -2026,7 +2047,7 @@ function fitPrintCvToTwoPages(host) {
   host.style.position = 'absolute'; host.style.left = '-99999px'; host.style.top = '0';
   host.style.display = 'block'; host.style.visibility = 'hidden'; host.style.width = '187.9mm';
   void host.offsetHeight;
-  var blocks = host.querySelectorAll('.sec, .cred');
+  var blocks = host.querySelectorAll('.block');
   var sizes = [];
   for (var k = 0; k < blocks.length; k++) {
     var h = blocks[k].offsetHeight;

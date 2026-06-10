@@ -155,14 +155,7 @@
   body:not(.party) .firefly,
   body:not(.party) .atomic-flash { display: none !important; }
 
-  /* 6. Proximity glow in dark mode: disable by never entering dark */
-  body:not(.party).dark {
-    /* Force professional palette even if JS somehow added .dark */
-    --bg: #F5EBE4 !important;
-    --bg-rgb: 245, 235, 228 !important;
-    --fg: #2A1A14 !important;
-    --accent: #8a4a32 !important;
-  }
+  /* 6. Dark mode honored site-wide; forced-light lock removed (audit Jun 2026). */
 
   /* 7. Descent marker, tier labels, coordinates: reduce contrast */
   body:not(.party) .descent-marker,
@@ -438,15 +431,19 @@
   }
 
   /* ===== DARK MODE (toggle states 1 and 2) ===== */
-  body.dark {
-    --bg: #2A0E12;
-    --bg-rgb: 42, 14, 18;
-    --fg: #F5E8E5;
-    --accent: #E89372;
-    --accent-rgb: 232, 147, 114;
-    --rule: rgba(245,232,229,0.12);
-    --geo-density: 0.55;
-    --geo2-density: 0.35;
+  body.dark, html.dark body, :root[data-theme="dark"] body {
+    --bg: #1A1410;
+    --bg-rgb: 26, 20, 16;
+    --fg: #E8DEC7;
+    --accent: #E0996A;
+    --accent-rgb: 224, 153, 106;
+    --rule: rgba(232,222,199,0.14);
+    --geo-density: 0.5;
+    --geo2-density: 0.3;
+  }
+  html.dark body, :root[data-theme="dark"] body {
+    background: #1A1410 !important;
+    color: #E8DEC7 !important;
   }
   body {
     transition: background-color 0.35s ease, color 0.35s ease;
