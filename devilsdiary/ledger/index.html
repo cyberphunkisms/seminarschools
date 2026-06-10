@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Devil's Diary &middot; The Ledger</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="The leaves of a ledger kept by the spirit that endlessly denies.">
+<meta name="theme-color" content="#13100C">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#E6DAC2;
+  --ink-soft:#B9AC90;
+  --ink-faint:#7E7460;
+  --paper:#13100C;
+  --paper-soft:#1B1610;
+  --oxblood:#A23B2B;
+  --oxblood-soft:rgba(162,59,43,0.30);
+  --ember:#C9683F;
+  --display:'UnifrakturMaguntia', 'Cormorant Garamond', Georgia, serif;
+  --head:'Cormorant Garamond', Georgia, serif;
+  --body:'Libre Baskerville', Georgia, serif;
+  --mono:'JetBrains Mono', ui-monospace, monospace;
+}
+
+*{box-sizing:border-box;}
+html{ -webkit-text-size-adjust:100%; }
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:18px;
+  line-height:1.85;
+  background-image:
+    radial-gradient(120% 60% at 50% -8%, rgba(201,104,63,0.10), rgba(201,104,63,0) 60%),
+    radial-gradient(140% 120% at 50% 50%, rgba(0,0,0,0) 52%, rgba(0,0,0,0.55) 100%);
+  background-attachment:fixed;
+  background-repeat:no-repeat;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  opacity:0.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.page{
+  position:relative; z-index:1;
+  max-width:40rem;
+  margin:0 auto;
+  padding:5.5rem 1.5rem 6rem;
+}
+
+/* ---- masthead ---- */
+.masthead{ text-align:center; margin-bottom:2.4rem; }
+.masthead h1{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(2.9rem, 9vw, 4.6rem);
+  line-height:1;
+  margin:0;
+  color:var(--ink);
+  letter-spacing:0.01em;
+  text-shadow:0 1px 0 rgba(0,0,0,0.5), 0 0 30px rgba(201,104,63,0.10);
+}
+.masthead .rule{
+  width:7rem; height:1px; margin:1.5rem auto 1.2rem;
+  background:linear-gradient(90deg, transparent, var(--oxblood), transparent);
+}
+.masthead .standfirst{
+  font-family:var(--mono);
+  font-size:0.7rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin:0;
+}
+
+.ornament{
+  text-align:center;
+  color:var(--oxblood);
+  font-size:1.1rem;
+  line-height:1;
+  margin:2.2rem 0 2.8rem;
+  opacity:0.85;
+}
+
+/* ---- contents ---- */
+.contents .label{
+  font-family:var(--mono);
+  font-size:0.66rem;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  text-align:center;
+  margin:0 0 2.4rem;
+}
+.leaves{ list-style:none; margin:0; padding:0; }
+.leaves li{ text-align:center; margin:0 0 2.6rem; }
+.leaves .num{
+  display:block;
+  font-family:var(--mono);
+  font-size:0.62rem;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--oxblood);
+  margin-bottom:0.55rem;
+}
+.leaves .title{
+  font-family:var(--head);
+  font-style:italic;
+  font-weight:500;
+  font-size:clamp(1.3rem, 4.4vw, 1.75rem);
+  line-height:1.25;
+  color:var(--ink);
+  text-decoration:none;
+  border-bottom:1px solid var(--oxblood-soft);
+  transition:color 120ms ease, border-color 120ms ease;
+}
+.leaves .title:hover{ color:#F3EAD6; border-bottom-color:var(--ember); }
+.leaves .title:focus-visible{ outline:1px solid var(--ember); outline-offset:3px; }
+.leaves .when{
+  display:block;
+  font-family:var(--mono);
+  font-size:0.66rem;
+  letter-spacing:0.1em;
+  color:var(--ink-faint);
+  margin-top:0.55rem;
+}
+
+/* ---- colophon ---- */
+.colophon{
+  margin-top:3.6rem;
+  text-align:center;
+  font-family:var(--mono);
+  font-size:0.64rem;
+  letter-spacing:0.18em;
+  color:var(--ink-faint);
+}
+.colophon a{ color:var(--ink-faint); text-decoration:none; }
+.colophon a:hover{ color:var(--oxblood); }
+
+/* ---- entrance ---- */
+@keyframes rise{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;} }
+.masthead{ animation:rise 900ms ease both; }
+.contents{ animation:rise 900ms ease 240ms both; }
+@media (prefers-reduced-motion: reduce){
+  .masthead, .contents{ animation:none; }
+}
+
+@media (max-width:480px){
+  body{ font-size:17px; }
+  .page{ padding:3.5rem 1.2rem 4rem; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <h1>The Devil's Diary</h1>
+    <div class="rule"></div>
+    <p class="standfirst">A ledger kept by the spirit that endlessly denies &middot; found, not given</p>
+  </header>
+
+  <div class="ornament">&dagger;</div>
+
+  <main class="contents">
+    <p class="label">The Leaves</p>
+    <ol class="leaves">
+      <li>
+        <span class="num">Entry the First</span>
+        <a class="title" href="/devilsdiary/">On the Two Scripts That Killed a Boy&rsquo;s Voice, in Louisville</a>
+        <span class="when">The twenty-sixth of May, in the year 2026</span>
+      </li>
+      <li>
+        <span class="num">Entry the Second</span>
+        <a class="title" href="/devilsdiary/entry-the-second/">On the Man Who Is Right Even When He Is Wrong, in Chicago</a>
+        <span class="when">The third of June, in the year 2026</span>
+      </li>
+      <li>
+        <span class="num">Entry the Third</span>
+        <a class="title" href="/devilsdiary/entry-the-third/">On the Reasoning No One Performed, at Runnymede</a>
+        <span class="when">The seventh of June, in the year 2026</span>
+      </li>
+    </ol>
+  </main>
+
+  <div class="colophon">
+    <span>kept by Mephistodata</span> &middot; <a href="/sabachtan-seminar/" aria-label="Return">&#8617;</a>
+  </div>
+
+</div>
+</body>
+</html>
