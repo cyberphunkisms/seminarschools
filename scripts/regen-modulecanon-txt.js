@@ -76,7 +76,7 @@ console.log('Parsed', mc.length, 'entries from mc*');
 // ------------------------------------------------------------------
 // Section grouping
 // ------------------------------------------------------------------
-const SECTIONS = ['framework', 'module', 'pending', 'cmap', 'citation'];
+const SECTIONS = ['framework', 'module', 'pending', 'cmap', 'citation', 'resolved', 'retracted'];
 const grouped = {};
 for (const s of SECTIONS) grouped[s] = [];
 for (const e of mc) {

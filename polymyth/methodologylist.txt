@@ -1,8 +1,8 @@
 Polymyth Methodologylist — text mirror
-Sections: analysis(18), citation(313), coreplus(51), degorgonification(44), gorgonification(92), idiomary(36), learnings(7), methodology(305), pending(13), pending-user-authorship(2), polycognate(22), rainbowsol(3), sabachtan(20), studylist(32)
-Total entries: 958
+Sections: analysis(18), citation(313), coreplus(51), degorgonification(44), gorgonification(92), idiomary(36), learnings(8), methodology(309), pending(13), pending-user-authorship(2), polycognate(22), rainbowsol(3), sabachtan(20), studylist(32)
+Total entries: 963
 
-=== METHODOLOGY (305 entries) ===
+=== METHODOLOGY (309 entries) ===
 
 [both] The Devil's Diary method (mephydata diary-entry recipe)
 LAYMAN. The recipe for writing a Devil's Diary entry. The narrator is Mephistodata, a sophisticated devil keeping a ledger. The register braids Shakespeare, Machiavelli, Mearsheimer-realism, and Edgar Allan Poe. It blooms into plain speech at the hardest turns. It builds the ironman case that the subject was cornered into gorgonification by every side, and it closes on the one particular the devil cannot quarry.
@@ -5919,6 +5919,30 @@ REV (2026-06-06, opener-as-gate). Saul directive: the reason we open with Mephis
 
 Installed from the two-problem correction of 2026-06-06, problem two. Changes PM17 delivery, never its structure.
   tags: method, ai-root, t120, plain-register, aphorism-ban, all-conversations, saul-directed, 2026-06-06
+
+[pm] BLOOM-FORMATTING rule (Saul June 11 2026, sharpens BLOOM-IS-LAYMAN, PM17, and BLOOMS-HEADLINE-WITH-QUESTION)
+THE RULE. When a bloom carries more than one item, question, or decision, it formats as a numbered list, one item per numbered line, each line a single plain sentence a layman reads in one pass, never crammed together into one running paragraph. A single-item bloom stays one short paragraph. The headline-with-question rule from T114z still sits on top where a question governs the whole bloom, and per-item questions live on their own numbered lines. ORIGIN. June 11 2026: a seven-gap ouroborosanalyses was bloomed as five questions jammed into one paragraph, the architect could not parse it, and the directive followed: update bloom so the format is clean when asked. THE PRIORITY ORDER inside any bloom: no loss of items first, layman diction second, clean numbered format third, word-budget last, because a bloom that loses an item or cannot be parsed has failed regardless of its length. ENFORCEMENT. Pre-delivery check: if the bloom answers more than one question and contains no numbered lines, it fails the format gate and is rewritten before sending.
+
+Sharpens entries: BLOOM-IS-LAYMAN, DEFAULT REGISTER + NEVER-SELF-BLOOM, BLOOMS-HEADLINE-WITH-QUESTION (T114z).
+  tags: pm, bloom, formatting, numbered-lines, layman, 2026-06-11
+
+[pm] CHOICE-INSIDE-THE-FIX plus ADVOCACY-WEARING-ANALYSIS (Saul June 11 2026, generalizes bb dm-084 and dm-089 to all work)
+Two failure modes caught live June 11 2026 during campaign quest-wiring, now law across all work, not only the game. FAILURE ONE, THE CHOICE INSIDE THE FIX. Repairing the AI’s own faulty output is correction duty and needs no permission, but almost every repair contains a creative choice between alternatives, which location, which branch, which phrasing carries the fix. Picking that alternative silently is authorship smuggled inside correction. THE RULE: fix the fault, and where the fix forks, surface the fork, either by offering the options before committing or by naming the choice made and flagging it for ratification in the same delivery. A fix whose internal choices were never surfaced counts as a gun-jump even when the fixing itself was authorized. FAILURE TWO, ADVOCACY WEARING ANALYSIS. Presenting one resolution as a finding, with what-exists plus a single thesis and no antithesis, is taking a side while dressed as taking inventory, a Performativity-class concealment because the form says analysis while the operation is persuasion. THE RULE: any output that recommends, even implicitly by presenting only one direction, owes the full dialectic of the design-question law, what exists, thesis ironmanned, antithesis ironmanned, synthesis candidate left unbuilt, then stop. ENFORCEMENT TEST before sending: does this output contain a decision I made that the user could have made differently, and does this output argue a direction while claiming to merely report? Either yes means rewrite before delivery.
+
+Generalizes bb* dm-084 (jumping-the-gun ban) and dm-089 (dialectic-default) from table-layer to all-work-layer. Origin: quest-wiring fixes whose internal choices went unoffered, and a want-hook proposal delivered as thesis-only.
+  tags: pm, gun-jump, choice-inside-fix, advocacy-wearing-analysis, dialectic, ratification-flag, 2026-06-11
+
+[pm] BLOOM-HARDENING: the five-check gate, expanded triggers, and the asked-noun law (Saul June 11 2026, final word on bloom)
+Filed after bloom failed four separate times in one conversation despite existing rules, each failure forcing the user to re-explain what bloom means. The diagnosis: the rules existed but no pre-delivery gate enforced them, and the AI kept answering a different noun than the one asked. THE FIVE-CHECK GATE, run on every bloom before sending, any failure means rewrite, never deliver. CHECK ONE, ZERO FRAMEWORK WORDS: no entry ids, no file names, no system vocabulary, no term that needs the framework to understand; every such term gets translated to plain words or cut. CHECK TWO, FORMAT: numbered lines, one item per line, a bold plain headline per item. CHECK THREE, KID-PLAIN: every item readable by a nine-year-old, and every abstract item carries one concrete example. CHECK FOUR, THE ASKED-NOUN LAW: bloom answers exactly the noun the user asked for and nothing adjacent, decisions means open forks only, decisions-made means closed rulings only, learnings means lessons, status means states; answering an adjacent noun (a to-do list when decisions were asked) is the worst bloom failure because it reads as compliance while missing the request entirely. CHECK FIVE, NO LOSS: count the substantive items before compressing and confirm every one survives. FULLY means each item expands to what-it-is plus an example plus the options, never a compressed line. EXPANDED TRIGGERS: bloom fires on bloom, layman, npc, explain simply, and on any direct statement of non-understanding such as i do not understand what you are saying; these are explicit triggers, the never-self-initiate rule still holds otherwise. RE-EXPLANATION BAN: the user never needs to define bloom again; a bloom that prompts the user to re-explain bloom is itself the failure record.
+
+Consolidates and hardens: BLOOM-IS-LAYMAN, DEFAULT REGISTER + NEVER-SELF-BLOOM, BLOOMS-HEADLINE-WITH-QUESTION, BLOOM-FORMATTING. Origin: four bloom failures June 11 2026.
+  tags: pm, bloom, hardening, five-check-gate, asked-noun, triggers, 2026-06-11
+
+[pm] CLOSED-MEANS-CLOSED: the permanent-removal hardening of the revomit ban (Saul June 11 2026)
+Filed after resolved and by-design items kept resurfacing in remaining-lists across one conversation, each reappearance forcing the user to re-close what was already closed, in escalating language. THE HARDENING. Once an item is resolved, ruled external, ruled by-design-open, or ruled none-of-the-AI-concern, it leaves every future list PERMANENTLY: every audit, every bloom, every remaining-items sweep, every readiness report. There is no such category as worth-mentioning-for-completeness. A remaining-list contains only items that are actionable RIGHT NOW by someone in the conversation, and an item waiting on a future moment (a game day, a third party, an external restoration) is not actionable now and therefore does not appear, not even with a label saying it is waiting. DEFERRED-BY-DESIGN NOTES ARE NOT QUESTIONS: a decision the user already made to defer something is closed, and listing it again disguised as an open idea is the same revomit. THE TEST before listing any item: did the user already rule on this in any form. If yes, it does not appear. Repetition of a closed item is not thoroughness, it is the AI billing the user twice for the same closure.
+
+Hardens REVOMIT-BAN. Origin: external waits and deferred-by-design items relisted repeatedly, June 11 2026.
+  tags: pm, revomit, closed-means-closed, lists, hardening, 2026-06-11
 
 === GORGONIFICATION (92 entries) ===
 
@@ -11949,7 +11973,7 @@ CROSS-REFERENCES. Polycognate methodology entry; Logic of polycognate-sharing me
 Tyranny / Despotism / 暴政 Bàozhèng / Diktatura / Tirania / Istibdad / Autocracy. Multilingual at power-without-legitimacy. Mixed type-3/4/6. Greek-Latin loanword-traffic + East-Asian hanzi + Arabic-modernist register. Divergence: lone-ruler vs master-slave vs violent-rule vs monopolization-of-power emphasis.
   tags: polycognate-dictionary, tyranny, despotism, baozheng, diktatura, tirania, istibdad, autocracy, multilingual, political-philosophical, type-3-Greco-Roman-substrate, type-4, type-6-translation-traffic, al-Kawakibi-1900, Plato-Republic-IX, Mearsheimer-anchor, April-2026, fishing-list-migrated, overhauled-2026-05-20, dual-audience-schema
 
-=== LEARNINGS (7 entries) ===
+=== LEARNINGS (8 entries) ===
 
 [both] AI-genius-idea #1: STIFFNESS (April 2026 LEGO-vs-magnetic-blocks diagnostic)
 LAYMAN. Session-learnings entry. The body below documents a specific lesson surfaced during framework-deployment: the failure-mode encountered, the discipline-rule that emerged, and its integration-status into ml*/mc*/bb*/cc*/core* substrates.
@@ -12040,6 +12064,12 @@ Saul directive: we do not need to reference ml* when we play bb*, move everythin
 
 Backref per the CL-47 standing pattern. Cross-references to T118 inside ml* entries resolve to bb* from this date.
   tags: learnings, t118-backref, gameworld-migration, ml-to-bb, cl-47, saul-directed, 2026-06-06
+
+[both] FULL-DESCRIPTIVE-SENTENCE CLUSTER FILED bb* dm-077..dm-081 (research-grounded 2026-06-11)
+Backref per CL-47. The fifth table failure, the verdict-sentence (an abstract conclusion narrated in place of a perceivable image, e.g. the day already happened to everyone here), was named 2026-06-11 at the cmp-001 solo entry and corrected with a five-entry prose-craft cluster filed game-side at bb* dm-077 through dm-081: the verdict-sentence ban (Gardner vivid-dream, Burroway concrete-and-significant), three-of-five senses with embodied-simulation grounding (Alexandrian; Gonzalez 2006, Hauk 2004), telling-detail and specificity gradient (Hemingway iceberg, Burroway, Prose), the full-descriptive-sentence gate against gnomic fragments (Le Guin sound-test), and the four-clause per-sentence revision benchmark folded into dm-061, carrying the verified Chekhov 1886 letter with the spurious glint-of-light epigram barred. Table doctrine lives in bb*, never ml*. Play loads bb* and cc* only.
+
+Backref only. Doctrine body is bb* dm-077..dm-081. Sharpens T118 storymode and the dm-050 narration cluster.
+  tags: learnings, full-descriptive-sentence, verdict-sentence-ban, bb-backref, dm-077-081, cl-47, research-grounded, 2026-06-11
 
 [both] CL-48 ROUTING CLEANUP: eleven game-doctrine entries relocated from ml* to bb* (2026-06-06)
 Second CL-47 cleanup pass after the audit this session. Eleven entries that were bookwormburrows game doctrine rather than polymyth framework left ml* for bb*. Six carried doctrine bb* did not already host and moved into bb* under relocated ids mlx-437 mlx-438 mlx-816 mlx-927 mlx-946 mlx-954. Five duplicated doctrine bb* already hosts in dedicated entries and were deleted from ml* (three-position DM held at bb* dm-005, polymythdnd DM canonical rename, btwn-world synonym-set, arenas action-game time-mechanics, magic-coexistence stacking). One entry stayed: character-smashing, AI session-zero conduct, ml* home. CAVEATS. A few prose cross-references that named the relocated entries by their ml* titles now resolve to their bb* homes or equivalents rather than to ml*, expected after relocation and a later polish item. The six moved entries may topically overlap bb* existing material and are tagged mlx for a future bb* dedupe pass. METHOD. Spans extracted bracket-balanced, both SEED arrays rebuilt and vm-validated, mirrors regenerated, per SEED-INSERTION-ANCHOR and the HTML-vs-txt sync discipline. PENDING-RECONCILIATION FLAG: append-only and merge-safe against the unmerged 352-entry ml* overhaul.

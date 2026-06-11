@@ -72,7 +72,7 @@ console.log('Parsed', bb.length, 'entries from bb*');
 // ------------------------------------------------------------------
 // Section grouping (ordered)
 // ------------------------------------------------------------------
-const SECTIONS = ['methodology', 'dimension', 'bookworm', 'character-creation', 'credit', 'pending'];
+const SECTIONS = ['methodology', 'dimension', 'bookworm', 'character-creation', 'credit', 'pending', 'retracted'];
 const grouped = {};
 const unknown = [];
 for (const s of SECTIONS) grouped[s] = [];
