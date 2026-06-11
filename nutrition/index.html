@@ -58,6 +58,37 @@
 <link rel="stylesheet" href="/css/mobile-overlay.css">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/theme.css">
+<link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
+<style id="solarpunk-skin">
+/* Nutrition wears solarpunk: leaf, soil, sun. Page-local override of the
+   shared palette so the template machinery is untouched. */
+:root{
+  --bg:#EEF3E2;
+  --bg-rgb:238,243,226;
+  --fg:#16240F;
+  --fg-soft:#3E5230;
+  --fg-fade:#6E7F5C;
+  --accent:#3E7C3A;
+  --accent-rgb:62,124,58;
+  --rule:rgba(22,36,15,0.14);
+  --rule-soft:rgba(22,36,15,0.07);
+  --highlight:#F4E6B8;
+}
+/* The sun in the system: gold for emphasis italics in compound headings. */
+.compound em{color:#C28F1E;}
+/* Status badge grows leaves. */
+.threshold-status{border-color:#3E7C3A;color:#3E7C3A;}
+/* The transmission chip photosynthesizes on this page. */
+.open-transmission{color:#3E7C3A;border-color:#3E7C3A;background:rgba(22,36,15,0.92);}
+.open-transmission:hover{background:#3E7C3A;color:#EEF3E2;box-shadow:0 0 12px rgba(62,124,58,0.45);}
+/* Mandala background tints toward chlorophyll. */
+canvas, .mandala{filter:hue-rotate(80deg) saturate(0.7);}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400;0,500;0,600;1,400&family=Besley:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style id="type-identity">/* warm grotesk + earthy Clarendon: garden and soil; a sun rises at the top of the page */
+:root{--display:'Familjen Grotesk', system-ui, sans-serif;--body:'Besley', Georgia, serif;}
+body{background-image:radial-gradient(ellipse 90% 40% at 50% -5%, rgba(216,196,90,0.18), transparent 70%);} ::selection{background:rgba(62,124,58,0.22);}
+</style>
 </head>
 <body>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sun" aria-hidden="true">&#9728;</span><span class="moon" aria-hidden="true">&#9790;</span></button><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
@@ -79,8 +110,7 @@
   <span class="right">Nutrition</span>
 </header>
 <main>
-<nav class="project-nav" aria-label="Projects"><a href="/">Home</a><a href="/calendar/">Calendar</a>
-<a href="/agora/">Agora</a><a href="/marginalia/">Marginalia</a><a href="/sabachtan-seminar/">Sabachtan</a><a href="/ohm-dome/">Ohm Dome</a><a href="/nutrition/" class="current">Nutrition</a><a href="/teacherresources/">Resources</a><a href="/florilegium/">Florilegium</a></nav>
+<nav class="project-nav" aria-label="Projects"><a href="/">Home</a><a href="/polymythseminars/">Calendar</a><a href="/agora/">Agora</a><a href="/marginalia/">Marginalia</a><a href="/nutrition/" class="current">Nutrition</a><a href="/#community">All projects →</a></nav>
 
 <div class="threshold-status">In development</div>
   <div class="eyebrow">Food &middot; Substrate &middot; Sovereignty</div>
@@ -94,7 +124,7 @@
   </div>
 
 
-  <p class="micro" style="margin: 1.5rem 0 2rem;">Subscribe via <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="prompt">&gt;</span>open_transmission<span class="cursor">_</span></a> to follow new pieces.</p>
+  <p class="micro" style="margin: 1.5rem 0 2rem;">Subscribe via <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="prompt">&gt;</span>open_transmission<span class="cursor">_</span></a> (a public reading doc) to follow new pieces.</p>
   <section class="section tier reveal" data-tier="1" data-roman="i">
   <div class="tier-label-vertical"><span class="num">i</span><span class="label">The principle</span></div>
   <div class="section-meta"><span class="num">i.</span> The principle</div>

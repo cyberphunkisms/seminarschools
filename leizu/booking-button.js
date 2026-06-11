@@ -16,17 +16,17 @@
 
 const PAYMENT_LINKS = {
   // Session bundles (one-time)
-  three_sessions:        'https://buy.stripe.com/6oUdR9aRlfZAad3bDc6oo02',    // $300 CAD — 3 sessions, $100 each
-  five_sessions:         'https://buy.stripe.com/14A5kD2kP7t470R4aK6oo03',    // $510 CAD — 5 sessions (Pansession)
-  seven_sessions:        'https://buy.stripe.com/5kQeVd9Nh3cOfxn22C6oo04',    // $610 CAD — 7 sessions (SeptSession)
+  three_sessions:        'https://buy.stripe.com/6oUdR9aRlfZAad3bDc6oo02',    // $225 CAD — 3 sessions, $75 each
+  five_sessions:         'https://buy.stripe.com/14A5kD2kP7t470R4aK6oo03',    // $380 CAD — 5 sessions (Pansession)
+  seven_sessions:        'https://buy.stripe.com/5kQeVd9Nh3cOfxn22C6oo04',    // $458 CAD — 7 sessions (SeptSession)
 
   // Forest year (144 contact hours, one-on-one)
-  forest_year_upfront:   'https://buy.stripe.com/14A6oHf7B8x82KB4aK6oo01',    // $14,000 CAD upfront
-  forest_year_monthly:   'https://buy.stripe.com/9B69AT0cH3cO98ZePo6oo05',    // $1,400/mo CAD recurring
+  forest_year_upfront:   'https://buy.stripe.com/14A6oHf7B8x82KB4aK6oo01',    // $10,500 CAD upfront
+  forest_year_monthly:   'https://buy.stripe.com/9B69AT0cH3cO98ZePo6oo05',    // $1,050/mo CAD recurring
 
   // Seminar year (144 contact hours, small seminar, gated by 20-40 prior one-on-one sessions)
-  seminar_year_upfront:  'https://buy.stripe.com/00w00j3oT28Kfxn6iS6oo00',    // $5,800 CAD upfront
-  seminar_year_monthly:  'https://buy.stripe.com/bJe7sLaRlcNo3OFcHg6oo06',    // $600/mo CAD recurring
+  seminar_year_upfront:  'https://buy.stripe.com/00w00j3oT28Kfxn6iS6oo00',    // $4,350 CAD upfront
+  seminar_year_monthly:  'https://buy.stripe.com/bJe7sLaRlcNo3OFcHg6oo06',    // $450/mo CAD recurring
 
   // Donation (Mulberry Fund). Routed through Saul's existing Buy Me a Coffee
   // page for now. Donation is NOT in the cart-routing logic — the donate CTA

@@ -68,6 +68,13 @@
 <link rel="stylesheet" href="/css/mobile-overlay.css">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/theme.css">
+<link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
+<style id="accent-identity">/* annotator’s red ink */:root{--accent:#A4343A;--accent-rgb:164,52,58;}</style>
+<link href="https://fonts.googleapis.com/css2?family=Unna:ital,wght@0,400;0,700;1,400&family=Vollkorn:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style id="type-identity">/* sharp didone + warm German text face; links underlined in the annotator’s red pen */
+:root{--display:'Unna', Georgia, serif;--body:'Vollkorn', Georgia, serif;}
+a{text-decoration-color:#A4343A;text-underline-offset:0.18em;} ::selection{background:rgba(164,52,58,0.18);}
+</style>
 </head>
 <body>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sun" aria-hidden="true">&#9728;</span><span class="moon" aria-hidden="true">&#9790;</span></button><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
@@ -91,8 +98,7 @@
 </header>
 
 <main id="main-content">
-<nav class="project-nav" aria-label="Projects"><a href="/">Home</a><a href="/polymythseminars/">Calendar</a>
-<a href="/agora/">Agora</a><a href="/marginalia/" class="current">Marginalia</a><a href="/sabachtan-seminar/">Sabachtan</a><a href="/ohm-dome/">Ohm Dome</a><a href="/nutrition/">Nutrition</a><a href="/teacherresources/">Resources</a><a href="/florilegium/">Florilegium</a></nav>
+<nav class="project-nav" aria-label="Projects"><a href="/">Home</a><a href="/polymythseminars/">Calendar</a><a href="/agora/">Agora</a><a href="/marginalia/" class="current">Marginalia</a><a href="/#community">All projects →</a></nav>
 
   <div class="threshold-status">In development</div>
   <h1 class="titanic words"><em>Marginalia.</em></h1>
@@ -116,7 +122,7 @@
       <span class="scribble">↗</span>
       Pieces stay in their canonical section so each section reads as itself. They aggregate in the florilegium so the writing reads as a body of work.
     </aside>
-  <p class="articles-intro">Each piece is one lecture, written within days of attending. Subscribe via <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="prompt">&gt;</span>open_transmission<span class="cursor">_</span></a>.</p>
+  <p class="articles-intro">Each piece is one lecture, written within days of attending. Subscribe via <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="prompt">&gt;</span>open_transmission<span class="cursor">_</span></a> (a public reading doc).</p>
   
   <ul class="article-list" id="article-list">
     <li class="articles-empty" id="articles-empty">No pieces yet. The first one is written after the first lecture is attended in earnest.</li>

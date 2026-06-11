@@ -567,9 +567,9 @@ body.theme-dark {
   font-family: var(--mono);
   font-size: 0.72rem;
   letter-spacing: 0.05em;
-  color: #00ff41;
-  background: #0a0908;
-  border: 1px solid #00ff41;
+  color: #C96F3B;
+  background: rgba(20, 14, 10, 0.92);
+  border: 1px solid #C96F3B;
   padding: 0.2rem 0.6rem;
   border-radius: 2px;
   text-decoration: none !important;
@@ -578,9 +578,9 @@ body.theme-dark {
   white-space: nowrap;
 }
 .open-transmission:hover {
-  background: #00ff41;
-  color: #0a0908;
-  box-shadow: 0 0 16px rgba(0,255,65,0.55);
+  background: #C96F3B;
+  color: #14100A;
+  box-shadow: 0 0 12px rgba(201, 111, 59, 0.45);
 }
 .open-transmission .prompt { opacity: 0.65; margin-right: 0.25em; }
 .open-transmission .cursor {

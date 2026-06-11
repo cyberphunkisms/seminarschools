@@ -129,3 +129,21 @@
 /polymyth/devilsnotebook    /polymyth/devilsdiary/        301
 /polymyth/devils-diary/*    /polymyth/devilsdiary/:splat  301
 /polymyth/devils-diary      /polymyth/devilsdiary/        301
+# Devil's Diary internal restructure (June 10 2026): ledger is now the landing
+# at /polymyth/devilsdiary/, entries live at numbered slugs /1 /2 /3 /4.
+/polymyth/devilsdiary/ledger/    /polymyth/devilsdiary/    301
+/polymyth/devilsdiary/ledger     /polymyth/devilsdiary/    301
+/polymyth/devilsdiary/entry-the-first/   /polymyth/devilsdiary/1/   301
+/polymyth/devilsdiary/entry-the-first    /polymyth/devilsdiary/1/   301
+/polymyth/devilsdiary/entry-the-second/  /polymyth/devilsdiary/2/   301
+/polymyth/devilsdiary/entry-the-second   /polymyth/devilsdiary/2/   301
+/polymyth/devilsdiary/entry-the-third/   /polymyth/devilsdiary/3/   301
+/polymyth/devilsdiary/entry-the-third    /polymyth/devilsdiary/3/   301
+/polymyth/devilsdiary/entry-the-fourth/  /polymyth/devilsdiary/4/   301
+/polymyth/devilsdiary/entry-the-fourth   /polymyth/devilsdiary/4/   301
+/polymyth/devilsdiary/one    /polymyth/devilsdiary/1/   301
+/polymyth/devilsdiary/two    /polymyth/devilsdiary/2/   301
+/polymyth/devilsdiary/three  /polymyth/devilsdiary/3/   301
+/polymyth/devilsdiary/four   /polymyth/devilsdiary/4/   301
+/polymyth/devilsdiary/Howourgenocidalculturenegotiatesracismthroughthecommodificationofemotionallabor  /polymyth/devilsdiary/4/  301
+/polymyth/devilsdiary/howourgenocidalculturenegotiatesracismthroughthecommodificationofemotionallabor  /polymyth/devilsdiary/4/  301

@@ -805,6 +805,7 @@
   /* card section divider */
   #card-preview .ascii-div{color:var(--fg-darker);text-shadow:none;font-size:0.85rem;letter-spacing:0;}
 </style>
+<link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
 </head>
 <body class="bypass-mode">
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:none;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
@@ -879,7 +880,7 @@
 </form>
 
 <!-- ACTUAL POSTING FORM (hidden, populated and submitted by JS) -->
-<form id="post-form" name="bookwormcard" class="nl-form" aria-hidden="true">
+<form id="post-form" name="bookwormcard" class="nl-form" aria-hidden="true" method="POST" data-netlify="true" netlify-honeypot="bot-field">
   <input type="hidden" name="form-name" value="bookwormcard">
   <input type="text" name="bot-field">
   <input type="hidden" name="handle">
@@ -3235,8 +3236,8 @@ var STATES = {
 
   email: {
     enter: function(){
-      appendLine('where can i reach you?', {gap:false, question:true});
-      appendLine('<span class="quiet">your email, optional. it rides inside the saved card and goes nowhere else. type skip to leave it off.</span>', {gap:false, instant:true});
+      appendLine('what email should the card carry?', {gap:false, question:true});
+      appendLine('<span class="quiet">optional. it rides inside the saved card so a future session can find you. nothing is mailed to it. type skip to leave it off.</span>', {gap:false, instant:true});
       setPrompt('email · skip');
     },
     advance: function(input){
@@ -4426,6 +4427,15 @@ function submitForm(){
   // post-submit handlers can tell when a card was completed without
   // any skips.
   form.querySelector('[name=hegeliane-full]').value = isFullyFilled() ? 'true' : 'false';
+  // POST the filled form to Netlify so the card is actually received.
+  // Fire-and-forget: a network failure must never strand the player,
+  // so the print step runs regardless.
+  try{
+    var fd = new FormData(form);
+    fetch('/', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'},
+                 body: new URLSearchParams(fd).toString() })
+      .catch(function(){});
+  }catch(e){}
   clearCheckpoint();
   printCard();
 }

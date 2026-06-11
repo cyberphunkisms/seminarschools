@@ -182,8 +182,12 @@
   .cal-ev .evtime { font-weight: 700; }
   .cal-ev.cont { border-left-style: solid; border-radius: 0; background: color-mix(in srgb, var(--c, var(--cat-other)) 13%, transparent); }
   .cal-ev.cont.is-end { border-radius: 0 3px 3px 0; }
-  .cal-ev.bar { min-height: 0.6rem; padding: 0.2rem 0; color: transparent; }
-  .cal-ev.bar:hover { color: transparent; }
+  .cal-ongoing { display: flex; flex-wrap: wrap; gap: 0.45rem 0.9rem; align-items: baseline; padding: 0.55rem 0.2rem 0.8rem; }
+  .cal-ongoing-head { font-family: var(--sans); font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
+  .cal-ongoing-item { font-family: var(--sans); font-size: 0.72rem; color: var(--ink); text-decoration: none; border-left: 3px solid var(--c, var(--cat-other)); padding-left: 0.4rem; }
+  .cal-ongoing-item:hover { color: var(--accent); }
+  .cal-ongoing-span { color: var(--dim); font-size: 0.66rem; }
+  .cal-ongoing-chip { display: block; font-family: var(--sans); font-size: 0.62rem; color: var(--dim); margin-top: 0.25rem; cursor: help; }
   .cal-more { font-family: var(--sans); font-size: 0.64rem; color: var(--dim); margin-top: 0.2rem; display: block; }
   @media (max-width: 640px) {
     .cal-cell { min-height: 76px; padding: 0.2rem; }
@@ -280,6 +284,7 @@
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/theme.css">
+<link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
 </head>
 <body>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sun" aria-hidden="true">&#9728;</span><span class="moon" aria-hidden="true">&#9790;</span></button><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
@@ -658,6 +663,31 @@ function renderCalendar(){
   html += '<span class="cal-title">' + MONTHS_LONG[month] + ' ' + year + '</span>';
   html += '<button type="button" class="cal-nav" data-cal="next" aria-label="Next month">\u203A</button>';
   html += '</div>';
+  // Ongoing strip: every multi-day run that covers this month but starts
+  // before it, named once with its span and link, instead of flooding cells.
+  var mFirst = new Date(year, month, 1), mLast = new Date(year, month + 1, 0);
+  var ongoing = events.filter(function(e){
+    if (!e.end_date) return false;
+    var s = new Date(e._date.getFullYear(), e._date.getMonth(), e._date.getDate());
+    var x = new Date(e.end_date);
+    if (isNaN(x.getTime())) return false;
+    var en = new Date(x.getFullYear(), x.getMonth(), x.getDate());
+    return s < mFirst && en >= mFirst && s <= mLast;
+  }).sort(function(a,b){ return new Date(a.end_date) - new Date(b.end_date); });
+  if (ongoing.length){
+    html += '<div class="cal-ongoing"><span class="cal-ongoing-head">Ongoing this month</span>';
+    ongoing.forEach(function(e){
+      var cat = e._category || 'other';
+      var x = new Date(e.end_date);
+      var span = 'to ' + MONTHS_SHORT[x.getMonth()] + ' ' + x.getDate() + (x.getFullYear() !== year ? ' ' + x.getFullYear() : '');
+      var body = escapeHtml(e.title) + ' <span class="cal-ongoing-span">' + span + '</span>';
+      if (e.source_url)
+        html += '<a class="cal-ongoing-item" href="' + e.source_url + '" target="_blank" rel="noopener" style="--c:var(--cat-' + cat + ')">' + body + '</a>';
+      else
+        html += '<span class="cal-ongoing-item" style="--c:var(--cat-' + cat + ')">' + body + '</span>';
+    });
+    html += '</div>';
+  }
   html += '<div class="cal-dow">' + dows.map(function(d){ return '<span>' + d + '</span>'; }).join('') + '</div>';
   html += '<div class="cal-grid">';
 
@@ -669,36 +699,40 @@ function renderCalendar(){
     html += '<div class="cal-cell' + (k === todayKey ? ' today' : '') + '">';
     html += '<span class="daynum">' + day + '</span>';
     var list = (byDay[k] || []).slice().sort(function(a, bb){ return a.e._date - bb.e._date; });
-    var shown = list.slice(0, 6);
+    // Split the day: real entries (single-day events and the true start of a
+    // multi-day run) get titled pills; days merely covered by a long run
+    // collapse into one compact ongoing chip, so exhibitions that span months
+    // no longer wallpaper every cell and bury that day's actual schedule.
+    var starts = list.filter(function(it){ return it.isStart; });
+    var conts = list.filter(function(it){ return !it.isStart; });
+    var ends = conts.filter(function(it){ return it.isEnd; });
+    var shown = starts.slice(0, 5);
     shown.forEach(function(item){
       var e = item.e;
       var cat = e._category || 'other';
-      // Title only where it carries information: the true start, the first day
-      // of the month, or the first day of each week during a long span. Every
-      // other covered day is a slim colored bar, so a run no longer prints the
-      // same title in every cell.
-      var labelHere = item.isStart || day === 1 || dObj.getDay() === 0;
       var hrs = e._date.getHours(), mins = e._date.getMinutes();
-      var hasTime = (hrs !== 0 || mins !== 0) && item.isStart;
+      var hasTime = (hrs !== 0 || mins !== 0);
       var timeStr = hasTime ? ((hrs % 12 || 12) + (mins ? ':' + pad2(mins) : '') + (hrs < 12 ? 'a' : 'p')) : '';
-      var contClass = item.isStart ? '' : (' cont' + (item.isEnd ? ' is-end' : '') + (labelHere ? '' : ' bar'));
-      var inner = '';
-      if (labelHere){
-        var label = escapeHtml(e.title);
-        if (item.isStart && e.end_date){
-          var ed2 = new Date(e.end_date);
-          if (!isNaN(ed2.getTime()) && !(ed2.getFullYear() === year && ed2.getMonth() === month && ed2.getDate() === day))
-            label += ' <span style="opacity:.6">(ends ' + MONTHS_SHORT[ed2.getMonth()] + ' ' + ed2.getDate() + ')</span>';
-        }
-        inner = (timeStr ? '<span class="evtime">' + timeStr + '</span> ' : '') + label;
+      var label = escapeHtml(e.title);
+      if (e.end_date){
+        var ed2 = new Date(e.end_date);
+        if (!isNaN(ed2.getTime()) && !(ed2.getFullYear() === year && ed2.getMonth() === month && ed2.getDate() === day))
+          label += ' <span style="opacity:.6">(to ' + MONTHS_SHORT[ed2.getMonth()] + ' ' + ed2.getDate() + ')</span>';
       }
+      var inner = (timeStr ? '<span class="evtime">' + timeStr + '</span> ' : '') + label;
       var sc = 'border-left-color:var(--cat-' + cat + ');background:color-mix(in srgb,var(--cat-' + cat + ') 11%,transparent);--c:var(--cat-' + cat + ')';
       if (e.source_url)
-        html += '<a class="cal-ev' + contClass + '" href="' + e.source_url + '" target="_blank" rel="noopener" style="' + sc + '" title="' + escapeHtml(e.title) + '">' + inner + '</a>';
+        html += '<a class="cal-ev" href="' + e.source_url + '" target="_blank" rel="noopener" style="' + sc + '" title="' + escapeHtml(e.title) + '">' + inner + '</a>';
       else
-        html += '<span class="cal-ev' + contClass + '" style="' + sc + '" title="' + escapeHtml(e.title) + '">' + inner + '</span>';
+        html += '<span class="cal-ev" style="' + sc + '" title="' + escapeHtml(e.title) + '">' + inner + '</span>';
     });
-    if (list.length > shown.length) html += '<span class="cal-more">+' + (list.length - shown.length) + ' more</span>';
+    var hiddenStarts = starts.length - shown.length;
+    if (conts.length){
+      var contNames = conts.map(function(it){ return it.e.title + (it.isEnd ? ' (ends today)' : ''); }).join('\n');
+      var endNote = ends.length ? ' \u00b7 ' + ends.length + ' end' + (ends.length === 1 ? 's' : '') + ' today' : '';
+      html += '<span class="cal-ongoing-chip" title="' + escapeHtml(contNames) + '">\u25cf ' + conts.length + ' ongoing' + endNote + '</span>';
+    }
+    if (hiddenStarts > 0) html += '<span class="cal-more">+' + hiddenStarts + ' more</span>';
     html += '</div>';
   }
 

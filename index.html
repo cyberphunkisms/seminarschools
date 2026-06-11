@@ -685,9 +685,9 @@
   #threshold .titanic { grid-column: 1 / span 11; }
   #threshold .threshold-meta {
     grid-column: 8 / -1; grid-row: 3;
-    font-family: var(--body); font-style: italic; font-size: 1.4rem;
-    color: var(--fg); opacity: 0.85; max-width: 28ch;
-    align-self: end;
+    font-family: var(--body); font-style: italic; font-size: 1.35rem;
+    color: var(--fg); opacity: 0.85; max-width: 34ch;
+    align-self: start; margin-top: 4rem;
     position: relative; z-index: 5;
   }
   #threshold .threshold-coords {
@@ -1072,23 +1072,23 @@
     font-family: var(--mono);
     font-size: 0.72rem;
     letter-spacing: 0.05em;
-    color: #00ff41;
+    color: #C96F3B;
     background: #0a0908;
-    border: 1px solid #00ff41;
+    border: 1px solid #C96F3B;
     padding: 0.2rem 0.6rem;
     text-decoration: none;
     text-transform: lowercase;
     vertical-align: baseline;
     margin: 0 0.15em;
-    box-shadow: 0 0 6px rgba(0,255,65,0.30), inset 0 0 8px rgba(0,255,65,0.06);
+    box-shadow: 0 0 6px rgba(201,111,59,0.30), inset 0 0 8px rgba(201,111,59,0.06);
     transition: background 0.18s, color 0.18s, box-shadow 0.18s;
     position: relative;
     top: -0.08em;
   }
   .open-transmission:hover {
-    background: #00ff41;
+    background: #C96F3B;
     color: #0a0908;
-    box-shadow: 0 0 16px rgba(0,255,65,0.55);
+    box-shadow: 0 0 16px rgba(201,111,59,0.45);
   }
   .open-transmission .prompt { opacity: 0.65; margin-right: 0.25em; }
   .open-transmission .cursor { display: inline-block; animation: ot-blink 1.05s steps(2) infinite; margin-left: 0.05em; }
@@ -1257,9 +1257,10 @@ input[type="button"] {
 <link rel="stylesheet" href="/css/theme.css">
 <link rel="stylesheet" href="/css/mobile-overlay.css">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
 </head>
 <body>
-<style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
+<style id="ss-fz-style">.ss-fz{position:fixed;top:4.4rem;right:1rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 <!-- Theme toggle (light/dark mode). System preference is the default;
      clicking flips. localStorage persists the choice. -->
 <!-- CL-2026-06-04 #2: dead light/dark toggle removed; home uses its own scroll-driven palette -->
@@ -1298,7 +1299,7 @@ input[type="button"] {
     <span class="seal" aria-hidden="true"></span>
     Seminar <em>Schools</em>
   </a>
-  <a href="mailto:saulnassau@protonmail.com" class="topbar-email" style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.08em;color:var(--accent,#1F2A1A);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:0.1rem;margin-right:1rem;">saulnassau@protonmail.com</a>
+  <a href="mailto:saulnassau@protonmail.com" class="topbar-email" style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.08em;color:var(--accent,#1F2A1A);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:0.1rem;margin:0 1rem 0 1.6rem;">saulnassau@protonmail.com</a>
   <nav class="nav" aria-label="Primary">
     <a href="#academy">Academy</a>
     <a href="/polymythseminars/">Calendar</a>
@@ -1316,7 +1317,7 @@ input[type="button"] {
 <section id="threshold" class="tier" data-tier="1" data-name="Threshold" data-roman="i">
   <div class="tier-label-vertical"><span class="num">i</span><span class="label">Threshold</span></div>
   <h1 class="titanic words">Seminar <em>Schools.</em></h1>
-  <div class="threshold-meta reveal delay-3">A room of readers working through a hard text together reaches understanding that none of them could reach alone. The seminar has been a root form of serious learning since Plato. Seminar Schools is a Toronto practice built on it, running across three scales. Leizu Academy, its tutoring arm, works with students toward the Ontario curriculum, the IB Diploma, and university admissions. A running list tracks upcoming free public lectures around the city, with longer-form reviews of the ones attended. An open seminar called the Agora is convened when participants gather, either at Earl Bales Park or online.</div>
+  <div class="threshold-meta reveal delay-3">A room of readers working through a hard text together reaches understanding none of them could reach alone. That form is the seminar, and it has carried serious learning since Plato. Seminar Schools runs it at three scales in Toronto. Leizu Academy tutors students toward the Ontario curriculum, the IB Diploma, and university admissions. The calendar tracks the city’s free public lectures. The Agora is the open seminar anyone can join, at Earl Bales Park or online.</div>
   <div class="threshold-coords reveal delay-4">
     <div class="row"><span class="lbl">Based in</span><span class="val">Toronto and online</span></div>
     <div class="row"><span class="lbl">Founded</span><span class="val">2026</span></div>
@@ -1326,7 +1327,7 @@ input[type="button"] {
 <section id="lectures" class="tier" data-tier="2" data-name="Upcoming GTA Lectures" data-roman="ii">
   <div class="tier-label-vertical"><span class="num">ii</span><span class="label">Lectures</span></div>
   <h2 class="compound words">Upcoming GTA <em>Lectures.</em></h2>
-  <p class="body reveal delay-2">Toronto holds a free public lecture almost every weeknight. Universities, libraries, and museums host more talks in any given week than any one person can attend. This page tracks the ones worth attending. The longer-form commentary on each one lives at <a href="/marginalia">Marginalia</a>.</p>
+  <p class="body reveal delay-2">Toronto holds a free public lecture almost every weeknight, more in any week than one person can attend. This list keeps the ones worth showing up for. Longer commentary on each lives at <a href="/marginalia">Marginalia</a>.</p>
   <div class="lecture-list stagger reveal delay-3" id="featured-lectures">
     <div class="lecture-loading" style="grid-column:1/-1;padding:2rem 0;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)">Loading lectures…</div>
     <div class="lecture-tail"><span>This week and next month. See <a href="/polymythseminars/">full calendar</a> for all.</span><a href="/polymythseminars/">Full calendar &rarr;</a></div>
@@ -1361,9 +1362,9 @@ input[type="button"] {
   <div class="founder-name reveal delay-2">Saul Nassau</div>
   <div class="founder-body reveal delay-3">
     <p class="body">A seminar is a small group of prepared readers working through a difficult text together until something none of them brought in alone shows up. Seminar Schools exists to host that practice, paid and unpaid, indoors and outdoors, for whoever wants to enter it.</p>
-    <p class="body">A seminar grows minds because each reader has to defend, revise, and surrender positions in front of others doing the same. It builds the kind of community where disagreement is the bond rather than the wedge. It needs no credential to begin. Two prepared readers and one good text are enough.</p>
-    <p class="body">Underneath the umbrella sit Leizu Academy for paid tutoring, the Agora and Ohm Dome as forthcoming community projects, and the Marginalia collecting written attention to the talks attended around Toronto. The same room with different doors.</p>
-    <p class="body">Saul Nassau runs Seminar Schools. Fifteen years teaching across six countries. MA in Philosophy from the European Graduate School. PhD in Education in progress.</p>
+    <p class="body">A seminar grows minds because each reader must defend, revise, and surrender positions in front of others doing the same. Disagreement becomes the bond instead of the wedge. No credential is needed to begin. Two prepared readers and one good text are enough.</p>
+    <p class="body">Under the umbrella sit Leizu Academy for tutoring, the Agora and Ohm Dome as free community projects, and Marginalia, essays on the talks attended around the city. The same room with different doors.</p>
+    <p class="body">Saul Nassau runs Seminar Schools. Fifteen years teaching across six countries. MA in Philosophy from the European Graduate School, where he studied under Žižek and Agamben, after reading Hegel with George di Giovanni at McGill. PhD in Education in progress.</p>
   </div>
   <div class="founder-grid reveal delay-4">
     <div class="founder-block">
@@ -1386,7 +1387,7 @@ input[type="button"] {
 <section id="community" class="tier" data-tier="5" data-name="Community" data-roman="v">
   <div class="tier-label-vertical"><span class="num">v</span><span class="label">Community</span></div>
   <h2 class="compound words">Community <em>projects.</em></h2>
-  <p class="body reveal delay-2">Three community projects in formation alongside the tutoring. Each will be free. Each will be open. Dates go out through <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="prompt">&gt;</span>open_transmission<span class="cursor">_</span></a> when each is ready.</p>
+  <p class="body reveal delay-2">Five community projects grow alongside the tutoring. All free, all open. Dates go out through <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="prompt">&gt;</span>open_transmission<span class="cursor">_</span></a> (a public reading doc) when each is ready.</p>
   <div class="community-list stagger reveal delay-3">
     <div class="project featured">
       <div class="micro">Open seminar</div>
@@ -1406,6 +1407,18 @@ input[type="button"] {
       <div class="what">A dimensional-traveling game where any text becomes a visitable world. Players make a character of themselves and play with their AI as the dungeon master. Built for classrooms and for the social network it grows into. Eighteen and over for the social side.</div>
       <div class="status">Live</div>
     </div>
+    <div class="project">
+      <div class="micro">Open seminar series</div>
+      <div class="name"><a href="/sabachtan-seminar/" style="color:inherit;text-decoration:none">Sabachtan</a></div>
+      <div class="what">A seminar series on abandonment as ground: the cry from the cross read across traditions. The deepest layer of the framework, taken slowly, in company.</div>
+      <div class="status">In development</div>
+    </div>
+    <div class="project">
+      <div class="micro">Food writing</div>
+      <div class="name"><a href="/nutrition/" style="color:inherit;text-decoration:none">Nutrition</a></div>
+      <div class="what">Notes from the kitchen on what food does and where it comes from. Bang-for-buck over branding, the diaspora grocery over the supplement aisle.</div>
+      <div class="status">In development</div>
+    </div>
   </div>
 </section>
 
@@ -1413,7 +1426,7 @@ input[type="button"] {
   <div class="tier-label-vertical"><span class="num">vi</span><span class="label">Writing</span></div>
   <h2 class="compound words"><em>Writing.</em></h2>
   <div class="writing-list stagger reveal delay-2">
-    <div class="entry featured"><div class="num">i</div><div class="title"><a href="https://philarchive.org/rec/SAUCOT-3" target="_blank" rel="noopener noreferrer">Carrying Over the Burdens of Trace</a></div><div class="where">MA Thesis in Philosophy, Art, and Critical Thought at the European Graduate School, 2019. Hosted on PhilArchive.</div></div>
+    <div class="entry featured"><div class="num">i</div><div class="title"><a href="/polymyth/trace/">Carrying Over the Burdens of Trace</a></div><div class="where">MA Thesis in Philosophy, Art, and Critical Thought at the European Graduate School, 2019. The argument, four exhibits, and the PhilArchive link.</div></div>
     <div class="entry"><div class="num">ii</div><div class="title"><a href="/polymyth/methodologylist">polymorphousmythology</a></div><div class="where">An ongoing project that tracks how cultural symbols, archetypes, and figures move across unrelated works and accumulate meaning through collective use. Part analytical framework, part object of study. Essays, terminology, and case studies live in the methodologylist.</div></div>
     <div class="entry"><div class="num">iii</div><div class="title"><a href="/aa/">archetype archive</a></div><div class="where">A catalog of approximately four hundred published archetype taxonomies. Depth psychology and dramaturgy and folklore and religious traditions and the gaming canons and the live folk surfaces where archetypes circulate now. Each entry carries originator and year and citation and a tag layer that surfaces cross tradition convergences. Sister project to the methodologylist.</div></div>
     <div class="entry"><div class="num">iv</div><div class="title"><a href="/marginalia">Marginalia</a></div><div class="where">Commentary essays on the Toronto lectures attended each month. Each entry is a longer piece of written attention to one talk.</div></div>
@@ -2397,6 +2410,13 @@ function fetchEventsWithFallback(){
           return d >= windowStart && d <= windowEnd;
         })
         .sort(function(a, b) { return new Date(a.date) - new Date(b.date); });
+
+      // Reading-length cap: at most 5 past and 10 upcoming on the homepage.
+      // The full archive lives on the calendar page.
+      var todayCut = new Date().toISOString().slice(0, 10);
+      var pastL = lectures.filter(function(e){ return e.date.slice(0,10) < todayCut; });
+      var futL  = lectures.filter(function(e){ return e.date.slice(0,10) >= todayCut; });
+      lectures = pastL.slice(-5).concat(futL.slice(0, 10));
 
       // Remove loading placeholder
       var loading = container.querySelector('.lecture-loading');

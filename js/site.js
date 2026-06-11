@@ -60,7 +60,11 @@
   function wrapWords(html) {
     return html.replace(/(<[^>]+>)|([^<]+)/g, function(m, tag, text) {
       if (tag) return tag;
-      return text.replace(/(\S+)/g, '<span class="word">$1</span> ').trimEnd();
+      // Keep one trailing space if the source text had one: trimEnd was
+      // eating the separator between plain text and a following <em>,
+      // fusing headings like "proxy.Bang-for-buck" across the whole site.
+      var trail = /\s$/.test(text) ? ' ' : '';
+      return text.replace(/(\S+)/g, '<span class="word">$1</span> ').trimEnd() + trail;
     });
   }
   function initRevealWrapping() {

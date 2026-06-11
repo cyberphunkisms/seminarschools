@@ -911,8 +911,10 @@ textarea:focus-visible,
 <link rel="stylesheet" href="/css/mobile-overlay.css">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <!-- CL-2026-06-04 #7: self-attributed role titles stripped from CV in all languages and SEO meta -->
+<link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
 </head>
 <body>
+<a href="/" style="position:fixed;top:0.9rem;left:1rem;z-index:1200;font-family:ui-monospace,monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:inherit;opacity:0.65;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:0.15rem;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.65">&larr; Seminar Schools</a>
 
 
 <!-- Theme toggle (light/dark mode). System preference is the default;
@@ -1145,7 +1147,7 @@ const UI = {
     subheadings: { kitchen: "Chef", teaching: "Educator", community: "Community Worker", education: "", volunteer: "Coordinator", performance: "Performer", seminarschools: "Founder & Editor" },
     secs: ["Elementary + Middle School", "High School, Earl Haig, North York", "McGill University, Montreal", "Europe: EGS, Humanitarian, Maritime", "China", "Vancouver + Italy", "Toronto 2019", "Toronto 2020–2022", "Toronto 2023–Present", "Current Projects"],
     certL: "TESOL, Indiana University (2016) · IB Theory of Knowledge (2023) · Nonviolent Communication, Rosenberg (2017) · Cognitive Behavioral Therapy (2018) · Social Impact Strategy (2012–2014) · Community Building Strategies (2012–2014) · Berkley Invigilation Standards (2019) · Accessibility for Ontarians with Disabilities Act (AODA) Training · Food Handlers (2006) · Motivation Coach Certificate (Udemy) · Python for Data Science & ML Bootcamp (Udemy) · Machine Learning A-Z (Udemy) · Mindfulness Practitioner I-III & Master (Udemy)",
-    eduL: "PhD Candidate in Education (Emerging technologies in pedagogy) · PhD Candidate in Philosophy (Hegel-Jung synthesis) · MA Philosophy, Art & Critical Thought, European Graduate School, Switzerland (faculty incl. Butler, Žižek, Agamben, Ronell) · BA Political Science, Economics, Philosophy, McGill University"
+    eduL: "PhD Candidate in Education (Emerging technologies in pedagogy) · PhD Candidate in Philosophy (Hegel-Jung synthesis) · MA Philosophy, Art & Critical Thought, European Graduate School, Switzerland (studied under Butler, Žižek, Agamben, Badiou, Nancy, Ronell) · BA Political Science, Economics, Philosophy, McGill University (studied under George di Giovanni)"
   },
   zh: {
     all: "全部", save: "儲存為 PDF", certs: "專業證照", edu: "學歷",
@@ -1153,7 +1155,7 @@ const UI = {
     subheadings: { kitchen: "廚師", teaching: "教育者", community: "社區工作者", education: "", volunteer: "統籌員", performance: "表演者", seminarschools: "創辦人與編輯" },
     secs: ["小學及國中", "高中, Earl Haig 北約克", "麥基爾大學 蒙特婁", "歐洲, EGS、人道救援、航海", "中國", "溫哥華及義大利", "多倫多 2019", "多倫多 2020–2022", "多倫多 2023–至今", "進行中計畫"],
     certL: "TESOL，印第安納大學（2016）· IB 知識論（2023）· 非暴力溝通，Rosenberg（2017）· 認知行為治療（2018）· 社會影響策略（2012–2014）· 社區建構策略（2012–2014）· Berkley 監考標準（2019）· 安大略省殘疾人無障礙法案（AODA）培訓· 食品處理員（2006）· 動機教練證書（Udemy）· Python 資料科學與機器學習（Udemy）· Machine Learning A-Z（Udemy）· 正念修習 I-III 及大師級（Udemy）",
-    eduL: "教育學博士候選人（教學中的新興科技）· 哲學博士候選人（黑格爾-榮格整合）· 哲學、藝術與批判思維碩士，歐洲高等研究院，瑞士（師資包括 Butler、Žižek、Agamben、Ronell）· 政治學、經濟學、哲學學士，麥基爾大學"
+    eduL: "教育學博士候選人（教學中的新興科技）· 哲學博士候選人（黑格爾-榮格整合）· 哲學、藝術與批判思維碩士，歐洲高等研究院，瑞士（師從 Butler、Žižek、Agamben、Badiou、Nancy、Ronell）· 政治學、經濟學、哲學學士，麥基爾大學（師從 George di Giovanni）"
   },
   zhs: {
     all: "全部", save: "保存为 PDF", certs: "专业证书", edu: "学历",
@@ -1161,7 +1163,7 @@ const UI = {
     subheadings: { kitchen: "厨师", teaching: "教育者", community: "社区工作者", education: "", volunteer: "统筹员", performance: "表演者", seminarschools: "创办人与编辑" },
     secs: ["小学及初中", "高中, Earl Haig 北约克", "麦吉尔大学 蒙特利尔", "欧洲, EGS、人道救援、航海", "中国", "温哥华及意大利", "多伦多 2019", "多伦多 2020–2022", "多伦多 2023–至今", "进行中项目"],
     certL: "TESOL，印第安纳大学（2016）· IB 知识论（2023）· 非暴力沟通，Rosenberg（2017）· 认知行为治疗（2018）· 社会影响策略（2012–2014）· 社区建构策略（2012–2014）· Berkley 监考标准（2019）· 安大略省残疾人无障碍法案（AODA）培训· 食品处理员（2006）· 动机教练证书（Udemy）· Python 数据科学与机器学习（Udemy）· Machine Learning A-Z（Udemy）· 正念修习 I-III 及大师级（Udemy）",
-    eduL: "教育学博士候选人（教学中的新兴科技）· 哲学博士候选人（黑格尔-荣格整合）· 哲学、艺术与批判思维硕士，欧洲高等研究院，瑞士（师资包括 Butler、Žižek、Agamben、Ronell）· 政治学、经济学、哲学学士，麦吉尔大学"
+    eduL: "教育学博士候选人（教学中的新兴科技）· 哲学博士候选人（黑格尔-荣格整合）· 哲学、艺术与批判思维硕士，欧洲高等研究院，瑞士（师从 Butler、Žižek、Agamben、Badiou、Nancy、Ronell）· 政治学、经济学、哲学学士，麦吉尔大学（师从 George di Giovanni）"
   },
   fa: {
     all: "همه", save: "ذخیره PDF", certs: "گواهینامه‌ها", edu: "تحصیلات",
@@ -1169,7 +1171,7 @@ const UI = {
     subheadings: { kitchen: "آشپز", teaching: "آموزگار", community: "فعال اجتماعی", education: "", volunteer: "هماهنگ‌کننده", performance: "هنرمند", seminarschools: "بنیان‌گذار و ویراستار" },
     secs: ["دبستان و راهنمایی", "دبیرستان, Earl Haig", "دانشگاه مک‌گیل, مونترال", "اروپا, EGS، بشردوستانه، دریانوردی", "چین", "ونکوور و ایتالیا", "تورنتو ۲۰۱۹", "تورنتو ۲۰۲۰–۲۰۲۲", "تورنتو ۲۰۲۳–اکنون", "پروژه‌های جاری"],
     certL: "TESOL، دانشگاه ایندیانا (۲۰۱۶) · IB نظریه دانش (۲۰۲۳) · ارتباط بدون خشونت، Rosenberg (۲۰۱۷) · رفتاردرمانی شناختی (۲۰۱۸) · استراتژی تأثیر اجتماعی (۲۰۱۲–۲۰۱۴) · استراتژی‌های ساخت جامعه (۲۰۱۲–۲۰۱۴) · استانداردهای نظارت Berkley (۲۰۱۹) · آموزش قانون دسترسی‌پذیری برای انتاریویی‌های دارای معلولیت (AODA) · گواهی بهداشت غذا (۲۰۰۶) · گواهینامه مربی انگیزشی (Udemy) · Python علم داده و یادگیری ماشین (Udemy) · Machine Learning A-Z (Udemy) · دوره ذهن‌آگاهی I-III و استاد (Udemy)",
-    eduL: "نامزد دکترای آموزش و پرورش (فناوری‌های نوظهور در آموزش) · نامزد دکترای فلسفه (ترکیب هگل-یونگ) · کارشناسی ارشد فلسفه، هنر و تفکر انتقادی, مدرسه عالی اروپایی، سوئیس (استادان: Butler، Žižek، Agamben، Ronell) · کارشناسی علوم سیاسی، اقتصاد، فلسفه, دانشگاه مک‌گیل"
+    eduL: "نامزد دکترای آموزش و پرورش (فناوری‌های نوظهور در آموزش) · نامزد دکترای فلسفه (ترکیب هگل-یونگ) · کارشناسی ارشد فلسفه، هنر و تفکر انتقادی, مدرسه عالی اروپایی، سوئیس (زیر نظر Butler، Žižek، Agamben، Badiou، Nancy، Ronell) · کارشناسی علوم سیاسی، اقتصاد، فلسفه, دانشگاه مک‌گیل (زیر نظر George di Giovanni)"
   },
   fr: {
     all: "Tout", save: "Enregistrer en PDF", certs: "Certifications", edu: "Formation",
@@ -1177,7 +1179,7 @@ const UI = {
     subheadings: { kitchen: "Chef", teaching: "Éducateur", community: "Travailleur communautaire", education: "", volunteer: "Coordinateur", performance: "Interprète", seminarschools: "Fondateur et éditeur" },
     secs: ["École primaire et secondaire", "École secondaire, Earl Haig", "Université McGill, Montréal", "Europe, EGS, humanitaire, maritime", "Chine", "Vancouver et Italie", "Toronto 2019", "Toronto 2020–2022", "Toronto 2023–présent", "Projets en cours"],
     certL: "TESOL, Université d'Indiana (2016) · IB Théorie de la connaissance (2023) · Communication non violente, Rosenberg (2017) · Thérapie cognitivo-comportementale (2018) · Stratégie d'impact social (2012–2014) · Stratégies de développement communautaire (2012–2014) · Normes de surveillance Berkley (2019) · Formation sur la Loi sur l'accessibilité pour les personnes handicapées de l'Ontario (LAPHO) · Certificat de manipulation des aliments (2006) · Certificat Coach Motivationnel (Udemy) · Python Data Science & ML (Udemy) · Machine Learning A-Z (Udemy) · Pleine Conscience I-III & Maître (Udemy)",
-    eduL: "Doctorant en éducation (technologies émergentes en pédagogie) · Doctorant en philosophie (synthèse Hegel-Jung) · MA Philosophie, art et pensée critique, European Graduate School, Suisse (professeurs : Butler, Žižek, Agamben, Ronell) · BA Sciences politiques, économie, philosophie, Université McGill"
+    eduL: "Doctorant en éducation (technologies émergentes en pédagogie) · Doctorant en philosophie (synthèse Hegel-Jung) · MA Philosophie, art et pensée critique, European Graduate School, Suisse (sous la direction de Butler, Žižek, Agamben, Badiou, Nancy, Ronell) · BA Sciences politiques, économie, philosophie, Université McGill (sous la direction de George di Giovanni)"
   }
 };
 
