@@ -34,6 +34,8 @@ RSS_PATH = ROOT / "seminars" / "feed.xml"
 FESTIVALS_OUT_PATH = ROOT / "festivals" / "events.json"
 FESTIVALS_RSS_PATH = ROOT / "festivals" / "feed.xml"
 LOG_PATH = ROOT / "data" / "scrape-log.json"
+PUBLIC_PATH = ROOT / "polymythseminars" / "events.json"
+DATA_MASTER_PATH = ROOT / "data" / "polymyth-seminar-events.json"
 HISTORY_DIR = ROOT / "data" / "history"
 
 # Festival-type values per polymyth-broadened seminar test
@@ -259,13 +261,40 @@ def write_log(harvest_data, final_records):
     for r in final_records:
         sid = r.get("source_id", "unknown")
         by_source[sid] = by_source.get(sid, 0) + 1
+
+    # Fail-loud source accounting (June 11 2026). The harvest output carries
+    # a source_yields table covering EVERY rostered source. Reproduce it in
+    # the public log, derive the zero-yield worklist, and cross-check it
+    # against sources.json so an omitted source is itself surfaced.
+    source_yields = harvest_data.get("source_yields", [])
+    roster_ids = []
+    try:
+        roster = json.loads((ROOT / "scripts" / "sources.json").read_text(encoding="utf-8"))
+        roster_ids = [s["id"] for s in roster.get("sources", [])]
+    except Exception:
+        pass
+    accounted = {y.get("source_id") for y in source_yields}
+    unaccounted = [sid for sid in roster_ids if sid not in accounted]
+    zero_yield = [
+        y["source_id"] for y in source_yields
+        if y.get("status") == "crawled" and not y.get("events")
+    ]
     log = {
         "run_at": now_iso(),
         "harvest_count": len(harvest_data.get("events", [])),
         "manual_count": sum(1 for r in final_records if r["review_status"] == "manual"),
         "final_count": len(final_records),
         "by_source": [{"id": k, "count": v} for k, v in sorted(by_source.items())],
+        "roster_size": len(roster_ids),
+        "source_yields": source_yields,
+        "zero_yield_sources": zero_yield,
+        "unaccounted_sources": unaccounted,
     }
+    if unaccounted:
+        print(f"WARNING: {len(unaccounted)} rostered sources missing from "
+              f"harvest source_yields accounting: {unaccounted[:10]}...")
+    if zero_yield:
+        print(f"Zero-yield sources this run ({len(zero_yield)}): {zero_yield[:15]}")
     LOG_PATH.write_text(json.dumps(log, indent=2), encoding="utf-8")
 
     HISTORY_DIR.mkdir(parents=True, exist_ok=True)
@@ -336,6 +365,59 @@ def main():
 
     write_log(harvest_data, merged)
     print(f"wrote {LOG_PATH} + history snapshot")
+
+    # PUBLIC CALENDAR SYNC (usability audit fix, June 11 2026). The calendar
+    # page at /polymythseminars/ reads /polymythseminars/events.json, which
+    # until now was only ever written by one-off consolidation scripts, so
+    # weekly harvests updated seminars/events.json while the page the user
+    # actually opens stayed frozen. Write the merged set to the public path
+    # and mirror it byte-identically to the data/ master so verify-critical's
+    # parity check holds.
+    public_output = {
+        "_comment": "Consolidated polymyth seminar calendar events. Auto-written each harvest by merge_and_finalize.py. Drives /polymythseminars/ page.",
+        "_generated_at": now_iso(),
+        "_total_events": len(merged),
+        "events": merged,
+        "count": len(merged),
+    }
+    public_text = json.dumps(public_output, indent=2, ensure_ascii=False)
+    PUBLIC_PATH.write_text(public_text, encoding="utf-8")
+    DATA_MASTER_PATH.write_text(public_text, encoding="utf-8")
+    print(f"wrote {PUBLIC_PATH} + byte-identical {DATA_MASTER_PATH}")
+
+    # FALLBACK + CACHE-BUSTER SYNC (trust audit, June 11 2026). The calendar
+    # page embeds an inline snapshot used when the fetch fails, and a ?v=
+    # cache buster on the fetch URL. Both went stale between consolidations.
+    # Refresh both every harvest so the no-network fallback always matches
+    # the served file and deployed clients never read a cached stale copy.
+    import re as _re
+    cal_path = ROOT / "polymythseminars" / "index.html"
+    cal_html = cal_path.read_text(encoding="utf-8")
+    snapshot = json.dumps({
+        "_comment": "Inline fallback snapshot. Auto-refreshed each harvest by merge_and_finalize.py.",
+        "_generated_at": now_iso(),
+        "_total_events": len(merged),
+        "events": merged,
+        "count": len(merged),
+    }, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    cal_html, n_fb = _re.subn(
+        r'(<script id="events-fallback" type="application/json">).*?(</script>)',
+        lambda m: m.group(1) + snapshot + m.group(2),
+        cal_html, flags=_re.S)
+    stamp = now_iso()[:10].replace("-", "")
+    cal_html, n_cb = _re.subn(r"events\.json\?v=\d+", f"events.json?v={stamp}", cal_html)
+    if n_fb == 1:
+        cal_path.write_text(cal_html, encoding="utf-8")
+        print(f"refreshed inline fallback snapshot + cache buster (v={stamp})")
+    else:
+        print(f"WARNING: fallback block match count {n_fb}, calendar page left untouched")
+    main_path = ROOT / "main" / "index.html"
+    if main_path.exists():
+        main_html = main_path.read_text(encoding="utf-8")
+        main_html, n_mb = _re.subn(r"events\.json\?v=\d+", f"events.json?v={stamp}", main_html)
+        if n_mb:
+            main_path.write_text(main_html, encoding="utf-8")
+            print(f"bumped main-page teaser cache buster ({n_mb} spot)")
     print("=== done ===")
 
 

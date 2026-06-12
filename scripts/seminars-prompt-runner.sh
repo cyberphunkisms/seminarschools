@@ -27,7 +27,13 @@ fi
 
 # Prepend the date context so Claude knows what "today" means inside the
 # headless run.
-PROMPT_BODY="Today is ${TODAY} (UTC). $(cat "${PROMPT_FILE}")"
+# Weekly shard rotation: ISO week number mod 4 selects which quarter of the
+# non-priority roster this run crawls. Priority sources run every week per
+# the prompt's coverage rules. Full roster coverage completes every 4 weeks (roster grew to 221 on the 2026-06-11 base-expansion audit).
+SHARD=$(( 10#$(date -u +%V) % 4 ))
+echo "This run's shard: ${SHARD} (of 0,1,2,3)"
+
+PROMPT_BODY="Today is ${TODAY} (UTC). This run's SHARD number is ${SHARD}. $(cat "${PROMPT_FILE}")"
 
 # Tool restrictions (audit fix #1):
 # --tools STRICTLY restricts which tools are available. --allowedTools only
@@ -47,16 +53,19 @@ PROMPT_BODY="Today is ${TODAY} (UTC). $(cat "${PROMPT_FILE}")"
 # --permission-mode bypassPermissions ensures no interactive prompts hang
 # the headless run. Combined with the restrictive --tools set, this is safe.
 #
-# --max-turns 60 caps agentic iteration. With 23 venues + retries, 60 turns
-# is generous. Hitting this is a signal the agent got stuck.
+# --max-turns 200 caps agentic iteration. The per-run crawl set under the
+# shard rules is roughly 80-90 sources (every-run set + one shard third),
+# so 200 turns leaves room for retries and detail-page follows. The dollar
+# budget remains the hard cost stop; turns only guard against stuck loops.
+# Budget is overridable per-dispatch via the BUDGET_USD env var.
 
 claude -p "${PROMPT_BODY}" \
     --model claude-sonnet-4-6 \
     --tools "WebFetch,Read,Write,Bash" \
     --allowedTools "WebFetch,Read,Write,Bash" \
     --permission-mode bypassPermissions \
-    --max-turns 60 \
-    --max-budget-usd 5.00 \
+    --max-turns 200 \
+    --max-budget-usd "${BUDGET_USD:-5.00}" \
     || { echo "ERROR: claude -p invocation failed" >&2; exit 1; }
 
 if [[ ! -f "${OUTPUT_FILE}" ]]; then

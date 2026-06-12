@@ -14,9 +14,12 @@ check('event data file parses', !!data);
 check('data file has 200+ events', !!data && (data.events||[]).length>=200);
 let feed=''; try{ feed=fs.readFileSync('polymythseminars/feed.xml','utf8'); }catch(e){}
 check('rss feed present with items', feed.includes('<item>'));
-let home=''; try{ home=fs.readFileSync('index.html','utf8'); }catch(e){}
-check('homepage fetches the public events file', home.includes("'/polymythseminars/events.json"));
-check('homepage wraps titles in source_url links', home.includes('source_url'));
+// Front-page swap (2026-06-11): the portrait page took the root and the old
+// homepage with the events teaser moved whole to main/index.html. These
+// checks follow the teaser, not the root.
+let home=''; try{ home=fs.readFileSync('main/index.html','utf8'); }catch(e){}
+check('main page fetches the public events file', home.includes("'/polymythseminars/events.json"));
+check('main page wraps titles in source_url links', home.includes('source_url'));
 let pub=null; try{ pub=JSON.parse(fs.readFileSync('polymythseminars/events.json','utf8')); }catch(e){}
 check('PUBLIC events copy exists at /polymythseminars/events.json', !!pub);
 check('public copy has 200+ events', !!pub && (pub.events||[]).length>=200);
@@ -25,7 +28,7 @@ try{
   check('public copy byte-identical to data/ master', a.equals(b));
 }catch(e){ check('public copy byte-identical to data/ master', false); }
 check('calendar primary fetch targets the PUBLIC path', cal.includes("'/polymythseminars/events.json"));
-check('homepage uses the fallback loader', home.includes('fetchEventsWithFallback'));
+check('main page uses the fallback loader', home.includes('fetchEventsWithFallback'));
 let ntl=''; try{ ntl=fs.readFileSync('netlify.toml','utf8'); }catch(e){}
 check('netlify still blocks /data/* (PM35 guard)', ntl.includes('from = "/data/*"'));
 let robot=null; try{ robot=JSON.parse(fs.readFileSync('seminars/events.json','utf8')); }catch(e){}

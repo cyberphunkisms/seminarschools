@@ -51,12 +51,30 @@ Record `age_band` on any record whose listing states who may enter or attend: a 
 
 The full venue roster is in `/scripts/sources.json`. Read that file first. Each entry has a `name`, `events_url`, and `default_type`. Use `WebFetch` to retrieve each `events_url`. For venues marked `render_mode: javascript`, the page may be sparse on first fetch; try the parent `base_url` plus common event-listing paths (`/events`, `/events/upcoming`, `/whats-on`, `/calendar`).
 
-Priority tiers from `sources.json` (`tier_priority` field):
-- Tier 1: must crawl. These are the workhorses.
-- Tier 2: crawl if budget permits.
-- Tier 3: crawl if budget permits and lower tiers produced results.
+Coverage rules (replacing the old tier-priority crawl order, June 11 2026):
 
-If a fetch returns a 403, a WAF page, or empty content, try once more with the venue's `base_url` instead. Then move on.
+The roster is larger than one run's budget, so coverage rotates on a four-week cycle while priority sources run every week. The runner provides this run's SHARD number (0, 1, 2, or 3) at the top of the prompt. Crawl exactly these sources, in this order:
+
+1. **Every-run set.** All sources with `tier_priority` 1, PLUS all sources whose `default_type` is `screening`, `cfp`, or `contest` regardless of tier. These categories are under-covered and run weekly until coverage normalizes.
+2. **This week's shard.** Of the remaining sources, crawl only those whose zero-based position in the `sources` array satisfies `position % 4 == SHARD`. Skip the rest and record them as `skipped-shard` in the source accounting below.
+
+Across four consecutive weekly runs this covers the full roster. Within the run, if the budget runs low, finish the every-run set before starting the shard, and record any source you could not reach as `budget-exhausted` rather than silently dropping it.
+
+**FEEDS FIRST.** When a source carries a `feed_url` field, fetch the feed BEFORE the `events_url`. Formats and how to read them: `ics` parses as iCalendar VEVENT blocks; `wp-tribe-json` returns a JSON object with an `events` array (title, start_date, venue, url fields); `bibliocommons-v2-html` is a server-rendered listing page that parses like normal HTML. If the feed returns 404, an error, or zero events, fall back to `events_url` and note `feed_failed` in that source's accounting entry, because the probable-tagged feeds are unconfirmed until a run proves them. A working feed is cheaper and more reliable than the HTML page; prefer it every run.
+
+**FEED DISCOVERY ON NEW OR FAILING SOURCES.** When an HTML page fetches sparse or empty, check these platform patterns before giving up: WordPress with The Events Calendar exposes `{base}/wp-json/tribe/events/v1/events`; BiblioCommons libraries expose `{lib}.bibliocommons.com/v2/events` server-rendered; Meetup groups expose `{group_url}/events/ical/`; Localist campus calendars expose `{domain}/api/2/events` as public JSON; Squarespace pages respond to `?format=json`; Drupal sites often expose `/events/feed` or an ICS export link. Record any discovered endpoint in the source's accounting note so it can be promoted into the roster.
+
+If a fetch returns a 403, a WAF page, or empty content, try once more with the venue's `base_url` instead. Then move on and record the status.
+
+## Source accounting (fail-loud, required)
+
+The output JSON must carry a `source_yields` array with one entry for EVERY source in `sources.json`, no exceptions, in roster order:
+
+```json
+"source_yields": [ {"source_id": "...", "status": "crawled", "events": 3}, {"source_id": "...", "status": "crawled", "events": 0}, {"source_id": "...", "status": "skipped-shard", "events": 0}, {"source_id": "...", "status": "unreachable", "events": 0}, ... ]
+```
+
+Statuses: `crawled` (fetched and parsed, events may be 0), `skipped-shard` (outside this week's shard), `unreachable` (fetch failed after the base_url retry), `budget-exhausted` (run out of budget before reaching it). A crawled source with zero events is a normal, honest result. An omitted source is a failure of this accounting rule. The post-processor turns this table into the public scrape log, so the zero-yield sources become a visible worklist instead of an invisible gap.
 
 ## Capture completeness, link specificity, multi-type, nesting, and merging
 
@@ -84,7 +102,8 @@ Emit a single JSON object to stdout matching `/data/seminars-schema.json`. The t
 ```json
 {
   "generated_at": "ISO-8601 timestamp UTC",
-  "events": [ <record>, <record>, ... ]
+  "events": [ <record>, <record>, ... ],
+  "source_yields": [ <one entry per rostered source, see Source accounting> ]
 }
 ```
 

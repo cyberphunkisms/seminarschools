@@ -79,7 +79,7 @@ jobs:
           git config user.email "saul+seminarsbot@seminarschools.com"
           echo "--- Pre-commit status ---"
           git status
-          git add -A seminars/ festivals/ data/
+          git add -A seminars/ festivals/ data/ polymythseminars/
           echo "--- Staged for commit ---"
           git diff --cached --stat
           if git diff --cached --quiet; then

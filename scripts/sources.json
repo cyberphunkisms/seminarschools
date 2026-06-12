@@ -1,6 +1,6 @@
 {
   "$schema_note": "Venue roster for /scripts/seminars-prompt.md. Each entry declares the venue, its event-list URL, default event type, tier priority, and render_mode hint. Read by Claude headless harvest weekly. The agent handles extraction; render_mode is a strategy hint for fetch-difficulty, not a parser selector. tier_priority 1 = must crawl, 2 = if budget permits, 3 = low priority, 4 = optional.",
-  "$updated": "2026-06-09",
+  "$updated": "2026-06-11 base-expansion audit",
   "sources": [
     {
       "id": "c4e",
@@ -19,7 +19,9 @@
       "default_type": "lecture",
       "base_url": "https://humanities.utoronto.ca/",
       "events_url": "https://humanities.utoronto.ca/events",
-      "render_mode": "drupal"
+      "render_mode": "drupal",
+      "feed_status": "not-needed",
+      "notes": "Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices."
     },
     {
       "id": "munk",
@@ -46,7 +48,11 @@
       "default_type": "lecture",
       "base_url": "https://www.torontopubliclibrary.ca/",
       "events_url": "https://www.torontopubliclibrary.ca/programs-and-classes/",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "feed_url": "https://tpl.bibliocommons.com/v2/events",
+      "feed_format": "bibliocommons-v2-html",
+      "feed_status": "verified",
+      "notes": "Feed pass 2026-06-11: /v2/events is server-rendered and fetches clean; prefer over programs-and-classes page."
     },
     {
       "id": "massey",
@@ -263,7 +269,9 @@
       "default_type": "lecture",
       "base_url": "https://philosophy.utoronto.ca/news-events/",
       "events_url": "https://philosophy.utoronto.ca/news-events/",
-      "render_mode": "drupal"
+      "render_mode": "drupal",
+      "feed_status": "not-needed",
+      "notes": "Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices."
     },
     {
       "id": "uoft-history",
@@ -272,7 +280,9 @@
       "default_type": "lecture",
       "base_url": "https://www.history.utoronto.ca/events",
       "events_url": "https://www.history.utoronto.ca/events",
-      "render_mode": "drupal"
+      "render_mode": "drupal",
+      "feed_status": "not-needed",
+      "notes": "Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices."
     },
     {
       "id": "uoft-english",
@@ -281,8 +291,9 @@
       "default_type": "lecture",
       "base_url": "https://www.english.utoronto.ca/events",
       "events_url": "https://www.english.utoronto.ca/events",
-      "notes": "Bot detection may block direct fetch; use headless/snippet fallback.",
-      "render_mode": "drupal"
+      "notes": "Bot detection may block direct fetch; use headless/snippet fallback. Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices.",
+      "render_mode": "drupal",
+      "feed_status": "not-needed"
     },
     {
       "id": "utm-historical",
@@ -291,7 +302,9 @@
       "default_type": "lecture",
       "base_url": "https://utm.utoronto.ca/historical-studies/events/events",
       "events_url": "https://utm.utoronto.ca/historical-studies/events/events",
-      "render_mode": "drupal"
+      "render_mode": "drupal",
+      "feed_status": "not-needed",
+      "notes": "Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices."
     },
     {
       "id": "cms-medieval",
@@ -300,7 +313,9 @@
       "default_type": "lecture",
       "base_url": "https://www.medieval.utoronto.ca/events",
       "events_url": "https://www.medieval.utoronto.ca/events",
-      "render_mode": "drupal"
+      "render_mode": "drupal",
+      "feed_status": "not-needed",
+      "notes": "Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices."
     },
     {
       "id": "york-events",
@@ -309,8 +324,11 @@
       "default_type": "lecture",
       "base_url": "https://events.yorku.ca/",
       "events_url": "https://events.yorku.ca/",
-      "notes": "Modern Events Calendar (Webnus) plugin; list views exposed.",
-      "render_mode": "javascript"
+      "notes": "Modern Events Calendar (Webnus) plugin; list views exposed. Feed pass 2026-06-11: site is WordPress (server-rendered tag archives), not JS-only; Tribe REST probable.",
+      "render_mode": "wordpress",
+      "feed_url": "https://events.yorku.ca/wp-json/tribe/events/v1/events",
+      "feed_format": "wp-tribe-json",
+      "feed_status": "probable"
     },
     {
       "id": "york-philosophy",
@@ -484,8 +502,9 @@
       "default_type": "reading",
       "base_url": "https://www.instagram.com/artbarpoetry/",
       "events_url": "https://www.instagram.com/artbarpoetry/",
-      "notes": "DO NOT scrape artbarpoetryseries.com -- domain hijacked to casino spam. Schedule only via Instagram @artbarpoetry / artbarpoetry@gmail.com.",
-      "render_mode": "javascript"
+      "notes": "DO NOT scrape artbarpoetryseries.com -- domain hijacked to casino spam. Schedule only via Instagram @artbarpoetry / artbarpoetry@gmail.com. Feed pass 2026-06-11: Instagram is unscrapeable by plain fetch; needs a website or listing-page replacement source.",
+      "render_mode": "javascript",
+      "feed_status": "replacement-needed"
     },
     {
       "id": "royal-inst-philosophy",
@@ -494,8 +513,11 @@
       "default_type": "lecture",
       "base_url": "https://royalinstitutephilosophy.org/philosophy-events/",
       "events_url": "https://royalinstitutephilosophy.org/philosophy-events/",
-      "notes": "GLOBAL online/hybrid; some events ticketed with recording.",
-      "render_mode": "wordpress"
+      "notes": "GLOBAL online/hybrid; some events ticketed with recording. Feed pass 2026-06-11: WordPress fingerprint, Tribe Events REST probable; fall back to events_url if 404.",
+      "render_mode": "wordpress",
+      "feed_url": "https://royalinstitutephilosophy.org/wp-json/tribe/events/v1/events",
+      "feed_format": "wp-tribe-json",
+      "feed_status": "probable"
     },
     {
       "id": "iai-live",
@@ -584,8 +606,11 @@
       "default_type": "philosophy-cafe",
       "base_url": "https://www.meetup.com/practical-philosophy-club-ontario/",
       "events_url": "https://www.meetup.com/practical-philosophy-club-ontario/",
-      "notes": "Most reliable in-person GTA cafe feed; multiple chapters.",
-      "render_mode": "javascript"
+      "notes": "Most reliable in-person GTA cafe feed; multiple chapters. Feed pass 2026-06-11: Meetup group ICS pattern; fall back to HTML if 404.",
+      "render_mode": "javascript",
+      "feed_url": "https://www.meetup.com/practical-philosophy-club-ontario/events/ical/",
+      "feed_format": "ics",
+      "feed_status": "probable"
     },
     {
       "id": "toronto-philosophy-meetup",
@@ -594,8 +619,11 @@
       "default_type": "philosophy-cafe",
       "base_url": "https://www.meetup.com/the-toronto-philosophy-meetup/",
       "events_url": "https://www.meetup.com/the-toronto-philosophy-meetup/",
-      "notes": "Largest group but near-term calendar mostly online.",
-      "render_mode": "javascript"
+      "notes": "Largest group but near-term calendar mostly online. Feed pass 2026-06-11: Meetup group ICS pattern; fall back to HTML if 404.",
+      "render_mode": "javascript",
+      "feed_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/ical/",
+      "feed_format": "ics",
+      "feed_status": "probable"
     },
     {
       "id": "being-becoming",
@@ -624,7 +652,11 @@
       "default_type": "talk",
       "base_url": "https://www.canadianclub.org/upcoming-events/",
       "events_url": "https://www.canadianclub.org/upcoming-events/",
-      "render_mode": "wordpress"
+      "render_mode": "wordpress",
+      "feed_url": "https://www.canadianclub.org/wp-json/tribe/events/v1/events",
+      "feed_format": "wp-tribe-json",
+      "feed_status": "probable",
+      "notes": "Feed pass 2026-06-11: WordPress fingerprint, Tribe Events REST probable; fall back to events_url if 404."
     },
     {
       "id": "economic-club",
@@ -651,7 +683,11 @@
       "default_type": "talk",
       "base_url": "https://thecic.org/events/",
       "events_url": "https://thecic.org/events/",
-      "render_mode": "wordpress"
+      "render_mode": "wordpress",
+      "feed_url": "https://thecic.org/wp-json/tribe/events/v1/events",
+      "feed_format": "wp-tribe-json",
+      "feed_status": "probable",
+      "notes": "Feed pass 2026-06-11: WordPress fingerprint, Tribe Events REST probable; fall back to events_url if 404."
     },
     {
       "id": "civicaction",
@@ -989,8 +1025,11 @@
       "default_type": "screening",
       "base_url": "https://www.foxtheatre.ca/",
       "events_url": "https://www.foxtheatre.ca/",
-      "notes": "Discussion components intermittent.",
-      "render_mode": "wordpress"
+      "notes": "Discussion components intermittent. Feed pass 2026-06-11: WordPress fingerprint, Tribe Events REST probable; fall back to events_url if 404.",
+      "render_mode": "wordpress",
+      "feed_url": "https://www.foxtheatre.ca/wp-json/tribe/events/v1/events",
+      "feed_format": "wp-tribe-json",
+      "feed_status": "probable"
     },
     {
       "id": "innis-csi",
@@ -1018,8 +1057,11 @@
       "default_type": "screening",
       "base_url": "https://events.yorku.ca/",
       "events_url": "https://events.yorku.ca/",
-      "notes": "Includes Cinema Politica @ York.",
-      "render_mode": "javascript"
+      "notes": "Includes Cinema Politica @ York. Feed pass 2026-06-11: site is WordPress (server-rendered tag archives), not JS-only; Tribe REST probable.",
+      "render_mode": "wordpress",
+      "feed_url": "https://events.yorku.ca/wp-json/tribe/events/v1/events",
+      "feed_format": "wp-tribe-json",
+      "feed_status": "probable"
     },
     {
       "id": "ago-cinema",
@@ -1210,7 +1252,11 @@
       "default_type": "performance",
       "base_url": "https://soundstreams.ca/upcoming-events/",
       "events_url": "https://soundstreams.ca/upcoming-events/",
-      "render_mode": "wordpress"
+      "render_mode": "wordpress",
+      "feed_url": "https://soundstreams.ca/wp-json/tribe/events/v1/events",
+      "feed_format": "wp-tribe-json",
+      "feed_status": "probable",
+      "notes": "Feed pass 2026-06-11: WordPress fingerprint, Tribe Events REST probable; fall back to events_url if 404."
     },
     {
       "id": "tdt",
@@ -1246,8 +1292,11 @@
       "default_type": "performance",
       "base_url": "https://musicgallery.org/events/",
       "events_url": "https://musicgallery.org/events/",
-      "notes": "WordPress event-category taxonomy; fall X Avant fest needs live fetch.",
-      "render_mode": "wordpress"
+      "notes": "WordPress event-category taxonomy; fall X Avant fest needs live fetch. Feed pass 2026-06-11: WordPress fingerprint, Tribe Events REST probable; fall back to events_url if 404.",
+      "render_mode": "wordpress",
+      "feed_url": "https://musicgallery.org/wp-json/tribe/events/v1/events",
+      "feed_format": "wp-tribe-json",
+      "feed_status": "probable"
     },
     {
       "id": "rom",
@@ -1331,7 +1380,11 @@
       "default_type": "exhibition",
       "base_url": "https://mcmichael.com/exhibitions/",
       "events_url": "https://mcmichael.com/exhibitions/",
-      "render_mode": "wordpress"
+      "render_mode": "wordpress",
+      "feed_url": "https://mcmichael.com/wp-json/tribe/events/v1/events",
+      "feed_format": "wp-tribe-json",
+      "feed_status": "probable",
+      "notes": "Feed pass 2026-06-11: WordPress fingerprint, Tribe Events REST probable; fall back to events_url if 404."
     },
     {
       "id": "mercer-union",
@@ -1500,8 +1553,11 @@
       "default_type": "reading",
       "base_url": "https://mississauga.bibliocommons.com/events/search/",
       "events_url": "https://mississauga.bibliocommons.com/events/search/",
-      "notes": "BiblioCommons events module.",
-      "render_mode": "javascript"
+      "notes": "BiblioCommons events module. Feed pass 2026-06-11: BiblioCommons /v2/events platform pattern, verified on TPL same platform.",
+      "render_mode": "javascript",
+      "feed_url": "https://mississauga.bibliocommons.com/v2/events",
+      "feed_format": "bibliocommons-v2-html",
+      "feed_status": "pattern-verified"
     },
     {
       "id": "markham-library",
@@ -1510,8 +1566,621 @@
       "default_type": "reading",
       "base_url": "https://markham.bibliocommons.com/events/search/",
       "events_url": "https://markham.bibliocommons.com/events/search/",
-      "notes": "BiblioCommons events module.",
-      "render_mode": "javascript"
+      "notes": "BiblioCommons events module. Feed pass 2026-06-11: BiblioCommons /v2/events platform pattern, verified on TPL same platform.",
+      "render_mode": "javascript",
+      "feed_url": "https://markham.bibliocommons.com/v2/events",
+      "feed_format": "bibliocommons-v2-html",
+      "feed_status": "pattern-verified"
+    },
+    {
+      "id": "uoft-sociology",
+      "name": "U of T Department of Sociology",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://www.sociology.utoronto.ca/",
+      "events_url": "https://www.sociology.utoronto.ca/events",
+      "render_mode": "drupal",
+      "notes": "Base-expansion audit 2026-06-11. Heavy yield in april-corpus."
+    },
+    {
+      "id": "uoft-artsci",
+      "name": "U of T Arts & Science events",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://www.artsci.utoronto.ca/",
+      "events_url": "https://www.artsci.utoronto.ca/events",
+      "render_mode": "drupal",
+      "notes": "Base-expansion audit 2026-06-11. Central A&S listing; heavy yield in recovery corpus."
+    },
+    {
+      "id": "uoft-classics",
+      "name": "U of T Department of Classics",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.classics.utoronto.ca/",
+      "events_url": "https://www.classics.utoronto.ca/events",
+      "render_mode": "drupal",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "uoft-religion",
+      "name": "U of T Department for the Study of Religion",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.religion.utoronto.ca/",
+      "events_url": "https://www.religion.utoronto.ca/events",
+      "render_mode": "drupal",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "uoft-anthropology",
+      "name": "U of T Department of Anthropology",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.anthropology.utoronto.ca/",
+      "events_url": "https://www.anthropology.utoronto.ca/events",
+      "render_mode": "drupal",
+      "notes": "Base-expansion audit 2026-06-11. Yielded in recovery corpus."
+    },
+    {
+      "id": "uoft-complit",
+      "name": "U of T Centre for Comparative Literature",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.complit.utoronto.ca/",
+      "events_url": "https://www.complit.utoronto.ca/events",
+      "render_mode": "drupal",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "srinstitute",
+      "name": "Schwartz Reisman Institute for Technology and Society",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://srinstitute.utoronto.ca/",
+      "events_url": "https://srinstitute.utoronto.ca/events",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11. AI-and-society programming; yielded in corpus."
+    },
+    {
+      "id": "fields",
+      "name": "Fields Institute for Research in Mathematical Sciences",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "http://www.fields.utoronto.ca/",
+      "events_url": "http://www.fields.utoronto.ca/calendar",
+      "render_mode": "static",
+      "notes": "Base-expansion audit 2026-06-11. Public lectures and MathEd Forum."
+    },
+    {
+      "id": "rotman-events",
+      "name": "Rotman School of Management events",
+      "tier_priority": 3,
+      "default_type": "talk",
+      "base_url": "https://www.rotman.utoronto.ca/",
+      "events_url": "https://www.rotman.utoronto.ca/events-and-news/events",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11. Author and speaker series."
+    },
+    {
+      "id": "uoft-law-events",
+      "name": "U of T Faculty of Law events",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.law.utoronto.ca/",
+      "events_url": "https://www.law.utoronto.ca/events",
+      "render_mode": "drupal",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "dunlap-astro",
+      "name": "Dunlap Institute / U of T AstroTours",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.astro.utoronto.ca/",
+      "events_url": "https://www.astro.utoronto.ca/astrotours/",
+      "render_mode": "static",
+      "notes": "Base-expansion audit 2026-06-11. Free public astronomy nights."
+    },
+    {
+      "id": "trinity-college",
+      "name": "Trinity College, U of T events",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.trinity.utoronto.ca/",
+      "events_url": "https://www.trinity.utoronto.ca/discover/events/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11. Larkin-Stuart lectures etc."
+    },
+    {
+      "id": "emmanuel-college",
+      "name": "Emmanuel College events",
+      "tier_priority": 3,
+      "default_type": "scholar-talk",
+      "base_url": "https://www.emmanuel.utoronto.ca/",
+      "events_url": "https://www.emmanuel.utoronto.ca/events/",
+      "render_mode": "drupal",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "crrs",
+      "name": "Centre for Renaissance and Reformation Studies",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://crrs.ca/",
+      "events_url": "https://crrs.ca/events/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "oise-events",
+      "name": "OISE events",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.oise.utoronto.ca/",
+      "events_url": "https://www.oise.utoronto.ca/home/events",
+      "render_mode": "drupal",
+      "notes": "Base-expansion audit 2026-06-11. Education research talks."
+    },
+    {
+      "id": "the-dais",
+      "name": "The Dais (TMU policy institute)",
+      "tier_priority": 3,
+      "default_type": "talk",
+      "base_url": "https://dais.ca/",
+      "events_url": "https://dais.ca/events/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "perimeter",
+      "name": "Perimeter Institute public lectures",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://perimeterinstitute.ca/",
+      "events_url": "https://perimeterinstitute.ca/events",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11. Major free public physics lecture series, Waterloo."
+    },
+    {
+      "id": "cigi",
+      "name": "Centre for International Governance Innovation (CIGI)",
+      "tier_priority": 3,
+      "default_type": "talk",
+      "base_url": "https://www.cigionline.org/",
+      "events_url": "https://www.cigionline.org/events/",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11. Waterloo policy events."
+    },
+    {
+      "id": "uwaterloo-philosophy",
+      "name": "University of Waterloo Philosophy",
+      "tier_priority": 3,
+      "default_type": "scholar-talk",
+      "base_url": "https://uwaterloo.ca/philosophy/",
+      "events_url": "https://uwaterloo.ca/philosophy/events",
+      "render_mode": "drupal",
+      "notes": "Base-expansion audit 2026-06-11. Colloquium yielded in manual corpus."
+    },
+    {
+      "id": "laurier-events",
+      "name": "Wilfrid Laurier University events",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.wlu.ca/",
+      "events_url": "https://students.wlu.ca/events/",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "guelph-philosophy",
+      "name": "University of Guelph Philosophy",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.uoguelph.ca/arts/philosophy/",
+      "events_url": "https://www.uoguelph.ca/arts/philosophy/events",
+      "render_mode": "drupal",
+      "notes": "Base-expansion audit 2026-06-11. Defences and talks yielded in corpus."
+    },
+    {
+      "id": "mcmaster-philosophy",
+      "name": "McMaster Philosophy Speaker Series",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://philos.humanities.mcmaster.ca/",
+      "events_url": "https://philos.humanities.mcmaster.ca/philosophy-department-speaker-series/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11. Yielded in corpus."
+    },
+    {
+      "id": "socrates-project",
+      "name": "McMaster Socrates Project public lectures",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://socrates.mcmaster.ca/",
+      "events_url": "https://socrates.mcmaster.ca/events/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11. Public humanities lecture program, Hamilton."
+    },
+    {
+      "id": "hamilton-library",
+      "name": "Hamilton Public Library programs",
+      "tier_priority": 3,
+      "default_type": "gathering",
+      "base_url": "https://www.hpl.ca/",
+      "events_url": "https://www.hpl.ca/events",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "kitchener-library",
+      "name": "Kitchener Public Library programs",
+      "tier_priority": 3,
+      "default_type": "gathering",
+      "base_url": "https://www.kpl.org/",
+      "events_url": "https://www.kpl.org/events",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "waterloo-library",
+      "name": "Waterloo Public Library programs",
+      "tier_priority": 3,
+      "default_type": "gathering",
+      "base_url": "https://www.wpl.ca/",
+      "events_url": "https://www.wpl.ca/events",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "guelph-library",
+      "name": "Guelph Public Library programs",
+      "tier_priority": 3,
+      "default_type": "gathering",
+      "base_url": "https://www.guelphpl.ca/",
+      "events_url": "https://www.guelphpl.ca/en/programs-and-events/programs-and-events.aspx",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "brampton-library",
+      "name": "Brampton Library programs",
+      "tier_priority": 3,
+      "default_type": "gathering",
+      "base_url": "https://www.bramptonlibrary.ca/",
+      "events_url": "https://www.bramptonlibrary.ca/index.php/events",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "vaughan-library",
+      "name": "Vaughan Public Libraries programs",
+      "tier_priority": 3,
+      "default_type": "gathering",
+      "base_url": "https://www.vaughanpl.info/",
+      "events_url": "https://www.vaughanpl.info/events",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "oakville-library",
+      "name": "Oakville Public Library programs",
+      "tier_priority": 3,
+      "default_type": "gathering",
+      "base_url": "https://www.opl.ca/",
+      "events_url": "https://www.opl.ca/Events",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "burlington-library",
+      "name": "Burlington Public Library programs",
+      "tier_priority": 3,
+      "default_type": "gathering",
+      "base_url": "https://www.bpl.on.ca/",
+      "events_url": "https://www.bpl.on.ca/events",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "richmondhill-library",
+      "name": "Richmond Hill Public Library programs",
+      "tier_priority": 3,
+      "default_type": "gathering",
+      "base_url": "https://www.rhpl.ca/",
+      "events_url": "https://www.rhpl.ca/events",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "oshawa-library",
+      "name": "Oshawa Public Libraries programs",
+      "tier_priority": 3,
+      "default_type": "gathering",
+      "base_url": "https://www.oshawalibrary.ca/",
+      "events_url": "https://www.oshawalibrary.ca/events",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "agh",
+      "name": "Art Gallery of Hamilton",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://www.artgalleryofhamilton.com/",
+      "events_url": "https://www.artgalleryofhamilton.com/exhibitions/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "kwag",
+      "name": "Kitchener-Waterloo Art Gallery",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://kwag.ca/",
+      "events_url": "https://kwag.ca/exhibitions",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "ag-guelph",
+      "name": "Art Gallery of Guelph",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://artgalleryofguelph.ca/",
+      "events_url": "https://artgalleryofguelph.ca/exhibitions/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "mcmaster-moa",
+      "name": "McMaster Museum of Art",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://museum.mcmaster.ca/",
+      "events_url": "https://museum.mcmaster.ca/exhibitions/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "agm-mississauga",
+      "name": "Art Gallery of Mississauga",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://artgalleryofmississauga.com/",
+      "events_url": "https://artgalleryofmississauga.com/exhibitions/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "dmg-utsc",
+      "name": "Doris McCarthy Gallery, UTSC",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://dorismccarthygallery.utoronto.ca/",
+      "events_url": "https://dorismccarthygallery.utoronto.ca/exhibitions",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "bentway",
+      "name": "The Bentway",
+      "tier_priority": 3,
+      "default_type": "site-specific-art",
+      "base_url": "https://thebentway.ca/",
+      "events_url": "https://thebentway.ca/events/",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11. Public art plus talks under the Gardiner."
+    },
+    {
+      "id": "myseum",
+      "name": "Myseum of Toronto",
+      "tier_priority": 3,
+      "default_type": "exhibition",
+      "base_url": "https://www.myseumoftoronto.com/",
+      "events_url": "https://www.myseumoftoronto.com/programs/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11. City-history exhibitions and talks."
+    },
+    {
+      "id": "heritage-toronto",
+      "name": "Heritage Toronto walks and talks",
+      "tier_priority": 3,
+      "default_type": "gathering",
+      "base_url": "https://www.heritagetoronto.org/",
+      "events_url": "https://www.heritagetoronto.org/whats-on/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "evergreen-brickworks",
+      "name": "Evergreen Brick Works events",
+      "tier_priority": 3,
+      "default_type": "gathering",
+      "base_url": "https://www.evergreen.ca/",
+      "events_url": "https://www.evergreen.ca/whats-on/",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "playhouse-hamilton",
+      "name": "Playhouse Cinema (Hamilton)",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://www.playhousecinema.ca/",
+      "events_url": "https://www.playhousecinema.ca/calendar",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11. Rep house; capture Q&A-tagged shows only per screening gate."
+    },
+    {
+      "id": "westdale-hamilton",
+      "name": "The Westdale (Hamilton)",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://thewestdale.ca/",
+      "events_url": "https://thewestdale.ca/events/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11. Film plus talks venue."
+    },
+    {
+      "id": "apollo-kitchener",
+      "name": "Apollo Cinema (Kitchener)",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://apollocinema.ca/",
+      "events_url": "https://apollocinema.ca/calendar/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11. Screening gate applies."
+    },
+    {
+      "id": "princess-waterloo",
+      "name": "Princess Cinemas (Waterloo)",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://princesscinemas.com/",
+      "events_url": "https://princesscinemas.com/coming-soon/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11. Screening gate applies."
+    },
+    {
+      "id": "passe-muraille",
+      "name": "Theatre Passe Muraille",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://passemuraille.ca/",
+      "events_url": "https://passemuraille.ca/whats-on/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "coal-mine",
+      "name": "Coal Mine Theatre",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://coalminetheatre.com/",
+      "events_url": "https://coalminetheatre.com/season/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "theatre-centre",
+      "name": "The Theatre Centre",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://theatrecentre.org/",
+      "events_url": "https://theatrecentre.org/whats-on/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11. Performance plus public talks."
+    },
+    {
+      "id": "theatre-aquarius",
+      "name": "Theatre Aquarius (Hamilton)",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://theatreaquarius.org/",
+      "events_url": "https://theatreaquarius.org/whats-on/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "esprit",
+      "name": "Esprit Orchestra",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://espritorchestra.com/",
+      "events_url": "https://espritorchestra.com/concerts/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11. New music."
+    },
+    {
+      "id": "toronto-consort",
+      "name": "Toronto Consort",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://torontoconsort.org/",
+      "events_url": "https://torontoconsort.org/concerts/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11. Early music."
+    },
+    {
+      "id": "hpo",
+      "name": "Hamilton Philharmonic Orchestra",
+      "tier_priority": 3,
+      "default_type": "performance",
+      "base_url": "https://hpo.org/",
+      "events_url": "https://hpo.org/concerts-tickets/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "rasc-toronto",
+      "name": "Royal Astronomical Society of Canada, Toronto Centre",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://www.rascto.ca/",
+      "events_url": "https://www.rascto.ca/upcoming-events",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11. Public speaker nights."
+    },
+    {
+      "id": "tfn",
+      "name": "Toronto Field Naturalists lectures",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://torontofieldnaturalists.org/",
+      "events_url": "https://torontofieldnaturalists.org/events/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "wellesley",
+      "name": "Wellesley Institute",
+      "tier_priority": 3,
+      "default_type": "talk",
+      "base_url": "https://www.wellesleyinstitute.com/",
+      "events_url": "https://www.wellesleyinstitute.com/events/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11. Urban health policy."
+    },
+    {
+      "id": "maytree",
+      "name": "Maytree events",
+      "tier_priority": 3,
+      "default_type": "talk",
+      "base_url": "https://maytree.com/",
+      "events_url": "https://maytree.com/events/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11. Poverty and rights policy."
+    },
+    {
+      "id": "tsa-architects",
+      "name": "Toronto Society of Architects lectures",
+      "tier_priority": 3,
+      "default_type": "lecture",
+      "base_url": "https://torontosocietyofarchitects.ca/",
+      "events_url": "https://torontosocietyofarchitects.ca/events/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11."
+    },
+    {
+      "id": "noor",
+      "name": "Noor Cultural Centre",
+      "tier_priority": 3,
+      "default_type": "scholar-talk",
+      "base_url": "https://noorculturalcentre.ca/",
+      "events_url": "https://noorculturalcentre.ca/events/",
+      "render_mode": "wordpress",
+      "notes": "Base-expansion audit 2026-06-11. Lectures and panels."
+    },
+    {
+      "id": "tranzac",
+      "name": "Tranzac Club (reading and series host)",
+      "tier_priority": 3,
+      "default_type": "reading",
+      "base_url": "https://www.tranzac.org/",
+      "events_url": "https://www.tranzac.org/events/",
+      "render_mode": "javascript",
+      "notes": "Base-expansion audit 2026-06-11. Hosts recurring literary series."
     }
   ],
   "deferred_candidates": {
