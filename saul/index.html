@@ -912,6 +912,7 @@ textarea:focus-visible,
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <!-- CL-2026-06-04 #7: self-attributed role titles stripped from CV in all languages and SEO meta -->
 <link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
+<link rel="stylesheet" href="/css/alive.css">
 </head>
 <body>
 <a href="/" style="position:fixed;top:0.9rem;left:1rem;z-index:1200;font-family:ui-monospace,monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:inherit;opacity:0.65;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:0.15rem;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.65">&larr; Seminar Schools</a>
@@ -1322,15 +1323,27 @@ function parseRoute() {
   return out;
 }
 
+// Language from URL: ?lang=zh / zhs / fa / fr. English is the unmarked default.
+function parseLangFromUrl() {
+  try {
+    const q = new URLSearchParams(window.location.search).get('lang');
+    if (q && LANGS[q]) return q;
+    return null;
+  } catch (e) { return null; }
+}
+
 // Update browser URL to reflect current filter state without reloading.
 // Categories serialized in alphabetical order for canonical, deterministic URLs.
 function syncUrlToFilter() {
   const cats = [...active].sort();
   const newPath = cats.length === 0 ? '/saul/' : '/saul/' + cats.join('/');
-  // Only push if the path actually changed (avoid spamming history)
-  if (window.location.pathname !== newPath || window.location.hash || window.location.search) {
+  // Language rides as a query param so shared links reproduce the language
+  // tab exactly like the category tabs. English stays unmarked.
+  const newSearch = lang && lang !== 'en' ? '?lang=' + lang : '';
+  const target = newPath + newSearch;
+  if (window.location.pathname + window.location.search !== target || window.location.hash) {
     try {
-      window.history.replaceState({ cats }, '', newPath);
+      window.history.replaceState({ cats, lang }, '', target);
     } catch (e) {
       // history.replaceState can fail in some sandboxed contexts; ignore silently
     }
@@ -1732,6 +1745,7 @@ document.querySelectorAll("#langs button").forEach(b => {
     document.querySelectorAll("#langs button").forEach(x => x.classList.remove("active"));
     b.classList.add("active");
     lang = b.dataset.lang;
+    syncUrlToFilter();
     render();
   });
 });
@@ -1793,7 +1807,8 @@ document.getElementById("shareBtn").addEventListener("click", () => {
     // Build canonical share URL: origin + /saul/<sorted cats joined by />
     const cats = [...active].sort();
     const path = cats.length === 0 ? '/saul/' : '/saul/' + cats.join('/');
-    const url = window.location.origin + path;
+    const langPart = lang && lang !== 'en' ? '?lang=' + lang : '';
+    const url = window.location.origin + path + langPart;
     navigator.clipboard.writeText(url);
     const btn = document.getElementById("shareBtn");
     btn.textContent = "✓ Copied";
@@ -1810,10 +1825,16 @@ document.getElementById("shareBtn").addEventListener("click", () => {
 // URL routing: slash-stacked path, ?cat= query, or #hash all parsed by parseRoute
 try {
   const routedCats = parseRoute();
-  if (routedCats && routedCats.length > 0) {
-    active = new Set(routedCats);
-    // Normalize URL to canonical sorted slash-stacked form on load.
-    // (Drops any hash or query-string artifacts left over from old links.)
+  const routedLang = parseLangFromUrl();
+  if (routedLang) {
+    lang = routedLang;
+    document.querySelectorAll('#langs button').forEach(x =>
+      x.classList.toggle('active', x.dataset.lang === routedLang));
+  }
+  if ((routedCats && routedCats.length > 0) || routedLang) {
+    if (routedCats && routedCats.length > 0) active = new Set(routedCats);
+    // Normalize URL to canonical sorted slash-stacked form on load,
+    // keeping the lang param when one is active.
     syncUrlToFilter();
   }
 } catch (e) {}
@@ -1823,6 +1844,10 @@ window.addEventListener("popstate", () => {
   try {
     const cats = parseRoute();
     active = new Set(cats);
+    const l = parseLangFromUrl();
+    lang = l || 'en';
+    document.querySelectorAll('#langs button').forEach(x =>
+      x.classList.toggle('active', x.dataset.lang === lang));
     render();
   } catch (e) {}
 });
@@ -1977,7 +2002,39 @@ function buildPrintCv() {
     secs += '<div class="sec block"><div class="sh">'+secName+'</div><table class="rows">'+items.map(rowHtml).join('')+'</table></div>';
   }
 
-  var eduLines = String(t.eduL||UI.en.eduL).split(/\s*·\s*/).filter(Boolean).map(function(line){
+  // Credentials follow the same per-tab anchoring as the on-screen CV
+  // (CREDS_OVERRIDE). Single tab: that tab's rule, where certs:null or
+  // edu:null removes the section. Multiple tabs: the union of each selected
+  // tab's certs in canonical order; education shows unless every selected
+  // tab suppresses it. No filter: full lists. This is what keeps a kitchen
+  // CV from carrying machine-learning bootcamps.
+  var splitCreds = function (s) { return String(s||'').split(/\s*[\u00b7\u3001]\s*/).filter(Boolean); };
+  var ovr = CREDS_OVERRIDE[lang] || CREDS_OVERRIDE.en || {};
+  var fullCerts = splitCreds(t.certL||UI.en.certL);
+  var certItems, showPrintEdu = true;
+  if (!isFiltered) {
+    certItems = fullCerts;
+  } else {
+    var allowed = {};
+    var anyFull = false, anyEdu = false;
+    active.forEach(function (cat) {
+      var rule = ovr[cat];
+      if (!rule) { anyFull = true; anyEdu = true; return; }     // no rule = full lists
+      if (rule.certs === null) { /* contributes nothing */ }
+      else if (rule.certs === undefined) { anyFull = true; }
+      else splitCreds(rule.certs).forEach(function (c) { allowed[c] = 1; });
+      if (rule.edu !== null) anyEdu = true;
+    });
+    certItems = anyFull ? fullCerts : fullCerts.filter(function (c) { return allowed[c]; });
+    // Items present in a rule but phrased differently than certL still show:
+    Object.keys(allowed).forEach(function (c) {
+      if (certItems.indexOf(c) === -1 && fullCerts.indexOf(c) === -1) certItems.push(c);
+    });
+    showPrintEdu = anyEdu;
+  }
+  var showPrintCerts = certItems.length > 0;
+
+  var eduLines = String(t.eduL||UI.en.eduL).split(/\s*\u00b7\s*/).filter(Boolean).map(function(line){
     var m = line.match(/^([^(,]+)([,(][\s\S]*)?$/);
     if (!m) return '<div class="erow"><span class="edeg">'+esc(line)+'</span></div>';
     var deg = esc(m[1].trim()); var det = m[2]?esc(m[2].trim()):'';
@@ -1985,10 +2042,11 @@ function buildPrintCv() {
     return '<div class="erow"><span class="edeg">'+deg+'</span>'+(det?sep+'<span class="edet">'+det+'</span>':'')+'</div>';
   }).join('');
 
-  var certItems = String(t.certL||UI.en.certL).split(/\s*[·、]\s*/).filter(Boolean);
   var half = Math.ceil(certItems.length/2);
   var certCol = function(arr){ return '<div class="ccol">'+arr.map(function(c){ return '<span class="ci">'+esc(c)+'</span>'; }).join('')+'</div>'; };
-  var certHtml = certCol(certItems.slice(0,half))+certCol(certItems.slice(half));
+  var certHtml = certItems.length === 1
+    ? '<div class="ccol" style="width:98%">'+'<span class="ci">'+esc(certItems[0])+'</span></div>'
+    : certCol(certItems.slice(0,half))+certCol(certItems.slice(half));
 
   var summaryText = esc(SUMMARY_BY_CAT[filterKey] || SUMMARY);
   var compHtml = COMPETENCIES.map(function(c,idx){ return (idx?'<span class="m">&#9642;</span>':'<span class="m" style="margin-left:0">&#9642;</span>')+esc(c); }).join('');
@@ -2030,9 +2088,9 @@ function buildPrintCv() {
     + '<div class="rule"></div>'
     + '<div class="summary block">'+summaryText+'</div>'
     + '<div class="comp block">'+compHtml+'</div>'
-    + '<div class="sec edu block"><div class="sh">'+esc(t.edu||UI.en.edu)+'</div>'+eduLines+'</div>'
+    + (showPrintEdu ? '<div class="sec edu block"><div class="sh">'+esc(t.edu||UI.en.edu)+'</div>'+eduLines+'</div>' : '')
     + secs
-    + '<div class="sec certs block"><div class="sh">'+esc(t.certs||UI.en.certs)+'</div>'+certHtml+'</div>';
+    + (showPrintCerts ? '<div class="sec certs block"><div class="sh">'+esc(t.certs||UI.en.certs)+'</div>'+certHtml+'</div>' : '');
   fitPrintCvToTwoPages(host);
 }
 // Fit the print document into two pages maximum. Measures once at scale 1,
@@ -2041,6 +2099,12 @@ function buildPrintCv() {
 // less), so the two-page guarantee is conservative. Layout-less environments
 // measure zero and fall through to zoom 1.
 function fitPrintCvToTwoPages(host) {
+  // Whole-page rule: output is exactly one page, or two pages with the
+  // second page meaningfully filled. Never a stub page carrying one
+  // orphaned section. Mechanism: greedy section packing at candidate zoom
+  // levels; shrink (down to 0.84) to pull a slightly-overflowing document
+  // onto one page; expand (up to 1.14) to let a sparse two-page document
+  // fill its second page; shrink to fit two when content exceeds two.
   host.style.zoom = '1';
   var probe = document.createElement('div');
   probe.style.cssText = 'position:absolute;left:-9999px;top:0;height:253.4mm;width:10px;';
@@ -2061,28 +2125,55 @@ function fitPrintCvToTwoPages(host) {
   }
   host.setAttribute('style', prev);
   if (!sizes.length) { host.style.zoom = '1'; return; }
-  var pagesAt = function (z) {
+  // Greedy packer: returns pages used and the filled fraction of the last page.
+  var pack = function (z) {
     var pages = 1, cur = 0;
     for (var k2 = 0; k2 < sizes.length; k2++) {
       var need = sizes[k2] * z;
       if (cur > 0 && cur + need > pageH) { pages++; cur = need; } else { cur += need; }
     }
-    return pages;
+    return { pages: pages, lastFill: cur / pageH };
   };
   var z = 1;
-  if (pagesAt(1) > 2) {
+  var p1 = pack(1);
+  if (p1.pages === 1) {
+    z = 1; // one whole page already
+  } else if (p1.pages === 2) {
+    if (p1.lastFill < 0.5) {
+      // Stub second page. First choice: shrink onto one page.
+      var fit1 = 0;
+      for (var zz = 0.99; zz >= 0.84; zz -= 0.01) {
+        if (pack(zz).pages === 1) { fit1 = zz; break; }
+      }
+      if (fit1) { z = fit1; }
+      else {
+        // Cannot reach one page legibly; expand so page two carries real weight.
+        z = 1;
+        for (var ze = 1.02; ze <= 1.14; ze += 0.02) {
+          var pe = pack(ze);
+          if (pe.pages > 2) break;
+          z = ze;
+          if (pe.lastFill >= 0.55) break;
+        }
+      }
+    }
+    // lastFill >= 0.5: an honest second page; leave at 1.
+  } else {
+    // More than two pages: shrink to the largest zoom that fits two.
     var lo = 0.5, hi = 1;
     for (var it = 0; it < 10; it++) {
       var mid = (lo + hi) / 2;
-      if (pagesAt(mid) <= 2) { lo = mid; } else { hi = mid; }
+      if (pack(mid).pages <= 2) { lo = mid; } else { hi = mid; }
     }
     z = Math.floor(lo * 100) / 100;
-    if (pagesAt(z) > 2) z = Math.max(0.5, z - 0.02);
+    if (pack(z).pages > 2) z = Math.max(0.5, z - 0.02);
   }
   host.style.zoom = String(z);
 }
 
 window.addEventListener('beforeprint', buildPrintCv);
 </script>
+<script src="/js/mandala.js" defer></script>
+<script src="/js/indra.js" defer></script>
 </body>
 </html>
