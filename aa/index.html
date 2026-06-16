@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <!--
   ============================================================================
-  aa* / classic — reference catalog view of the archetype archive
+  aa* / classic, reference catalog view of the archetype archive
   ============================================================================
 
   THE * (asterisk) IS A LIVING-ARCHIVE MARKER. The archive grows as new
-  layers and entries are added. This file is the classic catalog view —
+  layers and entries are added. This file is the classic catalog view
   search, filter, sort. The companion /aa/cloud/ view is the visual
   exploration mode.
 
   DATA LAYERS this view consumes (embedded inline below). Schema 1.1.
-    - TAXONOMIES         — ~404 entries (each with provenance field per A19)
-    - TAGS               — ~2267 entries (each with granularity + provenance
+    - TAXONOMIES        , ~404 entries (each with provenance field per A19)
+    - TAGS              , ~2267 entries (each with granularity + provenance
                             per A16/A19; 244 auto-classified named-figure)
-    - OCCURRENCES        — tag-in-taxonomy mappings (~2576 entries)
-    - SYNONYM_GROUPS     — 17 mass-archetypes grouping cross-tradition tags
-    - UNTRANSLATABLES    — 8 phenomenological terms (saudade / sehnsucht / etc;
+    - OCCURRENCES       , tag-in-taxonomy mappings (~2576 entries)
+    - SYNONYM_GROUPS    , 17 mass-archetypes grouping cross-tradition tags
+    - UNTRANSLATABLES   , 8 phenomenological terms (saudade / sehnsucht / etc;
                             italic-serif rendering per A29 typography)
-    - TRADITIONS         — 14 categorical containers (depth/myth/folk/etc)
-    - REMOVED_ENTRIES    — log of silently-removed entries (added A14; empty
+    - TRADITIONS        , 14 categorical containers (depth/myth/folk/etc)
+    - REMOVED_ENTRIES   , log of silently-removed entries (added A14; empty
                             seed; future removals get logged here)
 
   Future layers (oppositions, settings, transformations, motifs) are surfaced
@@ -46,17 +46,17 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>aa* — Archetype Archive</title>
+<title>aa*, Archetype Archive</title>
 <meta name="description" content="A comprehensive reference catalog of every existing archetype taxonomy across depth psychology, comparative mythology, folklore, dramaturgy, religion, gaming, and indigenous traditions. Search by taxonomy, by tag, or by category.">
 <link rel="canonical" href="https://seminarschools.com/aa/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seminarschools.com/aa/">
-<meta property="og:title" content="aa* — Archetype Archive · Seminar Schools">
+<meta property="og:title" content="aa*, Archetype Archive · Seminar Schools">
 <meta property="og:description" content="Reference catalog of archetype taxonomies across depth psychology, mythology, folklore, dramaturgy, religion, gaming, and indigenous traditions. Searchable by taxonomy, tag, or category.">
 <meta property="og:image" content="https://seminarschools.com/og-image.png">
 <meta property="og:site_name" content="Seminar Schools">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="aa* — Archetype Archive">
+<meta name="twitter:title" content="aa*, Archetype Archive">
 <meta name="twitter:description" content="Reference catalog of archetype taxonomies across traditions.">
 <meta name="twitter:image" content="https://seminarschools.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1613,6 +1613,7 @@ footer a:hover{color:var(--accent)}
   --highlight:#4A3C1E;
 }</style>
 <link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
+<link rel="stylesheet" href="/css/alive.css">
 </head>
 <body>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:auto;bottom:1rem;left:1rem;right:auto;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
@@ -1637,7 +1638,7 @@ footer a:hover{color:var(--accent)}
       <span>A Reference Catalog</span>
       <span id="head-tax-count">333 Taxonomies</span>
       <span>14 Traditions</span>
-      <span id="head-tag-count">— Tags</span>
+      <span id="head-tag-count">Tags</span>
     </div>
     <h1>aa* <em>Archetype Archive</em></h1>
     <p class="tagline">A polymorphous mythology archive. Every archetype taxonomy ever published, from Theophrastus's thirty character sketches in 319 BCE to the Magic: The Gathering color pie. Browse by tradition, by tag, by archetypal mass. Watch the same figure appear under different names across cultures.</p>
@@ -1682,7 +1683,7 @@ footer a:hover{color:var(--accent)}
       <button class="ctrl-chip active" data-ctrl="sort" data-val="tradition">Tradition → Year</button>
       <button class="ctrl-chip" data-ctrl="sort" data-val="year-asc">Year ↑</button>
       <button class="ctrl-chip" data-ctrl="sort" data-val="year-desc">Year ↓</button>
-      <button class="ctrl-chip" data-ctrl="sort" data-val="alpha">A–Z</button>
+      <button class="ctrl-chip" data-ctrl="sort" data-val="alpha">A to Z</button>
       <button class="ctrl-chip" data-ctrl="sort" data-val="converge">Convergence ↓</button>
     </div>
     <div class="ctrl-group">
@@ -1761,27 +1762,27 @@ const SCHEMA_VERSION = "1.5";
  *     stamped at write-time with extraction-pass identifier).
  *   TAXONOMIES gain `provenance` ('v1.0-baseline' for pre-tracking; 404
  *     existing entries stamped at A19 install).
- *   New top-level REMOVED_ENTRIES constant — log of silently-removed entries
+ *   New top-level REMOVED_ENTRIES constant, log of silently-removed entries
  *     ({tagId, taxId, removed_at, reason, original_label}). Empty seed;
  *     future removals MUST be logged here at removal time. UI surface at
  *     bottom-right footer link "removed: N" + collapsible panel.
  *
  * 1.2 (2026-05-04): three new top-level data layers under the aa*
  *   refinement track.
- *   COMPANION_RELATIONSHIPS (A21) — 8 entries documenting Jean Shinoda
+ *   COMPANION_RELATIONSHIPS (A21), 8 entries documenting Jean Shinoda
  *     Bolen's goddess↔god pairings from Goddesses in Everywoman (1984)
  *     and Gods in Everyman (1989). Each entry references EXISTING tag
  *     IDs (hera/zeus, aphrodite/hephaestus/ares, persephone/hades,
  *     demeter/persephone, plus the three virgin-goddesses with null
  *     consort: artemis/athena/hestia). No new tags created.
- *   LINEAGE_EDGES (A5) — taxonomy-to-taxonomy influence edges.
+ *   LINEAGE_EDGES (A5), taxonomy-to-taxonomy influence edges.
  *     v1 ships two entries: pearson12 → jung-classical (derivation),
  *     schmidt45 → bolen-goddess (derivation; the second edge added
  *     after recognizing that the audit's "Schmidt" refers to Victoria
  *     Lynn Schmidt 2001, already in the catalog as schmidt45, whose
  *     categories explicitly use Bolen's light/shadow Greek-pantheon
  *     framework). A5 audit item now fully shipped.
- *   META_ENTRIES (A12) — 3 entries documenting thinkers whose work
+ *   META_ENTRIES (A12), 3 entries documenting thinkers whose work
  *     CRITIQUES the universalist-archetype claim: Levi-Strauss
  *     (structural mythology / mythemes; Mythologiques 1964-1971),
  *     Wittgenstein (family resemblance; PI sections 65-67), Foucault
@@ -1832,7 +1833,7 @@ const SCHEMA_VERSION = "1.5";
  *   estimated_work, related_decisions[], status. Surfaced via 'Pending'
  *   tab in the .mode-toggle UI (4th tab parallel to Critiques + Settings
  *   from v1.2/v1.3). Capture-only per user direction "creating a whole
- *   pendinglist just for aa* / we will get to it later" — no AI-side
+ *   pendinglist just for aa* / we will get to it later", no AI-side
  *   auto-resolution. Each entry is a stable retrievable record of the
  *   decision shape and what unblocks it.
  * Every entry mutation should bump SCHEMA_VERSION when shape changes.
@@ -1864,15 +1865,15 @@ const TAXONOMIES = [
     note:"Polytheistic personification of psyche through Greek deities as ongoing archetypal patterns."
   },
   {
-    id:"pearson12",provenance:"v1.0-baseline", name:"Pearson — Twelve Archetypes",
+    id:"pearson12",provenance:"v1.0-baseline", name:"Pearson, Twelve Archetypes",
     originator:"Carol S. Pearson", year:1991, tradition:"depth",
     count:12, categories:["Innocent","Orphan","Warrior","Caregiver","Seeker","Lover","Destroyer","Creator","Ruler","Magician","Sage","Fool / Jester"],
     source_url:"https://carolspearson.com/",
-    source_book:"Carol S. Pearson, Awakening the Heroes Within (HarperSanFrancisco, 1991, ISBN 978-0062506788); predecessor The Hero Within (1986/1998, ISBN 978-0062515551) — 6 archetypes: Innocent, Orphan, Wanderer, Warrior, Martyr, Magician",
+    source_book:"Carol S. Pearson, Awakening the Heroes Within (HarperSanFrancisco, 1991, ISBN 978-0062506788); predecessor The Hero Within (1986/1998, ISBN 978-0062515551), 6 archetypes: Innocent, Orphan, Wanderer, Warrior, Martyr, Magician",
     note:"Backbone of the Pearson-Marr Archetype Indicator (PMAI) and most subsequent twelve-archetype branding adaptations."
   },
   {
-    id:"mark-pearson",provenance:"v1.0-baseline", name:"Mark & Pearson — 12 Brand Archetypes",
+    id:"mark-pearson",provenance:"v1.0-baseline", name:"Mark & Pearson, 12 Brand Archetypes",
     originator:"Margaret Mark and Carol S. Pearson", year:2001, tradition:"brand",
     count:12, categories:["Innocent","Explorer","Sage","Hero","Outlaw","Magician","Regular Guy/Gal (Everyman)","Lover","Jester","Caregiver","Creator","Ruler"],
     source_url:"https://carolspearson.com/about/the-pearson-12-archetype-system-human-development-and-evolution",
@@ -1880,7 +1881,7 @@ const TAXONOMIES = [
     note:"The dominant marketing-archetype system; Jungian-derived; widely copied across branding literature."
   },
   {
-    id:"moore-gillette",provenance:"v1.0-baseline", name:"Moore & Gillette — King, Warrior, Magician, Lover",
+    id:"moore-gillette",provenance:"v1.0-baseline", name:"Moore & Gillette, King, Warrior, Magician, Lover",
     originator:"Robert Moore and Douglas Gillette", year:1990, tradition:"depth",
     count:"4 mature + 4 immature + bipolar shadows",
     categories:["King","Warrior","Magician","Lover","Divine Child","Hero (immature)","Precocious Child","Oedipal Child","Tyrant/Weakling","Sadist/Masochist"],
@@ -1889,15 +1890,15 @@ const TAXONOMIES = [
     note:"Foundational text of the mythopoetic men's movement; Jungian masculine psychology."
   },
   {
-    id:"bolen-goddess",provenance:"v1.0-baseline", name:"Bolen — Goddesses in Everywoman",
+    id:"bolen-goddess",provenance:"v1.0-baseline", name:"Bolen, Goddesses in Everywoman",
     originator:"Jean Shinoda Bolen", year:1984, tradition:"depth",
     count:7, categories:["Artemis","Athena","Hestia","Hera","Demeter","Persephone","Aphrodite"],
     source_url:null,
-    source_book:"Jean Shinoda Bolen, Goddesses in Everywoman (Harper & Row, 1984, ISBN 978-0062321121); companion Gods in Everyman (Harper, 1989, ISBN 978-0060972806) — Zeus, Poseidon, Hades, Apollo, Hermes, Ares, Hephaestus, Dionysus",
+    source_book:"Jean Shinoda Bolen, Goddesses in Everywoman (Harper & Row, 1984, ISBN 978-0062321121); companion Gods in Everyman (Harper, 1989, ISBN 978-0060972806), Zeus, Poseidon, Hades, Apollo, Hermes, Ares, Hephaestus, Dionysus",
     note:"Jungian-feminist archetypal psychology mapped to Greek goddesses."
   },
   {
-    id:"wolff",provenance:"v1.0-baseline", name:"Toni Wolff — Structural Forms of the Feminine Psyche",
+    id:"wolff",provenance:"v1.0-baseline", name:"Toni Wolff, Structural Forms of the Feminine Psyche",
     originator:"Toni Wolff", year:1951, tradition:"depth",
     count:4, categories:["Mother","Hetaira (Companion)","Amazon","Medial Woman"],
     source_url:"https://ufdcimages.uflib.ufl.edu/AA/00/00/15/82/00001/AA00001582_00001.pdf",
@@ -1905,7 +1906,7 @@ const TAXONOMIES = [
     note:"Early Jungian feminine typology; predates Bolen by three decades."
   },
   {
-    id:"myss",provenance:"v1.0-baseline", name:"Myss — Sacred Contracts Archetypes",
+    id:"myss",provenance:"v1.0-baseline", name:"Myss, Sacred Contracts Archetypes",
     originator:"Caroline Myss", year:2001, tradition:"depth",
     count:"4 universal + ~70 gallery", categories:["Child","Victim","Prostitute","Saboteur","Actor","Anarchist","Bureaucrat","Caregiver","Companion","Crone","Detective","Diplomat","Dreamer","Fool","Healer","Historian","Knight","Magician","Matriarch","Muse","Networker","Patriarch","Poet","Priest","Prophet","Puck","Rebel","Revolutionary","Sadist","Scholar","Seductress","Servant","Sidekick","Storyteller","Thief","Tyrant","Visionary","Wizard"],
     source_url:"https://myss.com/free-resources/sacred-contracts-and-your-archetypes/",
@@ -1913,7 +1914,7 @@ const TAXONOMIES = [
     note:"New-age Jungian-derived archetypal coaching; 4 universal survival archetypes + 8 selected from a Gallery of 70+."
   },
   {
-    id:"neumann",provenance:"v1.0-baseline", name:"Neumann — Stages of Consciousness",
+    id:"neumann",provenance:"v1.0-baseline", name:"Neumann, Stages of Consciousness",
     originator:"Erich Neumann", year:1949, tradition:"depth",
     count:7, categories:["Uroboros","Great Mother","Separation of the World Parents","Birth of the Hero","Slaying of the Dragon","Rescue of the Captive","Transformation/Deification of the Hero"],
     source_url:null,
@@ -1929,7 +1930,7 @@ const TAXONOMIES = [
     note:"Psychometric instrument operationalizing Pearson's 12 archetypes."
   },
   {
-    id:"singer",provenance:"v1.0-baseline", name:"June Singer — Boundaries of the Soul",
+    id:"singer",provenance:"v1.0-baseline", name:"June Singer, Boundaries of the Soul",
     originator:"June Singer", year:1972, tradition:"depth",
     count:4, categories:["Persona","Shadow","Anima/Animus","Self"],
     source_url:null,
@@ -1937,7 +1938,7 @@ const TAXONOMIES = [
     note:"Standard didactic enumeration of the practical Jungian archetype core."
   },
   {
-    id:"johnson",provenance:"v1.0-baseline", name:"Robert A. Johnson — He, She, We trilogy",
+    id:"johnson",provenance:"v1.0-baseline", name:"Robert A. Johnson, He, She, We trilogy",
     originator:"Robert A. Johnson", year:1974, year_end:1983, tradition:"depth",
     count:"3 single-myth exegeses",
     categories:["He (masculine via Parsifal)","She (feminine via Psyche)","We (relational via Tristan)"],
@@ -1946,7 +1947,7 @@ const TAXONOMIES = [
     note:"Jungian gender-archetypal trilogy via single-myth exegeses."
   },
   {
-    id:"estes",provenance:"v1.0-baseline", name:"Estés — Wild Woman Archetype",
+    id:"estes",provenance:"v1.0-baseline", name:"Estés, Wild Woman Archetype",
     originator:"Clarissa Pinkola Estés", year:1992, tradition:"depth",
     count:"1 core, ~20 folk-tale chapters",
     categories:["Wild Woman","La Loba","Bluebeard","Skeleton Woman","Vasilisa","Manawee","Sealskin Soulskin"],
@@ -1955,7 +1956,7 @@ const TAXONOMIES = [
     note:"Jungian archetypal feminism through folk-tale exegesis."
   },
   {
-    id:"leonard",provenance:"v1.0-baseline", name:"Leonard — Wounded Woman / Father's Daughter",
+    id:"leonard",provenance:"v1.0-baseline", name:"Leonard, Wounded Woman / Father's Daughter",
     originator:"Linda Schierse Leonard", year:1982, tradition:"depth",
     count:4, categories:["Eternal Girl (Puella)","Amazon","Martyr","Dutiful Daughter"],
     source_url:null,
@@ -1963,7 +1964,7 @@ const TAXONOMIES = [
     note:"Jungian feminine archetypes around father-daughter dynamic."
   },
   {
-    id:"paris",provenance:"v1.0-baseline", name:"Ginette Paris — Pagan Meditations / Pagan Grace",
+    id:"paris",provenance:"v1.0-baseline", name:"Ginette Paris, Pagan Meditations / Pagan Grace",
     originator:"Ginette Paris", year:1986, year_end:1990, tradition:"depth",
     count:"3 + 3", categories:["Aphrodite","Artemis","Hestia","Dionysus","Hermes","Aphrodite (Pagan Grace)"],
     source_url:null,
@@ -1973,7 +1974,7 @@ const TAXONOMIES = [
 
   // ===== B. COMPARATIVE MYTHOLOGY / MONOMYTH =====
   {
-    id:"campbell",provenance:"v1.0-baseline", name:"Campbell — Monomyth (Hero's Journey)",
+    id:"campbell",provenance:"v1.0-baseline", name:"Campbell, Monomyth (Hero's Journey)",
     originator:"Joseph Campbell", year:1949, tradition:"myth",
     count:17, categories:["Call to Adventure","Refusal of the Call","Supernatural Aid","Crossing of the First Threshold","Belly of the Whale","Road of Trials","Meeting with the Goddess","Woman as Temptress","Atonement with the Father","Apotheosis","The Ultimate Boon","Refusal of the Return","Magic Flight","Rescue from Without","Crossing the Return Threshold","Master of Two Worlds","Freedom to Live"],
     source_url:null,
@@ -1981,7 +1982,7 @@ const TAXONOMIES = [
     note:"The foundational comparative-mythology monomyth; 17 stages in three acts (Departure, Initiation, Return)."
   },
   {
-    id:"vogler",provenance:"v1.0-baseline", name:"Vogler — The Writer's Journey",
+    id:"vogler",provenance:"v1.0-baseline", name:"Vogler, The Writer's Journey",
     originator:"Christopher Vogler", year:1992, tradition:"drama",
     count:"12 stages + 8 archetypes",
     categories:["Ordinary World","Call to Adventure","Refusal of the Call","Meeting the Mentor","Crossing the First Threshold","Tests Allies Enemies","Approach to the Inmost Cave","Ordeal","Reward","The Road Back","Resurrection","Return with the Elixir","Hero","Mentor","Threshold Guardian","Herald","Shapeshifter","Shadow","Ally","Trickster"],
@@ -1990,7 +1991,7 @@ const TAXONOMIES = [
     note:"Screenwriting adaptation of Campbell; 12 stages plus 8 character archetypes."
   },
   {
-    id:"murdock",provenance:"v1.0-baseline", name:"Murdock — The Heroine's Journey",
+    id:"murdock",provenance:"v1.0-baseline", name:"Murdock, The Heroine's Journey",
     originator:"Maureen Murdock", year:1990, tradition:"myth",
     count:10, categories:["Separation from the Feminine","Identification with the Masculine and Gathering of Allies","Road of Trials Meeting Ogres and Dragons","Experiencing the Illusory Boon of Success","Awakening to Feelings of Spiritual Aridity / Death","Initiation and Descent to the Goddess","Urgent Yearning to Reconnect with the Feminine","Healing the Mother/Daughter Split","Healing the Wounded Masculine Within","Integration of Masculine and Feminine"],
     source_url:"https://maureenmurdock.com/articles/articles-the-heroines-journey/",
@@ -1998,7 +1999,7 @@ const TAXONOMIES = [
     note:"Jungian feminist counterpart to Campbell."
   },
   {
-    id:"hudson",provenance:"v1.0-baseline", name:"Hudson — The Virgin's Promise",
+    id:"hudson",provenance:"v1.0-baseline", name:"Hudson, The Virgin's Promise",
     originator:"Kim Hudson", year:2009, tradition:"drama",
     count:13, categories:["Dependent World","Price of Conformity","Opportunity to Shine","Dresses the Part","Secret World","No Longer Fits Her World","Caught Shining","Gives Up What Kept Her Stuck","Kingdom in Chaos","Wanders in the Wilderness","Chooses Her Light","Re-ordering / Rescue","Kingdom is Brighter"],
     source_url:null,
@@ -2006,7 +2007,7 @@ const TAXONOMIES = [
     note:"Feminine-arc complement to Vogler in screenwriting practice."
   },
   {
-    id:"schmidt45",provenance:"v1.0-baseline", name:"Schmidt — 45 Master Characters",
+    id:"schmidt45",provenance:"v1.0-baseline", name:"Schmidt, 45 Master Characters",
     originator:"Victoria Lynn Schmidt", year:2001, tradition:"lit",
     count:45, categories:["Aphrodite (Seductive Muse / Femme Fatale)","Artemis (Amazon / Gorgon)","Athena (Father's Daughter / Backstabber)","Demeter (Nurturer / Overcontrolling Mother)","Hera (Matriarch / Scorned Woman)","Hestia (Mystic / Betrayer)","Isis (Female Messiah / Destroyer)","Persephone (Maiden / Troubled Teen)","Apollo (Businessman / Traitor)","Ares (Protector / Gladiator)","Hades (Recluse / Warlock)","Hermes (Fool / Derelict)","Dionysus (Woman's Man / Seducer)","Osiris (Male Messiah / Punisher)","Poseidon (Artist / Abuser)","Zeus (King / Dictator)"],
     source_url:"https://tvtropes.org/pmwiki/pmwiki.php/Literature/FortyFiveMasterCharacters",
@@ -2014,7 +2015,7 @@ const TAXONOMIES = [
     note:"8 female heroines + 8 male heroes (each hero/villain) + 13 supporting; Greek/Egyptian sourced."
   },
   {
-    id:"rank",provenance:"v1.0-baseline", name:"Rank — Myth of the Birth of the Hero",
+    id:"rank",provenance:"v1.0-baseline", name:"Rank, Myth of the Birth of the Hero",
     originator:"Otto Rank", year:1909, tradition:"myth",
     count:"~12 elements", categories:["Distinguished parents","Divine/heroic father","Difficulty in conception","Prophecy of danger to father","Hero exposed","Rescued by animals/lowly people","Raised by foster parents","Finds his parents","Takes revenge on father","Achieves rank/honors"],
     source_url:null,
@@ -2022,7 +2023,7 @@ const TAXONOMIES = [
     note:"Psychoanalytic mythography; precursor to Campbell."
   },
   {
-    id:"raglan",provenance:"v1.0-baseline", name:"Lord Raglan — The Hero",
+    id:"raglan",provenance:"v1.0-baseline", name:"Lord Raglan, The Hero",
     originator:"FitzRoy Somerset, Lord Raglan", year:1936, tradition:"myth",
     count:22, categories:["Mother is royal virgin","Father is king","Often near relative of mother","Unusual conception","Reputed son of god","At birth attempt to kill him","Spirited away","Reared by foster parents","Childhood unknown","Returns or goes to future kingdom","Victorious over king/giant/dragon/wild beast","Marries a princess","Becomes king","For a time reigns uneventfully","Prescribes laws","Loses favor with gods/subjects","Driven from throne and city","Meets with mysterious death","Often at top of hill","Children if any do not succeed him","Body not buried","Has one or more holy sepulchres"],
     source_url:null,
@@ -2030,7 +2031,7 @@ const TAXONOMIES = [
     note:"22-incident hero pattern; combined with Rank as the Rank-Raglan mythotype; deprecated in mainstream folklore studies."
   },
   {
-    id:"propp",provenance:"v1.0-baseline", name:"Propp — Morphology of the Folktale",
+    id:"propp",provenance:"v1.0-baseline", name:"Propp, Morphology of the Folktale",
     originator:"Vladimir Propp", year:1928, tradition:"folk",
     count:"31 functions + 7 roles",
     categories:["Villain","Donor","Helper","Princess (or sought-after person) and her Father","Dispatcher","Hero (Seeker or Victim)","False Hero"],
@@ -2039,7 +2040,7 @@ const TAXONOMIES = [
     note:"Russian formalism / structural folkloristics; 31 functions + 7 character spheres of action."
   },
   {
-    id:"frye",provenance:"v1.0-baseline", name:"Frye — Anatomy of Criticism Mythoi",
+    id:"frye",provenance:"v1.0-baseline", name:"Frye, Anatomy of Criticism Mythoi",
     originator:"Northrop Frye", year:1957, tradition:"lit",
     count:"4 mythoi + 5 modes",
     categories:["Comedy (Spring)","Romance (Summer)","Tragedy (Autumn)","Irony/Satire (Winter)","Mythic mode","Romantic mode","High Mimetic mode","Low Mimetic mode","Ironic mode"],
@@ -2048,7 +2049,7 @@ const TAXONOMIES = [
     note:"Archetypal literary criticism; seasonal mythoi mapped to genre modes."
   },
   {
-    id:"voytilla",provenance:"v1.0-baseline", name:"Voytilla — Myth and the Movies",
+    id:"voytilla",provenance:"v1.0-baseline", name:"Voytilla, Myth and the Movies",
     originator:"Stuart Voytilla", year:1999, tradition:"drama",
     count:"50 films across 10 genres", categories:null,
     source_url:null,
@@ -2056,7 +2057,7 @@ const TAXONOMIES = [
     note:"Vogler-derived film-genre archetypal mapping."
   },
   {
-    id:"frazer",provenance:"v1.0-baseline", name:"Frazer — The Golden Bough (Dying-and-Rising God)",
+    id:"frazer",provenance:"v1.0-baseline", name:"Frazer, The Golden Bough (Dying-and-Rising God)",
     originator:"James George Frazer", year:1890, year_end:1915, tradition:"myth",
     count:"open pattern", categories:["King of the Wood","Sacred King","Dying-and-Rising Vegetation God","Scapegoat"],
     source_url:"https://archive.org/details/goldenboughstudy00fraz",
@@ -2064,7 +2065,7 @@ const TAXONOMIES = [
     note:"Largely deprecated in religious studies; the dying-and-rising-god pattern is no longer mainstream scholarship."
   },
   {
-    id:"eliade",provenance:"v1.0-baseline", name:"Eliade — Sacred and Profane / Eternal Return",
+    id:"eliade",provenance:"v1.0-baseline", name:"Eliade, Sacred and Profane / Eternal Return",
     originator:"Mircea Eliade", year:1954, tradition:"myth",
     count:"open typology", categories:["Cosmogonic Myth","Hero Myth","Eschatological Myth","axis mundi","imago mundi","hierophany"],
     source_url:null,
@@ -2072,7 +2073,7 @@ const TAXONOMIES = [
     note:"Comparative religion; sacred/profane distinction with hierophany typology."
   },
   {
-    id:"leeming",provenance:"v1.0-baseline", name:"Leeming — World of Myth typology",
+    id:"leeming",provenance:"v1.0-baseline", name:"Leeming, World of Myth typology",
     originator:"David Adams Leeming", year:1990, tradition:"myth",
     count:7, categories:["Creation","Flood","Hero","Trickster","Death and Rebirth","Place","Afterlife"],
     source_url:null,
@@ -2091,7 +2092,7 @@ const TAXONOMIES = [
     note:"International folkloristics standard for tale-type classification."
   },
   {
-    id:"thompson-motif",provenance:"v1.0-baseline", name:"Thompson — Motif-Index of Folk-Literature",
+    id:"thompson-motif",provenance:"v1.0-baseline", name:"Thompson, Motif-Index of Folk-Literature",
     originator:"Stith Thompson", year:1932, year_end:1958, tradition:"folk",
     count:"open: tens of thousands of motifs in 23 alpha categories",
     categories:["A Mythological Motifs","B Animals","C Tabu","D Magic","E The Dead","F Marvels","G Ogres","H Tests","J The Wise and the Foolish","K Deceptions","L Reversals of Fortune","M Ordaining the Future","N Chance and Fate","P Society","Q Rewards and Punishments","R Captives and Fugitives","S Unnatural Cruelty","T Sex","U The Nature of Life","V Religion","W Traits of Character","X Humor","Z Miscellaneous"],
@@ -2100,7 +2101,7 @@ const TAXONOMIES = [
     note:"Massive open motif inventory; companion to ATU."
   },
   {
-    id:"dumezil",provenance:"v1.0-baseline", name:"Dumézil — Tripartite Indo-European Ideology",
+    id:"dumezil",provenance:"v1.0-baseline", name:"Dumézil, Tripartite Indo-European Ideology",
     originator:"Georges Dumézil", year:1940, year_end:1958, tradition:"myth",
     count:5, categories:["Sovereignty (sacral/legal-magical, sub-divided Mitra/Varuna)","Force/Warrior","Productivity/Fertility (commoners, twins)","Mitra (split from Sovereignty Mitra/Varuna per A20 2026-05-04)","Varuna (split from Sovereignty Mitra/Varuna per A20 2026-05-04)"],
     source_url:null,
@@ -2108,7 +2109,7 @@ const TAXONOMIES = [
     note:"Comparative Indo-European mythology; three social-mythic functions."
   },
   {
-    id:"bettelheim",provenance:"v1.0-baseline", name:"Bettelheim — The Uses of Enchantment",
+    id:"bettelheim",provenance:"v1.0-baseline", name:"Bettelheim, The Uses of Enchantment",
     originator:"Bruno Bettelheim", year:1976, tradition:"folk",
     count:"open per fairy tale",
     categories:["Cinderella","Snow White","Sleeping Beauty","Hansel and Gretel","Little Red Riding Hood","Bluebeard","Beauty and the Beast","Jack and the Beanstalk"],
@@ -2117,7 +2118,7 @@ const TAXONOMIES = [
     note:"Psychoanalytic folkloristics; classic fairy tales as developmental archetypal stages."
   },
   {
-    id:"luthi",provenance:"v1.0-baseline", name:"Lüthi — European Folktale Theory",
+    id:"luthi",provenance:"v1.0-baseline", name:"Lüthi, European Folktale Theory",
     originator:"Max Lüthi", year:1947, tradition:"folk",
     count:5, categories:["One-dimensionality","Depthlessness","Abstract style","Isolation/universal connection","Sublimation"],
     source_url:null,
@@ -2125,7 +2126,7 @@ const TAXONOMIES = [
     note:"Stylistic folkloristics; five formal traits of the European folktale."
   },
   {
-    id:"warner",provenance:"v1.0-baseline", name:"Warner — Fairy-Tale Archetypal Categories",
+    id:"warner",provenance:"v1.0-baseline", name:"Warner, Fairy-Tale Archetypal Categories",
     originator:"Marina Warner", year:1995, year_end:2014, tradition:"folk",
     count:"open", categories:["Beast","Blonde","Wise Crone","Stepmother","Witch"],
     source_url:null,
@@ -2133,7 +2134,7 @@ const TAXONOMIES = [
     note:"Cultural history / fairy-tale criticism."
   },
   {
-    id:"dundes",provenance:"v1.0-baseline", name:"Dundes — Hero Pattern Analysis",
+    id:"dundes",provenance:"v1.0-baseline", name:"Dundes, Hero Pattern Analysis",
     originator:"Alan Dundes", year:1976, tradition:"folk",
     count:"22 (combines Rank-Raglan)",
     categories:null,
@@ -2142,7 +2143,7 @@ const TAXONOMIES = [
     note:"Combines Rank and Raglan with morphological analysis; canonical scholarly hero-pattern collection."
   },
   {
-    id:"burkert",provenance:"v1.0-baseline", name:"Burkert — Greek Myth Archetypal Patterns",
+    id:"burkert",provenance:"v1.0-baseline", name:"Burkert, Greek Myth Archetypal Patterns",
     originator:"Walter Burkert", year:1979, tradition:"folk",
     count:"open structural patterns", categories:null,
     source_url:null,
@@ -2152,7 +2153,7 @@ const TAXONOMIES = [
 
   // ===== D. LITERARY CRITICISM / NARRATOLOGY =====
   {
-    id:"booker7",provenance:"v1.0-baseline", name:"Booker — Seven Basic Plots",
+    id:"booker7",provenance:"v1.0-baseline", name:"Booker, Seven Basic Plots",
     originator:"Christopher Booker", year:2004, tradition:"lit",
     count:"7 (+2 additional)", categories:["Overcoming the Monster","Rags to Riches","The Quest","Voyage and Return","Comedy","Tragedy","Rebirth","Mystery (additional)","Rebellion Against The One (additional)"],
     source_url:null,
@@ -2160,7 +2161,7 @@ const TAXONOMIES = [
     note:"Jungian-influenced popular literary criticism."
   },
   {
-    id:"polti36",provenance:"v1.0-baseline", name:"Polti — 36 Dramatic Situations",
+    id:"polti36",provenance:"v1.0-baseline", name:"Polti, 36 Dramatic Situations",
     originator:"Georges Polti", year:1895, tradition:"drama",
     count:36, categories:["Supplication","Deliverance","Crime Pursued by Vengeance","Vengeance Taken for Kin Upon Kin","Pursuit","Disaster","Falling Prey to Cruelty/Misfortune","Revolt","Daring Enterprise","Abduction","The Enigma","Obtaining","Enmity of Kin","Rivalry of Kin","Murderous Adultery","Madness","Fatal Imprudence","Involuntary Crimes of Love","Slaying of a Kinsman Unrecognized","Self-Sacrifice for an Ideal","Self-Sacrifice for Kindred","All Sacrificed for Passion","Necessity of Sacrificing Loved Ones","Rivalry of Superior vs. Inferior","Adultery","Crimes of Love","Discovery of the Dishonor of a Loved One","Obstacles to Love","An Enemy Loved","Ambition","Conflict with a God","Mistaken Jealousy","Erroneous Judgment","Remorse","Recovery of a Lost One","Loss of Loved Ones"],
     source_url:"https://www.gutenberg.org/ebooks/72036",
@@ -2168,7 +2169,7 @@ const TAXONOMIES = [
     note:"Foundational dramaturgical situation taxonomy."
   },
   {
-    id:"tobias20",provenance:"v1.0-baseline", name:"Tobias — 20 Master Plots",
+    id:"tobias20",provenance:"v1.0-baseline", name:"Tobias, 20 Master Plots",
     originator:"Ronald B. Tobias", year:1993, tradition:"lit",
     count:20, categories:["Quest","Adventure","Pursuit","Rescue","Escape","Revenge","The Riddle","Rivalry","Underdog","Temptation","Metamorphosis","Transformation","Maturation","Love","Forbidden Love","Sacrifice","Discovery","Wretched Excess","Ascension","Descension"],
     source_url:null,
@@ -2176,7 +2177,7 @@ const TAXONOMIES = [
     note:"Practitioner plot taxonomy."
   },
   {
-    id:"cowden16",provenance:"v1.0-baseline", name:"Cowden, LaFever, Viders — 16 Master Archetypes",
+    id:"cowden16",provenance:"v1.0-baseline", name:"Cowden, LaFever, Viders, 16 Master Archetypes",
     originator:"Tami D. Cowden, Caro LaFever, Sue Viders", year:2000, tradition:"lit",
     count:"16 + 16 villains",
     categories:["Chief","Bad Boy","Best Friend","Charmer","Lost Soul","Professor","Swashbuckler","Warrior","Boss","Seductress","Spunky Kid","Free Spirit","Waif","Librarian","Crusader","Nurturer"],
@@ -2185,7 +2186,7 @@ const TAXONOMIES = [
     note:"8 male heroes + 8 female heroines; widely used in romance and genre fiction craft."
   },
   {
-    id:"edelstein",provenance:"v1.0-baseline", name:"Edelstein — Writer's Guide to Character Traits",
+    id:"edelstein",provenance:"v1.0-baseline", name:"Edelstein, Writer's Guide to Character Traits",
     originator:"Linda N. Edelstein", year:1999, tradition:"lit",
     count:"open trait taxonomy", categories:null,
     source_url:null,
@@ -2193,7 +2194,7 @@ const TAXONOMIES = [
     note:"Open trait taxonomy organized by personality types, professions, and disorders for fiction writers."
   },
   {
-    id:"morrell",provenance:"v1.0-baseline", name:"Morrell — Bullies, Bastards & Bitches",
+    id:"morrell",provenance:"v1.0-baseline", name:"Morrell, Bullies, Bastards & Bitches",
     originator:"Jessica Page Morrell", year:2008, tradition:"lit",
     count:"open antagonist taxonomy",
     categories:["Bully","Bastard","Bitch","Anti-Hero","Mad Scientist","Femme Fatale"],
@@ -2202,7 +2203,7 @@ const TAXONOMIES = [
     note:"Open antagonist taxonomy for fiction writers."
   },
   {
-    id:"booth-narrator",provenance:"v1.0-baseline", name:"Booth — The Rhetoric of Fiction",
+    id:"booth-narrator",provenance:"v1.0-baseline", name:"Booth, The Rhetoric of Fiction",
     originator:"Wayne Booth", year:1961, tradition:"lit",
     count:"narrator typology",
     categories:["Implied Author","Reliable Narrator","Unreliable Narrator","Dramatized Narrator","Undramatized Narrator","Observer","Narrator-Agent"],
@@ -2211,7 +2212,7 @@ const TAXONOMIES = [
     note:"Canonical taxonomy of narrators and implied authors."
   },
   {
-    id:"genette",provenance:"v1.0-baseline", name:"Genette — Narrative Discourse",
+    id:"genette",provenance:"v1.0-baseline", name:"Genette, Narrative Discourse",
     originator:"Gérard Genette", year:1972, tradition:"lit",
     count:"3 axes",
     categories:["Tense","Mood","Voice","Zero focalization","Internal focalization","External focalization"],
@@ -2220,7 +2221,7 @@ const TAXONOMIES = [
     note:"Three-axis narratology taxonomy; defines focalization."
   },
   {
-    id:"todorov",provenance:"v1.0-baseline", name:"Todorov — The Fantastic / Grammar of the Decameron",
+    id:"todorov",provenance:"v1.0-baseline", name:"Todorov, The Fantastic / Grammar of the Decameron",
     originator:"Tzvetan Todorov", year:1970, tradition:"lit",
     count:"3 modes",
     categories:["Uncanny","Fantastic","Marvelous"],
@@ -2229,7 +2230,7 @@ const TAXONOMIES = [
     note:"Genre-fantastic taxonomy plus narrative-character functions."
   },
   {
-    id:"bakhtin",provenance:"v1.0-baseline", name:"Bakhtin — Chronotopes and Carnival Types",
+    id:"bakhtin",provenance:"v1.0-baseline", name:"Bakhtin, Chronotopes and Carnival Types",
     originator:"Mikhail Bakhtin", year:1981, tradition:"lit",
     count:"3 carnival types",
     categories:["Fool","Clown","Rogue"],
@@ -2238,7 +2239,7 @@ const TAXONOMIES = [
     note:"Carnival typology and chronotope theory."
   },
   {
-    id:"barthes-sz",provenance:"v1.0-baseline", name:"Barthes — S/Z Five Codes",
+    id:"barthes-sz",provenance:"v1.0-baseline", name:"Barthes, S/Z Five Codes",
     originator:"Roland Barthes", year:1970, tradition:"crit",
     count:5, categories:["Hermeneutic","Proairetic","Semic (code of the seme/character traits)","Symbolic","Cultural"],
     source_url:null,
@@ -2248,7 +2249,7 @@ const TAXONOMIES = [
 
   // ===== E. SCREENWRITING / DRAMATURGY =====
   {
-    id:"truby",provenance:"v1.0-baseline", name:"Truby — The Anatomy of Story",
+    id:"truby",provenance:"v1.0-baseline", name:"Truby, The Anatomy of Story",
     originator:"John Truby", year:2007, tradition:"drama",
     count:"22 steps + 7 character roles",
     categories:["Hero (Protagonist)","Opponent (Antagonist)","Ally","Fake-Ally Opponent","Fake-Opponent Ally","Subplot Character","Mentor","King","Warrior","Artist","Lover","Magician","Trickster"],
@@ -2257,7 +2258,7 @@ const TAXONOMIES = [
     note:"22-step story structure plus 7 character roles plus archetypal-type list."
   },
   {
-    id:"mckee",provenance:"v1.0-baseline", name:"McKee — Story",
+    id:"mckee",provenance:"v1.0-baseline", name:"McKee, Story",
     originator:"Robert McKee", year:1997, tradition:"drama",
     count:"open character functions",
     categories:["Protagonist","Antagonist","Forces of Antagonism (Contrary, Contradictory, Negation of the Negation)","Contrary (split from Forces of Antagonism per A20 2026-05-04)","Contradictory (split from Forces of Antagonism per A20 2026-05-04)","Negation of the Negation (split from Forces of Antagonism per A20 2026-05-04)"],
@@ -2266,7 +2267,7 @@ const TAXONOMIES = [
     note:"Industry-standard screenwriting craft text; Forces of Antagonism schema."
   },
   {
-    id:"snyder10",provenance:"v1.0-baseline", name:"Snyder — Save the Cat 10 Story Genres",
+    id:"snyder10",provenance:"v1.0-baseline", name:"Snyder, Save the Cat 10 Story Genres",
     originator:"Blake Snyder", year:2005, tradition:"drama",
     count:10, categories:["Monster in the House","Golden Fleece","Out of the Bottle","Dude with a Problem","Rites of Passage","Buddy Love","Whydunit","The Fool Triumphant","Institutionalized","Superhero"],
     source_url:"https://savethecat.com/forum/10-genres-and-beat-sheets",
@@ -2274,7 +2275,7 @@ const TAXONOMIES = [
     note:"Genre-classification taxonomy with embedded archetypal characters per genre."
   },
   {
-    id:"hauge",provenance:"v1.0-baseline", name:"Hauge — Six Stage Character Types",
+    id:"hauge",provenance:"v1.0-baseline", name:"Hauge, Six Stage Character Types",
     originator:"Michael Hauge", year:1988, tradition:"drama",
     count:5, categories:["Hero","Reflection","Romance","Nemesis","Mentor"],
     source_url:null,
@@ -2282,7 +2283,7 @@ const TAXONOMIES = [
     note:"Six-stage plot structure with five character types."
   },
   {
-    id:"dramatica",provenance:"v1.0-baseline", name:"Dramatica — Eight Throughline Archetypes",
+    id:"dramatica",provenance:"v1.0-baseline", name:"Dramatica, Eight Throughline Archetypes",
     originator:"Melanie Anne Phillips & Chris Huntley", year:1993, tradition:"drama",
     count:8, categories:["Protagonist","Antagonist","Reason","Emotion","Sidekick","Skeptic","Guardian","Contagonist"],
     source_url:"https://www.storymind.com/dramatica/dramatica_theory_book/chapter_04.html",
@@ -2290,7 +2291,7 @@ const TAXONOMIES = [
     note:"Eight archetypal characters in a dialectical relational scheme."
   },
   {
-    id:"egri",provenance:"v1.0-baseline", name:"Egri — Three-Dimensional Character",
+    id:"egri",provenance:"v1.0-baseline", name:"Egri, Three-Dimensional Character",
     originator:"Lajos Egri", year:1942, tradition:"drama",
     count:3, categories:["Physiology","Sociology","Psychology"],
     source_url:null,
@@ -2324,7 +2325,7 @@ const TAXONOMIES = [
     note:"Foundational stock-character taxonomy from Greek and Roman New Comedy."
   },
   {
-    id:"theophrastus",provenance:"v1.0-baseline", name:"Theophrastus — Characters",
+    id:"theophrastus",provenance:"v1.0-baseline", name:"Theophrastus, Characters",
     originator:"Theophrastus", year:-319, tradition:"drama",
     count:30, categories:["Dissembler/Ironical","Flatterer","Garrulous","Boor","Complaisant","Reckless","Loquacious/Chatterbox","Newsmonger","Shameless","Penurious","Gross/Disgusting","Tactless","Officious","Stupid","Surly","Superstitious","Grumbler/Faultfinder","Distrustful","Squalid/Offensive","Disagreeable","Petty Pride","Mean/Stingy","Boastful","Arrogant","Coward","Oligarchical","Late-Learner","Slanderer","Patron of Scoundrels","Avaricious"],
     source_url:"https://www.gutenberg.org/ebooks/58242",
@@ -2348,7 +2349,7 @@ const TAXONOMIES = [
     note:"Japanese theater character types since 17th century."
   },
   {
-    id:"archer",provenance:"v1.0-baseline", name:"Archer — Play-Making",
+    id:"archer",provenance:"v1.0-baseline", name:"Archer, Play-Making",
     originator:"William Archer", year:1912, tradition:"drama",
     count:"open enumeration", categories:null,
     source_url:null,
@@ -2356,7 +2357,7 @@ const TAXONOMIES = [
     note:"Early enumeration of dramatic situations and character types."
   },
   {
-    id:"lavandier",provenance:"v1.0-baseline", name:"Lavandier — La Dramaturgie",
+    id:"lavandier",provenance:"v1.0-baseline", name:"Lavandier, La Dramaturgie",
     originator:"Yves Lavandier", year:1994, tradition:"drama",
     count:"open protagonist/antagonist taxonomy", categories:null,
     source_url:null,
@@ -2382,7 +2383,7 @@ const TAXONOMIES = [
     note:"Three-aspect Hindu cosmological archetype set."
   },
   {
-    id:"dashavatara",provenance:"v1.0-baseline", name:"Dashavatara — Ten Avatars of Vishnu",
+    id:"dashavatara",provenance:"v1.0-baseline", name:"Dashavatara, Ten Avatars of Vishnu",
     originator:"Hindu tradition", year:500, tradition:"relig",
     count:10, categories:["Matsya (Fish)","Kurma (Tortoise)","Varaha (Boar)","Narasimha (Man-Lion)","Vamana (Dwarf)","Parashurama","Rama","Krishna (or Balarama)","Buddha (or Balarama)","Kalki"],
     source_url:null,
@@ -2390,7 +2391,7 @@ const TAXONOMIES = [
     note:"Ten Vaishnava archetypal incarnations."
   },
   {
-    id:"mahavidya",provenance:"v1.0-baseline", name:"Mahavidyas — Ten Wisdom Goddesses",
+    id:"mahavidya",provenance:"v1.0-baseline", name:"Mahavidyas, Ten Wisdom Goddesses",
     originator:"Shakta Tantra", year:800, tradition:"relig",
     count:10, categories:["Kali","Tara","Tripura Sundari","Bhuvaneshvari","Bhairavi","Chhinnamasta","Dhumavati","Bagalamukhi","Matangi","Kamala"],
     source_url:null,
@@ -2398,7 +2399,7 @@ const TAXONOMIES = [
     note:"Shakta Tantra ten-aspect feminine divine."
   },
   {
-    id:"saptamatrika",provenance:"v1.0-baseline", name:"Saptamatrika — Seven Mothers",
+    id:"saptamatrika",provenance:"v1.0-baseline", name:"Saptamatrika, Seven Mothers",
     originator:"Hindu Shakta", year:400, tradition:"relig",
     count:"7 (sometimes 8)", categories:["Brahmani","Vaishnavi","Maheshvari","Indrani","Kaumari","Varahi","Chamunda","Narasimhi"],
     source_url:null,
@@ -2415,7 +2416,7 @@ const TAXONOMIES = [
     note:"37 Doctors of the Church to date; Common of Saints from Roman Missal."
   },
   {
-    id:"sufi-maqamat",provenance:"v1.0-baseline", name:"Sufi Maqamat — Seven Stations",
+    id:"sufi-maqamat",provenance:"v1.0-baseline", name:"Sufi Maqamat, Seven Stations",
     originator:"Sufi tradition (al-Qushayri / al-Hujwiri)", year:1000, tradition:"relig",
     count:7, categories:["Tawba (Repentance)","Wara' (Watchfulness)","Zuhd (Renunciation)","Faqr (Poverty)","Sabr (Patience)","Tawakkul (Trust)","Riḍā (Satisfaction)","Ammāra (nafs)","Lawwāma (nafs)","Mulhama (nafs)","Mutma'inna (nafs)","Rāḍiya (nafs)","Marḍiyya (nafs)","Kāmila (nafs)"],
     source_url:null,
@@ -2423,7 +2424,7 @@ const TAXONOMIES = [
     note:"Sufi mystical-stations taxonomy with paired seven-nafs ladder."
   },
   {
-    id:"sefirot",provenance:"v1.0-baseline", name:"Kabbalistic Sefirot — Tree of Life",
+    id:"sefirot",provenance:"v1.0-baseline", name:"Kabbalistic Sefirot, Tree of Life",
     originator:"Jewish mysticism", year:1200, tradition:"relig",
     count:"10 (sometimes 11 with Da'at)",
     categories:["Keter","Chokhmah","Binah","Da'at","Chesed","Gevurah","Tiferet","Netzach","Hod","Yesod","Malkuth"],
@@ -2477,7 +2478,7 @@ const TAXONOMIES = [
   },
   {
     id:"orisha",provenance:"v1.0-baseline", name:"Yoruba Orisha Pantheon",
-    originator:"Yoruba tradition (Nigeria; diaspora — Santería, Candomblé)", year:1000, tradition:"indig",
+    originator:"Yoruba tradition (Nigeria; diaspora, Santería, Candomblé)", year:1000, tradition:"indig",
     count:"traditionally 401",
     categories:["Olodumare/Olorun (Supreme)","Orunmila (Wisdom/Ifa)","Eshu/Elegua (Trickster, crossroads)","Ogun (Iron, war)","Shango/Sango (Thunder)","Yemoja (Ocean/mother)","Oshun (Rivers/love)","Oya (Wind/storms)","Obatala (Purity/creator)","Olokun (Deep ocean)","Babalú-Ayé (Disease/healing)","Ibeji (Twins)","Iroko (Sacred tree)"],
     source_url:null,
@@ -2494,7 +2495,7 @@ const TAXONOMIES = [
     note:"Irish (Tuatha Dé Danann) and Welsh (Mabinogion) archetypal figures."
   },
   {
-    id:"auerbach",provenance:"v1.0-baseline", name:"Auerbach — Christian Biblical Typology",
+    id:"auerbach",provenance:"v1.0-baseline", name:"Auerbach, Christian Biblical Typology",
     originator:"Erich Auerbach", year:1953, tradition:"relig",
     count:"open OT-NT typological pairs",
     categories:["Adam/Christ","Eve/Mary","Moses/Christ","Isaac/Christ","Joshua/Jesus","Jonah/Christ"],
@@ -2503,7 +2504,7 @@ const TAXONOMIES = [
     note:"Patristic/medieval typology where OT figures prefigure NT figures."
   },
   {
-    id:"hyde-trickster",provenance:"v1.0-baseline", name:"Hyde — Cross-Cultural Trickster",
+    id:"hyde-trickster",provenance:"v1.0-baseline", name:"Hyde, Cross-Cultural Trickster",
     originator:"Lewis Hyde", year:1998, tradition:"myth",
     count:"open cross-cultural set",
     categories:["Hermes","Coyote","Krishna","Loki","Eshu/Legba","Anansi","Raven","Maui","Monkey King"],
@@ -2512,7 +2513,7 @@ const TAXONOMIES = [
     note:"Comparative trickster studies; cross-cultural archetype."
   },
   {
-    id:"doty",provenance:"v1.0-baseline", name:"Doty — Mythography",
+    id:"doty",provenance:"v1.0-baseline", name:"Doty, Mythography",
     originator:"William Doty", year:2000, tradition:"myth",
     count:"open hero/trickster patterns", categories:null,
     source_url:null,
@@ -2594,7 +2595,7 @@ const TAXONOMIES = [
     note:"Trinity plus typical seven-member Justice League archetypal core."
   },
   {
-    id:"marvel-avengers",provenance:"v1.0-baseline", name:"Marvel — Avengers Archetypal Heroes",
+    id:"marvel-avengers",provenance:"v1.0-baseline", name:"Marvel, Avengers Archetypal Heroes",
     originator:"Marvel Comics", year:1961, tradition:"game",
     count:"open list",
     categories:["Captain America (Patriot/Soldier)","Iron Man (Genius-Inventor)","Thor (Mythic God)","Hulk (Beast/Monster)","Spider-Man (Everyman teen)","Black Widow","Hawkeye","Black Panther","Doctor Strange (Magician)","Wolverine","Storm","Magneto","Daredevil"],
@@ -2622,7 +2623,7 @@ const TAXONOMIES = [
 
   // ===== H. PERSONALITY / POPULAR PSYCHOLOGY =====
   {
-    id:"mbti",provenance:"v1.0-baseline", name:"Myers-Briggs Type Indicator (MBTI) — 16 Types",
+    id:"mbti",provenance:"v1.0-baseline", name:"Myers-Briggs Type Indicator (MBTI), 16 Types",
     originator:"Katharine Cook Briggs and Isabel Briggs Myers", year:1944, tradition:"pers",
     count:16, categories:["INTJ","INTP","ENTJ","ENTP","INFJ","INFP","ENFJ","ENFP","ISTJ","ISFJ","ESTJ","ESFJ","ISTP","ISFP","ESTP","ESFP"],
     source_url:null,
@@ -2726,7 +2727,7 @@ const TAXONOMIES = [
 
   // ===== I. MARKETING / BRANDING =====
   {
-    id:"primal",provenance:"v1.0-baseline", name:"Hanlon — Primal Branding 7 Assets",
+    id:"primal",provenance:"v1.0-baseline", name:"Hanlon, Primal Branding 7 Assets",
     originator:"Patrick Hanlon", year:2006, tradition:"brand",
     count:7, categories:["Creation Story","Creed","Icons","Rituals","Pagans/Nonbelievers","Sacred Words","Leader"],
     source_url:null,
@@ -2734,7 +2735,7 @@ const TAXONOMIES = [
     note:"Religious-archetypal branding framework."
   },
   {
-    id:"holt",provenance:"v1.0-baseline", name:"Holt — How Brands Become Icons",
+    id:"holt",provenance:"v1.0-baseline", name:"Holt, How Brands Become Icons",
     originator:"Douglas Holt", year:2004, tradition:"brand",
     count:"open cultural-branding method", categories:null,
     source_url:null,
@@ -2759,7 +2760,7 @@ const TAXONOMIES = [
     note:"B2B persona archetypes; varies by report; not a single closed taxonomy."
   },
   {
-    id:"pearson-corlett",provenance:"v1.0-baseline", name:"Pearson & Corlett — Mapping the Organizational Psyche",
+    id:"pearson-corlett",provenance:"v1.0-baseline", name:"Pearson & Corlett, Mapping the Organizational Psyche",
     originator:"Carol Pearson and John Corlett", year:2003, tradition:"brand",
     count:12, categories:["Innocent","Orphan","Warrior","Caregiver","Seeker","Lover","Destroyer","Creator","Ruler","Magician","Sage","Fool / Jester"],
     source_url:null,
@@ -2767,7 +2768,7 @@ const TAXONOMIES = [
     note:"Pearson 12 archetypes applied to organizational culture."
   },
   {
-    id:"edinger",provenance:"v1.0-baseline", name:"Edinger — Ego and Archetype",
+    id:"edinger",provenance:"v1.0-baseline", name:"Edinger, Ego and Archetype",
     originator:"Edward Edinger", year:1972, tradition:"depth",
     count:"open Jungian organizational archetypes", categories:null,
     source_url:null,
@@ -2791,7 +2792,7 @@ const TAXONOMIES = [
     note:"6 cultural dimensions used to derive national-culture archetypes."
   },
   {
-    id:"aaker",provenance:"v1.0-baseline", name:"Aaker — Brand Personality Five Dimensions",
+    id:"aaker",provenance:"v1.0-baseline", name:"Aaker, Brand Personality Five Dimensions",
     originator:"Jennifer Aaker", year:1997, tradition:"brand",
     count:5, categories:["Sincerity","Excitement","Competence","Sophistication","Ruggedness"],
     source_url:null,
@@ -2819,7 +2820,7 @@ const TAXONOMIES = [
     note:"Entity Q193058 (character archetype) and related classes; structured-data ontology."
   },
   {
-    id:"behindthename",provenance:"v1.0-baseline", name:"Behind the Name — Character/Name Tagging",
+    id:"behindthename",provenance:"v1.0-baseline", name:"Behind the Name, Character/Name Tagging",
     originator:"Mike Campbell", year:1996, tradition:"fan",
     count:"open tag taxonomy", categories:null,
     source_url:"https://www.behindthename.com/",
@@ -2838,7 +2839,7 @@ const TAXONOMIES = [
 
   // ===== K. CHILDREN'S LITERATURE / DEVELOPMENTAL =====
   {
-    id:"tatar",provenance:"v1.0-baseline", name:"Tatar — Annotated Fairy Tale / Heroine Archetypes",
+    id:"tatar",provenance:"v1.0-baseline", name:"Tatar, Annotated Fairy Tale / Heroine Archetypes",
     originator:"Maria Tatar", year:1987, year_end:2021, tradition:"child",
     count:"open archetypal readings", categories:null,
     source_url:null,
@@ -2846,7 +2847,7 @@ const TAXONOMIES = [
     note:"Harvard folklorist; major fairy-tale and heroine-archetype scholarship."
   },
   {
-    id:"zipes",provenance:"v1.0-baseline", name:"Zipes — Fairy Tale Archetypes",
+    id:"zipes",provenance:"v1.0-baseline", name:"Zipes, Fairy Tale Archetypes",
     originator:"Jack Zipes", year:2006, tradition:"child",
     count:"open archetypal-character reading via memetics", categories:null,
     source_url:null,
@@ -2854,7 +2855,7 @@ const TAXONOMIES = [
     note:"Memetic and Marxist fairy-tale criticism."
   },
   {
-    id:"chilton-pearce",provenance:"v1.0-baseline", name:"Pearce — Magical Child",
+    id:"chilton-pearce",provenance:"v1.0-baseline", name:"Pearce, Magical Child",
     originator:"Joseph Chilton Pearce", year:1977, tradition:"child",
     count:"developmental archetypal stages", categories:null,
     source_url:null,
@@ -2864,7 +2865,7 @@ const TAXONOMIES = [
 
   // ===== L. CRITICAL THEORY / POST-STRUCTURAL =====
   {
-    id:"greimas-actant",provenance:"v1.0-baseline", name:"Greimas — Actantial Model",
+    id:"greimas-actant",provenance:"v1.0-baseline", name:"Greimas, Actantial Model",
     originator:"Algirdas Julien Greimas", year:1966, tradition:"crit",
     count:"6 actants in 3 pairs",
     categories:["Subject","Object","Sender","Receiver","Helper","Opponent"],
@@ -2882,7 +2883,7 @@ const TAXONOMIES = [
     note:"4-position logical square used for character/value analysis."
   },
   {
-    id:"bal",provenance:"v1.0-baseline", name:"Bal — Narratology",
+    id:"bal",provenance:"v1.0-baseline", name:"Bal, Narratology",
     originator:"Mieke Bal", year:1985, tradition:"crit",
     count:"open with focalization layers", categories:null,
     source_url:null,
@@ -2890,7 +2891,7 @@ const TAXONOMIES = [
     note:"Refines Greimas's actants with focalizers/narrators."
   },
   {
-    id:"haraway",provenance:"v1.0-baseline", name:"Haraway — Cyborg Manifesto Figures",
+    id:"haraway",provenance:"v1.0-baseline", name:"Haraway, Cyborg Manifesto Figures",
     originator:"Donna Haraway", year:1991, tradition:"crit",
     count:"4 archetypal figures",
     categories:["Cyborg","Trickster","Coyote","Companion Species"],
@@ -2899,7 +2900,7 @@ const TAXONOMIES = [
     note:"Posthuman archetypal figures."
   },
   {
-    id:"cixous",provenance:"v1.0-baseline", name:"Cixous — Écriture Féminine Figures",
+    id:"cixous",provenance:"v1.0-baseline", name:"Cixous, Écriture Féminine Figures",
     originator:"Hélène Cixous", year:1975, tradition:"crit",
     count:"3 recovered female figures",
     categories:["Medusa","Sorceress","Hysteric"],
@@ -2908,7 +2909,7 @@ const TAXONOMIES = [
     note:"Recovers archetypal female figures from patriarchal canon."
   },
   {
-    id:"irigaray",provenance:"v1.0-baseline", name:"Irigaray — Speculum / This Sex Which Is Not One",
+    id:"irigaray",provenance:"v1.0-baseline", name:"Irigaray, Speculum / This Sex Which Is Not One",
     originator:"Luce Irigaray", year:1985, tradition:"crit",
     count:"open feminine subject positions", categories:null,
     source_url:null,
@@ -2916,7 +2917,7 @@ const TAXONOMIES = [
     note:"Critiques masculine archetypes; proposes feminine subject positions."
   },
   {
-    id:"spivak",provenance:"v1.0-baseline", name:"Spivak — Subaltern",
+    id:"spivak",provenance:"v1.0-baseline", name:"Spivak, Subaltern",
     originator:"Gayatri Spivak", year:1988, tradition:"crit",
     count:"1 figure-category",
     categories:["Subaltern"],
@@ -2925,7 +2926,7 @@ const TAXONOMIES = [
     note:"Postcolonial figure/category critiquing colonial and canonical archetypes."
   },
   {
-    id:"fanon",provenance:"v1.0-baseline", name:"Fanon — Black Skin, White Masks / Wretched of the Earth",
+    id:"fanon",provenance:"v1.0-baseline", name:"Fanon, Black Skin, White Masks / Wretched of the Earth",
     originator:"Frantz Fanon", year:1952, year_end:1961, tradition:"crit",
     count:"3+ archetypal positions",
     categories:["Native","Settler","Colonized Intellectual","Black/White masks"],
@@ -2934,7 +2935,7 @@ const TAXONOMIES = [
     note:"Foundational postcolonial archetypal taxonomy."
   },
   {
-    id:"said",provenance:"v1.0-baseline", name:"Said — Orientalism",
+    id:"said",provenance:"v1.0-baseline", name:"Said, Orientalism",
     originator:"Edward Said", year:1978, tradition:"crit",
     count:"open Orientalist archetypes", categories:null,
     source_url:null,
@@ -2942,7 +2943,7 @@ const TAXONOMIES = [
     note:"Orientalist archetypal figures critiqued."
   },
   {
-    id:"butler",provenance:"v1.0-baseline", name:"Butler — Gender Performativity",
+    id:"butler",provenance:"v1.0-baseline", name:"Butler, Gender Performativity",
     originator:"Judith Butler", year:1990, tradition:"crit",
     count:"critique of fixed gender archetypes", categories:null,
     source_url:null,
@@ -2960,7 +2961,7 @@ const TAXONOMIES = [
     note:"Western tropical zodiac; psychological-astrology canon."
   },
   {
-    id:"tarot-major",provenance:"v1.0-baseline", name:"Tarot Major Arcana — 22 Archetypes",
+    id:"tarot-major",provenance:"v1.0-baseline", name:"Tarot Major Arcana, 22 Archetypes",
     originator:"Tarot tradition", year:1440, tradition:"esot",
     count:22, categories:["0 The Fool","1 Magician","2 High Priestess","3 Empress","4 Emperor","5 Hierophant","6 Lovers","7 Chariot","8 Strength","9 Hermit","10 Wheel of Fortune","11 Justice","12 Hanged Man","13 Death","14 Temperance","15 Devil","16 Tower","17 Star","18 Moon","19 Sun","20 Judgement","21 World"],
     source_url:null,
@@ -2977,7 +2978,7 @@ const TAXONOMIES = [
     note:"4 suits × 14 cards = 56 minor arcana; 16 court cards as character archetypes."
   },
   {
-    id:"iching",provenance:"v1.0-baseline", name:"I Ching — 64 Hexagrams",
+    id:"iching",provenance:"v1.0-baseline", name:"I Ching, 64 Hexagrams",
     originator:"Chinese tradition (Zhou dynasty origins)", year:-1000, tradition:"esot",
     count:64, categories:null,
     source_url:null,
@@ -3047,7 +3048,7 @@ const TAXONOMIES = [
     note:"Traditional Iroquois Confederacy leadership archetypes."
   },
   {
-    id:"navarasa",provenance:"v1.0-baseline", name:"Hindu Rasa Theory — Nine Rasas (Navarasa)",
+    id:"navarasa",provenance:"v1.0-baseline", name:"Hindu Rasa Theory, Nine Rasas (Navarasa)",
     originator:"Bharata Muni", year:-200, tradition:"indig",
     count:9, categories:["Shringara (love/erotic)","Hasya (mirth/comic)","Karuna (compassion/pathetic)","Raudra (fury)","Vira (heroic)","Bhayanaka (terror)","Bibhatsa (disgust)","Adbhuta (wonder)","Shanta (peace)"],
     source_url:null,
@@ -3055,7 +3056,7 @@ const TAXONOMIES = [
     note:"8 original + 1 added; foundational South Asian aesthetic-emotional taxonomy."
   },
   {
-    id:"wuxing",provenance:"v1.0-baseline", name:"Chinese Wu Xing — Five Elements/Phases",
+    id:"wuxing",provenance:"v1.0-baseline", name:"Chinese Wu Xing, Five Elements/Phases",
     originator:"Chinese tradition", year:-300, tradition:"indig",
     count:5, categories:["Wood","Fire","Earth","Metal","Water"],
     source_url:null,
@@ -3063,7 +3064,7 @@ const TAXONOMIES = [
     note:"Five elements with generative and destructive cycles."
   },
   {
-    id:"bagua",provenance:"v1.0-baseline", name:"Bagua — Eight Trigrams",
+    id:"bagua",provenance:"v1.0-baseline", name:"Bagua, Eight Trigrams",
     originator:"Chinese tradition (Fuxi, King Wen)", year:-1000, tradition:"indig",
     count:8, categories:["Qian (Heaven)","Kun (Earth)","Zhen (Thunder)","Kan (Water)","Gen (Mountain)","Xun (Wind)","Li (Fire)","Dui (Lake)"],
     source_url:null,
@@ -3140,10 +3141,10 @@ const TAXONOMIES = [
     note:"Sedna sea-spirit and Raven trickster across Northern circumpolar cultures."
   },
   // ============================================================
-  // PASS 1 — A1 DEPTH PSYCHOLOGY DEEPENING
+  // PASS 1, A1 DEPTH PSYCHOLOGY DEEPENING
   // ============================================================
   {
-    id:"beebe-eight",provenance:"v1.0-baseline", name:"Beebe — Eight-Function/Eight-Archetype Model",
+    id:"beebe-eight",provenance:"v1.0-baseline", name:"Beebe, Eight-Function/Eight-Archetype Model",
     originator:"John Beebe", year:2004, tradition:"depth",
     count:8, categories:["Hero/Heroine","Good Parent (Mother/Father)","Puer/Puella Aeternus (Eternal Child)","Anima/Animus","Opposing Personality","Senex/Witch","Trickster","Demon/Daimon"],
     source_url:"https://www.aptinternational.org/psychological-type/evolving-the-eight-function-model/",
@@ -3151,7 +3152,7 @@ const TAXONOMIES = [
     note:"Maps eight Jungian function-attitudes onto archetypal positions; ego-syntonic four (Hero/Good Parent/Puer/Anima) and ego-dystonic shadow four (Opposing Personality/Senex/Trickster/Demon)."
   },
   {
-    id:"reich-character",provenance:"v1.0-baseline", name:"Reich — Character Armor Types",
+    id:"reich-character",provenance:"v1.0-baseline", name:"Reich, Character Armor Types",
     originator:"Wilhelm Reich", year:1933, tradition:"depth",
     count:6, categories:["Hysterical","Compulsive","Phallic-Narcissistic","Masochistic","Schizoid","Oral"],
     source_url:null,
@@ -3159,7 +3160,7 @@ const TAXONOMIES = [
     note:"Six character types tied to psychosexual fixations and somatic armoring; foundational for body-character typology. Companion seven-segment body-armor scheme (ocular/oral/cervical/thoracic/diaphragmatic/abdominal/pelvic)."
   },
   {
-    id:"lowen-bioenergetic",provenance:"v1.0-baseline", name:"Lowen — Bioenergetic Character Structures",
+    id:"lowen-bioenergetic",provenance:"v1.0-baseline", name:"Lowen, Bioenergetic Character Structures",
     originator:"Alexander Lowen", year:1958, tradition:"depth",
     count:5, categories:["Schizoid","Oral","Psychopathic","Masochistic","Rigid"],
     source_url:"https://iahip.org/page-1076503",
@@ -3167,7 +3168,7 @@ const TAXONOMIES = [
     note:"Five character structures keyed to developmental wounding stages and musculoskeletal patterns. Rigid is sometimes split into masculine Phallic-Narcissistic and feminine Hysterical subtypes."
   },
   {
-    id:"horney-trends",provenance:"v1.0-baseline", name:"Horney — Three Neurotic Trends",
+    id:"horney-trends",provenance:"v1.0-baseline", name:"Horney, Three Neurotic Trends",
     originator:"Karen Horney", year:1945, tradition:"depth",
     count:3, categories:["Compliant (Moving Toward people)","Aggressive (Moving Against people)","Detached (Moving Away from people)"],
     source_url:"https://pubmed.ncbi.nlm.nih.gov/34748442/",
@@ -3183,7 +3184,7 @@ const TAXONOMIES = [
     note:"Four adult attachment styles arranged on positive/negative self-model × positive/negative other-model axes. Bowlby foundation 1969; Ainsworth Strange Situation 1978 (3 infant types); Main/Solomon 1990 (added Disorganized)."
   },
   {
-    id:"kohut-selfobject",provenance:"v1.0-baseline", name:"Kohut — Selfobject Transferences",
+    id:"kohut-selfobject",provenance:"v1.0-baseline", name:"Kohut, Selfobject Transferences",
     originator:"Heinz Kohut", year:1971, tradition:"depth",
     count:3, categories:["Mirroring","Idealizing","Twinship/Alter-Ego"],
     source_url:"https://www.ebsco.com/research-starters/health-and-medicine/self-psychology",
@@ -3199,7 +3200,7 @@ const TAXONOMIES = [
     note:"Klein's two developmental positions, Fairbairn's tripartite endopsychic structure, and Winnicott's True/False Self dyad combined as foundational object-relations character schema."
   },
   {
-    id:"erikson-stages",provenance:"v1.0-baseline", name:"Erikson — Eight Psychosocial Stages",
+    id:"erikson-stages",provenance:"v1.0-baseline", name:"Erikson, Eight Psychosocial Stages",
     originator:"Erik Erikson", year:1950, tradition:"depth",
     count:8, categories:["Trust vs. Mistrust → Hope","Autonomy vs. Shame/Doubt → Will","Initiative vs. Guilt → Purpose","Industry vs. Inferiority → Competence","Identity vs. Role Confusion → Fidelity","Intimacy vs. Isolation → Love","Generativity vs. Stagnation → Care","Ego Integrity vs. Despair → Wisdom"],
     source_url:"https://www.psychologynoteshq.com/erikson-stages/",
@@ -3207,7 +3208,7 @@ const TAXONOMIES = [
     note:"Eight life-stage crises each yielding an archetypal virtue. Joan Erikson posthumously added a ninth (gerotranscendence) stage."
   },
   {
-    id:"levinson-eras",provenance:"v1.0-baseline", name:"Levinson — Life-Structure Eras",
+    id:"levinson-eras",provenance:"v1.0-baseline", name:"Levinson, Life-Structure Eras",
     originator:"Daniel J. Levinson", year:1978, tradition:"depth",
     count:4, categories:["Pre-Adulthood","Early Adulthood","Middle Adulthood","Late Adulthood","Early Adult Transition","Age 30 Transition","Mid-Life Transition","Age 50 Transition","Late Adult Transition","The Dream","The Mentor","Young/Old polarity"],
     source_url:"https://www.psychologydiscussion.net/theory/levinsons-theory/levinsons-theory-stages-of-adult-life-human-development-psychology/13594",
@@ -3215,7 +3216,7 @@ const TAXONOMIES = [
     note:"Four ~25-year eras connected by transitions, with archetypal pair The Dream + The Mentor as core early-adult components."
   },
   {
-    id:"henderson-cultural",provenance:"v1.0-baseline", name:"Henderson — Cultural Attitudes",
+    id:"henderson-cultural",provenance:"v1.0-baseline", name:"Henderson, Cultural Attitudes",
     originator:"Joseph L. Henderson", year:1984, tradition:"depth",
     count:4, categories:["Social","Religious","Aesthetic","Philosophic","Psychological (proposed fifth, subsuming)"],
     source_url:"https://oac.cdlib.org/findaid/ark:%2F13030%2Fc8pr81cp",
@@ -3223,7 +3224,7 @@ const TAXONOMIES = [
     note:"Quaternary Jungian-cultural-attitude taxonomy explicitly linked to Jung's four functions and Lévi-Strauss's structural anthropology."
   },
   {
-    id:"stevens-evolutionary",provenance:"v1.0-baseline", name:"Stevens — Evolutionary Archetypes",
+    id:"stevens-evolutionary",provenance:"v1.0-baseline", name:"Stevens, Evolutionary Archetypes",
     originator:"Anthony Stevens", year:1982, tradition:"depth",
     count:"open", categories:["Mother","Father","Family","Initiation","Masculine/Feminine","Shadow-as-Enemy","life-cycle stages"],
     source_url:"https://www.routledge.com/Archetype-A-Natural-History-of-the-Self/Stevens/p/book/9780415052207",
@@ -3231,7 +3232,7 @@ const TAXONOMIES = [
     note:"Reorganizes Jung's archetypes around the human life cycle as ethological innate releasing mechanisms. Companion Evolutionary Psychiatry (with John Price, 1996/2002)."
   },
   {
-    id:"samuels-schools",provenance:"v1.0-baseline", name:"Samuels — Schools of Post-Jungian Analysis",
+    id:"samuels-schools",provenance:"v1.0-baseline", name:"Samuels, Schools of Post-Jungian Analysis",
     originator:"Andrew Samuels", year:1985, tradition:"depth",
     count:5, categories:["Classical","Developmental","Archetypal","Fundamentalist (2016 update)","Psychoanalytic-Merger (2016 update)"],
     source_url:"https://www.andrewsamuels.com/will-the-post-jungians-survive/",
@@ -3239,7 +3240,7 @@ const TAXONOMIES = [
     note:"Meta-taxonomy of post-Jungian practice. Originally three schools; 2016 update expands to five-position spectrum."
   },
   {
-    id:"stein-cartographic",provenance:"v1.0-baseline", name:"Stein — Cartographic Jungian Map",
+    id:"stein-cartographic",provenance:"v1.0-baseline", name:"Stein, Cartographic Jungian Map",
     originator:"Murray Stein", year:1998, tradition:"depth",
     count:9, categories:["Ego-Consciousness","Complexes","Libido/Psychic Energy","Instincts-Archetypes-Collective Unconscious","Persona-and-Shadow","Anima-Animus","Self","Individuation","Synchronicity"],
     source_url:"https://archive.org/details/jungsmapofsoulin00stei",
@@ -3247,7 +3248,7 @@ const TAXONOMIES = [
     note:"Nine-layer organized re-presentation of Jung's psyche; de facto contemporary introductory taxonomy of Jungian categories."
   },
   {
-    id:"young-eisendrath",provenance:"v1.0-baseline", name:"Young-Eisendrath — Feminist Jungian Gender Archetypes",
+    id:"young-eisendrath",provenance:"v1.0-baseline", name:"Young-Eisendrath, Feminist Jungian Gender Archetypes",
     originator:"Polly Young-Eisendrath", year:1984, tradition:"depth",
     count:"open", categories:["Great Mother","Terrible Mother","Negative Mother Complex","Hag","Hero","Lady Ragnell (sovereignty figure)"],
     source_url:"https://healingintheblur.com/2018/11/18/hags-and-heroes-a-feminist-approach-to-jungian-psychotherapy-with-couples-1984-by-polly-young-eisendrath-source-quotes/",
@@ -3255,7 +3256,7 @@ const TAXONOMIES = [
     note:"Re-readings of canonical Jungian gender archetypes treating masculine/feminine as gender-neutral archetypal domains rather than gender-essential ones."
   },
   {
-    id:"baring-cashford",provenance:"v1.0-baseline", name:"Baring & Cashford — Goddess-Image Sequence",
+    id:"baring-cashford",provenance:"v1.0-baseline", name:"Baring & Cashford, Goddess-Image Sequence",
     originator:"Anne Baring and Jules Cashford", year:1991, tradition:"depth",
     count:"open", categories:["Palaeolithic Mother","Neolithic Earth Goddess","Bronze-Age Goddesses (Inanna, Isis, Cybele, Demeter)","Iron-Age Suppression","Sophia/Virgin Mary"],
     source_url:"https://www.anne-baring.com/anbar03_myth-gdss.htm",
@@ -3264,10 +3265,10 @@ const TAXONOMIES = [
   },
 
   // ============================================================
-  // PASS 1 — A2 COMPARATIVE MYTHOLOGY DEEPENING
+  // PASS 1, A2 COMPARATIVE MYTHOLOGY DEEPENING
   // ============================================================
   {
-    id:"campbell-masks",provenance:"v1.0-baseline", name:"Campbell — The Masks of God",
+    id:"campbell-masks",provenance:"v1.0-baseline", name:"Campbell, The Masks of God",
     originator:"Joseph Campbell", year:1959, year_end:1968, tradition:"myth",
     count:4, categories:["Primitive Mythology","Oriental Mythology","Occidental Mythology","Creative Mythology"],
     source_url:"https://thalira.com/blogs/quantum-codex/masks-of-god-joseph-campbell",
@@ -3275,7 +3276,7 @@ const TAXONOMIES = [
     note:"Four-volume taxonomy of mythological worldviews. Each volume articulates internal character archetypes. Under-used companion to Hero with a Thousand Faces."
   },
   {
-    id:"campbell-goddesses",provenance:"v1.0-baseline", name:"Campbell — Goddesses & Pathways to Bliss",
+    id:"campbell-goddesses",provenance:"v1.0-baseline", name:"Campbell, Goddesses & Pathways to Bliss",
     originator:"Joseph Campbell", year:2004, year_end:2013, tradition:"myth",
     count:"open", categories:["feminine divine roles","follow-your-bliss monomyth"],
     source_url:null,
@@ -3283,7 +3284,7 @@ const TAXONOMIES = [
     note:"Posthumous Campbell volumes with comparative-mythology taxonomy of feminine divine roles and compressed monomyth around individual myth-making."
   },
   {
-    id:"graves-triple-goddess",provenance:"v1.0-baseline", name:"Graves — Triple Goddess",
+    id:"graves-triple-goddess",provenance:"v1.0-baseline", name:"Graves, Triple Goddess",
     originator:"Robert Graves", year:1948, tradition:"myth",
     count:9, categories:["Maiden","Mother","Crone","Maiden/Nymph/Mother (alt)","Birth/Love/Death (alt)","Bride/Mother/Layer-Out (alt)","White Goddess (muse)","God of the Waxing Year","God of the Waning Year","Nymph (split from Maiden/Nymph/Mother triad per A20 2026-05-04)","Birth (split from Birth/Love/Death triad per A20 2026-05-04)","Love (split from Birth/Love/Death triad per A20 2026-05-04)","Death (split from Birth/Love/Death triad per A20 2026-05-04)","Bride (split from Bride/Mother/Layer-Out triad per A20 2026-05-04)","Layer-Out (split from Bride/Mother/Layer-Out triad per A20 2026-05-04)"],
     source_url:"https://naturalisticpaganism.org/2015/07/19/beyond-female-role-models-the-triple-goddess-as-nature-by-john-halstead/",
@@ -3292,7 +3293,7 @@ const TAXONOMIES = [
     disputed:"widely regarded by classicists and Celticists as pseudohistorical; see Hutton, Triumph of the Moon (1999)"
   },
   {
-    id:"zimmer-indian",provenance:"v1.0-baseline", name:"Zimmer — Indian Symbol-Archetypes",
+    id:"zimmer-indian",provenance:"v1.0-baseline", name:"Zimmer, Indian Symbol-Archetypes",
     originator:"Heinrich Zimmer", year:1946, tradition:"myth",
     count:"open", categories:["Parade of Ants","Wheel of Rebirth","Vishnu's Maya","Cosmic Serpent (Shesha/Ananta)","Garuda","Lotus","Elephant","Shiva-Shakti","Nataraja (Cosmic Dancer)","Kirtimukha (Face of Glory)","Tripura-destroyer","Goddess and Island of Jewels"],
     source_url:"https://www.si.edu/object/myths-and-symbols-indian-art-and-civilization-heinrich-zimmer-edited-joseph-campbell:siris_sil_18199",
@@ -3300,7 +3301,7 @@ const TAXONOMIES = [
     note:"Symbolic-archetype taxonomy with named figures and motifs from Indian iconography."
   },
   {
-    id:"puhvel-ie",provenance:"v1.0-baseline", name:"Puhvel — Comparative Indo-European Mythography",
+    id:"puhvel-ie",provenance:"v1.0-baseline", name:"Puhvel, Comparative Indo-European Mythography",
     originator:"Jaan Puhvel", year:1987, tradition:"myth",
     count:"open", categories:["God-and-Warrior","King-and-Virgin","Fire-and-Water","Twin Founders","Three-Headed Adversary"],
     source_url:null,
@@ -3308,7 +3309,7 @@ const TAXONOMIES = [
     note:"Tradition-by-tradition comparative taxonomy crossed with recurrent archetypal pairings; extends Dumézil's trifunctional hypothesis with linguistic-archaeological evidence."
   },
   {
-    id:"rees-celtic",provenance:"v1.0-baseline", name:"Rees & Rees — Celtic Cycle and Story-Class Taxonomy",
+    id:"rees-celtic",provenance:"v1.0-baseline", name:"Rees & Rees, Celtic Cycle and Story-Class Taxonomy",
     originator:"Alwyn & Brinley Rees", year:1961, tradition:"myth",
     count:"open", categories:["Mythological Cycle","Ulster Cycle","Fenian/Finn Cycle","Kings Cycle","Mabinogi branches","Conceptions and Births","Wooings","Adventures (Echtrai)","Voyages (Immrama)","Violent Deaths (Aitheda/Aided)","Visions (Aislingi)","Elopements","Cattle-Raids (Táin)","Feasts","Sieges"],
     source_url:"https://www.amazon.com/Celtic-Heritage-Alwyn-Rees/dp/0500270392",
@@ -3316,7 +3317,7 @@ const TAXONOMIES = [
     note:"Two-axis classification: cycles + story-classes drawn from medieval Irish tale-lists. Canonical Celtic-mythology character/story taxonomy."
   },
   {
-    id:"lincoln-myth",provenance:"v1.0-baseline", name:"Lincoln — Myth Criticism Categories",
+    id:"lincoln-myth",provenance:"v1.0-baseline", name:"Lincoln, Myth Criticism Categories",
     originator:"Bruce Lincoln", year:1999, tradition:"myth",
     count:"open", categories:["myth-as-ideology","mythos/logos polarity","scholarship-as-myth-with-footnotes","cosmogonic body-cosmos myths"],
     source_url:"https://press.uchicago.edu/ucp/books/book/chicago/T/bo3637666.html",
@@ -3324,7 +3325,7 @@ const TAXONOMIES = [
     note:"Meta-taxonomy of how scholars have categorized myth; pairs with Lincoln's Indo-European cosmogonic body-cosmos classification."
   },
   {
-    id:"doniger-splitting",provenance:"v1.0-baseline", name:"Doniger — Mythological Doubling/Splitting",
+    id:"doniger-splitting",provenance:"v1.0-baseline", name:"Doniger, Mythological Doubling/Splitting",
     originator:"Wendy Doniger", year:1999, tradition:"myth",
     count:6, categories:["Shadow Sita / Phantom Helen","Indra-as-Gautama / Zeus-as-Amphitryon","Nala-Damayanti / Odysseus-Penelope","Mariatale-Renuka / Scylla-Charybdis","Transposed Male Heads / Male Androgynes","Bisexual Transformations"],
     source_url:"https://press.uchicago.edu/ucp/books/book/chicago/S/bo3619095.html",
@@ -3332,7 +3333,7 @@ const TAXONOMIES = [
     note:"Six-chapter character taxonomy of doubled/split mythic figures; argues gender is the deeper structuring axis than culture."
   },
   {
-    id:"harmon-circle",provenance:"v1.0-baseline", name:"Harmon — Story Circle",
+    id:"harmon-circle",provenance:"v1.0-baseline", name:"Harmon, Story Circle",
     originator:"Dan Harmon", year:2000, tradition:"drama",
     count:8, categories:["You (zone of comfort)","Need","Go (cross threshold)","Search (adapt)","Find","Take","Return","Change"],
     source_url:"https://www.studiobinder.com/blog/dan-harmon-story-circle/",
@@ -3340,7 +3341,7 @@ const TAXONOMIES = [
     note:"Eight beats arranged as a clockwise circle; explicitly derived from Campbell's monomyth via Vogler. Used in Community, Rick and Morty."
   },
   {
-    id:"sanderson-sliders",provenance:"v1.0-baseline", name:"Sanderson — Three Character Sliders",
+    id:"sanderson-sliders",provenance:"v1.0-baseline", name:"Sanderson, Three Character Sliders",
     originator:"Brandon Sanderson", year:2010, tradition:"drama",
     count:3, categories:["Sympathy/Likeability","Competence","Proactivity"],
     source_url:"https://stormwritingschool.com/character-mixing-board/",
@@ -3348,7 +3349,7 @@ const TAXONOMIES = [
     note:"Three slider dimensions for character engagement. Companion: Three Laws of Magic (clarity-permits-resolution; limitations > powers; expand before adding new) plus Zeroth Law ('err on the side of awesome')."
   },
   {
-    id:"weiland-arcs",provenance:"v1.0-baseline", name:"Weiland — Five Character Arcs",
+    id:"weiland-arcs",provenance:"v1.0-baseline", name:"Weiland, Five Character Arcs",
     originator:"K.M. Weiland", year:2016, tradition:"drama",
     count:5, categories:["Positive Change Arc","Flat Arc","Disillusionment Arc","Fall Arc","Corruption Arc"],
     source_url:"https://www.helpingwritersbecomeauthors.com/learn-5-types-of-character-arc-at-a-glance/",
@@ -3356,7 +3357,7 @@ const TAXONOMIES = [
     note:"Two heroic (truth-driven) arcs and three negative (lie-driven) arcs built on the 'Lie the Character Believes' vs. Truth thematic engine."
   },
   {
-    id:"yorke-fiveact",provenance:"v1.0-baseline", name:"Yorke — Five-Act Journey Into Story",
+    id:"yorke-fiveact",provenance:"v1.0-baseline", name:"Yorke, Five-Act Journey Into Story",
     originator:"John Yorke", year:2013, tradition:"drama",
     count:5, categories:["No Knowledge / status quo","Awakening / inciting incident","Doubt → Midpoint reversal","Worst Point","Resolution / new equilibrium"],
     source_url:"https://www.barnesandnoble.com/w/into-the-woods-john-yorke/1115204180",
@@ -3364,7 +3365,7 @@ const TAXONOMIES = [
     note:"Five acts framed as knowledge-acquisition journey with fractal architecture (each scene contains the same five-act shape)."
   },
   {
-    id:"weiland-archetypal",provenance:"v1.0-baseline", name:"Weiland — Six-Archetype Life-Cycle Arcs",
+    id:"weiland-archetypal",provenance:"v1.0-baseline", name:"Weiland, Six-Archetype Life-Cycle Arcs",
     originator:"K.M. Weiland", year:2022, tradition:"drama",
     count:6, categories:["Maiden","Hero","Queen","King","Crone","Mage"],
     source_url:"https://www.helpingwritersbecomeauthors.com/write-character-arcs/",
@@ -3373,10 +3374,10 @@ const TAXONOMIES = [
   },
 
   // ============================================================
-  // PASS 1 — A3 FOLKLORE STUDIES DEEPENING
+  // PASS 1, A3 FOLKLORE STUDIES DEEPENING
   // ============================================================
   {
-    id:"brunvand-urban",provenance:"v1.0-baseline", name:"Brunvand — Encyclopedia of Urban Legends",
+    id:"brunvand-urban",provenance:"v1.0-baseline", name:"Brunvand, Encyclopedia of Urban Legends",
     originator:"Jan Harold Brunvand", year:2001, tradition:"folk",
     count:"~300", categories:["The Vanishing Hitchhiker","The Choking Doberman","The Mexican Pet","The Kidney Heist","The Roommate's Death","The Killer in the Backseat","The Kentucky Fried Rat","Craig Shergold","Hoaxes","Photographic Urban Legends","Disaster Rumors","Memorate","Performance","Ostension","FOAFtale"],
     source_url:"https://www.goodreads.com/book/show/296558.Encyclopedia_of_Urban_Legends",
@@ -3384,7 +3385,7 @@ const TAXONOMIES = [
     note:"~300+ named legend types plus theme entries (Hoaxes, Photographic, Disaster Rumors) and method entries (Memorate, Performance, Ostension, FOAFtale)."
   },
   {
-    id:"klintberg-swedish",provenance:"v1.0-baseline", name:"af Klintberg — Types of the Swedish Folk Legend",
+    id:"klintberg-swedish",provenance:"v1.0-baseline", name:"af Klintberg, Types of the Swedish Folk Legend",
     originator:"Bengt af Klintberg", year:2010, tradition:"folk",
     count:"1800+", categories:["trolls","ghosts","witches","fate","treasure"],
     source_url:null,
@@ -3392,7 +3393,7 @@ const TAXONOMIES = [
     note:"1800+ legend types organized by section. Companion popular-canonical urban-legend volumes Råttan i pizzan (1986) and Den stulna njuren (1994); Swedish term 'klintbergare' derives from his work."
   },
   {
-    id:"abrahams-aa",provenance:"v1.0-baseline", name:"Abrahams — African American Folktale Character Types",
+    id:"abrahams-aa",provenance:"v1.0-baseline", name:"Abrahams, African American Folktale Character Types",
     originator:"Roger D. Abrahams", year:1985, tradition:"folk",
     count:"open", categories:["Trickster (Brer Rabbit, Anansi, Buh Nansi)","Why/How (etiological) stories","Moral example stories","Old Master / John-and-Old-Master stories","Signifying Monkey","Stagolee","Shine","the toast","the dozens"],
     source_url:"https://www.amazon.com/African-American-Folktales-Traditions-Pantheon/dp/0375705392",
@@ -3400,7 +3401,7 @@ const TAXONOMIES = [
     note:"Tales grouped into Trickster/Why-How/Moral example/Old Master categories. Earlier Deep Down in the Jungle classifies Black urban-Philadelphia performance genres with named character roles."
   },
   {
-    id:"degh-storyteller",provenance:"v1.0-baseline", name:"Dégh — Storyteller Typology",
+    id:"degh-storyteller",provenance:"v1.0-baseline", name:"Dégh, Storyteller Typology",
     originator:"Linda Dégh", year:1969, tradition:"folk",
     count:"open", categories:["active bearers of tradition","passive bearers","specialist tale-tellers","anecdotists","legend-tellers","joke-tellers","'true' tale-teller","ostension","pseudo-ostension","quasi-ostension","false ostension","proto-ostension"],
     source_url:null,
@@ -3408,7 +3409,7 @@ const TAXONOMIES = [
     note:"Active vs. passive bearer distinction plus differentiation of tale-teller types. Five forms of ostension in legend performance with Andrew Vázsonyi (1983)."
   },
   {
-    id:"glassie-ballymenone",provenance:"v1.0-baseline", name:"Glassie — Ballymenone Verbal-Art Repertoire",
+    id:"glassie-ballymenone",provenance:"v1.0-baseline", name:"Glassie, Ballymenone Verbal-Art Repertoire",
     originator:"Henry Glassie", year:1982, tradition:"folk",
     count:7, categories:["historical narrative ('the bid')","pant (humorous tale)","ceili (storytelling event)","ballad","lament","gossip","prayer","Historian","Saint","Wit"],
     source_url:"https://www.amazon.com/Stars-Ballymenone-New-Henry-Glassie-ebook/dp/B01LCCIZ8I",
@@ -3416,7 +3417,7 @@ const TAXONOMIES = [
     note:"Community-internal genre taxonomy of verbal art anchored in named storyteller-archetypes embodied by named individuals (Hugh Nolan as Historian; Peter Flanagan as Musician-Saint)."
   },
   {
-    id:"holbek-symbolic",provenance:"v1.0-baseline", name:"Holbek — Symbolic Interpretation Framework",
+    id:"holbek-symbolic",provenance:"v1.0-baseline", name:"Holbek, Symbolic Interpretation Framework",
     originator:"Bengt Holbek", year:1987, tradition:"folk",
     count:7, categories:["seven rules for fairy-tale symbols","low/high (class)","male/female","young/adult","marriage as terminal event","protagonist-pair as mediator"],
     source_url:null,
@@ -3424,7 +3425,7 @@ const TAXONOMIES = [
     note:"Seven-rule schema for decoding fairy-tale symbols; defines fairy tale by terminal marriage event; classifies tale-roles via three structural oppositions."
   },
   {
-    id:"ting-chinese",provenance:"v1.0-baseline", name:"Ting — Type Index of Chinese Folktales",
+    id:"ting-chinese",provenance:"v1.0-baseline", name:"Ting, Type Index of Chinese Folktales",
     originator:"Nai-Tung Ting", year:1978, tradition:"folk",
     count:"~2000", categories:null,
     source_url:"https://www.amazon.com/type-index-Chinese-folktales-communications/dp/9514103246",
@@ -3432,7 +3433,7 @@ const TAXONOMIES = [
     note:"ATU-aligned Chinese tale-type catalogue covering oral tradition and major non-religious classical literature. Companion: Wolfram Eberhard's Typen chinesischer Volksmärchen (FFC 120, 1937)."
   },
   {
-    id:"choi-korean",provenance:"v1.0-baseline", name:"Choi — Type Index of Korean Folktales",
+    id:"choi-korean",provenance:"v1.0-baseline", name:"Choi, Type Index of Korean Folktales",
     originator:"In-Hak Choi", year:1979, tradition:"folk",
     count:"~700+", categories:null,
     source_url:null,
@@ -3440,7 +3441,7 @@ const TAXONOMIES = [
     note:"ATU-aligned classification of Korean folktale types with Korean-specific oikotypes flagged."
   },
   {
-    id:"komatsu-yokai",provenance:"v1.0-baseline", name:"Komatsu — Yokai Taxonomy",
+    id:"komatsu-yokai",provenance:"v1.0-baseline", name:"Komatsu, Yokai Taxonomy",
     originator:"Komatsu Kazuhiko", year:2017, tradition:"folk",
     count:"~35000 entries (database)", categories:["yūrei","obake","bakemono","oni","tengu","kappa","yamauba","tsukumogami","ijin"],
     source_url:"https://web-japan.org/trends/09_culture/pop101104.html",
@@ -3449,10 +3450,10 @@ const TAXONOMIES = [
   },
 
   // ============================================================
-  // PASS 2 — A4 LITERARY CRITICISM DEEPENING
+  // PASS 2, A4 LITERARY CRITICISM DEEPENING
   // ============================================================
   {
-    id:"todorov-poetics",provenance:"v1.0-baseline", name:"Todorov — Grammaire du Décaméron / Poetics of Prose",
+    id:"todorov-poetics",provenance:"v1.0-baseline", name:"Todorov, Grammaire du Décaméron / Poetics of Prose",
     originator:"Tzvetan Todorov", year:1969, tradition:"lit",
     count:"open", categories:["subject","predicate","attribute","whodunit","thriller","suspense novel"],
     source_url:null,
@@ -3460,7 +3461,7 @@ const TAXONOMIES = [
     note:"Narrative-grammar character-functions extracted from Boccaccio. Companion three-subtype detective-fiction taxonomy."
   },
   {
-    id:"barthes-mythologies",provenance:"v1.0-baseline", name:"Barthes — Mythologies bourgeois mythologemes",
+    id:"barthes-mythologies",provenance:"v1.0-baseline", name:"Barthes, Mythologies bourgeois mythologemes",
     originator:"Roland Barthes", year:1957, tradition:"crit",
     count:"open", categories:["wrestler","striptease","Einstein's brain","wine","steak and chips","plastic","the Tour de France"],
     source_url:null,
@@ -3468,7 +3469,7 @@ const TAXONOMIES = [
     note:"Catalog of bourgeois sign-types as mid-century French cultural archetypes."
   },
   {
-    id:"frye-greatcode",provenance:"v1.0-baseline", name:"Frye — Great Code Biblical Typology",
+    id:"frye-greatcode",provenance:"v1.0-baseline", name:"Frye, Great Code Biblical Typology",
     originator:"Northrop Frye", year:1982, tradition:"lit",
     count:7, categories:["creation","revolution","law","wisdom","prophecy","gospel","apocalypse"],
     source_url:"https://www.amazon.com/Great-Code-Bible-Literature/dp/0156027801",
@@ -3476,7 +3477,7 @@ const TAXONOMIES = [
     note:"Seven phases of biblical revelation as archetypal sequence."
   },
   {
-    id:"frye-words",provenance:"v1.0-baseline", name:"Frye — Words With Power Four Phases",
+    id:"frye-words",provenance:"v1.0-baseline", name:"Frye, Words With Power Four Phases",
     originator:"Northrop Frye", year:1990, tradition:"lit",
     count:4, categories:["mountain","garden","cave","furnace"],
     source_url:null,
@@ -3484,7 +3485,7 @@ const TAXONOMIES = [
     note:"Four primary concerns / variations of imagery as archetypal poetic structures."
   },
   {
-    id:"propp-historical",provenance:"v1.0-baseline", name:"Propp — Historical Roots of the Wonder Tale",
+    id:"propp-historical",provenance:"v1.0-baseline", name:"Propp, Historical Roots of the Wonder Tale",
     originator:"Vladimir Propp", year:1946, tradition:"folk",
     count:"open", categories:["initiate","donor-as-ancestor","helper-animal-as-totem"],
     source_url:null,
@@ -3492,7 +3493,7 @@ const TAXONOMIES = [
     note:"Ritual-origin character types extending Morphology of the Folktale into anthropological substrate."
   },
   {
-    id:"ong-orality",provenance:"v1.0-baseline", name:"Ong — Orality vs. Literacy Character Types",
+    id:"ong-orality",provenance:"v1.0-baseline", name:"Ong, Orality vs. Literacy Character Types",
     originator:"Walter J. Ong", year:1982, tradition:"lit",
     count:"open", categories:["heroic/agonistic oral types","introspective literate types"],
     source_url:null,
@@ -3500,7 +3501,7 @@ const TAXONOMIES = [
     note:"Character-type contrast emerging from oral vs. chirographic/print epistemologies."
   },
   {
-    id:"bakhtin-polyphonic",provenance:"v1.0-baseline", name:"Bakhtin — Polyphonic Novel Character Types",
+    id:"bakhtin-polyphonic",provenance:"v1.0-baseline", name:"Bakhtin, Polyphonic Novel Character Types",
     originator:"Mikhail Bakhtin", year:1929, tradition:"lit",
     count:4, categories:["Hero of Idea","Double","Underground Man","Idiot"],
     source_url:null,
@@ -3508,7 +3509,7 @@ const TAXONOMIES = [
     note:"Dostoevskian polyphonic character types distinct from carnival typology already in catalog."
   },
   {
-    id:"watt-novel",provenance:"v1.0-baseline", name:"Watt — Rise of the Novel Character Types",
+    id:"watt-novel",provenance:"v1.0-baseline", name:"Watt, Rise of the Novel Character Types",
     originator:"Ian Watt", year:1957, tradition:"lit",
     count:"open", categories:["formal-realist individualist protagonist","particular person (vs. universal type)"],
     source_url:"https://www.ucpress.edu/books/the-rise-of-the-novel-updated-edition/paper",
@@ -3516,7 +3517,7 @@ const TAXONOMIES = [
     note:"Formal-realist individualist protagonist replacing universal type; foundational 18th-century novel-character analysis."
   },
   {
-    id:"chatman-story",provenance:"v1.0-baseline", name:"Chatman — Story and Discourse Character Classes",
+    id:"chatman-story",provenance:"v1.0-baseline", name:"Chatman, Story and Discourse Character Classes",
     originator:"Seymour Chatman", year:1978, tradition:"lit",
     count:"open", categories:["open-trait characters","closed-trait characters","kernel events","satellite events"],
     source_url:null,
@@ -3524,7 +3525,7 @@ const TAXONOMIES = [
     note:"Open vs. closed trait characters; kernel vs. satellite events as narratological character-event taxonomy."
   },
   {
-    id:"genette-paratexts",provenance:"v1.0-baseline", name:"Genette — Paratexts Taxonomy",
+    id:"genette-paratexts",provenance:"v1.0-baseline", name:"Genette, Paratexts Taxonomy",
     originator:"Gérard Genette", year:1987, tradition:"lit",
     count:"open", categories:["peritext","epitext","publisher's peritext","names","titles","prefaces","intertitles","notes","public epitext","private epitext"],
     source_url:"https://www.almendron.com/tribuna/wp-content/uploads/2017/06/genette_gerard_paratexts_thresholds_of_interpretation.pdf",
@@ -3532,7 +3533,7 @@ const TAXONOMIES = [
     note:"Peritext vs. epitext typology of textual thresholds; companion to Narrative Discourse already in catalog."
   },
   {
-    id:"white-metahistory",provenance:"v1.0-baseline", name:"White — Metahistory Tropes & Emplotments",
+    id:"white-metahistory",provenance:"v1.0-baseline", name:"White, Metahistory Tropes & Emplotments",
     originator:"Hayden White", year:1973, tradition:"crit",
     count:16, categories:["Metaphor","Metonymy","Synecdoche","Irony","Romance","Tragedy","Comedy","Satire","Formist","Mechanistic","Organicist","Contextualist","Anarchism","Radicalism","Conservatism","Liberalism"],
     source_url:null,
@@ -3540,7 +3541,7 @@ const TAXONOMIES = [
     note:"Four tropes × four emplotments × four argument modes × four ideologies. Foundational historiographic-archetype taxonomy."
   },
   {
-    id:"bloom-anxiety",provenance:"v1.0-baseline", name:"Bloom — Six Revisionary Ratios",
+    id:"bloom-anxiety",provenance:"v1.0-baseline", name:"Bloom, Six Revisionary Ratios",
     originator:"Harold Bloom", year:1973, tradition:"lit",
     count:6, categories:["Clinamen","Tessera","Kenosis","Daemonization","Askesis","Apophrades"],
     source_url:"https://theconversation.com/the-anxiety-of-influence-harold-blooms-not-so-influential-idea-at-50-197902",
@@ -3548,7 +3549,7 @@ const TAXONOMIES = [
     note:"Six modes by which poets misread predecessors. Influential meta-archetypal scheme of poetic relationship."
   },
   {
-    id:"clover-final-girl",provenance:"v1.0-baseline", name:"Clover — Final Girl & Horror Character Types",
+    id:"clover-final-girl",provenance:"v1.0-baseline", name:"Clover, Final Girl & Horror Character Types",
     originator:"Carol J. Clover", year:1992, tradition:"crit",
     count:4, categories:["Final Girl","killer (psychosexual)","terrible place","victim-hero"],
     source_url:"https://muse.jhu.edu/book/64483",
@@ -3556,7 +3557,7 @@ const TAXONOMIES = [
     note:"Foundational horror-film character taxonomy; introduces Final Girl as critical category."
   },
   {
-    id:"creed-monstrous",provenance:"v1.0-baseline", name:"Creed — Monstrous-Feminine Seven Faces",
+    id:"creed-monstrous",provenance:"v1.0-baseline", name:"Creed, Monstrous-Feminine Seven Faces",
     originator:"Barbara Creed", year:1993, tradition:"crit",
     count:7, categories:["archaic mother","monstrous womb","vampire","witch","possessed body","monstrous mother","castrator"],
     source_url:"https://www.amazon.com/Monstrous-Feminine-Feminism-Psychoanalysis-Popular-Fictions/dp/0415052599",
@@ -3564,7 +3565,7 @@ const TAXONOMIES = [
     note:"Seven-face Kristeva-derived horror-feminist taxonomy of monstrous-feminine figures."
   },
   {
-    id:"freud-uncanny",provenance:"v1.0-baseline", name:"Freud — The Uncanny",
+    id:"freud-uncanny",provenance:"v1.0-baseline", name:"Freud, The Uncanny",
     originator:"Sigmund Freud", year:1919, tradition:"crit",
     count:"open", categories:["the Uncanny (das Unheimliche)","double","automaton","living statue","return of the repressed"],
     source_url:null,
@@ -3572,7 +3573,7 @@ const TAXONOMIES = [
     note:"Foundational psychoanalytic-aesthetic figure; widely cited in horror, Gothic, and posthuman criticism."
   },
   {
-    id:"regis-romance",provenance:"v1.0-baseline", name:"Regis — Eight Essential Elements of the Romance Novel",
+    id:"regis-romance",provenance:"v1.0-baseline", name:"Regis, Eight Essential Elements of the Romance Novel",
     originator:"Pamela Regis", year:2003, tradition:"lit",
     count:8, categories:["Society Defined","Meeting","Barrier","Attraction","Declaration","Point of Ritual Death","Recognition","Betrothal"],
     source_url:"https://www.upenn.edu/pennpress/book/1566.html",
@@ -3580,7 +3581,7 @@ const TAXONOMIES = [
     note:"Eight narrative beats as constitutive elements of the romance novel form."
   },
   {
-    id:"krentz-romance",provenance:"v1.0-baseline", name:"Krentz — Dangerous Men and Adventurous Women",
+    id:"krentz-romance",provenance:"v1.0-baseline", name:"Krentz, Dangerous Men and Adventurous Women",
     originator:"Jayne Ann Krentz (ed.)", year:1992, tradition:"lit",
     count:"open", categories:["dangerous-hero archetype","adventurous-heroine archetype","alpha hero","beta hero"],
     source_url:null,
@@ -3588,7 +3589,7 @@ const TAXONOMIES = [
     note:"Romance-hero archetype essays by working novelists; foundational practitioner-criticism of genre archetypes."
   },
   {
-    id:"heinlein-three",provenance:"v1.0-baseline", name:"Heinlein — Three Plots",
+    id:"heinlein-three",provenance:"v1.0-baseline", name:"Heinlein, Three Plots",
     originator:"Robert A. Heinlein", year:1947, tradition:"lit",
     count:3, categories:["Boy-Meets-Girl","Little Tailor","The Man Who Learned Better"],
     source_url:null,
@@ -3596,7 +3597,7 @@ const TAXONOMIES = [
     note:"Practitioner SF taxonomy of fundamental plot types; foundational craft-document for genre."
   },
   {
-    id:"kristeva-abjection",provenance:"v1.0-baseline", name:"Kristeva — Three Forms of Abjection",
+    id:"kristeva-abjection",provenance:"v1.0-baseline", name:"Kristeva, Three Forms of Abjection",
     originator:"Julia Kristeva", year:1980, tradition:"crit",
     count:3, categories:["food","bodily waste / corpse","signs of sexual difference"],
     source_url:null,
@@ -3604,7 +3605,7 @@ const TAXONOMIES = [
     note:"Three ways the abject manifests; foundational for Creed's monstrous-feminine and post-structural body theory."
   },
   {
-    id:"kristeva-chora",provenance:"v1.0-baseline", name:"Kristeva — Semiotic Chora",
+    id:"kristeva-chora",provenance:"v1.0-baseline", name:"Kristeva, Semiotic Chora",
     originator:"Julia Kristeva", year:1974, tradition:"crit",
     count:1, categories:["chora (pre-symbolic register)"],
     source_url:null,
@@ -3612,7 +3613,7 @@ const TAXONOMIES = [
     note:"Pre-symbolic register and figure as locus of poetic language; companion to Lacan's symbolic order."
   },
   {
-    id:"bhabha-hybrid",provenance:"v1.0-baseline", name:"Bhabha — Hybrid / In-Between Figures",
+    id:"bhabha-hybrid",provenance:"v1.0-baseline", name:"Bhabha, Hybrid / In-Between Figures",
     originator:"Homi K. Bhabha", year:1994, tradition:"crit",
     count:4, categories:["Mimic Man","Hybrid","Third-Space","Time-Lag"],
     source_url:null,
@@ -3620,7 +3621,7 @@ const TAXONOMIES = [
     note:"Postcolonial archetypal figures of cultural ambivalence and translation."
   },
   {
-    id:"burke-pentad",provenance:"v1.0-baseline", name:"Burke — Dramatistic Pentad",
+    id:"burke-pentad",provenance:"v1.0-baseline", name:"Burke, Dramatistic Pentad",
     originator:"Kenneth Burke", year:1945, tradition:"crit",
     count:5, categories:["Act","Scene","Agent","Agency","Purpose"],
     source_url:"https://www.abebooks.com/9780520015432/Grammar-Motives-Kenneth-Burke-0520015436/plp",
@@ -3628,7 +3629,7 @@ const TAXONOMIES = [
     note:"Five terms of dramatism with ten possible ratios; foundational for rhetorical criticism."
   },
   {
-    id:"jakobson-functions",provenance:"v1.0-baseline", name:"Jakobson — Six Functions of Language",
+    id:"jakobson-functions",provenance:"v1.0-baseline", name:"Jakobson, Six Functions of Language",
     originator:"Roman Jakobson", year:1960, tradition:"crit",
     count:6, categories:["Referential","Emotive","Conative","Phatic","Metalingual","Poetic"],
     source_url:null,
@@ -3636,7 +3637,7 @@ const TAXONOMIES = [
     note:"Six communicative functions mapped to six factors of communication; foundational structuralist scheme."
   },
   {
-    id:"brooks-plot",provenance:"v1.0-baseline", name:"Brooks — Reading for the Plot",
+    id:"brooks-plot",provenance:"v1.0-baseline", name:"Brooks, Reading for the Plot",
     originator:"Peter Brooks", year:1984, tradition:"lit",
     count:"open", categories:["plot-as-desire","narrative drives","dynamics of narrative"],
     source_url:"https://www.barnesandnoble.com/w/reading-for-the-plot-peter-brooks/1101465643",
@@ -3644,7 +3645,7 @@ const TAXONOMIES = [
     note:"Plot as desire/dynamic; psychoanalytic-narratological character-action taxonomy."
   },
   {
-    id:"chandler-mean-streets",provenance:"v1.0-baseline", name:"Chandler — The Mean Streets Detective",
+    id:"chandler-mean-streets",provenance:"v1.0-baseline", name:"Chandler, The Mean Streets Detective",
     originator:"Raymond Chandler", year:1944, tradition:"lit",
     count:1, categories:["down-these-mean-streets man (hardboiled detective)"],
     source_url:null,
@@ -3652,7 +3653,7 @@ const TAXONOMIES = [
     note:"Foundational manifesto of the hardboiled-detective character archetype."
   },
   {
-    id:"naremore-noir",provenance:"v1.0-baseline", name:"Naremore — Film Noir Character Types",
+    id:"naremore-noir",provenance:"v1.0-baseline", name:"Naremore, Film Noir Character Types",
     originator:"James Naremore", year:1998, tradition:"crit",
     count:"open", categories:["femme fatale","fall guy","corrupt detective","damaged veteran"],
     source_url:null,
@@ -3660,7 +3661,7 @@ const TAXONOMIES = [
     note:"Comprehensive scholarly noir-character taxonomy."
   },
   {
-    id:"tompkins-western",provenance:"v1.0-baseline", name:"Tompkins — Western Fiction Stock Characters",
+    id:"tompkins-western",provenance:"v1.0-baseline", name:"Tompkins, Western Fiction Stock Characters",
     originator:"Jane Tompkins", year:1992, tradition:"crit",
     count:6, categories:["Lone Gunman","Schoolmarm","Sheriff","Outlaw","Indian","Mexican"],
     source_url:null,
@@ -3668,7 +3669,7 @@ const TAXONOMIES = [
     note:"Stock-character analysis of the Western as gendered/racialized genre form."
   },
   {
-    id:"trites-ya",provenance:"v1.0-baseline", name:"Trites — YA Fiction Power Archetypes",
+    id:"trites-ya",provenance:"v1.0-baseline", name:"Trites, YA Fiction Power Archetypes",
     originator:"Roberta Seelinger Trites", year:2000, tradition:"crit",
     count:"open", categories:["Adolescent-as-Rebel","Adult-as-Power","Institutional Figures"],
     source_url:null,
@@ -3677,10 +3678,10 @@ const TAXONOMIES = [
   },
 
   // ============================================================
-  // PASS 2 — A5 SCREENWRITING/DRAMATURGY DEEPENING
+  // PASS 2, A5 SCREENWRITING/DRAMATURGY DEEPENING
   // ============================================================
   {
-    id:"aristotle-poetics",provenance:"v1.0-baseline", name:"Aristotle — Poetics Six Elements",
+    id:"aristotle-poetics",provenance:"v1.0-baseline", name:"Aristotle, Poetics Six Elements",
     originator:"Aristotle", year:-335, tradition:"drama",
     count:6, categories:["Mythos (plot)","Ethos (character)","Dianoia (thought)","Lexis (diction)","Opsis (spectacle)","Melos (song)"],
     source_url:null,
@@ -3688,7 +3689,7 @@ const TAXONOMIES = [
     note:"Six elements of tragedy plus six character qualities; foundational Western dramaturgy."
   },
   {
-    id:"horace-ages",provenance:"v1.0-baseline", name:"Horace — Ars Poetica Age-Decorum Types",
+    id:"horace-ages",provenance:"v1.0-baseline", name:"Horace, Ars Poetica Age-Decorum Types",
     originator:"Horace", year:-19, tradition:"drama",
     count:4, categories:["Puer (boy)","Iuvenis (youth)","Vir (man)","Senex (old man)"],
     source_url:null,
@@ -3696,7 +3697,7 @@ const TAXONOMIES = [
     note:"Decorum-by-age character types; foundational for Western character-by-life-stage typology."
   },
   {
-    id:"brecht-gestic",provenance:"v1.0-baseline", name:"Brecht — Verfremdung & Lehrstück Figures",
+    id:"brecht-gestic",provenance:"v1.0-baseline", name:"Brecht, Verfremdung & Lehrstück Figures",
     originator:"Bertolt Brecht", year:1930, tradition:"drama",
     count:"open", categories:["the thinking actor","the gestic figure","the Lehrstück student-teacher pair"],
     source_url:null,
@@ -3704,7 +3705,7 @@ const TAXONOMIES = [
     note:"Anti-naturalist character-types of epic theater; foundational for political theater praxis."
   },
   {
-    id:"artaud-cruelty",provenance:"v1.0-baseline", name:"Artaud — Theatre of Cruelty Figures",
+    id:"artaud-cruelty",provenance:"v1.0-baseline", name:"Artaud, Theatre of Cruelty Figures",
     originator:"Antonin Artaud", year:1938, tradition:"drama",
     count:3, categories:["Plague-Figure","Double","Cruelty-Bearer"],
     source_url:null,
@@ -3712,7 +3713,7 @@ const TAXONOMIES = [
     note:"Foundational anti-textual theater archetypes."
   },
   {
-    id:"grotowski-actor",provenance:"v1.0-baseline", name:"Grotowski — Holy Actor",
+    id:"grotowski-actor",provenance:"v1.0-baseline", name:"Grotowski, Holy Actor",
     originator:"Jerzy Grotowski", year:1968, tradition:"drama",
     count:1, categories:["Holy Actor"],
     source_url:null,
@@ -3720,7 +3721,7 @@ const TAXONOMIES = [
     note:"Sacred-performer archetype of the Polish theater laboratory tradition."
   },
   {
-    id:"barba-anthropology",provenance:"v1.0-baseline", name:"Barba — Theatre Anthropology Pre-Expressivity",
+    id:"barba-anthropology",provenance:"v1.0-baseline", name:"Barba, Theatre Anthropology Pre-Expressivity",
     originator:"Eugenio Barba", year:1991, tradition:"drama",
     count:"open", categories:["pre-expressive performer","balanced extra-daily body","oppositions"],
     source_url:null,
@@ -3728,7 +3729,7 @@ const TAXONOMIES = [
     note:"Cross-cultural performer-archetype taxonomy of pre-expressive principles."
   },
   {
-    id:"kantor-death",provenance:"v1.0-baseline", name:"Kantor — Theatre of Death Figures",
+    id:"kantor-death",provenance:"v1.0-baseline", name:"Kantor, Theatre of Death Figures",
     originator:"Tadeusz Kantor", year:1975, tradition:"drama",
     count:3, categories:["Mannequin/Double","Dead Class","Low-Rank Reality"],
     source_url:null,
@@ -3736,7 +3737,7 @@ const TAXONOMIES = [
     note:"Polish post-war avant-garde character-figures of memory and death."
   },
   {
-    id:"bogart-viewpoints",provenance:"v1.0-baseline", name:"Bogart — Viewpoints",
+    id:"bogart-viewpoints",provenance:"v1.0-baseline", name:"Bogart, Viewpoints",
     originator:"Anne Bogart and Tina Landau", year:1995, tradition:"drama",
     count:9, categories:["Spatial Relationship","Kinesthetic Response","Shape","Gesture","Repetition","Tempo","Duration","Topography","Architecture"],
     source_url:null,
@@ -3752,7 +3753,7 @@ const TAXONOMIES = [
     note:"Japanese cross-cultural training-archetype taxonomy."
   },
   {
-    id:"mamet-craft",provenance:"v1.0-baseline", name:"Mamet — On Directing Film / True and False",
+    id:"mamet-craft",provenance:"v1.0-baseline", name:"Mamet, On Directing Film / True and False",
     originator:"David Mamet", year:1991, year_end:1997, tradition:"drama",
     count:"open", categories:["uninflected cuts","actor-as-worker","action-objective","through-line"],
     source_url:null,
@@ -3760,7 +3761,7 @@ const TAXONOMIES = [
     note:"Mamet's craft taxonomy of practical-action-based character work."
   },
   {
-    id:"vorhaus-comedy",provenance:"v1.0-baseline", name:"Vorhaus — Comic Toolbox Character Types",
+    id:"vorhaus-comedy",provenance:"v1.0-baseline", name:"Vorhaus, Comic Toolbox Character Types",
     originator:"John Vorhaus", year:1994, tradition:"drama",
     count:"open", categories:["clown in pain","ordinary character","character with a problem","comic perspective"],
     source_url:null,
@@ -3768,7 +3769,7 @@ const TAXONOMIES = [
     note:"Practitioner taxonomy of comic-character types and constructions."
   },
   {
-    id:"aronson-21st",provenance:"v1.0-baseline", name:"Aronson — 21st-Century Screenplay",
+    id:"aronson-21st",provenance:"v1.0-baseline", name:"Aronson, 21st-Century Screenplay",
     originator:"Linda Aronson", year:2010, tradition:"drama",
     count:"open", categories:["multi-protagonist","parallel narrative","tandem narrative","consecutive narrative","fractured tandem"],
     source_url:"https://www.abebooks.com/9781742371368/21st-Century-Screenplay-Linda-Aronson-1742371361/plp",
@@ -3776,7 +3777,7 @@ const TAXONOMIES = [
     note:"Non-linear and multi-protagonist narrative-structure taxonomy."
   },
   {
-    id:"seger-characters",provenance:"v1.0-baseline", name:"Seger — Creating Unforgettable Characters",
+    id:"seger-characters",provenance:"v1.0-baseline", name:"Seger, Creating Unforgettable Characters",
     originator:"Linda Seger", year:1990, tradition:"drama",
     count:"open", categories:["central character","supporting characters","minor characters","character flaws","character backstory"],
     source_url:"https://us.macmillan.com/books/9780805011715/creatingunforgettablecharacters/",
@@ -3784,7 +3785,7 @@ const TAXONOMIES = [
     note:"Practitioner character-craft taxonomy widely used in screenwriting pedagogy."
   },
   {
-    id:"truby-genres",provenance:"v1.0-baseline", name:"Truby — Anatomy of Genres",
+    id:"truby-genres",provenance:"v1.0-baseline", name:"Truby, Anatomy of Genres",
     originator:"John Truby", year:2022, tradition:"drama",
     count:14, categories:["Horror","Action","Myth","Memoir","Coming-of-Age","Love","Comedy","Crime","Detective/Thriller","Science Fiction","Fantasy","Western","Gangster","War"],
     source_url:"https://books.google.com/books/about/The_Anatomy_of_Genres.html?id=NnlUEAAAQBAJ",
@@ -3792,7 +3793,7 @@ const TAXONOMIES = [
     note:"Genre-specific character-beat taxonomy; companion to Anatomy of Story already in catalog."
   },
   {
-    id:"lopedevega",provenance:"v1.0-baseline", name:"Lope de Vega — Comedia Nueva Stock Characters",
+    id:"lopedevega",provenance:"v1.0-baseline", name:"Lope de Vega, Comedia Nueva Stock Characters",
     originator:"Lope de Vega", year:1609, tradition:"drama",
     count:7, categories:["Rey (king)","Poderoso (powerful)","Viejo/Barba (old man)","Galán (gallant)","Dama (lady)","Gracioso (clown-servant)","Criada (maid)","Villano (villager)"],
     source_url:null,
@@ -3832,7 +3833,7 @@ const TAXONOMIES = [
     note:"Four-role-category Chinese-opera taxonomy with extensive sub-types per category. Late-18th-century synthesis of regional Chinese theater forms."
   },
   {
-    id:"natyashastra-nayaka",provenance:"v1.0-baseline", name:"Natyashastra — Nayaka (Hero) Types",
+    id:"natyashastra-nayaka",provenance:"v1.0-baseline", name:"Natyashastra, Nayaka (Hero) Types",
     originator:"Bharata Muni", year:-200, tradition:"drama",
     count:4, categories:["Dhirodatta (heroic, noble, restrained)","Dhiroddhata (heroic, proud, vehement)","Dhiralalita (heroic, refined, playful)","Dhiraprashanta (heroic, calm, peaceful)"],
     source_url:null,
@@ -3840,7 +3841,7 @@ const TAXONOMIES = [
     note:"Four classical Sanskrit-drama hero-types from the foundational Indian dramatic treatise."
   },
   {
-    id:"natyashastra-nayika",provenance:"v1.0-baseline", name:"Natyashastra — Ashta Nayika (Eight Heroine Types)",
+    id:"natyashastra-nayika",provenance:"v1.0-baseline", name:"Natyashastra, Ashta Nayika (Eight Heroine Types)",
     originator:"Bharata Muni", year:-200, tradition:"drama",
     count:8, categories:["Vasakasajja (dressed for union)","Virahotkanthita (distressed by separation)","Svadhinabhartruka (one with a husband in subjection)","Kalahantarita (separated by quarrel)","Khandita (offended)","Vipralabdha (deceived)","Proshitabhartruka (with husband abroad)","Abhisarika (going to meet lover)"],
     source_url:null,
@@ -3848,7 +3849,7 @@ const TAXONOMIES = [
     note:"Eight classical Sanskrit-drama heroine-types organized by emotional-relational state."
   },
   {
-    id:"natyashastra-supporting",provenance:"v1.0-baseline", name:"Natyashastra — Supporting Character Types",
+    id:"natyashastra-supporting",provenance:"v1.0-baseline", name:"Natyashastra, Supporting Character Types",
     originator:"Bharata Muni", year:-200, tradition:"drama",
     count:4, categories:["Vidushaka (jester-companion)","Vita (parasite)","Shakara (libertine)","Pithamarda (hero's friend)"],
     source_url:null,
@@ -3889,7 +3890,7 @@ const TAXONOMIES = [
   },
 
   // ============================================================
-  // PASS 2 — A6 RELIGIOUS/THEOLOGICAL DEEPENING
+  // PASS 2, A6 RELIGIOUS/THEOLOGICAL DEEPENING
   // ============================================================
   {
     id:"twelve-apostles",provenance:"v1.0-baseline", name:"Twelve Apostles",
@@ -4052,7 +4053,7 @@ const TAXONOMIES = [
     note:"Multiple enumerations: 19 in Shatarudra Samhita; 64 in Tamil Shaiva tradition. Distinct from Vishnu's 10 avatars."
   },
   {
-    id:"ashtavinayaka",provenance:"v1.0-baseline", name:"Ashtavinayaka — Eight Forms of Ganesha",
+    id:"ashtavinayaka",provenance:"v1.0-baseline", name:"Ashtavinayaka, Eight Forms of Ganesha",
     originator:"Hindu Ganesha tradition", year:1000, tradition:"relig",
     count:8, categories:["Mayureshwar","Siddhivinayak","Ballaleshwar","Varadavinayak","Chintamani","Girijatmaj","Vighneshwar","Mahaganpati"],
     source_url:null,
@@ -4132,7 +4133,7 @@ const TAXONOMIES = [
     note:"Sixteen arhats as archetypal protectors of the Dharma."
   },
   {
-    id:"ashtamangala",provenance:"v1.0-baseline", name:"Ashtamangala — Eight Auspicious Symbols of Buddhism",
+    id:"ashtamangala",provenance:"v1.0-baseline", name:"Ashtamangala, Eight Auspicious Symbols of Buddhism",
     originator:"Buddhist iconographic tradition", year:500, tradition:"relig",
     count:8, categories:["Parasol","Golden Fishes","Treasure Vase","Lotus","Right-Coiling Conch","Endless Knot","Victory Banner","Dharma Wheel"],
     source_url:null,
@@ -4204,7 +4205,7 @@ const TAXONOMIES = [
     note:"Dualist Light/Dark cosmology with elaborate emanationist figure-set; influential on Christian Gnosticism and later esoteric traditions."
   },
   {
-    id:"yazidi",provenance:"v1.0-baseline", name:"Yazidi — Tawûsî Melek and Seven Angels",
+    id:"yazidi",provenance:"v1.0-baseline", name:"Yazidi, Tawûsî Melek and Seven Angels",
     originator:"Yazidi tradition", year:1100, tradition:"indig",
     count:7, categories:["Tawûsî Melek (Peacock Angel)","Sheikh Hasan","Sheikh Shams","Sheikh Abu Bakr","Sajadin","Nasirdin","Fakhradin"],
     source_url:null,
@@ -4293,7 +4294,7 @@ const TAXONOMIES = [
     note:"Diyin Diné (Holy People) as archetypal figures of Navajo cosmology and ceremonial cycle."
   },
   {
-    id:"theosophy-masters",provenance:"v1.0-baseline", name:"Theosophy — Masters of the Ancient Wisdom",
+    id:"theosophy-masters",provenance:"v1.0-baseline", name:"Theosophy, Masters of the Ancient Wisdom",
     originator:"Helena Blavatsky / Alice Bailey", year:1875, tradition:"esot",
     count:10, categories:["Morya","Koot Hoomi","Djwal Khul","Hilarion","Serapis","Saint Germain","Maha Chohan","Manu","Maitreya","Sanat Kumara"],
     source_url:null,
@@ -4302,7 +4303,7 @@ const TAXONOMIES = [
     disputed:"devotional/esoteric tradition; the named Masters lack academic-historical verification (see K. Paul Johnson, The Masters Revealed, SUNY 1994, ISBN 978-0791420638)"
   },
   {
-    id:"anthroposophy",provenance:"v1.0-baseline", name:"Anthroposophy — Steiner Archetypes",
+    id:"anthroposophy",provenance:"v1.0-baseline", name:"Anthroposophy, Steiner Archetypes",
     originator:"Rudolf Steiner", year:1912, tradition:"esot",
     count:4, categories:["The Christ Impulse","Ahriman","Lucifer","Sorat"],
     source_url:null,
@@ -4328,7 +4329,7 @@ const TAXONOMIES = [
     note:"Eleven-grade initiatory ladder mapped onto the Sefirot of the Tree of Life."
   },
   {
-    id:"thelema-figures",provenance:"v1.0-baseline", name:"Thelema (Crowley) — Aeon of Horus Figures",
+    id:"thelema-figures",provenance:"v1.0-baseline", name:"Thelema (Crowley), Aeon of Horus Figures",
     originator:"Aleister Crowley", year:1904, tradition:"esot",
     count:6, categories:["Nuit","Hadit","Ra-Hoor-Khuit","Babalon","Therion","Holy Guardian Angel"],
     source_url:null,
@@ -4337,7 +4338,7 @@ const TAXONOMIES = [
     disputed:"esoteric tradition; not academically verified"
   },
   {
-    id:"wicca-sabbats",provenance:"v1.0-baseline", name:"Wicca — Wheel of the Year Sabbats",
+    id:"wicca-sabbats",provenance:"v1.0-baseline", name:"Wicca, Wheel of the Year Sabbats",
     originator:"Doreen Valiente / Gerald Gardner", year:1953, tradition:"esot",
     count:8, categories:["Samhain","Yule","Imbolc","Ostara","Beltane","Litha","Lughnasadh","Mabon"],
     source_url:null,
@@ -4361,7 +4362,7 @@ const TAXONOMIES = [
     note:"547 birth-tales of the Bodhisattva as foundational Buddhist narrative-archetype set."
   },
   {
-    id:"scientology-thetan",provenance:"v1.0-baseline", name:"Scientology — Thetan and OT Levels",
+    id:"scientology-thetan",provenance:"v1.0-baseline", name:"Scientology, Thetan and OT Levels",
     originator:"L. Ron Hubbard", year:1952, tradition:"esot",
     count:"15 OT levels", categories:["Thetan","Body Thetans","Wog","Clear","OT I-VIII (publicly disclosed)","OT IX-XV (advanced/confidential)"],
     source_url:null,
@@ -4371,7 +4372,7 @@ const TAXONOMIES = [
   },
 
   // ============================================================
-  // PASS 2 — A7 GAMING/COMICS DEEPENING
+  // PASS 2, A7 GAMING/COMICS DEEPENING
   // ============================================================
   {
     id:"dnd-creatures",provenance:"v1.0-baseline", name:"D&D Monster Manual Creature Types",
@@ -4390,7 +4391,7 @@ const TAXONOMIES = [
     note:"Two-axis nine-cell alignment taxonomy widely adopted as cultural shorthand."
   },
   {
-    id:"vampire-clans",provenance:"v1.0-baseline", name:"Vampire: The Masquerade — 13 Clans",
+    id:"vampire-clans",provenance:"v1.0-baseline", name:"Vampire: The Masquerade, 13 Clans",
     originator:"White Wolf / Onyx Path", year:1991, tradition:"game",
     count:14, categories:["Brujah","Gangrel","Malkavian","Nosferatu","Toreador","Tremere","Ventrue","Caitiff (clanless)","Assamite","Followers of Set","Giovanni","Lasombra","Ravnos","Tzimisce"],
     source_url:"https://thechildrenofthesun.com/clans",
@@ -4398,7 +4399,7 @@ const TAXONOMIES = [
     note:"13 main clans plus clanless. Foundational World of Darkness taxonomy."
   },
   {
-    id:"werewolf-tribes",provenance:"v1.0-baseline", name:"Werewolf: The Apocalypse — 13 Garou Tribes",
+    id:"werewolf-tribes",provenance:"v1.0-baseline", name:"Werewolf: The Apocalypse, 13 Garou Tribes",
     originator:"White Wolf / Onyx Path", year:1992, tradition:"game",
     count:13, categories:["Black Furies","Bone Gnawers","Children of Gaia","Fianna","Get of Fenris","Glass Walkers","Red Talons","Shadow Lords","Silent Striders","Silver Fangs","Stargazers","Uktena","Wendigo"],
     source_url:null,
@@ -4406,7 +4407,7 @@ const TAXONOMIES = [
     note:"Thirteen Garou tribes as archetypal sub-cultures of werewolves."
   },
   {
-    id:"mage-traditions",provenance:"v1.0-baseline", name:"Mage: The Ascension — 9 Traditions / 5 Conventions",
+    id:"mage-traditions",provenance:"v1.0-baseline", name:"Mage: The Ascension, 9 Traditions / 5 Conventions",
     originator:"White Wolf / Onyx Path", year:1993, tradition:"game",
     count:14, categories:["Akashayana","Celestial Chorus","Cult of Ecstasy","Dreamspeakers","Euthanatoi","Order of Hermes","Sons of Ether","Verbena","Virtual Adepts","Iteration X","New World Order","Progenitors","Syndicate","Void Engineers"],
     source_url:null,
@@ -4414,7 +4415,7 @@ const TAXONOMIES = [
     note:"Nine paradigmatic Traditions vs. five technocratic Conventions; reality-war taxonomy."
   },
   {
-    id:"changeling-dreaming",provenance:"v1.0-baseline", name:"Changeling: The Dreaming — Kiths",
+    id:"changeling-dreaming",provenance:"v1.0-baseline", name:"Changeling: The Dreaming, Kiths",
     originator:"White Wolf / Onyx Path", year:1995, tradition:"game",
     count:13, categories:["Boggans","Eshu","Nockers","Pooka","Redcaps","Satyrs","Sidhe","Sluagh","Trolls","Clurichaun","Ghille Dhu","Korred","Selkies"],
     source_url:null,
@@ -4422,7 +4423,7 @@ const TAXONOMIES = [
     note:"Faerie-kith archetypes for the World of Darkness changeling line."
   },
   {
-    id:"changeling-lost",provenance:"v1.0-baseline", name:"Changeling: The Lost — Seemings",
+    id:"changeling-lost",provenance:"v1.0-baseline", name:"Changeling: The Lost, Seemings",
     originator:"White Wolf / Onyx Path", year:2007, tradition:"game",
     count:6, categories:["Beast","Darkling","Elemental","Fairest","Ogre","Wizened"],
     source_url:null,
@@ -4430,7 +4431,7 @@ const TAXONOMIES = [
     note:"Six 'seemings' (broad fae-archetype categories) for the Chronicles of Darkness changeling line. Each seeming has multiple kiths."
   },
   {
-    id:"mage-awakening",provenance:"v1.0-baseline", name:"Mage: The Awakening — Paths and Watchtowers",
+    id:"mage-awakening",provenance:"v1.0-baseline", name:"Mage: The Awakening, Paths and Watchtowers",
     originator:"White Wolf / Onyx Path", year:2005, tradition:"game",
     count:5, categories:["Acanthus (Watchtower of the Lunargent Thorn)","Mastigos (Watchtower of the Iron Gauntlet)","Moros (Watchtower of the Lead Coin)","Obrimos (Watchtower of the Golden Key)","Thyrsus (Watchtower of the Stone Book)"],
     source_url:null,
@@ -4438,7 +4439,7 @@ const TAXONOMIES = [
     note:"Five Paths/Watchtowers of awakening as archetypal magical orientations."
   },
   {
-    id:"shadowrun-roles",provenance:"v1.0-baseline", name:"Shadowrun — Metatypes and Archetypes",
+    id:"shadowrun-roles",provenance:"v1.0-baseline", name:"Shadowrun, Metatypes and Archetypes",
     originator:"Catalyst Game Labs / FASA", year:1989, tradition:"game",
     count:13, categories:["Human","Elf","Dwarf","Ork","Troll","Street Samurai","Decker","Mage","Rigger","Face","Adept","Shaman","Technomancer"],
     source_url:"https://shadowrun-series.fandom.com/wiki/Archetypes",
@@ -4446,7 +4447,7 @@ const TAXONOMIES = [
     note:"Five metatypes plus eight role archetypes for cyberpunk-fantasy hybrid setting."
   },
   {
-    id:"cyberpunk-roles",provenance:"v1.0-baseline", name:"Cyberpunk Red — Roles",
+    id:"cyberpunk-roles",provenance:"v1.0-baseline", name:"Cyberpunk Red, Roles",
     originator:"R. Talsorian Games / Mike Pondsmith", year:1988, tradition:"game",
     count:10, categories:["Rockerboy","Solo","Netrunner","Tech","Medtech","Media","Lawman","Exec","Fixer","Nomad"],
     source_url:"https://talsorianstore.com/products/cyberpunk-red",
@@ -4454,7 +4455,7 @@ const TAXONOMIES = [
     note:"Ten archetypal roles of the Cyberpunk RPG. Each role has a unique 'Role Ability' as identity."
   },
   {
-    id:"call-of-cthulhu",provenance:"v1.0-baseline", name:"Call of Cthulhu — Investigator Occupations",
+    id:"call-of-cthulhu",provenance:"v1.0-baseline", name:"Call of Cthulhu, Investigator Occupations",
     originator:"Chaosium / Sandy Petersen", year:1981, tradition:"game",
     count:"open", categories:["Antiquarian","Author","Detective","Doctor of Medicine","Journalist","Librarian","Police Officer","Private Investigator","Professor","Soldier","Cultist (variant)"],
     source_url:null,
@@ -4462,7 +4463,7 @@ const TAXONOMIES = [
     note:"Investigator-occupation archetypes for cosmic-horror RPG."
   },
   {
-    id:"apocalypse-world",provenance:"v1.0-baseline", name:"Apocalypse World — Playbooks",
+    id:"apocalypse-world",provenance:"v1.0-baseline", name:"Apocalypse World, Playbooks",
     originator:"D. Vincent Baker and Meguey Baker", year:2010, tradition:"game",
     count:12, categories:["Angel","Battlebabe","Brainer","Chopper","Driver","Gunlugger","Hardholder","Hocus","Maestro D'","Quarantine","Savvyhead","Skinner"],
     source_url:null,
@@ -4470,7 +4471,7 @@ const TAXONOMIES = [
     note:"Foundational Powered-by-the-Apocalypse playbook set; defined the PbtA design lineage."
   },
   {
-    id:"dungeon-world",provenance:"v1.0-baseline", name:"Dungeon World — Playbooks",
+    id:"dungeon-world",provenance:"v1.0-baseline", name:"Dungeon World, Playbooks",
     originator:"Sage LaTorra and Adam Koebel", year:2012, tradition:"game",
     count:12, categories:["Bard","Cleric","Druid","Fighter","Paladin","Ranger","Thief","Wizard","Barbarian","Immolator","Battlemaster","Mage"],
     source_url:null,
@@ -4478,7 +4479,7 @@ const TAXONOMIES = [
     note:"PbtA conversion of D&D classes; bridges OSR-fantasy with PbtA mechanics."
   },
   {
-    id:"motw-playbooks",provenance:"v1.0-baseline", name:"Monster of the Week — Playbooks",
+    id:"motw-playbooks",provenance:"v1.0-baseline", name:"Monster of the Week, Playbooks",
     originator:"Michael Sands", year:2012, tradition:"game",
     count:11, categories:["The Chosen","The Divine","The Expert","The Flake","The Initiate","The Monstrous","The Mundane","The Professional","The Spell-Slinger","The Spooky","The Wronged"],
     source_url:null,
@@ -4486,7 +4487,7 @@ const TAXONOMIES = [
     note:"PbtA playbooks for monster-hunter genre (Buffy, Supernatural, X-Files)."
   },
   {
-    id:"masks-playbooks",provenance:"v1.0-baseline", name:"Masks: A New Generation — Playbooks",
+    id:"masks-playbooks",provenance:"v1.0-baseline", name:"Masks: A New Generation, Playbooks",
     originator:"Brendan Conway", year:2017, tradition:"game",
     count:13, categories:["The Beacon","The Bull","The Delinquent","The Doomed","The Janus","The Legacy","The Nova","The Outsider","The Protégé","The Reformed","The Soldier","The Star","The Transformed"],
     source_url:"https://magpiegames.com/pages/play-masks",
@@ -4494,7 +4495,7 @@ const TAXONOMIES = [
     note:"PbtA playbooks for teen-superhero genre. Each playbook embodies a distinct identity-anxiety archetype."
   },
   {
-    id:"blades-playbooks",provenance:"v1.0-baseline", name:"Blades in the Dark — Playbooks",
+    id:"blades-playbooks",provenance:"v1.0-baseline", name:"Blades in the Dark, Playbooks",
     originator:"John Harper", year:2017, tradition:"game",
     count:7, categories:["Cutter","Hound","Leech","Lurk","Slide","Spider","Whisper"],
     source_url:"https://bladesinthedark.com/downloads",
@@ -4510,7 +4511,7 @@ const TAXONOMIES = [
     note:"Six character types of the Numenera setting; broader Cypher System uses Warrior/Adept/Explorer/Speaker."
   },
   {
-    id:"avatar-legends",provenance:"v1.0-baseline", name:"Avatar Legends RPG — Playbooks",
+    id:"avatar-legends",provenance:"v1.0-baseline", name:"Avatar Legends RPG, Playbooks",
     originator:"Magpie Games", year:2022, tradition:"game",
     count:10, categories:["The Bold","The Successor","The Pillar","The Idealist","The Adamant","The Hammer","The Prodigy","The Rogue","The Icon","The Guardian"],
     source_url:null,
@@ -4518,7 +4519,7 @@ const TAXONOMIES = [
     note:"PbtA playbooks for Avatar: The Last Airbender / Korra setting."
   },
   {
-    id:"bionicle-toa",provenance:"v1.0-baseline", name:"BIONICLE — Toa Elemental Archetypes",
+    id:"bionicle-toa",provenance:"v1.0-baseline", name:"BIONICLE, Toa Elemental Archetypes",
     originator:"LEGO Group / Greg Farshtey", year:2001, tradition:"game",
     count:16, categories:["Fire","Water","Air","Earth","Stone","Ice","Plantlife","Plasma","Lightning","Iron","Magnetism","Sonics","Gravity","Psionics","Light","Shadow"],
     source_url:null,
@@ -4526,7 +4527,7 @@ const TAXONOMIES = [
     note:"Sixteen elemental Toa archetypes from the LEGO BIONICLE setting."
   },
   {
-    id:"sirlin-fighting",provenance:"v1.0-baseline", name:"Sirlin — Fighting Game Archetypes",
+    id:"sirlin-fighting",provenance:"v1.0-baseline", name:"Sirlin, Fighting Game Archetypes",
     originator:"David Sirlin", year:2006, tradition:"game",
     count:10, categories:["Shoto (balanced)","Charge","Grappler","Zoner","Rushdown","Mix-up","Set-play","Footsies-based","Vortex","Projectile-spammer"],
     source_url:null,
@@ -4542,7 +4543,7 @@ const TAXONOMIES = [
     note:"Shonen-genre protagonist-type taxonomy in critical scholarship."
   },
   {
-    id:"galbraith-moe",provenance:"v1.0-baseline", name:"Galbraith — Moe Manifesto Typology",
+    id:"galbraith-moe",provenance:"v1.0-baseline", name:"Galbraith, Moe Manifesto Typology",
     originator:"Patrick W. Galbraith", year:2014, tradition:"fan",
     count:"open", categories:["Tsundere","Yandere","Kuudere","Dandere","Himedere","Deredere","Childhood Friend","Imouto","Senpai","Onee-san"],
     source_url:null,
@@ -4550,7 +4551,7 @@ const TAXONOMIES = [
     note:"Otaku-character-type taxonomy from anime/manga/visual-novel cultures."
   },
   {
-    id:"flores-decks",provenance:"v1.0-baseline", name:"MtG/Hearthstone — Deck Archetypes (Flores)",
+    id:"flores-decks",provenance:"v1.0-baseline", name:"MtG/Hearthstone, Deck Archetypes (Flores)",
     originator:"Mike Flores", year:1999, tradition:"game",
     count:7, categories:["Aggro","Midrange","Control","Combo","Tempo","Ramp","Mill"],
     source_url:null,
@@ -4574,7 +4575,7 @@ const TAXONOMIES = [
     note:"D&D-alternative class taxonomy from the Critical Role studio."
   },
   {
-    id:"morkborg",provenance:"v1.0-baseline", name:"Mörk Borg — Classes",
+    id:"morkborg",provenance:"v1.0-baseline", name:"Mörk Borg, Classes",
     originator:"Pelle Nilsson and Johan Nohr", year:2020, tradition:"game",
     count:6, categories:["Esoteric Hermit","Fanged Deserter","Gutterborn Scum","Heretical Priest","Wretched Royalty","Forlorn Philosopher"],
     source_url:null,
@@ -4582,7 +4583,7 @@ const TAXONOMIES = [
     note:"OSR-doomsday-metal class taxonomy with strong design aesthetic."
   },
   {
-    id:"lancer-frames",provenance:"v1.0-baseline", name:"Lancer — Mech Frames",
+    id:"lancer-frames",provenance:"v1.0-baseline", name:"Lancer, Mech Frames",
     originator:"Tom Bloom and Miguel Lopez (Massif Press)", year:2019, tradition:"game",
     count:"~30+ frames", categories:["GMS Everest","SSC Black Witch","HA Tortuga","HORUS Goblin","IPS-N Blackbeard"],
     source_url:null,
@@ -4590,7 +4591,7 @@ const TAXONOMIES = [
     note:"Mech-frame archetype taxonomy organized by manufacturer corp licenses."
   },
   {
-    id:"ffxiv-jobs",provenance:"v1.0-baseline", name:"FFXIV — Jobs",
+    id:"ffxiv-jobs",provenance:"v1.0-baseline", name:"FFXIV, Jobs",
     originator:"Square Enix", year:2010, tradition:"game",
     count:"21+ at expansion", categories:["Paladin","Warrior","Dark Knight","Gunbreaker","White Mage","Scholar","Astrologian","Sage","Monk","Dragoon","Ninja","Samurai","Reaper","Viper","Bard","Machinist","Dancer","Black Mage","Summoner","Red Mage","Pictomancer"],
     source_url:null,
@@ -4598,7 +4599,7 @@ const TAXONOMIES = [
     note:"FFXIV job system as MMO trinity-and-beyond character taxonomy."
   },
   {
-    id:"wikipedia-archetype",provenance:"v1.0-baseline", name:"Wikidata Q193058 — Archetype Class",
+    id:"wikipedia-archetype",provenance:"v1.0-baseline", name:"Wikidata Q193058, Archetype Class",
     originator:"Wikidata community", year:2012, tradition:"fan",
     count:"open ontology", categories:null,
     source_url:"https://www.wikidata.org/wiki/Q193058",
@@ -4606,7 +4607,7 @@ const TAXONOMIES = [
     note:"Crowd-sourced structured-data ontology of character archetypes; widely linked to from other knowledge graphs."
   },
   {
-    id:"behindthename-tags",provenance:"v1.0-baseline", name:"Behind the Name — Character/Name Tagging",
+    id:"behindthename-tags",provenance:"v1.0-baseline", name:"Behind the Name, Character/Name Tagging",
     originator:"Mike Campbell", year:1996, tradition:"fan",
     count:"open tag taxonomy", categories:null,
     source_url:"https://www.behindthename.com/",
@@ -5217,7 +5218,7 @@ const TAXONOMIES = [
     originator:"4chan /tg/ (Traditional Games board) anonymous community", year:2008, tradition:"fan",
     count:"open", categories:[],
     source_url:"https://1d4chan.org/wiki/Main_Page",
-    source_book:"4chan /tg/ (boards.4channel.org/tg/) — Traditional Games board; character-class and alignment charts emerge as community-shared images and recur in threads, archived on 1d4chan, knowyourmeme, and various wiki mirrors",
+    source_book:"4chan /tg/ (boards.4channel.org/tg/), Traditional Games board; character-class and alignment charts emerge as community-shared images and recur in threads, archived on 1d4chan, knowyourmeme, and various wiki mirrors",
     note:"4chan /tg/ has produced a substantial body of crowd-emerging character-archetype taxonomies, primarily as image-charts that circulate on the board and get refined through reposting and commentary. Examples include the alignment-chart family (now a globally-circulating meme-format), the 'character archetypes for D&D' charts, and the role-archetype enumerations for tabletop gaming. Notable structural feature: these charts often present a 9-cell or 16-cell grid where two axes intersect to produce typed character-instances. The format itself is an archetypal taxonomy. Editorial-quality flag live-folk; anonymous authorship; archived primarily on 1d4chan (the /tg/-affiliated wiki) which is the most stable secondary source. Disputed because anonymous-board content has provenance problems and a portion of the material is overtly transgressive in ways that scholarly catalogs should mark.",
     disputed:"Anonymous-board content with provenance problems; portion of material is overtly transgressive; cite via 1d4chan or knowyourmeme rather than direct 4chan archives where possible."
   },
@@ -5227,7 +5228,7 @@ const TAXONOMIES = [
     count:"open", categories:[],
     source_url:"https://www.animenewsnetwork.com/encyclopedia/",
     source_book:"Anime News Network Encyclopedia (animenewsnetwork.com/encyclopedia/), community-edited database of anime, manga, and related works with character-attribute tagging",
-    note:"ANN Encyclopedia maintains structured records on tens of thousands of anime titles and characters, with community-applied attribute tagging that functions as a de facto archetype taxonomy for anime characters. Tags include role-types (protagonist, antagonist, mentor, rival, foil), trope-types (tsundere, kuudere, yandere, deredere — themselves a crowd-emergent micro-taxonomy of archetype-of-affect), and physical/aesthetic descriptors. Editorial-quality flag live-folk leaning popularizing-with-citations; stronger editorial discipline than TV Tropes due to industry-press provenance.",
+    note:"ANN Encyclopedia maintains structured records on tens of thousands of anime titles and characters, with community-applied attribute tagging that functions as a de facto archetype taxonomy for anime characters. Tags include role-types (protagonist, antagonist, mentor, rival, foil), trope-types (tsundere, kuudere, yandere, deredere, themselves a crowd-emergent micro-taxonomy of archetype-of-affect), and physical/aesthetic descriptors. Editorial-quality flag live-folk leaning popularizing-with-citations; stronger editorial discipline than TV Tropes due to industry-press provenance.",
     disputed:"Community-edited database; tag-application varies by editor; reliable for industrial metadata, less so for analytical-trope claims."
   }
 ];
@@ -5282,7 +5283,7 @@ const CATEGORY_INDEX = buildCategoryIndex(TAXONOMIES);
 // ============================================================
 // LAYER 2 & 3: TAGS + OCCURRENCES (tags_data.js inlined)
 // ============================================================
-// AUTO-GENERATED — tag layer over taxonomies
+// AUTO-GENERATED, tag layer over taxonomies
 // Generated by build_tags.js from data.js
 // Layer 2: tags array. Layer 3: occurrences array.
 // To regenerate: node build_tags.js > tags_data.js
@@ -55445,7 +55446,7 @@ const OCCURRENCES = [
   }
 ];
 // ============================================================
-// A21 — BOLEN GODDESSES↔GODS COMPANION RELATIONSHIPS (schema 1.2)
+// A21, BOLEN GODDESSES↔GODS COMPANION RELATIONSHIPS (schema 1.2)
 // ============================================================
 // Source: Jean Shinoda Bolen, "Goddesses in Everywoman" (Harper & Row 1984,
 // ISBN 0-06-091291-5) and "Gods in Everyman" (Harper & Row 1989, ISBN
@@ -55482,7 +55483,7 @@ const COMPANION_RELATIONSHIPS = [
 ];
 
 // ============================================================
-// A5 — TAXONOMY LINEAGE EDGES (schema 1.2; partial v1)
+// A5, TAXONOMY LINEAGE EDGES (schema 1.2; partial v1)
 // ============================================================
 // Influence/derivation relationships between archetypal taxonomies. v1
 // ships with one verified edge (Pearson's 12-archetype framework derives
@@ -55499,7 +55500,7 @@ const LINEAGE_EDGES = [
 ];
 
 // ============================================================
-// A12 — ANTI-ARCHETYPE META-ENTRIES (schema 1.2)
+// A12, ANTI-ARCHETYPE META-ENTRIES (schema 1.2)
 // ============================================================
 // Thinkers whose work CRITIQUES the universalist-archetype claim. These
 // are NOT taxonomies of archetypes (they don't catalog Hero/Trickster/etc).
@@ -55551,7 +55552,7 @@ const META_ENTRIES = [
 
 
 // ============================================================
-// C5 — SETTINGS LIBRARY (schema 1.3)
+// C5, SETTINGS LIBRARY (schema 1.3)
 // ============================================================
 // Polymyth-grade archetypal settings. Seven seeds; this layer is a
 // scaffold for future setting entries. Each entry catalogs a SETTING
@@ -55566,7 +55567,7 @@ const META_ENTRIES = [
 // Rule #1 CITES+LOGOI: every claim is grounded in a named work. Where
 // a translation is cited, the original publication is also named so the
 // reader can trace either lineage.
-// PENDING_LIST_AA (v1.5) — captures aa*-specific outstanding decisions
+// PENDING_LIST_AA (v1.5), captures aa*-specific outstanding decisions
 // per user direction "creating a whole pendinglist just for aa* / we will
 // get to it later." Each entry: id, title, summary, options[], gates,
 // estimated_work, related_decisions[], status. Surfaced via the 'Pending'
@@ -55574,7 +55575,7 @@ const META_ENTRIES = [
 const PENDING_LIST_AA = [
   {
     "id": "pen-aa-001",
-    "title": "A10 — provenance-tier bucketing for the 404 taxonomies",
+    "title": "A10, provenance-tier bucketing for the 404 taxonomies",
     "summary": "Every TAXONOMIES entry has a provenance field intended to mark which version-pass added it. All 404 are currently stamped 'v1.0-baseline' (with the 18 v1.4-a20 tags as the only differentiated set). The planned filter UI to surface entries by provenance-tier has nothing to filter against.",
     "options": [
       "Bucket the 404 taxonomies into rough version-tiers (e.g., 'depth-psych and comp-mythology baseline' / 'personality and branding pass 2' / 'critical-theory pass 3' / 'indigenous and live-folk pass 4' / 'fan-curated additions' / 'user-rejected then refined').",
@@ -55589,7 +55590,7 @@ const PENDING_LIST_AA = [
   },
   {
     "id": "pen-aa-002",
-    "title": "C3 — untranslatables U6 onward (target 30 total, currently 8)",
+    "title": "C3, untranslatables U6 onward (target 30 total, currently 8)",
     "summary": "UNTRANSLATABLES data layer currently holds 8 entries (saudade, sehnsucht, mamihlapinatapai, komorebi, schadenfreude, sobremesa, fika, tsundoku). Target is 30. Two prior expansion attempts rejected for citing Wikipedia and Amazon book listings as sources.",
     "options": [
       "User provides 22-term seed list; AI writes each entry citing primary scholarship per term (etymology, linguistic-anthropology source, philosophical-translation source where available).",
@@ -55604,12 +55605,12 @@ const PENDING_LIST_AA = [
   },
   {
     "id": "pen-aa-003",
-    "title": "C4 — operational-signature data layer (9+ entries, interpretation undefined)",
+    "title": "C4, operational-signature data layer (9+ entries, interpretation undefined)",
     "summary": "Audit calls for an operational-signature layer alongside character-archetypes (TAXONOMIES), place-archetypes (SETTINGS_LIBRARY), and critique-frameworks (META_ENTRIES). 'Operational signature' has three plausible interpretations; without selection AI guesses produce three different catalogs.",
     "options": [
-      "Interpretation A — process-shapes archetypes move through. Each archetype has a typical sequence: Trickster's deception cycle (setup / reveal / reversal / escape), Hero's monomyth (departure / initiation / return), Lover's pursuit (encounter / obstacle / consummation-or-loss). Process-templates archetypes operate within.",
-      "Interpretation B — bb* transformation cycles extended. Cocoon (encapsulate / dissolve / reform / emerge), silkworm (consume / spin / emerge transformed), egg-laying (deposit / incubate / hatch), molt (outgrow / shed / harden), metamorphosis (worm / cocoon / butterfly). Biological-pattern templates as character-development archetypes.",
-      "Interpretation C — narrative-operation signatures. Recognition-and-reversal (Aristotle's anagnorisis + peripeteia), stranger-arrives, journey-and-return, dying-and-rising-god (Frazer), sacrifice-and-restoration. Large-scale narrative shapes from comparative literature/mythology."
+      "Interpretation A, process-shapes archetypes move through. Each archetype has a typical sequence: Trickster's deception cycle (setup / reveal / reversal / escape), Hero's monomyth (departure / initiation / return), Lover's pursuit (encounter / obstacle / consummation-or-loss). Process-templates archetypes operate within.",
+      "Interpretation B, bb* transformation cycles extended. Cocoon (encapsulate / dissolve / reform / emerge), silkworm (consume / spin / emerge transformed), egg-laying (deposit / incubate / hatch), molt (outgrow / shed / harden), metamorphosis (worm / cocoon / butterfly). Biological-pattern templates as character-development archetypes.",
+      "Interpretation C, narrative-operation signatures. Recognition-and-reversal (Aristotle's anagnorisis + peripeteia), stranger-arrives, journey-and-return, dying-and-rising-god (Frazer), sacrifice-and-restoration. Large-scale narrative shapes from comparative literature/mythology."
     ],
     "gates": "User picks A/B/C plus inclusion threshold (≥3 traditions? explicit scholar-naming? Wikipedia-grade entry?).",
     "estimated_work": "4-8 hours after interpretation selected.",
@@ -55620,7 +55621,7 @@ const PENDING_LIST_AA = [
   },
   {
     "id": "pen-aa-004",
-    "title": "C6 — motif catalog beyond the four named",
+    "title": "C6, motif catalog beyond the four named",
     "summary": "User named 4 motifs (magic-mirror, holy-fool, blood-compact, exchange-of-clothes). Audit calls for 15+ total. Standard reference for folkloric motifs is Stith Thompson, Motif-Index of Folk-Literature (Indiana UP 1955-1958, 6 volumes, ~46,000 motifs). Catalog can't ingest the whole index but can draw a useful starter set.",
     "options": [
       "Accept some subset of the 15 candidate motif-names AI proposed (locked-room, severed-head, golden-thread, false-grave, riddle-contest, three-tasks, gift-from-the-dead, doppelganger, impossible-bargain, silent-princess, hidden-name, threshold-guardian, night-journey, prophecy-self-fulfilling, sacred-marriage), plus user additions.",
@@ -55651,7 +55652,7 @@ const PENDING_LIST_AA = [
   {
     "id": "pen-aa-006",
     "title": "editorial sibling-nav asymmetry (just flagged in nav audit 2026-05-04)",
-    "summary": "/aa/editorial.html is reachable from /aa/ catalog via footer link, but is not pinned to the sibling-nav of /aa/cloud/ or /aa/views/ (which are 3-way: catalog/cloud/views). Editorial-page back-link points only to catalog. Asymmetry is plausibly intentional — editorial is meta-commentary ABOUT the catalog data while cloud/views are three views OF the catalog data; different abstraction layer.",
+    "summary": "/aa/editorial.html is reachable from /aa/ catalog via footer link, but is not pinned to the sibling-nav of /aa/cloud/ or /aa/views/ (which are 3-way: catalog/cloud/views). Editorial-page back-link points only to catalog. Asymmetry is plausibly intentional, editorial is meta-commentary ABOUT the catalog data while cloud/views are three views OF the catalog data; different abstraction layer.",
     "options": [
       "Leave asymmetric (current state). Editorial reachable from catalog only; argues editorial sits at different abstraction layer than peer views.",
       "Pin editorial to sibling-nav across all four pages (catalog / cloud / views / editorial as 4-way). Symmetric, but conflates abstraction layers.",
@@ -55726,7 +55727,7 @@ const SETTINGS_LIBRARY = [
         case: 'The Library of Alexandria as both real institution (Ptolemaic, c. 3rd c. BCE) and mythic figure: the totalizing library that burned, leaving permanent loss. Used as archetype of catastrophic archival destruction.',
         source: 'Canfora, La biblioteca scomparsa (Sellerio 1986); trans. The Vanished Library (U California 1990)' },
       { tradition: 'Argentine / 20th-c. literary',
-        case: 'Borges\' "La biblioteca de Babel" (1941) — the universe as infinite hexagonal library containing all possible books. The library is the cosmos.',
+        case: 'Borges\' "La biblioteca de Babel" (1941), the universe as infinite hexagonal library containing all possible books. The library is the cosmos.',
         source: 'Borges, "La biblioteca de Babel" in Ficciones (Editorial Sur 1944; later Emece 1956)' },
       { tradition: 'Italian / late-20th-c.',
         case: 'Eco\'s monastic library in Il nome della rosa (1980) as labyrinth concealing Aristotle\'s lost book on comedy. The library as both preservation and gatekeeping.',
@@ -55759,7 +55760,7 @@ const SETTINGS_LIBRARY = [
         case: 'Agni as cosmic ritual fire and divine messenger. The household hearth-fire is continuous with the cosmic fire that mediates between humans and gods.',
         source: 'Doniger, The Rig Veda (Penguin 1981), hymns to Agni; Renou, Etudes vediques et panineennes (de Boccard 1955-1969, 17 vols)' },
       { tradition: 'European pre-modern domestic',
-        case: 'The household hearth as center of dwelling, cooking, gathering, and storytelling — the place where day ends and family converges. The "hearth and home" formula registers the centrality.',
+        case: 'The household hearth as center of dwelling, cooking, gathering, and storytelling, the place where day ends and family converges. The "hearth and home" formula registers the centrality.',
         source: 'Bachelard, La poetique de l\'espace (PUF 1957)' }
     ],
     citations: [
@@ -55813,7 +55814,7 @@ const SETTINGS_LIBRARY = [
         case: 'Solzhenitsyn\'s Gulag Archipelago as totalitarian-prison archive. The work documents the Soviet camp system as continuous geographic space.',
         source: 'Solzhenitsyn, Arkhipelag GULAG (YMCA Press, Paris 1973-1975, 3 vols); trans. Whitney/Willetts, The Gulag Archipelago (Harper 1974-1978)' },
       { tradition: 'Czech / German modernist',
-        case: 'Kafka\'s "In der Strafkolonie" — the prison as theological torture-machine. The execution apparatus inscribes the prisoner\'s sentence on his body with needles.',
+        case: 'Kafka\'s "In der Strafkolonie", the prison as theological torture-machine. The execution apparatus inscribes the prisoner\'s sentence on his body with needles.',
         source: 'Kafka, "In der Strafkolonie" (Kurt Wolff 1919)' }
     ],
     citations: [
@@ -55840,7 +55841,7 @@ const SETTINGS_LIBRARY = [
         case: 'Tolkien\'s Barad-dur (Sauron\'s tower) and Orthanc (Saruman\'s tower) as architectural figures of evil power. The tower\'s height is also the tower-lord\'s isolation from common ground.',
         source: 'Tolkien, The Lord of the Rings (Allen & Unwin 1954-1955)' },
       { tradition: 'Modernist poetry',
-        case: 'Yeats\' "The Tower" (1928) — the poet writes from the height of the tower (Thoor Ballylee) and surveys the landscape of his own ageing. The vantage is the cost of the height.',
+        case: 'Yeats\' "The Tower" (1928), the poet writes from the height of the tower (Thoor Ballylee) and surveys the landscape of his own ageing. The vantage is the cost of the height.',
         source: 'Yeats, "The Tower" in The Tower (Macmillan 1928)' }
     ],
     citations: [
@@ -55855,7 +55856,7 @@ const SETTINGS_LIBRARY = [
 ];
 
 // ============================================================
-// A14 — REMOVED ENTRIES LOG
+// A14, REMOVED ENTRIES LOG
 // Tracks entries that were silently removed from the catalog (e.g.
 // wikipedia-stock placeholder data discarded during cleanup passes).
 // Schema: { tagId, taxId, removed_at: ISO date, reason, original_label }
@@ -56242,7 +56243,7 @@ const UNTRANSLATABLES = [
       {
         type: 'philosophical',
         author: 'Eduardo Lourenço',
-        title: 'O Labirinto da Saudade — Psicanálise mítica do destino português',
+        title: 'O Labirinto da Saudade, Psicanálise mítica do destino português',
         year: 1978,
         publisher: 'Dom Quixote',
         place: 'Lisboa',
@@ -56275,7 +56276,7 @@ const UNTRANSLATABLES = [
     kind: ['lexical-cultural', 'cluster'],
     tags: ['lexical-cultural', 'cluster', 'germanic', 'german', 'longing', 'melancholy-cluster', 'romanticism', 'ontological-condition', 'metaphysical-affect', 'schiller', 'goethe'],
     verification_status: 'cited_from_bibliography',
-    approximation: 'Yearning, longing, ardent desire — but for the unattainable, the infinite, the absolute.',
+    approximation: 'Yearning, longing, ardent desire, but for the unattainable, the infinite, the absolute.',
     approximation_note: 'Falsifies. The German Romantic Sehnsucht is structural: yearning AS the basic mode of human existence in the face of the infinite. Not a passing emotion but an ontological condition. "Yearning" misses the metaphysical weight.',
     primary_sources: [
       {
@@ -56292,7 +56293,7 @@ const UNTRANSLATABLES = [
         title: 'Wilhelm Meisters Lehrjahre',
         year: 1795,
         language: 'German',
-        note: 'Mignon\'s song "Nur wer die Sehnsucht kennt" — canonical formulation in German Romantic literature.'
+        note: 'Mignon\'s song "Nur wer die Sehnsucht kennt", canonical formulation in German Romantic literature.'
       },
       {
         type: 'philosophical',
@@ -56321,7 +56322,7 @@ const UNTRANSLATABLES = [
     tags: ['lexical-cultural', 'cluster', 'slavic', 'russian', 'longing', 'melancholy-cluster', 'spiritual-anguish', 'nabokov', 'national-keyword'],
     verification_status: 'cited_from_bibliography',
     approximation: 'Spiritual anguish, restless ache, dull yearning without object; ennui, weariness of soul.',
-    approximation_note: 'Falsifies. As Nabokov noted, no single English word covers all shades. Ranges from mild boredom to soul-crushing existential ache. Specifically Russian — bound to Russian literary and existential tradition.',
+    approximation_note: 'Falsifies. As Nabokov noted, no single English word covers all shades. Ranges from mild boredom to soul-crushing existential ache. Specifically Russian, bound to Russian literary and existential tradition.',
     primary_sources: [
       {
         type: 'literary',
@@ -56346,7 +56347,7 @@ const UNTRANSLATABLES = [
         title: 'Тоска (Misery / Heartache)',
         year: 1886,
         language: 'Russian',
-        note: 'Short story whose title IS the term — irreducible thematic node.'
+        note: 'Short story whose title IS the term, irreducible thematic node.'
       }
     ],
     adjacents: ['saudade-pt', 'sehnsucht-de'],
@@ -56405,7 +56406,7 @@ const UNTRANSLATABLES = [
     tags: ['philosophical-conceptual', 'lexical-cultural', 'hellenic', 'ancient-greek', 'aristotle', 'plato', 'political-philosophy', 'form-of-life', 'community', 'classical-antiquity'],
     verification_status: 'cited_from_bibliography',
     approximation: 'City-state; political community; the form of human collective life within which the human is fully human.',
-    approximation_note: 'Falsifies. The polis is not a city ("city" is asty in Greek) and not a state in the modern sense. It is the constitutive form of communal political life as Aristotle theorized it — the only context within which human flourishing (eudaimonia) is possible. Modern "city" and "state" both miss this.',
+    approximation_note: 'Falsifies. The polis is not a city ("city" is asty in Greek) and not a state in the modern sense. It is the constitutive form of communal political life as Aristotle theorized it, the only context within which human flourishing (eudaimonia) is possible. Modern "city" and "state" both miss this.',
     primary_sources: [
       {
         type: 'philosophical',
@@ -56413,7 +56414,7 @@ const UNTRANSLATABLES = [
         title: 'Πολιτικά (Politica / Politics)',
         year: -335,
         language: 'Ancient Greek',
-        note: 'Book I, 1252b-1253a: anthropos physei politikon zōon — "the human is by nature an animal of the polis." This sentence is the operative one; English "political animal" already mistranslates politikon zōon by losing the polis-reference.'
+        note: 'Book I, 1252b-1253a: anthropos physei politikon zōon, "the human is by nature an animal of the polis." This sentence is the operative one; English "political animal" already mistranslates politikon zōon by losing the polis-reference.'
       },
       {
         type: 'philosophical',
@@ -56421,7 +56422,7 @@ const UNTRANSLATABLES = [
         title: 'Πολιτεία (Republic)',
         year: -380,
         language: 'Ancient Greek',
-        note: 'Title itself is Politeia — the constitution/way-of-life of the polis. English title "Republic" is already a translation problem.'
+        note: 'Title itself is Politeia, the constitution/way-of-life of the polis. English title "Republic" is already a translation problem.'
       }
     ],
     adjacents: [],
@@ -56441,7 +56442,7 @@ const UNTRANSLATABLES = [
     tags: ['philosophical-conceptual', 'polysemic', 'sinitic', 'classical-chinese', 'laozi', 'zhuangzi', 'daodejing', 'cosmological-principle', 'east-asian-philosophy', 'untranslated-by-design'],
     verification_status: 'cited_from_bibliography',
     approximation: 'Way; path; method; the underlying principle of cosmos and conduct.',
-    approximation_note: 'The Daodejing\'s opening line — 道可道，非常道 — explicitly states this. "The dao that can be spoken is not the eternal dao." Any translation falsifies by definition of the term itself. The character 道 carries: way, road, doctrine, method, to-speak, to-lead. None reduce to one English word.',
+    approximation_note: 'The Daodejing\'s opening line, 道可道，非常道, explicitly states this. "The dao that can be spoken is not the eternal dao." Any translation falsifies by definition of the term itself. The character 道 carries: way, road, doctrine, method, to-speak, to-lead. None reduce to one English word.',
     primary_sources: [
       {
         type: 'philosophical',
@@ -56465,11 +56466,11 @@ const UNTRANSLATABLES = [
         title: '論語 (Analects)',
         year: -450,
         language: 'Classical Chinese',
-        note: 'Confucian dao differs from Daoist dao — proper-Way of human conduct rather than cosmic-Way. Same term, different operative content. Adjacency within Chinese itself.'
+        note: 'Confucian dao differs from Daoist dao, proper-Way of human conduct rather than cosmic-Way. Same term, different operative content. Adjacency within Chinese itself.'
       }
     ],
     adjacents: [],
-    polymyth_function: 'Demonstrates a term whose untranslatability is THEMATIZED in the source itself. The Daodejing\'s first sentence is a meta-statement about the limits of language — translating it falsifies what the text says about itself. Also shows intra-language adjacency: Confucian and Daoist dao share the script but not the operative content.',
+    polymyth_function: 'Demonstrates a term whose untranslatability is THEMATIZED in the source itself. The Daodejing\'s first sentence is a meta-statement about the limits of language, translating it falsifies what the text says about itself. Also shows intra-language adjacency: Confucian and Daoist dao share the script but not the operative content.',
     see_also_aa: []
   },
 
@@ -56485,7 +56486,7 @@ const UNTRANSLATABLES = [
     tags: ['aesthetic', 'cluster', 'japonic', 'japanese', 'norinaga', 'genji', 'heian', 'transience', 'aesthetic-emotion', 'east-asian-aesthetics', 'pathos-of-things'],
     verification_status: 'cited_from_bibliography',
     approximation: 'The pathos of things; sensitivity to ephemera; gentle sadness at impermanence.',
-    approximation_note: 'Falsifies. As Norinaga formulated it, mono no aware is a form of KNOWLEDGE — to "know" mono no aware is to have a specific kind of cognitive-affective sensitivity to reality\'s transience. Reducing it to "pathos of things" treats it as a feeling-state when it is actually an epistemological-aesthetic capacity.',
+    approximation_note: 'Falsifies. As Norinaga formulated it, mono no aware is a form of KNOWLEDGE, to "know" mono no aware is to have a specific kind of cognitive-affective sensitivity to reality\'s transience. Reducing it to "pathos of things" treats it as a feeling-state when it is actually an epistemological-aesthetic capacity.',
     primary_sources: [
       {
         type: 'literary',
@@ -56554,7 +56555,7 @@ const UNTRANSLATABLES = [
       }
     ],
     adjacents: ['polis-gr', 'tao-zh'],
-    polymyth_function: 'Pre-Socratic foundation concept whose polysemic untranslatability is the philosophical content. Demonstrates that some terms cannot be split into senses without destroying the claim being made — namely, the Heraclitean claim that speech, reason, and cosmic law are one structure.',
+    polymyth_function: 'Pre-Socratic foundation concept whose polysemic untranslatability is the philosophical content. Demonstrates that some terms cannot be split into senses without destroying the claim being made, namely, the Heraclitean claim that speech, reason, and cosmic law are one structure.',
     see_also_aa: []
   },
 
@@ -56569,7 +56570,7 @@ const UNTRANSLATABLES = [
     kind: ['philosophical-conceptual', 'aesthetic', 'polysemic'],
     tags: ['philosophical-conceptual', 'aesthetic', 'polysemic', 'hellenic', 'ancient-greek', 'plato', 'aristotle', 'poetics', 'philosophy-of-art', 'representation-vs-enactment', 'halliwell-2002', 'sep-verified'],
     verification_status: 'secondary_verified',
-    approximation: 'Imitation, representation, enactment, embodiment, performative likeness — the operation by which art relates to what it depicts.',
+    approximation: 'Imitation, representation, enactment, embodiment, performative likeness, the operation by which art relates to what it depicts.',
     approximation_note: 'Falsifies. Plato\'s mimesis in Republic Book 3 is enactment (the actor BECOMES the role). Plato\'s mimesis in Republic Book 10 is pictorial copy (twice removed from reality). Aristotle\'s Poetics uses both senses. English "imitation" privileges the copy-of-an-original metaphor; "representation" privileges the symbolic mediation; neither captures the embodying-role-playing dimension.',
     primary_sources: [
       {
@@ -56616,7 +56617,7 @@ const UNTRANSLATABLES = [
     kind: ['philosophical-conceptual', 'lexical-cultural'],
     tags: ['philosophical-conceptual', 'lexical-cultural', 'hellenic', 'ancient-greek', 'aristotle', 'nicomachean-ethics', 'virtue-ethics', 'flourishing', 'happiness-mistranslation', 'energeia', 'annas-1993', 'sep-verified'],
     verification_status: 'secondary_verified',
-    approximation: 'Happiness, flourishing, well-being, the good life — the highest human good according to Aristotle.',
+    approximation: 'Happiness, flourishing, well-being, the good life, the highest human good according to Aristotle.',
     approximation_note: 'Falsifies. "Happiness" connotes a subjective mental state that the speaker is the authority on. "Flourishing" applies to plants and animals, but eudaimonia is possible only for rational beings. "Well-being" loses the activity-character: eudaimonia is something one DOES (energeia), not something one feels. Aristotle is explicit that the term names an objective achievement, not a sensation.',
     primary_sources: [
       {
@@ -56673,7 +56674,7 @@ const UNTRANSLATABLES = [
     tags: ['lexical-cultural', 'religious-doctrinal', 'cluster', 'iranian', 'persian', 'sufism', 'spiritual-chivalry', 'fotowwa', 'shahnameh', 'ferdowsi', 'corbin-1971', 'ridgeon-2018', 'iranica-blocked'],
     verification_status: 'secondary_verified',
     approximation: 'Spiritual chivalry; a constellation of generosity, selflessness, hospitality, courage, honesty, and justice that defines the ideal Iranian-Sufi-Shi\'a man (javānmard).',
-    approximation_note: 'Falsifies. "Chivalry" reads it through Western medieval knighthood (a class-and-warrior code); "manliness" reduces it to gendered virtue. Javānmardi is simultaneously an ethical practice, a Sufi initiatic path (linked to fotowwat), a guild structure (the ʿayyārs and lūtīs), AND an aesthetic-literary ideal in Ferdowsi\'s Shāhnāmeh. Ridgeon: the term "transcends" any English equivalent. The exact OPPOSITE of the listed virtues can be required of the javānmard in some contexts — the rule cannot be reduced to a content.',
+    approximation_note: 'Falsifies. "Chivalry" reads it through Western medieval knighthood (a class-and-warrior code); "manliness" reduces it to gendered virtue. Javānmardi is simultaneously an ethical practice, a Sufi initiatic path (linked to fotowwat), a guild structure (the ʿayyārs and lūtīs), AND an aesthetic-literary ideal in Ferdowsi\'s Shāhnāmeh. Ridgeon: the term "transcends" any English equivalent. The exact OPPOSITE of the listed virtues can be required of the javānmard in some contexts, the rule cannot be reduced to a content.',
     primary_sources: [
       {
         type: 'literary',
@@ -56796,8 +56797,8 @@ const UNTRANSLATABLES = [
     kind: ['philosophical-conceptual', 'aesthetic', 'lexical-cultural'],
     tags: ['philosophical-conceptual', 'aesthetic', 'lexical-cultural', 'romance', 'spanish', 'baroque', 'cervantes', 'calderon', 'quevedo', 'don-quijote', 'engano-desengano-dyad', 'gonzalez-echevarria-2015', 'neumeister-2025', 'robbins-2007', 'epistemic-mentality'],
     verification_status: 'secondary_verified',
-    approximation: 'Disillusion as awakening; the moment when the world\'s deceits (engaños) are seen through and reality becomes available — both as Baroque epistemic event and Neostoic-Christian moral state.',
-    approximation_note: 'Falsifies. "Disillusion" carries a depressive English connotation that misses the lucid-knowledge dimension; "disenchantment" reads it through Weberian secularization Spain did not undergo; "awakening" misses the bitter taste; "undeceiving" is awkward. González Echevarría: desengaño is the Baroque movement from engaño (deceit, illusion) to true awareness — the structural pattern of Don Quixote itself. Neumeister: it is not necessarily contradictory but irreducible to "sentimiento" (Rosales), "género" (Presa Díaz), or "state of mind" (Green).',
+    approximation: 'Disillusion as awakening; the moment when the world\'s deceits (engaños) are seen through and reality becomes available, both as Baroque epistemic event and Neostoic-Christian moral state.',
+    approximation_note: 'Falsifies. "Disillusion" carries a depressive English connotation that misses the lucid-knowledge dimension; "disenchantment" reads it through Weberian secularization Spain did not undergo; "awakening" misses the bitter taste; "undeceiving" is awkward. González Echevarría: desengaño is the Baroque movement from engaño (deceit, illusion) to true awareness, the structural pattern of Don Quixote itself. Neumeister: it is not necessarily contradictory but irreducible to "sentimiento" (Rosales), "género" (Presa Díaz), or "state of mind" (Green).',
     primary_sources: [
       {
         type: 'literary',
@@ -56875,7 +56876,7 @@ const UNTRANSLATABLES = [
     tags: ['lexical-cultural', 'pragmatic-interactional', 'iranian', 'persian', 'cultural-keyword', 'speech-act', 'social-frame', 'beeman-1986', 'koutlaki-2002'],
     verification_status: 'cited_from_bibliography',
     approximation: 'Ritualized politeness; ceremonial offer-and-refusal; performative deference structuring Iranian social interaction.',
-    approximation_note: 'Falsifies. Tarof is a SYSTEM of communication, not a behavior — it operates as a constitutive frame within which Iranian conversation occurs. The same words can be sincere or pure tarof depending on context. "Politeness" in English is descriptive of behavior; tarof is a hermeneutic field. Misreading tarof literally is the canonical cross-cultural error in Iranian-Western interaction.',
+    approximation_note: 'Falsifies. Tarof is a SYSTEM of communication, not a behavior, it operates as a constitutive frame within which Iranian conversation occurs. The same words can be sincere or pure tarof depending on context. "Politeness" in English is descriptive of behavior; tarof is a hermeneutic field. Misreading tarof literally is the canonical cross-cultural error in Iranian-Western interaction.',
     primary_sources: [
       {
         type: 'anthropological',
@@ -57148,7 +57149,7 @@ function renderTaxonomyMode() {
     const nbBadge = neighborhoodId ? `<div class="tc-shared-tags">↔ ${sharedTagCount(neighborhoodId, t.id)} shared</div>` : '';
     // When sorting by convergence, show the score
     const convBadge = sortMode === 'converge' ? `<div class="tc-conv-score">${convergenceScore(t)} cross-tradition tags</div>` : '';
-    // P7: Confluence indicator — which archetypal masses this entry participates in
+    // P7: Confluence indicator, which archetypal masses this entry participates in
     const occs = OCC_BY_TAX[t.id] || [];
     const massSet = new Set();
     occs.forEach(o => {
@@ -57813,7 +57814,7 @@ function renderTagPage() {
 
 // ============ DETAIL PANEL ============
 
-// ============ A21 — COMPANION RELATIONSHIPS DETAIL HELPER ============
+// ============ A21, COMPANION RELATIONSHIPS DETAIL HELPER ============
 // Renders the companion-pairings section for the bolen-goddess detail
 // panel. Iterates COMPANION_RELATIONSHIPS, matches entries whose `from`
 // tagId is one of the goddesses in this taxonomy's occurrences, displays
@@ -57862,7 +57863,7 @@ function renderCompanionRelationships(t, occs) {
     + '<ul class="cr-list">' + rows.join('') + '</ul></div>';
 }
 
-// ============ A5 — LINEAGE DERIVATION DETAIL HELPER ============
+// ============ A5, LINEAGE DERIVATION DETAIL HELPER ============
 // Renders the "Derived from" section for any taxonomy whose ID appears
 // as the `from_tax` field in any LINEAGE_EDGES entry. Shows the parent
 // taxonomy name, edge kind, and source citation. Auto-surfaces as more
@@ -57938,11 +57939,11 @@ function openDetail(id) {
     </div>
     ${t.disputed ? `<div class="dp-disputed"><span class="dp-disputed-label">Disputed / Critical Note</span><span class="dp-disputed-text">${escapeHtml(t.disputed)}</span></div>` : ''}
     ${t.note ? `<div class="dp-section"><h3>Note</h3><div class="dp-note">${escapeHtml(t.note)}</div></div>` : ''}
-    ${cats ? `<div class="dp-section"><h3>Categories <span style="font-weight:400;color:var(--faint);text-transform:none;letter-spacing:0;font-size:11px">— numbered badges show how many other taxonomies share this tag; click to see convergence</span></h3><div class="dp-cats">${cats}</div></div>` : ''}
+    ${cats ? `<div class="dp-section"><h3>Categories <span style="font-weight:400;color:var(--faint);text-transform:none;letter-spacing:0;font-size:11px">numbered badges show how many other taxonomies share this tag; click to see convergence</span></h3><div class="dp-cats">${cats}</div></div>` : ''}
     ${renderCompanionRelationships(t, occs)}
     ${renderLineageDerivation(t)}
     <div class="dp-section"><h3>Source</h3><div class="dp-source">${sourceHtml}</div></div>
-    ${sharedCount > 0 ? `<button class="dp-lens" data-lens-tax="${t.id}">⌖ Show Neighborhood — ${sharedCount} entr${sharedCount===1?'y':'ies'} share ≥1 tag</button>` : ''}
+    ${sharedCount > 0 ? `<button class="dp-lens" data-lens-tax="${t.id}">⌖ Show Neighborhood, ${sharedCount} entr${sharedCount===1?'y':'ies'} share ≥1 tag</button>` : ''}
   `;
   document.getElementById('detail-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -57951,7 +57952,7 @@ function openDetail(id) {
     activateNeighborhood(t.id);
     if (mode !== 'taxonomy') switchMode('taxonomy');
   });
-  // A5: lineage-edge click handler — open the parent taxonomy detail
+  // A5: lineage-edge click handler, open the parent taxonomy detail
   panel.querySelectorAll('.le-target').forEach(b => {
     b.addEventListener('click', () => {
       const targetId = b.dataset.targetTax;
@@ -57968,7 +57969,7 @@ function openDetail(id) {
       // Switch to tag mode and open tag-page in one render pass.
       mode = 'tag';
       document.querySelectorAll('.mode-btn').forEach(mb => mb.classList.toggle('active', mb.dataset.mode === 'tag'));
-      document.getElementById('search-input').placeholder = "Search a tag — 'Trickster', 'Hero', 'Mother', 'Shadow', 'Warrior' …";
+      document.getElementById('search-input').placeholder = "Search a tag, 'Trickster', 'Hero', 'Mother', 'Shadow', 'Warrior' …";
       document.getElementById('search-input').disabled = false;
       document.getElementById('filter-row').style.display = '';
       document.getElementById('controls-row').style.display = 'none';
@@ -58005,8 +58006,8 @@ function switchMode(m) {
   const ph = m === 'taxonomy'
     ? "Search 'Trickster' or 'Pearson' or 'Greek' or 'twelve' …"
     : m === 'tree'
-    ? "Tree mode — use the toggles below to switch view"
-    : "Search a tag — 'Trickster', 'Hero', 'Mother', 'Shadow', 'Warrior' …";
+    ? "Tree mode, use the toggles below to switch view"
+    : "Search a tag, 'Trickster', 'Hero', 'Mother', 'Shadow', 'Warrior' …";
   document.getElementById('search-input').placeholder = ph;
   document.getElementById('search-input').disabled = (m === 'tree');
   document.getElementById('filter-row').style.display = (m === 'tree') ? 'none' : '';
@@ -58095,5 +58096,8 @@ function toggleRemovedPanel(){
   <a href="/aa/views/" style="background:transparent;border:1px solid rgba(180,180,180,0.3);color:rgba(180,180,180,0.6);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:all .15s;display:inline-block;" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" onmouseout="this.style.color='rgba(180,180,180,0.6)';this.style.borderColor='rgba(180,180,180,0.3)'">views</a>
 </div>
 <script src="/js/theme.js" defer></script>
+<script src="/js/mandala.js" defer></script>
+<script src="/js/indra.js" defer></script>
+<script src="/js/footer.js" defer></script>
 </body>
 </html>

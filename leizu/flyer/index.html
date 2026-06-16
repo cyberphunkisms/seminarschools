@@ -41,7 +41,7 @@ body{-webkit-font-smoothing:antialiased;padding:32px 20px;}
   border:none;cursor:pointer;font-family:var(--m);
   font-size:11px;letter-spacing:0.1em;text-transform:uppercase;}
 
-/* MANDALA — fills the whole page, centered, full presence */
+/* MANDALA, fills the whole page, centered, full presence */
 .mandala{
   position:absolute;
   top:50%;left:50%;
@@ -54,7 +54,7 @@ body{-webkit-font-smoothing:antialiased;padding:32px 20px;}
 .mandala svg{display:block;width:100%;height:100%;}
 .mandala .stroke{stroke:currentColor;}
 
-/* TOP STRIP — school name, left, small */
+/* TOP STRIP, school name, left, small */
 .topstrip{
   position:absolute;top:0;left:0;right:0;
   z-index:3;
@@ -78,7 +78,7 @@ body{-webkit-font-smoothing:antialiased;padding:32px 20px;}
   color:var(--g28);text-align:right;line-height:1.9;
 }
 
-/* BOTTOM STRIP — url + qr, left-right */
+/* BOTTOM STRIP, url + qr, left-right */
 .botstrip{
   position:absolute;bottom:0;left:0;right:0;
   z-index:3;
@@ -94,7 +94,7 @@ body{-webkit-font-smoothing:antialiased;padding:32px 20px;}
 .qr{width:148px;height:148px;flex-shrink:0;}
 .qr img{display:block;width:100%;height:100%;}
 
-/* HORIZONTAL RULES — one at top, one at bottom, full width */
+/* HORIZONTAL RULES, one at top, one at bottom, full width */
 .rule-t{
   position:absolute;top:1.22in;left:0;right:0;
   height:1.5px;background:var(--g50);z-index:3;
@@ -106,6 +106,7 @@ body{-webkit-font-smoothing:antialiased;padding:32px 20px;}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/theme.css">
+<link rel="stylesheet" href="/css/alive.css">
 </head>
 <body>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sun" aria-hidden="true">&#9728;</span><span class="moon" aria-hidden="true">&#9790;</span></button><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
@@ -149,5 +150,8 @@ body{-webkit-font-smoothing:antialiased;padding:32px 20px;}
 
 </div>
 <script src="/js/theme.js" defer></script>
+<script src="/js/mandala.js" defer></script>
+<script src="/js/indra.js" defer></script>
+<script src="/js/footer.js" defer></script>
 </body>
 </html>

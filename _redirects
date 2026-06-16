@@ -103,6 +103,11 @@
 # Devil's Diary canonical home (June 10 2026) — lives at /polymyth/devilsdiary/
 # All spelling and shortpath aliases 301 here, subpaths preserved. No alias targets
 # /devils-notebook to avoid a redirect loop; that spelling is an alias, not the home.
+# Old /devilsdiary/ledger and /devilsdiary/ledger/ must resolve in ONE hop to the
+# canonical ledger, so they precede the /devilsdiary/* wildcard below (which would
+# otherwise send them to the fileless /polymyth/devilsdiary/ledger/).
+/devilsdiary/ledger/        /polymyth/devilsdiary/        301
+/devilsdiary/ledger         /polymyth/devilsdiary/        301
 /devilsdiary/*              /polymyth/devilsdiary/:splat  301
 /devilsdiary                /polymyth/devilsdiary/        301
 /devils-diary/*             /polymyth/devilsdiary/:splat  301

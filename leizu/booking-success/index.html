@@ -161,6 +161,7 @@ p{margin-bottom:1.25rem;color:var(--ink-soft);}
 </style>
 <link rel="stylesheet" href="/css/mobile-overlay.css">
 <link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
+<link rel="stylesheet" href="/css/alive.css">
 </head>
 <body>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
@@ -197,7 +198,7 @@ p{margin-bottom:1.25rem;color:var(--ink-soft);}
 // before redirect to Stripe). Builds the Cal.com URL with notes pre-filled.
 // Forwards user there.
 
-// CAL.COM URLS — these must match what's in booking-button.js
+// CAL.COM URLS, these must match what's in booking-button.js
 // One Cal.com event type per Stripe product. Keys match PAYMENT_LINKS keys.
 const CAL_LINKS = {
   three_sessions:        'https://cal.com/seminarschools/weekly3',
@@ -240,7 +241,7 @@ function buildAndForward(){
     notesText = noteParts.join(' | ');
     try { localStorage.removeItem('leizu-pending-booking'); } catch(e){}
   } else {
-    // No pending data — direct Stripe payment without going through the cart flow
+    // No pending data, direct Stripe payment without going through the cart flow
     calUrl = CAL_LINKS.three_sessions;
     notesText = 'Paid via Stripe direct link';
   }
@@ -263,5 +264,8 @@ function buildAndForward(){
 document.addEventListener('DOMContentLoaded', buildAndForward);
 </script>
 <script src="/js/theme.js" defer></script>
+<script src="/js/mandala.js" defer></script>
+<script src="/js/indra.js" defer></script>
+<script src="/js/footer.js" defer></script>
 </body>
 </html>

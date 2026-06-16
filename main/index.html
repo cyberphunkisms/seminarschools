@@ -17,7 +17,7 @@
 <meta name="twitter:description" content="Seminar Schools runs a curriculum, a journal of upcoming GTA lectures, and tutoring through Leizu Academy. Built around the practice that two prepared readers and one good text are enough.">
 <!-- /Open Graph -->
 
-<meta name="description" content="Seminar Schools is a Toronto practice built on seminar-method learning. Tutoring through Leizu Academy. Public philosophy at the Agora. Curated lectures and a written framework.">
+<meta name="description" content="Seminar Schools is a Toronto practice built on seminar-method learning, with tutoring through Leizu Academy, free public philosophy at the Agora, a running lecture calendar, and a written framework underneath it all.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#2D3F26">
@@ -73,8 +73,8 @@
   }
 
   /* ============================================================
-     PROFESSIONAL MODE (default) — mutes all decorative layers
-     PARTY MODE (body.party) — restores full visual state
+     PROFESSIONAL MODE (default), mutes all decorative layers
+     PARTY MODE (body.party), restores full visual state
      Every decorative override below is scoped to body:not(.party)
      ============================================================ */
 
@@ -171,7 +171,7 @@
   }
 
   /* ============================================================
-     MODE TOGGLE — small subtle link, bottom-right corner
+     MODE TOGGLE, small subtle link, bottom-right corner
      ============================================================ */
   .mode-toggle {
     position: fixed;
@@ -386,7 +386,7 @@
     background: rgb(200, 215, 240);
     box-shadow: 0 0 7px rgba(200, 215, 240, 0.7), 0 0 14px rgba(180, 200, 230, 0.4);
   }
-  /* One-shot atomic orbital on entering state 1 — ~1 inch peak, fast bang */
+  /* One-shot atomic orbital on entering state 1, ~1 inch peak, fast bang */
   .atomic-flash {
     position: fixed;
     width: 96px; height: 96px;
@@ -953,7 +953,7 @@
     position: relative; z-index: 5;
   }
   /* admission-form decorative label removed per spec */
-  /* admission · file upload field — custom label + visually-hidden
+  /* admission · file upload field, custom label + visually-hidden
      native input so the browser's locale-localized "Choose file"
      and "No file chosen" strings never render. Kira's review showed
      the native widget rendered Chinese ("選擇檔案 / 未選取檔案") on
@@ -1538,7 +1538,7 @@ input[type="button"] {
   });
 
   // ============================================================================
-  // POLYMYTH MANDALA v32 — APOLLONIAN ROOTS + FLOWERING
+  // POLYMYTH MANDALA v32, APOLLONIAN ROOTS + FLOWERING
   // ============================================================================
   // LAYER 1 (ROOTS): Three Apollonian gaskets at golden-ratio scales overlaid.
   //   The mathematical root system. Descartes' theorem. Moiré confluence.
@@ -1656,7 +1656,7 @@ input[type="button"] {
       const circles = buildGasket(g.rot, g.scale);
       circles.forEach(c => {
         const r = 1/Math.abs(c.k);
-        // FLATTER opacity curve — depth 6+ still reads at 0.4+
+        // FLATTER opacity curve, depth 6+ still reads at 0.4+
         const sw = c.k<0 ? 0.5 : Math.max(0.18, 0.75-(c.d||0)*0.07);
         const op = c.k<0 ? g.op*0.5 : Math.max(0.32, g.op - (c.d||0)*0.045);
         geom += `<circle class="stroke" cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="${r.toFixed(1)}" stroke-width="${sw.toFixed(2)}" opacity="${op.toFixed(2)}" fill="none"/>`;
@@ -1723,7 +1723,7 @@ input[type="button"] {
       }
     });
 
-    // ===== INDRA'S NET JEWELS — CONCRESCENCE =====
+    // ===== INDRA'S NET JEWELS, CONCRESCENCE =====
     // Where circles from DIFFERENT gaskets nearly cross = moiré meeting points.
     // These are the concrescence points where independent structures touch.
     const PROX = 4, CELL = PROX*2;
@@ -1779,7 +1779,7 @@ input[type="button"] {
   }
 
 
-  // Defer build to after first paint — build into BOTH layers
+  // Defer build to after first paint, build into BOTH layers
   function initGeo() {
     const svg = buildMandala();
     document.getElementById('geo').innerHTML = svg;
@@ -1822,18 +1822,18 @@ input[type="button"] {
   // ===== Section camera vantage points =====
   // PRIMARY CAMERA: visits specific pores and depths of the gasket.
   const sectionSettings = [
-    { x:  120, y:   30, zoom:  7, density: 0.55 },  // i Threshold — right pore
-    { x:   40, y:  -30, zoom:  5, density: 0.60 },  // ii Lectures — wide view
-    { x:   10, y: -130, zoom: 10, density: 0.55 },  // iii Academy — top pore deep
-    { x:    0, y:   50, zoom: 12, density: 0.55 },  // iv Founder — central gap
-    { x: -110, y:   50, zoom:  8, density: 0.58 },  // v Community — left pore
-    { x:  -60, y:  120, zoom: 11, density: 0.55 },  // vi Writing — bottom-left deep
-    { x:   20, y:  -10, zoom:  6, density: 0.55 },  // vii About — center wide
-    { x:   70, y: -100, zoom:  9, density: 0.55 },  // viii Admission — top-right
+    { x:  120, y:   30, zoom:  7, density: 0.55 },  // i Threshold, right pore
+    { x:   40, y:  -30, zoom:  5, density: 0.60 },  // ii Lectures, wide view
+    { x:   10, y: -130, zoom: 10, density: 0.55 },  // iii Academy, top pore deep
+    { x:    0, y:   50, zoom: 12, density: 0.55 },  // iv Founder, central gap
+    { x: -110, y:   50, zoom:  8, density: 0.58 },  // v Community, left pore
+    { x:  -60, y:  120, zoom: 11, density: 0.55 },  // vi Writing, bottom-left deep
+    { x:   20, y:  -10, zoom:  6, density: 0.55 },  // vii About, center wide
+    { x:   70, y: -100, zoom:  9, density: 0.55 },  // viii Admission, top-right
     { x:  120, y:   30, zoom:  7, density: 0.55 },  // loop
   ];
   // SECOND CAMERA: visits the OPPOSITE regions at every section.
-  // Creates moiré at the journey level — two independent readings of the same structure.
+  // Creates moiré at the journey level, two independent readings of the same structure.
   const sectionSettings2 = [
     { x: -100, y:   40, zoom:  6, density: 0.35 },  // left pore while primary is right
     { x:    0, y:   50, zoom:  8, density: 0.38 },  // center while primary is wide
@@ -1982,7 +1982,7 @@ input[type="button"] {
   // ===== Firefly trail (CSS-driven, zero-bandwidth ephemeral) =====
   // Occasionally emit a tiny accent-colored dot at the cursor position.
   // Each dot fades out and is removed within 1.2s. Throttled to ~5 per second max.
-  // Uses no images, no canvas, no continuous loop — just transient DOM nodes that the
+  // Uses no images, no canvas, no continuous loop, just transient DOM nodes that the
   // garbage collector reclaims. Honors prefers-reduced-motion (will not emit).
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     let lastEmit = 0;
@@ -2077,7 +2077,7 @@ input[type="button"] {
   // Click anywhere (except interactive elements) cycles mode
   document.addEventListener('click', (e) => {
     if (e.target.closest('a, button, input, textarea, select, form, .lecture, .entry, .project, label, .mode-toggle')) return;
-    // Click-to-cycle only active in party mode — professional mode is one state
+    // Click-to-cycle only active in party mode, professional mode is one state
     if (!document.body.classList.contains('party')) return;
     lightState = (lightState + 1) % 3;
     applyMode();
@@ -2237,7 +2237,7 @@ input[type="button"] {
 
   // ===== Rubber-band pull-up at top of threshold =====
   // Pulling up at scrollY=0 lifts the body downward as visceral feedback,
-  // then springs back. Page does NOT actually loop upward — it resists.
+  // then springs back. Page does NOT actually loop upward, it resists.
   let pullAmount = 0;
   let pullActive = false;
   let pullRAF = null;
@@ -2331,7 +2331,7 @@ input[type="button"] {
     if (saved === 'party') setMode(true);
   } catch(e) {}
 })();
-// Custom file-input status updater — replaces the browser's native
+// Custom file-input status updater, replaces the browser's native
 // locale-bound "no file chosen" string with text in the page's own
 // language (English on this site). Updates on change to show the
 // filename or, for multi-file selection, the count.
@@ -2492,5 +2492,6 @@ function fetchEventsWithFallback(){
 
 <script src="/js/mandala.js" defer></script>
 <script src="/js/indra.js" defer></script>
+<script src="/js/footer.js" defer></script>
 </body>
 </html>

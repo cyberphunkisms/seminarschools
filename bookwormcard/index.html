@@ -4,17 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>bookwormburrows</title>
-<meta name="description" content="bookwormburrows. Make a wormcard. Eleven cosmological traditions over your birth-data. Thirty-eight burrowing animals. Character-smashing without limit. Matrix terminal interface.">
+<meta name="description" content="Make a wormcard inside bookwormburrows, laying eleven cosmological traditions over your birth data and choosing among thirty-eight burrowing animals, then smashing characters together without limit through a matrix terminal interface.">
 <link rel="canonical" href="https://seminarschools.com/bookwormcard/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seminarschools.com/bookwormcard/">
-<meta property="og:title" content="bookwormburrows — make your wormcard">
-<meta property="og:description" content="A pedagogical depth-game. Smash the figures you admire into a character that is none of them. Ten horoscope traditions over your birth-data. Thirty-eight burrowing animals. The character is yours.">
+<meta property="og:title" content="bookwormburrows, make your wormcard">
+<meta property="og:description" content="A pedagogical depth game where you smash the figures you admire into a character that is none of them, laying eleven cosmological traditions over your birth data and choosing among thirty-eight burrowing animals until the character is yours.">
 <meta property="og:image" content="https://seminarschools.com/og-image.png">
 <meta property="og:site_name" content="Seminar Schools">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="bookwormburrows — make your wormcard">
-<meta name="twitter:description" content="A pedagogical depth-game. Smash admired figures into a character. Ten cosmological grids. The character is yours.">
+<meta name="twitter:title" content="bookwormburrows, make your wormcard">
+<meta name="twitter:description" content="A pedagogical depth game. Smash the figures you admire into a character that is none of them, built from eleven cosmological traditions laid over your birth data.">
 <meta name="twitter:image" content="https://seminarschools.com/og-image.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -75,7 +75,7 @@
   html.fs-small{font-size:16px}
   html.fs-large{font-size:22px}
   html.fs-xlarge{font-size:26px}
-  /* CL-10: zoom-resilience — when viewport gets very tall (high zoom), allow scroll */
+  /* CL-10: zoom-resilience, when viewport gets very tall (high zoom), allow scroll */
   @media (max-height:600px){
     html,body{overflow:auto;height:auto}
     .layout{flex-direction:column;height:auto;min-height:100vh}
@@ -83,7 +83,7 @@
     .preview{width:auto;height:auto;max-height:50vh;border-left:none;border-top:1px solid var(--line)}
     .keys-hint{position:relative}
   }
-  /* CL-11: PRINT styles — clean B&W layout for paper */
+  /* CL-11: PRINT styles, clean B&W layout for paper */
   @media print{
     body{background:#fff;color:#000;font-family:'Courier New',monospace;font-size:11pt;text-shadow:none}
     body::after,body::before,#rain-canvas,#toggles,#animal-cinematic,#tier-cinematic,.keys-hint{display:none !important}
@@ -128,7 +128,7 @@
   .preview{width:380px;border-left:1px solid var(--line);padding:1.5rem;display:flex;flex-direction:column;background:rgba(0,0,0,0.3);height:100vh;overflow:hidden}
 
   /* ============================================================
-     BYPASS-MODE — empty terminal aesthetic for the intro screen.
+     BYPASS-MODE, empty terminal aesthetic for the intro screen.
      Strips all chrome so only the chat + cursor sit in the void.
      Once player presses enter, chrome fades in over 600ms.
      ============================================================ */
@@ -153,7 +153,7 @@
     overflow:visible;
     margin-bottom:1rem;
   }
-  /* Help link only visible during bypass — for first-time visitors who
+  /* Help link only visible during bypass, for first-time visitors who
      want to know what they're walking into before they press enter. */
   .bypass-help{
     position:fixed;
@@ -172,7 +172,7 @@
     opacity:0.7;
     pointer-events:auto;
   }
-  /* Chrome reveal — once bypass-mode is removed, fade the chrome in */
+  /* Chrome reveal, once bypass-mode is removed, fade the chrome in */
   #toggles, .preview, .header, .keys-hint{
     transition:opacity 0.6s ease-in;
   }
@@ -221,7 +221,7 @@
     opacity:0.85;
   }
   #chat .err{color:var(--danger);text-shadow:0 0 6px rgba(255,68,68,0.5)}
-  /* Animal-cycle status line — pinned single-line feedback that
+  /* Animal-cycle status line, pinned single-line feedback that
      updates on each arrow cycle. Border + background give it a
      visual frame so the player cannot miss the change. */
   #chat .animal-cycle-line{
@@ -299,7 +299,7 @@
     #word-count .earning{animation:none}
   }
 
-  /* menu (38 animals, 12 months, etc.) — floats UNDER current question */
+  /* menu (38 animals, 12 months, etc.), floats UNDER current question */
   #menu{display:none;margin-top:0.8rem;border:1px dashed var(--fg-darker);padding:0.6rem 0;max-height:60vh;overflow-y:auto;background:rgba(0,0,0,0.4)}
   #menu.visible{display:block}
   #menu .menu-section{padding:0.4rem 1rem 0.2rem;font-size:0.95rem;color:var(--fg-darker);text-shadow:none;text-transform:uppercase;letter-spacing:1.5px;border-top:1px dashed var(--fg-darker);margin-top:0.3rem}
@@ -351,7 +351,7 @@
 
   /* card preview */
   .preview-title{font-size:0.95rem;color:var(--fg-dim);text-shadow:none;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:0.6rem;padding-bottom:0.3rem;border-bottom:1px dashed var(--fg-darker);flex-shrink:0;display:flex;justify-content:space-between;align-items:center;gap:0.5rem}
-  /* Legend toggle — small ? button on the wormcard header that
+  /* Legend toggle, small ? button on the wormcard header that
      opens a panel mapping the visual vocabulary to its meaning.
      Closes critique #2 from the audit: silent visualization. */
   .legend-toggle{
@@ -489,7 +489,7 @@
     .empty-card-state .empty.pulse,.empty-card-state .empty.pulse-slow,.empty-card-state .empty-worm-large{animation:none;opacity:0.85}
   }
 
-  /* hint footer — anchored to bottom of viewport */
+  /* hint footer, anchored to bottom of viewport */
   .keys-hint{position:fixed;bottom:0;left:0;right:0;padding:0.5rem 1.5rem;background:#000;border-top:1px dashed var(--fg-darker);font-size:0.95rem;color:var(--fg-darker);text-shadow:none;z-index:10;display:flex;gap:1.5rem;flex-wrap:wrap}
   .keys-hint b{color:var(--fg-dim)}
   .keys-hint .key{display:inline;padding:0;border:none;border-radius:0;font-size:0.95rem;color:var(--fg-dim);text-shadow:var(--glow)}
@@ -500,7 +500,7 @@
   .keys-hint .skip-game-link a:hover{color:var(--fg);border-bottom-color:var(--fg)}
 
   /* mobile */
-  /* Touch-bar — hidden by default. The mobile media query below
+  /* Touch-bar, hidden by default. The mobile media query below
      unhides it. Buttons mirror the keyboard hints so a phone player
      does not need an arrow row. */
   #touch-bar{
@@ -538,9 +538,9 @@
     flex:0 0 14%;
     font-size:1.4rem;
   }
-  /* Back is destructive — it rewinds an already-answered field.
+  /* Back is destructive, it rewinds an already-answered field.
      Different colour, dashed border, lower visual weight. Skip is
-     intentional — designed flow, advance without committing.
+     intentional, designed flow, advance without committing.
      Different visual weight than back so a fast tap does not
      conflate them. */
   #touch-bar .tb-back{
@@ -567,7 +567,7 @@
   }
 
   @media (max-width:900px){
-    /* Mobile trial-mode banner — visible only on mobile screens. */
+    /* Mobile trial-mode banner, visible only on mobile screens. */
     #mobile-trial-banner{
       display:flex;
       flex-wrap:wrap;
@@ -592,7 +592,7 @@
       min-width:0;
     }
     body{font-size:18px}
-    /* Allow scrolling on phones — fixed-viewport bb does not survive
+    /* Allow scrolling on phones, fixed-viewport bb does not survive
        the keyboard rising. The body owns the scroll and the layout
        stacks naturally. */
     html,body{height:auto;min-height:100vh;overflow:auto}
@@ -611,7 +611,7 @@
     .keys-hint{
       font-size:0.8rem;padding:0.5rem 0.8rem;gap:0.6rem;
       flex-wrap:wrap;
-      /* Most of the keyboard hints are useless on touch — collapse
+      /* Most of the keyboard hints are useless on touch, collapse
          them. The touch-bar above the input does the work. */
     }
     .keys-hint span{display:none}
@@ -628,7 +628,7 @@
     #menu .menu-item{min-height:44px;padding:0.6rem 0.8rem}
     #menu{max-height:50vh}
   }
-  /* Very narrow — collapse the touch-bar arrow buttons inline. */
+  /* Very narrow, collapse the touch-bar arrow buttons inline. */
   @media (max-width:420px){
     #touch-bar .tb-prev,#touch-bar .tb-next{flex:0 0 18%}
     #touch-bar .tb-back,#touch-bar .tb-skip{flex:1 1 30%}
@@ -684,7 +684,7 @@
     #tier-cinematic.show{animation:none;display:none}
   }
 
-  /* Mobile trial-mode banner — hidden on desktop by default. The
+  /* Mobile trial-mode banner, hidden on desktop by default. The
      mobile breakpoint at max-width:900px below shows it. */
   #mobile-trial-banner{display:none}
 
@@ -730,7 +730,7 @@
     margin:0.25rem 0.4rem 0.25rem 0;
     animation:stat-burst 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)
   }
-  /* Floor variant — same shape, dimmer palette. The floor +1 fires
+  /* Floor variant, same shape, dimmer palette. The floor +1 fires
      on every forward Enter, including skips and birth-data fields.
      If it shared the full stat-award glow the chat would feel like
      fireworks at every keystroke. The dimmer pass keeps the building
@@ -761,7 +761,7 @@
     .preview.flash{animation:none}
   }
 
-  /* mascot worm — bouncy ASCII crawler shown between sections */
+  /* mascot worm, bouncy ASCII crawler shown between sections */
   .worm-crawl{
     color:var(--fg-dim); text-shadow:none; font-size:1rem;
     margin:0.6rem 0; letter-spacing:0;
@@ -806,6 +806,7 @@
   #card-preview .ascii-div{color:var(--fg-darker);text-shadow:none;font-size:0.85rem;letter-spacing:0;}
 </style>
 <link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
+<link rel="stylesheet" href="/css/alive.css">
 </head>
 <body class="bypass-mode">
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:none;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
@@ -814,7 +815,7 @@
 
 
 <!-- ============================================================
-     MOBILE TRIAL-MODE BANNER — bb is a writing-heavy depth-game.
+     MOBILE TRIAL-MODE BANNER, bb is a writing-heavy depth-game.
      Mobile keyboards and screens are a poor fit for the kind of
      paragraph-length authentic answering the game requires, AND
      the print/save-as-PDF flow is unreliable across mobile
@@ -1034,11 +1035,11 @@ var data = {
   idiolect_marker:'',
   unique_knowledge:'',
   // ------------------------------------------
-  stats:{}, // accumulating: {STAT_NAME: count} — positive adjective stats
-  quirks:{}, // accumulating: {QUIRK_NAME: count} — negative character markers
+  stats:{}, // accumulating: {STAT_NAME: count}, positive adjective stats
+  quirks:{}, // accumulating: {QUIRK_NAME: count}, negative character markers
   // ---- depth-engine state (added in build 2/11) ----
-  xp: 0,                    // running depth-XP — only ever increases
-  hp: 100,                  // running HP — depletes from quirks, heals from depth-stats
+  xp: 0,                    // running depth-XP, only ever increases
+  hp: 100,                  // running HP, depletes from quirks, heals from depth-stats
   hpPotionsUsed: 0,         // 1-time-only revival on death
   qualityHistory: [],       // [{phase, input, statsHit, quirksHit, xpDelta, hpDelta, ts, xpAfter, hpAfter}]
   tier: 'worm',             // current life-stage of the creature
@@ -1077,7 +1078,7 @@ var horoscope = {readings:[], hegelianekittyTier:false};
 var hegelianeFiredFor = '';
 
 // ============================================================
-// HEGELIANE NAMING — the badge title is built from the chosen
+// HEGELIANE NAMING, the badge title is built from the chosen
 // animal slug. "kitty" is no longer hardcoded. An owl-picker becomes
 // hegelianeowl, a fox-picker becomes hegelianefox, and so on. Slug
 // is sanitised to letters and digits only so multi-word animal names
@@ -1089,12 +1090,12 @@ function hegelianeName(){
 }
 
 // ============================================================
-// FULL-COMPLETION GATE — the dynamic hegeliane{animal} tier badge
+// FULL-COMPLETION GATE, the dynamic hegeliane{animal} tier badge
 // only unlocks when every field is filled. No skips. The previous
 // gate fired at hour+place which surfaced the badge far too early
 // in the flow. Birth fields, identity, the eight wormhole answers,
 // the wildcard, the thirteen deep questions, and at least five
-// smashes are all required. Order does not matter — only that
+// smashes are all required. Order does not matter, only that
 // every cell has content.
 // ============================================================
 function isFullyFilled(){
@@ -1117,7 +1118,7 @@ function isFullyFilled(){
   return true;
 }
 
-// Watcher — call after every advance. Fires the cinematic on the
+// Watcher, call after every advance. Fires the cinematic on the
 // false→true transition and binds the firing to the chosen animal
 // so a re-pick does not silently steal the moment. Keyed by animal
 // slug so a player who restarts and changes their mind still gets
@@ -1132,7 +1133,7 @@ function checkFullCompletionTransition(){
 var stateHistory = [];
 var currentState = 'bypass';
 // ============================================================
-// EDIT-FLOW INTERCEPT FLAGS — set by edit-pick.advance when the
+// EDIT-FLOW INTERCEPT FLAGS, set by edit-pick.advance when the
 // player asks to edit a field from review. The next transitionTo
 // out of the edit target gets redirected to editReturnTarget so
 // the player returns to the seal phase instead of walking forward
@@ -1219,7 +1220,7 @@ function escapeHtml(s){
   });
 }
 
-// Scroll chat container to bottom — but ONLY if user is already near bottom.
+// Scroll chat container to bottom, but ONLY if user is already near bottom.
 // Never fight user-scroll: if they've scrolled up to read, leave them alone.
 function scrollChatBottom(){
   if(!chatEl) return;
@@ -1247,14 +1248,14 @@ function awardStats(input, phaseLabel){
   var ctx = { ageRange: ageRange, hp: data.hp };
   var r = window.Reactions.scoreFor ? window.Reactions.scoreFor(phaseLabel || 'unknown', input, ctx) : null;
   if(!r){
-    // Legacy path — old statsFor only
+    // Legacy path, old statsFor only
     var hits = window.Reactions.statsFor(input);
     hits.forEach(function(s){ data.stats[s] = (data.stats[s] || 0) + 1; });
     return { statsHit: hits.map(function(s){ return {stat:s, weight:1}; }), quirksHit:[], xpDelta:0, hpDelta:0, reasons:[] };
   }
 
   // ============================================================
-  // REWRITE-AWARE SCORING — if this answer rewrites a previously
+  // REWRITE-AWARE SCORING, if this answer rewrites a previously
   // answered single-field phase, unwind the prior contribution
   // before applying the new one. Closes the "permanent quirks"
   // critique through the existing back-flow: a player who answered
@@ -1306,8 +1307,8 @@ function awardStats(input, phaseLabel){
   // weigh 3. Tier-2 hits (character substance, voice, stance,
   // action) weigh 2. Tier-3 hits (light-craft markers) weigh 1.
   // The character ends up with a quantitative profile of how
-  // strongly they read on each axis — COMMUNAL: 7, GREGARIOUS: 4,
-  // and so on — rather than a flat tally of which stats they touched.
+  // strongly they read on each axis, COMMUNAL: 7, GREGARIOUS: 4,
+  // and so on, rather than a flat tally of which stats they touched.
   // MINIMALIST fires on any answer of forty characters or fewer, which
   // taxes the terminal's native brevity \u2014 observed at +36 on one card.
   // Cap its total contribution at one fire (+2) per card. Filtered BEFORE
@@ -1333,7 +1334,7 @@ function awardStats(input, phaseLabel){
   var newHp = data.hp + r.hpDelta;
   if(newHp <= 0){
     if((data.hpPotionsUsed || 0) === 0){
-      // First fall — potion consumed, worm spared.
+      // First fall, potion consumed, worm spared.
       data.hpPotionsUsed = 1;
       data.hp = 50;
       appendLine('<span class="err">the worm collapsed.</span>', {gap:true, instant:true});
@@ -1342,7 +1343,7 @@ function awardStats(input, phaseLabel){
         window.Tamagotchi.reactToHpDamage(['revived']);
       }
     } else {
-      // Second fall — death, restart.
+      // Second fall, death, restart.
       data.hp = 0;
       appendLine('<span class="err">the worm died.</span>', {gap:true, instant:true});
       appendLine('<span class="quiet">there is no second potion. the card is gone. start again from the form.</span>', {gap:true, instant:true});
@@ -1426,7 +1427,7 @@ function awardStats(input, phaseLabel){
   }
 
   // ============================================================
-  // GEMINI AUGMENTATION PASS — depth-grading layer. The regex pass
+  // GEMINI AUGMENTATION PASS, depth-grading layer. The regex pass
   // above is the fast surface reader. Gemini is the deeper reader
   // that knows what the answer is DOING, not just what it is
   // SAYING. Dispatched async so the regex chips and accumulated
@@ -1494,7 +1495,7 @@ function awardStats(input, phaseLabel){
       // canonical weights are honored (Gemini is told to use them).
       var addedMarks = [];
       augment.add.forEach(function(a){
-        // De-dupe — if the regex already caught this stat, skip
+        // De-dupe, if the regex already caught this stat, skip
         // (Gemini is supposed to add only what was MISSED).
         if((entryRef.statsHit || []).some(function(h){ return h.stat === a.stat; })) return;
         if((entryRef.quirksHit || []).some(function(q){ return q.quirk === a.stat; })) return;
@@ -1549,10 +1550,10 @@ function awardStats(input, phaseLabel){
 }
 
 // ============================================================
-// DEPTH-SCORE — running counter used by tier-prose to pick voice register.
+// DEPTH-SCORE, running counter used by tier-prose to pick voice register.
 // Counts tier-1 (cognitive depth + craft) stat hits over the last 6 answers.
 // Higher score = chat trusts the player and asks deeper questions.
-// Tier-1 list derived from DepthEngine — single source of truth.
+// Tier-1 list derived from DepthEngine, single source of truth.
 // ============================================================
 var TIER1_STATS_CACHE = null;
 function getTier1Stats(){
@@ -1560,7 +1561,7 @@ function getTier1Stats(){
   if(window.DepthEngine && window.DepthEngine.getTier1Stats){
     TIER1_STATS_CACHE = window.DepthEngine.getTier1Stats();
   } else {
-    // Fallback if DepthEngine somehow missing — empty list = depthScore always 0
+    // Fallback if DepthEngine somehow missing, empty list = depthScore always 0
     TIER1_STATS_CACHE = [];
   }
   return TIER1_STATS_CACHE;
@@ -1584,7 +1585,7 @@ function currentDepthScore(){
 }
 
 // ============================================================
-// PROMPT PICKER — wraps TierProse to remember last-index-used per field
+// PROMPT PICKER, wraps TierProse to remember last-index-used per field
 // so consecutive asks of the same field rotate through variants.
 // Returns just the prompt string (the chat phases call this).
 // ============================================================
@@ -1598,7 +1599,7 @@ function pickPrompt(field){
 }
 
 // ============================================================
-// GLOBAL ESCAPE — accept finish/exit/quit/done/enough at any post-vitals prompt.
+// GLOBAL ESCAPE, accept finish/exit/quit/done/enough at any post-vitals prompt.
 // Returns true if the input should seal the card and jump to review.
 // Call sites: makeWormhole.advance, makeDeepQuestion.advance,
 // smash-name, smash-quality, wildcard, threshold.
@@ -1642,7 +1643,7 @@ function showReaction(field, input){
       if(text){
         span.innerHTML = '<span class="quiet">'+escapeHtml(text)+'</span>';
       } else {
-        // Gemini failed — fall back to static Morpheus-voice
+        // Gemini failed, fall back to static Morpheus-voice
         var staticR = getReaction(field, input);
         if(staticR){
           span.innerHTML = '<span class="quiet">'+escapeHtml(staticR)+'</span>';
@@ -1653,7 +1654,7 @@ function showReaction(field, input){
     });
     return;
   }
-  // No Gemini — static Morpheus-fallback inline
+  // No Gemini, static Morpheus-fallback inline
   var staticR = getReaction(field, input);
   if(staticR){
     appendLine('<span class="quiet">'+escapeHtml(staticR)+'</span>', {gap:true, instant:true});
@@ -1735,7 +1736,7 @@ function showTierCinematic(name, sub){
 }
 
 // ============================================================
-// CONSOLIDATED EXPORT — ONE CARD = PDF.
+// CONSOLIDATED EXPORT, ONE CARD = PDF.
 // The wormcard is a single artifact in PDF form. The PDF carries
 // every paragraph the player wrote, embeds the save blob (so the
 // PDF doubles as the save file), prints natively, drops back into
@@ -1743,7 +1744,7 @@ function showTierCinematic(name, sub){
 // the card straight into any AI chat to play with the character.
 //
 // Earlier builds shipped parallel SVG/TXT/JSON exports as separate
-// "artifacts". Those were a category error — proliferation by
+// "artifacts". Those were a category error, proliferation by
 // use-case rather than consolidation around the project's own
 // frame, which is bookwormcard singular. The PDF is the card.
 // generateCardSvg, wrapText, downloadCardSvg, downloadCardText,
@@ -1753,13 +1754,13 @@ function showTierCinematic(name, sub){
 // ============================================================
 
 // ============================================================
-// SAVE FORMAT — canonical save lives inside the PDF.
+// SAVE FORMAT, canonical save lives inside the PDF.
 // The print template at /bookwormcard/print/ reads localStorage and embeds
 // the save blob directly into the rendered HTML before printing,
 // so the resulting PDF carries its own save data. The chat-side
 // helper that previously built the same payload (buildSavePayload)
 // has been removed because no chat-side code calls it any longer
-// — the print template owns the embed end-to-end.
+//, the print template owns the embed end-to-end.
 // The drag-drop loader scans dropped PDFs for the BB_SAVE markers
 // and resumes from the embedded JSON. Legacy .json/.html/.txt
 // files dropped from earlier builds still work via the same
@@ -1767,7 +1768,7 @@ function showTierCinematic(name, sub){
 // ============================================================
 
 // ============================================================
-// RESTORE FROM SAVE — validates payload shape, merges into data,
+// RESTORE FROM SAVE, validates payload shape, merges into data,
 // jumps to a sensible state. Used by drag-drop upload handler.
 // Returns true on success, false on bad payload.
 // ============================================================
@@ -1797,7 +1798,7 @@ function restoreFromSavePayload(payload){
   saveCheckpoint();
   // Jump to a sensible resume state
   var resumeState = payload.currentState;
-  // Build a richer load-confirmation line — name the handle, the
+  // Build a richer load-confirmation line, name the handle, the
   // state, and what's carrying forward (smashes, stats) so the
   // player can see what the save brought back rather than the
   // resume happening silently.
@@ -1882,7 +1883,7 @@ function extractSaveFromText(text){
 function maybeInterject(){ /* intentional no-op */ }
 
 // ============================================================
-// DISPLAY TOGGLES — ESL / high-contrast / font-size / print
+// DISPLAY TOGGLES, ESL / high-contrast / font-size / print
 // ============================================================
 var TOGGLES_KEY = 'bb_display_toggles_v1';
 function loadToggles(){
@@ -1927,7 +1928,7 @@ function bumpFontSize(delta){
   applyToggles();
 }
 
-// Print/PDF — open browser print dialog. Print-specific CSS handles formatting.
+// Print/PDF, open browser print dialog. Print-specific CSS handles formatting.
 // Two modes: filled-card (default) or blank questionnaire.
 function printCard(){
   // Save current state to localStorage so the print template can read it,
@@ -1936,7 +1937,7 @@ function printCard(){
   window.open('/bookwormcard/print/?autoprint=1', '_blank');
 }
 
-// Print blank questionnaire — open the print template without autoprint
+// Print blank questionnaire, open the print template without autoprint
 // and without data (a fresh tab would still see localStorage data, so we
 // pass ?blank=1 to skip the fill step)
 function printBlank(){
@@ -1945,7 +1946,7 @@ function printBlank(){
 
 function showPrintMenu(){
   // ============================================================
-  // EXPORT MENU — ONE CARD. ONE BUTTON.
+  // EXPORT MENU, ONE CARD. ONE BUTTON.
   // The bookwormcard is a single artifact: the PDF. It carries
   // every paragraph, embeds the save blob, prints natively, drops
   // back into the game on resume, and is AI-readable. Earlier
@@ -1995,7 +1996,7 @@ function saveCheckpoint(){
     };
     localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
   } catch(e){
-    // localStorage may be disabled — silently skip
+    // localStorage may be disabled, silently skip
   }
 }
 function loadCheckpoint(){
@@ -2016,7 +2017,7 @@ function clearCheckpoint(){
 }
 
 // ============================================================
-// PROGRESS DOTS — show stage-completion at top
+// PROGRESS DOTS, show stage-completion at top
 // ============================================================
 // Stages: animal, handle, email, year, month-day, time, place, wormhole, smashes, wildcard, review
 // 11 stages total
@@ -2099,7 +2100,7 @@ function appendLine(text, opts){
 }
 
 // ============================================================
-// showError — display an error message, REPLACING any active error
+// showError, display an error message, REPLACING any active error
 // rather than stacking. Errors stay "live" until the player submits
 // non-error input, at which point the next showError starts fresh.
 // Prevents a kid from hammering enter on bad input and filling the
@@ -2121,7 +2122,7 @@ function showError(text){
 }
 
 // ============================================================
-// appendAnswer / appendQuiet / appendGap — small helpers that compress
+// appendAnswer / appendQuiet / appendGap, small helpers that compress
 // the boilerplate sprinkled across every phase advance handler.
 // Before: appendLine('<span class="answer">'+escapeHtml(input)+'</span>', {gap:false});
 // After:  appendAnswer(input);
@@ -2258,16 +2259,16 @@ function attachInputHandler(){
 
 function handleInputKey(e){
   // ============================================================
-  // ANIMAL ARROW CYCLING — handle FIRST, before any other gate.
+  // ANIMAL ARROW CYCLING, handle FIRST, before any other gate.
   // The typing gate that follows would block arrow presses during
   // the 1-2 second typewriter for "first: pick your animal."; some
   // players press arrows during that window and saw no response.
-  // Cycling has no dependency on typing being done — handle it
+  // Cycling has no dependency on typing being done, handle it
   // unconditionally when the conditions are right.
   // ============================================================
   if(currentState === 'animal' && (!inputEl || inputEl.value === '') && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')){
     if(menuEl && menuEl.classList.contains('visible')) {
-      // menu is up — let menu navigation handle it below
+      // menu is up, let menu navigation handle it below
     } else {
       e.preventDefault();
       var totalA = animalCycleList.length + 1;
@@ -2301,7 +2302,7 @@ function handleInputKey(e){
       return;
     }
   } else {
-    // ANIMAL CYCLE PICKER — arrows cycle through worm + burrowing animals.
+    // ANIMAL CYCLE PICKER, arrows cycle through worm + burrowing animals.
     // Only fires when in the animal state and the input is empty (so kids
     // can still type a slug directly to jump to a specific animal).
     if(currentState === 'animal' && inputEl.value === '' && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')){
@@ -2316,12 +2317,12 @@ function handleInputKey(e){
       renderAnimalCyclePreview();
       return;
     }
-    // No menu open — up-arrow goes back to previous question
+    // No menu open, up-arrow goes back to previous question
     if(e.key==='ArrowUp' && inputEl.value === '' && stateHistory.length > 0){
       e.preventDefault();
       var prev = stateHistory.pop();
       if(prev && STATES[prev]){
-        // Preserve any existing data — DO NOT erase
+        // Preserve any existing data, DO NOT erase
         var fieldMap = {
           handle:'handle', email:'email', year:'birthYear', month:'birthMonth',
           day:'birthDay', hour:'birthHour', minute:'birthMinute', place:'birthPlace',
@@ -2368,7 +2369,7 @@ function handleInputKey(e){
     var trimmed = raw.trim();
     // Throw a piece of food across the box on every Enter. The feed
     // visual is decoupled from validity. Pressing Enter is the act of
-    // feeding the creature — it happens whether the answer turns out
+    // feeding the creature, it happens whether the answer turns out
     // to be valid, a skip, an error, or an empty submit.
     if(window.Tamagotchi) window.Tamagotchi.reactToFeed(raw);
     handleAdvance(trimmed, raw);
@@ -2388,13 +2389,13 @@ function handleInputChange(){
   } else if(inputEl.value.length===0 && placeholderEl.textContent){
     placeholderEl.classList.add('visible');
   }
-  // The expensive parts — full DepthEngine scan against 183 regex
-  // patterns — are debounced. Word-count display and earning preview
+  // The expensive parts, full DepthEngine scan against 183 regex
+  // patterns, are debounced. Word-count display and earning preview
   // both wait for the player to pause briefly before recomputing.
   // This keeps long-form composition fluid on slow phones where
   // each keystroke firing every regex would jank the input.
   scheduleLiveStatUpdate();
-  // filter menu by typed text — kept synchronous because menus need
+  // filter menu by typed text, kept synchronous because menus need
   // to react instantly to typing.
   if(menuEl.classList.contains('visible')){
     filterMenu(inputEl.value.toLowerCase().trim());
@@ -2402,7 +2403,7 @@ function handleInputChange(){
 }
 
 // ============================================================
-// LIVE STAT UPDATE — debounced 150ms. The earning-preview
+// LIVE STAT UPDATE, debounced 150ms. The earning-preview
 // chip and the word-count meta both update from this single
 // scheduled call so a player burst-typing does not trigger
 // 183 regex evaluations per keystroke.
@@ -2458,7 +2459,7 @@ function runLiveStatUpdate(){
 attachInputHandler();
 
 // ============================================================
-// TOUCH-BAR — phones do not have arrow keys or a dedicated Enter.
+// TOUCH-BAR, phones do not have arrow keys or a dedicated Enter.
 // The bar below the input issues the same commands the keyboard
 // hint advertises. Animal-cycle prev/next dispatches the existing
 // arrow logic; back and skip type the words and submit; enter
@@ -2517,7 +2518,7 @@ attachInputHandler();
 // Document-level fallback for animal-phase arrow cycling.
 // If for any reason the input loses focus (player clicks the page,
 // browser quirks, etc.), arrow keys still cycle the picker.
-// No `typing` gate here either — cycling is independent of any
+// No `typing` gate here either, cycling is independent of any
 // in-flight typewriter animation.
 document.addEventListener('keydown', function(e){
   if(currentState !== 'animal') return;
@@ -2662,34 +2663,34 @@ function renderCardPreview(){
   var emoji = data.animal && ANIMAL_EMOJI[data.animal] ? ANIMAL_EMOJI[data.animal] : '';
   var emojiPrefix = emoji ? (emoji+' ') : '';
 
-  // Handle line — only show if handle exists
+  // Handle line, only show if handle exists
   if(data.handle){
     lines.push('<span class="live">'+emojiPrefix+'^'+escapeHtml(data.handle)+'</span>');
     var hashSrc = data.handle+'|'+data.email+'|'+data.birthYear;
     lines.push('hash: '+simpleHash(hashSrc));
   }
 
-  // Hegeliane{animal} badge — only renders when every field is filled.
+  // Hegeliane{animal} badge, only renders when every field is filled.
   // Vedic-depth (hour+place) is no longer the trigger. The badge name
   // resolves from the chosen animal slug.
   if(isFullyFilled()){
     lines.push('<span class="badge">◉ '+escapeHtml(hegelianeName())+' · vedic-grade</span>');
   }
-  // Cocoon — ONLY if 5+ smashes
+  // Cocoon, ONLY if 5+ smashes
   if(data.smashes.length >= 5){
     lines.push('<span class="badge">◉ cocoon · '+data.smashes.length+' smashes</span>');
   }
-  // Silkworm — ONLY if all 8 wormhole answered
+  // Silkworm, ONLY if all 8 wormhole answered
   var whFields = ['backstory','motivation','fear','flaw','bond','ideal','secret','pivotalEvent'];
   var whCount = whFields.filter(function(f){return data[f];}).length;
   if(whCount === 8){
     lines.push('<span class="badge">◉ silkworm · wormhole complete</span>');
   }
 
-  // birth — only show fields that exist
+  // birth, only show fields that exist
   if(data.birthYear || data.birthMonth || data.birthDay || data.birthPlace){
     if(lines.length) lines.push('');
-    lines.push('— birth —');
+    lines.push('birth');
     if(data.birthYear) lines.push('year: '+data.birthYear);
     if(data.birthYear && data.birthMonth && data.birthDay){
       lines.push('date: '+data.birthYear+'-'+pad2(data.birthMonth)+'-'+pad2(data.birthDay));
@@ -2703,7 +2704,7 @@ function renderCardPreview(){
   // horoscope
   if(horoscope.readings.length){
     lines.push('');
-    lines.push('— horoscope —');
+    lines.push('horoscope');
     horoscope.readings.forEach(function(r){
       lines.push(r.tradition+': '+r.sign);
     });
@@ -2714,7 +2715,7 @@ function renderCardPreview(){
     var a = window.BurrowingAnimals.find(function(x){return x.slug===data.animal;});
     if(a){
       lines.push('');
-      lines.push('— burrow —');
+      lines.push('burrow');
       lines.push('animal: '+a.name);
     }
   }
@@ -2727,7 +2728,7 @@ function renderCardPreview(){
   var hasWh = wormholeFields.some(function(f){return data[f[0]];});
   if(hasWh){
     lines.push('');
-    lines.push('— wormhole —');
+    lines.push('wormhole');
     wormholeFields.forEach(function(f){
       if(data[f[0]]) lines.push(f[1]+': '+escapeHtml(data[f[0]]));
     });
@@ -2736,13 +2737,13 @@ function renderCardPreview(){
   // smashes
   if(data.smashes.length){
     lines.push('');
-    lines.push('— smashed from —');
+    lines.push('smashed from');
     data.smashes.forEach(function(s){
       lines.push('• '+escapeHtml(s.name||'?')+' → '+escapeHtml(s.quality||'?'));
     });
   }
 
-  // stats — only show if any have accumulated
+  // stats, only show if any have accumulated
   var statKeys = Object.keys(data.stats);
   if(statKeys.length){
     lines.push('');
@@ -2757,7 +2758,7 @@ function renderCardPreview(){
     if(depthGradedCount > 0 && totalAnswers > 0){
       depthLabel = ' <span class="depth-grade-tag">· '+depthGradedCount+'/'+totalAnswers+' depth-graded</span>';
     }
-    lines.push('— stats —' + depthLabel);
+    lines.push('stats' + depthLabel);
     statKeys.sort(function(a,b){
       var diff = data.stats[b] - data.stats[a];
       return diff !== 0 ? diff : a.localeCompare(b);
@@ -2770,7 +2771,7 @@ function renderCardPreview(){
   // wildcard
   if(data.wildcard){
     lines.push('');
-    lines.push('— wildcard —');
+    lines.push('wildcard');
     lines.push(escapeHtml(data.wildcard));
   }
 
@@ -2803,7 +2804,7 @@ function buildPlaintextCard(){
   lines.push('last updated: '+today);
   lines.push('points: 0');
   lines.push('');
-  lines.push('— birth —');
+  lines.push('birth');
   if(data.birthYear) lines.push('year: '+data.birthYear);
   if(data.birthYear && data.birthMonth && data.birthDay){
     lines.push('date: '+data.birthYear+'-'+pad2(data.birthMonth)+'-'+pad2(data.birthDay));
@@ -2814,14 +2815,14 @@ function buildPlaintextCard(){
   if(data.birthPlace) lines.push('place: '+data.birthPlace);
   lines.push('');
   if(horoscope.readings.length){
-    lines.push('— polymyth horoscope —');
+    lines.push('polymyth horoscope');
     horoscope.readings.forEach(function(r){lines.push(r.tradition+': '+r.sign);});
     lines.push('');
   }
   if(data.animal){
     var a = window.BurrowingAnimals.find(function(x){return x.slug===data.animal;});
     if(a){
-      lines.push('— burrow —');
+      lines.push('burrow');
       lines.push('animal: '+a.name+' ('+a.group+')');
       lines.push('');
     }
@@ -2830,19 +2831,19 @@ function buildPlaintextCard(){
     ['bond','bond'],['ideal','ideal'],['secret','secret'],['pivotalEvent','pivotal']];
   var hasWh = wh.some(function(f){return data[f[0]];});
   if(hasWh){
-    lines.push('— wormhole —');
+    lines.push('wormhole');
     wh.forEach(function(f){if(data[f[0]]) lines.push(f[1]+': '+data[f[0]]);});
     lines.push('');
   }
   if(data.smashes.length){
-    lines.push('— smashed from —');
+    lines.push('smashed from');
     data.smashes.forEach(function(s){lines.push('• '+(s.name||'?')+' → '+(s.quality||'?'));});
     lines.push('');
   }
   // stats
   var statKeys = Object.keys(data.stats);
   if(statKeys.length){
-    lines.push('— stats —');
+    lines.push('stats');
     statKeys.sort(function(a,b){
       var diff = data.stats[b] - data.stats[a];
       return diff !== 0 ? diff : a.localeCompare(b);
@@ -2853,14 +2854,14 @@ function buildPlaintextCard(){
     lines.push('');
   }
   if(data.wildcard){
-    lines.push('— wildcard —');
+    lines.push('wildcard');
     lines.push(data.wildcard);
     lines.push('');
   }
-  lines.push('— monthly questions answered —');
+  lines.push('monthly questions answered');
   lines.push('(none)');
   lines.push('');
-  lines.push('— created at bookwormburrows · seminarschools.com/bookwormcard/ —');
+  lines.push('created at bookwormburrows · seminarschools.com/bookwormcard/');
   return lines.join('\n');
 }
 
@@ -2883,7 +2884,7 @@ function recalcHoroscope(){
 
 // ----- Animal cycle picker -----------------------------------
 // ============================================================
-// showAnimalCycleLine — pin a single chat status line that updates
+// showAnimalCycleLine, pin a single chat status line that updates
 // on each arrow cycle rather than appending a new line every time.
 // Strong visual feedback so the player knows their arrow press
 // registered. Patterned on showError's replace-rather-than-stack
@@ -2940,7 +2941,7 @@ function renderAnimalCyclePreview(){
   // 38 arrow presses do not produce 38 chat lines of clutter.
   var emoji = (typeof ANIMAL_EMOJI !== 'undefined' && ANIMAL_EMOJI[animal.slug]) ? (ANIMAL_EMOJI[animal.slug] + ' ') : '';
   showAnimalCycleLine('<span class="quiet">browsing:</span> <span class="answer">' + emoji + escapeHtml(animal.name.toLowerCase()) + '</span> <span class="quiet">· ' + (animalCycleIndex) + ' of ' + animalCycleList.length + ' · enter to choose, ← → to keep browsing.</span>');
-  // Defensive re-focus — if the player clicked away during the intro
+  // Defensive re-focus, if the player clicked away during the intro
   // and the input lost focus, the inputEl-level keydown handler would
   // stop firing. The document-level fallback at line ~2420 still
   // works, but re-focusing the input ensures both handlers stay live.
@@ -2948,7 +2949,7 @@ function renderAnimalCyclePreview(){
 }
 
 // Lock in the animal at the current cycle position. Worm position
-// shows a hint instead of advancing — the animal phase is required.
+// shows a hint instead of advancing, the animal phase is required.
 function commitAnimalCycle(){
   if(animalCycleIndex === 0){
     showError('<span class="err">browse with ← → first. pick an animal to keep going.</span>');
@@ -2960,7 +2961,7 @@ function commitAnimalCycle(){
     return;
   }
   data.animal = animal.slug;
-  // Clear the cycle status line — the animal is committed, the
+  // Clear the cycle status line, the animal is committed, the
   // picker is closed, the line should not persist into later
   // phases as stale UI.
   var cycleLine = chatEl && chatEl.querySelector('.animal-cycle-line');
@@ -3031,7 +3032,7 @@ var STATES = {
       var lower = (input||'').toLowerCase().trim();
       var checkpoint = loadCheckpoint();
       var hasCheckpoint = checkpoint && checkpoint.data && checkpoint.data.handle;
-      // PDF shortcut — open the blank questionnaire in a new tab
+      // PDF shortcut, open the blank questionnaire in a new tab
       // Power-user shortcut, kept available but no longer surfaced in the intro
       if(lower === 'pdf' || lower === 'blank' || lower === 'skip game' || lower === 'questionnaire'){
         appendLine('<span class="answer">'+escapeHtml(lower)+'</span>', {gap:true});
@@ -3093,7 +3094,7 @@ var STATES = {
             transitionTo('review');
         } else {
           // Player typed something we don't recognize.
-          // Tell them clearly what to do — different message based on whether
+          // Tell them clearly what to do, different message based on whether
           // a checkpoint exists (returning vs first-time).
           if(hasCheckpoint){
             showError('not recognized. type <span class="system">resume</span> to continue, or press <span class="system">enter</span> on empty to start fresh.');
@@ -3145,12 +3146,12 @@ var STATES = {
       // Positions 1..N = the burrowing animals.
       animalCycleIndex = 0;
       animalCycleList = (window.BurrowingAnimals || []).slice();
-      // Loud diagnostic if the animal list never loaded — almost always
+      // Loud diagnostic if the animal list never loaded, almost always
       // means the player opened bb/index.html standalone without its
       // sibling JS files (burrowing-animals.js etc.). The picker would
       // silently no-op without this check.
       if(animalCycleList.length === 0){
-        showError('<span class="err">animal list failed to load. you may be viewing this file alone — load it from /bookwormcard/ on the deployed site instead.</span>');
+        showError('<span class="err">animal list failed to load. you may be viewing this file alone, load it from /bookwormcard/ on the deployed site instead.</span>');
         setPrompt('animal data missing');
         return;
       }
@@ -3159,12 +3160,12 @@ var STATES = {
       // the picker is alive. Without this initial call, animal.enter
       // sets up the list but produces no visual confirmation that
       // arrow input would do anything. Position 0 is the worm
-      // (default) — no animal selected — but the prompt placeholder
+      // (default), no animal selected, but the prompt placeholder
       // updates and the chat-status-line below reassures the player.
       renderAnimalCyclePreview();
       // Append a STATUS LINE in the chat that gets replaced (not
       // appended) on each subsequent arrow press. Strong, visible,
-      // unmistakable feedback that arrow keys are working — the
+      // unmistakable feedback that arrow keys are working, the
       // tamagotchi sprite update and the placeholder text change
       // were too subtle for some players to notice.
       showAnimalCycleLine('press ← or → to browse the animals.');
@@ -3194,14 +3195,14 @@ var STATES = {
         showError('<span class="err">use ← → to browse, then enter to choose.</span>');
         return;
       }
-      // Empty enter — commit current selection
+      // Empty enter, commit current selection
       commitAnimalCycle();
     }
   },
 
   handle: {
     enter: function(){
-      // Section opener — fires only first time entering handle
+      // Section opener, fires only first time entering handle
       if(!data.handle){
         appendLine('anchored. now we name you.', {gap:true, instant:true, cls:'system'});
       }
@@ -3260,7 +3261,7 @@ var STATES = {
 
   year: {
     enter: function(){
-      // Section opener — fires only first time entering year, not on revisit
+      // Section opener, fires only first time entering year, not on revisit
       if(!data.birthYear){
         appendLine('the form is chosen. now we anchor it in time.', {gap:true, instant:true, cls:'system'});
         appendLine('when did this version of you arrive?', {gap:false});
@@ -3426,7 +3427,7 @@ var STATES = {
       data.birthPlace = input;
       appendLine('<span class="answer">'+escapeHtml(input)+'</span>', {gap:false});
       // Vedic-depth flag still recomputes here. The dynamic
-      // hegeliane{animal} cinematic no longer fires at place — it
+      // hegeliane{animal} cinematic no longer fires at place, it
       // is gated on full completion via checkFullCompletionTransition,
       // which the host advance loop calls after each commit.
       recalcHoroscope();
@@ -3436,7 +3437,7 @@ var STATES = {
     }
   },
 
-  // ===== wormhole — 8 questions, with age-gating for under-13 =====
+  // ===== wormhole, 8 questions, with age-gating for under-13 =====
   // Order: light first (backstory, motivation, bond, ideal, wildcard preview).
   // Heavy three (fear, flaw, secret, pivotal-event) gated by stats for under-13.
   'wormhole-1': makeWormhole('backstory', 'backstory in three sentences. where you are from. the shaping event. what brought you here.', 'wormhole-2', true),
@@ -3488,7 +3489,7 @@ var STATES = {
         sealAndReview(input);
         return;
       }
-      // browse — open the aa* archetype mini-cloud
+      // browse, open the aa* archetype mini-cloud
       if(/^(browse|inspire|archetype|archetypes)$/i.test((input||'').trim())){
         if(!window.AaBridge){
           showError('<span class="err">archetype archive not available.</span>');
@@ -3657,7 +3658,7 @@ var STATES = {
   },
 
   // ============================================================
-  // THRESHOLD — offer to go deeper or seal the card
+  // THRESHOLD, offer to go deeper or seal the card
   // ============================================================
   threshold: {
     enter: function(){
@@ -3681,7 +3682,7 @@ var STATES = {
   },
 
   // ============================================================
-  // DEEP QUESTIONS — 6 PDF sections × 14 questions total
+  // DEEP QUESTIONS, 6 PDF sections × 14 questions total
   // Each is one makeDeepQuestion. Section headers fire on first prompt
   // of each section. 'finish' at any prompt seals immediately.
   // ============================================================
@@ -3708,11 +3709,11 @@ var STATES = {
   'deep-teach_short':      makeDeepQuestion('teach_short',      'deep-teach_long',       { sectionLabel: 'what they could teach.', firstInSection: true }),
   'deep-teach_long':       makeDeepQuestion('teach_long',       'deep-face_after'),
 
-  // The Face After (1) — last deep-question, now flows into stampcard
+  // The Face After (1), last deep-question, now flows into stampcard
   'deep-face_after':       makeDeepQuestion('face_after',       'stamp-driving_principles', { sectionLabel: 'the face after.', firstInSection: true }),
 
   // ============================================================
-  // STAMPCARD — 5 Sanderson play-to-medium-strengths slots
+  // STAMPCARD, 5 Sanderson play-to-medium-strengths slots
   // Section header fires on first slot. Each slot is a custom factory
   // (makeStampQuestion) with a hardcoded prompt, since TierProse does
   // not carry these field-names. Last slot exits to review.
@@ -3765,7 +3766,7 @@ var STATES = {
       appendLine('the card is sealed.', {gap:false, cls:'system'});
       appendLine('you ended this session as <span class="answer">' + escapeHtml(tierLabel) + '</span>.', {gap:false});
 
-      // Top adjective stats — character-as-adjectives sentence + banner ammo
+      // Top adjective stats, character-as-adjectives sentence + banner ammo
       var statKeys = Object.keys(data.stats || {});
       var topStats = [];
       if(statKeys.length){
@@ -3782,7 +3783,7 @@ var STATES = {
       }
       appendLine('', {gap:true, instant:true});
 
-      // Seal animation — fires once when card first reaches review.
+      // Seal animation, fires once when card first reaches review.
       // The animal devolves to a worm and grows back through the tiers,
       // returning personalized with the player's top adjectives as a banner.
       // Subsequent visits (resume, edit-and-back) skip the animation but
@@ -3811,7 +3812,7 @@ var STATES = {
       appendLine('<span class="system">pdf</span> to take your card &middot; <span class="system">edit</span> to revise &middot; <span class="system">save</span> to copy text to clipboard.', {gap:true, instant:true});
       appendLine('<span class="quiet">drop your pdf back here anytime to keep working on this card.</span>', {gap:true, instant:true});
 
-      // Post-card narrative — what to do with the card after the seal.
+      // Post-card narrative, what to do with the card after the seal.
       // Threaded into the chat itself rather than a separate guide page.
       appendLine('the card is yours.', {gap:false});
       appendLine('drop your pdf into any AI chat. tell them you want to play with this character.', {gap:false});
@@ -3840,7 +3841,7 @@ var STATES = {
       } else if(cmd==='save' || cmd==='copy'){
         copyCardToClipboard();
       } else if(cmd==='download pdf' || cmd==='pdf' || cmd==='print' || cmd==='download' || cmd==='download all' || cmd==='all'){
-        // ONE CARD — every download path lands on the PDF. Aliases
+        // ONE CARD, every download path lands on the PDF. Aliases
         // accepted for the convenience of players who type the old
         // commands; the card produced is always the same single
         // PDF artifact.
@@ -3860,14 +3861,14 @@ var STATES = {
         // birth + identity
         handle:'handle',email:'email',year:'year',month:'month',day:'day',
         hour:'hour',minute:'minute',place:'place',animal:'animal',
-        // wormhole 8 — light + heavy
+        // wormhole 8, light + heavy
         backstory:'wormhole-1',motivation:'wormhole-2',wants:'wormhole-2',
         bond:'wormhole-bond',ideal:'wormhole-ideal',
         fear:'wormhole-fear',fears:'wormhole-fear',flaw:'wormhole-flaw',
         secret:'wormhole-secret',
         pivotal:'wormhole-pivotal','pivotal-event':'wormhole-pivotal',
         wildcard:'wildcard',
-        // smash synthesis — single-field, rewrite-subtract handles the unwind
+        // smash synthesis, single-field, rewrite-subtract handles the unwind
         synthesis:'smash-synthesis','smash-synthesis':'smash-synthesis',
         // 13 deep-question fields (build 5)
         unlearned:'deep-trait_unlearned','trait-unlearned':'deep-trait_unlearned',
@@ -3930,7 +3931,7 @@ function makeWormhole(field, prompt, next, multiline, isLast){
         appendLine('<span class="quiet">the surface is anchored. now we go beneath it.</span>', {gap:true, instant:true});
         appendLine('eight questions ahead. <span class="quiet">type skip on any. type why for context. type finish to seal the card with what you have so far.</span>', {gap:true, instant:true});
       }
-      // Use tier-prose if available — it already has the original prompts
+      // Use tier-prose if available, it already has the original prompts
       // as middle-tier and adds easy/deep variants. Falls back to hardcoded
       // prompt only if tier-prose not loaded.
       var dynamicPrompt = (typeof pickPrompt === 'function') ? pickPrompt(field) : null;
@@ -3956,7 +3957,7 @@ function makeWormhole(field, prompt, next, multiline, isLast){
         var hits = scoreResult ? scoreResult.statsHit : []; // full {stat,weight} objects so showStatHits renders weights
         showStatHits(hits, input);
         maybeInterject();
-        // silkworm tier check — fires when all 8 wormhole questions answered
+        // silkworm tier check, fires when all 8 wormhole questions answered
         var whFields = ['backstory','motivation','fear','flaw','bond','ideal','secret','pivotalEvent'];
         var prevCount = whFields.filter(function(f){return f === field ? false : !!data[f];}).length;
         var newCount = whFields.filter(function(f){return !!data[f];}).length;
@@ -3972,7 +3973,7 @@ function makeWormhole(field, prompt, next, multiline, isLast){
 }
 
 // ============================================================
-// makeDeepQuestion — tier-prose-aware question phase factory.
+// makeDeepQuestion, tier-prose-aware question phase factory.
 // Used for the 6 missing PDF sections (build 5/11).
 // Differences from makeWormhole:
 //   - Prompt is picked dynamically from TierProse based on currentDepthScore()
@@ -3994,7 +3995,7 @@ function makeDeepQuestion(field, next, opts){
       }
       var prompt = (typeof pickPrompt === 'function') ? pickPrompt(field) : '';
       if(!prompt){
-        // tier-prose missing for this field — fall back to skip silently
+        // tier-prose missing for this field, fall back to skip silently
         transitionTo(next);
         return;
       }
@@ -4004,7 +4005,7 @@ function makeDeepQuestion(field, next, opts){
     advance: function(input){
       if(isGlobalEscape(input)){ sealAndReview(input); return; }
       var lower = (input||'').toLowerCase().trim();
-      // Why — show explanation if reactions has one
+      // Why, show explanation if reactions has one
       if(lower === 'why'){
         var why = window.Reactions && window.Reactions.whyFor ? window.Reactions.whyFor(field) : '';
         if(!why || why === 'this question is part of building your wormcard. you can skip it if you want.'){
@@ -4014,12 +4015,12 @@ function makeDeepQuestion(field, next, opts){
         setPrompt('type · skip', multiline);
         return;
       }
-      // I-don't-know rephrasing — stay in this phase, re-ask with examples
+      // I-don't-know rephrasing, stay in this phase, re-ask with examples
       if(/^(i\s*don'?t\s*know|idk|i\s*dunno|dunno|no\s*idea|i\s*have\s*no\s*idea)\.?$/i.test(lower)){
         var rephrase = window.TierProse ? window.TierProse.pickIdkRephrase(field) : '';
         if(rephrase){
           appendLine('<span class="answer quiet">'+escapeHtml(input)+'</span>', {gap:true});
-          // Multi-line rephrase — append each line as quiet
+          // Multi-line rephrase, append each line as quiet
           rephrase.split('\n').forEach(function(line){
             if(line.trim()) appendLine('<span class="quiet">'+escapeHtml(line)+'</span>', {gap:false, instant:true});
           });
@@ -4051,7 +4052,7 @@ function makeDeepQuestion(field, next, opts){
 }
 
 // ============================================================
-// makeStampQuestion — fixed-prompt question phase factory (build 12).
+// makeStampQuestion, fixed-prompt question phase factory (build 12).
 // Used for the 5 Sanderson stampcard slots that live outside TierProse
 // (driving_principles, tuesday_mundane, register_shift, idiolect_marker,
 // unique_knowledge). Pattern follows makeDeepQuestion but takes a literal
@@ -4094,7 +4095,7 @@ function makeStampQuestion(field, prompt, next, opts){
 }
 
 // ============================================================
-// renderDmPuzzlePanel — DM-side puzzle-tracking panel (build 12).
+// renderDmPuzzlePanel, DM-side puzzle-tracking panel (build 12).
 // Aggregates contradiction-revealing field pairs into a single
 // DM-visible block. Surfaces what a Mephistodata reading of the
 // card would log: places where the character's stated values
@@ -4161,7 +4162,7 @@ function renderDmPuzzlePanel(){
 // ============================================================
 function transitionTo(name){
   // ============================================================
-  // EDIT-FLOW INTERCEPT — when the player edited a field from
+  // EDIT-FLOW INTERCEPT, when the player edited a field from
   // review (edit-pick set editReturnTarget and editTargetField),
   // the target's advance handler will hardcode a transition to
   // its natural-next state (e.g., wildcard → threshold, smash-
@@ -4181,7 +4182,7 @@ function transitionTo(name){
   if(currentState !== 'edit-pick' && currentState !== 'bypass' && currentState !== 'opening'){
     stateHistory.push(currentState);
   }
-  // FEEDING FLOOR — every forward state advance is worth at least one
+  // FEEDING FLOOR, every forward state advance is worth at least one
   // XP. The act of pressing Enter feeds the worm. Without this floor
   // a player who skips heavily, or who answers in short phrases that
   // miss every regex stat-pattern, sits at zero through the whole
@@ -4212,7 +4213,7 @@ function transitionTo(name){
 }
 
 // ============================================================
-// FEED-VISUAL — every forward Enter triggers the food-projectile
+// FEED-VISUAL, every forward Enter triggers the food-projectile
 // reaction on the tamagotchi (📖🍃🌰 etc. flying toward the
 // creature, "eating" status flash). NO XP grant. The earlier
 // implementation conflated visual feedback with mechanical
@@ -4414,7 +4415,7 @@ function submitForm(){
   form.querySelector('[name=level]').value = String(window.DepthEngine ? window.DepthEngine.levelFor(data.xp || 0) : 0);
   form.querySelector('[name=stats]').value = JSON.stringify(data.stats || {});
   form.querySelector('[name=quirks]').value = JSON.stringify(data.quirks || {});
-  // qualityHistory — full per-answer instrumentation log.
+  // qualityHistory, full per-answer instrumentation log.
   // This is the corpus the user reads to refine scoring rules.
   // Capped at 200 entries by awardStats; serialized compactly.
   form.querySelector('[name="quality-history"]').value = buildQualityHistorySummary();
@@ -4441,7 +4442,7 @@ function submitForm(){
 }
 
 // ============================================================
-// QUALITY-HISTORY SUMMARY — readable rendering of qualityHistory for
+// QUALITY-HISTORY SUMMARY, readable rendering of qualityHistory for
 // inclusion in the form submission email. Keeps it human-scannable
 // while preserving all the data needed to refine scoring rules.
 // ============================================================
@@ -4551,13 +4552,13 @@ window.addEventListener('load', function(){
 });
 
 // ============================================================
-// LEGEND PANEL — closes the silent-visualization critique. The
+// LEGEND PANEL, closes the silent-visualization critique. The
 // player sees emoji accessories appear on the worm but has no
 // way to know what each one means. The legend reveals the
 // vocabulary on demand: every accessory rule grouped by slot,
 // each row showing emoji, cluster name, and the traits that feed
 // it. Reads from Tamagotchi.getAccessoryRules() so there is one
-// source of truth for the rule table — adding new accessories
+// source of truth for the rule table, adding new accessories
 // in the future automatically appears in the legend.
 // ============================================================
 function installLegendPanel(){
@@ -4629,12 +4630,12 @@ function buildLegendPanel(panel){
     });
     html += '</div>';
   }
-  html += '<div style="color:var(--fg-dim);font-size:0.7rem;margin-top:0.5rem;line-height:1.4">a faint ghost-emoji means the cluster is brewing but has not yet crossed its threshold. a glowing pulsing accessory means one trait inside the cluster is dominating it — the trait name appears under the symbol. an extreme-shimmer accessory means a runaway register.</div>';
+  html += '<div style="color:var(--fg-dim);font-size:0.7rem;margin-top:0.5rem;line-height:1.4">a faint ghost-emoji means the cluster is brewing but has not yet crossed its threshold. a glowing pulsing accessory means one trait inside the cluster is dominating it, the trait name appears under the symbol. an extreme-shimmer accessory means a runaway register.</div>';
   panel.innerHTML = html;
 }
 
 // ============================================================
-// DRAG-DROP SAVE LOADER — accept .pdf, .html, .json files dropped
+// DRAG-DROP SAVE LOADER, accept .pdf, .html, .json files dropped
 // onto the page. Extract the BB_SAVE blob and resume from it.
 // ============================================================
 function installDragDropSaveLoader(){
@@ -4758,7 +4759,7 @@ function handleDroppedSaveFile(file){
 // Falls back to byte-pattern marker scan if PDF.js unavailable.
 function extractTextFromPdf(arrayBuffer){
   return new Promise(function(resolve, reject){
-    // First try byte-pattern scan — works because we encode the marker
+    // First try byte-pattern scan, works because we encode the marker
     // as plain UTF-8 text inside an HTML element that PDF preserves
     try {
       var bytes = new Uint8Array(arrayBuffer);
@@ -4807,7 +4808,7 @@ function extractTextFromPdf(arrayBuffer){
   });
 }
 
-// Sync tamagotchi state from data — call after every awardStats and on resume
+// Sync tamagotchi state from data, call after every awardStats and on resume
 function syncTamagotchi(){
   if(!window.Tamagotchi) return;
   var level = window.DepthEngine ? window.DepthEngine.levelFor(data.xp) : 0;
@@ -4825,7 +4826,7 @@ function syncTamagotchi(){
     // Quirks drive the bottom-left negative-marker slot. The four
     // quirks (PLATITUDE_PRONE, VAGUE_PRONE, DISENGAGED, LOW_CONTENT)
     // accumulate from awardStats just like positive stats but stay
-    // visually quiet — desaturated, smaller, in a corner — so they
+    // visually quiet, desaturated, smaller, in a corner, so they
     // mark without dominating.
     quirks: data.quirks || {}
   });
@@ -4843,5 +4844,8 @@ document.addEventListener('click', function(e){
 })();
 </script>
 <script src="/js/theme.js" defer></script>
+<script src="/js/mandala.js" defer></script>
+<script src="/js/indra.js" defer></script>
+<script src="/js/footer.js" defer></script>
 </body>
 </html>

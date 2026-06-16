@@ -209,7 +209,7 @@ This is the polymyth filter applied to tabletop game design choices. Each chip b
     </div>
   </div>
   <p style="font-size:13px;color:var(--dim);font-style:italic;margin-top:10px;line-height:1.5;max-width:780px">
-    Audit note. Original schema shipped May 12 2026 with four categories. <b>Advancement</b> was added May 13 after May 4 leveling-system work (chat 0f3705ce) was surfaced and the inventory was found to have no slot for "how a character grows." <b>Resolution</b>, <b>economy</b>, <b>knowledge</b>, and <b>time-scale</b> were added later that same day after audit-completion. The 9-category schema is now the working surface. <b>Knowledge</b> currently has zero mechanics filed under it — itself a finding: the 33-mechanic inventory lacks any first-class information-asymmetry mechanic, an open invitation for future inclusion (e.g., Blades-in-the-Dark flashbacks, GM mystery-clocks, player-facing dice). See <a href="https://seminarschools.com/polymyth/methodologylist/" style="color:var(--fire)">ml*</a> Schema-audit entries.
+    Audit note. Original schema shipped May 12 2026 with four categories. <b>Advancement</b> was added May 13 after May 4 leveling-system work (chat 0f3705ce) was surfaced and the inventory was found to have no slot for "how a character grows." <b>Resolution</b>, <b>economy</b>, <b>knowledge</b>, and <b>time-scale</b> were added later that same day after audit-completion. The 9-category schema is now the working surface. <b>Knowledge</b> currently has zero mechanics filed under it, itself a finding: the 33-mechanic inventory lacks any first-class information-asymmetry mechanic, an open invitation for future inclusion (e.g., Blades-in-the-Dark flashbacks, GM mystery-clocks, player-facing dice). See <a href="https://seminarschools.com/polymyth/methodologylist/" style="color:var(--fire)">ml*</a> Schema-audit entries.
   </p>
 </section>
 
@@ -364,7 +364,7 @@ const DATA = {
     compat:'Drop-in for any system. Roll the dice or steal the table.',
     partners:[{n:'influence subsystem',s:'PF2R'}], anti:[]},
   m_4e_skill: {label:'skill challenges', sys:'D&D 4e (2008)', tier:'A', cats:['pressure','resolution','timescale'],
-    table:'Frame extended scenarios as "accumulate 6 successes before 3 failures" across whatever skills make sense — investigation, chase, escape, negotiation.',
+    table:'Frame extended scenarios as "accumulate 6 successes before 3 failures" across whatever skills make sense, investigation, chase, escape, negotiation.',
     problem:'One framework runs dozens of subsystem scenarios. No bespoke mechanics needed for each. No "I keep rolling Investigation until something happens."',
     compat:'Drop-in for any system with skills.',
     partners:[{n:'victory points',s:'PF2R'}], anti:[]},
@@ -384,7 +384,7 @@ const DATA = {
     compat:'Drop-in. Pure substrate.',
     partners:[{n:'mörk borg misery',s:'OSR'},{n:'skill challenges',s:'4e'}], anti:[]},
   m_dh_heritage: {label:'ancestry+community', sys:'Daggerheart', tier:'A', cats:['agency','advancement'],
-    table:'Character creation splits identity into Ancestry (species) and Community (where you grew up — Wildborn, Highborn, Slum-born). Mixed ancestry supported by default.',
+    table:'Character creation splits identity into Ancestry (species) and Community (where you grew up, Wildborn, Highborn, Slum-born). Mixed ancestry supported by default.',
     problem:'Decouples species from culture. An elf raised in the slums is mechanically different from an elf in the high court.',
     compat:'Drop-in for any system. Bigger than backgrounds, smaller than backgrounds-as-class.',
     partners:[{n:'cairn scars',s:'OSR'},{n:'background capability',s:'2024'},{n:'knave slots',s:'OSR'}], anti:[{n:'class-as-role lock',s:'4e'},{n:'race-as-class',s:'B/X'}]},
@@ -406,7 +406,7 @@ const DATA = {
   m_dm_authority: {label:'DM-as-creator', sys:'OD&D (1974)', tier:'C', cats:['agency','resolution'],
     table:'Referee told to extend the rules as needed. Posture without mechanism.',
     problem:'Already implicit in every modern system. No reason to formally adopt it.',
-    compat:'N/A — implicit everywhere.',
+    compat:'N/A, implicit everywhere.',
     partners:[{n:'rulings over rules',s:'DH'}], anti:[]},
   m_great_wheel: {label:'great wheel', sys:'1e/2e/3e/5e cosmology', tier:'C', cats:['setting'],
     table:'D&D\'s default outer-planes cosmology arranged by alignment. Heaven, hell, neutral planes on a wheel.',
@@ -601,5 +601,6 @@ catGrid.addEventListener('click', e => {
 </script>
 <script src="/js/mandala.js" defer></script>
 <script src="/js/indra.js" defer></script>
+<script src="/js/footer.js" defer></script>
 </body>
 </html>

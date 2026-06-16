@@ -290,6 +290,17 @@
       flowers: false, jewels: true, maxDepth: 6,
       centerVoid: 55
     },
+    'devils-notebook': {
+      // Dense interlocked gaskets, oxblood register, jewels prominent: the
+      // diary substrate. Experimental tier, dark page, the web reads as
+      // line-work in ember on warm black.
+      gaskets: [
+        { rot: Math.PI * 0.2,       scale: 1,            op: 0.88 },
+        { rot: Math.PI * 0.62,      scale: 1/PHI,        op: 0.64 },
+        { rot: Math.PI * 0.93,      scale: 1/(PHI*PHI),  op: 0.46 }
+      ],
+      flowers: true, jewels: true, maxDepth: 7
+    },
     'ohm-dome': {
       // Three at hexagonal symmetry — dome-like, flowers minimal, jewels at vertices
       gaskets: [

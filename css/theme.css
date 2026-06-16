@@ -80,6 +80,13 @@
   --accent-rgb: 138, 74, 50;
   --accent-soft: rgba(138, 74, 50, 0.10);
   --accent-line: rgba(138, 74, 50, 0.35);
+
+  /* CANONICAL SPECTRUM — one source of truth for per-project accent colors.
+   * Muted jewel tones, legible on the cream ground and on the warm-black dark
+   * ground alike. Pages and the home constellation reference these, so the
+   * ecosystem stays one palette instead of each page inventing its own. */
+  --c1:#C0392B; --c2:#D35400; --c3:#B7950B; --c4:#1E8449;
+  --c5:#1F6FB2; --c6:#6C3FB5; --c7:#127C82;
 }
 
 

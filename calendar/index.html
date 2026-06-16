@@ -57,7 +57,7 @@
 
 <style>
 /* =========================================================
- * Calendar page — Seminar Schools
+ * Calendar page, Seminar Schools
  * Variable-height month grid, density-scaled rows.
  * Six-category filter pattern from /saul, extended with three
  * polymyth festival types.
@@ -456,7 +456,7 @@ button.btn[aria-pressed="true"] {
   flex-direction: column;
   gap: 0.25rem;
   overflow: hidden;
-  /* Density wash — heavier days get a faint accent tint */
+  /* Density wash, heavier days get a faint accent tint */
   --density: 0;
   background: color-mix(in oklch, var(--bg), var(--accent) calc(var(--density) * 6%));
 }
@@ -936,6 +936,7 @@ body.select-mode .export-toolbar { display: flex; }
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/theme.css">
 <link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
+<link rel="stylesheet" href="/css/alive.css">
 </head>
 <body>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sun" aria-hidden="true">&#9728;</span><span class="moon" aria-hidden="true">&#9790;</span></button><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
@@ -1332,7 +1333,7 @@ body.select-mode .export-toolbar { display: flex; }
   function renderGrid(grid) {
     grid.innerHTML = '';
 
-    // Group events by month — multi-day events appear in EVERY month they span
+    // Group events by month, multi-day events appear in EVERY month they span
     const byMonth = new Map();
     for (const e of state.filteredEvents) {
       const start = parseDate(e.date);
@@ -1394,7 +1395,7 @@ body.select-mode .export-toolbar { display: flex; }
     });
     block.appendChild(strip);
 
-    // Build day-indexed event map — multi-day events appear on EVERY day they span,
+    // Build day-indexed event map, multi-day events appear on EVERY day they span,
     // with a 'span_position' tag (start | middle | end | single) so the UI can mark continuation.
     const eventsByDay = new Map();
     for (const e of monthEvents) {
@@ -1730,7 +1731,7 @@ body.select-mode .export-toolbar { display: flex; }
         copyBtn.textContent = 'Copied ✓';
         setTimeout(() => { copyBtn.textContent = 'Copy link'; }, 1800);
       } catch (err) {
-        // Clipboard API failed (probably permission denied) — fall back to selecting text
+        // Clipboard API failed (probably permission denied), fall back to selecting text
         copyBtn.textContent = url;
         setTimeout(() => { copyBtn.textContent = 'Copy link'; }, 3000);
       }
@@ -1994,7 +1995,7 @@ body.select-mode .export-toolbar { display: flex; }
     document.body.classList.remove('list-mode');
     document.getElementById('btn-view-grid').setAttribute('aria-pressed', 'true');
     document.getElementById('btn-view-list').setAttribute('aria-pressed', 'false');
-    // Respect the user's motion preference — scrollIntoView smooth behavior
+    // Respect the user's motion preference, scrollIntoView smooth behavior
     // does not auto-fall-back per spec.
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const scrollBehavior = reduceMotion ? 'auto' : 'smooth';
@@ -2315,7 +2316,7 @@ body.select-mode .export-toolbar { display: flex; }
       const id = evtMatch[1];
       const event = state.events.find(e => e.id === id);
       if (event) {
-        // Make sure the event isn't filtered out by hide-past — if it is,
+        // Make sure the event isn't filtered out by hide-past, if it is,
         // open the modal anyway (the user explicitly asked for this one).
         openModal(event);
       } else {
@@ -2409,5 +2410,8 @@ body.select-mode .export-toolbar { display: flex; }
 </script>
 
 <script src="/js/theme.js" defer></script>
+<script src="/js/mandala.js" defer></script>
+<script src="/js/indra.js" defer></script>
+<script src="/js/footer.js" defer></script>
 </body>
 </html>

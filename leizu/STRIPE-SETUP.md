@@ -38,29 +38,34 @@ Allow a day or two for verification. Until verified you can only run test-mode t
 
 ### 3. Set up your products and prices
 
-In the Stripe dashboard, go to Product Catalog. Create one product per tier from the live Leizu page, eight products in total. All prices in CAD.
+One philosophy governs every price. Within a delivery type, the more hours you commit to, the cheaper each hour becomes, with no exception, and buying upfront beats paying monthly because paying in full is the larger commitment. The tables below are built on that rule, anchored on a notional ninety dollar one-on-one hour. Move that anchor and the whole ladder moves with it, but the order never changes.
 
-**Session bundles (one-time):**
+All prices CAD. One session is one contact hour. Create eight products.
 
-1. **Three sessions** — $300.00 — Description "3 sessions, $100 each. The minimum to begin." One-time payment.
-2. **Five sessions** — $510.00 — Description "5 sessions, $102 each. 11% off list." One-time payment.
-3. **Seven-class bundle** — $610.00 — Description "7 sessions. 24% off list." One-time payment.
+**One-on-one, the Forest track.** Each hour cheaper than the one above it.
 
-**Forest year (144 contact hours, one-on-one):**
+| product | price | hours | per hour | billing |
+|---|---|---|---|---|
+| 3 sessions | $270 | 3 | $90.00 | one time |
+| 5 sessions | $430 | 5 | $86.00 | one time |
+| 7 sessions | $575 | 7 | $82.14 | one time |
+| Forest year, monthly | $950 per month | 144 | $79.17 | recurring, 12 cycles |
+| Forest year, upfront | $10,500 | 144 | $72.92 | one time |
 
-4. **Forest year — upfront** — $14,000.00 — Description "Full Forest year paid in one transaction." One-time payment.
-5. **Forest year — monthly** — $1,400.00 — Description "Forest year paid monthly across 12 months." Recurring billing, monthly interval, 12 cycles or open-ended (your choice). Total $14,000.
+**Small seminar, the Seminar track, gated by 20 to 40 prior one-on-one sessions.** Group rate with its own floor, since group is a different product rather than a larger volume.
 
-**Seminar year (144 contact hours, small seminar, gated by 20-40 prior sessions):**
+| product | price | hours | per hour | billing |
+|---|---|---|---|---|
+| Seminar year, monthly | $390 per month | 144 | $32.50 | recurring, 12 cycles |
+| Seminar year, upfront | $4,350 | 144 | $30.21 | one time |
 
-6. **Seminar year — upfront** — $5,800.00 — Description "Full Seminar year paid in one transaction. Saves $1,400 vs monthly total." One-time payment.
-7. **Seminar year — monthly** — $600.00 — Description "Seminar year paid monthly across 12 months." Recurring billing, monthly interval, 12 cycles or open-ended. Total $7,200.
+**Donation.** Mulberry Fund, customer chooses the amount, scholarship support.
 
-**Donation:**
+The monthly option on each year carries a flat eight percent premium over upfront, the cost of spreading the commitment, and it is the same eight percent on both tracks so the financing stays consistent. Upfront is always the cheapest hour in its track. The three session pack is the on ramp and therefore the most expensive hour, which is correct, since it is the smallest purchase anyone can make.
 
-8. **Mulberry Fund donation** — Customer-chooses amount — Description "Scholarship fund supporting students who need financial help."
+The rule also locates the next tier for you. A multi year or sibling commitment is a larger purchase than a single Forest year, so it slots onto the bottom of the one-on-one table as the cheapest hour of all the moment you set its discount. That is the volume stacking tier, already placed.
 
-Decide for each year-tier product whether subscriptions cap at 12 cycles (cleaner accounting) or run open-ended (renewal each year is automatic until cancelled). The cleaner default is 12-cycle cap with manual renewal each year, but Stripe supports either.
+REGENERATE. Five of the seven paid prices changed and two did not. Forest upfront at $10,500 and Seminar upfront at $4,350 are held, so their existing Payment Links stay exactly as they are. Recreate only the other five in Stripe, the three session pack at $270, the five session pack at $430, the seven session pack at $575, Forest monthly at $950, and Seminar monthly at $390. A Stripe price is immutable once created, so for each one you make a new price and a new Payment Link and archive the old. Test mode links do not carry to live. Send me the five new buy.stripe.com URLs and I wire the page text and booking-button.js together in one pass so the displayed price and the charged price can never drift apart.
 
 Add the paper-materials fee as a separate add-on product if you want to invoice that separately.
 

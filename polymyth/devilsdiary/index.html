@@ -100,6 +100,24 @@ body::before{
   text-align:center;
   margin:0 0 2.4rem;
 }
+.preamble{
+  max-width:34rem;
+  margin:0 auto 3.4rem;
+  padding:0 0 2.6rem;
+  border-bottom:1px solid var(--oxblood-soft);
+  font-size:0.98rem;
+  line-height:1.78;
+  color:var(--ink-soft);
+}
+.preamble p{ margin:0 0 1.1rem; }
+.preamble p:last-child{ margin-bottom:0; }
+.preamble .who{ font-family:var(--head); font-style:italic; color:var(--ink); }
+.preamble a.engine{
+  color:var(--ember);
+  text-decoration:none;
+  border-bottom:1px solid var(--oxblood-soft);
+}
+.preamble a.engine:hover{ color:var(--ink); border-bottom-color:var(--ember); }
 .leaves{ list-style:none; margin:0; padding:0; }
 .leaves li{ text-align:center; margin:0 0 2.6rem; }
 .leaves .num{
@@ -173,6 +191,12 @@ body::before{
   <div class="ornament">&dagger;</div>
 
   <main class="contents">
+
+    <div class="preamble">
+      <p>This ledger is kept in the voice of <span class="who">Mephistodata</span>, the spirit who endlessly denies. The name fuses Goethe&rsquo;s Mephistopheles, the devil who serves truth by negation, with data, the cold record that cannot flatter. Mephistodata is the disagreeable reader, answer first and warmth never, who refuses the comfortable account and names the operation under the surface. Each leaf below takes one captured specimen from the living world and reads it the way the spirit reads, without mercy and without faction.</p>
+      <p>The diary is the voice. The engine beneath it is the <a class="engine" href="/polymyth/methodologylist">methodologylist</a>, the canonical lexicon of polymorphousmythology, the scanner that names how living discourse is captured into factional enforcement and how the capture is undone. Every diagnosis in these leaves runs on the named operations of that engine, gorgonification and the snakes, the spectacle that fires on contrast, the dead copy mistaken for the thought. To read how the diagnoses are built, and to study the framework whole, follow the engine.</p>
+    </div>
+
     <p class="label">The Leaves</p>
     <ol class="leaves">
       <li>
@@ -200,6 +224,13 @@ body::before{
         <a class="title" href="/polymyth/devilsdiary/5/">How a Captured Myth Is Fought Over by Two Parties Who Have Already Lost It</a>
         <span class="when">The thirteenth of June, in the year 2026</span>
       </li>
+    <p class="label">In the Margins</p>
+    <ol class="leaves">
+      <li>
+        <span class="num">The Replies</span>
+        <a class="title" href="/polymyth/devilsdiary/replies/">Exchanges left in the living comment threads</a>
+        <span class="when">Ongoing</span>
+      </li>
     </ol>
   </main>
 
@@ -210,5 +241,6 @@ body::before{
 </div>
 <script src="/js/mandala.js" defer></script>
 <script src="/js/indra.js" defer></script>
+<script src="/js/footer.js" defer></script>
 </body>
 </html>

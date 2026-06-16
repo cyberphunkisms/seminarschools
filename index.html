@@ -1,241 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Seminar Schools. Reading rooms, tutoring, and free public lectures.</title>
-<meta name="description" content="A Toronto practice built on the seminar. Leizu Academy tutoring, the Agora open seminar, a calendar of free public lectures, and the polymyth framework.">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="canonical" href="https://seminarschools.com/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seminar Schools. A reading organism in Toronto.</title>
+<meta name="description" content="Seminar Schools is the working organism of Saul Nassau in Toronto: tutoring, free public seminars, a lecture calendar, essays, a learning game, and the polymorphousmythology framework, all one ecosystem.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --display:'Fraunces',Georgia,serif;
-    --body:'Newsreader',Georgia,serif;
-    --sans:'DM Sans',system-ui,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
-    --bg:#FFFFFF;
-    --paper:#FFFFFF;
-    --ink:#0B0B0B;
-    --muted:#565656;
-    --line:#E4E4E4;
-    --line-strong:#111111;
-    /* rainbow keyed per card, legible on white, read top-to-bottom as a spectrum */
-    --c1:#D7263D; --c2:#E8590C; --c3:#C9A227; --c4:#2B9348; --c5:#1864AB; --c6:#7048E8;
-    --spectrum:linear-gradient(90deg,#D7263D,#E8590C,#E6B81E,#2B9348,#1098AD,#1864AB,#7048E8);
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;background:var(--bg);color:var(--ink);
-    font-family:var(--body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit;}
-  img{max-width:100%;display:block;}
-  .wrap{max-width:1200px;margin:0 auto;padding:3rem 1.5rem 5rem;display:grid;grid-template-columns:minmax(0,330px) minmax(0,1fr);gap:3.5rem;align-items:start;}
+:root{
+  --bg:#F5EBE4; --bg-soft:#FAF4ED; --ink:#2A1A14; --ink-soft:#4A3A30; --muted:#6B5F54;
+  --line:rgba(42,26,20,.16); --accent:#8a4a32;
+  --c1:#C0392B; --c2:#D35400; --c3:#B7950B; --c4:#1E8449; --c5:#1F6FB2; --c6:#6C3FB5; --c7:#127C82;
+  --mono:'JetBrains Mono',ui-monospace,monospace; --serif:'Fraunces',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
+}
+@media(prefers-color-scheme:dark){:root{--bg:#171210;--bg-soft:#211a15;--ink:#ECE3D2;--ink-soft:#C9BCA6;--muted:#8E806E;--line:rgba(236,227,210,.14);--accent:#c87a5a;}}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+.mono{font-family:var(--mono);}
 
-  /* ---------- Profile ---------- */
-  .profile{position:sticky;top:3rem;display:flex;flex-direction:column;gap:1rem;min-width:0;}
-  .pf-photo{
-    width:172px;height:172px;border-radius:50%;overflow:hidden;border:2px solid var(--ink);
-    background:#eee url('/img/saul.jpg') center 18%/cover no-repeat;
-    filter:grayscale(100%) contrast(1.04);
-  }
-  .pf-name{font-family:var(--display);font-size:2.15rem;line-height:1.04;font-weight:500;margin:.35rem 0 0;overflow-wrap:break-word;}
-  .pf-name em{font-style:italic;}
-  .pf-rule{height:5px;width:100%;max-width:240px;border-radius:3px;background:var(--spectrum);}
-  .pf-who{font-family:var(--mono);font-size:.74rem;letter-spacing:.05em;color:var(--ink);text-transform:uppercase;overflow-wrap:break-word;}
-  .pf-tag{color:var(--muted);font-size:1.02rem;line-height:1.45;max-width:32ch;}
-  .pf-links{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.2rem;}
-  .pf-links a{
-    font-family:var(--sans);font-size:.78rem;font-weight:600;
-    padding:.42rem .85rem;border:1.5px solid var(--ink);border-radius:999px;
-    text-decoration:none;color:var(--ink);transition:background .16s,color .16s;
-  }
-  .pf-links a:hover,.pf-links a:focus-visible{background:var(--ink);color:#fff;}
-  .pf-foot{margin-top:.7rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.07em;color:var(--muted);line-height:1.9;text-transform:uppercase;}
+/* ---------- top bar ---------- */
+.bar{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+  padding:.85rem 1.6rem;border-bottom:1px solid var(--line);
+  background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
+.bar .brand{font-family:var(--mono);font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;}
+.bar .brand b{color:var(--accent);font-weight:500;}
+.bar .right{display:flex;align-items:center;gap:1.1rem;}
+.bar .meta{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+@media(max-width:640px){.bar .meta{display:none;}}
+.book{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;
+  border:1px solid var(--ink);padding:.5rem .85rem;border-radius:3px;transition:background .18s,color .18s,transform .18s;}
+.book:hover,.book:focus-visible{background:var(--ink);color:var(--bg);transform:translateY(-1px);}
 
-  /* ---------- Card grid ---------- */
-  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.4rem;min-width:0;}
-  .card{
-    background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--c,#111);
-    border-radius:5px;overflow:hidden;display:flex;flex-direction:column;
-    text-decoration:none;color:inherit;min-width:0;
-    transition:transform .2s ease,box-shadow .2s ease;
-  }
-  .card:hover,.card:focus-visible{transform:translateY(-3px);box-shadow:0 14px 32px -18px rgba(0,0,0,.45);}
-  .card:focus-visible{outline:3px solid var(--c,#111);outline-offset:2px;}
-  .c1{--c:var(--c1);} .c2{--c:var(--c2);} .c3{--c:var(--c3);} .c4{--c:var(--c4);} .c5{--c:var(--c5);} .c6{--c:var(--c6);}
+/* ---------- hero stage ---------- */
+.stage{position:relative;width:100%;height:78vh;min-height:540px;overflow:hidden;border-bottom:1px solid var(--line);}
+#web{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab;}
+#web.dragging{cursor:grabbing;}
+.thread{stroke:var(--ink);stroke-width:.6;opacity:.13;transition:opacity .25s,stroke-width .25s;fill:none;}
+.ring{fill:none;stroke:var(--ink);opacity:.06;}
+.node{cursor:pointer;}
+.node .halo{fill:var(--n);opacity:0;transition:opacity .25s,r .25s;}
+.node .dot{fill:var(--bg);stroke:var(--n);stroke-width:2;transition:transform .22s cubic-bezier(.2,.9,.3,1.4),stroke-width .2s;transform-box:fill-box;transform-origin:center;}
+.node .lab{font-family:var(--mono);font-size:11px;letter-spacing:.06em;fill:var(--ink);transition:fill .2s;paint-order:stroke;stroke:var(--bg);stroke-width:3px;}
+.node.core .dot{fill:var(--ink);stroke:var(--ink);}
+.node.core .lab{font-family:var(--serif);font-style:italic;font-size:17px;stroke-width:4px;}
+.node:hover .dot,.node:focus-visible .dot,.node.on .dot{transform:scale(1.18);stroke-width:3;}
+.node:hover .halo,.node:focus-visible .halo,.node.on .halo{opacity:.16;}
+.node:hover .lab,.node:focus-visible .lab,.node.on .lab{fill:var(--n);}
+.thread.lit{opacity:.5;stroke:var(--litc);stroke-width:1.3;}
 
-  .card-art{aspect-ratio:16/10;width:100%;display:block;background:#fff;}
-  .card-art svg{width:100%;height:100%;display:block;}
-  .card-photo{aspect-ratio:16/10;width:100%;filter:grayscale(100%) contrast(1.05);}
-  .card-qr{aspect-ratio:16/10;width:100%;background:#fff url('/img/bookwormburrows.png') center/auto 80% no-repeat;}
+/* focus detail panel */
+.panel{position:absolute;left:1.4rem;bottom:1.4rem;max-width:340px;z-index:10;
+  background:color-mix(in srgb,var(--bg-soft) 90%,transparent);border:1px solid var(--line);border-left:3px solid var(--accent);
+  border-radius:4px;padding:1rem 1.1rem;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s,border-color .25s;pointer-events:none;}
+.panel.show{opacity:1;transform:none;pointer-events:auto;}
+.panel .k{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--n,var(--accent));}
+.panel h2{font-family:var(--serif);font-weight:500;font-size:1.35rem;margin:.25rem 0 .4rem;line-height:1.15;}
+.panel p{font-family:var(--serif);font-size:.94rem;line-height:1.55;color:var(--ink-soft);}
+.panel .go{display:inline-block;margin-top:.7rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--n,var(--accent));border-bottom:1px solid currentColor;padding-bottom:1px;}
 
-  .card-body{padding:1rem 1.15rem 1.2rem;display:flex;flex-direction:column;gap:.4rem;flex:1;min-width:0;}
-  .card-kicker{font-family:var(--mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--c,#111);font-weight:500;overflow-wrap:break-word;}
-  .card-title{font-family:var(--display);font-size:1.26rem;font-weight:500;line-height:1.16;color:var(--ink);overflow-wrap:anywhere;word-break:break-word;hyphens:auto;}
-  .card-blurb{color:var(--muted);font-size:.95rem;line-height:1.4;flex:1;overflow-wrap:break-word;}
-  .card-cta{font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;color:var(--c,#111);text-transform:uppercase;font-weight:500;display:inline-flex;align-items:center;gap:.4rem;margin-top:.2rem;}
-  .card:hover .card-cta .arr{transform:translateX(4px);}
-  .card-cta .arr{transition:transform .2s;}
+.hint{position:absolute;right:1.4rem;top:1.2rem;z-index:10;font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:right;line-height:1.9;pointer-events:none;}
 
-  .card.wide{grid-column:1/-1;flex-direction:row;}
-  .card.wide .card-art{aspect-ratio:auto;width:40%;min-height:168px;}
-  .card.wide .card-body{width:60%;justify-content:center;}
+/* identity strip under hero */
+.lede{max-width:1180px;margin:0 auto;padding:2.6rem 1.6rem 1.2rem;}
+.lede h1{font-family:var(--serif);font-weight:500;font-size:clamp(1.7rem,3.4vw,2.7rem);line-height:1.12;letter-spacing:-.01em;max-width:18ch;}
+.lede h1 em{font-style:italic;color:var(--accent);}
+.lede p{font-family:var(--serif);font-size:1.05rem;color:var(--ink-soft);max-width:60ch;margin-top:1rem;}
+.lede .who{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:1.1rem;}
 
-  @media(max-width:880px){
-    .wrap{grid-template-columns:minmax(0,1fr);gap:2.4rem;padding-top:2.2rem;}
-    .profile{position:static;align-items:center;text-align:center;}
-    .pf-tag{margin:0 auto;}
-    .pf-foot{text-align:center;}
-    .grid{grid-template-columns:minmax(0,1fr);}
-    .card.wide{flex-direction:column;}
-    .card.wide .card-art{width:100%;aspect-ratio:16/10;}
-    .card.wide .card-body{width:100%;}
-  }
-  @media(prefers-reduced-motion:reduce){*{transition:none!important;}html{scroll-behavior:auto;}}
+/* ---------- mono index ---------- */
+.index{max-width:1180px;margin:0 auto;padding:1.5rem 1.6rem 4rem;}
+.index .col-head{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+  border-top:1px solid var(--ink);padding-top:.5rem;margin-bottom:.2rem;display:flex;justify-content:space-between;}
+.idx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:1.6rem 2.4rem;margin-top:1.6rem;}
+.idx-row{display:block;border-bottom:1px solid var(--line);padding:.7rem 0;transition:padding .18s,border-color .2s;}
+.idx-row:hover,.idx-row:focus-visible{padding-left:.5rem;border-bottom-color:var(--rc);}
+.idx-row .n{font-family:var(--mono);font-size:.6rem;color:var(--rc);letter-spacing:.1em;}
+.idx-row .t{font-family:var(--serif);font-size:1.12rem;display:block;margin-top:.1rem;}
+.idx-row .d{font-size:.82rem;color:var(--muted);display:block;margin-top:.15rem;}
+.idx-row .arr{float:right;color:var(--rc);opacity:0;transition:opacity .18s,transform .18s;font-family:var(--mono);}
+.idx-row:hover .arr,.idx-row:focus-visible .arr{opacity:1;transform:translateX(3px);}
+
+.foot{max-width:1180px;margin:0 auto;padding:1.5rem 1.6rem 3rem;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:1rem 2rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.foot a{color:var(--ink);}
+.foot a:hover{color:var(--accent);}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
 </style>
-<link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
 </head>
 <body>
-<div class="wrap">
 
-  <!-- ============ PROFILE ============ -->
-  <aside class="profile">
-    <div class="pf-photo" role="img" aria-label="Saul Nassau"></div>
-    <h1 class="pf-name">Seminar <em>Schools.</em></h1>
-    <div class="pf-rule" aria-hidden="true"></div>
-    <div class="pf-who">Saul Nassau &middot; Toronto and online</div>
-    <p class="pf-tag">A room of readers working through a hard text together reaches what none of them could reach alone.</p>
-    <div class="pf-links">
-      <a href="mailto:saulnassau@protonmail.com">Email</a>
-      <a href="/saul">Full CV</a>
-      <a href="/main">Main</a>
-    </div>
-    <div class="pf-foot">Founded 2026<br>Reading rooms &middot; Tutoring &middot; Lectures</div>
-  </aside>
+<header class="bar">
+  <a class="brand" href="/">Seminar<b>Schools</b></a>
+  <div class="right">
+    <span class="meta">Toronto &middot; reading rooms &middot; est 2026</span>
+    <a class="book" href="/leizu">Book a session</a>
+  </div>
+</header>
 
-  <!-- ============ CARD GRID ============ -->
-  <main class="grid">
+<section class="stage" aria-label="The Seminar Schools ecosystem">
+  <svg id="web" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Interactive map of the projects"></svg>
+  <div class="hint" aria-hidden="true">drag to roam<br>scroll to zoom<br>tap a jewel</div>
+  <div class="panel" id="panel" role="status" aria-live="polite"></div>
+</section>
 
-    <!-- LEIZU -->
-    <a class="card c1" href="/leizu">
-      <div class="card-art">
-        <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Leizu Academy">
-          <defs><linearGradient id="rb" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="#D7263D"/><stop offset=".33" stop-color="#E8590C"/><stop offset=".5" stop-color="#2B9348"/><stop offset=".75" stop-color="#1864AB"/><stop offset="1" stop-color="#7048E8"/>
-          </linearGradient></defs>
-          <rect width="320" height="200" fill="#fff"/>
-          <rect x="11" y="11" width="298" height="178" fill="none" stroke="#0B0B0B" stroke-width="1"/>
-          <rect x="16" y="16" width="288" height="168" fill="none" stroke="#0B0B0B" stroke-width=".5" opacity=".5"/>
-          <text x="160" y="88" font-family="Fraunces,serif" font-size="42" font-weight="600" fill="#0B0B0B" text-anchor="middle" textLength="150" lengthAdjust="spacingAndGlyphs">嫘祖學院</text>
-          <rect x="92" y="104" width="136" height="3" fill="url(#rb)"/>
-          <text x="160" y="132" font-family="DM Sans,sans-serif" font-size="13" letter-spacing="4" fill="#0B0B0B" text-anchor="middle" textLength="150" lengthAdjust="spacingAndGlyphs">LEIZU ACADEMY</text>
-          <text x="160" y="154" font-family="JetBrains Mono,monospace" font-size="8" letter-spacing="2" fill="#565656" text-anchor="middle" textLength="150" lengthAdjust="spacingAndGlyphs">ONE ARROW · TWO BIRDS</text>
-        </svg>
-      </div>
-      <div class="card-body">
-        <div class="card-kicker">Tutoring</div>
-        <div class="card-title">Leizu Academy</div>
-        <p class="card-blurb">One-on-one and seminar tutoring toward the Ontario curriculum, the IB Diploma, and university admissions.</p>
-        <span class="card-cta">Visit the academy <span class="arr">&rarr;</span></span>
-      </div>
-    </a>
-
-    <!-- AGORA — grayscale photo (Earl Bales amphitheatre) -->
-    <a class="card c2" href="/agora/">
-      <img class="card-photo" src="/img/agora.jpg" alt="The Earl Bales Park amphitheatre where the Agora gathers" loading="lazy">
-      <div class="card-body">
-        <div class="card-kicker">Free open seminar</div>
-        <div class="card-title">The Agora</div>
-        <p class="card-blurb">The free public seminar at Earl Bales Park or online. Read the text ahead, then show up. No registration.</p>
-        <span class="card-cta">See the next session <span class="arr">&rarr;</span></span>
-      </div>
-    </a>
-
-    <!-- CALENDAR -->
-    <a class="card c3" href="/polymythseminars/">
-      <div class="card-art">
-        <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lecture calendar">
-          <rect width="320" height="200" fill="#0B0B0B"/>
-          <g>
-            <rect x="60" y="46" width="200" height="118" rx="3" fill="none" stroke="#fff" stroke-width="1"/>
-            <line x1="60" y1="72" x2="260" y2="72" stroke="#fff" stroke-width="1"/>
-            <g stroke="#fff" stroke-width=".4" opacity=".4">
-              <line x1="93" y1="72" x2="93" y2="164"/><line x1="127" y1="72" x2="127" y2="164"/><line x1="160" y1="72" x2="160" y2="164"/><line x1="193" y1="72" x2="193" y2="164"/><line x1="227" y1="72" x2="227" y2="164"/>
-              <line x1="60" y1="95" x2="260" y2="95"/><line x1="60" y1="118" x2="260" y2="118"/><line x1="60" y1="141" x2="260" y2="141"/>
-            </g>
-            <rect x="129" y="97" width="29" height="20" fill="#D7263D"/>
-            <rect x="195" y="120" width="29" height="20" fill="#2B9348"/>
-            <rect x="62" y="143" width="29" height="20" fill="#1864AB"/>
-            <rect x="96" y="74" width="29" height="20" fill="#E8590C"/>
-          </g>
-          <text x="160" y="35" font-family="DM Sans,sans-serif" font-size="11" letter-spacing="5" fill="#fff" text-anchor="middle" textLength="120" lengthAdjust="spacingAndGlyphs">THE CALENDAR</text>
-        </svg>
-      </div>
-      <div class="card-body">
-        <div class="card-kicker">Every weeknight</div>
-        <div class="card-title">Lecture Calendar</div>
-        <p class="card-blurb">Every free public lecture, reading, and screening across Toronto, gathered into one running calendar.</p>
-        <span class="card-cta">Open the calendar <span class="arr">&rarr;</span></span>
-      </div>
-    </a>
-
-    <!-- POLYMYTH (Devil's Diary now lives inside this) -->
-    <a class="card c4" href="/polymyth/methodologylist">
-      <div class="card-art">
-        <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="polymorphousmythology">
-          <rect width="320" height="200" fill="#fff"/>
-          <g stroke-width="1.4" fill="none">
-            <circle cx="160" cy="74" r="28" stroke="#D7263D"/><circle cx="136" cy="88" r="28" stroke="#2B9348"/><circle cx="184" cy="88" r="28" stroke="#1864AB"/>
-          </g>
-          <text x="160" y="142" font-family="Fraunces,serif" font-style="italic" font-size="19" fill="#0B0B0B" text-anchor="middle" textLength="280" lengthAdjust="spacingAndGlyphs">polymorphousmythology</text>
-          <text x="160" y="162" font-family="JetBrains Mono,monospace" font-size="8" letter-spacing="2" fill="#565656" text-anchor="middle" textLength="120" lengthAdjust="spacingAndGlyphs">THE FRAMEWORK</text>
-        </svg>
-      </div>
-      <div class="card-body">
-        <div class="card-kicker">The framework</div>
-        <div class="card-title">polymorphousmythology</div>
-        <p class="card-blurb">How symbols and figures move across unrelated works and gather meaning through use. Essays, terms, case studies, and the Devil's Diary.</p>
-        <span class="card-cta">Read the methodology <span class="arr">&rarr;</span></span>
-      </div>
-    </a>
-
-    <!-- BOOKWORMBURROWS — the QR is the picture -->
-    <a class="card c5" href="/bookwormcard/">
-      <div class="card-qr" role="img" aria-label="bookwormburrows QR code"></div>
-      <div class="card-body">
-        <div class="card-kicker">Pedagogical game &middot; Live</div>
-        <div class="card-title">bookwormburrows</div>
-        <p class="card-blurb">A dimensional-traveling game where any text becomes a world to visit. Scan the code, make a character of yourself, and play.</p>
-        <span class="card-cta">Enter the burrow <span class="arr">&rarr;</span></span>
-      </div>
-    </a>
-
-    <!-- MARGINALIA -->
-    <a class="card c6 wide" href="/marginalia">
-      <div class="card-art">
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Marginalia">
-          <rect width="200" height="200" fill="#fff"/>
-          <g stroke="#0B0B0B" stroke-width="1" opacity=".75">
-            <line x1="38" y1="52" x2="150" y2="52"/><line x1="38" y1="76" x2="150" y2="76"/><line x1="38" y1="100" x2="118" y2="100"/><line x1="38" y1="124" x2="150" y2="124"/><line x1="38" y1="148" x2="96" y2="148"/>
-          </g>
-          <path d="M150 88 q22 8 0 42" stroke="#7048E8" stroke-width="2" fill="none"/>
-          <circle cx="165" cy="80" r="4" fill="#D7263D"/>
-        </svg>
-      </div>
-      <div class="card-body">
-        <div class="card-kicker">Written attention</div>
-        <div class="card-title">Marginalia</div>
-        <p class="card-blurb">Longer-form commentary on the Toronto lectures attended each month. One essay of close attention per talk.</p>
-        <span class="card-cta">Read the essays <span class="arr">&rarr;</span></span>
-      </div>
-    </a>
-
-  </main>
+<div class="lede">
+  <h1>A room of readers working a hard text together reaches what <em>none of them</em> could reach alone.</h1>
+  <p>Seminar Schools is one organism, not a portfolio. A tutoring practice, a free public seminar, a city-wide lecture calendar, a body of essays, a learning game, and the framework underneath them all. Every part reflects the others.</p>
+  <div class="who">Saul Karim Nassau &middot; MA Philosophy &middot; Toronto and online &middot; saulnassau@protonmail.com</div>
 </div>
+
+<main class="index">
+  <div class="col-head"><span>The index</span><span>everything, directly</span></div>
+  <div class="idx-grid" id="idxGrid"></div>
+</main>
+
+<footer class="foot">
+  <a href="/saul">Full CV</a>
+  <a href="/main">Main</a>
+  <a href="/florilegium/">Florilegium</a>
+  <a href="/nutrition/">Nutrition</a>
+  <a href="/polymyth/sitemap/">Sitemap</a>
+  <a href="mailto:saulnassau@protonmail.com">Email</a>
+  <span style="color:var(--muted)">One arrow &middot; two birds</span>
+</footer>
+
+<script>
+// ---- the ecosystem as nodes on a web -------------------------------------
+const C = ['--c1','--c2','--c3','--c4','--c5','--c6','--c7'];
+const cv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const NODES = [
+  {id:'core', label:'Seminar Schools', href:'/', tier:0, c:'--ink', k:'The organism', d:'Everything below is one body. Start anywhere; every path reflects the whole.'},
+  {id:'leizu', label:'Leizu Academy', href:'/leizu', tier:1, c:'--c1', k:'Tutoring · IB & admissions', d:'One-on-one and seminar tutoring toward the Ontario curriculum, the IB Diploma, and university admissions.'},
+  {id:'teach', label:'Teacher Resources', href:'/teacherresources/', tier:1, c:'--c7', k:'Free for teachers', d:'Classroom-ready materials mapped by subject and collection, built and checked against real teaching.'},
+  {id:'agora', label:'The Agora', href:'/agora/', tier:1, c:'--c2', k:'Free public seminar', d:'The free public seminar at Earl Bales Park or online. Read the text ahead, then show up. No registration.'},
+  {id:'calendar', label:'Lecture Calendar', href:'/polymythseminars/', tier:2, c:'--c3', k:'Free events · every weeknight', d:'Every free public lecture, reading, and screening across Toronto, gathered into one running calendar.'},
+  {id:'marginalia', label:'Marginalia', href:'/marginalia', tier:2, c:'--c6', k:'Essays on the talks', d:'Each essay works through one free lecture attended around Toronto, written within days of the talk.'},
+  {id:'polymyth', label:'polymorphousmythology', href:'/polymyth/methodologylist', tier:2, c:'--c4', k:'The framework', d:'How symbols and figures move across unrelated works and gather meaning through use. The engine under all of it.'},
+  {id:'bb', label:'bookwormburrows', href:'/bookwormcard/', tier:3, c:'--c5', k:'Learning game · live', d:'A dimensional-traveling game where any text becomes a world to visit. Scan the code, make a character, play.'},
+  {id:'ohm', label:'Ohm Dome', href:'/ohm-dome/', tier:3, c:'--c5', k:'Public art proposal', d:'A biometric-responsive LED dome for public space in Toronto. Heart rate, breath, and proximity drive the light.'},
+  {id:'festivals', label:'Festivals', href:'/festivals/', tier:3, c:'--c2', k:'Across the GTA', d:'Festivals worth the trip across Toronto and the GO network, chosen for form, living culture, and site.'},
+  {id:'sabachtan', label:'Sabachtan Seminar', href:'/sabachtan-seminar/', tier:3, c:'--c6', k:'The ground', d:'The gnostic seminar at the base of the framework, where the reading turns to first questions.'},
+];
+const CLUSTERS = [ ['leizu','teach','agora'], ['calendar','marginalia'], ['polymyth','bb','sabachtan'] ];
+
+const W=1000,H=700, CX=W*0.5, CY=H*0.47;
+const RING={1:135,2:215,3:292};
+// explicit angles (degrees, 0=right, CCW) for a balanced composition, long
+// labels placed where there is room, clusters spread around the ring.
+const ANG={leizu:330,teach:205,agora:55,calendar:255,marginalia:150,polymyth:95,bb:25,ohm:290,festivals:175,sabachtan:120};
+const pos={core:{x:CX,y:CY}};
+NODES.forEach(n=>{
+  if(n.tier>0){ const a=ANG[n.id]*Math.PI/180, r=RING[n.tier];
+    pos[n.id]={x:CX+Math.cos(a)*r*1.12, y:CY+Math.sin(a)*r}; }
+});
+
+const NS='http://www.w3.org/2000/svg';
+const svg=document.getElementById('web');
+function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+
+const stage=el('g',{}); svg.appendChild(stage);
+// faint substrate rings
+[170,300,430].forEach((r,i)=>stage.appendChild(el('circle',{class:'ring',cx:CX,cy:CY,r})));
+
+// threads: core -> every node, plus intra-cluster links
+const threadEls={};
+function addThread(aId,bId,key){
+  const a=pos[aId],b=pos[bId];
+  const t=el('path',{class:'thread',d:`M${a.x} ${a.y} Q ${(a.x+b.x)/2+(b.y-a.y)*0.08} ${(a.y+b.y)/2+(a.x-b.x)*0.08} ${b.x} ${b.y}`});
+  stage.appendChild(t); (threadEls[key]=threadEls[key]||[]).push(t);
+}
+NODES.forEach(n=>{ if(n.tier>0){ addThread('core',n.id,n.id); }});
+CLUSTERS.forEach(cl=>{ for(let i=0;i<cl.length;i++)for(let j=i+1;j<cl.length;j++){ addThread(cl[i],cl[j],cl[i]); addThread(cl[i],cl[j],cl[j]); }});
+
+// nodes
+const panel=document.getElementById('panel');
+let activeId=null;
+function radius(t){return t===0?16:t===1?12:t===2?10:8;}
+NODES.forEach(n=>{
+  const p=pos[n.id], col=cv(n.c);
+  const g=el('g',{class:'node'+(n.tier===0?' core':''),tabindex:'0',role:'link','aria-label':n.label,transform:`translate(${p.x} ${p.y})`});
+  g.style.setProperty('--n',col);
+  g.appendChild(el('circle',{class:'halo',r:radius(n.tier)*2.6}));
+  g.appendChild(el('circle',{class:'dot',r:radius(n.tier)}));
+  const lab=el('text',{class:'lab',x:0,y:radius(n.tier)+15,'text-anchor':'middle'}); lab.textContent=n.label;
+  g.appendChild(lab);
+  const focusNode=()=>{
+    if(activeId&&activeId!==n.id){const pg=document.querySelector('.node.on');if(pg)pg.classList.remove('on');}
+    activeId=n.id; g.classList.add('on');
+    (threadEls[n.id]||[]).forEach(t=>{t.classList.add('lit');t.style.setProperty('--litc',col);});
+    panel.style.setProperty('--n',col);
+    panel.innerHTML=`<div class="k">${n.k}</div><h2>${n.label}</h2><p>${n.d}</p>`+(n.id!=='core'?`<a class="go" href="${n.href}">Enter ${n.label.split(' ')[0]} &rarr;</a>`:'');
+    panel.classList.add('show');
+  };
+  const blur=()=>{ g.classList.remove('on'); (threadEls[n.id]||[]).forEach(t=>t.classList.remove('lit')); };
+  g.addEventListener('mouseenter',focusNode);
+  g.addEventListener('focus',focusNode);
+  g.addEventListener('mouseleave',()=>{ if(activeId===n.id){} blur(); });
+  g.addEventListener('click',()=>{ if(n.id!=='core') location.href=n.href; });
+  g.addEventListener('keydown',e=>{ if(e.key==='Enter'&&n.id!=='core') location.href=n.href; });
+  stage.appendChild(g);
+});
+
+// ---- spring zoom + drag (the substrate stays alive, the taste stays calm) -
+let scale=1,sT=1,sV=0, tx=0,txT=0,txV=0, ty=0,tyT=0,tyV=0, dragging=false,lx=0,ly=0;
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function apply(){ stage.setAttribute('transform',`translate(${CX+tx} ${CY+ty}) scale(${scale}) translate(${-CX} ${-CY})`); }
+svg.addEventListener('wheel',e=>{ if(!e.ctrlKey&&!e.metaKey&&Math.abs(e.deltaY)<50&&!e.shiftKey){} e.preventDefault(); sT=Math.min(2.4,Math.max(.7, sT*(e.deltaY<0?1.08:0.93))); },{passive:false});
+svg.addEventListener('pointerdown',e=>{ dragging=true; lx=e.clientX; ly=e.clientY; svg.classList.add('dragging'); svg.setPointerCapture(e.pointerId); });
+svg.addEventListener('pointermove',e=>{ if(!dragging)return; const k=(svg.viewBox.baseVal.width/svg.clientWidth); txT+=(e.clientX-lx)*k; tyT+=(e.clientY-ly)*k; lx=e.clientX; ly=e.clientY; });
+addEventListener('pointerup',()=>{ dragging=false; svg.classList.remove('dragging'); });
+function clampPan(v){return Math.max(-260,Math.min(260,v));}
+function frame(){
+  txT=clampPan(txT); tyT=clampPan(tyT);
+  sV=(sV+(sT-scale)*0.12)*0.8; scale+=sV;
+  txV=(txV+(txT-tx)*0.12)*0.8; tx+=txV;
+  tyV=(tyV+(tyT-ty)*0.12)*0.8; ty+=tyV;
+  apply(); requestAnimationFrame(frame);
+}
+if(reduce){apply();}else{requestAnimationFrame(frame);}
+// open core by default so the panel is never empty
+setTimeout(()=>{const core=document.querySelector('.node.core');if(core)core.dispatchEvent(new Event('mouseenter'));},400);
+
+// ---- the mono index (functional, JS-free safe content mirrors this) ------
+const grid=document.getElementById('idxGrid');
+NODES.filter(n=>n.tier>0).forEach((n,i)=>{
+  const col=cv(n.c);
+  const a=document.createElement('a'); a.className='idx-row'; a.href=n.href; a.style.setProperty('--rc',col);
+  a.innerHTML=`<span class="arr">&rarr;</span><span class="n">${String(i+1).padStart(2,'0')} / ${n.k}</span><span class="t">${n.label}</span><span class="d">${n.d}</span>`;
+  grid.appendChild(a);
+});
+</script>
+<script src="/js/footer.js" defer></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
   ============================================================================
-  /aa/editorial.html — editorial decisions log
+  /aa/editorial.html, editorial decisions log
   ============================================================================
   Chronological record of consolidations, routing-decisions, schema bumps,
   bar/verification decisions, and explicit refusals (where the catalog did
@@ -17,7 +17,7 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>aa* — Editorial Log</title>
+<title>aa*, Editorial Log</title>
 <meta name="description" content="Editorial decisions log for the aa* archetype archive. Schema versions, routing decisions, refusals.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,6 +80,7 @@ body{padding:48px 24px 96px;max-width:920px;margin:0 auto}
   --highlight:#4A3C1E;
 }</style>
 <link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
+<link rel="stylesheet" href="/css/alive.css">
 </head>
 <body>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:auto;bottom:1rem;left:1rem;right:auto;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sun" aria-hidden="true">&#9728;</span><span class="moon" aria-hidden="true">&#9790;</span></button><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
@@ -135,7 +136,7 @@ body{padding:48px 24px 96px;max-width:920px;margin:0 auto}
       <div class="entry-meta"><span class="tag-shipped">SHIPPED</span> · C5</div>
     </div>
     <div class="entry-body">
-      <p><strong>SETTINGS_LIBRARY</strong> top-level constant added: 7 setting-archetypes (city-as-cosmic-axis, marketplace, library, hearth-fire, river, prison, tower). Each entry has structural_function, 3-4 worked instances across traditions with per-instance source attribution, 3-4 primary-source citations (publisher/ISBN/journal-volume — no SEO, no Wikipedia, no aggregators), polymyth-relevance note. Schema distinct from TAXONOMIES (archetype-frameworks) and META_ENTRIES (critiques): SETTINGS_LIBRARY catalogs PLACE-archetypes whose structural function in narrative is well-attested across traditions.</p>
+      <p><strong>SETTINGS_LIBRARY</strong> top-level constant added: 7 setting-archetypes (city-as-cosmic-axis, marketplace, library, hearth-fire, river, prison, tower). Each entry has structural_function, 3-4 worked instances across traditions with per-instance source attribution, 3-4 primary-source citations (publisher/ISBN/journal-volume, no SEO, no Wikipedia, no aggregators), polymyth-relevance note. Schema distinct from TAXONOMIES (archetype-frameworks) and META_ENTRIES (critiques): SETTINGS_LIBRARY catalogs PLACE-archetypes whose structural function in narrative is well-attested across traditions.</p>
       <p>Names came from the user; AI work was content authoring against named slots with citation discipline. Per Rule 30 (NO FABRICATION + NO NAMING): names = user authorship; content = AI organization with grounding.</p>
     </div>
   </article>
@@ -173,7 +174,7 @@ body{padding:48px 24px 96px;max-width:920px;margin:0 auto}
     </div>
     <div class="entry-body">
       <p>Three core* memory slots freed via the consolidation-not-deletion path (per Rule 6): BLOOM (slot 15), CH1 platformstrawmanculture (slot 25), COMPILATION FAILURE MODE (slot 27). Each slot's body preserved verbatim in ml*'s coreplus section with migration-status header. The BLOOM rule continues firing via the new ACTIVATIONS DISPATCH at slot 2.</p>
-      <p>Two new core* rules introduced: <strong>BOOTSTRAP</strong> (slot 24) — declares core+ in ml* canonical; ml*-upload at conversation start is the access mechanism; all core+ rules apply, not just the 30 in core*. <strong>ACTIVATIONS DISPATCH</strong> (slot 2) — table routing user-phrases (bloom / ouroboros / componentlist / HAL / reflect / WR) to their handlers in core+ or in-memory scanner slots. Architectural shift: trigger handlers move out of core* permanently while a single dispatch slot maintains the user-phrase → handler mapping.</p>
+      <p>Two new core* rules introduced: <strong>BOOTSTRAP</strong> (slot 24), declares core+ in ml* canonical; ml*-upload at conversation start is the access mechanism; all core+ rules apply, not just the 30 in core*. <strong>ACTIVATIONS DISPATCH</strong> (slot 2), table routing user-phrases (bloom / ouroboros / componentlist / HAL / reflect / WR) to their handlers in core+ or in-memory scanner slots. Architectural shift: trigger handlers move out of core* permanently while a single dispatch slot maintains the user-phrase → handler mapping.</p>
     </div>
   </article>
 </section>
@@ -209,18 +210,18 @@ body{padding:48px 24px 96px;max-width:920px;margin:0 auto}
       <div class="entry-meta"><span class="tag-shipped">SHIPPED</span> · core* slot 1</div>
     </div>
     <div class="entry-body">
-      <p>Top-priority core memory rule: every factual claim requires a verified primary source. Just-knowing without source-check is Q5 (objection delivered without source-check when the source-check would kill it). SEO content does not count as scholarship. Wikipedia is starter-only — never cite. LOGOI clause: ml* / mc* / bb* / core* outputs must be universal-truth-bearing; soft-pleasing is a violation.</p>
+      <p>Top-priority core memory rule: every factual claim requires a verified primary source. Just-knowing without source-check is Q5 (objection delivered without source-check when the source-check would kill it). SEO content does not count as scholarship. Wikipedia is starter-only, never cite. LOGOI clause: ml* / mc* / bb* / core* outputs must be universal-truth-bearing; soft-pleasing is a violation.</p>
       <p>Catalog enforcement: every entry added since this rule's installation cites primary sources by publisher / ISBN / journal-volume. The aa* refinement track this session (A12 / A21 / C5) all met this bar; META_ENTRIES cite Lévi-Strauss / Wittgenstein / Foucault primary works by Gallimard / Blackwell publication, SETTINGS_LIBRARY cites Eliade / Bachelard / Foucault / Vernant primary works.</p>
     </div>
   </article>
 </section>
 
 <section class="section">
-  <div class="section-title">Refusals — what the catalog did not add and why</div>
+  <div class="section-title">Refusals, what the catalog did not add and why</div>
 
   <article class="entry entry--shipped">
     <div class="entry-header">
-      <div class="entry-title">A20 — additional compound-marking refinements</div>
+      <div class="entry-title">A20, additional compound-marking refinements</div>
       <div class="entry-meta"><span class="tag-shipped">SHIPPED</span> · 18 tags + 20 occurrences</div>
     </div>
     <div class="entry-body">
@@ -232,28 +233,28 @@ body{padding:48px 24px 96px;max-width:920px;margin:0 auto}
 
   <article class="entry entry--blocked">
     <div class="entry-header">
-      <div class="entry-title">C3 — Untranslatables U6 onward</div>
+      <div class="entry-title">C3, Untranslatables U6 onward</div>
       <div class="entry-meta"><span class="tag-blocked">BLOCKED</span> · prior rejection</div>
     </div>
     <div class="entry-body">
-      <p>The 8 entries that did ship (U1-U8) are the recovered remainder after two prior research passes were user-rejected for citing aggregator sources. To resume needs either (a) an explicit 22-term seed list of which untranslatables to add, or (b) a stricter source-bar declaration — for example, "only entries appearing in Cassin's Vocabulaire européen des philosophies."</p>
+      <p>The 8 entries that did ship (U1-U8) are the recovered remainder after two prior research passes were user-rejected for citing aggregator sources. To resume needs either (a) an explicit 22-term seed list of which untranslatables to add, or (b) a stricter source-bar declaration, for example, "only entries appearing in Cassin's Vocabulaire européen des philosophies."</p>
       <div class="refusal-quote">memory note: "Untranslatables research failed twice (Wikipedia/Amazon citations rejected). ml*#720 water-through-fingers entry."</div>
     </div>
   </article>
 
   <article class="entry entry--blocked">
     <div class="entry-header">
-      <div class="entry-title">C4 — Operational signatures 9+</div>
+      <div class="entry-title">C4, Operational signatures 9+</div>
       <div class="entry-meta"><span class="tag-blocked">BLOCKED</span> · bar definition</div>
     </div>
     <div class="entry-body">
-      <p>"Operational signature" as a category exists in bookwormburrows (bb*) pedagogy — cocoon / silkworm / egg-laying-type process-signatures govern how the dimensional-traveling game tracks character development. Whether the category extends to aa* in the same form, and what the inclusion-bar would be, is undefined. Pending user direction on what counts as an operational signature in the aa* sense (process-signature for an archetype? signature of an archetype in operation? something else?).</p>
+      <p>"Operational signature" as a category exists in bookwormburrows (bb*) pedagogy, cocoon / silkworm / egg-laying-type process-signatures govern how the dimensional-traveling game tracks character development. Whether the category extends to aa* in the same form, and what the inclusion-bar would be, is undefined. Pending user direction on what counts as an operational signature in the aa* sense (process-signature for an archetype? signature of an archetype in operation? something else?).</p>
     </div>
   </article>
 
   <article class="entry entry--blocked">
     <div class="entry-header">
-      <div class="entry-title">C6 — Motifs 15+</div>
+      <div class="entry-title">C6, Motifs 15+</div>
       <div class="entry-meta"><span class="tag-blocked">BLOCKED</span> · partial seed</div>
     </div>
     <div class="entry-body">
@@ -263,18 +264,18 @@ body{padding:48px 24px 96px;max-width:920px;margin:0 auto}
 
   <article class="entry entry--shipped">
     <div class="entry-header">
-      <div class="entry-title">A5 — Schmidt → Bolen lineage</div>
+      <div class="entry-title">A5, Schmidt → Bolen lineage</div>
       <div class="entry-meta"><span class="tag-shipped">SHIPPED</span> · schmidt45 identified</div>
     </div>
     <div class="entry-body">
-      <p>The audit's "Schmidt" was ambiguous to the AI on first pass. On verification, the Schmidt referenced is <strong>Victoria Lynn Schmidt</strong> (45 Master Characters, Writer's Digest 2001, rev. 2012, ISBN 978-1599635347), already in the catalog as taxonomy <code>schmidt45</code>. Her categories explicitly use Bolen's light/shadow Greek-pantheon framework: "Aphrodite (Seductive Muse / Femme Fatale)" / "Zeus (King / Dictator)" / "Hera (Matriarch / Scorned Woman)" — these are Bolen 1984/1989 archetypal pairs extended into a writer's toolkit. The lineage edge schmidt45 → bolen-goddess is now in LINEAGE_EDGES alongside the prior pearson12 → jung-classical edge.</p>
-      <p>Adjacent gap noted (not yet fixed): the Bolen 1989 work (Gods in Everyman) does NOT have its own taxonomy entry in the catalog, only the 1984 Goddesses in Everywoman. Adding bolen-gods as a new taxonomy crosses into new-entry creation — user authorship territory. Flagged as future work, not auto-shipped.</p>
+      <p>The audit's "Schmidt" was ambiguous to the AI on first pass. On verification, the Schmidt referenced is <strong>Victoria Lynn Schmidt</strong> (45 Master Characters, Writer's Digest 2001, rev. 2012, ISBN 978-1599635347), already in the catalog as taxonomy <code>schmidt45</code>. Her categories explicitly use Bolen's light/shadow Greek-pantheon framework: "Aphrodite (Seductive Muse / Femme Fatale)" / "Zeus (King / Dictator)" / "Hera (Matriarch / Scorned Woman)", these are Bolen 1984/1989 archetypal pairs extended into a writer's toolkit. The lineage edge schmidt45 → bolen-goddess is now in LINEAGE_EDGES alongside the prior pearson12 → jung-classical edge.</p>
+      <p>Adjacent gap noted (not yet fixed): the Bolen 1989 work (Gods in Everyman) does NOT have its own taxonomy entry in the catalog, only the 1984 Goddesses in Everywoman. Adding bolen-gods as a new taxonomy crosses into new-entry creation, user authorship territory. Flagged as future work, not auto-shipped.</p>
     </div>
   </article>
 
   <article class="entry entry--blocked">
     <div class="entry-header">
-      <div class="entry-title">A10 — provenance-tier filter</div>
+      <div class="entry-title">A10, provenance-tier filter</div>
       <div class="entry-meta"><span class="tag-blocked">BLOCKED</span> · data monolithic</div>
     </div>
     <div class="entry-body">
@@ -287,5 +288,8 @@ body{padding:48px 24px 96px;max-width:920px;margin:0 auto}
 <a href="/aa/#mode=pending" class="nav-back" style="margin-left:24px">→ Pending decisions tab</a>
 
 <script src="/js/theme.js" defer></script>
+<script src="/js/mandala.js" defer></script>
+<script src="/js/indra.js" defer></script>
+<script src="/js/footer.js" defer></script>
 </body>
 </html>

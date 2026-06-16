@@ -339,6 +339,7 @@
 }
 </style>
 <link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
+<link rel="stylesheet" href="/css/alive.css">
 </head>
 <body>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
@@ -611,7 +612,7 @@
         var eventId = 'evt-' + cardIdx++;
         // Stash data for the toggle handler on a global lookup
         eventLookup[eventId] = e;
-        // On screenings, the filmmaker-present tag is redundant — being on this
+        // On screenings, the filmmaker-present tag is redundant, being on this
         // calendar at all already implies filmmaker presence (the filter criterion).
         // On lectures, 'Confirmed' conveys real info (vs tentative bookings) so kept.
         var attendance = (e.type !== 'screening' && e.attendance_confirmed && e.speaker_or_director)
@@ -623,7 +624,7 @@
         var timeDisplay = fmtTime(e.date);
         var dateRange = '';
         if (e.showtime_count && e.showtime_count > 1) {
-          // Aggregated screening — show date range and showtime count instead of single time
+          // Aggregated screening, show date range and showtime count instead of single time
           var first = fmtDateShort(e.first_date);
           var last = fmtDateShort(e.last_date);
           var rangeText = (first === last) ? first : first + ' to ' + last;
@@ -782,5 +783,8 @@
 })();
 </script>
 <script src="/js/theme.js" defer></script>
+<script src="/js/mandala.js" defer></script>
+<script src="/js/indra.js" defer></script>
+<script src="/js/footer.js" defer></script>
 </body>
 </html>

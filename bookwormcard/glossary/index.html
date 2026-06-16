@@ -45,6 +45,7 @@
 </style>
 <link rel="canonical" href="https://seminarschools.com/bookwormcard/glossary/">
 <link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
+<link rel="stylesheet" href="/css/alive.css">
 </head>
 <body class="crt">
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
@@ -52,7 +53,7 @@
   <div class="nav"><a href="/bookwormcard/">← back to the form</a></div>
   <h1>bookwormburrows · glossary</h1>
   <p class="lede">the vocabulary of the depth-engine. every characteristic the worm can wear, what it means, and which symbol it answers to. the worm earns these by what you write into the form, not by what you choose. the engine reads, the symbols arrive.</p>
-  <div class="x"><b>how to read.</b> each symbol is an <em>accessory cluster</em> — a single visual mark on the worm's body that lights up when one or more of its underlying traits accumulate. the cluster has a <em>min</em> threshold. below it, a faint ghost shows the cluster brewing. above it, the cluster is confidently worn. when one trait inside a cluster carries 60%+ of the cluster weight, the symbol pulses and the trait's name appears under it. extreme single-register commitment turns the symbol radiant. <b>weights:</b> +3 marks the deep cognitive moves, +2 the substance markers, +1 the craft markers. negative quirks subtract from hp.</div>
+  <div class="x"><b>how to read.</b> each symbol is an <em>accessory cluster</em>, a single visual mark on the worm's body that lights up when one or more of its underlying traits accumulate. the cluster has a <em>min</em> threshold. below it, a faint ghost shows the cluster brewing. above it, the cluster is confidently worn. when one trait inside a cluster carries 60%+ of the cluster weight, the symbol pulses and the trait's name appears under it. extreme single-register commitment turns the symbol radiant. <b>weights:</b> +3 marks the deep cognitive moves, +2 the substance markers, +1 the craft markers. negative quirks subtract from hp.</div>
   <div id="glossary-mount" class="loading">loading vocabulary…</div>
 </div>
 <script src="/bookwormcard/tamagotchi.js"></script>
@@ -70,14 +71,14 @@
     'bottom-left':'quirks (negative)'
   };
   var SLOT_LEDE = {
-    'top':'what they wear above the brow. headwear marks the dominant register of self-presentation — the part of the character that arrives before they speak.',
+    'top':'what they wear above the brow. headwear marks the dominant register of self-presentation, the part of the character that arrives before they speak.',
     'face':'how the character sees, or refuses to see. eyewear changes the cast of every line of sight.',
     'top-left':'the climate the character moves through and the temporal frame they live inside.',
     'top-right':'the cognitive register that floats above the head. the thinking, the haunting, the laughing-through.',
     'right':'the tool, weapon, instrument, talisman in the right hand. what the character travels with.',
-    'left':'the environment around the character — the place they belong to, the climate they came from.',
-    'bottom-right':'what is at the character\'s feet — what they walk on, what they carry as a small ornament.',
-    'bottom-left':'these are not characteristics. they are characteristic FAILURES — patterns the answer fell into. each costs hp.'
+    'left':'the environment around the character, the place they belong to, the climate they came from.',
+    'bottom-right':'what is at the character\'s feet, what they walk on, what they carry as a small ornament.',
+    'bottom-left':'these are not characteristics. they are characteristic FAILURES, patterns the answer fell into. each costs hp.'
   };
   var SLOT_ORDER = ['top','face','top-left','top-right','right','left','bottom-right','bottom-left'];
 
@@ -92,7 +93,7 @@
   function build(){
     var mount = document.getElementById('glossary-mount');
     if(!window.Tamagotchi || !window.Tamagotchi.getAccessoryRules){
-      mount.innerHTML = '<p class="lede">vocabulary unavailable — the worm engine did not load.</p>';
+      mount.innerHTML = '<p class="lede">vocabulary unavailable, the worm engine did not load.</p>';
       return;
     }
     var rules = window.Tamagotchi.getAccessoryRules();
@@ -161,5 +162,8 @@
 })();
 </script>
 <script src="/js/theme.js" defer></script>
+<script src="/js/mandala.js" defer></script>
+<script src="/js/indra.js" defer></script>
+<script src="/js/footer.js" defer></script>
 </body>
 </html>

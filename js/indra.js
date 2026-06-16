@@ -88,8 +88,8 @@
       var p = Math.min(1, y / docH);
       layer.style.transform =
         'translateY(' + (-y * factor).toFixed(1) + 'px)' +
-        ' rotate(' + (p * (tier === 'prominent' ? 14 : 5)).toFixed(2) + 'deg)' +
-        ' scale(' + (1 + p * 0.06).toFixed(3) + ')';
+        ' rotate(' + (p * (tier === 'prominent' ? 8 : 3)).toFixed(2) + 'deg)' +
+        ' scale(' + (1 + p * 0.04).toFixed(3) + ')';
     }
     function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -100,6 +100,10 @@
         mobile = window.innerWidth < 768;
         layer.innerHTML = window.PolymythMandala.build(opts);
         frame();
+        // The rebuild replaced every circle, so the ecosystem was running on
+        // dead nodes. Re-seat it on the fresh geometry, otherwise the web
+        // goes static after the first zoom or resize.
+        mountEcosystem(layer);
       }, 220);
     }, { passive: true });
     frame();
@@ -124,7 +128,7 @@
   // everything. Transform+opacity only.
   function mountReveal() {
     if (reduced || !('IntersectionObserver' in window)) return;
-    var sel = 'main section, main article, .card, .entry, .lecture, .event, .sec, .block-card';
+    var sel = 'main section, main article, .card, .entry, .lecture, .event, .sec, .block-card, .tile, .faq-item, .leg-item, .tier-table, .preamble, blockquote, figure, .leaves li';
     var els = document.querySelectorAll(sel);
     if (!els.length || els.length > 400) return;
     var io = new IntersectionObserver(function (entries) {
@@ -188,24 +192,27 @@
     return next;
   }
 
+  // Gesture listeners attach ONCE (see end of file), reading the live mount
+  // through these holders so resize re-mounts swap state instead of stacking
+  // new window listeners.
+  var ecoTimer = null, ecoState = null;
+
   function mountEcosystem(layer) {
     if (reduced || !layer) return;
+    if (ecoTimer) { clearTimeout(ecoTimer); ecoTimer = null; }
     var svg = layer.querySelector('svg');
-    if (!svg) return;
+    if (!svg) { ecoState = null; return; }
     var all = Array.prototype.slice.call(svg.querySelectorAll('circle'));
-    // Habitat: mid-sized circles only; caps keep the tick negligible.
     var cap = mobile ? 50 : 120;
     var nodes = all.map(function (c) {
       return { el: c, x: +c.getAttribute('cx'), y: +c.getAttribute('cy'), r: +c.getAttribute('r') };
     }).filter(function (n) { return n.r >= 2.5 && n.r <= 90; }).slice(0, cap);
-    if (nodes.length < 12) return;
-    // Tangency adjacency (one O(n^2) pass at mount)
+    if (nodes.length < 12) { ecoState = null; return; }
     var adj = nodes.map(function () { return []; });
     for (var i = 0; i < nodes.length; i++) {
       for (var j = i + 1; j < nodes.length; j++) {
         var d = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y);
         var sum = nodes[i].r + nodes[j].r;
-        // Tangent, internally tangent, or a near-tangent jewel of the net
         if (Math.abs(d - sum) < 0.18 * sum ||
             Math.abs(d - Math.abs(nodes[i].r - nodes[j].r)) < 0.6) {
           adj[i].push(j); adj[j].push(i);
@@ -213,9 +220,9 @@
       }
     }
     var seed = seedOf(window.location.pathname);
-    var strat = nodes.map(function (_, idx) {
+    var strat = nodes.map(function () {
       seed = (seed * 1103515245 + 12345) >>> 0;
-      return (seed / 4294967296) < 0.85 ? 1 : 0; // mostly cooperators, D seeds
+      return (seed / 4294967296) < 0.85 ? 1 : 0;
     });
     function paint() {
       for (var k = 0; k < nodes.length; k++) {
@@ -223,39 +230,50 @@
         nodes[k].el.classList.toggle('eco-d', strat[k] === 0);
       }
     }
-    var base = mobile ? 1400 : 900;
-    var tempo = base, hot = 0;
+    var base = mobile ? 2200 : 1600;
+    var hot = 0;
+    // Published state the once-attached gesture listeners read and mutate.
+    ecoState = {
+      svg: svg, nodes: nodes, adj: adj, strat: strat, paint: paint,
+      bumpTempo: function () { hot = 4; }
+    };
     function tick() {
-      if (!document.hidden) { strat = ecoStep(strat, adj, 0.3, Math.random); paint(); }
-      tempo = hot > 0 ? base * 0.45 : base; hot = Math.max(0, hot - 1);
-      setTimeout(tick, tempo);
+      if (!document.hidden) { strat = ecoStep(strat, adj, 0.3, Math.random); ecoState.strat = strat; paint(); }
+      var tempo = hot > 0 ? base * 0.45 : base; hot = Math.max(0, hot - 1);
+      ecoTimer = setTimeout(tick, tempo);
     }
     paint();
-    setTimeout(tick, base);
-    // Gesture coupling: click seeds cooperation at the nearest jewels
-    document.addEventListener('pointerdown', function (e) {
-      var pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
-      var m = svg.getScreenCTM(); if (!m) return;
-      var p = pt.matrixTransform(m.inverse());
-      var bi = -1, bd = Infinity;
-      for (var k = 0; k < nodes.length; k++) {
-        var d = Math.hypot(nodes[k].x - p.x, nodes[k].y - p.y);
-        if (d < bd) { bd = d; bi = k; }
-      }
-      if (bi >= 0) {
-        strat[bi] = 1;
-        adj[bi].forEach(function (j) { strat[j] = 1; });
-        paint();
-      }
-    }, { passive: true });
-    // Fast scroll raises the tempo briefly
-    var lastY = 0;
-    window.addEventListener('scroll', function () {
-      var y = window.scrollY || 0;
-      if (Math.abs(y - lastY) > 220) hot = 4;
-      lastY = y;
-    }, { passive: true });
+    ecoTimer = setTimeout(tick, base);
   }
+
+  // Click seeds cooperation at the nearest jewels; attached once for the page.
+  document.addEventListener('pointerdown', function (e) {
+    if (reduced || !ecoState || (e.button && e.button !== 0)) return;
+    var s = ecoState, svg = s.svg;
+    var pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+    var m = svg.getScreenCTM(); if (!m) return;
+    var p = pt.matrixTransform(m.inverse());
+    var bi = -1, bd = Infinity;
+    for (var k = 0; k < s.nodes.length; k++) {
+      var d = Math.hypot(s.nodes[k].x - p.x, s.nodes[k].y - p.y);
+      if (d < bd) { bd = d; bi = k; }
+    }
+    if (bi >= 0) {
+      s.strat[bi] = 1;
+      var seeded = 0;
+      s.adj[bi].forEach(function (j) { if (seeded < 2) { s.strat[j] = 1; seeded++; } });
+      s.paint();
+    }
+  }, { passive: true });
+
+  // Fast scroll briefly quickens the world; attached once for the page.
+  var ecoLastY = 0;
+  window.addEventListener('scroll', function () {
+    if (reduced || !ecoState) return;
+    var y = window.scrollY || 0;
+    if (Math.abs(y - ecoLastY) > 220) ecoState.bumpTempo();
+    ecoLastY = y;
+  }, { passive: true });
 
   function boot() {
     mountGeometry();
