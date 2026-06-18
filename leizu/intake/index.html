@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Begin with Leizu. Tell me about your student.</title>
+<!-- Open Graph / Twitter Card -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/leizu/intake">
+<meta property="og:title" content="Begin with Leizu. Tell me about your student.">
+<meta property="og:description" content="A few words to start, then as much as you like. Saul reads every one and writes back with a plan made for your student.">
+<meta property="og:image" content="https://seminarschools.com/og-image.png">
+<meta name="twitter:image" content="https://seminarschools.com/og-image.png">
+<meta property="og:site_name" content="Seminar Schools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Begin with Leizu. Tell me about your student.">
+<meta name="twitter:description" content="A few words to start, then as much as you like. Saul reads every one and writes back with a plan made for your student.">
+<!-- /Open Graph -->
+<meta name="description" content="Tell Leizu Academy about your student. A short start, then as much as you like, and a plan written back to you.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2D3F26">
+<link rel="canonical" href="https://seminarschools.com/leizu/intake/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+TC:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/alive.css">
+<style>
+:root{
+  --paper:#F4EFE3;
+  --paper-deep:#ECE3D0;
+  --ink:#1F1408;
+  --ink-soft:#5A4632;
+  --rule:#9C8862;
+  --mulberry-deep:#5A1F2F;
+  --mulberry-fruit:#8A2F40;
+  --mulberry-fruit-ripe:#B85A48;
+  --mulberry-leaf:#5C7A4D;
+  --shadow:rgba(31,20,8,0.08);
+  --display:'Cormorant Garamond',serif;
+  --han-tc:'Noto Serif TC',serif;
+  --mono:'JetBrains Mono',monospace;
+}
+:root.dark, :root[data-theme="dark"]{--paper:#1A2014;--paper-deep:#242C1C;--ink:#E8DEC7;--ink-soft:#B8AC8E;--rule:#5A5240;--mulberry-deep:#C98092;--mulberry-fruit:#D69AA8;--mulberry-fruit-ripe:#E0AEB8;--shadow:rgba(0,0,0,0.4);}
+@media (prefers-color-scheme: dark){ :root:not(.light){--paper:#1A2014;--paper-deep:#242C1C;--ink:#E8DEC7;--ink-soft:#B8AC8E;--rule:#5A5240;--mulberry-deep:#C98092;--mulberry-fruit:#D69AA8;--mulberry-fruit-ripe:#E0AEB8;--shadow:rgba(0,0,0,0.4);} }
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:var(--display);font-size:1.06rem;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.page{max-width:620px;margin:0 auto;padding:4.5rem 1.5rem 7rem;}
+
+.crumb{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3rem;}
+.crumb a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule);}
+.crumb a:hover{color:var(--mulberry-fruit);border-color:var(--mulberry-fruit);}
+
+.masthead{margin-bottom:3rem;}
+.masthead-han{font-family:var(--han-tc);font-size:1.7rem;color:var(--mulberry-deep);font-weight:500;display:block;margin-bottom:0.6rem;letter-spacing:0.1em;}
+.masthead-en{font-family:var(--display);font-size:2.5rem;font-weight:400;color:var(--ink);letter-spacing:-0.01em;font-style:italic;line-height:1.2;margin-bottom:1.1rem;}
+.masthead-sub{font-style:italic;color:var(--ink-soft);font-size:1.18rem;max-width:520px;}
+
+/* ---- the form, breathing ---- */
+.intake{margin-top:1rem;}
+.field{position:relative;margin:0 0 2.2rem;padding-left:1.1rem;}
+.field::before{content:"";position:absolute;left:0;top:0.15rem;bottom:0.15rem;width:2px;border-radius:2px;background:var(--rule);opacity:0.4;transition:background 0.5s ease,opacity 0.5s ease;}
+.field.has-value::before{background:var(--mulberry-fruit);opacity:0.9;}
+.field > label,.legend{display:block;font-family:var(--display);font-size:1.22rem;color:var(--ink);margin-bottom:0.55rem;font-weight:500;}
+.field .hint{display:block;font-style:italic;color:var(--ink-soft);font-size:0.98rem;margin:-0.25rem 0 0.7rem;}
+.req{color:var(--mulberry-fruit);font-family:var(--mono);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;vertical-align:0.25em;margin-left:0.35rem;}
+
+input[type="text"],input[type="email"],textarea,select{
+  width:100%;background:transparent;border:none;border-bottom:1.5px solid var(--rule);
+  font-family:var(--display);font-size:1.12rem;color:var(--ink);padding:0.45rem 0.1rem 0.55rem;
+  transition:border-color 0.35s ease;border-radius:0;
+}
+textarea{resize:vertical;min-height:3.2rem;line-height:1.6;}
+select{cursor:pointer;}
+input::placeholder,textarea::placeholder{color:var(--ink-soft);opacity:0.55;font-style:italic;}
+input:focus,textarea:focus,select:focus{outline:none;border-bottom-color:var(--mulberry-fruit);}
+input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px 0 0 var(--mulberry-fruit);}
+
+/* chips for the few grounded multiple-choices */
+.chips{display:flex;flex-wrap:wrap;gap:0.55rem;margin-top:0.2rem;}
+.chip{position:relative;}
+.chip input{position:absolute;opacity:0;width:0;height:0;}
+.chip span{display:inline-block;font-family:var(--mono);font-size:0.8rem;letter-spacing:0.04em;color:var(--ink-soft);
+  padding:0.45rem 0.95rem;border:1px solid var(--rule);border-radius:22px;cursor:pointer;
+  transition:all 0.25s ease;background:transparent;user-select:none;}
+.chip span:hover{border-color:var(--mulberry-fruit);color:var(--mulberry-deep);}
+.chip input:checked + span{background:var(--mulberry-deep);border-color:var(--mulberry-deep);color:var(--paper);}
+.chip input:focus-visible + span{box-shadow:0 0 0 2px var(--mulberry-fruit);}
+
+.divider{margin:3.2rem 0 2.6rem;text-align:center;}
+.divider span{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-soft);
+  display:inline-block;padding:0 1rem;position:relative;}
+.divider::before{content:"";display:block;height:1px;background:var(--rule);opacity:0.5;position:relative;top:0.7rem;}
+.divider span{background:var(--paper);position:relative;}
+
+/* ---- the money bubble: pop or leave it ---- */
+.bubble{margin:3rem 0 1rem;}
+.bubble-toggle{width:100%;text-align:left;background:var(--paper-deep);border:1px solid var(--rule);border-radius:30px;
+  font-family:var(--display);font-size:1.18rem;color:var(--mulberry-deep);padding:1.05rem 1.6rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:all 0.3s ease;}
+.bubble-toggle:hover{border-color:var(--mulberry-fruit);background:var(--paper);}
+.bubble-toggle:focus-visible{outline:none;box-shadow:0 0 0 2px var(--mulberry-fruit);}
+.bubble-toggle .mark{font-family:var(--mono);font-size:1.4rem;line-height:1;transition:transform 0.4s ease;color:var(--mulberry-fruit);}
+.bubble.open .bubble-toggle{border-radius:22px 22px 0 0;}
+.bubble.open .bubble-toggle .mark{transform:rotate(45deg);}
+.bubble-body{max-height:0;overflow:hidden;opacity:0;transition:max-height 0.55s ease,opacity 0.4s ease,padding 0.4s ease;
+  background:var(--paper-deep);border:1px solid var(--rule);border-top:none;border-radius:0 0 22px 22px;padding:0 1.6rem;}
+.bubble.open .bubble-body{max-height:640px;opacity:1;padding:1.4rem 1.6rem 1.8rem;}
+.bubble-body p{font-style:italic;color:var(--ink-soft);font-size:1.02rem;margin-bottom:1.1rem;}
+.tier-row{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.2rem;}
+.tier-pick{display:inline-block;font-family:var(--display);font-size:1.04rem;color:var(--paper);background:var(--mulberry-deep);
+  text-decoration:none;padding:0.6rem 1.2rem;border-radius:3px;transition:background 0.3s ease;}
+.tier-pick:hover{background:var(--mulberry-fruit-ripe);}
+.tier-pick .small{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.08em;opacity:0.85;display:block;}
+.book-line{font-family:var(--mono);font-size:0.82rem;letter-spacing:0.03em;color:var(--ink-soft);}
+.book-line a{color:var(--mulberry-deep);border-bottom:1px solid var(--rule);text-decoration:none;}
+.book-line a:hover{color:var(--mulberry-fruit);border-color:var(--mulberry-fruit);}
+
+/* ---- send ---- */
+.send-row{margin-top:2.6rem;}
+.send{display:inline-block;background:var(--mulberry-deep);color:var(--paper);border:none;
+  font-family:var(--display);font-size:1.28rem;padding:0.95rem 3rem;border-radius:3px;cursor:pointer;
+  transition:background 0.3s ease,transform 0.2s ease;letter-spacing:0.01em;}
+.send:hover{background:var(--mulberry-fruit-ripe);}
+.send:focus-visible{outline:none;box-shadow:0 0 0 3px var(--mulberry-fruit);}
+.send:disabled{opacity:0.55;cursor:wait;}
+.send-note{font-style:italic;color:var(--ink-soft);font-size:0.98rem;margin-top:1rem;}
+.form-error{font-family:var(--mono);font-size:0.82rem;color:var(--mulberry-fruit);margin-top:1rem;display:none;}
+.form-error.show{display:block;}
+
+/* honeypot, kept away from people */
+.gotcha{position:absolute;left:-9999px;top:-9999px;}
+
+/* ---- thank-you state ---- */
+.thanks{display:none;text-align:left;}
+.thanks.show{display:block;}
+.thanks .han{font-family:var(--han-tc);font-size:1.5rem;color:var(--mulberry-deep);display:block;margin-bottom:1rem;}
+.thanks h2{font-family:var(--display);font-style:italic;font-size:2rem;font-weight:400;color:var(--ink);margin-bottom:1.1rem;line-height:1.25;}
+.thanks p{color:var(--ink-soft);font-size:1.15rem;}
+.thanks .back{display:inline-block;margin-top:2rem;font-family:var(--mono);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule);}
+.thanks .back:hover{color:var(--mulberry-fruit);border-color:var(--mulberry-fruit);}
+
+.colophon{margin-top:5rem;padding-top:2rem;border-top:1px solid var(--rule);font-family:var(--mono);font-size:0.75rem;color:var(--ink-soft);text-align:center;}
+.colophon a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule);}
+.colophon a:hover{color:var(--mulberry-fruit);}
+
+/* ---- the pop-and-rise reveal ---- */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.7s ease,transform 0.7s cubic-bezier(0.22,1,0.36,1);}
+.reveal.in{opacity:1;transform:none;}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  .reveal{opacity:1;transform:none;transition:none;}
+  .bubble-body,.bubble-toggle .mark,.field::before{transition:none;}
+}
+@media(max-width:600px){
+  .page{padding:3rem 1.25rem 5rem;}
+  .masthead-en{font-size:2rem;}
+  .send{width:100%;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="crumb"><a href="/leizu">嫘祖學院 Leizu</a> · Begin</div>
+
+  <!-- ===================== FORM ===================== -->
+  <div id="intake-wrap">
+    <header class="masthead reveal in">
+      <span class="masthead-han">嫘祖學院</span>
+      <h1 class="masthead-en">Tell me about your student.</h1>
+      <p class="masthead-sub">A few words to start, then as much or as little as you like. I read every one myself and write back with a plan made for your child.</p>
+    </header>
+
+    <form name="leizu-intake" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="intake" id="intake-form" action="/leizu/intake/?sent=1">
+      <input type="hidden" name="form-name" value="leizu-intake">
+      <p class="gotcha"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+      <!-- ---- the short required core ---- -->
+      <div class="field reveal in">
+        <label for="parent-name">Your name <span class="req">needed</span></label>
+        <input type="text" id="parent-name" name="parent-name" autocomplete="name" required>
+      </div>
+
+      <div class="field reveal in">
+        <label for="email">Your email <span class="req">needed</span></label>
+        <span class="hint">So I can write back to you.</span>
+        <input type="email" id="email" name="email" autocomplete="email" required>
+      </div>
+
+      <div class="field reveal in">
+        <label for="student-age">Your child's age or grade <span class="req">needed</span></label>
+        <input type="text" id="student-age" name="student-age" placeholder="e.g. 14, or grade 9" required>
+      </div>
+
+      <div class="divider reveal"><span>that is all I need · the rest is yours</span></div>
+
+      <!-- ---- the expansive optional part ---- -->
+      <div class="field reveal">
+        <label for="student-name">Your child's name</label>
+        <input type="text" id="student-name" name="student-name">
+      </div>
+
+      <div class="field reveal">
+        <span class="legend">Which curriculum?</span>
+        <div class="chips" role="group" aria-label="Curriculum">
+          <label class="chip"><input type="radio" name="curriculum" value="OSSD"><span>OSSD</span></label>
+          <label class="chip"><input type="radio" name="curriculum" value="IB"><span>IB</span></label>
+          <label class="chip"><input type="radio" name="curriculum" value="AP"><span>AP</span></label>
+          <label class="chip"><input type="radio" name="curriculum" value="A-Level"><span>A-Level</span></label>
+          <label class="chip"><input type="radio" name="curriculum" value="Other"><span>Other</span></label>
+          <label class="chip"><input type="radio" name="curriculum" value="Not sure"><span>Not sure</span></label>
+        </div>
+      </div>
+
+      <div class="field reveal">
+        <label for="subjects">What would you like help with?</label>
+        <span class="hint">A subject, a skill, a goal. Whatever is on your mind.</span>
+        <input type="text" id="subjects" name="subjects" placeholder="e.g. essay writing, math, reading, university preparation">
+      </div>
+
+      <div class="field reveal">
+        <label for="current">Where is your child now?</label>
+        <span class="hint">Recent marks, what is working, what feels hard. Write as much as you like.</span>
+        <textarea id="current" name="current" rows="3"></textarea>
+      </div>
+
+      <div class="field reveal">
+        <label for="goal">What would a good year look like?</label>
+        <span class="hint">The picture you are hoping for.</span>
+        <textarea id="goal" name="goal" rows="3"></textarea>
+      </div>
+
+      <div class="field reveal">
+        <span class="legend">When would you like to begin?</span>
+        <div class="chips" role="group" aria-label="Timeline">
+          <label class="chip"><input type="radio" name="timeline" value="This week"><span>This week</span></label>
+          <label class="chip"><input type="radio" name="timeline" value="This term"><span>This term</span></label>
+          <label class="chip"><input type="radio" name="timeline" value="Next term"><span>Next term</span></label>
+          <label class="chip"><input type="radio" name="timeline" value="Just exploring"><span>Just exploring</span></label>
+        </div>
+      </div>
+
+      <div class="field reveal">
+        <span class="legend">Online or in person?</span>
+        <div class="chips" role="group" aria-label="Format">
+          <label class="chip"><input type="radio" name="format" value="Online"><span>Online</span></label>
+          <label class="chip"><input type="radio" name="format" value="In person"><span>In person</span></label>
+          <label class="chip"><input type="radio" name="format" value="Either"><span>Either</span></label>
+        </div>
+      </div>
+
+      <div class="field reveal">
+        <label for="schedule">Days or times that tend to work</label>
+        <span class="hint">And your timezone, if you are outside Toronto.</span>
+        <input type="text" id="schedule" name="schedule" placeholder="e.g. weekday evenings, EST">
+      </div>
+
+      <div class="field reveal">
+        <label for="found">How did you find Leizu?</label>
+        <input type="text" id="found" name="found">
+      </div>
+
+      <div class="field reveal">
+        <label for="notes">Anything else?</label>
+        <span class="hint">This is yours. Write as much as you like.</span>
+        <textarea id="notes" name="notes" rows="4"></textarea>
+      </div>
+
+      <!-- ---- optional money bubble: pop it or leave it ---- -->
+      <div class="bubble reveal" id="enrol-bubble">
+        <button type="button" class="bubble-toggle" id="bubble-toggle" aria-expanded="false" aria-controls="bubble-body">
+          <span>Already know you would like to begin?</span>
+          <span class="mark" aria-hidden="true">+</span>
+        </button>
+        <div class="bubble-body" id="bubble-body" role="region" aria-label="Enrol now">
+          <p>No need to choose here. Filling the form is enough, and I will send the right offer. But if you already know, you can begin right now.</p>
+          <div class="tier-row">
+            <a class="tier-pick" data-payment-key="starter_block" href="#">Starter block <span class="small">see price &amp; pay</span></a>
+            <a class="tier-pick" data-payment-key="term" href="#">Term <span class="small">see price &amp; pay</span></a>
+            <a class="tier-pick" data-payment-key="forest_year_upfront" href="#">Forest Year <span class="small">see price &amp; pay</span></a>
+            <a class="tier-pick" data-payment-key="forest_year_monthly" href="#">Forest Year, monthly <span class="small">see price &amp; pay</span></a>
+          </div>
+          <p class="book-line">For the seminar year or a custom plan, the form above is the way. Prefer to talk first? <a href="https://cal.com/seminarschools/class" target="_blank" rel="noopener noreferrer">Book a first conversation</a>.</p>
+        </div>
+      </div>
+
+      <div class="send-row reveal">
+        <button type="submit" class="send" id="send-btn">Send</button>
+        <p class="send-note">I read these myself. You will hear back soon.</p>
+        <p class="form-error" id="form-error">That did not send. Check your connection and press Send again, or email me at saulnassau@protonmail.com.</p>
+      </div>
+    </form>
+  </div>
+
+  <!-- ===================== THANK YOU ===================== -->
+  <div class="thanks" id="thanks">
+    <span class="han">謝</span>
+    <h2>Thank you. I have your note.</h2>
+    <p>I read every one myself. You will hear back from me soon, with a plan made for your student. If anything is urgent, you can reach me directly at <a href="mailto:saulnassau@protonmail.com" style="color:var(--mulberry-deep);border-bottom:1px solid var(--rule);text-decoration:none;">saulnassau@protonmail.com</a>.</p>
+    <a class="back" href="/leizu">Back to Leizu</a>
+  </div>
+
+  <footer class="colophon">
+    <p>嫘祖學院 · Leizu Academy · A practice within <a href="/">Seminar Schools</a> · <a href="/leizu/teach">Teach at Leizu</a> · <a href="/leizu/scholarship">Scholarships</a> · <a href="/leizu">Back to curriculum</a> · <a href="mailto:saulnassau@protonmail.com">Contact</a></p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var form = document.getElementById('intake-form');
+  if(!form) return;
+
+  // ---- pop-and-rise reveal, gentle and staggered ----
+  var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal:not(.in)'));
+  if('IntersectionObserver' in window && reveals.length){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          var el = en.target;
+          var delay = parseFloat(el.getAttribute('data-rise-delay') || '0');
+          setTimeout(function(){ el.classList.add('in'); }, delay);
+          io.unobserve(el);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    // small stagger so a cluster rises one after another, not all at once
+    var lastTop = null, step = 0;
+    reveals.forEach(function(el){
+      var top = Math.round(el.getBoundingClientRect().top);
+      if(lastTop !== null && Math.abs(top - lastTop) < 260){ step += 70; } else { step = 0; }
+      lastTop = top;
+      el.setAttribute('data-rise-delay', String(Math.min(step, 210)));
+      io.observe(el);
+    });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  // ---- warm the thread when a field has something in it ----
+  function markFilled(input){
+    var field = input.closest('.field');
+    if(!field) return;
+    var any = Array.prototype.some.call(field.querySelectorAll('input,textarea,select'), function(c){
+      if(c.type === 'radio' || c.type === 'checkbox') return c.checked;
+      return c.value && c.value.trim().length > 0;
+    });
+    field.classList.toggle('has-value', any);
+  }
+  Array.prototype.forEach.call(form.querySelectorAll('input,textarea,select'), function(input){
+    var ev = (input.type === 'radio' || input.type === 'checkbox') ? 'change' : 'input';
+    input.addEventListener(ev, function(){ markFilled(input); });
+    if(input.value) markFilled(input);
+  });
+
+  // ---- the money bubble pops open, or stays closed ----
+  var toggle = document.getElementById('bubble-toggle');
+  var bubble = document.getElementById('enrol-bubble');
+  if(toggle && bubble){
+    toggle.addEventListener('click', function(){
+      var open = bubble.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  // ---- send through Netlify Forms, then the quiet thank-you ----
+  var sendBtn = document.getElementById('send-btn');
+  var errEl = document.getElementById('form-error');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(typeof form.reportValidity === 'function' && !form.reportValidity()) return;
+    errEl.classList.remove('show');
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Sending';
+
+    var data = new URLSearchParams(new FormData(form)).toString();
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: data
+    }).then(function(res){
+      if(!res.ok) throw new Error('bad status ' + res.status);
+      var wrap = document.getElementById('intake-wrap');
+      var thanks = document.getElementById('thanks');
+      if(wrap) wrap.style.display = 'none';
+      if(thanks){ thanks.classList.add('show'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    }).catch(function(){
+      sendBtn.disabled = false;
+      sendBtn.textContent = 'Send';
+      errEl.classList.add('show');
+    });
+  });
+})();
+</script>
+
+<!-- standard site chrome -->
+<script src="/js/theme.js" defer></script>
+<script src="/js/mandala.js" defer></script>
+<script src="/js/indra.js" defer></script>
+<script src="/js/footer.js" defer></script>
+<!-- wires the enrol-bubble tier buttons to the same Stripe links as the Leizu tiles -->
+<script src="/leizu/booking-button.js" defer></script>
+</body>
+</html>
