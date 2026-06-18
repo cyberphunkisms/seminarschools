@@ -379,36 +379,50 @@
     { x:  -50, y:   20, zoom: 1.8, density: 0.14 }
   ];
   
-  function initSectionScroll() {
-    const sections = Array.from(document.querySelectorAll('section'));
-    if (sections.length === 0) return;
+  function initCameraScroll(opts) {
+    opts = opts || {};
+    const sections = Array.prototype.slice.call(document.querySelectorAll('section'));
+    // Section-aware camera needs at least two sections to interpolate between.
+    // With zero or one section, or when a page asks for it, the camera sweeps
+    // the whole path across the full page scroll instead, so the substrate is
+    // never static on a scrollable page regardless of its section markup.
+    const useSections = !opts.forceGlobal && sections.length >= 2;
     const root = document.documentElement.style;
     let lastFrame = 0;
-    
+
+    function locate() {
+      if (useSections) {
+        const viewportMid = window.scrollY + window.innerHeight * 0.4;
+        let currentIdx = 0, local = 0;
+        for (let i = 0; i < sections.length; i++) {
+          const r = sections[i].getBoundingClientRect();
+          const top = r.top + window.scrollY;
+          const bottom = top + r.height;
+          if (viewportMid >= top && viewportMid < bottom) {
+            currentIdx = i;
+            local = Math.max(0, Math.min(1, (viewportMid - top) / r.height));
+            break;
+          }
+          if (viewportMid >= bottom) currentIdx = i;
+        }
+        return { idx: currentIdx, t: local };
+      }
+      const docH = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const p = Math.max(0, Math.min(1, (window.scrollY || 0) / docH));
+      const span = Math.max(1, CAMERA_PRIMARY.length - 1);
+      const f = p * span;
+      const idx = Math.min(span - 1, Math.floor(f));
+      return { idx: idx, t: f - idx };
+    }
+
     function update() {
       const now = performance.now();
       if (now - lastFrame < 33) return;
       lastFrame = now;
-      
-      // Find the current section by scroll position
-      const viewportMid = window.scrollY + window.innerHeight * 0.4;
-      let currentIdx = 0;
-      let sectionLocalProgress = 0;
-      
-      for (let i = 0; i < sections.length; i++) {
-        const r = sections[i].getBoundingClientRect();
-        const top = r.top + window.scrollY;
-        const bottom = top + r.height;
-        if (viewportMid >= top && viewportMid < bottom) {
-          currentIdx = i;
-          sectionLocalProgress = Math.max(0, Math.min(1, (viewportMid - top) / r.height));
-          break;
-        }
-        if (viewportMid >= bottom) currentIdx = i;
-      }
-      
-      const t = sectionLocalProgress;
-      const ease = smoothstep(t);
+
+      const loc = locate();
+      const currentIdx = loc.idx;
+      const ease = smoothstep(loc.t);
       
       // PRIMARY CAMERA
       const cur = CAMERA_PRIMARY[currentIdx % CAMERA_PRIMARY.length];
@@ -456,7 +470,8 @@
       const geo2 = document.getElementById('geo2');
       if (geo) geo.innerHTML = svg;
       if (geo2) geo2.innerHTML = svg;
-      initSectionScroll();
-    }
+      initCameraScroll();
+    },
+    initScrollCamera: initCameraScroll
   };
 })(window);

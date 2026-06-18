@@ -149,13 +149,12 @@ li{margin-bottom:0.6rem;}
   <p>The Mulberry Fund is the donation pool that supports <a href="/leizu/scholarship">Leizu Scholars</a>. The program that lets students study at Leizu Academy without paying tuition when they can't afford it. Every contribution funds real teaching hours for real students.</p>
 
   <h2>What your contribution does <span class="han">用</span></h2>
-  <p>One scholar receiving one full year of weekly one-on-one instruction at Leizu Academy costs roughly $10,500. The same as a regular Forest Year. Donations don't have to cover a full year:</p>
+  <p>One scholar receiving one full year of weekly one-on-one instruction at Leizu Academy costs roughly $10,800. The same as a regular Forest Year. Donations don't have to cover a full year:</p>
   <ul>
     <li><strong>$75</strong> funds one full session of one-on-one teaching</li>
-    <li><strong>$225</strong> funds a complete short course (3 sessions)</li>
-    <li><strong>$458</strong> funds a 7-bundle for one scholar</li>
+    <li><strong>$480</strong> funds a Starter block (4 sessions)</li>
     <li><strong>$900</strong> covers one month of weekly Forest Year sessions</li>
-    <li><strong>$10,500</strong> sponsors a full Forest Year for one scholar</li>
+    <li><strong>$10,800</strong> sponsors a full Forest Year for one scholar</li>
   </ul>
   <p>You're welcome to give any amount, recurring or one-time. There's no minimum.</p>
 
@@ -163,15 +162,20 @@ li{margin-bottom:0.6rem;}
     <h3>Support a scholar today</h3>
     <p>Every gift lands as a coffee or a book for the practice, from $3, through Buy Me a Coffee. You'll receive an email receipt. The amount is up to you.</p>
 
-    <!-- STRIPE DONATION LINK PLACEHOLDER -->
-    <!-- After Saul creates the Stripe donation Payment Link, replace href below
-         with the real Payment Link URL. The Payment Link should use Stripe's
-         "customer chooses amount" option. -->
-    <a href="#" class="cta cta-disabled" id="donate-button">Coming soon. Please email to donate now</a>
-    <!-- When live: change to:
-    <a href="https://buymeacoffee.com/cyberphunk" target="_blank" rel="noopener noreferrer" class="cta">Buy a coffee or a book for Seminar Schools · from $3</a>
-    -->
+    <!-- Primary instant path: Buy Me a Coffee, the interim donation channel,
+         from $3, customer chooses amount. Matches the copy above and the Agora
+         page. Was previously commented out, which left this page with no working
+         donation button at all. -->
+    <a href="https://buymeacoffee.com/cyberphunk" target="_blank" rel="noopener noreferrer" class="cta" id="donate-button">Buy a coffee or a book for Seminar Schools · from $3</a>
 
+    <!-- Secondary path: email to arrange a larger or scholarship-specific gift. -->
+    <a href="mailto:saulnassau@protonmail.com?subject=Mulberry%20Fund%20donation&body=Hello%20Saul%2C%0A%0AI%20would%20like%20to%20make%20a%20donation%20to%20the%20Mulberry%20Fund.%0A%0AAmount%20I%20have%20in%20mind%3A%0A%0AAnything%20you%20would%20like%20me%20to%20know%3A%0A%0AThank%20you%2C" class="cta">Email to arrange a donation</a>
+
+    <!-- STRIPE DONATION LINK PLACEHOLDER: when Saul creates the Stripe donation
+         Payment Link (Stripe "customer chooses amount" option), add it here as
+         the primary button and demote Buy Me a Coffee to secondary. -->
+
+    <p class="amounts-note" style="text-align:center;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.04em;color:var(--ink-soft);margin-bottom:0.5rem;">Suggested amounts.</p>
     <div class="amounts">
       <span class="amount-pill">$25</span>
       <span class="amount-pill">$50</span>

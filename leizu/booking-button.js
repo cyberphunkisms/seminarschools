@@ -15,42 +15,23 @@
 // =================================================================
 
 const PAYMENT_LINKS = {
-  // Session bundles (one-time)
-  three_sessions:        'https://buy.stripe.com/6oUdR9aRlfZAad3bDc6oo02',    // $225 CAD — 3 sessions, $75 each
-  five_sessions:         'https://buy.stripe.com/14A5kD2kP7t470R4aK6oo03',    // $380 CAD — 5 sessions (Pansession)
-  seven_sessions:        'https://buy.stripe.com/5kQeVd9Nh3cOfxn22C6oo04',    // $458 CAD — 7 sessions (SeptSession)
+  // Starter and Term
+  starter_block:         'https://buy.stripe.com/eVq5kDcZt5kW2KB6iS6oo07',    // $480 CAD one-off
+  term:                  'https://buy.stripe.com/fZudR99NhaFg1Gx9v46oo0f',    // $200 today then $100/mo, ends at 3
 
-  // Forest year (144 contact hours, one-on-one)
-  forest_year_upfront:   'https://buy.stripe.com/14A6oHf7B8x82KB4aK6oo01',    // $10,500 CAD upfront
-  forest_year_monthly:   'https://buy.stripe.com/9B69AT0cH3cO98ZePo6oo05',    // $1,050/mo CAD recurring
+  // Forest Year, four payment shapes
+  forest_year_upfront:   'https://buy.stripe.com/bJe28r6B528K84Vaz86oo0d',    // $8,400 CAD one-off
+  forest_year_two:       'https://buy.stripe.com/00w28r7F96p0bh79v46oo0b',    // $4,700 CAD x2 every 6 months
+  forest_year_term:      'https://buy.stripe.com/5kQ5kDe3x14G98ZbDc6oo0e',    // $3,300 CAD x3 every 3 months
+  forest_year_monthly:   'https://buy.stripe.com/5kQdR97F93cObh76iS6oo09',    // $900/mo CAD, ends at 12
 
-  // Seminar year (144 contact hours, small seminar, gated by 20-40 prior one-on-one sessions)
-  seminar_year_upfront:  'https://buy.stripe.com/00w00j3oT28Kfxn6iS6oo00',    // $4,350 CAD upfront
-  seminar_year_monthly:  'https://buy.stripe.com/bJe7sLaRlcNo3OFcHg6oo06',    // $450/mo CAD recurring
-
-  // Donation (Mulberry Fund). Routed through Saul's existing Buy Me a Coffee
-  // page for now. Donation is NOT in the cart-routing logic — the donate CTA
-  // on leizu/index.html links directly to this URL. Replace with a Stripe
-  // Payment Link later if/when the Mulberry Fund needs first-party billing.
+  // Donation, Mulberry Fund (Buy Me a Coffee for now)
   donation:              'https://buymeacoffee.com/cyberphunk',
 };
 
-// =================================================================
-// CAL.COM BOOKING URLS
-// =================================================================
-
-const CAL_LINKS = {
-  // One Cal.com event type per Stripe product. Keys match PAYMENT_LINKS keys
-  // so the success handler can look up the right Cal.com URL by paymentKey.
-  three_sessions:        'https://cal.com/seminarschools/weekly3',
-  five_sessions:         'https://cal.com/seminarschools/weekly5',
-  seven_sessions:        'https://cal.com/seminarschools/weekly7',
-  forest_year_upfront:   'https://cal.com/seminarschools/forestyear',
-  forest_year_monthly:   'https://cal.com/seminarschools/forestyear',
-  seminar_year_upfront:  'https://cal.com/seminarschools/seminaryear',
-  seminar_year_monthly:  'https://cal.com/seminarschools/seminaryear',
-  donation:              'https://cal.com/seminarschools/class',  // donations fall through to a generic intake
-};
+// NOTE: Cal.com booking URLs live in ONE place now. They are inline in
+// /leizu/booking-success/index.html, the only page that uses them. This
+// script no longer carries a second copy, which was a silent drift hazard.
 
 // =================================================================
 // CART → PAYMENT LINK MAPPING
@@ -64,8 +45,6 @@ const CAL_LINKS = {
  *
  *   yearTier='forest', yearMode='upfront'  → 'forest_year_upfront'
  *   yearTier='forest', yearMode='monthly'  → 'forest_year_monthly'
- *   yearTier='seminar', yearMode='upfront' → 'seminar_year_upfront'
- *   yearTier='seminar', yearMode='monthly' → 'seminar_year_monthly'
  *
  *   0 courses                              → null (button disabled)
  *   1 course                               → 'three_sessions'
@@ -82,7 +61,6 @@ function getPaymentKeyForCart(selectedCourseIds, options){
   const yearMode = options.yearMode || 'monthly';
 
   if(yearTier === 'forest')  return yearMode === 'upfront' ? 'forest_year_upfront'  : 'forest_year_monthly';
-  if(yearTier === 'seminar') return yearMode === 'upfront' ? 'seminar_year_upfront' : 'seminar_year_monthly';
 
   const n = selectedCourseIds.length;
   if(n === 0) return null;
@@ -98,17 +76,6 @@ function getPaymentKeyForCart(selectedCourseIds, options){
 function getPaymentLinkForCart(selectedCourseIds, options){
   const key = getPaymentKeyForCart(selectedCourseIds, options);
   return key ? PAYMENT_LINKS[key] : null;
-}
-
-/**
- * Build a Cal.com URL for a given paymentKey, with cart notes pre-filled.
- * The paymentKey is whatever getPaymentKeyForCart returned at click time.
- */
-function buildCalLink(paymentKey, selectedCourseIds, courseNamesByLang){
-  const baseUrl = CAL_LINKS[paymentKey] || CAL_LINKS.three_sessions;
-  const courseNames = selectedCourseIds.map(id => (courseNamesByLang && courseNamesByLang[id]) || id).join(', ');
-  const notes = `Selected courses: ${courseNames}`;
-  return baseUrl + '?notes=' + encodeURIComponent(notes);
 }
 
 // =================================================================
@@ -178,47 +145,11 @@ function buildBookingHandler(){
 }
 
 // =================================================================
-// BOOKING-SUCCESS PAGE LOGIC (used on /leizu/booking-success/index.html)
+// NOTE: The booking-success page runs its OWN inline forwarding logic
+// (see /leizu/booking-success/index.html). The previous duplicate handler
+// that lived here never executed, because this script is not loaded on that
+// page, and has been removed to stop two implementations from drifting apart.
 // =================================================================
-//
-// This script runs on the success page after Stripe completes the payment.
-// It reads the pending-booking data from localStorage, builds the Cal.com URL,
-// and forwards the user to it.
-
-function handleBookingSuccess(){
-  let pending = null;
-  try {
-    const raw = localStorage.getItem('leizu-pending-booking');
-    if(raw) pending = JSON.parse(raw);
-  } catch(e){}
-
-  if(!pending){
-    // No pending booking — direct Stripe payment with no cart context
-    // Show a generic "go to Cal.com" button
-    return;
-  }
-
-  // Look up Cal.com URL by paymentKey. Fall back through legacy fields for
-  // any pending records written by older versions of this script.
-  let calUrl = CAL_LINKS[pending.paymentKey];
-  if(!calUrl){
-    if(pending.yearTier === 'forest')         calUrl = CAL_LINKS.forest_year_monthly;
-    else if(pending.yearTier === 'seminar')   calUrl = CAL_LINKS.seminar_year_monthly;
-    else if(pending.isForestYear === true)    calUrl = CAL_LINKS.forest_year_monthly;
-    else                                      calUrl = CAL_LINKS.three_sessions;
-  }
-
-  const courseNames = pending.courseIds.join(', ');
-  const noteParts = ['Paid courses: ' + courseNames];
-  if(pending.yearTier)  noteParts.push('Year tier: ' + pending.yearTier);
-  if(pending.yearMode)  noteParts.push('Payment mode: ' + pending.yearMode);
-  if(pending.paymentKey) noteParts.push('Product: ' + pending.paymentKey);
-  const fullUrl = calUrl + '?notes=' + encodeURIComponent(noteParts.join(' | '));
-
-  try { localStorage.removeItem('leizu-pending-booking'); } catch(e){}
-
-  window.location.href = fullUrl;
-}
 
 function wireTileCtas(){
   document.querySelectorAll('a[data-payment-key]').forEach(function(a){
@@ -231,18 +162,12 @@ function wireTileCtas(){
 // =================================================================
 // AUTO-INIT
 // =================================================================
-// On the main /leizu page, wire up the book button.
-// On /leizu/booking-success, handle the redirect.
+// This script loads only on the main /leizu page. Wire the book button and
+// tile CTAs after render. The booking-success page is handled by its own
+// inline script, not by this file.
 
-if(document.location.pathname.endsWith('/leizu/booking-success') ||
-   document.location.pathname.endsWith('/leizu/booking-success/')){
-  // Delay slightly so the user sees the page briefly
-  setTimeout(handleBookingSuccess, 1500);
-} else {
-  // On main /leizu — wire the book button after the page renders
-  document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(buildBookingHandler, 100);  // slight delay to let updatePricingPanel run first
-    wireTileCtas();
-  });
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(buildBookingHandler, 100);  // slight delay to let updatePricingPanel run first
   wireTileCtas();
-}
+});
+wireTileCtas();

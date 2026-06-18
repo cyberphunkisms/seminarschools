@@ -64,11 +64,20 @@
 
     var seed = seedOf(window.location.pathname);
     var rot = (seed % 360);
-    var opts = tier === 'prominent'
-      ? { gaskets: [{ rot: rot, scale: 1, op: 0.14 }, { rot: (rot + 137) % 360, scale: 0.62, op: 0.09 }],
-          flowers: !mobile, jewels: true, maxDepth: mobile ? 5 : 7, minRadius: mobile ? 2.4 : 0.9 }
-      : { gaskets: [{ rot: rot, scale: 1, op: 0.07 }],
-          flowers: false, jewels: !mobile, maxDepth: mobile ? 4 : 6, minRadius: mobile ? 3.5 : 1.6 };
+    var isHome = window.location.pathname === '/' || window.location.pathname === '/index.html';
+    var opts;
+    if (isHome) {
+      // The home node map sits inside a LARGER Indra's web: a wider gasket plus
+      // a second offset layer with jewels, kept faint so the map stays the figure.
+      opts = { gaskets: [{ rot: rot, scale: 1.4, op: 0.10 }, { rot: (rot + 137) % 360, scale: 0.8, op: 0.07 }],
+               flowers: !mobile, jewels: true, maxDepth: mobile ? 5 : 7, minRadius: mobile ? 2.4 : 0.9 };
+    } else if (tier === 'prominent') {
+      opts = { gaskets: [{ rot: rot, scale: 1, op: 0.14 }, { rot: (rot + 137) % 360, scale: 0.62, op: 0.09 }],
+               flowers: !mobile, jewels: true, maxDepth: mobile ? 5 : 7, minRadius: mobile ? 2.4 : 0.9 };
+    } else {
+      opts = { gaskets: [{ rot: rot, scale: 1, op: 0.07 }],
+               flowers: false, jewels: !mobile, maxDepth: mobile ? 4 : 6, minRadius: mobile ? 3.5 : 1.6 };
+    }
 
     var layer = document.createElement('div');
     layer.id = 'indraLayer';

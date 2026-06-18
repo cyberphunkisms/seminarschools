@@ -206,8 +206,6 @@ const CAL_LINKS = {
   seven_sessions:        'https://cal.com/seminarschools/weekly7',
   forest_year_upfront:   'https://cal.com/seminarschools/forestyear',
   forest_year_monthly:   'https://cal.com/seminarschools/forestyear',
-  seminar_year_upfront:  'https://cal.com/seminarschools/seminaryear',
-  seminar_year_monthly:  'https://cal.com/seminarschools/seminaryear',
   donation:              'https://cal.com/seminarschools/class',
 };
 
@@ -226,7 +224,6 @@ function buildAndForward(){
     calUrl = CAL_LINKS[pending.paymentKey];
     if(!calUrl){
       if(pending.yearTier === 'forest')         calUrl = CAL_LINKS.forest_year_monthly;
-      else if(pending.yearTier === 'seminar')   calUrl = CAL_LINKS.seminar_year_monthly;
       else if(pending.isForestYear === true)    calUrl = CAL_LINKS.forest_year_monthly;
       else                                      calUrl = CAL_LINKS.three_sessions;
     }

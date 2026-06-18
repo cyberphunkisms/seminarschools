@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/alive.css">
 <style>
 :root{
   --bg:#F5EBE4; --bg-soft:#FAF4ED; --ink:#2A1A14; --ink-soft:#4A3A30; --muted:#6B5F54;
@@ -71,6 +72,10 @@ a{color:inherit;text-decoration:none;}
 .lede h1 em{font-style:italic;color:var(--accent);}
 .lede p{font-family:var(--serif);font-size:1.05rem;color:var(--ink-soft);max-width:60ch;margin-top:1rem;}
 .lede .who{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:1.1rem;}
+.lede .id{display:flex;align-items:center;gap:.95rem;margin-top:1.2rem;}
+.lede .id .portrait{width:88px;height:88px;border-radius:50%;object-fit:cover;flex:0 0 auto;border:1px solid var(--line);box-shadow:0 4px 18px rgba(0,0,0,.10);}
+.lede .id .who{margin-top:0;}
+@media(max-width:520px){.lede .id{flex-direction:column;align-items:flex-start;gap:.7rem;}.lede .id .portrait{width:76px;height:76px;}}
 
 /* ---------- mono index ---------- */
 .index{max-width:1180px;margin:0 auto;padding:1.5rem 1.6rem 4rem;}
@@ -91,6 +96,7 @@ a{color:inherit;text-decoration:none;}
 .foot a:hover{color:var(--accent);}
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+.lede{position:relative;z-index:1;}
 </style>
 </head>
 <body>
@@ -112,10 +118,13 @@ a{color:inherit;text-decoration:none;}
 <div class="lede">
   <h1>A room of readers working a hard text together reaches what <em>none of them</em> could reach alone.</h1>
   <p>Seminar Schools is one organism, not a portfolio. A tutoring practice, a free public seminar, a city-wide lecture calendar, a body of essays, a learning game, and the framework underneath them all. Every part reflects the others.</p>
-  <div class="who">Saul Karim Nassau &middot; MA Philosophy &middot; Toronto and online &middot; saulnassau@protonmail.com</div>
+  <div class="id">
+    <img class="portrait" src="/img/saul.jpg" width="88" height="88" alt="Saul Karim Nassau" loading="lazy" decoding="async">
+    <div class="who">Saul Karim Nassau &middot; MA Philosophy &middot; Toronto and online &middot; saulnassau@protonmail.com</div>
+  </div>
 </div>
 
-<main class="index">
+<main class="index" id="index">
   <div class="col-head"><span>The index</span><span>everything, directly</span></div>
   <div class="idx-grid" id="idxGrid"></div>
 </main>
@@ -195,15 +204,16 @@ NODES.forEach(n=>{
     activeId=n.id; g.classList.add('on');
     (threadEls[n.id]||[]).forEach(t=>{t.classList.add('lit');t.style.setProperty('--litc',col);});
     panel.style.setProperty('--n',col);
-    panel.innerHTML=`<div class="k">${n.k}</div><h2>${n.label}</h2><p>${n.d}</p>`+(n.id!=='core'?`<a class="go" href="${n.href}">Enter ${n.label.split(' ')[0]} &rarr;</a>`:'');
+    panel.innerHTML=`<div class="k">${n.k}</div><h2>${n.label}</h2><p>${n.d}</p>`+(n.id!=='core'?`<a class="go" href="${n.href}">Enter ${n.label.split(' ')[0]} &rarr;</a>`:`<a class="go" href="#index">Everything, below &rarr;</a>`);
     panel.classList.add('show');
   };
   const blur=()=>{ g.classList.remove('on'); (threadEls[n.id]||[]).forEach(t=>t.classList.remove('lit')); };
   g.addEventListener('mouseenter',focusNode);
   g.addEventListener('focus',focusNode);
   g.addEventListener('mouseleave',()=>{ if(activeId===n.id){} blur(); });
-  g.addEventListener('click',()=>{ if(n.id!=='core') location.href=n.href; });
-  g.addEventListener('keydown',e=>{ if(e.key==='Enter'&&n.id!=='core') location.href=n.href; });
+  const enter=()=>{ if(n.id==='core'){ const tgt=document.getElementById('index'); if(tgt) tgt.scrollIntoView({behavior:'smooth',block:'start'}); } else { location.href=n.href; } };
+  g.addEventListener('click',enter);
+  g.addEventListener('keydown',e=>{ if(e.key==='Enter') enter(); });
   stage.appendChild(g);
 });
 
@@ -211,10 +221,11 @@ NODES.forEach(n=>{
 let scale=1,sT=1,sV=0, tx=0,txT=0,txV=0, ty=0,tyT=0,tyV=0, dragging=false,lx=0,ly=0;
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 function apply(){ stage.setAttribute('transform',`translate(${CX+tx} ${CY+ty}) scale(${scale}) translate(${-CX} ${-CY})`); }
+let down=false,downX=0,downY=0,moved=false;
 svg.addEventListener('wheel',e=>{ if(!e.ctrlKey&&!e.metaKey&&Math.abs(e.deltaY)<50&&!e.shiftKey){} e.preventDefault(); sT=Math.min(2.4,Math.max(.7, sT*(e.deltaY<0?1.08:0.93))); },{passive:false});
-svg.addEventListener('pointerdown',e=>{ dragging=true; lx=e.clientX; ly=e.clientY; svg.classList.add('dragging'); svg.setPointerCapture(e.pointerId); });
-svg.addEventListener('pointermove',e=>{ if(!dragging)return; const k=(svg.viewBox.baseVal.width/svg.clientWidth); txT+=(e.clientX-lx)*k; tyT+=(e.clientY-ly)*k; lx=e.clientX; ly=e.clientY; });
-addEventListener('pointerup',()=>{ dragging=false; svg.classList.remove('dragging'); });
+svg.addEventListener('pointerdown',e=>{ down=true; moved=false; downX=lx=e.clientX; downY=ly=e.clientY; });
+svg.addEventListener('pointermove',e=>{ if(!down)return; if(!moved && Math.hypot(e.clientX-downX,e.clientY-downY)>8){ moved=true; dragging=true; svg.classList.add('dragging'); try{svg.setPointerCapture(e.pointerId);}catch(_){} } if(dragging){ const k=(svg.viewBox.baseVal.width/svg.clientWidth); txT+=(e.clientX-lx)*k; tyT+=(e.clientY-ly)*k; lx=e.clientX; ly=e.clientY; } });
+addEventListener('pointerup',()=>{ down=false; dragging=false; svg.classList.remove('dragging'); });
 function clampPan(v){return Math.max(-260,Math.min(260,v));}
 function frame(){
   txT=clampPan(txT); tyT=clampPan(tyT);
@@ -236,6 +247,8 @@ NODES.filter(n=>n.tier>0).forEach((n,i)=>{
   grid.appendChild(a);
 });
 </script>
+<script src="/js/mandala.js" defer></script>
+<script src="/js/indra.js" defer></script>
 <script src="/js/footer.js" defer></script>
 </body>
 </html>

@@ -111,8 +111,8 @@ function resolveFile(relativeOrAbsolute) {
 
 const DEFAULT_FILES = {
   mc: 'polymyth/modulecanon/index.html',
-  cc: 'campaigncodex.html',
-  bb: 'bookwormburrows.html',
+  cc: 'polymyth/campaigncodex/index.html',
+  bb: 'polymyth/bookwormburrows/index.html',
 };
 
 const FILES = {};
