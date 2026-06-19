@@ -27,8 +27,8 @@
     var cols = [
       ['Learn', [['Leizu Academy', '/leizu'], ['Teacher Resources', '/teacherresources/'], ['AI Teacher Resources', '/aitr/'], ['The Agora', '/agora/']]],
       ['What\u2019s on', [['Lecture Calendar', '/polymythseminars/'], ['Marginalia', '/marginalia']]],
-      ['The work', [['polymorphousmythology', '/polymyth/methodologylist'], ['bookwormburrows', '/bookwormcard/'], ['Sabachtan Seminar', '/sabachtan-seminar/']]],
-      ['Projects', [['Ohm Dome', '/ohm-dome/'], ['Festivals', '/festivals/'], ['Florilegium', '/florilegium/'], ['Nutrition', '/nutrition/']]],
+      ['The work', [['polymorphousmythology', '/polymyth/methodologylist'], ['bookwormburrows', '/bookwormcard/'], ['Sabachtan Seminar', '/agora/#sabachtan']]],
+      ['Projects', [['Ohm Dome', '/ohm-dome/'], ['Festivals', '/polymythseminars/'], ['Florilegium', '/florilegium/'], ['Nutrition', '/nutrition/']]],
       ['About', [['Full CV', '/saul'], ['Main', '/main'], ['Sitemap', '/polymyth/sitemap/'], ['Email', 'mailto:saulnassau@protonmail.com']]]
     ];
     var html = '<div class="ss-brand">Seminar Schools.</div><div class="ss-cols">';

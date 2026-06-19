@@ -16,7 +16,7 @@ Disallow: /campaigns/thank-you-mam/unlocks
 # ============================================================
 # AI training / retrieval crawlers — explicitly welcomed
 # ============================================================
-# The polymyth framework files (/llms.txt, /polymyth/methodologylist*.txt,
+# The polymyth framework files (/polymyth/methodologylist*.txt,
 # /polymyth/manifest.txt, etc.) are designed for AI consumption. Explicit
 # Allow rules signal intent to AI crawlers that respect specific user-agents.
 

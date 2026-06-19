@@ -995,8 +995,7 @@ footer.colophon a{border-bottom-color:var(--rule);}
 .fee .fee-fine p{margin-bottom:0.4rem;}
 .fee .fee-fine a{color:var(--mulberry-deep);text-decoration:none;}
 .fee .fee-fine a:hover{color:var(--mulberry-fruit);}
-/* The old course-count cart is superseded by the menu above. The catalog stays as curriculum; its floating checkout bar retires. */
-.pricing-panel{display:none!important;}
+/* Course-selection build-up restored: the floating cart shows the running per-course total with each course's three options (venue, materials, ESL register). */
 </style>
 <script type="application/ld+json">
 {
@@ -1406,7 +1405,7 @@ footer.colophon a{border-bottom-color:var(--rule);}
 
 </main>
 <footer class="colophon">
-  <p>嫘祖學院 · Leizu Academy · <span data-i18n="footer.umbrella">A practice within</span> <a href="/">Seminar Schools</a> · <a href="/leizu/teach" data-i18n="footer.teach">Teach at Leizu</a> · <a href="/teacherresources/" data-i18n="footer.resources">Teacher Resources</a> · <a href="mailto:saulnassau@protonmail.com">Contact</a></p>
+  <p>嫘祖學院 · Leizu Academy · <span data-i18n="footer.umbrella">A practice within</span> <a href="/">Seminar Schools</a> · <a href="/leizu/teach" data-i18n="footer.teach">Teach at Leizu</a> · <a href="mailto:saulnassau@protonmail.com">Contact</a></p>
 </footer>
 
 </div>
@@ -1601,12 +1600,12 @@ function calculatePricing(n){
   
   // Forest Year flagship branch
   if(n>=TOTAL_COURSES-2){
-    const flagshipBase = 10500;
+    const flagshipBase = 8400;
     // Online discount applies only to the proportion of sessions that are online
     const onlineSessionPct = sess > 0 ? onlineCount / n : 0;
     const flagshipOnlineDiscount = Math.round(flagshipBase * onlineSessionPct * (ONLINE_DISCOUNT_PCT/100) / 5) * 5;
     const flagshipTotal = flagshipBase - flagshipOnlineDiscount + inPersonFee + paperFee;
-    const flagshipStrike = 18750;
+    const flagshipStrike = 10800;
     const flagshipSaved = flagshipStrike - flagshipTotal;
     return {sessions:sess,total:flagshipTotal,tier:'森林・私塾',strike:flagshipStrike,savedPct:Math.round(flagshipSaved/flagshipStrike*100),savedAmt:flagshipSaved,flagship:true,paperFee,inPersonFee,onlineDiscount:flagshipOnlineDiscount,onlineCount,inPersonCount,paperCount};
   }
@@ -2555,6 +2554,13 @@ document.addEventListener('DOMContentLoaded', () => {
 //   - Numbers as numerals (e.g. "20 sessions" not "twenty sessions").
 //   - Define rare words inline if needed.
 const ESL_TEXT = {
+  // gap-fill: prose blocks that were missing a simplified-English version
+  'masthead.sub': '嫘祖 (Leizu) was the wife of the Yellow Emperor. People say she taught the world how to make silk. The school is named after her. Its method comes from the same patience.',
+  'consultation.desc': 'Leizu has no paid trial class. Instead, come to the Agora. The Agora is a free seminar. Anyone can come. It shows you how we work. Read the text first. Then come.',
+  'fmt.private.desc': 'One student and one teacher. The whole session is for that one student. New students begin here.',
+  'fmt.seminar.desc': 'A small group of students with one teacher. They read the same text together. It costs less than half the price of a private session. You can join after 20 to 40 private sessions, when you are ready.',
+  'policy.p1': 'You can cancel or change a session for free up to 24 hours before it starts. Less than 24 hours before, you cannot get your money back. This is because the teacher kept that hour for you and cannot fill it again.',
+  'policy.p2': 'One time each term, every family may cancel late with no problem. If a teacher cancels for any reason, you get all your money back.',
   // Threshold + main intro
   'ch1.title': 'The program',
   'ch1.p1': 'Leizu Academy teaches five subjects as one curriculum. Philosophy. History. English. Social studies. media literacy. We teach them together because they all ask the same kinds of questions.',
@@ -2903,96 +2909,6 @@ document.querySelectorAll('.theme-btn[data-theme-toggle]').forEach(b=>b.addEvent
 })();
 
 // N38 - Free Consultation card click → dedicated mailto for consultation request
-(function wireConsultationCard(){
-  const card = document.getElementById('freeclass-card');
-  if(!card) return;
-  function buildConsultationMailto(){
-    const lang = getLang();
-    const subject = {
-      en:'Leizu Academy booking inquiry.',
-      fr:'Demande de réservation. Leizu Academy.',
-      zh:'免費諮詢申請。嫘祖學院。',
-      zhs:'免费咨询申请。嫘祖学院。',
-      fa:'درخواست مشاوره رایگان. لیزو.'
-    }[lang];
-    const body = {
-      en:[
-        "Hello Saul,",
-        "",
-        "I'd like to book a Leizu course. Below is some context so you can prepare for the first session.",
-        "",
-        "Student name:",
-        "Age / grade:",
-        "Current school:",
-        "What I'd like to discuss:",
-        "Best times for a call (with timezone):",
-        "",
-        "Thanks,"
-      ].join('\n'),
-      fr:[
-        "Bonjour Saul,",
-        "",
-        "Je souhaiterais réserver un cours Leizu. Voici quelques informations pour préparer la première séance.",
-        "",
-        "Nom de l'élève:",
-        "Âge / niveau:",
-        "École actuelle:",
-        "Ce que j'aimerais aborder:",
-        "Disponibilités (avec fuseau horaire):",
-        "",
-        "Merci,"
-      ].join('\n'),
-      zh:[
-        "Saul 您好，",
-        "",
-        "我想預約一次30分鐘的免費諮詢。以下提供一些背景資訊以便您準備。",
-        "",
-        "學生姓名：",
-        "年齡 / 年級：",
-        "目前就讀學校：",
-        "希望討論的內容：",
-        "方便通話的時間（含時區）：",
-        "",
-        "謝謝，"
-      ].join('\n'),
-      zhs:[
-        "Saul 您好，",
-        "",
-        "我想预约一次30分钟的免费咨询。以下提供一些背景信息以便您准备。",
-        "",
-        "学生姓名：",
-        "年龄 / 年级：",
-        "目前就读学校：",
-        "希望讨论的内容：",
-        "方便通话的时间（含时区）：",
-        "",
-        "谢谢，"
-      ].join('\n'),
-      fa:[
-        "سلام Saul،",
-        "",
-        "می‌خواهم یک مشاوره رایگان ۳۰ دقیقه‌ای رزرو کنم. اطلاعات زیر برای آماده‌سازی تماس کمک می‌کند.",
-        "",
-        "نام دانش‌آموز:",
-        "سن / پایه:",
-        "مدرسه فعلی:",
-        "موضوع مورد علاقه:",
-        "زمان مناسب برای تماس (با منطقه زمانی):",
-        "",
-        "متشکرم،"
-      ].join('\n')
-    }[lang];
-    return 'mailto:saulnassau@protonmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-  }
-  function fireConsultation(){
-    window.location.href = buildConsultationMailto();
-  }
-  card.addEventListener('click', fireConsultation);
-  card.addEventListener('keydown', (e) => {
-    if(e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); fireConsultation(); }
-  });
-})();
-
 // A5, Cart-summary expand/collapse wiring. Click the courses-count area to expand the per-course list.
 (function wireCartExpand(){
   const summary = document.getElementById('pricing-summary-toggle');
@@ -3118,7 +3034,6 @@ try {
 const observer = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting) e.target.classList.add('in');});},{threshold:0.1,rootMargin:'0px 0px -80px 0px'});
 document.querySelectorAll('.chapter-prose,.elements-grid,.tiers,.format-grid,.policy-block,.teacher-cta-small,.contact-block,.chapter-title,.chapter-num').forEach(el=>{el.classList.add('reveal');observer.observe(el);});
 </script>
-<!-- Booking + payment wiring. Replace placeholder URLs in this file with real Stripe/Cal.com URLs after account setup. -->
 <script src="/leizu/booking-button.js"></script>
 <script>
 (function(){

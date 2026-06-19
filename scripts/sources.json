@@ -1,6 +1,6 @@
 {
   "$schema_note": "Venue roster for /scripts/seminars-prompt.md. Each entry declares the venue, its event-list URL, default event type, tier priority, and render_mode hint. Read by Claude headless harvest weekly. The agent handles extraction; render_mode is a strategy hint for fetch-difficulty, not a parser selector. tier_priority 1 = must crawl, 2 = if budget permits, 3 = low priority, 4 = optional.",
-  "$updated": "2026-06-11 base-expansion audit",
+  "$updated": "2026-06-19",
   "sources": [
     {
       "id": "c4e",
@@ -2181,6 +2181,779 @@
       "events_url": "https://www.tranzac.org/events/",
       "render_mode": "javascript",
       "notes": "Base-expansion audit 2026-06-11. Hosts recurring literary series."
+    },
+    {
+      "id": "contactphoto",
+      "name": "CONTACT Photography Festival",
+      "tier_priority": 3,
+      "default_type": "site-specific-art",
+      "base_url": "https://contactphoto.com/",
+      "events_url": "https://contactphoto.com/",
+      "notes": "May 1-31 each year. Hundreds of sub-events at galleries city-wide. Agent should capture parent festival + Featured Exhibitions as separate records, skip the long tail. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo",
+      "additional_urls": [
+        "https://contactphoto.com/exhibitions/",
+        "https://contactphoto.com/events/"
+      ]
+    },
+    {
+      "id": "imaginenative",
+      "name": "imagineNATIVE Film + Media Arts Festival",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://imaginenative.org/festival",
+      "events_url": "https://imaginenative.org/festival",
+      "notes": "Indigenous-led film festival. June each year. Films with director Q&A overlap with screening-type criteria. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "torontojazz",
+      "name": "Toronto Jazz Festival",
+      "tier_priority": 3,
+      "default_type": "festival-of-form",
+      "base_url": "https://torontojazz.com/",
+      "events_url": "https://torontojazz.com/",
+      "notes": "Late June. ~500,000 attendees. Multi-venue. Capture parent festival + key named-artist concerts. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "pride-toronto",
+      "name": "Pride Toronto",
+      "tier_priority": 3,
+      "default_type": "festival-of-form",
+      "base_url": "https://www.pridetoronto.com/",
+      "events_url": "https://www.pridetoronto.com/",
+      "notes": "Late June. Church-Wellesley. Capture parent festival + major Pride Month events including Trans March, Dyke March, Pride Parade, Streetfair. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "luminato",
+      "name": "Luminato Festival",
+      "tier_priority": 3,
+      "default_type": "site-specific-art",
+      "base_url": "https://luminatofestival.com/",
+      "events_url": "https://luminatofestival.com/",
+      "notes": "Mid-June typically. Interdisciplinary arts. Capture parent + headline performances. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "nxne",
+      "name": "NXNE (North by Northeast)",
+      "tier_priority": 3,
+      "default_type": "festival-of-form",
+      "base_url": "https://nxne.com/",
+      "events_url": "https://nxne.com/",
+      "notes": "Mid-June. Music + interactive + film. Multi-day, multi-venue. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "tcaf",
+      "name": "Toronto Comic Arts Festival",
+      "tier_priority": 3,
+      "default_type": "festival-of-form",
+      "base_url": "https://torontocomics.com/",
+      "events_url": "https://torontocomics.com/",
+      "notes": "Mid-May to mid-June typically. Toronto Reference Library. Independent comics. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "tiff-festival",
+      "name": "TIFF (Toronto International Film Festival)",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://www.tiff.net/festival",
+      "events_url": "https://www.tiff.net/festival",
+      "notes": "September. Distinct from year-round TIFF Lightbox programming. Heavy director-Q&A density. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "hotdocs-festival",
+      "name": "Hot Docs Festival",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://hotdocs.ca/whats-on/hot-docs-festival",
+      "events_url": "https://hotdocs.ca/whats-on/hot-docs-festival",
+      "notes": "Late April through early May. Documentary festival. Distinct from year-round Hot Docs Ted Rogers Cinema programming. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "doors-open-toronto",
+      "name": "Doors Open Toronto",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://www.toronto.ca/explore-enjoy/festivals-events/doors-open-toronto/",
+      "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/doors-open-toronto/",
+      "notes": "Last weekend of May. Free public access to buildings normally closed. Civic-architectural ritual. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "caribana",
+      "name": "Toronto Caribbean Carnival",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://torontocaribbeancarnival.com/",
+      "events_url": "https://torontocaribbeancarnival.com/",
+      "notes": "Late July through early August. Caribbean-diasporic festival of form. Multi-week program. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "sing-toronto",
+      "name": "SING! The Toronto Vocal Arts Festival",
+      "tier_priority": 3,
+      "default_type": "festival-of-form",
+      "base_url": "https://singtoronto.com/",
+      "events_url": "https://singtoronto.com/",
+      "notes": "Late May through early June. A cappella and vocal arts. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "jewish-music-week",
+      "name": "Jewish Music Week",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://jewishmusicweek.com/",
+      "events_url": "https://jewishmusicweek.com/",
+      "notes": "Late May. Diasporic-cultural festival of form. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "nuit-blanche",
+      "name": "Nuit Blanche Toronto",
+      "tier_priority": 3,
+      "default_type": "site-specific-art",
+      "base_url": "https://www.toronto.ca/explore-enjoy/festivals-events/nuit-blanche-toronto/",
+      "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/nuit-blanche-toronto/",
+      "notes": "Early October. City-wide overnight contemporary art. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "fringe-toronto",
+      "name": "Toronto Fringe Festival",
+      "tier_priority": 3,
+      "default_type": "site-specific-art",
+      "base_url": "https://fringetoronto.com/",
+      "events_url": "https://fringetoronto.com/",
+      "notes": "Early July. Independent theatre. Lottery-selected programming. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "summerworks",
+      "name": "SummerWorks Performance Festival",
+      "tier_priority": 3,
+      "default_type": "site-specific-art",
+      "base_url": "https://summerworks.ca/",
+      "events_url": "https://summerworks.ca/",
+      "notes": "Early August. Curated contemporary performance. Higher-art-stake counterpart to Fringe. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "scotiabank-buskerfest",
+      "name": "Toronto Buskerfest",
+      "tier_priority": 3,
+      "default_type": "festival-of-form",
+      "base_url": "https://torontobuskerfest.com/",
+      "events_url": "https://torontobuskerfest.com/",
+      "notes": "Late August. Street performance. Yonge-Dundas Square typical venue. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "tdsbfilm",
+      "name": "Toronto Black Film Festival",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://torontoblackfilm.com/",
+      "events_url": "https://torontoblackfilm.com/",
+      "notes": "February. Black-cinema festival. Director Q&A standard. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "rendezvous-classic",
+      "name": "Toronto Reel Asian Film Festival",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://www.reelasian.com/",
+      "events_url": "https://www.reelasian.com/",
+      "notes": "November. Asian-diasporic cinema. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "inside-out-film",
+      "name": "Inside Out 2SLGBTQ+ Film Festival",
+      "tier_priority": 3,
+      "default_type": "screening",
+      "base_url": "https://insideout.ca/festival/",
+      "events_url": "https://insideout.ca/festival/",
+      "notes": "Late May to early June. Queer cinema. Strong director-attendance density. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "polish-festival-mississauga",
+      "name": "Polish Festival Mississauga",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://polishfestival.ca/",
+      "events_url": "https://polishfestival.ca/",
+      "notes": "Late summer typically. Diasporic-cultural reproduction. Suburban GTA. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "carassauga",
+      "name": "Carassauga (Mississauga Festival of Cultures)",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://www.carassauga.com/",
+      "events_url": "https://www.carassauga.com/",
+      "notes": "May. Multi-pavilion diasporic-cultural showcase. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "salsa-on-st-clair",
+      "name": "Salsa on St. Clair",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://salsaintoronto.com/",
+      "events_url": "https://salsaintoronto.com/",
+      "notes": "Mid-July. Latin-diasporic street festival. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "afrofest",
+      "name": "Afrofest",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://music-africa.org/afrofest/",
+      "events_url": "https://music-africa.org/afrofest/",
+      "notes": "Early July. Woodbine Park. African-diasporic music festival. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "asha-mehrjui-tirgan",
+      "name": "Tirgan Festival",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://tirgan.ca/",
+      "events_url": "https://tirgan.ca/",
+      "notes": "Late July. Iranian-diasporic festival of form. Harbourfront. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "iranian-fire-festival",
+      "name": "Chaharshanbe Suri (Iranian fire-jumping festival)",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://www.toronto.ca/explore-enjoy/festivals-events/",
+      "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/",
+      "notes": "Last Wednesday before Persian New Year (March). Mel Lastman Square typical. Officially-supported festival of form. May lack dedicated primary site; the City of Toronto events page is the closest primary source. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "taste-of-danforth",
+      "name": "Krinos Taste of the Danforth",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://tasteofthedanforth.com/",
+      "events_url": "https://tasteofthedanforth.com/",
+      "notes": "Early August. Greek-diasporic festival. Largest street festival in Canada. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "veld",
+      "name": "VELD Music Festival",
+      "tier_priority": 3,
+      "default_type": "festival-of-form",
+      "base_url": "https://veldmusicfestival.com/",
+      "events_url": "https://veldmusicfestival.com/",
+      "notes": "Early August. Downsview Park. EDM. Borderline cultural-form criterion; included for completeness. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "festival-of-south-asia",
+      "name": "Festival of South Asia",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://festivalofsouthasia.com/",
+      "events_url": "https://festivalofsouthasia.com/",
+      "notes": "Late July. Gerrard India Bazaar. Diasporic festival. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "jerkfest",
+      "name": "JerkFest (Canada's Jerk Food Festival)",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://www.jerkfestival.ca/",
+      "events_url": "https://www.jerkfestival.ca/",
+      "notes": "Caribbean jerk cuisine + music; Centennial Park, Etobicoke; early August. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "taste-little-italy",
+      "name": "Taste of Little Italy",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://tasteoflittleitaly.tolittleitaly.com/",
+      "events_url": "https://tasteoflittleitaly.tolittleitaly.com/",
+      "notes": "College St W (Bathurst-Shaw), Little Italy BIA; mid-June. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "do-west-fest",
+      "name": "Do West Fest (Little Portugal)",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://dowestfest.com/",
+      "events_url": "https://dowestfest.com/",
+      "notes": "Dundas St W; Uma Nota Culture. Portugal Day Parade now split off to St. Clair -- track separately. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "ukrainian-festival",
+      "name": "Toronto Ukrainian Festival (Bloor West Village)",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://ukrainianfestival.com/",
+      "events_url": "https://ukrainianfestival.com/",
+      "notes": "Bloor St W (Jane-Runnymede); mid-September. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "taste-of-manila",
+      "name": "Taste of Manila",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://www.eventbrite.ca/e/taste-of-manila-2026-tickets-1989943073300",
+      "events_url": "https://www.eventbrite.ca/e/taste-of-manila-2026-tickets-1989943073300",
+      "notes": "SPARC Canada; Bathurst & Wilson 'Little Manila'; mid-August. Multiple SPARC web properties exist -- disambiguate the Toronto event. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "toronto-korean-festival",
+      "name": "Toronto Korean Festival",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://www.torontokfest.ca/",
+      "events_url": "https://www.torontokfest.ca/",
+      "notes": "Mel Lastman Square; formerly 'Korean Harvest Festival' (legacy domain torontokhf.com). Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "indigenous-arts-festival",
+      "name": "Indigenous Arts Festival & Na-Me-Res Pow Wow",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://www.toronto.ca/explore-enjoy/festivals-events/indigenous-arts-festival/",
+      "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/indigenous-arts-festival/",
+      "notes": "City-produced; Fort York / Garrison Common; late June. Verify venue (one listing cites Biidaasige Park). Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "chinatown-festival",
+      "name": "Toronto Chinatown Festival / Lunar New Year",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://www.chinatownbia.com/",
+      "events_url": "https://www.chinatownbia.com/",
+      "notes": "Chinatown BIA, Spadina/Dundas; Lunar New Year in February, summer festival in August. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "panorama-india",
+      "name": "India Day Festival & Grand Parade (Panorama India)",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://panoramaindia.org/",
+      "events_url": "https://panoramaindia.org/",
+      "notes": "Nathan Phillips Square; August. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "beaches-jazz",
+      "name": "Beaches International Jazz Festival",
+      "tier_priority": 3,
+      "default_type": "festival",
+      "base_url": "https://beachesjazz.com/",
+      "events_url": "https://beachesjazz.com/",
+      "notes": "Late July, the Beaches. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "canadian-music-week",
+      "name": "Canadian Music Week",
+      "tier_priority": 3,
+      "default_type": "festival",
+      "base_url": "https://cmw.net/",
+      "events_url": "https://cmw.net/",
+      "notes": "Multi-venue music + conference. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "tjff",
+      "name": "Toronto Jewish Film Festival",
+      "tier_priority": 3,
+      "default_type": "festival",
+      "base_url": "https://tjff.com/",
+      "events_url": "https://tjff.com/",
+      "notes": "Early-mid June; clean static per-film pages with guests in meta tags. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo",
+      "additional_urls": [
+        "https://tjff.com/schedule/",
+        "https://tjff.com/lineup/"
+      ]
+    },
+    {
+      "id": "rendezvous-madness",
+      "name": "Rendezvous with Madness (Workman Arts)",
+      "tier_priority": 3,
+      "default_type": "festival",
+      "base_url": "https://workmanarts.com/rendezvous-with-madness/",
+      "events_url": "https://workmanarts.com/rendezvous-with-madness/",
+      "notes": "Late October; every screening followed by a panel; PWYW. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "regent-park-film",
+      "name": "Regent Park Film Festival",
+      "tier_priority": 3,
+      "default_type": "festival",
+      "base_url": "https://regentparkfilmfestival.com/",
+      "events_url": "https://regentparkfilmfestival.com/",
+      "notes": "November; free community festival + Home Made Visible touring panels. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "toronto-biennial",
+      "name": "Toronto Biennial of Art",
+      "tier_priority": 3,
+      "default_type": "site-specific-art",
+      "base_url": "https://torontobiennial.org/",
+      "events_url": "https://torontobiennial.org/",
+      "notes": "2026 'Things Fall Apart', Sept 26-Dec 20; hub = Art Museum at U of T. Dedupe venue cross-listings by title+venue. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "word-on-street",
+      "name": "Word on the Street Toronto",
+      "tier_priority": 3,
+      "default_type": "festival",
+      "base_url": "https://toronto.thewordonthestreet.ca/",
+      "events_url": "https://toronto.thewordonthestreet.ca/",
+      "notes": "Canada's largest free book & magazine festival; late September. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "markham-village-music",
+      "name": "Markham Village Music Festival",
+      "tier_priority": 3,
+      "default_type": "festival",
+      "base_url": "https://www.markhamfestival.com/",
+      "events_url": "https://www.markhamfestival.com/",
+      "notes": "Main Street Markham; mid-June. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "td-markham-jazz",
+      "name": "TD Markham Jazz Festival",
+      "tier_priority": 3,
+      "default_type": "festival",
+      "base_url": "https://www.markhamjazzfestival.com/",
+      "events_url": "https://www.markhamjazzfestival.com/",
+      "notes": "Main Street Unionville; late August (official dates over tourism listings). Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "world-of-threads",
+      "name": "World of Threads Festival (Oakville)",
+      "tier_priority": 3,
+      "default_type": "site-specific-art",
+      "base_url": "https://worldofthreadsfestival.com/",
+      "events_url": "https://worldofthreadsfestival.com/",
+      "notes": "Fibre/textile art; QEPCCC; Sept-Jan run. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "taste-of-asia-markham",
+      "name": "Taste of Asia (Markham)",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://visitmarkham.ca/things-to-do/festivals-events/",
+      "events_url": "https://visitmarkham.ca/things-to-do/festivals-events/",
+      "notes": "Kennedy Rd, Markham; late June. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "icff",
+      "name": "Italian Contemporary Film Festival",
+      "tier_priority": 3,
+      "default_type": "festival-of-form",
+      "base_url": "https://www.icff.ca/",
+      "events_url": "https://www.icff.ca/",
+      "notes": "Base-expansion audit 2026-06-11. June, Toronto core. Screening gate applies to sub-events. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "planet-in-focus",
+      "name": "Planet in Focus Environmental Film Festival",
+      "tier_priority": 3,
+      "default_type": "festival-of-form",
+      "base_url": "https://planetinfocus.org/",
+      "events_url": "https://planetinfocus.org/",
+      "notes": "Base-expansion audit 2026-06-11. October; doc screenings with filmmaker Q&As. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "tpff",
+      "name": "Toronto Palestine Film Festival",
+      "tier_priority": 3,
+      "default_type": "festival-of-form",
+      "base_url": "https://www.tpff.ca/",
+      "events_url": "https://www.tpff.ca/",
+      "notes": "Base-expansion audit 2026-06-11. September. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "toronto-after-dark",
+      "name": "Toronto After Dark Film Festival",
+      "tier_priority": 3,
+      "default_type": "festival-of-form",
+      "base_url": "https://torontoafterdark.com/",
+      "events_url": "https://torontoafterdark.com/",
+      "notes": "Base-expansion audit 2026-06-11. October genre festival. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "blood-in-the-snow",
+      "name": "Blood in the Snow Canadian Film Festival",
+      "tier_priority": 3,
+      "default_type": "festival-of-form",
+      "base_url": "https://bloodinthesnow.ca/",
+      "events_url": "https://bloodinthesnow.ca/",
+      "notes": "Base-expansion audit 2026-06-11. Canadian horror, November. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "female-eye",
+      "name": "Female Eye Film Festival",
+      "tier_priority": 3,
+      "default_type": "festival-of-form",
+      "base_url": "https://www.femaleeyefilmfestival.com/",
+      "events_url": "https://www.femaleeyefilmfestival.com/",
+      "notes": "Base-expansion audit 2026-06-11. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "reelabilities-to",
+      "name": "ReelAbilities Film Festival Toronto",
+      "tier_priority": 3,
+      "default_type": "festival-of-form",
+      "base_url": "https://reelabilities.org/toronto/",
+      "events_url": "https://reelabilities.org/toronto/",
+      "notes": "Base-expansion audit 2026-06-11. Disability film and arts. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "topictureshow",
+      "name": "Toronto Outdoor Picture Show",
+      "tier_priority": 3,
+      "default_type": "festival-of-form",
+      "base_url": "https://topictureshow.com/",
+      "events_url": "https://topictureshow.com/",
+      "notes": "Base-expansion audit 2026-06-11. Summer outdoor screenings with intros, incl. Christie Pits. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "ashkenaz",
+      "name": "Ashkenaz Festival",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://www.ashkenaz.ca/",
+      "events_url": "https://www.ashkenaz.ca/",
+      "notes": "Base-expansion audit 2026-06-11. Major Jewish music and culture festival, Harbourfront. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "small-world",
+      "name": "Small World Music",
+      "tier_priority": 3,
+      "default_type": "festival-of-form",
+      "base_url": "https://smallworldmusic.com/",
+      "events_url": "https://smallworldmusic.com/",
+      "notes": "Base-expansion audit 2026-06-11. Global music festival plus year-round series. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "pedestrian-sundays",
+      "name": "Pedestrian Sundays Kensington Market",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://www.pskensington.ca/",
+      "events_url": "https://www.pskensington.ca/",
+      "notes": "Base-expansion audit 2026-06-11. Monthly May-October. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "hispanic-fiesta",
+      "name": "Hispanic Fiesta",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://hispanicfiesta.com/",
+      "events_url": "https://hispanicfiesta.com/",
+      "notes": "Base-expansion audit 2026-06-11. Labour Day weekend, Mel Lastman Square. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "festival-of-india",
+      "name": "Festival of India / Ratha-Yatra Toronto",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://www.festivalofindia.ca/",
+      "events_url": "https://www.festivalofindia.ca/",
+      "notes": "Base-expansion audit 2026-06-11. July, Yonge St parade plus Centre Island. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "big-on-bloor",
+      "name": "BIG on Bloor Festival",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://bigonbloorfestival.com/",
+      "events_url": "https://bigonbloorfestival.com/",
+      "notes": "Base-expansion audit 2026-06-11. Bloordale street festival. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "taste-of-lawrence",
+      "name": "Taste of Lawrence Festival",
+      "tier_priority": 3,
+      "default_type": "cultural-reproduction",
+      "base_url": "https://tasteoflawrence.ca/",
+      "events_url": "https://tasteoflawrence.ca/",
+      "notes": "Base-expansion audit 2026-06-11. Scarborough, July. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "todocanada-toronto",
+      "name": "To Do Canada — Toronto festivals",
+      "tier_priority": 4,
+      "default_type": "festival-of-form",
+      "base_url": "https://www.todocanada.ca/festivals-in-toronto/",
+      "events_url": "https://www.todocanada.ca/festivals-in-toronto/",
+      "notes": "Indexes ~50 festivals across the Toronto calendar. Reliable for big-anchor coverage. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo",
+      "additional_urls": [
+        "https://www.todocanada.ca/things-to-do-in-toronto-this-weekend/",
+        "https://www.todocanada.ca/festivals-toronto-june/",
+        "https://www.todocanada.ca/festivals-toronto-july/",
+        "https://www.todocanada.ca/festivals-toronto-august/"
+      ]
+    },
+    {
+      "id": "streets-of-toronto",
+      "name": "Streets Of Toronto — culture index",
+      "tier_priority": 4,
+      "default_type": "festival-of-form",
+      "base_url": "https://streetsoftoronto.com/category/toronto-culture/",
+      "events_url": "https://streetsoftoronto.com/category/toronto-culture/",
+      "notes": "Monthly '76 best things' format gives broad small-event coverage. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo",
+      "additional_urls": [
+        "https://streetsoftoronto.com/toronto-culture/76-best-things-to-do-in-toronto-in-may-2026/",
+        "https://streetsoftoronto.com/toronto-culture/best-things-to-do-in-toronto-in-june-2026/",
+        "https://streetsoftoronto.com/toronto-culture/best-things-to-do-in-toronto-in-july-2026/"
+      ]
+    },
+    {
+      "id": "blogto",
+      "name": "BlogTO events",
+      "tier_priority": 4,
+      "default_type": "festival-of-form",
+      "base_url": "https://www.blogto.com/events/",
+      "events_url": "https://www.blogto.com/events/",
+      "notes": "Local culture indexing. Pagination is heavy; budget tokens accordingly. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo",
+      "additional_urls": [
+        "https://www.blogto.com/events/festivals/",
+        "https://www.blogto.com/best_of/the-best-toronto-summer-festivals/"
+      ]
+    },
+    {
+      "id": "festivalstoronto",
+      "name": "festivalstoronto.com",
+      "tier_priority": 4,
+      "default_type": "festival-of-form",
+      "base_url": "https://festivalstoronto.com/events/",
+      "events_url": "https://festivalstoronto.com/events/",
+      "notes": "Single-purpose aggregator. Direct festival listings. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "ontariofestivals",
+      "name": "Ontario Festivals — GTA section",
+      "tier_priority": 4,
+      "default_type": "festival-of-form",
+      "base_url": "https://ontariofestivals.ca/gta-festivals/",
+      "events_url": "https://ontariofestivals.ca/gta-festivals/",
+      "notes": "Suburban festival coverage (Vaughan, Markham, Mississauga, Brampton, Oakville). Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "musicfestivalwizard-toronto",
+      "name": "Music Festival Wizard — Toronto",
+      "tier_priority": 4,
+      "default_type": "festival-of-form",
+      "base_url": "https://www.musicfestivalwizard.com/festival-guide/toronto/",
+      "events_url": "https://www.musicfestivalwizard.com/festival-guide/toronto/",
+      "notes": "Music-festival specialist aggregator. Cross-check date claims against primary sites; user flagged false-positive risk. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "canadiantrainvacations",
+      "name": "Canadian Train Vacations — Toronto summer festivals",
+      "tier_priority": 4,
+      "default_type": "festival-of-form",
+      "base_url": "https://canadiantrainvacations.com/blog/summer-festivals-toronto",
+      "events_url": "https://canadiantrainvacations.com/blog/summer-festivals-toronto",
+      "notes": "Tourism-blog summary. Big-anchor coverage. Travel-industry framing. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "nowtoronto",
+      "name": "Now Toronto",
+      "tier_priority": 4,
+      "default_type": "festival-of-form",
+      "base_url": "https://nowtoronto.com/events/",
+      "events_url": "https://nowtoronto.com/events/",
+      "notes": "Cultural weekly. Festival coverage runs adjacent to event-pick coverage. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "tourism-toronto",
+      "name": "Destination Toronto official tourism site",
+      "tier_priority": 4,
+      "default_type": "festival-of-form",
+      "base_url": "https://www.destinationtoronto.com/events-festivals/",
+      "events_url": "https://www.destinationtoronto.com/events-festivals/",
+      "notes": "Tourism authority. Heavy on Tier-1 anchors. Low coverage of fringe events. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "akimbo",
+      "name": "Akimbo -- visual-art listings",
+      "tier_priority": 4,
+      "default_type": "festival-of-form",
+      "base_url": "https://akimbo.ca/listings/",
+      "events_url": "https://akimbo.ca/listings/",
+      "notes": "Canada-wide gallery/exhibition discovery; strong for GTA shows. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
+    },
+    {
+      "id": "destination-toronto",
+      "name": "Destination Toronto events",
+      "tier_priority": 4,
+      "default_type": "festival-of-form",
+      "base_url": "https://www.destinationtoronto.com/",
+      "events_url": "https://www.destinationtoronto.com/",
+      "notes": "Broad civic/cultural discovery. Folded from festivals-sources.json on calendar synthesis 2026-06.",
+      "render_mode": "todo"
     }
   ],
   "deferred_candidates": {
@@ -2204,7 +2977,7 @@
       "Confirmed demonstration callouts carried by local news outlets"
     ]
   },
-  "$architecture": "scrape_seminars.py and per-venue Python fetchers retired May 26 2026. Harvest now runs via claude -p in .github/workflows/scrape-seminars.yml. manual-events.json remains the override layer.",
+  "$architecture": "scrape_seminars.py and per-venue Python fetchers retired May 26 2026. Harvest now runs via claude -p in .github/workflows/scrape-seminars.yml. manual-events.json remains the override layer. | Festivals consolidated into this single roster 2026-06; standalone festivals pipeline retired.",
   "$render_modes": {
     "static": "Plain HTML. WebFetch returns parseable content.",
     "drupal": "Drupal events page. Default sort may show past events first.",

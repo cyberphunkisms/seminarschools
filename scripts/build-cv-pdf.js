@@ -102,8 +102,9 @@ const html = `<!doctype html>
 <style>
   html, body { margin:0; padding:0; background-color:#ffffff; }
   body { font-family: Georgia, 'Times New Roman', 'Liberation Serif', serif; color:#1d1d1d; }
-  .hd { text-align:center; border-bottom:1.5px solid #7A2632; padding-bottom:10pt; margin-bottom:6pt; }
-  .hd h1 { font-variant:small-caps; font-weight:600; letter-spacing:3.5px; font-size:22pt; color:#5A1A24; margin:0 0 5pt; }
+  .hd { display:flex; align-items:flex-end; justify-content:space-between; gap:18pt; border-bottom:1.5px solid #7A2632; padding-bottom:10pt; margin-bottom:6pt; }
+  .hd .contact { text-align:right; }
+  .hd h1 { font-variant:small-caps; font-weight:600; letter-spacing:3.5px; font-size:22pt; color:#5A1A24; margin:0; }
   .hd h1 .post { font-size:11.5pt; letter-spacing:2px; color:#7A2632; }
   .hd .meta { font-size:10.5pt; letter-spacing:1px; color:#2a2a2a; margin:2pt 0; }
   .hd .em { font-size:9pt; letter-spacing:0.8px; color:#46383a; margin-top:3.5pt; }
@@ -139,8 +140,10 @@ const html = `<!doctype html>
 <body>
 <div class="hd">
   <h1>Saul Karim NMH <span class="post">MA</span></h1>
-  <div class="meta">416-771-0382 &middot; Toronto</div>
-  <div class="em">saulnassau@protonmail.com &middot; seminarschools.com/saulnassau</div>
+  <div class="contact">
+    <div class="meta">416-771-0382 &middot; Toronto</div>
+    <div class="em">saulnassau@protonmail.com &middot; seminarschools.com/saulnassau</div>
+  </div>
 </div>
 ${sectionHtml}
 <div class="cred">

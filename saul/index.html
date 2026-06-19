@@ -177,6 +177,10 @@
     margin-top: 0.5rem;
     letter-spacing: 0.08em;
   }
+  header.cv-header .cv-head-row { display:flex; align-items:flex-end; justify-content:space-between; gap:1.2rem; flex-wrap:wrap; text-align:left; }
+  header.cv-header .cv-head-row h1 { margin:0; }
+  header.cv-header .cv-contact { text-align:right; }
+  header.cv-header .cv-contact .meta { margin-top:0; }
 
   /* ===== FILTER NAV ===== */
   .filter-nav {
@@ -632,7 +636,7 @@
        restore as plain CV contact line. */
     .cv-header-email {
       margin-top: 0.2rem !important;
-      text-align: center !important;
+      text-align: right !important;
     }
     .cv-header-email a {
       font-size: 0.74rem !important;
@@ -952,11 +956,14 @@ textarea:focus-visible,
   </nav>
 
   <header class="cv-header">
-    <h1>Saul Karim NMH <span class="post">MA</span></h1>
-    <div class="meta">416-771-0382 · Toronto</div>
+    <div class="cv-head-row">
+      <h1>Saul Karim NMH <span class="post">MA</span></h1>
+      <div class="cv-contact">
+        <div class="meta">416-771-0382 · Toronto</div>
+        <div class="cv-header-email" style="margin-top:0.2rem;text-align:right;"><a href="mailto:saulnassau@protonmail.com" style="font-family:var(--sans, system-ui, sans-serif);font-size:0.78rem;letter-spacing:0.04em;color:var(--accent, #A07A2C);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:0.1rem;">saulnassau@protonmail.com</a></div>
+      </div>
+    </div>
     <h2 id="pdfSubtitle" aria-hidden="true"></h2>
-  
-  <div class="cv-header-email" style="margin-top:0.6rem;text-align:center;"><a href="mailto:saulnassau@protonmail.com" style="font-family:var(--sans, system-ui, sans-serif);font-size:0.78rem;letter-spacing:0.04em;color:var(--accent, #A07A2C);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:0.1rem;">saulnassau@protonmail.com</a></div>
   </header>
 
   <nav class="filter-nav" id="filterNav">
@@ -2075,6 +2082,7 @@ function buildPrintCv() {
     "#printCv .block{page-break-inside:avoid;break-inside:avoid;}",
     "#printCv .hd{width:100%;border-collapse:collapse;}",
     "#printCv .hd td{vertical-align:bottom;padding:0;}",
+    "#printCv .hd td:first-child{width:100%;}",
     "#printCv .hd .name{font-size:23pt;font-weight:600;letter-spacing:0.4pt;color:#1c1c1c;line-height:1.04;}",
     "#printCv .hd .name .post{font-size:11pt;font-weight:600;letter-spacing:1pt;color:#7A2632;margin-left:5pt;}",
     "#printCv .hd .contact{text-align:right;font-size:8.6pt;letter-spacing:0.4pt;color:#5b5b5b;line-height:1.6;}",

@@ -65,6 +65,8 @@ a{color:inherit;text-decoration:none;}
 .panel .go{display:inline-block;margin-top:.7rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--n,var(--accent));border-bottom:1px solid currentColor;padding-bottom:1px;}
 
 .hint{position:absolute;right:1.4rem;top:1.2rem;z-index:10;font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:right;line-height:1.9;pointer-events:none;}
+.descend-sq{position:absolute;left:1.4rem;bottom:1.4rem;z-index:9;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:color-mix(in srgb,var(--bg-soft) 90%,transparent);border:1px solid var(--line);border-radius:4px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-family:var(--mono);font-size:1rem;color:var(--muted);transition:color .2s,border-color .2s,transform .2s;}
+.descend-sq:hover,.descend-sq:focus-visible{color:var(--accent);border-color:var(--accent);transform:translateY(2px);}
 
 /* identity strip under hero */
 .lede{max-width:1180px;margin:0 auto;padding:2.6rem 1.6rem 1.2rem;}
@@ -113,6 +115,7 @@ a{color:inherit;text-decoration:none;}
   <svg id="web" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Interactive map of the projects"></svg>
   <div class="hint" aria-hidden="true">drag to roam<br>scroll to zoom<br>tap a jewel</div>
   <div class="panel" id="panel" role="status" aria-live="polite"></div>
+  <button class="descend-sq" id="descendSq" type="button" aria-label="Scroll down into the page" title="Scroll down">&#8595;</button>
 </section>
 
 <div class="lede">
@@ -129,9 +132,13 @@ a{color:inherit;text-decoration:none;}
   <div class="idx-grid" id="idxGrid"></div>
 </main>
 
+<section id="main-stack" aria-label="The full page, below the map">
+  <iframe id="main-frame" src="/main/" title="Seminar Schools, the full page" loading="lazy" scrolling="no" style="width:100%;border:0;display:block;background:transparent;"></iframe>
+</section>
+
 <footer class="foot">
   <a href="/saul">Full CV</a>
-  <a href="/main">Main</a>
+  <a href="#main-stack">Main</a>
   <a href="/florilegium/">Florilegium</a>
   <a href="/nutrition/">Nutrition</a>
   <a href="/polymyth/sitemap/">Sitemap</a>
@@ -153,8 +160,7 @@ const NODES = [
   {id:'polymyth', label:'polymorphousmythology', href:'/polymyth/methodologylist', tier:2, c:'--c4', k:'The framework', d:'How symbols and figures move across unrelated works and gather meaning through use. The engine under all of it.'},
   {id:'bb', label:'bookwormburrows', href:'/bookwormcard/', tier:3, c:'--c5', k:'Learning game · live', d:'A dimensional-traveling game where any text becomes a world to visit. Scan the code, make a character, play.'},
   {id:'ohm', label:'Ohm Dome', href:'/ohm-dome/', tier:3, c:'--c5', k:'Public art proposal', d:'A biometric-responsive LED dome for public space in Toronto. Heart rate, breath, and proximity drive the light.'},
-  {id:'festivals', label:'Festivals', href:'/festivals/', tier:3, c:'--c2', k:'Across the GTA', d:'Festivals worth the trip across Toronto and the GO network, chosen for form, living culture, and site.'},
-  {id:'sabachtan', label:'Sabachtan Seminar', href:'/sabachtan-seminar/', tier:3, c:'--c6', k:'The ground', d:'The gnostic seminar at the base of the framework, where the reading turns to first questions.'},
+  {id:'sabachtan', label:'Sabachtan Seminar', href:'/agora/#sabachtan', tier:3, c:'--c6', k:'The ground', d:'The gnostic seminar at the base of the framework, where the reading turns to first questions.'},
 ];
 const CLUSTERS = [ ['leizu','teach','agora'], ['calendar','marginalia'], ['polymyth','bb','sabachtan'] ];
 
@@ -162,7 +168,7 @@ const W=1000,H=700, CX=W*0.5, CY=H*0.47;
 const RING={1:135,2:215,3:292};
 // explicit angles (degrees, 0=right, CCW) for a balanced composition, long
 // labels placed where there is room, clusters spread around the ring.
-const ANG={leizu:330,teach:205,agora:55,calendar:255,marginalia:150,polymyth:95,bb:25,ohm:290,festivals:175,sabachtan:120};
+const ANG={leizu:330,teach:205,agora:55,calendar:255,marginalia:150,polymyth:95,bb:25,ohm:290,sabachtan:120};
 const pos={core:{x:CX,y:CY}};
 NODES.forEach(n=>{
   if(n.tier>0){ const a=ANG[n.id]*Math.PI/180, r=RING[n.tier];
@@ -190,14 +196,24 @@ CLUSTERS.forEach(cl=>{ for(let i=0;i<cl.length;i++)for(let j=i+1;j<cl.length;j++
 // nodes
 const panel=document.getElementById('panel');
 let activeId=null;
-function radius(t){return t===0?16:t===1?12:t===2?10:8;}
+function radius(t){return t===0?22:t===1?12:t===2?10:8;}
 NODES.forEach(n=>{
   const p=pos[n.id], col=cv(n.c);
   const g=el('g',{class:'node'+(n.tier===0?' core':''),tabindex:'0',role:'link','aria-label':n.label,transform:`translate(${p.x} ${p.y})`});
   g.style.setProperty('--n',col);
-  g.appendChild(el('circle',{class:'halo',r:radius(n.tier)*2.6}));
-  g.appendChild(el('circle',{class:'dot',r:radius(n.tier)}));
-  const lab=el('text',{class:'lab',x:0,y:radius(n.tier)+15,'text-anchor':'middle'}); lab.textContent=n.label;
+  const r=radius(n.tier);
+  g.appendChild(el('circle',{class:'halo',r:r*2.6}));
+  g.appendChild(el('circle',{class:'dot',r:r}));
+  if(n.tier===0){
+    const ri=r-3;
+    const clip=el('clipPath',{id:'coreClip',clipPathUnits:'userSpaceOnUse'});
+    clip.appendChild(el('circle',{cx:0,cy:0,r:ri}));
+    g.appendChild(clip);
+    const img=el('image',{class:'face',x:-ri,y:-ri,width:ri*2,height:ri*2,'clip-path':'url(#coreClip)',preserveAspectRatio:'xMidYMid slice','aria-hidden':'true',href:'/img/saul.jpg'});
+    try{ img.setAttributeNS('http://www.w3.org/1999/xlink','href','/img/saul.jpg'); }catch(_){}
+    g.appendChild(img);
+  }
+  const lab=el('text',{class:'lab',x:0,y:r+15,'text-anchor':'middle'}); lab.textContent=n.label;
   g.appendChild(lab);
   const focusNode=()=>{
     if(activeId&&activeId!==n.id){const pg=document.querySelector('.node.on');if(pg)pg.classList.remove('on');}
@@ -221,10 +237,12 @@ NODES.forEach(n=>{
 let scale=1,sT=1,sV=0, tx=0,txT=0,txV=0, ty=0,tyT=0,tyV=0, dragging=false,lx=0,ly=0;
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 function apply(){ stage.setAttribute('transform',`translate(${CX+tx} ${CY+ty}) scale(${scale}) translate(${-CX} ${-CY})`); }
+let raf=null;
+function wake(){ if(raf===null && !reduce){ raf=requestAnimationFrame(frame); } }
 let down=false,downX=0,downY=0,moved=false;
-svg.addEventListener('wheel',e=>{ if(!e.ctrlKey&&!e.metaKey&&Math.abs(e.deltaY)<50&&!e.shiftKey){} e.preventDefault(); sT=Math.min(2.4,Math.max(.7, sT*(e.deltaY<0?1.08:0.93))); },{passive:false});
+svg.addEventListener('wheel',e=>{ e.preventDefault(); sT=Math.min(2.4,Math.max(.7, sT*(e.deltaY<0?1.08:0.93))); wake(); },{passive:false});
 svg.addEventListener('pointerdown',e=>{ down=true; moved=false; downX=lx=e.clientX; downY=ly=e.clientY; });
-svg.addEventListener('pointermove',e=>{ if(!down)return; if(!moved && Math.hypot(e.clientX-downX,e.clientY-downY)>8){ moved=true; dragging=true; svg.classList.add('dragging'); try{svg.setPointerCapture(e.pointerId);}catch(_){} } if(dragging){ const k=(svg.viewBox.baseVal.width/svg.clientWidth); txT+=(e.clientX-lx)*k; tyT+=(e.clientY-ly)*k; lx=e.clientX; ly=e.clientY; } });
+svg.addEventListener('pointermove',e=>{ if(!down)return; if(!moved && Math.hypot(e.clientX-downX,e.clientY-downY)>8){ moved=true; dragging=true; svg.classList.add('dragging'); try{svg.setPointerCapture(e.pointerId);}catch(_){} } if(dragging){ const k=(svg.viewBox.baseVal.width/svg.clientWidth); txT+=(e.clientX-lx)*k; tyT+=(e.clientY-ly)*k; lx=e.clientX; ly=e.clientY; wake(); } });
 addEventListener('pointerup',()=>{ down=false; dragging=false; svg.classList.remove('dragging'); });
 function clampPan(v){return Math.max(-260,Math.min(260,v));}
 function frame(){
@@ -232,9 +250,13 @@ function frame(){
   sV=(sV+(sT-scale)*0.12)*0.8; scale+=sV;
   txV=(txV+(txT-tx)*0.12)*0.8; tx+=txV;
   tyV=(tyV+(tyT-ty)*0.12)*0.8; ty+=tyV;
-  apply(); requestAnimationFrame(frame);
+  apply();
+  if(Math.abs(sV)<1e-4 && Math.abs(sT-scale)<1e-4 && Math.abs(txV)<1e-3 && Math.abs(txT-tx)<1e-3 && Math.abs(tyV)<1e-3 && Math.abs(tyT-ty)<1e-3){
+    scale=sT; tx=txT; ty=tyT; apply(); raf=null; return;
+  }
+  raf=requestAnimationFrame(frame);
 }
-if(reduce){apply();}else{requestAnimationFrame(frame);}
+if(reduce){ apply(); } else { raf=requestAnimationFrame(frame); }
 // open core by default so the panel is never empty
 setTimeout(()=>{const core=document.querySelector('.node.core');if(core)core.dispatchEvent(new Event('mouseenter'));},400);
 
@@ -246,6 +268,17 @@ NODES.filter(n=>n.tier>0).forEach((n,i)=>{
   a.innerHTML=`<span class="arr">&rarr;</span><span class="n">${String(i+1).padStart(2,'0')} / ${n.k}</span><span class="t">${n.label}</span><span class="d">${n.d}</span>`;
   grid.appendChild(a);
 });
+</script>
+<script>
+(function(){var d=document.getElementById("descendSq");if(d)d.addEventListener("click",function(){var t=document.querySelector(".lede");if(t)t.scrollIntoView({behavior:"smooth",block:"start"});});})();
+/* /main stacked beneath the home map: same-origin auto-height so it scrolls with the page, no internal scrollbar. */
+(function(){
+  var f=document.getElementById('main-frame');
+  if(!f) return;
+  function fit(){ try{ var d=f.contentWindow.document; f.style.height=((d.documentElement.scrollHeight||d.body.scrollHeight))+'px'; }catch(e){} }
+  f.addEventListener('load',function(){ fit(); setTimeout(fit,400); setTimeout(fit,1500); });
+  window.addEventListener('resize',fit);
+})();
 </script>
 <script src="/js/mandala.js" defer></script>
 <script src="/js/indra.js" defer></script>

@@ -174,7 +174,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
       <p class="masthead-sub">A few words to start, then as much or as little as you like. I read every one myself and write back with a plan made for your child.</p>
     </header>
 
-    <form name="leizu-intake" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="intake" id="intake-form" action="/leizu/intake/?sent=1">
+    <form name="leizu-intake" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field" class="intake" id="intake-form" action="/leizu/intake/?sent=1">
       <input type="hidden" name="form-name" value="leizu-intake">
       <p class="gotcha"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 
@@ -267,6 +267,12 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
         <label for="notes">Anything else?</label>
         <span class="hint">This is yours. Write as much as you like.</span>
         <textarea id="notes" name="notes" rows="4"></textarea>
+      </div>
+
+      <div class="field reveal">
+        <label for="portfolio">Portfolio (optional)</label>
+        <span class="hint">Writing, art, or work you want to share. One file. Not required.</span>
+        <input type="file" id="portfolio" name="portfolio">
       </div>
 
       <!-- ---- optional money bubble: pop it or leave it ---- -->

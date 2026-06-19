@@ -24,14 +24,13 @@
     ['/aa', 'prominent'],
     ['/ohm-dome', 'prominent'],
     ['/agora', 'prominent'],
-    ['/sabachtan-seminar', 'prominent'],
     ['/florilegium', 'prominent'],
     ['/leizu', 'subtle'],
     ['/saul', 'subtle'],
     ['/apply', 'subtle'],
     ['/polymythseminars', 'subtle'],
     ['/seminars', 'subtle'],
-    ['/festivals', 'subtle'],
+    ['/polymythseminars', 'subtle'],
     ['/teacherresources', 'subtle'],
     ['/marginalia', 'subtle'],
     ['/nutrition', 'subtle'],
@@ -56,49 +55,67 @@
 
   function mountGeometry() {
     if (!window.PolymythMandala || !window.PolymythMandala.build) return;
-    // Respect pages that already run their own geometry.
-    if (document.getElementById('geo') || document.getElementById('printCv') ||
-        document.querySelector('[class*="project-"]')) return;
+    // ONE engine, ONE layer for the whole site. Pages running the bespoke home
+    // rig keep theirs (#geo present); '/main' opts out by tier. Everything else
+    // mounts the single #indraLayer below. A page's project- color class no
+    // longer suppresses the web, since the web is now the only geometry it has.
+    if (document.getElementById('geo') || document.getElementById('printCv')) return;
     var tier = tierFor(window.location.pathname);
     if (tier === 'off') return;
 
-    var seed = seedOf(window.location.pathname);
-    var rot = (seed % 360);
-    var isHome = window.location.pathname === '/' || window.location.pathname === '/index.html';
-    var opts;
-    if (isHome) {
-      // The home node map sits inside a LARGER Indra's web: a wider gasket plus
-      // a second offset layer with jewels, kept faint so the map stays the figure.
-      opts = { gaskets: [{ rot: rot, scale: 1.4, op: 0.10 }, { rot: (rot + 137) % 360, scale: 0.8, op: 0.07 }],
-               flowers: !mobile, jewels: true, maxDepth: mobile ? 5 : 7, minRadius: mobile ? 2.4 : 0.9 };
-    } else if (tier === 'prominent') {
-      opts = { gaskets: [{ rot: rot, scale: 1, op: 0.14 }, { rot: (rot + 137) % 360, scale: 0.62, op: 0.09 }],
-               flowers: !mobile, jewels: true, maxDepth: mobile ? 5 : 7, minRadius: mobile ? 2.4 : 0.9 };
-    } else {
-      opts = { gaskets: [{ rot: rot, scale: 1, op: 0.07 }],
-               flowers: false, jewels: !mobile, maxDepth: mobile ? 4 : 6, minRadius: mobile ? 3.5 : 1.6 };
+    // ONE canonical gasket, byte-identical on every page. Distinctness comes
+    // entirely from the per-page FOCUS below: a stable offset, zoom, and
+    // rotation into this same gasket. The geometry is the same; each page
+    // looks through a different window onto it.
+    function canonOpts() {
+      return {
+        gaskets: [
+          { rot: 0,                  scale: 1,                op: 0.62 },
+          { rot: Math.PI * 0.42,     scale: 1 / 1.618,        op: 0.46 },
+          { rot: Math.PI * 0.78,     scale: 1 / (1.618 * 1.618), op: 0.34 }
+        ],
+        flowers: !mobile, jewels: true,
+        maxDepth: mobile ? 5 : 7, minRadius: mobile ? 2.4 : 0.9
+      };
     }
+
+    var seed = seedOf(window.location.pathname);
+    // Decorrelated focus params drawn from the path hash, so each page frames a
+    // different region of the identical gasket and the framing is stable across
+    // reloads. Scroll drifts on top so the substrate is never static.
+    var fScale = 1.55 + ((seed % 1000) / 1000) * 1.35;            // 1.55 .. 2.90
+    var fTx    = (((seed >>> 10) % 360) - 180);                   // -180 .. 180
+    var fTy    = (((seed >>> 19) % 360) - 180);                   // -180 .. 180
+    var fRot   = (seed % 360);                                    // 0 .. 360
+    // Register sets visibility, not shape: experimental pages read the web
+    // louder, professional pages quieter, over the same gasket.
+    var op = tier === 'prominent' ? 0.5 : 0.26;
 
     var layer = document.createElement('div');
     layer.id = 'indraLayer';
     layer.setAttribute('aria-hidden', 'true');
-    layer.innerHTML = window.PolymythMandala.build(opts);
+    layer.style.opacity = op.toFixed(2);
+    layer.style.transformOrigin = '50% 50%';
+    layer.innerHTML = window.PolymythMandala.build(canonOpts());
     document.body.appendChild(layer);
 
-    if (reduced) return;
-    // Parallax + slow drift: transform-only, rAF-throttled. Browser zoom and
-    // window resize regenerate, so the web refits organically at any zoom.
+    function baseTransform(p) {
+      var y = window.scrollY || 0;
+      var driftDeg = tier === 'prominent' ? 8 : 3;
+      return 'translate(' + fTx.toFixed(1) + 'px,' + (fTy - y * (tier === 'prominent' ? 0.12 : 0.06)).toFixed(1) + 'px)' +
+             ' rotate(' + (fRot + p * driftDeg).toFixed(2) + 'deg)' +
+             ' scale(' + (fScale + p * 0.18).toFixed(3) + ')';
+    }
+
+    if (reduced) { layer.style.transform = baseTransform(0); return; }
+
     var ticking = false;
-    var factor = tier === 'prominent' ? 0.12 : 0.05;
     function frame() {
       ticking = false;
       var y = window.scrollY || 0;
       var docH = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       var p = Math.min(1, y / docH);
-      layer.style.transform =
-        'translateY(' + (-y * factor).toFixed(1) + 'px)' +
-        ' rotate(' + (p * (tier === 'prominent' ? 8 : 3)).toFixed(2) + 'deg)' +
-        ' scale(' + (1 + p * 0.04).toFixed(3) + ')';
+      layer.style.transform = baseTransform(p);
     }
     function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -107,11 +124,9 @@
       clearTimeout(rT);
       rT = setTimeout(function () {
         mobile = window.innerWidth < 768;
-        layer.innerHTML = window.PolymythMandala.build(opts);
+        layer.innerHTML = window.PolymythMandala.build(canonOpts());
         frame();
-        // The rebuild replaced every circle, so the ecosystem was running on
-        // dead nodes. Re-seat it on the fresh geometry, otherwise the web
-        // goes static after the first zoom or resize.
+        // Rebuild replaced every circle; re-seat the ecosystem on fresh nodes.
         mountEcosystem(layer);
       }, 220);
     }, { passive: true });
