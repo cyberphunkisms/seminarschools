@@ -978,6 +978,7 @@ textarea:focus-visible,
   </nav>
 
   <div class="actions">
+    <button type="button" id="modeToggle" aria-label="Switch CV ordering between chronological and thematic">⇄ Chronological</button>
     <button type="button" id="saveBtn" class="save-btn">Save as PDF</button>
     <button type="button" id="shareBtn">⎘ Share Link</button>
   </div>
@@ -1350,11 +1351,14 @@ function syncUrlToFilter() {
   const newPath = cats.length === 0 ? '/saul/' : '/saul/' + cats.join('/');
   // Language rides as a query param so shared links reproduce the language
   // tab exactly like the category tabs. English stays unmarked.
-  const newSearch = lang && lang !== 'en' ? '?lang=' + lang : '';
+  const sp = [];
+  if (lang && lang !== 'en') sp.push('lang=' + lang);
+  if (cvMode === 'theme') sp.push('mode=theme');
+  const newSearch = sp.length ? '?' + sp.join('&') : '';
   const target = newPath + newSearch;
   if (window.location.pathname + window.location.search !== target || window.location.hash) {
     try {
-      window.history.replaceState({ cats, lang }, '', target);
+      window.history.replaceState({ cats, lang, mode: cvMode }, '', target);
     } catch (e) {
       // history.replaceState can fail in some sandboxed contexts; ignore silently
     }
@@ -1434,6 +1438,9 @@ let lettersExpanded = new Set();
 // PERF caches: only recompute filter results when filter or language changes
 let _lastGroupedKey = null;
 let _lastGrouped = null;
+let cvMode = "chrono"; // "chrono" = by career period, "theme" = grouped by category
+const THEME_ORDER = ["teaching","education","seminarschools","community","performance","volunteer","kitchen"];
+const CAT_LABELS = { teaching:"Teaching", education:"Education", seminarschools:"Seminar Schools", community:"Community", performance:"Performance", volunteer:"Volunteer", kitchen:"Culinary Hospitality" };
 
 // ===========================================================================
 // RENDER
@@ -1562,6 +1569,9 @@ function render() {
 
   // Save button label
   document.getElementById("saveBtn").textContent = t.save;
+  const mt = document.getElementById("modeToggle");
+  mt.textContent = (cvMode === "theme") ? "⇄ Thematic" : "⇄ Chronological";
+  mt.classList.toggle("on", cvMode === "theme");
 
   // PDF subtitle, populated with the localized button labels of currently active
   // category filters. Hidden on screen via CSS; visible only in print.
@@ -1604,15 +1614,22 @@ function render() {
 
   // PERF: cache the grouped list. Only recompute when filter or language changed.
   // This skips the D.filter walk on entry-click renders (which don't change groups).
-  const cacheKey = [...active].sort().join(",") + "|" + lang;
+  const cacheKey = [...active].sort().join(",") + "|" + lang + "|" + cvMode;
   let grouped;
   if (cacheKey === _lastGroupedKey && _lastGrouped) {
     grouped = _lastGrouped;
   } else {
-    grouped = [9,8,7,6,5,4,3,2,1,0].map(i => ({
-      i,
-      items: D.filter(x => x[0] === i && (isFiltered ? tagMatches(active, x[2]) : !x[2].includes("seminarschools")))
-    })).filter(g => g.items.length > 0);
+    if (cvMode === "theme") {
+      grouped = THEME_ORDER.map(cat => ({
+        cat,
+        items: D.filter(x => (isFiltered ? tagMatches(active, x[2]) : !tagsOf(x[2]).includes("seminarschools")) && primaryTag(x[2]) === cat).sort((a, b) => b[0] - a[0])
+      })).filter(g => g.items.length > 0);
+    } else {
+      grouped = [9,8,7,6,5,4,3,2,1,0].map(i => ({
+        i,
+        items: D.filter(x => x[0] === i && (isFiltered ? tagMatches(active, x[2]) : !x[2].includes("seminarschools")))
+      })).filter(g => g.items.length > 0);
+    }
     _lastGroupedKey = cacheKey;
     _lastGrouped = grouped;
   }
@@ -1660,7 +1677,7 @@ function render() {
   }
 
   grouped.forEach(g => {
-    const label = getSectionLabel(g.i);
+    const label = (cvMode === "theme") ? (CAT_LABELS[g.cat] || g.cat) : getSectionLabel(g.i);
     if (label === null) return; // section explicitly hidden for this filter
     const sec = document.createElement("section");
     sec.className = "cv-section";
@@ -1679,7 +1696,7 @@ function render() {
       const url = item[5];
       const desc = item[6] ? getText(item[6], "en") : null;
       const domain = url ? url.replace(/^https?:\/\//, "").replace(/\/.*$/, "") : null;
-      const entryId = `e-${g.i}-${itemIdx}`;
+      const entryId = `e-${cvMode === "theme" ? g.cat : g.i}-${itemIdx}`;
       const isOpen = openEntryId === entryId;
       const dotColor = CATS[primaryTag(item[2])]?.color || "#999";
       const cls = "entry" + (isFiltered ? " match" : "") + (isOpen ? " open" : "");
@@ -1813,13 +1830,22 @@ document.getElementById("saveBtn").addEventListener("click", () => {
   window.print();
 });
 
+document.getElementById("modeToggle").addEventListener("click", () => {
+  cvMode = (cvMode === "theme") ? "chrono" : "theme";
+  openEntryId = null;
+  render();
+  syncUrlToFilter();
+});
+
 document.getElementById("shareBtn").addEventListener("click", () => {
   try {
     // Build canonical share URL: origin + /saul/<sorted cats joined by />
     const cats = [...active].sort();
     const path = cats.length === 0 ? '/saul/' : '/saul/' + cats.join('/');
-    const langPart = lang && lang !== 'en' ? '?lang=' + lang : '';
-    const url = window.location.origin + path + langPart;
+    const sp = [];
+    if (lang && lang !== 'en') sp.push('lang=' + lang);
+    if (cvMode === 'theme') sp.push('mode=theme');
+    const url = window.location.origin + path + (sp.length ? '?' + sp.join('&') : '');
     navigator.clipboard.writeText(url);
     const btn = document.getElementById("shareBtn");
     btn.textContent = "✓ Copied";
@@ -1837,15 +1863,17 @@ document.getElementById("shareBtn").addEventListener("click", () => {
 try {
   const routedCats = parseRoute();
   const routedLang = parseLangFromUrl();
+  const routedMode = new URLSearchParams(window.location.search).get('mode');
+  if (routedMode === 'theme') cvMode = 'theme';
   if (routedLang) {
     lang = routedLang;
     document.querySelectorAll('#langs button').forEach(x =>
       x.classList.toggle('active', x.dataset.lang === routedLang));
   }
-  if ((routedCats && routedCats.length > 0) || routedLang) {
+  if ((routedCats && routedCats.length > 0) || routedLang || routedMode === 'theme') {
     if (routedCats && routedCats.length > 0) active = new Set(routedCats);
     // Normalize URL to canonical sorted slash-stacked form on load,
-    // keeping the lang param when one is active.
+    // keeping the lang and mode params when active.
     syncUrlToFilter();
   }
 } catch (e) {}
@@ -1857,6 +1885,8 @@ window.addEventListener("popstate", () => {
     active = new Set(cats);
     const l = parseLangFromUrl();
     lang = l || 'en';
+    const m = new URLSearchParams(window.location.search).get('mode');
+    cvMode = (m === 'theme') ? 'theme' : 'chrono';
     document.querySelectorAll('#langs button').forEach(x =>
       x.classList.toggle('active', x.dataset.lang === lang));
     render();
@@ -2000,11 +2030,20 @@ function buildPrintCv() {
   };
 
   var secs = '';
-  for (var i=9; i>=1; i--) {
-    var items = D.filter(function(x){ return x[0]===i && !tagsOf(x[2]).includes('seminarschools') && !isCert(x) && (!isFiltered || tagMatches(active, x[2])); });
-    if (!items.length) continue;
-    var secName = esc((t.secs||UI.en.secs)[i] || UI.en.secs[i]);
-    secs += '<div class="sec block"><div class="sh">'+secName+'</div><table class="rows">'+items.map(rowHtml).join('')+'</table></div>';
+  if (cvMode === "theme") {
+    THEME_ORDER.forEach(function(cat){
+      var items = D.filter(function(x){ return tagsOf(x[2])[0]===cat && x[0]>=1 && !tagsOf(x[2]).includes('seminarschools') && !isCert(x) && (!isFiltered || tagMatches(active, x[2])); }).sort(function(a,b){ return b[0]-a[0]; });
+      if (!items.length) return;
+      var secName = esc(CAT_LABELS[cat] || cat);
+      secs += '<div class="sec block"><div class="sh">'+secName+'</div><table class="rows">'+items.map(rowHtml).join('')+'</table></div>';
+    });
+  } else {
+    for (var i=9; i>=1; i--) {
+      var items = D.filter(function(x){ return x[0]===i && !tagsOf(x[2]).includes('seminarschools') && !isCert(x) && (!isFiltered || tagMatches(active, x[2])); });
+      if (!items.length) continue;
+      var secName = esc((t.secs||UI.en.secs)[i] || UI.en.secs[i]);
+      secs += '<div class="sec block"><div class="sh">'+secName+'</div><table class="rows">'+items.map(rowHtml).join('')+'</table></div>';
+    }
   }
 
   // Credentials follow the same per-tab anchoring as the on-screen CV
@@ -2068,7 +2107,7 @@ function buildPrintCv() {
     }).filter(Boolean).join(' ');
   }
   var summaryText = esc(summaryRaw);
-  var compHtml = COMPETENCIES.map(function(c,idx){ return (idx?'<span class="m">&#9642;</span>':'<span class="m" style="margin-left:0">&#9642;</span>')+esc(c); }).join('');
+  var compHtml = COMPETENCIES.map(function(c,idx){ var mk=(idx?'<span class="m">&#9642;</span>':'<span class="m" style="margin-left:0">&#9642;</span>'); return c.length<=42?('<span style="white-space:nowrap">'+mk+esc(c)+'</span>'):(mk+esc(c)); }).join('');
 
   var css = [
     "#printCv{font-family:Georgia,'Times New Roman','Liberation Serif',serif;color:#1c1c1c;background:#fff;font-size:10.5pt;line-height:1.4;}",
@@ -2099,7 +2138,8 @@ function buildPrintCv() {
     "#printCv .edet{color:#4f4f4f;}",
     "#printCv .certs{margin-top:9pt;}",
     "#printCv .ccol{display:inline-block;vertical-align:top;width:48%;margin-right:2%;}",
-    "#printCv .ccol .ci{display:block;padding:0.6pt 0;font-size:9pt;line-height:1.4;color:#2d2d2d;}"
+    "#printCv .ccol .ci{display:block;padding:0.6pt 0 0.6pt 9pt;text-indent:-9pt;font-size:9pt;line-height:1.4;color:#2d2d2d;}"
+    + "#printCv .ccol .ci::before{content:\"\\2023\\00a0\";color:#7A2632;}"
   ].join('\n');
 
   host.innerHTML = '<style>'+css+'</style>'

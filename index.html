@@ -45,19 +45,20 @@ a{color:inherit;text-decoration:none;}
 
 /* ---------- hero stage ---------- */
 .stage{position:relative;width:100%;height:78vh;min-height:540px;overflow:hidden;border-bottom:1px solid var(--line);}
-#web{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab;}
-#web.dragging{cursor:grabbing;}
-.thread{stroke:var(--ink);stroke-width:.6;opacity:.13;transition:opacity .25s,stroke-width .25s;fill:none;}
+#web{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:default;}
+.thread{stroke:var(--ink);stroke-width:.6;opacity:.13;transition:opacity .12s,stroke-width .12s;fill:none;}
 .ring{fill:none;stroke:var(--ink);opacity:.06;}
-.node{cursor:pointer;}
-.node .halo{fill:var(--n);opacity:0;transition:opacity .25s,r .25s;}
-.node .dot{fill:var(--bg);stroke:var(--n);stroke-width:2;transition:transform .22s cubic-bezier(.2,.9,.3,1.4),stroke-width .2s;transform-box:fill-box;transform-origin:center;}
-.node .lab{font-family:var(--mono);font-size:11px;letter-spacing:.06em;fill:var(--ink);transition:fill .2s;paint-order:stroke;stroke:var(--bg);stroke-width:3px;}
-.node.core .dot{fill:var(--ink);stroke:var(--ink);}
-.node.core .lab{font-family:var(--serif);font-style:italic;font-size:17px;stroke-width:4px;}
-.node:hover .dot,.node:focus-visible .dot,.node.on .dot{stroke-width:3;}
-.node:hover .halo,.node:focus-visible .halo,.node.on .halo{opacity:.16;}
-.node:hover .lab,.node:focus-visible .lab,.node.on .lab{fill:var(--n);}
+.jewel{cursor:pointer;}
+.jewel .halo{fill:var(--n);opacity:0;}
+.jewel .dot{fill:var(--bg);stroke:var(--n);stroke-width:2;}
+.jewel .lab{font-family:var(--mono);font-size:11px;letter-spacing:.06em;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:3px;}
+.jewel.core .dot{fill:var(--ink);stroke:var(--ink);}
+.jewel.core .lab{font-family:var(--serif);font-style:italic;font-size:17px;stroke-width:4px;}
+.jewel:hover .dot,.jewel:focus-visible .dot,.jewel.on .dot{stroke-width:3;}
+.jewel:hover .lab,.jewel:focus-visible .lab,.jewel.on .lab{fill:var(--n);}
+/* The constellation must NOT inherit alive.css .node/[role]/[tabindex] motion. Frozen jewels. */
+#web .jewel,#web .jewel *{transition:none!important;animation:none!important;transform:none!important;}
+#web .jewel:hover,#web .jewel:focus,#web .jewel:focus-visible,#web .jewel:active{transform:none!important;filter:none!important;}
 .thread.lit{opacity:.5;stroke:var(--litc);stroke-width:1.3;}
 
 /* focus detail panel */
@@ -120,7 +121,7 @@ a{color:inherit;text-decoration:none;}
 
 <section class="stage" aria-label="The Seminar Schools ecosystem">
   <svg id="web" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Interactive map of the projects"></svg>
-  <div class="hint" aria-hidden="true">drag to roam<br>scroll to zoom<br>tap a jewel</div>
+  <div class="hint" aria-hidden="true">tap a jewel</div>
   <div class="panel" id="panel" role="status" aria-live="polite"></div>
   <button class="descend-sq" id="descendSq" type="button" aria-label="Scroll down into the page" title="Scroll down">&#8595;</button>
 </section>
@@ -154,15 +155,15 @@ a{color:inherit;text-decoration:none;}
 const C = ['--c1','--c2','--c3','--c4','--c5','--c6','--c7'];
 const cv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const NODES = [
-  {id:'core', label:'Seminar Schools', href:'/', tier:0, c:'--ink', k:'The organism', d:'Everything below is one body. Start anywhere; every path reflects the whole.'},
+  {id:'core', label:'Seminar Schools', href:'/main', tier:0, c:'--ink', k:'The organism', d:'Everything below is one body, so wherever you begin, the path still reflects the whole.'},
   {id:'leizu', label:'Leizu Academy', href:'/leizu', tier:1, c:'--c1', k:'Tutoring · IB & admissions', d:'One-on-one and seminar tutoring toward the Ontario curriculum, the IB Diploma, and university admissions.'},
   {id:'teach', label:'Teacher Resources', href:'/teacherresources/', tier:1, c:'--c7', k:'Free for teachers', d:'Classroom-ready materials mapped by subject and collection, built and checked against real teaching.'},
-  {id:'agora', label:'The Agora', href:'/agora/', tier:1, c:'--c2', k:'Free public seminar', d:'The free public seminar at Earl Bales Park or online. Read the text ahead, then show up. No registration.'},
+  {id:'agora', label:'The Agora', href:'/agora/', tier:1, c:'--c2', k:'Free public seminar', d:'A free public seminar at Earl Bales Park or online, where you read the text ahead and then simply show up, with nothing to register.'},
   {id:'calendar', label:'Lecture Calendar', href:'/polymythseminars/', tier:2, c:'--c3', k:'Free events · every weeknight', d:'Every free public lecture, reading, and screening across Toronto, gathered into one running calendar.'},
   {id:'marginalia', label:'Marginalia', href:'/marginalia', tier:2, c:'--c6', k:'Essays on the talks', d:'Each essay works through one free lecture attended around Toronto, written within days of the talk.'},
-  {id:'polymyth', label:'polymorphousmythology', href:'/polymyth/methodologylist', tier:2, c:'--c4', k:'The framework', d:'How symbols and figures move across unrelated works and gather meaning through use. The engine under all of it.'},
-  {id:'bb', label:'bookwormburrows', href:'/bookwormcard/', tier:3, c:'--c5', k:'Learning game · live', d:'A dimensional-traveling game where any text becomes a world to visit. Scan the code, make a character, play.'},
-  {id:'ohm', label:'Ohm Dome', href:'/ohm-dome/', tier:3, c:'--c5', k:'Public art proposal', d:'A biometric-responsive LED dome for public space in Toronto. Heart rate, breath, and proximity drive the light.'},
+  {id:'polymyth', label:'polymorphousmythology', href:'/polymyth/methodologylist', tier:2, c:'--c4', k:'The framework', d:'How symbols and figures move across unrelated works and gather meaning through use, the engine running beneath everything else here.'},
+  {id:'bb', label:'bookwormburrows', href:'/bookwormcard/', tier:3, c:'--c5', k:'Learning game · live', d:'A dimensional-traveling game where any text becomes a world to visit, so you scan the code, make a character, and play.'},
+  {id:'ohm', label:'Ohm Dome', href:'/ohm-dome/', tier:3, c:'--c5', k:'Public art proposal', d:'A biometric-responsive LED dome for public space in Toronto, where heart rate, breath, and proximity drive the light.'},
   {id:'sabachtan', label:'Sabachtan Seminar', href:'/agora/#sabachtan', tier:3, c:'--c6', k:'The ground', d:'The gnostic seminar at the base of the framework, where the reading turns to first questions.'},
 ];
 const CLUSTERS = [ ['leizu','teach','agora'], ['calendar','marginalia'], ['polymyth','bb','sabachtan'] ];
@@ -202,15 +203,15 @@ let activeId=null;
 function radius(t){return t===0?22:t===1?12:t===2?10:8;}
 NODES.forEach(n=>{
   const p=pos[n.id], col=cv(n.c);
-  const g=el('g',{class:'node'+(n.tier===0?' core':''),tabindex:'0',role:'link','aria-label':n.label,transform:`translate(${p.x} ${p.y})`});
+  const g=el('g',{class:'jewel'+(n.tier===0?' core':''),tabindex:'0',role:'link','aria-label':n.label});
   g.style.setProperty('--n',col);
   const r=radius(n.tier);
-  g.appendChild(el('circle',{class:'halo',r:r*2.6}));
-  g.appendChild(el('circle',{class:'dot',r:r}));
-  const lab=el('text',{class:'lab',x:0,y:r+15,'text-anchor':'middle'}); lab.textContent=n.label;
+  g.appendChild(el('circle',{class:'halo',cx:p.x,cy:p.y,r:r*2.6}));
+  g.appendChild(el('circle',{class:'dot',cx:p.x,cy:p.y,r:r}));
+  const lab=el('text',{class:'lab',x:p.x,y:p.y+r+15,'text-anchor':'middle'}); lab.textContent=n.label;
   g.appendChild(lab);
   const focusNode=()=>{
-    if(activeId&&activeId!==n.id){const pg=document.querySelector('.node.on');if(pg)pg.classList.remove('on');}
+    if(activeId&&activeId!==n.id){const pg=document.querySelector('.jewel.on');if(pg)pg.classList.remove('on');}
     activeId=n.id; g.classList.add('on');
     (threadEls[n.id]||[]).forEach(t=>{t.classList.add('lit');t.style.setProperty('--litc',col);});
     panel.style.setProperty('--n',col);
@@ -221,38 +222,20 @@ NODES.forEach(n=>{
   g.addEventListener('mouseenter',focusNode);
   g.addEventListener('focus',focusNode);
   g.addEventListener('mouseleave',()=>{ if(activeId===n.id){} blur(); });
-  const enter=()=>{ if(n.id==='core'){ const tgt=document.getElementById('index'); if(tgt) tgt.scrollIntoView({behavior:'smooth',block:'start'}); } else { location.href=n.href; } };
+  const enter=()=>{ location.href=n.href; };
   g.addEventListener('click',enter);
   g.addEventListener('keydown',e=>{ if(e.key==='Enter') enter(); });
   stage.appendChild(g);
 });
 
-// ---- spring zoom + drag (the substrate stays alive, the taste stays calm) -
-let scale=1,sT=1,sV=0, tx=0,txT=0,txV=0, ty=0,tyT=0,tyV=0, dragging=false,lx=0,ly=0;
-const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-function apply(){ stage.setAttribute('transform',`translate(${CX+tx} ${CY+ty}) scale(${scale}) translate(${-CX} ${-CY})`); }
-let raf=null;
-function wake(){ if(raf===null && !reduce){ raf=requestAnimationFrame(frame); } }
-let down=false,downX=0,downY=0,moved=false;
-svg.addEventListener('wheel',e=>{ e.preventDefault(); sT=Math.min(2.4,Math.max(.7, sT*(e.deltaY<0?1.08:0.93))); wake(); },{passive:false});
-svg.addEventListener('pointerdown',e=>{ down=true; moved=false; downX=lx=e.clientX; downY=ly=e.clientY; });
-svg.addEventListener('pointermove',e=>{ if(!down)return; if(!moved && Math.hypot(e.clientX-downX,e.clientY-downY)>8){ moved=true; dragging=true; svg.classList.add('dragging'); try{svg.setPointerCapture(e.pointerId);}catch(_){} } if(dragging){ const k=(svg.viewBox.baseVal.width/svg.clientWidth); txT+=(e.clientX-lx)*k; tyT+=(e.clientY-ly)*k; lx=e.clientX; ly=e.clientY; wake(); } });
-addEventListener('pointerup',()=>{ down=false; dragging=false; svg.classList.remove('dragging'); });
-function clampPan(v){return Math.max(-260,Math.min(260,v));}
-function frame(){
-  txT=clampPan(txT); tyT=clampPan(tyT);
-  sV=(sV+(sT-scale)*0.12)*0.8; scale+=sV;
-  txV=(txV+(txT-tx)*0.12)*0.8; tx+=txV;
-  tyV=(tyV+(tyT-ty)*0.12)*0.8; ty+=tyV;
-  apply();
-  if(Math.abs(sV)<1e-4 && Math.abs(sT-scale)<1e-4 && Math.abs(txV)<1e-3 && Math.abs(txT-tx)<1e-3 && Math.abs(tyV)<1e-3 && Math.abs(tyT-ty)<1e-3){
-    scale=sT; tx=txT; ty=tyT; apply(); raf=null; return;
-  }
-  raf=requestAnimationFrame(frame);
-}
-if(reduce){ apply(); } else { raf=requestAnimationFrame(frame); }
-// open core by default so the panel is never empty
-setTimeout(()=>{const core=document.querySelector('.node.core');if(core)core.dispatchEvent(new Event('mouseenter'));},400);
+// The constellation holds still. No zoom, no drag, no spring, no auto-motion.
+// Seed the panel with the core so it is never empty, without lighting any node.
+(function(){
+  const core=NODES[0];
+  panel.style.setProperty('--n',cv(core.c));
+  panel.innerHTML=`<div class="k">${core.k}</div><h2>${core.label}</h2><p>${core.d}</p><a class="go" href="#index">Everything, below &rarr;</a>`;
+  panel.classList.add('show');
+})();
 
 // ---- the mono index (functional, JS-free safe content mirrors this) ------
 const grid=document.getElementById('idxGrid');

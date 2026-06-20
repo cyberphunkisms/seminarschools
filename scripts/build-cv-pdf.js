@@ -132,7 +132,8 @@ const html = `<!doctype html>
               color:#7A2632; margin:0 0 4pt; }
   .cred .cb { font-size:9pt; line-height:1.5; color:#2c2c2c; }
   .cred .colh { display:inline-block; vertical-align:top; width:48%; margin-right:2%; }
-  .cred .colh .ci { display:block; padding:0.6pt 0; line-height:1.5; }
+  .cred .colh .ci { display:block; padding:0.6pt 0 0.6pt 9pt; text-indent:-9pt; line-height:1.5; }
+  .cred .colh .ci::before { content:"\\2023\\00a0"; color:#7A2632; }
 </style>
 </head>
 <body>

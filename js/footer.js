@@ -15,7 +15,6 @@
         'border-top:1px solid currentColor;border-color:color-mix(in srgb,currentColor 18%,transparent);}',
         '.ss-foot .ss-brand{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;opacity:.85;margin-bottom:1.3rem;}',
         '.ss-foot .ss-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.5rem 1.2rem;}',
-        '.ss-foot h3{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;opacity:.55;font-weight:500;margin:0 0 .55rem;}',
         '.ss-foot a{display:block;color:inherit;text-decoration:none;font-size:.86rem;line-height:1.95;',
         'opacity:.82;border-bottom:1px solid transparent;width:max-content;max-width:100%;transition:opacity .15s,border-color .15s;}',
         '.ss-foot a:hover,.ss-foot a:focus-visible{opacity:1;border-bottom-color:currentColor;}',
@@ -25,15 +24,15 @@
     }
 
     var cols = [
-      ['Learn', [['Leizu Academy', '/leizu'], ['Teacher Resources', '/teacherresources/'], ['AI Teacher Resources', '/aitr/'], ['The Agora', '/agora/']]],
+      ['Learn', [['Leizu Academy', '/leizu'], ['Teacher Resources', '/teacherresources/'], ['The Agora', '/agora/']]],
       ['What\u2019s on', [['Lecture Calendar', '/polymythseminars/'], ['Marginalia', '/marginalia']]],
-      ['The work', [['polymorphousmythology', '/polymyth/methodologylist'], ['bookwormburrows', '/bookwormcard/'], ['Sabachtan Seminar', '/agora/#sabachtan']]],
+      ['The work', [['polymorphousmythology', '/polymyth/methodologylist'], ['bookwormburrows', '/bookwormcard/']]],
       ['Projects', [['Ohm Dome', '/ohm-dome/'], ['Festivals', '/polymythseminars/'], ['Florilegium', '/florilegium/'], ['Nutrition', '/nutrition/']]],
       ['About', [['Full CV', '/saul'], ['Main', '/main'], ['Sitemap', '/polymyth/sitemap/'], ['Email', 'mailto:saulnassau@protonmail.com']]]
     ];
     var html = '<div class="ss-brand">Seminar Schools.</div><div class="ss-cols">';
     cols.forEach(function (c) {
-      html += '<div><h3>' + c[0] + '</h3>';
+      html += '<div>';
       c[1].forEach(function (l) { html += '<a href="' + l[1] + '">' + l[0] + '</a>'; });
       html += '</div>';
     });
