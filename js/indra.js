@@ -90,7 +90,7 @@
     var fRot   = (seed % 360);                                    // 0 .. 360
     // Register sets visibility, not shape: experimental pages read the web
     // louder, professional pages quieter, over the same gasket.
-    var op = tier === 'prominent' ? 0.5 : 0.26;
+    var op = tier === 'prominent' ? 0.5 : 0.40;
 
     var layer = document.createElement('div');
     layer.id = 'indraLayer';
@@ -102,8 +102,8 @@
 
     function baseTransform(p) {
       var y = window.scrollY || 0;
-      var driftDeg = tier === 'prominent' ? 8 : 3;
-      return 'translate(' + fTx.toFixed(1) + 'px,' + (fTy - y * (tier === 'prominent' ? 0.12 : 0.06)).toFixed(1) + 'px)' +
+      var driftDeg = tier === 'prominent' ? 8 : 6;
+      return 'translate(' + fTx.toFixed(1) + 'px,' + (fTy - y * (tier === 'prominent' ? 0.12 : 0.10)).toFixed(1) + 'px)' +
              ' rotate(' + (fRot + p * driftDeg).toFixed(2) + 'deg)' +
              ' scale(' + (fScale + p * 0.18).toFixed(3) + ')';
     }
