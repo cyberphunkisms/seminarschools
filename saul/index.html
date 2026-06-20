@@ -1893,49 +1893,7 @@ window.addEventListener("popstate", () => {
   } catch (e) {}
 });
 
-// ===========================================================================
-// GEOMETRY (Apollonian gasket - simplified single layer for the CV)
-// ===========================================================================
-function buildGeo() {
-  const SIZE = 1000;
-  const cx = SIZE / 2, cy = SIZE / 2;
-  let svg = `<svg viewBox="-${cx} -${cy} ${SIZE} ${SIZE}" xmlns="http://www.w3.org/2000/svg">`;
-  svg += `<g fill="none" stroke="currentColor" stroke-width="0.5">`;
-
-  const R = 380;
-  // Outer circle
-  svg += `<circle cx="0" cy="0" r="${R}"/>`;
-
-  // Six interior tangent circles
-  const r1 = R / 3;
-  for (let i = 0; i < 6; i++) {
-    const a = (i / 6) * Math.PI * 2;
-    const d = R - r1;
-    svg += `<circle cx="${(d * Math.cos(a)).toFixed(1)}" cy="${(d * Math.sin(a)).toFixed(1)}" r="${r1.toFixed(1)}"/>`;
-  }
-
-  // Central
-  svg += `<circle cx="0" cy="0" r="${r1.toFixed(1)}"/>`;
-
-  // Smaller satellites
-  const r2 = r1 / 2.5;
-  for (let i = 0; i < 12; i++) {
-    const a = (i / 12) * Math.PI * 2 + Math.PI / 12;
-    const d = R - r2 - 5;
-    svg += `<circle cx="${(d * Math.cos(a)).toFixed(1)}" cy="${(d * Math.sin(a)).toFixed(1)}" r="${r2.toFixed(1)}"/>`;
-  }
-
-  // Inner ring
-  for (let i = 0; i < 6; i++) {
-    const a = (i / 6) * Math.PI * 2 + Math.PI / 6;
-    const d = r1 * 0.85;
-    svg += `<circle cx="${(d * Math.cos(a)).toFixed(1)}" cy="${(d * Math.sin(a)).toFixed(1)}" r="${(r2 * 0.7).toFixed(1)}"/>`;
-  }
-
-  svg += `</g></svg>`;
-  document.getElementById("geoLayer").innerHTML = svg;
-}
-buildGeo();
+// Geometry handled by indra.js (unified engine, per-page focus via path seed)
 
 // Set page title based on variant
 function updateTitle() {
@@ -2227,6 +2185,6 @@ window.addEventListener('beforeprint', buildPrintCv);
 <script src="/js/mandala.js" defer></script>
 <script src="/js/indra.js" defer></script>
 <script src="/js/footer.js" defer></script>
-<script>document.addEventListener('DOMContentLoaded',function(){if(window.PolymythMandala&&PolymythMandala.initScrollCamera&&!matchMedia('(prefers-reduced-motion: reduce)').matches){PolymythMandala.initScrollCamera({forceGlobal:true});}});</script>
+<!-- Scroll camera handled by indra.js -->
 </body>
 </html>

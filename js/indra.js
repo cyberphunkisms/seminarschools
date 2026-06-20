@@ -60,7 +60,7 @@
     // rig keep theirs (#geo present); '/main' opts out by tier. Everything else
     // mounts the single #indraLayer below. A page's project- color class no
     // longer suppresses the web, since the web is now the only geometry it has.
-    if (document.getElementById('geo') || document.getElementById('printCv')) return;
+    if (document.getElementById('geo')) return;
     var tier = tierFor(window.location.pathname);
     if (tier === 'off') return;
 
@@ -90,7 +90,7 @@
     var fRot   = (seed % 360);                                    // 0 .. 360
     // Register sets visibility, not shape: experimental pages read the web
     // louder, professional pages quieter, over the same gasket.
-    var op = tier === 'prominent' ? 0.5 : 0.40;
+    var op = tier === 'prominent' ? 0.5 : 0.32;
 
     var layer = document.createElement('div');
     layer.id = 'indraLayer';

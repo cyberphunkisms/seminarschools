@@ -1,7 +1,6 @@
-// === INTAKE FLOW WIRING ===
-// The cart's "Get started" button navigates to the intake form
-// with the selected courses encoded so the teacher sees what
-// the parent was looking at.
+// === INTAKE + PAYMENT WIRING ===
+// Cart "Get started" → intake form with course context
+// Tier buttons → Stripe Payment Links (wired by wireTileCtas)
 
 const PAYMENT_LINKS = {
   starter_block:       'https://buy.stripe.com/eVq5kDcZt5kW2KB6iS6oo07',
@@ -16,7 +15,6 @@ const PAYMENT_LINKS = {
 function buildBookingHandler(){
   const bookButton = document.querySelector('[data-action="book"]');
   if(!bookButton) return;
-
   bookButton.addEventListener('click', (e) => {
     e.preventDefault();
     const ids = typeof selected !== 'undefined' ? Array.from(selected) : [];
@@ -25,8 +23,6 @@ function buildBookingHandler(){
     const price = priceEl ? priceEl.textContent.trim() : '';
     const perEl = panel ? panel.querySelector('.per') : null;
     const per = perEl ? perEl.textContent.trim() : '';
-
-    // Build intake URL with course context
     const params = new URLSearchParams();
     if(ids.length) params.set('courses', ids.join(','));
     if(price) params.set('est', price);
@@ -36,9 +32,16 @@ function buildBookingHandler(){
   });
 }
 
-// Keep wireTileCtas alive but neutered since tiles are now reference-only
-function wireTileCtas(){}
+function wireTileCtas(){
+  document.querySelectorAll('a[data-payment-key]').forEach(function(a){
+    var u = PAYMENT_LINKS[a.dataset.paymentKey];
+    if (!u || u.indexOf('REPLACE') !== -1 || u.indexOf('https://buy.stripe.com/') !== 0) { a.style.display = 'none'; return; }
+    a.href = u;
+  });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(buildBookingHandler, 100);
+  wireTileCtas();
 });
+wireTileCtas();

@@ -987,8 +987,7 @@ footer.colophon a{border-bottom-color:var(--rule);}
 .fee .pay-pick:hover{border-color:var(--mulberry-fruit);color:var(--mulberry-deep);}
 .fee .pay-pick[aria-pressed="true"]{background:var(--mulberry-deep);border-color:var(--mulberry-deep);color:var(--paper);}
 .fee .buy{display:inline-block;background:var(--mulberry-deep);color:var(--paper);text-decoration:none;font-family:var(--display);font-size:1.12rem;padding:0.7rem 1.8rem;border-radius:3px;border:none;cursor:pointer;margin-top:1.1rem;}
-.fee .buy.ref{background:transparent;border:1px solid var(--rule);color:var(--ink-soft);cursor:default;pointer-events:none;font-size:0.78rem;text-align:center;padding:0.6rem 1rem;}
-.buy:hover{background:var(--mulberry-fruit-ripe);transform:translateY(-1.5px);}
+.fee .buy:hover{background:var(--mulberry-fruit-ripe);transform:translateY(-1.5px);}
 .fee .go{display:inline-block;margin-top:1.1rem;font-family:var(--display);font-size:1.08rem;color:var(--mulberry-deep);text-decoration:none;}
 .fee .go:hover{color:var(--mulberry-fruit);}
 .fee .fee-fine{margin-top:1.4rem;border-top:1px solid var(--rule);padding-top:1rem;font-style:italic;color:var(--ink-soft);font-size:1rem;line-height:1.7;}
@@ -1200,7 +1199,7 @@ footer.colophon a{border-bottom-color:var(--rule);}
           <li>A starting assessment</li>
           <li>First session refundable</li>
         </ul>
-        <span class="buy ref">4 sessions · $480</span>
+        <a class="buy" data-payment-key="starter_block" href="https://buy.stripe.com/eVq5kDcZt5kW2KB6iS6oo07">Begin the block</a>
       </div>
       <div class="card">
         <h3 class="tier-name">Term</h3>
@@ -1212,7 +1211,7 @@ footer.colophon a{border-bottom-color:var(--rule);}
           <li>Notes after each session</li>
           <li>A monthly check-in</li>
         </ul>
-        <span class="buy ref">$200 + $100/mo × 2</span>
+        <a class="buy" data-payment-key="term" href="https://buy.stripe.com/fZudR99NhaFg1Gx9v46oo0f">Begin the term</a>
       </div>
     </div>
 
@@ -1244,7 +1243,7 @@ footer.colophon a{border-bottom-color:var(--rule);}
         <p>First month refundable, and you can leave prorated. No lock you cannot walk out of.</p>
         <p>Limited to a handful of Forest families a year, and the founding rate holds as long as you stay.</p>
       </div>
-      <span class="buy ref" id="fy-buy">Payment arranged after intake</span>
+      <a class="buy" id="fy-buy" data-payment-key="forest_year_upfront" href="https://buy.stripe.com/bJe28r6B528K84Vaz86oo0d">Begin the year</a>
     </div>
 
     <div class="tier-grid">
@@ -1580,60 +1579,27 @@ const SESSIONS_PER_COURSE = 3;
 function getLang(){return document.documentElement.getAttribute('data-lang')||'en';}
 function L(o){const l=getLang();return o[l]||o.en;}
 
-function getDiscountPct(n){if(n<=1)return 0;if(n===2)return 15;if(n===3)return 17;if(n===4)return 19;if(n===5)return 21;if(n===6)return 22;if(n===7)return 23;if(n<=10)return 25;if(n<=13)return 27;if(n<=16)return 29;return 30;}
+// Old volume discount table removed: Stripe tiers are the pricing truth.
 
 function calculatePricing(n){
-  const sess = n * SESSIONS_PER_COURSE;
   const lang = getLang();
-  const tierWord = {en:'courses',zh:'門課',zhs:'门课',fa:'درس',fr:'cours'}[lang];
-  const sessWord = {en:'sessions',zh:'節',zhs:'节',fa:'جلسه',fr:'séances'}[lang];
-  if(n===0) return {sessions:0,total:0,tier:I18N[lang]['panel.empty'],strike:null,savedPct:0,savedAmt:0,flagship:false,paperFee:0,inPersonFee:0,onlineDiscount:0,onlineCount:0,inPersonCount:0,paperCount:0};
+  const SESSIONS_PER_COURSE = 3;
+  const sess = n * SESSIONS_PER_COURSE;
+  const TOTAL_COURSES = Object.values(COURSES).reduce((s,p)=>s+p.courses.length,0);
+  if(n===0) return {sessions:0,tierKey:null,tierName:I18N[lang]['panel.empty'],price:0,priceDisplay:'',perSession:'',billedAs:'',flagship:false};
   
-  // Count flag distribution across selected courses
-  const selectedIds = Array.from(selected);
-  const inPersonCount = selectedIds.filter(id => inPersonFlagged.has(id)).length;
-  const onlineCount = n - inPersonCount;
-  const paperCount = selectedIds.filter(id => paperFlagged.has(id)).length;
-  
-  // Per-session add-ons aggregated across courses
-  const inPersonFee = inPersonCount * SESSIONS_PER_COURSE * IN_PERSON_FEE_PER_SESSION;
-  const paperFee = paperCount * SESSIONS_PER_COURSE * PAPER_FEE_PER_SESSION;
-  
-  // Forest Year flagship branch
-  if(n>=TOTAL_COURSES-2){
-    const flagshipBase = 8400;
-    // Online discount applies only to the proportion of sessions that are online
-    const onlineSessionPct = sess > 0 ? onlineCount / n : 0;
-    const flagshipOnlineDiscount = Math.round(flagshipBase * onlineSessionPct * (ONLINE_DISCOUNT_PCT/100) / 5) * 5;
-    const flagshipTotal = flagshipBase - flagshipOnlineDiscount + inPersonFee + paperFee;
-    const flagshipStrike = 10800;
-    const flagshipSaved = flagshipStrike - flagshipTotal;
-    return {sessions:sess,total:flagshipTotal,tier:'森林・私塾',strike:flagshipStrike,savedPct:Math.round(flagshipSaved/flagshipStrike*100),savedAmt:flagshipSaved,flagship:true,paperFee,inPersonFee,onlineDiscount:flagshipOnlineDiscount,onlineCount,inPersonCount,paperCount};
+  // Forest Year: when nearly all courses selected
+  if(n >= TOTAL_COURSES - 2){
+    return {sessions:sess,tierKey:'forest_year',tierName:'Forest Year',price:8400,priceDisplay:'$8,400',perSession:'~$87/session',billedAs:'~96 sessions across the year',flagship:true};
   }
   
-  const baseRate = 86.25;
-  const fullPrice = sess * baseRate;
-  const dPct = getDiscountPct(n);
-  let total, strike, savedAmt, savedPct;
-  if(n===1){total=225;strike=null;savedAmt=0;savedPct=0;}
-  else{total=Math.round(fullPrice*(1-dPct/100)/5)*5;strike=total<fullPrice?fullPrice:null;savedAmt=strike?strike-total:0;savedPct=strike?Math.round((savedAmt/strike)*100):0;}
-  
-  // Per-course online discount: 5% off the proportion of sessions that are online
-  const baseAfterBundleDiscount = total;
-  const onlineSessions = onlineCount * SESSIONS_PER_COURSE;
-  const perSessionAfterBundle = sess > 0 ? baseAfterBundleDiscount / sess : 0;
-  const onlineDiscount = Math.round(onlineSessions * perSessionAfterBundle * (ONLINE_DISCOUNT_PCT/100) / 5) * 5;
-  
-  total = baseAfterBundleDiscount - onlineDiscount + inPersonFee + paperFee;
-  
-  // Recompute strike/savings to reflect the online discount
-  if(onlineDiscount > 0){
-    if(!strike) strike = baseAfterBundleDiscount + inPersonFee + paperFee;
-    savedAmt = strike - total;
-    savedPct = Math.round((savedAmt/strike)*100);
+  // Map course count to the Stripe tier that fits
+  if(n <= 2){
+    // 1-2 courses (3-6 sessions) → Starter block
+    return {sessions:sess,tierKey:'starter_block',tierName:'Starter block',price:480,priceDisplay:'$480',perSession:'$120/session',billedAs:'4 sessions, used within a month',flagship:false};
   }
-  
-  return {sessions:sess,total,tier:n+' '+tierWord+' · '+sess+' '+sessWord,strike,savedPct,savedAmt,flagship:false,paperFee,inPersonFee,onlineDiscount,onlineCount,inPersonCount,paperCount};
+  // 3+ courses (9+ sessions) → Term
+  return {sessions:sess,tierKey:'term',tierName:'Term',price:100,priceDisplay:'$100/mo',perSession:'$200 to start, then $100/mo',billedAs:'Any of the five subjects, 3 months',flagship:false};
 }
 
 function buildBookingMailto(){
@@ -1792,8 +1758,8 @@ function updatePricingPanel(){
   const n = selected.size;
   const pricing = calculatePricing(n);
   const lang = getLang();
-  const saveWord = {en:'You save',zh:'省下',zhs:'省下',fa:'صرفه‌جویی',fr:'Économies'}[lang];
-  const perSessionWord = {en:'per session',zh:'每節',zhs:'每节',fa:'به ازای هر جلسه',fr:'par séance'}[lang];
+  const SESSIONS_PER_COURSE = 3;
+  const sess = n * SESSIONS_PER_COURSE;
 
   // Count update with bump animation
   const countEl = document.getElementById('count-num');
@@ -1801,89 +1767,41 @@ function updatePricingPanel(){
   countEl.textContent = n;
   if(n !== oldCount){countEl.classList.add('bump');setTimeout(()=>countEl.classList.remove('bump'),400);}
 
-  // Tier name
+  // Tier name: show course count + recommended tier
   const tierEl = document.getElementById('tier-name');
-  if(pricing.flagship) tierEl.innerHTML = '<span class="han">森林・私塾</span> ' + (lang==='en'?'The Forest year':lang==='fr'?'L\'année Forêt':lang==='zh'?'森林年':lang==='zhs'?'森林年':'سال جنگل');
-  else tierEl.textContent = pricing.tier;
-
-  // Total amount with strikethrough
-  const amountEl = document.getElementById('price-amount');
-  let html = '';
-  if(pricing.strike) html += '<span class="strike">$' + pricing.strike.toLocaleString() + '</span>';
-  html += '$' + pricing.total.toLocaleString();
-  amountEl.innerHTML = html;
-
-  // Per-session unit price
-  const perSessEl = document.getElementById('price-per-session');
-  if(n === 0) perSessEl.textContent = '';
-  else if(pricing.flagship) perSessEl.textContent = '~$73 ' + perSessionWord + ' · 144h';
+  if(n === 0) tierEl.textContent = pricing.tierName;
+  else if(pricing.flagship) tierEl.innerHTML = '<span class="han">森林・私塾</span> Forest Year';
   else {
-    const perSess = Math.round(pricing.total / pricing.sessions);
-    perSessEl.textContent = '$' + perSess + ' ' + perSessionWord;
+    const coursesWord = {en:'courses',zh:'門課',zhs:'门课',fa:'درس',fr:'cours'}[lang];
+    const sessionsWord = {en:'sessions',zh:'節',zhs:'节',fa:'جلسه',fr:'séances'}[lang];
+    tierEl.textContent = n + ' ' + coursesWord + ' · ' + sess + ' ' + sessionsWord + ' → ' + pricing.tierName;
   }
 
-  // Savings line, prominent
-  const savingsEl = document.getElementById('pricing-savings');
-  let savingsHtml = '';
-  if(pricing.savedAmt && pricing.savedPct >= 5){
-    savingsHtml += '<span class="savings-icon">✓</span><span class="savings-amount">' + saveWord + ' $' + pricing.savedAmt.toLocaleString() + '</span><span class="savings-pct">' + pricing.savedPct + '% ' + (lang==='en'?'off':lang==='fr'?'de réduction':lang==='zh'||lang==='zhs'?'折扣':'تخفیف') + '</span>';
-  }
-  // Online discount badge
-  if(pricing.onlineDiscount > 0){
-    const onlineLbl = {en:'Online -$'+pricing.onlineDiscount,zh:'線上 -$'+pricing.onlineDiscount,zhs:'线上 -$'+pricing.onlineDiscount,fa:'آنلاین -$'+pricing.onlineDiscount,fr:'En ligne -'+pricing.onlineDiscount+'$'}[lang];
-    savingsHtml += '<span class="pricing-eco-badge">◯ '+onlineLbl+'</span>';
-  }
-  // In-person fee indicator
-  if(pricing.inPersonFee > 0){
-    const ipLbl = {en:'In-person +$'+pricing.inPersonFee,zh:'面授 +$'+pricing.inPersonFee,zhs:'面授 +$'+pricing.inPersonFee,fa:'حضوری +$'+pricing.inPersonFee,fr:'En personne +'+pricing.inPersonFee+'$'}[lang];
-    savingsHtml += '<span class="pricing-inperson-fee">◉ '+ipLbl+'</span>';
-  }
-  // Paper-fee indicator
-  if(pricing.paperFee > 0){
-    const paperLbl = {en:'Paper +$'+pricing.paperFee,zh:'紙本 +$'+pricing.paperFee,zhs:'纸本 +$'+pricing.paperFee,fa:'کاغذ +$'+pricing.paperFee,fr:'Papier +'+pricing.paperFee+'$'}[lang];
-    savingsHtml += '<span class="pricing-paper-fee">✦ '+paperLbl+'</span>';
-  }
-  if(savingsHtml){
-    savingsEl.innerHTML = savingsHtml;
-    savingsEl.style.display = 'flex';
-  } else {
-    savingsEl.style.display = 'none';
-  }
+  // Price display
+  const amountEl = document.getElementById('price-amount');
+  amountEl.textContent = pricing.priceDisplay;
 
-  // Billed-as line: Stripe charges fixed bundles, so state the real charge.
-  // The displayed total must EQUAL the charge: never quote below what Stripe takes.
+  // Per-session info
+  const perSessEl = document.getElementById('price-per-session');
+  perSessEl.textContent = n === 0 ? '' : pricing.perSession;
+
+  // Billed-as line
   const billedEl = document.getElementById('pricing-billed');
   if(billedEl){
-    if(n === 0 || pricing.flagship){ billedEl.textContent=''; billedEl.style.display='none'; }
+    if(n === 0){ billedEl.textContent=''; billedEl.style.display='none'; }
     else{
-      const bundle = n===1 ? ['3-session bundle',225] : (n<=3 ? ['5-session bundle',380] : ['7-session bundle',458]);
-      const amtEl = document.getElementById('price-amount');
-      if(amtEl){
-        const strike = amtEl.querySelector('s, .strike');
-        let strikeHtml = '';
-        if(strike){
-          const v = Math.round(parseFloat((strike.textContent||'').replace(/[^0-9.]/g,'')) || 0);
-          // Show the comparison only when it is a real saving, in whole dollars.
-          if(v > bundle[1] + 1){
-            strike.textContent = '$' + v;
-            strikeHtml = strike.outerHTML;
-          }
-        }
-        amtEl.innerHTML = strikeHtml + '$' + bundle[1];
-      }
-      const billedWord = {en:'Billed at checkout as',zh:'結帳將以此計費：',zhs:'结帐将以此计费：',fa:'صورتحساب در پرداخت:',fr:'Facturé au paiement :'}[lang];
-      billedEl.textContent = billedWord + ' ' + bundle[0] + ' · $' + bundle[1];
+      billedEl.textContent = pricing.billedAs;
       billedEl.style.display='block';
     }
   }
 
+  // Savings line: clean, no phantom discounts
+  const savingsEl = document.getElementById('pricing-savings');
+  savingsEl.innerHTML = '';
+  savingsEl.style.display = 'none';
+
   const panel = document.getElementById('pricing-panel');
   if(n > 0) panel.classList.add('visible'); else panel.classList.remove('visible');
-
-  // N40, Static fallback mailto remains on the button as graceful-degradation
-  // for JS-disabled visitors. booking-button.js takes over the click when JS
-  // is available. No need to re-set the href on every selection change.
-  // document.getElementById('btn-book').setAttribute('href', buildBookingMailto());
   syncSelectionVisuals();
 }
 
