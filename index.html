@@ -207,15 +207,6 @@ NODES.forEach(n=>{
   const r=radius(n.tier);
   g.appendChild(el('circle',{class:'halo',r:r*2.6}));
   g.appendChild(el('circle',{class:'dot',r:r}));
-  if(n.tier===0){
-    const ri=r-3;
-    const clip=el('clipPath',{id:'coreClip',clipPathUnits:'userSpaceOnUse'});
-    clip.appendChild(el('circle',{cx:0,cy:0,r:ri}));
-    g.appendChild(clip);
-    const img=el('image',{class:'face',x:-ri,y:-ri,width:ri*2,height:ri*2,'clip-path':'url(#coreClip)',preserveAspectRatio:'xMidYMid slice','aria-hidden':'true',href:'/img/saul.jpg'});
-    try{ img.setAttributeNS('http://www.w3.org/1999/xlink','href','/img/saul.jpg'); }catch(_){}
-    g.appendChild(img);
-  }
   const lab=el('text',{class:'lab',x:0,y:r+15,'text-anchor':'middle'}); lab.textContent=n.label;
   g.appendChild(lab);
   const focusNode=()=>{

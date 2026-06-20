@@ -267,8 +267,9 @@
       var tempo = hot > 0 ? base * 0.45 : base; hot = Math.max(0, hot - 1);
       ecoTimer = setTimeout(tick, tempo);
     }
+    // Paint the seeded state once and hold it. The perpetual step loop is
+    // disabled because the per-tick class flip read as a flicker at rest.
     paint();
-    ecoTimer = setTimeout(tick, base);
   }
 
   // Click seeds cooperation at the nearest jewels; attached once for the page.
