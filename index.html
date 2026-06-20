@@ -2,6 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="canonical" href="https://seminarschools.com/">
+<meta property="og:title" content="Seminar Schools. A reading organism in Toronto.">
+<meta property="og:description" content="Seminar Schools is the working organism of Saul Nassau in Toronto: tutoring, free public seminars, a lecture calendar, essays, a learning game, and the polymorphousmythology framework, all one ecosystem.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/">
+<meta property="og:site_name" content="Seminar Schools">
+<meta name="twitter:card" content="summary">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Seminar Schools. A reading organism in Toronto.</title>
 <meta name="description" content="Seminar Schools is the working organism of Saul Nassau in Toronto: tutoring, free public seminars, a lecture calendar, essays, a learning game, and the polymorphousmythology framework, all one ecosystem.">
@@ -120,7 +127,7 @@ a{color:inherit;text-decoration:none;}
 
 <div class="lede">
   <h1>A room of readers working a hard text together reaches what <em>none of them</em> could reach alone.</h1>
-  <p>Seminar Schools is one organism, not a portfolio. A tutoring practice, a free public seminar, a city-wide lecture calendar, a body of essays, a learning game, and the framework underneath them all. Every part reflects the others.</p>
+  <p>Seminar Schools is one organism. A tutoring practice, a free public seminar, a city-wide lecture calendar, a body of essays, a learning game, and the framework underneath them all. Every part reflects the others.</p>
   <div class="id">
     <img class="portrait" src="/img/saul.jpg" width="88" height="88" alt="Saul Karim Nassau" loading="lazy" decoding="async">
     <div class="who">Saul Karim Nassau &middot; MA Philosophy &middot; Toronto and online &middot; saulnassau@protonmail.com</div>
@@ -132,13 +139,9 @@ a{color:inherit;text-decoration:none;}
   <div class="idx-grid" id="idxGrid"></div>
 </main>
 
-<section id="main-stack" aria-label="The full page, below the map">
-  <iframe id="main-frame" src="/main/" title="Seminar Schools, the full page" loading="lazy" scrolling="no" style="width:100%;border:0;display:block;background:transparent;"></iframe>
-</section>
-
 <footer class="foot">
   <a href="/saul">Full CV</a>
-  <a href="#main-stack">Main</a>
+  <a href="/main">Main</a>
   <a href="/florilegium/">Florilegium</a>
   <a href="/nutrition/">Nutrition</a>
   <a href="/polymyth/sitemap/">Sitemap</a>
@@ -271,14 +274,6 @@ NODES.filter(n=>n.tier>0).forEach((n,i)=>{
 </script>
 <script>
 (function(){var d=document.getElementById("descendSq");if(d)d.addEventListener("click",function(){var t=document.querySelector(".lede");if(t)t.scrollIntoView({behavior:"smooth",block:"start"});});})();
-/* /main stacked beneath the home map: same-origin auto-height so it scrolls with the page, no internal scrollbar. */
-(function(){
-  var f=document.getElementById('main-frame');
-  if(!f) return;
-  function fit(){ try{ var d=f.contentWindow.document; f.style.height=((d.documentElement.scrollHeight||d.body.scrollHeight))+'px'; }catch(e){} }
-  f.addEventListener('load',function(){ fit(); setTimeout(fit,400); setTimeout(fit,1500); });
-  window.addEventListener('resize',fit);
-})();
 </script>
 <script src="/js/mandala.js" defer></script>
 <script src="/js/indra.js" defer></script>

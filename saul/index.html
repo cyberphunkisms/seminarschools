@@ -1978,9 +1978,7 @@ function buildPrintCv() {
   var firstSentence = function (txt) {
     var s = String(txt).trim();
     var m = s.match(/^[\s\S]*?[.!?](?=\s|$)/);
-    var out = m ? m[0] : s;
-    if (out.length > 64) { out = out.slice(0,58); out = out.slice(0, out.lastIndexOf(' ')) + '…'; }
-    return out;
+    return m ? m[0] : s;
   };
   var tagsOf = function (c) { return Array.isArray(c) ? c : [c]; };
   var longest = D.reduce(function(a,e){ return Math.max(a, String(e[1]).length); }, 0);
@@ -1995,11 +1993,7 @@ function buildPrintCv() {
     var sub = item[4] ? getText(item[4], lang) : null;
     var noteRaw = (sub && String(sub).trim()) ? String(sub).trim()
       : (item[6] && getText(item[6], lang) && getText(item[6], lang).trim() ? firstSentence(getText(item[6], lang)) : null);
-    if (noteRaw) {
-      var budget = 88 - roleLen;
-      if (budget < 14) { noteRaw = null; }
-      else if (noteRaw.length > budget) { noteRaw = noteRaw.slice(0, budget-1); noteRaw = noteRaw.slice(0, noteRaw.lastIndexOf(' ')).replace(/[.,;:]$/,'') + '…'; }
-    }
+    if (noteRaw && noteRaw.length > (72 - roleLen)) { noteRaw = null; }
     var note = noteRaw ? esc(noteRaw) : null;
     return '<tr><td class="d">'+esc(item[1])+'</td>'
       + '<td class="b" style="border-left-color:'+color+'"><span class="t">'+title+'</span>'+(note?' <span class="n">'+note+'</span>':'')+'</td></tr>';
@@ -2172,16 +2166,7 @@ function fitPrintCvToTwoPages(host) {
         if (pack(zz).pages === 1) { fit1 = zz; break; }
       }
       if (fit1) { z = fit1; }
-      else {
-        // Cannot reach one page legibly; expand so page two carries real weight.
-        z = 1;
-        for (var ze = 1.02; ze <= 1.14; ze += 0.02) {
-          var pe = pack(ze);
-          if (pe.pages > 2) break;
-          z = ze;
-          if (pe.lastFill >= 0.55) break;
-        }
-      }
+      else { z = 1; }
     }
     // lastFill >= 0.5: an honest second page; leave at 1.
   } else {

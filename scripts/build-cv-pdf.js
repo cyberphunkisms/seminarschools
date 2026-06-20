@@ -45,12 +45,7 @@ const isCert = (item) =>
 const firstSentence = (txt) => {
   const t = String(txt).trim();
   const m = t.match(/^[\s\S]*?[.!?](?=\s|$)/);
-  let out = m ? m[0] : t;
-  if (out.length > 140) {
-    out = out.slice(0, 120);
-    out = out.slice(0, out.lastIndexOf(" ")) + "\u2026";
-  }
-  return out;
+  return m ? m[0] : t;
 };
 
 const esc = (s) =>
@@ -73,9 +68,12 @@ const rows = (items) =>
       const cert = isCert(item);
       const color = (CATS[primaryTag(item[2])] || {}).color || "#999";
       const title = esc(item[3].en);
-      const note = (item[4] && item[4].en && item[4].en.trim())
-        ? esc(item[4].en)
-        : (item[6] && item[6].en && item[6].en.trim() ? esc(firstSentence(item[6].en)) : null);
+      const titleLen = String(item[3].en).length;
+      let noteRaw = (item[4] && item[4].en && item[4].en.trim())
+        ? String(item[4].en).trim()
+        : (item[6] && item[6].en && item[6].en.trim() ? firstSentence(item[6].en) : null);
+      if (noteRaw && noteRaw.length > 72 - titleLen) noteRaw = null;
+      const note = noteRaw ? esc(noteRaw) : null;
       return `<div class="row">
   <span class="d">${esc(item[1])}</span><span class="o"><span class="dot${cert ? " sq" : ""}" style="background-color:${color}"></span></span>
   <div class="b">${cert ? '<span class="caret">&#8227;</span> ' : ""}<span class="t${cert ? " tc" : ""}">${title}</span>${note ? ` <span class="n">${note}</span>` : ""}</div>

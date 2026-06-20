@@ -40,6 +40,7 @@
     ['/', 'subtle']
   ];
   function tierFor(path) {
+    if (path === '/' || path === '/index.html') return 'prominent';
     for (var i = 0; i < TIERS.length; i++) {
       if (path === TIERS[i][0] || path.indexOf(TIERS[i][0]) === 0) return TIERS[i][1];
     }
