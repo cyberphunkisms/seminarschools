@@ -7,6 +7,9 @@
 (function() {
   'use strict';
 
+  // Site build stamp — update on every deploy
+  var SITE_BUILD = 'cl78c · 2026-06-24';
+
   // ============================================================
   // 1. Reveal-in observer
   // ============================================================
@@ -164,6 +167,17 @@
   }
 
   // ============================================================
+  // Build stamp — extremely subtle version indicator
+  // ============================================================
+  function initBuildStamp() {
+    var el = document.createElement('div');
+    el.setAttribute('aria-hidden', 'true');
+    el.style.cssText = 'text-align:center;font-family:monospace;font-size:9px;letter-spacing:.04em;color:rgba(128,128,128,0.25);padding:6px 0 4px;user-select:none';
+    el.textContent = SITE_BUILD;
+    document.body.appendChild(el);
+  }
+
+  // ============================================================
   // Initialize everything when DOM is ready
   // ============================================================
   function init() {
@@ -172,6 +186,7 @@
     initRevealWrapping();
     initDescentMarker();
     initPostList();
+    initBuildStamp();
   }
 
   if (document.readyState === 'loading') {
