@@ -45,12 +45,7 @@ const isCert = (item) =>
 const firstSentence = (txt) => {
   const t = String(txt).trim();
   const m = t.match(/^[\s\S]*?[.!?](?=\s|$)/);
-  let out = m ? m[0] : t;
-  if (out.length > 140) {
-    out = out.slice(0, 120);
-    out = out.slice(0, out.lastIndexOf(" ")) + "\u2026";
-  }
-  return out;
+  return m ? m[0] : t;
 };
 
 const esc = (s) =>
@@ -73,9 +68,12 @@ const rows = (items) =>
       const cert = isCert(item);
       const color = (CATS[primaryTag(item[2])] || {}).color || "#999";
       const title = esc(item[3].en);
-      const note = (item[4] && item[4].en && item[4].en.trim())
-        ? esc(item[4].en)
-        : (item[6] && item[6].en && item[6].en.trim() ? esc(firstSentence(item[6].en)) : null);
+      const titleLen = String(item[3].en).length;
+      let noteRaw = (item[4] && item[4].en && item[4].en.trim())
+        ? String(item[4].en).trim()
+        : (item[6] && item[6].en && item[6].en.trim() ? firstSentence(item[6].en) : null);
+      if (noteRaw && noteRaw.length > 72 - titleLen) noteRaw = null;
+      const note = noteRaw ? esc(noteRaw) : null;
       return `<div class="row">
   <span class="d">${esc(item[1])}</span><span class="o"><span class="dot${cert ? " sq" : ""}" style="background-color:${color}"></span></span>
   <div class="b">${cert ? '<span class="caret">&#8227;</span> ' : ""}<span class="t${cert ? " tc" : ""}">${title}</span>${note ? ` <span class="n">${note}</span>` : ""}</div>
@@ -102,8 +100,9 @@ const html = `<!doctype html>
 <style>
   html, body { margin:0; padding:0; background-color:#ffffff; }
   body { font-family: Georgia, 'Times New Roman', 'Liberation Serif', serif; color:#1d1d1d; }
-  .hd { text-align:center; border-bottom:1.5px solid #7A2632; padding-bottom:10pt; margin-bottom:6pt; }
-  .hd h1 { font-variant:small-caps; font-weight:600; letter-spacing:3.5px; font-size:22pt; color:#5A1A24; margin:0 0 5pt; }
+  .hd { display:flex; align-items:flex-end; justify-content:space-between; gap:18pt; border-bottom:1.5px solid #7A2632; padding-bottom:10pt; margin-bottom:6pt; }
+  .hd .contact { text-align:right; }
+  .hd h1 { font-variant:small-caps; font-weight:600; letter-spacing:3.5px; font-size:22pt; color:#5A1A24; margin:0; }
   .hd h1 .post { font-size:11.5pt; letter-spacing:2px; color:#7A2632; }
   .hd .meta { font-size:10.5pt; letter-spacing:1px; color:#2a2a2a; margin:2pt 0; }
   .hd .em { font-size:9pt; letter-spacing:0.8px; color:#46383a; margin-top:3.5pt; }
@@ -133,14 +132,17 @@ const html = `<!doctype html>
               color:#7A2632; margin:0 0 4pt; }
   .cred .cb { font-size:9pt; line-height:1.5; color:#2c2c2c; }
   .cred .colh { display:inline-block; vertical-align:top; width:48%; margin-right:2%; }
-  .cred .colh .ci { display:block; padding:0.6pt 0; line-height:1.5; }
+  .cred .colh .ci { display:block; padding:0.6pt 0 0.6pt 9pt; text-indent:-9pt; line-height:1.5; }
+  .cred .colh .ci::before { content:"\\2023\\00a0"; color:#7A2632; }
 </style>
 </head>
 <body>
 <div class="hd">
   <h1>Saul Karim NMH <span class="post">MA</span></h1>
-  <div class="meta">416-771-0382 &middot; Toronto</div>
-  <div class="em">saulnassau@protonmail.com &middot; seminarschools.com/saulnassau</div>
+  <div class="contact">
+    <div class="meta">416-771-0382 &middot; Toronto</div>
+    <div class="em">saulnassau@protonmail.com &middot; seminarschools.com/saulnassau</div>
+  </div>
 </div>
 ${sectionHtml}
 <div class="cred">

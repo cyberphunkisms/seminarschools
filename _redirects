@@ -100,6 +100,14 @@
 /polymyth-seminar-calendar     /polymythseminars/    301
 /polymyth-seminar-calendar/    /polymythseminars/    301
 /polymyth-seminar-calendar/*   /polymythseminars/    301
+# Festivals consolidated into the one polymyth seminar calendar (June 2026)
+/festivals/*   /polymythseminars/    301
+/festivals     /polymythseminars/    301
+
+# Sabachtan Gnosticism seminar folded into The Agora as a reading strand (June 2026)
+/sabachtan-seminar/*   /agora/    301
+/sabachtan-seminar     /agora/    301
+
 # Devil's Diary canonical home (June 10 2026) — lives at /polymyth/devilsdiary/
 # All spelling and shortpath aliases 301 here, subpaths preserved. No alias targets
 # /devils-notebook to avoid a redirect loop; that spelling is an alias, not the home.
@@ -157,3 +165,9 @@
 /front-preview.html   /   301
 /front-preview        /   301
 /front-preview/       /   301
+
+# Mephydata activation pointer retired into the methodologylist mirror (catches old inbound links)
+/activatemephydata    /polymyth/methodologylist.txt    301
+/activatemephydata/   /polymyth/methodologylist.txt    301
+/polymyth     /polymyth/methodologylist/    301
+/polymyth/    /polymyth/methodologylist/    301

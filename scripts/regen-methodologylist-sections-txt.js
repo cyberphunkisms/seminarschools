@@ -109,7 +109,7 @@ for (const sec of Object.keys(bySection).sort()) {
   lines.push('Polymyth Methodologylist — ' + sec + ' section');
   lines.push('Source: https://seminarschools.com/polymyth/methodologylist.txt (full file)');
   lines.push('Section index: https://seminarschools.com/polymyth/manifest.txt');
-  lines.push('AI-discovery index: https://seminarschools.com/llms.txt');
+  lines.push('AI-discovery index: https://seminarschools.com/polymyth/methodologylist.txt');
   lines.push('Last build: ' + BUILD_DATE);
   lines.push('');
   lines.push('=== ' + label + ' (' + entries.length + ' entries) ===');

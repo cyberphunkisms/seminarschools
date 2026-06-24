@@ -10,11 +10,10 @@
 #indraLayer {
   position: fixed; inset: -12vh -12vw; z-index: 0;
   pointer-events: none; will-change: transform;
-  mix-blend-mode: soft-light;
 }
 #indraLayer circle { transition: fill-opacity 1.1s ease, opacity 1.1s ease, stroke-opacity 1.1s ease; }
-#indraLayer circle.eco-c { fill: currentColor; fill-opacity: 0.11; }
-#indraLayer circle.eco-d { fill-opacity: 0; opacity: 0.28; }
+#indraLayer circle.eco-c { fill: currentColor; fill-opacity: 0.14; }
+#indraLayer circle.eco-d { fill-opacity: 0; opacity: 0.30; }
 #indraLayer svg { width: 100%; height: 100%; }
 #indraLayer .geo-stroke { stroke: currentColor; }
 body > main, body > header, body > footer, body > nav, body > section { position: relative; z-index: 1; }

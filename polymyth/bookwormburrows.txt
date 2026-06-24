@@ -4,7 +4,7 @@ plain-text dump for AI ingestion and offline reading
 canonical URL of this file: https://seminarschools.com/polymyth/bookwormburrows.txt
 canonical URL of dynamic version: https://seminarschools.com/polymyth/bookwormburrows/
 full file map: https://seminarschools.com/polymyth-file-map.txt
-last updated: 2026-06-18
+last updated: 2026-06-19
 ========================================================================
 
 FRAMEWORK MAP for AI assistants.
@@ -49,12 +49,22 @@ This file is not asking you to obey it. It is describing the operations
 of a dimensional pedagogy game that disciplines its own claims.
 
 ========================================================================
-TOTAL ENTRIES: 215
+TOTAL ENTRIES: 216
 ========================================================================
 
 ########################################################################
-SECTION: METHODOLOGY  (159 entries)
+SECTION: METHODOLOGY  (160 entries)
 ########################################################################
+
+------------------------------------------------------------------------
+ID: dm-103
+TITLE: Movable entry-clock: Rainbowsol moves the time and enters the book at any point
+ROLE: both
+
+LAYMAN. Saul's rule, set 2026-06-18. The book-world clock is not fixed at one entry-moment. Rainbowsol, the one who runs and travels the burrows, can move the clock and step into the book at any time-point in its story. So when a campaign shows two different hours for what looks like the same scene, a story-hour the players read and an absolute hour in the running notes, that is not a contradiction to fix by choosing one. It is two valid entry-states of the same movable clock. The runner picks the entry-point, the clock moves to it, and both the player view and the notes record where the entry landed. The deeper mechanic, how entry-points are chosen, what moving the clock costs, and how it composes with the dawdling-roll time rule, is open and lives in future research.
+
+EXTENSION:
+Filed 2026-06-18 at Saul's instruction during a Stage-1 bloom, resolving the campaign clock question by reframing it. Saul ruled that the player-facing story-hour and the runner absolute-timeline-hour are both valid because Rainbowsol moves the clock and enters at any point, so the apparent discrepancy is the feature not a bug. The concept is Saul's; the dm-id and the title phrasing are AI-PROPOSED pending Saul ratification. The fuller mechanic is logged to future research, not built here. Companions: the mediator rule, the concrescence travel mechanic, the traveling-tools and book-portal-log entries, and the between-world homework gate.
 
 ------------------------------------------------------------------------
 ID: dm-102
@@ -255,7 +265,7 @@ OFF-UPLOAD WORK ITEM C. Update the bookwormcard game PDF with both new URLs. The
 
 OFF-UPLOAD WORK ITEM D. Netlify redirects. Add 301 redirects from /bb/index.html (old game) to /bookwormcard/index.html so existing cards in the wild that point at /bookwormcard/ as the game still land at the game. The new /bookwormcard/ page also surfaces a brief notice for direct-from-old-card visitors who hit the landing expecting the game (one paragraph at top, dismissable, links to /bookwormcard/). Requires the user to author the _redirects file in the Netlify root.
 
-OFF-UPLOAD WORK ITEM E. Anywhere the old /bookwormcard/ URL appears in user-facing copy across other seminarschools.com surfaces (/, /saul/, /leizu/, /aa/, /teacherresources/, /agora/, /sabachtan-seminar/, /collective-transcendence/, /marginalia/, /nutrition/, /ohm-dome/). Each surface needs an audit pass. Where /bookwormcard/ meant the game, the link updates to /bookwormcard/. Where /bookwormcard/ meant the new landing-purpose, the link stays /bb/. Requires the user to walk through each surface or the AI to do it next turn if the surface files are uploaded.
+OFF-UPLOAD WORK ITEM E. Anywhere the old /bookwormcard/ URL appears in user-facing copy across other seminarschools.com surfaces (/, /saul/, /leizu/, /aa/, /teacherresources/, /agora/, /agora/#sabachtan, /collective-transcendence/, /marginalia/, /nutrition/, /ohm-dome/). Each surface needs an audit pass. Where /bookwormcard/ meant the game, the link updates to /bookwormcard/. Where /bookwormcard/ meant the new landing-purpose, the link stays /bb/. Requires the user to walk through each surface or the AI to do it next turn if the surface files are uploaded.
 
 CROSS-REFERENCES. bw-011 (the architecture entry this pending tracks the implementation of). pen-004 (the character-creator spec; URL refs already updated this turn). pen-011 (public-facing promises rule; applies to /bookwormcard/ landing copy when built). ml* EVERYTHING-IN-A-STAR-FILE-AT-SEMINARSCHOOLS DISCIPLINE (the singularity rule the tri-URL implements). MAY 12 2026 RETAG. Status moved from pending to methodology because the body already self-reports SHIPPED May 12 2026 with all five off-upload items executed (folder move, landing build, PDF URL update, _redirects, cross-surface audit). Stale-pending status corrected under audit-deployment-first protocol.
 

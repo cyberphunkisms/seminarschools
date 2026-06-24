@@ -183,8 +183,27 @@
 (function(){
   function inject(){
     if (document.querySelector('.ss-sitenav') || document.querySelector('footer')) return;
-    var links=[['/','Home'],['/polymythseminars/','Calendar'],['/agora/','Agora'],['/marginalia/','Marginalia'],['/sabachtan-seminar/','Sabachtan'],['/ohm-dome/','Ohm Dome'],['/nutrition/','Nutrition'],['/teacherresources/','Resources'],['/leizu/','Leizu Academy'],['/florilegium/','Florilegium'],['/saul/','Founder']];
     var here=(location.pathname.replace(/\/+$/,'')||'/');
+    /* Hierarchy refactor: branch-aware footer. Up to Home, across to branch siblings only, no full roster. First-pass branch map; open to correction. */
+    function nrm(p){return p.replace(/\/+$/,'')||'/';}
+    function inb(ps){return ps.some(function(p){var n=nrm(p);return here===n||here.indexOf(n+'/')===0;});}
+    var TREE={
+      teaching:[['/leizu/','Leizu Academy'],['/agora/','The Agora'],['/teacherresources/','Teacher Resources']],
+      whatson:[['/polymythseminars/','Calendar'],['/marginalia/','Marginalia']],
+      framework:[['/polymyth/','Polymyth'],['/campaigns/','Campaigns'],['/bb/','Bookworm Burrows']],
+      projects:[['/ohm-dome/','Ohm Dome'],['/florilegium/','Florilegium'],['/nutrition/','Nutrition']],
+      about:[['/saul/','Founder'],['/polymyth/sitemap/','Sitemap']]
+    };
+    var sibs;
+    if(inb(['/leizu/'])) sibs=[['/agora/','The Agora']];
+    else if(inb(['/agora/','/teacherresources/','/aitr/'])) sibs=TREE.teaching;
+    else if(inb(['/polymythseminars/','/marginalia/'])) sibs=TREE.whatson;
+    else if(inb(['/ohm-dome/','/florilegium/','/nutrition/'])) sibs=TREE.projects;
+    else if(inb(['/saul/'])) sibs=TREE.about;
+    else if(inb(['/polymyth/','/campaigns/','/bb/','/bookwormcard/','/aa/','/apply/'])) sibs=TREE.framework;
+    else sibs=[];
+    var links=[['/','Home']];
+    sibs.forEach(function(l){if(here.indexOf(nrm(l[0]))!==0)links.push(l);});
     var nav=document.createElement('nav');
     nav.className='ss-sitenav';
     nav.setAttribute('aria-label','Site');

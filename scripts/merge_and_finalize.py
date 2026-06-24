@@ -337,31 +337,12 @@ def main():
     OUT_PATH.write_text(json.dumps(output, indent=2), encoding="utf-8")
     print(f"wrote {OUT_PATH}")
 
-    # Split: write festivals-only output. Festivals page reads /festivals/events.json
-    # separately so it can filter without loading the full seminars feed.
-    festivals_subset = [r for r in merged if r.get("type") in FESTIVAL_TYPES]
-    festivals_output = {
-        "$schema_ref": "/data/seminars-schema.json",
-        "generated_at": now_iso(),
-        "count": len(festivals_subset),
-        "events": festivals_subset,
-    }
-    FESTIVALS_OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    FESTIVALS_OUT_PATH.write_text(json.dumps(festivals_output, indent=2), encoding="utf-8")
-    print(f"wrote {FESTIVALS_OUT_PATH} ({len(festivals_subset)} festival records)")
+    # Festivals consolidated into the single polymyth seminar calendar (June 2026).
+    # The standalone /festivals/ page and its split feed were retired; festival-type
+    # events now live in the one calendar and ship in the main feed below.
 
     write_rss(merged)
     print(f"wrote {RSS_PATH}")
-
-    # Festivals RSS feed (only festival-type records)
-    write_rss(
-        festivals_subset,
-        out_path=FESTIVALS_RSS_PATH,
-        channel_title="Seminar Schools — Toronto Festivals",
-        channel_link="https://seminarschools.com/festivals/",
-        channel_desc="Festivals across Toronto and the GO Transit network.",
-    )
-    print(f"wrote {FESTIVALS_RSS_PATH}")
 
     write_log(harvest_data, merged)
     print(f"wrote {LOG_PATH} + history snapshot")

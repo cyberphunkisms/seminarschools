@@ -11,7 +11,6 @@ KEY_LOCATION="https://${HOST}/${KEY}.txt"
 # Build URL list. Edit this when you add new contentinternet surfaces.
 URLS=$(cat <<EOL
 [
-  "https://${HOST}/llms.txt",
   "https://${HOST}/polymyth/manifest.txt",
   "https://${HOST}/polymyth/methodologylist.txt",
   "https://${HOST}/polymyth/methodologylist-methodology.txt",
