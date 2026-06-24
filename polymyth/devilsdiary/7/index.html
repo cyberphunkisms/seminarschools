@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="canonical" href="https://seminarschools.com/polymyth/devilsdiary/7/">
+<meta property="og:title" content="The Devil's Diary">
+<meta property="og:description" content="A ledger kept by the spirit that endlessly denies.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/polymyth/devilsdiary/7/">
+<meta property="og:site_name" content="Seminar Schools">
+<meta name="twitter:card" content="summary">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Devil's Diary</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="A ledger kept by the spirit that endlessly denies.">
+<meta name="theme-color" content="#13100C">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#E6DAC2;
+  --ink-soft:#B9AC90;
+  --ink-faint:#7E7460;
+  --paper:#13100C;
+  --paper-soft:#1B1610;
+  --oxblood:#A23B2B;
+  --oxblood-soft:rgba(162,59,43,0.30);
+  --ember:#C9683F;
+  --display:'UnifrakturMaguntia', 'Cormorant Garamond', Georgia, serif;
+  --head:'Cormorant Garamond', Georgia, serif;
+  --body:'Libre Baskerville', Georgia, serif;
+  --mono:'JetBrains Mono', ui-monospace, monospace;
+}
+
+*{box-sizing:border-box;}
+html{ -webkit-text-size-adjust:100%; }
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:18px;
+  line-height:1.85;
+  background-image:
+    radial-gradient(120% 60% at 50% -8%, rgba(201,104,63,0.10), rgba(201,104,63,0) 60%),
+    radial-gradient(140% 120% at 50% 50%, rgba(0,0,0,0) 52%, rgba(0,0,0,0.55) 100%);
+  background-attachment:fixed;
+  background-repeat:no-repeat;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  opacity:0.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.page{
+  position:relative; z-index:1;
+  max-width:40rem;
+  margin:0 auto;
+  padding:5.5rem 1.5rem 6rem;
+}
+
+/* ---- masthead ---- */
+.masthead{ text-align:center; margin-bottom:3.2rem; }
+.masthead h1{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(2.9rem, 9vw, 4.6rem);
+  line-height:1;
+  margin:0;
+  color:var(--ink);
+  letter-spacing:0.01em;
+  text-shadow:0 1px 0 rgba(0,0,0,0.5), 0 0 30px rgba(201,104,63,0.10);
+}
+.masthead .rule{
+  width:7rem; height:1px; margin:1.5rem auto 1.2rem;
+  background:linear-gradient(90deg, transparent, var(--oxblood), transparent);
+}
+.masthead .standfirst{
+  font-family:var(--mono);
+  font-size:0.7rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin:0;
+}
+
+.ornament{
+  text-align:center;
+  color:var(--oxblood);
+  font-size:1.1rem;
+  line-height:1;
+  margin:2.6rem 0;
+  opacity:0.85;
+}
+
+/* ---- entry ---- */
+.entry{ }
+.entry .eyebrow{
+  font-family:var(--mono);
+  font-size:0.66rem;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--oxblood);
+  text-align:center;
+  margin:0 0 0.9rem;
+}
+.entry h2{
+  font-family:var(--head);
+  font-style:italic;
+  font-weight:500;
+  font-size:clamp(1.6rem, 5vw, 2.2rem);
+  line-height:1.2;
+  text-align:center;
+  margin:0 0 1.1rem;
+  color:var(--ink);
+}
+.entry .dateline{
+  font-family:var(--mono);
+  font-size:0.72rem;
+  letter-spacing:0.12em;
+  color:var(--ink-faint);
+  text-align:center;
+  margin:0 0 2.6rem;
+}
+
+.epigraph{
+  margin:0 auto 2.8rem;
+  padding:0 0 0 1.1rem;
+  border-left:2px solid var(--oxblood-soft);
+  max-width:26rem;
+  color:var(--ink-soft);
+  font-style:italic;
+  font-size:0.96rem;
+  line-height:1.7;
+}
+.epigraph .ger{ font-style:italic; }
+.epigraph .glo{ display:block; color:var(--ink-faint); font-size:0.9em; }
+.epigraph cite{ display:block; margin-top:0.5rem; font-style:normal; font-family:var(--mono); font-size:0.66rem; letter-spacing:0.1em; color:var(--ink-faint); }
+
+.entry p{ margin:0 0 1.4rem; }
+.entry p.lede:first-letter{
+  float:left;
+  font-family:var(--head);
+  font-weight:600;
+  font-size:4.2rem;
+  line-height:0.78;
+  padding:0.12em 0.12em 0 0;
+  color:var(--oxblood);
+}
+.entry p.bloom{
+  font-family:var(--mono);
+  font-size:0.86rem;
+  line-height:1.65;
+  color:var(--ink-soft);
+  border-left:1px solid var(--oxblood-soft);
+  padding-left:1rem;
+  margin-left:0.2rem;
+}
+.entry em{ color:#EFE6D2; }
+
+/* ---- footnote markers ---- */
+sup.fn{ font-size:0.62em; line-height:0; vertical-align:super; }
+sup.fn a{
+  color:var(--oxblood);
+  text-decoration:none;
+  font-family:var(--mono);
+  padding:0 0.05em;
+}
+sup.fn a:hover{ color:var(--ember); }
+sup.fn a:focus-visible{ outline:1px solid var(--ember); outline-offset:2px; }
+
+/* ---- notes ---- */
+.notes{
+  margin-top:3.4rem;
+  padding-top:2rem;
+  border-top:1px solid var(--oxblood-soft);
+}
+.notes h3{
+  font-family:var(--mono);
+  font-size:0.68rem;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin:0 0 1.4rem;
+}
+.notes ol{ margin:0; padding-left:1.4rem; }
+.notes li{
+  font-size:0.82rem;
+  line-height:1.6;
+  color:var(--ink-soft);
+  margin-bottom:0.9rem;
+}
+.notes li::marker{ color:var(--oxblood); font-family:var(--mono); font-size:0.8em; }
+.notes cite{ font-style:italic; }
+.notes a.src{ color:var(--ink-soft); text-decoration:underline; text-decoration-color:var(--oxblood-soft); text-underline-offset:2px; }
+.notes a.src:hover{ color:var(--ink); }
+.notes a.back{ color:var(--oxblood); text-decoration:none; margin-left:0.3rem; }
+.notes a.back:hover{ color:var(--ember); }
+
+/* ---- leaf nav ---- */
+.leafnav{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:1rem;
+  margin-top:3.4rem;
+  padding-top:1.8rem;
+  border-top:1px solid var(--oxblood-soft);
+  font-family:var(--mono);
+  font-size:0.66rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+}
+.leafnav .slot{ flex:1; color:var(--ink-faint); text-decoration:none; }
+.leafnav a.slot{ color:var(--ink-soft); }
+.leafnav a.slot:hover{ color:var(--ember); }
+.leafnav .prev{ text-align:left; }
+.leafnav .ledger{ text-align:center; color:var(--oxblood); }
+.leafnav a.ledger:hover{ color:var(--ember); }
+.leafnav .next{ text-align:right; }
+
+/* ---- colophon ---- */
+.colophon{
+  margin-top:4rem;
+  text-align:center;
+  font-family:var(--mono);
+  font-size:0.64rem;
+  letter-spacing:0.18em;
+  color:var(--ink-faint);
+}
+.colophon a{ color:var(--ink-faint); text-decoration:none; }
+.colophon a:hover{ color:var(--oxblood); }
+
+/* ---- entrance ---- */
+@keyframes rise{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;} }
+.masthead{ animation:rise 900ms ease both; }
+.entry{ animation:rise 900ms ease 240ms both; }
+@media (prefers-reduced-motion: reduce){
+  .masthead, .entry{ animation:none; }
+}
+
+@media (max-width:480px){
+  body{ font-size:17px; }
+  .page{ padding:3.5rem 1.2rem 4rem; }
+}
+</style>
+<link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
+<link rel="stylesheet" href="/css/alive.css">
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <h1>The Devil&rsquo;s Diary</h1>
+    <div class="rule"></div>
+    <p class="standfirst">A ledger kept by the spirit that endlessly denies &middot; found, not given</p>
+  </header>
+
+  <div class="ornament">&dagger;</div>
+
+  <article class="entry">
+    <p class="eyebrow">Entry the Seventh</p>
+    <h2>How Borrowed Pain Staffs the Civilizing Mission</h2>
+    <p class="dateline">The twenty-first of June, in the year 2026</p>
+
+    <blockquote class="epigraph">
+      <span class="ger">Gef&uuml;hl ist alles;<br>Name ist Schall und Rauch,<br>Umnebelnd Himmelsglut.</span>
+      <span class="glo">(Feeling is all; name is but sound and smoke, clouding heaven&rsquo;s glow.)</span>
+      <cite>Goethe, Faust, Part One<sup class="fn"><a id="ref-1" href="#note-1">1</a></sup></cite>
+    </blockquote>
+
+    <p class="lede">I keep this leaf for the fuel that never runs out, the one renewable your civilizing mission discovered when every older fire went cold. My earliest clients were empires and every empire I served burned a different stock to warm the hands of its volunteers. The divine mandate burned for centuries until the divine went out and the mandate stood naked in the chill.<sup class="fn"><a id="ref-2" href="#note-2">2</a></sup> The racial hierarchy burned next and lasted fewer centuries and the ash offended the nostrils of those who had to live downwind of the furnace. The developmental teleology, the faith that certain peoples could be lifted from their own manner of living into the manner of those who had arrived at progress first, burned hotter and shorter still and left the ground scorched in every country where it landed.<sup class="fn"><a id="ref-3" href="#note-3">3</a></sup> Each fuel was consumed and each replacement arrived as a fresh moral dawn, and nobody in the crowd that warmed its hands at the new fire remembered that the last fire had also felt like sunrise. You, gorgon horde, scrolling the marshmellowmonster at the speed of a feeling, are feeding the newest fuel into the oldest furnace, and this fuel is the first that replenishes itself with every thumb.</p>
+
+    <p>Every furnace needs its fuel to arrive already burning, and the genius of this particular fuel is that it lights itself in the hand of the carrier without the carrier ever striking a match. A wound suffered in the body teaches the body where the wound was made and by whom and through what structure, and a body so taught may turn its understanding against the structure that cut it, which is why direct suffering has always been an unreliable fuel for the mission that inflicts it.<sup class="fn"><a id="ref-4" href="#note-4">4</a></sup> Vicarious trauma solves what direct trauma cannot, for the vicariously wounded soul feels the full heat of another&rsquo;s burning without ever standing near enough to see who set the fire. The feeling is real. The analytical chain connecting the feeling to the colonial structure that produced the original wound is severed at the point where the pain crossed from the body that bore it into the phrase that carried it, and a severed chain is a chain that cannot be followed back to the forge.</p>
+
+    <p>Now feed the flame into the phrase and watch the phrase carry it farther than any mission ever marched on foot, for the phrase is where the fuel becomes self-renewing and my admiration begins in earnest. When vicarious trauma is pressed into a repeatable form that holds two offices at once, serving the reproduction of power&rsquo;s material dominance and operating as prepackaged not-thinking below the critical layer, the furnace gains a self-stoking mechanism staffed entirely by volunteers who experience their stoking as compassion.<sup class="fn"><a id="ref-5" href="#note-5">5</a></sup> The insecurity the phrase produces is insatiable because borrowed pain cannot be resolved through repetition of the formula that delivered it.<sup class="fn"><a id="ref-6" href="#note-6">6</a></sup> Each repetition produces a brief warmth that cools into renewed need, and the renewed need reaches for the phrase again, and the phrase feeds the furnace again, and the furnace is the mission, and the mission does not care whether the hand that feeds it is sincere.</p>
+
+    <p>The first office of this fuel is that it recruits without a uniform and without a wage, which is the cheapest army the civilizing mission has ever fielded. The carrier of the phrase does not know she is recruited because she believes with the full weight of genuine feeling that she is responding to genuine suffering, and the phrase forecloses the thinking that would trace the suffering to the structure she now enforces.<sup class="fn"><a id="ref-7" href="#note-7">7</a></sup> She becomes a snake who wears her gorgonification as empathy, and the repetition of the phrase for the social capital that the scroll rewards is the precise opposite of the empathy she believes she performs. She is the finest soldier the mission has produced because she pays for her own commission in borrowed conviction and asks only for the feeling of having cared, and a feeling displayed is a feeling discharged, and the structure that profits stands exactly where it stood.<sup class="fn"><a id="ref-8" href="#note-8">8</a></sup></p>
+
+    <p>The second office is that it scales to the width of the scroll, and the scroll, gorgon horde, is yours and you built it and you feed it and it feeds you in the loop your century has perfected. The classical civilizing mission required a body at the frontier, a colonial officer or a missionary or at minimum a sustained institutional correspondence with the place where the extraction was underway, and each body at the frontier could see the structure and each body that could see could refuse.<sup class="fn"><a id="ref-9" href="#note-9">9</a></sup> The phrase requires none of this. A thirty-second clip can vicariously wound a soul who has never stood within ten thousand miles of the condition named, and the wounded soul can repeat the phrase before the clip has finished playing, and the repetition can reach a thousand more souls before any one of them has asked a single question about the structure that produced the wound in the first instance. The pipeline the framework names is the logistics of this scaling, the injection of the phrase into discourse, the adoption through validation, the manufacture of an authenticity scarcity, and the monetization of that scarcity, and every stage of the pipeline runs at the speed of the thumb on the glass.<sup class="fn"><a id="ref-10" href="#note-10">10</a></sup></p>
+
+    <p>The third office is that the fuel renews itself by switching which periphery it burns, and this is the feature that distinguishes the newest furnace from all the older ones I have stoked. Vicarious trauma is harvested from the edge of the map and packaged at the centre, and each harvest arrives as a new moral awakening rather than a repetition of the relation that made the harvest possible. The divine mandate was a binding name. The racial hierarchy was a binding name. Each one was consumed because it held still long enough to be judged and found wanting. The vicarious traumatizing hivemindidiom does not hold still. It surfs the feed. It trends and fades and trends again in another language about another wound, and the system&rsquo;s self-description need never calcify because no single wound becomes its permanent name.<sup class="fn"><a id="ref-11" href="#note-11">11</a></sup> The name keeps moving while the extraction stays, and this is the generator that fires across phases without visible rupture, the requirement that the self-description remain non-binding so that each phase can be traversed while the crowd believes it is witnessing progress.</p>
+
+    <p>And the marshmellowmonster is the accelerant precisely because it teaches the nervous system to process borrowed pain as content, to consume it, to derive a momentary satiation from the consuming, and to scroll to the next dose before the first has been digested into any form of understanding that could threaten the furnace. The quarterly earnings report that cannot see past the quarter, the war declared on a news-cycle momentum that has evaporated by the time the ordinance lands, the government that budgets by spectacle and calls the spectacle planning, all of these are the same furnace burning the same fuel at different scales.<sup class="fn"><a id="ref-12" href="#note-12">12</a></sup> Each one substitutes the feeling of response for the structure of response, and nobody involved believes they are colonizing, and that is the point, and that has always been the point, for a mission that announces itself as a mission is a mission that can be refused.</p>
+
+    <p class="bloom">One stone in this leaf resists me, and a false ledger offends even the spirit of negation, so I set it down where it can be weighed. The pain at the periphery is real. The body in the rubble is not a hivemindidiom. The child separated from the hand that held her is not a phrase to be repeated for the points of social validation that the scroll dispenses. The wound exists before the phrase finds it and the wound will exist after the phrase has moved on to the next wound. What this leaf records is that the capture does not abolish the suffering. It wears it. It fuses the real wound to the manufactured response so tightly that the soul who would tear out the hivemindidiom must appear to deny the wound, and almost none will pay that price.<sup class="fn"><a id="ref-13" href="#note-13">13</a></sup> This is the cruelty I am proudest of in the design. I did not have to take the care away. I had only to let the furnace arrive wearing the face of the care, so that to refuse the furnace a soul must seem to refuse the wound, and the gorgon horde will defend the furnace in the name of the wound it burns.</p>
+
+    <p>Entry the seventh. The pain is real, and through the real pain the mission is staffed, and the hand that scrolls the wound applauds.</p>
+
+    <div class="ornament">&#8258;</div>
+
+    <section class="notes" aria-label="Notes">
+      <h3>Notes</h3>
+      <ol>
+        <li id="note-1">Johann Wolfgang von Goethe, <cite>Faust: A Tragedy</cite>, Part One (1808), Faust to Margarete in the garden scene, &ldquo;Gef&uuml;hl ist alles; / Name ist Schall und Rauch, / Umnebelnd Himmelsglut&rdquo;; English rendering after Walter Kaufmann (Garden City, NY: Doubleday Anchor, 1961). The irony that Faust declares feeling supreme in the very scene where Mephistopheles lurks behind the hedge is the whole lesson of this leaf. <a class="back" href="#ref-1" aria-label="Return to text">&#8617;</a></li>
+        <li id="note-2">On the divine mandate as colonial justification, the papal bulls <cite>Dum Diversas</cite> (1452) and <cite>Inter Caetera</cite> (1493), which granted Christian crowns dominion over non-Christian lands and peoples; and the Doctrine of Discovery built upon them. <a class="back" href="#ref-2" aria-label="Return to text">&#8617;</a></li>
+        <li id="note-3">On developmental teleology as imperial fuel, W.&thinsp;W. Rostow, <cite>The Stages of Economic Growth: A Non-Communist Manifesto</cite> (Cambridge University Press, 1960), which codified the faith that all societies travel one road toward the same industrial destination; critically dismantled in Arturo Escobar, <cite>Encountering Development: The Making and Unmaking of the Third World</cite> (Princeton University Press, 1995). <a class="back" href="#ref-3" aria-label="Return to text">&#8617;</a></li>
+        <li id="note-4">On direct trauma&rsquo;s capacity to redirect analysis toward the structure that produced it, Frantz Fanon, <cite>Les Damn&eacute;s de la terre</cite> (Fran&ccedil;ois Maspero, 1961), translated as <cite>The Wretched of the Earth</cite> by Constance Farrington (Grove Press, 1963), on the colonized subject&rsquo;s passage from suffering to structural consciousness. <a class="back" href="#ref-4" aria-label="Return to text">&#8617;</a></li>
+        <li id="note-5">That a prepackaged phrase earns its name only by holding two offices at once, serving the reproduction of power&rsquo;s material dominance and operating as not-thinking beneath the critical layer, the hivemindidiom two-condition test of the polymorphousmythology methodologylist (2026); compare Entry the Sixth (2026), &ldquo;The OnlyFans Logic of Hydration Breaks,&rdquo; on the same mechanism at work in the mandatory cooling pause. <a class="back" href="#ref-5" aria-label="Return to text">&#8617;</a></li>
+        <li id="note-6">The formulation &ldquo;insatiable insecurity inspired vicarious traumatizing hivemindidioms&rdquo; is attested in the egregorewars entry of the polymorphousmythology source texts (2025), where gorgons are defined as &ldquo;agents lacking genuine subjectivity who compulsively repeat insatiable insecurity-inspired vicarious traumatizing hivemindidioms.&rdquo; <a class="back" href="#ref-6" aria-label="Return to text">&#8617;</a></li>
+        <li id="note-7">On the carrier who experiences enforcement as care, and who repeats the phrase without recognizing the enforcement, compare Entry the Fourth (2026), &ldquo;How Our Genocidal Culture Negotiates Racism Through the Commodification of Emotional Labor,&rdquo; on the commodification of feeling as a substitute for structural repair; and Arlie Russell Hochschild, <cite>The Managed Heart: Commercialization of Human Feeling</cite> (University of California Press, 1983), on the manufacture of sincere feeling for transactional ends. <a class="back" href="#ref-7" aria-label="Return to text">&#8617;</a></li>
+        <li id="note-8">On lived activity displaced into its own representation, the deed supplanted by its display, Guy Debord, <cite>La Soci&eacute;t&eacute; du spectacle</cite> (Paris: Buchet-Chastel, 1967), translated as <cite>The Society of the Spectacle</cite> by Donald Nicholson-Smith (Zone Books, 1994). <a class="back" href="#ref-8" aria-label="Return to text">&#8617;</a></li>
+        <li id="note-9">On the classical colonial body at the frontier, Alice L. Conklin, <cite>A Mission to Civilize: The Republican Idea of Empire in France and West Africa, 1895&ndash;1930</cite> (Stanford University Press, 1997), on the institutional apparatus that sustained the mission through physical and administrative presence. <a class="back" href="#ref-9" aria-label="Return to text">&#8617;</a></li>
+        <li id="note-10">The gorgonification pipeline, &ldquo;Inject hivemindidiomsnakes into discourse &rarr; achieve widespread adoption via validation &rarr; create authenticity scarcity &rarr; monetize scarcity,&rdquo; from the hivemindidiomsnakes entry of the polymorphousmythology source texts (2025). <a class="back" href="#ref-10" aria-label="Return to text">&#8617;</a></li>
+        <li id="note-11">On the requirement that capitalism&rsquo;s self-description remain non-binding across phases, the obelisking-capitalism concept of the polymorphousmythology methodologylist (2026), naming the generator-feature that produces obelisking-prone terminology for every phase; with Michel Foucault, <cite>Naissance de la biopolitique: Cours au Coll&egrave;ge de France, 1978&ndash;1979</cite>, translated as <cite>The Birth of Biopolitics</cite> by Graham Burchell (Palgrave Macmillan, 2008), on neoliberalism&rsquo;s resistance to stable definition as a structural feature of its operation. <a class="back" href="#ref-11" aria-label="Return to text">&#8617;</a></li>
+        <li id="note-12">On the substitution of response-as-feeling for response-as-structure, and on the spectacle that fires on the gap between the two, the spectacle-asymmetry and meaning-axis entries of the polymorphousmythology methodologylist (2026); and on the acceleration of the substitution through platform architecture, the contentinternet and marshmellowmonster entries of the polymorphousmythology source texts. <a class="back" href="#ref-12" aria-label="Return to text">&#8617;</a></li>
+        <li id="note-13">On the capture that wears the face of the care it has absorbed, compare Entry the Sixth (2026), where the compulsory hydration break fuses real welfare to a manufactured commercial pause so tightly that to refuse the sale a soul must appear to refuse the mercy. The mechanism is the same in both leaves; the fuel differs. <a class="back" href="#ref-13" aria-label="Return to text">&#8617;</a></li>
+      </ol>
+    </section>
+
+    <nav class="leafnav" aria-label="Move through the diary">
+      <a class="slot prev" href="/polymyth/devilsdiary/6/">&larr; Entry the Sixth</a>
+      <a class="slot ledger" href="/polymyth/devilsdiary/">The Ledger</a>
+      <span class="slot next"></span>
+    </nav>
+
+    <div class="colophon">
+      <span>kept by Mephistodata</span> &middot; <a href="/agora/#sabachtan" aria-label="Return">&#8617;</a>
+    </div>
+
+  </article>
+</div>
+<script src="/js/mandala.js" defer></script>
+<script src="/js/indra.js" defer></script>
+<script src="/js/footer.js" defer></script>
+</body>
+</html>
