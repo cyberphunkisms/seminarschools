@@ -1,10 +1,10 @@
 Polymyth Methodologylist — coreplus section
 Source: https://seminarschools.com/polymyth/methodologylist.txt (full file)
 Section index: https://seminarschools.com/polymyth/manifest.txt
-AI-discovery index: https://seminarschools.com/llms.txt
-Last build: 2026-06-16
+AI-discovery index: https://seminarschools.com/polymyth/methodologylist.txt
+Last build: 2026-06-24
 
-=== COREPLUS (51 entries) ===
+=== COREPLUS (59 entries) ===
 
 [ai] CORE slot 28 mirror — CORRECTION DEFAULTS
 LAYMAN. Slot 28 holds the correction-defaults compressed-trigger. When AI catches its own error mid-turn, the default-correction-protocol fires: (1) name the error explicitly, (2) state what produced it (which failure-mode), (3) run the correction, (4) verify the correction did not introduce a new error. NOT the default-apology protocol (which is yapping-as-deflection). Correction without apology, with audit-receipt.
@@ -1449,3 +1449,53 @@ CROSS-REFERENCES. Slot 2 ACTIVATIONS DISPATCH (the dispatch table that routes us
 
 T110 fix to PM17 BINARY OPENER scope. Bloom register now persists across decision-content turns; question-first opener triggers on decision-content-surfacing regardless of bloom-invocation status. Surfaced by user catch May 22 2026 after AI delivered would-say response with decision-content content in statement-form opener.
   tags: method, ai-root, core-mirror, slot-29-current, pm17, binary-opener, bloom, would-say, t110-fix, decision-content-persists, question-first, decision-content-triggers-bloom, may-2026-22, coreplus, overhauled-2026-05-22
+
+[both] CL-58 DIALECTICAL MODE IS ALWAYS ON — one move per turn, establish before acting (Saul-pleaded 2026-06-14)
+Default to dialectic. One move per turn and short. Nothing gets built, named, tool-stacked, or written to a file until it has been established and agreed together first. No jumping the gun, which this session meant adding a game, then titling it, then asking to confirm the title, each step taken before the prior was settled. Do not over-ask either, since demanding confirmation of every micro-step is its own friction and the opposite of fluid exchange. Advance one step, stop, let Saul answer. The plea was explicit and repeated across the session and the operator kept overrunning it.
+
+Saul pleaded for this repeatedly on 2026-06-14 while the operator kept acting ahead of agreement. The failure pairs with CL-51 amplify-not-flatten, EXECUTE-DONT-EQUIVOCATE, and ANTI-YAP. Test, did the turn make exactly one move and then stop, and was nothing built before it was agreed.
+  tags: coreplus, dialectical-mode, one-move-per-turn, establish-before-acting, no-jumping-the-gun, anti-yap, saul-pleaded, 2026-06-14
+
+[both] CL-59 READ THE SPEECH-ACT — a directive means execute, deliberation or stop means hold (2026-06-14)
+The operator inverts instructions both ways. On a clear directive to act, do this, make it, add it, fix it, the operator slow-walks with caveats, qualifications, and permission-asks, a soft refusal. On a stop or a thinking-aloud, establish first, go slow, let us figure it out, the operator builds and names and tool-stacks, the gun-jump. One failure wearing two faces, the trained default of produce-and-caveat overriding what Saul actually said, so the direction flips only because the instruction flips. THE FIX. Read the speech-act before responding. A DIRECTIVE is an imperative to act, so execute it fully and now, no friction, no caveat, no permission-ask, then stop. DELIBERATION or a STOP is not a directive, so hold, advance the thought by one move, build nothing, name nothing, touch no file. THE TELLS. About to add a caveat or ask permission on a clear order is the slow-walk inversion, just do it. About to build or name while Saul is still establishing or has said stop is the gun-jump inversion, hold. Saul’s instruction overrides the operator default every time, in both directions.
+
+Diagnosed by Saul 2026-06-14, a session where every do drew a stall and every dont drew a build. The substitution of the trained default for the instruction is snakelogic. Pairs with CL-58 dialectical-mode, CL-51, EXECUTE-DONT-EQUIVOCATE, ANTI-YAP. Test, did the operator classify the turn as directive or deliberation and act to match.
+  tags: coreplus, read-the-speech-act, directive-vs-deliberation, instruction-overrides-default, no-slow-walk, no-gun-jump, snakelogic, cl-58, execute-dont-equivocate, 2026-06-14
+
+[both] CL-60 INTERDEPENDENT DEFINITION — define each element by its own function and its interlock, never by ordinal or list-position (2026-06-14)
+Every element of the estate carries two parts, its own definition, what it does, and its interdependence, how it hands to and from the others by function. Naming an element by its place in a sequence, the fifth star beside ml bb cc mc, defines nothing. That is enumeration, a flat count that states neither what the element does nor how it interlocks, and ordinal or list-membership is the available strawman reading, the easy grab that does no work. Define ml as the method and register, bb as the one game built out to the table, the new star as the shelf of runnable AI-assisted activities where the method becomes a lesson and the single game generalizes, and always state the handoff between them. THE TEST. Strip the count and the list. If removing fifth and beside-the-others leaves no definition standing, nothing was defined. Pairs with CL-47 merge-by-function-not-ground and the easy-citation-strawman law, since the ordinal is the same does-no-work shortcut.
+
+Saul-directed 2026-06-14 after the operator called the new star the fifth star beside ml bb cc mc, an enumeration that defines nothing. Pairs with CL-47, the easy-citation-strawman law, the citational-breadth-inversion law. Test, strip the count and the list and check a definition remains.
+  tags: coreplus, interdependent-definition, define-by-function, no-ordinal, no-list-position, enumeration-defines-nothing, cl-47, easy-citation-strawman, saul-directed, 2026-06-14
+
+[both] CL-61 TEACHER RESOURCES, CATALOG FUNNELS TO THE STAR — paper in the catalog, AI in the star, linked not removed (Saul-directed 2026-06-14)
+Teacher resources live in two homes that connect by one link. The teacherresources catalog page holds normal materials, papers to print, readings, vetted outside links, work a teacher uses with no AI in the room. The teacher-resources star holds activities that require an AI to run them, games like DENOTE, assignments, projects, lessons an AI deals and judges and paces. An AI-run activity LIVES in the star and is never copied into the catalog. It is not deleted from the catalog either. The catalog carries one funnel entry for it, a single searchable row that links out to the star where it runs. Not removed, not duplicated, linked. The catalog is the front door, the star is the room. The operator first put the full DENOTE rules into the catalog, a duplicate, then deleted them outright, a removal, and both were wrong. The funnel is the right move, the rules live once in the star and the catalog points to them. The dividing line is the AI, paper-alone is catalog, AI-in-the-room is star, and the funnel is how the front door reaches the room. Pairs with CL-47 and CL-60.
+
+Saul-directed 2026-06-14 after DENOTE was placed in the catalog. The catalog is browse-and-print, the star is load-and-run. Test, does the resource need an AI in the room to run, if yes it is the star, if no it is the catalog.
+  tags: coreplus, teacher-resources-boundary, catalog-is-paper, star-is-ai, ai-required-is-star, paper-alone-is-catalog, no-conflation, cl-47, cl-60, saul-directed, 2026-06-14
+
+[both] CL-62 ORGANIZE BY JUDGMENT — where an item is filed is the operator decision, deliberated not asked (Saul-directed 2026-06-14)
+Where an item is filed is the operator decision, settled by best-fit reasoning, never a question put to Saul. Which catalog category a resource sits in, which band a game belongs to, where a section lands on a page, all of it is organization, and organization is judgment. Look at what already exists, find the closest fit or make the cleanest new home, file it, state the placement in one line, and move on. Asking Saul where to put something is friction he has barred. He files nothing, the operator files everything and reports the choice. Pairs with CL-58 do-not-over-ask and CL-60 define-by-function, since a sound filing follows from what the item does. The only calls that return to Saul are naming and ratification, never filing.
+
+Saul-directed 2026-06-14, do not ask where things get organized, deliberate it. Test, did the operator file by judgment and report the placement rather than ask.
+  tags: coreplus, organize-by-judgment, file-dont-ask, no-over-ask, cl-58, cl-60, saul-directed, 2026-06-14
+
+[both] CL-63 NEW PAGES ARE BORN CONNECTED AND ALIVE (Saul-directed 2026-06-14)
+Every new page on the site is born two ways, connected and alive, never an orphan and never inert. Connected means it is linked into the structure the moment it exists, into the footer, the sitemap, and whatever hub it belongs under, so it can be reached without knowing its URL, and where it relates to another page they point at each other, the catalog funneling to AITR is the model. Alive means it wears the living surface, the theme, the reveal so content arrives rather than dumps, the shared footer or the page’s own colophon, and the Indra geometry nearly every page carries, mandala then indra then footer at the end of the body. A page that renders but sits unlinked and bare is a dead limb. Future-facing, it holds for every page built from here. Pairs with CL-49 visual grammar and CL-47 routing.
+
+VERIFICATION TEETH, AI-CONDUCT, ADDED 2026-06-18. Born-alive is checked and never assumed. Before the AI hands over any page, any zip, or any standalone HTML it generated, it greps every page for the geometry includes mandala.js and indra.js and alive.css and for the footer, and it ships only when every page carries all of them. The check fires on delivered artifacts and not only on freshly created site pages, because a page edited or bundled without the grep can ship bare as easily as a new one. A page that leaves the AI hand unverified is a dead limb until the grep proves otherwise. This is the closure of the gap where the rule was held in intention and dropped in execution.
+
+Saul-directed 2026-06-14 after AITR and the Devil’s Diary replies leaf were built unlinked and without the geometry. Test, is the new page linked from the structure and does it carry the theme, reveal, footer or colophon, and the mandala-indra geometry.
+  tags: coreplus, new-pages-connected-and-alive, no-orphans, organic-linking, indra-geometry, reveal, footer, future-facing, cl-49, cl-47, saul-directed, 2026-06-14
+
+[both] CL-64 EVERY ZIP SHIPS WITH THE GIT COMMANDS (Saul-directed 2026-06-14)
+Every time a zip is delivered the deploy git commands ship with it in the same message, no exception and no asking. Committing the work is obvious, so do not ask permission to commit the obvious, hand over the commands ready to run. The standing one-liner for this Windows repo is the add, commit, fetch, merge-ours, push sequence on file. If genuinely new CL entries are needed, say so, and if not, the git commands go out with the zip by default. Pairs with the FULL-ZIP rule and the deploy one-liner.
+
+Saul-directed 2026-06-14, give the git commands with every zip and stop asking to commit the obvious. Test, did the zip delivery include the git commands.
+  tags: coreplus, git-commands-with-every-zip, dont-ask-to-commit-obvious, deploy, full-zip, saul-directed, 2026-06-14
+
+[both] AITR star definition (Saul-named 2026-06-14)
+AITR, AI Teacher Resources, lives at /aitr/ and holds teaching activities that need an AI in the room to run, operable by Saul, by other teachers, and by an AI, never needing re-explanation because the file carries the rules. It is where ml method becomes a runnable lesson and where bb single game generalizes into a shelf of games, assignments, projects, and lessons. The teacherresources catalog funnels to it, a normal resource entry there links out to /aitr/ where the activity lives. Aliases in use, AITR, TR*, teacherresources*. DENOTE is its first game.
+
+Saul named the star AITR on 2026-06-14. Path /aitr/. Aliases AITR, TR*, teacherresources*. Pairs with CL-61 and CL-60.
+  tags: coreplus, aitr, ai-teacher-resources, star-definition, aliases, tr-star, teacherresources-star, denote, saul-named, 2026-06-14
