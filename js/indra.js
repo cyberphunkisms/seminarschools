@@ -107,9 +107,10 @@
     // Breathing parameters: slow enough to feel like sleep, not motion.
     var BREATH_PERIOD = 10000;   // 10s full cycle
     var BREATH_SCALE  = 0.003;   // ±0.003 scale oscillation
-    var BREATH_ROT    = 0.25;    // ±0.25° rotation oscillation
+    var BREATH_ROT    = 0.25;    // ±0.25° rotation oscillation (sway)
     var BREATH_X      = 0.4;     // ±0.4px lateral sway
     var BREATH_Y      = 0.3;     // ±0.3px vertical sway
+    var SPIN_RATE     = 360 / 420000; // deg/ms -> ~7min per full turn, slow CW
     var TWO_PI = Math.PI * 2;
 
     // Cursor lean state (computed in tick, fed by mousemove listener below)
@@ -131,9 +132,10 @@
       var bRot   = Math.cos(phase2) * BREATH_ROT;
       var bX     = Math.sin(phase2) * BREATH_X;
       var bY     = Math.cos(phase1 * 0.7) * BREATH_Y;
+      var spin   = (t * SPIN_RATE) % 360; // slow continuous monotonic rotation
       var tx = fTx + bX;
       var ty = fTy - y * (tier === 'prominent' ? 0.12 : 0.06) + bY;
-      var rot = fRot + p * driftDeg + bRot;
+      var rot = fRot + p * driftDeg + bRot + spin;
       var sc = fScale + p * 0.18 + bScale;
       return 'translate(' + (tx + leanX * LEAN_PX).toFixed(2) + 'px,' + (ty + leanY * LEAN_PX).toFixed(2) + 'px)' +
              ' rotate(' + (rot + leanX * LEAN_DEG).toFixed(3) + 'deg)' +

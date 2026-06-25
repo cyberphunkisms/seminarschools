@@ -674,15 +674,13 @@ body.theme-dark {
   overflow: visible;
 }
 #geo svg {
-  transform: scale(var(--geo-scale, 1.4)) translate(var(--geo-tx, 0px), var(--geo-ty, 0px));
+  transform: rotate(var(--geo-rot, 0deg)) scale(var(--geo-scale, 1.4)) translate(var(--geo-tx, 0px), var(--geo-ty, 0px));
   transform-origin: center center;
-  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
 #geo2 svg {
-  transform: scale(var(--geo2-scale, 1.1)) translate(var(--geo2-tx, 60px), var(--geo2-ty, -40px));
+  transform: rotate(var(--geo2-rot, 0deg)) scale(var(--geo2-scale, 1.1)) translate(var(--geo2-tx, 60px), var(--geo2-ty, -40px));
   transform-origin: center center;
-  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
 .geo-stroke { stroke: currentColor; fill: none; vector-effect: non-scaling-stroke; }

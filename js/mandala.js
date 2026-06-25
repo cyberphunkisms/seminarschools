@@ -110,6 +110,12 @@
       </radialGradient>
     </defs>`;
 
+    // Two rotation groups: depth-even circles spin one way, depth-odd the
+    // other. Each <g> turns around the shared SVG center via its own CSS var,
+    // driven opposite-handed in the mandala rAF loop. Interleaved gasket rings
+    // therefore rotate against each other instead of as one rigid disc.
+    let geomCW = '';   // depth-even -> group A
+    let geomCCW = '';  // depth-odd  -> group B
     const allCircles = [];
     const flowerPositions = [];
 
@@ -126,7 +132,10 @@
         const op = c.k<0 ? g.op*0.5 : Math.max(0.32, g.op - (c.d||0)*0.045);
         const x = (c.x + offsetX).toFixed(1);
         const y = (c.y + offsetY).toFixed(1);
-        geom += `<circle class="geo-stroke" cx="${x}" cy="${y}" r="${r.toFixed(1)}" stroke-width="${sw.toFixed(2)}" opacity="${op.toFixed(2)}" fill="none"/>`;
+        const circleSvg = `<circle class="geo-stroke" cx="${x}" cy="${y}" r="${r.toFixed(1)}" stroke-width="${sw.toFixed(2)}" opacity="${op.toFixed(2)}" fill="none"/>`;
+        // Depth parity routes the circle to one of the two counter-rotating
+        // groups. The bounding ring (k<0) stays in group A so the frame holds.
+        if ((c.d || 0) % 2 === 0 || c.k < 0) { geomCW += circleSvg; } else { geomCCW += circleSvg; }
         if (r > 2) {
           for (let i = 0; i < 8; i++) {
             const a = (i/8)*Math.PI*2;
@@ -266,7 +275,12 @@
       });
     }
 
-    return `<svg viewBox="-380 -380 760 760" xmlns="http://www.w3.org/2000/svg">${geom}</svg>`;
+    // The two gasket-circle groups rotate opposite-handed around the shared
+    // center (0,0 in this centered viewBox). transform-box ensures the
+    // rotation pivots on the SVG origin, not each group's bounding box.
+    const groupA = `<g class="spin-a" style="transform-box:view-box;transform-origin:0 0;transform:rotate(var(--spin-a,0deg));">${geomCW}</g>`;
+    const groupB = `<g class="spin-b" style="transform-box:view-box;transform-origin:0 0;transform:rotate(var(--spin-b,0deg));">${geomCCW}</g>`;
+    return `<svg viewBox="-380 -380 760 760" xmlns="http://www.w3.org/2000/svg">${groupA}${groupB}${geom}</svg>`;
   }
 
   // Per-project parameter presets — same substrate, different jazz
@@ -388,7 +402,34 @@
     // never static on a scrollable page regardless of its section markup.
     const useSections = !opts.forceGlobal && sections.length >= 2;
     const root = document.documentElement.style;
-    let lastFrame = 0;
+
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // --- Continuous aliveness constants -----------------------------------
+    // The gasket never freezes. Two layers turn against each other (primary
+    // clockwise, secondary counter-clockwise) so the moire between them is the
+    // Indra-net reflection made visible. Barely perceptible: ~5 minutes per
+    // full turn. Idle breath rides on top as a slow scale/translate wobble so
+    // a still page reads as sleeping, not stopped.
+    const ROT_PRIMARY   = 360 / 300000;  // deg per ms -> ~300s per full turn, CW
+    const ROT_SECONDARY = -360 / 360000; // deg per ms -> ~360s per full turn, CCW
+    const SPIN_GROUP_A  = 360 / 480000;  // depth-even circles, CW, ~8min/turn
+    const SPIN_GROUP_B  = -360 / 540000; // depth-odd circles, CCW, ~9min/turn
+    const BREATH_PERIOD = 11000;          // 11s breath cycle
+    const BREATH_SCALE  = 0.012;          // ±1.2% scale wobble, primary
+    const BREATH_SCALE2 = 0.016;          // ±1.6% scale wobble, secondary (detuned)
+    const BREATH_TX     = 5;              // ±5px lateral sway, primary
+    const BREATH_TY     = 4;              // ±4px vertical sway, primary
+    const TWO_PI = Math.PI * 2;
+
+    // Smoothed camera state the rAF loop writes every frame. Scroll updates
+    // the *target*; the loop eases toward it so the camera glides and the
+    // rotation/breath ride continuously on top.
+    let curScale = 1.4, curTx = 0, curTy = 0, curDensity = 0.08;
+    let curScale2 = 1.1, curTx2 = 60, curTy2 = -40, curDensity2 = 0.04;
+    let tScale = curScale, tTx = curTx, tTy = curTy, tDensity = curDensity;
+    let tScale2 = curScale2, tTx2 = curTx2, tTy2 = curTy2, tDensity2 = curDensity2;
+    const EASE = 0.06;
 
     function locate() {
       if (useSections) {
@@ -415,43 +456,227 @@
       return { idx: idx, t: f - idx };
     }
 
-    function update() {
-      const now = performance.now();
-      if (now - lastFrame < 33) return;
-      lastFrame = now;
-
+    // Recompute the scroll-driven camera *targets* (cheap, on scroll only).
+    // Also writes the vars synchronously so the camera responds to scroll even
+    // in environments without rAF; the persistent loop eases+rotates on top.
+    function setTargets() {
       const loc = locate();
       const currentIdx = loc.idx;
       const ease = smoothstep(loc.t);
-      
-      // PRIMARY CAMERA
+
       const cur = CAMERA_PRIMARY[currentIdx % CAMERA_PRIMARY.length];
       const nxt = CAMERA_PRIMARY[(currentIdx + 1) % CAMERA_PRIMARY.length];
-      const zoom = cur.zoom + (nxt.zoom - cur.zoom) * ease;
-      const tx = cur.x + (nxt.x - cur.x) * ease;
-      const ty = cur.y + (nxt.y - cur.y) * ease;
-      const density = cur.density + (nxt.density - cur.density) * ease;
-      root.setProperty('--geo-scale', zoom.toFixed(2));
-      root.setProperty('--geo-tx', (-tx).toFixed(1) + 'px');
-      root.setProperty('--geo-ty', (-ty).toFixed(1) + 'px');
-      root.setProperty('--geo-density', density.toFixed(2));
-      
-      // SECONDARY CAMERA
+      tScale   = cur.zoom + (nxt.zoom - cur.zoom) * ease;
+      tTx      = cur.x + (nxt.x - cur.x) * ease;
+      tTy      = cur.y + (nxt.y - cur.y) * ease;
+      tDensity = cur.density + (nxt.density - cur.density) * ease;
+
       const cur2 = CAMERA_SECONDARY[currentIdx % CAMERA_SECONDARY.length];
       const nxt2 = CAMERA_SECONDARY[(currentIdx + 1) % CAMERA_SECONDARY.length];
-      const zoom2 = cur2.zoom + (nxt2.zoom - cur2.zoom) * ease;
-      const tx2 = cur2.x + (nxt2.x - cur2.x) * ease;
-      const ty2 = cur2.y + (nxt2.y - cur2.y) * ease;
-      const density2 = cur2.density + (nxt2.density - cur2.density) * ease;
-      root.setProperty('--geo2-scale', zoom2.toFixed(2));
-      root.setProperty('--geo2-tx', (-tx2).toFixed(1) + 'px');
-      root.setProperty('--geo2-ty', (-ty2).toFixed(1) + 'px');
-      root.setProperty('--geo2-density', density2.toFixed(2));
+      tScale2   = cur2.zoom + (nxt2.zoom - cur2.zoom) * ease;
+      tTx2      = cur2.x + (nxt2.x - cur2.x) * ease;
+      tTy2      = cur2.y + (nxt2.y - cur2.y) * ease;
+      tDensity2 = cur2.density + (nxt2.density - cur2.density) * ease;
+
+      // Synchronous write: scroll changes the camera immediately. The rAF loop
+      // re-eases and adds spin/breath next frame on a live page.
+      root.setProperty('--geo-scale', tScale.toFixed(2));
+      root.setProperty('--geo-tx', (-tTx).toFixed(1) + 'px');
+      root.setProperty('--geo-ty', (-tTy).toFixed(1) + 'px');
+      root.setProperty('--geo-density', tDensity.toFixed(2));
+      root.setProperty('--geo2-scale', tScale2.toFixed(2));
+      root.setProperty('--geo2-tx', (-tTx2).toFixed(1) + 'px');
+      root.setProperty('--geo2-ty', (-tTy2).toFixed(1) + 'px');
+      root.setProperty('--geo2-density', tDensity2.toFixed(2));
     }
-    
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update, { passive: true });
-    update();
+
+    // Reduced motion: set the scroll camera once and stop. No spin, no breath.
+    if (reduced) {
+      function staticUpdate() {
+        setTargets();
+        root.setProperty('--spin-a', '0deg');
+        root.setProperty('--spin-b', '0deg');
+        root.setProperty('--geo-rot', '0deg');
+        root.setProperty('--geo2-rot', '0deg');
+        root.setProperty('--geo-scale', tScale.toFixed(2));
+        root.setProperty('--geo-tx', (-tTx).toFixed(1) + 'px');
+        root.setProperty('--geo-ty', (-tTy).toFixed(1) + 'px');
+        root.setProperty('--geo-density', tDensity.toFixed(2));
+        root.setProperty('--geo2-scale', tScale2.toFixed(2));
+        root.setProperty('--geo2-tx', (-tTx2).toFixed(1) + 'px');
+        root.setProperty('--geo2-ty', (-tTy2).toFixed(1) + 'px');
+        root.setProperty('--geo2-density', tDensity2.toFixed(2));
+      }
+      window.addEventListener('scroll', staticUpdate, { passive: true });
+      window.addEventListener('resize', staticUpdate, { passive: true });
+      staticUpdate();
+      return;
+    }
+
+    // Persistent loop: NEVER sleeps. Eases the camera toward its scroll target,
+    // adds the continuous counter-rotation, adds the idle breath, writes once.
+    function frame() {
+      const t = Date.now();
+
+      // Ease smoothed camera toward scroll targets
+      curScale   += (tScale   - curScale)   * EASE;
+      curTx      += (tTx      - curTx)      * EASE;
+      curTy      += (tTy      - curTy)      * EASE;
+      curDensity += (tDensity - curDensity) * EASE;
+      curScale2   += (tScale2   - curScale2)   * EASE;
+      curTx2      += (tTx2      - curTx2)      * EASE;
+      curTy2      += (tTy2      - curTy2)      * EASE;
+      curDensity2 += (tDensity2 - curDensity2) * EASE;
+
+      // Idle breath: detuned sines on scale + translate
+      const ph1 = t / BREATH_PERIOD * TWO_PI;
+      const ph2 = t / (BREATH_PERIOD * 1.37) * TWO_PI;
+      const bScale  = Math.sin(ph1) * BREATH_SCALE;
+      const bScale2 = Math.cos(ph2) * BREATH_SCALE2;
+      const bTx  = Math.sin(ph2) * BREATH_TX;
+      const bTy  = Math.cos(ph1 * 0.7) * BREATH_TY;
+
+      // Continuous counter-rotation of the whole layers (geo vs geo2)
+      const rot1 = (t * ROT_PRIMARY)   % 360;
+      const rot2 = (t * ROT_SECONDARY) % 360;
+
+      // Per-group counter-rotation WITHIN each layer: depth-even circles turn
+      // one way, depth-odd the other. Slower than the layer spin so the two
+      // motions read as distinct. Group A clockwise, group B counter.
+      const spinA = (t * SPIN_GROUP_A) % 360;
+      const spinB = (t * SPIN_GROUP_B) % 360;
+
+      root.setProperty('--spin-a', spinA.toFixed(3) + 'deg');
+      root.setProperty('--spin-b', spinB.toFixed(3) + 'deg');
+
+      root.setProperty('--geo-rot', rot1.toFixed(3) + 'deg');
+      root.setProperty('--geo-scale', (curScale + bScale).toFixed(3));
+      root.setProperty('--geo-tx', (-(curTx) + bTx).toFixed(1) + 'px');
+      root.setProperty('--geo-ty', (-(curTy) + bTy).toFixed(1) + 'px');
+      root.setProperty('--geo-density', curDensity.toFixed(3));
+
+      root.setProperty('--geo2-rot', rot2.toFixed(3) + 'deg');
+      root.setProperty('--geo2-scale', (curScale2 + bScale2).toFixed(3));
+      root.setProperty('--geo2-tx', (-(curTx2) - bTx * 0.6).toFixed(1) + 'px');
+      root.setProperty('--geo2-ty', (-(curTy2) - bTy * 0.6).toFixed(1) + 'px');
+      root.setProperty('--geo2-density', curDensity2.toFixed(3));
+
+      requestAnimationFrame(frame);
+    }
+
+    window.addEventListener('scroll', setTargets, { passive: true });
+    window.addEventListener('resize', setTargets, { passive: true });
+    setTargets();
+    requestAnimationFrame(frame);
+  }
+
+  // --- Click interaction for the mandala (#geo) pages -----------------------
+  // The indra engine has its own click rig; the #geo pages had none. On
+  // pointerdown: drop a soft ripple at the cursor, then reveal faint tangent
+  // lines among the gasket circles nearest the touch point, which fade and
+  // dissolve. Coordinates map screen -> the #geo svg's centered viewBox.
+  function mountClick() {
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
+    const geo = document.getElementById('geo');
+    if (!geo) return;
+    const svg = geo.querySelector('svg');
+    if (!svg) return;
+
+    // Cache circle centers from the static (group A) + dynamic positions once.
+    function readCircles() {
+      const cs = Array.prototype.slice.call(svg.querySelectorAll('circle'));
+      return cs.map(function (c) {
+        return {
+          x: +c.getAttribute('cx'),
+          y: +c.getAttribute('cy'),
+          r: +c.getAttribute('r')
+        };
+      }).filter(function (n) { return n.r >= 2 && n.r <= 120; });
+    }
+    let nodes = readCircles();
+
+    const NS = 'http://www.w3.org/2000/svg';
+
+    document.addEventListener('pointerdown', function (e) {
+      if (e.button && e.button !== 0) return;
+
+      // 1) Soft ripple at the cursor (DOM element, same as indra's).
+      const rip = document.createElement('span');
+      rip.className = 'indra-ripple';
+      rip.style.left = e.clientX + 'px';
+      rip.style.top = e.clientY + 'px';
+      document.body.appendChild(rip);
+      setTimeout(function () { if (rip.parentNode) rip.parentNode.removeChild(rip); }, 700);
+
+      // 2) Map the click into the svg's coordinate space.
+      const m = svg.getScreenCTM();
+      if (!m) return;
+      const pt = svg.createSVGPoint();
+      pt.x = e.clientX; pt.y = e.clientY;
+      const p = pt.matrixTransform(m.inverse());
+
+      if (!nodes.length) nodes = readCircles();
+      if (!nodes.length) return;
+
+      // Nearest circle to the click.
+      let bi = -1, bd = Infinity;
+      for (let k = 0; k < nodes.length; k++) {
+        const d = Math.hypot(nodes[k].x - p.x, nodes[k].y - p.y);
+        if (d < bd) { bd = d; bi = k; }
+      }
+      if (bi < 0) return;
+
+      // Its tangent-ish neighbors: circles whose centers sit close to the
+      // sum/diff of radii (the gasket tangency condition, loosened).
+      const a = nodes[bi];
+      const neigh = [];
+      for (let k = 0; k < nodes.length; k++) {
+        if (k === bi) continue;
+        const b = nodes[k];
+        const d = Math.hypot(a.x - b.x, a.y - b.y);
+        const sum = a.r + b.r, diff = Math.abs(a.r - b.r);
+        if (Math.abs(d - sum) < 0.22 * sum || Math.abs(d - diff) < 0.8) {
+          neigh.push(b);
+          if (neigh.length >= 6) break;
+        }
+      }
+
+      // Draw + fade-in the tangent lines, then dissolve.
+      const lines = [];
+      neigh.forEach(function (b) {
+        const line = document.createElementNS(NS, 'line');
+        line.setAttribute('x1', a.x); line.setAttribute('y1', a.y);
+        line.setAttribute('x2', b.x); line.setAttribute('y2', b.y);
+        line.setAttribute('stroke', 'currentColor');
+        line.setAttribute('stroke-width', '0.4');
+        line.setAttribute('vector-effect', 'non-scaling-stroke');
+        line.style.opacity = '0';
+        line.style.transition = 'opacity 0.7s ease-in';
+        svg.appendChild(line);
+        lines.push(line);
+        requestAnimationFrame(function () { line.style.opacity = '0.10'; });
+      });
+      setTimeout(function () {
+        lines.forEach(function (l) {
+          l.style.transition = 'opacity 3.5s ease-out';
+          l.style.opacity = '0';
+        });
+        setTimeout(function () {
+          lines.forEach(function (l) { if (l.parentNode) l.parentNode.removeChild(l); });
+        }, 3800);
+      }, 1800);
+    }, { passive: true });
+
+    // Re-read circles after a resize rebuild swaps the svg contents.
+    window.addEventListener('resize', function () {
+      setTimeout(function () {
+        const s = geo.querySelector('svg');
+        if (s) nodes = Array.prototype.slice.call(s.querySelectorAll('circle')).map(function (c) {
+          return { x: +c.getAttribute('cx'), y: +c.getAttribute('cy'), r: +c.getAttribute('r') };
+        }).filter(function (n) { return n.r >= 2 && n.r <= 120; });
+      }, 260);
+    }, { passive: true });
   }
 
   global.PolymythMandala = {
@@ -471,6 +696,7 @@
       if (geo) geo.innerHTML = svg;
       if (geo2) geo2.innerHTML = svg;
       initCameraScroll();
+      mountClick();
     },
     initScrollCamera: initCameraScroll
   };
