@@ -2,8 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="https://seminarschools.com/">
 <meta property="og:title" content="Seminar Schools. A reading organism in Toronto.">
+<meta property="og:image" content="https://seminarschools.com/og-image.png">
 <meta property="og:description" content="Seminar Schools is the working organism of Saul Nassau in Toronto: tutoring, free public seminars, a lecture calendar, essays, a learning game, and the polymorphousmythology framework, all one ecosystem.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seminarschools.com/">
@@ -15,7 +19,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/alive.css">
+<link rel="stylesheet" href="/css/alive.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=cl91">
 <style>
 :root{
   --bg:#F5EBE4; --bg-soft:#FAF4ED; --ink:#2A1A14; --ink-soft:#4A3A30; --muted:#6B5F54;
@@ -23,7 +28,8 @@
   --c1:#C0392B; --c2:#D35400; --c3:#B7950B; --c4:#1E8449; --c5:#1F6FB2; --c6:#6C3FB5; --c7:#127C82;
   --mono:'JetBrains Mono',ui-monospace,monospace; --serif:'Fraunces',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
 }
-@media(prefers-color-scheme:dark){:root{--bg:#171210;--bg-soft:#211a15;--ink:#ECE3D2;--ink-soft:#C9BCA6;--muted:#8E806E;--line:rgba(236,227,210,.14);--accent:#c87a5a;}}
+@media(prefers-color-scheme:dark){:root:not(.light){--bg:#171210;--bg-soft:#211a15;--ink:#ECE3D2;--ink-soft:#C9BCA6;--muted:#8E806E;--line:rgba(236,227,210,.14);--accent:#c87a5a;}}
+:root.dark,:root[data-theme="dark"]{--bg:#171210;--bg-soft:#211a15;--ink:#ECE3D2;--ink-soft:#C9BCA6;--muted:#8E806E;--line:rgba(236,227,210,.14);--accent:#c87a5a;}
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;}
@@ -53,9 +59,9 @@ a{color:inherit;text-decoration:none;}
 .jewel{cursor:pointer;}
 .jewel .halo{fill:var(--n);opacity:0;}
 .jewel .dot{fill:var(--bg);stroke:var(--n);stroke-width:2;}
-.jewel .lab{font-family:var(--mono);font-size:13px;letter-spacing:.06em;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:4px;}
+.jewel .lab{font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:.03em;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:4px;}
 .jewel.core .dot{fill:var(--ink);stroke:var(--ink);}
-.jewel.core .lab{font-family:var(--serif);font-style:italic;font-size:20px;stroke-width:5px;}
+.jewel.core .lab{font-family:var(--sans);font-weight:600;font-size:20px;stroke-width:5px;}
 .jewel:hover .dot,.jewel:focus-visible .dot,.jewel.on .dot{stroke-width:3;}
 .jewel:hover .lab,.jewel:focus-visible .lab,.jewel.on .lab{fill:var(--n);}
 /* The constellation must NOT inherit alive.css .node/[role]/[tabindex] motion. Frozen jewels. */
@@ -110,6 +116,9 @@ a{color:inherit;text-decoration:none;}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
 .lede{position:relative;z-index:1;}
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Seminar Schools","url":"https://seminarschools.com/","description":"Tutoring, free public seminars, a lecture calendar, essays, a learning game, and the polymorphousmythology framework.","author":{"@type":"Person","name":"Saul Nassau","url":"https://seminarschools.com/saul/"}}
+</script>
 </head>
 <body>
 
@@ -275,9 +284,10 @@ NODES.filter(n=>n.tier>0).forEach((n,i)=>{
 <script>
 (function(){var d=document.getElementById("descendSq");if(d)d.addEventListener("click",function(){var t=document.querySelector(".lede");if(t)t.scrollIntoView({behavior:"smooth",block:"start"});});})();
 </script>
-<script src="/js/mandala.js" defer></script>
-<script src="/js/indra.js" defer></script>
-<script src="/js/footer.js" defer></script>
-<script src="/js/autolink.js" defer></script>
+<script src="/js/mandala.js?v=cl91" defer></script>
+<script src="/js/theme.js?v=cl91" defer></script>
+<script src="/js/indra.js?v=cl91" defer></script>
+<script src="/js/footer.js?v=cl91" defer></script>
+<script src="/js/autolink.js?v=cl91" defer></script>
 </body>
 </html>

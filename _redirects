@@ -72,16 +72,14 @@
 #   /saul/teaching/kitchen           (same outcome as the previous line)
 #   /saul/kitchen/teaching/community/performance
 #   /cv/kitchen, /cv/teaching/kitchen, etc.
-/saul         /saul/index.html  200
 /saul/*       /saul/index.html  200
 /cv           /saul/index.html  200
 /cv/*         /saul/index.html  200
 /blog/* /florilegium/:splat 301
 /blog /florilegium/ 301
 
-# Sitemap moved into polymyth namespace (May 15 2026)
-/sitemap     /polymyth/sitemap     301
-/sitemap/    /polymyth/sitemap/    301
+# Sitemap: sitemap/index.html handles the redirect via meta-refresh
+# /sitemap and /sitemap/ serve sitemap/index.html which redirects to /polymyth/sitemap/
 
 # Calendar URL aliases — users guess different paths for "what's on"
 /events       /polymythseminars/    301
@@ -143,7 +141,7 @@
 /devils-advocate/*          /polymyth/devilsdiary/:splat  301
 /devils-advocate            /polymyth/devilsdiary/        301
 /polymyth/devils-notebook/* /polymyth/devilsdiary/:splat  301
-/polymyth/devils-notebook   /polymyth/devilsdiary/        301
+# /polymyth/devils-notebook → its own index.html (Devil's Notebook page)
 /polymyth/devilsnotebook/*  /polymyth/devilsdiary/:splat  301
 /polymyth/devilsnotebook    /polymyth/devilsdiary/        301
 /polymyth/devils-diary/*    /polymyth/devilsdiary/:splat  301
@@ -175,4 +173,3 @@
 # Mephydata activation pointer retired into the methodologylist mirror (catches old inbound links)
 /activatemephydata    /polymyth/methodologylist.txt    301
 /activatemephydata/   /polymyth/methodologylist.txt    301
-/polymyth/    /polymyth/methodologylist/    301

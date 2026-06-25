@@ -83,8 +83,9 @@
   @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   @keyframes rise{from{opacity:0;transform:translateY(26px) scale(.985)}to{opacity:1;transform:none}}
 </style>
-<link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
-<link rel="stylesheet" href="/css/alive.css">
+<link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
+<link rel="stylesheet" href="/css/alive.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=cl91">
 </head>
 <body>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
@@ -115,7 +116,7 @@
       <div class="desc">A folded map of Harlem, soft at the creases, carried in a pocket long enough to wear thin. The streets and the places anyone could name. You stop and orient yourself.</div>
       <div class="map-label">The real map &middot; if a bookworm has the paper in hand</div>
       <div class="map-frame map-frame-real">
-        <img class="real-map" src="harlem-campbell-1932.jpg" alt="A Night-Club Map of Harlem, E. Simms Campbell, 1932" onerror="this.parentNode.style.display='none'">
+        <img loading="lazy" class="real-map" src="harlem-campbell-1932.jpg" alt="A Night-Club Map of Harlem, E. Simms Campbell, 1932" onerror="this.parentNode.style.display='none'">
       </div>
       <div class="map-note">Drop <code>harlem-campbell-1932.jpg</code> beside this page to show the real map here. Until then only the clear map below appears.</div>
 
@@ -367,9 +368,9 @@
   document.getElementById("code").addEventListener("keydown", function(e){ if(e.key==="Enter") attempt(); });
   (function(){ renderWallet(); })();
 </script>
-<script src="/js/theme.js" defer></script>
-<script src="/js/mandala.js" defer></script>
-<script src="/js/indra.js" defer></script>
-<script src="/js/footer.js" defer></script>
+<script src="/js/theme.js?v=cl91" defer></script>
+<script src="/js/mandala.js?v=cl91" defer></script>
+<script src="/js/indra.js?v=cl91" defer></script>
+<script src="/js/footer.js?v=cl91" defer></script>
 </body>
 </html>

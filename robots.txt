@@ -1,5 +1,5 @@
 # robots.txt for seminarschools.com
-# Last updated: 2026-05-20
+# Last updated: 2026-06-25
 
 # ============================================================
 # Default policy
@@ -12,13 +12,21 @@ Disallow: /leizu/admin
 Disallow: /apply/success
 Disallow: /bookwormcard/success
 Disallow: /campaigns/thank-you-mam/unlocks
+Disallow: /polymyth/dmboard/
+Disallow: /polymyth/trace/
+Disallow: /polymyth/notebook/
+Disallow: /data/
+Disallow: /aa/cloud/
+Disallow: /leizu/cloud/
+Disallow: /bookwormcard/print/
+Disallow: /bookwormcard/pdf/
+Disallow: /scripts/
 
 # ============================================================
 # AI training / retrieval crawlers — explicitly welcomed
 # ============================================================
 # The polymyth framework files (/polymyth/methodologylist*.txt,
-# /polymyth/manifest.txt, etc.) are designed for AI consumption. Explicit
-# Allow rules signal intent to AI crawlers that respect specific user-agents.
+# /polymyth/manifest.txt, etc.) are designed for AI consumption.
 
 User-agent: GPTBot
 Allow: /

@@ -8,7 +8,7 @@
   'use strict';
 
   // Site build stamp — update on every deploy
-  var SITE_BUILD = 'cl82 · 2026-06-24';
+  var SITE_BUILD = 'cl91 · 2026-06-25';
 
   // ============================================================
   // 1. Reveal-in observer

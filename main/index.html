@@ -19,6 +19,7 @@
 
 <meta name="description" content="Seminar Schools is a Toronto practice built on seminar-method learning, with tutoring through Leizu Academy, free public philosophy at the Agora, a running lecture calendar, and a written framework underneath it all.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#2D3F26">
 <link rel="canonical" href="https://seminarschools.com/main/">
@@ -1261,11 +1262,11 @@ input[type="button"] {
   }
 }
 </script>
-<link rel="stylesheet" href="/css/theme.css">
-<link rel="stylesheet" href="/css/mobile-overlay.css">
+<link rel="stylesheet" href="/css/theme.css?v=cl91">
+<link rel="stylesheet" href="/css/mobile-overlay.css?v=cl91">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
-<link rel="stylesheet" href="/css/alive.css">
+<link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
+<link rel="stylesheet" href="/css/alive.css?v=cl91">
 </head>
 <body>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:4.4rem;right:1rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
@@ -1275,8 +1276,8 @@ input[type="button"] {
 
 <!-- Netlify build-time form detection · hidden mirror of the visible admission form -->
 <form name="leizu-application" data-netlify="true" netlify-honeypot="bot-field" hidden enctype="multipart/form-data">
-  <input type="text" name="name">
-  <input type="email" name="email">
+  <input type="text" name="name" autocomplete="name">
+  <input type="email" autocomplete="email" name="email">
   <input type="text" name="level">
   <input type="text" name="subject">
   <textarea name="note"></textarea>
@@ -1467,8 +1468,8 @@ input[type="button"] {
   <form class="admission-form reveal delay-3" id="apply-form" name="leizu-application" method="POST" action="/apply/success/" data-netlify="true" data-netlify-honeypot="bot-field" enctype="multipart/form-data">
     <input type="hidden" name="form-name" value="leizu-application">
     <p style="display:none"><label>Do not fill this field <input name="bot-field"></label></p>
-    <div class="field" data-num="01"><label for="apply-name">Name</label><input type="text" id="apply-name" name="name" placeholder="Your name" required></div>
-    <div class="field" data-num="02"><label for="apply-email">Your email</label><input type="email" id="apply-email" name="email" placeholder="your@email.com" required></div>
+    <div class="field" data-num="01"><label for="apply-name">Name</label><input type="text" id="apply-name" name="name" placeholder="Your name" required autocomplete="name"></div>
+    <div class="field" data-num="02"><label for="apply-email">Your email</label><input type="email" autocomplete="email" id="apply-email" name="email" placeholder="your@email.com" required></div>
     <div class="field" data-num="03"><label for="apply-level">Grade or level</label><input type="text" id="apply-level" name="level" placeholder="Grade 11. University. Adult learner."></div>
     <div class="field" data-num="04"><label for="apply-subject">Subject</label>
       <select id="apply-subject" name="subject" required>
@@ -1503,7 +1504,7 @@ input[type="button"] {
   </div>
 </section>
 
-<script src="/js/lenis.min.js" defer></script>
+<script src="/js/lenis.min.js?v=cl91" defer></script>
 
 <script>
   // ===== Headlines =====
@@ -1775,7 +1776,7 @@ input[type="button"] {
       geom += `<circle cx="${hx}" cy="${hy}" r="${(r*0.28).toFixed(2)}" fill="#ffffff" opacity="0.75"/>`;
     });
 
-    return `<svg viewBox="-380 -380 760 760" xmlns="http://www.w3.org/2000/svg">${geom}</svg>`;
+    return `<svg aria-hidden="true" viewBox="-380 -380 760 760" xmlns="http://www.w3.org/2000/svg">${geom}</svg>`;
   }
 
 
@@ -2057,7 +2058,7 @@ input[type="button"] {
   body.dataset.mode = 0;
 
   // SVG for the atomic flash glyph
-  const ATOMIC_SVG = '<svg viewBox="-20 -20 40 40" xmlns="http://www.w3.org/2000/svg">' +
+  const ATOMIC_SVG = '<svg aria-hidden="true" viewBox="-20 -20 40 40" xmlns="http://www.w3.org/2000/svg">' +
     '<ellipse cx="0" cy="0" rx="17" ry="6.5" fill="none" stroke="currentColor" stroke-width="2"/>' +
     '<ellipse cx="0" cy="0" rx="17" ry="6.5" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(60)"/>' +
     '<ellipse cx="0" cy="0" rx="17" ry="6.5" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(120)"/>' +
@@ -2349,7 +2350,7 @@ input[type="button"] {
   input.addEventListener('change', update);
 })();
 </script>
-<script src="/js/theme.js" defer></script>
+<script src="/js/theme.js?v=cl91" defer></script>
 
 <script>
 function fetchEventsWithFallback(){
@@ -2490,9 +2491,9 @@ function fetchEventsWithFallback(){
 })();
 </script>
 
-<script src="/js/mandala.js" defer></script>
-<script src="/js/indra.js" defer></script>
-<script src="/js/footer.js" defer></script>
-<script src="/js/autolink.js" defer></script>
+<script src="/js/mandala.js?v=cl91" defer></script>
+<script src="/js/indra.js?v=cl91" defer></script>
+<script src="/js/footer.js?v=cl91" defer></script>
+<script src="/js/autolink.js?v=cl91" defer></script>
 </body>
 </html>

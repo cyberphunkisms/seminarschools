@@ -2,6 +2,9 @@
 # seminarschools.com static site
 
 [build]
+
+[build.environment]
+  NODE_VERSION = "20"
   publish = "."
   functions = "netlify/functions"
   # Credit conservation (June 6 2026): skip the build entirely when a push

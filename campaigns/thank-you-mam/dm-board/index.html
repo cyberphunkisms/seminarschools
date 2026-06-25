@@ -254,8 +254,9 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 ::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--border); }
 </style>
-<link rel="stylesheet" href="/mobile-slim.css" media="screen and (max-width:640px)">
-<link rel="stylesheet" href="/css/alive.css">
+<link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
+<link rel="stylesheet" href="/css/alive.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=cl91">
 </head>
 <body>
 <h1 class="sr-only">DM Board</h1>
@@ -523,7 +524,7 @@ function renderTriggers() {
 
 function showThread(id) {
   const t = threads.find(x => x.id === id);
-  let html = `<h3 style="color:${t.color}">Thread ${t.id}: ${t.name}</h3>`;
+  let html = `<h2 style="color:${t.color}">Thread ${t.id}: ${t.name}</h2>`;
   html += `<p>${t.desc}</p>`;
   html += `<p style="margin-top:8px"><strong>Assignments native to this thread:</strong></p>`;
   html += `<div style="margin-top:4px">`;
@@ -678,9 +679,9 @@ renderBookworms();
 renderDMTools();
 renderLog();
 </script>
-<script src="/js/theme.js" defer></script>
-<script src="/js/mandala.js" defer></script>
-<script src="/js/indra.js" defer></script>
-<script src="/js/footer.js" defer></script>
+<script src="/js/theme.js?v=cl91" defer></script>
+<script src="/js/mandala.js?v=cl91" defer></script>
+<script src="/js/indra.js?v=cl91" defer></script>
+<script src="/js/footer.js?v=cl91" defer></script>
 </body>
 </html>
