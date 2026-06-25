@@ -690,7 +690,7 @@ body.searching details.category[hidden] {
   if (!container || !dataEl) return;
   var data;
   try { data = JSON.parse(dataEl.textContent); } catch(e) { return; }
-  if (!data) {
+  if (!data) return;
 
   var FORMATS    = data.formats    || {};
   var SUBJECTS   = data.subjects   || {};
