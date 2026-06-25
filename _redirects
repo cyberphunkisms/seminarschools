@@ -5,12 +5,18 @@
 /cyberphunkisms /saul 301
 
 # Other domain-shortener redirects
+/tr           /teacherresources  301
 /leizuacademy /leizu  301
 /teach        /leizu/teach  301
 /journal      /marginalia  301
 /reviews      /marginalia  301
 /scholarship  /leizu/scholarship  301
 /donate       /leizu/donate  301
+
+# Dead-link fixes (CL-74b audit)
+/polymyth     /polymyth/methodologylist  301
+/polymyth/    /polymyth/methodologylist  301
+/aa/editorial  /aa/editorial.html  301
 
 
 # Lecture Reviews renamed to Marginalia (May 2026)
@@ -169,5 +175,4 @@
 # Mephydata activation pointer retired into the methodologylist mirror (catches old inbound links)
 /activatemephydata    /polymyth/methodologylist.txt    301
 /activatemephydata/   /polymyth/methodologylist.txt    301
-/polymyth     /polymyth/methodologylist/    301
 /polymyth/    /polymyth/methodologylist/    301

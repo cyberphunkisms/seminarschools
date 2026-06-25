@@ -210,6 +210,7 @@ li{margin-bottom:0.6rem;}
   <p>Email or text me at <a href="tel:+14167710382">416-771-0382</a> for any questions about the fund, donations, or how the program operates.</p>
 
   
+<p style="font-family:var(--mono);font-size:0.7rem;color:var(--ink-soft);margin-top:2rem;text-align:center;">* Donations are processed through Buy Me a Coffee while the dedicated payment system is being built. Every dollar goes to the Mulberry Fund.</p>
 </main>
 <footer class="colophon">
     <p>嫲祖學院 · Leizu Academy · A practice within <a href="/">Seminar Schools</a> · <a href="/leizu/teach">Teach at Leizu</a> · <a href="/leizu">Back to curriculum</a> · <a href="mailto:saulnassau@protonmail.com">Contact</a></p>
@@ -221,5 +222,23 @@ li{margin-bottom:0.6rem;}
 <script src="/js/mandala.js" defer></script>
 <script src="/js/indra.js" defer></script>
 <script src="/js/footer.js" defer></script>
+
+<script>
+document.querySelectorAll('.amount-pill').forEach(function(pill){
+  pill.style.cursor = 'pointer';
+  pill.setAttribute('role', 'button');
+  pill.setAttribute('tabindex', '0');
+  pill.addEventListener('click', function(){
+    document.querySelectorAll('.amount-pill').forEach(function(p){ p.style.opacity = '0.5'; });
+    pill.style.opacity = '1';
+    pill.style.background = 'var(--mulberry-deep, #5A1F2F)';
+    pill.style.color = 'var(--paper, #F4EFE3)';
+    window.open('https://buymeacoffee.com/cyberphunk', '_blank');
+    setTimeout(function(){
+      document.querySelectorAll('.amount-pill').forEach(function(p){ p.style.opacity = ''; p.style.background = ''; p.style.color = ''; });
+    }, 2000);
+  });
+});
+</script>
 </body>
 </html>

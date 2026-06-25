@@ -517,6 +517,8 @@
     color: #5a5a52;
     line-height: 1.8;
   }
+  .edu-line { margin-bottom: 0.15em; }
+  .edu-line:last-child { margin-bottom: 0; }
 
   footer.cv-footer {
     text-align: center;
@@ -957,7 +959,7 @@ textarea:focus-visible,
 
   <header class="cv-header">
     <div class="cv-head-row">
-      <h1>Saul Karim NMH <span class="post">MA</span></h1>
+      <h1>Saul Karim NMH,<span class="post">MA</span></h1>
       <div class="cv-contact">
         <div class="meta">416-771-0382 · Toronto</div>
         <div class="cv-header-email" style="margin-top:0.2rem;text-align:right;"><a href="mailto:saulnassau@protonmail.com" style="font-family:var(--sans, system-ui, sans-serif);font-size:0.78rem;letter-spacing:0.04em;color:var(--accent, #A07A2C);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:0.1rem;">saulnassau@protonmail.com</a></div>
@@ -1017,6 +1019,18 @@ function tagsOf(catField) {
 function primaryTag(catField) {
   return Array.isArray(catField) ? catField[0] : catField;
 }
+// When a filter is active, an entry belongs to the FIRST selected category it carries,
+// in THEME_ORDER, so a volunteer-tagged entry shows under Volunteer rather than under its
+// primary heading. With no filter it falls back to its primary tag. One entry maps to
+// exactly one section, so nothing leaks into an unselected heading and nothing duplicates.
+function sectionCat(activeSet, catField) {
+  var tags = Array.isArray(catField) ? catField : [catField];
+  if (activeSet.size === 0) return tags[0];
+  for (var i = 0; i < THEME_ORDER.length; i++) {
+    if (activeSet.has(THEME_ORDER[i]) && tags.indexOf(THEME_ORDER[i]) !== -1) return THEME_ORDER[i];
+  }
+  return null;
+}
 function tagMatches(activeSet, catField) {
   const tags = tagsOf(catField);
   for (const t of tags) if (activeSet.has(t)) return true;
@@ -1075,7 +1089,7 @@ const CREDS_OVERRIDE = {
   en: {
     teaching: {
       certs: "TESOL, Indiana University (2016) · IB Theory of Knowledge (2023) · Nonviolent Communication, Rosenberg (2017) · Cognitive Behavioral Therapy (2018) · Berkley Invigilation Standards (2019) · Accessibility for Ontarians with Disabilities Act (AODA) Training · Motivation Coach Certificate (Udemy) · Mindfulness Practitioner I-III & Master (Udemy)",
-      // education: full list (default)
+      edu: "PhD Candidate in Education (Emerging technologies in pedagogy) · PhD Candidate in Philosophy (Hegel-Jung synthesis) · MA Philosophy, Art & Critical Thought, European Graduate School, Switzerland · BA Political Science, Economics, Philosophy, McGill University"
     },
     education: {
       certs: "TESOL, Indiana University (2016) · IB Theory of Knowledge (2023) · Nonviolent Communication, Rosenberg (2017) · Cognitive Behavioral Therapy (2018) · Berkley Invigilation Standards (2019) · Accessibility for Ontarians with Disabilities Act (AODA) Training · Motivation Coach Certificate (Udemy) · Python for Data Science & ML Bootcamp (Udemy) · Machine Learning A-Z (Udemy) · Mindfulness Practitioner I-III & Master (Udemy)",
@@ -1093,7 +1107,8 @@ const CREDS_OVERRIDE = {
   },
   zh: {
     teaching: {
-      certs: "TESOL，印第安納大學（2016）· IB 知識論（2023）· 非暴力溝通，Rosenberg（2017）· 認知行為治療（2018）· Berkley 監考標準（2019）· 安大略省殘疾人無障礙法案（AODA）培訓· 動機教練證書（Udemy）· 正念修習 I-III 及大師級（Udemy）"
+      certs: "TESOL，印第安納大學（2016）· IB 知識論（2023）· 非暴力溝通，Rosenberg（2017）· 認知行為治療（2018）· Berkley 監考標準（2019）· 安大略省殘疾人無障礙法案（AODA）培訓· 動機教練證書（Udemy）· 正念修習 I-III 及大師級（Udemy）",
+      edu: "教育學博士候選人（教學中的新興科技）· 哲學博士候選人（黑格爾-榮格整合）· 哲學、藝術與批判思維碩士，歐洲高等研究院，瑞士 · 政治學、經濟學、哲學學士，麥基爾大學"
     },
     education: {
       certs: "TESOL，印第安納大學（2016）· IB 知識論（2023）· 非暴力溝通，Rosenberg（2017）· 認知行為治療（2018）· Berkley 監考標準（2019）· 安大略省殘疾人無障礙法案（AODA）培訓· 動機教練證書（Udemy）· Python 資料科學與機器學習（Udemy）· Machine Learning A-Z（Udemy）· 正念修習 I-III 及大師級（Udemy）"
@@ -1108,7 +1123,8 @@ const CREDS_OVERRIDE = {
   },
   zhs: {
     teaching: {
-      certs: "TESOL，印第安纳大学（2016）· IB 知识论（2023）· 非暴力沟通，Rosenberg（2017）· 认知行为治疗（2018）· Berkley 监考标准（2019）· 安大略省残疾人无障碍法案（AODA）培训· 动机教练证书（Udemy）· 正念修习 I-III 及大师级（Udemy）"
+      certs: "TESOL，印第安纳大学（2016）· IB 知识论（2023）· 非暴力沟通，Rosenberg（2017）· 认知行为治疗（2018）· Berkley 监考标准（2019）· 安大略省残疾人无障碍法案（AODA）培训· 动机教练证书（Udemy）· 正念修习 I-III 及大师级（Udemy）",
+      edu: "教育学博士候选人（教学中的新兴科技）· 哲学博士候选人（黑格尔-荣格整合）· 哲学、艺术与批判思维硕士，欧洲高等研究院，瑞士 · 政治学、经济学、哲学学士，麦吉尔大学"
     },
     education: {
       certs: "TESOL，印第安纳大学（2016）· IB 知识论（2023）· 非暴力沟通，Rosenberg（2017）· 认知行为治疗（2018）· Berkley 监考标准（2019）· 安大略省残疾人无障碍法案（AODA）培训· 动机教练证书（Udemy）· Python 数据科学与机器学习（Udemy）· Machine Learning A-Z（Udemy）· 正念修习 I-III 及大师级（Udemy）"
@@ -1123,7 +1139,8 @@ const CREDS_OVERRIDE = {
   },
   fa: {
     teaching: {
-      certs: "TESOL، دانشگاه ایندیانا (۲۰۱۶) · IB نظریه دانش (۲۰۲۳) · ارتباط بدون خشونت، Rosenberg (۲۰۱۷) · رفتاردرمانی شناختی (۲۰۱۸) · استانداردهای نظارت Berkley (۲۰۱۹) · آموزش قانون دسترسی‌پذیری برای انتاریویی‌های دارای معلولیت (AODA) · گواهینامه مربی انگیزشی (Udemy) · دوره ذهن‌آگاهی I-III و استاد (Udemy)"
+      certs: "TESOL، دانشگاه ایندیانا (۲۰۱۶) · IB نظریه دانش (۲۰۲۳) · ارتباط بدون خشونت، Rosenberg (۲۰۱۷) · رفتاردرمانی شناختی (۲۰۱۸) · استانداردهای نظارت Berkley (۲۰۱۹) · آموزش قانون دسترسی‌پذیری برای انتاریویی‌های دارای معلولیت (AODA) · گواهینامه مربی انگیزشی (Udemy) · دوره ذهن‌آگاهی I-III و استاد (Udemy)",
+      edu: "نامزد دکترای آموزش و پرورش (فناوری‌های نوظهور در آموزش) · نامزد دکترای فلسفه (ترکیب هگل-یونگ) · کارشناسی ارشد فلسفه، هنر و تفکر انتقادی, مدرسه عالی اروپایی، سوئیس · کارشناسی علوم سیاسی، اقتصاد، فلسفه, دانشگاه مک‌گیل"
     },
     education: {
       certs: "TESOL، دانشگاه ایندیانا (۲۰۱۶) · IB نظریه دانش (۲۰۲۳) · ارتباط بدون خشونت، Rosenberg (۲۰۱۷) · رفتاردرمانی شناختی (۲۰۱۸) · استانداردهای نظارت Berkley (۲۰۱۹) · آموزش قانون دسترسی‌پذیری برای انتاریویی‌های دارای معلولیت (AODA) · گواهینامه مربی انگیزشی (Udemy) · Python علم داده و یادگیری ماشین (Udemy) · Machine Learning A-Z (Udemy) · دوره ذهن‌آگاهی I-III و استاد (Udemy)"
@@ -1138,7 +1155,8 @@ const CREDS_OVERRIDE = {
   },
   fr: {
     teaching: {
-      certs: "TESOL, Université d'Indiana (2016) · IB Théorie de la connaissance (2023) · Communication non violente, Rosenberg (2017) · Thérapie cognitivo-comportementale (2018) · Normes de surveillance Berkley (2019) · Formation sur la Loi sur l'accessibilité pour les personnes handicapées de l'Ontario (LAPHO) · Certificat Coach Motivationnel (Udemy) · Pleine Conscience I-III & Maître (Udemy)"
+      certs: "TESOL, Université d'Indiana (2016) · IB Théorie de la connaissance (2023) · Communication non violente, Rosenberg (2017) · Thérapie cognitivo-comportementale (2018) · Normes de surveillance Berkley (2019) · Formation sur la Loi sur l'accessibilité pour les personnes handicapées de l'Ontario (LAPHO) · Certificat Coach Motivationnel (Udemy) · Pleine Conscience I-III & Maître (Udemy)",
+      edu: "Doctorant en éducation (technologies émergentes en pédagogie) · Doctorant en philosophie (synthèse Hegel-Jung) · MA Philosophie, art et pensée critique, European Graduate School, Suisse · BA Sciences politiques, économie, philosophie, Université McGill"
     },
     education: {
       certs: "TESOL, Université d'Indiana (2016) · IB Théorie de la connaissance (2023) · Communication non violente, Rosenberg (2017) · Thérapie cognitivo-comportementale (2018) · Normes de surveillance Berkley (2019) · Formation sur la Loi sur l'accessibilité pour les personnes handicapées de l'Ontario (LAPHO) · Certificat Coach Motivationnel (Udemy) · Python Data Science & ML (Udemy) · Machine Learning A-Z (Udemy) · Pleine Conscience I-III & Maître (Udemy)"
@@ -1385,12 +1403,12 @@ const D = [
   [8,"Jan 2026–Present",["teaching","education"],{en:"Instructor, Happy Learning Education Center",zh:"講師，Happy Learning",zhs:"讲师，Happy Learning",fa:"مدرس، Happy Learning",fr:"Instructeur, Happy Learning"},null,"https://happylearningedu.com/",{en:"Toronto-based education centre offering STEM, robotics, and language classes. Part-time teaching alongside other concurrent roles.",zh:"多倫多教育中心，提供 STEM、機器人及語言課程。兼職教學。",zhs:"多伦多教育中心，提供 STEM、机器人及语言课程。兼职教学。",fa:"مرکز آموزشی تورنتو ارائه‌دهنده STEM، رباتیک و کلاس‌های زبان. تدریس پاره‌وقت.",fr:"Centre éducatif à Toronto offrant STEM, robotique et cours de langues. Enseignement à temps partiel."}],
   [7,"Jan–Aug 2020",["teaching","education"],{en:"Teacher, Toronto Central Academy",zh:"教師，Toronto Central Academy",zhs:"教师，Toronto Central Academy",fa:"معلم، Toronto Central Academy",fr:"Enseignant, Toronto Central Academy"},null,"https://www.tacademy.ca/",{en:"Second stint. Private school offering OSSD and AP programs to international students. Transition to online delivery during COVID-19.",zh:"第二次任職。私立學校，為國際學生提供 OSSD 及 AP 課程。疫情期間轉為線上教學。",zhs:"第二次任职。私立学校，为国际学生提供 OSSD 及 AP 课程。疫情期间转为线上教学。",fa:"دوره دوم. مدرسه خصوصی ارائه‌دهنده OSSD و AP برای دانش‌آموزان بین‌المللی. انتقال به آموزش آنلاین در دوران کووید.",fr:"Deuxième passage. École privée offrant OSSD et AP aux étudiants internationaux. Transition en ligne pendant le COVID-19."}],
   [7,"Jul 2020–Feb 2024",["teaching","education"],{en:"Online Educator, Smart Native, Hong Kong",zh:"線上教師，Smart Native, 香港",zhs:"线上教师，Smart Native, 香港",fa:"مدرس آنلاین، Smart Native, هنگ‌کنگ",fr:"Éducateur en ligne, Smart Native, Hong Kong"},null,"https://smartnative.hk/",{en:"Hong Kong-based online English education platform. Remote teaching concurrent with Toronto-based roles over nearly four years.",zh:"香港線上英語教育平台。近四年間與多倫多教學工作同步進行遠端授課。",zhs:"香港线上英语教育平台。近四年间与多伦多教学工作同步进行远程授课。",fa:"پلتفرم آموزش آنلاین انگلیسی مستقر در هنگ‌کنگ. تدریس از راه دور همزمان با نقش‌های تورنتو به مدت نزدیک به چهار سال.",fr:"Plateforme d'éducation en ligne basée à Hong Kong. Enseignement à distance en parallèle des postes à Toronto pendant près de quatre ans."}],
-  [4,"c. 2018–2020",["community","performance","kitchen"],{en:"Event Security and Front-of-House; Special Events and Nightclub, Toronto",zh:"活動安保及前場服務；多倫多特別活動及夜店",zhs:"活动安保及前场服务；多伦多特别活动及夜店",fa:"امنیت رویداد و پذیرایی؛ رویدادهای ویژه و کلوب شبانه، تورنتو",fr:"Sécurité événementielle et service en salle ; événements spéciaux et boîte de nuit, Toronto"},{en:"Licensed",zh:"持牌",zhs:"持牌",fa:"دارای مجوز",fr:"Sous licence"},null,{en:"Two pre-pandemic years working private security at a downtown Toronto gay club and a rotating set of special events. Always the de-escalation role at the door, diplomatic conversation as the primary tool, physical intervention as the rare last resort. Ontario Security Guard License. Front-of-house and floor-management overlap kept the work close to hospitality rather than enforcement.",zh:"疫情前兩年於多倫多市中心一家同志夜店及多項特別活動擔任私人安保。一直擔任門口的緩和角色——以外交對話為主要工具，肢體介入則是極少使用的最後手段。安大略保安員執照。前場與場內管理職責的重疊使這份工作更接近餐旅服務而非執法。",zhs:"疫情前两年于多伦多市中心一家同志夜店及多项特别活动担任私人安保。一直担任门口的缓和角色——以外交对话为主要工具，肢体介入则是极少使用的最后手段。安大略保安员执照。前场与场内管理职责的重叠使这份工作更接近餐旅服务而非执法。",fa:"دو سال پیش از همه‌گیری، کار امنیتی خصوصی در یک کلوب همجنس‌گرایان در مرکز شهر تورنتو و مجموعه‌ای از رویدادهای ویژه. همیشه نقش آرام‌سازی در درگاه, گفت‌وگوی دیپلماتیک به‌عنوان ابزار اصلی، مداخلهٔ فیزیکی به‌عنوان آخرین گزینهٔ نادر. مجوز نگهبان امنیتی انتاریو. هم‌پوشانی با خدمات پذیرایی و مدیریت سالن، این کار را به مهمان‌نوازی نزدیک‌تر کرد تا اجرای قانون.",fr:"Deux années pré-pandémiques en sécurité privée dans une boîte de nuit gaie du centre-ville de Toronto et lors d'une rotation d'événements spéciaux. Toujours en rôle de désescalade à la porte, la conversation diplomatique comme outil principal, l'intervention physique comme rare dernier recours. Permis d'agent de sécurité de l'Ontario. Le chevauchement avec le service en salle et la gestion de plancher rapprochait le travail de l'hôtellerie plutôt que de l'application de la loi."}],
+  [6,"c. 2018–2020",["community","performance","kitchen"],{en:"Event Security and Front-of-House; Special Events and Nightclub, Toronto",zh:"活動安保及前場服務；多倫多特別活動及夜店",zhs:"活动安保及前场服务；多伦多特别活动及夜店",fa:"امنیت رویداد و پذیرایی؛ رویدادهای ویژه و کلوب شبانه، تورنتو",fr:"Sécurité événementielle et service en salle ; événements spéciaux et boîte de nuit, Toronto"},{en:"Licensed",zh:"持牌",zhs:"持牌",fa:"دارای مجوز",fr:"Sous licence"},null,{en:"Two pre-pandemic years working private security at a downtown Toronto gay club and a rotating set of special events. Always the de-escalation role at the door, diplomatic conversation as the primary tool, physical intervention as the rare last resort. Ontario Security Guard License. Front-of-house and floor-management overlap kept the work close to hospitality rather than enforcement.",zh:"疫情前兩年於多倫多市中心一家同志夜店及多項特別活動擔任私人安保。一直擔任門口的緩和角色——以外交對話為主要工具，肢體介入則是極少使用的最後手段。安大略保安員執照。前場與場內管理職責的重疊使這份工作更接近餐旅服務而非執法。",zhs:"疫情前两年于多伦多市中心一家同志夜店及多项特别活动担任私人安保。一直担任门口的缓和角色——以外交对话为主要工具，肢体介入则是极少使用的最后手段。安大略保安员执照。前场与场内管理职责的重叠使这份工作更接近餐旅服务而非执法。",fa:"دو سال پیش از همه‌گیری، کار امنیتی خصوصی در یک کلوب همجنس‌گرایان در مرکز شهر تورنتو و مجموعه‌ای از رویدادهای ویژه. همیشه نقش آرام‌سازی در درگاه, گفت‌وگوی دیپلماتیک به‌عنوان ابزار اصلی، مداخلهٔ فیزیکی به‌عنوان آخرین گزینهٔ نادر. مجوز نگهبان امنیتی انتاریو. هم‌پوشانی با خدمات پذیرایی و مدیریت سالن، این کار را به مهمان‌نوازی نزدیک‌تر کرد تا اجرای قانون.",fr:"Deux années pré-pandémiques en sécurité privée dans une boîte de nuit gaie du centre-ville de Toronto et lors d'une rotation d'événements spéciaux. Toujours en rôle de désescalade à la porte, la conversation diplomatique comme outil principal, l'intervention physique comme rare dernier recours. Permis d'agent de sécurité de l'Ontario. Le chevauchement avec le service en salle et la gestion de plancher rapprochait le travail de l'hôtellerie plutôt que de l'application de la loi."}],
     [7,"c. 2020–Early 2023",["kitchen"],{en:"Assistant Manager, Pizza Pizza; Event Security; Various Contracts",zh:"副店長，Pizza Pizza；活動安保；合約工作",zhs:"副店长，Pizza Pizza；活动安保；合同工作",fa:"مدیر دستیار، Pizza Pizza؛ امنیت رویداد؛ قراردادها",fr:"Gérant adjoint, Pizza Pizza ; Sécurité ; Divers contrats"},{en:"Full kitchen, shift management, front-of-house",zh:"全廚房營運、班次管理、前場服務",zhs:"全厨房运营、班次管理、前场服务",fa:"عملیات کامل آشپزخانه، مدیریت شیفت، پذیرایی",fr:"Cuisine complète, gestion des quarts, service en salle"},"https://www.pizzapizza.ca/",{en:"Full kitchen operations, shift lead, front-of-house service through the pandemic period. Concurrent contract security work continuing from earlier Toronto roles.",zh:"全廚房營運、班次主管、前場服務，貫穿疫情期間。延續早期多倫多安保工作，同期承接合約安保任務。",zhs:"全厨房运营、班次主管、前场服务，贯穿疫情期间。延续早期多伦多安保工作，同期承接合约安保任务。",fa:"عملیات کامل آشپزخانه، سرپرست شیفت، خدمات پذیرایی در دوران همه‌گیری. کار قراردادی امنیتی هم‌زمان، در ادامهٔ نقش‌های پیشین تورنتو.",fr:"Opérations cuisine complètes, chef de quart, service en salle pendant la pandémie. Travail de sécurité contractuel parallèle, prolongement de postes torontois antérieurs."}],
   [7,"Jan 2021–May 2022",["teaching","education"],{en:"ESL Instructor, Access Education",zh:"ESL 講師，Access Education",zhs:"ESL 讲师，Access Education",fa:"مدرس ESL، Access Education",fr:"Instructeur d'ALS, Access Education"},null,"https://www.accessenglish.com/en/",{en:"Toronto-based ESL school (Nacel Access English, established 1999). English language instruction for international adult learners.",zh:"多倫多 ESL 學校（Nacel Access English，1999 年成立）。為國際成人學生提供英語教學。",zhs:"多伦多 ESL 学校（Nacel Access English，1999 年成立）。为国际成人学生提供英语教学。",fa:"مدرسه ESL تورنتو (Nacel Access English، تأسیس ۱۹۹۹). آموزش زبان انگلیسی برای بزرگسالان بین‌المللی.",fr:"École d'ALS à Toronto (Nacel Access English, fondée en 1999). Enseignement de l'anglais aux adultes internationaux."}],
   [6,"Jan–Jul 2019",["teaching","education"],{en:"Teacher, Toronto Central Academy",zh:"教師，Toronto Central Academy",zhs:"教师，Toronto Central Academy",fa:"معلم، Toronto Central Academy",fr:"Enseignant, Toronto Central Academy"},null,"https://www.tacademy.ca/",{en:"First stint. Private school offering OSSD and AP programs to international students in downtown Toronto.",zh:"第一次任職。市中心私立學校，為國際學生提供 OSSD 及 AP 課程。",zhs:"第一次任职。市中心私立学校，为国际学生提供 OSSD 及 AP 课程。",fa:"دوره اول. مدرسه خصوصی مرکز شهر تورنتو ارائه‌دهنده OSSD و AP برای دانش‌آموزان بین‌المللی.",fr:"Premier passage. École privée au centre-ville offrant OSSD et AP aux étudiants internationaux."}],
   [6,"Jul 2019",["education","teaching"],{en:"Berkley Invigilation Standards Certification",zh:"Berkley 監考標準認證",zhs:"Berkley 监考标准认证",fa:"گواهینامه نظارت Berkley",fr:"Certification Berkley"},null,null,{en:"Professional development in examination invigilation from Chongqing No.1 International Studies School. Subsequently retrained in invigilation standards at various other institutions.",zh:"重慶第一雙語學校的監考專業培訓。其後在多所學校接受監考標準再培訓。",zhs:"重庆第一双语学校的监考专业培训。其后在多所学校接受监考标准再培训。",fa:"آموزش حرفه‌ای نظارت بر آزمون از مدرسه بین‌المللی شماره ۱ چونگ‌چینگ. بازآموزی استانداردهای نظارت در مدارس مختلف.",fr:"Formation professionnelle en surveillance d'examens à Chongqing No.1."}],
-  [6,"Sep–Dec 2019",["teaching","education"],{en:"Teacher, Chongqing No.1 International Studies School, China",zh:"教師，重慶第一雙語學校, 中國",zhs:"教师，重庆第一双语学校, 中国",fa:"معلم، مدرسه بین‌المللی شماره ۱ چونگ‌چینگ, چین",fr:"Enseignant, École internationale n°1 de Chongqing, Chine"},{en:"A-Level English, AP Economics, AP English, IELTS",zh:"A-Level 英語、AP 經濟學、AP 英語、IELTS",zhs:"A-Level 英语、AP 经济学、AP 英语、IELTS",fa:"A-Level، AP، IELTS",fr:"A-Level, AP, IELTS"},"https://www.cqyz.cn/",{en:"A-Level English, AP Economics, AP English, and IELTS preparation at this international school in Chongqing, China.",zh:"在重慶國際學校教授 A-Level 英語、AP 經濟學、AP 英語及 IELTS 備考課程。",zhs:"在重庆国际学校教授 A-Level 英语、AP 经济学、AP 英语及 IELTS 备考课程。",fa:"تدریس A-Level انگلیسی، AP اقتصاد، AP انگلیسی و آمادگی IELTS در این مدرسه بین‌المللی در چونگ‌چینگ.",fr:"Enseignement A-Level anglais, AP économie, AP anglais et préparation IELTS dans cette école internationale à Chongqing."}],
+  [4,"Sep–Dec 2019",["teaching","education"],{en:"Teacher, Chongqing No.1 International Studies School, China",zh:"教師，重慶第一雙語學校, 中國",zhs:"教师，重庆第一双语学校, 中国",fa:"معلم، مدرسه بین‌المللی شماره ۱ چونگ‌چینگ, چین",fr:"Enseignant, École internationale n°1 de Chongqing, Chine"},{en:"A-Level English, AP Economics, AP English, IELTS",zh:"A-Level 英語、AP 經濟學、AP 英語、IELTS",zhs:"A-Level 英语、AP 经济学、AP 英语、IELTS",fa:"A-Level، AP، IELTS",fr:"A-Level, AP, IELTS"},"https://www.cqyz.cn/",{en:"A-Level English, AP Economics, AP English, and IELTS preparation at this international school in Chongqing, China.",zh:"在重慶國際學校教授 A-Level 英語、AP 經濟學、AP 英語及 IELTS 備考課程。",zhs:"在重庆国际学校教授 A-Level 英语、AP 经济学、AP 英语及 IELTS 备考课程。",fa:"تدریس A-Level انگلیسی، AP اقتصاد، AP انگلیسی و آمادگی IELTS در این مدرسه بین‌المللی در چونگ‌چینگ.",fr:"Enseignement A-Level anglais, AP économie, AP anglais et préparation IELTS dans cette école internationale à Chongqing."}],
   [5,"c. Jan 2017–Dec 2018",["teaching","education"],{en:"Instructor, East Van Education Center, Vancouver",zh:"講師，East Van, 溫哥華",zhs:"讲师，East Van, 温哥华",fa:"مدرس، East Van, ونکوور",fr:"Instructeur, East Van, Vancouver"},{en:"Adult education",zh:"成人教育",zhs:"成人教育",fa:"آموزش بزرگسالان",fr:"Éducation des adultes"},"https://www.vsb.bc.ca/vass/east-vancouver-education-centre",{en:"Adult education program run through the Vancouver School Board. Concurrent with Pattison High School.",zh:"溫哥華學區委員會成人教育課程。與 Pattison 高中同期任教。",zhs:"温哥华学区委员会成人教育课程。与 Pattison 高中同期任教。",fa:"برنامه آموزش بزرگسالان از طریق هیئت مدرسه ونکوور. همزمان با Pattison.",fr:"Programme d'éducation des adultes du conseil scolaire de Vancouver."}],
   [5,"Jan 2017–Jan 2019",["teaching","education"],{en:"Teacher, Pattison High School, Vancouver",zh:"教師，Pattison 高中, 溫哥華",zhs:"教师，Pattison 高中, 温哥华",fa:"معلم، Pattison, ونکوور",fr:"Enseignant, Pattison, Vancouver"},{en:"English, Economics, Social Studies",zh:"英語、經濟學、社會研究",zhs:"英语、经济学、社会研究",fa:"انگلیسی، اقتصاد، مطالعات اجتماعی",fr:"Anglais, économie, études sociales"},"https://www.pattisonhighschool.ca/",{en:"Private high school in Vancouver. Taught English, Economics, and Social Studies to international students.",zh:"溫哥華私立高中。為國際學生教授英語、經濟學和社會研究。",zhs:"温哥华私立高中。为国际学生教授英语、经济学和社会研究。",fa:"دبیرستان خصوصی در ونکوور. تدریس انگلیسی، اقتصاد و مطالعات اجتماعی به دانش‌آموزان بین‌المللی.",fr:"École secondaire privée à Vancouver."}],
   [5,"c. 2017–2018",["kitchen"],{en:"Chef, Private Winery Estate, Florence, Italy",zh:"主廚，私人酒莊, 義大利佛羅倫斯",zhs:"主厨，私人酒庄, 意大利佛罗伦萨",fa:"سرآشپز، ملک خصوصی شراب‌سازی, فلورانس، ایتالیا",fr:"Chef, Domaine viticole privé, Florence, Italie"},{en:"Seasonal",zh:"季節性",zhs:"季节性",fa:"فصلی",fr:"Saisonnier"},null,{en:"Secluded high-end private winery estate outside Florence. Worked as chef during breaks between teaching terms and EGS summer sessions.",zh:"佛羅倫斯郊外的高端私人酒莊。於教學學期與 EGS 暑期課程間隙擔任主廚。",zhs:"佛罗伦萨郊外的高端私人酒庄。于教学学期与 EGS 暑期课程间隙担任主厨。",fa:"ملک خصوصی شراب‌سازی لوکس در حومه فلورانس.",fr:"Domaine viticole privé haut de gamme près de Florence."}],
@@ -1622,7 +1640,7 @@ function render() {
     if (cvMode === "theme") {
       grouped = THEME_ORDER.map(cat => ({
         cat,
-        items: D.filter(x => (isFiltered ? tagMatches(active, x[2]) : !tagsOf(x[2]).includes("seminarschools")) && primaryTag(x[2]) === cat).sort((a, b) => b[0] - a[0])
+        items: D.filter(x => (isFiltered ? tagMatches(active, x[2]) : !tagsOf(x[2]).includes("seminarschools")) && sectionCat(active, x[2]) === cat).sort((a, b) => b[0] - a[0])
       })).filter(g => g.items.length > 0);
     } else {
       grouped = [9,8,7,6,5,4,3,2,1,0].map(i => ({
@@ -1760,7 +1778,14 @@ function render() {
   certsBlock.style.display = showCerts ? "" : "none";
   eduBlock.style.display = showEdu ? "" : "none";
   document.getElementById("certsBody").textContent = certsContent;
-  document.getElementById("eduBody").textContent = eduContent;
+  const eduEl = document.getElementById("eduBody");
+  eduEl.innerHTML = "";
+  String(eduContent).split(/\s*\u00b7\s*/).filter(Boolean).forEach(function(line, i, arr){
+    const d = document.createElement("div");
+    d.className = "edu-line";
+    d.textContent = line.trim();
+    eduEl.appendChild(d);
+  });
 
   // Letter size is handled globally and persistently by /js/theme.js.
 }
@@ -1893,7 +1918,49 @@ window.addEventListener("popstate", () => {
   } catch (e) {}
 });
 
-// Geometry handled by indra.js (unified engine, per-page focus via path seed)
+// ===========================================================================
+// GEOMETRY (Apollonian gasket - simplified single layer for the CV)
+// ===========================================================================
+function buildGeo() {
+  const SIZE = 1000;
+  const cx = SIZE / 2, cy = SIZE / 2;
+  let svg = `<svg viewBox="-${cx} -${cy} ${SIZE} ${SIZE}" xmlns="http://www.w3.org/2000/svg">`;
+  svg += `<g fill="none" stroke="currentColor" stroke-width="0.5">`;
+
+  const R = 380;
+  // Outer circle
+  svg += `<circle cx="0" cy="0" r="${R}"/>`;
+
+  // Six interior tangent circles
+  const r1 = R / 3;
+  for (let i = 0; i < 6; i++) {
+    const a = (i / 6) * Math.PI * 2;
+    const d = R - r1;
+    svg += `<circle cx="${(d * Math.cos(a)).toFixed(1)}" cy="${(d * Math.sin(a)).toFixed(1)}" r="${r1.toFixed(1)}"/>`;
+  }
+
+  // Central
+  svg += `<circle cx="0" cy="0" r="${r1.toFixed(1)}"/>`;
+
+  // Smaller satellites
+  const r2 = r1 / 2.5;
+  for (let i = 0; i < 12; i++) {
+    const a = (i / 12) * Math.PI * 2 + Math.PI / 12;
+    const d = R - r2 - 5;
+    svg += `<circle cx="${(d * Math.cos(a)).toFixed(1)}" cy="${(d * Math.sin(a)).toFixed(1)}" r="${r2.toFixed(1)}"/>`;
+  }
+
+  // Inner ring
+  for (let i = 0; i < 6; i++) {
+    const a = (i / 6) * Math.PI * 2 + Math.PI / 6;
+    const d = r1 * 0.85;
+    svg += `<circle cx="${(d * Math.cos(a)).toFixed(1)}" cy="${(d * Math.sin(a)).toFixed(1)}" r="${(r2 * 0.7).toFixed(1)}"/>`;
+  }
+
+  svg += `</g></svg>`;
+  document.getElementById("geoLayer").innerHTML = svg;
+}
+buildGeo();
 
 // Set page title based on variant
 function updateTitle() {
@@ -1948,24 +2015,94 @@ function buildPrintCv() {
   var isFiltered = active.size > 0;
   // Summary selection is combination-aware below (see activeCats).
 
-  // Professional summary, English only by request. Per-tab variants reshaped from the
-  // 2025 resume summary, the competencies, and the documented entries. No new facts.
-  var SUMMARY = "Education and community development professional with extensive experience across North America, Asia, and Europe. Mentored 1,000+ students through academic development and university admissions processes while coordinating volunteer programs and community initiatives. Applies cross-cultural understanding to develop and assess programs that address performance gaps and improve outcomes. Experienced in resource management, building communication networks, and fostering collaboration in multicultural settings.";
-  var SUMMARY_BY_CAT = {
-    teaching: "Educator with fifteen years across six countries and roughly fifteen curricula, including OSSD, IB, AP, A-level, and ESL. Mentored over a thousand students through academic development and university admissions, teaching English and the humanities in IB World Schools and Ontario diploma programs. IB Theory of Knowledge and TESOL certified.",
-    education: "Education professional and current PhD candidate researching emerging technologies in pedagogy. Mentored over a thousand students through academic development and admissions while developing and assessing programs that close performance gaps. Grounds practice in dialogical, seminar-based learning rather than transmission.",
-    community: "Community development professional experienced in coordinating volunteer programs and community initiatives across multicultural settings. Managed volunteer coordination, budgeting, and partner networks, and organized university and secondary-school conferences at scale. Applies social and economic impact assessment and nonviolent communication to build durable networks.",
-    kitchen: "Hospitality and culinary background spanning private estate kitchens and front-of-house management. Worked as a chef between teaching terms, including a high-end private winery estate outside Florence, alongside shift management and event roles. Food Handlers certified.",
-    volunteer: "Volunteer coordinator experienced in mobilizing programs and people across community settings, from student-run urban agriculture to accessibility-focused walks. Brings resource planning and cross-cultural collaboration to mission-driven work.",
-    performance: "Comfortable in public-facing and performance settings, from competitive select-level athletics to leading seminars and public talks. Brings composure, presence, and teamwork into the room.",
-    seminarschools: "Founder of Seminar Schools, a Toronto practice built on the seminar as a root form of serious learning. Runs Leizu Academy for tutoring toward the Ontario curriculum, the IB Diploma, and university admissions, alongside the polymyth framework and the bookwormburrows pedagogical game. Connects classroom practice to research in dialogical learning."
+  // Professional summary, localized to the active language. Per-tab variants reshaped
+  // from the 2025 resume, the competencies, and the documented entries. No new facts.
+  // Non-English prose is authored for this CV; have a native eye confirm before relying.
+  var SUMMARY = {
+    en: "Education and community development professional with extensive experience across North America, Asia, and Europe. Mentored 1,000+ students through academic development and university admissions processes while coordinating volunteer programs and community initiatives. Applies cross-cultural understanding to develop and assess programs that address performance gaps and improve outcomes. Experienced in resource management, building communication networks, and fostering collaboration in multicultural settings.",
+    zh: "教育與社區發展專業人士，在北美、亞洲及歐洲擁有豐富經驗。透過學術發展及大學升學輔導指導逾一千名學生，同時統籌志工計畫與社區項目。運用跨文化理解力開發及評估計畫，以彌補學習成效落差並提升成果。具備資源管理、建立溝通網絡及在多元文化環境中促進協作的經驗。",
+    zhs: "教育与社区发展专业人士，在北美、亚洲及欧洲拥有丰富经验。通过学术发展及大学升学辅导指导逾一千名学生，同时统筹志愿者计划与社区项目。运用跨文化理解力开发及评估计划，以弥补学习成效差距并提升成果。具备资源管理、建立沟通网络及在多元文化环境中促进协作的经验。",
+    fa: "متخصص آموزش و توسعهٔ اجتماعی با تجربهٔ گسترده در آمریکای شمالی، آسیا و اروپا. راهنمایی بیش از ۱٬۰۰۰ دانش‌آموز در مسیر رشد تحصیلی و پذیرش دانشگاه، همراه با هماهنگی برنامه‌های داوطلبانه و طرح‌های اجتماعی. به‌کارگیری درک میان‌فرهنگی برای طراحی و ارزیابی برنامه‌هایی که شکاف‌های عملکرد را پر می‌کنند و نتایج را بهبود می‌بخشند. باتجربه در مدیریت منابع، ساخت شبکه‌های ارتباطی و تقویت همکاری در محیط‌های چندفرهنگی.",
+    fr: "Professionnel de l'éducation et du développement communautaire fort d'une vaste expérience en Amérique du Nord, en Asie et en Europe. A accompagné plus de 1 000 élèves dans leur progression scolaire et leurs candidatures universitaires tout en coordonnant des programmes de bénévolat et des initiatives communautaires. Mobilise une compréhension interculturelle pour concevoir et évaluer des programmes qui comblent les écarts de performance et améliorent les résultats. Expérimenté en gestion des ressources, en création de réseaux de communication et en collaboration en milieu multiculturel."
   };
-  var COMPETENCIES = ["Resource Planning & Allocation","Consultation & Guidance Expertise","Policy & Procedure Development","Nonviolent Communication","Social & Economic Impact Assessment","Team Development & Leadership","Basic French, Farsi, & Mandarin","Key Performance Indicator (KPI) tracking & Continuous Process Improvement"];
+  var SUMMARY_BY_CAT = {
+    teaching: {
+      en: "PhD candidate in Education with an MA in Philosophy from the European Graduate School and more than fifteen years of teaching experience across six countries. Work spans fifteen curricula, including OSSD, IB, AP, A Level, ESL, and adult education, supporting over 1,000 students in academic writing, literacy development, and university preparation.\n\nTeaching is inquiry-based, highly scaffolded, and discussion-driven, designed to create seminars that create projects students feel proud of by the end of the semester. Aims to cultivate independent thinkers who develop the curiosity, confidence, and habits necessary for lifelong self-directed learning. Places strong emphasis on revision as a central part of the learning process, helping students refine their ideas through continuous feedback and reflection.\n\nCommitted to building engaging learning communities where students take pride in their work and contribute meaningfully to collective inquiry. Having taught extensively in multilingual classrooms, designs instruction that is responsive to diverse linguistic backgrounds, neurodivergent learners, varied learning profiles, and a wide range of educational needs.\n\nSuccessfully completed instructional inspections in Ontario and British Columbia. Certified in IB Theory of Knowledge and TESOL.",
+      zh: "教育學博士候選人，持歐洲高等研究院哲學碩士學位，擁有超過十五年橫跨六個國家的教學經驗。教學涵蓋十五種課程體系，包括 OSSD、IB、AP、A Level、ESL 及成人教育，支持逾一千名學生的學術寫作、讀寫能力發展及大學升學準備。\n\n教學以探究為本、高度鷹架支持、以討論為驅動，旨在創建研討會式的課堂，催生出讓學生在學期結束時引以為傲的專題作品。致力於培養獨立思考者，發展其終身自主學習所需的好奇心、自信與習慣。高度重視修訂作為學習過程的核心環節，幫助學生通過持續反饋與反思來精煉思想。\n\n致力於建構富有參與感的學習社群，讓學生以自己的作品為榮，並對集體探究做出有意義的貢獻。在多語課堂中擁有豐富教學經驗，能針對不同語言背景、神經多樣性學習者、多元學習風格及廣泛教育需求設計教學。\n\n已成功通過安大略省及卑詩省的教學督導。持有 IB 知識論及 TESOL 認證。",
+      zhs: "教育学博士候选人，持欧洲高等研究院哲学硕士学位，拥有超过十五年横跨六个国家的教学经验。教学涵盖十五种课程体系，包括 OSSD、IB、AP、A Level、ESL 及成人教育，支持逾一千名学生的学术写作、读写能力发展及大学升学准备。\n\n教学以探究为本、高度脚手架支持、以讨论为驱动，旨在创建研讨会式的课堂，催生出让学生在学期结束时引以为傲的专题作品。致力于培养独立思考者，发展其终身自主学习所需的好奇心、自信与习惯。高度重视修订作为学习过程的核心环节，帮助学生通过持续反馈与反思来精炼思想。\n\n致力于构建富有参与感的学习社群，让学生以自己的作品为荣，并对集体探究做出有意义的贡献。在多语课堂中拥有丰富教学经验，能针对不同语言背景、神经多样性学习者、多元学习风格及广泛教育需求设计教学。\n\n已成功通过安大略省及不列颠哥伦比亚省的教学督导。持有 IB 知识论及 TESOL 认证。",
+      fa: "نامزد دکترای آموزش و پرورش با مدرک کارشناسی ارشد فلسفه از مدرسه عالی اروپایی و بیش از پانزده سال تجربه تدریس در شش کشور. تدریس در پانزده برنامه درسی شامل OSSD، IB، AP، A Level، ESL و آموزش بزرگسالان، با حمایت از بیش از ۱٬۰۰۰ دانش‌آموز در نگارش آکادمیک، توسعه سواد و آمادگی دانشگاه.\n\nتدریس پژوهش‌محور، با داربست‌بندی بالا و مبتنی بر گفت‌وگو، طراحی‌شده برای ایجاد سمینارهایی که پروژه‌هایی می‌سازند که دانش‌آموزان در پایان ترم به آنها افتخار کنند. هدف پرورش متفکران مستقل با کنجکاوی، اعتمادبه‌نفس و عادت‌های لازم برای یادگیری خودراهبر مادام‌العمر. تأکید قوی بر بازنگری به‌عنوان بخش محوری فرآیند یادگیری.\n\nمتعهد به ساختن جوامع یادگیری پویا. با تجربه گسترده در کلاس‌های چندزبانه، طراحی آموزش پاسخگو به پیشینه‌های زبانی متنوع، یادگیرندگان عصب‌متنوع، پروفایل‌های یادگیری مختلف و طیف وسیعی از نیازهای آموزشی.\n\nبازرسی‌های آموزشی در انتاریو و بریتیش کلمبیا با موفقیت گذرانده شده. دارای گواهینامه نظریه دانش IB و TESOL.",
+      fr: "Doctorant en éducation, titulaire d'un MA en philosophie de l'European Graduate School et fort de plus de quinze ans d'enseignement dans six pays. Parcours couvrant quinze programmes dont l'OSSD, l'IB, l'AP, le A Level, l'ESL et l'éducation des adultes, avec l'accompagnement de plus de 1 000 élèves en rédaction académique, développement de la littératie et préparation universitaire.\n\nEnseignement fondé sur l'investigation, fortement étayé et axé sur la discussion, conçu pour créer des séminaires qui engendrent des projets dont les élèves sont fiers en fin de semestre. Vise à former des penseurs autonomes dotés de la curiosité, de la confiance et des habitudes nécessaires à un apprentissage autodirigé tout au long de la vie. Accorde une grande importance à la révision comme élément central du processus d'apprentissage.\n\nEngagé dans la construction de communautés d'apprentissage stimulantes où les élèves sont fiers de leur travail et contribuent de manière significative à l'enquête collective. Fort d'une expérience étendue en classes multilingues, conçoit un enseignement adapté aux divers profils linguistiques, aux apprenants neurodivergents, aux profils d'apprentissage variés et à un large éventail de besoins éducatifs.\n\nInspections pédagogiques réussies en Ontario et en Colombie-Britannique. Certifié en théorie de la connaissance de l'IB et TESOL."
+    },
+    education: {
+      en: "Education professional and current PhD candidate researching emerging technologies in pedagogy. Mentored over a thousand students through academic development and admissions while developing and assessing programs that close performance gaps. Grounds practice in dialogical, seminar-based learning rather than transmission.",
+      zh: "教育專業人士，現為博士候選人，研究教學中的新興技術。透過學術發展與升學輔導指導逾千名學生，同時開發及評估彌補學習成效落差的計畫。以對話式、研討會為本的學習為實踐根基，而非單向傳授。",
+      zhs: "教育专业人士，现为博士候选人，研究教学中的新兴技术。通过学术发展与升学辅导指导逾千名学生，同时开发及评估弥补学习成效差距的计划。以对话式、研讨会为本的学习为实践根基，而非单向传授。",
+      fa: "متخصص آموزش و دانشجوی کنونی دکتری با پژوهش در فناوری‌های نوظهور در آموزش. راهنمایی بیش از هزار دانش‌آموز در رشد تحصیلی و پذیرش، همراه با طراحی و ارزیابی برنامه‌هایی که شکاف‌های عملکرد را می‌بندند. مبنای کار، یادگیری گفت‌وگومحور و سمینارمحور است نه انتقال یک‌سویه.",
+      fr: "Professionnel de l'éducation et doctorant étudiant les technologies émergentes en pédagogie. A accompagné plus de mille élèves dans leur progression scolaire et leurs candidatures, tout en concevant et évaluant des programmes qui comblent les écarts de performance. Ancre sa pratique dans un apprentissage dialogique de type séminaire plutôt que dans la transmission."
+    },
+    community: {
+      en: "Community development professional experienced in coordinating volunteer programs and community initiatives across multicultural settings. Managed volunteer coordination, budgeting, and partner networks, and organized university and secondary-school conferences at scale. Applies social and economic impact assessment to build durable networks.",
+      zh: "社區發展專業人士，擅長在多元文化環境中統籌志工計畫與社區項目。負責志工協調、預算編列及夥伴網絡，並大規模籌辦大學及中學會議。運用社會與經濟影響評估，以建立持久的網絡。",
+      zhs: "社区发展专业人士，擅长在多元文化环境中统筹志愿者计划与社区项目。负责志愿者协调、预算编列及伙伴网络，并大规模筹办大学及中学会议。运用社会与经济影响评估，以建立持久的网络。",
+      fa: "متخصص توسعهٔ اجتماعی با تجربه در هماهنگی برنامه‌های داوطلبانه و طرح‌های اجتماعی در محیط‌های چندفرهنگی. مسئول هماهنگی داوطلبان، بودجه‌بندی و شبکه‌های همکار، و برگزارکنندهٔ همایش‌های دانشگاهی و دبیرستانی در مقیاس بزرگ. به‌کارگیری ارزیابی اثر اجتماعی و اقتصادی برای ساخت شبکه‌های پایدار.",
+      fr: "Professionnel du développement communautaire expérimenté dans la coordination de programmes de bénévolat et d'initiatives communautaires en milieu multiculturel. A géré la coordination des bénévoles, la budgétisation et les réseaux de partenaires, et organisé des conférences universitaires et secondaires d'envergure. Recourt à l'évaluation de l'impact social et économique pour bâtir des réseaux durables."
+    },
+    kitchen: {
+      en: "Hospitality and culinary background spanning private estate kitchens and front-of-house management. Worked as a chef between teaching terms, including a high-end private winery estate outside Florence, alongside shift management and event roles. Food Handlers certified.",
+      zh: "餐旅與廚藝背景，涵蓋私人莊園廚房及前場管理。於教學工作之間擔任廚師，包括佛羅倫斯郊外一座高級私人酒莊，並兼任班次管理及活動職務。持有食品安全處理（Food Handlers）認證。",
+      zhs: "餐旅与厨艺背景，涵盖私人庄园厨房及前场管理。于教学工作之间担任厨师，包括佛罗伦萨郊外一座高级私人酒庄，并兼任班次管理及活动职务。持有食品安全处理（Food Handlers）认证。",
+      fa: "پیشینهٔ مهمان‌نوازی و آشپزی، از آشپزخانه‌های املاک خصوصی تا مدیریت پذیرایی. کار به‌عنوان سرآشپز در فاصلهٔ دوره‌های تدریس، از جمله یک ملک شراب‌سازی خصوصی ممتاز در حومهٔ فلورانس، همراه با مدیریت شیفت و نقش‌های رویداد. دارای گواهینامهٔ بهداشت مواد غذایی (Food Handlers).",
+      fr: "Parcours en hôtellerie et en cuisine, des cuisines de domaines privés à la gestion de salle. A travaillé comme chef entre ses contrats d'enseignement, notamment dans un domaine viticole privé haut de gamme près de Florence, en plus de la gestion des quarts et de rôles événementiels. Certifié en hygiène alimentaire (Food Handlers)."
+    },
+    volunteer: {
+      en: "Volunteer coordinator experienced in mobilizing programs and people across community settings, from student-run urban agriculture to accessibility-focused walks. Brings resource planning and cross-cultural collaboration to mission-driven work.",
+      zh: "志工協調員，擅長在各類社區場景中動員計畫與人力，從學生營運的都市農業到關注無障礙的步行活動。為使命導向的工作帶來資源規劃與跨文化協作。",
+      zhs: "志愿者协调员，擅长在各类社区场景中动员计划与人力，从学生运营的都市农业到关注无障碍的步行活动。为使命导向的工作带来资源规划与跨文化协作。",
+      fa: "هماهنگ‌کنندهٔ داوطلبان با تجربه در بسیج برنامه‌ها و افراد در محیط‌های اجتماعی، از کشاورزی شهری دانشجویی تا پیاده‌روی‌های متمرکز بر دسترس‌پذیری. برنامه‌ریزی منابع و همکاری میان‌فرهنگی را به کارهای هدف‌محور می‌آورد.",
+      fr: "Coordonnateur de bénévoles expérimenté dans la mobilisation de programmes et de personnes en milieu communautaire, de l'agriculture urbaine gérée par des étudiants aux marches axées sur l'accessibilité. Apporte planification des ressources et collaboration interculturelle au travail à vocation sociale."
+    },
+    performance: {
+      en: "Comfortable in public-facing and performance settings, from competitive select-level athletics to leading seminars and public talks. Brings composure, presence, and teamwork into the room.",
+      zh: "擅長面對公眾及表演場合，從競技選拔級體育到主持研討會及公開演講。將沉著、台風與團隊合作帶入現場。",
+      zhs: "擅长面对公众及表演场合，从竞技选拔级体育到主持研讨会及公开演讲。将沉着、台风与团队合作带入现场。",
+      fa: "راحت در موقعیت‌های عمومی و اجرایی، از ورزش رقابتی سطح منتخب تا ادارهٔ سمینارها و سخنرانی‌های عمومی. خونسردی، حضور و کار تیمی را به فضا می‌آورد.",
+      fr: "À l'aise en contexte public et scénique, du sport de compétition de niveau sélect à l'animation de séminaires et de conférences. Apporte sang-froid, présence et esprit d'équipe."
+    },
+    seminarschools: {
+      en: "Founder of Seminar Schools, a Toronto practice built on the seminar as a root form of serious learning. Runs Leizu Academy for tutoring toward the Ontario curriculum, the IB Diploma, and university admissions, alongside the polymyth framework and the bookwormburrows pedagogical game. Connects classroom practice to research in dialogical learning.",
+      zh: "Seminar Schools 創辦人，這是一間以研討會作為嚴肅學習根本形式的多倫多機構。經營嫘祖學院（Leizu Academy），輔導安大略課程、IB 文憑及大學升學，並推動 polymyth 框架與 bookwormburrows 教學遊戲。將課堂實踐與對話式學習研究相連結。",
+      zhs: "Seminar Schools 创办人，这是一间以研讨会作为严肃学习根本形式的多伦多机构。经营嫘祖学院（Leizu Academy），辅导安大略课程、IB 文凭及大学升学，并推动 polymyth 框架与 bookwormburrows 教学游戏。将课堂实践与对话式学习研究相连结。",
+      fa: "بنیان‌گذار Seminar Schools، نهادی در تورنتو که بر سمینار به‌عنوان شکل بنیادی یادگیری جدی استوار است. ادارهٔ آکادمی لِیزو (Leizu Academy) برای آموزش خصوصی در برنامهٔ درسی انتاریو، دیپلم IB و پذیرش دانشگاه، در کنار چارچوب polymyth و بازی آموزشی bookwormburrows. پیوند میان عمل کلاسی و پژوهش در یادگیری گفت‌وگومحور.",
+      fr: "Fondateur de Seminar Schools, une structure torontoise fondée sur le séminaire comme forme première d'un apprentissage sérieux. Dirige la Leizu Academy, qui prépare au curriculum de l'Ontario, au diplôme de l'IB et aux admissions universitaires, aux côtés du cadre polymyth et du jeu pédagogique bookwormburrows. Relie la pratique en classe à la recherche sur l'apprentissage dialogique."
+    }
+  };
+  var COMPETENCIES = ["Resource Planning & Allocation","Consultation & Guidance Expertise","Policy & Procedure Development","Social & Economic Impact Assessment","Team Development & Leadership","Basic French, Farsi, & Mandarin","Key Performance Indicator (KPI) tracking & Continuous Process Improvement"];
+  // Per-tab competency routing. With no filter the full list shows. Filtered, the
+  // competency block becomes the union of the active tabs' lists in canonical order,
+  // so a kitchen CV stops advertising policy and impact-assessment skills. Order and
+  // wording stay anchored to COMPETENCIES above; this only selects.
+  var COMP_BY_CAT = {
+    teaching: ["Consultation & Guidance Expertise","Basic French, Farsi, & Mandarin"],
+    education: ["Consultation & Guidance Expertise","Policy & Procedure Development","Basic French, Farsi, & Mandarin"],
+    community: ["Resource Planning & Allocation","Policy & Procedure Development","Social & Economic Impact Assessment","Team Development & Leadership","Key Performance Indicator (KPI) tracking & Continuous Process Improvement"],
+    kitchen: ["Resource Planning & Allocation","Team Development & Leadership"],
+    volunteer: ["Resource Planning & Allocation","Social & Economic Impact Assessment","Team Development & Leadership"],
+    performance: ["Team Development & Leadership"],
+    seminarschools: ["Resource Planning & Allocation","Consultation & Guidance Expertise","Policy & Procedure Development","Team Development & Leadership","Key Performance Indicator (KPI) tracking & Continuous Process Improvement"]
+  };
+  // Localized competency labels, index-aligned with COMPETENCIES. English falls through.
+  var COMPETENCIES_L10N = {
+    zh: ["資源規劃與分配","諮詢與輔導專長","政策與流程制定","社會與經濟影響評估","團隊培養與領導","基礎法語、波斯語及普通話","關鍵績效指標（KPI）追蹤與持續流程改善"],
+    zhs: ["资源规划与分配","咨询与辅导专长","政策与流程制定","社会与经济影响评估","团队培养与领导","基础法语、波斯语及普通话","关键绩效指标（KPI）追踪与持续流程改善"],
+    fa: ["برنامه‌ریزی و تخصیص منابع","تخصص مشاوره و راهنمایی","تدوین سیاست و رویه","ارزیابی اثر اجتماعی و اقتصادی","توسعهٔ تیم و رهبری","فرانسه، فارسی و ماندارین مقدماتی","پایش شاخص‌های کلیدی عملکرد (KPI) و بهبود مستمر فرایند"],
+    fr: ["Planification et allocation des ressources","Expertise en consultation et orientation","Élaboration de politiques et de procédures","Évaluation de l'impact social et économique","Développement d'équipe et leadership","Français, persan et mandarin de base","Suivi des indicateurs clés de performance (KPI) et amélioration continue des processus"]
+  };
 
   var esc = function (s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
+  var dateDigits = function (s) { return lang === 'fa' ? String(s).replace(/[0-9]/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'.charAt(+d); }) : s; };
   var firstSentence = function (txt) {
     var s = String(txt).trim();
-    var m = s.match(/^[\s\S]*?[.!?](?=\s|$)/);
+    var m = s.match(/^[\s\S]*?(?:[.!?](?=\s|$)|[。！？؟])/);
     return m ? m[0] : s;
   };
   var tagsOf = function (c) { return Array.isArray(c) ? c : [c]; };
@@ -1973,8 +2110,7 @@ function buildPrintCv() {
   var dateColPt = Math.min(118, Math.max(92, 6.1*longest)).toFixed(0);
 
   var rowHtml = function (item) {
-    var prim = tagsOf(item[2])[0];
-    var color = (CATS[prim]||{}).color || '#888';
+    var color = '#7A2632';
     var titleRaw = getText(item[3], lang) || '';
     var title = esc(titleRaw);
     var roleLen = titleRaw.length;
@@ -1983,14 +2119,14 @@ function buildPrintCv() {
       : (item[6] && getText(item[6], lang) && getText(item[6], lang).trim() ? firstSentence(getText(item[6], lang)) : null);
     if (noteRaw && noteRaw.length > (72 - roleLen)) { noteRaw = null; }
     var note = noteRaw ? esc(noteRaw) : null;
-    return '<tr><td class="d">'+esc(item[1])+'</td>'
+    return '<tr><td class="d">'+dateDigits(esc(item[1]))+'</td>'
       + '<td class="b" style="border-left-color:'+color+'"><span class="t">'+title+'</span>'+(note?' <span class="n">'+note+'</span>':'')+'</td></tr>';
   };
 
   var secs = '';
   if (cvMode === "theme") {
     THEME_ORDER.forEach(function(cat){
-      var items = D.filter(function(x){ return tagsOf(x[2])[0]===cat && x[0]>=1 && !tagsOf(x[2]).includes('seminarschools') && !isCert(x) && (!isFiltered || tagMatches(active, x[2])); }).sort(function(a,b){ return b[0]-a[0]; });
+      var items = D.filter(function(x){ return sectionCat(active, x[2])===cat && x[0]>=1 && !tagsOf(x[2]).includes('seminarschools') && !isCert(x) && (!isFiltered || tagMatches(active, x[2])); }).sort(function(a,b){ return b[0]-a[0]; });
       if (!items.length) return;
       var secName = esc(CAT_LABELS[cat] || cat);
       secs += '<div class="sec block"><div class="sh">'+secName+'</div><table class="rows">'+items.map(rowHtml).join('')+'</table></div>';
@@ -2052,20 +2188,31 @@ function buildPrintCv() {
 
   var CAT_ORDER = ['kitchen','teaching','community','education','volunteer','performance','seminarschools'];
   var activeCats = CAT_ORDER.filter(function(c){ return active.has(c); });
+  var pickL = function (o) { return (o && typeof o === 'object') ? (o[lang] || o.en) : o; };
   var summaryRaw;
   if (activeCats.length === 0) {
-    summaryRaw = SUMMARY;
+    summaryRaw = pickL(SUMMARY);
   } else if (activeCats.length === 1) {
-    summaryRaw = SUMMARY_BY_CAT[activeCats[0]] || SUMMARY;
+    summaryRaw = pickL(SUMMARY_BY_CAT[activeCats[0]]) || pickL(SUMMARY);
   } else {
     summaryRaw = activeCats.map(function(c){
-      var t = String(SUMMARY_BY_CAT[c] || '').trim();
-      var m = t.match(/^[\s\S]*?[.!?](?=\s|$)/);
+      var t = String(pickL(SUMMARY_BY_CAT[c]) || '').trim();
+      var m = t.match(/^[\s\S]*?(?:[.!?](?=\s|$)|[。！？؟])/);
       return m ? m[0].trim() : t;
     }).filter(Boolean).join(' ');
   }
-  var summaryText = esc(summaryRaw);
-  var compHtml = COMPETENCIES.map(function(c,idx){ var mk=(idx?'<span class="m">&#9642;</span>':'<span class="m" style="margin-left:0">&#9642;</span>'); return c.length<=42?('<span style="white-space:nowrap">'+mk+esc(c)+'</span>'):(mk+esc(c)); }).join('');
+  var summaryText = esc(summaryRaw).replace(/\n\n/g, '</p><p>');
+  if (summaryText.indexOf('</p>') !== -1) summaryText = '<p>' + summaryText + '</p>';
+  var compL = COMPETENCIES_L10N[lang] || COMPETENCIES;
+  var compIdx;
+  if (active.size === 0) { compIdx = COMPETENCIES.map(function (_, i) { return i; }); }
+  else {
+    var compUnion = {};
+    activeCats.forEach(function (c) { (COMP_BY_CAT[c] || []).forEach(function (x) { compUnion[x] = 1; }); });
+    compIdx = COMPETENCIES.map(function (c, i) { return compUnion[c] ? i : -1; }).filter(function (i) { return i >= 0; });
+  }
+  var showComp = compIdx.length > 0;
+  var compHtml = compIdx.map(function (i, k) { var mk = '<span class="m"' + (k ? '' : ' style="margin-left:0"') + '>&#9642;</span>'; return '<span style="white-space:nowrap">' + mk + esc(compL[i]) + '</span>'; }).join(' ');
 
   var css = [
     "#printCv{font-family:Georgia,'Times New Roman','Liberation Serif',serif;color:#1c1c1c;background:#fff;font-size:10.5pt;line-height:1.4;}",
@@ -2079,8 +2226,10 @@ function buildPrintCv() {
     "#printCv .hd .contact{text-align:right;font-size:8.6pt;letter-spacing:0.4pt;color:#5b5b5b;line-height:1.6;}",
     "#printCv .hd .contact .em{color:#7A2632;}",
     "#printCv .rule{border-bottom:1.5px solid #7A2632;margin-top:6pt;height:0;font-size:0;}",
-    "#printCv .summary{margin-top:6pt;font-size:9.5pt;line-height:1.38;color:#2b2b2b;text-align:justify;}",
-    "#printCv .comp{margin-top:4pt;font-size:8.9pt;line-height:1.42;color:#454545;}",
+    "#printCv .summary{margin-top:6pt;font-size:9.5pt;line-height:1.38;color:#2b2b2b;text-align:left;}",
+    "#printCv .summary p{margin:0 0 4pt 0;}",
+    "#printCv .summary p:last-child{margin-bottom:0;}",
+    "#printCv .comp{margin-top:4pt;font-size:8.9pt;line-height:1.42;color:#454545;overflow-wrap:break-word;word-wrap:break-word;}",
     "#printCv .comp .m{color:#7A2632;margin:0 5pt;}",
     "#printCv .sec{margin-top:9pt;}",
     "#printCv .sh{font-size:9.5pt;font-weight:600;letter-spacing:2.2pt;text-transform:uppercase;color:#7A2632;border-bottom:0.75px solid #ddc8cc;padding-bottom:2pt;margin-bottom:3.5pt;page-break-after:avoid;}",
@@ -2101,11 +2250,11 @@ function buildPrintCv() {
   ].join('\n');
 
   host.innerHTML = '<style>'+css+'</style>'
-    + '<table class="hd block"><tr><td><span class="name">Saul Karim NMH<span class="post">MA</span></span></td>'
+    + '<table class="hd block"><tr><td><span class="name">Saul Karim NMH,<span class="post">MA</span></span></td>'
     + '<td class="contact"><span class="em">saulnassau@protonmail.com</span><br>seminarschools.com/saulnassau<br>416&middot;771&middot;0382 &nbsp;&middot;&nbsp; Toronto</td></tr></table>'
     + '<div class="rule"></div>'
     + '<div class="summary block">'+summaryText+'</div>'
-    + '<div class="comp block">'+compHtml+'</div>'
+    + (showComp ? '<div class="comp block">'+compHtml+'</div>' : '')
     + (showPrintEdu ? '<div class="sec edu block"><div class="sh">'+esc(t.edu||UI.en.edu)+'</div>'+eduLines+'</div>' : '')
     + secs
     + (showPrintCerts ? '<div class="sec certs block"><div class="sh">'+esc(t.certs||UI.en.certs)+'</div>'+certHtml+'</div>' : '');
@@ -2185,6 +2334,7 @@ window.addEventListener('beforeprint', buildPrintCv);
 <script src="/js/mandala.js" defer></script>
 <script src="/js/indra.js" defer></script>
 <script src="/js/footer.js" defer></script>
-<!-- Scroll camera handled by indra.js -->
+<script src="/js/autolink.js" defer></script>
+<script>document.addEventListener('DOMContentLoaded',function(){if(window.PolymythMandala&&PolymythMandala.initScrollCamera&&!matchMedia('(prefers-reduced-motion: reduce)').matches){PolymythMandala.initScrollCamera({forceGlobal:true});}});</script>
 </body>
 </html>

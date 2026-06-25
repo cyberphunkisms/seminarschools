@@ -161,6 +161,12 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
   .send{width:100%;}
 }
 </style>
+<style>
+#indraLayer, #geo, #geo2, .mandala-canvas, canvas.mandala {
+  opacity: 0.04 !important;
+  pointer-events: none;
+}
+</style>
 </head>
 <body>
 <div class="page">
@@ -193,6 +199,18 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
       <div class="field reveal in">
         <label for="student-age">Your child's age or grade <span class="req">needed</span></label>
         <input type="text" id="student-age" name="student-age" placeholder="e.g. 14, or grade 9" required>
+
+      <label>What brings you here? <span class="req">NEEDED</span></label>
+      <select name="purpose" required>
+        <option value="" disabled selected>Choose one</option>
+        <option value="starter">Starting with a Starter block</option>
+        <option value="term">Starting a Term</option>
+        <option value="forest">Inquiring about the Forest Year</option>
+        <option value="seminar">Applying for the Seminar</option>
+        <option value="mulberry">Asking about the Mulberry Fund</option>
+        <option value="question">I have a question before enrolling</option>
+        <option value="booking">I am enrolled and booking a session</option>
+      </select>
       </div>
 
       <div class="divider reveal"><span>that is all I need · the rest is yours</span></div>
@@ -284,10 +302,10 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
         <div class="bubble-body" id="bubble-body" role="region" aria-label="Enrol now">
           <p>No need to choose here. Filling the form is enough, and I will send the right offer. But if you already know, you can begin right now.</p>
           <div class="tier-row">
-            <a class="tier-pick" data-payment-key="starter_block" href="#">Starter block <span class="small">see price &amp; pay</span></a>
-            <a class="tier-pick" data-payment-key="term" href="#">Term <span class="small">see price &amp; pay</span></a>
-            <a class="tier-pick" data-payment-key="forest_year_upfront" href="#">Forest Year <span class="small">see price &amp; pay</span></a>
-            <a class="tier-pick" data-payment-key="forest_year_monthly" href="#">Forest Year, monthly <span class="small">see price &amp; pay</span></a>
+            <a class="tier-pick" data-payment-key="starter_block" href="#">Starter block <span class="small">select</span></a>
+            <a class="tier-pick" data-payment-key="term" href="#">Term <span class="small">select</span></a>
+            <a class="tier-pick" data-payment-key="forest_year_upfront" href="#">Forest Year <span class="small">select</span></a>
+            <a class="tier-pick" data-payment-key="forest_year_monthly" href="#">Forest Year, monthly <span class="small">select</span></a>
           </div>
           <p class="book-line">For the seminar year or a custom plan, the form above is the way. Prefer to talk first? <a href="https://cal.com/seminarschools/class" target="_blank" rel="noopener noreferrer">Book a first conversation</a>.</p>
         </div>
@@ -303,10 +321,14 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
 
   <!-- ===================== THANK YOU ===================== -->
   <div class="thanks" id="thanks">
-    <span class="han">謝</span>
-    <h2>Thank you. I have your note.</h2>
-    <p>I read every one myself. You will hear back from me soon, with a plan made for your student. If anything is urgent, you can reach me directly at <a href="mailto:saulnassau@protonmail.com" style="color:var(--mulberry-deep);border-bottom:1px solid var(--rule);text-decoration:none;">saulnassau@protonmail.com</a>.</p>
-    <a class="back" href="/leizu">Back to Leizu</a>
+    <span class="han">已收到</span>
+    <h2>Got it. Now let's get you started.</h2>
+    <p>Your information has been sent. The next step is payment, which takes you to a secure Stripe checkout. After payment, you will be forwarded to the calendar to book your first session.</p>
+    <div id="payment-step" style="margin:2rem 0;">
+      <a id="stripe-link" class="buy" href="#" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:1rem 2.5rem;background:var(--mulberry-deep,#5A1F2F);color:var(--paper,#F4EFE3);font-family:var(--display);font-size:1.15rem;font-style:italic;text-decoration:none;border-radius:2px;transition:background 0.3s;">Proceed to payment →</a>
+    </div>
+    <p style="font-size:0.9rem;color:var(--ink-soft);">If you have questions first, text or call <a href="tel:+14167710382">416-771-0382</a> or reply to the confirmation email.</p>
+    <a href="/leizu" class="back">← Back to the curriculum</a>
   </div>
 
   <footer class="colophon">
@@ -408,5 +430,135 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
 <script src="/js/footer.js" defer></script>
 <!-- wires the enrol-bubble tier buttons to the same Stripe links as the Leizu tiles -->
 <script src="/leizu/booking-button.js" defer></script>
+
+<script>
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var source = params.get('source');
+  var map = {seminar:'seminar', mulberry:'mulberry', contact:'question', booking:'booking'};
+  if(source && map[source]){
+    var sel = document.querySelector('select[name="purpose"]');
+    if(sel) sel.value = map[source];
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var STRIPE_URLS = {
+    starter_block: 'https://buy.stripe.com/eVq5kDcZt5kW2KB6iS6oo07',
+    term:          'https://buy.stripe.com/fZudR99NhaFg1Gx9v46oo0f',
+    forest_year_upfront: 'https://buy.stripe.com/bJe28r6B528K84Vaz86oo0d',
+    forest_year_two:     'https://buy.stripe.com/00w28r7F96p0bh79v46oo0b',
+    forest_year_term:    'https://buy.stripe.com/5kQ5kDe3x14G98ZbDc6oo0e',
+    forest_year_monthly: 'https://buy.stripe.com/5kQdR97F93cObh76iS6oo09'
+  };
+  var TIER_LABELS = {
+    starter_block: 'Starter block · $480',
+    term: 'Term · $400 over 3 months',
+    forest_year_upfront: 'Forest Year · $8,400 up front',
+    forest_year_two: 'Forest Year · two payments of $4,700',
+    forest_year_term: 'Forest Year · $3,300 per term',
+    forest_year_monthly: 'Forest Year · $900 per month'
+  };
+  var params = new URLSearchParams(window.location.search);
+  var tier = params.get('tier');
+  var link = document.getElementById('stripe-link');
+  // Also check localStorage from cart flow (booking-button.js saves pending-stripe)
+  var pendingStripe = null;
+  try { pendingStripe = localStorage.getItem('leizu-pending-stripe'); } catch(e){}
+  if(tier && STRIPE_URLS[tier] && link){
+    link.href = STRIPE_URLS[tier];
+    link.textContent = 'Pay now: ' + (TIER_LABELS[tier] || tier) + ' \u2192';
+  } else if(pendingStripe && link){
+    link.href = pendingStripe;
+    link.textContent = 'Proceed to payment \u2192';
+    try { localStorage.removeItem('leizu-pending-stripe'); } catch(e){}
+  } else {
+    // Final fallback: check localStorage for tier saved before form submission
+    var savedTier = null;
+    try { savedTier = localStorage.getItem('leizu-pending-tier'); } catch(e){}
+    if(savedTier && STRIPE_URLS[savedTier] && link){
+      link.href = STRIPE_URLS[savedTier];
+      link.textContent = 'Pay now: ' + (TIER_LABELS[savedTier] || savedTier) + ' \u2192';
+      try { localStorage.removeItem('leizu-pending-tier'); } catch(e){}
+    }
+  }
+  // Also pre-select purpose dropdown based on tier
+  var purposeMap = {starter_block:'starter', term:'term', forest_year_upfront:'forest', forest_year_two:'forest', forest_year_term:'forest', forest_year_monthly:'forest'};
+  var sel = document.querySelector('select[name="purpose"]');
+  if(sel && tier && purposeMap[tier]) sel.value = purposeMap[tier];
+})();
+</script>
+
+<script>
+(function(){
+  var form = document.getElementById('intake-form');
+  if(!form) return;
+  var params = new URLSearchParams(window.location.search);
+  var tier = params.get('tier');
+  if(tier){
+    // Preserve tier param through form submission by appending to action URL
+    var action = form.getAttribute('action') || '/leizu/intake/?sent=1';
+    if(action.indexOf('tier=') === -1){
+      action += (action.indexOf('?') === -1 ? '?' : '&') + 'tier=' + encodeURIComponent(tier);
+      form.setAttribute('action', action);
+    }
+    // Also save to localStorage as belt-and-suspenders
+    try { localStorage.setItem('leizu-pending-tier', tier); } catch(e){}
+  }
+})();
+</script>
+
+<script>
+(function(){
+  // Tier-pick buttons: set purpose dropdown + close modal, do NOT go to Stripe
+  var picks = document.querySelectorAll('.tier-pick');
+  var purposeMap = {starter_block:'starter', term:'term', forest_year_upfront:'forest', forest_year_monthly:'forest'};
+  var tierModal = document.querySelector('.tier-modal, .tier-overlay, [data-tier-modal]');
+  picks.forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      var key = btn.getAttribute('data-payment-key');
+      var sel = document.querySelector('[name="purpose"]');
+      if(sel && purposeMap[key]) sel.value = purposeMap[key];
+      // Store tier for the thank-you Stripe link
+      try { localStorage.setItem('leizu-pending-tier', key); } catch(ex){}
+      // Update form action to include tier
+      var form = document.getElementById('intake-form');
+      if(form){
+        var action = form.getAttribute('action') || '/leizu/intake/?sent=1';
+        if(action.indexOf('tier=') === -1) action += '&tier=' + key;
+        form.setAttribute('action', action);
+      }
+      // Close the modal/overlay
+      var modal = btn.closest('[data-open]') || btn.closest('.tier-modal') || btn.closest('.overlay');
+      if(modal) modal.setAttribute('data-open', 'false');
+      // Scroll to form
+      if(form) form.scrollIntoView({behavior:'smooth'});
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  // Read cart courses from booking-button.js and pre-fill the subjects field
+  try {
+    var raw = localStorage.getItem('leizu-pending-booking');
+    if (!raw) return;
+    var data = JSON.parse(raw);
+    var courses = data.courseIds || [];
+    if (!courses.length) return;
+    var subj = document.querySelector('[name="subjects"]');
+    if (subj && !subj.value) {
+      // Format course IDs into readable names
+      subj.value = courses.map(function(id){
+        return id.replace(/-/g, ' ').replace(/\b\w/g, function(l){ return l.toUpperCase(); });
+      }).join(', ');
+    }
+  } catch(e){}
+})();
+</script>
 </body>
 </html>

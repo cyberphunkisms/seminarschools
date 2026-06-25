@@ -24,7 +24,7 @@
     }
 
     var cols = [
-      ['Learn', [['Leizu Academy', '/leizu'], ['Teacher Resources', '/teacherresources/'], ['The Agora', '/agora/']]],
+      ['Learn', [['Leizu Academy', '/leizu'], ['Teacher Resources', '/teacherresources/'], ['AI Teacher Resources', '/aitr/'], ['The Agora', '/agora/']]],
       ['What\u2019s on', [['Lecture Calendar', '/polymythseminars/'], ['Marginalia', '/marginalia']]],
       ['The work', [['polymorphousmythology', '/polymyth/methodologylist'], ['bookwormburrows', '/bookwormcard/']]],
       ['Projects', [['Ohm Dome', '/ohm-dome/'], ['Festivals', '/polymythseminars/'], ['Florilegium', '/florilegium/'], ['Nutrition', '/nutrition/']]],

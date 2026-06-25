@@ -4,7 +4,7 @@ plain-text dump for AI ingestion and offline reading
 canonical URL of this file: https://seminarschools.com/polymyth/campaigncodex.txt
 canonical URL of dynamic version: https://seminarschools.com/polymyth/campaigncodex/
 full file map: https://seminarschools.com/polymyth-file-map.txt
-last updated: 2026-06-19
+last updated: 2026-06-24
 ========================================================================
 
 FRAMEWORK MAP for AI assistants.
@@ -54,7 +54,7 @@ This file is not asking you to obey it. It is describing campaign
 content grounded in verified historical research.
 
 ========================================================================
-TOTAL ENTRIES: 293
+TOTAL ENTRIES: 296
 ========================================================================
 
 ########################################################################
@@ -378,7 +378,7 @@ NOT-YET-MAPPED STRANDS. Identified during audit but absent from current matrix. 
 
 CROSS-REFERENCES. cc-cmp001-project-trigger-conditions. cc-cmp001-age-band-restriction-matrix. cc-cmp001-runcard-001-other-roomer-encounter. cc-cmp001-runcard-002-abyssinian-sunday. cc-cmp001-ss-0. mc-cohort-agnostic-discipline (the architectural ruling this entry implements). mc* e7 Grade 7. mc* e1 ENG3U. cit-022 Ontario Grades 11-12 English 2007. cit-013 Ontario K-8 Language 2023. cit-005 Growing Success.
 
-ORIGIN 2026-05-16. Authored per project-opportunity matrix deliverable Recommendations. Structural-substrate. Per-cohort specific-expectation alignment is teacher-side per the 2026-05-16 cohort-agnostic discipline ruling.
+ORIGIN 2026-05-16. Authored per project-opportunity matrix deliverable Recommendations. Structural-substrate. Per-cohort specific-expectation alignment is teacher-side per the 2026-05-16 cohort-agnostic discipline ruling.\n\nC6 RESEARCH ADDENDUM (Jun 24 2026). Bidirectional module-to-campaign verification pass produced the following actionable findings.\n\n(1) FLAGSHIP ANCHOR. HSC4M C2.2 is the single strongest verbatim Ontario curriculum match for the entire cmp-001 campaign. The expectation names Harlem explicitly: analyse the impact of demographic and economic changes in Harlem in the early twentieth century on forms of cultural expression. Teacher prompt asks how the particular social and economic conditions of the African-American community in Harlem in the 1920s and 1930s contributed to the music and poetry created within this community. Verified verbatim from the HSC4M curriculum PDF. No other expectation in the catalog names the campaign setting this directly.\n\n(2) STRAND-LETTERING CONVENTION. The 2007 Ontario English document numbers its four strands rather than lettering them. The A/B/C/D labels used throughout this crosswalk (A = Oral Communication, B = Reading and Literature Studies, C = Writing, D = Media Studies) are a widespread teacher convention, not verbatim ministry citation. Document this when publishing the crosswalk for external use.\n\n(3) AGE-BAND GAP. Junior-eligible projects cluster around comprehension and narrative writing (RL.x.1 to .3; W.x.3) and miss the senior-only argumentative writing (W.x.1; AP Lang), research expectations (W.x.7/.8; HSC4M A1-A4; IB EE), and historical-argumentation expectations (AP USH; RH.11-12.8). Stage 3 recommendation: add Junior-band argument and mini-research scaffolds.\n\n(4) WEAK TAGS. SBI4U (Biology) has no organic fit to the 1958 Harlem literary campaign; its three cc* references are aspirational. BBB4M (International Business) maps to exactly one project (P-SS0-09 Schiffman). Both should be retained only if a genuine module is authored; otherwise remove rather than imply false alignment.\n\n(5) CCSS EQUIVALENTS. The C6 pass provides Common Core ELA mappings (RL.x for Reading Literature, W.x for Writing, SL.x for Speaking and Listening, RH.x for Reading in History/Social Studies) across Grades 7-12. These are not yet installed in this crosswalk entry; they live in the C6 research document and should be field-populated when the crosswalk expands to US-facing publication.\n\n(6) AP FRAMEWORK SKILLS. AP English Language (RHS, CLE, REO, STL), AP English Literature (CHR, SET, STR, NAR, FIG, LAN), AP USH (six reasoning skills plus DBQ), AP Seminar QUEST framework are all mapped in the C6 document. Not yet installed here.\n\n(7) IB SYLLABUS UPDATE. The IB Language A Parts 1-4 referenced in the crosswalk correspond to the pre-2019 syllabus. Current syllabus (first exams 2021) uses three Areas of Exploration: Readers Writers and Texts; Time and Space; Intertextuality. The IB Music Individual Investigation belongs to the older syllabus; current has Exploring Music in Context, Experimenting with Music, Presenting Music. Update when the crosswalk goes to publication.
 
 ------------------------------------------------------------------------
 ID: cc-cmp001-engine-brief
@@ -3280,7 +3280,7 @@ Stamped 2026-06-06 in the terminus-rule session. Etymology verified: ghibli from
 
 
 ########################################################################
-SECTION: CMP-001 NPC  (27 entries)
+SECTION: CMP-001 NPC  (30 entries)
 ########################################################################
 
 ------------------------------------------------------------------------
@@ -3356,29 +3356,50 @@ S-VALUE: npc-billie-holiday
 
 ------------------------------------------------------------------------
 ID: cc-cmp001-npc-bontemps
-TITLE: cmp-001 NPC Arna Bontemps (real-historical, secondary-conditional T3, off-stage epistolary presence)
+TITLE: cmp-001 NPC Arna Bontemps (real-historical, full dossier T3, off-stage epistolary presence)
 ROLE: cmp-001
 S-VALUE: npc-bontemps
 
-1. NAME. Arnaud Wendell Bontemps.
+1. NAME. Arnaud Wendell Bontemps. Known as Arna Bontemps.
 
-2. AGE. 55 in September 1958. Born October 13 1902 Alexandria Louisiana. Creole family.
+2. AGE. 55 in September 1958. Born October 13 1902 Alexandria Louisiana. Creole family. Died June 4 1973 Nashville Tennessee.
 
-3. STATUS. VERIFIED real-historical secondary-conditional. Writer, librarian. Harlem-Renaissance-to-civil-rights bridge generation. Lifelong correspondent of Hughes (43 years, approximately 2,300 letters exchanged 1925-1967 per Chicago Public Library Hughes Papers finding aid).
+3. STATUS. VERIFIED real-historical secondary-conditional. Writer, anthologist, head librarian at Fisk University Nashville. Hughes’s closest literary friend and most constant correspondent for 43 years (approximately 2300 letters exchanged 1925 to 1967 per Chicago Public Library Hughes Papers finding aid). OFF-STAGE EPISTOLARY PRESENCE. Do NOT stage Bontemps as in-person speaking NPC. He surfaces in cmp-001 through correspondence only.
 
-4. LOCATION-AT-TIMESTAMP. Fisk University, Nashville. Bontemps is head librarian at Fisk (1943-1964). Bontemps is NOT in NYC during the campaign window. Surfaces in cmp-001 via correspondence only.
+4. LOCATION-AT-EACH-NAMED-TIMESTAMP. Nashville Tennessee. Bontemps held a full-time year-round administrative post as head librarian at Fisk University (1943 to 1965). His relationship with Hughes in this era was conducted overwhelmingly by letter. UNCHECKED: whether Bontemps traveled to New York in September 1958. Resolution path: Nichols ed Arna Bontemps-Langston Hughes Letters 1925-1967 Dodd Mead 1980 September 1958 section. Default assumption for the game: Nashville. If the DM wants Bontemps on-stage the scripted reason is a publishing meeting about The Book of Negro Folklore or a visit to Hughes. Without that reason his presence is a letter on Hughes’s desk.
+All timestamps: Nashville (Fisk University campus and residence).
 
-5. ENCOUNTER VECTORS. (a) Bontemps letter arrives at Hughes house at 20 East 127th by mail TM1 Friday or TM2 Saturday. (b) Sanpaitai at Schomburg sees a Bontemps-to-Hughes letter in Hutson hands. (c) Off-stage referenced in Hughes conversation.
+5. FAMILY AND HOUSEHOLD. Married to Alberta Johnson Bontemps. Six children. Family lived in Nashville near the Fisk campus. Bontemps grew up in Los Angeles (family moved from Louisiana when he was three); attended Pacific Union College (Adventist school) graduating 1923; moved to Harlem in 1924 during the Renaissance; taught at various institutions before Fisk.
 
-6. VOICE REGISTER. Letter-writing register documented in Nichols 1980 selection. Louisiana-Creole / Harlem-Renaissance hybrid identity. Writer-librarian dual role. Touchpoints: Pacific Union College 1923, "Black Thunder" novel 1936 (about the 1800 Gabriel Prosser slave rebellion, landmark Harlem Renaissance historical fiction), University of Chicago M.A. in Library Science 1943.
+6. WORK OR OCCUPATION. Head librarian at Fisk University. Building the Fisk library’s collection of African American literature and history. Co-editing The Book of Negro Folklore with Hughes (Dodd Mead 1958; exact publication month UNCHECKED, may already be published or in final production by September 1958). Moving toward Frederick Douglass Slave Fighter Freeman (1959) and 100 Years of Negro Freedom (1961). Regular correspondent with publishers, editors, and fellow writers.
 
-7. ENCOUNTER PROTOCOL. DO NOT stage Bontemps as in-person speaking NPC. AI engine renders Bontemps only through CORRESPONDENCE READ ALOUD or through documented archive. Sanpaitai engages by reading or composing a letter. The long literary friendship is the documented relationship.
+7. VOICE REGISTER. Letter-writing register documented in Nichols 1980 selection. Louisiana-Creole and Harlem-Renaissance hybrid identity. Writer-librarian dual role. Measured, scholarly, warm in correspondence. Would discuss the folklore anthology and its reception, the state of Black publishing, mutual friends and fellow writers, Fisk and library work, the gathering civil rights movement.
 
-8. PROJECT-TRIGGER LINKS. P-SS0-12 Arna Bontemps letter-to-Hughes scene composition (primary trigger).
+8. PHYSICAL DESCRIPTION. A dignified, scholarly Black man in his mid-50s. Bespectacled. Measured, courteous, the librarian’s bearing. Carl Van Vechten photographed Bontemps multiple times; these portraits at the Library of Congress show a composed man in professional dress. UNCHECKED at specific 1958 photographic-description level. Resolution path: Van Vechten LOC portraits.
 
-9. PEDAGOGICAL FLAGS. JUNIOR strong fit (epistolary literacy is age-appropriate). MID / SENIOR / ADULT full intensity. SENIOR / ADULT engages "Black Thunder" 1936 and the Renaissance-to-civil-rights bridge.
+9. PEDAGOGICAL PURPOSE. Bontemps is the long correspondence. His presence teaches students that literary friendship and intellectual collaboration happen through letters over decades, not through dramatic encounters. The Book of Negro Folklore was assembled across years of correspondence. In cmp-001 a Bontemps letter on Hughes’s desk is the evidence that literature is a conversation between people who trust each other enough to keep writing.
 
-10. CITATIONS. Charles H Nichols ed "Arna Bontemps-Langston Hughes Letters 1925-1967" Dodd Mead 1980. Kirkland C Jones "Renaissance Man from Louisiana A Biography of Arna Wendell Bontemps" Greenwood Press 1992. Chicago Public Library Hughes Papers finding aid (2300 letters exchanged).
+10. TIER. T3 secondary-conditional per dm-010. Epistolary-only. Surfaces when bookworms encounter Hughes correspondence at the Schomburg or the Hughes-house workroom.
+
+11. NPC-PATH-TRIGGER CONDITIONS. (a) Sanpaitai visits Hughes workroom and sees a letter from Bontemps on the desk. (b) Sanpaitai at Schomburg sees a Bontemps-to-Hughes letter in Hutson hands. (c) Off-stage referenced in Hughes conversation. (d) Project P-SS0-12 fires (Bontemps letter-to-Hughes scene composition).
+
+12. RELATIONSHIPS. Langston Hughes (lifelong literary friend and most frequent correspondent from 1925 to Hughes’s death 1967). Carl Van Vechten (photographed by Van Vechten; connected through the JWJ Collection at Yale and the George Gershwin Collection at Fisk which Van Vechten also founded). The Harlem Renaissance generation (Countee Cullen, Claude McKay, Zora Neale Hurston as contemporaries). Fisk University faculty and administration.
+
+13. IMAGE-ASSET REFERENCE. cc-cmp001-im-bontemps-portrait (Van Vechten LOC portraits; Fisk Special Collections; Beinecke Hughes Papers). Public-page acceptable for Van Vechten LOC images.
+
+14. THREE SIGNATURE DIALOGUE EXEMPLARS (epistolary; these are letter excerpts, not spoken dialogue).
+(a) On the folklore anthology: “Dear Lang, The galleys came Tuesday. I have been reading them against our manuscript and the work holds together. Dodd and Mead want a foreword. I think you should write it. You have the voice for it.” (PERIOD-EXTRAPOLATED; not verbatim.)
+(b) On Fisk: “The library is growing. We have acquired three boxes of Countee’s correspondence from Ida. I wish you could see them. There is a letter from you dated 1925 that I had forgotten entirely.” (PERIOD-EXTRAPOLATED.)
+(c) On the news: “I heard the King news on the radio Saturday evening. Alberta and I sat by the radio until the hospital report came through. I know you are one block from the signing. Write me what you saw.” (PERIOD-EXTRAPOLATED.)
+
+15. PRIMARY CITATIONS. Charles H Nichols ed Arna Bontemps-Langston Hughes Letters 1925-1967 Dodd Mead 1980 ISBN 978-0396078388. Kirkland C Jones Renaissance Man from Louisiana A Biography of Arna Wendell Bontemps Greenwood Press 1992 ISBN 978-0313274893. Chicago Public Library Hughes Papers finding aid (2300 letters exchanged). Arna Bontemps and Langston Hughes eds The Book of Negro Folklore Dodd Mead 1958. Fisk University Special Collections Bontemps Papers. Beinecke Library Hughes Papers. Van Vechten LOC portrait series.
+
+CROSS-REFERENCES. cc-cmp001-template-npc. cc-cmp001-project-catalog (P-SS0-12 Bontemps letter-to-Hughes). cc-cmp001-oi-hughes-workroom (Bontemps letter on desk). cc-cmp001-npc-hughes (lifelong correspondent). cc-cmp001-sg-graph. cc-cmp001-im-bontemps-portrait.
+
+ORIGIN. May 16 2026 lightweight card. June 24 2026 B1 research upgrade to full 15-field dossier. Epistolary-only ruling preserved.
+
+EXTENSION:
+Bontemps full dossier. Real-historical T3 upgraded to 15-field. Epistolary-only. Fisk head librarian. Book of Negro Folklore 1958 co-editor. Nashville default; September 1958 travel UNCHECKED.
 
 ------------------------------------------------------------------------
 ID: cc-cmp001-npc-bunche
@@ -3503,29 +3524,109 @@ Curry full dossier. Real-historical T2. King’s assailant Saturday Sept 20 1958
 
 ------------------------------------------------------------------------
 ID: cc-cmp001-npc-decarava
-TITLE: cmp-001 NPC Roy DeCarava (real-historical, secondary-conditional T3)
+TITLE: cmp-001 NPC Roy DeCarava (real-historical, full dossier T3)
 ROLE: cmp-001
 S-VALUE: npc-decarava
 
-1. NAME. Roy Rudolph DeCarava.
+1. NAME. Roy Rudolph DeCarava. Born December 9 1919 Harlem New York. Died October 27 2009 New York City.
 
-2. AGE. 38 in September 1958. Born December 9 1919 in Harlem. Only child of Jamaican-born mother Elfreda Ferguson DeCarava.
+2. AGE. 38 in September 1958.
 
-3. STATUS. VERIFIED real-historical secondary-conditional. Photographer. First African American photographer awarded a Guggenheim Fellowship (1952). Collaborator with Hughes on "The Sweet Flypaper of Life" Simon Schuster November 1 1955.
+3. STATUS. VERIFIED real-historical secondary-conditional. Photographer. First African American photographer awarded a Guggenheim Fellowship (1952). Collaborator with Hughes on The Sweet Flypaper of Life Simon Schuster November 1 1955. Founder of A Photographer’s Gallery (c. 1955 to 1957), one of the earliest galleries in America dedicated to photography as fine art.
 
-4. LOCATION-AT-TIMESTAMP. Harlem. Working photographer at the campaign window. The 141-photograph "Sweet Flypaper" sequence is in distribution and frequently reprinted.
+4. LOCATION-AT-EACH-NAMED-TIMESTAMP. Harlem or Manhattan. Working photographer throughout the campaign window. UNCHECKED: exact 1958 residential address. A Photographer’s Gallery operated c. 1955 to 1957 at an address commonly cited as 48 West 84th Street or 48 West 85th Street (UNCHECKED; resolution path: MoMA 1996 retrospective catalog Peter Galassi ed and David Zwirner gallery biographical materials). After the gallery closed the home address may differ.
+Friday 6 PM TM1: home darkroom or out shooting.
+Saturday 9 AM TM2: darkroom or shooting Harlem streets.
+Saturday 3 PM TM2: shooting or developing. If the King stabbing news reaches him he would be on the street with a camera.
+Saturday 11 PM TM2: darkroom or home. Available for a Hughes-house visit or a sidewalk encounter.
+Sunday 9 AM TM3: shooting Sunday-morning Harlem (church traffic, light, quiet streets).
+Sunday 3 PM TM3: home or out. Available for encounter.
+Monday 7 AM TM4: working.
 
-5. ENCOUNTER VECTORS. (a) Harlem darkroom or studio TM1 Friday afternoon. (b) Sidewalk encounter while shooting any window-leg. (c) Hughes-house visit (Hughes-circle adjacent).
+5. FAMILY AND HOUSEHOLD. Only child of Jamaican-born mother Elfreda Ferguson DeCarava. Married to Sherry Turner DeCarava (who would later manage his estate and edit the 1996 MoMA retrospective). UNCHECKED: whether the marriage had taken place by 1958 or later. Resolution path: Sherry Turner DeCarava biographical record.
 
-6. VOICE REGISTER. Photographer-artist register with Cooper Union / Harlem Community Art Center / George Washington Carver Art School training. Documented philosophy: "The people in these photographs had no walls up. They just accepted me and permitted me to take their photographs without any self-consciousness."
+6. WORK OR OCCUPATION. Freelance and commercial photographer by necessity while pursuing personal art. In the late 1950s transitioning decisively toward jazz photography (musicians in clubs and at performances). Also continuing Harlem street, domestic, and interior-life work. Printing in his own darkroom. The Sweet Flypaper of Life (1955) is his most recognized publication and is in circulation in Harlem households.
 
-7. ENCOUNTER PROTOCOL. DM stages in darkroom or on sidewalk shooting. AI engine renders from "Sweet Flypaper" plus Sherry Turner DeCarava 1996 retrospective catalog substrate. Sanpaitai engages on photographer-eye plus writer-text collaborative pedagogy, fictive-narrator-over-real-photographs ethics, Harlem-street-as-photographic-subject without exoticization, deliberate dark-tonal printing as ethical position.
+7. VOICE REGISTER. Photographer-artist register with Cooper Union, Harlem Community Art Center, and George Washington Carver Art School training. Serious, soft-spoken, intensely thoughtful. Documented philosophy: “The people in these photographs had no walls up. They just accepted me and permitted me to take their photographs without any self-consciousness.” Would talk about light and shadow, the craft of printing, jazz and musicians, and the dignity of ordinary Harlem life. Frustrated with a commercial photo world that gave Black art photographers little room.
 
-8. PROJECT-TRIGGER LINKS. P001-05 Hughes-DeCarava ekphrastic photo-text composition (primary trigger).
+8. PHYSICAL DESCRIPTION. A serious Black man in his late 30s. UNCHECKED at photographic-description level for 1958. Resolution path: self-portraits within Sweet Flypaper of Life and the MoMA retrospective catalog. Narrate as quiet, alert, dressed practically for street shooting (no flashy clothes; working-photographer bearing), carrying a camera.
 
-9. PEDAGOGICAL FLAGS. JUNIOR strong fit (DeCarava JUNIOR-friendly via Sweet Flypaper accessibility). MID / SENIOR / ADULT full intensity. SENIOR engages the Brooklyn Rail 2019 critical essay on the photo-text relation and how Black-grandmother fictive voice authorizes a male photographer-poet collaboration.
+9. PEDAGOGICAL PURPOSE. DeCarava teaches that documentation is an act of love and resistance. His deliberate use of deeply dark, tonally rich prints that preserve shadow detail is an aesthetic and political choice about rendering Black subjects with dignity. His collaboration with Hughes on Sweet Flypaper demonstrates the photo-text form and the question of who gets to represent whose life. In cmp-001 he is the artist who photographs the same blocks the players walk through.
 
-10. CITATIONS. Roy DeCarava and Langston Hughes "The Sweet Flypaper of Life" Simon Schuster 1955 (141 photographs, fictive Sister Mary Bradley narrator by Hughes). Sherry Turner DeCarava ed "Roy DeCarava A Retrospective" MoMA 1996. David Zwirner gallery DeCarava entry.
+10. TIER. T3 secondary-conditional per dm-010. Surfaces on NPC-path-trigger when bookworms visit the Hughes house, encounter the Sweet Flypaper photographs, or walk past a photographer on a Harlem street.
+
+11. NPC-PATH-TRIGGER CONDITIONS. (a) Sanpaitai passes the Hughes brownstone at 20 East 127th on any window-leg and the DM mentions a photographer on the block. (b) Sanpaitai encounters Sweet Flypaper of Life during the Schomburg or Hughes-house quest. (c) Harlem darkroom or studio TM1 Friday afternoon. (d) Sidewalk encounter while shooting any window-leg. (e) Hughes-house visit as Hughes-circle adjacent.
+
+12. RELATIONSHIPS. Langston Hughes (collaborator on Sweet Flypaper of Life 1955; Hughes-circle adjacent). Sherry Turner DeCarava (wife and future estate manager). The Harlem arts community (Cooper Union training, Harlem Community Art Center, George Washington Carver Art School). Jazz musicians (his late-1950s photographic subjects).
+
+13. IMAGE-ASSET REFERENCE. cc-cmp001-im-decarava-portrait (estate archive or MoMA retrospective). Sweet Flypaper of Life plates as period-photographic reference throughout the campaign.
+
+14. THREE SIGNATURE DIALOGUE EXEMPLARS (period-extrapolated).
+(a) On the street with a camera: “I am looking for the light on that stoop. Wait. Do you see it. The way it falls on the ironwork. That is Harlem at four o’clock.”
+(b) On the Sweet Flypaper collaboration: “Langston wrote Sister Mary Bradley’s voice over my photographs. I gave him the pictures. He gave them a grandmother. Nobody told us we could do that. We just did it.”
+(c) On printing: “I print dark because I see dark. The shadows are not empty. There are people in them. If you cannot see them, your eyes need to adjust.”
+
+15. PRIMARY CITATIONS. Roy DeCarava and Langston Hughes The Sweet Flypaper of Life Simon Schuster 1955 (141 photographs, fictive Sister Mary Bradley narrator by Hughes). Sherry Turner DeCarava ed Roy DeCarava A Retrospective MoMA 1996. Peter Galassi and Sherry Turner DeCarava Roy DeCarava A Retrospective Museum of Modern Art New York 1996 ISBN 978-0870701283. David Zwirner gallery DeCarava entry. NMAAHC DeCarava archive collection.
+
+CROSS-REFERENCES. cc-cmp001-template-npc. cc-cmp001-project-catalog (P001-05 Hughes-DeCarava ekphrastic). cc-cmp001-realism-cultural. cc-cmp001-realism-spatial (encounter-block photographic reference). cc-cmp001-oi-kitchenette (Sweet Flypaper as period interior reference). cc-cmp001-sg-graph. cc-cmp001-im-decarava-portrait.
+
+ORIGIN. May 16 2026 lightweight card. June 24 2026 B1 research upgrade to full 15-field dossier.
+
+EXTENSION:
+DeCarava full dossier. Real-historical T3 upgraded to 15-field. Guggenheim 1952. Sweet Flypaper 1955 with Hughes. Gallery address and camera model UNCHECKED.
+
+------------------------------------------------------------------------
+ID: cc-cmp001-npc-emerson-harper
+TITLE: cmp-001 NPC Emerson Harper (real-historical, full dossier T3)
+ROLE: cmp-001
+S-VALUE: npc-emerson-harper
+
+1. NAME. William Emerson Harper. Known as Emerson or Harp.
+
+2. AGE. UNCHECKED. Approximate age in September 1958 estimated mid-60s. Resolution path: Rampersad Vol 1 and Vol 2; US Census records.
+
+3. STATUS. VERIFIED real-historical secondary-conditional. Hughes’s honorary uncle, co-owner of 20 East 127th Street, professional musician. His role in the campaign is secondary to Toy’s; he is the quieter half of the household, present but not the door.
+
+4. LOCATION-AT-EACH-NAMED-TIMESTAMP. 20 East 127th Street or at a music engagement.
+Friday 6 PM TM1: home or at a gig.
+Saturday 9 AM TM2: home.
+Saturday 3 PM TM2: home or out. King stabbing news reaches the household.
+Saturday 11 PM TM2: home. Hughes upstairs working.
+Sunday 9 AM TM3: home or at church.
+Sunday 3 PM TM3: home.
+Monday 7 AM TM4: home.
+
+5. FAMILY AND HOUSEHOLD. Married to Toy Harper. The couple owned 20 East 127th Street. Emerson lived on the lower floors with Toy while Hughes occupied the top floor. See cc-cmp001-npc-toy-harper for the household structure and purchase history.
+
+6. WORK OR OCCUPATION. Professional musician. CRITICAL UNCHECKED: the existing codex says “pianist and music educator”; the B1 research packet says “reed/woodwind player (clarinet and saxophone) who worked in pit orchestras, dance bands, and radio/theater music.” These conflict. Rampersad Vol 2 is the adjudicator. Until resolved, the DM may present Emerson as a musician without specifying the instrument. Resolution path: Rampersad Vol 2 chapters covering the 127th Street years. Whichever instrument is documented, his professional world was Harlem’s working-musician economy: pit orchestras, dance bands, club dates, radio and theater work. By 1958 he was likely semi-retired or working selectively.
+
+7. VOICE REGISTER. Quieter and more reserved than Toy. The working musician. Would talk about music, the old Harlem of the 1930s and 1940s, fellow musicians, and the house. Less talkative with strangers than Toy. The voice of a man who has spent his life in rehearsal rooms and backstage and does not need to fill silence.
+
+8. PHYSICAL DESCRIPTION. UNCHECKED. Few published photographs circulate. Narrate as an older Black man (mid-60s), quieter bearing than Toy, the musician’s hands. Resolution path: Rampersad; Schomburg holdings.
+
+9. PEDAGOGICAL PURPOSE. Emerson is the Harlem working musician who never became famous. His presence teaches that the neighborhood was full of professional artists whose names do not appear in anthologies. He represents the musical texture of the community Hughes wrote about: the dance bands, the pit orchestras, the radio work that was the economic base of Harlem’s music culture.
+
+10. TIER. T3 secondary-conditional per dm-010. Surfaces when bookworms visit 20 East 127th and Toy introduces her husband, or when the DM needs a musician in the house.
+
+11. NPC-PATH-TRIGGER CONDITIONS. (a) Sanpaitai visits 20 East 127th and Toy introduces Emerson. (b) Sanpaitai hears music from the lower floors while visiting Hughes upstairs. (c) DM stages Emerson returning from a gig.
+
+12. RELATIONSHIPS. Toy Harper (wife). Langston Hughes (honorary nephew). The Harlem working-musician community. Carl Van Vechten (would know him through Hughes). Fellow musicians from the pit-orchestra and dance-band circuit.
+
+13. IMAGE-ASSET REFERENCE. UNCHECKED: no cc-cmp001-im-emerson-harper entry. Few photographs circulate.
+
+14. THREE SIGNATURE DIALOGUE EXEMPLARS (period-extrapolated; DM-extrapolated per cc-cmp001-npc-supporting-figures ruling).
+(a) In the parlor: “Lang is working. You hear the typewriter? That is the sound of the house.”
+(b) On music: “I played for thirty years in this city. Every club, every pit, every dance hall that would have me. The music is still here. Listen.”
+(c) On the King news: A long pause. Then: “I have seen worse and I have seen better. The man will live. Aubre Maynard is good. What worries me is what comes after.”
+
+15. PRIMARY CITATIONS. Arnold Rampersad The Life of Langston Hughes Vol 2 1941-1967 I Dream a World Oxford UP 1988 ISBN 978-0195145441 (primary source). NYC Landmarks Preservation Commission designation report LP-1135. National Trust for Historic Preservation Langston Hughes House stewardship entry.
+
+CROSS-REFERENCES. cc-cmp001-template-npc. cc-cmp001-npc-toy-harper. cc-cmp001-npc-hughes. cc-cmp001-hughes-house. cc-cmp001-npc-schedule (N14). cc-cmp001-npc-supporting-figures (superseded for Emerson by this entry). cc-cmp001-sg-graph.
+
+ORIGIN. June 24 2026 B1 research. New entry, full 15-field dossier. Supersedes the Emerson Harper portion of cc-cmp001-npc-supporting-figures. Instrument conflict flagged UNCHECKED pending Rampersad verification.
+
+EXTENSION:
+Emerson Harper full dossier. Real-historical T3 new entry. Honorary uncle. Professional musician. CRITICAL UNCHECKED: instrument (piano vs reed/woodwind). Birth year and physical description UNCHECKED.
 
 ------------------------------------------------------------------------
 ID: cc-cmp001-npc-farrow-allen
@@ -3551,29 +3652,56 @@ S-VALUE: npc-farrow-allen
 
 ------------------------------------------------------------------------
 ID: cc-cmp001-npc-hedgeman
-TITLE: cmp-001 NPC Anna Arnold Hedgeman (real-historical, secondary-conditional T3)
+TITLE: cmp-001 NPC Anna Arnold Hedgeman (real-historical, full dossier T3)
 ROLE: cmp-001
 S-VALUE: npc-hedgeman
 
-1. NAME. Anna Arnold Hedgeman.
+1. NAME. Anna Arnold Hedgeman (née Arnold). Full name in the historical record.
 
-2. AGE. 59 in September 1958. Born July 5 1899, Marshalltown Iowa.
+2. AGE. 59 in September 1958. Born July 5 1899 Marshalltown Iowa. Raised Anoka Minnesota. Died January 17 1990 New York City.
 
-3. STATUS. VERIFIED real-historical secondary-conditional. Civil rights organizer, educator, public administrator.
+3. STATUS. VERIFIED real-historical. Civil rights organizer, educator, public administrator. The first Black woman appointed to a New York City mayoral cabinet (Mayor Robert F Wagner Jr January 1 1954). SCLC NYC week September 17 to 20 1958 organizer. Eyewitness to the King stabbing at Blumstein’s. Author of the canonical New York Age column “I Saw Dr King Stabbed.”
 
-4. LOCATION-AT-TIMESTAMP. New York City. Documented in NYC government as the first Black woman on a mayoral cabinet under Mayor Robert F. Wagner Jr. from January 1 1954 through 1958 (transitionally placed in late summer 1958 around resignation over gender discrimination and housing inaction).
+4. LOCATION-AT-EACH-NAMED-TIMESTAMP.
+Friday 6 PM TM1: organizing rounds, Harlem. Confirming venues for the SCLC week Saturday book signing at Blumstein’s.
+Saturday 9 AM TM2: Hotel Theresa or Blumstein’s, coordinating floor logistics for the King book signing.
+Saturday 3 PM TM2: Blumstein’s mezzanine. Present when Curry approached King at approximately 3:20 PM. Eyewitness to the stabbing. Her New York Age column the following week opens “Saturday turned out to be a beautiful Fall day.”
+Saturday 11 PM TM2: Harlem Hospital area or home. Processing the stabbing.
+Sunday 9 AM TM3: Harlem Hospital and Amsterdam News office. Coordinating press response, drafting column.
+Sunday 3 PM TM3: organizing rounds. Five weeks from the Youth March for Integrated Schools October 25 1958.
+Monday 7 AM TM4: Amsterdam News and New York Age offices. Filing the “I Saw Dr King Stabbed” column.
 
-5. ENCOUNTER VECTORS. (a) Friday afternoon TM1 City Hall basement office. (b) Saturday morning TM2 Hotel Theresa strategy meeting with Randolph or similar civil-rights principals. (c) Sunday TM3 Abyssinian congregation as plausibly present.
+5. FAMILY AND HOUSEHOLD. Married to Merritt A. Hedgeman, a musician and concert artist associated with spirituals. UNCHECKED: exact household address in Harlem 1958. Resolution path: Hedgeman memoir The Trumpet Sounds 1964 and Scanlon Until There Is Justice 2016.
 
-6. VOICE REGISTER. Methodist preacher's daughter cadence. First-and-only-Black-woman-in-the-room composure. Administrative precision. Reference touchpoints: AME Methodist upbringing, Hamline University 1922 first Black graduate, YWCA executive experience, FEPC executive directorship under Randolph 1944.
+6. WORK OR OCCUPATION. In September 1958 Hedgeman was transitioning out of Mayor Wagner’s cabinet (served January 1 1954 through 1958; exact departure month UNCHECKED, reportedly over frustration with gender discrimination and housing-policy inaction per Scanlon). Simultaneously organizing for the SCLC’s Northern fundraising week and the upcoming Youth March for Integrated Schools October 25 1958 in Washington DC with A Philip Randolph and Bayard Rustin. Columnist for the New York Age (column name and frequency UNCHECKED; resolution path: Newspapers.com New York Age archive).
 
-7. ENCOUNTER PROTOCOL. DM stages as adminstrative-precise interlocutor. AI engine renders from "The Trumpet Sounds" (Holt Rinehart Winston 1964) voice register and the documented public-administrative biography. Sanpaitai engages on civil-rights organizing strategy, FEPC history, women-in-movement-leadership cost.
+7. VOICE REGISTER. Methodist preacher’s daughter cadence. First-and-only-Black-woman-in-the-room composure. Administrative precision. Reference touchpoints: Hamline University 1922 first Black graduate, YWCA executive experience, FEPC executive directorship under Randolph 1944, Wagner cabinet 1954 to 1958. The voice of a woman who ran the logistics the men took credit for.
 
-8. PROJECT-TRIGGER LINKS. P001-04 beauty-shop wage-labor research paper (Hedgeman as secondary historical source). P002-08 Hedgeman-Randolph Youth-March-for-Integrated-Schools October 25 1958 organizing brief (primary trigger).
+8. PHYSICAL DESCRIPTION. UNCHECKED at photographic-description level for 1958. Narrate a poised, professionally dressed Black woman in her late 50s with the bearing of a seasoned administrator and public speaker. Firm, organized, articulate. Resolution path: NYPL Schomburg Photographs and Prints Division (search Hedgeman Anna Arnold at digitalcollections.nypl.org); see cc-cmp001-im-hedgeman-portrait.
 
-9. PEDAGOGICAL FLAGS. SENIOR / ADULT for primary engagement. MID for biographical-introduction only. JUNIOR can encounter as City-Hall-administrator without political-organizing register.
+9. PEDAGOGICAL PURPOSE. Hedgeman is the invisible organizer. She organized the entire SCLC NYC week that ended with the King stabbing and she organized the Youth March five weeks later. Her presence in the campaign teaches that political events do not happen by themselves. Someone books the church, confirms the press, manages the floor, and writes the column afterward. Hedgeman did all four.
 
-10. CITATIONS. Anna Arnold Hedgeman "The Trumpet Sounds A Memoir of Negro Leadership" Holt Rinehart and Winston 1964. Anna Arnold Hedgeman Papers NYPL Schomburg finding aid SCM 20703. National Park Service biographical entry. Jennifer Scanlon "Until There Is Justice The Life of Anna Arnold Hedgeman" Oxford UP 2016 (ADULT-preferred secondary).
+10. TIER. T3 secondary-conditional per dm-010. Surfaces on NPC-path-trigger when bookworms investigate the SCLC week organizing, the Youth March, or the “I Saw Dr King Stabbed” column. Tier 1 presence in the NPC schedule at Blumstein’s Saturday afternoon and Harlem Hospital Saturday evening.
+
+11. NPC-PATH-TRIGGER CONDITIONS. (a) Bookworm chooses Dragon 1 (Blumstein’s before three-twenty) and asks who organized the event. (b) Bookworm encounters the New York Age column and asks who wrote it. (c) Bookworm hears about the Youth March and asks who is planning it. (d) Bookworm encounters Randolph and he names her. (e) DM stages her at any SCLC-week venue per the NPC schedule.
+
+12. RELATIONSHIPS. A Philip Randolph (co-organizer of the Youth March; she worked under him at the FEPC 1944). Martin Luther King Jr (she organized his entire NYC week). Langston Hughes (shared Harlem intellectual-political community). Adam Clayton Powell Jr (overlapping Harlem political networks). L Joseph Overton (NAACP Harlem branch, co-present at Blumstein’s). Merritt Hedgeman (husband).
+
+13. IMAGE-ASSET REFERENCE. cc-cmp001-im-hedgeman-portrait (NYPL Schomburg).
+
+14. THREE SIGNATURE DIALOGUE EXEMPLARS (period-extrapolated, not verbatim).
+(a) At Blumstein’s before the signing: “The press is in the balcony. Dr King’s car is fifteen minutes out. The NAACP people have the mezzanine. I need the elevator held.”
+(b) At Harlem Hospital Saturday evening: “I was standing ten feet from him. The woman asked if he was Mr King and he said yes. Then the blade was in his chest. I am going to write every word of what I saw.”
+(c) On the Youth March: “The march is October twenty-fifth. Randolph and Rustin have Washington. I have New York. We need young people on buses. That is what I am organizing right now.”
+
+15. PRIMARY CITATIONS. Anna Arnold Hedgeman The Trumpet Sounds A Memoir of Negro Leadership Holt Rinehart and Winston 1964. Anna Arnold Hedgeman The Gift of Chaos Decades of American Discontent Oxford UP 1977 ISBN 978-0195022261. Jennifer Scanlon Until There Is Justice The Life of Anna Arnold Hedgeman Oxford UP 2016 ISBN 978-0190673208. Hedgeman “I Saw Dr King Stabbed” New York Age at Newspapers.com page 40868038. Anna Arnold Hedgeman Papers NYPL Schomburg finding aid SCM 20703. National Park Service biographical entry.
+
+CROSS-REFERENCES. cc-cmp001-template-npc. cc-cmp001-week-lead-up. cc-cmp001-realism-political. cc-cmp001-npc-schedule (N04). cc-cmp001-project-catalog (P001-04, P002-08). cc-cmp001-sg-graph.
+
+ORIGIN. May 16 2026 lightweight card. June 24 2026 B1 research upgrade to full 15-field dossier.
+
+EXTENSION:
+Hedgeman full dossier. Real-historical T3 upgraded to 15-field. Eyewitness to King stabbing. SCLC NYC week organizer. Youth March October 25 1958 organizer. Cabinet departure month and exact Harlem address UNCHECKED.
 
 ------------------------------------------------------------------------
 ID: cc-cmp001-npc-hughes
@@ -3689,29 +3817,49 @@ King full dossier. Real-historical T1 as news event, T2 as encounterable NPC. St
 
 ------------------------------------------------------------------------
 ID: cc-cmp001-npc-mahalia-jackson
-TITLE: cmp-001 NPC Mahalia Jackson (real-historical, secondary-conditional T3, documented-radio-surface-only)
+TITLE: cmp-001 NPC Mahalia Jackson (real-historical, full dossier T3, documented-radio-surface-only)
 ROLE: cmp-001
 S-VALUE: npc-mahalia-jackson
 
-1. NAME. Mahalia Jackson.
+1. NAME. Mahalia Jackson. Born Mahala Jackson (spelling changed later).
 
-2. AGE. 46 in September 1958. Born October 26 1911, New Orleans Louisiana.
+2. AGE. 46 in September 1958. Born October 26 1911 New Orleans Louisiana. Died January 27 1972 Evergreen Park Illinois.
 
-3. STATUS. VERIFIED real-historical secondary-conditional. Gospel singer. SURFACES IN cmp-001 VIA DOCUMENTED-RADIO-BROADCAST ONLY per the 2026-05-16 audit. Undocumented in-person Abyssinian appearance September 21 1958 is excluded under no-fabrication compliance.
+3. STATUS. VERIFIED real-historical secondary-conditional. Gospel singer. Columbia Records artist since 1954. SURFACES IN cmp-001 VIA DOCUMENTED-RADIO-BROADCAST ONLY per the May 16 2026 audit. No documented in-person NYC appearance September 20 to 21 1958. Undocumented in-person Abyssinian appearance September 21 1958 is excluded under no-fabrication compliance.
 
-4. LOCATION-AT-TIMESTAMP. Chicago-based residentially. Performed at Newport Jazz Festival July 6 1958 (the recording "Live at Newport 1958" Columbia CL 1244 was current). Surfaces in cmp-001 only via radio reception in Harlem.
+4. LOCATION-AT-EACH-NAMED-TIMESTAMP. Chicago-based residentially. No documented New York City performance, recording session, television appearance, or church appearance in September 1958. Performed at Newport Jazz Festival Sunday July 6 1958 (the recording Newport 1958 Columbia CL 1244 was current on Black radio in September). Surfaces in cmp-001 ONLY via radio reception at any timestamp. UNCHECKED: Burford Mahalia Jackson and the Black Gospel Field Oxford 2019 and Schwerin Got to Tell It Oxford 1992 may document a September 1958 itinerary. Resolution path: check both.
 
-5. ENCOUNTER VECTORS. (a) Sunday morning TM3 radio reception at Theresa lobby or Abyssinian vestibule. (b) Saturday afternoon TM2 jazz-radio broadcast Apollo-side-street. (c) Visible on period Apollo-bound performer poster.
+5. FAMILY AND HOUSEHOLD. Based in Chicago. Purchased a home in the largely white Chatham neighborhood on the South Side circa 1956. Faced racist hostility including gunfire into the home. UNCHECKED: exact address and date of purchase. Divorced from Isaac Hockenhull (married 1936, divorced 1941). In 1958 she was unmarried (second marriage to Sigmond Galloway was 1964).
 
-6. VOICE REGISTER. Documented gospel vocal arrangement. Newport 1958 introduction: "Ladies and gentleman: it is Sunday, and it is time for the world's greatest gospel singer, Miss Mahalia Jackson." Refused secular blues offers from Decca and Armstrong. First gospel-singer Carnegie Hall concert 1950.
+6. WORK OR OCCUPATION. Full-time gospel recording and touring artist. Columbia Records (signed 1954). Refused secular-blues offers from Decca and Louis Armstrong throughout career. First gospel singer to give a Carnegie Hall concert (1950). Television appearances on Ed Sullivan and other national programs. In 1958 her Columbia catalog included multiple albums and singles in active distribution. UNCHECKED: specific 1958 Columbia sessions and album release dates. Resolution path: Columbia Records discography and Burford.
 
-7. ENCOUNTER PROTOCOL. AI engine surfaces Mahalia only as DOCUMENTED RECORDED VOICE played on period radio. Do not stage as in-person speaking NPC. The Sanpaitai hears the voice, can react, may write listening-journal. Mahalia is a recorded-presence not an interactive-character.
+7. VOICE REGISTER. Documented gospel vocal arrangement. Powerful contralto. Newport 1958 introduction: “Ladies and gentleman: it is Sunday, and it is time for the world’s greatest gospel singer, Miss Mahalia Jackson.” Performance register: clapping, swaying, eyes closed, raised arms, full-body engagement. Speaking register: warm, religiously devout, plain-spoken, New Orleans inflection carried through decades in Chicago. Would talk about faith, the power of gospel, the civil rights movement, and Dr King.
 
-8. PROJECT-TRIGGER LINKS. P002-04 Mahalia documented-radio listening-and-context journal (primary trigger, audit-reanchored from undocumented Abyssinian appearance).
+8. PHYSICAL DESCRIPTION. Large, tall, commanding woman. Broad-shouldered, physically powerful. Typically wore formal gowns or robes for performance, conservative professional dress off-stage. Dark complexion. Expressive face, wide smile. Narrate her as filling a doorway and a room with presence before she opens her mouth.
 
-9. PEDAGOGICAL FLAGS. JUNIOR / MID / SENIOR / ADULT all eligible. JUNIOR-friendly. No content warnings for the documented Newport recording.
+9. PEDAGOGICAL PURPOSE. Jackson is the voice that connects the sacred to the political. Her friendship with King, her Newport performance weeks before the campaign window, and her refusal to cross into secular music despite enormous commercial pressure make her a figure who teaches students about artistic integrity and the role of faith in the civil rights movement. In cmp-001 she is audible but not visible, which makes her a teaching example about presence-through-art rather than presence-through-proximity.
 
-10. CITATIONS. Mahalia Jackson "Newport 1958" Columbia CL 1244 recorded July 6 1958. Mark Burford "Mahalia Jackson and the Black Gospel Field" Oxford UP 2019. Jules Schwerin "Got to Tell It Mahalia Jackson Queen of Gospel" Oxford UP 1992.
+10. TIER. T3 secondary-conditional per dm-010. Documented-radio-surface-only. Surfaces when bookworms hear gospel music on a radio at any crossing-point.
+
+11. NPC-PATH-TRIGGER CONDITIONS. (a) Sanpaitai hears Mahalia on a Theresa-lobby radio or Abyssinian-vestibule speaker. (b) Saturday afternoon jazz-radio broadcast Apollo-side-street. (c) Period Apollo-bound performer poster visible. (d) Any crossing-point where a radio is audible. AI engine renders voice only; do not stage as in-person speaking NPC.
+
+12. RELATIONSHIPS. Martin Luther King Jr (personal friendship dating to the Montgomery Bus Boycott 1955 to 1956; she sang at civil rights rallies at King’s request; she would later sing at his funeral 1968). Langston Hughes (shared 1958 cultural moment; Hughes attended Newport; both Columbia-adjacent in the recording world). The Newport jazz community (she closed the festival July 6 1958 and appears in Bert Stern’s Jazz on a Summer’s Day). UNCHECKED: whether she visited King at Harlem Hospital after the September 20 stabbing. Do not assert this.
+
+13. IMAGE-ASSET REFERENCE. cc-cmp001-im-mahalia-jackson-portrait (LOC Carl Van Vechten Collection or Columbia Records publicity). cc-cmp001-scene-set-pack (Newport 1958 footage in Jazz on a Summer’s Day).
+
+14. THREE SIGNATURE DIALOGUE EXEMPLARS (documented-voice-only; these are what a radio broadcast would carry, not in-person speech).
+(a) Newport 1958 spoken introduction before “Didn’t It Rain”: the MC’s voice, then her voice entering the song. The radio carries the recorded performance.
+(b) A radio interview clip (period-extrapolated): “I sing God’s music because God’s music makes me feel free. They offered me the blues. I said no. The blues is fine for somebody else. I sing for the Lord.”
+(c) A radio news mention (period-extrapolated): WLIB announcer: “Mahalia Jackson, who closed the Newport Jazz Festival in July, sends her prayers to Dr King at Harlem Hospital tonight.” (Note: this specific broadcast is PERIOD-EXTRAPOLATED, not documented.)
+
+15. PRIMARY CITATIONS. Mahalia Jackson Newport 1958 Columbia CL 1244 recorded July 6 1958. Mark Burford Mahalia Jackson and the Black Gospel Field Oxford UP 2019 ISBN 978-0190634933. Jules Schwerin Got to Tell It Mahalia Jackson Queen of Gospel Oxford UP 1992 ISBN 978-0195084399. Bert Stern Jazz on a Summer’s Day Galaxy Productions 1959. LOC Carl Van Vechten Collection Jackson portraits.
+
+CROSS-REFERENCES. cc-cmp001-template-npc. cc-cmp001-project-catalog (P002-04). cc-cmp001-scene-set-pack (Newport footage and Mahalia embed). cc-cmp001-realism-cultural (Newport ghost). cc-cmp001-sg-graph.
+
+ORIGIN. May 16 2026 lightweight card. June 24 2026 B1 research upgrade to full 15-field dossier. Radio-surface-only ruling preserved from May 16 2026 audit.
+
+EXTENSION:
+Mahalia Jackson full dossier. Real-historical T3 upgraded to 15-field. Documented-radio-surface-only. No documented September 1958 NYC appearance. Newport July 1958 verified. Chatham house and King hospital visit UNCHECKED.
 
 ------------------------------------------------------------------------
 ID: cc-cmp001-npc-maynard
@@ -4047,6 +4195,108 @@ EXTENSION:
 Closes the un-dossiered-figures gap for cmp-001. Main cast of twenty-three documented NPCs unchanged.
 
 ------------------------------------------------------------------------
+ID: cc-cmp001-npc-toy-harper
+TITLE: cmp-001 NPC Toy Harper (real-historical, full dossier T3)
+ROLE: cmp-001
+S-VALUE: npc-toy-harper
+
+1. NAME. Ethel “Toy” Harper (née Dudley Brown, per some sources). Known universally as Toy. Hughes called her his “aunt” though they were not blood relatives.
+
+2. AGE. UNCHECKED. Approximate age in September 1958 estimated mid-60s based on her long association with Hughes’s mother Carrie from the 1920s. Resolution path: Rampersad Vol 1 and Vol 2 for biographical detail; US Census records for birth year.
+
+3. STATUS. VERIFIED real-historical secondary-conditional. Hughes’s honorary aunt, co-owner of 20 East 127th Street, and the domestic anchor of his Harlem life from 1947 to 1967. Her role in the campaign is as gatekeeper of the Hughes house: any player visiting the brownstone meets Toy before they reach the top-floor workroom.
+
+4. LOCATION-AT-EACH-NAMED-TIMESTAMP. 20 East 127th Street. Toy is home-based. She manages the household, screens Hughes’s visitors (especially during his daytime sleep after late-night writing sessions), and cooks.
+Friday 6 PM TM1: home, 20 East 127th, lower floors.
+Saturday 9 AM TM2: home.
+Saturday 3 PM TM2: home. King stabbing news reaches the house via radio or visitor within an hour.
+Saturday 11 PM TM2: home. Hughes is upstairs working.
+Sunday 9 AM TM3: home or at church (specific church affiliation UNCHECKED; DM improvises).
+Sunday 3 PM TM3: home.
+Monday 7 AM TM4: home.
+
+5. FAMILY AND HOUSEHOLD. Married to Emerson Harper (see cc-cmp001-npc-emerson-harper). The couple owned 20 East 127th Street and lived on the lower floors while Hughes occupied the top floor as his workroom and bedroom. Toy was connected to Hughes’s mother Carrie; the relationship predates Hughes’s arrival in the house. Hughes used royalties from the 1947 Broadway opera Street Scene (Kurt Weill, Elmer Rice, Hughes as lyricist) to help fund the brownstone purchase. UNCHECKED: exact purchase date and deed details. Resolution path: Rampersad Vol 2 chapters covering 1947 to 1948; NYC property records.
+
+6. WORK OR OCCUPATION. Household manager of the 20 East 127th brownstone. Toy had a background in show business and dressmaking or fashion (UNCHECKED which; resolution path: Rampersad Vol 1 for early biography). By 1958 she was primarily the homemaker and household anchor. She cooked for Hughes, managed the stream of visitors, and maintained the domestic stability that made his prolific 1958 output possible.
+
+7. VOICE REGISTER. Warm, talkative, house-proud. The matriarch of the brownstone. Would address a young visitor as “baby” or “child.” Would talk about Lang (her name for Hughes), the house, the neighborhood, cooking, and the parade of famous and not-famous people who came through the door. The voice of a woman who has been keeping house for a genius for a decade and treats it as ordinary.
+
+8. PHYSICAL DESCRIPTION. UNCHECKED. Few published photographs of Toy Harper circulate. Narrate as an older Black woman (mid-60s), settled, respectable, house-proud in appearance. Apron likely if at home. The DM fills physical specifics from their own judgment. Resolution path: Rampersad for any physical descriptions; Schomburg holdings for possible photographs.
+
+9. PEDAGOGICAL PURPOSE. Toy teaches that genius has infrastructure. Hughes’s extraordinary 1958 output (four books, a weekly column, a recording, active correspondence) happened because someone cooked his meals, screened his callers, and kept the house running. Toy is the invisible labor that makes visible art possible. For the game she is also the warmth at the door: she decides whether a stranger gets upstairs.
+
+10. TIER. T3 secondary-conditional per dm-010. Surfaces automatically when any bookworm visits 20 East 127th Street.
+
+11. NPC-PATH-TRIGGER CONDITIONS. (a) Any bookworm who visits 20 East 127th knocks on the door. Toy answers. (b) Dragon 8 (Find the Hughes house) routes through Toy first. (c) Ghost-firing-6 (Hughes typewriter) requires getting past Toy to reach the top floor. (d) Any Hughes-house-window quest opens with Toy.
+
+12. RELATIONSHIPS. Langston Hughes (honorary nephew; she is his surrogate mother in Harlem). Emerson Harper (husband). Hughes’s mother Carrie (the original connection). Carl Van Vechten (she would know him as “Carlo” the way Hughes did, from decades of visits). The stream of writers, musicians, publishers, and students who came to 20 East 127th.
+
+13. IMAGE-ASSET REFERENCE. UNCHECKED: no cc-cmp001-im-toy-harper entry. Few photographs circulate. Resolution path: Rampersad; Schomburg; Beinecke Hughes Papers.
+
+14. THREE SIGNATURE DIALOGUE EXEMPLARS (period-extrapolated; Toy’s voice is DM-extrapolated per cc-cmp001-npc-supporting-figures ruling).
+(a) At the door: “Lang is sleeping. He was up until four. Come back after supper or sit in the parlor and I will make you coffee. Do not go upstairs.”
+(b) In the kitchen: “I have been feeding that man since he moved in. Collard greens, cornbread, and coffee. He would forget to eat if I did not put the plate in front of him.”
+(c) On the King news: “Lord have mercy. We heard it on the radio. Lang went quiet. He has been upstairs since. I am praying for Dr King and I am praying for that poor woman who did it because she is sick in her mind.”
+
+15. PRIMARY CITATIONS. Arnold Rampersad The Life of Langston Hughes Vol 1 1902-1941 I Too Sing America Oxford UP 1986 ISBN 978-0195146424 and Vol 2 1941-1967 I Dream a World Oxford UP 1988 ISBN 978-0195145441 (primary source for the Harpers throughout). NYC Landmarks Preservation Commission designation report LP-1135 Marjorie Pearson August 11 1981 at s-media.nyc.gov/agencies/lpc/lp/1135.pdf. National Trust for Historic Preservation Langston Hughes House stewardship entry.
+
+CROSS-REFERENCES. cc-cmp001-template-npc. cc-cmp001-npc-emerson-harper. cc-cmp001-npc-hughes. cc-cmp001-oi-hughes-workroom. cc-cmp001-hughes-house. cc-cmp001-npc-schedule (N13). cc-cmp001-npc-supporting-figures (superseded for Toy by this entry). cc-cmp001-sg-graph.
+
+ORIGIN. June 24 2026 B1 research. New entry, full 15-field dossier. Supersedes the Toy Harper portion of cc-cmp001-npc-supporting-figures.
+
+EXTENSION:
+Toy Harper full dossier. Real-historical T3 new entry. Honorary aunt. Door of 20 East 127th. Birth year, physical description, and early biography UNCHECKED.
+
+------------------------------------------------------------------------
+ID: cc-cmp001-npc-van-vechten
+TITLE: cmp-001 NPC Carl Van Vechten (real-historical, full dossier T3)
+ROLE: cmp-001
+S-VALUE: npc-van-vechten
+
+1. NAME. Carl Van Vechten.
+
+2. AGE. 78 in September 1958. Born June 17 1880 Cedar Rapids Iowa. Died December 21 1964 New York City.
+
+3. STATUS. VERIFIED real-historical secondary-conditional. Novelist, music and dance critic, photographer, and major (controversial) patron-promoter of the Harlem Renaissance. Author of the 1926 novel whose title is a racial slur, which permanently complicated his legacy and his relationships with some Black writers. Still alive and active as a photographer in 1958. IMPORTANT FOR THE GAME: Van Vechten did NOT live in Harlem. He lived on Central Park West. An encounter with him in Harlem in September 1958 is plausible (he visited to see friends, attend events, photograph subjects) but would itself be a notable occurrence, not a routine sighting.
+
+4. LOCATION-AT-EACH-NAMED-TIMESTAMP. Central Park West Manhattan. UNCHECKED: exact building and apartment number. Commonly associated with 146 Central Park West but this is UNCHECKED. Resolution path: Bruce Kellner Carl Van Vechten and the Irreverent Decades and Edward White The Tastemaker Carl Van Vechten and the Birth of Modern America. If encountered in Harlem during the campaign window, the scripted reason is a visit to Hughes at 20 East 127th (they were friends since 1925 and Van Vechten visited) or a photography sitting with a Harlem subject.
+All timestamps: Central Park West (default). Harlem only by scripted visit.
+
+5. FAMILY AND HOUSEHOLD. Married to Fania Marinoff (actress, born 1890 Odessa; married Van Vechten 1914; she survived him, died 1971). They lived together on Central Park West. The apartment was famously decorated with photographs, art, and memorabilia from Van Vechten’s long career as cultural impresario.
+
+6. WORK OR OCCUPATION. By 1958 his main creative activity was portrait photography. He made thousands of striking portraits of cultural figures (Black and white) with his Leica, often against boldly patterned backdrops (fabric, wallpaper, printed textiles). Just as important he was the founder and steward of major archives: the James Weldon Johnson Memorial Collection of Negro Arts and Letters at Yale (Beinecke Library, established 1941), the George Gershwin Memorial Collection at Fisk University, and collections at the New York Public Library. Much of his late life was devoted to soliciting, organizing, and donating materials to these collections.
+
+7. VOICE REGISTER. Effusive, gossipy, name-dropping conversational style. Theatrical. A raconteur who had known everyone for decades and wanted you to know it. Would talk about the Harlem of the 1920s, the writers and performers he had photographed, his archives, his enthusiasms in music and dance, and his continuing photography work. The voice of a man who believed himself a friend and champion of Black art, which he was, but whose patronage carried the weight of a racial slur in the title of his most famous novel.
+
+8. PHYSICAL DESCRIPTION. An elderly white man of 78 with white hair, a famously prominent set of front teeth (remarked on lifelong by contemporaries), portly build, dapper and sometimes flamboyant dress. Self-portraits from the late 1950s show an alert, theatrical figure who dressed for the camera. UNCHECKED at specific September 1958 level. Resolution path: Van Vechten self-portraits 1957 to 1959 in the Beinecke or LOC collections.
+
+9. PEDAGOGICAL PURPOSE. Van Vechten teaches the complicated role of white patronage in Black art. He championed Hughes in 1925, helped place The Weary Blues with Knopf, and spent decades building the JWJ Collection at Yale that preserves Black literary history. He also wrote a novel whose title is a racial slur and whose representation of Harlem was contested from the day it appeared. His friendship with Hughes survived the controversy; other friendships did not. For the game he is a teaching moment about allyship, exploitation, and the gap between intention and effect. Educators should handle the novel-title question directly when it arises.
+
+10. TIER. T3 secondary-conditional per dm-010. Surfaces on NPC-path-trigger when bookworms investigate the JWJ Collection, encounter Van Vechten photographs on the walls of Hughes’s study, or ask about white patrons of the Harlem Renaissance.
+
+11. NPC-PATH-TRIGGER CONDITIONS. (a) Sanpaitai visits Hughes workroom and notices Van Vechten photograph references on the wall. (b) Sanpaitai asks Hughes about who helped publish his early work. (c) Sanpaitai at Schomburg encounters the JWJ Collection and asks who founded it. (d) DM stages a rare Harlem visit as an encounter of significance. (e) Van Vechten arrives at 20 East 127th to photograph someone in Hughes’s circle.
+
+12. RELATIONSHIPS. Langston Hughes (friends since 1925; Van Vechten championed The Weary Blues and helped place it with Knopf; Hughes routinely sent papers to Van Vechten for the JWJ Collection at Yale; their friendship was long warm and ongoing in 1958 despite the controversy). Fania Marinoff (wife). The entire Harlem Renaissance generation (Van Vechten photographed, promoted, and archived dozens of Black writers, musicians, and performers). Arna Bontemps (connected through the JWJ Collection and the George Gershwin Collection at Fisk which Van Vechten also founded). James Weldon Johnson (the collection’s namesake; Johnson died 1938).
+
+13. IMAGE-ASSET REFERENCE. UNCHECKED: no cc-cmp001-im-van-vechten entry yet. Van Vechten self-portraits in the Beinecke and LOC are the source family. Many are public domain or educational-use permitted through the Van Vechten Trust.
+
+14. THREE SIGNATURE DIALOGUE EXEMPLARS (period-extrapolated).
+(a) At Hughes’s door: “Lang! I brought my camera. I want to photograph that new bookshelf before you rearrange it. Is Toy making coffee? Tell her Carlo is here.”
+(b) On the JWJ Collection: “Yale has everything I have sent them. Your drafts, Countee’s letters, Zora’s manuscripts. When we are all gone the collection will be there. That is what it is for.”
+(c) On the King news: “I heard it on the radio. Dreadful. Dreadful. I telephoned Fania and she wept. Martin is a brave man. I want to photograph him when he recovers. That face should be in the collection.”
+
+15. PRIMARY CITATIONS. Bruce Kellner Carl Van Vechten and the Irreverent Decades University of Oklahoma Press 1968. Edward White The Tastemaker Carl Van Vechten and the Birth of Modern America Farrar Straus and Giroux 2014 ISBN 978-0374201562. Emily Bernard Carl Van Vechten and the Harlem Renaissance A Portrait in Black and White Yale UP 2012 ISBN 978-0300121995. Yale University Beinecke Rare Book and Manuscript Library James Weldon Johnson Memorial Collection finding aid. LOC Van Vechten photographic collection. Van Vechten Trust educational-use policy.
+
+SENSITIVITY NOTE FOR THE CLASSROOM. Van Vechten’s 1926 novel carries a title that is a racial slur. Present the historical fact without reproducing the slur gratuitously. Use the encounter as a teaching moment about the complicated, sometimes exploitative role of white patronage in the Harlem Renaissance. The novel’s title is not spoken aloud in cmp-001 gameplay; it is referenced as “the 1926 novel whose title was and is a slur” or similar circumlocution. If a student asks, the educator handles it directly.
+
+CROSS-REFERENCES. cc-cmp001-template-npc. cc-cmp001-oi-hughes-workroom (Van Vechten photographs on the wall). cc-cmp001-npc-hughes (friend since 1925). cc-cmp001-npc-bontemps (connected through Fisk Gershwin Collection). cc-cmp001-schomburg (JWJ Collection context). cc-cmp001-sg-graph.
+
+ORIGIN. June 24 2026 B1 research. New entry, full 15-field dossier.
+
+EXTENSION:
+Van Vechten full dossier. Real-historical T3 new entry. 78 years old. Central Park West resident NOT Harlem. Leica photographer. JWJ Collection founder Yale 1941. Controversial Harlem Renaissance patron. Exact apartment address UNCHECKED.
+
+------------------------------------------------------------------------
 ID: cc-cmp001-roger
 TITLE: Roger — NPC card
 ROLE: npc-canon
@@ -4183,7 +4433,7 @@ LAYER A PRESENTATION (per cc-cmp001-narrative-architecture MAY 10 2026 EXTENSION
 
 LAYER B PRESENTATION. Hughes-the-man at the desk in residence September 1958. Toy and Emerson Harper elsewhere in the house. The workroom is a working writer's room with all the physical artifacts present and Hughes physically present writing.
 
-GHOST-FIRING ATTACHMENT. cc-cmp001-ghost-firing-6-hughes-typewriter is the cmp-001 ghost-exegesis firing-point that activates here. When a Sanpaitai member visits Hughes and reads a manuscript page, the page shows the encounter being drafted. Pedagogical effect: authorship demystified, fiction shown as constructed. IMAGE-ASSET cc-cmp001-im-hughes-house (LP-1135 designation report photograph public domain) plus cc-cmp001-im-hughes-portrait (Carl Van Vechten NYPL Schomburg public domain). ADJACENT SPATIAL. cc-cmp001-street-S02 expands the East 128th block context one block north of Hughes door.
+GHOST-FIRING ATTACHMENT. cc-cmp001-ghost-firing-6-hughes-typewriter is the cmp-001 ghost-exegesis firing-point that activates here. B3 RESOLVED (Jun 2026 Saul ruling): the crossing is PLAYER-CHOICE. The mirror or any interdimensional object is present and available. The player decides when to step through. Reading the manuscript page does not auto-trigger the crossing and the crossing does not require reading first. The player has full agency over when reality shifts. This is a fourth-wall-breaking mechanism. The architecture does not commit to one-moment or two-moment as fixed doctrine. Future campaigns inherit player-choice as the default crossing rule. When a Sanpaitai member visits Hughes and reads a manuscript page, the page shows the encounter being drafted. Pedagogical effect: authorship demystified, fiction shown as constructed. IMAGE-ASSET cc-cmp001-im-hughes-house (LP-1135 designation report photograph public domain) plus cc-cmp001-im-hughes-portrait (Carl Van Vechten NYPL Schomburg public domain). ADJACENT SPATIAL. cc-cmp001-street-S02 expands the East 128th block context one block north of Hughes door.
 
 EXTENSION:
 NYC Landmarks Preservation Commission designation report LP-1135 (Marjorie Pearson, August 11, 1981): http://s-media.nyc.gov/agencies/lpc/lp/1135.pdf · National Register of Historic Places NRHP 82001198 (October 29, 1982) · status: verified primary
@@ -4850,7 +5100,7 @@ TOP FLOOR WORKROOM (where Hughes wrote 1947-1967).
 - Specific typewriter brand 1958 UNCHECKED at primary level. Period-likely candidates. Royal (very common writer's choice 1940s-50s), Underwood (common), Smith Corona (common), Hermes Baby (portable, popular with writers).
 - Bookshelves with his published work. Montage of a Dream Deferred (1951), The Weary Blues (1925).
 - Within cmp-001 1958 timeline the workroom contains his 1958 publications The Book of Negro Folklore (Dodd Mead) and The Langston Hughes Reader (Braziller). Selected Poems of Langston Hughes (1959, Knopf) is post-cmp-001-window and absent from 1958 setting.
-- Manuscript pages of works-in-progress on or near the typewriter. Simple stories drafts (Chicago Defender column ongoing, begun 1943). Correspondence with Bontemps and Knopf. Possibly drafts of "Thank You, M'am" if disputed citation venue resolves to "drafted in fall 1958" (UNCHECKED).
+- Manuscript pages and published works on or near the typewriter and desk. The desk in September 1958 sits at the center of an extraordinarily busy publishing year. FOUR 1958 BOOKS (proofs, jacket art, author copies, reviews, or fan and colleague mail about them are all plausible desk items): (1) The Langston Hughes Reader George Braziller 1958, a major career-spanning anthology. (2) Tambourines to Glory John Day Company 1958, his gospel-themed novel which he was also developing toward a stage musical (premiere 1963). (3) The Book of Negro Folklore co-edited with Arna Bontemps Dodd Mead 1958 (exact publication month UNCHECKED; galleys or the finished book are both plausible). (4) Famous Negro Heroes of America Dodd Mead 1958, juvenile nonfiction. CHICAGO DEFENDER COLUMN: the Simple column (Jesse B Semple) was still running in 1958 as a regular column (begun 1943; ended 1966 per Rampersad). A column-in-progress for the Defender is the highest-probability document in the typewriter at any given moment. WEARY BLUES LP: the MGM Weary Blues LP (E3697) was recorded in 1958 (exact session dates UNCHECKED; musicians included Charles Mingus, Henry Red Allen, and Phineas Newborn Jr under producer Leonard Feather). Related notes, correspondence, or a test pressing are plausible desk items. SELECTED POEMS: Selected Poems of Langston Hughes Knopf 1959 was in preparation; working drafts and Knopf correspondence about it are plausible. SIMPLY HEAVENLY: his Simple-based musical play had reached Broadway in 1957; related papers (royalty statements, revival or amateur-rights correspondence) are plausible. LIBRARY OF CONGRESS: Hughes recorded poetry at the LOC in 1958 (exact date UNCHECKED); correspondence about it is plausible. CORRESPONDENCE ON THE DESK: letters to and from Arna Bontemps (his most frequent correspondent, about the folklore book and shared projects), Carl Van Vechten (about contributing papers to the JWJ Collection at Yale), publishers and editors at Braziller, Knopf, John Day, and Dodd Mead, and the constant stream of readers, students, and young writers who wrote to him. A Bontemps letter about the folklore anthology is the single most defensible specific letter on the desk. REFERENCE MATERIALS: the Chicago Defender and other Black press; general magazines and books he was reviewing or mining for anthologies; reference works for his juvenile nonfiction.
 
 PERIOD-EXTRAPOLATED INTERIOR (UNCHECKED for exact 1958 layout, plausible per period writing-room photographs and Rampersad biography).
 - Wooden writing desk with chair facing the window or facing the wall (most likely arrangement).
@@ -4863,7 +5113,7 @@ PERIOD-EXTRAPOLATED INTERIOR (UNCHECKED for exact 1958 layout, plausible per per
 - Window onto East 127th Street (the front room faces the street).
 
 THE HARPERS (Hughes's adopted-family co-residents).
-- William Emerson Harper. Husband. Pianist and music educator.
+- William Emerson Harper. Husband. Professional musician (INSTRUMENT UNCHECKED: piano or reed/woodwind; see cc-cmp001-npc-emerson-harper).
 - Ethel "Toy" Dudley Brown Harper. His longtime companion / adoptive aunt-figure. Hughes called her his "aunt" though they were not blood relatives.
 - Lived in the lower floors of 20 East 127th. Hughes occupied the top.
 - They were his de facto family during his Harlem years.
@@ -4893,9 +5143,14 @@ NAVIGATIONAL HOOKS.
 - The Hughes thread per cc-cmp001-narrative-architecture is now load-bearing #1. Most cross-thread paths intersect at or near the workroom.
 
 UNCHECKED resolution paths.
-- Specific typewriter brand 1958 UNCHECKED. Resolvable via Langston Hughes House museum direct visit, Schomburg holdings, or Rampersad Volume II 1941-1967 (Oxford 2002, ISBN 978-0-19-514643-4).
+- Specific typewriter brand 1958 UNCHECKED. Resolvable via Langston Hughes House museum direct visit, Schomburg holdings, or Rampersad Volume II 1941-1967 (Oxford 2002, ISBN 978-0-19-514643-4). Period-likely candidates: Royal (very common writer choice 1940s to 50s), Underwood (common), Smith Corona (common), Hermes Baby (portable, popular with writers).
 - Specific 1958 furniture layout UNCHECKED. Resolvable via Rampersad notes at Schomburg or via the Beinecke Library Hughes papers at Yale.
 - Hughes specific Sept 20 1958 hour-by-hour location: not surfaced in available primary sources for this date. His documented late-September 1958 working pattern at this workroom (per Rampersad biography) covers most weekday and weekend hours; specific Saturday afternoon attendance not yet verified.
+- Exact publication months for the four 1958 books UNCHECKED. Resolution path: LOC catalog copyright registration dates.
+- Weary Blues LP recording session dates UNCHECKED. Resolution path: MGM recording archives and jazz discography databases.
+- Thank You Mam earliest publication date and venue UNCHECKED. Resolution path: Hughes bibliography and Beinecke finding aid.
+- Selected Poems Knopf 1959 preparation timeline UNCHECKED. Resolution path: Rampersad and Beinecke Knopf-Hughes correspondence.
+- B1 RESEARCH FILL June 24 2026 added the four 1958 books, the Defender column, the Weary Blues LP, the Selected Poems preparation, the Simply Heavenly papers, the LOC recording, and the correspondence inventory. UNCHECKED items flagged above.
 
 CROSS-REFERENCES. cc-cmp001-authors-world-reframe (the scene this materializes). cc-cmp001-npc-hughes (Hughes dossier; status upgrade to T1 load-bearing pending). cc-cmp001-emergence-point (kitchenette mirror as primary spawn portal, manuscript as secondary in-world artifact-portal). cc-cmp001-historical-overlay-disclaimer (cites the venue dispute Folklore vs Reader). cc-cmp001-narrative-architecture (Hughes thread #1). cc-cmp001-realism-spatial (Hughes house in spatial domain). PM14 (Truman + Curb + Crash + Matrix anchors). dim-001 (text-as-dimension, manuscript IS the next layer of dimension being created in real time).
 
@@ -6539,7 +6794,7 @@ Stress-test of the D and D-frame Ontario English curriculum produced by deep-res
 ID: cc-pen-007
 TITLE: Bidirectional linkage verification and install: /campaigns/thank-you-mam/ ↔ /teacherresources/
 ROLE: deployment
-S-VALUE: pending
+S-VALUE: resolved
 
 MAY 11 2026 VERIFIED STATE. Forward link from /campaigns/thank-you-mam/ to /teacherresources/ is PRESENT (anchor in nav header: <a href="/teacherresources/">Resources</a>). Back link from /teacherresources/ to /campaigns/thank-you-mam/ is NOT PRESENT.
 

@@ -60,7 +60,7 @@
     // rig keep theirs (#geo present); '/main' opts out by tier. Everything else
     // mounts the single #indraLayer below. A page's project- color class no
     // longer suppresses the web, since the web is now the only geometry it has.
-    if (document.getElementById('geo')) return;
+    if (document.getElementById('geo') || document.getElementById('printCv')) return;
     var tier = tierFor(window.location.pathname);
     if (tier === 'off') return;
 
@@ -90,7 +90,7 @@
     var fRot   = (seed % 360);                                    // 0 .. 360
     // Register sets visibility, not shape: experimental pages read the web
     // louder, professional pages quieter, over the same gasket.
-    var op = tier === 'prominent' ? 0.5 : 0.32;
+    var op = tier === 'prominent' ? 0.12 : 0.06;
 
     var layer = document.createElement('div');
     layer.id = 'indraLayer';
@@ -100,38 +100,100 @@
     layer.innerHTML = window.PolymythMandala.build(canonOpts());
     document.body.appendChild(layer);
 
-    function baseTransform(p) {
-      var y = window.scrollY || 0;
-      var driftDeg = tier === 'prominent' ? 8 : 6;
-      return 'translate(' + fTx.toFixed(1) + 'px,' + (fTy - y * (tier === 'prominent' ? 0.12 : 0.10)).toFixed(1) + 'px)' +
-             ' rotate(' + (fRot + p * driftDeg).toFixed(2) + 'deg)' +
-             ' scale(' + (fScale + p * 0.18).toFixed(3) + ')';
-    }
+    // The geometry follows a SMOOTHED scroll value, not the raw one, so it glides
+    // instead of stepping with each discrete wheel tick. A per-frame approach toward
+    // the real scrollY is an exponential ease-out, the same character as the home
+    // rig's Lenis easing. curY chases scrollY; the loop sleeps once it settles.
+    // Breathing parameters: slow enough to feel like sleep, not motion.
+    var BREATH_PERIOD = 10000;   // 10s full cycle
+    var BREATH_SCALE  = 0.003;   // ±0.003 scale oscillation
+    var BREATH_ROT    = 0.25;    // ±0.25° rotation oscillation
+    var BREATH_X      = 0.4;     // ±0.4px lateral sway
+    var BREATH_Y      = 0.3;     // ±0.3px vertical sway
+    var TWO_PI = Math.PI * 2;
 
-    if (reduced) { layer.style.transform = baseTransform(0); return; }
+    // Cursor lean state (computed in tick, fed by mousemove listener below)
+    var mouseX = 0, mouseY = 0, leanX = 0, leanY = 0;
+    var LEAN_EASE = 0.008, LEAN_DEG = 0.15, LEAN_PX = 0.8;
 
-    var ticking = false;
-    function frame() {
-      ticking = false;
-      var y = window.scrollY || 0;
+    // Tidal pulse target (SVG element, set after layer is appended)
+    var tidalSvg = null;
+    var TIDAL_PERIOD = 20000, TIDAL_AMP = 0.001;
+
+    function transformFor(y, t) {
       var docH = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       var p = Math.min(1, y / docH);
-      layer.style.transform = baseTransform(p);
+      var driftDeg = tier === 'prominent' ? 8 : 3;
+      // Time-based breath: two detuned sine waves for organic irregularity
+      var phase1 = t / BREATH_PERIOD * TWO_PI;
+      var phase2 = t / (BREATH_PERIOD * 1.37) * TWO_PI; // detuned golden ratio
+      var bScale = Math.sin(phase1) * BREATH_SCALE;
+      var bRot   = Math.cos(phase2) * BREATH_ROT;
+      var bX     = Math.sin(phase2) * BREATH_X;
+      var bY     = Math.cos(phase1 * 0.7) * BREATH_Y;
+      var tx = fTx + bX;
+      var ty = fTy - y * (tier === 'prominent' ? 0.12 : 0.06) + bY;
+      var rot = fRot + p * driftDeg + bRot;
+      var sc = fScale + p * 0.18 + bScale;
+      return 'translate(' + (tx + leanX * LEAN_PX).toFixed(2) + 'px,' + (ty + leanY * LEAN_PX).toFixed(2) + 'px)' +
+             ' rotate(' + (rot + leanX * LEAN_DEG).toFixed(3) + 'deg)' +
+             ' scale(' + sc.toFixed(4) + ')';
     }
-    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
-    window.addEventListener('scroll', onScroll, { passive: true });
+
+    if (reduced) { layer.style.transform = transformFor(window.scrollY || 0, 0); return; }
+
+    var curY = window.scrollY || 0;
+    var raf = 0;
+    var EASE = 0.085;
+    // Persistent tick: never sleeps. Handles scroll chase AND idle breath
+    // in one rAF chain. One style write per frame, always running.
+    function tick() {
+      var target = window.scrollY || 0;
+      curY += (target - curY) * EASE;
+      if (Math.abs(target - curY) < 0.15) { curY = target; }
+      // Lean easing (merged from standalone loop)
+      leanX += (mouseX - leanX) * LEAN_EASE;
+      leanY += (mouseY - leanY) * LEAN_EASE;
+      // Layer transform: scroll + breath + lean in one write
+      layer.style.transform = transformFor(curY, Date.now());
+      // Tidal pulse on the SVG (separate element, one write)
+      if (tidalSvg) {
+        var tt = Date.now() / TIDAL_PERIOD * Math.PI * 2;
+        tidalSvg.style.transform = 'scale(' + (1 + Math.sin(tt) * TIDAL_AMP).toFixed(5) + ')';
+      }
+      raf = requestAnimationFrame(tick);
+    }
+    function kick() {
+      // Immediate sync update so the transform reflects scroll NOW
+      // (needed for gate detection; the rAF loop handles smooth easing)
+      layer.style.transform = transformFor(window.scrollY || 0, Date.now());
+      if (!raf) { raf = requestAnimationFrame(tick); }
+    }
+    window.addEventListener('scroll', kick, { passive: true });
+    // Start immediately so the substrate breathes from first frame.
+    kick();
     var rT;
     window.addEventListener('resize', function () {
       clearTimeout(rT);
       rT = setTimeout(function () {
         mobile = window.innerWidth < 768;
         layer.innerHTML = window.PolymythMandala.build(canonOpts());
-        frame();
+        curY = window.scrollY || 0;
+        layer.style.transform = transformFor(curY);
         // Rebuild replaced every circle; re-seat the ecosystem on fresh nodes.
         mountEcosystem(layer);
       }, 220);
     }, { passive: true });
-    frame();
+
+    // Assign tidal SVG target (vars declared above, before tick)
+    tidalSvg = layer.querySelector('svg');
+
+    // Cursor lean: the web tilts imperceptibly toward the pointer.
+    document.addEventListener('mousemove', function(e) {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    }, { passive: true });
+    // Lean is computed inside the unified tick loop below.
   }
 
   // --- Click ripple: interaction enters the web itself ----------------------
@@ -249,13 +311,18 @@
       seed = (seed * 1103515245 + 12345) >>> 0;
       return (seed / 4294967296) < 0.85 ? 1 : 0;
     });
+    // Assign depth-band classes for opacity layering + phase stagger
+    for (var b = 0; b < nodes.length; b++) {
+      var r = nodes[b].r;
+      nodes[b].el.classList.add(r > 30 ? 'depth-far' : r > 10 ? 'depth-mid' : 'depth-near');
+    }
     function paint() {
       for (var k = 0; k < nodes.length; k++) {
         nodes[k].el.classList.toggle('eco-c', strat[k] === 1);
         nodes[k].el.classList.toggle('eco-d', strat[k] === 0);
       }
     }
-    var base = mobile ? 2200 : 1600;
+    var base = mobile ? 10000 : 8000;
     var hot = 0;
     // Published state the once-attached gesture listeners read and mutate.
     ecoState = {
@@ -267,12 +334,14 @@
       var tempo = hot > 0 ? base * 0.45 : base; hot = Math.max(0, hot - 1);
       ecoTimer = setTimeout(tick, tempo);
     }
-    // Paint the seeded state once and hold it. The perpetual step loop is
-    // disabled because the per-tick class flip read as a flicker at rest.
+    // Glacial ecosystem: steps every 8 seconds so changes are almost
+    // imperceptible. The old fast loop flickered; this one drifts.
     paint();
+    tick();
   }
 
-  // Click seeds cooperation at the nearest jewels; attached once for the page.
+  // Click reveals tangent connections near the touch point, then dissolves.
+  // Also seeds cooperation at the nearest jewels (ecosystem interaction).
   document.addEventListener('pointerdown', function (e) {
     if (reduced || !ecoState || (e.button && e.button !== 0)) return;
     var s = ecoState, svg = s.svg;
@@ -285,10 +354,37 @@
       if (d < bd) { bd = d; bi = k; }
     }
     if (bi >= 0) {
+      // Seed cooperation
       s.strat[bi] = 1;
       var seeded = 0;
       s.adj[bi].forEach(function (j) { if (seeded < 2) { s.strat[j] = 1; seeded++; } });
       s.paint();
+      // Reveal tangent lines from this node to its neighbors
+      var ns = 'http://www.w3.org/2000/svg';
+      var lines = [];
+      s.adj[bi].forEach(function (j) {
+        var line = document.createElementNS(ns, 'line');
+        line.setAttribute('x1', s.nodes[bi].x);
+        line.setAttribute('y1', s.nodes[bi].y);
+        line.setAttribute('x2', s.nodes[j].x);
+        line.setAttribute('y2', s.nodes[j].y);
+        line.setAttribute('stroke', 'currentColor');
+        line.setAttribute('stroke-width', '0.3');
+        line.style.opacity = '0';
+        line.style.transition = 'opacity 0.8s ease-in';
+        svg.appendChild(line);
+        lines.push(line);
+        // Fade in
+        requestAnimationFrame(function() { line.style.opacity = '0.06'; });
+      });
+      // Dissolve after 2 seconds
+      setTimeout(function() {
+        lines.forEach(function(l) { l.style.transition = 'opacity 4s ease-out'; l.style.opacity = '0'; });
+        // Remove from DOM after fade
+        setTimeout(function() {
+          lines.forEach(function(l) { if (l.parentNode) l.parentNode.removeChild(l); });
+        }, 4500);
+      }, 2000);
     }
   }, { passive: true });
 

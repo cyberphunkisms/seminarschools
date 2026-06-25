@@ -62,8 +62,25 @@ for (const step of STEPS) {
 
 console.log();
 console.log('========================================================================');
-console.log('Quartet regen ' + (failures === 0 ? 'COMPLETE' : 'FAILED'));
-console.log(failures === 0 ? '0 failures' : (failures + ' / ' + STEPS.length + ' failures'));
+
+// ── Concordance index (depends on all four SEED arrays being up to date) ──
+const concordancePath = path.join(projectRoot, 'polymyth/concordance/concordance-index.json');
+const cBefore = fs.existsSync(concordancePath) ? fs.statSync(concordancePath).size : 0;
+try {
+  const cScript = path.join(scriptDir, 'regen-concordance-index.js');
+  const cCmd = 'node ' + JSON.stringify(cScript) + (dryRun ? ' --dry-run' : '');
+  execSync(cCmd, { cwd: projectRoot, encoding: 'utf-8' });
+  const cAfter = fs.existsSync(concordancePath) ? fs.statSync(concordancePath).size : 0;
+  const cDelta = cAfter - cBefore;
+  console.log('[concordance-index] OK (' + cBefore + ' -> ' + cAfter + ', delta ' + (cDelta >= 0 ? '+' : '') + cDelta + ')');
+} catch (err) {
+  failures++;
+  console.error('[concordance-index] FAIL:', err.message);
+}
+
+console.log('========================================================================');
+console.log('Regen ' + (failures === 0 ? 'COMPLETE' : 'FAILED'));
+console.log(failures === 0 ? '0 failures' : (failures + ' failures'));
 console.log('========================================================================');
 
 process.exit(failures);

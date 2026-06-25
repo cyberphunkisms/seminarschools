@@ -10,10 +10,11 @@
 #indraLayer {
   position: fixed; inset: -12vh -12vw; z-index: 0;
   pointer-events: none; will-change: transform;
+  mix-blend-mode: soft-light;
 }
-#indraLayer circle { transition: fill-opacity 1.1s ease, opacity 1.1s ease, stroke-opacity 1.1s ease; }
-#indraLayer circle.eco-c { fill: currentColor; fill-opacity: 0.14; }
-#indraLayer circle.eco-d { fill-opacity: 0; opacity: 0.30; }
+#indraLayer circle { transition: fill-opacity 3.5s ease-in-out, opacity 3.5s ease-in-out, stroke-opacity 3.5s ease-in-out; }
+#indraLayer circle.eco-c { fill: currentColor; fill-opacity: 0.08; }
+#indraLayer circle.eco-d { fill-opacity: 0; opacity: 0.18; }
 #indraLayer svg { width: 100%; height: 100%; }
 #indraLayer .geo-stroke { stroke: currentColor; }
 body > main, body > header, body > footer, body > nav, body > section { position: relative; z-index: 1; }
@@ -162,3 +163,9 @@ input:focus, textarea:focus, select:focus {
     transition: none !important;
   }
 }
+
+/* Depth bands: outer circles more transparent, inner more present.
+   Phase-staggered transitions so focus racks slowly across the web. */
+#indraLayer circle.depth-far  { opacity: 0.55; transition-delay: 0s; }
+#indraLayer circle.depth-mid  { opacity: 0.75; transition-delay: 0.8s; }
+#indraLayer circle.depth-near { opacity: 0.92; transition-delay: 1.6s; }

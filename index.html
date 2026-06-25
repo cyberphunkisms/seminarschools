@@ -43,6 +43,8 @@ a{color:inherit;text-decoration:none;}
   border:1px solid var(--ink);padding:.5rem .85rem;border-radius:3px;transition:background .18s,color .18s,transform .18s;}
 .book:hover,.book:focus-visible{background:var(--ink);color:var(--bg);transform:translateY(-1px);}
 
+.door:hover,.door:focus-visible{background:var(--ink);color:var(--bg);transform:translateY(-1px);}
+.door:hover strong,.door:focus-visible strong{color:inherit;}
 /* ---------- hero stage ---------- */
 .stage{position:relative;width:100%;height:78vh;min-height:540px;overflow:hidden;border-bottom:1px solid var(--line);}
 #web{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:default;}
@@ -51,9 +53,9 @@ a{color:inherit;text-decoration:none;}
 .jewel{cursor:pointer;}
 .jewel .halo{fill:var(--n);opacity:0;}
 .jewel .dot{fill:var(--bg);stroke:var(--n);stroke-width:2;}
-.jewel .lab{font-family:var(--mono);font-size:11px;letter-spacing:.06em;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:3px;}
+.jewel .lab{font-family:var(--mono);font-size:13px;letter-spacing:.06em;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:4px;}
 .jewel.core .dot{fill:var(--ink);stroke:var(--ink);}
-.jewel.core .lab{font-family:var(--serif);font-style:italic;font-size:17px;stroke-width:4px;}
+.jewel.core .lab{font-family:var(--serif);font-style:italic;font-size:20px;stroke-width:5px;}
 .jewel:hover .dot,.jewel:focus-visible .dot,.jewel.on .dot{stroke-width:3;}
 .jewel:hover .lab,.jewel:focus-visible .lab,.jewel.on .lab{fill:var(--n);}
 /* The constellation must NOT inherit alive.css .node/[role]/[tabindex] motion. Frozen jewels. */
@@ -128,10 +130,34 @@ a{color:inherit;text-decoration:none;}
 
 <div class="lede">
   <h1>A room of readers working a hard text together reaches what <em>none of them</em> could reach alone.</h1>
-  <p>Seminar Schools is one organism. A tutoring practice, a free public seminar, a city-wide lecture calendar, a body of essays, a learning game, and the framework underneath them all. Every part reflects the others.</p>
+  <p>Every project here is a seminar at a different scale. Tutoring, a free public gathering, a city-wide lecture calendar, essays, a learning game, and the framework underneath them all. One organism.</p>
+
+  <nav class="doors" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:2rem 0;">
+    <a href="/leizu" class="door" style="font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:1.1rem 1.2rem;border:1px solid var(--line);border-radius:3px;transition:background .18s,color .18s;">
+      <strong style="display:block;font-family:var(--serif);font-size:1rem;text-transform:none;letter-spacing:0;margin-bottom:.3rem;">Book tutoring</strong>
+      Five subjects. From $120/session.
+    </a>
+    <a href="/agora/" class="door" style="font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:1.1rem 1.2rem;border:1px solid var(--line);border-radius:3px;transition:background .18s,color .18s;">
+      <strong style="display:block;font-family:var(--serif);font-size:1rem;text-transform:none;letter-spacing:0;margin-bottom:.3rem;">Free class at the Agora</strong>
+      Show up, read the text, no registration.
+    </a>
+    <a href="/teacherresources/" class="door" style="font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:1.1rem 1.2rem;border:1px solid var(--line);border-radius:3px;transition:background .18s,color .18s;">
+      <strong style="display:block;font-family:var(--serif);font-size:1rem;text-transform:none;letter-spacing:0;margin-bottom:.3rem;">Teacher Resources</strong>
+      700+ curated resources by subject.
+    </a>
+    <a href="/polymyth/methodologylist" class="door" style="font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:1.1rem 1.2rem;border:1px solid var(--line);border-radius:3px;transition:background .18s,color .18s;">
+      <strong style="display:block;font-family:var(--serif);font-size:1rem;text-transform:none;letter-spacing:0;margin-bottom:.3rem;">The framework</strong>
+      polymorphousmythology. 1,000+ entries.
+    </a>
+  </nav>
+
+  <div style="font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;color:var(--ink-soft);margin-bottom:1.5rem;">
+    Text or call <a href="tel:+14167710382" style="color:var(--accent);border-bottom:1px solid var(--accent);">416-771-0382</a> &middot; <a href="mailto:saulnassau@protonmail.com" style="color:var(--accent);border-bottom:1px solid var(--accent);">saulnassau@protonmail.com</a>
+  </div>
+
   <div class="id">
     <img class="portrait" src="/img/saul.jpg" width="88" height="88" alt="Saul Karim Nassau" loading="lazy" decoding="async">
-    <div class="who">Saul Karim Nassau &middot; MA Philosophy &middot; Toronto and online &middot; saulnassau@protonmail.com</div>
+    <div class="who">Saul Karim Nassau &middot; MA Philosophy &middot; Toronto and online</div>
   </div>
 </div>
 
@@ -252,5 +278,6 @@ NODES.filter(n=>n.tier>0).forEach((n,i)=>{
 <script src="/js/mandala.js" defer></script>
 <script src="/js/indra.js" defer></script>
 <script src="/js/footer.js" defer></script>
+<script src="/js/autolink.js" defer></script>
 </body>
 </html>
