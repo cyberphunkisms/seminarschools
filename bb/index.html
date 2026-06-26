@@ -92,6 +92,8 @@ main{
 .card:hover{transform:translateY(-2px)}
 .card.student:hover{border-color:var(--fire)}
 .card.teacher:hover{border-color:var(--teal)}
+.card.case:hover{border-color:#c4a878}
+.card.wide{grid-column:1/-1}
 .card .audience{
   font-family:'JetBrains Mono',monospace;font-size:11px;
   text-transform:uppercase;letter-spacing:1.6px;
@@ -99,6 +101,7 @@ main{
 }
 .student .audience{color:var(--fire)}
 .teacher .audience{color:var(--teal)}
+.case .audience{color:#c4a878}
 .card h2{
   font-family:'EB Garamond',Georgia,serif;
   font-size:30px;font-weight:500;letter-spacing:-.3px;
@@ -118,6 +121,7 @@ main{
 .card .arrow{font-size:16px;transition:transform .2s}
 .student .arrow{color:var(--fire)}
 .teacher .arrow{color:var(--teal)}
+.case .arrow{color:#c4a878}
 .card:hover .arrow{transform:translateX(4px)}
 
 /* FOOTER */
@@ -171,8 +175,8 @@ footer a:hover{color:var(--txt);border-bottom-color:var(--fnt)}
     <polygon points="60,38 80,49 80,71 60,82 40,71 40,49" fill="none" stroke="url(#rb)" stroke-width="1.2" opacity="0.55"/>
     <circle cx="60" cy="60" r="2.5" fill="url(#rb)"/>
   </svg>
-  <h1>bookwormburrows<span class="mid">·</span>two paths in</h1>
-  <p class="lede">The game and the operation file. Pick the door that fits what brought you.</p>
+  <h1>bookwormburrows<span class="mid">·</span>three paths in</h1>
+  <p class="lede">The game, the operation file, and the case for why it works. Pick the door that fits what brought you.</p>
 </header>
 
 <main>
@@ -193,6 +197,16 @@ footer a:hover{color:var(--txt);border-bottom-color:var(--fnt)}
     <p class="blurb">The substrate that defines bookworms, dimensions, DM protocol, session structures. The framework file behind the game. Methodology, character creation, bookworm developmental arc, dimension registry, credit pathway.</p>
     <div class="cta">
       <span class="url">seminarschools.com/polymyth/bookwormburrows/</span>
+      <span class="arrow" aria-hidden="true">→</span>
+    </div>
+  </a>
+
+  <a class="card case wide" href="/bb/why/" aria-label="Read the pedagogical case for bookwormburrows">
+    <div class="audience">For parents &amp; schools</div>
+    <h2>Read the pedagogical case.</h2>
+    <p class="blurb">Why Dungeons &amp; Dragons belongs in the classroom, and why bookwormburrows belongs there more. The research, the comparison, the seven evaluation criteria, and what it means for your child or your school. Grounded in the evidence base, honest about what has been proven and what has been designed.</p>
+    <div class="cta">
+      <span class="url">seminarschools.com/bb/why/</span>
       <span class="arrow" aria-hidden="true">→</span>
     </div>
   </a>
