@@ -37,7 +37,15 @@ function friendlyTime(iso, timezone){
 }
 
 function bookingReference(payload){
-  const text = [payload.additionalNotes, payload.description, payload.notes].filter(Boolean).join('\n');
+  const responses = payload && payload.responses && typeof payload.responses === 'object' ? payload.responses : {};
+  const bookingFields = payload && payload.bookingFieldsResponses && typeof payload.bookingFieldsResponses === 'object' ? payload.bookingFieldsResponses : {};
+  const text = [
+    payload.additionalNotes,
+    payload.description,
+    payload.notes,
+    responses.notes,
+    bookingFields.notes
+  ].filter(Boolean).join('\n');
   const match = text.match(/Leizu booking reference:\s*(leizu_[A-Za-z0-9_]{12,180})/i);
   return match ? match[1] : null;
 }

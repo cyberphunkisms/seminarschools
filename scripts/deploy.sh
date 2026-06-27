@@ -22,6 +22,7 @@ node scripts/verify-geometry.js
 node scripts/verify-register.js
 node scripts/verify-payments.js
 node scripts/verify-leizu-pipeline.js
+node scripts/verify-leizu-experience.js
 
 git add -A
 git commit -m "deploy: canonical tree $(date +%Y-%m-%d_%H%M)" || echo "(nothing new to commit)"
@@ -38,6 +39,7 @@ node scripts/verify-geometry.js
 node scripts/verify-register.js
 node scripts/verify-payments.js           # payment wiring guard, post-merge
 node scripts/verify-leizu-pipeline.js
+node scripts/verify-leizu-experience.js
 
 git push origin "$BR"
 echo

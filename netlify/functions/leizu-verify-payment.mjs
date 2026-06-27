@@ -90,15 +90,19 @@ export default async function(req){
   }
 
   const now = new Date().toISOString();
+  const paidEmail = customerEmail(session) || (existing && existing.customerEmail) || '';
+  if(!paidEmail){
+    return json({error:'Stripe did not provide the checkout email required to release the booking calendar. Please contact Leizu.'}, 409);
+  }
   const record = {
-    schema: 2,
+    schema: 3,
     state:'booking_available',
     paymentStatus:'paid',
     sessionId:session.id,
     reference,
     planKey,
-    customerEmail:customerEmail(session) || (existing && existing.customerEmail) || null,
-    calendarUrl:makeCalendarUrl(baseCalendar, reference, planKey),
+    customerEmail:paidEmail,
+    calendarUrl:makeCalendarUrl(baseCalendar, reference, planKey, paidEmail),
     createdAt:(existing && existing.createdAt) || now,
     verifiedAt:now,
     bookedAt:null,

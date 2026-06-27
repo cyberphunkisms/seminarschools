@@ -69,15 +69,19 @@ async function recordPaidCheckout(session){
   if(existing && existing.state === 'blocked_duplicate_reference') return {ok:true, blocked:true};
 
   const now = new Date().toISOString();
+  const paidEmail = customerEmail(session) || (existing && existing.customerEmail) || '';
+  if(!paidEmail){
+    throw new Error('Paid Leizu Checkout Session is missing the checkout email required for Cal.com confirmation.');
+  }
   const record = {
-    schema:2,
+    schema:3,
     state:'paid',
     paymentStatus:'paid',
     sessionId:session.id,
     reference,
     planKey,
-    customerEmail:customerEmail(session) || (existing && existing.customerEmail) || null,
-    calendarUrl:makeCalendarUrl(baseCalendar, reference, planKey),
+    customerEmail:paidEmail,
+    calendarUrl:makeCalendarUrl(baseCalendar, reference, planKey, paidEmail),
     createdAt:(existing && existing.createdAt) || now,
     verifiedAt:null,
     bookedAt:null,

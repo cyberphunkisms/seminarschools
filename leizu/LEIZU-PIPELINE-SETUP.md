@@ -7,8 +7,9 @@ The deployed paid sequence is:
 3. Stripe Checkout receives that `intake-id` as `client_reference_id`.
 4. Stripe sends `checkout.session.completed` to the signed Stripe webhook and redirects the completed Checkout Session to the booking-success page with `{CHECKOUT_SESSION_ID}`.
 5. The booking-success page independently retrieves the Checkout Session from Stripe, confirms that it is paid, confirms its configured Payment Link, and releases only the matching server-configured Cal.com route.
-6. Cal.com creates the booking and sends a signed `BOOKING_CREATED` webhook.
-7. The Cal.com webhook requires a matching paid Leizu record and matching payer email before it sends the final Resend confirmation.
+6. The Cal.com route carries the Stripe checkout email and the Leizu reference into the booking form.
+7. Cal.com creates the booking and sends a signed `BOOKING_CREATED` webhook.
+8. The Cal.com webhook requires a matching paid Leizu record and matching payer email before it sends the final Resend confirmation.
 
 A single `intake-id` can unlock one paid booking route. A second completed Checkout Session with the same `intake-id` is recorded as a duplicate and never releases another Cal.com route. A second Cal.com booking event for the same paid reference receives no Leizu confirmation.
 
@@ -95,7 +96,7 @@ Trigger: BOOKING_CREATED
 Secret: exactly the CAL_WEBHOOK_SECRET value in Netlify
 ```
 
-The function accepts a booking only when the prefilled Leizu reference resolves to a paid Stripe record and the Cal.com attendee email matches the Checkout email.
+The function accepts a booking only when the prefilled Leizu reference resolves to a paid Stripe record and the Cal.com attendee email matches the Checkout email. The generated Cal.com URL pre-fills that email. Use the same email as Stripe Checkout when booking.
 
 ## 6. Verify the Resend sender
 
@@ -111,7 +112,7 @@ Use a Stripe test Payment Link and a disposable email address:
 4. Confirm Stripe Checkout opens with a non-empty `client_reference_id` and prefilled email.
 5. Complete test payment. Confirm the Stripe webhook returns `200` and the browser returns to `/leizu/booking-success/?session_id=cs_...`.
 6. Confirm the payment-success page opens the expected Cal.com event only after verification.
-7. Book a time using the same email as Stripe Checkout.
+7. Confirm that Cal.com pre-fills the Stripe Checkout email, then book with that same email.
 8. Confirm Cal.com sends its normal invitation and Resend sends **Your Leizu session is booked**.
 9. Reopen the Stripe-success URL. It should report that the payment already has a booked session instead of releasing another calendar route.
 10. Try a direct Cal.com event without the Leizu note. It should create no Leizu Resend confirmation because it has no verified payment reference.
@@ -125,6 +126,7 @@ node scripts/verify-geometry.js
 node scripts/verify-register.js
 node scripts/verify-payments.js
 node scripts/verify-leizu-pipeline.js
+node scripts/verify-leizu-experience.js
 ```
 
 The static checks catch wiring drift. The test transaction remains necessary because Stripe, Cal.com, Resend, and Netlify Forms each run in your own live accounts.

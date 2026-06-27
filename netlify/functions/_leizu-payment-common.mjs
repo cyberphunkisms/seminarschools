@@ -63,10 +63,14 @@ export function calendarUrlFor(planKey){
   }
 }
 
-export function makeCalendarUrl(baseCalendar, reference, planKey){
+export function makeCalendarUrl(baseCalendar, reference, planKey, customerEmail = ''){
   const url = new URL(baseCalendar.toString());
   const label = PLAN_LABELS[planKey] || planKey;
+  const email = normalizeEmail(customerEmail);
   url.searchParams.set('notes', 'Leizu booking reference: ' + reference + '\nPlan: ' + label);
+  // The Cal.com webhook accepts a booking only from the Stripe checkout email.
+  // Prefilling it prevents a harmless typo from stopping the final confirmation.
+  if(email) url.searchParams.set('email', email);
   return url.toString();
 }
 
@@ -76,7 +80,7 @@ export function getLeizuStore(){
 
 export function referenceProjection(record){
   return {
-    schema: 2,
+    schema: 3,
     state: record.state,
     sessionId: record.sessionId,
     reference: record.reference,

@@ -17,17 +17,15 @@
   directory = "netlify/functions"
 
 # Form processing: Netlify auto-detects forms with data-netlify="true"
-# attribute in HTML at deploy time. ONE canonical form now:
+# in published HTML. Active public forms include:
 #   "bookwormcard" — matrix-chat at /bb/
-# (Old forms "bb-card" and "bb-character-creator" deprecated; their
-# accumulated submissions remain accessible in dashboard but new
-# submissions land in the bookwormcard bucket.)
+#   "leizu-intake" — Leizu inquiry and paid-plan intake at /leizu/intake/
 #
 # After first deploy, configure in Netlify dashboard:
 #
-# 1. Site Configuration → Forms → confirm "bookwormcard" form detected
+# 1. Site Configuration → Forms → confirm both active forms are detected
 # 2. Site Configuration → Notifications → Form submission notifications
-#    → add Email notification (admin email on every bookwormcard submit)
+#    → add an admin email notification for each form you want monitored
 # 3. (Optional, autoresponder to submitter) connect Zapier:
 #    Trigger: Netlify Forms → "New Form Submission" → form: bookwormcard
 #    Action: Gmail/your-email-provider → "Send Email"

@@ -61,7 +61,18 @@
       var yearMode = modeElement && /^(upfront|two|term|monthly)$/.test(modeElement.value) ? modeElement.value : 'monthly';
       var paymentKey = getPaymentKeyForCart(selectedCourseIds, {yearTier: yearTier, yearMode: yearMode});
 
-      if(!paymentKey && selectedCourseIds.length === 0 && eslCourseIds.length === 0) return;
+      if(!paymentKey && selectedCourseIds.length === 0 && eslCourseIds.length === 0){
+        var notice = document.getElementById('selection-notice');
+        if(notice){
+          notice.hidden = false;
+          notice.textContent = 'Choose at least one subject before continuing.';
+        }
+        var subjects = document.getElementById('subjects');
+        if(subjects) subjects.scrollIntoView({behavior:'smooth', block:'start'});
+        return;
+      }
+      var notice = document.getElementById('selection-notice');
+      if(notice) notice.hidden = true;
       window.location.assign(buildIntakeUrl({
         tier: paymentKey,
         courseIds: selectedCourseIds,
