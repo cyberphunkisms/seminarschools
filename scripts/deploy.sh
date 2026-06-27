@@ -18,7 +18,10 @@ ROBOT_PATHS=("seminars/events.json")   # daily-scraper-owned: origin wins
 cp data/polymyth-seminar-events.json polymythseminars/events.json
 
 node scripts/verify-critical.js
+node scripts/verify-geometry.js
+node scripts/verify-register.js
 node scripts/verify-payments.js
+node scripts/verify-leizu-pipeline.js
 
 git add -A
 git commit -m "deploy: canonical tree $(date +%Y-%m-%d_%H%M)" || echo "(nothing new to commit)"
@@ -31,7 +34,10 @@ git add -A
 git commit -m "deploy: keep robot-owned data from origin" || true
 
 node scripts/verify-critical.js           # verify AGAIN post-merge
+node scripts/verify-geometry.js
+node scripts/verify-register.js
 node scripts/verify-payments.js           # payment wiring guard, post-merge
+node scripts/verify-leizu-pipeline.js
 
 git push origin "$BR"
 echo

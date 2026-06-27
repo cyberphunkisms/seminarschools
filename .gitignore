@@ -1,35 +1,7 @@
-# Internal scratchpads — per-build notes, never committed
-CL-*.md
-bb-componentlist-*.md
-memory-update-record-*.md
-
-# Python
-*.pyc
-__pycache__/
-*.pyo
-.pytest_cache/
-
-# OS junk
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Editor
-.vscode/
-.idea/
-*.swp
-*~
-
-# Build artifacts (none currently but defensive)
 node_modules/
-.cache/
-dist/
 .netlify/
-
-# Provisioning scripts (one-time Stripe product creation) — PM35 tooling
-leizu/create-stripe-products.sh
-leizu/create-stripe-products.ps1
-
-# Local environment overrides
 .env
-.env.local
+.env.*
+!.env.example
+!netlify.env.example
+.DS_Store

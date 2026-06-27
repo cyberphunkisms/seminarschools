@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="Payment confirmed. Forwarding you to schedule your session at Leizu Academy.">
 <!-- /Open Graph -->
 
-<meta name="description" content="Your Leizu Academy booking is confirmed. Payment received. You will receive a calendar invite shortly with session location, materials, and any pre-reading.">
+<meta name="description" content="Leizu Academy verifies your Stripe payment before opening the calendar for your session.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
@@ -172,21 +172,21 @@ p{margin-bottom:1.25rem;color:var(--ink-soft);}
 <div class="wrap">
   <span class="checkmark">✓</span>
   <span class="han">已收到</span>
-  <h1>Payment received.</h1>
-  <p class="lede">Now let's schedule your first session.</p>
+  <h1 id="page-title">Confirming your payment.</h1>
+  <p class="lede" id="page-lede">We verify the Stripe payment before opening your calendar.</p>
 
   <div class="status">
     <span class="spinner"></span>
-    <span id="status-text">Forwarding you to the calendar…</span>
+    <span id="status-text">Checking the Stripe payment…</span>
   </div>
 
-  <p>You'll be redirected to the booking calendar in a moment. Pick the time that works for you. A confirmation email and a Google Meet link will be sent automatically.</p>
+  <p id="explanation">After Stripe confirms payment, this page opens the calendar for your plan. A final confirmation email arrives after you book.</p>
 
   <div class="fallback" id="fallback" style="display:none;">
     <h2>Not redirecting?</h2>
-    <p>If the page doesn't move automatically, click the link below to schedule your session:</p>
+    <p>Use the link below when the calendar does not open automatically.</p>
     <p><a href="#" id="manual-link">Open the booking calendar &rarr;</a></p>
-    <p style="font-size:0.92rem;margin-top:1rem;">If you run into any trouble, text or call <a href="tel:+14167710382">416-771-0382</a> and your slot will be reserved manually.</p>
+    <p style="font-size:0.92rem;margin-top:1rem;">For help, text or call <a href="tel:+14167710382">416-771-0382</a> and your session can be arranged directly.</p>
   </div>
 
   <div class="colophon">
@@ -195,73 +195,68 @@ p{margin-bottom:1.25rem;color:var(--ink-soft);}
 </div>
 
 </main>
+
 <script>
-// === BOOKING-SUCCESS HANDLER ===
-// Reads pending-booking metadata from localStorage (set by booking-button.js
-// before redirect to Stripe). Builds the Cal.com URL with notes pre-filled.
-// Forwards user there.
+(function(){
+  var statusText = document.getElementById('status-text');
+  var title = document.getElementById('page-title');
+  var lede = document.getElementById('page-lede');
+  var explanation = document.getElementById('explanation');
+  var fallback = document.getElementById('fallback');
+  var manualLink = document.getElementById('manual-link');
 
-// CAL.COM URLS, these must match what's in booking-button.js
-// One Cal.com event type per Stripe product. Keys match PAYMENT_LINKS keys.
-const CAL_LINKS = {
-  three_sessions:        'https://cal.com/seminarschools/weekly3',
-  five_sessions:         'https://cal.com/seminarschools/weekly5',
-  seven_sessions:        'https://cal.com/seminarschools/weekly7',
-  forest_year_upfront:   'https://cal.com/seminarschools/forestyear',
-  forest_year_monthly:   'https://cal.com/seminarschools/forestyear',
-  donation:              'https://cal.com/seminarschools/class',
-};
-
-function buildAndForward(){
-  let pending = null;
-  try {
-    const raw = localStorage.getItem('leizu-pending-booking');
-    if(raw) pending = JSON.parse(raw);
-  } catch(e){}
-
-  let calUrl;
-  let notesText;
-
-  if(pending && pending.courseIds && pending.courseIds.length > 0){
-    // Look up by paymentKey. Fall through to legacy fields for older pending records.
-    calUrl = CAL_LINKS[pending.paymentKey];
-    if(!calUrl){
-      if(pending.yearTier === 'forest')         calUrl = CAL_LINKS.forest_year_monthly;
-      else if(pending.isForestYear === true)    calUrl = CAL_LINKS.forest_year_monthly;
-      else                                      calUrl = CAL_LINKS.three_sessions;
-    }
-
-    const noteParts = ['Paid courses: ' + pending.courseIds.join(', ')];
-    if(pending.eslCourseIds && pending.eslCourseIds.length > 0){
-      noteParts.push('ESL register requested for: ' + pending.eslCourseIds.join(', '));
-    }
-    if(pending.yearTier)   noteParts.push('Year tier: ' + pending.yearTier);
-    if(pending.yearMode)   noteParts.push('Payment mode: ' + pending.yearMode);
-    if(pending.paymentKey) noteParts.push('Product: ' + pending.paymentKey);
-    notesText = noteParts.join(' | ');
-    try { localStorage.removeItem('leizu-pending-booking'); } catch(e){}
-  } else {
-    // No pending data, direct Stripe payment without going through the cart flow
-    calUrl = CAL_LINKS.three_sessions;
-    notesText = 'Paid via Stripe direct link';
+  function setFailure(message){
+    title.textContent = 'We could not confirm the booking route.';
+    lede.textContent = 'Your payment remains safe with Stripe.';
+    statusText.textContent = message;
+    explanation.textContent = 'Return to the payment page or contact Leizu at 416-771-0382 so the session can be released safely.';
+    fallback.style.display = 'block';
+    manualLink.removeAttribute('href');
+    manualLink.textContent = 'Contact Leizu to complete scheduling';
+    manualLink.href = 'mailto:saulnassau@protonmail.com?subject=' + encodeURIComponent('Leizu booking help');
   }
 
-  const fullUrl = calUrl + '?notes=' + encodeURIComponent(notesText);
+  function setAlreadyBooked(){
+    title.textContent = 'Your Leizu session is already booked.';
+    lede.textContent = 'The calendar invitation contains the current meeting details.';
+    statusText.textContent = 'Booking confirmed.';
+    explanation.textContent = 'For a change, use the rescheduling option in your calendar invitation or contact Leizu at 416-771-0382.';
+  }
 
-  // Show the manual fallback link in case the auto-redirect fails
-  const fallback = document.getElementById('fallback');
-  const manualLink = document.getElementById('manual-link');
-  manualLink.href = fullUrl;
-  // Show fallback after 5 seconds in case redirect didn't happen
-  setTimeout(() => { fallback.style.display = 'block'; }, 5000);
+  async function verifyAndForward(){
+    var sessionId = new URLSearchParams(window.location.search).get('session_id');
+    if(!sessionId){
+      setFailure('This page needs the Stripe payment confirmation in its address.');
+      return;
+    }
 
-  // Auto-redirect after a brief pause so the user sees the confirmation
-  setTimeout(() => {
-    window.location.href = fullUrl;
-  }, 1800);
-}
+    try {
+      var response = await fetch('/api/leizu-verify-payment?session_id=' + encodeURIComponent(sessionId), {cache:'no-store'});
+      var payload = await response.json().catch(function(){ return {}; });
+      if(!response.ok){
+        if(payload.alreadyBooked){ setAlreadyBooked(); return; }
+        setFailure(payload.error || 'Stripe could not confirm this payment yet.');
+        return;
+      }
+      if(!payload.verified || !payload.calendarUrl){
+        setFailure('The paid session did not return a valid booking route.');
+        return;
+      }
 
-document.addEventListener('DOMContentLoaded', buildAndForward);
+      title.textContent = 'Payment received.';
+      lede.textContent = 'Now let\'s schedule your first session.';
+      statusText.textContent = 'Opening your booking calendar…';
+      explanation.textContent = 'Pick a time that works for you. A final confirmation email and meeting details will arrive after the booking is created.';
+      manualLink.href = payload.calendarUrl;
+      fallback.style.display = 'block';
+      window.setTimeout(function(){ window.location.assign(payload.calendarUrl); }, 900);
+    } catch(error) {
+      setFailure('The payment check could not reach the server.');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', verifyAndForward);
+})();
 </script>
 <script src="/js/theme.js?v=cl91" defer></script>
 <script src="/js/mandala.js?v=cl91" defer></script>

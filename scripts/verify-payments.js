@@ -1,122 +1,131 @@
 #!/usr/bin/env node
-/**
- * verify-payments.js
- *
- * Guards the Leizu payment wiring against the drift class found in the June
- * audit: a tile button that points to a non-existent product, a payment link
- * that is malformed or still a placeholder, or a post-payment redirect that
- * lands on an undefined Cal.com entry.
- *
- * It does NOT and CANNOT check the actual dollar amount a Stripe link charges.
- * Only the Stripe dashboard holds that. This checks WIRING, not prices.
- *
- * Exit 1 only on a real breakage:
- *   - a data-payment-key on the page with no matching PAYMENT_LINKS entry
- *   - a reachable payment key whose link is missing/placeholder/not a stripe URL
- *   - a reachable payment key with no Cal.com entry (post-payment 404 risk)
- * Orphan keys (defined but no tile points to them, e.g. the seminar links while
- * that decision is pending) are reported as WARNINGS and do not fail the run.
- *
- * Run: node scripts/verify-payments.js
+/*
+ * Static contract test for the Leizu intake → Stripe → Cal.com → Resend flow.
+ * It validates source-of-truth links and required source files. Live account
+ * credentials are deliberately tested by the deployment checklist, not here.
  */
 const fs = require('fs');
-const vm = require('vm');
 const path = require('path');
+const vm = require('vm');
 
 const ROOT = path.resolve(__dirname, '..');
-const PAGE = path.join(ROOT, 'leizu/index.html');
-const SCRIPT = path.join(ROOT, 'leizu/booking-button.js');
-const SUCCESS = path.join(ROOT, 'leizu/booking-success/index.html');
-
 const errors = [];
 const warnings = [];
-const notes = [];
-
-function read(p){ return fs.readFileSync(p, 'utf8'); }
-
-// --- 1. PAYMENT_LINKS, lifted by running the script headless -----------------
-function loadPaymentLinks(){
-  const code = read(SCRIPT);
-  const listeners = {};
-  const sandbox = {
-    document: { addEventListener:(e,f)=>{listeners[e]=f;}, querySelector:()=>null, querySelectorAll:()=>[], location:{pathname:'/leizu/'} },
-    window: {}, localStorage:{getItem:()=>null,setItem:()=>{},removeItem:()=>{}}, setTimeout:()=>{}, console,
-  };
+function read(relative){ return fs.readFileSync(path.join(ROOT, relative), 'utf8'); }
+function exists(relative){ return fs.existsSync(path.join(ROOT, relative)); }
+function assert(condition, message){ if(!condition) errors.push(message); }
+function requireConfig(){
+  const code = read('leizu/payment-config.js');
+  const sandbox = {globalThis:{}};
   vm.createContext(sandbox);
   vm.runInContext(code, sandbox);
-  return vm.runInContext('typeof PAYMENT_LINKS !== "undefined" ? PAYMENT_LINKS : null', sandbox);
+  return sandbox.globalThis.LEIZU_PAYMENT_CONFIG;
 }
-
-// --- 2. data-payment-key values used on the page ------------------------------
-function loadPageKeys(){
-  // Scan every surface that carries pay buttons: the Leizu tiles and the
-  // intake-page enrol bubble. Both use data-payment-key wired by the same
-  // PAYMENT_LINKS, so both must be guarded.
-  const files = [PAGE, path.join(ROOT, 'leizu/intake/index.html')];
+function pageKeys(relative){
   const keys = [];
   const re = /data-payment-key="([^"]+)"/g;
-  for(const f of files){
-    if(!fs.existsSync(f)) continue;
-    const html = read(f);
-    let m;
-    while((m = re.exec(html)) !== null) keys.push(m[1]);
-  }
+  const html = read(relative);
+  let match;
+  while((match = re.exec(html))) keys.push(match[1]);
   return keys;
 }
 
-// --- 3. CAL_LINKS from the success page (the single source after dedup) -------
-function loadCalLinks(){
-  const html = read(SUCCESS);
-  const m = html.match(/const\s+CAL_LINKS\s*=\s*\{[\s\S]*?\};/);
-  if(!m){ errors.push('CAL_LINKS object not found in booking-success/index.html'); return {}; }
-  const sandbox = {}; vm.createContext(sandbox);
-  vm.runInContext(m[0] + '\nthis.__cal = CAL_LINKS;', sandbox);
-  return sandbox.__cal || {};
+const config = requireConfig();
+assert(config && config.products, 'Could not load LEIZU_PAYMENT_CONFIG.');
+const products = config ? config.products : {};
+const keys = Object.keys(products);
+const isStripeLink = value => typeof value === 'string' && /^https:\/\/buy\.stripe\.com\/[A-Za-z0-9]+$/.test(value);
+
+for(const key of keys){
+  const product = products[key];
+  assert(isStripeLink(product.paymentLink), 'Invalid Stripe Payment Link for ' + key + '.');
+  assert(typeof product.label === 'string' && product.label.length > 0, 'Missing label for ' + key + '.');
+  assert(typeof product.purpose === 'string' && product.purpose.length > 0, 'Missing intake purpose for ' + key + '.');
+}
+assert(new Set(keys.map(key => products[key].paymentLink)).size === keys.length, 'Payment links must be unique across products.');
+
+function dynamicYearKeys(relative){
+  const html = read(relative);
+  const output = [];
+  const re = /key\s*:\s*["'](forest_year_[a-z]+)["']/g;
+  let match;
+  while((match = re.exec(html))) output.push(match[1]);
+  return output;
 }
 
-const PAYMENT_LINKS = loadPaymentLinks();
-if(!PAYMENT_LINKS){ console.error('FATAL: could not read PAYMENT_LINKS from booking-button.js'); process.exit(1); }
-const pageKeys = loadPageKeys();
-const CAL_LINKS = {}; // post-payment redirects are set inside each Stripe link now, not tracked in code
-
-const uniquePageKeys = [...new Set(pageKeys)];
-const linkKeys = Object.keys(PAYMENT_LINKS);
-const isStripe = (u) => typeof u === 'string' && u.indexOf('https://buy.stripe.com/') === 0;
-const isPlaceholder = (u) => typeof u !== 'string' || u.length === 0 || u.indexOf('REPLACE') !== -1;
-
-// CHECK A. every page key resolves to a PAYMENT_LINKS entry
-for(const k of uniquePageKeys){
-  if(!(k in PAYMENT_LINKS)) errors.push(`Tile button data-payment-key="${k}" has NO entry in PAYMENT_LINKS (broken button)`);
+const usedKeys = new Set([
+  ...pageKeys('leizu/index.html'),
+  ...pageKeys('leizu/intake/index.html'),
+  ...dynamicYearKeys('leizu/index.html')
+]);
+for(const key of usedKeys){ assert(products[key], 'A page references unknown payment key: ' + key); }
+for(const key of keys){
+  if(!usedKeys.has(key)) warnings.push('Configured payment key has no reachable CTA or payment mode: ' + key);
 }
 
-// CHECK B. every reachable, paid key has a usable stripe link + a cal entry
-for(const k of uniquePageKeys){
-  if(!(k in PAYMENT_LINKS)) continue;
-  if(k === 'donation') continue;
-  const u = PAYMENT_LINKS[k];
-  if(isPlaceholder(u)) errors.push(`Reachable key "${k}" still points to a placeholder link`);
-  else if(!isStripe(u)) errors.push(`Reachable key "${k}" link is not a buy.stripe.com URL: ${u}`);
+const intake = read('leizu/intake/index.html');
+for(const field of ['intake-id', 'selected-tier', 'selected-course-ids', 'selected-esl-course-ids']){
+  assert(intake.includes('name="' + field + '"'), 'Intake form is missing capture field: ' + field);
 }
+assert(intake.includes('client_reference_id'), 'Intake form does not attach client_reference_id to Stripe.');
+assert(!intake.includes('leizu-pending-tier'), 'Intake still trusts stale localStorage tier state.');
+assert(!/https:\/\/buy\.stripe\.com\//.test(intake), 'Intake has a duplicate Stripe-link map; use payment-config.js only.');
 
-// CHECK C. orphans: defined links no tile reaches (warn, do not fail)
-for(const k of linkKeys){
-  if(k === 'donation') continue;
-  if(!uniquePageKeys.includes(k)) warnings.push(`Link "${k}" is defined but no tile button reaches it (orphan)`);
-}
+const success = read('leizu/booking-success/index.html');
+assert(success.includes('/api/leizu-verify-payment'), 'Booking success page does not verify Stripe server-side.');
+assert(!success.includes('CAL_LINKS'), 'Booking success page must not contain public calendar routing.');
+assert(!success.includes('localStorage'), 'Booking success page still trusts browser storage.');
 
-// CHECK D. cal keys with no matching payment key (stale cal entry, warn)
-for(const k of Object.keys(CAL_LINKS)){
-  if(k === 'donation') continue;
-  if(!(k in PAYMENT_LINKS)) warnings.push(`Cal.com entry "${k}" has no matching PAYMENT_LINKS key (stale)`);
-}
+const button = read('leizu/booking-button.js');
+assert(button.includes('buildIntakeUrl'), 'Course selection does not route through intake.');
+assert(!button.includes('localStorage'), 'Booking button still stores payment choices in browser storage.');
+assert(button.includes("'forest_year_' + mode"), 'Forest payment modes are not routed dynamically.');
 
-notes.push(`PAYMENT_LINKS keys: ${linkKeys.length} (${linkKeys.join(', ')})`);
-notes.push(`Tile buttons on page: ${uniquePageKeys.length} (${uniquePageKeys.join(', ')})`);
-notes.push(`Cal.com entries: ${Object.keys(CAL_LINKS).length}`);
+for(const file of [
+  'netlify/functions/leizu-verify-payment.mjs',
+  'netlify/functions/cal-booking-webhook.mjs',
+  'netlify/functions/leizu-form-events.mjs',
+  'scripts/configure-leizu-stripe-payment-links.mjs',
+  'scripts/verify-leizu-pipeline.js',
+  'leizu/LEIZU-PIPELINE-SETUP.md'
+]) assert(exists(file), 'Missing pipeline file: ' + file);
+assert(!exists('netlify/functions/submission-created.js'), 'Deprecated HTTP form handler still exists.');
+
+const verifyFunction = read('netlify/functions/leizu-verify-payment.mjs');
+const paymentCommon = read('netlify/functions/_leizu-payment-common.mjs');
+assert(verifyFunction.includes('STRIPE_SECRET_KEY'), 'Stripe verification function is missing server secret use.');
+assert(verifyFunction.includes('planForPaymentLink'), 'Stripe verification function does not map a session to a known plan.');
+assert(paymentCommon.includes('STRIPE_PAYMENT_LINK_ID_'), 'Shared payment helper does not map a session to a known plan.');
+assert(verifyFunction.includes('calendarUrlFor'), 'Stripe verification function does not use server-only Cal.com URLs.');
+assert(paymentCommon.includes('CAL_BOOKING_URL_'), 'Shared payment helper does not use server-only Cal.com URLs.');
+assert(verifyFunction.includes('claimReference'), 'Stripe verification function does not protect the intake reference atomically.');
+assert(paymentCommon.includes('{onlyIfNew:true}'), 'Shared payment helper does not protect the payment session record atomically.');
+
+const calWebhook = read('netlify/functions/cal-booking-webhook.mjs');
+assert(calWebhook.includes('x-cal-signature-256'), 'Cal.com webhook signature header is not verified.');
+assert(calWebhook.includes('BOOKING_CREATED'), 'Cal.com webhook does not filter for booked appointments.');
+assert(calWebhook.includes('RESEND_API_KEY'), 'Cal.com webhook does not send through Resend.');
+assert(calWebhook.includes('onlyIfNew'), 'Cal.com webhook does not deduplicate webhook retries.');
+
+const formEvents = read('netlify/functions/leizu-form-events.mjs');
+assert(formEvents.includes('formSubmitted'), 'Netlify Forms event handler is missing formSubmitted.');
+assert(formEvents.includes("plain(data['selected-tier'])"), 'Form receipt handler can still mislabel paid intake as booked.');
+
+const netlify = read('netlify.toml');
+assert(netlify.includes('/api/leizu-verify-payment'), 'Netlify redirect for payment verification is missing.');
+assert(netlify.includes('/api/cal-booking-webhook'), 'Netlify redirect for Cal.com webhook is missing.');
+assert(netlify.includes('/api/stripe-payment-webhook'), 'Netlify redirect for Stripe webhook is missing.');
 
 console.log('=== verify-payments ===');
-notes.forEach(n => console.log('  · ' + n));
-if(warnings.length){ console.log('\nWARNINGS (' + warnings.length + '):'); warnings.forEach(w => console.log('  ! ' + w)); }
-if(errors.length){ console.log('\nERRORS (' + errors.length + '):'); errors.forEach(e => console.log('  X ' + e)); console.log('\nFAIL'); process.exit(1); }
-console.log('\nPASS (no broken wiring)' + (warnings.length ? ' — warnings above are informational' : ''));
-process.exit(0);
+console.log('  · payment plans: ' + keys.length + ' (' + keys.join(', ') + ')');
+console.log('  · static CTAs: ' + [...usedKeys].length + ' (' + [...usedKeys].join(', ') + ')');
+if(warnings.length){
+  console.log('\nWARNINGS (' + warnings.length + '):');
+  warnings.forEach(item => console.log('  ! ' + item));
+}
+if(errors.length){
+  console.log('\nERRORS (' + errors.length + '):');
+  errors.forEach(item => console.log('  X ' + item));
+  process.exit(1);
+}
+console.log('\nPASS — static payment and booking contract is intact.');
