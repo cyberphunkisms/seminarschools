@@ -35,10 +35,10 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/polymythseminars/feed.xsl"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <channel>
-<title>Polymyth Seminar Calendar — Seminar Schools</title>
+<title>polymythcalendar — Seminar Schools</title>
 <link>https://seminarschools.com/polymythseminars/</link>
 <atom:link href="https://seminarschools.com/polymythseminars/feed.xml" rel="self" type="application/rss+xml" />
-<description>Lectures, conferences, workshops, readings, festivals, exhibitions, protests across Toronto, the GTA, Hamilton, Guelph, and Waterloo. Upcoming events from the consolidated polymyth seminar calendar.</description>
+<description>Public lectures, conferences, workshops, readings, festivals, exhibitions and civic events across Toronto and Southern Ontario, Kingston, and Montréal. Upcoming events from polymythcalendar.</description>
 <language>en-CA</language>
 <lastBuildDate>${rfc822(new Date())}</lastBuildDate>
 <generator>seminarschools.com</generator>

@@ -1,6 +1,6 @@
 {
   "$schema_note": "Venue roster for /scripts/seminars-prompt.md. Each entry declares the venue, its event-list URL, default event type, tier priority, and render_mode hint. Read by Claude headless harvest weekly. The agent handles extraction; render_mode is a strategy hint for fetch-difficulty, not a parser selector. tier_priority 1 = must crawl, 2 = if budget permits, 3 = low priority, 4 = optional.",
-  "$updated": "2026-06-19",
+  "$updated": "2026-06-28",
   "sources": [
     {
       "id": "c4e",
@@ -2954,6 +2954,186 @@
       "events_url": "https://www.destinationtoronto.com/",
       "notes": "Broad civic/cultural discovery. Folded from festivals-sources.json on calendar synthesis 2026-06.",
       "render_mode": "todo"
+    },
+    {
+      "id": "queens-events",
+      "name": "Queen's University Events Calendar",
+      "tier_priority": 1,
+      "default_type": "lecture",
+      "base_url": "https://www.queensu.ca/eventscalendar/",
+      "events_url": "https://www.queensu.ca/eventscalendar/",
+      "render_mode": "server-rendered",
+      "notes": "Kingston anchor. Filter for public lecture, seminar, academic presentation, research, arts and culture, conference, and workshop records with exact dates."
+    },
+    {
+      "id": "kingston-writersfest",
+      "name": "Kingston WritersFest",
+      "tier_priority": 1,
+      "default_type": "festival",
+      "base_url": "https://www.kingstonwritersfest.ca/",
+      "events_url": "https://www.kingstonwritersfest.ca/2026-festival/",
+      "render_mode": "server-rendered",
+      "notes": "Kingston literary festival anchor. Add parent season plus dated individual event pages only."
+    },
+    {
+      "id": "agnes-etherington",
+      "name": "Agnes Etherington Art Centre",
+      "tier_priority": 2,
+      "default_type": "exhibition",
+      "base_url": "https://agnes.queensu.ca/",
+      "events_url": "https://agnes.queensu.ca/whats-on/",
+      "render_mode": "javascript",
+      "notes": "Kingston exhibitions, artist talks and public programs. Exhibition and residency records require exact ranges."
+    },
+    {
+      "id": "montreal-jazz",
+      "name": "Festival International de Jazz de Montréal",
+      "tier_priority": 1,
+      "default_type": "festival",
+      "base_url": "https://montrealjazzfest.com/",
+      "events_url": "https://montrealjazzfest.com/",
+      "render_mode": "javascript",
+      "notes": "Montréal festival anchor. Add current-season parent plus dated official programme pages."
+    },
+    {
+      "id": "osheaga",
+      "name": "OSHEAGA",
+      "tier_priority": 1,
+      "default_type": "festival",
+      "base_url": "https://osheaga.com/",
+      "events_url": "https://osheaga.com/",
+      "render_mode": "javascript",
+      "notes": "Montréal festival anchor. Add parent season plus dated official programme pages."
+    },
+    {
+      "id": "mcgill-events",
+      "name": "McGill University Events",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://www.mcgill.ca/",
+      "events_url": "https://www.mcgill.ca/channels/channels/event",
+      "render_mode": "javascript",
+      "notes": "Montréal university anchor. Prioritize public lectures, symposia, colloquia, defences, readings and artist talks."
+    },
+    {
+      "id": "concordia-events",
+      "name": "Concordia University Events",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://www.concordia.ca/",
+      "events_url": "https://www.concordia.ca/cuevents/offices/provost/fourth-space.html",
+      "render_mode": "javascript",
+      "notes": "Montréal public programming anchor. Capture only exact-date public events."
+    },
+    {
+      "id": "tpl-salon-series",
+      "name": "Toronto Public Library Salon Series",
+      "tier_priority": 1,
+      "default_type": "reading",
+      "base_url": "https://tpl.ca/",
+      "events_url": "https://tpl.ca/programs-and-classes/featured/salon-series/",
+      "render_mode": "server-rendered",
+      "notes": "Deep-research backbone 2026-06-28. Literary events with authors, artists and thinkers; strong recurring Toronto reading/book-talk source."
+    },
+    {
+      "id": "tpl-programs",
+      "name": "Toronto Public Library Programs",
+      "tier_priority": 2,
+      "default_type": "reading",
+      "base_url": "https://tpl.ca/",
+      "events_url": "https://tpl.ca/programs-and-classes/",
+      "render_mode": "server-rendered",
+      "notes": "Broader TPL programmes. Filter to author talks, library cultural programming, humanities events and public intellectual programming."
+    },
+    {
+      "id": "u-t-lecture-series",
+      "name": "University of Toronto School of Continuing Studies Lecture Series",
+      "tier_priority": 1,
+      "default_type": "lecture",
+      "base_url": "https://learn.utoronto.ca/",
+      "events_url": "https://learn.utoronto.ca/university-lecture-series",
+      "render_mode": "server-rendered",
+      "notes": "Deep-research backbone 2026-06-28. Public U of T lecture series with exact dates and named speakers."
+    },
+    {
+      "id": "tmu-research-events",
+      "name": "Toronto Metropolitan University Research Events",
+      "tier_priority": 1,
+      "default_type": "conference",
+      "base_url": "https://www.torontomu.ca/",
+      "events_url": "https://www.torontomu.ca/research/news-events/toronto-metropolitan-university-wide-research-events/",
+      "render_mode": "server-rendered",
+      "notes": "Deep-research backbone 2026-06-28. University research workshops, conferences and public events."
+    },
+    {
+      "id": "rom-events",
+      "name": "Royal Ontario Museum Events",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://www.rom.on.ca/",
+      "events_url": "https://www.rom.on.ca/whats-on/events",
+      "render_mode": "server-rendered",
+      "notes": "Museum events, talks, panels, public programmes and expert-led events. Filter out tours and purely social programming unless intellectually substantive."
+    },
+    {
+      "id": "rom-talks",
+      "name": "Royal Ontario Museum Talks",
+      "tier_priority": 1,
+      "default_type": "lecture",
+      "base_url": "https://www.rom.on.ca/",
+      "events_url": "https://www.rom.on.ca/whats-on/special-programs/talks",
+      "render_mode": "server-rendered",
+      "notes": "Deep-research backbone 2026-06-28. ROM talks with expert speakers and collection-linked public learning."
+    },
+    {
+      "id": "ago-events",
+      "name": "Art Gallery of Ontario Events",
+      "tier_priority": 2,
+      "default_type": "artist-talk",
+      "base_url": "https://ago.ca/",
+      "events_url": "https://ago.ca/events/browse",
+      "render_mode": "javascript",
+      "notes": "AGO public events. Prioritize artist talks, openings with artists/curators, lectures, panels and workshops with exact dates."
+    },
+    {
+      "id": "concordia-fofa",
+      "name": "Concordia FOFA Gallery Events",
+      "tier_priority": 1,
+      "default_type": "exhibition",
+      "base_url": "https://www.concordia.ca/finearts/fofa.html",
+      "events_url": "https://www.concordia.ca/cuevents/finearts/fofa.html",
+      "render_mode": "server-rendered",
+      "notes": "Deep-research backbone 2026-06-28. Montréal exhibitions, artist talks and fine-arts public programming."
+    },
+    {
+      "id": "concordia-gradproskills",
+      "name": "Concordia GradProSkills Events",
+      "tier_priority": 2,
+      "default_type": "workshop",
+      "base_url": "https://www.concordia.ca/",
+      "events_url": "https://www.concordia.ca/cuevents/offices/vprgs/gradproskills.html",
+      "render_mode": "server-rendered",
+      "notes": "Graduate research workshops, funding workshops and academic professional-development events with exact dates."
+    },
+    {
+      "id": "mcgill-science",
+      "name": "McGill Faculty of Science Events",
+      "tier_priority": 1,
+      "default_type": "lecture",
+      "base_url": "https://www.mcgill.ca/science/",
+      "events_url": "https://www.mcgill.ca/science/channels_item/25",
+      "render_mode": "server-rendered",
+      "notes": "Deep-research backbone 2026-06-28. Public talks, science-and-society events, symposia and academic deadlines."
+    },
+    {
+      "id": "rotman-public-events",
+      "name": "Rotman School of Management Public Events",
+      "tier_priority": 2,
+      "default_type": "lecture",
+      "base_url": "https://www.rotman.utoronto.ca/",
+      "events_url": "https://www.rotman.utoronto.ca/news-events-and-ideas/public-events/",
+      "render_mode": "server-rendered",
+      "notes": "U of T business, public policy and leadership talks. Filter to public intellectual events, panels and speaker events."
     }
   ],
   "deferred_candidates": {
@@ -2986,5 +3166,23 @@
     "rss": "Native RSS feed available, prefer it.",
     "ical": "Native iCal feed available, prefer it.",
     "api": "Native JSON API endpoint, prefer it."
-  }
+  },
+  "$regions": [
+    "Toronto and Southern Ontario",
+    "Kingston",
+    "Montréal"
+  ],
+  "backbone_source_expansion": [
+    "tpl-salon-series",
+    "tpl-programs",
+    "u-t-lecture-series",
+    "tmu-research-events",
+    "rom-events",
+    "rom-talks",
+    "ago-events",
+    "concordia-fofa",
+    "concordia-gradproskills",
+    "mcgill-science",
+    "rotman-public-events"
+  ]
 }

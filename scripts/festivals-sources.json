@@ -1,6 +1,6 @@
 {
   "$schema_note": "Festival roster for /scripts/festivals-prompt.md. Two-class architecture: discovery (aggregators used as candidate-list scaffolding, never cited as source_url) and primary (festival's own official site, citation target). Read by Claude headless harvest weekly. Quantity-is-quality: agent should crawl every discovery source for candidates, then verify and extract from primary sites.",
-  "$updated": "2026-06-09",
+  "$updated": "2026-06-27",
   "$architecture": "Two-pass scrape-within-scrape. Pass 1: read every discovery source, build candidate list of festival names + provisional date windows + official URLs. Discard discovery entries after this pass. Pass 2: for each candidate, fetch its primary official site, confirm date, extract program, build record with primary URL as source_url. Drop candidates the primary site does not confirm.",
   "$audit_rule": "No record's source_url may match a discovery hostname. merge_festivals.py enforces this as defense-in-depth.",
   "discovery_aggregators": [
@@ -591,6 +591,63 @@
       "additional_urls": [],
       "default_type": "cultural-reproduction",
       "notes": "Base-expansion audit 2026-06-11. Scarborough, July."
+    },
+    {
+      "id": "kingston-writersfest",
+      "name": "Kingston WritersFest",
+      "events_url": "https://www.kingstonwritersfest.ca/2026-festival/",
+      "additional_urls": [
+        "https://www.kingstonwritersfest.ca/"
+      ],
+      "default_type": "festival",
+      "notes": "Kingston. Parent season plus individual dated programme pages."
+    },
+    {
+      "id": "montreal-jazz",
+      "name": "Festival International de Jazz de Montréal",
+      "events_url": "https://montrealjazzfest.com/",
+      "additional_urls": [],
+      "default_type": "festival",
+      "notes": "Montréal. Current-season parent plus official dated programme entries."
+    },
+    {
+      "id": "osheaga",
+      "name": "OSHEAGA",
+      "events_url": "https://osheaga.com/",
+      "additional_urls": [],
+      "default_type": "festival",
+      "notes": "Montréal. Current-season parent plus official dated programme entries."
+    },
+    {
+      "id": "mutek-montreal",
+      "name": "MUTEK Montréal",
+      "events_url": "https://montreal.mutek.org/en/",
+      "additional_urls": [],
+      "default_type": "festival",
+      "notes": "Montréal experimental music and digital arts. Confirm current edition before publishing."
+    },
+    {
+      "id": "fantasia-montreal",
+      "name": "Fantasia International Film Festival",
+      "events_url": "https://fantasiafestival.com/",
+      "additional_urls": [],
+      "default_type": "festival",
+      "notes": "Montréal genre film festival. Screening gate applies to individual films."
+    },
+    {
+      "id": "brott-music",
+      "name": "Brott Music Festival",
+      "events_url": "https://brottmusic.com/",
+      "additional_urls": [
+        "https://brottmusic.com/concerts/"
+      ],
+      "default_type": "festival",
+      "notes": "Hamilton and Burlington orchestral and opera season. Parent festival plus dated individual concerts."
     }
+  ],
+  "$regions": [
+    "Toronto and Southern Ontario",
+    "Kingston",
+    "Montréal"
   ]
 }

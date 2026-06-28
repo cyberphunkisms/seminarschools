@@ -90,12 +90,14 @@
     var fRot   = (seed % 360);                                    // 0 .. 360
     // Register sets visibility, not shape: experimental pages read the web
     // louder, professional pages quieter, over the same gasket.
-    var op = tier === 'prominent' ? 0.12 : 0.06;
+    var requestedOpacity = parseFloat(document.body && document.body.getAttribute('data-indra-intensity'));
+    var op = Number.isFinite(requestedOpacity) ? requestedOpacity : (tier === 'prominent' ? 0.12 : 0.06);
 
     var layer = document.createElement('div');
     layer.id = 'indraLayer';
     layer.setAttribute('aria-hidden', 'true');
-    layer.style.opacity = op.toFixed(2);
+    // The home page can adjust this variable when a constellation project is selected.
+    layer.style.opacity = 'var(--indra-opacity, ' + op.toFixed(3) + ')';
     layer.style.transformOrigin = '50% 50%';
     layer.innerHTML = window.PolymythMandala.build(canonOpts());
     document.body.appendChild(layer);
@@ -147,32 +149,35 @@
     var curY = window.scrollY || 0;
     var raf = 0;
     var EASE = 0.085;
-    // Persistent tick: never sleeps. Handles scroll chase AND idle breath
-    // in one rAF chain. One style write per frame, always running.
+    var lastMotion = Date.now();
+    var IDLE_AFTER = 1800;
+    // The layer comes alive while a visitor is moving through the page, then rests.
+    // This avoids a permanent animation loop in background tabs and idle pages.
     function tick() {
+      raf = 0;
+      if (document.hidden) return;
+      var now = Date.now();
       var target = window.scrollY || 0;
       curY += (target - curY) * EASE;
       if (Math.abs(target - curY) < 0.15) { curY = target; }
-      // Lean easing (merged from standalone loop)
       leanX += (mouseX - leanX) * LEAN_EASE;
       leanY += (mouseY - leanY) * LEAN_EASE;
-      // Layer transform: scroll + breath + lean in one write
-      layer.style.transform = transformFor(curY, Date.now());
-      // Tidal pulse on the SVG (separate element, one write)
+      layer.style.transform = transformFor(curY, now);
       if (tidalSvg) {
-        var tt = Date.now() / TIDAL_PERIOD * Math.PI * 2;
+        var tt = now / TIDAL_PERIOD * Math.PI * 2;
         tidalSvg.style.transform = 'scale(' + (1 + Math.sin(tt) * TIDAL_AMP).toFixed(5) + ')';
       }
-      raf = requestAnimationFrame(tick);
+      if (Math.abs(target - curY) > 0.15 || Math.abs(mouseX - leanX) > 0.003 || Math.abs(mouseY - leanY) > 0.003 || now - lastMotion < IDLE_AFTER) {
+        raf = requestAnimationFrame(tick);
+      }
     }
     function kick() {
-      // Immediate sync update so the transform reflects scroll NOW
-      // (needed for gate detection; the rAF loop handles smooth easing)
-      layer.style.transform = transformFor(window.scrollY || 0, Date.now());
-      if (!raf) { raf = requestAnimationFrame(tick); }
+      lastMotion = Date.now();
+      layer.style.transform = transformFor(window.scrollY || 0, lastMotion);
+      if (!raf && !document.hidden) { raf = requestAnimationFrame(tick); }
     }
     window.addEventListener('scroll', kick, { passive: true });
-    // Start immediately so the substrate breathes from first frame.
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) kick(); });
     kick();
     var rT;
     window.addEventListener('resize', function () {
@@ -194,6 +199,7 @@
     document.addEventListener('mousemove', function(e) {
       mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
       mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+      kick();
     }, { passive: true });
     // Lean is computed inside the unified tick loop below.
   }

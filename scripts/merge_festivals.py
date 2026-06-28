@@ -42,8 +42,8 @@ def now_iso():
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
-def make_id(source_url, iso_date):
-    key = f"{source_url}::{iso_date}".encode("utf-8")
+def make_id(source_url, iso_date, title=""):
+    key = f"{source_url}::{iso_date}::{title}".encode("utf-8")
     return hashlib.sha1(key).hexdigest()[:12]
 
 
@@ -125,7 +125,7 @@ def load_manual_festivals():
 
     sources = json.loads(SOURCES_PATH.read_text(encoding="utf-8"))
     festival_source_ids = {s["id"] for s in sources["primary_sources"]}
-    festival_types = {"festival-of-form", "cultural-reproduction", "site-specific-art"}
+    festival_types = {"festival", "festival-of-form", "cultural-reproduction", "site-specific-art"}
 
     records = []
     for entry in data.get("events", []):
@@ -140,7 +140,7 @@ def load_manual_festivals():
         except Exception:
             continue
         iso = dt.isoformat(timespec="minutes")
-        record_id = make_id(entry.get("source_url", entry["title"]), iso)
+        record_id = make_id(entry.get("source_url", entry["title"]), iso, entry["title"])
         records.append({
             "id": record_id,
             "date": iso,
@@ -163,6 +163,10 @@ def load_manual_festivals():
             "scraped_at": now_iso(),
             "review_status": "manual",
             "marginalia_url": entry.get("marginalia_url"),
+            "secondary_types": entry.get("secondary_types", []),
+            "parent_id": entry.get("parent_id"),
+            "is_parent_festival": entry.get("is_parent_festival", False),
+            "age_band": entry.get("age_band"),
         })
     return records
 
@@ -245,6 +249,18 @@ def merge(harvest_records, manual_records):
         deduped.append(r)
     deduped.sort(key=lambda r: r["date"])
     return deduped
+
+
+def normalize_festival_parents(records):
+    """A festival season is type=fes​tival; form/cultural/site subtype remains secondary."""
+    for r in records:
+        if r.get("is_parent_festival") and r.get("type") != "festival":
+            old = r.get("type")
+            r["type"] = "festival"
+            secondary = r.setdefault("secondary_types", [])
+            if old and old not in secondary:
+                secondary.append(old)
+    return records
 
 
 def validate(records, schema):
@@ -353,7 +369,7 @@ def main():
     manual_records = load_manual_festivals()
     print(f"manual festivals:  {len(manual_records)} records")
 
-    merged = merge(clean_harvest, manual_records)
+    merged = normalize_festival_parents(merge(clean_harvest, manual_records))
     print(f"merged:            {len(merged)} records after dedup")
 
     schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
@@ -382,6 +398,21 @@ def main():
 
     write_log(harvest_data, merged, dropped)
     print(f"wrote {LOG_PATH} + history snapshot")
+
+    # The former split festival feed is retained as an audit artefact, while
+    # every validated festival record is published into polymythcalendar.
+    # This prevents the festival workflow from succeeding without updating
+    # the calendar visitors and crawlers actually receive.
+    import subprocess as _subprocess
+    for command in [
+        ["node", str(ROOT / "scripts" / "merge-festival-harvest-into-calendar.js")],
+        ["node", str(ROOT / "scripts" / "sync-calendar-data.js")],
+        ["node", str(ROOT / "scripts" / "build-search-pages.js")],
+    ]:
+        result = _subprocess.run(command, cwd=ROOT, check=False)
+        if result.returncode:
+            print(f"FATAL: calendar publication command failed: {' '.join(command)}", file=sys.stderr)
+            sys.exit(result.returncode)
     print("=== done ===")
 
 

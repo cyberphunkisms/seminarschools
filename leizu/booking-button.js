@@ -1,9 +1,8 @@
 /*
  * Leizu course selection → intake handoff.
  *
- * The form owns the payment handoff. This file only carries a selected plan and
- * selected course IDs to that form. It never sends users from browser storage to
- * Stripe or Cal.com.
+ * Every intake-bound action carries the current course, ESL, and pathway choices.
+ * Stripe and Cal.com remain server-verified downstream of the intake form.
  */
 (function(){
   function config(){ return window.LEIZU_PAYMENT_CONFIG; }
@@ -11,30 +10,40 @@
     var c = config();
     return c && c.getProduct ? c.getProduct(key) : null;
   }
-
   function sanitizeIds(ids){
     return (ids || []).filter(function(id){ return /^[a-z0-9-]{1,80}$/i.test(String(id)); });
   }
-
   function readSelectedSet(name){
-    // The curriculum declares these Sets before this file loads. Reading them
-    // directly avoids evaluating a string from the page.
     var value = null;
     if(name === 'selected' && typeof selected !== 'undefined') value = selected;
     if(name === 'eslSelected' && typeof eslSelected !== 'undefined') value = eslSelected;
     return value instanceof Set ? Array.from(value) : [];
   }
-
+  function currentPickerState(){
+    var courseIds = readSelectedSet('selected');
+    var eslCourseIds = readSelectedSet('eslSelected').filter(function(id){ return courseIds.indexOf(id) !== -1; });
+    var path = String((window.LEIZU_CURRENT_ROUTE || document.documentElement.getAttribute('data-current-route') || 'all')).toLowerCase();
+    if(['forest','ib','ossd'].indexOf(path) === -1) path = '';
+    var lang = String(document.documentElement.getAttribute('data-lang') || 'en').toLowerCase();
+    if(['en','fr','zh','zhs','fa'].indexOf(lang) === -1) lang = 'en';
+    return {courseIds:courseIds, eslCourseIds:eslCourseIds, path:path, lang:lang};
+  }
   function buildIntakeUrl(options){
+    options = options || {};
     var params = new URLSearchParams();
-    if(options && productFor(options.tier)) params.set('tier', options.tier);
-    var courses = sanitizeIds(options && options.courseIds);
-    var esl = sanitizeIds(options && options.eslCourseIds);
+    if(productFor(options.tier)) params.set('tier', options.tier);
+    var source = String(options.source || '').toLowerCase();
+    if(['seminar','mulberry','contact'].indexOf(source) !== -1) params.set('source', source);
+    var courses = sanitizeIds(options.courseIds);
+    var esl = sanitizeIds(options.eslCourseIds);
+    var path = String(options.path || '').toLowerCase();
+    var lang = String(options.lang || '').toLowerCase();
     if(courses.length) params.set('courses', courses.join(','));
     if(esl.length) params.set('esl_courses', esl.join(','));
+    if(['forest','ib','ossd'].indexOf(path) !== -1) params.set('path', path);
+    if(['fr','zh','zhs','fa'].indexOf(lang) !== -1) params.set('lang', lang);
     return '/leizu/intake/' + (params.toString() ? '?' + params.toString() : '');
   }
-
   function getPaymentKeyForCart(selectedCourseIds, options){
     if(options === true) return 'forest_year_monthly';
     options = options || {};
@@ -45,59 +54,60 @@
     }
     return null;
   }
-
+  function intentForLink(link){
+    var raw = link.getAttribute('href') || '';
+    var parsed;
+    try { parsed = new URL(raw, window.location.origin); } catch(e){ parsed = new URL('/leizu/intake/', window.location.origin); }
+    return {
+      tier: link.dataset.paymentKey || parsed.searchParams.get('tier') || '',
+      source: link.dataset.intakeSource || parsed.searchParams.get('source') || ''
+    };
+  }
+  function refreshIntakeCtas(){
+    var state = currentPickerState();
+    document.querySelectorAll('a[data-payment-key],a[data-intake-source],a[href^="/leizu/intake"]').forEach(function(link){
+      var intent = intentForLink(link);
+      if(intent.tier && !productFor(intent.tier)) return;
+      link.href = buildIntakeUrl({
+        tier:intent.tier,
+        source:intent.source,
+        courseIds:state.courseIds,
+        eslCourseIds:state.eslCourseIds,
+        path:state.path,
+        lang:state.lang
+      });
+    });
+  }
   function buildBookingHandler(){
     var bookButton = document.querySelector('[data-action="book"]');
     if(!bookButton || bookButton.dataset.leizuWired === 'true') return;
     bookButton.dataset.leizuWired = 'true';
     bookButton.removeAttribute('href');
-
     bookButton.addEventListener('click', function(e){
       e.preventDefault();
-      var selectedCourseIds = readSelectedSet('selected');
-      var eslCourseIds = readSelectedSet('eslSelected');
-      var yearTier = selectedCourseIds.indexOf('forest-year-flagship') !== -1 ? 'forest' : null;
+      var state = currentPickerState();
+      var yearTier = state.path === 'forest' ? 'forest' : null;
       var modeElement = document.querySelector('[data-year-payment-mode]');
       var yearMode = modeElement && /^(upfront|two|term|monthly)$/.test(modeElement.value) ? modeElement.value : 'monthly';
-      var paymentKey = getPaymentKeyForCart(selectedCourseIds, {yearTier: yearTier, yearMode: yearMode});
-
-      if(!paymentKey && selectedCourseIds.length === 0 && eslCourseIds.length === 0){
+      var paymentKey = getPaymentKeyForCart(state.courseIds, {yearTier:yearTier, yearMode:yearMode});
+      if(!paymentKey && state.courseIds.length === 0 && state.eslCourseIds.length === 0 && !state.path){
         var notice = document.getElementById('selection-notice');
-        if(notice){
-          notice.hidden = false;
-          notice.textContent = 'Choose at least one subject before continuing.';
-        }
+        if(notice){ notice.hidden=false; notice.textContent='Choose at least one subject before continuing.'; }
         var subjects = document.getElementById('subjects');
         if(subjects) subjects.scrollIntoView({behavior:'smooth', block:'start'});
         return;
       }
       var notice = document.getElementById('selection-notice');
-      if(notice) notice.hidden = true;
-      window.location.assign(buildIntakeUrl({
-        tier: paymentKey,
-        courseIds: selectedCourseIds,
-        eslCourseIds: eslCourseIds
-      }));
+      if(notice) notice.hidden=true;
+      window.location.assign(buildIntakeUrl({tier:paymentKey,courseIds:state.courseIds,eslCourseIds:state.eslCourseIds,path:state.path,lang:state.lang}));
     });
   }
-
-  function wireTileCtas(){
-    document.querySelectorAll('a[data-payment-key]').forEach(function(link){
-      var key = link.dataset.paymentKey;
-      if(!productFor(key)){
-        link.removeAttribute('href');
-        link.setAttribute('aria-disabled', 'true');
-        return;
-      }
-      link.href = buildIntakeUrl({tier:key});
-    });
-  }
-
   window.LEIZU_BUILD_INTAKE_URL = buildIntakeUrl;
+  window.LEIZU_REFRESH_INTAKE_CTAS = refreshIntakeCtas;
   window.getPaymentKeyForCart = getPaymentKeyForCart;
-
+  document.addEventListener('leizu:pickerchange', refreshIntakeCtas);
   document.addEventListener('DOMContentLoaded', function(){
-    wireTileCtas();
+    refreshIntakeCtas();
     window.setTimeout(buildBookingHandler, 100);
   });
 })();

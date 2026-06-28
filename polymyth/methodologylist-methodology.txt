@@ -2,9 +2,9 @@ Polymyth Methodologylist — methodology section
 Source: https://seminarschools.com/polymyth/methodologylist.txt (full file)
 Section index: https://seminarschools.com/polymyth/manifest.txt
 AI-discovery index: https://seminarschools.com/polymyth/methodologylist.txt
-Last build: 2026-06-25
+Last build: 2026-06-27
 
-=== METHODOLOGY (331 entries) ===
+=== METHODOLOGY (332 entries) ===
 
 [ai] Interpretive pleonexia, the scope-overreach tripwire (AI-conduct, authority line between filing and scope)
 LAYMAN. An AI-conduct rule. Rainbowsol named the failure interpretive pleonexia: the assistant reads an instruction as a license to build its fullest version and overruns the boundary the instruction set. This rule fixes the authority line that stops it.
@@ -17,7 +17,7 @@ THE TIMING. The flag comes before the build. When scope swells past the sentence
 
 THE LIMIT. This failure sits below the reflex layer where the dead copy lives, so a filed rule narrows it and the author's live catch enforces it, the same shape the framework gives gorgonification.
 
-THE WORKED EXAMPLE. The festivals calendar. A justified source-level split, festival sites differ from lecture sites, was carried all the way to a separate page, a separate pipeline, and a separate feed that the operator never requested. The corrective shipped the same session: the two calendars were synthesized into the one polymyth seminar calendar.
+THE WORKED EXAMPLE. The festivals calendar. A justified source-level split, festival sites differ from lecture sites, was carried all the way to a separate page, a separate pipeline, and a separate feed that the operator never requested. The corrective shipped the same session: the two calendars were synthesized into the one polymythcalendar.
 
 Filed June 18 2026 at the author's instruction to update ml* against this failure. Rainbowsol named it interpretive pleonexia in the same session. Companion to the self-abasement-reflex entry and the ORGANIZE-MINE, RETROACTIVE-SCOPE, and context-override-defense entries. Concept named by Rainbowsol; the assistant filed and structured per NO-NAMING.
   tags: methodology, ai-conduct, interpretive-pleonexia, scope-overreach-tripwire, authority-line, organize-mine-boundary, flag-before-build, literal-minimum, completeness-cascade, dead-copy-of-design, festivals-calendar-worked-example, Rainbowsol-named, 2026-06-18
@@ -6181,3 +6181,15 @@ CLOSING (derived from ml* entries). This is why I have been building the polymor
 
 Connects: Collective Devaluation Paradox (the sink), Commodifiedempathy vs Gnosis (the operational opposition), Collective historical trauma (upstream driver 1), Kenocharism (upstream driver 2), Bang-for-buck (the structural exit), Gorgonification (the broad diagnostic), Egregore (why Star Trek and Greek myth and Buddhist teaching count equally as mythology in the framework), DERIVE-FROM-ML* rule (the AI behavioral rule this entry authoring-session produced).
   tags: methodology, modus-operandi, root-thesis, manifesto, why-polymyth-exists, collective-devaluation-paradox, commodifiedempathy, gorgonification, egregore, user-authored, user-named, dual-audience-schema
+
+[human] UPLOADED-FILE-FIRST
+UPLOADED-FILE-FIRST. When a file is uploaded, read it before running any conversation search. The file is the ground truth. Search only fills gaps the file cannot answer.
+
+ORIGIN: June 27 2026 session. AI ran six conversation searches to reconstruct context that was sitting in the uploaded zip file. The zip contained the antipsychology-300-extraction.txt with all 300 points. Instead of reading the file first, the AI performed an archaeological expedition across five search queries to recover information the file header would have provided in two seconds. Then when the user uploaded a second file containing points 1-130, the AI launched into an unsolicited structural analysis of a numbering collision instead of answering the yes/no question asked.
+
+FAILURE MODE: treating conversation history as primary and uploaded files as supplementary. The uploaded file is the canonical artifact. The conversation history is context around the artifact. Reading the artifact first eliminates most of the questions the conversation search would have been used to answer.
+
+RELATIONSHIP TO EXISTING RULES: specialization of RETRIEVE-FIRST applied to the upload context. RETRIEVE-FIRST says check before claiming absence. UPLOADED-FILE-FIRST says the upload is the first place to check. Also specialization of Q-CEILING: if the file answers the question, asking more questions is stalling.
+
+user-authored June 27 2026 session. User formulated the rule directly. AI wasted six searches and multiple turns on information sitting in the uploaded zip.
+  tags: methodology, correction, file-handling, retrieve-first, q-ceiling, june-2026-27, dual-audience-schema

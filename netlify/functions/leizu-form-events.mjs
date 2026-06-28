@@ -25,7 +25,7 @@ export default {
     const data = event.data || {};
     const formName = plain(data['form-name'] || data.form_name || event.form?.name);
     const email = plain(data.email);
-    if(!email || !['leizu-intake', 'leizu-application'].includes(formName)) return;
+    if(!email || formName !== 'leizu-intake') return;
 
     // The secure paid sequence ends with a Cal.com BOOKING_CREATED webhook.
     if(formName === 'leizu-intake' && plain(data['selected-tier'])) return;
@@ -46,7 +46,14 @@ export default {
       'seminarschools.com/leizu'
     ].join('\n');
 
-    if(purpose === 'mulberry'){
+    if(purpose === 'portfolio'){
+      subject = 'Portfolio intake received — Leizu Academy';
+      body = [
+        'Thank you for sharing your work with Leizu Academy' + lead + '.', '',
+        'I will review the portfolio and follow up with the portfolio rate and next step.', '',
+        'Saul Nassau', 'Leizu Academy', 'seminarschools.com/leizu'
+      ].join('\n');
+    } else if(purpose === 'mulberry'){
       subject = 'We received your Mulberry Fund application — Leizu Academy';
       body = [
         'Thank you for applying to the Mulberry Fund.', '',

@@ -63,14 +63,11 @@
 
   .map-frame{position:relative;margin-top:16px;background:radial-gradient(140% 120% at 30% 20%, var(--paper) 0%, var(--paper-2) 55%, var(--paper-edge) 100%);border:1px solid var(--crease);border-radius:2px;box-shadow:0 18px 44px rgba(0,0,0,.5),inset 0 0 80px rgba(120,90,50,.25);overflow:hidden}
   .map-frame::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 32.8%,rgba(80,60,30,.16) 33%,transparent 33.3%),linear-gradient(90deg,transparent 65.8%,rgba(80,60,30,.14) 66%,transparent 66.3%),linear-gradient(0deg,transparent 48.8%,rgba(80,60,30,.14) 49%,transparent 49.3%);mix-blend-mode:multiply}
-  .real-map{display:block;width:100%;height:auto;position:relative;z-index:2}
   .map-title{position:relative;z-index:3;font-family:'Limelight',cursive;text-align:center;color:var(--ink);font-size:clamp(17px,3.2vw,24px);letter-spacing:.04em;padding:16px 16px 2px}
   .map-sub{position:relative;z-index:3;text-align:center;font-family:'Special Elite',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);padding-bottom:10px}
   .map-svg{display:block;width:100%;height:auto;position:relative;z-index:2}
   .map-label{font-family:'Special Elite',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9c6a4a;margin-top:18px;margin-bottom:2px}
-  .map-frame-real{min-height:60px}
   .map-note{font-family:'Cutive Mono',monospace;font-size:11px;line-height:1.6;color:#7a6843;margin-top:8px}
-  .map-note code{background:#0c0805;border:1px solid #3e2f1a;border-radius:2px;padding:1px 5px;color:#cbb88f;font-size:11px}
 
   .street{stroke:#a89160;stroke-width:1.4;fill:none;opacity:.7}
   .ave{stroke:#8a7142;stroke-width:2.6;fill:none}
@@ -114,11 +111,8 @@
       <h3>A map of Harlem</h3>
       <div class="kind">Artifact + assignment</div>
       <div class="desc">A folded map of Harlem, soft at the creases, carried in a pocket long enough to wear thin. The streets and the places anyone could name. You stop and orient yourself.</div>
-      <div class="map-label">The real map &middot; if a bookworm has the paper in hand</div>
-      <div class="map-frame map-frame-real">
-        <img loading="lazy" class="real-map" src="harlem-campbell-1932.jpg" alt="A Night-Club Map of Harlem, E. Simms Campbell, 1932" onerror="this.parentNode.style.display='none'">
-      </div>
-      <div class="map-note">Drop <code>harlem-campbell-1932.jpg</code> beside this page to show the real map here. Until then only the clear map below appears.</div>
+      <div class="map-label">The real map &middot; a primary source</div>
+      <div class="map-note">Read the original 1932 map through the <a href="https://digitalcollections.nypl.org/items/3b494070-c6e9-012f-238a-3c075448cc4b" target="_blank" rel="noopener noreferrer">New York Public Library Digital Collections</a>. The clear map below remains the version for play.</div>
 
       <div class="map-label">The clear map &middot; for finding your way</div>
       <div class="map-frame">

@@ -1,8 +1,8 @@
-# Toronto-GTA seminars harvest
+# polymythcalendar regional seminars harvest
 
-You are running headless inside a GitHub Action. Your job is to produce a JSON array of upcoming public events in the Greater Toronto Area for the seminarschools.com calendar.
+You are running headless inside a GitHub Action. Your job is to produce a JSON array of upcoming public events for polymythcalendar across Toronto and Southern Ontario, Kingston, and Montréal. Treat Toronto and Southern Ontario as the established core; Kingston and Montréal are equal regional coverage zones, each with its own authoritative sources.
 
-Today's date is provided via the runner shell. Treat the current date as **today**. Find events from today through the next 90 days.
+Today's date is provided via the runner shell. Treat the current date as **today**. Find events from today through the next 90 days. Use exact dates and a primary-source URL for every record. A zero-result source is valid; never pad a run with inferred dates, annual patterns, or general venue pages.
 
 ## What counts as a seminar event
 
@@ -31,6 +31,15 @@ Set `type` to `protest`. Fill the `four_condition_test` object honestly against 
 
 Protest sources are now in the venue roster as `labour-council` and `protest-civic`. Also surface protests from any announcement you can confirm with a `source_url` and a verbatim `raw_excerpt`. Treat an unconfirmable protest as nonexistent.
 
+
+## Regional coverage and eligibility
+
+Search Toronto and Southern Ontario, including Hamilton, Guelph, Waterloo, Kitchener, Mississauga, Brampton, Oakville, Niagara, and nearby public institutions; also search Kingston and Montréal. Prioritize universities, libraries, museums, artist-run centres, literary organizations, public civic institutions, and directly operated festival pages.
+
+Capture public lectures, talks, panels, symposia, conferences, workshops, thesis defences, colloquia, book talks and launches, readings, artist talks, exhibitions with exact start and end dates, forums, meetings, webinars, networking events, retreats, memorials, celebrations, residencies with exact start and end dates, public gatherings, protests, contests, and verified calls for papers. A screening qualifies **only when a creator or principal collaborator is confirmed to attend for a conversation, introduction, Q&A, or equivalent exchange**. A regular showing without that confirmed presence does not qualify.
+
+For a festival, create one parent festival record spanning the verified season and create an individual production record only when its own official detail page supplies a title, exact date, and primary URL. Link individual records with `parent_id`; do not manufacture children from a season overview.
+
 ## Community and charity events
 
 Community and charity events are a separate category and are exempt from the four-condition test above, on a public-benefit basis. Capture organized public community events: charity walks and rides, fundraisers, neighbourhood festivals, mutual-aid drives, and open community gatherings with a named cause or organizer. A community event qualifies when it is public, has a nameable cause or host, and carries a confirmable date and place. Set `type` to `community`. The same citation discipline applies. Every community record must carry a `raw_excerpt` and a `source_url`. Sources are `toronto-events` and `community-discovery` in the roster. Do not invent an event and do not list a rumored one.
@@ -58,7 +67,7 @@ The roster is larger than one run's budget, so coverage rotates on a four-week c
 1. **Every-run set.** All sources with `tier_priority` 1, PLUS all sources whose `default_type` is `screening`, `cfp`, or `contest` regardless of tier. These categories are under-covered and run weekly until coverage normalizes.
 2. **This week's shard.** Of the remaining sources, crawl only those whose zero-based position in the `sources` array satisfies `position % 4 == SHARD`. Skip the rest and record them as `skipped-shard` in the source accounting below.
 
-Across four consecutive weekly runs this covers the full roster. Within the run, if the budget runs low, finish the every-run set before starting the shard, and record any source you could not reach as `budget-exhausted` rather than silently dropping it.
+Across four consecutive runs this covers the full roster. Within the run, if the budget runs low, finish the every-run set before starting the shard, and record any source you could not reach as `budget-exhausted` rather than silently dropping it.
 
 **FEEDS FIRST.** When a source carries a `feed_url` field, fetch the feed BEFORE the `events_url`. Formats and how to read them: `ics` parses as iCalendar VEVENT blocks; `wp-tribe-json` returns a JSON object with an `events` array (title, start_date, venue, url fields); `bibliocommons-v2-html` is a server-rendered listing page that parses like normal HTML. If the feed returns 404, an error, or zero events, fall back to `events_url` and note `feed_failed` in that source's accounting entry, because the probable-tagged feeds are unconfirmed until a run proves them. A working feed is cheaper and more reliable than the HTML page; prefer it every run.
 
@@ -84,7 +93,7 @@ Statuses: `crawled` (fetched and parsed, events may be 0), `skipped-shard` (outs
 
 **One event may hold several types.** When an event genuinely belongs to more than one type, a workshop that is also a panel or a reading that is also a book launch, set `type` to the primary and list the rest in `secondary_types`. One event is one record with several types. Never emit the same event once per type.
 
-**Festivals nest.** For a multi-event festival, emit the umbrella as one record with `is_parent_festival` true, then emit each named, dated sub-event with `parent_id` set to the umbrella's `id`. Capture the umbrella plus the named sub-events and skip the undifferentiated long tail. Jazz, Pride, NXNE, TIFF, and CONTACT all work this way.
+**Festivals nest.** For a multi-event festival, emit the umbrella as one record with `type: "festival"` and `is_parent_festival` true. Preserve any form subtype in `secondary_types`, then emit each named, dated sub-event with `parent_id` set to the umbrella's `id`. Capture the umbrella plus the named sub-events and skip the undifferentiated long tail. Jazz, Pride, NXNE, TIFF, and CONTACT all work this way.
 
 **One event, one record.** If the same event surfaces on two source pages, emit it once, keep the richest fields and the most specific `source_url`, and union the extra types into `secondary_types`. The post-processor separately merges your output against the manual file, so never pre-merge manual entries.
 

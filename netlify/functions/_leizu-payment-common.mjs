@@ -40,7 +40,7 @@ export function normalizeEmail(value){
 
 export function isCompletedAndPaid(session){
   return Boolean(session) && session.status === 'complete' &&
-    (session.payment_status === 'paid' || session.payment_status === 'no_payment_required');
+    session.payment_status === 'paid';
 }
 
 export function planForPaymentLink(paymentLinkId){

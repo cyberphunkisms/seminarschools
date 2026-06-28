@@ -116,6 +116,12 @@ function execMotionCamera(){
 const rows=[], fails=[];
 for(const f of walk(ROOT)){
   const s = read(f), p = pagePath(f);
+  // Search-surface pages are deliberately plain, static documents. They carry
+  // content, schema, and canonical URLs rather than project-specific motion.
+  if (s.includes('name="generator" content="Seminar Schools Static Search Surface"')) {
+    rows.push({p, outcome:'static-search', fail:[]});
+    continue;
+  }
   const loadsIndra=s.includes('/js/indra.js'), loadsMand=s.includes('/js/mandala.js'), loadsAlive=s.includes('alive.css');
   const hasGeo=/id="geo"/.test(s), hasGeoLayer=/id="geoLayer"/.test(s), hasPcv=/printCv/.test(s);
   const projCls=(s.match(/class="([^"]*project-[^"]*)"/)||[])[1]||null;

@@ -1,48 +1,71 @@
 #!/usr/bin/env bash
-#
-# Festivals harvest runner. Two-pass scrape-within-scrape via claude -p.
-# Higher token budget than seminars because Pass 1 crawls discovery
-# aggregators and Pass 2 verifies against primary sites.
-#
-# Auth: CLAUDE_CODE_OAUTH_TOKEN env var (same as seminars).
-
+# Bounded, observable polymythcalendar festival harvest. See the seminars
+# runner for the no-partial-merge policy and diagnostics contract.
 set -euo pipefail
 
 PROMPT_FILE="scripts/festivals-prompt.md"
 OUTPUT_FILE="/tmp/festivals-output.json"
 TODAY="$(date -u +'%Y-%m-%d')"
+# One of seven daily coverage shards. Core regional anchors run every time.
+SHARD=$(( 10#$(date -u +%u) - 1 ))
+RUN_ID="$(date -u +'%Y%m%dT%H%M%SZ')"
+LOG_DIR="${HARVEST_LOG_DIR:-data/harvest-runs}"
+LOG_FILE="${LOG_DIR}/festivals-${RUN_ID}.log"
+STATUS_FILE="${LOG_DIR}/festivals-${RUN_ID}.status.json"
+MAX_TURNS="${MAX_TURNS:-55}"
+MAX_BUDGET_USD="${MAX_BUDGET_USD:-3.50}"
+HARVEST_TIMEOUT_SECONDS="${HARVEST_TIMEOUT_SECONDS:-1500}"
+mkdir -p "${LOG_DIR}"
 
-echo "=== Festivals harvest run ${TODAY} ==="
-echo "Calling claude -p with prompt from ${PROMPT_FILE}"
-echo
-
+write_status() {
+  python3 - "$STATUS_FILE" "$1" "$TODAY" "$RUN_ID" "$LOG_FILE" "$MAX_TURNS" "$MAX_BUDGET_USD" "$HARVEST_TIMEOUT_SECONDS" <<'PY'
+import json,sys
+out, code, today, run_id, log, turns, budget, timeout = sys.argv[1:]
+json.dump({
+  "stream":"festivals", "run_id":run_id, "date_utc":today,
+  "exit_code":int(code), "log_file":log,
+  "max_turns":int(turns), "max_budget_usd":float(budget),
+  "timeout_seconds":int(timeout)
+}, open(out,"w"), indent=2)
+open(out,"a").write("\n")
+PY
+}
 if [[ -z "${CLAUDE_CODE_OAUTH_TOKEN:-}" ]]; then
-    echo "ERROR: CLAUDE_CODE_OAUTH_TOKEN env var not set." >&2
-    exit 1
+  echo "ERROR: CLAUDE_CODE_OAUTH_TOKEN env var not set." >&2
+  write_status 78
+  exit 78
 fi
-
-PROMPT_BODY="Today is ${TODAY} (UTC). $(cat "${PROMPT_FILE}")"
-
-# --max-budget-usd 10.00 (double seminars; two-pass + larger source roster)
-# --max-turns 100 (more sources, more iterations expected)
-# Same --tools restriction as seminars: no WebSearch (separately billed).
-
-claude -p "${PROMPT_BODY}" \
+PROMPT_BODY="Today is ${TODAY} (UTC). This run's SHARD number is ${SHARD} (0-6). $(cat "${PROMPT_FILE}")"
+echo "=== polymythcalendar festivals harvest ${RUN_ID}; shard ${SHARD}; max ${HARVEST_TIMEOUT_SECONDS}s ==="
+set +e
+timeout --signal=INT --kill-after=30s "${HARVEST_TIMEOUT_SECONDS}" \
+  claude -p "${PROMPT_BODY}" \
     --model claude-sonnet-4-6 \
     --tools "WebFetch,Read,Write,Bash" \
     --allowedTools "WebFetch,Read,Write,Bash" \
     --permission-mode bypassPermissions \
-    --max-turns 100 \
-    --max-budget-usd 10.00 \
-    || { echo "ERROR: claude -p invocation failed" >&2; exit 1; }
-
-if [[ ! -f "${OUTPUT_FILE}" ]]; then
-    echo "ERROR: expected output file ${OUTPUT_FILE} not produced by Claude" >&2
-    exit 1
+    --max-turns "${MAX_TURNS}" \
+    --max-budget-usd "${MAX_BUDGET_USD}" 2>&1 | tee "${LOG_FILE}"
+CLAUDE_STATUS="${PIPESTATUS[0]}"
+set -e
+write_status "${CLAUDE_STATUS}"
+if [[ "${CLAUDE_STATUS}" -ne 0 ]]; then
+  echo "ERROR: claude -p exited ${CLAUDE_STATUS}; data was left unchanged. Read ${LOG_FILE} and ${STATUS_FILE}." >&2
+  exit "${CLAUDE_STATUS}"
 fi
-
-EVENT_COUNT="$(python3 -c "import json; d=json.load(open('${OUTPUT_FILE}')); print(len(d.get('events',[])))")"
-echo "=== Claude festivals harvest produced ${EVENT_COUNT} records ==="
-
-# Hand off to merge + validate
+if [[ ! -f "${OUTPUT_FILE}" ]]; then
+  echo "ERROR: expected output file ${OUTPUT_FILE} was not produced. Data was left unchanged. Read ${LOG_FILE}." >&2
+  exit 65
+fi
+python3 - "$OUTPUT_FILE" <<'PY'
+import json,sys
+p=sys.argv[1]
+try: data=json.load(open(p))
+except Exception as e: raise SystemExit(f"ERROR: malformed harvest JSON: {e}")
+if not isinstance(data,dict) or not isinstance(data.get('events'),list): raise SystemExit('ERROR: harvest JSON must be an object with an events array')
+for i,e in enumerate(data['events']):
+    if not isinstance(e,dict) or not all(e.get(k) for k in ('title','date','source_url')):
+        raise SystemExit(f'ERROR: harvest record {i} lacks title, date, or source_url')
+print(f"=== valid full harvest: {len(data['events'])} records ===")
+PY
 python3 scripts/merge_festivals.py

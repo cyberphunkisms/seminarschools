@@ -66,13 +66,9 @@ exports.handler = async function(event, context) {
 
   if(event.httpMethod === 'GET'){
     // Diagnostic ping — returns function state without calling Gemini
-    var apiKeyPresent = !!process.env.GEMINI_API_KEY;
-    var apiKeyLen = apiKeyPresent ? process.env.GEMINI_API_KEY.length : 0;
     return { statusCode: 200, headers: headers, body: JSON.stringify({
       ok: true,
       diagnostic: true,
-      api_key_present: apiKeyPresent,
-      api_key_length: apiKeyLen,
       runtime: 'netlify-function',
       function_responding: true,
       timestamp: new Date().toISOString()

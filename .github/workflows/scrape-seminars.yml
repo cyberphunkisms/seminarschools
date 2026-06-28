@@ -1,92 +1,61 @@
-name: Scrape seminars + festivals
-
-# Weekly Toronto-GTA harvest via Claude headless mode (claude -p).
-# CONSOLIDATED June 6 2026 for Netlify credit conservation: the seminars
-# and festivals harvests previously ran as two separate workflows pushing
-# one hour apart, costing two production deploys (2 x 15 credits) every
-# Monday. They now run sequentially in one job with ONE combined commit
-# and push: one deploy, 15 credits.
-#
-# Seminars pass: scripts/seminars-prompt.md (venue roster + schema),
-# WebFetch crawl, JSON to /tmp, merge with manual-events, validate.
-# Festivals pass: scripts/festivals-prompt.md two-pass scrape-within-scrape
-# (aggregator discovery, then official-site confirmation; aggregator URLs
-# never become source_url), merge, validate with aggregator-leak guard.
-#
-# Auth: CLAUDE_CODE_OAUTH_TOKEN generated locally via `claude setup-token`.
-# Binds to the Max 20x subscription / Agent SDK credit pool, not API billing.
-# Budget caps live inside each runner script.
-#
-# Schedule: weekly Monday 06:00 UTC = 02:00 Toronto. Manual dispatch enabled.
+name: Refresh polymythcalendar seminars
 
 on:
-  schedule:
-    - cron: '0 6 * * 1'
   workflow_dispatch:
+  schedule:
+    - cron: '15 08 * * *'
 
 permissions:
   contents: write
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+concurrency:
+  group: polymythcalendar-harvest
+  cancel-in-progress: false
 
 jobs:
-  scrape:
+  seminars:
     runs-on: ubuntu-latest
-    timeout-minutes: 75
+    timeout-minutes: 32
+    env:
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+      MAX_TURNS: '70'
+      MAX_BUDGET_USD: '2.50'
+      HARVEST_TIMEOUT_SECONDS: '1500'
+      HARVEST_LOG_DIR: data/harvest-runs
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
         with:
-          python-version: '3.11'
-
-      - name: Install Claude Code (native binary)
-        # The native installer is the recommended method per
-        # https://code.claude.com/docs. NPM install is deprecated.
-        run: |
-          curl -fsSL https://claude.ai/install.sh | bash
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-
-      - name: Verify Claude Code install
-        run: claude --version
-
-      - name: Install Python validator dependencies
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install validators
         run: pip install jsonschema
-
-      - name: Run Claude headless scrape (seminars)
-        env:
-          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+      - name: Install site dependencies
+        run: npm ci
+      - name: Harvest seminars
         run: bash scripts/seminars-prompt-runner.sh
-
-      - name: Validate seminars output against schema
-        run: python3 scripts/validate_seminars.py
-
-      - name: Run Claude headless scrape (festivals)
-        env:
-          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-        run: bash scripts/festivals-prompt-runner.sh
-
-      - name: Validate festivals output (schema + aggregator-leak guard)
-        run: python3 scripts/validate_festivals.py
-
-      - name: Commit and push if changed (single combined deploy)
+      - name: Verify generated calendar
+        run: npm run verify:all
+      - name: Commit verified changes
         run: |
-          set -x
-          git config user.name "seminars-bot"
-          git config user.email "saul+seminarsbot@seminarschools.com"
-          echo "--- Pre-commit status ---"
-          git status
-          git add -A seminars/ festivals/ data/ polymythseminars/
-          echo "--- Staged for commit ---"
-          git diff --cached --stat
-          if git diff --cached --quiet; then
-            echo "No changes to commit. Harvest produced identical output."
-            exit 0
+          git config user.name "seminarschools calendar bot"
+          git config user.email "calendar-bot@users.noreply.github.com"
+          git add data seminars festivals polymythseminars sitemap.xml scripts/search-surface-manifest.json main/index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "data: refresh polymythcalendar seminars"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin HEAD:"${GITHUB_REF_NAME}"
           fi
-          git commit -m "Update seminars + festivals calendars ($(date -u +'%Y-%m-%d %H:%M UTC'))"
-          git pull --rebase origin main
-          git push origin main
-          echo "Push succeeded."
+      - name: Preserve harvest diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: polymythcalendar-seminars-${{ github.run_id }}
+          path: data/harvest-runs/
+          if-no-files-found: warn
+          retention-days: 30

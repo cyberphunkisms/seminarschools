@@ -80,9 +80,16 @@ function flag(f, type, count, detail){
 for (const f of files){
   const s = readL1(path.join(ROOT, f));
   const real = isRealPage(f, s);
-  const vt = visibleText(s);
+  const generatedSearchSurface = s.includes('Seminar Schools Static Search Surface');
+  // Catalog/event cards contain third-party titles and source descriptions. Exclude
+  // only those generated blocks from authored-prose checks; retain the surrounding page.
+  const authoredOnly = s
+    .replace(/<!-- SS_STATIC_CATALOG_START -->[\s\S]*?<!-- SS_STATIC_CATALOG_END -->/g, ' ')
+    .replace(/<!-- SS_STATIC_EVENTS_START -->[\s\S]*?<!-- SS_STATIC_EVENTS_END -->/g, ' ')
+    .replace(/<section id="static-methodology-editions"[\s\S]*?<\/section>/g, ' ');
+  const vt = visibleText(authoredOnly);
 
-  if (!underAny(f, allow.proseExemptPrefixes)){
+  if (!generatedSearchSurface && !underAny(f, allow.proseExemptPrefixes)){
     const d = countDashes(vt);
     if (d) flag(f, 'DASH', d, d + ' dash(es) in visible copy');
     const nd = negdefHits(vt);
@@ -92,7 +99,7 @@ for (const f of files){
   }
 
   if (real){
-    if (!underAny(f, allow.bornAliveExempt)){
+    if (!generatedSearchSurface && !underAny(f, allow.bornAliveExempt)){
       const missing = ['mandala.js','indra.js','alive.css'].filter(a => !s.includes(a));
       if (missing.length) flag(f, 'BORNALIVE', 1, 'missing ' + missing.join(', '));
     }

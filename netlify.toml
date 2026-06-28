@@ -2,6 +2,7 @@
 # seminarschools.com static site
 
 [build]
+  command = "node scripts/build-search-pages.js"
   publish = "."
   # Credit conservation (June 6 2026): skip the build entirely when a push
   # touches only non-public plumbing (scraper code, workflows, scrape logs,
@@ -35,6 +36,26 @@
 #    Free tier: 100 tasks/month; scales via Zapier paid plans.
 #    Alternative: Netlify Function with Resend/SendGrid/Mailgun.
 
+
+# Canonical bookwormburrows pedagogical case. Explicitly normalize the bare path.
+[[redirects]]
+  from = "/bb/why"
+  to = "/bb/why/"
+  status = 301
+
+# The retired standalone portfolio form now enters the canonical Leizu intake.
+[[redirects]]
+  from = "/apply/success"
+  to = "/leizu/intake/?source=portfolio"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/apply/success/"
+  to = "/leizu/intake/?source=portfolio"
+  status = 301
+  force = true
+
 # Redirect /bb/create/ to /bb/ (matrix chat is the canonical entry now).
 [[redirects]]
   from = "/bb/create/"
@@ -45,6 +66,100 @@
   from = "/bb/create"
   to = "/bb/"
   status = 301
+
+
+# Canonicalize the legacy sitemap doorway with an HTTP redirect rather than a client-side refresh.
+[[redirects]]
+  from = "/sitemap"
+  to = "/polymyth/sitemap/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sitemap/"
+  to = "/polymyth/sitemap/"
+  status = 301
+  force = true
+
+# Internal operator and audit artifacts belong in the deploy tree for maintenance,
+# yet should never become public documents. Public polymyth source texts remain open.
+[[redirects]]
+  from = "/SETUP.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/_headers"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/_redirects"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/_build_txt_from_html.py"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/CHARTER.txt"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify.env.example"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package-lock.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/leizu/*.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/teacherresources/audit-batch-01.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/teacherresources/audit-methodology.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/teacherresources/submission-strategy.md"
+  to = "/404.html"
+  status = 404
+  force = true
 
 # Pretty URL for the Gemini chat function
 [[redirects]]
@@ -158,5 +273,27 @@
 
 [[headers]]
   for = "/api/*"
+  [headers.values]
+    Cache-Control = "no-store"
+
+# Intake and payment-success pages can contain personal context or a Stripe session ID.
+# Browser and intermediary caches must not retain either page.
+[[headers]]
+  for = "/leizu/intake/*"
+  [headers.values]
+    Cache-Control = "no-store"
+
+[[headers]]
+  for = "/leizu/booking-success/*"
+  [headers.values]
+    Cache-Control = "no-store"
+
+[[headers]]
+  for = "/bookwormcard/success/*"
+  [headers.values]
+    Cache-Control = "no-store"
+
+[[headers]]
+  for = "/.well-known/security.txt"
   [headers.values]
     Cache-Control = "no-store"

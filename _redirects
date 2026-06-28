@@ -81,6 +81,12 @@
 # Sitemap: sitemap/index.html handles the redirect via meta-refresh
 # /sitemap and /sitemap/ serve sitemap/index.html which redirects to /polymyth/sitemap/
 
+# Polymyth Seminar Calendar short aliases — direct, one-hop canonical redirects.
+/polymythcalendar   /polymythseminars/    301
+/polymythcalendar/  /polymythseminars/    301
+/polymythcal        /polymythseminars/    301
+/polymythcal/       /polymythseminars/    301
+
 # Calendar URL aliases — users guess different paths for "what's on"
 /events       /polymythseminars/    301
 /events/      /polymythseminars/    301

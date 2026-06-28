@@ -39,7 +39,7 @@ DATA_MASTER_PATH = ROOT / "data" / "polymyth-seminar-events.json"
 HISTORY_DIR = ROOT / "data" / "history"
 
 # Festival-type values per polymyth-broadened seminar test
-FESTIVAL_TYPES = {"festival-of-form", "cultural-reproduction", "site-specific-art"}
+FESTIVAL_TYPES = {"festival", "festival-of-form", "cultural-reproduction", "site-specific-art"}
 
 
 def now_iso():
@@ -185,6 +185,18 @@ def merge(harvest_records, manual_records):
     return merged
 
 
+def normalize_festival_parents(records):
+    """One parent season always uses type=fes​tival; prior subtype remains searchable."""
+    for r in records:
+        if r.get("is_parent_festival") and r.get("type") != "festival":
+            old = r.get("type")
+            r["type"] = "festival"
+            secondary = r.setdefault("secondary_types", [])
+            if old and old not in secondary:
+                secondary.append(old)
+    return records
+
+
 def validate(records, schema):
     validator = Draft7Validator(schema)
     errors = []
@@ -314,7 +326,7 @@ def main():
     manual_records = load_manual()
     print(f"manual:  {len(manual_records)} records")
 
-    merged = merge(harvest_records, manual_records)
+    merged = normalize_festival_parents(merge(harvest_records, manual_records))
     print(f"merged:  {len(merged)} records after dedup")
 
     schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
@@ -337,7 +349,7 @@ def main():
     OUT_PATH.write_text(json.dumps(output, indent=2), encoding="utf-8")
     print(f"wrote {OUT_PATH}")
 
-    # Festivals consolidated into the single polymyth seminar calendar (June 2026).
+    # Festivals consolidated into the single polymythcalendar (June 2026).
     # The standalone /festivals/ page and its split feed were retired; festival-type
     # events now live in the one calendar and ship in the main feed below.
 
@@ -355,7 +367,7 @@ def main():
     # and mirror it byte-identically to the data/ master so verify-critical's
     # parity check holds.
     public_output = {
-        "_comment": "Consolidated polymyth seminar calendar events. Auto-written each harvest by merge_and_finalize.py. Drives /polymythseminars/ page.",
+        "_comment": "Consolidated polymythcalendar events. Auto-written each harvest by merge_and_finalize.py. Drives /polymythseminars/ page.",
         "_generated_at": now_iso(),
         "_total_events": len(merged),
         "events": merged,
@@ -399,6 +411,14 @@ def main():
         if n_mb:
             main_path.write_text(main_html, encoding="utf-8")
             print(f"bumped main-page teaser cache buster ({n_mb} spot)")
+    # STATIC SEARCH SURFACE SYNC (crawlability audit, June 27 2026). Build real
+    # HTML event pages and refresh sitemap.xml after every published-calendar update.
+    import subprocess as _subprocess
+    build = _subprocess.run(["node", str(ROOT / "scripts" / "build-search-pages.js")], cwd=ROOT, check=False)
+    if build.returncode:
+        print("FATAL: static search-surface generation failed", file=sys.stderr)
+        sys.exit(build.returncode)
+
     print("=== done ===")
 
 

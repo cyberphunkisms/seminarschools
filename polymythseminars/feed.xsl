@@ -48,7 +48,7 @@
             </div>
           </xsl:for-each>
           <footer>
-            <a href="/polymythseminars/">Calendar</a> ·
+            <a href="/polymythseminars/">polymythcalendar</a> ·
             <a href="/">Seminar Schools</a>
           </footer>
         </div>

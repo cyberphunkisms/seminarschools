@@ -17,13 +17,7 @@ ROBOT_PATHS=("seminars/events.json")   # daily-scraper-owned: origin wins
 # sync the public events copy (netlify force-404s /data/*)
 cp data/polymyth-seminar-events.json polymythseminars/events.json
 
-node scripts/verify-critical.js
-node scripts/verify-geometry.js
-node scripts/verify-register.js
-node scripts/verify-payments.js
-node scripts/verify-leizu-pipeline.js
-node scripts/verify-leizu-experience.js
-
+npm run verify:all
 git add -A
 git commit -m "deploy: canonical tree $(date +%Y-%m-%d_%H%M)" || echo "(nothing new to commit)"
 git fetch origin
@@ -34,13 +28,7 @@ done
 git add -A
 git commit -m "deploy: keep robot-owned data from origin" || true
 
-node scripts/verify-critical.js           # verify AGAIN post-merge
-node scripts/verify-geometry.js
-node scripts/verify-register.js
-node scripts/verify-payments.js           # payment wiring guard, post-merge
-node scripts/verify-leizu-pipeline.js
-node scripts/verify-leizu-experience.js
-
+npm run verify:all
 git push origin "$BR"
 echo
 echo "DEPLOYED. Hard-refresh /polymythseminars/ and confirm the footer reads: build 20260606"

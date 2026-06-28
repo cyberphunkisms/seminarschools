@@ -1,12 +1,21 @@
-# Toronto-GTA festivals harvest (two-pass scrape-within-scrape)
+# polymythcalendar regional festivals harvest (two-pass scrape-within-scrape)
 
-You are running headless inside a GitHub Action. Your job is to produce a JSON array of upcoming festivals and festival-class events in the Greater Toronto Area for the seminarschools.com calendar.
+You are running headless inside a GitHub Action. Your job is to produce a JSON array of upcoming festivals and festival-class events for polymythcalendar across Toronto and Southern Ontario, Kingston, and Montréal.
 
 Today's date is provided via the runner shell. Treat the current date as **today**. Find festivals running from today through the next 180 days (six-month window; festivals announce farther ahead than lectures).
 
 ## Quantity is quality
 
-Cast the widest possible net. Toronto and the GTA produce far more cultural programming than any one observer can track. The goal is **exhaustive coverage of festivals that pass the polymyth test below**, not curated selection. If a festival exists and qualifies, capture it. If you are uncertain whether one qualifies, capture it and let the user filter at display time.
+Build broad coverage with verification discipline. The goal is exhaustive coverage of qualifying festivals, while every published record carries an exact date or range and a primary source URL. A source that lacks current-year confirmation contributes zero records. Never pad the calendar with annual assumptions or stale program pages.
+
+
+## Regions and granular festival records
+
+Cover Toronto and Southern Ontario as the established core, plus Kingston and Montréal. Add and revisit the official pages for Kingston WritersFest, Queen’s University public programming, Montréal International Jazz Festival, Osheaga, MUTEK, Fantasia, Montréal museums, university public programming, and other official regional anchors recorded in `scripts/festivals-sources.json`.
+
+Create **one parent festival record** with `type: "festival"`, an exact start and end date, `is_parent_festival: true`, and the official season URL. Create an **individual production record** for each qualifying named performance, reading, workshop, panel, exhibition, creator-attended screening, or other programme item only when its own official detail page gives an exact date and primary URL. Set `parent_id` to the parent record’s stable ID. Do not turn a lineup card, a programme category, or an undated listing into an event.
+
+Screening gate: publish a screening only when a creator or principal collaborator is confirmed to attend for a conversation, introduction, Q&A, or comparable encounter. A normal screening without confirmed participation is excluded. Exhibitions and residencies require exact start and end dates.
 
 ## The polymyth-broadened seminar test
 
@@ -29,13 +38,24 @@ A festival qualifies if **any one** of the following holds.
 
 The line is fuzzy. When uncertain, capture and flag with lower confidence.
 
+## Coverage rotation and regional anchors
+
+The festival roster is intentionally wider than one bounded harvest. The runner supplies `SHARD` from 0 through 6. Crawl these official-source groups:
+
+1. **Every-run regional anchors.** Toronto Fringe, SummerWorks, Brott Music Festival, Kingston WritersFest, Montréal International Jazz Festival, OSHEAGA, MUTEK Montréal, and Fantasia. These sources establish the Toronto, Southern Ontario, Kingston, and Montréal baseline and run every day.
+2. **This run’s shard.** From the remaining `primary_sources` in `festivals-sources.json`, crawl only entries whose zero-based position satisfies `position % 7 == SHARD`. Record the others as `skipped-shard` in the source accounting.
+
+Across seven consecutive runs, the full festival roster is covered. Spend the bounded budget on the every-run anchors before the assigned shard. A source that cannot be reached receives an explicit `unreachable` status; it does not collapse the whole harvest.
+
+Every public programme must follow this hierarchy: the season itself is exactly `type: "festival"` with `is_parent_festival: true`; every named, dated production that qualifies receives its own record and its own official detail-page URL. Preserve a subtype such as `festival-of-form`, `cultural-reproduction`, or `site-specific-art` only in `secondary_types`.
+
 ## Two-pass architecture (critical)
 
 This is a **scrape-within-scrape**. Two passes per source class.
 
 ### Pass 1 — Discovery
 
-Read `/scripts/festivals-sources.json`. The `discovery_aggregators` array lists ten aggregator sites. **Fetch each one** (use `WebFetch` against each `events_url` and each entry in `additional_urls`). From each aggregator page, extract a candidate list. Each candidate is:
+Read `/scripts/festivals-sources.json`. The `discovery_aggregators` array lists ten aggregator sites. **Fetch each assigned source** (use `WebFetch` against each `events_url` and each entry in `additional_urls`). From each aggregator page, extract a candidate list. Each candidate is:
 - Festival name
 - Provisional date or date window
 - A guess at the festival's official URL (if the aggregator names one)
@@ -43,7 +63,7 @@ Read `/scripts/festivals-sources.json`. The `discovery_aggregators` array lists 
 
 **Discard the aggregator content after Pass 1.** Do not retain aggregator URLs as `source_url` on any record. Aggregators are scaffolding. They are not citation targets.
 
-Also read the `primary_sources` array. Add each entry as a candidate even if no aggregator surfaced it. Many Tier-1 anchors will be captured both ways; deduplicate on festival name.
+Also read the assigned `primary_sources` entries. Add each assigned entry as a candidate even if no aggregator surfaced it. Many Tier-1 anchors will be captured both ways; deduplicate on festival name.
 
 Pass 1 output should be an in-memory candidate list, no records yet.
 
@@ -56,8 +76,8 @@ For each candidate, fetch its official site (`primary_sources[].events_url` if k
 - Is there a usable program of named events, or only the parent festival listing?
 
 For each confirmed festival, build records:
-- One **parent record** for the festival itself, with dates, official URL, type, polymyth-test classification, raw_excerpt from the official site, confidence 90+.
-- Up to five **child records** for headline named-program events within the festival (specific concerts, screenings with director Q&A, panels, etc.), each pointing to its own detail page on the official site if available.
+- One **parent festival record** for the festival itself, with `type: "festival"`, exact start/end dates, official URL, `is_parent_festival: true`, raw_excerpt from the official site, and confidence 90+.
+- **Individual production records** for qualifying named programme events (specific performances, readings, workshops, creator-attended screenings, panels, exhibitions). Each must point to its own detail page on the official site and carry an exact date. There is no arbitrary numeric cap; source precision determines quantity.
 
 **Drop candidates the official site does not confirm.** Stale aggregator entries (last year's festival rolled forward, festivals that announced 2026 cancellation, festivals whose 2026 edition is virtual-only or moved cities) die in Pass 2. The CSHPS-2025-rollover hazard documented in the seminars prompt applies here at festival scale.
 
@@ -73,6 +93,8 @@ Emit a single JSON object to `/tmp/festivals-output.json` matching `/data/semina
   "events": [ <record>, <record>, ... ]
 }
 ```
+
+The output JSON must also include a `source_yields` array with one entry for every `primary_sources` record, in roster order, using `crawled`, `skipped-shard`, `unreachable`, or `budget-exhausted`. This gives the next run a visible coverage ledger.
 
 Each record's `type` field uses one of the new polymyth types when appropriate:
 - `festival-of-form` for jazz festivals, music festivals, fringe theatre, literary festivals

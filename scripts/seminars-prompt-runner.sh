@@ -1,81 +1,79 @@
 #!/usr/bin/env bash
 #
-# Invokes claude -p with the seminars harvest prompt. Captures the JSON
-# output to /tmp/seminars-output.json, then runs the merge with
-# /data/manual-events.json into the final /seminars/events.json.
-#
-# Auth: CLAUDE_CODE_OAUTH_TOKEN env var, generated via `claude setup-token`.
-# Routes through Max 20x subscription; post June 15 2026 draws from the
-# $200/mo Agent SDK credit pool.
-
+# Bounded, observable polymythcalendar seminars harvest.
+# A failed agent run never merges partial data. Its transcript and status are
+# retained as a workflow artifact so the exact failure is visible in Actions.
 set -euo pipefail
 
 PROMPT_FILE="scripts/seminars-prompt.md"
 OUTPUT_FILE="/tmp/seminars-output.json"
 TODAY="$(date -u +'%Y-%m-%d')"
+RUN_ID="$(date -u +'%Y%m%dT%H%M%SZ')"
+LOG_DIR="${HARVEST_LOG_DIR:-data/harvest-runs}"
+LOG_FILE="${LOG_DIR}/seminars-${RUN_ID}.log"
+STATUS_FILE="${LOG_DIR}/seminars-${RUN_ID}.status.json"
+MAX_TURNS="${MAX_TURNS:-70}"
+MAX_BUDGET_USD="${MAX_BUDGET_USD:-2.50}"
+HARVEST_TIMEOUT_SECONDS="${HARVEST_TIMEOUT_SECONDS:-1500}"
+mkdir -p "${LOG_DIR}"
 
-echo "=== Seminars harvest run ${TODAY} ==="
-echo "Calling claude -p with prompt from ${PROMPT_FILE}"
-echo
+write_status() {
+  python3 - "$STATUS_FILE" "$1" "$TODAY" "$RUN_ID" "$LOG_FILE" "$MAX_TURNS" "$MAX_BUDGET_USD" "$HARVEST_TIMEOUT_SECONDS" <<'PY'
+import json, sys
+out, code, today, run_id, log, turns, budget, timeout = sys.argv[1:]
+json.dump({
+  "stream":"seminars", "run_id":run_id, "date_utc":today,
+  "exit_code":int(code), "log_file":log,
+  "max_turns":int(turns), "max_budget_usd":float(budget),
+  "timeout_seconds":int(timeout)
+}, open(out,"w"), indent=2)
+open(out,"a").write("\n")
+PY
+}
 
-# Sanity check: token must be set
 if [[ -z "${CLAUDE_CODE_OAUTH_TOKEN:-}" ]]; then
-    echo "ERROR: CLAUDE_CODE_OAUTH_TOKEN env var not set. Cannot authenticate." >&2
-    echo "Generate one locally with: claude setup-token" >&2
-    exit 1
+  echo "ERROR: CLAUDE_CODE_OAUTH_TOKEN env var not set. Generate it with claude setup-token." >&2
+  write_status 78
+  exit 78
 fi
 
-# Prepend the date context so Claude knows what "today" means inside the
-# headless run.
-# Weekly shard rotation: ISO week number mod 4 selects which quarter of the
-# non-priority roster this run crawls. Priority sources run every week per
-# the prompt's coverage rules. Full roster coverage completes every 4 weeks (roster grew to 221 on the 2026-06-11 base-expansion audit).
 SHARD=$(( 10#$(date -u +%V) % 4 ))
-echo "This run's shard: ${SHARD} (of 0,1,2,3)"
-
 PROMPT_BODY="Today is ${TODAY} (UTC). This run's SHARD number is ${SHARD}. $(cat "${PROMPT_FILE}")"
+echo "=== polymythcalendar seminars harvest ${RUN_ID}; shard ${SHARD}; max ${HARVEST_TIMEOUT_SECONDS}s ==="
 
-# Tool restrictions (audit fix #1):
-# --tools STRICTLY restricts which tools are available. --allowedTools only
-# skips confirmation prompts but does not bound capability. We need BOTH:
-#   --tools to cap the set
-#   --allowedTools to skip prompts on that set in headless mode
-# Tool set: WebFetch for venue pages, Read for sources.json, Write for the
-# output JSON, Bash for sha1 computation. WebSearch is REMOVED because it
-# bills as a separately-metered hosted tool.
-#
-# Budget cap (audit fix #2): --max-budget-usd 5.00 hard-stops the run if
-# a runaway loop or expensive web-fetch chain pushes past the projection.
-#
-# Model pin (audit fix #4): --model claude-sonnet-4-6 prevents silent drift
-# to Opus or future default models that would change cost projection.
-#
-# --permission-mode bypassPermissions ensures no interactive prompts hang
-# the headless run. Combined with the restrictive --tools set, this is safe.
-#
-# --max-turns 200 caps agentic iteration. The per-run crawl set under the
-# shard rules is roughly 80-90 sources (every-run set + one shard third),
-# so 200 turns leaves room for retries and detail-page follows. The dollar
-# budget remains the hard cost stop; turns only guard against stuck loops.
-# Budget is overridable per-dispatch via the BUDGET_USD env var.
-
-claude -p "${PROMPT_BODY}" \
+# Capture both stdout and stderr. `timeout` makes the job wall explicit; a
+# partial JSON file is intentionally never merged because it could erase
+# previously indexed records during a replacement merge.
+set +e
+timeout --signal=INT --kill-after=30s "${HARVEST_TIMEOUT_SECONDS}" \
+  claude -p "${PROMPT_BODY}" \
     --model claude-sonnet-4-6 \
     --tools "WebFetch,Read,Write,Bash" \
     --allowedTools "WebFetch,Read,Write,Bash" \
     --permission-mode bypassPermissions \
-    --max-turns 200 \
-    --max-budget-usd "${BUDGET_USD:-5.00}" \
-    || { echo "ERROR: claude -p invocation failed" >&2; exit 1; }
+    --max-turns "${MAX_TURNS}" \
+    --max-budget-usd "${MAX_BUDGET_USD}" 2>&1 | tee "${LOG_FILE}"
+CLAUDE_STATUS="${PIPESTATUS[0]}"
+set -e
+write_status "${CLAUDE_STATUS}"
 
-if [[ ! -f "${OUTPUT_FILE}" ]]; then
-    echo "ERROR: expected output file ${OUTPUT_FILE} not produced by Claude" >&2
-    echo "The agent may have exited without writing. Check token, prompt, and tool perms." >&2
-    exit 1
+if [[ "${CLAUDE_STATUS}" -ne 0 ]]; then
+  echo "ERROR: claude -p exited ${CLAUDE_STATUS}; data was left unchanged. Read ${LOG_FILE} and ${STATUS_FILE}." >&2
+  exit "${CLAUDE_STATUS}"
 fi
-
-EVENT_COUNT="$(python3 -c "import json; d=json.load(open('${OUTPUT_FILE}')); print(len(d.get('events',[])))")"
-echo "=== Claude harvest produced ${EVENT_COUNT} events ==="
-
-# Hand off to merge + validate
+if [[ ! -f "${OUTPUT_FILE}" ]]; then
+  echo "ERROR: expected output file ${OUTPUT_FILE} was not produced. Data was left unchanged. Read ${LOG_FILE}." >&2
+  exit 65
+fi
+python3 - "$OUTPUT_FILE" <<'PY'
+import json,sys
+p=sys.argv[1]
+try: data=json.load(open(p))
+except Exception as e: raise SystemExit(f"ERROR: malformed harvest JSON: {e}")
+if not isinstance(data,dict) or not isinstance(data.get('events'),list): raise SystemExit('ERROR: harvest JSON must be an object with an events array')
+for i,e in enumerate(data['events']):
+    if not isinstance(e,dict) or not all(e.get(k) for k in ('title','date','source_url')):
+        raise SystemExit(f'ERROR: harvest record {i} lacks title, date, or source_url')
+print(f"=== valid full harvest: {len(data['events'])} events ===")
+PY
 python3 scripts/merge_and_finalize.py

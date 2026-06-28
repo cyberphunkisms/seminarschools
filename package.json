@@ -7,10 +7,29 @@
     "verify:payments": "node scripts/verify-payments.js",
     "verify:leizu": "node scripts/verify-leizu-pipeline.js",
     "verify:leizu-experience": "node scripts/verify-leizu-experience.js",
-    "verify:all": "node scripts/verify-critical.js && node scripts/verify-geometry.js && node scripts/verify-register.js && node scripts/verify-payments.js && node scripts/verify-leizu-pipeline.js && node scripts/verify-leizu-experience.js",
-    "configure:stripe": "node scripts/configure-leizu-stripe-payment-links.mjs"
+    "verify:leizu-course-picker": "node scripts/verify-leizu-course-picker.js",
+    "verify:all": "node scripts/verify-critical.js && node scripts/verify-search-surface.js && node scripts/verify-calendar-aliases.js && node scripts/verify-calendar-data-parity.js && node scripts/verify-festival-parent-taxonomy.js && node scripts/verify-harvest-pipeline.js && node scripts/verify-polymythcalendar-name.js && node scripts/verify-geometry.js && node scripts/verify-register.js && node scripts/verify-payments.js && node scripts/verify-leizu-pipeline.js && node scripts/verify-leizu-experience.js && node scripts/verify-leizu-course-picker.js && node scripts/verify-leizu-simplified-chinese.js && node scripts/verify-leizu-persian.js && node scripts/verify-leizu-localization-funnel.js && node scripts/verify-home-map.js && node scripts/verify-bb-why.js && node scripts/verify-main-page.js && node scripts/verify-main-leizu-funnel.js && node scripts/verify-saul-page.js && node scripts/verify-site-integrity.js && node scripts/verify-professional-readiness.js && node scripts/verify-seo.js",
+    "configure:stripe": "node scripts/configure-leizu-stripe-payment-links.mjs",
+    "verify:leizu-zhs": "node scripts/verify-leizu-simplified-chinese.js",
+    "verify:leizu-fa": "node scripts/verify-leizu-persian.js",
+    "verify:bb-why": "node scripts/verify-bb-why.js",
+    "verify:leizu-localization-funnel": "node scripts/verify-leizu-localization-funnel.js",
+    "verify:home-map": "node scripts/verify-home-map.js",
+    "verify:main-page": "node scripts/verify-main-page.js",
+    "verify:main-leizu-funnel": "node scripts/verify-main-leizu-funnel.js",
+    "verify:saul": "node scripts/verify-saul-page.js",
+    "verify:site": "node scripts/verify-site-integrity.js",
+    "verify:professional": "node scripts/verify-professional-readiness.js",
+    "verify:seo": "node scripts/verify-seo.js",
+    "build:search": "node scripts/build-search-pages.js",
+    "verify:search-surface": "node scripts/build-search-pages.js --check && node scripts/verify-search-surface.js",
+    "verify:calendar-aliases": "node scripts/verify-calendar-aliases.js",
+    "verify:calendar-data": "node scripts/verify-calendar-data-parity.js",
+    "verify:harvest-pipeline": "node scripts/verify-harvest-pipeline.js",
+    "verify:polymythcalendar": "node scripts/verify-polymythcalendar-name.js",
+    "verify:festival-parent-taxonomy": "node scripts/verify-festival-parent-taxonomy.js"
   },
   "dependencies": {
-    "@netlify/blobs": "10.7.7"
+    "@netlify/blobs": "10.7.9"
   }
 }

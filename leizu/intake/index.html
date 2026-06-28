@@ -211,7 +211,9 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
       <input type="hidden" name="selected-course-names" id="selected-course-names" value="">
       <input type="hidden" name="selected-esl-course-ids" id="selected-esl-course-ids" value="">
       <input type="hidden" name="selected-esl-course-names" id="selected-esl-course-names" value="">
+      <input type="hidden" name="selected-path" id="selected-path" value="">
       <input type="hidden" name="source" id="source" value="">
+      <input type="hidden" name="language" id="language" value="">
       <p class="gotcha"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 
       <section class="selection-summary" id="selection-summary" hidden aria-labelledby="selection-summary-title"></section>
@@ -243,6 +245,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
           <option value="seminar">Applying for the Seminar</option>
           <option value="mulberry">Asking about the Mulberry Fund</option>
           <option value="question">I have a question before enrolling</option>
+          <option value="portfolio">Sharing a portfolio with Leizu</option>
           <option value="booking">I am enrolled and booking a session</option>
         </select>
       </div>
@@ -389,7 +392,9 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
   var selectedCourseNames = document.getElementById('selected-course-names');
   var selectedEslCourses = document.getElementById('selected-esl-course-ids');
   var selectedEslCourseNames = document.getElementById('selected-esl-course-names');
+  var selectedPath = document.getElementById('selected-path');
   var sourceInput = document.getElementById('source');
+  var languageInput = document.getElementById('language');
   var intakeId = document.getElementById('intake-id');
   var purpose = form.querySelector('[name="purpose"]');
   var subjects = form.querySelector('[name="subjects"]');
@@ -413,7 +418,9 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
     return 'leizu_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 14);
   }
   function getProduct(key){ return cfg && cfg.getProduct ? cfg.getProduct(key) : null; }
-  function hasCourseSelection(){ return Boolean(selectedCourses.value || selectedEslCourses.value); }
+  var pathLabels = { forest:'Forest Year', ib:'IB Diploma preparation', ossd:'OSSD preparation' };
+  function hasCourseSelection(){ return Boolean(selectedCourses.value || selectedEslCourses.value || (selectedPath && selectedPath.value)); }
+  function sourceRequiresReview(){ return Boolean(sourceInput && sourceInput.value === 'portfolio'); }
   function courseLabel(id){ return labels[id] || 'Selected course'; }
   function labelList(ids){ return ids.map(courseLabel); }
   function appendText(parent, tag, className, text){
@@ -448,12 +455,18 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
     var copy = document.getElementById('plan-picker-copy');
     var bubble = document.getElementById('enrol-bubble');
     var toggle = document.getElementById('bubble-toggle');
-    if(!copy) return;
-    if(hasCourseSelection() && !getProduct(selectedTier.value)){
-      copy.textContent = 'Your selected subjects are attached to this intake. Choose one published plan before you send it so secure payment can follow.';
-      if(bubble) bubble.classList.add('open');
+    if(!copy || !bubble) return;
+    if(sourceRequiresReview()){
+      bubble.hidden = true;
+      copy.textContent = 'Your portfolio receives a personal review before the portfolio rate and next step are confirmed.';
+      return;
+    }
+    bubble.hidden = false;
+    if(hasCourseSelection() && !getProduct(selectedTier.value) && !sourceRequiresReview()){
+      copy.textContent = 'Choose a published plan before you send it so secure payment can follow.';
+      bubble.classList.add('open');
       if(toggle) toggle.setAttribute('aria-expanded', 'true');
-    } else if(getProduct(selectedTier.value)) {
+    } else if(getProduct(selectedTier.value)){
       copy.textContent = 'Your plan is selected. Send the intake, then continue to secure payment.';
     } else {
       copy.textContent = 'Use this form for an inquiry, the Seminar Year, or a custom plan.';
@@ -471,14 +484,16 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
     if(selectedEslCourseNames) selectedEslCourseNames.value = eslCourseNames.join(', ');
 
     box.replaceChildren();
-    if(!product && !courses.length && !eslCourses.length){
+    if(!product && !courses.length && !eslCourses.length && !sourceRequiresReview()){
       box.hidden = true;
       updateSubjectPrompt();
       updatePlanPicker();
       return;
     }
     appendText(box, 'div', 'selection-summary-title', 'Your selection');
+    if(sourceRequiresReview()) appendCourseRow(box, 'Route', ['Portfolio intake']);
     if(product) appendCourseRow(box, 'Plan', [product.label]);
+    if(selectedPath && pathLabels[selectedPath.value]) appendCourseRow(box, 'Selected path', [pathLabels[selectedPath.value]]);
     appendCourseRow(box, 'Selected subjects', courseNames);
     appendCourseRow(box, 'ESL support', eslCourseNames);
     appendText(box, 'p', 'selection-summary-note', 'These choices are included with your intake. Add context below.');
@@ -488,7 +503,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
   }
   function setTier(key){
     var product = getProduct(key);
-    if(!product) return false;
+    if(sourceRequiresReview() || !product) return false;
     selectedTier.value = key;
     if(purpose && product.purpose) purpose.value = product.purpose;
     updateSummary();
@@ -514,9 +529,10 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
   function showThanks(product){
     var wrap = document.getElementById('intake-wrap');
     var thanks = document.getElementById('thanks');
+    var portfolioRoute = sourceRequiresReview();
     if(wrap) wrap.style.display = 'none';
     if(thanks) thanks.classList.add('show');
-    if(product){
+    if(product && !portfolioRoute){
       var email = form.querySelector('[name="email"]').value.trim();
       thanksTitle.textContent = 'Your intake is in.';
       thanksCopy.textContent = 'Your plan is ready. Continue to secure Stripe payment. After payment, you will choose a session time.';
@@ -525,10 +541,11 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
       paymentStep.hidden = false;
       offerNote.hidden = true;
     } else {
-      thanksTitle.textContent = 'Your message is in.';
-      thanksCopy.textContent = 'I will read what you sent and reply with the right next step.';
+      thanksTitle.textContent = portfolioRoute ? 'Your portfolio intake is in.' : 'Your message is in.';
+      thanksCopy.textContent = portfolioRoute ? 'I will review the work you shared and confirm the portfolio rate and next step.' : 'I will read what you sent and reply with the right next step.';
       paymentStep.hidden = true;
       offerNote.hidden = false;
+      offerNote.textContent = portfolioRoute ? 'Your work receives a personal review before payment.' : 'I will read what you sent and reply with the right plan, usually within one day.';
     }
     window.scrollTo({top:0, behavior:'smooth'});
   }
@@ -539,7 +556,9 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
     if(selectedTier.value) query.set('tier', selectedTier.value);
     if(selectedCourses.value) query.set('courses', selectedCourses.value);
     if(selectedEslCourses.value) query.set('esl_courses', selectedEslCourses.value);
+    if(selectedPath && pathLabels[selectedPath.value]) query.set('path', selectedPath.value);
     if(sourceInput && sourceInput.value) query.set('source', sourceInput.value);
+    if(languageInput && /^(fr|zh|zhs|fa)$/.test(languageInput.value)) query.set('lang', languageInput.value);
     return '/leizu/intake/?' + query.toString();
   }
 
@@ -547,11 +566,22 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
   if(!intakeId.value) intakeId.value = createIntakeId();
   selectedCourses.value = listFromParam(params.get('courses')).join(',');
   selectedEslCourses.value = listFromParam(params.get('esl_courses')).join(',');
+  var incomingPath = String(params.get('path') || '').toLowerCase();
+  if(selectedPath) selectedPath.value = pathLabels[incomingPath] ? incomingPath : '';
+  var preferredLanguage = String(params.get('lang') || localStorage.getItem('leizu-lang') || 'en').toLowerCase();
+  if(!/^(en|fr|zh|zhs|fa)$/.test(preferredLanguage)) preferredLanguage = 'en';
+  if(languageInput) languageInput.value = preferredLanguage;
+  try { localStorage.setItem('leizu-lang', preferredLanguage); } catch(e){}
   var source = String(params.get('source') || '').toLowerCase();
-  if(sourceInput) sourceInput.value = /^(seminar|mulberry|contact)$/.test(source) ? source : '';
-  if(purpose && source === 'seminar') purpose.value = 'seminar';
-  if(purpose && source === 'mulberry') purpose.value = 'mulberry';
-  if(purpose && source === 'contact') purpose.value = 'question';
+  var sourcePurposes = { seminar:'seminar', mulberry:'mulberry', contact:'question', portfolio:'portfolio' };
+  if(sourceInput) sourceInput.value = Object.prototype.hasOwnProperty.call(sourcePurposes, source) ? source : '';
+  if(purpose && sourcePurposes[source]) purpose.value = sourcePurposes[source];
+  if(source === 'portfolio'){
+    var intakeHeading = document.querySelector('.masthead-en');
+    var intakeSubheading = document.querySelector('.masthead-sub');
+    if(intakeHeading) intakeHeading.textContent = 'Share the work that helps tell the story.';
+    if(intakeSubheading) intakeSubheading.textContent = 'Add a small selection or a link. I will review it before confirming the portfolio rate and next step.';
+  }
   setTier(params.get('tier'));
   updateSummary();
 
@@ -658,6 +688,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
   }
 })();
 </script>
+<script src="/leizu/language-state.js?v=cl96" defer></script>
 <script src="/js/theme.js?v=cl91" defer></script>
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
