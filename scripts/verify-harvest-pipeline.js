@@ -23,6 +23,9 @@ for(const workflow of ['.github/workflows/scrape-seminars.yml','.github/workflow
  need(s,'actions/upload-artifact@v4',workflow,problems);
  need(s,'concurrency:',workflow,problems);
  need(s,'CLAUDE_CODE_OAUTH_TOKEN',workflow,problems);
+ need(s,'Install Claude Code CLI',workflow,problems);
+ need(s,'npm install -g @anthropic-ai/claude-code',workflow,problems);
+ need(s,'claude --version',workflow,problems);
  need(s,'Preserve harvest diagnostics',workflow,problems);
 }
 const seminarPrompt=read('scripts/seminars-prompt.md');

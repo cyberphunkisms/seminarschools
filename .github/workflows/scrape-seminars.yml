@@ -37,6 +37,10 @@ jobs:
         run: pip install jsonschema
       - name: Install site dependencies
         run: npm ci
+      - name: Install Claude Code CLI
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          claude --version
       - name: Harvest seminars
         run: bash scripts/seminars-prompt-runner.sh
       - name: Verify generated calendar
