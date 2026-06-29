@@ -12,6 +12,44 @@
 /
   Cache-Control: no-cache
 
+# Fresh calendar and writing shortcut HTML routes
+/polymythseminars/
+  Cache-Control: no-cache
+
+/writingclub/
+  Cache-Control: no-cache
+
+/writingkids/
+  Cache-Control: no-cache
+
+/writingjuniors/
+  Cache-Control: no-cache
+
+/writingteens/
+  Cache-Control: no-cache
+
+/writinggrads/
+  Cache-Control: no-cache
+
+
+/university/
+  Cache-Control: no-cache
+
+/philosophy/
+  Cache-Control: no-cache
+
+/humanities/
+  Cache-Control: no-cache
+
+/cfps/
+  Cache-Control: no-cache
+
+/lectures/
+  Cache-Control: no-cache
+
+/fellowships/
+  Cache-Control: no-cache
+
 # Security headers — all paths
 /*
   X-Frame-Options: SAMEORIGIN

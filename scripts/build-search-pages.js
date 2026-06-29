@@ -305,7 +305,7 @@ function staticEventCard(event) {
   const route = `/polymythseminars/events/${slug(event.id || event.title)}-${hash(event.id || event.title)}/`;
   const date = event.end_date ? `${humanDate(event.date)} to ${humanDate(event.end_date)}` : humanDate(event.date);
   const by = event.speaker_or_director ? `<div class="event-speaker">${esc(event.speaker_or_director)}</div>` : '';
-  return `<article class="event" data-date="${attr(event.date || '')}" data-type="${attr(event.type || 'other')}"><div class="date-col"><span class="mon">${esc(new Intl.DateTimeFormat('en-CA',{month:'short',timeZone:'America/Toronto'}).format(new Date(event.date)))}</span><span class="day">${esc(new Intl.DateTimeFormat('en-CA',{day:'2-digit',timeZone:'America/Toronto'}).format(new Date(event.date)))}</span></div><div class="body-col"><h2 class="title"><a href="${route}">${esc(event.title)}</a></h2>${by}<div class="event-meta">${esc(date)}${event.venue ? ` · ${esc(event.venue)}` : ''}</div>${event.description ? `<p class="event-desc">${esc(cleanSentence(event.description,260))}</p>` : ''}</div></article>`;
+  return `<article class="event" data-date="${attr(event.date || '')}" data-type="${attr(event.type || 'other')}"><div class="date-col"><span class="day">${esc(new Intl.DateTimeFormat('en-CA',{day:'2-digit',timeZone:'America/Toronto'}).format(new Date(event.date)))}</span><span class="mon">${esc(new Intl.DateTimeFormat('en-CA',{month:'short',timeZone:'America/Toronto'}).format(new Date(event.date)))}</span></div><div class="body-col"><h2 class="title"><a href="${route}">${esc(event.title)}</a></h2>${by}<div class="event-meta">${esc(date)}${event.venue ? ` · ${esc(event.venue)}` : ''}</div>${event.description ? `<p class="event-desc">${esc(cleanSentence(event.description,260))}</p>` : ''}</div></article>`;
 }
 function eventEligible(event) {
   const start = new Date(event.date || '');
@@ -326,7 +326,7 @@ function injectEventRoot(events) {
   const markup=`<div class="ssr-event-list" data-ssr-events="true"><p class="sr-only">${current.length} upcoming calendar entries are listed below. Use the controls above to filter them when JavaScript is available.</p>${current.map(staticEventCard).join('\n')}</div>`;
   if (!html.includes('id="eventsContainer"')) throw new Error('Calendar event injection point is missing');
   html=replaceDivInner(html, 'eventsContainer', `<!-- SS_STATIC_EVENTS_START -->${markup}<!-- SS_STATIC_EVENTS_END -->`);
-  html=html.replace('<div class="count-line" id="countLine">Loading events…</div>', `<div class="count-line" id="countLine">${current.length} upcoming events</div>`);
+  html=html.replace(/<div class="count-line" id="countLine"[^>]*>[\s\S]*?<\/div>/, `<div class="count-line" id="countLine" role="status" aria-live="polite" aria-atomic="true">${current.length} upcoming events</div>`);
   write(rel,html);
   return current;
 }

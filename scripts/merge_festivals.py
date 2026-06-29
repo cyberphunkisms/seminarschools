@@ -408,6 +408,7 @@ def main():
         ["node", str(ROOT / "scripts" / "merge-festival-harvest-into-calendar.js")],
         ["node", str(ROOT / "scripts" / "sync-calendar-data.js")],
         ["node", str(ROOT / "scripts" / "build-search-pages.js")],
+        ["node", str(ROOT / "scripts" / "build-writing-shortcuts.js")],
     ]:
         result = _subprocess.run(command, cwd=ROOT, check=False)
         if result.returncode:

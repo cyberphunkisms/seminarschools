@@ -23,6 +23,7 @@ Status as of 2026-06-09: all twelve passes researched and wired.
 | A6 Calls for papers | cfp | GLOBAL (deadline answerable from anywhere) | researched + wired (PhilEvents, UPenn, H-Net, WikiCFP, CFPList, association pages). Prompt rule rewritten global |
 | A7 Writing & literary contests | contest | GLOBAL | researched + wired (Poets & Writers, Reedsy, Submittable, Winning Writers, CBC, CAA). Prompt rule rewritten global |
 | A8 Film screenings with discussion | screening | Toronto | researched + wired (Fox, Innis/CSI [closed May 4–Aug 21 2026], TMU Image Arts, York/Nat Taylor, AGO cinema, Goethe) |
+| A9 Global university philosophy & humanities | lecture, conference, workshop, talk, panel, symposium, colloquium, cfp | worldwide university, philosophy, humanities, and opportunity sources | researched + wired 2026-06-29 (UCHV, major humanities centers, philosophy societies, CFP networks, fellowships; routes `/university/`, `/philosophy/`, `/humanities/`, `/cfps/`, `/lectures/`, `/fellowships/`) |
 
 ## Pipeline B — festivals (`festivals-sources.json`)
 

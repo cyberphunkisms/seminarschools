@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Create a bookwormburrows Wormcard</title>
-<meta name="description" content="Make a wormcard inside bookwormburrows, laying eleven cosmological traditions over your birth data and choosing among thirty-eight burrowing animals, then smashing characters together without limit through a matrix terminal interface.">
+<title>Bookwormcard · Make a bookwormburrows Character Card</title>
+<meta name="description" content="Create a Bookwormcard for BookwormBurrows, the BB character gate where reading, writing, admired figures, burrowing animals, and classroom identity become a playable wormcard.">
 <link rel="canonical" href="https://seminarschools.com/bookwormcard/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seminarschools.com/bookwormcard/">
@@ -16,6 +16,7 @@
 <meta name="twitter:title" content="bookwormburrows, make your wormcard">
 <meta name="twitter:description" content="A pedagogical depth game. Smash the figures you admire into a character that is none of them, built from eleven cosmological traditions laid over your birth data.">
 <meta name="twitter:image" content="https://seminarschools.com/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Bookwormcard","url":"https://seminarschools.com/bookwormcard/","applicationCategory":"EducationalApplication","operatingSystem":"Web","description":"Bookwormcard is the BookwormBurrows character gate, a writing-based interactive activity that creates a portable wormcard for BB sessions.","isPartOf":{"@type":"CreativeWork","name":"BookwormBurrows","url":"https://seminarschools.com/bb/"},"educationalUse":["Character creation","Reflective writing","Reading game preparation"],"audience":{"@type":"EducationalAudience","educationalRole":"student"}}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +33,7 @@
     --glow:0 0 7px rgba(255,62,224,0.55);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:var(--bg);color:var(--fg);font-family:'VT323',monospace;font-size:20px;line-height:1.4;height:100vh;overflow:hidden}
+  html,body{background:var(--bg);color:var(--fg);font-family:'VT323',monospace;font-size:20px;line-height:1.4;min-height:100svh;overflow-x:hidden;overflow-y:auto}
   body{
     background:
       linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.15) 50%) 0 0/100% 3px,
@@ -50,16 +51,16 @@
     font-family:'VT323',monospace;
   }
   #toggles button, #toggles a{
-    background:transparent;border:none;
-    color:var(--fg-darker);font-family:'VT323',monospace;font-size:0.95rem;
-    padding:0;cursor:pointer;text-shadow:none;
-    line-height:1.2;
-    text-decoration:none;display:inline;
+    background:rgba(0,0,0,0.22);border:1px solid rgba(177,79,216,0.28);
+    color:var(--fg-dim);font-family:'VT323',monospace;font-size:1.05rem;
+    min-width:2.1rem;min-height:2rem;padding:0.18rem 0.45rem;cursor:pointer;text-shadow:none;
+    line-height:1.2;border-radius:0.2rem;
+    text-decoration:none;display:inline-flex;align-items:center;justify-content:center;
     letter-spacing:0.5px;
   }
   #toggles button:hover, #toggles a:hover{color:var(--fg);text-shadow:var(--glow)}
   #toggles button[aria-pressed="true"]{
-    color:var(--accent);background:transparent;border:none;text-shadow:0 0 4px rgba(255,176,0,0.6);
+    color:var(--accent);background:rgba(139,92,246,0.16);border-color:var(--accent);text-shadow:0 0 4px rgba(255,176,0,0.6);
   }
   /* CL-8: high-contrast mode */
   body.contrast{
@@ -67,10 +68,22 @@
     --accent:#ffd700;--line:#fff;
   }
   body.contrast::after,body.contrast::before{display:none}
-  /* CL-7: ESL mode (slight visual hint) */
-  body.esl #chat .question{
-    border-left:3px solid var(--fg-dim);padding-left:0.5rem;
+  /* Explicit Bookwormcard theme, separate from high-contrast mode. */
+  body.light-mode{
+    --bg:#f9f5e8;--fg:#253018;--fg-dim:#56643c;--fg-darker:#8c936e;
+    --accent:#6b3fb5;--danger:#9b1c31;--line:#c9c19e;--glow:none;
+    background:var(--bg);text-shadow:none;
   }
+  body.light-mode #rain-canvas{opacity:0.12}
+  body.light-mode .preview{background:rgba(255,255,255,0.45)}
+  body.light-mode #card-preview{background:rgba(255,255,255,0.55)}
+  body.light-mode #toggles button, body.light-mode #toggles a{background:rgba(255,255,255,0.55)}
+  /* ESL/guided reading mode. It now changes behaviour, not only colour. */
+  body.esl #chat{line-height:1.62}
+  body.esl #chat .question{border-left:3px solid var(--accent);padding-left:0.5rem}
+  .esl-help{display:block;color:var(--accent);text-shadow:none;font-size:1rem;border-left:2px dotted var(--fg-darker);margin:0.2rem 0 0.55rem 0.5rem;padding-left:0.55rem;letter-spacing:0.02em}
+  body:not(.esl) .esl-help{display:none}
+
   /* CL-9: font-size scale steps */
   html.fs-small{font-size:16px}
   html.fs-large{font-size:22px}
@@ -123,9 +136,9 @@
   a{color:var(--fg);text-decoration:none;border-bottom:1px dotted var(--fg-dim)}
   a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 
-  .layout{display:flex;height:100vh;max-width:1400px;margin:0 auto}
-  .terminal{flex:1;padding:1.5rem 1.5rem 0.5rem;display:flex;flex-direction:column;min-width:0;height:100vh;overflow:hidden}
-  .preview{width:380px;border-left:1px solid var(--line);padding:1.5rem;display:flex;flex-direction:column;background:rgba(0,0,0,0.3);height:100vh;overflow:hidden}
+  .layout{display:flex;min-height:100svh;max-width:1400px;margin:0 auto}
+  .terminal{flex:1;padding:1.5rem 1.5rem 0.5rem;display:flex;flex-direction:column;min-width:0;min-height:100svh;overflow:hidden}
+  .preview{width:380px;border-left:1px solid var(--line);padding:1.5rem;display:flex;flex-direction:column;background:rgba(0,0,0,0.3);min-height:100svh;overflow:hidden}
 
   /* ============================================================
      BYPASS-MODE, empty terminal aesthetic for the intro screen.
@@ -804,12 +817,26 @@
   }
   /* card section divider */
   #card-preview .ascii-div{color:var(--fg-darker);text-shadow:none;font-size:0.85rem;letter-spacing:0;}
+
+  /* Static/no-JS and crawler-readable context. Hidden only once the runtime boots. */
+  #static-bookwormcard-context{
+    max-width:980px;margin:4rem auto 2rem;padding:2rem 1.5rem;border:1px solid var(--line);
+    background:rgba(0,0,0,0.28);color:var(--fg);text-shadow:none;line-height:1.55;
+  }
+  #static-bookwormcard-context h1{font-size:2.2rem;line-height:1.05;margin-bottom:0.8rem;text-shadow:var(--glow)}
+  #static-bookwormcard-context h2{font-size:1.35rem;margin:1.25rem 0 0.35rem;color:var(--accent)}
+  #static-bookwormcard-context p,#static-bookwormcard-context li{font-size:1.05rem;margin-bottom:0.45rem}
+  #static-bookwormcard-context ul{padding-left:1.2rem;margin:0.4rem 0 0.9rem}
+  #static-bookwormcard-context .sample-card{border:1px dashed var(--fg-darker);padding:0.9rem;margin-top:0.6rem;background:rgba(0,0,0,0.22);white-space:normal}
+  body.game-ready #static-bookwormcard-context{display:none}
+  .sr-status{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  @media (max-width:900px){#static-bookwormcard-context{margin:1rem;padding:1.1rem}.layout{min-height:auto}.terminal,.preview{min-height:auto}}
 </style>
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
 <link rel="stylesheet" href="/css/theme.css?v=cl91">
 </head>
-<body class="bypass-mode">
+<body class="bypass-mode bookwormcard-page">
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:none;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 <!-- bb* QR logo -->
 <a href="/bookwormcard/" title="Bookwormcard. Scan with phone or click to open." aria-label="Bookwormburrows ouroboros QR. Links to bookwormcard." style="position:fixed;top:20px;right:20px;width:72px;height:72px;z-index:9999;display:none;background:transparent;border:none;line-height:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);border-radius:6px;overflow:hidden;"><img loading="lazy" src="/bookwormcard/qr-ouroboros-indra.png" alt="bb* ouroboros QR logo" style="width:100%;height:100%;display:block;"></a>
@@ -833,6 +860,33 @@
   <span class="banner-body">mobile cannot save your wormcard. play to see what bb is, then open <strong>seminarschools.com/bb</strong> on a laptop or desktop to take your card.</span>
 </div>
 <a href="/bookwormcard/about/" class="bypass-help">[ what is this? ]</a>
+
+<section id="static-bookwormcard-context" aria-labelledby="bookwormcard-static-title">
+  <h1 id="bookwormcard-static-title">Bookwormcard is the character gate for BookwormBurrows</h1>
+  <p><strong>BB is the game. Bookwormcard is how a player becomes a character inside it.</strong> The page asks reflective questions, turns answers into a wormcard, and gives the player a portable PDF they can bring into <a href="/bb/">BookwormBurrows</a>, a classroom session, or an AI chat running the table.</p>
+  <h2>What it makes</h2>
+  <ul>
+    <li>A handle, burrowing animal, admired figures, traits, tensions, and writing-based identity material.</li>
+    <li>A printable and resumable wormcard that carries the player’s paragraphs.</li>
+    <li>A bridge from self-description into BB’s reading, writing, and role-play system.</li>
+  </ul>
+  <h2>Sample prompts</h2>
+  <ul>
+    <li>What should I call you?</li>
+    <li>Name someone you admire.</li>
+    <li>What quality do you want from them?</li>
+    <li>What fear, bond, flaw, or secret belongs on the card?</li>
+  </ul>
+  <h2>Before you play</h2>
+  <ul>
+    <li>Use <strong>ESL</strong> for plain-language help under the current question.</li>
+    <li>Use <strong>A−</strong> and <strong>A+</strong> for readable text size.</li>
+    <li>Use <strong>Light/Dark</strong> for theme and <strong>HC</strong> for high contrast.</li>
+    <li>Type <strong>static</strong> during play to turn off the optional AI reaction layer.</li>
+  </ul>
+  <div class="sample-card"><strong>Privacy/data note.</strong> Bookwormcard saves checkpoints in your browser so you can resume. Longer answers can be sent to the site’s AI function for reaction/stat help while the AI layer is active. The final card opens as a PDF/print file for you to save. Links: <a href="/bookwormcard/about/">about</a>, <a href="/bookwormcard/glossary/">glossary</a>, <a href="/bookwormcard/print/?blank=1">blank card</a>.</div>
+</section>
+<div id="display-status" class="sr-status" role="status" aria-live="polite"></div>
 
 <!-- HIDDEN STATIC FORM FOR NETLIFY DETECTION -->
 <form name="bookwormcard" hidden class="nl-form" aria-hidden="true">
@@ -930,10 +984,11 @@
 </form>
 
 <canvas id="rain-canvas"></canvas>
-<div id="toggles" role="toolbar" aria-label="display options">
-  <button id="t-esl" type="button" aria-pressed="false" title="simpler English" style="display:none"><span>ESL</span></button>
-  <button id="t-contrast" type="button" aria-pressed="false" title="high contrast"><span>◐</span></button>
-  <button id="t-fontminus" type="button" aria-label="smaller text" title="smaller text"><span>A-</span></button>
+<div id="toggles" role="toolbar" aria-label="Bookwormcard display options">
+  <button id="t-esl" type="button" aria-pressed="false" title="turn plain-language help on or off"><span>ESL</span></button>
+  <button id="t-theme" type="button" aria-pressed="false" title="switch light or dark mode"><span>☀</span></button>
+  <button id="t-contrast" type="button" aria-pressed="false" title="high contrast"><span>HC</span></button>
+  <button id="t-fontminus" type="button" aria-label="smaller text" title="smaller text"><span>A−</span></button>
   <button id="t-fontplus" type="button" aria-label="larger text" title="larger text"><span>A+</span></button>
   <a id="t-pdf" href="/bookwormcard/pdf/bookwormcard.pdf" target="_blank" rel="noopener noreferrer" aria-label="download blank Bookwormcard PDF" title="download blank Bookwormcard PDF"><span>PDF</span></a>
   <button id="t-print" type="button" aria-label="print options" title="print"><span>⎙</span></button>
@@ -942,7 +997,7 @@
 <div id="tier-cinematic"><div class="tier-text"></div></div>
 
 <div class="layout">
-  <h1 class="sr-only">Bookworm Card</h1>
+  <h1 class="sr-only">Bookwormcard · BookwormBurrows character gate</h1>
 <main class="terminal">
     <div class="header">
       <span>bookwormburrows · <b>/bookwormcard/</b></span>
@@ -952,7 +1007,7 @@
     <div id="input-area">
       <div id="prompt-line">
         <span class="prompt-arrow">›</span>
-        <input id="user-input" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="response">
+        <input id="user-input" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Bookwormcard response">
         <span id="cursor-block"></span>
       </div>
       <div id="word-count" aria-hidden="true"></div>
@@ -977,7 +1032,7 @@
       <span>your wormcard</span>
       <button type="button" class="legend-toggle" id="legend-toggle" aria-label="show visual legend" title="what the symbols mean">?</button>
     </div>
-    <pre id="card-preview"><span class="empty">building...</span></pre>
+    <pre id="card-preview"><span class="empty">your wormcard preview will build here.</span></pre>
     <div class="legend-panel" id="legend-panel" hidden></div>
   </aside>
 </div>
@@ -1894,18 +1949,93 @@ function loadToggles(){
 function saveToggles(t){
   try { localStorage.setItem(TOGGLES_KEY, JSON.stringify(t)); } catch(e){}
 }
+
+function getBookwormTheme(t){
+  if(t && (t.theme === 'light' || t.theme === 'dark')) return t.theme;
+  try {
+    var stored = localStorage.getItem('bb-theme') || localStorage.getItem('ss-theme') || localStorage.getItem('leizu-theme');
+    if(stored === 'light' || stored === 'dark') return stored;
+  } catch(e){}
+  return 'dark';
+}
+function saveBookwormTheme(theme){
+  try {
+    localStorage.setItem('bb-theme', theme);
+    localStorage.setItem('ss-theme', theme);
+    localStorage.setItem('leizu-theme', theme);
+  } catch(e){}
+}
+function isEslOn(){ return document.body.classList.contains('esl'); }
+function announceDisplay(text){
+  var el = document.getElementById('display-status');
+  if(el) el.textContent = text;
+}
+function stripForEsl(html){
+  return String(html || '').replace(/<[^>]*>/g,' ').replace(/&middot;/g,'·').replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim().toLowerCase();
+}
+function eslExplanationFor(html){
+  var s = stripForEsl(html);
+  if(!s) return '';
+  if(s.indexOf('what should i call you') >= 0) return 'Plain English: type the name you want on your card.';
+  if(s.indexOf('what email') >= 0) return 'Plain English: type an email for the card, or type skip.';
+  if(s.indexOf('what year were you born') >= 0) return 'Plain English: type your birth year using four numbers.';
+  if(s.indexOf('what month') >= 0) return 'Plain English: choose or type your birth month.';
+  if(s.indexOf('what day') >= 0) return 'Plain English: type the day of the month you were born.';
+  if(s.indexOf('what hour') >= 0) return 'Plain English: type the hour from 0 to 23, or type skip.';
+  if(s.indexOf('what minute') >= 0) return 'Plain English: type the minute from 0 to 59, or type skip.';
+  if(s.indexOf('what city were you born') >= 0) return 'Plain English: type the city and country, or type skip.';
+  if(s.indexOf('pick your animal') >= 0) return 'Plain English: use left and right, then press enter.';
+  if(s.indexOf('name someone you admire') >= 0) return 'Plain English: name a real or fictional person you like or respect.';
+  if(s.indexOf('what quality') >= 0) return 'Plain English: write the trait you want from that person.';
+  if(s.indexOf('eight questions ahead') >= 0 || s.indexOf('six more sections') >= 0) return 'Plain English: answer what you can. You can type skip or finish.';
+  if(s.indexOf('press enter') >= 0) return 'Plain English: press Enter to continue.';
+  if(s.length > 18) return 'Plain English: answer in your own words. A short answer is okay. Type skip if you want to move on.';
+  return '';
+}
+function addEslHelperAfter(line, html){
+  if(!line) return;
+  var msg = eslExplanationFor(html);
+  if(!msg) return;
+  var help = document.createElement('span');
+  help.className = 'line esl-help';
+  help.textContent = msg;
+  line.insertAdjacentElement('afterend', help);
+  scrollChatBottom();
+}
+function simplifyPromptHint(hint){
+  if(!isEslOn() || !hint) return hint;
+  return String(hint)
+    .replace(/free text/g, 'write anything')
+    .replace(/type · skip · why · finish/g, 'answer · skip · why · finish')
+    .replace(/type · skip · why/g, 'answer · skip · why')
+    .replace(/type · skip/g, 'answer · skip')
+    .replace(/letters numbers _ -  no spaces/g, 'name for your card')
+    .replace(/real or fictional · browse · or skip to finish smashing/g, 'person you admire · browse · skip')
+    .replace(/1920 - 2030/g, 'birth year')
+    .replace(/city, country · or skip/g, 'city, country · skip');
+}
 function applyToggles(){
   var t = loadToggles();
+  var theme = getBookwormTheme(t);
   document.body.classList.toggle('esl', !!t.esl);
   document.body.classList.toggle('contrast', !!t.contrast);
+  document.body.classList.toggle('light-mode', theme === 'light');
+  document.body.classList.toggle('dark-mode', theme !== 'light');
+  document.documentElement.setAttribute('data-bw-theme', theme);
   document.documentElement.classList.remove('fs-small','fs-large','fs-xlarge');
   if(t.fontSize === 'small') document.documentElement.classList.add('fs-small');
   else if(t.fontSize === 'large') document.documentElement.classList.add('fs-large');
   else if(t.fontSize === 'xlarge') document.documentElement.classList.add('fs-xlarge');
   // Update button visual state
   var bEsl = document.getElementById('t-esl');
+  var bTheme = document.getElementById('t-theme');
   var bC = document.getElementById('t-contrast');
   if(bEsl) bEsl.setAttribute('aria-pressed', t.esl?'true':'false');
+  if(bTheme){
+    bTheme.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+    bTheme.setAttribute('aria-label', theme === 'dark' ? 'Switch Bookwormcard to light mode' : 'Switch Bookwormcard to dark mode');
+    bTheme.querySelector('span').textContent = theme === 'dark' ? '☀' : '☾';
+  }
   if(bC) bC.setAttribute('aria-pressed', t.contrast?'true':'false');
 }
 function toggleEsl(){
@@ -1913,12 +2043,23 @@ function toggleEsl(){
   t.esl = !t.esl;
   saveToggles(t);
   applyToggles();
+  announceDisplay(t.esl ? 'ESL help on' : 'ESL help off');
 }
 function toggleContrast(){
   var t = loadToggles();
   t.contrast = !t.contrast;
   saveToggles(t);
   applyToggles();
+  announceDisplay(t.contrast ? 'High contrast on' : 'High contrast off');
+}
+function toggleTheme(){
+  var t = loadToggles();
+  var next = getBookwormTheme(t) === 'dark' ? 'light' : 'dark';
+  t.theme = next;
+  saveBookwormTheme(next);
+  saveToggles(t);
+  applyToggles();
+  announceDisplay(next === 'dark' ? 'Dark mode on' : 'Light mode on');
 }
 function bumpFontSize(delta){
   var t = loadToggles();
@@ -1928,6 +2069,7 @@ function bumpFontSize(delta){
   t.fontSize = sizes[idx];
   saveToggles(t);
   applyToggles();
+  announceDisplay('Text size ' + t.fontSize);
 }
 
 // Print/PDF, open browser print dialog. Print-specific CSS handles formatting.
@@ -2095,10 +2237,13 @@ function appendLine(text, opts){
   chatEl.appendChild(line);
   if(opts.instant){
     line.innerHTML = text;
+    if(opts.question) addEslHelperAfter(line, text);
     scrollChatBottom();
     return Promise.resolve();
   }
-  return typeInto(line, text, opts.speed||30);
+  return typeInto(line, text, opts.speed||30).then(function(){
+    if(opts.question) addEslHelperAfter(line, text);
+  });
 }
 
 // ============================================================
@@ -2218,6 +2363,7 @@ function setPrompt(hint, multiline){
   } else {
     inputEl.tagName === 'INPUT' || swapToInput();
   }
+  hint = simplifyPromptHint(hint);
   if(hint){
     placeholderEl.textContent = hint;
     placeholderEl.classList.add('visible');
@@ -2225,6 +2371,7 @@ function setPrompt(hint, multiline){
     placeholderEl.classList.remove('visible');
     placeholderEl.textContent = '';
   }
+  inputEl.setAttribute('aria-label', 'Bookwormcard response' + (hint ? ': ' + hint : ''));
   inputEl.focus();
 }
 
@@ -2234,7 +2381,7 @@ function swapToTextarea(){
   newEl.className = 'multiline';
   newEl.setAttribute('autocomplete','off');
   newEl.setAttribute('spellcheck','false');
-  newEl.setAttribute('aria-label','response');
+  newEl.setAttribute('aria-label','Bookwormcard response');
   newEl.rows = 3;
   inputEl.parentNode.replaceChild(newEl, inputEl);
   inputEl = newEl;
@@ -2247,7 +2394,7 @@ function swapToInput(){
   newEl.setAttribute('autocomplete','off');
   newEl.setAttribute('autocapitalize','off');
   newEl.setAttribute('spellcheck','false');
-  newEl.setAttribute('aria-label','response');
+  newEl.setAttribute('aria-label','Bookwormcard response');
   inputEl.parentNode.replaceChild(newEl, inputEl);
   inputEl = newEl;
   attachInputHandler();
@@ -4536,9 +4683,11 @@ function buildQualityHistorySummary(){
 // BOOT
 // ============================================================
 window.addEventListener('load', function(){
+  document.body.classList.add('game-ready');
   renderProgressDots();
   applyToggles();
   document.getElementById('t-esl').addEventListener('click', toggleEsl);
+  document.getElementById('t-theme').addEventListener('click', toggleTheme);
   document.getElementById('t-contrast').addEventListener('click', toggleContrast);
   document.getElementById('t-fontminus').addEventListener('click', function(){ bumpFontSize(-1); });
   document.getElementById('t-fontplus').addEventListener('click', function(){ bumpFontSize(1); });

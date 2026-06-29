@@ -1,3 +1,25 @@
+/POLYMYTHCALENDAR_SCRAPER_FAILURE_HARDENING_AUDIT.md    /404.html    404!
+/POLYMYTHCALENDAR_SCRAPE_WORKFLOW_AUDIT_2026-06-29.md  /404.html  404!
+/POLYMYTHCALENDAR_SCRAPE_WORKFLOW_AUDIT_2026-06-29.json  /404.html  404!
+/POLYMYTHCALENDAR_SCRAPER_FAILURE_FIX_AUDIT.json  /404.html  404!
+/POLYMYTHCALENDAR_SCRAPER_FAILURE_FIX_AUDIT.md  /404.html  404!
+# Forced blocks for root audit and operator handoff artifacts
+/SETUP.md  /404.html  404!
+/BOOKWORMCARD_TECHNICAL_AUDIT.md  /404.html  404!
+/CRAWLABILITY_INDEXATION_AUDIT.md  /404.html  404!
+/POLYMYTHCALENDAR_BACKBONE_AUDIT.json  /404.html  404!
+/POLYMYTHCALENDAR_BACKBONE_UPDATE_AUDIT.md  /404.html  404!
+/POLYMYTHCALENDAR_FULL_CRITIQUE_AUDIT.md  /404.html  404!
+/POLYMYTHCALENDAR_SCRAPER_LAYMAN_SETUP.md  /404.html  404!
+/POLYMYTHCALENDAR_YOUTH_WRITING_CONTESTS_UPDATE_AUDIT.json  /404.html  404!
+/POLYMYTHCALENDAR_YOUTH_WRITING_CONTESTS_UPDATE_AUDIT.md  /404.html  404!
+/TYPOGRAPHY_AND_CONTROLS_AUDIT.md  /404.html  404!
+/VERIFY_ALL_OUTPUT.txt  /404.html  404!
+/WRITING_SHORTCUT_ROUTES_AUDIT.json  /404.html  404!
+/WRITING_SHORTCUT_ROUTES_AUDIT.md  /404.html  404!
+/POLYMYTHCALENDAR_TECHNICAL_AUDIT_2026-06-29.md  /404.html  404!
+/POLYMYTHCALENDAR_TECHNICAL_AUDIT_2026-06-29.json  /404.html  404!
+
 # Username-alias permanent redirects to canonical CV
 /saulnassau   /saul   301
 /saulkarim    /saul   301
@@ -91,8 +113,6 @@
 /events       /polymythseminars/    301
 /events/      /polymythseminars/    301
 /events/*     /polymythseminars/    301
-/lectures     /polymythseminars/    301
-/lectures/    /polymythseminars/    301
 /talks        /polymythseminars/    301
 /talks/       /polymythseminars/    301
 /whats-on     /polymythseminars/    301
@@ -179,3 +199,54 @@
 # Mephydata activation pointer retired into the methodologylist mirror (catches old inbound links)
 /activatemephydata    /polymyth/methodologylist.txt    301
 /activatemephydata/   /polymyth/methodologylist.txt    301
+
+# Youth writing competition shortcut routes, one-slash spoken URLs
+/writingclub     /writingclub/     301
+/writingkids     /writingkids/     301
+/writingjuniors  /writingjuniors/  301
+/writingteens    /writingteens/    301
+/writinggrads    /writinggrads/    301
+
+# University philosophy and humanities shortcut routes, one-slash spoken URLs
+/university     /university/     301
+/philosophy     /philosophy/     301
+/humanities     /humanities/     301
+/cfps     /cfps/     301
+/lectures     /lectures/     301
+/fellowships     /fellowships/     301
+
+
+# Operator/audit artifacts blocked from public serving
+/POLYMYTHCALENDAR_SCRAPER_FAILURE_FIX_AUDIT.json    /404.html    404!
+/POLYMYTHCALENDAR_SCRAPER_FAILURE_FIX_AUDIT.md    /404.html    404!
+
+# Root audit/setup/operator artifacts blocked from public serving
+/BOOKWORMCARD_TECHNICAL_AUDIT.md /404.html 404!
+/CRAWLABILITY_INDEXATION_AUDIT.md /404.html 404!
+/POLYMYTHCALENDAR_BACKBONE_AUDIT.json /404.html 404!
+/POLYMYTHCALENDAR_BACKBONE_UPDATE_AUDIT.md /404.html 404!
+/POLYMYTHCALENDAR_FULL_CRITIQUE_AUDIT.md /404.html 404!
+/POLYMYTHCALENDAR_SCRAPER_FAILURE_FIX_AUDIT.json /404.html 404!
+/POLYMYTHCALENDAR_SCRAPER_FAILURE_FIX_AUDIT.md /404.html 404!
+/POLYMYTHCALENDAR_SCRAPER_FAILURE_HARDENING_AUDIT.md /404.html 404!
+/POLYMYTHCALENDAR_SCRAPER_LAYMAN_SETUP.md /404.html 404!
+/POLYMYTHCALENDAR_SCRAPE_WORKFLOW_AUDIT_2026-06-29.json /404.html 404!
+/POLYMYTHCALENDAR_SCRAPE_WORKFLOW_AUDIT_2026-06-29.md /404.html 404!
+/POLYMYTHCALENDAR_TECHNICAL_AUDIT_2026-06-29.json /404.html 404!
+/POLYMYTHCALENDAR_TECHNICAL_AUDIT_2026-06-29.md /404.html 404!
+/POLYMYTHCALENDAR_YOUTH_WRITING_CONTESTS_UPDATE_AUDIT.json /404.html 404!
+/POLYMYTHCALENDAR_YOUTH_WRITING_CONTESTS_UPDATE_AUDIT.md /404.html 404!
+/SETUP.md /404.html 404!
+/TYPOGRAPHY_AND_CONTROLS_AUDIT.md /404.html 404!
+/VERIFY_ALL_OUTPUT.txt /404.html 404!
+/WRITING_SHORTCUT_ROUTES_AUDIT.json /404.html 404!
+/WRITING_SHORTCUT_ROUTES_AUDIT.md /404.html 404!
+/.github/* /404.html 404!
+/scripts/* /404.html 404!
+/data/* /404.html 404!
+/POLYMYTHCALENDAR_SCRAPER_FAILURE_HARDENING_AUDIT.json /404.html 404!
+/POLYMYTHCALENDAR_PHILOSOPHY_HUMANITIES_CFP_UPDATE_AUDIT.md /404.html 404!
+/POLYMYTHCALENDAR_PHILOSOPHY_HUMANITIES_CFP_UPDATE_AUDIT.json /404.html 404!
+/VERIFY_ALL_OUTPUT_PHILOSOPHY_HUMANITIES.txt /404.html 404!
+
+/POLYMYTHCALENDAR_TODAY_SCROLL_AUDIT.md /404.html 404!

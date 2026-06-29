@@ -44,8 +44,17 @@ function asRecord(entry, now) {
     is_parent_festival: Boolean(entry.is_parent_festival),
     age_band: entry.age_band || null,
     description: entry.description || undefined,
-    _src: 'manual'
+    _src: entry._src || 'manual'
   };
+  const passthrough = [
+    'writing_bands', 'academic_bands', 'subjects', 'genres', 'eligibility_region',
+    'opportunity_kind', 'application_url', 'registration_url', 'submission_url',
+    'rules_url', 'deadline_confidence', 'source_notes'
+  ];
+  for (const field of passthrough) {
+    if (entry[field] !== undefined) rec[field] = entry[field];
+  }
+  return rec;
 }
 
 const manual = JSON.parse(fs.readFileSync(manualPath, 'utf8')).events || [];

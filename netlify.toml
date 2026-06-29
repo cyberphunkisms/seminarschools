@@ -2,7 +2,7 @@
 # seminarschools.com static site
 
 [build]
-  command = "node scripts/build-search-pages.js"
+  command = "node scripts/build-search-pages.js && node scripts/build-writing-shortcuts.js"
   publish = "."
   # Credit conservation (June 6 2026): skip the build entirely when a push
   # touches only non-public plumbing (scraper code, workflows, scrape logs,
@@ -161,6 +161,91 @@
   status = 404
   force = true
 
+# Root audit and operator handoff artifacts must not be publicly served.
+[[redirects]]
+  from = "/BOOKWORMCARD_TECHNICAL_AUDIT.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/CRAWLABILITY_INDEXATION_AUDIT.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/POLYMYTHCALENDAR_BACKBONE_AUDIT.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/POLYMYTHCALENDAR_BACKBONE_UPDATE_AUDIT.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/POLYMYTHCALENDAR_FULL_CRITIQUE_AUDIT.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/POLYMYTHCALENDAR_SCRAPER_LAYMAN_SETUP.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/POLYMYTHCALENDAR_YOUTH_WRITING_CONTESTS_UPDATE_AUDIT.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/POLYMYTHCALENDAR_YOUTH_WRITING_CONTESTS_UPDATE_AUDIT.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/TYPOGRAPHY_AND_CONTROLS_AUDIT.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/VERIFY_ALL_OUTPUT.txt"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/WRITING_SHORTCUT_ROUTES_AUDIT.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/WRITING_SHORTCUT_ROUTES_AUDIT.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/POLYMYTHCALENDAR_TECHNICAL_AUDIT_2026-06-29.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/POLYMYTHCALENDAR_TECHNICAL_AUDIT_2026-06-29.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # Pretty URL for the Gemini chat function
 [[redirects]]
   from = "/api/gemini-chat"
@@ -173,10 +258,38 @@
 #   to = "/bb/"
 #   status = 301
 
+
+# Root operator/audit artifacts blocked from public serving
+
+[[redirects]]
+  from = "/POLYMYTHCALENDAR_SCRAPER_FAILURE_FIX_AUDIT.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/POLYMYTHCALENDAR_SCRAPER_FAILURE_FIX_AUDIT.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # === Path 2 architecture: block tooling paths from public serving ===
 # Netlify deploys the entire repo. Scraper code, internal audit files, and
 # workflow definitions ship to the deploy because GitHub Actions needs them,
 # but they must not be reachable via the public domain. PM35 substrate vs
+
+[[redirects]]
+  from = "/POLYMYTHCALENDAR_SCRAPE_WORKFLOW_AUDIT_2026-06-29.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/POLYMYTHCALENDAR_SCRAPE_WORKFLOW_AUDIT_2026-06-29.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # plumbing at the URL layer.
 [[redirects]]
   from = "/scripts/*"
@@ -297,3 +410,183 @@
   for = "/.well-known/security.txt"
   [headers.values]
     Cache-Control = "no-store"
+
+# Operator/audit artifacts blocked from public serving
+
+[[redirects]]
+  from = "/POLYMYTHCALENDAR_SCRAPER_FAILURE_HARDENING_AUDIT.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Root audit/setup/operator artifacts blocked from public serving
+
+[[redirects]]
+from = "/BOOKWORMCARD_TECHNICAL_AUDIT.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/CRAWLABILITY_INDEXATION_AUDIT.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_BACKBONE_AUDIT.json"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_BACKBONE_UPDATE_AUDIT.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_FULL_CRITIQUE_AUDIT.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_SCRAPER_FAILURE_FIX_AUDIT.json"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_SCRAPER_FAILURE_FIX_AUDIT.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_SCRAPER_FAILURE_HARDENING_AUDIT.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_SCRAPER_LAYMAN_SETUP.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_SCRAPE_WORKFLOW_AUDIT_2026-06-29.json"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_SCRAPE_WORKFLOW_AUDIT_2026-06-29.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_TECHNICAL_AUDIT_2026-06-29.json"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_TECHNICAL_AUDIT_2026-06-29.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_YOUTH_WRITING_CONTESTS_UPDATE_AUDIT.json"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_YOUTH_WRITING_CONTESTS_UPDATE_AUDIT.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/SETUP.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/TYPOGRAPHY_AND_CONTROLS_AUDIT.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/VERIFY_ALL_OUTPUT.txt"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/WRITING_SHORTCUT_ROUTES_AUDIT.json"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/WRITING_SHORTCUT_ROUTES_AUDIT.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/.github/*"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/scripts/*"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/data/*"
+to = "/404.html"
+status = 404
+force = true
+
+# Newly generated audit/operator artifacts blocked from public serving
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_SCRAPER_FAILURE_HARDENING_AUDIT.json"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_PHILOSOPHY_HUMANITIES_CFP_UPDATE_AUDIT.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_PHILOSOPHY_HUMANITIES_CFP_UPDATE_AUDIT.json"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/VERIFY_ALL_OUTPUT_PHILOSOPHY_HUMANITIES.txt"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_TODAY_SCROLL_AUDIT.md"
+to = "/404.html"
+status = 404
+force = true

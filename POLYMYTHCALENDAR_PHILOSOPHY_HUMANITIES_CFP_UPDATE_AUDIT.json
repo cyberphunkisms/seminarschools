@@ -1,0 +1,39 @@
+{
+  "date": "2026-06-29",
+  "zip_base": "seminarschools-polymythcalendar-scrape-hardened.zip",
+  "events_total": 512,
+  "sources_total": 386,
+  "global_academic_sources": 55,
+  "events_with_academic_bands": 42,
+  "academic_routes": [
+    "university",
+    "philosophy",
+    "humanities",
+    "cfps",
+    "lectures",
+    "fellowships"
+  ],
+  "route_counts": {
+    "university": 130,
+    "philosophy": 46,
+    "humanities": 96,
+    "cfps": 87,
+    "lectures": 36,
+    "fellowships": 40
+  },
+  "added_manual_research_events": 42,
+  "added_sources": 55,
+  "actual_princeton_uchv_events": 15,
+  "projected_cfp_fellowship_watch_cards": 27,
+  "verification": "npm run verify:all passed after route, sitemap, data parity, and shortcut checks",
+  "new_scripts": [
+    "scripts/build-academic-shortcuts.js",
+    "scripts/verify-academic-shortcuts.js"
+  ],
+  "updated_scripts": [
+    "scripts/upsert-manual-calendar-events.js",
+    "scripts/seminars-prompt.md",
+    "scripts/research-tasks.md",
+    "package.json"
+  ]
+}

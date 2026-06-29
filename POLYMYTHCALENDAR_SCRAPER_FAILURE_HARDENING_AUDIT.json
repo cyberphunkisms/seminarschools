@@ -1,0 +1,51 @@
+{
+  "date": "2026-06-29",
+  "trigger": "GitHub Actions scrape-seminars and scrape-festivals exited 1 after roughly 16-18 minutes",
+  "diagnosis": "harvest runner non-zero exit; Node 20 message was a runtime deprecation warning rather than the direct failure",
+  "hardened_files": [
+    ".github/workflows/scrape-seminars.yml",
+    ".github/workflows/scrape-festivals.yml",
+    "scripts/seminars-prompt-runner.sh",
+    "scripts/festivals-prompt-runner.sh",
+    "scripts/summarize-harvest-status.js",
+    "scripts/verify-harvest-pipeline.js",
+    "scripts/seminars-prompt.md",
+    "scripts/festivals-prompt.md",
+    "scripts/merge-seminar-harvest-into-calendar.js",
+    "scripts/merge_and_finalize.py",
+    "scripts/merge_festivals.py",
+    "_redirects",
+    "netlify.toml"
+  ],
+  "workflow_action_versions": {
+    "checkout": "actions/checkout@v7",
+    "setup_node": "actions/setup-node@v6",
+    "setup_python": "actions/setup-python@v6",
+    "upload_artifact": "actions/upload-artifact@v7"
+  },
+  "soft_failures": [
+    "agent-nonzero",
+    "timeout-or-interrupted",
+    "invalid-agent-output",
+    "missing output"
+  ],
+  "hard_failures": [
+    "missing token/configuration",
+    "merge failure",
+    "publication failure",
+    "verification failure"
+  ],
+  "local_soft_failure_tests": [
+    {
+      "case": "fake claude exits 1",
+      "runner_exit": 0,
+      "failure_kind": "agent-nonzero"
+    },
+    {
+      "case": "fake claude writes invalid JSON",
+      "runner_exit": 0,
+      "failure_kind": "invalid-agent-output"
+    }
+  ],
+  "verification": "npm run verify:all PASS"
+}

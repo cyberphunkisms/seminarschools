@@ -40,12 +40,12 @@ The line is fuzzy. When uncertain, capture and flag with lower confidence.
 
 ## Coverage rotation and regional anchors
 
-The festival roster is intentionally wider than one bounded harvest. The runner supplies `SHARD` from 0 through 6. Crawl these official-source groups:
+The festival roster is intentionally wider than one bounded harvest. The runner supplies `SHARD` and `FESTIVAL_SHARD_COUNT` at the top of the prompt; the default is seven daily shards. Crawl these official-source groups:
 
 1. **Every-run regional anchors.** Toronto Fringe, SummerWorks, Brott Music Festival, Kingston WritersFest, Montréal International Jazz Festival, OSHEAGA, MUTEK Montréal, and Fantasia. These sources establish the Toronto, Southern Ontario, Kingston, and Montréal baseline and run every day.
-2. **This run’s shard.** From the remaining `primary_sources` in `festivals-sources.json`, crawl only entries whose zero-based position satisfies `position % 7 == SHARD`. Record the others as `skipped-shard` in the source accounting.
+2. **This run’s shard.** From the remaining `primary_sources` in `festivals-sources.json`, crawl only entries whose zero-based position satisfies `position % FESTIVAL_SHARD_COUNT == SHARD`. Record the others as `skipped-shard` in the source accounting.
 
-Across seven consecutive runs, the full festival roster is covered. Spend the bounded budget on the every-run anchors before the assigned shard. A source that cannot be reached receives an explicit `unreachable` status; it does not collapse the whole harvest.
+Across the default seven consecutive runs, or across one full `FESTIVAL_SHARD_COUNT` cycle if that value changes, the full festival roster is covered. Spend the bounded budget on the every-run anchors before the assigned shard. A source that cannot be reached receives an explicit `unreachable` status; it does not collapse the whole harvest. Before the budget is exhausted, write a valid JSON file with verified parent festival records and any verified children already collected; a smaller verified harvest is better than a failed run.
 
 Every public programme must follow this hierarchy: the season itself is exactly `type: "festival"` with `is_parent_festival: true`; every named, dated production that qualifies receives its own record and its own official detail-page URL. Preserve a subtype such as `festival-of-form`, `cultural-reproduction`, or `site-specific-art` only in `secondary_types`.
 
@@ -77,7 +77,7 @@ For each candidate, fetch its official site (`primary_sources[].events_url` if k
 
 For each confirmed festival, build records:
 - One **parent festival record** for the festival itself, with `type: "festival"`, exact start/end dates, official URL, `is_parent_festival: true`, raw_excerpt from the official site, and confidence 90+.
-- **Individual production records** for qualifying named programme events (specific performances, readings, workshops, creator-attended screenings, panels, exhibitions). Each must point to its own detail page on the official site and carry an exact date. There is no arbitrary numeric cap; source precision determines quantity.
+- **Individual production records** for qualifying named programme events (specific performances, readings, workshops, creator-attended screenings, panels, exhibitions). Each must point to its own detail page on the official site and carry an exact date. There is no arbitrary numeric cap; source precision determines quantity. If budget or time pressure appears, prioritize parent festival records first, then high-value child events with their own official detail pages.
 
 **Drop candidates the official site does not confirm.** Stale aggregator entries (last year's festival rolled forward, festivals that announced 2026 cancellation, festivals whose 2026 edition is virtual-only or moved cities) die in Pass 2. The CSHPS-2025-rollover hazard documented in the seminars prompt applies here at festival scale.
 
@@ -128,7 +128,7 @@ Do not read `/data/manual-events.json` and do not include its entries in your ou
 
 ## Tool budget
 
-You have `WebFetch`, `Read`, `Write`, `Bash`. The runner caps spend at $10 USD per run (festivals get a higher cap than seminars because two-pass crawl doubles fetch count). Use the budget. Crawl every discovery source. Verify every candidate. Do not stop early when budget remains.
+You have `WebFetch`, `Read`, `Write`, `Bash`. The runner caps spend at the MAX_BUDGET_USD value announced by the workflow. Festivals normally run with a higher cap than seminars because two-pass crawl doubles fetch count. Use the budget. Crawl every discovery source. Verify every candidate. Do not stop early when budget remains.
 
 ## Output destination
 

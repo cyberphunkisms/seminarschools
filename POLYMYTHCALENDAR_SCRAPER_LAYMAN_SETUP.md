@@ -143,3 +143,9 @@ Send one of these:
 - a screenshot of the failed GitHub Actions step with the last 30 lines visible
 
 That gives the real cause. The old email only said the job failed after 36 minutes, which was not enough to diagnose the exact line.
+
+## 2026-06-29 scrape reliability notes
+
+The scheduled scraper is fail-open by default: if the external Claude harvest exits nonzero, the workflow records a warning, uploads the full transcript/status artifact from `data/harvest-runs/`, verifies the existing site, and leaves published data unchanged. Manual runs include a `strict_harvest` input for a red failure when you want debugging pressure instead of green scheduled upkeep.
+
+The workflows use Node-24-compatible GitHub action majors and set `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true`, matching GitHub's 2026 Node 20 migration path.

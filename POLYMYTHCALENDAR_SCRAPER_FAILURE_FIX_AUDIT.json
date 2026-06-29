@@ -1,0 +1,24 @@
+{
+  "date_utc": "2026-06-29",
+  "observed_from_screenshot": {
+    "scrape_seminars": "Harvest job reached the seminars step and exited with code 1 after roughly 17 minutes.",
+    "scrape_festivals": "Harvest job reached the festivals step and exited with code 1 after roughly 16 minutes.",
+    "node_warning": "The visible Node.js 20 warning is platform/action-runtime deprecation noise, separate from the red harvest exit."
+  },
+  "fixes": [
+    "Moved workflow actions to Node 24-compatible majors: checkout@v7, setup-node@v6, setup-python@v6, upload-artifact@v7.",
+    "Added FORCE_JAVASCRIPT_ACTIONS_TO_NODE24 to expose Node 24 runtime compatibility early.",
+    "Added strict_harvest manual input; scheduled runs default to warning/skip behavior while manual strict runs can still fail red.",
+    "Added HARVEST_ATTEMPTS=2 retries around the external Claude CLI call.",
+    "Added structured timestamped and latest status JSON for seminars and festivals.",
+    "Fixed the latest-status contract consumed by summarize-harvest-status.js.",
+    "Kept missing CLAUDE_CODE_OAUTH_TOKEN as a hard configuration failure.",
+    "Kept merge, schema, rebuild, and verify failures hard because those indicate site/data correctness problems.",
+    "Reduced seminars crawl pressure with SHARD_COUNT=8 and kept festivals on FESTIVAL_SHARD_COUNT=7.",
+    "Preserved the previous verified calendar when the external harvest fails, times out, exceeds budget, or returns malformed JSON."
+  ],
+  "verification": {
+    "bash_syntax": "scripts/seminars-prompt-runner.sh and scripts/festivals-prompt-runner.sh checked with bash -n",
+    "guard": "scripts/verify-harvest-pipeline.js now guards the scraper contract"
+  }
+}

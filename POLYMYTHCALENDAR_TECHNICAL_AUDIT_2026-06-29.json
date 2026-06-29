@@ -1,0 +1,304 @@
+{
+  "site_metrics": {
+    "html_pages": 1119,
+    "js_files": 73,
+    "css_files": 7
+  },
+  "focus_metrics": {
+    "polymythseminars": {
+      "bytes": 594512,
+      "gzip_bytes": 97809,
+      "events_fallback_bytes": 361013,
+      "static_event_cards": 266,
+      "title": "polymythcalendar | Regional Public Events",
+      "description": "A free, regularly updated public-events index across Toronto and Southern Ontario, Kingston, and Montréal.",
+      "canonical": "https://seminarschools.com/polymythseminars/",
+      "html_lang": "en-CA",
+      "count_line_accessible": true,
+      "writing_nav_real_links": 5,
+      "writing_nav_buttons": 0,
+      "jsonld_types": [
+        "CollectionPage"
+      ]
+    },
+    "writingclub": {
+      "bytes": 464109,
+      "gzip_bytes": 76636,
+      "events_fallback_bytes": 361013,
+      "static_event_cards": 39,
+      "title": "Writing Club | Youth Writing Competitions | Seminar Schools",
+      "description": "Youth writing competitions for Canadian students and Canadian-eligible students across poetry, essays, fiction, journalism, plays, and creative nonfiction.",
+      "canonical": "https://seminarschools.com/writingclub/",
+      "html_lang": "en-CA",
+      "count_line_accessible": true,
+      "writing_nav_real_links": 5,
+      "writing_nav_buttons": 0,
+      "jsonld_types": [
+        "CollectionPage",
+        "ItemList"
+      ]
+    },
+    "writingkids": {
+      "bytes": 436311,
+      "gzip_bytes": 72603,
+      "events_fallback_bytes": 361013,
+      "static_event_cards": 13,
+      "title": "Writing Kids | Children’s Writing Competitions | Seminar Schools",
+      "description": "Writing competitions for younger students, including children and elementary-age writers eligible through Canadian or Canadian-open contests.",
+      "canonical": "https://seminarschools.com/writingkids/",
+      "html_lang": "en-CA",
+      "count_line_accessible": true,
+      "writing_nav_real_links": 5,
+      "writing_nav_buttons": 0,
+      "jsonld_types": [
+        "CollectionPage",
+        "ItemList"
+      ]
+    },
+    "writingjuniors": {
+      "bytes": 443667,
+      "gzip_bytes": 73643,
+      "events_fallback_bytes": 361013,
+      "static_event_cards": 20,
+      "title": "Writing Juniors | Middle Grade Writing Competitions | Seminar Schools",
+      "description": "Writing competitions for junior and middle-grade students, including poetry, stories, essays, comics, and mixed writing contests.",
+      "canonical": "https://seminarschools.com/writingjuniors/",
+      "html_lang": "en-CA",
+      "count_line_accessible": true,
+      "writing_nav_real_links": 5,
+      "writing_nav_buttons": 0,
+      "jsonld_types": [
+        "CollectionPage",
+        "ItemList"
+      ]
+    },
+    "writingteens": {
+      "bytes": 460681,
+      "gzip_bytes": 76087,
+      "events_fallback_bytes": 361013,
+      "static_event_cards": 36,
+      "title": "Writing Teens | High School Writing Competitions | Seminar Schools",
+      "description": "Writing competitions for teen students, including high-school, youth, and Canadian-eligible writing contests.",
+      "canonical": "https://seminarschools.com/writingteens/",
+      "html_lang": "en-CA",
+      "count_line_accessible": true,
+      "writing_nav_real_links": 5,
+      "writing_nav_buttons": 0,
+      "jsonld_types": [
+        "CollectionPage",
+        "ItemList"
+      ]
+    },
+    "writinggrads": {
+      "bytes": 461240,
+      "gzip_bytes": 76126,
+      "events_fallback_bytes": 361013,
+      "static_event_cards": 36,
+      "title": "Writing Grads | Grade 11 and 12 Writing Competitions | Seminar Schools",
+      "description": "Writing competitions for senior high-school students, Grade 11, Grade 12, graduating students, and older teen writers.",
+      "canonical": "https://seminarschools.com/writinggrads/",
+      "html_lang": "en-CA",
+      "count_line_accessible": true,
+      "writing_nav_real_links": 5,
+      "writing_nav_buttons": 0,
+      "jsonld_types": [
+        "CollectionPage",
+        "ItemList"
+      ]
+    }
+  },
+  "html_quality": {
+    "missing_title_count": 1,
+    "missing_title": [
+      "google20234ae70106ee9d.html"
+    ],
+    "missing_meta_description_count": 4,
+    "missing_meta_description": [
+      "google20234ae70106ee9d.html",
+      "sitemap/index.html",
+      "campaigns/thank-you-mam/dm-board/index.html",
+      "campaigns/thank-you-mam/unlocks/index.html"
+    ],
+    "missing_canonical_count": 2,
+    "missing_canonical": [
+      "google20234ae70106ee9d.html",
+      "404.html"
+    ],
+    "no_h1_count": 1,
+    "no_h1": [
+      "google20234ae70106ee9d.html"
+    ],
+    "multi_h1_count": 1,
+    "multi_h1": [
+      {
+        "file": "bookwormcard/index.html",
+        "count": 2,
+        "texts": [
+          "Bookwormcard is the character gate for BookwormBurrows",
+          "Bookwormcard · BookwormBurrows character gate"
+        ]
+      }
+    ],
+    "duplicate_id_count": 0,
+    "duplicate_ids": [],
+    "images_missing_alt_count": 0,
+    "images_missing_alt": [],
+    "target_blank_missing_safe_rel_count": 0,
+    "target_blank_missing_safe_rel": [],
+    "bad_internal_link_count": 0,
+    "bad_internal_links": [],
+    "bad_hash_anchor_count": 5,
+    "bad_hash_anchors": [
+      {
+        "file": "aa/editorial.html",
+        "href": "/aa/#mode=pending"
+      },
+      {
+        "file": "campaigns/thank-you-mam/pregame/index.html",
+        "href": "/polymyth/campaigncodex/#cc-cmp001-curriculum-anchor-map"
+      },
+      {
+        "file": "campaigns/thank-you-mam/pregame/index.html",
+        "href": "/polymyth/campaigncodex/#cc-cmp001-triangulation-rubric"
+      },
+      {
+        "file": "teacherresources/ela/ela-inst-esl/denote-92453e09/index.html",
+        "href": "/aitr/#denote"
+      },
+      {
+        "file": "teacherresources/ela/ela-inst-esl/monster-battle-73b3b982/index.html",
+        "href": "/aitr/#monster-battle"
+      }
+    ],
+    "local_asset_missing_count": 0,
+    "local_asset_missing": [],
+    "invalid_jsonld_count": 0,
+    "invalid_jsonld": [],
+    "jsonld_type_counts": {
+      "CollectionPage": 56,
+      "Event": 162,
+      "CreativeWork": 6,
+      "ProfilePage": 1,
+      "Blog": 4,
+      "WebSite": 1,
+      "WebApplication": 1,
+      "ItemList": 5,
+      "Dataset": 2,
+      "DefinedTermSet": 1,
+      "WebPage": 1048,
+      "BreadcrumbList": 1044,
+      "Article": 3,
+      "LearningResource": 719
+    }
+  },
+  "sitemap": {
+    "loc_count": 981,
+    "noindex_in_sitemap_count": 0,
+    "noindex_in_sitemap": [],
+    "sitemap_missing_indexable_count": 12,
+    "sitemap_missing_indexable": [
+      {
+        "file": "polymyth/index.html",
+        "canonical": "https://seminarschools.com/polymyth/"
+      },
+      {
+        "file": "marginalia/example-review/index.html",
+        "canonical": "https://seminarschools.com/marginalia/example-review/"
+      },
+      {
+        "file": "polymyth/devils-notebook/index.html",
+        "canonical": "https://seminarschools.com/polymyth/devils-notebook/"
+      },
+      {
+        "file": "polymyth/devilsdiary/replies/index.html",
+        "canonical": "https://seminarschools.com/polymyth/devilsdiary/replies/"
+      },
+      {
+        "file": "polymyth/devils-notebook/the-boy-and-the-earworm/index.html",
+        "canonical": "https://seminarschools.com/polymyth/devils-notebook/the-boy-and-the-earworm/"
+      },
+      {
+        "file": "teacherresources/pedagogical-case/index.html",
+        "canonical": "https://seminarschools.com/teacherresources/pedagogical-case/"
+      },
+      {
+        "file": "polymythseminars/events/pride-toronto-parade-2026-2026-06-28-3dcecab8/index.html",
+        "canonical": "https://seminarschools.com/polymythseminars/events/pride-toronto-parade-2026-2026-06-28-3dcecab8/"
+      },
+      {
+        "file": "polymythseminars/events/246eae77dc33-c4b84eff/index.html",
+        "canonical": "https://seminarschools.com/polymythseminars/events/246eae77dc33-c4b84eff/"
+      },
+      {
+        "file": "polymythseminars/events/d13a12bba177-bf4a647b/index.html",
+        "canonical": "https://seminarschools.com/polymythseminars/events/d13a12bba177-bf4a647b/"
+      },
+      {
+        "file": "polymythseminars/events/0397c5dce167-f646f3ad/index.html",
+        "canonical": "https://seminarschools.com/polymythseminars/events/0397c5dce167-f646f3ad/"
+      },
+      {
+        "file": "polymythseminars/events/aed7ce8c9bb6-a80968dc/index.html",
+        "canonical": "https://seminarschools.com/polymythseminars/events/aed7ce8c9bb6-a80968dc/"
+      },
+      {
+        "file": "polymythseminars/events/8b8423aafbf6-1f888308/index.html",
+        "canonical": "https://seminarschools.com/polymythseminars/events/8b8423aafbf6-1f888308/"
+      }
+    ]
+  },
+  "calendar_data": {
+    "total_events": 470,
+    "missing_source_url_count": 0,
+    "duplicate_title_date_count": 0,
+    "writing_competitions_with_bands": 39,
+    "current_writing_counts": {
+      "kids": 13,
+      "juniors": 20,
+      "teens": 36,
+      "grads": 36,
+      "club": 39
+    }
+  },
+  "deployment": {
+    "security_headers": {
+      "X-Frame-Options": true,
+      "X-Content-Type-Options": true,
+      "Referrer-Policy": true,
+      "Permissions-Policy": true,
+      "Strict-Transport-Security": true,
+      "Content-Security-Policy": false,
+      "Content-Security-Policy-Report-Only": false
+    },
+    "redirect_rule_count": 141,
+    "root_level_devish_entries": [
+      "all_entries.json",
+      "buckets.json",
+      "_build_txt_from_html.py",
+      "scripts",
+      "manifest.json",
+      "package-lock.json",
+      "netlify.toml",
+      "data",
+      "netlify.env.example",
+      "package.json",
+      "SETUP.md",
+      "new_groups.json",
+      "netlify",
+      "CRAWLABILITY_INDEXATION_AUDIT.md",
+      ".github",
+      "POLYMYTHCALENDAR_SCRAPER_LAYMAN_SETUP.md",
+      "POLYMYTHCALENDAR_BACKBONE_UPDATE_AUDIT.md",
+      "POLYMYTHCALENDAR_BACKBONE_AUDIT.json",
+      "TYPOGRAPHY_AND_CONTROLS_AUDIT.md",
+      "BOOKWORMCARD_TECHNICAL_AUDIT.md",
+      "POLYMYTHCALENDAR_YOUTH_WRITING_CONTESTS_UPDATE_AUDIT.md",
+      "POLYMYTHCALENDAR_YOUTH_WRITING_CONTESTS_UPDATE_AUDIT.json",
+      "WRITING_SHORTCUT_ROUTES_AUDIT.md",
+      "WRITING_SHORTCUT_ROUTES_AUDIT.json",
+      "POLYMYTHCALENDAR_FULL_CRITIQUE_AUDIT.md",
+      "POLYMYTHCALENDAR_TECHNICAL_AUDIT_2026-06-29.md",
+      "POLYMYTHCALENDAR_TECHNICAL_AUDIT_2026-06-29.json"
+    ]
+  }
+}

@@ -32,6 +32,11 @@ Set `type` to `protest`. Fill the `four_condition_test` object honestly against 
 Protest sources are now in the venue roster as `labour-council` and `protest-civic`. Also surface protests from any announcement you can confirm with a `source_url` and a verbatim `raw_excerpt`. Treat an unconfirmable protest as nonexistent.
 
 
+
+## Global university philosophy and humanities sources
+
+Sources marked `scope: global-academic` in `/scripts/sources.json` are explicitly in scope even when they are outside Toronto, Southern Ontario, Kingston, or Montréal. Crawl them for university-level philosophy, humanities, public lectures, colloquia, seminars, calls for papers, fellowships, residencies, funding opportunities, and research-network deadlines. These records are useful because a lecture may be livestreamed or worth tracking, and a submission or fellowship deadline can be answered from anywhere. Use `age_band` values such as `University+`, `Graduate students`, `Early-career researchers`, `Postdoctoral`, `Faculty`, `Open to the public`, or the exact eligibility text from the source. Do not invent dates for these sources; if a page only describes a program without an active deadline, record it as a zero-yield source and let the manual projected-deadline layer handle watch cards.
+
 ## Regional coverage and eligibility
 
 Search Toronto and Southern Ontario, including Hamilton, Guelph, Waterloo, Kitchener, Mississauga, Brampton, Oakville, Niagara, and nearby public institutions; also search Kingston and Montréal. Prioritize universities, libraries, museums, artist-run centres, literary organizations, public civic institutions, and directly operated festival pages.
@@ -60,14 +65,15 @@ Record `age_band` on any record whose listing states who may enter or attend: a 
 
 The full venue roster is in `/scripts/sources.json`. Read that file first. Each entry has a `name`, `events_url`, and `default_type`. Use `WebFetch` to retrieve each `events_url`. For venues marked `render_mode: javascript`, the page may be sparse on first fetch; try the parent `base_url` plus common event-listing paths (`/events`, `/events/upcoming`, `/whats-on`, `/calendar`).
 
-Coverage rules (replacing the old tier-priority crawl order, June 11 2026):
+Coverage rules (budget-safe rotation, June 29 2026):
 
-The roster is larger than one run's budget, so coverage rotates on a four-week cycle while priority sources run every week. The runner provides this run's SHARD number (0, 1, 2, or 3) at the top of the prompt. Crawl exactly these sources, in this order:
+The roster is larger than one run's budget, so coverage rotates across the shard count supplied by the runner. The runner provides both this run's SHARD number and the SHARD_COUNT at the top of the prompt. Crawl exactly these sources, in this order:
 
-1. **Every-run set.** All sources with `tier_priority` 1, PLUS all sources whose `default_type` is `screening`, `cfp`, or `contest` regardless of tier. These categories are under-covered and run weekly until coverage normalizes.
-2. **This week's shard.** Of the remaining sources, crawl only those whose zero-based position in the `sources` array satisfies `position % 4 == SHARD`. Skip the rest and record them as `skipped-shard` in the source accounting below.
+1. **Every-run set.** All sources with `tier_priority` 1.
+2. **This run's shard.** Of every remaining source, including sources whose `default_type` is `screening`, `cfp`, or `contest`, crawl only those whose zero-based position in the `sources` array satisfies `position % SHARD_COUNT == SHARD`. Skip the rest and record them as `skipped-shard` in the source accounting below.
+3. **Urgency reserve.** If budget remains after the every-run set and assigned shard, crawl at most five extra `cfp`, `contest`, or `screening` sources where the listing itself suggests a deadline or event within the next 30 days. Record those as `crawled-urgency-reserve` in the source accounting.
 
-Across four consecutive runs this covers the full roster. Within the run, if the budget runs low, finish the every-run set before starting the shard, and record any source you could not reach as `budget-exhausted` rather than silently dropping it.
+Across a complete shard cycle this covers the full roster without trying to crawl 140+ sources in one action run. Within the run, if the budget runs low, finish the every-run set before starting the shard, and record any source you could not reach as `budget-exhausted` rather than silently dropping it. Before the budget is exhausted, write a valid JSON file with the records already verified; a smaller verified harvest is better than a failed run.
 
 **FEEDS FIRST.** When a source carries a `feed_url` field, fetch the feed BEFORE the `events_url`. Formats and how to read them: `ics` parses as iCalendar VEVENT blocks; `wp-tribe-json` returns a JSON object with an `events` array (title, start_date, venue, url fields); `bibliocommons-v2-html` is a server-rendered listing page that parses like normal HTML. If the feed returns 404, an error, or zero events, fall back to `events_url` and note `feed_failed` in that source's accounting entry, because the probable-tagged feeds are unconfirmed until a run proves them. A working feed is cheaper and more reliable than the HTML page; prefer it every run.
 
@@ -106,7 +112,7 @@ Statuses: `crawled` (fetched and parsed, events may be 0), `skipped-shard` (outs
 
 ## Output format
 
-Emit a single JSON object to stdout matching `/data/seminars-schema.json`. The top-level shape is:
+Write a single JSON object to `/tmp/seminars-output.json` matching `/data/seminars-schema.json`. The top-level shape is:
 
 ```json
 {

@@ -2,6 +2,12 @@ name: Refresh polymythcalendar seminars
 
 on:
   workflow_dispatch:
+    inputs:
+      strict_harvest:
+        description: 'Fail this run if the external Claude harvest fails'
+        required: false
+        default: false
+        type: boolean
   schedule:
     - cron: '15 08 * * *'
 
@@ -15,22 +21,28 @@ concurrency:
 jobs:
   seminars:
     runs-on: ubuntu-latest
-    timeout-minutes: 32
+    timeout-minutes: 45
     env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
       CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-      MAX_TURNS: '70'
-      MAX_BUDGET_USD: '2.50'
-      HARVEST_TIMEOUT_SECONDS: '1500'
+      MAX_TURNS: '90'
+      MAX_BUDGET_USD: '5.00'
+      HARVEST_TIMEOUT_SECONDS: '2100'
+      HARVEST_ATTEMPTS: '2'
+      SHARD_COUNT: '8'
+      STRICT_HARVEST_FAILURES: ${{ github.event_name == 'workflow_dispatch' && inputs.strict_harvest && 'true' || 'false' }}
       HARVEST_LOG_DIR: data/harvest-runs
+      HARVEST_STRICT: ${{ github.event_name == 'workflow_dispatch' && inputs.strict_harvest && '1' || '0' }}
+      CLAUDE_MODEL: claude-sonnet-4-6
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          node-version: '24'
           cache: npm
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - name: Install validators
@@ -43,13 +55,19 @@ jobs:
           claude --version
       - name: Harvest seminars
         run: bash scripts/seminars-prompt-runner.sh
+      - name: Summarize harvest diagnostics
+        if: always()
+        run: bash scripts/summarize-harvest-diagnostics.sh seminars
+      - name: Summarize harvest outcome
+        if: always()
+        run: node scripts/summarize-harvest-status.js seminars
       - name: Verify generated calendar
         run: npm run verify:all
       - name: Commit verified changes
         run: |
           git config user.name "seminarschools calendar bot"
           git config user.email "calendar-bot@users.noreply.github.com"
-          git add data seminars festivals polymythseminars sitemap.xml scripts/search-surface-manifest.json main/index.html
+          git add data seminars festivals polymythseminars writingclub writingkids writingjuniors writingteens writinggrads sitemap.xml scripts/search-surface-manifest.json main/index.html
           if ! git diff --cached --quiet; then
             git commit -m "data: refresh polymythcalendar seminars"
             git pull --rebase origin "${GITHUB_REF_NAME}"
@@ -57,7 +75,7 @@ jobs:
           fi
       - name: Preserve harvest diagnostics
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: polymythcalendar-seminars-${{ github.run_id }}
           path: data/harvest-runs/

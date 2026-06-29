@@ -1,0 +1,10 @@
+{
+  "date_utc": "2026-06-29",
+  "workflow_files": [
+    ".github/workflows/scrape-seminars.yml",
+    ".github/workflows/scrape-festivals.yml"
+  ],
+  "current_behavior": "Scheduled runs soft-skip on external Claude harvest failures while preserving verified data; manual strict_harvest can force red failure.",
+  "node_runtime": "Node 24-compatible action majors with FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true.",
+  "diagnostics": "Timestamped logs/status plus stream-latest.status.json are uploaded as workflow artifacts."
+}

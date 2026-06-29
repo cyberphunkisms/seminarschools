@@ -1,0 +1,25 @@
+{
+  "date": "2026-06-28",
+  "routes": [
+    "https://seminarschools.com/writingclub/",
+    "https://seminarschools.com/writingkids/",
+    "https://seminarschools.com/writingjuniors/",
+    "https://seminarschools.com/writingteens/",
+    "https://seminarschools.com/writinggrads/"
+  ],
+  "counts": {
+    "writingclub": 39,
+    "writingkids": 13,
+    "writingjuniors": 20,
+    "writingteens": 36,
+    "writinggrads": 36
+  },
+  "explicit_writing_band_records": 39,
+  "generic_grade_pathway_leaks": 0,
+  "visible_writing_tabs": true,
+  "filtered_ssr_shortcut_pages": true,
+  "verification": [
+    "npm run verify:writing-shortcuts",
+    "npm run verify:all"
+  ]
+}

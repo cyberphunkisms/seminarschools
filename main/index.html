@@ -2247,7 +2247,7 @@ function fetchEventsWithFallback(){
   // (/data/ is 404'd by design, /seminars/ is not served) only produced the
   // console 404, so they are dropped. The calendar page carries an embedded
   // snapshot fallback; this teaser simply loads the file on the live site.
-  var urls = ['/polymythseminars/events.json?v=20260628'];
+  var urls = ['/polymythseminars/events.json?v=20260629'];
   return (async function(){
     var lastErr = null;
     for (var i=0;i<urls.length;i++){
