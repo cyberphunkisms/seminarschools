@@ -2,7 +2,7 @@
 
 ## What was fixed
 
-- Removed self-explaining copy like “All Writing = all writing contests.”
+- Removed self-explaining copy like “the old self-explaining writing label.”
 - Replaced Polymythcal instructions with practical user instructions: choose a filter, open a title, check dates/rules/sign-up on the official page.
 - Added a direct student safety note without a glossary box.
 - Renamed Saul CV controls so they read like an action: “Choose what this CV shows.”

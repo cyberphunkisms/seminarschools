@@ -733,6 +733,45 @@
     .cal-agenda-head p { margin-top: 0.18rem; }
   }
 
+
+
+/* POLYMYTHCAL_BEAUTY_RESPONSIVE_RELEASE — stable title, clearer use, wider desktop. */
+@media (min-width: 980px) {
+  main { max-width: min(1240px, calc(100vw - 80px)) !important; }
+  .cv-header { max-width: none; display: grid; grid-template-columns: minmax(280px, 0.9fr) minmax(360px, 1.1fr); gap: 2rem; align-items: center; text-align: left; padding: clamp(2rem, 4vw, 4.5rem); }
+  .cv-header h1 { font-size: clamp(4rem, 8vw, 8rem); letter-spacing: -0.055em; }
+  .cv-header .meta, .cv-header .tag { margin-left: 0; margin-right: 0; max-width: 64ch; }
+  .active-guide, .helper-tag { max-width: 64ch; text-align: left; }
+  .quick-guide { max-width: none; display: grid; grid-template-columns: 1.15fr .85fr; }
+  .filter-nav { max-width: none; justify-content: flex-start; padding: 1rem 1.2rem; }
+  .scroll-shell { max-height: 74vh; padding: .9rem; }
+  .month-group { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 2rem; align-items: start; }
+  .month-head { position: sticky; top: 1rem; }
+}
+.cv-header { border-color: color-mix(in srgb, var(--accent) 28%, transparent); background: linear-gradient(135deg, color-mix(in srgb, var(--paper) 92%, transparent), color-mix(in srgb, var(--accent) 7%, transparent)); box-shadow: 0 22px 80px color-mix(in srgb, #000 18%, transparent); }
+.cv-header h1 { text-wrap: balance; }
+.quick-guide { border-color: color-mix(in srgb, var(--accent) 25%, transparent); box-shadow: 0 14px 44px color-mix(in srgb, #000 12%, transparent); }
+.quick-guide strong { color: var(--ink); }
+.filter-nav { background: color-mix(in srgb, var(--paper) 84%, transparent); border-color: color-mix(in srgb, var(--accent) 18%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, #fff 3%, transparent); }
+.filter-nav button, .filter-nav a { border-color: color-mix(in srgb, var(--accent) 24%, transparent); letter-spacing: .075em; }
+.filter-nav button.on, .filter-nav a.on { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+.event { background: color-mix(in srgb, var(--paper) 90%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 12%, transparent); border-left-width: 4px; border-radius: 18px; margin: .7rem 0; }
+.event .body-col .title { font-size: clamp(1.05rem, 1.4vw, 1.34rem); }
+.event .body-col .event-desc { color: color-mix(in srgb, var(--ink) 72%, transparent); }
+.cal-shell { gap: 1.25rem; }
+.cal-grid { border-radius: 22px; overflow: hidden; }
+.cal-cell { min-height: 78px; }
+.cal-agenda { border-radius: 22px; }
+@media (max-width: 760px) {
+  main { width: min(100%, calc(100vw - 20px)); }
+  .cv-header { padding: 1.6rem 1.2rem; border-radius: 22px; }
+  .cv-header h1 { font-size: clamp(2.6rem, 15vw, 4.8rem); }
+  .quick-guide { grid-template-columns: 1fr; padding: 1rem; }
+  .filter-nav { margin-left: calc(50% - 50vw + 10px); margin-right: calc(50% - 50vw + 10px); border-radius: 0; padding-inline: 1rem; overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; }
+  .filter-nav button, .filter-nav a { flex: 0 0 auto; white-space: nowrap; }
+  .scroll-shell { padding: .55rem; }
+}
+
 </style>
 
 <link rel="stylesheet" href="/css/theme.css?v=cl91">
@@ -1329,7 +1368,7 @@
 }
 </script>
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.145">
+<body data-geometry="indra-web" data-indra-intensity="0.245">
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sun" aria-hidden="true">&#9728;</span><span class="moon" aria-hidden="true">&#9790;</span></button><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 
 <main>
@@ -1337,7 +1376,7 @@
     <h1>Polymythcal</h1>
     <div class="meta" id="polymythContext">Humanities</div>
     <div class="tag" id="polymythDescription">Humanities lectures, calls for papers, conferences, fellowships, and research opportunities in literature, history, classics, religion, art history, archaeology, and theory.</div>
-    <div class="tag helper-tag">Choose what you need. Open a title to check the official page.</div>
+    <div class="tag helper-tag">Choose a filter. Open a title to check dates, rules, and sign-up.</div>
   </header>
 
   <section class="quick-guide" aria-labelledby="quickGuideTitle">

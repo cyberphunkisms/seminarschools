@@ -28,9 +28,9 @@
     ['/leizu', 'subtle'],
     ['/saul', 'subtle'],
     ['/apply', 'subtle'],
-    ['/polymythseminars', 'subtle'],
-    ['/seminars', 'subtle'],
-    ['/polymythseminars', 'subtle'],
+    ['/polymythseminars', 'prominent'],
+    ['/seminars', 'prominent'],
+    ['/polymythseminars', 'prominent'],
     ['/teacherresources', 'subtle'],
     ['/marginalia', 'subtle'],
     ['/nutrition', 'subtle'],
@@ -85,14 +85,14 @@
     // Decorrelated focus params drawn from the path hash, so each page frames a
     // different region of the identical gasket and the framing is stable across
     // reloads. Scroll drifts on top so the substrate is never static.
-    var fScale = 1.55 + ((seed % 1000) / 1000) * 1.35;            // 1.55 .. 2.90
+    var fScale = 1.85 + ((seed % 1000) / 1000) * 1.55;            // 1.55 .. 2.90
     var fTx    = (((seed >>> 10) % 360) - 180);                   // -180 .. 180
     var fTy    = (((seed >>> 19) % 360) - 180);                   // -180 .. 180
     var fRot   = (seed % 360);                                    // 0 .. 360
     // Register sets visibility, not shape: experimental pages read the web
     // louder, professional pages quieter, over the same gasket.
     var requestedOpacity = parseFloat(document.body && document.body.getAttribute('data-indra-intensity'));
-    var op = Number.isFinite(requestedOpacity) ? Math.max(0.045, Math.min(0.24, requestedOpacity)) : (tier === 'prominent' ? 0.18 : 0.105);
+    var op = Number.isFinite(requestedOpacity) ? Math.max(0.075, Math.min(0.38, requestedOpacity)) : (tier === 'prominent' ? 0.24 : 0.16);
 
     var layer = document.createElement('div');
     layer.id = 'indraLayer';
@@ -109,11 +109,11 @@
     // rig's Lenis easing. curY chases scrollY; the loop sleeps once it settles.
     // Breathing parameters: slow enough to feel like sleep, not motion.
     var BREATH_PERIOD = 10000;   // 10s full cycle
-    var BREATH_SCALE  = 0.003;   // ±0.003 scale oscillation
-    var BREATH_ROT    = 0.25;    // ±0.25° rotation oscillation (sway)
+    var BREATH_SCALE  = 0.0045;   // ±0.003 scale oscillation
+    var BREATH_ROT    = 0.38;    // ±0.25° rotation oscillation (sway)
     var BREATH_X      = 0.4;     // ±0.4px lateral sway
     var BREATH_Y      = 0.3;     // ±0.3px vertical sway
-    var SPIN_RATE     = 360 / 420000; // deg/ms -> ~7min per full turn, slow CW
+    var SPIN_RATE     = 360 / 360000; // deg/ms -> ~7min per full turn, slow CW
     var TWO_PI = Math.PI * 2;
 
     // Cursor lean state (computed in tick, fed by mousemove listener below)

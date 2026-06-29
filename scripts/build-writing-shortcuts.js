@@ -61,7 +61,7 @@ function setStablePolymythcalHeader(html, info, route){
     <h1>Polymythcal</h1>
     <div class="meta" id="polymythContext">${esc(info.label)}</div>
     <div class="tag" id="polymythDescription">${esc(info.desc || 'Learning opportunities.')}</div>
-    <div class="tag helper-tag">Choose what you need. Open a title to check the official page.</div>
+    <div class="tag helper-tag">Choose a filter. Open a title to check dates, rules, and sign-up.</div>
   </header>`);
   return html;
 }

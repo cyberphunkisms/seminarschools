@@ -138,6 +138,12 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
 .lede{position:relative;z-index:1;}
+
+/* HOME_RESPONSIVE_CONCISE_RELEASE */
+@media (min-width: 900px){
+  main, .wrap, .frame, .home-shell, .landing-shell { max-width: min(1240px, calc(100vw - 72px)) !important; }
+}
+
 </style>
 <script type="application/ld+json">
 {
@@ -176,7 +182,7 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
 }
 </script>
 </head>
-<body class="home" data-indra-intensity="0.105" data-geometry="indra-web">
+<body class="home" data-indra-intensity="0.205" data-geometry="indra-web">
 
 <header class="bar">
   <a class="brand" href="/">Seminar<b>Schools</b></a>

@@ -33,9 +33,9 @@
  * /ohm-dome).
  * ============================================================ */
 :root {
-  --font-display: 'Cormorant Garamond', 'Garamond', 'Georgia', serif;
-  --font-body: 'Libre Baskerville', 'Georgia', serif;
-  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Fraunces', 'Cormorant Garamond', 'Georgia', serif;
+  --font-body: 'Source Serif 4', 'Libre Baskerville', 'Georgia', serif;
+  --font-sans: 'Inter', 'DM Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
   /* Page-specific override slot — Leizu, Marshmellow, etc. can
      redefine if their content needs different character sets. */
@@ -43,7 +43,8 @@
 
   /* Canonical content width — one reading measure across the site.
      Added 2026-06-04 per Kira UI review; page widths ranged 600 to 1400px. */
-  --content-width: 768px;
+  --content-width: 980px;
+  --wide-content-width: 1220px;
 
   /* Letter-size scale, driven by the A-/A+ controls in /js/theme.js. */
   --font-scale: 1;
@@ -243,4 +244,34 @@ body {
   --body:    var(--font-body);
   --sans:    var(--font-sans);
   --mono:    var(--font-mono);
+}
+
+
+/* ============================================================
+ * WIDE RESPONSIVE SURFACE — desktop + phone, not phone-only.
+ * ============================================================ */
+@media (min-width: 900px) {
+  body:not(.print-mode) main,
+  body:not(.print-mode) .page,
+  body:not(.print-mode) .wrap,
+  body:not(.print-mode) .shell,
+  body:not(.print-mode) .container,
+  body:not(.print-mode) .calendar-shell {
+    max-width: min(var(--wide-content-width, 1220px), calc(100vw - 72px));
+  }
+  body:not(.print-mode) .reading-measure,
+  body:not(.print-mode) article,
+  body:not(.print-mode) .body {
+    max-width: min(72ch, calc(100vw - 72px));
+  }
+}
+@media (max-width: 760px) {
+  body main, body .page, body .wrap, body .shell, body .container, body .calendar-shell {
+    width: min(100%, calc(100vw - 24px));
+    max-width: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  h1 { overflow-wrap: anywhere; }
+  p, li { overflow-wrap: anywhere; }
 }

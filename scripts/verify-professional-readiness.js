@@ -134,3 +134,4 @@ if(errors.length){
   process.exit(1);
 }
 console.log('PASS — cache, PWA, sitemap, entitlement, diagnostics, accessibility semantics, and public build boundaries are hardened.');
+process.exit(0);

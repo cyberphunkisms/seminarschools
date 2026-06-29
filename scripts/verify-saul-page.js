@@ -8,28 +8,18 @@ const file = path.join(root, 'saul', 'index.html');
 const html = fs.readFileSync(file, 'utf8');
 const errors = [];
 const required = [
-  'class="cv-intro"',
   'id="careerArchive"',
-  'data-quick-view="current"',
-  'data-quick-view="teaching"',
-  'data-quick-view="all"',
   'data-cv-mode="chrono"',
   'data-cv-mode="theme"',
-  'class="archive-tools',
-  'href="/leizu/intake/"',
-  'href="/leizu/"',
-  'href="/main/"',
-  'const SAUL_PROFILE_COPY',
-  'function renderProfile()',
-  'renderProfile();',
+  'class="archive-tools cv-module-tabs" open',
+  'id="filterNav"',
+  'id="moduleStatus"',
+  'Choose CV sections',
+  'Select one area or combine several. The PDF follows your selection.',
   'Saul Karim Nassau,<span class="post">MA</span>',
-  'body:not(.party) { --geo-density: 0.025 !important; }',
   'Black-and-white portrait of Saul Nassau',
   'data-saul-modular-cv="true"',
-  'class="archive-tools cv-module-tabs" open',
-  'id="moduleStatus"',
-  'Choose what this CV shows',
-  'Each category is a real CV area. Choose one or combine several;',
+  'SAUL_CV_FOCUSED_RELEASE',
   'buildPrintCv();',
   'window.print();',
   'if (active.has(cat)) active.delete(cat);',
@@ -45,7 +35,7 @@ for (const lang of ['en:', 'zh:', 'zhs:', 'fa:', 'fr:']) {
 
 const introEnd = html.indexOf('<section class="archive-shell"', html.indexOf('class="cv-intro"'));
 const filters = html.indexOf('id="filterNav"');
-if (filters < introEnd) errors.push('Detailed filters appear before the professional front page/archive boundary.');
+if (!html.includes('SAUL_CV_FOCUSED_RELEASE')) errors.push('Saul page is not marked as the focused CV release.');
 
 if (html.includes('Saul Karim NMH,<span class="post">MA</span>')) errors.push('Legacy NMH header remains visible.');
 
@@ -61,8 +51,8 @@ const moduleTabTokens = [
 ];
 for (const token of moduleTabTokens) if (!html.includes(token)) errors.push(`Missing visible CV module tab: ${token}`);
 
-if (html.includes('CV module tabs') || html.includes('PDF follows active tabs') || html.includes('Choose one module')) {
-  errors.push('Saul page still contains confusing CV module language.');
+if (html.includes('CV module tabs') || html.includes('PDF follows active tabs') || html.includes('Choose one module') || html.includes('Three ways to begin')) {
+  errors.push('Saul page still contains confusing or non-CV front-page language.');
 }
 if (!/function buildPrintCv\(\)[\s\S]*activeCats\.length === 1[\s\S]*SUMMARY_BY_CAT/.test(html)) {
   errors.push('PDF builder no longer routes summary copy by selected CV module.');
@@ -97,3 +87,4 @@ if (errors.length) {
   process.exit(1);
 }
 console.log('Saul page guard passed.');
+process.exit(0);

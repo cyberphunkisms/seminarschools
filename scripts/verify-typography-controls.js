@@ -58,3 +58,5 @@ if(failures.length){
   process.exit(1);
 }
 console.log(`Typography/control verification passed: ${files.length} HTML/CSS files scanned, ${small.length} very-small declarations inventoried.`);
+
+process.exit(0);

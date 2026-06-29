@@ -4,7 +4,7 @@ Restores `/saul/` as a modular CV instrument rather than a flattened résumé pa
 
 ## Preserved and strengthened
 
-- Visible CV module tabs are open by default: All, Culinary Hospitality, Teaching, Community, Education, Volunteer, Performance, Seminar Schools.
+- Visible CV section buttons are open by default: All, Culinary Hospitality, Teaching, Community, Education, Volunteer, Performance, Seminar Schools.
 - A module status line explains that `Save as PDF` exports the selected version.
 - Category tab clicks now behave like CV versions: one selected category produces one focused CV.
 - Quick views still support useful combinations, including Current Work and Teaching + Education.

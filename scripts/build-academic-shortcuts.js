@@ -158,12 +158,12 @@ function setHead(html, info, route){
   html=html.replace(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${attr(info.title)}">`);
   html=html.replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${attr(info.description)}">`);
   html=html.replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${url}">`);
-  html=html.replace(/<body([^>]*)data-indra-intensity="[^"]*"([^>]*)>/, '<body$1data-indra-intensity="0.145"$2>');
+  html=html.replace(/<body([^>]*)data-indra-intensity="[^"]*"([^>]*)>/, '<body$1data-indra-intensity="0.245"$2>');
   html=html.replace(/<header class="cv-header">[\s\S]*?<\/header>/, `<header class="cv-header">
     <h1>Polymythcal</h1>
     <div class="meta" id="polymythContext">${esc(info.label)}</div>
     <div class="tag" id="polymythDescription">${esc(info.description)}</div>
-    <div class="tag helper-tag">Choose what you need. Open a title to check the official page.</div>
+    <div class="tag helper-tag">Choose a filter. Open a title to check dates, rules, and sign-up.</div>
   </header>`);
   return html;
 }

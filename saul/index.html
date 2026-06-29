@@ -1203,6 +1203,30 @@ textarea:focus-visible,
   .cv-intro, .current-work, .archive-heading, .quick-views, .archive-tools, .view-switcher { display:none !important; }
 }
 
+
+/* SAUL_CV_FOCUSED_RELEASE — /saul/ is a CV interface, not a landing page. */
+.cv-intro { grid-template-columns: 1fr auto; margin-top: 2rem; padding-top: 1.75rem; }
+.cv-intro .cv-proof, .current-work { display: none !important; }
+.cv-promo-actions { display: none !important; }
+.archive-shell { margin-top: 2.4rem; }
+.archive-heading { grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
+.archive-heading h2 { font-size: clamp(2.6rem, 5vw, 5.2rem); line-height: .9; }
+.archive-tools summary { font-family: var(--sans); font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; }
+.module-helper { max-width: 68ch; }
+.filter-nav button { border-radius: 999px; }
+.filter-nav button.on { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+@media (min-width: 900px){
+  main.page { max-width: min(1180px, calc(100vw - 72px)); }
+  #entries { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem 2rem; }
+  #entries .era { grid-column: 1 / -1; }
+}
+@media (max-width: 760px){
+  .cv-head-row, .archive-heading { display:block; }
+  .cv-header-email { text-align:left !important; }
+  .filter-nav { display:flex; overflow-x:auto; flex-wrap:nowrap; padding-bottom:.4rem; }
+  .filter-nav button { flex:0 0 auto; }
+}
+
 </style>
 <script type="application/ld+json">
 {
@@ -1226,7 +1250,7 @@ textarea:focus-visible,
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.115">
+<body data-geometry="indra-web" data-indra-intensity="0.19">
 <a href="/" style="position:fixed;top:0.9rem;left:1rem;z-index:1200;font-family:ui-monospace,monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:inherit;opacity:0.65;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:0.15rem;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.65">&larr; Seminar Schools</a>
 
 
@@ -1275,10 +1299,10 @@ textarea:focus-visible,
 
   <section class="cv-intro" aria-labelledby="cvIntroTitle">
     <div>
-      <span class="cv-kicker" data-profile="eyebrow">Educator · curriculum designer · public learning</span>
-      <h2 id="cvIntroTitle" data-profile="title">Teaching, curriculum, and public learning.</h2>
-      <p class="cv-lede" data-profile="lede">I teach through close reading, discussion, careful structure, and revision. My work moves between individual tutoring, classroom teaching, curriculum design, public seminars, and independent study.</p>
-      <div class="cv-actions">
+      <span class="cv-kicker" data-profile="eyebrow">Curriculum vitae</span>
+      <h2 id="cvIntroTitle" data-profile="title">Career record.</h2>
+      <p class="cv-lede" data-profile="lede">Choose the areas you want, then save the matching CV as a PDF.</p>
+      <div class="cv-actions cv-promo-actions" hidden>
         <a class="cv-action primary" href="/leizu/intake/" data-profile="intake">Start a Leizu intake</a>
         <a class="cv-action" href="/main/" data-profile="seminar">Explore Seminar Schools</a>
         <button class="cv-action" type="button" id="downloadCvTop" data-profile="download">Download CV</button>
@@ -1291,37 +1315,10 @@ textarea:focus-visible,
     </div>
   </section>
 
-  <section class="current-work" aria-labelledby="currentWorkTitle">
-    <div class="section-intro">
-      <div><span class="archive-eyebrow" data-profile="currentEyebrow">Current work</span><h2 id="currentWorkTitle" data-profile="currentTitle">Three ways to begin</h2></div>
-      <p data-profile="currentText">Choose a direct route, then use the full archive when you need the complete record.</p>
-    </div>
-    <div class="work-grid">
-      <a class="work-card" href="/leizu/">
-        <span class="work-kicker" data-profile="leizuKicker">Individual tutoring</span>
-        <h3 data-profile="leizuTitle">Leizu Academy</h3>
-        <p data-profile="leizuText">English-language tutoring for the Ontario curriculum, the IB Diploma, and university preparation.</p>
-        <span class="work-link" data-profile="leizuLink">Explore Leizu →</span>
-      </a>
-      <a class="work-card" href="/main/">
-        <span class="work-kicker" data-profile="seminarKicker">Public learning</span>
-        <h3 data-profile="seminarTitle">Seminar Schools</h3>
-        <p data-profile="seminarText">A Toronto practice for tutoring, public reading, teacher resources, writing, and learning design.</p>
-        <span class="work-link" data-profile="seminarLink">Explore Seminar Schools →</span>
-      </a>
-      <button class="work-card" type="button" data-quick-view="teaching" aria-controls="careerArchive">
-        <span class="work-kicker" data-profile="teachingKicker">Teaching and curriculum</span>
-        <h3 data-profile="teachingTitle">Current practice</h3>
-        <p data-profile="teachingText">Open the teaching and education record, including current work and international experience.</p>
-        <span class="work-link" data-profile="teachingLink">View teaching record →</span>
-      </button>
-    </div>
-  </section>
-
-  <section class="archive-shell" id="careerArchive" aria-labelledby="archiveTitle">
+    <section class="archive-shell" id="careerArchive" aria-labelledby="archiveTitle">
     <div class="archive-heading">
-      <div><span class="archive-eyebrow" data-profile="archiveEyebrow">Full record</span><h2 id="archiveTitle" data-profile="archiveTitle">Career archive</h2></div>
-      <p id="archiveStatus" data-profile="archiveText">The complete record, arranged by timeline or by practice.</p>
+      <div><span class="archive-eyebrow" data-profile="archiveEyebrow">CV</span><h2 id="archiveTitle" data-profile="archiveTitle">Career record</h2></div>
+      <p id="archiveStatus" data-profile="archiveText">Choose sections, then save the matching PDF.</p>
     </div>
     <div class="quick-views" aria-label="Choose a CV view">
       <button type="button" data-quick-view="current" data-profile="quickCurrent">Current work</button>
@@ -1333,9 +1330,9 @@ textarea:focus-visible,
       <button type="button" data-cv-mode="theme" data-profile="viewPractice">View by practice</button>
     </div>
     <details class="archive-tools cv-module-tabs" open>
-      <summary data-profile="filterSummary">Choose what this CV shows</summary>
+      <summary data-profile="filterSummary">Choose CV sections</summary>
       <div class="archive-tool-content">
-        <p class="module-helper" data-profile="moduleHelper">Pick one or more areas. The PDF uses what you pick.</p>
+        <p class="module-helper" data-profile="moduleHelper">Select one area or combine several. The PDF follows your selection.</p>
   <nav class="filter-nav" id="filterNav" aria-label="CV areas">
     <button type="button" data-cat="all" class="on" id="allBtn">Full CV</button>
     <button type="button" data-cat="kitchen">Culinary Hospitality</button>
@@ -1352,7 +1349,7 @@ textarea:focus-visible,
     <button type="button" id="saveBtn" class="save-btn">Save as PDF</button>
     <button type="button" id="shareBtn">⎘ Share Link</button>
   </div>
-  <p id="moduleStatus" class="module-current" aria-live="polite">Showing the full CV. The PDF will use the full CV.</p>
+  <p id="moduleStatus" class="module-current" aria-live="polite">Full CV selected. PDF will include everything.</p>
       </div>
     </details>
 
@@ -2347,13 +2344,13 @@ const SAUL_PROFILE_COPY = {
     lede: "I teach through close reading, discussion, careful structure, and revision. My work moves between individual tutoring, classroom teaching, curriculum design, public seminars, and independent study.",
     intake: "Start a Leizu intake", seminar: "Explore Seminar Schools", download: "Download CV",
     stat1n: "15+", stat1l: "years teaching", stat2n: "6", stat2l: "countries", stat3n: "15", stat3l: "curricula",
-    currentEyebrow: "Current work", currentTitle: "Three ways to begin", currentText: "Choose a direct route, then use the full archive when you need the complete record.",
+    currentEyebrow: "Current work", currentTitle: "CV", currentText: "Choose sections, then save the matching PDF.",
     leizuKicker: "Individual tutoring", leizuTitle: "Leizu Academy", leizuText: "English-language tutoring for the Ontario curriculum, the IB Diploma, and university preparation.", leizuLink: "Explore Leizu →",
-    seminarKicker: "Public learning", seminarTitle: "Seminar Schools", seminarText: "A Toronto practice for tutoring, public reading, teacher resources, writing, and learning design.", seminarLink: "Explore Seminar Schools →",
+    seminarKicker: "Public learning", seminarTitle: "Seminar Schools", seminarText: "Tutoring, public reading, teacher resources, and learning design.", seminarLink: "Explore Seminar Schools →",
     teachingKicker: "Teaching and curriculum", teachingTitle: "Current practice", teachingText: "Open the teaching and education record, including current work and international experience.", teachingLink: "View teaching record →",
-    archiveEyebrow: "Full record", archiveTitle: "Career archive", archiveText: "The complete record, arranged by timeline or by practice.",
-    quickCurrent: "Current work", quickTeaching: "Teaching and education", quickAll: "Full archive", viewTimeline: "View by timeline", viewPractice: "View by practice", filterSummary: "Choose what this CV shows", moduleHelper: "Pick one or more areas. The PDF uses what you pick.",
-    statusCurrent: "Showing current teaching, education, and Seminar Schools work.", statusTeaching: "Showing teaching and education work.", statusAll: "The complete record, arranged by timeline or by practice.", statusCustom: "Showing selected areas of the record."
+    archiveEyebrow: "Full record", archiveTitle: "Career archive", archiveText: "Choose sections, then save the matching PDF.",
+    quickCurrent: "Current work", quickTeaching: "Teaching and education", quickAll: "Full archive", viewTimeline: "View by timeline", viewPractice: "View by practice", filterSummary: "Choose CV sections", moduleHelper: "Select one area or combine several. The PDF follows your selection.",
+    statusCurrent: "Showing current teaching, education, and Seminar Schools work.", statusTeaching: "Showing teaching and education work.", statusAll: "Choose sections, then save the matching PDF.", statusCustom: "Showing selected areas of the record."
   },
   zh: {
     eyebrow: "教育工作者 · 課程設計者 · 公共學習", title: "教學、課程與公共學習。",
@@ -2429,7 +2426,7 @@ function renderProfile() {
   } else if (activeEquals(['teaching','education'])) {
     moduleText = 'Showing teaching and education. The PDF will use this view.';
   } else if (active.size === 0) {
-    moduleText = 'Showing the full CV. The PDF will use the full CV.';
+    moduleText = 'Full CV selected. PDF will include everything.';
   } else if (active.size === 1) {
     const only = [...active][0];
     moduleText = 'Showing ' + (catLabels[only] || only) + '. The PDF will use this view.';
