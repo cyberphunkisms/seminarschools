@@ -1,0 +1,2422 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  Leizu Academy / cloud, recursive growth view of the curriculum
+  ============================================================================
+
+  Companion to the classic /leizu/ catalog view. The five subjects of the
+  productive cycle (木 History / 火 Philosophy / 土 English / 金 Media Literacy / 水 Social
+  Studies) appear as the first-level children of the seed. Click a subject
+  to see its courses. Click a course to see its themes and convergences.
+  Concepts that recur across multiple subjects (argumentation, writing-as-
+  thinking, ethics-in-practice, etc) appear as luminous meeting-points.
+
+  Same architecture as /aa/cloud/. The data layers differ, curriculum
+  rather than archetypes, but the dedup/physics/animation/legend/manifest
+  pattern is identical. See /aa/cloud/ template for canonical extension
+  contract.
+
+  EXTENSION CONTRACT for THIS file:
+
+  1. Data lives in /home/claude/taxsite_leizu/leizu_data.js. Schema:
+     - SUBJECTS (5 elements with element-color tokens)
+     - COURSES (~25 entries with subject + routes)
+     - ROUTES (forest / IB / OSSD)
+     - THREADS (cross-subject thematic recurrences)
+
+  2. To add a course: append to COURSES array, optionally tag THREADS.
+  3. To add a thread: append to THREADS with courses[] array of course-ids.
+  4. To add a new top-level layer: register in CLOUD_LAYERS manifest below.
+  5. Concept namespaces: subj:, course:, route:, thread:, registered in
+     CONCEPT_NAMESPACES below.
+
+  Meeting-point principle holds: a course or thread reached from multiple
+  paths is ONE node, not duplicates.
+  ============================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leizu Academy / cloud, curriculum growth</title>
+<meta name="description" content="Explore the Leizu Academy curriculum as five connected subjects, courses, routes, and shared themes.">
+<link rel="canonical" href="https://seminarschools.com/leizu/cloud/">
+<meta property="og:title" content="Leizu Academy / cloud, curriculum growth">
+<meta property="og:description" content="Leizu Academy curriculum in cloud-growth mode. Five subjects of the productive cycle expand into courses, routes, and cross-subject thematic threads.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/leizu/cloud/">
+<meta property="og:site_name" content="Seminar Schools">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0e0c0a;
+  --bg2:#1a1714;
+  --ink:#f0e8d4;
+  --ink2:#c8b896;
+  --dim:#7a6e58;
+  --faint:#4a4338;
+  --accent:#e8a04a;
+  --accent2:#d65a2a;
+  --line:rgba(232,160,74,0.12);
+  --line-active:rgba(232,160,74,0.35);
+
+  /* Tradition palette, slightly lifted from light-mode for dark-mode visibility */
+  --t-depth:#b89bb0;
+  --t-myth:#d4a888;
+  --t-folk:#a8b890;
+  --t-lit:#9aaab8;
+  --t-drama:#c89494;
+  --t-relig:#d4c08a;
+  --t-game:#90b4a8;
+  --t-pers:#a89cb4;
+  --t-brand:#b4a888;
+  --t-fan:#a0a0a0;
+  --t-child:#bca890;
+  --t-crit:#8a8aa8;
+  --t-esot:#a890b0;
+  --t-indig:#90b090;
+}
+html,body{
+  height:100%;width:100%;overflow:hidden;
+  background:var(--bg);color:var(--ink);
+  font-family:'Cormorant Garamond','Noto Serif TC',serif;
+  user-select:none;-webkit-user-select:none;
+}
+
+/* ==================== CANVAS ==================== */
+#canvas{
+  position:fixed;inset:0;
+  cursor:grab;
+  background:radial-gradient(ellipse at center, #14110d 0%, #0a0807 70%, #050403 100%);
+}
+#canvas.dragging{cursor:grabbing}
+#canvas-inner{
+  position:absolute;
+  left:50%;top:50%;
+  transform-origin:0 0;
+  will-change:transform;
+}
+
+/* ==================== BUBBLES (overlap-friendly colored discs) ==================== */
+.bubble{
+  fill-opacity:0.18;
+  /* Stroke is intentionally faint, circumferences should not announce themselves;
+     overlap zones (where fills add) are the real signal */
+  stroke-opacity:0.12;
+  stroke-width:0.5;
+  transition:fill-opacity 0.4s, stroke-opacity 0.4s;
+  mix-blend-mode:screen;
+  pointer-events:none;
+}
+
+/* ==================== EDGES ==================== */
+/* ==================== EDGES ==================== */
+#edges{
+  position:absolute;left:0;top:0;
+  pointer-events:none;
+  overflow:visible;
+}
+.edge{
+  fill:none;
+  stroke:var(--line);
+  stroke-width:0.5;
+  opacity:0.45;
+  transition:stroke 0.3s, stroke-width 0.3s, opacity 0.3s;
+}
+.edge.active{stroke:var(--line-active);stroke-width:0.8;opacity:0.7}
+/* Spiderweb: edges from the currently-pinned (focused) node render as
+   prominent rays so the user can clearly see what's spawned from where.
+   The pinned node becomes visibly the structural center. Other edges
+   stay at low baseline opacity. */
+.edge--focus{
+  stroke:#d4c2a8;
+  stroke-width:1.4;
+  opacity:0.85;
+}
+/* Membership edges: mass-archetype → tag-instance. Distinct from spawn
+   lineage. Loki is an instance of Trickster, not a child of it. Thicker,
+   gold-toned, higher visibility. */
+.edge--membership{
+  stroke:#c89858;
+  stroke-width:1.2;
+  opacity:0.55;
+}
+.edge--membership.active{stroke:#e8a04a;stroke-width:1.6;opacity:0.9}
+/* Membership edge that is ALSO from the focus, spider leg in gold. */
+.edge--focus.edge--membership{
+  stroke:#e8a04a;
+  stroke-width:1.8;
+  opacity:0.95;
+}
+/* Triple-click copy feedback. Flash on the node briefly, plus a toast. */
+.copied-flash{
+  animation: copied-pulse 0.6s ease-out;
+}
+@keyframes copied-pulse {
+  0%   { filter: brightness(2.0) drop-shadow(0 0 8px #e8a04a); }
+  100% { filter: brightness(1.0); }
+}
+/* Summoned: an existing node receives a new incoming edge from a fresh click.
+   The polymyth meeting-point gets a brief golden pulse so the user can see
+   "this concept is also part of what you just clicked." Distinct from the
+   click-flash above, this fires on a node the user did NOT click. */
+.summoned{
+  animation: summoned-pulse 0.8s ease-out;
+}
+@keyframes summoned-pulse {
+  0%   { filter: brightness(1.0); }
+  30%  { filter: brightness(1.7) drop-shadow(0 0 10px #e8a04a); }
+  100% { filter: brightness(1.0); }
+}
+#copy-toast{
+  position:fixed;
+  bottom:36px;
+  left:50%;
+  transform:translateX(-50%) translateY(10px);
+  background:rgba(232,160,74,0.92);
+  color:#1a1612;
+  font-family:'JetBrains Mono','Noto Sans Mono CJK',monospace;
+  font-size:12px;
+  letter-spacing:0.5px;
+  padding:8px 16px;
+  border-radius:0;
+  box-shadow:0 4px 16px rgba(0,0,0,0.5);
+  opacity:0;
+  transition:opacity 0.2s, transform 0.2s;
+  z-index:200;
+  pointer-events:none;
+  max-width:60vw;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+#copy-toast.visible{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+/* Meeting-point indicators: nodes with multiple incoming edges (convergent
+   concepts) get a graduated visual ring. The MORE traditions converge on a
+   concept, the more pronounced the ring. Synthesis tool: at-a-glance
+   recognition of how cross-cutting a given concept is across the cloud.
+   Subtle so it doesn't dominate; visible enough to spot the meeting-points. */
+.meeting-point--low{
+  text-shadow:0 0 8px rgba(232,160,74,0.25);
+}
+.meeting-point--mid{
+  text-shadow:0 0 12px rgba(232,160,74,0.45), 0 0 4px rgba(232,160,74,0.3);
+}
+.meeting-point--high{
+  text-shadow:0 0 18px rgba(232,160,74,0.7), 0 0 8px rgba(232,160,74,0.5);
+}
+
+/* ==================== NODES ==================== */
+.node{
+  position:absolute;
+  transform:translate(-50%,-50%);
+  cursor:pointer;
+  transition:opacity 0.4s, color 0.3s, text-shadow 0.3s, transform 0.15s ease-out;
+  white-space:nowrap;
+  padding:8px 12px;  /* bigger hit area for easier clicking */
+  text-align:center;
+  z-index:1;
+  letter-spacing:0.3px;
+  /* Growing animation runs once when each node is first rendered. The
+     overshoot at 70% gives an organic "settling into place" feel rather
+     than a mechanical pop. transform-origin defaults to center which
+     plays well with the translate(-50%,-50%) centering. */
+  animation: nodeGrow 0.75s cubic-bezier(0.34, 1.46, 0.64, 1) backwards;
+}
+.node.dragging{cursor:grabbing;animation:none}
+.node:hover{
+  color:var(--accent);
+  text-shadow:0 0 12px rgba(232,160,74,0.5);
+  z-index:10;
+  transform:translate(-50%,-50%) scale(1.08);  /* slight pop on hover */
+}
+.node.visited{opacity:0.45}
+.node.active{
+  color:var(--accent);
+  text-shadow:0 0 16px rgba(232,160,74,0.6);
+  opacity:1;
+  z-index:5;
+}
+@keyframes nodeGrow{
+  0%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(0.15);
+    filter:blur(2px);
+  }
+  60%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1.08);
+    filter:blur(0);
+  }
+  100%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1);
+    filter:blur(0);
+  }
+}
+
+/* Node type styling, leizu curriculum cloud */
+.node--seed{
+  font-size:64px;
+  font-weight:300;
+  color:var(--accent);
+  font-family:'Cormorant Garamond','Noto Serif TC',serif;
+  text-shadow:0 0 24px rgba(232,160,74,0.6);
+}
+/* Subjects: the 5 productive-cycle elements. Each gets its own color
+   token from the leizu palette. The glyph (木火土金水) reads first, the
+   English name follows. */
+.node--subject{
+  font-family:'Cormorant Garamond','Noto Serif TC',serif;
+  font-size:30px;
+  font-weight:500;
+  font-style:italic;
+  letter-spacing:0.5px;
+}
+.node--subject[data-element="wood"]{color:#8FAB78}
+.node--subject[data-element="fire"]{color:#E08AA0}
+.node--subject[data-element="earth"]{color:#D4A076}
+.node--subject[data-element="metal"]{color:#E0B574}
+.node--subject[data-element="water"]{color:#7CA5B8}
+
+/* Courses: curriculum units. Serif, mid-size, color inherited from parent
+   subject when spawned via subject-click; default cream otherwise. */
+.node--course{
+  font-family:'Cormorant Garamond','Noto Serif TC',serif;
+  font-size:18px;
+  font-weight:500;
+  color:var(--ink2);
+  max-width:280px;
+  white-space:normal;
+  line-height:1.2;
+}
+
+/* Routes: forest / IB / OSSD. Mono caps to read as a structural category
+   rather than content. */
+.node--route{
+  font-family:'JetBrains Mono','Noto Sans TC',monospace;
+  font-size:13px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--accent);
+  font-weight:500;
+}
+.node--route-gateway{
+  font-family:'JetBrains Mono','Noto Sans TC',monospace;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  color:#a89878;
+  border:1px dashed #a89878;
+  padding:6px 12px;
+}
+
+/* Threads: cross-subject thematic recurrences. Italic gold, larger than
+   courses to read as the meeting-point concepts they represent. */
+.node--thread{
+  font-family:'Cormorant Garamond','Noto Serif TC',serif;
+  font-size:22px;
+  font-style:italic;
+  font-weight:500;
+  color:#e8a04a;
+  max-width:300px;
+  white-space:normal;
+  line-height:1.2;
+  letter-spacing:0.3px;
+}
+.node--thread-gateway{
+  font-family:'JetBrains Mono','Noto Sans TC',monospace;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  color:#a89878;
+  border:1px dashed #a89878;
+  padding:6px 12px;
+}
+
+/* When an untranslatable is the focus (pinned), the categorical color scheme
+   suspends, surrounding nodes desaturate. Each kind gets a distinct tint
+   layered on grayscale, encoding what KIND of categorical exit this is.
+   Lexical-cultural: warm sepia (cultural-bound). Philosophical-conceptual:
+   cool blue (theoretical density). Religious-doctrinal: amber (sacred).
+   Aesthetic: rose. Pragmatic-interactional: green. Polysemic + performative
+   + cluster get treatments closer to neutral grayscale (the special-case
+   rendering for those, radial gradient, animation, shimmer, would need
+   per-node JS treatment, deferred). */
+
+/* ==================== CHROME ==================== */
+.chrome{
+  position:fixed;
+  z-index:100;
+  font-family:'JetBrains Mono','Noto Sans TC',monospace;
+  pointer-events:none;
+}
+.chrome > *{pointer-events:auto}
+
+#header{
+  top:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:18px 24px;
+  background:linear-gradient(to bottom, rgba(14,12,10,0.85), rgba(14,12,10,0));
+}
+#title{
+  font-family:'Cormorant Garamond','Noto Serif TC',serif;
+  font-size:14px;
+  letter-spacing:1px;
+  color:var(--ink2);
+}
+#title em{color:var(--accent);font-style:normal}
+#title a{color:var(--ink2);text-decoration:none;border-bottom:1px dotted var(--dim)}
+#title a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+
+#controls{
+  display:flex;gap:14px;align-items:center;
+  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
+}
+#controls button{
+  background:transparent;
+  border:1px solid var(--faint);
+  color:var(--dim);
+  padding:7px 12px;
+  cursor:pointer;
+  font-family:inherit;
+  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
+  transition:all 0.15s;
+}
+#controls button:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+/* Language toggle is distinguished by accent border + serif glyph */
+#controls button.lang-toggle{
+  font-family:'Noto Serif TC','Cormorant Garamond',serif;
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:0;
+  text-transform:none;
+  border-color:var(--accent);
+  color:var(--accent);
+  padding:5px 10px;
+  min-width:34px;
+}
+#controls button.lang-toggle:hover{
+  background:rgba(232,160,74,0.08);
+}
+
+#footer{
+  bottom:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding:18px 24px;
+  background:linear-gradient(to top, rgba(14,12,10,0.85), rgba(14,12,10,0));
+}
+#status{
+  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--dim);
+  display:flex;gap:18px;
+}
+#status span strong{color:var(--ink2);font-weight:500}
+#hint{
+  font-family:'Cormorant Garamond','Noto Serif TC',serif;
+  font-size:13px;
+  font-style:italic;
+  color:var(--dim);
+  text-align:right;
+  max-width:340px;
+  line-height:1.3;
+}
+
+/* ==================== LEGEND ==================== */
+/* Single size, the readable one. The previous S/M/L/XL cycler added
+   complexity for marginal benefit; only the largest size was actually
+   useful so we keep just that. Color bumped to ink2 so it's properly
+   visible against the dark canvas, not just barely. */
+#legend{
+  position:fixed;
+  bottom:60px;right:24px;
+  z-index:90;
+  background:rgba(26,23,20,0.96);
+  border:1px solid var(--rule);
+  padding:18px 22px 14px;
+  font-family:'JetBrains Mono','Noto Sans TC',monospace;
+  font-size:15px;
+  letter-spacing:0.6px;
+  color:var(--ink2);
+  max-height:calc(100vh - 200px);
+  overflow-y:auto;
+  pointer-events:auto;
+  user-select:none;
+  transition:opacity 0.3s;
+}
+#legend.collapsed .leg-list,
+#legend.collapsed .leg-types{display:none}
+#legend.collapsed{padding:10px 16px}
+.leg-header{
+  display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer;
+  letter-spacing:2px;
+  font-size:12px;
+  color:var(--ink);
+  text-transform:uppercase;
+  margin-bottom:10px;
+  padding-bottom:8px;
+  border-bottom:1px solid var(--rule);
+}
+#legend.collapsed .leg-header{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.leg-controls{display:flex;align-items:center;gap:10px}
+.leg-toggle{color:var(--accent);margin-left:0;font-size:16px}
+.leg-list{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
+.leg-item{display:flex;align-items:center;gap:10px;padding:2px 0}
+.leg-swatch{
+  display:inline-block;
+  width:18px;height:18px;
+  border-radius:50%;
+  flex-shrink:0;
+  opacity:0.95;
+}
+.leg-types{
+  border-top:1px solid var(--rule);
+  padding-top:10px;
+  margin-top:4px;
+  display:flex;flex-direction:column;gap:5px;
+  font-size:14px;
+}
+.leg-section-label{
+  font-family:'JetBrains Mono','Noto Sans TC',monospace;
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--accent);
+  opacity:0.85;
+  margin-top:12px;
+  margin-bottom:4px;
+  padding-bottom:3px;
+  border-bottom:1px dotted var(--rule);
+}
+.leg-section-label:first-child{margin-top:0}
+.leg-types .leg-item{text-transform:none;letter-spacing:0.5px;color:var(--ink2);padding:3px 0}
+.leg-types em{font-style:italic;color:var(--accent)}
+.leg-types b{font-weight:500;color:var(--ink)}
+
+/* ==================== DETAIL POPUP ==================== */
+#detail{
+  position:fixed;
+  bottom:60px;left:24px;
+  z-index:200;
+  max-width:380px;
+  background:var(--bg2);
+  border:1px solid var(--faint);
+  padding:16px 18px;
+  display:none;
+  font-family:'Cormorant Garamond','Noto Serif TC',serif;
+  pointer-events:auto;
+}
+#detail.open{display:block;animation:slidein 0.3s ease}
+@keyframes slidein{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
+#detail .dt-trad{
+  font-family:'JetBrains Mono','Noto Sans TC',monospace;
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:6px;
+}
+#detail .dt-name{
+  font-size:18px;font-weight:600;
+  margin-bottom:4px;line-height:1.15;
+}
+#detail .dt-orig{
+  font-size:12px;font-style:italic;color:var(--ink2);
+  margin-bottom:12px;
+}
+#detail .dt-note{
+  font-size:13px;color:var(--ink2);
+  line-height:1.4;
+  max-height:140px;overflow-y:auto;
+  padding-right:6px;
+}
+#detail .dt-disputed{
+  margin-top:10px;
+  font-size:11px;color:var(--accent2);
+  font-style:italic;
+  border-left:2px solid var(--accent2);
+  padding-left:8px;
+}
+#detail .dt-source{
+  margin-top:10px;
+  font-size:10px;color:var(--dim);
+  font-family:'JetBrains Mono','Noto Sans TC',monospace;
+  word-break:break-all;
+}
+#detail .dt-source a{color:var(--dim);text-decoration:none;border-bottom:1px dotted var(--faint)}
+#detail .dt-source a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+#detail .dt-close{
+  position:absolute;top:8px;right:10px;
+  background:none;border:none;color:var(--dim);
+  cursor:pointer;font-size:16px;line-height:1;
+  padding:4px;font-family:inherit;
+}
+#detail .dt-close:hover{color:var(--accent)}
+
+/* ==================== EMPTY STATE GUIDE ==================== */
+#guide{
+  position:fixed;inset:0;
+  z-index:50;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+  flex-direction:column;
+  gap:20px;
+}
+#guide-text{
+  text-align:center;
+  font-family:'Cormorant Garamond','Noto Serif TC',serif;
+  font-style:italic;
+  font-size:15px;
+  color:var(--dim);
+  margin-top:120px;
+  max-width:340px;
+  line-height:1.4;
+  opacity:0;
+  animation:fadeup 1.5s ease 0.6s forwards;
+}
+@keyframes fadeup{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:0.8;transform:translateY(0)}
+}
+#guide.hidden{display:none}
+
+/* Mobile fallback */
+@media (max-width:600px){
+  .node--taxonomy{font-size:15px;max-width:200px}
+  .node--mass{font-size:18px}
+  .node--seed{font-size:48px}
+  #hint{display:none}
+  #detail{max-width:calc(100vw - 32px);left:16px;bottom:50px}
+  #header{padding:12px 16px}
+  #footer{padding:12px 16px}
+}
+</style>
+<link rel="stylesheet" href="/css/mobile-overlay.css?v=cl91">
+<link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
+<link rel="stylesheet" href="/css/alive.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=cl91">
+</head>
+<body>
+<h1 class="sr-only">Cloud</h1>
+<style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
+
+<!-- ==================== CHROME ==================== -->
+<div class="chrome" id="header">
+  <div id="title"><em>嫘祖</em> <span>/ cloud, curriculum growth</span> · <a href="/leizu/">classic view →</a></div>
+  <div id="controls">
+    <button id="btn-reset" data-i18n="btn_reset" data-i18n-title="title_reset" title="Clear cloud and start over">reset</button>
+    <button id="btn-recenter" data-i18n="btn_recenter" data-i18n-title="title_recenter" title="Recenter on seed">recenter</button>
+  </div>
+</div>
+
+<div class="chrome" id="footer">
+  <div id="status">
+    <span><strong id="ct-nodes">0</strong> <span data-i18n="foot_nodes">nodes</span></span>
+    <span><strong id="ct-depth">0</strong> <span data-i18n="foot_deepest">deepest</span></span>
+  </div>
+  <div id="hint" data-i18n="hint">drag to pan · scroll to zoom · click any concept to grow it</div>
+</div>
+
+<div id="legend">
+  <div class="leg-header" id="leg-toggle">
+    <span>legend</span>
+    <span class="leg-toggle">−</span>
+  </div>
+  <div class="leg-list">
+    <div class="leg-item"><span class="leg-swatch" style="background:#8FAB78"></span><span>木 wood · History</span></div>
+    <div class="leg-item"><span class="leg-swatch" style="background:#E08AA0"></span><span>火 fire · Philosophy</span></div>
+    <div class="leg-item"><span class="leg-swatch" style="background:#D4A076"></span><span>土 earth · English</span></div>
+    <div class="leg-item"><span class="leg-swatch" style="background:#E0B574"></span><span>金 metal · Media Literacy</span></div>
+    <div class="leg-item"><span class="leg-swatch" style="background:#7CA5B8"></span><span>水 water · Social Studies</span></div>
+  </div>
+  <div class="leg-types">
+    <div class="leg-section-label">edges</div>
+    <div class="leg-item">solid curve = spawn lineage</div>
+    <div class="leg-item"><span style="color:#d4c2a8">bright curve</span> = focus rays (in + out from pinned)</div>
+
+    <div class="leg-section-label">typography</div>
+    <div class="leg-item"><em style="font-size:18px">italic large</em> = subject (productive cycle)</div>
+    <div class="leg-item"><b>serif</b> = course (curriculum unit)</div>
+    <div class="leg-item"><em style="color:#e8a04a">italic gold</em> = thread (cross-subject)</div>
+    <div class="leg-item">CAPS MONO = route (forest / IB / OSSD)</div>
+
+    <div class="leg-section-label">indicators</div>
+    <div class="leg-item"><span style="color:#e8a04a;text-shadow:0 0 6px rgba(232,160,74,0.7)">glowing word</span> = meeting-point (cross-subject)</div>
+    <div class="leg-item">brighter glow = more subjects converging</div>
+  </div>
+</div>
+
+<div id="detail"></div>
+
+<!-- ==================== EMPTY STATE GUIDE ==================== -->
+<div id="guide">
+  <div id="guide-text">
+    <span>Click 嫘祖 to begin.</span><br><span>Five subjects expand into courses.</span><br><span>Cross-subject threads emerge as meeting-points.</span>
+  </div>
+</div>
+
+<!-- ==================== CANVAS ==================== -->
+<div id="canvas">
+  <svg aria-hidden="true" id="edges" width="100%" height="100%">
+    <g id="bubbles-layer"></g>
+    <g id="edges-layer"></g>
+  </svg>
+  <div id="canvas-inner"></div>
+</div>
+
+<script>
+// ==================== EMBEDDED DATA ====================
+// ============================================================================
+// Leizu Academy curriculum data for the cloud-growth view.
+// ============================================================================
+// Generated from /leizu/index.html. Five subjects following the productive
+// cycle (木→火→土→金→水), each containing courses. Routes (forest / IB / OSSD)
+// are cross-cutting filters, a course can belong to multiple routes.
+//
+// Schema parallel to aa* cloud:
+//   SUBJECTS   ↔ TRADITIONS in aa* (top-level categorical containers)
+//   COURSES    ↔ TAXONOMIES (named curriculum units)
+//   ROUTES     ↔ MASS-ARCHETYPES (cross-cutting concepts spanning subjects)
+//   THEMES     ↔ TAGS (concepts within courses, expandable later)
+// ============================================================================
+
+const SUBJECTS = {
+  history: {
+    code: 'history',
+    glyph: '木',
+    pinyin: 'mù',
+    label: 'History',
+    han: '歷史',
+    element: 'wood',
+    color: '#6B8E5A',
+    gloss: 'Rooted in the past, growing upward.'
+  },
+  philosophy: {
+    code: 'philosophy',
+    glyph: '火',
+    pinyin: 'huǒ',
+    label: 'Philosophy',
+    han: '哲學',
+    element: 'fire',
+    color: '#8B3A4F',
+    gloss: 'The burning question, the light it gives.'
+  },
+  english: {
+    code: 'english',
+    glyph: '土',
+    pinyin: 'tǔ',
+    label: 'English',
+    han: '英文',
+    element: 'earth',
+    color: '#8B5A3C',
+    gloss: 'The ground all the others stand on.'
+  },
+  ai: {
+    code: 'ai',
+    glyph: '金',
+    pinyin: 'jīn',
+    label: 'Media Literacy',
+    han: '媒體素養',
+    element: 'metal',
+    color: '#B8923A',
+    gloss: 'The tool, the cut, the precise instrument.'
+  },
+  social: {
+    code: 'social',
+    glyph: '水',
+    pinyin: 'shuǐ',
+    label: 'Social Studies',
+    han: '社會研究',
+    element: 'water',
+    color: '#2E4B5C',
+    gloss: 'What flows through society in the present.'
+  }
+};
+
+// The productive-cycle ordering: wood feeds fire, fire makes earth, earth
+// bears metal, metal carries water, water grows wood. The cloud uses this
+// for visual layout cues but the curriculum doesn't enforce the cycle
+// students choose their own path through the subjects.
+const PRODUCTIVE_CYCLE = ['history', 'philosophy', 'english', 'ai', 'social'];
+
+const ROUTES = [
+  { id: 'forest', label: 'Forest year',     gloss: 'Full year inside the practice. Twice a week across all five subjects.' },
+  { id: 'ib',     label: 'IB Diploma prep', gloss: 'Six subject scores plus three core requirements. The diploma is won or lost here.' },
+  { id: 'ossd',   label: 'OSSD prep',       gloss: 'Ontario Secondary School Diploma, credits across grades 9-12 plus literacy test plus 40 community hours.' }
+];
+
+const COURSES = [
+  // History, 木
+  { id: 'h1', subject: 'history', label: 'World History', han: '世界史', codes: 'CHY4U / IB History HL & SL', routes: ['forest','ib','ossd'],
+    desc: 'Students learn to read historical events the way historians read them. Source by source, argument by argument.' },
+  { id: 'h2', subject: 'history', label: 'Canadian History', han: '加拿大史', codes: 'CHC2D · CHC2P', routes: ['ossd'],
+    desc: 'Confederation, settlement, conflict, and the long shape of Indigenous resistance.' },
+  { id: 'h3', subject: 'history', label: 'Ancient Civilizations', han: '古代文明', codes: 'CHW3M', routes: ['ossd'],
+    desc: 'Mesopotamia, Egypt, Greece, Rome, China, India. Each one treated as a thinking culture rather than a costume.' },
+  { id: 'h4', subject: 'history', label: 'Twentieth Century', han: '二十世紀史', codes: 'IB Paper 2 · CHY4U', routes: ['forest','ib','ossd'],
+    desc: 'Cold War, decolonization, total war, and the political economy of the century just past.' },
+  { id: 'h5', subject: 'history', label: 'History of Philosophy', han: '哲學史', codes: '', routes: [],
+    desc: 'Most IB History students lose marks because they treat ideas as decorations on top of events. This course teaches the inverse.' },
+
+  // Philosophy, 火
+  { id: 'p1', subject: 'philosophy', label: 'IB Theory of Knowledge', han: '知識論', codes: 'TOK essay · exhibition', routes: ['forest','ib'],
+    desc: 'Claims, counterclaims, implications. The score follows the method.' },
+  { id: 'p2', subject: 'philosophy', label: 'OSSD Philosophy', han: '哲學', codes: 'HZB3M · HZT4U', routes: ['forest','ossd'],
+    desc: 'The questions and theories course at Grade 11 and 12. Plato through to the present.' },
+  { id: 'p3', subject: 'philosophy', label: 'Logic and argument', han: '邏輯與論證', codes: '', routes: ['forest'],
+    desc: 'Detect the move inside an argument, name it, evaluate it, respond to it.' },
+  { id: 'p4', subject: 'philosophy', label: 'Introduction to ethics', han: '倫理學', codes: '', routes: [],
+    desc: 'Consequentialism, deontology, virtue ethics, care ethics. Live tools rather than a museum tour.' },
+  { id: 'p5', subject: 'philosophy', label: 'Continental philosophy', han: '歐陸哲學', codes: '', routes: ['ib'],
+    desc: 'Hegel, Heidegger, Foucault, Derrida.' },
+
+  // English, 土
+  { id: 'e1', subject: 'english', label: 'OSSD English', han: 'OSSD 英文', codes: 'ENG1D–ENG4U', routes: ['forest','ossd'],
+    desc: 'Reading and writing taught as one practice. Students arrive with a text and leave with a position they can defend.' },
+  { id: 'e2', subject: 'english', label: 'IB English A', han: 'IB 英文', codes: 'Lang & Lit · Literature · HL & SL', routes: ['forest','ib'],
+    desc: 'Close reading, comparative analysis, and the IB\'s specific demand that students argue with method.' },
+  { id: 'e3', subject: 'english', label: 'University admissions writing', han: '大學申請寫作', codes: '', routes: [],
+    desc: 'Personal statements and supplements succeed when they show the reader who is writing rather than performing polish.' },
+  { id: 'e4', subject: 'english', label: 'Academic writing', han: '學術寫作', codes: '', routes: ['forest'],
+    desc: 'Thesis construction, evidence handling, paragraph rhythm.' },
+  { id: 'e5', subject: 'english', label: 'Literary analysis', han: '文學分析', codes: '', routes: ['ib'],
+    desc: 'For students who plan to study English, comparative literature, or any humanities subject at university.' },
+  { id: 'e6', subject: 'english', label: 'ESL Intensive', han: 'ESL 強化班', codes: '', routes: [],
+    desc: 'Reading fluency, written grammar, academic register, oral confidence.' },
+
+  // Media Literacy, 金
+  { id: 'a1', subject: 'ai', label: 'Critical Media Literacy', han: '批判性媒體素養', codes: '', routes: ['forest'],
+    desc: 'Whether students use these tools to think better or to avoid thinking is the question this course is built around.' },
+  { id: 'a2', subject: 'ai', label: 'Reading and writing with the screen', han: '與媒體共讀共寫', codes: '', routes: ['forest'],
+    desc: 'The student leaves understanding which moves the screen does well and which moves only a human can do.' },
+  { id: 'a3', subject: 'ai', label: 'Academic integrity in the screen age', han: '媒體素養與學術誠信', codes: '', routes: [],
+    desc: 'Where the line is between using contemporary tools as a study aid and crossing into academic dishonesty.' },
+
+  // Social Studies, 水
+  { id: 's1', subject: 'social', label: 'OSSD Civics', han: 'OSSD 公民', codes: 'CHV2O', routes: ['ossd'],
+    desc: 'The half-credit course every Ontario student takes in Grade 10. Taught as an introduction to political theory.' },
+  { id: 's2', subject: 'social', label: 'OSSD Politics', han: 'OSSD 政治', codes: 'CPW4U', routes: ['forest','ossd'],
+    desc: 'Comparative government, political ideologies, Canadian federal politics.' },
+  { id: 's3', subject: 'social', label: 'World Issues', han: '世界議題', codes: 'CGW4U', routes: ['forest','ossd'],
+    desc: 'A geography of the present. Climate, migration, inequality, conflict.' },
+  { id: 's4', subject: 'social', label: 'Equity & Social Justice', han: '公平與社會正義', codes: 'HSE4M', routes: ['ossd'],
+    desc: 'Students learn to read theory carefully and write essays that take real positions on real disagreements.' },
+  { id: 's5', subject: 'social', label: 'IB Global Politics', han: 'IB 全球政治', codes: 'HL & SL', routes: ['forest','ib'],
+    desc: 'Engagement activities, the four core units, the HL extension on global political challenges.' }
+];
+
+// Cross-subject thematic threads. Concepts that recur across multiple
+// subjects, the polymyth-meeting-points of the curriculum. When a thread's
+// node is reached, edges connect to every course in its `courses` array.
+// This is the curriculum's "argument that recurs across subjects" surfaced
+// as visible structure.
+const THREADS = [
+  { id: 'argumentation', label: 'Argumentation', han: '論證',
+    courses: ['h1','h4','p1','p2','p3','e1','e2','e4','e5','s2','s4'],
+    gloss: 'Reading, naming, evaluating arguments. The skill all five subjects compound.' },
+  { id: 'historiography', label: 'Historiography', han: '史學',
+    courses: ['h1','h2','h3','h4','h5','p2','p5'],
+    gloss: 'How historical knowledge is made, not just what happened.' },
+  { id: 'writing-as-thinking', label: 'Writing as thinking', han: '以寫思考',
+    courses: ['e1','e2','e3','e4','e5','p1','p3','a2','s4'],
+    gloss: 'The act of writing IS the act of clarifying what you think.' },
+  { id: 'method-and-evidence', label: 'Method and evidence', han: '方法與證據',
+    courses: ['h1','h4','p1','p3','p4','a1','a2','s3','s5'],
+    gloss: 'How a discipline knows what it knows. The basis for arguing inside it.' },
+  { id: 'ethics-in-practice', label: 'Ethics in practice', han: '實踐倫理',
+    courses: ['p4','p5','a1','a3','s1','s2','s4'],
+    gloss: 'Moral frameworks brought down to specific cases.' },
+  { id: 'reading-primary-sources', label: 'Reading primary sources', han: '讀原典',
+    courses: ['h1','h3','h4','h5','p2','p5','e2','e5','s4'],
+    gloss: 'Going to the source itself rather than the secondary literature about it.' }
+];
+
+// Reverse indexes for quick lookup
+const SUBJECTS_BY_CODE = SUBJECTS;
+const COURSES_BY_ID = {};
+COURSES.forEach(c => { COURSES_BY_ID[c.id] = c; });
+const COURSES_BY_SUBJECT = {};
+COURSES.forEach(c => {
+  if (!COURSES_BY_SUBJECT[c.subject]) COURSES_BY_SUBJECT[c.subject] = [];
+  COURSES_BY_SUBJECT[c.subject].push(c);
+});
+const COURSES_BY_ROUTE = {};
+COURSES.forEach(c => {
+  (c.routes || []).forEach(r => {
+    if (!COURSES_BY_ROUTE[r]) COURSES_BY_ROUTE[r] = [];
+    COURSES_BY_ROUTE[r].push(c);
+  });
+});
+const THREADS_BY_COURSE = {};
+THREADS.forEach(t => {
+  t.courses.forEach(cid => {
+    if (!THREADS_BY_COURSE[cid]) THREADS_BY_COURSE[cid] = [];
+    THREADS_BY_COURSE[cid].push(t.id);
+  });
+});
+const THREADS_BY_ID = {};
+THREADS.forEach(t => { THREADS_BY_ID[t.id] = t; });
+const ROUTES_BY_ID = {};
+ROUTES.forEach(r => { ROUTES_BY_ID[r.id] = r; });
+
+
+// ==================== CANVAS STATE ====================
+const canvas = document.getElementById('canvas');
+const inner = document.getElementById('canvas-inner');
+const edgesSvg = document.getElementById('edges');
+const bubblesLayer = document.getElementById('bubbles-layer');
+const edgesLayer = document.getElementById('edges-layer');
+const guide = document.getElementById('guide');
+const detail = document.getElementById('detail');
+
+// Tradition color map mirrors CSS vars, used for SVG fill/stroke directly
+const TRAD_COLOR = {
+  depth:'#b89bb0', myth:'#d4a888', folk:'#a8b890', lit:'#9aaab8',
+  drama:'#c89494', relig:'#d4c08a', game:'#90b4a8', pers:'#a89cb4',
+  brand:'#b4a888', fan:'#a0a0a0', child:'#bca890', crit:'#8a8aa8',
+  esot:'#a890b0', indig:'#90b090'
+};
+const ACCENT_COLOR = '#e8a04a';
+const NEUTRAL_COLOR = '#7a6e58';
+
+// Cloud-view scope filter: aa* the archive includes some entries that scholars call
+// "typologies" but which are NOT figure/character/role typologies in the strict
+// archetype sense (religious praxis lists, philosophical schools, abstract doctrines,
+// divine-attribute lists, narrative-beat sequences, etc.). The classic /aa/ archive
+// keeps everything for completeness. The cloud view filters to figure-archetypes only.
+let panX = 0, panY = 0, zoom = 1;
+let isDragging = false, dragStartX = 0, dragStartY = 0, dragStartPanX = 0, dragStartPanY = 0;
+let didDrag = false;
+
+function applyTransform(){
+  const cx = canvas.clientWidth / 2;
+  const cy = canvas.clientHeight / 2;
+  inner.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
+  // SVG is positioned at top-left (0,0) while inner is at center (50%,50%).
+  // Add canvas-center offset to SVG transform so world (0,0) renders at the
+  // same screen position in both layers, otherwise bubbles drift half a canvas
+  // away from the nodes they're meant to enclose.
+  edgesSvg.style.transform = `translate(${cx + panX}px, ${cy + panY}px) scale(${zoom})`;
+  edgesSvg.style.transformOrigin = '0 0';
+}
+
+// ==================== NODE STATE ====================
+// Every spawned node is in `nodes` Map keyed by unique id.
+// Format: { id, type, label, x, y, vx, vy, r, el, parentId, depth, data }
+const nodes = new Map();
+const edges = []; // {fromId, toId}  (parent → child spawn lineage)
+let nextNodeId = 0;
+let activeNodeId = null;
+
+function genId(prefix){ return `${prefix}-${nextNodeId++}`; }
+
+// Normalize a label to its canonical concept-key form. Lowercase, trimmed,
+// collapsed whitespace, leading articles stripped. This is the basis for
+// "every word is one tag", the principle that the same word reached from
+// different paths IS the same concept, not separate instances.
+//
+// Article stripping catches real duplicates the audit found: "The Quest" /
+// "Quest", "Rogue" / "The Rogue", "Guardian" / "The Guardian", "Bold" /
+// "The Bold", "initiate" / "The Initiate". Different curators wrote with
+// or without "The", same concept either way.
+function normalizeLabel(s){
+  if (!s) return '';
+  return String(s)
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, ' ')
+    .replace(/^(the|a|an) /, '');
+}
+
+// A conceptId identifies the underlying entity. Two prospective nodes with
+// the same conceptId resolve to the SAME node (meeting point). The cloud
+// never displays the same word twice, concepts ARE their convergences.
+function computeConceptId(node){
+  switch(node.type){
+    case 'seed': return 'seed';
+    case 'subject': return 'subj:' + (node.data.code || node.data.subject?.code || normalizeLabel(node.label));
+    // Course conceptId is course-id-based, not label-based, different
+    // courses can have similar names across subjects (OSSD English / IB
+    // English) but they ARE different courses.
+    case 'course': return 'course:' + (node.data.course?.id || node.data.id || normalizeLabel(node.label));
+    case 'route': return 'route:' + (node.data.route?.id || node.data.id);
+    case 'route-gateway': return 'route:gateway';
+    // Thread conceptId is id-based so a thread reached as gateway-spawn
+    // and as course-spawn dedupe to the same node, meeting-point.
+    case 'thread': return 'thr:' + (node.data.thread?.id || node.data.id);
+    case 'thread-gateway': return 'thr:gateway';
+    default: return 'u:' + node.id;
+  }
+}
+
+// Per-type label-size estimate. Used as collision radius for force-directed layout.
+// Estimates are rough, physics relaxation smooths errors.
+function estimateRadius(node){
+  const len = (node.label || '').length;
+  switch(node.type){
+    case 'seed': return 50;
+    case 'subject': return 50 + len * 2.0;
+    case 'course': return 38 + Math.min(len, 32) * 1.8;
+    case 'route': return 36 + Math.min(len, 18) * 2.0;
+    case 'route-gateway': return 38 + len * 1.5;
+    case 'thread': return 40 + Math.min(len, 28) * 2.2;
+    case 'thread-gateway': return 38 + len * 1.5;
+    default: return 32;
+  }
+}
+
+// Get a node's actual rendered bounding box (half-width and half-height plus
+// a small visual padding so edges don't touch the text). Falls back to
+// estimated radius if the DOM element isn't available yet (during initial
+// render before measurement). Returns world-space (un-zoomed) dimensions
+// because edges are drawn in world coordinates, the SVG layer carries the
+// same transform as the node layer, so the box is in matching coordinates.
+function getNodeBox(node){
+  if (node && node.el && node.el.offsetWidth > 0){
+    return {
+      hw: node.el.offsetWidth / 2 + 6,
+      hh: node.el.offsetHeight / 2 + 4
+    };
+  }
+  // Fallback for nodes without measured DOM yet
+  const r = estimateRadius(node) / 2;
+  return { hw: r, hh: r };
+}
+
+// Trim a line from one node to another so the endpoints sit on the EDGES of
+// each node's label-box rather than at the centers. Without trimming, the
+// bezier starts inside the source label and ends inside the target label,
+// producing visual collision between the line and the text. With trimming,
+// edges visibly start AT the label's outer edge along the line direction.
+//
+// Algorithm: parametrize the line as p(t) = from + t*(to - from) for t in
+// [0, 1]. The line exits the source's bounding box at the smaller of two
+// times: hw/|dx| (vertical edge) or hh/|dy| (horizontal edge). Same for
+// entering the target's box, but worked from t=1 backward.
+function trimEdgeToBoxes(from, to){
+  const dx = to.x - from.x;
+  const dy = to.y - from.y;
+  const total = Math.hypot(dx, dy);
+  // Degenerate: nodes overlap. Skip trimming.
+  if (total < 1) return { x1: from.x, y1: from.y, x2: to.x, y2: to.y };
+
+  const fb = getNodeBox(from);
+  const tb = getNodeBox(to);
+  const adx = Math.abs(dx), ady = Math.abs(dy);
+
+  // t-value at which line exits the source box (working from t=0 forward)
+  let t1;
+  if (adx === 0) t1 = fb.hh / ady;
+  else if (ady === 0) t1 = fb.hw / adx;
+  else t1 = Math.min(fb.hw / adx, fb.hh / ady);
+
+  // t-value at which line enters the target box (working from t=1 backward)
+  let t2;
+  if (adx === 0) t2 = 1 - tb.hh / ady;
+  else if (ady === 0) t2 = 1 - tb.hw / adx;
+  else t2 = 1 - Math.min(tb.hw / adx, tb.hh / ady);
+
+  // Degenerate: the boxes overlap so much that the trimmed segment would
+  // be inverted. Fall back to a tiny segment at the midpoint.
+  if (t1 >= t2){
+    const mid = 0.5;
+    return {
+      x1: from.x + mid * dx,
+      y1: from.y + mid * dy,
+      x2: from.x + mid * dx,
+      y2: from.y + mid * dy
+    };
+  }
+
+  return {
+    x1: from.x + t1 * dx,
+    y1: from.y + t1 * dy,
+    x2: from.x + t2 * dx,
+    y2: from.y + t2 * dy
+  };
+}
+
+// ============================================================================
+// EXTENSION ARCHITECTURE, How to add new data layers to the cloud
+// ============================================================================
+// The cloud's data is composed of LAYERS. A layer is a self-contained body of
+// concepts (currently: traditions, mass-archetypes, motifs, untranslatables;
+// future: oppositions, settings, transformations, character↔setting bindings).
+// Each layer is loaded from its own data file (data.js, motifs.js, etc.)
+// injected by build_cloud.py via a __PLACEHOLDER__ token.
+//
+// To add a new layer (e.g. "oppositions"):
+//   1. Create taxsite/oppositions.js with const OPPOSITIONS = [...];
+//   2. Add reverse indexes built at end of file.
+//   3. Add to build_cloud.py: read file, replace __OPPOSITIONS_DATA__ token.
+//   4. Add __OPPOSITIONS_DATA__ token near other tokens in this template.
+//   5. Add a CLOUD_LAYERS entry below.
+//   6. Add new node types (if needed) to:
+//        - CONCEPT_NAMESPACES (below) so the conceptId namespace is reserved
+//        - computeConceptId switch
+//        - estimateRadius switch
+//        - .node--<type> CSS rule
+//        - spawn-case in spawnFromNode if clickable
+//        - detail panel branch in showDetailFromNode
+//        - legend (in the typography or indicators section)
+//
+// The spawn-switch in spawnFromNode is the only place where adding a NEW type
+// requires editing existing code. All other touchpoints are additive.
+//
+// ============================================================================
+// CONCEPT_NAMESPACES, registry of conceptId prefixes
+// ============================================================================
+// Every node has a conceptId computed by computeConceptId(node). Two nodes
+// with the same conceptId are the SAME node (meeting-point dedup). Each type
+// uses a distinct prefix to prevent collision. New types MUST register here.
+const CONCEPT_NAMESPACES = {
+  'seed':     { prefix: 'seed',    uses: 'singular root node (嫘祖)' },
+  'subject':  { prefix: 'subj:',   uses: 'subject code (history/philosophy/english/ai/social)' },
+  'course':   { prefix: 'course:', uses: 'course id (h1/p2/e3/a1/s5 etc)' },
+  'route':    { prefix: 'route:',  uses: 'route id (forest/ib/ossd)' },
+  'thread':   { prefix: 'thr:',    uses: 'thematic thread id (argumentation/writing-as-thinking/etc)' },
+  'route-gateway':  { prefix: 'route:gateway',  uses: 'singular gateway node revealing all routes' },
+  'thread-gateway': { prefix: 'thr:gateway',    uses: 'singular gateway node revealing all threads' },
+};
+
+// ============================================================================
+// CLOUD_LAYERS, the layer manifest
+// ============================================================================
+// The seed-spawn case iterates this manifest, asking each layer what it
+// contributes as a top-level child of the seed. Layers can also declare
+// metadata used elsewhere (legend regen, depth-spawn, statistics).
+//
+// Each layer entry is { id, label, seedSpawn, sourceData, nodeType, spawnFromSeed }.
+// - seedSpawn: should this layer place children at the top level when seed
+//   is clicked? Most yes. Some layers (e.g. relations like opposition)
+//   might be discoverable only via specific node-clicks rather than
+//   top-level spawn, those have seedSpawn:false.
+// - spawnFromSeed: function returning array of {type, label, data} objects.
+//   Returns [] if the layer is unavailable (data not loaded yet).
+const CLOUD_LAYERS = [
+  {
+    id: 'subjects',
+    label: 'subjects (productive cycle)',
+    seedSpawn: true,
+    sourceData: 'SUBJECTS',
+    spawnFromSeed: () => PRODUCTIVE_CYCLE.map(code => {
+      const s = SUBJECTS[code];
+      return {
+        type: 'subject',
+        label: s.glyph + ' ' + s.label,
+        data: { subject: s, code }
+      };
+    })
+  },
+  {
+    id: 'routes',
+    label: 'routes',
+    seedSpawn: true,
+    sourceData: 'ROUTES',
+    spawnFromSeed: () => {
+      if (typeof ROUTES === 'undefined' || ROUTES.length === 0) return [];
+      return [{ type: 'route-gateway', label: 'routes', data: { count: ROUTES.length } }];
+    }
+  },
+  {
+    id: 'threads',
+    label: 'cross-subject threads',
+    seedSpawn: true,
+    sourceData: 'THREADS',
+    spawnFromSeed: () => {
+      if (typeof THREADS === 'undefined' || THREADS.length === 0) return [];
+      return [{ type: 'thread-gateway', label: 'threads', data: { count: THREADS.length } }];
+    }
+  },
+];
+
+// ==================== SPAWN LOGIC ====================
+// Each node type defines what it spawns when clicked.
+
+// ==================== POSITIONING ====================
+// When spawning N children of parent at (px, py), distribute angularly.
+// Use a starting angle offset so spawn doesn't always go straight up.
+
+function getAngleSpread(parentNode, n){
+  // For root (seed), full 2π. For others, prefer outward from parent's angle from origin.
+  let centerAngle = 0;
+  if (parentNode.parentId !== null){
+    const grand = nodes.get(parentNode.parentId);
+    if (grand){
+      centerAngle = Math.atan2(parentNode.y - grand.y, parentNode.x - grand.x);
+    }
+  } else {
+    centerAngle = -Math.PI / 2; // start spreading upward
+  }
+  const arc = parentNode.parentId === null ? Math.PI * 2 : Math.PI * 1.4; // wider for seed
+  const start = centerAngle - arc/2 + (arc / (2*n));
+  return { start, step: arc / n };
+}
+
+function spawnNodes(parentId, newNodes){
+  const parent = nodes.get(parentId);
+  if (!parent) return;
+  // Spawn radius scales with sibling count to avoid collisions on initial layout.
+  // For n children around a parent: arc spacing = 2πR/n. We want spacing ≥ 18·n
+  // (rough collision-clearance budget). Combined with springTarget as floor:
+  //   R = max(springTarget, 18·n)
+  // Children spawned beyond springTarget will spring inward, but with softK
+  // and maxStep cap the inward drift is constant-velocity (~48 px/sec) and
+  // never oscillates past target. Children at exactly springTarget have zero
+  // initial radial force.
+  const radius = Math.max(SIM.springTarget, 18 * newNodes.length);
+  const { start, step } = getAngleSpread(parent, newNodes.length);
+
+  // Track newly-spawned IDs so we don't connect a new node to its same-spawn siblings
+  const newlySpawnedIds = [];
+
+  // Build a fast conceptId → existing-node lookup so we can detect meeting
+  // points without iterating the full node Map per child.
+  const byConceptId = new Map();
+  nodes.forEach(n => {
+    if (n.conceptId && n.conceptId !== 'seed') byConceptId.set(n.conceptId, n);
+  });
+
+  newNodes.forEach((nd, i) => {
+    // Compute the prospective conceptId BEFORE creating the node, if a node
+    // with this conceptId already exists in the cloud, we connect to it
+    // instead of duplicating. Every word is ONE tag. Concepts ARE meeting
+    // points; they don't have separate instances that need dashed lines
+    // drawn between them. The node is the convergence.
+    const probe = { type: nd.type, label: nd.label, data: nd.data };
+    const prospectiveCid = computeConceptId(probe);
+
+    const existing = byConceptId.get(prospectiveCid);
+    if (existing && existing.id !== parentId){
+      // Meeting point hit. Add edge from parent to existing, without
+      // duplicating if the edge already exists from a prior visit.
+      const dup = edges.some(e => e.fromId === parentId && e.toId === existing.id);
+      if (!dup) edges.push({ fromId: parentId, toId: existing.id });
+      // Briefly highlight the existing node so the user sees the connection
+      if (existing.el){
+        existing.el.classList.add('summoned');
+        setTimeout(() => existing.el && existing.el.classList.remove('summoned'), 800);
+      }
+      return;
+    }
+
+    // No existing node, spawn fresh
+    const angle = start + step * i;
+    const x = parent.x + Math.cos(angle) * radius;
+    const y = parent.y + Math.sin(angle) * radius;
+    const id = genId(nd.type);
+    const node = {
+      id, type: nd.type, label: nd.label,
+      x, y, vx: 0, vy: 0, el: null,
+      parentId, depth: parent.depth + 1,
+      data: nd.data,
+      visited: false,
+      hasSpawned: false,
+      pinned: false,
+    };
+    node.r = estimateRadius(node);
+    node.conceptId = prospectiveCid;
+    nodes.set(id, node);
+    byConceptId.set(prospectiveCid, node);
+    edges.push({ fromId: parentId, toId: id });
+    renderNode(node);
+    newlySpawnedIds.push(id);
+  });
+
+
+  renderEdges();
+  setActive(parentId);
+  parent.hasSpawned = true;
+  drawBubble(parentId);
+  updateStatus();
+  reheatSim();
+  // Focus camera on the clicked node + its just-spawned children. Defer one
+  // frame so the new bubble's r is computed and the focus rect is accurate.
+  requestAnimationFrame(() => autoFit(parentId));
+}
+
+// ==================== CLICK HANDLERS PER TYPE ====================
+function spawnFromNode(node){
+  // Every click re-engages camera autoFit. Drag/wheel sets userOverrodeZoom
+  // to suppress per-frame fighting during a manual gesture, but a fresh click
+  // is an explicit "this is my new POV" signal, clear the override so autoFit
+  // re-anchors on the just-clicked node.
+  userOverrodeZoom = false;
+
+  // EGGY SPAWN: trigger the fast-equilibrium envelope. Sim runs in fast
+  // bouncy mode for ~3.5 seconds then eases back to slow steady-state.
+  // Whether the click spawns new children or just re-pins an existing
+  // node, the cloud needs to rapidly reorient around the new focus.
+  lastSpawnAt = performance.now();
+
+  // INDRA'S-JEWEL PIN: release the prior focus pin (let it drift back into
+  // the physics field), then pin the just-clicked node as the new still
+  // center. Cloud reorients via existing spring-spawning physics around it.
+  nodes.forEach(n => { if (n.pinned && n.id !== node.id) n.pinned = false; });
+  node.pinned = true;
+
+  // Untranslatable focus mode: when an untranslatable is pinned, surrounding
+  // nodes desaturate via per-kind CSS filter. The categorical color scheme
+  // suspends because the untranslatable operates outside the 14-tradition
+  // apparatus. Body class drives the filter; cleared on non-untranslatable pin.
+  document.body.classList.remove('untrans-focus',
+    'untrans-focus--lexical-cultural',
+    'untrans-focus--philosophical-conceptual',
+    'untrans-focus--religious-doctrinal',
+    'untrans-focus--aesthetic',
+    'untrans-focus--pragmatic-interactional',
+    'untrans-focus--polysemic',
+    'untrans-focus--performative',
+    'untrans-focus--cluster');
+  if (node.type === 'untranslatable' && node.data.entry && Array.isArray(node.data.entry.kind)){
+    document.body.classList.add('untrans-focus');
+    // Apply primary kind's filter (first in the array)
+    const primaryKind = node.data.entry.kind[0];
+    if (primaryKind) document.body.classList.add('untrans-focus--' + primaryKind);
+  }
+
+  if (node.hasSpawned){
+    // Already spawned: re-anchor camera on this node (treat as new POV)
+    setActive(node.id);
+    requestAnimationFrame(() => autoFit(node.id));
+    return;
+  }
+  let children = [];
+  switch(node.type){
+    case 'seed': {
+      // Seed iterates the CLOUD_LAYERS manifest. Adding a new top-level
+      // layer (e.g. specializations, scholar-cohorts, school-partnerships)
+      // means appending one entry to CLOUD_LAYERS, no edits here.
+      CLOUD_LAYERS.forEach(layer => {
+        if (layer.seedSpawn && typeof layer.spawnFromSeed === 'function'){
+          const items = layer.spawnFromSeed() || [];
+          items.forEach(c => children.push(c));
+        }
+      });
+      break;
+    }
+    case 'subject': {
+      // Subject -> its courses. Each course is a curriculum unit within
+      // the subject. Courses with cross-subject threads will visibly
+      // converge on thread nodes when those threads are also spawned.
+      const code = node.data.code || node.data.subject?.code;
+      const list = COURSES_BY_SUBJECT[code] || [];
+      list.forEach(c => {
+        children.push({
+          type: 'course',
+          label: c.label,
+          data: { course: c, id: c.id }
+        });
+      });
+      break;
+    }
+    case 'course': {
+      // Course -> its threads (cross-subject themes). Each thread is a
+      // meeting-point: clicking a course's thread reveals other courses
+      // that share it. The dedup logic ensures the same thread reached
+      // from different courses is ONE node.
+      const c = node.data.course;
+      if (!c) break;
+      const threadIds = THREADS_BY_COURSE[c.id] || [];
+      threadIds.forEach(tid => {
+        const t = THREADS_BY_ID[tid];
+        if (t){
+          children.push({
+            type: 'thread',
+            label: t.label,
+            data: { thread: t, id: t.id }
+          });
+        }
+      });
+      // Course also reveals its routes (forest / IB / OSSD memberships).
+      // These dedupe to the route nodes that already exist or are spawned
+      // via the route-gateway.
+      (c.routes || []).forEach(rid => {
+        const r = ROUTES_BY_ID[rid];
+        if (r){
+          children.push({
+            type: 'route',
+            label: r.label,
+            data: { route: r, id: r.id }
+          });
+        }
+      });
+      break;
+    }
+    case 'route-gateway': {
+      // Gateway expands to the 3 routes
+      ROUTES.forEach(r => {
+        children.push({
+          type: 'route',
+          label: r.label,
+          data: { route: r, id: r.id }
+        });
+      });
+      break;
+    }
+    case 'route': {
+      // Route -> all courses on this route
+      const list = COURSES_BY_ROUTE[node.data.id] || [];
+      list.forEach(c => {
+        children.push({
+          type: 'course',
+          label: c.label,
+          data: { course: c, id: c.id }
+        });
+      });
+      break;
+    }
+    case 'thread-gateway': {
+      // Gateway expands to all threads
+      THREADS.forEach(t => {
+        children.push({
+          type: 'thread',
+          label: t.label,
+          data: { thread: t, id: t.id }
+        });
+      });
+      break;
+    }
+    case 'thread': {
+      // Thread -> all courses that participate in this thread. This is
+      // where the convergence reads visibly: a thread spawning 9 courses
+      // across 3 subjects shows the curriculum's shared concerns.
+      const t = node.data.thread;
+      if (!t) break;
+      (t.courses || []).forEach(cid => {
+        const c = COURSES_BY_ID[cid];
+        if (c){
+          children.push({
+            type: 'course',
+            label: c.label,
+            data: { course: c, id: c.id }
+          });
+        }
+      });
+      break;
+    }
+  }
+
+  // Filter out children already spawned from this same parent (defensive)
+  if (children.length === 0){
+    // Leaf node, show detail panel if applicable
+    showDetailFromNode(node);
+    setActive(node.id);
+    return;
+  }
+
+  // Show explanation panel for the clicked node, every type, not just taxonomy.
+  // showDetailFromNode pulls from existing per-type data sources (SUBJECTS
+  // descriptions, course descriptions, route gloss, thread gloss).
+  showDetailFromNode(node);
+
+  spawnNodes(node.id, children);
+
+  // Pan toward the new growth
+  panToward(node.x, node.y, 200);
+}
+
+// ==================== RENDERING ====================
+function renderNode(node){
+  const el = document.createElement('div');
+  el.className = `node node--${node.type} spawning`;
+  el.dataset.id = node.id;
+  el.style.left = node.x + 'px';
+  el.style.top = node.y + 'px';
+
+  if (node.type === 'seed'){
+    el.textContent = '嫘祖';
+  } else {
+    el.textContent = node.label;
+  }
+
+  // Leizu coloring + data-attributes. Subjects get data-element so the CSS
+  // [data-element="wood"] selectors can apply the element-specific color.
+  // Courses inherit their subject's color. Threads use accent gold. Routes
+  // and gateways stay at default styling.
+  if (node.type === 'subject'){
+    const s = node.data.subject;
+    if (s){
+      el.dataset.element = s.element;
+      el.style.color = s.color;
+    }
+  } else if (node.type === 'course'){
+    const c = node.data.course;
+    if (c){
+      const subj = SUBJECTS[c.subject];
+      if (subj && subj.color) el.style.color = subj.color;
+    }
+  } else if (node.type === 'thread'){
+    el.style.color = '#e8a04a';
+  }
+
+  // Click counter for triple-click copy detection. Tracks clicks per element
+  // with a 600ms window. On the third click, copy the node's label to
+  // clipboard and flash visual feedback. Spawn behavior fires on first click
+  // as normal, copy is purely additive and doesn't displace the spawn.
+  let clickCount = 0;
+  let clickTimer = null;
+  el.addEventListener('click', e => {
+    e.stopPropagation();
+    if (didDrag) return; // suppress click after drag
+    hideGuide();
+
+    // Triple-click copy logic. Skip on seed (label is "*", not useful).
+    if (node.type !== 'seed'){
+      clickCount++;
+      if (clickTimer) clearTimeout(clickTimer);
+      clickTimer = setTimeout(() => { clickCount = 0; }, 600);
+      if (clickCount >= 3){
+        clickCount = 0;
+        // Copy the node's label. For motif-member nodes, strip the
+        // "(Author Year)" parenthetical so the user gets the bare label.
+        let copyText = node.label;
+        if (node.type === 'motif-member'){
+          copyText = copyText.replace(/\s*\([^)]*\)\s*$/, '');
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(copyText).then(() => {
+            showCopyToast(copyText);
+            el.classList.add('copied-flash');
+            setTimeout(() => el.classList.remove('copied-flash'), 600);
+          }).catch(() => {});
+        }
+      }
+    }
+
+    spawnFromNode(node);
+  });
+
+  inner.appendChild(el);
+  node.el = el;
+}
+
+function renderEdges(){
+  // Clear and re-render all edges as SVG paths
+  while (edgesLayer.firstChild) edgesLayer.removeChild(edgesLayer.firstChild);
+
+  // Find the currently-pinned node (Indra's jewel). Edges FROM it get the
+  // spiderweb treatment, prominent rays radiating outward. Other edges
+  // stay at low baseline opacity so the structural center reads clearly.
+  let focusedId = null;
+  nodes.forEach(n => { if (n.pinned) focusedId = n.id; });
+
+  // Count incoming edges per node so we can mark meeting-points (multi-
+  // parent nodes) with a visual indicator. The MORE traditions converge on
+  // a concept, the more pronounced the ring, synthesis tool: at-a-glance
+  // recognition of how cross-cutting a given concept is.
+  const incomingCount = new Map();
+  edges.forEach(e => {
+    incomingCount.set(e.toId, (incomingCount.get(e.toId) || 0) + 1);
+  });
+
+  edges.forEach(e => {
+    const from = nodes.get(e.fromId);
+    const to = nodes.get(e.toId);
+    if (!from || !to) return;
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    // Trim edge endpoints to the bounding boxes of source/target labels.
+    // Without trimming, the bezier starts at the node CENTER which is
+    // visually inside the text label, line and text occupy the same space.
+    // Trimming computes the line-rectangle intersection and uses those
+    // points as the endpoints. Lines now start AT the visible label edge.
+    const trimmed = trimEdgeToBoxes(from, to);
+    const fx = trimmed.x1, fy = trimmed.y1;
+    const tx = trimmed.x2, ty = trimmed.y2;
+    const dx = tx - fx, dy = ty - fy;
+    const cx1 = fx + dx * 0.5;
+    const cy1 = fy + dy * 0.1;
+    const cx2 = fx + dx * 0.5;
+    const cy2 = ty - dy * 0.1;
+    path.setAttribute('d', `M ${fx} ${fy} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${tx} ${ty}`);
+
+    // Compose edge classes based on relation type + focus status
+    const classes = ['edge'];
+    if (from.type === 'mass') classes.push('edge--membership');
+    if (from.type === 'motif') classes.push('edge--motif');
+    if (from.type === 'untranslatable' && to.type === 'untranslatable'){
+      classes.push('edge--adjacency');
+    }
+    if (from.id === focusedId || to.id === focusedId) classes.push('edge--focus');
+    path.setAttribute('class', classes.join(' '));
+
+    edgesLayer.appendChild(path);
+  });
+
+  // Tag nodes by meeting-point intensity. Three tiers based on incoming-edge
+  // count. The visual ring intensity reads as: how many traditions converge
+  // on this concept. Single-tradition concepts have no ring (clean leaf).
+  // Cross-tradition concepts have a subtle gold ring. Highly-convergent
+  // concepts (5+) have a stronger ring.
+  nodes.forEach(node => {
+    if (!node.el) return;
+    const count = incomingCount.get(node.id) || 0;
+    node.el.classList.remove('meeting-point--low', 'meeting-point--mid', 'meeting-point--high');
+    if (count >= 5){
+      node.el.classList.add('meeting-point--high');
+    } else if (count >= 3){
+      node.el.classList.add('meeting-point--mid');
+    } else if (count >= 2){
+      node.el.classList.add('meeting-point--low');
+    }
+  });
+}
+
+// Render convergence as constellations. For every conceptId with 2+ instances:
+//   - Compute centroid of all instances
+//   - Draw a line from each instance to the centroid, colored by the
+//     instance's SOURCE tradition (so polychromy = cross-tradition confluence,
+//     monochromy = within-tradition recurrence, the line color IS the data)
+//   - Place a clickable label at the centroid: "ConceptName ×N"
+//     in the convergent concept's color
+//   - Clicking the label refocuses the camera on all instances
+
+// Pick a short, readable label for a concept (for the constellation hub label).
+
+// Return the tradition code that a node "belongs to" for line-color purposes.
+// Walks up the parent chain until a tradition is found. Returns code string.
+
+// Click a constellation label: refocus camera on all instances of that concept.
+
+// ==================== BUBBLES (overlap-friendly colored discs) ====================
+// Each node that has spawned children gets a translucent colored disc drawn around
+// it and its descendants. Discs overlap freely, when two clicked items spatially
+// overlap, the overlap zone is the polymyth confluence made visible.
+//
+// Bubble color = the actual computed font color of the parent node. So the disc
+// always exactly matches the text inside it, no static mapping required.
+// Resolve a node's actual visible color. In modern browsers getComputedStyle
+// returns rgb(...) for CSS-var-based colors. JSDOM and edge cases can return
+// the raw var() string, fall back to the type-based hex in that case so SVG
+// fill/stroke always gets a real color value.
+function resolveColor(node){
+  if (!node) return ACCENT_COLOR;
+  // Subjects use their element color. Courses inherit from their subject
+  // when reachable via parent. Threads use accent gold. Default to accent.
+  if (node.type === 'subject'){
+    return node.data.subject?.color || ACCENT_COLOR;
+  }
+  if (node.type === 'course'){
+    const subj = SUBJECTS[node.data.course?.subject];
+    if (subj && subj.color) return subj.color;
+    return ACCENT_COLOR;
+  }
+  if (node.type === 'thread') return '#e8a04a';
+  if (node.el){
+    const c = getComputedStyle(node.el).color;
+    if (c && c !== '' && c !== 'rgba(0, 0, 0, 0)' && !c.includes('var(')) return c;
+  }
+  return ACCENT_COLOR;
+}
+
+function getNodeColor(node){ return resolveColor(node); }
+
+function drawBubble(parentId){
+  const parent = nodes.get(parentId);
+  if (!parent) return;
+  // Find children via outgoing edges, not parentId. With node-reuse (every
+  // word is one tag), a child node may have its parentId pointing at the
+  // FIRST parent that spawned it but receive additional incoming edges from
+  // later parents. The bubble should enclose every node this parent has an
+  // edge to.
+  const children = [];
+  edges.forEach(e => {
+    if (e.fromId === parentId){
+      const c = nodes.get(e.toId);
+      if (c) children.push(c);
+    }
+  });
+  if (children.length === 0){
+    // Leaf node, remove any existing bubble
+    const existing = bubblesLayer.querySelector(`circle[data-bubble-id="${parentId}"]`);
+    if (existing) existing.remove();
+    return;
+  }
+  // Bounding circle: centroid of (parent + children), radius = max distance + padding
+  const points = [parent, ...children];
+  const cx = points.reduce((s,p)=>s+p.x,0) / points.length;
+  const cy = points.reduce((s,p)=>s+p.y,0) / points.length;
+  let r = 0;
+  points.forEach(p => {
+    const d = Math.hypot(p.x-cx, p.y-cy);
+    if (d > r) r = d;
+  });
+  r += 80; // padding for label width
+
+  const color = getNodeColor(parent);
+  let circle = bubblesLayer.querySelector(`circle[data-bubble-id="${parentId}"]`);
+  if (!circle){
+    circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('class', 'bubble');
+    circle.setAttribute('data-bubble-id', parentId);
+    circle.setAttribute('data-type', parent.type);
+    bubblesLayer.appendChild(circle);
+  }
+  circle.setAttribute('cx', cx);
+  circle.setAttribute('cy', cy);
+  circle.setAttribute('r', r);
+  circle.setAttribute('fill', color);
+  circle.setAttribute('stroke', color);
+}
+
+function redrawAllBubbles(){
+  // Recompute every existing bubble (used after spawns to update older bubbles
+  // whose children may have moved or grown)
+  const drawn = new Set();
+  nodes.forEach(n => {
+    if (n.hasSpawned){
+      drawBubble(n.id);
+      drawn.add(n.id);
+    }
+  });
+  // Cleanup orphaned bubbles
+  bubblesLayer.querySelectorAll('circle[data-bubble-id]').forEach(c => {
+    const id = c.getAttribute('data-bubble-id');
+    if (!drawn.has(id)) c.remove();
+  });
+}
+
+// ==================== FORCE-DIRECTED SIMULATION ====================
+// Every node repels every other (collision avoidance). Every node is spring-pulled
+// toward its parent. Mild center-pull keeps the cloud from drifting off-canvas.
+// Sim runs while there's energy, idles when settled. Reheats on every spawn.
+// ==================== PHYSICS CONSTANTS (with math) ====================
+//
+// Spring (parent-child attraction):
+//   springK = 0.0015, damping = 0.94
+//   → ω_s = √K = 0.0387 rad/frame
+//   → damping ratio ζ_s = (1−ρ)/(2ω_s) = 0.06/0.0775 = 0.775 (slight underdamp)
+//   → ~2% overshoot, settles to 5% in 100 frames (1.67 sec)
+//
+// MaxStep cap = 0.8 px/frame = 48 px/sec ceiling on any node velocity.
+// During post-spawn settling (initial disturbance Δ from spring target),
+// peak velocity is capped at 48 px/sec, visible but never violent.
+//
+// Orbit force (perpetual rotation):
+//   F_o = 0.00001 → equilibrium tangential velocity v_ss = ρ·F_o/(1−ρ) = 0.000157 px/frame
+//   At radius 230, angular velocity ω_orb = v_ss/r = 6.8e-7 rad/frame
+//   Period of revolution = 2π/ω_orb / 60fps = 153,000 sec = 42.5 HOURS
+//   (i.e. effectively no rotation, kept for tradition not visibility)
+//
+// Brownian noise (perpetual gentle drift):
+//   A_b = 0.00003 (uniform half-width)
+//   E[ε²] = A_b²/12 = 7.5e-11
+//   Var(v_ss) = ρ²·E[ε²]/(1−ρ²) = 0.884·7.5e-11/0.116 = 5.71e-10
+//   σ(v_ss) = 2.4e-5 px/frame = 0.0014 px/sec RMS (invisible to eye)
+//
+// Spawn radius equals springTarget exactly → nodes spawn already at equilibrium
+// distance from parent. Zero radial spring force at t=0. Only repulsion between
+// siblings drives motion, which is constructive (spreads them out).
+// Tree-stable tuning. The curriculum has structural fixity (5 subjects,
+// each course belongs primarily to ONE subject, threads as cross-cutting
+// overlays) so the cloud should READ as held-in-place rather than as
+// open-ended exploration. Higher damping + lower brownian + lower orbit
+// = nodes settle and stay. Compare with /aa/cloud/ which uses 0.92 / 0.00012
+// / 0.00005, looser, floatier, suited to archetype browsing.
+const SIM = {
+  springTarget: 230,
+  springK: 0.0015,
+  repelStrength: 0.4,
+  repelBuffer: 18,
+  damping: 0.96,
+  centerPull: 0.0006,
+  seedAnchor: 0.04,
+  maxStep: 0.8,
+  orbitStrength: 0.00001,
+  brownian: 0.00003,
+  magnetRadius: 80,
+  magnetDamping: 0.45,
+  maxNodesForN2: 350,
+};
+
+// EGGY SPAWN: after each click/spawn the sim runs in fast-equilibrium mode for
+// a few seconds, strong springs, low damping, big steps, so the cloud
+// rapidly snaps into its new arrangement around the new pin. Then it eases
+// back to slow solar-system mode for the calm steady-state browsing experience.
+// Without this, the cloud spends too long drifting to balance and the user sees
+// "lame loops" of slow micro-adjustment instead of decisive reorientation.
+const SIM_FAST = {
+  springK: 0.012,    // 8x stronger spring
+  damping: 0.85,     // less damping → bouncier
+  maxStep: 3.0,      // 3.75x larger per-frame motion
+  brownian: 0.0001,  // more jitter to break out of local minima
+  repelStrength: 0.7, // stronger repulsion to clear collisions fast
+};
+const EGG_DURATION_MS = 3500; // length of the fast-phase before easing to slow
+let lastSpawnAt = 0; // timestamp of last spawn-or-click, drives the envelope
+function eggT(){
+  // 0 = just spawned (full fast mode), 1 = fully settled (full normal mode)
+  const elapsed = performance.now() - lastSpawnAt;
+  if (elapsed >= EGG_DURATION_MS) return 1;
+  const raw = elapsed / EGG_DURATION_MS;
+  // easeOutCubic, fast collapse early, smooth approach to normal late
+  return 1 - Math.pow(1 - raw, 3);
+}
+function lerp(a, b, t){ return a + (b - a) * t; }
+
+let mouseWorldX = 0, mouseWorldY = 0;
+let mouseActive = false;
+let simRunning = false;
+let simEnergy = 0;
+let simFrameCount = 0;
+
+function simTick(){
+  const arr = [...nodes.values()];
+  const n = arr.length;
+  if (n <= 1){ simEnergy = 0; return; }
+
+  // Compute egg-envelope. After each spawn/click lastSpawnAt resets to now,
+  // so eggT() returns 0 (full fast-mode) and rises to 1 (full normal-mode)
+  // over EGG_DURATION_MS. The five tunable physics constants are linearly
+  // interpolated between FAST and NORMAL values along that envelope.
+  const eggPhase = eggT();
+  const springK = lerp(SIM_FAST.springK, SIM.springK, eggPhase);
+  const damping = lerp(SIM_FAST.damping, SIM.damping, eggPhase);
+  const maxStep = lerp(SIM_FAST.maxStep, SIM.maxStep, eggPhase);
+  const brownian = lerp(SIM_FAST.brownian, SIM.brownian, eggPhase);
+  const repelStrength = lerp(SIM_FAST.repelStrength, SIM.repelStrength, eggPhase);
+
+  // ---- Repulsion (collision avoidance between every pair) ----
+  // For very large clouds, coarse spatial filter could be added; for now O(n²).
+  for (let i = 0; i < n; i++){
+    const a = arr[i];
+    for (let j = i+1; j < n; j++){
+      const b = arr[j];
+      const dx = b.x - a.x, dy = b.y - a.y;
+      const minDist = a.r + b.r + SIM.repelBuffer;
+      const minSq = minDist * minDist;
+      const d2 = dx*dx + dy*dy;
+      if (d2 >= minSq) continue;
+      const dist = Math.sqrt(d2) || 0.01;
+      const overlap = minDist - dist;
+      const force = overlap * repelStrength;
+      const ux = dx/dist, uy = dy/dist;
+      a.vx -= ux * force;
+      a.vy -= uy * force;
+      b.vx += ux * force;
+      b.vy += uy * force;
+    }
+  }
+
+  // ---- Spring to parent(s) + tangential orbit force ----
+  // Build incoming-edge map once per tick. Meeting-point nodes have multiple
+  // parents, they spring toward the centroid with FULL stiffness, so
+  // converged concepts ANCHOR at the structural centroid rather than
+  // drifting. The tree-mode payoff: a thread spawned by 14 courses across
+  // 5 subjects sits firmly at the average position of those subjects, not
+  // wandering between them. (Compare /aa/cloud/ which divides stiffness by
+  // sqrt(N) for floaty exploration of an open-ended archetype graph.)
+  const incomingByNode = new Map();
+  edges.forEach(e => {
+    if (!incomingByNode.has(e.toId)) incomingByNode.set(e.toId, []);
+    const from = nodes.get(e.fromId);
+    if (from) incomingByNode.get(e.toId).push(from);
+  });
+
+  arr.forEach(node => {
+    const parents = incomingByNode.get(node.id);
+    if (parents && parents.length > 0){
+      const N = parents.length;
+      // Centroid of all parents
+      let cx = 0, cy = 0;
+      parents.forEach(p => { cx += p.x; cy += p.y; });
+      cx /= N;
+      cy /= N;
+      // Full stiffness regardless of parent count. Multi-parent nodes
+      // anchor at the centroid the same way single-parent nodes anchor at
+      // their parent. The structural meaning of "this thread participates
+      // in 14 courses" is rendered as physical anchoring, not wandering.
+      const dx = cx - node.x, dy = cy - node.y;
+      const dist = Math.hypot(dx, dy) || 0.01;
+      const force = (dist - SIM.springTarget) * springK;
+      node.vx += (dx/dist) * force;
+      node.vy += (dy/dist) * force;
+      // Per-parent orbit forces, summed. Each parent contributes a
+      // perpendicular nudge. With orbitStrength dropped to 0.00001 the
+      // orbital motion is barely perceptible, meeting-points hold their
+      // angular position as well as their radial position.
+      parents.forEach(p => {
+        const pdx = p.x - node.x, pdy = p.y - node.y;
+        const pd = Math.hypot(pdx, pdy) || 0.01;
+        node.vx += (-pdy/pd) * SIM.orbitStrength;
+        node.vy += (pdx/pd) * SIM.orbitStrength;
+      });
+      // No extra brownian for multi-parent nodes. In aa* the most-converged
+      // concepts get the most jitter (alive); in leizu the most-converged
+      // concepts (the threads that connect the curriculum) should be the
+      // most STILL, they are the structural anchors.
+    } else if (node.type === 'seed' || node.parentId === null){
+      // Seed: strongly pulled to origin so it stays anchored at canvas center
+      node.vx -= node.x * SIM.seedAnchor;
+      node.vy -= node.y * SIM.seedAnchor;
+    }
+    // Gentle center pull on every node to prevent slow drift
+    node.vx -= node.x * SIM.centerPull;
+    node.vy -= node.y * SIM.centerPull;
+    // Brownian jitter, at 0.00003 this is essentially imperceptible.
+    // Just enough to keep the integrator from getting stuck in numerical
+    // local minima, not enough to read as motion.
+    node.vx += (Math.random() - 0.5) * brownian;
+    node.vy += (Math.random() - 0.5) * brownian;
+  });
+
+  // ---- Apply velocity, damping, step cap ----
+  let energy = 0;
+  arr.forEach(node => {
+    node.vx *= damping;
+    node.vy *= damping;
+    // Magnetism: if cursor is near this node, apply extra damping so it
+    // settles into place and the user can actually click it. Falloff is
+    // smooth, closer to cursor = stronger freeze.
+    if (mouseActive){
+      const mdx = node.x - mouseWorldX;
+      const mdy = node.y - mouseWorldY;
+      const mDist = Math.hypot(mdx, mdy);
+      if (mDist < SIM.magnetRadius){
+        const falloff = 1 - (mDist / SIM.magnetRadius); // 0 at edge, 1 at center
+        const damp = 1 - falloff * (1 - SIM.magnetDamping); // smooth interp toward magnetDamping
+        node.vx *= damp;
+        node.vy *= damp;
+      }
+    }
+    // Cap per-frame movement to avoid teleportation under high force
+    const speed = Math.hypot(node.vx, node.vy);
+    if (speed > maxStep){
+      node.vx = (node.vx / speed) * maxStep;
+      node.vy = (node.vy / speed) * maxStep;
+    }
+    // Indra's-jewel pinning: the focused node is a fixed point. Other nodes
+    // orbit it via the existing physics. Clicking a new node releases the
+    // prior pin and sets a new one. Pinned nodes accumulate no velocity and
+    // hold position, the cloud reorients around the still center.
+    if (node.pinned){
+      node.vx = 0;
+      node.vy = 0;
+    } else {
+      node.x += node.vx;
+      node.y += node.vy;
+    }
+    energy += Math.abs(node.vx) + Math.abs(node.vy);
+  });
+  simEnergy = energy / n;
+
+  // ---- Reposition DOM nodes (cheap: just style updates on cached el refs) ----
+  arr.forEach(node => {
+    if (node.el){
+      node.el.style.left = node.x + 'px';
+      node.el.style.top = node.y + 'px';
+    }
+  });
+
+  // ---- Re-render edges, convergences, and bubbles to follow node positions ----
+  renderEdges();
+  redrawAllBubbles();
+  // No camera updates here. Camera moves only on explicit events (click/recenter).
+  // Per-frame camera tracking amplified sim noise into visible POV drift.
+}
+
+function simLoop(){
+  if (!simRunning) return;
+  simTick();
+  simFrameCount++;
+  // Sim never auto-stops anymore. The orbit force + brownian jitter keep the
+  // cloud gently drifting forever, and the camera-lerp continuously tracks the
+  // visual centroid. Stopping would create the abrupt jerk you noticed.
+  // (Reset / nodes-cleared sets simRunning=false explicitly.)
+  requestAnimationFrame(simLoop);
+}
+
+// ==================== AUTOFIT ====================
+// Focus-based POV: when called with a focus node ID, the camera frames just
+// (focus + its children), the just-clicked node and its expansion. When
+// called with null, frames everything. The POV is therefore the recent
+// activity, not the entire cloud, which keeps text readable.
+//
+// Camera uses a CSS transition (700ms ease) on click. NO per-frame tracking
+// during sim. Sim physics moves nodes around the (paused) camera.
+//
+// Zoom clamped to [0.7, 1.5]:
+//   - 0.7 minimum keeps text legible (a 22px taxonomy = 15.4px on screen at 0.7×)
+//   - 1.5 maximum prevents zoom-blowup on small focus groups
+let userOverrodeZoom = false;
+let autoFitTimer = null;
+const AUTOFIT_MIN_ZOOM = 0.7;
+const AUTOFIT_MAX_ZOOM = 1.5;
+const AUTOFIT_DUR = 700;
+
+function computeAutoFitTarget(focusId, customGroup){
+  // Focus group: focus node + its direct children. Falls back to all nodes if
+  // no focus given (e.g., recenter button) or focus has no children yet.
+  // customGroup overrides everything, used for concept-constellation focus.
+  let focusGroup = customGroup || null;
+  if (!focusGroup && focusId !== null && focusId !== undefined){
+    const focus = nodes.get(focusId);
+    if (focus){
+      focusGroup = [focus];
+      nodes.forEach(n => { if (n.parentId === focusId) focusGroup.push(n); });
+      if (focusGroup.length < 2) focusGroup = null; // not enough to frame
+    }
+  }
+  const consider = focusGroup || [...nodes.values()];
+  if (consider.length < 2) return null;
+
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+  consider.forEach(n => {
+    minX = Math.min(minX, n.x - n.r);
+    maxX = Math.max(maxX, n.x + n.r);
+    minY = Math.min(minY, n.y - n.r);
+    maxY = Math.max(maxY, n.y + n.r);
+  });
+
+  // Include the focus's bubble extent if it has one (so its disc fits in frame).
+  if (focusGroup){
+    const focusBubble = bubblesLayer.querySelector(`circle[data-bubble-id="${focusId}"]`);
+    if (focusBubble){
+      const bcx = parseFloat(focusBubble.getAttribute('cx')) || 0;
+      const bcy = parseFloat(focusBubble.getAttribute('cy')) || 0;
+      const r = parseFloat(focusBubble.getAttribute('r')) || 0;
+      minX = Math.min(minX, bcx - r);
+      maxX = Math.max(maxX, bcx + r);
+      minY = Math.min(minY, bcy - r);
+      maxY = Math.max(maxY, bcy + r);
+    }
+  } else {
+    // Fitting everything, also include all bubble extents
+    bubblesLayer.querySelectorAll('circle[data-bubble-id]').forEach(c => {
+      const bcx = parseFloat(c.getAttribute('cx')) || 0;
+      const bcy = parseFloat(c.getAttribute('cy')) || 0;
+      const r = parseFloat(c.getAttribute('r')) || 0;
+      minX = Math.min(minX, bcx - r);
+      maxX = Math.max(maxX, bcx + r);
+      minY = Math.min(minY, bcy - r);
+      maxY = Math.max(maxY, bcy + r);
+    });
+  }
+
+  const vW = window.innerWidth;
+  const vH = window.innerHeight;
+  const padTop = 70, padBottom = 70, padLeft = 50, padRight = 50;
+  const availW = vW - padLeft - padRight;
+  const availH = vH - padTop - padBottom;
+  const legendOpen = legendEl && !legendEl.classList.contains('collapsed');
+  const detailOpen = detail.classList.contains('open');
+  let shiftX = 0, shiftY = 0;
+  if (detailOpen){ shiftX += 70; shiftY -= 70; }
+  if (legendOpen){ shiftX -= 50; shiftY -= 50; }
+  const availCenterX = padLeft + availW / 2 + shiftX;
+  const availCenterY = padTop + availH / 2 + shiftY;
+
+  // ANCHOR: when focusing on a node, the camera centers on the FOCUS NODE
+  // itself, not the bbox center. This keeps the just-clicked node as the
+  // perspective and stops the camera drifting when children fan asymmetrically.
+  // Only the recenter case (no focusId, no customGroup) uses bbox-center.
+  let anchorX, anchorY, halfW, halfH;
+  const focusNode = (focusId !== null && focusId !== undefined) ? nodes.get(focusId) : null;
+  if (focusNode && !customGroup){
+    anchorX = focusNode.x;
+    anchorY = focusNode.y;
+    // Half-extents = max distance from focus to any child or its own bubble
+    halfW = focusNode.r;
+    halfH = focusNode.r;
+    consider.forEach(n => {
+      halfW = Math.max(halfW, Math.abs(n.x - anchorX) + n.r);
+      halfH = Math.max(halfH, Math.abs(n.y - anchorY) + n.r);
+    });
+    const focusBubble = bubblesLayer.querySelector(`circle[data-bubble-id="${focusId}"]`);
+    if (focusBubble){
+      const r = parseFloat(focusBubble.getAttribute('r')) || 0;
+      halfW = Math.max(halfW, r);
+      halfH = Math.max(halfH, r);
+    }
+  } else {
+    // Fallback: bbox-center (recenter button, concept-constellation focus)
+    anchorX = (minX + maxX) / 2;
+    anchorY = (minY + maxY) / 2;
+    halfW = (maxX - minX) / 2;
+    halfH = (maxY - minY) / 2;
+  }
+  halfW = Math.max(halfW, 100);
+  halfH = Math.max(halfH, 100);
+
+  let targetZoom = Math.min(availW / (2 * halfW), availH / (2 * halfH));
+  targetZoom = Math.max(AUTOFIT_MIN_ZOOM, Math.min(AUTOFIT_MAX_ZOOM, targetZoom));
+
+  const newPanX = availCenterX - vW/2 - anchorX * targetZoom;
+  const newPanY = availCenterY - vH/2 - anchorY * targetZoom;
+  return { panX: newPanX, panY: newPanY, zoom: targetZoom };
+}
+
+// Single-shot camera move with CSS transition. Called on spawn (with focusId)
+// or on recenter (focusId = null for full-cloud fit). NO per-frame tracking.
+function autoFit(focusId, customGroup){
+  if (userOverrodeZoom || isDragging) return;
+  const t = computeAutoFitTarget(focusId, customGroup);
+  if (!t) return;
+  inner.style.transition = `transform ${AUTOFIT_DUR}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
+  edgesSvg.style.transition = `transform ${AUTOFIT_DUR}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
+  panX = t.panX;
+  panY = t.panY;
+  zoom = t.zoom;
+  applyTransform();
+  if (autoFitTimer) clearTimeout(autoFitTimer);
+  autoFitTimer = setTimeout(() => {
+    inner.style.transition = '';
+    edgesSvg.style.transition = '';
+    autoFitTimer = null;
+  }, AUTOFIT_DUR + 50);
+}
+
+function reheatSim(){
+  // Tiny jitter (0.005) just to break perfect angular symmetry. With spawn
+  // radius = springTarget, there's no radial spring force at t=0, so we don't
+  // need significant velocity injection, repulsion will spread siblings apart.
+  nodes.forEach(node => {
+    node.vx += (Math.random() - 0.5) * 0.005;
+    node.vy += (Math.random() - 0.5) * 0.005;
+  });
+  simFrameCount = 0;
+  if (!simRunning){
+    simRunning = true;
+    requestAnimationFrame(simLoop);
+  }
+}
+
+function setActive(nodeId){
+  document.querySelectorAll('.node').forEach(el => el.classList.remove('active'));
+  // Mark previous active as visited
+  if (activeNodeId !== null && activeNodeId !== nodeId){
+    const prev = nodes.get(activeNodeId);
+    if (prev){
+      const prevEl = document.querySelector(`.node[data-id="${activeNodeId}"]`);
+      if (prevEl && prev.hasSpawned) prevEl.classList.add('visited');
+    }
+  }
+  activeNodeId = nodeId;
+  const el = document.querySelector(`.node[data-id="${nodeId}"]`);
+  if (el){
+    el.classList.add('active');
+    el.classList.remove('visited');
+  }
+}
+
+// ==================== DETAIL PANEL ====================
+function showDetailFromNode(node){
+  const detail = document.getElementById('detail');
+  if (!detail) return;
+  let kicker = '', title = node.label || '', body = '', extra = '';
+
+  if (node.type === 'subject'){
+    const s = node.data.subject;
+    kicker = 'subject · ' + s.element + ' · ' + s.pinyin;
+    title = s.glyph + ' ' + s.label + '  ' + s.han;
+    body = s.gloss;
+    const courseList = COURSES_BY_SUBJECT[s.code] || [];
+    extra = courseList.length + ' course' + (courseList.length===1?'':'s') + ' in this subject.';
+  } else if (node.type === 'course'){
+    const c = node.data.course;
+    if (!c) return;
+    const subj = SUBJECTS[c.subject];
+    kicker = 'course · ' + (subj ? subj.glyph + ' ' + subj.label : c.subject);
+    title = c.label + (c.han ? ' · ' + c.han : '');
+    body = c.desc || '';
+    const parts = [];
+    if (c.codes) parts.push('Codes: ' + c.codes);
+    if (c.routes && c.routes.length) parts.push('Routes: ' + c.routes.join(' · '));
+    const threadIds = THREADS_BY_COURSE[c.id] || [];
+    if (threadIds.length){
+      const threadLabels = threadIds.map(tid => THREADS_BY_ID[tid]?.label).filter(Boolean);
+      parts.push('Threads: ' + threadLabels.join(' · '));
+    }
+    extra = parts.join('\n');
+  } else if (node.type === 'route'){
+    const r = node.data.route;
+    if (!r) return;
+    kicker = 'route';
+    title = r.label;
+    body = r.gloss || '';
+    const courseList = COURSES_BY_ROUTE[r.id] || [];
+    extra = courseList.length + ' course' + (courseList.length===1?'':'s') + ' on this route.';
+  } else if (node.type === 'route-gateway'){
+    kicker = 'archive layer';
+    title = 'Routes';
+    body = 'Three paths through the curriculum. Forest year: a full year inside the practice. IB Diploma prep: capstone work plus six subject scores. OSSD prep: Ontario Secondary School Diploma alignment. Each course can belong to multiple routes.';
+    extra = (typeof ROUTES !== 'undefined' ? ROUTES.length : 0) + ' routes catalogued.';
+  } else if (node.type === 'thread'){
+    const t = node.data.thread;
+    if (!t) return;
+    kicker = 'thread · cross-subject';
+    title = t.label + (t.han ? ' · ' + t.han : '');
+    body = t.gloss || '';
+    extra = (t.courses ? t.courses.length : 0) + ' course' + ((t.courses?.length||0)===1?'':'s') + ' converge on this thread.';
+  } else if (node.type === 'thread-gateway'){
+    kicker = 'archive layer';
+    title = 'Cross-subject threads';
+    body = 'Concepts that recur across multiple subjects. Argumentation appears in History, Philosophy, English, and Social Studies. Writing-as-thinking appears in English, Philosophy, Media Literacy, and beyond. The threads make visible what the curriculum compounds across the five subjects.';
+    extra = (typeof THREADS !== 'undefined' ? THREADS.length : 0) + ' threads catalogued.';
+  } else if (node.type === 'seed'){
+    kicker = 'archive';
+    title = '嫘祖 · Leizu Academy';
+    body = 'A practice within Seminar Schools. Five subjects taught as one curriculum: 木 History, 火 Philosophy, 土 English, 金 Media Literacy, 水 Social Studies. Click anything to grow it.';
+  }
+
+  if (!body) return;
+  detail.innerHTML = `
+    <button class="dt-close" aria-label="close">×</button>
+    ${kicker ? `<div class="dt-trad">${escapeHtml(kicker)}</div>` : ''}
+    <div class="dt-name">${escapeHtml(title)}</div>
+    <div class="dt-note">${escapeHtml(body)}</div>
+    ${extra ? `<div class="dt-note" style="opacity:0.78;margin-top:8px;font-size:13px;white-space:pre-wrap">${escapeHtml(extra)}</div>` : ''}
+  `;
+  detail.classList.add('open');
+  detail.querySelector('.dt-close').addEventListener('click', () => detail.classList.remove('open'));
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// ==================== STATUS ====================
+function updateStatus(){
+  document.getElementById('ct-nodes').textContent = nodes.size;
+  let maxDepth = 0;
+  nodes.forEach(n => { if (n.depth > maxDepth) maxDepth = n.depth; });
+  document.getElementById('ct-depth').textContent = maxDepth;
+}
+
+// ==================== PAN / ZOOM ====================
+function panToward(targetX, targetY, smooth){
+  // Compute pan such that target is more centered (without moving instantly to it)
+  const cx = window.innerWidth / 2;
+  const cy = window.innerHeight / 2;
+  const desiredPanX = cx - targetX * zoom;
+  const desiredPanY = cy - targetY * zoom;
+  if (smooth){
+    inner.style.transition = 'transform 0.6s ease';
+    edgesSvg.style.transition = 'transform 0.6s ease';
+    panX = panX * 0.4 + desiredPanX * 0.6;
+    panY = panY * 0.4 + desiredPanY * 0.6;
+    applyTransform();
+    setTimeout(() => {
+      inner.style.transition = '';
+      edgesSvg.style.transition = '';
+    }, 650);
+  } else {
+    panX = desiredPanX;
+    panY = desiredPanY;
+    applyTransform();
+  }
+}
+
+function recenterOnSeed(){
+  panX = 0; panY = 0; zoom = 1;
+  userOverrodeZoom = false;
+  // Release all pins, cloud returns to fully-fluid state
+  nodes.forEach(n => { n.pinned = false; });
+  applyTransform();
+  // No focus = fit everything
+  if (nodes.size > 1) autoFit(null);
+}
+
+canvas.addEventListener('mousedown', e => {
+  if (e.target.closest('.node')) return;
+  isDragging = true;
+  didDrag = false;
+  dragStartX = e.clientX;
+  dragStartY = e.clientY;
+  dragStartPanX = panX;
+  dragStartPanY = panY;
+  canvas.classList.add('dragging');
+});
+
+// Track mouse in WORLD coordinates for magnetism, nodes near the cursor
+// get extra damping each tick so they settle and become easy to click.
+canvas.addEventListener('mousemove', e => {
+  const rect = canvas.getBoundingClientRect();
+  const sx = e.clientX - rect.left;
+  const sy = e.clientY - rect.top;
+  // Reverse the inner transform: world(x,y) renders at (W/2 + panX + x*zoom, ...)
+  mouseWorldX = (sx - canvas.clientWidth / 2 - panX) / zoom;
+  mouseWorldY = (sy - canvas.clientHeight / 2 - panY) / zoom;
+  mouseActive = true;
+});
+canvas.addEventListener('mouseleave', () => {
+  mouseActive = false;
+});
+
+window.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  const dx = e.clientX - dragStartX;
+  const dy = e.clientY - dragStartY;
+  if (Math.abs(dx) + Math.abs(dy) > 4){
+    didDrag = true;
+    userOverrodeZoom = true; // user took camera control, stop auto-fit
+  }
+  panX = dragStartPanX + dx;
+  panY = dragStartPanY + dy;
+  applyTransform();
+});
+window.addEventListener('mouseup', () => {
+  isDragging = false;
+  canvas.classList.remove('dragging');
+  // didDrag flag stays true briefly to suppress synthesized click
+  setTimeout(() => { didDrag = false; }, 50);
+});
+
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  userOverrodeZoom = true; // user is zooming manually, stop auto-fit
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  const factor = e.deltaY > 0 ? 0.92 : 1.08;
+  const newZoom = Math.max(0.2, Math.min(3.5, zoom * factor));
+  // Zoom around mouse position
+  const wx = (mx - panX) / zoom;
+  const wy = (my - panY) / zoom;
+  zoom = newZoom;
+  panX = mx - wx * zoom;
+  panY = my - wy * zoom;
+  applyTransform();
+}, { passive: false });
+
+// Touch support, basic
+let touchStart = null;
+canvas.addEventListener('touchstart', e => {
+  if (e.touches.length === 1 && !e.target.closest('.node')){
+    touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY, panX, panY };
+  }
+}, { passive: true });
+canvas.addEventListener('touchmove', e => {
+  if (e.touches.length === 1 && touchStart){
+    const dx = e.touches[0].clientX - touchStart.x;
+    const dy = e.touches[0].clientY - touchStart.y;
+    panX = touchStart.panX + dx;
+    panY = touchStart.panY + dy;
+    applyTransform();
+  }
+}, { passive: true });
+canvas.addEventListener('touchend', () => { touchStart = null; }, { passive: true });
+
+// ==================== INIT ====================
+function reset(){
+  nodes.clear();
+  edges.length = 0;
+  nextNodeId = 0;
+  activeNodeId = null;
+  while (inner.firstChild) inner.removeChild(inner.firstChild);
+  while (edgesLayer.firstChild) edgesLayer.removeChild(edgesLayer.firstChild);
+  while (bubblesLayer.firstChild) bubblesLayer.removeChild(bubblesLayer.firstChild);
+  detail.classList.remove('open');
+  guide.classList.remove('hidden');
+
+  // Place the seed at origin
+  const seedId = 'seed-0';
+  nextNodeId = 1;
+  const seedNode = {
+    id: seedId, type: 'seed', label: '*',
+    x: 0, y: 0, vx: 0, vy: 0, el: null,
+    parentId: null, depth: 0,
+    data: {}, visited: false, hasSpawned: false,
+  };
+  seedNode.r = estimateRadius(seedNode);
+  nodes.set(seedId, seedNode);
+  renderNode(seedNode);
+  panX = 0; panY = 0; zoom = 1;
+  applyTransform();
+  updateStatus();
+  simRunning = false;
+  simFrameCount = 0;
+  simEnergy = 0;
+  userOverrodeZoom = false;
+}
+
+document.getElementById('btn-reset').addEventListener('click', reset);
+document.getElementById('btn-recenter').addEventListener('click', recenterOnSeed);
+
+// Hide guide on first interaction
+function hideGuide(){ guide.classList.add('hidden'); }
+canvas.addEventListener('click', e => {
+  if (e.target.closest('.node')) hideGuide();
+});
+
+// Toast feedback for triple-click copy. Brief floating message that fades.
+function showCopyToast(text){
+  const existing = document.getElementById('copy-toast');
+  if (existing) existing.remove();
+  const toast = document.createElement('div');
+  toast.id = 'copy-toast';
+  toast.textContent = 'copied: ' + text;
+  document.body.appendChild(toast);
+  // Force reflow then add visible class for transition
+  void toast.offsetWidth;
+  toast.classList.add('visible');
+  setTimeout(() => {
+    toast.classList.remove('visible');
+    setTimeout(() => toast.remove(), 400);
+  }, 1400);
+}
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape'){
+    detail.classList.remove('open');
+  } else if (e.key === 'r' && (e.metaKey || e.ctrlKey)){
+    e.preventDefault();
+    reset();
+  }
+});
+
+// Re-apply transform on window resize so SVG and inner stay aligned
+window.addEventListener('resize', () => {
+  applyTransform();
+});
+
+// Legend toggle (collapse). The previous S/M/L/XL size cycler is gone;
+// the legend is now a single readable size. Toggle is the only control.
+const legendEl = document.getElementById('legend');
+const legendToggleBtn = document.getElementById('leg-toggle');
+// Clear any stale size classes from prior sessions where the cycler existed
+if (legendEl){
+  legendEl.classList.remove('size-s', 'size-l', 'size-xl');
+  try { localStorage.removeItem('aa-cloud-legend-size'); } catch(e) {}
+}
+if (legendToggleBtn){
+  legendToggleBtn.addEventListener('click', () => {
+    legendEl.classList.toggle('collapsed');
+    const arrow = legendToggleBtn.querySelector('.leg-toggle');
+    if (arrow) arrow.textContent = legendEl.classList.contains('collapsed') ? '+' : '−';
+  });
+}
+
+// Keyboard shortcut: ? toggles legend visibility.
+document.addEventListener('keydown', e => {
+  if (e.key === '?' && !e.target.matches('input, textarea')){
+    legendEl.classList.toggle('collapsed');
+    const arrow = legendToggleBtn?.querySelector('.leg-toggle');
+    if (arrow) arrow.textContent = legendEl.classList.contains('collapsed') ? '+' : '−';
+  }
+});
+
+// Boot
+reset();
+</script>
+<script src="/leizu/language-state.js?v=cl96" defer></script>
+<script src="/js/theme.js?v=cl91" defer></script>
+<script src="/js/mandala.js?v=cl91" defer></script>
+<script src="/js/indra.js?v=cl91" defer></script>
+<script src="/js/footer.js?v=cl91" defer></script>
+<script src="/js/autolink.js?v=cl91" defer></script>
+</body>
+</html>

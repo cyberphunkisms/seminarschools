@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  /aa/editorial.html, editorial decisions log
+  ============================================================================
+  Chronological record of consolidations, routing-decisions, schema bumps,
+  bar/verification decisions, and explicit refusals (where the catalog did
+  NOT add content because doing so would require fabricating names, tag
+  IDs, or scholarship the AI could not source). Per polymyth methodology
+  this file is itself a polymyth artifact: making editorial decisions
+  visible is the anti-data-graveyard discipline (Rule 11 organize-not-create
+  + Rule 6 consolidation-not-deletion + Rule 30 no-fabrication-no-naming).
+  ============================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,follow">
+<title>aa*, Editorial Log</title>
+<meta name="description" content="Editorial decisions log for the aa* archetype archive. Schema versions, routing decisions, refusals.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f4f0e6;
+  --bg2:#ebe5d4;
+  --bg3:#e0d7c0;
+  --ink:#1a1614;
+  --ink2:#3d352d;
+  --dim:#6b5d4f;
+  --faint:#9c8e7f;
+  --rule:#c9bea8;
+  --rule2:#a89c83;
+  --accent:#8b2e1f;
+  --accent2:#c8501f;
+  --green:#4a6a4a;
+  --grey:#7a7064;
+}
+html,body{background:var(--bg);color:var(--ink);font-family:'Cormorant Garamond', Georgia, serif;line-height:1.55}
+body{padding:48px 24px 96px;max-width:920px;margin:0 auto}
+.header{border-bottom:1px solid var(--rule);padding-bottom:20px;margin-bottom:36px}
+.header-eyebrow{font-family:'JetBrains Mono', monospace;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.header h1{font-size:38px;font-weight:600;letter-spacing:-0.5px;color:var(--ink);margin-bottom:6px}
+.header-sub{font-size:16px;font-style:italic;color:var(--ink2)}
+.intro{font-size:16px;color:var(--ink2);margin-bottom:40px;max-width:680px}
+.intro p{margin-bottom:14px}
+.section{margin-bottom:48px}
+.section-title{font-family:'JetBrains Mono', monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.entry{margin-bottom:24px;padding:16px 20px;background:var(--bg2);border-left:3px solid var(--rule2);border-radius:0 2px 2px 0}
+.entry--shipped{border-left-color:var(--green)}
+.entry--blocked{border-left-color:var(--grey)}
+.entry--routing{border-left-color:var(--accent2)}
+.entry-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;gap:12px;flex-wrap:wrap}
+.entry-title{font-size:19px;font-weight:600;color:var(--ink)}
+.entry-meta{font-family:'JetBrains Mono', monospace;font-size:10px;letter-spacing:0.6px;text-transform:uppercase;color:var(--dim)}
+.entry-meta .tag-shipped{color:var(--green)}
+.entry-meta .tag-blocked{color:var(--grey)}
+.entry-meta .tag-routing{color:var(--accent2)}
+.entry-body{font-size:15px;line-height:1.55;color:var(--ink2)}
+.entry-body p{margin-bottom:6px}
+.entry-body strong{color:var(--ink)}
+.entry-cite{font-size:13px;color:var(--dim);font-style:italic;margin-top:6px}
+.refusal-quote{font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--dim);background:var(--bg);padding:8px 12px;margin-top:6px;border-left:1px solid var(--faint)}
+.nav-back{display:inline-block;margin-top:48px;font-family:'JetBrains Mono', monospace;font-size:12px;letter-spacing:0.5px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--rule)}
+.nav-back:hover{color:var(--accent2);border-bottom-color:var(--accent2)}
+</style>
+<link rel="stylesheet" href="/css/mobile-overlay.css?v=cl91">
+<link rel="canonical" href="https://seminarschools.com/aa/editorial">
+<meta property="og:title" content="aa*, Editorial Log">
+<meta property="og:description" content="Editorial decisions log for the aa* archetype archive. Schema versions, routing decisions, refusals.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/aa/editorial">
+<meta property="og:site_name" content="Seminar Schools">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/theme.css?v=cl91">
+<style>/* CL-2026-06-04 #3: dark-mode ink override so body text reads on dark bg */:root.dark{
+  --bg:#16120E; --bg2:#1F1A14; --bg3:#28221A;
+  --ink:#E8DEC7; --ink2:#C8BCA5;
+  --dim:#A39481; --faint:#8B7E6A;
+  --rule:#473E31; --rule2:#5C5141;
+  --accent:var(--accent-dark); --accent2:#E0824E;
+  --highlight:#4A3C1E;
+}</style>
+<link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
+<link rel="stylesheet" href="/css/alive.css?v=cl91">
+</head>
+<body>
+<style id="ss-fz-style">.ss-fz{position:fixed;top:auto;bottom:1rem;left:1rem;right:auto;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sun" aria-hidden="true">&#9728;</span><span class="moon" aria-hidden="true">&#9790;</span></button><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
+
+<header class="header">
+  <div class="header-eyebrow">aa* archetype archive</div>
+  <h1>Editorial Log</h1>
+  <div class="header-sub">Schema versions, routing decisions, bar-and-verification decisions, refusals.</div>
+</header>
+
+<div class="intro">
+  <p>The catalog accumulates not only entries but decisions about entries. This file is the public record of those decisions: what was added, what was rejected, what was rerouted, what was left undone because completing it would have required fabrication.</p>
+  <p>Each entry carries a date-anchor, a status badge (shipped / blocked / routing-decision), and a brief account. Refusals are first-class: an honest catalog documents what it did not catalog and why.</p>
+</div>
+
+<section class="section">
+  <div class="section-title">Schema versions</div>
+
+  <article class="entry entry--shipped">
+    <div class="entry-header">
+      <div class="entry-title">v1.0 baseline</div>
+      <div class="entry-meta"><span class="tag-shipped">SHIPPED</span> · pre-2026</div>
+    </div>
+    <div class="entry-body">
+      <p>Initial catalog: 404 taxonomies, 2,267 tags, 2,576 occurrences, 14 traditions, 17 mass-archetype synonym groups, embedded inline. Source: hand-curated across depth psychology, comparative mythology, folklore, dramaturgy, religion, gaming, personality theory, branding, fan-curation, children's literature, critical theory, esoteric, and indigenous typologies.</p>
+    </div>
+  </article>
+
+  <article class="entry entry--shipped">
+    <div class="entry-header">
+      <div class="entry-title">v1.0 → v1.1 (May 2026)</div>
+      <div class="entry-meta"><span class="tag-shipped">SHIPPED</span> · A14 / A16 / A19 / A26</div>
+    </div>
+    <div class="entry-body">
+      <p>SCHEMA_VERSION constant introduced (A26). REMOVED_ENTRIES top-level constant added (A14): empty seed, future removals must be logged here at removal time rather than dropped silently. Granularity field added to every TAGS entry (A16): abstract / specific / named-figure, with 244 named-figure tags auto-classified across 31 named-figure-bearing taxonomies (Olympians, Norse pantheon, Marvel-MCU, Tarot major arcana, etc). Provenance field added to every TAGS and TAXONOMIES entry (A19): all 2,673 entries stamped <code>v1.0-baseline</code>.</p>
+    </div>
+  </article>
+
+  <article class="entry entry--shipped">
+    <div class="entry-header">
+      <div class="entry-title">v1.1 → v1.2 (May 4 2026)</div>
+      <div class="entry-meta"><span class="tag-shipped">SHIPPED</span> · A5 partial / A12 / A21</div>
+    </div>
+    <div class="entry-body">
+      <p>Three new top-level data layers: <strong>COMPANION_RELATIONSHIPS</strong> (8 entries documenting Bolen's goddess↔god pairings from Goddesses in Everywoman 1984 and Gods in Everyman 1989, citing existing tag IDs only); <strong>LINEAGE_EDGES</strong> (1 entry: pearson12 → jung-classical derivation, citing Mark &amp; Pearson 2001 ISBN 0-07-136415-3); <strong>META_ENTRIES</strong> (3 entries: Lévi-Strauss / Wittgenstein / Foucault as anti-archetype critiques, citing primary works by publisher/ISBN/journal-volume).</p>
+      <p>Schema for META_ENTRIES is distinct from TAXONOMIES: TAXONOMIES catalogs archetype-frameworks, META_ENTRIES catalogs critiques OF archetype-thinking. The user reading the catalog through Lévi-Strauss / Wittgenstein / Foucault catches that the catalog is itself a discursive formation rather than a transcendent reference.</p>
+    </div>
+  </article>
+
+  <article class="entry entry--shipped">
+    <div class="entry-header">
+      <div class="entry-title">v1.2 → v1.3 (May 4 2026)</div>
+      <div class="entry-meta"><span class="tag-shipped">SHIPPED</span> · C5</div>
+    </div>
+    <div class="entry-body">
+      <p><strong>SETTINGS_LIBRARY</strong> top-level constant added: 7 setting-archetypes (city-as-cosmic-axis, marketplace, library, hearth-fire, river, prison, tower). Each entry has structural_function, 3-4 worked instances across traditions with per-instance source attribution, 3-4 primary-source citations (publisher/ISBN/journal-volume, no SEO, no Wikipedia, no aggregators), polymyth-relevance note. Schema distinct from TAXONOMIES (archetype-frameworks) and META_ENTRIES (critiques): SETTINGS_LIBRARY catalogs PLACE-archetypes whose structural function in narrative is well-attested across traditions.</p>
+      <p>Names came from the user; AI work was content authoring against named slots with citation discipline. Per Rule 30 (NO FABRICATION + NO NAMING): names = user authorship; content = AI organization with grounding.</p>
+    </div>
+  </article>
+</section>
+
+<section class="section">
+  <div class="section-title">Routing decisions</div>
+
+  <article class="entry entry--routing">
+    <div class="entry-header">
+      <div class="entry-title">CC* peer-file creation; mc* now 100% academic (May 2026)</div>
+      <div class="entry-meta"><span class="tag-routing">ROUTING</span> · resolves G2</div>
+    </div>
+    <div class="entry-body">
+      <p>The Campaign Codex / OSSD English D&amp;D-based curriculum was unclear in routing. Three candidate destinations existed: extension of mc* (modulecanon as academic curriculum file), extension of bb* (bookwormburrows as game-pedagogy file), or own peer file. User ruling: <strong>CC* exists as own peer file</strong>, citing both bb* and mc*. Consequence: mc* is now 100% academic content (curriculum maps for OSSD, IB, etc); bb* remains the dimensional-traveling game-pedagogy file; CC* covers the bridge case where game-pedagogy meets ministry-mandated curriculum codes (ENG1D-ENG4U).</p>
+      <p>CC* shipped at <code>/polymyth/campaigncodex/</code> (~19,555 bytes) with 7 OSSD English course stubs and 3 framework citations to bb*/mc*/ml*.</p>
+    </div>
+  </article>
+
+  <article class="entry entry--routing">
+    <div class="entry-header">
+      <div class="entry-title">A11 compound-cluster splits (May 2026)</div>
+      <div class="entry-meta"><span class="tag-routing">ROUTING</span> · 25 child entries</div>
+    </div>
+    <div class="entry-body">
+      <p>Seven compound clusters in the catalog were rendering as multi-system entries inside a single tag-occurrence. The Beijing Opera Sheng / Dan / Jing / Chou cluster (4 entries with 12+ child sub-roles) was the canonical case. Resolution: split each compound into parent + children, where children carry <code>notes: "sub-component of {parent_tagId}"</code> annotation. 25 child entries corrected across 7 clusters.</p>
+      <p>Worked example: Sheng (主生 male role) split from Lao Sheng / Xiao Sheng / Wu Sheng sub-types; Dan split from Qing Yi / Hua Dan / Wu Dan / Lao Dan; etc. Sub-types now appear as proper entries that can be queried independently while retaining the cluster-membership annotation.</p>
+    </div>
+  </article>
+
+  <article class="entry entry--routing">
+    <div class="entry-header">
+      <div class="entry-title">Polymyth memory consolidation (May 2026)</div>
+      <div class="entry-meta"><span class="tag-routing">ROUTING</span> · core* / ml* / coreplus</div>
+    </div>
+    <div class="entry-body">
+      <p>Three core* memory slots freed via the consolidation-not-deletion path (per Rule 6): BLOOM (slot 15), CH1 platformstrawmanculture (slot 25), COMPILATION FAILURE MODE (slot 27). Each slot's body preserved verbatim in ml*'s coreplus section with migration-status header. The BLOOM rule continues firing via the new ACTIVATIONS DISPATCH at slot 2.</p>
+      <p>Two new core* rules introduced: <strong>BOOTSTRAP</strong> (slot 24), declares core+ in ml* canonical; ml*-upload at conversation start is the access mechanism; all core+ rules apply, not just the 30 in core*. <strong>ACTIVATIONS DISPATCH</strong> (slot 2), table routing user-phrases (bloom / ouroboros / componentlist / HAL / reflect / WR) to their handlers in core+ or in-memory scanner slots. Architectural shift: trigger handlers move out of core* permanently while a single dispatch slot maintains the user-phrase → handler mapping.</p>
+    </div>
+  </article>
+</section>
+
+<section class="section">
+  <div class="section-title">Bar &amp; verification decisions</div>
+
+  <article class="entry entry--shipped">
+    <div class="entry-header">
+      <div class="entry-title">Untranslatables verification badges (April 2026)</div>
+      <div class="entry-meta"><span class="tag-shipped">SHIPPED</span> · U1-U8</div>
+    </div>
+    <div class="entry-body">
+      <p>The 8 untranslatable entries (saudade, sehnsucht, mamihlapinatapai, komorebi, schadenfreude, sobremesa, fika, tsundoku) carry verification badges: <strong>◉ primary read</strong> (translator/author engaged source directly), <strong>◐ secondary verified</strong> (passes through reputable scholarly intermediary), <strong>◌ cited from bibliography</strong> (entered via citation chain, not direct read). Badges visible on each card; reading the badge tells the reader how grounded the entry is.</p>
+      <p>Bar established by user-rejection of two prior research passes that cited Wikipedia and Amazon-product listings. Subsequent work cites Cassin's Vocabulaire européen des philosophies (Seuil 2004, trans. Princeton 2014) and equivalent primary-scholarship sources only.</p>
+    </div>
+  </article>
+
+  <article class="entry entry--shipped">
+    <div class="entry-header">
+      <div class="entry-title">Frazer/Smith pattern for contested types (May 2026)</div>
+      <div class="entry-meta"><span class="tag-shipped">SHIPPED</span> · H6 ml*</div>
+    </div>
+    <div class="entry-body">
+      <p>Methodology entry H6 codifies the cite-pair-the-contested rule: when an archetypal type is itself disputed (e.g., the "scapegoat king" inherited from Frazer's Golden Bough but criticized by Jonathan Z. Smith), the catalog cites BOTH the founding author and the contesting author rather than picking a side. The reader gets the live contest, not a settled adjudication.</p>
+      <p>Worked example in catalog: scapegoat-king tag carries Frazer 1890-1915 alongside J. Z. Smith 1973 contesting reference. Reader can follow either lineage.</p>
+    </div>
+  </article>
+
+  <article class="entry entry--shipped">
+    <div class="entry-header">
+      <div class="entry-title">Rule #1 CITES + LOGOI (May 2026)</div>
+      <div class="entry-meta"><span class="tag-shipped">SHIPPED</span> · core* slot 1</div>
+    </div>
+    <div class="entry-body">
+      <p>Top-priority core memory rule: every factual claim requires a verified primary source. Just-knowing without source-check is Q5 (objection delivered without source-check when the source-check would kill it). SEO content does not count as scholarship. Wikipedia is starter-only, never cite. LOGOI clause: ml* / mc* / bb* / core* outputs must be universal-truth-bearing; soft-pleasing is a violation.</p>
+      <p>Catalog enforcement: every entry added since this rule's installation cites primary sources by publisher / ISBN / journal-volume. The aa* refinement track this session (A12 / A21 / C5) all met this bar; META_ENTRIES cite Lévi-Strauss / Wittgenstein / Foucault primary works by Gallimard / Blackwell publication, SETTINGS_LIBRARY cites Eliade / Bachelard / Foucault / Vernant primary works.</p>
+    </div>
+  </article>
+</section>
+
+<section class="section">
+  <div class="section-title">Refusals, what the catalog did not add and why</div>
+
+  <article class="entry entry--shipped">
+    <div class="entry-header">
+      <div class="entry-title">A20, additional compound-marking refinements</div>
+      <div class="entry-meta"><span class="tag-shipped">SHIPPED</span> · 18 tags + 20 occurrences</div>
+    </div>
+    <div class="entry-body">
+      <p>User authorized 2026-05-04. Eight compound-cluster splits executed: graves-triple-goddess Maiden/Nymph/Mother (split into Maiden + Nymph + Mother), graves-triple-goddess Birth/Love/Death (split into Birth-aspect + Love-aspect + Death-aspect), graves-triple-goddess Bride/Mother/Layer-Out (split into Bride + Mother + Layer-Out), dumezil Sovereignty Mitra/Varuna (split into Mitra + Varuna), mckee Forces of Antagonism (split into Contrary + Contradictory + Negation-of-the-Negation), commedia Flavio/Lelio/Orazio (split into the three named-lover masks), sentai Pink/Green/White (split into the three sixth-ranger color types), mma-marvel Rank-based archetypes (split into Street-level + Mid-level + Cosmic-level).</p>
+      <p>18 new tags created with full schema (id, display, normalized, synonyms, equivalents:[], confidence:'curated', tradition_hints inherited from parent taxonomy, granularity, provenance v1.4-a20-shipped-2026-05-04). 20 new occurrences appended to parent taxonomies' categories[] arrays with split-annotation in original strings; each carries notes citing source-author (Graves The White Goddess 1948, Dumezil Mitra-Varuna 1940, McKee Story 1997, etc.). count fields on parent taxonomies bumped accordingly.</p>
+      <p>No tag IDs fabricated outside source-author usage. Per Rule 11 (organize-not-create) the AI split aggregations the catalog had collapsed; the names came from the source authors themselves.</p>
+    </div>
+  </article>
+
+  <article class="entry entry--blocked">
+    <div class="entry-header">
+      <div class="entry-title">C3, Untranslatables U6 onward</div>
+      <div class="entry-meta"><span class="tag-blocked">BLOCKED</span> · prior rejection</div>
+    </div>
+    <div class="entry-body">
+      <p>The 8 entries that did ship (U1-U8) are the recovered remainder after two prior research passes were user-rejected for citing aggregator sources. To resume needs either (a) an explicit 22-term seed list of which untranslatables to add, or (b) a stricter source-bar declaration, for example, "only entries appearing in Cassin's Vocabulaire européen des philosophies."</p>
+      <div class="refusal-quote">memory note: "Untranslatables research failed twice (Wikipedia/Amazon citations rejected). ml*#720 water-through-fingers entry."</div>
+    </div>
+  </article>
+
+  <article class="entry entry--blocked">
+    <div class="entry-header">
+      <div class="entry-title">C4, Operational signatures 9+</div>
+      <div class="entry-meta"><span class="tag-blocked">BLOCKED</span> · bar definition</div>
+    </div>
+    <div class="entry-body">
+      <p>"Operational signature" as a category exists in bookwormburrows (bb*) pedagogy, cocoon / silkworm / egg-laying-type process-signatures govern how the dimensional-traveling game tracks character development. Whether the category extends to aa* in the same form, and what the inclusion-bar would be, is undefined. Pending user direction on what counts as an operational signature in the aa* sense (process-signature for an archetype? signature of an archetype in operation? something else?).</p>
+    </div>
+  </article>
+
+  <article class="entry entry--blocked">
+    <div class="entry-header">
+      <div class="entry-title">C6, Motifs 15+</div>
+      <div class="entry-meta"><span class="tag-blocked">BLOCKED</span> · partial seed</div>
+    </div>
+    <div class="entry-body">
+      <p>Four motifs named in the audit (magic-mirror, holy-fool, blood-compact, exchange-of-clothes). The "+15" target requires 11 additional motif-names from the user. Per Rule 30 (no naming), the AI does not propose new motif names; that is user authorship. Once names land, the AI authors entries against them with primary-source citations.</p>
+    </div>
+  </article>
+
+  <article class="entry entry--shipped">
+    <div class="entry-header">
+      <div class="entry-title">A5, Schmidt → Bolen lineage</div>
+      <div class="entry-meta"><span class="tag-shipped">SHIPPED</span> · schmidt45 identified</div>
+    </div>
+    <div class="entry-body">
+      <p>The audit's "Schmidt" was ambiguous to the AI on first pass. On verification, the Schmidt referenced is <strong>Victoria Lynn Schmidt</strong> (45 Master Characters, Writer's Digest 2001, rev. 2012, ISBN 978-1599635347), already in the catalog as taxonomy <code>schmidt45</code>. Her categories explicitly use Bolen's light/shadow Greek-pantheon framework: "Aphrodite (Seductive Muse / Femme Fatale)" / "Zeus (King / Dictator)" / "Hera (Matriarch / Scorned Woman)", these are Bolen 1984/1989 archetypal pairs extended into a writer's toolkit. The lineage edge schmidt45 → bolen-goddess is now in LINEAGE_EDGES alongside the prior pearson12 → jung-classical edge.</p>
+      <p>Adjacent gap noted (not yet fixed): the Bolen 1989 work (Gods in Everyman) does NOT have its own taxonomy entry in the catalog, only the 1984 Goddesses in Everywoman. Adding bolen-gods as a new taxonomy crosses into new-entry creation, user authorship territory. Flagged as future work, not auto-shipped.</p>
+    </div>
+  </article>
+
+  <article class="entry entry--blocked">
+    <div class="entry-header">
+      <div class="entry-title">A10, provenance-tier filter</div>
+      <div class="entry-meta"><span class="tag-blocked">BLOCKED</span> · data monolithic</div>
+    </div>
+    <div class="entry-body">
+      <p>The provenance field exists on every taxonomy and tag (A19 shipped). Filter UI for provenance tier was specified in the audit. However: all 404 taxonomies currently carry the same provenance value (<code>v1.0-baseline</code>). The filter would offer only one populated tier, doing no useful work. Diverse provenance stamping across TAXONOMIES (separating original Pass-1 entries from Pass-2 deepening from Pass-3 corrections) would need to land first as a separate authoring pass. Pending that work.</p>
+    </div>
+  </article>
+</section>
+
+<a href="/aa/" class="nav-back">← Back to catalog</a>
+<a href="/aa/#mode=pending" class="nav-back" style="margin-left:24px">→ Pending decisions tab</a>
+
+<script src="/js/theme.js?v=cl91" defer></script>
+<script src="/js/mandala.js?v=cl91" defer></script>
+<script src="/js/indra.js?v=cl91" defer></script>
+<script src="/js/footer.js?v=cl91" defer></script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+/* ============================================================
+ * SEMINAR SCHOOLS — DESIGN SYSTEM
+ * /css/theme.css
+ *
+ * Unified design tokens. Light + dark modes. Per-page accent
+ * variants follow an analogous color wheel arc through warm
+ * earth tones (10° to 50° hue) with two cool-complementary
+ * exceptions for dark-themed pages (Ohm Dome, Polymyth core).
+ *
+ * Approach.
+ *  - Base bg, fg, muted, rule defined ONCE in :root.
+ *  - Each page sets its own --accent-light and --accent-dark in
+ *    its own :root. The theme cascade picks the right one based
+ *    on user preference and toggle state.
+ *  - Dark mode triggers via (a) @media (prefers-color-scheme:
+ *    dark) by default, (b) .dark class on <html> set by JS for
+ *    manual override, (c) .light class on <html> for manual
+ *    light override despite system preference.
+ *  - Toggle button writes to localStorage so preference persists.
+ *
+ * Built 2026-05-20 per audit CL-T98 items #18 + #19.
+ * ============================================================ */
+
+
+/* ============================================================
+ * FONT SYSTEM
+ * One serif for display (Cormorant Garamond — appears on 4+
+ * pages already, the unofficial system serif). One serif for
+ * long body (Libre Baskerville — already used on /saul for CV
+ * dense reading). One sans for UI labels and meta (DM Sans —
+ * already used on home and /saul). One mono for data, code,
+ * and meta (JetBrains Mono — already used on /agora, /aa,
+ * /ohm-dome).
+ * ============================================================ */
+:root {
+  --font-display: 'Cormorant Garamond', 'Garamond', 'Georgia', serif;
+  --font-body: 'Libre Baskerville', 'Georgia', serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  /* Page-specific override slot — Leizu, Marshmellow, etc. can
+     redefine if their content needs different character sets. */
+  --font-multilingual: var(--font-body);
+
+  /* Canonical content width — one reading measure across the site.
+     Added 2026-06-04 per Kira UI review; page widths ranged 600 to 1400px. */
+  --content-width: 768px;
+
+  /* Letter-size scale, driven by the A-/A+ controls in /js/theme.js. */
+  --font-scale: 1;
+}
+
+
+/* ============================================================
+ * COLOR SYSTEM — LIGHT MODE (default)
+ * Warm cream foundation across the site. The bg color signals
+ * "this is Seminar Schools" — same across every page. The fg
+ * is warm dark (not pure black) for a printed-paper feel.
+ * ============================================================ */
+:root {
+  /* Surfaces */
+  --bg: #F5EBE4;
+  --bg-soft: #FAF4ED;
+  --bg-rgb: 245, 235, 228;
+
+  /* Ink */
+  --fg: #2A1A14;
+  --fg-soft: #4A3A30;
+  --fg-rgb: 42, 26, 20;
+
+  /* Mid-weight surfaces */
+  --muted: #6B5F54;
+  --rule: #C8C0B2;
+  --rule-soft: rgba(42, 26, 20, 0.08);
+
+  /* Per-page accent slots. Pages override these in their own
+     :root. Defaults shown below are used by /index. */
+  --accent-light: #8a4a32;
+  --accent-dark: #c87a5a;
+  --accent: var(--accent-light);
+  --accent-rgb: 138, 74, 50;
+  --accent-soft: rgba(138, 74, 50, 0.10);
+  --accent-line: rgba(138, 74, 50, 0.35);
+
+  /* CANONICAL SPECTRUM — one source of truth for per-project accent colors.
+   * Muted jewel tones, legible on the cream ground and on the warm-black dark
+   * ground alike. Pages and the home constellation reference these, so the
+   * ecosystem stays one palette instead of each page inventing its own. */
+  --c1:#C0392B; --c2:#D35400; --c3:#B7950B; --c4:#1E8449;
+  --c5:#1F6FB2; --c6:#6C3FB5; --c7:#127C82;
+}
+
+
+/* ============================================================
+ * COLOR SYSTEM — DARK MODE
+ * Warm black foundation. Cream fg. The relationship between
+ * light and dark bg is intentional inverse: same hue, flipped
+ * lightness. The dark accent is a lighter version of the light
+ * accent at the same hue, lifted for contrast.
+ *
+ * Dark mode fires when:
+ *  (a) User OS preference is dark (default), via @media
+ *  (b) <html class="dark"> is set by JS (manual override)
+ * Manual light override: <html class="light"> wins.
+ * ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --bg: #1A1410;
+    --bg-soft: #2A2018;
+    --bg-rgb: 26, 20, 16;
+
+    --fg: #E8DEC7;
+    --fg-soft: #C8BCA5;
+    --fg-rgb: 232, 222, 199;
+
+    --muted: #8A7E6D;
+    --rule: #3A3328;
+    --rule-soft: rgba(232, 222, 199, 0.10);
+
+    --accent: var(--accent-dark);
+  }
+}
+
+:root.dark,
+:root[data-theme="dark"] {
+  --bg: #1A1410;
+  --bg-soft: #2A2018;
+  --bg-rgb: 26, 20, 16;
+
+  --fg: #E8DEC7;
+  --fg-soft: #C8BCA5;
+  --fg-rgb: 232, 222, 199;
+
+  --muted: #8A7E6D;
+  --rule: #3A3328;
+  --rule-soft: rgba(232, 222, 199, 0.10);
+
+  --accent: var(--accent-dark);
+}
+
+
+/* ============================================================
+ * THEME TOGGLE BUTTON
+ * Small circular button. Floats top-right of viewport. Two
+ * icons (sun + moon) toggled by CSS based on theme state.
+ * Keyboard accessible. ARIA live region announces the change.
+ * Print: hidden.
+ * ============================================================ */
+.theme-toggle {
+  position: fixed;
+  top: 0.9rem;
+  right: 0.9rem;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  background: var(--bg-soft);
+  color: var(--fg);
+  font: 600 14px/1 var(--font-sans);
+  cursor: pointer;
+  transition: background-color 200ms ease, border-color 200ms ease, transform 150ms ease;
+}
+.theme-toggle:hover {
+  background: var(--bg);
+  border-color: var(--accent);
+  transform: scale(1.05);
+}
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.theme-toggle .sun, .theme-toggle .moon {
+  display: none;
+  font-size: calc(16px * var(--font-scale, 1));
+  line-height: 1;
+}
+:root:not(.dark) .theme-toggle .moon { display: inline; }
+:root.dark .theme-toggle .sun { display: inline; }
+/* When system preference is dark and user hasn't overridden to .light,
+   show the sun (offer light mode). */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not(.dark) .theme-toggle .moon { display: none; }
+  :root:not(.light):not(.dark) .theme-toggle .sun { display: inline; }
+}
+@media print {
+  .theme-toggle { display: none !important; }
+}
+
+
+/* ============================================================
+ * SAFE TRANSITIONS
+ * Reduce-motion preference disables the smooth theme transition
+ * (some users find the flicker disorienting).
+ * ============================================================ */
+html {
+  transition: background-color 200ms ease, color 200ms ease;
+}
+body {
+  transition: background-color 200ms ease, color 200ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  html, body {
+    transition: none !important;
+  }
+  .theme-toggle {
+    transition: none !important;
+  }
+}
+
+
+/* ============================================================
+ * TYPE CANON ALIASES — added 2026-06-04 per Kira UI review.
+ * Pages historically used --display / --serif / --body / --sans /
+ * --mono with divergent values (Fraunces, Newsreader, EB Garamond,
+ * Playfair, Spectral). Map every alias to the one canon so the
+ * whole site shares a type system. Loaded after each page's inline
+ * :root, so these win. Deliberate separate worlds (the Devil's
+ * Diary) do not load this file and keep their own faces.
+ * ============================================================ */
+:root {
+  --display: var(--font-display);
+  --serif:   var(--font-display);
+  --body:    var(--font-body);
+  --sans:    var(--font-sans);
+  --mono:    var(--font-mono);
+}

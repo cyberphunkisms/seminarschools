@@ -1,0 +1,359 @@
+{
+  "version": 1,
+  "updated": "2026-06-24",
+  "note": "Canonical contentinternet vocabulary. Single source of truth. autolink.js and regen-concordance-index.js both read this file. To add a new term: add an entry here, run node scripts/regen-concordance-index.js, deploy. autolink.js fetches this file on page load. Terms ordered longest-pattern-first to prevent partial regex matches.",
+  "terms": [
+    {
+      "canonical": "platformstrawmanculture",
+      "pattern": "platformstrawmanculture|platformstrawmanned|platformstrawmanning"
+    },
+    {
+      "canonical": "polymyth",
+      "pattern": "polymyth(?:ic|ical|ically|card|cards|horoscope|analyses)?"
+    },
+    {
+      "canonical": "gorgonification",
+      "pattern": "gorgonif(?:ication|ications|ied|ies|y|ying|iable)"
+    },
+    {
+      "canonical": "petrification",
+      "pattern": "petrif(?:ication|ications|ied|ies|y|ying|action)"
+    },
+    {
+      "canonical": "hegelianegirl",
+      "pattern": "hegelianegirls?|hegelianekitty|hegelianekitties"
+    },
+    {
+      "canonical": "ironmanning",
+      "pattern": "ironman(?:ning|ned|nable|ner|nans?|s)?"
+    },
+    {
+      "canonical": "hivemindidiom",
+      "pattern": "hivemindidiomsnakes?|hivemindidioms?"
+    },
+    {
+      "canonical": "degorgonification",
+      "pattern": "degorgonif(?:ication|ied|ies|y|ying)"
+    },
+    {
+      "canonical": "twistingleviathan",
+      "pattern": "twistingleviathan|twisting leviathan"
+    },
+    {
+      "canonical": "ventriloquism",
+      "pattern": "ventriloqui(?:sm|zed|zing|ze|st)"
+    },
+    {
+      "canonical": "obelisking",
+      "pattern": "obelisk(?:ing|ed|able|maker|s)"
+    },
+    {
+      "canonical": "concedingasstrength",
+      "pattern": "[Cc]onceding[- ]as[- ]strength"
+    },
+    {
+      "canonical": "ouroborosanalyses",
+      "pattern": "ouroborosanalys(?:es|is|ed|e)"
+    },
+    {
+      "canonical": "mephistodata",
+      "pattern": "mephistodata|mephistofaustian"
+    },
+    {
+      "canonical": "marshmellowmonster",
+      "pattern": "[Mm]arshmell?ow[- ]?monster"
+    },
+    {
+      "canonical": "polycognate",
+      "pattern": "polycognates?|polycognated"
+    },
+    {
+      "canonical": "connectedcontentinternet",
+      "pattern": "connectedcontentinternet"
+    },
+    {
+      "canonical": "performativitypython",
+      "pattern": "[Pp]erformativity python"
+    },
+    {
+      "canonical": "endlessphd",
+      "pattern": "endless[- ]?[Pp][Hh][Dd]"
+    },
+    {
+      "canonical": "definitionfederation",
+      "pattern": "definitional federation"
+    },
+    {
+      "canonical": "scapegoat",
+      "pattern": "scapegoat(?:ing|ed|s)?"
+    },
+    {
+      "canonical": "polymorphousmythology",
+      "pattern": "polymorphousmythology"
+    },
+    {
+      "canonical": "capturenarrative",
+      "pattern": "capture[- ]narrative"
+    },
+    {
+      "canonical": "ironmannedmontesque",
+      "pattern": "ironmannedmontesque"
+    },
+    {
+      "canonical": "sabachtan",
+      "pattern": "sabachtan(?:index)?"
+    },
+    {
+      "canonical": "mearsheimerttest",
+      "pattern": "[Mm]earsheimer test"
+    },
+    {
+      "canonical": "romanticdecline",
+      "pattern": "romantic[- ]decline"
+    },
+    {
+      "canonical": "mogging",
+      "pattern": "mogg(?:ing|ed|er|s)"
+    },
+    {
+      "canonical": "commodifiedempathy",
+      "pattern": "commodifiedempathy"
+    },
+    {
+      "canonical": "protectionracket",
+      "pattern": "protection racket"
+    },
+    {
+      "canonical": "dualregister",
+      "pattern": "dual[- ]?register"
+    },
+    {
+      "canonical": "meaningaxis",
+      "pattern": "meaning[- ]?axis"
+    },
+    {
+      "canonical": "wrongcurtain",
+      "pattern": "wrong[- ]curtain"
+    },
+    {
+      "canonical": "bookwormburrows",
+      "pattern": "bookwormburrows"
+    },
+    {
+      "canonical": "methodologylist",
+      "pattern": "methodologylist"
+    },
+    {
+      "canonical": "contentinternet",
+      "pattern": "contentinternet"
+    },
+    {
+      "canonical": "cyberphunkism",
+      "pattern": "cyberphunkisms?"
+    },
+    {
+      "canonical": "crocodiletears",
+      "pattern": "crocodile tears"
+    },
+    {
+      "canonical": "spectacle",
+      "pattern": "spectacle(?:s)?"
+    },
+    {
+      "canonical": "ghostfiring",
+      "pattern": "ghost[- ]firing"
+    },
+    {
+      "canonical": "tollbooth",
+      "pattern": "toll[- ]?booth"
+    },
+    {
+      "canonical": "bronzeserpent",
+      "pattern": "bronze serpent"
+    },
+    {
+      "canonical": "bakhtin",
+      "pattern": "\\b[Bb]akhtin\\b"
+    },
+    {
+      "canonical": "threesealings",
+      "pattern": "three sealings"
+    },
+    {
+      "canonical": "campaigncodex",
+      "pattern": "campaigncodex"
+    },
+    {
+      "canonical": "demogorgon",
+      "pattern": "[Dd]emogorgon"
+    },
+    {
+      "canonical": "deadstage",
+      "pattern": "dead[- ]stage"
+    },
+    {
+      "canonical": "egregorewars",
+      "pattern": "egregorewars?"
+    },
+    {
+      "canonical": "girard",
+      "pattern": "\\b[Gg]irard\\b"
+    },
+    {
+      "canonical": "debord",
+      "pattern": "\\b[Dd]ebord\\b"
+    },
+    {
+      "canonical": "snakelogic",
+      "pattern": "snakelogics?"
+    },
+    {
+      "canonical": "parseltongue",
+      "pattern": "parseltongue"
+    },
+    {
+      "canonical": "rainbowmagic",
+      "pattern": "rainbowmagic"
+    },
+    {
+      "canonical": "leviathan",
+      "pattern": "[Ll]eviathan"
+    },
+    {
+      "canonical": "nehushtan",
+      "pattern": "[Nn]ehushtan"
+    },
+    {
+      "canonical": "psychologism",
+      "pattern": "psychologism"
+    },
+    {
+      "canonical": "legalism",
+      "pattern": "\\blegalism\\b"
+    },
+    {
+      "canonical": "gorgonkaren",
+      "pattern": "gorgonkaren"
+    },
+    {
+      "canonical": "modulecanon",
+      "pattern": "modulecanon"
+    },
+    {
+      "canonical": "gorgonhorde",
+      "pattern": "gorgonhorde"
+    },
+    {
+      "canonical": "gorgonworld",
+      "pattern": "gorgonworld"
+    },
+    {
+      "canonical": "gorgonlogic",
+      "pattern": "gorgonlogic"
+    },
+    {
+      "canonical": "polymythdnd",
+      "pattern": "polymythdnd"
+    },
+    {
+      "canonical": "theyliveMOG",
+      "pattern": "theylivemog"
+    },
+    {
+      "canonical": "kenocharism",
+      "pattern": "kenocharism"
+    },
+    {
+      "canonical": "florilegium",
+      "pattern": "florilegium"
+    },
+    {
+      "canonical": "gorgonwars",
+      "pattern": "gorgonwars?"
+    },
+    {
+      "canonical": "blob",
+      "pattern": "\\b[Bb]lob\\b"
+    },
+    {
+      "canonical": "jester",
+      "pattern": "[Jj]esters?"
+    },
+    {
+      "canonical": "cave",
+      "pattern": "\\b[Cc]ave\\b"
+    },
+    {
+      "canonical": "tentacular",
+      "pattern": "tentacular"
+    },
+    {
+      "canonical": "ubermynsch",
+      "pattern": "ubermynsch"
+    },
+    {
+      "canonical": "egregore",
+      "pattern": "egregores?"
+    },
+    {
+      "canonical": "fourheads",
+      "pattern": "four heads"
+    },
+    {
+      "canonical": "beingkind",
+      "pattern": "beingkind"
+    },
+    {
+      "canonical": "goopworld",
+      "pattern": "goopworld"
+    },
+    {
+      "canonical": "pleonexia",
+      "pattern": "pleonexia"
+    },
+    {
+      "canonical": "ouroboros",
+      "pattern": "ouroboros"
+    },
+    {
+      "canonical": "medusa",
+      "pattern": "[Mm]edusa"
+    },
+    {
+      "canonical": "typhon",
+      "pattern": "[Tt]yphon"
+    },
+    {
+      "canonical": "aufheben",
+      "pattern": "aufheben"
+    },
+    {
+      "canonical": "idiomary",
+      "pattern": "idiomary"
+    },
+    {
+      "canonical": "kayfabe",
+      "pattern": "kayfabe"
+    },
+    {
+      "canonical": "scanner",
+      "pattern": "scanner"
+    },
+    {
+      "canonical": "gestell",
+      "pattern": "gestell"
+    },
+    {
+      "canonical": "revomit",
+      "pattern": "revomit"
+    },
+    {
+      "canonical": "twisting",
+      "pattern": "twisting"
+    },
+    {
+      "canonical": "antitwisting",
+      "pattern": "anti.?twisting|antitwisting"
+    }
+  ]
+}

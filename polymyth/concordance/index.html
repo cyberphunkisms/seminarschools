@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, follow">
+<meta name="description" content="Concordance. Cross-corpus index of contentinternet vocabulary across polymorphousmythology star pages.">
+<meta property="og:title" content="Concordance. polymorphousmythology.">
+<meta property="og:image" content="https://seminarschools.com/og-image.png">
+<meta property="og:description" content="Cross-corpus index of contentinternet vocabulary across polymorphousmythology star pages.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/polymyth/concordance/">
+<meta property="og:site_name" content="Seminar Schools">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0a0908">
+<link rel="canonical" href="https://seminarschools.com/polymyth/concordance/">
+<link rel="stylesheet" href="/css/alive.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=cl91">
+<title>Concordance. polymorphousmythology.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --display: 'Fraunces', Georgia, serif;
+  --body: 'Newsreader', Georgia, serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --bg: #0a0908; --bg1: #131210; --bg2: #1c1a17;
+  --brd: #2a2722; --brd2: #3d3830;
+  --txt: #e8e2d4; --dim: #8a8275; --fnt: #5a5448;
+  --fire: #d97515; --fire2: #f4a032;
+  --gorgon: #6b3d4a; --sabachtan: #c4a878; --method: #6b8a7a;
+  --idiom: #8a6b4a; --degorgon: #4a6b5a; --citation: #c9a66b;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--txt);
+  font-family: var(--body); font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--fire); color: var(--bg); }
+
+.topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.8rem 2rem; border-bottom: 1px solid var(--brd);
+  font-family: var(--mono); font-size: 0.7rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+}
+.topbar a { color: var(--dim); text-decoration: none; }
+.topbar a:hover { color: var(--fire); }
+.topbar .brand em { font-style: italic; color: var(--fire); }
+
+.wrap { max-width: 860px; margin: 0 auto; padding: 2rem; }
+
+/* ── Term header ── */
+.term-header {
+  margin-bottom: 2rem; padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--brd);
+}
+.term-name {
+  font-family: var(--display); font-size: 2.2rem;
+  color: var(--fire); font-weight: 500; margin-bottom: 0.4rem;
+}
+.term-count {
+  font-family: var(--mono); font-size: 0.8rem;
+  color: var(--dim); letter-spacing: 0.06em;
+}
+
+/* ── Vocabulary index (landing page) ── */
+.vocab-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.6rem; margin-top: 1.5rem;
+}
+.vocab-card {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 0.5rem 0.8rem; border: 1px solid var(--brd);
+  border-radius: 4px; text-decoration: none; color: var(--txt);
+  font-family: var(--mono); font-size: 0.82rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+.vocab-card:hover { border-color: var(--fire); background: var(--bg1); }
+.vocab-card .ct { color: var(--dim); font-size: 0.72rem; }
+
+/* ── Entry list ── */
+.section-label {
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--dim); margin-top: 2rem; margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--brd); padding-bottom: 0.3rem;
+}
+.entry-card {
+  padding: 0.8rem 0; border-bottom: 1px solid var(--brd);
+}
+.entry-card:last-child { border-bottom: none; }
+.entry-title {
+  color: var(--txt); text-decoration: none;
+  font-size: 0.95rem; line-height: 1.4;
+  transition: color 0.12s;
+}
+.entry-title:hover { color: var(--fire); }
+.entry-meta {
+  font-family: var(--mono); font-size: 0.68rem;
+  color: var(--fnt); margin-top: 0.2rem;
+  letter-spacing: 0.04em;
+}
+.entry-snippet {
+  font-size: 0.88rem; color: var(--dim);
+  margin-top: 0.3rem; line-height: 1.5;
+}
+.entry-snippet mark {
+  background: rgba(217, 117, 21, 0.2); color: var(--txt);
+  border-radius: 2px; padding: 0 2px;
+}
+.src-badge {
+  display: inline-block; padding: 0.1rem 0.4rem;
+  border: 1px solid var(--brd2); border-radius: 3px;
+  font-family: var(--mono); font-size: 0.62rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--dim);
+}
+.src-badge.ml { border-color: var(--method); color: var(--method); }
+.src-badge.bb { border-color: var(--degorgon); color: var(--degorgon); }
+.src-badge.cc { border-color: var(--gorgon); color: var(--gorgon); }
+.src-badge.mc { border-color: var(--citation); color: var(--citation); }
+
+/* ── Search ── */
+.search-bar {
+  margin-bottom: 1rem;
+}
+.search-bar input {
+  width: 100%; padding: 0.5rem 0.8rem;
+  background: var(--bg1); border: 1px solid var(--brd);
+  border-radius: 4px; color: var(--txt);
+  font-family: var(--mono); font-size: 0.82rem;
+  outline: none;
+}
+.search-bar input:focus { border-color: var(--fire); }
+.search-bar input::placeholder { color: var(--fnt); }
+
+.loading { color: var(--dim); font-style: italic; padding: 2rem 0; }
+.empty { color: var(--fnt); font-style: italic; padding: 2rem 0; }
+</style>
+</head>
+<body>
+<h1 class="sr-only">Polymyth Concordance</h1>
+<div class="topbar">
+  <a href="/polymyth/methodologylist/" class="brand"><em>polymyth</em> concordance</a>
+  <a href="/polymyth/sitemap/">sitemap</a>
+</div>
+<div class="wrap">
+  <div id="content"><div class="loading">Loading concordance index…</div></div>
+</div>
+<script>
+(function () {
+  'use strict';
+
+  var content = document.getElementById('content');
+  var params = new URLSearchParams(window.location.search);
+  var termParam = params.get('term');
+
+  // Source labels
+  var SRC_LABELS = { ml: 'methodologylist*', bb: 'bookwormburrows*', cc: 'campaigncodex*', mc: 'modulecanon*' };
+
+  // Fetch the index
+  fetch('/polymyth/concordance/concordance-index.json')
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (termParam) {
+        renderTerm(data, termParam);
+      } else {
+        renderIndex(data);
+      }
+    })
+    .catch(function (err) {
+      content.innerHTML = '<div class="empty">Failed to load concordance index.</div>';
+      console.error(err);
+    });
+
+  // ── Render: vocabulary index (landing page) ──
+  function renderIndex(data) {
+    var terms = Object.keys(data.terms).sort(function (a, b) {
+      return data.terms[b].count - data.terms[a].count;
+    });
+
+    var html = '';
+    html += '<div class="term-header">';
+    html += '<div class="term-name">contentinternet concordance</div>';
+    html += '<div class="term-count">' + terms.length + ' terms \u00b7 ' + data.totalReferences + ' cross-references \u00b7 ' + data.totalEntries + ' entries scanned</div>';
+    html += '</div>';
+
+    html += '<div class="search-bar"><input type="text" id="vocab-search" placeholder="filter terms\u2026"></div>';
+
+    html += '<div class="vocab-grid" id="vocab-grid">';
+    for (var i = 0; i < terms.length; i++) {
+      var t = terms[i];
+      html += '<a class="vocab-card" href="?term=' + encodeURIComponent(t) + '" data-term="' + esc(t) + '">';
+      html += esc(t);
+      html += ' <span class="ct">' + data.terms[t].count + '</span>';
+      html += '</a>';
+    }
+    html += '</div>';
+
+    content.innerHTML = html;
+    document.title = 'Concordance. polymorphousmythology.';
+
+    // Search filter
+    var input = document.getElementById('vocab-search');
+    input.addEventListener('input', function () {
+      var q = input.value.toLowerCase();
+      var cards = document.querySelectorAll('.vocab-card');
+      for (var j = 0; j < cards.length; j++) {
+        var term = cards[j].getAttribute('data-term');
+        cards[j].style.display = term.indexOf(q) !== -1 ? '' : 'none';
+      }
+    });
+  }
+
+  // ── Render: single term concordance ──
+  function renderTerm(data, term) {
+    var termData = data.terms[term];
+    if (!termData) {
+      content.innerHTML = '<div class="empty">No entries found for \u201c' + esc(term) + '\u201d. <a href="/polymyth/concordance/" style="color:var(--fire)">Browse all terms</a>.</div>';
+      return;
+    }
+
+    var entries = termData.entries;
+
+    var html = '';
+    html += '<div class="term-header">';
+    html += '<div class="term-name">' + esc(term) + '</div>';
+    html += '<div class="term-count">' + entries.length + ' entries across ';
+
+    // Count sources
+    var srcCounts = {};
+    for (var i = 0; i < entries.length; i++) {
+      var s = entries[i].src;
+      srcCounts[s] = (srcCounts[s] || 0) + 1;
+    }
+    var srcParts = [];
+    for (var k in srcCounts) {
+      srcParts.push(srcCounts[k] + ' in ' + (SRC_LABELS[k] || k));
+    }
+    html += srcParts.join(', ');
+    html += ' \u00b7 <a href="/polymyth/concordance/" style="color:var(--fire);text-decoration:none">all terms</a>';
+    html += '</div></div>';
+
+    // Group by source
+    var grouped = {};
+    for (var j = 0; j < entries.length; j++) {
+      var e = entries[j];
+      if (!grouped[e.src]) grouped[e.src] = [];
+      grouped[e.src].push(e);
+    }
+
+    var srcOrder = ['ml', 'bb', 'cc', 'mc'];
+    for (var si = 0; si < srcOrder.length; si++) {
+      var srcId = srcOrder[si];
+      if (!grouped[srcId]) continue;
+      var srcEntries = grouped[srcId];
+
+      html += '<div class="section-label"><span class="src-badge ' + srcId + '">' + srcId + '*</span> ' + (SRC_LABELS[srcId] || srcId) + ' (' + srcEntries.length + ')</div>';
+
+      for (var ei = 0; ei < srcEntries.length; ei++) {
+        var en = srcEntries[ei];
+        html += '<div class="entry-card">';
+        html += '<a class="entry-title" href="' + esc(en.url) + '">' + esc(en.t) + '</a>';
+        html += '<div class="entry-meta">section: ' + esc(en.s) + '</div>';
+        if (en.snip) {
+          html += '<div class="entry-snippet">' + highlightTerm(esc(en.snip), term) + '</div>';
+        }
+        html += '</div>';
+      }
+    }
+
+    content.innerHTML = html;
+    document.title = esc(term) + '. Concordance.';
+  }
+
+  // ── Utilities ──
+  function esc(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  function highlightTerm(html, term) {
+    // Build regex from term that catches inflected forms
+    // Simple approach: match the term literally (case-insensitive)
+    try {
+      var re = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\w*)', 'gi');
+      return html.replace(re, '<mark>$1</mark>');
+    } catch (e) {
+      return html;
+    }
+  }
+})();
+</script>
+<script src="/js/mandala.js?v=cl91" defer></script>
+<script src="/js/indra.js?v=cl91" defer></script>
+<script src="/js/footer.js?v=cl91" defer></script>
+<script src="/js/autolink.js?v=cl91" defer></script>
+<script src="/js/theme.js?v=cl91" defer></script>
+</body>
+</html>
