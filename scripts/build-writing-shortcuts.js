@@ -7,11 +7,11 @@ const ROOT = path.resolve(__dirname, '..');
 const CHECK = process.argv.includes('--check');
 const NOW = new Date();
 const ROUTES = {
-  writingclub: { band:'club', label:'All Writing', display:'All Writing', desc:'All writing contests together.', countText:n=>`${n} writing competitions` },
-  writingkids: { band:'kids', label:'Writing Kids', display:'Kids', desc:'Elementary-friendly writing opportunities.', countText:n=>`${n} writing competitions` },
-  writingjuniors: { band:'juniors', label:'Writing Juniors', display:'Juniors', desc:'Middle-grade writing opportunities.', countText:n=>`${n} writing competitions` },
-  writingteens: { band:'teens', label:'Writing Teens', display:'Teens', desc:'High-school writing contests and publications.', countText:n=>`${n} writing competitions` },
-  writinggrads: { band:'grads', label:'Writing Grades 11 and 12', display:'Grades 11 and 12', desc:'Senior high-school portfolio builders.', countText:n=>`${n} writing competitions` }
+  writingclub: { band:'club', label:'All Writing', display:'All Writing', desc:'Student writing opportunities in one list.', countText:n=>`${n} writing competitions` },
+  writingkids: { band:'kids', label:'Kids', display:'Kids', desc:'Writing opportunities for younger students.', countText:n=>`${n} writing competitions` },
+  writingjuniors: { band:'juniors', label:'Juniors', display:'Juniors', desc:'Middle-grade writing opportunities.', countText:n=>`${n} writing competitions` },
+  writingteens: { band:'teens', label:'Teens', display:'Teens', desc:'High-school writing opportunities.', countText:n=>`${n} writing competitions` },
+  writinggrads: { band:'grads', label:'Grades 11 and 12', display:'Grades 11 and 12', desc:'Senior high-school writing opportunities.', countText:n=>`${n} writing competitions` }
 };
 function read(rel){ return fs.readFileSync(path.join(ROOT, rel), 'utf8'); }
 function write(rel, text){
@@ -61,7 +61,7 @@ function setStablePolymythcalHeader(html, info, route){
     <h1>Polymythcal</h1>
     <div class="meta" id="polymythContext">${esc(info.label)}</div>
     <div class="tag" id="polymythDescription">${esc(info.desc || 'Learning opportunities.')}</div>
-    <div class="tag helper-tag">Pick a filter. The list opens near today. Open a title for the official source.</div>
+    <div class="tag helper-tag">Choose what you need. Open a title to check the official page.</div>
   </header>`);
   return html;
 }

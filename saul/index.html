@@ -1226,7 +1226,7 @@ textarea:focus-visible,
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.085">
+<body data-geometry="indra-web" data-indra-intensity="0.115">
 <a href="/" style="position:fixed;top:0.9rem;left:1rem;z-index:1200;font-family:ui-monospace,monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:inherit;opacity:0.65;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:0.15rem;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.65">&larr; Seminar Schools</a>
 
 
@@ -1333,11 +1333,11 @@ textarea:focus-visible,
       <button type="button" data-cv-mode="theme" data-profile="viewPractice">View by practice</button>
     </div>
     <details class="archive-tools cv-module-tabs" open>
-      <summary data-profile="filterSummary">CV module tabs — PDF follows active tabs</summary>
+      <summary data-profile="filterSummary">Choose what this CV shows</summary>
       <div class="archive-tool-content">
-        <p class="module-helper" data-profile="moduleHelper">Choose one module, then use Save as PDF. The PDF exports the version you clicked.</p>
-  <nav class="filter-nav" id="filterNav" aria-label="CV module tabs">
-    <button type="button" data-cat="all" class="on" id="allBtn">All</button>
+        <p class="module-helper" data-profile="moduleHelper">Pick one or more areas. The PDF uses what you pick.</p>
+  <nav class="filter-nav" id="filterNav" aria-label="CV areas">
+    <button type="button" data-cat="all" class="on" id="allBtn">Full CV</button>
     <button type="button" data-cat="kitchen">Culinary Hospitality</button>
     <button type="button" data-cat="teaching">Teaching</button>
     <button type="button" data-cat="community">Community</button>
@@ -1352,7 +1352,7 @@ textarea:focus-visible,
     <button type="button" id="saveBtn" class="save-btn">Save as PDF</button>
     <button type="button" id="shareBtn">⎘ Share Link</button>
   </div>
-  <p id="moduleStatus" class="module-current" aria-live="polite">Full CV selected. PDF will include the full archive.</p>
+  <p id="moduleStatus" class="module-current" aria-live="polite">Showing the full CV. The PDF will use the full CV.</p>
       </div>
     </details>
 
@@ -1545,7 +1545,7 @@ const CREDS_OVERRIDE = {
 
 const UI = {
   en: {
-    all: "All", save: "Save as PDF", certs: "Certifications", edu: "Education",
+    all: "Full CV", save: "Save as PDF", certs: "Certifications", edu: "Education",
     cats: { kitchen: "Culinary Hospitality", teaching: "Teaching", community: "Community", education: "Education", volunteer: "Volunteer", performance: "Performance", seminarschools: "Seminar Schools" },
     subheadings: { kitchen: "Chef", teaching: "Educator", community: "Community Worker", education: "", volunteer: "Coordinator", performance: "Performer", seminarschools: "Founder & Editor" },
     secs: ["Elementary + Middle School", "High School, Earl Haig, North York", "McGill University, Montreal", "Europe: EGS, Humanitarian, Maritime", "China", "Vancouver + Italy", "Toronto 2019", "Toronto 2020–2022", "Toronto 2023–Present", "Current Projects"],
@@ -1553,7 +1553,7 @@ const UI = {
     eduL: "PhD Candidate in Education (Emerging technologies in pedagogy) · PhD Candidate in Philosophy (Hegel-Jung synthesis) · MA Philosophy, Art & Critical Thought, European Graduate School, Switzerland (studied under Butler, Žižek, Agamben, Badiou, Nancy, Ronell) · BA Political Science, Economics, Philosophy, McGill University (studied under George di Giovanni)"
   },
   zh: {
-    all: "全部", save: "儲存為 PDF", certs: "專業證照", edu: "學歷",
+    all: "完整 CV", save: "儲存為 PDF", certs: "專業證照", edu: "學歷",
     cats: { kitchen: "烹飪餐旅", teaching: "教學", community: "社區領導", education: "教育認證", volunteer: "志工服務", performance: "表演藝術", seminarschools: "Seminar Schools" },
     subheadings: { kitchen: "廚師", teaching: "教育者", community: "社區工作者", education: "", volunteer: "統籌員", performance: "表演者", seminarschools: "創辦人與編輯" },
     secs: ["小學及國中", "高中, Earl Haig 北約克", "麥基爾大學 蒙特婁", "歐洲, EGS、人道救援、航海", "中國", "溫哥華及義大利", "多倫多 2019", "多倫多 2020–2022", "多倫多 2023–至今", "進行中計畫"],
@@ -1561,7 +1561,7 @@ const UI = {
     eduL: "教育學博士候選人（教學中的新興科技）· 哲學博士候選人（黑格爾-榮格整合）· 哲學、藝術與批判思維碩士，歐洲高等研究院，瑞士（師從 Butler、Žižek、Agamben、Badiou、Nancy、Ronell）· 政治學、經濟學、哲學學士，麥基爾大學（師從 George di Giovanni）"
   },
   zhs: {
-    all: "全部", save: "保存为 PDF", certs: "专业证书", edu: "学历",
+    all: "完整 CV", save: "保存为 PDF", certs: "专业证书", edu: "学历",
     cats: { kitchen: "烹饪餐旅", teaching: "教学", community: "社区领导", education: "教育认证", volunteer: "志愿服务", performance: "表演艺术", seminarschools: "Seminar Schools" },
     subheadings: { kitchen: "厨师", teaching: "教育者", community: "社区工作者", education: "", volunteer: "统筹员", performance: "表演者", seminarschools: "创办人与编辑" },
     secs: ["小学及初中", "高中, Earl Haig 北约克", "麦吉尔大学 蒙特利尔", "欧洲, EGS、人道救援、航海", "中国", "温哥华及意大利", "多伦多 2019", "多伦多 2020–2022", "多伦多 2023–至今", "进行中项目"],
@@ -1569,7 +1569,7 @@ const UI = {
     eduL: "教育学博士候选人（教学中的新兴科技）· 哲学博士候选人（黑格尔-荣格整合）· 哲学、艺术与批判思维硕士，欧洲高等研究院，瑞士（师从 Butler、Žižek、Agamben、Badiou、Nancy、Ronell）· 政治学、经济学、哲学学士，麦吉尔大学（师从 George di Giovanni）"
   },
   fa: {
-    all: "همه", save: "ذخیره PDF", certs: "گواهینامه‌ها", edu: "تحصیلات",
+    all: "رزومه کامل", save: "ذخیره PDF", certs: "گواهینامه‌ها", edu: "تحصیلات",
     cats: { kitchen: "مهمان‌نوازی و آشپزی", teaching: "تدریس", community: "جامعه", education: "تحصیلات", volunteer: "داوطلبانه", performance: "هنرهای نمایشی", seminarschools: "Seminar Schools" },
     subheadings: { kitchen: "آشپز", teaching: "آموزگار", community: "فعال اجتماعی", education: "", volunteer: "هماهنگ‌کننده", performance: "هنرمند", seminarschools: "بنیان‌گذار و ویراستار" },
     secs: ["دبستان و راهنمایی", "دبیرستان, Earl Haig", "دانشگاه مک‌گیل, مونترال", "اروپا, EGS، بشردوستانه، دریانوردی", "چین", "ونکوور و ایتالیا", "تورنتو ۲۰۱۹", "تورنتو ۲۰۲۰–۲۰۲۲", "تورنتو ۲۰۲۳–اکنون", "پروژه‌های جاری"],
@@ -1577,7 +1577,7 @@ const UI = {
     eduL: "نامزد دکترای آموزش و پرورش (فناوری‌های نوظهور در آموزش) · نامزد دکترای فلسفه (ترکیب هگل-یونگ) · کارشناسی ارشد فلسفه، هنر و تفکر انتقادی, مدرسه عالی اروپایی، سوئیس (زیر نظر Butler، Žižek، Agamben، Badiou، Nancy، Ronell) · کارشناسی علوم سیاسی، اقتصاد، فلسفه, دانشگاه مک‌گیل (زیر نظر George di Giovanni)"
   },
   fr: {
-    all: "Tout", save: "Enregistrer en PDF", certs: "Certifications", edu: "Formation",
+    all: "CV complet", save: "Enregistrer en PDF", certs: "Certifications", edu: "Formation",
     cats: { kitchen: "Hôtellerie culinaire", teaching: "Enseignement", community: "Communauté", education: "Éducation", volunteer: "Bénévolat", performance: "Arts de la scène", seminarschools: "Seminar Schools" },
     subheadings: { kitchen: "Chef", teaching: "Éducateur", community: "Travailleur communautaire", education: "", volunteer: "Coordinateur", performance: "Interprète", seminarschools: "Fondateur et éditeur" },
     secs: ["École primaire et secondaire", "École secondaire, Earl Haig", "Université McGill, Montréal", "Europe, EGS, humanitaire, maritime", "Chine", "Vancouver et Italie", "Toronto 2019", "Toronto 2020–2022", "Toronto 2023–présent", "Projets en cours"],
@@ -2184,10 +2184,10 @@ document.querySelectorAll("#filterNav button").forEach(b => {
     if (cat === "all") {
       active = new Set();
     } else {
-      // Category tabs behave like CV versions: one selected tab = one printable CV.
-      // Quick views can still set intentional combinations such as Teaching + Education.
-      const wasOnly = active.size === 1 && active.has(cat);
-      active = wasOnly ? new Set() : new Set([cat]);
+      // Each category is a real CV area. Choose one or combine several;
+      // Save as PDF uses the current selection.
+      if (active.has(cat)) active.delete(cat);
+      else active.add(cat);
     }
     syncUrlToFilter();
     render();
@@ -2352,7 +2352,7 @@ const SAUL_PROFILE_COPY = {
     seminarKicker: "Public learning", seminarTitle: "Seminar Schools", seminarText: "A Toronto practice for tutoring, public reading, teacher resources, writing, and learning design.", seminarLink: "Explore Seminar Schools →",
     teachingKicker: "Teaching and curriculum", teachingTitle: "Current practice", teachingText: "Open the teaching and education record, including current work and international experience.", teachingLink: "View teaching record →",
     archiveEyebrow: "Full record", archiveTitle: "Career archive", archiveText: "The complete record, arranged by timeline or by practice.",
-    quickCurrent: "Current work", quickTeaching: "Teaching and education", quickAll: "Full archive", viewTimeline: "View by timeline", viewPractice: "View by practice", filterSummary: "CV module tabs — PDF follows active tabs", moduleHelper: "Choose one module, then use Save as PDF. The PDF exports the version you clicked.",
+    quickCurrent: "Current work", quickTeaching: "Teaching and education", quickAll: "Full archive", viewTimeline: "View by timeline", viewPractice: "View by practice", filterSummary: "Choose what this CV shows", moduleHelper: "Pick one or more areas. The PDF uses what you pick.",
     statusCurrent: "Showing current teaching, education, and Seminar Schools work.", statusTeaching: "Showing teaching and education work.", statusAll: "The complete record, arranged by timeline or by practice.", statusCustom: "Showing selected areas of the record."
   },
   zh: {
@@ -2425,16 +2425,16 @@ function renderProfile() {
   const catLabels = (UI[lang] && UI[lang].cats) || UI.en.cats;
   let moduleText = '';
   if (activeEquals(['teaching','education','seminarschools'])) {
-    moduleText = 'Current-work CV selected. PDF will include current teaching, education, and Seminar Schools work.';
+    moduleText = 'Showing current work. The PDF will use this view.';
   } else if (activeEquals(['teaching','education'])) {
-    moduleText = 'Teaching and education CV selected. PDF will include those modules.';
+    moduleText = 'Showing teaching and education. The PDF will use this view.';
   } else if (active.size === 0) {
-    moduleText = 'Full CV selected. PDF will include the full archive.';
+    moduleText = 'Showing the full CV. The PDF will use the full CV.';
   } else if (active.size === 1) {
     const only = [...active][0];
-    moduleText = (catLabels[only] || only) + ' CV selected. PDF will export this module.';
+    moduleText = 'Showing ' + (catLabels[only] || only) + '. The PDF will use this view.';
   } else {
-    moduleText = [...active].map(function(cat){ return catLabels[cat] || cat; }).join(' + ') + ' CV selected. PDF will export these modules.';
+    moduleText = 'Showing ' + [...active].map(function(cat){ return catLabels[cat] || cat; }).join(' + ') + '. The PDF will use these areas.';
   }
   if (status) {
     status.textContent = activeEquals(['teaching','education','seminarschools']) ? t.statusCurrent : activeEquals(['teaching','education']) ? t.statusTeaching : active.size === 0 ? t.statusAll : moduleText;

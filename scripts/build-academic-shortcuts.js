@@ -21,7 +21,7 @@ const ROUTES = {
     label: 'Philosophy',
     title: 'Polymythcal | Seminar Schools',
     h1: 'Polymythcal',
-    description: 'Philosophy lectures, colloquia, ethics events, political theory, CFPs, graduate conferences, and fellowship opportunities worldwide.',
+    description: 'Philosophy lectures, colloquia, ethics events, political theory, Calls for Papers, graduate conferences, and fellowship opportunities worldwide.',
     countText: n => `${n} philosophy opportunities`
   },
   humanities: {
@@ -34,7 +34,7 @@ const ROUTES = {
   },
   cfps: {
     focus: 'cfps',
-    label: 'CFPs',
+    label: 'Calls for Papers',
     title: 'Polymythcal | Seminar Schools',
     h1: 'Polymythcal',
     description: 'Calls for papers and conference submission deadlines in philosophy, humanities, history, literature, classics, religious studies, art history, archaeology, and theory.',
@@ -158,12 +158,12 @@ function setHead(html, info, route){
   html=html.replace(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${attr(info.title)}">`);
   html=html.replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${attr(info.description)}">`);
   html=html.replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${url}">`);
-  html=html.replace(/<body([^>]*)data-indra-intensity="[^"]*"([^>]*)>/, '<body$1data-indra-intensity="0.110"$2>');
+  html=html.replace(/<body([^>]*)data-indra-intensity="[^"]*"([^>]*)>/, '<body$1data-indra-intensity="0.145"$2>');
   html=html.replace(/<header class="cv-header">[\s\S]*?<\/header>/, `<header class="cv-header">
     <h1>Polymythcal</h1>
     <div class="meta" id="polymythContext">${esc(info.label)}</div>
     <div class="tag" id="polymythDescription">${esc(info.description)}</div>
-    <div class="tag helper-tag">Pick a filter. The list opens near today. Open a title for the official source.</div>
+    <div class="tag helper-tag">Choose what you need. Open a title to check the official page.</div>
   </header>`);
   return html;
 }

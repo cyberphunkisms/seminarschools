@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Polymythcal view: Writing Grades 11 and 12. Senior high-school portfolio builders.">
+<meta name="description" content="Polymythcal view: Grades 11 and 12. Senior high-school writing opportunities.">
 <title>Polymythcal | Seminar Schools</title>
 <link rel="alternate" type="application/rss+xml" title="polymythcalendar" href="/polymythseminars/feed.xml">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seminarschools.com/writinggrads/">
 <meta property="og:title" content="Polymythcal">
-<meta property="og:description" content="Polymythcal view: Writing Grades 11 and 12. Senior high-school portfolio builders.">
+<meta property="og:description" content="Polymythcal view: Grades 11 and 12. Senior high-school writing opportunities.">
 <meta property="og:image" content="https://seminarschools.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -981,23 +981,23 @@
 }
 </script>
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.110">
+<body data-geometry="indra-web" data-indra-intensity="0.145">
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sun" aria-hidden="true">&#9728;</span><span class="moon" aria-hidden="true">&#9790;</span></button><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 
 <main>
   <header class="cv-header">
     <h1>Polymythcal</h1>
-    <div class="meta" id="polymythContext">Writing Grades 11 and 12</div>
-    <div class="tag" id="polymythDescription">Senior high-school portfolio builders.</div>
-    <div class="tag helper-tag">Pick a filter. The list opens near today. Open a title for the official source.</div>
+    <div class="meta" id="polymythContext">Grades 11 and 12</div>
+    <div class="tag" id="polymythDescription">Senior high-school writing opportunities.</div>
+    <div class="tag helper-tag">Choose what you need. Open a title to check the official page.</div>
   </header>
 
   <section class="quick-guide" aria-labelledby="quickGuideTitle">
     <div class="quick-guide-main">
-      <h2 id="quickGuideTitle">How to use</h2>
-      <p id="quickGuideCopy"><strong>Pick a filter.</strong> The list starts near today. Open a title to reach the official source.</p>
+      <h2 id="quickGuideTitle">Find something useful</h2>
+      <p id="quickGuideCopy"><strong>Choose a filter.</strong> Open a title, then check dates, rules, and sign-up on the official page.</p>
     </div>
-    <p class="guide-note"><strong>All Writing</strong> = all writing contests. <strong>CFP</strong> = call for papers. <strong>Projected</strong> = check the official source first.</p>
+    <p class="guide-note"><strong>For students:</strong> ask a parent or teacher before applying, paying, or sharing personal information.</p>
   </section>
 
 
@@ -1015,7 +1015,7 @@
     <button type="button" data-cat="protest">Protest</button>
     <button type="button" data-cat="community">Community</button>
     <button type="button" data-cat="deadlines">Deadlines</button>
-    <button type="button" data-cat="cfp">Call for Papers</button>
+    <button type="button" data-cat="cfp">Calls for Papers</button>
     <button type="button" data-cat="contest">Competition</button>
     <button type="button" data-cat="other">Other</button>
   </nav>
@@ -1031,7 +1031,7 @@
     <a href="/university/" data-academic="university">University+</a>
     <a href="/philosophy/" data-academic="philosophy">Philosophy</a>
     <a href="/humanities/" data-academic="humanities">Humanities</a>
-    <a href="/cfps/" data-academic="cfps">CFPs</a>
+    <a href="/cfps/" data-academic="cfps">Calls for Papers</a>
     <a href="/lectures/" data-academic="lectures">Lectures</a>
     <a href="/fellowships/" data-academic="fellowships">Fellowships</a>
   </nav>
@@ -1052,7 +1052,7 @@
   </div>
 
   <div class="count-line" id="countLine" role="status" aria-live="polite" aria-atomic="true">36 writing competitions</div>
-  <div class="active-guide" id="activeGuide" role="note" aria-live="polite">Showing opportunities near today. Descriptions say what each item is.</div>
+  <div class="active-guide" id="activeGuide" role="note" aria-live="polite">Open a title to check dates, rules, and sign-up on the official page.</div>
 
   <div class="mode-toggle" aria-label="View mode">
     <button type="button" data-mode="list" class="on" aria-pressed="true">List</button>
@@ -1309,7 +1309,7 @@ function writingBandMatches(e, band){
 }
 
 function writingBandLabel(){
-  var labels = { club: 'All Writing', kids: 'Kids Writing', juniors: 'Juniors', teens: 'Teens', grads: 'Grads' };
+  var labels = { club: 'All Writing', kids: 'Kids', juniors: 'Juniors', teens: 'Teens', grads: 'Grades 11 and 12' };
   return labels[activeWritingBand] || '';
 }
 
@@ -1446,21 +1446,21 @@ function activeContextSummary(shown, total, calendarLabel){
   var title = '';
   var desc = '';
   if (activeWritingBand) {
-    var w = { club:['All Writing','All writing contests together.'], kids:['Writing Kids','Elementary-friendly writing opportunities.'], juniors:['Writing Juniors','Middle-grade writing opportunities.'], teens:['Writing Teens','High-school writing contests and publications.'], grads:['Writing Grades 11 and 12','Senior high-school portfolio builders.'] }[activeWritingBand] || ['Writing','Writing opportunities.'];
+    var w = { club:['All Writing','Student writing opportunities in one list.'], kids:['Kids','Writing opportunities for younger students.'], juniors:['Juniors','Middle-grade writing opportunities.'], teens:['Teens','High-school writing opportunities.'], grads:['Grades 11 and 12','Senior high-school writing opportunities.'] }[activeWritingBand] || ['Writing','Writing opportunities.'];
     title = w[0]; desc = w[1];
   } else if (activeAcademicFocus) {
-    var a = { university:['University+','University-level talks, CFPs, fellowships, and research opportunities.'], philosophy:['Philosophy','Talks, CFPs, ethics, theory, and philosophy events.'], humanities:['Humanities','Literature, history, classics, religion, art history, culture, and theory.'], cfps:['Calls for Papers','Submission deadlines for essays, abstracts, papers, and conference proposals.'], lectures:['Lectures & Talks','Public talks, colloquia, seminars, and speaker series.'], fellowships:['Fellowships & Funding','Grants, residencies, visiting scholar, and research-support deadlines.'] }[activeAcademicFocus] || ['University+','University-level opportunities.'];
+    var a = { university:['University+','University-level talks, paper calls, fellowships, and research opportunities.'], philosophy:['Philosophy','Talks, ethics, theory, and philosophy events.'], humanities:['Humanities','Literature, history, classics, religion, art history, culture, and theory.'], cfps:['Calls for Papers','Places asking for abstracts, essays, papers, or conference proposals.'], lectures:['Lectures & Talks','Public talks, colloquia, seminars, and speaker series.'], fellowships:['Fellowships & Funding','Grants, residencies, visiting scholar, and research-support deadlines.'] }[activeAcademicFocus] || ['University+','University-level opportunities.'];
     title = a[0]; desc = a[1];
   } else if (activeCategory !== 'all') {
     title = prettyCategory(activeCategory);
     desc = 'Filtered to ' + prettyCategory(activeCategory).toLowerCase() + '.';
   } else {
     title = 'All opportunities';
-    desc = 'Contests, talks, lectures, festivals, CFPs, fellowships, and learning events.';
+    desc = 'Contests, talks, lectures, festivals, paper calls, fellowships, and learning opportunities.';
   }
   if (activeAge !== 'all') desc += ' Showing ' + prettyAge(activeAge) + '.';
   if (calendarLabel) desc += ' Calendar view: ' + calendarLabel + '.';
-  return { title:title, desc:desc + ' Titles open official pages.' };
+  return { title:title, desc:desc + ' Open a title to check the official page.' };
 }
 
 function updateContextHeader(context){
@@ -1468,7 +1468,7 @@ function updateContextHeader(context){
   var title = document.getElementById('polymythContext');
   var desc = document.getElementById('polymythDescription');
   if (title) title.textContent = context.title || 'All opportunities';
-  if (desc) desc.textContent = (context.desc || '').replace(/\s*Titles open official pages\.?\s*$/,'') || 'Contests, talks, lectures, festivals, calls for papers, fellowships, and learning opportunities.';
+  if (desc) desc.textContent = (context.desc || '').replace(/\s*Open a title to check the official page\.?\s*$/,'') || 'Contests, talks, lectures, festivals, calls for papers, fellowships, and learning opportunities.';
 }
 function updateActiveGuide(text){
   var el = document.getElementById('activeGuide');

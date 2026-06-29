@@ -28,11 +28,12 @@ const required = [
   'data-saul-modular-cv="true"',
   'class="archive-tools cv-module-tabs" open',
   'id="moduleStatus"',
-  'CV module tabs — PDF follows active tabs',
-  'Category tabs behave like CV versions: one selected tab = one printable CV.',
+  'Choose what this CV shows',
+  'Each category is a real CV area. Choose one or combine several;',
   'buildPrintCv();',
   'window.print();',
-  'active = wasOnly ? new Set() : new Set([cat]);',
+  'if (active.has(cat)) active.delete(cat);',
+  'else active.add(cat);',
   'summaryRaw = pickL(SUMMARY_BY_CAT[activeCats[0]])'
 ];
 for (const token of required) if (!html.includes(token)) errors.push(`Missing required Saul page element: ${token}`);
@@ -49,6 +50,7 @@ if (filters < introEnd) errors.push('Detailed filters appear before the professi
 if (html.includes('Saul Karim NMH,<span class="post">MA</span>')) errors.push('Legacy NMH header remains visible.');
 
 const moduleTabTokens = [
+  'data-cat="all" class="on" id="allBtn">Full CV</button>',
   'data-cat="kitchen">Culinary Hospitality</button>',
   'data-cat="teaching">Teaching</button>',
   'data-cat="community">Community</button>',
@@ -59,6 +61,9 @@ const moduleTabTokens = [
 ];
 for (const token of moduleTabTokens) if (!html.includes(token)) errors.push(`Missing visible CV module tab: ${token}`);
 
+if (html.includes('CV module tabs') || html.includes('PDF follows active tabs') || html.includes('Choose one module')) {
+  errors.push('Saul page still contains confusing CV module language.');
+}
 if (!/function buildPrintCv\(\)[\s\S]*activeCats\.length === 1[\s\S]*SUMMARY_BY_CAT/.test(html)) {
   errors.push('PDF builder no longer routes summary copy by selected CV module.');
 }

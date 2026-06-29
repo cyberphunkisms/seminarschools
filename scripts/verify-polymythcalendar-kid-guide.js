@@ -20,14 +20,17 @@ const PAGES = [
 const REQUIRED = [
   'class="quick-guide"',
   'quick-guide-main',
-  'How to use',
-  'Pick a filter',
-  'The list starts near today',
-  'Open a title to reach the official source',
+  'Find something useful',
+  'Choose a filter',
+  'check dates, rules, and sign-up',
+  'For students:',
+  'parent or teacher',
+  'aria-describedby="quickGuideCopy"'
+];
+const FORBIDDEN = [
   'All Writing</strong> = all writing contests',
   'CFP</strong> = call for papers',
-  'Projected</strong> = check the official source first',
-  'aria-describedby="quickGuideCopy"'
+  'Projected</strong> = check the official source first'
 ];
 const failures = [];
 for (const rel of PAGES) {
@@ -36,6 +39,9 @@ for (const rel of PAGES) {
   const html = fs.readFileSync(file, 'utf8');
   for (const needle of REQUIRED) {
     if (!html.includes(needle)) failures.push(`${rel}: missing ${needle}`);
+  }
+  for (const bad of FORBIDDEN) {
+    if (html.includes(bad)) failures.push(`${rel}: still has self-explaining copy: ${bad}`);
   }
 }
 if (failures.length) {

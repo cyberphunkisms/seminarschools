@@ -36,7 +36,7 @@
     ['/nutrition', 'subtle'],
     ['/calendar', 'subtle'],
     ['/sitemap', 'subtle'],
-    ['/main', 'off'],   // home runs its own dual-camera rig
+    ['/main', 'off'],   // home keeps its bespoke dual-camera rig; every other page gets this animated Indra layer
     ['/', 'subtle']
   ];
   function tierFor(path) {
@@ -92,7 +92,7 @@
     // Register sets visibility, not shape: experimental pages read the web
     // louder, professional pages quieter, over the same gasket.
     var requestedOpacity = parseFloat(document.body && document.body.getAttribute('data-indra-intensity'));
-    var op = Number.isFinite(requestedOpacity) ? Math.max(0.025, Math.min(0.18, requestedOpacity)) : (tier === 'prominent' ? 0.14 : 0.075);
+    var op = Number.isFinite(requestedOpacity) ? Math.max(0.045, Math.min(0.24, requestedOpacity)) : (tier === 'prominent' ? 0.18 : 0.105);
 
     var layer = document.createElement('div');
     layer.id = 'indraLayer';
@@ -151,9 +151,9 @@
     var raf = 0;
     var EASE = 0.085;
     var lastMotion = Date.now();
-    var IDLE_AFTER = 1800;
-    // The layer comes alive while a visitor is moving through the page, then rests.
-    // This avoids a permanent animation loop in background tabs and idle pages.
+    var IDLE_AFTER = 100000000;
+    // The layer stays softly alive while the page is visible, matching the main page
+    // background: slow breathing, slow spin, no hard stop after a click.
     function tick() {
       raf = 0;
       if (document.hidden) return;
