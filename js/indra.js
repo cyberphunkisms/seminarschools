@@ -55,12 +55,13 @@
   }
 
   function mountGeometry() {
+    // VISIBLE_GEOMETRY_GUARD: every public page may mount Indra's Web, including CV pages; print hides it in CSS.
     if (!window.PolymythMandala || !window.PolymythMandala.build) return;
     // ONE engine, ONE layer for the whole site. Pages running the bespoke home
     // rig keep theirs (#geo present); '/main' opts out by tier. Everything else
     // mounts the single #indraLayer below. A page's project- color class no
     // longer suppresses the web, since the web is now the only geometry it has.
-    if (document.getElementById('geo') || document.getElementById('printCv')) return;
+    if (document.getElementById('geo')) return;
     var tier = tierFor(window.location.pathname);
     if (tier === 'off') return;
 
@@ -91,7 +92,7 @@
     // Register sets visibility, not shape: experimental pages read the web
     // louder, professional pages quieter, over the same gasket.
     var requestedOpacity = parseFloat(document.body && document.body.getAttribute('data-indra-intensity'));
-    var op = Number.isFinite(requestedOpacity) ? requestedOpacity : (tier === 'prominent' ? 0.12 : 0.06);
+    var op = Number.isFinite(requestedOpacity) ? Math.max(0.025, Math.min(0.18, requestedOpacity)) : (tier === 'prominent' ? 0.14 : 0.075);
 
     var layer = document.createElement('div');
     layer.id = 'indraLayer';
@@ -136,7 +137,7 @@
       var bY     = Math.cos(phase1 * 0.7) * BREATH_Y;
       var spin   = (t * SPIN_RATE) % 360; // slow continuous monotonic rotation
       var tx = fTx + bX;
-      var ty = fTy - y * (tier === 'prominent' ? 0.12 : 0.06) + bY;
+      var ty = fTy - y * (tier === 'prominent' ? 0.14 : 0.075) + bY;
       var rot = fRot + p * driftDeg + bRot + spin;
       var sc = fScale + p * 0.18 + bScale;
       return 'translate(' + (tx + leanX * LEAN_PX).toFixed(2) + 'px,' + (ty + leanY * LEAN_PX).toFixed(2) + 'px)' +

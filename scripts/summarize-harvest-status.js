@@ -46,6 +46,10 @@ if (Number(status.exit_code) === 0) {
   process.exit(0);
 }
 const message = `${stream} harvest ${status.status || 'skipped'} with ${status.failure_kind} (${status.exit_code}); existing calendar data stayed intact. See artifact ${status.log_file}.`;
+if (status.status === 'started') {
+  console.log(`::warning::${message}`);
+  process.exit(0);
+}
 if (status.failure_kind === 'configuration') {
   console.error(`::error::${message}`);
   process.exit(Number(status.exit_code) || 1);

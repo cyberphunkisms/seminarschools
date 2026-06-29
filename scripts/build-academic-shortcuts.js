@@ -11,48 +11,48 @@ const ROUTES = {
   university: {
     focus: 'university',
     label: 'University+',
-    title: 'University+ | Philosophy, Humanities, CFPs & Fellowships | Seminar Schools',
-    h1: 'University+',
+    title: 'Polymythcal | Seminar Schools',
+    h1: 'Polymythcal',
     description: 'University-level philosophy, humanities, lectures, calls for papers, fellowships, conferences, and research opportunities worldwide.',
     countText: n => `${n} university-level opportunities`
   },
   philosophy: {
     focus: 'philosophy',
     label: 'Philosophy',
-    title: 'Philosophy | University Events, CFPs & Fellowships | Seminar Schools',
-    h1: 'Philosophy',
+    title: 'Polymythcal | Seminar Schools',
+    h1: 'Polymythcal',
     description: 'Philosophy lectures, colloquia, ethics events, political theory, CFPs, graduate conferences, and fellowship opportunities worldwide.',
     countText: n => `${n} philosophy opportunities`
   },
   humanities: {
     focus: 'humanities',
     label: 'Humanities',
-    title: 'Humanities | Lectures, CFPs & Fellowships | Seminar Schools',
-    h1: 'Humanities',
+    title: 'Polymythcal | Seminar Schools',
+    h1: 'Polymythcal',
     description: 'Humanities lectures, calls for papers, conferences, fellowships, and research opportunities in literature, history, classics, religion, art history, archaeology, and theory.',
     countText: n => `${n} humanities opportunities`
   },
   cfps: {
     focus: 'cfps',
     label: 'CFPs',
-    title: 'CFPs | Philosophy & Humanities Calls for Papers | Seminar Schools',
-    h1: 'CFPs',
+    title: 'Polymythcal | Seminar Schools',
+    h1: 'Polymythcal',
     description: 'Calls for papers and conference submission deadlines in philosophy, humanities, history, literature, classics, religious studies, art history, archaeology, and theory.',
     countText: n => `${n} calls for papers`
   },
   lectures: {
     focus: 'lectures',
     label: 'Lectures',
-    title: 'Lectures | University Philosophy & Humanities Talks | Seminar Schools',
-    h1: 'Lectures',
+    title: 'Polymythcal | Seminar Schools',
+    h1: 'Polymythcal',
     description: 'University public lectures, colloquia, seminars, talks, and humanities speaker series for students, scholars, and lifelong learners.',
     countText: n => `${n} lecture-family events`
   },
   fellowships: {
     focus: 'fellowships',
     label: 'Fellowships',
-    title: 'Fellowships | Humanities Research Opportunities | Seminar Schools',
-    h1: 'Fellowships',
+    title: 'Polymythcal | Seminar Schools',
+    h1: 'Polymythcal',
     description: 'Humanities fellowships, research grants, residencies, visiting scholar opportunities, and deadline watch cards for university-level researchers.',
     countText: n => `${n} fellowship and funding opportunities`
   }
@@ -138,11 +138,11 @@ function setTopStates(html, focus){
 }
 function itemList(events, info, route){
   return {
-    '@context':'https://schema.org', '@type':'ItemList', '@id':`${SITE}/${route}/#itemlist`, name: info.h1 + ' opportunities', url:`${SITE}/${route}/`, numberOfItems: events.length,
+    '@context':'https://schema.org', '@type':'ItemList', '@id':`${SITE}/${route}/#itemlist`, name: info.label + ' opportunities', url:`${SITE}/${route}/`, numberOfItems: events.length,
     itemListElement: events.map((e,i)=>({'@type':'ListItem', position:i+1, name:e.title, url:`${SITE}/polymythseminars/events/${slug(e.id || e.title)}-${hash(e.id || e.title)}/`}))
   };
 }
-function collectionPage(info, route){ return {'@context':'https://schema.org','@type':'CollectionPage','@id':`${SITE}/${route}/#webpage`,url:`${SITE}/${route}/`,name:info.h1,description:info.description,isPartOf:{'@id':`${SITE}/#website`},inLanguage:'en-CA'}; }
+function collectionPage(info, route){ return {'@context':'https://schema.org','@type':'CollectionPage','@id':`${SITE}/${route}/#webpage`,url:`${SITE}/${route}/`,name:'Polymythcal',description:info.description,isPartOf:{'@id':`${SITE}/#website`},inLanguage:'en-CA'}; }
 function installSchema(html, schemas){
   html = html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\s*/g, '');
   const block = schemas.map(s=>`<script type="application/ld+json">\n${JSON.stringify(s,null,2)}\n</script>`).join('\n');
@@ -158,7 +158,13 @@ function setHead(html, info, route){
   html=html.replace(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${attr(info.title)}">`);
   html=html.replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${attr(info.description)}">`);
   html=html.replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${url}">`);
-  html=html.replace(/<h1>[\s\S]*?<\/h1>/, `<h1>${esc(info.h1)}</h1>`);
+  html=html.replace(/<body([^>]*)data-indra-intensity="[^"]*"([^>]*)>/, '<body$1data-indra-intensity="0.110"$2>');
+  html=html.replace(/<header class="cv-header">[\s\S]*?<\/header>/, `<header class="cv-header">
+    <h1>Polymythcal</h1>
+    <div class="meta" id="polymythContext">${esc(info.label)}</div>
+    <div class="tag" id="polymythDescription">${esc(info.description)}</div>
+    <div class="tag helper-tag">Pick a filter. The list opens near today. Open a title for the official source.</div>
+  </header>`);
   return html;
 }
 function main(){
@@ -170,7 +176,7 @@ function main(){
     const events=current.filter(e=>academicBandMatches(e, info.focus));
     let html=base;
     const markup=`<div class="ssr-event-list" data-ssr-events="true"><p class="sr-only">${events.length} ${esc(info.label)} listings are listed below. Use the controls above to filter them when JavaScript is available.</p>${events.map(staticEventCard).join('\n')}</div>`;
-    html=html.replace(/<script type="application\/json" id="events-fallback">[\s\S]*?<\/script>/, `<script type="application/json" id="events-fallback">${JSON.stringify(data)}</script>`);
+    html=html.replace(/<script(?=[^>]*id=["']events-fallback["'])(?=[^>]*type=["']application\/json["'])[^>]*>[\s\S]*?<\/script>/, `<script type="application/json" id="events-fallback">${JSON.stringify(data)}</script>`);
     html=html.replace(/<!-- SS_STATIC_EVENTS_START -->[\s\S]*?<!-- SS_STATIC_EVENTS_END -->/, `<!-- SS_STATIC_EVENTS_START -->${markup}<!-- SS_STATIC_EVENTS_END -->`);
     html=html.replace(/<div class="count-line" id="countLine"[^>]*>[\s\S]*?<\/div>/, `<div class="count-line" id="countLine" role="status" aria-live="polite" aria-atomic="true">${info.countText(events.length)}</div>`);
     html=setAcademicLinks(html, info.focus);

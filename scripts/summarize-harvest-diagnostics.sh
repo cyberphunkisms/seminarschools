@@ -26,7 +26,7 @@ with open(summary_path, 'a', encoding='utf-8') as out:
         out.write(f"Could not parse `{status_path}`: {exc}\n\n")
         status = {"log_file": None}
     out.write(f"Status file: `{status_path}`  \n")
-    out.write(f"Outcome: `{status.get('outcome','unknown')}`  \n")
+    out.write(f"Status: `{status.get('status','unknown')}`  \n")
     out.write(f"Failure kind: `{status.get('failure_kind','unknown')}`  \n")
     out.write(f"Message: `{status.get('message','')}`  \n")
     out.write(f"Exit code: `{status.get('exit_code','?')}`  \n")

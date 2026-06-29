@@ -19,6 +19,11 @@ check(!page.includes('// ===== Loop =====') && !page.includes('function tryLoop(
 check(!page.includes('Rubber-band pull-up at top'), 'main page does not intercept ordinary top scrolling');
 check(page.includes('href="#threshold">Return to the beginning</a>'), 'footer has an explicit return link');
 check(home.includes("href:'/main/', tier:0"), 'homepage core jewel links to main page');
+
+check(home.includes('Private tutoring, reading rooms, and learning resources'), 'homepage opens with plain service-first message');
+check(home.includes('href="/polymythseminars/"') && home.includes('Explore Polymythcal'), 'homepage routes directly to Polymythcal');
+check(home.includes('Black-and-white portrait of Saul Nassau') && home.includes('/img/saul.jpg'), 'homepage has founder portrait with descriptive alt text');
+check(home.includes('View modular CV'), 'homepage links to modular CV');
 check((page.match(/<script\b/gi) || []).length === (page.match(/<\/script>/gi) || []).length, 'main page has balanced script tags');
 if (failed) {
   console.error(`\n${failed} main-page guard(s) failed.`);

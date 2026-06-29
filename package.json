@@ -8,7 +8,7 @@
     "verify:leizu": "node scripts/verify-leizu-pipeline.js",
     "verify:leizu-experience": "node scripts/verify-leizu-experience.js",
     "verify:leizu-course-picker": "node scripts/verify-leizu-course-picker.js",
-    "verify:all": "node scripts/verify-critical.js && node scripts/verify-public-artifact-blocks.js && node scripts/verify-search-surface.js && node scripts/verify-calendar-aliases.js && node scripts/verify-calendar-data-parity.js && node scripts/verify-polymythcalendar-today-scroll.js && node scripts/build-writing-shortcuts.js --check && node scripts/verify-writing-shortcuts.js && node scripts/build-academic-shortcuts.js --check && node scripts/verify-academic-shortcuts.js && node scripts/verify-festival-parent-taxonomy.js && node scripts/verify-harvest-pipeline.js && node scripts/verify-polymythcalendar-name.js && node scripts/verify-geometry.js && node scripts/verify-register.js && node scripts/verify-payments.js && node scripts/verify-leizu-pipeline.js && node scripts/verify-leizu-experience.js && node scripts/verify-leizu-course-picker.js && node scripts/verify-leizu-simplified-chinese.js && node scripts/verify-leizu-persian.js && node scripts/verify-leizu-localization-funnel.js && node scripts/verify-home-map.js && node scripts/verify-bb-why.js && node scripts/verify-main-page.js && node scripts/verify-main-leizu-funnel.js && node scripts/verify-saul-page.js && node scripts/verify-site-integrity.js && node scripts/verify-professional-readiness.js && node scripts/verify-seo.js && node scripts/verify-typography-controls.js && node scripts/verify-bookwormcard-gate.js",
+    "verify:all": "node scripts/verify-critical.js && node scripts/verify-public-artifact-blocks.js && node scripts/verify-search-surface.js && node scripts/verify-calendar-aliases.js && node scripts/verify-calendar-data-parity.js && node scripts/verify-polymythcalendar-today-scroll.js && node scripts/verify-polymythcalendar-kid-guide.js && node scripts/verify-polymythcalendar-ux-efficiency.js && node scripts/verify-site-interactivity.js && node scripts/build-writing-shortcuts.js --check && node scripts/verify-writing-shortcuts.js && node scripts/build-academic-shortcuts.js --check && node scripts/verify-academic-shortcuts.js && node scripts/verify-festival-parent-taxonomy.js && node scripts/verify-harvest-pipeline.js && node scripts/verify-polymythcalendar-name.js && node scripts/verify-geometry.js && node scripts/verify-visible-geometry.js && node scripts/verify-register.js && node scripts/verify-payments.js && node scripts/verify-leizu-pipeline.js && node scripts/verify-leizu-experience.js && node scripts/verify-leizu-course-picker.js && node scripts/verify-leizu-simplified-chinese.js && node scripts/verify-leizu-persian.js && node scripts/verify-leizu-localization-funnel.js && node scripts/verify-home-map.js && node scripts/verify-bb-why.js && node scripts/verify-main-page.js && node scripts/verify-main-leizu-funnel.js && node scripts/verify-saul-page.js && node scripts/verify-site-integrity.js && node scripts/verify-professional-readiness.js && node scripts/verify-seo.js && node scripts/verify-typography-controls.js && node scripts/verify-bookwormcard-gate.js",
     "configure:stripe": "node scripts/configure-leizu-stripe-payment-links.mjs",
     "verify:leizu-zhs": "node scripts/verify-leizu-simplified-chinese.js",
     "verify:leizu-fa": "node scripts/verify-leizu-persian.js",
@@ -35,7 +35,12 @@
     "verify:public-artifacts": "node scripts/verify-public-artifact-blocks.js",
     "build:academic-shortcuts": "node scripts/build-academic-shortcuts.js",
     "verify:academic-shortcuts": "node scripts/build-academic-shortcuts.js --check && node scripts/verify-academic-shortcuts.js",
-    "verify:today-scroll": "node scripts/verify-polymythcalendar-today-scroll.js"
+    "verify:today-scroll": "node scripts/verify-polymythcalendar-today-scroll.js",
+    "verify:kid-guide": "node scripts/verify-polymythcalendar-kid-guide.js",
+    "verify:polymythcal-ux": "node scripts/verify-polymythcalendar-ux-efficiency.js",
+    "verify:visible-geometry": "node scripts/verify-visible-geometry.js",
+    "apply:visible-geometry": "node scripts/apply-visible-geometry.js",
+    "verify:site-interactivity": "node scripts/verify-site-interactivity.js"
   },
   "dependencies": {
     "@netlify/blobs": "10.7.9"

@@ -169,3 +169,19 @@ input:focus, textarea:focus, select:focus {
 #indraLayer circle.depth-far  { opacity: 0.55; transition-delay: 0s; }
 #indraLayer circle.depth-mid  { opacity: 0.75; transition-delay: 0.8s; }
 #indraLayer circle.depth-near { opacity: 0.92; transition-delay: 1.6s; }
+
+
+/* VISIBLE_GEOMETRY_CONTRACT — every public page can carry the Indra substrate.
+   Page-specific intensity is controlled with body[data-indra-intensity] and
+   respected by /js/indra.js. Keep geometry ornamental, pointer-safe, and print-safe. */
+body[data-geometry="indra-web"] #indraLayer {
+  color: var(--geo-ink, currentColor);
+  filter: saturate(0.92) contrast(1.04);
+}
+body[data-geometry="indra-web"] main,
+body[data-geometry="indra-web"] .page,
+body[data-geometry="indra-web"] .shell,
+body[data-geometry="indra-web"] .calendar-shell {
+  position: relative;
+  z-index: 1;
+}

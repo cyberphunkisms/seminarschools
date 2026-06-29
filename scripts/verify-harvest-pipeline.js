@@ -23,19 +23,26 @@ for (const [runner, stream] of [['scripts/seminars-prompt-runner.sh', 'seminars'
     'Expected output file',
     'data/harvest-runs',
     'CLAUDE_CODE_OAUTH_TOKEN',
+    'write_status 124',
+    'trap on_runner_interrupt',
   ]) need(s, needle, runner, problems);
   if (stream === 'seminars') need(s, 'SHARD_COUNT', runner, problems);
   if (stream === 'festivals') need(s, 'FESTIVAL_SHARD_COUNT', runner, problems);
   if (/exit "\$\{CLAUDE_STATUS\}"/.test(s)) problems.push(`${runner} should not hard-fail scheduled runs on agent nonzero status.`);
   if (/\|\|\s*\{\s*echo\s+"ERROR: claude -p invocation failed"[^}]*exit 1/.test(s)) problems.push(`${runner} still drops the command exit context through the legacy one-line failure handler.`);
 }
+const initializer = read('scripts/initialize-harvest-status.js');
+for (const needle of ["status: 'started'", 'timeout-or-interrupted', 'latest.status.json']) need(initializer, needle, 'scripts/initialize-harvest-status.js', problems);
 const summary = read('scripts/summarize-harvest-status.js');
 for (const needle of ['failure_kind', 'status', 'attempt', 'shard_count', 'GITHUB_STEP_SUMMARY']) need(summary, needle, 'scripts/summarize-harvest-status.js', problems);
 for (const workflow of ['.github/workflows/scrape-seminars.yml', '.github/workflows/scrape-festivals.yml']) {
   if (!fs.existsSync(path.join(ROOT, workflow))) { problems.push(`${workflow} is missing`); continue; }
   const s = read(workflow);
   for (const needle of [
-    'timeout-minutes: 45',
+    'timeout-minutes: 60',
+    'timeout-minutes: 20',
+    'Initialize harvest diagnostics',
+    'scripts/initialize-harvest-status.js',
     'actions/upload-artifact@v7',
     'actions/checkout@v7',
     'actions/setup-node@v6',
@@ -44,9 +51,13 @@ for (const workflow of ['.github/workflows/scrape-seminars.yml', '.github/workfl
     'CLAUDE_CODE_OAUTH_TOKEN',
     'STRICT_HARVEST_FAILURES',
     'HARVEST_ATTEMPTS',
+    "HARVEST_ATTEMPTS: '1'",
+    "HARVEST_TIMEOUT_SECONDS: '840'",
+    "MAX_TURNS: '40'",
     'FORCE_JAVASCRIPT_ACTIONS_TO_NODE24',
     'strict_harvest',
     'Install Claude Code CLI',
+    'continue-on-error: true',
     'npm install -g @anthropic-ai/claude-code',
     'claude --version',
     'Summarize harvest outcome',

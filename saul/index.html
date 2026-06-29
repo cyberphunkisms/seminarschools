@@ -178,7 +178,9 @@
     margin-top: 0.5rem;
     letter-spacing: 0.08em;
   }
-  header.cv-header .cv-head-row { display:flex; align-items:flex-end; justify-content:space-between; gap:1.2rem; flex-wrap:wrap; text-align:left; }
+  header.cv-header .cv-head-row { display:flex; align-items:center; justify-content:space-between; gap:1.2rem; flex-wrap:wrap; text-align:left; }
+  header.cv-header .cv-name-block { display:flex; align-items:center; gap:1rem; min-width:min(100%, 560px); }
+  header.cv-header .saul-portrait { width:96px; height:96px; border-radius:50%; object-fit:cover; border:1px solid var(--accent); box-shadow:0 10px 30px rgba(0,0,0,.12); flex:0 0 auto; }
   header.cv-header .cv-head-row h1 { margin:0; }
   header.cv-header .cv-contact { text-align:right; }
   header.cv-header .cv-contact .meta { margin-top:0; }
@@ -1129,6 +1131,24 @@ textarea:focus-visible,
   .archive-tools summary::after { content: "+"; font-size: 1.2rem; font-weight: 400; color: var(--accent); }
   .archive-tools[open] summary::after { content: "−"; }
   .archive-tool-content { padding: 0 0 1.15rem; }
+  .cv-module-tabs { background: color-mix(in srgb, var(--accent) 3%, transparent); border-radius: 18px; padding: 0 1rem 1rem; }
+  .cv-module-tabs[open] summary::after { content: ""; }
+  .cv-module-tabs summary { cursor: default; gap: .75rem; }
+  .module-helper {
+    font-family: var(--sans);
+    font-size: .72rem;
+    line-height: 1.65;
+    color: var(--muted);
+    margin: -.25rem 0 .8rem;
+    max-width: 760px;
+  }
+  .module-current {
+    font-family: var(--sans);
+    font-size: .72rem;
+    color: var(--accent);
+    margin: .7rem 0 0;
+    letter-spacing: .025em;
+  }
   .filter-nav { justify-content: flex-start; margin: 0 0 .85rem; }
   .filter-nav button { min-height: 38px; font-family: var(--sans); font-size: .68rem; }
   .actions { justify-content: flex-start; margin: 0; }
@@ -1206,7 +1226,7 @@ textarea:focus-visible,
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
 </head>
-<body>
+<body data-geometry="indra-web" data-indra-intensity="0.085">
 <a href="/" style="position:fixed;top:0.9rem;left:1rem;z-index:1200;font-family:ui-monospace,monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:inherit;opacity:0.65;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:0.15rem;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.65">&larr; Seminar Schools</a>
 
 
@@ -1229,7 +1249,7 @@ textarea:focus-visible,
   <button type="button" id="fzReset" data-fz="reset" class="reset" title="Reset text size" style="display:none">↺</button>
 </div>
 
-<main class="page" id="page">
+<main class="page" id="page" data-saul-modular-cv="true">
 
   <nav class="langs" id="langs">
     <button type="button" data-lang="en" class="active">English</button>
@@ -1241,7 +1261,10 @@ textarea:focus-visible,
 
   <header class="cv-header">
     <div class="cv-head-row">
-      <h1>Saul Karim Nassau,<span class="post">MA</span></h1>
+      <div class="cv-name-block">
+        <img class="saul-portrait" src="/img/saul.jpg" width="96" height="96" alt="Black-and-white portrait of Saul Nassau" loading="eager" decoding="async">
+        <h1>Saul Karim Nassau,<span class="post">MA</span></h1>
+      </div>
       <div class="cv-contact">
         <div class="meta">416-771-0382 · Toronto</div>
         <div class="cv-header-email" style="margin-top:0.2rem;text-align:right;"><a href="mailto:saulnassau@protonmail.com" style="font-family:var(--sans, system-ui, sans-serif);font-size:0.78rem;letter-spacing:0.04em;color:var(--accent, #A07A2C);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:0.1rem;">saulnassau@protonmail.com</a></div>
@@ -1309,10 +1332,11 @@ textarea:focus-visible,
       <button type="button" data-cv-mode="chrono" class="on" data-profile="viewTimeline">View by timeline</button>
       <button type="button" data-cv-mode="theme" data-profile="viewPractice">View by practice</button>
     </div>
-    <details class="archive-tools">
-      <summary data-profile="filterSummary">Filter the complete record</summary>
+    <details class="archive-tools cv-module-tabs" open>
+      <summary data-profile="filterSummary">CV module tabs — PDF follows active tabs</summary>
       <div class="archive-tool-content">
-  <nav class="filter-nav" id="filterNav">
+        <p class="module-helper" data-profile="moduleHelper">Choose one module, then use Save as PDF. The PDF exports the version you clicked.</p>
+  <nav class="filter-nav" id="filterNav" aria-label="CV module tabs">
     <button type="button" data-cat="all" class="on" id="allBtn">All</button>
     <button type="button" data-cat="kitchen">Culinary Hospitality</button>
     <button type="button" data-cat="teaching">Teaching</button>
@@ -1328,6 +1352,7 @@ textarea:focus-visible,
     <button type="button" id="saveBtn" class="save-btn">Save as PDF</button>
     <button type="button" id="shareBtn">⎘ Share Link</button>
   </div>
+  <p id="moduleStatus" class="module-current" aria-live="polite">Full CV selected. PDF will include the full archive.</p>
       </div>
     </details>
 
@@ -1929,7 +1954,9 @@ function render() {
     const cat = btn.dataset.cat;
     if (cat === "all") btn.textContent = t.all;
     else btn.textContent = t.cats[cat];
-    btn.classList.toggle("on", (cat === "all" && active.size === 0) || active.has(cat));
+    const isOn = (cat === "all" && active.size === 0) || active.has(cat);
+    btn.classList.toggle("on", isOn);
+    btn.setAttribute("aria-pressed", isOn ? "true" : "false");
   });
 
   // Save button label
@@ -2153,16 +2180,14 @@ document.querySelectorAll("#langs button").forEach(b => {
 document.querySelectorAll("#filterNav button").forEach(b => {
   b.addEventListener("click", () => {
     const cat = b.dataset.cat;
+    lettersExpanded.clear();
     if (cat === "all") {
       active = new Set();
-      lettersExpanded.clear();
     } else {
-      if (active.has(cat)) {
-        active.delete(cat);
-        lettersExpanded.delete(cat); // close that letter when its filter is removed
-      } else {
-        active.add(cat); // new category starts collapsed by default
-      }
+      // Category tabs behave like CV versions: one selected tab = one printable CV.
+      // Quick views can still set intentional combinations such as Teaching + Education.
+      const wasOnly = active.size === 1 && active.has(cat);
+      active = wasOnly ? new Set() : new Set([cat]);
     }
     syncUrlToFilter();
     render();
@@ -2327,7 +2352,7 @@ const SAUL_PROFILE_COPY = {
     seminarKicker: "Public learning", seminarTitle: "Seminar Schools", seminarText: "A Toronto practice for tutoring, public reading, teacher resources, writing, and learning design.", seminarLink: "Explore Seminar Schools →",
     teachingKicker: "Teaching and curriculum", teachingTitle: "Current practice", teachingText: "Open the teaching and education record, including current work and international experience.", teachingLink: "View teaching record →",
     archiveEyebrow: "Full record", archiveTitle: "Career archive", archiveText: "The complete record, arranged by timeline or by practice.",
-    quickCurrent: "Current work", quickTeaching: "Teaching and education", quickAll: "Full archive", viewTimeline: "View by timeline", viewPractice: "View by practice", filterSummary: "Filter the complete record",
+    quickCurrent: "Current work", quickTeaching: "Teaching and education", quickAll: "Full archive", viewTimeline: "View by timeline", viewPractice: "View by practice", filterSummary: "CV module tabs — PDF follows active tabs", moduleHelper: "Choose one module, then use Save as PDF. The PDF exports the version you clicked.",
     statusCurrent: "Showing current teaching, education, and Seminar Schools work.", statusTeaching: "Showing teaching and education work.", statusAll: "The complete record, arranged by timeline or by practice.", statusCustom: "Showing selected areas of the record."
   },
   zh: {
@@ -2340,7 +2365,7 @@ const SAUL_PROFILE_COPY = {
     seminarKicker: "公共學習", seminarTitle: "Seminar Schools", seminarText: "多倫多的教學實踐，涵蓋輔導、公共閱讀、教師資源、寫作與學習設計。", seminarLink: "探索 Seminar Schools →",
     teachingKicker: "教學與課程", teachingTitle: "現行實踐", teachingText: "開啟教學與教育紀錄，包括目前工作及國際經驗。", teachingLink: "查看教學紀錄 →",
     archiveEyebrow: "完整紀錄", archiveTitle: "職業檔案", archiveText: "完整紀錄可依時間線或實踐領域閱讀。",
-    quickCurrent: "目前工作", quickTeaching: "教學與教育", quickAll: "完整檔案", viewTimeline: "依時間線查看", viewPractice: "依實踐領域查看", filterSummary: "篩選完整紀錄",
+    quickCurrent: "目前工作", quickTeaching: "教學與教育", quickAll: "完整檔案", viewTimeline: "依時間線查看", viewPractice: "依實踐領域查看", filterSummary: "CV 模組分頁 — PDF 跟隨目前選擇", moduleHelper: "選擇一個模組，再使用「儲存為 PDF」。PDF 會輸出你目前點選的版本。",
     statusCurrent: "顯示目前的教學、教育與 Seminar Schools 工作。", statusTeaching: "顯示教學與教育工作。", statusAll: "完整紀錄可依時間線或實踐領域閱讀。", statusCustom: "顯示已選擇的經歷領域。"
   },
   zhs: {
@@ -2353,7 +2378,7 @@ const SAUL_PROFILE_COPY = {
     seminarKicker: "公共学习", seminarTitle: "Seminar Schools", seminarText: "多伦多的教学实践，涵盖辅导、公共阅读、教师资源、写作与学习设计。", seminarLink: "探索 Seminar Schools →",
     teachingKicker: "教学与课程", teachingTitle: "当前实践", teachingText: "打开教学与教育记录，包括当前工作及国际经验。", teachingLink: "查看教学记录 →",
     archiveEyebrow: "完整记录", archiveTitle: "职业档案", archiveText: "完整记录可依时间线或实践领域阅读。",
-    quickCurrent: "当前工作", quickTeaching: "教学与教育", quickAll: "完整档案", viewTimeline: "按时间线查看", viewPractice: "按实践领域查看", filterSummary: "筛选完整记录",
+    quickCurrent: "当前工作", quickTeaching: "教学与教育", quickAll: "完整档案", viewTimeline: "按时间线查看", viewPractice: "按实践领域查看", filterSummary: "CV 模块分页 — PDF 跟随当前选择", moduleHelper: "选择一个模块，再使用“保存为 PDF”。PDF 会输出你当前点击的版本。",
     statusCurrent: "显示当前的教学、教育与 Seminar Schools 工作。", statusTeaching: "显示教学与教育工作。", statusAll: "完整记录可依时间线或实践领域阅读。", statusCustom: "显示已选择的经历领域。"
   },
   fa: {
@@ -2366,7 +2391,7 @@ const SAUL_PROFILE_COPY = {
     seminarKicker: "یادگیری عمومی", seminarTitle: "Seminar Schools", seminarText: "یک عمل آموزشی در تورنتو برای آموزش خصوصی، خواندن عمومی، منابع معلم، نوشتن و طراحی یادگیری.", seminarLink: "کاوش Seminar Schools ←",
     teachingKicker: "تدریس و برنامهٔ درسی", teachingTitle: "عمل کنونی", teachingText: "سابقهٔ تدریس و آموزش را باز کنید، از جمله کار کنونی و تجربهٔ بین‌المللی.", teachingLink: "مشاهدهٔ سابقهٔ تدریس ←",
     archiveEyebrow: "سابقهٔ کامل", archiveTitle: "آرشیو حرفه‌ای", archiveText: "سابقهٔ کامل بر اساس زمان یا حوزهٔ عمل قابل مطالعه است.",
-    quickCurrent: "کار کنونی", quickTeaching: "تدریس و آموزش", quickAll: "آرشیو کامل", viewTimeline: "نمایش زمانی", viewPractice: "نمایش بر اساس عمل", filterSummary: "فیلتر سابقهٔ کامل",
+    quickCurrent: "کار کنونی", quickTeaching: "تدریس و آموزش", quickAll: "آرشیو کامل", viewTimeline: "نمایش زمانی", viewPractice: "نمایش بر اساس عمل", filterSummary: "زبانه‌های رزومه — PDF از انتخاب فعال پیروی می‌کند", moduleHelper: "یک بخش را انتخاب کنید، سپس PDF را ذخیره کنید. PDF همان نسخهٔ انتخاب‌شده را خروجی می‌گیرد.",
     statusCurrent: "کارهای کنونی آموزش، تحصیل و Seminar Schools نمایش داده می‌شود.", statusTeaching: "کارهای تدریس و آموزش نمایش داده می‌شود.", statusAll: "سابقهٔ کامل بر اساس زمان یا حوزهٔ عمل قابل مطالعه است.", statusCustom: "حوزه‌های انتخاب‌شدهٔ سابقه نمایش داده می‌شود."
   },
   fr: {
@@ -2379,7 +2404,7 @@ const SAUL_PROFILE_COPY = {
     seminarKicker: "Apprentissage public", seminarTitle: "Seminar Schools", seminarText: "Une pratique torontoise de tutorat, lecture publique, ressources pour enseignants, écriture et conception pédagogique.", seminarLink: "Explorer Seminar Schools →",
     teachingKicker: "Enseignement et programmes", teachingTitle: "Pratique actuelle", teachingText: "Ouvrez le parcours d'enseignement et d'éducation, y compris le travail actuel et l'expérience internationale.", teachingLink: "Voir le parcours d'enseignement →",
     archiveEyebrow: "Dossier complet", archiveTitle: "Archives professionnelles", archiveText: "Le parcours complet se lit par chronologie ou par domaine de pratique.",
-    quickCurrent: "Travail actuel", quickTeaching: "Enseignement et éducation", quickAll: "Archive complète", viewTimeline: "Voir par chronologie", viewPractice: "Voir par pratique", filterSummary: "Filtrer le dossier complet",
+    quickCurrent: "Travail actuel", quickTeaching: "Enseignement et éducation", quickAll: "Archive complète", viewTimeline: "Voir par chronologie", viewPractice: "Voir par pratique", filterSummary: "Onglets du CV — le PDF suit la sélection", moduleHelper: "Choisissez un module, puis utilisez Enregistrer en PDF. Le PDF exporte la version sélectionnée.",
     statusCurrent: "Affichage du travail actuel en enseignement, éducation et Seminar Schools.", statusTeaching: "Affichage du travail en enseignement et en éducation.", statusAll: "Le parcours complet se lit par chronologie ou par domaine de pratique.", statusCustom: "Affichage des domaines sélectionnés du parcours."
   }
 };
@@ -2396,9 +2421,25 @@ function renderProfile() {
     el.textContent = t[key];
   });
   const status = document.getElementById('archiveStatus');
-  if (status) {
-    status.textContent = activeEquals(['teaching','education','seminarschools']) ? t.statusCurrent : activeEquals(['teaching','education']) ? t.statusTeaching : active.size === 0 ? t.statusAll : t.statusCustom;
+  const moduleStatus = document.getElementById('moduleStatus');
+  const catLabels = (UI[lang] && UI[lang].cats) || UI.en.cats;
+  let moduleText = '';
+  if (activeEquals(['teaching','education','seminarschools'])) {
+    moduleText = 'Current-work CV selected. PDF will include current teaching, education, and Seminar Schools work.';
+  } else if (activeEquals(['teaching','education'])) {
+    moduleText = 'Teaching and education CV selected. PDF will include those modules.';
+  } else if (active.size === 0) {
+    moduleText = 'Full CV selected. PDF will include the full archive.';
+  } else if (active.size === 1) {
+    const only = [...active][0];
+    moduleText = (catLabels[only] || only) + ' CV selected. PDF will export this module.';
+  } else {
+    moduleText = [...active].map(function(cat){ return catLabels[cat] || cat; }).join(' + ') + ' CV selected. PDF will export these modules.';
   }
+  if (status) {
+    status.textContent = activeEquals(['teaching','education','seminarschools']) ? t.statusCurrent : activeEquals(['teaching','education']) ? t.statusTeaching : active.size === 0 ? t.statusAll : moduleText;
+  }
+  if (moduleStatus) moduleStatus.textContent = moduleText;
   document.querySelectorAll('[data-quick-view]').forEach(function(btn) {
     const view = btn.dataset.quickView;
     const isCurrent = view === 'current' && activeEquals(['teaching','education','seminarschools']);

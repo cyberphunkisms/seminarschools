@@ -585,8 +585,43 @@ to = "/404.html"
 status = 404
 force = true
 
+
 [[redirects]]
 from = "/POLYMYTHCALENDAR_TODAY_SCROLL_AUDIT.md"
+to = "/404.html"
+status = 404
+force = true
+
+
+[[redirects]]
+from = "/POLYMYTHCALENDAR_KID_GUIDE_UX_AUDIT.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/SITE_BEAUTIFICATION_VISIBLE_GEOMETRY_AUDIT.md"
+to = "/404.html"
+status = 404
+force = true
+
+
+[[redirects]]
+from = "/VERIFY_ALL_OUTPUT_VISIBLE_GEOMETRY.txt"
+to = "/404.html"
+status = 404
+force = true
+
+
+[[redirects]]
+from = "/SITE_FIX_EVERYTHING_AUDIT.md"
+to = "/404.html"
+status = 404
+force = true
+
+
+[[redirects]]
+from = "/VERIFY_ALL_OUTPUT_FIX_EVERYTHING.txt"
 to = "/404.html"
 status = 404
 force = true

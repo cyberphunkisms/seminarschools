@@ -14,11 +14,11 @@ LOG_DIR="${HARVEST_LOG_DIR:-data/harvest-runs}"
 LOG_FILE="${LOG_DIR}/${STREAM}-${RUN_ID}.log"
 STATUS_FILE="${LOG_DIR}/${STREAM}-${RUN_ID}.status.json"
 LATEST_STATUS_FILE="${LOG_DIR}/${STREAM}-latest.status.json"
-MAX_TURNS="${MAX_TURNS:-90}"
-MAX_BUDGET_USD="${MAX_BUDGET_USD:-5.00}"
-HARVEST_TIMEOUT_SECONDS="${HARVEST_TIMEOUT_SECONDS:-2100}"
-HARVEST_ATTEMPTS="${HARVEST_ATTEMPTS:-2}"
-SHARD_COUNT="${SHARD_COUNT:-8}"
+MAX_TURNS="${MAX_TURNS:-40}"
+MAX_BUDGET_USD="${MAX_BUDGET_USD:-2.00}"
+HARVEST_TIMEOUT_SECONDS="${HARVEST_TIMEOUT_SECONDS:-840}"
+HARVEST_ATTEMPTS="${HARVEST_ATTEMPTS:-1}"
+SHARD_COUNT="${SHARD_COUNT:-12}"
 STRICT_HARVEST_FAILURES="${STRICT_HARVEST_FAILURES:-false}"
 HARVEST_STRICT="${HARVEST_STRICT:-0}"
 CLAUDE_MODEL="${CLAUDE_MODEL:-claude-sonnet-4-6}"
@@ -108,6 +108,19 @@ soft_exit_or_fail() {
   fi
   exit 0
 }
+
+
+# Leave a useful diagnostic if the runner receives an interrupt before normal completion.
+on_runner_interrupt() {
+  write_status 143 "agent" "Harvest runner was interrupted before completion; existing verified calendar data stayed intact." "${ATTEMPT:-0}" || true
+  if is_strict_harvest; then
+    exit 143
+  fi
+  exit 0
+}
+trap on_runner_interrupt INT TERM
+
+write_status 124 "agent" "Harvest runner started. If this status remains latest, the external agent timed out or the runner was interrupted before completion." 0
 
 if [[ -z "${CLAUDE_CODE_OAUTH_TOKEN:-}" ]]; then
   soft_exit_or_fail 78 "CLAUDE_CODE_OAUTH_TOKEN env var is not set. Generate it with claude setup-token." 0
