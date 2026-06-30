@@ -15,13 +15,11 @@ function walk(dir, out=[]){
 }
 function rel(file){ return path.relative(ROOT, file).replace(/\\/g,'/'); }
 function intensityFor(r){
-  if (/^polymythseminars\//.test(r) || r === 'polymythseminars/index.html') return '0.245';
-  if (/^(writingclub|writingkids|writingjuniors|writingteens|writinggrads|university|philosophy|humanities|cfps|lectures|fellowships)\//.test(r)) return '0.245';
-  if (/^agora\//.test(r)) return '0.225';
-  if (/^main\//.test(r) || r === 'index.html') return '0.205';
-  if (/^saul\//.test(r)) return '0.19';
-  if (/^teacherresources\//.test(r)) return '0.15';
-  return '0.165';
+  if (/^polymythseminars\//.test(r) || r === 'polymythseminars/index.html') return '0.120';
+  if (/^(writingclub|writingkids|writingjuniors|writingteens|writinggrads|university|philosophy|humanities|cfps|lectures|fellowships)\//.test(r)) return '0.110';
+  if (/^saul\//.test(r)) return '0.085';
+  if (/^teacherresources\//.test(r)) return '0.070';
+  return '0.075';
 }
 function ensureHead(html){
   if (!/\/css\/alive\.css/i.test(html)) {

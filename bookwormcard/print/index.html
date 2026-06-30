@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Bookwormcard</title>
-<meta name="description" content="The Bookwormcard, in-browser printable version. A character punch card for bookwormburrows. Fill it as you read; scan it back into the matrix when full.">
+<meta name="description" content="The Bookwormcard, in-browser printable version. A character card for bookwormburrows. Fill it as you read; bring it back into the game when it grows.">
 <link rel="canonical" href="https://seminarschools.com/bookwormcard/print/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seminarschools.com/bookwormcard/print/">
 <meta property="og:title" content="The Bookwormcard (printable)">
-<meta property="og:description" content="In-browser printable version of the Bookwormcard. A character punch card for bookwormburrows. Fill it as you read; scan it back into the matrix when full.">
+<meta property="og:description" content="In-browser printable version of the Bookwormcard. A character card for bookwormburrows. Fill it as you read; bring it back into the game when it grows.">
 <meta property="og:image" content="https://seminarschools.com/og-image.png">
 <meta property="og:site_name" content="Seminar Schools">
 <meta name="twitter:card" content="summary_large_image">
@@ -220,7 +220,7 @@
   .tier-table tr.adv td{font-style:italic;color:var(--navy)}
   .tier-table tr.adv td.lvl{font-style:normal;color:var(--accent)}
 
-  /* Compact one-line tier strip for dense pages (page 8 smash-questions) */
+  /* Compact one-line tier strip for dense pages (page 8 mix-questions) */
   .tier-strip{
     display:flex;
     gap:0.3em;
@@ -285,13 +285,13 @@
   }
   .adj-table td{padding:0.08em 0.4em;line-height:1.6;width:33.33%;vertical-align:top}
 
-  /* ----- Smash table, "trading cards inside the trading card" ----- */
-  .smash-table{
+  /* ----- Mix table, "trading cards inside the trading card" ----- */
+  .mix-table{
     width:100%;border-collapse:collapse;
     margin:0.4rem 0 0.5rem;font-size:10pt;
     border:2.5px solid var(--ink);
   }
-  .smash-table th{
+  .mix-table th{
     font-weight:bold;text-align:left;
     padding:0.3em 0.5em;
     background:var(--ink);color:var(--paper);
@@ -299,9 +299,9 @@
     text-transform:uppercase;
     border-bottom:2px solid var(--ink);
   }
-  .smash-table td{padding:0.35em 0.5em;border-bottom:1px solid var(--ink);vertical-align:top;background:#fff8e8}
-  .smash-table td.num{font-weight:bold;width:1.6em;text-align:center;background:var(--accent);color:var(--paper)}
-  .smash-table td.fill{height:3.4em}
+  .mix-table td{padding:0.35em 0.5em;border-bottom:1px solid var(--ink);vertical-align:top;background:#fff8e8}
+  .mix-table td.num{font-weight:bold;width:1.6em;text-align:center;background:var(--accent);color:var(--paper)}
+  .mix-table td.fill{height:3.4em}
 
   /* ----- Dilemma blocks, comic panels ----- */
   .dilemma-block{
@@ -662,7 +662,7 @@
   }
   .splash-panel.splash-tall{height:7.2in}
 
-  /* Bond ledger table - same visual register as smash-table but compressed */
+  /* Bond ledger table - same visual register as mix-table but compressed */
   .bond-ledger{
     width:100%;border-collapse:collapse;
     margin:0.4rem 0 0.5rem;font-size:9.5pt;
@@ -797,7 +797,7 @@
      Border-radius zeroed on panels.
      Zero added assets. CSS only.
      ============================================================ */
-  .tier-table, .smash-table, .dilemma-block, .adj-table, .axis-block,
+  .tier-table, .mix-table, .dilemma-block, .adj-table, .axis-block,
   .splash-panel, .stat-block, .mug-frame, .bottom-strip, .caption,
   .comic-doodle, .card-title, .draw-frame, h2, .panel-label, .corner-stamp,
   .extra-block, .open-dilemma, .seminar-log {
@@ -806,7 +806,7 @@
 
   /* Heavier borders on the major panels */
   .tier-table { border-width: 1.5px; }
-  .smash-table { border-width: 2.5px; }
+  .mix-table { border-width: 2.5px; }
   .dilemma-block { border-width: 2.5px; }
   .adj-table { border-width: 2px; }
   .axis-block { border-width: 3px; }
@@ -820,7 +820,7 @@
   .tier-table {
     box-shadow: 4px 4px 0 var(--ink), 8px 8px 0 var(--accent);
   }
-  .smash-table {
+  .mix-table {
     box-shadow: 5px 5px 0 var(--ink), 10px 10px 0 var(--gold);
   }
   .dilemma-block {
@@ -954,13 +954,13 @@
     /* Decorative box-shadows on content panels, these create the
        paper-card stack-extrusion effect on screen but render as
        large coloured strips at every panel's bottom-right edge in
-       print. Most visible on bottom-strip, tier-table, smash-table,
+       print. Most visible on bottom-strip, tier-table, mix-table,
        dilemma-block where the shadow extends into the page bottom
        gutter and reads as a stray maroon/red bar below the footer.
        Strip them all in print. */
     .bottom-strip,
     .tier-table,
-    .smash-table,
+    .mix-table,
     .dilemma-block,
     .stat-block,
     .splash-panel,
@@ -975,8 +975,8 @@
        define them. Saves the ink that would otherwise tint every
        caption-style block across the document. */
     .caption,
-    .smash-table td,
-    .smash-table tr,
+    .mix-table td,
+    .mix-table tr,
     .write-clearly,
     .stat-block,
     .panel-label,
@@ -1000,11 +1000,11 @@
       print-color-adjust:exact;
     }
     h2{page-break-after:avoid}
-    .question,.tier-table,.smash-table tr,.dilemma-block,.stat-block{page-break-inside:avoid}
+    .question,.tier-table,.mix-table tr,.dilemma-block,.stat-block{page-break-inside:avoid}
     @page{size:letter;margin:0.35in}
   }
 
-.smash-table td.fill[data-filled="true"]{
+.mix-table td.fill[data-filled="true"]{
   font-family:'Georgia','Times New Roman',serif;
   color:var(--ink);
   font-size:9.5pt;
@@ -1014,7 +1014,7 @@
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
 <link rel="stylesheet" href="/css/theme.css?v=cl91">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.165">
+<body data-geometry="indra-web" data-indra-intensity="0.075" data-page-weight="heavy">
 
 <div class="controls">
   The Bookwormcard &nbsp;&nbsp;
@@ -1045,7 +1045,7 @@
 
   <div class="card-title">
     <h1>THE BOOKWORMCARD</h1>
-    <div class="tag">A character punch card &middot; input. output. cycle.</div>
+    <div class="tag">A character card &middot; answer, play, grow.</div>
   </div>
 
   <div class="caption">
@@ -1072,7 +1072,7 @@
         </div>
         <div class="stat-block">
           <div class="stat-label">APPEARANCE</div>
-          <div class="gloss" style="font-size:7pt;margin:0.05em 0 0.1em">The form of the smashed-up character. Proportions, surfaces, what stands out. What someone meeting them sees first.</div>
+          <div class="gloss" style="font-size:7pt;margin:0.05em 0 0.1em">What your mixed-together character looks like. Shape, style, surfaces, and what someone notices first.</div>
           <span class="ruled-line"></span>
         </div>
       </td>
@@ -1086,12 +1086,12 @@
       <td class="col-side">
         <div class="stat-block">
           <div class="stat-label">WILDCARD</div>
-          <div class="gloss" style="font-size:7pt;margin:0.05em 0 0.1em">What does not fit any other category. The detail that makes the smash specific.</div>
+          <div class="gloss" style="font-size:7pt;margin:0.05em 0 0.1em">A special detail that does not fit anywhere else. This makes the character feel specific.</div>
           <span class="ruled-line ruled-multi" data-fill="wildcard"></span>
         </div>
         <div class="stat-block">
           <div class="stat-label">ITEMS CARRIED</div>
-          <div class="gloss" style="font-size:7pt;margin:0.05em 0 0.1em">What they keep on their person regardless of where they are. RAINBOW (carries across books) or Consumable (one book only).</div>
+          <div class="gloss" style="font-size:7pt;margin:0.05em 0 0.1em">What they carry with them. RAINBOW means it travels across books. Consumable means it lasts for one book-world.</div>
           <span class="ruled-line"></span>
           <span class="ruled-line"></span>
           <span class="ruled-line"></span>
@@ -1102,7 +1102,7 @@
 
   <div class="stat-block">
     <div class="stat-label">WHAT THEY WANT, AND ARE BAD AT GETTING</div>
-    <div class="gloss">A real want. The kind that follows them around even when they try to put it down.</div>
+    <div class="gloss">What your character really wants, even when it is hard to get.</div>
     <span class="ruled-line" data-fill="motivation"></span>
   </div>
 
@@ -1121,7 +1121,7 @@
 
   <div class="stat-block token-block" style="border:1.5px solid var(--accent);padding:0.35em 0.55em;background:rgba(184,137,58,0.05)">
     <div class="stat-label" style="color:var(--accent)">TOKEN</div>
-    <div class="gloss">One small object the character carries. You (the bookworm-author) know its precise weight, feel, or contents. Nobody else at the table does. Anchors the character against being puppeted, against getting lost in nested dimensions, against having their interior spoken-over. Mrs Jones's pocketbook is a token. Roger could not hold it the same way.</div>
+    <div class="gloss">One small object the character carries. You (the bookworm-author) know its precise weight, feel, or contents. Nobody else at the table does. Anchors the character against being controlled by someone else, against getting lost in stories inside stories, against having their interior spoken-over. Mrs Jones's pocketbook is a token. Roger could not hold it the same way.</div>
     <table style="width:100%;border-collapse:collapse;margin-top:0.2em">
       <tr>
         <td style="width:35%;vertical-align:top;padding-right:0.5em">
@@ -1141,7 +1141,7 @@
   <div class="stat-block stat-block-ai">
     <div class="stat-label">HOROSCOPE<span class="ai-badge">· AI</span></div>
     <div style="font-size:8pt;text-align:left;margin:0.25em 0 0.4em;color:var(--ai-ink);font-style:italic;line-height:1.3">
-      Ten cosmological grids over the birth event. Ask the AI to compute each from your birth data. Each tradition retains its irreducibility. The character is the concrescence of all readings.
+      Ten star or calendar systems for the character’s birth moment. Ask the AI to compute each from your birth data. Each tradition keeps its own shape. The character becomes a mix of all readings.
     </div>
     <table class="birth-grid horoscope-grid">
       <tr>
@@ -1189,7 +1189,7 @@
 
   <div class="bottom-strip">
     <div class="strip-label">JOURNEYS THE PLAYER BRINGS</div>
-    <div class="strip-gloss">Real trips from your life. The ones that left a mark. Read each as a question: have you taken one of these? The character starts with what you bring.</div>
+    <div class="strip-gloss">Real trips from your life that stayed with you. Read each as a question. Your character starts with what you bring.</div>
     <table class="strip-grid">
       <tr>
         <td><span class="checkbox"></span>To a city they did not know</td>
@@ -1214,7 +1214,7 @@
 
   <div class="stat-block voice-block">
     <div class="stat-label">CHARACTER VOICE</div>
-    <div class="gloss">Three lines this smashed-up character might actually say. Out loud, to another person. Not their inner monologue, not their theme song. Lines you could quote.</div>
+    <div class="gloss">Three lines this mixed-together character might actually say out loud to another person. Write lines someone could quote.</div>
     <table style="width:100%;border-collapse:collapse">
       <tr><td style="width:1.8em;font-family:'JetBrains Mono',monospace;font-size:8pt;color:var(--accent);padding:0.1em 0.4em 0.1em 0">01</td><td><span class="ruled-line"></span></td></tr>
       <tr><td style="font-family:'JetBrains Mono',monospace;font-size:8pt;color:var(--accent);padding:0.1em 0.4em 0.1em 0">02</td><td><span class="ruled-line"></span></td></tr>
@@ -1224,14 +1224,14 @@
 
   <div class="stat-block gesture-block">
     <div class="stat-label">ONE GESTURE</div>
-    <div class="gloss">A distinct physical gesture this character makes. The way they sit when they are listening. What their hands do when they lie. The walk. The pause before they answer. One specific gesture. Other bookworms should be able to picture it.</div>
+    <div class="gloss">One physical gesture this character makes. How they sit, walk, pause, listen, or move their hands. Make it specific enough for others to picture.</div>
     <span class="ruled-line"></span>
     <span class="ruled-line"></span>
   </div>
 
   <div class="stat-block private-world-block">
     <div class="stat-label">PRIVATE WORLD</div>
-    <div class="gloss">Where the character is when no one is watching. Their room. Their pocket. The five minutes of their day they tell nobody about. A smashed-up character is recognizable as much by what they do alone as by what they do in public. Sketch it short.</div>
+    <div class="gloss">Where the character is when nobody is watching. Their room, pocket, secret place, or quiet five minutes. Show who they are alone.</div>
     <table style="width:100%;border-collapse:collapse;margin-top:0.3em">
       <tr>
         <td style="width:48%;vertical-align:top;padding-right:0.6em">
@@ -1253,7 +1253,7 @@
 
   <div class="stat-block moment-block">
     <div class="stat-label">MOMENT OF DECISION</div>
-    <div class="gloss">A choice the character has already made that they cannot take back. Not the smash that made them. A specific decision inside their character-history they would defend if pressed, even though pressing reveals what it cost. Three difficulties.</div>
+    <div class="gloss">A choice the character already made and cannot take back. Make it specific. Show what it cost.</div>
     <table class="tier-table" style="margin-top:0.2em">
       <tr><td class="lvl">Beginner</td><td>One sentence: what did they choose, and what did they leave behind to choose it?</td></tr>
       <tr><td class="lvl">Intermediate</td><td>Two sentences: the choice, and the moment when they realized the choice was permanent.</td></tr>
@@ -1266,7 +1266,7 @@
 
   <div class="stat-block">
     <div class="stat-label">THE UNSAID</div>
-    <div class="gloss">One line this character will never say out loud. They might think it. They will not speak it. Write the line anyway. Other bookworms read this and know what the character is carrying around silence-wrapped.</div>
+    <div class="gloss">One line this character keeps inside. They may think it, but they will not say it out loud. Write it anyway so others can understand what they carry.</div>
     <span class="ruled-line ruled-multi" data-fill="secret"></span>
     <span class="ruled-line"></span>
   </div>
@@ -1281,7 +1281,7 @@
 
   <div class="stat-block">
     <div class="stat-label">WHAT BOOK STARTED THIS</div>
-    <div class="gloss">One book that, when read, made this character possible. Not their favorite book. The book without which the smash would not have held.</div>
+    <div class="gloss">One book that helped make this character possible. It does not have to be their favorite book. It is the book that helped the character hold together.</div>
     <table class="tier-table" style="margin-top:0.2em">
       <tr><td class="lvl">Beginner</td><td>Title and author.</td></tr>
       <tr><td class="lvl">Intermediate</td><td>Title, author, and one sentence on what the book did to the character.</td></tr>
@@ -1293,7 +1293,7 @@
 
   <div class="stat-block">
     <div class="stat-label">WHAT MAKES THEM LAUGH</div>
-    <div class="gloss">Not what they pretend to laugh at. What actually makes them laugh out loud when no one is watching. The shape of their humor is a fingerprint.</div>
+    <div class="gloss">What actually makes them laugh when nobody is watching. Their humor tells us something real about them.</div>
     <span class="ruled-line"></span>
     <span class="ruled-line"></span>
   </div>
@@ -1319,15 +1319,15 @@
   <h2>Inner Life</h2>
 
   <div class="caption">
-    What a character believes about themselves. What they will and won't do. What they keep coming back to.
+    What a character believes about themselves. What they will do, what they avoid, and what they keep returning to.
   </div>
 
   <div class="question">
     <div class="ask">What rule will your character never break?</div>
     <table class="tier-table">
-      <tr><td class="lvl">Beginner</td><td>A rule they keep, even when nobody is watching.</td></tr>
-      <tr><td class="lvl">Intermediate</td><td>A line they will not cross, even when crossing it would help them.</td></tr>
-      <tr class="adv"><td class="lvl">Advanced</td><td>The principle they organize themselves around. If your character has no such rule, why? What does the absence of rules mean to them?</td></tr>
+      <tr><td class="lvl">Beginner</td><td>A rule they keep even when nobody is watching.</td></tr>
+      <tr><td class="lvl">Intermediate</td><td>A line they refuse to cross, even when crossing it would help them.</td></tr>
+      <tr class="adv"><td class="lvl">Advanced</td><td>The main idea they try to live by. If your character has no such rule, why? What does the absence of rules mean to them?</td></tr>
     </table>
     <span class="ruled-line"></span>
     <span class="ruled-line"></span>
@@ -1338,7 +1338,7 @@
     <table class="tier-table">
       <tr><td class="lvl">Beginner</td><td>A bad habit they have. The one their family or friends would name first.</td></tr>
       <tr><td class="lvl">Intermediate</td><td>The fault that gets in their way. They know about it, or they don't.</td></tr>
-      <tr class="adv"><td class="lvl">Advanced</td><td>The flaw that is also their strength. The same trait that hurts them is the trait they could not survive without. Name it.</td></tr>
+      <tr class="adv"><td class="lvl">Advanced</td><td>The flaw that can also become a strength. The same trait that hurts them is the trait they could not survive without. Name it.</td></tr>
     </table>
     <span class="ruled-line"></span>
     <span class="ruled-line"></span>
@@ -1569,7 +1569,7 @@
         <td><span class="checkbox"></span>Summer</td>
         <td><span class="checkbox"></span>Autumn</td>
         <td><span class="checkbox"></span>Winter</td>
-        <td><span class="checkbox"></span>The threshold between two seasons</td>
+        <td><span class="checkbox"></span>The doorway between two seasons</td>
       </tr>
       <tr>
         <td colspan="6" style="border-top:1px dotted var(--ink-soft);padding-top:0.3em">Their own:&nbsp;<span style="border-bottom:1px solid var(--ink);display:inline-block;min-width:80%">&nbsp;</span></td>
@@ -2083,7 +2083,7 @@
 </div>
 
 <!-- ============================================================
-     PAGE 8, Figures table (auto-paginates) + Smash questions
+     PAGE 8, Figures table (auto-paginates) + Mix questions
      ============================================================ -->
 <div class="page" id="page-8">
   <div class="card-header">
@@ -2102,7 +2102,7 @@
     Your character carries pieces of other people they admire. The collision IS the operation. It produces a character that is none of them but inherits from each. Real people, family, fictional characters, historical figures. The why-column is load-bearing. Skip the words your culture hands you (inspirational, strong, resilient). Pick the actual operation you watched the figure perform.
   </div>
 
-  <table class="smash-table" id="page-8-figures">
+  <table class="mix-table" id="page-8-figures">
     <tr>
       <th style="width:1.6em">No.</th>
       <th style="width:24%">Figure</th>
@@ -2141,16 +2141,16 @@
     </table>
   </div>
 
-  <h2>The Smash</h2>
+  <h2>The Mix</h2>
 
   <div class="caption">
-    The figures listed on page 8 are substrate. The smash is the operation that turns substrate into a character. Six questions answered ACROSS all the figures you carry. Each has three difficulties; pick the one that fits today. The character forms at the friction-points where the figures collide, not where they agree.
+    The figures listed on page 8 are base material. The mix is the operation that turns base material into a character. Six questions answered ACROSS all the figures you carry. Each has three difficulties; pick the one that fits today. The character forms at the friction-points where the figures collide, not where they agree.
   </div>
 
-  <div class="question" data-fill="smashSynthesis-block" style="margin-bottom:0.7em">
+  <div class="question" data-fill="mixSynthesis-block" style="margin-bottom:0.7em">
     <div class="ask">The character who is none of them. Who carries the pieces taken. Who is yours.</div>
     <div class="gloss">Two or three sentences. The synthesis. None of the figures, all of the takings.</div>
-    <span class="ruled-line ruled-multi" data-fill="smashSynthesis"></span>
+    <span class="ruled-line ruled-multi" data-fill="mixSynthesis"></span>
   </div>
 
   <div class="question">
@@ -2196,12 +2196,12 @@
   <div class="question">
     <div class="ask">The residue. After the collision, what survives that is yours alone?</div>
     <div class="tier-strip"><div><span class="lvl">Beginner</span> A quality that is yours, not theirs.</div><div><span class="lvl">Intermediate</span> A quality that came from the collision itself, that none of them had alone.</div><div class="adv"><span class="lvl">Advanced</span> The one sentence that names your character.</div></div>
-    <span class="ruled-line ruled-multi" data-fill="smashSynthesis"></span>
+    <span class="ruled-line ruled-multi" data-fill="mixSynthesis"></span>
     <span class="ruled-line"></span>
     <span class="ruled-line"></span>
   </div>
 
-  <div class="card-footer"><span class="footer-left">Bookwormburrows &middot; Series I</span><span class="footer-mid">The Smash</span><span class="footer-right">IX &middot; 9 / 10</span></div>
+  <div class="card-footer"><span class="footer-left">Bookwormburrows &middot; Series I</span><span class="footer-mid">The Mix</span><span class="footer-right">IX &middot; 9 / 10</span></div>
 </div>
 
 <!-- ============================================================
@@ -2243,7 +2243,7 @@
   <h2 style="margin-top:0.6em">The Face After</h2>
 
   <div class="caption">
-    Page 1 asked what their face looks like at the start. After the seminars, the smashes, the bonds, draw them again. The face changes when the character changes.
+    Page 1 asked what their face looks like at the start. After the seminars, the mixes, the bonds, draw them again. The face changes when the character changes.
   </div>
 <div class="question" style="margin:0.4em 0 0.45em">
   <div class="ask">What their face does after the work.</div>
@@ -2265,7 +2265,7 @@
      PAGE 11+, APPENDIX (digital fill only)
      This page is rendered only when chat data is present (data.handle set).
      Prints the adjective-form character description, stat frequencies,
-     quirks, smash archetypes, and the deep-question answers from the
+     quirks, mix archetypes, and the deep-question answers from the
      six PDF sections that the chat fills via tier-prose.
      ============================================================ -->
 <div class="page" id="page-appendix" style="display:none">
@@ -2325,13 +2325,16 @@
     if (window.bookwormcard && typeof window.bookwormcard === "object") {
       return window.bookwormcard;
     }
-    // Then try the bb app's checkpoint key
+    // Then try the bb app's checkpoint keys, newest first.
     try {
-      var raw = localStorage.getItem('bb_wormcard_checkpoint_v1');
-      if (raw) {
-        var parsed = JSON.parse(raw);
-        // bb app stores under .data, schema documented in bb/index.html
-        if (parsed && parsed.data) return parsed.data;
+      var keys = ['bb_wormcard_checkpoint_v2','bb_wormcard_checkpoint_v1'];
+      for(var i=0;i<keys.length;i++){
+        var raw = localStorage.getItem(keys[i]);
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          // bb app stores under .data, schema documented in /bookwormcard/
+          if (parsed && parsed.data) return parsed.data;
+        }
       }
     } catch(e){}
     // Fall back to a flat 'bookwormcard' key if someone wrote one directly
@@ -2395,7 +2398,7 @@
       teach_short: data.teach_short || '',
       teach_long: data.teach_long || '',
       face_after: data.face_after || '',
-      smashSynthesis: data.smashSynthesis || ''
+      mixSynthesis: data.mixSynthesis || ''
     };
 
     // Horoscope readings travel inside data.horoscope (creator writes them
@@ -2413,27 +2416,27 @@
       }
     });
 
-    // FIGURES table · data.smashes is array of {name, quality, archetype?}
+    // FIGURES table · data.mixes is array of {name, quality, archetype?}
     // Fill only the first FIGURES_PER_PAGE rows here; paginatePage8 handles overflow
-    if (Array.isArray(data.smashes) && data.smashes.length) {
+    if (Array.isArray(data.mixes) && data.mixes.length) {
       var FIGURES_PER_PAGE = 10;
-      data.smashes.slice(0, FIGURES_PER_PAGE).forEach(function(smash, i){
-        var rows = document.querySelectorAll('.smash-table tr.fig-row');
+      data.mixes.slice(0, FIGURES_PER_PAGE).forEach(function(mix, i){
+        var rows = document.querySelectorAll('.mix-table tr.fig-row');
         if (rows[i]) {
           var nameCell = rows[i].querySelector('[data-fill="figure-name"]');
           var qualCell = rows[i].querySelector('[data-fill="figure-quality"]');
-          if (nameCell && smash.name) {
+          if (nameCell && mix.name) {
             // If archetype provenance is present and not already in the name, append it
-            var displayName = smash.name;
-            if (smash.archetype && smash.archetype.taxonomyLabel &&
-                displayName.indexOf(smash.archetype.taxonomyLabel) === -1) {
-              displayName = displayName + ' \u00b7 ' + smash.archetype.taxonomyLabel;
+            var displayName = mix.name;
+            if (mix.archetype && mix.archetype.taxonomyLabel &&
+                displayName.indexOf(mix.archetype.taxonomyLabel) === -1) {
+              displayName = displayName + ' \u00b7 ' + mix.archetype.taxonomyLabel;
             }
             nameCell.textContent = displayName;
             nameCell.setAttribute('data-filled', 'true');
           }
-          if (qualCell && smash.quality) {
-            qualCell.textContent = smash.quality;
+          if (qualCell && mix.quality) {
+            qualCell.textContent = mix.quality;
             qualCell.setAttribute('data-filled', 'true');
           }
         }
@@ -2570,21 +2573,21 @@
   }
 
   function paginatePage8(data){
-    /* True digital pagination of page 8 when smashes exceed FIGURES_PER_PAGE.
-       page 8a holds first chunk of figures + the smash-questions block.
+    /* True digital pagination of page 8 when mixes exceed FIGURES_PER_PAGE.
+       page 8a holds first chunk of figures + the mix-questions block.
        page 8b, 8c, ... hold subsequent chunks of figures only.
        Footer numbering: 8a, 8b, 8c... continuation pages re-number total /N. */
     var FIGURES_PER_PAGE = 10;
-    if (!data || !Array.isArray(data.smashes) || data.smashes.length <= FIGURES_PER_PAGE) {
-      return; // no pagination needed; default 6 rows hold all smashes
+    if (!data || !Array.isArray(data.mixes) || data.mixes.length <= FIGURES_PER_PAGE) {
+      return; // no pagination needed; default 6 rows hold all mixes
     }
     var p8 = document.getElementById('page-8');
     var table = document.getElementById('page-8-figures');
     var calloutOriginal = document.getElementById('page-8-callout');
     if (!p8 || !table || !calloutOriginal) return;
 
-    var totalSmashes = data.smashes.length;
-    var totalChunks = Math.ceil(totalSmashes / FIGURES_PER_PAGE);
+    var totalMixes = data.mixes.length;
+    var totalChunks = Math.ceil(totalMixes / FIGURES_PER_PAGE);
     if (totalChunks <= 1) return;
 
     /* Update the original page 8's title + footer to "8a" + N */
@@ -2618,7 +2621,7 @@
     var originalP8 = p8;
     var insertAfter = p8;
 
-    /* For each additional chunk, clone the original and strip smash-questions */
+    /* For each additional chunk, clone the original and strip mix-questions */
     var letterMap = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p'];
     for (var chunkIdx = 1; chunkIdx < totalChunks; chunkIdx++) {
       var clone = originalP8.cloneNode(true);
@@ -2635,11 +2638,11 @@
         cloneFooter.innerHTML = 'VIII &middot; 8' + letter + ' / ' + (9 + totalChunks);
       }
 
-      /* Remove smash-questions block from clone (everything from smash heading to end of page-content before footer) */
-      var cloneSmashHeading = clone.querySelector('#page-8-smash-heading');
-      if (cloneSmashHeading) {
+      /* Remove mix-questions block from clone (everything from mix heading to end of page-content before footer) */
+      var cloneMixHeading = clone.querySelector('#page-8-mix-heading');
+      if (cloneMixHeading) {
         var toRemove = [];
-        var cur = cloneSmashHeading;
+        var cur = cloneMixHeading;
         while (cur && !cur.classList.contains('card-footer')) {
           toRemove.push(cur);
           cur = cur.nextElementSibling;
@@ -2650,14 +2653,14 @@
       /* Update intro caption to indicate continuation */
       var cloneCaption = clone.querySelector('.caption');
       if (cloneCaption) {
-        cloneCaption.innerHTML = 'Continuation of the figures table from page 8a. Same operation, more figures. The smash questions across all your figures live on page 9.';
+        cloneCaption.innerHTML = 'Continuation of the figures table from page 8a. Same operation, more figures. The mix questions across all your figures live on page 9.';
       }
 
       /* Update add-more callout text on clone */
       var cloneCallout = clone.querySelector('#page-8-callout');
       if (cloneCallout) {
         cloneCallout.removeAttribute('id');
-        cloneCallout.innerHTML = '<strong>Continuation page.</strong> The smash questions live on page 9. Carry your answers across all figures listed here.';
+        cloneCallout.innerHTML = '<strong>Continuation page.</strong> The mix questions live on page 9. Carry your answers across all figures listed here.';
       }
 
       /* Clear all data-fill cells on clone (they were copied from page 8a's first chunk) */
@@ -2674,10 +2677,10 @@
 
       /* Adjust row count to match this chunk size */
       var chunkStart = chunkIdx * FIGURES_PER_PAGE;
-      var chunkEnd = Math.min(chunkStart + FIGURES_PER_PAGE, totalSmashes);
+      var chunkEnd = Math.min(chunkStart + FIGURES_PER_PAGE, totalMixes);
       var chunkSize = chunkEnd - chunkStart;
       /* Trim any rows beyond chunkSize */
-      var cloneTable = clone.querySelector('table.smash-table');
+      var cloneTable = clone.querySelector('table.mix-table');
       var cloneTableRows = cloneTable.querySelectorAll('tr.fig-row');
       for (var rr = cloneTableRows.length - 1; rr >= chunkSize; rr--) {
         cloneTableRows[rr].remove();
@@ -2693,19 +2696,19 @@
         cloneTable.appendChild(newTr);
       }
 
-      /* Fill clone rows from data.smashes[chunkStart..chunkEnd] */
+      /* Fill clone rows from data.mixes[chunkStart..chunkEnd] */
       var freshRows = clone.querySelectorAll('tr.fig-row');
       for (var rIdx = 0; rIdx < freshRows.length; rIdx++) {
-        var smash = data.smashes[chunkStart + rIdx];
-        if (!smash) continue;
+        var mix = data.mixes[chunkStart + rIdx];
+        if (!mix) continue;
         var nameCell = freshRows[rIdx].querySelector('[data-fill="figure-name"]');
         var qualCell = freshRows[rIdx].querySelector('[data-fill="figure-quality"]');
-        if (nameCell && smash.name) {
-          nameCell.textContent = smash.name;
+        if (nameCell && mix.name) {
+          nameCell.textContent = mix.name;
           nameCell.setAttribute('data-filled', 'true');
         }
-        if (qualCell && smash.quality) {
-          qualCell.textContent = smash.quality;
+        if (qualCell && mix.quality) {
+          qualCell.textContent = mix.quality;
           qualCell.setAttribute('data-filled', 'true');
         }
       }
@@ -2771,7 +2774,11 @@
     if(!data) return;
     var raw = null;
     try {
-      raw = localStorage.getItem('bb_wormcard_checkpoint_v1');
+      var keys = ['bb_wormcard_checkpoint_v2','bb_wormcard_checkpoint_v1'];
+      for(var i=0;i<keys.length;i++){
+        raw = localStorage.getItem(keys[i]);
+        if(raw) break;
+      }
     } catch(e){}
     if(!raw){
       // Fallback: build a minimal payload from data
@@ -2875,5 +2882,6 @@
 <script src="/js/indra.js?v=cl91" defer></script>
 <script src="/js/footer.js?v=cl91" defer></script>
 <script src="/js/theme.js?v=cl91" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
 </body>
 </html>

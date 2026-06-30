@@ -2,15 +2,15 @@
 
 *Four-day campaign window: Saturday September 20 1958, 4 PM through Tuesday September 23 1958, morning. Lead-up week documented from Wednesday September 17.*
 
-**Design principle.** Hughes-text-canonical and historically-documented NPCs are placed at specific times and specific places. Everything else (kitchenette neighbors with no canonical names, peers of Roger, customers at the Theresa beauty shop, congregants who are not named historical figures) is improvised live per session by the AI engine. The schedule below is what a DM can rely on without further reading.
+**Design principle.** cmp-001 now distinguishes two NPC registers. **setupnpcs** are prepared before play. They are text-canonical people, documented historical people, or real learning-bearing figures attached to assignments and real events. They are placed at specific times and specific places. **improvnpcs** are live-play ordinary people generated during the session: kitchenette neighbors with no canonical names, peers of Roger, customers at the Theresa beauty shop, congregants who are not named historical figures, street passersby, clerks, ushers, and crowd members. AI may instantiate improvnpcs live, but it must not present them as documented historical figures. The schedule below is the setupnpc spine a DM can rely on without further reading.
 
 The encounter beat (Mrs Jones and Roger, East 128th Street between Madison and Park, ~11:15 PM Saturday September 20) is sealed. All other beats can be visited or skipped based on the path the bookworms walk.
 
 ---
 
-## Roster: text-canonical and documented-historical NPCs
+## Roster: setupnpcs
 
-These are the named characters who hold scheduled positions. Roles-without-names (other roomers, beauty-shop coworkers, Sunday-service congregants without documented attendance, Apollo audience, etc.) appear on the schedule by role only; the AI engine instantiates specifics at session-runtime.
+These are the named text-canonical or documented-historical NPCs who hold scheduled positions. Their placement is part of the pregame arena setup. Roles-without-names appear by role only and are handled as improvnpcs at session-runtime.
 
 | ID | Name | Role | Source |
 |---|---|---|---|
@@ -30,7 +30,9 @@ These are the named characters who hold scheduled positions. Roles-without-names
 | N14 | Emerson Harper | Hughes's honorary uncle, 20 East 127th | Documented per cc-cmp001-hughes-house |
 | N15 | James L. Hicks | Amsterdam News executive editor | Documented per cc-cmp001-realism-cultural |
 
-Roles-without-names that may appear at any location (AI engine instantiates live): a rear-house roomer in Mrs Jones's boarding house, a beauty-shop coworker, a stoop-smoker on the encounter block, a desk sergeant at the 28th Precinct night shift, Sunday-morning ushers at the three congregations, an Amsterdam News compositor, Apollo doormen, Hotel Theresa bellhops, Blumstein's mezzanine-floor staff, Harlem Hospital ER intake, period passersby.
+## ImprovNPC pool
+
+Improvnpcs are ordinary live-play people. AI may instantiate them to keep the world populated while the teacher remains the filter. They include: a rear-house roomer in Mrs Jones's boarding house, a beauty-shop coworker, a stoop-smoker on the encounter block, a desk sergeant at the 28th Precinct night shift, Sunday-morning ushers at the three congregations, an Amsterdam News compositor, Apollo doormen, Hotel Theresa bellhops, Blumstein's mezzanine-floor staff, Harlem Hospital ER intake, period passersby.
 
 ---
 

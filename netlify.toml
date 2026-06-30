@@ -625,3 +625,23 @@ from = "/VERIFY_ALL_OUTPUT_FIX_EVERYTHING.txt"
 to = "/404.html"
 status = 404
 force = true
+
+[[redirects]]
+from = "/BB_KID_FRIENDLY_REWRITE_AUDIT.md"
+to = "/404.html"
+status = 404
+force = true
+
+
+[[redirects]]
+from = "/BB_INTERACTIVITY_FIXES_AUDIT_2026-06-30.md"
+to = "/404.html"
+status = 404
+force = true
+
+
+[[redirects]]
+  from = "/BB_FINAL_TECHNICAL_SMOOTHNESS_AUDIT_2026-06-30.md"
+  to = "/404.html"
+  status = 404
+  force = true

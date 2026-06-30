@@ -1,0 +1,106 @@
+{
+  "schema": "page-size-budget-v2",
+  "updated": "2026-06-30",
+  "policy": "Budget tracks current large HTML pages after the CL suggestion pass. ML* source-of-truth pages remain intact; generated shortcut pages have lower ceilings after fallback reduction.",
+  "budgetedLargePages": [
+    {
+      "path": "polymyth/methodologylist/index.html",
+      "bytes": 3796520,
+      "route": "/polymyth/methodologylist/",
+      "ceilingBytes": 3831520,
+      "status": "canonical-heavy; ML*/archive source order preserved; guard prevents regression before dialectical chunking decision"
+    },
+    {
+      "path": "polymyth/methodologylist/methodology/index.html",
+      "bytes": 1808686,
+      "route": "/polymyth/methodologylist/methodology/",
+      "ceilingBytes": 1843686,
+      "status": "canonical-heavy; ML*/archive source order preserved; guard prevents regression before dialectical chunking decision"
+    },
+    {
+      "path": "aa/index.html",
+      "bytes": 1509786,
+      "route": "/aa/",
+      "ceilingBytes": 1544786,
+      "status": "canonical-heavy; ML*/archive source order preserved; guard prevents regression before dialectical chunking decision"
+    },
+    {
+      "path": "aa/cloud/index.html",
+      "bytes": 1321615,
+      "route": "/aa/cloud/",
+      "ceilingBytes": 1356615,
+      "status": "canonical-heavy; ML*/archive source order preserved; guard prevents regression before dialectical chunking decision"
+    },
+    {
+      "path": "polymyth/campaigncodex/index.html",
+      "bytes": 1030961,
+      "route": "/polymyth/campaigncodex/",
+      "ceilingBytes": 1065961,
+      "status": "canonical-heavy; ML*/archive source order preserved; guard prevents regression before dialectical chunking decision"
+    },
+    {
+      "path": "teacherresources/index.html",
+      "bytes": 925068,
+      "route": "/teacherresources/",
+      "ceilingBytes": 955068,
+      "status": "known-heavy; render-contained and budgeted to prevent regression"
+    },
+    {
+      "path": "polymythseminars/index.html",
+      "bytes": 717811,
+      "route": "/polymythseminars/",
+      "ceilingBytes": 739811,
+      "status": "calendar/shortcut page after route-specific fallback reduction; guard prevents fallback bloat returning"
+    },
+    {
+      "path": "polymyth/bookwormburrows/index.html",
+      "bytes": 556321,
+      "route": "/polymyth/bookwormburrows/",
+      "ceilingBytes": 586321,
+      "status": "known-heavy; render-contained and budgeted to prevent regression"
+    },
+    {
+      "path": "polymyth/methodologylist/citation/index.html",
+      "bytes": 518194,
+      "route": "/polymyth/methodologylist/citation/",
+      "ceilingBytes": 548194,
+      "status": "known-heavy; render-contained and budgeted to prevent regression"
+    },
+    {
+      "path": "polymyth/methodologylist/gorgonification/index.html",
+      "bytes": 393928,
+      "route": "/polymyth/methodologylist/gorgonification/",
+      "ceilingBytes": 423928,
+      "status": "known-heavy; render-contained and budgeted to prevent regression"
+    },
+    {
+      "path": "polymyth/modulecanon/index.html",
+      "bytes": 393927,
+      "route": "/polymyth/modulecanon/",
+      "ceilingBytes": 423927,
+      "status": "known-heavy; render-contained and budgeted to prevent regression"
+    },
+    {
+      "path": "leizu/flyer/index.html",
+      "bytes": 375227,
+      "route": "/leizu/flyer/",
+      "ceilingBytes": 405227,
+      "status": "known-heavy; render-contained and budgeted to prevent regression"
+    },
+    {
+      "path": "university/index.html",
+      "bytes": 370959,
+      "route": "/university/",
+      "ceilingBytes": 392959,
+      "status": "calendar/shortcut page after route-specific fallback reduction; guard prevents fallback bloat returning"
+    },
+    {
+      "path": "leizu/index.html",
+      "bytes": 369060,
+      "route": "/leizu/",
+      "ceilingBytes": 399060,
+      "status": "known-heavy; render-contained and budgeted to prevent regression"
+    }
+  ],
+  "unbudgetedLimitBytes": 500000
+}

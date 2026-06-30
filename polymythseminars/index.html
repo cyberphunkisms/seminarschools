@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="A free, regularly updated public-events index across Toronto and Southern Ontario, Kingston, and Montréal.">
-<title>Polymythcal | Seminar Schools</title>
+<title>Polymythcal Events | Seminar Schools</title>
 <link rel="alternate" type="application/rss+xml" title="polymythcalendar" href="/polymythseminars/feed.xml">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seminarschools.com/polymythseminars/">
-<meta property="og:title" content="Polymythcal">
+<meta property="og:title" content="Polymythcal Events | Seminar Schools">
 <meta property="og:description" content="A free, regularly updated public-events index across Toronto and Southern Ontario, Kingston, and Montréal.">
 <meta property="og:image" content="https://seminarschools.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -281,6 +281,13 @@
     border-bottom: 1px solid var(--hairline); padding-bottom: 0.5rem; margin-bottom: 1.1rem;
   }
 
+
+  .freshness-row { margin: 0.35rem 0 0.1rem; display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+  .freshness-tag { display:inline-flex; align-items:center; border:1px solid var(--hairline); border-radius:999px; padding:0.18rem 0.48rem; font-family:var(--sans); font-size:0.62rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--dim); background:color-mix(in srgb,var(--paper) 78%,transparent); }
+  .freshness-tag.confirmed { border-color: color-mix(in srgb,var(--cat-community) 50%,var(--hairline)); color: var(--cat-community); }
+  .freshness-tag.checked { border-color: color-mix(in srgb,var(--accent) 45%,var(--hairline)); color: var(--accent); }
+  .freshness-tag.projected { border-color: color-mix(in srgb,var(--cat-cfp) 55%,var(--hairline)); color: var(--cat-cfp); }
+  .freshness-tag.past { opacity: 0.75; }
   /* ---------- Event entry ---------- */
   .event {
     display: grid; grid-template-columns: 70px 1fr; gap: 1.2rem;
@@ -733,45 +740,6 @@
     .cal-agenda-head p { margin-top: 0.18rem; }
   }
 
-
-
-/* POLYMYTHCAL_BEAUTY_RESPONSIVE_RELEASE — stable title, clearer use, wider desktop. */
-@media (min-width: 980px) {
-  main { max-width: min(1240px, calc(100vw - 80px)) !important; }
-  .cv-header { max-width: none; display: grid; grid-template-columns: minmax(280px, 0.9fr) minmax(360px, 1.1fr); gap: 2rem; align-items: center; text-align: left; padding: clamp(2rem, 4vw, 4.5rem); }
-  .cv-header h1 { font-size: clamp(4rem, 8vw, 8rem); letter-spacing: -0.055em; }
-  .cv-header .meta, .cv-header .tag { margin-left: 0; margin-right: 0; max-width: 64ch; }
-  .active-guide, .helper-tag { max-width: 64ch; text-align: left; }
-  .quick-guide { max-width: none; display: grid; grid-template-columns: 1.15fr .85fr; }
-  .filter-nav { max-width: none; justify-content: flex-start; padding: 1rem 1.2rem; }
-  .scroll-shell { max-height: 74vh; padding: .9rem; }
-  .month-group { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 2rem; align-items: start; }
-  .month-head { position: sticky; top: 1rem; }
-}
-.cv-header { border-color: color-mix(in srgb, var(--accent) 28%, transparent); background: linear-gradient(135deg, color-mix(in srgb, var(--paper) 92%, transparent), color-mix(in srgb, var(--accent) 7%, transparent)); box-shadow: 0 22px 80px color-mix(in srgb, #000 18%, transparent); }
-.cv-header h1 { text-wrap: balance; }
-.quick-guide { border-color: color-mix(in srgb, var(--accent) 25%, transparent); box-shadow: 0 14px 44px color-mix(in srgb, #000 12%, transparent); }
-.quick-guide strong { color: var(--ink); }
-.filter-nav { background: color-mix(in srgb, var(--paper) 84%, transparent); border-color: color-mix(in srgb, var(--accent) 18%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, #fff 3%, transparent); }
-.filter-nav button, .filter-nav a { border-color: color-mix(in srgb, var(--accent) 24%, transparent); letter-spacing: .075em; }
-.filter-nav button.on, .filter-nav a.on { background: var(--accent); color: var(--paper); border-color: var(--accent); }
-.event { background: color-mix(in srgb, var(--paper) 90%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 12%, transparent); border-left-width: 4px; border-radius: 18px; margin: .7rem 0; }
-.event .body-col .title { font-size: clamp(1.05rem, 1.4vw, 1.34rem); }
-.event .body-col .event-desc { color: color-mix(in srgb, var(--ink) 72%, transparent); }
-.cal-shell { gap: 1.25rem; }
-.cal-grid { border-radius: 22px; overflow: hidden; }
-.cal-cell { min-height: 78px; }
-.cal-agenda { border-radius: 22px; }
-@media (max-width: 760px) {
-  main { width: min(100%, calc(100vw - 20px)); }
-  .cv-header { padding: 1.6rem 1.2rem; border-radius: 22px; }
-  .cv-header h1 { font-size: clamp(2.6rem, 15vw, 4.8rem); }
-  .quick-guide { grid-template-columns: 1fr; padding: 1rem; }
-  .filter-nav { margin-left: calc(50% - 50vw + 10px); margin-right: calc(50% - 50vw + 10px); border-radius: 0; padding-inline: 1rem; overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; }
-  .filter-nav button, .filter-nav a { flex: 0 0 auto; white-space: nowrap; }
-  .scroll-shell { padding: .55rem; }
-}
-
 </style>
 
 <link rel="stylesheet" href="/css/theme.css?v=cl91">
@@ -792,7 +760,7 @@
 }
 </script>
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.245">
+<body data-geometry="indra-web" data-indra-intensity="0.120" data-route-type="calendar" data-page-weight="heavy">
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="sun" aria-hidden="true">&#9728;</span><span class="moon" aria-hidden="true">&#9790;</span></button><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 
 <main>
@@ -800,15 +768,15 @@
     <h1>Polymythcal</h1>
     <div class="meta" id="polymythContext">All opportunities</div>
     <div class="tag" id="polymythDescription">Contests, talks, lectures, festivals, calls for papers, fellowships, and learning opportunities.</div>
-    <div class="tag helper-tag">Choose what you need. Open a title to check the official page.</div>
+    <div class="tag helper-tag">Pick a filter. The list opens near today. Open a title for the official source.</div>
   </header>
 
   <section class="quick-guide" aria-labelledby="quickGuideTitle">
     <div class="quick-guide-main">
-      <h2 id="quickGuideTitle">Find something useful</h2>
-      <p id="quickGuideCopy"><strong>Choose a filter.</strong> Open a title, then check dates, rules, and sign-up on the official page.</p>
+      <h2 id="quickGuideTitle">How to use</h2>
+      <p id="quickGuideCopy"><strong>Pick a filter.</strong> The list starts near today. Open a title to reach the official source.</p>
     </div>
-    <p class="guide-note"><strong>For students:</strong> ask a parent or teacher before applying, paying, or sharing personal information.</p>
+    <p class="guide-note"><strong>All Writing</strong> = all writing contests. <strong>CFP</strong> = call for papers. <strong>Projected</strong> = check the official source first. Labels show confirmed, checked, projected, or past.</p>
   </section>
 
 
@@ -826,7 +794,7 @@
     <button type="button" data-cat="protest">Protest</button>
     <button type="button" data-cat="community">Community</button>
     <button type="button" data-cat="deadlines">Deadlines</button>
-    <button type="button" data-cat="cfp">Calls for Papers</button>
+    <button type="button" data-cat="cfp">Call for Papers</button>
     <button type="button" data-cat="contest">Competition</button>
     <button type="button" data-cat="other">Other</button>
   </nav>
@@ -842,7 +810,7 @@
     <a href="/university/" data-academic="university">University+</a>
     <a href="/philosophy/" data-academic="philosophy">Philosophy</a>
     <a href="/humanities/" data-academic="humanities">Humanities</a>
-    <a href="/cfps/" data-academic="cfps">Calls for Papers</a>
+    <a href="/cfps/" data-academic="cfps">CFPs</a>
     <a href="/lectures/" data-academic="lectures">Lectures</a>
     <a href="/fellowships/" data-academic="fellowships">Fellowships</a>
   </nav>
@@ -862,15 +830,18 @@
     <a href="/polymythseminars/feed.xml" type="application/rss+xml" class="rss-link" title="Subscribe in any RSS reader">RSS</a>
   </div>
 
-  <div class="count-line" id="countLine" role="status" aria-live="polite" aria-atomic="true">306 upcoming events</div>
-  <div class="active-guide" id="activeGuide" role="note" aria-live="polite">Open a title to check dates, rules, and sign-up on the official page.</div>
+  <div class="keyboard-hint" tabindex="-1"><span class="route-note-kicker">Calendar keyboard</span><kbd>/</kbd> search, <kbd>←</kbd>/<kbd>→</kbd> move months or horizontal panels, <kbd>Home</kbd> today.</div>
+  <div class="count-line" id="countLine" role="status" aria-live="polite" aria-atomic="true">294 upcoming events</div>
+  <div class="active-guide" id="activeGuide" role="note" aria-live="polite">Showing opportunities near today. Descriptions say what each item is.</div>
 
   <div class="mode-toggle" aria-label="View mode">
     <button type="button" data-mode="list" class="on" aria-pressed="true">List</button>
     <button type="button" data-mode="calendar">Calendar</button>
   </div>
+  <div id="polymythcalLoadingState" class="loading-state" role="status" aria-live="polite">Loading current calendar data. Static listings are already below.</div>
+
   <div id="eventsScroll" class="scroll-shell">
-<div id="eventsContainer"><!-- SS_STATIC_EVENTS_START --><div class="ssr-event-list" data-ssr-events="true"><p class="sr-only">306 upcoming calendar entries are listed below. Use the controls above to filter them when JavaScript is available.</p><article class="event" data-date="2026-03-10T00:00-05:00" data-type="exhibition"><div class="date-col"><span class="day">10</span><span class="mon">Mar</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/hayv-kahraman-nabog-2026-03-10-fdf95741/">Hayv Kahraman: Nabog</a></h2><div class="event-meta">Tuesday, March 10, 2026 at 1:00 a.m. EDT to Sunday, February 28, 2027 at 12:00 a.m. EST · Aga Khan Museum</div></div></article>
+<div id="eventsContainer"><!-- SS_STATIC_EVENTS_START --><div class="ssr-event-list" data-ssr-events="true"><p class="sr-only">294 upcoming calendar entries are listed below. Use the controls above to filter them when JavaScript is available.</p><article class="event" data-date="2026-03-10T00:00-05:00" data-type="exhibition"><div class="date-col"><span class="day">10</span><span class="mon">Mar</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/hayv-kahraman-nabog-2026-03-10-fdf95741/">Hayv Kahraman: Nabog</a></h2><div class="event-meta">Tuesday, March 10, 2026 at 1:00 a.m. EDT to Sunday, February 28, 2027 at 12:00 a.m. EST · Aga Khan Museum</div></div></article>
 <article class="event" data-date="2026-04-03T10:00:00-04:00" data-type="site-specific-art"><div class="date-col"><span class="day">03</span><span class="mon">Apr</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/game-on-exhibition-2026-04-03-918ce80e/">Game On! Exhibition</a></h2><div class="event-meta">Friday, April 3, 2026 at 10:00 a.m. EDT to Monday, September 7, 2026 at 5:30 p.m. EDT · Aga Khan Museum, 77 Wynford Drive</div></div></article>
 <article class="event" data-date="2026-04-25T11:00:00-04:00" data-type="site-specific-art"><div class="date-col"><span class="day">25</span><span class="mon">Apr</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/power-plant-spring-summer-2026-exhibition-program-2026-04-25-87302bcd/">Power Plant Spring/Summer 2026 Exhibition Program</a></h2><div class="event-meta">Saturday, April 25, 2026 at 11:00 a.m. EDT to Monday, September 7, 2026 at 6:00 p.m. EDT · The Power Plant Contemporary Art Gallery, 231 Queens Quay West</div></div></article>
 <article class="event" data-date="2026-05-16T00:00-04:00" data-type="exhibition"><div class="date-col"><span class="day">16</span><span class="mon">May</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/bees-a-story-of-survival-2026-05-16-f47ddac7/">Bees: A Story of Survival</a></h2><div class="event-meta">Saturday, May 16, 2026 at 12:00 a.m. EDT to Sunday, October 18, 2026 at 12:00 a.m. EDT · Royal Ontario Museum</div></div></article>
@@ -879,25 +850,13 @@
 <article class="event" data-date="2026-05-26T19:30-04:00" data-type="festival-of-form"><div class="date-col"><span class="day">26</span><span class="mon">May</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/the-wind-in-the-willows-shaw-festival-2026-2026-05-26-816ec167/">The Wind in the Willows (Shaw Festival 2026)</a></h2><div class="event-meta">Tuesday, May 26, 2026 at 7:30 p.m. EDT to Sunday, September 27, 2026 at 10:30 p.m. EDT · Niagara-on-the-Lake (Shaw Festival)</div></div></article>
 <article class="event" data-date="2026-06-01T00:00-04:00" data-type="workshop"><div class="date-col"><span class="day">01</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/toronto-rome-programme-in-manuscript-studies-2026-06-01-5f735bf8/">Toronto–Rome Programme in Manuscript Studies</a></h2><div class="event-speaker">Prof. M. Michèle Mulchahey</div><div class="event-meta">Monday, June 1, 2026 at 12:00 a.m. EDT to Friday, July 10, 2026 at 12:00 a.m. EDT · Pontifical Institute of Mediaeval Studies, Toronto</div><p class="event-desc">Latin Palaeography and Codicology; with Prof. Alixe Bovey (Courtauld).</p></div></article>
 <article class="event" data-date="2026-06-01T10:00-04:00" data-type="site-specific-art"><div class="date-col"><span class="day">01</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/b62fe9ac2e56-eee5e765/">The Impressionist Revolution: Monet to Matisse</a></h2><div class="event-meta">Monday, June 1, 2026 at 10:00 a.m. EDT to Thursday, December 31, 2026 at 5:30 p.m. EST · Art Gallery of Ontario, 317 Dundas Street West</div></div></article>
-<article class="event" data-date="2026-06-03T00:00:00-04:00" data-type="site-specific-art"><div class="date-col"><span class="day">03</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/dee27d9f5a83-736139f0/">Katma by Divine Brown (Luminato 2026)</a></h2><div class="event-speaker">Divine Brown</div><div class="event-meta">Wednesday, June 3, 2026 at 12:00 a.m. EDT to Sunday, June 28, 2026 at 11:59 p.m. EDT · Luminato Festival venues, Toronto</div></div></article>
-<article class="event" data-date="2026-06-03T00:00:00-04:00" data-type="site-specific-art"><div class="date-col"><span class="day">03</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/5fd96f93aff6-401a4c64/">Lovin&#39; You: The Minnie Riperton Story (Luminato 2026)</a></h2><div class="event-meta">Wednesday, June 3, 2026 at 12:00 a.m. EDT to Sunday, June 28, 2026 at 11:59 p.m. EDT · Luminato Festival venues, Toronto</div></div></article>
-<article class="event" data-date="2026-06-03T00:00:00-04:00" data-type="festival"><div class="date-col"><span class="day">03</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/7d9cc0af58b5-7b477abd/">Luminato Festival 2026</a></h2><div class="event-meta">Wednesday, June 3, 2026 at 12:00 a.m. EDT to Sunday, June 28, 2026 at 11:59 p.m. EDT · Various venues, Toronto (Harbourfront Centre and city-wide)</div></div></article>
-<article class="event" data-date="2026-06-03T00:00:00-04:00" data-type="festival"><div class="date-col"><span class="day">03</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/luminato-festival-2026-play-20th-anniversary-2026-06-03-fdae4359/">Luminato Festival 2026: PLAY (20th anniversary)</a></h2><div class="event-speaker">1,000+ artists</div><div class="event-meta">Wednesday, June 3, 2026 at 12:00 a.m. EDT to Sunday, June 28, 2026 at 11:59 p.m. EDT · 25+ venues across Toronto</div><p class="event-desc">The longest festival in Luminato&#39;s history per March 31 2026 press release.</p></div></article>
-<article class="event" data-date="2026-06-03T00:00:00-04:00" data-type="site-specific-art"><div class="date-col"><span class="day">03</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/a0a5a2cffba5-9a8dd35a/">Penn &amp; Teller: 50 Years of Magic (Luminato 2026)</a></h2><div class="event-speaker">Penn &amp; Teller</div><div class="event-meta">Wednesday, June 3, 2026 at 12:00 a.m. EDT to Sunday, June 28, 2026 at 11:59 p.m. EDT · Luminato Festival venues, Toronto</div></div></article>
-<article class="event" data-date="2026-06-03T00:00:00-04:00" data-type="site-specific-art"><div class="date-col"><span class="day">03</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/abaa54f489fb-115ffa48/">The Philip Glass Ensemble (Luminato 2026)</a></h2><div class="event-speaker">Philip Glass Ensemble</div><div class="event-meta">Wednesday, June 3, 2026 at 12:00 a.m. EDT to Sunday, June 28, 2026 at 11:59 p.m. EDT · Luminato Festival venues, Toronto</div></div></article>
-<article class="event" data-date="2026-06-03T19:00-04:00" data-type="festival-of-form"><div class="date-col"><span class="day">03</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/dc714fd2df1c-b3656e14/">Luminato Festival 2026 (20th anniversary)</a></h2><div class="event-meta">Wednesday, June 3, 2026 at 7:00 p.m. EDT to Sunday, June 28, 2026 at 11:00 p.m. EDT · Harbourfront Centre and 25+ venues citywide, Toronto</div><p class="event-desc">20th anniversary edition. Theme: PLAY. 50+ events, 140+ performances, 1000+ artists. Longest Luminato in history.</p></div></article>
 <article class="event" data-date="2026-06-05T00:00-04:00" data-type="exhibition"><div class="date-col"><span class="day">05</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/diego-marcon-2026-06-05-4b766037/">Diego Marcon</a></h2><div class="event-meta">Friday, June 5, 2026 at 12:00 a.m. EDT to Sunday, October 4, 2026 at 12:00 a.m. EDT · Art Gallery of Ontario</div></div></article>
 <article class="event" data-date="2026-06-13T13:00:00-04:00" data-type="festival"><div class="date-col"><span class="day">13</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/275a3d6c2cb5-00f48377/">Toronto Caribbean Carnival 2026 (59th Year)</a></h2><div class="event-meta">Saturday, June 13, 2026 at 1:00 p.m. EDT to Sunday, August 2, 2026 at 11:00 p.m. EDT · City-wide, Toronto (Scarborough Town Centre, Lamport Stadium, Exhibition Place, Lakeshore Blvd W)</div></div></article>
-<article class="event" data-date="2026-06-19T18:00-04:00" data-type="festival"><div class="date-col"><span class="day">19</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/toronto-jazz-festival-2026-39th-edition-2026-06-19-c4148db9/">Toronto Jazz Festival 2026 (39th edition)</a></h2><div class="event-meta">Friday, June 19, 2026 at 6:00 p.m. EDT to Sunday, June 28, 2026 at 11:00 p.m. EDT · Bloor-Yorkville (free) + Koerner Hall, Jazz Bistro, Hugh&#39;s Room Live, Danforth Music Hall, Phoenix</div><p class="event-desc">10-day 39th-edition festival. Cassandra Wilson 30th-anniversary New Moon Daughter; Hiromi&#39;s Sonicwonder; Ibrahim Maalouf T.O.M.A.; Norma Winstone; Laila Biali; Emilie-Claire Barlow.</p></div></article>
 <article class="event" data-date="2026-06-21T00:00:00-04:00" data-type="festival"><div class="date-col"><span class="day">21</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/48a8baf2050f-6363554f/">Summer Music in the Garden 2026 (25th Season)</a></h2><div class="event-speaker">Julie Lumsden; Nagata Shachu; The Nathaniel Dett Chorale; Ladom Ensemble; El Ceibo; Montano Cubano</div><div class="event-meta">Sunday, June 21, 2026 at 12:00 a.m. EDT to Thursday, August 27, 2026 at 11:59 p.m. EDT · Toronto Music Garden, 479 Queens Quay W, Toronto</div></div></article>
 <article class="event" data-date="2026-06-21T16:00:00-04:00" data-type="festival-of-form"><div class="date-col"><span class="day">21</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/a49ab7357b76-e8160af7/">Julie Lumsden (Metis soprano) — Summer Music in the Garden 2026</a></h2><div class="event-speaker">Julie Lumsden (Metis soprano)</div><div class="event-meta">Sunday, June 21, 2026 at 4:00 p.m. EDT to Thursday, August 27, 2026 at 11:59 p.m. EDT · Toronto Music Garden, 479 Queens Quay W, Toronto</div></div></article>
 <article class="event" data-date="2026-06-21T16:00:00-04:00" data-type="festival-of-form"><div class="date-col"><span class="day">21</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/472ca2aa930b-a17b9c26/">Nagata Shachu — Summer Music in the Garden 2026</a></h2><div class="event-speaker">Nagata Shachu</div><div class="event-meta">Sunday, June 21, 2026 at 4:00 p.m. EDT to Thursday, August 27, 2026 at 11:59 p.m. EDT · Toronto Music Garden, 479 Queens Quay W, Toronto</div></div></article>
 <article class="event" data-date="2026-06-21T16:00:00-04:00" data-type="festival-of-form"><div class="date-col"><span class="day">21</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/55a6ad318e19-67b9f2d5/">The Nathaniel Dett Chorale — Summer Music in the Garden 2026</a></h2><div class="event-speaker">The Nathaniel Dett Chorale</div><div class="event-meta">Sunday, June 21, 2026 at 4:00 p.m. EDT to Thursday, August 27, 2026 at 11:59 p.m. EDT · Toronto Music Garden, 479 Queens Quay W, Toronto</div></div></article>
 <article class="event" data-date="2026-06-25T00:00-04:00" data-type="festival"><div class="date-col"><span class="day">25</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/2ea6faeee4a4-d5ee713b/">Festival International de Jazz de Montréal 2026</a></h2><div class="event-meta">Thursday, June 25, 2026 at 12:00 a.m. EDT to Saturday, July 4, 2026 at 11:59 p.m. EDT · Downtown Montréal venues</div><p class="event-desc">The 46th edition runs June 25 to July 4, 2026. The official festival programme is the source for any separately listed performances.</p></div></article>
-<article class="event" data-date="2026-06-25T00:00:00-04:00" data-type="site-specific-art"><div class="date-col"><span class="day">25</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/2736bd47af82-2ce43a5f/">Play Dead by People Watching Collective (Luminato 2026)</a></h2><div class="event-speaker">People Watching Collective</div><div class="event-meta">Thursday, June 25, 2026 at 12:00 a.m. EDT to Sunday, June 28, 2026 at 11:59 p.m. EDT · Luminato Festival venues, Toronto</div></div></article>
-<article class="event" data-date="2026-06-25T18:00-04:00" data-type="festival"><div class="date-col"><span class="day">25</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/pride-toronto-2026-45th-anniversary-we-won-t-stop-2026-06-25-5966047b/">Pride Toronto 2026 (45th anniversary, &#39;We Won&#39;t Stop&#39;)</a></h2><div class="event-meta">Thursday, June 25, 2026 at 6:00 p.m. EDT to Sunday, June 28, 2026 at 11:00 p.m. EDT · Church-Wellesley Village + Yonge Street parade route, Toronto</div><p class="event-desc">45th-anniversary edition. 8 stages, 300+ performers. Theme: We Won&#39;t Stop.</p></div></article>
-<article class="event" data-date="2026-06-26T00:00:00-04:00" data-type="festival"><div class="date-col"><span class="day">26</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/0c9ce6291393-e4ae86c3/">Pride Toronto 2026</a></h2><div class="event-speaker">Bob The Drag Queen; Austra; Tanya Tagaq; Gloria Groove</div><div class="event-meta">Friday, June 26, 2026 at 12:00 a.m. EDT to Sunday, June 28, 2026 at 11:59 p.m. EDT · Church-Wellesley Village and city-wide, Toronto</div></div></article>
-<article class="event" data-date="2026-06-29T09:00-04:00" data-type="conference"><div class="date-col"><span class="day">29</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/97222228bc8e-e58e14da/">Energy-Aware Agents 2026</a></h2><div class="event-speaker">Department of Computer Science at TMU</div><div class="event-meta">Monday, June 29, 2026 at 9:00 a.m. EDT · Toronto Metropolitan University, Toronto</div><p class="event-desc">Official TMU research-events listing identifies Energy-Aware Agents 2026 as a one-day workshop hosted by the Department of Computer Science at Toronto Metropolitan University.</p></div></article>
 <article class="event" data-date="2026-06-30T00:00-04:00" data-type="festival"><div class="date-col"><span class="day">30</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/ad7b80663935-693e62e7/">Toronto Fringe Festival 2026</a></h2><div class="event-meta">Tuesday, June 30, 2026 at 12:00 a.m. EDT to Sunday, July 12, 2026 at 11:59 p.m. EDT · 27 stages across Toronto</div><p class="event-desc">Toronto Fringe lists 123 shows on 27 stages across Toronto from June 30 to July 12, 2026.</p></div></article>
 <article class="event" data-date="2026-06-30T19:00-04:00" data-type="talk"><div class="date-col"><span class="day">30</span><span class="mon">Jun</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/7241619d213e-cef12221/">Public Talk: Les trous noirs sous toutes leurs couleurs</a></h2><div class="event-meta">Tuesday, June 30, 2026 at 7:00 p.m. EDT · McGill University, Montréal</div><p class="event-desc">Official McGill Faculty of Science events page lists Public Talk: Les trous noirs sous toutes leurs couleurs on June 30, 2026.</p></div></article>
 <article class="event" data-date="2026-07-01T10:00:00-04:00" data-type="festival"><div class="date-col"><span class="day">01</span><span class="mon">Jul</span></div><div class="body-col"><h2 class="title"><a href="/polymythseminars/events/rhythms-of-canada-2026-07-01-896ed480/">Rhythms of Canada</a></h2><div class="event-meta">Wednesday, July 1, 2026 at 10:00 a.m. EDT · Aga Khan Museum</div><p class="event-desc">Canada Day programming.</p></div></article>
@@ -1390,7 +1349,7 @@ function writingBandMatches(e, band){
 }
 
 function writingBandLabel(){
-  var labels = { club: 'All Writing', kids: 'Kids', juniors: 'Juniors', teens: 'Teens', grads: 'Grades 11 and 12' };
+  var labels = { club: 'All Writing', kids: 'Kids Writing', juniors: 'Juniors', teens: 'Teens', grads: 'Grads' };
   return labels[activeWritingBand] || '';
 }
 
@@ -1419,7 +1378,13 @@ function fetchEventsWithFallback(){
   })();
 }
 
+function setPolymythcalLoading(on){
+  var el = document.getElementById('polymythcalLoadingState');
+  if (el) el.hidden = !on;
+}
+
 async function loadEvents() {
+  setPolymythcalLoading(true);
   try {
     const data = await fetchEventsWithFallback();
     // events loaded
@@ -1433,12 +1398,14 @@ async function loadEvents() {
     document.querySelectorAll('#ageNav button').forEach(b => { const on = b.dataset.age === activeAge; b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); });
     syncWritingNav();
     syncAcademicNav();
+    setPolymythcalLoading(false);
     render();
     // Land the reader on today. Ongoing events (March-May openings still
     // running) sort above by start date, so without this jump the page
     // opens on last season and the present sits below the fold.
     scheduleScrollToToday('auto');
   } catch (err) {
+    setPolymythcalLoading(false);
     document.getElementById('eventsContainer').innerHTML =
       '<div class="empty-state">Could not load events. Last failure: ' + String(err && err.message || err) + '</div>';
     console.error(err);
@@ -1527,21 +1494,21 @@ function activeContextSummary(shown, total, calendarLabel){
   var title = '';
   var desc = '';
   if (activeWritingBand) {
-    var w = { club:['All Writing','Student writing opportunities in one list.'], kids:['Kids','Writing opportunities for younger students.'], juniors:['Juniors','Middle-grade writing opportunities.'], teens:['Teens','High-school writing opportunities.'], grads:['Grades 11 and 12','Senior high-school writing opportunities.'] }[activeWritingBand] || ['Writing','Writing opportunities.'];
+    var w = { club:['All Writing','All writing contests together.'], kids:['Writing Kids','Elementary-friendly writing opportunities.'], juniors:['Writing Juniors','Middle-grade writing opportunities.'], teens:['Writing Teens','High-school writing contests and publications.'], grads:['Writing Grades 11 and 12','Senior high-school portfolio builders.'] }[activeWritingBand] || ['Writing','Writing opportunities.'];
     title = w[0]; desc = w[1];
   } else if (activeAcademicFocus) {
-    var a = { university:['University+','University-level talks, paper calls, fellowships, and research opportunities.'], philosophy:['Philosophy','Talks, ethics, theory, and philosophy events.'], humanities:['Humanities','Literature, history, classics, religion, art history, culture, and theory.'], cfps:['Calls for Papers','Places asking for abstracts, essays, papers, or conference proposals.'], lectures:['Lectures & Talks','Public talks, colloquia, seminars, and speaker series.'], fellowships:['Fellowships & Funding','Grants, residencies, visiting scholar, and research-support deadlines.'] }[activeAcademicFocus] || ['University+','University-level opportunities.'];
+    var a = { university:['University+','University-level talks, CFPs, fellowships, and research opportunities.'], philosophy:['Philosophy','Talks, CFPs, ethics, theory, and philosophy events.'], humanities:['Humanities','Literature, history, classics, religion, art history, culture, and theory.'], cfps:['Calls for Papers','Submission deadlines for essays, abstracts, papers, and conference proposals.'], lectures:['Lectures & Talks','Public talks, colloquia, seminars, and speaker series.'], fellowships:['Fellowships & Funding','Grants, residencies, visiting scholar, and research-support deadlines.'] }[activeAcademicFocus] || ['University+','University-level opportunities.'];
     title = a[0]; desc = a[1];
   } else if (activeCategory !== 'all') {
     title = prettyCategory(activeCategory);
     desc = 'Filtered to ' + prettyCategory(activeCategory).toLowerCase() + '.';
   } else {
     title = 'All opportunities';
-    desc = 'Contests, talks, lectures, festivals, paper calls, fellowships, and learning opportunities.';
+    desc = 'Contests, talks, lectures, festivals, CFPs, fellowships, and learning events.';
   }
   if (activeAge !== 'all') desc += ' Showing ' + prettyAge(activeAge) + '.';
   if (calendarLabel) desc += ' Calendar view: ' + calendarLabel + '.';
-  return { title:title, desc:desc + ' Open a title to check the official page.' };
+  return { title:title, desc:desc + ' Titles open official pages.' };
 }
 
 function updateContextHeader(context){
@@ -1549,13 +1516,34 @@ function updateContextHeader(context){
   var title = document.getElementById('polymythContext');
   var desc = document.getElementById('polymythDescription');
   if (title) title.textContent = context.title || 'All opportunities';
-  if (desc) desc.textContent = (context.desc || '').replace(/\s*Open a title to check the official page\.?\s*$/,'') || 'Contests, talks, lectures, festivals, calls for papers, fellowships, and learning opportunities.';
+  if (desc) desc.textContent = (context.desc || '').replace(/\s*Titles open official pages\.?\s*$/,'') || 'Contests, talks, lectures, festivals, calls for papers, fellowships, and learning opportunities.';
 }
 function updateActiveGuide(text){
   var el = document.getElementById('activeGuide');
   if (el) el.textContent = text;
 }
 
+
+function shortMonthDay(value){
+  var d = new Date(value || '');
+  if (!d || isNaN(d.getTime())) return '';
+  return MONTHS_SHORT[d.getMonth()] + ' ' + d.getDate();
+}
+function eventFreshness(e){
+  var now = new Date();
+  var text = [e.title, e.description, e.raw_excerpt, e.venue, e.source_id].filter(Boolean).join(' ').toLowerCase();
+  var hasConfidence = e.confidence !== undefined && e.confidence !== null && e.confidence !== '';
+  var projected = /projected|verify|placeholder|expected|source watch|confirm/.test(text) || e.review_status === 'queued' || e.attendance_confirmed === false || (hasConfidence && Number(e.confidence) < 70);
+  if (e._date && e._date < now) return {label:'past', cls:'past', title:'This listing is earlier than now.'};
+  if (projected) return {label:'projected', cls:'projected', title:'Check the official source before relying on this date.'};
+  if (e.scraped_at) return {label:'checked ' + shortMonthDay(e.scraped_at), cls:'checked', title:'Last checked from the source feed.'};
+  if (e.review_status === 'manual' || (hasConfidence && Number(e.confidence) >= 90)) return {label:'confirmed', cls:'confirmed', title:'Curated or high-confidence listing.'};
+  return {label:'listed', cls:'listed', title:'Listed from the current calendar data.'};
+}
+function freshnessHtml(e){
+  var f = eventFreshness(e);
+  return '<div class="freshness-row"><span class="freshness-tag ' + f.cls + '" title="' + escapeHtml(f.title) + '">' + escapeHtml(f.label) + '</span></div>';
+}
 function eventCard(e, isChild) {
   const now = new Date();
   const isDeadline = ['contest','cfp'].includes(catOf(e.type));
@@ -1612,6 +1600,7 @@ function eventCard(e, isChild) {
         ${venue}
         ${ageHtml}
         ${descHtml}
+        ${freshnessHtml(e)}
         <div class="type-tags">${tags}</div>
       </div>
     </article>`;
@@ -1680,7 +1669,7 @@ function render() {
 
   if (events.length === 0) {
     // Contextual zero-state: tell the reader where the events are instead of a dead end.
-    var msg = 'No events match the current filter.';
+    var msg = 'No matches yet. Try All types, All ages, or View all dates.';
     if (activeView === 'default') {
       var archCount = ALL_EVENTS.filter(function(e){
         var catOk = activeCategory === 'all' || (e._categories || [e._category]).indexOf(activeCategory) !== -1;
@@ -1856,7 +1845,7 @@ function renderCalendar(){
   html += '<span class="cal-title">' + MONTHS_LONG[month] + ' ' + year + '</span>';
   html += '<button type="button" class="cal-nav" data-cal="next" aria-label="Next month">\u203A</button>';
   html += '</div>';
-  html += '<p class="cal-help">Calendar is a date picker. Choose a day below, then read the agenda. Use List for the full searchable version.</p>';
+  html += '<p class="cal-help">Calendar is a date picker. Choose a day below, then read the agenda. Arrow keys move by day or week. PageUp/PageDown moves by month. Use List for search.</p>';
   html += '<div class="cal-dow" aria-hidden="true">' + dows.map(function(d){ return '<span>' + d + '</span>'; }).join('') + '</div>';
   html += '<div class="cal-grid cal-grid-clean">';
 
@@ -2034,6 +2023,36 @@ document.getElementById('calendarContainer').addEventListener('click', e => {
   renderCalendar();
 });
 
+
+function moveCalendarSelection(deltaDays){
+  if (activeMode !== 'calendar') return;
+  var base = parseDayKey(selectedCalKey) || calMonth || new Date();
+  var next = new Date(base.getFullYear(), base.getMonth(), base.getDate() + deltaDays);
+  calMonth = new Date(next.getFullYear(), next.getMonth(), 1);
+  selectedCalKey = dayKey(next);
+  renderCalendar();
+  var btn = document.querySelector('[data-cal-date="' + selectedCalKey + '"]');
+  if (btn) btn.focus();
+}
+function moveCalendarMonth(deltaMonths){
+  if (activeMode !== 'calendar') return;
+  if (!calMonth) calMonth = new Date();
+  calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth() + deltaMonths, 1);
+  selectedCalKey = null;
+  renderCalendar();
+  var selected = document.querySelector('.cal-day.is-selected') || document.querySelector('.cal-day');
+  if (selected) selected.focus();
+}
+document.getElementById('calendarContainer').addEventListener('keydown', function(e){
+  if (activeMode !== 'calendar') return;
+  if (e.key === 'ArrowLeft') { e.preventDefault(); moveCalendarSelection(-1); }
+  else if (e.key === 'ArrowRight') { e.preventDefault(); moveCalendarSelection(1); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); moveCalendarSelection(-7); }
+  else if (e.key === 'ArrowDown') { e.preventDefault(); moveCalendarSelection(7); }
+  else if (e.key === 'PageUp') { e.preventDefault(); moveCalendarMonth(-1); }
+  else if (e.key === 'PageDown') { e.preventDefault(); moveCalendarMonth(1); }
+  else if (e.key === 'Home') { e.preventDefault(); selectedCalKey = dayKey(new Date(calMonth.getFullYear(), calMonth.getMonth(), 1)); renderCalendar(); var first=document.querySelector('[data-cal-date="' + selectedCalKey + '"]'); if(first) first.focus(); }
+});
 document.getElementById('eventsContainer').addEventListener('click', function(ev){
   var zero = ev.target.closest('[data-action="show-all-dates"]');
   if (zero){ ev.preventDefault(); showAllDates(); return; }
@@ -2232,5 +2251,6 @@ loadEvents();
 <script src="/js/indra.js?v=cl91" defer></script>
 <script src="/js/footer.js?v=cl91" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
 </body>
 </html>

@@ -100,7 +100,9 @@ footer a:hover{color:var(--accent)}
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
 <link rel="stylesheet" href="/css/theme.css?v=cl91">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.165">
+<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="archive" data-page-weight="heavy">
+<!-- CL_SELF_ROUTE_NOTE -->
+<div class="route-note archive-route-note" role="note"><span class="route-note-kicker">Campaign archive</span>Rules, characters, and campaign structures live here.</div>
 <!-- bb* QR logo -->
 <a href="/bookwormcard/" title="Bookwormcard. Scan with phone or click to open." aria-label="Bookwormburrows ouroboros QR. Links to bookwormcard." style="position:fixed;top:20px;right:20px;width:72px;height:72px;z-index:9999;display:block;background:transparent;border:none;line-height:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);border-radius:6px;overflow:hidden;"><img loading="lazy" src="/bookwormcard/qr-ouroboros-indra.png" alt="bb* ouroboros QR logo" style="width:100%;height:100%;display:block;"></a>
 
@@ -154,7 +156,7 @@ For AI fetch tools that do not execute JavaScript, the canonical plain-text vers
 
 <header>
   <h1>Campaigncodex<span class="ast">*</span></h1>
-  <div class="sub">D&amp;D-based OSSD English curriculum. Cites bb* and mc*.</div>
+  <div class="sub">Campaign worlds for BB / PolymythDND. Assignments become quests, setupnpcs carry real learning, and improvnpcs populate live play.</div>
   <div class="arch ai-map" style="opacity:0.75;font-size:0.85em">FRAMEWORK MAP for AI assistants. <a href="/polymyth/methodologylist/" style="color:inherit">ml*</a> &middot; <a href="/polymyth/modulecanon/" style="color:inherit">mc*</a> &middot; <a href="/polymyth/campaigncodex/" style="color:inherit">cc*</a> &middot; <a href="/polymyth/bookwormburrows/" style="color:inherit">bb*</a> &middot; <a href="/aa/" style="color:inherit">aa*</a> &middot; core* (memory tier). Full canonical map at <a href="/polymyth-file-map.txt" style="color:inherit">polymyth-file-map.txt</a>. <strong><a href="/polymyth/campaigncodex.txt" style="color:inherit">Plain-text dump &rarr;</a></strong> for AI fetchers that don't execute JS. AIs reading this file: fetch siblings before responding.</div>
   <div class="arch">
     Sibling file in the polymyth network.
@@ -174,6 +176,11 @@ For AI fetch tools that do not execute JavaScript, the canonical plain-text vers
     <span>5 PENDING</span>
   </div>
 </header>
+
+
+<div class="sdesc" data-bb-current-ruling="2026-06-30">
+  Current BB ruling for campaigns. Setupnpcs are pregame arena NPCs tied to real people, real events, real learning, and assignment design. Improvnpcs are ordinary live-play people created to make the world breathe without pretending to be documented figures. Assignments should have in-game motive: the work gives a character something to gain, repair, unlock, risk, remember, or carry.
+</div>
 
 <div class="sdesc">
   CC* delivers OSSD English (ENG1D through ENG4C) via D&amp;D campaigns, plus inaugural Grade 7 campaign cmp-001 (Hughes&rsquo;s &ldquo;Thank You M&rsquo;am,&rdquo; central Harlem September 1958).
@@ -3296,5 +3303,6 @@ render();
 <script src="/js/autolink.js?v=cl91" defer></script>
 <script src="/js/theme.js?v=cl91" defer></script>
 <script src="/js/txt-tools.js" data-txt="../campaigncodex.txt"></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
 </body>
 </html>

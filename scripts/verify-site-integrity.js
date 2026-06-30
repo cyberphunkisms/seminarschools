@@ -165,4 +165,3 @@ console.log(`HTML pages: ${html.length} | JS files: ${jsFiles.length} | Redirect
 if(warnings.length){console.log(`Warnings (${warnings.length}):`); warnings.forEach(x=>console.log('  WARN '+x));}
 if(errors.length){console.log(`Errors (${errors.length}):`); errors.forEach(x=>console.log('  FAIL '+x)); process.exit(1);}
 console.log('PASS — public routes, local links, assets, forms, anchors, and scripts are internally consistent.');
-process.exit(0);

@@ -10,7 +10,7 @@
 #indraLayer {
   position: fixed; inset: -12vh -12vw; z-index: 0;
   pointer-events: none; will-change: transform;
-  mix-blend-mode: normal;
+  mix-blend-mode: soft-light;
 }
 #indraLayer circle { transition: fill-opacity 3.5s ease-in-out, opacity 3.5s ease-in-out, stroke-opacity 3.5s ease-in-out; }
 #indraLayer circle.eco-c { fill: currentColor; fill-opacity: 0.08; }
@@ -186,27 +186,273 @@ body[data-geometry="indra-web"] .calendar-shell {
   z-index: 1;
 }
 
-
-/* ============================================================
- * MAIN-LIKE VISIBLE GEOMETRY — ML* core+ / CL-63 visible contract.
- * ============================================================ */
-body[data-geometry="indra-web"] #indraLayer {
-  color: var(--geo-ink, color-mix(in srgb, var(--accent, currentColor) 55%, var(--fg, currentColor)));
-  opacity: var(--indra-opacity, .18);
-  mix-blend-mode: normal;
-  filter: saturate(1.05) contrast(1.08);
+/* =========================================================================
+   ZOOM_RESILIENCE_CONTRACT — whole-site zoom and responsive typography guard
+   Added 2026-06-30.
+   Goal: when browser zoom changes the effective viewport, geometry, text,
+   controls, cards, generated catalog pages, and BB surfaces reflow instead
+   of clipping words or pushing a page sideways. Loaded by every public page.
+   ========================================================================= */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
-body[data-geometry="indra-web"] #indraLayer svg { width: 115%; height: 115%; }
-@media (min-width: 900px) {
-  body[data-geometry="indra-web"] main,
-  body[data-geometry="indra-web"] .page,
-  body[data-geometry="indra-web"] .wrap,
-  body[data-geometry="indra-web"] .shell,
-  body[data-geometry="indra-web"] .container,
-  body[data-geometry="indra-web"] .calendar-shell {
-    max-width: min(var(--wide-content-width, 1220px), calc(100vw - 72px));
+html,
+body {
+  max-width: 100%;
+}
+body {
+  min-width: 0;
+}
+:where(*, *::before, *::after) {
+  min-width: 0;
+}
+:where(main, header, footer, nav, section, article, aside,
+  .wrap, .page, .shell, .container, .layout, .calendar-shell,
+  .catalog-page, .catalog-top, .catalog-footer, .panel, .drawer,
+  .modal, .dialog, .terminal, .preview, .card, .tile, .entry,
+  .event, .lecture, .resource-card, .resource-row) {
+  max-width: 100%;
+}
+:where(.wrap, .page, .shell, .container, .catalog-page, main,
+  .card, .tile, .entry, .event, .lecture, .resource-card,
+  .resource-row, .terminal, .preview, .chat, .copy) {
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+}
+:where(h1, h2, h3, h4, h5, h6, p, li, dd, dt, td, th,
+  figcaption, blockquote, summary, label, button, a, span,
+  strong, em, .lede, .dek, .title, .meta, .venue, .tag,
+  .type-tag, .pill, .chip, .filter-chip, .ctrl-btn) {
+  overflow-wrap: break-word;
+}
+:where(a[href], code, pre, kbd, samp, .url, .source, .slug,
+  .resource-meta, .breadcrumbs) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+:where(pre, code, kbd, samp) {
+  white-space: pre-wrap;
+}
+:where(img, svg, video, canvas, iframe, object, embed) {
+  max-width: 100%;
+  height: auto;
+}
+:where(input, select, textarea, button) {
+  max-width: 100%;
+}
+:where(table) {
+  max-width: 100%;
+}
+:where(.table-wrap, .scroll-shell, .calendar-shell, .resource-grid,
+  .resource-list, .cards, .grid, .tiles, .deck, .columns, .layout,
+  .topbar, .catalog-top, .controls, .toolbar, .filter-nav, .view-toggle,
+  .mode-toggle, .quick-guide, .door-grid, .bb-doors, .phase-list,
+  .command-toolbar, .desktop-commands) {
+  min-width: 0;
+}
+:where(.grid, .cards, .tiles, .deck, .columns, .layout, .topbar,
+  .catalog-top, .controls, .toolbar, .filter-nav, .view-toggle,
+  .mode-toggle, .quick-guide, .door-grid, .bb-doors, .phase-list,
+  .command-toolbar, .desktop-commands) > * {
+  min-width: 0;
+  max-width: 100%;
+}
+:where([style*="width:"], [style*="min-width:"]) {
+  max-width: 100%;
+}
+:where([style*="white-space:nowrap"], [style*="white-space: nowrap"]) {
+  overflow-wrap: anywhere;
+}
+:where(.ss-fz) {
+  flex-wrap: wrap;
+  max-width: calc(100vw - 2rem);
+}
+#indraLayer {
+  inset: -14vmax;
+  width: auto;
+  height: auto;
+  contain: paint;
+  max-width: none;
+}
+#indraLayer svg {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  transform-box: fill-box;
+}
+:where(#geo, #geo2, #geoLayer, .geo, .geometry, .mandala, .stage) svg {
+  max-width: none;
+  transform-box: fill-box;
+}
+@media (max-width: 900px), (max-height: 700px) {
+  :where(.topbar, .catalog-top, .filter-nav, .controls, .toolbar,
+    .view-toggle, .mode-toggle, .nav-links, .quick-links, .desktop-commands,
+    .command-toolbar, .cal-head, .stage-nav) {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+  :where(.topbar .right, .brand, .catalog-top nav, .cal-head .cal-title,
+    .filter-nav button, .filter-nav a, .view-toggle button, .mode-toggle button) {
+    min-width: 0;
+    max-width: 100%;
+  }
+  :where(h1, .hero h1, header h1) {
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+  :where(.calendar-shell, .scroll-shell, .panel, .modal, .drawer, .dialog,
+    .terminal, .preview) {
+    max-width: 100%;
+  }
+  :where(.cal-ev, .today-anchor, .cal-ongoing-item, .type-tag, .pill,
+    .chip, .filter-chip, .ctrl-btn) {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
   }
 }
 @media (max-width: 760px) {
-  #indraLayer { inset: -18vh -24vw; opacity: calc(var(--indra-opacity, .18) * .82); }
+  :where(.resource-grid, .card-grid, .cards, .tiles, .columns,
+    .quick-guide, .proof-grid, .door-grid, .bb-doors, .letter-grid,
+    .cv-proof, .feature-grid, .chapter-grid, .course-grid) {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  :where(.event, .entry, .row, .resource-row, .definition dl,
+    .timeline-row, .project-row, .result-row) {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  :where(.cal-cell) {
+    overflow: visible;
+    min-height: auto;
+    height: auto;
+  }
+  :where(.cal-nav, .ss-fz button) {
+    flex: 0 0 auto;
+  }
+}
+@media (max-width: 520px) {
+  :where(body) {
+    overflow-x: clip;
+  }
+  :where(.wrap, .page, .shell, .container, .catalog-page, main) {
+    padding-left: min(1rem, 4vw);
+    padding-right: min(1rem, 4vw);
+  }
+  :where(button, .button, .btn, .chip, .pill, .filter-chip, .type-tag,
+    .ctrl-btn, .cta, .rss-link) {
+    white-space: normal;
+    line-height: 1.25;
+  }
+  :where(.cal-head) {
+    gap: 0.45rem;
+  }
+}
+
+/* ============================================================
+   CL_SELF_GUARD_CONTRACT — 2026-06-30
+   Small shared pieces used by route doctrine, archive labels,
+   keyboard hints, loading states, and resilient CV/print checks.
+   ============================================================ */
+.route-note,
+.archive-route-note,
+.tool-route-note,
+.keyboard-hint,
+.loading-state,
+.empty-state,
+.site-health-note {
+  box-sizing: border-box;
+  max-width: min(1120px, calc(100vw - 2rem));
+  margin: .75rem auto;
+  padding: .62rem .8rem;
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  border-radius: 16px;
+  font-family: var(--sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  font-size: clamp(.76rem, .72rem + .18vw, .92rem);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.route-note .route-note-kicker,
+.archive-route-note .route-note-kicker,
+.tool-route-note .route-note-kicker,
+.keyboard-hint .route-note-kicker {
+  display: inline-flex;
+  margin-right: .35rem;
+  font-size: .68em;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .74;
+}
+.keyboard-hint kbd,
+.route-note kbd {
+  display: inline-block;
+  min-width: 1.5em;
+  padding: .05rem .35rem;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: .35rem;
+  font: inherit;
+  font-size: .86em;
+  text-align: center;
+  background: color-mix(in srgb, currentColor 7%, transparent);
+}
+.loading-state[hidden],
+.empty-state[hidden] { display: none !important; }
+[data-route-type] { min-width: 0; }
+[data-keyboard-enhanced="true"] .keyboard-hint { outline: none; }
+@media (max-width: 760px) {
+  .route-note,
+  .archive-route-note,
+  .tool-route-note,
+  .keyboard-hint,
+  .loading-state,
+  .empty-state,
+  .site-health-note {
+    max-width: calc(100vw - 1rem);
+    margin-inline: .5rem;
+    border-radius: 12px;
+  }
+}
+@media print {
+  .route-note,
+  .archive-route-note,
+  .tool-route-note,
+  .keyboard-hint,
+  .loading-state,
+  .empty-state,
+  .site-health-note { display: none !important; }
+  .cv-shell, .resume-shell, .saul-cv, main, article { max-width: 100% !important; overflow: visible !important; }
+}
+
+
+/* ============================================================
+   CL_SUGGESTION_PASS_CONTRACT — 2026-06-30
+   Page-type and heavy-page rules preserve ML* source order while keeping
+   large archives smoother under zoom, scroll, and mobile layout.
+   ============================================================ */
+:where(.path-grid, .threshold-paths, .work-paths) { min-width: 0; }
+:where(.path-grid, .threshold-paths) > * { min-width: 0; }
+:where(body[data-page-weight="heavy"]) :where(.resource-row, .entry, .event, .lecture, article, details, section.card, .index-row) {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 320px;
+}
+:where(body[data-page-weight="heavy"]) :where(.resource-row:focus-within, .entry:focus-within, .event:focus-within, article:focus-within, details[open]) {
+  content-visibility: visible;
+}
+:where(body[data-route-type]) :where(.path-card, .threshold-route, .resource-card, .entry, .event, .lecture) {
+  overflow-wrap: break-word;
+}
+:where(body[data-route-type="service"], body[data-route-type="service-form"], body[data-route-type="service-policy"], body[data-route-type="service-payment"], body[data-route-type="service-recruiting"]) :where(.cta, .button, .booking-button, .intake-link) {
+  scroll-margin-block: 1.5rem;
+}
+:where(body[data-route-type="calendar"], body[data-route-type="calendar-shortcut"]) :where(.empty-state, .loading-state, .keyboard-hint) {
+  margin-block: .8rem;
+}
+:where(body[data-route-type="archive"], body[data-route-type="project-archive"], body[data-route-type="archive-tool"]) :where(.route-note, .archive-route-note) {
+  text-wrap: pretty;
+}
+@supports not (content-visibility: auto) {
+  :where(body[data-page-weight="heavy"]) :where(.resource-row, .entry, .event, .lecture, article, details, section.card, .index-row) {
+    contain: layout paint style;
+  }
 }

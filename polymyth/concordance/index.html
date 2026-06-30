@@ -144,7 +144,10 @@ body {
 .empty { color: var(--fnt); font-style: italic; padding: 2rem 0; }
 </style>
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.165">
+<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="archive-tool">
+<div class="keyboard-hint" tabindex="-1"><span class="route-note-kicker">Keyboard</span><kbd>/</kbd> search, <kbd>?</kbd> help, <kbd>←</kbd>/<kbd>→</kbd> move wide panels.</div>
+<!-- CL_SELF_ROUTE_NOTE -->
+<div class="route-note tool-route-note" role="note"><span class="route-note-kicker">Archive tool</span>Filter terms, then follow the matching entry.</div>
 <h1 class="sr-only">Polymyth Concordance</h1>
 <div class="topbar">
   <a href="/polymyth/methodologylist/" class="brand"><em>polymyth</em> concordance</a>
@@ -191,7 +194,7 @@ body {
     html += '<div class="term-count">' + terms.length + ' terms \u00b7 ' + data.totalReferences + ' cross-references \u00b7 ' + data.totalEntries + ' entries scanned</div>';
     html += '</div>';
 
-    html += '<div class="search-bar"><input type="text" id="vocab-search" placeholder="filter terms\u2026"></div>';
+    html += '<div class="search-bar"><input type="text" id="vocab-search" aria-label="Filter concordance terms" placeholder="filter terms\u2026"></div>';
 
     html += '<div class="vocab-grid" id="vocab-grid">';
     for (var i = 0; i < terms.length; i++) {
@@ -303,5 +306,6 @@ body {
 <script src="/js/footer.js?v=cl91" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
 <script src="/js/theme.js?v=cl91" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
 </body>
 </html>

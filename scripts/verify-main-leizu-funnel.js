@@ -26,4 +26,3 @@ pass('tree sitemap points to canonical portfolio intake', tree.includes('/leizu/
 pass('graph replaces retired portfolio success route', graph.includes('/leizu/intake/?source=portfolio') && !graph.includes('"/apply/success/"'));
 if (failed) process.exit(1);
 console.log('Main to Leizu portfolio funnel guard passed.');
-process.exit(0);

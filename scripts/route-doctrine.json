@@ -1,0 +1,383 @@
+{
+  "schema": "seminarschools-route-doctrine-v2",
+  "updated": "2026-06-30",
+  "rules": {
+    "public": "public HTML routes need title, description, canonical, h1, and sitemap entry when sitemap=true",
+    "private": "private routes need noindex or robots disallow",
+    "generated": "generated routes need a source or pattern guard",
+    "archive": "archive routes get a short visible route note unless deliberately private/noindex",
+    "route_types": [
+      "service",
+      "cv",
+      "calendar",
+      "game",
+      "archive",
+      "tool",
+      "generated",
+      "private",
+      "mirror",
+      "resource-catalog",
+      "campaign"
+    ]
+  },
+  "routes": [
+    {
+      "path": "/",
+      "type": "public-home",
+      "sitemap": true
+    },
+    {
+      "path": "/main/",
+      "type": "public-map",
+      "sitemap": true
+    },
+    {
+      "path": "/leizu/",
+      "type": "service",
+      "sitemap": true
+    },
+    {
+      "path": "/leizu/intake/",
+      "type": "service-form",
+      "private": true
+    },
+    {
+      "path": "/leizu/policies/",
+      "type": "service-policy",
+      "sitemap": true
+    },
+    {
+      "path": "/leizu/donate/",
+      "type": "service-payment",
+      "sitemap": true
+    },
+    {
+      "path": "/leizu/teach/",
+      "type": "service-recruiting",
+      "sitemap": true
+    },
+    {
+      "path": "/leizu/booking-success/",
+      "type": "private-success",
+      "private": true
+    },
+    {
+      "path": "/leizu/cloud/",
+      "type": "tool",
+      "sitemap": false
+    },
+    {
+      "path": "/leizu/flyer/",
+      "type": "service-flyer",
+      "sitemap": true
+    },
+    {
+      "path": "/leizu/scholarship/",
+      "type": "service-policy",
+      "sitemap": true
+    },
+    {
+      "path": "/leizu/toronto-tutoring/",
+      "type": "service",
+      "sitemap": true
+    },
+    {
+      "path": "/saul/",
+      "type": "cv",
+      "sitemap": true
+    },
+    {
+      "path": "/teacherresources/",
+      "type": "resource-catalog",
+      "sitemap": true,
+      "generated": true
+    },
+    {
+      "path": "/polymythseminars/",
+      "type": "calendar",
+      "sitemap": true,
+      "generated": true
+    },
+    {
+      "path": "/writingkids/",
+      "type": "calendar-shortcut",
+      "sitemap": true,
+      "generated": true
+    },
+    {
+      "path": "/writingjuniors/",
+      "type": "calendar-shortcut",
+      "sitemap": true,
+      "generated": true
+    },
+    {
+      "path": "/writingteens/",
+      "type": "calendar-shortcut",
+      "sitemap": true,
+      "generated": true
+    },
+    {
+      "path": "/writinggrads/",
+      "type": "calendar-shortcut",
+      "sitemap": true,
+      "generated": true
+    },
+    {
+      "path": "/writingclub/",
+      "type": "calendar-shortcut",
+      "sitemap": true,
+      "generated": true
+    },
+    {
+      "path": "/university/",
+      "type": "calendar-shortcut",
+      "sitemap": true,
+      "generated": true
+    },
+    {
+      "path": "/philosophy/",
+      "type": "calendar-shortcut",
+      "sitemap": true,
+      "generated": true
+    },
+    {
+      "path": "/humanities/",
+      "type": "calendar-shortcut",
+      "sitemap": true,
+      "generated": true
+    },
+    {
+      "path": "/cfps/",
+      "type": "calendar-shortcut",
+      "sitemap": true,
+      "generated": true
+    },
+    {
+      "path": "/lectures/",
+      "type": "calendar-shortcut",
+      "sitemap": true,
+      "generated": true
+    },
+    {
+      "path": "/fellowships/",
+      "type": "calendar-shortcut",
+      "sitemap": true,
+      "generated": true
+    },
+    {
+      "path": "/bb/",
+      "type": "game-landing",
+      "sitemap": true
+    },
+    {
+      "path": "/bb/why/",
+      "type": "game-research",
+      "sitemap": true
+    },
+    {
+      "path": "/bb/why/zh/",
+      "type": "game-research-localized",
+      "sitemap": true
+    },
+    {
+      "path": "/bookwormcard/",
+      "type": "game-tool",
+      "sitemap": true
+    },
+    {
+      "path": "/bookwormcard/about/",
+      "type": "game-info",
+      "sitemap": true
+    },
+    {
+      "path": "/bookwormcard/glossary/",
+      "type": "game-info",
+      "sitemap": true
+    },
+    {
+      "path": "/bookwormcard/print/",
+      "type": "private-print",
+      "private": true
+    },
+    {
+      "path": "/bookwormcard/pdf/",
+      "type": "private-output",
+      "private": true
+    },
+    {
+      "path": "/bookwormcard/success/",
+      "type": "private-success",
+      "private": true
+    },
+    {
+      "path": "/aa/",
+      "type": "archive",
+      "sitemap": true
+    },
+    {
+      "path": "/aa/cloud/",
+      "type": "private-archive-tool",
+      "private": true
+    },
+    {
+      "path": "/aa/views/",
+      "type": "archive-tool",
+      "sitemap": true
+    },
+    {
+      "path": "/polymyth/",
+      "type": "project-archive",
+      "sitemap": true
+    },
+    {
+      "path": "/polymyth/bookwormburrows/",
+      "type": "teacher-rule-library",
+      "sitemap": true
+    },
+    {
+      "path": "/polymyth/methodologylist/",
+      "type": "archive",
+      "sitemap": true
+    },
+    {
+      "path": "/polymyth/methodologylist/methodology/",
+      "type": "archive",
+      "sitemap": true
+    },
+    {
+      "path": "/polymyth/campaigncodex/",
+      "type": "archive",
+      "sitemap": true
+    },
+    {
+      "path": "/polymyth/modulecanon/",
+      "type": "archive",
+      "sitemap": true
+    },
+    {
+      "path": "/polymyth/concordance/",
+      "type": "private-archive-tool",
+      "private": true
+    },
+    {
+      "path": "/polymyth/devilsdiary/",
+      "type": "private-archive",
+      "private": true
+    },
+    {
+      "path": "/polymyth/devils-notebook/",
+      "type": "archive",
+      "sitemap": true
+    },
+    {
+      "path": "/polymyth/notebook/",
+      "type": "private-archive",
+      "private": true
+    },
+    {
+      "path": "/polymyth/dmboard/",
+      "type": "private-tool",
+      "private": true
+    },
+    {
+      "path": "/polymyth/polymythdnd/",
+      "type": "archive",
+      "sitemap": true
+    },
+    {
+      "path": "/polymyth/sitemap/",
+      "type": "private-archive-map",
+      "private": true
+    },
+    {
+      "path": "/polymyth/trace/",
+      "type": "private-archive",
+      "private": true
+    },
+    {
+      "path": "/agora/",
+      "type": "archive",
+      "sitemap": true
+    },
+    {
+      "path": "/florilegium/",
+      "type": "archive",
+      "sitemap": true
+    },
+    {
+      "path": "/marginalia/",
+      "type": "archive",
+      "sitemap": true
+    },
+    {
+      "path": "/marginalia/example-review/",
+      "type": "archive-example",
+      "sitemap": true
+    },
+    {
+      "path": "/aitr/",
+      "type": "tool",
+      "sitemap": true
+    },
+    {
+      "path": "/nutrition/",
+      "type": "tool",
+      "sitemap": true
+    },
+    {
+      "path": "/ohm-dome/",
+      "type": "project",
+      "sitemap": true
+    },
+    {
+      "path": "/campaigns/studio-qibla/",
+      "type": "campaign",
+      "sitemap": true
+    },
+    {
+      "path": "/campaigns/thank-you-mam/",
+      "type": "campaign",
+      "sitemap": true
+    }
+  ],
+  "route_groups": [
+    {
+      "pattern": "/teacherresources/**/",
+      "type": "generated-resource-detail",
+      "public": true,
+      "source": "data/teacherresources or generated catalog HTML"
+    },
+    {
+      "pattern": "/polymythseminars/events/**/",
+      "type": "generated-event-detail",
+      "publicOrNoindex": true,
+      "source": "polymythseminars/events.json"
+    },
+    {
+      "pattern": "/campaigns/**/",
+      "type": "campaign",
+      "publicOrNoindex": true
+    },
+    {
+      "pattern": "/polymyth/articles/**/",
+      "type": "archive-article",
+      "publicOrNoindex": true
+    },
+    {
+      "pattern": "/marginalia/posts/**/",
+      "type": "archive-post",
+      "publicOrNoindex": true
+    }
+  ],
+  "page_type_contracts": {
+    "service": "Service pages make the action path visible first, then keep policy, price, contact, and intake details close enough that a family can decide without reading the whole site.",
+    "cv": "CV pages present a broad professional record with clean print behavior, zoom resilience, and no project-only narrowing unless the page title explicitly says it is project-specific.",
+    "calendar": "Calendar pages put source links, filters, freshness labels, empty states, and keyboard movement ahead of decorative complexity.",
+    "game": "Game pages separate student action, teacher notes, saving/resuming, and research explanation so the play loop stays legible.",
+    "archive": "Archive pages preserve source-of-truth density while giving a short route note, anchors, search, and related paths that help readers enter without flattening the archive.",
+    "tool": "Tool pages expose the working controls, keyboard hints, loading and empty states, and fallback behavior before any decorative or theoretical layer.",
+    "resource-catalog": "Resource catalogs prioritize finding links through search, subject filters, grade and level signals, and stable outbound routes; they avoid unnecessary teacher-decision metadata.",
+    "campaign": "Campaign pages keep the public story, call to action, and route status clear while protecting private/system artifacts."
+  },
+  "anti_twist_rule": "Page-type rules support the existing project meaning. They must not rename, flatten, or reframe ML*, AA*, polymyth, BB, Leizu, or CL in ways that change their function or source-of-truth relation."
+}

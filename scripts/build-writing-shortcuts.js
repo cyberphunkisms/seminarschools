@@ -7,11 +7,11 @@ const ROOT = path.resolve(__dirname, '..');
 const CHECK = process.argv.includes('--check');
 const NOW = new Date();
 const ROUTES = {
-  writingclub: { band:'club', label:'All Writing', display:'All Writing', desc:'Student writing opportunities in one list.', countText:n=>`${n} writing competitions` },
-  writingkids: { band:'kids', label:'Kids', display:'Kids', desc:'Writing opportunities for younger students.', countText:n=>`${n} writing competitions` },
-  writingjuniors: { band:'juniors', label:'Juniors', display:'Juniors', desc:'Middle-grade writing opportunities.', countText:n=>`${n} writing competitions` },
-  writingteens: { band:'teens', label:'Teens', display:'Teens', desc:'High-school writing opportunities.', countText:n=>`${n} writing competitions` },
-  writinggrads: { band:'grads', label:'Grades 11 and 12', display:'Grades 11 and 12', desc:'Senior high-school writing opportunities.', countText:n=>`${n} writing competitions` }
+  writingclub: { band:'club', label:'All Writing', display:'All Writing', title:'All Writing | Polymythcal | Seminar Schools', desc:'All writing contests together.', countText:n=>`${n} writing competitions` },
+  writingkids: { band:'kids', label:'Writing Kids', display:'Kids', title:'Writing Kids | Polymythcal | Seminar Schools', desc:'Elementary-friendly writing opportunities.', countText:n=>`${n} writing competitions` },
+  writingjuniors: { band:'juniors', label:'Writing Juniors', display:'Juniors', title:'Writing Juniors | Polymythcal | Seminar Schools', desc:'Middle-grade writing opportunities.', countText:n=>`${n} writing competitions` },
+  writingteens: { band:'teens', label:'Writing Teens', display:'Teens', title:'Writing Teens | Polymythcal | Seminar Schools', desc:'High-school writing contests and publications.', countText:n=>`${n} writing competitions` },
+  writinggrads: { band:'grads', label:'Writing Grades 11 and 12', display:'Grades 11 and 12', title:'Writing Grades 11 and 12 | Polymythcal | Seminar Schools', desc:'Senior high-school portfolio builders.', countText:n=>`${n} writing competitions` }
 };
 function read(rel){ return fs.readFileSync(path.join(ROOT, rel), 'utf8'); }
 function write(rel, text){
@@ -49,19 +49,19 @@ function replaceDivInner(html, id, inner){
 function setStablePolymythcalHeader(html, info, route){
   const url = `https://seminarschools.com/${route}/`;
   const description = `Polymythcal view: ${info.label}. ${info.desc || 'Learning opportunities.'}`;
-  html=html.replace(/<title>[\s\S]*?<\/title>/, '<title>Polymythcal | Seminar Schools</title>');
+  html=html.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(info.title || ('Polymythcal | Seminar Schools'))}</title>`);
   html=html.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${attr(description)}">`);
   html=html.replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${url}">`);
-  html=html.replace(/<meta property="og:title" content="[^"]*">/, '<meta property="og:title" content="Polymythcal">');
+  html=html.replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${attr(info.title || 'Polymythcal')}">`);
   html=html.replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${attr(description)}">`);
-  html=html.replace(/<meta name="twitter:title" content="[^"]*">/, '<meta name="twitter:title" content="Polymythcal">');
+  html=html.replace(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${attr(info.title || 'Polymythcal')}">`);
   html=html.replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${attr(description)}">`);
   html=html.replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${url}">`);
   html=html.replace(/<header class="cv-header">[\s\S]*?<\/header>/, `<header class="cv-header">
     <h1>Polymythcal</h1>
     <div class="meta" id="polymythContext">${esc(info.label)}</div>
     <div class="tag" id="polymythDescription">${esc(info.desc || 'Learning opportunities.')}</div>
-    <div class="tag helper-tag">Choose a filter. Open a title to check dates, rules, and sign-up.</div>
+    <div class="tag helper-tag">Pick a filter. The list opens near today. Open a title for the official source.</div>
   </header>`);
   return html;
 }
@@ -83,7 +83,7 @@ function main(){
     let html = read(`${slug}/index.html`);
     const events = current.filter(e=>bandMatches(e, info.band));
     const markup = `<div class="ssr-event-list" data-ssr-events="true"><p class="sr-only">${events.length} writing competition listings are listed below. Use the controls above to filter them when JavaScript is available.</p>${events.map(staticEventCard).join('\n')}</div>`;
-    html = html.replace(/<script(?=[^>]*id=["']events-fallback["'])(?=[^>]*type=["']application\/json["'])[^>]*>[\s\S]*?<\/script>/, `<script type="application/json" id="events-fallback">${JSON.stringify(data)}</script>`);
+    html = html.replace(/<script(?=[^>]*id=["']events-fallback["'])(?=[^>]*type=["']application\/json["'])[^>]*>[\s\S]*?<\/script>/, `<script type="application/json" id="events-fallback" data-source="/polymythseminars/events.json">${JSON.stringify({ _comment: 'Route-specific fallback. Full canonical data loads from /polymythseminars/events.json and remains mirrored on /polymythseminars/.', _generated_at: data._generated_at, _total_events: events.length, count: events.length, events })}</script>`);
     html = html.replace(/<!-- SS_STATIC_EVENTS_START -->[\s\S]*?<!-- SS_STATIC_EVENTS_END -->/, `<!-- SS_STATIC_EVENTS_START -->${markup}<!-- SS_STATIC_EVENTS_END -->`);
     html = html.replace(/<div class="count-line" id="countLine"[^>]*>[\s\S]*?<\/div>/, `<div class="count-line" id="countLine" role="status" aria-live="polite" aria-atomic="true">${info.countText(events.length)}</div>`);
     html = setStablePolymythcalHeader(html, info, slug);

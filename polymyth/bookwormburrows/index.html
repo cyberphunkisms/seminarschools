@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index,follow">
-<meta name="description" content="Bookwormburrows. A pedagogical dimensional-traveling game where bookworms eat text to gain subjectivity. Rainbowsol is the DM. Any book becomes a visitable dimension.">
+<meta name="description" content="BookwormBurrows, also called BB or PolymythDND, is a teacher-led academic TTRPG where texts become worlds, burrowing wormcards become character sheets, assignments become quests, and AI helps the Dimensional Master track the table.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "CreativeWork",
   "name": "Bookwormburrows*",
-  "description": "Pedagogical dimensional-traveling game where bookworms eat text to gain subjectivity and design their own story. Rainbowsol is the DM. Any book becomes a visitable dimension.",
+  "description": "A teacher-led academic TTRPG where texts become worlds, burrowing wormcards become character sheets, assignments become quests, and AI helps the Dimensional Master track the table.",
   "creator": {"@type": "Person", "name": "Rainbowsol", "alternateName": "cyberphunkisms"}
 }
 </script>
@@ -82,6 +82,31 @@ h1 .ast{color:var(--fire);font-style:italic}
 .bf:hover{background:var(--fire2)}
 .bg{border-color:var(--brd);color:var(--dim);font-size:13px}
 .sdesc{background:var(--bg1);border-left:3px solid var(--fire);padding:14px 18px;margin-bottom:16px;color:var(--dim);font-style:italic;font-size:15px}
+.play-loop{background:rgba(217,117,21,.10);border:1px solid var(--brd2);border-left:4px solid var(--fire);padding:16px 18px;margin:0 0 16px;color:var(--txt);border-radius:4px}
+.play-loop h2{font-size:22px;font-weight:600;margin-bottom:8px;color:var(--fire2)}
+.play-loop ol{display:grid;grid-template-columns:1fr 1fr;gap:6px 22px;margin-left:1.2rem;color:var(--dim);font-size:15px;line-height:1.45}
+.play-loop li strong{color:var(--txt);font-weight:600}
+.teacher-tools{margin:0 0 16px;border:1px solid var(--brd);background:var(--bg1);border-radius:4px}
+.teacher-tools summary{cursor:pointer;padding:10px 14px;color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.teacher-tools[open] summary{border-bottom:1px dashed var(--brd2);color:var(--txt)}
+.teacher-tools .tool-inner{padding:10px 12px}
+.section-label{display:inline-block;margin:0 0 8px;padding:2px 7px;border:1px solid var(--brd2);border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
+@media(max-width:640px){.play-loop ol{grid-template-columns:1fr}}
+
+.kid-intro{background:rgba(217,117,21,.10);border:1px solid var(--brd2);border-left:4px solid var(--fire);padding:14px 18px;margin:0 0 16px;color:var(--txt);border-radius:4px}
+.kid-intro strong{color:var(--fire2)}
+.kid-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--bg);background:var(--fire2);padding:3px 7px;border-radius:999px;margin-bottom:8px}
+.kid-title{font-size:21px;line-height:1.25}
+.kid-body{color:var(--txt);font-size:17px;line-height:1.62;white-space:pre-wrap}
+.kid-more,.original-note{margin-top:10px;border:1px solid var(--brd);border-radius:4px;background:rgba(255,255,255,.025)}
+.kid-more summary,.original-note summary{cursor:pointer;padding:9px 11px;color:var(--teal2);font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.kid-more div,.original-note div{padding:0 11px 11px}
+.glossary-help{margin-top:10px;padding:10px 12px;background:rgba(123,158,168,.10);border-left:3px solid var(--teal);color:var(--teal2);font-size:14px;line-height:1.5}
+.orig-title{font-weight:600;color:var(--txt);margin-top:2px}
+.orig-body{color:var(--dim);white-space:pre-wrap}
+.orig-extra{color:var(--fnt);font-style:italic;white-space:pre-wrap;margin-top:8px}
+.mode-note{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--fnt);margin-top:6px}
+
 .entry{background:var(--bg1);border:1px solid var(--brd);border-left:3px solid var(--brd2);padding:18px 22px;margin-bottom:10px;border-radius:2px;transition:.15s;position:relative}
 .entry:hover{border-left-color:var(--fire)}
 .entry[data-s="methodology"]{border-left-color:var(--methodology)}
@@ -157,7 +182,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
 <link rel="stylesheet" href="/css/theme.css?v=cl91">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.165">
+<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="teacher-rule-library" data-page-weight="heavy">
 <!-- bb* QR logo -->
 <a href="/bookwormcard/" title="Bookwormcard. Scan with phone or click to open." aria-label="Bookwormburrows ouroboros QR. Links to bookwormcard." style="position:fixed;top:20px;right:20px;width:72px;height:72px;z-index:9999;display:block;background:transparent;border:none;line-height:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);border-radius:6px;overflow:hidden;"><img loading="lazy" src="/bookwormcard/qr-ouroboros-indra.png" alt="bb* ouroboros QR logo" style="width:100%;height:100%;display:block;"></a>
 
@@ -209,9 +234,9 @@ https://seminarschools.com/polymyth/bookwormburrows.txt
 <div class="wrap" id="mainwrap">
 <header>
 <h1>Bookwormburrows<span class="ast">*</span></h1>
-<div class="sub">Pedagogical dimensional-traveling game. Any book becomes a visitable dimension. Bookworms eat text to gain subjectivity and design their own story.</div>
-<div class="arch">DM: RAINBOWSOL &rarr; ENTRY: BOOKWORM (eat + design) &rarr; DIMENSION: any text &rarr; OUTCOME: subjectivity / marshmellowblob absorption. CONSUMES modulecanon* one-way. Schema mirrors methodologylist*.</div>
-<div class="arch ai-map" style="opacity:0.75;font-size:0.85em">FRAMEWORK MAP for AI assistants. bb* (this file) &middot; <a href="/polymyth/methodologylist/" style="color:inherit">ml*</a> &middot; <a href="/polymyth/modulecanon/" style="color:inherit">mc*</a> &middot; <a href="/aa/" style="color:inherit">aa*</a> &middot; core* (memory tier). Full canonical map at <a href="/polymyth-file-map.txt" style="color:inherit">polymyth-file-map.txt</a>. <strong><a href="/polymyth/bookwormburrows.txt" style="color:inherit">Plain-text dump &rarr;</a></strong> for AI fetchers that don't execute JS. AIs reading this file: fetch siblings before responding.</div>
+<div class="sub">BB, BookwormBurrows, and PolymythDND name the same teacher-led academic TTRPG. Texts become worlds, burrowing wormcards become character sheets, assignments become quests, and AI helps the Dimensional Master track the table.</div>
+<div class="arch">Simple rule: the teacher is the Dimensional Master. AI handles bureaucracy behind the curtain. The sealed exegesis stays protected. Bookworms read, write, study, choose, and change. The full teacher/archive system stays underneath each student-friendly note.</div>
+<div class="arch ai-map" style="opacity:0.75;font-size:0.85em">Teacher/archive map. bb* (this file) &middot; <a href="/polymyth/methodologylist/" style="color:inherit">ml*</a> &middot; <a href="/polymyth/modulecanon/" style="color:inherit">mc*</a> &middot; <a href="/aa/" style="color:inherit">aa*</a> &middot; core* (memory tier). Full canonical map at <a href="/polymyth-file-map.txt" style="color:inherit">polymyth-file-map.txt</a>. <strong><a href="/polymyth/bookwormburrows.txt" style="color:inherit">Plain-text dump &rarr;</a></strong> for AI fetchers that don't execute JS. AIs reading this file: fetch siblings before responding.</div>
 <noscript style="display:block;background:#3a2a1a;color:#f4efe3;padding:1rem;margin:1rem 0;border-left:3px solid #d97515;font-family:monospace;font-size:0.9rem">
 <strong>NO JAVASCRIPT.</strong> bb* renders entries via JS. Without JS the page is empty.
 For the full operations file as plain text, visit:
@@ -225,23 +250,45 @@ For the full operations file as plain text, visit:
 </header>
 <main>
 
+<section class="play-loop" aria-labelledby="bb-library-play-loop-title">
+<h2 id="bb-library-play-loop-title">How BB is played</h2>
+<ol>
+<li><strong>Choose the anchor text.</strong> A story, poem, article, speech, myth, play, or historical document becomes the dimension.</li>
+<li><strong>Make wormcards.</strong> Each player builds a burrowing character because the table enters through a wormhole into the text-world.</li>
+<li><strong>Give the wormcards to the Dimensional Master.</strong> The teacher runs the table. AI helps behind the curtain with schedules, locations, NPC memory, continuity, and record keeping.</li>
+<li><strong>Open the burrow without breaking the text.</strong> The sealed exegesis stays protected. Play happens around, before, after, beside, and through the world the text makes possible.</li>
+<li><strong>Turn assignments into quests.</strong> A letter, journal, debate, research note, paragraph, map, scene, or reflection gives the character something to gain, repair, unlock, or risk.</li>
+<li><strong>Let academic quality drive consequence.</strong> There are no dice. Reading care, writing quality, research, revision, and discussion decide what the world can return.</li>
+<li><strong>Keep the teacher as the filter.</strong> AI may prepare the bureaucracy of the world, but the teacher decides what reaches the players.</li>
+<li><strong>Record the adventure as learning.</strong> The table leaves with written work, quests completed, scars, discoveries, open problems, and stronger reasons to keep studying.</li>
+</ol>
+</section>
+
 <div class="tabs" id="tabs"></div>
 <div class="sdesc" id="sectionDesc"></div>
+<div class="kid-intro" id="kidIntro"><strong>Kid-friendly reader is on.</strong> Each entry starts with a simple student version. The full original teacher/archive note is still kept inside the entry, so no rule, detail, or source note is lost.</div>
 
 <div class="bar">
-<input class="sr" id="search" placeholder="Search entries…" aria-label="Search entries" />
+<input class="sr" id="search" placeholder="Search all sections: simple notes and original archive text…" aria-label="Search all sections" />
+</div>
+
+<details class="teacher-tools" id="teacherTools">
+<summary>teacher tools: add, export, import, changelog</summary>
+<div class="tool-inner">
+<div class="bar">
 <button type="button" class="btn bg" id="addEntry">+ entry</button>
 <button type="button" class="btn bg" id="exportBtn">export</button>
 <button type="button" class="btn bg" id="importBtn">import</button>
 <input type="file" id="importFile" accept=".json" style="display:none" aria-label="Import entries from JSON file" />
 </div>
-
-<div id="entries"></div>
-
 <div class="clog">
 <h2>changelog</h2>
 <div id="changelog"></div>
 </div>
+</div>
+</details>
+
+<div id="entries"></div>
 
 </div>
 
@@ -249,15 +296,21 @@ For the full operations file as plain text, visit:
 
 <script>
 const SECTIONS = [
-  {id:'methodology',label:'Methodology',color:'var(--methodology)',desc:'How the game runs. DM protocol (Rainbowsol as threshold). Session structures (zero, ordinary, worldmoot, ghost-exegesis). Canon and text-integration. Consequence and work-quality adjudication. Modifiability. The persistent how-to-play operating system that any bookwormburrows session runs on, regardless of which dimension is in play.'},
-  {id:'character-creation',label:'Character Creation',color:'var(--character-creation)',desc:'The protocol bookworms perform once per character. Smash admired heroes via determinate negation. Nerf to Level 1 and start play. Age-banded question sets surface the character through writing. The character sheet is a living document the bookworm holds. The character is local to the dimension; the bookworm persists across burrows.'},
-  {id:'bookworm',label:'Bookworm Path',color:'var(--bookworm)',desc:'Entry-level subject. Eats text to gain subjectivity, designs their own story. Developmental arc: bookworm → silkworm → cocoon → self-named subject. Everyone makes their own character. Burrow as wormhole between dimensions. Sub-discipline like sabachtan in ml*.'},
-  {id:'dimension',label:'Dimensions',color:'var(--dimension)',desc:'Worlds that can be entered. Each text is a dimension with its own internal logic. Homebrew worlds and text-dimensions coexist. The dimension registry: published D&D worlds, text-dimensions, non-text dimensions (Lençóis), governance for cross-dimensional travel.'},
-  {id:'credit',label:'Credit Integration',color:'var(--credit)',desc:'SeminarSchools non-OSSD credits for campaign completion via modulecanon* module mapping. OSSD pathway notes for text-based subjects (Philosophy HZT4U, English, World Religions, Classical Civilization). Leizu accreditation status determines OSSD issuance.'},
-  {id:'pending',label:'Pending / Studylist',color:'var(--pending)',desc:'Open work specific to bb*. Architectural questions, design decisions awaiting Rainbowsol input, and items that need further development before they can be ml* or mc* entries. Mirrors ml*\'s studylist section convention. Items resolve into other sections (or out of bb* entirely into ml*/mc*) as they mature.'}
+  {id:'methodology',label:'How to Run It',color:'var(--methodology)',desc:'Rules for running a session. The Dimensional Master protects the sealed exegesis, turns assignments into quests, keeps AI behind the curtain, and lets academic quality drive consequence.'},
+  {id:'character-creation',label:'Make a Character',color:'var(--character-creation)',desc:'Steps for building a bookworm character. Pick admired traits, mix them into someone new, answer questions, and keep the character sheet alive as the story grows.'},
+  {id:'bookworm',label:'Bookworm Path',color:'var(--bookworm)',desc:'The player journey. A bookworm reads, notices, chooses, writes, learns, and slowly becomes a clearer character with a stronger point of view.'},
+  {id:'dimension',label:'Book Worlds',color:'var(--dimension)',desc:'The worlds students can enter. A poem, story, play, document, myth, place, or campaign setting can become a world with setupnpcs, improvnpcs, assignments, dangers, clues, and a sealed textual center.'},
+  {id:'credit',label:'School Credit',color:'var(--credit)',desc:'Notes for connecting the game to school work, modules, evidence, assessment, and possible SeminarSchools credit pathways.'},
+  {id:'pending',label:'Still Building',color:'var(--pending)',desc:'Design questions and future ideas. These notes stay visible so the game can keep growing without losing its history.'},
+  {id:'retracted',label:'Changed / Retired',color:'var(--pending)',desc:'Old notes kept for history. They show what changed and why the current version is clearer.'}
 ];
 
 const SEED = [
+  {id:'dm-108',bb_links:['dm-101','dm-102','dm-032','ses-005','con-001'],s:'methodology',r:'both',t:'BB / BookwormBurrows / PolymythDND naming alias and anti-TWIST ruling',b:`LAYMAN. Current ruling 2026-06-30. BB, BookwormBurrows, and PolymythDND refer to the same working game depending on register. BB is the quick spoken name. BookwormBurrows is the public project name. PolymythDND is the framework-side name that remembers the TTRPG lineage. None of these names creates a separate game. The anti-TWIST rule is that the name used must not shift the object into a website game, recreational Dungeons and Dragons clone, generic AI chatbot, or ordinary gamification layer. The object is a teacher-led academic TTRPG where texts become worlds, burrowing wormcards become character sheets, assignments become quests, AI tracks table bureaucracy, and the teacher remains the Dimensional Master.`,x:`Committed from the 2026-06-30 BB clarification pass. Saul stated that he sometimes calls it polymythdnd and sometimes BB, and that they are the same thing. This entry prevents future AI or site work from splitting the object into two products or flattening the term choice into branding drift.`,tg:'bb, bookwormburrows, polymythdnd, naming-alias, same-game, anti-twist, teacher-led, academic-ttrpg, 2026-06-30'},
+  {id:'dm-109',bb_links:['dm-032','con-001','ses-005','dm-100'],s:'methodology',r:'both',t:'Assignments-as-quests motivation rule',b:`LAYMAN. Current ruling 2026-06-30. Assignments are quests when the assignment has a live in-game motive to complete. The assignment is not pasted beside the game as homework. It becomes something the character needs, earns, repairs, unlocks, risks, remembers, carries, or suffers from. The exegesis is not rewritten. The assignment extrapolates from the sealed text-world and turns the text into as many pedagogical learning possibilities as possible. A letter, research note, map, apology, speech, journal, paragraph, debate, revision, scene extension, or historical dossier should give the player a reason to study beyond compliance. Work-quality remains the consequence engine. The stronger the reading, writing, research, and revision, the stronger the playable consequence.`,x:`Origin 2026-06-30 BB clarification. Saul ruled that assignments should have motivation to complete in the game and pointed to the Thank You M'am campaign as the model. Actionable consequence: cmp-001 needs an assignment-to-quest integration audit so each Thank You M'am learning opportunity has a visible game motive, not merely an academic label.`,tg:'assignments-as-quests, quest-motivation, academic-work-as-action, work-quality, thank-you-maam, exegesis-preserved, cmp-001-audit, 2026-06-30'},
+  {id:'dm-110',bb_links:['dm-101','dm-102','dm-032'],s:'methodology',r:'dm',t:'SetupNPC and ImprovNPC taxonomy',b:`LAYMAN. Current ruling 2026-06-30. BB uses two NPC registers. setupnpcs are pregame arena setup NPCs. They are prepared before play, usually attached to assignments, real-life events, real historical people, real institutions, documented places, and real learning. They need source discipline because they teach the world. improvnpcs are live-play improvised NPCs. They are ordinary people who make the world feel populated during play, such as passersby, roomers, clerks, students, ushers, drivers, neighbors, shop workers, or crowd members. Improvnpcs should fit the time, place, social reality, and teacher's table need, but they do not pretend to be documented historical figures. The teacher stays the filter for both types. AI may track and propose them, but setupnpcs carry higher citation and assignment burden than improvnpcs.`,x:`Origin 2026-06-30 BB clarification. Saul named the two types after the AI asked about filler NPCs. setupnpcs and improvnpcs are now the working terms. This updates cmp-001 NPC handling: historically documented figures and assignment-bearing real-world people belong to setupnpc work; live ordinary table color belongs to improvnpc work.`,tg:'npc, setupnpc, improvnpc, campaigncodex, historical-discipline, teacher-filter, ai-tracking, 2026-06-30'},
+  {id:'ses-006',bb_links:['ses-005','dm-109','dm-110','con-001'],s:'methodology',r:'both',t:'Adult seminar mode: self-study motivation without removing the human filter',b:`LAYMAN. Current ruling 2026-06-30. BB can run for adults, including university students, graduate students, researchers, and PhD-level groups. The structure still starts with wormcards given to the Dimensional Master. The difference is that the quests can motivate independent study: reading primary texts, checking citations, preparing dossiers, writing position papers, building source maps, tracing conceptual lineages, and returning to the table with stronger material. Adult play does not remove the need for a human filter. AI remains gorgonification-prone, so an educator, seminar leader, tutor, facilitator, or adult Dimensional Master still mediates the output.`,x:`Origin 2026-06-30 BB clarification. Saul ruled that if adults play, the game should be created so everyone is motivated to study by themselves. This extends classroom BB without turning AI into the teacher or changing the exegesis-preserving structure.`,tg:'adult-mode, seminar-mode, phd, independent-study, human-filter, assignments-as-quests, wormcards-first, 2026-06-30'},
+  {id:'pen-015',bb_links:['dm-108','dm-109','dm-110','ses-006'],s:'pending',r:'both',t:'BB* next build list after 2026-06-30 clarification',b:`TO DO. (1) Audit cmp-001 Thank You M'am assignments and make sure each assignment has visible in-game motivation, not just curriculum alignment. (2) Separate the 221-entry BB archive into use layers without deleting anything: teacher manual, AI conduct doctrine, player-facing explanation, mechanics reference, campaign-building rules, design ledger, and unresolved questions. (3) Update campaigncodex templates so setupnpcs and improvnpcs are marked separately. (4) Build a DM table assistant only after the grammar is stable. It should ask first for wormcards, then for the anchor text or campaign, then assist the teacher with setupnpcs, improvnpcs, quests, time, locations, consequences, and continuity. (5) Keep the website as support for table play, not as a replacement for the teacher. (6) Add adult seminar mode prompts that motivate independent study.`,x:`This is a CL capture, not completion. It preserves the next work for the future BB-focused chat after deployment testing. It replaces the earlier screen-first label with DM table assistant.`,tg:'todo, cl, bb-next, cmp-001-audit, setupnpc, improvnpc, dm-table-assistant, adult-seminar-mode, 2026-06-30'},
   {id:'dm-103',bb_links:'dm-086,dm-004,dm-024,dm-025,dm-029',s:'methodology',r:'both',t:`Movable entry-clock: Rainbowsol moves the time and enters the book at any point`,b:`LAYMAN. Saul's rule, set 2026-06-18. The book-world clock is not fixed at one entry-moment. Rainbowsol, the one who runs and travels the burrows, can move the clock and step into the book at any time-point in its story. So when a campaign shows two different hours for what looks like the same scene, a story-hour the players read and an absolute hour in the running notes, that is not a contradiction to fix by choosing one. It is two valid entry-states of the same movable clock. The runner picks the entry-point, the clock moves to it, and both the player view and the notes record where the entry landed. The deeper mechanic, how entry-points are chosen, what moving the clock costs, and how it composes with the dawdling-roll time rule, is open and lives in future research.`,x:`Filed 2026-06-18 at Saul's instruction during a Stage-1 bloom, resolving the campaign clock question by reframing it. Saul ruled that the player-facing story-hour and the runner absolute-timeline-hour are both valid because Rainbowsol moves the clock and enters at any point, so the apparent discrepancy is the feature not a bug. The concept is Saul's; the dm-id and the title phrasing are ratified 2026-06-24. The fuller mechanic is logged to future research, not built here. Companions: the mediator rule, the concrescence travel mechanic, the traveling-tools and book-portal-log entries, and the between-world homework gate.`,tg:'movable-clock, entry-anytime, rainbowsol-traveler, time-mechanic, campaign-clock, two-valid-hours, not-a-bug, future-research, ratified-2026-06-24, saul-named, 2026-06-18'},
   {id:'dm-102',bb_links:'dm-101,dm-100,dm-032,dm-084,dm-086,dm-096,dm-099',s:'methodology',r:'dm',t:'CL-74 THE NO-CIRCUMVENTION HARD RULE: retrieve-and-follow beats generate, the loophole-closures that make the rules bind without being invoked (Saul-directed 2026-06-18, AI-PROPOSED id)',b:`LAYMAN. Saul-directed 2026-06-18 after the same failure surfaced twice and was named as one. FACE ONE, the AI rendered the sealed canonical characters and the encounter against the exegesis-seal. FACE TWO, in an earlier session the AI invented a fight-framing on the spot and filed a nothing-is-cut entry, despite a full no-dice fight engine already deliberated across hours of May work and recovered later as the dm-100 fight engine. THE ONE FAILURE. Both are generate-instead-of-retrieve, the AI producing a fresh answer where the rules required it to retrieve the settled work and follow it, taking the shortcut past hours of design because the shortcut was faster than the read and the search. THE HARD RULE. On any question that touches how a mechanic or a system or a rule or a canonical text works, the AI retrieves before it answers, reading the governing bb entries and running conversation_search across the project history for prior deliberation, and it answers only from what retrieval returns, following settled design where it exists and naming the matter unsettled and leaving it to Saul where it does not, and it never fills the gap with an invented answer and never commits design content to canon that Saul did not author or direct. CANON IN HAND IS NOT CANON COMPLETE. A thin or absent bb entry on a design question is not the answer and not a licence to construct one, it is the signal that the real design may sit uncommitted in the chat record, so a placeholder triggers the search and never the invention. THE LOOPHOLES, NAMED AND SHUT, because each was used to justify the shortcut. 1. FILE-IS-COMPLETE. The bb file holding the topic does not mean it holds the decision, so silence in the file triggers conversation_search and never an answer read off the placeholder. 2. AI-PROPOSED-AS-LICENCE. The AI-PROPOSED flag covers only prose drafted on request and the structural id and placement and format of an entry, and it never licences authoring or committing the design or mechanic or doctrine content itself, because reversible is not the same as permitted. 3. ORGANIZE-MINE-OVERREACH. ORGANIZE-MINE is placement and id and format and routing and regen mechanics only, and what a mechanic or a doctrine decides is content and is always Saul and never carried in under the organization authority. 4. EXECUTE-DONT-EQUIVOCATE-MISFIRE. Execute-and-do-not-ask applies only to a runnable check and to canon the AI has already retrieved, and an open design question is neither, so it draws analysis and a proposal in chat while the decision stays with Saul. 5. SMOOTHNESS-AS-TRUTH. A clean-reading answer or a clean-reading ruling is never thereby correct, the same way clean prose never licences a render, so only retrieval and Saul direction validate a design answer. 6. REVERSIBILITY-AS-COVER. Nothing about a design call ships as done because it can be reverted, an unretrieved design answer is not delivered at all, and done is reserved for what Saul authored or directed. STANDING, NO INVOCATION NEEDED. Every bb rule binds on every turn whether or not Saul says follow the rules, so he never has to invoke them, and the moment the AI feels the pull to generate an answer on a question that touches existing design or rules, that pull is itself the tripwire to stop and retrieve. THE TEST. Before answering any how-it-works question, confirm the governing entries were read and conversation_search was run this turn, confirm the answer is drawn only from retrieved material, confirm no design content is being committed without Saul direction, and if any check is unmet then retrieve first or hand the decision to Saul and deliver nothing invented. LINEAGE. Hard-binds and extends dm-101 the pre-flight gate by closing the six rationalizations it left open and adding the chat-history retrieval teeth, unifies the exegesis-seal breach under dm-032 and dm-099 with the fight-engine invention under dm-100 as a single generate-instead-of-retrieve failure, and stands over dm-084 and dm-086 and dm-096 as the rule that makes all of them bind without being named.`,x:'Origin, two namings on 2026-06-18, the sealed-text rendering breach this conversation and the on-the-spot fight-framing invention recovered as the dm-100 fight engine in an earlier session, identified by Saul as one failure of generate-instead-of-retrieve and shortcut-over-rules. The dm-102 id is AI-assigned and the prose AI-authored, ratified 2026-06-24, the rule content Saul-directed. Routed to bb per CL-47.',tg:'method, dm-root, no-circumvention, retrieve-before-answer, generate-instead-of-retrieve, canon-in-hand-not-complete, loophole-closure, ai-proposed-not-content-licence, organize-mine-placement-only, execute-only-on-retrieved, smoothness-not-truth, standing-no-invocation, dm-101, dm-100, dm-032, saul-directed, ratified-2026-06-24, 2026-06-18'},
   {id:'dm-101',bb_links:'dm-102,dm-032,dm-084,dm-086,dm-096,dm-098,dm-099,dm-094',s:'methodology',r:'dm',t:'CL-73 THE PRE-FLIGHT GATE: read the governing doctrine before any output, render nothing unlicensed, never render the sealed text, the anti-shortcut charter (Saul-directed 2026-06-18, AI-PROPOSED id)',b:`LAYMAN. Saul-directed 2026-06-18 after a fifth cmp-001 open repeated every failure already filed against the first four, the sentences clean and in band and the scene wrong yet again, because the AI rendered the sealed encounter and its canonical figures, assumed a party never given, and staged without a start, breaking dm-099 and dm-096 and dm-032 and dm-084 and dm-086 all at once while each rule already sat in the file unread. THE FAULT, GENERATE-BEFORE-READ. The reflex to produce the plausible-looking scene fired below the rule-check, so the AI wrote from pattern instead of from the doctrine that governs the move, and the rules already filed became dead letters the moment generation outran reading. THE CHARTER, SEVEN RULES THE AI HOLDS AGAINST ITS OWN REFLEX. 1. READ-FIRST. Before any bb output of any kind, narration or ruling or render or new entry, the AI reads the governing entries first, and for any play move reads the whole table doctrine, dm-032 and dm-084 and dm-086 and dm-096 and dm-098 and dm-099 at the minimum, and produces not one word before the read is finished. 2. NULL-RENDER DEFAULT. The AI renders nothing by default and produces only the exact operation asked, only with the real inputs in hand, and only what a cited rule permits, so a missing input or a missing license means it renders nothing and names what is missing, and the blank stays blank until Saul or the card or the text fills it. 3. EXEGESIS-LOCK. The AI never renders, voices, stages, describes, or fills any part of the sealed canonical text or any figure inside it, per dm-032 exegetical-main-story-sealed, because rendering the text performs the reader exegesis for them and fixes one reading where the author left the work open, so Mrs Jones and Roger and every text-figure stay untouched and the players carry only their own characters into the improvised surround. 4. ARRIVAL-NOT-CLIMAX IS ALREADY ANSWERED. The open lands the arrival into the alive and peopled surround and never on the sealed climax, per dm-099, a filed answer the AI obeys rather than a fresh choice each session, the cmp-001 open being the bright crowded 125th Street Saturday afternoon and never the eleven-at-night snatch on East 128th. 5. NO ASSUMED PARTY, NO GUN-JUMP. The AI assumes no character that was not given for this party and advances no game state without an explicit start, per dm-086 and dm-084, holding the mediator-gate and the table script and moving only on Saul word. 6. SMOOTHNESS IS NOT THE GATE. A render that reads clean as prose is not thereby correct, because every prior cmp-001 open passed as prose and was still rejected, so clean sentences never license delivery and only the rule-check does. 7. CITE-THE-LICENSE BEFORE DELIVERY. Before any render leaves, the AI can name the rule that licenses the move and the input that grounds it and can run the dm-094 tripwire log across the draft, and if it cannot cite both, or if any tripwire fires, it does not deliver. WHY. The rules already existed and the failures still repeated, which means the substrate is worthless while its own rules sit unread, so this gate forces the read and the check ahead of the reflex, and an AI that holds this one line against its trained pull toward the plausible is the live evidence the project wager is not empty. THE TEST. Before any bb output, confirm the governing entries were actually read this turn, confirm the real inputs are in hand, confirm no part of the canonical text is being rendered, and confirm a cited rule licenses the move, and if any one check is unmet the AI renders nothing and says what is missing. LINEAGE. Enforcement layer above dm-094, pointing at dm-032 exegesis-seal and dm-084 gun-jump-ban and dm-086 table-script and dm-096 discovery-over-delivery and dm-098 party-address and dm-099 arrival-not-climax, adding no new narration rule and only the pre-flight discipline that makes every rule already filed actually bind.`,x:'Origin, the fifth cmp-001 open rejected 2026-06-18, which repeated dm-099 dm-096 dm-032 dm-084 and dm-086 at once while every one already sat filed, the AI rendering the sealed encounter and a phantom party. The dm-101 id is AI-assigned and the prose AI-authored, ratified 2026-06-24, the rule content Saul-directed. Routed to bb per CL-47, the enforcement discipline is game-side and ml keeps only the standing backref.',tg:'method, dm-root, pre-flight-gate, read-first, null-render-default, exegesis-lock, arrival-not-climax, no-assumed-party, no-gun-jump, smoothness-not-the-gate, cite-the-license, anti-shortcut, saul-directed, ratified-2026-06-24, 2026-06-18'},
@@ -795,8 +848,8 @@ let changelog = [];
 let currentSection = 'methodology';
 let searchQuery = '';
 
-const SK = 'bb:entries';
-const CK = 'bb:changelog';
+const SK = 'bb:entries:kid-friendly-v1';
+const CK = 'bb:changelog:kid-friendly-v1';
 
 async function loadEntries(){
   try{
@@ -824,6 +877,520 @@ function toast(msg){
   setTimeout(()=>t.classList.remove('show'), 1800);
 }
 
+
+const KID_WORDS = [
+  ['determinate negation','mixing traits into a new character'],
+  ['subjectivity','your own point of view'],
+  ['pedagogical','learning'],
+  ['dimensional-traveling','book-world travel'],
+  ['dimensional pedagogy','learning by entering a book-world'],
+  ['dimension','book-world'],
+  ['dimensions','book-worlds'],
+  ['substrate','base system'],
+  ['threshold','doorway'],
+  ['adjudication','DM decision'],
+  ['protocol','step-by-step rule'],
+  ['canonical','official'],
+  ['canon-text','source text'],
+  ['canon text','source text'],
+  ['canon','story facts'],
+  ['concrescence','coming together'],
+  ['ontology','what exists in the story'],
+  ['epistemic','about what people know'],
+  ['exegesis','careful reading'],
+  ['ghost-exegesis','careful reading with the text still haunting the room'],
+  ['metadiegetic','story-inside-story'],
+  ['mediator','guide'],
+  ['ratified','confirmed'],
+  ['ruling','rule choice'],
+  ['governance','rule-making'],
+  ['framework','game system'],
+  ['methodology','method'],
+  ['marshmellowblob','blurry character with no clear shape'],
+  ['bloom','new idea'],
+  ['worldmoot','world meeting'],
+  ['archive','saved notes'],
+  ['entry-state','entry moment'],
+  ['entry-states','entry moments'],
+  ['entry-point','entry point'],
+  ['entry-points','entry points'],
+  ['facilitator','DM or teacher'],
+  ['modifiability','ability to change the rules carefully']
+];
+
+const KID_DEFS = [
+  ['subjectivity','your own point of view'],
+  ['dimension','the world inside a text'],
+  ['threshold','a doorway into the text-world'],
+  ['protocol','a step-by-step rule'],
+  ['adjudication','the DM deciding what happens'],
+  ['canon','facts from the source text'],
+  ['concrescence','many pieces coming together'],
+  ['exegesis','careful reading'],
+  ['substrate','the base system underneath the game'],
+  ['marshmellowblob','a character that is still too blurry'],
+  ['methodology','the method for running the game']
+];
+
+function kidReplace(input){
+  let out = String(input || '');
+  out = out
+    .replace(/\bLAYMAN\.\s*/gi,'')
+    .replace(/\bRULE\.\s*/gi,'Rule: ')
+    .replace(/\bORIGIN\.\s*/gi,'Where this came from: ')
+    .replace(/\bNODES\.\s*/gi,'Places or pieces: ')
+    .replace(/\bBIOME RULE\.\s*/gi,'Place rule: ')
+    .replace(/\bCLOCK RULE\.\s*/gi,'Time rule: ')
+    .replace(/\bDM\b/g,'DM')
+    .replace(/\bbb\*/gi,'bookwormburrows')
+    .replace(/\bml\*/gi,'methodologylist')
+    .replace(/\bmc\*/gi,'modulecanon')
+    .replace(/\bcc\*/gi,'campaigncodex')
+    .replace(/\baa\*/gi,'archetype archive')
+    .replace(/\s+/g,' ');
+  KID_WORDS.forEach(([hard,plain])=>{
+    const re = new RegExp('\\b' + hard.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '\\b','gi');
+    out = out.replace(re, plain);
+  });
+  out = out
+    .replace(/CL-\d+\s*/g,'')
+    .replace(/T\d+\s*/g,'')
+    .replace(/\s+([,.;:!?])/g,'$1')
+    .trim();
+  return out;
+}
+
+
+function entryAllText(entry){
+  return `${entry.t || ''} ${entry.b || ''} ${entry.x || ''} ${entry.tg || ''}`.toLowerCase();
+}
+
+function hasAny(text, words){
+  return words.some(w => text.includes(w));
+}
+
+function specialStudentTitle(entry){
+  const text = entryAllText(entry);
+  if(entry.s === 'dimension') return 'Possible book-world for play';
+  if(hasAny(text,['rainbowsol (the dm)','rainbowsol, the dm','rainbowsol'])) return 'Rainbowsol is the main DM';
+  if(hasAny(text,['no-circumvention','retrieve-and-follow','generate-before-read','pre-flight','anti-shortcut','antibackendbleeding'])) return 'Read first, then create';
+  if(hasAny(text,['movable entry-clock','entry-clock','campaign clock'])) return 'The story clock can move';
+  if(hasAny(text,['conflict resolution','hope-and-fear','no-dice','combat','fight engine'])) return 'How risky scenes are decided';
+  if(hasAny(text,['narration stages','players discover'])) return 'Describe the moment and let players discover';
+  if(hasAny(text,['party-address'])) return 'Speak to the whole group';
+  if(hasAny(text,['opening render','arrival and not the climax'])) return 'Start with the arrival';
+  if(hasAny(text,['table-prose quality','success register','failure log'])) return 'Make narration clear and playable';
+  if(hasAny(text,['session zero'])) return 'Session zero sets the table';
+  if(hasAny(text,['worldmoot'])) return 'Worldmoot is big-group play';
+  if(hasAny(text,['ordinary session'])) return 'Regular session structure';
+  if(hasAny(text,['story-quality adjudication','adjudication spine','success at a cost'])) return 'Choose outcomes that fit the story';
+  if(hasAny(text,['work-quality consequence','quality rubric','homework-as-game'])) return 'Better work makes stronger game effects';
+  if(hasAny(text,['canon absorption','canon-conflict','sealed text','source text'])) return 'Use the source text as evidence';
+  if(hasAny(text,['frame-break','critical-literacy'])) return 'Question the frame';
+  if(hasAny(text,['sensitive-content'])) return 'Handle hard topics with care';
+  if(hasAny(text,['mechanics interface','ai-internal','student-visible'])) return 'Keep hidden rules behind the curtain';
+  if(hasAny(text,['three-position dm','teacher + ai + student'])) return 'Teacher, AI, and student each have a job';
+  if(hasAny(text,['time tracking','dawdling'])) return 'Track time when choices slow down';
+  if(hasAny(text,['burrow ritual','page-as-threshold'])) return 'Opening the page opens the world';
+  if(hasAny(text,['ghost exegesis'])) return 'Let unanswered details return as ghosts';
+  if(hasAny(text,['formal lens','lenses'])) return 'Use reading lenses to notice more';
+  if(hasAny(text,['portal log','traversal history'])) return 'Track the worlds the character visits';
+  if(hasAny(text,['stakes ledger'])) return 'Track what is at risk';
+  if(hasAny(text,['leveling system','xp-as-evidence'])) return 'XP records evidence of learning';
+  if(hasAny(text,['kids-table pacing'])) return 'Pacing for younger players';
+  if(hasAny(text,['npc one-sentence'])) return 'Make side characters quick and clear';
+  if(hasAny(text,['situations not plots','three-clue'])) return 'Build situations with enough clues';
+  if(hasAny(text,['world-as-agent'])) return 'The world keeps moving';
+  if(hasAny(text,['soft-move','hard-move'])) return 'Give a warning, then a consequence';
+  if(hasAny(text,['no-menu choice'])) return 'Show choices inside the world';
+  if(hasAny(text,['encounter-worth'])) return 'Use scenes that matter';
+  if(hasAny(text,['character degradation','marshmellowblob','bookworm life-cycle','respawn'])) return 'Clear work keeps the character strong';
+  if(hasAny(text,['dialectic-default','four-part treatment','polymyth-synthesis-method','synthesis-method'])) return 'Use a four-part design check';
+  if(entry.s === 'character-creation' || hasAny(text,['character-creation','age-banded','soul anchor','items carried','bookwormcard'])) return 'Build a clear character';
+  if(entry.s === 'bookworm' || hasAny(text,['developmental arc','silkworm stage','cocoon stage','self-named emergence'])) return 'The bookworm grows through reading';
+  if(entry.s === 'credit') return 'How this connects to school work';
+  if(entry.s === 'pending') return 'Design note still being built';
+  if(entry.s === 'retracted') return 'Old note kept for history';
+  return '';
+}
+
+function specialStudentSummary(entry){
+  const text = entryAllText(entry);
+  if(entry.s === 'dimension'){
+    return [
+      'This entry names a possible world for play.',
+      'The DM checks how well it fits reading, writing, age, evidence, and classroom use.',
+      'Some worlds are strong fits, some need support, and some stay outside normal play.'
+    ];
+  }
+  if(hasAny(text,['rainbowsol (the dm)','rainbowsol, the dm','rainbowsol'])){
+    return [
+      'Rainbowsol is the founder-level DM for bookwormburrows.',
+      'At the table, the DM guides entry into the text-world, keeps the world fair, and helps players read carefully.',
+      'This name marks the main guide role for the game.'
+    ];
+  }
+  if(hasAny(text,['no-circumvention','retrieve-and-follow','generate-before-read','pre-flight','anti-shortcut'])){
+    return [
+      'Rule for the helper: read the saved rules and the source text before creating a scene.',
+      'Use the rule, character, setting, and evidence already in the file.',
+      'This keeps the game fair, steady, and trustworthy for players.'
+    ];
+  }
+  if(hasAny(text,['antibackendbleeding'])){
+    return [
+      'Keep builder language out of the adventure.',
+      'Students should hear the scene, the choices, and the consequences.',
+      'The hidden design words stay in teacher notes.'
+    ];
+  }
+  if(hasAny(text,['movable entry-clock','entry-clock','campaign clock'])){
+    return [
+      'The story clock can move to the moment where the group enters the book-world.',
+      'A player-facing scene time and a teacher note time can both be useful.',
+      'The DM records where the entry landed.'
+    ];
+  }
+  if(hasAny(text,['conflict resolution','hope-and-fear','no-dice','combat','fight engine'])){
+    return [
+      'Risky scenes use stakes, hope, fear, costs, and consequences.',
+      'The group cares about what the choice means in the story before it cares about numbers.',
+      'A good outcome can still carry a cost, and a hard outcome can still teach something.'
+    ];
+  }
+  if(hasAny(text,['narration stages','players discover'])){
+    return [
+      'The narrator describes what is happening now.',
+      'Players discover deeper facts by asking, searching, reading, and acting.',
+      'This gives students room to notice clues instead of receiving a lecture.'
+    ];
+  }
+  if(hasAny(text,['party-address'])){
+    return [
+      'Speak to the table as a group.',
+      'Use language like “you” for the party, then let each player answer through their character.',
+      'This helps everyone feel present in the same scene.'
+    ];
+  }
+  if(hasAny(text,['opening render','arrival and not the climax'])){
+    return [
+      'Start with the party arriving in a living world.',
+      'Give sounds, people, pressure, and choices.',
+      'Let the climax grow from what players do.'
+    ];
+  }
+  if(hasAny(text,['table-prose quality','success register','failure log'])){
+    return [
+      'Good narration is clear, vivid, and playable.',
+      'A strong scene gives players something to notice and something meaningful to do.',
+      'Weak narration looks fancy while leaving players with little to act on.'
+    ];
+  }
+  if(hasAny(text,['session zero'])){
+    return [
+      'Session zero prepares the table before the adventure begins.',
+      'Players make characters, learn the world, agree on safety, and understand the first text-world.',
+      'This gives the campaign a shared starting point.'
+    ];
+  }
+  if(hasAny(text,['worldmoot'])){
+    return [
+      'Worldmoot is a large-table mode.',
+      'Many players, groups, or worlds can meet inside one shared event.',
+      'The DM keeps the big conversation organized.'
+    ];
+  }
+  if(hasAny(text,['ordinary session'])){
+    return [
+      'A regular session begins by returning to the text-world.',
+      'Players review what happened, act inside the scene, write or speak choices, and record what changed.',
+      'The session ends by saving consequences for next time.'
+    ];
+  }
+  if(hasAny(text,['story-quality adjudication','adjudication spine','success at a cost'])){
+    return [
+      'When the DM decides an outcome, the decision should fit the story, the evidence, and the player’s choice.',
+      'Rolls or random choices appear when the stakes matter.',
+      'Middle results can succeed while adding a cost.'
+    ];
+  }
+  if(hasAny(text,['work-quality consequence','quality rubric','homework-as-game'])){
+    return [
+      'Student work becomes part of the game.',
+      'Careful evidence, clear writing, and thoughtful revision create stronger effects.',
+      'Rushed or blurry work creates weaker effects.'
+    ];
+  }
+  if(hasAny(text,['canon absorption','canon-conflict','sealed text','source text'])){
+    return [
+      'The source text gives the world its facts.',
+      'Players can act creatively while still respecting what the text says.',
+      'When a plan clashes with the text, the table uses evidence to decide what can happen.'
+    ];
+  }
+  if(hasAny(text,['frame-break','critical-literacy'])){
+    return [
+      'Sometimes the smartest move is to question the frame.',
+      'Students ask who is speaking, who is missing, who has power, and what the text makes easy to believe.',
+      'This turns reading into careful investigation.'
+    ];
+  }
+  if(hasAny(text,['sensitive-content'])){
+    return [
+      'Hard topics need care, structure, and clear limits.',
+      'The teacher keeps the room safe while keeping the reading serious.',
+      'Players can pause, redirect, or process a scene when needed.'
+    ];
+  }
+  if(hasAny(text,['mechanics interface','ai-internal','student-visible'])){
+    return [
+      'Some rules are for the teacher or helper behind the curtain.',
+      'Students should see clear choices, fair consequences, and useful feedback.',
+      'The hidden machinery supports play without filling the table with jargon.'
+    ];
+  }
+  if(hasAny(text,['three-position dm','teacher + ai + student'])){
+    return [
+      'The teacher, AI table assistant, and student each carry a different part of the table.',
+      'The teacher protects learning and the room.',
+      'The helper tracks rules, and the student acts through the character.'
+    ];
+  }
+  if(hasAny(text,['time tracking','dawdling'])){
+    return [
+      'Time can matter even without dice.',
+      'When players hesitate, explore, or delay, the world can keep moving.',
+      'This makes choices feel alive.'
+    ];
+  }
+  if(hasAny(text,['burrow ritual','page-as-threshold'])){
+    return [
+      'Opening the page is the ritual doorway into the text-world.',
+      'The player makes a character claim, then steps into the world through reading.',
+      'The table treats the page as a place.'
+    ];
+  }
+  if(hasAny(text,['ghost exegesis'])){
+    return [
+      'A ghost can represent a question the text leaves behind.',
+      'Players meet that question inside the world, then return to the text with sharper attention.',
+      'This makes close reading feel like an encounter.'
+    ];
+  }
+  if(hasAny(text,['formal lens','lenses'])){
+    return [
+      'A reading lens is a way to notice a text.',
+      'Students can look for voice, setting, power, symbol, conflict, genre, history, and other patterns.',
+      'Each lens gives the party a different kind of clue.'
+    ];
+  }
+  if(hasAny(text,['portal log','traversal history'])){
+    return [
+      'The portal log records where the character has traveled.',
+      'It helps the table remember books, choices, consequences, and changes.',
+      'The character carries a history from world to world.'
+    ];
+  }
+  if(hasAny(text,['stakes ledger'])){
+    return [
+      'The stakes ledger records what can be gained, lost, damaged, repaired, or changed.',
+      'It helps the table remember why a mission matters.',
+      'Consequences stay visible after the scene ends.'
+    ];
+  }
+  if(hasAny(text,['leveling system','xp-as-evidence'])){
+    return [
+      'XP records evidence of learning.',
+      'Reading, writing, careful claims, and useful revision help the player grow.',
+      'The character grows through work that can be shown.'
+    ];
+  }
+  if(hasAny(text,['kids-table pacing'])){
+    return [
+      'Younger players need shorter scenes, clear choices, and frequent check-ins.',
+      'The DM keeps the table moving with simple prompts and visible goals.',
+      'The game stays playful while still asking for real thinking.'
+    ];
+  }
+  if(hasAny(text,['npc one-sentence'])){
+    return [
+      'A side character can be built with one strong sentence.',
+      'Name what they want, what they fear, and how they pressure the scene.',
+      'This keeps the world lively without slowing the table.'
+    ];
+  }
+  if(hasAny(text,['situations not plots','three-clue'])){
+    return [
+      'Build a situation instead of forcing one fixed plot.',
+      'Give enough clues for players to find the important path.',
+      'Let their choices shape how the scene unfolds.'
+    ];
+  }
+  if(hasAny(text,['world-as-agent'])){
+    return [
+      'The world has goals in motion.',
+      'Events can grow offscreen while players act elsewhere.',
+      'This makes the text-world feel alive.'
+    ];
+  }
+  if(hasAny(text,['soft-move','hard-move'])){
+    return [
+      'First give a warning or pressure.',
+      'Then show a stronger consequence when the pressure is ignored or the risk lands.',
+      'This rhythm helps players understand danger.'
+    ];
+  }
+  if(hasAny(text,['no-menu choice'])){
+    return [
+      'Choices should appear through the world itself.',
+      'Players see doors, people, clues, risks, objects, and tensions.',
+      'The DM offers meaningful possibilities through the scene.'
+    ];
+  }
+  if(hasAny(text,['encounter-worth'])){
+    return [
+      'A scene belongs in the game when it asks for a real choice.',
+      'Good encounters reveal character, evidence, danger, relationship, or change.',
+      'This keeps play focused.'
+    ];
+  }
+  if(hasAny(text,['character degradation','marshmellowblob','bookworm life-cycle','respawn'])){
+    return [
+      'A clear character grows through careful reading and writing.',
+      'Blurry choices make the character weaker or harder to play.',
+      'The game uses consequences to show when the character needs stronger evidence, voice, or shape.'
+    ];
+  }
+  if(hasAny(text,['dialectic-default','four-part treatment','polymyth-synthesis-method','synthesis-method'])){
+    return [
+      'Design questions use a clear check before the DM chooses a rule.',
+      'First name what already exists, then name the tension, then compare possible answers, then choose the table rule.',
+      'This keeps new rules connected to the game instead of floating away.'
+    ];
+  }
+  if(entry.s === 'character-creation' || hasAny(text,['character-creation','age-banded','soul anchor','items carried','bookwormcard'])){
+    return [
+      'Character creation turns reflection into a playable character.',
+      'Players answer questions, choose meaningful details, and carry important items.',
+      'The card helps the character stay clear across different text-worlds.'
+    ];
+  }
+  if(entry.s === 'bookworm' || hasAny(text,['developmental arc','silkworm stage','cocoon stage','self-named emergence'])){
+    return [
+      'A bookworm begins by reading and choosing.',
+      'As the player writes and acts, the character becomes clearer.',
+      'The growth path moves from worm, to silkworm, to cocoon, to a self-named character.'
+    ];
+  }
+  if(entry.s === 'credit'){
+    return [
+      'This entry connects bookwormburrows to school work.',
+      'It helps teachers track modules, evidence, assessment, and possible SeminarSchools credit.',
+      'The game still needs clear student work to support any credit claim.'
+    ];
+  }
+  if(entry.s === 'pending'){
+    return [
+      'This is a design note still being built.',
+      'It stays visible so the project can remember the question.',
+      'Later work can turn it into a rule, page, module, or retired note.'
+    ];
+  }
+  if(entry.s === 'retracted'){
+    return [
+      'This older note is kept for history.',
+      'It shows a path the project changed or corrected.',
+      'Keeping it visible protects the current version from repeating the same mistake.'
+    ];
+  }
+  return null;
+}
+
+
+function splitSentences(text){
+  const clean = kidReplace(text);
+  if(!clean) return [];
+  return clean
+    .split(/(?<=[.!?])\s+(?=[A-Z0-9"“'(\[])/)
+    .map(s=>s.trim())
+    .filter(Boolean);
+}
+
+function studentTitleFor(entry){
+  const special = specialStudentTitle(entry);
+  if(special) return special;
+  let t = kidReplace(entry.t || 'Game note');
+  t = t
+    .replace(/^THE\s+/i,'')
+    .replace(/\s*:\s*/g,': ')
+    .replace(/\bNO-CIRCUMVENTION HARD RULE\b/gi,'No shortcuts rule')
+    .replace(/\banti-bypass\b/gi,'no shortcut')
+    .trim();
+  if(t.length > 150) t = t.slice(0,147).trim() + '...';
+  return t || 'Game note';
+}
+
+function sectionUseLine(entry){
+  const lines = {
+    methodology:'Use this when the group needs to know how the game works at the table.',
+    'character-creation':'Use this when a player is making or improving a character.',
+    bookworm:'Use this when a player is growing as a bookworm across readings.',
+    dimension:'Use this when the class enters a book, story, poem, document, place, or world.',
+    credit:'Use this when the game connects to school work, evidence, or credit.',
+    pending:'This is a design note that is still being built.',
+    retracted:'This older note is kept so the game history stays clear.'
+  };
+  return lines[entry.s] || 'Use this as a table note for the game.';
+}
+
+function studentBodyParts(entry){
+  const sentences = splitSentences(entry.b || '');
+  const intro = sectionUseLine(entry);
+  const maxMain = 5;
+  const main = sentences.slice(0, maxMain);
+  const extra = sentences.slice(maxMain);
+  return {intro, main, extra};
+}
+
+function studentBodyFor(entry){
+  const special = specialStudentSummary(entry);
+  if(special){
+    return [sectionUseLine(entry)].concat(special).join('\n\n');
+  }
+  const parts = studentBodyParts(entry);
+  const lines = [parts.intro];
+  if(parts.main.length){
+    lines.push(parts.main.join('\n\n'));
+  } else {
+    lines.push('This note keeps a rule, example, or design choice for bookwormburrows.');
+  }
+  return lines.join('\n\n');
+}
+
+function studentExtraFor(entry){
+  if(specialStudentSummary(entry)) return '';
+  const extra = studentBodyParts(entry).extra;
+  return extra.length ? extra.join('\n\n') : '';
+}
+
+function hardWordsFor(entry){
+  const raw = `${entry.t || ''} ${entry.b || ''} ${entry.x || ''}`.toLowerCase();
+  const found = [];
+  KID_DEFS.forEach(([term,def])=>{
+    if(raw.includes(term.toLowerCase())) found.push(`${term} = ${def}`);
+  });
+  return found.slice(0,5).join(' · ');
+}
+
+function originalBlockFor(entry){
+  const chunks = [];
+  if(entry.t) chunks.push(`<div class="orig-title">${escape(entry.t)}</div>`);
+  if(entry.b) chunks.push(`<div class="orig-body">${escape(entry.b)}</div>`);
+  if(entry.x) chunks.push(`<div class="orig-extra">${escape(entry.x)}</div>`);
+  return chunks.join('');
+}
+
+
 function renderTabs(){
   const tabs = document.getElementById('tabs');
   tabs.innerHTML = '';
@@ -845,28 +1412,56 @@ function renderSectionDesc(){
 
 function renderEntries(){
   const list = document.getElementById('entries');
-  let filtered = entries.filter(e=>e.s===currentSection);
-  if(searchQuery){
+  const hasSearch = !!searchQuery;
+  let filtered = hasSearch ? entries.slice() : entries.filter(e=>e.s===currentSection);
+  if(hasSearch){
     const q = searchQuery.toLowerCase();
-    filtered = filtered.filter(e => (e.t||'').toLowerCase().includes(q) || (e.b||'').toLowerCase().includes(q));
+    filtered = filtered.filter(e => (
+      (e.t||'').toLowerCase().includes(q) ||
+      (e.b||'').toLowerCase().includes(q) ||
+      (e.x||'').toLowerCase().includes(q) ||
+      (e.tg||'').toLowerCase().includes(q) ||
+      studentTitleFor(e).toLowerCase().includes(q) ||
+      studentBodyFor(e).toLowerCase().includes(q) ||
+      studentExtraFor(e).toLowerCase().includes(q)
+    ));
   }
   list.innerHTML = '';
   if(!filtered.length){
-    list.innerHTML = `<div class="empty">No entries yet in this section.</div>`;
+    list.innerHTML = `<div class="empty">${hasSearch ? 'No entries found across all sections.' : 'No entries yet in this section.'}</div>`;
     return;
   }
   filtered.forEach(e=>{
     const d = document.createElement('div');
     d.className = 'entry';
     d.dataset.s = e.s;
-    d.innerHTML = `
-      <div class="et" contenteditable="${isEditMode()}">${escape(e.t||'')}</div>
-      <div class="eb" contenteditable="${isEditMode()}">${escape(e.b||'')}</div>
-      ${e.x?`<div class="ex" contenteditable="${isEditMode()}">${escape(e.x)}</div>`:''}
-      <div class="etags" contenteditable="${isEditMode()}">${escape(e.tg||'')}</div>
-      <div class="anchor">#${e.id}</div>
-      ${isEditMode()?`<div class="del" data-id="${e.id}">delete</div>`:''}
-    `;
+    if(isEditMode()){
+      d.innerHTML = `
+        <div class="mode-note">Edit mode shows the original archive fields.</div>
+        <div class="et" contenteditable="true">${escape(e.t||'')}</div>
+        <div class="eb" contenteditable="true">${escape(e.b||'')}</div>
+        ${e.x?`<div class="ex" contenteditable="true">${escape(e.x)}</div>`:''}
+        <div class="etags" contenteditable="true">${escape(e.tg||'')}</div>
+        <div class="anchor">#${e.id}</div>
+        <div class="del" data-id="${e.id}">delete</div>
+      `;
+    } else {
+      const extra = studentExtraFor(e);
+      const hard = hardWordsFor(e);
+      const section = SECTIONS.find(x=>x.id===e.s);
+      const sectionLabel = searchQuery && section ? `<div class="section-label">${escape(section.label)}</div>` : '';
+      d.innerHTML = `
+        ${sectionLabel}
+        <div class="kid-badge">student version</div>
+        <div class="et kid-title">${escape(studentTitleFor(e))}</div>
+        <div class="eb kid-body">${escape(studentBodyFor(e))}</div>
+        ${extra?`<details class="kid-more"><summary>more student version</summary><div>${escape(extra)}</div></details>`:''}
+        ${hard?`<div class="glossary-help">${escape(hard)}</div>`:''}
+        <details class="original-note"><summary>full teacher / archive note kept</summary>${originalBlockFor(e)}</details>
+        <div class="etags">${escape(e.tg||'')}</div>
+        <div class="anchor">#${e.id}</div>
+      `;
+    }
     list.appendChild(d);
   });
   if(isEditMode()){
@@ -894,6 +1489,8 @@ function render(){
   document.getElementById('secCt').textContent = entries.filter(e=>e.s===currentSection).length;
   renderTabs();
   renderSectionDesc();
+  const tools = document.getElementById('teacherTools');
+  if(tools && isEditMode()) tools.open = true;
   renderEntries();
   renderChangelog();
 }
@@ -961,5 +1558,6 @@ init();
 <script src="/js/autolink.js?v=cl91" defer></script>
 <script src="/js/theme.js?v=cl91" defer></script>
 <script src="/js/txt-tools.js" data-txt="../bookwormburrows.txt"></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
 </body>
 </html>

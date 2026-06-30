@@ -4,17 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bookwormcard · Make a bookwormburrows Character Card</title>
-<meta name="description" content="Create a Bookwormcard for BookwormBurrows, the BB character gate where reading, writing, admired figures, burrowing animals, and classroom identity become a playable wormcard.">
+<meta name="description" content="Create a Bookwormcard for BookwormBurrows, the BB character gate where reading, writing, admired people, burrowing animals, and classroom play become a wormcard.">
 <link rel="canonical" href="https://seminarschools.com/bookwormcard/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seminarschools.com/bookwormcard/">
 <meta property="og:title" content="bookwormburrows, make your wormcard">
-<meta property="og:description" content="A pedagogical depth game where you smash the figures you admire into a character that is none of them, laying eleven cosmological traditions over your birth data and choosing among thirty-eight burrowing animals until the character is yours.">
+<meta property="og:description" content="A student-friendly character card game for BookwormBurrows. Answer simple questions, mix admired traits into a character, and print a wormcard for reading adventures.">
 <meta property="og:image" content="https://seminarschools.com/og-image.png">
 <meta property="og:site_name" content="Seminar Schools">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="bookwormburrows, make your wormcard">
-<meta name="twitter:description" content="A pedagogical depth game. Smash the figures you admire into a character that is none of them, built from eleven cosmological traditions laid over your birth data.">
+<meta name="twitter:description" content="Make a kid-friendly wormcard for BB. Answer simple questions, choose a burrowing animal, save the card as PDF, and give it to the Dimensional Master before entering the book-world.">
 <meta name="twitter:image" content="https://seminarschools.com/og-image.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Bookwormcard","url":"https://seminarschools.com/bookwormcard/","applicationCategory":"EducationalApplication","operatingSystem":"Web","description":"Bookwormcard is the BookwormBurrows character gate, a writing-based interactive activity that creates a portable wormcard for BB sessions.","isPartOf":{"@type":"CreativeWork","name":"BookwormBurrows","url":"https://seminarschools.com/bb/"},"educationalUse":["Character creation","Reflective writing","Reading game preparation"],"audience":{"@type":"EducationalAudience","educationalRole":"student"}}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -78,7 +78,7 @@
   body.light-mode .preview{background:rgba(255,255,255,0.45)}
   body.light-mode #card-preview{background:rgba(255,255,255,0.55)}
   body.light-mode #toggles button, body.light-mode #toggles a{background:rgba(255,255,255,0.55)}
-  /* ESL/guided reading mode. It now changes behaviour, beyond colour. */
+  /* ESL/guided reading mode. It now changes behaviour, not only colour. */
   body.esl #chat{line-height:1.62}
   body.esl #chat .question{border-left:3px solid var(--accent);padding-left:0.5rem}
   .esl-help{display:block;color:var(--accent);text-shadow:none;font-size:1rem;border-left:2px dotted var(--fg-darker);margin:0.2rem 0 0.55rem 0.5rem;padding-left:0.55rem;letter-spacing:0.02em}
@@ -99,7 +99,7 @@
   /* CL-11: PRINT styles, clean B&W layout for paper */
   @media print{
     body{background:#fff;color:#000;font-family:'Courier New',monospace;font-size:11pt;text-shadow:none}
-    body::after,body::before,#rain-canvas,#toggles,#animal-cinematic,#tier-cinematic,.keys-hint{display:none !important}
+    body::after,body::before,#rain-canvas,#toggles,#animal-cinematic,#tier-cinematic,.keys-hint,#student-start-card,#touch-bar{display:none !important}
     .layout{display:block;height:auto}
     .terminal,.preview{height:auto;overflow:visible;background:#fff;border:none}
     #chat{font-size:11pt;color:#000;text-shadow:none}
@@ -148,7 +148,8 @@
   body.bypass-mode #toggles,
   body.bypass-mode .preview,
   body.bypass-mode .header,
-  body.bypass-mode .keys-hint{
+  body.bypass-mode .keys-hint,
+  body.bypass-mode #touch-bar{
     opacity:0;
     pointer-events:none;
     transition:opacity 0.6s ease-out;
@@ -186,13 +187,13 @@
     pointer-events:auto;
   }
   /* Chrome reveal, once bypass-mode is removed, fade the chrome in */
-  #toggles, .preview, .header, .keys-hint{
+  #toggles, .preview, .header, .keys-hint, #touch-bar{
     transition:opacity 0.6s ease-in;
   }
 
   .header{font-size:1rem;color:var(--fg-dim);margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px dashed var(--fg-darker);text-shadow:none;letter-spacing:1px;flex-shrink:0;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
   .header b{color:var(--fg)}
-  .header .progress-dots{margin-left:auto;font-family:'VT323',monospace;font-size:0.9rem;color:var(--fg-darker);letter-spacing:0.5px;text-shadow:none}
+  .header .progress-dots{margin-left:auto;font-family:'VT323',monospace;font-size:0.95rem;color:var(--accent);letter-spacing:0.5px;text-shadow:0 0 6px rgba(255,176,0,0.35);border:1px solid var(--fg-darker);padding:0.15rem 0.45rem;background:rgba(0,0,0,0.25)}
   @keyframes dot-pulse{
     0%,100%{transform:scale(1);opacity:1}
     50%{transform:scale(1.3);opacity:0.7}
@@ -512,12 +513,9 @@
   .keys-hint .skip-game-link a{color:var(--fg-darker);text-decoration:none;font-style:italic;border-bottom:1px dashed var(--fg-darker);padding-bottom:1px}
   .keys-hint .skip-game-link a:hover{color:var(--fg);border-bottom-color:var(--fg)}
 
-  /* mobile */
-  /* Touch-bar, hidden by default. The mobile media query below
-     unhides it. Buttons mirror the keyboard hints so a phone player
-     does not need an arrow row. */
+  /* command bar, visible on desktop and mobile. Buttons mirror the keyboard shortcuts so a kid does not have to remember typed commands. */
   #touch-bar{
-    display:none;
+    display:flex;
     gap:0.4rem;
     margin-top:0.6rem;
     padding-top:0.6rem;
@@ -548,7 +546,7 @@
   }
   #touch-bar .tb-btn[hidden]{display:none}
   #touch-bar .tb-prev,#touch-bar .tb-next{
-    flex:0 0 14%;
+    flex:0 0 10%;
     font-size:1.4rem;
   }
   /* Back is destructive, it rewinds an already-answered field.
@@ -568,7 +566,7 @@
     border-color:#d4a04a;
     border-style:solid;
   }
-  #touch-bar .tb-skip{
+  #touch-bar .tb-skip, #touch-bar .tb-why, #touch-bar .tb-finish{
     color:var(--fg);
     border-color:var(--fg-darker);
   }
@@ -629,7 +627,7 @@
     }
     .keys-hint span{display:none}
     .keys-hint .skip-game-link{display:inline}
-    /* Touch-bar lights up. */
+    /* Command bar remains visible on touch screens. */
     #touch-bar{display:flex}
     /* Bigger tap targets on the input itself. */
     #user-input{font-size:1.1rem;padding:0.4rem 0;min-height:32px}
@@ -828,6 +826,21 @@
   #static-bookwormcard-context p,#static-bookwormcard-context li{font-size:1.05rem;margin-bottom:0.45rem}
   #static-bookwormcard-context ul{padding-left:1.2rem;margin:0.4rem 0 0.9rem}
   #static-bookwormcard-context .sample-card{border:1px dashed var(--fg-darker);padding:0.9rem;margin-top:0.6rem;background:rgba(0,0,0,0.22);white-space:normal}
+  #student-start-card{
+    max-width:980px;margin:1rem auto 1.35rem;padding:1.35rem 1.4rem;
+    border:1px solid var(--fg-darker);background:rgba(8,7,13,0.72);
+    color:var(--fg);text-shadow:none;line-height:1.5;box-shadow:0 0 24px rgba(139,92,246,0.15);
+  }
+  #student-start-card h2{font-size:1.45rem;line-height:1.1;margin-bottom:0.55rem;color:var(--accent);text-shadow:var(--glow)}
+  #student-start-card p,#student-start-card li{font-size:1.05rem;margin-bottom:0.42rem}
+  #student-start-card ol{padding-left:1.25rem;margin:0.45rem 0 1rem}
+  #student-start-card button{
+    display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0.62rem 1rem;
+    border:1px solid var(--accent);background:rgba(139,92,246,0.18);color:var(--fg);
+    font-family:'VT323',monospace;font-size:1.2rem;letter-spacing:0.04em;cursor:pointer;text-shadow:var(--glow);
+  }
+  #student-start-card button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+  body.wormcard-started #student-start-card{display:none}
   body.game-ready #static-bookwormcard-context{display:none}
   .sr-status{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   @media (max-width:900px){#static-bookwormcard-context{margin:1rem;padding:1.1rem}.layout{min-height:auto}.terminal,.preview{min-height:auto}}
@@ -836,7 +849,7 @@
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
 <link rel="stylesheet" href="/css/theme.css?v=cl91">
 </head>
-<body class="bypass-mode bookwormcard-page" data-geometry="indra-web" data-indra-intensity="0.165">
+<body class="bypass-mode bookwormcard-page" data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="game-tool" data-page-weight="heavy">
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:none;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 <!-- bb* QR logo -->
 <a href="/bookwormcard/" title="Bookwormcard. Scan with phone or click to open." aria-label="Bookwormburrows ouroboros QR. Links to bookwormcard." style="position:fixed;top:20px;right:20px;width:72px;height:72px;z-index:9999;display:none;background:transparent;border:none;line-height:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);border-radius:6px;overflow:hidden;"><img loading="lazy" src="/bookwormcard/qr-ouroboros-indra.png" alt="bb* ouroboros QR logo" style="width:100%;height:100%;display:block;"></a>
@@ -857,7 +870,7 @@
      ============================================================ -->
 <div id="mobile-trial-banner" role="alert">
   <strong>⚠ TRIAL MODE</strong>
-  <span class="banner-body">mobile cannot save your wormcard. play to see what bb is, then open <strong>seminarschools.com/bb</strong> on a laptop or desktop to take your card.</span>
+  <span class="banner-body">mobile is best for a quick trial. for the smooth save-as-PDF flow, open <strong>seminarschools.com/bb</strong> on a laptop or desktop.</span>
 </div>
 <a href="/bookwormcard/about/" class="bypass-help">[ what is this? ]</a>
 
@@ -866,16 +879,23 @@
   <p><strong>BB is the game. Bookwormcard is how a player becomes a character inside it.</strong> The page asks reflective questions, turns answers into a wormcard, and gives the player a portable PDF they can bring into <a href="/bb/">BookwormBurrows</a>, a classroom session, or an AI chat running the table.</p>
   <h2>What it makes</h2>
   <ul>
-    <li>A handle, burrowing animal, admired figures, traits, tensions, and writing-based identity material.</li>
+    <li>A handle, burrowing animal, admired people, character traits, tensions, and short writing answers.</li>
     <li>A printable and resumable wormcard that carries the player’s paragraphs.</li>
-    <li>A bridge from self-description into BB’s reading, writing, and role-play system.</li>
+    <li>A bridge from describing yourself into BB’s reading, writing, and role-play game.</li>
   </ul>
   <h2>Sample prompts</h2>
   <ul>
     <li>What should I call you?</li>
     <li>Name someone you admire.</li>
     <li>What quality do you want from them?</li>
-    <li>What fear, bond, flaw, or secret belongs on the card?</li>
+    <li>What fear, bond, flaw, or secret should your character carry?</li>
+  </ul>
+  <h2>How BB is played</h2>
+  <ul>
+    <li>Pick a book, poem, story, article, scene, or document.</li>
+    <li>Make a wormcard.</li>
+    <li>Give the wormcard to the Dimensional Master. The teacher runs the table and may use AI behind the curtain.</li>
+    <li>Enter the text-world, complete assignments as quests, and write what happened.</li>
   </ul>
   <h2>Before you play</h2>
   <ul>
@@ -886,59 +906,74 @@
   </ul>
   <div class="sample-card"><strong>Privacy/data note.</strong> Bookwormcard saves checkpoints in your browser so you can resume. Longer answers can be sent to the site’s AI function for reaction/stat help while the AI layer is active. The final card opens as a PDF/print file for you to save. Links: <a href="/bookwormcard/about/">about</a>, <a href="/bookwormcard/glossary/">glossary</a>, <a href="/bookwormcard/print/?blank=1">blank card</a>.</div>
 </section>
+
+<section id="student-start-card" aria-labelledby="student-start-title">
+  <h2 id="student-start-title">Step 1: make your wormcard</h2>
+  <p>You will answer questions, pick a burrowing animal, and build a character for playing inside a book-world. You can skip most questions. At the end, save your wormcard as PDF.</p>
+  <ol aria-label="How BookwormBurrows is played">
+    <li><strong>Pick a text.</strong> Book, poem, story, article, or scene.</li>
+    <li><strong>Make this card.</strong> It becomes your burrowing character.</li>
+    <li><strong>Give it to the Dimensional Master.</strong> The teacher runs the table and may use AI for tracking.</li>
+    <li><strong>Enter the text-world.</strong> The story stays protected while you play in the world around it.</li>
+    <li><strong>Complete quests.</strong> Assignments become motivated actions inside the game.</li>
+    <li><strong>Write and grow.</strong> Your work changes what happens next.</li>
+  </ol>
+  <button type="button" id="start-wormcard">Start my wormcard</button>
+</section>
+
 <div id="display-status" class="sr-status" role="status" aria-live="polite"></div>
 
 <!-- HIDDEN STATIC FORM FOR NETLIFY DETECTION -->
 <form name="bookwormcard" hidden class="nl-form" aria-hidden="true">
-  <input type="text" name="bot-field">
-  <input type="text" name="handle">
-  <input type="email" autocomplete="email" name="email">
-  <input type="text" name="birth-year">
-  <input type="text" name="birth-month">
-  <input type="text" name="birth-day">
-  <input type="text" name="birth-hour">
-  <input type="text" name="birth-minute">
-  <input type="text" name="birth-place">
-  <input type="text" name="animal">
-  <textarea name="backstory"></textarea>
-  <textarea name="motivation"></textarea>
-  <textarea name="fear"></textarea>
-  <textarea name="flaw"></textarea>
-  <textarea name="bond"></textarea>
-  <textarea name="ideal"></textarea>
-  <textarea name="secret"></textarea>
-  <textarea name="pivotal-event"></textarea>
-  <textarea name="smashes"></textarea>
-  <textarea name="wildcard"></textarea>
-  <textarea name="trait-unlearned"></textarea>
-  <textarea name="trait-avoided"></textarea>
-  <textarea name="trait-surfacing"></textarea>
-  <textarea name="cognition"></textarea>
-  <textarea name="belief-loud"></textarea>
-  <textarea name="belief-quiet"></textarea>
-  <textarea name="belief-doubted"></textarea>
-  <textarea name="dilemma-friend"></textarea>
-  <textarea name="dilemma-stranger"></textarea>
-  <textarea name="dilemma-witness"></textarea>
-  <textarea name="teach-short"></textarea>
-  <textarea name="teach-long"></textarea>
-  <textarea name="face-after"></textarea>
-  <input type="text" name="xp">
-  <input type="text" name="hp">
-  <input type="text" name="tier">
-  <input type="text" name="level">
-  <textarea name="stats"></textarea>
-  <textarea name="quirks"></textarea>
-  <textarea name="quality-history"></textarea>
-  <textarea name="card-text"></textarea>
-  <input type="text" name="hash">
-  <input type="text" name="hegeliane-full">
+  <input type="hidden" name="bot-field" aria-hidden="true">
+  <input type="hidden" name="handle" aria-hidden="true">
+  <input type="hidden" autocomplete="email" name="email" aria-hidden="true">
+  <input type="hidden" name="birth-year" aria-hidden="true">
+  <input type="hidden" name="birth-month" aria-hidden="true">
+  <input type="hidden" name="birth-day" aria-hidden="true">
+  <input type="hidden" name="birth-hour" aria-hidden="true">
+  <input type="hidden" name="birth-minute" aria-hidden="true">
+  <input type="hidden" name="birth-place" aria-hidden="true">
+  <input type="hidden" name="animal" aria-hidden="true">
+  <textarea name="backstory" aria-hidden="true" hidden></textarea>
+  <textarea name="motivation" aria-hidden="true" hidden></textarea>
+  <textarea name="fear" aria-hidden="true" hidden></textarea>
+  <textarea name="flaw" aria-hidden="true" hidden></textarea>
+  <textarea name="bond" aria-hidden="true" hidden></textarea>
+  <textarea name="ideal" aria-hidden="true" hidden></textarea>
+  <textarea name="secret" aria-hidden="true" hidden></textarea>
+  <textarea name="pivotal-event" aria-hidden="true" hidden></textarea>
+  <textarea name="mixes" aria-hidden="true" hidden></textarea>
+  <textarea name="wildcard" aria-hidden="true" hidden></textarea>
+  <textarea name="trait-unlearned" aria-hidden="true" hidden></textarea>
+  <textarea name="trait-avoided" aria-hidden="true" hidden></textarea>
+  <textarea name="trait-surfacing" aria-hidden="true" hidden></textarea>
+  <textarea name="cognition" aria-hidden="true" hidden></textarea>
+  <textarea name="belief-loud" aria-hidden="true" hidden></textarea>
+  <textarea name="belief-quiet" aria-hidden="true" hidden></textarea>
+  <textarea name="belief-doubted" aria-hidden="true" hidden></textarea>
+  <textarea name="dilemma-friend" aria-hidden="true" hidden></textarea>
+  <textarea name="dilemma-stranger" aria-hidden="true" hidden></textarea>
+  <textarea name="dilemma-witness" aria-hidden="true" hidden></textarea>
+  <textarea name="teach-short" aria-hidden="true" hidden></textarea>
+  <textarea name="teach-long" aria-hidden="true" hidden></textarea>
+  <textarea name="face-after" aria-hidden="true" hidden></textarea>
+  <input type="hidden" name="xp" aria-hidden="true">
+  <input type="hidden" name="hp" aria-hidden="true">
+  <input type="hidden" name="tier" aria-hidden="true">
+  <input type="hidden" name="level" aria-hidden="true">
+  <textarea name="stats" aria-hidden="true" hidden></textarea>
+  <textarea name="quirks" aria-hidden="true" hidden></textarea>
+  <textarea name="quality-history" aria-hidden="true" hidden></textarea>
+  <textarea name="card-text" aria-hidden="true" hidden></textarea>
+  <input type="hidden" name="hash" aria-hidden="true">
+  <input type="hidden" name="hegeliane-full" aria-hidden="true">
 </form>
 
 <!-- ACTUAL POSTING FORM (hidden, populated and submitted by JS) -->
 <form id="post-form" name="bookwormcard" class="nl-form" aria-hidden="true" method="POST" data-netlify="true" netlify-honeypot="bot-field">
   <input type="hidden" name="form-name" value="bookwormcard">
-  <input type="text" name="bot-field">
+  <input type="hidden" name="bot-field" aria-hidden="true">
   <input type="hidden" name="handle">
   <input type="hidden" name="email">
   <input type="hidden" name="birth-year">
@@ -956,7 +991,7 @@
   <input type="hidden" name="ideal">
   <input type="hidden" name="secret">
   <input type="hidden" name="pivotal-event">
-  <input type="hidden" name="smashes">
+  <input type="hidden" name="mixes">
   <input type="hidden" name="wildcard">
   <input type="hidden" name="trait-unlearned">
   <input type="hidden" name="trait-avoided">
@@ -997,7 +1032,7 @@
 <div id="tier-cinematic"><div class="tier-text"></div></div>
 
 <div class="layout">
-  <h1 class="sr-only">Bookwormcard · BookwormBurrows character gate</h1>
+  <h2 class="sr-only">Bookwormcard · BookwormBurrows character gate</h2>
 <main class="terminal">
     <div class="header">
       <span>bookwormburrows · <b>/bookwormcard/</b></span>
@@ -1013,15 +1048,16 @@
       <div id="word-count" aria-hidden="true"></div>
       <div id="placeholder-hint"></div>
       <div id="menu" role="listbox" aria-label="options"></div>
-      <!-- Mobile-only touch bar. Hidden on desktop. The buttons issue
-           the same commands the keyboard-hint promises so a player on
-           a phone can navigate the form without arrow keys. The
-           prev/next pair only lights up during the animal state. -->
-      <div id="touch-bar" aria-label="touch controls">
+      <!-- Command bar. The buttons issue the same commands as the
+           keyboard shortcuts so a player can navigate without memorizing
+           typed commands. The prev/next pair only works during animal choice. -->
+      <div id="touch-bar" role="toolbar" aria-label="wormcard controls">
         <button type="button" class="tb-btn tb-prev" data-action="prev-animal" aria-label="previous animal">←</button>
         <button type="button" class="tb-btn tb-next" data-action="next-animal" aria-label="next animal">→</button>
         <button type="button" class="tb-btn tb-back" data-action="back" aria-label="go back">back</button>
         <button type="button" class="tb-btn tb-skip" data-action="skip" aria-label="skip">skip</button>
+        <button type="button" class="tb-btn tb-why" data-action="why" aria-label="explain this question">why?</button>
+        <button type="button" class="tb-btn tb-finish" data-action="finish" aria-label="finish early">finish</button>
         <button type="button" class="tb-btn tb-enter" data-action="enter" aria-label="submit">enter ↵</button>
       </div>
     </div>
@@ -1041,9 +1077,8 @@
   <span><b>↵ enter</b> · advance</span>
   <span><b>↑</b> · go back</span>
   <span><b>← →</b> · pick animal</span>
-  <span><b>type</b> <span class="key">skip</span> · skip optional</span>
-  <span><b>type</b> <span class="key">why</span> · explain question</span>
-  <span><b>type</b> <span class="key">finish</span> · seal early</span>
+  <span><b>buttons</b> · back · skip · why · finish · enter</span>
+  <span><b>typed shortcuts</b> · skip · why · finish</span>
   <span class="skip-game-link"><a href="/bookwormcard/glossary/">glossary · what the symbols mean →</a></span>
   <span class="skip-game-link"><a href="#" id="resume-from-file" role="button">resume from a saved wormcard →</a></span>
   <span class="skip-game-link"><a href="/bookwormcard/print/?blank=1">skip the game · download blank card →</a></span>
@@ -1052,7 +1087,7 @@
 <!-- File-picker fallback for keyboard-only and mobile users.
      Drag-drop is the primary path; this input is invisible and
      opened by the resume-from-file link. Same handler path. -->
-<input type="file" id="resume-file-input" aria-label="Choose a saved wormcard file" accept=".pdf,.html,.htm,.json,.txt,application/pdf,text/html,application/json,text/plain" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" aria-hidden="true">
+<input type="file" id="resume-file-input" aria-label="Choose a saved wormcard file" accept=".pdf,.html,.htm,.json,.txt,application/pdf,text/html,application/json,text/plain" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
 
 <script src="polymyth-horoscope.js?v=20260506011901"></script>
 <script src="archetypes-set1.js?v=20260506011901"></script>
@@ -1077,7 +1112,7 @@ var data = {
   birthHour:'',birthMinute:'',birthPlace:'',
   animal:'',backstory:'',motivation:'',fear:'',flaw:'',
   bond:'',ideal:'',secret:'',pivotalEvent:'',
-  smashes:[], smashSynthesis:'', wildcard:'',
+  mixes:[], mixSynthesis:'', wildcard:'',
   // ---- new PDF-section fields (build 4) ----
   trait_unlearned:'', trait_avoided:'', trait_surfacing:'',
   cognition:'',
@@ -1094,7 +1129,7 @@ var data = {
   // ------------------------------------------
   stats:{}, // accumulating: {STAT_NAME: count}, positive adjective stats
   quirks:{}, // accumulating: {QUIRK_NAME: count}, negative character markers
-  // ---- depth-engine state (added in build 2/11) ----
+  // ---- character engine state (added in build 2/11) ----
   xp: 0,                    // running depth-XP, only ever increases
   hp: 100,                  // running HP, depletes from quirks, heals from depth-stats
   hpPotionsUsed: 0,         // 1-time-only revival on death
@@ -1152,7 +1187,7 @@ function hegelianeName(){
 // gate fired at hour+place which surfaced the badge far too early
 // in the flow. Birth fields, identity, the eight wormhole answers,
 // the wildcard, the thirteen deep questions, and at least five
-// smashes are all required. Order does not matter, only that
+// mixes are all required. Order does not matter, only that
 // every cell has content.
 // ============================================================
 function isFullyFilled(){
@@ -1171,7 +1206,7 @@ function isFullyFilled(){
     var v = data[req[i]];
     if(v === '' || v == null) return false;
   }
-  if(!data.smashes || data.smashes.length < 5) return false;
+  if(!data.mixes || data.mixes.length < 5) return false;
   return true;
 }
 
@@ -1212,8 +1247,8 @@ var menuIndex = 0;
 var animalCycleIndex = 0;
 var animalCycleList = [];
 var menuBreadcrumb = '';
-var smashTemp = {name:'',quality:''};
-var smashStage = 'name'; // name | quality | continue
+var mixTemp = {name:'',quality:''};
+var mixStage = 'name'; // name | quality | continue
 
 // Animal-emoji lookup. Unicode-when-available, blank otherwise.
 var ANIMAL_EMOJI = {
@@ -1320,18 +1355,18 @@ function awardStats(input, phaseLabel){
   // platitude mark is unmade as part of the rewrite. No new UI;
   // the existing back command does the work.
   //
-  // Multi-entry phases (each smash is its own answer that appends
-  // to data.smashes) are excluded from rewrite-subtract because
+  // Multi-entry phases (each mix is its own answer that appends
+  // to data.mixes) are excluded from rewrite-subtract because
   // the phase label does not uniquely identify which entry is
-  // being rewritten. smash-quality stays append-only.
+  // being rewritten. mix-quality stays append-only.
   //
-  // smash-synthesis IS a single field (data.smashSynthesis = input
+  // mix-synthesis IS a single field (data.mixSynthesis = input
   // overwrites on every advance), so it qualifies for rewrite-
   // subtract. The "synthesis" is the most reflective answer in the
-  // smash flow and players naturally want to revise it after
+  // mix flow and players naturally want to revise it after
   // seeing their accumulated card.
   // ============================================================
-  var MULTI_ENTRY_PHASES = { 'smash-quality': true };
+  var MULTI_ENTRY_PHASES = { 'mix-quality': true };
   var isRewriteable = phaseLabel && !MULTI_ENTRY_PHASES[phaseLabel];
   var priorIdx = -1;
   if(isRewriteable && data.qualityHistory && data.qualityHistory.length){
@@ -1416,7 +1451,7 @@ function awardStats(input, phaseLabel){
       data.hpPotionsUsed = 0;
       data.stats = {};
       data.quirks = {};
-      data.smashes = [];
+      data.mixes = [];
       data.wildcard = '';
       data.qualityHistory = [];
       data.promptVariants = {};
@@ -1442,7 +1477,7 @@ function awardStats(input, phaseLabel){
   // single-field phase, the prior entry is replaced in-place so
   // future rewrites of the same field unwind from the most-recent
   // contribution rather than the original. Multi-entry phases
-  // (smashes) always append.
+  // (mixes) always append.
   var newEntry = {
     phase: phaseLabel || 'unknown',
     input: (input || '').slice(0, 500),
@@ -1659,7 +1694,7 @@ function pickPrompt(field){
 // GLOBAL ESCAPE, accept finish/exit/quit/done/enough at any post-vitals prompt.
 // Returns true if the input should seal the card and jump to review.
 // Call sites: makeWormhole.advance, makeDeepQuestion.advance,
-// smash-name, smash-quality, wildcard, threshold.
+// mix-name, mix-quality, wildcard, doorway.
 // NOT used in animal/handle/email/birth-data phases (those need valid input).
 // ============================================================
 var GLOBAL_ESCAPE_RE = /^(finish|exit|quit|done|enough)$/i;
@@ -1835,9 +1870,9 @@ function restoreFromSavePayload(payload){
   if(!payload.data || typeof payload.data !== 'object') return false;
   // Apply data
   Object.assign(data, payload.data);
-  // Backfill any missing depth-engine fields
+  // Backfill any missing character engine fields
   if(!data.stats) data.stats = {};
-  if(!data.smashes) data.smashes = [];
+  if(!data.mixes) data.mixes = [];
   if(!data.quirks) data.quirks = {};
   if(typeof data.xp !== 'number') data.xp = 0;
   if(typeof data.hp !== 'number') data.hp = 100;
@@ -1848,6 +1883,8 @@ function restoreFromSavePayload(payload){
   // Apply state-history
   if(Array.isArray(payload.stateHistory)) stateHistory = payload.stateHistory.slice();
   // Sync UI
+  markWormcardStarted();
+  document.body.classList.remove('bypass-mode');
   recalcHoroscope();
   renderCardPreview();
   if(typeof syncTamagotchi === 'function') syncTamagotchi();
@@ -1856,15 +1893,15 @@ function restoreFromSavePayload(payload){
   // Jump to a sensible resume state
   var resumeState = payload.currentState;
   // Build a richer load-confirmation line, name the handle, the
-  // state, and what's carrying forward (smashes, stats) so the
+  // state, and what's carrying forward (mixes, stats) so the
   // player can see what the save brought back rather than the
   // resume happening silently.
-  var smashCount = (data.smashes || []).length;
+  var mixCount = (data.mixes || []).length;
   var statCount = Object.keys(data.stats || {}).length;
   var loadSummary = '<span class="system">save loaded.</span> ^' + escapeHtml(data.handle||'unnamed');
   var carryBits = [];
   if(data.animal) carryBits.push(escapeHtml(data.animal));
-  if(smashCount) carryBits.push(smashCount + ' smash' + (smashCount===1?'':'es'));
+  if(mixCount) carryBits.push(mixCount + ' mix' + (mixCount===1?'':'es'));
   if(statCount) carryBits.push(statCount + ' stats');
   if(data.tier && data.tier !== 'worm') carryBits.push(escapeHtml(data.tier));
   if(carryBits.length){
@@ -2010,7 +2047,7 @@ function simplifyPromptHint(hint){
     .replace(/type · skip · why/g, 'answer · skip · why')
     .replace(/type · skip/g, 'answer · skip')
     .replace(/letters numbers _ -  no spaces/g, 'name for your card')
-    .replace(/real or fictional · browse · or skip to finish smashing/g, 'person you admire · browse · skip')
+    .replace(/real or fictional · browse · or skip to finish mixing/g, 'person you admire · browse · skip')
     .replace(/1920 - 2030/g, 'birth year')
     .replace(/city, country · or skip/g, 'city, country · skip');
 }
@@ -2074,18 +2111,26 @@ function bumpFontSize(delta){
 
 // Print/PDF, open browser print dialog. Print-specific CSS handles formatting.
 // Two modes: filled-card (default) or blank questionnaire.
+function openBookwormcardWindow(url, label){
+  var opened = window.open(url, '_blank', 'noopener');
+  if(!opened && typeof appendLine === 'function'){
+    appendLine('<span class="system">open this link to continue:</span> <a href="'+escapeHtml(url)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(label)+'</a>', {gap:true, instant:true});
+  }
+  return opened;
+}
+
 function printCard(){
   // Save current state to localStorage so the print template can read it,
-  // then open the integrated print page with autoprint trigger
+  // then open the integrated print page with autoprint trigger.
   saveCheckpoint();
-  window.open('/bookwormcard/print/?autoprint=1', '_blank');
+  openBookwormcardWindow('/bookwormcard/print/?autoprint=1', 'Save my wormcard as PDF');
 }
 
 // Print blank questionnaire, open the print template without autoprint
 // and without data (a fresh tab would still see localStorage data, so we
 // pass ?blank=1 to skip the fill step)
 function printBlank(){
-  window.open('/bookwormcard/print/?blank=1', '_blank');
+  openBookwormcardWindow('/bookwormcard/print/?blank=1', 'Print blank wormcard');
 }
 
 function showPrintMenu(){
@@ -2107,7 +2152,7 @@ function showPrintMenu(){
     '<div style="font-size:0.92rem;color:var(--fg-dim);margin-bottom:1.1rem;line-height:1.4">one card. it is your save file, your record, and your share. drop it back here anytime to resume.</div>' +
     '<button id="print-card" style="'+btnStyle+'">' +
       '<div style="font-size:1.05rem;color:var(--fg);font-weight:bold">your wormcard (PDF)</div>' +
-      '<div style="font-size:0.86rem;color:var(--fg-dim);margin-top:0.15rem;line-height:1.3">every paragraph, every smash, every stat. paper-and-ink.</div>' +
+      '<div style="font-size:0.86rem;color:var(--fg-dim);margin-top:0.15rem;line-height:1.3">every paragraph, every mix, every stat. choose Save as PDF in the print window.</div>' +
     '</button>' +
     '<button id="print-blank" style="'+btnStyle+';opacity:0.65">' +
       '<div style="font-size:0.95rem;color:var(--fg)">blank questionnaire</div>' +
@@ -2123,7 +2168,9 @@ function showPrintMenu(){
 }
 
 
-var SAVE_KEY = 'bb_wormcard_checkpoint_v1';
+var SAVE_KEY = 'bb_wormcard_checkpoint_v2';
+var LEGACY_SAVE_KEYS = ['bb_wormcard_checkpoint_v1'];
+function allSaveKeys(){ return [SAVE_KEY].concat(LEGACY_SAVE_KEYS); }
 function saveCheckpoint(){
   try {
     if (typeof assignCardId === 'function') assignCardId();
@@ -2145,81 +2192,72 @@ function saveCheckpoint(){
 }
 function loadCheckpoint(){
   try {
-    var raw = localStorage.getItem(SAVE_KEY);
-    if(!raw) return null;
-    var parsed = JSON.parse(raw);
-    // Reject if older than 7 days
-    if(Date.now() - parsed.timestamp > 7 * 24 * 60 * 60 * 1000){
-      clearCheckpoint();
-      return null;
+    var keys = allSaveKeys();
+    for(var i=0;i<keys.length;i++){
+      var raw = localStorage.getItem(keys[i]);
+      if(!raw) continue;
+      var parsed = JSON.parse(raw);
+      // Reject if older than 7 days
+      if(Date.now() - parsed.timestamp > 7 * 24 * 60 * 60 * 1000){
+        clearCheckpoint();
+        return null;
+      }
+      // Migrate older cards to the current key after a successful read.
+      if(keys[i] !== SAVE_KEY){
+        try { localStorage.setItem(SAVE_KEY, JSON.stringify(parsed)); } catch(e){}
+      }
+      return parsed;
     }
-    return parsed;
+    return null;
   } catch(e){ return null; }
 }
 function clearCheckpoint(){
-  try { localStorage.removeItem(SAVE_KEY); } catch(e){}
+  try {
+    allSaveKeys().forEach(function(k){ localStorage.removeItem(k); });
+  } catch(e){}
 }
 
 // ============================================================
-// PROGRESS DOTS, show stage-completion at top
+// PROGRESS PHASE LABELS, show where the player is in plain language
 // ============================================================
-// Stages: animal, handle, email, year, month-day, time, place, wormhole, smashes, wildcard, review
-// 11 stages total
-var STAGE_ORDER = ['animal','year','date','time','place','handle','email','wormhole','smashes','wildcard','deep','review'];
+var PHASES = [
+  {id:'animal', label:'Animal'},
+  {id:'time', label:'Time'},
+  {id:'name', label:'Name'},
+  {id:'story', label:'Story'},
+  {id:'people', label:'People'},
+  {id:'deep', label:'Deep Questions'},
+  {id:'stamps', label:'Stamps'},
+  {id:'review', label:'Review'}
+];
 var STAGE_MAP = {
-  // mapping currentState → stage-index for highlighting
-  animal:0,
-  handle:1,
-  email:2,
-  year:3,
-  month:4, day:4,
-  hour:5, minute:5,
-  place:6,
-  'wormhole-1':7, 'wormhole-2':7, 'wormhole-bond':7, 'wormhole-ideal':7,
-  'wormhole-gate':7, 'wormhole-fear':7, 'wormhole-flaw':7,
-  'wormhole-secret':7, 'wormhole-pivotal':7,
-  'smash-name':8, 'smash-quality':8, 'smash-synthesis':8,
-  wildcard:9,
-  threshold:10,
-  'deep-trait_unlearned':10, 'deep-trait_avoided':10, 'deep-trait_surfacing':10,
-  'deep-cognition':10,
-  'deep-belief_loud':10, 'deep-belief_quiet':10, 'deep-belief_doubted':10,
-  'deep-dilemma_friend':10, 'deep-dilemma_stranger':10, 'deep-dilemma_witness':10,
-  'deep-teach_short':10, 'deep-teach_long':10,
-  'deep-face_after':10,
-  'stamp-driving_principles':10, 'stamp-tuesday_mundane':10, 'stamp-register_shift':10,
-  'stamp-idiolect_marker':10, 'stamp-unique_knowledge':10,
-  review:11, 'edit-pick':11, submitting:11
+  bypass:0, opening:0, animal:0,
+  year:1, month:1, day:1, hour:1, minute:1, place:1,
+  handle:2, email:2,
+  'wormhole-1':3, 'wormhole-2':3, 'wormhole-bond':3, 'wormhole-ideal':3,
+  'wormhole-gate':3, 'wormhole-fear':3, 'wormhole-flaw':3,
+  'wormhole-secret':3, 'wormhole-pivotal':3, wildcard:3, doorway:3,
+  'mix-name':4, 'mix-quality':4, 'mix-synthesis':4,
+  'deep-trait_unlearned':5, 'deep-trait_avoided':5, 'deep-trait_surfacing':5,
+  'deep-cognition':5, 'deep-belief_loud':5, 'deep-belief_quiet':5,
+  'deep-belief_doubted':5, 'deep-dilemma_friend':5, 'deep-dilemma_stranger':5,
+  'deep-dilemma_witness':5, 'deep-teach_short':5, 'deep-teach_long':5,
+  'deep-face_after':5,
+  'stamp-driving_principles':6, 'stamp-tuesday_mundane':6, 'stamp-register_shift':6,
+  'stamp-idiolect_marker':6, 'stamp-unique_knowledge':6,
+  review:7, 'edit-pick':7, submitting:7, complete:7
 };
+function markWormcardStarted(){
+  document.body.classList.add('wormcard-started');
+}
+
 function renderProgressDots(){
   var el = document.getElementById('progress-dots');
   if(!el) return;
-  var doneCount = 0;
-  for(var i=0; i<STAGE_ORDER.length; i++){
-    var name = STAGE_ORDER[i];
-    var done = false;
-    if(name === 'animal' && data.animal) done = true;
-    else if(name === 'handle' && data.handle) done = true;
-    else if(name === 'email' && data.email) done = true;
-    else if(name === 'year' && data.birthYear) done = true;
-    else if(name === 'date' && data.birthMonth && data.birthDay) done = true;
-    else if(name === 'time' && (data.birthHour !== '' && data.birthHour != null)) done = true;
-    else if(name === 'place' && data.birthPlace) done = true;
-    else if(name === 'wormhole' && (data.backstory || data.motivation || data.fear || data.flaw || data.bond || data.ideal || data.secret || data.pivotalEvent)) done = true;
-    else if(name === 'smashes' && data.smashes && data.smashes.length) done = true;
-    else if(name === 'wildcard' && data.wildcard) done = true;
-    if(done) doneCount++;
-  }
-  var total = STAGE_ORDER.length;
-  // Terminal-native progress: [====------] 04/10
-  var barLen = 10;
-  var filled = Math.round((doneCount / total) * barLen);
-  var bar = '';
-  for(var j=0; j<barLen; j++){
-    bar += (j < filled) ? '=' : '-';
-  }
-  var pad = doneCount < 10 ? '0'+doneCount : doneCount;
-  el.textContent = '['+bar+'] '+pad+'/'+total;
+  var idx = STAGE_MAP[currentState];
+  if(idx == null) idx = 0;
+  var phase = PHASES[idx] || PHASES[0];
+  el.textContent = 'Phase ' + (idx + 1) + ' of ' + PHASES.length + ' · ' + phase.label;
 }
 
 // Append a chat line, optionally typed char-by-char
@@ -2507,6 +2545,8 @@ function handleInputKey(e){
           appendLine('<span class="quiet">type a new answer to overwrite, or press up again to go further back.</span>', {gap:true, instant:true});
         }
         currentState = prev;
+        renderProgressDots();
+        saveCheckpoint();
         STATES[prev].enter();
       }
       return;
@@ -2654,6 +2694,15 @@ attachInputHandler();
       handleAdvance('skip', 'skip');
       return;
     }
+    if(action === 'why'){
+      handleAdvance('why', 'why');
+      return;
+    }
+    if(action === 'finish'){
+      if(window.Tamagotchi) window.Tamagotchi.reactToFeed('finish');
+      handleAdvance('finish', 'finish');
+      return;
+    }
     if(action === 'enter'){
       var raw = inputEl ? inputEl.value : '';
       var trimmed = raw.trim();
@@ -2794,7 +2843,7 @@ function renderCardPreview(){
   var hasAnyData = data.handle || data.animal || data.birthYear ||
     data.backstory || data.motivation || data.fear || data.flaw ||
     data.bond || data.ideal || data.secret || data.pivotalEvent ||
-    data.smashes.length || data.wildcard ||
+    data.mixes.length || data.wildcard ||
     Object.keys(data.stats).length;
 
   if(!hasAnyData){
@@ -2825,9 +2874,9 @@ function renderCardPreview(){
   if(isFullyFilled()){
     lines.push('<span class="badge">◉ '+escapeHtml(hegelianeName())+' · vedic-grade</span>');
   }
-  // Cocoon, ONLY if 5+ smashes
-  if(data.smashes.length >= 5){
-    lines.push('<span class="badge">◉ cocoon · '+data.smashes.length+' smashes</span>');
+  // Cocoon, ONLY if 5+ mixes
+  if(data.mixes.length >= 5){
+    lines.push('<span class="badge">◉ cocoon · '+data.mixes.length+' mixes</span>');
   }
   // Silkworm, ONLY if all 8 wormhole answered
   var whFields = ['backstory','motivation','fear','flaw','bond','ideal','secret','pivotalEvent'];
@@ -2883,11 +2932,11 @@ function renderCardPreview(){
     });
   }
 
-  // smashes
-  if(data.smashes.length){
+  // mixes
+  if(data.mixes.length){
     lines.push('');
-    lines.push('smashed from');
-    data.smashes.forEach(function(s){
+    lines.push('mixed from');
+    data.mixes.forEach(function(s){
       lines.push('• '+escapeHtml(s.name||'?')+' → '+escapeHtml(s.quality||'?'));
     });
   }
@@ -2940,9 +2989,9 @@ function buildPlaintextCard(){
   lines.push('hash: '+simpleHash(hashSrc));
   if(isFullyFilled()) lines.push('◉ '+hegelianeName()+' tier · vedic-grade');
   else lines.push('◎ '+hegelianeName()+' (locked: fill every field)');
-  var smashCount = data.smashes.length;
-  if(smashCount >= 5) lines.push('◉ cocoon tier · 5+ smashes');
-  else lines.push('◎ cocoon (locked: 5 smashes, '+smashCount+'/5)');
+  var mixCount = data.mixes.length;
+  if(mixCount >= 5) lines.push('◉ cocoon tier · 5+ mixes');
+  else lines.push('◎ cocoon (locked: 5 mixes, '+mixCount+'/5)');
   var whFields = ['backstory','motivation','fear','flaw','bond','ideal','secret','pivotalEvent'];
   var whCount = whFields.filter(function(f){return data[f];}).length;
   if(whCount === 8) lines.push('◉ silkworm tier · wormhole complete');
@@ -2984,9 +3033,9 @@ function buildPlaintextCard(){
     wh.forEach(function(f){if(data[f[0]]) lines.push(f[1]+': '+data[f[0]]);});
     lines.push('');
   }
-  if(data.smashes.length){
-    lines.push('smashed from');
-    data.smashes.forEach(function(s){lines.push('• '+(s.name||'?')+' → '+(s.quality||'?'));});
+  if(data.mixes.length){
+    lines.push('mixed from');
+    data.mixes.forEach(function(s){lines.push('• '+(s.name||'?')+' → '+(s.quality||'?'));});
     lines.push('');
   }
   // stats
@@ -3148,19 +3197,19 @@ var STATES = {
           if(hasCheckpoint){
             return appendLine('we left off with <span class="system">^'+escapeHtml(checkpoint.data.handle)+'</span>.', {gap:false});
           }
-          return appendLine('there is something you have always known about yourself.', {gap:false, cls:'system'});
+          return appendLine('you are about to make a wormcard for a reading game.', {gap:false, cls:'system'});
         })
         .then(function(){
           if(hasCheckpoint){
             return appendLine('type <span class="system">resume</span> to pick up where you left off.', {gap:false});
           }
-          return appendLine('you cannot quite say it. but you feel it.', {gap:false});
+          return appendLine('the card turns your answers into a character you can bring inside a book-world.', {gap:false});
         })
         .then(function(){
           if(hasCheckpoint){
             return appendLine('or press <span class="system">enter</span> on empty to start fresh.', {gap:true});
           }
-          return appendLine('we are going to make a card about it. about you.', {gap:false});
+          return appendLine('answer what you can. skip what you want. only the animal is required.', {gap:false});
         })
         .then(function(){
           if(hasCheckpoint){
@@ -3197,8 +3246,8 @@ var STATES = {
       if(lower === 'resume' && hasCheckpoint){
         Object.assign(data, checkpoint.data);
         if(!data.stats) data.stats = {};
-        if(!data.smashes) data.smashes = [];
-        // Backfill depth-engine fields for older checkpoints
+        if(!data.mixes) data.mixes = [];
+        // Backfill character state fields for older checkpoints
         if(!data.quirks) data.quirks = {};
         if(typeof data.xp !== 'number') data.xp = 0;
         if(typeof data.hp !== 'number') data.hp = 100;
@@ -3211,6 +3260,7 @@ var STATES = {
         syncTamagotchi();
         // Resume at last state if it makes sense
         document.body.classList.remove('bypass-mode');
+        markWormcardStarted();
         var resumeState = checkpoint.currentState;
         if(resumeState && STATES[resumeState] && resumeState !== 'bypass' && resumeState !== 'submitting'){
           currentState = resumeState;
@@ -3228,8 +3278,8 @@ var STATES = {
         if(parsed){
           Object.assign(data, parsed.data);
           if(!data.stats) data.stats = {};
-          if(!data.smashes) data.smashes = [];
-          // Backfill depth-engine fields for older pasted cards
+          if(!data.mixes) data.mixes = [];
+          // Backfill character state fields for older pasted cards
           if(!data.quirks) data.quirks = {};
           if(typeof data.xp !== 'number') data.xp = 0;
           if(typeof data.hp !== 'number') data.hp = 100;
@@ -3246,9 +3296,9 @@ var STATES = {
           // Tell them clearly what to do, different message based on whether
           // a checkpoint exists (returning vs first-time).
           if(hasCheckpoint){
-            showError('not recognized. type <span class="system">resume</span> to continue, or press <span class="system">enter</span> on empty to start fresh.');
+            showError('try <span class="system">resume</span> to continue, or press <span class="system">enter</span> on empty input to start fresh.');
           } else {
-            showError('press <span class="system">enter</span> on empty input to begin.');
+            showError('press <span class="system">enter</span> with the input empty to begin.');
           }
         }
       }
@@ -3260,20 +3310,14 @@ var STATES = {
       promptArrow.classList.add('thinking');
       placeholderEl.classList.remove('visible');
       var seq = [
-        ['.', {speed:8}],
-        ['..', {speed:8}],
-        ['...', {speed:8, gap:true}],
-        ['the white rabbit is at the edge of every page.', {speed:32}],
-        ['most readers do not follow it.', {speed:32, gap:true}],
-        ['this is for the ones who do.', {speed:32, gap:true}],
-        ['you have felt it before. when a book ends and you wish you could stay inside it.', {speed:32}],
-        ['you can stay inside it. but only if you bring a self that fits.', {speed:32, gap:true}],
-        ['that is what we are about to make.', {speed:30, cls:'system'}],
-        ['a version of you. the one that walks through the door.', {speed:32, gap:true}],
-        ['every version of you that walks through has four parts.', {speed:32}],
-        ['a burrowing animal. a date. a name. a wormhole to fall down.', {speed:32, gap:true}],
-        ['skip what you want. only the animal is required.', {speed:32, gap:true}],
-        ['follow.', {speed:30, cls:'system'}]
+        ['first, we make the wormcard.', {speed:32, cls:'system'}],
+        ['this is your character card for playing inside a book, poem, story, article, or scene.', {speed:32}],
+        ['after the card is saved, give it to the Dimensional Master. the teacher runs the table and may use AI for tracking.', {speed:32}],
+        ['the helper opens the text-world. you choose actions. you use evidence from the text. the world responds.', {speed:32, gap:true}],
+        ['this card has four easy starting parts.', {speed:32}],
+        ['a burrowing animal. a date and place. a name. a few story answers.', {speed:32}],
+        ['you can skip most questions. only the animal is required.', {speed:32, gap:true}],
+        ['start with the animal.', {speed:30, cls:'system'}]
       ];
       var p = Promise.resolve();
       seq.forEach(function(item){
@@ -3607,7 +3651,7 @@ var STATES = {
         transitionTo('wormhole-fear');
       } else {
         appendLine('<span class="quiet">the deeper questions stay closed for now. the burrow is shelter, not test.</span>', {gap:true, instant:true});
-        transitionTo('smash-name');
+        transitionTo('mix-name');
       }
     },
     advance: function(){}
@@ -3615,25 +3659,25 @@ var STATES = {
   'wormhole-fear': makeWormhole('fear', 'what do you fear most?', 'wormhole-flaw'),
   'wormhole-flaw': makeWormhole('flaw', 'your fatal flaw.', 'wormhole-secret'),
   'wormhole-secret': makeWormhole('secret', 'a secret you carry.', 'wormhole-pivotal'),
-  'wormhole-pivotal': makeWormhole('pivotalEvent', 'the pivotal event of your life so far.', 'smash-name', false, true),
+  'wormhole-pivotal': makeWormhole('pivotalEvent', 'the pivotal event of your life so far.', 'mix-name', false, true),
 
-  'smash-name': {
+  'mix-name': {
     enter: function(){
-      if(data.smashes.length===0){
+      if(data.mixes.length===0){
         showWormCrawl();
         appendLine('next part: people you admire.', {gap:false, cls:'system'});
         appendLine('name someone you look up to. real or made up. then say one thing about them you wish you had too.', {gap:false});
         appendLine('do it as many times as you want. the more you do, the more your card has in it.', {gap:false});
         appendLine('<span class="quiet">type why for more. type browse to see a list of famous ones.</span>', {gap:true, instant:true});
       }
-      smashStage = 'name';
-      smashTemp = {name:'',quality:'',archetype:null};
+      mixStage = 'name';
+      mixTemp = {name:'',quality:'',archetype:null};
       appendLine('name someone you admire.', {gap:false, question:true});
-      setPrompt('real or fictional · browse · or skip to finish smashing');
+      setPrompt('real or fictional · browse · or skip to finish mixing');
     },
     advance: function(input){
-      // finish/exit/quit/enough at smash-name = seal card globally
-      // (note: 'done' has phase-specific meaning here = stop smashing, advance to wildcard)
+      // finish/exit/quit/enough at mix-name = seal card globally
+      // (note: 'done' has phase-specific meaning here = stop mixing, advance to wildcard)
       if(isGlobalEscape(input) && (input||'').toLowerCase() !== 'done'){
         sealAndReview(input);
         return;
@@ -3648,8 +3692,8 @@ var STATES = {
         appendLine('<span class="quiet">click a figure to use it. close to type your own.</span>', {gap:true, instant:true});
         window.AaBridge.open({
           onPick: function(picked){
-            // Stash archetype provenance on smashTemp
-            smashTemp.archetype = {
+            // Stash archetype provenance on mixTemp
+            mixTemp.archetype = {
               id: picked.archetypeId,
               figureLabel: picked.figureLabel,
               tradition: picked.tradition,
@@ -3658,20 +3702,20 @@ var STATES = {
             // Pre-fill the input with the picked name and submit
             inputEl.value = picked.name;
             // Re-trigger advance with the value
-            STATES['smash-name'].advance(picked.name);
+            STATES['mix-name'].advance(picked.name);
             inputEl.value = '';
           }
         });
         return;
       }
       if(input.toLowerCase()==='skip' || input.toLowerCase()==='done' || input.toLowerCase()==='n'){
-        if(data.smashes.length===0){
+        if(data.mixes.length===0){
           appendLine('<span class="answer quiet">skipped</span>',{gap:true});
           appendLine('<span class="quiet">type back to revisit. or press up.</span>', {gap:true, instant:true});
           transitionTo('wildcard');
         } else {
-          appendLine('<span class="quiet">'+data.smashes.length+' figure'+(data.smashes.length>1?'s':'')+' smashed.</span>',{gap:true, instant:true});
-          transitionTo('smash-synthesis');
+          appendLine('<span class="quiet">'+data.mixes.length+' figure'+(data.mixes.length>1?'s':'')+' mixed.</span>',{gap:true, instant:true});
+          transitionTo('mix-synthesis');
         }
         return;
       }
@@ -3690,66 +3734,66 @@ var STATES = {
         showError('<span class="err">that does not look like a name. real or fictional, but readable.</span>');
         return;
       }
-      smashTemp.name = input;
+      mixTemp.name = input;
       appendLine('<span class="answer">'+escapeHtml(input)+'</span>', {gap:false});
-      showReaction('smash-name', input);
-      transitionTo('smash-quality');
+      showReaction('mix-name', input);
+      transitionTo('mix-quality');
     }
   },
 
-  'smash-quality': {
+  'mix-quality': {
     enter: function(){
-      appendLine('what would you take from '+escapeHtml(smashTemp.name)+'?', {gap:false});
+      appendLine('what would you take from '+escapeHtml(mixTemp.name)+'?', {gap:false});
       setPrompt('the specific quality');
     },
     advance: function(input){
       // skip / done / n at the quality stage = abandon this figure
-      // (nothing is smashed) and return to smash-name, where skip
+      // (nothing is mixed) and return to mix-name, where skip
       // exits the loop. Before this branch existed, the word skip
       // passed the validators and was recorded as the taken quality,
       // and done sealed the whole card mid-figure.
       if(/^(skip|done|n)$/i.test((input||'').trim())){
-        appendLine('<span class="answer quiet">skipped \u2014 nothing taken from '+escapeHtml(smashTemp.name)+'.</span>',{gap:true});
-        smashTemp = {name:'',quality:'',archetype:null};
-        transitionTo('smash-name');
+        appendLine('<span class="answer quiet">skipped \u2014 nothing taken from '+escapeHtml(mixTemp.name)+'.</span>',{gap:true});
+        mixTemp = {name:'',quality:'',archetype:null};
+        transitionTo('mix-name');
         return;
       }
       if(isGlobalEscape(input)){ sealAndReview(input); return; }
       if(!input){showError('<span class="err">name the quality you would take.</span>');return;}
       if(input.length < 4){
-        showError('<span class="err">a quality is more than a syllable. tell me what '+escapeHtml(smashTemp.name)+' has that you would take.</span>');
+        showError('<span class="err">a quality is more than a syllable. tell me what '+escapeHtml(mixTemp.name)+' has that you would take.</span>');
         return;
       }
       if(!/[aeiouy]/i.test(input)){
-        showError('<span class="err">readable words. what would you take from '+escapeHtml(smashTemp.name)+'?</span>');
+        showError('<span class="err">readable words. what would you take from '+escapeHtml(mixTemp.name)+'?</span>');
         return;
       }
-      smashTemp.quality = input;
-      data.smashes.push({
-        name: smashTemp.name,
+      mixTemp.quality = input;
+      data.mixes.push({
+        name: mixTemp.name,
         quality: input,
-        archetype: smashTemp.archetype || null
+        archetype: mixTemp.archetype || null
       });
       appendLine('<span class="answer">'+escapeHtml(input)+'</span>', {gap:false});
       // reaction
-      showReaction('smash-quality', input);
-      var scoreResult = awardStats(input, 'smash-quality');
+      showReaction('mix-quality', input);
+      var scoreResult = awardStats(input, 'mix-quality');
       var hits = scoreResult ? scoreResult.statsHit : []; // full {stat,weight} objects so showStatHits renders weights
       showStatHits(hits, input);
-      // cocoon tier unlock at 5 smashes
-      if(data.smashes.length === 5){
-        showTierCinematic('cocoon', 'admired others becoming substrate');
+      // cocoon tier unlock at 5 mixes
+      if(data.mixes.length === 5){
+        showTierCinematic('cocoon', 'admired others becoming base material');
       }
-      appendLine('<span class="quiet">smashed. '+data.smashes.length+' so far.</span>', {gap:true, instant:true});
+      appendLine('<span class="quiet">mixed. '+data.mixes.length+' so far.</span>', {gap:true, instant:true});
       renderCardPreview();
-      transitionTo('smash-name');
+      transitionTo('mix-name');
     }
   },
 
-  'smash-synthesis': {
+  'mix-synthesis': {
     enter: function(){
-      var names = data.smashes.map(function(s){ return s.name; }).join(', ');
-      appendLine('the smash.', {gap:true, instant:true, cls:'system'});
+      var names = data.mixes.map(function(s){ return s.name; }).join(', ');
+      appendLine('the mix.', {gap:true, instant:true, cls:'system'});
       appendLine('you took something from <span class="answer">'+escapeHtml(names)+'</span>.', {gap:false});
       appendLine('now describe the character who is none of them. who carries the pieces you took. who is yours.', {gap:false});
       appendLine('<span class="quiet">two or three sentences. type skip to leave it for later.</span>', {gap:true, instant:true});
@@ -3767,9 +3811,9 @@ var STATES = {
         showError('<span class="err">two or three sentences. give the character a shape.</span>');
         return;
       }
-      data.smashSynthesis = input;
+      data.mixSynthesis = input;
       appendLine('<span class="answer">'+escapeHtml(input.length>200?input.slice(0,200)+'...':input)+'</span>', {gap:false});
-      var scoreResult = awardStats(input, 'smash-synthesis');
+      var scoreResult = awardStats(input, 'mix-synthesis');
       var hits = scoreResult ? scoreResult.statsHit : []; // full {stat,weight} objects so showStatHits renders weights
       showStatHits(hits, input);
       appendLine('<span class="quiet">the synthesis is the character. none of them. all of them. yours.</span>', {gap:true, instant:true});
@@ -3802,14 +3846,14 @@ var STATES = {
         appendLine('', {gap:true, instant:true});
       }
       renderCardPreview();
-      transitionTo('threshold');
+      transitionTo('doorway');
     }
   },
 
   // ============================================================
   // THRESHOLD, offer to go deeper or seal the card
   // ============================================================
-  threshold: {
+  doorway: {
     enter: function(){
       appendLine('the surface of the card is filled in.', {gap:true, instant:true, cls:'system'});
       appendLine('you can stop here, or take the worm further down.', {gap:false});
@@ -3949,17 +3993,17 @@ var STATES = {
         }
       }
 
-      appendLine('press <span class="system">enter</span> for your pdf.', {gap:false});
-      appendLine('your wormcard is one file: a <span class="system">pdf</span>. it carries every paragraph you wrote, prints natively, doubles as your save file, and reads cleanly when you drop it into any AI chat to play with this character.', {gap:true, instant:true});
+      appendLine('choose <span class="system">Save my wormcard as PDF</span>.', {gap:false});
+      appendLine('your wormcard PDF carries every paragraph you wrote. save it, give it to the Dimensional Master, and use it as your character sheet inside a book-world.', {gap:true, instant:true});
       // Mobile players see the trial-mode banner at the top of the
       // page already. Repeat the warning here so the player who's
       // been scrolled into the chat for a while gets reminded right
       // when they're about to try saving.
       if(window.matchMedia && window.matchMedia('(max-width:900px)').matches){
-        appendLine('<span class="err">⚠ trial mode.</span> mobile cannot reliably save the pdf. open <span class="system">seminarschools.com/bb</span> on desktop and drop the questions in there to take your card.', {gap:true, instant:true});
+        appendLine('<span class="system">mobile trial mode.</span> desktop gives the smooth save-as-PDF flow. open <span class="system">seminarschools.com/bb</span> on a laptop or desktop to take your card.', {gap:true, instant:true});
       }
-      appendLine('<span class="system">pdf</span> to take your card &middot; <span class="system">edit</span> to revise &middot; <span class="system">save</span> to copy text to clipboard.', {gap:true, instant:true});
-      appendLine('<span class="quiet">drop your pdf back here anytime to keep working on this card.</span>', {gap:true, instant:true});
+      appendLine('<span class="system">save pdf</span> · Save my wormcard as PDF &middot; <span class="system">edit</span> · Edit answers &middot; <span class="system">copy</span> · Copy text &middot; <span class="system">blank</span> · Print blank card.', {gap:true, instant:true});
+      appendLine('<span class="quiet">drop your saved PDF back here anytime to keep working on this card.</span>', {gap:true, instant:true});
 
       // Post-card narrative, what to do with the card after the seal.
       // Threaded into the chat itself rather than a separate guide page.
@@ -3967,37 +4011,32 @@ var STATES = {
       appendLine('drop your pdf into any AI chat. tell them you want to play with this character.', {gap:false});
       appendLine('your AI runs the table. you bring the card.', {gap:true});
 
-      setPrompt('enter · edit · save · pdf');
+      setPrompt('save pdf · edit · copy · blank');
     },
     advance: function(input){
       var cmd = input.toLowerCase();
-      if(cmd==='' || cmd==='enter' || cmd==='submit'){
+      if(cmd==='' || cmd==='enter' || cmd==='submit' || cmd==='save pdf' || cmd==='save as pdf' || cmd==='pdf' || cmd==='print' || cmd==='download' || cmd==='download pdf'){
         // PURE PUNCHCARD: finishing prints the card to PDF. No server submit.
         printCard();
-        appendLine('<span class="system">opening your wormcard. choose save-as-pdf in the print dialog. the pdf is your save file too.</span>', {gap:true, instant:true});
+        appendLine('<span class="system">opening your wormcard. choose Save as PDF in the print dialog. the PDF is your save file too.</span>', {gap:true, instant:true});
       } else if(cmd==='edit'){
         appendLine('<span class="system">type the name of the field to revise:</span> <span class="quiet">edit one field, return to the seal.</span>', {gap:true, instant:true});
         appendLine('<span class="quiet">identity:</span> handle · email · animal', {gap:false, instant:true});
         appendLine('<span class="quiet">birth:</span> year · month · day · hour · minute · place', {gap:false, instant:true});
         appendLine('<span class="quiet">wormhole:</span> backstory · motivation · bond · ideal · fear · flaw · secret · pivotal', {gap:false, instant:true});
-        appendLine('<span class="quiet">wildcard:</span> wildcard &middot; <span class="quiet">smash:</span> synthesis', {gap:false, instant:true});
+        appendLine('<span class="quiet">wildcard:</span> wildcard &middot; <span class="quiet">mix:</span> synthesis', {gap:false, instant:true});
         if(data.trait_unlearned || data.cognition || data.belief_loud || data.dilemma_friend || data.teach_short || data.face_after){
           appendLine('<span class="quiet">deep:</span> unlearned · avoided · surfacing · cognition · loud · quiet · doubted · friend · stranger · witness · teach-short · teach-long · face', {gap:true, instant:true});
         } else {
           appendLine('', {gap:true, instant:true});
         }
         currentState = 'edit-pick';
-      } else if(cmd==='save' || cmd==='copy'){
+      } else if(cmd==='copy' || cmd==='copy text' || cmd==='save text' || cmd==='clipboard'){
         copyCardToClipboard();
-      } else if(cmd==='download pdf' || cmd==='pdf' || cmd==='print' || cmd==='download' || cmd==='download all' || cmd==='all'){
-        // ONE CARD, every download path lands on the PDF. Aliases
-        // accepted for the convenience of players who type the old
-        // commands; the card produced is always the same single
-        // PDF artifact.
-        printCard();
-        appendLine('<span class="system">opening your wormcard. choose save-as-pdf in the print dialog. the pdf is your save file too.</span>', {gap:true, instant:true});
+      } else if(cmd==='blank' || cmd==='blank card' || cmd==='print blank' || cmd==='print blank card'){
+        window.open('/bookwormcard/print/?blank=1', '_blank', 'noopener');
       } else {
-        showError('<span class="err">enter · edit · save · pdf</span>');
+        showError('<span class="err">save pdf · edit · copy · blank</span>');
       }
     }
   },
@@ -4017,8 +4056,8 @@ var STATES = {
         secret:'wormhole-secret',
         pivotal:'wormhole-pivotal','pivotal-event':'wormhole-pivotal',
         wildcard:'wildcard',
-        // smash synthesis, single-field, rewrite-subtract handles the unwind
-        synthesis:'smash-synthesis','smash-synthesis':'smash-synthesis',
+        // mix synthesis, single-field, rewrite-subtract handles the unwind
+        synthesis:'mix-synthesis','mix-synthesis':'mix-synthesis',
         // 13 deep-question fields (build 5)
         unlearned:'deep-trait_unlearned','trait-unlearned':'deep-trait_unlearned',
         avoided:'deep-trait_avoided','trait-avoided':'deep-trait_avoided',
@@ -4314,7 +4353,7 @@ function transitionTo(name){
   // EDIT-FLOW INTERCEPT, when the player edited a field from
   // review (edit-pick set editReturnTarget and editTargetField),
   // the target's advance handler will hardcode a transition to
-  // its natural-next state (e.g., wildcard → threshold, smash-
+  // its natural-next state (e.g., wildcard → doorway, mix-
   // synthesis → wildcard, wormhole-1 → wormhole-2). Intercept
   // that first outward transition and redirect to the return
   // point so the player gets back to the seal phase instead of
@@ -4347,6 +4386,7 @@ function transitionTo(name){
   // Drop bypass-mode chrome-stripping class when leaving the intro screen.
   if(currentState === 'bypass' && name !== 'bypass'){
     document.body.classList.remove('bypass-mode');
+    markWormcardStarted();
   }
   currentState = name;
   renderProgressDots();
@@ -4370,7 +4410,7 @@ function transitionTo(name){
 // reach the silkworm tier by attendance alone. The visual is
 // the visual; XP comes only from quality scoring. The fix
 // keeps the worm visibly fed on every commit while restoring
-// the depth-engine thresholds to their original meaning.
+// the character engine doorways to their original meaning.
 //
 // Empty-Enter (skip-without-typing) gets a generic feed because
 // the player still committed an action. A separate reactToFeed
@@ -4396,7 +4436,7 @@ function handleAdvance(input, raw){
       'wormhole-bond':'bond', 'wormhole-ideal':'ideal',
       'wormhole-fear':'fear', 'wormhole-flaw':'flaw',
       'wormhole-secret':'secret', 'wormhole-pivotal':'pivotal-event',
-      'smash-name':'smash-name', 'smash-quality':'smash-quality', wildcard:'wildcard'
+      'mix-name':'mix-name', 'mix-quality':'mix-quality', wildcard:'wildcard'
     };
     var key = explainMap[currentState];
     if(key && window.Reactions){
@@ -4424,6 +4464,8 @@ function handleAdvance(input, raw){
     var prev = stateHistory.pop();
     if(prev){
       currentState = prev;
+      renderProgressDots();
+      saveCheckpoint();
       var s = STATES[prev];
       if(s) s.enter();
     }
@@ -4472,7 +4514,7 @@ function fallbackCopy(txt){
 function parseCard(text){
   if(!text || text.length<10) return null;
   var lines = text.split('\n').map(function(l){return l.trim();});
-  var d = {handle:'',email:'',birthYear:'',birthMonth:'',birthDay:'',birthHour:'',birthMinute:'',birthPlace:'',animal:'',backstory:'',motivation:'',fear:'',flaw:'',bond:'',ideal:'',secret:'',pivotalEvent:'',smashes:[],smashSynthesis:'',wildcard:''};
+  var d = {handle:'',email:'',birthYear:'',birthMonth:'',birthDay:'',birthHour:'',birthMinute:'',birthPlace:'',animal:'',backstory:'',motivation:'',fear:'',flaw:'',bond:'',ideal:'',secret:'',pivotalEvent:'',mixes:[],mixSynthesis:'',wildcard:''};
   // handle on first non-empty line, with optional emoji prefix
   for(var i=0;i<lines.length;i++){
     var l = lines[i];
@@ -4508,9 +4550,9 @@ function parseCard(text){
         var fmap = {backstory:'backstory',wants:'motivation',motivation:'motivation',fears:'fear',fear:'fear',flaw:'flaw',bond:'bond',ideal:'ideal',secret:'secret',pivotal:'pivotalEvent','pivotal-event':'pivotalEvent'};
         if(fmap[k]) d[fmap[k]] = v;
       }
-    } else if(section==='smashed from'){
+    } else if(section==='mixed from'){
       var smm = l.match(/^•\s*(.+?)\s*→\s*(.+)$/);
-      if(smm) d.smashes.push({name:smm[1].trim(), quality:smm[2].trim()});
+      if(smm) d.mixes.push({name:smm[1].trim(), quality:smm[2].trim()});
     } else if(section==='wildcard'){
       d.wildcard = (d.wildcard?d.wildcard+'\n':'')+l;
     }
@@ -4541,7 +4583,7 @@ function submitForm(){
   form.querySelector('[name=ideal]').value = data.ideal;
   form.querySelector('[name=secret]').value = data.secret;
   form.querySelector('[name="pivotal-event"]').value = data.pivotalEvent;
-  form.querySelector('[name=smashes]').value = JSON.stringify(data.smashes);
+  form.querySelector('[name=mixes]').value = JSON.stringify(data.mixes);
   form.querySelector('[name=wildcard]').value = data.wildcard;
   // Deep-question fields (build 5)
   form.querySelector('[name="trait-unlearned"]').value = data.trait_unlearned || '';
@@ -4685,6 +4727,17 @@ function buildQualityHistorySummary(){
 window.addEventListener('load', function(){
   document.body.classList.add('game-ready');
   renderProgressDots();
+  var startBtn = document.getElementById('start-wormcard');
+  if(startBtn){
+    startBtn.addEventListener('click', function(){
+      if(inputEl) inputEl.focus();
+      if(currentState === 'bypass'){
+        handleAdvance('', '');
+      } else if(currentState === 'review'){
+        printCard();
+      }
+    });
+  }
   applyToggles();
   document.getElementById('t-esl').addEventListener('click', toggleEsl);
   document.getElementById('t-theme').addEventListener('click', toggleTheme);
@@ -4781,7 +4834,7 @@ function buildLegendPanel(panel){
     });
     html += '</div>';
   }
-  html += '<div style="color:var(--fg-dim);font-size:0.7rem;margin-top:0.5rem;line-height:1.4">a faint ghost-emoji means the cluster is brewing but has not yet crossed its threshold. a glowing pulsing accessory means one trait inside the cluster is dominating it, the trait name appears under the symbol. an extreme-shimmer accessory means a runaway register.</div>';
+  html += '<div style="color:var(--fg-dim);font-size:0.7rem;margin-top:0.5rem;line-height:1.4">a faint ghost-emoji means the cluster is brewing but has not yet crossed its doorway. a glowing pulsing accessory means one trait inside the cluster is dominating it, the trait name appears under the symbol. an extreme-shimmer accessory means a runaway register.</div>';
   panel.innerHTML = html;
 }
 
@@ -4999,5 +5052,6 @@ document.addEventListener('click', function(e){
 <script src="/js/indra.js?v=cl91" defer></script>
 <script src="/js/footer.js?v=cl91" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
 </body>
 </html>

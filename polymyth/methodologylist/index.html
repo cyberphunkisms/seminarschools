@@ -164,7 +164,9 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
 <link rel="stylesheet" href="/css/theme.css?v=cl91">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.165">
+<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="archive" data-page-weight="heavy">
+<!-- CL_SELF_ROUTE_NOTE -->
+<div class="route-note archive-route-note" role="note"><span class="route-note-kicker">ML* archive</span>Dense source page. Use find, section links, and anchors.</div>
 <a class="skip-link" href="#mainwrap">Skip to main content</a>
 <!--
 ================================================================
@@ -7911,6 +7913,7 @@ function exportHTML(){
 </main>
 <script src="/js/theme.js?v=cl91" defer><\/script>
 <script src="/js/txt-tools.js" data-txt="../methodologylist.txt"><\/script>
+<script defer src="/js/site-keyboard-enhancements.js"><\/script>
 </body></html>`;
   dl(new Blob([html],{type:'text/html'}),'methodologylist.html');
   toast('exported html');

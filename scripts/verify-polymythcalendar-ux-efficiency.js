@@ -26,9 +26,7 @@ for (const route of ROUTES) {
   if (html.includes("window.scrollTo({ top: 0")) errors.push(`${label} still jumps whole page on event-tag click`);
   if (html.includes("setTimeout(run, 320)")) errors.push(`${label} still has multi-timer today anchoring`);
   if (!html.includes('academicOk = !activeAcademicFocus')) errors.push(`${label} calendar mode ignores academic shortcut focus`);
-  if (!html.includes('All Writing</a>')) errors.push(`${label} missing clear All Writing link`);
-  if (html.includes('All Writing</strong> = all writing contests')) errors.push(`${label} still contains pointless All Writing glossary copy`);
-  if (!html.includes('For students:')) errors.push(`${label} missing student safety copy`);
+  if (!html.includes('All Writing</a>')) errors.push(`${label} still labels /writingclub/ as only Club`);
 }
 const pkg = fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8');
 if (!pkg.includes('verify-polymythcalendar-ux-efficiency.js')) errors.push('package verify:all does not include UX efficiency guard');

@@ -139,11 +139,17 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
 .lede{position:relative;z-index:1;}
 
-/* HOME_RESPONSIVE_CONCISE_RELEASE */
-@media (min-width: 900px){
-  main, .wrap, .frame, .home-shell, .landing-shell { max-width: min(1240px, calc(100vw - 72px)) !important; }
-}
-
+/* CL pathway map: starts from the work someone is trying to do, not from a flat role label. */
+.work-paths{margin:1.6rem 0 1.9rem;}
+.work-paths h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.25rem,1.04rem + .9vw,1.85rem);line-height:1.12;margin:0 0 .55rem;}
+.work-paths .path-intro{max-width:68ch;margin:0 0 .95rem;color:var(--ink-soft);font-family:var(--serif);font-size:clamp(.98rem,.93rem + .22vw,1.12rem);}
+.path-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.78rem;}
+.path-card{display:flex;flex-direction:column;gap:.42rem;min-height:100%;border:1px solid var(--line);border-radius:12px;padding:1rem 1rem .95rem;background:color-mix(in srgb,var(--bg-soft) 82%,transparent);transition:border-color .18s,background .18s,transform .18s;color:var(--ink);}
+.path-card:hover,.path-card:focus-visible{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--bg-soft));transform:translateY(-1px);outline:0;}
+.path-card .path-k{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);}
+.path-card strong{font-family:var(--serif);font-weight:500;font-size:1.05rem;line-height:1.16;}
+.path-card span:last-child{font-size:.9rem;line-height:1.42;color:var(--ink-soft);}
+@media(max-width:520px){.path-grid{grid-template-columns:1fr}.path-card{border-radius:10px;padding:.9rem;}}
 </style>
 <script type="application/ld+json">
 {
@@ -163,8 +169,7 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
       "founder": {
         "@type": "Person",
         "name": "Saul Karim Nassau",
-        "url": "https://seminarschools.com/saul/",
-        "image": "https://seminarschools.com/img/saul.jpg"
+        "url": "https://seminarschools.com/saul/"
       }
     },
     {
@@ -182,7 +187,7 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
 }
 </script>
 </head>
-<body class="home" data-indra-intensity="0.205" data-geometry="indra-web">
+<body class="home" data-indra-intensity="0.075" data-geometry="indra-web" data-route-type="home">
 
 <header class="bar">
   <a class="brand" href="/">Seminar<b>Schools</b></a>
@@ -201,39 +206,30 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
 <div class="map-rail" id="mapRail" aria-label="Project list"></div>
 
 <div class="lede">
-  <h1>Private tutoring, reading rooms, and learning resources in <em>Toronto and online</em>.</h1>
-  <p>Work through hard texts, write stronger essays, prepare for school, and find public learning opportunities without having to decode the site first.</p>
+  <h1>A room of readers working a hard text together reaches what <em>none of them</em> could reach alone.</h1>
+  <p>Seminar Schools brings tutoring, public reading, teacher resources, writing, and learning games into one Toronto practice.</p>
 
-  <nav class="doors" aria-label="Start here" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:2rem 0;">
-    <a href="/leizu" class="door" style="font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:1.1rem 1.2rem;border:1px solid var(--line);border-radius:3px;transition:background .18s,color .18s;">
-      <strong style="display:block;font-family:var(--serif);font-size:1rem;text-transform:none;letter-spacing:0;margin-bottom:.3rem;">Book tutoring</strong>
-      English, writing, philosophy, humanities, and study skills.
-    </a>
-    <a href="/agora/" class="door" style="font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:1.1rem 1.2rem;border:1px solid var(--line);border-radius:3px;transition:background .18s,color .18s;">
-      <strong style="display:block;font-family:var(--serif);font-size:1rem;text-transform:none;letter-spacing:0;margin-bottom:.3rem;">Join a reading room</strong>
-      Free public seminars for readers in Toronto and online.
-    </a>
-    <a href="/polymythseminars/" class="door" style="font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:1.1rem 1.2rem;border:1px solid var(--line);border-radius:3px;transition:background .18s,color .18s;">
-      <strong style="display:block;font-family:var(--serif);font-size:1rem;text-transform:none;letter-spacing:0;margin-bottom:.3rem;">Explore Polymythcal</strong>
-      Talks, contests, lectures, festivals, scholarships, and opportunities.
-    </a>
-    <a href="/teacherresources/" class="door" style="font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:1.1rem 1.2rem;border:1px solid var(--line);border-radius:3px;transition:background .18s,color .18s;">
-      <strong style="display:block;font-family:var(--serif);font-size:1rem;text-transform:none;letter-spacing:0;margin-bottom:.3rem;">Use teacher resources</strong>
-      Classroom-ready materials arranged by subject.
-    </a>
-  </nav>
+
+  <section class="work-paths" aria-labelledby="home-pathways-title">
+    <h2 id="home-pathways-title">Start with the work in front of you.</h2>
+    <p class="path-intro">The site opens through practical entrances: study support, public events, classroom materials, reading games, project archives, and a general CV.</p>
+    <div class="path-grid">
+      <a class="path-card" href="/leizu/"><span class="path-k">Study support</span><strong>A student needs steadier reading, writing, or humanities work.</strong><span>Leizu gives the tutoring path, session structure, policies, intake, and scholarship information.</span></a>
+      <a class="path-card" href="/polymythseminars/"><span class="path-k">Events and deadlines</span><strong>A learner wants talks, contests, calls for papers, and fellowships worth tracking.</strong><span>Polymythcal gathers public opportunities with filters, dates, source links, and freshness labels.</span></a>
+      <a class="path-card" href="/teacherresources/"><span class="path-k">Teaching materials</span><strong>A teacher wants useful outside resources without digging through scattered tabs.</strong><span>The resource finder keeps the page link-first, searchable, and organized by subject and level.</span></a>
+      <a class="path-card" href="/bb/"><span class="path-k">Reading game</span><strong>A class or reading group wants to turn a difficult text into playable choices.</strong><span>BB starts with the wormcard maker, then points students and teachers toward the rule library.</span></a>
+      <a class="path-card" href="/aa/"><span class="path-k">AA* and polymyth</span><strong>A reader wants the project archive and the theory machinery behind the work.</strong><span>AA* now funnels toward polymyth without flattening either project into a generic homepage.</span></a>
+      <a class="path-card" href="/saul/"><span class="path-k">CV</span><strong>An employer, school, collaborator, or grant reader wants Saul Karim Nassau’s record.</strong><span>The CV is framed broadly for professional opportunities rather than only for Leizu.</span></a>
+    </div>
+  </section>
 
   <div style="font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;color:var(--ink-soft);margin-bottom:1.5rem;">
     Text or call <a href="tel:+14167710382" style="color:var(--accent);border-bottom:1px solid var(--accent);">416-771-0382</a> &middot; <a href="mailto:saulnassau@protonmail.com" style="color:var(--accent);border-bottom:1px solid var(--accent);">saulnassau@protonmail.com</a>
   </div>
 
-  <div class="id" aria-label="Founder and teacher">
-    <img class="portrait" src="/img/saul.jpg" width="88" height="88" alt="Black-and-white portrait of Saul Nassau" loading="lazy" decoding="async">
-    <div>
-      <div class="who">Taught by Saul Nassau &middot; MA Philosophy &middot; Toronto and online</div>
-      <p style="margin-top:.35rem;font-size:.9rem;max-width:48ch;">I teach students to read closely, write clearly, and think through difficult ideas with confidence.</p>
-      <a href="/saul/" style="display:inline-block;margin-top:.45rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border-bottom:1px solid currentColor;">View modular CV</a>
-    </div>
+  <div class="id">
+    <img class="portrait" src="/img/saul.jpg" width="88" height="88" alt="Saul Karim Nassau" loading="lazy" decoding="async">
+    <div class="who">Saul Karim Nassau &middot; MA Philosophy &middot; Toronto and online</div>
   </div>
 </div>
 
@@ -364,5 +360,6 @@ NODES.filter(n=>n.tier>0).forEach((n,i)=>{
 <script src="/js/indra.js?v=cl91" defer></script>
 <script src="/js/footer.js?v=cl91" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
 </body>
 </html>

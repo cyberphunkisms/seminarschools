@@ -30,5 +30,3 @@ if (failures.length) {
   process.exit(1);
 }
 console.log('Bookwormcard gate verification passed: static BB context, ESL helpers, theme/contrast/text controls, mobile-safe shell, and data notice are present.');
-
-process.exit(0);

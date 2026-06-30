@@ -70,6 +70,12 @@ function humanDate(date) {
   if (Number.isNaN(d.getTime())) return String(date || 'Date to be confirmed');
   return new Intl.DateTimeFormat('en-CA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/Toronto', timeZoneName: 'short' }).format(d);
 }
+function geometryIntensity(canonical) {
+  if (/\/polymythseminars\//.test(canonical)) return '0.120';
+  if (/\/teacherresources\//.test(canonical)) return '0.070';
+  if (canonical.includes('/saul/')) return '0.085';
+  return '0.075';
+}
 function pageHead({ title, description, canonical, schema = [], robots = 'index,follow', css = '/teacherresources/catalog.css' }) {
   const cards = [
     `<meta property="og:type" content="website">`,
@@ -93,6 +99,7 @@ function pageHead({ title, description, canonical, schema = [], robots = 'index,
 <meta name="description" content="${attr(description)}">
 <link rel="canonical" href="${attr(canonical)}">
 <link rel="stylesheet" href="${css}">
+<link rel="stylesheet" href="/css/alive.css?v=cl91">
 ${cards}
 ${schemas}
 </head>`;
@@ -110,13 +117,15 @@ function htmlPage({title, description, canonical, crumbs, body, schema = [], rob
     ...schema
   ];
   return `${pageHead({title, description, canonical, schema:graph, robots, css})}
-<body>
+<body data-geometry="indra-web" data-indra-intensity="${geometryIntensity(canonical)}">
 <a class="skip-link" href="#content">Skip to content</a>
 <header class="catalog-top"><a href="/" class="brand">Seminar <em>Schools</em></a><nav aria-label="Primary"><a href="/teacherresources/">Teacher Resources</a><a href="/polymythseminars/">polymythcalendar</a><a href="/leizu/">Leizu Academy</a></nav></header>
 <main id="content" class="catalog-page">
 ${body}
 </main>
 <footer class="catalog-footer"><a href="/teacherresources/">Teacher Resources</a> · <a href="/">Seminar Schools</a> · Toronto</footer>
+<script src="/js/mandala.js?v=cl91" defer></script>
+<script src="/js/indra.js?v=cl91" defer></script>
 </body>
 </html>\n`;
 }

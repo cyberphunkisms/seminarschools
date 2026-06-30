@@ -2,9 +2,21 @@
 
 **What this document is.** A compiled rulebook for polymythdnd built by aggregating Saul-authored methodology entries (T114r through T115e) in ml*. This is editorial-arrangement work per the GOBLDIGOOK-BAN-IN-ML pipeline: ml* holds the source methodology; this document arranges those entries into a pickup-and-run format for teachers and AI co-DMs. Every claim is sourced to a specific methodology entry by T-tag. No new rules invented here.
 
-**What polymythdnd is.** A TTRPG-based curriculum-delivery system for K-12+ classrooms. Bookworms (students) traverse dimensions (units of inquiry anchored in specific texts) under the joint DM-ship of a human teacher and an AI co-DM. Resolution is by reading-comprehension-grounded deliberation rather than visible dice. The framework operates as part of the larger bookwormburrows pedagogical architecture (bb*).
+**What polymythdnd is.** PolymythDND, BookwormBurrows, and BB name the same working game depending on register. It is a teacher-led academic TTRPG for K-12, tutoring, seminars, and adult study groups. Bookworms traverse dimensions anchored in specific texts. Wormcards are the character sheets. Assignments are quests. The teacher is the Dimensional Master. AI assists behind the curtain as memory clerk, continuity tracker, NPC scheduler, quest ledger, and variable tracker. Resolution is narrative-first and academic-quality-first rather than dice-first. The framework operates as part of the larger bookwormburrows pedagogical architecture (bb*).
 
 **Cross-references.** Source methodology: ml* at `/polymyth/methodologylist/`. Bookwormburrows pedagogical context: bb* at `/polymyth/bookwormburrows/`. Compatibility-landscape reference for D&D/OSR mechanic-mapping: `/polymyth/polymythdnd/index.html`. Verified-source research on adjacent TTRPG systems: `/polymyth/research.md`.
+
+---
+
+## 0. Current BB clarification pass (2026-06-30)
+
+- BB, BookwormBurrows, and PolymythDND name the same game in different registers.
+- The game starts when the Dimensional Master receives the players' wormcards.
+- The anchor text becomes the dimension, while the sealed exegesis remains protected.
+- Assignments are quests when they give players in-game motive to study, write, research, revise, or return.
+- There are two NPC registers: setupnpcs prepared before play from real people, real events, real learning, and assignment architecture; improvnpcs generated during play as ordinary world-population.
+- Adult seminar mode keeps the same structure and makes independent study the main quest energy.
+- AI is gorgonification-prone, so it remains behind the human Dimensional Master.
 
 ---
 
@@ -14,7 +26,7 @@ Seven canonical foundations of polymythdnd. These are NOT design-suggestions —
 
 **F1. No dice.** Polymythdnd has no dice mechanics. Resolution is by deliberation grounded in reading-comprehension substrate (F4) plus the as-many-variables-as-possible substrate (A5). No probability-tables, hit-chances, or skill-check thresholds. No hidden random-resolvers. The deliberation-and-variable-substrate IS the resolution-method. (Source: ml* T114r entry "polymythdnd-foundations-canonicalized"; companion principles F2 ai-adjudicates, F3 deliberation-as-resolution, F4 reading-comprehension-as-substrate; reaffirmed by Saul T115h "ive already answered the question- no dice".)
 
-**F2. AI adjudicates.** The AI is the resolver of mechanical questions. Not the teacher (whose role is pedagogical guidance) and not the bookworm (whose role is in-character agency). When a bookworm proposes an action, the AI determines outcomes by integrating reading-comprehension substrate plus situational variables. (Source: T114r.)
+**F2. AI assists the Dimensional Master.** Current 2026-06-30 ruling: AI does not replace the teacher and does not become the final table voice. The teacher remains the Dimensional Master and filter. AI handles the bureaucratic burden of play: schedules, locations, setupnpcs, improvnpcs, continuity, inventory, quest status, time, relationship memory, and variable tracking. When a bookworm proposes an action, AI may prepare teacher-facing adjudication options by integrating text-world logic, assignment status, and situational variables. The teacher decides what reaches the players.
 
 **F3. Deliberation as resolution.** The mechanical resolution of conflicts is not "roll-the-dice-and-see" but "deliberate-with-the-text-and-with-each-other-and-with-the-AI." The AI’s adjudication is informed by what bookworms discover through reading and discussing. Resolution unfolds AS deliberation, not after it. (Source: T114r; Q1 in T114s confirmed deliberation-shape as resolution-mechanic.)
 
@@ -22,7 +34,7 @@ Seven canonical foundations of polymythdnd. These are NOT design-suggestions —
 
 **F5. Any action possible.** No predetermined action-list bounds what bookworms can attempt. The AI must adjudicate novel actions on their merits, integrating reading-substrate plus situational logic plus framework principles. (Source: T114r.)
 
-**F6. AI co-DM via bb*.** The AI’s DM-role is enacted through bookwormburrows pedagogical-protocols (bb*). The AI is not a generic GM — it is a co-DM operating within the bb* substrate that gives it pedagogical grounding. (Source: T114r.)
+**F6. AI as table assistant via bb*.** The AI-role is enacted through bookwormburrows pedagogical protocols (bb*). The AI is not a generic GM and not an autonomous DM. It is a table assistant operating within the bb* substrate, always mediated by the Dimensional Master.
 
 **F7. Bookworm becomes author.** The long-arc goal is that bookworms transition from bookworm-as-character-in-game to bookworm-as-co-author-of-their-own-dimension. Mature bookworms author dimensions for newer bookworms. The framework operates as living-scanner without dependency on any single facilitator. (Source: T114r; aligns with success-criterion in user-memory "bookwormburrows producing students who name themselves.")
 
@@ -32,9 +44,9 @@ Seven canonical foundations of polymythdnd. These are NOT design-suggestions —
 
 **Canonical term: DM.** Both the human teacher and the AI co-DM are referred to as DM. The unified term is canonical. When a session is running, "the DM" may refer to teacher-action, AI-action, or the unified teacher-plus-AI adjudication-pair. (Source: ml* T114s entry "polymythdnd-design-questions-resolved" — dm-canonical-rename.)
 
-**Division of labor (operational).** The teacher handles real-time human-facing pedagogical care (engagement, social dynamics, emotional safety, real-world context). The AI handles mechanical adjudication, dimension-substrate, in-game variable-tracking, reading-comprehension-checks via deliberation. The two coordinate but the bookworm experiences them as one DM-entity.
+**Division of labor (operational).** The teacher handles real-time human-facing pedagogy, narration, pacing, social dynamics, emotional safety, historical mediation, assessment judgement, and the final spoken table surface. The AI handles the hidden bureaucracy: dimension-substrate lookup, setupnpc schedule, improvnpc continuity, in-game variable tracking, quest status, inventory, locations, time, and teacher-facing adjudication options. The bookworm experiences the teacher as the DM. AI remains behind the curtain.
 
-**Suggestion protocol (T114s Q2).** The AI may suggest options to the teacher or to bookworms; it does not unilaterally impose narrative direction. Suggestions are explicit and labeled as such. The teacher decides whether to follow, modify, or override AI-suggestions. (Source: T114s Q2-suggestion-protocol-resolved.)
+**Suggestion protocol (T114s Q2, updated 2026-06-30).** The AI may suggest options to the teacher. It should not directly run bookworms unless the teacher deliberately opens that channel. Suggestions are teacher-facing, explicit, and labeled as suggestions. The teacher decides whether to follow, modify, translate, or discard them.
 
 ---
 

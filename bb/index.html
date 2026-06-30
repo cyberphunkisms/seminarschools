@@ -6,14 +6,14 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>bookwormburrows | Tabletop Role-Playing for Learning</title>
-<meta name="description" content="bookwormburrows is the learning game where any text becomes a world to enter, with one way in for students who want to play and another for teachers who want to run it.">
+<title>bookwormburrows | Reading Game for Students and Teachers</title>
+<meta name="description" content="bookwormburrows, also called PolymythDND in the framework, is a teacher-led academic TTRPG where texts become worlds, wormcards become character sheets, assignments become quests, and AI helps the Dimensional Master track the table.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://seminarschools.com/bb/">
-<meta property="og:title" content="bookwormburrows · two paths in">
+<meta property="og:title" content="bookwormburrows · three easy paths in">
 <meta name="twitter:card" content="summary">
     <meta property="og:image" content="https://seminarschools.com/og-image.png">
-<meta property="og:description" content="Two paths in. The game for students. The operation file for teachers.">
+<meta property="og:description" content="Make a wormcard, give it to the Dimensional Master, or read the school explanation. Student-friendly wording first, teacher notes preserved.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seminarschools.com/bb/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -93,6 +93,9 @@ main{
 .card.student:hover{border-color:var(--fire)}
 .card.teacher:hover{border-color:var(--teal)}
 .card.case:hover{border-color:#c4a878}
+.card.session:hover{border-color:#8fae67}
+.card.future{opacity:.78}
+.card.future:hover{transform:none}
 .card.wide{grid-column:1/-1}
 .card .audience{
   font-family:'JetBrains Mono',monospace;font-size:11px;
@@ -102,6 +105,7 @@ main{
 .student .audience{color:var(--fire)}
 .teacher .audience{color:var(--teal)}
 .case .audience{color:#c4a878}
+.session .audience{color:#8fae67}
 .card h2{
   font-family:'EB Garamond',Georgia,serif;
   font-size:30px;font-weight:500;letter-spacing:-.3px;
@@ -122,7 +126,13 @@ main{
 .student .arrow{color:var(--fire)}
 .teacher .arrow{color:var(--teal)}
 .case .arrow{color:#c4a878}
+.session .arrow{color:#8fae67}
 .card:hover .arrow{transform:translateX(4px)}
+.how-play{background:var(--bg1);border:1px solid var(--brd);border-left:4px solid var(--fire);padding:22px 24px;margin:30px 0 0;color:var(--txt)}
+.how-play h2{font-size:26px;font-weight:500;margin-bottom:10px}
+.how-play ol{display:grid;grid-template-columns:1fr 1fr;gap:8px 22px;margin-left:1.2rem;color:var(--dim);font-size:16px;line-height:1.45}
+.how-play li strong{color:var(--txt);font-weight:500}
+@media (max-width:720px){.how-play ol{grid-template-columns:1fr}.how-play{padding:18px 20px}}
 
 /* FOOTER */
 footer{
@@ -152,14 +162,14 @@ footer a:hover{color:var(--txt);border-bottom-color:var(--fnt)}
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
 <link rel="stylesheet" href="/css/theme.css?v=cl91">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.165">
+<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="game-landing">
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 <div class="wrap">
 
 
 
 <header>
-  <svg class="threshold" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-label="Three nested hexagonal thresholds with rainbow gradient">
+  <svg class="threshold" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-label="Three rainbow doorways into bookwormburrows">
     <defs>
       <linearGradient id="rb" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stop-color="#e94e4e"/>
@@ -175,26 +185,50 @@ footer a:hover{color:var(--txt);border-bottom-color:var(--fnt)}
     <polygon points="60,38 80,49 80,71 60,82 40,71 40,49" fill="none" stroke="url(#rb)" stroke-width="1.2" opacity="0.55"/>
     <circle cx="60" cy="60" r="2.5" fill="url(#rb)"/>
   </svg>
-  <h1>bookwormburrows<span class="mid">·</span>three paths in</h1>
-  <p class="lede">The game, the operation file, and the case for why it works. Pick the door that fits what brought you.</p>
+  <h1>bookwormburrows<span class="mid">·</span>enter the burrow</h1>
+  <p class="lede">BB is PolymythDND in classroom form: a teacher-led academic TTRPG where the text becomes the world, wormcards become character sheets, assignments become quests, and AI stays behind the Dimensional Master as the memory clerk.</p>
 </header>
+
+<section class="how-play" aria-labelledby="bb-how-play-title">
+  <h2 id="bb-how-play-title">How BB is played</h2>
+  <ol>
+    <li><strong>Choose the anchor text.</strong> A story, poem, article, speech, myth, play, or historical document becomes the dimension.</li>
+    <li><strong>Make wormcards.</strong> Each player builds a burrowing character, because the class enters through a wormhole into the text-world.</li>
+    <li><strong>Give the wormcards to the Dimensional Master.</strong> The teacher runs the table. AI helps behind the curtain with schedules, locations, NPC memory, continuity, and record keeping.</li>
+    <li><strong>Open the burrow without breaking the text.</strong> The sealed exegesis stays protected. Play happens around, before, after, beside, and through the world the text makes possible.</li>
+    <li><strong>Turn assignments into quests.</strong> A letter, journal, debate, research note, paragraph, map, scene, or reflection gives the character something to gain, repair, unlock, or risk.</li>
+    <li><strong>Let academic quality drive consequence.</strong> There are no dice. Reading care, writing quality, research, revision, and discussion decide what the world can return.</li>
+    <li><strong>Keep the teacher as the filter.</strong> AI may prepare the bureaucracy of the world, but the teacher decides what reaches the players.</li>
+    <li><strong>Record the adventure as learning.</strong> The table leaves with written work, quests completed, scars, discoveries, open problems, and stronger reasons to keep studying.</li>
+  </ol>
+</section>
 
 <main>
 
   <a class="card student" href="/bookwormcard/" aria-label="Enter the bookwormburrows character-creation game">
     <div class="audience">For students &amp; players</div>
-    <h2>Make a wormcard.</h2>
-    <p class="blurb">The character-creation game. Smash the figures you admire into a character that is <em>none of them</em>. Print the card or fill it on screen. Carry it through the seminars. Scan it back into the matrix when full.</p>
+    <h2>Make your wormcard.</h2>
+    <p class="blurb">Answer simple questions, choose people you admire, and mix their best traits into a new character that belongs to you. Print the card or fill it on screen. Bring it into the game when you read.</p>
     <div class="cta">
       <span class="url">seminarschools.com/bookwormcard/</span>
       <span class="arrow" aria-hidden="true">→</span>
     </div>
   </a>
 
-  <a class="card teacher" href="/polymyth/bookwormburrows/" aria-label="Open the bookwormburrows teacher operation file">
+  <div class="card session future" aria-label="Future guided BookwormBurrows session screen">
+    <div class="audience">Future DM table assistant</div>
+    <h2>Open a burrow with wormcards.</h2>
+    <p class="blurb">This future tool starts by asking the Dimensional Master for the players' wormcards and the anchor text. It helps track assignments-as-quests, setupnpcs, improvnpcs, time, places, and consequences while the teacher remains the voice at the table.</p>
+    <div class="cta">
+      <span class="url">coming soon: DM assistant mode</span>
+      <span class="arrow" aria-hidden="true">↗</span>
+    </div>
+  </div>
+
+  <a class="card teacher" href="/polymyth/bookwormburrows/" aria-label="Open the bookwormburrows teacher rule library">
     <div class="audience">For teachers &amp; DMs</div>
-    <h2>Open the operation file.</h2>
-    <p class="blurb">The substrate that defines bookworms, dimensions, DM protocol, session structures. The framework file behind the game. Methodology, character creation, bookworm developmental arc, dimension registry, credit pathway.</p>
+    <h2>Teacher rule library.</h2>
+    <p class="blurb">Open the full rule library for Dimensional Masters. It keeps the BB and PolymythDND rules, quest logic, NPC types, character steps, school-credit notes, and design ledger. The student version is shown first, with the full teacher/archive note kept underneath.</p>
     <div class="cta">
       <span class="url">seminarschools.com/polymyth/bookwormburrows/</span>
       <span class="arrow" aria-hidden="true">→</span>
@@ -203,8 +237,8 @@ footer a:hover{color:var(--txt);border-bottom-color:var(--fnt)}
 
   <a class="card case wide" href="/bb/why/" aria-label="Read the pedagogical case for bookwormburrows">
     <div class="audience">For parents &amp; schools</div>
-    <h2>Read the pedagogical case.</h2>
-    <p class="blurb">Why Dungeons &amp; Dragons belongs in the classroom, and why bookwormburrows belongs there more. The research, the comparison, the seven evaluation criteria, and what it means for your child or your school. Grounded in the evidence base, honest about what has been proven and what has been designed.</p>
+    <h2>Read why it helps learning.</h2>
+    <p class="blurb">A clear explanation for parents and schools. It shows how tabletop role-playing can turn reading, writing, research, discussion, and assignments into motivated academic play, with the research essay kept below for adults who want the full case.</p>
     <div class="cta">
       <span class="url">seminarschools.com/bb/why/</span>
       <span class="arrow" aria-hidden="true">→</span>
@@ -244,5 +278,6 @@ footer a:hover{color:var(--txt);border-bottom-color:var(--fnt)}
 <script src="/js/indra.js?v=cl91" defer></script>
 <script src="/js/footer.js?v=cl91" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
 </body>
 </html>

@@ -23,15 +23,15 @@
 <meta name="theme-color" content="#1F2A1A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&family=Inter:wght@400;500;650;750&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/main.css?v=cl91">
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/site.js?v=cl91" defer></script>
 <style>
 :root {
-  --display: 'Fraunces', Georgia, serif;
-  --body: 'Source Serif 4', Georgia, serif;
-  --sans: 'Inter', system-ui, sans-serif;
+  --display: 'Cinzel', Georgia, serif;
+  --body: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Cormorant Garamond', system-ui, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, monospace;
   /* Accent darkened from #B5704A (failed WCAG AA at 3.09:1) to #7a4828
      (passes AA at 6.54:1). Same ochre/rust hue family, darker for legibility.
@@ -133,27 +133,13 @@
 .threshold-coords .row{display:grid;grid-template-columns:7rem 1fr;gap:1.2rem;padding:.6rem 0;border-bottom:1px solid var(--rule,rgba(0,0,0,.15));align-items:baseline}
 .threshold-coords .lbl{font-family:var(--sans,var(--body,sans-serif));font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent,inherit);font-weight:500}
 .threshold-coords .val{font-family:var(--mono,monospace);font-size:.78rem;color:var(--fg,inherit);opacity:.85;letter-spacing:.04em}
-
-/* AGORA_CONCISE_RESPONSIVE_RELEASE */
-@media (min-width: 900px){
-  .wrap { max-width: min(1220px, calc(100vw - 72px)); }
-  #threshold { display:grid; grid-template-columns: minmax(360px, 0.9fr) minmax(380px, 1fr); gap: clamp(2rem, 5vw, 6rem); align-items:end; }
-  #threshold .titanic { grid-column:1; font-size:clamp(7rem, 15vw, 18rem); line-height:.78; }
-  #threshold .threshold-meta { grid-column:2; max-width: 18em; font-family:var(--sans); font-style:normal; font-size:clamp(2rem, 4vw, 4.5rem); line-height:1.02; }
-  #threshold .threshold-coords { grid-column:2; max-width: 620px; }
-}
-@media (max-width: 760px){
-  #threshold .titanic { font-size: clamp(5rem, 25vw, 9rem); }
-  #threshold .threshold-meta { font-size: 1.35rem; line-height: 1.25; }
-}
-
 </style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Event",
   "name": "The Agora",
-  "description": "Read the text. Show up. Talk clearly.",
+  "description": "An open seminar convened when participants gather. Read the text ahead of time. Show up. Sit. Speak when you have something to say.",
   "url": "https://seminarschools.com/agora/",
   "isPartOf": {
     "@type": "WebSite",
@@ -166,11 +152,16 @@
 <link rel="stylesheet" href="/css/mobile-overlay.css?v=cl91">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
-
-<style id="type-identity">:root{--display:'Fraunces', Georgia, serif;--body:'Source Serif 4', Georgia, serif;--sans:'Inter', system-ui, sans-serif;} .titanic,.compound{letter-spacing:-0.035em;} ::selection{background:rgba(196,106,60,0.25);}</style>
+<link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Andada+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style id="type-identity">/* Greek Font Society Didot: the Greek typographic tradition itself, for the assembly */
+:root{--display:'GFS Didot', Georgia, serif;--body:'Andada Pro', Georgia, serif;}
+.titanic,.compound{letter-spacing:0.01em;} ::selection{background:rgba(196,106,60,0.25);}
+</style>
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.225">
+<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="archive">
+<!-- CL_SELF_ROUTE_NOTE -->
+<div class="route-note archive-route-note" role="note"><span class="route-note-kicker">Archive</span>Public-learning and gathering materials.</div>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 
 <!-- Theme toggle (light/dark mode). System preference is the default;
@@ -205,8 +196,8 @@
 <section id="threshold" class="tier reveal" data-tier="1" data-name="Threshold" data-roman="i">
   <div class="tier-label-vertical"><span class="num">i</span><span class="label">Threshold</span></div>
 
-  <h1 class="titanic words">Agora</h1>
-  <div class="threshold-meta reveal delay-2">Read the text. Show up. Talk clearly.</div>
+  <h1 class="titanic words">The <em>Agora.</em></h1>
+  <div class="threshold-meta reveal delay-2">An open seminar convened when participants gather. Read the text ahead of time. Show up. Sit. Speak when you have something to say.</div>
   <div class="threshold-coords reveal delay-3">
     <div class="row"><span class="lbl">Where</span><span class="val">Earl Bales Park, or online over Google Meet</span></div>
     <div class="row"><span class="lbl">When</span><span class="val">Announced per session. Email to be notified.</span></div>
@@ -230,7 +221,7 @@
     </div>
     <div class="door door-polymyth" style="padding:1.5rem 1.75rem;background:rgba(0,0,0,0.02);border:1px solid rgba(0,0,0,0.08);">
       <div style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--fg-soft,#666);font-weight:600;margin-bottom:0.6rem;">From Seminar Schools</div>
-      <p style="font-family:var(--body);font-size:1rem;line-height:1.55;margin:0 0 1rem 0;">An open seminar within the practice. Each session has a text. Read first. Speak honestly.</p>
+      <p style="font-family:var(--body);font-size:1rem;line-height:1.55;margin:0 0 1rem 0;">An open seminar within the practice. Each session has a text. The willingness to be wrong out loud is the ticket.</p>
       <a href="/" style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent,#7a4828);font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent,#7a4828);padding-bottom:0.15rem;">About Seminar Schools &rarr;</a>
     </div>
   </div>
@@ -247,8 +238,8 @@
   <div class="micro">II. The format</div>
   <h2 class="compound words">A seminar held in person or online, open to anyone <em>who reads ahead.</em></h2>
   <div class="body">
-    <p>The Agora is a free reading seminar.</p>
-    <p>A text is announced in advance. Read it before the session. We meet in person or online, read passages, and discuss.</p>
+    <p>The Agora is a philosophy seminar modelled on the original sense of the word. A place where people come together to think out loud about what they have been reading.</p>
+    <p>The format is straightforward. A text is announced in advance. Anyone who wants to attend reads it before the gathering. We meet either in person at the Barry Zukerman Amphitheatre or online over Google Meet. We take turns reading passages aloud. We discuss.</p>
   </div>
 </section>
 
@@ -359,5 +350,6 @@
 <script src="/js/indra.js?v=cl91" defer></script>
 <script src="/js/footer.js?v=cl91" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
 </body>
 </html>

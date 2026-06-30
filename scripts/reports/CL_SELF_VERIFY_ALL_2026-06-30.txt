@@ -1,0 +1,216 @@
+
+> seminar-schools-leizu-pipeline@1.0.0 verify:all
+> node scripts/verify-critical.js && node scripts/verify-public-artifact-blocks.js && node scripts/verify-search-surface.js && node scripts/verify-calendar-aliases.js && node scripts/verify-calendar-data-parity.js && node scripts/verify-polymythcalendar-today-scroll.js && node scripts/verify-polymythcalendar-kid-guide.js && node scripts/verify-polymythcalendar-ux-efficiency.js && node scripts/verify-site-interactivity.js && node scripts/build-writing-shortcuts.js --check && node scripts/verify-writing-shortcuts.js && node scripts/build-academic-shortcuts.js --check && node scripts/verify-academic-shortcuts.js && node scripts/verify-festival-parent-taxonomy.js && node scripts/verify-harvest-pipeline.js && node scripts/verify-polymythcalendar-name.js && node scripts/verify-geometry.js && node scripts/verify-visible-geometry.js && node scripts/verify-zoom-resilience.js && node scripts/verify-register.js && node scripts/verify-route-doctrine.js && node scripts/verify-page-size-budget.js && node scripts/verify-generated-route-indexing.js && node scripts/verify-sitemap-classification.js && node scripts/verify-keyboard-navigation.js && node scripts/verify-responsive-regression.js && node scripts/verify-saul-print.js && node scripts/verify-teacherresources-finder.js && node scripts/verify-aa-polymyth-funnel.js && node scripts/verify-polymythcal-freshness-labels.js && node scripts/verify-shortcut-title-uniqueness.js && node scripts/verify-visible-input-labels.js && node scripts/audit-external-links.js && node scripts/verify-dense-anchors.js && node scripts/verify-asset-weights.js && node scripts/verify-payments.js && node scripts/verify-leizu-pipeline.js && node scripts/verify-leizu-experience.js && node scripts/verify-leizu-course-picker.js && node scripts/verify-leizu-simplified-chinese.js && node scripts/verify-leizu-persian.js && node scripts/verify-leizu-localization-funnel.js && node scripts/verify-home-map.js && node scripts/verify-bb-final-readiness.js && node scripts/verify-bb-kid-friendly.js && node scripts/verify-bb-why.js && node scripts/verify-main-page.js && node scripts/verify-main-leizu-funnel.js && node scripts/verify-saul-page.js && node scripts/verify-site-integrity.js && node scripts/verify-professional-readiness.js && node scripts/verify-seo.js && node scripts/verify-typography-controls.js && node scripts/verify-bookwormcard-gate.js
+
+PASS  calendar page exists
+PASS  calendar embeds a 200+ event snapshot fallback
+PASS  calendar wraps titles in source_url links
+PASS  calendar carries build stamp
+PASS  event data file parses
+PASS  data file has 200+ events
+PASS  rss feed present with items
+PASS  main page fetches the public events file
+PASS  main page wraps titles in source_url links
+PASS  PUBLIC events copy exists at /polymythseminars/events.json
+PASS  public copy has 200+ events
+PASS  public copy byte-identical to data/ master
+PASS  calendar primary fetch targets the PUBLIC path
+PASS  main page uses the fallback loader
+PASS  netlify still blocks /data/* (PM35 guard)
+PASS  robot fallback file parses
+
+ALL CRITICAL CHECKS PASS — safe to deploy.
+PUBLIC ARTIFACT BLOCK CHECK PASSED — 33 root audit/setup artifacts are forced to 404.
+SEARCH SURFACE CHECK PASSED — 719 catalog resources, 294 current event cards, 15 methodology sections, 996 sitemap URLs.
+PASS — polymyth calendar aliases redirect directly to the canonical calendar.
+CALENDAR DATA PARITY OK — 512 mirrored entries.
+POLYMYTHCALENDAR TODAY SCROLL CHECK PASSED — 12 scrollbox pages auto-anchor to the viewer's local today.
+POLYMYTHCALENDAR KID GUIDE CHECK PASSED — 12 pages carry concise student-facing instructions.
+POLYMYTHCALENDAR UX/EFFICIENCY CHECK PASSED — 12 pages have compact guide, descriptions, agenda calendar, smoother anchoring, and geometry.
+SITE INTERACTIVITY CHECK PASSED — 12 Polymythcal pages keep a stable title, clear context/guide text, no inline click handlers, and no filter-click re-anchoring. Site scan: 1268 HTML/JS files, 27 intentional preventDefault handlers, 21 scroll helpers, 7 bare hash links, 0 javascript hrefs.
+WRITING SHORTCUT CHECK — 39 current youth writing competitions, 0 files updated.
+WRITING SHORTCUT CHECK PASSED — 39 current youth writing competitions; counts {"writingclub":39,"writingkids":13,"writingjuniors":20,"writingteens":36,"writinggrads":36}.
+ACADEMIC SHORTCUT CHECK — 6 routes, 294 current events scanned, 0 files updated.
+ACADEMIC SHORTCUT CHECK PASSED — 55 global-academic sources; counts {"university":129,"philosophy":46,"humanities":94,"cfps":87,"lectures":36,"fellowships":40}.
+FESTIVAL PARENT TAXONOMY OK — 37 parent seasons and 73 linked productions.
+HARVEST PIPELINE OK — bounded, observable, soft-failing regional harvest workflow.
+polymythcalendar naming gate passed (393 public files scanned).
+pages executed: 1166   (auto-includes any future .html)
+result: 78 built+moves  |  1 inline-build+own-rig  |  1086 static-search  |  1 inline-build+camera
+
+engine invariants:
+  PASS  mandala exports initScrollCamera
+  PASS  mandala has global-scroll fallback
+  PASS  #geo svg consumes --geo-scale
+  PASS  indra scroll-couples #indraLayer
+  PASS  alive.css styles #indraLayer
+
+GEOMETRY COMPLETE — every page BUILDS a substrate and MOVES on scroll, engine intact.
+VISIBLE GEOMETRY CHECK PASSED — 1166 HTML pages carry alive.css, mandala.js, indra.js, body geometry markers, and CV pages are not excluded.
+ZOOM RESILIENCE CHECK PASSED — 1166 HTML pages inherit the shared zoom/reflow contract; user zoom is not disabled.
+ZOOM RESILIENCE WARNINGS — 22 known fixed/nowrap patterns are covered by the shared contract.
+ - aa/cloud/index.html: nowrap content relies on zoom contract unwrap media query
+ - aa/index.html: inline fixed width over 700px relies on zoom contract max-width override
+ - bookwormcard/index.html: nowrap content relies on zoom contract unwrap media query
+ - bookwormcard/print/index.html: nowrap content relies on zoom contract unwrap media query
+ - cfps/index.html: nowrap content relies on zoom contract unwrap media query
+ - fellowships/index.html: nowrap content relies on zoom contract unwrap media query
+ - humanities/index.html: nowrap content relies on zoom contract unwrap media query
+ - lectures/index.html: nowrap content relies on zoom contract unwrap media query
+ - leizu/cloud/index.html: nowrap content relies on zoom contract unwrap media query
+ - leizu/index.html: nowrap content relies on zoom contract unwrap media query
+ - leizu/teach/index.html: inline fixed width over 700px relies on zoom contract max-width override
+ - philosophy/index.html: nowrap content relies on zoom contract unwrap media query
+ - polymyth/polymythdnd/index.html: inline fixed width over 700px relies on zoom contract max-width override
+ - polymyth/sitemap/index.html: nowrap content relies on zoom contract unwrap media query
+ - polymythseminars/index.html: nowrap content relies on zoom contract unwrap media query
+ - teacherresources/index.html: nowrap content relies on zoom contract unwrap media query
+ - university/index.html: nowrap content relies on zoom contract unwrap media query
+ - writingclub/index.html: nowrap content relies on zoom contract unwrap media query
+ - writinggrads/index.html: nowrap content relies on zoom contract unwrap media query
+ - writingjuniors/index.html: nowrap content relies on zoom contract unwrap media query
+ ... 2 more
+PASS  DASH  (0)
+PASS  NEGDEF  (0)
+PASS  FILLER  (0)
+PASS  BORNALIVE  (0)
+PASS  OG  (0)
+
+register gate clean
+ROUTE DOCTRINE CHECK PASSED — 61 explicit routes and 5 route groups governed.
+PAGE SIZE BUDGET PASSED — 20 known-heavy pages budgeted; no unbudgeted HTML over 500000 bytes.
+PAGE SIZE BUDGET WARNINGS — 4 medium-heavy pages tracked below hard budget.
+GENERATED ROUTE INDEXING PASSED — 1070 generated pages checked, 911 sitemap-indexed, 159 intentionally noindexed.
+SITEMAP CLASSIFICATION PASSED — 996 sitemap URLs classified (976 HTML, 19 txt, 1 md, 0 xml, 0 other); 187 non-sitemap HTML routes are intentionally classified.
+KEYBOARD NAVIGATION CHECK PASSED — shared helper loaded on 1165 HTML files, dense routes carry keyboard hints.
+RESPONSIVE REGRESSION CHECK PASSED — 200 percent zoom and mobile source contracts are present on smoke routes.
+SAUL PRINT/CV CHECK PASSED — general CV marker, no comma before MA, print and zoom guards present.
+TEACHER RESOURCES FINDER CHECK PASSED — 4 subject, 2 grade, 3 format quick buttons wired.
+AA TO POLYMYTH FUNNEL CHECK PASSED — aa* surfaces point to polymorphousmythology.
+POLYMYTHCAL FRESHNESS CHECK PASSED — 12 calendar/shortcut surfaces expose freshness labels.
+SHORTCUT TITLE UNIQUENESS PASSED — 11 shortcut titles are unique.
+VISIBLE INPUT LABEL CHECK PASSED — 39 visible fields checked, 100 hidden/honeypot/machine fields ignored.
+EXTERNAL LINK INVENTORY WRITTEN — 1124 external links across 311 hosts. No network calls made.
+DENSE ANCHOR CHECK PASSED — 6 dense pages have intact local anchors or explicit search/dynamic navigation.
+ASSET WEIGHT CHECK PASSED — asset report present and no image exceeds 2.5MB.
+=== verify-payments ===
+  · payment plans: 6 (starter_block, term, forest_year_upfront, forest_year_two, forest_year_term, forest_year_monthly)
+  · static CTAs: 6 (starter_block, term, forest_year_upfront, forest_year_two, forest_year_term, forest_year_monthly)
+
+PASS — static payment and booking contract is intact.
+=== verify-leizu-pipeline ===
+PASS — Leizu code-level payment, booking, and confirmation safeguards are wired.
+=== verify-leizu-experience ===
+PASS — Leizu public choices, intake context, payment handoff, and booking confirmation safeguards are wired.
+PASS delegated course picker wiring
+PASS persistent path state
+PASS Simple English marks automatic course ESL flags
+PASS path reaches intake URL
+PASS intake stores path
+PASS intake shows path
+Leizu course picker guard passed.
+PASS  Simplified Chinese control remains available
+PASS  Simplified Chinese exposes zh-Hans to assistive technology
+PASS  Simplified Chinese covers every current revised page string that Traditional Chinese covers
+PASS  Simple English banner is translated into Simplified Chinese
+PASS  Chinese consultation CTA is translated into Simplified Chinese
+PASS  Course selection handoff is translated into Simplified Chinese
+PASS  All 24 course descriptions have Simplified Chinese text
+PASS  Simplified Chinese course coverage matches Traditional Chinese course coverage
+PASS  Simplified Chinese course descriptions use Simplified Chinese forms
+PASS  All Five Elements glosses have Simplified Chinese text
+PASS  Course renderer receives Simplified Chinese descriptions
+PASS  Five Elements renderer receives Simplified Chinese glosses
+Simplified Chinese localization guard passed.
+PASS  Persian control remains available
+PASS  Persian exposes fa to assistive technology
+PASS  Persian page uses right-to-left layout
+PASS  Persian covers every current revised page string
+PASS  Simple English banner is translated into Persian
+PASS  Chinese consultation CTA is translated into Persian
+PASS  Course selection handoff is translated into Persian
+PASS  All 24 course descriptions have Persian text
+PASS  Persian course coverage matches the full Traditional Chinese course coverage
+PASS  Persian course descriptions use Persian text
+PASS  All Five Elements glosses have Persian text
+PASS  Course renderer receives Persian descriptions
+PASS  Five Elements renderer receives Persian glosses
+Persian localization guard passed.
+PASS CTA state reader
+PASS source CTA handoff
+PASS course handoff across CTAs
+PASS path handoff across CTAs
+PASS automatic ESL state
+PASS automatic ESL cleared on exit
+PASS clear removes course support state
+PASS persistent language support
+PASS semantic RTL direction
+PASS Traditional Chinese Forest payment copy
+PASS Simplified Chinese Forest payment copy
+PASS Persian Forest payment copy
+PASS Traditional Chinese seminar correction
+PASS Simplified Chinese seminar correction
+PASS Simplified Chinese editorial correction
+PASS Simplified Chinese core-unit correction
+PASS language state on leizu/intake/index.html
+PASS language state on leizu/policies/index.html
+PASS language state on leizu/scholarship/index.html
+PASS language state on leizu/donate/index.html
+PASS language state on leizu/cloud/index.html
+PASS language state on leizu/teach/index.html
+PASS language state on leizu/flyer/index.html
+PASS language state on leizu/booking-success/index.html
+Leizu localization and funnel guard passed.
+PASS  map label plates exist
+PASS  map labels no longer use halo strokes
+PASS  mobile project rail exists
+PASS  core jewel opens the conceptual centre
+PASS  bookwormburrows jewel routes to its landing page
+PASS  jewels expose selected state
+PASS  touch uses select-before-navigate behavior
+PASS  selection connects the constellation to the background web
+PASS  map colors refresh after theme changes
+PASS  Indra accepts page-specific intensity
+PASS  Indra pauses its animation when idle or hidden
+
+Homepage map guard passed.
+BB final readiness verification passed: local assets, depth engine load, start flow, command controls, save migration, print fallback, and 216-entry library all checked.
+BB kid-friendly verification passed: student-facing copy, preserved archive notes, plain-text mirror, landing page, why pages, about/glossary/print copy.
+PASS bb/why/index.html
+PASS bb/index.html
+PASS netlify.toml
+PASS sitemap.xml
+PASS  main page has three practical entry routes
+PASS  main page routes to tutoring, public reading, and resources
+PASS  main page has explicit geometry control
+PASS  main page uses the lighter geometry depth
+PASS  main page can quiet ornamental geometry independently
+PASS  main page does not auto-loop at the footer
+PASS  main page does not intercept ordinary top scrolling
+PASS  footer has an explicit return link
+PASS  homepage core jewel links to main page
+PASS  main page has balanced script tags
+
+Main-page guard passed.
+PASS main route enters canonical portfolio intake
+PASS standalone application form removed
+PASS portfolio statement remains present
+PASS intake recognises the portfolio source
+PASS intake offers a portfolio purpose
+PASS portfolio source avoids automatic payment
+PASS portfolio receives its own manual-review receipt
+PASS retired standalone form file is absent
+PASS legacy success route redirects to portfolio intake
+PASS tree sitemap points to canonical portfolio intake
+PASS graph replaces retired portfolio success route
+Main to Leizu portfolio funnel guard passed.
+Saul page guard passed.
+=== SITE INTEGRITY GUARD ===
+HTML pages: 1166 | JS files: 108 | Redirect rules: 271
+PASS — public routes, local links, assets, forms, anchors, and scripts are internally consistent.
+=== PROFESSIONAL PREDEPLOY READINESS ===
+PASS — cache, PWA, sitemap, entitlement, diagnostics, accessibility semantics, and public build boundaries are hardened.
+=== SEO DEPLOYMENT GUARD ===
+PASS — 996 sitemap URLs, canonical/indexing controls, AI crawler privacy, structured data, local offer facts, and multilingual links are coherent.
+Typography/control verification passed: 1173 HTML/CSS files scanned, 355 very-small declarations inventoried.
+Bookwormcard gate verification passed: static BB context, ESL helpers, theme/contrast/text controls, mobile-safe shell, and data notice are present.

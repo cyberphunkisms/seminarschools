@@ -38,14 +38,26 @@ function walkHTML(dir) {
 const HTML = walkHTML(ROOT).filter(f => !f.includes('/scripts/'));
 
 // ── 1. TAG BALANCE ──
+// Token-based check: count actual HTML start/end tags instead of raw strings,
+// so examples in comments or JavaScript strings do not masquerade as tags.
+function stripHtmlComments(source) {
+  return source.replace(/<!--[\s\S]*?-->/g, '');
+}
+function tagBalance(source, tag) {
+  const clean = stripHtmlComments(source);
+  const re = new RegExp('<\\s*(/)?\\s*' + tag + '(?:\\s[^>]*)?>', 'gi');
+  let opens = 0, closes = 0, match;
+  while ((match = re.exec(clean))) {
+    if (match[1]) closes++; else opens++;
+  }
+  return { opens, closes };
+}
 for (const f of HTML) {
   const s = fs.readFileSync(f,'utf8'), r = path.relative(ROOT,f);
-  const chk = (tag) => {
-    const o = (s.match(new RegExp(`<${tag}[\\s>]`,'gi'))||[]).length;
-    const c = (s.match(new RegExp(`</${tag}>`,'gi'))||[]).length;
-    if (o!==c) issue(r, `<${tag}> mismatch: ${o} opens, ${c} closes`);
-  };
-  chk('script'); chk('style');
+  for (const tag of ['script','style']) {
+    const {opens, closes} = tagBalance(s, tag);
+    if (opens !== closes) issue(r, `<${tag}> mismatch: ${opens} opens, ${closes} closes`);
+  }
 }
 
 // ── 2. PM35 GUARD ──

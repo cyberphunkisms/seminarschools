@@ -489,6 +489,12 @@ details.category[open] > summary > .caret { transform: rotate(90deg); }
   vertical-align: middle;
 }
 
+
+.quick-finder{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .45rem;margin:.15rem 0 .7rem;padding:.55rem .65rem;border:1px solid var(--rule);background:color-mix(in srgb,var(--bg) 92%,transparent);}
+.quick-finder .quick-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-fade);margin-right:.15rem;}
+.quick-finder button{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;border:1px solid var(--rule);border-radius:999px;background:transparent;color:var(--fg-soft);padding:.32rem .55rem;cursor:pointer;}
+.quick-finder button:hover,.quick-finder button:focus-visible,.quick-finder button.active{border-color:var(--accent);color:var(--accent);}
+.empty{padding:1rem;border:1px solid var(--rule);background:var(--accent-soft);color:var(--fg-soft);}
 .contribute {
   margin-top: 3rem;
   padding: 1.25rem 1.5rem;
@@ -651,7 +657,7 @@ body.searching details.category[hidden] {
 }
 </script>
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.15">
+<body data-geometry="indra-web" data-indra-intensity="0.070" data-route-type="resource-catalog" data-page-weight="heavy">
 <a class="skip-link" href="#catalog">Skip to catalog</a>
 <div class="wrap">
 
@@ -675,6 +681,19 @@ body.searching details.category[hidden] {
     <button class="ctrl-btn mobile-only" id="filter-toggle" type="button" aria-pressed="false" aria-expanded="false">Filters</button>
     <button class="ctrl-btn" id="expand-toggle" type="button" aria-pressed="false">Expand all</button>
     <button class="ctrl-btn" id="clear" type="button">Clear filters</button>
+  </div>
+
+  <div class="quick-finder" aria-label="Quick resource finder">
+    <span class="quick-label">Find faster</span>
+    <button type="button" data-preset-subject="ela" aria-pressed="false">English</button>
+    <button type="button" data-preset-subject="math" aria-pressed="false">Math</button>
+    <button type="button" data-preset-subject="history" aria-pressed="false">History</button>
+    <button type="button" data-preset-subject="indigenous" aria-pressed="false">Indigenous</button>
+    <button type="button" data-preset-grade="7" aria-pressed="false">Grade 7</button>
+    <button type="button" data-preset-grade="8" aria-pressed="false">Grade 8</button>
+    <button type="button" data-preset-format="lesson" aria-pressed="false">Lessons</button>
+    <button type="button" data-preset-format="anthology" aria-pressed="false">Texts</button>
+    <button type="button" data-preset-format="assessment" aria-pressed="false">Assessments</button>
   </div>
   <div class="filter-rows" id="filter-rows">
   <div class="chip-group" id="subject-chips"><span class="chip-label">Subject</span></div>
@@ -1881,6 +1900,7 @@ body.searching details.category[hidden] {
     // Result count and empty state
     var rcEl = document.getElementById('result-count');
     document.getElementById('empty').hidden = totalShown !== 0;
+    syncPresetButtons();
     document.getElementById('clear').classList.toggle('has-active', filtering);
     var ftBtn = document.getElementById('filter-toggle');
     if (ftBtn) ftBtn.classList.toggle('has-active', filtering);
@@ -1932,6 +1952,42 @@ body.searching details.category[hidden] {
     }, 150);
   });
 
+
+  function syncPresetButtons(){
+    document.querySelectorAll('[data-preset-subject],[data-preset-grade],[data-preset-format]').forEach(function(btn){
+      var on = false;
+      if (btn.dataset.presetSubject) on = state.subjects.has(btn.dataset.presetSubject);
+      if (btn.dataset.presetGrade) on = state.grades.has(btn.dataset.presetGrade);
+      if (btn.dataset.presetFormat) on = state.formats.has(btn.dataset.presetFormat);
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+  function syncFacetChips(){
+    document.querySelectorAll('.chip').forEach(function(chip){
+      var t = chip.dataset.filterType, v = chip.dataset.filterValue, on = false;
+      if (t === 'format') on = state.formats.has(v);
+      else if (t === 'grade') on = state.grades.has(v);
+      else if (t === 'subject') on = state.subjects.has(v);
+      else if (t === 'curriculum') on = state.curricula.has(v);
+      chip.classList.toggle('active', on);
+      chip.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    syncPresetButtons();
+  }
+  document.querySelectorAll('[data-preset-subject],[data-preset-grade],[data-preset-format]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var set, value;
+      if (btn.dataset.presetSubject){ set = state.subjects; value = btn.dataset.presetSubject; }
+      else if (btn.dataset.presetGrade){ set = state.grades; value = btn.dataset.presetGrade; }
+      else if (btn.dataset.presetFormat){ set = state.formats; value = btn.dataset.presetFormat; }
+      if (!set || !value) return;
+      if (set.has(value)) set.delete(value); else set.add(value);
+      syncFacetChips();
+      applyFilters();
+      setExpandLabel();
+    });
+  });
   document.querySelectorAll('.chip').forEach(function(chip) {
     chip.addEventListener('click', function() {
       var t = chip.dataset.filterType;
@@ -1963,10 +2019,7 @@ body.searching details.category[hidden] {
     state.subjects.clear();
     state.curricula.clear();
     searchInput.value = '';
-    document.querySelectorAll('.chip.active').forEach(function(c) {
-      c.classList.remove('active');
-      c.setAttribute('aria-pressed', 'false');
-    });
+    syncFacetChips();
     applyFilters();
     setExpandLabel();
   });
@@ -2108,5 +2161,6 @@ body.searching details.category[hidden] {
 <script src="/js/theme.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
 <script src="/js/footer.js?v=cl91" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
 </body>
 </html>

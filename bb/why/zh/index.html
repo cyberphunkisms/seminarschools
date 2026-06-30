@@ -107,6 +107,12 @@ footer a:hover{color:var(--txt);border-bottom-color:var(--fnt)}
   .back,footer,.lang-switch{display:none!important}
   .wrap{max-width:100%!important;padding:1rem!important}
 }
+
+.student-version,.teacher-essay{background:rgba(217,117,21,.08);border:1px solid var(--brd2);border-left:4px solid var(--fire);padding:1.1rem 1.2rem;margin:1.2rem 0;border-radius:6px}
+.student-version h2{margin-top:0;color:var(--fire2)}
+.student-version p{font-size:1.05rem;line-height:1.7}
+.teacher-essay{background:rgba(255,255,255,.025);border-left-color:var(--teal)}
+.teacher-essay summary{cursor:pointer;color:var(--teal2);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.06em;font-size:.78rem;margin-bottom:.7rem}
 </style>
 <link rel="stylesheet" href="/mobile-slim.css?v=cl92" media="screen and (max-width:640px)">
 <link rel="stylesheet" href="/css/alive.css?v=cl92">
@@ -133,7 +139,7 @@ footer a:hover{color:var(--txt);border-bottom-color:var(--fnt)}
 }
 </script>
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.165">
+<body data-route-type="game-research-localized" data-geometry="indra-web" data-indra-intensity="0.075">
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="调整字号"><button type="button" data-fz="down" title="缩小字号">A-</button><button type="button" data-fz="up" title="放大字号">A+</button><button type="button" data-fz="reset" class="reset" title="重置字号" style="display:none">&#8634;</button></div>
 <div class="wrap">
 
@@ -141,9 +147,18 @@ footer a:hover{color:var(--txt);border-bottom-color:var(--fnt)}
 
 <header>
   <h1>教室本身已经是一场角色扮演游戏</h1>
-  <p class="subtitle">Why tabletop role-playing belongs in education, and why I developed bookwormburrows.</p>
+  <p class="subtitle">先给学生看的简单说明，下面保留给成人和教师的完整论文。</p>
   <a class="lang-switch" href="/bb/why/">English version</a>
 </header>
+<section class="student-version" aria-label="学生友好说明">
+<h2>学生版</h2>
+<p>bookwormburrows 把一篇文本变成一个可以进入的世界。故事、诗、戏剧、演讲或历史文件，都可以成为冒险发生的地方。</p>
+<p>你会做一个角色，寻找线索，和同伴讨论，做选择，并写下角色的行动。你越仔细观察文本细节，就越能清楚地在这个世界里行动。</p>
+<p>老师或 DM 会帮助大家保持公平、安全，并一直回到原文证据。你的想法会产生结果，因为这个世界会回应你的选择。</p>
+<p>目标很简单：更仔细地阅读，更有目的地写作，认真听别人说话，并一起发现文本里的世界。</p>
+</section>
+
+<details class="teacher-essay"><summary>教师和成人完整论文</summary>
 
 <p>教室本身已经是一场角色扮演游戏。每天早晨，学生走进一间被仪式、许可、等级、角色、隐性期望和共享虚构所支配的房间，这些虚构规定了什么算作聪明、参与、成功、失败、权威、信心和归属感。教师通过语言建立一个世界；学生通过经验发现这个世界的运行条件；每个人学会了哪些言语会获得关注，哪些冒险看起来是安全的，哪些知识能够改变一场对话的方向，以及在这个群体中哪些身份是可及的。教育从来就涉及进入一个社会世界并学习如何在其中有意义地行动这项艰难的工作。</p>
 
@@ -197,6 +212,8 @@ footer a:hover{color:var(--txt);border-bottom-color:var(--fnt)}
 
 <p>每当学生一起进入一个世界并发现他们的阐释是重要的，教室就已经是一场角色扮演游戏了。bookwormburrows生长于使这一事实变得可见、可玩和智识上鲜活的愿望。</p>
 
+
+</details>
 <div class="references">
 <h2>References</h2>
 
@@ -260,5 +277,6 @@ footer a:hover{color:var(--txt);border-bottom-color:var(--fnt)}
 <script src="/js/indra.js?v=cl92" defer></script>
 <script src="/js/footer.js?v=cl92" defer></script>
 <script src="/js/autolink.js?v=cl92" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
 </body>
 </html>
