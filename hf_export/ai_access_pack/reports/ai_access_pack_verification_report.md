@@ -1,9 +1,10 @@
 # Meaninglib AI Access Pack verification report
 
-Generated: 2026-07-01T01:34:02.537Z
+Generated: 2026-07-01T02:43:32.703Z
 
 Latest markdown: hf_export/ai_access_pack/latest_access_pack.md
 Latest JSON: hf_export/ai_access_pack/latest_access_pack.json
+Activation markdown: hf_export/ai_access_pack/MEPHISTODATA_ACTIVATION.md
 
 ## Golden tests
 
@@ -16,9 +17,10 @@ Latest JSON: hf_export/ai_access_pack/latest_access_pack.json
 - PASS: modulecanon -> [mc] mc* concept-primary architecture | [mc] mc* alignment methodology | [mc] mc* curriculum_anchor schema | [mc] mc* curriculum-map decisions, May 2026 | [mc] mc* concept inventory (Pass B manifest)
 - PASS: campaigncodex -> [cc] cmp-001 Session minute-by-minute template (cc* hyperrealism scaffold) | [cc] cmp-001 NPC dossier template (cc* hyperrealism scaffold) | [cc] cmp-001 Street block detail template (cc* hyperrealism scaffold) | [cc] cc* render defect: 116 entries carry s values outside the five rendered tabs (pass-3 CL capture 2026-06-06) | [cc] bb* — bookwormburrows (pedagogy substrate)
 - PASS: HTML txt mirror -> [ml] ML*-DUAL-WRITE (txt/HTML sync rule) | [ml] ml*/bb* HTML-vs-txt sync discipline (canonical-source rule) | [ml] methodologylist full text mirror | [ml] CORE slot 4 mirror — Mearsheimer | [ml] CORE slot 3 mirror — SCANNER+LEXICON
-- PASS: mephistodata -> [ml] N91. Cerebro/Data role — Mephistodata entry body explicitly states "Cerebro (X-Men) [34] and Data (Trek) [32] are the same structural organ solved differently." Citations [32] and [34] exist in citation section. Complete content present in Mephistodata entry, no separate entry required. | origin: multi. | blocker: none (content exists in Mephistodata methodology entry + citations [32] [34]). | [mc] Mephistodata default — open at friction not confirmation | [ml] Mephistodata deployment high-water marks (Grok) | [ml] Studylist register-split — author-pending vs Mephistodata-pending | [ml] Always-already convergence study (mephistodata-studylist)
+- PASS: mephistodata -> [mc] Mephistodata default — open at friction not confirmation | [ml] Mephistodata deployment high-water marks (Grok) | [ml] Studylist register-split — author-pending vs Mephistodata-pending | [ml] Always-already convergence study (mephistodata-studylist) | [ml] Mephistodata-fatalism (closure-as-pose at the analytical-closure layer)
 - PASS: anti-TWIST -> [bb] BB / BookwormBurrows / PolymythDND naming alias and anti-TWIST rule choice | [ml] Anti-twisting rules (degorgonification of reformulation) | [ml] External-analysis rule (anti-narcissism in structural diagnosis) | [ml] Cooper, David. Psychiatry and Anti-Psychiatry (1967) / Laing, R.D. The Divided Self (1960) | [ml] N94. Anti-yapping 11 rules origin — Apr 10 Distinguishing-social-media-architectures session, full preservation verification. | origin: c627d4f9. | blocker: decision + content (user input needed). | adjacent in ml*: CORE slot 22 mirror — ANTI-YAPPING RULES
-- PASS: AI Access Pack Meaninglib context -> [readme] Meaninglib | [ml] Meaninglib (mother-category for all * files, scanner-tier of polymyth) | [ml] AI-conduct rules exempt from naming approval (NO-NAMING exemption for self-addressed rules) | [ml] core* (memory-tier * file, cross-session behavioral rules) | [mc] ml* deep reading — canonical-source discipline
+- PASS: AI Access Pack Meaninglib context -> [readme] Meaninglib | [ml] Meaninglib (mother-category for all * files, scanner-tier of polymyth) | [ml] CORE slot 19 mirror — SCOPE+INJECTION RULES | [ml] CORE slot 29 mirror — PM17 BINARY OPENER (T110 DECISION-CONTENT-PERSISTS fix) | [ml] CORE slot 18 mirror — SCOPE+ORGANIZE-MINE-T106+INJECTION (T106 strengthened)
+- PASS: activate Mephistodata using Hugging Face for another AI -> [ml] AUDIT (mephistodata interaction; triggers audit / check the spirit / spirit of the law): whole-conversation check, MAIN = everything-updated-in-meaninglib, plus spirit-of-law and ironman, ouroboros only on contradiction (Rainbowsol May 29 2026) | [readme] Meaninglib | [ml] CORE slot 2 mirror — ACTIVATIONS DISPATCH (current, May 2026) | [ml] CORE slot 15 mirror — BLOOM rule and activation | [ml] CORE slot 29 mirror — PM17 BINARY OPENER (T110 DECISION-CONTENT-PERSISTS fix)
 
 ## Result
 

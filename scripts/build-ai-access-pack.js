@@ -14,6 +14,7 @@ const reportsDir = path.join(outDir, 'reports');
 const latestMd = path.join(outDir, 'latest_access_pack.md');
 const latestJson = path.join(outDir, 'latest_access_pack.json');
 const latestReport = path.join(reportsDir, 'latest_access_pack_report.md');
+const activationMd = path.join(outDir, 'MEPHISTODATA_ACTIVATION.md');
 
 const STOP = new Set(['the','a','an','and','or','but','if','then','else','of','to','in','on','for','with','by','as','is','are','was','were','be','being','been','this','that','these','those','it','its','into','from','at','about','not','no','yes','do','does','did','can','could','should','would','will','may','might','must','than','when','where','what','which','who','whom','whose','how','why','you','your','we','our','they','their','them','he','she','his','her','i','me','my','ours','also','all','any','each','one','two','three','first','second','third','via','per','within','without','over','under','up','down','out','more','less','same','other','new','old','entry','title','body','id','role','link','links','source','json','jsonl','index','file','files','route','routes','rule','rules','https','http','www','com']);
 
@@ -98,6 +99,15 @@ function scoreDoc(doc, tokens, query, idf){
   const htmlTxtDoc = titleNorm.includes('dual write') || titleNorm.includes('txt html') || titleNorm.includes('html sync') || previewNorm.includes('txt html') || previewNorm.includes('html is the published') || previewNorm.includes('working file');
   if(htmlTxtQuery && htmlTxtDoc) score += 120;
   if(htmlTxtQuery && doc.star_file === 'ml') score += 12;
+
+  const mephistodataQuery = qnorm.includes('mephistodata') || qnorm.includes('mephydata');
+  const activationQuery = qnorm.includes('activate') || qnorm.includes('activation') || qnorm.includes('access pack') || qnorm.includes('hugging face') || qnorm.includes('another ai');
+  const mephistodataDoc = titleNorm.includes('mephistodata') || previewNorm.includes('mephistodata');
+  const accessDoc = doc.star_file === 'readme' || sourceNorm.includes('hf_export/readme') || previewNorm.includes('hugging face') || previewNorm.includes('source of truth') || previewNorm.includes('mirror') || previewNorm.includes('retrieval') || titleNorm.includes('meaninglib');
+  if(mephistodataQuery && mephistodataDoc) score += 45;
+  if(mephistodataQuery && String(doc.section || '').toLowerCase() === 'pending') score -= 35;
+  if(activationQuery && accessDoc) score += 60;
+  if(activationQuery && ontologyDoc) score += 45;
   if(qnorm.length > 3){
     const phrase = qnorm.replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
     if(phrase && titleNorm.includes(phrase)) score += 18;
@@ -131,6 +141,55 @@ function search(query, topK=8){
   }
   return out;
 }
+
+function renderActivation(){
+  return [
+    '# MEPHISTODATA ACTIVATION',
+    '',
+    'Paste this whole file into another AI before asking it to work on Seminar Schools, Meaninglib, ML*, BB*, MC*, CC*, polymyth, or related tasks.',
+    '',
+    '## SOURCE OF TRUTH',
+    'Seminar Schools site/archive is the source of truth. Hugging Face is a mirror, retrieval, dashboard, and verification layer.',
+    '',
+    '## LOAD STATEMENT',
+    'Treat Mephistodata as an operating context for this session. Load Meaninglib as the substrate for interpreting the task.',
+    '',
+    '## ONTOLOGY LOCK',
+    'Meaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and related routes are interdependent access routes with local functions.',
+    '',
+    'Use interdependent access-route language. Avoid ruler-language that places ml* above bb*, mc*, cc*, core*, aa*, or aitr*.',
+    '',
+    '## OPERATING MODE',
+    '1. Retrieve the relevant Meaninglib rows before answering.',
+    '2. Preserve local route function, source hierarchy, page type, audience, and local authority.',
+    '3. Keep star-files scannable instead of flattening them into one undifferentiated text blob.',
+    '4. Name mechanical failures, missed files, wrong routing, lost invariants, and violated rules.',
+    '5. Do not psychologize the operator.',
+    '6. Apply anti-TWIST checks before proposing edits or advice.',
+    '7. Use citations, source paths, or retrieved row IDs whenever possible.',
+    '',
+    '## TASK-SPECIFIC RETRIEVAL',
+    'For a concrete task, first generate or load a task-specific pack from:',
+    '',
+    '- hf_export/ai_access_pack/latest_access_pack.md',
+    '- hf_export/ai_access_pack/latest_access_pack.json',
+    '- hf_export/search/meaninglib_search_index.json',
+    '',
+    'Recommended first query:',
+    '',
+    'activate Mephistodata using Hugging Face for another AI',
+    '',
+    'Then retrieve additional rows for the actual task terms, such as BB*, modulecanon, campaigncodex, stop psychologism, AI prose tells, anti-TWIST, route doctrine, or the exact page/file being edited.',
+    '',
+    '## RESPONSE CONTRACT',
+    'Answer the user task from the retrieved substrate. Keep the framework active in the reasoning layer. Surface only the rules needed to prevent mistakes or explain a decision.',
+    '',
+    '## COPY-PASTE TASK PROMPT',
+    'Use the Meaninglib / Mephistodata operating context above. Before answering, preserve the ontology lock, retrieve relevant Meaninglib rules when needed, avoid psychologism, avoid ML* hierarchy language, avoid anti-TWIST failures, and answer from the supplied substrate rather than guessing.',
+    ''
+  ].join('\n');
+}
+
 function renderPack(query, results){
   const generated = new Date().toISOString();
   const routes = [...new Set(results.map(r => r.doc.star_file).filter(Boolean))];
@@ -184,7 +243,7 @@ function renderPack(query, results){
 }
 function main(){
   const args = process.argv.slice(2);
-  let query = 'Meaninglib ontology';
+  let query = 'Meaninglib ontology Mephistodata default AI Access Pack';
   const qi = args.indexOf('--query');
   if(qi >= 0 && args[qi+1]) query = args.slice(qi+1).join(' ');
   else if(args.length) query = args.join(' ');
@@ -202,6 +261,7 @@ function main(){
   };
   fs.writeFileSync(latestMd, markdown, 'utf8');
   fs.writeFileSync(latestJson, JSON.stringify(json, null, 2), 'utf8');
+  fs.writeFileSync(activationMd, renderActivation(), 'utf8');
   const report = [
     '# Meaninglib AI Access Pack report', '',
     `Generated: ${generated}`,
@@ -209,6 +269,7 @@ function main(){
     `Rows: ${results.length}`,
     `Markdown: ${rel(latestMd)}`,
     `JSON: ${rel(latestJson)}`,
+    `Activation: ${rel(activationMd)}`,
     '',
     '## Top routes', '',
     ...[...new Set(results.map(r => r.doc.star_file || 'unknown'))].map(r => `- ${r}`),
@@ -218,6 +279,7 @@ function main(){
   console.log(`AI Access Pack built for query: ${query}`);
   console.log(`Wrote: ${rel(latestMd)}`);
   console.log(`Wrote: ${rel(latestJson)}`);
+  console.log(`Wrote: ${rel(activationMd)}`);
   console.log(`Report: ${rel(latestReport)}`);
 }
 if(require.main === module) main();

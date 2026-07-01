@@ -30,6 +30,14 @@ echo Verifying Meaninglib search...
 call npm run verify:meaninglib-search
 if errorlevel 1 goto fail
 
+echo Building AI Access Pack and Mephistodata activation file...
+call npm run build:ai-access-pack
+if errorlevel 1 goto fail
+
+echo Verifying AI Access Pack...
+call npm run verify:ai-access-pack
+if errorlevel 1 goto fail
+
 echo Uploading hf_export to Hugging Face...
 python scripts\sync-meaninglib-hf.py
 if errorlevel 1 goto fail

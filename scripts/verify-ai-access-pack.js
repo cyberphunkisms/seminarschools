@@ -11,6 +11,7 @@ const reportsDir = path.join(outDir, 'reports');
 const mdPath = path.join(outDir, 'latest_access_pack.md');
 const jsonPath = path.join(outDir, 'latest_access_pack.json');
 const reportPath = path.join(reportsDir, 'ai_access_pack_verification_report.md');
+const activationPath = path.join(outDir, 'MEPHISTODATA_ACTIVATION.md');
 const goldenPath = path.join(root, 'hf_export', 'eval', 'ai_access_pack_golden.jsonl');
 function fail(msg){ console.error('FAIL:', msg); process.exit(1); }
 function ensureDir(d){ fs.mkdirSync(d, {recursive:true}); }
@@ -19,7 +20,7 @@ function normalize(v){ return String(v||'').toLowerCase(); }
 function main(){
   ensureDir(reportsDir);
   if(!fs.existsSync(path.join(root, 'hf_export','search','meaninglib_search_index.json'))) fail('missing meaninglib_search_index.json');
-  if(!fs.existsSync(mdPath) || !fs.existsSync(jsonPath)) {
+  if(!fs.existsSync(mdPath) || !fs.existsSync(jsonPath) || !fs.existsSync(activationPath)) {
     child_process.execFileSync(process.execPath, [path.join(root, 'scripts','build-ai-access-pack.js'), '--query', 'Meaninglib ontology'], {stdio:'inherit'});
   }
   const md = fs.readFileSync(mdPath, 'utf8');
@@ -30,6 +31,17 @@ function main(){
   if(!/Seminar Schools site\/archive is the source of truth/i.test(md)) failures.push('missing source of truth wording');
   if(/ml\* governs/i.test(md)) failures.push('forbidden hierarchy language: ml* governs');
   if(!/Do not psychologize/i.test(md)) failures.push('missing stop-psychologism guard');
+  if(!fs.existsSync(activationPath)) {
+    failures.push('missing MEPHISTODATA_ACTIVATION.md');
+  } else {
+    const activation = fs.readFileSync(activationPath, 'utf8');
+    const activationRequired = ['MEPHISTODATA ACTIVATION','SOURCE OF TRUTH','LOAD STATEMENT','ONTOLOGY LOCK','OPERATING MODE','TASK-SPECIFIC RETRIEVAL','RESPONSE CONTRACT'];
+    for(const r of activationRequired){ if(!activation.includes(r)) failures.push(`activation missing section ${r}`); }
+    if(!/Treat Mephistodata as an operating context/i.test(activation)) failures.push('activation missing operating-context wording');
+    if(!/Meaninglib is the mother-category/i.test(activation)) failures.push('activation missing ontology lock wording');
+    if(/ml\* governs/i.test(activation)) failures.push('activation uses forbidden hierarchy language: ml* governs');
+    if(!/Do not psychologize/i.test(activation)) failures.push('activation missing stop-psychologism guard');
+  }
   let json;
   try { json = JSON.parse(fs.readFileSync(jsonPath, 'utf8')); } catch(e){ failures.push('latest_access_pack.json invalid JSON'); }
   if(json && (!Array.isArray(json.retrieved) || json.retrieved.length < 3)) failures.push('latest_access_pack.json has too few retrieved rows');
@@ -46,7 +58,8 @@ function main(){
     {query:'HTML txt mirror', anyTitle:['DUAL-WRITE','txt/HTML','html-vs-txt']},
     {query:'mephistodata', anyStar:['ml']},
     {query:'anti-TWIST', anyStar:['ml']},
-    {query:'AI Access Pack Meaninglib context', anyStar:['readme','ml']}
+    {query:'AI Access Pack Meaninglib context', anyStar:['readme','ml']},
+    {query:'activate Mephistodata using Hugging Face for another AI', anyStar:['readme','ml']}
   ];
   let golden = goldenDefaults;
   if(fs.existsSync(goldenPath)){
@@ -67,7 +80,8 @@ function main(){
     '# Meaninglib AI Access Pack verification report','',
     `Generated: ${new Date().toISOString()}`,'',
     `Latest markdown: hf_export/ai_access_pack/latest_access_pack.md`,
-    `Latest JSON: hf_export/ai_access_pack/latest_access_pack.json`,'',
+    `Latest JSON: hf_export/ai_access_pack/latest_access_pack.json`,
+    `Activation markdown: hf_export/ai_access_pack/MEPHISTODATA_ACTIVATION.md`,'',
     '## Golden tests','',
     ...testLines,'',
     '## Result','',

@@ -1,6 +1,6 @@
 # Meaninglib search verification report
 
-Generated: 2026-07-01T01:33:58.524Z
+Generated: 2026-07-01T02:43:28.155Z
 
 Index: hf_export/search/meaninglib_search_index.json
 Documents: 1974
@@ -11,7 +11,7 @@ Documents: 1974
 
 Query: Meaninglib ontology
 
-1. [readme] Meaninglib (215.52)
+1. [readme] Meaninglib (199.95)
    - hf_export/README.md
 2. [ml] Meaninglib (mother-category for all * files, scanner-tier of polymyth) (89.49)
    - hf_export/data/all_meaninglib_rows.jsonl
@@ -26,7 +26,7 @@ Query: Meaninglib ontology
 
 Query: interdependence rule
 
-1. [readme] Meaninglib (270.17)
+1. [readme] Meaninglib (271.06)
    - hf_export/README.md
 2. [ml] CL-60 INTERDEPENDENT DEFINITION — define each element by its own function and its interlock, never by ordinal or list-position (2026-06-14) (150.06)
    - hf_export/data/all_meaninglib_rows.jsonl
@@ -41,7 +41,7 @@ Query: interdependence rule
 
 Query: ML* hierarchy language governs BB*
 
-1. [readme] Meaninglib (416.82)
+1. [readme] Meaninglib (420.07)
    - hf_export/README.md
 2. [ml] T118 AND THE GAMEWORLD SET RELOCATED TO bb* (Rainbowsol-directed 2026-06-06) (196.78)
    - hf_export/data/all_meaninglib_rows.jsonl
@@ -146,13 +146,13 @@ Query: campaigncodex
 
 Query: HTML txt mirror
 
-1. [ml] ML*-DUAL-WRITE (txt/HTML sync rule) (714.24)
+1. [ml] ML*-DUAL-WRITE (txt/HTML sync rule) (714.22)
    - hf_export/data/all_meaninglib_rows.jsonl
 2. [ml] ml*/bb* HTML-vs-txt sync discipline (canonical-source rule) (203.29)
    - hf_export/data/all_meaninglib_rows.jsonl
 3. [ml] methodologylist full text mirror (163.12)
    - hf_export/data/all_meaninglib_rows.jsonl
-4. [ml] CORE slot 4 mirror — Mearsheimer (147.90)
+4. [ml] CORE slot 4 mirror — Mearsheimer (147.89)
    - hf_export/data/all_meaninglib_rows.jsonl
 5. [ml] CORE slot 3 mirror — SCANNER+LEXICON (141.37)
    - hf_export/data/all_meaninglib_rows.jsonl

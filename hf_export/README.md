@@ -30,6 +30,18 @@ Meaninglib is the mother-category for interdependent star-file access routes. ml
 - manifest and file-map views
 - available aa*/aitr* route views
 
+## AI Access Pack
+
+Generate task-specific AI handoff files after export with `npm run build:ai-access-pack`.
+
+Current handoff files live at:
+
+- `hf_export/ai_access_pack/MEPHISTODATA_ACTIVATION.md`
+- `hf_export/ai_access_pack/latest_access_pack.md`
+- `hf_export/ai_access_pack/latest_access_pack.json`
+
+For another AI, paste `MEPHISTODATA_ACTIVATION.md` first, then paste or retrieve a task-specific `latest_access_pack.md`. If this dataset remains private, external AIs need pasted text or authorized access. Public browser access requires the Hugging Face repository or a curated companion Space to be public or protected.
+
 ## Privacy stance
 
 Private first. Public curated views can be created later after ontology, privacy, and verification checks pass.
