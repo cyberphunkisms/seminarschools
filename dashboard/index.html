@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meaninglib Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-block">
+      <p class="eyebrow">Seminar Schools</p>
+      <h1>Meaninglib Dashboard</h1>
+      <p class="sub">Local search, star-file routing, and ontology guard for the private Meaninglib mirror.</p>
+    </div>
+    <div class="status-card" id="status">Loading health…</div>
+  </header>
+
+  <main>
+    <section class="hero-grid">
+      <section class="panel lock-panel">
+        <div class="panel-title-row">
+          <h2>Ontology lock</h2>
+          <span class="pill good">active</span>
+        </div>
+        <p id="ontologyLock">Loading…</p>
+        <div class="guards">
+          <span>Meaninglib mother-category</span>
+          <span>Interdependent star routes</span>
+          <span>Anti-hierarchy guard</span>
+          <span>Reports excluded from retrieval</span>
+        </div>
+      </section>
+
+      <section class="panel suite-panel">
+        <div class="panel-title-row">
+          <h2>Suite status</h2>
+          <span class="pill good">passed</span>
+        </div>
+        <p>Whole-Meaninglib retrieval suite checks ontology, interdependence, anti-hierarchy, psychologism, AI prose tells, bb*, mc*, cc*, and HTML/txt mirror routing.</p>
+        <a class="button-link" href="../hf_export/reports/meaninglib_search_verify_report.md" target="_blank" rel="noopener">Open verification report</a>
+      </section>
+    </section>
+
+    <section class="panel search-panel">
+      <div class="search-row">
+        <input id="query" type="text" value="Meaninglib ontology" placeholder="Search Meaninglib…" autofocus />
+        <select id="starFilter" title="Star-file filter">
+          <option value="all">All star files</option>
+          <option value="ml">ml*</option>
+          <option value="bb">bb*</option>
+          <option value="mc">mc*</option>
+          <option value="cc">cc*</option>
+          <option value="aa">aa*</option>
+          <option value="aitr">aitr*</option>
+          <option value="readme">README</option>
+        </select>
+        <button id="searchBtn">Search</button>
+      </div>
+      <div class="quick" aria-label="Common Meaninglib searches">
+        <button data-q="Meaninglib ontology">Meaninglib ontology</button>
+        <button data-q="interdependence rule">Interdependence</button>
+        <button data-q="ML* hierarchy language governs BB*">Anti-hierarchy</button>
+        <button data-q="stop psychologism">Stop psychologism</button>
+        <button data-q="AI prose tells">AI prose tells</button>
+        <button data-q="bookwormburrows">bookwormburrows</button>
+        <button data-q="modulecanon">modulecanon</button>
+        <button data-q="campaigncodex">campaigncodex</button>
+        <button data-q="HTML txt mirror">HTML/txt mirror</button>
+      </div>
+    </section>
+
+    <section class="layout">
+      <aside class="panel counts-panel">
+        <h2>Index health</h2>
+        <div id="counts"></div>
+        <div class="totals" id="totals"></div>
+        <h3>Reports</h3>
+        <ul class="report-links">
+          <li><a href="../hf_export/reports/search_report.md" target="_blank" rel="noopener">Search report</a></li>
+          <li><a href="../hf_export/reports/meaninglib_search_verify_report.md" target="_blank" rel="noopener">Verification report</a></li>
+          <li><a href="../hf_export/reports/latest_export_report.md" target="_blank" rel="noopener">Export report</a></li>
+          <li><a href="../hf_export/reports/privacy_scan_report.md" target="_blank" rel="noopener">Privacy scan</a></li>
+        </ul>
+      </aside>
+
+      <section class="panel results-panel">
+        <div class="results-head">
+          <h2>Results</h2>
+          <div id="resultMeta"></div>
+        </div>
+        <div id="results"></div>
+      </section>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

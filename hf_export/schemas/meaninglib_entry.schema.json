@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Meaninglib export row",
+  "type": "object",
+  "required": [
+    "id",
+    "star_file",
+    "title",
+    "body",
+    "section",
+    "canonical_status",
+    "source_hash",
+    "exported_at",
+    "embedding_text"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "star_file": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "section": {
+      "type": "string"
+    },
+    "source_html": {
+      "type": "string"
+    },
+    "source_txt": {
+      "type": "string"
+    },
+    "canonical_status": {
+      "type": "string"
+    },
+    "route": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "crossrefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "record_type": {
+      "type": "string"
+    },
+    "source_hash": {
+      "type": "string"
+    },
+    "exported_at": {
+      "type": "string"
+    },
+    "embedding_text": {
+      "type": "string"
+    }
+  }
+}

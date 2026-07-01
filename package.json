@@ -62,7 +62,22 @@
     "verify:heavy-pages": "node scripts/verify-heavy-page-resilience.js",
     "verify:page-types": "node scripts/verify-page-type-contracts.js",
     "verify:pathfinder": "node scripts/verify-pathfinder-nav.js",
-    "verify:bb-clarification": "node scripts/verify-bb-clarification.js"
+    "verify:bb-clarification": "node scripts/verify-bb-clarification.js",
+    "export:meaninglib-dataset": "node scripts/export-meaninglib-dataset.js",
+    "verify:meaninglib-dataset": "node scripts/verify-meaninglib-dataset.js",
+    "scan:private-data": "node scripts/scan-private-data.js",
+    "build:meaninglib-search": "node scripts/build-meaninglib-search.js",
+    "verify:meaninglib-search": "node scripts/verify-meaninglib-search.js",
+    "query:meaninglib": "node scripts/query-meaninglib.js",
+    "start:meaninglib-dashboard": "node scripts/meaninglib-dashboard-server.js",
+    "verify:meaninglib-dashboard": "node scripts/verify-meaninglib-dashboard.js",
+    "sync:meaninglib-hf": "python scripts/sync-meaninglib-hf.py",
+    "verify:ml-stop-psychologism": "node scripts/verify-ml-stop-psychologism.js",
+    "verify:ml-ai-prose-tells": "node scripts/verify-ml-ai-prose-tells.js",
+    "verify:ml-antibacktracking": "node scripts/verify-ml-antibacktracking.js",
+    "build:ai-access-pack": "node scripts/build-ai-access-pack.js",
+    "verify:ai-access-pack": "node scripts/verify-ai-access-pack.js",
+    "query:ai-access-pack": "node scripts/build-ai-access-pack.js --query"
   },
   "dependencies": {
     "@netlify/blobs": "10.7.9"
