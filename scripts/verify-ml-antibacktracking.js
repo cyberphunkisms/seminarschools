@@ -9,7 +9,8 @@ const required = [
   'working affordance cannot be erased by a polish pass',
   'Before changing a live page, game surface, route, generator, or PDF/export behavior',
   'the old website allowed a modular CV selection such as Culinary Hospitality + Community',
-  'restore it when lost, and add a verification guard'
+  'restore it when lost, and add a verification guard',
+  'front of /saul/ must stay an any-job modular CV builder'
 ];
 for (const phrase of required) {
   if (!html.includes(phrase)) throw new Error(`ML* anti-backtracking entry missing from HTML canonical: ${phrase}`);

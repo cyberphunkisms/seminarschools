@@ -1,7 +1,7 @@
 {
   "schema": "external-link-inventory-v1",
-  "generatedAt": "2026-06-30T15:21:42.655Z",
-  "totalExternalLinks": 1124,
+  "generatedAt": "2026-07-08T21:48:34.817Z",
+  "totalExternalLinks": 1087,
   "topHosts": [
     {
       "host": "www.gutenberg.org",
@@ -48,16 +48,16 @@
       "count": 16
     },
     {
-      "host": "torontocarnival.ca",
-      "count": 11
-    },
-    {
       "host": "www.loc.gov",
       "count": 11
     },
     {
       "host": "inquirygroup.org",
       "count": 11
+    },
+    {
+      "host": "torontocarnival.ca",
+      "count": 10
     },
     {
       "host": "www.readwritethink.org",
@@ -92,10 +92,6 @@
       "count": 7
     },
     {
-      "host": "www.toronto.ca",
-      "count": 7
-    },
-    {
       "host": "www.soulpepper.ca",
       "count": 7
     },
@@ -105,10 +101,6 @@
     },
     {
       "host": "www.tso.ca",
-      "count": 7
-    },
-    {
-      "host": "philevents.org",
       "count": 7
     },
     {
@@ -122,14 +114,6 @@
     {
       "host": "www.khanacademy.org",
       "count": 7
-    },
-    {
-      "host": "agakhanmuseum.org",
-      "count": 6
-    },
-    {
-      "host": "luminatofestival.com",
-      "count": 6
     },
     {
       "host": "www.rom.on.ca",
@@ -152,11 +136,15 @@
       "count": 5
     },
     {
-      "host": "harbourfrontcentre.com",
+      "host": "agakhanmuseum.org",
       "count": 5
     },
     {
       "host": "www.canadianstage.com",
+      "count": 5
+    },
+    {
+      "host": "philevents.org",
       "count": 5
     },
     {
@@ -188,14 +176,6 @@
       "count": 4
     },
     {
-      "host": "brottmusic.com",
-      "count": 4
-    },
-    {
-      "host": "festivalofauthors.ca",
-      "count": 4
-    },
-    {
       "host": "www.kingstonwritersfest.ca",
       "count": 4
     },
@@ -204,11 +184,7 @@
       "count": 4
     },
     {
-      "host": "www.mcgill.ca",
-      "count": 4
-    },
-    {
-      "host": "torontojazz.com",
+      "host": "harbourfrontcentre.com",
       "count": 4
     },
     {
@@ -242,6 +218,30 @@
     {
       "host": "www.ibo.org",
       "count": 4
+    },
+    {
+      "host": "www3.nfb.ca",
+      "count": 4
+    },
+    {
+      "host": "nrich.maths.org",
+      "count": 4
+    },
+    {
+      "host": "www.biointeractive.org",
+      "count": 4
+    },
+    {
+      "host": "letstalkscience.ca",
+      "count": 4
+    },
+    {
+      "host": "www.nyclgbtsites.org",
+      "count": 3
+    },
+    {
+      "host": "cal.com",
+      "count": 3
     }
   ],
   "importantSample": [
@@ -426,11 +426,6 @@
       "host": "calendly.com"
     },
     {
-      "source": "polymythseminars/events/0397c5dce167-f646f3ad/index.html",
-      "href": "https://www.toronto.ca/explore-enjoy/festivals-events/pride-month/",
-      "host": "www.toronto.ca"
-    },
-    {
       "source": "polymythseminars/events/049ffd7fa6b9-f0069db2/index.html",
       "href": "https://veldmusicfestival.com/",
       "host": "veldmusicfestival.com"
@@ -444,11 +439,6 @@
       "source": "polymythseminars/events/083b2f76f382-8a98f3ce/index.html",
       "href": "https://brottmusic.com/la-boheme/",
       "host": "brottmusic.com"
-    },
-    {
-      "source": "polymythseminars/events/0c9ce6291393-e4ae86c3/index.html",
-      "href": "https://www.toronto.ca/explore-enjoy/festivals-events/pride-month/",
-      "host": "www.toronto.ca"
     },
     {
       "source": "polymythseminars/events/0cc0dee6936c-1569072e/index.html",
@@ -481,11 +471,6 @@
       "host": "www.reelasian.com"
     },
     {
-      "source": "polymythseminars/events/1ce636088711-d699318a/index.html",
-      "href": "https://brottmusic.com/the-piano-men/",
-      "host": "brottmusic.com"
-    },
-    {
       "source": "polymythseminars/events/2026-summer-camps-2026-07-06-740b03df/index.html",
       "href": "https://agakhanmuseum.org/whats-on/2026-summer-camps-2/",
       "host": "agakhanmuseum.org"
@@ -499,16 +484,6 @@
       "source": "polymythseminars/events/229c166bbbe6-769cb39f/index.html",
       "href": "https://summerworks.ca/show/devising-immersive-site-specific-performance/",
       "host": "summerworks.ca"
-    },
-    {
-      "source": "polymythseminars/events/246eae77dc33-c4b84eff/index.html",
-      "href": "https://www.toronto.ca/explore-enjoy/festivals-events/pride-month/",
-      "host": "www.toronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/2736bd47af82-2ce43a5f/index.html",
-      "href": "https://luminatofestival.com/",
-      "host": "luminatofestival.com"
     },
     {
       "source": "polymythseminars/events/2757d9fa6cc7-fb66b5f4/index.html",
@@ -536,11 +511,6 @@
       "host": "www.mcgill.ca"
     },
     {
-      "source": "polymythseminars/events/2ea6faeee4a4-d5ee713b/index.html",
-      "href": "https://montrealjazzfest.com/",
-      "host": "montrealjazzfest.com"
-    },
-    {
       "source": "polymythseminars/events/2fe410f5efc7-029630c0/index.html",
       "href": "https://fringetoronto.com/fringe/show/danse-macabre",
       "host": "fringetoronto.com"
@@ -549,11 +519,6 @@
       "source": "polymythseminars/events/3018f2437e1f-b906f0be/index.html",
       "href": "https://www.toronto.ca/explore-enjoy/festivals-events/nuitblanche/",
       "host": "www.toronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/3830157c28b8-5dbb7909/index.html",
-      "href": "https://montrealjazzfest.com/en/program/patrick-watson-e007898",
-      "host": "montrealjazzfest.com"
     },
     {
       "source": "polymythseminars/events/455d5b079312-8b2bd338/index.html",
@@ -576,11 +541,6 @@
       "host": "harbourfrontcentre.com"
     },
     {
-      "source": "polymythseminars/events/55335321d10e-38a19326/index.html",
-      "href": "https://montrealjazzfest.com/en/program/saint-levant-e007897",
-      "host": "montrealjazzfest.com"
-    },
-    {
       "source": "polymythseminars/events/55a6ad318e19-67b9f2d5/index.html",
       "href": "https://harbourfrontcentre.com/series/summer-music-in-the-garden/",
       "host": "harbourfrontcentre.com"
@@ -596,39 +556,14 @@
       "host": "summerworks.ca"
     },
     {
-      "source": "polymythseminars/events/5fd96f93aff6-401a4c64/index.html",
-      "href": "https://luminatofestival.com/",
-      "host": "luminatofestival.com"
-    },
-    {
-      "source": "polymythseminars/events/7241619d213e-cef12221/index.html",
-      "href": "https://www.mcgill.ca/science/channels_item/33",
-      "host": "www.mcgill.ca"
-    },
-    {
       "source": "polymythseminars/events/74f79ea5ff35-183cba57/index.html",
       "href": "https://carabram.org/",
       "host": "carabram.org"
     },
     {
-      "source": "polymythseminars/events/7a63d8fd5e8c-1dbbec38/index.html",
-      "href": "https://harbourfrontcentre.com/event/fun-philippines/",
-      "host": "harbourfrontcentre.com"
-    },
-    {
-      "source": "polymythseminars/events/7d9cc0af58b5-7b477abd/index.html",
-      "href": "https://luminatofestival.com/",
-      "host": "luminatofestival.com"
-    },
-    {
       "source": "polymythseminars/events/874ad14c70b3-8fe95c20/index.html",
       "href": "https://beachesjazz.com/",
       "host": "beachesjazz.com"
-    },
-    {
-      "source": "polymythseminars/events/8b8423aafbf6-1f888308/index.html",
-      "href": "https://torontojazz.com/lineup/",
-      "host": "torontojazz.com"
     },
     {
       "source": "polymythseminars/events/8c0a1af041b0-b27caa62/index.html",
@@ -661,11 +596,6 @@
       "host": "www.reelasian.com"
     },
     {
-      "source": "polymythseminars/events/97222228bc8e-e58e14da/index.html",
-      "href": "https://www.torontomu.ca/research/news-events/toronto-metropolitan-university-wide-research-events/",
-      "host": "www.torontomu.ca"
-    },
-    {
       "source": "polymythseminars/events/98410ad8a93b-ce5d67bc/index.html",
       "href": "https://www.toronto.ca/explore-enjoy/festivals-events/nuitblanche/",
       "host": "www.toronto.ca"
@@ -691,11 +621,6 @@
       "host": "fanexpohq.com"
     },
     {
-      "source": "polymythseminars/events/a0a5a2cffba5-9a8dd35a/index.html",
-      "href": "https://luminatofestival.com/",
-      "host": "luminatofestival.com"
-    },
-    {
       "source": "polymythseminars/events/a49ab7357b76-e8160af7/index.html",
       "href": "https://harbourfrontcentre.com/series/summer-music-in-the-garden/",
       "host": "harbourfrontcentre.com"
@@ -716,11 +641,6 @@
       "host": "relse.org"
     },
     {
-      "source": "polymythseminars/events/abaa54f489fb-115ffa48/index.html",
-      "href": "https://luminatofestival.com/",
-      "host": "luminatofestival.com"
-    },
-    {
       "source": "polymythseminars/events/acla-annual-meeting-seminar-proposal-deadline-projected-2026-09-30-f04d246c-fc5a583b/index.html",
       "href": "https://www.acla.org/annual-meeting",
       "host": "www.acla.org"
@@ -739,11 +659,6 @@
       "source": "polymythseminars/events/ad7b80663935-693e62e7/index.html",
       "href": "https://fringetoronto.com/",
       "host": "fringetoronto.com"
-    },
-    {
-      "source": "polymythseminars/events/aed7ce8c9bb6-a80968dc/index.html",
-      "href": "https://www.toronto.ca/explore-enjoy/festivals-events/pride-month/",
-      "host": "www.toronto.ca"
     },
     {
       "source": "polymythseminars/events/afrofest-2026-2026-08-14-7de6ee8b/index.html",
@@ -916,11 +831,6 @@
       "host": "fanexpohq.com"
     },
     {
-      "source": "polymythseminars/events/c7eb8ca496f2-8e0d184c/index.html",
-      "href": "https://www.concordia.ca/cuevents/offices/vprgs/gradproskills/2026/07/08/funding-opportunities-graduate-students-research-programs-within-social-sciences-arts-humanities.html",
-      "host": "www.concordia.ca"
-    },
-    {
       "source": "polymythseminars/events/c99bf4285b72-a1a5f566/index.html",
       "href": "https://torontofolkfestival.com/",
       "host": "torontofolkfestival.com"
@@ -956,11 +866,6 @@
       "host": "torontocarnival.ca"
     },
     {
-      "source": "polymythseminars/events/caribana-official-launch-2026-2026-06-13-43affaae/index.html",
-      "href": "https://torontocarnival.ca/events/",
-      "host": "torontocarnival.ca"
-    },
-    {
       "source": "polymythseminars/events/caribana-pan-alive-closing-day-2026-08-02-04f6ce41/index.html",
       "href": "https://torontocarnival.ca/events/",
       "host": "torontocarnival.ca"
@@ -984,21 +889,6 @@
       "source": "polymythseminars/events/cfp-athens-institute-22nd-international-conference-on-philos-2026-10-27-53abf098/index.html",
       "href": "https://www.atiner.gr/philosophy",
       "host": "www.atiner.gr"
-    },
-    {
-      "source": "polymythseminars/events/cfp-international-association-for-philosophy-of-time-eastern-2026-07-03-996fc57b/index.html",
-      "href": "https://www.philtimesociety.com/calls-for-papers/",
-      "host": "www.philtimesociety.com"
-    },
-    {
-      "source": "polymythseminars/events/cfp-toronto-workshop-on-moral-psychology-and-moral-2026-07-01-24acb866/index.html",
-      "href": "https://philevents.org/event/show/147097",
-      "host": "philevents.org"
-    },
-    {
-      "source": "polymythseminars/events/cfp-university-of-toronto-philosophy-graduate-conf-2026-07-04-cfe952a0/index.html",
-      "href": "https://philevents.org/event/show/148365",
-      "host": "philevents.org"
     },
     {
       "source": "polymythseminars/events/chci-annual-meeting-proposals-projected-2026-12-15-c2df23ab-9f992c7e/index.html",
@@ -1036,29 +926,14 @@
       "host": "www.kingstonwritersfest.ca"
     },
     {
-      "source": "polymythseminars/events/d13a12bba177-bf4a647b/index.html",
-      "href": "https://festivalofauthors.ca/",
-      "host": "festivalofauthors.ca"
-    },
-    {
       "source": "polymythseminars/events/dae6c0d27ea4-b4778229/index.html",
       "href": "https://fantasiafestival.com/en/news/mubi-announces-montreals-fantasia-international-film-festival-as-the-canadian-premiere-for-jane-schoenbruns-teenage-sex-and-death-at-camp-miasma-starring-hannah-einbinder-and-gillian-anderson",
       "host": "fantasiafestival.com"
     },
     {
-      "source": "polymythseminars/events/dc714fd2df1c-b3656e14/index.html",
-      "href": "https://www.luminatofestival.com/",
-      "host": "www.luminatofestival.com"
-    },
-    {
       "source": "polymythseminars/events/de-profundis-oscar-wilde-in-jail-2026-11-03-ec06d1f5/index.html",
       "href": "https://www.soulpepper.ca/performances",
       "host": "www.soulpepper.ca"
-    },
-    {
-      "source": "polymythseminars/events/dee27d9f5a83-736139f0/index.html",
-      "href": "https://luminatofestival.com/",
-      "host": "luminatofestival.com"
     },
     {
       "source": "polymythseminars/events/diego-marcon-2026-06-05-4b766037/index.html",
@@ -1276,19 +1151,9 @@
       "host": "hillsidefestival.ca"
     },
     {
-      "source": "polymythseminars/events/hiromi-s-sonicwonder-at-koerner-hall-toronto-jazz-2026-06-27-4a406e67/index.html",
-      "href": "https://torontojazz.com/",
-      "host": "torontojazz.com"
-    },
-    {
       "source": "polymythseminars/events/huntington-library-fellowships-projected-2026-11-15-309085c1-0a0f8051/index.html",
       "href": "https://huntington.org/fellowships",
       "host": "huntington.org"
-    },
-    {
-      "source": "polymythseminars/events/ibrahim-maalouf-t-o-m-a-at-danforth-music-hall-tor-2026-06-27-a1ba98ce/index.html",
-      "href": "https://torontojazz.com/",
-      "host": "torontojazz.com"
     },
     {
       "source": "polymythseminars/events/icma-sponsored-session-caa-2028-2027-9d7329b5/index.html",
@@ -1331,11 +1196,6 @@
       "host": "www.imc.leeds.ac.uk"
     },
     {
-      "source": "polymythseminars/events/international-studies-association-2027-convention-2026-ca96ad58/index.html",
-      "href": "https://www.isanet.org/Conferences/ISA2027/Call",
-      "host": "www.isanet.org"
-    },
-    {
       "source": "polymythseminars/events/international-virginia-woolf-conference-36th-2027-ddb69d75/index.html",
       "href": "https://call-for-papers.sas.upenn.edu/category/modernist-studies",
       "host": "call-for-papers.sas.upenn.edu"
@@ -1371,11 +1231,6 @@
       "host": "www.johnlockeinstitute.com"
     },
     {
-      "source": "polymythseminars/events/journal-of-humanistic-psychology-authenticity-in-lived-exper-2026-7844ec42/index.html",
-      "href": "https://journals.sagepub.com/special-issue-calls-for-papers",
-      "host": "journals.sagepub.com"
-    },
-    {
       "source": "polymythseminars/events/journal-of-marlowe-studies-2027-issue-2026-0bd897cc/index.html",
       "href": "https://journals.shu.ac.uk/index.php/Marlstud/index",
       "host": "journals.shu.ac.uk"
@@ -1404,11 +1259,6 @@
       "source": "polymythseminars/events/law-and-society-association-2027-international-meeting-2026-fe26d5d9/index.html",
       "href": "https://www.lawandsociety.org/annual-meetings/",
       "host": "www.lawandsociety.org"
-    },
-    {
-      "source": "polymythseminars/events/luminato-festival-2026-play-20th-anniversary-2026-06-03-fdae4359/index.html",
-      "href": "https://www.luminatofestival.com/",
-      "host": "www.luminatofestival.com"
     },
     {
       "source": "polymythseminars/events/marshall-society-essay-competition-in-economics-2026-b32cdc92/index.html",
@@ -1454,11 +1304,6 @@
       "source": "polymythseminars/events/mississauga-latin-festival-2026-08-07-4645633f/index.html",
       "href": "https://www.mississaugalatinfestival.com/en/",
       "host": "www.mississaugalatinfestival.com"
-    },
-    {
-      "source": "polymythseminars/events/mississauga-taco-fest-2026-debut-2026-06-27-3a2d02dd/index.html",
-      "href": "https://mississauga.ca/events/",
-      "host": "mississauga.ca"
     },
     {
       "source": "polymythseminars/events/mla-2027-convention-just-in-time-sessions-2026-9d3e798c/index.html",
@@ -1606,16 +1451,6 @@
       "host": "www.thepowerplant.org"
     },
     {
-      "source": "polymythseminars/events/pride-toronto-2026-45th-anniversary-we-won-t-stop-2026-06-25-5966047b/index.html",
-      "href": "https://www.pridetoronto.com/",
-      "host": "www.pridetoronto.com"
-    },
-    {
-      "source": "polymythseminars/events/pride-toronto-parade-2026-2026-06-28-3dcecab8/index.html",
-      "href": "https://www.pridetoronto.com/",
-      "host": "www.pridetoronto.com"
-    },
-    {
       "source": "polymythseminars/events/princeton-ten-minute-play-contest-2027-dbaa012d/index.html",
       "href": "https://arts.princeton.edu/about/opportunities/high-school-contests/ten-minute-play-contest/",
       "host": "arts.princeton.edu"
@@ -1679,11 +1514,6 @@
       "source": "polymythseminars/events/renaissance-society-of-america-philadelphia-2027-2026-2c57f920/index.html",
       "href": "https://www.rsa.org/news/726650/Call-for-Papers-RSA-Philadelphia-2027.htm",
       "host": "www.rsa.org"
-    },
-    {
-      "source": "polymythseminars/events/rhythms-of-canada-2026-07-01-896ed480/index.html",
-      "href": "https://agakhanmuseum.org/whats-on/rhythms-of-canada/",
-      "host": "agakhanmuseum.org"
     },
     {
       "source": "polymythseminars/events/river-of-words-poetry-and-art-contest-2027-6b705879/index.html",
@@ -1906,11 +1736,6 @@
       "host": "www.medieval.utoronto.ca"
     },
     {
-      "source": "polymythseminars/events/toronto-dyke-march-pride-toronto-2026-2026-06-27-4d32ba49/index.html",
-      "href": "https://www.pridetoronto.com/",
-      "host": "www.pridetoronto.com"
-    },
-    {
       "source": "polymythseminars/events/toronto-international-festival-of-authors-2026-tif-2026-10-27-70be9f3f/index.html",
       "href": "https://festivalofauthors.ca/flagship-fall-festival/",
       "host": "festivalofauthors.ca"
@@ -1919,11 +1744,6 @@
       "source": "polymythseminars/events/toronto-international-film-festival-2026-tiff-51st-2026-09-10-75cb4b0c/index.html",
       "href": "https://tiff.net/about-the-festival",
       "host": "tiff.net"
-    },
-    {
-      "source": "polymythseminars/events/toronto-jazz-festival-2026-39th-edition-2026-06-19-c4148db9/index.html",
-      "href": "https://torontojazz.com/",
-      "host": "torontojazz.com"
     },
     {
       "source": "polymythseminars/events/toronto-public-library-young-voices-magazine-2027-6c04362c/index.html",
@@ -1989,11 +1809,6 @@
       "source": "polymythseminars/events/wine-in-the-wilderness-childress-2026-09-19-06a1f2a2/index.html",
       "href": "https://www.canadianstage.com/shows-events/26.27-season",
       "host": "www.canadianstage.com"
-    },
-    {
-      "source": "polymythseminars/events/write-the-world-monthly-competitions-2026-1e8a3be2/index.html",
-      "href": "https://writetheworld.org/competitions",
-      "host": "writetheworld.org"
     },
     {
       "source": "polymythseminars/events/yabs-young-writers-award-2027-b885392b/index.html",
@@ -2744,6 +2559,191 @@
       "source": "teacherresources/ela/ela-pd-canadian/the-man-from-glengarry-1e3cae60/index.html",
       "href": "https://www.gutenberg.org/ebooks/4544",
       "host": "www.gutenberg.org"
+    },
+    {
+      "source": "teacherresources/ela/ela-pd-canadian/the-story-girl-b6e9ad6f/index.html",
+      "href": "https://www.gutenberg.org/ebooks/26273",
+      "host": "www.gutenberg.org"
+    },
+    {
+      "source": "teacherresources/ela/ela-pd-canadian/wild-animals-i-have-known-8ba61513/index.html",
+      "href": "https://www.gutenberg.org/ebooks/3031",
+      "host": "www.gutenberg.org"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/30-of-the-best-short-stories-you-can-read-for-free-index-01938bbb/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/30-of-the-Best-Short-Stories-You-Can-Read-for-Free.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/a-and-p-3c36b5af/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/A-and-P-Updike-John.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/a-handful-of-time-497dcdea/index.html",
+      "href": "https://archive.org/details/handfuloftime0000pear",
+      "host": "archive.org"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/a-painful-case-b9ae8c53/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/A-painful-case-Joyce-James.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/a-temporary-matter-78e8f095/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/A-Temporary-Matter-Lahiri-Jhumpa.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/a-very-old-man-with-enormous-wings-aa306dae/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/A-Very-Old-Man-with-Enormous-Wings-Garcia-Marquez-Gabriel.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/a-worn-path-a6143709/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/A-Worn-Path-Welty-Eudora.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/adam-5732d7ab/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/Adam-Vonnegut.-Kurt.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/all-summer-in-a-day-8cafdc20/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/All-Summer-in-a-Day-Bradbury-Ray.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/american-history-5fe9a7fc/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/American-History-Cofer-Judith-Ortiz.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/an-imaginative-woman-3052706a/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/An-Imaginative-Woman-Hardy-Thomas.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/an-occurrence-at-owl-creek-bridge-518eb266/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/An-Occurrence-at-Owl-Creek-Bridge-Bierce-Ambrose.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/and-of-clay-we-are-created-121a4320/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/And-of-Clay-We-Are-Created-Allende-Isabel.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/by-the-waters-of-babylon-south-pasadena-hs-87955a05/index.html",
+      "href": "https://www.sphstigers.org/ourpages/users/jasher/SSBootCampWebsite/By%20the%20Waters%20of%20Babylon.pdf",
+      "host": "www.sphstigers.org"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/complete-canadian-curriculum-grade-3-5f24112e/index.html",
+      "href": "https://archive.org/details/completecanadian0000m6c1",
+      "host": "archive.org"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/complete-canadian-curriculum-grade-5-99d120b6/index.html",
+      "href": "https://archive.org/details/completecanadian0000unse_w5j5",
+      "host": "archive.org"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/defender-of-the-faith-e41981cb/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/Defender-of-the-Faith-Roth-Philip.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/everything-that-rises-must-converge-0fe22397/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/Everything-that-rises-must-converge-OConner-Flannery.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/flowers-for-algernon-clean-cache-f7c8e906/index.html",
+      "href": "https://raio.org/FlowersForAlgernon.pdf",
+      "host": "raio.org"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/flowers-for-algernon-helena-schools-full-novel-5aca7a0d/index.html",
+      "href": "https://helenaschools.org/wp-content/uploads/2023/02/Flowers-For-Algernon.pdf",
+      "host": "helenaschools.org"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/flowers-for-algernon-louisiana-doe-companion-guidebook-9e3c6ddb/index.html",
+      "href": "https://doe.louisiana.gov/docs/default-source/students-with-disabilities/grade-8-companion-resources---flowers-for-algernon.pdf",
+      "host": "doe.louisiana.gov"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/hills-like-white-elephants-cedfdec7/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/Hills-Like-White-Elephants-Hemingway-Ernest.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/let-s-see-pearson-education-d43ed7a8/index.html",
+      "href": "https://archive.org/details/letssee0000pear",
+      "host": "archive.org"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/luck-bb981b28/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/Luck-Twain-Mark.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/nine-stories-a0c77628/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/Nine-Stories-Perfect-Day-Salinger-JD.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/robert-louis-stevenson-short-stories-60daa00f/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2014/02/Robert-Louis-Stevenson-Short-Stories.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/rules-of-the-game-3f2ffdd4/index.html",
+      "href": "https://www.kenwoodacademy.org/ourpages/auto/2015/3/30/65964006/SS%20Rules%20of%20the%20Game.pdf",
+      "host": "www.kenwoodacademy.org"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/rules-of-the-game-alternate-cache-c78ac00b/index.html",
+      "href": "https://jg019.k12.sd.us/eng1/Assignment%20Documents/Rules%20of%20the%20Game.pdf",
+      "host": "jg019.k12.sd.us"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/sealed-off-81807ab8/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/Sealed-Off-Chang-Eileen.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/short-story-collection-multi-author-anthology-d447b37b/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2014/02/Short-Story-Collection.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/the-cask-of-amontillado-ibiblio-clean-text-f16dda2d/index.html",
+      "href": "https://www.ibiblio.org/ebooks/Poe/Amontillado.pdf",
+      "host": "www.ibiblio.org"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/the-complete-stories-58592044/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/The-Complete-Stories-OConnor-Flannery.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/the-interlopers-holt-reader-format-anderson-ky-4a5b9b0a/index.html",
+      "href": "https://www.anderson.k12.ky.us/Downloads/The%20Interlopers%5B1%5D.pdf",
+      "host": "www.anderson.k12.ky.us"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/through-the-tunnel-b4229a2a/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/Through-the-Tunnel-Lessing-Doris.pdf",
+      "host": "jerrywbrown.com"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/twenty-two-short-works-by-charles-dickens-compilation-4d012b10/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2014/02/Twenty-two-short-stories-by-Charles-Dickens.pdf",
+      "host": "jerrywbrown.com"
     }
   ]
 }

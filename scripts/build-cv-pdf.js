@@ -81,6 +81,9 @@ const rows = (items) =>
     })
     .join("\n");
 
+const summary = "Toronto-based worker with experience across hospitality, community work, teaching, curriculum, performance, research, writing, and public projects. Brings adaptable communication, service, organization, cross-cultural work, and project-building experience to general employment and hybrid roles.";
+const competencies = ["Resource Planning & Allocation","Consultation & Guidance Expertise","Policy & Procedure Development","Social & Economic Impact Assessment","Team Development & Leadership","Basic French, Farsi, & Mandarin","Key Performance Indicator (KPI) tracking & Continuous Process Improvement"];
+
 const sectionHtml = sections
   .map(
     (g) => `<div class="sec">
@@ -96,41 +99,45 @@ const html = `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Saul Karim NMH &middot; CV</title>
+<title>Saul Karim Nassau &middot; Employment CV</title>
 <style>
+  @page { size: A4; margin: 0.38in 0.46in; }
   html, body { margin:0; padding:0; background-color:#ffffff; }
   body { font-family: Georgia, 'Times New Roman', 'Liberation Serif', serif; color:#1d1d1d; }
-  .hd { display:flex; align-items:flex-end; justify-content:space-between; gap:18pt; border-bottom:1.5px solid #7A2632; padding-bottom:10pt; margin-bottom:6pt; }
+  .hd { display:flex; align-items:flex-end; justify-content:space-between; gap:18pt; border-bottom:1.5px solid #7A2632; padding-bottom:7pt; margin-bottom:5pt; }
   .hd .contact { text-align:right; }
-  .hd h1 { font-variant:small-caps; font-weight:600; letter-spacing:3.5px; font-size:22pt; color:#5A1A24; margin:0; }
-  .hd h1 .post { font-size:11.5pt; letter-spacing:2px; color:#7A2632; }
-  .hd .meta { font-size:10.5pt; letter-spacing:1px; color:#2a2a2a; margin:2pt 0; }
-  .hd .em { font-size:9pt; letter-spacing:0.8px; color:#46383a; margin-top:3.5pt; }
-  .sec { margin-top:11pt; page-break-inside:avoid; break-inside:avoid; }
-  .sh { font-variant:small-caps; letter-spacing:2.2px; font-size:10pt; color:#7A2632;
+  .hd h1 { font-variant:small-caps; font-weight:600; letter-spacing:3.5px; font-size:20pt; color:#5A1A24; margin:0; }
+  .hd h1 .post { font-size:10pt; letter-spacing:2px; color:#7A2632; }
+  .hd .meta { font-size:8.8pt; letter-spacing:1px; color:#2a2a2a; margin:2pt 0; }
+  .hd .em { font-size:8.3pt; letter-spacing:0.8px; color:#46383a; margin-top:3.5pt; }
+  .summary { margin:6pt 0 5pt; font-size:8pt; line-height:1.36; color:#272727; }
+  .skills { margin:0 0 6pt; font-size:8pt; line-height:1.35; color:#424242; }
+  .skills .m { color:#7A2632; margin:0 4pt; }
+  .sec { margin-top:8pt; }
+  .sh { font-variant:small-caps; letter-spacing:2.2px; font-size:8.3pt; color:#7A2632;
         border-bottom:1px solid #9b5560; padding-bottom:2pt; margin-bottom:4pt;
         page-break-after:avoid; }
   .elist { width:100%; }
-  .row { position:relative; page-break-inside:avoid; padding:3pt 0 3pt ${leftPadPt}pt; }
+  .row { position:relative; page-break-inside:avoid; padding:2.2pt 0 2.2pt ${leftPadPt}pt; }
   .row::before { content:""; position:absolute; left:${dateColPt}pt; top:0; bottom:0;
                  width:1px; background:#d9c6c9; }
   .row .d { position:absolute; left:0; top:3pt; width:${dateTextPt}pt; text-align:right;
-            white-space:nowrap; font-size:9pt; color:#3a3a3a; }
+            white-space:nowrap; font-size:8.3pt; color:#3a3a3a; }
   .row .o { position:absolute; left:${dateColPt}pt; top:6.5pt; width:12pt;
             text-align:center; line-height:0; }
   .dot { display:inline-block; width:5px; height:5px; border-radius:50%; }
   .dot.sq { border-radius:1px; }
-  .row .b { font-size:11pt; line-height:1.32;
+  .row .b { font-size:9.8pt; line-height:1.24;
             overflow-wrap:break-word; word-wrap:break-word; }
   .t { font-weight:bold; color:#161616; }
   .t.tc { font-weight:600; color:#33272a; }
   .caret { color:#7A2632; }
-  .n { font-style:italic; color:#564a4c; font-size:10pt; }
-  .cred { margin-top:14pt; border-top:0.75px solid #c4a8ab; padding-top:8pt;
+  .n { font-style:italic; color:#564a4c; font-size:8.3pt; }
+  .cred { margin-top:8pt; border-top:0.75px solid #c4a8ab; padding-top:5pt;
           page-break-inside:avoid; }
   .cred .ch { font-variant:small-caps; letter-spacing:1.8px; font-size:9.5pt;
               color:#7A2632; margin:0 0 4pt; }
-  .cred .cb { font-size:9pt; line-height:1.5; color:#2c2c2c; }
+  .cred .cb { font-size:8.3pt; line-height:1.5; color:#2c2c2c; }
   .cred .colh { display:inline-block; vertical-align:top; width:48%; margin-right:2%; }
   .cred .colh .ci { display:block; padding:0.6pt 0 0.6pt 9pt; text-indent:-9pt; line-height:1.5; }
   .cred .colh .ci::before { content:"\\2023\\00a0"; color:#7A2632; }
@@ -138,12 +145,14 @@ const html = `<!doctype html>
 </head>
 <body>
 <div class="hd">
-  <h1>Saul Karim NMH <span class="post">MA</span></h1>
+  <h1>Saul Karim Nassau <span class="post">MA</span></h1>
   <div class="contact">
     <div class="meta">416-771-0382 &middot; Toronto</div>
-    <div class="em">saulnassau@protonmail.com &middot; seminarschools.com/saulnassau</div>
+    <div class="em">saulnassau@protonmail.com &middot; seminarschools.com/saul/</div>
   </div>
 </div>
+<div class="summary">${esc(summary)}</div>
+<div class="skills">${competencies.map((c, i) => `${i ? '<span class="m">▪</span>' : ''}${esc(c)}`).join(' ')}</div>
 ${sectionHtml}
 <div class="cred">
   <div class="ch">${esc(t.certs)}</div>

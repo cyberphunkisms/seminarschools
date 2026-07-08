@@ -110,22 +110,25 @@ function breadcrumb(items) {
     itemListElement: items.map((item, i) => ({ '@type':'ListItem', position:i+1, name:item.name, item:item.url }))
   };
 }
-function htmlPage({title, description, canonical, crumbs, body, schema = [], robots, css}) {
+function htmlPage({title, description, canonical, crumbs, body, schema = [], robots, css, routeType}) {
+  const typeAttr = routeType || (canonical.includes('/polymyth/methodologylist/') ? 'archive' : canonical.includes('/teacherresources/') ? 'resource-catalog' : canonical.includes('/polymythseminars/events/') ? 'calendar' : 'archive');
   const graph = [
     { '@context':'https://schema.org', '@type':'WebPage', '@id': canonical + '#webpage', url: canonical, name:title, description, inLanguage:'en-CA', isPartOf:{ '@id': SITE + '/#website' } },
     ...(crumbs ? [breadcrumb(crumbs)] : []),
     ...schema
   ];
   return `${pageHead({title, description, canonical, schema:graph, robots, css})}
-<body data-geometry="indra-web" data-indra-intensity="${geometryIntensity(canonical)}">
+<body data-route-type="${attr(typeAttr)}" data-geometry="indra-web" data-indra-intensity="${geometryIntensity(canonical)}">
 <a class="skip-link" href="#content">Skip to content</a>
 <header class="catalog-top"><a href="/" class="brand">Seminar <em>Schools</em></a><nav aria-label="Primary"><a href="/teacherresources/">Teacher Resources</a><a href="/polymythseminars/">polymythcalendar</a><a href="/leizu/">Leizu Academy</a></nav></header>
 <main id="content" class="catalog-page">
 ${body}
 </main>
 <footer class="catalog-footer"><a href="/teacherresources/">Teacher Resources</a> · <a href="/">Seminar Schools</a> · Toronto</footer>
+<script src="/js/site-keyboard-enhancements.js?v=cl91" defer></script>
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
 </body>
 </html>\n`;
 }
@@ -339,7 +342,22 @@ function injectEventRoot(events) {
   write(rel,html);
   return current;
 }
+function cleanGeneratedEventPages(currentRoutes) {
+  const base = path.join(ROOT, 'polymythseminars', 'events');
+  if (CHECK || !fs.existsSync(base)) return;
+  const keep = new Set(currentRoutes.map(route => path.join(ROOT, sourcePathFor(route))));
+  for (const ent of fs.readdirSync(base, { withFileTypes: true })) {
+    if (!ent.isDirectory()) continue;
+    const ix = path.join(base, ent.name, 'index.html');
+    if (!keep.has(ix)) {
+      fs.rmSync(path.join(base, ent.name), { recursive: true, force: true });
+      writes++;
+    }
+  }
+}
 function generateEventPages(events) {
+  const currentEventRoutes = events.filter(eventEligible).map(event => `/polymythseminars/events/${slug(event.id || event.title)}-${hash(event.id || event.title)}/`);
+  cleanGeneratedEventPages(currentEventRoutes);
   const indexable=[];
   for (const event of events.filter(eventEligible)) {
     const route=`/polymythseminars/events/${slug(event.id || event.title)}-${hash(event.id || event.title)}/`;
@@ -397,7 +415,7 @@ function generateMethodologyPages(seed) {
       return `<article class="resource-row" id="${attr(anchor)}"><h2>${esc(entry.t || 'Untitled entry')}</h2><p>${esc(entry.b || '')}</p>${entry.x ? `<p>${esc(entry.x)}</p>`:''}${tags}<p><a href="#${attr(anchor)}">Permanent link</a></p></article>`;
     }).join('\n');
     const desc=`${entries.length} polymyth framework entries in the ${label} section, presented as a static HTML reference edition.`;
-    const body=`<p class="breadcrumbs"><a href="/">Seminar Schools</a> / <a href="/polymyth/methodologylist/">Polymyth Methodologylist</a> / ${esc(label)}</p><p class="eyebrow">Polymyth framework</p><h1>${esc(label)}</h1><p class="lede">${esc(desc)}</p><p><a class="button secondary" href="/polymyth/methodologylist/">Open the interactive methodologylist</a></p><div class="resource-list">${cards}</div>`;
+    const body=`<p class="breadcrumbs"><a href="/">Seminar Schools</a> / <a href="/polymyth/methodologylist/">Polymyth Methodologylist</a> / ${esc(label)}</p><p class="eyebrow">Polymyth framework</p><h1>${esc(label)}</h1><p class="lede">${esc(desc)}</p><p class="archive-route-note route-note">Static archive route for this methodologylist section. Use this page for crawlable entry anchors, or open the interactive methodologylist for search and full navigation.</p><p><a class="button secondary" href="/polymyth/methodologylist/">Open the interactive methodologylist</a></p><div class="resource-list">${cards}</div>`;
     const schema=[{'@context':'https://schema.org','@type':'CollectionPage','@id':url+'#collection',url,name:`Polymyth Methodologylist: ${label}`,description:desc,numberOfItems:entries.length}];
     write(sourcePathFor(route),htmlPage({title:`${label} | Polymyth Methodologylist | Seminar Schools`,description:desc,canonical:url,crumbs:[{name:'Seminar Schools',url:SITE+'/'},{name:'Polymyth Methodologylist',url:SITE+'/polymyth/methodologylist/'},{name:label,url}],body,schema,css:'/teacherresources/catalog.css'}));
     routes.push({route,url});

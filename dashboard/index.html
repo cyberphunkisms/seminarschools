@@ -3,10 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,follow" />
   <title>Meaninglib Dashboard</title>
+  <link rel="canonical" href="https://seminarschools.com/dashboard/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://seminarschools.com/dashboard/" />
+  <meta property="og:title" content="Meaninglib Dashboard" />
+  <meta property="og:description" content="Local search, star-file routing, and ontology guard for the private Meaninglib mirror." />
+  <meta property="og:image" content="https://seminarschools.com/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Meaninglib Dashboard" />
+  <meta name="twitter:description" content="Local search, star-file routing, and ontology guard for the private Meaninglib mirror." />
+  <link rel="stylesheet" href="../css/alive.css" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root{--geo-scale:1;--geo-tx:0px;--geo-ty:0px;}
+    #geo{position:fixed;inset:auto -20vw -25vw auto;width:min(70vw,720px);height:min(70vw,720px);pointer-events:none;opacity:.055;color:#7A2632;z-index:0;}
+    #geo svg{width:100%;height:100%;transform:translate3d(var(--geo-tx),var(--geo-ty),0) scale(var(--geo-scale));transform-origin:center;transition:transform .2s linear;}
+    .topbar,main{position:relative;z-index:1;}
+  </style>
 </head>
-<body>
+<body data-geometry="indra-web" data-indra-intensity="0.055">
+  <div id="geo" aria-hidden="true"></div>
   <header class="topbar">
     <div class="brand-block">
       <p class="eyebrow">Seminar Schools</p>
@@ -44,7 +62,8 @@
 
     <section class="panel search-panel">
       <div class="search-row">
-        <input id="query" type="text" value="Meaninglib ontology" placeholder="Search Meaninglib…" autofocus />
+        <label for="query">Search Meaninglib</label>
+    <input id="query" type="text" value="Meaninglib ontology" placeholder="Search Meaninglib…" autofocus />
         <select id="starFilter" title="Star-file filter">
           <option value="all">All star files</option>
           <option value="ml">ml*</option>
@@ -94,6 +113,25 @@
     </section>
   </main>
 
+
+  <script>
+    function buildGeo(){
+      var g=document.getElementById('geo');
+      if(!g) return;
+      g.innerHTML='<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="1"><circle cx="300" cy="300" r="250"/><circle cx="300" cy="300" r="160"/><circle cx="300" cy="300" r="75"/><path d="M300 50 L516 425 H84 Z"/><path d="M300 550 L84 175 h432 Z"/></g></svg>';
+    }
+    buildGeo();
+    window.addEventListener('scroll', function(){
+      var max=Math.max(1, document.documentElement.scrollHeight-window.innerHeight);
+      var t=Math.min(1, Math.max(0, window.scrollY/max));
+      document.documentElement.style.setProperty('--geo-scale', String(1 + t * .08));
+      document.documentElement.style.setProperty('--geo-tx', (t * -18).toFixed(2)+'px');
+      document.documentElement.style.setProperty('--geo-ty', (t * -10).toFixed(2)+'px');
+    }, {passive:true});
+  </script>
+  <script src="../js/mandala.js"></script>
+  <script src="../js/indra.js"></script>
   <script src="app.js"></script>
+<script src="/js/site-keyboard-enhancements.js?v=cl91" defer></script>
 </body>
 </html>

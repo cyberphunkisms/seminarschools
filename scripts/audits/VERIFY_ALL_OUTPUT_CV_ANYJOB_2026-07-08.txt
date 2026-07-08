@@ -1,0 +1,81 @@
+
+> seminar-schools-leizu-pipeline@1.0.0 verify:all
+> node scripts/verify-critical.js && node scripts/verify-public-artifact-blocks.js && node scripts/verify-search-surface.js && node scripts/verify-calendar-aliases.js && node scripts/verify-calendar-data-parity.js && node scripts/verify-polymythcalendar-today-scroll.js && node scripts/verify-polymythcalendar-kid-guide.js && node scripts/verify-polymythcalendar-ux-efficiency.js && node scripts/verify-site-interactivity.js && node scripts/build-writing-shortcuts.js --check && node scripts/verify-writing-shortcuts.js && node scripts/build-academic-shortcuts.js --check && node scripts/verify-academic-shortcuts.js && node scripts/verify-festival-parent-taxonomy.js && node scripts/verify-harvest-pipeline.js && node scripts/verify-polymythcalendar-name.js && node scripts/verify-geometry.js && node scripts/verify-visible-geometry.js && node scripts/verify-zoom-resilience.js && node scripts/verify-register.js && node scripts/verify-route-doctrine.js && node scripts/verify-page-type-contracts.js && node scripts/verify-pathfinder-nav.js && node scripts/verify-page-size-budget.js && node scripts/verify-heavy-page-resilience.js && node scripts/verify-generated-route-indexing.js && node scripts/verify-sitemap-classification.js && node scripts/verify-keyboard-navigation.js && node scripts/verify-responsive-regression.js && node scripts/verify-saul-print.js && node scripts/verify-saul-modular-cv.js && node scripts/verify-teacherresources-finder.js && node scripts/verify-aa-polymyth-funnel.js && node scripts/verify-polymythcal-freshness-labels.js && node scripts/verify-shortcut-title-uniqueness.js && node scripts/verify-visible-input-labels.js && node scripts/audit-external-links.js && node scripts/verify-dense-anchors.js && node scripts/verify-asset-weights.js && node scripts/verify-payments.js && node scripts/verify-leizu-pipeline.js && node scripts/verify-leizu-experience.js && node scripts/verify-leizu-course-picker.js && node scripts/verify-leizu-simplified-chinese.js && node scripts/verify-leizu-persian.js && node scripts/verify-leizu-localization-funnel.js && node scripts/verify-home-map.js && node scripts/verify-bb-clarification.js && node scripts/verify-bb-final-readiness.js && node scripts/verify-bb-kid-friendly.js && node scripts/verify-bb-why.js && node scripts/verify-main-page.js && node scripts/verify-main-leizu-funnel.js && node scripts/verify-saul-page.js && node scripts/verify-site-integrity.js && node scripts/verify-professional-readiness.js && node scripts/verify-seo.js && node scripts/verify-typography-controls.js && node scripts/verify-bookwormcard-gate.js
+
+PASS  calendar page exists
+PASS  calendar embeds a 200+ event snapshot fallback
+PASS  calendar wraps titles in source_url links
+PASS  calendar carries build stamp
+PASS  event data file parses
+PASS  data file has 200+ events
+PASS  rss feed present with items
+PASS  main page fetches the public events file
+PASS  main page wraps titles in source_url links
+PASS  PUBLIC events copy exists at /polymythseminars/events.json
+PASS  public copy has 200+ events
+PASS  public copy byte-identical to data/ master
+PASS  calendar primary fetch targets the PUBLIC path
+PASS  main page uses the fallback loader
+PASS  netlify still blocks /data/* (PM35 guard)
+PASS  robot fallback file parses
+
+ALL CRITICAL CHECKS PASS — safe to deploy.
+PUBLIC ARTIFACT BLOCK CHECK PASSED — root operator artifacts, bare tooling dirs, and wildcard tooling paths are forced to 404.
+SEARCH SURFACE CHECK PASSED — 719 catalog resources, 280 current event cards, 15 methodology sections, 989 sitemap URLs.
+PASS — polymyth calendar aliases redirect directly to the canonical calendar.
+CALENDAR DATA PARITY OK — 512 mirrored entries.
+POLYMYTHCALENDAR TODAY SCROLL CHECK PASSED — 12 scrollbox pages auto-anchor to the viewer's local today.
+POLYMYTHCALENDAR KID GUIDE CHECK PASSED — 12 pages carry concise student-facing instructions.
+POLYMYTHCALENDAR UX/EFFICIENCY CHECK PASSED — 12 pages have compact guide, descriptions, agenda calendar, smoother anchoring, and geometry.
+SITE INTERACTIVITY CHECK PASSED — 12 Polymythcal pages keep a stable title, clear context/guide text, no inline click handlers, and no filter-click re-anchoring. Site scan: 1288 HTML/JS files, 27 intentional preventDefault handlers, 21 scroll helpers, 7 bare hash links, 0 javascript hrefs.
+WRITING SHORTCUT CHECK — 38 current youth writing competitions, 0 files updated.
+WRITING SHORTCUT CHECK PASSED — 38 current youth writing competitions; counts {"writingclub":38,"writingkids":13,"writingjuniors":20,"writingteens":35,"writinggrads":35}.
+ACADEMIC SHORTCUT CHECK — 6 routes, 280 current events scanned, 0 files updated.
+ACADEMIC SHORTCUT CHECK PASSED — 55 global-academic sources; counts {"university":122,"philosophy":43,"humanities":90,"cfps":82,"lectures":33,"fellowships":38}.
+FESTIVAL PARENT TAXONOMY OK — 37 parent seasons and 73 linked productions.
+HARVEST PIPELINE OK — bounded, observable, soft-failing regional harvest workflow.
+polymythcalendar naming gate passed (393 public files scanned).
+pages executed: 1167   (auto-includes any future .html)
+result: 78 built+moves  |  2 inline-build+own-rig  |  1086 static-search  |  1 inline-build+camera
+
+engine invariants:
+  PASS  mandala exports initScrollCamera
+  PASS  mandala has global-scroll fallback
+  PASS  #geo svg consumes --geo-scale
+  PASS  indra scroll-couples #indraLayer
+  PASS  alive.css styles #indraLayer
+
+GEOMETRY COMPLETE — every page BUILDS a substrate and MOVES on scroll, engine intact.
+VISIBLE GEOMETRY CHECK PASSED — 1167 HTML pages carry alive.css, mandala.js, indra.js, body geometry markers, and CV pages are not excluded.
+ZOOM RESILIENCE CHECK PASSED — 1167 HTML pages inherit the shared zoom/reflow contract; user zoom is not disabled.
+ZOOM RESILIENCE WARNINGS — 22 known fixed/nowrap patterns are covered by the shared contract.
+ - aa/cloud/index.html: nowrap content relies on zoom contract unwrap media query
+ - aa/index.html: inline fixed width over 700px relies on zoom contract max-width override
+ - bookwormcard/index.html: nowrap content relies on zoom contract unwrap media query
+ - bookwormcard/print/index.html: nowrap content relies on zoom contract unwrap media query
+ - cfps/index.html: nowrap content relies on zoom contract unwrap media query
+ - fellowships/index.html: nowrap content relies on zoom contract unwrap media query
+ - humanities/index.html: nowrap content relies on zoom contract unwrap media query
+ - lectures/index.html: nowrap content relies on zoom contract unwrap media query
+ - leizu/cloud/index.html: nowrap content relies on zoom contract unwrap media query
+ - leizu/index.html: nowrap content relies on zoom contract unwrap media query
+ - leizu/teach/index.html: inline fixed width over 700px relies on zoom contract max-width override
+ - philosophy/index.html: nowrap content relies on zoom contract unwrap media query
+ - polymyth/polymythdnd/index.html: inline fixed width over 700px relies on zoom contract max-width override
+ - polymyth/sitemap/index.html: nowrap content relies on zoom contract unwrap media query
+ - polymythseminars/index.html: nowrap content relies on zoom contract unwrap media query
+ - teacherresources/index.html: nowrap content relies on zoom contract unwrap media query
+ - university/index.html: nowrap content relies on zoom contract unwrap media query
+ - writingclub/index.html: nowrap content relies on zoom contract unwrap media query
+ - writinggrads/index.html: nowrap content relies on zoom contract unwrap media query
+ - writingjuniors/index.html: nowrap content relies on zoom contract unwrap media query
+ ... 2 more
+PASS  DASH  (0)
+PASS  NEGDEF  (0)
+PASS  FILLER  (0)
+PASS  BORNALIVE  (0)
+PASS  OG  (0)
+
+register gate clean
+ROUTE DOCTRINE CHECK FAILED
+ - /polymyth/methodologylist/methodology/ archive route lacks visible route note or funnel
