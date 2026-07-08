@@ -261,3 +261,53 @@
 
 /BB_INTERACTIVITY_FIXES_AUDIT_2026-06-30.md /404.html 404!
 /BB_FINAL_TECHNICAL_SMOOTHNESS_AUDIT_2026-06-30.md /404.html 404!
+
+# === V10.4 hardened private/tooling public blocks ===
+/.env.example /404.html 404!
+/BB_STAR_OUROBOROSANALYSES_AND_UPDATE_REPORT_2026-06-30.md /404.html 404!
+/BUILD_AI_ACCESS_PACK.bat /404.html 404!
+/BUILD_MEANINGLIB_SEARCH.bat /404.html 404!
+/CHARTER.txt /404.html 404!
+/CL_SUGGESTION_PASS_REPORT_2026-06-30.md /404.html 404!
+/EXPORT_MEANINGLIB_DATASET.bat /404.html 404!
+/MEANINGLIB_AI_ACCESS_PACK_CURRENT_GITHUB_PATCH_2026-06-30.md /404.html 404!
+/MEANINGLIB_AI_ACCESS_PACK_UPDATE_2026-06-30.md /404.html 404!
+/MEPHISTODATA_HF_ACTIVATION_PATCH_2026-06-30.md /404.html 404!
+/QUERY_AI_ACCESS_PACK.bat /404.html 404!
+/QUERY_MEANINGLIB.bat /404.html 404!
+/QUERY_MEANINGLIB_TEST_SUITE.bat /404.html 404!
+/START_MEANINGLIB_DASHBOARD.bat /404.html 404!
+/SYNC_MEANINGLIB_TO_HUGGINGFACE.bat /404.html 404!
+/VERIFY_AI_ACCESS_PACK.bat /404.html 404!
+/VERIFY_MEANINGLIB_DASHBOARD.bat /404.html 404!
+/_headers /404.html 404!
+/_redirects /404.html 404!
+/hf_export/* /404.html 404!
+/netlify.env.example /404.html 404!
+/netlify.toml /404.html 404!
+/netlify/* /404.html 404!
+/node_modules/* /404.html 404!
+/package-lock.json /404.html 404!
+/package.json /404.html 404!
+
+
+# === V10.5 hardened bare-folder/root-artifact public blocks ===
+/CL_SUGGESTION_VERIFY_ALL_2026-06-30.txt /404.html 404!
+/VERIFY_VISIBLE_GEOMETRY_OUTPUT.txt /404.html 404!
+/_build_txt_from_html.py /404.html 404!
+/hf_export /404.html 404!
+/hf_export/ /404.html 404!
+/scripts /404.html 404!
+/scripts/ /404.html 404!
+/data /404.html 404!
+/data/ /404.html 404!
+/netlify /404.html 404!
+/netlify/ /404.html 404!
+/node_modules /404.html 404!
+/node_modules/ /404.html 404!
+/.github /404.html 404!
+/.github/ /404.html 404!
+/.env /404.html 404!
+/.env.local /404.html 404!
+/.npmrc /404.html 404!
+/.gitignore /404.html 404!

@@ -645,3 +645,230 @@ force = true
   to = "/404.html"
   status = 404
   force = true
+
+# === V10.4 hardened private/tooling public blocks ===
+[[redirects]]
+from = "/.env.example"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/BB_STAR_OUROBOROSANALYSES_AND_UPDATE_REPORT_2026-06-30.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/BUILD_AI_ACCESS_PACK.bat"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/BUILD_MEANINGLIB_SEARCH.bat"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/CL_SUGGESTION_PASS_REPORT_2026-06-30.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/EXPORT_MEANINGLIB_DATASET.bat"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/MEANINGLIB_AI_ACCESS_PACK_CURRENT_GITHUB_PATCH_2026-06-30.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/MEANINGLIB_AI_ACCESS_PACK_UPDATE_2026-06-30.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/MEPHISTODATA_HF_ACTIVATION_PATCH_2026-06-30.md"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/QUERY_AI_ACCESS_PACK.bat"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/QUERY_MEANINGLIB.bat"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/QUERY_MEANINGLIB_TEST_SUITE.bat"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/START_MEANINGLIB_DASHBOARD.bat"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/SYNC_MEANINGLIB_TO_HUGGINGFACE.bat"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/VERIFY_AI_ACCESS_PACK.bat"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/VERIFY_MEANINGLIB_DASHBOARD.bat"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/hf_export/*"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/netlify/*"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/node_modules/*"
+to = "/404.html"
+status = 404
+force = true
+
+
+
+# === V10.5 hardened bare-folder/root-artifact public blocks ===
+[[redirects]]
+from = "/CL_SUGGESTION_VERIFY_ALL_2026-06-30.txt"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/VERIFY_VISIBLE_GEOMETRY_OUTPUT.txt"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/hf_export"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/hf_export/"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/scripts"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/scripts/"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/data"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/data/"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/netlify"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/netlify/"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/node_modules"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/node_modules/"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/.github"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/.github/"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/.env"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/.env.local"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/.npmrc"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/.gitignore"
+to = "/404.html"
+status = 404
+force = true
+

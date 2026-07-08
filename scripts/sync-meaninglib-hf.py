@@ -49,6 +49,22 @@ def main() -> None:
         print("Missing huggingface_hub. Install it with: pip install huggingface_hub", file=sys.stderr)
         sys.exit(1)
     api = HfApi(token=token)
+    allow_public = os.environ.get("HF_ALLOW_PUBLIC_FULL_EXPORT", "").strip().upper() in {"1", "YES", "TRUE", "ALLOW"}
+    try:
+        info = api.repo_info(repo_id=repo_id, repo_type="dataset", token=token)
+    except Exception as exc:
+        print(f"Could not verify Hugging Face dataset visibility for {repo_id}: {exc}", file=sys.stderr)
+        print("Refusing to upload full hf_export/ without visibility verification.", file=sys.stderr)
+        sys.exit(1)
+    is_private = bool(getattr(info, "private", False))
+    if not is_private and not allow_public:
+        print(f"Refusing to upload full hf_export/ to PUBLIC Hugging Face dataset: {repo_id}", file=sys.stderr)
+        print("Use a private target such as SeminarSchools/meaninglib-private, or set HF_ALLOW_PUBLIC_FULL_EXPORT=YES only after a public-release audit.", file=sys.stderr)
+        sys.exit(1)
+    if is_private:
+        print(f"Verified private Hugging Face dataset target: {repo_id}")
+    else:
+        print(f"OVERRIDE ENABLED: uploading full hf_export/ to public dataset: {repo_id}")
     msg = f"Sync Meaninglib export {datetime.now(timezone.utc).isoformat(timespec='seconds')}"
     api.upload_folder(
         folder_path=str(EXPORT_DIR),

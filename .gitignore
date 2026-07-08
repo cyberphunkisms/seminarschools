@@ -1,0 +1,38 @@
+﻿# Seminar Schools deploy safety: local-only secrets and generated folders
+.env
+.env.*
+!.env.example
+!.env*.example
+.npmrc
+node_modules/
+.netlify/
+*.log
+SeminarSchools-Deploy-*.log
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+Thumbs.db
+
+# BEGIN Seminar Schools deploy safety
+# Local-only secrets and generated folders. Required by deployer.
+.env
+.env.*
+!.env.example
+!.env*.example
+.npmrc
+node_modules
+node_modules/
+.netlify
+.netlify/
+*.log
+SeminarSchools-Deploy-*.log
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+Thumbs.db
+# END Seminar Schools deploy safety
+
