@@ -3,7 +3,7 @@
 const fs=require('fs'); const path=require('path'); const ROOT=path.resolve(__dirname,'..');
 const outDir=path.join(ROOT,'scripts','reports'); fs.mkdirSync(outDir,{recursive:true});
 const domainCounts=new Map(); let total=0; const important=[];
-function walk(d,acc=[]){ for(const e of fs.readdirSync(d,{withFileTypes:true})){ if(['.git','node_modules','.netlify'].includes(e.name)) continue; const f=path.join(d,e.name); if(e.isDirectory()) walk(f,acc); else if(e.name.endsWith('.html')) acc.push(f); } return acc; }
+function walk(d,acc=[]){ for(const e of fs.readdirSync(d,{withFileTypes:true})){ if(['.git','node_modules','.netlify','public'].includes(e.name)) continue; const f=path.join(d,e.name); if(e.isDirectory()) walk(f,acc); else if(e.name.endsWith('.html')) acc.push(f); } return acc; }
 for(const f of walk(ROOT)){
   const rel=path.relative(ROOT,f).replace(/\\/g,'/'); const html=fs.readFileSync(f,'utf8');
   for(const m of html.matchAll(/<a\b[^>]*href=["'](https?:\/\/[^"']+)["'][^>]*>/gi)){

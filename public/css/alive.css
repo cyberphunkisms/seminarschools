@@ -1,0 +1,458 @@
+/* =========================================================================
+   ALIVE — site-wide aliveness layer (rev June 13 2026)
+   Pairs with /js/indra.js. Transform/opacity/shadow/filter only: no layout
+   reflow, compositor-friendly. Every interactive element responds to hover,
+   focus, and press; every structural surface carries at least one life
+   gesture. ~4KB, cached site-wide. prefers-reduced-motion kills all motion.
+   ========================================================================= */
+
+/* ---- Geometric substrate mounted by indra.js -------------------------- */
+#indraLayer {
+  position: fixed; inset: -12vh -12vw; z-index: 0;
+  pointer-events: none; will-change: transform;
+  mix-blend-mode: soft-light;
+}
+#indraLayer circle { transition: fill-opacity 3.5s ease-in-out, opacity 3.5s ease-in-out, stroke-opacity 3.5s ease-in-out; }
+#indraLayer circle.eco-c { fill: currentColor; fill-opacity: 0.08; }
+#indraLayer circle.eco-d { fill-opacity: 0; opacity: 0.18; }
+#indraLayer svg { width: 100%; height: 100%; }
+#indraLayer .geo-stroke { stroke: currentColor; }
+body > main, body > header, body > footer, body > nav, body > section { position: relative; z-index: 1; }
+
+/* ---- Click ripple: a jewel of the net flaring at the touch ------------ */
+.indra-ripple {
+  position: fixed; z-index: 2147483000; pointer-events: none;
+  width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%;
+  border: 1.5px solid currentColor; opacity: 0.5;
+  animation: indra-ripple 0.65s cubic-bezier(0.2, 0.6, 0.3, 1) forwards;
+}
+@keyframes indra-ripple { to { transform: scale(11); opacity: 0; } }
+
+/* ---- Reveal on scroll (JS-applied, so no-JS shows everything) --------- */
+.iv-pre { opacity: 1; transform: translateY(10px); }
+.iv-in {
+  opacity: 1; transform: translateY(0);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16, 0.8, 0.3, 1);
+}
+
+/* ======================================================================
+   INTERACTIVE LIFE — every clickable element, hover devices only.
+   The selector net is deliberately wide: links, buttons, summaries,
+   labels, and the project's recurring interactive classes.
+   ====================================================================== */
+@media (hover: hover) and (pointer: fine) {
+
+  /* Baseline transition on anything that can be pressed or clicked */
+  a, button, summary, label, select,
+  [role="button"], [role="tab"], [role="link"], [tabindex]:not([tabindex="-1"]),
+  input[type="submit"], input[type="button"], input[type="checkbox"], input[type="radio"],
+  .btn, .card, .pill, .chip, .filter-chip, .tab, .entry, .lecture, .event,
+  .node, .name-link, .leg-item, .item, .row, .tile, .cta, .skip-link,
+  .faq-item, .card-header, .foot-row, .theme-toggle, details {
+    transition: transform 0.18s cubic-bezier(0.2,0.7,0.3,1),
+                box-shadow 0.18s ease, opacity 0.18s ease,
+                background-color 0.18s ease, color 0.18s ease,
+                border-color 0.18s ease, filter 0.18s ease;
+  }
+
+  /* Lift family: cards, tiles, panels rise and gain shadow */
+  .card:hover, .tile:hover, .lecture:hover, .event:hover,
+  .faq-item:hover, .leg-item:hover, .entry:hover {
+    transform: translateY(-1.5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  }
+
+  /* Nudge family: buttons and small controls lift slightly */
+  button:hover, .btn:hover, [role="button"]:hover, .cta:hover,
+  input[type="submit"]:hover, input[type="button"]:hover,
+  .theme-toggle:hover, summary:hover {
+    transform: translateY(-1.5px);
+    filter: brightness(1.04);
+  }
+
+  /* Pill / chip / tab family: brighten and gently grow */
+  .pill:hover, .chip:hover, .filter-chip:hover, .tab:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.04);
+  }
+
+  /* Link family: text links draw a living underline that grows from left */
+  a.name-link, a.title, .leaves .title, .card a, p a, li a, .entry a {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.28s cubic-bezier(0.2,0.7,0.3,1), color 0.18s ease;
+  }
+  a.name-link:hover, a.title:hover, .leaves .title:hover,
+  .card a:hover, p a:hover, li a:hover, .entry a:hover {
+    background-size: 100% 1px;
+  }
+
+  /* Graph nodes pulse outward on hover */
+  .node:hover { transform: scale(1.05); filter: brightness(1.06); }
+
+  /* Rows slide a hair on hover, the table breathing */
+  .row:hover, .foot-row:hover { transform: translateX(2px); }
+
+  /* PRESS: everything settles inward when clicked */
+  a:active, button:active, summary:active, label:active,
+  [role="button"]:active, .btn:active, .pill:active, .chip:active,
+  .filter-chip:active, .tab:active, .card:active, .tile:active,
+  .node:active, .cta:active, input[type="submit"]:active,
+  input[type="button"]:active, .theme-toggle:active {
+    transform: translateY(0) scale(0.97);
+    filter: brightness(0.98);
+    transition-duration: 0.08s;
+  }
+}
+
+/* ======================================================================
+   AMBIENT LIFE — touch and hover alike. Subtle perpetual motion so even
+   idle elements feel alive, tied to the same rhythm as the web.
+   ====================================================================== */
+
+/* Selected state arrives with a single settle, not a perpetual pulse.
+   Motion without cause reads as kitsch; motion that marks a change reads
+   as intent. The selected element simply rests brighter once chosen. */
+.pill.on, .chip.on, .filter-chip.on, .tab.on, [aria-selected="true"] {
+  animation: alive-settle 0.32s cubic-bezier(0.2,0.7,0.3,1);
+}
+@keyframes alive-settle {
+  from { transform: scale(0.96); }
+  to { transform: scale(1); }
+}
+
+/* details/summary open with a soft unfold */
+details[open] > *:not(summary) {
+  animation: alive-unfold 0.4s cubic-bezier(0.16,0.8,0.3,1) both;
+}
+@keyframes alive-unfold {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Inputs wake on focus with a living ring */
+input:focus, textarea:focus, select:focus {
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 0 0 3px rgba(127,127,127,0.18);
+}
+
+/* ---- Keyboard life ---------------------------------------------------- */
+:focus-visible {
+  outline: 1.5px solid currentColor; outline-offset: 2px;
+  border-radius: 2px; opacity: 0.95;
+}
+
+/* ---- Print safety ----------------------------------------------------- */
+@media print {
+  #indraLayer, .indra-ripple { display: none; }
+  .iv-pre { opacity: 1 !important; transform: none !important; }
+  * { animation: none !important; }
+}
+
+/* ---- Kill switch outranks everything above ---------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  #indraLayer { transform: none !important; }
+  .indra-ripple { display: none; }
+  .iv-pre { opacity: 1; transform: none; }
+  .iv-in { transition: none; }
+  *, *::before, *::after { animation: none !important; }
+  a, button, .btn, .card, .pill, .chip, .tab, .entry, .lecture, .event,
+  .node, .name-link, .row, .tile, summary, label, details {
+    transition: none !important;
+  }
+}
+
+/* Depth bands: outer circles more transparent, inner more present.
+   Phase-staggered transitions so focus racks slowly across the web. */
+#indraLayer circle.depth-far  { opacity: 0.55; transition-delay: 0s; }
+#indraLayer circle.depth-mid  { opacity: 0.75; transition-delay: 0.8s; }
+#indraLayer circle.depth-near { opacity: 0.92; transition-delay: 1.6s; }
+
+
+/* VISIBLE_GEOMETRY_CONTRACT — every public page can carry the Indra substrate.
+   Page-specific intensity is controlled with body[data-indra-intensity] and
+   respected by /js/indra.js. Keep geometry ornamental, pointer-safe, and print-safe. */
+body[data-geometry="indra-web"] #indraLayer {
+  color: var(--geo-ink, currentColor);
+  filter: saturate(0.92) contrast(1.04);
+}
+body[data-geometry="indra-web"] main,
+body[data-geometry="indra-web"] .page,
+body[data-geometry="indra-web"] .shell,
+body[data-geometry="indra-web"] .calendar-shell {
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================================================================
+   ZOOM_RESILIENCE_CONTRACT — whole-site zoom and responsive typography guard
+   Added 2026-06-30.
+   Goal: when browser zoom changes the effective viewport, geometry, text,
+   controls, cards, generated catalog pages, and BB surfaces reflow instead
+   of clipping words or pushing a page sideways. Loaded by every public page.
+   ========================================================================= */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+html,
+body {
+  max-width: 100%;
+}
+body {
+  min-width: 0;
+}
+:where(*, *::before, *::after) {
+  min-width: 0;
+}
+:where(main, header, footer, nav, section, article, aside,
+  .wrap, .page, .shell, .container, .layout, .calendar-shell,
+  .catalog-page, .catalog-top, .catalog-footer, .panel, .drawer,
+  .modal, .dialog, .terminal, .preview, .card, .tile, .entry,
+  .event, .lecture, .resource-card, .resource-row) {
+  max-width: 100%;
+}
+:where(.wrap, .page, .shell, .container, .catalog-page, main,
+  .card, .tile, .entry, .event, .lecture, .resource-card,
+  .resource-row, .terminal, .preview, .chat, .copy) {
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+}
+:where(h1, h2, h3, h4, h5, h6, p, li, dd, dt, td, th,
+  figcaption, blockquote, summary, label, button, a, span,
+  strong, em, .lede, .dek, .title, .meta, .venue, .tag,
+  .type-tag, .pill, .chip, .filter-chip, .ctrl-btn) {
+  overflow-wrap: break-word;
+}
+:where(a[href], code, pre, kbd, samp, .url, .source, .slug,
+  .resource-meta, .breadcrumbs) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+:where(pre, code, kbd, samp) {
+  white-space: pre-wrap;
+}
+:where(img, svg, video, canvas, iframe, object, embed) {
+  max-width: 100%;
+  height: auto;
+}
+:where(input, select, textarea, button) {
+  max-width: 100%;
+}
+:where(table) {
+  max-width: 100%;
+}
+:where(.table-wrap, .scroll-shell, .calendar-shell, .resource-grid,
+  .resource-list, .cards, .grid, .tiles, .deck, .columns, .layout,
+  .topbar, .catalog-top, .controls, .toolbar, .filter-nav, .view-toggle,
+  .mode-toggle, .quick-guide, .door-grid, .bb-doors, .phase-list,
+  .command-toolbar, .desktop-commands) {
+  min-width: 0;
+}
+:where(.grid, .cards, .tiles, .deck, .columns, .layout, .topbar,
+  .catalog-top, .controls, .toolbar, .filter-nav, .view-toggle,
+  .mode-toggle, .quick-guide, .door-grid, .bb-doors, .phase-list,
+  .command-toolbar, .desktop-commands) > * {
+  min-width: 0;
+  max-width: 100%;
+}
+:where([style*="width:"], [style*="min-width:"]) {
+  max-width: 100%;
+}
+:where([style*="white-space:nowrap"], [style*="white-space: nowrap"]) {
+  overflow-wrap: anywhere;
+}
+:where(.ss-fz) {
+  flex-wrap: wrap;
+  max-width: calc(100vw - 2rem);
+}
+#indraLayer {
+  inset: -14vmax;
+  width: auto;
+  height: auto;
+  contain: paint;
+  max-width: none;
+}
+#indraLayer svg {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  transform-box: fill-box;
+}
+:where(#geo, #geo2, #geoLayer, .geo, .geometry, .mandala, .stage) svg {
+  max-width: none;
+  transform-box: fill-box;
+}
+@media (max-width: 900px), (max-height: 700px) {
+  :where(.topbar, .catalog-top, .filter-nav, .controls, .toolbar,
+    .view-toggle, .mode-toggle, .nav-links, .quick-links, .desktop-commands,
+    .command-toolbar, .cal-head, .stage-nav) {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+  :where(.topbar .right, .brand, .catalog-top nav, .cal-head .cal-title,
+    .filter-nav button, .filter-nav a, .view-toggle button, .mode-toggle button) {
+    min-width: 0;
+    max-width: 100%;
+  }
+  :where(h1, .hero h1, header h1) {
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+  :where(.calendar-shell, .scroll-shell, .panel, .modal, .drawer, .dialog,
+    .terminal, .preview) {
+    max-width: 100%;
+  }
+  :where(.cal-ev, .today-anchor, .cal-ongoing-item, .type-tag, .pill,
+    .chip, .filter-chip, .ctrl-btn) {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+}
+@media (max-width: 760px) {
+  :where(.resource-grid, .card-grid, .cards, .tiles, .columns,
+    .quick-guide, .proof-grid, .door-grid, .bb-doors, .letter-grid,
+    .cv-proof, .feature-grid, .chapter-grid, .course-grid) {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  :where(.event, .entry, .row, .resource-row, .definition dl,
+    .timeline-row, .project-row, .result-row) {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  :where(.cal-cell) {
+    overflow: visible;
+    min-height: auto;
+    height: auto;
+  }
+  :where(.cal-nav, .ss-fz button) {
+    flex: 0 0 auto;
+  }
+}
+@media (max-width: 520px) {
+  :where(body) {
+    overflow-x: clip;
+  }
+  :where(.wrap, .page, .shell, .container, .catalog-page, main) {
+    padding-left: min(1rem, 4vw);
+    padding-right: min(1rem, 4vw);
+  }
+  :where(button, .button, .btn, .chip, .pill, .filter-chip, .type-tag,
+    .ctrl-btn, .cta, .rss-link) {
+    white-space: normal;
+    line-height: 1.25;
+  }
+  :where(.cal-head) {
+    gap: 0.45rem;
+  }
+}
+
+/* ============================================================
+   CL_SELF_GUARD_CONTRACT — 2026-06-30
+   Small shared pieces used by route doctrine, archive labels,
+   keyboard hints, loading states, and resilient CV/print checks.
+   ============================================================ */
+.route-note,
+.archive-route-note,
+.tool-route-note,
+.keyboard-hint,
+.loading-state,
+.empty-state,
+.site-health-note {
+  box-sizing: border-box;
+  max-width: min(1120px, calc(100vw - 2rem));
+  margin: .75rem auto;
+  padding: .62rem .8rem;
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  border-radius: 16px;
+  font-family: var(--sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  font-size: clamp(.76rem, .72rem + .18vw, .92rem);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.route-note .route-note-kicker,
+.archive-route-note .route-note-kicker,
+.tool-route-note .route-note-kicker,
+.keyboard-hint .route-note-kicker {
+  display: inline-flex;
+  margin-right: .35rem;
+  font-size: .68em;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .74;
+}
+.keyboard-hint kbd,
+.route-note kbd {
+  display: inline-block;
+  min-width: 1.5em;
+  padding: .05rem .35rem;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: .35rem;
+  font: inherit;
+  font-size: .86em;
+  text-align: center;
+  background: color-mix(in srgb, currentColor 7%, transparent);
+}
+.loading-state[hidden],
+.empty-state[hidden] { display: none !important; }
+[data-route-type] { min-width: 0; }
+[data-keyboard-enhanced="true"] .keyboard-hint { outline: none; }
+@media (max-width: 760px) {
+  .route-note,
+  .archive-route-note,
+  .tool-route-note,
+  .keyboard-hint,
+  .loading-state,
+  .empty-state,
+  .site-health-note {
+    max-width: calc(100vw - 1rem);
+    margin-inline: .5rem;
+    border-radius: 12px;
+  }
+}
+@media print {
+  .route-note,
+  .archive-route-note,
+  .tool-route-note,
+  .keyboard-hint,
+  .loading-state,
+  .empty-state,
+  .site-health-note { display: none !important; }
+  .cv-shell, .resume-shell, .saul-cv, main, article { max-width: 100% !important; overflow: visible !important; }
+}
+
+
+/* ============================================================
+   CL_SUGGESTION_PASS_CONTRACT — 2026-06-30
+   Page-type and heavy-page rules preserve ML* source order while keeping
+   large archives smoother under zoom, scroll, and mobile layout.
+   ============================================================ */
+:where(.path-grid, .threshold-paths, .work-paths) { min-width: 0; }
+:where(.path-grid, .threshold-paths) > * { min-width: 0; }
+:where(body[data-page-weight="heavy"]) :where(.resource-row, .entry, .event, .lecture, article, details, section.card, .index-row) {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 320px;
+}
+:where(body[data-page-weight="heavy"]) :where(.resource-row:focus-within, .entry:focus-within, .event:focus-within, article:focus-within, details[open]) {
+  content-visibility: visible;
+}
+:where(body[data-route-type]) :where(.path-card, .threshold-route, .resource-card, .entry, .event, .lecture) {
+  overflow-wrap: break-word;
+}
+:where(body[data-route-type="service"], body[data-route-type="service-form"], body[data-route-type="service-policy"], body[data-route-type="service-payment"], body[data-route-type="service-recruiting"]) :where(.cta, .button, .booking-button, .intake-link) {
+  scroll-margin-block: 1.5rem;
+}
+:where(body[data-route-type="calendar"], body[data-route-type="calendar-shortcut"]) :where(.empty-state, .loading-state, .keyboard-hint) {
+  margin-block: .8rem;
+}
+:where(body[data-route-type="archive"], body[data-route-type="project-archive"], body[data-route-type="archive-tool"]) :where(.route-note, .archive-route-note) {
+  text-wrap: pretty;
+}
+@supports not (content-visibility: auto) {
+  :where(body[data-page-weight="heavy"]) :where(.resource-row, .entry, .event, .lecture, article, details, section.card, .index-row) {
+    contain: layout paint style;
+  }
+}

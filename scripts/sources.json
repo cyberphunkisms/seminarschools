@@ -243,6 +243,21 @@
       "render_mode": "todo"
     },
     {
+      "id": "findaprotest-toronto",
+      "name": "Find a Protest — Toronto",
+      "tier_priority": 1,
+      "default_type": "protest",
+      "base_url": "https://www.findaprotest.info/",
+      "events_url": "https://www.findaprotest.info/canada/toronto",
+      "additional_urls": [
+        "https://www.findaprotest.info/canada/ontario/toronto",
+        "https://www.findaprotest.info/canada/on/toronto"
+      ],
+      "notes": "Server-rendered Toronto protest and solidarity-event index. Follow detail pages and publish only events with a specific date, time, location, organizer, source_url, and raw_excerpt. Save-the-date/TBD listings go to the watchlist.",
+      "render_mode": "static",
+      "fetcher": "findaprotest-toronto"
+    },
+    {
       "id": "toronto-events",
       "name": "City of Toronto Festivals and Events",
       "tier_priority": 3,

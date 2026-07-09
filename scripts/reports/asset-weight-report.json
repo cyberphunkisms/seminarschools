@@ -1,406 +1,206 @@
 {
-  "schema": "asset-weight-report-v1",
-  "updated": "2026-06-30",
+  "generatedAt": "2026-07-08T23:19:32.432Z",
+  "totalFiles": 1484,
   "largestAssets": [
     {
+      "path": "hf_export/data/all_meaninglib_rows.jsonl",
+      "size": 16454759
+    },
+    {
+      "path": "hf_export/data/ml/methodologylist.jsonl",
+      "size": 12116100
+    },
+    {
+      "path": "hf_export/search/meaninglib_search_index.json",
+      "size": 10946133
+    },
+    {
       "path": "polymyth/methodologylist/index.html",
-      "bytes": 3796494,
-      "ext": ".html"
+      "size": 3828122
+    },
+    {
+      "path": "hf_export/data/ml/sections/methodology.jsonl",
+      "size": 3707897
+    },
+    {
+      "path": "polymyth/methodologylist.txt",
+      "size": 3654446
+    },
+    {
+      "path": "hf_export/data/cc/campaigncodex.jsonl",
+      "size": 2092625
+    },
+    {
+      "path": "bookwormcard/pdf/bookwormcard.pdf",
+      "size": 1994830
     },
     {
       "path": "polymyth/methodologylist/methodology/index.html",
-      "bytes": 1808661,
-      "ext": ".html"
+      "size": 1826428
     },
     {
       "path": "polymyth/concordance/concordance-index.json",
-      "bytes": 1726337,
-      "ext": ".json"
+      "size": 1726337
+    },
+    {
+      "path": "polymyth/methodologylist-methodology.txt",
+      "size": 1713192
     },
     {
       "path": "aa/index.html",
-      "bytes": 1509761,
-      "ext": ".html"
+      "size": 1509786
+    },
+    {
+      "path": "hf_export/data/bb/bookwormburrows.jsonl",
+      "size": 1441045
     },
     {
       "path": "aa/cloud/index.html",
-      "bytes": 1321590,
-      "ext": ".html"
+      "size": 1321615
+    },
+    {
+      "path": "hf_export/data/ml/sections/citation.jsonl",
+      "size": 1096018
     },
     {
       "path": "polymyth/campaigncodex/index.html",
-      "bytes": 1030936,
-      "ext": ".html"
+      "size": 1031487
+    },
+    {
+      "path": "polymyth/campaigncodex.txt",
+      "size": 965580
+    },
+    {
+      "path": "hf_export/data/ml/sections/gorgonification.jsonl",
+      "size": 817930
     },
     {
       "path": "teacherresources/index.html",
-      "bytes": 925043,
-      "ext": ".html"
+      "size": 776783
+    },
+    {
+      "path": "hf_export/data/mc/modulecanon.jsonl",
+      "size": 770636
     },
     {
       "path": "polymythseminars/index.html",
-      "bytes": 717786,
-      "ext": ".html"
+      "size": 709367
     },
     {
-      "path": "university/index.html",
-      "bytes": 654318,
-      "ext": ".html"
+      "path": "polymyth/bookwormburrows.txt",
+      "size": 666131
     },
     {
-      "path": "humanities/index.html",
-      "bytes": 619869,
-      "ext": ".html"
-    },
-    {
-      "path": "cfps/index.html",
-      "bytes": 612177,
-      "ext": ".html"
-    },
-    {
-      "path": "philosophy/index.html",
-      "bytes": 571385,
-      "ext": ".html"
-    },
-    {
-      "path": "fellowships/index.html",
-      "bytes": 563752,
-      "ext": ".html"
-    },
-    {
-      "path": "writingclub/index.html",
-      "bytes": 562463,
-      "ext": ".html"
-    },
-    {
-      "path": "writinggrads/index.html",
-      "bytes": 559693,
-      "ext": ".html"
-    },
-    {
-      "path": "writingteens/index.html",
-      "bytes": 559125,
-      "ext": ".html"
-    },
-    {
-      "path": "lectures/index.html",
-      "bytes": 558432,
-      "ext": ".html"
+      "path": "hf_export/data/ml/sections/coreplus.jsonl",
+      "size": 623927
     },
     {
       "path": "polymyth/bookwormburrows/index.html",
-      "bytes": 556296,
-      "ext": ".html"
-    },
-    {
-      "path": "writingjuniors/index.html",
-      "bytes": 541769,
-      "ext": ".html"
-    },
-    {
-      "path": "writingkids/index.html",
-      "bytes": 534285,
-      "ext": ".html"
-    },
-    {
-      "path": "polymythseminars/events.json",
-      "bytes": 529004,
-      "ext": ".json"
+      "size": 563944
     },
     {
       "path": "data/polymyth-seminar-events.json",
-      "bytes": 529004,
-      "ext": ".json"
+      "size": 529670
+    },
+    {
+      "path": "polymythseminars/events.json",
+      "size": 529670
     },
     {
       "path": "polymyth/methodologylist/citation/index.html",
-      "bytes": 518169,
-      "ext": ".html"
+      "size": 518480
+    },
+    {
+      "path": "polymyth/methodologylist-citation.txt",
+      "size": 427329
     },
     {
       "path": "polymyth/methodologylist/gorgonification/index.html",
-      "bytes": 393928,
-      "ext": ".html"
+      "size": 398956
     },
     {
       "path": "polymyth/modulecanon/index.html",
-      "bytes": 393902,
-      "ext": ".html"
+      "size": 393927
     },
     {
       "path": "leizu/flyer/index.html",
-      "bytes": 375170,
-      "ext": ".html"
+      "size": 375227
     },
     {
       "path": "leizu/index.html",
-      "bytes": 369035,
-      "ext": ".html"
+      "size": 369050
+    },
+    {
+      "path": "hf_export/data/ml/sections/degorgonification.jsonl",
+      "size": 366969
+    },
+    {
+      "path": "hf_export/data/ml/sections/pending.jsonl",
+      "size": 361131
+    },
+    {
+      "path": "polymyth/methodologylist-gorgonification.txt",
+      "size": 359743
+    },
+    {
+      "path": "university/index.html",
+      "size": 358230
+    },
+    {
+      "path": "teacherresources/feed.xml",
+      "size": 343516
+    },
+    {
+      "path": "hf_export/data/relations/crossrefs.jsonl",
+      "size": 334828
+    },
+    {
+      "path": "polymyth/modulecanon.txt",
+      "size": 332448
     },
     {
       "path": "polymyth/methodologylist/coreplus/index.html",
-      "bytes": 312028,
-      "ext": ".html"
+      "size": 312339
+    },
+    {
+      "path": "hf_export/data/ml/sections/idiomary.jsonl",
+      "size": 308096
+    },
+    {
+      "path": "humanities/index.html",
+      "size": 293936
     },
     {
       "path": "bookwormcard/print/index.html",
-      "bytes": 289765,
-      "ext": ".html"
+      "size": 289790
     },
     {
-      "path": "saul/index.html",
-      "bytes": 238290,
-      "ext": ".html"
+      "path": "polymyth/methodologylist-coreplus.txt",
+      "size": 287799
     },
     {
-      "path": "buckets.json",
-      "bytes": 233831,
-      "ext": ".json"
+      "path": "cfps/index.html",
+      "size": 271589
+    },
+    {
+      "path": "hf_export/data/ml/sections/polycognate.jsonl",
+      "size": 263560
+    },
+    {
+      "path": "hf_export/data/ml/sections/studylist.jsonl",
+      "size": 259110
     },
     {
       "path": "all_entries.json",
-      "bytes": 233357,
-      "ext": ".json"
+      "size": 258695
     },
     {
-      "path": "bookwormcard/index.html",
-      "bytes": 228264,
-      "ext": ".html"
+      "path": "buckets.json",
+      "size": 233831
     },
     {
-      "path": "new_groups.json",
-      "bytes": 197345,
-      "ext": ".json"
-    },
-    {
-      "path": "aa/views/index.html",
-      "bytes": 194850,
-      "ext": ".html"
-    },
-    {
-      "path": "img/agora.jpg",
-      "bytes": 194693,
-      "ext": ".jpg"
-    },
-    {
-      "path": "seminars/events.json",
-      "bytes": 181592,
-      "ext": ".json"
-    },
-    {
-      "path": "polymyth/methodologylist/degorgonification/index.html",
-      "bytes": 180392,
-      "ext": ".html"
-    },
-    {
-      "path": "data/manual-events.json",
-      "bytes": 167341,
-      "ext": ".json"
-    },
-    {
-      "path": "scripts/sources.json",
-      "bytes": 161183,
-      "ext": ".json"
-    },
-    {
-      "path": "polymyth/methodologylist/idiomary/index.html",
-      "bytes": 154533,
-      "ext": ".html"
-    },
-    {
-      "path": "polymyth/methodologylist/img/snake-hat-tongs.jpg",
-      "bytes": 147143,
-      "ext": ".jpg"
-    },
-    {
-      "path": "polymyth/methodologylist/polycognate/index.html",
-      "bytes": 132266,
-      "ext": ".html"
-    },
-    {
-      "path": "polymyth/methodologylist/studylist/index.html",
-      "bytes": 127586,
-      "ext": ".html"
-    },
-    {
-      "path": "img/bookwormburrows.png",
-      "bytes": 127062,
-      "ext": ".png"
-    },
-    {
-      "path": "bookwormcard/qr-ouroboros-indra.png",
-      "bytes": 127062,
-      "ext": ".png"
-    },
-    {
-      "path": "img/ohm-hero.jpg",
-      "bytes": 125724,
-      "ext": ".jpg"
-    },
-    {
-      "path": "data/festivals-history/festivals-2026-06-08.json",
-      "bytes": 111456,
-      "ext": ".json"
-    },
-    {
-      "path": "florilegium/bg.jpg",
-      "bytes": 108498,
-      "ext": ".jpg"
-    },
-    {
-      "path": "main/index.html",
-      "bytes": 105650,
-      "ext": ".html"
-    },
-    {
-      "path": "data/festivals-history/festivals-2026-06-06.json",
-      "bytes": 105535,
-      "ext": ".json"
-    },
-    {
-      "path": "teacherresources/img/jimmy-liao/corner-of-world.jpg",
-      "bytes": 99196,
-      "ext": ".jpg"
-    },
-    {
-      "path": "leizu/cloud/index.html",
-      "bytes": 97578,
-      "ext": ".html"
-    },
-    {
-      "path": "polymyth/methodologylist/pending/index.html",
-      "bytes": 97487,
-      "ext": ".html"
-    },
-    {
-      "path": "teacherresources/img/jimmy-liao/lost-cat.jpg",
-      "bytes": 91759,
-      "ext": ".jpg"
-    },
-    {
-      "path": "data/history/seminars-2026-06-08.json",
-      "bytes": 79534,
-      "ext": ".json"
-    },
-    {
-      "path": "polymyth/methodologylist/analysis/index.html",
-      "bytes": 78365,
-      "ext": ".html"
-    },
-    {
-      "path": "polymyth/methodologylist/sabachtan/index.html",
-      "bytes": 76537,
-      "ext": ".html"
-    },
-    {
-      "path": "data/history/seminars-2026-06-06.json",
-      "bytes": 74617,
-      "ext": ".json"
-    },
-    {
-      "path": "img/saul.jpg",
-      "bytes": 70422,
-      "ext": ".jpg"
-    },
-    {
-      "path": "data/history/seminars-2026-05-27.json",
-      "bytes": 68416,
-      "ext": ".json"
-    },
-    {
-      "path": "campaigns/thank-you-mam/index.html",
-      "bytes": 67620,
-      "ext": ".html"
-    },
-    {
-      "path": "bookwormcard/tamagotchi.js",
-      "bytes": 66364,
-      "ext": ".js"
-    },
-    {
-      "path": "teacherresources/img/jimmy-liao/moon-forgot.jpg",
-      "bytes": 59546,
-      "ext": ".jpg"
-    },
-    {
-      "path": "img/ohm-day.jpg",
-      "bytes": 58554,
-      "ext": ".jpg"
-    },
-    {
-      "path": "teacherresources/img/jimmy-liao/beautiful-solitude.jpg",
-      "bytes": 57766,
-      "ext": ".jpg"
-    },
-    {
-      "path": "teacherresources/img/jimmy-liao/forest-songs.jpg",
-      "bytes": 56654,
-      "ext": ".jpg"
-    },
-    {
-      "path": "teacherresources/img/jimmy-liao/give-me-a-hug.jpg",
-      "bytes": 52685,
-      "ext": ".jpg"
-    },
-    {
-      "path": "bookwormcard/archetypes-set3.js",
-      "bytes": 51868,
-      "ext": ".js"
-    },
-    {
-      "path": "campaigns/thank-you-mam/pregame/index.html",
-      "bytes": 51169,
-      "ext": ".html"
-    },
-    {
-      "path": "polymyth/methodologylist/learnings/index.html",
-      "bytes": 50656,
-      "ext": ".html"
-    },
-    {
-      "path": "bookwormcard/burrowing-animals.js",
-      "bytes": 50337,
-      "ext": ".js"
-    },
-    {
-      "path": "teacherresources/lang-hughes/lang-hughes-activities/index.html",
-      "bytes": 48949,
-      "ext": ".html"
-    },
-    {
-      "path": "teacherresources/img/jimmy-liao/blue-stone.jpg",
-      "bytes": 47794,
-      "ext": ".jpg"
-    },
-    {
-      "path": "polymyth/sitemap/graph/index.html",
-      "bytes": 47212,
-      "ext": ".html"
-    },
-    {
-      "path": "teacherresources/img/jimmy-liao/something-about-love.jpg",
-      "bytes": 45837,
-      "ext": ".jpg"
-    },
-    {
-      "path": "polymyth/polymythdnd/index.html",
-      "bytes": 45802,
-      "ext": ".html"
-    },
-    {
-      "path": "img/ohm-drawings.jpg",
-      "bytes": 45623,
-      "ext": ".jpg"
-    },
-    {
-      "path": "aa/_data/untranslatables.js",
-      "bytes": 45116,
-      "ext": ".js"
-    },
-    {
-      "path": "teacherresources/img/jimmy-liao/mute.jpg",
-      "bytes": 44782,
-      "ext": ".jpg"
+      "path": "saul/index.html",
+      "size": 231295
     }
   ]
 }

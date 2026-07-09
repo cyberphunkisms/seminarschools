@@ -12,20 +12,20 @@ const required = [
   'data-cv-purpose="general-employment"',
   'class="cv-intro"',
   'id="careerArchive"',
-  'Modular CV · employment profile · project archive',
-  'A flexible CV for many kinds of work.',
-  'CV builder',
-  'Select the version you need',
+  'Curriculum vitae',
+  'Work record across service, education, community, and projects.',
+  'Focus areas',
+  'Relevant experience',
   'data-quick-view="all"',
   'data-quick-view="service"',
   'data-quick-view="teaching"',
   'data-quick-view="portfolio"',
   'data-cv-mode="chrono"',
   'data-cv-mode="theme"',
-  'class="archive-tools cv-module-tabs" open',
+  'class="archive-tools cv-module-tabs"',
   'id="moduleStatus"',
-  'CV modules — PDF follows active modules',
-  'Select any combination, then use Save as PDF. The PDF exports exactly the active modules.',
+  'Focus filters',
+  'Choose one or more areas before downloading.',
   'data-cat="kitchen">Culinary Hospitality</button>',
   'data-cat="teaching">Teaching</button>',
   'data-cat="community">Community</button>',
@@ -38,7 +38,6 @@ const required = [
   "culinary: 'kitchen'",
   "theatre: 'performance'",
   "const CAT_SLUGS = { seminarschools: 'portfolio' }",
-  'Modular CV tabs are additive',
   'const next = new Set(active);',
   'active = next;',
   'buildPrintCv();',
@@ -48,7 +47,6 @@ const required = [
   'class="cv-map-section"',
   'google.com/maps/d/embed?mid=1n92i0SyhgddNp4TZjLFW8GW6Nzk9JH1B',
   'Saul Karim Nassau <span class="post">MA</span>',
-  'body:not(.party) { --geo-density: 0.025 !important; }',
   'data-saul-modular-cv="true"',
   'function renderProfile()',
   'renderProfile();',
@@ -57,6 +55,14 @@ const required = [
 for (const token of required) if (!html.includes(token)) errors.push(`Missing required Saul page element: ${token}`);
 
 const banned = [
+  'CV builder',
+  'Select the version you need',
+  'Modular CV · employment profile · project archive',
+  'CV modules — PDF follows active modules',
+  'PDF follows active modules',
+  'Build modular CV',
+  'Save selected CV',
+  'World map',
   'Three ways to begin',
   'href="/leizu/intake/"',
   'data-quick-view="current"',
@@ -103,4 +109,4 @@ if (errors.length) {
   errors.forEach(e => console.error(`- ${e}`));
   process.exit(1);
 }
-console.log('Saul page guard passed — any-job modular CV, additive modules, website-only portrait/map, and no teaching-front regression.');
+console.log('Saul page guard passed — any-job CV, employer-facing labels, additive focus filters, website-only portrait/map, and no teaching-front regression.');

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
+<title>The Burrow Notebook · Bookwormburrows Series II</title>
+<meta name="description" content="The session companion to The Bookwormcard. Free PDF notebook for any bookwormburrows campaign in any dimension.">
+<link rel="canonical" href="https://seminarschools.com/polymyth/notebook/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/polymyth/notebook/">
+<meta property="og:title" content="The Burrow Notebook, Bookwormburrows Series II">
+<meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://seminarschools.com/og-image.png">
+<meta property="og:description" content="The session companion to The Bookwormcard. Free PDF. Carry it to every session.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<style>
+:root {
+  --burgundy: #7A2632;
+  --deep-burgundy: #5A1A24;
+  --pale-burgundy: #D9B9BE;
+  --cream: #FBF8F1;
+  --ink: #1A1A1A;
+  --ink-gray: #4A4A4A;
+  --warm-gray: #7C7268;
+  --light: #C9C2B5;
+}
+:root.dark, :root[data-theme="dark"]{--cream:#161311;--ink:#EDE6DA;--ink-gray:#B6AEA2;--warm-gray:#9A8E80;--light:#3A352C;--burgundy:#D98A92;--deep-burgundy:#C06A74;--pale-burgundy:#7A4A50;}
+@media (prefers-color-scheme: dark){ :root:not(.light){--cream:#161311;--ink:#EDE6DA;--ink-gray:#B6AEA2;--warm-gray:#9A8E80;--light:#3A352C;--burgundy:#D98A92;--deep-burgundy:#C06A74;--pale-burgundy:#7A4A50;} }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.55;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+}
+.bar {
+  background: var(--burgundy);
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+  font: 600 11px/1 -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.bar a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 28px 80px;
+}
+.kicker {
+  font: 600 11px/1.3 -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+  margin-bottom: 8px;
+}
+h1 {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-weight: 700;
+  font-size: 54px;
+  line-height: 1.04;
+  color: var(--deep-burgundy);
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+}
+.tag {
+  font-style: italic;
+  font-size: 20px;
+  color: var(--ink-gray);
+  margin-bottom: 32px;
+}
+.lead {
+  font-size: 19px;
+  line-height: 1.6;
+  margin: 28px 0;
+  color: var(--ink);
+}
+.lead b { color: var(--deep-burgundy); }
+
+.dl {
+  background: #fff;
+  border: 1.5px solid var(--burgundy);
+  padding: 28px 32px;
+  margin: 36px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 22px;
+}
+.dl .info { flex: 1 1 280px; }
+.dl .info .label {
+  font: 600 11px/1 -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+  margin-bottom: 8px;
+}
+.dl .info .title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--deep-burgundy);
+  margin-bottom: 6px;
+}
+.dl .info .meta {
+  font-size: 14px;
+  color: var(--ink-gray);
+}
+.btn {
+  display: inline-block;
+  background: var(--burgundy);
+  color: #fff;
+  font: 600 14px/1 -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 16px 28px;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background 0.15s;
+}
+.btn:hover { background: var(--deep-burgundy); }
+.btn.alt {
+  background: #fff;
+  color: var(--burgundy);
+  border: 1.5px solid var(--burgundy);
+}
+.btn.alt:hover { background: var(--burgundy); color: #fff; }
+
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--deep-burgundy);
+  margin: 44px 0 14px;
+  padding-bottom: 6px;
+  border-bottom: 1.5px solid var(--burgundy);
+}
+.what {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin: 24px 0;
+}
+.what .item {
+  border-left: 3px solid var(--burgundy);
+  padding-left: 14px;
+}
+.what .item h3 {
+  font: 700 12px/1.2 -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+  margin-bottom: 6px;
+}
+.what .item p { font-size: 15px; color: var(--ink-gray); }
+@media (max-width: 600px) {
+  h1 { font-size: 38px; }
+  .tag { font-size: 17px; }
+  .what { grid-template-columns: 1fr; }
+}
+.flow {
+  background: #fff;
+  border: 1px solid var(--light);
+  padding: 22px 26px;
+  margin: 28px 0;
+  font-size: 15px;
+}
+.flow ol { margin-left: 22px; }
+.flow li { margin: 8px 0; color: var(--ink-gray); }
+.flow li b { color: var(--deep-burgundy); }
+
+footer {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid var(--light);
+  font-size: 13px;
+  color: var(--warm-gray);
+  text-align: center;
+}
+footer a { color: var(--burgundy); }
+</style>
+<link rel="stylesheet" href="/css/alive.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=cl91">
+<script src="/js/mandala.js?v=cl91" defer></script>
+<script src="/js/indra.js?v=cl91" defer></script>
+</head>
+<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="archive">
+<!-- CL_SELF_ROUTE_NOTE -->
+<div class="route-note archive-route-note" role="note"><span class="route-note-kicker">Archive</span>Notebook materials and working traces.</div>
+<div class="bar">
+  build your character first at <a href="/bookwormcard/">seminarschools.com/bookwormcard/</a> then come back here
+</div>
+
+<div class="wrap">
+
+<div class="kicker">Bookwormburrows · Series II</div>
+
+<h1>The Burrow Notebook</h1>
+
+<p class="tag">session companion to The Bookwormcard</p>
+
+<p class="lead">A free 32-page companion to <b>The Bookwormcard</b> and to whatever notebook you already love. The card holds who your bookworm is. This book holds the rules, the safety tools, and the running record of every book you have ever burrowed into.</p>
+
+<div class="dl">
+  <div class="info">
+    <div class="label">v2.0 · 222&nbsp;KB · 32 pages · US Digest</div>
+    <div class="title">the-burrow-notebook_v2-1.pdf</div>
+    <div class="meta">universal · for any campaign, in any dimension</div>
+  </div>
+  <a class="btn" href="the-burrow-notebook_v2-1.pdf" download>Download PDF</a>
+</div>
+
+<div class="card" style="margin-top:24px;border-top:1px solid var(--burgundy,#7A2632);padding-top:18px">
+    <div class="title">your-teammate-page_v0-1.pdf</div>
+    <p class="small" style="font-size:13px;color:#4A4A4A;margin:6px 0 12px">A supplement page for tracking the bookworms you cross dimensions with. Use one page per teammate. Polymythdnd OP-3 bond-layer-between-PCs implementation per T115k.</p>
+    <a class="btn" href="your-teammate-page_v0-1.pdf" download>Download teammate supplement</a>
+</div>
+
+<div class="card" style="margin-top:24px;border-top:1px solid var(--burgundy,#7A2632);padding-top:18px">
+    <div class="title">the-burrow-notebook-supplement_v0-1.pdf</div>
+    <p class="small" style="font-size:13px;color:#4A4A4A;margin:6px 0 12px">A six-page supplement on three practices to add to your burrow toolkit: <b>antihivemind</b> (how to stop a burrow from collapsing into one shared opinion), <b>marshmellowmonster</b> (the shortcut creature that eats the work when the burrow agrees too fast), and the <b>btwn-world</b> (five names for the space between worlds where the burrow itself takes place). Carry it folded inside your Burrow Notebook.</p>
+    <a class="btn" href="the-burrow-notebook-supplement_v0-1.pdf" download>Download antihivemind supplement</a>
+</div>
+
+
+<h2>What is inside</h2>
+
+<div class="what">
+  <div class="item"><h3>Front matter</h3><p>Cover with owner fields. Inside cover with the three rules, the symbol key, the four zones of a session spread. Safety tools page with X-card, lines, and veils.</p></div>
+  <div class="item"><h3>Fifteen session spreads</h3><p>Left page is the four-zone master: header strip, cue column, rapid-log notes, one-sentence summary. Right page is sketch and reflection. Blank, universal, ready for any dimension.</p></div>
+  <div class="item"><h3>Cross-session trackers</h3><p>People (NPC dossier cards). Places (map plus place cards). Burrow log for crossings. Marshmellowblob check-in for when your character is fading.</p></div>
+  <div class="item"><h3>Inventory and sources</h3><p>Rainbow Items inventory with the three modes (dissolve, convert, remain). Source log with citation slots across two sheets.</p></div>
+  <div class="item"><h3>Quests log</h3><p>Ten universal deliverable categories (essay, letter, oral history, photo-text, deposition, period news article, protocol study, business history brief, comparative geography, listening journal) plus ten blank slots for your own.</p></div>
+  <div class="item"><h3>End of campaign</h3><p>The smash, again. Migration of open threads. Six perforated spark cards. Back cover with attribution.</p></div>
+</div>
+
+<h2>How to use it</h2>
+
+<div class="flow">
+<ol>
+  <li><b>Before any session,</b> fill in your bookwormcard at <a href="/bookwormcard/">/bookwormcard/</a>.</li>
+  <li><b>Open the notebook</b> to the inside cover. Read the three rules and the symbol key. That is the only reading you do.</li>
+  <li><b>Every session after,</b> rapid-log on the left page during play, sketch and reflect on the right page after. <code>•</code> task, <code>o</code> event, <code>–</code> note, <code>?</code> open question.</li>
+  <li><b>Between sessions,</b> migrate open questions forward. Run the Marshmellowblob check-in if your character is fading.</li>
+  <li><b>At the end of the campaign,</b> pick a quest. Deliver it. Synthesize what you carry out as Rainbow Items.</li>
+</ol>
+</div>
+
+<h2>The paragraph is the game mechanic</h2>
+
+<p class="lead">Bookwormburrows is not dice-driven. Outcomes are <b>adjudicated by the quality of your writing</b>. A strong paragraph about what your character does means your action succeeds. A weak paragraph means it fails. An ambiguous paragraph means a mixed outcome. Your DM narrates the consequence; you receive the narrated outcome and the academic grade for the same paragraph. The notebook is built around this rule.</p>
+
+<h2>License</h2>
+
+<p class="lead">Creative Commons BY-NC-SA 4.0. Print, share, adapt for your classroom, attribute to seminarschools.com. Commercial use requires permission.</p>
+
+<footer>
+The Burrow Notebook · Bookwormburrows Series II · by Saul Nassau<br>
+<a href="/bookwormcard/">The Bookwormcard (Series I)</a> &middot;
+<a href="/polymyth/bookwormburrows/">bookwormburrows framework</a> &middot;
+<a href="/">seminarschools.com</a>
+</footer>
+
+</div>
+
+<script src="/js/footer.js?v=cl91" defer></script>
+<script src="/js/autolink.js?v=cl91" defer></script>
+<script src="/js/theme.js?v=cl91" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 {
   "schema": "external-link-inventory-v1",
-  "generatedAt": "2026-07-08T21:48:34.817Z",
-  "totalExternalLinks": 1087,
+  "generatedAt": "2026-07-09T01:11:37.921Z",
+  "totalExternalLinks": 1013,
   "topHosts": [
     {
       "host": "www.gutenberg.org",
@@ -28,12 +28,12 @@
       "count": 42
     },
     {
-      "host": "seminarschools.com",
-      "count": 30
-    },
-    {
       "host": "openstax.org",
       "count": 29
+    },
+    {
+      "host": "seminarschools.com",
+      "count": 26
     },
     {
       "host": "doi.org",
@@ -48,10 +48,6 @@
       "count": 16
     },
     {
-      "host": "www.loc.gov",
-      "count": 11
-    },
-    {
       "host": "inquirygroup.org",
       "count": 11
     },
@@ -60,16 +56,12 @@
       "count": 10
     },
     {
-      "host": "www.readwritethink.org",
+      "host": "www.loc.gov",
       "count": 10
     },
     {
       "host": "www.youtube.com",
       "count": 9
-    },
-    {
-      "host": "en.wikipedia.org",
-      "count": 8
     },
     {
       "host": "calendly.com",
@@ -120,19 +112,11 @@
       "count": 6
     },
     {
-      "host": "www.facinghistory.org",
-      "count": 6
-    },
-    {
-      "host": "sjsmiddleschool.weebly.com",
-      "count": 6
-    },
-    {
       "host": "buymeacoffee.com",
       "count": 5
     },
     {
-      "host": "www.commonlit.org",
+      "host": "en.wikipedia.org",
       "count": 5
     },
     {
@@ -145,6 +129,14 @@
     },
     {
       "host": "philevents.org",
+      "count": 5
+    },
+    {
+      "host": "www.readwritethink.org",
+      "count": 5
+    },
+    {
+      "host": "sjsmiddleschool.weebly.com",
       "count": 5
     },
     {
@@ -172,10 +164,6 @@
       "count": 5
     },
     {
-      "host": "digitalcollections.nypl.org",
-      "count": 4
-    },
-    {
       "host": "www.kingstonwritersfest.ca",
       "count": 4
     },
@@ -189,30 +177,6 @@
     },
     {
       "host": "www.shawfest.com",
-      "count": 4
-    },
-    {
-      "host": "dramaresource.com",
-      "count": 4
-    },
-    {
-      "host": "www.nextgenlearning.org",
-      "count": 4
-    },
-    {
-      "host": "tvolearn.com",
-      "count": 4
-    },
-    {
-      "host": "www.teacherspayteachers.com",
-      "count": 4
-    },
-    {
-      "host": "nmaahc.si.edu",
-      "count": 4
-    },
-    {
-      "host": "poets.org",
       "count": 4
     },
     {
@@ -236,11 +200,47 @@
       "count": 4
     },
     {
-      "host": "www.nyclgbtsites.org",
+      "host": "digitalcollections.nypl.org",
+      "count": 3
+    },
+    {
+      "host": "www.commonlit.org",
       "count": 3
     },
     {
       "host": "cal.com",
+      "count": 3
+    },
+    {
+      "host": "brottmusic.com",
+      "count": 3
+    },
+    {
+      "host": "festivalofauthors.ca",
+      "count": 3
+    },
+    {
+      "host": "www.mcgill.ca",
+      "count": 3
+    },
+    {
+      "host": "learn.utoronto.ca",
+      "count": 3
+    },
+    {
+      "host": "fringetoronto.com",
+      "count": 3
+    },
+    {
+      "host": "www.toronto.ca",
+      "count": 3
+    },
+    {
+      "host": "beachesjazz.com",
+      "count": 3
+    },
+    {
+      "host": "fanexpohq.com",
       "count": 3
     }
   ],

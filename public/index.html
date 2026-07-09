@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://seminarschools.com/">
+<meta property="og:title" content="Toronto Tutoring, Public Seminars &amp; Teacher Resources | Seminar Schools">
+<meta property="og:image" content="https://seminarschools.com/og-image.png">
+<meta property="og:description" content="Toronto tutoring in English, philosophy, history, and writing, plus free public seminars, teacher resources, and experimental learning from Seminar Schools.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/">
+<meta property="og:site_name" content="Seminar Schools">
+<meta name="twitter:card" content="summary">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toronto Tutoring, Public Seminars &amp; Teacher Resources | Seminar Schools</title>
+<meta name="description" content="Toronto tutoring in English, philosophy, history, and writing, plus free public seminars, teacher resources, and experimental learning from Seminar Schools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/alive.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=cl91">
+<style>
+:root{
+  --bg:#F5EBE4; --bg-soft:#FAF4ED; --ink:#2A1A14; --ink-soft:#4A3A30; --muted:#6B5F54;
+  --line:rgba(42,26,20,.16); --accent:#8a4a32;
+  --c1:#C0392B; --c2:#D35400; --c3:#B7950B; --c4:#1E8449; --c5:#1F6FB2; --c6:#6C3FB5; --c7:#127C82;
+  --mono:'JetBrains Mono',ui-monospace,monospace; --serif:'Fraunces',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
+}
+@media(prefers-color-scheme:dark){:root:not(.light){--bg:#171210;--bg-soft:#211a15;--ink:#ECE3D2;--ink-soft:#C9BCA6;--muted:#8E806E;--line:rgba(236,227,210,.14);--accent:#c87a5a;}}
+:root.dark,:root[data-theme="dark"]{--bg:#171210;--bg-soft:#211a15;--ink:#ECE3D2;--ink-soft:#C9BCA6;--muted:#8E806E;--line:rgba(236,227,210,.14);--accent:#c87a5a;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+.mono{font-family:var(--mono);}
+
+/* ---------- top bar ---------- */
+.bar{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+  padding:.85rem 1.6rem;border-bottom:1px solid var(--line);
+  background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
+.bar .brand{font-family:var(--mono);font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;}
+.bar .brand b{color:var(--accent);font-weight:500;}
+.bar .right{display:flex;align-items:center;gap:1.1rem;}
+.bar .meta{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+@media(max-width:640px){.bar .meta{display:none;}}
+.book{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;
+  border:1px solid var(--ink);padding:.5rem .85rem;border-radius:3px;transition:background .18s,color .18s,transform .18s;}
+.book:hover,.book:focus-visible{background:var(--ink);color:var(--bg);transform:translateY(-1px);}
+
+.door:hover,.door:focus-visible{background:var(--ink);color:var(--bg);transform:translateY(-1px);}
+.door:hover strong,.door:focus-visible strong{color:inherit;}
+/* ---------- hero stage ---------- */
+body.home{--indra-opacity:.036;--indra-active:var(--ink);}
+body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .45s ease,color .45s ease;}
+.stage{position:relative;width:100%;height:78vh;min-height:560px;overflow:hidden;border-bottom:1px solid var(--line);isolation:isolate;}
+.stage::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 50% 46%,transparent 0 30%,color-mix(in srgb,var(--bg) 12%,transparent) 74%,color-mix(in srgb,var(--bg) 30%,transparent) 100%);}
+#web{position:absolute;inset:0;z-index:1;width:100%;height:100%;display:block;cursor:default;}
+.thread{stroke:var(--ink);stroke-width:.7;opacity:.12;transition:opacity .22s ease,stroke-width .22s ease;fill:none;}
+.ring{fill:none;stroke:var(--ink);opacity:.055;}
+.jewel{cursor:pointer;outline:none;}
+.jewel .halo{fill:var(--n);opacity:0;transition:opacity .22s ease!important;}
+.jewel .dot{fill:var(--bg);stroke:var(--n);stroke-width:2;transition:fill .2s ease,stroke-width .2s ease!important;}
+.jewel .label-plate{fill:color-mix(in srgb,var(--bg-soft) 94%,transparent);stroke:var(--n);stroke-opacity:.34;stroke-width:.75;rx:4;ry:4;transition:fill .2s ease,stroke-opacity .2s ease!important;}
+.jewel .lab{font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.012em;fill:var(--ink);stroke:none;paint-order:normal;pointer-events:none;}
+.jewel .hit{fill:transparent;cursor:pointer;}
+.jewel.core .dot{fill:var(--ink);stroke:var(--ink);}
+.jewel.core .label-plate{stroke-width:1;stroke-opacity:.46;}
+.jewel.core .lab{font-family:var(--sans);font-weight:600;font-size:20px;letter-spacing:.005em;}
+.jewel:hover .dot,.jewel:focus-visible .dot,.jewel.on .dot{stroke-width:3;}
+.jewel:hover .halo,.jewel:focus-visible .halo,.jewel.on .halo{opacity:.12;}
+.jewel:hover .label-plate,.jewel:focus-visible .label-plate,.jewel.on .label-plate{stroke-opacity:.9;fill:color-mix(in srgb,var(--bg-soft) 98%,transparent);}
+.jewel:hover .lab,.jewel:focus-visible .lab,.jewel.on .lab{fill:var(--ink);}
+/* The constellation must NOT inherit alive.css generic node motion. */
+#web .jewel,#web .jewel *{animation:none!important;transform:none!important;}
+#web .jewel:hover,#web .jewel:focus,#web .jewel:focus-visible,#web .jewel:active{transform:none!important;filter:none!important;}
+#web .jewel:focus-visible .label-plate{stroke-width:1.6;}
+.thread.lit{opacity:.66;stroke:var(--litc);stroke-width:1.45;}
+
+/* focus detail panel */
+.panel{position:absolute;left:1.5rem;bottom:1.5rem;max-width:365px;z-index:3;
+  background:color-mix(in srgb,var(--bg-soft) 94%,transparent);border:1px solid var(--line);border-left:3px solid var(--accent);
+  border-radius:5px;padding:1.1rem 1.2rem;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s,border-color .25s;pointer-events:none;box-shadow:0 12px 32px rgba(0,0,0,.08);}
+.panel.show{opacity:1;transform:none;pointer-events:auto;}
+.panel .k{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--n,var(--accent));}
+.panel h2{font-family:var(--serif);font-weight:500;font-size:1.42rem;margin:.28rem 0 .42rem;line-height:1.15;}
+.panel p{font-family:var(--serif);font-size:.98rem;line-height:1.52;color:var(--ink-soft);}
+.panel .go{display:inline-block;margin-top:.75rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--n,var(--accent));border-bottom:1px solid currentColor;padding-bottom:1px;}
+
+.hint{position:absolute;right:1.5rem;top:1.25rem;z-index:3;font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:right;line-height:1.9;pointer-events:none;}
+.descend-sq{position:absolute;right:1.5rem;bottom:1.5rem;z-index:3;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:color-mix(in srgb,var(--bg-soft) 92%,transparent);border:1px solid var(--line);border-radius:5px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-family:var(--mono);font-size:1rem;color:var(--muted);transition:color .2s,border-color .2s,transform .2s;}
+.descend-sq:hover,.descend-sq:focus-visible{color:var(--accent);border-color:var(--accent);transform:translateY(2px);}
+.map-rail{display:none;}
+@media(max-width:720px){
+  .stage{height:565px;min-height:565px;}
+  #web{height:425px;}
+  .jewel .lab,.jewel .label-plate{display:none;}
+  .jewel .hit{r:27;}
+  .hint{right:1rem;top:.8rem;}
+  .panel{left:1rem;right:1rem;bottom:1rem;max-width:none;padding:1rem 1.05rem;}
+  .descend-sq{display:none;}
+  .map-rail{display:flex;gap:.55rem;overflow:auto;padding:.8rem 1rem 1rem;border-bottom:1px solid var(--line);scrollbar-width:thin;}
+  .map-rail button{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;background:var(--bg-soft);color:var(--ink-soft);padding:.55rem .75rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;cursor:pointer;}
+  .map-rail button.on{border-color:var(--n);color:var(--n);background:color-mix(in srgb,var(--n) 10%,var(--bg-soft));}
+}
+@media(prefers-reduced-motion:reduce){.jewel .halo,.jewel .dot,.jewel .label-plate,.thread{transition:none!important;}}
+
+/* identity strip under hero */
+.lede{max-width:1180px;margin:0 auto;padding:2.6rem 1.6rem 1.2rem;}
+.lede h1{font-family:var(--serif);font-weight:500;font-size:clamp(1.7rem,3.4vw,2.7rem);line-height:1.12;letter-spacing:-.01em;max-width:18ch;}
+.lede h1 em{font-style:italic;color:var(--accent);}
+.lede p{font-family:var(--serif);font-size:1.05rem;color:var(--ink-soft);max-width:60ch;margin-top:1rem;}
+.lede .who{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:1.1rem;}
+.lede .id{display:flex;align-items:center;gap:.95rem;margin-top:1.2rem;}
+.lede .id .portrait{width:88px;height:88px;border-radius:50%;object-fit:cover;flex:0 0 auto;border:1px solid var(--line);box-shadow:0 4px 18px rgba(0,0,0,.10);}
+.lede .id .who{margin-top:0;}
+@media(max-width:520px){.lede .id{flex-direction:column;align-items:flex-start;gap:.7rem;}.lede .id .portrait{width:76px;height:76px;}}
+
+/* ---------- mono index ---------- */
+.index{max-width:1180px;margin:0 auto;padding:1.5rem 1.6rem 4rem;}
+.index .col-head{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+  border-top:1px solid var(--ink);padding-top:.5rem;margin-bottom:.2rem;display:flex;justify-content:space-between;}
+.idx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:1.6rem 2.4rem;margin-top:1.6rem;}
+.idx-row{display:block;border-bottom:1px solid var(--line);padding:.7rem 0;transition:padding .18s,border-color .2s;}
+.idx-row:hover,.idx-row:focus-visible{padding-left:.5rem;border-bottom-color:var(--rc);}
+.idx-row .n{font-family:var(--mono);font-size:.6rem;color:var(--rc);letter-spacing:.1em;}
+.idx-row .t{font-family:var(--serif);font-size:1.12rem;display:block;margin-top:.1rem;}
+.idx-row .d{font-size:.82rem;color:var(--muted);display:block;margin-top:.15rem;}
+.idx-row .arr{float:right;color:var(--rc);opacity:0;transition:opacity .18s,transform .18s;font-family:var(--mono);}
+.idx-row:hover .arr,.idx-row:focus-visible .arr{opacity:1;transform:translateX(3px);}
+
+.foot{max-width:1180px;margin:0 auto;padding:1.5rem 1.6rem 3rem;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:1rem 2rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.foot a{color:var(--ink);}
+.foot a:hover{color:var(--accent);}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+.lede{position:relative;z-index:1;}
+
+/* CL pathway map: starts from the work someone is trying to do, not from a flat role label. */
+.work-paths{margin:1.6rem 0 1.9rem;}
+.work-paths h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.25rem,1.04rem + .9vw,1.85rem);line-height:1.12;margin:0 0 .55rem;}
+.work-paths .path-intro{max-width:68ch;margin:0 0 .95rem;color:var(--ink-soft);font-family:var(--serif);font-size:clamp(.98rem,.93rem + .22vw,1.12rem);}
+.path-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.78rem;}
+.path-card{display:flex;flex-direction:column;gap:.42rem;min-height:100%;border:1px solid var(--line);border-radius:12px;padding:1rem 1rem .95rem;background:color-mix(in srgb,var(--bg-soft) 82%,transparent);transition:border-color .18s,background .18s,transform .18s;color:var(--ink);}
+.path-card:hover,.path-card:focus-visible{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--bg-soft));transform:translateY(-1px);outline:0;}
+.path-card .path-k{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);}
+.path-card strong{font-family:var(--serif);font-weight:500;font-size:1.05rem;line-height:1.16;}
+.path-card span:last-child{font-size:.9rem;line-height:1.42;color:var(--ink-soft);}
+@media(max-width:520px){.path-grid{grid-template-columns:1fr}.path-card{border-radius:10px;padding:.9rem;}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://seminarschools.com/#organization",
+      "name": "Seminar Schools",
+      "url": "https://seminarschools.com/",
+      "email": "saulnassau@protonmail.com",
+      "telephone": "+1-416-771-0382",
+      "areaServed": {
+        "@type": "City",
+        "name": "Toronto"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Saul Karim Nassau",
+        "url": "https://seminarschools.com/saul/"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://seminarschools.com/#website",
+      "name": "Seminar Schools",
+      "url": "https://seminarschools.com/",
+      "description": "Toronto tutoring, free public seminars, teacher resources, writing, and experimental learning.",
+      "publisher": {
+        "@id": "https://seminarschools.com/#organization"
+      },
+      "inLanguage": "en-CA"
+    }
+  ]
+}
+</script>
+</head>
+<body class="home" data-indra-intensity="0.075" data-geometry="indra-web" data-route-type="home">
+
+<header class="bar">
+  <a class="brand" href="/">Seminar<b>Schools</b></a>
+  <div class="right">
+    <span class="meta">Toronto &middot; reading rooms &middot; est 2026</span>
+    <a class="book" href="/leizu">Book a session</a>
+  </div>
+</header>
+
+<section class="stage" aria-label="The Seminar Schools ecosystem">
+  <svg id="web" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid meet" role="img" aria-describedby="mapInstruction" aria-label="Interactive map of Seminar Schools projects"></svg>
+  <p class="hint" id="mapInstruction">Choose a jewel</p>
+  <div class="panel" id="panel" role="region" aria-label="Selected project"></div>
+  <button class="descend-sq" id="descendSq" type="button" aria-label="Scroll down into the page" title="Scroll down">&#8595;</button>
+</section>
+<div class="map-rail" id="mapRail" aria-label="Project list"></div>
+
+<div class="lede">
+  <h1>A room of readers working a hard text together reaches what <em>none of them</em> could reach alone.</h1>
+  <p>Seminar Schools brings tutoring, public reading, teacher resources, writing, and learning games into one Toronto practice.</p>
+
+
+  <section class="work-paths" aria-labelledby="home-pathways-title">
+    <h2 id="home-pathways-title">Start with the work in front of you.</h2>
+    <p class="path-intro">The site opens through practical entrances: study support, public events, classroom materials, reading games, project archives, and a general CV.</p>
+    <div class="path-grid">
+      <a class="path-card" href="/leizu/"><span class="path-k">Study support</span><strong>A student needs steadier reading, writing, or humanities work.</strong><span>Leizu gives the tutoring path, session structure, policies, intake, and scholarship information.</span></a>
+      <a class="path-card" href="/polymythseminars/"><span class="path-k">Events and deadlines</span><strong>A learner wants talks, contests, calls for papers, and fellowships worth tracking.</strong><span>Polymythcal gathers public opportunities with filters, dates, source links, and freshness labels.</span></a>
+      <a class="path-card" href="/teacherresources/"><span class="path-k">Teaching materials</span><strong>A teacher wants useful outside resources without digging through scattered tabs.</strong><span>The resource finder keeps the page link-first, searchable, and organized by subject and level.</span></a>
+      <a class="path-card" href="/bb/"><span class="path-k">Reading game</span><strong>A class or reading group wants to turn a difficult text into playable choices.</strong><span>BB starts with the wormcard maker, then points students and teachers toward the rule library.</span></a>
+      <a class="path-card" href="/aa/"><span class="path-k">AA* and polymyth</span><strong>A reader wants the project archive and the theory machinery behind the work.</strong><span>AA* now funnels toward polymyth without flattening either project into a generic homepage.</span></a>
+      <a class="path-card" href="/saul/"><span class="path-k">CV</span><strong>An employer, school, collaborator, or grant reader wants Saul Karim Nassau’s record.</strong><span>The CV is framed broadly for professional opportunities rather than only for Leizu.</span></a>
+    </div>
+  </section>
+
+  <div style="font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;color:var(--ink-soft);margin-bottom:1.5rem;">
+    Text or call <a href="tel:+14167710382" style="color:var(--accent);border-bottom:1px solid var(--accent);">416-771-0382</a> &middot; <a href="mailto:saulnassau@protonmail.com" style="color:var(--accent);border-bottom:1px solid var(--accent);">saulnassau@protonmail.com</a>
+  </div>
+
+  <div class="id">
+    <img class="portrait" src="/img/saul.jpg" width="88" height="88" alt="Saul Karim Nassau" loading="lazy" decoding="async">
+    <div class="who">Saul Karim Nassau &middot; MA Philosophy &middot; Toronto and online</div>
+  </div>
+</div>
+
+<main class="index" id="index">
+  <div class="col-head"><span>The index</span><span>everything, directly</span></div>
+  <div class="idx-grid" id="idxGrid"></div>
+</main>
+
+<footer class="foot">
+  <a href="/saul">Full CV</a>
+  <a href="/main">About Seminar Schools</a>
+  <a href="/florilegium/">Florilegium</a>
+  <a href="/nutrition/">Nutrition</a>
+  <a href="/polymyth/sitemap/">Sitemap</a>
+  <a href="mailto:saulnassau@protonmail.com">Email</a>
+  <span style="color:var(--muted)">One arrow &middot; two birds</span>
+</footer>
+
+<script>
+// ---- the ecosystem as a readable, selectable map -----------------------
+const cv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const NODES = [
+  {id:'core', label:'Seminar Schools', href:'/main/', tier:0, c:'--ink', k:'The practice', d:'The conceptual centre of Seminar Schools, with its public work, teaching practice, and deeper account of the seminar method.'},
+  {id:'leizu', label:'Leizu Academy', href:'/leizu', tier:1, c:'--c1', k:'Tutoring', d:'Individual tutoring for OSSD, IB, and university preparation.'},
+  {id:'teach', label:'Teacher Resources', href:'/teacherresources/', tier:1, c:'--c7', k:'For teachers', d:'Free classroom-ready materials arranged by subject.'},
+  {id:'agora', label:'The Agora', href:'/agora/', tier:1, c:'--c2', k:'Public seminar', d:'A free public seminar for readers in Toronto and online.'},
+  {id:'calendar', label:'polymythcalendar', href:'/polymythseminars/', tier:2, c:'--c3', k:'Toronto events', d:'Free public lectures, readings, and screenings gathered in one calendar.'},
+  {id:'marginalia', label:'Marginalia', href:'/marginalia', tier:2, c:'--c6', k:'Essays', d:'Writing shaped by lectures and conversations across Toronto.'},
+  {id:'polymyth', label:'polymorphousmythology', href:'/polymyth/methodologylist', tier:2, c:'--c4', k:'The framework', d:'A framework for tracing how symbols, figures, and stories gather meaning through use.'},
+  {id:'bb', label:'bookwormburrows', href:'/bb/', tier:3, c:'--c5', k:'Learning game', d:'A text becomes a world to enter, read, and play.'},
+  {id:'ohm', label:'Ohm Dome', href:'/ohm-dome/', tier:3, c:'--c5', k:'Public art', d:'A public light installation shaped by heartbeat, breath, and proximity.'},
+  {id:'sabachtan', label:'Sabachtan Seminar', href:'/agora/#sabachtan', tier:3, c:'--c6', k:'The ground', d:'A seminar on first questions, abandonment, and the ground beneath the framework.'},
+];
+const CLUSTERS = [ ['leizu','teach','agora'], ['calendar','marginalia'], ['polymyth','bb','sabachtan'] ];
+const W=1000,H=700,CX=W*.5,CY=H*.47;
+const RING={1:135,2:215,3:292};
+const ANG={leizu:330,teach:205,agora:55,calendar:255,marginalia:150,polymyth:95,bb:25,ohm:290,sabachtan:120};
+const LABEL={
+  core:{dx:0,dy:53,a:'middle'},leizu:{dx:25,dy:7,a:'start'},teach:{dx:-24,dy:7,a:'end'},agora:{dx:24,dy:7,a:'start'},
+  calendar:{dx:-16,dy:-17,a:'end'},marginalia:{dx:-20,dy:7,a:'end'},polymyth:{dx:20,dy:9,a:'start'},
+  bb:{dx:20,dy:8,a:'start'},ohm:{dx:18,dy:-16,a:'start'},sabachtan:{dx:-20,dy:10,a:'end'}
+};
+const pos={core:{x:CX,y:CY}};
+NODES.forEach(n=>{if(n.tier>0){const a=ANG[n.id]*Math.PI/180,r=RING[n.tier];pos[n.id]={x:CX+Math.cos(a)*r*1.12,y:CY+Math.sin(a)*r};}});
+const NS='http://www.w3.org/2000/svg';
+const svg=document.getElementById('web');
+function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+const stage=el('g',{});svg.appendChild(stage);
+[170,300,430].forEach(r=>stage.appendChild(el('circle',{class:'ring',cx:CX,cy:CY,r})));
+const threadEls={};
+function addThread(aId,bId){
+  const a=pos[aId],b=pos[bId];
+  const t=el('path',{class:'thread',d:`M${a.x} ${a.y} Q ${(a.x+b.x)/2+(b.y-a.y)*.08} ${(a.y+b.y)/2+(a.x-b.x)*.08} ${b.x} ${b.y}`});
+  stage.appendChild(t);
+  (threadEls[aId]??=[]).push(t);(threadEls[bId]??=[]).push(t);
+}
+NODES.forEach(n=>{if(n.tier>0)addThread('core',n.id);});
+CLUSTERS.forEach(cl=>{for(let i=0;i<cl.length;i++)for(let j=i+1;j<cl.length;j++)addThread(cl[i],cl[j]);});
+const panel=document.getElementById('panel');
+const rail=document.getElementById('mapRail');
+const jewelEls={};
+let activeId=null,lastPointer='mouse';
+function radius(t){return t===0?22:t===1?12:t===2?10:8;}
+function setPanel(n,col){
+  panel.style.setProperty('--n',col);
+  panel.innerHTML=`<div class="k">${n.k}</div><h2>${n.label}</h2><p>${n.d}</p><a class="go" href="${n.href}">${n.id==='core'?'Explore the full index':'Enter '+n.label} &rarr;</a>`;
+  panel.classList.add('show');
+}
+function selectNode(n){
+  const col=cv(n.c);
+  Object.keys(jewelEls).forEach(id=>{const g=jewelEls[id];g.classList.remove('on');g.setAttribute('aria-pressed','false');});
+  Object.keys(threadEls).forEach(id=>threadEls[id].forEach(t=>t.classList.remove('lit')));
+  jewelEls[n.id].classList.add('on');jewelEls[n.id].setAttribute('aria-pressed','true');
+  (threadEls[n.id]||[]).forEach(t=>{t.classList.add('lit');t.style.setProperty('--litc',col);});
+  activeId=n.id;
+  document.body.style.setProperty('--indra-active',col);
+  document.body.style.setProperty('--indra-opacity',n.id==='core'?'.036':'.075');
+  document.body.dataset.activeProject=n.id;
+  setPanel(n,col);
+  rail.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.node===n.id));
+}
+NODES.forEach(n=>{
+  const p=pos[n.id],col=cv(n.c),r=radius(n.tier),L=LABEL[n.id];
+  const g=el('g',{class:'jewel'+(n.tier===0?' core':''),tabindex:'0',role:'button','aria-label':`Show ${n.label}`,'aria-pressed':'false'});
+  g.style.setProperty('--n',col);
+  g.appendChild(el('circle',{class:'halo',cx:p.x,cy:p.y,r:r*2.65}));
+  g.appendChild(el('circle',{class:'dot',cx:p.x,cy:p.y,r}));
+  const lab=el('text',{class:'lab',x:p.x+L.dx,y:p.y+L.dy,'text-anchor':L.a});lab.textContent=n.label;g.appendChild(lab);
+  stage.appendChild(g);
+  let bb;
+  try { bb=lab.getBBox(); } catch (err) { bb={x:(p.x+L.dx)-(n.label.length*3.8),y:(p.y+L.dy)-12,width:n.label.length*7.6,height:16}; }
+  const plate=el('rect',{class:'label-plate',x:(bb.x-8).toFixed(1),y:(bb.y-5).toFixed(1),width:(bb.width+16).toFixed(1),height:(bb.height+10).toFixed(1)});
+  g.insertBefore(plate,lab);
+  g.appendChild(el('circle',{class:'hit',cx:p.x,cy:p.y,r:Math.max(r*2.9,24)}));
+  jewelEls[n.id]=g;
+  g.addEventListener('mouseenter',()=>selectNode(n));
+  g.addEventListener('focus',()=>selectNode(n));
+  g.addEventListener('pointerup',e=>{lastPointer=e.pointerType||'mouse';});
+  g.addEventListener('click',()=>{
+    if(lastPointer==='touch'||lastPointer==='pen'||activeId!==n.id){selectNode(n);return;}
+    window.location.assign(n.href);
+  });
+  g.addEventListener('keydown',e=>{
+    if(e.key===' '){e.preventDefault();selectNode(n);}
+    if(e.key==='Enter'){e.preventDefault();if(activeId===n.id)window.location.assign(n.href);else selectNode(n);}
+  });
+  const b=document.createElement('button');b.type='button';b.dataset.node=n.id;b.textContent=n.label;b.style.setProperty('--n',col);b.addEventListener('click',()=>selectNode(n));rail.appendChild(b);
+});
+selectNode(NODES[0]);
+// Core ink follows the theme toggle as well as the page's first render.
+new MutationObserver(()=>{
+  NODES.forEach(n=>jewelEls[n.id].style.setProperty('--n',cv(n.c)));
+  const current=NODES.find(n=>n.id===activeId)||NODES[0];
+  selectNode(current);
+}).observe(document.documentElement,{attributes:true,attributeFilter:['class','data-theme']});
+const grid=document.getElementById('idxGrid');
+NODES.filter(n=>n.tier>0).forEach((n,i)=>{
+  const col=cv(n.c);const a=document.createElement('a');a.className='idx-row';a.href=n.href;a.style.setProperty('--rc',col);
+  a.innerHTML=`<span class="arr">&rarr;</span><span class="n">${String(i+1).padStart(2,'0')} / ${n.k}</span><span class="t">${n.label}</span><span class="d">${n.d}</span>`;grid.appendChild(a);
+});
+</script>
+
+<script>
+(function(){var d=document.getElementById("descendSq");if(d)d.addEventListener("click",function(){var t=document.querySelector(".lede");if(t)t.scrollIntoView({behavior:"smooth",block:"start"});});})();
+</script>
+<script src="/js/mandala.js?v=cl91" defer></script>
+<script src="/js/theme.js?v=cl91" defer></script>
+<script src="/js/indra.js?v=cl91" defer></script>
+<script src="/js/footer.js?v=cl91" defer></script>
+<script src="/js/autolink.js?v=cl91" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
+</body>
+</html>

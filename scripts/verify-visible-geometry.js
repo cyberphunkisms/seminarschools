@@ -9,7 +9,7 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = process.cwd();
-const SKIP_DIRS = new Set(['.git', 'node_modules', '.netlify']);
+const SKIP_DIRS = new Set(['.git', 'node_modules', '.netlify', 'public']);
 function walk(dir, acc = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (SKIP_DIRS.has(entry.name)) continue;

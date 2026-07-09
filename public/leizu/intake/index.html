@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Begin with Leizu. Tell me about your student.</title>
+<!-- Open Graph / Twitter Card -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/leizu/intake/">
+<meta property="og:title" content="Begin with Leizu. Tell me about your student.">
+<meta property="og:description" content="A few words to start, then as much as you like. Saul reads every one and writes back with a plan made for your student.">
+<meta property="og:image" content="https://seminarschools.com/og-image.png">
+<meta name="twitter:image" content="https://seminarschools.com/og-image.png">
+<meta property="og:site_name" content="Seminar Schools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Begin with Leizu. Tell me about your student.">
+<meta name="twitter:description" content="A few words to start, then as much as you like. Saul reads every one and writes back with a plan made for your student.">
+<!-- /Open Graph -->
+<meta name="description" content="Tell Leizu Academy about your student and receive a plan shaped around their needs.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2D3F26">
+<link rel="canonical" href="https://seminarschools.com/leizu/intake/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+TC:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/alive.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=cl91">
+<style>
+:root{
+  --paper:#F4EFE3;
+  --paper-deep:#ECE3D0;
+  --ink:#1F1408;
+  --ink-soft:#5A4632;
+  --rule:#9C8862;
+  --mulberry-deep:#5A1F2F;
+  --mulberry-fruit:#8A2F40;
+  --mulberry-fruit-ripe:#B85A48;
+  --mulberry-leaf:#5C7A4D;
+  --shadow:rgba(31,20,8,0.08);
+  --display:'Cormorant Garamond',serif;
+  --han-tc:'Noto Serif TC',serif;
+  --mono:'JetBrains Mono',monospace;
+}
+:root.dark, :root[data-theme="dark"]{--paper:#1A2014;--paper-deep:#242C1C;--ink:#E8DEC7;--ink-soft:#B8AC8E;--rule:#5A5240;--mulberry-deep:#C98092;--mulberry-fruit:#D69AA8;--mulberry-fruit-ripe:#E0AEB8;--shadow:rgba(0,0,0,0.4);}
+@media (prefers-color-scheme: dark){ :root:not(.light){--paper:#1A2014;--paper-deep:#242C1C;--ink:#E8DEC7;--ink-soft:#B8AC8E;--rule:#5A5240;--mulberry-deep:#C98092;--mulberry-fruit:#D69AA8;--mulberry-fruit-ripe:#E0AEB8;--shadow:rgba(0,0,0,0.4);} }
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:var(--display);font-size:1.06rem;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.page{max-width:620px;margin:0 auto;padding:4.5rem 1.5rem 7rem;}
+
+.crumb{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3rem;}
+.crumb a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule);}
+.crumb a:hover{color:var(--mulberry-fruit);border-color:var(--mulberry-fruit);}
+
+.masthead{margin-bottom:3rem;}
+.masthead-han{font-family:var(--han-tc);font-size:1.7rem;color:var(--mulberry-deep);font-weight:500;display:block;margin-bottom:0.6rem;letter-spacing:0.1em;}
+.masthead-en{font-family:var(--display);font-size:2.5rem;font-weight:400;color:var(--ink);letter-spacing:-0.01em;font-style:italic;line-height:1.2;margin-bottom:1.1rem;}
+.masthead-sub{font-style:italic;color:var(--ink-soft);font-size:1.18rem;max-width:520px;}
+
+/* ---- the form, breathing ---- */
+.intake{margin-top:1rem;}
+.field{position:relative;margin:0 0 2.2rem;padding-left:1.1rem;}
+.field::before{content:"";position:absolute;left:0;top:0.15rem;bottom:0.15rem;width:2px;border-radius:2px;background:var(--rule);opacity:0.4;transition:background 0.5s ease,opacity 0.5s ease;}
+.field.has-value::before{background:var(--mulberry-fruit);opacity:0.9;}
+.field > label,.legend{display:block;font-family:var(--display);font-size:1.22rem;color:var(--ink);margin-bottom:0.55rem;font-weight:500;}
+.field .hint{display:block;font-style:italic;color:var(--ink-soft);font-size:0.98rem;margin:-0.25rem 0 0.7rem;}
+.req{color:var(--mulberry-fruit);font-family:var(--mono);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;vertical-align:0.25em;margin-left:0.35rem;}
+
+input[type="text"],input[type="email"],textarea,select{
+  width:100%;background:transparent;border:none;border-bottom:1.5px solid var(--rule);
+  font-family:var(--display);font-size:1.12rem;color:var(--ink);padding:0.45rem 0.1rem 0.55rem;
+  transition:border-color 0.35s ease;border-radius:0;
+}
+textarea{resize:vertical;min-height:3.2rem;line-height:1.6;}
+select{cursor:pointer;}
+input::placeholder,textarea::placeholder{color:var(--ink-soft);opacity:0.55;font-style:italic;}
+input:focus,textarea:focus,select:focus{outline:none;border-bottom-color:var(--mulberry-fruit);}
+input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px 0 0 var(--mulberry-fruit);}
+
+/* chips for the few grounded multiple-choices */
+.chips{display:flex;flex-wrap:wrap;gap:0.55rem;margin-top:0.2rem;}
+.chip{position:relative;}
+.chip input{position:absolute;opacity:0;width:0;height:0;}
+.chip span{display:inline-block;font-family:var(--mono);font-size:0.8rem;letter-spacing:0.04em;color:var(--ink-soft);
+  padding:0.45rem 0.95rem;border:1px solid var(--rule);border-radius:22px;cursor:pointer;
+  transition:all 0.25s ease;background:transparent;user-select:none;}
+.chip span:hover{border-color:var(--mulberry-fruit);color:var(--mulberry-deep);}
+.chip input:checked + span{background:var(--mulberry-deep);border-color:var(--mulberry-deep);color:var(--paper);}
+.chip input:focus-visible + span{box-shadow:0 0 0 2px var(--mulberry-fruit);}
+
+.divider{margin:3.2rem 0 2.6rem;text-align:center;}
+.divider span{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-soft);
+  display:inline-block;padding:0 1rem;position:relative;}
+.divider::before{content:"";display:block;height:1px;background:var(--rule);opacity:0.5;position:relative;top:0.7rem;}
+.divider span{background:var(--paper);position:relative;}
+
+/* ---- the money bubble: pop or leave it ---- */
+.bubble{margin:3rem 0 1rem;}
+.bubble-toggle{width:100%;text-align:left;background:var(--paper-deep);border:1px solid var(--rule);border-radius:30px;
+  font-family:var(--display);font-size:1.18rem;color:var(--mulberry-deep);padding:1.05rem 1.6rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:all 0.3s ease;}
+.bubble-toggle:hover{border-color:var(--mulberry-fruit);background:var(--paper);}
+.bubble-toggle:focus-visible{outline:none;box-shadow:0 0 0 2px var(--mulberry-fruit);}
+.bubble-toggle .mark{font-family:var(--mono);font-size:1.4rem;line-height:1;transition:transform 0.4s ease;color:var(--mulberry-fruit);}
+.bubble.open .bubble-toggle{border-radius:22px 22px 0 0;}
+.bubble.open .bubble-toggle .mark{transform:rotate(45deg);}
+.bubble-body{max-height:0;overflow:hidden;opacity:0;transition:max-height 0.55s ease,opacity 0.4s ease,padding 0.4s ease;
+  background:var(--paper-deep);border:1px solid var(--rule);border-top:none;border-radius:0 0 22px 22px;padding:0 1.6rem;}
+.bubble.open .bubble-body{max-height:640px;opacity:1;padding:1.4rem 1.6rem 1.8rem;}
+.bubble-body p{font-style:italic;color:var(--ink-soft);font-size:1.02rem;margin-bottom:1.1rem;}
+.tier-row{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.2rem;}
+.tier-pick{display:inline-block;font-family:var(--display);font-size:1.04rem;color:var(--paper);background:var(--mulberry-deep);
+  text-decoration:none;padding:0.6rem 1.2rem;border-radius:3px;transition:background 0.3s ease;}
+.tier-pick:hover{background:var(--mulberry-fruit-ripe);}
+.tier-pick .small{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.08em;opacity:0.85;display:block;}
+.book-line{font-family:var(--mono);font-size:0.82rem;letter-spacing:0.03em;color:var(--ink-soft);}
+.book-line a{color:var(--mulberry-deep);border-bottom:1px solid var(--rule);text-decoration:none;}
+.book-line a:hover{color:var(--mulberry-fruit);border-color:var(--mulberry-fruit);}
+
+/* ---- send ---- */
+.send-row{margin-top:2.6rem;}
+.send{display:inline-block;background:var(--mulberry-deep);color:var(--paper);border:none;
+  font-family:var(--display);font-size:1.28rem;padding:0.95rem 3rem;border-radius:3px;cursor:pointer;
+  transition:background 0.3s ease,transform 0.2s ease;letter-spacing:0.01em;}
+.send:hover{background:var(--mulberry-fruit-ripe);}
+.send:focus-visible{outline:none;box-shadow:0 0 0 3px var(--mulberry-fruit);}
+.send:disabled{opacity:0.55;cursor:wait;}
+.send-note{font-style:italic;color:var(--ink-soft);font-size:0.98rem;margin-top:1rem;}
+.form-error{font-family:var(--mono);font-size:0.82rem;color:var(--mulberry-fruit);margin-top:1rem;display:none;line-height:1.55;}
+.form-error.show{display:block;}
+.form-error:focus{outline:2px solid var(--mulberry-fruit);outline-offset:5px;}
+.native-submit{display:inline-block;margin-top:0.85rem;background:transparent;border:1px solid var(--rule);border-radius:3px;color:var(--ink-soft);font-family:var(--display);font-size:1rem;padding:0.65rem 1rem;cursor:pointer;}
+.native-submit:hover,.native-submit:focus-visible{border-color:var(--mulberry-fruit);color:var(--mulberry-deep);}
+.selection-summary{margin:0 0 1.55rem;padding:1rem 1.1rem;background:var(--paper-deep);border-left:3px solid var(--mulberry-deep);border-radius:2px;color:var(--ink-soft);}
+.selection-summary-title{font-family:var(--display);font-size:1.2rem;font-weight:500;color:var(--ink);margin-bottom:0.7rem;}
+.selection-summary-row{margin-top:0.65rem;}
+.selection-summary-label{display:block;font-family:var(--mono);font-size:0.67rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:0.35rem;}
+.selection-summary-chips{display:flex;flex-wrap:wrap;gap:0.38rem;}
+.selection-summary-chip{display:inline-flex;align-items:center;max-width:100%;padding:0.3rem 0.58rem;border:1px solid var(--rule);border-radius:999px;font-family:var(--display);font-size:0.98rem;line-height:1.2;color:var(--ink);background:var(--paper);}
+.selection-summary-note{margin-top:0.8rem;font-style:italic;font-size:0.95rem;color:var(--ink-soft);}
+
+/* honeypot, kept away from people */
+.gotcha{position:absolute;left:-9999px;top:-9999px;}
+
+/* ---- thank-you state ---- */
+.thanks{display:none;text-align:left;}
+.thanks.show{display:block;}
+.thanks .han{font-family:var(--han-tc);font-size:1.5rem;color:var(--mulberry-deep);display:block;margin-bottom:1rem;}
+.thanks h2{font-family:var(--display);font-style:italic;font-size:2rem;font-weight:400;color:var(--ink);margin-bottom:1.1rem;line-height:1.25;}
+.thanks p{color:var(--ink-soft);font-size:1.15rem;}
+.thanks .back{display:inline-block;margin-top:2rem;font-family:var(--mono);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule);}
+.thanks .back:hover{color:var(--mulberry-fruit);border-color:var(--mulberry-fruit);}
+
+.colophon{margin-top:5rem;padding-top:2rem;border-top:1px solid var(--rule);font-family:var(--mono);font-size:0.75rem;color:var(--ink-soft);text-align:center;}
+.colophon a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule);}
+.colophon a:hover{color:var(--mulberry-fruit);}
+
+/* ---- the pop-and-rise reveal ---- */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.7s ease,transform 0.7s cubic-bezier(0.22,1,0.36,1);}
+.reveal.in{opacity:1;transform:none;}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  .reveal{opacity:1;transform:none;transition:none;}
+  .bubble-body,.bubble-toggle .mark,.field::before{transition:none;}
+}
+@media(max-width:600px){
+  .page{padding:3rem 1.25rem 5rem;}
+  .masthead-en{font-size:2rem;}
+  .send{width:100%;}
+}
+</style>
+<style>
+#indraLayer, #geo, #geo2, .mandala-canvas, canvas.mandala {
+  opacity: 0.04 !important;
+  pointer-events: none;
+}
+</style>
+  <link rel="stylesheet" href="/leizu/revamp.css?v=20260627a">
+</head>
+<body class="leizu-revamp" data-geometry="indra-web" data-indra-intensity="0.075">
+<nav class="leizu-site-nav" aria-label="Leizu Academy">
+  <a class="leizu-mark" href="/leizu/">嫘祖學院 <span aria-hidden="true">·</span> Leizu</a>
+  <div class="leizu-nav-links">
+    <a href="/leizu/#subjects">Subjects</a>
+    <a href="/leizu/#pricing">Plans</a>
+    <a href="/leizu/scholarship/">Scholars</a>
+    <a class="leizu-nav-zh" href="https://calendly.com/kyrah0131/leizu" target="_blank" rel="noopener noreferrer">中文諮詢</a>
+  </div>
+</nav>
+<main id="content">
+<div class="page">
+  <div class="crumb"><a href="/leizu">嫘祖學院 Leizu</a> · Begin</div>
+
+  <!-- ===================== FORM ===================== -->
+  <div id="intake-wrap">
+    <header class="masthead reveal in">
+      <span class="masthead-han">嫘祖學院</span>
+      <h1 class="masthead-en">Tell me what the student needs.</h1>
+      <p class="masthead-sub">Share the course, the difficulty, or the goal. The form keeps the choices you made and gives the next step a clear starting point.</p>
+    </header>
+
+    <form name="leizu-intake" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field" class="intake" id="intake-form" action="/leizu/intake/?sent=1">
+      <input type="hidden" name="form-name" value="leizu-intake">
+      <input type="hidden" name="intake-id" id="intake-id" value="">
+      <input type="hidden" name="selected-tier" id="selected-tier" value="">
+      <input type="hidden" name="selected-course-ids" id="selected-course-ids" value="">
+      <input type="hidden" name="selected-course-names" id="selected-course-names" value="">
+      <input type="hidden" name="selected-esl-course-ids" id="selected-esl-course-ids" value="">
+      <input type="hidden" name="selected-esl-course-names" id="selected-esl-course-names" value="">
+      <input type="hidden" name="selected-path" id="selected-path" value="">
+      <input type="hidden" name="source" id="source" value="">
+      <input type="hidden" name="language" id="language" value="">
+      <p class="gotcha"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+      <section class="selection-summary" id="selection-summary" hidden aria-labelledby="selection-summary-title"></section>
+
+      <!-- ---- the short required core ---- -->
+      <div class="field reveal in">
+        <label for="parent-name">Your name <span class="req">needed</span></label>
+        <input type="text" id="parent-name" name="parent-name" autocomplete="name" required>
+      </div>
+
+      <div class="field reveal in">
+        <label for="email">Your email <span class="req">needed</span></label>
+        <span class="hint">This is where I will reply.</span>
+        <input type="email" id="email" name="email" autocomplete="email" required>
+      </div>
+
+      <div class="field reveal in">
+        <label for="student-age">Student's age or grade <span class="req">needed</span></label>
+        <input type="text" id="student-age" name="student-age" placeholder="e.g. 14, or grade 9" required>
+      </div>
+
+      <div class="field reveal in">
+        <label for="purpose">What brings you here? <span class="req">needed</span></label>
+        <select id="purpose" name="purpose" required>
+          <option value="" disabled selected>Choose one</option>
+          <option value="starter">Starting with a Starter block</option>
+          <option value="term">Starting a Term</option>
+          <option value="forest">Inquiring about the Forest Year</option>
+          <option value="seminar">Applying for the Seminar</option>
+          <option value="mulberry">Asking about the Mulberry Fund</option>
+          <option value="question">I have a question before enrolling</option>
+          <option value="portfolio">Sharing a portfolio with Leizu</option>
+          <option value="booking">I am enrolled and booking a session</option>
+        </select>
+      </div>
+
+      <div class="divider reveal"><span>That is enough to begin. Add whatever helps.</span></div>
+
+      <!-- ---- the expansive optional part ---- -->
+      <div class="field reveal">
+        <label for="student-name">Student's name</label>
+        <input type="text" id="student-name" name="student-name">
+      </div>
+
+      <div class="field reveal">
+        <span class="legend">Which curriculum?</span>
+        <div class="chips" role="group" aria-label="Curriculum">
+          <label class="chip"><input type="radio" name="curriculum" value="OSSD"><span>OSSD</span></label>
+          <label class="chip"><input type="radio" name="curriculum" value="IB"><span>IB</span></label>
+          <label class="chip"><input type="radio" name="curriculum" value="AP"><span>AP</span></label>
+          <label class="chip"><input type="radio" name="curriculum" value="A-Level"><span>A-Level</span></label>
+          <label class="chip"><input type="radio" name="curriculum" value="Other"><span>Other</span></label>
+          <label class="chip"><input type="radio" name="curriculum" value="Not sure"><span>Not sure</span></label>
+        </div>
+      </div>
+
+      <div class="field reveal">
+        <label for="subjects" id="subjects-label">What else would you like help with?</label>
+        <span class="hint" id="subjects-hint">Add a skill, a project, or a goal.</span>
+        <input type="text" id="subjects" name="subjects" placeholder="e.g. essay writing, reading, an assignment, university preparation">
+      </div>
+
+      <div class="field reveal">
+        <label for="current">Where is the student now?</label>
+        <span class="hint">Recent marks, what is working, and what feels difficult.</span>
+        <textarea id="current" name="current" rows="3"></textarea>
+      </div>
+
+      <div class="field reveal">
+        <label for="goal">What would a good year look like?</label>
+        <span class="hint">The outcome you hope to see.</span>
+        <textarea id="goal" name="goal" rows="3"></textarea>
+      </div>
+
+      <div class="field reveal">
+        <span class="legend">When would you like to begin?</span>
+        <div class="chips" role="group" aria-label="Timeline">
+          <label class="chip"><input type="radio" name="timeline" value="This week"><span>This week</span></label>
+          <label class="chip"><input type="radio" name="timeline" value="This term"><span>This term</span></label>
+          <label class="chip"><input type="radio" name="timeline" value="Next term"><span>Next term</span></label>
+          <label class="chip"><input type="radio" name="timeline" value="Just exploring"><span>Just exploring</span></label>
+        </div>
+      </div>
+
+      <div class="field reveal">
+        <span class="legend">Online or in person?</span>
+        <div class="chips" role="group" aria-label="Format">
+          <label class="chip"><input type="radio" name="format" value="Online"><span>Online</span></label>
+          <label class="chip"><input type="radio" name="format" value="In person"><span>In person</span></label>
+          <label class="chip"><input type="radio" name="format" value="Either"><span>Either</span></label>
+        </div>
+      </div>
+
+      <div class="field reveal">
+        <label for="schedule">Days or times that tend to work</label>
+        <span class="hint">Include your time zone when you live outside Toronto.</span>
+        <input type="text" id="schedule" name="schedule" placeholder="e.g. weekday evenings, EST">
+      </div>
+
+      <div class="field reveal">
+        <label for="found">How did you find Leizu?</label>
+        <input type="text" id="found" name="found">
+      </div>
+
+      <div class="field reveal">
+        <label for="notes">Anything else?</label>
+        <span class="hint">Add anything that will help me understand the situation.</span>
+        <textarea id="notes" name="notes" rows="4"></textarea>
+      </div>
+
+      <div class="field reveal">
+        <label for="portfolio">Portfolio (optional)</label>
+        <span class="hint">Writing, art, or other work you want to share. One file is enough.</span>
+        <input type="file" id="portfolio" name="portfolio">
+      </div>
+
+      <!-- ---- optional money bubble: pop it or leave it ---- -->
+      <div class="bubble reveal" id="enrol-bubble">
+        <button type="button" class="bubble-toggle" id="bubble-toggle" aria-expanded="false" aria-controls="bubble-body">
+          <span>Already know you would like to begin?</span>
+          <span class="mark" aria-hidden="true">+</span>
+        </button>
+        <div class="bubble-body" id="bubble-body" role="region" aria-label="Enrol now">
+          <p id="plan-picker-copy">This form begins any inquiry. A selected course path needs one of the published plans below before it moves to secure payment.</p>
+          <div class="tier-row">
+            <a class="tier-pick" data-payment-key="starter_block" href="#">Starter block <span class="small">select</span></a>
+            <a class="tier-pick" data-payment-key="term" href="#">Term <span class="small">select</span></a>
+            <a class="tier-pick" data-payment-key="forest_year_upfront" href="#">Forest Year, up front <span class="small">select</span></a>
+            <a class="tier-pick" data-payment-key="forest_year_two" href="#">Forest Year, two payments <span class="small">select</span></a>
+            <a class="tier-pick" data-payment-key="forest_year_term" href="#">Forest Year, by term <span class="small">select</span></a>
+            <a class="tier-pick" data-payment-key="forest_year_monthly" href="#">Forest Year, monthly <span class="small">select</span></a>
+          </div>
+          <p class="book-line">Use this form for the Seminar Year or a custom plan. Prefer a first conversation? <a href="https://cal.com/seminarschools/class" target="_blank" rel="noopener noreferrer">Book a first conversation</a>.</p>
+        </div>
+      </div>
+
+      <div class="send-row reveal">
+        <button type="submit" class="send" id="send-btn">Send</button>
+        <p class="send-note">I read these myself. You will hear back soon.</p>
+        <p class="form-error" id="form-error" role="alert" aria-live="assertive" tabindex="-1"></p>
+        <button class="native-submit" id="native-submit" type="button" hidden>Use the standard form submission</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ===================== THANK YOU ===================== -->
+  <div class="thanks" id="thanks">
+    <span class="han">已收到</span>
+    <h2 id="thanks-title">Your intake is in.</h2>
+    <p id="thanks-copy">Your information has been sent.</p>
+    <div id="payment-step" hidden style="margin:2rem 0;">
+      <a id="stripe-link" class="buy" href="#" rel="noopener noreferrer" style="display:inline-block;padding:1rem 2.5rem;background:var(--mulberry-deep,#5A1F2F);color:var(--paper,#F4EFE3);font-family:var(--display);font-size:1.15rem;font-style:italic;text-decoration:none;border-radius:2px;transition:background 0.3s;">Continue to secure payment</a>
+    </div>
+    <p id="offer-note" hidden style="margin:2rem 0;font-size:1.08rem;color:var(--ink);">I will read what you sent and reply with the right plan, usually within one day.</p>
+    <p style="font-size:0.9rem;color:var(--ink-soft);">For questions, text or call <a href="tel:+14167710382">416-771-0382</a> or reply to the confirmation email.</p>
+    <a href="/leizu" class="back">Back to Leizu</a>
+  </div>
+
+  <footer class="colophon">
+    <p>嫘祖學院 · Leizu Academy · A practice within <a href="/">Seminar Schools</a> · <a href="/leizu/teach">Teach at Leizu</a> · <a href="/leizu/scholarship">Scholarships</a> · <a href="/leizu">Back to curriculum</a> · <a href="mailto:saulnassau@protonmail.com">Contact</a></p>
+  </footer></main>
+</div>
+
+
+<script src="/leizu/payment-config.js?v=cl96"></script>
+<script src="/leizu/course-labels.js?v=cl96"></script>
+<script>
+(function(){
+  var form = document.getElementById('intake-form');
+  if(!form) return;
+
+  var cfg = window.LEIZU_PAYMENT_CONFIG;
+  var labels = window.LEIZU_COURSE_LABELS || {};
+  var selectedTier = document.getElementById('selected-tier');
+  var selectedCourses = document.getElementById('selected-course-ids');
+  var selectedCourseNames = document.getElementById('selected-course-names');
+  var selectedEslCourses = document.getElementById('selected-esl-course-ids');
+  var selectedEslCourseNames = document.getElementById('selected-esl-course-names');
+  var selectedPath = document.getElementById('selected-path');
+  var sourceInput = document.getElementById('source');
+  var languageInput = document.getElementById('language');
+  var intakeId = document.getElementById('intake-id');
+  var purpose = form.querySelector('[name="purpose"]');
+  var subjects = form.querySelector('[name="subjects"]');
+  var params = new URLSearchParams(window.location.search);
+  var sendBtn = document.getElementById('send-btn');
+  var errEl = document.getElementById('form-error');
+  var nativeSubmit = document.getElementById('native-submit');
+  var paymentStep = document.getElementById('payment-step');
+  var stripeLink = document.getElementById('stripe-link');
+  var offerNote = document.getElementById('offer-note');
+  var thanksTitle = document.getElementById('thanks-title');
+  var thanksCopy = document.getElementById('thanks-copy');
+
+  function validId(value){ return /^[a-z0-9-]{1,80}$/i.test(String(value || '')); }
+  function validIntakeId(value){ return /^leizu_[A-Za-z0-9_]{12,180}$/.test(String(value || '')); }
+  function listFromParam(value){ return String(value || '').split(',').filter(validId); }
+  function createIntakeId(){
+    if(window.crypto && typeof window.crypto.randomUUID === 'function'){
+      return 'leizu_' + window.crypto.randomUUID().replace(/-/g, '_');
+    }
+    return 'leizu_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 14);
+  }
+  function getProduct(key){ return cfg && cfg.getProduct ? cfg.getProduct(key) : null; }
+  var pathLabels = { forest:'Forest Year', ib:'IB Diploma preparation', ossd:'OSSD preparation' };
+  function hasCourseSelection(){ return Boolean(selectedCourses.value || selectedEslCourses.value || (selectedPath && selectedPath.value)); }
+  function sourceRequiresReview(){ return Boolean(sourceInput && sourceInput.value === 'portfolio'); }
+  function courseLabel(id){ return labels[id] || 'Selected course'; }
+  function labelList(ids){ return ids.map(courseLabel); }
+  function appendText(parent, tag, className, text){
+    var node = document.createElement(tag);
+    if(className) node.className = className;
+    node.textContent = text;
+    parent.appendChild(node);
+    return node;
+  }
+  function appendCourseRow(box, title, values){
+    if(!values.length) return;
+    var row = appendText(box, 'div', 'selection-summary-row', '');
+    appendText(row, 'span', 'selection-summary-label', title);
+    var chips = document.createElement('div');
+    chips.className = 'selection-summary-chips';
+    values.forEach(function(value){ appendText(chips, 'span', 'selection-summary-chip', value); });
+    row.appendChild(chips);
+  }
+  function updateSubjectPrompt(){
+    var label = document.getElementById('subjects-label');
+    var hint = document.getElementById('subjects-hint');
+    if(!label || !hint) return;
+    if(hasCourseSelection()){
+      label.textContent = 'What else would help?';
+      hint.textContent = 'Your selected subjects are listed above. Add a skill, assignment, or goal.';
+    } else {
+      label.textContent = 'What would you like help with?';
+      hint.textContent = 'Add a subject, a skill, or a goal.';
+    }
+  }
+  function updatePlanPicker(){
+    var copy = document.getElementById('plan-picker-copy');
+    var bubble = document.getElementById('enrol-bubble');
+    var toggle = document.getElementById('bubble-toggle');
+    if(!copy || !bubble) return;
+    if(sourceRequiresReview()){
+      bubble.hidden = true;
+      copy.textContent = 'Your portfolio receives a personal review before the portfolio rate and next step are confirmed.';
+      return;
+    }
+    bubble.hidden = false;
+    if(hasCourseSelection() && !getProduct(selectedTier.value) && !sourceRequiresReview()){
+      copy.textContent = 'Choose a published plan before you send it so secure payment can follow.';
+      bubble.classList.add('open');
+      if(toggle) toggle.setAttribute('aria-expanded', 'true');
+    } else if(getProduct(selectedTier.value)){
+      copy.textContent = 'Your plan is selected. Send the intake, then continue to secure payment.';
+    } else {
+      copy.textContent = 'Use this form for an inquiry, the Seminar Year, or a custom plan.';
+    }
+  }
+  function updateSummary(){
+    var box = document.getElementById('selection-summary');
+    if(!box) return;
+    var product = getProduct(selectedTier.value);
+    var courses = listFromParam(selectedCourses.value);
+    var eslCourses = listFromParam(selectedEslCourses.value);
+    var courseNames = labelList(courses);
+    var eslCourseNames = labelList(eslCourses);
+    if(selectedCourseNames) selectedCourseNames.value = courseNames.join(', ');
+    if(selectedEslCourseNames) selectedEslCourseNames.value = eslCourseNames.join(', ');
+
+    box.replaceChildren();
+    if(!product && !courses.length && !eslCourses.length && !sourceRequiresReview()){
+      box.hidden = true;
+      updateSubjectPrompt();
+      updatePlanPicker();
+      return;
+    }
+    appendText(box, 'div', 'selection-summary-title', 'Your selection');
+    if(sourceRequiresReview()) appendCourseRow(box, 'Route', ['Portfolio intake']);
+    if(product) appendCourseRow(box, 'Plan', [product.label]);
+    if(selectedPath && pathLabels[selectedPath.value]) appendCourseRow(box, 'Selected path', [pathLabels[selectedPath.value]]);
+    appendCourseRow(box, 'Selected subjects', courseNames);
+    appendCourseRow(box, 'ESL support', eslCourseNames);
+    appendText(box, 'p', 'selection-summary-note', 'These choices are included with your intake. Add context below.');
+    box.hidden = false;
+    updateSubjectPrompt();
+    updatePlanPicker();
+  }
+  function setTier(key){
+    var product = getProduct(key);
+    if(sourceRequiresReview() || !product) return false;
+    selectedTier.value = key;
+    if(purpose && product.purpose) purpose.value = product.purpose;
+    updateSummary();
+    return true;
+  }
+  function buildPaymentUrl(product, email){
+    var url = new URL(product.paymentLink);
+    url.searchParams.set('client_reference_id', intakeId.value);
+    if(email) url.searchParams.set('prefilled_email', email);
+    return url.toString();
+  }
+  function clearError(){
+    errEl.textContent = '';
+    errEl.classList.remove('show');
+    if(nativeSubmit) nativeSubmit.hidden = true;
+  }
+  function showError(message, offerNative){
+    errEl.textContent = message;
+    errEl.classList.add('show');
+    if(nativeSubmit) nativeSubmit.hidden = !offerNative;
+    window.setTimeout(function(){ errEl.focus(); }, 0);
+  }
+  function showThanks(product){
+    var wrap = document.getElementById('intake-wrap');
+    var thanks = document.getElementById('thanks');
+    var portfolioRoute = sourceRequiresReview();
+    if(wrap) wrap.style.display = 'none';
+    if(thanks) thanks.classList.add('show');
+    if(product && !portfolioRoute){
+      var email = form.querySelector('[name="email"]').value.trim();
+      thanksTitle.textContent = 'Your intake is in.';
+      thanksCopy.textContent = 'Your plan is ready. Continue to secure Stripe payment. After payment, you will choose a session time.';
+      stripeLink.href = buildPaymentUrl(product, email);
+      stripeLink.textContent = 'Continue to secure payment';
+      paymentStep.hidden = false;
+      offerNote.hidden = true;
+    } else {
+      thanksTitle.textContent = portfolioRoute ? 'Your portfolio intake is in.' : 'Your message is in.';
+      thanksCopy.textContent = portfolioRoute ? 'I will review the work you shared and confirm the portfolio rate and next step.' : 'I will read what you sent and reply with the right next step.';
+      paymentStep.hidden = true;
+      offerNote.hidden = false;
+      offerNote.textContent = portfolioRoute ? 'Your work receives a personal review before payment.' : 'I will read what you sent and reply with the right plan, usually within one day.';
+    }
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  function nativeAction(){
+    var query = new URLSearchParams();
+    query.set('sent', '1');
+    query.set('intake_id', intakeId.value);
+    if(selectedTier.value) query.set('tier', selectedTier.value);
+    if(selectedCourses.value) query.set('courses', selectedCourses.value);
+    if(selectedEslCourses.value) query.set('esl_courses', selectedEslCourses.value);
+    if(selectedPath && pathLabels[selectedPath.value]) query.set('path', selectedPath.value);
+    if(sourceInput && sourceInput.value) query.set('source', sourceInput.value);
+    if(languageInput && /^(fr|zh|zhs|fa)$/.test(languageInput.value)) query.set('lang', languageInput.value);
+    return '/leizu/intake/?' + query.toString();
+  }
+
+  if(validIntakeId(params.get('intake_id'))) intakeId.value = params.get('intake_id');
+  if(!intakeId.value) intakeId.value = createIntakeId();
+  selectedCourses.value = listFromParam(params.get('courses')).join(',');
+  selectedEslCourses.value = listFromParam(params.get('esl_courses')).join(',');
+  var incomingPath = String(params.get('path') || '').toLowerCase();
+  if(selectedPath) selectedPath.value = pathLabels[incomingPath] ? incomingPath : '';
+  var preferredLanguage = String(params.get('lang') || localStorage.getItem('leizu-lang') || 'en').toLowerCase();
+  if(!/^(en|fr|zh|zhs|fa)$/.test(preferredLanguage)) preferredLanguage = 'en';
+  if(languageInput) languageInput.value = preferredLanguage;
+  try { localStorage.setItem('leizu-lang', preferredLanguage); } catch(e){}
+  var source = String(params.get('source') || '').toLowerCase();
+  var sourcePurposes = { seminar:'seminar', mulberry:'mulberry', contact:'question', portfolio:'portfolio' };
+  if(sourceInput) sourceInput.value = Object.prototype.hasOwnProperty.call(sourcePurposes, source) ? source : '';
+  if(purpose && sourcePurposes[source]) purpose.value = sourcePurposes[source];
+  if(source === 'portfolio'){
+    var intakeHeading = document.querySelector('.masthead-en');
+    var intakeSubheading = document.querySelector('.masthead-sub');
+    if(intakeHeading) intakeHeading.textContent = 'Share the work that helps tell the story.';
+    if(intakeSubheading) intakeSubheading.textContent = 'Add a small selection or a link. I will review it before confirming the portfolio rate and next step.';
+  }
+  setTier(params.get('tier'));
+  updateSummary();
+
+  var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal:not(.in)'));
+  if('IntersectionObserver' in window && reveals.length){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          var node = entry.target;
+          var delay = parseFloat(node.getAttribute('data-rise-delay') || '0');
+          window.setTimeout(function(){ node.classList.add('in'); }, delay);
+          io.unobserve(node);
+        }
+      });
+    }, { rootMargin:'0px 0px -8% 0px', threshold:0.12 });
+    var lastTop = null;
+    var step = 0;
+    reveals.forEach(function(node){
+      var top = Math.round(node.getBoundingClientRect().top);
+      step = lastTop !== null && Math.abs(top - lastTop) < 260 ? step + 70 : 0;
+      lastTop = top;
+      node.setAttribute('data-rise-delay', String(Math.min(step, 210)));
+      io.observe(node);
+    });
+  } else {
+    reveals.forEach(function(node){ node.classList.add('in'); });
+  }
+
+  function markFilled(input){
+    var field = input.closest('.field');
+    if(!field) return;
+    var any = Array.prototype.some.call(field.querySelectorAll('input,textarea,select'), function(control){
+      if(control.type === 'radio' || control.type === 'checkbox') return control.checked;
+      return control.value && control.value.trim().length > 0;
+    });
+    field.classList.toggle('has-value', any);
+  }
+  Array.prototype.forEach.call(form.querySelectorAll('input,textarea,select'), function(input){
+    var eventName = (input.type === 'radio' || input.type === 'checkbox') ? 'change' : 'input';
+    input.addEventListener(eventName, function(){ markFilled(input); });
+    if(input.value) markFilled(input);
+  });
+
+  var toggle = document.getElementById('bubble-toggle');
+  var bubble = document.getElementById('enrol-bubble');
+  if(toggle && bubble){
+    toggle.addEventListener('click', function(){
+      var open = bubble.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  document.querySelectorAll('.tier-pick').forEach(function(button){
+    button.addEventListener('click', function(event){
+      event.preventDefault();
+      if(setTier(button.getAttribute('data-payment-key'))){
+        clearError();
+        form.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
+
+  if(nativeSubmit){
+    nativeSubmit.addEventListener('click', function(){
+      if(typeof form.reportValidity === 'function' && !form.reportValidity()) return;
+      form.dataset.nativeSubmit = 'true';
+      form.action = nativeAction();
+      if(typeof form.requestSubmit === 'function') form.requestSubmit();
+      else form.submit();
+    });
+  }
+
+  form.addEventListener('submit', function(event){
+    if(form.dataset.nativeSubmit === 'true') return;
+    event.preventDefault();
+    if(typeof form.reportValidity === 'function' && !form.reportValidity()) return;
+    if(hasCourseSelection() && !getProduct(selectedTier.value)){
+      var requiredBubble = document.getElementById('enrol-bubble');
+      var requiredToggle = document.getElementById('bubble-toggle');
+      if(requiredBubble) requiredBubble.classList.add('open');
+      if(requiredToggle) requiredToggle.setAttribute('aria-expanded', 'true');
+      showError('Choose a published plan below before moving from your selected subjects to secure payment.', false);
+      if(requiredBubble) requiredBubble.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+    clearError();
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Sending';
+    var product = getProduct(selectedTier.value);
+    var formData = new FormData(form);
+    fetch('/', {method:'POST', body:formData})
+      .then(function(response){
+        if(!response.ok) throw new Error('Netlify Forms returned ' + response.status);
+        showThanks(product);
+      })
+      .catch(function(){
+        sendBtn.disabled = false;
+        sendBtn.textContent = 'Send';
+        showError('Your form was not sent. Your answers are still here. Please try again. The standard submission is available below if the problem continues.', true);
+      });
+  });
+
+  if(params.get('sent') === '1'){
+    showThanks(getProduct(selectedTier.value));
+  }
+})();
+</script>
+<script src="/leizu/language-state.js?v=cl96" defer></script>
+<script src="/js/theme.js?v=cl91" defer></script>
+<script src="/js/mandala.js?v=cl91" defer></script>
+<script src="/js/indra.js?v=cl91" defer></script>
+<script src="/js/footer.js?v=cl91" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<title>bookwormburrows Glossary | Terms for Players &amp; DMs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="description" content="Glossary of bookwormburrows character symbols, traits, book-world words, and card terms for players and DMs.">
+<link rel="stylesheet" href="/css/mobile-overlay.css?v=cl91">
+<style>
+  :root{--bg:#000;--fg:#33ff66;--fg-dim:#1f9c3d;--fg-darker:#125e25;--accent:#ffb000;--quirk:#ff7a4a;--glow:0 0 6px rgba(51,255,102,0.35)}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:'VT323','Courier New',monospace;font-size:18px;line-height:1.55;text-shadow:var(--glow)}
+  .crt{background:repeating-linear-gradient(0deg,rgba(51,255,102,0.04) 0 1px,transparent 1px 3px),radial-gradient(ellipse at center,rgba(51,255,102,0.08) 0%,transparent 70%),var(--bg);min-height:100vh}
+  .wrap{max-width:920px;margin:0 auto;padding:2rem 1.4rem 4rem}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px dashed currentColor}
+  a:hover{filter:brightness(1.2)}
+  .nav{margin-bottom:1.2rem;font-size:0.9rem;color:var(--fg-dim)}
+  h1{font-size:2rem;letter-spacing:2px;margin:0 0 0.4rem;color:var(--accent)}
+  h2{font-size:1.4rem;margin:2rem 0 0.6rem;letter-spacing:1.5px;text-transform:uppercase;border-bottom:1px dashed var(--fg-darker);padding-bottom:0.3rem}
+  .lede{color:var(--fg-dim);font-size:1.05rem;margin:0 0 1.4rem;max-width:62ch}
+  .toc{display:flex;flex-wrap:wrap;gap:0.4rem 1rem;margin:1.2rem 0 2rem;padding:0.8rem;border:1px dashed var(--fg-darker);background:rgba(0,0,0,0.4)}
+  .toc a{font-size:0.9rem;border:none;color:var(--fg)}
+  .toc a:hover{color:var(--accent)}
+  .cluster{margin:0 0 1.4rem;padding:0.7rem 1rem;border:1px dashed var(--fg-darker);background:rgba(0,0,0,0.35)}
+  .ch{display:flex;gap:0.7rem;align-items:flex-start;margin-bottom:0.4rem}
+  .ce{font-size:1.6rem;line-height:1.1;flex:0 0 auto}
+  .cm{flex:1 1 auto;min-width:0}
+  .cn{color:var(--accent);font-size:1.15rem;font-weight:bold;letter-spacing:1px;text-transform:lowercase}
+  .cs{color:var(--fg-dim);font-size:0.78rem;text-transform:uppercase;letter-spacing:1.5px;margin-top:0.1rem}
+  .cd{color:var(--fg);font-size:0.95rem;margin:0.3rem 0 0.6rem;line-height:1.5}
+  .ts{margin-top:0.5rem;padding-top:0.5rem;border-top:1px dotted var(--fg-darker)}
+  .t{display:flex;gap:0.6rem;padding:0.2rem 0;font-size:0.9rem}
+  .tn{flex:0 0 200px;color:var(--accent);text-transform:lowercase;letter-spacing:0.5px;word-break:break-word}
+  .tw{flex:0 0 24px;color:var(--fg-dim);font-size:0.75rem;text-align:right}
+  .td{flex:1 1 auto;min-width:0;color:var(--fg);line-height:1.45}
+  .ms .ce{width:24px;height:24px;border-radius:2px;display:inline-block}
+  .qs .cn,.qs .tn{color:var(--quirk)}
+  .x{margin:0 0 1.4rem;padding:0.7rem 1rem;border:1px dashed var(--fg-darker);background:rgba(0,0,0,0.4);font-size:0.92rem;color:var(--fg-dim);line-height:1.55}
+  .x b{color:var(--accent)}
+  .loading{padding:2rem;text-align:center;color:var(--fg-dim)}
+  @media (max-width:560px){
+    .t{flex-direction:column;gap:0.05rem;padding:0.4rem 0;border-bottom:1px dotted rgba(18,94,37,0.4)}
+    .tn,.tw{flex:none;text-align:left}
+  }
+</style>
+<link rel="canonical" href="https://seminarschools.com/bookwormcard/glossary/">
+<meta property="og:title" content="bookwormburrows · glossary">
+<meta property="og:description" content="Glossary of bookwormburrows character symbols, traits, book-world words, and card terms for players and DMs.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/bookwormcard/glossary/">
+<meta property="og:site_name" content="Seminar Schools">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
+<link rel="stylesheet" href="/css/alive.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=cl91">
+<meta property="og:image" content="https://seminarschools.com/og-image.png">
+</head>
+<body data-route-type="game-info" class="crt" data-geometry="indra-web" data-indra-intensity="0.075">
+<main id="content">
+<style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
+<div class="wrap">
+  <div class="nav"><a href="/bookwormcard/">← back to the form</a></div>
+  <h1>bookwormburrows · glossary</h1>
+  <p class="lede">the vocabulary of the character engine. each symbol shows something your writing brought out in the wormcard. You answer questions, the card notices patterns, and the symbols help you understand the character you are making.</p>
+  <div class="x"><b>how to read.</b> each symbol is a visual mark on the worm. It lights up when your answers show a trait strongly enough. A faint version means the trait is starting to appear. A clear version means the trait is strong. <b>weights:</b> +3 marks deep thinking, +2 marks strong character material, +1 marks writing craft. Negative quirks lower HP.</div>
+  <div id="glossary-mount" class="loading">loading vocabulary…</div>
+</div>
+<script src="/bookwormcard/tamagotchi.js?v=cl91"></script>
+<script src="glossary-data.js"></script>
+<script>
+(function(){
+  var SLOT_LABEL = {
+    'top':'on the head',
+    'face':'over the eyes',
+    'top-left':'weather and time',
+    'top-right':'thought or companion',
+    'right':'what they carry',
+    'left':'where they stand',
+    'bottom-right':'on the ground',
+    'bottom-left':'quirks (negative)'
+  };
+  var SLOT_LEDE = {
+    'top':'what the character shows first. This is the part people may notice before the character speaks.',
+    'face':'how the character sees the world, or what they avoid seeing.',
+    'top-left':'the weather, season, or time-feel around the character.',
+    'top-right':'the kind of thinking, memory, joke, worry, or companion that follows the character.',
+    'right':'the tool, instrument, object, or charm the character carries.',
+    'left':'the place, background, or world-feel around the character.',
+    'bottom-right':'what sits near the character, rests at their feet, or travels with them as a small sign.',
+    'bottom-left':'these are warning signs in the writing. They show habits that make the character weaker or blurrier. Each one costs HP.'
+  };
+  var SLOT_ORDER = ['top','face','top-left','top-right','right','left','bottom-right','bottom-left'];
+
+  function escapeHtml(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function defOf(id){
+    return (window.GLOSSARY_DATA && window.GLOSSARY_DATA[id]) || '';
+  }
+
+  function build(){
+    var mount = document.getElementById('glossary-mount');
+    if(!window.Tamagotchi || !window.Tamagotchi.getAccessoryRules){
+      mount.innerHTML = '<p class="lede">vocabulary unavailable, the worm engine did not load.</p>';
+      return;
+    }
+    var rules = window.Tamagotchi.getAccessoryRules();
+    var moods = window.Tamagotchi.getMoodRules ? window.Tamagotchi.getMoodRules() : [];
+    var html = '';
+    // TOC
+    html += '<div class="toc">';
+    SLOT_ORDER.forEach(function(slot){
+      if(rules.some(function(r){return r.slot===slot;})){
+        html += '<a href="#'+slot+'">'+SLOT_LABEL[slot]+'</a>';
+      }
+    });
+    if(moods.length) html += '<a href="#mood">mood (room tint)</a>';
+    html += '</div>';
+    // Sections
+    SLOT_ORDER.forEach(function(slot){
+      var slotRules = rules.filter(function(r){return r.slot===slot;});
+      if(!slotRules.length) return;
+      var isQuirk = (slot === 'bottom-left');
+      html += '<h2 id="'+slot+'"'+(isQuirk?' class="qs"':'')+'>'+SLOT_LABEL[slot]+'</h2>';
+      html += '<p class="lede">'+SLOT_LEDE[slot]+'</p>';
+      slotRules.forEach(function(r){
+        html += '<div class="cluster'+(isQuirk?' qs':'')+'">';
+        html += '<div class="ch"><span class="ce">'+r.emoji+'</span><div class="cm">';
+        html += '<div class="cn">'+escapeHtml(r.id)+'</div>';
+        html += '<div class="cs">'+r.slot+' · min cluster weight '+r.min+(isQuirk?' · negative':'')+'</div>';
+        html += '</div></div>';
+        html += '<div class="cd">'+(defOf('cluster:'+r.id) || '<em style="color:var(--fg-darker)">[no definition yet]</em>')+'</div>';
+        html += '<div class="ts">';
+        r.traits.forEach(function(t){
+          var w = (window.GLOSSARY_DATA && window.GLOSSARY_DATA['weight:'+t]) || '';
+          var sign = isQuirk ? '−' : '+';
+          html += '<div class="t">';
+          html += '<div class="tn">'+escapeHtml(t.toLowerCase())+'</div>';
+          html += '<div class="tw">'+(w?sign+w:'')+'</div>';
+          html += '<div class="td">'+(defOf('trait:'+t) || '<em style="color:var(--fg-darker)">[no definition yet]</em>')+'</div>';
+          html += '</div>';
+        });
+        html += '</div></div>';
+      });
+    });
+    // Mood
+    if(moods.length){
+      html += '<h2 id="mood">mood (room tint)</h2>';
+      html += '<p class="lede">the mood is the climate of the room behind the worm. one wins. the room turns a colour; the worm and its accessories keep theirs.</p>';
+      moods.forEach(function(m){
+        html += '<div class="cluster ms">';
+        html += '<div class="ch"><span class="ce" style="background:'+m.tint+'"></span><div class="cm">';
+        html += '<div class="cn">'+escapeHtml(m.id)+'</div>';
+        html += '<div class="cs">backdrop · min cluster weight '+m.min+'</div>';
+        html += '</div></div>';
+        html += '<div class="cd">'+(defOf('mood:'+m.id) || '<em style="color:var(--fg-darker)">[no definition yet]</em>')+'</div>';
+        html += '<div class="ts"><div class="t"><div class="tn">contributing</div><div class="tw"></div><div class="td">'+m.traits.map(function(t){return t.toLowerCase();}).join(' · ')+'</div></div></div>';
+        html += '</div>';
+      });
+    }
+    mount.innerHTML = html;
+    mount.classList.remove('loading');
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', build);
+  } else {
+    build();
+  }
+})();
+</script>
+</main>
+<script src="/js/theme.js?v=cl91" defer></script>
+<script src="/js/mandala.js?v=cl91" defer></script>
+<script src="/js/indra.js?v=cl91" defer></script>
+<script src="/js/footer.js?v=cl91" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
+</body>
+</html>

@@ -34,6 +34,8 @@ RSS_PATH = ROOT / "seminars" / "feed.xml"
 FESTIVALS_OUT_PATH = ROOT / "festivals" / "events.json"
 FESTIVALS_RSS_PATH = ROOT / "festivals" / "feed.xml"
 LOG_PATH = ROOT / "data" / "scrape-log.json"
+WATCHLIST_PATH = ROOT / "data" / "event-watchlist.json"
+WATCHLIST_PUBLIC_PATH = ROOT / "polymythseminars" / "watchlist.json"
 PUBLIC_PATH = ROOT / "polymythseminars" / "events.json"
 DATA_MASTER_PATH = ROOT / "data" / "polymyth-seminar-events.json"
 HISTORY_DIR = ROOT / "data" / "history"
@@ -267,6 +269,51 @@ def write_rss(records, out_path=None, channel_title=None, channel_link=None, cha
     out_path.write_text(feed, encoding="utf-8")
 
 
+def write_watchlist(harvest_data, final_records=None):
+    """Persist provisional event leads without publishing them as events.
+
+    Watchlist records are source-confirmed leads with missing details, such as
+    time/place TBD. They keep scraper memory and search recall without inventing
+    an event time or venue. A public mirror lets Polymythcal surface them as
+    "needs details" leads, clearly outside the event feed.
+    """
+    items = harvest_data.get("watchlist", [])
+    if not isinstance(items, list):
+        items = []
+    existing = []
+    if WATCHLIST_PATH.exists():
+        try:
+            prior = json.loads(WATCHLIST_PATH.read_text(encoding="utf-8"))
+            if isinstance(prior.get("items"), list):
+                existing = prior["items"]
+        except Exception:
+            existing = []
+
+    def wl_key(item):
+        return item.get("source_url") or f"{item.get('source_id','')}::{item.get('title','')}::{item.get('date','') or item.get('date_text','')}"
+
+    published = set()
+    for event in (final_records or harvest_data.get("events", [])):
+        published.add(wl_key(event))
+
+    merged = {}
+    for item in existing + items:
+        key = wl_key(item)
+        if not key or key in published:
+            continue
+        merged[key] = item
+    out_items = sorted(merged.values(), key=lambda x: x.get("date", "") or x.get("date_text", ""))
+    payload = {
+        "generated_at": now_iso(),
+        "count": len(out_items),
+        "rule": "watchlist only: not published as calendar events until time/place is confirmed; existing leads persist until confirmed or published",
+        "items": out_items,
+    }
+    WATCHLIST_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    WATCHLIST_PUBLIC_PATH.parent.mkdir(parents=True, exist_ok=True)
+    WATCHLIST_PUBLIC_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
+
 def write_log(harvest_data, final_records):
     """Per-source counts. Today's snapshot."""
     by_source = {}
@@ -357,7 +404,8 @@ def main():
     print(f"wrote {RSS_PATH}")
 
     write_log(harvest_data, merged)
-    print(f"wrote {LOG_PATH} + history snapshot")
+    write_watchlist(harvest_data, merged)
+    print(f"wrote {LOG_PATH}, {WATCHLIST_PATH} + history snapshot")
 
     # PUBLIC CALENDAR INTEGRATION (June 29 2026). Earlier versions wrote the
     # seminar stream directly to /polymythseminars/events.json, which could

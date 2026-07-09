@@ -1,9 +1,9 @@
 # Meaninglib search verification report
 
-Generated: 2026-07-08T22:07:18.702Z
+Generated: 2026-07-09T01:11:24.375Z
 
 Index: hf_export/search/meaninglib_search_index.json
-Documents: 1980
+Documents: 1981
 
 ## Test results
 
@@ -11,13 +11,13 @@ Documents: 1980
 
 Query: Meaninglib ontology
 
-1. [readme] Meaninglib (199.90)
+1. [readme] Meaninglib (199.91)
    - hf_export/README.md
 2. [ml] Meaninglib (mother-category for all * files, scanner-tier of polymyth) (89.45)
    - hf_export/data/all_meaninglib_rows.jsonl
 3. [ml] core* (memory-tier * file, cross-session behavioral rules) (65.88)
    - hf_export/data/all_meaninglib_rows.jsonl
-4. [ml] Pedagogical ontology (64.05)
+4. [ml] Pedagogical ontology (64.06)
    - hf_export/data/all_meaninglib_rows.jsonl
 5. [mc] ml* deep reading — canonical-source discipline (63.87)
    - hf_export/data/all_meaninglib_rows.jsonl
@@ -26,43 +26,43 @@ Query: Meaninglib ontology
 
 Query: interdependence rule
 
-1. [readme] Meaninglib (270.96)
+1. [readme] Meaninglib (270.97)
    - hf_export/README.md
-2. [ml] CL-60 INTERDEPENDENT DEFINITION — define each element by its own function and its interlock, never by ordinal or list-position (2026-06-14) (150.10)
+2. [ml] CL-60 INTERDEPENDENT DEFINITION — define each element by its own function and its interlock, never by ordinal or list-position (2026-06-14) (150.11)
    - hf_export/data/all_meaninglib_rows.jsonl
-3. [ml] Meaninglib (mother-category for all * files, scanner-tier of polymyth) (131.10)
+3. [ml] Meaninglib (mother-category for all * files, scanner-tier of polymyth) (131.11)
    - hf_export/data/all_meaninglib_rows.jsonl
 4. [ml] JAZZ rule (folds Modularity rule and Interdependency rule into both-at-once name) (98.02)
    - hf_export/data/all_meaninglib_rows.jsonl
-5. [mc] ml* deep reading — canonical-source discipline (90.53)
+5. [mc] ml* deep reading — canonical-source discipline (90.54)
    - hf_export/data/all_meaninglib_rows.jsonl
 
 ### PASS: Rejected ML hierarchy language retrieves ontology guard
 
 Query: ML* hierarchy language governs BB*
 
-1. [readme] Meaninglib (419.87)
+1. [readme] Meaninglib (419.89)
    - hf_export/README.md
-2. [ml] T118 AND THE GAMEWORLD SET RELOCATED TO bb* (Rainbowsol-directed 2026-06-06) (196.93)
+2. [ml] T118 AND THE GAMEWORLD SET RELOCATED TO bb* (Rainbowsol-directed 2026-06-06) (196.94)
    - hf_export/data/all_meaninglib_rows.jsonl
-3. [mc] ml* deep reading — canonical-source discipline (172.03)
+3. [mc] ml* deep reading — canonical-source discipline (172.00)
    - hf_export/data/all_meaninglib_rows.jsonl
-4. [ml] Meaninglib (mother-category for all * files, scanner-tier of polymyth) (167.78)
+4. [ml] Meaninglib (mother-category for all * files, scanner-tier of polymyth) (167.79)
    - hf_export/data/all_meaninglib_rows.jsonl
-5. [ml] Pedagogical ontology (166.20)
+5. [ml] Pedagogical ontology (166.22)
    - hf_export/data/all_meaninglib_rows.jsonl
 
 ### PASS: Stop psychologism rule top result retrieves ml* rule
 
 Query: stop psychologism
 
-1. [ml] Stop psychologism in operator-facing diagnosis, describe the failure not the user interior state (132.08)
+1. [ml] Stop psychologism in operator-facing diagnosis, describe the failure not the user interior state (132.09)
    - hf_export/data/all_meaninglib_rows.jsonl
-2. [ml] Psychologism (89.06)
+2. [ml] Psychologism (89.07)
    - hf_export/data/all_meaninglib_rows.jsonl
-3. [ml] CORE slot 9 mirror — PSYCHOLOGISM AUDIT (82.17)
+3. [ml] CORE slot 9 mirror — PSYCHOLOGISM AUDIT (82.18)
    - hf_export/data/all_meaninglib_rows.jsonl
-4. [ml] Psychologism gorgon culture, DSM hydra as gorgonwars within egregorewars (79.27)
+4. [ml] Psychologism gorgon culture, DSM hydra as gorgonwars within egregorewars (79.28)
    - hf_export/data/all_meaninglib_rows.jsonl
 5. [ml] Anti-twisting worked example, psychologism and gorgonwars session (71.39)
    - hf_export/data/all_meaninglib_rows.jsonl
@@ -75,7 +75,7 @@ Query: AI prose tells
    - hf_export/data/all_meaninglib_rows.jsonl
 2. [ml] Voice audit at write-time (PM4 applies to AI prose) (95.33)
    - hf_export/data/all_meaninglib_rows.jsonl
-3. [ml] "That tells you all" (62.18)
+3. [ml] "That tells you all" (62.19)
    - hf_export/data/all_meaninglib_rows.jsonl
 4. [ml] N133. Five pentagram books are AI-free. Definitional constraint on the pentagram-book project. The five books are written by the user without AI text-generation assistance. AI conversation IS permitted as research, note-taking, and dialectical interlocutor (the conversations themselves serve as note-corpus per N132 above), but the prose of the books is the user's prose, not co-written. This is the achievement-mode that distinguishes the pentagram-books from any other writing-output. (a) BLOCKED ON: book titles (long-standing P6 pending). (b) BLOCKER TYPE: user authorship. (c) WHAT THE USER NEEDS TO PROVIDE: the five titles + the pentagram structural assignments (which book sits at which vertex). (d) CROSS-REFS: N132 verbatim-corpus extraction (the legitimate AI-assisted research-mode for these books); pentagram-titles long-standing P6 pending item; user's standing rule that AI does not coin polymyth names (no-naming rule, memory slot 30); studylist section microbook stubs (Marshmellowmonster, Microbook: Jesters, Microbook: Rainbows, etc., all of which are Rainbowsol-named — same discipline applies to the pentagram books). (61.62)
    - hf_export/data/all_meaninglib_rows.jsonl
@@ -88,13 +88,13 @@ Query: bookwormburrows
 
 1. [bb] BB / BookwormBurrows / PolymythDND naming alias and anti-TWIST rule choice (137.30)
    - hf_export/data/all_meaninglib_rows.jsonl
-2. [bb] Rainbowsol is the main DM (105.96)
+2. [bb] Rainbowsol is the main DM (105.97)
    - hf_export/data/all_meaninglib_rows.jsonl
 3. [bb] Rainbowsol is the main DM (105.62)
    - hf_export/data/all_meaninglib_rows.jsonl
-4. [bb] Rainbowsol is the main DM (105.13)
+4. [bb] Rainbowsol is the main DM (105.14)
    - hf_export/data/all_meaninglib_rows.jsonl
-5. [bb] Rainbowsol is the main DM (103.75)
+5. [bb] Rainbowsol is the main DM (103.76)
    - hf_export/data/all_meaninglib_rows.jsonl
 
 ### PASS: Bookwormburrows query tolerates stray slash/quote
@@ -103,13 +103,13 @@ Query: bookwormburrows\"
 
 1. [bb] BB / BookwormBurrows / PolymythDND naming alias and anti-TWIST rule choice (137.30)
    - hf_export/data/all_meaninglib_rows.jsonl
-2. [bb] Rainbowsol is the main DM (105.96)
+2. [bb] Rainbowsol is the main DM (105.97)
    - hf_export/data/all_meaninglib_rows.jsonl
 3. [bb] Rainbowsol is the main DM (105.62)
    - hf_export/data/all_meaninglib_rows.jsonl
-4. [bb] Rainbowsol is the main DM (105.13)
+4. [bb] Rainbowsol is the main DM (105.14)
    - hf_export/data/all_meaninglib_rows.jsonl
-5. [bb] Rainbowsol is the main DM (103.75)
+5. [bb] Rainbowsol is the main DM (103.76)
    - hf_export/data/all_meaninglib_rows.jsonl
 
 ### PASS: Modulecanon identity query retrieves mc* identity at top
@@ -118,13 +118,13 @@ Query: modulecanon
 
 1. [mc] mc* concept-primary architecture (147.88)
    - hf_export/data/all_meaninglib_rows.jsonl
-2. [mc] mc* alignment methodology (145.95)
+2. [mc] mc* alignment methodology (145.96)
    - hf_export/data/all_meaninglib_rows.jsonl
-3. [mc] mc* curriculum_anchor schema (144.96)
+3. [mc] mc* curriculum_anchor schema (144.97)
    - hf_export/data/all_meaninglib_rows.jsonl
-4. [mc] mc* curriculum-map decisions, May 2026 (144.17)
+4. [mc] mc* curriculum-map decisions, May 2026 (144.18)
    - hf_export/data/all_meaninglib_rows.jsonl
-5. [mc] mc* concept inventory (Pass B manifest) (142.03)
+5. [mc] mc* concept inventory (Pass B manifest) (142.04)
    - hf_export/data/all_meaninglib_rows.jsonl
 
 ### PASS: Campaigncodex identity query retrieves cc* identity at top
@@ -135,7 +135,7 @@ Query: campaigncodex
    - hf_export/data/all_meaninglib_rows.jsonl
 2. [cc] cmp-001 NPC dossier template (cc* hyperrealism scaffold) (139.01)
    - hf_export/data/all_meaninglib_rows.jsonl
-3. [cc] cmp-001 Street block detail template (cc* hyperrealism scaffold) (130.76)
+3. [cc] cmp-001 Street block detail template (cc* hyperrealism scaffold) (130.77)
    - hf_export/data/all_meaninglib_rows.jsonl
 4. [cc] cc* render defect: 116 entries carry s values outside the five rendered tabs (pass-3 CL capture 2026-06-06) (130.04)
    - hf_export/data/all_meaninglib_rows.jsonl
@@ -146,13 +146,13 @@ Query: campaigncodex
 
 Query: HTML txt mirror
 
-1. [ml] ML*-DUAL-WRITE (txt/HTML sync rule) (714.51)
+1. [ml] ML*-DUAL-WRITE (txt/HTML sync rule) (714.58)
    - hf_export/data/all_meaninglib_rows.jsonl
-2. [ml] ml*/bb* HTML-vs-txt sync discipline (canonical-source rule) (203.41)
+2. [ml] ml*/bb* HTML-vs-txt sync discipline (canonical-source rule) (203.43)
    - hf_export/data/all_meaninglib_rows.jsonl
 3. [ml] methodologylist full text mirror (163.09)
    - hf_export/data/all_meaninglib_rows.jsonl
-4. [ml] CORE slot 4 mirror — Mearsheimer (147.65)
+4. [ml] CORE slot 4 mirror — Mearsheimer (147.67)
    - hf_export/data/all_meaninglib_rows.jsonl
-5. [ml] CORE slot 3 mirror — SCANNER+LEXICON (141.14)
+5. [ml] CORE slot 3 mirror — SCANNER+LEXICON (141.16)
    - hf_export/data/all_meaninglib_rows.jsonl

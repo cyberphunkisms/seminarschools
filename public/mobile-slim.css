@@ -1,0 +1,41 @@
+/* mobile-slim.css — Seminar Schools shared mobile layer.
+   Loaded by every page with media="screen and (max-width:640px)",
+   so desktop and print are untouched by construction.
+   Rules here must be safe for every page on the site: guard rails,
+   not page redesigns. Page-specific mobile work stays in each page. */
+
+/* Never let a page scroll sideways on a phone. */
+html, body { overflow-x: hidden; }
+html { -webkit-text-size-adjust: 100%; }
+
+/* Media never exceeds the viewport. */
+img, svg, video, canvas { max-width: 100%; height: auto; }
+iframe { max-width: 100%; }
+
+/* Long words, URLs, and handles wrap instead of pushing the layout. */
+h1, h2, h3, h4, p, li, dd, dt, td, th, figcaption, blockquote {
+  overflow-wrap: break-word;
+}
+
+/* Oversized display headings slim to phone scale. */
+h1 { font-size: clamp(1.9rem, 8.5vw, 2.7rem) !important; line-height: 1.12 !important; }
+h2 { font-size: clamp(1.35rem, 6vw, 1.8rem) !important; }
+
+/* Code and preformatted blocks wrap instead of scrolling the page. */
+pre, code, kbd, samp { white-space: pre-wrap; word-break: break-word; }
+
+/* Wide tables become their own scroll region instead of widening the page. */
+table { display: block; max-width: 100%; overflow-x: auto; }
+
+/* The floating text-size widget drops to the bottom corner on phones,
+   where it cannot collide with any header or nav. */
+.ss-fz { top: auto !important; bottom: 1rem !important; right: 1rem !important; }
+
+/* Fixed or sticky headers lose excess padding on small screens. */
+.topbar, header.topbar { flex-wrap: wrap; }
+
+/* Tap targets: links in dense mono footers get breathing room. */
+footer a { line-height: 2; }
+
+/* Forms: inputs never overflow their column. */
+input, select, textarea, button { max-width: 100%; }

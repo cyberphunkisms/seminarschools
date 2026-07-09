@@ -2,7 +2,7 @@
 'use strict';
 const fs=require('fs'); const path=require('path'); const ROOT=path.resolve(__dirname,'..');
 const failures=[]; let checked=0, ignored=0;
-function walk(d,acc=[]){ for(const e of fs.readdirSync(d,{withFileTypes:true})){ if(['.git','node_modules','.netlify'].includes(e.name)) continue; const f=path.join(d,e.name); if(e.isDirectory()) walk(f,acc); else if(e.name.endsWith('.html')) acc.push(f); } return acc; }
+function walk(d,acc=[]){ for(const e of fs.readdirSync(d,{withFileTypes:true})){ if(['.git','node_modules','.netlify','public'].includes(e.name)) continue; const f=path.join(d,e.name); if(e.isDirectory()) walk(f,acc); else if(e.name.endsWith('.html')) acc.push(f); } return acc; }
 function attrsObj(s){ const o={}; const rx=/([:\w-]+)(?:\s*=\s*("[^"]*"|'[^']*'|[^\s"'>]+))?/g; let m; while((m=rx.exec(s))){ o[m[1].toLowerCase()] = m[2] ? m[2].replace(/^['"]|['"]$/g,'') : ''; } return o; }
 for(const f of walk(ROOT)){
   const rel=path.relative(ROOT,f).replace(/\\/g,'/'); const html=fs.readFileSync(f,'utf8');

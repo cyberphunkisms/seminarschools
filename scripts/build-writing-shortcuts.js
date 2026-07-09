@@ -80,7 +80,7 @@ function main(){
   const current = (data.events || []).filter(isYouthWritingContest).filter(eventEligible).sort((a,b)=>String(a.date).localeCompare(String(b.date)));
   let writes=0;
   for (const [slug, info] of Object.entries(ROUTES)) {
-    let html = read(`${slug}/index.html`);
+    let html = read('polymythseminars/index.html');
     const events = current.filter(e=>bandMatches(e, info.band));
     const markup = `<div class="ssr-event-list" data-ssr-events="true"><p class="sr-only">${events.length} writing competition listings are listed below. Use the controls above to filter them when JavaScript is available.</p>${events.map(staticEventCard).join('\n')}</div>`;
     html = html.replace(/<script(?=[^>]*id=["']events-fallback["'])(?=[^>]*type=["']application\/json["'])[^>]*>[\s\S]*?<\/script>/, `<script type="application/json" id="events-fallback" data-source="/polymythseminars/events.json">${JSON.stringify({ _comment: 'Route-specific fallback. Full canonical data loads from /polymythseminars/events.json and remains mirrored on /polymythseminars/.', _generated_at: data._generated_at, _total_events: events.length, count: events.length, events })}</script>`);

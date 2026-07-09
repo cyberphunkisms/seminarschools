@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-07-09T03:48:47+00:00",
+  "count": 1,
+  "rule": "watchlist only: not published as calendar events until time/place is confirmed",
+  "items": [
+    {
+      "id": "watch-findaprotest-palestinian-football-exhibit-2026-07-18",
+      "title": "Palestinian Football Exhibit",
+      "organizer": "PYM Toronto",
+      "speaker_or_director": "PYM Toronto",
+      "date": "2026-07-18T00:00:00-04:00",
+      "date_text": "Saturday, July 18",
+      "time_text": "TBD",
+      "location_text": "Toronto, Ontario, Canada",
+      "venue": "Toronto, Ontario, Canada",
+      "type": "exhibition",
+      "secondary_types": [
+        "community"
+      ],
+      "topics": [
+        "FIFA",
+        "football",
+        "Palestine",
+        "Human Rights"
+      ],
+      "status": "needs-time-place",
+      "review_status": "queued",
+      "confidence": 60,
+      "source_id": "findaprotest-toronto",
+      "source_url": "https://www.findaprotest.info/canada/toronto",
+      "raw_excerpt": "Palestinian Football Exhibit | PYM Toronto | Saturday, July 18 | Time TBD | Toronto | Community, Palestine, Human Rights | addresses institutions like FIFA and Palestinian football culture.",
+      "scraped_at": "2026-07-09T03:48:47+00:00",
+      "attendance_confirmed": true,
+      "four_condition_test": {
+        "time_place": false,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "marginalia_url": null,
+      "parent_id": null,
+      "is_parent_festival": false,
+      "age_band": null
+    }
+  ]
+}

@@ -215,7 +215,43 @@
       ],
       "default": null,
       "description": "Stated entrant or attendee age band or eligibility. null when unrestricted."
+    },
+    "topics": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "Search and discovery topics extracted from title, excerpt, source, or curator fields. Topics support recall only; they do not change the event category."
+    },
+    "status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Optional provisional state for non-event watchlist leads, e.g. needs-time-place. Public events normally omit this."
+    },
+    "date_text": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Source date text preserved for provisional/watchlist leads."
+    },
+    "time_text": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Source time text preserved for provisional/watchlist leads."
+    },
+    "location_text": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Source location text preserved for provisional/watchlist leads."
     }
   },
-  "$updated": "2026-06-08"
+  "$updated": "2026-07-09"
 }

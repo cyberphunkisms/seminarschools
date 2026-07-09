@@ -15,11 +15,11 @@ const has = (s) => html.includes(s);
   'const CAT_SLUGS = { seminarschools: \'portfolio\' };',
   'summaryRaw = activeCats.map(function(c)',
   'tagMatches(active, x[2])',
-  'Portfolio-only PDF suppresses unrelated full credentials'
+  'seminarschools: { certs: null, edu: null }'
 ].forEach(token => { if(!has(token)) failures.push(`Missing modular CV invariant: ${token}`); });
 if (has('active = wasOnly ? new Set() : new Set([cat]);')) failures.push('Single-select module logic returned.');
 if (has('data-quick-view="current"')) failures.push('Old current-work quick view returned.');
 if (has('data-cat="seminarschools">Seminar Schools</button>')) failures.push('Seminar Schools standalone tab label returned.');
-if (!has('Portrait and map remain website-only')) failures.push('Website-only portrait/map rule missing from embedded audit copy.');
+if (!has('src="/img/saul.jpg"') || !has('class="cv-map-section"')) failures.push('Website portrait/map presence missing.');
 if (failures.length) { console.error('SAUL MODULAR CV CHECK FAILED'); failures.forEach(f => console.error(' - ' + f)); process.exit(1); }
-console.log('SAUL MODULAR CV CHECK PASSED — default broad, selected modules targeted, combinations additive, PDF follows selected modules.');
+console.log('SAUL MODULAR CV CHECK PASSED — default broad, selected focus areas targeted, combinations additive, export follows selected focus areas.');

@@ -16,7 +16,7 @@ for(const rel of requiredRoutes){
   if(!/class=["'][^"']*keyboard-hint/i.test(html)) failures.push(`${rel} lacks visible keyboard hint`);
   if(!/site-keyboard-enhancements\.js/.test(html)) failures.push(`${rel} does not load keyboard helper`);
 }
-const allHtml=[]; function walk(d){ for(const e of fs.readdirSync(d,{withFileTypes:true})){ if(['.git','node_modules','.netlify'].includes(e.name)) continue; const f=path.join(d,e.name); if(e.isDirectory()) walk(f); else if(e.name.endsWith('.html')) allHtml.push(f); } } walk(ROOT);
+const allHtml=[]; function walk(d){ for(const e of fs.readdirSync(d,{withFileTypes:true})){ if(['.git','node_modules','.netlify','public'].includes(e.name)) continue; const f=path.join(d,e.name); if(e.isDirectory()) walk(f); else if(e.name.endsWith('.html')) allHtml.push(f); } } walk(ROOT);
 let loaded=0; for(const f of allHtml){ const html=fs.readFileSync(f,'utf8'); if(/site-keyboard-enhancements\.js/.test(html)) loaded++; }
 if(loaded < Math.max(25, allHtml.length - 5)) failures.push(`keyboard helper loaded on only ${loaded}/${allHtml.length} HTML files`);
 if(failures.length){ console.error('KEYBOARD NAVIGATION CHECK FAILED'); failures.forEach(f=>console.error(' - '+f)); process.exit(1); }

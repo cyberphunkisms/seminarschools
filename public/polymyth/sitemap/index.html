@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sitemap. Seminar Schools.</title>
+<meta name="description" content="Visual map of every page across seminarschools.com. Browse by section: Leizu Academy, the Agora, lectures and marginalia, the polymyth framework, archetype archive.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://seminarschools.com/polymyth/sitemap/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2A1A14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --display: 'Fraunces', Georgia, serif;
+  --body: 'Newsreader', Georgia, serif;
+  --mono: 'JetBrains Mono', monospace;
+  --bg: #F5EBE4;
+  --fg: #2A1A14;
+  --fg-soft: #5A4A40;
+  --fg-fade: #8A7A70;
+  --accent: #B85638;
+  --rule: rgba(42, 26, 20, 0.18);
+  --rule-soft: rgba(42, 26, 20, 0.08);
+}
+:root.dark, :root[data-theme="dark"]{--bg:#1A1410;--fg:#F3EADD;--fg-soft:#C8B6A6;--fg-fade:#9A8678;--accent:#E0857A;--rule:rgba(243,234,221,0.2);--rule-soft:rgba(243,234,221,0.08);}
+@media (prefers-color-scheme: dark){ :root:not(.light){--bg:#1A1410;--fg:#F3EADD;--fg-soft:#C8B6A6;--fg-fade:#9A8678;--accent:#E0857A;--rule:rgba(243,234,221,0.2);--rule-soft:rgba(243,234,221,0.08);} }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+a.skip-link {
+  position: absolute; top: -40px; left: 0; background: var(--accent); color: var(--bg);
+  padding: 0.5rem 1rem; z-index: 100; font-family: var(--mono); font-size: 0.7rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+}
+a.skip-link:focus { top: 0; }
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.topbar .brand em { font-style: italic; color: var(--accent); }
+.topbar .right { color: var(--fg-soft); }
+
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 2rem 6rem;
+}
+
+.threshold { margin-bottom: 4rem; }
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 1px;
+  background: var(--accent);
+}
+h1 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 6.5vw, 5.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  font-variation-settings: "opsz" 96, "SOFT" 50;
+  margin-bottom: 1.5rem;
+}
+h1 em { color: var(--accent); font-style: italic; }
+.lede {
+  font-family: var(--body);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--fg-soft);
+  max-width: 38em;
+  line-height: 1.55;
+}
+
+/* ============================================================
+   THE TREE
+   ============================================================ */
+.tree { margin-top: 2rem; }
+
+.branch {
+  margin-bottom: 3.5rem;
+  position: relative;
+}
+.branch-head {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.65rem;
+  color: var(--fg);
+  margin-bottom: 0.3rem;
+  padding-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.branch-head em { color: var(--accent); font-style: italic; }
+.branch-head .marker {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+}
+.branch-head .marker::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.branch-meta {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-fade);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
+  margin-left: 1.7rem;
+}
+
+/* Nested list, tree connectors */
+.tree ul {
+  list-style: none;
+  padding-left: 1.3rem;
+  position: relative;
+}
+.tree > .branch > ul {
+  padding-left: 0.7rem;
+}
+.tree li {
+  position: relative;
+  padding: 0.7rem 0 0.7rem 1.8rem;
+  margin: 0;
+}
+/* Vertical line going down within the parent ul */
+.tree > .branch > ul::before,
+.tree li > ul::before {
+  content: "";
+  position: absolute;
+  left: 0.4rem;
+  top: 0;
+  bottom: 1.4rem;
+  width: 1px;
+  background: var(--rule);
+}
+/* Horizontal connector from line to node */
+.tree li::before {
+  content: "";
+  position: absolute;
+  left: 0.4rem;
+  top: 1.6rem;
+  width: 1.2rem;
+  height: 1px;
+  background: var(--rule);
+}
+/* Last child draws an L-shape, vertical only goes to top, then horizontal */
+.tree li:last-child::after {
+  content: "";
+  position: absolute;
+  left: 0.4rem;
+  top: 1.6rem;
+  bottom: 0;
+  width: 1px;
+  background: var(--bg);
+  z-index: 1;
+}
+
+/* Node content */
+.node {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+.node .name {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--fg);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s, color 0.15s;
+}
+.node a.name-link { display: inline; }
+.node a.name-link:hover .name {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.node .path {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--fg-fade);
+  letter-spacing: 0.04em;
+}
+.node .blurb {
+  font-family: var(--body);
+  font-size: 0.95rem;
+  color: var(--fg-soft);
+  font-style: italic;
+  flex-basis: 100%;
+  margin-top: 0.2rem;
+  line-height: 1.5;
+}
+.node .status {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.55rem;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.node .status.live { border-color: #4A7A4A; color: #4A7A4A; }
+.node .status.dev { border-color: var(--accent); color: var(--accent); }
+.node .status.framework { border-color: #5A6A8A; color: #5A6A8A; }
+.node .status.utility { border-color: #8A7A70; color: #8A7A70; opacity: 0.85; }
+
+/* Mobile */
+@media (max-width: 720px) {
+  .wrap { padding: 2.5rem 1.2rem 4rem; }
+  .tree li { padding-left: 1.3rem; }
+  .tree ul { padding-left: 0.6rem; }
+  .branch-head { font-size: 1.3rem; }
+  .branch-meta { font-size: 0.62rem; margin-left: 1.5rem; }
+  .node .path { display: none; }
+  .node .blurb { font-size: 0.88rem; }
+  .node .name { font-size: 1rem; }
+}
+
+.view-toggle {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.7rem 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.view-toggle .label { color: var(--fg-fade); }
+.view-toggle a {
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--fg-soft);
+  transition: all 0.15s;
+}
+.view-toggle a:hover { border-color: var(--accent); color: var(--accent); }
+.view-toggle a.current { border-color: var(--accent); color: var(--accent); background: rgba(184, 86, 56, 0.08); }
+@media (max-width: 720px) {
+  .view-toggle { padding: 0.6rem 1rem; font-size: 0.62rem; gap: 0.6rem; }
+}
+
+.foot-rich {
+  margin-top: 6rem;
+  padding: 3rem 2rem 2rem;
+  border-top: 1px solid var(--rule);
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--fg-fade);
+}
+.foot-row-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+}
+.foot-row-bottom a {
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent);
+}
+</style>
+<link rel="stylesheet" href="/css/mobile-overlay.css?v=cl91">
+<script src="/js/site.js?v=cl91" defer></script>
+<!-- Open Graph / Twitter Card meta -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/polymyth/sitemap/">
+<meta property="og:title" content="Site map, Seminar Schools">
+<meta property="og:description" content="Visual map of every page across seminarschools.com. Browse Leizu Academy, the Agora, lectures, polymyth framework, archetype archive.">
+<meta property="og:image" content="https://seminarschools.com/og-image.png">
+<meta property="og:site_name" content="Seminar Schools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Site map, Seminar Schools">
+<meta name="twitter:description" content="Visual map of every page across seminarschools.com. Browse Leizu Academy, the Agora, lectures, polymyth framework, archetype archive.">
+<meta name="twitter:image" content="https://seminarschools.com/og-image.png">
+<!-- /Open Graph -->
+<link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
+<link rel="stylesheet" href="/css/alive.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=cl91">
+</head>
+<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="archive-map">
+<!-- CL_SELF_ROUTE_NOTE -->
+<div class="route-note archive-route-note" role="note"><span class="route-note-kicker">Archive map</span>Route map for the polymyth materials.</div>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<nav class="view-toggle" aria-label="Sitemap view selector">
+  <span class="label">View:</span>
+  <a href="/polymyth/sitemap/" class="current">Tree</a>
+  <a href="/polymyth/sitemap/graph/">Graph</a>
+  <a href="/sitemap.xml">XML</a>
+  <span class="label" style="margin-left:auto"><a href="/polymyth/methodologylist/" style="border:none">← back to ml*</a></span>
+</nav>
+
+<header class="topbar">
+  <a href="/" class="brand">Seminar <em>Schools</em></a>
+  <span class="right">Sitemap</span>
+</header>
+
+<main class="wrap" id="main">
+
+  <div class="threshold">
+    <div class="eyebrow">A tree of the practice</div>
+    <h1>Site<em>map.</em></h1>
+    <p class="lede">Every page on the site, grouped by what it does. The practice has six branches. Each branch is a place to read or attend or contribute.</p>
+  </div>
+
+  <div class="tree">
+
+    <section class="branch" aria-labelledby="b-home">
+      <h2 class="branch-head" id="b-home"><span class="marker"></span>Home</h2>
+      <div class="branch-meta">The threshold &middot; root</div>
+      <ul>
+        <li>
+          <div class="node">
+            <a href="/" class="name-link"><span class="name">Seminar Schools</span></a>
+            <span class="path">/</span>
+            <span class="blurb">The landing page. Lists current projects, recent thinking, ways to enter.</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="branch" aria-labelledby="b-practice">
+      <h2 class="branch-head" id="b-practice"><span class="marker"></span>The <em>practice</em></h2>
+      <div class="branch-meta">Gatherings, installations, working notes</div>
+      <ul>
+        <li>
+          <div class="node">
+            <a href="/bb/" class="name-link"><span class="name">bookwormburrows landing</span></a>
+            <span class="path">/bb/</span>
+
+            <span class="blurb">The two-card entry point for students (make a wormcard) and teachers (read the operation file).</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/polymythseminars/" class="name-link"><span class="name">Calendar</span></a>
+            <span class="path">/polymythseminars/</span>
+            <span class="status live">Live</span>
+            <span class="blurb">Interactive month-grid calendar of seminars and festivals across the GO Transit network. Filter by category, pick events, export to iCal or PDF.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/polymythseminars/" class="name-link"><span class="name">Seminars</span></a>
+            <span class="path">/polymythseminars/</span>
+            <span class="status live">Live</span>
+            <span class="blurb">Lectures, panels, screenings with director Q&amp;A, philosophy cafes, scholar talks. Tested against the four-condition seminar form.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/agora/" class="name-link"><span class="name">The Agora</span></a>
+            <span class="path">/agora/</span>
+
+            <span class="blurb">A monthly outdoor philosophy gathering at Earl Bales Park. Read the text. Show up. Sit. Speak when you have something to say.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/agora/#sabachtan" class="name-link"><span class="name">Sabachtan Seminar</span></a>
+            <span class="path">/agora/#sabachtan</span>
+
+            <span class="blurb">A reading-and-discussion seminar on the cry from the cross and the gnostic tradition.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/ohm-dome/" class="name-link"><span class="name">Ohm Dome</span></a>
+            <span class="path">/ohm-dome/</span>
+
+            <span class="blurb">A geodesic public art installation that responds to the heart rates and breathing of the people inside it.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/marginalia/" class="name-link"><span class="name">Marginalia</span></a>
+            <span class="path">/marginalia/</span>
+
+            <span class="blurb">Essays on free public lectures around Toronto.</span>
+          </div>
+          <ul>
+            <li>
+              <div class="node">
+                <a href="/marginalia/example-review/" class="name-link"><span class="name">Example review</span></a>
+                <span class="path">/marginalia/example-review/</span>
+                <span class="blurb">A stub. The first real review will replace it.</span>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/nutrition/" class="name-link"><span class="name">Nutrition</span></a>
+            <span class="path">/nutrition/</span>
+
+            <span class="blurb">Notes on food, substrate, sovereignty. The bread-and-circus tradition extended.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/campaigns/" class="name-link"><span class="name">Campaigns</span></a>
+            <span class="path">/campaigns/</span>
+
+            <span class="blurb">Bookwormburrows campaigns. Each campaign is a dimensionally-rendered reading of a specific text or text-set.</span>
+          </div>
+          <ul>
+            <li>
+              <div class="node">
+                <a href="/campaigns/thank-you-mam/" class="name-link"><span class="name">Thank You M'am</span></a>
+                <span class="path">/campaigns/thank-you-mam/</span>
+                <span class="blurb">A pedagogical RPG campaign set in Harlem on September 20-22, 1958, built around Langston Hughes's short story. Forty-eight hours around a single canonical encounter, with the MLK stabbing at Blumstein's alive across the same window.</span>
+              </div>
+              <ul>
+                <li>
+                  <div class="node">
+                    <a href="/campaigns/thank-you-mam/pregame/" class="name-link"><span class="name">Pregame Arena</span></a>
+                    <span class="path">/campaigns/thank-you-mam/pregame/</span>
+                    <span class="blurb">DM-facing session-zero runbook. Pre-session checklist, opening script, dimension introduction, burrow-point protocol, first scene, Mrs Jones NPC quick-card.</span>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="branch" aria-labelledby="b-resources">
+      <h2 class="branch-head" id="b-resources"><span class="marker"></span>Resources &amp; <em>reading</em></h2>
+      <div class="branch-meta">Catalogs, the blog, the academy</div>
+      <ul>
+        <li>
+          <div class="node">
+            <a href="/teacherresources/" class="name-link"><span class="name">Teacher Resources</span></a>
+            <span class="path">/teacherresources/</span>
+            <span class="status live">Live</span>
+            <span class="blurb">A curated catalog of free teaching materials. 554 entries across 50 collections, K-12 plus IB plus AP across eleven subjects.</span>
+          </div>
+        </li>
+        <li><a href="/aitr/">AI Teacher Resources</a><br><span class="desc">Teaching games requiring an AI in the room. DENOTE and Monster Battle.</span></li>
+        <li>
+          <div class="node">
+            <a href="/florilegium/" class="name-link"><span class="name">The Florilegium</span></a>
+            <span class="path">/florilegium/</span>
+            <span class="status live">Live</span>
+            <span class="blurb">The aggregated reading feed across the practice. Every section's articles flower here. The florilegium of the Seminar Schools writing.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/leizu/" class="name-link"><span class="name">Leizu Academy</span></a>
+            <span class="path">/leizu/</span>
+            <span class="status live">Live</span>
+            <span class="blurb">Solo tutoring practice. Five subjects as peer pillars following the five-elements productive cycle.</span>
+          </div>
+          <ul>
+            <li>
+              <div class="node">
+                <a href="/leizu/teach/" class="name-link"><span class="name">Teach at Leizu</span></a>
+                <span class="path">/leizu/teach/</span>
+                <span class="blurb">For teachers who want a seminar to teach in. Eighty percent of session rate, small student loads, the seminar method.</span>
+              </div>
+            </li>
+            <li>
+              <div class="node">
+                <a href="/leizu/scholarship/" class="name-link"><span class="name">Scholarship</span></a>
+                <span class="path">/leizu/scholarship/</span>
+                <span class="blurb">Application page for need-based scholarship.</span>
+              </div>
+            </li>
+            <li>
+              <div class="node">
+                <a href="/leizu/donate/" class="name-link"><span class="name">The Mulberry Fund</span></a>
+                <span class="path">/leizu/donate/</span>
+                <span class="blurb">The Mulberry Fund supports Leizu Scholars: tuition-free education for students who can't afford regular fees.</span>
+              </div>
+            </li>
+            <li>
+              <div class="node">
+                <a href="/leizu/cloud/" class="name-link"><span class="name">Curriculum cloud</span></a>
+                <span class="path">/leizu/cloud/</span>
+                <span class="blurb">Leizu Academy curriculum in cloud-growth mode. Five subjects of the productive cycle expand into courses, routes, and cross-subject thematic threads.</span>
+              </div>
+            </li>
+            <li>
+              <div class="node">
+                <a href="/leizu/policies/" class="name-link"><span class="name">Policies</span></a>
+                <span class="path">/leizu/policies/</span>
+                <span class="blurb">Cancellations, rescheduling, no-shows, seminar gating.</span>
+              </div>
+            </li>
+            <li>
+              <div class="node">
+                <a href="/leizu/booking-success/" class="name-link"><span class="name">Booking confirmation</span></a>
+                <span class="path">/leizu/booking-success/</span>
+                <span class="status utility">Utility</span>
+                <span class="blurb">Post-payment landing page. Forwards to scheduling once payment is confirmed.</span>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="branch" aria-labelledby="b-framework">
+      <h2 class="branch-head" id="b-framework"><span class="marker"></span>The <em>framework</em></h2>
+      <div class="branch-meta">Polymyth working files</div>
+      <ul>
+        <li>
+          <div class="node">
+            <a href="/polymyth/methodologylist/" class="name-link"><span class="name">Methodology List</span></a>
+            <span class="path">/polymyth/methodologylist/</span>
+            <span class="status framework">Framework</span>
+            <span class="blurb">The methodology corpus, ml*. Methodology entries, gorgonification scanner, degorgonification strategies, sabachtan procedure, idiomary, citations.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/polymyth/modulecanon/" class="name-link"><span class="name">Module Canon</span></a>
+            <span class="path">/polymyth/modulecanon/</span>
+            <span class="status framework">Framework</span>
+            <span class="blurb">Teaching modules ,  mc*. OSSD course codes, Leizu view, curriculum maps.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/polymyth/bookwormburrows/" class="name-link"><span class="name">bookwormburrows</span></a>
+            <span class="path">/polymyth/bookwormburrows/</span>
+            <span class="status framework">Framework</span>
+            <span class="blurb">The pedagogical dimensional-traveling game ,  bb*. Rainbowsol is singular DM and founder.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/polymyth/campaigncodex/" class="name-link"><span class="name">Campaign Codex</span></a>
+            <span class="path">/polymyth/campaigncodex/</span>
+            <span class="status framework">Framework</span>
+            <span class="blurb">The campaign canon ,  cc*. D&amp;D-style OSSD English campaigns from ENG2D through ENG4U.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/polymyth/polymythdnd/" class="name-link"><span class="name">Polymythdnd compatibility landscape</span></a>
+            <span class="path">/polymyth/polymythdnd/</span>
+            <span class="status framework">Framework</span>
+            <span class="blurb">33 D&amp;D and OSR mechanics from 10 systems, ranked by polymyth-compatibility, mapped to four table functions. A reference for any DM building a richer, agency-respecting game.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/polymyth/concordance/" class="name-link"><span class="name">Concordance</span></a>
+            <span class="path">/polymyth/concordance/</span>
+            <span class="status framework">Framework</span>
+            <span class="blurb">Cross-corpus index of contentinternet vocabulary. Every polymyth term links here; every entry that uses the term is listed with context and source.</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="branch" aria-labelledby="b-instruments">
+      <h2 class="branch-head" id="b-instruments"><span class="marker"></span><em>Instruments</em></h2>
+      <div class="branch-meta">Specialized tools and tools-in-development</div>
+      <ul>
+        <li>
+          <div class="node">
+            <a href="/bookwormcard/" class="name-link"><span class="name">Bookwormcard</span></a>
+            <span class="path">/bookwormcard/</span>
+
+            <span class="blurb">The matrix-terminal character creator for bookwormburrows. Players answer questions and receive a printable wormcard.</span>
+          </div>
+          <ul>
+            <li>
+              <div class="node">
+                <a href="/bookwormcard/about/" class="name-link"><span class="name">About</span></a>
+                <span class="path">/bookwormcard/about/</span>
+                <span class="blurb">Project overview and rules.</span>
+              </div>
+            </li>
+            <li>
+              <div class="node">
+                <a href="/bookwormcard/pdf/" class="name-link"><span class="name">PDF download</span></a>
+                <span class="path">/bookwormcard/pdf/</span>
+                <span class="blurb">Print-ready bookwormcard PDF for the analog companion.</span>
+              </div>
+            </li>
+            <li>
+              <div class="node">
+                <a href="/bookwormcard/print/" class="name-link"><span class="name">In-browser print</span></a>
+                <span class="path">/bookwormcard/print/</span>
+                <span class="blurb">The Bookwormcard rendered for in-browser printing. A character punch card for bookwormburrows. Fill it as you read; scan it back into the matrix when full.</span>
+              </div>
+            </li>
+            <li>
+              <div class="node">
+                <a href="/bookwormcard/glossary/" class="name-link"><span class="name">Glossary</span></a>
+                <span class="path">/bookwormcard/glossary/</span>
+                <span class="blurb">The vocabulary of the bookwormburrows depth-engine.</span>
+              </div>
+            </li>
+            <li>
+              <div class="node">
+                <a href="/bookwormcard/success/" class="name-link"><span class="name">Transmission complete</span></a>
+                <span class="path">/bookwormcard/success/</span>
+                <span class="status utility">Utility</span>
+                <span class="blurb">Confirmation page after a wormcard submission is received.</span>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/aa/" class="name-link"><span class="name">aa</span></a>
+            <span class="path">/aa/</span>
+
+            <span class="blurb">The archive tool. A working space for citation-bearing exploration.</span>
+          </div>
+          <ul>
+            <li>
+              <div class="node">
+                <a href="/aa/cloud/" class="name-link"><span class="name">aa cloud</span></a>
+                <span class="path">/aa/cloud/</span>
+                <span class="blurb">The cloud index of the archive.</span>
+              </div>
+            </li>
+            <li>
+              <div class="node">
+                <a href="/aa/views/" class="name-link"><span class="name">aa views</span></a>
+                <span class="path">/aa/views/</span>
+                <span class="blurb">Five lenses over the archetype catalog: originator index, timeline, cross-tradition heatmap, co-occurrence weighting, tradition-pair affinity matrix.</span>
+              </div>
+            </li>
+            <li>
+              <div class="node">
+                <a href="/aa/editorial.html" class="name-link"><span class="name">Editorial Log</span></a>
+                <span class="path">/aa/editorial.html</span>
+                <span class="blurb">Editorial decisions log for the aa* archetype archive. Schema versions, routing decisions, refusals.</span>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="branch" aria-labelledby="b-about">
+      <h2 class="branch-head" id="b-about"><span class="marker"></span>About &amp; <em>site</em></h2>
+      <div class="branch-meta">The author and the map</div>
+      <ul>
+        <li>
+          <div class="node">
+            <a href="/saul/" class="name-link"><span class="name">Saul Nassau</span></a>
+            <span class="path">/saul/</span>
+            <span class="blurb">The founder. Philosopher, educator, builder of the practice.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/polymyth/sitemap/" class="name-link"><span class="name">Sitemap (tree)</span></a>
+            <span class="path">/polymyth/sitemap/</span>
+            <span class="blurb">This page. Hierarchical tree of every page across the practice.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/polymyth/sitemap/graph/" class="name-link"><span class="name">Sitemap (graph)</span></a>
+            <span class="path">/polymyth/sitemap/graph/</span>
+            <span class="blurb">Interactive force-directed graph showing every cross-page link between pages. Same coverage as the tree, different lens.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/sitemap.xml" class="name-link"><span class="name">Sitemap (XML)</span></a>
+            <span class="path">/sitemap.xml</span>
+            <span class="blurb">Machine-readable sitemap for search engines and crawlers.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/404.html" class="name-link"><span class="name">Not found</span></a>
+            <span class="path">/404.html</span>
+            <span class="blurb">The page that appears when something has been moved or never existed.</span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <a href="/leizu/intake/?source=portfolio" class="name-link"><span class="name">Leizu portfolio intake</span></a>
+            <span class="path">/leizu/intake/?source=portfolio</span>
+            <span class="status utility">Intake</span>
+            <span class="blurb">The portfolio route inside the canonical Leizu intake.</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="foot foot-rich">
+  <div class="foot-row-bottom">
+    <span>&copy; 2026 Seminar Schools &middot; Toronto</span>
+    <span><a href="/">&larr; Home</a></span>
+  </div>
+</footer>
+
+<script src="/js/mandala.js?v=cl91" defer></script>
+<script src="/js/indra.js?v=cl91" defer></script>
+<script src="/js/footer.js?v=cl91" defer></script>
+<script src="/js/theme.js?v=cl91" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
+</body>
+</html>

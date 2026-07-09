@@ -1,0 +1,27 @@
+name: Audit external links
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 10 * * 0"
+jobs:
+  link-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      EXTERNAL_LINK_CHECK_LIMIT: "350"
+      EXTERNAL_LINK_STRICT: "0"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+      - name: Live external link audit
+        run: node scripts/audit-external-links-live.js
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: external-link-live-report
+          path: scripts/reports/external-link-live-report.json

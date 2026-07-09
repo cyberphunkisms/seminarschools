@@ -10,12 +10,24 @@ const path = require('path');
 const cp = require('child_process');
 const os = require('os');
 const ROOT = path.resolve(__dirname, '..');
-const EXCLUDE = new Set(['node_modules','.git','.github']);
+function configuredPublishDir(){
+  const fp=path.join(ROOT,'netlify.toml');
+  if(!fs.existsSync(fp)) return '.';
+  const m=fs.readFileSync(fp,'utf8').match(/\bpublish\s*=\s*"([^"]+)"/);
+  return m ? m[1] : '.';
+}
+const PUBLISH_DIR = configuredPublishDir();
+const SITE_ROOT = path.resolve(ROOT, PUBLISH_DIR);
+if (PUBLISH_DIR !== '.' && !fs.existsSync(SITE_ROOT)) {
+  console.error(`SITE INTEGRITY GUARD: publish directory ${PUBLISH_DIR} is missing. Run node scripts/build-public-deploy.js first.`);
+  process.exit(1);
+}
+const EXCLUDE = new Set(['node_modules','.git','.github','public']);
 const errors=[];
 const warnings=[];
 const fail=(m)=>errors.push(m);
 const warn=(m)=>warnings.push(m);
-const rel=(p)=>path.relative(ROOT,p).replace(/\\/g,'/');
+const rel=(p)=>path.relative(SITE_ROOT,p).replace(/\\/g,'/');
 
 function walk(dir, out=[]) {
   for (const e of fs.readdirSync(dir,{withFileTypes:true})) {
@@ -26,7 +38,7 @@ function walk(dir, out=[]) {
   }
   return out;
 }
-const files=walk(ROOT);
+const files=walk(SITE_ROOT);
 const html=files.filter(f=>f.endsWith('.html'));
 const publicFiles=new Set(files.map(f=>'/'+rel(f)));
 const publicRoutes=new Set(['/']);
@@ -155,13 +167,13 @@ for(const f of html) {
 for(const p of ['/','/main/','/saul/','/leizu/','/leizu/intake/','/bb/','/bb/why/','/agora/','/teacherresources/','/polymyth/']) {
   if(!publicRoutes.has(p)) fail(`core route missing ${p}`);
 }
-const sitemap=fs.readFileSync(path.join(ROOT,'sitemap.xml'),'utf8');
+const sitemap=fs.readFileSync(path.join(SITE_ROOT,'sitemap.xml'),'utf8');
 for(const p of ['/','/main/','/saul/','/leizu/','/bb/why/']) {
   if(!sitemap.includes(`https://seminarschools.com${p}`)) fail(`sitemap missing ${p}`);
 }
 
 console.log('=== SITE INTEGRITY GUARD ===');
-console.log(`HTML pages: ${html.length} | JS files: ${jsFiles.length} | Redirect rules: ${redirects.length}`);
+console.log(`Publish dir: ${PUBLISH_DIR} | HTML pages: ${html.length} | JS files: ${jsFiles.length} | Redirect rules: ${redirects.length}`);
 if(warnings.length){console.log(`Warnings (${warnings.length}):`); warnings.forEach(x=>console.log('  WARN '+x));}
 if(errors.length){console.log(`Errors (${errors.length}):`); errors.forEach(x=>console.log('  FAIL '+x)); process.exit(1);}
 console.log('PASS — public routes, local links, assets, forms, anchors, and scripts are internally consistent.');

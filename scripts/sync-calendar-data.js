@@ -9,6 +9,8 @@ const path=require('path');
 const ROOT=path.resolve(__dirname,'..');
 const PUBLIC=path.join(ROOT,'polymythseminars','events.json');
 const MASTER=path.join(ROOT,'data','polymyth-seminar-events.json');
+const WATCHLIST_DATA=path.join(ROOT,'data','event-watchlist.json');
+const WATCHLIST_PUBLIC=path.join(ROOT,'polymythseminars','watchlist.json');
 const CALENDAR=path.join(ROOT,'polymythseminars','index.html');
 const MAIN=path.join(ROOT,'main','index.html');
 const DAY=new Date().toISOString().slice(0,10).replaceAll('-','');
@@ -33,7 +35,20 @@ const encoded=JSON.stringify(fallback).replace(/<\//g,'<\\/');
 const fallbackPattern=/(<script id="events-fallback" type="application\/json">).*?(<\/script>)/s;
 if(!fallbackPattern.test(html)) throw new Error('events-fallback injection point is missing');
 html=html.replace(fallbackPattern,(_,a,b)=>a+encoded+b);
+
+let watchlist={generated_at:new Date().toISOString(),count:0,rule:'watchlist only: not published as calendar events until time/place is confirmed',items:[]};
+if(fs.existsSync(WATCHLIST_DATA)) {
+  watchlist=JSON.parse(read(WATCHLIST_DATA));
+  if(!Array.isArray(watchlist.items)) watchlist.items=[];
+  watchlist.count=watchlist.items.length;
+}
+write(WATCHLIST_PUBLIC, JSON.stringify(watchlist,null,2)+'\n');
+const watchEncoded=JSON.stringify(watchlist).replace(/<\//g,'<\\/');
+const watchPattern=/(<script id="watchlist-fallback" type="application\/json">).*?(<\/script>)/s;
+if(!watchPattern.test(html)) throw new Error('watchlist-fallback injection point is missing');
+html=html.replace(watchPattern,(_,a,b)=>a+watchEncoded+b);
 html=html.replace(/events\.json\?v=\d+/g,`events.json?v=${DAY}`);
+html=html.replace(/watchlist\.json\?v=\d+/g,`watchlist.json?v=${DAY}`);
 write(CALENDAR,html);
-if(fs.existsSync(MAIN)) write(MAIN,read(MAIN).replace(/events\.json\?v=\d+/g,`events.json?v=${DAY}`));
-console.log(`CALENDAR DATA SYNC — ${data.events.length} events, fallback and mirror refreshed.`);
+if(fs.existsSync(MAIN)) write(MAIN,read(MAIN).replace(/events\.json\?v=\d+/g,`events.json?v=${DAY}`).replace(/watchlist\.json\?v=\d+/g,`watchlist.json?v=${DAY}`));
+console.log(`CALENDAR DATA SYNC — ${data.events.length} events, ${watchlist.items.length} watchlist leads, fallbacks and mirrors refreshed.`);

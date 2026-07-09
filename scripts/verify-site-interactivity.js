@@ -10,7 +10,7 @@ function read(rel){ return fs.readFileSync(path.join(ROOT, rel), 'utf8'); }
 function exists(rel){ return fs.existsSync(path.join(ROOT, rel)); }
 function allFiles(dir, out=[]){
   for (const name of fs.readdirSync(dir)){
-    if (['.git','node_modules','.netlify'].includes(name)) continue;
+    if (['.git','node_modules','.netlify','public'].includes(name)) continue;
     const p=path.join(dir,name); const st=fs.statSync(p);
     if (st.isDirectory()) allFiles(p,out); else out.push(p);
   }

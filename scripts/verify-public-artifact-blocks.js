@@ -6,7 +6,6 @@ const ROOT = path.resolve(__dirname, '..');
 const redirects = fs.existsSync(path.join(ROOT, '_redirects')) ? fs.readFileSync(path.join(ROOT, '_redirects'), 'utf8') : '';
 const toml = fs.existsSync(path.join(ROOT, 'netlify.toml')) ? fs.readFileSync(path.join(ROOT, 'netlify.toml'), 'utf8') : '';
 const failures = [];
-function esc(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 function escRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 function hasRedirectsBlock(pattern) {
   return new RegExp('^' + escRegex(pattern) + '\\s+/404\\.html\\s+404!', 'm').test(redirects);
@@ -19,14 +18,21 @@ function hasBlock(pattern) { return hasRedirectsBlock(pattern) || hasTomlBlock(p
 function requireBlock(pattern, why) {
   if (!hasBlock(pattern)) failures.push(`${pattern} is not forced to 404 (${why})`);
 }
+function publishDir() {
+  const m = toml.match(/\bpublish\s*=\s*"([^"]+)"/);
+  return m ? m[1] : '.';
+}
+const publish = publishDir();
+if (publish !== 'public') failures.push(`netlify.toml publish directory is "${publish}"; expected "public" so full zip root stays archive/operator and only /public deploys.`);
+if (!/build-public-deploy\.js/.test(toml)) failures.push('netlify.toml build command does not generate the public publish directory.');
 const rootFiles = fs.readdirSync(ROOT, { withFileTypes: true })
   .filter(d => d.isFile())
   .map(d => d.name);
-const rootArtifactRe = /(?:AUDIT|REPORT|PATCH|VERIFY|VERIFY_ALL|OUTPUT|SETUP|DEPLOY|V10|MEANINGLIB|CL_SUGGESTION|PRIVATE|SECRET|TOKEN)/i;
+const rootArtifactRe = /(?:AUDIT|REPORT|PATCH|VERIFY|VERIFY_ALL|OUTPUT|SETUP|DEPLOY|V10|MEANINGLIB|CL_SUGGESTION|PRIVATE|SECRET|TOKEN|CRITIQUE|DASHBOARD|HANDOFF|RELEASE)/i;
 for (const name of rootFiles) {
   const publicPath = '/' + name;
   if (/\.(?:bat|ps1|py)$/i.test(name)) requireBlock(publicPath, 'root executable/operator file');
-  if (rootArtifactRe.test(name) && /\.(?:md|json|txt|log)$/i.test(name)) {
+  if (rootArtifactRe.test(name) && /\.(?:md|json|txt|log|csv)$/i.test(name)) {
     requireBlock(publicPath, 'root audit/report/operator artifact');
   }
 }
@@ -43,9 +49,27 @@ for (const pattern of [
   '/netlify.toml', '/_redirects', '/_headers',
   '/CHARTER.txt'
 ]) requireBlock(pattern, 'tooling/private path');
+// If /public exists locally, scan it as the true deploy surface.
+const pubRoot = path.join(ROOT, 'public');
+if (fs.existsSync(pubRoot)) {
+  const bannedTop = ['scripts','data','hf_export','netlify','.github','package.json','package-lock.json','netlify.toml','SETUP.md'];
+  for (const p of bannedTop) if (fs.existsSync(path.join(pubRoot, p))) failures.push(`public/${p} reached the publish directory`);
+  const opRe = rootArtifactRe;
+  function walk(dir) {
+    for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, ent.name);
+      const rel = path.relative(pubRoot, full).replace(/\\/g, '/');
+      if (ent.isDirectory()) walk(full);
+      else if (ent.isFile() && !rel.startsWith('polymyth/') && !rel.startsWith('aa/') && !rel.startsWith('bb/') && !rel.startsWith('bookwormcard/')) {
+        if (ent.name !== 'site-release.json' && opRe.test(ent.name) && /\.(?:md|json|txt|log|csv)$/i.test(ent.name)) failures.push(`public/${rel} looks like an operator/audit artifact`);
+      }
+    }
+  }
+  walk(pubRoot);
+}
 if (failures.length) {
   console.error('PUBLIC ARTIFACT BLOCK CHECK FAILED');
   failures.forEach(f => console.error(' - ' + f));
   process.exit(1);
 }
-console.log('PUBLIC ARTIFACT BLOCK CHECK PASSED — root operator artifacts, bare tooling dirs, and wildcard tooling paths are forced to 404.');
+console.log('PUBLIC ARTIFACT BLOCK CHECK PASSED — full zip can keep source/operator files while Netlify publishes only /public, with root fallback blocks in place.');

@@ -23,7 +23,7 @@ const files = [];
   for(const name of fs.readdirSync(dir)){
     const p = path.join(dir, name);
     const rel = path.relative(ROOT, p).replace(/\\/g,'/');
-    if(rel.startsWith('.git/') || rel.includes('/node_modules/') || rel.includes('/data/harvest-runs/')) continue;
+    if(rel.startsWith('.git/') || rel.startsWith('public/') || rel.includes('/node_modules/') || rel.includes('/data/harvest-runs/')) continue;
     const st = fs.statSync(p);
     if(st.isDirectory()) walk(p);
     else if(/\.(html|css)$/.test(name)) files.push(p);

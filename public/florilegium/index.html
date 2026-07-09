@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Florilegium | Seminar Schools Writing &amp; Commentary</title>
+<link rel="canonical" href="https://seminarschools.com/florilegium/">
+<meta name="description" content="Articles from across Seminar Schools. Lecture commentary, framework analyses, nutrition writing, and other pieces from the practice. Every article also lives in its canonical section.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/florilegium/">
+<meta property="og:title" content="Florilegium, Seminar Schools">
+<meta property="og:description" content="Articles from across the practice. Lecture commentary, framework analyses, nutrition writing, and other pieces. Every article also lives in its canonical section.">
+<meta property="og:image" content="https://seminarschools.com/og-image.png">
+<meta property="og:site_name" content="Seminar Schools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Florilegium, Seminar Schools">
+<meta name="twitter:description" content="Articles from across the practice.">
+<meta name="twitter:image" content="https://seminarschools.com/og-image.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2D3F26">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=cl91">
+<script src="/js/mandala.js?v=cl91" defer></script>
+<script src="/js/site.js?v=cl91" defer></script>
+<style>
+/* Project-specific theme override. Dark mode for the florilegium because
+   the gatherer-of-flowers background image runs near-black. */
+:root {
+  --display: 'Yeseva One', Georgia, serif;
+  --body: 'Lora', Georgia, serif;
+  --sans: 'Lora', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --accent: #C08858;
+  --accent-rgb: 192,136,88;
+  --accent-line: rgba(192,136,88,0.4);
+  --bg: #0E1110;
+  --bg-soft: #1A1F1C;
+  --bg-rgb: 14,17,16;
+  --fg: #E8DEC7;
+  --fg-soft: #C8BCA5;
+  --fg-fade: rgba(232,222,199,0.55);
+  --rule: rgba(232,222,199,0.18);
+  --rule-soft: rgba(232,222,199,0.08);
+  --muted: rgba(232,222,199,0.5);
+  --geo-density: 0.04;
+  --geo2-density: 0.02;
+}
+
+
+  
+  body {
+    background: var(--bg) url('/florilegium/bg.jpg') center center / cover no-repeat fixed;
+    color: var(--fg);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.65;
+    min-height: 100vh;
+    position: relative;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(14,17,16,0.55) 0%, rgba(14,17,16,0.78) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body > * { position: relative; z-index: 1; }
+  .skip-link {
+    position: absolute; top: -100px; left: 0;
+    background: var(--accent); color: white;
+    padding: 0.5rem 1rem; z-index: 100;
+  }
+  .skip-link:focus { top: 0; }
+  .wrap { max-width: 56rem; margin: 0 auto; padding: 0 1.5rem; }
+  .topbar {
+    border-bottom: 1px solid var(--rule);
+    padding: 1rem 0;
+    margin-bottom: 3rem;
+    display: flex; justify-content: space-between;
+    font-family: var(--mono); font-size: 0.7rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--fg-fade);
+  }
+  .topbar a { color: inherit; text-decoration: none; }
+  .topbar a:hover { color: var(--accent); }
+  .eyebrow {
+    font-family: var(--mono); font-size: 0.7rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  h1 {
+    font-family: var(--display); font-size: 3.5rem;
+    font-weight: 500; line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.25rem;
+  }
+  .lede {
+    font-family: var(--display); font-size: 1.4rem;
+    font-style: italic; line-height: 1.5;
+    color: var(--fg-soft);
+    max-width: 36rem;
+    margin-bottom: 1rem;
+  }
+  .curatorial {
+    font-family: var(--body); font-size: 0.95rem;
+    color: var(--fg-soft); margin-bottom: 2rem;
+    max-width: 56rem; line-height: 1.55;
+    padding-left: 0.95rem;
+    border-left: 2px solid var(--rule);
+  }
+  .feed { margin-top: 2rem; }
+  .post-list { list-style: none; padding: 0; margin: 0; }
+  .post-entry {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .post-entry:first-child { padding-top: 0; }
+  .post-entry:last-child { border-bottom: none; }
+  .post-meta {
+    font-family: var(--mono); font-size: 0.7rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg-fade);
+    margin-bottom: 0.5rem;
+    display: flex; gap: 0.85rem; align-items: center; flex-wrap: wrap;
+  }
+  .post-date { color: var(--fg-soft); }
+  .post-section {
+    color: var(--accent); border: 1px solid var(--accent-line);
+    padding: 0.15rem 0.55rem; border-radius: 999px;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .post-section:hover {
+    background: var(--accent); color: white; border-color: var(--accent);
+  }
+  .post-title {
+    font-family: var(--display); font-size: 1.7rem;
+    font-weight: 500; line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .post-title a {
+    color: var(--fg); text-decoration: none;
+  }
+  .post-title a:hover { color: var(--accent); }
+  .post-excerpt {
+    font-size: 1rem; color: var(--fg-soft);
+    line-height: 1.6;
+    max-width: 40rem;
+  }
+  .empty {
+    padding: 4rem 0; text-align: center;
+    color: var(--fg-fade);
+    font-family: var(--display); font-style: italic;
+    font-size: 1.2rem;
+  }
+  .error {
+    padding: 2rem 0; color: var(--accent);
+    font-family: var(--mono); font-size: 0.85rem;
+  }
+  .colophon {
+    margin: 4rem 0 2rem; padding-top: 2rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono); font-size: 0.7rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg-fade); text-align: center;
+  }
+  @media (max-width: 600px) {
+    h1 { font-size: 2.4rem; }
+    .lede { font-size: 1.15rem; }
+    .post-title { font-size: 1.35rem; }
+  }
+
+
+/* readout layout ported from homepage (unscoped) so threshold-coords labels and values do not collapse */
+.threshold-coords .row{display:grid;grid-template-columns:7rem 1fr;gap:1.2rem;padding:.6rem 0;border-bottom:1px solid var(--rule,rgba(0,0,0,.15));align-items:baseline}
+.threshold-coords .lbl{font-family:var(--sans,var(--body,sans-serif));font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent,inherit);font-weight:500}
+.threshold-coords .val{font-family:var(--mono,monospace);font-size:.78rem;color:var(--fg,inherit);opacity:.85;letter-spacing:.04em}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "The Florilegium",
+  "description": "An aggregated reading feed across the practice. Lecture commentary, framework analyses, nutrition writing, and more.",
+  "url": "https://seminarschools.com/florilegium/",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Seminar Schools",
+    "url": "https://seminarschools.com"
+  }
+}
+</script>
+<link rel="stylesheet" href="/css/mobile-overlay.css?v=cl91">
+<link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
+<style id="accent-identity">/* pressed-flower rose */:root{--accent:#C2628E;--accent-rgb:194,98,142;}</style>
+<link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Petrona:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style id="type-identity">/* a delicate didone pressed like a flower, over a quiet literary text face */
+:root{--display:'Gilda Display', Georgia, serif;--body:'Petrona', Georgia, serif;}
+::selection{background:rgba(194,98,142,0.22);}
+</style>
+<link rel="stylesheet" href="/css/alive.css?v=cl91">
+</head>
+<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="archive">
+<!-- CL_SELF_ROUTE_NOTE -->
+<div class="route-note archive-route-note" role="note"><span class="route-note-kicker">Archive</span>Collected passages and reading traces.</div>
+<style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
+<div class="descent-marker" id="marker">
+  <span class="roman">i</span>
+  <span class="name">Threshold</span>
+  <div class="ticks">
+    <div class="tick active"></div><div class="tick"></div><div class="tick"></div>
+    <div class="tick"></div><div class="tick"></div><div class="tick"></div>
+  </div>
+</div>
+<a class="skip-link" href="#feed">Skip to articles</a>
+<div class="wrap">
+
+<header class="topbar" id="topbar">
+  <a href="/" class="brand"><span class="seal" aria-hidden="true"></span>Seminar <em>Schools</em></a>
+  <span class="right">Florilegium</span>
+</header>
+
+<main>
+<nav class="project-nav" aria-label="Projects"><a href="/">Home</a><a href="/polymythseminars/">polymythcalendar</a><a href="/agora/">Agora</a><a href="/marginalia/">Marginalia</a><a href="/florilegium/" class="current">Florilegium</a><a href="/main/#community">All projects →</a></nav>
+
+
+  <div class="eyebrow">A reading feed</div>
+<h1 class="titanic words">The <em>Florilegium.</em></h1>
+<p class="lede">Articles from across the practice. Each one also lives in the section it came from.</p>
+  <div class="threshold-coords reveal delay-3">
+    <div class="row"><span class="lbl">Type</span><span class="val">Aggregated reading feed.</span></div>
+    <div class="row"><span class="lbl">Sections</span><span class="val">Marginalia, nutrition, agora, sabachtan, ohm-dome.</span></div>
+    <div class="row"><span class="lbl">Updated</span><span class="val">As pieces appear in their canonical sections.</span></div>
+  </div>
+
+<p class="micro" style="margin: 1.5rem 0 1rem; text-align: center;">Subscribe via <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="prompt">&gt;</span>open_transmission<span class="cursor">_</span></a> (a public reading doc) for new articles across the practice.</p>
+
+<p class="curatorial">A piece appears here when it is genuinely an article. A writer's piece with a date and a position, not a catalog entry or a framework reference. Lecture commentary, framework analyses, nutrition writing, bookwormburrows session notes, reviews. Pieces stay in their canonical section so the section reads as itself. They aggregate here so the writing reads as a body of work.</p>
+
+<section class="feed" id="feed" aria-live="polite">
+  <div class="tier-label-vertical"><span class="num">ii</span><span class="label">Feed</span></div>
+  <ul class="post-list" id="post-list">
+    <li class="empty" id="empty-state">No pieces yet. The feed begins when the first canonical-section piece is tagged for cross-listing here.</li>
+  </ul>
+</section>
+
+<div class="colophon">Seminar Schools &middot; Toronto &middot; 2026</div>
+
+</main>
+
+</div>
+<script src="/js/theme.js?v=cl91" defer></script>
+<script src="/js/indra.js?v=cl91" defer></script>
+<script src="/js/footer.js?v=cl91" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js"></script>
+</body>
+</html>

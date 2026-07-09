@@ -194,9 +194,11 @@ function resourceMeta(entry, data) {
 function resourceDescription(entry, category, group, data) {
   const note = cleanSentence(entry.notes || entry.blurb || '', 300);
   if (note) return note;
-  const fields = resourceMeta(entry, data);
-  const audience = entry.grade && entry.grade !== 'all' ? `for grades ${entry.grade}` : 'for classroom use';
-  return `${entry.title} is a ${data.formats[entry.format] || 'teaching'} resource in the ${category.title} collection, selected ${audience}${fields.length ? ' and organized by ' + fields.slice(0, 3).join(', ') : ''}.`;
+  const fields = resourceMeta(entry, data).filter(Boolean);
+  const audience = entry.grade && entry.grade !== 'all' ? `Grades ${entry.grade}` : 'Multi-grade classroom use';
+  const format = data.formats[entry.format] || entry.format || 'Teaching resource';
+  const parts = [format, audience, ...fields.filter(x => x !== format && x !== audience)].slice(0, 4);
+  return `${entry.title}. ${parts.join(' · ')}.`;
 }
 function resourceRoute(group, category, entry, i) {
   const stable = hash(`${group.id}|${category.id}|${entry.title}|${entry.url}|${i}`);
@@ -217,10 +219,10 @@ function renderResourceCatalogRoot(data) {
     const cats = group.categories.map(category => {
       const cards = category.entries.map(entry => staticResourceCard(entry, category, group, data, globalIndex++)).join('\n');
       const catRoute = `/teacherresources/${slug(group.id)}/${slug(category.id)}/`;
-      return `<details class="category" id="${attr(category.id)}" data-category-id="${attr(category.id)}"><summary class="category-head"><span class="caret" aria-hidden="true">›</span><span class="cat-headtext"><span class="cat-kicker">${esc(category.kicker || 'Collection')}</span><span class="cat-title">${esc(category.title)}</span></span><span class="cat-count" data-cat-count="${attr(category.id)}">${category.entries.length} items</span></summary><div class="cat-body"><p class="cat-blurb">${esc(category.blurb || `A curated ${category.title.toLowerCase()} collection.`)}</p><p class="seo-collection-link"><a href="${catRoute}">Browse ${esc(category.title)} as a static collection page</a></p><div class="entries">${cards}</div></div></details>`;
+      return `<details class="category" id="${attr(category.id)}" data-category-id="${attr(category.id)}"><summary class="category-head"><span class="caret" aria-hidden="true">›</span><span class="cat-headtext"><span class="cat-kicker">${esc(category.kicker || 'Collection')}</span><span class="cat-title">${esc(category.title)}</span></span><span class="cat-count" data-cat-count="${attr(category.id)}">${category.entries.length} items</span></summary><div class="cat-body"><p class="cat-blurb">${esc(category.blurb || 'Curated classroom resources.')}</p><p class="seo-collection-link"><a href="${catRoute}">Open ${esc(category.title)}</a></p><div class="entries">${cards}</div></div></details>`;
     }).join('\n');
     const groupRoute = `/teacherresources/${slug(group.id)}/`;
-    return `<details class="group" id="grp-${attr(group.id)}" data-group-id="${attr(group.id)}"><summary class="group-head"><span class="caret-g" aria-hidden="true">›</span><span class="grp-headtext"><span class="grp-kicker">${esc(group.kicker || 'Teacher resources')}</span><span class="grp-title">${esc(group.title)}</span></span><span class="grp-count" data-grp-count="${attr(group.id)}"><span class="grp-count-sec">${group.categories.length} collections</span><span class="grp-count-ent">${count} items</span></span></summary><div class="grp-body"><p class="seo-collection-link"><a href="${groupRoute}">Browse ${esc(group.title)} as a static collection page</a></p>${cats}</div></details>`;
+    return `<details class="group" id="grp-${attr(group.id)}" data-group-id="${attr(group.id)}"><summary class="group-head"><span class="caret-g" aria-hidden="true">›</span><span class="grp-headtext"><span class="grp-kicker">${esc(group.kicker || 'Teacher resources')}</span><span class="grp-title">${esc(group.title)}</span></span><span class="grp-count" data-grp-count="${attr(group.id)}"><span class="grp-count-sec">${group.categories.length} collections</span><span class="grp-count-ent">${count} items</span></span></summary><div class="grp-body"><p class="seo-collection-link"><a href="${groupRoute}">Open ${esc(group.title)}</a></p>${cats}</div></details>`;
   }).join('\n');
 }
 function injectResourceRoot(data) {
@@ -251,29 +253,29 @@ function generateResourcePages(data) {
     const groupRoute = `/teacherresources/${slug(group.id)}/`;
     const groupUrl = routeUrl(groupRoute);
     const groupCount = group.categories.reduce((n,c)=>n+c.entries.length,0);
-    const groupDesc = `${groupCount} curated ${group.title.toLowerCase()} resources for teachers, organized into practical collections and grade-aware resource pages.`;
+    const groupDesc = `${groupCount} resources for classroom planning, source selection, and lesson design.`;
     const groupCards = group.categories.map(cat => {
       const catRoute = `/teacherresources/${slug(group.id)}/${slug(cat.id)}/`;
       const n = cat.entries.length;
       return `<a class="resource-card" href="${catRoute}"><h3>${esc(cat.title)}</h3><p>${esc(cat.blurb || cat.kicker || 'Curated classroom resources.')}</p><div class="resource-meta">${n} resources</div></a>`;
     }).join('\n');
-    const groupBody = `<p class="breadcrumbs"><a href="/">Seminar Schools</a> / <a href="/teacherresources/">Teacher Resources</a> / ${esc(group.title)}</p><p class="eyebrow">Teacher resources</p><h1>${esc(group.title)} Teaching Resources</h1><p class="lede">${esc(group.kicker || groupDesc)}</p><p>${esc(groupDesc)}</p><div class="resource-grid">${groupCards}</div><p><a class="button secondary" href="/teacherresources/">Browse the full Teacher Resources catalog</a></p>`;
-    const groupSchema = [{ '@context':'https://schema.org','@type':'CollectionPage','@id':groupUrl+'#collection',url:groupUrl,name:`${group.title} Teaching Resources`,description:groupDesc,numberOfItems:groupCount }];
-    write(sourcePathFor(groupRoute), htmlPage({ title:`${group.title} Teaching Resources | Seminar Schools`, description:cleanSentence(groupDesc), canonical:groupUrl, crumbs:[...topCrumbs,{name:group.title,url:groupUrl}], body:groupBody, schema:groupSchema }));
+    const groupBody = `<p class="breadcrumbs"><a href="/">Seminar Schools</a> / <a href="/teacherresources/">Teacher Resources</a> / ${esc(group.title)}</p><p class="eyebrow">Teacher resources</p><h1>${esc(group.title)}</h1><p class="lede">${esc(group.kicker || groupDesc)}</p><div class="resource-grid">${groupCards}</div><p><a class="button secondary" href="/teacherresources/">All teacher resources</a></p>`;
+    const groupSchema = [{ '@context':'https://schema.org','@type':'CollectionPage','@id':groupUrl+'#collection',url:groupUrl,name:group.title,description:groupDesc,numberOfItems:groupCount }];
+    write(sourcePathFor(groupRoute), htmlPage({ title:`${group.title} | Teacher Resources | Seminar Schools`, description:cleanSentence(groupDesc), canonical:groupUrl, crumbs:[...topCrumbs,{name:group.title,url:groupUrl}], body:groupBody, schema:groupSchema }));
     all.push({route:groupRoute, url:groupUrl, kind:'group'});
 
     for (const category of group.categories) {
       const catRoute = `/teacherresources/${slug(group.id)}/${slug(category.id)}/`;
       const catUrl = routeUrl(catRoute);
-      const catDesc = `${category.entries.length} ${category.title.toLowerCase()} resources for teachers${group.title ? ` in the ${group.title} collection` : ''}.`;
+      const catDesc = `${category.entries.length} resources in ${group.title}.`;
       const cards = category.entries.map(entry => {
         const route = resourceRoute(group, category, entry, globalIndex++);
         const d = resourceDescription(entry, category, group, data);
         return `<a class="resource-row" href="${route}"><h2>${esc(entry.title)}</h2>${entry.author ? `<p>${esc(entry.author)}</p>` : ''}<div class="resource-meta">${esc(resourceMeta(entry,data).join(' · '))}</div><p>${esc(cleanSentence(d, 260))}</p></a>`;
       }).join('\n');
-      const body = `<p class="breadcrumbs"><a href="/">Seminar Schools</a> / <a href="/teacherresources/">Teacher Resources</a> / <a href="${groupRoute}">${esc(group.title)}</a> / ${esc(category.title)}</p><p class="eyebrow">${esc(group.title)}</p><h1>${esc(category.title)} Resources for Teachers</h1><p class="lede">${esc(category.blurb || category.kicker || catDesc)}</p><p>${esc(catDesc)}</p><div class="resource-list">${cards}</div><p><a class="button secondary" href="${groupRoute}">Back to ${esc(group.title)}</a></p>`;
-      const listSchema = [{ '@context':'https://schema.org','@type':'CollectionPage','@id':catUrl+'#collection',url:catUrl,name:`${category.title} Resources for Teachers`,description:catDesc,numberOfItems:category.entries.length }];
-      write(sourcePathFor(catRoute), htmlPage({ title:`${category.title} Resources for Teachers | Seminar Schools`,description:cleanSentence(catDesc),canonical:catUrl,crumbs:[...topCrumbs,{name:group.title,url:groupUrl},{name:category.title,url:catUrl}],body,schema:listSchema }));
+      const body = `<p class="breadcrumbs"><a href="/">Seminar Schools</a> / <a href="/teacherresources/">Teacher Resources</a> / <a href="${groupRoute}">${esc(group.title)}</a> / ${esc(category.title)}</p><p class="eyebrow">${esc(group.title)}</p><h1>${esc(category.title)}</h1><p class="lede">${esc(category.blurb || category.kicker || catDesc)}</p><div class="resource-list">${cards}</div><p><a class="button secondary" href="${groupRoute}">Back to ${esc(group.title)}</a></p>`;
+      const listSchema = [{ '@context':'https://schema.org','@type':'CollectionPage','@id':catUrl+'#collection',url:catUrl,name:category.title,description:catDesc,numberOfItems:category.entries.length }];
+      write(sourcePathFor(catRoute), htmlPage({ title:`${category.title} | Teacher Resources | Seminar Schools`,description:cleanSentence(catDesc),canonical:catUrl,crumbs:[...topCrumbs,{name:group.title,url:groupUrl},{name:category.title,url:catUrl}],body,schema:listSchema }));
       all.push({route:catRoute, url:catUrl, kind:'category'});
     }
   }
@@ -288,7 +290,7 @@ function generateResourcePages(data) {
         const catRoute = `/teacherresources/${slug(group.id)}/${slug(category.id)}/`;
         const meta = resourceMeta(entry, data);
         const desc = resourceDescription(entry, category, group, data);
-        const availability = entry.url ? `<p><a class="button" href="${attr(entry.url)}" target="_blank" rel="noopener noreferrer">Open the resource${entry.host ? ` on ${esc(entry.host)}` : ''}</a></p>` : '';
+        const availability = entry.url ? `<p><a class="button" href="${attr(entry.url)}" target="_blank" rel="noopener noreferrer">Open resource${entry.host ? ` on ${esc(entry.host)}` : ''}</a></p>` : '';
         const sourceHost = entry.host || (entry.url ? (()=>{try{return new URL(entry.url, SITE).hostname.replace(/^www\./,'')}catch(e){return ''}})() : '');
         const titleQualifier = entry.author || sourceHost || (entry.grade && entry.grade !== 'all' ? `Grades ${entry.grade}` : category.title);
         const seoDescription = cleanSentence(`${entry.title} for ${category.title}. ${desc}${sourceHost ? ` Source: ${sourceHost}.` : ''}`, 300);
@@ -300,8 +302,8 @@ function generateResourcePages(data) {
           ['Curriculum', data.curricula[entry.curriculum] || entry.curriculum || 'Cross-curricular'],
           ['Publisher or host', sourceHost || 'Source link supplied']
         ].map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join('');
-        const review = entry.notes || entry.blurb || `Seminar Schools includes this resource in the ${category.title} collection because it offers a clearly identified ${data.formats[entry.format] || 'teaching'} format for ${entry.grade && entry.grade !== 'all' ? `grades ${entry.grade}` : 'classroom use'}. The catalog record identifies its source, subject area, and curriculum information so teachers can judge fit before opening the original resource.`;
-        const body = `<p class="breadcrumbs"><a href="/">Seminar Schools</a> / <a href="/teacherresources/">Teacher Resources</a> / <a href="${groupRoute}">${esc(group.title)}</a> / <a href="${catRoute}">${esc(category.title)}</a></p><p class="eyebrow">Curated teaching resource</p><h1>${esc(entry.title)}</h1>${entry.author ? `<p class="lede">By ${esc(entry.author)}</p>` : ''}<div class="definition"><dl>${details}</dl></div><h2>Why this resource is included</h2><p>${esc(review)}</p>${availability}<p><a class="button secondary" href="${catRoute}">Back to ${esc(category.title)}</a></p>`;
+        const review = entry.notes || entry.blurb || `Use this as a ${data.formats[entry.format] || 'teaching'} resource for ${entry.grade && entry.grade !== 'all' ? `grades ${entry.grade}` : 'classroom use'}. The record keeps subject, level, and source visible before you open the original link.`;
+        const body = `<p class="breadcrumbs"><a href="/">Seminar Schools</a> / <a href="/teacherresources/">Teacher Resources</a> / <a href="${groupRoute}">${esc(group.title)}</a> / <a href="${catRoute}">${esc(category.title)}</a></p><p class="eyebrow">Curated teaching resource</p><h1>${esc(entry.title)}</h1>${entry.author ? `<p class="lede">By ${esc(entry.author)}</p>` : ''}<div class="definition"><dl>${details}</dl></div><h2>Classroom fit</h2><p>${esc(review)}</p>${availability}<p><a class="button secondary" href="${catRoute}">Back to ${esc(category.title)}</a></p>`;
         const schema = [{ '@context':'https://schema.org','@type':'LearningResource','@id':url+'#resource',url,name:entry.title,description:desc,author:entry.author ? { '@type':'Organization', name:entry.author } : undefined,educationalLevel:entry.grade || undefined,learningResourceType:data.formats[entry.format] || entry.format || undefined,about:data.subjects[entry.subject] || entry.subject || undefined,isPartOf:{'@id':routeUrl(catRoute)+'#collection'},sameAs:entry.url ? new URL(entry.url, SITE).href : undefined }];
         // Avoid serializing undefined properties.
         const normalized = schema.map(o=>Object.fromEntries(Object.entries(o).filter(([,v])=>v !== undefined && v !== '')));
@@ -432,7 +434,8 @@ function generateSitemap(generated) {
   const groupPrefixes=[...new Set(generated.resources.filter(x=>x.kind==='group').map(x=>x.url))];
   const eventPrefix=SITE+'/polymythseminars/events/';
   const methodologyPrefixes=[...new Set(generated.methodology.map(x=>x.url))];
-  const keep=existingUrls.filter(u=> !groupPrefixes.some(p=>u===p || u.startsWith(p)) && !u.startsWith(eventPrefix) && !methodologyPrefixes.some(p=>u===p || u.startsWith(p)));
+  const retiredPrefixes=[SITE+'/teacherresources/lang-hughes/'];
+  const keep=existingUrls.filter(u=> !retiredPrefixes.some(p=>u===p || u.startsWith(p)) && !groupPrefixes.some(p=>u===p || u.startsWith(p)) && !u.startsWith(eventPrefix) && !methodologyPrefixes.some(p=>u===p || u.startsWith(p)));
   const all=[...new Set([...keep, SITE+'/teacherresources/', ...generated.resources.map(x=>x.url), ...generated.events.map(x=>x.url), ...generated.methodology.map(x=>x.url)])].sort((a,b)=>a.localeCompare(b));
   const xml=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'];
   for(const url of all) xml.push(`  <url><loc>${escapeXml(url)}</loc><lastmod>${TODAY}</lastmod></url>`);
