@@ -1,0 +1,188 @@
+/* ========================================================================
+   SITE-WIDE TYPOGRAPHY + ZOOM CONTRACT — 2026-07-10
+   Loaded last on every HTML document. It preserves each page's visual voice
+   while enforcing readable type, graceful wrapping, and reflow from narrow
+   mobile widths through high browser zoom and very wide zoomed-out views.
+   ======================================================================== */
+:root {
+  --ss-serif-fallback: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --ss-sans-fallback: Inter, Aptos, "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --ss-mono-fallback: "JetBrains Mono", "Cascadia Code", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --ss-reading-measure: 72ch;
+}
+html {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  font-size: clamp(15.5px, 0.955rem + 0.08vw, 17px);
+  font-kerning: normal;
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+*, *::before, *::after { box-sizing: inherit; }
+body {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
+  font-kerning: normal;
+  font-synthesis: none;
+  font-variant-ligatures: common-ligatures contextual;
+}
+:where(button, input, select, textarea) { font-family: inherit; }
+:where(p, li, dd, figcaption, blockquote) {
+  line-height: 1.62;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
+  orphans: 3;
+  widows: 3;
+}
+:where(h1, h2, h3, h4, h5, h6) {
+  max-width: 100%;
+  line-height: 1.08;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
+  font-kerning: normal;
+  font-optical-sizing: auto;
+}
+:where(a, button, label, summary, .title, .lede, .dek, .meta, .tag, .pill, .chip) {
+  word-break: normal;
+  hyphens: none;
+}
+:where(a[href^="http"], a[href^="mailto:"], .url, .source, .slug, .breadcrumbs, code) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+:where(.eyebrow, .kicker, .overline, .meta, .caption, small, .tag, .type-tag, .pill, .chip) {
+  font-size: max(0.72rem, 0.72em);
+  line-height: 1.45;
+}
+:where(main, article, section, header, footer, nav, aside,
+  .page, .wrap, .shell, .container, .layout, .content, .panel,
+  .card, .tile, .entry, .event, .lecture, .resource-card, .resource-row) {
+  min-width: 0;
+  max-width: 100%;
+}
+:where(.prose, .article-body, .post-body, .copy, .reading-column) {
+  max-width: min(100%, var(--ss-reading-measure));
+}
+:where(img, picture, video, canvas, svg, iframe, object, embed) {
+  max-width: 100%;
+}
+:where(img, video, canvas) { height: auto; }
+:where(pre) {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+:where(table) {
+  max-width: 100%;
+  border-collapse: collapse;
+}
+:where(th, td) {
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
+}
+:where(.grid, .cards, .tiles, .columns, .deck, .card-grid, .resource-grid,
+  .feature-grid, .proof-grid, .course-grid, .chapter-grid, .door-grid,
+  .bb-doors, .quick-guide, .work-grid, .quick-views) > * {
+  min-width: 0;
+  max-width: 100%;
+}
+:where(.card-grid, .resource-grid, .feature-grid, .proof-grid, .course-grid,
+  .chapter-grid, .door-grid, .bb-doors) {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+}
+:where(.button, .btn, button, [role="button"], input[type="button"], input[type="submit"]) {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 1.25;
+}
+
+/* The CV had four cards and a two-column hero below their comfortable widths.
+   These breakpoints also respond naturally when browser zoom reduces the CSS
+   viewport, keeping words intact instead of producing letter-by-letter stacks. */
+@media screen and (max-width: 1060px) {
+  body[data-route-type="cv"] .work-grid,
+  body[data-route-type="cv"] .quick-views {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media screen and (max-width: 920px) {
+  body[data-route-type="cv"] .cv-intro,
+  body[data-route-type="cv"] .archive-heading {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  body[data-route-type="cv"] .cv-portrait-card {
+    width: min(100%, 420px);
+  }
+  body[data-route-type="cv"] header.cv-header .cv-head-row {
+    display: block !important;
+  }
+  body[data-route-type="cv"] header.cv-header .cv-contact,
+  body[data-route-type="cv"] .cv-header-email {
+    text-align: left !important;
+  }
+  body[data-route-type="cv"] .section-intro {
+    display: block !important;
+  }
+  body[data-route-type="cv"] .section-intro > p {
+    margin-top: 0.75rem !important;
+  }
+}
+@media screen and (max-width: 620px) {
+  body[data-route-type="cv"] .work-grid,
+  body[data-route-type="cv"] .quick-views {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  body[data-route-type="cv"] .cv-actions,
+  body[data-route-type="cv"] .view-switcher {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  body[data-route-type="cv"] .cv-action,
+  body[data-route-type="cv"] .view-switcher button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* High zoom commonly converts wide tables and toolbars into narrow surfaces. */
+@media screen and (max-width: 820px) {
+  :where(.topbar, .toolbar, .controls, .filter-nav, .nav-links, .quick-links,
+    .command-toolbar, .desktop-commands, .actions, .button-row, .cta-row) {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+  :where(.table-wrap, .scroll-shell) {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+@media screen and (max-width: 560px) {
+  :where(.page, .wrap, .shell, .container, main) {
+    padding-left: min(1rem, 4vw);
+    padding-right: min(1rem, 4vw);
+  }
+  :where(h1) { letter-spacing: -0.015em; }
+  :where(.eyebrow, .kicker, .overline) { letter-spacing: 0.11em; }
+  :where(.status-card, .cart-item-flag, .esl-banner-off, .open-transmission) {
+    white-space: normal !important;
+    overflow-wrap: break-word;
+  }
+}
+@media print {
+  html { font-size: 11pt; }
+  body { overflow: visible; }
+  :where(h1, h2, h3, h4, h5, h6) { text-wrap: wrap; }
+}

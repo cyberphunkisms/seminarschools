@@ -1,13 +1,19 @@
 {
-  "release_id": "seminarschools-polymythcal-scraper-layout-netlify-public-registry-2026-07-09",
-  "generated_at": "2026-07-09T00:00:00Z",
+  "release_id": "2026-07-10-reviews-zoom-font",
+  "generated_at": "2026-07-10T05:55:08Z",
   "publish_dir": "public",
   "notes": [
-    "Find a Protest Toronto first-class source",
-    "watchlist support",
-    "generic category-aware fetcher",
-    "Polymythcal front-facing search/quick filters",
-    "one-zip archive with safe public deploy surface"
+    "Dedicated /reviews/ page replacing the former Marginalia redirect",
+    "Requested LinkedIn recommendation is the first source-linked reference",
+    "Global clean-route cache revalidation through Netlify _headers",
+    "Versioned site-wide typography, natural wrapping, and zoom-reflow contract",
+    "All user-facing HTML pages inherit the shared typography and zoom layer",
+    "Saul CV reflow improvements for narrow viewports and high browser zoom",
+    "Visible sitemap, XML sitemap, footer, theme navigation, and llms.txt discovery",
+    "Google site-verification file preserved as an exact one-line token",
+    "81 of 81 release checks passed"
   ],
-  "fix": "Sanitized package-lock npm registry URLs for Netlify dependency install; added guard."
+  "audited_user_facing_pages": 1052,
+  "html_files_including_verification_token": 1053,
+  "release_gate_count": 81
 }

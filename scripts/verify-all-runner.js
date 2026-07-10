@@ -44,6 +44,7 @@ const checks = [
   'node scripts/verify-geometry.js',
   'node scripts/verify-visible-geometry.js',
   'node scripts/verify-zoom-resilience.js',
+  'node scripts/verify-reviews-zoom-font-release.js',
   'node scripts/verify-register.js',
   'node scripts/verify-route-doctrine.js',
   'node scripts/verify-page-type-contracts.js',

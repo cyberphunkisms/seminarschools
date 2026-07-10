@@ -1,57 +1,8 @@
-# Cache-bust JS and CSS: 10 minutes max, must revalidate on each visit
-/js/*
-  Cache-Control: public, max-age=600, must-revalidate
-
-/css/*
-  Cache-Control: public, max-age=600, must-revalidate
-
-# HTML pages: never cache, always fetch fresh
-/*.html
-  Cache-Control: no-cache
-
-/
-  Cache-Control: no-cache
-
-# Fresh calendar and writing shortcut HTML routes
-/polymythseminars/
-  Cache-Control: no-cache
-
-/writingclub/
-  Cache-Control: no-cache
-
-/writingkids/
-  Cache-Control: no-cache
-
-/writingjuniors/
-  Cache-Control: no-cache
-
-/writingteens/
-  Cache-Control: no-cache
-
-/writinggrads/
-  Cache-Control: no-cache
-
-
-/university/
-  Cache-Control: no-cache
-
-/philosophy/
-  Cache-Control: no-cache
-
-/humanities/
-  Cache-Control: no-cache
-
-/cfps/
-  Cache-Control: no-cache
-
-/lectures/
-  Cache-Control: no-cache
-
-/fellowships/
-  Cache-Control: no-cache
-
+# Browser freshness and security. Every route revalidates on each visit.
+# Versioned asset URLs provide a second guard against stale CSS or JavaScript.
 # Security headers — all paths
 /*
+  Cache-Control: no-cache, max-age=0, must-revalidate
   X-Frame-Options: SAMEORIGIN
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
@@ -87,30 +38,6 @@
 /scripts/*
   X-Robots-Tag: noindex, nofollow
 
-# Immutable assets (fonts, images) — long cache
-/img/*
-  Cache-Control: public, max-age=31536000, immutable
-
-/apple-touch-icon.png
-  Cache-Control: public, max-age=31536000, immutable
-
-/favicon.svg
-  Cache-Control: public, max-age=2592000
-
-/og-image.png
-  Cache-Control: public, max-age=2592000
-
-# JSON data — short cache, revalidate
-/*.json
-  Cache-Control: public, max-age=300, must-revalidate
-
-# Feed XML — short cache
+# Feed XML content-type hardening
 /polymythseminars/feed.xml
-  Cache-Control: public, max-age=3600, must-revalidate
   X-Content-Type-Options: nosniff
-
-/teacherresources/feed.xml
-  Cache-Control: public, max-age=3600, must-revalidate
-
-/agora/feed.xml
-  Cache-Control: public, max-age=3600, must-revalidate

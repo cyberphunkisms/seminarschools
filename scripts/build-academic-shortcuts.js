@@ -7,6 +7,8 @@ const ROOT = path.resolve(__dirname, '..');
 const SITE = 'https://seminarschools.com';
 const CHECK = process.argv.includes('--check');
 const NOW = new Date();
+const TYPE_ZOOM_BUILD = '20260710-reviews-zoom-font-a';
+const TYPE_ZOOM_LINK = `<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=${TYPE_ZOOM_BUILD}" data-site-wide-type-zoom="${TYPE_ZOOM_BUILD}">`;
 const ROUTES = {
   university: {
     focus: 'university',
@@ -143,6 +145,10 @@ function itemList(events, info, route){
   };
 }
 function collectionPage(info, route){ return {'@context':'https://schema.org','@type':'CollectionPage','@id':`${SITE}/${route}/#webpage`,url:`${SITE}/${route}/`,name:'Polymythcal',description:info.description,isPartOf:{'@id':`${SITE}/#website`},inLanguage:'en-CA'}; }
+function normalizeTypeZoomLink(html){
+  html = html.replace(/\s*<link[^>]+data-site-wide-type-zoom=["'][^"']+["'][^>]*>\s*/ig, '\n');
+  return html.replace(/<\/head>/i, `${TYPE_ZOOM_LINK}\n</head>`);
+}
 function installSchema(html, schemas){
   html = html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\s*/g, '');
   const block = schemas.map(s=>`<script type="application/ld+json">\n${JSON.stringify(s,null,2)}\n</script>`).join('\n');
@@ -183,6 +189,7 @@ function main(){
     html=setTopStates(html, info.focus);
     html=setHead(html, info, route);
     html=installSchema(html, [collectionPage(info, route), itemList(events, info, route)]);
+    html=normalizeTypeZoomLink(html);
     if(write(`${route}/index.html`, html)) writes++;
   }
   console.log(`ACADEMIC SHORTCUT ${CHECK?'CHECK':'BUILD'} — ${Object.keys(ROUTES).length} routes, ${current.length} current events scanned, ${writes} files updated.`);

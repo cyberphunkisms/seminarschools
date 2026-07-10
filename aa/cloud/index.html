@@ -811,7 +811,7 @@ body.untrans-focus .bubble{ opacity:0.5; transition: opacity 0.6s; }
 
 #controls{
   display:flex;gap:14px;align-items:center;
-  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
+  font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;
 }
 #controls button{
   background:transparent;
@@ -820,7 +820,7 @@ body.untrans-focus .bubble{ opacity:0.5; transition: opacity 0.6s; }
   padding:7px 12px;
   cursor:pointer;
   font-family:inherit;
-  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
+  font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;
   transition:all 0.15s;
 }
 #controls button:hover{
@@ -850,7 +850,7 @@ body.untrans-focus .bubble{ opacity:0.5; transition: opacity 0.6s; }
   background:linear-gradient(to top, rgba(14,12,10,0.85), rgba(14,12,10,0));
 }
 #status{
-  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
+  font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;
   color:var(--dim);
   display:flex;gap:18px;
 }
@@ -912,7 +912,7 @@ body.untrans-focus .bubble{ opacity:0.5; transition: opacity 0.6s; }
   margin-left:auto;
   margin-right:8px;
   font-family:'JetBrains Mono','Noto Sans Mono CJK',monospace;
-  font-size:10px;
+  font-size:0.72rem;
   letter-spacing:1px;
   text-transform:uppercase;
 }
@@ -923,7 +923,7 @@ body.untrans-focus .bubble{ opacity:0.5; transition: opacity 0.6s; }
 }
 .depth-btn{
   font-family:inherit;
-  font-size:10px;
+  font-size:0.72rem;
   letter-spacing:0.5px;
   background:transparent;
   color:var(--ink2);
@@ -993,7 +993,7 @@ body.untrans-focus .bubble{ opacity:0.5; transition: opacity 0.6s; }
 @keyframes slidein{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
 #detail .dt-trad{
   font-family:'JetBrains Mono','Noto Sans TC',monospace;
-  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;
   color:var(--accent);
   margin-bottom:6px;
 }
@@ -1020,9 +1020,9 @@ body.untrans-focus .bubble{ opacity:0.5; transition: opacity 0.6s; }
 }
 #detail .dt-source{
   margin-top:10px;
-  font-size:10px;color:var(--dim);
+  font-size:0.72rem;color:var(--dim);
   font-family:'JetBrains Mono','Noto Sans TC',monospace;
-  word-break:break-all;
+  overflow-wrap:anywhere;word-break:normal;
 }
 #detail .dt-source a{color:var(--dim);text-decoration:none;border-bottom:1px dotted var(--faint)}
 #detail .dt-source a:hover{color:var(--accent);border-bottom-color:var(--accent)}
@@ -1043,7 +1043,7 @@ body.untrans-focus .bubble{ opacity:0.5; transition: opacity 0.6s; }
 #detail .dt-tag-chip{
   display:inline-block;
   font-family:'JetBrains Mono','Courier New',monospace;
-  font-size:10px;letter-spacing:0.3px;
+  font-size:0.72rem;letter-spacing:0.3px;
   padding:3px 7px;
   background:rgba(201,166,107,0.08);
   border:1px solid rgba(201,166,107,0.25);
@@ -1101,6 +1101,7 @@ body.untrans-focus .bubble{ opacity:0.5; transition: opacity 0.6s; }
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
 <link rel="stylesheet" href="/css/theme.css?v=cl91">
 <style>.polymyth-funnel{max-width:900px;margin:.8rem auto;padding:.7rem .9rem;border:1px solid currentColor;font-family:system-ui,sans-serif;font-size:.9rem;line-height:1.45}.polymyth-funnel a{color:inherit;text-decoration:underline}</style>
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
 </head>
 <body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="archive-tool" data-page-weight="heavy">
 <div class="keyboard-hint" tabindex="-1"><span class="route-note-kicker">Keyboard</span><kbd>/</kbd> search, <kbd>?</kbd> help, <kbd>←</kbd>/<kbd>→</kbd> move wide panels.</div>
@@ -36592,9 +36593,9 @@ function showEdgeTooltip(ev, from, to, kind){
   const toLabel = nodeLabel(to);
   const kindLabel = EDGE_KIND_LABELS[kind] || kind;
   tip.innerHTML =
-    '<div style="opacity:0.6;font-size:9px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">' + escapeHtml(kindLabel) + '</div>' +
+    '<div style="opacity:0.6;font-size:0.72rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">' + escapeHtml(kindLabel) + '</div>' +
     '<div><strong style="color:#fff">' + escapeHtml(fromLabel) + '</strong> <span style="opacity:0.55">→</span> <strong style="color:#fff">' + escapeHtml(toLabel) + '</strong></div>' +
-    '<div style="opacity:0.5;font-size:10px;margin-top:4px;font-style:italic">click to follow</div>';
+    '<div style="opacity:0.5;font-size:0.72rem;margin-top:4px;font-style:italic">click to follow</div>';
   tip.style.opacity = '1';
   moveEdgeTooltip(ev);
 }

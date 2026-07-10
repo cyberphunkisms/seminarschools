@@ -30,7 +30,8 @@ function main(){
     if(!html.includes('application/ld+json')) fail(`${r}: missing structured data`);
     if(!sitemap.includes(`${SITE}/${r}/`)) fail(`${r}: missing from sitemap`);
     if(!redirects.includes(`/${r}     /${r}/`) && !redirects.includes(`/${r}\t/${r}/`)) fail(`${r}: missing slashless redirect`);
-    if(!headers.includes(`/${r}/`)) fail(`${r}: missing no-cache header rule`);
+    const globalNoCache = /\/\*\s*\n\s*Cache-Control:\s*no-cache, max-age=0, must-revalidate/i.test(headers);
+    if(!globalNoCache && !headers.includes(`/${r}/`)) fail(`${r}: missing no-cache header rule`);
   }
   if(!sources.some(s=>s.id==='princeton-uchv')) fail('source roster missing princeton-uchv');
   if(!sources.some(s=>s.scope==='global-academic')) fail('source roster missing global-academic scope sources');

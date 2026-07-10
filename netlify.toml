@@ -2,7 +2,7 @@
 # seminarschools.com static site
 
 [build]
-  command = "node scripts/build-search-pages.js && node scripts/build-writing-shortcuts.js && node scripts/build-public-deploy.js"
+  command = "node scripts/build-search-pages.js && node scripts/build-writing-shortcuts.js && node scripts/apply-sitewide-type-zoom-link.js && node scripts/apply-type-floor.js && node scripts/build-public-deploy.js"
   publish = "public"
   # Credit conservation (June 6 2026): skip the build entirely when a push
   # touches only non-public plumbing (scraper code, workflows, scrape logs,
@@ -37,6 +37,13 @@
 #    Free tier: 100 tasks/month; scales via Zapier paid plans.
 #    Alternative: Netlify Function with Resend/SendGrid/Mailgun.
 
+
+# Canonical reviews and references route.
+[[redirects]]
+  from = "/reviews"
+  to = "/reviews/"
+  status = 301
+  force = true
 
 # Canonical bookwormburrows pedagogical case. Explicitly normalize the bare path.
 

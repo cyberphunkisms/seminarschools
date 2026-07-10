@@ -124,7 +124,7 @@ a { color: inherit; text-decoration: none; }
 }
 .tier-label-vertical .label {
   font-family: var(--mono);
-  font-size: 0.6rem;
+  font-size:0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--fg-fade);
@@ -268,7 +268,7 @@ section.tier p.dropcap::first-letter,
 .status {
   display: inline-block;
   font-family: var(--mono);
-  font-size: 0.65rem;
+  font-size:0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent);
@@ -524,7 +524,7 @@ body.theme-dark {
   transition: color 0.3s;
 }
 .descent-marker .name {
-  font-family: var(--sans); font-size: 0.62rem;
+  font-family: var(--sans); font-size:0.72rem;
   letter-spacing: 0.24em; text-transform: uppercase;
   color: var(--fg); opacity: 0.7;
   writing-mode: vertical-rl;
@@ -597,7 +597,7 @@ body.theme-dark {
   padding: 0.3rem 0.7rem;
   border: 1px solid var(--accent);
   font-family: var(--mono);
-  font-size: 0.65rem;
+  font-size:0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent);
@@ -734,7 +734,7 @@ section, section.section, section.tier, section.articles-section {
 }
 .foot-rich .foot-label {
   text-transform: uppercase;
-  font-size: 0.65rem;
+  font-size:0.72rem;
   letter-spacing: 0.22em;
   color: var(--accent);
   margin-bottom: 1rem;
@@ -1208,7 +1208,7 @@ section.tier:first-of-type::after {
   font-family: var(--mono);
   letter-spacing: 0.22em;
   color: var(--accent);
-  font-size: 0.65rem;
+  font-size:0.72rem;
 }
 .project-ohm-dome section.tier > .section-meta::before {
   content: "⬡ ";
@@ -1222,7 +1222,7 @@ section.tier:first-of-type::after {
   color: var(--bg);
   padding: 0.3rem 0.8rem;
   font-family: var(--mono);
-  font-size: 0.65rem;
+  font-size:0.72rem;
   letter-spacing: 0.18em;
   border-radius: 2px 2px 0 0;
 }

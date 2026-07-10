@@ -99,7 +99,10 @@
     "audit:external-links-live:strict": "EXTERNAL_LINK_STRICT=1 node scripts/audit-external-links-live.js",
     "verify:linkability-overhaul": "node scripts/verify-linkability-overhaul.js",
     "verify:bb-mechanics": "node scripts/verify-bb-mechanics-synthesis.js",
-    "verify:bbt-upcoming": "node scripts/verify-bbt-upcoming.js"
+    "verify:bbt-upcoming": "node scripts/verify-bbt-upcoming.js",
+    "apply:sitewide-type-zoom": "node scripts/apply-sitewide-type-zoom-link.js",
+    "apply:type-floor": "node scripts/apply-type-floor.js",
+    "verify:reviews-zoom-font": "node scripts/verify-reviews-zoom-font-release.js"
   },
   "dependencies": {
     "@netlify/blobs": "^10.1.0"

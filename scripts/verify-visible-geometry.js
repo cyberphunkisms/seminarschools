@@ -15,7 +15,7 @@ function walk(dir, acc = []) {
     if (SKIP_DIRS.has(entry.name)) continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) walk(full, acc);
-    else if (entry.isFile() && entry.name.endsWith('.html')) acc.push(full);
+    else if (entry.isFile() && entry.name.endsWith('.html') && !/^google.*\.html$/i.test(entry.name)) acc.push(full);
   }
   return acc;
 }

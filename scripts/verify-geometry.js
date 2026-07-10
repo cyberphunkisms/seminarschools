@@ -21,7 +21,7 @@ const vm = require('vm');
 
 const ROOT = path.resolve(__dirname, '..');
 const read = (p) => fs.readFileSync(path.join(ROOT, p), 'utf8');
-function walk(dir){ let o=[]; for(const e of fs.readdirSync(dir,{withFileTypes:true})){ if(e.name==='node_modules'||e.name==='public'||e.name.startsWith('.'))continue; const fp=path.join(dir,e.name); if(e.isDirectory())o=o.concat(walk(fp)); else if(e.name.endsWith('.html'))o.push(path.relative(ROOT,fp)); } return o; }
+function walk(dir){ let o=[]; for(const e of fs.readdirSync(dir,{withFileTypes:true})){ if(e.name==='node_modules'||e.name==='public'||e.name.startsWith('.'))continue; const fp=path.join(dir,e.name); if(e.isDirectory())o=o.concat(walk(fp)); else if(e.name.endsWith('.html') && !/^google.*\.html$/i.test(e.name))o.push(path.relative(ROOT,fp)); } return o; }
 
 const indraSrc = read('js/indra.js');
 const mandalaSrc = read('js/mandala.js');

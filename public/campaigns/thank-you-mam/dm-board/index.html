@@ -66,7 +66,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 
 /* LEFT PANEL: TIMELINE + NPCs */
 .left { background: var(--surface); overflow-y: auto; padding: 12px; }
-.panel-title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 8px; font-weight: 700; }
+.panel-title { font-size:0.72rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 8px; font-weight: 700; }
 
 .timeline { display: flex; flex-direction: column; gap: 2px; margin-bottom: 16px; }
 .time-slot {
@@ -84,7 +84,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 .time-slot.active { border-left-color: var(--gold); background: var(--surface-3); }
 .time-slot .time { font-family: var(--mono); font-size: 11px; color: var(--text-dim); min-width: 52px; }
 .time-slot .label { color: var(--text); font-size: 12px; }
-.time-slot .npc-count { margin-left: auto; background: var(--accent-dim); color: #fff; font-size: 10px; padding: 1px 6px; border-radius: 8px; }
+.time-slot .npc-count { margin-left: auto; background: var(--accent-dim); color: #fff; font-size:0.72rem; padding: 1px 6px; border-radius: 8px; }
 
 .npc-list { display: flex; flex-direction: column; gap: 4px; }
 .npc-card {
@@ -96,7 +96,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 .npc-card .name { font-weight: 700; font-size: 13px; }
 .npc-card .loc { font-size: 11px; color: var(--text-dim); }
 .npc-card.met { border-left-color: var(--green); }
-.npc-card.met .name::after { content: " ✓"; color: var(--green); font-size: 10px; }
+.npc-card.met .name::after { content: " ✓"; color: var(--green); font-size:0.72rem; }
 
 /* CENTER PANEL: MAP + ACTIVE SCENE */
 .center { background: var(--bg); overflow-y: auto; display: flex; flex-direction: column; }
@@ -122,7 +122,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
   background: var(--surface-2);
   border: 1px solid var(--border);
   padding: 8px;
-  font-size: 10px;
+  font-size:0.72rem;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -133,19 +133,19 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 .block:hover { border-color: var(--accent); background: var(--surface-3); }
 .block.has-bookworm { border-color: var(--gold); box-shadow: 0 0 8px rgba(184,137,58,0.3); }
 .block .street { font-weight: 700; color: var(--text); font-size: 11px; }
-.block .poi { color: var(--text-dim); font-size: 9px; }
+.block .poi { color: var(--text-dim); font-size:0.72rem; }
 .block .dots { display: flex; gap: 3px; margin-top: auto; }
 .block .dot { width: 6px; height: 6px; border-radius: 50%; }
 .block .dot.bw { background: var(--gold); }
 .block .dot.npc { background: var(--blue); }
-.block .layer-a { position: absolute; top: 4px; right: 4px; font-size: 8px; color: var(--purple); font-weight: 700; }
+.block .layer-a { position: absolute; top: 4px; right: 4px; font-size:0.72rem; color: var(--purple); font-weight: 700; }
 
 /* PROJECT TRIGGERS (below map) */
 .triggers { padding: 12px 16px; border-top: 1px solid var(--border); background: var(--surface); }
 .trigger-grid { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
 .trigger-chip {
   padding: 3px 8px;
-  font-size: 10px;
+  font-size:0.72rem;
   font-family: var(--mono);
   background: var(--surface-3);
   border: 1px solid var(--border);
@@ -169,7 +169,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 .bw-card .bw-name { font-weight: 700; font-size: 13px; }
 .bw-card .bw-loc { font-size: 11px; color: var(--text-dim); }
 .bw-card .badges { display: flex; gap: 4px; margin-top: 4px; flex-wrap: wrap; }
-.badge { font-size: 9px; padding: 1px 6px; border-radius: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
+.badge { font-size:0.72rem; padding: 1px 6px; border-radius: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
 .badge.gold { background: #8b6f2a; color: #fff; }
 .badge.silver { background: #5a5a5a; color: #ccc; }
 .badge.bronze { background: #6a4a2a; color: #ccc; }
@@ -192,7 +192,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
   transition: all 0.15s;
 }
 .tool-btn:hover { border-color: var(--accent); background: var(--surface-3); }
-.tool-btn .tool-code { font-family: var(--mono); font-size: 10px; color: var(--accent-dim); min-width: 52px; }
+.tool-btn .tool-code { font-family: var(--mono); font-size:0.72rem; color: var(--accent-dim); min-width: 52px; }
 .tool-btn .tool-name { flex: 1; }
 
 .session-log { margin-top: 12px; }
@@ -202,7 +202,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
   color: var(--text-dim);
   border-bottom: 1px solid var(--border);
 }
-.log-entry .log-time { font-family: var(--mono); color: var(--text-faint); font-size: 10px; }
+.log-entry .log-time { font-family: var(--mono); color: var(--text-faint); font-size:0.72rem; }
 .log-entry .log-text { margin-left: 4px; }
 
 /* MODAL */
@@ -247,7 +247,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
   display: flex;
   gap: 16px;
 }
-.ambient-bar .amb-label { color: var(--accent-dim); font-weight: 700; text-transform: uppercase; font-size: 9px; letter-spacing: 0.1em; }
+.ambient-bar .amb-label { color: var(--accent-dim); font-weight: 700; text-transform: uppercase; font-size:0.72rem; letter-spacing: 0.1em; }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
@@ -258,6 +258,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
 <link rel="stylesheet" href="/css/theme.css?v=cl91">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
 </head>
 <body data-geometry="indra-web" data-indra-intensity="0.075">
 <h1 class="sr-only">DM Board</h1>
@@ -510,15 +511,15 @@ function renderTriggers() {
     const isActive = activeThreadIds.includes(t.id);
     html += `<div class="trigger-chip" style="display:block;width:100%;margin-bottom:4px;padding:6px 8px;border-left:3px solid ${t.color};${isActive ? 'background:var(--surface-3);color:var(--text)' : ''}" onclick="showThread(${t.id})">`;
     html += `<span style="font-weight:700;color:${t.color}">${t.id}. ${t.name}</span>`;
-    html += `<span style="margin-left:8px;font-size:10px;color:var(--text-dim)">${t.desc}</span>`;
+    html += `<span style="margin-left:8px;font-size:0.72rem;color:var(--text-dim)">${t.desc}</span>`;
     if (isActive) {
-      html += `<span style="margin-left:8px;font-size:9px;color:var(--green)">● ACTIVE</span>`;
+      html += `<span style="margin-left:8px;font-size:0.72rem;color:var(--green)">● ACTIVE</span>`;
     }
     html += `</div>`;
   });
   
   // Always show Hughes thread as available
-  html += `<div style="margin-top:8px;font-size:10px;color:var(--purple)">Thread 5 (Hughes) available at any crossing point.</div>`;
+  html += `<div style="margin-top:8px;font-size:0.72rem;color:var(--purple)">Thread 5 (Hughes) available at any crossing point.</div>`;
   
   el.innerHTML = html;
 }

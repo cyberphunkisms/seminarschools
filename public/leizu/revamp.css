@@ -173,7 +173,7 @@ body.leizu-revamp {
 .leizu-home .hero-fact:last-child { border-right:0; }
 .leizu-home .hero-fact strong { display:block; color:var(--mulberry-deep); font-size:1.2rem; font-weight:500; line-height:1.15; }
 .leizu-home .hero-fact span { display:block; margin-top:.3rem; font-size:.88rem; color:var(--ink-soft); line-height:1.35; }
-.leizu-home .masthead-meta { justify-content:flex-start; gap:.55rem 1rem; margin-top:1.8rem; font-size:.64rem; }
+.leizu-home .masthead-meta { justify-content:flex-start; gap:.55rem 1rem; margin-top:1.8rem; font-size:0.72rem; }
 .leizu-home .masthead-meta > span:nth-of-type(3),
 .leizu-home .masthead-meta > .masthead-meta-sep,
 .leizu-home .masthead-meta > a { display:none; }
@@ -275,7 +275,7 @@ body.leizu-revamp {
 @media (max-width:640px) {
   .leizu-site-nav { margin-top:.7rem; padding:.8rem; gap:.75rem; }
   .leizu-site-nav .leizu-mark { width:100%; }
-  .leizu-site-nav .leizu-nav-links { gap:.5rem .8rem; font-size:.6rem; }
+  .leizu-site-nav .leizu-nav-links { gap:.5rem .8rem; font-size:0.72rem; }
   .leizu-site-nav .leizu-nav-zh { padding:.35rem .55rem; }
   .leizu-home .page { padding-left:1.25rem; padding-right:1.25rem; }
   .leizu-home header.masthead { padding-top:3.2rem; }

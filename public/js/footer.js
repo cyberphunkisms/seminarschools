@@ -28,7 +28,7 @@
       ['What\u2019s on', [['polymythcalendar', '/polymythseminars/'], ['Marginalia', '/marginalia']]],
       ['The work', [['polymorphousmythology', '/polymyth/methodologylist'], ['bookwormburrows', '/bookwormcard/']]],
       ['Projects', [['Ohm Dome', '/ohm-dome/'], ['Festivals', '/polymythseminars/'], ['Florilegium', '/florilegium/'], ['Nutrition', '/nutrition/']]],
-      ['About', [['Full CV', '/saul'], ['Main', '/main'], ['Sitemap', '/polymyth/sitemap/'], ['Email', 'mailto:saulnassau@protonmail.com']]]
+      ['About', [['Full CV', '/saul'], ['Reviews & references', '/reviews/'], ['Main', '/main'], ['Sitemap', '/polymyth/sitemap/'], ['Email', 'mailto:saulnassau@protonmail.com']]]
     ];
     var html = '<div class="ss-brand">Seminar Schools.</div><div class="ss-cols">';
     cols.forEach(function (c) {

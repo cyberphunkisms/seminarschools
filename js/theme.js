@@ -171,14 +171,14 @@
       whatson:[['/polymythseminars/','Calendar'],['/marginalia/','Marginalia']],
       framework:[['/polymyth/','Polymyth'],['/campaigns/','Campaigns'],['/bb/','Bookworm Burrows']],
       projects:[['/ohm-dome/','Ohm Dome'],['/florilegium/','Florilegium'],['/nutrition/','Nutrition']],
-      about:[['/saul/','Founder'],['/polymyth/sitemap/','Sitemap']]
+      about:[['/saul/','Founder'],['/reviews/','Reviews'],['/polymyth/sitemap/','Sitemap']]
     };
     var sibs;
     if(inb(['/leizu/'])) sibs=[['/agora/','The Agora']];
     else if(inb(['/agora/','/teacherresources/','/aitr/'])) sibs=TREE.teaching;
     else if(inb(['/polymythseminars/','/marginalia/'])) sibs=TREE.whatson;
     else if(inb(['/ohm-dome/','/florilegium/','/nutrition/'])) sibs=TREE.projects;
-    else if(inb(['/saul/'])) sibs=TREE.about;
+    else if(inb(['/saul/','/reviews/'])) sibs=TREE.about;
     else if(inb(['/polymyth/','/campaigns/','/bb/','/bookwormcard/','/aa/','/apply/'])) sibs=TREE.framework;
     else sibs=[];
     var links=[['/','Home']];
