@@ -60,7 +60,25 @@ function parseSeedArray(filePath) {
   return eval(html.slice(arrStart, arrEnd + 1));
 }
 
+function decodeHtmlEntities(text) {
+  return text
+    .replace(/&amp;/g, '&')
+    .replace(/&rsquo;/g, '’')
+    .replace(/&ldquo;/g, '“')
+    .replace(/&rdquo;/g, '”')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, ' ');
+}
+function extractCurrentBbRuling(filePath) {
+  const html = fs.readFileSync(filePath, 'utf-8');
+  const m = html.match(/<div class="sdesc"[^>]*data-bb-current-ruling="[^"]+"[^>]*>([\s\S]*?)<\/div>/);
+  if (!m) return '';
+  return decodeHtmlEntities(m[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim());
+}
+
 const cc = parseSeedArray(HTML_PATH);
+const currentBbRuling = extractCurrentBbRuling(HTML_PATH);
 console.log('Parsed', cc.length, 'entries from cc*');
 
 // ------------------------------------------------------------------
@@ -202,6 +220,12 @@ out.push('cc* holds course-level entries (cc-eng-* for OSSD English courses) and
 out.push('campaign-level entries (cc-cmp001-* for the inaugural Hughes Thank You');
 out.push('M am 1958 Harlem campaign).');
 out.push('');
+if (currentBbRuling) {
+  out.push('CURRENT BB / POLYMYTHDND CAMPAIGN RULING');
+  out.push(currentBbRuling);
+  out.push('');
+}
+
 out.push('Each entry documents a campaign element: NPC, location, spatial block,');
 out.push('object inventory, time slice, image asset, ghost firing, template,');
 out.push('realism domain, or pedagogical apparatus. Cross-references to mc* and');

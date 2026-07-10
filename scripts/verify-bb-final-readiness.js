@@ -58,7 +58,7 @@ must('Print template reads current and legacy checkpoint keys', /bb_wormcard_che
 must('Print path has popup fallback link', /function openBookwormcardWindow/.test(app) && /Save my wormcard as PDF/.test(app));
 must('File resume input is accessible to the picker link', /id="resume-from-file"/.test(app) && /id="resume-file-input"/.test(app) && !/id="resume-file-input"[^>]*aria-hidden="true"/.test(app));
 must('Mobile copy frames desktop as the smooth save path', /desktop gives the smooth save-as-PDF flow/.test(app));
-must('Landing page separates wormcard, DM table assistant, rule library, and why page', /Make your wormcard/.test(landing) && /Open a burrow with wormcards/.test(landing) && /Teacher rule library/.test(landing) && /Read why it helps learning/.test(landing));
+must('Landing page separates wormcard, teacher workflow, rule library, and why page', /Make your wormcard/.test(landing) && /Run a burrow with wormcards/.test(landing) && /Dimensional Master rule library/.test(landing) && /Read why it helps learning/.test(landing));
 must('Teacher tools are tucked in a details drawer', /<details class="teacher-tools"/.test(op) && /<summary>teacher tools/.test(op));
 
 const seedMatch = op.match(/const SEED = \[([\s\S]*?)\];\n\nlet entries/);
@@ -66,11 +66,12 @@ let seedCount = 0;
 if(seedMatch){
   seedCount = vm.runInNewContext('const SEED = [' + seedMatch[1] + ']; SEED.length;', {});
 }
-must('BB operation library preserves all 221 entries', seedCount === 221);
+must('BB operation library preserves all 246 entries', seedCount === 246);
+must('BB teacher commitment surface translation rule exists', op.includes('Teacher-commitment copy rule: keep the force, translate the surface'));
 
 if(failures.length){
   console.error('BB final readiness verification failed:');
   for(const failure of failures) console.error(' - ' + failure);
   process.exit(1);
 }
-console.log('BB final readiness verification passed: local assets, depth engine load, start flow, command controls, save migration, print fallback, and 221-entry library all checked.');
+console.log('BB final readiness verification passed: local assets, depth engine load, start flow, command controls, save migration, print fallback, and 246-entry library and current public pathways all checked.');

@@ -2431,6 +2431,22 @@ function renderProfile() {
     if (t[key] === undefined) return;
     el.textContent = t[key];
   });
+  const focusCopy = {
+    all: { title: 'Work record across service, education, community, and projects.', lede: 'A broad one-page CV for roles that need care, structure, adaptability, and clear communication across teaching, service, hospitality, community work, performance, and public projects.' },
+    service: { title: 'Hospitality and community work.', lede: 'Food, service, events, volunteer coordination, public-facing work, and community programs, shaped for roles that need calm practical coordination.' },
+    teaching: { title: 'Teaching and education work.', lede: 'Classroom, tutoring, curriculum, admissions, seminar teaching, academic writing, multilingual learning, and education projects.' },
+    portfolio: { title: 'Portfolio and public-learning infrastructure.', lede: 'Seminar Schools projects, publishing, resources, calendars, games, and methodology infrastructure kept separate from the working employment record.' },
+    custom: { title: 'Selected modular CV.', lede: 'The top profile, experience list, skills, education, and credentials follow the currently selected focus areas.' }
+  };
+  let fc = focusCopy.custom;
+  if (active.size === 0) fc = focusCopy.all;
+  else if (activeEquals(['kitchen','community'])) fc = focusCopy.service;
+  else if (activeEquals(['teaching','education'])) fc = focusCopy.teaching;
+  else if (activeEquals(['seminarschools'])) fc = focusCopy.portfolio;
+  const titleNode = document.querySelector('[data-profile="title"]');
+  const ledeNode = document.querySelector('[data-profile="lede"]');
+  if (titleNode) titleNode.textContent = fc.title;
+  if (ledeNode) ledeNode.textContent = fc.lede;
   const status = document.getElementById('archiveStatus');
   const moduleStatus = document.getElementById('moduleStatus');
   const catLabels = (UI[lang] && UI[lang].cats) || UI.en.cats;
@@ -2540,327 +2556,280 @@ render();
   @page { size: Letter; margin: 12mm 14mm 14mm 14mm; }
 </style>
 <script>
-// Unified print document. One layout: the static generator's, rebuilt live
-// from the active tab set and current language. Printing shows only this.
+// Unified print document. One-page modular output, rebuilt live from the active tab set and current language.
+// CV_OUTPUT_REVAMP_2026_07_09: every print/download state targets one page and rewrites the top profile to the selected module.
+// CV_WHITESPACE_FILL_2026_07_09: selected outputs use expanded rows and bottom anchoring so one-page PDFs do not strand large unused space.
 function buildPrintCv() {
   var host = document.getElementById('printCv');
   if (!host) return;
   var t = UI[lang] || UI.en;
-  var isFiltered = active.size > 0;
-  // Summary selection is combination-aware below (see activeCats).
-
-  // Professional summary, localized to the active language. Per-tab variants reshaped
-  // from the 2025 resume, the competencies, and the documented entries. No new facts.
-  // Non-English prose is authored for this CV; have a native eye confirm before relying.
-  var SUMMARY = {
-    en: "Toronto-based worker with experience across hospitality, community work, teaching, curriculum, performance, research, writing, and public projects. Brings adaptable communication, service, organization, cross-cultural work, and project-building experience to general employment and hybrid roles.",
-    zh: "Toronto-based worker with experience across hospitality, community work, teaching, curriculum, performance, research, writing, and public projects. Brings adaptable communication, service, organization, cross-cultural work, and project-building experience to general employment and hybrid roles.",
-    zhs: "Toronto-based worker with experience across hospitality, community work, teaching, curriculum, performance, research, writing, and public projects. Brings adaptable communication, service, organization, cross-cultural work, and project-building experience to general employment and hybrid roles.",
-    fa: "Toronto-based worker with experience across hospitality, community work, teaching, curriculum, performance, research, writing, and public projects. Brings adaptable communication, service, organization, cross-cultural work, and project-building experience to general employment and hybrid roles.",
-    fr: "Toronto-based worker with experience across hospitality, community work, teaching, curriculum, performance, research, writing, and public projects. Brings adaptable communication, service, organization, cross-cultural work, and project-building experience to general employment and hybrid roles."
-  };
-  var SUMMARY_BY_CAT = {
-    teaching: {
-      en: "PhD candidate in Education with an MA in Philosophy from the European Graduate School and more than fifteen years of teaching experience across six countries. Work spans fifteen curricula, including OSSD, IB, AP, A Level, ESL, and adult education, supporting over 1,000 students in academic writing, literacy development, and university preparation.\n\nTeaching is inquiry-based, highly scaffolded, and discussion-driven, designed to create seminars that create projects students feel proud of by the end of the semester. Aims to cultivate independent thinkers who develop the curiosity, confidence, and habits necessary for lifelong self-directed learning. Places strong emphasis on revision as a central part of the learning process, helping students refine their ideas through continuous feedback and reflection.\n\nCommitted to building engaging learning communities where students take pride in their work and contribute meaningfully to collective inquiry. Having taught extensively in multilingual classrooms, designs instruction that is responsive to diverse linguistic backgrounds, neurodivergent learners, varied learning profiles, and a wide range of educational needs.\n\nSuccessfully completed instructional inspections in Ontario and British Columbia. Certified in IB Theory of Knowledge and TESOL.",
-      zh: "教育學博士候選人，持歐洲高等研究院哲學碩士學位，擁有超過十五年橫跨六個國家的教學經驗。教學涵蓋十五種課程體系，包括 OSSD、IB、AP、A Level、ESL 及成人教育，支持逾一千名學生的學術寫作、讀寫能力發展及大學升學準備。\n\n教學以探究為本、高度鷹架支持、以討論為驅動，旨在創建研討會式的課堂，催生出讓學生在學期結束時引以為傲的專題作品。致力於培養獨立思考者，發展其終身自主學習所需的好奇心、自信與習慣。高度重視修訂作為學習過程的核心環節，幫助學生通過持續反饋與反思來精煉思想。\n\n致力於建構富有參與感的學習社群，讓學生以自己的作品為榮，並對集體探究做出有意義的貢獻。在多語課堂中擁有豐富教學經驗，能針對不同語言背景、神經多樣性學習者、多元學習風格及廣泛教育需求設計教學。\n\n已成功通過安大略省及卑詩省的教學督導。持有 IB 知識論及 TESOL 認證。",
-      zhs: "教育学博士候选人，持欧洲高等研究院哲学硕士学位，拥有超过十五年横跨六个国家的教学经验。教学涵盖十五种课程体系，包括 OSSD、IB、AP、A Level、ESL 及成人教育，支持逾一千名学生的学术写作、读写能力发展及大学升学准备。\n\n教学以探究为本、高度脚手架支持、以讨论为驱动，旨在创建研讨会式的课堂，催生出让学生在学期结束时引以为傲的专题作品。致力于培养独立思考者，发展其终身自主学习所需的好奇心、自信与习惯。高度重视修订作为学习过程的核心环节，帮助学生通过持续反馈与反思来精炼思想。\n\n致力于构建富有参与感的学习社群，让学生以自己的作品为荣，并对集体探究做出有意义的贡献。在多语课堂中拥有丰富教学经验，能针对不同语言背景、神经多样性学习者、多元学习风格及广泛教育需求设计教学。\n\n已成功通过安大略省及不列颠哥伦比亚省的教学督导。持有 IB 知识论及 TESOL 认证。",
-      fa: "نامزد دکترای آموزش و پرورش با مدرک کارشناسی ارشد فلسفه از مدرسه عالی اروپایی و بیش از پانزده سال تجربه تدریس در شش کشور. تدریس در پانزده برنامه درسی شامل OSSD، IB، AP، A Level، ESL و آموزش بزرگسالان، با حمایت از بیش از ۱٬۰۰۰ دانش‌آموز در نگارش آکادمیک، توسعه سواد و آمادگی دانشگاه.\n\nتدریس پژوهش‌محور، با داربست‌بندی بالا و مبتنی بر گفت‌وگو، طراحی‌شده برای ایجاد سمینارهایی که پروژه‌هایی می‌سازند که دانش‌آموزان در پایان ترم به آنها افتخار کنند. هدف پرورش متفکران مستقل با کنجکاوی، اعتمادبه‌نفس و عادت‌های لازم برای یادگیری خودراهبر مادام‌العمر. تأکید قوی بر بازنگری به‌عنوان بخش محوری فرآیند یادگیری.\n\nمتعهد به ساختن جوامع یادگیری پویا. با تجربه گسترده در کلاس‌های چندزبانه، طراحی آموزش پاسخگو به پیشینه‌های زبانی متنوع، یادگیرندگان عصب‌متنوع، پروفایل‌های یادگیری مختلف و طیف وسیعی از نیازهای آموزشی.\n\nبازرسی‌های آموزشی در انتاریو و بریتیش کلمبیا با موفقیت گذرانده شده. دارای گواهینامه نظریه دانش IB و TESOL.",
-      fr: "Doctorant en éducation, titulaire d'un MA en philosophie de l'European Graduate School et fort de plus de quinze ans d'enseignement dans six pays. Parcours couvrant quinze programmes dont l'OSSD, l'IB, l'AP, le A Level, l'ESL et l'éducation des adultes, avec l'accompagnement de plus de 1 000 élèves en rédaction académique, développement de la littératie et préparation universitaire.\n\nEnseignement fondé sur l'investigation, fortement étayé et axé sur la discussion, conçu pour créer des séminaires qui engendrent des projets dont les élèves sont fiers en fin de semestre. Vise à former des penseurs autonomes dotés de la curiosité, de la confiance et des habitudes nécessaires à un apprentissage autodirigé tout au long de la vie. Accorde une grande importance à la révision comme élément central du processus d'apprentissage.\n\nEngagé dans la construction de communautés d'apprentissage stimulantes où les élèves sont fiers de leur travail et contribuent de manière significative à l'enquête collective. Fort d'une expérience étendue en classes multilingues, conçoit un enseignement adapté aux divers profils linguistiques, aux apprenants neurodivergents, aux profils d'apprentissage variés et à un large éventail de besoins éducatifs.\n\nInspections pédagogiques réussies en Ontario et en Colombie-Britannique. Certifié en théorie de la connaissance de l'IB et TESOL."
-    },
-    education: {
-      en: "Education professional and current PhD candidate researching emerging technologies in pedagogy. Mentored over a thousand students through academic development and admissions while developing and assessing programs that close performance gaps. Grounds practice in dialogical, seminar-based learning rather than transmission.",
-      zh: "教育專業人士，現為博士候選人，研究教學中的新興技術。透過學術發展與升學輔導指導逾千名學生，同時開發及評估彌補學習成效落差的計畫。以對話式、研討會為本的學習為實踐根基，而非單向傳授。",
-      zhs: "教育专业人士，现为博士候选人，研究教学中的新兴技术。通过学术发展与升学辅导指导逾千名学生，同时开发及评估弥补学习成效差距的计划。以对话式、研讨会为本的学习为实践根基，而非单向传授。",
-      fa: "متخصص آموزش و دانشجوی کنونی دکتری با پژوهش در فناوری‌های نوظهور در آموزش. راهنمایی بیش از هزار دانش‌آموز در رشد تحصیلی و پذیرش، همراه با طراحی و ارزیابی برنامه‌هایی که شکاف‌های عملکرد را می‌بندند. مبنای کار، یادگیری گفت‌وگومحور و سمینارمحور است نه انتقال یک‌سویه.",
-      fr: "Professionnel de l'éducation et doctorant étudiant les technologies émergentes en pédagogie. A accompagné plus de mille élèves dans leur progression scolaire et leurs candidatures, tout en concevant et évaluant des programmes qui comblent les écarts de performance. Ancre sa pratique dans un apprentissage dialogique de type séminaire plutôt que dans la transmission."
-    },
-    community: {
-      en: "Community development professional experienced in coordinating volunteer programs and community initiatives across multicultural settings. Managed volunteer coordination, budgeting, and partner networks, and organized university and secondary-school conferences at scale. Applies social and economic impact assessment to build durable networks.",
-      zh: "社區發展專業人士，擅長在多元文化環境中統籌志工計畫與社區項目。負責志工協調、預算編列及夥伴網絡，並大規模籌辦大學及中學會議。運用社會與經濟影響評估，以建立持久的網絡。",
-      zhs: "社区发展专业人士，擅长在多元文化环境中统筹志愿者计划与社区项目。负责志愿者协调、预算编列及伙伴网络，并大规模筹办大学及中学会议。运用社会与经济影响评估，以建立持久的网络。",
-      fa: "متخصص توسعهٔ اجتماعی با تجربه در هماهنگی برنامه‌های داوطلبانه و طرح‌های اجتماعی در محیط‌های چندفرهنگی. مسئول هماهنگی داوطلبان، بودجه‌بندی و شبکه‌های همکار، و برگزارکنندهٔ همایش‌های دانشگاهی و دبیرستانی در مقیاس بزرگ. به‌کارگیری ارزیابی اثر اجتماعی و اقتصادی برای ساخت شبکه‌های پایدار.",
-      fr: "Professionnel du développement communautaire expérimenté dans la coordination de programmes de bénévolat et d'initiatives communautaires en milieu multiculturel. A géré la coordination des bénévoles, la budgétisation et les réseaux de partenaires, et organisé des conférences universitaires et secondaires d'envergure. Recourt à l'évaluation de l'impact social et économique pour bâtir des réseaux durables."
-    },
-    kitchen: {
-      en: "Hospitality and culinary background spanning private estate kitchens and front-of-house management. Worked as a chef between teaching terms, including a high-end private winery estate outside Florence, alongside shift management and event roles. Food Handlers certified.",
-      zh: "餐旅與廚藝背景，涵蓋私人莊園廚房及前場管理。於教學工作之間擔任廚師，包括佛羅倫斯郊外一座高級私人酒莊，並兼任班次管理及活動職務。持有食品安全處理（Food Handlers）認證。",
-      zhs: "餐旅与厨艺背景，涵盖私人庄园厨房及前场管理。于教学工作之间担任厨师，包括佛罗伦萨郊外一座高级私人酒庄，并兼任班次管理及活动职务。持有食品安全处理（Food Handlers）认证。",
-      fa: "پیشینهٔ مهمان‌نوازی و آشپزی، از آشپزخانه‌های املاک خصوصی تا مدیریت پذیرایی. کار به‌عنوان سرآشپز در فاصلهٔ دوره‌های تدریس، از جمله یک ملک شراب‌سازی خصوصی ممتاز در حومهٔ فلورانس، همراه با مدیریت شیفت و نقش‌های رویداد. دارای گواهینامهٔ بهداشت مواد غذایی (Food Handlers).",
-      fr: "Parcours en hôtellerie et en cuisine, des cuisines de domaines privés à la gestion de salle. A travaillé comme chef entre ses contrats d'enseignement, notamment dans un domaine viticole privé haut de gamme près de Florence, en plus de la gestion des quarts et de rôles événementiels. Certifié en hygiène alimentaire (Food Handlers)."
-    },
-    volunteer: {
-      en: "Volunteer coordinator experienced in mobilizing programs and people across community settings, from student-run urban agriculture to accessibility-focused walks. Brings resource planning and cross-cultural collaboration to mission-driven work.",
-      zh: "志工協調員，擅長在各類社區場景中動員計畫與人力，從學生營運的都市農業到關注無障礙的步行活動。為使命導向的工作帶來資源規劃與跨文化協作。",
-      zhs: "志愿者协调员，擅长在各类社区场景中动员计划与人力，从学生运营的都市农业到关注无障碍的步行活动。为使命导向的工作带来资源规划与跨文化协作。",
-      fa: "هماهنگ‌کنندهٔ داوطلبان با تجربه در بسیج برنامه‌ها و افراد در محیط‌های اجتماعی، از کشاورزی شهری دانشجویی تا پیاده‌روی‌های متمرکز بر دسترس‌پذیری. برنامه‌ریزی منابع و همکاری میان‌فرهنگی را به کارهای هدف‌محور می‌آورد.",
-      fr: "Coordonnateur de bénévoles expérimenté dans la mobilisation de programmes et de personnes en milieu communautaire, de l'agriculture urbaine gérée par des étudiants aux marches axées sur l'accessibilité. Apporte planification des ressources et collaboration interculturelle au travail à vocation sociale."
-    },
-    performance: {
-      en: "Comfortable in public-facing and performance settings, from competitive select-level athletics to leading seminars and public talks. Brings composure, presence, and teamwork into the room.",
-      zh: "擅長面對公眾及表演場合，從競技選拔級體育到主持研討會及公開演講。將沉著、台風與團隊合作帶入現場。",
-      zhs: "擅长面对公众及表演场合，从竞技选拔级体育到主持研讨会及公开演讲。将沉着、台风与团队合作带入现场。",
-      fa: "راحت در موقعیت‌های عمومی و اجرایی، از ورزش رقابتی سطح منتخب تا ادارهٔ سمینارها و سخنرانی‌های عمومی. خونسردی، حضور و کار تیمی را به فضا می‌آورد.",
-      fr: "À l'aise en contexte public et scénique, du sport de compétition de niveau sélect à l'animation de séminaires et de conférences. Apporte sang-froid, présence et esprit d'équipe."
-    },
-    seminarschools: {
-      en: "Portfolio record for Seminar Schools and related projects, including Leizu Academy, BookwormBurrows / PolymythDND, Teacher Resources, Polymythcal, Marginalia, the Agora, Ohm Dome, polymyth / AA*, and Florilegium. Connects web infrastructure, public learning, writing, research, tutoring, and project design.",
-      zh: "Seminar Schools 創辦人，這是一間以研討會作為嚴肅學習根本形式的多倫多機構。經營嫘祖學院（Leizu Academy），輔導安大略課程、IB 文憑及大學升學，並推動 polymyth 框架與 bookwormburrows 教學遊戲。將課堂實踐與對話式學習研究相連結。",
-      zhs: "Seminar Schools 创办人，这是一间以研讨会作为严肃学习根本形式的多伦多机构。经营嫘祖学院（Leizu Academy），辅导安大略课程、IB 文凭及大学升学，并推动 polymyth 框架与 bookwormburrows 教学游戏。将课堂实践与对话式学习研究相连结。",
-      fa: "بنیان‌گذار Seminar Schools، نهادی در تورنتو که بر سمینار به‌عنوان شکل بنیادی یادگیری جدی استوار است. ادارهٔ آکادمی لِیزو (Leizu Academy) برای آموزش خصوصی در برنامهٔ درسی انتاریو، دیپلم IB و پذیرش دانشگاه، در کنار چارچوب polymyth و بازی آموزشی bookwormburrows. پیوند میان عمل کلاسی و پژوهش در یادگیری گفت‌وگومحور.",
-      fr: "Fondateur de Seminar Schools, une structure torontoise fondée sur le séminaire comme forme première d'un apprentissage sérieux. Dirige la Leizu Academy, qui prépare au curriculum de l'Ontario, au diplôme de l'IB et aux admissions universitaires, aux côtés du cadre polymyth et du jeu pédagogique bookwormburrows. Relie la pratique en classe à la recherche sur l'apprentissage dialogique."
-    }
-  };
-  var COMPETENCIES = ["Resource Planning & Allocation","Consultation & Guidance Expertise","Policy & Procedure Development","Social & Economic Impact Assessment","Team Development & Leadership","Basic French, Farsi, & Mandarin","Key Performance Indicator (KPI) tracking & Continuous Process Improvement"];
-  // Per-tab competency routing. With no filter the full list shows. Filtered, the
-  // competency block becomes the union of the active tabs' lists in canonical order,
-  // so a kitchen CV stops advertising policy and impact-assessment skills. Order and
-  // wording stay anchored to COMPETENCIES above; this only selects.
-  var COMP_BY_CAT = {
-    teaching: ["Consultation & Guidance Expertise","Basic French, Farsi, & Mandarin"],
-    education: ["Consultation & Guidance Expertise","Policy & Procedure Development","Basic French, Farsi, & Mandarin"],
-    community: ["Resource Planning & Allocation","Policy & Procedure Development","Social & Economic Impact Assessment","Team Development & Leadership","Key Performance Indicator (KPI) tracking & Continuous Process Improvement"],
-    kitchen: ["Resource Planning & Allocation","Team Development & Leadership"],
-    volunteer: ["Resource Planning & Allocation","Social & Economic Impact Assessment","Team Development & Leadership"],
-    performance: ["Team Development & Leadership"],
-    seminarschools: ["Resource Planning & Allocation","Consultation & Guidance Expertise","Policy & Procedure Development","Team Development & Leadership","Key Performance Indicator (KPI) tracking & Continuous Process Improvement"]
-  };
-  // Localized competency labels, index-aligned with COMPETENCIES. English falls through.
-  var COMPETENCIES_L10N = {
-    zh: ["資源規劃與分配","諮詢與輔導專長","政策與流程制定","社會與經濟影響評估","團隊培養與領導","基礎法語、波斯語及普通話","關鍵績效指標（KPI）追蹤與持續流程改善"],
-    zhs: ["资源规划与分配","咨询与辅导专长","政策与流程制定","社会与经济影响评估","团队培养与领导","基础法语、波斯语及普通话","关键绩效指标（KPI）追踪与持续流程改善"],
-    fa: ["برنامه‌ریزی و تخصیص منابع","تخصص مشاوره و راهنمایی","تدوین سیاست و رویه","ارزیابی اثر اجتماعی و اقتصادی","توسعهٔ تیم و رهبری","فرانسه، فارسی و ماندارین مقدماتی","پایش شاخص‌های کلیدی عملکرد (KPI) و بهبود مستمر فرایند"],
-    fr: ["Planification et allocation des ressources","Expertise en consultation et orientation","Élaboration de politiques et de procédures","Évaluation de l'impact social et économique","Développement d'équipe et leadership","Français, persan et mandarin de base","Suivi des indicateurs clés de performance (KPI) et amélioration continue des processus"]
-  };
-
-  var esc = function (s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
-  var dateDigits = function (s) { return lang === 'fa' ? String(s).replace(/[0-9]/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'.charAt(+d); }) : s; };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
+  var pick = function (o) { return (o && typeof o === 'object') ? (o[lang] || o.en || '') : (o || ''); };
   var firstSentence = function (txt) {
-    var s = String(txt).trim();
-    var m = s.match(/^[\s\S]*?(?:[.!?](?=\s|$)|[。！？؟])/);
-    return m ? m[0] : s;
+    var m = String(txt || '').trim().match(/^[\s\S]*?(?:[.!?](?=\s|$)|[。！？؟])/);
+    return m ? m[0].trim() : String(txt || '').trim();
   };
-  var tagsOf = function (c) { return Array.isArray(c) ? c : [c]; };
-  var longest = D.reduce(function(a,e){ return Math.max(a, String(e[1]).length); }, 0);
-  var dateColPt = Math.min(118, Math.max(92, 6.1*longest)).toFixed(0);
-
-  var rowHtml = function (item) {
-    var color = '#7A2632';
-    var titleRaw = getText(item[3], lang) || '';
-    var title = esc(titleRaw);
-    var roleLen = titleRaw.length;
-    var sub = item[4] ? getText(item[4], lang) : null;
-    var noteRaw = (sub && String(sub).trim()) ? String(sub).trim()
-      : (item[6] && getText(item[6], lang) && getText(item[6], lang).trim() ? firstSentence(getText(item[6], lang)) : null);
-    if (noteRaw && noteRaw.length > (72 - roleLen)) { noteRaw = null; }
-    var note = noteRaw ? esc(noteRaw) : null;
-    return '<tr><td class="d">'+dateDigits(esc(item[1]))+'</td>'
-      + '<td class="b" style="border-left-color:'+color+'"><span class="t">'+title+'</span>'+(note?' <span class="n">'+note+'</span>':'')+'</td></tr>';
-  };
-
-  var secs = '';
-  if (cvMode === "theme") {
-    THEME_ORDER.forEach(function(cat){
-      var items = D.filter(function(x){ return sectionCat(active, x[2])===cat && x[0]>=1 && !tagsOf(x[2]).includes('seminarschools') && !isCert(x) && (!isFiltered || tagMatches(active, x[2])); }).sort(function(a,b){ return b[0]-a[0]; });
-      if (!items.length) return;
-      var secName = esc(CAT_LABELS[cat] || cat);
-      secs += '<div class="sec block"><div class="sh">'+secName+'</div><table class="rows">'+items.map(rowHtml).join('')+'</table></div>';
-    });
-  } else {
-    for (var i=9; i>=1; i--) {
-      var items = D.filter(function(x){ return x[0]===i && !tagsOf(x[2]).includes('seminarschools') && !isCert(x) && (!isFiltered || tagMatches(active, x[2])); });
-      if (!items.length) continue;
-      var secName = esc((t.secs||UI.en.secs)[i] || UI.en.secs[i]);
-      secs += '<div class="sec block"><div class="sh">'+secName+'</div><table class="rows">'+items.map(rowHtml).join('')+'</table></div>';
-    }
-  }
-
-  // Credentials follow the same per-tab anchoring as the on-screen CV
-  // (CREDS_OVERRIDE). Single tab: that tab's rule, where certs:null or
-  // edu:null removes the section. Multiple tabs: the union of each selected
-  // tab's certs in canonical order; education shows unless every selected
-  // tab suppresses it. No filter: full lists. This is what keeps a kitchen
-  // CV from carrying machine-learning bootcamps.
-  var splitCreds = function (s) { return String(s||'').split(/\s*[\u00b7\u3001]\s*/).filter(Boolean); };
-  var ovr = CREDS_OVERRIDE[lang] || CREDS_OVERRIDE.en || {};
-  var fullCerts = splitCreds(t.certL||UI.en.certL);
-  var certItems, showPrintEdu = true;
-  if (!isFiltered) {
-    certItems = fullCerts;
-  } else {
-    var allowed = {};
-    var anyFull = false, anyEdu = false;
-    active.forEach(function (cat) {
-      var rule = ovr[cat];
-      if (!rule) { anyFull = true; anyEdu = true; return; }     // no rule = full lists
-      if (rule.certs === null) { /* contributes nothing */ }
-      else if (rule.certs === undefined) { anyFull = true; }
-      else splitCreds(rule.certs).forEach(function (c) { allowed[c] = 1; });
-      if (rule.edu !== null) anyEdu = true;
-    });
-    certItems = anyFull ? fullCerts : fullCerts.filter(function (c) { return allowed[c]; });
-    // Items present in a rule but phrased differently than certL still show:
-    Object.keys(allowed).forEach(function (c) {
-      if (certItems.indexOf(c) === -1 && fullCerts.indexOf(c) === -1) certItems.push(c);
-    });
-    showPrintEdu = anyEdu;
-  }
-  var showPrintCerts = certItems.length > 0;
-
-  var eduLines = String(t.eduL||UI.en.eduL).split(/\s*\u00b7\s*/).filter(Boolean).map(function(line){
-    var m = line.match(/^([^(,]+)([,(][\s\S]*)?$/);
-    if (!m) return '<div class="erow"><span class="edeg">'+esc(line)+'</span></div>';
-    var deg = esc(m[1].trim()); var det = m[2]?esc(m[2].trim()):'';
-    var sep = (det.indexOf(',')===0) ? '' : ' ';
-    return '<div class="erow"><span class="edeg">'+deg+'</span>'+(det?sep+'<span class="edet">'+det+'</span>':'')+'</div>';
-  }).join('');
-
-  var half = Math.ceil(certItems.length/2);
-  var certCol = function(arr){ return '<div class="ccol">'+arr.map(function(c){ return '<span class="ci">'+esc(c)+'</span>'; }).join('')+'</div>'; };
-  var certHtml = certItems.length === 1
-    ? '<div class="ccol" style="width:98%">'+'<span class="ci">'+esc(certItems[0])+'</span></div>'
-    : certCol(certItems.slice(0,half))+certCol(certItems.slice(half));
-
+  var dateDigits = function (s) { return lang === 'fa' ? String(s).replace(/[0-9]/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'.charAt(+d); }) : s; };
+  var rowTags = function (item) { return Array.isArray(item[2]) ? item[2] : [item[2]]; };
+  var hasTag = function (item, cat) { return rowTags(item).indexOf(cat) !== -1; };
+  var isCertRow = function (item) { return isCert(item) || /Certif|Certificate|Bootcamp|Machine Learning A-Z|Practitioner|TESOL|Food Handlers|Bronze Cross/i.test(pick(item[3])); };
   var CAT_ORDER = ['kitchen','teaching','community','education','volunteer','performance','seminarschools'];
   var activeCats = CAT_ORDER.filter(function(c){ return active.has(c); });
-  var pickL = function (o) { return (o && typeof o === 'object') ? (o[lang] || o.en) : o; };
-  var summaryRaw;
-  if (activeCats.length === 0) {
-    summaryRaw = pickL(SUMMARY);
-  } else if (activeCats.length === 1) {
-    summaryRaw = pickL(SUMMARY_BY_CAT[activeCats[0]]) || pickL(SUMMARY);
-  } else {
-    summaryRaw = activeCats.map(function(c){
-      var t = String(pickL(SUMMARY_BY_CAT[c]) || '').trim();
-      var m = t.match(/^[\s\S]*?(?:[.!?](?=\s|$)|[。！？؟])/);
-      return m ? m[0].trim() : t;
-    }).filter(Boolean).join(' ');
-  }
-  var summaryText = esc(summaryRaw).replace(/\n\n/g, '</p><p>');
-  if (summaryText.indexOf('</p>') !== -1) summaryText = '<p>' + summaryText + '</p>';
-  var compL = COMPETENCIES_L10N[lang] || COMPETENCIES;
-  var compIdx;
-  if (active.size === 0) { compIdx = COMPETENCIES.map(function (_, i) { return i; }); }
+  var isFiltered = activeCats.length > 0;
+  var catLabels = (t && t.cats) || UI.en.cats;
+  var labelFor = function (cat) { return catLabels[cat] || CAT_LABELS[cat] || cat; };
+  var activeEqualsLocal = function (arr) { return activeCats.length === arr.length && arr.every(function(c){ return active.has(c); }); };
+  var focusTitle;
+  if (activeCats.length === 0) focusTitle = 'Educator and Community Relations Professional';
+  else if (activeEqualsLocal(['kitchen','community'])) focusTitle = 'Hospitality and Community CV';
+  else if (activeEqualsLocal(['teaching','education'])) focusTitle = 'Teaching and Education CV';
+  else if (activeEqualsLocal(['seminarschools'])) focusTitle = 'Portfolio CV';
+  else focusTitle = activeCats.map(labelFor).join(' + ') + ' CV';
+
+  var PRINT_FOCUS = {
+    all: 'Education and community development professional with experience across North America, Asia, and Europe. Mentored 1,000+ students while coordinating volunteer programs, community initiatives, hospitality work, writing, performance, and public-facing projects.',
+    teaching: 'Teacher and education worker with experience across OSSD, IB, AP, A-Level, ESL, adult education, online instruction, admissions preparation, and curriculum support. Builds seminar-style classrooms that turn reading, revision, and discussion into durable student work.',
+    education: 'Education professional and PhD candidate working across pedagogy, curriculum, academic development, educational technology, writing instruction, university preparation, and program assessment.',
+    community: 'Community development and coordination worker with experience building volunteer systems, partner networks, conferences, refugee-support logistics, community programs, and multicultural communication structures.',
+    kitchen: 'Hospitality and culinary worker with kitchen, front-of-house, private estate, event, farm, and shift-management experience. Brings calm service, resource planning, practical coordination, and care under pressure.',
+    volunteer: 'Volunteer and service worker with long-running experience in accessibility, farms, long-term care, refugee support, education, community markets, and public events. The through-line is showing up where coordination and care are needed.',
+    performance: 'Performance and public-facing worker with theatre, screen, front-of-house, event, teaching, and presentation experience. Brings stage awareness, attention to the room, timing, improvisation, and audience care.',
+    seminarschools: 'Founder and editor of public-learning projects across seminarschools.com, including Leizu Academy, Bookworm Burrows, Teacher Resources, Marginalia, Polymythcal, and the wider methodology library.'
+  };
+  var focusSummary;
+  if (activeCats.length === 0) focusSummary = PRINT_FOCUS.all;
+  else if (activeEqualsLocal(['kitchen','community'])) focusSummary = PRINT_FOCUS.kitchen + ' ' + firstSentence(PRINT_FOCUS.community);
+  else if (activeEqualsLocal(['teaching','education'])) focusSummary = PRINT_FOCUS.teaching + ' ' + firstSentence(PRINT_FOCUS.education);
+  else if (activeCats.length === 1) focusSummary = PRINT_FOCUS[activeCats[0]] || PRINT_FOCUS.all;
+  else focusSummary = activeCats.map(function(c){ return firstSentence(PRINT_FOCUS[c]); }).filter(Boolean).join(' ');
+
+  var COMPETENCIES = ['Resource Planning & Allocation','Consultation & Guidance Expertise','Policy & Procedure Development','Social & Economic Impact Assessment','Team Development & Leadership','Basic French, Farsi, & Mandarin','KPI Tracking & Continuous Process Improvement'];
+  var COMP_BY_CAT = {
+    teaching: ['Consultation & Guidance Expertise','Policy & Procedure Development','Team Development & Leadership','Basic French, Farsi, & Mandarin'],
+    education: ['Consultation & Guidance Expertise','Policy & Procedure Development','Basic French, Farsi, & Mandarin','KPI Tracking & Continuous Process Improvement'],
+    community: ['Resource Planning & Allocation','Social & Economic Impact Assessment','Team Development & Leadership','KPI Tracking & Continuous Process Improvement'],
+    kitchen: ['Resource Planning & Allocation','Team Development & Leadership'],
+    volunteer: ['Resource Planning & Allocation','Social & Economic Impact Assessment','Team Development & Leadership'],
+    performance: ['Team Development & Leadership','Consultation & Guidance Expertise'],
+    seminarschools: ['Resource Planning & Allocation','Consultation & Guidance Expertise','Policy & Procedure Development','Team Development & Leadership']
+  };
+  var compList;
+  if (!isFiltered) compList = COMPETENCIES;
   else {
-    var compUnion = {};
-    activeCats.forEach(function (c) { (COMP_BY_CAT[c] || []).forEach(function (x) { compUnion[x] = 1; }); });
-    compIdx = COMPETENCIES.map(function (c, i) { return compUnion[c] ? i : -1; }).filter(function (i) { return i >= 0; });
+    var seenComp = {};
+    activeCats.forEach(function(c){ (COMP_BY_CAT[c] || []).forEach(function(v){ seenComp[v] = 1; }); });
+    compList = COMPETENCIES.filter(function(v){ return seenComp[v]; });
   }
-  var showComp = compIdx.length > 0;
-  var compHtml = compIdx.map(function (i, k) { var mk = '<span class="m"' + (k ? '' : ' style="margin-left:0"') + '>&#9642;</span>'; return '<span style="white-space:nowrap">' + mk + esc(compL[i]) + '</span>'; }).join(' ');
+
+  var GENERAL_KEEP = {
+    'Teacher, Intelligent International':1,
+    'Instructor, Tamwood Education Camps':1,
+    'Teacher, NOIC Academy':1,
+    'Teacher, Willowdale High School':1,
+    'Teacher, Toronto Central Academy':1,
+    'Online Educator, Smart Native, Hong Kong':1,
+    'ESL Instructor, Access Education':1,
+    'Teacher, Chongqing No.1 International Studies School, China':1,
+    'ESL Teacher (Volunteer), Sanxin Schools, Zhongshan':1,
+    'Instructor, East Van Education Center, Vancouver':1,
+    'Teacher, Pattison High School, Vancouver':1,
+    'Project Manager and Translator, The Refugee Project':1,
+    'Community Development Manager, Campus Crops Farmers Market':1,
+    'Assistant Manager, Pizza Pizza; Event Security; Various Contracts':1,
+    'Chef, Private Winery Estate, Florence, Italy':1,
+    'Chef, Private Events and Festival Catering':1,
+    'Teaching Assistant, European Graduate School':1,
+    'Conference Organizer, McMUN and SSUNS at IRSAM, McGill':1,
+    'Research Assistant, McGill University':1,
+    'WWOOF (World Wide Opportunities on Organic Farms)':1,
+    'Sears Ontario Drama Festival':1
+  };
+  var ROW_LIMIT = {
+    all: 25, kitchen: 14, teaching: 25, education: 26, community: 18, volunteer: 14, performance: 12, seminarschools: 14,
+    combo: 20, service: 22, teachingedu: 26
+  };
+  var rowLimit = ROW_LIMIT.all;
+  if (activeEqualsLocal(['kitchen','community'])) rowLimit = ROW_LIMIT.service;
+  else if (activeEqualsLocal(['teaching','education'])) rowLimit = ROW_LIMIT.teachingedu;
+  else if (activeCats.length === 1) rowLimit = ROW_LIMIT[activeCats[0]] || ROW_LIMIT.combo;
+  else if (activeCats.length > 1) rowLimit = ROW_LIMIT.combo;
+
+  var scoreRow = function (item) {
+    var title = pick(item[3]);
+    var note = pick(item[4]);
+    var s = item[0] * 20;
+    if (/Present|Current|2025|2026/i.test(item[1])) s += 16;
+    if (/Teacher|Instructor|Project Manager|Community Development|Founder|Editor|Chef|Assistant Manager|Teaching Assistant|Conference Organizer|Research Assistant/i.test(title)) s += 10;
+    if (/1,000|six countries|\$8,000|IB|OSSD|A-Level|AP|ESL|Adult|Private|Volunteer coordination|budgeting|partner network/i.test(note)) s += 6;
+    if (GENERAL_KEEP[title]) s += 25;
+    if (isCertRow(item)) s -= 100;
+    if (item[0] === 0) s -= 80;
+    return s;
+  };
+  var itemMatches = function (item) {
+    if (!isFiltered) return !hasTag(item, 'seminarschools') && !isCertRow(item) && item[0] >= 1;
+    var minWeight = activeCats.indexOf('performance') !== -1 ? 0 : 1;
+    return activeCats.some(function(c){ return hasTag(item, c); }) && !isCertRow(item) && item[0] >= minWeight;
+  };
+  var rows = D.filter(itemMatches).sort(function(a,b){
+    var sa = scoreRow(a), sb = scoreRow(b);
+    if (sb !== sa) return sb - sa;
+    return D.indexOf(a) - D.indexOf(b);
+  }).slice(0, rowLimit);
+  rows.sort(function(a,b){
+    if (b[0] !== a[0]) return b[0]-a[0];
+    return D.indexOf(a)-D.indexOf(b);
+  });
+
+  var densityProbeRows = rows.length;
+  var cvDensity = densityProbeRows <= 8 ? 'cv-ultra' : (densityProbeRows <= 10 ? 'cv-sparse' : (densityProbeRows <= 16 ? 'cv-airy' : 'cv-dense'));
+  var usesExpandedRows = cvDensity === 'cv-ultra' || cvDensity === 'cv-sparse';
+  var trimText = function (txt, max) {
+    txt = String(txt || '').replace(/\s+/g, ' ').trim();
+    if (!txt || txt.length <= max) return txt;
+    return txt.slice(0, max - 3).replace(/\s+\S*$/, '') + '...';
+  };
+  var rowHtml = function (item) {
+    var titleRaw = pick(item[3]);
+    var noteRaw = pick(item[4]);
+    var fullRaw = pick(item[6]);
+    if (!noteRaw && fullRaw) noteRaw = firstSentence(fullRaw);
+    noteRaw = trimText(noteRaw, usesExpandedRows ? 92 : 72);
+    var descRaw = '';
+    if (usesExpandedRows && fullRaw && fullRaw !== noteRaw) descRaw = trimText(fullRaw, cvDensity === 'cv-ultra' ? 430 : (cvDensity === 'cv-sparse' ? 220 : 120));
+    var tags = rowTags(item).filter(function(c){ return c !== 'seminarschools' || active.has('seminarschools'); }).slice(0,2).map(labelFor).join(' / ');
+    return '<tr><td class="d">'+esc(dateDigits(item[1]))+'</td><td class="r"><span class="t">'+esc(titleRaw)+'</span>'+(noteRaw?' <span class="n">'+esc(noteRaw)+'</span>':'')+(tags?' <span class="tag">'+esc(tags)+'</span>':'')+(descRaw?' <span class="desc">'+esc(descRaw)+'</span>':'')+'</td></tr>';
+  };
+  var rowsHtml = rows.map(rowHtml).join('');
+
+  var splitCreds = function (s) { return String(s||'').split(/\s*[\u00b7\u3001]\s*/).filter(Boolean); };
+  var ovr = (CREDS_OVERRIDE[lang] || CREDS_OVERRIDE.en || {});
+  var fullCerts = splitCreds((t && t.certL) || UI.en.certL);
+  var certItems = fullCerts;
+  var showEdu = true;
+  if (isFiltered) {
+    var allowed = {}, anyFull = false, anyEdu = false;
+    activeCats.forEach(function(cat){
+      var rule = ovr[cat];
+      if (!rule) { anyFull = true; anyEdu = true; return; }
+      if (rule.certs === null) { }
+      else if (rule.certs === undefined) anyFull = true;
+      else splitCreds(rule.certs).forEach(function(c){ allowed[c] = 1; });
+      if (rule.edu !== null) anyEdu = true;
+    });
+    certItems = anyFull ? fullCerts : fullCerts.filter(function(c){ return allowed[c]; });
+    Object.keys(allowed).forEach(function(c){ if (certItems.indexOf(c) === -1) certItems.push(c); });
+    showEdu = anyEdu;
+  }
+  if (!isFiltered && certItems.length > 9) certItems = certItems.slice(0,9);
+  if (isFiltered && certItems.length > 8) certItems = certItems.slice(0,8);
+
+  var eduItems = String((t && t.eduL) || UI.en.eduL).split(/\s*\u00b7\s*/).filter(Boolean);
+  if (!isFiltered) eduItems = eduItems.slice(0,2);
+  else if (active.size === 1 && (active.has('kitchen') || active.has('volunteer') || active.has('performance') || active.has('seminarschools'))) showEdu = false;
+  else eduItems = eduItems.slice(0,3);
+  var sideSection = function (head, arr, cls) {
+    if (!arr || !arr.length) return '';
+    return '<div class="sideSec '+(cls||'')+'"><div class="sideHead">'+esc(head)+'</div>'+arr.map(function(v){ return '<div class="sideItem">'+esc(v)+'</div>'; }).join('')+'</div>';
+  };
+  var compHtml = compList.map(function(c){ return '<span>'+esc(c)+'</span>'; }).join('');
+  var FIT_BY_CAT = {
+    teaching: ['Seminar-style teaching', 'Writing and revision support', 'OSSD, IB, AP, ESL experience', 'Parent and student communication'],
+    education: ['Curriculum support', 'Assessment and program thinking', 'Educational technology', 'Academic development'],
+    community: ['Volunteer coordination', 'Partner communication', 'De-escalation and care', 'Public-facing logistics'],
+    kitchen: ['Kitchen operations', 'Front-of-house service', 'Shift coordination', 'Event hospitality'],
+    volunteer: ['Showing up consistently', 'Accessibility support', 'Refugee-support logistics', 'Farm and community work'],
+    performance: ['Room awareness', 'Audience care', 'Stage and screen background', 'Timing and improvisation', 'Front-of-house presence'],
+    seminarschools: ['Public-learning projects', 'Editorial infrastructure', 'Teacher resources', 'Seminar design', 'Website-based portfolio']
+  };
+  var fitItems = [];
+  if (isFiltered && cvDensity !== 'cv-dense') {
+    var seenFit = {};
+    activeCats.forEach(function(c){ (FIT_BY_CAT[c] || []).forEach(function(v){ if (!seenFit[v]) { seenFit[v] = 1; fitItems.push(v); } }); });
+    fitItems = fitItems.slice(0,6);
+  }
+  var fitHtml = fitItems.length ? sideSection('Selected Strengths', fitItems, 'fit') : '';
+  var eduHtml = showEdu ? sideSection((t && t.edu) || 'Education', eduItems, 'edu') : '';
+  var certHtml = sideSection((t && t.certs) || 'Certifications', certItems, 'certs');
+  var linksHtml = sideSection('Links', ['seminarschools.com/saul/', 'saulnassau@protonmail.com'], 'links');
 
   var css = [
-    "#printCv{font-family:Georgia,'Times New Roman','Liberation Serif',serif;color:#1c1c1c;background:#fff;font-size:10.5pt;line-height:1.4;}",
-    "#printCv a{color:inherit;text-decoration:none;}",
-    "#printCv .block{page-break-inside:avoid;break-inside:avoid;}",
-    "#printCv .hd{width:100%;border-collapse:collapse;}",
-    "#printCv .hd td{vertical-align:bottom;padding:0;}",
-    "#printCv .hd td:first-child{width:58%;}",
-    "#printCv .hd .name{font-size:23pt;font-weight:600;letter-spacing:0.4pt;color:#1c1c1c;line-height:1.04;}",
-    "#printCv .hd .name .post{font-size:11pt;font-weight:600;letter-spacing:1pt;color:#7A2632;margin-left:5pt;}",
-    "#printCv .hd .contact{width:42%;text-align:right;font-size:8.4pt;letter-spacing:0.2pt;color:#5b5b5b;line-height:1.55;white-space:nowrap;}",
-    "#printCv .hd .contact .em{color:#7A2632;}",
-    "#printCv .rule{border-bottom:1.5px solid #7A2632;margin-top:6pt;height:0;font-size:0;}",
-    "#printCv .summary{margin-top:6pt;font-size:9.5pt;line-height:1.38;color:#2b2b2b;text-align:left;}",
-    "#printCv .summary p{margin:0 0 4pt 0;}",
-    "#printCv .summary p:last-child{margin-bottom:0;}",
-    "#printCv .comp{margin-top:4pt;font-size:8.9pt;line-height:1.42;color:#454545;overflow-wrap:break-word;word-wrap:break-word;}",
-    "#printCv .comp .m{color:#7A2632;margin:0 5pt;}",
-    "#printCv .sec{margin-top:9pt;}",
-    "#printCv .sh{font-size:9.5pt;font-weight:600;letter-spacing:2.2pt;text-transform:uppercase;color:#7A2632;border-bottom:0.75px solid #ddc8cc;padding-bottom:2pt;margin-bottom:3.5pt;page-break-after:avoid;}",
-    "#printCv .rows{width:100%;border-collapse:collapse;}",
-    "#printCv .rows td{vertical-align:top;padding:2.4pt 0;}",
-    "#printCv .rows td.d{width:"+dateColPt+"pt;text-align:right;white-space:nowrap;font-size:8.6pt;color:#6c6c6c;padding-right:12pt;padding-top:3.1pt;letter-spacing:0.2pt;}",
-    "#printCv .rows td.b{border-left:2px solid #888;padding-left:12pt;font-size:10.2pt;line-height:1.28;overflow-wrap:break-word;word-wrap:break-word;}",
-    "#printCv .t{font-weight:bold;color:#171717;}",
-    "#printCv .n{font-style:italic;color:#5c5c5c;font-size:9.6pt;}",
-    "#printCv .edu{margin-top:8pt;}",
-    "#printCv .erow{padding:1.7pt 0;font-size:10.1pt;line-height:1.32;}",
-    "#printCv .edeg{font-weight:bold;color:#171717;}",
-    "#printCv .edet{color:#4f4f4f;}",
-    "#printCv .certs{margin-top:9pt;}",
-    "#printCv .ccol{display:inline-block;vertical-align:top;width:48%;margin-right:2%;}",
-    "#printCv .ccol .ci{display:block;padding:0.6pt 0 0.6pt 9pt;text-indent:-9pt;font-size:9pt;line-height:1.4;color:#2d2d2d;}"
-    + "#printCv .ccol .ci::before{content:\"\\2023\\00a0\";color:#7A2632;}"
+    '#printCv{font-family:Arial,Helvetica,sans-serif;color:#171717;background:#fff;font-size:8.65pt;line-height:1.23;-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
+    '#printCv *{box-sizing:border-box;}',
+    '#printCv a{color:inherit;text-decoration:none;}',
+    '#printCv .folio{border-top:4pt solid #111;padding-top:8pt;}',
+    '#printCv .cv-ultra,#printCv .cv-sparse,#printCv .cv-airy{height:252mm;position:relative;}',
+    '#printCv .head{width:100%;border-collapse:collapse;border-bottom:1.5pt solid #111;padding-bottom:5pt;}',
+    '#printCv .head td{vertical-align:bottom;padding:0 0 5pt 0;}',
+    '#printCv .name{font-size:23pt;line-height:.9;font-weight:700;letter-spacing:1.9pt;text-transform:uppercase;color:#111;}',
+    '#printCv .role{margin-top:4pt;font-size:8.5pt;text-transform:uppercase;letter-spacing:2.2pt;color:#7A2632;font-weight:700;}',
+    '#printCv .contact{text-align:right;font-size:7.6pt;line-height:1.45;letter-spacing:.35pt;color:#333;white-space:nowrap;}',
+    '#printCv .profile{display:table;width:100%;border-bottom:1pt solid #b7a2a5;margin:6pt 0 6pt 0;padding-bottom:5pt;}',
+    '#printCv .profile .pkey{display:table-cell;width:78pt;font-size:7.2pt;letter-spacing:2pt;text-transform:uppercase;color:#7A2632;font-weight:700;vertical-align:top;padding-top:1pt;}',
+    '#printCv .profile .ptext{display:table-cell;font-family:Georgia,Times New Roman,serif;font-size:8.35pt;line-height:1.31;color:#202020;}',
+    '#printCv .main{display:table;width:100%;table-layout:fixed;}',
+    '#printCv .left{display:table-cell;width:68%;vertical-align:top;padding-right:12pt;border-right:1pt solid #d7c7ca;}',
+    '#printCv .right{display:table-cell;width:32%;vertical-align:top;padding-left:12pt;}',
+    '#printCv .sectionHead{font-size:8.2pt;letter-spacing:2pt;text-transform:uppercase;color:#7A2632;border-bottom:1pt solid #7A2632;font-weight:700;padding-bottom:2pt;margin:0 0 4pt;}',
+    '#printCv table.rows{width:100%;border-collapse:collapse;}',
+    '#printCv .rows td{vertical-align:top;padding:1.65pt 0;}',
+    '#printCv .cv-airy .rows td{padding:2.5pt 0;}',
+    '#printCv .cv-sparse .rows td{padding:3.5pt 0;}',
+    '#printCv .cv-ultra .rows td{padding:5.8pt 0;}',
+    '#printCv .rows .d{width:92pt;text-align:right;white-space:nowrap;color:#555;font-size:7.35pt;padding-right:12pt;font-variant-numeric:tabular-nums;}',
+    '#printCv .rows .r{border-left:2pt solid #111;padding-left:8pt;font-family:Georgia,Times New Roman,serif;font-size:8.3pt;line-height:1.22;}',
+    '#printCv .cv-airy .rows .r{font-size:8.55pt;line-height:1.25;}',
+    '#printCv .cv-sparse .rows .r{font-size:8.9pt;line-height:1.28;}',
+    '#printCv .cv-ultra .rows .r{font-size:9.25pt;line-height:1.33;}',
+    '#printCv .t{font-weight:700;color:#111;}',
+    '#printCv .n{font-style:italic;color:#555;}',
+    '#printCv .tag{font-family:Arial,Helvetica,sans-serif;font-size:6.65pt;letter-spacing:.9pt;text-transform:uppercase;color:#7A2632;white-space:nowrap;}',
+    '#printCv .desc{display:block;margin-top:1.5pt;color:#3f3f3f;font-size:7.75pt;line-height:1.25;}',
+    '#printCv .cv-sparse .desc{font-size:8.05pt;line-height:1.28;margin-top:1.8pt;}',
+    '#printCv .cv-ultra .desc{font-size:8.45pt;line-height:1.32;margin-top:2.2pt;}',
+    '#printCv .chips{margin:0 0 6pt 0;}',
+    '#printCv .chips span{display:inline-block;border:1pt solid #d7c7ca;border-left:3pt solid #7A2632;padding:2pt 3pt;margin:0 2pt 3pt 0;font-size:6.9pt;line-height:1.05;background:#fbf9f9;}',
+    '#printCv .cv-airy .chips span,#printCv .cv-sparse .chips span,#printCv .cv-ultra .chips span{padding:2.4pt 3.2pt;margin-bottom:3.5pt;}',
+    '#printCv .sideSec{margin:0 0 7pt 0;}',
+    '#printCv .sideHead{font-size:7.8pt;letter-spacing:1.7pt;text-transform:uppercase;color:#7A2632;font-weight:700;border-bottom:1pt solid #d7c7ca;padding-bottom:2pt;margin-bottom:3pt;}',
+    '#printCv .sideItem{font-family:Georgia,Times New Roman,serif;font-size:7.75pt;line-height:1.24;padding:1.2pt 0;border-bottom:.35pt solid #eee;}',
+    '#printCv .cv-airy .sideItem,#printCv .cv-sparse .sideItem,#printCv .cv-ultra .sideItem{font-size:8pt;line-height:1.3;padding:1.8pt 0;}',
+    '#printCv .links .sideItem{font-family:Arial,Helvetica,sans-serif;font-size:7.2pt;letter-spacing:.3pt;}',
+    '#printCv .foot{margin-top:5pt;border-top:1pt solid #111;padding-top:3pt;text-align:center;font-size:7pt;letter-spacing:1.2pt;text-transform:uppercase;color:#333;}',
+    '#printCv .cv-ultra .foot,#printCv .cv-sparse .foot,#printCv .cv-airy .foot{position:absolute;left:0;right:0;bottom:0;margin-top:0;}'
   ].join('\n');
 
-  host.innerHTML = '<style>'+css+'</style>'
-    + '<table class="hd block"><tr><td><span class="name">Saul Karim Nassau <span class="post">MA</span></span></td>'
-    + '<td class="contact"><span class="em">saulnassau@protonmail.com</span><br>seminarschools.com/saulnassau<br>416&middot;771&middot;0382 &nbsp;&middot;&nbsp; Toronto</td></tr></table>'
-    + '<div class="rule"></div>'
-    + '<div class="summary block">'+summaryText+'</div>'
-    + (showComp ? '<div class="comp block">'+compHtml+'</div>' : '')
-    + (showPrintEdu ? '<div class="sec edu block"><div class="sh">'+esc(t.edu||UI.en.edu)+'</div>'+eduLines+'</div>' : '')
-    + secs
-    + (showPrintCerts ? '<div class="sec certs block"><div class="sh">'+esc(t.certs||UI.en.certs)+'</div>'+certHtml+'</div>' : '');
-  fitPrintCvToTwoPages(host);
+  host.innerHTML = '<style>'+css+'</style><div class="folio '+cvDensity+'" data-cv-output-revamp="2026-07-09" data-cv-whitespace-fill="2026-07-09">'
+    + '<table class="head"><tr><td><div class="name">Saul Karim Nassau <span style="font-size:10pt;letter-spacing:1pt;color:#7A2632">MA</span></div><div class="role">'+esc(focusTitle)+'</div></td>'
+    + '<td class="contact">Toronto, Ontario<br>416&middot;771&middot;0382<br>saulnassau@protonmail.com<br>seminarschools.com/saul/</td></tr></table>'
+    + '<div class="profile"><div class="pkey">Profile</div><div class="ptext">'+esc(focusSummary)+'</div></div>'
+    + '<div class="main"><div class="left"><div class="sectionHead">'+(isFiltered ? 'Selected Experience' : 'Professional Experience')+'</div><table class="rows">'+rowsHtml+'</table></div>'
+    + '<div class="right"><div class="sectionHead">Key Skills</div><div class="chips">'+compHtml+'</div>'+fitHtml+eduHtml+certHtml+linksHtml+'</div></div>'
+    + '<div class="foot">See reviews at seminarschools.com/reviews · References available on request</div></div>';
+  fitPrintCvToOnePage(host);
 }
-// Fit the print document into two pages maximum. Measures once at scale 1,
-// then binary-searches the largest zoom whose greedy section-packing fits the
-// two-page budget. Scaled-height arithmetic overestimates (smaller text wraps
-// less), so the two-page guarantee is conservative. Layout-less environments
-// measure zero and fall through to zoom 1.
-function fitPrintCvToTwoPages(host) {
-  // Whole-page rule: output is exactly one page, or two pages with the
-  // second page meaningfully filled. Never a stub page carrying one
-  // orphaned section. Mechanism: greedy section packing at candidate zoom
-  // levels; shrink (down to 0.84) to pull a slightly-overflowing document
-  // onto one page; expand (up to 1.14) to let a sparse two-page document
-  // fill its second page; shrink to fit two when content exceeds two.
+
+function fitPrintCvToOnePage(host) {
   host.style.zoom = '1';
   var probe = document.createElement('div');
-  probe.style.cssText = 'position:absolute;left:-9999px;top:0;height:253.4mm;width:10px;';
+  probe.style.cssText = 'position:absolute;left:-9999px;top:0;height:252mm;width:10px;';
   document.body.appendChild(probe);
   var pageH = probe.offsetHeight;
   document.body.removeChild(probe);
   if (!pageH) return;
   var prev = host.getAttribute('style') || '';
-  host.style.position = 'absolute'; host.style.left = '-99999px'; host.style.top = '0';
-  host.style.display = 'block'; host.style.visibility = 'hidden'; host.style.width = '187.9mm';
+  host.style.position = 'absolute';
+  host.style.left = '-99999px';
+  host.style.top = '0';
+  host.style.display = 'block';
+  host.style.visibility = 'hidden';
+  host.style.width = '190mm';
   void host.offsetHeight;
-  var blocks = host.querySelectorAll('.block');
-  var sizes = [];
-  for (var k = 0; k < blocks.length; k++) {
-    var h = blocks[k].offsetHeight;
-    var mt = parseFloat((window.getComputedStyle(blocks[k]).marginTop) || '0') || 0;
-    if (h > 0) sizes.push(h + mt);
-  }
+  var h = host.offsetHeight;
   host.setAttribute('style', prev);
-  if (!sizes.length) { host.style.zoom = '1'; return; }
-  // Greedy packer: returns pages used and the filled fraction of the last page.
-  var pack = function (z) {
-    var pages = 1, cur = 0;
-    for (var k2 = 0; k2 < sizes.length; k2++) {
-      var need = sizes[k2] * z;
-      if (cur > 0 && cur + need > pageH) { pages++; cur = need; } else { cur += need; }
-    }
-    return { pages: pages, lastFill: cur / pageH };
-  };
-  var z = 1;
-  var p1 = pack(1);
-  if (p1.pages === 1) {
-    z = 1; // one whole page already
-  } else if (p1.pages === 2) {
-    if (p1.lastFill < 0.5) {
-      // Stub second page. First choice: shrink onto one page.
-      var fit1 = 0;
-      for (var zz = 0.99; zz >= 0.84; zz -= 0.01) {
-        if (pack(zz).pages === 1) { fit1 = zz; break; }
-      }
-      if (fit1) { z = fit1; }
-      else { z = 1; }
-    }
-    // lastFill >= 0.5: an honest second page; leave at 1.
-  } else {
-    // More than two pages: shrink to the largest zoom that fits two.
-    var lo = 0.5, hi = 1;
-    for (var it = 0; it < 10; it++) {
-      var mid = (lo + hi) / 2;
-      if (pack(mid).pages <= 2) { lo = mid; } else { hi = mid; }
-    }
-    z = Math.floor(lo * 100) / 100;
-    if (pack(z).pages > 2) z = Math.max(0.5, z - 0.02);
-  }
-  host.style.zoom = String(z);
+  if (!h) return;
+  var z = Math.min(1, Math.max(0.72, (pageH / h) * 0.985));
+  host.style.zoom = String(Math.floor(z * 100) / 100);
 }
 
 window.addEventListener('beforeprint', buildPrintCv);

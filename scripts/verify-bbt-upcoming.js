@@ -1,0 +1,44 @@
+#!/usr/bin/env node
+'use strict';
+const fs = require('fs');
+const path = require('path');
+const ROOT = path.resolve(__dirname, '..');
+const read = rel => fs.readFileSync(path.join(ROOT, rel), 'utf8');
+const failures = [];
+const must = (label, ok) => { if (!ok) failures.push(label); };
+const bb = read('bb/index.html');
+const bbt = read('bb/bbt/index.html');
+const why = read('bb/why/index.html');
+const lib = read('polymyth/bookwormburrows/index.html');
+const txt = fs.existsSync(path.join(ROOT,'polymyth/bookwormburrows.txt')) ? read('polymyth/bookwormburrows.txt') : '';
+const sitemap = read('sitemap.xml');
+const netlify = read('netlify.toml');
+const llms = read('llms.txt');
+const cl = read('BB_CL_2026-07-10.md');
+must('BB landing links BBT', bb.includes('href="/bb/bbt/"') && bb.includes('BBT · BookwormBurrows Therapy'));
+must('BB landing is voluntary-first', bb.includes('Made first for voluntary seminar play'));
+must('BB landing removes dead bookmark code', !bb.includes('ss-bb-bookmark-notice-dismissed') && !bb.includes('bookmark-notice'));
+must('BB landing uses accessible faint text token', bb.includes('--fnt:#837c70'));
+must('BBT page exists with canonical route', bbt.includes('https://seminarschools.com/bb/bbt/') && bbt.includes('Upcoming · research and design phase'));
+must('BBT status is exact', bbt.includes('Research assembled. System unbuilt.') && bbt.includes('has not been released, tested, or offered as therapy'));
+must('BBT explains all research lineages', ['Therapeutically applied tabletop role-playing','Bibliotherapy','Psychodrama and drama therapy','Bleed and dual consciousness','Transformative, freeform, and diceless design','Attuned human facilitation'].every(x=>bbt.includes(x)));
+must('BBT preserves AI boundary', bbt.includes('the AI never becomes the therapist') || bbt.includes('AI is never the therapist'));
+must('BBT explains affective modifiers', bbt.includes('Emotions and personality can act like magic') && bbt.includes('contextual modifiers rather than fixed labels'));
+must('BBT distinguishes BB and BBT', bbt.includes('BB and BBT remain different'));
+must('BBT evidence ceiling is explicit', bbt.includes('The evidence ceiling') && bbt.includes('does not support claims that BBT is clinically proven'));
+must('BBT build requirements are explicit', bbt.includes('What must be built before BBT exists'));
+must('BBT links full research shelf', bbt.includes('/polymyth/bookwormburrows-bbt-therapy-bibliography-2026-07-09.md'));
+must('BBT has research citations', (bbt.match(/https:\/\/doi\.org\//g)||[]).length >= 9);
+must('BBT is canonical in BB library', lib.includes("id:'bbt-008'") && lib.includes('research assembled, therapeutic system unbuilt'));
+if (txt) must('BBT is regenerated into text mirror', txt.includes('ID: bbt-008'));
+must('Sitemap includes BBT', sitemap.includes('https://seminarschools.com/bb/bbt/'));
+must('Netlify canonicalizes BBT', netlify.includes('from = "/bb/bbt"') && netlify.includes('to = "/bb/bbt/"'));
+must('LLMs surface includes BBT', llms.includes('https://seminarschools.com/bb/bbt/'));
+must('Why page states voluntary-first context', why.includes('designed primarily for voluntary seminar play'));
+must('CL separates public synthesis from unbuilt practice', cl.includes('[CLOSED] BBT public research synthesis') && cl.includes('[OPEN] Separate BBT practice architecture'));
+if (failures.length) {
+  console.error('BBT upcoming verification failed:');
+  failures.forEach(f=>console.error(' - '+f));
+  process.exit(1);
+}
+console.log('BBT upcoming verification passed: public synthesis, evidence boundary, affective design, voluntary-first context, canonical library, routes, citations, and CL checked.');

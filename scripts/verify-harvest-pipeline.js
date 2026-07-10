@@ -36,8 +36,8 @@ for (const workflow of ['.github/workflows/scrape-seminars.yml', '.github/workfl
   const s = read(workflow);
   for (const needle of [
     'timeout-minutes: 45',
-    'actions/upload-artifact@v7',
-    'actions/checkout@v7',
+    'actions/upload-artifact@v6',
+    'actions/checkout@v5',
     'actions/setup-node@v6',
     'actions/setup-python@v6',
     'concurrency:',

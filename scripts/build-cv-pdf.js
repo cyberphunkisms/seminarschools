@@ -1,170 +1,148 @@
 #!/usr/bin/env node
-/* build-cv-pdf.js
-   Generates the static CV print document from the live data in saul/index.html.
-   Output: /tmp/cv-print.html (render with wkhtmltopdf; ship the PDF at saul/cv.pdf).
-
-   Design constraints (hard-won, do not regress):
-   - No flexbox anywhere: wkhtmltopdf (Qt WebKit) misrenders flex. Tables with explicit
-     column widths only.
-   - No overflow rules on html/body: overflow-x:hidden forces a vertical scrollbar that
-     wkhtmltopdf bakes into the PDF over the right edge.
-   - No fixed heights + overflow:hidden page chassis: silent content loss.
-   - System serif stack only (Georgia first): web fonts gate rendering and are blocked
-     in sandboxes; the layout must be font-independent.
-   - Date column: single line guaranteed (nowrap, fixed width sized to the longest
-     date string), right-aligned, so every body column starts at the same x.
-   - background-color, never the background shorthand.
-   - Render with --disable-smart-shrinking and explicit Letter margins.
+'use strict';
+/* One-page modular CV builder.
+   CV_WHITESPACE_FILL_2026_07_09: all modular outputs use the page deliberately, avoid stranded bottom whitespace, and remain one page.
+   Reads live data from saul/index.html and writes a print HTML file.
+   Render with: weasyprint /tmp/cv-print.html saul/cv.pdf
+   Optional: --cats=teaching,education --out=/tmp/cv-teaching.html --lang=en
 */
-const fs = require("fs");
-const vm = require("vm");
-const path = require("path");
-
-const SRC = path.join(__dirname, "..", "saul", "index.html");
-const OUT = "/tmp/cv-print.html";
-
-const src = fs.readFileSync(SRC, "utf8");
-
-function slice(re, label) {
-  const m = src.match(re);
-  if (!m) throw new Error("could not slice " + label);
-  return vm.runInNewContext("(" + m[1] + ")");
-}
-
-const D = slice(/const D = (\[[\s\S]*?\n\]);/, "D");
-const UI = slice(/const UI = (\{[\s\S]*?\n\});/, "UI");
-const CATS = slice(/const CATS = (\{[\s\S]*?\n\});/, "CATS");
-
-const t = UI.en;
-const tagsOf = (c) => (Array.isArray(c) ? c : [c]);
-const primaryTag = (c) => tagsOf(c)[0];
-const isCert = (item) =>
-  tagsOf(item[2]).includes("education") &&
-  /Certif|Certificate|Bootcamp|Machine Learning A-Z|Practitioner|TESOL|Bronze Cross/.test(item[3].en);
-
-const firstSentence = (txt) => {
-  const t = String(txt).trim();
-  const m = t.match(/^[\s\S]*?[.!?](?=\s|$)/);
-  return m ? m[0] : t;
+const fs = require('fs');
+const vm = require('vm');
+const path = require('path');
+const SRC = path.join(__dirname, '..', 'saul', 'index.html');
+const src = fs.readFileSync(SRC, 'utf8');
+function arg(name, def='') { const p='--'+name+'='; const x=process.argv.find(a=>a.startsWith(p)); return x?x.slice(p.length):def; }
+const OUT = arg('out', '/tmp/cv-print.html');
+const lang = arg('lang', 'en');
+const active = new Set(arg('cats','').split(',').map(s=>s.trim()).filter(Boolean));
+function slice(re, label) { const m = src.match(re); if (!m) throw new Error('could not slice '+label); return vm.runInNewContext('('+m[1]+')'); }
+const D = slice(/const D = (\[[\s\S]*?\n\]);/, 'D');
+const UI = slice(/const UI = (\{[\s\S]*?\n\});/, 'UI');
+const CREDS_OVERRIDE = slice(/const CREDS_OVERRIDE = (\{[\s\S]*?\n\});/, 'CREDS_OVERRIDE');
+const t = UI[lang] || UI.en;
+const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const pick = o => (o && typeof o === 'object') ? (o[lang] || o.en || '') : (o || '');
+const firstSentence = txt => { const m=String(txt||'').trim().match(/^[\s\S]*?(?:[.!?](?=\s|$)|[。！？؟])/); return m?m[0].trim():String(txt||'').trim(); };
+const tags = item => Array.isArray(item[2]) ? item[2] : [item[2]];
+const hasTag = (item, cat) => tags(item).includes(cat);
+const isCert = item => tags(item).includes('education') && /Certif|Certificate|Bootcamp|Machine Learning A-Z|Practitioner|TESOL|Food Handlers|Bronze Cross/i.test(pick(item[3]));
+const CAT_ORDER = ['kitchen','teaching','community','education','volunteer','performance','seminarschools'];
+const activeCats = CAT_ORDER.filter(c => active.has(c));
+const isFiltered = activeCats.length > 0;
+const catLabels = (t && t.cats) || UI.en.cats;
+const labelFor = cat => catLabels[cat] || cat;
+const activeEquals = arr => activeCats.length === arr.length && arr.every(c => active.has(c));
+let focusTitle;
+if (!isFiltered) focusTitle = 'Educator and Community Relations Professional';
+else if (activeEquals(['kitchen','community'])) focusTitle = 'Hospitality and Community CV';
+else if (activeEquals(['teaching','education'])) focusTitle = 'Teaching and Education CV';
+else if (activeEquals(['seminarschools'])) focusTitle = 'Portfolio CV';
+else focusTitle = activeCats.map(labelFor).join(' + ') + ' CV';
+const PRINT_FOCUS = {
+  all: 'Education and community development professional with experience across North America, Asia, and Europe. Mentored 1,000+ students while coordinating volunteer programs, community initiatives, hospitality work, writing, performance, and public-facing projects.',
+  teaching: 'Teacher and education worker with experience across OSSD, IB, AP, A-Level, ESL, adult education, online instruction, admissions preparation, and curriculum support. Builds seminar-style classrooms that turn reading, revision, and discussion into durable student work.',
+  education: 'Education professional and PhD candidate working across pedagogy, curriculum, academic development, educational technology, writing instruction, university preparation, and program assessment.',
+  community: 'Community development and coordination worker with experience building volunteer systems, partner networks, conferences, refugee-support logistics, community programs, and multicultural communication structures.',
+  kitchen: 'Hospitality and culinary worker with kitchen, front-of-house, private estate, event, farm, and shift-management experience. Brings calm service, resource planning, practical coordination, and care under pressure.',
+  volunteer: 'Volunteer and service worker with long-running experience in accessibility, farms, long-term care, refugee support, education, community markets, and public events. The through-line is showing up where coordination and care are needed.',
+  performance: 'Performance and public-facing worker with theatre, screen, front-of-house, event, teaching, and presentation experience. Brings stage awareness, attention to the room, timing, improvisation, and audience care.',
+  seminarschools: 'Founder and editor of public-learning projects across seminarschools.com, including Leizu Academy, Bookworm Burrows, Teacher Resources, Marginalia, Polymythcal, and the wider methodology library.'
 };
-
-const esc = (s) =>
-  String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-// Longest date string decides the column width: measured, not guessed.
-const longestDate = D.reduce((a, e) => Math.max(a, String(e[1]).length), 0);
-const dateColIn = Math.min(1.7, Math.max(1.3, 0.085 * longestDate)).toFixed(2);
-const dateColPt = (parseFloat(dateColIn) * 72).toFixed(1);
-const dateTextPt = (parseFloat(dateColPt) - 8).toFixed(1);
-const leftPadPt = (parseFloat(dateColPt) + 12 + 9).toFixed(1);
-
-const sections = [9, 8, 7, 6, 5, 4, 3, 2, 1]  // tier 0 (Elementary + Middle School) never prints
-  .map((i) => ({ i, items: D.filter((x) => x[0] === i && !tagsOf(x[2]).includes("seminarschools")) }))
-  .filter((g) => g.items.length > 0);
-
-const rows = (items) =>
-  items
-    .map((item) => {
-      const cert = isCert(item);
-      const color = (CATS[primaryTag(item[2])] || {}).color || "#999";
-      const title = esc(item[3].en);
-      const titleLen = String(item[3].en).length;
-      let noteRaw = (item[4] && item[4].en && item[4].en.trim())
-        ? String(item[4].en).trim()
-        : (item[6] && item[6].en && item[6].en.trim() ? firstSentence(item[6].en) : null);
-      if (noteRaw && noteRaw.length > 72 - titleLen) noteRaw = null;
-      const note = noteRaw ? esc(noteRaw) : null;
-      return `<div class="row">
-  <span class="d">${esc(item[1])}</span><span class="o"><span class="dot${cert ? " sq" : ""}" style="background-color:${color}"></span></span>
-  <div class="b">${cert ? '<span class="caret">&#8227;</span> ' : ""}<span class="t${cert ? " tc" : ""}">${title}</span>${note ? ` <span class="n">${note}</span>` : ""}</div>
-</div>`;
-    })
-    .join("\n");
-
-const summary = "Toronto-based worker with experience across hospitality, community work, teaching, curriculum, performance, research, writing, and public projects. Brings adaptable communication, service, organization, cross-cultural work, and project-building experience to general employment and hybrid roles.";
-const competencies = ["Resource Planning & Allocation","Consultation & Guidance Expertise","Policy & Procedure Development","Social & Economic Impact Assessment","Team Development & Leadership","Basic French, Farsi, & Mandarin","Key Performance Indicator (KPI) tracking & Continuous Process Improvement"];
-
-const sectionHtml = sections
-  .map(
-    (g) => `<div class="sec">
-<div class="sh">${esc(t.secs[g.i])}</div>
-<div class="elist">
-${rows(g.items)}
-</div>
-</div>`
-  )
-  .join("\n");
-
-const html = `<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Saul Karim Nassau &middot; Employment CV</title>
-<style>
-  @page { size: A4; margin: 0.38in 0.46in; }
-  html, body { margin:0; padding:0; background-color:#ffffff; }
-  body { font-family: Georgia, 'Times New Roman', 'Liberation Serif', serif; color:#1d1d1d; }
-  .hd { display:flex; align-items:flex-end; justify-content:space-between; gap:18pt; border-bottom:1.5px solid #7A2632; padding-bottom:7pt; margin-bottom:5pt; }
-  .hd .contact { text-align:right; }
-  .hd h1 { font-variant:small-caps; font-weight:600; letter-spacing:3.5px; font-size:20pt; color:#5A1A24; margin:0; }
-  .hd h1 .post { font-size:10pt; letter-spacing:2px; color:#7A2632; }
-  .hd .meta { font-size:8.8pt; letter-spacing:1px; color:#2a2a2a; margin:2pt 0; }
-  .hd .em { font-size:8.3pt; letter-spacing:0.8px; color:#46383a; margin-top:3.5pt; }
-  .summary { margin:6pt 0 5pt; font-size:8pt; line-height:1.36; color:#272727; }
-  .skills { margin:0 0 6pt; font-size:8pt; line-height:1.35; color:#424242; }
-  .skills .m { color:#7A2632; margin:0 4pt; }
-  .sec { margin-top:8pt; }
-  .sh { font-variant:small-caps; letter-spacing:2.2px; font-size:8.3pt; color:#7A2632;
-        border-bottom:1px solid #9b5560; padding-bottom:2pt; margin-bottom:4pt;
-        page-break-after:avoid; }
-  .elist { width:100%; }
-  .row { position:relative; page-break-inside:avoid; padding:2.2pt 0 2.2pt ${leftPadPt}pt; }
-  .row::before { content:""; position:absolute; left:${dateColPt}pt; top:0; bottom:0;
-                 width:1px; background:#d9c6c9; }
-  .row .d { position:absolute; left:0; top:3pt; width:${dateTextPt}pt; text-align:right;
-            white-space:nowrap; font-size:8.3pt; color:#3a3a3a; }
-  .row .o { position:absolute; left:${dateColPt}pt; top:6.5pt; width:12pt;
-            text-align:center; line-height:0; }
-  .dot { display:inline-block; width:5px; height:5px; border-radius:50%; }
-  .dot.sq { border-radius:1px; }
-  .row .b { font-size:9.8pt; line-height:1.24;
-            overflow-wrap:break-word; word-wrap:break-word; }
-  .t { font-weight:bold; color:#161616; }
-  .t.tc { font-weight:600; color:#33272a; }
-  .caret { color:#7A2632; }
-  .n { font-style:italic; color:#564a4c; font-size:8.3pt; }
-  .cred { margin-top:8pt; border-top:0.75px solid #c4a8ab; padding-top:5pt;
-          page-break-inside:avoid; }
-  .cred .ch { font-variant:small-caps; letter-spacing:1.8px; font-size:9.5pt;
-              color:#7A2632; margin:0 0 4pt; }
-  .cred .cb { font-size:8.3pt; line-height:1.5; color:#2c2c2c; }
-  .cred .colh { display:inline-block; vertical-align:top; width:48%; margin-right:2%; }
-  .cred .colh .ci { display:block; padding:0.6pt 0 0.6pt 9pt; text-indent:-9pt; line-height:1.5; }
-  .cred .colh .ci::before { content:"\\2023\\00a0"; color:#7A2632; }
-</style>
-</head>
-<body>
-<div class="hd">
-  <h1>Saul Karim Nassau <span class="post">MA</span></h1>
-  <div class="contact">
-    <div class="meta">416-771-0382 &middot; Toronto</div>
-    <div class="em">saulnassau@protonmail.com &middot; seminarschools.com/saul/</div>
-  </div>
-</div>
-<div class="summary">${esc(summary)}</div>
-<div class="skills">${competencies.map((c, i) => `${i ? '<span class="m">▪</span>' : ''}${esc(c)}`).join(' ')}</div>
-${sectionHtml}
-<div class="cred">
-  <div class="ch">${esc(t.certs)}</div>
-  <div class="cb">${(() => { const ci = String(t.certL).split(/\s*[·、]\s*/).filter(Boolean); const h = Math.ceil(ci.length / 2); const col = (a) => `<div class="colh">${a.map((i) => `<span class="ci">${esc(i)}</span>`).join("")}</div>`; return col(ci.slice(0, h)) + col(ci.slice(h)); })()}</div>
-</div>
-<div class="cred">
-  <div class="ch">${esc(t.edu)}</div>
-  <div class="cb">${esc(t.eduL)}</div>
-</div>
-</body>
-</html>
-`;
-
-fs.writeFileSync(OUT, html, "utf8");
-console.log(`wrote ${OUT}: ${sections.length} sections, ${D.length} entries, date col ${dateColIn}in (longest date ${longestDate} chars)`);
+let focusSummary;
+if (!isFiltered) focusSummary = PRINT_FOCUS.all;
+else if (activeEquals(['kitchen','community'])) focusSummary = PRINT_FOCUS.kitchen + ' ' + firstSentence(PRINT_FOCUS.community);
+else if (activeEquals(['teaching','education'])) focusSummary = PRINT_FOCUS.teaching + ' ' + firstSentence(PRINT_FOCUS.education);
+else if (activeCats.length === 1) focusSummary = PRINT_FOCUS[activeCats[0]] || PRINT_FOCUS.all;
+else focusSummary = activeCats.map(c => firstSentence(PRINT_FOCUS[c])).filter(Boolean).join(' ');
+const COMPETENCIES = ['Resource Planning & Allocation','Consultation & Guidance Expertise','Policy & Procedure Development','Social & Economic Impact Assessment','Team Development & Leadership','Basic French, Farsi, & Mandarin','KPI Tracking & Continuous Process Improvement'];
+const COMP_BY_CAT = {
+  teaching: ['Consultation & Guidance Expertise','Policy & Procedure Development','Team Development & Leadership','Basic French, Farsi, & Mandarin'],
+  education: ['Consultation & Guidance Expertise','Policy & Procedure Development','Basic French, Farsi, & Mandarin','KPI Tracking & Continuous Process Improvement'],
+  community: ['Resource Planning & Allocation','Social & Economic Impact Assessment','Team Development & Leadership','KPI Tracking & Continuous Process Improvement'],
+  kitchen: ['Resource Planning & Allocation','Team Development & Leadership'],
+  volunteer: ['Resource Planning & Allocation','Social & Economic Impact Assessment','Team Development & Leadership'],
+  performance: ['Team Development & Leadership','Consultation & Guidance Expertise'],
+  seminarschools: ['Resource Planning & Allocation','Consultation & Guidance Expertise','Policy & Procedure Development','Team Development & Leadership']
+};
+let compList;
+if (!isFiltered) compList = COMPETENCIES;
+else { const seen={}; activeCats.forEach(c => (COMP_BY_CAT[c]||[]).forEach(v => seen[v]=1)); compList = COMPETENCIES.filter(v => seen[v]); }
+const GENERAL_KEEP = new Set([
+  'Teacher, Intelligent International','Instructor, Tamwood Education Camps','Teacher, NOIC Academy','Teacher, Willowdale High School','Teacher, Toronto Central Academy','Online Educator, Smart Native, Hong Kong','ESL Instructor, Access Education','Teacher, Chongqing No.1 International Studies School, China','ESL Teacher (Volunteer), Sanxin Schools, Zhongshan','Instructor, East Van Education Center, Vancouver','Teacher, Pattison High School, Vancouver','Project Manager and Translator, The Refugee Project','Community Development Manager, Campus Crops Farmers Market','Assistant Manager, Pizza Pizza; Event Security; Various Contracts','Chef, Private Winery Estate, Florence, Italy','Chef, Private Events and Festival Catering','Teaching Assistant, European Graduate School','Conference Organizer, McMUN and SSUNS at IRSAM, McGill','Research Assistant, McGill University','WWOOF (World Wide Opportunities on Organic Farms)','Sears Ontario Drama Festival'
+]);
+const ROW_LIMIT = { all:25, kitchen:14, teaching:25, education:26, community:18, volunteer:14, performance:12, seminarschools:14, combo:20, service:22, teachingedu:26 };
+let rowLimit = ROW_LIMIT.all;
+if (activeEquals(['kitchen','community'])) rowLimit = ROW_LIMIT.service;
+else if (activeEquals(['teaching','education'])) rowLimit = ROW_LIMIT.teachingedu;
+else if (activeCats.length === 1) rowLimit = ROW_LIMIT[activeCats[0]] || ROW_LIMIT.combo;
+else if (activeCats.length > 1) rowLimit = ROW_LIMIT.combo;
+const scoreRow = item => {
+  const title = pick(item[3]); const note = pick(item[4]); let s = item[0] * 20;
+  if (/Present|Current|2025|2026/i.test(item[1])) s += 16;
+  if (/Teacher|Instructor|Project Manager|Community Development|Founder|Editor|Chef|Assistant Manager|Teaching Assistant|Conference Organizer|Research Assistant/i.test(title)) s += 10;
+  if (/1,000|six countries|\$8,000|IB|OSSD|A-Level|AP|ESL|Adult|Private|Volunteer coordination|budgeting|partner network/i.test(note)) s += 6;
+  if (GENERAL_KEEP.has(title)) s += 25;
+  if (isCert(item)) s -= 100;
+  if (item[0] === 0) s -= 80;
+  return s;
+};
+const itemMatches = item => {
+  if (!isFiltered) return !hasTag(item,'seminarschools') && !isCert(item) && item[0] >= 1;
+  const minWeight = activeCats.includes('performance') ? 0 : 1;
+  return activeCats.some(c => hasTag(item,c)) && !isCert(item) && item[0] >= minWeight;
+};
+let rows = D.filter(itemMatches).sort((a,b) => scoreRow(b)-scoreRow(a) || D.indexOf(a)-D.indexOf(b)).slice(0,rowLimit);
+rows.sort((a,b) => b[0]-a[0] || D.indexOf(a)-D.indexOf(b));
+const densityProbeRows = rows.length;
+const cvDensity = densityProbeRows <= 8 ? 'cv-ultra' : (densityProbeRows <= 10 ? 'cv-sparse' : (densityProbeRows <= 16 ? 'cv-airy' : 'cv-dense'));
+const usesExpandedRows = cvDensity === 'cv-ultra' || cvDensity === 'cv-sparse';
+const trimText = (txt, max) => { txt = String(txt || '').replace(/\s+/g, ' ').trim(); if (!txt || txt.length <= max) return txt; return txt.slice(0, max - 3).replace(/\s+\S*$/, '') + '...'; };
+function rowHtml(item) {
+  const titleRaw = pick(item[3]);
+  let noteRaw = pick(item[4]);
+  const fullRaw = pick(item[6]);
+  if (!noteRaw && fullRaw) noteRaw = firstSentence(fullRaw);
+  noteRaw = trimText(noteRaw, usesExpandedRows ? 92 : 72);
+  let descRaw = '';
+  if (usesExpandedRows && fullRaw && fullRaw !== noteRaw) descRaw = trimText(fullRaw, cvDensity === 'cv-ultra' ? 430 : (cvDensity === 'cv-sparse' ? 220 : 120));
+  const tagText = tags(item).filter(c => c !== 'seminarschools' || active.has('seminarschools')).slice(0,2).map(labelFor).join(' / ');
+  return '<tr><td class="d">'+esc(item[1])+'</td><td class="r"><span class="t">'+esc(titleRaw)+'</span>'+(noteRaw?' <span class="n">'+esc(noteRaw)+'</span>':'')+(tagText?' <span class="tag">'+esc(tagText)+'</span>':'')+(descRaw?' <span class="desc">'+esc(descRaw)+'</span>':'')+'</td></tr>';
+}
+const splitCreds = s => String(s||'').split(/\s*[\u00b7\u3001]\s*/).filter(Boolean);
+const ovr = CREDS_OVERRIDE[lang] || CREDS_OVERRIDE.en || {};
+const fullCerts = splitCreds((t && t.certL) || UI.en.certL);
+let certItems = fullCerts;
+let showEdu = true;
+if (isFiltered) {
+  const allowed = {}; let anyFull=false, anyEdu=false;
+  activeCats.forEach(cat => { const rule=ovr[cat]; if(!rule){anyFull=true; anyEdu=true; return;} if(rule.certs===null){} else if(rule.certs===undefined) anyFull=true; else splitCreds(rule.certs).forEach(c=>allowed[c]=1); if(rule.edu!==null) anyEdu=true; });
+  certItems = anyFull ? fullCerts : fullCerts.filter(c => allowed[c]); Object.keys(allowed).forEach(c => { if(!certItems.includes(c)) certItems.push(c); }); showEdu = anyEdu;
+}
+if (!isFiltered && certItems.length > 9) certItems = certItems.slice(0,9);
+if (isFiltered && certItems.length > 8) certItems = certItems.slice(0,8);
+let eduItems = String((t && t.eduL) || UI.en.eduL).split(/\s*\u00b7\s*/).filter(Boolean);
+if (!isFiltered) eduItems = eduItems.slice(0,2);
+else if (active.size === 1 && (active.has('kitchen') || active.has('volunteer') || active.has('performance') || active.has('seminarschools'))) showEdu = false;
+else eduItems = eduItems.slice(0,3);
+const sideSection = (head, arr, cls='') => (!arr || !arr.length) ? '' : '<div class="sideSec '+cls+'"><div class="sideHead">'+esc(head)+'</div>'+arr.map(v => '<div class="sideItem">'+esc(v)+'</div>').join('')+'</div>';
+const compHtml = compList.map(c => '<span>'+esc(c)+'</span>').join('');
+const FIT_BY_CAT = {
+  teaching: ['Seminar-style teaching', 'Writing and revision support', 'OSSD, IB, AP, ESL experience', 'Parent and student communication'],
+  education: ['Curriculum support', 'Assessment and program thinking', 'Educational technology', 'Academic development'],
+  community: ['Volunteer coordination', 'Partner communication', 'De-escalation and care', 'Public-facing logistics'],
+  kitchen: ['Kitchen operations', 'Front-of-house service', 'Shift coordination', 'Event hospitality'],
+  volunteer: ['Showing up consistently', 'Accessibility support', 'Refugee-support logistics', 'Farm and community work'],
+  performance: ['Room awareness', 'Audience care', 'Stage and screen background', 'Timing and improvisation', 'Front-of-house presence'],
+  seminarschools: ['Public-learning projects', 'Editorial infrastructure', 'Teacher resources', 'Seminar design', 'Website-based portfolio']
+};
+let fitItems = [];
+if (isFiltered && cvDensity !== 'cv-dense') {
+  const seenFit = {};
+  activeCats.forEach(c => (FIT_BY_CAT[c] || []).forEach(v => { if (!seenFit[v]) { seenFit[v]=1; fitItems.push(v); } }));
+  fitItems = fitItems.slice(0,6);
+}
+const fitHtml = fitItems.length ? sideSection('Selected Strengths', fitItems, 'fit') : '';
+const css = `@page{size:Letter;margin:10mm 10mm 10mm 10mm;}html,body{margin:0;padding:0;background:#fff;}body{font-family:Arial,Helvetica,sans-serif;color:#171717;background:#fff;font-size:8.65pt;line-height:1.23;}*{box-sizing:border-box;}a{color:inherit;text-decoration:none;}.folio{border-top:4pt solid #111;padding-top:8pt;}.cv-ultra,.cv-sparse,.cv-airy{height:252mm;position:relative;}.head{width:100%;border-collapse:collapse;border-bottom:1.5pt solid #111;padding-bottom:5pt;}.head td{vertical-align:bottom;padding:0 0 5pt 0;}.name{font-size:23pt;line-height:.9;font-weight:700;letter-spacing:1.9pt;text-transform:uppercase;color:#111;}.role{margin-top:4pt;font-size:8.5pt;text-transform:uppercase;letter-spacing:2.2pt;color:#7A2632;font-weight:700;}.contact{text-align:right;font-size:7.6pt;line-height:1.45;letter-spacing:.35pt;color:#333;white-space:nowrap;}.profile{display:table;width:100%;border-bottom:1pt solid #b7a2a5;margin:6pt 0 6pt 0;padding-bottom:5pt;}.profile .pkey{display:table-cell;width:78pt;font-size:7.2pt;letter-spacing:2pt;text-transform:uppercase;color:#7A2632;font-weight:700;vertical-align:top;padding-top:1pt;}.profile .ptext{display:table-cell;font-family:Georgia,'Times New Roman',serif;font-size:8.35pt;line-height:1.31;color:#202020;}.main{display:table;width:100%;table-layout:fixed;}.left{display:table-cell;width:68%;vertical-align:top;padding-right:12pt;border-right:1pt solid #d7c7ca;}.right{display:table-cell;width:32%;vertical-align:top;padding-left:12pt;}.sectionHead{font-size:8.2pt;letter-spacing:2pt;text-transform:uppercase;color:#7A2632;border-bottom:1pt solid #7A2632;font-weight:700;padding-bottom:2pt;margin:0 0 4pt;}table.rows{width:100%;border-collapse:collapse;}.rows td{vertical-align:top;padding:1.65pt 0;}.cv-airy .rows td{padding:2.5pt 0;}.cv-sparse .rows td{padding:3.5pt 0;}.cv-ultra .rows td{padding:5.8pt 0;}.rows .d{width:92pt;text-align:right;white-space:nowrap;color:#555;font-size:7.35pt;padding-right:12pt;font-variant-numeric:tabular-nums;}.rows .r{border-left:2pt solid #111;padding-left:8pt;font-family:Georgia,'Times New Roman',serif;font-size:8.3pt;line-height:1.22;}.cv-airy .rows .r{font-size:8.55pt;line-height:1.25;}.cv-sparse .rows .r{font-size:8.9pt;line-height:1.28;}.cv-ultra .rows .r{font-size:9.25pt;line-height:1.33;}.t{font-weight:700;color:#111;}.n{font-style:italic;color:#555;}.tag{font-family:Arial,Helvetica,sans-serif;font-size:6.65pt;letter-spacing:.9pt;text-transform:uppercase;color:#7A2632;white-space:nowrap;}.desc{display:block;margin-top:1.5pt;color:#3f3f3f;font-size:7.75pt;line-height:1.25;}.cv-sparse .desc{font-size:8.05pt;line-height:1.28;margin-top:1.8pt;}.cv-ultra .desc{font-size:8.45pt;line-height:1.32;margin-top:2.2pt;}.chips{margin:0 0 6pt 0;}.chips span{display:inline-block;border:1pt solid #d7c7ca;border-left:3pt solid #7A2632;padding:2pt 3pt;margin:0 2pt 3pt 0;font-size:6.9pt;line-height:1.05;background:#fbf9f9;}.cv-airy .chips span,.cv-sparse .chips span,.cv-ultra .chips span{padding:2.4pt 3.2pt;margin-bottom:3.5pt;}.sideSec{margin:0 0 7pt 0;}.sideHead{font-size:7.8pt;letter-spacing:1.7pt;text-transform:uppercase;color:#7A2632;font-weight:700;border-bottom:1pt solid #d7c7ca;padding-bottom:2pt;margin-bottom:3pt;}.sideItem{font-family:Georgia,'Times New Roman',serif;font-size:7.75pt;line-height:1.24;padding:1.2pt 0;border-bottom:.35pt solid #eee;}.cv-airy .sideItem,.cv-sparse .sideItem,.cv-ultra .sideItem{font-size:8pt;line-height:1.3;padding:1.8pt 0;}.links .sideItem{font-family:Arial,Helvetica,sans-serif;font-size:7.2pt;letter-spacing:.3pt;}.foot{margin-top:5pt;border-top:1pt solid #111;padding-top:3pt;text-align:center;font-size:7pt;letter-spacing:1.2pt;text-transform:uppercase;color:#333;}.cv-ultra .foot,.cv-sparse .foot,.cv-airy .foot{position:absolute;left:0;right:0;bottom:0;margin-top:0;}`;
+const html = `<!doctype html><html><head><meta charset="utf-8"><title>Saul Karim Nassau CV</title><style>${css}</style></head><body><div class="folio ${cvDensity}" data-cv-output-revamp="2026-07-09" data-cv-whitespace-fill="2026-07-09"><table class="head"><tr><td><div class="name">Saul Karim Nassau <span style="font-size:10pt;letter-spacing:1pt;color:#7A2632">MA</span></div><div class="role">${esc(focusTitle)}</div></td><td class="contact">Toronto, Ontario<br>416&middot;771&middot;0382<br>saulnassau@protonmail.com<br>seminarschools.com/saul/</td></tr></table><div class="profile"><div class="pkey">Profile</div><div class="ptext">${esc(focusSummary)}</div></div><div class="main"><div class="left"><div class="sectionHead">${isFiltered ? 'Selected Experience' : 'Professional Experience'}</div><table class="rows">${rows.map(rowHtml).join('')}</table></div><div class="right"><div class="sectionHead">Key Skills</div><div class="chips">${compHtml}</div>${fitHtml}${showEdu ? sideSection((t&&t.edu)||'Education', eduItems, 'edu') : ''}${sideSection((t&&t.certs)||'Certifications', certItems, 'certs')}${sideSection('Links', ['seminarschools.com/saul/', 'saulnassau@protonmail.com'], 'links')}</div></div><div class="foot">See reviews at seminarschools.com/reviews &middot; References available on request</div></div></body></html>`;
+fs.writeFileSync(OUT, html, 'utf8');
+console.log(`wrote ${OUT}: ${rows.length} rows, focus=${focusTitle}, cats=${activeCats.join(',') || 'all'}`);

@@ -18,21 +18,21 @@ if(seedMatch){
   const vm = require('vm');
   seedCount = vm.runInNewContext('const SEED = [' + seedMatch[1] + ']; SEED.length;', {});
 }
-must('BB operation file keeps all 221 seed entries', seedCount === 221);
+must('BB operation file keeps all 246 seed entries', seedCount === 246);
 
 const txt = read('polymyth/bookwormburrows.txt');
 must('Plain text mirror includes student-friendly versions', txt.includes('STUDENT-FRIENDLY VERSION:'));
 must('Plain text mirror keeps original teacher/archive versions', txt.includes('ORIGINAL TEACHER / ARCHIVE VERSION:'));
-must('Plain text mirror still has 221 entries', /TOTAL ENTRIES:\s+221/.test(txt));
+must('Plain text mirror still has 246 entries', /TOTAL ENTRIES:\s+246/.test(txt));
 
 const bbIndex = read('bb/index.html');
 must('BB landing says enter the burrow', bbIndex.includes('enter the burrow'));
-must('BB landing explains the Dimensional Master path', bbIndex.includes('give it to the Dimensional Master'));
+must('BB landing explains the Dimensional Master path', bbIndex.includes('Give the wormcards to the Dimensional Master'));
 must('BB landing removes old smash wording', !bbIndex.includes('Smash the figures'));
 
 const why = read('bb/why/index.html');
-must('Why page has student version', why.includes('Student version</h2>'));
-must('Why page keeps full research essay in details', why.includes('Full research essay for adults and teachers'));
+must('Why page has student version', why.includes('Player version</h2>'));
+must('Why page keeps full research essay in details', why.includes('Full education research essay'));
 
 const whyZh = read('bb/why/zh/index.html');
 must('Chinese why page has student version', whyZh.includes('学生版</h2>'));
@@ -40,8 +40,8 @@ must('Chinese why page keeps full essay details', whyZh.includes('教师和成�
 
 const about = read('bookwormcard/about/index.html');
 must('Bookwormcard about uses text-world wording', about.includes('text-world'));
-must('Bookwormcard about names Dimensional Master and AI behind curtain', about.includes('Dimensional Master') && about.includes('AI helps behind the curtain'));
-must('Bookwormcard about keeps DM assistant bootstrap playable', about.includes('copy bootstrap') && about.includes('DM table assistant') && about.includes('setupnpcs') && about.includes('improvnpcs'));
+must('Bookwormcard about names Dimensional Master and teacher workflow', about.includes('Dimensional Master') && about.includes('teacher manual workflow'));
+must('Bookwormcard about routes the AI-assisted workflow through BB manual', about.includes('AI-assisted BB is the priority workflow') && about.includes('/polymyth/bookwormburrows.txt') && !about.includes('copy bootstrap') && !about.includes('setupnpcs') && !about.includes('improvnpcs'));
 
 const glossary = read('bookwormcard/glossary/index.html');
 must('Glossary uses character engine wording', glossary.includes('character engine'));

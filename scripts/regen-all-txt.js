@@ -2,13 +2,14 @@
 /**
  * regen-all-txt.js
  *
- * Convenience wrapper that regenerates all four star-file .txt mirrors:
+ * Convenience wrapper that regenerates star-file .txt mirrors plus ml* section mirrors,
+ * the ml* discovery manifest, and the concordance index:
  *   - polymyth/methodologylist.txt (from polymyth/methodologylist/index.html)
  *   - polymyth/modulecanon.txt     (from polymyth/modulecanon/index.html)
  *   - polymyth/bookwormburrows.txt (from polymyth/bookwormburrows/index.html)
  *   - polymyth/campaigncodex.txt   (from polymyth/campaigncodex/index.html)
  *
- * Runs the four sibling regen scripts in sequence, reports consolidated
+ * Runs sibling regen scripts in sequence, reports consolidated
  * per-file delta, returns aggregate exit code (0 if all succeeded; non-zero
  * count of failures otherwise).
  *
@@ -18,6 +19,8 @@
  *
  * Origin: 2026-05-10, .txt mirror trifecta convenience wrapper.
  * 2026-05-12: lifted ml* DEFERRED status; orchestrator now covers all four star files.
+ * 2026-07-09: added ml* section mirrors and manifest so routine regen keeps
+ * AI-discovery surfaces aligned with canonical HTML.
  */
 
 'use strict';
@@ -37,6 +40,8 @@ const STEPS = [
   { name: 'modulecanon',     script: 'regen-modulecanon-txt.js',     txtPath: 'polymyth/modulecanon.txt' },
   { name: 'bookwormburrows', script: 'regen-bookwormburrows-txt.js', txtPath: 'polymyth/bookwormburrows.txt' },
   { name: 'campaigncodex',   script: 'regen-campaigncodex-txt.js',   txtPath: 'polymyth/campaigncodex.txt' },
+  { name: 'ml-section-mirrors', script: 'regen-methodologylist-sections-txt.js', txtPath: 'polymyth/methodologylist-studylist.txt' },
+  { name: 'ml-manifest', script: 'regen-methodologylist-manifest.js', txtPath: 'polymyth/manifest.txt' },
 ];
 
 let failures = 0;

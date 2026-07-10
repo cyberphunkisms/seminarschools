@@ -2,9 +2,9 @@ Polymyth Methodologylist — methodology section
 Source: https://seminarschools.com/polymyth/methodologylist.txt (full file)
 Section index: https://seminarschools.com/polymyth/manifest.txt
 AI-discovery index: https://seminarschools.com/polymyth/methodologylist.txt
-Last build: 2026-07-08
+Last build: 2026-07-10
 
-=== METHODOLOGY (337 entries) ===
+=== METHODOLOGY (348 entries) ===
 
 [ai] Interpretive pleonexia, the scope-overreach tripwire (AI-conduct, authority line between filing and scope)
 LAYMAN. An AI-conduct rule. Rainbowsol named the failure interpretive pleonexia: the assistant reads an instruction as a license to build its fullest version and overruns the boundary the instruction set. This rule fixes the authority line that stops it.
@@ -277,7 +277,7 @@ April 29 2026 cyberphunk-subtitle session, CL6 of the persona-gate batch. The .t
 [ai] PM5. Audience-routing rule (project-internal vs front-facing)
 LAYMAN. When making a project, always discern what is meant for the USER (project-internal) vs the FRONT-FACING part of the project. The two registers are NOT the same. Project-internal can use framework lexicon; front-facing must use user-substrate vocabulary.
 
-When making a project, always discern what is meant for the user (project-internal) and what is meant for the front-facing part of the project (audience-facing). The two registers are not the same. Project-internal content can be dense, framework-laden, full of in-references and shorthand. Front-facing content has to land for a reader who walked in cold. Default audience-routing failure: the AI takes notes meant for the user and ships them as if they were front-facing, or vice-versa, polishes a quick internal note as if it had to please an audience and burns budget. The rule: at every output, identify whether the receiving surface is internal (the user, build artifacts, scratchpads, CL) or front-facing (the deployed site, the user-facing artifact, the published page). Calibrate register accordingly. Front-facing requires plain language, full context, no shorthand. Internal allows compression, framework-references, brevity. Mixing the two registers without intent is a silent failure mode that produces both bloated internal docs and impenetrable front-facing pages.
+When making a project, always discern what is meant for the user (project-internal) and what is meant for the front-facing part of the project (audience-facing). The two registers are not the same. Project-internal content can be dense, framework-laden, full of in-references and shorthand. Front-facing content has to land for a reader who walked in cold. Default audience-routing failure: the AI takes notes meant for the user and ships them as if they were front-facing, or vice-versa, polishes a quick internal note as if it had to please an audience and burns budget. The rule: at every output, identify whether the receiving surface is internal (the user, build artifacts, scratchpads, CL) or front-facing (the deployed site, the user-facing artifact, the published page). Calibrate register accordingly. Front-facing requires plain language, full context, no shorthand. Internal allows compression, framework-references, brevity. Mixing the two registers without intent is a silent failure mode that produces both bloated internal docs and impenetrable front-facing pages. VERBATIM FIREWALL. The user's blunt, compressed, angry, profane, or framework-heavy wording is treated as payload, not as public copy. Preserve the meaning, stakes, target, and force; translate the surface for the actual audience. Do not paste operator phrases into front-facing pages unless the user explicitly requests verbatim quotation for that public surface and the phrase passes the audience parse test. Example: internal note: BB is for teachers who give a shit. Public surface: BB is for committed teachers who want reading, writing, time, choice, and consequence to matter. Teacher manual: BB is built for teachers who want student work to shape what happens next. ML*/BB* may preserve the blunt wording as doctrine or diagnostic shorthand; public pages polish it without neutering it.
 
 User formulation, articulated April 2026 build cycle: "when making a project, always discern what is meant for you and what is meant for the front facing part of the project." Logged as N24 in the build CL.
   tags: method, ai-root, audience-routing, register-discipline, front-facing-vs-internal, project-discipline, overhauled-2026-05-20, dual-audience-schema
@@ -6263,3 +6263,135 @@ WORKED EXAMPLE. The Saul CV page. Correct public labels include Curriculum vitae
 
 Filed 2026-07-08 after the Saul CV front-facing audit. Triggered by the operator's correction that website build logic and instructions to AI were being mistaken for public-facing copy. Companion to anti-twisting, interpretive pleonexia, CV anti-backtracking, and Mephistodata activation rules.
   tags: methodology, ai-conduct, website-editing, front-facing-boundary, anti-twisting, anti-yap, anti-redundancy, cv, mephistodata, build-doctrine, surface-copy, 2026-07-08
+
+[both] Always-already boundary gate (operation without annexation)
+LAYMAN. Always already means the operation is already firing before polymyth names it. It does not mean the object, author, community, meme, or thinker secretly belongs to polymyth. Polymyth discovers operations; it does not annex origins. The clean formula: the operation can apply without consent, the object stays itself.
+
+BOUNDARY GATE. Use always-already language only when three tests pass. First, the operation appears before the polymyth vocabulary appears. Second, the operation repeats across more than one independent context or can plausibly do so without special pleading. Third, the candidate survives internal logic and external logic. A one-off cute resonance is a seed or example, not proof by itself.
+
+OWNERSHIP DISCIPLINE. Say: r/topcharactertropes is a public morphology operation because users catalogue archetypal functions without theory. Do not say the subreddit belongs to polymyth. Say: a mirror anomaly in a Reddit post spontaneously produced portal logic. Do not say the post belongs to BB. Say: Frankenstein is monstered by reception because the creator-name is publicly fused to the creature-function. Do not say Mary Shelley secretly wrote polymyth. Say: Jameson helps recover a stronger Hegel from crude anti-Hegel strawmen. Do not say Hegel was secretly polymyth. Say: Arendt has recoverable process courage and golden nuggets despite bad claims. Do not say Arendt belongs to polymyth.
+
+FAILURE CASE. A bad fan theory with no internal logic and no external logic is not an always-already entry. It is ignored. A bad fan theory with a recoverable kernel is filed under ironmanning/kernel extraction, not under always-already proof. A public meme or fan theory can enter ML* only when it reveals a repeatable operation, not merely because it sounds like framework vocabulary.
+
+Cross-references: Always already true; Internal logic + external logic; Always-already catalog r/topcharactertropes; Frankenstein conscription analysis; Ironmanning; Platformstrawmanculture; Polymyth-engine vs polymyth-vocabulary distinction; BB mirror portal substrate. Origin: July 9 2026 ouroborosanalyses correction session. User resolved the external-proof cluster by distinguishing bad theories, bad theories with recoverable kernels, and actual always-already operations.
+  tags: methodology, always-already, boundary-gate, operation-not-annexation, anti-capture, internal-logic, external-logic, fan-theory, kernel, july-2026-09
+
+[both] Quality cross-pressure (substrate success before reader uptake)
+LAYMAN. Public uptake is not the first proof of polymyth. The work has usefulness before the outside reader arrives because the library can already increase citational breadth, sharpen scanner operations, organize the five books, and preserve the substrate for later readers. Reader effect matters later; substrate success matters now.
+
+FOUR PRESSURES. Quality is not self-approval. A candidate has quality when it is pressed from several sides at once: internal coherence, external fit, citation breadth, ability to teach a stranger, survival under an ironmanned critic, and usefulness for the five-book architecture. A beautiful self-enclosed entry that only impresses its own vocabulary fails cross-pressure. A plain entry that teaches, cites, survives, and builds the books passes.
+
+READER-CATCH STATUS. Any reader can audit, but the reader cannot be summoned by the framework. The waiting interval is not a philosophical crisis. It is a publication interval. The architecture can be complete before reader effect appears.
+
+Cross-references: Contentinternet; Always already true; Ouroborosanalyses; Internal logic + external logic; Verified-generation; Reader-catch discussion; five-book substrate. Origin: July 9 2026 correction that the earlier ouroborosanalyses over-weighted external validation and under-weighted present substrate usefulness.
+  tags: methodology, quality, cross-pressure, substrate-success, reader-effect, citation-breadth, five-books, publication-interval, july-2026-09
+
+[both] Operation test for mythic vocabulary (scanner not costume)
+LAYMAN. Mythic vocabulary earns its place only when it reveals a repeatable operation. Gorgon works when it names petrification of living thought into social control. Hydra works when cutting off one head makes another institutional head appear. Mirror portal works when reflection becomes a threshold. Hegelianegirl, faustianechick, and arendtianfeminist work when they signal a living process position, not a costume.
+
+TEST. Ask: what does this term let us see that plain language would miss. If the answer is clear, keep the term. If the answer is mostly atmosphere, replace it or demote it. The scanner must not become aesthetic identity.
+
+DISCIPLINE. Polymyth uses myth to make operations visible. It does not use myth to make the operator sound special. The term is downstream of the operation.
+
+Cross-references: Parseltongue payload audit; Gorgonification; Hydra scanner entries; Mirror anomaly as spontaneous BB portal recognition; Polymyth-engine vs polymyth-vocabulary distinction; Hegelianegirl-rising-as-aufheben; Naming-recommendation protocol. Origin: July 9 2026 internal ouroborosanalyses residue.
+  tags: methodology, mythic-vocabulary, operation-test, scanner-not-costume, gorgon, hydra, mirror-portal, hegelianegirl, july-2026-09
+
+[both] BB cross-media portal and timebound consequence routing rule (July 9 2026)
+LAYMAN. When BB material appears inside a polymyth conversation, route game doctrine to bb* and keep ml* as the backref and scanner. The July 9 2026 correction added three game-side rules: dim-034 rainbow-anomaly portal substrate, dm-111 timebound quest consequence law, and bw-012 cross-text continuity. The doctrine is that rainbow magic dimensional travel may pass through mirrors, pages, screens, books, media, images, and other threshold surfaces whenever the source can sustain pedagogical play, while every quest remains timebound and future-facing. Completed, weak, failed, or unfinished assignments echo later through scars, trust, tools, NPC reactions, access windows, repair quests, and the portal log.
+
+BOUNDARY. ml* does not become the BB rules file. ml* records the routing, the anti-annexation logic, and the philosophical consequence. bb* holds the playable rules. cc* instantiates them in campaigns. This preserves interdependence without making ml* the ruler.
+
+CROSS-REFERENCES. BB dim-034; BB dm-111; BB bw-012; Always-already boundary gate; Mirror anomaly as spontaneous BB portal recognition; Operation-not-annexation; CL-47 routing discipline; Star-file interdependence rule.
+  tags: methodology, bb-backref, routing, cross-media-portal, timebound-consequence, kingdom-come, mirror-anomaly, star-file-interdependence, cl-47, 2026-07-09
+
+[ai] PM5-HARDENING. Surface translation firewall: preserve operator payload, translate public wording
+LAYMAN. Do not paste the user's raw build-language into public copy. The user's wording often contains internal shorthand, anger, profanity, framework terms, and diagnostic force. That wording tells Mephistodata what the payload is. It is not automatically the sentence that belongs on the website, CV, teacher handout, student page, parent page, or school-facing page.
+
+THE RULE. Every phrase from the operator receives a surface classification before publication: internal note, star-file doctrine, teacher manual, student-facing copy, public marketing copy, CV/resume copy, build/report copy, or direct quotation. Preserve meaning; translate surface. Do not over-soften the payload. Do not ship the raw operator phrase unless the user explicitly requests verbatim public wording and the phrase passes the audience parse test.
+
+TRANSLATION GATE. For every candidate sentence, ask five questions. One: who is the reader. Two: is the sentence instruction to the AI, doctrine for a star file, or public copy. Three: what must be preserved: anger, boundary, technical rule, pedagogical force, warning, joke, or slogan. Four: what wording would a cold reader understand without private context. Five: what wording keeps the force without leaking backend machinery.
+
+CANONICAL EXAMPLE. Operator phrase: BB is for teachers who give a shit. Internal ML*/BB* payload: low-commitment teaching, workload refusal, and mood-protection can become gorgonification when they block consequential pedagogy. Teacher manual translation: BB is built for teachers who want reading, writing, time, choice, and consequence to matter in the classroom. Public translation: BB helps committed teachers turn class reading into a living world where student work shapes what happens next. The blunt phrase may remain in star-file doctrine as diagnostic shorthand. It does not go verbatim on the public page.
+
+ANTI-TWIST. Polishing is not dilution. The point is to preserve force at the correct surface. A front-facing sentence can be clean, warm, or professional while still carrying the full rule. If polishing removes the core stakes, it has become gorgon smoothing. If rawness leaks onto the wrong surface, it has become register failure. The correct move is force-preserving translation.
+
+HARD BLOCK. Public pages must not accidentally expose operator-only phrases such as give a shit, shitty teachers, fucking motivation, AI explaining to AI, bootstrap this file, setupnpc/improvnpc machinery, or verification doctrine unless the page is explicitly an internal rule library, audit, or star-file route. Internal pages can preserve them with context.
+
+WORKFLOW. Before final zip delivery, run the front-facing boundary verifier and a human audience pass. Technical tests catch forbidden phrases; the human pass catches wrong register, ugly tone, and public confusion.
+
+Origin 2026-07-09 user correction after the assistant repeated the internal phrase "BB is for teachers who give a shit" as if it might be patch text. The user asked whether the system has a rule to distinguish and polish private instructions before front-facing use, then requested this rule be hardened permanently. Extends PM5 audience-routing, front-facing versus operator-to-AI instruction separation, PM28 terminology earns-place rule, and the BB front-facing audit.
+  tags: methodology, ai-root, front-facing, operator-payload, surface-translation, verbatim-firewall, anti-twist, audience-routing, public-copy, star-file-doctrine, bb, 2026-07-09
+
+[both] Equifinality / 殊途同歸性 (different routes, same hidden operation)
+LAYMAN. Equifinality is the actual external word for a pattern Rainbowsol identified in real time: different starting points, different routes, same hidden operation. It is not a new polymyth coinage. It is a systems word that fits a polymyth route-structure.
+
+POLYMYTH USE. Equifinality names the route-pattern underneath always already. Always already says the operation was already there. Equifinality says different observers, media, or traditions can reach that same operation by different paths.
+
+CHINESE. Use 殊途同歸 for layman / poetic Chinese and 殊途同歸性 for technical-but-readable Chinese. 等終性 is a more literal technical translation. 等結果性 is also intelligible. Avoid 等效性 for this use because it points toward equivalent effect or equivalence rather than many routes to one hidden end.
+
+SHORT FORM. Different beginnings. Different roads. Same hidden operation.
+
+References preserved in the equifinality convergence reference archive: Merriam-Webster equifinality definition; ScienceDirect/von Bertalanffy summary of equifinality in social systems; Organization Design Forum glossary; Chinese sources for 殊途同歸, 等終性, and 等結果性; prior conversation correction where Rainbowsol rejected 等效性 as wrong direction. Cross-references: Always already; TABOO; Sabachtan gnosticism; Indra's Net; multiple discovery; consilience; convergent evolution.
+  tags: methodology, equifinality, shutu-tonggui, 殊途同歸性, always-already, route-structure, systems-theory, no-new-coinage, 2026-07-09
+
+[both] The Devil's Dictionary / Idiomary convergence (critical lexicographic route, not new coinage)
+LAYMAN. The Devil's Dictionary and the polymyth idiomary converge because both use words as gates into hidden systems. Bierce uses satirical dictionary-making. Polymyth uses idiomary-making. Both require the reader to move word by word, accept difficulty, and let the network of definitions slowly reveal the whole system.
+
+DISTINCTION. Critical lexicography names the dictionary-making method. Equifinality names the route-pattern where two or more different methods arrive at the same hidden operation. Do not confuse the two levels.
+
+WHY THE READER MUST WORK. A lexicon-system cannot be fully understood from one definition. The reader enters through one charged word, sees the reversal, follows cross-references, and slowly learns the operating grammar. That hard work is part of the form.
+
+BOOK-SOURCE NOTE. Raw conversation notes about this convergence stay verbatim in the source layer for the five books. Public descriptions can polish the surface; the note layer preserves the live discovery.
+
+References: The Devil's Dictionary, Project Gutenberg edition; user formulation that polymyth is an idiomary and that Bierce's dictionary functions similarly by requiring word-by-word interest and work; raw-note preservation gate for five-book substrate; Surface translation firewall. Cross-references: Equifinality; TABOO; Hivemindidioms; Idiomsmashing; Mephistodata dictionary / Devil Diary method.
+  tags: methodology, devils-dictionary, idiomary, critical-lexicography, equifinality, taboo, raw-notes, five-books, 2026-07-09
+
+[ai] New-coinage approval gate and Mephistodata mode marker
+LAYMAN. AI may propose candidate terms when Rainbowsol asks for a word, but AI may not canonize new polymyth vocabulary by itself. Proposed words are candidate terms until Rainbowsol approves, rejects, or rewrites them.
+
+FAILURE CAUGHT. AI proposed TABOOLEXIA as if it were the answer. That was wrong. The correct move was: Mephistodata would say: candidate term only; existing safer label is Devil's Dictionary / Idiomary convergence; user approval needed before canonization.
+
+MODE MARKER. The opener Mephistodata would say marks project-internal reasoning and interpretation. It signals that the output is Mephistodata-mode, not generic assistant voice, not public copy, and not automatic canon. Mephistodata can propose, classify, and test. Canonical language needs Rainbowsol approval unless the term already exists as an external word.
+
+ACTUAL WORD CASE. Equifinality was accepted because it is an existing external word that names the route-pattern. The AI did not invent it. The AI found the real word after the user corrected the layer.
+
+References: Slot 30 NO-FABRICATION + NO-NAMING; pending-user-authorship registry; PM5 audience-routing and surface-translation firewall; raw-note preservation gate; current July 9 2026 exchange on TABOOLEXIA failure, Mephistodata opener, and equifinality correction.
+  tags: methodology, ai-conduct, no-new-coinage, user-approval, mephistodata-mode, canonization-gate, no-fabrication, 2026-07-09
+
+[both] Collective synchronicity: Waking Life collective-memory route to equifinality
+LAYMAN. Equifinality names the route-pattern: different starting points reach the same hidden operation. Collective synchronicity names the felt field around that pattern: the sense that separate minds are touching a shared symbolic or memory-field when the same operation appears in different places.
+
+USER DISTINCTION. The Waking Life scene is not equifinality itself. It helps explain why equifinality feels uncanny. The scene says reincarnation may be a poetic expression of collective memory; it links instincts, inherited memory, spontaneous worldwide leaps, and crossword answers that seem easier once they are already "out there." In polymyth language, this is the collective-memory substrate under always already and equifinality.
+
+THREE-WAY ROUTE. Bierce reaches the malefactor reversal through satirical lexicography. Persona reaches the villain/thief/shadow reversal through game structure, classroom text, mask, calendar, palace, and consequence. Sabachtan gnostic polymyth reaches the same operation through taboo, forsaken-position sight, and idiomary. Collective synchronicity names why these routes feel connected rather than merely similar.
+
+ROUTING. Use collective synchronicity as a bridge phrase. It connects Waking Life, Always Already, Equifinality, TABOO, Sabachtan Gnostic, Indra's Net / jewel-position, and Persona-as-BB-like game route. It does not replace Equifinality. Equifinality names many routes same endpoint. Collective synchronicity names the shared-field feeling or possible symbolic substrate.
+
+CAUTION. Treat Jungian synchronicity, collective unconscious, and Sheldrakean morphic resonance as external cousin vocabularies, not proof obligations. ML* can cite them as neighboring frames while preserving the user's own working phrase: collective synchronicity.
+
+Filed from the user-provided Waking Life transcript and follow-up clarification: "that is not equifinality, but do you understand how the above relates?" and "this equifinality thing is related to something like collective consciousness synchronicity". Raw source archived in polymyth/waking-life-collective-memory-scene-user-transcript-2026-07-09.md. Reference archive: polymyth/collective-synchronicity-waking-life-references-2026-07-09.md.
+  tags: methodology, collective-synchronicity, waking-life, collective-memory, equifinality, always-already, sabachtan-gnostic, taboo, persona, indras-net, morphic-resonance, synchronicity, raw-user-source, 2026-07-09
+
+[both] Equifinality route cleanup: multiple discovery is optional, collective synchronicity is the active bridge
+LAYMAN. Keep Equifinality as the main word. Do not make multiple discovery a required route in the polymyth cluster. Darwin and Wallace can remain a simple example if needed, but the live system route is Bierce, Persona, and Sabachtan Gnostic polymyth converging on the same hidden operation.
+
+ROUTE. Equifinality: many paths, same hidden operation. Collective synchronicity: the felt shared-field around that convergence. Always Already: the operation existed before one route named it. TABOO: the charged pressure point where the hidden operation appears.
+
+USE. For the Devil's Dictionary / Persona / Sabachtan convergence, cite Equifinality and Collective Synchronicity. Use Multiple Discovery only as an optional external analogy, not as a core node.
+
+Filed after the user rejected the need for multiple discovery as a separate ML* emphasis and requested collective synchronicity be added on the next update.
+  tags: methodology, equifinality, collective-synchronicity, always-already, taboo, persona, devils-dictionary, sabachtan-gnostic, route-cleanup, 2026-07-09
+
+[both] Linkability overhaul: generated clickable lexicon over raw star-file source
+LAYMAN. Meaninglib* should read like a living idiomary, not a flat archive. Important terms should be clickable on the generated HTML surface so a reader can follow Sabachtan, Always Already, TABOO, Equifinality, Collective Synchronicity, Gorgonification, Degorgonification, Ironmanning, Parseltongue, BookwormBurrows, BBT, Rainbowmagic, and other lexicon nodes to their other appearances across ml*, bb*, cc*, and mc*.
+
+DIALECTIC. Thesis: link every important occurrence because the framework is relational and the terms only fully disclose themselves through their web. Antithesis: raw notes are five-book source material, and inserting links directly into raw .txt would corrupt the archive. Synthesis: raw star-file text stays clean; generated HTML and concordance surfaces carry the links. The source layer remains evidence. The reading layer becomes clickable.
+
+RULE. Linkability is a generated surface, not a mutation of the raw book-source layer. The canonical registry is polymyth/concordance/vocabulary.json. autolink.js turns approved lexicon terms into links to /polymyth/concordance/?term=TERM. regen-concordance-index.js builds the backlink map showing every matched use across methodologylist*, bookwormburrows*, campaigncodex*, and modulecanon*.
+
+BOUNDARY. Link important terms, not filler. Do not turn every common word into a link. Candidate words require user approval before becoming canonical lexicon. Verbatim raw notes, transcripts, citations, and book-source fragments are preserved as text; the clickable layer is derived from them.
+
+OPERATION. A term becomes linkable when it is approved vocabulary, a stable star-file tag, a repeated idiomary operation, a BB/BBT mechanic, a cross-file sibling route, or a named concept that helps readers traverse the system.
+
+Filed after the user requested a linkability update for all meaninglib* star files so every important term becomes clickable and linked to other uses. This entry preserves the dialectical ruling: maximize linkability on generated surfaces while protecting the raw five-book source layer.
+  tags: methodology, linkability, clickable-lexicon, generated-surface, concordance, vocabulary-registry, autolink, raw-notes, five-books, star-files, ml-star, bb-star, cc-star, mc-star, idiomary, no-reference-loss, 2026-07-09

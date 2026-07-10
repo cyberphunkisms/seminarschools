@@ -50,7 +50,10 @@ const required = [
   'data-saul-modular-cv="true"',
   'function renderProfile()',
   'renderProfile();',
-  'summaryRaw = pickL(SUMMARY_BY_CAT[activeCats[0]])'
+  'CV_OUTPUT_REVAMP_2026_07_09',
+  'fitPrintCvToOnePage(host)',
+  'PRINT_FOCUS',
+  'The top profile, experience list, skills, education, and credentials follow the currently selected focus areas.'
 ];
 for (const token of required) if (!html.includes(token)) errors.push(`Missing required Saul page element: ${token}`);
 
@@ -78,10 +81,10 @@ const introEnd = html.indexOf('<section class="archive-shell"', html.indexOf('cl
 const filters = html.indexOf('id="filterNav"');
 if (introEnd < 0 || filters < 0 || filters < introEnd) errors.push('Detailed filters appear before the professional front page/archive boundary.');
 
-if (!/function buildPrintCv\(\)[\s\S]*activeCats\.length === 1[\s\S]*SUMMARY_BY_CAT/.test(html)) {
-  errors.push('PDF builder no longer routes summary copy by selected CV module.');
+if (!/function buildPrintCv\(\)[\s\S]*activeCats\.length[\s\S]*PRINT_FOCUS[\s\S]*focusSummary/.test(html)) {
+  errors.push('PDF builder no longer routes top profile copy by selected CV module.');
 }
-if (!/D\.filter\(function\(x\)\{[\s\S]*tagMatches\(active, x\[2\]\)/.test(html)) {
+if (!/var itemMatches = function \(item\)[\s\S]*activeCats\.some\(function\(c\)\{ return hasTag\(item, c\); \}\)/.test(html)) {
   errors.push('PDF builder no longer filters entries by active CV module.');
 }
 if (!/document\.getElementById\("saveBtn"\)\.addEventListener\("click"[\s\S]*buildPrintCv\(\);[\s\S]*window\.print\(\);/.test(html)) {
@@ -109,4 +112,4 @@ if (errors.length) {
   errors.forEach(e => console.error(`- ${e}`));
   process.exit(1);
 }
-console.log('Saul page guard passed — any-job CV, employer-facing labels, additive focus filters, website-only portrait/map, and no teaching-front regression.');
+console.log('Saul page guard passed — any-job CV, employer-facing labels, additive focus filters, top profile switching, one-page output, website-only portrait/map, and no teaching-front regression.');

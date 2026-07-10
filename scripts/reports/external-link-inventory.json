@@ -1,7 +1,7 @@
 {
   "schema": "external-link-inventory-v1",
-  "generatedAt": "2026-07-09T01:11:37.921Z",
-  "totalExternalLinks": 1013,
+  "generatedAt": "2026-07-10T04:42:16.330Z",
+  "totalExternalLinks": 1020,
   "topHosts": [
     {
       "host": "www.gutenberg.org",
@@ -28,16 +28,16 @@
       "count": 42
     },
     {
+      "host": "doi.org",
+      "count": 33
+    },
+    {
       "host": "openstax.org",
       "count": 29
     },
     {
       "host": "seminarschools.com",
       "count": 26
-    },
-    {
-      "host": "doi.org",
-      "count": 24
     },
     {
       "host": "jerrywbrown.com",
@@ -212,10 +212,6 @@
       "count": 3
     },
     {
-      "host": "brottmusic.com",
-      "count": 3
-    },
-    {
       "host": "festivalofauthors.ca",
       "count": 3
     },
@@ -242,9 +238,58 @@
     {
       "host": "fanexpohq.com",
       "count": 3
+    },
+    {
+      "host": "networks.h-net.org",
+      "count": 3
     }
   ],
   "importantSample": [
+    {
+      "source": "bb/bbt/index.html",
+      "href": "https://doi.org/10.2147/PRBM.S466664",
+      "host": "doi.org"
+    },
+    {
+      "source": "bb/bbt/index.html",
+      "href": "https://doi.org/10.1177/10468781211073720",
+      "host": "doi.org"
+    },
+    {
+      "source": "bb/bbt/index.html",
+      "href": "https://doi.org/10.1080/15401383.2021.1987367",
+      "host": "doi.org"
+    },
+    {
+      "source": "bb/bbt/index.html",
+      "href": "https://doi.org/10.33063/ijrp.vi15.321",
+      "host": "doi.org"
+    },
+    {
+      "source": "bb/bbt/index.html",
+      "href": "https://doi.org/10.1089/g4h.2023.0158",
+      "host": "doi.org"
+    },
+    {
+      "source": "bb/bbt/index.html",
+      "href": "https://doi.org/10.1080/01609513.2021.1932014",
+      "host": "doi.org"
+    },
+    {
+      "source": "bb/bbt/index.html",
+      "href": "https://doi.org/10.1176/appi.psychotherapy.1994.48.4.624",
+      "host": "doi.org"
+    },
+    {
+      "source": "bb/bbt/index.html",
+      "href": "https://doi.org/10.1177/1046878116650765",
+      "host": "doi.org"
+    },
+    {
+      "source": "bb/bbt/index.html",
+      "href": "https://doi.org/10.3389/fpubh.2021.629872",
+      "host": "doi.org"
+    },
     {
       "source": "bb/why/index.html",
       "href": "https://doi.org/10.4018/IJGBL.287825",
@@ -519,11 +564,6 @@
       "source": "polymythseminars/events/3018f2437e1f-b906f0be/index.html",
       "href": "https://www.toronto.ca/explore-enjoy/festivals-events/nuitblanche/",
       "host": "www.toronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/455d5b079312-8b2bd338/index.html",
-      "href": "https://brottmusic.com/quanto-amore/",
-      "host": "brottmusic.com"
     },
     {
       "source": "polymythseminars/events/4630f11e087b-3a3ac812/index.html",
@@ -1751,11 +1791,6 @@
       "host": "tpl.ca"
     },
     {
-      "source": "polymythseminars/events/toronto-rome-programme-in-manuscript-studies-2026-06-01-5f735bf8/index.html",
-      "href": "https://pims.ca/article/diploma-programme-in-manuscript-studies/",
-      "host": "pims.ca"
-    },
-    {
       "source": "polymythseminars/events/toronto-workshop-on-moral-psychology-and-moral-the-2026-11-07-d0db16e2/index.html",
       "href": "https://philevents.org/event/show/147093",
       "host": "philevents.org"
@@ -2709,41 +2744,6 @@
       "source": "teacherresources/ela/ela-ss-american/rules-of-the-game-alternate-cache-c78ac00b/index.html",
       "href": "https://jg019.k12.sd.us/eng1/Assignment%20Documents/Rules%20of%20the%20Game.pdf",
       "host": "jg019.k12.sd.us"
-    },
-    {
-      "source": "teacherresources/ela/ela-ss-american/sealed-off-81807ab8/index.html",
-      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/Sealed-Off-Chang-Eileen.pdf",
-      "host": "jerrywbrown.com"
-    },
-    {
-      "source": "teacherresources/ela/ela-ss-american/short-story-collection-multi-author-anthology-d447b37b/index.html",
-      "href": "https://jerrywbrown.com/wp-content/uploads/2014/02/Short-Story-Collection.pdf",
-      "host": "jerrywbrown.com"
-    },
-    {
-      "source": "teacherresources/ela/ela-ss-american/the-cask-of-amontillado-ibiblio-clean-text-f16dda2d/index.html",
-      "href": "https://www.ibiblio.org/ebooks/Poe/Amontillado.pdf",
-      "host": "www.ibiblio.org"
-    },
-    {
-      "source": "teacherresources/ela/ela-ss-american/the-complete-stories-58592044/index.html",
-      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/The-Complete-Stories-OConnor-Flannery.pdf",
-      "host": "jerrywbrown.com"
-    },
-    {
-      "source": "teacherresources/ela/ela-ss-american/the-interlopers-holt-reader-format-anderson-ky-4a5b9b0a/index.html",
-      "href": "https://www.anderson.k12.ky.us/Downloads/The%20Interlopers%5B1%5D.pdf",
-      "host": "www.anderson.k12.ky.us"
-    },
-    {
-      "source": "teacherresources/ela/ela-ss-american/through-the-tunnel-b4229a2a/index.html",
-      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/Through-the-Tunnel-Lessing-Doris.pdf",
-      "host": "jerrywbrown.com"
-    },
-    {
-      "source": "teacherresources/ela/ela-ss-american/twenty-two-short-works-by-charles-dickens-compilation-4d012b10/index.html",
-      "href": "https://jerrywbrown.com/wp-content/uploads/2014/02/Twenty-two-short-stories-by-Charles-Dickens.pdf",
-      "host": "jerrywbrown.com"
     }
   ]
 }

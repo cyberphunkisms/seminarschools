@@ -52,12 +52,70 @@ requireNotVisible('campaigns/thank-you-mam/pregame/index.html', [
   'Live build target',
   'Send corrections to Rainbowsol'
 ]);
+
+requireHas('bb/index.html', [
+  'Run a burrow with wormcards.',
+  'AI-assisted BB is the priority workflow.',
+  'Let time matter.'
+]);
+requireNotVisible('bb/index.html', [
+  'Future DM table assistant',
+  'This future tool starts',
+  'coming soon: DM assistant mode',
+  'setupnpcs',
+  'improvnpcs',
+  'AI helps behind the curtain',
+  'memory clerk',
+  'give a shit',
+  'shitty teachers',
+  'fucking motivation',
+  'shit work',
+  'AI explaining to AI',
+  'bootstrap this file'
+]);
+requireHas('bookwormcard/about/index.html', [
+  'teacher manual workflow',
+  'AI-assisted BB is the priority workflow',
+  'open the BB plain-text manual'
+]);
+requireNotVisible('bookwormcard/about/index.html', [
+  'copy bootstrap',
+  'DM table assistant',
+  'first ask me for the wormcards',
+  'setupnpcs',
+  'improvnpcs',
+  'AI helps behind the curtain'
+]);
+requireNotVisible('bookwormcard/index.html', [
+  'AI chat running the table',
+  'AI function',
+  'AI reaction layer',
+  'may use AI behind the curtain'
+]);
+requireHas('polymyth/dmboard/index.html', [
+  'The priority AI-assisted workflow for opening a burrow with wormcards',
+  'teacher as human mediator',
+  'Paper or document play remains available' 
+]);
+requireNotVisible('polymyth/dmboard/index.html', [
+  'SCAFFOLDING STUB',
+  'Saul-authored content pending',
+  'AI-side of the DM',
+  'DM-AI scene-creation interaction surface',
+  'pending Saul-authorship'
+]);
 const ml = read('polymyth/methodologylist.txt');
 if(!ml.includes('Front-facing versus operator-to-AI instruction separation')) {
   errors.push('ml*: front-facing vs AI instruction boundary rule missing.');
 }
 if(!ml.includes('Treating operator command language as front-facing copy')) {
   errors.push('ml*: worked-example anti-twist text missing.');
+}
+if(!ml.includes('Surface translation firewall')) {
+  errors.push('ml*: hardened surface translation firewall missing.');
+}
+if(!ml.includes('BB helps committed teachers turn class reading into a living world')) {
+  errors.push('ml*: canonical BB public translation example missing.');
 }
 // Public-page scan. Star/internal framework surfaces are deliberately excluded:
 // aa*, bb*, bookwormcard*, ml*/polymyth*, dashboard/meaninglib, hf_export, and AITR.
@@ -83,7 +141,24 @@ const forbidden = [
   'Send corrections to Rainbowsol',
   'route is a working tool',
   'Front-facing versus operator-to-AI',
-  'operator-to-AI instruction'
+  'operator-to-AI instruction',
+  'Future DM table assistant',
+  'This future tool starts',
+  'coming soon: DM assistant mode',
+  'AI chat running the table',
+  'AI function',
+  'AI reaction layer',
+  'copy bootstrap',
+  'AI helps behind the curtain',
+  'SCAFFOLDING STUB',
+  'Saul-authored content pending',
+  'AI-side of the DM',
+  'give a shit',
+  'shitty teachers',
+  'fucking motivation',
+  'shit work',
+  'AI explaining to AI',
+  'bootstrap this file'
 ];
 function walk(dir){
   for(const ent of fs.readdirSync(path.join(ROOT, dir), {withFileTypes:true})){

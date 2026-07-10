@@ -9,11 +9,11 @@
  * Links are display-only: contenteditable save reads .textContent which strips them.
  * Re-injected on every render cycle via MutationObserver.
  *
- * Link density: every occurrence (per Rainbowsol directive).
+ * Link density: every important occurrence in generated HTML surfaces (per Rainbowsol directive).
  * Link styling: color:inherit, faint dotted underline, solid on hover.
  *
- * Adding a new term: edit vocabulary.json, run regen-concordance-index.js, deploy.
- * This file never needs editing for vocabulary changes.
+ * Adding a new term: approve the term, run scripts/build-meaninglib-linkability-registry.js, then regen-all-txt and deploy.
+ * Raw .txt/book-source layers are not mutated; this is a generated linkability surface.
  *
  * Usage: <script src="/js/autolink.js" defer></script>
  */
@@ -92,7 +92,8 @@
       var p = node.parentNode;
       if (!p) continue;
       var tag = p.tagName;
-      if (tag === 'A' || tag === 'SCRIPT' || tag === 'STYLE' || tag === 'CODE' || tag === 'PRE') continue;
+      if (tag === 'A' || tag === 'SCRIPT' || tag === 'STYLE' || tag === 'CODE' || tag === 'PRE' || tag === 'TEXTAREA' || tag === 'INPUT' || tag === 'BUTTON' || tag === 'SELECT') continue;
+      if (p.closest && p.closest('[data-no-autolink], nav, .topbar, .keyboard-hint, .route-note, .site-footer')) continue;
       if (p.classList && p.classList.contains('ci-link')) continue;
       textNodes.push(node);
     }
@@ -131,7 +132,7 @@
   window.autolinkEntries = function (selector) {
     if (!vocabReady) return;
     injectCSS();
-    var sel = selector || '.eb, .ex, .et, .entry, .bloom, .lede, .notes, .epigraph, .article-excerpt, .articles-intro, .c, .cat-sub, .cr-from, article p, .wrap p, main p';
+    var sel = selector || '.eb, .ex, .et, .entry, .bloom, .lede, .notes, .epigraph, .article-excerpt, .articles-intro, .c, .cat-sub, .cr-from, article p, article li, article blockquote, .wrap p, .wrap li, .wrap blockquote, main p, main li, main blockquote, main h1, main h2, main h3, main h4, main h5, main h6, .e h3, .e p';
     var els = document.querySelectorAll(sel);
     for (var i = 0; i < els.length; i++) {
       autolinkNode(els[i]);

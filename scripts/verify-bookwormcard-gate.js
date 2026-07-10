@@ -11,7 +11,7 @@ const must = (label, ok) => { if (!ok) failures.push(label); };
 must('Bookwormcard title names the BB character-card purpose', /<title>Bookwormcard · Make a bookwormburrows Character Card<\/title>/.test(html));
 must('Static crawler-readable context exists outside noscript', /<section id="static-bookwormcard-context"[\s\S]*Bookwormcard is the character gate for BookwormBurrows/.test(html));
 must('Static context links to BB, about, glossary, and blank card', /href="\/bb\/"/.test(html) && /href="\/bookwormcard\/about\/"/.test(html) && /href="\/bookwormcard\/glossary\/"/.test(html) && /href="\/bookwormcard\/print\/\?blank=1"/.test(html));
-must('Static context includes privacy/data note', /Privacy\/data note/.test(html) && /AI function/.test(html) && /checkpoints in your browser/.test(html));
+must('Static context includes privacy/data note', /Privacy\/data note/.test(html) && /optional feedback layer/.test(html) && /checkpoints in your browser/.test(html));
 must('Runtime hides static context only after game-ready class', /body\.game-ready #static-bookwormcard-context\{display:none\}/.test(html) && /classList\.add\('game-ready'\)/.test(html));
 must('ESL button is visible and bound', /id="t-esl"[\s\S]*<span>ESL<\/span>/.test(html) && !/id="t-esl"[^>]*display\s*:\s*none/.test(html) && /addEventListener\('click', toggleEsl\)/.test(html));
 must('ESL mode adds plain-language helper copy', /function eslExplanationFor/.test(html) && /Plain English:/.test(html) && /addEslHelperAfter/.test(html));
@@ -22,7 +22,7 @@ must('App shell avoids global 100vh overflow trap', /html,body\{[^}]*min-height:
 must('Card preview no longer says only building', /your wormcard preview will build here/.test(html) && !/<span class="empty">building\.\.\.<\/span>/.test(html));
 must('Input label is contextual', /aria-label="Bookwormcard response/.test(html) && /setAttribute\('aria-label', 'Bookwormcard response'/.test(html));
 must('Structured data marks the page as educational WebApplication and part of BB', /"@type":"WebApplication"/.test(html) && /"isPartOf":\{"@type":"CreativeWork","name":"BookwormBurrows"/.test(html));
-must('Optional static command is surfaced before play', /Type <strong>static<\/strong> during play to turn off the optional AI reaction layer/.test(html));
+must('Optional static command is surfaced before play', /Type <strong>static<\/strong> during play to use the quiet card builder with no optional feedback layer/.test(html));
 
 if (failures.length) {
   console.error('Bookwormcard gate verification failed:');

@@ -1,6 +1,6 @@
 # Meaninglib dataset verification report
 
-Generated: 2026-07-09T04:53:22.618Z
+Generated: 2026-07-10T04:42:17.415Z
 
 Failures: 0
 Warnings: 0
@@ -14,9 +14,9 @@ Warnings: 0
 - PASS: found hf_export/data/relations/crossrefs.jsonl
 - PASS: found hf_export/reports/latest_export_report.md
 - PASS: found hf_export/schemas/meaninglib_entry.schema.json
-- PASS: total rows: 1980
-- PASS: ml row count 1225
-- PASS: bb row count 221
+- PASS: total rows: 2033
+- PASS: ml row count 1253
+- PASS: bb row count 246
 - PASS: mc row count 234
 - PASS: cc row count 296
 - PASS: star_file_map includes ml

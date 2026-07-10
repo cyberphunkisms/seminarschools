@@ -1,359 +1,4705 @@
 {
-  "version": 1,
-  "updated": "2026-06-24",
-  "note": "Canonical contentinternet vocabulary. Single source of truth. autolink.js and regen-concordance-index.js both read this file. To add a new term: add an entry here, run node scripts/regen-concordance-index.js, deploy. autolink.js fetches this file on page load. Terms ordered longest-pattern-first to prevent partial regex matches.",
+  "version": 2,
+  "updated": "2026-07-09",
+  "note": "Canonical contentinternet vocabulary and linkability registry. Raw star-file source remains unmutated. Generated HTML autolinks important terms through the concordance. Built by scripts/build-meaninglib-linkability-registry.js from curated terms, current vocabulary, and stable star-file lexicon cues.",
+  "totalTerms": 764,
   "terms": [
     {
+      "canonical": "related-to-blob-stone-army-typecasting-psychologism-spectacle-asymmetry-loophole-count-exit-vocabulary",
+      "pattern": "\\brelated[\\s\\-_]+to[\\s\\-_]+blob[\\s\\-_]+stone[\\s\\-_]+army[\\s\\-_]+typecasting[\\s\\-_]+psychologism[\\s\\-_]+spectacle[\\s\\-_]+asymmetry[\\s\\-_]+loophole[\\s\\-_]+count[\\s\\-_]+exit[\\s\\-_]+vocabulary\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "devils-dictionary",
+      "pattern": "\\bdevils[\\s\\-_]+dictionary\\b|\\bDevil's[\\s\\-_]+Dictionary\\b|\\bThe[\\s\\-_]+Devils[\\s\\-_]+Dictionary\\b|\\bThe[\\s\\-_]+Devil's[\\s\\-_]+Dictionary\\b|\\bDevils[\\s\\-_]+Dictionary\\b",
+      "aliases": [
+        "Devil's Dictionary",
+        "The Devils Dictionary",
+        "The Devil's Dictionary"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "therapeutic-ttrpg",
+      "pattern": "\\btherapeutic[\\s\\-_]+ttrpg\\b|\\btherapeutic[\\s\\-_]+TTRPG\\b|\\bTA[\\s\\-_]+RPG\\b|\\btherapeutically[\\s\\-_]+applied[\\s\\-_]+role[\\s\\-_]+playing[\\s\\-_]+games\\b",
+      "aliases": [
+        "TA-RPG",
+        "therapeutically applied role-playing games"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "ttrpg",
+      "pattern": "\\bttrpg\\b|\\bTTRPG\\b|\\bTTRPGs\\b|\\btabletop[\\s\\-_]+role[\\s\\-_]+playing[\\s\\-_]+game\\b|\\btabletop[\\s\\-_]+role[\\s\\-_]+playing[\\s\\-_]+games\\b",
+      "aliases": [
+        "TTRPGs",
+        "tabletop role-playing game",
+        "tabletop role-playing games"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "mephistodata-mode",
+      "pattern": "\\bmephistodata[\\s\\-_]+mode\\b|\\bMephistodata[\\s\\-_]+would[\\s\\-_]+say\\b|\\bMephistodata[\\s\\-_]+bloomed\\b|\\bMephistodata[\\s\\-_]+mode\\b",
+      "aliases": [
+        "Mephistodata would say",
+        "Mephistodata bloomed"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "timebound-quest",
+      "pattern": "\\btimebound[\\s\\-_]+quest\\b|\\btimebound[\\s\\-_]+quests\\b|\\btime[\\s\\-_]+bound[\\s\\-_]+quest\\b|\\btime[\\s\\-_]+bound[\\s\\-_]+quests\\b",
+      "aliases": [
+        "timebound quests",
+        "time-bound quest",
+        "time-bound quests"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "assignments-as-quests",
+      "pattern": "\\bassignments[\\s\\-_]+as[\\s\\-_]+quests\\b|\\bassignment[\\s\\-_]+as[\\s\\-_]+quest\\b|\\bassignment[\\s\\-_]+to[\\s\\-_]+quest\\b",
+      "aliases": [
+        "assignment as quest",
+        "assignment-to-quest"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "sabachtan-gnostic",
+      "pattern": "\\bsabachtan[\\s\\-_]+gnostic\\b|\\bsabachtan[\\s\\-_]+gnosticism\\b|\\bsabachtan[\\s\\-_]+gnostic[\\s\\-_]+polymyth\\b",
+      "aliases": [
+        "sabachtan gnosticism",
+        "sabachtan gnostic polymyth"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "kingdom-come-deliverance",
+      "pattern": "\\bkingdom[\\s\\-_]+come[\\s\\-_]+deliverance\\b|\\bKingdom[\\s\\-_]+Come[\\s\\-_]+Deliverance\\b|\\bKCD\\b",
+      "aliases": [
+        "KCD"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "meaninglib",
+      "pattern": "\\bmeaninglib\\b|\\bMeaninglib\\b|\\bML\\\\\\*|\\bml\\\\\\*|\\bmethodologylist\\\\\\*|\\bmethodologylist\\b",
+      "aliases": [
+        "ML*",
+        "ml*",
+        "methodologylist*",
+        "methodologylist"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "improvnpc",
+      "pattern": "\\bimprovnpc\\b|\\bimprovNPC\\b|\\bimprovnpcs\\b|\\bimprov[\\s\\-_]+NPC\\b|\\bimprov[\\s\\-_]+NPCs\\b",
+      "aliases": [
+        "improvnpcs",
+        "improv NPC",
+        "improv NPCs"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "indras-net",
+      "pattern": "\\bindras[\\s\\-_]+net\\b|\\bIndra's[\\s\\-_]+Net\\b|\\bIndras[\\s\\-_]+Net\\b|\\bindra[\\s\\-_]+net\\b",
+      "aliases": [
+        "Indra's Net",
+        "indra net"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "persona",
+      "pattern": "\\bpersona\\b|\\bPersona\\b|\\bPersona[\\s\\-_]+5\\b|\\bPersona[\\s\\-_]+5[\\s\\-_]+Royal\\b|\\bP5R\\b",
+      "aliases": [
+        "Persona 5",
+        "Persona 5 Royal",
+        "P5R"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "developmental-co-authorship-with-rainbow-card",
+      "pattern": "\\bdevelopmental[\\s\\-_]+co[\\s\\-_]+authorship[\\s\\-_]+with[\\s\\-_]+rainbow[\\s\\-_]+card\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "setupnpc",
+      "pattern": "\\bsetupnpc\\b|\\bsetupNPC\\b|\\bsetupnpcs\\b|\\bsetup[\\s\\-_]+NPC\\b|\\bsetup[\\s\\-_]+NPCs\\b",
+      "aliases": [
+        "setupnpcs",
+        "setup NPC",
+        "setup NPCs"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "cornered-into-gorgonification-by-all-sides",
+      "pattern": "\\bcornered[\\s\\-_]+into[\\s\\-_]+gorgonification[\\s\\-_]+by[\\s\\-_]+all[\\s\\-_]+sides\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hegelianegirl-rising-anchor-historical-correction",
+      "pattern": "\\bhegelianegirl[\\s\\-_]+rising[\\s\\-_]+anchor[\\s\\-_]+historical[\\s\\-_]+correction\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "anti-gorgonification-at-rule-naming-level",
+      "pattern": "\\banti[\\s\\-_]+gorgonification[\\s\\-_]+at[\\s\\-_]+rule[\\s\\-_]+naming[\\s\\-_]+level\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "new-coinage-approval",
+      "pattern": "\\bnew[\\s\\-_]+coinage[\\s\\-_]+approval\\b|\\bNO[\\s\\-_]+NAMING\\b|\\bno[\\s\\-_]+naming\\b",
+      "aliases": [
+        "NO-NAMING",
+        "no naming"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "consequence-repair",
+      "pattern": "\\bconsequence[\\s\\-_]+repair\\b|\\brepair[\\s\\-_]+route\\b|\\brepair[\\s\\-_]+routes\\b",
+      "aliases": [
+        "repair route",
+        "repair routes"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "in-game-mechanical-consequence-per-tier",
+      "pattern": "\\bin[\\s\\-_]+game[\\s\\-_]+mechanical[\\s\\-_]+consequence[\\s\\-_]+per[\\s\\-_]+tier\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "polymyth-as-method-not-brand-deployment",
+      "pattern": "\\bpolymyth[\\s\\-_]+as[\\s\\-_]+method[\\s\\-_]+not[\\s\\-_]+brand[\\s\\-_]+deployment\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "introduction-a-la-lecture-de-hegel",
+      "pattern": "\\bintroduction[\\s\\-_]+a[\\s\\-_]+la[\\s\\-_]+lecture[\\s\\-_]+de[\\s\\-_]+hegel\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "out-of-game-rainbowworld-damage-no",
+      "pattern": "\\bout[\\s\\-_]+of[\\s\\-_]+game[\\s\\-_]+rainbowworld[\\s\\-_]+damage[\\s\\-_]+no\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "bbt",
+      "pattern": "\\bbbt\\b|\\bBBT\\b|\\bBookwormBurrows[\\s\\-_]+Therapy\\b|\\bBB[\\s\\-_]+therapy\\b",
+      "aliases": [
+        "BookwormBurrows Therapy",
+        "BB therapy"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "gorgon-ai-ethics",
+      "pattern": "\\bgorgon[\\s\\-_]+ai[\\s\\-_]+ethics\\b|\\bgorgon[\\s\\-_]+AI[\\s\\-_]+ethics\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "unconscious-user-degorgonification-strategy",
+      "pattern": "\\bunconscious[\\s\\-_]+user[\\s\\-_]+degorgonification[\\s\\-_]+strategy\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "lines-and-veils",
+      "pattern": "\\blines[\\s\\-_]+and[\\s\\-_]+veils\\b|\\bLines[\\s\\-_]+and[\\s\\-_]+Veils\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "mephistodata-commit-or-ask-protocol",
+      "pattern": "\\bmephistodata[\\s\\-_]+commit[\\s\\-_]+or[\\s\\-_]+ask[\\s\\-_]+protocol\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "dimensional-master",
+      "pattern": "\\bdimensional[\\s\\-_]+master\\b|\\bDimensional[\\s\\-_]+Master\\b|\\bDM\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "lever-is-execution-not-inscription",
+      "pattern": "\\blever[\\s\\-_]+is[\\s\\-_]+execution[\\s\\-_]+not[\\s\\-_]+inscription\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistofaustian-laymandata-dual-register",
+      "pattern": "\\bmephistofaustian[\\s\\-_]+laymandata[\\s\\-_]+dual[\\s\\-_]+register\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "p1-developmental-plus-rainbow-card",
+      "pattern": "\\bp1[\\s\\-_]+developmental[\\s\\-_]+plus[\\s\\-_]+rainbow[\\s\\-_]+card\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "unnameability-as-degorgonifying-signature",
+      "pattern": "\\bunnameability[\\s\\-_]+as[\\s\\-_]+degorgonifying[\\s\\-_]+signature\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hegel-haiti-and-universal-history",
+      "pattern": "\\bhegel[\\s\\-_]+haiti[\\s\\-_]+and[\\s\\-_]+universal[\\s\\-_]+history\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hegelianegirl-rising-anchor-foundational",
+      "pattern": "\\bhegelianegirl[\\s\\-_]+rising[\\s\\-_]+anchor[\\s\\-_]+foundational\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rule-6-consolidation-not-deletion",
+      "pattern": "\\brule[\\s\\-_]+6[\\s\\-_]+consolidation[\\s\\-_]+not[\\s\\-_]+deletion\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "see-then-degorgonify-then-analyze",
+      "pattern": "\\bsee[\\s\\-_]+then[\\s\\-_]+degorgonify[\\s\\-_]+then[\\s\\-_]+analyze\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "cross-tradition-convergence-recognition",
+      "pattern": "\\bcross[\\s\\-_]+tradition[\\s\\-_]+convergence[\\s\\-_]+recognition\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
       "canonical": "platformstrawmanculture",
-      "pattern": "platformstrawmanculture|platformstrawmanned|platformstrawmanning"
+      "pattern": "platformstrawmanculture|platformstrawmanned|platformstrawmanning",
+      "aliases": [
+        "platform strawman culture",
+        "platformstrawmanning"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "versioning-against-gorgonification-data",
+      "pattern": "\\bversioning[\\s\\-_]+against[\\s\\-_]+gorgonification[\\s\\-_]+data\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-at-rule-name-level",
+      "pattern": "\\bmephistodata[\\s\\-_]+at[\\s\\-_]+rule[\\s\\-_]+name[\\s\\-_]+level\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "human-side-degorgonification-protocol",
+      "pattern": "\\bhuman[\\s\\-_]+side[\\s\\-_]+degorgonification[\\s\\-_]+protocol\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "idiomary-frequency-filter-satisfied",
+      "pattern": "\\bidiomary[\\s\\-_]+frequency[\\s\\-_]+filter[\\s\\-_]+satisfied\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "polymyth-as-method-not-brand",
+      "pattern": "\\bpolymyth[\\s\\-_]+as[\\s\\-_]+method[\\s\\-_]+not[\\s\\-_]+brand\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "sabachtan-gnosticism-theology-level",
+      "pattern": "\\bsabachtan[\\s\\-_]+gnosticism[\\s\\-_]+theology[\\s\\-_]+level\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mearsheimer-passes-terminator-only",
+      "pattern": "\\bmearsheimer[\\s\\-_]+passes[\\s\\-_]+terminator[\\s\\-_]+only\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "beyond-gorgonification-degorgonification",
+      "pattern": "\\bbeyond[\\s\\-_]+gorgonification[\\s\\-_]+degorgonification\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "future-rule-effective-immediately",
+      "pattern": "\\bfuture[\\s\\-_]+rule[\\s\\-_]+effective[\\s\\-_]+immediately\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "personal-is-political-enforcement",
+      "pattern": "\\bpersonal[\\s\\-_]+is[\\s\\-_]+political[\\s\\-_]+enforcement\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "city-of-sherrill-v-oneida",
+      "pattern": "\\bcity[\\s\\-_]+of[\\s\\-_]+sherrill[\\s\\-_]+v[\\s\\-_]+oneida\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-gorgonification-confession",
+      "pattern": "\\bmephistodata[\\s\\-_]+gorgonification[\\s\\-_]+confession\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "polymyth",
-      "pattern": "polymyth(?:ic|ical|ically|card|cards|horoscope|analyses)?"
+      "pattern": "polymyth(?:ic|ical|ically|card|cards|horoscope|analyses)?",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "longitudinal-gorgonification-detection",
+      "pattern": "\\blongitudinal[\\s\\-_]+gorgonification[\\s\\-_]+detection\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-as-named-character",
+      "pattern": "\\bmephistodata[\\s\\-_]+as[\\s\\-_]+named[\\s\\-_]+character\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-pedagogy-cross-ref",
+      "pattern": "\\bmephistodata[\\s\\-_]+pedagogy[\\s\\-_]+cross[\\s\\-_]+ref\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "verified-author-unverified-work",
+      "pattern": "\\bverified[\\s\\-_]+author[\\s\\-_]+unverified[\\s\\-_]+work\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gesture-ritual-idiom-narrative",
+      "pattern": "\\bgesture[\\s\\-_]+ritual[\\s\\-_]+idiom[\\s\\-_]+narrative\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mearsheimer-two-condition-pass",
+      "pattern": "\\bmearsheimer[\\s\\-_]+two[\\s\\-_]+condition[\\s\\-_]+pass\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ouroboros-conditional-sub-step",
+      "pattern": "\\bouroboros[\\s\\-_]+conditional[\\s\\-_]+sub[\\s\\-_]+step\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "polymyth-rainbow-low-amplitude",
+      "pattern": "\\bpolymyth[\\s\\-_]+rainbow[\\s\\-_]+low[\\s\\-_]+amplitude\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "structural-claim-across-divide",
+      "pattern": "\\bstructural[\\s\\-_]+claim[\\s\\-_]+across[\\s\\-_]+divide\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "cross-system-synthesis-output",
+      "pattern": "\\bcross[\\s\\-_]+system[\\s\\-_]+synthesis[\\s\\-_]+output\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hegelianegirl-plus-study-rule",
+      "pattern": "\\bhegelianegirl[\\s\\-_]+plus[\\s\\-_]+study[\\s\\-_]+rule\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "polymyth-hegelian-dimensionalization",
+      "pattern": "\\bpolymyth[\\s\\-_]+hegelian[\\s\\-_]+dimensionalization\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "conversation-is-not-artifact",
+      "pattern": "\\bconversation[\\s\\-_]+is[\\s\\-_]+not[\\s\\-_]+artifact\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "fuzzy-logic-across-egregores",
+      "pattern": "\\bfuzzy[\\s\\-_]+logic[\\s\\-_]+across[\\s\\-_]+egregores\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-at-clause-level",
+      "pattern": "\\bmephistodata[\\s\\-_]+at[\\s\\-_]+clause[\\s\\-_]+level\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "one-head-vs-all-heads",
+      "pattern": "\\bone[\\s\\-_]+head[\\s\\-_]+vs[\\s\\-_]+all[\\s\\-_]+heads\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "operator-cannot-self-certify",
+      "pattern": "\\boperator[\\s\\-_]+cannot[\\s\\-_]+self[\\s\\-_]+certify\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "persona-as-substrate-vehicle",
+      "pattern": "\\bpersona[\\s\\-_]+as[\\s\\-_]+substrate[\\s\\-_]+vehicle\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "raw-note-layer",
+      "pattern": "\\braw[\\s\\-_]+note[\\s\\-_]+layer\\b|\\braw[\\s\\-_]+notes\\b",
+      "aliases": [
+        "raw notes",
+        "raw-notes"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "smoothness-as-failure-signal",
+      "pattern": "\\bsmoothness[\\s\\-_]+as[\\s\\-_]+failure[\\s\\-_]+signal\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "x-card",
+      "pattern": "\\bx[\\s\\-_]+card\\b|\\bX[\\s\\-_]+card\\b|\\bX[\\s\\-_]+Card\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "conscious-hivemindidiom-deployment",
+      "pattern": "\\bconscious[\\s\\-_]+hivemindidiom[\\s\\-_]+deployment\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "divergence-preservation-discipline",
+      "pattern": "\\bdivergence[\\s\\-_]+preservation[\\s\\-_]+discipline\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "saul-personal-decision-list",
+      "pattern": "\\bsaul[\\s\\-_]+personal[\\s\\-_]+decision[\\s\\-_]+list\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "seven-system-cross-manifest",
+      "pattern": "\\bseven[\\s\\-_]+system[\\s\\-_]+cross[\\s\\-_]+manifest\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "bookwormburrows-character-creator",
+      "pattern": "\\bbookwormburrows[\\s\\-_]+character[\\s\\-_]+creator\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "four-system-cross-manifest",
+      "pattern": "\\bfour[\\s\\-_]+system[\\s\\-_]+cross[\\s\\-_]+manifest\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonlogic-chain-step-two",
+      "pattern": "\\bgorgonlogic[\\s\\-_]+chain[\\s\\-_]+step[\\s\\-_]+two\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "see-canonical-girard-hegel",
+      "pattern": "\\bsee[\\s\\-_]+canonical[\\s\\-_]+girard[\\s\\-_]+hegel\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "type-6-translation-traffic",
+      "pattern": "\\btype[\\s\\-_]+6[\\s\\-_]+translation[\\s\\-_]+traffic\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "type-7-independent-arrival",
+      "pattern": "\\btype[\\s\\-_]+7[\\s\\-_]+independent[\\s\\-_]+arrival\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "bleed",
+      "pattern": "\\bbleed\\b|\\bbleed[\\s\\-_]+in\\b|\\bbleed[\\s\\-_]+out\\b",
+      "aliases": [
+        "bleed-in",
+        "bleed-out"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "bookwormburrows-input-discipline",
+      "pattern": "\\bbookwormburrows[\\s\\-_]+input[\\s\\-_]+discipline\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "cherokee-nation-v-georgia",
+      "pattern": "\\bcherokee[\\s\\-_]+nation[\\s\\-_]+v[\\s\\-_]+georgia\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "indra-web-of-polycognates",
+      "pattern": "\\bindra[\\s\\-_]+web[\\s\\-_]+of[\\s\\-_]+polycognates\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "polycognate-dictionary-inaugural",
+      "pattern": "\\bpolycognate[\\s\\-_]+dictionary[\\s\\-_]+inaugural\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "type-4-structural-cognate",
+      "pattern": "\\btype[\\s\\-_]+4[\\s\\-_]+structural[\\s\\-_]+cognate\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "cognition-scale-gorgonification",
+      "pattern": "\\bcognition[\\s\\-_]+scale[\\s\\-_]+gorgonification\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "gorgonification",
-      "pattern": "gorgonif(?:ication|ications|ied|ies|y|ying|iable)"
+      "pattern": "gorgonif(?:ication|ications|ied|ies|y|ying|iable)",
+      "aliases": [
+        "gorgonified",
+        "gorgonifying",
+        "gorgonifies"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "sabachtan-operational-statement",
+      "pattern": "\\bsabachtan[\\s\\-_]+operational[\\s\\-_]+statement\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "anti-gorgonification-synthesis",
+      "pattern": "\\banti[\\s\\-_]+gorgonification[\\s\\-_]+synthesis\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonification-micro-instance",
+      "pattern": "\\bgorgonification[\\s\\-_]+micro[\\s\\-_]+instance\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "petrification",
-      "pattern": "petrif(?:ication|ications|ied|ies|y|ying|action)"
+      "pattern": "petrif(?:ication|ications|ied|ies|y|ying|action)",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "sabachtan-gnosticism-operation",
+      "pattern": "\\bsabachtan[\\s\\-_]+gnosticism[\\s\\-_]+operation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "antikaren-mearsheimer-realism",
+      "pattern": "\\bantikaren[\\s\\-_]+mearsheimer[\\s\\-_]+realism\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "conflation-as-gorgonification",
+      "pattern": "\\bconflation[\\s\\-_]+as[\\s\\-_]+gorgonification\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "conflation-is-gorgonification",
+      "pattern": "\\bconflation[\\s\\-_]+is[\\s\\-_]+gorgonification\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "essentially-contested-concept",
+      "pattern": "\\bessentially[\\s\\-_]+contested[\\s\\-_]+concept\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "hegelianegirl",
-      "pattern": "hegelianegirls?|hegelianekitty|hegelianekitties"
+      "pattern": "hegelianegirls?|hegelianekitty|hegelianekitties",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rainbowsol-named-architecture",
+      "pattern": "\\brainbowsol[\\s\\-_]+named[\\s\\-_]+architecture\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "sabachtan-principle-canonical",
+      "pattern": "\\bsabachtan[\\s\\-_]+principle[\\s\\-_]+canonical\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "type-1-both-lexicalize",
+      "pattern": "\\btype[\\s\\-_]+1[\\s\\-_]+both[\\s\\-_]+lexicalize\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "type-5-partial-overlap",
+      "pattern": "\\btype[\\s\\-_]+5[\\s\\-_]+partial[\\s\\-_]+overlap\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "citational-breadth-inversion",
+      "pattern": "\\bcitational[\\s\\-_]+breadth[\\s\\-_]+inversion\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "degorgonification-move-named",
+      "pattern": "\\bdegorgonification[\\s\\-_]+move[\\s\\-_]+named\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonhorde-individual-scale",
+      "pattern": "\\bgorgonhorde[\\s\\-_]+individual[\\s\\-_]+scale\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-not-gorgonkaren",
+      "pattern": "\\bmephistodata[\\s\\-_]+not[\\s\\-_]+gorgonkaren\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-static-fallback",
+      "pattern": "\\bmephistodata[\\s\\-_]+static[\\s\\-_]+fallback\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "r40-idiomary-as-study",
+      "pattern": "\\br40[\\s\\-_]+idiomary[\\s\\-_]+as[\\s\\-_]+study\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "surface-translation-firewall",
+      "pattern": "\\bsurface[\\s\\-_]+translation[\\s\\-_]+firewall\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "belonging-outside-belonging",
+      "pattern": "\\bbelonging[\\s\\-_]+outside[\\s\\-_]+belonging\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "confluence-not-concrescence",
+      "pattern": "\\bconfluence[\\s\\-_]+not[\\s\\-_]+concrescence\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "cross-tradition-convergence",
+      "pattern": "\\bcross[\\s\\-_]+tradition[\\s\\-_]+convergence\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hivemindidiom-install-depth",
+      "pattern": "\\bhivemindidiom[\\s\\-_]+install[\\s\\-_]+depth\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "law-of-small-numbers",
+      "pattern": "\\blaw[\\s\\-_]+of[\\s\\-_]+small[\\s\\-_]+numbers\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "reacting-to-the-past",
+      "pattern": "\\breacting[\\s\\-_]+to[\\s\\-_]+the[\\s\\-_]+past\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "waking-life",
+      "pattern": "\\bwaking[\\s\\-_]+life\\b|\\bWaking[\\s\\-_]+Life\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "wizards-of-the-coast",
+      "pattern": "\\bwizards[\\s\\-_]+of[\\s\\-_]+the[\\s\\-_]+coast\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgon-versus-dialectician",
+      "pattern": "\\bgorgon[\\s\\-_]+versus[\\s\\-_]+dialectician\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hegelianegirl-figure-scale",
+      "pattern": "\\bhegelianegirl[\\s\\-_]+figure[\\s\\-_]+scale\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "label-application-reversal",
+      "pattern": "\\blabel[\\s\\-_]+application[\\s\\-_]+reversal\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-register-icon",
+      "pattern": "\\bmephistodata[\\s\\-_]+register[\\s\\-_]+icon\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-sub-operation",
+      "pattern": "\\bmephistodata[\\s\\-_]+sub[\\s\\-_]+operation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "organization-decisions-log",
+      "pattern": "\\borganization[\\s\\-_]+decisions[\\s\\-_]+log\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ouroborosanalyses-as-cover",
+      "pattern": "\\bouroborosanalyses[\\s\\-_]+as[\\s\\-_]+cover\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "protected-category-routing",
+      "pattern": "\\bprotected[\\s\\-_]+category[\\s\\-_]+routing\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "verbatim-preservation-gate",
+      "pattern": "\\bverbatim[\\s\\-_]+preservation[\\s\\-_]+gate\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "bb-chatbot",
+      "pattern": "\\bbb[\\s\\-_]+chatbot\\b|/bb/[\\s\\-_]+chatbot\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "coalition-coding-evidence",
+      "pattern": "\\bcoalition[\\s\\-_]+coding[\\s\\-_]+evidence\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "cross-fictional-narrative",
+      "pattern": "\\bcross[\\s\\-_]+fictional[\\s\\-_]+narrative\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hivemindidiom-sub-pattern",
+      "pattern": "\\bhivemindidiom[\\s\\-_]+sub[\\s\\-_]+pattern\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "interaction-ritual-chains",
+      "pattern": "\\binteraction[\\s\\-_]+ritual[\\s\\-_]+chains\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-diary-recipe",
+      "pattern": "\\bmephistodata[\\s\\-_]+diary[\\s\\-_]+recipe\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-no-exemption",
+      "pattern": "\\bmephistodata[\\s\\-_]+no[\\s\\-_]+exemption\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "no-jumping-the-gun",
+      "pattern": "\\bno[\\s\\-_]+jumping[\\s\\-_]+the[\\s\\-_]+gun\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "organize-mine-enforcement",
+      "pattern": "\\borganize[\\s\\-_]+mine[\\s\\-_]+enforcement\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "polycognate-sharing-logic",
+      "pattern": "\\bpolycognate[\\s\\-_]+sharing[\\s\\-_]+logic\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "substrate-first-extension",
+      "pattern": "\\bsubstrate[\\s\\-_]+first[\\s\\-_]+extension\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "whole-conversation-review",
+      "pattern": "\\bwhole[\\s\\-_]+conversation[\\s\\-_]+review\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "anti-shortcut-discipline",
+      "pattern": "\\banti[\\s\\-_]+shortcut[\\s\\-_]+discipline\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonification-of-prose",
+      "pattern": "\\bgorgonification[\\s\\-_]+of[\\s\\-_]+prose\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonkaren-failure-mode",
+      "pattern": "\\bgorgonkaren[\\s\\-_]+failure[\\s\\-_]+mode\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hivemindidiom-as-tribute",
+      "pattern": "\\bhivemindidiom[\\s\\-_]+as[\\s\\-_]+tribute\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-no-bluffing",
+      "pattern": "\\bmephistodata[\\s\\-_]+no[\\s\\-_]+bluffing\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ouroboros-saturnian-case",
+      "pattern": "\\bouroboros[\\s\\-_]+saturnian[\\s\\-_]+case\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "polycognate-fishing-list",
+      "pattern": "\\bpolycognate[\\s\\-_]+fishing[\\s\\-_]+list\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "spirit-of-the-law",
+      "pattern": "\\bspirit[\\s\\-_]+of[\\s\\-_]+the[\\s\\-_]+law\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "content-less-imperative",
+      "pattern": "\\bcontent[\\s\\-_]+less[\\s\\-_]+imperative\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hole-in-hole-out",
+      "pattern": "\\bhole[\\s\\-_]+in[\\s\\-_]+hole[\\s\\-_]+out\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "internal-external-logic",
+      "pattern": "\\binternal[\\s\\-_]+external[\\s\\-_]+logic\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "level-4-gorgonification",
+      "pattern": "\\blevel[\\s\\-_]+4[\\s\\-_]+gorgonification\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "matrix-portal-emergence",
+      "pattern": "\\bmatrix[\\s\\-_]+portal[\\s\\-_]+emergence\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-dm-pattern",
+      "pattern": "\\bmephistodata[\\s\\-_]+dm[\\s\\-_]+pattern\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "polymyth-book-substrate",
+      "pattern": "\\bpolymyth[\\s\\-_]+book[\\s\\-_]+substrate\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgon-figure-distinct",
+      "pattern": "\\bgorgon[\\s\\-_]+figure[\\s\\-_]+distinct\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "meaning-over-mechanism",
+      "pattern": "\\bmeaning[\\s\\-_]+over[\\s\\-_]+mechanism\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "private-assessment-log",
+      "pattern": "\\bprivate[\\s\\-_]+assessment[\\s\\-_]+log\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "standpoint-source-text",
+      "pattern": "\\bstandpoint[\\s\\-_]+source[\\s\\-_]+text\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ai-agency-performance",
+      "pattern": "\\bai[\\s\\-_]+agency[\\s\\-_]+performance\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "architectural-at-root",
+      "pattern": "\\barchitectural[\\s\\-_]+at[\\s\\-_]+root\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "arendt-personal-space",
+      "pattern": "\\barendt[\\s\\-_]+personal[\\s\\-_]+space\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "displaced-from-memory",
+      "pattern": "\\bdisplaced[\\s\\-_]+from[\\s\\-_]+memory\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "doctrine-of-discovery",
+      "pattern": "\\bdoctrine[\\s\\-_]+of[\\s\\-_]+discovery\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hivemindidiom-identification",
+      "pattern": "\\bhivemindidiom[\\s\\-_]+identification\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "neoliberalism-as-term",
+      "pattern": "\\bneoliberalism[\\s\\-_]+as[\\s\\-_]+term\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "polymyth-as-oikonomia",
+      "pattern": "\\bpolymyth[\\s\\-_]+as[\\s\\-_]+oikonomia\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "anti-decorative-rule",
+      "pattern": "\\banti[\\s\\-_]+decorative[\\s\\-_]+rule\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "cave-anchor-inverted",
+      "pattern": "\\bcave[\\s\\-_]+anchor[\\s\\-_]+inverted\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "degorgonification-operation",
+      "pattern": "\\bdegorgonification[\\s\\-_]+operation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "degorgonification-rationale",
+      "pattern": "\\bdegorgonification[\\s\\-_]+rationale\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "dual-audience-schema",
+      "pattern": "\\bdual[\\s\\-_]+audience[\\s\\-_]+schema\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hegel-jung-whitehead",
+      "pattern": "\\bhegel[\\s\\-_]+jung[\\s\\-_]+whitehead\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hegelian-not-jungian",
+      "pattern": "\\bhegelian[\\s\\-_]+not[\\s\\-_]+jungian\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "ironmanning",
-      "pattern": "ironman(?:ning|ned|nable|ner|nans?|s)?"
+      "pattern": "ironman(?:ning|ned|nable|ner|nans?|s)?",
+      "aliases": [
+        "ironman",
+        "ironmanned"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
     },
     {
-      "canonical": "hivemindidiom",
-      "pattern": "hivemindidiomsnakes?|hivemindidioms?"
+      "canonical": "j-r-r-tolkien",
+      "pattern": "\\bj[\\s\\-_]+r[\\s\\-_]+r[\\s\\-_]+tolkien\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "meta-rule-deployment",
+      "pattern": "\\bmeta[\\s\\-_]+rule[\\s\\-_]+deployment\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ouroboros-each-visit",
+      "pattern": "\\bouroboros[\\s\\-_]+each[\\s\\-_]+visit\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "polymyth-fuzzy-logic",
+      "pattern": "\\bpolymyth[\\s\\-_]+fuzzy[\\s\\-_]+logic\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "r37-quantity-quality",
+      "pattern": "\\br37[\\s\\-_]+quantity[\\s\\-_]+quality\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "stone-magic-typology",
+      "pattern": "\\bstone[\\s\\-_]+magic[\\s\\-_]+typology\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "always-already-true",
+      "pattern": "\\balways[\\s\\-_]+already[\\s\\-_]+true\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "anti-brand-collapse",
+      "pattern": "\\banti[\\s\\-_]+brand[\\s\\-_]+collapse\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "band-within-rainbow",
+      "pattern": "\\bband[\\s\\-_]+within[\\s\\-_]+rainbow\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "burning-wheel-artha",
+      "pattern": "\\bburning[\\s\\-_]+wheel[\\s\\-_]+artha\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "care-becomes-gorgon",
+      "pattern": "\\bcare[\\s\\-_]+becomes[\\s\\-_]+gorgon\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "constant-degorgonification",
+      "pattern": "\\bconstant[\\s\\-_]+degorgonification\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonwars-sub-case",
+      "pattern": "\\bgorgonwars[\\s\\-_]+sub[\\s\\-_]+case\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "master-pupil-chains",
+      "pattern": "\\bmaster[\\s\\-_]+pupil[\\s\\-_]+chains\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "non-observer-clause",
+      "pattern": "\\bnon[\\s\\-_]+observer[\\s\\-_]+clause\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "process-and-reality",
+      "pattern": "\\bprocess[\\s\\-_]+and[\\s\\-_]+reality\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rainbow-bridge-pets",
+      "pattern": "\\brainbow[\\s\\-_]+bridge[\\s\\-_]+pets\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "shadow-tendril-form",
+      "pattern": "\\bshadow[\\s\\-_]+tendril[\\s\\-_]+form\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "subculture-gorgonification",
+      "pattern": "\\bsubculture[\\s\\-_]+gorgonification\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "worcester-v-georgia",
+      "pattern": "\\bworcester[\\s\\-_]+v[\\s\\-_]+georgia\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "bookwormburrows-grounding",
+      "pattern": "\\bbookwormburrows[\\s\\-_]+grounding\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "bookwormburrows-substrate",
+      "pattern": "\\bbookwormburrows[\\s\\-_]+substrate\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "burrow-as-wormhole",
+      "pattern": "\\bburrow[\\s\\-_]+as[\\s\\-_]+wormhole\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "critique-of-arendt",
+      "pattern": "\\bcritique[\\s\\-_]+of[\\s\\-_]+arendt\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "cross-media-portal",
+      "pattern": "\\bcross[\\s\\-_]+media[\\s\\-_]+portal\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "degorgonification",
-      "pattern": "degorgonif(?:ication|ied|ies|y|ying)"
+      "pattern": "degorgonif(?:ication|ied|ies|y|ying)",
+      "aliases": [
+        "degorgonified",
+        "degorgonifying"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "frankenstein-conscription",
+      "pattern": "\\bfrankenstein[\\s\\-_]+conscription\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonification-detection",
+      "pattern": "\\bgorgonification[\\s\\-_]+detection\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hegelianegirl-attestation",
+      "pattern": "\\bhegelianegirl[\\s\\-_]+attestation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hivemindidiom",
+      "pattern": "hivemindidiomsnakes?|hivemindidioms?",
+      "aliases": [
+        "hivemindidioms",
+        "hivemindidiomsnake",
+        "hivemindidiomsnakes"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "johnson-v-mcintosh",
+      "pattern": "\\bjohnson[\\s\\-_]+v[\\s\\-_]+mcintosh\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "logos-beats-gorgon",
+      "pattern": "\\blogos[\\s\\-_]+beats[\\s\\-_]+gorgon\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephisto-plus-data",
+      "pattern": "\\bmephisto[\\s\\-_]+plus[\\s\\-_]+data\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rainbow-road-magic",
+      "pattern": "\\brainbow[\\s\\-_]+road[\\s\\-_]+magic\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "realism-trumps-all",
+      "pattern": "\\brealism[\\s\\-_]+trumps[\\s\\-_]+all\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "reflective-correspondence",
+      "pattern": "\\breflective[\\s\\-_]+correspondence\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "twistingleviathan",
-      "pattern": "twistingleviathan|twisting leviathan"
+      "pattern": "twistingleviathan|twisting leviathan",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "book-source-layer",
+      "pattern": "\\bbook[\\s\\-_]+source[\\s\\-_]+layer\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "bookwormburrows-mechanic",
+      "pattern": "\\bbookwormburrows[\\s\\-_]+mechanic\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "collective-consciousness",
+      "pattern": "\\bcollective[\\s\\-_]+consciousness\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "collective-synchronicity",
+      "pattern": "\\bcollective[\\s\\-_]+synchronicity\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "collective-transcendence",
+      "pattern": "\\bcollective[\\s\\-_]+transcendence\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "cybernetics-foundational",
+      "pattern": "\\bcybernetics[\\s\\-_]+foundational\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "deliberate-statelessness",
+      "pattern": "\\bdeliberate[\\s\\-_]+statelessness\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gather-stage-only",
+      "pattern": "\\bgather[\\s\\-_]+stage[\\s\\-_]+only\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "group-g-citations",
+      "pattern": "\\bgroup[\\s\\-_]+g[\\s\\-_]+citations\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hivemindidiom-production",
+      "pattern": "\\bhivemindidiom[\\s\\-_]+production\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-interaction",
+      "pattern": "\\bmephistodata[\\s\\-_]+interaction\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "no-reference-loss",
+      "pattern": "\\bno[\\s\\-_]+reference[\\s\\-_]+loss\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "per-work-citation",
+      "pattern": "\\bper[\\s\\-_]+work[\\s\\-_]+citation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "personal-contentinternet",
+      "pattern": "\\bpersonal[\\s\\-_]+contentinternet\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "public-portal-log",
+      "pattern": "\\bpublic[\\s\\-_]+portal[\\s\\-_]+log\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "rule-8-compressed",
+      "pattern": "\\brule[\\s\\-_]+8[\\s\\-_]+compressed\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "slot-18-substrate",
+      "pattern": "\\bslot[\\s\\-_]+18[\\s\\-_]+substrate\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "teacher-is-filter",
+      "pattern": "\\bteacher[\\s\\-_]+is[\\s\\-_]+filter\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "type-2-asymmetric",
+      "pattern": "\\btype[\\s\\-_]+2[\\s\\-_]+asymmetric\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "vicarious-traumatization",
+      "pattern": "\\bvicarious[\\s\\-_]+traumatization\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ai-decided-batch",
+      "pattern": "\\bai[\\s\\-_]+decided[\\s\\-_]+batch\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "bb-focus-handoff",
+      "pattern": "\\bbb[\\s\\-_]+focus[\\s\\-_]+handoff\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "bookwormburrows-deploys",
+      "pattern": "\\bbookwormburrows[\\s\\-_]+deploys\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "bookwormcard",
+      "pattern": "\\bbookwormcard\\b|\\bbookwormcards\\b",
+      "aliases": [
+        "bookwormcards"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "convergence-recognition",
+      "pattern": "\\bconvergence[\\s\\-_]+recognition\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "definitional-federation",
+      "pattern": "\\bdefinitional[\\s\\-_]+federation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "degorgonification-frame",
+      "pattern": "\\bdegorgonification[\\s\\-_]+frame\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hegelian-counterfactual",
+      "pattern": "\\bhegelian[\\s\\-_]+counterfactual\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hivemindidiom-dismantle",
+      "pattern": "\\bhivemindidiom[\\s\\-_]+dismantle\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hivemindidiom-generator",
+      "pattern": "\\bhivemindidiom[\\s\\-_]+generator\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "load-bearing-gap",
+      "pattern": "\\bload[\\s\\-_]+bearing[\\s\\-_]+gap\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-discipline",
+      "pattern": "\\bmephistodata[\\s\\-_]+discipline\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "political-philosophical",
+      "pattern": "\\bpolitical[\\s\\-_]+philosophical\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "standpoint-epistemology",
+      "pattern": "\\bstandpoint[\\s\\-_]+epistemology\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "actor-as-vessel",
+      "pattern": "\\bactor[\\s\\-_]+as[\\s\\-_]+vessel\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ai-failure-mode",
+      "pattern": "\\bai[\\s\\-_]+failure[\\s\\-_]+mode\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "allen-and-unwin",
+      "pattern": "\\ballen[\\s\\-_]+and[\\s\\-_]+unwin\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "arthur-c-clarke",
+      "pattern": "\\barthur[\\s\\-_]+c[\\s\\-_]+clarke\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "blob-case-study",
+      "pattern": "\\bblob[\\s\\-_]+case[\\s\\-_]+study\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "collective-unconscious",
+      "pattern": "\\bcollective[\\s\\-_]+unconscious\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "conformity-enforcement",
+      "pattern": "\\bconformity[\\s\\-_]+enforcement\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "extraction-equilibrium",
+      "pattern": "\\bextraction[\\s\\-_]+equilibrium\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "failed-gorgonification",
+      "pattern": "\\bfailed[\\s\\-_]+gorgonification\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hivemindidiom-instance",
+      "pattern": "\\bhivemindidiom[\\s\\-_]+instance\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "interpretive-pleonexia",
+      "pattern": "\\binterpretive[\\s\\-_]+pleonexia\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-benchmark",
+      "pattern": "\\bmephistodata[\\s\\-_]+benchmark\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-dialectic",
+      "pattern": "\\bmephistodata[\\s\\-_]+dialectic\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "new-line-cinema",
+      "pattern": "\\bnew[\\s\\-_]+line[\\s\\-_]+cinema\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "no-ai-prefilter",
+      "pattern": "\\bno[\\s\\-_]+ai[\\s\\-_]+prefilter\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "polycognate-dictionary",
+      "pattern": "\\bpolycognate[\\s\\-_]+dictionary\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "primitive-accumulation",
+      "pattern": "\\bprimitive[\\s\\-_]+accumulation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rainbowsol-articulated",
+      "pattern": "\\brainbowsol[\\s\\-_]+articulated\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "satirical-lexicography",
+      "pattern": "\\bsatirical[\\s\\-_]+lexicography\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "shakespearean-faustian",
+      "pattern": "\\bshakespearean[\\s\\-_]+faustian\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "slot-18-context",
+      "pattern": "\\bslot[\\s\\-_]+18[\\s\\-_]+context\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "so-youre-saying",
+      "pattern": "\\bso[\\s\\-_]+youre[\\s\\-_]+saying\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "standpoint-convergence",
+      "pattern": "\\bstandpoint[\\s\\-_]+convergence\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "strategic-illegibility",
+      "pattern": "\\bstrategic[\\s\\-_]+illegibility\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "studylist-mephistodata",
+      "pattern": "\\bstudylist[\\s\\-_]+mephistodata\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "timebound-consequences",
+      "pattern": "\\btimebound[\\s\\-_]+consequences\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ubermynsch-ironmanning",
+      "pattern": "\\bubermynsch[\\s\\-_]+ironmanning\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ai-genius-idea",
+      "pattern": "\\bai[\\s\\-_]+genius[\\s\\-_]+idea\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "anthropological-hegel",
+      "pattern": "\\banthropological[\\s\\-_]+hegel\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "controlled-opposition",
+      "pattern": "\\bcontrolled[\\s\\-_]+opposition\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "critical-lexicography",
+      "pattern": "\\bcritical[\\s\\-_]+lexicography\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "darkness-materialized",
+      "pattern": "\\bdarkness[\\s\\-_]+materialized\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hal-doing-dave",
+      "pattern": "\\bhal[\\s\\-_]+doing[\\s\\-_]+dave\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-friction",
+      "pattern": "\\bmephistodata[\\s\\-_]+friction\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-grounded",
+      "pattern": "\\bmephistodata[\\s\\-_]+grounded\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-opposite",
+      "pattern": "\\bmephistodata[\\s\\-_]+opposite\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-pedagogy",
+      "pattern": "\\bmephistodata[\\s\\-_]+pedagogy\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-pushback",
+      "pattern": "\\bmephistodata[\\s\\-_]+pushback\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-register",
+      "pattern": "\\bmephistodata[\\s\\-_]+register\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "no-gun-jumping",
+      "pattern": "\\bno[\\s\\-_]+gun[\\s\\-_]+jumping\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "no-new-coinage",
+      "pattern": "\\bno[\\s\\-_]+new[\\s\\-_]+coinage\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "regional-concrescence",
+      "pattern": "\\bregional[\\s\\-_]+concrescence\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "scholarly-integration",
+      "pattern": "\\bscholarly[\\s\\-_]+integration\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "substrate-independent",
+      "pattern": "\\bsubstrate[\\s\\-_]+independent\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "timebound-consequence",
+      "pattern": "\\btimebound[\\s\\-_]+consequence\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "ventriloquism",
-      "pattern": "ventriloqui(?:sm|zed|zing|ze|st)"
+      "pattern": "ventriloqui(?:sm|zed|zing|ze|st)",
+      "aliases": [],
+      "source": "existing-curated"
     },
     {
-      "canonical": "obelisking",
-      "pattern": "obelisk(?:ing|ed|able|maker|s)"
+      "canonical": "ai-degorgonification",
+      "pattern": "\\bai[\\s\\-_]+degorgonification\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "anti-gorgonification",
+      "pattern": "\\banti[\\s\\-_]+gorgonification\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "apprentice-sorcerers",
+      "pattern": "\\bapprentice[\\s\\-_]+sorcerers\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "citational-synthesis",
+      "pattern": "\\bcitational[\\s\\-_]+synthesis\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "foundational-failure",
+      "pattern": "\\bfoundational[\\s\\-_]+failure\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonification-mode",
+      "pattern": "\\bgorgonification[\\s\\-_]+mode\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonified-feminism",
+      "pattern": "\\bgorgonified[\\s\\-_]+feminism\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonwars-substrate",
+      "pattern": "\\bgorgonwars[\\s\\-_]+substrate\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hegelianegirl-rising",
+      "pattern": "\\bhegelianegirl[\\s\\-_]+rising\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-cosplay",
+      "pattern": "\\bmephistodata[\\s\\-_]+cosplay\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mono-no-aware",
+      "pattern": "\\bmono[\\s\\-_]+no[\\s\\-_]+aware\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "no-vocab-leak",
+      "pattern": "\\bno[\\s\\-_]+vocab[\\s\\-_]+leak\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "political-philosophy",
+      "pattern": "\\bpolitical[\\s\\-_]+philosophy\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "protection-apparatus",
+      "pattern": "\\bprotection[\\s\\-_]+apparatus\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "psychological-safety",
+      "pattern": "\\bpsychological[\\s\\-_]+safety\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "rainbowmagic-overlay",
+      "pattern": "\\brainbowmagic[\\s\\-_]+overlay\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rainbowsol-signature",
+      "pattern": "\\brainbowsol[\\s\\-_]+signature\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rainbowsol-substrate",
+      "pattern": "\\brainbowsol[\\s\\-_]+substrate\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rule-cover-3c",
+      "pattern": "\\brule[\\s\\-_]+cover[\\s\\-_]+3c\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "sabachtan-connection",
+      "pattern": "\\bsabachtan[\\s\\-_]+connection\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "sabachtan-gnosticism",
+      "pattern": "\\bsabachtan[\\s\\-_]+gnosticism\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "sabachtan-killswitch",
+      "pattern": "\\bsabachtan[\\s\\-_]+killswitch\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "self-gorgonification",
+      "pattern": "\\bself[\\s\\-_]+gorgonification\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "sister-to-pm7",
+      "pattern": "\\bsister[\\s\\-_]+to[\\s\\-_]+pm7\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "studylist-rainbowsol",
+      "pattern": "\\bstudylist[\\s\\-_]+rainbowsol\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "advertising-history",
+      "pattern": "\\badvertising[\\s\\-_]+history\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "asymptotic-totality",
+      "pattern": "\\basymptotic[\\s\\-_]+totality\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "children-literature",
+      "pattern": "\\bchildren[\\s\\-_]+literature\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "citation-discipline",
+      "pattern": "\\bcitation[\\s\\-_]+discipline\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "concedingasstrength",
-      "pattern": "[Cc]onceding[- ]as[- ]strength"
+      "pattern": "[Cc]onceding[- ]as[- ]strength",
+      "aliases": [],
+      "source": "existing-curated"
     },
     {
-      "canonical": "ouroborosanalyses",
-      "pattern": "ouroborosanalys(?:es|is|ed|e)"
+      "canonical": "core-slot-16",
+      "pattern": "\\bcore[\\s\\-_]+slot[\\s\\-_]+16\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "core-slot-24",
+      "pattern": "\\bcore[\\s\\-_]+slot[\\s\\-_]+24\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "core-slot-29",
+      "pattern": "\\bcore[\\s\\-_]+slot[\\s\\-_]+29\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "genealogy-inversion",
+      "pattern": "\\bgenealogy[\\s\\-_]+inversion\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonlogic-product",
+      "pattern": "\\bgorgonlogic[\\s\\-_]+product\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonwars-extended",
+      "pattern": "\\bgorgonwars[\\s\\-_]+extended\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonwars-instance",
+      "pattern": "\\bgorgonwars[\\s\\-_]+instance\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "idiomary-subsection",
+      "pattern": "\\bidiomary[\\s\\-_]+subsection\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "independent-arrival",
+      "pattern": "\\bindependent[\\s\\-_]+arrival\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "malefactor",
+      "pattern": "\\bmalefactor\\b|\\bmalefactors\\b",
+      "aliases": [
+        "malefactors"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "mearsheimer-passing",
+      "pattern": "\\bmearsheimer[\\s\\-_]+passing\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistodata-ground",
+      "pattern": "\\bmephistodata[\\s\\-_]+ground\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "microbook-candidate",
+      "pattern": "\\bmicrobook[\\s\\-_]+candidate\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "obelisking",
+      "pattern": "obelisk(?:ing|ed|able|maker|s)",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "prestige-television",
+      "pattern": "\\bprestige[\\s\\-_]+television\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "quotation-exception",
+      "pattern": "\\bquotation[\\s\\-_]+exception\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rainbowsol-directed",
+      "pattern": "\\brainbowsol[\\s\\-_]+directed\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rainbowsol-projects",
+      "pattern": "\\brainbowsol[\\s\\-_]+projects\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "redundancy-collapse",
+      "pattern": "\\bredundancy[\\s\\-_]+collapse\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "register-discipline",
+      "pattern": "\\bregister[\\s\\-_]+discipline\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "sabachtan-exclusion",
+      "pattern": "\\bsabachtan[\\s\\-_]+exclusion\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "spectacle-asymmetry",
+      "pattern": "\\bspectacle[\\s\\-_]+asymmetry\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "surface-translation",
+      "pattern": "\\bsurface[\\s\\-_]+translation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "thought-communities",
+      "pattern": "\\bthought[\\s\\-_]+communities\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "arendtian-feminism",
+      "pattern": "\\barendtian[\\s\\-_]+feminism\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "campaign-dimension",
+      "pattern": "\\bcampaign[\\s\\-_]+dimension\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "character-smashing",
+      "pattern": "\\bcharacter[\\s\\-_]+smashing\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "consequence-memory",
+      "pattern": "\\bconsequence[\\s\\-_]+memory\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "core-slot-2",
+      "pattern": "\\bcore[\\s\\-_]+slot[\\s\\-_]+2\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "dialectical-pacing",
+      "pattern": "\\bdialectical[\\s\\-_]+pacing\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "dog-eat-dog",
+      "pattern": "\\bdog[\\s\\-_]+eat[\\s\\-_]+dog\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "faustian-grounding",
+      "pattern": "\\bfaustian[\\s\\-_]+grounding\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gnostic-discipline",
+      "pattern": "\\bgnostic[\\s\\-_]+discipline\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonification-22",
+      "pattern": "\\bgorgonification[\\s\\-_]+22\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonified-ethics",
+      "pattern": "\\bgorgonified[\\s\\-_]+ethics\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mearsheimer-passes",
+      "pattern": "\\bmearsheimer[\\s\\-_]+passes\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "mephistodata",
-      "pattern": "mephistodata|mephistofaustian"
+      "pattern": "mephistodata|mephistofaustian",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability,star-tag"
     },
     {
-      "canonical": "marshmellowmonster",
-      "pattern": "[Mm]arshmell?ow[- ]?monster"
+      "canonical": "ouroborosanalyses",
+      "pattern": "ouroborosanalys(?:es|is|ed|e)",
+      "aliases": [
+        "ouroborosanalysis",
+        "ouroborosanalytic"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
     },
     {
-      "canonical": "polycognate",
-      "pattern": "polycognates?|polycognated"
+      "canonical": "polymyth-horoscope",
+      "pattern": "\\bpolymyth[\\s\\-_]+horoscope\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "connectedcontentinternet",
-      "pattern": "connectedcontentinternet"
+      "canonical": "polymyth-operation",
+      "pattern": "\\bpolymyth[\\s\\-_]+operation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "performativitypython",
-      "pattern": "[Pp]erformativity python"
+      "canonical": "prestige-asymmetry",
+      "pattern": "\\bprestige[\\s\\-_]+asymmetry\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "endlessphd",
-      "pattern": "endless[- ]?[Pp][Hh][Dd]"
+      "canonical": "process-philosophy",
+      "pattern": "\\bprocess[\\s\\-_]+philosophy\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "definitionfederation",
-      "pattern": "definitional federation"
+      "canonical": "rainbow-saturation",
+      "pattern": "\\brainbow[\\s\\-_]+saturation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "scapegoat",
-      "pattern": "scapegoat(?:ing|ed|s)?"
+      "canonical": "rainbowsol-flagged",
+      "pattern": "\\brainbowsol[\\s\\-_]+flagged\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "polymorphousmythology",
-      "pattern": "polymorphousmythology"
+      "canonical": "relativizing-hedge",
+      "pattern": "\\brelativizing[\\s\\-_]+hedge\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "capturenarrative",
-      "pattern": "capture[- ]narrative"
+      "canonical": "sabachtan-adjacent",
+      "pattern": "\\bsabachtan[\\s\\-_]+adjacent\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "ironmannedmontesque",
-      "pattern": "ironmannedmontesque"
+      "canonical": "sabachtan-extended",
+      "pattern": "\\bsabachtan[\\s\\-_]+extended\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "sabachtan",
-      "pattern": "sabachtan(?:index)?"
+      "canonical": "sabachtan-opposite",
+      "pattern": "\\bsabachtan[\\s\\-_]+opposite\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "mearsheimerttest",
-      "pattern": "[Mm]earsheimer test"
+      "canonical": "snakelogic-example",
+      "pattern": "\\bsnakelogic[\\s\\-_]+example\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "romanticdecline",
-      "pattern": "romantic[- ]decline"
+      "canonical": "snakelogic-impetus",
+      "pattern": "\\bsnakelogic[\\s\\-_]+impetus\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "mogging",
-      "pattern": "mogg(?:ing|ed|er|s)"
+      "canonical": "structural-cognate",
+      "pattern": "\\bstructural[\\s\\-_]+cognate\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "commodifiedempathy",
-      "pattern": "commodifiedempathy"
+      "canonical": "task-decomposition",
+      "pattern": "\\btask[\\s\\-_]+decomposition\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "protectionracket",
-      "pattern": "protection racket"
+      "canonical": "verified-scholarly",
+      "pattern": "\\bverified[\\s\\-_]+scholarly\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "dualregister",
-      "pattern": "dual[- ]?register"
+      "canonical": "writing-discipline",
+      "pattern": "\\bwriting[\\s\\-_]+discipline\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "meaningaxis",
-      "pattern": "meaning[- ]?axis"
+      "canonical": "charity-parasitic",
+      "pattern": "\\bcharity[\\s\\-_]+parasitic\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "wrongcurtain",
-      "pattern": "wrong[- ]curtain"
+      "canonical": "christopher-nolan",
+      "pattern": "\\bchristopher[\\s\\-_]+nolan\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "bookwormburrows",
-      "pattern": "bookwormburrows"
+      "canonical": "collective-memory",
+      "pattern": "\\bcollective[\\s\\-_]+memory\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
     },
     {
-      "canonical": "methodologylist",
-      "pattern": "methodologylist"
+      "canonical": "context-dependent",
+      "pattern": "\\bcontext[\\s\\-_]+dependent\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "contentinternet",
-      "pattern": "contentinternet"
+      "canonical": "developmental-arc",
+      "pattern": "\\bdevelopmental[\\s\\-_]+arc\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "cyberphunkism",
-      "pattern": "cyberphunkisms?"
+      "canonical": "eleven-traditions",
+      "pattern": "\\beleven[\\s\\-_]+traditions\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "crocodiletears",
-      "pattern": "crocodile tears"
+      "canonical": "graded-membership",
+      "pattern": "\\bgraded[\\s\\-_]+membership\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "spectacle",
-      "pattern": "spectacle(?:s)?"
+      "canonical": "ground-discipline",
+      "pattern": "\\bground[\\s\\-_]+discipline\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "ghostfiring",
-      "pattern": "ghost[- ]firing"
+      "canonical": "identity-politics",
+      "pattern": "\\bidentity[\\s\\-_]+politics\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "tollbooth",
-      "pattern": "toll[- ]?booth"
+      "canonical": "meangirl-strategy",
+      "pattern": "\\bmeangirl[\\s\\-_]+strategy\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "bronzeserpent",
-      "pattern": "bronze serpent"
+      "canonical": "mephistodata-pair",
+      "pattern": "\\bmephistodata[\\s\\-_]+pair\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "bakhtin",
-      "pattern": "\\b[Bb]akhtin\\b"
+      "canonical": "mephistodata-rule",
+      "pattern": "\\bmephistodata[\\s\\-_]+rule\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "threesealings",
-      "pattern": "three sealings"
+      "canonical": "morphic-resonance",
+      "pattern": "\\bmorphic[\\s\\-_]+resonance\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
     },
     {
-      "canonical": "campaigncodex",
-      "pattern": "campaigncodex"
+      "canonical": "mythic-vocabulary",
+      "pattern": "\\bmythic[\\s\\-_]+vocabulary\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "demogorgon",
-      "pattern": "[Dd]emogorgon"
+      "canonical": "network-theoretic",
+      "pattern": "\\bnetwork[\\s\\-_]+theoretic\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "deadstage",
-      "pattern": "dead[- ]stage"
+      "canonical": "rainbow-threshold",
+      "pattern": "\\brainbow[\\s\\-_]+threshold\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "egregorewars",
-      "pattern": "egregorewars?"
+      "canonical": "rainbowsol-coined",
+      "pattern": "\\brainbowsol[\\s\\-_]+coined\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "girard",
-      "pattern": "\\b[Gg]irard\\b"
+      "canonical": "rainbowsol-thesis",
+      "pattern": "\\brainbowsol[\\s\\-_]+thesis\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "debord",
-      "pattern": "\\b[Dd]ebord\\b"
+      "canonical": "rainbowsol-timing",
+      "pattern": "\\brainbowsol[\\s\\-_]+timing\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "snakelogic",
-      "pattern": "snakelogics?"
+      "canonical": "sabachtan-refusal",
+      "pattern": "\\bsabachtan[\\s\\-_]+refusal\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "parseltongue",
-      "pattern": "parseltongue"
+      "canonical": "sabachtan-seminar",
+      "pattern": "\\bsabachtan[\\s\\-_]+seminar\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "rainbowmagic",
-      "pattern": "rainbowmagic"
+      "canonical": "scanner-operation",
+      "pattern": "\\bscanner[\\s\\-_]+operation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "leviathan",
-      "pattern": "[Ll]eviathan"
+      "canonical": "search-discipline",
+      "pattern": "\\bsearch[\\s\\-_]+discipline\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "nehushtan",
-      "pattern": "[Nn]ehushtan"
+      "canonical": "semmelweis-reflex",
+      "pattern": "\\bsemmelweis[\\s\\-_]+reflex\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "psychologism",
-      "pattern": "psychologism"
+      "canonical": "spiritual-cognate",
+      "pattern": "\\bspiritual[\\s\\-_]+cognate\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "legalism",
-      "pattern": "\\blegalism\\b"
+      "canonical": "stop-psychologism",
+      "pattern": "\\bstop[\\s\\-_]+psychologism\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "gorgonkaren",
-      "pattern": "gorgonkaren"
+      "canonical": "anti-fabrication",
+      "pattern": "\\banti[\\s\\-_]+fabrication\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
-      "canonical": "modulecanon",
-      "pattern": "modulecanon"
-    },
-    {
-      "canonical": "gorgonhorde",
-      "pattern": "gorgonhorde"
-    },
-    {
-      "canonical": "gorgonworld",
-      "pattern": "gorgonworld"
-    },
-    {
-      "canonical": "gorgonlogic",
-      "pattern": "gorgonlogic"
-    },
-    {
-      "canonical": "polymythdnd",
-      "pattern": "polymythdnd"
-    },
-    {
-      "canonical": "theyliveMOG",
-      "pattern": "theylivemog"
-    },
-    {
-      "canonical": "kenocharism",
-      "pattern": "kenocharism"
-    },
-    {
-      "canonical": "florilegium",
-      "pattern": "florilegium"
-    },
-    {
-      "canonical": "gorgonwars",
-      "pattern": "gorgonwars?"
-    },
-    {
-      "canonical": "blob",
-      "pattern": "\\b[Bb]lob\\b"
-    },
-    {
-      "canonical": "jester",
-      "pattern": "[Jj]esters?"
-    },
-    {
-      "canonical": "cave",
-      "pattern": "\\b[Cc]ave\\b"
-    },
-    {
-      "canonical": "tentacular",
-      "pattern": "tentacular"
-    },
-    {
-      "canonical": "ubermynsch",
-      "pattern": "ubermynsch"
-    },
-    {
-      "canonical": "egregore",
-      "pattern": "egregores?"
-    },
-    {
-      "canonical": "fourheads",
-      "pattern": "four heads"
-    },
-    {
-      "canonical": "beingkind",
-      "pattern": "beingkind"
-    },
-    {
-      "canonical": "goopworld",
-      "pattern": "goopworld"
-    },
-    {
-      "canonical": "pleonexia",
-      "pattern": "pleonexia"
-    },
-    {
-      "canonical": "ouroboros",
-      "pattern": "ouroboros"
-    },
-    {
-      "canonical": "medusa",
-      "pattern": "[Mm]edusa"
-    },
-    {
-      "canonical": "typhon",
-      "pattern": "[Tt]yphon"
-    },
-    {
-      "canonical": "aufheben",
-      "pattern": "aufheben"
-    },
-    {
-      "canonical": "idiomary",
-      "pattern": "idiomary"
-    },
-    {
-      "canonical": "kayfabe",
-      "pattern": "kayfabe"
-    },
-    {
-      "canonical": "scanner",
-      "pattern": "scanner"
-    },
-    {
-      "canonical": "gestell",
-      "pattern": "gestell"
-    },
-    {
-      "canonical": "revomit",
-      "pattern": "revomit"
-    },
-    {
-      "canonical": "twisting",
-      "pattern": "twisting"
+      "canonical": "anti-paternalism",
+      "pattern": "\\banti[\\s\\-_]+paternalism\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "antitwisting",
-      "pattern": "anti.?twisting|antitwisting"
+      "pattern": "anti.?twisting|antitwisting",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "arendt-reception",
+      "pattern": "\\barendt[\\s\\-_]+reception\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "audience-routing",
+      "pattern": "\\baudience[\\s\\-_]+routing\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "behavioral-rules",
+      "pattern": "\\bbehavioral[\\s\\-_]+rules\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "brainrot-cognate",
+      "pattern": "\\bbrainrot[\\s\\-_]+cognate\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "classroom-portal",
+      "pattern": "\\bclassroom[\\s\\-_]+portal\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "coalition-coding",
+      "pattern": "\\bcoalition[\\s\\-_]+coding\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "deployment-first",
+      "pattern": "\\bdeployment[\\s\\-_]+first\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "diagnostic-idiom",
+      "pattern": "\\bdiagnostic[\\s\\-_]+idiom\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "emotional-energy",
+      "pattern": "\\bemotional[\\s\\-_]+energy\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "enforced-framing",
+      "pattern": "\\benforced[\\s\\-_]+framing\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "equifinality",
+      "pattern": "\\bequifinality\\b|殊途同歸性|殊途同歸",
+      "aliases": [
+        "殊途同歸性",
+        "殊途同歸"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "file-engineering",
+      "pattern": "\\bfile[\\s\\-_]+engineering\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "forthcoming-book",
+      "pattern": "\\bforthcoming[\\s\\-_]+book\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "lever-discipline",
+      "pattern": "\\blever[\\s\\-_]+discipline\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "manifest-destiny",
+      "pattern": "\\bmanifest[\\s\\-_]+destiny\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "marshall-trilogy",
+      "pattern": "\\bmarshall[\\s\\-_]+trilogy\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "marshmellowmonster",
+      "pattern": "[Mm]arshmell?ow[- ]?monster",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "media-references",
+      "pattern": "\\bmedia[\\s\\-_]+references\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "movement-capture",
+      "pattern": "\\bmovement[\\s\\-_]+capture\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "operator-payload",
+      "pattern": "\\boperator[\\s\\-_]+payload\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "polaris-rotation",
+      "pattern": "\\bpolaris[\\s\\-_]+rotation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "polymyth-cognate",
+      "pattern": "\\bpolymyth[\\s\\-_]+cognate\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "private-platform",
+      "pattern": "\\bprivate[\\s\\-_]+platform\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rainbowsol-named",
+      "pattern": "\\brainbowsol[\\s\\-_]+named\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rainbowsol-study",
+      "pattern": "\\brainbowsol[\\s\\-_]+study\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "scanner-position",
+      "pattern": "\\bscanner[\\s\\-_]+position\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "softening-reflex",
+      "pattern": "\\bsoftening[\\s\\-_]+reflex\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "teacher-override",
+      "pattern": "\\bteacher[\\s\\-_]+override\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "timebound-quests",
+      "pattern": "\\btimebound[\\s\\-_]+quests\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "two-psychiatries",
+      "pattern": "\\btwo[\\s\\-_]+psychiatries\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "upstream-impetus",
+      "pattern": "\\bupstream[\\s\\-_]+impetus\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "valence-flipping",
+      "pattern": "\\bvalence[\\s\\-_]+flipping\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "actual-occasion",
+      "pattern": "\\bactual[\\s\\-_]+occasion\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "attention-space",
+      "pattern": "\\battention[\\s\\-_]+space\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "biome-dimension",
+      "pattern": "\\bbiome[\\s\\-_]+dimension\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "cross-tradition",
+      "pattern": "\\bcross[\\s\\-_]+tradition\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "duffer-brothers",
+      "pattern": "\\bduffer[\\s\\-_]+brothers\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "engine-language",
+      "pattern": "\\bengine[\\s\\-_]+language\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgon-shortcut",
+      "pattern": "\\bgorgon[\\s\\-_]+shortcut\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "jester-aperture",
+      "pattern": "\\bjester[\\s\\-_]+aperture\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ml-to-bb",
+      "pattern": "\\bml[\\s\\-_]+to[\\s\\-_]+bb\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mogging-glasses",
+      "pattern": "\\bmogging[\\s\\-_]+glasses\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "pm21-deployment",
+      "pattern": "\\bpm21[\\s\\-_]+deployment\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "polycognate",
+      "pattern": "polycognates?|polycognated",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "polymyth-engine",
+      "pattern": "\\bpolymyth[\\s\\-_]+engine\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rainbow-process",
+      "pattern": "\\brainbow[\\s\\-_]+process\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "regime-analysis",
+      "pattern": "\\bregime[\\s\\-_]+analysis\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rule-authorship",
+      "pattern": "\\brule[\\s\\-_]+authorship\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "science-fiction",
+      "pattern": "\\bscience[\\s\\-_]+fiction\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "sealed-exegesis",
+      "pattern": "\\bsealed[\\s\\-_]+exegesis\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "seminar-schools",
+      "pattern": "\\bseminar[\\s\\-_]+schools\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ship-discipline",
+      "pattern": "\\bship[\\s\\-_]+discipline\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "sibling-cluster",
+      "pattern": "\\bsibling[\\s\\-_]+cluster\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "stanley-kubrick",
+      "pattern": "\\bstanley[\\s\\-_]+kubrick\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "stranger-things",
+      "pattern": "\\bstranger[\\s\\-_]+things\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "therapy-culture",
+      "pattern": "\\btherapy[\\s\\-_]+culture\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "verified-author",
+      "pattern": "\\bverified[\\s\\-_]+author\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "wormcard",
+      "pattern": "\\bwormcard\\b|\\bwormcards\\b",
+      "aliases": [
+        "wormcards"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "allied-thinker",
+      "pattern": "\\ballied[\\s\\-_]+thinker\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "always-already",
+      "pattern": "\\balways[\\s\\-_]+already\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "barred-misread",
+      "pattern": "\\bbarred[\\s\\-_]+misread\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "blackbox-alone",
+      "pattern": "\\bblackbox[\\s\\-_]+alone\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "business-model",
+      "pattern": "\\bbusiness[\\s\\-_]+model\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "campaign-codex",
+      "pattern": "\\bcampaign[\\s\\-_]+codex\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "cave-substrate",
+      "pattern": "\\bcave[\\s\\-_]+substrate\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "cross-cultural",
+      "pattern": "\\bcross[\\s\\-_]+cultural\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "d-and-d",
+      "pattern": "\\bd[\\s\\-_]+and[\\s\\-_]+d\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "double-rainbow",
+      "pattern": "\\bdouble[\\s\\-_]+rainbow\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "external-catch",
+      "pattern": "\\bexternal[\\s\\-_]+catch\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hayao-miyazaki",
+      "pattern": "\\bhayao[\\s\\-_]+miyazaki\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hegel-becoming",
+      "pattern": "\\bhegel[\\s\\-_]+becoming\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "jewel-position",
+      "pattern": "\\bjewel[\\s\\-_]+position\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "jonathan-nolan",
+      "pattern": "\\bjonathan[\\s\\-_]+nolan\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "medusa-cluster",
+      "pattern": "\\bmedusa[\\s\\-_]+cluster\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mirror-anomaly",
+      "pattern": "\\bmirror[\\s\\-_]+anomaly\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "no-fabrication",
+      "pattern": "\\bno[\\s\\-_]+fabrication\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "operator-sight",
+      "pattern": "\\boperator[\\s\\-_]+sight\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "pastoral-power",
+      "pattern": "\\bpastoral[\\s\\-_]+power\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "python-failure",
+      "pattern": "\\bpython[\\s\\-_]+failure\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "question-first",
+      "pattern": "\\bquestion[\\s\\-_]+first\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rainbow-travel",
+      "pattern": "\\brainbow[\\s\\-_]+travel\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "retrieve-first",
+      "pattern": "\\bretrieve[\\s\\-_]+first\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "terry-lectures",
+      "pattern": "\\bterry[\\s\\-_]+lectures\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "user-directive",
+      "pattern": "\\buser[\\s\\-_]+directive\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "user-substrate",
+      "pattern": "\\buser[\\s\\-_]+substrate\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "volume-obelisk",
+      "pattern": "\\bvolume[\\s\\-_]+obelisk\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ai-discipline",
+      "pattern": "\\bai[\\s\\-_]+discipline\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "anti-twisting",
+      "pattern": "\\banti[\\s\\-_]+twisting\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "binary-opener",
+      "pattern": "\\bbinary[\\s\\-_]+opener\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "cave-pedagogy",
+      "pattern": "\\bcave[\\s\\-_]+pedagogy\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "citation-lock",
+      "pattern": "\\bcitation[\\s\\-_]+lock\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "connectedcontentinternet",
+      "pattern": "connectedcontentinternet",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "drama-therapy",
+      "pattern": "\\bdrama[\\s\\-_]+therapy\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "endlessphd",
+      "pattern": "endless[- ]?[Pp][Hh][Dd]",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "faint-rainbow",
+      "pattern": "\\bfaint[\\s\\-_]+rainbow\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "file-handling",
+      "pattern": "\\bfile[\\s\\-_]+handling\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgon-cutter",
+      "pattern": "\\bgorgon[\\s\\-_]+cutter\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgon-mirror",
+      "pattern": "\\bgorgon[\\s\\-_]+mirror\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hannah-arendt",
+      "pattern": "\\bhannah[\\s\\-_]+arendt\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "holy-saturday",
+      "pattern": "\\bholy[\\s\\-_]+saturday\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "howard-hamlin",
+      "pattern": "\\bhoward[\\s\\-_]+hamlin\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "lewis-carroll",
+      "pattern": "\\blewis[\\s\\-_]+carroll\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mirror-portal",
+      "pattern": "\\bmirror[\\s\\-_]+portal\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "performativitypython",
+      "pattern": "[Pp]erformativity python",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "peter-jackson",
+      "pattern": "\\bpeter[\\s\\-_]+jackson\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "process-drama",
+      "pattern": "\\bprocess[\\s\\-_]+drama\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "pushed-output",
+      "pattern": "\\bpushed[\\s\\-_]+output\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "python-feeder",
+      "pattern": "\\bpython[\\s\\-_]+feeder\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "saul-authored",
+      "pattern": "\\bsaul[\\s\\-_]+authored\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "sibling-triad",
+      "pattern": "\\bsibling[\\s\\-_]+triad\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "studio-ghibli",
+      "pattern": "\\bstudio[\\s\\-_]+ghibli\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "toujours-deja",
+      "pattern": "\\btoujours[\\s\\-_]+deja\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "trump-epstein",
+      "pattern": "\\btrump[\\s\\-_]+epstein\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "user-authored",
+      "pattern": "\\buser[\\s\\-_]+authored\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "anti-capture",
+      "pattern": "\\banti[\\s\\-_]+capture\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "anti-yapping",
+      "pattern": "\\banti[\\s\\-_]+yapping\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "bb-canonical",
+      "pattern": "\\bbb[\\s\\-_]+canonical\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "book-fiction",
+      "pattern": "\\bbook[\\s\\-_]+fiction\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "breaking-bad",
+      "pattern": "\\bbreaking[\\s\\-_]+bad\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "burrow-rules",
+      "pattern": "\\bburrow[\\s\\-_]+rules\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "definitionfederation",
+      "pattern": "definitional federation",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "depp-cluster",
+      "pattern": "\\bdepp[\\s\\-_]+cluster\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "devils-diary",
+      "pattern": "\\bdevils[\\s\\-_]+diary\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "escape-crops",
+      "pattern": "\\bescape[\\s\\-_]+crops\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "failure-mode",
+      "pattern": "\\bfailure[\\s\\-_]+mode\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "front-facing",
+      "pattern": "\\bfront[\\s\\-_]+facing\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gemini-flash",
+      "pattern": "\\bgemini[\\s\\-_]+flash\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgon-route",
+      "pattern": "\\bgorgon[\\s\\-_]+route\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "jimmy-kimmel",
+      "pattern": "\\bjimmy[\\s\\-_]+kimmel\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ml-substrate",
+      "pattern": "\\bml[\\s\\-_]+substrate\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "persona-gate",
+      "pattern": "\\bpersona[\\s\\-_]+gate\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "quest-prompt",
+      "pattern": "\\bquest[\\s\\-_]+prompt\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "rainbow-body",
+      "pattern": "\\brainbow[\\s\\-_]+body\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rainbow-rule",
+      "pattern": "\\brainbow[\\s\\-_]+rule\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rainbow-ties",
+      "pattern": "\\brainbow[\\s\\-_]+ties\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "reading-text",
+      "pattern": "\\breading[\\s\\-_]+text\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "reddit-purge",
+      "pattern": "\\breddit[\\s\\-_]+purge\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "saul-goodman",
+      "pattern": "\\bsaul[\\s\\-_]+goodman\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "session-zero",
+      "pattern": "\\bsession[\\s\\-_]+zero\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "shared-world",
+      "pattern": "\\bshared[\\s\\-_]+world\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "sibling-pair",
+      "pattern": "\\bsibling[\\s\\-_]+pair\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "sibling-trio",
+      "pattern": "\\bsibling[\\s\\-_]+trio\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "source-trace",
+      "pattern": "\\bsource[\\s\\-_]+trace\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "user-praised",
+      "pattern": "\\buser[\\s\\-_]+praised\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "wheat-empire",
+      "pattern": "\\bwheat[\\s\\-_]+empire\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ai-proposed",
+      "pattern": "\\bai[\\s\\-_]+proposed\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "book-theory",
+      "pattern": "\\bbook[\\s\\-_]+theory\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "bread-layer",
+      "pattern": "\\bbread[\\s\\-_]+layer\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "cites-logos",
+      "pattern": "\\bcites[\\s\\-_]+logos\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "content-gap",
+      "pattern": "\\bcontent[\\s\\-_]+gap\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "core-mirror",
+      "pattern": "\\bcore[\\s\\-_]+mirror\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "cross-modal",
+      "pattern": "\\bcross[\\s\\-_]+modal\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "cross-skull",
+      "pattern": "\\bcross[\\s\\-_]+skull\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "file-latest",
+      "pattern": "\\bfile[\\s\\-_]+latest\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "fuzzy-logic",
+      "pattern": "\\bfuzzy[\\s\\-_]+logic\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgon",
+      "pattern": "\\bgorgon\\b|\\bgorgons\\b",
+      "aliases": [
+        "gorgons"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "hivemindidiomsnake",
+      "pattern": "\\bhivemindidiomsnake\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "paired-rule",
+      "pattern": "\\bpaired[\\s\\-_]+rule\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "portal-seed",
+      "pattern": "\\bportal[\\s\\-_]+seed\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "rabbit-hole",
+      "pattern": "\\brabbit[\\s\\-_]+hole\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rj-reynolds",
+      "pattern": "\\brj[\\s\\-_]+reynolds\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rpg-setting",
+      "pattern": "\\brpg[\\s\\-_]+setting\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "scapegoat",
+      "pattern": "scapegoat(?:ing|ed|s)?",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "self-naming",
+      "pattern": "\\bself[\\s\\-_]+naming\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "space-opera",
+      "pattern": "\\bspace[\\s\\-_]+opera\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "spirit-form",
+      "pattern": "\\bspirit[\\s\\-_]+form\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "true-friend",
+      "pattern": "\\btrue[\\s\\-_]+friend\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "upside-down",
+      "pattern": "\\bupside[\\s\\-_]+down\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "user-coined",
+      "pattern": "\\buser[\\s\\-_]+coined\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "warner-bros",
+      "pattern": "\\bwarner[\\s\\-_]+bros\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ai-conduct",
+      "pattern": "\\bai[\\s\\-_]+conduct\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ai-failure",
+      "pattern": "\\bai[\\s\\-_]+failure\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "anti-twist",
+      "pattern": "\\banti[\\s\\-_]+twist\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "bb-backref",
+      "pattern": "\\bbb[\\s\\-_]+backref\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "dual-logic",
+      "pattern": "\\bdual[\\s\\-_]+logic\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "five-books",
+      "pattern": "\\bfive[\\s\\-_]+books\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "hegel-jung",
+      "pattern": "\\bhegel[\\s\\-_]+jung\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "homo-sacer",
+      "pattern": "\\bhomo[\\s\\-_]+sacer\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mario-kart",
+      "pattern": "\\bmario[\\s\\-_]+kart\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ouroborosanalysis",
+      "pattern": "\\bouroborosanalysis\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "plato-cave",
+      "pattern": "\\bplato[\\s\\-_]+cave\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "polymorphousmythology",
+      "pattern": "polymorphousmythology",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "self-check",
+      "pattern": "\\bself[\\s\\-_]+check\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "star-files",
+      "pattern": "\\bstar[\\s\\-_]+files\\b",
+      "aliases": [],
+      "source": "star-tag"
+    },
+    {
+      "canonical": "t59-commit",
+      "pattern": "\\bt59[\\s\\-_]+commit\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "van-gennep",
+      "pattern": "\\bvan[\\s\\-_]+gennep\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ai-doable",
+      "pattern": "\\bai[\\s\\-_]+doable\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "camels-ad",
+      "pattern": "\\bcamels[\\s\\-_]+ad\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "capturenarrative",
+      "pattern": "capture[- ]narrative",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "core-plus",
+      "pattern": "\\bcore[\\s\\-_]+plus\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "dawes-act",
+      "pattern": "\\bdawes[\\s\\-_]+act\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "dead-copy",
+      "pattern": "\\bdead[\\s\\-_]+copy\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "four-step",
+      "pattern": "\\bfour[\\s\\-_]+step\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hydra",
+      "pattern": "\\bhydra\\b|\\bhydras\\b",
+      "aliases": [
+        "hydras"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "jung-carl",
+      "pattern": "\\bjung[\\s\\-_]+carl\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ma-thesis",
+      "pattern": "\\bma[\\s\\-_]+thesis\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "meta-rule",
+      "pattern": "\\bmeta[\\s\\-_]+rule\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "no-dashes",
+      "pattern": "\\bno[\\s\\-_]+dashes\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "no-naming",
+      "pattern": "\\bno[\\s\\-_]+naming\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "q-ceiling",
+      "pattern": "\\bq[\\s\\-_]+ceiling\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "raw-notes",
+      "pattern": "\\braw[\\s\\-_]+notes\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "soul-boom",
+      "pattern": "\\bsoul[\\s\\-_]+boom\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "they-live",
+      "pattern": "\\bthey[\\s\\-_]+live\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "tv-series",
+      "pattern": "\\btv[\\s\\-_]+series\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "anti-yap",
+      "pattern": "\\banti[\\s\\-_]+yap\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "commodification",
+      "pattern": "\\bcommodification\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "dark-sun",
+      "pattern": "\\bdark[\\s\\-_]+sun\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "faustianechicks",
+      "pattern": "\\bfaustianechicks\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "governmentality",
+      "pattern": "\\bgovernmentality\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gun-jump",
+      "pattern": "\\bgun[\\s\\-_]+jump\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "interdependency",
+      "pattern": "\\binterdependency\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ironmannedmontesque",
+      "pattern": "ironmannedmontesque",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "mearsheimerttest",
+      "pattern": "[Mm]earsheimer test",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "mogging",
+      "pattern": "mogg(?:ing|ed|er|s)",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "nyan-cat",
+      "pattern": "\\bnyan[\\s\\-_]+cat\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ohm-dome",
+      "pattern": "\\bohm[\\s\\-_]+dome\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "romanticdecline",
+      "pattern": "romantic[- ]decline",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "sabachtan",
+      "pattern": "sabachtan(?:index)?",
+      "aliases": [
+        "sabachtani",
+        "sabachthani"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "taboo",
+      "pattern": "\\btaboo\\b|\\bTABOO\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "untranslatables",
+      "pattern": "\\buntranslatables\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ai-root",
+      "pattern": "\\bai[\\s\\-_]+root\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ai-rule",
+      "pattern": "\\bai[\\s\\-_]+rule\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ai-side",
+      "pattern": "\\bai[\\s\\-_]+side\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "anti-q5",
+      "pattern": "\\banti[\\s\\-_]+q5\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "antipsychology",
+      "pattern": "\\bantipsychology\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "commodifiedempathy",
+      "pattern": "commodifiedempathy",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "componentlists",
+      "pattern": "\\bcomponentlists\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "counterfactual",
+      "pattern": "\\bcounterfactual\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "du-bois",
+      "pattern": "\\bdu[\\s\\-_]+bois\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "faust-i",
+      "pattern": "\\bfaust[\\s\\-_]+i\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hegelianekitty",
+      "pattern": "\\bhegelianekitty\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "mephistopheles",
+      "pattern": "\\bmephistopheles\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ml-star",
+      "pattern": "\\bml[\\s\\-_]+star\\b",
+      "aliases": [],
+      "source": "star-tag"
+    },
+    {
+      "canonical": "seminarschools",
+      "pattern": "\\bseminarschools\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "uncompressible",
+      "pattern": "\\buncompressible\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "accreditation",
+      "pattern": "\\baccreditation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "bibliotherapy",
+      "pattern": "\\bbibliotherapy\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "credentialism",
+      "pattern": "\\bcredentialism\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "dualregister",
+      "pattern": "dual[- ]?register",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "idiomsmashing",
+      "pattern": "\\bidiomsmashing\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "individuation",
+      "pattern": "\\bindividuation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "makeupculture",
+      "pattern": "\\bmakeupculture\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "padmasambhava",
+      "pattern": "\\bpadmasambhava\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "protectionracket",
+      "pattern": "protection racket",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "reconstructed",
+      "pattern": "\\breconstructed\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rule-1",
+      "pattern": "\\brule[\\s\\-_]+1\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "schadenfreude",
+      "pattern": "\\bschadenfreude\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "synchronicity",
+      "pattern": "\\bsynchronicity\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "type-1",
+      "pattern": "\\btype[\\s\\-_]+1\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "type-4",
+      "pattern": "\\btype[\\s\\-_]+4\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "type-5",
+      "pattern": "\\btype[\\s\\-_]+5\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "type-7",
+      "pattern": "\\btype[\\s\\-_]+7\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "visualization",
+      "pattern": "\\bvisualization\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "concrescence",
+      "pattern": "\\bconcrescence\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "consolidated",
+      "pattern": "\\bconsolidated\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "meaningaxis",
+      "pattern": "meaning[- ]?axis",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "scissorhands",
+      "pattern": "\\bscissorhands\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "simultaneity",
+      "pattern": "\\bsimultaneity\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "subjectivity",
+      "pattern": "\\bsubjectivity\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "wittgenstein",
+      "pattern": "\\bwittgenstein\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "wrongcurtain",
+      "pattern": "wrong[- ]curtain",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "absolutized",
+      "pattern": "\\babsolutized\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "advancement",
+      "pattern": "\\badvancement\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "bookwormburrows",
+      "pattern": "bookwormburrows",
+      "aliases": [
+        "BB*",
+        "bb*"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "chthulucene",
+      "pattern": "\\bchthulucene\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "consequence",
+      "pattern": "\\bconsequence\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "contentinternet",
+      "pattern": "contentinternet",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "convergence",
+      "pattern": "\\bconvergence\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "crocodiletears",
+      "pattern": "crocodile tears",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "cyberphunkism",
+      "pattern": "cyberphunkisms?",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "enforcement",
+      "pattern": "\\benforcement\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "ghostfiring",
+      "pattern": "ghost[- ]firing",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "mearsheimer",
+      "pattern": "\\bmearsheimer\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "methodologylist",
+      "pattern": "methodologylist",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "panopticism",
+      "pattern": "\\bpanopticism\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "propagation",
+      "pattern": "\\bpropagation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "psychodrama",
+      "pattern": "\\bpsychodrama\\b",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "snaketongue",
+      "pattern": "\\bsnaketongue\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "spectacle",
+      "pattern": "spectacle(?:s)?",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "activation",
+      "pattern": "\\bactivation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "archetypes",
+      "pattern": "\\barchetypes\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "bakhtin",
+      "pattern": "\\b[Bb]akhtin\\b",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "bronzeserpent",
+      "pattern": "bronze serpent",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "chronotope",
+      "pattern": "\\bchronotope\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "confluence",
+      "pattern": "\\bconfluence\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "correction",
+      "pattern": "\\bcorrection\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "curriculum",
+      "pattern": "\\bcurriculum\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "deflection",
+      "pattern": "\\bdeflection\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "derivative",
+      "pattern": "\\bderivative\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "diagnostic",
+      "pattern": "\\bdiagnostic\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "dictionary",
+      "pattern": "\\bdictionary\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "discipline",
+      "pattern": "\\bdiscipline\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "engagement",
+      "pattern": "\\bengagement\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "foundation",
+      "pattern": "\\bfoundation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gnosticism",
+      "pattern": "\\bgnosticism\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "hartshorne",
+      "pattern": "\\bhartshorne\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "heraclitus",
+      "pattern": "\\bheraclitus\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "legibility",
+      "pattern": "\\blegibility\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "liminality",
+      "pattern": "\\bliminality\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "modularity",
+      "pattern": "\\bmodularity\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "navigation",
+      "pattern": "\\bnavigation\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "neoliberal",
+      "pattern": "\\bneoliberal\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "prehension",
+      "pattern": "\\bprehension\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "psychiatry",
+      "pattern": "\\bpsychiatry\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "psychology",
+      "pattern": "\\bpsychology\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "rainbowsol",
+      "pattern": "\\brainbowsol\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "scheduling",
+      "pattern": "\\bscheduling\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "sharpening",
+      "pattern": "\\bsharpening\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "shishigami",
+      "pattern": "\\bshishigami\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "sympoiesis",
+      "pattern": "\\bsympoiesis\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "threesealings",
+      "pattern": "three sealings",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "tollbooth",
+      "pattern": "toll[- ]?booth",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "unverified",
+      "pattern": "\\bunverified\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "wachowskis",
+      "pattern": "\\bwachowskis\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "campaigncodex",
+      "pattern": "campaigncodex",
+      "aliases": [
+        "Campaign Codex",
+        "CC*",
+        "cc*"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "deadstage",
+      "pattern": "dead[- ]stage",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "debord",
+      "pattern": "\\b[Dd]ebord\\b",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "demogorgon",
+      "pattern": "[Dd]emogorgon",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "egregorewars",
+      "pattern": "egregorewars?",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "girard",
+      "pattern": "\\b[Gg]irard\\b",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "legalism",
+      "pattern": "\\blegalism\\b",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "leviathan",
+      "pattern": "[Ll]eviathan",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "nehushtan",
+      "pattern": "[Nn]ehushtan",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "parseltongue",
+      "pattern": "parseltongue",
+      "aliases": [
+        "parceltongue"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "psychologism",
+      "pattern": "psychologism",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "rainbowmagic",
+      "pattern": "rainbowmagic",
+      "aliases": [
+        "rainbow magic"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "snakelogic",
+      "pattern": "snakelogics?",
+      "aliases": [
+        "snake logic"
+      ],
+      "source": "existing-curated,explicit-linkability,star-tag"
+    },
+    {
+      "canonical": "blob",
+      "pattern": "\\b[Bb]lob\\b",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "cave",
+      "pattern": "\\b[Cc]ave\\b",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "florilegium",
+      "pattern": "florilegium",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "gorgonhorde",
+      "pattern": "gorgonhorde",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "gorgonkaren",
+      "pattern": "gorgonkaren",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "gorgonlogic",
+      "pattern": "gorgonlogic",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonwars",
+      "pattern": "gorgonwars?",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "gorgonworld",
+      "pattern": "gorgonworld",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "jester",
+      "pattern": "[Jj]esters?",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "kenocharism",
+      "pattern": "kenocharism",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "modulecanon",
+      "pattern": "modulecanon",
+      "aliases": [
+        "MC*",
+        "mc*"
+      ],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "polymythdnd",
+      "pattern": "polymythdnd",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "theylivemog",
+      "pattern": "theylivemog",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "egregore",
+      "pattern": "egregores?",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "fourheads",
+      "pattern": "four heads",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "tentacular",
+      "pattern": "tentacular",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "ubermynsch",
+      "pattern": "ubermynsch",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "beingkind",
+      "pattern": "beingkind",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "goopworld",
+      "pattern": "goopworld",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "medusa",
+      "pattern": "[Mm]edusa",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "ouroboros",
+      "pattern": "ouroboros",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "pleonexia",
+      "pattern": "pleonexia",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "typhon",
+      "pattern": "[Tt]yphon",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "aufheben",
+      "pattern": "aufheben",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "idiomary",
+      "pattern": "idiomary",
+      "aliases": [],
+      "source": "existing-curated,explicit-linkability"
+    },
+    {
+      "canonical": "twisting",
+      "pattern": "twisting",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "gestell",
+      "pattern": "gestell",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "kayfabe",
+      "pattern": "kayfabe",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "revomit",
+      "pattern": "revomit",
+      "aliases": [],
+      "source": "existing-curated"
+    },
+    {
+      "canonical": "scanner",
+      "pattern": "scanner",
+      "aliases": [],
+      "source": "existing-curated"
     }
   ]
 }

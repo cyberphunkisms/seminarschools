@@ -17,6 +17,8 @@ else {
   if(pdfBytes.length < 5000) failures.push('static Saul CV PDF looks too small');
   const buildScript = fs.readFileSync(path.join(ROOT, 'scripts', 'build-cv-pdf.js'), 'utf8');
   if(/Saul\s+Karim\s+NMH|NMH/.test(buildScript)) failures.push('static PDF builder still contains NMH');
+  if(!/One-page modular CV builder/.test(buildScript)) failures.push('static PDF builder missing one-page modular revamp marker');
+  if(!/data-cv-output-revamp/.test(buildScript)) failures.push('static PDF builder missing output revamp marker');
 }
 if(failures.length){ console.error('SAUL PRINT/CV CHECK FAILED'); failures.forEach(f=>console.error(' - '+f)); process.exit(1); }
-console.log('SAUL PRINT/CV CHECK PASSED — general CV marker, no comma before MA, print and zoom guards present.');
+console.log('SAUL PRINT/CV CHECK PASSED — one-page modular PDF present, general CV marker, no comma before MA, print and zoom guards present.');

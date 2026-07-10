@@ -72,7 +72,7 @@ console.log('Parsed', bb.length, 'entries from bb*');
 // ------------------------------------------------------------------
 // Section grouping (ordered)
 // ------------------------------------------------------------------
-const SECTIONS = ['methodology', 'dimension', 'bookworm', 'character-creation', 'credit', 'pending', 'retracted'];
+const SECTIONS = ['methodology', 'dimension', 'bbt', 'bookworm', 'character-creation', 'credit', 'pending', 'retracted'];
 const grouped = {};
 const unknown = [];
 for (const s of SECTIONS) grouped[s] = [];
@@ -181,7 +181,12 @@ function hasAny(text, words){
 function specialStudentTitle(entry){
   const text = entryAllText(entry);
   if(entry.s === 'dimension') return 'Possible book-world for play';
-  if(hasAny(text,['rainbowsol (the dm)','rainbowsol, the dm','rainbowsol'])) return 'Rainbowsol is the main DM';
+  if(hasAny(text,['[superseded','historical record'])) return 'Old note kept for history';
+  if(entry.id === 'dm-118') return 'Characters can conflict and still learn teamwork';
+  if(entry.id === 'dm-119') return 'The AI works behind the teacher';
+  if(entry.id === 'ses-008') return 'The party learns as a seminar';
+  if(entry.id === 'char-008') return 'Feelings and traits can change what happens';
+  if(entry.id === 'dm-001' || entry.id === 'dm-002') return 'Rainbowsol is Saul, the founder';
   if(hasAny(text,['no-circumvention','retrieve-and-follow','generate-before-read','pre-flight','anti-shortcut','antibackendbleeding'])) return 'Read first, then create';
   if(hasAny(text,['movable entry-clock','entry-clock','campaign clock'])) return 'The story clock can move';
   if(hasAny(text,['conflict resolution','hope-and-fear','no-dice','combat','fight engine'])) return 'How risky scenes are decided';
@@ -189,7 +194,7 @@ function specialStudentTitle(entry){
   if(hasAny(text,['party-address'])) return 'Speak to the whole group';
   if(hasAny(text,['opening render','arrival and not the climax'])) return 'Start with the arrival';
   if(hasAny(text,['table-prose quality','success register','failure log'])) return 'Make narration clear and playable';
-  if(hasAny(text,['session zero'])) return 'Session zero sets the table';
+  if(entry.id === 'ses-001') return 'Session zero makes the characters';
   if(hasAny(text,['worldmoot'])) return 'Worldmoot is big-group play';
   if(hasAny(text,['ordinary session'])) return 'Regular session structure';
   if(hasAny(text,['story-quality adjudication','adjudication spine','success at a cost'])) return 'Choose outcomes that fit the story';
@@ -225,6 +230,41 @@ function specialStudentTitle(entry){
 
 function specialStudentSummary(entry){
   const text = entryAllText(entry);
+  if(hasAny(text,['[superseded','historical record'])){
+    return [
+      'This older rule is kept so the game history stays clear.',
+      'A newer ruling now governs play.',
+      'The old version remains useful for tracing how the design changed.'
+    ];
+  }
+  if(entry.id === 'dm-118'){
+    return [
+      'Characters may persuade, frighten, control, steal from, or harm one another when the world allows it.',
+      'The player whose character is targeted usually chooses the inner response.',
+      'The teacher keeps the conflict playable while the world gives it consequences.'
+    ];
+  }
+  if(entry.id === 'dm-119'){
+    return [
+      'The AI compares and tracks the background details.',
+      'The teacher can inspect, change, or replace the proposed result.',
+      'Players hear the reasons that matter in the story, and the session is saved in campaigncodex.'
+    ];
+  }
+  if(entry.id === 'ses-008'){
+    return [
+      'The party normally stays together so the room shares one story.',
+      'Characters can separate when a real situation calls for it.',
+      'The teacher supports different kinds of contribution and keeps disagreement open to evidence.'
+    ];
+  }
+  if(entry.id === 'char-008'){
+    return [
+      'Feelings and personality can help, hinder, or redirect an action.',
+      'The effect depends on the character and the moment.',
+      'The game uses psychology carefully and does not diagnose a student from one response.'
+    ];
+  }
   if(entry.s === 'dimension'){
     return [
       'This entry names a possible world for play.',
@@ -232,11 +272,11 @@ function specialStudentSummary(entry){
       'Some worlds are strong fits, some need support, and some stay outside normal play.'
     ];
   }
-  if(hasAny(text,['rainbowsol (the dm)','rainbowsol, the dm','rainbowsol'])){
+  if(entry.id === 'dm-001' || entry.id === 'dm-002'){
     return [
-      'Rainbowsol is the founder-level DM for bookwormburrows.',
-      'At the table, the DM guides entry into the text-world, keeps the world fair, and helps players read carefully.',
-      'This name marks the main guide role for the game.'
+      'Rainbowsol is Saul, the founder of bookwormburrows.',
+      'A regular Dimensional Master is the teacher and AI working together.',
+      'Rainbow Magic is the crossing power any Dimensional Master can use.'
     ];
   }
   if(hasAny(text,['no-circumvention','retrieve-and-follow','generate-before-read','pre-flight','anti-shortcut'])){
@@ -262,9 +302,9 @@ function specialStudentSummary(entry){
   }
   if(hasAny(text,['conflict resolution','hope-and-fear','no-dice','combat','fight engine'])){
     return [
-      'Risky scenes use stakes, hope, fear, costs, and consequences.',
-      'The group cares about what the choice means in the story before it cares about numbers.',
-      'A good outcome can still carry a cost, and a hard outcome can still teach something.'
+      'Risky scenes are decided through the source text, the living situation, the character, and the player’s approach.',
+      'Hope, fear, skills, tools, relationships, time, and other factors matter when the scene makes them relevant.',
+      'The narrator explains what actually happens without using dice.'
     ];
   }
   if(hasAny(text,['narration stages','players discover'])){
@@ -295,11 +335,11 @@ function specialStudentSummary(entry){
       'Weak narration looks fancy while leaving players with little to act on.'
     ];
   }
-  if(hasAny(text,['session zero'])){
+  if(entry.id === 'ses-001'){
     return [
-      'Session zero prepares the table before the adventure begins.',
-      'Players make characters, learn the world, agree on safety, and understand the first text-world.',
-      'This gives the campaign a shared starting point.'
+      'Session zero is the character-creation session.',
+      'Players make their wormcards as fully as they can and begin from a humble baseline.',
+      'Campaign translation and play begin later through the startup sequence.'
     ];
   }
   if(hasAny(text,['worldmoot'])){
@@ -318,9 +358,9 @@ function specialStudentSummary(entry){
   }
   if(hasAny(text,['story-quality adjudication','adjudication spine','success at a cost'])){
     return [
-      'When the DM decides an outcome, the decision should fit the story, the evidence, and the player’s choice.',
-      'Rolls or random choices appear when the stakes matter.',
-      'Middle results can succeed while adding a cost.'
+      'When the DM decides an outcome, the decision should fit the source, the evidence, the world, the character, and the player’s approach.',
+      'The game uses no dice or random resolver.',
+      'The narration states the exact achievement, failure, cost, discovery, or consequence.'
     ];
   }
   if(hasAny(text,['work-quality consequence','quality rubric','homework-as-game'])){
@@ -591,7 +631,7 @@ out.push('This file documents the bookwormburrows operations file (bb*), the');
 out.push('dimensional-traveling pedagogy game framework. Game is a polymyth method');
 out.push('for teaching reading, writing, and ethical reasoning by treating texts');
 out.push('as dimensions and bookworms (player-characters) as readers becoming');
-out.push('subjects. Rainbowsol is the founder and DM.');
+out.push('subjects. Rainbowsol is Saul, the founder; the working DM is the teacher-and-AI pair.');
 out.push('');
 out.push('Each entry is a game-mechanic, dimension, dm-ruling, character, session,');
 out.push('canonical reading, or pending decision. Cross-references to mc* (curriculum)');
@@ -604,9 +644,9 @@ out.push('    for the polymyth framework. Sessions stage burrow-rituals (page-as
 out.push('    threshold) where bookworms read into a dimension, encounter the');
 out.push('    text as a place, and emerge changed.');
 out.push('');
-out.push('(2) The DM (Dimensional Master) is the educator-as-threshold. dm-* entries');
-out.push('    are DM-rulings: tier-calibrated realism activation, ghost exegesis,');
-out.push('    quality rubric framework, time tracking in diceless play.');
+out.push('(2) The DM (Dimensional Master) is the teacher-and-AI pair. dm-* entries');
+out.push('    are DM-rulings for translation, narration, narrative-priority resolution,');
+out.push('    seminar mediation, continuity, and time tracking in diceless play.');
 out.push('');
 out.push('(3) Cross-references to mc* curriculum modules and cc* campaign codex');
 out.push('    are structural. Reading bb* in isolation produces an incomplete');

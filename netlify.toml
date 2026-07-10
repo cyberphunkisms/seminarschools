@@ -39,6 +39,13 @@
 
 
 # Canonical bookwormburrows pedagogical case. Explicitly normalize the bare path.
+
+[[redirects]]
+  from = "/bb/bbt"
+  to = "/bb/bbt/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/bb/why"
   to = "/bb/why/"

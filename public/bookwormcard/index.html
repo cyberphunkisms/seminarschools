@@ -876,7 +876,7 @@
 
 <section id="static-bookwormcard-context" aria-labelledby="bookwormcard-static-title">
   <h1 id="bookwormcard-static-title">Bookwormcard is the character gate for BookwormBurrows</h1>
-  <p><strong>BB is the game. Bookwormcard is how a player becomes a character inside it.</strong> The page asks reflective questions, turns answers into a wormcard, and gives the player a portable PDF they can bring into <a href="/bb/">BookwormBurrows</a>, a classroom session, or an AI chat running the table.</p>
+  <p><strong>BB is the game. Bookwormcard is how a player becomes a character inside it.</strong> The page asks reflective questions, turns answers into a wormcard, and gives the player a portable PDF they can bring into <a href="/bb/">BookwormBurrows</a>, a classroom session, or a teacher-led BB session.</p>
   <h2>What it makes</h2>
   <ul>
     <li>A handle, burrowing animal, admired people, character traits, tensions, and short writing answers.</li>
@@ -894,7 +894,7 @@
   <ul>
     <li>Pick a book, poem, story, article, scene, or document.</li>
     <li>Make a wormcard.</li>
-    <li>Give the wormcard to the Dimensional Master. The teacher runs the table and may use AI behind the curtain.</li>
+    <li>Give the wormcard to the Dimensional Master. The teacher runs the table and decides what reaches the players.</li>
     <li>Enter the text-world, complete assignments as quests, and write what happened.</li>
   </ul>
   <h2>Before you play</h2>
@@ -902,9 +902,9 @@
     <li>Use <strong>ESL</strong> for plain-language help under the current question.</li>
     <li>Use <strong>A−</strong> and <strong>A+</strong> for readable text size.</li>
     <li>Use <strong>Light/Dark</strong> for theme and <strong>HC</strong> for high contrast.</li>
-    <li>Type <strong>static</strong> during play to turn off the optional AI reaction layer.</li>
+    <li>Type <strong>static</strong> during play to use the quiet card builder with no optional feedback layer.</li>
   </ul>
-  <div class="sample-card"><strong>Privacy/data note.</strong> Bookwormcard saves checkpoints in your browser so you can resume. Longer answers can be sent to the site’s AI function for reaction/stat help while the AI layer is active. The final card opens as a PDF/print file for you to save. Links: <a href="/bookwormcard/about/">about</a>, <a href="/bookwormcard/glossary/">glossary</a>, <a href="/bookwormcard/print/?blank=1">blank card</a>.</div>
+  <div class="sample-card"><strong>Privacy/data note.</strong> Bookwormcard saves checkpoints in your browser so you can resume. Longer answers can be processed by the optional feedback layer while that layer is active. The final card opens as a PDF/print file for you to save. Links: <a href="/bookwormcard/about/">about</a>, <a href="/bookwormcard/glossary/">glossary</a>, <a href="/bookwormcard/print/?blank=1">blank card</a>.</div>
 </section>
 
 <section id="student-start-card" aria-labelledby="student-start-title">
@@ -1832,8 +1832,8 @@ function showTierCinematic(name, sub){
 // The wormcard is a single artifact in PDF form. The PDF carries
 // every paragraph the player wrote, embeds the save blob (so the
 // PDF doubles as the save file), prints natively, drops back into
-// the game on resume, and is AI-readable so the player can paste
-// the card straight into any AI chat to play with the character.
+// the game on resume, and is plain-text readable so the player can bring
+// the card into a teacher-led BB session.
 //
 // Earlier builds shipped parallel SVG/TXT/JSON exports as separate
 // "artifacts". Those were a category error, proliferation by
@@ -2138,7 +2138,7 @@ function showPrintMenu(){
   // EXPORT MENU, ONE CARD. ONE BUTTON.
   // The bookwormcard is a single artifact: the PDF. It carries
   // every paragraph, embeds the save blob, prints natively, drops
-  // back into the game on resume, and is AI-readable. Earlier
+  // back into the game on resume, and is plain-text readable. Earlier
   // builds spread the export across PDF/SVG/TXT/JSON which was
   // use-case proliferation against the project's own ONE CARD
   // frame. The blank-questionnaire option remains for the player
@@ -3312,7 +3312,7 @@ var STATES = {
       var seq = [
         ['first, we make the wormcard.', {speed:32, cls:'system'}],
         ['this is your character card for playing inside a book, poem, story, article, or scene.', {speed:32}],
-        ['after the card is saved, give it to the Dimensional Master. the teacher runs the table and may use AI for tracking.', {speed:32}],
+        ['after the card is saved, give it to the Dimensional Master. the teacher runs the table and keeps the record of what changes.', {speed:32}],
         ['the helper opens the text-world. you choose actions. you use evidence from the text. the world responds.', {speed:32, gap:true}],
         ['this card has four easy starting parts.', {speed:32}],
         ['a burrowing animal. a date and place. a name. a few story answers.', {speed:32}],
@@ -4008,7 +4008,7 @@ var STATES = {
       // Post-card narrative, what to do with the card after the seal.
       // Threaded into the chat itself rather than a separate guide page.
       appendLine('the card is yours.', {gap:false});
-      appendLine('drop your pdf into any AI chat. tell them you want to play with this character.', {gap:false});
+      appendLine('bring your pdf to your Dimensional Master. use it as the character record for the next BB session.', {gap:false});
       appendLine('your AI runs the table. you bring the card.', {gap:true});
 
       setPrompt('save pdf · edit · copy · blank');

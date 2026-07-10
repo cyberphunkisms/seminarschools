@@ -6,7 +6,7 @@ Daily seminar aggregator for seminarschools.com.
 
 Reads /scripts/sources.json. Iterates configured sources. Calls per-source
 fetcher functions. Normalizes output to /data/seminars-schema.json shape.
-Writes /data/seminars.json plus dated history snapshot.
+Writes /seminars/events.json plus /data/seminars-review.json, /data/event-watchlist.json, /data/scrape-log.json, and dated history snapshots.
 
 Production trigger lives in /netlify/functions/seminars-cron-background.js.
 This script also runs standalone for local debugging:

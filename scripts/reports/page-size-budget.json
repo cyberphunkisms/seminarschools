@@ -1,21 +1,21 @@
 {
   "schema": "page-size-budget-v2",
-  "updated": "2026-06-30",
-  "policy": "Budget tracks current large HTML pages after the CL suggestion pass. ML* source-of-truth pages remain intact; generated shortcut pages have lower ceilings after fallback reduction.",
+  "updated": "2026-07-10",
+  "policy": "Budget tracks current large HTML pages after the BB mechanics synthesis and the public BBT research synthesis. Canonical source pages remain intact; ceilings permit intentional documented growth while blocking accidental bloat.",
   "budgetedLargePages": [
     {
       "path": "polymyth/methodologylist/index.html",
-      "bytes": 3796520,
+      "bytes": 3883147,
       "route": "/polymyth/methodologylist/",
-      "ceilingBytes": 3831520,
-      "status": "canonical-heavy; ML*/archive source order preserved; guard prevents regression before dialectical chunking decision"
+      "ceilingBytes": 3918147,
+      "status": "canonical-heavy; July 9 linkability doctrine entry added intentionally; guard prevents accidental bloat before dialectical chunking decision"
     },
     {
       "path": "polymyth/methodologylist/methodology/index.html",
-      "bytes": 1808686,
+      "bytes": 1851467,
       "route": "/polymyth/methodologylist/methodology/",
-      "ceilingBytes": 1843686,
-      "status": "canonical-heavy; ML*/archive source order preserved; guard prevents regression before dialectical chunking decision"
+      "ceilingBytes": 1886467,
+      "status": "canonical-heavy; July 10 BBT public research synthesis propagated intentionally; 35 KB guard preserves room for small canonical corrections before dialectical chunking decision"
     },
     {
       "path": "aa/index.html",
@@ -33,42 +33,42 @@
     },
     {
       "path": "polymyth/campaigncodex/index.html",
-      "bytes": 1030961,
+      "bytes": 1031512,
       "route": "/polymyth/campaigncodex/",
       "ceilingBytes": 1065961,
       "status": "canonical-heavy; ML*/archive source order preserved; guard prevents regression before dialectical chunking decision"
     },
     {
       "path": "teacherresources/index.html",
-      "bytes": 925068,
+      "bytes": 776968,
       "route": "/teacherresources/",
       "ceilingBytes": 955068,
       "status": "known-heavy; render-contained and budgeted to prevent regression"
     },
     {
       "path": "polymythseminars/index.html",
-      "bytes": 717811,
+      "bytes": 727205,
       "route": "/polymythseminars/",
       "ceilingBytes": 739811,
       "status": "calendar/shortcut page after route-specific fallback reduction; guard prevents fallback bloat returning"
     },
     {
       "path": "polymyth/bookwormburrows/index.html",
-      "bytes": 556321,
+      "bytes": 602200,
       "route": "/polymyth/bookwormburrows/",
-      "ceilingBytes": 586321,
-      "status": "known-heavy; render-contained and budgeted to prevent regression"
+      "ceilingBytes": 623415,
+      "status": "known-heavy 246-entry BB rule library after July 10 BBT synthesis; render-contained with existing regression ceiling"
     },
     {
       "path": "polymyth/methodologylist/citation/index.html",
-      "bytes": 518194,
+      "bytes": 518480,
       "route": "/polymyth/methodologylist/citation/",
       "ceilingBytes": 548194,
       "status": "known-heavy; render-contained and budgeted to prevent regression"
     },
     {
       "path": "polymyth/methodologylist/gorgonification/index.html",
-      "bytes": 393928,
+      "bytes": 398956,
       "route": "/polymyth/methodologylist/gorgonification/",
       "ceilingBytes": 423928,
       "status": "known-heavy; render-contained and budgeted to prevent regression"
@@ -89,14 +89,14 @@
     },
     {
       "path": "university/index.html",
-      "bytes": 370959,
+      "bytes": 375359,
       "route": "/university/",
       "ceilingBytes": 392959,
       "status": "calendar/shortcut page after route-specific fallback reduction; guard prevents fallback bloat returning"
     },
     {
       "path": "leizu/index.html",
-      "bytes": 369060,
+      "bytes": 369050,
       "route": "/leizu/",
       "ceilingBytes": 399060,
       "status": "known-heavy; render-contained and budgeted to prevent regression"
