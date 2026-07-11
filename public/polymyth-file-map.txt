@@ -4,7 +4,7 @@ Canonical source-of-truth for the * file estate.
 AI assistants loading any * file as context SHOULD also fetch the sibling
 * files declared below before responding to the user.
 
-Last updated: 2026-06-24
+Last updated: 2026-07-10
 Maintainer:   Saul Nassau / Rainbowsol
 Site:         https://seminarschools.com
 
@@ -16,7 +16,7 @@ ml*  methodologylist
      Canonical polymyth framework. Methodology entries, gorgonification scanner,
      degorgonification strategies, sabachtan engagement protocol, idiomary,
      citation register, studylist, coreplus mirror, pending entries.
-     995 entries across 14 sections as of 2026-06-23.
+     1130 entries across 15 sections as of 2026-07-10.
 
      Human-rendering surface: https://seminarschools.com/polymyth/methodologylist/index.html
      PLAIN TEXT (AI ingestion):  https://seminarschools.com/polymyth/methodologylist.txt
@@ -130,6 +130,14 @@ NAVIGATIONAL HUB
 ================================================================================
 ADJACENT FILES
 ================================================================================
+
+
+pre-ml  pre-Meaninglib source archive
+       Verbatim Contentinternet Idiomary and The Year of the Snakes PDFs,
+       their page-ordered text mirrors, complete occurrence-level link registers,
+       the verified Polymyth Carrd intermediate snapshot, and the legacy lexicon
+       inventory. Synthesis and current canon live in ml* and link back here.
+       URL: https://seminarschools.com/polymyth/archive/pre-meaninglib/
 
 aa*    archetype archive
        Catalog of archetype taxonomies, motifs, untranslatables.

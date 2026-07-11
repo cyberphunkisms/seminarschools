@@ -1,15 +1,27 @@
 {
   "schema": "external-link-inventory-v1",
-  "generatedAt": "2026-07-10T05:54:59.826Z",
-  "totalExternalLinks": 1021,
+  "generatedAt": "2026-07-11T22:53:42.732Z",
+  "totalExternalLinks": 1418,
   "topHosts": [
     {
       "host": "www.gutenberg.org",
-      "count": 109
+      "count": 111
+    },
+    {
+      "host": "www.urbandictionary.com",
+      "count": 76
     },
     {
       "host": "cemc.uwaterloo.ca",
       "count": 65
+    },
+    {
+      "host": "tinyurl.com",
+      "count": 64
+    },
+    {
+      "host": "en.wikipedia.org",
+      "count": 57
     },
     {
       "host": "www.warmuseum.ca",
@@ -28,20 +40,40 @@
       "count": 42
     },
     {
+      "host": "docs.google.com",
+      "count": 41
+    },
+    {
+      "host": "www.imdb.com",
+      "count": 34
+    },
+    {
       "host": "doi.org",
       "count": 33
+    },
+    {
+      "host": "seminarschools.com",
+      "count": 33
+    },
+    {
+      "host": "www.reddit.com",
+      "count": 32
     },
     {
       "host": "openstax.org",
       "count": 29
     },
     {
-      "host": "seminarschools.com",
+      "host": "youtu.be",
       "count": 26
     },
     {
       "host": "jerrywbrown.com",
       "count": 24
+    },
+    {
+      "host": "www.youtube.com",
+      "count": 23
     },
     {
       "host": "uchv.princeton.edu",
@@ -52,15 +84,11 @@
       "count": 11
     },
     {
-      "host": "torontocarnival.ca",
-      "count": 10
-    },
-    {
       "host": "www.loc.gov",
       "count": 10
     },
     {
-      "host": "www.youtube.com",
+      "host": "torontocarnival.ca",
       "count": 9
     },
     {
@@ -78,10 +106,6 @@
     {
       "host": "www.archives.gov.on.ca",
       "count": 8
-    },
-    {
-      "host": "docs.google.com",
-      "count": 7
     },
     {
       "host": "www.soulpepper.ca",
@@ -108,6 +132,26 @@
       "count": 7
     },
     {
+      "host": "www.sum.si",
+      "count": 6
+    },
+    {
+      "host": "www.threads.net",
+      "count": 6
+    },
+    {
+      "host": "www.instagram.com",
+      "count": 6
+    },
+    {
+      "host": "x.com",
+      "count": 6
+    },
+    {
+      "host": "ibo.org",
+      "count": 6
+    },
+    {
       "host": "www.rom.on.ca",
       "count": 6
     },
@@ -116,7 +160,7 @@
       "count": 5
     },
     {
-      "host": "en.wikipedia.org",
+      "host": "www.ibo.org",
       "count": 5
     },
     {
@@ -156,10 +200,6 @@
       "count": 5
     },
     {
-      "host": "ibo.org",
-      "count": 5
-    },
-    {
       "host": "indigenousfoundations.arts.ubc.ca",
       "count": 5
     },
@@ -177,10 +217,6 @@
     },
     {
       "host": "www.shawfest.com",
-      "count": 4
-    },
-    {
-      "host": "www.ibo.org",
       "count": 4
     },
     {
@@ -205,42 +241,6 @@
     },
     {
       "host": "www.commonlit.org",
-      "count": 3
-    },
-    {
-      "host": "cal.com",
-      "count": 3
-    },
-    {
-      "host": "festivalofauthors.ca",
-      "count": 3
-    },
-    {
-      "host": "www.mcgill.ca",
-      "count": 3
-    },
-    {
-      "host": "learn.utoronto.ca",
-      "count": 3
-    },
-    {
-      "host": "fringetoronto.com",
-      "count": 3
-    },
-    {
-      "host": "www.toronto.ca",
-      "count": 3
-    },
-    {
-      "host": "beachesjazz.com",
-      "count": 3
-    },
-    {
-      "host": "fanexpohq.com",
-      "count": 3
-    },
-    {
-      "host": "networks.h-net.org",
       "count": 3
     }
   ],
@@ -894,11 +894,6 @@
       "source": "polymythseminars/events/caribana-grand-parade-2026-08-01-3c50e2cc/index.html",
       "href": "https://www.caribanatoronto.com/events/parade",
       "host": "www.caribanatoronto.com"
-    },
-    {
-      "source": "polymythseminars/events/caribana-junior-king-queen-showcase-2026-07-11-4c6116bb/index.html",
-      "href": "https://torontocarnival.ca/events/",
-      "host": "torontocarnival.ca"
     },
     {
       "source": "polymythseminars/events/caribana-king-queen-showcase-2026-07-31-aedeff91/index.html",
@@ -2744,6 +2739,11 @@
       "source": "teacherresources/ela/ela-ss-american/rules-of-the-game-alternate-cache-c78ac00b/index.html",
       "href": "https://jg019.k12.sd.us/eng1/Assignment%20Documents/Rules%20of%20the%20Game.pdf",
       "host": "jg019.k12.sd.us"
+    },
+    {
+      "source": "teacherresources/ela/ela-ss-american/sealed-off-81807ab8/index.html",
+      "href": "https://jerrywbrown.com/wp-content/uploads/2020/02/Sealed-Off-Chang-Eileen.pdf",
+      "host": "jerrywbrown.com"
     }
   ]
 }

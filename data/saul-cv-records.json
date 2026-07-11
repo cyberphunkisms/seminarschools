@@ -1,0 +1,954 @@
+{
+  "generated_at": "2026-07-11T22:47:46.389Z",
+  "purpose": "Structured factual snapshot and verification ledger for the modular online CV. The live page remains the public rendering source.",
+  "locked_wording": {
+    "learner_scale": "thousands of learners"
+  },
+  "retired_claims": [
+    "PhD Candidate",
+    "1,000+ students",
+    "Seminar Schools as an operating institution",
+    "delivered status for conceptual projects"
+  ],
+  "records": [
+    {
+      "index": 0,
+      "section_weight": 9,
+      "date": "May 2026–Present",
+      "categories": [
+        "seminarschools"
+      ],
+      "title": "Leizu Academy (嫘祖 Academy)",
+      "note": "English-language tutoring practice within Seminar Schools",
+      "url": "https://seminarschools.com/leizu/",
+      "description": "English-language tutoring for the Ontario curriculum, the IB Diploma, and university admissions. Instruction in English. Family communication available in English, Mandarin, French, and Farsi. Sessions run privately or in seminar format, in person or online, weekly or in concentrated blocks before assessments.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 1,
+      "section_weight": 9,
+      "date": "2025–Present",
+      "categories": [
+        "seminarschools"
+      ],
+      "title": "Seminar Schools",
+      "note": "Independent website and project archive in development",
+      "url": "https://seminarschools.com",
+      "description": "Independent website that organizes published teaching resources, research materials, essays, public information, and clearly labelled conceptual projects. Completed work, active development, and proposals are presented separately.",
+      "status": "conceptual",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 2,
+      "section_weight": 9,
+      "date": "2025–Present",
+      "categories": [
+        "seminarschools"
+      ],
+      "title": "Designer, Bookworm Burrows",
+      "note": "Pedagogical game in development",
+      "url": "https://seminarschools.com/bookwormcard/",
+      "description": "Teacher-led learning game in development. Assignments become quests inside the worlds of books and other course materials, while AI supports teacher preparation, improvisation, and resource development.",
+      "status": "in development",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 3,
+      "section_weight": 9,
+      "date": "2026–Present",
+      "categories": [
+        "seminarschools"
+      ],
+      "title": "Editor, Teacher Resources",
+      "note": "Curated index of classroom resources",
+      "url": "https://seminarschools.com/teacherresources/",
+      "description": "Developing index of classroom resources across English, history, mathematics, science, French, Indigenous Studies, civics, and computer science. Original and government sources are prioritized where available.",
+      "status": "in development",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 4,
+      "section_weight": 9,
+      "date": "2025–Present",
+      "categories": [
+        "seminarschools"
+      ],
+      "title": "Editor, Marginalia",
+      "note": "Commentary and research notes on Toronto public lectures",
+      "url": "https://seminarschools.com/marginalia/",
+      "description": "Developing record of public lectures, readings, and cultural events in Toronto, with research notes and longer commentary on selected events attended.",
+      "status": "in development",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 5,
+      "section_weight": 9,
+      "date": "2025–Present",
+      "categories": [
+        "seminarschools"
+      ],
+      "title": "The Agora",
+      "note": "Outdoor seminar concept in development",
+      "url": "https://seminarschools.com/agora/",
+      "description": "Concept for public reading and discussion sessions in Toronto. The project remains in development and has not been presented as an operating public program.",
+      "status": "conceptual",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 6,
+      "section_weight": 9,
+      "date": "2025–Present",
+      "categories": [
+        "seminarschools"
+      ],
+      "title": "Ohm Dome",
+      "note": "Conceptual public artwork",
+      "url": "https://seminarschools.com/ohm-dome/",
+      "description": "Conceptual participatory artwork exploring shared rhythm, light, sound, and public gathering. Proposal and presentation work exist; the installation has not been built.",
+      "status": "conceptual",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 7,
+      "section_weight": 9,
+      "date": "2025–Present",
+      "categories": [
+        "seminarschools"
+      ],
+      "title": "polymyth / AA*",
+      "note": "Research framework and archive in development",
+      "url": "https://seminarschools.com/polymyth/",
+      "description": "Research and writing framework used to organize concepts, citations, project records, and methodological rules across the website. The archive distinguishes user-authored source material from public-facing summaries.",
+      "status": "conceptual",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 8,
+      "section_weight": 9,
+      "date": "2025–Present",
+      "categories": [
+        "seminarschools"
+      ],
+      "title": "Toronto Arts and Public Events Resource (Polymythcal)",
+      "note": "Public information project in development",
+      "url": "https://seminarschools.com/polymythseminars/",
+      "description": "Developing resource that researches arts, humanities, educational, and civic events across Toronto. Work includes checking original sources, tracking changes, organizing listings, and improving information clarity and accessibility.",
+      "status": "in development",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 9,
+      "section_weight": 9,
+      "date": "2025–Present",
+      "categories": [
+        "seminarschools"
+      ],
+      "title": "Florilegium",
+      "note": "Reading and citation archive in development",
+      "url": "https://seminarschools.com/florilegium/",
+      "description": "Commonplace-book project for organizing passages, citations, reading notes, and connections across the wider research archive.",
+      "status": "in development",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 10,
+      "section_weight": 8,
+      "date": "Feb 2023–Present",
+      "categories": [
+        "teaching",
+        "education"
+      ],
+      "title": "Teacher, Intelligent International",
+      "note": "",
+      "url": "https://www.inteledu.ca/",
+      "description": "Mix of subjects including English, ESL, and social studies for international students in the GTA. Part-time, concurrent with other teaching roles.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 11,
+      "section_weight": 8,
+      "date": "May 2023–Aug 2024",
+      "categories": [
+        "teaching",
+        "community",
+        "education"
+      ],
+      "title": "Instructor, Tamwood Education Camps",
+      "note": "",
+      "url": "https://tamwood.com/camps/",
+      "description": "Summer education camps for international students. Curriculum delivery, group facilitation, and activity coordination across multiple camp sessions.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 12,
+      "section_weight": 8,
+      "date": "Sep 2023–May 2025",
+      "categories": [
+        "teaching",
+        "education"
+      ],
+      "title": "Teacher, NOIC Academy",
+      "note": "IB and OSSD",
+      "url": "https://noic.ca",
+      "description": "IB World School in Markham. Taught across both International Baccalaureate and Ontario Secondary School Diploma frameworks. Obtained IB TOK certification while teaching here.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 13,
+      "section_weight": 8,
+      "date": "Nov 2023",
+      "categories": [
+        "education",
+        "teaching"
+      ],
+      "title": "IB Theory of Knowledge (TOK) Certification",
+      "note": "",
+      "url": "https://ibo.org/programmes/diploma-programme/curriculum/dp-core/theory-of-knowledge/",
+      "description": "IB-authorized certification for teaching Theory of Knowledge. Obtained while at NOIC Academy.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 14,
+      "section_weight": 9,
+      "date": "2026",
+      "categories": [
+        "education",
+        "community",
+        "volunteer"
+      ],
+      "title": "AODA Training",
+      "note": "Selected professional development",
+      "url": null,
+      "description": "Training in accessibility requirements and inclusive service under the Accessibility for Ontarians with Disabilities Act.",
+      "status": "in development",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 15,
+      "section_weight": 9,
+      "date": "2026–Present",
+      "categories": [
+        "volunteer",
+        "community",
+        "performance"
+      ],
+      "title": "Volunteer, BUMI Festival",
+      "note": "Music, culture, movement, and community gathering",
+      "url": "https://bumifest.ca/",
+      "description": "Volunteer support for a Toronto-area festival sustained through shared participation, cultural programming, and community work.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 16,
+      "section_weight": 8,
+      "date": "c. May–Jun 2025",
+      "categories": [
+        "volunteer",
+        "community"
+      ],
+      "title": "Volunteer, CNIB Night Steps at Earl Bales Park",
+      "note": "Charity walk for Canadians who are blind or partially sighted",
+      "url": "https://www.cnib.ca/en/support-us/events/cnib-night-steps?region=on",
+      "description": "CNIB fundraising charity walk at Earl Bales Park in North York. Volunteered as sighted guide support.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 17,
+      "section_weight": 8,
+      "date": "Jun 2025–Feb 2026",
+      "categories": [
+        "teaching",
+        "education"
+      ],
+      "title": "Teacher, Willowdale High School",
+      "note": "OSSD",
+      "url": "https://willowdalehighschool.com/",
+      "description": "Ontario Secondary School Diploma program. Teaching English and humanities courses.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 18,
+      "section_weight": 8,
+      "date": "Jan 2026–Present",
+      "categories": [
+        "teaching",
+        "education"
+      ],
+      "title": "Instructor, RoboThink Toronto, Markham",
+      "note": "Elementary, up to Grade 4",
+      "url": "https://www.myrobothink.com/franchises/gta/",
+      "description": "Teaching robotics and STEM to elementary students up to Grade 4. Lessons use demonstrations, guided practice, observation, and adaptive support to help students build foundational technical skills.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 19,
+      "section_weight": 8,
+      "date": "Jan 2026–Present",
+      "categories": [
+        "teaching",
+        "education"
+      ],
+      "title": "Instructor, Happy Learning Education Center",
+      "note": "",
+      "url": "https://happylearningedu.com/",
+      "description": "Toronto-based education centre offering STEM, robotics, and language classes. Part-time teaching alongside other concurrent roles.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 20,
+      "section_weight": 7,
+      "date": "Jan–Aug 2020",
+      "categories": [
+        "teaching",
+        "education"
+      ],
+      "title": "Teacher, Toronto Central Academy",
+      "note": "",
+      "url": "https://www.tacademy.ca/",
+      "description": "Second stint. Private school offering OSSD and AP programs to international students. Transition to online delivery during COVID-19.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 21,
+      "section_weight": 7,
+      "date": "Jul 2020–Feb 2024",
+      "categories": [
+        "teaching",
+        "education"
+      ],
+      "title": "Online Educator, Smart Native, Hong Kong",
+      "note": "",
+      "url": "https://smartnative.hk/",
+      "description": "Hong Kong-based online English education platform. Remote teaching concurrent with Toronto-based roles over nearly four years.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 22,
+      "section_weight": 6,
+      "date": "c. 2018–2020",
+      "categories": [
+        "community",
+        "performance",
+        "kitchen"
+      ],
+      "title": "Event Security and Front-of-House; Special Events and Nightclub, Toronto",
+      "note": "Licensed",
+      "url": null,
+      "description": "Two pre-pandemic years working private security at a downtown Toronto gay club and a rotating set of special events. Always the de-escalation role at the door, diplomatic conversation as the primary tool, physical intervention as the rare last resort. Ontario Security Guard License. Front-of-house and floor-management overlap kept the work close to hospitality rather than enforcement.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 23,
+      "section_weight": 7,
+      "date": "c. 2020–Early 2023",
+      "categories": [
+        "kitchen"
+      ],
+      "title": "Assistant Manager, Pizza Pizza; Event Security; Various Contracts",
+      "note": "Full kitchen, shift management, front-of-house",
+      "url": "https://www.pizzapizza.ca/",
+      "description": "Full kitchen operations, shift lead, front-of-house service through the pandemic period. Concurrent contract security work continuing from earlier Toronto roles.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 24,
+      "section_weight": 7,
+      "date": "Jan 2021–May 2022",
+      "categories": [
+        "teaching",
+        "education"
+      ],
+      "title": "ESL Instructor, Access Education",
+      "note": "",
+      "url": "https://www.accessenglish.com/en/",
+      "description": "Toronto-based ESL school (Nacel Access English, established 1999). English language instruction for international adult learners.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 25,
+      "section_weight": 6,
+      "date": "Jan–Jul 2019",
+      "categories": [
+        "teaching",
+        "education"
+      ],
+      "title": "Teacher, Toronto Central Academy",
+      "note": "",
+      "url": "https://www.tacademy.ca/",
+      "description": "First stint. Private school offering OSSD and AP programs to international students in downtown Toronto.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 26,
+      "section_weight": 6,
+      "date": "Jul 2019",
+      "categories": [
+        "education",
+        "teaching"
+      ],
+      "title": "Berkley Invigilation Standards Certification",
+      "note": "",
+      "url": null,
+      "description": "Professional development in examination invigilation from Chongqing No.1 International Studies School. Subsequently retrained in invigilation standards at various other institutions.",
+      "status": "in development",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 27,
+      "section_weight": 4,
+      "date": "Sep–Dec 2019",
+      "categories": [
+        "teaching",
+        "education"
+      ],
+      "title": "Teacher, Chongqing No.1 International Studies School, China",
+      "note": "A-Level English, AP Economics, AP English, IELTS",
+      "url": "https://www.cqyz.cn/",
+      "description": "A-Level English, AP Economics, AP English, and IELTS preparation at this international school in Chongqing, China.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 28,
+      "section_weight": 5,
+      "date": "c. Jan 2017–Dec 2018",
+      "categories": [
+        "teaching",
+        "education"
+      ],
+      "title": "Instructor, East Van Education Center, Vancouver",
+      "note": "Adult education",
+      "url": "https://www.vsb.bc.ca/vass/east-vancouver-education-centre",
+      "description": "Adult education program run through the Vancouver School Board. Concurrent with Pattison High School.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 29,
+      "section_weight": 5,
+      "date": "Jan 2017–Jan 2019",
+      "categories": [
+        "teaching",
+        "education"
+      ],
+      "title": "Teacher, Pattison High School, Vancouver",
+      "note": "English, Economics, Social Studies",
+      "url": "https://www.pattisonhighschool.ca/",
+      "description": "Private high school in Vancouver. Taught English, Economics, and Social Studies to international students.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 30,
+      "section_weight": 5,
+      "date": "c. 2017–2018",
+      "categories": [
+        "kitchen"
+      ],
+      "title": "Chef, Private Winery Estate, Florence, Italy",
+      "note": "Seasonal",
+      "url": null,
+      "description": "Secluded high-end private winery estate outside Florence. Worked as chef during breaks between teaching terms and EGS summer sessions.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 31,
+      "section_weight": 5,
+      "date": "c. 2017–2018",
+      "categories": [
+        "kitchen"
+      ],
+      "title": "Chef, Private Events and Festival Catering",
+      "note": "Seasonal",
+      "url": null,
+      "description": "Seasonal catering for private events and festivals during off-periods from teaching.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 32,
+      "section_weight": 5,
+      "date": "c. 2018",
+      "categories": [
+        "education",
+        "teaching",
+        "community"
+      ],
+      "title": "Nonviolent Communication",
+      "note": "",
+      "url": "https://www.cnvc.org/",
+      "description": "Online professional development in conflict communication, listening, and collaborative problem solving.",
+      "status": "in development",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 33,
+      "section_weight": 5,
+      "date": "c. 2018",
+      "categories": [
+        "education",
+        "teaching",
+        "community"
+      ],
+      "title": "Cognitive Behavioral Therapy Certification",
+      "note": "",
+      "url": "https://www.udemy.com/",
+      "description": "Udemy CBT Practitioner Certificate. Professional development in cognitive behavioral therapy techniques.",
+      "status": "in development",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 34,
+      "section_weight": 5,
+      "date": "c. 2018",
+      "categories": [
+        "education",
+        "teaching"
+      ],
+      "title": "Motivation Coach Certificate",
+      "note": "",
+      "url": "https://www.udemy.com/",
+      "description": "Udemy certification. Complete coaching system for motivation and personal development.",
+      "status": "in development",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 35,
+      "section_weight": 5,
+      "date": "c. 2018",
+      "categories": [
+        "education"
+      ],
+      "title": "Python for Data Science and Machine Learning Bootcamp",
+      "note": "",
+      "url": "https://www.udemy.com/",
+      "description": "Udemy bootcamp covering NumPy, Pandas, Seaborn, Matplotlib, Plotly, Scikit-Learn, TensorFlow, and NLP.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 36,
+      "section_weight": 5,
+      "date": "c. 2018",
+      "categories": [
+        "education"
+      ],
+      "title": "Machine Learning A-Z, Hands-On Python and R in Data Science",
+      "note": "",
+      "url": "https://www.udemy.com/",
+      "description": "Udemy certification covering regression, classification, clustering, association rule learning, reinforcement learning, NLP, and deep learning.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 37,
+      "section_weight": 5,
+      "date": "c. 2018",
+      "categories": [
+        "education"
+      ],
+      "title": "Mindfulness Practitioner Course (Levels I, II, III, and Master)",
+      "note": "",
+      "url": "https://www.udemy.com/",
+      "description": "Udemy certification. Four-level mindfulness practitioner program covering meditation, body scan, breathing techniques, and advanced practice.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 38,
+      "section_weight": 4,
+      "date": "Early 2016",
+      "categories": [
+        "education",
+        "teaching"
+      ],
+      "title": "TESOL Certification, Indiana University",
+      "note": "",
+      "url": "https://dsls.indiana.edu/graduate/ma-tesol.html",
+      "description": "Teaching English to Speakers of Other Languages certification. Obtained before beginning ESL teaching in China.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 39,
+      "section_weight": 4,
+      "date": "c. Jan–Jun 2016",
+      "categories": [
+        "teaching",
+        "volunteer",
+        "education"
+      ],
+      "title": "ESL Teacher (Volunteer), Sanxin Schools, Zhongshan",
+      "note": "",
+      "url": "http://www.sbsid.edu.cn/en/",
+      "description": "Volunteer ESL teaching at this Zhongshan school with a flexible schedule, traveling between assignments across Guangdong province.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 40,
+      "section_weight": 4,
+      "date": "c. Jul–Dec 2016",
+      "categories": [
+        "teaching",
+        "education"
+      ],
+      "title": "ESL Teacher, Best Learning English (贝乐学科英语), Shenzhen",
+      "note": "American K12 immersion, ages 2–12",
+      "url": null,
+      "description": "American K12 immersion curriculum for students aged 2 to 12 in Shenzhen. Full English-language instruction in a structured classroom environment.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 41,
+      "section_weight": 3,
+      "date": "Sep 2014–Jun 2015",
+      "categories": [
+        "teaching",
+        "education"
+      ],
+      "title": "Teaching Assistant, European Graduate School",
+      "note": "Switzerland",
+      "url": "https://egs.edu/",
+      "description": "Part of the MA program. Assisted with philosophy and critical theory seminars during the first year of the four-year summer intensive.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 42,
+      "section_weight": 3,
+      "date": "Feb 2014–Dec 2015",
+      "categories": [
+        "community",
+        "education"
+      ],
+      "title": "Founder, Project Manager and Translator, Independent Refugee Support Initiative",
+      "note": "Serbia and Croatia; six countries; more than $8,000 raised",
+      "url": "https://www.unhcr.org/5601b9a66.html",
+      "description": "Founded and led an independent refugee support and fundraising initiative. Raised more than $8,000 for food, water, legal assistance, and urgent needs, verified changing information, translated communications, and coordinated professionals and supporters across six countries.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 43,
+      "section_weight": 3,
+      "date": "c. Nov–Dec 2015",
+      "categories": [
+        "volunteer",
+        "teaching",
+        "community"
+      ],
+      "title": "English Language Volunteer, Egypt",
+      "note": "",
+      "url": null,
+      "description": "Volunteered at an English learning centre during travel through Egypt following the Balkan route operations.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 44,
+      "section_weight": 3,
+      "date": "2015–2016",
+      "categories": [
+        "kitchen",
+        "volunteer",
+        "community"
+      ],
+      "title": "Ship's Chef and Crew, S/V Hawila",
+      "note": "Denmark; gaff-rigged ketch, 135t",
+      "url": "https://www.hawilaproject.org/",
+      "description": "32-meter gaff-rigged ketch built 1935 in Risør, Norway. Galley chef and general crew during cargo and festival voyages.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 45,
+      "section_weight": 3,
+      "date": "2015–2016",
+      "categories": [
+        "volunteer",
+        "community",
+        "kitchen",
+        "performance"
+      ],
+      "title": "Volunteer, Flydende By (Floating City), Copenhagen",
+      "note": "Sustainable makerspace; cooking, construction, film support",
+      "url": "https://www.floatingcity.dk/",
+      "description": "Non-profit art collective building boats from recycled materials since 2008. Cooking, construction, and film production support.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 46,
+      "section_weight": 2,
+      "date": "Sep 2011–Aug 2015",
+      "categories": [
+        "community",
+        "education"
+      ],
+      "title": "Community Development Manager, Campus Crops Farmers Market",
+      "note": "Budgeting, volunteer coordination, partner relationships",
+      "url": "https://www.mcgill.ca/sustainability/sp0008-campus-crops-1",
+      "description": "Paid community development role with a student-run urban agriculture initiative at McGill. Redesigned budgeting and expense tracking in Excel, coordinated volunteers, supported community programming, and developed partner relationships.",
+      "status": "in development",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 47,
+      "section_weight": 2,
+      "date": "c. 2009–2014",
+      "categories": [
+        "kitchen"
+      ],
+      "title": "Front-of-House, Kitchen, Event Security at Various Venues",
+      "note": "La Plante and Mile End venues",
+      "url": "https://www.songkick.com/venues/4045864-la-plante",
+      "description": "Short-term contracts and event-based work across Montreal's Mile End neighbourhood. Front-of-house service, kitchen work, and event security at venues including La Plante.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 48,
+      "section_weight": 2,
+      "date": "c. 2011–2013",
+      "categories": [
+        "community",
+        "education",
+        "teaching"
+      ],
+      "title": "Conference Organizer, McMUN and SSUNS at IRSAM, McGill",
+      "note": "University and secondary school Model UN",
+      "url": "https://www.irsam.ca/",
+      "description": "Organized both McMUN, the university-level conference with around 1600 delegates, and SSUNS, the secondary school version, through IRSAM.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 49,
+      "section_weight": 2,
+      "date": "c. 2018",
+      "categories": [
+        "education",
+        "community"
+      ],
+      "title": "Social Impact Strategy and Community Building Strategies",
+      "note": "",
+      "url": null,
+      "description": "Online professional development in social impact planning and community building.",
+      "status": "in development",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 50,
+      "section_weight": 2,
+      "date": "2013–2014",
+      "categories": [
+        "education",
+        "teaching"
+      ],
+      "title": "Research Assistant, McGill University",
+      "note": "",
+      "url": "https://www.mcgill.ca/",
+      "description": "Philosophy department. Research assistance during final year at McGill before beginning the MA at EGS.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 51,
+      "section_weight": 1,
+      "date": "2005–2009",
+      "categories": [
+        "education",
+        "performance"
+      ],
+      "title": "Claude Watson Arts Program, Screen Arts",
+      "note": "Earl Haig Secondary School, Toronto",
+      "url": "https://earlhaig.ca/departments/claude/",
+      "description": "Completed the Claude Watson Arts Program with a Screen Arts focus, including film and video production, performance, criticism, and collaborative creative work.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 52,
+      "section_weight": 1,
+      "date": "2005, 2006, 2007",
+      "categories": [
+        "performance",
+        "education"
+      ],
+      "title": "Sears Ontario Drama Festival",
+      "note": "Grades 9 to 11",
+      "url": "https://ent-nts.ca/en/nts-dramafest/",
+      "description": "Ontario's oldest and largest high school drama festival, founded 1946. Competed in Grades 9, 10, and 11 through Claude Watson.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 53,
+      "section_weight": 1,
+      "date": "2006",
+      "categories": [
+        "performance",
+        "community",
+        "volunteer"
+      ],
+      "title": "Volunteer Commercial, Street Kids International",
+      "note": "Merged with Save the Children in 2015",
+      "url": "https://en.wikipedia.org/wiki/Street_Kids_International",
+      "description": "Produced as part of the Claude Watson Screen Arts curriculum. Street Kids International was a Toronto-based Canadian NGO founded in 1988 focused on street children's health and rights.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 54,
+      "section_weight": 1,
+      "date": "Summers 2005–2008",
+      "categories": [
+        "volunteer",
+        "community"
+      ],
+      "title": "Carefree Lodge Long-Term Care Home",
+      "note": "",
+      "url": "https://www.toronto.ca/community-people/housing-shelter/long-term-care-homes/long-term-care-home-locations/carefree-lodge/",
+      "description": "City of Toronto long-term care home in North York. Summer volunteer across all areas including resident care, recreation and activities, and administrative support.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 55,
+      "section_weight": 1,
+      "date": "c. 2006",
+      "categories": [
+        "education"
+      ],
+      "title": "Food Handlers Certificate",
+      "note": "",
+      "url": null,
+      "description": "Ontario Food Handlers Certificate obtained during high school for Pizza Pizza work.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 56,
+      "section_weight": 1,
+      "date": "c. 2004–2009",
+      "categories": [
+        "kitchen"
+      ],
+      "title": "Crew Member, Pizza Pizza",
+      "note": "",
+      "url": "https://www.pizzapizza.ca/",
+      "description": "High school through first year of university in Montreal. Crew member handling front counter, kitchen prep, and cash.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 57,
+      "section_weight": 1,
+      "date": "2008–2016",
+      "categories": [
+        "volunteer",
+        "community",
+        "kitchen"
+      ],
+      "title": "WWOOF (World Wide Opportunities on Organic Farms)",
+      "note": "Periodic, including Azores, Portugal",
+      "url": "https://wwoof.net/",
+      "description": "Periodic volunteer farm work across multiple countries over eight years, including the Azores in Portugal. Sustainable agriculture and organic farming practices.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 58,
+      "section_weight": 0,
+      "date": "c. 1996–2001",
+      "categories": [
+        "performance",
+        "education"
+      ],
+      "title": "Karate",
+      "note": "Grades 1 to 5",
+      "url": null,
+      "description": "Five years of karate training through elementary school.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 59,
+      "section_weight": 0,
+      "date": "c. 2001",
+      "categories": [
+        "performance",
+        "education"
+      ],
+      "title": "Bronze Cross Swimming Certificate",
+      "note": "Grade 5",
+      "url": "https://www.lifesavingsociety.com/",
+      "description": "Canadian Red Cross Bronze Cross certification at Douglas Snow Aquatic Centre, North York. Lifesaving and water safety skills.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 60,
+      "section_weight": 0,
+      "date": "c. 2001–2003",
+      "categories": [
+        "education",
+        "performance"
+      ],
+      "title": "Willowdale Middle School",
+      "note": "Grades 6 and 7; Choir",
+      "url": "https://schoolweb.tdsb.on.ca/willowdale",
+      "description": "TDSB middle school in North York. Participated in the school choir program.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 61,
+      "section_weight": 0,
+      "date": "c. 2003–2004",
+      "categories": [
+        "education"
+      ],
+      "title": "Cummer Valley Middle School, Gifted Program (TDSB)",
+      "note": "Grade 8; IPRC identified",
+      "url": "https://schoolweb.tdsb.on.ca/cummervalley",
+      "description": "Transferred to Cummer Valley for Grade 8 to access the TDSB Gifted stream (IPRC identified). Standard pathway into Claude Watson Arts Program at Earl Haig.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    },
+    {
+      "index": 62,
+      "section_weight": 0,
+      "date": "c. 2001–2004",
+      "categories": [
+        "performance",
+        "community"
+      ],
+      "title": "Select Player, Spartacus Soccer Club",
+      "note": "Competitive rep team, Toronto",
+      "url": "https://spartacussoccer.ca/",
+      "description": "One of Canada's premier youth soccer clubs, founded 1994. Trained alongside players later scouted by professional clubs.",
+      "status": "completed or ongoing experience",
+      "source": "saul/index.html embedded CV record"
+    }
+  ]
+}

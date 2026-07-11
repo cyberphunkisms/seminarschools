@@ -13,12 +13,16 @@ const required = [
   'class="cv-intro"',
   'id="careerArchive"',
   'Curriculum vitae',
-  'Work record across service, education, community, and projects.',
+  'Education, research, community development, arts, service, and independent project work.',
   'Focus areas',
   'Relevant experience',
   'data-quick-view="all"',
-  'data-quick-view="service"',
+  'data-quick-view="evaluation"',
   'data-quick-view="teaching"',
+  'data-quick-view="programs"',
+  'data-quick-view="customer"',
+  'data-quick-view="arts"',
+  'data-quick-view="service"',
   'data-quick-view="portfolio"',
   'data-cv-mode="chrono"',
   'data-cv-mode="theme"',
@@ -53,7 +57,11 @@ const required = [
   'CV_OUTPUT_REVAMP_2026_07_09',
   'fitPrintCvToOnePage(host)',
   'PRINT_FOCUS',
-  'The top profile, experience list, skills, education, and credentials follow the currently selected focus areas.'
+  'The experience, methods, education, professional development, and downloadable PDF follow the selected focus areas.',
+  'CV_610_SYNTHESIS_2026_07_11',
+  'const QUICK_VIEW_SETS',
+  'const CV_METHODS_ALL',
+  'const CV_LANGUAGES'
 ];
 for (const token of required) if (!html.includes(token)) errors.push(`Missing required Saul page element: ${token}`);
 
@@ -73,7 +81,17 @@ const banned = [
   'active = wasOnly ? new Set() : new Set([cat]);',
   'Teaching, curriculum, and public learning.',
   'Saul Karim Nassau,<span class="post">MA</span>',
-  'data-cat="seminarschools">Seminar Schools</button>'
+  'data-cat="seminarschools">Seminar Schools</button>',
+  'PhD Candidate',
+  'Doctorant en',
+  'نامزد دکتر',
+  '博士候選人',
+  '博士候选人',
+  '1,000+',
+  'Mentored 1,000',
+  'References available on request',
+  'advanced doctoral work',
+  'umbrella practice that holds'
 ];
 for (const token of banned) if (html.includes(token)) errors.push(`Backtracked/strawman Saul page element remains: ${token}`);
 
@@ -112,4 +130,4 @@ if (errors.length) {
   errors.forEach(e => console.error(`- ${e}`));
   process.exit(1);
 }
-console.log('Saul page guard passed — any-job CV, employer-facing labels, additive focus filters, top profile switching, one-page output, website-only portrait/map, and no teaching-front regression.');
+console.log('Saul page guard passed — truthful role views, additive filters, factual corrections, methods/languages, project-status discipline, one-page output, and website-only portrait/map.');

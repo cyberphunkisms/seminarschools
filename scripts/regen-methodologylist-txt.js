@@ -79,7 +79,7 @@ console.log('Parsed', ml.length, 'entries from ml*');
 const SECTION_ORDER = [
   'methodology', 'gorgonification', 'degorgonification', 'analysis', 'sabachtan',
   'idiomary', 'citation', 'studylist', 'rainbowsol', 'polycognate', 'learnings',
-  'coreplus', 'pending',
+  'coreplus', 'corehistory', 'framework-core', 'pending',
 ];
 
 const SECTION_LABELS = {
@@ -95,6 +95,8 @@ const SECTION_LABELS = {
   polycognate: 'POLYCOGNATE',
   learnings: 'LEARNINGS',
   coreplus: 'COREPLUS',
+  corehistory: 'CORE HISTORY',
+  'framework-core': 'FRAMEWORK CORE',
   pending: 'PENDING',
 };
 
@@ -179,6 +181,7 @@ Sections of this file are also available individually:
 - citation: https://seminarschools.com/polymyth/methodologylist-citation.txt
 - analysis: https://seminarschools.com/polymyth/methodologylist-analysis.txt
 - coreplus: https://seminarschools.com/polymyth/methodologylist-coreplus.txt
+- corehistory: https://seminarschools.com/polymyth/methodologylist-corehistory.txt
 - learnings: https://seminarschools.com/polymyth/methodologylist-learnings.txt
 - studylist: https://seminarschools.com/polymyth/methodologylist-studylist.txt
 - polycognate: https://seminarschools.com/polymyth/methodologylist-polycognate.txt

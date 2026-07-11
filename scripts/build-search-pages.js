@@ -45,6 +45,14 @@ function esc(value) {
   return String(value == null ? '' : value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 function attr(value) { return esc(value); }
+function linkExternalUrls(value) {
+  return esc(value).replace(/https?:\/\/[^\s<]+/g, function(url) {
+    const m = url.match(/[.,;:!?]+$/);
+    const tail = m ? m[0] : '';
+    const clean = tail ? url.slice(0, -tail.length) : url;
+    return `<a href="${clean}" target="_blank" rel="noopener noreferrer">${clean}</a>${tail}`;
+  });
+}
 function slug(value) {
   const core = String(value || 'resource').normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
     .toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 76);
@@ -382,7 +390,7 @@ function generateEventPages(events) {
   return indexable;
 }
 
-const SECTION_LABELS={methodology:'Methodology',gorgonification:'Gorgonification',degorgonification:'Degorgonification',analysis:'Analysis',sabachtan:'Sabachtan Gnosticism',idiomary:'Idiomary',citation:'Citations',studylist:'Study List',rainbowsol:'Rainbowsol',polycognate:'Polycognate',learnings:'Learnings',coreplus:'Coreplus',pending:'Pending'};
+const SECTION_LABELS={methodology:'Methodology',gorgonification:'Gorgonification',degorgonification:'Degorgonification',analysis:'Analysis',sabachtan:'Sabachtan Gnosticism',idiomary:'Idiomary',citation:'Citations',studylist:'Study List',rainbowsol:'Rainbowsol',polycognate:'Polycognate',learnings:'Learnings',coreplus:'CORE+',corehistory:'CORE History','framework-core':'Framework Core',pending:'Pending'};
 function methodologyStaticIndex(seed) {
   const counts={}; seed.forEach(e=>counts[e.s||'unknown']=(counts[e.s||'unknown']||0)+1);
   const links=Object.entries(counts).sort((a,b)=>a[0].localeCompare(b[0])).map(([section,count])=>`<a class="resource-card" href="/polymyth/methodologylist/${slug(section)}/"><h3>${esc(SECTION_LABELS[section]||section)}</h3><p>${count} indexed framework entries in a static HTML edition.</p></a>`).join('\n');
@@ -414,7 +422,7 @@ function generateMethodologyPages(seed) {
     const cards=entries.map((entry,index)=>{
       const anchor=entry.id || `${section}-${slug(entry.t)}-${hash(entry.t+'|'+index)}`;
       const tags=entry.tg ? `<div class="resource-meta">${esc(entry.tg)}</div>` : '';
-      return `<article class="resource-row" id="${attr(anchor)}"><h2>${esc(entry.t || 'Untitled entry')}</h2><p>${esc(entry.b || '')}</p>${entry.x ? `<p>${esc(entry.x)}</p>`:''}${tags}<p><a href="#${attr(anchor)}">Permanent link</a></p></article>`;
+      return `<article class="resource-row" id="${attr(anchor)}"><h2>${esc(entry.t || 'Untitled entry')}</h2><p>${linkExternalUrls(entry.b || '')}</p>${entry.x ? `<p>${linkExternalUrls(entry.x)}</p>`:''}${tags}<p><a href="#${attr(anchor)}">Permanent link</a></p></article>`;
     }).join('\n');
     const desc=`${entries.length} polymyth framework entries in the ${label} section, presented as a static HTML reference edition.`;
     const body=`<p class="breadcrumbs"><a href="/">Seminar Schools</a> / <a href="/polymyth/methodologylist/">Polymyth Methodologylist</a> / ${esc(label)}</p><p class="eyebrow">Polymyth framework</p><h1>${esc(label)}</h1><p class="lede">${esc(desc)}</p><p class="archive-route-note route-note">Static archive route for this methodologylist section. Use this page for crawlable entry anchors, or open the interactive methodologylist for search and full navigation.</p><p><a class="button secondary" href="/polymyth/methodologylist/">Open the interactive methodologylist</a></p><div class="resource-list">${cards}</div>`;
@@ -434,7 +442,7 @@ function generateSitemap(generated) {
   const groupPrefixes=[...new Set(generated.resources.filter(x=>x.kind==='group').map(x=>x.url))];
   const eventPrefix=SITE+'/polymythseminars/events/';
   const methodologyPrefixes=[...new Set(generated.methodology.map(x=>x.url))];
-  const retiredPrefixes=[SITE+'/teacherresources/lang-hughes/'];
+  const retiredPrefixes=[SITE+'/teacherresources/lang-hughes/', SITE+'/polymyth/methodologylist/core/'];
   const keep=existingUrls.filter(u=> !retiredPrefixes.some(p=>u===p || u.startsWith(p)) && !groupPrefixes.some(p=>u===p || u.startsWith(p)) && !u.startsWith(eventPrefix) && !methodologyPrefixes.some(p=>u===p || u.startsWith(p)));
   const all=[...new Set([...keep, SITE+'/teacherresources/', ...generated.resources.map(x=>x.url), ...generated.events.map(x=>x.url), ...generated.methodology.map(x=>x.url)])].sort((a,b)=>a.localeCompare(b));
   const xml=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'];

@@ -29,7 +29,7 @@ function requireNotVisible(rel, tokens){
 }
 requireHas('saul/index.html', [
   'Curriculum vitae',
-  'Work record across service, education, community, and projects.',
+  'Education, research, community development, arts, service, and independent project work.',
   'Relevant experience',
   'Focus areas',
   'Places behind the work',

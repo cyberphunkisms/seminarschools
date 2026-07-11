@@ -85,6 +85,9 @@ for (const section of sections) {
   }
 }
 lines.push('');
+lines.push('Source lineage archive');
+lines.push('- Pre-Meaninglib source archive: https://seminarschools.com/polymyth/archive/pre-meaninglib/ — verbatim PDFs, text mirrors, legacy lexicon inventory, Carrd snapshot, and complete link register.');
+lines.push('');
 lines.push('Sibling star files');
 const siblings = [
   ['modulecanon', 'polymyth/modulecanon.txt', 'Curriculum and module architecture'],

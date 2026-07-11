@@ -1,14 +1,14 @@
 {
   "schema": "page-size-budget-v2",
   "updated": "2026-07-10",
-  "policy": "Budget tracks current large HTML pages after the BB mechanics synthesis and the public BBT research synthesis. Canonical source pages remain intact; ceilings permit intentional documented growth while blocking accidental bloat.",
+  "policy": "Budget tracks current large HTML pages after the BB mechanics synthesis, public BBT research synthesis, and the documented pre-Meaninglib source integration. Canonical source pages and complete link registers remain intact; ceilings permit intentional documented growth while blocking accidental bloat.",
   "budgetedLargePages": [
     {
       "path": "polymyth/methodologylist/index.html",
-      "bytes": 3883147,
+      "bytes": 3920948,
       "route": "/polymyth/methodologylist/",
-      "ceilingBytes": 3918147,
-      "status": "canonical-heavy; July 9 linkability doctrine entry added intentionally; guard prevents accidental bloat before dialectical chunking decision"
+      "ceilingBytes": 3955948,
+      "status": "canonical-heavy; pre-Meaninglib lineage, verbatim rule, recovered ouroboros logic, Carrd bridge, and citation entries added intentionally; 35 KB guard remains before dialectical chunking decision"
     },
     {
       "path": "polymyth/methodologylist/methodology/index.html",
@@ -61,10 +61,10 @@
     },
     {
       "path": "polymyth/methodologylist/citation/index.html",
-      "bytes": 518480,
+      "bytes": 572905,
       "route": "/polymyth/methodologylist/citation/",
-      "ceilingBytes": 548194,
-      "status": "known-heavy; render-contained and budgeted to prevent regression"
+      "ceilingBytes": 607905,
+      "status": "canonical-heavy; complete occurrence-level source links and all recovered Urban Dictionary URLs added intentionally; 35 KB guard remains before dialectical chunking decision"
     },
     {
       "path": "polymyth/methodologylist/gorgonification/index.html",

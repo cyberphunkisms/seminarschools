@@ -72,6 +72,8 @@ const SECTION_LABELS = {
   polycognate: 'POLYCOGNATE',
   learnings: 'LEARNINGS',
   coreplus: 'COREPLUS',
+  corehistory: 'CORE HISTORY',
+  'framework-core': 'FRAMEWORK CORE',
   pending: 'PENDING',
 };
 

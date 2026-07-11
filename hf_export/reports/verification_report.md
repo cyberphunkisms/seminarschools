@@ -1,6 +1,6 @@
 # Meaninglib dataset verification report
 
-Generated: 2026-07-10T05:55:01.001Z
+Generated: 2026-07-11T22:53:43.851Z
 
 Failures: 0
 Warnings: 0
@@ -14,8 +14,8 @@ Warnings: 0
 - PASS: found hf_export/data/relations/crossrefs.jsonl
 - PASS: found hf_export/reports/latest_export_report.md
 - PASS: found hf_export/schemas/meaninglib_entry.schema.json
-- PASS: total rows: 2033
-- PASS: ml row count 1253
+- PASS: total rows: 2053
+- PASS: ml row count 1273
 - PASS: bb row count 246
 - PASS: mc row count 234
 - PASS: cc row count 296
@@ -27,4 +27,4 @@ Warnings: 0
 - PASS: README names Meaninglib
 - PASS: README states interdependence ontology
 - PASS: README avoids rejected ML* hierarchy language
-- PASS: jsonl files found: 25
+- PASS: jsonl files found: 26

@@ -11,37 +11,138 @@
     "florilegium",
     "polymyth/trace",
     "agora",
-    "saul"
+    "saul",
+    "polymyth/archive/pre-meaninglib"
   ],
   "ogExempt": [
     "leizu/flyer"
   ],
   "bornAliveExempt": [],
   "snippetAllow": [
-    { "file": "campaigns/studio-qibla/index.html", "type": "DASH", "max": 3 },
-    { "file": "campaigns/studio-qibla/pregame/index.html", "type": "DASH", "max": 1 },
-    { "file": "campaigns/thank-you-mam/index.html", "type": "DASH", "max": 1 },
-    { "file": "polymyth/notebook/index.html", "type": "DASH", "max": 1 },
-    { "file": "polymyth/polymythdnd/index.html", "type": "DASH", "max": 1 },
-    { "file": "bb/why/index.html", "type": "DASH", "max": 15 },
-    { "file": "bb/why/zh/index.html", "type": "DASH", "max": 15 },
-    { "file": "aa/editorial.html", "type": "NEGDEF", "max": 5 },
-    { "file": "bookwormcard/about/index.html", "type": "NEGDEF", "max": 2 },
-    { "file": "bookwormcard/glossary/index.html", "type": "NEGDEF", "max": 1 },
-    { "file": "bookwormcard/print/index.html", "type": "NEGDEF", "max": 5 },
-    { "file": "campaigns/studio-qibla/index.html", "type": "NEGDEF", "max": 1 },
-    { "file": "campaigns/studio-qibla/pregame/index.html", "type": "NEGDEF", "max": 1 },
-    { "file": "campaigns/thank-you-mam/index.html", "type": "NEGDEF", "max": 1 },
-    { "file": "campaigns/thank-you-mam/pregame/index.html", "type": "NEGDEF", "max": 8 },
-    { "file": "leizu/donate/index.html", "type": "NEGDEF", "max": 1 },
-    { "file": "leizu/index.html", "type": "NEGDEF", "max": 1 },
-    { "file": "leizu/policies/index.html", "type": "NEGDEF", "max": 3 },
-    { "file": "leizu/scholarship/index.html", "type": "NEGDEF", "max": 4 },
-    { "file": "leizu/teach/index.html", "type": "NEGDEF", "max": 2 },
-    { "file": "nutrition/index.html", "type": "NEGDEF", "max": 1 },
-    { "file": "ohm-dome/index.html", "type": "NEGDEF", "max": 2 },
-    { "file": "teacherresources/index.html", "type": "NEGDEF", "max": 1 },
-    { "file": "teacherresources/pedagogical-case/index.html", "type": "NEGDEF", "max": 2 },
-    { "file": "campaigns/thank-you-mam/pregame/index.html", "type": "FILLER", "max": 2 }
+    {
+      "file": "campaigns/studio-qibla/index.html",
+      "type": "DASH",
+      "max": 3
+    },
+    {
+      "file": "campaigns/studio-qibla/pregame/index.html",
+      "type": "DASH",
+      "max": 1
+    },
+    {
+      "file": "campaigns/thank-you-mam/index.html",
+      "type": "DASH",
+      "max": 1
+    },
+    {
+      "file": "polymyth/notebook/index.html",
+      "type": "DASH",
+      "max": 1
+    },
+    {
+      "file": "polymyth/polymythdnd/index.html",
+      "type": "DASH",
+      "max": 1
+    },
+    {
+      "file": "bb/why/index.html",
+      "type": "DASH",
+      "max": 15
+    },
+    {
+      "file": "bb/why/zh/index.html",
+      "type": "DASH",
+      "max": 15
+    },
+    {
+      "file": "aa/editorial.html",
+      "type": "NEGDEF",
+      "max": 5
+    },
+    {
+      "file": "bookwormcard/about/index.html",
+      "type": "NEGDEF",
+      "max": 2
+    },
+    {
+      "file": "bookwormcard/glossary/index.html",
+      "type": "NEGDEF",
+      "max": 1
+    },
+    {
+      "file": "bookwormcard/print/index.html",
+      "type": "NEGDEF",
+      "max": 5
+    },
+    {
+      "file": "campaigns/studio-qibla/index.html",
+      "type": "NEGDEF",
+      "max": 1
+    },
+    {
+      "file": "campaigns/studio-qibla/pregame/index.html",
+      "type": "NEGDEF",
+      "max": 1
+    },
+    {
+      "file": "campaigns/thank-you-mam/index.html",
+      "type": "NEGDEF",
+      "max": 1
+    },
+    {
+      "file": "campaigns/thank-you-mam/pregame/index.html",
+      "type": "NEGDEF",
+      "max": 8
+    },
+    {
+      "file": "leizu/donate/index.html",
+      "type": "NEGDEF",
+      "max": 1
+    },
+    {
+      "file": "leizu/index.html",
+      "type": "NEGDEF",
+      "max": 1
+    },
+    {
+      "file": "leizu/policies/index.html",
+      "type": "NEGDEF",
+      "max": 3
+    },
+    {
+      "file": "leizu/scholarship/index.html",
+      "type": "NEGDEF",
+      "max": 4
+    },
+    {
+      "file": "leizu/teach/index.html",
+      "type": "NEGDEF",
+      "max": 2
+    },
+    {
+      "file": "nutrition/index.html",
+      "type": "NEGDEF",
+      "max": 1
+    },
+    {
+      "file": "ohm-dome/index.html",
+      "type": "NEGDEF",
+      "max": 2
+    },
+    {
+      "file": "teacherresources/index.html",
+      "type": "NEGDEF",
+      "max": 1
+    },
+    {
+      "file": "teacherresources/pedagogical-case/index.html",
+      "type": "NEGDEF",
+      "max": 2
+    },
+    {
+      "file": "campaigns/thank-you-mam/pregame/index.html",
+      "type": "FILLER",
+      "max": 2
+    }
   ]
 }
