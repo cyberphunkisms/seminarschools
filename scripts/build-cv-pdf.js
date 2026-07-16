@@ -65,7 +65,7 @@ const PRINT_FOCUS = {
   seminarschools:'Independent website and project archive with published resources, public information, teaching tools and clearly labelled work in development.'
 };
 const focusSummary = PRINT_FOCUS[view] || (activeCats.length===1 ? PRINT_FOCUS[activeCats[0]] : activeCats.map(c=>firstSentence(PRINT_FOCUS[c])).filter(Boolean).join(' '));
-const COMPETENCIES = ['Google Forms, surveys and questionnaires','Qualitative interpretation and thematic review','Excel budgeting, formulas, tables and charts','Reports, workshops and presentations','Program and event coordination','Stakeholder communication','Source verification and data-quality review','Basic French, Farsi and Mandarin'];
+const COMPETENCIES = ['Google Forms, surveys and questionnaires','Qualitative interpretation and thematic review','Excel budgeting, formulas, tables and charts','Reports, workshops and presentations','Program and event coordination','Stakeholder communication','Source verification and data-quality review','Farsi (advanced); French and Mandarin (basic)'];
 const COMP_BY_CAT = {
   teaching:['Google Forms, surveys and questionnaires','Qualitative interpretation and thematic review','Reports, workshops and presentations','Stakeholder communication'],
   education:['Google Forms, surveys and questionnaires','Excel budgeting, formulas, tables and charts','Source verification and data-quality review','Reports, workshops and presentations'],

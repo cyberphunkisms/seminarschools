@@ -85,7 +85,7 @@ const release = {
 fs.writeFileSync(path.join(OUT, 'site-release.json'), JSON.stringify(release, null, 2) + '\n');
 // Hygiene check: the deploy dir must not contain tool/operator roots.
 const failures = [];
-for (const p of ['scripts', 'data', 'hf_export', 'netlify', '.github', 'package.json', 'package-lock.json', 'netlify.toml']) {
+for (const p of ['scripts', 'data', 'hf_export', 'netlify', '.github', 'node_modules', '.git', '.netlify', 'package.json', 'package-lock.json', 'netlify.toml']) {
   if (fs.existsSync(path.join(OUT, p))) failures.push(`public/${p}`);
 }
 function walkCheck(dir){

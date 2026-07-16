@@ -1,6 +1,6 @@
 {
-  "release_id": "2026-07-11-saul-online-cv-610-point-synthesis",
-  "generated_at": "2026-07-11T22:53:20Z",
+  "release_id": "2026-07-16-full-cv-seo-final6-deploy-ready",
+  "generated_at": "2026-07-16T02:47:24Z",
   "publish_dir": "public",
   "notes": [
     "Integrated Chapter 0 Working Draft 4 as a complete source-preserving prose overhaul with the approved WHAT MATTERS? prelude, full movement architecture, Full Circle index, and 70-entry Subject and Object map",
@@ -22,11 +22,20 @@
     "Replaced retired 1,000+ language with the locked wording thousands of learners and removed unsupported PhD-candidate status",
     "Corrected Campus Crops as paid work, strengthened founder-level refugee initiative evidence, and added Google Forms, Excel budgeting, teacher development, Screen Arts, current volunteering, languages, and dated professional development",
     "Separated published work, development-stage projects, and conceptual projects across Seminar Schools, Polymythcal, Bookworm Burrows, The Agora, and Ohm Dome",
-    "Regenerated /saul/cv.pdf, added a structured CV verification ledger, updated dedicated guards, and synchronized the public deploy mirror"
+    "Regenerated /saul/cv.pdf, added a structured CV verification ledger, updated dedicated guards, and synchronized the public deploy mirror",
+    "Removed the redundant public/data/saul-cv-canonical-2026.json copy while preserving data/saul-cv-canonical-2026.json in the complete source archive.",
+    "Added an exact FINAL6 deploy-contract guard for public/scripts, public/data, public/hf_export, public/.github, public/node_modules, public/.git, and public/.netlify.",
+    "Wired the FINAL6 guard into the central release runner and strengthened build-public-deploy.js so future public builds reject the same seven forbidden internal folders.",
+    "Preserved every current CV webpage, PDF, text output, route, source record, search surface, and public-facing asset while restoring deployability.",
+    "Reconciled the 12 canonical focused CV routes with the sitemap and search-surface manifest; the noindex legacy /saul/hospitality/ alias is no longer listed in the sitemap.",
+    "Applied the shared geometry, zoom, typography, keyboard, favicon/manifest, and route-integrity contracts to every focused CV webpage and the preserved hospitality alias.",
+    "Rebuilt the general static CV PDF with complete release metadata and refreshed the modular CV sample archives with the current outputs and state-audit records.",
+    "Updated Saul page verification to understand the decluttered role-focus workflow, declarative application/json data block, and collapsed complete career archive without reintroducing duplicate front-facing controls.",
+    "Validated the complete final tree through the central 82-command release runner after the FINAL6 deploy-contract repair."
   ],
   "meaninglib_entries": 1139,
   "coreplus_active_entries": 46,
   "core_history_entries": 18,
   "memory_operations_requested": 2,
-  "release_verification": "All 81 release checks passed; all eight role-specific CV exports generated as one-page PDFs; source/public Saul page and PDF parity confirmed."
+  "release_verification": "82/82 central release checks passed after rebuilding /public; exact FINAL6 deploy-contract verification passed; ZIP-level expansion simulation is required before delivery and recorded in the external checksum report."
 }

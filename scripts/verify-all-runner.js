@@ -24,6 +24,7 @@ const checks = [
   'node scripts/verify-external-link-workflow.js',
   'node scripts/verify-release-gates.js',
   'node scripts/verify-public-artifact-blocks.js',
+  'node scripts/verify-final6-deploy-contract.js',
   'node scripts/verify-npm-public-registry.js',
   'node scripts/verify-search-surface.js',
   'node scripts/verify-calendar-aliases.js',

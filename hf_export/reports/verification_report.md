@@ -1,6 +1,6 @@
 # Meaninglib dataset verification report
 
-Generated: 2026-07-11T22:53:43.851Z
+Generated: 2026-07-16T02:47:38.879Z
 
 Failures: 0
 Warnings: 0

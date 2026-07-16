@@ -30,13 +30,6 @@ const required = [
   'id="moduleStatus"',
   'Focus filters',
   'Choose one or more areas before downloading.',
-  'data-cat="kitchen">Culinary Hospitality</button>',
-  'data-cat="teaching">Teaching</button>',
-  'data-cat="community">Community</button>',
-  'data-cat="education">Education</button>',
-  'data-cat="volunteer">Volunteer</button>',
-  'data-cat="performance">Performance</button>',
-  'data-cat="seminarschools">Portfolio</button>',
   'const CAT_ALIASES',
   "portfolio: 'seminarschools'",
   "culinary: 'kitchen'",
@@ -52,6 +45,32 @@ const required = [
   'google.com/maps/d/embed?mid=1n92i0SyhgddNp4TZjLFW8GW6Nzk9JH1B',
   'Saul Karim Nassau <span class="post">MA</span>',
   'data-saul-modular-cv="true"',
+  'class="cv-v3"',
+  'name="cv-focus"',
+  'value="hospitality"',
+  'value="research"',
+  'value="teaching"',
+  'value="programs"',
+  'value="customer-education"',
+  'value="arts-culture"',
+  'value="performance"',
+  'value="portfolio"',
+  'value="community"',
+  'value="volunteer-events"',
+  'data-cv-option="education"',
+  'data-cv-option="training"',
+  'data-cv-option="languages"',
+  'data-cv-option="archive"',
+  'data-cv-designed',
+  'data-cv-ats',
+  'data-cv-text',
+  'data-cv-route',
+  'data-cv-print',
+  'data-cv-copy',
+  'class="cv-v3__archive"',
+  'Complete career archive',
+  'id="cv-v3-data" type="application/json"',
+  'saul-cv-v3.js',
   'function renderProfile()',
   'renderProfile();',
   'CV_OUTPUT_REVAMP_2026_07_09',
@@ -95,9 +114,17 @@ const banned = [
 ];
 for (const token of banned) if (html.includes(token)) errors.push(`Backtracked/strawman Saul page element remains: ${token}`);
 
-const introEnd = html.indexOf('<section class="archive-shell"', html.indexOf('class="cv-intro"'));
-const filters = html.indexOf('id="filterNav"');
-if (introEnd < 0 || filters < 0 || filters < introEnd) errors.push('Detailed filters appear before the professional front page/archive boundary.');
+const front = html.indexOf('class="cv-v3"');
+const archive = html.indexOf('<details class="cv-v3__archive"');
+if (front < 0 || archive < 0 || archive < front) errors.push('Complete archive no longer follows the role-facing CV workflow.');
+const focusCount = (html.match(/name="cv-focus"/g) || []).length;
+const optionCount = (html.match(/data-cv-option=/g) || []).length;
+const workflowCount = (html.match(/<section[^>]+class="cv-v3"/g) || []).length;
+if (focusCount !== 11) errors.push(`Expected 11 role-focus controls; found ${focusCount}.`);
+if (optionCount !== 4) errors.push(`Expected 4 supporting-module controls; found ${optionCount}.`);
+if (workflowCount !== 1) errors.push(`Expected one front-facing CV workflow; found ${workflowCount}.`);
+const legacyFilter = html.search(/<[^>]+id=["']filterNav["']/i);
+if (legacyFilter >= 0 && legacyFilter < archive) errors.push('Legacy duplicate filter navigation returned before the collapsed complete archive.');
 
 if (!/function buildPrintCv\(\)[\s\S]*activeCats\.length[\s\S]*PRINT_FOCUS[\s\S]*focusSummary/.test(html)) {
   errors.push('PDF builder no longer routes top profile copy by selected CV module.');
@@ -110,7 +137,8 @@ if (!/document\.getElementById\("saveBtn"\)\.addEventListener\("click"[\s\S]*bui
 }
 
 const scripts = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)]
-  .map(m => m[0].includes('application/ld+json') ? null : m[1])
+  // JSON data blocks are declarative payloads, not executable JavaScript.
+  .map(m => /type=["']application\/(?:ld\+)?json["']/i.test(m[0]) ? null : m[1])
   .filter(Boolean);
 const tmpDir = fs.mkdtempSync(path.join(require('os').tmpdir(), 'saul-js-'));
 try {

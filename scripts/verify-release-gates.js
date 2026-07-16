@@ -21,11 +21,13 @@ const mustInclude = [
   'verify-meaninglib-dataset.js',
   'verify-meaninglib-search.js',
   'verify-ai-access-pack.js',
-  'build-public-deploy.js'
+  'build-public-deploy.js',
+  'verify-final6-deploy-contract.js'
 ];
 check('package verify:all points to central runner', pkg.scripts && pkg.scripts['verify:all'] === 'node scripts/verify-all-runner.js');
 check('package verify:release points to central runner', pkg.scripts && pkg.scripts['verify:release'] === 'node scripts/verify-all-runner.js');
 check('package verify:all:serial points to central runner', pkg.scripts && pkg.scripts['verify:all:serial'] === 'node scripts/verify-all-runner.js');
+check('package exposes exact FINAL6 deploy-contract guard', pkg.scripts && pkg.scripts['verify:final6-deploy-contract'] === 'node scripts/verify-final6-deploy-contract.js');
 for (const token of mustInclude) check('release runner includes ' + token, runner.includes(token));
 check('release runner writes gate report', runner.includes('release-gate-report.json'));
 if (fail) {

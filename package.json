@@ -1,7 +1,7 @@
 {
   "name": "seminar-schools-leizu-pipeline",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Secure Leizu intake, payment, booking, and confirmation pipeline.",
   "scripts": {
     "verify:payments": "node scripts/verify-payments.js",
@@ -102,7 +102,8 @@
     "verify:bbt-upcoming": "node scripts/verify-bbt-upcoming.js",
     "apply:sitewide-type-zoom": "node scripts/apply-sitewide-type-zoom-link.js",
     "apply:type-floor": "node scripts/apply-type-floor.js",
-    "verify:reviews-zoom-font": "node scripts/verify-reviews-zoom-font-release.js"
+    "verify:reviews-zoom-font": "node scripts/verify-reviews-zoom-font-release.js",
+    "verify:final6-deploy-contract": "node scripts/verify-final6-deploy-contract.js"
   },
   "dependencies": {
     "@netlify/blobs": "^10.1.0"

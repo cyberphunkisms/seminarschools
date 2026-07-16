@@ -1,0 +1,16 @@
+{
+  "contract": "SeminarSchools-Deploy-FINAL6 public deploy surface",
+  "forbidden_public_paths": [
+    "public/scripts",
+    "public/data",
+    "public/hf_export",
+    "public/.github",
+    "public/node_modules",
+    "public/.git",
+    "public/.netlify"
+  ],
+  "removed_path": "public/data/saul-cv-canonical-2026.json",
+  "preserved_source_path": "data/saul-cv-canonical-2026.json",
+  "runtime_references_to_removed_file": 0,
+  "release_gate": "scripts/verify-final6-deploy-contract.js"
+}
