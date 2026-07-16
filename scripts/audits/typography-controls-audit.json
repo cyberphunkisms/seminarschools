@@ -1,6 +1,6 @@
 {
-  "checkedFiles": 1078,
-  "tinyFontDeclarationsUnder10_5px": 13,
+  "checkedFiles": 1080,
+  "tinyFontDeclarationsUnder10_5px": 14,
   "examples": [
     {
       "file": "bookwormcard/print/index.html",
@@ -66,6 +66,11 @@
       "file": "polymyth/devilsdiary/8/index.html",
       "value": "0.62em",
       "px": 9.9
+    },
+    {
+      "file": "saul/assets/saul-cv-spectrum-2026.css",
+      "value": ".58rem",
+      "px": 9.3
     }
   ]
 }

@@ -83,6 +83,7 @@ const checks = [
   'node scripts/verify-main-page.js',
   'node scripts/verify-main-leizu-funnel.js',
   'node scripts/verify-saul-page.js',
+  'node scripts/verify-saul-visual-governance.js',
   'node scripts/verify-front-facing-boundary.js',
   'node scripts/verify-meaninglib-dataset.js',
   'node scripts/verify-linkability-overhaul.js',

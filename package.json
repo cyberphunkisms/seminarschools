@@ -103,7 +103,9 @@
     "apply:sitewide-type-zoom": "node scripts/apply-sitewide-type-zoom-link.js",
     "apply:type-floor": "node scripts/apply-type-floor.js",
     "verify:reviews-zoom-font": "node scripts/verify-reviews-zoom-font-release.js",
-    "verify:final6-deploy-contract": "node scripts/verify-final6-deploy-contract.js"
+    "verify:final6-deploy-contract": "node scripts/verify-final6-deploy-contract.js",
+    "build:saul-cv": "node scripts/build-cv-pdf.js",
+    "verify:saul-visual": "node scripts/verify-saul-visual-governance.js"
   },
   "dependencies": {
     "@netlify/blobs": "^10.1.0"

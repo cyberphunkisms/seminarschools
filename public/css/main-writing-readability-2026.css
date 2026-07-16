@@ -1,0 +1,9 @@
+
+/* Main writing-list readability repair - stable project names, flexible descriptions - 2026-07-16 */
+#writing .entry{grid-template-columns:50px minmax(18rem,.48fr) minmax(22rem,1fr)!important;align-items:start!important;column-gap:clamp(1rem,2.25vw,2.35rem)!important}
+#writing .entry .title,#writing .entry .where{min-width:0!important}
+#writing .entry .title{font-size:clamp(1.05rem,1.45vw,1.35rem)!important;line-height:1.24!important;overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important}
+#writing .entry .title a{display:inline!important;white-space:normal!important;overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important}
+#writing .entry .where{white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;line-height:1.62!important}
+@media(max-width:1000px){#writing .entry{grid-template-columns:36px minmax(0,1fr)!important;row-gap:.28rem!important}#writing .entry .title{grid-column:2!important}#writing .entry .where{grid-column:2!important;margin-top:0!important}}
+@media(max-width:560px){#writing .entry .title,#writing .entry .title a{overflow-wrap:anywhere!important;word-break:normal!important}}

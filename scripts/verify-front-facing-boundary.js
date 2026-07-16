@@ -29,13 +29,13 @@ function requireNotVisible(rel, tokens){
 }
 requireHas('saul/index.html', [
   'Curriculum vitae',
-  'Education, research, community development, arts, service, and independent project work.',
-  'Relevant experience',
-  'Focus areas',
+  'Selected experience',
+  'Current focus',
   'Places behind the work',
   'Work record',
-  'Focus filters',
-  'Download current CV'
+  'Combine focus areas',
+  'Download professional PDF',
+  'The webpage is the visual record. Downloaded PDFs use a separate professional monochrome design.'
 ]);
 requireNotVisible('saul/index.html', [
   'CV builder',

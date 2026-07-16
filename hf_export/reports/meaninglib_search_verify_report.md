@@ -1,6 +1,6 @@
 # Meaninglib search verification report
 
-Generated: 2026-07-16T02:47:30.032Z
+Generated: 2026-07-16T19:05:35.409Z
 
 Index: hf_export/search/meaninglib_search_index.json
 Documents: 2054

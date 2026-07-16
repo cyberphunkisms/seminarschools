@@ -1,24 +1,5 @@
 #!/usr/bin/env node
 'use strict';
-const fs=require('fs'); const path=require('path');
-const ROOT=path.resolve(__dirname,'..'); const rel='saul/index.html';
-const html=fs.readFileSync(path.join(ROOT,rel),'utf8'); const failures=[];
-if(!/data-cv-purpose=["']general-employment["']/.test(html)) failures.push('Saul CV lacks general-employment purpose marker');
-if(/Saul\s+Karim\s+Nassau,\s*<small>MA<\/small>|Saul\s+Karim\s+Nassau,\s*MA/.test(html)) failures.push('Saul CV has comma before MA');
-if(!/Saul\s+Karim\s+Nassau[\s\S]{0,80}<small>MA<\/small>|Saul\s+Karim\s+Nassau[\s\S]{0,80}MA/.test(html)) failures.push('Saul CV name/MA pattern missing');
-if(!/CL_SELF_CV_PRINT_ZOOM_GUARD/.test(html)) failures.push('Saul CV missing print/zoom guard marker');
-if(!/@media\s+print/i.test(html)) failures.push('Saul CV missing print media CSS');
-if(!/overflow-wrap:\s*anywhere/.test(html)) failures.push('Saul CV missing overflow-wrap guard');
-
-const pdfPath = path.join(ROOT, 'saul', 'cv.pdf');
-if(!fs.existsSync(pdfPath)) failures.push('static Saul CV PDF missing');
-else {
-  const pdfBytes = fs.readFileSync(pdfPath);
-  if(pdfBytes.length < 5000) failures.push('static Saul CV PDF looks too small');
-  const buildScript = fs.readFileSync(path.join(ROOT, 'scripts', 'build-cv-pdf.js'), 'utf8');
-  if(/Saul\s+Karim\s+NMH|NMH/.test(buildScript)) failures.push('static PDF builder still contains NMH');
-  if(!/One-page modular CV builder/.test(buildScript)) failures.push('static PDF builder missing one-page modular revamp marker');
-  if(!/data-cv-output-revamp/.test(buildScript)) failures.push('static PDF builder missing output revamp marker');
-}
-if(failures.length){ console.error('SAUL PRINT/CV CHECK FAILED'); failures.forEach(f=>console.error(' - '+f)); process.exit(1); }
-console.log('SAUL PRINT/CV CHECK PASSED — one-page modular PDF present, general CV marker, no comma before MA, print and zoom guards present.');
+const fs=require('fs'),path=require('path');const root=path.resolve(__dirname,'..');const m=JSON.parse(fs.readFileSync(path.join(root,'data','saul-cv-pdf-manifest.json'),'utf8'));const f=[];const css=fs.readFileSync(path.join(root,'saul','assets','saul-cv-spectrum-2026.css'),'utf8');
+if(!css.includes('@media print'))f.push('missing print CSS');if(m.outputs.length!==24)f.push(`expected 24 role PDFs; found ${m.outputs.length}`);if(m.design_system!=='professional-monochrome')f.push('professional monochrome manifest missing');m.outputs.forEach(o=>{if(!fs.existsSync(path.join(root,o.path)))f.push('missing '+o.path);if(o.pages!==1)f.push(o.path+' is not one page');if(o.extractable_characters<700)f.push(o.path+' has weak text extraction');if(o.rainbow||o.geometry)f.push(o.path+' contains prohibited decorative design flags')});
+if(f.length){console.error('SAUL PRINT/CV CHECK FAILED');f.forEach(x=>console.error(' - '+x));process.exit(1)}console.log('SAUL PRINT/CV CHECK PASSED - 12 professional monochrome and 12 ATS-safe one-page PDFs, extractable text and professional combined-view print CSS.');

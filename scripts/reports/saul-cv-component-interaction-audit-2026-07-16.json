@@ -1,0 +1,48 @@
+{
+  "states": {
+    "general": {
+      "role": "GENERAL / ANY ROLE",
+      "post": "",
+      "designed_href": "/saul/downloads/saul-karim-nassau-general-cv.pdf",
+      "designed_label": "Download professional PDF",
+      "h1_count": 1,
+      "horizontal_overflow": false,
+      "spectrum_segments": 8
+    },
+    "hospitality": {
+      "role": "CAF\u00c9, FOOD SERVICE & HOSPITALITY",
+      "post": "",
+      "designed_href": "/saul/downloads/saul-karim-nassau-hospitality-cv.pdf",
+      "designed_label": "Download professional PDF",
+      "h1_count": 1,
+      "horizontal_overflow": false,
+      "spectrum_segments": 8
+    },
+    "education": {
+      "role": "EDUCATION & ACADEMIC BACKGROUND",
+      "post": ", MA",
+      "designed_href": "/saul/downloads/saul-karim-nassau-education-cv.pdf",
+      "designed_label": "Download professional PDF",
+      "h1_count": 1,
+      "horizontal_overflow": false,
+      "spectrum_segments": 8
+    },
+    "hospitality_community": {
+      "role": "HOSPITALITY + COMMUNITY",
+      "post": "",
+      "designed_href": "#",
+      "designed_label": "Save combined view as PDF",
+      "h1_count": 1,
+      "horizontal_overflow": false,
+      "spectrum_segments": 8
+    }
+  },
+  "page_errors": [],
+  "mobile": {
+    "horizontal_overflow": false,
+    "card_width": 330,
+    "viewport_width": 390,
+    "portrait_height": 640,
+    "h1_count": 1
+  }
+}
