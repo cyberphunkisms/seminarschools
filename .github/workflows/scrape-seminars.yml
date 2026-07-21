@@ -9,8 +9,11 @@ on:
   schedule:
     - cron: "18 8 * * 1,4"
 concurrency:
-  group: scrape-seminars-${{ github.ref }}
+  group: polymythcal-publish-${{ github.ref }}
   cancel-in-progress: false
+permissions:
+  contents: write
+  pull-requests: write
 jobs:
   harvest:
     runs-on: ubuntu-latest
@@ -32,8 +35,14 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+      - name: Install calendar dependencies
+        run: python3 -m pip install --disable-pip-version-check beautifulsoup4 requests python-dateutil jsonschema
+      - name: Test Polymythcal adapters and lifecycle
+        run: |
+          python3 -m unittest scripts/test_polymythcal_adapters.py
+          python3 -m unittest scripts/test_polymythcal_lifecycle.py
       - name: Install Claude Code CLI
-        run: npm install -g @anthropic-ai/claude-code
+        run: npm install -g @anthropic-ai/claude-code@2.1.14
       - name: Claude version
         run: claude --version
       - name: Run seminar harvest
@@ -42,13 +51,30 @@ jobs:
         if: always()
         run: node scripts/summarize-harvest-status.js >> "$GITHUB_STEP_SUMMARY"
       - name: Verify generated calendar
-        run: npm run verify:calendar-data
+        run: |
+          python3 scripts/validate-polymythcal.py
+          npm run verify:calendar-data
+          npm run verify:polymythcal-audit14
+      - name: Create publication pull request
+        if: success()
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/polymythcal-${{ github.workflow }}
+          delete-branch: true
+          commit-message: "Update Polymythcal verified data"
+          title: "Polymythcal verified harvest update"
+          body: "Automated harvest passed canonical semantic validation. Review the event diff, qualifications, lifecycle changes, and source diagnostics before merging."
+          labels: polymythcal,automated-harvest
       - name: Preserve harvest diagnostics
         if: always()
         uses: actions/upload-artifact@v6
         with:
           name: seminar-harvest-diagnostics
-          path: data/harvest-runs/**
+          path: |
+            data/harvest-runs/**
+            data/polymythcal-lifecycle-log.json
+            data/polymythcal-lifecycle-state.json
       - name: Summarize harvest diagnostics
         if: always()
         run: bash scripts/summarize-harvest-diagnostics.sh

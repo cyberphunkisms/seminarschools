@@ -11,7 +11,7 @@ const failures = [];
 function fail(x){ failures.push(x); }
 function fileFor(route){ if(route === '/') return 'index.html'; return route.replace(/^\//,'').replace(/\/$/,'') + '/index.html'; }
 function read(rel){ return fs.existsSync(path.join(ROOT, rel)) ? fs.readFileSync(path.join(ROOT, rel), 'utf8') : ''; }
-function hasNoindex(html){ return /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html); }
+function hasNoindex(html){ return /<meta\b(?=[^>]*name=["']robots["'])(?=[^>]*content=["'][^"']*noindex)[^>]*>/i.test(html); }
 function routeInSitemap(route){ return sitemap.includes(`<loc>${SITE}${route}</loc>`); }
 if(!/^seminarschools-route-doctrine-v2/.test(doctrine.schema || '')) fail('route doctrine schema must be v2');
 if(!Array.isArray(doctrine.routes) || doctrine.routes.length < 40) fail('route doctrine must govern at least 40 explicit routes');

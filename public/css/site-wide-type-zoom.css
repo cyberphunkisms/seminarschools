@@ -186,3 +186,10 @@ body {
   body { overflow: visible; }
   :where(h1, h2, h3, h4, h5, h6) { text-wrap: wrap; }
 }
+
+
+/* FINAL8_ACCESSIBILITY_POLISH */
+.visually-hidden,.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.skip-link{position:fixed;z-index:99999;top:.75rem;left:-9999px;padding:.72rem .9rem;border:2px solid currentColor;border-radius:9px;background:var(--bg-soft,#fff);color:var(--fg,#111);font:750 .78rem/1 system-ui,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.16)}
+.skip-link:focus{left:.75rem}
+:where(button,[role="button"],input[type="button"],input[type="submit"],input[type="reset"]){min-height:44px}

@@ -300,7 +300,7 @@ if 'data-profile="reviews"' not in s:
     s = s.replace('<button class="cv-action" type="button" id="downloadCvTop" data-profile="download">Download CV</button>', '<button class="cv-action" type="button" id="downloadCvTop" data-profile="download">Download CV</button>\n        <a class="cv-action" href="/reviews/" data-profile="reviews">Reviews &amp; references</a>')
 s = s.replace('intake: "Contact", seminar: "View experience", download: "Download CV",', 'intake: "Contact", seminar: "View experience", download: "Download CV", reviews: "Reviews & references",')
 # Link the visible CV colophon to the new route without disturbing print generation.
-s = s.replace('Saul Karim Nassau · Toronto · <a href="/main/"', 'Saul Karim Nassau · Toronto · <a href="/reviews/" style="color:inherit;border-bottom:1px dotted currentColor;text-decoration:none;">Reviews &amp; references</a> · <a href="/main/"')
+s = s.replace('Saul Karim Nassau · Toronto · <a href="/about/"', 'Saul Karim Nassau · Toronto · <a href="/reviews/" style="color:inherit;border-bottom:1px dotted currentColor;text-decoration:none;">Reviews &amp; references</a> · <a href="/about/"')
 saul.write_text(s, encoding='utf-8')
 
 # Public deployment allowlist.
@@ -327,7 +327,7 @@ netlify.write_text(n, encoding='utf-8')
 # Footer and branch navigation discoverability.
 footer = ROOT / 'js' / 'footer.js'
 f = footer.read_text(encoding='utf-8')
-f = f.replace("['Full CV', '/saul'], ['Main', '/main']", "['Full CV', '/saul'], ['Reviews & references', '/reviews/'], ['Main', '/main']")
+f = f.replace("['Full CV', '/saul'], ['Main', '/about']", "['Full CV', '/saul'], ['Reviews & references', '/reviews/'], ['Main', '/about']")
 footer.write_text(f, encoding='utf-8')
 
 theme = ROOT / 'js' / 'theme.js'

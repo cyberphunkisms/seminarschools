@@ -105,7 +105,21 @@
     "verify:reviews-zoom-font": "node scripts/verify-reviews-zoom-font-release.js",
     "verify:final6-deploy-contract": "node scripts/verify-final6-deploy-contract.js",
     "build:saul-cv": "node scripts/build-cv-pdf.js",
-    "verify:saul-visual": "node scripts/verify-saul-visual-governance.js"
+    "verify:saul-visual": "node scripts/verify-saul-visual-governance.js",
+    "verify:saul-performance": "node scripts/verify-saul-performance-synthesis.js",
+    "verify:final8-polish": "node scripts/verify-final8-website-polish.js",
+    "verify:final9-hardening": "node scripts/verify-final9-mephistodata-website-hardening.js",
+    "verify:audit10": "node scripts/verify-audit10-remaining-website.js",
+    "verify:audit11": "node scripts/verify-audit11-website-decisions.js",
+    "verify:about-page": "node scripts/verify-main-page.js",
+    "verify:audit12": "node scripts/verify-audit12-mobile-web-hybrid.js",
+    "verify:polymythcal-truth": "python3 scripts/validate-polymythcal.py && node scripts/verify-polymythcal-audit13.js",
+    "test:polymythcal-adapters": "python3 -m unittest scripts/test_polymythcal_adapters.py",
+    "test:polymythcal-lifecycle": "python3 -m unittest scripts/test_polymythcal_lifecycle.py",
+    "build:polymythcal": "python3 scripts/finalize-polymythcal-publication.py",
+    "verify:polymythcal-audit14": "node scripts/verify-polymythcal-audit14.js",
+    "audit:polymythcal-wcag22": "python3 scripts/audit-polymythcal-wcag22.py",
+    "verify:polymythcal-complete": "npm run test:polymythcal-adapters && npm run test:polymythcal-lifecycle && npm run build:polymythcal && npm run audit:polymythcal-wcag22 && npm run verify:polymythcal-audit14"
   },
   "dependencies": {
     "@netlify/blobs": "^10.1.0"

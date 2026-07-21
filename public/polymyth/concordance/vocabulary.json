@@ -2,7 +2,7 @@
   "version": 2,
   "updated": "2026-07-09",
   "note": "Canonical contentinternet vocabulary and linkability registry. Raw star-file source remains unmutated. Generated HTML autolinks important terms through the concordance. Built by scripts/build-meaninglib-linkability-registry.js from curated terms, current vocabulary, and stable star-file lexicon cues.",
-  "totalTerms": 833,
+  "totalTerms": 838,
   "terms": [
     {
       "canonical": "related-to-blob-stone-army-typecasting-psychologism-spectacle-asymmetry-loophole-count-exit-vocabulary",
@@ -1051,6 +1051,12 @@
       "source": "existing-curated,explicit-linkability"
     },
     {
+      "canonical": "balanced-consequence-closer",
+      "pattern": "\\bbalanced[\\s\\-_]+consequence[\\s\\-_]+closer\\b",
+      "aliases": [],
+      "source": "star-tag"
+    },
+    {
       "canonical": "belonging-outside-belonging",
       "pattern": "\\bbelonging[\\s\\-_]+outside[\\s\\-_]+belonging\\b",
       "aliases": [],
@@ -1207,7 +1213,7 @@
       "canonical": "mephistodata-no-exemption",
       "pattern": "\\bmephistodata[\\s\\-_]+no[\\s\\-_]+exemption\\b",
       "aliases": [],
-      "source": "existing-curated,star-tag"
+      "source": "existing-curated"
     },
     {
       "canonical": "no-jumping-the-gun",
@@ -1237,7 +1243,7 @@
       "canonical": "substrate-first-extension",
       "pattern": "\\bsubstrate[\\s\\-_]+first[\\s\\-_]+extension\\b",
       "aliases": [],
-      "source": "existing-curated,star-tag"
+      "source": "existing-curated"
     },
     {
       "canonical": "whole-conversation-review",
@@ -1307,6 +1313,12 @@
       "pattern": "\\bcontent[\\s\\-_]+less[\\s\\-_]+imperative\\b",
       "aliases": [],
       "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "dont-be-a-gorgon",
+      "pattern": "\\bdont[\\s\\-_]+be[\\s\\-_]+a[\\s\\-_]+gorgon\\b",
+      "aliases": [],
+      "source": "star-tag"
     },
     {
       "canonical": "hole-in-hole-out",
@@ -1396,7 +1408,7 @@
       "canonical": "displaced-from-memory",
       "pattern": "\\bdisplaced[\\s\\-_]+from[\\s\\-_]+memory\\b",
       "aliases": [],
-      "source": "existing-curated,star-tag"
+      "source": "existing-curated"
     },
     {
       "canonical": "doctrine-of-discovery",
@@ -2062,7 +2074,7 @@
       "canonical": "slot-23-current",
       "pattern": "\\bslot[\\s\\-_]+23[\\s\\-_]+current\\b",
       "aliases": [],
-      "source": "star-tag"
+      "source": "existing-curated"
     },
     {
       "canonical": "so-youre-saying",
@@ -2404,19 +2416,19 @@
       "canonical": "core-slot-16",
       "pattern": "\\bcore[\\s\\-_]+slot[\\s\\-_]+16\\b",
       "aliases": [],
-      "source": "existing-curated,star-tag"
+      "source": "existing-curated"
     },
     {
       "canonical": "core-slot-24",
       "pattern": "\\bcore[\\s\\-_]+slot[\\s\\-_]+24\\b",
       "aliases": [],
-      "source": "existing-curated,star-tag"
+      "source": "existing-curated"
     },
     {
       "canonical": "core-slot-29",
       "pattern": "\\bcore[\\s\\-_]+slot[\\s\\-_]+29\\b",
       "aliases": [],
-      "source": "existing-curated,star-tag"
+      "source": "existing-curated"
     },
     {
       "canonical": "genealogy-inversion",
@@ -2709,7 +2721,7 @@
       "canonical": "snakelogic-impetus",
       "pattern": "\\bsnakelogic[\\s\\-_]+impetus\\b",
       "aliases": [],
-      "source": "existing-curated,star-tag"
+      "source": "existing-curated"
     },
     {
       "canonical": "structural-cognate",
@@ -2997,6 +3009,12 @@
       "source": "existing-curated,star-tag"
     },
     {
+      "canonical": "inactive-runtime",
+      "pattern": "\\binactive[\\s\\-_]+runtime\\b",
+      "aliases": [],
+      "source": "star-tag"
+    },
+    {
       "canonical": "lever-discipline",
       "pattern": "\\blever[\\s\\-_]+discipline\\b",
       "aliases": [],
@@ -3171,6 +3189,12 @@
       "source": "existing-curated,star-tag"
     },
     {
+      "canonical": "historical-stub",
+      "pattern": "\\bhistorical[\\s\\-_]+stub\\b",
+      "aliases": [],
+      "source": "star-tag"
+    },
+    {
       "canonical": "jester-aperture",
       "pattern": "\\bjester[\\s\\-_]+aperture\\b",
       "aliases": [],
@@ -3240,7 +3264,7 @@
       "canonical": "seminar-schools",
       "pattern": "\\bseminar[\\s\\-_]+schools\\b",
       "aliases": [],
-      "source": "existing-curated,star-tag"
+      "source": "existing-curated"
     },
     {
       "canonical": "ship-discipline",
@@ -3695,6 +3719,12 @@
       "source": "existing-curated,star-tag"
     },
     {
+      "canonical": "core-history",
+      "pattern": "\\bcore[\\s\\-_]+history\\b",
+      "aliases": [],
+      "source": "star-tag"
+    },
+    {
       "canonical": "definitionfederation",
       "pattern": "definitional federation",
       "aliases": [],
@@ -3896,7 +3926,7 @@
       "canonical": "file-latest",
       "pattern": "\\bfile[\\s\\-_]+latest\\b",
       "aliases": [],
-      "source": "existing-curated,star-tag"
+      "source": "existing-curated"
     },
     {
       "canonical": "full-circle",
@@ -4422,7 +4452,7 @@
       "canonical": "uncompressible",
       "pattern": "\\buncompressible\\b",
       "aliases": [],
-      "source": "existing-curated,star-tag"
+      "source": "existing-curated"
     },
     {
       "canonical": "accreditation",
@@ -4542,7 +4572,7 @@
       "canonical": "consolidated",
       "pattern": "\\bconsolidated\\b",
       "aliases": [],
-      "source": "existing-curated,star-tag"
+      "source": "existing-curated"
     },
     {
       "canonical": "meaningaxis",
@@ -4643,7 +4673,7 @@
       "canonical": "enforcement",
       "pattern": "\\benforcement\\b",
       "aliases": [],
-      "source": "existing-curated,star-tag"
+      "source": "existing-curated"
     },
     {
       "canonical": "ghostfiring",

@@ -119,7 +119,8 @@ if ! [[ "${HARVEST_ATTEMPTS}" =~ ^[1-9][0-9]*$ ]]; then
   soft_exit_or_fail 78 "HARVEST_ATTEMPTS must be a positive integer." 0
 fi
 
-SHARD=$(( 10#$(date -u +%V) % SHARD_COUNT ))
+RUN_SLOT=$(( $(date -u +%s) / 259200 ))
+SHARD=$(( RUN_SLOT % SHARD_COUNT ))
 PROMPT_BODY="Today is ${TODAY} (UTC). This run's SHARD number is ${SHARD}. SHARD_COUNT is ${SHARD_COUNT}. Crawl non-priority sources whose zero-based roster position satisfies position % ${SHARD_COUNT} == ${SHARD}. $(cat "${PROMPT_FILE}")"
 echo "=== polymythcalendar seminars harvest ${RUN_ID}; shard ${SHARD}/${SHARD_COUNT}; model ${CLAUDE_MODEL}; max ${HARVEST_TIMEOUT_SECONDS}s; budget ${MAX_BUDGET_USD}; turns ${MAX_TURNS}; attempts ${HARVEST_ATTEMPTS} ==="
 
@@ -131,9 +132,9 @@ for ATTEMPT in $(seq 1 "${HARVEST_ATTEMPTS}"); do
   timeout --signal=INT --kill-after=30s "${HARVEST_TIMEOUT_SECONDS}" \
     claude -p "${PROMPT_BODY}" \
       --model "${CLAUDE_MODEL}" \
-      --tools "WebFetch,Read,Write,Bash" \
-      --allowedTools "WebFetch,Read,Write,Bash" \
-      --permission-mode bypassPermissions \
+      --tools "WebFetch,Read,Write" \
+      --allowedTools "WebFetch,Read,Write" \
+      --permission-mode acceptEdits \
       --max-turns "${MAX_TURNS}" \
       --max-budget-usd "${MAX_BUDGET_USD}" 2>&1 | tee -a "${LOG_FILE}"
   CLAUDE_STATUS="${PIPESTATUS[0]}"

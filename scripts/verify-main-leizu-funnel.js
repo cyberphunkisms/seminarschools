@@ -7,7 +7,7 @@ function pass(label, ok) {
   console.log(`${ok ? 'PASS' : 'FAIL'} ${label}`);
   if (!ok) failed = true;
 }
-const main = read('main/index.html');
+const main = read('about/index.html');
 const intake = read('leizu/intake/index.html');
 const netlify = read('netlify.toml');
 const tree = read('polymyth/sitemap/index.html');

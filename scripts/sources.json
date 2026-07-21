@@ -1,6 +1,6 @@
 {
   "$schema_note": "Venue roster for /scripts/seminars-prompt.md. Each entry declares the venue, its event-list URL, default event type, tier priority, and render_mode hint. Read by Claude headless harvest weekly. The agent handles extraction; render_mode is a strategy hint for fetch-difficulty, not a parser selector. tier_priority 1 = must crawl, 2 = if budget permits, 3 = low priority, 4 = optional.",
-  "$updated": "2026-06-29",
+  "$updated": "2026-07-20 audit14 completion: dedicated platform adapters, lifecycle, public features, translation, feeds, accessibility.",
   "sources": [
     {
       "id": "c4e",
@@ -10,7 +10,10 @@
       "base_url": "https://sites.google.com/view/uoftc4e",
       "events_url": "https://sites.google.com/view/uoftc4e",
       "notes": "Documented as most reliable single source for Toronto philosophy lectures. Ethics@Noon-ish weekly series is the workhorse.",
-      "render_mode": "google-sites"
+      "render_mode": "google-sites",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "jhi",
@@ -21,7 +24,9 @@
       "events_url": "https://humanities.utoronto.ca/events",
       "render_mode": "drupal",
       "feed_status": "not-needed",
-      "notes": "Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices."
+      "notes": "Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "munk",
@@ -30,7 +35,9 @@
       "default_type": "lecture",
       "base_url": "https://munkschool.utoronto.ca/",
       "events_url": "https://munkschool.utoronto.ca/events",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "philevents",
@@ -39,7 +46,9 @@
       "default_type": "lecture",
       "base_url": "https://philevents.org/",
       "events_url": "https://philevents.org/regions/CA-ON",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tpl-appel",
@@ -52,7 +61,10 @@
       "feed_url": "https://tpl.bibliocommons.com/v2/events",
       "feed_format": "bibliocommons-v2-html",
       "feed_status": "verified",
-      "notes": "Feed pass 2026-06-11: /v2/events is server-rendered and fetches clean; prefer over programs-and-classes page."
+      "notes": "Feed pass 2026-06-11: /v2/events is server-rendered and fetches clean; prefer over programs-and-classes page.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "massey",
@@ -61,7 +73,10 @@
       "default_type": "lecture",
       "base_url": "https://www.masseycollege.ca/",
       "events_url": "https://www.masseycollege.ca/events/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "rom-speaks",
@@ -70,7 +85,9 @@
       "default_type": "lecture",
       "base_url": "https://www.rom.on.ca/",
       "events_url": "https://www.rom.on.ca/en/whats-on/events",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "victoria",
@@ -79,7 +96,10 @@
       "default_type": "lecture",
       "base_url": "https://www.vic.utoronto.ca/",
       "events_url": "https://www.vic.utoronto.ca/about/events",
-      "render_mode": "static"
+      "render_mode": "static",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "hart-house",
@@ -89,7 +109,10 @@
       "base_url": "https://harthouse.ca/",
       "events_url": "https://harthouse.ca/events/",
       "notes": "Covers Hart House Lecture (annual named-honorific), chapel-philosophy series, and Hart House Debates. Multiple types from one source.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "revue",
@@ -99,7 +122,9 @@
       "base_url": "https://revuecinema.ca/",
       "events_url": "https://revuecinema.ca/films/",
       "notes": "Most reliable cinema source for director-attendance signals.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "royal",
@@ -108,7 +133,9 @@
       "default_type": "screening",
       "base_url": "https://theroyal.to/",
       "events_url": "https://theroyal.to/upcoming-events/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "paradise",
@@ -117,7 +144,9 @@
       "default_type": "screening",
       "base_url": "https://paradiseonbloor.com/",
       "events_url": "https://paradiseonbloor.com/coming-soon/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "hot-docs",
@@ -127,7 +156,10 @@
       "base_url": "https://hotdocs.ca/",
       "events_url": "https://hotdocs.ca/whats-on",
       "notes": "Most director-attendance happens during the April-May Festival window. Year-round programming has fewer Q&A events.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tiff-lightbox",
@@ -136,7 +168,9 @@
       "default_type": "screening",
       "base_url": "https://tiff.net/",
       "events_url": "https://tiff.net/calendar",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "type-books",
@@ -145,7 +179,9 @@
       "default_type": "reading",
       "base_url": "https://www.typebooks.ca/",
       "events_url": "https://www.typebooks.ca/events",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ifoa",
@@ -155,7 +191,10 @@
       "base_url": "https://festivalofauthors.ca/",
       "events_url": "https://festivalofauthors.ca/events/",
       "notes": "Festival window is October-November; year-round programming is thinner.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "glad-day",
@@ -164,7 +203,9 @@
       "default_type": "reading",
       "base_url": "https://gladdaybookshop.com/",
       "events_url": "https://gladdaybookshop.com/events",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "power-plant",
@@ -173,7 +214,9 @@
       "default_type": "artist-talk",
       "base_url": "https://www.thepowerplant.org/",
       "events_url": "https://www.thepowerplant.org/Programmes.aspx",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ago",
@@ -182,7 +225,9 @@
       "default_type": "artist-talk",
       "base_url": "https://ago.ca/",
       "events_url": "https://ago.ca/events",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "moca",
@@ -191,7 +236,9 @@
       "default_type": "artist-talk",
       "base_url": "https://moca.ca/",
       "events_url": "https://moca.ca/programs/",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "philosophy-cafe-toronto",
@@ -200,7 +247,10 @@
       "default_type": "philosophy-cafe",
       "base_url": "https://www.meetup.com/",
       "events_url": "TODO - discovery method (Meetup search? FB groups? mailing list?)",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "source_mode": "discovery",
+      "harvest_enabled": false,
+      "deferred_reason": "Discovery channel requires a verified official event URL before automated crawling."
     },
     {
       "id": "agora-self",
@@ -210,7 +260,9 @@
       "base_url": "https://seminarschools.com/agora/",
       "events_url": "https://seminarschools.com/agora/",
       "notes": "Saul-hosted outdoor philosophy gathering at Barry Zukerman Amphitheatre, Earl Bales Park. Self-source; pulls from agora page directly.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "manual-curated",
@@ -220,7 +272,11 @@
       "base_url": "https://seminarschools.com/seminars/",
       "events_url": "manual",
       "notes": "Hand-curated events from data/manual-events.json. Used for lectures the auto-scraper cannot reliably capture (UofT departments without public RSS, special symposia, the Agora self-source) and for archival lectures the curator wants preserved on the seminars page.",
-      "render_mode": "manual"
+      "render_mode": "manual",
+      "platform_adapter": "university",
+      "source_mode": "manual",
+      "fetcher": "manual",
+      "harvest_enabled": true
     },
     {
       "id": "labour-council",
@@ -230,7 +286,10 @@
       "base_url": "https://labourcouncil.ca/",
       "events_url": "https://labourcouncil.ca/events/",
       "notes": "Union action calendar. Demonstrations, rallies, pickets, strikes. Promoted from deferred_candidates.protest 2026-06.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "platform_adapter": "civic-action",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "protest-civic",
@@ -240,7 +299,11 @@
       "base_url": "https://www.toronto.ca/",
       "events_url": "discovery - student-union and advocacy action pages plus confirmed demonstration callouts carried by local news; every record needs source_url and raw_excerpt",
       "notes": "Open-discovery protest channel across the political spectrum. Promoted from deferred_candidates.protest 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "civic-action",
+      "source_mode": "discovery",
+      "harvest_enabled": false,
+      "deferred_reason": "Discovery channel requires a verified official event URL before automated crawling."
     },
     {
       "id": "findaprotest-toronto",
@@ -255,7 +318,10 @@
       ],
       "notes": "Server-rendered Toronto protest and solidarity-event index. Follow detail pages and publish only events with a specific date, time, location, organizer, source_url, and raw_excerpt. Save-the-date/TBD listings go to the watchlist.",
       "render_mode": "static",
-      "fetcher": "findaprotest-toronto"
+      "fetcher": "findaprotest-toronto",
+      "platform_adapter": "civic-action",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "toronto-events",
@@ -265,7 +331,10 @@
       "base_url": "https://www.toronto.ca/explore-enjoy/festivals-events/",
       "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/festivals-events-calendar/",
       "notes": "Community events, charity walks and rides, fundraisers, neighbourhood gatherings.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "community-discovery",
@@ -275,7 +344,10 @@
       "base_url": "https://www.eventbrite.ca/",
       "events_url": "discovery - charity rides and walks, fundraisers, community-org events in the GTA; confirm each with source_url and raw_excerpt",
       "notes": "Open-discovery community channel. Captures events like charity rides that fall outside the discursive seminar roster.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "source_mode": "discovery",
+      "harvest_enabled": false,
+      "deferred_reason": "Discovery channel requires a verified official event URL before automated crawling."
     },
     {
       "id": "uoft-philosophy",
@@ -286,7 +358,10 @@
       "events_url": "https://philosophy.utoronto.ca/news-events/",
       "render_mode": "drupal",
       "feed_status": "not-needed",
-      "notes": "Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices."
+      "notes": "Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "uoft-history",
@@ -297,7 +372,10 @@
       "events_url": "https://www.history.utoronto.ca/events",
       "render_mode": "drupal",
       "feed_status": "not-needed",
-      "notes": "Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices."
+      "notes": "Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "uoft-english",
@@ -308,7 +386,10 @@
       "events_url": "https://www.english.utoronto.ca/events",
       "notes": "Bot detection may block direct fetch; use headless/snippet fallback. Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices.",
       "render_mode": "drupal",
-      "feed_status": "not-needed"
+      "feed_status": "not-needed",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "utm-historical",
@@ -319,7 +400,10 @@
       "events_url": "https://utm.utoronto.ca/historical-studies/events/events",
       "render_mode": "drupal",
       "feed_status": "not-needed",
-      "notes": "Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices."
+      "notes": "Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "cms-medieval",
@@ -330,7 +414,9 @@
       "events_url": "https://www.medieval.utoronto.ca/events",
       "render_mode": "drupal",
       "feed_status": "not-needed",
-      "notes": "Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices."
+      "notes": "Feed pass 2026-06-11: Drupal listing is server-rendered; plain fetch suffices.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "york-events",
@@ -343,7 +429,10 @@
       "render_mode": "wordpress",
       "feed_url": "https://events.yorku.ca/wp-json/tribe/events/v1/events",
       "feed_format": "wp-tribe-json",
-      "feed_status": "probable"
+      "feed_status": "probable",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "york-philosophy",
@@ -352,7 +441,9 @@
       "default_type": "lecture",
       "base_url": "https://www.yorku.ca/laps/phil/experience/speaker-series/philosophy/",
       "events_url": "https://www.yorku.ca/laps/phil/experience/speaker-series/philosophy/",
-      "render_mode": "wordpress"
+      "render_mode": "wordpress",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ycar",
@@ -361,7 +452,9 @@
       "default_type": "lecture",
       "base_url": "https://www.yorku.ca/research/ycar/ycar-events/",
       "events_url": "https://www.yorku.ca/research/ycar/ycar-events/",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tmu-philosophy",
@@ -371,7 +464,10 @@
       "base_url": "https://www.torontomu.ca/philosophy/news-events/",
       "events_url": "https://www.torontomu.ca/philosophy/news-events/",
       "notes": "Prefer the dept Google Calendar embed and PhilEvents host 17926; main page lags.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ocadu-events",
@@ -380,7 +476,10 @@
       "default_type": "talk",
       "base_url": "https://www.ocadu.ca/whats-on",
       "events_url": "https://www.ocadu.ca/whats-on",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "pims",
@@ -389,7 +488,9 @@
       "default_type": "lecture",
       "base_url": "https://pims.ca/events-list/calendar-of-events/",
       "events_url": "https://pims.ca/events-list/calendar-of-events/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tst",
@@ -398,7 +499,9 @@
       "default_type": "lecture",
       "base_url": "https://www.tst.edu/events",
       "events_url": "https://www.tst.edu/events",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "rciscience",
@@ -407,7 +510,9 @@
       "default_type": "scholar-talk",
       "base_url": "https://www.rciscience.ca/whats-on",
       "events_url": "https://www.rciscience.ca/whats-on",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "another-story",
@@ -417,7 +522,9 @@
       "base_url": "https://anotherstory.ca/events",
       "events_url": "https://anotherstory.ca/events",
       "notes": "Bookmanager JS; prefer Eventbrite org page.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "queen-books",
@@ -427,7 +534,9 @@
       "base_url": "https://shop.queenbooks.ca/events",
       "events_url": "https://shop.queenbooks.ca/events",
       "notes": "Bookmanager JS; prefer Eventbrite org page.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ben-mcnally",
@@ -436,7 +545,9 @@
       "default_type": "reading",
       "base_url": "https://benmcnallybooks.com/",
       "events_url": "https://benmcnallybooks.com/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "a-different-booklist",
@@ -445,7 +556,9 @@
       "default_type": "reading",
       "base_url": "http://adifferentbooklist.com",
       "events_url": "http://adifferentbooklist.com",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "flying-books",
@@ -454,7 +567,9 @@
       "default_type": "reading",
       "base_url": "https://flyingbooks.ca/",
       "events_url": "https://flyingbooks.ca/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "coach-house",
@@ -463,7 +578,9 @@
       "default_type": "book-launch",
       "base_url": "https://chbooks.com/Events",
       "events_url": "https://chbooks.com/Events",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "brockton-writers",
@@ -472,7 +589,9 @@
       "default_type": "reading",
       "base_url": "https://brocktonwriters.com/",
       "events_url": "https://brocktonwriters.com/",
-      "render_mode": "wordpress"
+      "render_mode": "wordpress",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "junction-reads",
@@ -481,7 +600,9 @@
       "default_type": "reading",
       "base_url": "https://junctionreads.ca/upcoming-schedule/",
       "events_url": "https://junctionreads.ca/upcoming-schedule/",
-      "render_mode": "wordpress"
+      "render_mode": "wordpress",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "griffin-poetry",
@@ -490,7 +611,9 @@
       "default_type": "reading",
       "base_url": "https://griffinpoetryprize.com/",
       "events_url": "https://griffinpoetryprize.com/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "writers-trust",
@@ -499,7 +622,9 @@
       "default_type": "reading",
       "base_url": "https://www.writerstrust.com/events",
       "events_url": "https://www.writerstrust.com/events",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "diaspora-dialogues",
@@ -508,7 +633,9 @@
       "default_type": "reading",
       "base_url": "https://diasporadialogues.com/category/upcoming-events/",
       "events_url": "https://diasporadialogues.com/category/upcoming-events/",
-      "render_mode": "wordpress"
+      "render_mode": "wordpress",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "art-bar",
@@ -519,7 +646,9 @@
       "events_url": "https://www.instagram.com/artbarpoetry/",
       "notes": "DO NOT scrape artbarpoetryseries.com -- domain hijacked to casino spam. Schedule only via Instagram @artbarpoetry / artbarpoetry@gmail.com. Feed pass 2026-06-11: Instagram is unscrapeable by plain fetch; needs a website or listing-page replacement source.",
       "render_mode": "javascript",
-      "feed_status": "replacement-needed"
+      "feed_status": "replacement-needed",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "royal-inst-philosophy",
@@ -532,7 +661,9 @@
       "render_mode": "wordpress",
       "feed_url": "https://royalinstitutephilosophy.org/wp-json/tribe/events/v1/events",
       "feed_format": "wp-tribe-json",
-      "feed_status": "probable"
+      "feed_status": "probable",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "iai-live",
@@ -542,7 +673,9 @@
       "base_url": "https://iai.tv/",
       "events_url": "https://iai.tv/",
       "notes": "GLOBAL online; IAI Live first Monday monthly.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "aristotelian-society",
@@ -552,7 +685,9 @@
       "base_url": "https://www.aristoteliansociety.org.uk/",
       "events_url": "https://www.aristoteliansociety.org.uk/",
       "notes": "GLOBAL; fortnightly Monday talks, confirm livestream per event.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "arendt-center",
@@ -562,7 +697,10 @@
       "base_url": "https://hac.bard.edu/events/",
       "events_url": "https://hac.bard.edu/events/",
       "notes": "GLOBAL online/hybrid; fall forum webcast.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "bisr",
@@ -572,7 +710,9 @@
       "base_url": "https://thebrooklyninstitute.com/events/",
       "events_url": "https://thebrooklyninstitute.com/events/",
       "notes": "GLOBAL online seminars by term.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "catherine-project",
@@ -582,7 +722,9 @@
       "base_url": "https://catherineproject.org/events/",
       "events_url": "https://catherineproject.org/events/",
       "notes": "GLOBAL free Zoom seminars.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "long-now",
@@ -592,7 +734,9 @@
       "base_url": "https://longnow.org/talks",
       "events_url": "https://longnow.org/talks",
       "notes": "GLOBAL; SF in-person + livestream/podcast.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "92ny",
@@ -602,7 +746,9 @@
       "base_url": "https://www.92ny.org/talks",
       "events_url": "https://www.92ny.org/talks",
       "notes": "GLOBAL; livestream + live podcast tapings.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "nypl-live",
@@ -612,7 +758,9 @@
       "base_url": "https://www.nypl.org/events/live-nypl",
       "events_url": "https://www.nypl.org/events/live-nypl",
       "notes": "GLOBAL; in-person + livestream.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "practical-philosophy-on",
@@ -625,7 +773,9 @@
       "render_mode": "javascript",
       "feed_url": "https://www.meetup.com/practical-philosophy-club-ontario/events/ical/",
       "feed_format": "ics",
-      "feed_status": "probable"
+      "feed_status": "probable",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "toronto-philosophy-meetup",
@@ -638,7 +788,9 @@
       "render_mode": "javascript",
       "feed_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/ical/",
       "feed_format": "ics",
-      "feed_status": "probable"
+      "feed_status": "probable",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "being-becoming",
@@ -648,7 +800,9 @@
       "base_url": "https://beingnbecoming.org/curiosity-cafes/",
       "events_url": "https://beingnbecoming.org/curiosity-cafes/",
       "notes": "Recurring in-person cafe, Madison Avenue Pub.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "empire-club",
@@ -658,7 +812,9 @@
       "base_url": "https://empireclubofcanada.com/upcoming-events/",
       "events_url": "https://empireclubofcanada.com/upcoming-events/",
       "notes": "Swoogo cards; page renders empty between seasons.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "canadian-club",
@@ -671,7 +827,9 @@
       "feed_url": "https://www.canadianclub.org/wp-json/tribe/events/v1/events",
       "feed_format": "wp-tribe-json",
       "feed_status": "probable",
-      "notes": "Feed pass 2026-06-11: WordPress fingerprint, Tribe Events REST probable; fall back to events_url if 404."
+      "notes": "Feed pass 2026-06-11: WordPress fingerprint, Tribe Events REST probable; fall back to events_url if 404.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "economic-club",
@@ -680,7 +838,9 @@
       "default_type": "talk",
       "base_url": "https://www.economicclub.ca/upcomingevents",
       "events_url": "https://www.economicclub.ca/upcomingevents",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "board-of-trade",
@@ -689,7 +849,9 @@
       "default_type": "networking",
       "base_url": "https://bot.com/Events",
       "events_url": "https://bot.com/Events",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "cic-toronto",
@@ -702,7 +864,9 @@
       "feed_url": "https://thecic.org/wp-json/tribe/events/v1/events",
       "feed_format": "wp-tribe-json",
       "feed_status": "probable",
-      "notes": "Feed pass 2026-06-11: WordPress fingerprint, Tribe Events REST probable; fall back to events_url if 404."
+      "notes": "Feed pass 2026-06-11: WordPress fingerprint, Tribe Events REST probable; fall back to events_url if 404.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "civicaction",
@@ -711,7 +875,10 @@
       "default_type": "gathering",
       "base_url": "https://civicaction.ca/",
       "events_url": "https://civicaction.ca/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "platform_adapter": "civic-action",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "janes-walk",
@@ -721,7 +888,10 @@
       "base_url": "https://www.janeswalkfestivalto.com/",
       "events_url": "https://www.janeswalkfestivalto.com/",
       "notes": "Annual, first weekend of May.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "trampoline-hall",
@@ -731,7 +901,9 @@
       "base_url": "https://www.trampolinehall.net/",
       "events_url": "https://www.trampolinehall.net/",
       "notes": "Monthly barroom lectures; dates announced rolling via Luma.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "walrus-talks",
@@ -740,7 +912,9 @@
       "default_type": "talk",
       "base_url": "https://thewalrus.ca/the-walrus-talks/",
       "events_url": "https://thewalrus.ca/the-walrus-talks/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "cupe-ontario",
@@ -750,7 +924,9 @@
       "base_url": "https://cupe.on.ca/calendar/",
       "events_url": "https://cupe.on.ca/calendar/",
       "notes": "iCal export; categorized rallies/conventions.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "opseu",
@@ -759,7 +935,9 @@
       "default_type": "protest",
       "base_url": "https://opseu.org/events/",
       "events_url": "https://opseu.org/events/",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ofl",
@@ -768,7 +946,10 @@
       "default_type": "protest",
       "base_url": "https://ofl.ca/events/",
       "events_url": "https://ofl.ca/events/",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "platform_adapter": "civic-action",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ontario-health-coalition",
@@ -777,7 +958,9 @@
       "default_type": "protest",
       "base_url": "https://www.ontariohealthcoalition.ca/",
       "events_url": "https://www.ontariohealthcoalition.ca/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "acorn-toronto",
@@ -786,7 +969,9 @@
       "default_type": "protest",
       "base_url": "https://acorncanada.org/locations/toronto-acorn/",
       "events_url": "https://acorncanada.org/locations/toronto-acorn/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "mwac",
@@ -795,7 +980,9 @@
       "default_type": "protest",
       "base_url": "https://migrantworkersalliance.org/",
       "events_url": "https://migrantworkersalliance.org/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "free-grassy",
@@ -805,7 +992,9 @@
       "base_url": "https://freegrassy.net/",
       "events_url": "https://freegrassy.net/",
       "notes": "Annual River Run, mid-late September.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "kairos",
@@ -815,7 +1004,9 @@
       "base_url": "https://kairoscanada.org/events/list",
       "events_url": "https://kairoscanada.org/events/list",
       "notes": "The Events Calendar with .ics export; only structured faith feed.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "toronto350",
@@ -824,7 +1015,9 @@
       "default_type": "protest",
       "base_url": "https://toronto350.org/",
       "events_url": "https://toronto350.org/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "yfs",
@@ -833,7 +1026,9 @@
       "default_type": "protest",
       "base_url": "https://yfs.ca/events-home",
       "events_url": "https://yfs.ca/events-home",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "philevents-cfp",
@@ -843,7 +1038,9 @@
       "base_url": "https://philevents.org/cfps",
       "events_url": "https://philevents.org/cfps",
       "notes": "GLOBAL. RSS/iCal/CSV export per saved search ID; best machine feed in the set.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "upenn-cfp",
@@ -853,7 +1050,9 @@
       "base_url": "https://call-for-papers.sas.upenn.edu/category/all",
       "events_url": "https://call-for-papers.sas.upenn.edu/category/all",
       "notes": "GLOBAL. ~40 per-category RSS feeds; explicit deadline field.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "hnet-announce",
@@ -863,7 +1062,9 @@
       "base_url": "https://networks.h-net.org/h-announce",
       "events_url": "https://networks.h-net.org/h-announce",
       "notes": "GLOBAL. Bot-protected; rate-limit and corroborate at originating institution.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "wikicfp",
@@ -873,7 +1074,9 @@
       "base_url": "http://www.wikicfp.com/cfp/call?conference=humanities",
       "events_url": "http://www.wikicfp.com/cfp/call?conference=humanities",
       "notes": "GLOBAL. Multidisciplinary; humanities coverage uneven.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "cfplist",
@@ -883,7 +1086,9 @@
       "base_url": "https://www.cfplist.com/",
       "events_url": "https://www.cfplist.com/",
       "notes": "GLOBAL. Curated; powers NeMLA/PAMLA portals (Ballast).",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "arthist",
@@ -893,7 +1098,9 @@
       "base_url": "https://arthist.net/",
       "events_url": "https://arthist.net/",
       "notes": "GLOBAL art history; CFP subject-line prefix.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "mla-cfp",
@@ -903,7 +1110,9 @@
       "base_url": "https://www.mla.org/Events/Planning-a-Convention-Session/Calls-for-Papers",
       "events_url": "https://www.mla.org/Events/Planning-a-Convention-Session/Calls-for-Papers",
       "notes": "GLOBAL literary; just-in-time sessions open June.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "aha-cfp",
@@ -913,7 +1122,9 @@
       "base_url": "https://www.historians.org/events/annual-meeting/call-for-proposals/",
       "events_url": "https://www.historians.org/events/annual-meeting/call-for-proposals/",
       "notes": "GLOBAL history.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "aar-cfp",
@@ -923,7 +1134,9 @@
       "base_url": "https://aarweb.org/events/annual-meetings/call-for-papers-proposals/",
       "events_url": "https://aarweb.org/events/annual-meetings/call-for-papers-proposals/",
       "notes": "GLOBAL religion/theology.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "acla-cfp",
@@ -933,7 +1146,9 @@
       "base_url": "https://www.acla.org/resources-links/calls-papers",
       "events_url": "https://www.acla.org/resources-links/calls-papers",
       "notes": "GLOBAL comparative literature; seminar portal opens June.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "apa-cfp",
@@ -943,7 +1158,9 @@
       "base_url": "https://www.apaonline.org/page/calls",
       "events_url": "https://www.apaonline.org/page/calls",
       "notes": "GLOBAL philosophy.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "4s-cfp",
@@ -953,7 +1170,9 @@
       "base_url": "https://www.4sonline.org/",
       "events_url": "https://www.4sonline.org/",
       "notes": "GLOBAL STS; 4S 2026 is in Toronto (Sheraton).",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "pw-grants",
@@ -963,7 +1182,9 @@
       "base_url": "https://www.pw.org/grants",
       "events_url": "https://www.pw.org/grants",
       "notes": "GLOBAL. Deadline-sortable, vetted; strongest legitimacy filter.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "reedsy-contests",
@@ -973,7 +1194,9 @@
       "base_url": "https://reedsy.com/resources/writing-contests/",
       "events_url": "https://reedsy.com/resources/writing-contests/",
       "notes": "GLOBAL. 460+ vetted, genre/deadline/fee filters.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "submittable-discover",
@@ -983,7 +1206,9 @@
       "base_url": "https://discover.submittable.com/",
       "events_url": "https://discover.submittable.com/",
       "notes": "GLOBAL. Wide net; Submittable-hosted calls only.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "winning-writers",
@@ -993,7 +1218,9 @@
       "base_url": "https://winningwriters.com/",
       "events_url": "https://winningwriters.com/",
       "notes": "GLOBAL. Best free/no-fee coverage + scam filter.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "canadian-authors",
@@ -1003,7 +1230,9 @@
       "base_url": "https://canadianauthors.org/national/links/awards-competitions/",
       "events_url": "https://canadianauthors.org/national/links/awards-competitions/",
       "notes": "Month-by-month deadline pages; Canadian + some intl.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "cbc-literary",
@@ -1013,7 +1242,9 @@
       "base_url": "https://www.cbc.ca/books/literaryprizes",
       "events_url": "https://www.cbc.ca/books/literaryprizes",
       "notes": "Canada only; Short Story / Nonfiction / Poetry cycles.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "league-cdn-poets",
@@ -1022,7 +1253,9 @@
       "default_type": "contest",
       "base_url": "https://poets.ca/offerings/awards/",
       "events_url": "https://poets.ca/offerings/awards/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "writers-union",
@@ -1031,7 +1264,9 @@
       "default_type": "contest",
       "base_url": "https://writersunion.ca/short-prose-competition",
       "events_url": "https://writersunion.ca/short-prose-competition",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "fox-theatre",
@@ -1044,7 +1279,9 @@
       "render_mode": "wordpress",
       "feed_url": "https://www.foxtheatre.ca/wp-json/tribe/events/v1/events",
       "feed_format": "wp-tribe-json",
-      "feed_status": "probable"
+      "feed_status": "probable",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "innis-csi",
@@ -1054,7 +1291,9 @@
       "base_url": "https://innis.utoronto.ca/happening-at-innis/",
       "events_url": "https://innis.utoronto.ca/happening-at-innis/",
       "notes": "CLOSED for construction May 4 - Aug 21, 2026; screenings pause that summer.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tmu-image-arts",
@@ -1063,7 +1302,9 @@
       "default_type": "screening",
       "base_url": "https://www.torontomu.ca/image-arts/news-events/",
       "events_url": "https://www.torontomu.ca/image-arts/news-events/",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "york-cinema",
@@ -1076,7 +1317,9 @@
       "render_mode": "wordpress",
       "feed_url": "https://events.yorku.ca/wp-json/tribe/events/v1/events",
       "feed_format": "wp-tribe-json",
-      "feed_status": "probable"
+      "feed_status": "probable",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ago-cinema",
@@ -1085,7 +1328,9 @@
       "default_type": "screening",
       "base_url": "https://ago.ca/ago-art-cinema",
       "events_url": "https://ago.ca/ago-art-cinema",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "goethe-films",
@@ -1094,7 +1339,9 @@
       "default_type": "screening",
       "base_url": "https://www.goethe.de/ins/ca/en/sta/tor/ver.cfm",
       "events_url": "https://www.goethe.de/ins/ca/en/sta/tor/ver.cfm",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "massey-rth",
@@ -1103,7 +1350,9 @@
       "default_type": "performance",
       "base_url": "https://tickets.mhrth.com/events",
       "events_url": "https://tickets.mhrth.com/events",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tso",
@@ -1112,7 +1361,9 @@
       "default_type": "performance",
       "base_url": "https://www.tso.ca/concerts-and-events/calendar",
       "events_url": "https://www.tso.ca/concerts-and-events/calendar",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "coc",
@@ -1121,7 +1372,9 @@
       "default_type": "performance",
       "base_url": "https://www.coc.ca/",
       "events_url": "https://www.coc.ca/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "national-ballet",
@@ -1130,7 +1383,9 @@
       "default_type": "performance",
       "base_url": "https://national.ballet.ca/performances/",
       "events_url": "https://national.ballet.ca/performances/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "to-live",
@@ -1139,7 +1394,9 @@
       "default_type": "performance",
       "base_url": "https://www.tolive.com/",
       "events_url": "https://www.tolive.com/",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "koerner-hall",
@@ -1148,7 +1405,9 @@
       "default_type": "performance",
       "base_url": "https://www.rcmusic.com/concerts",
       "events_url": "https://www.rcmusic.com/concerts",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "harbourfront-centre",
@@ -1157,7 +1416,9 @@
       "default_type": "performance",
       "base_url": "https://harbourfrontcentre.com/whats-on/",
       "events_url": "https://harbourfrontcentre.com/whats-on/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "soulpepper",
@@ -1166,7 +1427,9 @@
       "default_type": "performance",
       "base_url": "https://www.soulpepper.ca/",
       "events_url": "https://www.soulpepper.ca/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "mirvish",
@@ -1175,7 +1438,9 @@
       "default_type": "performance",
       "base_url": "https://www.mirvish.com/whats-on/upcoming-shows",
       "events_url": "https://www.mirvish.com/whats-on/upcoming-shows",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "canadian-stage",
@@ -1184,7 +1449,9 @@
       "default_type": "performance",
       "base_url": "https://www.canadianstage.com/shows-events",
       "events_url": "https://www.canadianstage.com/shows-events",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "crows-theatre",
@@ -1193,7 +1460,9 @@
       "default_type": "performance",
       "base_url": "https://www.crowstheatre.com/shows-events",
       "events_url": "https://www.crowstheatre.com/shows-events",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tarragon",
@@ -1202,7 +1471,9 @@
       "default_type": "performance",
       "base_url": "https://tarragontheatre.com/whats-on/",
       "events_url": "https://tarragontheatre.com/whats-on/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "buddies",
@@ -1211,7 +1482,9 @@
       "default_type": "performance",
       "base_url": "https://buddiesinbadtimes.com/",
       "events_url": "https://buddiesinbadtimes.com/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "factory-theatre",
@@ -1221,7 +1494,9 @@
       "base_url": "https://www.factorytheatre.ca/whats-on/",
       "events_url": "https://www.factorytheatre.ca/whats-on/",
       "notes": "Venue calendar partially JS; fetch live for spring/summer dates.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ypt",
@@ -1230,7 +1505,9 @@
       "default_type": "performance",
       "base_url": "https://www.youngpeoplestheatre.org/shows-tickets/",
       "events_url": "https://www.youngpeoplestheatre.org/shows-tickets/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "native-earth",
@@ -1240,7 +1517,9 @@
       "base_url": "https://nativeearth.ca/current-season",
       "events_url": "https://nativeearth.ca/current-season",
       "notes": "Ticketing via PatronBase.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tafelmusik",
@@ -1249,7 +1528,9 @@
       "default_type": "performance",
       "base_url": "https://www.tafelmusik.org/",
       "events_url": "https://www.tafelmusik.org/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "opera-atelier",
@@ -1258,7 +1539,9 @@
       "default_type": "performance",
       "base_url": "https://www.operaatelier.com/",
       "events_url": "https://www.operaatelier.com/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "soundstreams",
@@ -1271,7 +1554,9 @@
       "feed_url": "https://soundstreams.ca/wp-json/tribe/events/v1/events",
       "feed_format": "wp-tribe-json",
       "feed_status": "probable",
-      "notes": "Feed pass 2026-06-11: WordPress fingerprint, Tribe Events REST probable; fall back to events_url if 404."
+      "notes": "Feed pass 2026-06-11: WordPress fingerprint, Tribe Events REST probable; fall back to events_url if 404.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tdt",
@@ -1280,7 +1565,9 @@
       "default_type": "performance",
       "base_url": "https://tdt.org/whats-on/",
       "events_url": "https://tdt.org/whats-on/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "danceworks",
@@ -1289,7 +1576,9 @@
       "default_type": "performance",
       "base_url": "https://www.danceworks.ca/upcoming-events",
       "events_url": "https://www.danceworks.ca/upcoming-events",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "citadel-cie",
@@ -1298,7 +1587,9 @@
       "default_type": "performance",
       "base_url": "https://www.citadelcie.com/",
       "events_url": "https://www.citadelcie.com/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "music-gallery",
@@ -1311,7 +1602,10 @@
       "render_mode": "wordpress",
       "feed_url": "https://musicgallery.org/wp-json/tribe/events/v1/events",
       "feed_format": "wp-tribe-json",
-      "feed_status": "probable"
+      "feed_status": "probable",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "rom",
@@ -1321,7 +1615,9 @@
       "base_url": "https://www.rom.on.ca/whats-on/exhibitions",
       "events_url": "https://www.rom.on.ca/whats-on/exhibitions",
       "notes": "Also scrape ROM Speaks/Talks for scholar-talks.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "gardiner-museum",
@@ -1330,7 +1626,9 @@
       "default_type": "exhibition",
       "base_url": "https://www.gardinermuseum.on.ca/whats-on/",
       "events_url": "https://www.gardinermuseum.on.ca/whats-on/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "aga-khan",
@@ -1340,7 +1638,9 @@
       "base_url": "https://agakhanmuseum.org/whats-on/",
       "events_url": "https://agakhanmuseum.org/whats-on/",
       "notes": "Exhibitions + Lectures & Talks + performances; ticketing subdomain is JS.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "textile-museum",
@@ -1349,7 +1649,9 @@
       "default_type": "exhibition",
       "base_url": "https://textilemuseum.ca/",
       "events_url": "https://textilemuseum.ca/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "bata-shoe",
@@ -1358,7 +1660,9 @@
       "default_type": "exhibition",
       "base_url": "https://batashoemuseum.ca/exhibitions/",
       "events_url": "https://batashoemuseum.ca/exhibitions/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "artmuseum-uoft",
@@ -1368,7 +1672,10 @@
       "base_url": "https://artmuseum.utoronto.ca/exhibitions/",
       "events_url": "https://artmuseum.utoronto.ca/exhibitions/",
       "notes": "Main hub for 2026 Toronto Biennial (Sept 26-Dec 20).",
-      "render_mode": "static"
+      "render_mode": "static",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "onsite-ocadu",
@@ -1377,7 +1684,9 @@
       "default_type": "exhibition",
       "base_url": "https://www.ocadu.ca/galleries/onsite-gallery",
       "events_url": "https://www.ocadu.ca/galleries/onsite-gallery",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "agyu-goldfarb",
@@ -1386,7 +1695,9 @@
       "default_type": "exhibition",
       "base_url": "https://thegoldfarbgallery.ca/exhibitions/",
       "events_url": "https://thegoldfarbgallery.ca/exhibitions/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "mcmichael",
@@ -1399,7 +1710,9 @@
       "feed_url": "https://mcmichael.com/wp-json/tribe/events/v1/events",
       "feed_format": "wp-tribe-json",
       "feed_status": "probable",
-      "notes": "Feed pass 2026-06-11: WordPress fingerprint, Tribe Events REST probable; fall back to events_url if 404."
+      "notes": "Feed pass 2026-06-11: WordPress fingerprint, Tribe Events REST probable; fall back to events_url if 404.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "mercer-union",
@@ -1409,7 +1722,9 @@
       "base_url": "https://www.mercerunion.org/exhibitions",
       "events_url": "https://www.mercerunion.org/exhibitions",
       "notes": "Co-presents Toronto Biennial commission; closed summers.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "gallery44",
@@ -1418,7 +1733,9 @@
       "default_type": "exhibition",
       "base_url": "https://www.gallery44.org/all-exhibitions",
       "events_url": "https://www.gallery44.org/all-exhibitions",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "koffler",
@@ -1427,7 +1744,9 @@
       "default_type": "exhibition",
       "base_url": "https://www.kofflerarts.org/whatson/exhibitions",
       "events_url": "https://www.kofflerarts.org/whatson/exhibitions",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "cooper-cole",
@@ -1437,7 +1756,9 @@
       "base_url": "https://coopercolegallery.com/exhibitions/",
       "events_url": "https://coopercolegallery.com/exhibitions/",
       "notes": "Bimonthly cycles; crawl monthly.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "daniel-faria",
@@ -1446,7 +1767,9 @@
       "default_type": "exhibition",
       "base_url": "http://www.danielfariagallery.com/exhibitions",
       "events_url": "http://www.danielfariagallery.com/exhibitions",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "living-arts-centre",
@@ -1456,7 +1779,9 @@
       "base_url": "https://www.mississauga.ca/arts-and-culture/locations/living-arts-centre/",
       "events_url": "https://www.mississauga.ca/arts-and-culture/locations/living-arts-centre/",
       "notes": "Ticketmaster venue feed.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "the-rose-brampton",
@@ -1465,7 +1790,9 @@
       "default_type": "performance",
       "base_url": "https://tickets.brampton.ca/",
       "events_url": "https://tickets.brampton.ca/",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "flato-markham",
@@ -1475,7 +1802,9 @@
       "base_url": "https://flatomarkhamtheatre.ca/",
       "events_url": "https://flatomarkhamtheatre.ca/",
       "notes": "Ticketing feeds AXS.",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "rhcpa",
@@ -1484,7 +1813,9 @@
       "default_type": "performance",
       "base_url": "https://www.rhcentre.ca/",
       "events_url": "https://www.rhcentre.ca/",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "burlington-pac",
@@ -1494,7 +1825,9 @@
       "base_url": "https://burlingtonpac.ca/events/",
       "events_url": "https://burlingtonpac.ca/events/",
       "notes": "Ticketing via TixHub.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "oakville-galleries",
@@ -1503,7 +1836,9 @@
       "default_type": "exhibition",
       "base_url": "https://www.oakvillegalleries.com/",
       "events_url": "https://www.oakvillegalleries.com/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "pama",
@@ -1512,7 +1847,9 @@
       "default_type": "exhibition",
       "base_url": "https://www.pama.peelregion.ca/exhibitions",
       "events_url": "https://www.pama.peelregion.ca/exhibitions",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "varley",
@@ -1521,7 +1858,9 @@
       "default_type": "exhibition",
       "base_url": "https://varleyartgallery.ca/exhibitions/",
       "events_url": "https://varleyartgallery.ca/exhibitions/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "rmg",
@@ -1531,7 +1870,9 @@
       "base_url": "https://rmg.on.ca/exhibitions/",
       "events_url": "https://rmg.on.ca/exhibitions/",
       "notes": "Largest public gallery in Durham; admission free.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "station-gallery",
@@ -1540,7 +1881,9 @@
       "default_type": "exhibition",
       "base_url": "https://stationgallery.ca/exhibitions/",
       "events_url": "https://stationgallery.ca/exhibitions/",
-      "render_mode": "static"
+      "render_mode": "static",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "aurora-town-square",
@@ -1549,7 +1892,9 @@
       "default_type": "performance",
       "base_url": "https://www.auroratownsquare.ca/events-tickets/whats-on/",
       "events_url": "https://www.auroratownsquare.ca/events-tickets/whats-on/",
-      "render_mode": "javascript"
+      "render_mode": "javascript",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ontario-tech-events",
@@ -1559,7 +1904,10 @@
       "base_url": "https://events.ontariotechu.ca/",
       "events_url": "https://events.ontariotechu.ca/",
       "notes": "RSS/iCal/JSON feeds.",
-      "render_mode": "static"
+      "render_mode": "static",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "mississauga-library",
@@ -1572,7 +1920,10 @@
       "render_mode": "javascript",
       "feed_url": "https://mississauga.bibliocommons.com/v2/events",
       "feed_format": "bibliocommons-v2-html",
-      "feed_status": "pattern-verified"
+      "feed_status": "pattern-verified",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "markham-library",
@@ -1585,7 +1936,10 @@
       "render_mode": "javascript",
       "feed_url": "https://markham.bibliocommons.com/v2/events",
       "feed_format": "bibliocommons-v2-html",
-      "feed_status": "pattern-verified"
+      "feed_status": "pattern-verified",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "uoft-sociology",
@@ -1595,7 +1949,10 @@
       "base_url": "https://www.sociology.utoronto.ca/",
       "events_url": "https://www.sociology.utoronto.ca/events",
       "render_mode": "drupal",
-      "notes": "Base-expansion audit 2026-06-11. Heavy yield in april-corpus."
+      "notes": "Base-expansion audit 2026-06-11. Heavy yield in april-corpus.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "uoft-artsci",
@@ -1605,7 +1962,9 @@
       "base_url": "https://www.artsci.utoronto.ca/",
       "events_url": "https://www.artsci.utoronto.ca/events",
       "render_mode": "drupal",
-      "notes": "Base-expansion audit 2026-06-11. Central A&S listing; heavy yield in recovery corpus."
+      "notes": "Base-expansion audit 2026-06-11. Central A&S listing; heavy yield in recovery corpus.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "uoft-classics",
@@ -1615,7 +1974,10 @@
       "base_url": "https://www.classics.utoronto.ca/",
       "events_url": "https://www.classics.utoronto.ca/events",
       "render_mode": "drupal",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "uoft-religion",
@@ -1625,7 +1987,10 @@
       "base_url": "https://www.religion.utoronto.ca/",
       "events_url": "https://www.religion.utoronto.ca/events",
       "render_mode": "drupal",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "uoft-anthropology",
@@ -1635,7 +2000,10 @@
       "base_url": "https://www.anthropology.utoronto.ca/",
       "events_url": "https://www.anthropology.utoronto.ca/events",
       "render_mode": "drupal",
-      "notes": "Base-expansion audit 2026-06-11. Yielded in recovery corpus."
+      "notes": "Base-expansion audit 2026-06-11. Yielded in recovery corpus.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "uoft-complit",
@@ -1645,7 +2013,9 @@
       "base_url": "https://www.complit.utoronto.ca/",
       "events_url": "https://www.complit.utoronto.ca/events",
       "render_mode": "drupal",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "srinstitute",
@@ -1655,7 +2025,9 @@
       "base_url": "https://srinstitute.utoronto.ca/",
       "events_url": "https://srinstitute.utoronto.ca/events",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11. AI-and-society programming; yielded in corpus."
+      "notes": "Base-expansion audit 2026-06-11. AI-and-society programming; yielded in corpus.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "fields",
@@ -1665,7 +2037,9 @@
       "base_url": "http://www.fields.utoronto.ca/",
       "events_url": "http://www.fields.utoronto.ca/calendar",
       "render_mode": "static",
-      "notes": "Base-expansion audit 2026-06-11. Public lectures and MathEd Forum."
+      "notes": "Base-expansion audit 2026-06-11. Public lectures and MathEd Forum.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "rotman-events",
@@ -1675,7 +2049,9 @@
       "base_url": "https://www.rotman.utoronto.ca/",
       "events_url": "https://www.rotman.utoronto.ca/events-and-news/events",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11. Author and speaker series."
+      "notes": "Base-expansion audit 2026-06-11. Author and speaker series.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "uoft-law-events",
@@ -1685,7 +2061,10 @@
       "base_url": "https://www.law.utoronto.ca/",
       "events_url": "https://www.law.utoronto.ca/events",
       "render_mode": "drupal",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "dunlap-astro",
@@ -1695,7 +2074,9 @@
       "base_url": "https://www.astro.utoronto.ca/",
       "events_url": "https://www.astro.utoronto.ca/astrotours/",
       "render_mode": "static",
-      "notes": "Base-expansion audit 2026-06-11. Free public astronomy nights."
+      "notes": "Base-expansion audit 2026-06-11. Free public astronomy nights.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "trinity-college",
@@ -1705,7 +2086,10 @@
       "base_url": "https://www.trinity.utoronto.ca/",
       "events_url": "https://www.trinity.utoronto.ca/discover/events/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11. Larkin-Stuart lectures etc."
+      "notes": "Base-expansion audit 2026-06-11. Larkin-Stuart lectures etc.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "emmanuel-college",
@@ -1715,7 +2099,10 @@
       "base_url": "https://www.emmanuel.utoronto.ca/",
       "events_url": "https://www.emmanuel.utoronto.ca/events/",
       "render_mode": "drupal",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "crrs",
@@ -1725,7 +2112,9 @@
       "base_url": "https://crrs.ca/",
       "events_url": "https://crrs.ca/events/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "oise-events",
@@ -1735,7 +2124,9 @@
       "base_url": "https://www.oise.utoronto.ca/",
       "events_url": "https://www.oise.utoronto.ca/home/events",
       "render_mode": "drupal",
-      "notes": "Base-expansion audit 2026-06-11. Education research talks."
+      "notes": "Base-expansion audit 2026-06-11. Education research talks.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "the-dais",
@@ -1745,7 +2136,9 @@
       "base_url": "https://dais.ca/",
       "events_url": "https://dais.ca/events/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "perimeter",
@@ -1755,7 +2148,9 @@
       "base_url": "https://perimeterinstitute.ca/",
       "events_url": "https://perimeterinstitute.ca/events",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11. Major free public physics lecture series, Waterloo."
+      "notes": "Base-expansion audit 2026-06-11. Major free public physics lecture series, Waterloo.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "cigi",
@@ -1765,7 +2160,9 @@
       "base_url": "https://www.cigionline.org/",
       "events_url": "https://www.cigionline.org/events/",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11. Waterloo policy events."
+      "notes": "Base-expansion audit 2026-06-11. Waterloo policy events.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "uwaterloo-philosophy",
@@ -1775,7 +2172,10 @@
       "base_url": "https://uwaterloo.ca/philosophy/",
       "events_url": "https://uwaterloo.ca/philosophy/events",
       "render_mode": "drupal",
-      "notes": "Base-expansion audit 2026-06-11. Colloquium yielded in manual corpus."
+      "notes": "Base-expansion audit 2026-06-11. Colloquium yielded in manual corpus.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "laurier-events",
@@ -1785,7 +2185,10 @@
       "base_url": "https://www.wlu.ca/",
       "events_url": "https://students.wlu.ca/events/",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "guelph-philosophy",
@@ -1795,7 +2198,10 @@
       "base_url": "https://www.uoguelph.ca/arts/philosophy/",
       "events_url": "https://www.uoguelph.ca/arts/philosophy/events",
       "render_mode": "drupal",
-      "notes": "Base-expansion audit 2026-06-11. Defences and talks yielded in corpus."
+      "notes": "Base-expansion audit 2026-06-11. Defences and talks yielded in corpus.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "mcmaster-philosophy",
@@ -1805,7 +2211,10 @@
       "base_url": "https://philos.humanities.mcmaster.ca/",
       "events_url": "https://philos.humanities.mcmaster.ca/philosophy-department-speaker-series/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11. Yielded in corpus."
+      "notes": "Base-expansion audit 2026-06-11. Yielded in corpus.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "socrates-project",
@@ -1815,7 +2224,9 @@
       "base_url": "https://socrates.mcmaster.ca/",
       "events_url": "https://socrates.mcmaster.ca/events/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11. Public humanities lecture program, Hamilton."
+      "notes": "Base-expansion audit 2026-06-11. Public humanities lecture program, Hamilton.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "hamilton-library",
@@ -1825,7 +2236,10 @@
       "base_url": "https://www.hpl.ca/",
       "events_url": "https://www.hpl.ca/events",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "kitchener-library",
@@ -1835,7 +2249,10 @@
       "base_url": "https://www.kpl.org/",
       "events_url": "https://www.kpl.org/events",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "waterloo-library",
@@ -1845,7 +2262,10 @@
       "base_url": "https://www.wpl.ca/",
       "events_url": "https://www.wpl.ca/events",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "guelph-library",
@@ -1855,7 +2275,10 @@
       "base_url": "https://www.guelphpl.ca/",
       "events_url": "https://www.guelphpl.ca/en/programs-and-events/programs-and-events.aspx",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "brampton-library",
@@ -1865,7 +2288,10 @@
       "base_url": "https://www.bramptonlibrary.ca/",
       "events_url": "https://www.bramptonlibrary.ca/index.php/events",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "vaughan-library",
@@ -1875,7 +2301,10 @@
       "base_url": "https://www.vaughanpl.info/",
       "events_url": "https://www.vaughanpl.info/events",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "oakville-library",
@@ -1885,7 +2314,10 @@
       "base_url": "https://www.opl.ca/",
       "events_url": "https://www.opl.ca/Events",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "burlington-library",
@@ -1895,7 +2327,10 @@
       "base_url": "https://www.bpl.on.ca/",
       "events_url": "https://www.bpl.on.ca/events",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "richmondhill-library",
@@ -1905,7 +2340,10 @@
       "base_url": "https://www.rhpl.ca/",
       "events_url": "https://www.rhpl.ca/events",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "oshawa-library",
@@ -1915,7 +2353,10 @@
       "base_url": "https://www.oshawalibrary.ca/",
       "events_url": "https://www.oshawalibrary.ca/events",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "agh",
@@ -1925,7 +2366,9 @@
       "base_url": "https://www.artgalleryofhamilton.com/",
       "events_url": "https://www.artgalleryofhamilton.com/exhibitions/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "kwag",
@@ -1935,7 +2378,9 @@
       "base_url": "https://kwag.ca/",
       "events_url": "https://kwag.ca/exhibitions",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ag-guelph",
@@ -1945,7 +2390,9 @@
       "base_url": "https://artgalleryofguelph.ca/",
       "events_url": "https://artgalleryofguelph.ca/exhibitions/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "mcmaster-moa",
@@ -1955,7 +2402,9 @@
       "base_url": "https://museum.mcmaster.ca/",
       "events_url": "https://museum.mcmaster.ca/exhibitions/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "agm-mississauga",
@@ -1965,7 +2414,9 @@
       "base_url": "https://artgalleryofmississauga.com/",
       "events_url": "https://artgalleryofmississauga.com/exhibitions/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "dmg-utsc",
@@ -1975,7 +2426,9 @@
       "base_url": "https://dorismccarthygallery.utoronto.ca/",
       "events_url": "https://dorismccarthygallery.utoronto.ca/exhibitions",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "bentway",
@@ -1985,7 +2438,9 @@
       "base_url": "https://thebentway.ca/",
       "events_url": "https://thebentway.ca/events/",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11. Public art plus talks under the Gardiner."
+      "notes": "Base-expansion audit 2026-06-11. Public art plus talks under the Gardiner.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "myseum",
@@ -1995,7 +2450,9 @@
       "base_url": "https://www.myseumoftoronto.com/",
       "events_url": "https://www.myseumoftoronto.com/programs/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11. City-history exhibitions and talks."
+      "notes": "Base-expansion audit 2026-06-11. City-history exhibitions and talks.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "heritage-toronto",
@@ -2005,7 +2462,9 @@
       "base_url": "https://www.heritagetoronto.org/",
       "events_url": "https://www.heritagetoronto.org/whats-on/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "evergreen-brickworks",
@@ -2015,7 +2474,9 @@
       "base_url": "https://www.evergreen.ca/",
       "events_url": "https://www.evergreen.ca/whats-on/",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "playhouse-hamilton",
@@ -2025,7 +2486,9 @@
       "base_url": "https://www.playhousecinema.ca/",
       "events_url": "https://www.playhousecinema.ca/calendar",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11. Rep house; capture Q&A-tagged shows only per screening gate."
+      "notes": "Base-expansion audit 2026-06-11. Rep house; capture Q&A-tagged shows only per screening gate.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "westdale-hamilton",
@@ -2035,7 +2498,9 @@
       "base_url": "https://thewestdale.ca/",
       "events_url": "https://thewestdale.ca/events/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11. Film plus talks venue."
+      "notes": "Base-expansion audit 2026-06-11. Film plus talks venue.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "apollo-kitchener",
@@ -2045,7 +2510,9 @@
       "base_url": "https://apollocinema.ca/",
       "events_url": "https://apollocinema.ca/calendar/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11. Screening gate applies."
+      "notes": "Base-expansion audit 2026-06-11. Screening gate applies.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "princess-waterloo",
@@ -2055,7 +2522,9 @@
       "base_url": "https://princesscinemas.com/",
       "events_url": "https://princesscinemas.com/coming-soon/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11. Screening gate applies."
+      "notes": "Base-expansion audit 2026-06-11. Screening gate applies.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "passe-muraille",
@@ -2065,7 +2534,9 @@
       "base_url": "https://passemuraille.ca/",
       "events_url": "https://passemuraille.ca/whats-on/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "coal-mine",
@@ -2075,7 +2546,9 @@
       "base_url": "https://coalminetheatre.com/",
       "events_url": "https://coalminetheatre.com/season/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "theatre-centre",
@@ -2085,7 +2558,9 @@
       "base_url": "https://theatrecentre.org/",
       "events_url": "https://theatrecentre.org/whats-on/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11. Performance plus public talks."
+      "notes": "Base-expansion audit 2026-06-11. Performance plus public talks.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "theatre-aquarius",
@@ -2095,7 +2570,9 @@
       "base_url": "https://theatreaquarius.org/",
       "events_url": "https://theatreaquarius.org/whats-on/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "esprit",
@@ -2105,7 +2582,9 @@
       "base_url": "https://espritorchestra.com/",
       "events_url": "https://espritorchestra.com/concerts/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11. New music."
+      "notes": "Base-expansion audit 2026-06-11. New music.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "toronto-consort",
@@ -2115,7 +2594,9 @@
       "base_url": "https://torontoconsort.org/",
       "events_url": "https://torontoconsort.org/concerts/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11. Early music."
+      "notes": "Base-expansion audit 2026-06-11. Early music.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "hpo",
@@ -2125,7 +2606,9 @@
       "base_url": "https://hpo.org/",
       "events_url": "https://hpo.org/concerts-tickets/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "rasc-toronto",
@@ -2135,7 +2618,9 @@
       "base_url": "https://www.rascto.ca/",
       "events_url": "https://www.rascto.ca/upcoming-events",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11. Public speaker nights."
+      "notes": "Base-expansion audit 2026-06-11. Public speaker nights.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tfn",
@@ -2145,7 +2630,9 @@
       "base_url": "https://torontofieldnaturalists.org/",
       "events_url": "https://torontofieldnaturalists.org/events/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "wellesley",
@@ -2155,7 +2642,9 @@
       "base_url": "https://www.wellesleyinstitute.com/",
       "events_url": "https://www.wellesleyinstitute.com/events/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11. Urban health policy."
+      "notes": "Base-expansion audit 2026-06-11. Urban health policy.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "maytree",
@@ -2165,7 +2654,9 @@
       "base_url": "https://maytree.com/",
       "events_url": "https://maytree.com/events/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11. Poverty and rights policy."
+      "notes": "Base-expansion audit 2026-06-11. Poverty and rights policy.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tsa-architects",
@@ -2175,7 +2666,9 @@
       "base_url": "https://torontosocietyofarchitects.ca/",
       "events_url": "https://torontosocietyofarchitects.ca/events/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11."
+      "notes": "Base-expansion audit 2026-06-11.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "noor",
@@ -2185,7 +2678,9 @@
       "base_url": "https://noorculturalcentre.ca/",
       "events_url": "https://noorculturalcentre.ca/events/",
       "render_mode": "wordpress",
-      "notes": "Base-expansion audit 2026-06-11. Lectures and panels."
+      "notes": "Base-expansion audit 2026-06-11. Lectures and panels.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tranzac",
@@ -2195,7 +2690,9 @@
       "base_url": "https://www.tranzac.org/",
       "events_url": "https://www.tranzac.org/events/",
       "render_mode": "javascript",
-      "notes": "Base-expansion audit 2026-06-11. Hosts recurring literary series."
+      "notes": "Base-expansion audit 2026-06-11. Hosts recurring literary series.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "contactphoto",
@@ -2209,7 +2706,10 @@
       "additional_urls": [
         "https://contactphoto.com/exhibitions/",
         "https://contactphoto.com/events/"
-      ]
+      ],
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "imaginenative",
@@ -2219,7 +2719,10 @@
       "base_url": "https://imaginenative.org/festival",
       "events_url": "https://imaginenative.org/festival",
       "notes": "Indigenous-led film festival. June each year. Films with director Q&A overlap with screening-type criteria. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "torontojazz",
@@ -2229,7 +2732,10 @@
       "base_url": "https://torontojazz.com/",
       "events_url": "https://torontojazz.com/",
       "notes": "Late June. ~500,000 attendees. Multi-venue. Capture parent festival + key named-artist concerts. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "pride-toronto",
@@ -2239,7 +2745,10 @@
       "base_url": "https://www.pridetoronto.com/",
       "events_url": "https://www.pridetoronto.com/",
       "notes": "Late June. Church-Wellesley. Capture parent festival + major Pride Month events including Trans March, Dyke March, Pride Parade, Streetfair. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "luminato",
@@ -2249,7 +2758,10 @@
       "base_url": "https://luminatofestival.com/",
       "events_url": "https://luminatofestival.com/",
       "notes": "Mid-June typically. Interdisciplinary arts. Capture parent + headline performances. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "nxne",
@@ -2259,7 +2771,10 @@
       "base_url": "https://nxne.com/",
       "events_url": "https://nxne.com/",
       "notes": "Mid-June. Music + interactive + film. Multi-day, multi-venue. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tcaf",
@@ -2269,7 +2784,10 @@
       "base_url": "https://torontocomics.com/",
       "events_url": "https://torontocomics.com/",
       "notes": "Mid-May to mid-June typically. Toronto Reference Library. Independent comics. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tiff-festival",
@@ -2279,7 +2797,10 @@
       "base_url": "https://www.tiff.net/festival",
       "events_url": "https://www.tiff.net/festival",
       "notes": "September. Distinct from year-round TIFF Lightbox programming. Heavy director-Q&A density. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "hotdocs-festival",
@@ -2289,7 +2810,10 @@
       "base_url": "https://hotdocs.ca/whats-on/hot-docs-festival",
       "events_url": "https://hotdocs.ca/whats-on/hot-docs-festival",
       "notes": "Late April through early May. Documentary festival. Distinct from year-round Hot Docs Ted Rogers Cinema programming. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "doors-open-toronto",
@@ -2299,7 +2823,10 @@
       "base_url": "https://www.toronto.ca/explore-enjoy/festivals-events/doors-open-toronto/",
       "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/doors-open-toronto/",
       "notes": "Last weekend of May. Free public access to buildings normally closed. Civic-architectural ritual. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "civic-action",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "caribana",
@@ -2309,7 +2836,10 @@
       "base_url": "https://torontocaribbeancarnival.com/",
       "events_url": "https://torontocaribbeancarnival.com/",
       "notes": "Late July through early August. Caribbean-diasporic festival of form. Multi-week program. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "sing-toronto",
@@ -2319,7 +2849,10 @@
       "base_url": "https://singtoronto.com/",
       "events_url": "https://singtoronto.com/",
       "notes": "Late May through early June. A cappella and vocal arts. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "jewish-music-week",
@@ -2329,7 +2862,10 @@
       "base_url": "https://jewishmusicweek.com/",
       "events_url": "https://jewishmusicweek.com/",
       "notes": "Late May. Diasporic-cultural festival of form. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "nuit-blanche",
@@ -2339,7 +2875,10 @@
       "base_url": "https://www.toronto.ca/explore-enjoy/festivals-events/nuit-blanche-toronto/",
       "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/nuit-blanche-toronto/",
       "notes": "Early October. City-wide overnight contemporary art. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "fringe-toronto",
@@ -2349,7 +2888,10 @@
       "base_url": "https://fringetoronto.com/",
       "events_url": "https://fringetoronto.com/",
       "notes": "Early July. Independent theatre. Lottery-selected programming. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "summerworks",
@@ -2359,7 +2901,10 @@
       "base_url": "https://summerworks.ca/",
       "events_url": "https://summerworks.ca/",
       "notes": "Early August. Curated contemporary performance. Higher-art-stake counterpart to Fringe. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "scotiabank-buskerfest",
@@ -2369,7 +2914,10 @@
       "base_url": "https://torontobuskerfest.com/",
       "events_url": "https://torontobuskerfest.com/",
       "notes": "Late August. Street performance. Yonge-Dundas Square typical venue. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tdsbfilm",
@@ -2379,7 +2927,10 @@
       "base_url": "https://torontoblackfilm.com/",
       "events_url": "https://torontoblackfilm.com/",
       "notes": "February. Black-cinema festival. Director Q&A standard. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "rendezvous-classic",
@@ -2389,7 +2940,10 @@
       "base_url": "https://www.reelasian.com/",
       "events_url": "https://www.reelasian.com/",
       "notes": "November. Asian-diasporic cinema. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "inside-out-film",
@@ -2399,7 +2953,10 @@
       "base_url": "https://insideout.ca/festival/",
       "events_url": "https://insideout.ca/festival/",
       "notes": "Late May to early June. Queer cinema. Strong director-attendance density. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "polish-festival-mississauga",
@@ -2409,7 +2966,10 @@
       "base_url": "https://polishfestival.ca/",
       "events_url": "https://polishfestival.ca/",
       "notes": "Late summer typically. Diasporic-cultural reproduction. Suburban GTA. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "carassauga",
@@ -2419,7 +2979,10 @@
       "base_url": "https://www.carassauga.com/",
       "events_url": "https://www.carassauga.com/",
       "notes": "May. Multi-pavilion diasporic-cultural showcase. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "salsa-on-st-clair",
@@ -2429,7 +2992,10 @@
       "base_url": "https://salsaintoronto.com/",
       "events_url": "https://salsaintoronto.com/",
       "notes": "Mid-July. Latin-diasporic street festival. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "afrofest",
@@ -2439,7 +3005,10 @@
       "base_url": "https://music-africa.org/afrofest/",
       "events_url": "https://music-africa.org/afrofest/",
       "notes": "Early July. Woodbine Park. African-diasporic music festival. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "asha-mehrjui-tirgan",
@@ -2449,7 +3018,10 @@
       "base_url": "https://tirgan.ca/",
       "events_url": "https://tirgan.ca/",
       "notes": "Late July. Iranian-diasporic festival of form. Harbourfront. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "iranian-fire-festival",
@@ -2459,7 +3031,10 @@
       "base_url": "https://www.toronto.ca/explore-enjoy/festivals-events/",
       "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/",
       "notes": "Last Wednesday before Persian New Year (March). Mel Lastman Square typical. Officially-supported festival of form. May lack dedicated primary site; the City of Toronto events page is the closest primary source. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "taste-of-danforth",
@@ -2469,7 +3044,10 @@
       "base_url": "https://tasteofthedanforth.com/",
       "events_url": "https://tasteofthedanforth.com/",
       "notes": "Early August. Greek-diasporic festival. Largest street festival in Canada. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "veld",
@@ -2479,7 +3057,10 @@
       "base_url": "https://veldmusicfestival.com/",
       "events_url": "https://veldmusicfestival.com/",
       "notes": "Early August. Downsview Park. EDM. Borderline cultural-form criterion; included for completeness. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "festival-of-south-asia",
@@ -2489,7 +3070,10 @@
       "base_url": "https://festivalofsouthasia.com/",
       "events_url": "https://festivalofsouthasia.com/",
       "notes": "Late July. Gerrard India Bazaar. Diasporic festival. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "jerkfest",
@@ -2499,7 +3083,10 @@
       "base_url": "https://www.jerkfestival.ca/",
       "events_url": "https://www.jerkfestival.ca/",
       "notes": "Caribbean jerk cuisine + music; Centennial Park, Etobicoke; early August. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "taste-little-italy",
@@ -2509,7 +3096,10 @@
       "base_url": "https://tasteoflittleitaly.tolittleitaly.com/",
       "events_url": "https://tasteoflittleitaly.tolittleitaly.com/",
       "notes": "College St W (Bathurst-Shaw), Little Italy BIA; mid-June. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "do-west-fest",
@@ -2519,7 +3109,10 @@
       "base_url": "https://dowestfest.com/",
       "events_url": "https://dowestfest.com/",
       "notes": "Dundas St W; Uma Nota Culture. Portugal Day Parade now split off to St. Clair -- track separately. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ukrainian-festival",
@@ -2529,7 +3122,10 @@
       "base_url": "https://ukrainianfestival.com/",
       "events_url": "https://ukrainianfestival.com/",
       "notes": "Bloor St W (Jane-Runnymede); mid-September. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "taste-of-manila",
@@ -2539,7 +3135,10 @@
       "base_url": "https://www.eventbrite.ca/e/taste-of-manila-2026-tickets-1989943073300",
       "events_url": "https://www.eventbrite.ca/e/taste-of-manila-2026-tickets-1989943073300",
       "notes": "SPARC Canada; Bathurst & Wilson 'Little Manila'; mid-August. Multiple SPARC web properties exist -- disambiguate the Toronto event. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "toronto-korean-festival",
@@ -2549,7 +3148,10 @@
       "base_url": "https://www.torontokfest.ca/",
       "events_url": "https://www.torontokfest.ca/",
       "notes": "Mel Lastman Square; formerly 'Korean Harvest Festival' (legacy domain torontokhf.com). Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "indigenous-arts-festival",
@@ -2559,7 +3161,10 @@
       "base_url": "https://www.toronto.ca/explore-enjoy/festivals-events/indigenous-arts-festival/",
       "events_url": "https://www.toronto.ca/explore-enjoy/festivals-events/indigenous-arts-festival/",
       "notes": "City-produced; Fort York / Garrison Common; late June. Verify venue (one listing cites Biidaasige Park). Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "chinatown-festival",
@@ -2569,7 +3174,10 @@
       "base_url": "https://www.chinatownbia.com/",
       "events_url": "https://www.chinatownbia.com/",
       "notes": "Chinatown BIA, Spadina/Dundas; Lunar New Year in February, summer festival in August. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "panorama-india",
@@ -2579,7 +3187,10 @@
       "base_url": "https://panoramaindia.org/",
       "events_url": "https://panoramaindia.org/",
       "notes": "Nathan Phillips Square; August. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "beaches-jazz",
@@ -2589,7 +3200,10 @@
       "base_url": "https://beachesjazz.com/",
       "events_url": "https://beachesjazz.com/",
       "notes": "Late July, the Beaches. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "canadian-music-week",
@@ -2599,7 +3213,10 @@
       "base_url": "https://cmw.net/",
       "events_url": "https://cmw.net/",
       "notes": "Multi-venue music + conference. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tjff",
@@ -2613,7 +3230,10 @@
       "additional_urls": [
         "https://tjff.com/schedule/",
         "https://tjff.com/lineup/"
-      ]
+      ],
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "rendezvous-madness",
@@ -2623,7 +3243,10 @@
       "base_url": "https://workmanarts.com/rendezvous-with-madness/",
       "events_url": "https://workmanarts.com/rendezvous-with-madness/",
       "notes": "Late October; every screening followed by a panel; PWYW. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "regent-park-film",
@@ -2633,7 +3256,10 @@
       "base_url": "https://regentparkfilmfestival.com/",
       "events_url": "https://regentparkfilmfestival.com/",
       "notes": "November; free community festival + Home Made Visible touring panels. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "toronto-biennial",
@@ -2643,7 +3269,10 @@
       "base_url": "https://torontobiennial.org/",
       "events_url": "https://torontobiennial.org/",
       "notes": "2026 'Things Fall Apart', Sept 26-Dec 20; hub = Art Museum at U of T. Dedupe venue cross-listings by title+venue. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "word-on-street",
@@ -2653,7 +3282,10 @@
       "base_url": "https://toronto.thewordonthestreet.ca/",
       "events_url": "https://toronto.thewordonthestreet.ca/",
       "notes": "Canada's largest free book & magazine festival; late September. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "markham-village-music",
@@ -2663,7 +3295,10 @@
       "base_url": "https://www.markhamfestival.com/",
       "events_url": "https://www.markhamfestival.com/",
       "notes": "Main Street Markham; mid-June. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "td-markham-jazz",
@@ -2673,7 +3308,10 @@
       "base_url": "https://www.markhamjazzfestival.com/",
       "events_url": "https://www.markhamjazzfestival.com/",
       "notes": "Main Street Unionville; late August (official dates over tourism listings). Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "world-of-threads",
@@ -2683,7 +3321,10 @@
       "base_url": "https://worldofthreadsfestival.com/",
       "events_url": "https://worldofthreadsfestival.com/",
       "notes": "Fibre/textile art; QEPCCC; Sept-Jan run. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "taste-of-asia-markham",
@@ -2693,7 +3334,10 @@
       "base_url": "https://visitmarkham.ca/things-to-do/festivals-events/",
       "events_url": "https://visitmarkham.ca/things-to-do/festivals-events/",
       "notes": "Kennedy Rd, Markham; late June. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "icff",
@@ -2703,7 +3347,10 @@
       "base_url": "https://www.icff.ca/",
       "events_url": "https://www.icff.ca/",
       "notes": "Base-expansion audit 2026-06-11. June, Toronto core. Screening gate applies to sub-events. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "planet-in-focus",
@@ -2713,7 +3360,10 @@
       "base_url": "https://planetinfocus.org/",
       "events_url": "https://planetinfocus.org/",
       "notes": "Base-expansion audit 2026-06-11. October; doc screenings with filmmaker Q&As. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tpff",
@@ -2723,7 +3373,10 @@
       "base_url": "https://www.tpff.ca/",
       "events_url": "https://www.tpff.ca/",
       "notes": "Base-expansion audit 2026-06-11. September. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "toronto-after-dark",
@@ -2733,7 +3386,10 @@
       "base_url": "https://torontoafterdark.com/",
       "events_url": "https://torontoafterdark.com/",
       "notes": "Base-expansion audit 2026-06-11. October genre festival. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "blood-in-the-snow",
@@ -2743,7 +3399,10 @@
       "base_url": "https://bloodinthesnow.ca/",
       "events_url": "https://bloodinthesnow.ca/",
       "notes": "Base-expansion audit 2026-06-11. Canadian horror, November. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "female-eye",
@@ -2753,7 +3412,10 @@
       "base_url": "https://www.femaleeyefilmfestival.com/",
       "events_url": "https://www.femaleeyefilmfestival.com/",
       "notes": "Base-expansion audit 2026-06-11. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "reelabilities-to",
@@ -2763,7 +3425,10 @@
       "base_url": "https://reelabilities.org/toronto/",
       "events_url": "https://reelabilities.org/toronto/",
       "notes": "Base-expansion audit 2026-06-11. Disability film and arts. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "topictureshow",
@@ -2773,7 +3438,10 @@
       "base_url": "https://topictureshow.com/",
       "events_url": "https://topictureshow.com/",
       "notes": "Base-expansion audit 2026-06-11. Summer outdoor screenings with intros, incl. Christie Pits. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ashkenaz",
@@ -2783,7 +3451,10 @@
       "base_url": "https://www.ashkenaz.ca/",
       "events_url": "https://www.ashkenaz.ca/",
       "notes": "Base-expansion audit 2026-06-11. Major Jewish music and culture festival, Harbourfront. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "small-world",
@@ -2793,7 +3464,10 @@
       "base_url": "https://smallworldmusic.com/",
       "events_url": "https://smallworldmusic.com/",
       "notes": "Base-expansion audit 2026-06-11. Global music festival plus year-round series. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "pedestrian-sundays",
@@ -2803,7 +3477,10 @@
       "base_url": "https://www.pskensington.ca/",
       "events_url": "https://www.pskensington.ca/",
       "notes": "Base-expansion audit 2026-06-11. Monthly May-October. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "hispanic-fiesta",
@@ -2813,7 +3490,10 @@
       "base_url": "https://hispanicfiesta.com/",
       "events_url": "https://hispanicfiesta.com/",
       "notes": "Base-expansion audit 2026-06-11. Labour Day weekend, Mel Lastman Square. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "civic-action",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "festival-of-india",
@@ -2823,7 +3503,10 @@
       "base_url": "https://www.festivalofindia.ca/",
       "events_url": "https://www.festivalofindia.ca/",
       "notes": "Base-expansion audit 2026-06-11. July, Yonge St parade plus Centre Island. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "big-on-bloor",
@@ -2833,7 +3516,10 @@
       "base_url": "https://bigonbloorfestival.com/",
       "events_url": "https://bigonbloorfestival.com/",
       "notes": "Base-expansion audit 2026-06-11. Bloordale street festival. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "taste-of-lawrence",
@@ -2843,7 +3529,10 @@
       "base_url": "https://tasteoflawrence.ca/",
       "events_url": "https://tasteoflawrence.ca/",
       "notes": "Base-expansion audit 2026-06-11. Scarborough, July. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "todocanada-toronto",
@@ -2859,7 +3548,10 @@
         "https://www.todocanada.ca/festivals-toronto-june/",
         "https://www.todocanada.ca/festivals-toronto-july/",
         "https://www.todocanada.ca/festivals-toronto-august/"
-      ]
+      ],
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "streets-of-toronto",
@@ -2874,7 +3566,10 @@
         "https://streetsoftoronto.com/toronto-culture/76-best-things-to-do-in-toronto-in-may-2026/",
         "https://streetsoftoronto.com/toronto-culture/best-things-to-do-in-toronto-in-june-2026/",
         "https://streetsoftoronto.com/toronto-culture/best-things-to-do-in-toronto-in-july-2026/"
-      ]
+      ],
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "blogto",
@@ -2888,7 +3583,10 @@
       "additional_urls": [
         "https://www.blogto.com/events/festivals/",
         "https://www.blogto.com/best_of/the-best-toronto-summer-festivals/"
-      ]
+      ],
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "festivalstoronto",
@@ -2898,7 +3596,10 @@
       "base_url": "https://festivalstoronto.com/events/",
       "events_url": "https://festivalstoronto.com/events/",
       "notes": "Single-purpose aggregator. Direct festival listings. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ontariofestivals",
@@ -2908,7 +3609,10 @@
       "base_url": "https://ontariofestivals.ca/gta-festivals/",
       "events_url": "https://ontariofestivals.ca/gta-festivals/",
       "notes": "Suburban festival coverage (Vaughan, Markham, Mississauga, Brampton, Oakville). Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "musicfestivalwizard-toronto",
@@ -2918,7 +3622,10 @@
       "base_url": "https://www.musicfestivalwizard.com/festival-guide/toronto/",
       "events_url": "https://www.musicfestivalwizard.com/festival-guide/toronto/",
       "notes": "Music-festival specialist aggregator. Cross-check date claims against primary sites; user flagged false-positive risk. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "canadiantrainvacations",
@@ -2928,7 +3635,10 @@
       "base_url": "https://canadiantrainvacations.com/blog/summer-festivals-toronto",
       "events_url": "https://canadiantrainvacations.com/blog/summer-festivals-toronto",
       "notes": "Tourism-blog summary. Big-anchor coverage. Travel-industry framing. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "nowtoronto",
@@ -2938,7 +3648,10 @@
       "base_url": "https://nowtoronto.com/events/",
       "events_url": "https://nowtoronto.com/events/",
       "notes": "Cultural weekly. Festival coverage runs adjacent to event-pick coverage. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tourism-toronto",
@@ -2948,7 +3661,10 @@
       "base_url": "https://www.destinationtoronto.com/events-festivals/",
       "events_url": "https://www.destinationtoronto.com/events-festivals/",
       "notes": "Tourism authority. Heavy on Tier-1 anchors. Low coverage of fringe events. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "akimbo",
@@ -2958,7 +3674,10 @@
       "base_url": "https://akimbo.ca/listings/",
       "events_url": "https://akimbo.ca/listings/",
       "notes": "Canada-wide gallery/exhibition discovery; strong for GTA shows. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "destination-toronto",
@@ -2968,7 +3687,10 @@
       "base_url": "https://www.destinationtoronto.com/",
       "events_url": "https://www.destinationtoronto.com/",
       "notes": "Broad civic/cultural discovery. Folded from festivals-sources.json on calendar synthesis 2026-06.",
-      "render_mode": "todo"
+      "render_mode": "todo",
+      "platform_adapter": "civic-action",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "queens-events",
@@ -2978,7 +3700,10 @@
       "base_url": "https://www.queensu.ca/eventscalendar/",
       "events_url": "https://www.queensu.ca/eventscalendar/",
       "render_mode": "server-rendered",
-      "notes": "Kingston anchor. Filter for public lecture, seminar, academic presentation, research, arts and culture, conference, and workshop records with exact dates."
+      "notes": "Kingston anchor. Filter for public lecture, seminar, academic presentation, research, arts and culture, conference, and workshop records with exact dates.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "kingston-writersfest",
@@ -2988,7 +3713,10 @@
       "base_url": "https://www.kingstonwritersfest.ca/",
       "events_url": "https://www.kingstonwritersfest.ca/2026-festival/",
       "render_mode": "server-rendered",
-      "notes": "Kingston literary festival anchor. Add parent season plus dated individual event pages only."
+      "notes": "Kingston literary festival anchor. Add parent season plus dated individual event pages only.",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "agnes-etherington",
@@ -2998,7 +3726,9 @@
       "base_url": "https://agnes.queensu.ca/",
       "events_url": "https://agnes.queensu.ca/whats-on/",
       "render_mode": "javascript",
-      "notes": "Kingston exhibitions, artist talks and public programs. Exhibition and residency records require exact ranges."
+      "notes": "Kingston exhibitions, artist talks and public programs. Exhibition and residency records require exact ranges.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "montreal-jazz",
@@ -3008,7 +3738,10 @@
       "base_url": "https://montrealjazzfest.com/",
       "events_url": "https://montrealjazzfest.com/",
       "render_mode": "javascript",
-      "notes": "Montréal festival anchor. Add current-season parent plus dated official programme pages."
+      "notes": "Montréal festival anchor. Add current-season parent plus dated official programme pages.",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "osheaga",
@@ -3018,7 +3751,10 @@
       "base_url": "https://osheaga.com/",
       "events_url": "https://osheaga.com/",
       "render_mode": "javascript",
-      "notes": "Montréal festival anchor. Add parent season plus dated official programme pages."
+      "notes": "Montréal festival anchor. Add parent season plus dated official programme pages.",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "mcgill-events",
@@ -3028,7 +3764,10 @@
       "base_url": "https://www.mcgill.ca/",
       "events_url": "https://www.mcgill.ca/channels/channels/event",
       "render_mode": "javascript",
-      "notes": "Montréal university anchor. Prioritize public lectures, symposia, colloquia, defences, readings and artist talks."
+      "notes": "Montréal university anchor. Prioritize public lectures, symposia, colloquia, defences, readings and artist talks.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "concordia-events",
@@ -3038,7 +3777,10 @@
       "base_url": "https://www.concordia.ca/",
       "events_url": "https://www.concordia.ca/cuevents/offices/provost/fourth-space.html",
       "render_mode": "javascript",
-      "notes": "Montréal public programming anchor. Capture only exact-date public events."
+      "notes": "Montréal public programming anchor. Capture only exact-date public events.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tpl-salon-series",
@@ -3048,7 +3790,10 @@
       "base_url": "https://tpl.ca/",
       "events_url": "https://tpl.ca/programs-and-classes/featured/salon-series/",
       "render_mode": "server-rendered",
-      "notes": "Deep-research backbone 2026-06-28. Literary events with authors, artists and thinkers; strong recurring Toronto reading/book-talk source."
+      "notes": "Deep-research backbone 2026-06-28. Literary events with authors, artists and thinkers; strong recurring Toronto reading/book-talk source.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tpl-programs",
@@ -3058,7 +3803,10 @@
       "base_url": "https://tpl.ca/",
       "events_url": "https://tpl.ca/programs-and-classes/",
       "render_mode": "server-rendered",
-      "notes": "Broader TPL programmes. Filter to author talks, library cultural programming, humanities events and public intellectual programming."
+      "notes": "Broader TPL programmes. Filter to author talks, library cultural programming, humanities events and public intellectual programming.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "u-t-lecture-series",
@@ -3068,7 +3816,10 @@
       "base_url": "https://learn.utoronto.ca/",
       "events_url": "https://learn.utoronto.ca/university-lecture-series",
       "render_mode": "server-rendered",
-      "notes": "Deep-research backbone 2026-06-28. Public U of T lecture series with exact dates and named speakers."
+      "notes": "Deep-research backbone 2026-06-28. Public U of T lecture series with exact dates and named speakers.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tmu-research-events",
@@ -3078,7 +3829,10 @@
       "base_url": "https://www.torontomu.ca/",
       "events_url": "https://www.torontomu.ca/research/news-events/toronto-metropolitan-university-wide-research-events/",
       "render_mode": "server-rendered",
-      "notes": "Deep-research backbone 2026-06-28. University research workshops, conferences and public events."
+      "notes": "Deep-research backbone 2026-06-28. University research workshops, conferences and public events.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "rom-events",
@@ -3088,7 +3842,9 @@
       "base_url": "https://www.rom.on.ca/",
       "events_url": "https://www.rom.on.ca/whats-on/events",
       "render_mode": "server-rendered",
-      "notes": "Museum events, talks, panels, public programmes and expert-led events. Filter out tours and purely social programming unless intellectually substantive."
+      "notes": "Museum events, talks, panels, public programmes and expert-led events. Filter out tours and purely social programming unless intellectually substantive.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "rom-talks",
@@ -3098,7 +3854,9 @@
       "base_url": "https://www.rom.on.ca/",
       "events_url": "https://www.rom.on.ca/whats-on/special-programs/talks",
       "render_mode": "server-rendered",
-      "notes": "Deep-research backbone 2026-06-28. ROM talks with expert speakers and collection-linked public learning."
+      "notes": "Deep-research backbone 2026-06-28. ROM talks with expert speakers and collection-linked public learning.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ago-events",
@@ -3108,7 +3866,9 @@
       "base_url": "https://ago.ca/",
       "events_url": "https://ago.ca/events/browse",
       "render_mode": "javascript",
-      "notes": "AGO public events. Prioritize artist talks, openings with artists/curators, lectures, panels and workshops with exact dates."
+      "notes": "AGO public events. Prioritize artist talks, openings with artists/curators, lectures, panels and workshops with exact dates.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "concordia-fofa",
@@ -3118,7 +3878,9 @@
       "base_url": "https://www.concordia.ca/finearts/fofa.html",
       "events_url": "https://www.concordia.ca/cuevents/finearts/fofa.html",
       "render_mode": "server-rendered",
-      "notes": "Deep-research backbone 2026-06-28. Montréal exhibitions, artist talks and fine-arts public programming."
+      "notes": "Deep-research backbone 2026-06-28. Montréal exhibitions, artist talks and fine-arts public programming.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "concordia-gradproskills",
@@ -3128,7 +3890,9 @@
       "base_url": "https://www.concordia.ca/",
       "events_url": "https://www.concordia.ca/cuevents/offices/vprgs/gradproskills.html",
       "render_mode": "server-rendered",
-      "notes": "Graduate research workshops, funding workshops and academic professional-development events with exact dates."
+      "notes": "Graduate research workshops, funding workshops and academic professional-development events with exact dates.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "mcgill-science",
@@ -3138,7 +3902,10 @@
       "base_url": "https://www.mcgill.ca/science/",
       "events_url": "https://www.mcgill.ca/science/channels_item/25",
       "render_mode": "server-rendered",
-      "notes": "Deep-research backbone 2026-06-28. Public talks, science-and-society events, symposia and academic deadlines."
+      "notes": "Deep-research backbone 2026-06-28. Public talks, science-and-society events, symposia and academic deadlines.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "rotman-public-events",
@@ -3148,7 +3915,9 @@
       "base_url": "https://www.rotman.utoronto.ca/",
       "events_url": "https://www.rotman.utoronto.ca/news-events-and-ideas/public-events/",
       "render_mode": "server-rendered",
-      "notes": "U of T business, public policy and leadership talks. Filter to public intellectual events, panels and speaker events."
+      "notes": "U of T business, public policy and leadership talks. Filter to public intellectual events, panels and speaker events.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "meaning-home",
@@ -3159,7 +3928,9 @@
       "events_url": "https://www.meaningofhome.ca/page/rules-and-regulations",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "kids-write-4-kids",
@@ -3170,7 +3941,9 @@
       "events_url": "https://kidswrite4kids.ripplefoundation.ca/kids-write-4-kids-contest-rules/",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "legion-remembrance-contests",
@@ -3181,7 +3954,9 @@
       "events_url": "https://www.remembrancecontests.ca/",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "yabs-young-writers-award",
@@ -3192,7 +3967,9 @@
       "events_url": "https://www.yabs.ab.ca/ywa/",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "oecta-young-authors",
@@ -3203,7 +3980,9 @@
       "events_url": "https://www.catholicteachers.ca/For-Your-Benefit/Awards/Young-Authors-Awards",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "cnib-braille-writing",
@@ -3214,7 +3993,9 @@
       "events_url": "https://www.cnib.ca/en/about-contest",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "vancouver-writers-fest-youth",
@@ -3225,7 +4006,10 @@
       "events_url": "https://writersfest.bc.ca/youth/youth-writing-contest",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "jessamy-stursberg-poetry",
@@ -3236,7 +4020,9 @@
       "events_url": "https://poets.ca/offerings/awards/",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "queens-commonwealth-writing",
@@ -3247,7 +4033,10 @@
       "events_url": "https://www.royalcwsociety.org/writing-competition/qcwc2026",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "french-for-future-essay",
@@ -3258,7 +4047,9 @@
       "events_url": "https://french-future.org/programs/essay-contest/",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "aristotle-contest-utoronto",
@@ -3269,7 +4060,9 @@
       "events_url": "https://philosophy.utoronto.ca/the-aristotle-a-high-school-philosophy-essay-contest/",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "fraser-student-essay",
@@ -3280,7 +4073,9 @@
       "events_url": "https://www.fraserinstitute.org/education-programs/student-essay-contest",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "cns-essay-contest",
@@ -3291,7 +4086,9 @@
       "events_url": "https://www.cns-snc.ca/news/canadian-nuclear-society-2026-essay-contest/",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "diverse-minds-manitoba",
@@ -3302,7 +4099,9 @@
       "events_url": "https://bnaibrith.ca/diverseminds/",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "osstf-student-achievement",
@@ -3313,7 +4112,9 @@
       "events_url": "https://www.osstf.on.ca/studentachievementawards",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "opl-awesome-authors",
@@ -3324,7 +4125,10 @@
       "events_url": "https://collections.biblioottawalibrary.ca/en/awesome-authors-youth-writing-contest-2026",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "hpl-power-of-the-pen",
@@ -3335,7 +4139,10 @@
       "events_url": "https://teens.hpl.ca/articles/power-pen-creative-writing-contest",
       "render_mode": "static",
       "feed_status": "manual-deep-research",
-      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways."
+      "notes": "Youth writing competition source added from 2026-06-28 deep research for Canadian-eligible grades 1-12 pathways.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "princeton-uchv",
@@ -3347,7 +4154,10 @@
       "render_mode": "drupal",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Global university philosophy and ethics source. Strong public and university-affiliate listings; includes Tanner Lectures, Moffett Lectures, political philosophy colloquia, workshops, and fellowships."
+      "notes": "Global university philosophy and ethics source. Strong public and university-affiliate listings; includes Tanner Lectures, Moffett Lectures, political philosophy colloquia, workshops, and fellowships.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "harvard-safra-ethics",
@@ -3359,7 +4169,9 @@
       "render_mode": "drupal",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "High-value ethics, political theory, public life, fellowship and lecture source."
+      "notes": "High-value ethics, political theory, public life, fellowship and lecture source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "harvard-mahindra-humanities",
@@ -3371,7 +4183,9 @@
       "render_mode": "drupal",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "High-value humanities lectures, seminars, conferences, and workshops."
+      "notes": "High-value humanities lectures, seminars, conferences, and workshops.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "stanford-humanities-center",
@@ -3383,7 +4197,9 @@
       "render_mode": "drupal",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Humanities lectures, workshops, fellowships, and interdisciplinary public events."
+      "notes": "Humanities lectures, workshops, fellowships, and interdisciplinary public events.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "yale-whitney-humanities",
@@ -3395,7 +4211,9 @@
       "render_mode": "drupal",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Humanities lectures, workshops, colloquia, and public programs."
+      "notes": "Humanities lectures, workshops, colloquia, and public programs.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "berkeley-townsend-center",
@@ -3407,7 +4225,9 @@
       "render_mode": "drupal",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Public humanities lectures, forums, workshops, and fellowships."
+      "notes": "Public humanities lectures, forums, workshops, and fellowships.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "uchicago-humanities-events",
@@ -3419,7 +4239,10 @@
       "render_mode": "drupal",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Humanities lectures and departmental events."
+      "notes": "Humanities lectures and departmental events.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "cambridge-crassh",
@@ -3431,7 +4254,9 @@
       "render_mode": "wordpress",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Centre for Research in the Arts, Social Sciences and Humanities; high-value lectures, conferences, seminars, and workshops."
+      "notes": "Centre for Research in the Arts, Social Sciences and Humanities; high-value lectures, conferences, seminars, and workshops.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "oxford-torch",
@@ -3443,7 +4268,9 @@
       "render_mode": "drupal",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Oxford humanities talks, workshops, networks, fellowships, and public programs."
+      "notes": "Oxford humanities talks, workshops, networks, fellowships, and public programs.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "oxford-philosophy",
@@ -3455,7 +4282,10 @@
       "render_mode": "drupal",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Philosophy lectures, seminars, and colloquia."
+      "notes": "Philosophy lectures, seminars, and colloquia.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "institute-philosophy-london",
@@ -3467,7 +4297,10 @@
       "render_mode": "drupal",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Public philosophy lectures, seminars, and events through the School of Advanced Study."
+      "notes": "Public philosophy lectures, seminars, and events through the School of Advanced Study.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "sas-events-london",
@@ -3479,7 +4312,10 @@
       "render_mode": "drupal",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Humanities and social science lectures, institutes, and research events."
+      "notes": "Humanities and social science lectures, institutes, and research events.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "lse-events",
@@ -3491,7 +4327,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Public lectures in political theory, law, ethics, history, economics, and social science."
+      "notes": "Public lectures in political theory, law, ethics, history, economics, and social science.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "college-de-france-agenda",
@@ -3503,7 +4341,10 @@
       "render_mode": "javascript",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Global public lecture calendar; especially useful for philosophy, history, philology, archaeology, and intellectual history."
+      "notes": "Global public lecture calendar; especially useful for philosophy, history, philology, archaeology, and intellectual history.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "iwm-vienna-events",
@@ -3515,7 +4356,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Humanities, political theory, intellectual history, public philosophy, and fellowships."
+      "notes": "Humanities, political theory, intellectual history, public philosophy, and fellowships.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "warburg-events",
@@ -3527,7 +4370,9 @@
       "render_mode": "drupal",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Art history, intellectual history, Renaissance studies, magic, memory, and cultural history."
+      "notes": "Art history, intellectual history, Renaissance studies, magic, memory, and cultural history.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "new-school-nssr-events",
@@ -3539,7 +4384,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Critical theory, philosophy, politics, history, and social research events."
+      "notes": "Critical theory, philosophy, politics, history, and social research events.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ias-events",
@@ -3551,7 +4398,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "High-value lectures, seminars, and talks across historical studies, social science, mathematics, and natural sciences."
+      "notes": "High-value lectures, seminars, and talks across historical studies, social science, mathematics, and natural sciences.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "tanner-lectures",
@@ -3563,7 +4412,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Prestige lecture series across major universities; harvest through host institutions when individual listings appear."
+      "notes": "Prestige lecture series across major universities; harvest through host institutions when individual listings appear.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "apa-meeting-submissions",
@@ -3575,7 +4426,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Main philosophy meeting submission source; complements APA calls page already in roster."
+      "notes": "Main philosophy meeting submission source; complements APA calls page already in roster.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "cpa-congress",
@@ -3587,7 +4440,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Canadian and international philosophy congress CFP source."
+      "notes": "Canadian and international philosophy congress CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "spep",
@@ -3599,7 +4454,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Continental philosophy conference CFP and annual meeting source."
+      "notes": "Continental philosophy conference CFP and annual meeting source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "philosophy-of-science-association",
@@ -3611,7 +4468,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Biennial conference and philosophy of science CFP source."
+      "notes": "Biennial conference and philosophy of science CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "european-society-analytic-philosophy",
@@ -3623,7 +4482,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Analytic philosophy congress and affiliated CFP source."
+      "notes": "Analytic philosophy congress and affiliated CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "european-society-aesthetics",
@@ -3635,7 +4496,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Aesthetics and philosophy of art annual conference CFP source."
+      "notes": "Aesthetics and philosophy of art annual conference CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "bsph",
@@ -3647,7 +4510,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "History of philosophy annual conference and workshop CFP source."
+      "notes": "History of philosophy annual conference and workshop CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "bsap",
@@ -3659,7 +4524,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Aesthetics conference, grants, and CFP source."
+      "notes": "Aesthetics conference, grants, and CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "sap-uk",
@@ -3671,7 +4538,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Applied ethics, social/political philosophy, and practical philosophy conference CFP source."
+      "notes": "Applied ethics, social/political philosophy, and practical philosophy conference CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "bset",
@@ -3683,7 +4552,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Annual ethical theory conference CFP source."
+      "notes": "Annual ethical theory conference CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "nassp",
@@ -3695,7 +4566,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Social and political philosophy annual conference CFP source."
+      "notes": "Social and political philosophy annual conference CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "society-classical-studies",
@@ -3707,7 +4580,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Classics annual meeting CFP source."
+      "notes": "Classics annual meeting CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "archaeological-institute-america",
@@ -3719,7 +4594,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Archaeology annual meeting CFP source."
+      "notes": "Archaeology annual meeting CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "leeds-imc",
@@ -3731,7 +4608,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Major medieval studies congress and CFP source."
+      "notes": "Major medieval studies congress and CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "kalamazoo-medieval-congress",
@@ -3743,7 +4622,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Major medieval studies CFP source."
+      "notes": "Major medieval studies CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "renaissance-society-america",
@@ -3755,7 +4636,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Renaissance and early modern studies CFP source."
+      "notes": "Renaissance and early modern studies CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "college-art-association",
@@ -3767,7 +4650,10 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Art history, studio art, museum studies, and visual culture CFP source."
+      "notes": "Art history, studio art, museum studies, and visual culture CFP source.",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "icma-medieval-art",
@@ -3779,7 +4665,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Medieval art history calls, sessions, and conference opportunities."
+      "notes": "Medieval art history calls, sessions, and conference opportunities.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "asor-annual-meeting",
@@ -3791,7 +4679,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Archaeology, ancient Near East, religious studies, and material culture CFP source."
+      "notes": "Archaeology, ancient Near East, religious studies, and material culture CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "sharp",
@@ -3803,7 +4693,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Book history, bibliography, publishing studies, and print culture CFP source."
+      "notes": "Book history, bibliography, publishing studies, and print culture CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "digital-humanities-adho",
@@ -3815,7 +4707,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Digital humanities annual conference CFP source."
+      "notes": "Digital humanities annual conference CFP source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "hastac-opportunities",
@@ -3827,7 +4721,10 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Digital humanities, pedagogy, grants, CFPs, and collaborative opportunities."
+      "notes": "Digital humanities, pedagogy, grants, CFPs, and collaborative opportunities.",
+      "platform_adapter": "civic-action",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "chci-annual-meeting",
@@ -3839,7 +4736,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Humanities centers, annual meeting calls, institutes, and research networks."
+      "notes": "Humanities centers, annual meeting calls, institutes, and research networks.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "acls-competitions",
@@ -3851,7 +4750,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Humanities fellowships, grants, and scholarly competitions; harvest as deadline opportunities."
+      "notes": "Humanities fellowships, grants, and scholarly competitions; harvest as deadline opportunities.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "radcliffe-fellowship",
@@ -3863,7 +4764,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Major interdisciplinary humanities, arts, social sciences, and science fellowship deadline source."
+      "notes": "Major interdisciplinary humanities, arts, social sciences, and science fellowship deadline source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "national-humanities-center-fellowships",
@@ -3875,7 +4778,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Major humanities fellowship deadline source."
+      "notes": "Major humanities fellowship deadline source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "ias-fellowships",
@@ -3887,7 +4792,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "School of Historical Studies and Social Science membership/fellowship deadlines."
+      "notes": "School of Historical Studies and Social Science membership/fellowship deadlines.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "warburg-fellowships",
@@ -3899,7 +4806,9 @@
       "render_mode": "drupal",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Art history, intellectual history, Renaissance, history of ideas, and cultural memory fellowship deadlines."
+      "notes": "Art history, intellectual history, Renaissance, history of ideas, and cultural memory fellowship deadlines.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "iwm-fellowships",
@@ -3911,7 +4820,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Political thought, history, philosophy, public humanities, and social science fellowship deadlines."
+      "notes": "Political thought, history, philosophy, public humanities, and social science fellowship deadlines.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "dumbarton-oaks-fellowships",
@@ -3923,7 +4834,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Byzantine studies, pre-Columbian studies, garden and landscape history fellowships."
+      "notes": "Byzantine studies, pre-Columbian studies, garden and landscape history fellowships.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "american-academy-rome-prize",
@@ -3935,7 +4848,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Humanities, arts, architecture, design, and historic preservation opportunity deadline source."
+      "notes": "Humanities, arts, architecture, design, and historic preservation opportunity deadline source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "getty-scholar-grants",
@@ -3947,7 +4862,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Art history, conservation, humanities, and museum research grant deadline source."
+      "notes": "Art history, conservation, humanities, and museum research grant deadline source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "huntington-fellowships",
@@ -3959,7 +4876,10 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Humanities research fellowships in archives, rare books, and collections."
+      "notes": "Humanities research fellowships in archives, rare books, and collections.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "folger-fellowships",
@@ -3971,7 +4891,10 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Early modern, Shakespeare, performance history, book history, and humanities fellowship deadlines."
+      "notes": "Early modern, Shakespeare, performance history, book history, and humanities fellowship deadlines.",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "nias-fellowships",
@@ -3983,7 +4906,9 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "International humanities and social sciences fellowship source."
+      "notes": "International humanities and social sciences fellowship source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     },
     {
       "id": "casbs-fellowships",
@@ -3995,7 +4920,582 @@
       "render_mode": "static",
       "scope": "global-academic",
       "feed_status": "deep-research-2026-06-29",
-      "notes": "Social science and humanities-adjacent fellowship deadline source."
+      "notes": "Social science and humanities-adjacent fellowship deadline source.",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "kingston-city",
+      "name": "City of Kingston Events",
+      "url": "https://www.cityofkingston.ca/arts-culture-and-events/city-calendar-and-events/",
+      "region": "Kingston",
+      "city": "Kingston",
+      "corridor_zone": "kingston",
+      "language": "en",
+      "timezone": "America/Toronto",
+      "trust_tier": "official",
+      "crawl_cadence_days": 3,
+      "enabled": true,
+      "status": "active",
+      "adapter": "discovery-detail",
+      "events_url": "https://www.cityofkingston.ca/arts-culture-and-events/city-calendar-and-events/",
+      "platform_adapter": "municipal",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "kfpl-events",
+      "name": "Kingston Frontenac Public Library",
+      "url": "https://calendar.kfpl.ca/events",
+      "region": "Kingston",
+      "city": "Kingston",
+      "corridor_zone": "kingston",
+      "language": "en",
+      "timezone": "America/Toronto",
+      "trust_tier": "official",
+      "crawl_cadence_days": 3,
+      "enabled": true,
+      "status": "active",
+      "adapter": "discovery-detail",
+      "events_url": "https://calendar.kfpl.ca/events",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "agnes-events",
+      "name": "Agnes Etherington Art Centre",
+      "url": "https://agnes.queensu.ca/participate/events/",
+      "region": "Kingston",
+      "city": "Kingston",
+      "corridor_zone": "kingston",
+      "language": "en",
+      "timezone": "America/Toronto",
+      "trust_tier": "official",
+      "crawl_cadence_days": 3,
+      "enabled": true,
+      "status": "active",
+      "adapter": "discovery-detail",
+      "events_url": "https://agnes.queensu.ca/participate/events/",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "gananoque-events",
+      "name": "Town of Gananoque Events",
+      "url": "https://www.gananoque.ca/community-services/events",
+      "region": "Gananoque",
+      "city": "Gananoque",
+      "corridor_zone": "gananoque-thousand-islands",
+      "language": "en",
+      "timezone": "America/Toronto",
+      "trust_tier": "official",
+      "crawl_cadence_days": 3,
+      "enabled": true,
+      "status": "active",
+      "adapter": "discovery-detail",
+      "events_url": "https://www.gananoque.ca/community-services/events",
+      "platform_adapter": "municipal",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "thousand-islands-playhouse",
+      "name": "Thousand Islands Playhouse",
+      "url": "https://www.1000islandsplayhouse.com/",
+      "region": "Gananoque",
+      "city": "Gananoque",
+      "corridor_zone": "gananoque-thousand-islands",
+      "language": "en",
+      "timezone": "America/Toronto",
+      "trust_tier": "official",
+      "crawl_cadence_days": 3,
+      "enabled": true,
+      "status": "active",
+      "adapter": "discovery-detail",
+      "events_url": "https://www.1000islandsplayhouse.com/",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "brockville-arts-centre",
+      "name": "Brockville Arts Centre",
+      "url": "https://brockvilleartscentre.com/",
+      "region": "Brockville",
+      "city": "Brockville",
+      "corridor_zone": "brockville-leeds-grenville",
+      "language": "en",
+      "timezone": "America/Toronto",
+      "trust_tier": "official",
+      "crawl_cadence_days": 3,
+      "enabled": true,
+      "status": "active",
+      "adapter": "discovery-detail",
+      "events_url": "https://brockvilleartscentre.com/",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "brockville-library",
+      "name": "Brockville Public Library",
+      "url": "https://brockvillelibrary.ca/",
+      "region": "Brockville",
+      "city": "Brockville",
+      "corridor_zone": "brockville-leeds-grenville",
+      "language": "en",
+      "timezone": "America/Toronto",
+      "trust_tier": "official",
+      "crawl_cadence_days": 3,
+      "enabled": true,
+      "status": "active",
+      "adapter": "discovery-detail",
+      "events_url": "https://brockvillelibrary.ca/",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "cornwall-events",
+      "name": "City of Cornwall Events",
+      "url": "https://www.cornwall.ca/en/play-here/events.aspx",
+      "region": "Cornwall",
+      "city": "Cornwall",
+      "corridor_zone": "cornwall-sdg",
+      "language": "en",
+      "timezone": "America/Toronto",
+      "trust_tier": "official",
+      "crawl_cadence_days": 3,
+      "enabled": true,
+      "status": "active",
+      "adapter": "discovery-detail",
+      "events_url": "https://www.cornwall.ca/en/play-here/events.aspx",
+      "platform_adapter": "municipal",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "cornwall-library",
+      "name": "Cornwall Public Library",
+      "url": "https://library.cornwall.on.ca/",
+      "region": "Cornwall",
+      "city": "Cornwall",
+      "corridor_zone": "cornwall-sdg",
+      "language": "en/fr",
+      "timezone": "America/Toronto",
+      "trust_tier": "official",
+      "crawl_cadence_days": 3,
+      "enabled": true,
+      "status": "active",
+      "adapter": "discovery-detail",
+      "events_url": "https://library.cornwall.on.ca/",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "montreal-ville",
+      "name": "Ville de Montréal Événements",
+      "url": "https://montreal.ca/evenements",
+      "region": "Montréal",
+      "city": "Montréal",
+      "corridor_zone": "montreal",
+      "language": "fr/en",
+      "timezone": "America/Toronto",
+      "trust_tier": "official",
+      "crawl_cadence_days": 3,
+      "enabled": true,
+      "status": "active",
+      "adapter": "discovery-detail",
+      "events_url": "https://montreal.ca/evenements",
+      "platform_adapter": "municipal",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "banq-events",
+      "name": "BAnQ Activités",
+      "url": "https://www.banq.qc.ca/calendrier/",
+      "region": "Montréal",
+      "city": "Montréal",
+      "corridor_zone": "montreal",
+      "language": "fr",
+      "timezone": "America/Toronto",
+      "trust_tier": "official",
+      "crawl_cadence_days": 3,
+      "enabled": true,
+      "status": "active",
+      "adapter": "discovery-detail",
+      "events_url": "https://www.banq.qc.ca/calendrier/",
+      "platform_adapter": "library",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "udem-events",
+      "name": "Université de Montréal Événements",
+      "url": "https://calendrier.umontreal.ca/",
+      "region": "Montréal",
+      "city": "Montréal",
+      "corridor_zone": "montreal",
+      "language": "fr",
+      "timezone": "America/Toronto",
+      "trust_tier": "official",
+      "crawl_cadence_days": 3,
+      "enabled": true,
+      "status": "active",
+      "adapter": "discovery-detail",
+      "events_url": "https://calendrier.umontreal.ca/",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "uqam-events",
+      "name": "UQAM Calendrier",
+      "url": "https://evenements.uqam.ca/",
+      "region": "Montréal",
+      "city": "Montréal",
+      "corridor_zone": "montreal",
+      "language": "fr",
+      "timezone": "America/Toronto",
+      "trust_tier": "official",
+      "crawl_cadence_days": 3,
+      "enabled": true,
+      "status": "active",
+      "adapter": "discovery-detail",
+      "events_url": "https://evenements.uqam.ca/",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "cinematheque-events",
+      "name": "Cinémathèque québécoise",
+      "url": "https://www.cinematheque.qc.ca/fr/cinema/",
+      "region": "Montréal",
+      "city": "Montréal",
+      "corridor_zone": "montreal",
+      "language": "fr/en",
+      "timezone": "America/Toronto",
+      "trust_tier": "official",
+      "crawl_cadence_days": 3,
+      "enabled": true,
+      "status": "active",
+      "adapter": "discovery-detail",
+      "events_url": "https://www.cinematheque.qc.ca/fr/cinema/",
+      "platform_adapter": "french-language",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "phi-events",
+      "name": "PHI Events",
+      "url": "https://phi.ca/en/events/",
+      "region": "Montréal",
+      "city": "Montréal",
+      "corridor_zone": "montreal",
+      "language": "en/fr",
+      "timezone": "America/Toronto",
+      "trust_tier": "official",
+      "crawl_cadence_days": 3,
+      "enabled": true,
+      "status": "active",
+      "adapter": "discovery-detail",
+      "events_url": "https://phi.ca/en/events/",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "cca-events",
+      "name": "Canadian Centre for Architecture",
+      "url": "https://www.cca.qc.ca/en/events",
+      "region": "Montréal",
+      "city": "Montréal",
+      "corridor_zone": "montreal",
+      "language": "en/fr",
+      "timezone": "America/Toronto",
+      "trust_tier": "official",
+      "crawl_cadence_days": 3,
+      "enabled": true,
+      "status": "active",
+      "adapter": "discovery-detail",
+      "events_url": "https://www.cca.qc.ca/en/events",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "institutional-arc",
+      "name": "Legacy source institutional-arc",
+      "url": "https://www.masseycollege.ca/calendar/",
+      "region": "Unknown",
+      "city": "Unknown",
+      "corridor_zone": "unknown",
+      "language": "unknown",
+      "timezone": "America/Toronto",
+      "trust_tier": "legacy-unclassified",
+      "crawl_cadence_days": 30,
+      "enabled": false,
+      "status": "legacy",
+      "adapter": "legacy-record",
+      "events_url": "https://www.masseycollege.ca/calendar/",
+      "platform_adapter": "university",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "corpus-2026-06-09",
+      "name": "Legacy source corpus-2026-06-09",
+      "url": "https://agakhanmuseum.org/whats-on/",
+      "region": "Unknown",
+      "city": "Unknown",
+      "corridor_zone": "unknown",
+      "language": "unknown",
+      "timezone": "America/Toronto",
+      "trust_tier": "legacy-unclassified",
+      "crawl_cadence_days": 30,
+      "enabled": false,
+      "status": "legacy",
+      "adapter": "legacy-record",
+      "events_url": "https://agakhanmuseum.org/whats-on/",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "april-15-recovery-tbd",
+      "name": "Legacy source april-15-recovery-tbd",
+      "url": "https://www.medieval.utoronto.ca/",
+      "region": "Unknown",
+      "city": "Unknown",
+      "corridor_zone": "unknown",
+      "language": "unknown",
+      "timezone": "America/Toronto",
+      "trust_tier": "legacy-unclassified",
+      "crawl_cadence_days": 30,
+      "enabled": false,
+      "status": "legacy",
+      "adapter": "legacy-record",
+      "events_url": "https://www.medieval.utoronto.ca/",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "april-15-recovery",
+      "name": "Legacy source april-15-recovery",
+      "url": "https://www.humanities.utoronto.ca/events/miles-away-film-screening-and-directors-panel",
+      "region": "Unknown",
+      "city": "Unknown",
+      "corridor_zone": "unknown",
+      "language": "unknown",
+      "timezone": "America/Toronto",
+      "trust_tier": "legacy-unclassified",
+      "crawl_cadence_days": 30,
+      "enabled": false,
+      "status": "legacy",
+      "adapter": "legacy-record",
+      "events_url": "https://www.humanities.utoronto.ca/events/miles-away-film-screening-and-directors-panel",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "april-corpus",
+      "name": "Legacy source april-corpus",
+      "url": "https://www.sociology.utoronto.ca/events/cgsp-care-economics-context-care-peaks-plateaus-and-loops-narrative-insights-stress-family",
+      "region": "Unknown",
+      "city": "Unknown",
+      "corridor_zone": "unknown",
+      "language": "unknown",
+      "timezone": "America/Toronto",
+      "trust_tier": "legacy-unclassified",
+      "crawl_cadence_days": 30,
+      "enabled": false,
+      "status": "legacy",
+      "adapter": "legacy-record",
+      "events_url": "https://www.sociology.utoronto.ca/events/cgsp-care-economics-context-care-peaks-plateaus-and-loops-narrative-insights-stress-family",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "may-27-research",
+      "name": "Legacy source may-27-research",
+      "url": "https://agakhanmuseum.org/whats-on/dhrupad-vocal-recital/",
+      "region": "Unknown",
+      "city": "Unknown",
+      "corridor_zone": "unknown",
+      "language": "unknown",
+      "timezone": "America/Toronto",
+      "trust_tier": "legacy-unclassified",
+      "crawl_cadence_days": 30,
+      "enabled": false,
+      "status": "legacy",
+      "adapter": "legacy-record",
+      "events_url": "https://agakhanmuseum.org/whats-on/dhrupad-vocal-recital/",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "desifest",
+      "name": "Legacy source desifest",
+      "url": "https://desifest.ca/",
+      "region": "Toronto",
+      "city": "Toronto",
+      "corridor_zone": "toronto",
+      "language": "unknown",
+      "timezone": "America/Toronto",
+      "trust_tier": "legacy-unclassified",
+      "crawl_cadence_days": 30,
+      "enabled": false,
+      "status": "legacy",
+      "adapter": "legacy-record",
+      "events_url": "https://desifest.ca/",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "massey-verified-2026-06-09",
+      "name": "Legacy source massey-verified-2026-06-09",
+      "url": "https://masseycollege.ca/events/ideas-ideals-the-ethics-of-civic-responsibility/",
+      "region": "Toronto",
+      "city": "Toronto",
+      "corridor_zone": "toronto",
+      "language": "unknown",
+      "timezone": "America/Toronto",
+      "trust_tier": "legacy-unclassified",
+      "crawl_cadence_days": 30,
+      "enabled": false,
+      "status": "legacy",
+      "adapter": "legacy-record",
+      "events_url": "https://masseycollege.ca/events/ideas-ideals-the-ethics-of-civic-responsibility/",
+      "platform_adapter": "civic-action",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "harbourfront-summer",
+      "name": "Legacy source harbourfront-summer",
+      "url": "https://harbourfrontcentre.com/series/summer-music-in-the-garden/",
+      "region": "Toronto",
+      "city": "Toronto",
+      "corridor_zone": "toronto",
+      "language": "unknown",
+      "timezone": "America/Toronto",
+      "trust_tier": "legacy-unclassified",
+      "crawl_cadence_days": 30,
+      "enabled": false,
+      "status": "legacy",
+      "adapter": "legacy-record",
+      "events_url": "https://harbourfrontcentre.com/series/summer-music-in-the-garden/",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "cfp-worldwide",
+      "name": "Legacy source cfp-worldwide",
+      "url": "https://www.isanet.org/Conferences/ISA2027/Call",
+      "region": "Online",
+      "city": "Online",
+      "corridor_zone": "online-global",
+      "language": "unknown",
+      "timezone": "UTC",
+      "trust_tier": "legacy-unclassified",
+      "crawl_cadence_days": 30,
+      "enabled": false,
+      "status": "legacy",
+      "adapter": "legacy-record",
+      "events_url": "https://www.isanet.org/Conferences/ISA2027/Call",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "brott-music",
+      "name": "Legacy source brott-music",
+      "url": "https://brottmusic.com/",
+      "region": "Hamilton",
+      "city": "Hamilton",
+      "corridor_zone": "outside-corridor",
+      "language": "unknown",
+      "timezone": "America/Toronto",
+      "trust_tier": "legacy-unclassified",
+      "crawl_cadence_days": 30,
+      "enabled": false,
+      "status": "legacy",
+      "adapter": "legacy-record",
+      "events_url": "https://brottmusic.com/",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "writing-competitions-2",
+      "name": "Legacy source writing-competitions-2",
+      "url": "https://writetheworld.org/competitions",
+      "region": "Unknown",
+      "city": "Unknown",
+      "corridor_zone": "unknown",
+      "language": "unknown",
+      "timezone": "America/Toronto",
+      "trust_tier": "legacy-unclassified",
+      "crawl_cadence_days": 30,
+      "enabled": false,
+      "status": "legacy",
+      "adapter": "legacy-record",
+      "events_url": "https://writetheworld.org/competitions",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "youth-writing-competitions-2026-06-28",
+      "name": "Legacy source youth-writing-competitions-2026-06-28",
+      "url": "https://philosophy.utoronto.ca/the-aristotle-a-high-school-philosophy-essay-contest/",
+      "region": "Unknown",
+      "city": "Unknown",
+      "corridor_zone": "unknown",
+      "language": "unknown",
+      "timezone": "America/Toronto",
+      "trust_tier": "legacy-unclassified",
+      "crawl_cadence_days": 30,
+      "enabled": false,
+      "status": "legacy",
+      "adapter": "legacy-record",
+      "events_url": "https://philosophy.utoronto.ca/the-aristotle-a-high-school-philosophy-essay-contest/",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "fantasia-montreal",
+      "name": "Legacy source fantasia-montreal",
+      "url": "https://fantasiafestival.com/en/",
+      "region": "Montréal",
+      "city": "Montréal",
+      "corridor_zone": "montreal",
+      "language": "unknown",
+      "timezone": "America/Toronto",
+      "trust_tier": "legacy-unclassified",
+      "crawl_cadence_days": 30,
+      "enabled": false,
+      "status": "legacy",
+      "adapter": "legacy-record",
+      "events_url": "https://fantasiafestival.com/en/",
+      "platform_adapter": "festival",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "writing-competitions",
+      "name": "Legacy source writing-competitions",
+      "url": "https://foyleyoungpoets.org/",
+      "region": "Unknown",
+      "city": "Unknown",
+      "corridor_zone": "unknown",
+      "language": "unknown",
+      "timezone": "America/Toronto",
+      "trust_tier": "legacy-unclassified",
+      "crawl_cadence_days": 30,
+      "enabled": false,
+      "status": "legacy",
+      "adapter": "legacy-record",
+      "events_url": "https://foyleyoungpoets.org/",
+      "source_mode": "crawl",
+      "harvest_enabled": true
     }
   ],
   "deferred_candidates": {

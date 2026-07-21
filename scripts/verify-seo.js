@@ -28,6 +28,20 @@ function attrValue(tag,name){
   const m=tag.match(new RegExp('\\b'+name+'\\s*=\\s*(["\'])(.*?)\\1','i'));
   return m?m[2]:'';
 }
+function hasRobotsNoindex(text){
+  return [...text.matchAll(/<meta\b[^>]*>/gi)].some(match => {
+    const tag=match[0];
+    return attrValue(tag,'name').toLowerCase()==='robots' && attrValue(tag,'content').toLowerCase().split(',').map(v=>v.trim()).includes('noindex');
+  });
+}
+function hasAlternate(text,hreflang,href){
+  return [...text.matchAll(/<link\b[^>]*>/gi)].some(match => {
+    const tag=match[0];
+    const rel=attrValue(tag,'rel').toLowerCase().split(/\s+/);
+    return rel.includes('alternate') && attrValue(tag,'hreflang')===hreflang && attrValue(tag,'href')===href;
+  });
+}
+
 function pageMeta(file){
   const text=read(file);
   const head=(text.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)||[])[1]||'';
@@ -58,7 +72,7 @@ for(const {loc,lastmod} of entries){
   if(file){
     if(!exists(file)) { fail(`sitemap route has no HTML file: ${loc} -> ${file}`); continue; }
     const page=pageMeta(file);
-    if(/name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(page.head)) fail(`sitemap advertises noindex page: ${loc}`);
+    if(hasRobotsNoindex(page.head)) fail(`sitemap advertises noindex page: ${loc}`);
     if(!page.canonical) fail(`sitemap page lacks canonical: ${loc}`);
     else if(attrValue(page.canonical,'href')!==loc) fail(`canonical mismatch: ${loc} declares ${attrValue(page.canonical,'href')}`);
     if(!page.title.trim()) fail(`sitemap page lacks title: ${loc}`);
@@ -130,12 +144,12 @@ for(const [file,text] of [['leizu/index.html',leizu],['leizu/toronto-tutoring/in
   if(!text.includes('availability')) fail(`${file} lacks machine-readable availability`);
 }
 const en=read('bb/why/index.html'), zh=read('bb/why/zh/index.html');
-for(const [file,text,expected] of [
-  ['bb/why/index.html',en,'hreflang="zh-Hans" href="https://seminarschools.com/bb/why/zh/"'],
-  ['bb/why/zh/index.html',zh,'hreflang="en" href="https://seminarschools.com/bb/why/"']
-]) if(!text.includes(expected)) fail(`${file} lacks reciprocal language alternate`);
-if(!/name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(read('404.html'))) fail('404 page needs noindex');
-if(!/name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(read('aa/editorial.html'))) fail('editorial log needs noindex');
+for(const [file,text,hreflang,href] of [
+  ['bb/why/index.html',en,'zh-Hans','https://seminarschools.com/bb/why/zh/'],
+  ['bb/why/zh/index.html',zh,'en','https://seminarschools.com/bb/why/']
+]) if(!hasAlternate(text,hreflang,href)) fail(`${file} lacks reciprocal language alternate`);
+if(!hasRobotsNoindex(read('404.html'))) fail('404 page needs noindex');
+if(!hasRobotsNoindex(read('aa/editorial.html'))) fail('editorial log needs noindex');
 
 console.log('=== SEO DEPLOYMENT GUARD ===');
 if(errors.length){

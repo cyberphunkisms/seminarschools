@@ -59,7 +59,7 @@ for (const workflow of ['.github/workflows/scrape-seminars.yml', '.github/workfl
   if (!/actions\/setup-python@v6/.test(s)) problems.push(`${workflow} must use a Node 24-compatible setup-python action.`);
 }
 const seminarPrompt = read('scripts/seminars-prompt.md');
-for (const needle of ['Kingston', 'Montréal', 'A screening qualifies **only when a creator or principal collaborator is confirmed', 'type: "festival"', 'SHARD_COUNT', 'crawled-urgency-reserve', 'smaller verified harvest is better than a failed run', 'findaprotest-toronto', 'watchlist']) need(seminarPrompt, needle, 'scripts/seminars-prompt.md', problems);
+for (const needle of ['Kingston', 'Montréal', 'A screening qualifies **only when a creator or principal collaborator is confirmed', 'type: "festival"', 'SHARD_COUNT', 'crawled-urgency-reserve', 'smaller verified harvest is better than a failed run', 'findaprotest-toronto', 'qualification queue']) need(seminarPrompt, needle, 'scripts/seminars-prompt.md', problems);
 const sourcesRoster = read('scripts/sources.json');
 for (const needle of ['findaprotest-toronto', 'https://www.findaprotest.info/canada/toronto']) need(sourcesRoster, needle, 'scripts/sources.json', problems);
 const festivalPrompt = read('scripts/festivals-prompt.md');
@@ -76,4 +76,4 @@ if (problems.length) {
   console.error('HARVEST PIPELINE FAILED\n- ' + problems.join('\n- '));
   process.exit(1);
 }
-console.log('HARVEST PIPELINE OK — bounded, observable, soft-failing regional harvest workflow.');
+console.log('HARVEST PIPELINE OK — bounded, observable, qualification-preserving regional harvest workflow.');

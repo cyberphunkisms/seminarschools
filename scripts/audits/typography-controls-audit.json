@@ -1,7 +1,12 @@
 {
-  "checkedFiles": 1080,
-  "tinyFontDeclarationsUnder10_5px": 14,
+  "checkedFiles": 1081,
+  "tinyFontDeclarationsUnder10_5px": 15,
   "examples": [
+    {
+      "file": "about/index.html",
+      "value": "0.62em",
+      "px": 9.9
+    },
     {
       "file": "bookwormcard/print/index.html",
       "value": "1px",
@@ -23,9 +28,9 @@
       "px": 8.8
     },
     {
-      "file": "main/index.html",
-      "value": "0.62em",
-      "px": 9.9
+      "file": "index.html",
+      "value": ".61rem",
+      "px": 9.8
     },
     {
       "file": "polymyth/devilsdiary/1/index.html",

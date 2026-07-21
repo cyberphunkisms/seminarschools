@@ -6,16 +6,16 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="https://seminarschools.com/">
-<meta property="og:title" content="Toronto Tutoring, Public Seminars &amp; Teacher Resources | Seminar Schools">
+<meta property="og:title" content="Polymythcal, Tutoring, Resources &amp; Projects | Seminar Schools">
 <meta property="og:image" content="https://seminarschools.com/og-image.png">
-<meta property="og:description" content="Toronto tutoring in English, philosophy, history, and writing, plus free public seminars, teacher resources, and experimental learning from Seminar Schools.">
+<meta property="og:description" content="Seminar Schools is a project web led by Polymythcal, with public events, tutoring, teacher resources, reading games, essays, and the polymorphousmythology framework.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seminarschools.com/">
 <meta property="og:site_name" content="Seminar Schools">
 <meta name="twitter:card" content="summary">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Toronto Tutoring, Public Seminars &amp; Teacher Resources | Seminar Schools</title>
-<meta name="description" content="Toronto tutoring in English, philosophy, history, and writing, plus free public seminars, teacher resources, and experimental learning from Seminar Schools.">
+<title>Polymythcal, Tutoring, Resources &amp; Projects | Seminar Schools</title>
+<meta name="description" content="Seminar Schools is a project web led by Polymythcal, with public events, tutoring, teacher resources, reading games, essays, and the polymorphousmythology framework.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -68,6 +68,7 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
 .jewel.core .dot{fill:var(--ink);stroke:var(--ink);}
 .jewel.core .label-plate{stroke-width:1;stroke-opacity:.46;}
 .jewel.core .lab{font-family:var(--sans);font-weight:600;font-size:20px;letter-spacing:.005em;}
+.jewel.priority .lab{font-size:16px;font-weight:700}.jewel.priority .dot{stroke-width:3}.prototype-mark{display:inline-flex;align-items:center;justify-content:center;width:1.2em;height:1.2em;margin-left:.35em;border:1px solid currentColor;border-radius:50%;font:700 .64em/1 var(--mono);vertical-align:.12em}.proto-mark-svg{font-family:var(--mono);font-size:11px;font-weight:700}
 .jewel:hover .dot,.jewel:focus-visible .dot,.jewel.on .dot{stroke-width:3;}
 .jewel:hover .halo,.jewel:focus-visible .halo,.jewel.on .halo{opacity:.12;}
 .jewel:hover .label-plate,.jewel:focus-visible .label-plate,.jewel.on .label-plate{stroke-opacity:.9;fill:color-mix(in srgb,var(--bg-soft) 98%,transparent);}
@@ -145,6 +146,7 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
 .work-paths .path-intro{max-width:68ch;margin:0 0 .95rem;color:var(--ink-soft);font-family:var(--serif);font-size:clamp(.98rem,.93rem + .22vw,1.12rem);}
 .path-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.78rem;}
 .path-card{display:flex;flex-direction:column;gap:.42rem;min-height:100%;border:1px solid var(--line);border-radius:12px;padding:1rem 1rem .95rem;background:color-mix(in srgb,var(--bg-soft) 82%,transparent);transition:border-color .18s,background .18s,transform .18s;color:var(--ink);}
+.path-card.featured{border-color:color-mix(in srgb,var(--c3) 62%,var(--line));box-shadow:inset 0 3px 0 color-mix(in srgb,var(--c3) 74%,transparent);}
 .path-card:hover,.path-card:focus-visible{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--bg-soft));transform:translateY(-1px);outline:0;}
 .path-card .path-k{font-family:var(--mono);font-size:0.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);}
 .path-card strong{font-family:var(--serif);font-weight:500;font-size:1.05rem;line-height:1.16;}
@@ -187,40 +189,58 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
 }
 </script>
 <link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<style id="audit12-mobile-web-hybrid">
+@media(max-width:720px){
+  #web{touch-action:manipulation;}
+  .jewel .lab,.jewel .label-plate{display:none;}
+  .jewel.core .lab,.jewel.core .label-plate,
+  .jewel.on .lab,.jewel.on .label-plate{display:block;}
+  .jewel .lab{font-size:17px;font-weight:650;}
+  .jewel.core .lab{font-size:20px;}
+  .jewel.priority .lab{font-size:18px;}
+  .hint{max-width:calc(100% - 2rem);padding:.3rem .48rem;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--bg-soft) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);line-height:1.35;}
+  .map-rail{align-items:center;scroll-snap-type:x proximity;overscroll-behavior-x:contain;scroll-padding-inline:4.5rem;}
+  .map-rail button{min-height:44px;scroll-snap-align:center;display:inline-flex;align-items:center;gap:.42rem;padding:.58rem .78rem;}
+  .map-rail button.on{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--n) 45%,transparent);}
+  .map-rail button:focus-visible{outline:2px solid var(--n);outline-offset:2px;}
+  .map-rail .rail-index{font-size:.61rem;opacity:.7;}
+}
+</style>
 </head>
 <body class="home" data-indra-intensity="0.075" data-geometry="indra-web" data-route-type="home">
+<a class="skip-link" href="#index">Skip to main content</a>
 
 <header class="bar">
   <a class="brand" href="/">Seminar<b>Schools</b></a>
   <div class="right">
     <span class="meta">Toronto &middot; reading rooms &middot; est 2026</span>
-    <a class="book" href="/leizu">Book a session</a>
+    <a class="book" href="/polymythseminars/">Open Polymythcal</a>
   </div>
 </header>
 
 <section class="stage" aria-label="The Seminar Schools ecosystem">
   <svg id="web" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid meet" role="img" aria-describedby="mapInstruction" aria-label="Interactive map of Seminar Schools projects"></svg>
   <p class="hint" id="mapInstruction">Choose a jewel</p>
-  <div class="panel" id="panel" role="region" aria-label="Selected project"></div>
+  <div class="panel" id="panel" role="region" aria-label="Selected project" aria-live="polite"></div>
   <button class="descend-sq" id="descendSq" type="button" aria-label="Scroll down into the page" title="Scroll down">&#8595;</button>
 </section>
-<div class="map-rail" id="mapRail" aria-label="Project list"></div>
+<div class="map-rail" id="mapRail" role="toolbar" aria-label="Project web selector"></div>
 
 <div class="lede">
   <h1>A room of readers working a hard text together reaches what <em>none of them</em> could reach alone.</h1>
-  <p>Seminar Schools brings tutoring, public reading, teacher resources, writing, and learning games into one Toronto practice.</p>
+  <p>Seminar Schools connects Polymythcal, tutoring, public reading, teacher resources, writing, and learning games in one project web.</p>
 
 
   <section class="work-paths" aria-labelledby="home-pathways-title">
     <h2 id="home-pathways-title">Start with the work in front of you.</h2>
-    <p class="path-intro">The site opens through practical entrances: study support, public events, classroom materials, reading games, project archives, and a general CV.</p>
+    <p class="path-intro">Study support, public events, classroom materials, reading games, project archives, and the full CV are available below.</p>
     <div class="path-grid">
-      <a class="path-card" href="/leizu/"><span class="path-k">Study support</span><strong>A student needs steadier reading, writing, or humanities work.</strong><span>Leizu gives the tutoring path, session structure, policies, intake, and scholarship information.</span></a>
-      <a class="path-card" href="/polymythseminars/"><span class="path-k">Events and deadlines</span><strong>A learner wants talks, contests, calls for papers, and fellowships worth tracking.</strong><span>Polymythcal gathers public opportunities with filters, dates, source links, and freshness labels.</span></a>
-      <a class="path-card" href="/teacherresources/"><span class="path-k">Teaching materials</span><strong>A teacher wants useful outside resources without digging through scattered tabs.</strong><span>The resource finder keeps the page link-first, searchable, and organized by subject and level.</span></a>
-      <a class="path-card" href="/bb/"><span class="path-k">Reading game</span><strong>A class or reading group wants to turn a difficult text into playable choices.</strong><span>BB starts with the wormcard maker, then points students and teachers toward the rule library.</span></a>
-      <a class="path-card" href="/aa/"><span class="path-k">AA* and polymyth</span><strong>A reader wants the project archive and the theory machinery behind the work.</strong><span>AA* now funnels toward polymyth without flattening either project into a generic homepage.</span></a>
-      <a class="path-card" href="/saul/"><span class="path-k">CV</span><strong>An employer, school, collaborator, or grant reader wants Saul Karim Nassau’s record.</strong><span>The CV is framed broadly for professional opportunities rather than only for Leizu.</span></a>
+      <a class="path-card featured" href="/polymythseminars/"><span class="path-k">Polymythcal · public calendar</span><strong>Find talks, contests, calls for papers, fellowships, festivals, and public events.</strong><span>Search by date, category, audience, location, and source freshness.</span></a>
+      <a class="path-card" href="/leizu/"><span class="path-k">Leizu Academy · tutoring</span><strong>A student needs steadier reading, writing, or humanities work.</strong><span>View tutoring plans, session structure, policies, intake, and scholarship information.</span></a>
+      <a class="path-card" href="/teacherresources/"><span class="path-k">Teaching materials</span><strong>A teacher wants useful outside resources without digging through scattered tabs.</strong><span>Search classroom resources by subject and level, with direct links to the original material.</span></a>
+      <a class="path-card" href="/bb/"><span class="path-k">Reading game</span><strong>A class or reading group wants to turn a difficult text into playable choices.</strong><span>Make a wormcard, then use the rule library to guide students through choices inside the text.</span></a>
+      <a class="path-card" href="/aa/"><span class="path-k">AA* and polymyth</span><strong>A reader wants the project archive and the theory machinery behind the work.</strong><span>Open the archive, then follow its routes into polymyth and ML*.</span></a>
+      <a class="path-card" href="/saul/"><span class="path-k">CV</span><strong>An employer, school, collaborator, or grant reader wants Saul Karim Nassau’s record.</strong><span>Open the full professional record, choose a focus, and download the matching monochrome CV.</span></a>
     </div>
   </section>
 
@@ -241,7 +261,7 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
 
 <footer class="foot">
   <a href="/saul">Full CV</a>
-  <a href="/main">About Seminar Schools</a>
+  <a href="/about">About Seminar Schools</a>
   <a href="/florilegium/">Florilegium</a>
   <a href="/nutrition/">Nutrition</a>
   <a href="/polymyth/sitemap/">Sitemap</a>
@@ -253,16 +273,16 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
 // ---- the ecosystem as a readable, selectable map -----------------------
 const cv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const NODES = [
-  {id:'core', label:'Seminar Schools', href:'/main/', tier:0, c:'--ink', k:'The practice', d:'The conceptual centre of Seminar Schools, with its public work, teaching practice, and deeper account of the seminar method.'},
-  {id:'leizu', label:'Leizu Academy', href:'/leizu', tier:1, c:'--c1', k:'Tutoring', d:'Individual tutoring for OSSD, IB, and university preparation.'},
-  {id:'teach', label:'Teacher Resources', href:'/teacherresources/', tier:1, c:'--c7', k:'For teachers', d:'Free classroom-ready materials arranged by subject.'},
-  {id:'agora', label:'The Agora', href:'/agora/', tier:1, c:'--c2', k:'Public seminar', d:'A free public seminar for readers in Toronto and online.'},
-  {id:'calendar', label:'polymythcalendar', href:'/polymythseminars/', tier:2, c:'--c3', k:'Toronto events', d:'Free public lectures, readings, and screenings gathered in one calendar.'},
-  {id:'marginalia', label:'Marginalia', href:'/marginalia', tier:2, c:'--c6', k:'Essays', d:'Writing shaped by lectures and conversations across Toronto.'},
-  {id:'polymyth', label:'polymorphousmythology', href:'/polymyth/methodologylist', tier:2, c:'--c4', k:'The framework', d:'A framework for tracing how symbols, figures, and stories gather meaning through use.'},
-  {id:'bb', label:'bookwormburrows', href:'/bb/', tier:3, c:'--c5', k:'Learning game', d:'A text becomes a world to enter, read, and play.'},
-  {id:'ohm', label:'Ohm Dome', href:'/ohm-dome/', tier:3, c:'--c5', k:'Public art', d:'A public light installation shaped by heartbeat, breath, and proximity.'},
-  {id:'sabachtan', label:'Sabachtan Seminar', href:'/agora/#sabachtan', tier:3, c:'--c6', k:'The ground', d:'A seminar on first questions, abandonment, and the ground beneath the framework.'},
+  {id:'core', label:'Seminar Schools', href:'/about/', tier:0, c:'--ink', k:'The practice', plain:'About the whole project web', d:'The conceptual centre of Seminar Schools, with its public work, teaching practice, and deeper account of the seminar method.'},
+  {id:'calendar', label:'polymythcalendar', href:'/polymythseminars/', tier:2, c:'--c3', k:'Public calendar', plain:'Events and deadlines', priority:true, d:'Talks, readings, exhibitions, festivals, contests, CFPs, fellowships, and public opportunities in one searchable calendar.'},
+  {id:'leizu', label:'Leizu Academy', href:'/leizu', tier:1, c:'--c1', k:'Tutoring', plain:'Study support', d:'Individual tutoring for OSSD, IB, and university preparation.'},
+  {id:'teach', label:'Teacher Resources', href:'/teacherresources/', tier:1, c:'--c7', k:'Teacher library', plain:'Classroom materials', d:'Free classroom-ready materials arranged by subject.'},
+  {id:'agora', label:'The Agora', href:'/agora/', tier:1, c:'--c2', k:'Public seminar', plain:'Reading together', d:'A free public seminar for readers in Toronto and online.'},
+  {id:'marginalia', label:'Marginalia', href:'/marginalia', tier:2, c:'--c6', k:'Essays', plain:'Lecture writing', d:'Writing shaped by lectures and conversations across Toronto.'},
+  {id:'polymyth', label:'polymorphousmythology', href:'/polymyth/methodologylist', tier:2, c:'--c4', k:'Framework', plain:'Theory and archive', d:'A framework for tracing how symbols, figures, and stories gather meaning through use.'},
+  {id:'bb', label:'bookwormburrows', href:'/bb/', tier:3, c:'--c5', k:'Reading game', plain:'Text-based learning game', d:'A text becomes a world to enter, read, and play.'},
+  {id:'ohm', label:'Ohm Dome', href:'/ohm-dome/', tier:3, c:'--c5', k:'Public art', plain:'Installation prototype', prototype:true, d:'A public light installation prototype shaped by heartbeat, breath, and proximity.'},
+  {id:'sabachtan', label:'Sabachtan Seminar', href:'/agora/#sabachtan', tier:3, c:'--c6', k:'Seminar series', plain:'Framework prototype', prototype:true, d:'A developing seminar on first questions, abandonment, and the ground beneath the framework.'},
 ];
 const CLUSTERS = [ ['leizu','teach','agora'], ['calendar','marginalia'], ['polymyth','bb','sabachtan'] ];
 const W=1000,H=700,CX=W*.5,CY=H*.47;
@@ -271,7 +291,7 @@ const ANG={leizu:330,teach:205,agora:55,calendar:255,marginalia:150,polymyth:95,
 const LABEL={
   core:{dx:0,dy:53,a:'middle'},leizu:{dx:25,dy:7,a:'start'},teach:{dx:-24,dy:7,a:'end'},agora:{dx:24,dy:7,a:'start'},
   calendar:{dx:-16,dy:-17,a:'end'},marginalia:{dx:-20,dy:7,a:'end'},polymyth:{dx:20,dy:9,a:'start'},
-  bb:{dx:20,dy:8,a:'start'},ohm:{dx:18,dy:-16,a:'start'},sabachtan:{dx:-20,dy:10,a:'end'}
+  bb:{dx:20,dy:8,a:'start'},ohm:{dx:18,dy:-16,a:'start'},sabachtan:{dx:20,dy:10,a:'start'}
 };
 const pos={core:{x:CX,y:CY}};
 NODES.forEach(n=>{if(n.tier>0){const a=ANG[n.id]*Math.PI/180,r=RING[n.tier];pos[n.id]={x:CX+Math.cos(a)*r*1.12,y:CY+Math.sin(a)*r};}});
@@ -293,10 +313,10 @@ const panel=document.getElementById('panel');
 const rail=document.getElementById('mapRail');
 const jewelEls={};
 let activeId=null,lastPointer='mouse';
-function radius(t){return t===0?22:t===1?12:t===2?10:8;}
+function radius(n){if(n.priority)return 14;return n.tier===0?22:n.tier===1?12:n.tier===2?10:8;}
 function setPanel(n,col){
   panel.style.setProperty('--n',col);
-  panel.innerHTML=`<div class="k">${n.k}</div><h2>${n.label}</h2><p>${n.d}</p><a class="go" href="${n.href}">${n.id==='core'?'Explore the full index':'Enter '+n.label} &rarr;</a>`;
+  panel.innerHTML=`<div class="k">${n.k}</div><h2>${n.label}${n.prototype?' <span class="prototype-mark" title="Prototype" aria-label="Prototype">P</span>':''}</h2><p>${n.d}</p><a class="go" href="${n.href}">${n.id==='core'?'Explore the full index':'Enter '+n.label} &rarr;</a>`;
   panel.classList.add('show');
 }
 function selectNode(n){
@@ -313,12 +333,12 @@ function selectNode(n){
   rail.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.node===n.id));
 }
 NODES.forEach(n=>{
-  const p=pos[n.id],col=cv(n.c),r=radius(n.tier),L=LABEL[n.id];
-  const g=el('g',{class:'jewel'+(n.tier===0?' core':''),tabindex:'0',role:'button','aria-label':`Show ${n.label}`,'aria-pressed':'false'});
+  const p=pos[n.id],col=cv(n.c),r=radius(n),L=LABEL[n.id];
+  const g=el('g',{class:'jewel'+(n.tier===0?' core':'')+(n.priority?' priority':''),tabindex:'0',role:'button','aria-label':`Show ${n.label}, ${n.plain||n.k}${n.prototype?', prototype':''}`,'aria-pressed':'false'});
   g.style.setProperty('--n',col);
   g.appendChild(el('circle',{class:'halo',cx:p.x,cy:p.y,r:r*2.65}));
   g.appendChild(el('circle',{class:'dot',cx:p.x,cy:p.y,r}));
-  const lab=el('text',{class:'lab',x:p.x+L.dx,y:p.y+L.dy,'text-anchor':L.a});lab.textContent=n.label;g.appendChild(lab);
+  const lab=el('text',{class:'lab',x:p.x+L.dx,y:p.y+L.dy,'text-anchor':L.a});lab.textContent=n.label;if(n.prototype){const pm=el('tspan',{class:'proto-mark-svg',dx:'6'});pm.textContent='P';lab.appendChild(pm);}g.appendChild(lab);
   stage.appendChild(g);
   let bb;
   try { bb=lab.getBBox(); } catch (err) { bb={x:(p.x+L.dx)-(n.label.length*3.8),y:(p.y+L.dy)-12,width:n.label.length*7.6,height:16}; }
@@ -337,29 +357,126 @@ NODES.forEach(n=>{
     if(e.key===' '){e.preventDefault();selectNode(n);}
     if(e.key==='Enter'){e.preventDefault();if(activeId===n.id)window.location.assign(n.href);else selectNode(n);}
   });
-  const b=document.createElement('button');b.type='button';b.dataset.node=n.id;b.textContent=n.label;b.style.setProperty('--n',col);b.addEventListener('click',()=>selectNode(n));rail.appendChild(b);
+  const b=document.createElement('button');b.type='button';b.dataset.node=n.id;b.textContent=n.label+(n.prototype?' · P':'');b.title=n.plain+(n.prototype?' · Prototype':'');b.style.setProperty('--n',col);b.addEventListener('click',()=>selectNode(n));rail.appendChild(b);
 });
-selectNode(NODES[0]);
+selectNode(NODES.find(n=>n.id==='calendar')||NODES[0]);
 // Core ink follows the theme toggle as well as the page's first render.
 new MutationObserver(()=>{
   NODES.forEach(n=>jewelEls[n.id].style.setProperty('--n',cv(n.c)));
-  const current=NODES.find(n=>n.id===activeId)||NODES[0];
+  const current=NODES.find(n=>n.id===activeId)||NODES.find(n=>n.id==='calendar')||NODES[0];
   selectNode(current);
 }).observe(document.documentElement,{attributes:true,attributeFilter:['class','data-theme']});
 const grid=document.getElementById('idxGrid');
 NODES.filter(n=>n.tier>0).forEach((n,i)=>{
   const col=cv(n.c);const a=document.createElement('a');a.className='idx-row';a.href=n.href;a.style.setProperty('--rc',col);
-  a.innerHTML=`<span class="arr">&rarr;</span><span class="n">${String(i+1).padStart(2,'0')} / ${n.k}</span><span class="t">${n.label}</span><span class="d">${n.d}</span>`;grid.appendChild(a);
+  a.innerHTML=`<span class="arr">&rarr;</span><span class="n">${String(i+1).padStart(2,'0')} / ${n.k}</span><span class="t">${n.label}${n.prototype?' <span class="prototype-mark" title="Prototype" aria-label="Prototype">P</span>':''}</span><span class="d">${n.d}</span>`;grid.appendChild(a);
 });
 </script>
-
+<script id="audit12-mobile-web-hybrid-script">
+(function(){
+  if(window.__seminarSchoolsMobileWebHybrid)return;
+  window.__seminarSchoolsMobileWebHybrid=true;
+  const mobile=window.matchMedia('(max-width:720px)');
+  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)');
+  const svg=document.getElementById('web');
+  const rail=document.getElementById('mapRail');
+  const hint=document.getElementById('mapInstruction');
+  if(!svg||!rail||typeof NODES==='undefined'||typeof pos==='undefined'||typeof selectNode!=='function')return;
+  const FULL={x:0,y:0,w:1000,h:700};
+  let frame=0;
+  const buttons=Array.from(rail.querySelectorAll('button'));
+  const buttonById=Object.fromEntries(buttons.map(b=>[b.dataset.node,b]));
+  buttons.forEach((button,index)=>{
+    const node=NODES.find(n=>n.id===button.dataset.node);
+    button.innerHTML='<span class="rail-index">'+String(index+1).padStart(2,'0')+'</span><span>'+node.label+(node.prototype?' · P':'')+'</span>';
+    button.setAttribute('aria-label',node.label+', '+(node.plain||node.k)+(node.prototype?', prototype':''));
+    button.setAttribute('aria-pressed','false');
+    button.addEventListener('keydown',event=>{
+      let next=index;
+      if(event.key==='ArrowRight'||event.key==='ArrowDown')next=(index+1)%buttons.length;
+      else if(event.key==='ArrowLeft'||event.key==='ArrowUp')next=(index-1+buttons.length)%buttons.length;
+      else if(event.key==='Home')next=0;
+      else if(event.key==='End')next=buttons.length-1;
+      else return;
+      event.preventDefault();
+      const target=NODES.find(n=>n.id===buttons[next].dataset.node);
+      selectNode(target);
+      buttons[next].focus();
+    });
+  });
+  Object.values(jewelEls).forEach(g=>{
+    const hit=g.querySelector('.hit');
+    if(hit)hit.dataset.desktopRadius=hit.getAttribute('r');
+  });
+  function targetFor(node){
+    if(!mobile.matches||node.id==='core')return FULL;
+    const p=pos[node.id],c=pos.core,w=660,h=520;
+    const midX=(c.x*.35+p.x*.65),midY=(c.y*.4+p.y*.6);
+    return {
+      x:Math.max(-35,Math.min(1000-w+35,midX-w/2)),
+      y:Math.max(-40,Math.min(700-h+40,midY-h/2)),
+      w,h
+    };
+  }
+  function parseView(){
+    const v=(svg.getAttribute('viewBox')||'0 0 1000 700').trim().split(/\s+/).map(Number);
+    return {x:v[0],y:v[1],w:v[2],h:v[3]};
+  }
+  function writeView(v){svg.setAttribute('viewBox',[v.x,v.y,v.w,v.h].map(n=>Number(n.toFixed(2))).join(' '));}
+  function moveView(target,animate){
+    cancelAnimationFrame(frame);
+    if(!animate||reduce.matches){writeView(target);return;}
+    const start=parseView(),startAt=performance.now(),duration=230;
+    const ease=t=>1-Math.pow(1-t,3);
+    const step=now=>{
+      const t=Math.min(1,(now-startAt)/duration),e=ease(t);
+      writeView({x:start.x+(target.x-start.x)*e,y:start.y+(target.y-start.y)*e,w:start.w+(target.w-start.w)*e,h:start.h+(target.h-start.h)*e});
+      if(t<1)frame=requestAnimationFrame(step);
+    };
+    frame=requestAnimationFrame(step);
+  }
+  function centerRail(node,animate){
+    const button=buttonById[node.id];
+    if(!button||!mobile.matches)return;
+    const left=Math.max(0,button.offsetLeft-(rail.clientWidth-button.offsetWidth)/2);
+    rail.scrollTo({left,behavior:animate&&!reduce.matches?'smooth':'auto'});
+  }
+  function sync(node,animate=true){
+    buttons.forEach(button=>{
+      const on=button.dataset.node===node.id;
+      button.classList.toggle('on',on);
+      button.setAttribute('aria-pressed',String(on));
+      button.tabIndex=on?0:-1;
+    });
+    Object.entries(jewelEls).forEach(([id,g])=>{
+      g.dataset.node=id;
+      const hit=g.querySelector('.hit');
+      if(hit)hit.setAttribute('r',mobile.matches?'40':hit.dataset.desktopRadius||'24');
+      g.setAttribute('aria-current',id===node.id?'true':'false');
+    });
+    if(hint)hint.textContent=mobile.matches?(node.plain+' · '+(NODES.indexOf(node)+1)+'/'+NODES.length):'Choose a jewel';
+    svg.dataset.focusNode=node.id;
+    moveView(targetFor(node),animate&&mobile.matches);
+    requestAnimationFrame(()=>centerRail(node,animate));
+  }
+  const baseSelect=selectNode;
+  selectNode=function(node){baseSelect(node);sync(node,true);};
+  function refresh(){
+    const node=NODES.find(n=>n.id===activeId)||NODES.find(n=>n.id==='calendar')||NODES[0];
+    sync(node,false);
+  }
+  if(mobile.addEventListener)mobile.addEventListener('change',refresh);else mobile.addListener(refresh);
+  window.addEventListener('resize',refresh,{passive:true});
+  refresh();
+})();
+</script>
 <script>
 (function(){var d=document.getElementById("descendSq");if(d)d.addEventListener("click",function(){var t=document.querySelector(".lede");if(t)t.scrollIntoView({behavior:"smooth",block:"start"});});})();
 </script>
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/theme.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
-<script src="/js/footer.js?v=cl91" defer></script>
+<script src="/js/footer.js?v=20260719-audit11-decisions" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
 <script defer src="/js/site-keyboard-enhancements.js"></script>
 </body>

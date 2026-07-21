@@ -58,7 +58,7 @@ for(const forbidden of [
 ]){
   if(seen.has(forbidden)) fail(`sitemap includes noindex or alias route ${forbidden}`);
 }
-for(const core of ['https://seminarschools.com/','https://seminarschools.com/main/','https://seminarschools.com/saul/','https://seminarschools.com/leizu/','https://seminarschools.com/bb/why/']){
+for(const core of ['https://seminarschools.com/','https://seminarschools.com/about/','https://seminarschools.com/saul/','https://seminarschools.com/leizu/','https://seminarschools.com/bb/why/']){
   if(!seen.has(core)) fail(`sitemap missing core route ${core}`);
 }
 

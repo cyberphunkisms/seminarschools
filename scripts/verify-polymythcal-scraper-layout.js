@@ -30,8 +30,6 @@ for (const [rel, needle, label] of [
   ['polymythseminars/index.html', 'function getFilteredLeads', 'watchlist filtering'],
   ['polymythseminars/index.html', 'function searchHaystack', 'raw excerpt/topic search'],
   ['polymythseminars/index.html', 'watchlist.json?v=', 'watchlist network source'],
-  ['data/event-watchlist.json', 'Palestinian Football Exhibit', 'PYM/FIFA watchlist lead'],
-  ['polymythseminars/watchlist.json', 'Palestinian Football Exhibit', 'published watchlist JSON']
 ]) need(rel, needle, label);
 forbid('polymythseminars/index.html', 'id="eventSearch"', 'duplicate internal search input');
 forbid('polymythseminars/index.html', 'id="quickFocus"', 'duplicate quick focus nav');
@@ -41,13 +39,14 @@ const html = read('polymythseminars/index.html');
 if ((html.match(/function matchesSearch\(/g) || []).length !== 1) problems.push('polymythseminars/index.html must define matchesSearch exactly once');
 if ((html.match(/function getFilteredEvents\(/g) || []).length !== 1) problems.push('polymythseminars/index.html must define getFilteredEvents exactly once');
 if (!/activeFocus === 'learning'/.test(html) || !/activeFocus === 'arts'/.test(html)) problems.push('polymythseminars/index.html quick filters are not implemented in focusMatches');
-const watch = JSON.parse(read('data/event-watchlist.json'));
-if (!Array.isArray(watch.items)) problems.push('data/event-watchlist.json must have an items array');
-if (!watch.items.some(x => /Palestinian Football Exhibit/i.test(x.title || '') && /FIFA|football/i.test([x.raw_excerpt, ...(x.topics || [])].join(' ')))) problems.push('PYM/FIFA lead must preserve topic recall');
-if (!exists('polymythseminars/watchlist.json')) problems.push('polymythseminars/watchlist.json is missing');
+const canonical = JSON.parse(read('polymythseminars/events.json'));
+const football = canonical.events.find(x => /Palestinian Football Exhibit/i.test(x.title || ''));
+if (!football) problems.push('PYM/FIFA lead must remain in the canonical chronology');
+else if (football.confirmation_status !== 'unconfirmed' || !(football.qualification_reasons || []).includes('time-unconfirmed')) problems.push('PYM/FIFA lead must carry exact unconfirmed qualification');
+if (!exists('polymythseminars/watchlist.json')) problems.push('polymythseminars/watchlist.json compatibility file is missing');
 if (problems.length) {
   console.error('POLYMYTHCAL SCRAPER/LAYOUT CHECK FAILED');
   for (const p of problems) console.error(' - ' + p);
   process.exit(1);
 }
-console.log('POLYMYTHCAL SCRAPER/LAYOUT CHECK PASSED — Find a Protest, watchlist leads, topic search, and front-facing quick filters are guarded.');
+console.log('POLYMYTHCAL SCRAPER/LAYOUT CHECK PASSED — Find a Protest, qualified uncertainty, topic search, and front-facing quick filters are guarded.');

@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://seminarschools.com/schemas/polymythcal-event-v2.json",
+  "title": "Polymythcal canonical record v2",
+  "type": "object",
+  "required": [
+    "id",
+    "identity_key",
+    "record_kind",
+    "date",
+    "date_precision",
+    "time_precision",
+    "title",
+    "source_url",
+    "source_quality",
+    "confirmation_status",
+    "qualification_reasons",
+    "lifecycle_status",
+    "last_checked_at",
+    "city",
+    "corridor_zone",
+    "timezone",
+    "type"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "identity_key": {
+      "type": "string",
+      "minLength": 12
+    },
+    "record_kind": {
+      "enum": [
+        "event",
+        "exhibition",
+        "festival",
+        "civic-action",
+        "opportunity"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "minLength": 10
+    },
+    "end_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "date_precision": {
+      "enum": [
+        "exact",
+        "date",
+        "estimated",
+        "unknown"
+      ]
+    },
+    "time_precision": {
+      "enum": [
+        "exact",
+        "estimated",
+        "unknown"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "venue": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": "string",
+      "pattern": "^https?://"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "source_quality": {
+      "enum": [
+        "official-or-institutional",
+        "aggregator-or-social",
+        "unavailable"
+      ]
+    },
+    "confirmation_status": {
+      "enum": [
+        "confirmed",
+        "unconfirmed"
+      ]
+    },
+    "qualification_reasons": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "date-unconfirmed",
+          "time-unconfirmed",
+          "location-unconfirmed",
+          "current-edition-unconfirmed",
+          "public-access-unconfirmed",
+          "registration-unconfirmed",
+          "participant-attendance-unconfirmed",
+          "official-source-unconfirmed",
+          "aggregator-only",
+          "private-status-unconfirmed"
+        ]
+      }
+    },
+    "lifecycle_status": {
+      "enum": [
+        "active",
+        "missing-on-source",
+        "postponed",
+        "rescheduled",
+        "cancelled",
+        "sold-out",
+        "registration-closed",
+        "superseded",
+        "archived"
+      ]
+    },
+    "first_seen_at": {
+      "type": "string"
+    },
+    "last_checked_at": {
+      "type": "string"
+    },
+    "scraped_at": {
+      "type": "string"
+    },
+    "review_status": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "province": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "corridor_zone": {
+      "type": "string"
+    },
+    "timezone": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "secondary_types": {
+      "type": "array"
+    },
+    "description": {
+      "type": "string"
+    },
+    "speaker_or_director": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "attendance_confirmed": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true
+}

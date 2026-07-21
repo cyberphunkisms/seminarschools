@@ -15,9 +15,9 @@ check('data file has 200+ events', !!data && (data.events||[]).length>=200);
 let feed=''; try{ feed=fs.readFileSync('polymythseminars/feed.xml','utf8'); }catch(e){}
 check('rss feed present with items', feed.includes('<item>'));
 // Front-page swap (2026-06-11): the portrait page took the root and the old
-// homepage with the events teaser moved whole to main/index.html. These
+// homepage with the events teaser moved whole to about/index.html. These
 // checks follow the teaser, not the root.
-let home=''; try{ home=fs.readFileSync('main/index.html','utf8'); }catch(e){}
+let home=''; try{ home=fs.readFileSync('about/index.html','utf8'); }catch(e){}
 check('main page fetches the public events file', home.includes("'/polymythseminars/events.json"));
 check('main page wraps titles in source_url links', home.includes('source_url'));
 let pub=null; try{ pub=JSON.parse(fs.readFileSync('polymythseminars/events.json','utf8')); }catch(e){}

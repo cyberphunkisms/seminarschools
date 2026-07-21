@@ -1,21 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="description" content="Student unlock surface for found papers and clues in the Thank You Ma’am classroom campaign.">
-<link rel="canonical" href="https://seminarschools.com/campaigns/thank-you-mam/unlocks/">
-<meta property="og:title" content="Found Papers">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://seminarschools.com/campaigns/thank-you-mam/unlocks/">
-<meta property="og:site_name" content="Seminar Schools">
-<meta name="twitter:card" content="summary">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow, noarchive">
-<meta name="googlebot" content="noindex, nofollow">
+<meta charset="utf-8"/>
+<meta content="Student unlock surface for found papers and clues in the Thank You Ma’am classroom campaign." name="description"/>
+<link href="https://seminarschools.com/campaigns/thank-you-mam/unlocks/" rel="canonical"/>
+<meta content="Found Papers" property="og:title"/>
+<meta content="website" property="og:type"/>
+<meta content="https://seminarschools.com/campaigns/thank-you-mam/unlocks/" property="og:url"/>
+<meta content="Seminar Schools" property="og:site_name"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="noindex, nofollow, noarchive" name="robots"/>
+<meta content="noindex, nofollow" name="googlebot"/>
 <title>Found Papers</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Cutive+Mono&family=Limelight&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&amp;family=Cutive+Mono&amp;family=Limelight&amp;display=swap" rel="stylesheet"/>
 <style>
   :root{
     --ink:#d8c4a0; --ink-soft:#5a4a36;
@@ -81,229 +82,206 @@
   @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   @keyframes rise{from{opacity:0;transform:translateY(26px) scale(.985)}to{opacity:1;transform:none}}
 </style>
-<link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
-<link rel="stylesheet" href="/css/alive.css?v=cl91">
-<link rel="stylesheet" href="/css/theme.css?v=cl91">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)" rel="stylesheet"/>
+<link href="/css/alive.css?v=cl91" rel="stylesheet"/>
+<link href="/css/theme.css?v=cl91" rel="stylesheet"/>
+<link data-site-wide-type-zoom="20260710-reviews-zoom-font-a" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" rel="stylesheet"/>
 </head>
 <body data-geometry="indra-web" data-indra-intensity="0.075">
-<style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
-
-  <div class="drawer">
-    <h1>Found Papers</h1>
-    <p>You found a number while you were walking. Scratched into wood, pencilled on a wall, folded into a pocket. Type it in. The drawer only opens for the number you actually carry.</p>
-  </div>
-
-  <div class="gate">
-    <label for="code">Enter the number you found</label>
-    <div class="gate-row">
-      <input id="code" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="·····" maxlength="8" aria-label="code">
-      <button id="go">Open</button>
-    </div>
-    <div class="msg" id="msg" role="status"></div>
-  </div>
-
-  <div class="wallet" id="walletBox" style="display:none">
-    <h2>What you have opened</h2>
-    <div class="wallet-chips" id="chips"></div>
-  </div>
-
-  <div class="unlocked" id="u-14128">
-    <div class="payload">
-      <h3>A map of Harlem</h3>
-      <div class="kind">Artifact + assignment</div>
-      <div class="desc">A folded map of Harlem, soft at the creases, carried in a pocket long enough to wear thin. The streets and the places anyone could name. You stop and orient yourself.</div>
-      <div class="map-label">The real map &middot; a primary source</div>
-      <div class="map-note">Read the original 1932 map through the <a href="https://digitalcollections.nypl.org/items/3b494070-c6e9-012f-238a-3c075448cc4b" target="_blank" rel="noopener noreferrer">New York Public Library Digital Collections</a>. The clear map below remains the version for play.</div>
-
-      <div class="map-label">The clear map &middot; for finding your way</div>
-      <div class="map-frame">
-        <div class="map-title">Central Harlem</div>
-        <div class="map-sub">Borough of Manhattan</div>
-        <svg class="map-svg" viewBox="0 0 720 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Simple street map of central Harlem">
-          <title>Central Harlem, simplified</title>
-          <desc>Five cross streets, six avenues, the Harlem River to the east, Mount Morris Park, and five landmarks: Hotel Theresa, the Apollo, the Schomburg, Abyssinian Baptist, and Harlem Hospital.</desc>
-          <path d="M650 50 Q678 200 666 360 Q660 440 644 470 L720 470 L720 50 Z" fill="#b9c7c0" opacity="0.45"/>
-          <text x="690" y="260" class="water" text-anchor="middle" transform="rotate(90 690 260)">HARLEM RIVER</text>
-          <rect x="440" y="430" width="100" height="40" fill="#bcae84" opacity="0.5"/>
-          <text x="490" y="455" class="park" text-anchor="middle">MOUNT MORRIS PK</text>
-
-          <line class="ave" x1="140" y1="60" x2="140" y2="470"/>
-          <line class="ave" x1="230" y1="60" x2="230" y2="470"/>
-          <line class="ave" x1="330" y1="60" x2="330" y2="470"/>
-          <line class="ave" x1="440" y1="60" x2="440" y2="430"/>
-          <line class="ave" x1="540" y1="60" x2="540" y2="470"/>
-          <line class="ave" x1="630" y1="60" x2="630" y2="470"/>
-          <text class="avelabel" x="140" y="48" text-anchor="middle">8TH</text>
-          <text class="avelabel" x="230" y="48" text-anchor="middle">7TH</text>
-          <text class="avelabel" x="330" y="48" text-anchor="middle">LENOX</text>
-          <text class="avelabel" x="440" y="48" text-anchor="middle">5TH</text>
-          <text class="avelabel" x="540" y="48" text-anchor="middle">MADISON</text>
-          <text class="avelabel" x="630" y="48" text-anchor="middle">PARK</text>
-
-          <line class="street" x1="90" y1="90" x2="660" y2="90"/>
-          <line class="street" x1="90" y1="170" x2="660" y2="170"/>
-          <line class="street" x1="90" y1="250" x2="660" y2="250"/>
-          <line class="street" x1="90" y1="330" x2="660" y2="330"/>
-          <line class="street" x1="90" y1="410" x2="660" y2="410"/>
-          <text class="stlabel" x="84" y="94" text-anchor="end">138th</text>
-          <text class="stlabel" x="84" y="174" text-anchor="end">135th</text>
-          <text class="stlabel" x="84" y="254" text-anchor="end">130th</text>
-          <text class="stlabel" x="84" y="334" text-anchor="end">127th</text>
-          <text class="stlabel" x="84" y="414" text-anchor="end">125th</text>
-
-          <g><circle cx="230" cy="410" r="6" fill="#8a3a1e"/><text x="244" y="414" class="civic-l" text-anchor="start">Hotel Theresa</text></g>
-          <g><circle cx="195" cy="410" r="6" fill="#8a3a1e"/><text x="183" y="426" class="civic-l" text-anchor="end">Apollo</text></g>
-          <g><circle cx="300" cy="170" r="6" fill="#8a3a1e"/><text x="314" y="174" class="civic-l" text-anchor="start">Schomburg</text></g>
-          <g><circle cx="290" cy="90" r="6" fill="#8a3a1e"/><text x="304" y="94" class="civic-l" text-anchor="start">Abyssinian Baptist</text></g>
-          <g><circle cx="330" cy="120" r="6" fill="#8a3a1e"/><text x="344" y="124" class="civic-l" text-anchor="start">Harlem Hospital</text></g>
-
-          <g transform="translate(625,440)">
-            <circle r="16" fill="none" stroke="#8a7142" stroke-width="1.3"/>
-            <path d="M0 -12 L4 5 L0 0 L-4 5 Z" fill="#5a4a2c"/>
-            <text x="0" y="-20" text-anchor="middle" class="stlabel">N</text>
-          </g>
-        </svg>
-      </div>
-      <div class="spec"><b>Assignment.</b> P-SS0-01 · Crossing-point ekphrastic<br><b>Deliverable.</b> 300-700 words. The place describes itself. The time of day sets the register.</div>
-    </div>
-  </div>
-
-  <div class="unlocked" id="u-31255">
-    <div class="payload">
-      <h3>A photograph from The Sweet Flypaper of Life</h3>
-      <div class="kind">Artifact + assignment</div>
-      <div class="desc">A small photograph slipped inside a book. Roy DeCarava’s Harlem, Langston Hughes’s words. The narrator is an old woman named Sister Mary Bradley who never existed and sees everything.</div>
-      <div class="spec"><b>Assignment.</b> P001-05 · Hughes-DeCarava ekphrastic<br><b>Deliverable.</b> One paragraph in Sister Mary Bradley’s voice, responding to a single photograph.</div>
-    </div>
-  </div>
-
-  <div class="unlocked" id="u-56156">
-    <div class="payload">
-      <h3>A window card for blue suede shoes</h3>
-      <div class="kind">Artifact + assignment</div>
-      <div class="desc">A shoe-store card from a 125th Street window. Carl Perkins cut the song in 1956 on Sun Records. Elvis covered it the same year on RCA. Roger wants the shoes. Ten dollars buys them.</div>
-      <div class="spec"><b>Assignment.</b> P001-03 · Blue suede shoes close reading<br><b>Deliverable.</b> Map the 1956 recordings against Roger’s 1958 desire. What did the shoes mean in this Harlem?</div>
-    </div>
-  </div>
-
-  <div class="unlocked" id="u-15158">
-    <div class="payload">
-      <h3>A loose page of the Amsterdam News</h3>
-      <div class="kind">Artifact + assignment</div>
-      <div class="desc">Fifteen cents at any Seventh Avenue newsstand. The masthead, the column rules, the typography of a Black weekly at the height of its reach.</div>
-      <div class="spec"><b>Assignment.</b> P001-11 / P-SS0-08 / P002-15 · Period newspaper<br><b>Deliverable.</b> Write a period-faithful article. Choose your subject. Match the typography and the reportorial conventions of the paper.</div>
-    </div>
-  </div>
-
-  <div class="unlocked" id="u-91958">
-    <div class="payload">
-      <h3>A handbill for the Theresa sidewalk meeting</h3>
-      <div class="kind">Artifact + assignment</div>
-      <div class="desc">A handbill for Friday, September 19, eight o’clock, the sidewalk outside Hotel Theresa at Seventh and 125th. Documented speakers. A crowd that filled the block.</div>
-      <div class="spec"><b>Assignment.</b> P002-01 · Sunday in-character journal<br><b>Deliverable.</b> 250-400 words. A Harlem resident reflects on the weekend’s events.</div>
-    </div>
-  </div>
-
-  <div class="unlocked" id="u-13821">
-    <div class="payload">
-      <h3>A church bulletin from Abyssinian Baptist</h3>
-      <div class="kind">Artifact + assignment</div>
-      <div class="desc">A Sunday bulletin, September 21, from Abyssinian Baptist on West 138th. The pastor prepared one sermon on Friday and threw it out overnight when the news came.</div>
-      <div class="spec"><b>Assignment.</b> P002-02 · Powell sermon close reading<br><b>Deliverable.</b> Read the pivot. Why was the Friday sermon discarded, and what replaced it?</div>
-    </div>
-  </div>
-
-  <div class="unlocked" id="u-12558">
-    <div class="payload">
-      <h3>A hospital intake card</h3>
-      <div class="kind">Artifact + assignment</div>
-      <div class="desc">An intake card from Harlem Hospital, Saturday afternoon. A book signing at Blumstein’s on West 125th. A letter-opener. The surgeons who worked through the night to save a life.</div>
-      <div class="spec"><b>Assignment.</b> P-SS0-04 · Documented-figure portrait<br><b>Deliverable.</b> Portrait of one documented figure from the day, built only from the record.</div>
-    </div>
-  </div>
-
-  <div class="unlocked" id="u-25358">
-    <div class="payload">
-      <h3>A bill from the Apollo Theater</h3>
-      <div class="kind">Artifact</div>
-      <div class="desc">A theater bill from 253 West 125th. Headliner week. The marquee names and the price of a seat in the fall of 1958.</div>
-      <div class="spec"><b>Anchors.</b> The music and media-studies prompts.</div>
-    </div>
-  </div>
-
-  <div class="unlocked" id="u-20127">
-    <div class="payload">
-      <h3>A page from Hughes’s drafting table</h3>
-      <div class="kind">Artifact + assignment</div>
-      <div class="desc">A discarded page from the workroom at 20 East 127th, one block south of where it all happened. The author lived through the action of his own story without writing it down.</div>
-      <div class="spec"><b>Assignment.</b> P-SS0-13 · 1958 character-arc study<br><b>Deliverable.</b> Trace one character across the four-day window using only what the record allows.</div>
-    </div>
-  </div>
-
-  <div class="unlocked" id="u-11525">
-    <div class="payload">
-      <h3>An inventory of a purse</h3>
-      <div class="kind">Artifact + assignment</div>
-      <div class="desc">What the bag held: a canvas strap, lima beans and ham for supper, a can of cocoa, the day’s tips, the week’s rent, and a ten-dollar bill. Everything a person carries and what they choose to give away.</div>
-      <div class="spec"><b>Assignment.</b> P001-02 · The apology letter<br><b>Deliverable.</b> Write as Roger, twenty years on, to the woman who fed him. Quality decides the empathy badge.</div>
-    </div>
-  </div>
-
-  <div class="unlocked" id="u-23058">
-    <div class="payload">
-      <h3>Blumstein's floor card</h3>
-      <div class="kind">Artifact + assignment</div>
-      <div class="desc">A floor card from Blumstein’s at 230 West 125th, where Dr. King signed Stride Toward Freedom on Saturday afternoon. The mezzanine, the line, the table, and the three-twenty that broke the day in half.</div>
-      <div class="spec"><b>Assignment.</b> P-SS0-03 / P002-03 · Blumstein deposition + book review<br><b>Deliverable.</b> Take a witness deposition from the mezzanine, or review the book the crowd came to have signed.</div>
-    </div>
-  </div>
-
-  <div class="unlocked" id="u-20827">
-    <div class="payload">
-      <h3>Hotel Theresa register page</h3>
-      <div class="kind">Artifact + assignment</div>
-      <div class="desc">A leaf from the front desk at the Hotel Theresa, 2082 Seventh Avenue, the lobby Harlem used as its living room. Bellhops, the basement WLIB studio, and everyone who came through the revolving door that weekend.</div>
-      <div class="spec"><b>Assignment.</b> P-SS0-07 · Lobby concierge log<br><b>Deliverable.</b> Keep the concierge’s log for the weekend. Who arrives, who asks for what, what the lobby hears.</div>
-    </div>
-  </div>
-
-  <div class="unlocked" id="u-50658">
-    <div class="payload">
-      <h3>Harlem Hospital pass</h3>
-      <div class="kind">Artifact + assignment</div>
-      <div class="desc">A pass from the third-floor surgical wing at Harlem Hospital, 506 Lenox Avenue, where the surgeons worked past midnight. Coretta Scott King, who trained as a singer at the New England Conservatory, flew up from Montgomery and sat at the bedside.</div>
-      <div class="spec"><b>Assignment.</b> P002-06 · Coretta epistolary<br><b>Deliverable.</b> A period-faithful letter from the bedside, built only from the record.</div>
-    </div>
-  </div>
-
-  <div class="unlocked" id="u-17126">
-    <div class="payload">
-      <h3>A Great Day in Harlem photograph</h3>
-      <div class="kind">Artifact</div>
-      <div class="desc">Art Kane’s photograph from the stoop at 17 East 126th, five weeks before this weekend. Fifty-seven musicians arranged on the brownstone steps at ten in the morning, Count Basie on the curb with the neighborhood children.</div>
-      <div class="spec"><b>Anchors.</b> The music and jazz-history prompts. Ask who you are looking at.</div>
-    </div>
-  </div>
-
-  <div class="unlocked" id="u-60001">
-    <div class="payload">
-      <h3>Policy slip</h3>
-      <div class="kind">Artifact</div>
-      <div class="desc">A policy slip from the numbers game that ran the block. A dollar on the right three figures paid six hundred. The runner knew every doorway, and a word with the runner was a word with the whole street.</div>
-      <div class="spec"><b>Anchors.</b> The block-economy and street-geography prompts.</div>
-    </div>
-  </div>
-
-  <div class="unlocked" id="u-10941">
-    <div class="payload">
-      <h3>Baltimore box score</h3>
-      <div class="kind">Artifact</div>
-      <div class="desc">A box score carried home in a back pocket. While Harlem held its breath over Blumstein’s, Hoyt Wilhelm threw a no-hitter against the Yankees in the Baltimore rain, ten thousand nine hundred forty-one in the stands. The men with transistor radios got both pieces of news at once.</div>
-      <div class="spec"><b>Anchors.</b> The same-afternoon and media-studies prompts.</div>
-    </div>
-  </div>
-
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="main-content"></div>
+<style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div aria-label="Adjust text size" class="ss-fz"><button data-fz="down" title="Decrease text size" type="button">A-</button><button data-fz="up" title="Increase text size" type="button">A+</button><button class="reset" data-fz="reset" style="display:none" title="Reset text size" type="button">↺</button></div>
+<div class="drawer" role="main">
+<h1>Found Papers</h1>
+<p>You found a number while you were walking. Scratched into wood, pencilled on a wall, folded into a pocket. Type it in. The drawer only opens for the number you actually carry.</p>
+</div>
+<div class="gate">
+<label for="code">Enter the number you found</label>
+<div class="gate-row">
+<input aria-label="code" autocomplete="off" id="code" inputmode="numeric" maxlength="8" placeholder="·····" spellcheck="false"/>
+<button id="go">Open</button>
+</div>
+<div class="msg" id="msg" role="status"></div>
+</div>
+<div class="wallet" id="walletBox" style="display:none">
+<h2>What you have opened</h2>
+<div class="wallet-chips" id="chips"></div>
+</div>
+<div class="unlocked" id="u-14128">
+<div class="payload">
+<h3>A map of Harlem</h3>
+<div class="kind">Artifact + assignment</div>
+<div class="desc">A folded map of Harlem, soft at the creases, carried in a pocket long enough to wear thin. The streets and the places anyone could name. You stop and orient yourself.</div>
+<div class="map-label">The real map · a primary source</div>
+<div class="map-note">Read the original 1932 map through the <a href="https://digitalcollections.nypl.org/items/3b494070-c6e9-012f-238a-3c075448cc4b" rel="noopener noreferrer" target="_blank">New York Public Library Digital Collections</a>. The clear map below remains the version for play.</div>
+<div class="map-label">The clear map · for finding your way</div>
+<div class="map-frame">
+<div class="map-title">Central Harlem</div>
+<div class="map-sub">Borough of Manhattan</div>
+<svg aria-label="Simple street map of central Harlem" class="map-svg" role="img" viewbox="0 0 720 520" xmlns="http://www.w3.org/2000/svg">
+<title>Central Harlem, simplified</title>
+<desc>Five cross streets, six avenues, the Harlem River to the east, Mount Morris Park, and five landmarks: Hotel Theresa, the Apollo, the Schomburg, Abyssinian Baptist, and Harlem Hospital.</desc>
+<path d="M650 50 Q678 200 666 360 Q660 440 644 470 L720 470 L720 50 Z" fill="#b9c7c0" opacity="0.45"></path>
+<text class="water" text-anchor="middle" transform="rotate(90 690 260)" x="690" y="260">HARLEM RIVER</text>
+<rect fill="#bcae84" height="40" opacity="0.5" width="100" x="440" y="430"></rect>
+<text class="park" text-anchor="middle" x="490" y="455">MOUNT MORRIS PK</text>
+<line class="ave" x1="140" x2="140" y1="60" y2="470"></line>
+<line class="ave" x1="230" x2="230" y1="60" y2="470"></line>
+<line class="ave" x1="330" x2="330" y1="60" y2="470"></line>
+<line class="ave" x1="440" x2="440" y1="60" y2="430"></line>
+<line class="ave" x1="540" x2="540" y1="60" y2="470"></line>
+<line class="ave" x1="630" x2="630" y1="60" y2="470"></line>
+<text class="avelabel" text-anchor="middle" x="140" y="48">8TH</text>
+<text class="avelabel" text-anchor="middle" x="230" y="48">7TH</text>
+<text class="avelabel" text-anchor="middle" x="330" y="48">LENOX</text>
+<text class="avelabel" text-anchor="middle" x="440" y="48">5TH</text>
+<text class="avelabel" text-anchor="middle" x="540" y="48">MADISON</text>
+<text class="avelabel" text-anchor="middle" x="630" y="48">PARK</text>
+<line class="street" x1="90" x2="660" y1="90" y2="90"></line>
+<line class="street" x1="90" x2="660" y1="170" y2="170"></line>
+<line class="street" x1="90" x2="660" y1="250" y2="250"></line>
+<line class="street" x1="90" x2="660" y1="330" y2="330"></line>
+<line class="street" x1="90" x2="660" y1="410" y2="410"></line>
+<text class="stlabel" text-anchor="end" x="84" y="94">138th</text>
+<text class="stlabel" text-anchor="end" x="84" y="174">135th</text>
+<text class="stlabel" text-anchor="end" x="84" y="254">130th</text>
+<text class="stlabel" text-anchor="end" x="84" y="334">127th</text>
+<text class="stlabel" text-anchor="end" x="84" y="414">125th</text>
+<g><circle cx="230" cy="410" fill="#8a3a1e" r="6"></circle><text class="civic-l" text-anchor="start" x="244" y="414">Hotel Theresa</text></g>
+<g><circle cx="195" cy="410" fill="#8a3a1e" r="6"></circle><text class="civic-l" text-anchor="end" x="183" y="426">Apollo</text></g>
+<g><circle cx="300" cy="170" fill="#8a3a1e" r="6"></circle><text class="civic-l" text-anchor="start" x="314" y="174">Schomburg</text></g>
+<g><circle cx="290" cy="90" fill="#8a3a1e" r="6"></circle><text class="civic-l" text-anchor="start" x="304" y="94">Abyssinian Baptist</text></g>
+<g><circle cx="330" cy="120" fill="#8a3a1e" r="6"></circle><text class="civic-l" text-anchor="start" x="344" y="124">Harlem Hospital</text></g>
+<g transform="translate(625,440)">
+<circle fill="none" r="16" stroke="#8a7142" stroke-width="1.3"></circle>
+<path d="M0 -12 L4 5 L0 0 L-4 5 Z" fill="#5a4a2c"></path>
+<text class="stlabel" text-anchor="middle" x="0" y="-20">N</text>
+</g>
+</svg>
+</div>
+<div class="spec"><b>Assignment.</b> P-SS0-01 · Crossing-point ekphrastic<br/><b>Deliverable.</b> 300-700 words. The place describes itself. The time of day sets the register.</div>
+</div>
+</div>
+<div class="unlocked" id="u-31255">
+<div class="payload">
+<h3>A photograph from The Sweet Flypaper of Life</h3>
+<div class="kind">Artifact + assignment</div>
+<div class="desc">A small photograph slipped inside a book. Roy DeCarava’s Harlem, Langston Hughes’s words. The narrator is an old woman named Sister Mary Bradley who never existed and sees everything.</div>
+<div class="spec"><b>Assignment.</b> P001-05 · Hughes-DeCarava ekphrastic<br/><b>Deliverable.</b> One paragraph in Sister Mary Bradley’s voice, responding to a single photograph.</div>
+</div>
+</div>
+<div class="unlocked" id="u-56156">
+<div class="payload">
+<h3>A window card for blue suede shoes</h3>
+<div class="kind">Artifact + assignment</div>
+<div class="desc">A shoe-store card from a 125th Street window. Carl Perkins cut the song in 1956 on Sun Records. Elvis covered it the same year on RCA. Roger wants the shoes. Ten dollars buys them.</div>
+<div class="spec"><b>Assignment.</b> P001-03 · Blue suede shoes close reading<br/><b>Deliverable.</b> Map the 1956 recordings against Roger’s 1958 desire. What did the shoes mean in this Harlem?</div>
+</div>
+</div>
+<div class="unlocked" id="u-15158">
+<div class="payload">
+<h3>A loose page of the Amsterdam News</h3>
+<div class="kind">Artifact + assignment</div>
+<div class="desc">Fifteen cents at any Seventh Avenue newsstand. The masthead, the column rules, the typography of a Black weekly at the height of its reach.</div>
+<div class="spec"><b>Assignment.</b> P001-11 / P-SS0-08 / P002-15 · Period newspaper<br/><b>Deliverable.</b> Write a period-faithful article. Choose your subject. Match the typography and the reportorial conventions of the paper.</div>
+</div>
+</div>
+<div class="unlocked" id="u-91958">
+<div class="payload">
+<h3>A handbill for the Theresa sidewalk meeting</h3>
+<div class="kind">Artifact + assignment</div>
+<div class="desc">A handbill for Friday, September 19, eight o’clock, the sidewalk outside Hotel Theresa at Seventh and 125th. Documented speakers. A crowd that filled the block.</div>
+<div class="spec"><b>Assignment.</b> P002-01 · Sunday in-character journal<br/><b>Deliverable.</b> 250-400 words. A Harlem resident reflects on the weekend’s events.</div>
+</div>
+</div>
+<div class="unlocked" id="u-13821">
+<div class="payload">
+<h3>A church bulletin from Abyssinian Baptist</h3>
+<div class="kind">Artifact + assignment</div>
+<div class="desc">A Sunday bulletin, September 21, from Abyssinian Baptist on West 138th. The pastor prepared one sermon on Friday and threw it out overnight when the news came.</div>
+<div class="spec"><b>Assignment.</b> P002-02 · Powell sermon close reading<br/><b>Deliverable.</b> Read the pivot. Why was the Friday sermon discarded, and what replaced it?</div>
+</div>
+</div>
+<div class="unlocked" id="u-12558">
+<div class="payload">
+<h3>A hospital intake card</h3>
+<div class="kind">Artifact + assignment</div>
+<div class="desc">An intake card from Harlem Hospital, Saturday afternoon. A book signing at Blumstein’s on West 125th. A letter-opener. The surgeons who worked through the night to save a life.</div>
+<div class="spec"><b>Assignment.</b> P-SS0-04 · Documented-figure portrait<br/><b>Deliverable.</b> Portrait of one documented figure from the day, built only from the record.</div>
+</div>
+</div>
+<div class="unlocked" id="u-25358">
+<div class="payload">
+<h3>A bill from the Apollo Theater</h3>
+<div class="kind">Artifact</div>
+<div class="desc">A theater bill from 253 West 125th. Headliner week. The marquee names and the price of a seat in the fall of 1958.</div>
+<div class="spec"><b>Anchors.</b> The music and media-studies prompts.</div>
+</div>
+</div>
+<div class="unlocked" id="u-20127">
+<div class="payload">
+<h3>A page from Hughes’s drafting table</h3>
+<div class="kind">Artifact + assignment</div>
+<div class="desc">A discarded page from the workroom at 20 East 127th, one block south of where it all happened. The author lived through the action of his own story without writing it down.</div>
+<div class="spec"><b>Assignment.</b> P-SS0-13 · 1958 character-arc study<br/><b>Deliverable.</b> Trace one character across the four-day window using only what the record allows.</div>
+</div>
+</div>
+<div class="unlocked" id="u-11525">
+<div class="payload">
+<h3>An inventory of a purse</h3>
+<div class="kind">Artifact + assignment</div>
+<div class="desc">What the bag held: a canvas strap, lima beans and ham for supper, a can of cocoa, the day’s tips, the week’s rent, and a ten-dollar bill. Everything a person carries and what they choose to give away.</div>
+<div class="spec"><b>Assignment.</b> P001-02 · The apology letter<br/><b>Deliverable.</b> Write as Roger, twenty years on, to the woman who fed him. Quality decides the empathy badge.</div>
+</div>
+</div>
+<div class="unlocked" id="u-23058">
+<div class="payload">
+<h3>Blumstein's floor card</h3>
+<div class="kind">Artifact + assignment</div>
+<div class="desc">A floor card from Blumstein’s at 230 West 125th, where Dr. King signed Stride Toward Freedom on Saturday afternoon. The mezzanine, the line, the table, and the three-twenty that broke the day in half.</div>
+<div class="spec"><b>Assignment.</b> P-SS0-03 / P002-03 · Blumstein deposition + book review<br/><b>Deliverable.</b> Take a witness deposition from the mezzanine, or review the book the crowd came to have signed.</div>
+</div>
+</div>
+<div class="unlocked" id="u-20827">
+<div class="payload">
+<h3>Hotel Theresa register page</h3>
+<div class="kind">Artifact + assignment</div>
+<div class="desc">A leaf from the front desk at the Hotel Theresa, 2082 Seventh Avenue, the lobby Harlem used as its living room. Bellhops, the basement WLIB studio, and everyone who came through the revolving door that weekend.</div>
+<div class="spec"><b>Assignment.</b> P-SS0-07 · Lobby concierge log<br/><b>Deliverable.</b> Keep the concierge’s log for the weekend. Who arrives, who asks for what, what the lobby hears.</div>
+</div>
+</div>
+<div class="unlocked" id="u-50658">
+<div class="payload">
+<h3>Harlem Hospital pass</h3>
+<div class="kind">Artifact + assignment</div>
+<div class="desc">A pass from the third-floor surgical wing at Harlem Hospital, 506 Lenox Avenue, where the surgeons worked past midnight. Coretta Scott King, who trained as a singer at the New England Conservatory, flew up from Montgomery and sat at the bedside.</div>
+<div class="spec"><b>Assignment.</b> P002-06 · Coretta epistolary<br/><b>Deliverable.</b> A period-faithful letter from the bedside, built only from the record.</div>
+</div>
+</div>
+<div class="unlocked" id="u-17126">
+<div class="payload">
+<h3>A Great Day in Harlem photograph</h3>
+<div class="kind">Artifact</div>
+<div class="desc">Art Kane’s photograph from the stoop at 17 East 126th, five weeks before this weekend. Fifty-seven musicians arranged on the brownstone steps at ten in the morning, Count Basie on the curb with the neighborhood children.</div>
+<div class="spec"><b>Anchors.</b> The music and jazz-history prompts. Ask who you are looking at.</div>
+</div>
+</div>
+<div class="unlocked" id="u-60001">
+<div class="payload">
+<h3>Policy slip</h3>
+<div class="kind">Artifact</div>
+<div class="desc">A policy slip from the numbers game that ran the block. A dollar on the right three figures paid six hundred. The runner knew every doorway, and a word with the runner was a word with the whole street.</div>
+<div class="spec"><b>Anchors.</b> The block-economy and street-geography prompts.</div>
+</div>
+</div>
+<div class="unlocked" id="u-10941">
+<div class="payload">
+<h3>Baltimore box score</h3>
+<div class="kind">Artifact</div>
+<div class="desc">A box score carried home in a back pocket. While Harlem held its breath over Blumstein’s, Hoyt Wilhelm threw a no-hitter against the Yankees in the Baltimore rain, ten thousand nine hundred forty-one in the stands. The men with transistor radios got both pieces of news at once.</div>
+<div class="spec"><b>Anchors.</b> The same-afternoon and media-studies prompts.</div>
+</div>
+</div>
 <script>
   var REGISTRY = {
     "14128": { id:"u-14128", label:"A map of Harlem" },
@@ -364,10 +342,10 @@
   document.getElementById("code").addEventListener("keydown", function(e){ if(e.key==="Enter") attempt(); });
   (function(){ renderWallet(); })();
 </script>
-<script src="/js/theme.js?v=cl91" defer></script>
-<script src="/js/mandala.js?v=cl91" defer></script>
-<script src="/js/indra.js?v=cl91" defer></script>
-<script src="/js/footer.js?v=cl91" defer></script>
-<script defer src="/js/site-keyboard-enhancements.js"></script>
+<script defer="" src="/js/theme.js?v=cl91"></script>
+<script defer="" src="/js/mandala.js?v=cl91"></script>
+<script defer="" src="/js/indra.js?v=cl91"></script>
+<script defer="" src="/js/footer.js?v=20260719-audit11-decisions"></script>
+<script defer="" src="/js/site-keyboard-enhancements.js"></script>
 </body>
 </html>

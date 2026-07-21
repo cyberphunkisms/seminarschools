@@ -8,7 +8,7 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
-const SKIP = new Set(['.git', 'node_modules', '.netlify', 'public']);
+const SKIP = new Set(['.git', 'node_modules', '.netlify', 'public', 'fixtures']);
 function walk(dir, acc = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     if (SKIP.has(e.name)) continue;
@@ -44,10 +44,11 @@ for (const file of htmls) {
   const html = fs.readFileSync(file, 'utf8');
   if (/user-scalable\s*=\s*no/i.test(html)) errors.push(`${r}: disables user zoom with user-scalable=no`);
   if (/maximum-scale\s*=\s*1(?:["',\s>]|$)/i.test(html)) errors.push(`${r}: caps user zoom with maximum-scale=1`);
+  const isRedirect = /http-equiv=["']refresh["']/i.test(html) && /location\.replace\(/.test(html);
   const hasHead = /<head[\s>]/i.test(html);
   const hasBody = /<body[\s>]/i.test(html);
   if (hasHead && !/<meta[^>]+name=["']viewport["']/i.test(html)) warnings.push(`${r}: no viewport meta`);
-  if ((hasHead || hasBody) && !/alive\.css/.test(html)) errors.push(`${r}: missing shared alive.css, so zoom contract will not load`);
+  if (!isRedirect && (hasHead || hasBody) && !/alive\.css/.test(html)) errors.push(`${r}: missing shared alive.css, so zoom contract will not load`);
   if (/style=["'][^"']*(width|min-width)\s*:\s*(?:[7-9]\d\d|\d{4,})px/i.test(html)) warnings.push(`${r}: inline fixed width over 700px relies on zoom contract max-width override`);
   if (/white-space\s*:\s*nowrap/i.test(html) && !/overflow-wrap/i.test(html)) warnings.push(`${r}: nowrap content relies on zoom contract unwrap media query`);
 }

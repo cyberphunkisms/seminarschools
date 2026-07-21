@@ -1,0 +1,302 @@
+{
+  "generated_at": "2026-07-21T15:11:43.162Z",
+  "audit": "Polymythcal Audit 14 completion verification",
+  "checks": [
+    {
+      "name": "Every automated source has a crawl URL and every exception is explicit",
+      "passed": true,
+      "details": {
+        "sources": 418,
+        "crawlSources": 414,
+        "explicitExceptions": 4
+      }
+    },
+    {
+      "name": "All six dedicated adapter profiles are populated",
+      "passed": true,
+      "details": {
+        "municipal": 4,
+        "university": 44,
+        "library": 24,
+        "festival": 81,
+        "french-language": 1,
+        "civic-action": 10
+      }
+    },
+    {
+      "name": "All six adapter fixtures exist",
+      "passed": true,
+      "details": {
+        "profiles": [
+          "municipal",
+          "university",
+          "library",
+          "festival",
+          "french-language",
+          "civic-action"
+        ]
+      }
+    },
+    {
+      "name": "Adapter module implements all six profiles",
+      "passed": true,
+      "details": {
+        "profiles": [
+          "municipal",
+          "university",
+          "library",
+          "festival",
+          "french-language",
+          "civic-action"
+        ]
+      }
+    },
+    {
+      "name": "Scraper imports and uses adapter normalization",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "Adapter test suite is present",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "Lifecycle reconciler covers cancellation, disappearance, recurrence, and rescheduling",
+      "passed": true,
+      "details": {
+        "markers": [
+          "rrulestr",
+          "previous_dates",
+          "missing_count",
+          "cancelled",
+          "rescheduled",
+          "missing-on-source"
+        ]
+      }
+    },
+    {
+      "name": "Lifecycle test suite is present",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "Canonical event data is internally complete",
+      "passed": true,
+      "details": {
+        "events": 839,
+        "declared": 839,
+        "count": 839
+      }
+    },
+    {
+      "name": "Every event has stable identity and lifecycle fields",
+      "passed": true,
+      "details": {
+        "events": 839
+      }
+    },
+    {
+      "name": "Event IDs and identity keys are unique",
+      "passed": true,
+      "details": {
+        "events": 839
+      }
+    },
+    {
+      "name": "Bilingual typo-tolerant search is wired",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "Filters are URL-backed and shareable",
+      "passed": true,
+      "details": {
+        "parameters": [
+          "q",
+          "cat",
+          "age",
+          "focus",
+          "view",
+          "mode",
+          "lang"
+        ]
+      }
+    },
+    {
+      "name": "Saved events and searches use device-local storage",
+      "passed": true,
+      "details": {
+        "keys": [
+          "polymythcal.savedEvents.v1",
+          "polymythcal.savedSearches.v1"
+        ]
+      }
+    },
+    {
+      "name": "Public submission form is deployable and labelled",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "Public correction form is deployable and labelled",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "Submission confirmation is bilingual and noindex",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "Focused RSS and calendar subscriptions are complete",
+      "passed": true,
+      "details": {
+        "feeds": 11
+      }
+    },
+    {
+      "name": "Subscription index exposes bilingual feed labels",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "Stable event pages, legacy aliases, and per-event calendars are synchronized",
+      "passed": true,
+      "details": {
+        "canonicalPages": 839,
+        "aliasPages": 839,
+        "icsCount": 839,
+        "events": 839
+      }
+    },
+    {
+      "name": "Holistic English and French translation inventory is complete",
+      "passed": true,
+      "details": {
+        "generated_at": "2026-07-21T15:06:10+00:00",
+        "languages": [
+          "en-CA",
+          "fr-CA"
+        ],
+        "interface_dictionary_entries": 69,
+        "calendar_renderer_dictionary_entries": 136,
+        "surfaces": [
+          {
+            "surface": "Main calendar",
+            "path": "/polymythseminars/",
+            "status": "complete",
+            "required_markers": 5,
+            "missing_markers": []
+          },
+          {
+            "surface": "Event submission",
+            "path": "/polymythseminars/submit/",
+            "status": "complete",
+            "required_markers": 4,
+            "missing_markers": []
+          },
+          {
+            "surface": "Listing correction",
+            "path": "/polymythseminars/correct/",
+            "status": "complete",
+            "required_markers": 4,
+            "missing_markers": []
+          },
+          {
+            "surface": "Submission confirmation",
+            "path": "/polymythseminars/thanks/",
+            "status": "complete",
+            "required_markers": 2,
+            "missing_markers": []
+          },
+          {
+            "surface": "Subscription index",
+            "path": "/polymythseminars/subscribe/",
+            "status": "complete",
+            "required_markers": 3,
+            "missing_markers": []
+          }
+        ],
+        "canonical_event_pages": 839,
+        "canonical_event_pages_with_bilingual_actions": 839,
+        "focused_feeds": 11,
+        "focused_feeds_with_english_and_french_labels": 11,
+        "content_policy": "Organizer titles, descriptions, proper names, and source-language material remain in their source language. Navigation, filters, states, qualifications, actions, forms, feed labels, and calendar instructions are maintained in English and French.",
+        "complete": true
+      }
+    },
+    {
+      "name": "Browser WCAG 2.2 AA audit passes every automated check",
+      "passed": true,
+      "details": {
+        "passed": 26,
+        "failed": 0,
+        "browser": "Chromium 144 headless with local assets inlined"
+      }
+    },
+    {
+      "name": "Browser audit covers keyboard, reflow, forced colours, and reduced motion",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "Native VoiceOver and NVDA protocol is documented",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "Feature CSS includes touch targets, focus, forced colours, reflow, and reduced motion",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "Scheduled harvest workflows run adapter, lifecycle, publication, and audit gates",
+      "passed": true,
+      "details": {
+        "workflows": [
+          ".github/workflows/scrape-seminars.yml",
+          ".github/workflows/scrape-festivals.yml"
+        ],
+        "mergeScripts": [
+          "scripts/merge_and_finalize.py",
+          "scripts/merge_festivals.py"
+        ]
+      }
+    },
+    {
+      "name": "Calendar language switch covers generated and static interface text",
+      "passed": true,
+      "details": {
+        "translationCalls": 63
+      }
+    },
+    {
+      "name": "Public routes expose English, French, and default alternates",
+      "passed": true,
+      "details": {}
+    }
+  ],
+  "passed": 28,
+  "failed": 0,
+  "metrics": {
+    "registered_sources": 418,
+    "dedicated_adapter_sources": 164,
+    "adapter_profile_counts": {
+      "municipal": 4,
+      "university": 44,
+      "library": 24,
+      "festival": 81,
+      "french-language": 1,
+      "civic-action": 10
+    },
+    "canonical_events": 839,
+    "canonical_event_pages": 839,
+    "legacy_redirect_aliases": 839,
+    "event_ics_files": 839,
+    "focused_feed_pairs": 11,
+    "browser_wcag_checks_passed": 26,
+    "browser_wcag_checks_failed": 0,
+    "translation_surfaces": 5
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "generated_at": "2026-07-21T15:07:36+00:00",
+  "standard": "WCAG 2.2 AA",
+  "browser": "Chromium 144 headless with local assets inlined",
+  "automated_checks": [
+    {
+      "name": "Calendar has unique IDs",
+      "passed": true,
+      "details": [],
+      "criterion": "4.1.1",
+      "scope": "automated"
+    },
+    {
+      "name": "Calendar controls have programmatic labels",
+      "passed": true,
+      "details": [],
+      "criterion": "1.3.1, 3.3.2, 4.1.2",
+      "scope": "automated"
+    },
+    {
+      "name": "Calendar interactive elements have accessible names",
+      "passed": true,
+      "details": {
+        "buttons": 0,
+        "links": 0
+      },
+      "criterion": "2.4.4, 4.1.2",
+      "scope": "automated"
+    },
+    {
+      "name": "Calendar has a valid skip link and main landmark",
+      "passed": true,
+      "details": {
+        "label": "calendar",
+        "duplicateIds": [],
+        "missingLabels": [],
+        "unnamedButtons": 0,
+        "unnamedLinks": 0,
+        "headingJumps": [],
+        "mainCount": 1,
+        "h1Count": 1,
+        "skipTargetValid": true,
+        "lang": "fr-CA"
+      },
+      "criterion": "2.4.1",
+      "scope": "automated"
+    },
+    {
+      "name": "French URL state restores interface language",
+      "passed": true,
+      "details": {
+        "lang": "fr-CA",
+        "query": "montral"
+      },
+      "criterion": "3.1.1, 3.1.2",
+      "scope": "automated"
+    },
+    {
+      "name": "Typo-tolerant bilingual search returns Montréal results",
+      "passed": true,
+      "details": {
+        "visibleEvents": 11,
+        "countLine": "11 sur 32 événements  ·  Recherche: montral  ·  12 prochains mois"
+      },
+      "criterion": "3.2.2",
+      "scope": "automated"
+    },
+    {
+      "name": "URL-backed focus restores Montréal",
+      "passed": true,
+      "details": "true",
+      "criterion": "3.2.3",
+      "scope": "automated"
+    },
+    {
+      "name": "First keyboard focus reaches visible skip link",
+      "passed": true,
+      "details": {
+        "tag": "A",
+        "cls": "skip-link",
+        "outline": "solid",
+        "width": "3px"
+      },
+      "criterion": "2.1.1, 2.4.1, 2.4.7, 2.4.11",
+      "scope": "automated"
+    },
+    {
+      "name": "Slash shortcut focuses search",
+      "passed": true,
+      "details": "calendarSearch",
+      "criterion": "2.1.1",
+      "scope": "automated"
+    },
+    {
+      "name": "Saved events persist in device-local storage",
+      "passed": true,
+      "details": [
+        {
+          "id": "fdc0f440490c",
+          "title": "The Let Down Reflex at the FOFA Gallery",
+          "href": "/polymythseminars/events/fdc0f440490c/",
+          "date": "2026-07-10T00:00-04:00",
+          "saved": "2026-07-21T15:07:31.662Z"
+        }
+      ],
+      "criterion": "4.1.2",
+      "scope": "automated"
+    },
+    {
+      "name": "Saved searches persist URL state locally",
+      "passed": true,
+      "details": [
+        {
+          "query": "?q=montral&focus=montreal&lang=fr",
+          "label": "montral",
+          "created": "2026-07-21T15:07:32.967Z"
+        }
+      ],
+      "criterion": "3.2.3",
+      "scope": "automated"
+    },
+    {
+      "name": "Calendar reflows at 320 CSS px",
+      "passed": true,
+      "details": {
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "bodyScrollWidth": 320
+      },
+      "criterion": "1.4.10",
+      "scope": "automated"
+    },
+    {
+      "name": "Reduced-motion preference suppresses transitions and smooth scrolling",
+      "passed": true,
+      "details": {
+        "animationDuration": "1e-06s",
+        "transitionDuration": "0s",
+        "scrollBehavior": "auto"
+      },
+      "criterion": "user-requested reduced-motion check",
+      "scope": "automated"
+    },
+    {
+      "name": "Forced-colour mode preserves focus and tool boundaries",
+      "passed": true,
+      "details": {
+        "focusedTag": "BUTTON",
+        "focusedText": "Enregistrer la recherche",
+        "focusOutline": "solid",
+        "focusWidth": "3px",
+        "toolsBorder": "solid",
+        "forcedAdjust": "auto"
+      },
+      "criterion": "1.4.11, 2.4.7",
+      "scope": "automated"
+    },
+    {
+      "name": "Chrome accessibility tree names all exposed controls",
+      "passed": true,
+      "details": [],
+      "criterion": "4.1.2",
+      "scope": "screen-reader proxy"
+    },
+    {
+      "name": "Submission form fields have labels",
+      "passed": true,
+      "details": [],
+      "criterion": "1.3.1, 3.3.2",
+      "scope": "automated"
+    },
+    {
+      "name": "Submission form has one main landmark and heading",
+      "passed": true,
+      "details": {
+        "label": "submission form",
+        "duplicateIds": [],
+        "missingLabels": [],
+        "unnamedButtons": 0,
+        "unnamedLinks": 0,
+        "headingJumps": [],
+        "mainCount": 1,
+        "h1Count": 1,
+        "skipTargetValid": true,
+        "lang": "en-CA"
+      },
+      "criterion": "1.3.1, 2.4.6",
+      "scope": "automated"
+    },
+    {
+      "name": "Submission form reflows at 320 CSS px",
+      "passed": true,
+      "details": {
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "criterion": "1.4.10",
+      "scope": "automated"
+    },
+    {
+      "name": "Correction form fields have labels",
+      "passed": true,
+      "details": [],
+      "criterion": "1.3.1, 3.3.2",
+      "scope": "automated"
+    },
+    {
+      "name": "Correction form has one main landmark and heading",
+      "passed": true,
+      "details": {
+        "label": "correction form",
+        "duplicateIds": [],
+        "missingLabels": [],
+        "unnamedButtons": 0,
+        "unnamedLinks": 0,
+        "headingJumps": [],
+        "mainCount": 1,
+        "h1Count": 1,
+        "skipTargetValid": true,
+        "lang": "en-CA"
+      },
+      "criterion": "1.3.1, 2.4.6",
+      "scope": "automated"
+    },
+    {
+      "name": "Correction form pre-fills the selected stable listing",
+      "passed": true,
+      "details": "https://seminarschools.com/polymythseminars/events/clarkson-laureateships-high-table-2026-01-30/",
+      "criterion": "3.3.2",
+      "scope": "automated"
+    },
+    {
+      "name": "Correction form reflows at 320 CSS px",
+      "passed": true,
+      "details": {
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "criterion": "1.4.10",
+      "scope": "automated"
+    },
+    {
+      "name": "Stable event detail has correction, source, and calendar actions",
+      "passed": true,
+      "details": [
+        "Official source · Source officielle ↗",
+        "Add to calendar · Ajouter au calendrier",
+        "Correct this listing · Corriger cette fiche"
+      ],
+      "criterion": "2.4.4",
+      "scope": "automated"
+    },
+    {
+      "name": "Stable event detail receives a local save control",
+      "passed": true,
+      "details": 1,
+      "criterion": "4.1.2",
+      "scope": "automated"
+    },
+    {
+      "name": "Event detail language follows the French preference",
+      "passed": true,
+      "details": "fr-CA",
+      "criterion": "3.1.1",
+      "scope": "automated"
+    },
+    {
+      "name": "Event detail reflows at 320 CSS px",
+      "passed": true,
+      "details": {
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "criterion": "1.4.10",
+      "scope": "automated"
+    }
+  ],
+  "passed": 26,
+  "failed": 0,
+  "console_errors": [
+    "console: Failed to load resource: net::ERR_NAME_NOT_RESOLVED"
+  ],
+  "native_assistive_technology": [
+    {
+      "technology": "VoiceOver on macOS",
+      "executed": false,
+      "reason": "Native macOS and VoiceOver are unavailable in the Linux build container. The exact manual script and expected announcements are included."
+    },
+    {
+      "technology": "NVDA on Windows",
+      "executed": false,
+      "reason": "Native Windows and NVDA are unavailable in the Linux build container. The exact manual script and expected announcements are included."
+    }
+  ],
+  "native_protocol": "docs/POLYMYTHCAL_SCREEN_READER_TEST_PROTOCOL.md"
+}

@@ -3,7 +3,7 @@
 const fs=require('fs'); const path=require('path');
 const ROOT=path.resolve(__dirname,'..');
 const home=fs.readFileSync(path.join(ROOT,'index.html'),'utf8');
-const main=fs.readFileSync(path.join(ROOT,'main/index.html'),'utf8');
+const main=fs.readFileSync(path.join(ROOT,'about/index.html'),'utf8');
 const failures=[];
 function fail(x){failures.push(x)}
 for(const [name,html] of [['home',home],['main',main]]){

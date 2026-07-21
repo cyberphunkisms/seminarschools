@@ -31,7 +31,7 @@ Set `type` to `protest`. Fill the `four_condition_test` object honestly against 
 
 Protest sources are now in the venue roster as `labour-council` and `protest-civic`. Also surface protests from any announcement you can confirm with a `source_url` and a verbatim `raw_excerpt`. Treat an unconfirmable protest as nonexistent.
 
-**Find a Protest source rule.** Crawl `findaprotest-toronto` every run before sharding. Fetch the Toronto index, follow each event detail page, and preserve the detail URL. Publish an event only when the detail page gives a specific date, start time, specific assembly location or venue, organizer, and raw excerpt. If the page says `TBD`, `Not available`, `MORE INFO TO BE SHARED SOON`, or only city-level location, do not publish it in `events`; put it in `watchlist` with `status: "needs-time-place"` or `status: "needs-location"`, preserving title, organizer, date text, detail URL, raw excerpt, and topics.
+**Find a Protest source rule.** Crawl `findaprotest-toronto` every run before sharding. Fetch the Toronto index, follow each event detail page, and preserve the detail URL. Publish an event only when the detail page gives a specific date, start time, specific assembly location or venue, organizer, and raw excerpt. If the page says `TBD`, `Not available`, `MORE INFO TO BE SHARED SOON`, or only city-level location, do not publish it in `events`; put it in `qualification queue` with `status: "needs-time-place"` or `status: "needs-location"`, preserving title, organizer, date text, detail URL, raw excerpt, and topics.
 
 **Topic discovery.** Keep `FIFA`, `World Cup`, `football`, `Palestine`, `Human Rights`, and organizer names visible in `raw_excerpt` or `topics` when present. This is for search recall only; do not infer a protest category from a topic. Classify by the listing: `protest` for rallies, marches, vigils, strikes, pickets, sit-ins, or demonstrations; `community` or `exhibition` for exhibits and teach-ins that are not public street actions.
 
@@ -122,7 +122,7 @@ Write a single JSON object to `/tmp/seminars-output.json` matching `/data/semina
 {
   "generated_at": "ISO-8601 timestamp UTC",
   "events": [ <record>, <record>, ... ],
-  "watchlist": [ <provisional record with missing time/place/details, optional> ],
+  "events": [ <confirmed and unconfirmed records together; every uncertain record must include confirmation_status="unconfirmed" and exact qualification_reasons> ],
   "source_yields": [ <one entry per rostered source, see Source accounting> ]
 }
 ```
@@ -175,3 +175,5 @@ Do not read `/data/manual-events.json` and do not include its entries in your ou
 Write the final JSON to `/tmp/seminars-output.json`. Print a one-line summary to stdout with event count and per-source breakdown. Then exit.
 
 Do not emit anything else to stdout. The output file is the deliverable.
+
+Qualification rule: keep listings with missing time/place in the main chronology as UNCONFIRMED and record the exact missing fact.

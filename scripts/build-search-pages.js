@@ -59,6 +59,10 @@ function slug(value) {
   return core || 'resource';
 }
 function hash(value) { return crypto.createHash('sha1').update(String(value)).digest('hex').slice(0, 8); }
+function eventRoute(event) {
+  const id = String(event.id || event.identity_key || event.title || 'event');
+  return `/polymythseminars/events/${encodeURIComponent(id)}/`;
+}
 function stripTags(value) { return String(value || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim(); }
 function cleanSentence(value, limit = 156) {
   const text = stripTags(value).replace(/\s+/g, ' ').trim();
@@ -108,6 +112,7 @@ function pageHead({ title, description, canonical, schema = [], robots = 'index,
 <link rel="canonical" href="${attr(canonical)}">
 <link rel="stylesheet" href="${css}">
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
 ${cards}
 ${schemas}
 </head>`;
@@ -136,7 +141,6 @@ ${body}
 <script src="/js/site-keyboard-enhancements.js?v=cl91" defer></script>
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
-<script defer src="/js/site-keyboard-enhancements.js"></script>
 </body>
 </html>\n`;
 }
@@ -187,7 +191,7 @@ function parseSeedArray(html) {
 }
 
 const RESOURCE_CSS = `/* Generated static catalog pages: crawlable HTML with the same calm, readable surface. */
-:root{--bg:#f7f5ef;--ink:#1f211e;--muted:#65675f;--line:#d9d6ca;--paper:#fffdf8;--accent:#52654d;--gold:#947a2c;--max:980px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Georgia,serif}.catalog-top{display:flex;gap:1.5rem;justify-content:space-between;align-items:center;padding:1rem max(1rem,calc((100vw - var(--max))/2));border-bottom:1px solid var(--line);font-family:Arial,sans-serif;font-size:.9rem}.catalog-top nav{display:flex;gap:1rem;flex-wrap:wrap}.brand{font-size:1.05rem;font-weight:700;text-decoration:none;color:var(--ink);letter-spacing:.02em}.brand em{font-weight:400}.catalog-top a,.catalog-footer a{color:inherit;text-decoration:none;border-bottom:1px solid transparent}.catalog-top a:hover,.catalog-footer a:hover{border-color:currentColor}.catalog-page{max-width:var(--max);margin:0 auto;padding:3rem 1.1rem 4rem}.eyebrow{font:600 .76rem/1.2 Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 .75rem}.catalog-page h1{font-size:clamp(2rem,5vw,3.6rem);line-height:1.08;letter-spacing:-.03em;margin:.1rem 0 1rem}.catalog-page h2{font-size:1.45rem;line-height:1.2;margin:2.5rem 0 .8rem}.catalog-page h3{font-size:1.1rem;margin:.2rem 0}.lede{font-size:1.15rem;max-width:70ch;color:#34362f}.breadcrumbs{font:14px/1.4 Arial,sans-serif;color:var(--muted);margin:0 0 1.5rem}.breadcrumbs a{color:inherit}.resource-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:1rem;margin:1.5rem 0}.resource-card{display:block;background:var(--paper);border:1px solid var(--line);padding:1rem 1.05rem;text-decoration:none;color:inherit;border-radius:.35rem}.resource-card:hover{border-color:var(--accent);transform:translateY(-1px)}.resource-card h3{font-size:1.02rem;line-height:1.3}.resource-card p{font-size:.92rem;color:var(--muted);margin:.55rem 0 0}.resource-meta{font:12px/1.45 Arial,sans-serif;letter-spacing:.015em;color:var(--muted);margin:.5rem 0 0}.resource-list{display:grid;gap:.8rem;margin:1.25rem 0}.resource-row{display:block;background:var(--paper);border:1px solid var(--line);padding:1rem 1.1rem;text-decoration:none;color:inherit;border-radius:.3rem}.resource-row:hover{border-color:var(--accent)}.resource-row h2,.resource-row h3{margin:0;font-size:1.08rem}.resource-row p{margin:.35rem 0 0;color:var(--muted);font-size:.94rem}.button{display:inline-block;background:var(--accent);color:white!important;text-decoration:none;padding:.65rem .9rem;border-radius:.25rem;font:600 .9rem/1 Arial,sans-serif}.button.secondary{background:transparent;color:var(--ink)!important;border:1px solid var(--ink)}.definition{background:var(--paper);border-left:4px solid var(--gold);padding:1.2rem 1.25rem;margin:1.4rem 0}.definition dl{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:.35rem 1rem;margin:0}.definition dt{font:600 .84rem/1.4 Arial,sans-serif;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}.definition dd{margin:0}.callout{background:#edf1ea;border-left:4px solid var(--accent);padding:1rem 1.1rem;margin:1.4rem 0}.catalog-footer{max-width:var(--max);margin:0 auto;padding:1.5rem 1.1rem 2.5rem;border-top:1px solid var(--line);font:13px/1.5 Arial,sans-serif;color:var(--muted)}.skip-link{position:absolute;left:-999px;top:0}.skip-link:focus{left:0;background:#fff;padding:.75rem;z-index:3}@media(max-width:650px){.catalog-top{align-items:flex-start;flex-direction:column;gap:.5rem}.catalog-page{padding-top:2rem}.definition dl{grid-template-columns:1fr}.resource-grid{grid-template-columns:1fr}}\n`;
+:root{--bg:#f7f5ef;--ink:#1f211e;--muted:#65675f;--line:#d9d6ca;--paper:#fffdf8;--accent:#52654d;--gold:#947a2c;--max:980px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Georgia,serif}.catalog-top{display:flex;gap:1.5rem;justify-content:space-between;align-items:center;padding:1rem max(1rem,calc((100vw - var(--max))/2));border-bottom:1px solid var(--line);font-family:Arial,sans-serif;font-size:.9rem}.catalog-top nav{display:flex;gap:1rem;flex-wrap:wrap}.brand{font-size:1.05rem;font-weight:700;text-decoration:none;color:var(--ink);letter-spacing:.02em}.brand em{font-weight:400}.catalog-top a,.catalog-footer a{color:inherit;text-decoration:none;border-bottom:1px solid transparent}.catalog-top a:hover,.catalog-footer a:hover{border-color:currentColor}.catalog-page{max-width:var(--max);margin:0 auto;padding:3rem 1.1rem 4rem}.eyebrow{font:600 .76rem/1.2 Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 .75rem}.catalog-page h1{font-size:clamp(2rem,5vw,3.6rem);line-height:1.08;letter-spacing:-.03em;margin:.1rem 0 1rem}.catalog-page h2{font-size:1.45rem;line-height:1.2;margin:2.5rem 0 .8rem}.catalog-page h3{font-size:1.1rem;margin:.2rem 0}.lede{font-size:1.15rem;max-width:70ch;color:#34362f}.breadcrumbs{font:14px/1.4 Arial,sans-serif;color:var(--muted);margin:0 0 1.5rem}.breadcrumbs a{color:inherit}.resource-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:1rem;margin:1.5rem 0}.resource-card{display:block;background:var(--paper);border:1px solid var(--line);padding:1rem 1.05rem;text-decoration:none;color:inherit;border-radius:.35rem}.resource-card:hover{border-color:var(--accent);transform:translateY(-1px)}.resource-card h2{font-size:1.02rem;line-height:1.3;margin:.2rem 0}.resource-card p{font-size:.92rem;color:var(--muted);margin:.55rem 0 0}.resource-meta{font:12px/1.45 Arial,sans-serif;letter-spacing:.015em;color:var(--muted);margin:.5rem 0 0}.resource-list{display:grid;gap:.8rem;margin:1.25rem 0}.resource-row{display:block;background:var(--paper);border:1px solid var(--line);padding:1rem 1.1rem;text-decoration:none;color:inherit;border-radius:.3rem}.resource-row:hover{border-color:var(--accent)}.resource-row h2,.resource-row h3{margin:0;font-size:1.08rem}.resource-row p{margin:.35rem 0 0;color:var(--muted);font-size:.94rem}.button{display:inline-block;background:var(--accent);color:white!important;text-decoration:none;padding:.65rem .9rem;border-radius:.25rem;font:600 .9rem/1 Arial,sans-serif}.button.secondary{background:transparent;color:var(--ink)!important;border:1px solid var(--ink)}.definition{background:var(--paper);border-left:4px solid var(--gold);padding:1.2rem 1.25rem;margin:1.4rem 0}.definition dl{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:.35rem 1rem;margin:0}.definition dt{font:600 .84rem/1.4 Arial,sans-serif;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}.definition dd{margin:0}.callout{background:#edf1ea;border-left:4px solid var(--accent);padding:1rem 1.1rem;margin:1.4rem 0}.catalog-footer{max-width:var(--max);margin:0 auto;padding:1.5rem 1.1rem 2.5rem;border-top:1px solid var(--line);font:13px/1.5 Arial,sans-serif;color:var(--muted)}.skip-link{position:absolute;left:-999px;top:0}.skip-link:focus{left:0;background:#fff;padding:.75rem;z-index:3}@media(max-width:650px){.catalog-top{align-items:flex-start;flex-direction:column;gap:.5rem}.catalog-page{padding-top:2rem}.definition dl{grid-template-columns:1fr}.resource-grid{grid-template-columns:1fr}}\n`;
 write('teacherresources/catalog.css', RESOURCE_CSS);
 
 function resourceMeta(entry, data) {
@@ -265,7 +269,7 @@ function generateResourcePages(data) {
     const groupCards = group.categories.map(cat => {
       const catRoute = `/teacherresources/${slug(group.id)}/${slug(cat.id)}/`;
       const n = cat.entries.length;
-      return `<a class="resource-card" href="${catRoute}"><h3>${esc(cat.title)}</h3><p>${esc(cat.blurb || cat.kicker || 'Curated classroom resources.')}</p><div class="resource-meta">${n} resources</div></a>`;
+      return `<a class="resource-card" href="${catRoute}"><h2>${esc(cat.title)}</h2><p>${esc(cat.blurb || cat.kicker || 'Curated classroom resources.')}</p><div class="resource-meta">${n} resources</div></a>`;
     }).join('\n');
     const groupBody = `<p class="breadcrumbs"><a href="/">Seminar Schools</a> / <a href="/teacherresources/">Teacher Resources</a> / ${esc(group.title)}</p><p class="eyebrow">Teacher resources</p><h1>${esc(group.title)}</h1><p class="lede">${esc(group.kicker || groupDesc)}</p><div class="resource-grid">${groupCards}</div><p><a class="button secondary" href="/teacherresources/">All teacher resources</a></p>`;
     const groupSchema = [{ '@context':'https://schema.org','@type':'CollectionPage','@id':groupUrl+'#collection',url:groupUrl,name:group.title,description:groupDesc,numberOfItems:groupCount }];
@@ -324,7 +328,7 @@ function generateResourcePages(data) {
 }
 
 function staticEventCard(event) {
-  const route = `/polymythseminars/events/${slug(event.id || event.title)}-${hash(event.id || event.title)}/`;
+  const route = eventRoute(event);
   const date = event.end_date ? `${humanDate(event.date)} to ${humanDate(event.end_date)}` : humanDate(event.date);
   const by = event.speaker_or_director ? `<div class="event-speaker">${esc(event.speaker_or_director)}</div>` : '';
   return `<article class="event" data-date="${attr(event.date || '')}" data-type="${attr(event.type || 'other')}"><div class="date-col"><span class="day">${esc(new Intl.DateTimeFormat('en-CA',{day:'2-digit',timeZone:'America/Toronto'}).format(new Date(event.date)))}</span><span class="mon">${esc(new Intl.DateTimeFormat('en-CA',{month:'short',timeZone:'America/Toronto'}).format(new Date(event.date)))}</span></div><div class="body-col"><h2 class="title"><a href="${route}">${esc(event.title)}</a></h2>${by}<div class="event-meta">${esc(date)}${event.venue ? ` · ${esc(event.venue)}` : ''}</div>${event.description ? `<p class="event-desc">${esc(cleanSentence(event.description,260))}</p>` : ''}</div></article>`;
@@ -338,8 +342,12 @@ function eventEligible(event) {
   return start.getTime() <= horizon.getTime();
 }
 function eventIndexable(event) {
-  const text = [event.title,event.venue,event.description].filter(Boolean).join(' ').toLowerCase();
-  return eventEligible(event) && ['manual','auto-published'].includes(event.review_status) && Number(event.confidence || 0) >= 80 && !/\b(projected|verify|confirm on the site)\b/.test(text) && !['cfp','contest'].includes(event.type);
+  // Event-detail ownership belongs to build-polymythcal-audit13.py. Keep the
+  // sitemap contract aligned with that canonical builder's robots policy.
+  return event.confirmation_status === 'confirmed'
+    && event.date_precision === 'exact'
+    && !['', 'Unknown'].includes(String(event.city || ''))
+    && !['cancelled', 'missing-on-source'].includes(event.lifecycle_status);
 }
 function injectEventRoot(events) {
   const rel='polymythseminars/index.html';
@@ -352,25 +360,37 @@ function injectEventRoot(events) {
   write(rel,html);
   return current;
 }
+function archiveGeneratedEventPage(ix) {
+  if (!fs.existsSync(ix)) return;
+  let html = fs.readFileSync(ix, 'utf8');
+  const robots = /<meta\b(?=[^>]*\bname=["']robots["'])[^>]*>/i;
+  if (robots.test(html)) html = html.replace(robots, '<meta name="robots" content="noindex,follow">');
+  else html = html.replace('</head>', '<meta name="robots" content="noindex,follow">\n</head>');
+  html = html.replace(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>\s*\{[^<]*"@type"\s*:\s*"Event"[^<]*\}\s*<\/script>\s*/gi, '');
+  html = html.replace(/"eventStatus"\s*:\s*"https:\/\/schema\.org\/EventScheduled"/g, '"eventStatus":"https://schema.org/EventCompleted"');
+  html = html.replace('\n<script defer src="/js/site-keyboard-enhancements.js"></script>', '');
+  if (!html.includes('data-event-archive-note')) {
+    const note = '<div class="callout" data-event-archive-note="true"><strong>Past event.</strong> This permalink is retained as an archive record. Check the original source for a current edition or related event.</div>';
+    html = html.replace(/(<h1\b[^>]*>[\s\S]*?<\/h1>)/i, `$1${note}`);
+  }
+  write(path.relative(ROOT, ix).split(path.sep).join('/'), html);
+}
 function cleanGeneratedEventPages(currentRoutes) {
   const base = path.join(ROOT, 'polymythseminars', 'events');
-  if (CHECK || !fs.existsSync(base)) return;
+  if (!fs.existsSync(base)) return;
   const keep = new Set(currentRoutes.map(route => path.join(ROOT, sourcePathFor(route))));
   for (const ent of fs.readdirSync(base, { withFileTypes: true })) {
     if (!ent.isDirectory()) continue;
     const ix = path.join(base, ent.name, 'index.html');
-    if (!keep.has(ix)) {
-      fs.rmSync(path.join(base, ent.name), { recursive: true, force: true });
-      writes++;
-    }
+    if (!keep.has(ix)) archiveGeneratedEventPage(ix);
   }
 }
 function generateEventPages(events) {
-  const currentEventRoutes = events.filter(eventEligible).map(event => `/polymythseminars/events/${slug(event.id || event.title)}-${hash(event.id || event.title)}/`);
+  const currentEventRoutes = events.filter(eventEligible).map(eventRoute);
   cleanGeneratedEventPages(currentEventRoutes);
   const indexable=[];
   for (const event of events.filter(eventEligible)) {
-    const route=`/polymythseminars/events/${slug(event.id || event.title)}-${hash(event.id || event.title)}/`;
+    const route=eventRoute(event);
     const url=routeUrl(route);
     const dateLabel=event.end_date ? `${humanDate(event.date)} to ${humanDate(event.end_date)}` : humanDate(event.date);
     const baseDescription=event.description || `${event.title}${event.venue ? ` at ${event.venue}` : ''}.`;
@@ -444,7 +464,7 @@ function generateSitemap(generated) {
   const methodologyPrefixes=[...new Set(generated.methodology.map(x=>x.url))];
   const retiredPrefixes=[SITE+'/teacherresources/lang-hughes/', SITE+'/polymyth/methodologylist/core/'];
   const keep=existingUrls.filter(u=> !retiredPrefixes.some(p=>u===p || u.startsWith(p)) && !groupPrefixes.some(p=>u===p || u.startsWith(p)) && !u.startsWith(eventPrefix) && !methodologyPrefixes.some(p=>u===p || u.startsWith(p)));
-  const all=[...new Set([...keep, SITE+'/teacherresources/', ...generated.resources.map(x=>x.url), ...generated.events.map(x=>x.url), ...generated.methodology.map(x=>x.url)])].sort((a,b)=>a.localeCompare(b));
+  const all=[...new Set([...keep, SITE+'/teacherresources/', SITE+'/polymythseminars/subscribe/', ...generated.resources.map(x=>x.url), ...generated.events.map(x=>x.url), ...generated.methodology.map(x=>x.url)])].sort((a,b)=>a.localeCompare(b));
   const xml=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'];
   for(const url of all) xml.push(`  <url><loc>${escapeXml(url)}</loc><lastmod>${TODAY}</lastmod></url>`);
   xml.push('</urlset>','');
@@ -461,7 +481,13 @@ function main(){
 
     const events=JSON.parse(read('polymythseminars/events.json')).events || [];
     injectEventRoot(events);
-    const eventIndex=generateEventPages(events);
+    // Stable event pages, legacy aliases, and per-event ICS files are generated
+    // once by build-polymythcal-audit13.py. This search builder contributes
+    // only the canonical indexable routes to the sitemap.
+    const eventIndex=events.filter(eventIndexable).map(event => {
+      const route=eventRoute(event);
+      return {route,url:routeUrl(route)};
+    });
 
     const methodHtml=read('polymyth/methodologylist/index.html');
     const seed=parseSeedArray(methodHtml);

@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-07-16T19:05:41.754Z",
-  "status": "passed",
-  "source_html_files": 1067,
-  "public_html_files": 1067,
-  "audited_source_pages": 1066,
-  "audited_public_pages": 1066,
+  "generated_at": "2026-07-20T14:21:41.645Z",
+  "status": "failed",
+  "source_html_files": 1582,
+  "public_html_files": 1581,
+  "audited_source_pages": 1581,
+  "audited_public_pages": 1580,
   "typography_contract": "/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a",
   "reviews_first_reference": "https://www.linkedin.com/in/seminarschools/overlay/Position/1409449435/treasury/?profileId=ACoAAAoVpaQBwFL59ASEITFxwp8D-hzMxzfApMM",
   "checks": {
@@ -16,5 +16,7 @@
     "clean_route_revalidation": true,
     "reviews_route_and_discovery": true
   },
-  "failures": []
+  "failures": [
+    "source/public HTML count differs: 1582/1581"
+  ]
 }

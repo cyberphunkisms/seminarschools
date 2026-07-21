@@ -113,7 +113,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
 .bubble-body p{font-style:italic;color:var(--ink-soft);font-size:1.02rem;margin-bottom:1.1rem;}
 .tier-row{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.2rem;}
 .tier-pick{display:inline-block;font-family:var(--display);font-size:1.04rem;color:var(--paper);background:var(--mulberry-deep);
-  text-decoration:none;padding:0.6rem 1.2rem;border-radius:3px;transition:background 0.3s ease;}
+  text-decoration:none;padding:0.6rem 1.2rem;border:0;border-radius:3px;cursor:pointer;transition:background 0.3s ease;}
 .tier-pick:hover{background:var(--mulberry-fruit-ripe);}
 .tier-pick .small{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.08em;opacity:0.85;display:block;}
 .book-line{font-family:var(--mono);font-size:0.82rem;letter-spacing:0.03em;color:var(--ink-soft);}
@@ -183,6 +183,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
 <link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
 </head>
 <body class="leizu-revamp" data-geometry="indra-web" data-indra-intensity="0.075">
+<a class="skip-link" href="#content">Skip to main content</a>
 <nav class="leizu-site-nav" aria-label="Leizu Academy">
   <a class="leizu-mark" href="/leizu/">嫘祖學院 <span aria-hidden="true">·</span> Leizu</a>
   <div class="leizu-nav-links">
@@ -340,12 +341,12 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
         <div class="bubble-body" id="bubble-body" role="region" aria-label="Enrol now">
           <p id="plan-picker-copy">This form begins any inquiry. A selected course path needs one of the published plans below before it moves to secure payment.</p>
           <div class="tier-row">
-            <a class="tier-pick" data-payment-key="starter_block" href="#">Starter block <span class="small">select</span></a>
-            <a class="tier-pick" data-payment-key="term" href="#">Term <span class="small">select</span></a>
-            <a class="tier-pick" data-payment-key="forest_year_upfront" href="#">Forest Year, up front <span class="small">select</span></a>
-            <a class="tier-pick" data-payment-key="forest_year_two" href="#">Forest Year, two payments <span class="small">select</span></a>
-            <a class="tier-pick" data-payment-key="forest_year_term" href="#">Forest Year, by term <span class="small">select</span></a>
-            <a class="tier-pick" data-payment-key="forest_year_monthly" href="#">Forest Year, monthly <span class="small">select</span></a>
+            <button class="tier-pick" data-payment-key="starter_block" type="button">Starter block <span class="small">select</span></button>
+            <button class="tier-pick" data-payment-key="term" type="button">Term <span class="small">select</span></button>
+            <button class="tier-pick" data-payment-key="forest_year_upfront" type="button">Forest Year, up front <span class="small">select</span></button>
+            <button class="tier-pick" data-payment-key="forest_year_two" type="button">Forest Year, two payments <span class="small">select</span></button>
+            <button class="tier-pick" data-payment-key="forest_year_term" type="button">Forest Year, by term <span class="small">select</span></button>
+            <button class="tier-pick" data-payment-key="forest_year_monthly" type="button">Forest Year, monthly <span class="small">select</span></button>
           </div>
           <p class="book-line">Use this form for the Seminar Year or a custom plan. Prefer a first conversation? <a href="https://cal.com/seminarschools/class" target="_blank" rel="noopener noreferrer">Book a first conversation</a>.</p>
         </div>
@@ -366,7 +367,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
     <h2 id="thanks-title">Your intake is in.</h2>
     <p id="thanks-copy">Your information has been sent.</p>
     <div id="payment-step" hidden style="margin:2rem 0;">
-      <a id="stripe-link" class="buy" href="#" rel="noopener noreferrer" style="display:inline-block;padding:1rem 2.5rem;background:var(--mulberry-deep,#5A1F2F);color:var(--paper,#F4EFE3);font-family:var(--display);font-size:1.15rem;font-style:italic;text-decoration:none;border-radius:2px;transition:background 0.3s;">Continue to secure payment</a>
+      <a id="stripe-link" class="buy" href="/leizu/#pricing" rel="noopener noreferrer" style="display:inline-block;padding:1rem 2.5rem;background:var(--mulberry-deep,#5A1F2F);color:var(--paper,#F4EFE3);font-family:var(--display);font-size:1.15rem;font-style:italic;text-decoration:none;border-radius:2px;transition:background 0.3s;">Continue to secure payment</a>
     </div>
     <p id="offer-note" hidden style="margin:2rem 0;font-size:1.08rem;color:var(--ink);">I will read what you sent and reply with the right plan, usually within one day.</p>
     <p style="font-size:0.9rem;color:var(--ink-soft);">For questions, text or call <a href="tel:+14167710382">416-771-0382</a> or reply to the confirmation email.</p>
@@ -693,7 +694,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
 <script src="/js/theme.js?v=cl91" defer></script>
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
-<script src="/js/footer.js?v=cl91" defer></script>
+<script src="/js/footer.js?v=20260719-audit11-decisions" defer></script>
 <script defer src="/js/site-keyboard-enhancements.js"></script>
 </body>
 </html>

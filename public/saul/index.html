@@ -177,7 +177,8 @@
   header.cv-header .cv-contact, .cv-header-email, .cv-header-email a { overflow-wrap: anywhere; }
   .langs { row-gap: 0.35rem; }
   .langs button { max-width: 100%; overflow-wrap: anywhere; }
-  .cv-actions, .quick-views, .view-switcher, .archive-tools { min-width: 0; }
+  .cv-actions, .quick-views, .view-switcher, .archive-expand-controls{display:flex;flex-wrap:wrap;gap:.45rem;margin:.75rem 0 1rem}.archive-expand-controls button{min-height:44px;padding:.55rem .8rem;border:1px solid var(--rule);border-radius:999px;background:transparent;color:var(--muted);font:700 .68rem/1 var(--sans);cursor:pointer}.archive-expand-controls button:hover,.archive-expand-controls button:focus-visible{border-color:var(--accent);color:var(--accent)}
+.archive-tools { min-width: 0; }
   .cv-action, .quick-views button, .view-switcher button { white-space: normal; text-align: center; justify-content: center; overflow-wrap: anywhere; }
   @media (max-width: 720px), (min-resolution: 1.5dppx) {
     header.cv-header .cv-head-row { align-items: flex-start; }
@@ -1239,7 +1240,7 @@ textarea:focus-visible,
 <link href="/css/alive.css?v=cl91" rel="stylesheet"/>
 <style id="CL_SELF_CV_PRINT_ZOOM_GUARD">@media print{body[data-cv-purpose="general-employment"]{font-size:11pt}.cv-name,.hero-title,h1{break-after:avoid;overflow-wrap:anywhere}}@media (max-width:760px){body[data-cv-purpose="general-employment"] h1,body[data-cv-purpose="general-employment"] .name{max-width:100%;overflow-wrap:anywhere}}</style>
 <link data-site-wide-type-zoom="20260710-reviews-zoom-font-a" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" rel="stylesheet"/>
-<title>Saul Karim Nassau - Visual Modular CV and Career Archive</title><meta content="Explore Saul Karim Nassau's visual modular CV, role-focused links, professional application PDFs, map and complete career archive." name="description"/><meta content="index,follow,max-image-preview:large" name="robots"/><meta content="profile" property="og:type"/><meta content="Saul Karim Nassau — Modular CV and Complete Career Archive" property="og:title"/><meta content="Role-focused CV outputs for hospitality, research, teaching, programs, customer education, arts, performance, portfolio and community work." property="og:description"/><meta content="https://seminarschools.com/saul/" property="og:url"/><meta content="https://seminarschools.com/img/saul.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Saul Karim Nassau — Modular CV" name="twitter:title"/><meta content="Choose one clear job focus, download a text-based CV, or open the complete career archive." name="twitter:description"/><meta content="https://seminarschools.com/img/saul.jpg" name="twitter:image"/><link href="https://seminarschools.com/saul/" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfilePage", "name": "Saul Karim Nassau — Modular CV and Complete Career Archive", "url": "https://seminarschools.com/saul/", "mainEntity": {"@type": "Person", "name": "Saul Karim Nassau", "email": "saulnassau@protonmail.com", "telephone": "416-771-0382", "address": {"@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "Ontario", "addressCountry": "CA"}}}</script><link href="./assets/saul-cv-spectrum-2026.css?v=20260716-spirit-r4" rel="stylesheet"/></head>
+<title>Saul Karim Nassau - Visual Modular CV and Career Archive</title><meta content="Explore Saul Karim Nassau" name="description"/><meta content="index,follow,max-image-preview:large" name="robots"/><meta content="profile" property="og:type"><meta content="Saul Karim Nassau — Modular CV and Complete Career Archive" property="og:title"><meta content="Role-focused CV outputs for hospitality, research, teaching, programs, customer education, arts, performance, portfolio and community work." property="og:description"><meta content="https://seminarschools.com/saul/" property="og:url"><meta content="https://seminarschools.com/img/saul.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Saul Karim Nassau — Modular CV" name="twitter:title"/><meta content="Choose one clear job focus, download a text-based CV, or open the complete career archive." name="twitter:description"/><meta content="https://seminarschools.com/img/saul.jpg" name="twitter:image"/><link href="https://seminarschools.com/saul/" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfilePage", "name": "Saul Karim Nassau — Modular CV and Complete Career Archive", "url": "https://seminarschools.com/saul/", "mainEntity": {"@type": "Person", "name": "Saul Karim Nassau", "email": "saulnassau@protonmail.com", "telephone": "416-771-0382", "address": {"@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "Ontario", "addressCountry": "CA"}}}</script><link href="./assets/saul-cv-spectrum-2026.css?v=20260718-map-archive-final8" rel="stylesheet"></link></meta></meta></meta></meta><style id="audit11-mobile-cv-return-link">@media(max-width:520px){body[data-cv-purpose="general-employment"]>a[href="/"]:first-of-type{position:absolute!important;background:rgba(255,253,248,.88);padding:.45rem .58rem;border:1px solid rgba(35,43,46,.18);border-radius:999px;backdrop-filter:blur(8px);}}</style></head>
 <body data-cv-purpose="general-employment" data-geometry="indra-web" data-indra-intensity="0.085" data-page-weight="heavy" data-route-type="cv">
 <a href="/" onmouseout="this.style.opacity=0.65" onmouseover="this.style.opacity=1" style="position:fixed;top:0.9rem;left:1rem;z-index:1200;font-family:ui-monospace,monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:inherit;opacity:0.65;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:0.15rem;">← Seminar Schools</a>
 <!-- Theme toggle (light/dark mode). System preference is the default;
@@ -1264,8 +1265,7 @@ textarea:focus-visible,
 <button data-lang="fa" type="button">فارسی</button>
 <button data-lang="fr" type="button">Français</button>
 </nav>
-
-<section class="cv-spectrum" data-cv-spectrum="" data-default-focus="general" data-focused-route="false" style="--focus:#665A78">
+<nav aria-label="CV sections" class="cv-local-nav" data-cv-local-nav=""><a aria-current="location" href="#cvOverview">CV</a><a href="#places">Map</a><a href="#careerArchive">Timeline</a><a href="#eduHead">Education</a><a href="#methodsHead">Methods</a></nav><section class="cv-spectrum" data-cv-spectrum="" data-default-focus="general" data-focused-route="false" id="cvOverview" style="--focus:#665A78">
 <div aria-hidden="true" class="cv-spectrum__rainbow"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 <header class="cv-spectrum__hero">
 <figure class="cv-spectrum__portrait">
@@ -1276,7 +1276,7 @@ textarea:focus-visible,
 <span class="cv-kicker">Curriculum vitae</span>
 <h1 data-cv-name="">Saul Karim Nassau<span class="post" data-cv-post=""></span></h1>
 <p class="cv-spectrum__role" data-cv-role="">General / Any Role</p>
-<p class="cv-lede" data-cv-profile="">Versatile educator, researcher, program coordinator and public-facing professional with experience turning complex material into clear, practical work across learning, culture, community, service and digital projects.</p>
+<p class="cv-lede" data-cv-profile="">Versatile educator, researcher, program coordinator and public-facing professional with experience turning complex material into clear, practical work across learning, culture, community, service, presentation and digital projects.</p>
 <div class="cv-spectrum__contact">
 <a href="tel:+14167710382">416-771-0382</a><span>Toronto, Ontario</span>
 <a href="mailto:saulnassau@protonmail.com">saulnassau@protonmail.com</a>
@@ -1287,20 +1287,20 @@ textarea:focus-visible,
 <nav aria-label="Choose a CV focus" class="cv-spectrum__focus">
 <div class="cv-spectrum__focus-heading">
 <div><span>Current focus</span><strong data-cv-current="">General / Any Role</strong></div>
-<button data-cv-copy="" type="button">Share this view</button>
+<button data-cv-copy="" type="button">Share this view</button><span aria-atomic="true" aria-live="polite" class="cv-spectrum__status" data-cv-share-status=""></span>
 </div>
 <div class="cv-spectrum__focus-row"><a aria-current="page" class="cv-spectrum__lens" data-focus-slug="general" href="/saul/cv/general/" style="--lens:#665A78"><span aria-hidden="true"></span><strong>General</strong></a><a class="cv-spectrum__lens" data-focus-slug="hospitality" href="/saul/cv/hospitality/" style="--lens:#946A1E"><span aria-hidden="true"></span><strong>Hospitality</strong></a><a class="cv-spectrum__lens" data-focus-slug="research" href="/saul/cv/research/" style="--lens:#5268A3"><span aria-hidden="true"></span><strong>Research</strong></a><a class="cv-spectrum__lens" data-focus-slug="teaching" href="/saul/cv/teaching/" style="--lens:#347CA5"><span aria-hidden="true"></span><strong>Teaching</strong></a><a class="cv-spectrum__lens" data-focus-slug="programs" href="/saul/cv/programs/" style="--lens:#478568"><span aria-hidden="true"></span><strong>Programs &amp; Events</strong></a><a class="cv-spectrum__lens" data-focus-slug="arts-culture" href="/saul/cv/arts-culture/" style="--lens:#98546D"><span aria-hidden="true"></span><strong>Arts &amp; Culture</strong></a><a class="cv-spectrum__lens" data-focus-slug="portfolio" href="/saul/cv/portfolio/" style="--lens:#A45C51"><span aria-hidden="true"></span><strong>Portfolio</strong></a><a class="cv-spectrum__lens" data-focus-slug="community" href="/saul/cv/community/" style="--lens:#567F5E"><span aria-hidden="true"></span><strong>Community</strong></a></div>
 <details class="cv-spectrum__more-paths"><summary>More focused views</summary><div><a class="cv-spectrum__lens" data-focus-slug="customer-education" href="/saul/cv/customer-education/" style="--lens:#3F817E"><span aria-hidden="true"></span><strong>Customer Support</strong></a><a class="cv-spectrum__lens" data-focus-slug="performance" href="/saul/cv/performance/" style="--lens:#6D5AA0"><span aria-hidden="true"></span><strong>Performance</strong></a><a class="cv-spectrum__lens" data-focus-slug="volunteer-events" href="/saul/cv/volunteer-events/" style="--lens:#806A4C"><span aria-hidden="true"></span><strong>Volunteer &amp; Events</strong></a><a class="cv-spectrum__lens" data-focus-slug="education" href="/saul/cv/education/" style="--lens:#9A607B"><span aria-hidden="true"></span><strong>Education</strong></a></div></details>
 </nav>
 <div aria-live="polite" class="cv-spectrum__preview">
 <section class="cv-spectrum__experience">
-<div class="cv-spectrum__experience-head"><p class="cv-spectrum__section-label">Selected experience</p><a href="/saul/#careerArchive">Complete record ↓</a></div>
-<div data-cv-jobs=""><article class="cv-spectrum__job"><h4>Leizu Academy <span>- Seminar Schools</span></h4><p class="cv-spectrum__job-meta">Toronto / online · May 2026-Present</p><ul><li>Provides English-language tutoring for the Ontario curriculum, the IB Diploma and university preparation.</li><li>Adapts explanations, assignments and seminar formats to each learner while keeping family communication clear and practical.</li></ul></article><article class="cv-spectrum__job"><h4>Seminar Schools</h4><p class="cv-spectrum__job-meta">Toronto / online · 2025-Present</p><ul><li>Develops and publishes teaching resources, research archives, essays, public information and clearly labelled conceptual projects.</li><li>Maintains source trails, structured releases and accessible public-facing documentation across the site.</li></ul></article><article class="cv-spectrum__job"><h4>Teacher <span>- NOIC Academy</span></h4><p class="cv-spectrum__job-meta">Markham · Sep 2023-May 2025</p><ul><li>Taught within International Baccalaureate and Ontario Secondary School Diploma frameworks.</li><li>Completed IB Theory of Knowledge certification while supporting international secondary students.</li></ul></article><article class="cv-spectrum__job"><h4>Assistant Manager <span>- Pizza Pizza</span></h4><p class="cv-spectrum__job-meta">Toronto · c. 2020-early 2023</p><ul><li>Supervised front-counter and kitchen shifts, supported scheduling and training, and kept service moving during high-volume periods.</li><li>Handled POS, cash and tills, customer concerns, opening and closing, food preparation, sanitation, receiving, FIFO, inventory and ordering.</li></ul></article><article class="cv-spectrum__job"><h4>Founder, Project Manager and Translator <span>- Independent Refugee Support Initiative</span></h4><p class="cv-spectrum__job-meta">Serbia, Croatia and remote coordination · Feb 2014-Dec 2015</p><ul><li>Founded and coordinated a cross-border support effort that raised more than $8,000 for food, water, legal assistance and urgent needs.</li><li>Verified changing information, translated communications and coordinated professionals, supporters and on-the-ground needs.</li></ul></article></div>
-<div aria-hidden="true" class="cv-spectrum__print-jobs" data-cv-print-jobs=""><article class="cv-spectrum__job"><h4>Leizu Academy <span>- Seminar Schools</span></h4><p class="cv-spectrum__job-meta">Toronto / online · May 2026-Present</p><ul><li>Provides English-language tutoring for the Ontario curriculum, the IB Diploma and university preparation.</li><li>Adapts explanations, assignments and seminar formats to each learner while keeping family communication clear and practical.</li></ul></article><article class="cv-spectrum__job"><h4>Seminar Schools</h4><p class="cv-spectrum__job-meta">Toronto / online · 2025-Present</p><ul><li>Develops and publishes teaching resources, research archives, essays, public information and clearly labelled conceptual projects.</li><li>Maintains source trails, structured releases and accessible public-facing documentation across the site.</li></ul></article><article class="cv-spectrum__job"><h4>Teacher <span>- NOIC Academy</span></h4><p class="cv-spectrum__job-meta">Markham · Sep 2023-May 2025</p><ul><li>Taught within International Baccalaureate and Ontario Secondary School Diploma frameworks.</li><li>Completed IB Theory of Knowledge certification while supporting international secondary students.</li></ul></article><article class="cv-spectrum__job"><h4>Assistant Manager <span>- Pizza Pizza</span></h4><p class="cv-spectrum__job-meta">Toronto · c. 2020-early 2023</p><ul><li>Supervised front-counter and kitchen shifts, supported scheduling and training, and kept service moving during high-volume periods.</li><li>Handled POS, cash and tills, customer concerns, opening and closing, food preparation, sanitation, receiving, FIFO, inventory and ordering.</li></ul></article><article class="cv-spectrum__job"><h4>Founder, Project Manager and Translator <span>- Independent Refugee Support Initiative</span></h4><p class="cv-spectrum__job-meta">Serbia, Croatia and remote coordination · Feb 2014-Dec 2015</p><ul><li>Founded and coordinated a cross-border support effort that raised more than $8,000 for food, water, legal assistance and urgent needs.</li><li>Verified changing information, translated communications and coordinated professionals, supporters and on-the-ground needs.</li></ul></article><article class="cv-spectrum__job"><h4>Community Development Manager <span>- Campus Crops Farmers Market, McGill</span></h4><p class="cv-spectrum__job-meta">Montreal · Sep 2011-Aug 2015</p><ul><li>Redesigned budgeting and expense tracking in Excel, coordinated volunteers and supported public programming.</li><li>Developed partner relationships for a student-run urban agriculture initiative and farmers market.</li></ul></article></div>
+<div class="cv-spectrum__experience-head"><h2 class="cv-spectrum__section-label">Selected experience</h2><a href="/saul/#careerArchive">Complete record ↓</a></div>
+<div data-cv-jobs=""><article class="cv-spectrum__job"><h3>Leizu Academy <span>- Seminar Schools</span></h3><p class="cv-spectrum__job-meta">Toronto / online · May 2026-Present</p><ul><li>Provides English-language tutoring for the Ontario curriculum, the IB Diploma and university preparation.</li><li>Adapts explanations, assignments and seminar formats to each learner while keeping family communication clear and practical.</li></ul></article><article class="cv-spectrum__job"><h3>Volunteer, Event and Hospitality Operations <span>- BUMI Festival</span></h3><p class="cv-spectrum__job-meta">Toronto area · 2025-Present</p><ul><li>Supports full festival operations: setup, check-in, guest and vendor service, food and beverage, backstage, grounds and cleaning.</li><li>Supported transport, information, security, and crowd flow during festival operations and participated in 2025 and 2026 planning.</li></ul></article><article class="cv-spectrum__job"><h3>Teacher <span>- NOIC Academy</span></h3><p class="cv-spectrum__job-meta">Markham · Sep 2023-May 2025</p><ul><li>Taught within International Baccalaureate and Ontario Secondary School Diploma frameworks.</li><li>Completed IB Theory of Knowledge certification while supporting international secondary students.</li></ul></article><article class="cv-spectrum__job"><h3>Assistant Manager <span>- Pizza Pizza</span></h3><p class="cv-spectrum__job-meta">Toronto · c. 2020-early 2023</p><ul><li>Supervised front-counter and kitchen shifts, supported scheduling and training, and kept service moving during high-volume periods.</li><li>Handled POS, cash and tills, customer concerns, opening and closing, food preparation, sanitation, receiving, FIFO, inventory and ordering.</li></ul></article><article class="cv-spectrum__job"><h3>Founder, Project Manager and Translator <span>- Independent Refugee Support Initiative</span></h3><p class="cv-spectrum__job-meta">Serbia, Croatia and remote coordination · Feb 2014-Dec 2015</p><ul><li>Founded and coordinated a cross-border support effort that raised more than $8,000 for food, water, legal assistance and urgent needs.</li><li>Verified changing information, translated communications and coordinated professionals, supporters and on-the-ground needs.</li></ul></article></div>
+<template data-cv-print-template=""><article class="cv-spectrum__job"><h3>Leizu Academy <span>- Seminar Schools</span></h3><p class="cv-spectrum__job-meta">Toronto / online · May 2026-Present</p><ul><li>Provides English-language tutoring for the Ontario curriculum, the IB Diploma and university preparation.</li><li>Adapts explanations, assignments and seminar formats to each learner while keeping family communication clear and practical.</li></ul></article><article class="cv-spectrum__job"><h3>Volunteer, Event and Hospitality Operations <span>- BUMI Festival</span></h3><p class="cv-spectrum__job-meta">Toronto area · 2025-Present</p><ul><li>Supports full festival operations: setup, check-in, guest and vendor service, food and beverage, backstage, grounds and cleaning.</li><li>Supported transport, information, security, and crowd flow during festival operations and participated in 2025 and 2026 planning.</li></ul></article><article class="cv-spectrum__job"><h3>Teacher <span>- NOIC Academy</span></h3><p class="cv-spectrum__job-meta">Markham · Sep 2023-May 2025</p><ul><li>Taught within International Baccalaureate and Ontario Secondary School Diploma frameworks.</li><li>Completed IB Theory of Knowledge certification while supporting international secondary students.</li></ul></article><article class="cv-spectrum__job"><h3>Assistant Manager <span>- Pizza Pizza</span></h3><p class="cv-spectrum__job-meta">Toronto · c. 2020-early 2023</p><ul><li>Supervised front-counter and kitchen shifts, supported scheduling and training, and kept service moving during high-volume periods.</li><li>Handled POS, cash and tills, customer concerns, opening and closing, food preparation, sanitation, receiving, FIFO, inventory and ordering.</li></ul></article><article class="cv-spectrum__job"><h3>Founder, Project Manager and Translator <span>- Independent Refugee Support Initiative</span></h3><p class="cv-spectrum__job-meta">Serbia, Croatia and remote coordination · Feb 2014-Dec 2015</p><ul><li>Founded and coordinated a cross-border support effort that raised more than $8,000 for food, water, legal assistance and urgent needs.</li><li>Verified changing information, translated communications and coordinated professionals, supporters and on-the-ground needs.</li></ul></article><article class="cv-spectrum__job"><h3>Community Development Manager <span>- Campus Crops Farmers Market, McGill</span></h3><p class="cv-spectrum__job-meta">Montreal · Sep 2011-Aug 2015</p><ul><li>Redesigned budgeting and expense tracking in Excel, coordinated volunteers and supported public programming.</li><li>Developed partner relationships for a student-run urban agriculture initiative and farmers market.</li></ul></article></template>
 </section>
 <aside class="cv-spectrum__skills">
 <p class="cv-spectrum__section-label">Key skills</p>
-<ul data-cv-skills=""><li>Clear written and verbal communication</li><li>Research and synthesis</li><li>Teaching and facilitation</li><li>Program and event coordination</li><li>Customer and participant support</li><li>Cross-cultural communication</li><li>Documentation and digital publishing</li><li>Independent project delivery</li></ul>
+<ul data-cv-skills=""><li>Clear written and verbal communication</li><li>Research and synthesis</li><li>Teaching and facilitation</li><li>Program and event coordination</li><li>Customer and participant support</li><li>Cross-cultural communication</li><li>Public presentation and audience engagement</li><li>Documentation and digital publishing</li><li>Independent project delivery</li></ul>
 <p class="cv-spectrum__section-label">Training &amp; languages</p>
 <p class="cv-spectrum__credentials" data-cv-credentials="">AODA Accessibility Standards training - June 2026 · IB Theory of Knowledge certification - 2023 · TESOL certification - Indiana University, 2016 · Farsi - advanced · French - basic · Mandarin - basic</p>
 </aside>
@@ -1318,29 +1318,39 @@ textarea:focus-visible,
 <summary>Combine focus areas</summary>
 <div class="cv-spectrum__tune-body">
 <p>Select two or more areas to build a combined visual view. The print action uses a professional monochrome layout.</p>
-<fieldset><legend>Focus areas</legend><div class="cv-spectrum__blend"><label class="cv-spectrum__blend-chip" style="--lens:#946A1E"><input data-cv-blend="" type="checkbox" value="hospitality"/><span>Hospitality</span></label><label class="cv-spectrum__blend-chip" style="--lens:#5268A3"><input data-cv-blend="" type="checkbox" value="research"/><span>Research</span></label><label class="cv-spectrum__blend-chip" style="--lens:#347CA5"><input data-cv-blend="" type="checkbox" value="teaching"/><span>Teaching</span></label><label class="cv-spectrum__blend-chip" style="--lens:#478568"><input data-cv-blend="" type="checkbox" value="programs"/><span>Programs &amp; Events</span></label><label class="cv-spectrum__blend-chip" style="--lens:#3F817E"><input data-cv-blend="" type="checkbox" value="customer-education"/><span>Customer Support</span></label><label class="cv-spectrum__blend-chip" style="--lens:#98546D"><input data-cv-blend="" type="checkbox" value="arts-culture"/><span>Arts &amp; Culture</span></label><label class="cv-spectrum__blend-chip" style="--lens:#6D5AA0"><input data-cv-blend="" type="checkbox" value="performance"/><span>Performance</span></label><label class="cv-spectrum__blend-chip" style="--lens:#A45C51"><input data-cv-blend="" type="checkbox" value="portfolio"/><span>Portfolio</span></label><label class="cv-spectrum__blend-chip" style="--lens:#567F5E"><input data-cv-blend="" type="checkbox" value="community"/><span>Community</span></label><label class="cv-spectrum__blend-chip" style="--lens:#806A4C"><input data-cv-blend="" type="checkbox" value="volunteer-events"/><span>Volunteer &amp; Events</span></label><label class="cv-spectrum__blend-chip" style="--lens:#9A607B"><input data-cv-blend="" type="checkbox" value="education"/><span>Education</span></label></div></fieldset>
+<p aria-live="polite" class="cv-spectrum__selection-count" data-cv-selection-count="">Choose focus areas to combine.</p><fieldset><legend>Focus areas</legend><div class="cv-spectrum__blend"><label class="cv-spectrum__blend-chip" style="--lens:#946A1E"><input data-cv-blend="" type="checkbox" value="hospitality"/><span>Hospitality</span></label><label class="cv-spectrum__blend-chip" style="--lens:#5268A3"><input data-cv-blend="" type="checkbox" value="research"/><span>Research</span></label><label class="cv-spectrum__blend-chip" style="--lens:#347CA5"><input data-cv-blend="" type="checkbox" value="teaching"/><span>Teaching</span></label><label class="cv-spectrum__blend-chip" style="--lens:#478568"><input data-cv-blend="" type="checkbox" value="programs"/><span>Programs &amp; Events</span></label><label class="cv-spectrum__blend-chip" style="--lens:#3F817E"><input data-cv-blend="" type="checkbox" value="customer-education"/><span>Customer Support</span></label><label class="cv-spectrum__blend-chip" style="--lens:#98546D"><input data-cv-blend="" type="checkbox" value="arts-culture"/><span>Arts &amp; Culture</span></label><label class="cv-spectrum__blend-chip" style="--lens:#6D5AA0"><input data-cv-blend="" type="checkbox" value="performance"/><span>Performance</span></label><label class="cv-spectrum__blend-chip" style="--lens:#A45C51"><input data-cv-blend="" type="checkbox" value="portfolio"/><span>Portfolio</span></label><label class="cv-spectrum__blend-chip" style="--lens:#567F5E"><input data-cv-blend="" type="checkbox" value="community"/><span>Community</span></label><label class="cv-spectrum__blend-chip" style="--lens:#806A4C"><input data-cv-blend="" type="checkbox" value="volunteer-events"/><span>Volunteer &amp; Events</span></label><label class="cv-spectrum__blend-chip" style="--lens:#9A607B"><input data-cv-blend="" type="checkbox" value="education"/><span>Education</span></label></div></fieldset>
 </div>
 </details>
-<p class="cv-spectrum__note">The webpage is the visual record. Downloaded PDFs use a separate professional monochrome design.</p>
+<p class="cv-spectrum__note">Use the webpage for the visual record. Download a monochrome PDF for applications.</p>
 </section>
-
-<section aria-labelledby="cvMapTitle" class="cv-map-section">
-<div class="section-intro">
-<div><span class="archive-eyebrow" data-profile="mapEyebrow">Work, study, and travel</span><h2 data-profile="mapTitle" id="cvMapTitle">Places behind the work</h2></div>
-<p data-profile="mapText">Places connected to work, study, travel, service, teaching, hospitality, and projects.</p>
+<section aria-labelledby="cvMapTitle" class="cv-map-section cv-map-section--enhanced" id="places">
+<div aria-hidden="true" class="cv-map-orbit"></div>
+<div class="cv-map-shell">
+<div class="section-intro"><div><span class="archive-eyebrow" data-profile="mapEyebrow">Work, study, and travel</span><h2 data-profile="mapTitle" id="cvMapTitle">Places behind the work</h2></div><p data-profile="mapText">Locations connected to paid work, teaching, community programs, service, study, travel, and independent projects.</p></div>
+<div class="cv-map-grid">
+<div class="cv-map-stage" data-cv-map-stage=""><p class="cv-map-loading" role="status">Interactive map loading</p><div class="cv-map-embed"><iframe data-cv-map-frame="" height="480" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/d/embed?mid=1n92i0SyhgddNp4TZjLFW8GW6Nzk9JH1B&amp;ehbc=2E312F" title="Saul Karim Nassau work, study, service, and travel map" width="640"></iframe></div><noscript><p><a href="https://www.google.com/maps/d/viewer?mid=1n92i0SyhgddNp4TZjLFW8GW6Nzk9JH1B&amp;ehbc=2E312F" rel="noopener noreferrer" target="_blank">Open the full map</a></p></noscript><a class="cv-map-rescue" data-cv-map-rescue="" href="https://www.google.com/maps/d/viewer?mid=1n92i0SyhgddNp4TZjLFW8GW6Nzk9JH1B&amp;ehbc=2E312F" rel="noopener noreferrer" target="_blank">Map blank? Open full map ↗</a></div>
+<aside aria-label="Map legend and connected archive views" class="cv-map-companion"><span class="cv-map-companion__eyebrow">Location threads</span><h3>Follow the work across places</h3><p>Use the map for geography, then open the connected archive view for the work behind each thread.</p>
+<ul class="cv-map-threads">
+<li><a href="/saul/?archive=teaching,education#careerArchive" style="--thread:var(--cv-sky)">Teaching and study</a></li>
+<li><a href="/saul/?archive=community,volunteer#careerArchive" style="--thread:var(--cv-green)">Community and service</a></li>
+<li><a href="/saul/?archive=kitchen#careerArchive" style="--thread:var(--cv-gold)">Hospitality</a></li>
+<li><a href="/saul/?archive=performance#careerArchive" style="--thread:var(--cv-violet)">Stage and screen</a></li>
+<li><a href="/saul/?archive=portfolio#careerArchive" style="--thread:var(--cv-coral)">Independent projects</a></li>
+</ul>
+<div class="cv-map-companion__actions"><a href="https://www.google.com/maps/d/viewer?mid=1n92i0SyhgddNp4TZjLFW8GW6Nzk9JH1B&amp;ehbc=2E312F" rel="noopener noreferrer" target="_blank">Open full interactive map ↗</a><details><summary>Text location list</summary><ul class="cv-map-location-list"><li>Toronto and Markham</li><li>Montreal and Vancouver</li><li>China and Switzerland</li><li>Serbia and Croatia</li><li>Florence, Egypt, Copenhagen, and the Azores</li></ul></details></div>
+</aside>
 </div>
-<div class="cv-map-embed">
-<iframe height="480" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/d/embed?mid=1n92i0SyhgddNp4TZjLFW8GW6Nzk9JH1B&amp;ehbc=2E312F" title="Saul Karim Nassau work and study map" width="640"></iframe>
 </div>
 </section><section aria-labelledby="archiveTitle" class="archive-shell" id="careerArchive">
 <div class="archive-heading">
 <div><span class="archive-eyebrow" data-profile="archiveEyebrow">Experience</span><h2 data-profile="archiveTitle" id="archiveTitle">Work record</h2></div>
 <p data-profile="archiveText" id="archiveStatus">Complete record by date or by practice.</p>
-</div>
+<p aria-atomic="true" aria-live="polite" class="archive-count" id="archiveCount">Loading archive count.</p></div>
 <div aria-label="Archive arrangement" class="view-switcher" role="group">
 <button class="on" data-cv-mode="chrono" data-profile="viewTimeline" type="button">Timeline</button>
 <button data-cv-mode="theme" data-profile="viewPractice" type="button">By practice</button>
 </div>
+<div aria-label="Archive expansion" class="archive-expand-controls" role="group"><button data-archive-expand="all" type="button">Expand all</button><button data-archive-expand="recent" type="button">Recent first</button><button data-archive-expand="none" type="button">Collapse all</button></div>
 <details class="archive-tools cv-module-tabs">
 <summary data-profile="filterSummary">Archive filters</summary>
 <div class="archive-tool-content">
@@ -1376,8 +1386,8 @@ textarea:focus-visible,
 <div class="credentials-head" id="languagesHead">Languages</div>
 <div class="credentials-body" id="languagesBody"></div>
 </section>
-<footer class="cv-footer">
-<div class="colophon">Saul Karim Nassau · Toronto · <a href="/reviews/" style="color:inherit;border-bottom:1px dotted currentColor;text-decoration:none;">Reviews &amp; references</a> · <a href="/main/" style="color:inherit;border-bottom:1px dotted currentColor;text-decoration:none;">seminarschools.com</a></div>
+<a class="cv-return-focus" href="#cvOverview">Return to current CV focus ↑</a><footer class="cv-footer">
+<div class="colophon">Saul Karim Nassau · Toronto · <a href="/reviews/" style="color:inherit;border-bottom:1px dotted currentColor;text-decoration:none;">Reviews &amp; references</a> · <a href="/about/" style="color:inherit;border-bottom:1px dotted currentColor;text-decoration:none;">seminarschools.com</a></div>
 </footer>
 </section></main>
 <script>
@@ -1894,11 +1904,11 @@ const LETTERS = {
   performance: {
     title: { en: "On performance", zh: "論表演", zhs: "论表演", fa: "درباره اجرا", fr: "Sur la performance" },
     body: {
-      en: `<p>I treat performance and teaching as continuous practices because both depend on holding attention, calibrating to a room, and trusting that what comes through unrehearsed is sometimes more honest than what was prepared. The training started with the Sears Ontario Drama Festival years at Claude Watson and continued through commercial work for Street Kids International produced through the Screen Arts curriculum.</p>`,
-      zh: `<p>我把表演與教學視為連續的實踐，因為兩者都依賴於持守注意力、依現場校準，並信任那些未經排練之物有時比預先準備的更為誠實。訓練始於 Claude Watson 期間參與 Sears 安大略戲劇節，並透過 Screen Arts 課程延伸至為 Street Kids International 拍攝的公益影像作品。</p>`,
-      zhs: `<p>我把表演与教学视为连续的实践，因为两者都依赖于持守注意力、依现场校准，并信任那些未经排练之物有时比预先准备的更为诚实。训练始于 Claude Watson 期间参与 Sears 安大略戏剧节，并通过 Screen Arts 课程延伸至为 Street Kids International 拍摄的公益影像作品。</p>`,
-      fa: `<p>من اجرا و تدریس را به‌عنوان دو تمرین پیوسته تلقی می‌کنم، زیرا هر دو به نگه‌داشتن توجه، تنظیم بر اساس فضا، و اعتماد به این بسته‌اند که آنچه از تمرین‌نشدگی بیرون می‌آید گاهی صادق‌تر از چیزی است که از پیش آماده شده. آموزش از سال‌های جشنوارهٔ تئاتر Sears انتاریو در Claude Watson آغاز شد و از طریق برنامهٔ Screen Arts به کار تبلیغاتی برای Street Kids International ادامه یافت.</p>`,
-      fr: `<p>Je traite la performance et l'enseignement comme des pratiques continues parce que les deux dépendent de la tenue de l'attention, de l'ajustement à une salle, et de la confiance que ce qui passe sans répétition est parfois plus honnête que ce qui était préparé. La formation a commencé avec les années du Festival Sears de l'Ontario à Claude Watson et s'est poursuivie par le travail publicitaire pour Street Kids International produit dans le cadre du programme Arts de l'écran.</p>`
+      en: `<p>I treat performance and teaching as continuous practices because both depend on holding attention, calibrating to a room, and trusting that what comes through unrehearsed is sometimes more honest than what was prepared. The training started with the Sears Ontario Drama Festival years at Claude Watson and continued through commercial work for Street Kids International produced through the Screen Arts curriculum. Later on-camera work included GEICO’s 2012 “California” commercial.</p>`,
+      zh: `<p>我把表演與教學視為連續的實踐，因為兩者都依賴於持守注意力、依現場校準，並信任那些未經排練之物有時比預先準備的更為誠實。訓練始於 Claude Watson 期間參與 Sears 安大略戲劇節，並透過 Screen Arts 課程延伸至為 Street Kids International 拍攝的公益影像作品。後來的鏡頭前工作包括 2012 年 GEICO「California」廣告。</p>`,
+      zhs: `<p>我把表演与教学视为连续的实践，因为两者都依赖于持守注意力、依现场校准，并信任那些未经排练之物有时比预先准备的更为诚实。训练始于 Claude Watson 期间参与 Sears 安大略戏剧节，并通过 Screen Arts 课程延伸至为 Street Kids International 拍摄的公益影像作品。后来的镜头前工作包括 2012 年 GEICO《California》广告。</p>`,
+      fa: `<p>من اجرا و تدریس را به‌عنوان دو تمرین پیوسته تلقی می‌کنم، زیرا هر دو به نگه‌داشتن توجه، تنظیم بر اساس فضا، و اعتماد به این بسته‌اند که آنچه از تمرین‌نشدگی بیرون می‌آید گاهی صادق‌تر از چیزی است که از پیش آماده شده. آموزش از سال‌های جشنوارهٔ تئاتر Sears انتاریو در Claude Watson آغاز شد و از طریق برنامهٔ Screen Arts به کار تبلیغاتی برای Street Kids International ادامه یافت. کار بعدی جلوی دوربین شامل تبلیغ «California» شرکت GEICO در سال ۲۰۱۲ بود.</p>`,
+      fr: `<p>Je traite la performance et l'enseignement comme des pratiques continues parce que les deux dépendent de la tenue de l'attention, de l'ajustement à une salle, et de la confiance que ce qui passe sans répétition est parfois plus honnête que ce qui était préparé. La formation a commencé avec les années du Festival Sears de l'Ontario à Claude Watson et s'est poursuivie par le travail publicitaire pour Street Kids International produit dans le cadre du programme Arts de l'écran. Un travail ultérieur devant la caméra comprend la publicité « California » de GEICO en 2012.</p>`
     }
   }
 };
@@ -1937,23 +1947,17 @@ function parseRoute() {
     const k = normalizeCatSlug(s);
     if (k && k in CATS && !seen.has(k)) { seen.add(k); out.push(k); }
   };
-
-  // Path: /saul/<...> or /cv/<...> (any depth)
-  const path = window.location.pathname;
-  const pathMatch = path.match(/^\/(saul|cv)(?:\/(.*))?$/i);
-  if (pathMatch && pathMatch[2]) {
-    pathMatch[2].split('/').forEach(add);
-  }
-
-  // Query string fallback: ?cat=kitchen or ?cat=kitchen,teaching
   const search = new URLSearchParams(window.location.search);
-  const qCat = search.get('cat');
-  if (qCat) qCat.split(',').forEach(add);
-
-  // Hash fallback: #kitchen or #kitchen+teaching
+  const qArchive = search.get('archive') || search.get('cat');
+  if (qArchive) qArchive.split(',').forEach(add);
+  if (!qArchive) {
+    const path = window.location.pathname;
+    const pathMatch = path.match(/^\/(saul|cv)(?:\/(.*))?$/i);
+    if (pathMatch && pathMatch[2]) pathMatch[2].split('/').forEach(add);
+  }
   const h = window.location.hash.slice(1);
-  if (h) h.split(/[+,]/).forEach(add);
-
+  const pageAnchors = new Set(['cvOverview','places','cvMapTitle','careerArchive','archiveTitle','eduHead','methodsHead','page','main-content']);
+  if (h && !pageAnchors.has(h)) h.split(/[+,]/).forEach(add);
   return out;
 }
 
@@ -1970,20 +1974,18 @@ function parseLangFromUrl() {
 // Categories serialized in alphabetical order for canonical, deterministic URLs.
 function syncUrlToFilter() {
   const cats = [...active].sort();
-  const newPath = cats.length === 0 ? '/saul/' : '/saul/' + cats.map(catSlug).join('/');
-  // Language rides as a query param so shared links reproduce the language
-  // tab exactly like the category tabs. English stays unmarked.
-  const sp = [];
-  if (lang && lang !== 'en') sp.push('lang=' + lang);
-  if (cvMode === 'theme') sp.push('mode=theme');
-  const newSearch = sp.length ? '?' + sp.join('&') : '';
-  const target = newPath + newSearch;
-  if (window.location.pathname + window.location.search !== target || window.location.hash) {
-    try {
-      window.history.replaceState({ cats, lang, mode: cvMode }, '', target);
-    } catch (e) {
-      // history.replaceState can fail in some sandboxed contexts; ignore silently
-    }
+  const url = new URL(window.location.href);
+  url.pathname = '/saul/';
+  url.searchParams.delete('cat');
+  if (cats.length) url.searchParams.set('archive', cats.map(catSlug).join(','));
+  else url.searchParams.delete('archive');
+  if (lang && lang !== 'en') url.searchParams.set('lang', lang);
+  else url.searchParams.delete('lang');
+  if (cvMode === 'theme') url.searchParams.set('mode', 'theme');
+  else url.searchParams.delete('mode');
+  const target = url.pathname + (url.search ? url.search : '') + (url.hash ? url.hash : '');
+  if (window.location.pathname + window.location.search + window.location.hash !== target) {
+    try { window.history.replaceState({ cats, lang, mode: cvMode }, '', target); } catch (e) {}
   }
 }
 
@@ -2353,7 +2355,7 @@ const D = [
     }
   ],
   [
-    9,
+    8,
     "2026",
     [
       "education",
@@ -3355,7 +3357,7 @@ const D = [
     },
     "https://earlhaig.ca/departments/claude/",
     {
-      "en": "Completed the Claude Watson Arts Program with a Screen Arts focus, including film and video production, performance, criticism, and collaborative creative work."
+      "en": "Completed the Claude Watson Arts Program with a Screen Arts focus spanning film and video production, interviewing, camera awareness, performance and collaborative visual storytelling. Acted in Jesus Christ Superstar and the 2008 production One Thousand and One Nights and completed script writing and editing work in 2006."
     }
   ],
   [
@@ -3381,11 +3383,28 @@ const D = [
     },
     "https://ent-nts.ca/en/nts-dramafest/",
     {
-      "en": "Ontario's oldest and largest high school drama festival, founded 1946. Competed in Grades 9, 10, and 11 through Claude Watson.",
+      "en": "Acted in Sears Ontario Drama Festival productions in Grades 9, 10 and 11 through Claude Watson in 2005, 2006 and 2007.",
       "zh": "安大略省歷史最悠久、規模最大的高中戲劇節（1946 年創辦）。",
       "zhs": "安大略省历史最悠久、规模最大的高中戏剧节（1946 年创办）。",
       "fa": "قدیمی‌ترین و بزرگ‌ترین جشنواره تئاتر دبیرستانی انتاریو.",
       "fr": "Le plus ancien et le plus grand festival de théâtre secondaire de l'Ontario."
+    }
+  ],
+  [
+    1,
+    "2012",
+    [
+      "performance"
+    ],
+    {
+      "en": "On-Camera Performer, GEICO “California” Commercial"
+    },
+    {
+      "en": "San Francisco trolley scene"
+    },
+    "https://www.youtube.com/watch?v=bz-bDLya3gg",
+    {
+      "en": "Appeared as an on-camera performer in the San Francisco trolley scene, where passengers wave at the GEICO Gecko, in 2012."
     }
   ],
   [
@@ -3397,22 +3416,18 @@ const D = [
       "volunteer"
     ],
     {
-      "en": "Volunteer Commercial, Street Kids International",
+      "en": "On-Camera Interviewer, Street Kids International Volunteer Commercial",
       "zh": "公益廣告拍攝，Street Kids International",
       "zhs": "公益广告拍摄，Street Kids International",
       "fa": "تبلیغات داوطلبانه، Street Kids International",
       "fr": "Publicité bénévole, Street Kids International"
     },
     {
-      "en": "Merged with Save the Children in 2015",
-      "zh": "2015年併入拯救兒童",
-      "zhs": "2015年并入拯救儿童",
-      "fa": "ادغام با Save the Children",
-      "fr": "Fusionné avec Save the Children, 2015"
+      "en": "Claude Watson Screen Arts production"
     },
     "https://en.wikipedia.org/wiki/Street_Kids_International",
     {
-      "en": "Produced as part of the Claude Watson Screen Arts curriculum. Street Kids International was a Toronto-based Canadian NGO founded in 1988 focused on street children's health and rights.",
+      "en": "Served as the on-camera interviewer in a 2006 volunteer commercial produced through the Claude Watson Screen Arts curriculum for Street Kids International.",
       "zh": "Claude Watson 影視藝術課程的作品。",
       "zhs": "Claude Watson 影视艺术课程的作品。",
       "fa": "تولیدشده به عنوان بخشی از برنامه درسی هنرهای تصویری Claude Watson.",
@@ -3552,7 +3567,7 @@ const D = [
   ],
   [
     0,
-    "c. 2001",
+    "Completed at age 16",
     [
       "performance",
       "education"
@@ -3565,15 +3580,11 @@ const D = [
       "fr": "Certificat Croix de bronze"
     },
     {
-      "en": "Grade 5",
-      "zh": "五年級",
-      "zhs": "五年级",
-      "fa": "پنجم",
-      "fr": "5e"
+      "en": "Lifesaving and water safety"
     },
     "https://www.lifesavingsociety.com/",
     {
-      "en": "Canadian Red Cross Bronze Cross certification at Douglas Snow Aquatic Centre, North York. Lifesaving and water safety skills.",
+      "en": "Completed Bronze Cross and First Aid at age 16, developing lifesaving and water-safety skills.",
       "zh": "加拿大紅十字會銅十字游泳認證。",
       "zhs": "加拿大红十字会铜十字游泳认证。",
       "fa": "گواهینامه شنای صلیب برنزی صلیب سرخ کانادا.",
@@ -3922,14 +3933,17 @@ function render() {
     return t.secs[gIdx];
   }
 
-  grouped.forEach(g => {
+  let renderedArchiveCount = 0;
+  grouped.forEach((g, groupIndex) => {
     const label = (cvMode === "theme") ? (CAT_LABELS[g.cat] || g.cat) : getSectionLabel(g.i);
     if (label === null) return; // section explicitly hidden for this filter
-    const sec = document.createElement("section");
+    renderedArchiveCount += g.items.length;
+    const sec = document.createElement("details");
     sec.className = "cv-section";
-    const head = document.createElement("div");
+    sec.open = isFiltered || (cvMode === 'chrono' ? g.i >= 8 : groupIndex === 0);
+    const head = document.createElement("summary");
     head.className = "section-head";
-    head.textContent = label;
+    head.innerHTML = `<span>${label}</span><span class="section-count">${g.items.length}</span>`;
     sec.appendChild(head);
 
     // Build all entries as one HTML string, set in single innerHTML write.
@@ -3975,6 +3989,12 @@ function render() {
     }
     frag.appendChild(sec);
   });
+
+  const archiveCount = document.getElementById("archiveCount");
+  if (archiveCount) {
+    const focus = active.size ? " across the selected archive filters" : " in the professional archive";
+    archiveCount.textContent = `${renderedArchiveCount} record${renderedArchiveCount === 1 ? "" : "s"}${focus}.`;
+  }
 
   // Single DOM swap at the end, replace all entries in one reflow
   entriesEl.innerHTML = "";
@@ -4082,6 +4102,18 @@ document.querySelectorAll("#filterNav button").forEach(b => {
   });
 });
 
+document.querySelectorAll('[data-archive-expand]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    const mode = btn.dataset.archiveExpand;
+    const sections = [...document.querySelectorAll('details.cv-section')];
+    sections.forEach(function(sec, index){
+      if (mode === 'all') sec.open = true;
+      else if (mode === 'none') sec.open = false;
+      else sec.open = cvMode === 'chrono' ? index < 2 : index === 0;
+    });
+  });
+});
+
 // ===========================================================================
 // PDF EXPORT, natural multi-page flow with clean print typography
 // ===========================================================================
@@ -4102,8 +4134,17 @@ function clearOnePageFitScale() {
   document.body.classList.remove("print-scaled");
 }
 
-window.addEventListener("beforeprint", applyOnePageFitScale);
-window.addEventListener("afterprint", clearOnePageFitScale);
+let _archivePrintOpenState = [];
+window.addEventListener("beforeprint", function(){
+  applyOnePageFitScale();
+  _archivePrintOpenState = [...document.querySelectorAll("details.cv-section")].map(d => [d, d.open]);
+  _archivePrintOpenState.forEach(([d]) => { d.open = true; });
+});
+window.addEventListener("afterprint", function(){
+  clearOnePageFitScale();
+  _archivePrintOpenState.forEach(([d, open]) => { d.open = open; });
+  _archivePrintOpenState = [];
+});
 
 
 
@@ -4348,9 +4389,9 @@ render();
 <script defer="" src="/js/theme.js?v=cl91"></script>
 <script defer="" src="/js/mandala.js?v=cl91"></script>
 <script defer="" src="/js/indra.js?v=cl91"></script>
-<script defer="" src="/js/footer.js?v=cl91"></script>
+<script defer="" src="/js/footer.js?v=20260719-audit11-decisions"></script>
 <script defer="" src="/js/autolink.js?v=cl91"></script>
 <script>document.addEventListener('DOMContentLoaded',function(){if(window.PolymythMandala&&PolymythMandala.initScrollCamera&&!matchMedia('(prefers-reduced-motion: reduce)').matches){PolymythMandala.initScrollCamera({forceGlobal:true});}});</script>
 <script defer="" src="/js/site-keyboard-enhancements.js"></script>
-<script defer="True" src="./assets/saul-cv-spectrum-2026.js?v=20260716-spirit-r4"></script></body>
+<script defer="True" src="./assets/saul-cv-spectrum-2026.js?v=20260718-map-archive-final8"></script></body>
 </html>

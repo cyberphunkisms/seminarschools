@@ -12,8 +12,8 @@ const OUT = path.join(ROOT, 'public');
 const PUBLIC_DIRS = [
   '.well-known', 'agora', 'aitr', 'aa', 'bb', 'bookwormcard', 'campaigns',
   'cfps', 'css', 'dashboard', 'fellowships', 'florilegium', 'humanities',
-  'img', 'js', 'lectures', 'leizu', 'main', 'marginalia', 'nutrition',
-  'ohm-dome', 'philosophy', 'polymyth', 'polymythseminars', 'reviews', 'saul',
+  'img', 'js', 'lectures', 'leizu', 'about', 'main', 'marginalia', 'nutrition',
+  'ohm-dome', 'philosophy', 'polymyth', 'polymythcal', 'polymythseminars', 'reviews', 'saul',
   'seminars', 'sitemap', 'teacherresources', 'university', 'writingclub',
   'writinggrads', 'writingjuniors', 'writingkids', 'writingteens'
 ];

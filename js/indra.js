@@ -36,7 +36,7 @@
     ['/nutrition', 'subtle'],
     ['/calendar', 'subtle'],
     ['/sitemap', 'subtle'],
-    ['/main', 'off'],   // home runs its own dual-camera rig
+    ['/about', 'off'],   // home runs its own dual-camera rig
     ['/', 'subtle']
   ];
   function tierFor(path) {
@@ -58,7 +58,7 @@
     // VISIBLE_GEOMETRY_GUARD: every public page may mount Indra's Web, including CV pages; print hides it in CSS.
     if (!window.PolymythMandala || !window.PolymythMandala.build) return;
     // ONE engine, ONE layer for the whole site. Pages running the bespoke home
-    // rig keep theirs (#geo present); '/main' opts out by tier. Everything else
+    // rig keep theirs (#geo present); '/about' opts out by tier. Everything else
     // mounts the single #indraLayer below. A page's project- color class no
     // longer suppresses the web, since the web is now the only geometry it has.
     if (document.getElementById('geo')) return;

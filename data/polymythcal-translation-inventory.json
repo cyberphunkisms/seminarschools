@@ -1,0 +1,52 @@
+{
+  "generated_at": "2026-07-21T15:06:10+00:00",
+  "languages": [
+    "en-CA",
+    "fr-CA"
+  ],
+  "interface_dictionary_entries": 69,
+  "calendar_renderer_dictionary_entries": 136,
+  "surfaces": [
+    {
+      "surface": "Main calendar",
+      "path": "/polymythseminars/",
+      "status": "complete",
+      "required_markers": 5,
+      "missing_markers": []
+    },
+    {
+      "surface": "Event submission",
+      "path": "/polymythseminars/submit/",
+      "status": "complete",
+      "required_markers": 4,
+      "missing_markers": []
+    },
+    {
+      "surface": "Listing correction",
+      "path": "/polymythseminars/correct/",
+      "status": "complete",
+      "required_markers": 4,
+      "missing_markers": []
+    },
+    {
+      "surface": "Submission confirmation",
+      "path": "/polymythseminars/thanks/",
+      "status": "complete",
+      "required_markers": 2,
+      "missing_markers": []
+    },
+    {
+      "surface": "Subscription index",
+      "path": "/polymythseminars/subscribe/",
+      "status": "complete",
+      "required_markers": 3,
+      "missing_markers": []
+    }
+  ],
+  "canonical_event_pages": 839,
+  "canonical_event_pages_with_bilingual_actions": 839,
+  "focused_feeds": 11,
+  "focused_feeds_with_english_and_french_labels": 11,
+  "content_policy": "Organizer titles, descriptions, proper names, and source-language material remain in their source language. Navigation, filters, states, qualifications, actions, forms, feed labels, and calendar instructions are maintained in English and French.",
+  "complete": true
+}

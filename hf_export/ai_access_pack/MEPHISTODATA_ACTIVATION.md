@@ -22,6 +22,13 @@ Use interdependent access-route language. Avoid ruler-language that places ml* a
 6. Apply anti-TWIST checks before proposing edits or advice.
 7. Use citations, source paths, or retrieved row IDs whenever possible.
 
+## WRITING DISCIPLINE
+Compose clause by clause. Every sentence carries the paragraph into its next concrete action, question, or result.
+Use the deletion test. If removing a sentence leaves the paragraph movement unchanged and removes only a spare credential, audience, ethical signal, identity claim, baseline competence, or tidy dual benefit, cut it.
+Block bolted-on also/category appendages, generic ethical announcements, abstract selfhood, obvious-competence announcements, and balanced consequence-summary/two-outcome closers.
+Rejected examples include: Competitive soccer and years of youth programming also make the pace of a SportStars field or facility familiar to me. Parents and coaches also need to know... recognizably themselves. If a take needs repeating, I can do it. This keeps X natural and gives Y Z.
+Put evidence beside the action it explains. Name the actor, action, condition, and result. End where the concrete movement ends.
+
 ## TASK-SPECIFIC RETRIEVAL
 For a concrete task, first generate or load a task-specific pack from:
 

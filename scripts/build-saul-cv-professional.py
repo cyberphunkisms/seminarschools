@@ -45,7 +45,7 @@ training = canonical.get('training', [])
 languages = canonical.get('languages', [])
 education = canonical.get('education', [])
 
-canonical['release'] = '2026-07-16-spirit-professional-interactivity-r4'
+canonical['release'] = '2026-07-18-mephistodata-sentence-discipline-final9'
 canonical['rules'].update({
     'visual_first': True,
     'same_modular_card_every_route': True,
@@ -88,7 +88,7 @@ def module_records_html(module: dict, count: int = 6) -> str:
         bullets = ''.join(f'<li>{escape(str(b))}</li>' for b in rec.get('bullets', [])[:2])
         chunks.append(
             f'<article class="cv-spectrum__job">'
-            f'<h4>{escape(rec.get("title", ""))}{org}</h4>'
+            f'<h3>{(f'<a href="{escape(str(rec.get("url")), quote=True)}" target="_blank" rel="noopener noreferrer">{escape(rec.get("title", ""))}</a>' if rec.get("url") else escape(rec.get("title", "")))}{org}</h3>'
             f'<p class="cv-spectrum__job-meta">{meta}</p>'
             f'<ul>{bullets}</ul></article>'
         )
@@ -157,7 +157,7 @@ def card_html(selected: str = 'general', focused_route: bool = False) -> str:
 
   <div class="cv-spectrum__preview" aria-live="polite">
     <section class="cv-spectrum__experience">
-      <div class="cv-spectrum__experience-head"><p class="cv-spectrum__section-label">Selected experience</p><a href="/saul/#careerArchive">Complete record ↓</a></div>
+      <div class="cv-spectrum__experience-head"><h2 class="cv-spectrum__section-label">Selected experience</h2><a href="/saul/#careerArchive">Complete record ↓</a></div>
       <div data-cv-jobs>{module_records_html(m, 5)}</div>
       <div class="cv-spectrum__print-jobs" data-cv-print-jobs aria-hidden="true">{module_records_html(m, 7)}</div>
     </section>
@@ -186,7 +186,7 @@ def card_html(selected: str = 'general', focused_route: bool = False) -> str:
       <fieldset><legend>Focus areas</legend><div class="cv-spectrum__blend">{blend_choices(selected)}</div></fieldset>
     </div>
   </details>
-  <p class="cv-spectrum__note">The webpage is the visual record. Downloaded PDFs use a separate professional monochrome design.</p>
+  <p class="cv-spectrum__note">Use the webpage for the visual record. Download a monochrome PDF for applications.</p>
 </section>
 '''
 
@@ -212,7 +212,7 @@ body:has(.cv-spectrum)>.skip-link:focus{left:1rem}
 .cv-spectrum__focus{padding:.95rem clamp(1.25rem,3.6vw,2.8rem) 1.05rem;border-top:1px solid var(--cv-rule);border-bottom:1px solid var(--cv-rule);background:rgba(255,255,255,.38)}.cv-spectrum__focus-heading{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:.72rem}.cv-spectrum__focus-heading span{display:block;color:var(--cv-muted);font:750 .63rem/1 var(--sans,system-ui);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.28rem}.cv-spectrum__focus-heading strong{display:block;font:600 clamp(1rem,2vw,1.25rem)/1.2 var(--serif,Georgia,serif)}.cv-spectrum__focus-heading button{border:0;background:transparent;color:var(--focus-ink);cursor:pointer;font:750 .68rem/1.2 var(--sans,system-ui);text-decoration:underline;text-underline-offset:.2em;padding:.25rem}
 .cv-spectrum__focus-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem}.cv-spectrum__lens{position:relative;display:flex;align-items:center;gap:.5rem;min-height:42px;padding:.55rem .65rem;border:1px solid var(--cv-rule);border-radius:11px;background:rgba(255,255,255,.35);color:var(--cv-ink);text-decoration:none;min-width:0}.cv-spectrum__lens>span{width:.48rem;height:.48rem;border-radius:50%;background:var(--lens);box-shadow:0 0 0 4px color-mix(in srgb,var(--lens) 10%,transparent);flex:0 0 auto}.cv-spectrum__lens strong{font:650 .74rem/1.15 var(--sans,system-ui);overflow-wrap:anywhere}.cv-spectrum__lens:hover,.cv-spectrum__lens[aria-current="page"]{background:color-mix(in srgb,var(--lens) 8%,white);border-color:color-mix(in srgb,var(--lens) 50%,transparent)}.cv-spectrum__lens[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--lens)}
 .cv-spectrum__more-paths{margin-top:.6rem}.cv-spectrum__more-paths>summary{cursor:pointer;color:var(--cv-muted);font:700 .68rem/1.4 var(--sans,system-ui)}.cv-spectrum__more-paths>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem;margin-top:.55rem}
-.cv-spectrum__preview{display:grid;grid-template-columns:minmax(0,1.52fr) minmax(225px,.68fr);gap:clamp(1.25rem,3vw,2.4rem);padding:clamp(1.25rem,3.6vw,2.6rem)}.cv-spectrum__section-label{color:var(--focus-ink);font:800 .67rem/1 var(--sans,system-ui);letter-spacing:.12em;text-transform:uppercase;margin:0 0 .78rem}.cv-spectrum__experience-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}.cv-spectrum__experience-head>a{color:var(--focus-ink);font:750 .67rem/1.2 var(--sans,system-ui);text-decoration:none}.cv-spectrum__job{position:relative;padding:.7rem 0 .78rem 1rem;border-top:1px solid var(--cv-rule)}.cv-spectrum__job:first-of-type{border-top:0;padding-top:0}.cv-spectrum__job::before{content:"";position:absolute;left:0;top:.9rem;width:3px;height:calc(100% - 1.5rem);border-radius:2px;background:color-mix(in srgb,var(--focus) 55%,transparent)}.cv-spectrum__job h4{margin:0;font:600 1rem/1.25 var(--serif,Georgia,serif)}.cv-spectrum__job h4 span{font-style:italic;font-weight:400;color:var(--cv-muted)}.cv-spectrum__job-meta{margin:.13rem 0 .28rem;color:var(--cv-muted);font:650 .66rem/1.35 var(--sans,system-ui);letter-spacing:.025em}.cv-spectrum__job ul{margin:0;padding-left:1rem;color:var(--cv-muted);font-size:.79rem;line-height:1.52}.cv-spectrum__job li+li{margin-top:.14rem}
+.cv-spectrum__preview{display:grid;grid-template-columns:minmax(0,1.52fr) minmax(225px,.68fr);gap:clamp(1.25rem,3vw,2.4rem);padding:clamp(1.25rem,3.6vw,2.6rem)}.cv-spectrum__section-label{color:var(--focus-ink);font:800 .67rem/1 var(--sans,system-ui);letter-spacing:.12em;text-transform:uppercase;margin:0 0 .78rem}.cv-spectrum__experience-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}.cv-spectrum__experience-head>a{color:var(--focus-ink);font:750 .67rem/1.2 var(--sans,system-ui);text-decoration:none}.cv-spectrum__job{position:relative;padding:.7rem 0 .78rem 1rem;border-top:1px solid var(--cv-rule)}.cv-spectrum__job:first-of-type{border-top:0;padding-top:0}.cv-spectrum__job::before{content:"";position:absolute;left:0;top:.9rem;width:3px;height:calc(100% - 1.5rem);border-radius:2px;background:color-mix(in srgb,var(--focus) 55%,transparent)}.cv-spectrum__job h3{margin:0;font:600 1rem/1.25 var(--serif,Georgia,serif)}.cv-spectrum__job h3 a{color:inherit;text-decoration-thickness:.07em;text-underline-offset:.14em}.cv-spectrum__job h3 span{font-style:italic;font-weight:400;color:var(--cv-muted)}.cv-spectrum__job-meta{margin:.13rem 0 .28rem;color:var(--cv-muted);font:650 .66rem/1.35 var(--sans,system-ui);letter-spacing:.025em}.cv-spectrum__job ul{margin:0;padding-left:1rem;color:var(--cv-muted);font-size:.79rem;line-height:1.52}.cv-spectrum__job li+li{margin-top:.14rem}
 .cv-spectrum__print-jobs{display:none}.cv-spectrum__skills{padding-left:1.25rem;border-left:1px solid var(--cv-rule)}.cv-spectrum__skills ul{list-style:none;margin:0 0 1.35rem;padding:0;display:grid;gap:.42rem}.cv-spectrum__skills li{position:relative;padding-left:.9rem;font-size:.83rem;line-height:1.35}.cv-spectrum__skills li::before{content:"";position:absolute;left:0;top:.46em;width:.4rem;height:.4rem;border-radius:50%;background:var(--focus)}.cv-spectrum__credentials{color:var(--cv-muted);font-size:.76rem;line-height:1.62;margin:0}
 .cv-spectrum__actions{display:flex;flex-wrap:wrap;align-items:center;gap:.65rem;padding:1rem clamp(1.25rem,3.6vw,2.8rem);border-top:1px solid var(--cv-rule);background:rgba(255,255,255,.38)}.cv-spectrum__actions>a,.cv-spectrum__actions summary,.cv-spectrum__actions button{min-height:42px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--focus-ink);border-radius:999px;background:transparent;color:var(--focus-ink);font:780 .72rem/1.1 var(--sans,system-ui);padding:.68rem 1rem;text-decoration:none;cursor:pointer}.cv-spectrum__actions .cv-spectrum__primary{background:var(--focus-ink);color:#fff;box-shadow:0 6px 16px color-mix(in srgb,var(--focus) 20%,transparent)}.cv-spectrum__formats{position:relative}.cv-spectrum__formats summary{list-style:none}.cv-spectrum__formats summary::-webkit-details-marker{display:none}.cv-spectrum__formats>div{position:absolute;z-index:30;top:calc(100% + .5rem);left:0;min-width:220px;background:var(--cv-paper-solid);border:1px solid var(--cv-rule);border-radius:15px;padding:.5rem;box-shadow:0 14px 35px rgba(0,0,0,.12)}.cv-spectrum__formats>div a,.cv-spectrum__formats>div button{display:block;width:100%;border:0;background:transparent;color:var(--cv-ink);text-align:left;padding:.65rem .7rem;text-decoration:none;border-radius:9px;font:650 .74rem/1.3 var(--sans,system-ui)}.cv-spectrum__formats>div a:hover,.cv-spectrum__formats>div button:hover{background:color-mix(in srgb,var(--focus) 8%,white)}.cv-spectrum [hidden]{display:none!important}.cv-spectrum__combined-note{margin:.45rem .7rem .55rem;color:var(--cv-muted);font:600 .67rem/1.45 var(--sans,system-ui)}
 .cv-spectrum__tune{margin:0 clamp(1.25rem,3.6vw,2.8rem);border-top:1px solid var(--cv-rule)}.cv-spectrum__tune>summary{cursor:pointer;padding:.9rem 0;color:var(--cv-muted);font:720 .7rem/1.4 var(--sans,system-ui)}.cv-spectrum__tune-body{display:grid;grid-template-columns:minmax(180px,.55fr) minmax(0,1.45fr);gap:1rem;padding:0 0 1.15rem}.cv-spectrum__tune-body>p{margin:0;color:var(--cv-muted);font-size:.76rem;line-height:1.55}.cv-spectrum__tune fieldset{border:1px solid var(--cv-rule);border-radius:13px;padding:.78rem}.cv-spectrum__tune legend{font:750 .68rem/1 var(--sans,system-ui);padding:0 .3rem}.cv-spectrum__blend{display:flex;flex-wrap:wrap;gap:.4rem}.cv-spectrum__blend-chip{display:inline-flex;align-items:center;gap:.32rem;border:1px solid var(--cv-rule);border-radius:999px;padding:.34rem .52rem;font:650 .66rem/1 var(--sans,system-ui);cursor:pointer}.cv-spectrum__blend-chip:has(input:checked){border-color:var(--lens);background:color-mix(in srgb,var(--lens) 9%,white)}.cv-spectrum__blend-chip input{accent-color:var(--lens)}.cv-spectrum__note{margin:0;padding:.85rem clamp(1.25rem,3.6vw,2.8rem) 1.1rem;color:var(--cv-muted);font:550 .67rem/1.45 var(--sans,system-ui)}
@@ -230,7 +230,7 @@ body:has(.cv-spectrum)>.skip-link:focus{left:1rem}
   .page>.cv-spectrum,.cv-spectrum{display:block!important;position:static!important;width:100%!important;max-width:none!important;margin:0!important;margin-left:0!important;transform:none!important;overflow:visible!important;border:0!important;border-radius:0!important;background:#fff!important;box-shadow:none!important;backdrop-filter:none!important;color:#111!important}
   .cv-spectrum__hero{display:block!important;padding:0 0 .12in!important;border-bottom:2px solid #111!important}
   .cv-spectrum__identity .cv-kicker{color:#111!important}.cv-spectrum__identity h1{font-size:22pt!important;line-height:1!important;max-width:none!important;color:#111!important}.cv-spectrum__identity h1 .post{color:#111!important}.cv-spectrum__role{color:#111!important;font-size:8pt!important;margin:.06in 0!important}.cv-spectrum__identity .cv-lede{color:#222!important;font-size:8pt!important;line-height:1.35!important;max-width:none!important}.cv-spectrum__contact{font-size:7pt!important;margin-top:.06in!important}.cv-spectrum__contact a{border-bottom-color:#777!important}
-  .cv-spectrum__preview{display:grid!important;grid-template-columns:1.45fr .62fr!important;gap:.18in!important;padding:.13in 0 0!important}.cv-spectrum__section-label{color:#111!important;font-size:7.2pt!important}.cv-spectrum__experience-head>a{display:none!important}[data-cv-jobs]{display:none!important}.cv-spectrum__print-jobs{display:block!important}.cv-spectrum__job{padding:.075in 0 .085in .10in!important;border-top:1px solid #bbb!important;break-inside:avoid}.cv-spectrum__job::before{background:#555!important}.cv-spectrum__job h4{font-size:8.5pt!important;line-height:1.22!important}.cv-spectrum__job-meta{font-size:6.8pt!important;color:#444!important}.cv-spectrum__job ul{font-size:7.25pt!important;line-height:1.34!important;color:#222!important}.cv-spectrum__skills{padding-left:.12in!important;border-left:1px solid #aaa!important;border-top:0!important}.cv-spectrum__skills li{font-size:7.25pt!important;line-height:1.3!important}.cv-spectrum__skills li::before{background:#555!important}.cv-spectrum__credentials{font-size:6.7pt!important;line-height:1.4!important;color:#333!important}.cv-spectrum a{color:#111!important;text-decoration:none!important}
+  .cv-spectrum__preview{display:grid!important;grid-template-columns:1.45fr .62fr!important;gap:.18in!important;padding:.13in 0 0!important}.cv-spectrum__section-label{color:#111!important;font-size:7.2pt!important}.cv-spectrum__experience-head>a{display:none!important}[data-cv-jobs]{display:none!important}.cv-spectrum__print-jobs{display:block!important}.cv-spectrum__job{padding:.075in 0 .085in .10in!important;border-top:1px solid #bbb!important;break-inside:avoid}.cv-spectrum__job::before{background:#555!important}.cv-spectrum__job h3{font-size:8.5pt!important;line-height:1.22!important}.cv-spectrum__job-meta{font-size:6.8pt!important;color:#444!important}.cv-spectrum__job ul{font-size:7.25pt!important;line-height:1.34!important;color:#222!important}.cv-spectrum__skills{padding-left:.12in!important;border-left:1px solid #aaa!important;border-top:0!important}.cv-spectrum__skills li{font-size:7.25pt!important;line-height:1.3!important}.cv-spectrum__skills li::before{background:#555!important}.cv-spectrum__credentials{font-size:6.7pt!important;line-height:1.4!important;color:#333!important}.cv-spectrum a{color:#111!important;text-decoration:none!important}
 }
 '''
 
@@ -292,10 +292,11 @@ WEB_JS = r'''
     };
   };
   const jobHTML = r => {
+    const title = r.url ? `<a href="${escapeHTML(r.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(r.title)}</a>` : escapeHTML(r.title);
     const org = r.organization ? ` <span>- ${escapeHTML(r.organization)}</span>` : '';
     const meta = [r.location, r.dates].filter(Boolean).map(escapeHTML).join(' · ');
     const bullets = (r.bullets || []).slice(0, 2).map(x => `<li>${escapeHTML(x)}</li>`).join('');
-    return `<article class="cv-spectrum__job"><h4>${escapeHTML(r.title)}${org}</h4><p class="cv-spectrum__job-meta">${meta}</p><ul>${bullets}</ul></article>`;
+    return `<article class="cv-spectrum__job"><h3>${title}${org}</h3><p class="cv-spectrum__job-meta">${meta}</p><ul>${bullets}</ul></article>`;
   };
   const escapeHTML = value => String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   const render = () => {
@@ -419,12 +420,12 @@ def patch_main_saul(path: Path):
     for el in list(soup.find_all('link', href=re.compile('saul-cv-spectrum-2026.css')))[1:]:
         el.decompose()
     if not soup.find('link', href=re.compile('saul-cv-spectrum-2026.css')):
-        soup.head.append(soup.new_tag('link', rel='stylesheet', href='./assets/saul-cv-spectrum-2026.css?v=20260716-spirit-r4'))
+        soup.head.append(soup.new_tag('link', rel='stylesheet', href='./assets/saul-cv-spectrum-2026.css?v=20260718-performance-final7'))
     else:
-        soup.find('link', href=re.compile('saul-cv-spectrum-2026.css'))['href'] = './assets/saul-cv-spectrum-2026.css?v=20260716-spirit-r4'
+        soup.find('link', href=re.compile('saul-cv-spectrum-2026.css'))['href'] = './assets/saul-cv-spectrum-2026.css?v=20260718-performance-final7'
     for el in soup.find_all('script', src=re.compile('saul-cv-spectrum-2026.js')):
         el.decompose()
-    script = soup.new_tag('script', src='./assets/saul-cv-spectrum-2026.js?v=20260716-spirit-r4', defer=True)
+    script = soup.new_tag('script', src='./assets/saul-cv-spectrum-2026.js?v=20260718-performance-final7', defer=True)
     soup.body.append(script)
     # Remove duplicate download/share controls from the complete archive.
     archive = soup.find(id='careerArchive')
@@ -466,7 +467,7 @@ def focused_page(slug: str, alias: bool = False) -> str:
                        'telephone': contact['phone'], 'address': {'@type': 'PostalAddress',
                        'addressLocality': 'Toronto', 'addressRegion': 'Ontario', 'addressCountry': 'CA'}}
     })
-    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(description)}"><meta name="robots" content="{robots}"><link rel="canonical" href="{canonical_url}"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/manifest.json"><meta property="og:type" content="profile"><meta property="og:title" content="{escape(title)}"><meta property="og:description" content="{escape(description)}"><meta property="og:url" content="{page_url}"><meta property="og:image" content="https://seminarschools.com/img/saul.jpg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{escape(title)}"><meta name="twitter:description" content="{escape(description)}"><meta name="twitter:image" content="https://seminarschools.com/img/saul.jpg"><link rel="stylesheet" href="/css/theme.css?v=cl91"><link rel="stylesheet" href="/css/alive.css?v=cl91"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a"><link rel="stylesheet" href="/saul/assets/saul-cv-spectrum-2026.css?v=20260716-spirit-r4"><script type="application/ld+json">{schema}</script></head><body data-geometry="indra-web" data-indra-intensity="0.085" data-route-type="cv" data-cv-purpose="general-employment"><a class="cv-spectrum__site-link" href="/main/">← Seminar Schools</a><a class="skip-link" href="#main-content">Skip to main content</a><main id="main-content" class="page">{card_html(slug, True)}<section class="cv-map-section" aria-labelledby="routeArchiveTitle"><div class="section-intro"><div><span class="archive-eyebrow">Same visual system</span><h2 id="routeArchiveTitle">Continue through the complete career archive</h2></div><p>This shareable link opens the same modular CV card with {escape(m['label'])} selected. The portrait, map, timeline and additive combinations remain available from the main CV.</p></div><p><a href="/saul/#careerArchive">Open the complete modular CV and work record →</a></p></section></main><script defer src="/js/mandala.js?v=cl91"></script><script defer src="/js/indra.js?v=cl91"></script><script defer src="/js/site-keyboard-enhancements.js"></script><script defer src="/saul/assets/saul-cv-spectrum-2026.js?v=20260716-spirit-r4"></script></body></html>'''
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(description)}"><meta name="robots" content="{robots}"><link rel="canonical" href="{canonical_url}"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/manifest.json"><meta property="og:type" content="profile"><meta property="og:title" content="{escape(title)}"><meta property="og:description" content="{escape(description)}"><meta property="og:url" content="{page_url}"><meta property="og:image" content="https://seminarschools.com/img/saul.jpg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{escape(title)}"><meta name="twitter:description" content="{escape(description)}"><meta name="twitter:image" content="https://seminarschools.com/img/saul.jpg"><link rel="stylesheet" href="/css/theme.css?v=cl91"><link rel="stylesheet" href="/css/alive.css?v=cl91"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a"><link rel="stylesheet" href="/saul/assets/saul-cv-spectrum-2026.css?v=20260718-performance-final7"><script type="application/ld+json">{schema}</script></head><body data-geometry="indra-web" data-indra-intensity="0.085" data-route-type="cv" data-cv-purpose="general-employment"><a class="cv-spectrum__site-link" href="/about/">← Seminar Schools</a><a class="skip-link" href="#main-content">Skip to main content</a><main id="main-content" class="page">{card_html(slug, True)}<section class="cv-map-section" aria-labelledby="routeArchiveTitle"><div class="section-intro"><div><span class="archive-eyebrow">Same visual system</span><h2 id="routeArchiveTitle">Continue through the complete career archive</h2></div><p>This link opens the modular CV card with {escape(m['label'])} selected. Open the full CV for the map, complete timeline, every focus area, and combined views.</p></div><p><a href="/saul/#careerArchive">Open the complete modular CV and work record →</a></p></section></main><script defer src="/js/mandala.js?v=cl91"></script><script defer src="/js/indra.js?v=cl91"></script><script defer src="/js/site-keyboard-enhancements.js"></script><script defer src="/saul/assets/saul-cv-spectrum-2026.js?v=20260718-performance-final7"></script></body></html>'''
 
 
 for slug in modules:
@@ -493,9 +494,9 @@ main_page = ROOT / 'main' / 'index.html'
 mt = main_page.read_text(encoding='utf-8')
 mt = mt.replace('>polymorphousmythology</a>', '>polymorphous mythology</a>')
 if 'main-writing-readability-2026.css' not in mt:
-    mt = mt.replace('</head>', '<link rel="stylesheet" href="/css/main-writing-readability-2026.css?v=20260716-spirit-r4">\n</head>', 1)
+    mt = mt.replace('</head>', '<link rel="stylesheet" href="/css/main-writing-readability-2026.css?v=20260718-performance-final7">\n</head>', 1)
 else:
-    mt = re.sub(r'/css/main-writing-readability-2026\.css\?v=[^"\']+', '/css/main-writing-readability-2026.css?v=20260716-spirit-r4', mt)
+    mt = re.sub(r'/css/main-writing-readability-2026\.css\?v=[^"\']+', '/css/main-writing-readability-2026.css?v=20260718-performance-final7', mt)
 main_page.write_text(mt, encoding='utf-8')
 
 # -----------------------------
@@ -906,7 +907,7 @@ def archive_pdf(path: Path):
              Paragraph('Complete record of education, research, teaching, community development, hospitality, performance, volunteer work and independent projects. Role-focused one-page versions are available from the modular web CV.', styles['body']), Spacer(1, 8)]
     seen = set()
     for slug, module in modules.items():
-        if slug in {'general', 'education'}:
+        if slug in {'general', 'education', 'portfolio'}:
             continue
         story.append(Paragraph(escape(normal_text(module['label'])), styles['h2']))
         for rec in ordered_records(module):
@@ -963,7 +964,7 @@ VERIFY_VISUAL = r'''#!/usr/bin/env node
 const fs=require('fs'),path=require('path');const root=path.resolve(__dirname,'..');const fail=[];
 const h=fs.readFileSync(path.join(root,'saul','index.html'),'utf8');const css=fs.readFileSync(path.join(root,'saul','assets','saul-cv-spectrum-2026.css'),'utf8');const js=fs.readFileSync(path.join(root,'saul','assets','saul-cv-spectrum-2026.js'),'utf8');const data=JSON.parse(fs.readFileSync(path.join(root,'data','saul-cv-canonical-2026.json'),'utf8'));
 const need=(hay,t,msg)=>{if(!hay.includes(t))fail.push(msg||`missing ${t}`)};
-['data-cv-spectrum','cv-spectrum__rainbow','cv-spectrum__portrait','data-cv-designed','Other application formats','Combine focus areas','class="cv-map-section"','id="careerArchive"','data-geometry="indra-web"'].forEach(t=>need(h,t));
+['data-cv-spectrum','cv-spectrum__rainbow','cv-spectrum__portrait','data-cv-designed','Other application formats','Combine focus areas','cv-map-section','id="careerArchive"','data-geometry="indra-web"'].forEach(t=>need(h,t));
 ['--cv-gold','--cv-sky','--cv-green','--cv-teal','--cv-indigo','--cv-violet','--cv-rose','--cv-coral','@media print'].forEach(t=>need(css,t));
 ['routeFor','combineModules','data-cv-post','/saul/assets/saul-cv-canonical-2026.json'].forEach(t=>need(js,t));
 if(h.includes('class="cv-v3"')||h.includes('saul-cv-v3.js'))fail.push('download-first v3 wrapper returned');
@@ -978,7 +979,7 @@ console.log('SAUL VISUAL GOVERNANCE PASSED - mild spectrum remains web-only; all
 VERIFY_PAGE = r'''#!/usr/bin/env node
 'use strict';
 const fs=require('fs'),path=require('path');const root=path.resolve(__dirname,'..');const h=fs.readFileSync(path.join(root,'saul','index.html'),'utf8');const errors=[];
-['data-cv-purpose="general-employment"','data-saul-modular-cv="true"','data-cv-spectrum','cv-spectrum__rainbow','src="/img/saul.jpg"','class="cv-map-section"','id="careerArchive"','data-cv-designed','data-cv-ats','data-cv-text','data-cv-print','data-cv-copy','Combine focus areas','Other application formats','saul-cv-spectrum-2026.js'].forEach(t=>{if(!h.includes(t))errors.push('missing '+t)});
+['data-cv-purpose="general-employment"','data-saul-modular-cv="true"','data-cv-spectrum','cv-spectrum__rainbow','src="/img/saul.jpg"','cv-map-section','id="careerArchive"','data-cv-designed','data-cv-ats','data-cv-text','data-cv-print','data-cv-copy','Combine focus areas','Other application formats','saul-cv-spectrum-2026.js'].forEach(t=>{if(!h.includes(t))errors.push('missing '+t)});
 if(h.includes('class="cv-v3"')||h.includes('saul-cv-v3.js'))errors.push('download-first v3 wrapper returned');if((h.match(/<h1\b/g)||[]).length!==1)errors.push('expected one H1');if(!/data-cv-designed[\s\S]{0,180}>Download professional PDF</.test(h))errors.push('professional PDF is not the visible primary action');
 if(errors.length){console.error('Saul page guard failed');errors.forEach(e=>console.error(' - '+e));process.exit(1)}console.log('Saul page guard passed - one visual modular card, compact focus rail, professional download hierarchy, portrait, map and complete archive.');
 '''
@@ -1017,5 +1018,20 @@ pkg_path.write_text(json.dumps(pkg, indent=2) + '\n', encoding='utf-8')
 
 # Release report.
 (ROOT / 'docs' / 'SAUL_CV_VISUAL_WEB_PROFESSIONAL_PDF_RELEASE_2026-07-16.md').write_text(f'''# Saul Visual Web / Professional PDF Release - 2026-07-16\n\n- Website: one mild-spectrum modular card shared by all 12 focused routes.\n- Website hierarchy: portrait and profile, compact focus rail, selected experience, skills, one professional-PDF action, secondary formats, optional combinations.\n- Main page: Writing titles receive a stable title column and descriptions receive the flexible column.\n- PDFs: 12 professional monochrome one-page PDFs, 12 ATS-safe one-page PDFs, 12 plain-text outputs and one complete archive PDF.\n- PDF spectrum/geometry: absent.\n- Education rule: MA and academic details appear only in the Education output or an Education-selected web state.\n- Current canonical release: `{canonical['release']}`.\n''', encoding='utf-8')
+
+
+# Ordered post-build migrations. Audit12 is authoritative last.
+# Compatibility marker used by Final8 hook detection: polish_script = ROOT /
+import subprocess, sys
+for migration_name in [
+    'apply-final8-website-polish.py',
+    'apply-final9-mephistodata-website-hardening.py',
+    'apply-audit10-remaining-website-fixes.py',
+    'apply-audit11-website-decisions.py',
+    'apply-audit12-mobile-web-hybrid.py',
+]:
+    migration = ROOT / 'scripts' / migration_name
+    if migration.is_file():
+        subprocess.run([sys.executable, str(migration)], check=True)
 
 print('SAUL_CV_PROFESSIONAL_BUILD_COMPLETE')

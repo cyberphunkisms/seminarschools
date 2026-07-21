@@ -33,6 +33,8 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
+from polymythcal_adapters import infer_adapter, normalise_source_config, parse_source_with_adapter
+
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
@@ -1211,8 +1213,31 @@ def fetch_findaprotest_toronto(source_config):
     return records
 
 
+def fetch_platform_event_source(source_config):
+    """Fetch through a dedicated profile adapter.
+
+    This is the maintainable path for municipal, university, library,
+    festival, French-language, and civic-action sources. It accepts both the
+    legacy ``url``/``adapter`` fields and the canonical
+    ``events_url``/``platform_adapter`` fields.
+    """
+    source_config = normalise_source_config(source_config)
+    url = source_config.get("events_url") or ""
+    if not str(url).startswith(("http://", "https://")):
+        return []
+    ical_records = fetch_ical_then_html(source_config)
+    if ical_records:
+        for record in ical_records:
+            record.setdefault("platform_adapter", source_config.get("platform_adapter"))
+            record.setdefault("source_language", source_config.get("language", "en"))
+        return ical_records
+    response = fetch(url)
+    response.raise_for_status()
+    return parse_source_with_adapter(response.text, source_config)
+
+
 def fetch_todo(source_config):
-    """Placeholder fetcher for sources not yet implemented."""
+    """Placeholder fetcher for non-HTTP discovery instructions."""
     return []
 
 
@@ -1224,6 +1249,7 @@ FETCHERS = {
     "agora-self": fetch_agora_self,
     "findaprotest-toronto": fetch_findaprotest_toronto,
     "generic-html": fetch_generic_event_source,
+    "platform-adapter": fetch_platform_event_source,
     # Generic fallback fetchers (selected via source_config["fetcher"])
     "manual": fetch_manual_events,
     "ical": fetch_ical_then_html,
@@ -1231,25 +1257,18 @@ FETCHERS = {
 
 
 def get_fetcher(source_config):
-    """
-    Resolve which fetcher to use for a given source.
-
-    Priority:
-      1. source_config["fetcher"] explicit override. Lets Saul flip a source
-         to "manual" without code changes if its native scraper breaks.
-      2. Built-in FETCHERS dict by source id.
-      3. fetch_todo (returns empty) for stubbed sources.
-    """
+    """Resolve the explicit fetcher, dedicated profile adapter, or fallback."""
+    source_config = normalise_source_config(source_config)
     explicit = source_config.get("fetcher")
     if explicit and explicit in FETCHERS:
         return FETCHERS[explicit]
     sid = source_config["id"]
     if sid in FETCHERS:
         return FETCHERS[sid]
-    # For real HTTP roster sources, use the conservative generic discovery
-    # fallback instead of silently returning []. Discovery-only/TODO pseudo-URLs
-    # still return [] because publishing from vague source instructions would
-    # fabricate events.
+    if source_config.get("platform_adapter") in {
+        "municipal", "university", "library", "festival", "french-language", "civic-action"
+    }:
+        return fetch_platform_event_source
     if str(source_config.get("events_url", "")).startswith(("http://", "https://")):
         return fetch_generic_event_source
     return fetch_todo
@@ -1262,7 +1281,9 @@ def get_fetcher(source_config):
 
 def load_sources():
     with open(SOURCES_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
+        payload = json.load(f)
+    payload["sources"] = [normalise_source_config(source) for source in payload.get("sources", [])]
+    return payload
 
 
 def deduplicate(records):

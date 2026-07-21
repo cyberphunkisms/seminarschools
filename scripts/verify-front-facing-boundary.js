@@ -35,7 +35,7 @@ requireHas('saul/index.html', [
   'Work record',
   'Combine focus areas',
   'Download professional PDF',
-  'The webpage is the visual record. Downloaded PDFs use a separate professional monochrome design.'
+  'Use the webpage for the visual record. Download a monochrome PDF for applications.'
 ]);
 requireNotVisible('saul/index.html', [
   'CV builder',

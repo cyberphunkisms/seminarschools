@@ -1,0 +1,66 @@
+{
+  "generated_at": "2026-07-21T04:23:35+00:00",
+  "release": "Polymythcal Audit 14",
+  "key_files": [
+    {
+      "path": "POLYMYTHCAL_AUDIT14_COMPLETION_REPORT_2026-07-20.md",
+      "bytes": 6604,
+      "sha256": "783b2dcc8de17079f691c994bafc9c282590635c0ceed4867fc50a7c7ab63726"
+    },
+    {
+      "path": "AUDIT14_PACKAGE_VERIFICATION_2026-07-20.json",
+      "bytes": 7855,
+      "sha256": "6226402359d89e4ff9a77cad2c4f6b88db439effaddda195e012b5fffa7f6a06"
+    },
+    {
+      "path": "data/polymythcal-wcag22-browser-audit.json",
+      "bytes": 8035,
+      "sha256": "cc429b07802e6a770db01e0ba10299251b39eaed1d4355a2361ea32aa29e7a13"
+    },
+    {
+      "path": "data/polymythcal-translation-inventory.json",
+      "bytes": 1550,
+      "sha256": "63a1e0c5c626a39ed383cbdd1f3fbb0ac4fd693bae648d301563a8d330a40a9c"
+    },
+    {
+      "path": "docs/POLYMYTHCAL_SCREEN_READER_TEST_PROTOCOL.md",
+      "bytes": 7370,
+      "sha256": "bc2e8eb7af7630f1f806fa216a0d14ca51116ecdf61a02e9ad3d0004f8d14998"
+    },
+    {
+      "path": "scripts/polymythcal_adapters.py",
+      "bytes": 18054,
+      "sha256": "e2685cf82f606c04917bf085ca0651342be1e015ab3136a2412239072c23bbe3"
+    },
+    {
+      "path": "scripts/reconcile_polymythcal_lifecycle.py",
+      "bytes": 7576,
+      "sha256": "dbe2b615ce803902c7c0c02d4ec154af70a60fc5f43952d87ca5edebe4a56f0e"
+    },
+    {
+      "path": "scripts/build-polymythcal-feeds.py",
+      "bytes": 9677,
+      "sha256": "1bacf9bb48459f2c0ea0962f989261db096e02e1a79dcae8ed4a419d9eb2c0f1"
+    },
+    {
+      "path": "scripts/verify-polymythcal-audit14.js",
+      "bytes": 10367,
+      "sha256": "d8db0ae4e5d116ff1528ada793ddd79ef3f923d5401951e47c02bb1082726c02"
+    },
+    {
+      "path": "js/polymythcal-features.js",
+      "bytes": 21972,
+      "sha256": "b1c243943d6c1ecd972ac5def79637fda7e675f6e49d2720e1a942480c43b8c5"
+    },
+    {
+      "path": "css/polymythcal-features.css",
+      "bytes": 5669,
+      "sha256": "aa433f7f1f5aea91167a975135ad249e932062f2728d8f71edf65ac3daa2afa4"
+    },
+    {
+      "path": "polymythseminars/index.html",
+      "bytes": 1002752,
+      "sha256": "26278a481291e5f1ecd5a4cb5e6646dd71ce94c21c32b83333d9c7b362c22524"
+    }
+  ]
+}

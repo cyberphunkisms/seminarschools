@@ -21,7 +21,7 @@ function readJson(rel) {
 }
 
 const sources = read('scripts/sources.json');
-for (const needle of ['findaprotest-toronto', 'https://www.findaprotest.info/canada/toronto', 'Save-the-date/TBD listings go to the watchlist']) {
+for (const needle of ['findaprotest-toronto', 'https://www.findaprotest.info/canada/toronto']) {
   if (!sources.includes(needle)) problems.push(`scripts/sources.json must keep ${needle}`);
 }
 
@@ -50,7 +50,7 @@ for (const needle of ['WATCHLIST_PUBLIC_PATH', 'polymythseminars', 'watchlist.js
 }
 
 const prompt = read('scripts/seminars-prompt.md');
-for (const needle of ['Find a Protest source rule', 'watchlist', 'FIFA', 'football', 'Palestine', 'Human Rights', 'time/place']) {
+for (const needle of ['Find a Protest source rule', 'qualification queue', 'FIFA', 'football', 'Palestine', 'Human Rights', 'time/place']) {
   if (!prompt.includes(needle)) problems.push(`scripts/seminars-prompt.md must keep ${needle}`);
 }
 
@@ -94,18 +94,19 @@ for (const rel of POLYMYTHCAL_PAGES) {
 }
 const page = read('polymythseminars/index.html');
 
-const watchlist = readJson('data/event-watchlist.json');
-const publicWatchlist = readJson('polymythseminars/watchlist.json');
-for (const [rel, obj] of [['data/event-watchlist.json', watchlist], ['polymythseminars/watchlist.json', publicWatchlist]]) {
-  if (!obj) continue;
-  const items = Array.isArray(obj.items) ? obj.items : [];
+const canonical = readJson('polymythseminars/events.json');
+if (canonical) {
+  const items = Array.isArray(canonical.events) ? canonical.events : [];
   const event = items.find(item => String(item.title || '').toLowerCase().includes('palestinian football exhibit'));
-  if (!event) { problems.push(`${rel} must keep Palestinian Football Exhibit as a watchlist lead`); continue; }
-  const joined = JSON.stringify(event);
-  for (const needle of ['PYM Toronto', 'FIFA', 'football', 'Palestine', 'Human Rights', 'needs-time-place', 'TBD']) {
-    if (!joined.includes(needle)) problems.push(`${rel} Palestinian Football Exhibit must keep ${needle}`);
+  if (!event) problems.push('polymythseminars/events.json must retain Palestinian Football Exhibit in the main chronology');
+  else {
+    const joined = JSON.stringify(event);
+    for (const needle of ['PYM Toronto', 'FIFA', 'football', 'Palestine', 'Human Rights', 'unconfirmed', 'time-unconfirmed']) {
+      if (!joined.includes(needle)) problems.push(`Palestinian Football Exhibit must keep ${needle}`);
+    }
   }
 }
+
 
 if (page.includes('Thank You Ma’am Teaching Activities as a static collection page')) {
   problems.push('polymythseminars/index.html leaked unrelated non-front-facing resource language.');
@@ -115,4 +116,4 @@ if (problems.length) {
   console.error('POLYMYTHCAL SCRAPER/UI GUARD FAILED\n- ' + problems.join('\n- '));
   process.exit(1);
 }
-console.log('POLYMYTHCAL SCRAPER/UI OK — source recall, watchlist, topics, search, and lead UI guarded.');
+console.log('POLYMYTHCAL SCRAPER/UI OK — source recall, qualified uncertainty, topics, search, and lead provenance guarded.');

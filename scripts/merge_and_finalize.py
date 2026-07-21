@@ -416,9 +416,7 @@ def main():
     import subprocess as _subprocess
     for command in [
         ["node", str(ROOT / "scripts" / "merge-seminar-harvest-into-calendar.js")],
-        ["node", str(ROOT / "scripts" / "sync-calendar-data.js")],
-        ["node", str(ROOT / "scripts" / "build-search-pages.js")],
-        ["node", str(ROOT / "scripts" / "build-writing-shortcuts.js")],
+        [sys.executable, str(ROOT / "scripts" / "finalize-polymythcal-publication.py")],
     ]:
         result = _subprocess.run(command, cwd=ROOT, check=False)
         if result.returncode:

@@ -34,6 +34,8 @@ requireTrue(sourceHtml.length === publicHtml.length, `source/public HTML count d
 for (const file of auditedSourceHtml) {
   const text = read(file);
   const where = rel(file);
+  const isRedirect = /http-equiv=["']refresh["']/i.test(text) && /location\.replace\(/.test(text);
+  if (isRedirect) continue;
   const contractCount = (text.match(/data-site-wide-type-zoom="20260710-reviews-zoom-font-a"/g) || []).length;
   requireTrue(contractCount === 1, `${where}: expected exactly one site-wide type/zoom contract link, found ${contractCount}`);
   const viewportTags = text.match(/<meta\b[^>]*>/gi) || [];

@@ -1,3 +1,8 @@
+# About route renamed from /main/
+/main /about/ 301
+/main/ /about/ 301
+/main/* /about/:splat 301
+
 /POLYMYTHCALENDAR_SCRAPER_FAILURE_HARDENING_AUDIT.md    /404.html    404!
 /POLYMYTHCALENDAR_SCRAPE_WORKFLOW_AUDIT_2026-06-29.md  /404.html  404!
 /POLYMYTHCALENDAR_SCRAPE_WORKFLOW_AUDIT_2026-06-29.json  /404.html  404!

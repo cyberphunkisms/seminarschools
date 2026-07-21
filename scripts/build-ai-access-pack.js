@@ -59,7 +59,7 @@ function inferStarHints(query){
   if(/\b(bb|bbstar|bookwormburrows|bookworm|setupnpc|setupnpcs|improvnpc|improvnpcs|wormcard|wormcards|dimensional master)\b/.test(q)) hints.add('bb');
   if(/\b(mc|mcstar|modulecanon|module canon|curriculum module|delivery agnostic)\b/.test(q)) hints.add('mc');
   if(/\b(cc|ccstar|campaigncodex|campaign codex|campaign level)\b/.test(q)) hints.add('cc');
-  if(/\b(ml|mlstar|methodologylist|anti twist|antitwist|gorgonification|degorgonification|psychologism|mephistodata|ouroboros|citation discipline|ai prose|law review|dual write|txt html|html txt|text mirror)\b/.test(q)) hints.add('ml');
+  if(/\b(ml|mlstar|methodologylist|anti twist|antitwist|gorgonification|degorgonification|psychologism|mephistodata|ouroboros|citation discipline|ai prose|law review|bolted on|category appendage|consequence closer|obvious competence|abstract selfhood|generic ethical announcement|dual write|txt html|html txt|text mirror)\b/.test(q)) hints.add('ml');
   if(/\b(core|corestar|coreplus|core\+)\b/.test(q)) hints.add('core');
   if(/\b(meaninglib|interdependence|mother category|starfile|star file|ontology|hierarchy)\b/.test(q)){ hints.add('readme'); hints.add('relations'); }
   return hints;
@@ -168,6 +168,13 @@ function renderActivation(){
     '6. Apply anti-TWIST checks before proposing edits or advice.',
     '7. Use citations, source paths, or retrieved row IDs whenever possible.',
     '',
+    '## WRITING DISCIPLINE',
+    'Compose clause by clause. Every sentence carries the paragraph into its next concrete action, question, or result.',
+    'Use the deletion test. If removing a sentence leaves the paragraph movement unchanged and removes only a spare credential, audience, ethical signal, identity claim, baseline competence, or tidy dual benefit, cut it.',
+    'Block bolted-on also/category appendages, generic ethical announcements, abstract selfhood, obvious-competence announcements, and balanced consequence-summary/two-outcome closers.',
+    'Rejected examples include: Competitive soccer and years of youth programming also make the pace of a SportStars field or facility familiar to me. Parents and coaches also need to know... recognizably themselves. If a take needs repeating, I can do it. This keeps X natural and gives Y Z.',
+    'Put evidence beside the action it explains. Name the actor, action, condition, and result. End where the concrete movement ends.',
+    '',
     '## TASK-SPECIFIC RETRIEVAL',
     'For a concrete task, first generate or load a task-specific pack from:',
     '',
@@ -228,6 +235,8 @@ function renderPack(query, results){
   lines.push('- Avoid hierarchy language that makes ml* the ruler of bb*, mc*, cc*, core*, aa*, or aitr*. Use interdependent access-route language.');
   lines.push('- Name mechanical failures and missed files. Do not psychologize the operator.');
   lines.push('- Apply AI prose tell detection when generating user-facing prose.');
+  lines.push('- Use the deletion test. Cut bolted-on also/category appendages, generic ethical announcements, abstract selfhood, obvious-competence claims, and balanced two-outcome consequence closers.');
+  lines.push('- Put evidence beside the action it explains. Every sentence must move the paragraph into a concrete action, question, condition, or result.');
   lines.push('');
   lines.push('## MEPHISTODATA MODE');
   lines.push('Operate from the retrieved substrate. Answer the actual task. Do not summarize the framework back to the operator unless asked. Retrieve before inventing.');

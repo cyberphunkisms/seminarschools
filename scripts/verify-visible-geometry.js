@@ -9,7 +9,7 @@ const fs=require('fs');
 const path=require('path');
 const ROOT=process.cwd();
 const PUBLIC=path.join(ROOT,'public');
-const SOURCE_SKIP=new Set(['.git','node_modules','.netlify','public']);
+const SOURCE_SKIP=new Set(['.git','node_modules','.netlify','public','fixtures']);
 const NESTED_SKIP=new Set(['.git','node_modules','.netlify']);
 function walk(dir,skip,acc=[]){
   if(!fs.existsSync(dir)) return acc;
@@ -26,6 +26,8 @@ function inspect(files,base,label,errors){
   for(const file of files){
     const r=rel(base,file); const html=fs.readFileSync(file,'utf8');
     if(!/<body\b/i.test(html)){errors.push(`${label}:${r}: missing body element`);continue;}
+    const isRedirect=/http-equiv=["']refresh["']/i.test(html)&&/location\.replace\(/.test(html);
+    if(isRedirect) continue;
     if(!/alive\.css/.test(html))errors.push(`${label}:${r}: missing alive.css include`);
     if(!/\/js\/mandala\.js/.test(html))errors.push(`${label}:${r}: missing mandala.js include`);
     if(!/\/js\/indra\.js/.test(html))errors.push(`${label}:${r}: missing indra.js include`);
@@ -33,7 +35,7 @@ function inspect(files,base,label,errors){
     const intensity=html.match(/<body\b[^>]*data-indra-intensity=["']([0-9.]+)["']/i);
     if(!intensity)errors.push(`${label}:${r}: body missing data-indra-intensity`);
     else {const n=Number(intensity[1]);if(!Number.isFinite(n)||n<0.025||n>0.18)errors.push(`${label}:${r}: geometry intensity ${intensity[1]} outside 0.025–0.18`);}
-    const key=/^(polymythseminars|writingclub|writingkids|writingjuniors|writingteens|writinggrads|university|philosophy|humanities|cfps|lectures|fellowships|saul|main)\//.test(r)||r==='index.html';
+    const key=/^(polymythseminars|writingclub|writingkids|writingjuniors|writingteens|writinggrads|university|philosophy|humanities|cfps|lectures|fellowships|saul|about)\//.test(r)||r==='index.html';
     if(key&&!(/id=["']geo["']/.test(html)||/id=["']indraLayer["']/.test(html)||/\/js\/indra\.js/.test(html)))errors.push(`${label}:${r}: key page has no visible geometry mount path`);
   }
 }

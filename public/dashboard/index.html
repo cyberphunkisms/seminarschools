@@ -26,6 +26,7 @@
 <link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
 </head>
 <body data-geometry="indra-web" data-indra-intensity="0.055">
+<a class="skip-link" href="#main-content">Skip to main content</a>
   <div id="geo" aria-hidden="true"></div>
   <header class="topbar">
     <div class="brand-block">
@@ -36,7 +37,7 @@
     <div class="status-card" id="status">Loading health…</div>
   </header>
 
-  <main>
+  <main id="main-content">
     <section class="hero-grid">
       <section class="panel lock-panel">
         <div class="panel-title-row">
@@ -66,7 +67,7 @@
       <div class="search-row">
         <label for="query">Search Meaninglib</label>
     <input id="query" type="text" value="Meaninglib ontology" placeholder="Search Meaninglib…" autofocus />
-        <select id="starFilter" title="Star-file filter">
+        <label class="visually-hidden" for="starFilter">Filter by star file</label><select id="starFilter" title="Star-file filter">
           <option value="all">All star files</option>
           <option value="ml">ml*</option>
           <option value="bb">bb*</option>
@@ -98,10 +99,7 @@
         <div class="totals" id="totals"></div>
         <h3>Reports</h3>
         <ul class="report-links">
-          <li><a href="../hf_export/reports/search_report.md" target="_blank" rel="noopener">Search report</a></li>
-          <li><a href="../hf_export/reports/meaninglib_search_verify_report.md" target="_blank" rel="noopener">Verification report</a></li>
-          <li><a href="../hf_export/reports/latest_export_report.md" target="_blank" rel="noopener">Export report</a></li>
-          <li><a href="../hf_export/reports/privacy_scan_report.md" target="_blank" rel="noopener">Privacy scan</a></li>
+          
         </ul>
       </aside>
 

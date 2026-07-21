@@ -48,7 +48,7 @@ must('Glossary uses character engine wording', glossary.includes('character engi
 must('Glossary uses simple symbol explanation', glossary.includes('A faint version means the trait is starting to appear.'));
 
 const print = read('bookwormcard/print/index.html');
-must('Print card uses simple card tagline', print.includes('A character card &middot; answer, play, grow.'));
+must('Print card uses simple card tagline', print.includes('A character card &middot; answer, play, grow.') || print.includes('A character card · answer, play, grow.'));
 must('Print card replaces smashed-up appearance copy', print.includes('mixed-together character looks like'));
 
 if(failures.length){

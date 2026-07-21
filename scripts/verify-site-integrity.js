@@ -9,6 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const cp = require('child_process');
 const os = require('os');
+const vm = require('vm');
 const ROOT = path.resolve(__dirname, '..');
 function configuredPublishDir(){
   const fp=path.join(ROOT,'netlify.toml');
@@ -149,26 +150,25 @@ for(const f of jsFiles) {
   const out=cp.spawnSync(process.execPath,['--check',f],{encoding:'utf8'});
   if(out.status!==0) fail(`${rel(f)}: JavaScript parse error: ${(out.stderr||out.stdout).trim().split('\n')[0]}`);
 }
-// Validate inline JS other than data declarations.
+// Validate inline JS other than data declarations. Parse in-process so
+// thousands of generated event and alias pages do not spawn thousands of
+// short-lived Node processes.
 for(const f of html) {
   const text=fs.readFileSync(f,'utf8'); const name=rel(f); let i=0;
   for(const m of text.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
     const attrs=m[1], code=m[2]; i++;
     if(/\bsrc\s*=/.test(attrs)||/application\/(?:ld\+)?json|application\/json/i.test(attrs)||!code.trim()) continue;
-    const tmp=path.join(os.tmpdir(),`site-inline-${process.pid}-${i}.js`);
-    fs.writeFileSync(tmp,code);
-    const out=cp.spawnSync(process.execPath,['--check',tmp],{encoding:'utf8'});
-    fs.unlinkSync(tmp);
-    if(out.status!==0) fail(`${name}: inline script ${i} parse error: ${(out.stderr||out.stdout).trim().split('\n')[0]}`);
+    try { new vm.Script(code, {filename:`${name}#inline-${i}`}); }
+    catch (err) { fail(`${name}: inline script ${i} parse error: ${String(err.message||err).split('\n')[0]}`); }
   }
 }
 
 // Core public files must exist and be represented in sitemap.
-for(const p of ['/','/main/','/saul/','/leizu/','/leizu/intake/','/bb/','/bb/why/','/agora/','/teacherresources/','/polymyth/']) {
+for(const p of ['/','/about/','/saul/','/leizu/','/leizu/intake/','/bb/','/bb/why/','/agora/','/teacherresources/','/polymyth/']) {
   if(!publicRoutes.has(p)) fail(`core route missing ${p}`);
 }
 const sitemap=fs.readFileSync(path.join(SITE_ROOT,'sitemap.xml'),'utf8');
-for(const p of ['/','/main/','/saul/','/leizu/','/bb/why/']) {
+for(const p of ['/','/about/','/saul/','/leizu/','/bb/why/']) {
   if(!sitemap.includes(`https://seminarschools.com${p}`)) fail(`sitemap missing ${p}`);
 }
 

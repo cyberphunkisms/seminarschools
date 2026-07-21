@@ -1,0 +1,131 @@
+{
+  "release": "2026-07-19-mobile-web-hybrid-audit12",
+  "checks": [
+    {
+      "name": "390 no overflow",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "initial calendar",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "initial focused view",
+      "passed": true,
+      "detail": "129.49 -40 660 520"
+    },
+    {
+      "name": "one rail tab stop",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "44px rail buttons",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "rail to map",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "card follows rail",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "map follows rail",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "map to rail",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "rail reflects map",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "arrow keys sync",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "core restores whole web",
+      "passed": true,
+      "detail": "0 0 1000 700"
+    },
+    {
+      "name": "mobile no script errors",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "320 no overflow",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "320 active button visible",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "320 panel within viewport",
+      "passed": true,
+      "detail": {
+        "x": 15.53125,
+        "y": 439.703125,
+        "width": 288.9375,
+        "height": 184.453125
+      }
+    },
+    {
+      "name": "320 no script errors",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "reduced motion immediate view",
+      "passed": true,
+      "detail": "362.66 143.04 660 520"
+    },
+    {
+      "name": "desktop full view",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "desktop rail hidden",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "desktop labels preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "desktop hit radius restored",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "desktop no overflow",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "desktop no script errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "status": "passed"
+}

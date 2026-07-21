@@ -1,5 +1,5 @@
 {
-  "release": "2026-07-16-spirit-professional-interactivity-r4",
+  "release": "2026-07-19-mobile-web-hybrid-audit12",
   "contact": {
     "name": "Saul Karim Nassau",
     "phone": "416-771-0382",
@@ -43,7 +43,24 @@
     "pdf_geometry": false,
     "combined_view_download": "professional monochrome browser print from the selected web state",
     "website_selected_experience_limit": 5,
-    "website_primary_action_count": 1
+    "website_primary_action_count": 1,
+    "map_on_main_cv": true,
+    "focused_route_archive_bridge": true,
+    "print_copy_inert_until_print": true,
+    "archive_state_in_url": true,
+    "minimum_primary_touch_target_css_px": 44,
+    "geometry_structures_relationships": true,
+    "sitewide_skip_links_extended": true,
+    "remaining_site_audit10": true,
+    "cv_job_heading_level": 3,
+    "map_recovery_link": true,
+    "mobile_date_no_wrap": true,
+    "about_route_replaces_main": true,
+    "polymythcal_home_priority": true,
+    "prototype_badges": true,
+    "archive_recent_first_expandable": true,
+    "footer_visible_group_headings": true,
+    "website_cl_active": true
   },
   "spectrum_order": [
     "general",
@@ -64,7 +81,7 @@
       "label": "General / Any Role",
       "short": "General",
       "color": "#665A78",
-      "profile": "Versatile educator, researcher, program coordinator and public-facing professional with experience turning complex material into clear, practical work across learning, culture, community, service and digital projects.",
+      "profile": "Versatile educator, researcher, program coordinator and public-facing professional with experience turning complex material into clear, practical work across learning, culture, community, service, presentation and digital projects.",
       "skills": [
         "Clear written and verbal communication",
         "Research and synthesis",
@@ -72,20 +89,11 @@
         "Program and event coordination",
         "Customer and participant support",
         "Cross-cultural communication",
+        "Public presentation and audience engagement",
         "Documentation and digital publishing",
         "Independent project delivery"
       ],
       "records": [
-        {
-          "title": "Seminar Schools",
-          "organization": "",
-          "location": "Toronto / online",
-          "dates": "2025-Present",
-          "bullets": [
-            "Develops and publishes teaching resources, research archives, essays, public information and clearly labelled conceptual projects.",
-            "Maintains source trails, structured releases and accessible public-facing documentation across the site."
-          ]
-        },
         {
           "title": "Leizu Academy",
           "organization": "Seminar Schools",
@@ -134,6 +142,16 @@
           "bullets": [
             "Founded and coordinated a cross-border support effort that raised more than $8,000 for food, water, legal assistance and urgent needs.",
             "Verified changing information, translated communications and coordinated professionals, supporters and on-the-ground needs."
+          ]
+        },
+        {
+          "title": "Volunteer, Event and Hospitality Operations",
+          "organization": "BUMI Festival",
+          "location": "Toronto area",
+          "dates": "2025-Present",
+          "bullets": [
+            "Supports full festival operations: setup, check-in, guest and vendor service, food and beverage, backstage, grounds and cleaning.",
+            "Supported transport, information, security, and crowd flow during festival operations and participated in 2025 and 2026 planning."
           ]
         }
       ],
@@ -232,7 +250,7 @@
           "dates": "2025-Present",
           "bullets": [
             "Supports full festival operations: setup, check-in, guest and vendor service, food and beverage, backstage, grounds and cleaning.",
-            "Helps with transport, information, security and crowd support; participated in 2025 and 2026 planning."
+            "Supported transport, information, security, and crowd flow during festival operations and participated in 2025 and 2026 planning."
           ]
         }
       ],
@@ -254,7 +272,7 @@
       "label": "Research & Evaluation",
       "short": "Research",
       "color": "#5268A3",
-      "profile": "Qualitative researcher and evaluator experienced in source review, interviewing, interpretation, evidence synthesis, documentation and communicating findings through clear reports, presentations and public resources.",
+      "profile": "Qualitative researcher and evaluator experienced in source review, interviewing, interpretation, evidence synthesis, documentation, budgeting and communicating findings through clear reports and presentations.",
       "skills": [
         "Qualitative research",
         "Source and literature review",
@@ -263,39 +281,10 @@
         "Program evaluation",
         "Evidence synthesis",
         "Research documentation",
+        "Budget and data tracking",
         "Provenance and citation practice"
       ],
       "records": [
-        {
-          "title": "polymyth / AA*",
-          "organization": "Independent research framework",
-          "location": "",
-          "dates": "2025-Present",
-          "bullets": [
-            "Organizes concepts, citations, project records and methodological rules across a growing research and writing archive.",
-            "Distinguishes author source, public adaptation, AI synthesis and external citation through explicit provenance layers."
-          ]
-        },
-        {
-          "title": "Toronto Arts and Public Events Resource",
-          "organization": "Polymythcal",
-          "location": "Toronto",
-          "dates": "2025-Present",
-          "bullets": [
-            "Researches arts, humanities, educational and civic events through original-source checking and change tracking.",
-            "Organizes listings and improves the clarity, accessibility and source trail of public information."
-          ]
-        },
-        {
-          "title": "Seminar Schools",
-          "organization": "",
-          "location": "Toronto / online",
-          "dates": "2025-Present",
-          "bullets": [
-            "Develops and publishes teaching resources, research archives, essays, public information and clearly labelled conceptual projects.",
-            "Maintains source trails, structured releases and accessible public-facing documentation across the site."
-          ]
-        },
         {
           "title": "Research Assistant",
           "organization": "McGill University, Philosophy",
@@ -317,13 +306,33 @@
           ]
         },
         {
-          "title": "Florilegium",
-          "organization": "Independent commonplace-book project",
-          "location": "",
-          "dates": "2025-Present",
+          "title": "Teaching Assistant",
+          "organization": "European Graduate School",
+          "location": "Saas-Fee",
+          "dates": "Sep 2014-Jun 2015",
           "bullets": [
-            "Organizes passages, citations, reading notes and connections across the wider research archive.",
-            "Supports close reading, source retrieval and long-term editorial synthesis."
+            "Assisted philosophy and critical-theory seminars during the first year of the MA program.",
+            "Supported discussion, preparation and academic work in an intensive international seminar environment."
+          ]
+        },
+        {
+          "title": "Community Development Manager",
+          "organization": "Campus Crops Farmers Market, McGill",
+          "location": "Montreal",
+          "dates": "Sep 2011-Aug 2015",
+          "bullets": [
+            "Redesigned budgeting and expense tracking in Excel, coordinated volunteers and supported public programming.",
+            "Developed partner relationships for a student-run urban agriculture initiative and farmers market."
+          ]
+        },
+        {
+          "title": "Conference Organizer",
+          "organization": "McMUN and SSUNS at IRSAM, McGill",
+          "location": "Montreal",
+          "dates": "c. 2011-2013",
+          "bullets": [
+            "Helped organize university and secondary-school Model United Nations conferences, including a university event with about 1,600 delegates.",
+            "Supported schedules, participant communication, logistics and collaborative delivery."
           ]
         }
       ],
@@ -343,15 +352,17 @@
       "label": "Teaching & Education",
       "short": "Teaching",
       "color": "#347CA5",
-      "profile": "Educator and facilitator experienced in tutoring, curriculum support, seminar-based learning, lesson planning, assessment and adapting complex material for multilingual and varied learners.",
+      "profile": "Educator and facilitator experienced in tutoring, curriculum support, seminar-based learning, drama and improvisation, lesson planning, assessment and adapting complex material for multilingual and varied learners.",
       "skills": [
         "Tutoring and instruction",
         "Lesson and curriculum planning",
-        "Seminar facilitation",
+        "Seminar, drama and improvisation facilitation",
+        "Youth and family presentation",
         "Differentiated explanation",
         "Student feedback and assessment",
         "Classroom and online delivery",
         "Parent and learner communication",
+        "Demonstration-based learning",
         "Accessible educational writing"
       ],
       "records": [
@@ -491,17 +502,7 @@
           "dates": "2025-Present",
           "bullets": [
             "Supports full festival operations: setup, check-in, guest and vendor service, food and beverage, backstage, grounds and cleaning.",
-            "Helps with transport, information, security and crowd support; participated in 2025 and 2026 planning."
-          ]
-        },
-        {
-          "title": "Toronto Arts and Public Events Resource",
-          "organization": "Polymythcal",
-          "location": "Toronto",
-          "dates": "2025-Present",
-          "bullets": [
-            "Researches arts, humanities, educational and civic events through original-source checking and change tracking.",
-            "Organizes listings and improves the clarity, accessibility and source trail of public information."
+            "Supported transport, information, security, and crowd flow during festival operations and participated in 2025 and 2026 planning."
           ]
         }
       ],
@@ -610,48 +611,19 @@
       "label": "Arts & Culture",
       "short": "Arts & Culture",
       "color": "#98546D",
-      "profile": "Arts and culture practitioner experienced in screen arts, performance, cultural research, public programming, collaborative production and the development of interdisciplinary cultural projects.",
+      "profile": "Arts and culture practitioner experienced in screen arts, stage and on-camera performance, script development, cultural research, public programming, collaborative production and audience-facing work.",
       "skills": [
+        "Screen and stage performance",
+        "Film and video production",
+        "Script writing and editing",
+        "Interviewing and camera awareness",
         "Cultural research",
-        "Arts programming",
-        "Writing and editing",
-        "Interpretation and contextualization",
         "Collaborative production",
         "Public engagement",
         "Project documentation",
-        "Digital publishing"
+        "Festival and event operations"
       ],
       "records": [
-        {
-          "title": "Claude Watson Arts Program, Screen Arts",
-          "organization": "Earl Haig Secondary School",
-          "location": "Toronto",
-          "dates": "2005-2009",
-          "bullets": [
-            "Completed a Screen Arts focus spanning film and video production, performance, criticism and collaborative creative work.",
-            "Developed a foundation in visual storytelling, rehearsal, production and cultural interpretation."
-          ]
-        },
-        {
-          "title": "Sears Ontario Drama Festival",
-          "organization": "Claude Watson Arts Program",
-          "location": "Ontario",
-          "dates": "2005, 2006 and 2007",
-          "bullets": [
-            "Competed in Grades 9, 10 and 11 through Claude Watson.",
-            "Contributed to rehearsal, performance and collaborative production in a juried high-school festival setting."
-          ]
-        },
-        {
-          "title": "Volunteer Commercial",
-          "organization": "Street Kids International",
-          "location": "Toronto",
-          "dates": "2006",
-          "bullets": [
-            "Produced as part of the Claude Watson Screen Arts curriculum for a Canadian NGO focused on street children's health and rights.",
-            "Combined performance, production and public-interest communication."
-          ]
-        },
         {
           "title": "Volunteer, Event and Hospitality Operations",
           "organization": "BUMI Festival",
@@ -659,7 +631,7 @@
           "dates": "2025-Present",
           "bullets": [
             "Supports full festival operations: setup, check-in, guest and vendor service, food and beverage, backstage, grounds and cleaning.",
-            "Helps with transport, information, security and crowd support; participated in 2025 and 2026 planning."
+            "Supported transport, information, security, and crowd flow during festival operations and participated in 2025 and 2026 planning."
           ]
         },
         {
@@ -673,13 +645,50 @@
           ]
         },
         {
-          "title": "polymyth / AA*",
-          "organization": "Independent research framework",
-          "location": "",
-          "dates": "2025-Present",
+          "title": "On-Camera Performer",
+          "organization": "GEICO, “California” commercial",
+          "location": "San Francisco trolley scene",
+          "dates": "2012",
+          "url": "https://www.youtube.com/watch?v=bz-bDLya3gg",
           "bullets": [
-            "Organizes concepts, citations, project records and methodological rules across a growing research and writing archive.",
-            "Distinguishes author source, public adaptation, AI synthesis and external citation through explicit provenance layers."
+            "Appeared in the trolley scene as passengers wave at the GEICO Gecko."
+          ]
+        },
+        {
+          "title": "Screen Arts Production and Script Work",
+          "organization": "Earl Haig Secondary School",
+          "location": "Toronto",
+          "dates": "2005-2009",
+          "bullets": [
+            "Developed film and video production, interviewing, camera awareness and visual storytelling in Claude Watson Screen Arts.",
+            "Completed script writing and editing work in 2006 alongside performance and production training."
+          ]
+        },
+        {
+          "title": "Stage Actor",
+          "organization": "Claude Watson Arts Program",
+          "location": "Toronto",
+          "dates": "2005-2008",
+          "bullets": [
+            "Acted in productions including Jesus Christ Superstar and the 2008 production One Thousand and One Nights."
+          ]
+        },
+        {
+          "title": "Sears Ontario Drama Festival",
+          "organization": "Claude Watson Arts Program",
+          "location": "Ontario",
+          "dates": "2005, 2006 and 2007",
+          "bullets": [
+            "Acted in festival productions in Grades 9, 10 and 11 through Claude Watson."
+          ]
+        },
+        {
+          "title": "On-Camera Interviewer",
+          "organization": "Street Kids International volunteer commercial",
+          "location": "Toronto",
+          "dates": "2006",
+          "bullets": [
+            "Served as the interviewer in a volunteer commercial produced through Claude Watson Screen Arts."
           ]
         }
       ],
@@ -698,48 +707,20 @@
       "label": "Performance & Live Events",
       "short": "Performance",
       "color": "#6D5AA0",
-      "profile": "Performance and live-event practitioner with experience in rehearsal, stage and festival environments, collaborative production, audience-facing work and event operations.",
+      "profile": "On-camera and stage performer, educator and live-event practitioner with experience in commercial shoots, interviewing, film and video production, script work, improvisation, rehearsal, youth presentation and festival operations.",
       "skills": [
-        "Live performance",
-        "Rehearsal and preparation",
-        "Stage and event awareness",
-        "Audience engagement",
-        "Collaborative production",
-        "Festival operations",
-        "Public presentation",
-        "Event setup and teardown"
+        "On-camera performance",
+        "Stage acting",
+        "Interviewing and camera awareness",
+        "Improvisation and live presentation",
+        "Script writing and editing",
+        "Film and video production",
+        "Youth and family engagement",
+        "Rehearsal and collaborative production",
+        "Festival and event operations",
+        "Athletic movement and physical discipline"
       ],
       "records": [
-        {
-          "title": "Sears Ontario Drama Festival",
-          "organization": "Claude Watson Arts Program",
-          "location": "Ontario",
-          "dates": "2005, 2006 and 2007",
-          "bullets": [
-            "Competed in Grades 9, 10 and 11 through Claude Watson.",
-            "Contributed to rehearsal, performance and collaborative production in a juried high-school festival setting."
-          ]
-        },
-        {
-          "title": "Claude Watson Arts Program, Screen Arts",
-          "organization": "Earl Haig Secondary School",
-          "location": "Toronto",
-          "dates": "2005-2009",
-          "bullets": [
-            "Completed a Screen Arts focus spanning film and video production, performance, criticism and collaborative creative work.",
-            "Developed a foundation in visual storytelling, rehearsal, production and cultural interpretation."
-          ]
-        },
-        {
-          "title": "Volunteer Commercial",
-          "organization": "Street Kids International",
-          "location": "Toronto",
-          "dates": "2006",
-          "bullets": [
-            "Produced as part of the Claude Watson Screen Arts curriculum for a Canadian NGO focused on street children's health and rights.",
-            "Combined performance, production and public-interest communication."
-          ]
-        },
         {
           "title": "Volunteer, Event and Hospitality Operations",
           "organization": "BUMI Festival",
@@ -747,7 +728,17 @@
           "dates": "2025-Present",
           "bullets": [
             "Supports full festival operations: setup, check-in, guest and vendor service, food and beverage, backstage, grounds and cleaning.",
-            "Helps with transport, information, security and crowd support; participated in 2025 and 2026 planning."
+            "Supported transport, information, security, and crowd flow during festival operations and participated in 2025 and 2026 planning."
+          ]
+        },
+        {
+          "title": "Event Security and Front-of-House",
+          "organization": "Special events and nightclub contracts",
+          "location": "Toronto",
+          "dates": "c. 2018-2020",
+          "bullets": [
+            "Supported doors, guest flow and front-of-house operations at a downtown nightclub and rotating special events.",
+            "Used diplomatic conversation and de-escalation as the primary approach to conflict and crowd management."
           ]
         },
         {
@@ -761,20 +752,52 @@
           ]
         },
         {
-          "title": "Event Security and Front-of-House",
-          "organization": "Special events and nightclub contracts",
-          "location": "Toronto",
-          "dates": "c. 2018-2020",
+          "title": "On-Camera Commercial Work",
+          "organization": "GEICO and Street Kids International",
+          "location": "",
+          "dates": "2006 and 2012",
+          "url": "https://www.youtube.com/watch?v=bz-bDLya3gg",
           "bullets": [
-            "Supported doors, guest flow and front-of-house operations at a downtown nightclub and rotating special events.",
-            "Used diplomatic conversation and de-escalation as the primary approach to conflict and crowd management."
+            "Appeared in GEICO’s 2012 “California” commercial as an on-camera performer in the San Francisco trolley scene.",
+            "Served as the on-camera interviewer in a 2006 Street Kids International volunteer commercial produced through Claude Watson Screen Arts."
+          ]
+        },
+        {
+          "title": "Stage Performance",
+          "organization": "Claude Watson Arts Program",
+          "location": "Toronto and Ontario",
+          "dates": "2005-2008",
+          "bullets": [
+            "Acted in productions including Jesus Christ Superstar and the 2008 production One Thousand and One Nights.",
+            "Performed in Sears Ontario Drama Festival productions in 2005, 2006 and 2007 through Claude Watson."
+          ]
+        },
+        {
+          "title": "Screen Arts Production and Script Work",
+          "organization": "Earl Haig Secondary School",
+          "location": "Toronto",
+          "dates": "2005-2009",
+          "bullets": [
+            "Developed film and video production, interviewing, camera awareness and visual storytelling in Claude Watson Screen Arts.",
+            "Completed script writing and editing work in 2006 alongside performance and production training."
+          ]
+        },
+        {
+          "title": "Athletic and Movement Background",
+          "organization": "",
+          "location": "Toronto",
+          "dates": "Youth training",
+          "bullets": [
+            "Played competitive rep soccer with Spartacus Soccer Club from approximately 2001 to 2004 and completed five years of karate.",
+            "Completed Bronze Cross and First Aid at age 16, developing lifesaving and water-safety skills."
           ]
         }
       ],
       "credentials": [
         "AODA Accessibility Standards training - June 2026",
-        "Ontario Security Guard Licence - held during the COVID-19 period (historical)",
-        "Claude Watson Arts Program, Screen Arts - 2009"
+        "Claude Watson Arts Program, Screen Arts - 2009",
+        "Bronze Cross and First Aid - completed at age 16 (historical)",
+        "Ontario Security Guard Licence - held during the COVID-19 period (historical)"
       ],
       "route": "/saul/cv/performance/",
       "downloads": {
@@ -924,7 +947,7 @@
           "dates": "2025-Present",
           "bullets": [
             "Supports full festival operations: setup, check-in, guest and vendor service, food and beverage, backstage, grounds and cleaning.",
-            "Helps with transport, information, security and crowd support; participated in 2025 and 2026 planning."
+            "Supported transport, information, security, and crowd flow during festival operations and participated in 2025 and 2026 planning."
           ]
         },
         {
@@ -983,7 +1006,7 @@
           "dates": "2025-Present",
           "bullets": [
             "Supports full festival operations: setup, check-in, guest and vendor service, food and beverage, backstage, grounds and cleaning.",
-            "Helps with transport, information, security and crowd support; participated in 2025 and 2026 planning."
+            "Supported transport, information, security, and crowd flow during festival operations and participated in 2025 and 2026 planning."
           ]
         },
         {

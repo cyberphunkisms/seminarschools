@@ -1,0 +1,40 @@
+{
+  "release_id": "2026-07-18-mephistodata-sentence-discipline-final9",
+  "uploaded_baseline": {
+    "archive": "ss-site-map-archive-interaction-final8-audited-2026-07-18(1).zip",
+    "files": 2961,
+    "directories": 2209,
+    "entries": 5170
+  },
+  "final_tree": {
+    "files": 2970,
+    "directories_below_root": 2208,
+    "zip_entries_including_root": 5179
+  },
+  "verification": {
+    "central_release_runner": "86/86 passed in 16.5 seconds",
+    "focused_cv_routes": 13,
+    "representative_pdf_visual_renders": [
+      "general",
+      "performance",
+      "portfolio"
+    ],
+    "public_deploy_rebuilt": true,
+    "zip_integrity": "pending packaging"
+  },
+  "critical_sha256": {
+    "RELEASE_ID.txt": "0d1af3a3ad1e54d3b2dd0953a4562fbddfd45cdc3f7dcbbb015cad32885726f1",
+    "RELEASE_MANIFEST.json": "ab1c9e2cbb2b413dd3b65d7d749705adf5debfa8c4d8a29a09dae679b2de7c05",
+    "CHARTER.txt": "dc2d77eacc78258020c527e5606428bb67868eee54956649b6f70fd150547ba3",
+    "polymyth/methodologylist/index.html": "8104e6c009efc895bb74251ab0b4a0b80770c2483083acee3d399f1cba472861",
+    "polymyth/methodologylist-coreplus.txt": "2d2648d4b2fdff7578462fe0c99bb34d1966b258f79754bc87a4266367b7c61a",
+    "hf_export/ai_access_pack/MEPHISTODATA_ACTIVATION.md": "109ac4ebd4ed9910fb8e396eb877c41173e02cee40544e1a32e9b09862979042",
+    "index.html": "58fffb341796ef4b8deb9c38a970ab93bdb29bd62764c7d05b82eff0b44e36d5",
+    "main/index.html": "59c6f3251bb0f456efa3e65707ea31926f66f7a35438a400a8be427428a7a5fd",
+    "saul/index.html": "a7b6eec25400e13797c6a123cee217f4c29c09dc788967282fd7c7f5f120dcd2",
+    "data/saul-cv-canonical-2026.json": "db80f7144be4f6af2abb7c76d4d3f99270d149b88ed814ec103bb77408283d52",
+    "scripts/apply-final9-mephistodata-website-hardening.py": "af856a61283e28ca37093dcecf0e18aa52771cd8bbe3f607f78c70f0840815a1",
+    "scripts/verify-final9-mephistodata-website-hardening.js": "a589ca7018177d8b7e5146732816402e30ac668aaa68e1540700f69258335c32",
+    "docs/MEPHISTODATA_SENTENCE_DISCIPLINE_AND_WEBSITE_FINAL9_AUDIT_2026-07-18.md": "6ff5197865c22a0e97ae60dc9aa168287d90e806dc895177f856aeb12a5d9a3b"
+  }
+}

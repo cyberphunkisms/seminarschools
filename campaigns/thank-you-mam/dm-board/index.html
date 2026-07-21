@@ -1,18 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="description" content="Private teacher-facing campaign board for the Thank You Ma’am classroom campaign.">
-<link rel="canonical" href="https://seminarschools.com/campaigns/thank-you-mam/dm-board/">
-<meta property="og:title" content="DM Board · Thank You M'am · cmp-001">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://seminarschools.com/campaigns/thank-you-mam/dm-board/">
-<meta property="og:site_name" content="Seminar Schools">
-<meta name="twitter:card" content="summary">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="Private teacher-facing campaign board for the Thank You Ma’am classroom campaign." name="description"/>
+<link href="https://seminarschools.com/campaigns/thank-you-mam/dm-board/" rel="canonical"/>
+<meta content="DM Board · Thank You M'am · cmp-001" property="og:title"/>
+<meta content="website" property="og:type"/>
+<meta content="https://seminarschools.com/campaigns/thank-you-mam/dm-board/" property="og:url"/>
+<meta content="Seminar Schools" property="og:site_name"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>DM Board · Thank You M'am · cmp-001</title>
-<meta name="robots" content="noindex,nofollow">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta content="noindex,nofollow" name="robots"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 <style>
 :root {
   --bg: #1a1a1a;
@@ -255,77 +256,66 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 ::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--border); }
 </style>
-<link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
-<link rel="stylesheet" href="/css/alive.css?v=cl91">
-<link rel="stylesheet" href="/css/theme.css?v=cl91">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)" rel="stylesheet"/>
+<link href="/css/alive.css?v=cl91" rel="stylesheet"/>
+<link href="/css/theme.css?v=cl91" rel="stylesheet"/>
+<link data-site-wide-type-zoom="20260710-reviews-zoom-font-a" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" rel="stylesheet"/>
 </head>
 <body data-geometry="indra-web" data-indra-intensity="0.075">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="main-content"></div>
 <h1 class="sr-only">DM Board</h1>
-<style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
-<div class="board">
-
-  <!-- TOP BAR -->
-  <div class="topbar">
-    <span class="title">DM Board · cmp-001 · Thank You M'am</span>
-    <span class="clock" id="gameClock">SAT 11:00 PM</span>
-    <span style="color:var(--text-dim);font-size:11px" id="windowNote">Hour 29 of 63</span>
-    <div class="layer-toggle">
-      <button class="active" id="layerA" onclick="setLayer('A')">Layer A · Dream</button>
-      <button id="layerB" onclick="setLayer('B')">Layer B · Real</button>
-    </div>
-  </div>
-
-  <!-- LEFT PANEL -->
-  <div class="left">
-    <div class="panel-title">48-Hour Timeline</div>
-    <div class="timeline" id="timeline"></div>
-
-    <div class="panel-title" style="margin-top:12px">NPCs at Current Time</div>
-    <div class="npc-list" id="npcList"></div>
-  </div>
-
-  <!-- CENTER PANEL -->
-  <div class="center">
-    <div class="map-area">
-      <div class="scene-header">Active Scene</div>
-      <div class="scene-title" id="sceneTitle">East 128th Street between Madison and Park</div>
-      <div class="scene-desc" id="sceneDesc">Saturday 11 PM. Mrs. Luella Bates Washington Jones is walking home from the beauty shop. A large purse hangs from her shoulder. The street is lit by a single streetlight. Layer A overlay: Hughes texts ambient on building walls. A faint radio from an upper window plays WLIB.</div>
-
-      <div class="harlem-grid" id="harlemGrid"></div>
-    </div>
-
-    <div class="ambient-bar" id="ambientBar">
-      <div><span class="amb-label">Radio</span> WWRL 1600 AM (WLIB off air after sunset ~6:55 PM)</div>
-      <div><span class="amb-label">Apollo</span> R&B Revue format (specific Sep 19-25 bill UNVERIFIED)</div>
-      <div><span class="amb-label">News</span> King stabbing at Blumstein's, 3:20 PM today</div>
-    </div>
-
-    <div class="triggers">
-      <div class="panel-title">Active Threads at Current Crossing Point</div>
-      <div class="trigger-grid" id="triggerGrid"></div>
-    </div>
-  </div>
-
-  <!-- RIGHT PANEL -->
-  <div class="right">
-    <div class="panel-title">Bookworms</div>
-    <div id="bookwormList"></div>
-
-    <div class="panel-title" style="margin-top:16px">DM Tools</div>
-    <div class="dm-tools" id="dmTools"></div>
-
-    <div class="panel-title" style="margin-top:16px">Session Log</div>
-    <div class="session-log" id="sessionLog"></div>
-  </div>
-
+<style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div aria-label="Adjust text size" class="ss-fz"><button data-fz="down" title="Decrease text size" type="button">A-</button><button data-fz="up" title="Increase text size" type="button">A+</button><button class="reset" data-fz="reset" style="display:none" title="Reset text size" type="button">↺</button></div>
+<div class="board" role="main">
+<!-- TOP BAR -->
+<div class="topbar">
+<span class="title">DM Board · cmp-001 · Thank You M'am</span>
+<span class="clock" id="gameClock">SAT 11:00 PM</span>
+<span id="windowNote" style="color:var(--text-dim);font-size:11px">Hour 29 of 63</span>
+<div class="layer-toggle">
+<button class="active" id="layerA" onclick="setLayer('A')">Layer A · Dream</button>
+<button id="layerB" onclick="setLayer('B')">Layer B · Real</button>
 </div>
-
+</div>
+<!-- LEFT PANEL -->
+<div class="left">
+<div class="panel-title">48-Hour Timeline</div>
+<div class="timeline" id="timeline"></div>
+<div class="panel-title" style="margin-top:12px">NPCs at Current Time</div>
+<div class="npc-list" id="npcList"></div>
+</div>
+<!-- CENTER PANEL -->
+<div class="center">
+<div class="map-area">
+<div class="scene-header">Active Scene</div>
+<div class="scene-title" id="sceneTitle">East 128th Street between Madison and Park</div>
+<div class="scene-desc" id="sceneDesc">Saturday 11 PM. Mrs. Luella Bates Washington Jones is walking home from the beauty shop. A large purse hangs from her shoulder. The street is lit by a single streetlight. Layer A overlay: Hughes texts ambient on building walls. A faint radio from an upper window plays WLIB.</div>
+<div class="harlem-grid" id="harlemGrid"></div>
+</div>
+<div class="ambient-bar" id="ambientBar">
+<div><span class="amb-label">Radio</span> WWRL 1600 AM (WLIB off air after sunset ~6:55 PM)</div>
+<div><span class="amb-label">Apollo</span> R&amp;B Revue format (specific Sep 19-25 bill UNVERIFIED)</div>
+<div><span class="amb-label">News</span> King stabbing at Blumstein's, 3:20 PM today</div>
+</div>
+<div class="triggers">
+<div class="panel-title">Active Threads at Current Crossing Point</div>
+<div class="trigger-grid" id="triggerGrid"></div>
+</div>
+</div>
+<!-- RIGHT PANEL -->
+<div class="right">
+<div class="panel-title">Bookworms</div>
+<div id="bookwormList"></div>
+<div class="panel-title" style="margin-top:16px">DM Tools</div>
+<div class="dm-tools" id="dmTools"></div>
+<div class="panel-title" style="margin-top:16px">Session Log</div>
+<div class="session-log" id="sessionLog"></div>
+</div>
+</div>
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" id="modalContent"></div>
+<div class="modal" id="modalContent"></div>
 </div>
-
 <script>
 // ===== GAME STATE =====
 const state = {
@@ -681,10 +671,10 @@ renderBookworms();
 renderDMTools();
 renderLog();
 </script>
-<script src="/js/theme.js?v=cl91" defer></script>
-<script src="/js/mandala.js?v=cl91" defer></script>
-<script src="/js/indra.js?v=cl91" defer></script>
-<script src="/js/footer.js?v=cl91" defer></script>
-<script defer src="/js/site-keyboard-enhancements.js"></script>
+<script defer="" src="/js/theme.js?v=cl91"></script>
+<script defer="" src="/js/mandala.js?v=cl91"></script>
+<script defer="" src="/js/indra.js?v=cl91"></script>
+<script defer="" src="/js/footer.js?v=20260719-audit11-decisions"></script>
+<script defer="" src="/js/site-keyboard-enhancements.js"></script>
 </body>
 </html>

@@ -116,6 +116,10 @@ function execMotionCamera(){
 const rows=[], fails=[];
 for(const f of walk(ROOT)){
   const s = read(f), p = pagePath(f);
+  if (/http-equiv=["']refresh["']/i.test(s) && /location\.replace\(/.test(s)) {
+    rows.push({p, outcome:'redirect', fail:[]});
+    continue;
+  }
   // Search-surface pages are deliberately plain, static documents. They carry
   // content, schema, and canonical URLs rather than project-specific motion.
   if (s.includes('name="generator" content="Seminar Schools Static Search Surface"')) {
@@ -130,7 +134,7 @@ for(const f of walk(ROOT)){
   const callsCam=/\.initScrollCamera\s*\(/.test(s);   // the CALL, not a guard reference
   const secCount=(s.match(/<section/g)||[]).length;
   const tier=tierFor(p);
-  // inline-build pages build their own SVG via private inline code (main, saul);
+  // inline-build pages build their own SVG via private inline code (about, saul);
   // the harness cannot execute that, so they are checked structurally + camera-run.
   const inlineBuilder = /buildGeo\s*\(/.test(s) || /getElementById\((["'])(geo|geoLayer)\1\)\.innerHTML\s*=/.test(s);
   const motionSelf = /addEventListener\('scroll'/.test(s) && /setProperty\('--geo-(scale|tx|ty)'/.test(s);

@@ -1,0 +1,66 @@
+{
+  "generated_at": "2026-07-21T12:00:00-04:00",
+  "baseline_canonical_events": 513,
+  "research_records": 349,
+  "specific_verified_records": 327,
+  "research_source_calendar_placeholders_excluded": 22,
+  "research_already_present_excluded": 1,
+  "candidate_records_selected": 326,
+  "inserted": 326,
+  "skipped_on_live_canonical_dedup": [],
+  "skipped_as_already_imported_manual": [],
+  "final_canonical_events_before_publication_rebuild": 839,
+  "inserted_by_city": {
+    "Brampton": 8,
+    "Brockville": 21,
+    "Burlington": 4,
+    "Cambridge": 17,
+    "Cornwall": 21,
+    "Dollard-des-Ormeaux": 5,
+    "Gananoque": 38,
+    "Guelph": 6,
+    "Hamilton": 15,
+    "Kingston": 25,
+    "Kitchener": 1,
+    "Markham": 12,
+    "Mississauga": 8,
+    "Montréal": 34,
+    "Oakville": 6,
+    "Online": 1,
+    "Ontario": 1,
+    "Pointe-Claire": 4,
+    "Prescott": 4,
+    "Richmond Hill": 3,
+    "South Dundas": 5,
+    "South Stormont": 25,
+    "Toronto": 31,
+    "Vaudreuil-Dorion": 16,
+    "Vaughan": 5,
+    "Waterloo": 10
+  },
+  "inserted_by_type": {
+    "community": 65,
+    "conference": 3,
+    "exhibition": 26,
+    "festival": 43,
+    "lecture": 10,
+    "meeting": 40,
+    "performance": 85,
+    "reading": 11,
+    "screening": 24,
+    "workshop": 19
+  },
+  "confirmation_status": {
+    "confirmed": 25,
+    "unconfirmed": 301
+  },
+  "qualified_uncertainty_reasons": {
+    "location-unconfirmed": 298,
+    "time-unconfirmed": 211
+  },
+  "source_files": {
+    "research": "data/research/polymythcal-2026-07-21/research.json",
+    "manual": "data/manual-events.json",
+    "canonical": "polymythseminars/events.json"
+  }
+}

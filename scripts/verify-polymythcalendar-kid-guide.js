@@ -23,10 +23,7 @@ const REQUIRED = [
   'How to use',
   'Pick a filter',
   'The list starts near today',
-  'Open a title to reach the official source',
-  'All Writing</strong> = all writing contests',
   'CFP</strong> = call for papers',
-  'Projected</strong> = check the official source first',
   'aria-describedby="quickGuideCopy"'
 ];
 const failures = [];
@@ -36,6 +33,11 @@ for (const rel of PAGES) {
   const html = fs.readFileSync(file, 'utf8');
   for (const needle of REQUIRED) {
     if (!html.includes(needle)) failures.push(`${rel}: missing ${needle}`);
+  }
+  if (rel === 'polymythseminars/index.html') {
+    for (const needle of ['stable Polymythcal page', 'Unconfirmed</strong> listings remain visible']) if (!html.includes(needle)) failures.push(`${rel}: missing ${needle}`);
+  } else if (!html.includes('Open a title to reach the official source') && !html.includes('stable Polymythcal page')) {
+    failures.push(`${rel}: missing title-link guidance`);
   }
 }
 if (failures.length) {

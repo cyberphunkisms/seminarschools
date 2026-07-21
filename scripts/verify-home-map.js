@@ -15,7 +15,7 @@ function check(ok, label) {
 check(home.includes("class:'label-plate'"), 'map label plates exist');
 check(!home.includes('paint-order:stroke;stroke:var(--bg);stroke-width:4px'), 'map labels no longer use halo strokes');
 check(home.includes('class="map-rail" id="mapRail"'), 'mobile project rail exists');
-check(home.includes("href:'/main/', tier:0"), 'core jewel opens the conceptual centre');
+check(home.includes("href:'/about/', tier:0"), 'core jewel opens the conceptual centre');
 check(home.includes("href:'/bb/', tier:3"), 'bookwormburrows jewel routes to its landing page');
 check(home.includes("role:'button'") && home.includes("aria-pressed"), 'jewels expose selected state');
 check(home.includes('lastPointer') && home.includes("lastPointer==='touch'"), 'touch uses select-before-navigate behavior');

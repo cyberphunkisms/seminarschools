@@ -1,6 +1,6 @@
 # Meaninglib search verification report
 
-Generated: 2026-07-16T19:05:35.409Z
+Generated: 2026-07-20T14:21:34.715Z
 
 Index: hf_export/search/meaninglib_search_index.json
 Documents: 2054
@@ -30,11 +30,11 @@ Query: interdependence rule
    - hf_export/README.md
 2. [ml] CL-60 INTERDEPENDENT DEFINITION — define each element by its own function and its interlock, never by ordinal or list-position (2026-06-14) (150.20)
    - hf_export/data/all_meaninglib_rows.jsonl
-3. [ml] Meaninglib (mother-category for all * files, scanner-tier of polymyth) (127.99)
+3. [ml] Meaninglib (mother-category for all * files, scanner-tier of polymyth) (127.95)
    - hf_export/data/all_meaninglib_rows.jsonl
 4. [ml] JAZZ rule (folds Modularity rule and Interdependency rule into both-at-once name) (98.15)
    - hf_export/data/all_meaninglib_rows.jsonl
-5. [mc] ml* deep reading — canonical-source discipline (88.56)
+5. [mc] ml* deep reading — canonical-source discipline (88.54)
    - hf_export/data/all_meaninglib_rows.jsonl
 
 ### PASS: Rejected ML hierarchy language retrieves ontology guard
@@ -152,7 +152,7 @@ Query: HTML txt mirror
    - hf_export/data/all_meaninglib_rows.jsonl
 3. [manifest] methodologylist section manifest (184.30)
    - hf_export/data/all_meaninglib_rows.jsonl
-4. [ml] methodologylist full text mirror (163.40)
+4. [ml] methodologylist full text mirror (163.39)
    - hf_export/data/all_meaninglib_rows.jsonl
 5. [ml] CORE slot 4 mirror — Mearsheimer (148.02)
    - hf_export/data/all_meaninglib_rows.jsonl

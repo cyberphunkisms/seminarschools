@@ -633,6 +633,8 @@
     #user-input{font-size:1.1rem;padding:0.4rem 0;min-height:32px}
     /* Toggles bar gets out of the way on phones. */
     #toggles{position:relative;top:auto;right:auto;justify-content:flex-end;padding:0.6rem 1rem 0;gap:0.8rem}
+    #toggles button,#toggles a{min-width:44px;min-height:44px;padding:.45rem .55rem}
+    .legend-toggle{width:44px;height:44px;min-width:44px;min-height:44px}
     /* The header takes less space. */
     .header{font-size:0.95rem;padding:0.5rem 1rem}
     /* Menu rows finger-friendly. */
@@ -849,8 +851,10 @@
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
 <link rel="stylesheet" href="/css/theme.css?v=cl91">
 <link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<style id="final8-linklike-button">.linklike-button{appearance:none;border:0;background:none;color:inherit;font:inherit;padding:0;text-decoration:underline;text-underline-offset:.18em;cursor:pointer}</style>
 </head>
 <body class="bypass-mode bookwormcard-page" data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="game-tool" data-page-weight="heavy">
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:none;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 <!-- bb* QR logo -->
 <a href="/bookwormcard/" title="Bookwormcard. Scan with phone or click to open." aria-label="Bookwormburrows ouroboros QR. Links to bookwormcard." style="position:fixed;top:20px;right:20px;width:72px;height:72px;z-index:9999;display:none;background:transparent;border:none;line-height:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);border-radius:6px;overflow:hidden;"><img loading="lazy" src="/bookwormcard/qr-ouroboros-indra.png" alt="bb* ouroboros QR logo" width="405" height="405" style="width:100%;height:100%;display:block;"></a>
@@ -936,37 +940,37 @@
   <input type="hidden" name="birth-minute" aria-hidden="true">
   <input type="hidden" name="birth-place" aria-hidden="true">
   <input type="hidden" name="animal" aria-hidden="true">
-  <textarea name="backstory" aria-hidden="true" hidden></textarea>
-  <textarea name="motivation" aria-hidden="true" hidden></textarea>
-  <textarea name="fear" aria-hidden="true" hidden></textarea>
-  <textarea name="flaw" aria-hidden="true" hidden></textarea>
-  <textarea name="bond" aria-hidden="true" hidden></textarea>
-  <textarea name="ideal" aria-hidden="true" hidden></textarea>
-  <textarea name="secret" aria-hidden="true" hidden></textarea>
-  <textarea name="pivotal-event" aria-hidden="true" hidden></textarea>
-  <textarea name="mixes" aria-hidden="true" hidden></textarea>
-  <textarea name="wildcard" aria-hidden="true" hidden></textarea>
-  <textarea name="trait-unlearned" aria-hidden="true" hidden></textarea>
-  <textarea name="trait-avoided" aria-hidden="true" hidden></textarea>
-  <textarea name="trait-surfacing" aria-hidden="true" hidden></textarea>
-  <textarea name="cognition" aria-hidden="true" hidden></textarea>
-  <textarea name="belief-loud" aria-hidden="true" hidden></textarea>
-  <textarea name="belief-quiet" aria-hidden="true" hidden></textarea>
-  <textarea name="belief-doubted" aria-hidden="true" hidden></textarea>
-  <textarea name="dilemma-friend" aria-hidden="true" hidden></textarea>
-  <textarea name="dilemma-stranger" aria-hidden="true" hidden></textarea>
-  <textarea name="dilemma-witness" aria-hidden="true" hidden></textarea>
-  <textarea name="teach-short" aria-hidden="true" hidden></textarea>
-  <textarea name="teach-long" aria-hidden="true" hidden></textarea>
-  <textarea name="face-after" aria-hidden="true" hidden></textarea>
+  <textarea name="backstory" aria-hidden="true" hidden aria-label="Backstory"></textarea>
+  <textarea name="motivation" aria-hidden="true" hidden aria-label="Motivation"></textarea>
+  <textarea name="fear" aria-hidden="true" hidden aria-label="Fear"></textarea>
+  <textarea name="flaw" aria-hidden="true" hidden aria-label="Flaw"></textarea>
+  <textarea name="bond" aria-hidden="true" hidden aria-label="Bond"></textarea>
+  <textarea name="ideal" aria-hidden="true" hidden aria-label="Ideal"></textarea>
+  <textarea name="secret" aria-hidden="true" hidden aria-label="Secret"></textarea>
+  <textarea name="pivotal-event" aria-hidden="true" hidden aria-label="Pivotal Event"></textarea>
+  <textarea name="mixes" aria-hidden="true" hidden aria-label="Mixes"></textarea>
+  <textarea name="wildcard" aria-hidden="true" hidden aria-label="Wildcard"></textarea>
+  <textarea name="trait-unlearned" aria-hidden="true" hidden aria-label="Trait Unlearned"></textarea>
+  <textarea name="trait-avoided" aria-hidden="true" hidden aria-label="Trait Avoided"></textarea>
+  <textarea name="trait-surfacing" aria-hidden="true" hidden aria-label="Trait Surfacing"></textarea>
+  <textarea name="cognition" aria-hidden="true" hidden aria-label="Cognition"></textarea>
+  <textarea name="belief-loud" aria-hidden="true" hidden aria-label="Belief Loud"></textarea>
+  <textarea name="belief-quiet" aria-hidden="true" hidden aria-label="Belief Quiet"></textarea>
+  <textarea name="belief-doubted" aria-hidden="true" hidden aria-label="Belief Doubted"></textarea>
+  <textarea name="dilemma-friend" aria-hidden="true" hidden aria-label="Dilemma Friend"></textarea>
+  <textarea name="dilemma-stranger" aria-hidden="true" hidden aria-label="Dilemma Stranger"></textarea>
+  <textarea name="dilemma-witness" aria-hidden="true" hidden aria-label="Dilemma Witness"></textarea>
+  <textarea name="teach-short" aria-hidden="true" hidden aria-label="Teach Short"></textarea>
+  <textarea name="teach-long" aria-hidden="true" hidden aria-label="Teach Long"></textarea>
+  <textarea name="face-after" aria-hidden="true" hidden aria-label="Face After"></textarea>
   <input type="hidden" name="xp" aria-hidden="true">
   <input type="hidden" name="hp" aria-hidden="true">
   <input type="hidden" name="tier" aria-hidden="true">
   <input type="hidden" name="level" aria-hidden="true">
-  <textarea name="stats" aria-hidden="true" hidden></textarea>
-  <textarea name="quirks" aria-hidden="true" hidden></textarea>
-  <textarea name="quality-history" aria-hidden="true" hidden></textarea>
-  <textarea name="card-text" aria-hidden="true" hidden></textarea>
+  <textarea name="stats" aria-hidden="true" hidden aria-label="Stats"></textarea>
+  <textarea name="quirks" aria-hidden="true" hidden aria-label="Quirks"></textarea>
+  <textarea name="quality-history" aria-hidden="true" hidden aria-label="Quality History"></textarea>
+  <textarea name="card-text" aria-hidden="true" hidden aria-label="Card Text"></textarea>
   <input type="hidden" name="hash" aria-hidden="true">
   <input type="hidden" name="hegeliane-full" aria-hidden="true">
 </form>
@@ -1034,7 +1038,7 @@
 
 <div class="layout">
   <h2 class="sr-only">Bookwormcard · BookwormBurrows character gate</h2>
-<main class="terminal">
+<main id="main-content" class="terminal">
     <div class="header">
       <span>bookwormburrows · <b>/bookwormcard/</b></span>
       <span class="progress-dots" id="progress-dots"></span>
@@ -1081,7 +1085,7 @@
   <span><b>buttons</b> · back · skip · why · finish · enter</span>
   <span><b>typed shortcuts</b> · skip · why · finish</span>
   <span class="skip-game-link"><a href="/bookwormcard/glossary/">glossary · what the symbols mean →</a></span>
-  <span class="skip-game-link"><a href="#" id="resume-from-file" role="button">resume from a saved wormcard →</a></span>
+  <span class="skip-game-link"><button id="resume-from-file" class="linklike-button" type="button">resume from a saved wormcard →</button></span>
   <span class="skip-game-link"><a href="/bookwormcard/print/?blank=1">skip the game · download blank card →</a></span>
 </div>
 
@@ -5051,7 +5055,7 @@ document.addEventListener('click', function(e){
 <script src="/js/theme.js?v=cl91" defer></script>
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
-<script src="/js/footer.js?v=cl91" defer></script>
+<script src="/js/footer.js?v=20260719-audit11-decisions" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
 <script defer src="/js/site-keyboard-enhancements.js"></script>
 </body>

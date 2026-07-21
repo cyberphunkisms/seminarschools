@@ -22,7 +22,7 @@ for (const route of POLY_ROUTES){
   const html = read(rel);
   if (!/<h1>\s*Polymythcal\s*<\/h1>/.test(html)) errors.push(`${rel} visible h1 is not stable Polymythcal`);
   if (!/id="polymythContext"/.test(html) || !/id="polymythDescription"/.test(html)) errors.push(`${rel} missing context/description fields`);
-  if (!/id="quickGuideCopy"/.test(html) || !/Open a title to reach the official source|Open a title for the official source/.test(html)) errors.push(`${rel} missing plain-language use guide`);
+  if (!/id="quickGuideCopy"/.test(html) || !/Open a title to reach the official source|Open a title for the official source|Open a title for the stable Polymythcal page/.test(html)) errors.push(`${rel} missing plain-language use guide`);
   if (/onclick="/.test(html)) errors.push(`${rel} contains inline onclick handler`);
   if (/document\.title/.test(html)) errors.push(`${rel} mutates document.title`);
   if (/scheduleScrollToToday\('auto'\);\s*}\s*}\s*function dispatchRender/.test(html)) errors.push(`${rel} still anchors on every dispatchRender`);
