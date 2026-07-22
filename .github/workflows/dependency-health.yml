@@ -1,0 +1,62 @@
+name: Dependency health
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "37 13 * * 1"
+  push:
+    paths:
+      - package.json
+      - package-lock.json
+      - .github/workflows/dependency-health.yml
+      - .github/dependabot.yml
+  pull_request:
+    paths:
+      - package.json
+      - package-lock.json
+      - .github/workflows/dependency-health.yml
+      - .github/dependabot.yml
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Setup Node 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Install locked production dependencies
+        run: npm ci --omit=dev --no-audit --no-fund
+      - name: Verify lockfile and dependency contract
+        run: node scripts/verify-dependency-health.js
+      - name: Query npm vulnerability advisories with retries
+        shell: bash
+        run: |
+          set +e
+          status=1
+          for attempt in 1 2 3; do
+            npm audit --omit=dev --audit-level=high --json > npm-audit.json
+            status=$?
+            if [ "$status" -eq 0 ]; then
+              break
+            fi
+            if grep -q '"vulnerabilities"' npm-audit.json; then
+              break
+            fi
+            sleep $((attempt * 15))
+          done
+          cat npm-audit.json
+          exit "$status"
+      - name: Upload advisory evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: npm-audit-report
+          path: npm-audit.json
+          if-no-files-found: warn

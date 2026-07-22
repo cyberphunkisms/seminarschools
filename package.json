@@ -120,9 +120,16 @@
     "verify:polymythcal-audit14": "node scripts/verify-polymythcal-audit14.js",
     "audit:polymythcal-wcag22": "python3 scripts/audit-polymythcal-wcag22.py",
     "verify:polymythcal-complete": "npm run test:polymythcal-adapters && npm run test:polymythcal-lifecycle && npm run build:polymythcal && npm run audit:polymythcal-wcag22 && npm run verify:polymythcal-audit14",
-    "verify:polymyth-entry-points": "node scripts/verify-polymyth-entry-points.js"
+    "verify:polymyth-entry-points": "node scripts/verify-polymyth-entry-points.js",
+    "verify:polymythcal-build-efficiency": "node scripts/verify-polymythcal-build-efficiency.js",
+    "build": "node scripts/build-search-pages.js && node scripts/build-writing-shortcuts.js && node scripts/build-academic-shortcuts.js && node scripts/apply-sitewide-type-zoom-link.js && node scripts/apply-type-floor.js && node scripts/build-public-deploy.js && node scripts/verify-polymythcal-build-efficiency.js",
+    "verify:predeploy-automation": "node scripts/verify-predeploy-automation.js"
   },
   "dependencies": {
-    "@netlify/blobs": "^10.1.0"
-  }
+    "@netlify/blobs": "10.1.0"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "packageManager": "npm@11"
 }

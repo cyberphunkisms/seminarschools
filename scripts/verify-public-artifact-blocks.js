@@ -5,6 +5,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const redirects = fs.existsSync(path.join(ROOT, '_redirects')) ? fs.readFileSync(path.join(ROOT, '_redirects'), 'utf8') : '';
 const toml = fs.existsSync(path.join(ROOT, 'netlify.toml')) ? fs.readFileSync(path.join(ROOT, 'netlify.toml'), 'utf8') : '';
+const packageDoc = fs.existsSync(path.join(ROOT, 'package.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')) : {};
 const failures = [];
 function escRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 function hasRedirectsBlock(pattern) {
@@ -24,31 +25,31 @@ function publishDir() {
 }
 const publish = publishDir();
 if (publish !== 'public') failures.push(`netlify.toml publish directory is "${publish}"; expected "public" so full zip root stays archive/operator and only /public deploys.`);
-if (!/build-public-deploy\.js/.test(toml)) failures.push('netlify.toml build command does not generate the public publish directory.');
+const netlifyRunsCanonicalBuild = /command\s*=\s*"npm run build"/.test(toml) && /build-public-deploy\.js/.test(packageDoc.scripts?.build || '');
+if (!/build-public-deploy\.js/.test(toml) && !netlifyRunsCanonicalBuild) failures.push('Netlify build does not generate the public publish directory through the canonical package build command.');
 const rootFiles = fs.readdirSync(ROOT, { withFileTypes: true })
   .filter(d => d.isFile())
   .map(d => d.name);
 const rootArtifactRe = /(?:AUDIT|REPORT|PATCH|VERIFY|VERIFY_ALL|OUTPUT|SETUP|DEPLOY|V10|MEANINGLIB|CL_SUGGESTION|PRIVATE|SECRET|TOKEN|CRITIQUE|DASHBOARD|HANDOFF|RELEASE)/i;
-for (const name of rootFiles) {
-  const publicPath = '/' + name;
-  if (/\.(?:bat|ps1|py)$/i.test(name)) requireBlock(publicPath, 'root executable/operator file');
-  if (rootArtifactRe.test(name) && /\.(?:md|json|txt|log|csv)$/i.test(name)) {
-    requireBlock(publicPath, 'root audit/report/operator artifact');
+// When Netlify publishes /public, root source/operator files are outside the
+// deploy surface by construction. Require route-level blocks only for legacy
+// root-publish configurations; always scan the actual /public output below.
+if (publish !== 'public') {
+  for (const name of rootFiles) {
+    const publicPath = '/' + name;
+    if (/\.(?:bat|ps1|py)$/i.test(name)) requireBlock(publicPath, 'root executable/operator file');
+    if (rootArtifactRe.test(name) && /\.(?:md|json|txt|log|csv)$/i.test(name)) {
+      requireBlock(publicPath, 'root audit/report/operator artifact');
+    }
   }
+  for (const pattern of [
+    '/data', '/data/', '/data/*', '/scripts', '/scripts/', '/scripts/*',
+    '/.github', '/.github/', '/.github/*', '/hf_export', '/hf_export/', '/hf_export/*',
+    '/node_modules', '/node_modules/', '/node_modules/*', '/netlify', '/netlify/', '/netlify/*',
+    '/.env', '/.env.local', '/.npmrc', '/.gitignore', '/.env.example', '/netlify.env.example',
+    '/package.json', '/package-lock.json', '/netlify.toml', '/_redirects', '/_headers', '/CHARTER.txt'
+  ]) requireBlock(pattern, 'tooling/private path');
 }
-for (const pattern of [
-  '/data', '/data/', '/data/*',
-  '/scripts', '/scripts/', '/scripts/*',
-  '/.github', '/.github/', '/.github/*',
-  '/hf_export', '/hf_export/', '/hf_export/*',
-  '/node_modules', '/node_modules/', '/node_modules/*',
-  '/netlify', '/netlify/', '/netlify/*',
-  '/.env', '/.env.local', '/.npmrc', '/.gitignore',
-  '/.env.example', '/netlify.env.example',
-  '/package.json', '/package-lock.json',
-  '/netlify.toml', '/_redirects', '/_headers',
-  '/CHARTER.txt'
-]) requireBlock(pattern, 'tooling/private path');
 // If /public exists locally, scan it as the true deploy surface.
 const pubRoot = path.join(ROOT, 'public');
 if (fs.existsSync(pubRoot)) {

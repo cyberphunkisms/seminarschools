@@ -2,17 +2,17 @@
 # seminarschools.com static site
 
 [build]
-  command = "node scripts/build-search-pages.js && node scripts/build-writing-shortcuts.js && node scripts/apply-sitewide-type-zoom-link.js && node scripts/apply-type-floor.js && node scripts/build-public-deploy.js"
+  command = "npm run build"
   publish = "public"
   # Credit conservation (June 6 2026): skip the build entirely when a push
-  # touches only non-public plumbing (scraper code, workflows, scrape logs,
-  # history snapshots). Exit 0 = skip, exit 1 = build, mirroring git diff
+  # touches only workflow metadata, historical snapshots, scrape summaries,
+  # or generated verifier reports. Build scripts remain deploy-affecting. Exit 0 = skip, exit 1 = build, mirroring git diff
   # --quiet semantics. Robot pushes still build because they change
   # seminars/ and festivals/ alongside the logs.
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)scripts/' ':(exclude).github/' ':(exclude)data/history/' ':(exclude)data/scrape-log.json'"
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude).github/' ':(exclude)data/history/' ':(exclude)data/scrape-log.json' ':(exclude)scripts/reports/'"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "24"
   NPM_CONFIG_REGISTRY = "https://registry.npmjs.org/"
 
 [functions]

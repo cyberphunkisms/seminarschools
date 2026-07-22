@@ -32,8 +32,9 @@ subprocess.run(["node", "--check", str(js_path)], check=True)
 check("JavaScript syntax", True)
 
 soup = BeautifulSoup(page_path.read_text(encoding="utf-8"), "html.parser")
-old_ids = ["quickFocusNav", "filterNav", "ageNav", "academicNav", "writingNav", "calendarSearch"]
+old_ids = ["quickFocusNav", "filterNav", "ageNav", "calendarSearch"]
 check("old mutually exclusive filter system removed", not any(soup.select_one(f"#{x}") for x in old_ids))
+check("academic entry points remain links rather than mutually exclusive controls", len(soup.select("#academicNav a[href]")) == 6 and not soup.select("#academicNav button"))
 check("ambiguous Deadlines button removed", not any(x.get_text(" ", strip=True) == "Deadlines" for x in soup.select("button, label, a")))
 check("attend and apply are independent checkboxes", len(soup.select('input[type="checkbox"][data-state-set="content"]')) == 2)
 check("places are multi-select checkboxes", len(soup.select('input[type="checkbox"][data-state-set="places"]')) >= 9)
@@ -132,7 +133,7 @@ with sync_playwright() as p:
 test_html.unlink(missing_ok=True)
 
 report = {
-    "release": "Polymythcal clarity revamp",
+    "release": "PolymythCAL Audit 18 predeploy",
     "date": "2026-07-21",
     "checks_passed": sum(1 for x in results if x["passed"]),
     "checks_total": len(results),

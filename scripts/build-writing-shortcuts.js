@@ -34,7 +34,7 @@ function isYouthWritingContest(e){ return Array.isArray(e.writing_bands) && e.wr
 function bandMatches(e, band){ if(band==='club') return true; const explicit=Array.isArray(e.writing_bands)?e.writing_bands.map(x=>String(x).toLowerCase()):[]; return explicit.includes(band); }
 function staticEventCard(event){
   const d=new Date(event.date);
-  const route=`/polymythseminars/events/${slug(event.id || event.title)}-${hash(event.id || event.title)}/`;
+  const route=`/polymythseminars/events/${encodeURIComponent(event.id || event.identity_key || event.title)}/`;
   const date=event.end_date?`${humanDate(event.date)} to ${humanDate(event.end_date)}`:humanDate(event.date);
   const day=Number.isNaN(d.getTime())?'':new Intl.DateTimeFormat('en-CA',{day:'2-digit',timeZone:'America/Toronto'}).format(d);
   const mon=Number.isNaN(d.getTime())?'':new Intl.DateTimeFormat('en-CA',{month:'short',timeZone:'America/Toronto'}).format(d);
@@ -80,7 +80,7 @@ function main(){
   const current = (data.events || []).filter(isYouthWritingContest).filter(eventEligible).sort((a,b)=>String(a.date).localeCompare(String(b.date)));
   let writes=0;
   for (const [slug, info] of Object.entries(ROUTES)) {
-    let html = read('polymythseminars/index.html');
+    let html = read(`${slug}/index.html`);
     const events = current.filter(e=>bandMatches(e, info.band));
     const markup = `<div class="ssr-event-list" data-ssr-events="true"><p class="sr-only">${events.length} writing competition listings are listed below. Use the controls above to filter them when JavaScript is available.</p>${events.map(staticEventCard).join('\n')}</div>`;
     html = html.replace(/<script(?=[^>]*id=["']events-fallback["'])(?=[^>]*type=["']application\/json["'])[^>]*>[\s\S]*?<\/script>/, `<script type="application/json" id="events-fallback" data-source="/polymythseminars/events.json">${JSON.stringify({ _comment: 'Route-specific fallback. Full canonical data loads from /polymythseminars/events.json and remains mirrored on /polymythseminars/.', _generated_at: data._generated_at, _total_events: events.length, count: events.length, events })}</script>`);

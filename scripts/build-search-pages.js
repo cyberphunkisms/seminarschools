@@ -353,12 +353,31 @@ function injectEventRoot(events) {
   const rel='polymythseminars/index.html';
   let html=read(rel);
   const current=events.filter(eventEligible).sort((a,b)=>String(a.date).localeCompare(String(b.date)));
-  const markup=`<div class="ssr-event-list" data-ssr-events="true"><p class="sr-only">${current.length} upcoming calendar entries are listed below. Use the controls above to filter them when JavaScript is available.</p>${current.map(staticEventCard).join('\n')}</div>`;
-  if (!html.includes('id="eventsContainer"')) throw new Error('Calendar event injection point is missing');
-  html=replaceDivInner(html, 'eventsContainer', `<!-- SS_STATIC_EVENTS_START -->${markup}<!-- SS_STATIC_EVENTS_END -->`);
-  html=html.replace(/<div class="count-line" id="countLine"[^>]*>[\s\S]*?<\/div>/, `<div class="count-line" id="countLine" role="status" aria-live="polite" aria-atomic="true">${current.length} upcoming events</div>`);
-  write(rel,html);
-  return current;
+
+  // Legacy calendar pages render their complete event list into #eventsContainer.
+  // The Audit 16 calendar is intentionally a lightweight client shell backed by
+  // /polymythseminars/events.json and stable event-detail pages. Re-injecting all
+  // events into that shell would restore the 1.6+ MB page that the revamp removed.
+  if (html.includes('id="eventsContainer"')) {
+    const markup=`<div class="ssr-event-list" data-ssr-events="true"><p class="sr-only">${current.length} upcoming calendar entries are listed below. Use the controls above to filter them when JavaScript is available.</p>${current.map(staticEventCard).join('\n')}</div>`;
+    html=replaceDivInner(html, 'eventsContainer', `<!-- SS_STATIC_EVENTS_START -->${markup}<!-- SS_STATIC_EVENTS_END -->`);
+    html=html.replace(/<div class="count-line" id="countLine"[^>]*>[\s\S]*?<\/div>/, `<div class="count-line" id="countLine" role="status" aria-live="polite" aria-atomic="true">${current.length} upcoming events</div>`);
+    write(rel,html);
+    return current;
+  }
+
+  const clientShell = html.includes('id="pmEventList"')
+    && /\/js\/polymythcal-revamp\.js/.test(html)
+    && /<noscript>[\s\S]*RSS and calendar feeds[\s\S]*site map/i.test(html);
+  if (clientShell) {
+    // Remove stale legacy payloads if an older generated page was merged into the
+    // new shell. The live controller fetches the canonical JSON data instead.
+    html=html.replace(/<!-- SS_STATIC_EVENTS_START -->[\s\S]*?<!-- SS_STATIC_EVENTS_END -->/g, '');
+    write(rel,html);
+    return current;
+  }
+
+  throw new Error('Calendar root supports neither the legacy #eventsContainer mount nor the Polymythcal client-shell contract');
 }
 function archiveGeneratedEventPage(ix) {
   if (!fs.existsSync(ix)) return;
@@ -374,6 +393,13 @@ function archiveGeneratedEventPage(ix) {
     html = html.replace(/(<h1\b[^>]*>[\s\S]*?<\/h1>)/i, `$1${note}`);
   }
   write(path.relative(ROOT, ix).split(path.sep).join('/'), html);
+}
+function archiveExpiredStableEventPages(events) {
+  for (const event of events) {
+    if (eventEligible(event)) continue;
+    const stable = path.join(ROOT, sourcePathFor(eventRoute(event)));
+    archiveGeneratedEventPage(stable);
+  }
 }
 function cleanGeneratedEventPages(currentRoutes) {
   const base = path.join(ROOT, 'polymythseminars', 'events');
@@ -482,9 +508,11 @@ function main(){
     const events=JSON.parse(read('polymythseminars/events.json')).events || [];
     injectEventRoot(events);
     // Stable event pages, legacy aliases, and per-event ICS files are generated
-    // once by build-polymythcal-audit13.py. This search builder contributes
-    // only the canonical indexable routes to the sitemap.
-    const eventIndex=events.filter(eventIndexable).map(event => {
+    // by the canonical PolymythCAL builder. The deploy build still refreshes
+    // archive status as dates pass, then contributes only current, indexable
+    // routes to the sitemap. Redirect aliases remain untouched.
+    archiveExpiredStableEventPages(events);
+    const eventIndex=events.filter(event => eventEligible(event) && eventIndexable(event)).map(event => {
       const route=eventRoute(event);
       return {route,url:routeUrl(route)};
     });

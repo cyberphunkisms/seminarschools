@@ -24,7 +24,7 @@ function rel(p) { return path.relative(ROOT, p).replace(/\\/g, '/'); }
 function stripCssComments(s) { return s.replace(/\/\*[\s\S]*?\*\//g, ''); }
 function requireTrue(ok, message) { if (!ok) failures.push(message); }
 
-const sourceHtml = walk(ROOT).filter(p => p.endsWith('.html') && !p.startsWith(PUBLIC + path.sep));
+const sourceHtml = walk(ROOT).filter(p => p.endsWith('.html') && !p.startsWith(PUBLIC + path.sep) && !p.includes(path.join('scripts','fixtures') + path.sep));
 const publicHtml = walk(PUBLIC).filter(p => p.endsWith('.html'));
 const auditedSourceHtml = sourceHtml.filter(p => !/^google.*\.html$/i.test(path.basename(p)));
 const auditedPublicHtml = publicHtml.filter(p => !/^google.*\.html$/i.test(path.basename(p)));

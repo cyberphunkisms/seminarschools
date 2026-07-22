@@ -257,6 +257,22 @@ a { color: inherit; }
   font-weight: 700;
 }
 
+
+.pm-dedicated-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .45rem .75rem;
+  margin-top: .75rem;
+  padding-top: .7rem;
+  border-top: 1px solid var(--pm-rule);
+  color: var(--pm-muted);
+  font-size: .78rem;
+}
+.pm-dedicated-row > span { font-weight: 700; color: var(--pm-ink); }
+.pm-dedicated-links { display: flex; flex-wrap: wrap; gap: .35rem .65rem; }
+.pm-dedicated-links a { color: var(--pm-accent); text-underline-offset: .18em; }
+
 .pm-utility-bar {
   max-width: 1040px;
   margin: .9rem auto 0;
@@ -295,6 +311,9 @@ a { color: inherit; }
 .pm-saved-dialog::backdrop { background: rgba(22, 15, 12, .48); backdrop-filter: blur(3px); }
 .pm-dialog-head { display: flex; justify-content: space-between; align-items: start; gap: 1rem; }
 .pm-dialog-head h2 { margin: 0; font-family: var(--pm-serif); }
+.pm-saved-section { margin-top: 1rem; }
+.pm-saved-section + .pm-saved-section { padding-top: .9rem; border-top: 1px solid var(--pm-rule); }
+.pm-saved-section h3 { margin: 0; font-family: var(--pm-serif); font-size: 1rem; }
 .pm-saved-list { margin-top: .8rem; overflow: auto; }
 .pm-saved-list ul { list-style: none; margin: 0; padding: 0; }
 .pm-saved-item {
@@ -487,6 +506,8 @@ a { color: inherit; }
 .pm-event-list { display: grid; gap: .7rem; }
 .pm-month-heading { margin: 1.2rem 0 .1rem; font-family: var(--pm-serif); font-size: 1.12rem; }
 .pm-event-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 190px;
   display: grid;
   grid-template-columns: 86px minmax(0, 1fr);
   gap: .95rem;
@@ -520,7 +541,7 @@ a { color: inherit; }
   border-radius: 999px;
   padding: .17rem .42rem;
   color: var(--pm-muted);
-  font-size: .63rem;
+  font-size:0.72rem;
   font-weight: 700;
   letter-spacing: .045em;
   text-transform: uppercase;
@@ -529,9 +550,21 @@ a { color: inherit; }
 .pm-badge.apply { color: var(--pm-warning); border-color: color-mix(in srgb, var(--pm-warning) 45%, var(--pm-rule)); }
 .pm-badge.pending { border-style: dashed; }
 .pm-event-title { margin: 0; font-family: var(--pm-serif); font-size: clamp(1.05rem, 2.1vw, 1.28rem); line-height: 1.31; }
-.pm-event-title a { text-decoration-thickness: 1px; text-underline-offset: .18em; }
+.pm-event-title a { display: inline-block; min-height: 24px; text-decoration-thickness: 1px; text-underline-offset: .18em; }
 .pm-event-title a:hover { color: var(--pm-accent); }
 .pm-event-meta { margin: .38rem 0 0; color: var(--pm-muted); font-size: .82rem; }
+
+.pm-freshness-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 0.35rem 0 0;
+  color: var(--pm-muted);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+.pm-freshness-row span[aria-hidden="true"] { opacity: 0.55; }
+
 .pm-event-description { margin: .42rem 0 0; font-family: Georgia, serif; font-size: .9rem; }
 .pm-card-actions { display: flex; flex-wrap: wrap; gap: .38rem; margin-top: .65rem; }
 .pm-action {
@@ -571,6 +604,7 @@ a { color: inherit; }
 .pm-calendar-day a:hover { color: var(--pm-accent); text-decoration: underline; }
 .pm-calendar-more { min-height: 32px; margin-top: .25rem; padding: .18rem .2rem; border: 0; background: transparent; color: var(--pm-accent); cursor: pointer; font-size: .7rem; font-weight: 700; }
 .pm-calendar-agenda { display: none; }
+.pm-calendar-agenda a { display: inline-block; min-height: 24px; }
 .pm-agenda-day { padding: .85rem; border-bottom: 1px solid var(--pm-rule); }
 .pm-agenda-day h3 { margin: 0 0 .5rem; font-family: var(--pm-serif); font-size: 1rem; }
 .pm-agenda-day ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
@@ -695,6 +729,20 @@ a { color: inherit; }
 }
 
 @media (forced-colors: active) {
+  .pm-button:focus-visible,
+  .pm-link-button:focus-visible,
+  .pm-segment:focus-visible,
+  .pm-search-input:focus-visible,
+  .pm-select:focus-visible,
+  .pm-quick-summary:focus-visible,
+  .pm-filter-drawer-summary:focus-visible,
+  .pm-summary:focus-visible,
+  .pm-event-title a:focus-visible,
+  .pm-action:focus-visible,
+  .pm-calendar-day a:focus-visible,
+  .pm-calendar-more:focus-visible,
+  .pm-active-chip:focus-visible,
+  .pm-section-clear:focus-visible { outline: 3px solid Highlight; outline-offset: 3px; }
   .pm-choice-card:has(input:checked),
   .pm-chip:has(input:checked),
   .pm-time-list input:checked + span,

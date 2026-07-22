@@ -1,8 +1,8 @@
 {
-  "release": "Polymythcal clarity revamp",
+  "release": "PolymythCAL Audit 18 predeploy",
   "date": "2026-07-21",
-  "checks_passed": 28,
-  "checks_total": 28,
+  "checks_passed": 29,
+  "checks_total": 29,
   "results": [
     {
       "name": "revamped page exists",
@@ -17,7 +17,7 @@
     {
       "name": "page is lightweight",
       "passed": true,
-      "detail": "24912 bytes"
+      "detail": "25851 bytes"
     },
     {
       "name": "source and deploy page match",
@@ -41,6 +41,11 @@
     },
     {
       "name": "old mutually exclusive filter system removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "academic entry points remain links rather than mutually exclusive controls",
       "passed": true,
       "detail": ""
     },

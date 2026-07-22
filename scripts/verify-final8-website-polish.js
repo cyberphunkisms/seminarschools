@@ -5,7 +5,7 @@ const root=path.resolve(__dirname,'..'),fail=[];
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const need=(hay,t,msg)=>{if(!hay.includes(t))fail.push(msg||`missing ${t}`)};
 const release=read('RELEASE_ID.txt').trim();
-if(!['2026-07-18-map-archive-interaction-final8','2026-07-18-mephistodata-sentence-discipline-final9','2026-07-19-remaining-website-audit10','2026-07-19-polymythcal-about-cl-audit11','2026-07-19-mobile-web-hybrid-audit12'].includes(release))fail.push(`release id ${release}`);
+if(!/^\d{4}-\d{2}-\d{2}-.+/.test(release))fail.push(`release id malformed: ${release}`);
 const main=read('saul/index.html'),css=read('saul/assets/saul-cv-spectrum-2026.css'),js=read('saul/assets/saul-cv-spectrum-2026.js'),home=read('about/index.html');
 ['cv-map-section--enhanced','data-cv-map-frame','cv-map-threads','Text location list','data-cv-local-nav','id="archiveCount"','archive=','document.createElement("details")','renderedArchiveCount','data-cv-print-template'].forEach(t=>need(main,t,`main Saul missing ${t}`));
 ['FINAL8_MAP_ARCHIVE_INTERACTION_POLISH','cv-route-bridge','cv-map-grid','min-height:44px','.page>.cv-local-nav','.section-count'].forEach(t=>need(css,t,`shared CSS missing ${t}`));

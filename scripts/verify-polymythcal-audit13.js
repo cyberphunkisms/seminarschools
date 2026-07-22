@@ -2,6 +2,8 @@ const fs=require('fs'),path=require('path'),crypto=require('crypto');
 const root=path.resolve(__dirname,'..');
 const data=JSON.parse(fs.readFileSync(path.join(root,'polymythseminars/events.json'),'utf8'));
 const html=fs.readFileSync(path.join(root,'polymythseminars/index.html'),'utf8');
+const client=fs.readFileSync(path.join(root,'js/polymythcal-revamp.js'),'utf8');
+const css=fs.readFileSync(path.join(root,'css/polymythcal-revamp.css'),'utf8');
 const sem=fs.readFileSync(path.join(root,'scripts/seminars-prompt-runner.sh'),'utf8');
 const fest=fs.readFileSync(path.join(root,'scripts/festivals-prompt-runner.sh'),'utf8');
 const checks=[
@@ -10,9 +12,9 @@ const checks=[
  [data.events.every(e=>e.confirmation_status==='confirmed'||(e.confirmation_status==='unconfirmed'&&e.qualification_reasons.length)),'qualified uncertainty'],
  [data.events.every(e=>e.city&&e.corridor_zone&&e.timezone),'structured geography'],
  [data.events.some(e=>e.corridor_zone==='montreal'),'Montréal data'],
- [html.includes('Kingston→Montréal')&&html.includes('data-focus="unconfirmed"'),'corridor and confirmation filters'],
- [html.includes('truth-chip')&&html.includes('Official source'),'truth display'],
- [html.includes('max-height:none!important;overflow:visible!important'),'normal mobile scroll'],
+ [html.includes('Kingston to Montréal')&&html.includes('data-state-set="places"')&&html.includes('data-label-key="statuses:pending"'),'corridor and confirmation filters'],
+ [client.includes('freshnessHtml(event)')&&client.includes('Official source')&&fs.readdirSync(path.join(root,'polymythseminars/events')).some(id=>{const f=path.join(root,'polymythseminars/events',id,'index.html');return fs.existsSync(f)&&fs.readFileSync(f,'utf8').includes('truth-chip')}),'truth display'],
+ [css.includes('@media (max-width: 760px)')&&css.includes('.pm-calendar-agenda')&&!css.includes('max-height: 100vh'),'normal mobile scroll'],
  [sem.includes('RUN_SLOT=')&&fest.includes('RUN_SLOT='),'rotating run slots'],
  [!sem.includes('Write,Bash')&&!fest.includes('Write,Bash'),'no agent shell'],
  [fs.existsSync(path.join(root,'data/polymythcal-build-manifest.json')),'build manifest'],

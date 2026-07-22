@@ -65,13 +65,13 @@ for (const needle of ['findaprotest-toronto', 'https://www.findaprotest.info/can
 const festivalPrompt = read('scripts/festivals-prompt.md');
 for (const needle of ['Kingston', 'Montréal', 'one parent festival record', 'individual production record', 'type: "festival"', 'SHARD', 'seven consecutive runs', 'source_yields', 'smaller verified harvest is better than a failed run']) need(festivalPrompt, needle, 'scripts/festivals-prompt.md', problems);
 const seminarMerger = read('scripts/merge_and_finalize.py');
-for (const needle of ['merge-seminar-harvest-into-calendar.js', 'sync-calendar-data.js', 'build-search-pages.js', 'build-writing-shortcuts.js']) need(seminarMerger, needle, 'scripts/merge_and_finalize.py', problems);
+for (const needle of ['merge-seminar-harvest-into-calendar.js', 'finalize-polymythcal-publication.py']) need(seminarMerger, needle, 'scripts/merge_and_finalize.py', problems);
 const seminarPublish = read('scripts/merge-seminar-harvest-into-calendar.js');
 for (const needle of ['SEMINAR CALENDAR INTEGRATION', 'polymythseminars', 'preservedManual']) need(seminarPublish, needle, 'scripts/merge-seminar-harvest-into-calendar.js', problems);
 const diagnostics = read('scripts/summarize-harvest-diagnostics.sh');
 for (const needle of ['GITHUB_STEP_SUMMARY', 'Last 120 log lines', 'status.json']) need(diagnostics, needle, 'scripts/summarize-harvest-diagnostics.sh', problems);
 const festivalMerger = read('scripts/merge_festivals.py');
-for (const needle of ['merge-festival-harvest-into-calendar.js', 'sync-calendar-data.js', 'build-search-pages.js', 'build-writing-shortcuts.js', 'normalize_festival_parents', '"festival", "festival-of-form"']) need(festivalMerger, needle, 'scripts/merge_festivals.py', problems);
+for (const needle of ['merge-festival-harvest-into-calendar.js', 'finalize-polymythcal-publication.py', 'normalize_festival_parents', '"festival", "festival-of-form"']) need(festivalMerger, needle, 'scripts/merge_festivals.py', problems);
 if (problems.length) {
   console.error('HARVEST PIPELINE FAILED\n- ' + problems.join('\n- '));
   process.exit(1);

@@ -1,0 +1,37 @@
+{
+  "release": "PolymythCAL Audit 17 Netlify build and package efficiency",
+  "date": "2026-07-21",
+  "calendar_records": 839,
+  "calendar_shell_bytes": 25059,
+  "source_files_before_report_additions": 4046,
+  "source_bytes_before_report_additions": 165781513,
+  "generated_public_files": 3540,
+  "generated_public_bytes": 95129994,
+  "clean_build_seconds": 1.32,
+  "clean_build_max_rss_kb": 163540,
+  "previous_privacy_zip_bytes": 134630784,
+  "previous_compressed_payload_delta_bytes": -44577,
+  "previous_zip_metadata_overhead_delta_bytes": 1719226,
+  "checks": {
+    "netlify_clean_build": true,
+    "netlify_second_pass_zero_source_rewrites": true,
+    "search_surface": true,
+    "writing_shortcuts": true,
+    "clarity_checks": "28/28",
+    "interaction_design_checks": "91/91",
+    "site_integrity": true,
+    "seo": true,
+    "keyboard": true,
+    "responsive": true,
+    "visible_geometry": true,
+    "site_interactivity": true,
+    "sitemap_classification": true,
+    "privacy_regression": true
+  },
+  "package": {
+    "public_directory_included": false,
+    "hf_export_included": true,
+    "packaged_files": 4047,
+    "approximate_megabytes": 75.3
+  }
+}

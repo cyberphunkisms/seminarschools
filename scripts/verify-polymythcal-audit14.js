@@ -49,10 +49,10 @@ const features = read('js/polymythcal-features.js');
 const revamp = read('js/polymythcal-revamp.js');
 const css = read('css/polymythcal-features.css') + read('css/polymythcal-revamp.css');
 add('Bilingual typo-tolerant search is wired', (['normalizeSearchText', 'BILINGUAL_SEARCH_GROUPS', 'editDistance', 'PM_LANG', 'PM_FR'].every(m => main.includes(m))) || (['normalizeText', 'searchSynonyms', 'editDistance', 'translations', 'fr:'].every(m => revamp.includes(m))), {});
-const filterParams = ['q', 'cat', 'age', 'focus', 'view', 'mode', 'lang'];
-add('Filters are URL-backed and shareable', filterParams.every(p => features.includes(`'${p}'`) || features.includes(`"${p}"`)) && /history\.(replaceState|pushState)/.test(features) && /navigator\.share|clipboard/.test(features), {parameters: filterParams});
-const localKeys = ['polymythcal.savedEvents.v1', 'polymythcal.savedSearches.v1'];
-add('Saved events and searches use device-local storage', localKeys.every(k => features.includes(k)) && /localStorage/.test(features), {keys: localKeys});
+const filterParams = ['q', 'time', 'sort', 'view', 'content', 'places', 'topics', 'eventTypes', 'opportunityTypes', 'audiences', 'formats', 'statuses', 'lang'];
+add('Filters are URL-backed and shareable', filterParams.every(p => revamp.includes(`'${p}'`) || revamp.includes(`\"${p}\"`)) && /URLSearchParams/.test(revamp) && /history\.(replaceState|pushState)/.test(revamp) && /navigator\.share|clipboard/.test(revamp), {parameters: filterParams});
+const localKeys = ['polymythcal.savedEvents.v2', 'polymythcal.savedSearches.v2'];
+add('Saved events and searches use device-local storage', localKeys.every(k => revamp.includes(k)) && /localStorage/.test(revamp), {keys: localKeys});
 
 const submit = read('polymythseminars/submit/index.html');
 const correct = read('polymythseminars/correct/index.html');
@@ -88,7 +88,10 @@ const translation = json('data/polymythcal-translation-inventory.json');
 add('Holistic English and French translation inventory is complete', translation.complete === true && translation.canonical_event_pages_with_bilingual_actions === events.length && translation.focused_feeds_with_english_and_french_labels === feeds.length, translation);
 
 const wcag = json('data/polymythcal-wcag22-browser-audit.json');
-add('Browser WCAG 2.2 AA audit passes every automated check', wcag.standard === 'WCAG 2.2 AA' && wcag.failed === 0 && wcag.passed === wcag.automated_checks.length && wcag.passed >= 20, {passed: wcag.passed, failed: wcag.failed, browser: wcag.browser});
+const wcagPassed = wcag.checks_passed ?? wcag.passed ?? 0;
+const wcagFailed = wcag.checks_failed ?? wcag.failed ?? 0;
+const wcagChecks = wcag.results ?? wcag.automated_checks ?? [];
+add('Browser WCAG 2.2 AA audit passes every automated check', wcag.standard === 'WCAG 2.2 AA' && wcagFailed === 0 && wcagPassed === wcagChecks.length && wcagPassed >= 20, {passed: wcagPassed, failed: wcagFailed, browser: wcag.browser});
 add('Browser audit covers keyboard, reflow, forced colours, and reduced motion', ['keyboard', 'reflow', 'forced', 'reduced'].every(term => JSON.stringify(wcag).toLowerCase().includes(term)), {});
 add('Native VoiceOver and NVDA protocol is documented', exists('docs/POLYMYTHCAL_SCREEN_READER_TEST_PROTOCOL.md') && /VoiceOver/.test(read('docs/POLYMYTHCAL_SCREEN_READER_TEST_PROTOCOL.md')) && /NVDA/.test(read('docs/POLYMYTHCAL_SCREEN_READER_TEST_PROTOCOL.md')), {});
 
@@ -124,8 +127,8 @@ const output = {
     legacy_redirect_aliases: aliasPages,
     event_ics_files: icsCount,
     focused_feed_pairs: feeds.length,
-    browser_wcag_checks_passed: wcag.passed,
-    browser_wcag_checks_failed: wcag.failed,
+    browser_wcag_checks_passed: wcagPassed,
+    browser_wcag_checks_failed: wcagFailed,
     translation_surfaces: translation.surfaces?.length || 0,
   },
 };

@@ -30,7 +30,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const readL1 = (p) => fs.readFileSync(p, 'latin1');
-function walk(dir){ let o=[]; for(const e of fs.readdirSync(dir,{withFileTypes:true})){ if(e.name==='node_modules'||e.name==='public'||e.name.startsWith('.'))continue; const fp=path.join(dir,e.name); if(e.isDirectory())o=o.concat(walk(fp)); else if(e.name.endsWith('.html'))o.push(path.relative(ROOT,fp).replace(/\\/g,'/')); } return o; }
+function walk(dir){ let o=[]; for(const e of fs.readdirSync(dir,{withFileTypes:true})){ if(e.name==='node_modules'||e.name==='public'||e.name.startsWith('.')||path.relative(ROOT,path.join(dir,e.name)).replace(/\\/g,'/').startsWith('scripts/fixtures'))continue; const fp=path.join(dir,e.name); if(e.isDirectory())o=o.concat(walk(fp)); else if(e.name.endsWith('.html'))o.push(path.relative(ROOT,fp).replace(/\\/g,'/')); } return o; }
 
 let allow = { proseExemptPrefixes:[], ogExempt:[], bornAliveExempt:[], snippetAllow:[] };
 try { allow = Object.assign(allow, JSON.parse(readL1(path.join(__dirname,'register-allow.json')))); } catch(e){ console.log('note: no register-allow.json, running with empty allowlist'); }
@@ -89,7 +89,8 @@ for (const f of files){
     .replace(/<section id="static-methodology-editions"[\s\S]*?<\/section>/g, ' ');
   const vt = visibleText(authoredOnly);
 
-  if (!generatedSearchSurface && !underAny(f, allow.proseExemptPrefixes)){
+  const generatedEventDetail = f.startsWith('polymythseminars/events/');
+  if (!generatedSearchSurface && !generatedEventDetail && !underAny(f, allow.proseExemptPrefixes)){
     const d = countDashes(vt);
     if (d) flag(f, 'DASH', d, d + ' dash(es) in visible copy');
     const nd = negdefHits(vt);

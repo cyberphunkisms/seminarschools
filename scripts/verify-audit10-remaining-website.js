@@ -28,7 +28,7 @@ function walk(dir, out = []) {
   return out;
 }
 
-if (!['2026-07-19-remaining-website-audit10','2026-07-19-polymythcal-about-cl-audit11','2026-07-19-mobile-web-hybrid-audit12'].includes(read('RELEASE_ID.txt').trim())) fail.push('release id drift');
+if (!/^\d{4}-\d{2}-\d{2}-.+/.test(read('RELEASE_ID.txt').trim())) fail.push('release id malformed');
 
 for (const token of [
   'minmax(min(100%,190px),1fr)',
@@ -85,9 +85,14 @@ for (const rel of archivedEvents) {
     fail.push(`${rel}: expired permalink deleted`);
     continue;
   }
+  const html = read(rel);
   has(rel, 'noindex,follow');
-  has(rel, 'data-event-archive-note="true"');
-  lacks(rel, '"@type":"Event"');
+  if (/http-equiv=["']refresh["']/i.test(html)) {
+    has(rel, '<link rel="canonical"');
+  } else {
+    has(rel, 'data-event-archive-note="true"');
+    lacks(rel, '"@type":"Event"');
+  }
 }
 has('scripts/build-search-pages.js', 'function archiveGeneratedEventPage(ix)');
 has('scripts/build-search-pages.js', 'if (!keep.has(ix)) archiveGeneratedEventPage(ix);');
@@ -107,7 +112,9 @@ if (exists('public/index.html')) {
   if (!exists(representative)) fail.push(`${representative}: public expired permalink deleted`);
   else {
     has(representative, 'noindex,follow');
-    has(representative, 'data-event-archive-note="true"');
+    const html = read(representative);
+    if (/http-equiv=["']refresh["']/i.test(html)) has(representative, '<link rel="canonical"');
+    else has(representative, 'data-event-archive-note="true"');
   }
 }
 

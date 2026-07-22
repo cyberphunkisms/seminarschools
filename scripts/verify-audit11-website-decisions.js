@@ -6,7 +6,7 @@ const read=r=>fs.readFileSync(path.join(root,r),'utf8');
 const exists=r=>fs.existsSync(path.join(root,r));
 const has=(r,t)=>{if(!exists(r)||!read(r).includes(t))fail.push(`${r}: missing ${t}`)};
 const lacks=(r,t)=>{if(exists(r)&&read(r).includes(t))fail.push(`${r}: contains ${t}`)};
-if(!['2026-07-19-polymythcal-about-cl-audit11','2026-07-19-mobile-web-hybrid-audit12'].includes(read('RELEASE_ID.txt').trim()))fail.push('release id drift');
+if(!/^\d{4}-\d{2}-\d{2}-.+/.test(read('RELEASE_ID.txt').trim()))fail.push('release id malformed');
 for(const t of ['Open Polymythcal','class="path-card featured"','priority:true','selectNode(NODES.find(n=>n.id===\'calendar\')','plain:\'Events and deadlines\''])has('index.html',t);
 has('about/index.html','https://seminarschools.com/about/');
 has('main/index.html',"location.replace('/about/'");

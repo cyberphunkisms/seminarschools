@@ -7,6 +7,7 @@ const ROOT = path.resolve(__dirname, '..');
 const SITE = 'https://seminarschools.com';
 const CHECK = process.argv.includes('--check');
 const NOW = new Date();
+const FALLBACK_LIMIT = 60;
 const TYPE_ZOOM_BUILD = '20260710-reviews-zoom-font-a';
 const TYPE_ZOOM_LINK = `<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=${TYPE_ZOOM_BUILD}" data-site-wide-type-zoom="${TYPE_ZOOM_BUILD}">`;
 const ROUTES = {
@@ -176,13 +177,16 @@ function setHead(html, info, route){
 function main(){
   const data=JSON.parse(read('polymythseminars/events.json'));
   const current=(data.events||[]).filter(eventEligible).sort((a,b)=>String(a.date).localeCompare(String(b.date)) || String(a.title).localeCompare(String(b.title)));
-  const base=read('polymythseminars/index.html');
   let writes=0;
   for(const [route, info] of Object.entries(ROUTES)){
     const events=current.filter(e=>academicBandMatches(e, info.focus));
-    let html=base;
-    const markup=`<div class="ssr-event-list" data-ssr-events="true"><p class="sr-only">${events.length} ${esc(info.label)} listings are listed below. Use the controls above to filter them when JavaScript is available.</p>${events.map(staticEventCard).join('\n')}</div>`;
-    html=html.replace(/<script(?=[^>]*id=["']events-fallback["'])(?=[^>]*type=["']application\/json["'])[^>]*>[\s\S]*?<\/script>/, `<script type="application/json" id="events-fallback" data-source="/polymythseminars/events.json">${JSON.stringify({ _comment: 'Route-specific fallback. Full canonical data loads from /polymythseminars/events.json and remains mirrored on /polymythseminars/.', _generated_at: data._generated_at, _total_events: events.length, count: events.length, events })}</script>`);
+    const fallbackEvents=events.slice(0, FALLBACK_LIMIT);
+    // Preserve each dedicated route's own interaction and layout contract.
+    // The published JSON remains canonical. The compact inline snapshot keeps
+    // the route useful during an offline preview without recreating a huge page.
+    let html=read(`${route}/index.html`);
+    const markup=`<div class="ssr-event-list" data-ssr-events="true"><p class="sr-only">${events.length} ${esc(info.label)} listings are available. The first ${fallbackEvents.length} are listed below as a compact no-script preview.</p>${fallbackEvents.map(staticEventCard).join('\n')}</div>`;
+    html=html.replace(/<script(?=[^>]*id=["']events-fallback["'])(?=[^>]*type=["']application\/json["'])[^>]*>[\s\S]*?<\/script>/, `<script type="application/json" id="events-fallback" data-source="/polymythseminars/events.json">${JSON.stringify({ _comment: 'Compact route-specific offline fallback. Full canonical data loads from /polymythseminars/events.json.', _generated_at: data._generated_at, _total_events: events.length, count: fallbackEvents.length, events: fallbackEvents })}</script>`);
     html=html.replace(/<!-- SS_STATIC_EVENTS_START -->[\s\S]*?<!-- SS_STATIC_EVENTS_END -->/, `<!-- SS_STATIC_EVENTS_START -->${markup}<!-- SS_STATIC_EVENTS_END -->`);
     html=html.replace(/<div class="count-line" id="countLine"[^>]*>[\s\S]*?<\/div>/, `<div class="count-line" id="countLine" role="status" aria-live="polite" aria-atomic="true">${info.countText(events.length)}</div>`);
     html=setAcademicLinks(html, info.focus);

@@ -17,6 +17,7 @@ const sequential = [
 
 const checks = [
   'node scripts/verify-critical.js',
+  'node scripts/verify-predeploy-automation.js',
   'node scripts/verify-methodologylist-manifest.js',
   'node scripts/verify-regen-safety.js',
   'node scripts/verify-data-hygiene.js',

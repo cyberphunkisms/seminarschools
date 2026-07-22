@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-22T01:08:19.802Z",
+  "generated_at": "2026-07-22T04:57:35.859Z",
   "audit": "Polymythcal Audit 14 completion verification",
   "checks": [
     {
@@ -114,11 +114,17 @@
       "details": {
         "parameters": [
           "q",
-          "cat",
-          "age",
-          "focus",
+          "time",
+          "sort",
           "view",
-          "mode",
+          "content",
+          "places",
+          "topics",
+          "eventTypes",
+          "opportunityTypes",
+          "audiences",
+          "formats",
+          "statuses",
           "lang"
         ]
       }
@@ -128,8 +134,8 @@
       "passed": true,
       "details": {
         "keys": [
-          "polymythcal.savedEvents.v1",
-          "polymythcal.savedSearches.v1"
+          "polymythcal.savedEvents.v2",
+          "polymythcal.savedSearches.v2"
         ]
       }
     },
@@ -230,9 +236,9 @@
       "name": "Browser WCAG 2.2 AA audit passes every automated check",
       "passed": true,
       "details": {
-        "passed": 26,
+        "passed": 42,
         "failed": 0,
-        "browser": "Chromium 144 headless with local assets inlined"
+        "browser": "Chromium headless with production assets executed locally"
       }
     },
     {
@@ -295,7 +301,7 @@
     "legacy_redirect_aliases": 839,
     "event_ics_files": 839,
     "focused_feed_pairs": 11,
-    "browser_wcag_checks_passed": 26,
+    "browser_wcag_checks_passed": 42,
     "browser_wcag_checks_failed": 0,
     "translation_surfaces": 5
   }

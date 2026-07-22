@@ -8,37 +8,46 @@ function exists(rel){ return fs.existsSync(path.join(ROOT, rel)); }
 const problems = [];
 function need(rel, needle, label){ const s = read(rel); if (!s.includes(needle)) problems.push(`${rel} missing ${label || needle}`); }
 function forbid(rel, needle, label){ const s = read(rel); if (s.includes(needle)) problems.push(`${rel} still contains ${label || needle}`); }
+
+// Harvest and qualified-uncertainty pipeline.
 for (const [rel, needle, label] of [
-  ['scripts/sources.json', 'findaprotest-toronto', 'Find a Protest source id'],
-  ['scripts/sources.json', 'https://www.findaprotest.info/canada/toronto', 'Find a Protest Toronto URL'],
-  ['scripts/scrape_seminars.py', 'def fetch_findaprotest_toronto', 'deterministic Find a Protest fetcher'],
-  ['scripts/scrape_seminars.py', 'def fetch_generic_event_source', 'generic HTML source fetcher'],
-  ['scripts/scrape_seminars.py', 'event-watchlist.json', 'event watchlist output'],
-  ['scripts/scrape_seminars.py', 'extract_topics', 'topic extraction'],
-  ['scripts/merge_and_finalize.py', 'event-watchlist.json', 'watchlist merge output'],
-  ['scripts/sync-calendar-data.js', 'watchlist-fallback', 'watchlist fallback sync'],
-  ['scripts/sync-calendar-data.js', 'WATCHLIST_PUBLIC', 'public watchlist sync'],
-  ['scripts/verify-harvest-pipeline.js', 'findaprotest-toronto', 'pipeline guard for Find a Protest'],
-  ['polymythseminars/index.html', 'id="calendarSearch"', 'front-facing search input'],
-  ['polymythseminars/index.html', 'id="quickFocusNav"', 'quick focus nav'],
-  ['polymythseminars/index.html', 'data-focus="learning"', 'learning quick filter'],
-  ['polymythseminars/index.html', 'data-focus="arts"', 'arts quick filter'],
-  ['polymythseminars/index.html', 'data-focus="deadlines"', 'deadlines quick filter'],
-  ['polymythseminars/index.html', 'data-focus="toronto"', 'Toronto quick filter'],
-  ['polymythseminars/index.html', 'data-focus="online"', 'online quick filter'],
-  ['polymythseminars/index.html', 'watchlistPanel', 'source-confirmed leads panel'],
-  ['polymythseminars/index.html', 'function getFilteredLeads', 'watchlist filtering'],
-  ['polymythseminars/index.html', 'function searchHaystack', 'raw excerpt/topic search'],
-  ['polymythseminars/index.html', 'watchlist.json?v=', 'watchlist network source'],
+  ['scripts/sources.json','findaprotest-toronto','Find a Protest source id'],
+  ['scripts/sources.json','https://www.findaprotest.info/canada/toronto','Find a Protest Toronto URL'],
+  ['scripts/scrape_seminars.py','def fetch_findaprotest_toronto','deterministic Find a Protest fetcher'],
+  ['scripts/scrape_seminars.py','def fetch_generic_event_source','generic HTML source fetcher'],
+  ['scripts/scrape_seminars.py','event-watchlist.json','event watchlist output'],
+  ['scripts/scrape_seminars.py','extract_topics','topic extraction'],
+  ['scripts/merge_and_finalize.py','event-watchlist.json','watchlist merge output'],
+  ['scripts/sync-calendar-data.js','watchlist-fallback','watchlist fallback sync'],
+  ['scripts/sync-calendar-data.js','WATCHLIST_PUBLIC','public watchlist sync'],
+  ['scripts/verify-harvest-pipeline.js','findaprotest-toronto','pipeline guard for Find a Protest']
 ]) need(rel, needle, label);
-forbid('polymythseminars/index.html', 'id="eventSearch"', 'duplicate internal search input');
-forbid('polymythseminars/index.html', 'id="quickFocus"', 'duplicate quick focus nav');
-forbid('polymythseminars/index.html', 'polymythcal-tools', 'duplicate tool panel');
-forbid('polymythseminars/index.html', 'function eventSearchText', 'duplicate search function');
-const html = read('polymythseminars/index.html');
-if ((html.match(/function matchesSearch\(/g) || []).length !== 1) problems.push('polymythseminars/index.html must define matchesSearch exactly once');
-if ((html.match(/function getFilteredEvents\(/g) || []).length !== 1) problems.push('polymythseminars/index.html must define getFilteredEvents exactly once');
-if (!/activeFocus === 'learning'/.test(html) || !/activeFocus === 'arts'/.test(html)) problems.push('polymythseminars/index.html quick filters are not implemented in focusMatches');
+
+// Current front-facing clarity architecture.
+for (const [rel, needle, label] of [
+  ['polymythseminars/index.html','id="pmSearch"','front-facing search input'],
+  ['polymythseminars/index.html','id="pmQuickStarts"','popular starting points'],
+  ['polymythseminars/index.html','data-preset="philosophy"','philosophy starting point'],
+  ['polymythseminars/index.html','data-preset="humanities"','humanities starting point'],
+  ['polymythseminars/index.html','data-preset="lectures"','talks starting point'],
+  ['polymythseminars/index.html','data-preset="festivals"','festival starting point'],
+  ['polymythseminars/index.html','data-preset="writing"','writing starting point'],
+  ['polymythseminars/index.html','data-preset="fellowships"','fellowship starting point'],
+  ['polymythseminars/index.html','data-preset="toronto"','Toronto starting point'],
+  ['polymythseminars/index.html','data-preset="corridor"','corridor starting point'],
+  ['polymythseminars/index.html','data-state-set="opportunityTypes"','separate opportunity filters'],
+  ['js/polymythcal-revamp.js','function eventMatchesSearch','single current search function'],
+  ['js/polymythcal-revamp.js','function matchesFilters','single current filter function'],
+  ['js/polymythcal-revamp.js','event.raw_excerpt','raw excerpt search'],
+  ['js/polymythcal-revamp.js','event.topics','source topic search'],
+  ['js/polymythcal-revamp.js','event.source_url','official source actions']
+]) need(rel, needle, label);
+forbid('polymythseminars/index.html','id="eventSearch"','duplicate internal search input');
+forbid('polymythseminars/index.html','data-focus="deadlines"','ambiguous Deadlines quick filter');
+forbid('polymythseminars/index.html','polymythcal-tools','duplicate tool panel');
+const app = read('js/polymythcal-revamp.js');
+if ((app.match(/function eventMatchesSearch\(/g) || []).length !== 1) problems.push('polymythcal app must define eventMatchesSearch exactly once');
+if ((app.match(/function matchesFilters\(/g) || []).length !== 1) problems.push('polymythcal app must define matchesFilters exactly once');
 const canonical = JSON.parse(read('polymythseminars/events.json'));
 const football = canonical.events.find(x => /Palestinian Football Exhibit/i.test(x.title || ''));
 if (!football) problems.push('PYM/FIFA lead must remain in the canonical chronology');
@@ -46,7 +55,7 @@ else if (football.confirmation_status !== 'unconfirmed' || !(football.qualificat
 if (!exists('polymythseminars/watchlist.json')) problems.push('polymythseminars/watchlist.json compatibility file is missing');
 if (problems.length) {
   console.error('POLYMYTHCAL SCRAPER/LAYOUT CHECK FAILED');
-  for (const p of problems) console.error(' - ' + p);
+  problems.forEach(p => console.error(' - ' + p));
   process.exit(1);
 }
-console.log('POLYMYTHCAL SCRAPER/LAYOUT CHECK PASSED — Find a Protest, qualified uncertainty, topic search, and front-facing quick filters are guarded.');
+console.log('POLYMYTHCAL SCRAPER/LAYOUT CHECK PASSED — harvest pipeline, qualified uncertainty, raw excerpt/topic search, and clear starting points are guarded.');

@@ -1,0 +1,85 @@
+name: Pre-deploy verification
+on:
+  workflow_dispatch:
+  push:
+    branches: [master, main]
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: predeploy-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  clean-build:
+    name: Clean build (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Setup Node 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Build exactly as Netlify builds
+        run: npm run build
+      - name: Verify release automation contract
+        run: npm run verify:predeploy-automation
+  full-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Setup Node 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install locked JavaScript dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install audit dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 requests python-dateutil jsonschema playwright
+      - name: Install Playwright Chromium
+        run: python -m playwright install --with-deps chromium
+      - name: Production build
+        run: npm run build
+      - name: Full repository verifier
+        run: npm run verify:all
+      - name: Adapter and lifecycle tests
+        run: |
+          python -m unittest scripts/test_polymythcal_adapters.py
+          python -m unittest scripts/test_polymythcal_lifecycle.py
+      - name: Audit 14 structural verifier
+        run: node scripts/verify-polymythcal-audit14.js
+      - name: Interaction and design browser audit
+        run: python scripts/audit-polymythcal-interactivity-design.py
+      - name: WCAG browser audit
+        run: python scripts/audit-polymythcal-wcag22.py
+      - name: Upload audit evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: polymythcal-predeploy-evidence
+          path: |
+            data/polymythcal-audit19/**
+            data/polymythcal-wcag22-browser-audit.json
+            POLYMYTHCAL_WCAG22_AA_AUDIT_2026-07-22.md
+            scripts/reports/release-gate-report.json
+          if-no-files-found: warn

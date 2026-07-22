@@ -1,0 +1,478 @@
+{
+  "release": "PolymythCAL Audit 19 final predeploy interaction and design verification",
+  "date": "2026-07-21",
+  "checks_passed": 94,
+  "checks_total": 94,
+  "results": [
+    {
+      "name": "calendar page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "public calendar mirror exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source and public HTML match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source and public JavaScript match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source and public CSS match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "HTML remains lightweight",
+      "passed": true,
+      "detail": "25851 bytes"
+    },
+    {
+      "name": "JavaScript remains lightweight",
+      "passed": true,
+      "detail": "67011 bytes"
+    },
+    {
+      "name": "JavaScript syntax passes",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "HTML has no duplicate IDs",
+      "passed": true,
+      "detail": "44 IDs"
+    },
+    {
+      "name": "search is the first interactive calendar control",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "many popular entry points remain",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "filters have a mobile disclosure",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "saved listings and searches share a dialog",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "active filters are designed as removable controls",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ambiguous Deadlines control is absent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "event and opportunity types stay separated",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "close-spelling search is disclosed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "no-script route exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "839 canonical records preserved",
+      "passed": true,
+      "detail": "839"
+    },
+    {
+      "name": "all event detail routes exist",
+      "passed": true,
+      "detail": "missing 0"
+    },
+    {
+      "name": "all public event routes exist",
+      "passed": true,
+      "detail": "missing 0"
+    },
+    {
+      "name": "initial results load",
+      "passed": true,
+      "detail": "586"
+    },
+    {
+      "name": "initial render is paginated",
+      "passed": true,
+      "detail": "50"
+    },
+    {
+      "name": "default reset action is absent rather than dead",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "empty current-choices panel is removed from the layout",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "dataset-empty opportunity categories stay hidden",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fellowship filter remains visible and clickable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "two places remain selected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "two topics remain selected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "active choices become clickable remove buttons",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "clicking an active choice removes only that choice",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "event and opportunity type filters work side by side",
+      "passed": true,
+      "detail": "{'event', 'opportunity'}"
+    },
+    {
+      "name": "typo-tolerant Montréal search works",
+      "passed": true,
+      "detail": "40"
+    },
+    {
+      "name": "save-search action activates for a meaningful view",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "device-local saved searches persist URL state",
+      "passed": true,
+      "detail": "[{'id': 'blank?q=montral', 'href': 'blank?q=montral', 'label': '“montral”', 'savedAt': '2026-07-22T04:58:41.581Z'}]"
+    },
+    {
+      "name": "saved-search entry is visible in the shared dialog",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "clear-search control appears",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "clear-search empties query and restores results",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "placeholder venues are cleaned from cards",
+      "passed": true,
+      "detail": "Time unpublished · Montréal"
+    },
+    {
+      "name": "popular entry point applies a clear preset",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "active preset is visibly pressed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "topic section clear action appears",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "section clear removes its own choices",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "save state updates without replacing focus",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "saved counter combines listings and searches",
+      "passed": true,
+      "detail": "2"
+    },
+    {
+      "name": "saved dialog opens modally",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "saved dialog receives focus",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "saved listing includes date and location context",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Escape closes saved dialog",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "share action copies a URL-backed view",
+      "passed": true,
+      "detail": "https://seminarschools.com/blank?places=kingston"
+    },
+    {
+      "name": "language switch preserves active filters",
+      "passed": true,
+      "detail": "blank?lang=fr&places=kingston"
+    },
+    {
+      "name": "ongoing listings are labelled as ongoing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "date-only values do not shift a day in Toronto",
+      "passed": true,
+      "detail": "rendered 2026-07-24, source 2026-07-24T18:00-04:00"
+    },
+    {
+      "name": "desktop calendar renders 42 day cells",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "desktop calendar grid is visible",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "calendar status describes the whole matching view",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "multi-day listings are consolidated above the grid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "calendar days begin compact",
+      "passed": true,
+      "detail": "3"
+    },
+    {
+      "name": "multi-day spans no longer create enormous daily overflow",
+      "passed": true,
+      "detail": "32"
+    },
+    {
+      "name": "documented arrow shortcut changes calendar month",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "calendar navigation changes the displayed month",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "calendar more control expands hidden links",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "desktop run has no script errors",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "French interface activates",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "French active choices remain translated",
+      "passed": true,
+      "detail": "Philosophie et éthique\n×"
+    },
+    {
+      "name": "French concept search works",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "upcoming count is stable outside the Toronto timezone",
+      "passed": true,
+      "detail": "586 listings"
+    },
+    {
+      "name": "mobile filter drawer starts collapsed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile quick starts begin collapsed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile empty active panel stays out of the way",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile has no horizontal page overflow",
+      "passed": true,
+      "detail": "[390, 390]"
+    },
+    {
+      "name": "mobile reaches results without a filter wall",
+      "passed": true,
+      "detail": "676.625"
+    },
+    {
+      "name": "mobile filter button opens the drawer",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile hidden checkbox has a visible focus treatment",
+      "passed": true,
+      "detail": "solid"
+    },
+    {
+      "name": "mobile calendar uses vertical agenda",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile calendar status avoids list pagination language",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile multi-day panel starts collapsed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile desktop calendar grid is hidden",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile interactive targets meet the 24 pixel minimum",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "mobile run has no script errors",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "small-mobile filter drawer starts collapsed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "small-mobile quick starts begin collapsed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "small-mobile empty active panel stays out of the way",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "small-mobile has no horizontal page overflow",
+      "passed": true,
+      "detail": "[320, 320]"
+    },
+    {
+      "name": "small-mobile reaches results without a filter wall",
+      "passed": true,
+      "detail": "690.828125"
+    },
+    {
+      "name": "small-mobile filter button opens the drawer",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "small-mobile hidden checkbox has a visible focus treatment",
+      "passed": true,
+      "detail": "solid"
+    },
+    {
+      "name": "small-mobile calendar uses vertical agenda",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "small-mobile calendar status avoids list pagination language",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "small-mobile multi-day panel starts collapsed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "small-mobile desktop calendar grid is hidden",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "small-mobile interactive targets meet the 24 pixel minimum",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "small-mobile run has no script errors",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "forced-colour selected filters retain a visible outline",
+      "passed": true,
+      "detail": "solid"
+    }
+  ]
+}

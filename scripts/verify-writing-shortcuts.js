@@ -56,7 +56,7 @@ function main(){
   const sitemap = read('sitemap.xml');
   const redirects = read('_redirects');
   const root = read('polymythseminars/index.html');
-  if (!root.includes('id="writingNav"')) fail('calendar root: missing visible Writing shortcut nav');
+  if (!root.includes('id="writingNav"') && !/data-preset=["']writing["']/.test(root)) fail('calendar root: missing visible Writing entry point');
   for (const [slug, band] of Object.entries(ROUTES)){
     const rel = `${slug}/index.html`;
     const html = read(rel);

@@ -1,0 +1,69 @@
+name: PolymythCAL native screen-reader sign-off
+description: Record the required VoiceOver or NVDA spoken-output pass for a release.
+title: "[PolymythCAL AT sign-off] "
+labels:
+  - accessibility
+  - polymythcal
+body:
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Native platform and screen reader
+      options:
+        - macOS, Safari, VoiceOver
+        - Windows, Chrome, NVDA
+        - Windows, Firefox, NVDA
+    validations:
+      required: true
+  - type: input
+    id: release
+    attributes:
+      label: Release ID or commit
+      placeholder: 2026-07-22-polymythcal-audit19-final
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: OS, browser, and assistive-technology versions
+    validations:
+      required: true
+  - type: textarea
+    id: protocol
+    attributes:
+      label: Protocol results
+      description: Copy the cases from docs/POLYMYTHCAL_SCREEN_READER_TEST_PROTOCOL.md and record Pass, Fail, or Blocked with the exact spoken output.
+    validations:
+      required: true
+  - type: checkboxes
+    id: coverage
+    attributes:
+      label: Required coverage
+      options:
+        - label: Main calendar structure, skip link, search, filters, and live result announcements were tested.
+          required: true
+        - label: Saved event, saved search, saved-items dialog, and feed controls were tested.
+          required: true
+        - label: List and calendar views, keyboard date-grid behavior, and stable event pages were tested.
+          required: true
+        - label: Submission and correction forms were tested.
+          required: true
+        - label: French mode, 400% zoom/reflow, high contrast, and reduced motion were tested.
+          required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence links and defects
+      description: Add recordings, screenshots, exact spoken phrases, and links to any repair issues.
+    validations:
+      required: true
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Sign-off outcome
+      options:
+        - Pass
+        - Fail
+        - Blocked
+    validations:
+      required: true

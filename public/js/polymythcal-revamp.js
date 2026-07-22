@@ -13,6 +13,7 @@
   let cachedCalendarToday = null;
   const PAGE_SIZE = 50;
   const SAVED_KEY = "polymythcal.savedEvents.v2";
+  const SEARCHES_KEY = "polymythcal.savedSearches.v2";
   const SET_KEYS = ["content", "places", "topics", "eventTypes", "opportunityTypes", "audiences", "formats", "statuses"];
   const STATE_KEYS = ["content", "time", ...SET_KEYS.filter(key => key !== "content")];
 
@@ -31,12 +32,19 @@
       save: "Save",
       remove: "Remove",
       savedEmpty: "You have no saved listings yet.",
+      savedSearchesEmpty: "You have no saved searches yet.",
+      saveSearch: "Save search",
+      searchSaved: "Search saved",
+      savedItems: "Saved items",
       source: "Official source",
       details: "View details",
       timePending: "Time unpublished",
       placePending: "Location unpublished",
-      confirmed: "Confirmed",
-      detailsPending: "Details pending",
+      confirmed: "Confirmed details",
+      detailsPending: "Some details pending",
+      checkedOn: "Checked",
+      projectedDate: "Projected date",
+      past: "Past",
       attend: "Event",
       apply: "Opportunity",
       loadMore: "Show more",
@@ -79,12 +87,19 @@
       save: "Enregistrer",
       remove: "Retirer",
       savedEmpty: "Vous n’avez encore enregistré aucune fiche.",
+      savedSearchesEmpty: "Vous n’avez encore enregistré aucune recherche.",
+      saveSearch: "Enregistrer la recherche",
+      searchSaved: "Recherche enregistrée",
+      savedItems: "Éléments enregistrés",
       source: "Source officielle",
       details: "Voir les détails",
       timePending: "Heure non publiée",
       placePending: "Lieu non publié",
-      confirmed: "Confirmé",
-      detailsPending: "Détails à confirmer",
+      confirmed: "Détails confirmés",
+      detailsPending: "Certains détails à confirmer",
+      checkedOn: "Vérifié le",
+      projectedDate: "Date projetée",
+      past: "Passé",
       attend: "Événement",
       apply: "Possibilité",
       loadMore: "Afficher plus",
@@ -134,14 +149,24 @@
     "Fellowships and grants": "Bourses et subventions",
     "Toronto and GTA": "Toronto et RGT",
     "Kingston to Montréal": "Kingston à Montréal",
+    "Dedicated pages": "Pages spécialisées",
+    "Dedicated academic calendar pages": "Pages spécialisées du calendrier universitaire",
+    "University+": "Université+",
+    "Philosophy": "Philosophie",
+    "Calls for papers": "Appels de communications",
+    "Lectures": "Conférences",
+    "Fellowships": "Bourses",
     "Share view": "Partager la vue",
     "Saved": "Enregistrés",
+    "Save search": "Enregistrer la recherche",
     "Get calendar updates": "Recevoir les mises à jour",
     "Submit an event": "Proposer un événement",
     "Correct a listing": "Corriger une fiche",
     "Français": "English",
     "Saved on this device": "Enregistré sur cet appareil",
+    "Saved items": "Éléments enregistrés",
     "Saved listings": "Fiches enregistrées",
+    "Saved searches": "Recherches enregistrées",
     "Close saved listings": "Fermer les fiches enregistrées",
     "Filters": "Filtres",
     "No extra filters": "Aucun filtre supplémentaire",
@@ -270,6 +295,7 @@
   let allEvents = [];
   let filteredEvents = [];
   let savedIds = loadSaved();
+  let savedSearches = loadSavedSearches();
   let searchWriteTimer = null;
   let lastFocusedElement = null;
   const expandedCalendarDays = new Set();
@@ -345,7 +371,7 @@
     return normalizeText([
       event.title, event.description, event.speaker_or_director, event.venue, event.city,
       event.country, event.type, ...(event.secondary_types || []), event.age_band,
-      event.source_id, event.source_name, event.organizer
+      event.source_id, event.source_name, event.organizer, event.raw_excerpt, event.topics, event.tags, event.qualification_reasons
     ].join(" "));
   }
 
@@ -462,6 +488,18 @@
 
   function persistSaved() {
     try { localStorage.setItem(SAVED_KEY, JSON.stringify([...savedIds])); }
+    catch (_) { /* Device storage may be disabled. */ }
+  }
+
+  function loadSavedSearches() {
+    try {
+      const value = JSON.parse(localStorage.getItem(SEARCHES_KEY) || "[]");
+      return Array.isArray(value) ? value.filter(item => item && typeof item.href === "string" && typeof item.label === "string").slice(0, 20) : [];
+    } catch (_) { return []; }
+  }
+
+  function persistSavedSearches() {
+    try { localStorage.setItem(SEARCHES_KEY, JSON.stringify(savedSearches.slice(0, 20))); }
     catch (_) { /* Device storage may be disabled. */ }
   }
 
@@ -707,6 +745,25 @@
     return labels[key] || labelFor(`${event._content === "apply" ? "opportunityTypes" : "eventTypes"}:${key}`);
   }
 
+  function eventFreshness(event) {
+    const items = [event._status === "confirmed" ? t.confirmed : t.detailsPending];
+    const reasons = Array.isArray(event.qualification_reasons) ? event.qualification_reasons.map(normalizeText) : [];
+    const projected = reasons.some(reason => reason.includes("current edition unconfirmed") || reason.includes("projected"));
+    if (projected) items.push(t.projectedDate);
+    const end = event._endDay || event._startDay;
+    if (end && end < calendarToday()) items.push(t.past);
+    const checkedRaw = event.last_checked_at || event.scraped_at || event.first_seen_at;
+    const checked = checkedRaw ? new Date(checkedRaw) : null;
+    if (checked && !Number.isNaN(checked.getTime())) {
+      items.push(`${t.checkedOn} ${formatEventTime(checked, { year: "numeric", month: "short", day: "numeric" })}`);
+    }
+    return items;
+  }
+
+  function freshnessHtml(event) {
+    return `<p class="pm-freshness-row">${eventFreshness(event).map(item => `<span>${escapeHtml(item)}</span>`).join('<span aria-hidden="true">·</span>')}</p>`;
+  }
+
   function dateBoxHtml(event) {
     if (isOngoing(event)) {
       const end = event._endDay;
@@ -732,6 +789,7 @@
           </div>
           <h3 class="pm-event-title"><a href="${routeFor(event)}">${escapeHtml(event.title)}</a></h3>
           <p class="pm-event-meta">${escapeHtml(formatMeta(event))}</p>
+          ${freshnessHtml(event)}
           ${descriptionText ? `<p class="pm-event-description">${escapeHtml(descriptionText)}</p>` : ""}
           <div class="pm-card-actions">
             <a class="pm-action primary-link" href="${routeFor(event)}">${escapeHtml(t.details)} <span aria-hidden="true">→</span></a>
@@ -923,13 +981,46 @@
     $("#pmJumpResults").textContent = t.viewResults(filteredEvents.length);
   }
 
+  function hasCustomSearch() {
+    return activeFilterItems().length > 0 || state.sort !== "soonest" || state.view !== "list";
+  }
+
+  function currentSearchLabel() {
+    const labels = activeFilterItems().map(item => item.label);
+    if (state.view === "calendar") labels.push(lang === "fr" ? "Vue calendrier" : "Calendar view");
+    if (state.sort !== "soonest") labels.push(labelFor(`sort:${state.sort}`));
+    const shown = labels.slice(0, 3);
+    const remaining = labels.length - shown.length;
+    return `${shown.join(" + ")}${remaining > 0 ? ` + ${remaining}` : ""}` || (lang === "fr" ? "Recherche du calendrier" : "Calendar search");
+  }
+
+  function saveCurrentSearch() {
+    if (!hasCustomSearch()) return;
+    writeStateToUrl();
+    const href = buildUrl(lang);
+    const item = { id: href, href, label: currentSearchLabel(), savedAt: new Date().toISOString() };
+    savedSearches = [item, ...savedSearches.filter(existing => existing.href !== href)].slice(0, 20);
+    persistSavedSearches();
+    renderSaved();
+    const button = $("#pmSaveSearch");
+    button.textContent = t.searchSaved;
+    $("#pmStatus").textContent = t.searchSaved;
+    setTimeout(() => { button.textContent = t.saveSearch; }, 1600);
+  }
+
   function renderSaved() {
     const list = $("#pmSavedList");
     const events = allEvents.filter(event => savedIds.has(event.id)).sort((a, b) => (a._start || 0) - (b._start || 0));
     list.innerHTML = events.length
       ? `<ul>${events.map(event => `<li class="pm-saved-item"><div><a href="${routeFor(event)}">${escapeHtml(event.title)}</a><span><time datetime="${isoDate(event._startDay)}">${escapeHtml(formatDate(event._startDay, { dateStyle: "medium" }))}</time> · ${escapeHtml(formatMeta(event))}</span></div><button type="button" class="pm-button subtle" data-remove-saved="${escapeHtml(event.id)}" aria-label="${escapeHtml(`${t.remove}: ${event.title}`)}">${escapeHtml(t.remove)}</button></li>`).join("")}</ul>`
       : `<p class="pm-empty-saved">${escapeHtml(t.savedEmpty)}</p>`;
-    $("#pmSavedCount").textContent = String(events.length);
+    const searchList = $("#pmSavedSearchList");
+    searchList.innerHTML = savedSearches.length
+      ? `<ul>${savedSearches.map(item => `<li class="pm-saved-item pm-saved-search-item"><div><a href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a><span>${escapeHtml(lang === "fr" ? "Ouvrir cette vue enregistrée" : "Open this saved view")}</span></div><button type="button" class="pm-button subtle" data-remove-search="${escapeHtml(item.id)}" aria-label="${escapeHtml(`${t.remove}: ${item.label}`)}">${escapeHtml(t.remove)}</button></li>`).join("")}</ul>`
+      : `<p class="pm-empty-saved">${escapeHtml(t.savedSearchesEmpty)}</p>`;
+    $("#pmSavedCount").textContent = String(events.length + savedSearches.length);
+    $("#pmSaveSearch").disabled = !hasCustomSearch();
+    $("#pmSaveSearch").textContent = t.saveSearch;
   }
 
   function updateSaveButtons(id) {
@@ -1106,6 +1197,11 @@
     document.addEventListener("keydown", event => {
       const target = event.target;
       const typing = target instanceof HTMLElement && (target.matches("input, textarea, select") || target.isContentEditable);
+      if (!typing && event.key === "/") {
+        event.preventDefault();
+        $("#pmSearch").focus();
+        return;
+      }
       if (state.view === "calendar" && !typing && (event.key === "ArrowLeft" || event.key === "ArrowRight")) {
         event.preventDefault();
         state.calendarMonth = addMonths(state.calendarMonth, event.key === "ArrowRight" ? 1 : -1);
@@ -1183,6 +1279,15 @@
         return;
       }
 
+      const removeSearch = event.target.closest("[data-remove-search]");
+      if (removeSearch) {
+        savedSearches = savedSearches.filter(item => item.id !== removeSearch.dataset.removeSearch);
+        persistSavedSearches();
+        renderSaved();
+        return;
+      }
+
+      if (event.target.closest("#pmSaveSearch")) { saveCurrentSearch(); return; }
       if (event.target.closest("#pmSavedToggle")) { openSavedDialog(); return; }
       if (event.target.closest("#pmCloseSaved")) { closeSavedDialog(); return; }
       if (event.target.closest("#pmShare")) { await shareCurrentView(); return; }
@@ -1235,7 +1340,7 @@
     configureResponsivePanels();
     $("#pmStatus").textContent = t.loading;
     try {
-      const response = await fetch(DATA_URL, { cache: "no-store" });
+      const response = await fetch(DATA_URL, { cache: "no-cache" });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const payload = await response.json();
       const raw = Array.isArray(payload) ? payload : (payload.events || payload.items || []);

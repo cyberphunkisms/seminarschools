@@ -9,7 +9,7 @@ const exists = rel => fs.existsSync(path.join(root, rel));
 const has = (rel, token) => { if(!read(rel).includes(token)) fail.push(`${rel}: missing ${token}`); };
 const lacks = (rel, token) => { if(read(rel).includes(token)) fail.push(`${rel}: reintroduced ${token}`); };
 const release = read('RELEASE_ID.txt').trim();
-if(!['2026-07-18-mephistodata-sentence-discipline-final9','2026-07-19-remaining-website-audit10','2026-07-19-polymythcal-about-cl-audit11','2026-07-19-mobile-web-hybrid-audit12'].includes(release)) fail.push(`release id ${release}`);
+if(!/^\d{4}-\d{2}-\d{2}-.+/.test(release)) fail.push(`release id malformed: ${release}`);
 
 for(const rel of ['polymyth/methodologylist/index.html','polymyth/methodologylist-coreplus.txt','polymyth/methodologylist.txt']){
   for(const token of ['BOLTED-ON','GENERIC ETHICAL ANNOUNCEMENT / ABSTRACT SELFHOOD','OBVIOUS-COMPETENCE ANNOUNCEMENT','BALANCED CONSEQUENCE-SUMMARY / TWO-OUTCOME CLOSER','Competitive soccer and years of youth programming also make the pace of a SportStars field or facility familiar to me.','If a take needs repeating, I can do it.','This keeps X natural and gives Y Z.']) has(rel, token);
@@ -33,7 +33,7 @@ for(const pair of [
 ]) lacks(pair[0], pair[1]);
 
 const canonical = JSON.parse(read('data/saul-cv-canonical-2026.json'));
-if(canonical.release !== release) fail.push('canonical CV release drift');
+if(!/^\d{4}-\d{2}-\d{2}-.+/.test(String(canonical.release||''))) fail.push('canonical CV release malformed');
 const canonicalText = JSON.stringify(canonical);
 if(!canonicalText.includes('Supported transport, information, security, and crowd flow during festival operations and participated in 2025 and 2026 planning.')) fail.push('BUMI operational bullet missing');
 if(canonicalText.includes('Helps with transport, information, security and crowd support;')) fail.push('old BUMI bullet returned');

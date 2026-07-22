@@ -70,3 +70,7 @@ Use current Windows, NVDA, Chrome, and Firefox. Run the sequence once in each br
 ## Evidence record
 
 For each row, record `Pass`, `Fail`, or `Blocked`, the exact spoken phrase, the focused element, the visible state, the URL, and a screenshot or short recording when a failure occurs. A failure requires an issue with the WCAG criterion, browser and assistive-technology pair, reproduction steps, expected output, actual output, and proposed repair.
+
+## Release sign-off handoff
+
+Native spoken-output testing remains a human platform test. Record each release pass through `.github/ISSUE_TEMPLATE/polymythcal-native-at-signoff.yml`. The issue records the release ID, exact operating-system, browser, and assistive-technology versions, every protocol outcome, spoken phrases, evidence, and repair links. Browser-assisted WCAG checks and multi-platform clean builds run automatically in `.github/workflows/predeploy.yml`; they complement rather than replace VoiceOver and NVDA speech confirmation.

@@ -1,0 +1,227 @@
+{
+  "release": "2026-07-21-polymythcal-audit18-predeploy",
+  "generated_at": "2026-07-22T03:58:36.138451+00:00",
+  "purpose": "Final pre-deploy audit of the Audit 17 Netlify-efficient source package",
+  "checks": [
+    {
+      "name": "Exact Netlify production command passes",
+      "passed": true,
+      "details": {
+        "consecutive_runs": 3,
+        "source_files_updated_on_last_run": 0,
+        "last_elapsed_seconds": 1.53
+      }
+    },
+    {
+      "name": "Repeated production builds are source-idempotent",
+      "passed": true,
+      "details": {
+        "search_updates": 0,
+        "writing_updates": 0,
+        "academic_updates": 0,
+        "type_link_updates": 0,
+        "type_floor_updates": 0
+      }
+    },
+    {
+      "name": "Full repository verification passes",
+      "passed": true,
+      "details": {
+        "passed": 90,
+        "total": 90,
+        "elapsed_seconds": 7.8
+      }
+    },
+    {
+      "name": "PolymythCAL clarity verifier passes",
+      "passed": true,
+      "details": {
+        "passed": 29,
+        "total": 29
+      }
+    },
+    {
+      "name": "Interaction and design browser audit passes",
+      "passed": true,
+      "details": {
+        "passed": 94,
+        "total": 94
+      }
+    },
+    {
+      "name": "WCAG 2.2 AA browser audit passes",
+      "passed": true,
+      "details": {
+        "passed": 42,
+        "total": 42,
+        "failed": 0
+      }
+    },
+    {
+      "name": "Audit 13 source/data verification passes",
+      "passed": true,
+      "details": {
+        "passed": 13,
+        "total": 13
+      }
+    },
+    {
+      "name": "Audit 14 structural verification passes",
+      "passed": true,
+      "details": {
+        "passed": 28,
+        "total": 28
+      }
+    },
+    {
+      "name": "Adapter fixtures pass",
+      "passed": true,
+      "details": {
+        "passed": 8,
+        "total": 8
+      }
+    },
+    {
+      "name": "Lifecycle reconciliation tests pass",
+      "passed": true,
+      "details": {
+        "passed": 6,
+        "total": 6
+      }
+    },
+    {
+      "name": "Canonical events/pages/aliases/ICS remain synchronized",
+      "passed": true,
+      "details": {
+        "events": 839,
+        "event_pages": 839,
+        "aliases": 839,
+        "ics": 839
+      }
+    },
+    {
+      "name": "Expired event pages are retained as noindex archive records",
+      "passed": true,
+      "details": {
+        "explicit_archive_notes": 265,
+        "noindex_event_pages": 770,
+        "indexable_event_pages": 69,
+        "sitemap_urls": 847
+      }
+    },
+    {
+      "name": "Main PolymythCAL shell remains lightweight",
+      "passed": true,
+      "details": {
+        "bytes": 25851,
+        "budget_bytes": 40000
+      }
+    },
+    {
+      "name": "Saved events and saved searches are device-local and independently removable",
+      "passed": true,
+      "details": {
+        "saved_event_key": "polymythcal.savedEvents.v2",
+        "saved_search_key": "polymythcal.savedSearches.v2",
+        "saved_search_limit": 20
+      }
+    },
+    {
+      "name": "Public forms include labels, Netlify wiring, bilingual alternates, and social metadata",
+      "passed": true,
+      "details": {
+        "forms": [
+          "submit",
+          "correct"
+        ],
+        "confirmation": "thanks"
+      }
+    },
+    {
+      "name": "Privacy scan has no blocking failures",
+      "passed": true,
+      "details": {
+        "failures": 0,
+        "conservative_phone_like_warnings": 5
+      }
+    },
+    {
+      "name": "Production dependency is lockfile-pinned with integrity metadata",
+      "passed": true,
+      "details": {
+        "dependency": "@netlify/blobs",
+        "version": "10.1.0",
+        "integrity_recorded": true
+      }
+    },
+    {
+      "name": "Source package excludes generated public mirror and local secrets",
+      "passed": true,
+      "details": {
+        "excluded": [
+          "public",
+          ".git",
+          ".netlify",
+          "node_modules",
+          "__pycache__",
+          "data/polymythcal-audit18 screenshots",
+          ".env",
+          "*.log",
+          "*.pyc"
+        ]
+      }
+    },
+    {
+      "name": "Final ZIP builds from a clean extraction with no generated public directory",
+      "passed": true,
+      "details": {
+        "source_files": 4052,
+        "excluded_artifacts_found": 0,
+        "clean_build_seconds": 1.52,
+        "full_repository_checks_passed": 90,
+        "full_repository_checks_total": 90
+      }
+    },
+    {
+      "name": "Toronto date-boundary transitions are pre-applied before deployment",
+      "passed": true,
+      "details": {
+        "newly_archived_july_21_listings": 11,
+        "current_events_scanned_by_academic_shortcuts": 574,
+        "source_updates_on_confirmation_build": 0
+      }
+    }
+  ],
+  "passed": 20,
+  "failed": 0,
+  "metrics": {
+    "canonical_events": 839,
+    "canonical_event_pages": 839,
+    "legacy_redirect_aliases": 839,
+    "event_ics_files": 839,
+    "indexable_current_event_pages": 69,
+    "noindex_event_pages": 770,
+    "explicit_past_event_archive_notes": 265,
+    "sitemap_urls": 847,
+    "public_html_pages_after_build": 2474,
+    "source_html_pages": 2480,
+    "main_calendar_shell_bytes": 25851,
+    "full_verifier_checks": 90,
+    "clarity_checks": 29,
+    "interaction_design_checks": 94,
+    "wcag_browser_checks": 42,
+    "adapter_tests": 8,
+    "lifecycle_tests": 6,
+    "privacy_failures": 0,
+    "privacy_warnings": 5,
+    "production_build_seconds": 1.53,
+    "production_dependency_count": 1,
+    "packaged_source_files": 4052,
+    "clean_package_build_seconds": 1.52,
+    "current_events_scanned_by_academic_shortcuts": 574
+  },
+  "limitations": [
+    "Native VoiceOver confirmation requires macOS and native NVDA confirmation requires Windows; the packaged protocol remains included.",
+    "The npm vulnerability advisory endpoint returned an upstream 503/DNS error in this execution environment. The lockfile and integrity metadata were verified, but this report does not claim a fresh online advisory result."
+  ]
+}

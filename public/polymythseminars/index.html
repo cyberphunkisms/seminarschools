@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="20260721-audit18" name="ss-build"/>
 <meta content="Find and filter public events and application opportunities across Toronto, Kingston, Montréal, and the communities between them." name="description"/>
 <title>Polymythcal | Seminar Schools</title>
 <link href="https://seminarschools.com/polymythseminars/" rel="canonical"/>
@@ -23,8 +24,8 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Libre+Baskerville:wght@400;700&amp;display=swap" rel="stylesheet"/>
 <link href="/css/theme.css?v=cl91" rel="stylesheet"/>
 <link href="/css/alive.css?v=cl91" rel="stylesheet"/>
-<link href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" rel="stylesheet"/>
-<link href="/css/polymythcal-revamp.css?v=20260721-audit16" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link href="/css/polymythcal-revamp.css?v=20260721-audit18" rel="stylesheet"/>
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -35,6 +36,7 @@
     "inLanguage": ["en-CA", "fr-CA"]
   }
   </script>
+
 </head>
 <body data-geometry="indra-web" data-indra-intensity="0.035" data-page-weight="light" data-route-type="calendar">
 <a class="skip-link" href="#pmResults">Skip to results</a>
@@ -65,10 +67,13 @@
 <button class="pm-button subtle" data-preset="fellowships" type="button">Fellowships and grants</button>
 <button class="pm-button subtle" data-preset="toronto" type="button">Toronto and GTA</button>
 <button class="pm-button subtle" data-preset="corridor" type="button">Kingston to Montréal</button>
-</nav></div>
+</nav>
+<div class="pm-dedicated-row"><span>Dedicated pages</span><nav aria-label="Dedicated academic calendar pages" class="pm-dedicated-links" id="academicNav"><a href="/university/">University+</a><a href="/philosophy/">Philosophy</a><a href="/humanities/">Humanities</a><a href="/cfps/">Calls for papers</a><a href="/lectures/">Lectures</a><a href="/fellowships/">Fellowships</a></nav></div>
+</div>
 </details><nav aria-label="Calendar tools" class="pm-utility-bar pm-panel">
 <div aria-label="Personal calendar tools" class="pm-utility-group">
 <button class="pm-button" id="pmShare" type="button">Share view</button>
+<button class="pm-button" disabled="" id="pmSaveSearch" type="button">Save search</button>
 <button aria-controls="pmSavedPanel" aria-haspopup="dialog" class="pm-button" id="pmSavedToggle" type="button">Saved <span class="pm-count" id="pmSavedCount">0</span></button>
 <a class="pm-link-button" href="/polymythseminars/subscribe/">Get calendar updates</a>
 </div>
@@ -81,11 +86,12 @@
 <div class="pm-dialog-head">
 <div>
 <p class="pm-dialog-kicker">Saved on this device</p>
-<h2 id="pmSavedTitle">Saved listings</h2>
+<h2 id="pmSavedTitle">Saved items</h2>
 </div>
 <button aria-label="Close saved listings" class="pm-button icon" id="pmCloseSaved" type="button">×</button>
 </div>
-<div class="pm-saved-list" id="pmSavedList"></div>
+<section class="pm-saved-section" aria-labelledby="pmSavedListingsTitle"><h3 id="pmSavedListingsTitle">Saved listings</h3><div class="pm-saved-list" id="pmSavedList"></div></section>
+<section class="pm-saved-section" aria-labelledby="pmSavedSearchesTitle"><h3 id="pmSavedSearchesTitle">Saved searches</h3><div class="pm-saved-list" id="pmSavedSearchList"></div></section>
 </dialog><details class="pm-filter-drawer pm-panel" id="pmFilterDrawer" open="">
 <summary class="pm-filter-drawer-summary">
 <span><strong>Filters</strong><span id="pmFilterSelectionCount">No extra filters</span></span>
@@ -222,7 +228,7 @@
 </section><div class="pm-mobile-bar" id="pmMobileBar">
 <button aria-controls="pmFilterDrawer" class="pm-button" id="pmMobileFilters" type="button">Filters <span class="pm-count" id="pmMobileFilterCount">0</span></button>
 <button class="pm-button primary" id="pmMobileResults" type="button">View results</button>
-</div><section aria-labelledby="pmResultsTitle" class="pm-results" id="pmResults">
+</div><section aria-labelledby="pmResultsTitle" aria-describedby="quickGuideCopy" class="pm-results" id="pmResults">
 <div class="pm-results-head">
 <div>
 <h2 id="pmResultsTitle">Calendar listings</h2>
@@ -248,7 +254,7 @@
 </section><p class="pm-footer-note" id="quickGuideCopy">Open a title for the stable Polymythcal page. Every listing also links to its official source. Missing times and locations stay visible as pending details. Saved listings remain on this device.</p><noscript><p class="pm-noscript pm-panel">Polymythcal needs JavaScript for interactive filtering. You can still use the <a href="/polymythseminars/subscribe/">RSS and calendar feeds</a> or browse the <a href="/sitemap/">site map</a>.</p></noscript></main>
 <script defer="" src="/js/mandala.js?v=cl91"></script>
 <script defer="" src="/js/indra.js?v=cl91"></script>
-<script defer="" src="/js/polymythcal-revamp.js?v=20260721-audit16"></script>
+<script defer="" src="/js/polymythcal-revamp.js?v=20260721-audit18"></script>
 <script defer="" src="/js/theme.js?v=cl91"></script>
 <script defer="" src="/js/footer.js?v=20260719-audit11-decisions"></script>
 <script defer="" src="/js/site-keyboard-enhancements.js"></script>

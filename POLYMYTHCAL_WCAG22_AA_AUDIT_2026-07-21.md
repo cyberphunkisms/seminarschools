@@ -1,0 +1,51 @@
+# PolymythCAL WCAG 2.2 AA audit
+
+- Browser-assisted checks passed: **42/42**
+- Browser-assisted checks failed: **0**
+- Native VoiceOver: manual macOS protocol retained
+- Native NVDA: manual Windows protocol retained
+
+## Results
+
+- PASS · Calendar IDs are unique · 4.1.1 · `[]`
+- PASS · Calendar form controls have programmatic labels · 1.3.1, 3.3.2, 4.1.2 · `[]`
+- PASS · Calendar buttons and links have accessible names · 2.4.4, 4.1.2 · `{"buttons": 0, "links": 0}`
+- PASS · Calendar has one main landmark and one H1 · 1.3.1, 2.4.6 · `{"duplicates": [], "unlabeled": [], "unnamedButtons": 0, "unnamedLinks": 0, "jumps": [], "skipTarget": true, "mainCount": 1, "h1Count": 1, "lang": "en-CA"}`
+- PASS · Calendar skip link targets the results region · 2.4.1 · `{"duplicates": [], "unlabeled": [], "unnamedButtons": 0, "unnamedLinks": 0, "jumps": [], "skipTarget": true, "mainCount": 1, "h1Count": 1, "lang": "en-CA"}`
+- PASS · Calendar heading order avoids skipped levels · 1.3.1, 2.4.6 · `[]`
+- PASS · Calendar declares Canadian English · 3.1.1 · `"en-CA"`
+- PASS · Initial results render in a bounded page · 2.4.6 · `50`
+- PASS · Result count is announced in the results heading · 4.1.3 · `"586 listings"`
+- PASS · Events and opportunities can remain selected together · 3.2.2 · `2`
+- PASS · First Tab reaches the visible-on-focus skip link · 2.1.1, 2.4.1, 2.4.7, 2.4.11 · `{"tag": "A", "cls": "skip-link", "outline": "solid"}`
+- PASS · Slash keyboard shortcut focuses search · 2.1.1 · `"pmSearch"`
+- PASS · Multiple place filters remain operable together · 3.2.2 · `2`
+- PASS · Close-spelling Montréal search returns results · 3.3.2 · `40`
+- PASS · Device-local saved event state persists · 4.1.2 · `["research-f7322782aec1"]`
+- PASS · Saved listings open as a labelled modal dialog · 2.4.3, 4.1.2 · `"pmSavedTitle"`
+- PASS · Save-search control becomes available for a meaningful view · 3.2.2 · `true`
+- PASS · Device-local saved search preserves URL state · 3.2.3, 4.1.2 · `[{"id": "blank?q=philosophy&places=montreal%2Ctoronto-gta", "href": "blank?q=philosophy&places=montreal%2Ctoronto-gta", "label": "“philosophy” + Toronto and GTA + Montréal and West Island", "savedAt": "2026-07-22T04:06:23.242Z"}]`
+- PASS · Share-view control exposes the current URL state · 3.2.3 · `"https://seminarschools.com/blank?q=philosophy&places=montreal%2Ctoronto-gta"`
+- PASS · Desktop calendar view exposes a six-week grid · 1.3.1 · `42`
+- PASS · View toggle exposes its pressed state · 4.1.2 · `"true"`
+- PASS · Chromium accessibility tree names every exposed control · 4.1.2 · `[]`
+- PASS · Reduced-motion preference suppresses motion · 2.3.3 · `{"transition": "0s", "animation": "0s", "scroll": "auto"}`
+- PASS · Forced-colour mode preserves visible keyboard focus · 1.4.11, 2.4.7 · `{"tag": "A", "cls": "skip-link", "outline": "solid", "width": "1px"}`
+- PASS · French URL state restores page language · 3.1.1, 3.1.2 · `"fr-CA"`
+- PASS · French URL state restores search and place filters · 3.2.3 · `{"query": "montral"}`
+- PASS · French controls use translated visible labels · 3.1.2 · `"Que voulez-vous trouver?"`
+- PASS · Calendar reflows at 320 CSS pixels · 1.4.10 · `[320, 320]`
+- PASS · Mobile filter drawer starts collapsed · 3.2.1 · `false`
+- PASS · Mobile filter button opens the filter drawer · 4.1.2 · `true`
+- PASS · Mobile calendar uses a vertical agenda · 1.3.1, 1.4.10 · `"block"`
+- PASS · Visible mobile targets meet the 24-pixel minimum · 2.5.8 · `[]`
+- PASS · Submission fields have programmatic labels · 1.3.1, 3.3.2 · `[]`
+- PASS · Submission form has one main landmark and H1 · 1.3.1, 2.4.6 · `{"duplicates": [], "unlabeled": [], "unnamedButtons": 0, "unnamedLinks": 0, "jumps": [], "skipTarget": true, "mainCount": 1, "h1Count": 1, "lang": "en-CA"}`
+- PASS · Submission form reflows at 320 CSS pixels · 1.4.10 · `[320, 320]`
+- PASS · Correction fields have programmatic labels · 1.3.1, 3.3.2 · `[]`
+- PASS · Correction form exposes the stable-listing URL field · 3.3.2 · `1`
+- PASS · Correction form reflows at 320 CSS pixels · 1.4.10 · `[320, 320]`
+- PASS · Stable event page has source, calendar, and correction actions · 2.4.4 · `["Official source · Source officielle ↗", "Add to calendar · Ajouter au calendrier", "Correct this listing · Corriger cette fiche"]`
+- PASS · Stable event page has one main landmark and H1 · 1.3.1, 2.4.6 · `{"duplicates": [], "unlabeled": [], "unnamedButtons": 0, "unnamedLinks": 0, "jumps": [], "skipTarget": true, "mainCount": 1, "h1Count": 1, "lang": "en-CA"}`
+- PASS · Stable event page reflows at 320 CSS pixels · 1.4.10 · `[320, 320]`
+- PASS · Browser run completed without JavaScript errors · 4.1.1 · `[]`

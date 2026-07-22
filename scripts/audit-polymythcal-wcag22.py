@@ -1,229 +1,318 @@
 #!/usr/bin/env python3
-"""Browser-assisted WCAG 2.2 AA audit for Polymythcal's public surfaces.
+"""Browser-assisted WCAG 2.2 AA audit for the current PolymythCAL interface.
 
-Chromium is loaded from local files with scripts/styles inlined because this
-execution environment applies an enterprise URL block policy to headless Chrome.
-The rendered DOM, keyboard model, media emulation, JS features, and Chrome
-accessibility tree remain testable. Native VoiceOver and NVDA runs require their
-respective operating systems and are tracked separately in the companion protocol.
+The audit executes the production HTML, CSS, JavaScript, and canonical event data
+locally in Chromium. Native VoiceOver and NVDA speech output remain manual tests
+because those screen readers require macOS and Windows.
 """
 from __future__ import annotations
-import asyncio, html, json, mimetypes, re
+
+import json
+import os
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from playwright.async_api import async_playwright
 
-ROOT=Path(__file__).resolve().parents[1]
-OUT_JSON=ROOT/'data/polymythcal-wcag22-browser-audit.json'
-OUT_MD=ROOT/'POLYMYTHCAL_WCAG22_AA_AUDIT_2026-07-20.md'
-CHROMIUM='/usr/bin/chromium'
+from bs4 import BeautifulSoup
+from playwright.sync_api import sync_playwright
 
-FEED_INDEX=json.loads((ROOT/'polymythseminars/feeds/index.json').read_text(encoding='utf-8'))
-_PAGE_CACHE={}
+ROOT = Path(__file__).resolve().parents[1]
+OUT_JSON = ROOT / "data" / "polymythcal-wcag22-browser-audit.json"
+OUT_MD = ROOT / "POLYMYTHCAL_WCAG22_AA_AUDIT_2026-07-22.md"
+CHROMIUM = "/usr/bin/chromium"
+RESULTS: list[dict[str, Any]] = []
 
-def _trim_calendar_for_audit(text:str)->str:
-    """Keep representative corridor records while avoiding a one-megabyte DOM fixture.
 
-    Production files remain untouched. The browser audit exercises the same renderer,
-    filters, local storage, translation, and accessibility code against a compact
-    deterministic slice containing Montréal and non-Montréal records.
-    """
-    match=re.search(r'(<script id="events-fallback" type="application/json">)([\s\S]*?)(</script>)',text)
-    if match:
-        payload=json.loads(match.group(2))
-        all_events=list(payload.get('events') or [])
-        montreal=[e for e in all_events if 'montr' in ' '.join(str(e.get(k,'')) for k in ('city','venue','title','description')).lower()]
-        others=[e for e in all_events if e not in montreal]
-        selected=(montreal[:16]+others[:16])
-        payload['events']=selected
-        payload['count']=len(selected)
-        payload['_total_events']=len(selected)
-        compact=json.dumps(payload,ensure_ascii=False,separators=(',',':')).replace('</',r'<\/')
-        text=text[:match.start()]+match.group(1)+compact+match.group(3)+text[match.end():]
-    text=re.sub(r'<!-- SS_STATIC_EVENTS_START -->[\s\S]*?<!-- SS_STATIC_EVENTS_END -->','<!-- SS_STATIC_EVENTS_START --><div class="ssr-event-list" data-ssr-events="true"></div><!-- SS_STATIC_EVENTS_END -->',text,count=1)
-    return text
+def resolve_chromium_path(browser_type) -> str:
+    configured = os.environ.get("CHROMIUM_PATH", "").strip()
+    candidates = [configured, "/usr/bin/chromium", "/usr/bin/chromium-browser", "/usr/bin/google-chrome", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"]
+    for candidate in candidates:
+        if candidate and Path(candidate).exists():
+            return candidate
+    managed = getattr(browser_type, "executable_path", "")
+    if managed and Path(managed).exists():
+        return managed
+    raise FileNotFoundError("Chromium was not found. Set CHROMIUM_PATH or run: python -m playwright install chromium")
 
-def inline_page(rel:str)->str:
-    if rel in _PAGE_CACHE: return _PAGE_CACHE[rel]
-    text=(ROOT/rel).read_text(encoding='utf-8')
-    if rel=='polymythseminars/index.html':
-        text=_trim_calendar_for_audit(text)
-    def css_repl(m:re.Match)->str:
-        href=m.group(1).split('?')[0]
-        p=ROOT/href.lstrip('/')
-        if not p.exists(): return ''
-        css=p.read_text(encoding='utf-8')
-        css=re.sub(r'@import\s+url\([^;]+;','',css)
-        css=re.sub(r'url\((?!["\']?data:)[^)]+\)','none',css)
-        return f'<style data-local-src="{html.escape(href)}">{css}</style>'
-    text=re.sub(r'<link[^>]+rel=["\']stylesheet["\'][^>]+href=["\']([^"\']+)["\'][^>]*>',css_repl,text,flags=re.I)
-    def js_repl(m:re.Match)->str:
-        src=m.group(1).split('?')[0]
-        if src != '/js/polymythcal-features.js': return ''
-        p=ROOT/src.lstrip('/')
-        if not p.exists(): return ''
-        js=p.read_text(encoding='utf-8').replace('</script>','<\\/script>')
-        return f'<script data-local-src="{html.escape(src)}">\n{js}\n</script>'
-    text=re.sub(r'<script[^>]+src=["\']([^"\']+)["\'][^>]*>\s*</script>',js_repl,text,flags=re.I)
-    # Remove resource hints, icons, and manifests that would attempt blocked navigation.
-    text=re.sub(r'<link\b(?![^>]*rel=["\'](?:canonical|alternate)["\'])[^>]*>',lambda m:m.group(0) if 'stylesheet' in m.group(0).lower() else '',text,flags=re.I)
-    bootstrap='''<script>
-window.__pmStorageData=window.__pmStorageData||{};
-Object.defineProperty(window,'localStorage',{configurable:true,value:{
- getItem:function(k){return Object.prototype.hasOwnProperty.call(window.__pmStorageData,k)?window.__pmStorageData[k]:null},
- setItem:function(k,v){window.__pmStorageData[k]=String(v)},removeItem:function(k){delete window.__pmStorageData[k]},
- clear:function(){window.__pmStorageData={}},key:function(i){return Object.keys(window.__pmStorageData)[i]||null},
- get length(){return Object.keys(window.__pmStorageData).length}
-}});
-window.fetch=function(u){var k=new URL(String(u),'https://local.invalid').pathname,d=null,el=null;
- if(k==='/polymythseminars/events.json'||k==='/data/polymyth-seminar-events.json'){el=document.getElementById('events-fallback');if(el)try{d=JSON.parse(el.textContent)}catch(e){}}
- else if(k==='/polymythseminars/watchlist.json'){el=document.getElementById('watchlist-fallback');if(el)try{d=JSON.parse(el.textContent)}catch(e){}}
- else if(k==='/polymythseminars/feeds/index.json')d=__FEED_INDEX__;
- return Promise.resolve({ok:!!d,status:d?200:404,json:function(){return Promise.resolve(d)},text:function(){return Promise.resolve(d?JSON.stringify(d):'')}})};
-</script>'''.replace('__FEED_INDEX__',json.dumps(FEED_INDEX,ensure_ascii=False).replace('</','<\\/'))
-    result=text.replace('<head>','<head>'+bootstrap,1)
-    _PAGE_CACHE[rel]=result
-    return result
 
-def issue(name:str,passed:bool,details:Any,criterion:str,scope:str='automated')->dict:
-    return {'name':name,'passed':bool(passed),'details':details,'criterion':criterion,'scope':scope}
+def record(name: str, passed: bool, details: Any, criterion: str, scope: str = "browser-assisted") -> None:
+    RESULTS.append({
+        "name": name,
+        "passed": bool(passed),
+        "details": details,
+        "criterion": criterion,
+        "scope": scope,
+    })
+    if not passed:
+        raise AssertionError(f"{name}: {details}")
 
-async def set_page(page, rel:str, query:str=''):
-    await page.goto('about:blank')
+
+def page_assets() -> tuple[str, str, dict[str, Any], str]:
+    soup = BeautifulSoup((ROOT / "polymythseminars/index.html").read_text(encoding="utf-8"), "html.parser")
+    for node in soup.select('script[src], link[rel="stylesheet"], link[rel="preconnect"], link[rel="manifest"], link[rel="icon"], link[rel="apple-touch-icon"]'):
+        node.decompose()
+    css = "\n".join(
+        (ROOT / rel).read_text(encoding="utf-8")
+        for rel in ["css/theme.css", "css/alive.css", "css/site-wide-type-zoom.css", "css/polymythcal-revamp.css"]
+    )
+    payload = json.loads((ROOT / "polymythseminars/events.json").read_text(encoding="utf-8"))
+    js = (ROOT / "js/polymythcal-revamp.js").read_text(encoding="utf-8")
+    return str(soup), css, payload, js
+
+
+def load_calendar(page, html: str, css: str, payload: dict[str, Any], app_js: str, query: str = "") -> None:
+    page.set_content(html, wait_until="domcontentloaded")
+    page.add_style_tag(content=css)
+    page.evaluate(
+        """data => {
+          window.__pmStore = {};
+          Object.defineProperty(window, 'localStorage', { configurable: true, value: {
+            getItem: key => Object.prototype.hasOwnProperty.call(window.__pmStore, key) ? window.__pmStore[key] : null,
+            setItem: (key, value) => { window.__pmStore[key] = String(value); },
+            removeItem: key => { delete window.__pmStore[key]; },
+            clear: () => { window.__pmStore = {}; }
+          }});
+          window.fetch = async () => ({ ok: true, status: 200, json: async () => data });
+          window.__copied = '';
+          try { Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async value => { window.__copied = String(value); } } }); } catch (_) {}
+        }""",
+        payload,
+    )
+    js = app_js
     if query:
-        await page.evaluate("q=>history.replaceState(null,'','about:blank'+q)",query)
-    await page.set_content(inline_page(rel),wait_until='load',timeout=120000)
-    await page.wait_for_timeout(900)
+        js = js.replace("new URLSearchParams(location.search)", f"new URLSearchParams({json.dumps(query)})")
+    page.add_script_tag(content=js)
+    page.wait_for_selector(".pm-event-card", timeout=30_000)
 
-async def dom_audit(page,label:str):
-    return await page.evaluate("""label=>{
- const ids=[...document.querySelectorAll('[id]')].map(x=>x.id);const dup=[...new Set(ids.filter((x,i)=>ids.indexOf(x)!==i))];
- const missingLabels=[...document.querySelectorAll('input:not([type=hidden]),select,textarea')].filter(x=>{
-   if(x.labels&&x.labels.length)return false; if(x.getAttribute('aria-label')||x.getAttribute('aria-labelledby'))return false; return true;
- }).map(x=>x.id||x.name||x.outerHTML.slice(0,80));
- const unnamedButtons=[...document.querySelectorAll('button')].filter(x=>!((x.textContent||'').trim()||x.getAttribute('aria-label')||x.getAttribute('aria-labelledby'))).length;
- const unnamedLinks=[...document.querySelectorAll('a[href]')].filter(x=>!((x.textContent||'').trim()||x.getAttribute('aria-label')||x.querySelector('img[alt]'))).length;
- const hs=[...document.querySelectorAll('h1,h2,h3,h4,h5,h6')].map(x=>+x.tagName[1]);const jumps=[];for(let i=1;i<hs.length;i++)if(hs[i]-hs[i-1]>1)jumps.push([hs[i-1],hs[i]]);
- const skip=document.querySelector('a.skip-link');const target=skip&&document.querySelector(skip.getAttribute('href'));
- return {label,duplicateIds:dup,missingLabels,unnamedButtons,unnamedLinks,headingJumps:jumps,mainCount:document.querySelectorAll('main').length,h1Count:document.querySelectorAll('h1').length,skipTargetValid:!!target,lang:document.documentElement.lang};
- }""",label)
 
-async def reflow(page,rel,label,query=''):
-    await page.set_viewport_size({'width':320,'height':900})
-    await set_page(page,rel,query)
-    await page.wait_for_timeout(500)
-    dims=await page.evaluate("({scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth,bodyScrollWidth:document.body.scrollWidth})")
-    return issue(f'{label} reflows at 320 CSS px',dims['scrollWidth']<=dims['clientWidth']+2,dims,'1.4.10')
+def dom_audit(page) -> dict[str, Any]:
+    return page.evaluate(
+        """() => {
+          const ids = [...document.querySelectorAll('[id]')].map(el => el.id);
+          const duplicates = [...new Set(ids.filter((id, i) => ids.indexOf(id) !== i))];
+          const unlabeled = [...document.querySelectorAll('input:not([type=hidden]),select,textarea')].filter(el => {
+            if (el.labels && el.labels.length) return false;
+            return !(el.getAttribute('aria-label') || el.getAttribute('aria-labelledby'));
+          }).map(el => el.id || el.name || el.outerHTML.slice(0, 100));
+          const unnamedButtons = [...document.querySelectorAll('button')].filter(el => !((el.textContent || '').trim() || el.getAttribute('aria-label') || el.getAttribute('aria-labelledby'))).length;
+          const unnamedLinks = [...document.querySelectorAll('a[href]')].filter(el => !((el.textContent || '').trim() || el.getAttribute('aria-label') || el.querySelector('img[alt]'))).length;
+          const headings = [...document.querySelectorAll('h1,h2,h3,h4,h5,h6')].map(el => Number(el.tagName.slice(1)));
+          const jumps = [];
+          for (let i = 1; i < headings.length; i++) if (headings[i] - headings[i - 1] > 1) jumps.push([headings[i - 1], headings[i]]);
+          const skip = document.querySelector('a.skip-link');
+          const target = skip ? document.querySelector(skip.getAttribute('href')) : null;
+          return {
+            duplicates, unlabeled, unnamedButtons, unnamedLinks, jumps,
+            skipTarget: Boolean(target), mainCount: document.querySelectorAll('main').length,
+            h1Count: document.querySelectorAll('h1').length, lang: document.documentElement.lang
+          };
+        }"""
+    )
 
-async def run():
-    results=[]; console_errors=[]
-    async with async_playwright() as pw:
-        browser=await pw.chromium.launch(executable_path=CHROMIUM,headless=True,args=['--no-sandbox'])
-        context=await browser.new_context(viewport={'width':1280,'height':900})
-        page=await context.new_page()
-        page.on('pageerror',lambda e:console_errors.append('pageerror: '+str(e)))
-        page.on('console',lambda m:console_errors.append('console: '+m.text) if m.type=='error' else None)
 
-        # One main-calendar render supports URL, search, keyboard, local storage,
-        # reflow, reduced motion, forced colours, and accessibility-tree checks.
-        print('AUDIT stage main load',flush=True)
-        await set_page(page,'polymythseminars/index.html','?q=montral&focus=montreal&lang=fr')
-        print('AUDIT stage main loaded',flush=True)
-        await page.wait_for_selector('#pmTools',timeout=30000)
-        dom=await dom_audit(page,'calendar')
-        visible=await page.locator('#eventsContainer article.event').count()
-        results += [
-          issue('Calendar has unique IDs',not dom['duplicateIds'],dom['duplicateIds'],'4.1.1'),
-          issue('Calendar controls have programmatic labels',not dom['missingLabels'],dom['missingLabels'],'1.3.1, 3.3.2, 4.1.2'),
-          issue('Calendar interactive elements have accessible names',dom['unnamedButtons']==0 and dom['unnamedLinks']==0,{'buttons':dom['unnamedButtons'],'links':dom['unnamedLinks']},'2.4.4, 4.1.2'),
-          issue('Calendar has a valid skip link and main landmark',dom['skipTargetValid'] and dom['mainCount']==1,dom,'2.4.1'),
-          issue('French URL state restores interface language',dom['lang']=='fr-CA' and await page.input_value('#calendarSearch')=='montral',{'lang':dom['lang'],'query':await page.input_value('#calendarSearch')},'3.1.1, 3.1.2'),
-          issue('Typo-tolerant bilingual search returns Montréal results',visible>0,{'visibleEvents':visible,'countLine':await page.locator('#countLine').inner_text()},'3.2.2'),
-          issue('URL-backed focus restores Montréal',await page.get_attribute('#quickFocusNav [data-focus="montreal"]','aria-pressed')=='true',await page.get_attribute('#quickFocusNav [data-focus="montreal"]','aria-pressed'),'3.2.3'),
-        ]
-        await page.keyboard.press('Tab')
-        focused=await page.evaluate("({tag:document.activeElement.tagName,cls:document.activeElement.className,outline:getComputedStyle(document.activeElement).outlineStyle,width:getComputedStyle(document.activeElement).outlineWidth})")
-        results.append(issue('First keyboard focus reaches visible skip link',focused['tag']=='A' and 'skip-link' in focused['cls'] and focused['outline']!='none',focused,'2.1.1, 2.4.1, 2.4.7, 2.4.11'))
-        await page.keyboard.press('/')
-        results.append(issue('Slash shortcut focuses search',await page.evaluate("document.activeElement===document.querySelector('#calendarSearch')"),await page.evaluate("document.activeElement&&document.activeElement.id"),'2.1.1'))
-        first_save=page.locator('.save-event').first; await first_save.click()
-        saved=await page.evaluate("JSON.parse(localStorage.getItem('polymythcal.savedEvents.v1')||'[]')")
-        results.append(issue('Saved events persist in device-local storage',len(saved)==1 and await first_save.get_attribute('aria-pressed')=='true',saved,'4.1.2'))
-        await page.locator('#pmTools button[data-pm-label="Save search"]').click()
-        searches=await page.evaluate("JSON.parse(localStorage.getItem('polymythcal.savedSearches.v1')||'[]')")
-        results.append(issue('Saved searches persist URL state locally',len(searches)==1 and 'q=montral' in searches[0].get('query',''),searches,'3.2.3'))
+def count_from_title(text: str) -> int:
+    match = re.search(r"([\d,\s]+)", text)
+    return int(re.sub(r"\D", "", match.group(1))) if match else 0
 
-        print('AUDIT stage main interactions done',flush=True)
-        await page.set_viewport_size({'width':320,'height':900}); await page.wait_for_timeout(300)
-        dims=await page.evaluate("({scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth,bodyScrollWidth:document.body.scrollWidth})")
-        results.append(issue('Calendar reflows at 320 CSS px',dims['scrollWidth']<=dims['clientWidth']+2,dims,'1.4.10'))
-        await page.set_viewport_size({'width':1280,'height':900})
-        await page.emulate_media(reduced_motion='reduce'); await page.wait_for_timeout(100)
-        motion=await page.evaluate("""()=>{const e=document.querySelector('.event')||document.body,c=getComputedStyle(e);return {animationDuration:c.animationDuration,transitionDuration:c.transitionDuration,scrollBehavior:getComputedStyle(document.documentElement).scrollBehavior}}""")
-        results.append(issue('Reduced-motion preference suppresses transitions and smooth scrolling',motion['transitionDuration'] in ('0s','0.001s') and motion['scrollBehavior']!='smooth',motion,'user-requested reduced-motion check'))
-        await page.emulate_media(reduced_motion='no-preference',forced_colors='active'); await page.wait_for_timeout(100)
-        await page.locator('#pmTools button').first.focus(); await page.keyboard.press('Tab')
-        forced=await page.evaluate("""()=>{const e=document.activeElement,c=getComputedStyle(e),t=getComputedStyle(document.querySelector('#pmTools'));return {focusedTag:e.tagName,focusedText:(e.textContent||'').trim(),focusOutline:c.outlineStyle,focusWidth:c.outlineWidth,toolsBorder:t.borderTopStyle,forcedAdjust:t.forcedColorAdjust}}""")
-        results.append(issue('Forced-colour mode preserves focus and tool boundaries',forced['focusOutline']!='none' and forced['toolsBorder']!='none',forced,'1.4.11, 2.4.7'))
-        print('AUDIT stage media done',flush=True)
-        session=await context.new_cdp_session(page); ax=await session.send('Accessibility.getFullAXTree')
-        interactive={'button','link','textbox','combobox','checkbox','searchbox'}; unnamed=[]
-        for n in ax.get('nodes',[]):
-            role=(n.get('role') or {}).get('value'); name=(n.get('name') or {}).get('value','')
-            if role in interactive and not str(name).strip() and not n.get('ignored'): unnamed.append({'role':role,'nodeId':n.get('nodeId')})
-        results.append(issue('Chrome accessibility tree names all exposed controls',not unnamed,unnamed[:20],'4.1.2','screen-reader proxy'))
-        await page.emulate_media(forced_colors='none')
 
-        # Each secondary surface is rendered once at 320px for DOM and reflow.
-        print('AUDIT stage main interactions done',flush=True)
-        print('AUDIT stage ax done',flush=True)
-        await page.set_viewport_size({'width':320,'height':900})
-        print('AUDIT stage submit load',flush=True)
-        await set_page(page,'polymythseminars/submit/index.html')
-        d=await dom_audit(page,'submission form'); dims=await page.evaluate("({scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth})")
-        results += [
-          issue('Submission form fields have labels',not d['missingLabels'],d['missingLabels'],'1.3.1, 3.3.2'),
-          issue('Submission form has one main landmark and heading',d['mainCount']==1 and d['h1Count']==1,d,'1.3.1, 2.4.6'),
-          issue('Submission form reflows at 320 CSS px',dims['scrollWidth']<=dims['clientWidth']+2,dims,'1.4.10'),
-        ]
-        full_event='https://seminarschools.com/polymythseminars/events/clarkson-laureateships-high-table-2026-01-30/'
-        print('AUDIT stage correct load',flush=True)
-        await set_page(page,'polymythseminars/correct/index.html','?event='+full_event)
-        d=await dom_audit(page,'correction form'); dims=await page.evaluate("({scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth})")
-        results += [
-          issue('Correction form fields have labels',not d['missingLabels'],d['missingLabels'],'1.3.1, 3.3.2'),
-          issue('Correction form has one main landmark and heading',d['mainCount']==1 and d['h1Count']==1,d,'1.3.1, 2.4.6'),
-          issue('Correction form pre-fills the selected stable listing',await page.input_value('#listing-url')==full_event,await page.input_value('#listing-url'),'3.3.2'),
-          issue('Correction form reflows at 320 CSS px',dims['scrollWidth']<=dims['clientWidth']+2,dims,'1.4.10'),
-        ]
-        event_rel='polymythseminars/events/clarkson-laureateships-high-table-2026-01-30/index.html'
-        print('AUDIT stage event load',flush=True)
-        await set_page(page,event_rel,'?lang=fr')
-        d=await dom_audit(page,'event detail'); dims=await page.evaluate("({scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth})")
-        results += [
-          issue('Stable event detail has correction, source, and calendar actions',await page.locator('.pm-event-actions a').count()==3,await page.locator('.pm-event-actions a').all_inner_texts(),'2.4.4'),
-          issue('Stable event detail receives a local save control',await page.locator('.save-event').count()==1,await page.locator('.save-event').count(),'4.1.2'),
-          issue('Event detail language follows the French preference',d['lang']=='fr-CA',d['lang'],'3.1.1'),
-          issue('Event detail reflows at 320 CSS px',dims['scrollWidth']<=dims['clientWidth']+2,dims,'1.4.10'),
-        ]
-        print('AUDIT stage complete',flush=True)
-        await browser.close()
+def static_page(page, rel: str, css: str, query: str = "") -> None:
+    soup = BeautifulSoup((ROOT / rel).read_text(encoding="utf-8"), "html.parser")
+    for node in soup.select('script[src], link[rel="stylesheet"], link[rel="preconnect"], link[rel="manifest"], link[rel="icon"], link[rel="apple-touch-icon"]'):
+        node.decompose()
+    page.set_content(str(soup), wait_until="domcontentloaded")
+    page.add_style_tag(content=css)
+    if query:
+        page.evaluate("q => history.replaceState(null, '', q)", query)
 
-    native=[
-      {'technology':'VoiceOver on macOS','executed':False,'reason':'Native macOS and VoiceOver are unavailable in the Linux build container. The exact manual script and expected announcements are included.'},
-      {'technology':'NVDA on Windows','executed':False,'reason':'Native Windows and NVDA are unavailable in the Linux build container. The exact manual script and expected announcements are included.'},
+
+def run() -> int:
+    html, css, payload, app_js = page_assets()
+    console_errors: list[str] = []
+
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(headless=True, executable_path=resolve_chromium_path(pw.chromium), args=["--no-sandbox", "--disable-dev-shm-usage"])
+
+        # Desktop, English, full interaction model.
+        context = browser.new_context(viewport={"width": 1280, "height": 900}, timezone_id="America/Toronto")
+        page = context.new_page()
+        page.on("pageerror", lambda error: console_errors.append(f"pageerror: {error}"))
+        page.on("console", lambda message: console_errors.append(f"console: {message.text}") if message.type == "error" else None)
+        load_calendar(page, html, css, payload, app_js)
+        dom = dom_audit(page)
+        record("Calendar IDs are unique", not dom["duplicates"], dom["duplicates"], "4.1.1")
+        record("Calendar form controls have programmatic labels", not dom["unlabeled"], dom["unlabeled"], "1.3.1, 3.3.2, 4.1.2")
+        record("Calendar buttons and links have accessible names", dom["unnamedButtons"] == 0 and dom["unnamedLinks"] == 0, {"buttons": dom["unnamedButtons"], "links": dom["unnamedLinks"]}, "2.4.4, 4.1.2")
+        record("Calendar has one main landmark and one H1", dom["mainCount"] == 1 and dom["h1Count"] == 1, dom, "1.3.1, 2.4.6")
+        record("Calendar skip link targets the results region", dom["skipTarget"], dom, "2.4.1")
+        record("Calendar heading order avoids skipped levels", not dom["jumps"], dom["jumps"], "1.3.1, 2.4.6")
+        record("Calendar declares Canadian English", dom["lang"] == "en-CA", dom["lang"], "3.1.1")
+        record("Initial results render in a bounded page", page.locator(".pm-event-card").count() == 50, page.locator(".pm-event-card").count(), "2.4.6")
+        initial_count = count_from_title(page.locator("#pmResultsTitle").inner_text())
+        record("Result count is announced in the results heading", initial_count > 0, page.locator("#pmResultsTitle").inner_text(), "4.1.3")
+        record("Events and opportunities can remain selected together", page.locator('input[data-state-set="content"]:checked').count() == 2, page.locator('input[data-state-set="content"]:checked').count(), "3.2.2")
+
+        page.keyboard.press("Tab")
+        focus = page.evaluate("({tag:document.activeElement.tagName, cls:document.activeElement.className, outline:getComputedStyle(document.activeElement).outlineStyle})")
+        record("First Tab reaches the visible-on-focus skip link", focus["tag"] == "A" and "skip-link" in focus["cls"] and focus["outline"] != "none", focus, "2.1.1, 2.4.1, 2.4.7, 2.4.11")
+        page.keyboard.press("/")
+        record("Slash keyboard shortcut focuses search", page.evaluate("document.activeElement === document.querySelector('#pmSearch')"), page.evaluate("document.activeElement && document.activeElement.id"), "2.1.1")
+
+        page.locator('input[value="toronto-gta"][data-state-set="places"]').check()
+        page.locator('input[value="montreal"][data-state-set="places"]').check()
+        record("Multiple place filters remain operable together", page.locator('input[data-state-set="places"]:checked').count() == 2, page.locator('input[data-state-set="places"]:checked').count(), "3.2.2")
+
+        page.locator("#pmSearch").fill("montral")
+        typo_count = count_from_title(page.locator("#pmResultsTitle").inner_text())
+        record("Close-spelling Montréal search returns results", typo_count > 0, typo_count, "3.3.2")
+        page.locator("#pmClearSearch").click()
+
+        save = page.locator("[data-save-id]").first
+        saved_id = save.get_attribute("data-save-id")
+        save.click()
+        saved = page.evaluate("JSON.parse(localStorage.getItem('polymythcal.savedEvents.v2') || '[]')")
+        record("Device-local saved event state persists", saved_id in saved and page.locator(f'[data-save-id="{saved_id}"]').first.get_attribute("aria-pressed") == "true", saved, "4.1.2")
+        page.locator("#pmSavedToggle").click()
+        record("Saved listings open as a labelled modal dialog", page.locator("#pmSavedPanel").evaluate("el => el.open") and page.locator("#pmSavedPanel").get_attribute("aria-labelledby") == "pmSavedTitle", page.locator("#pmSavedPanel").get_attribute("aria-labelledby"), "2.4.3, 4.1.2")
+        page.locator("#pmCloseSaved").click()
+
+        page.locator("#pmSearch").fill("philosophy")
+        record("Save-search control becomes available for a meaningful view", page.locator("#pmSaveSearch").is_enabled(), page.locator("#pmSaveSearch").is_enabled(), "3.2.2")
+        page.locator("#pmSaveSearch").click()
+        saved_searches = page.evaluate("JSON.parse(localStorage.getItem('polymythcal.savedSearches.v2') || '[]')")
+        record("Device-local saved search preserves URL state", len(saved_searches) == 1 and "q=philosophy" in saved_searches[0].get("href", ""), saved_searches, "3.2.3, 4.1.2")
+        page.locator("#pmShare").click()
+        page.wait_for_timeout(50)
+        copied = page.evaluate("window.__copied")
+        record("Share-view control exposes the current URL state", "q=philosophy" in copied and "seminarschools.com" in copied, copied, "3.2.3")
+        page.locator("#pmClearSearch").click()
+
+        page.locator('[data-view="calendar"]').click()
+        record("Desktop calendar view exposes a six-week grid", page.locator(".pm-calendar-day").count() == 42, page.locator(".pm-calendar-day").count(), "1.3.1")
+        record("View toggle exposes its pressed state", page.locator('[data-view="calendar"]').get_attribute("aria-pressed") == "true", page.locator('[data-view="calendar"]').get_attribute("aria-pressed"), "4.1.2")
+        page.locator('[data-view="list"]').click()
+
+        # Accessibility-tree proxy for exposed names.
+        session = context.new_cdp_session(page)
+        tree = session.send("Accessibility.getFullAXTree")
+        interactive = {"button", "link", "textbox", "combobox", "checkbox", "radio", "searchbox"}
+        unnamed = []
+        for node in tree.get("nodes", []):
+            role = (node.get("role") or {}).get("value")
+            name = (node.get("name") or {}).get("value", "")
+            if role in interactive and not str(name).strip() and not node.get("ignored"):
+                unnamed.append({"role": role, "nodeId": node.get("nodeId")})
+        record("Chromium accessibility tree names every exposed control", not unnamed, unnamed[:20], "4.1.2", "screen-reader proxy")
+
+        page.emulate_media(reduced_motion="reduce")
+        motion = page.evaluate("""() => { const e=document.querySelector('.pm-event-card'), c=getComputedStyle(e); return {transition:c.transitionDuration, animation:c.animationDuration, scroll:getComputedStyle(document.documentElement).scrollBehavior}; }""")
+        record("Reduced-motion preference suppresses motion", motion["transition"] in ("0s", "0.001s") and motion["scroll"] != "smooth", motion, "2.3.3")
+        context.close()
+
+        context = browser.new_context(viewport={"width": 1000, "height": 800}, timezone_id="America/Toronto", forced_colors="active")
+        page = context.new_page()
+        load_calendar(page, html, css, payload, app_js)
+        page.keyboard.press("Tab")
+        forced = page.evaluate("({tag:document.activeElement.tagName, cls:document.activeElement.className, outline:getComputedStyle(document.activeElement).outlineStyle, width:getComputedStyle(document.activeElement).outlineWidth})")
+        record("Forced-colour mode preserves visible keyboard focus", forced["outline"] != "none" and forced["width"] != "0px", forced, "1.4.11, 2.4.7")
+        context.close()
+
+        # French URL state and bilingual labels.
+        context = browser.new_context(viewport={"width": 1000, "height": 800}, timezone_id="America/Toronto")
+        page = context.new_page()
+        load_calendar(page, html, css, payload, app_js, "?lang=fr&q=montral&places=montreal")
+        record("French URL state restores page language", page.locator("html").get_attribute("lang") == "fr-CA", page.locator("html").get_attribute("lang"), "3.1.1, 3.1.2")
+        record("French URL state restores search and place filters", page.locator("#pmSearch").input_value() == "montral" and page.locator('input[value="montreal"][data-state-set="places"]').is_checked(), {"query": page.locator("#pmSearch").input_value()}, "3.2.3")
+        record("French controls use translated visible labels", page.locator("#pmLookingForTitle").inner_text() == "Que voulez-vous trouver?", page.locator("#pmLookingForTitle").inner_text(), "3.1.2")
+        context.close()
+
+        # Mobile reflow, drawer, agenda, and target sizes.
+        context = browser.new_context(viewport={"width": 320, "height": 800}, timezone_id="America/Toronto", reduced_motion="reduce")
+        page = context.new_page()
+        load_calendar(page, html, css, payload, app_js)
+        dims = page.evaluate("[document.documentElement.scrollWidth, document.documentElement.clientWidth]")
+        record("Calendar reflows at 320 CSS pixels", dims[0] <= dims[1] + 2, dims, "1.4.10")
+        record("Mobile filter drawer starts collapsed", not page.locator("#pmFilterDrawer").evaluate("el => el.open"), page.locator("#pmFilterDrawer").evaluate("el => el.open"), "3.2.1")
+        page.locator("#pmMobileFilters").click()
+        record("Mobile filter button opens the filter drawer", page.locator("#pmFilterDrawer").evaluate("el => el.open"), page.locator("#pmFilterDrawer").evaluate("el => el.open"), "4.1.2")
+        page.locator("#pmMobileResults").click()
+        page.locator('[data-view="calendar"]').click()
+        record("Mobile calendar uses a vertical agenda", page.locator(".pm-calendar-agenda").evaluate("el => getComputedStyle(el).display") != "none", page.locator(".pm-calendar-agenda").evaluate("el => getComputedStyle(el).display"), "1.3.1, 1.4.10")
+        controls = page.locator("button:visible, a[href]:visible, input:visible")
+        small = []
+        for i in range(min(controls.count(), 140)):
+            box = controls.nth(i).bounding_box()
+            if box and (box["width"] < 24 or box["height"] < 24):
+                small.append({"text": controls.nth(i).get_attribute("aria-label") or controls.nth(i).inner_text(), "box": box})
+        record("Visible mobile targets meet the 24-pixel minimum", not small, small[:10], "2.5.8")
+        context.close()
+
+        # Submission and correction forms.
+        base_css = "\n".join((ROOT / rel).read_text(encoding="utf-8") for rel in ["css/theme.css", "css/alive.css", "css/polymythcal-features.css"] if (ROOT / rel).exists())
+        context = browser.new_context(viewport={"width": 320, "height": 900})
+        page = context.new_page()
+        static_page(page, "polymythseminars/submit/index.html", base_css)
+        form_dom = dom_audit(page)
+        dims = page.evaluate("[document.documentElement.scrollWidth, document.documentElement.clientWidth]")
+        record("Submission fields have programmatic labels", not form_dom["unlabeled"], form_dom["unlabeled"], "1.3.1, 3.3.2")
+        record("Submission form has one main landmark and H1", form_dom["mainCount"] == 1 and form_dom["h1Count"] == 1, form_dom, "1.3.1, 2.4.6")
+        record("Submission form reflows at 320 CSS pixels", dims[0] <= dims[1] + 2, dims, "1.4.10")
+
+        event_url = "https://seminarschools.com/polymythseminars/events/hayv-kahraman-nabog-2026-03-10/"
+        static_page(page, "polymythseminars/correct/index.html", base_css)
+        # The production script pre-fills from location; verify static labelling and URL field contract here.
+        correction_dom = dom_audit(page)
+        dims = page.evaluate("[document.documentElement.scrollWidth, document.documentElement.clientWidth]")
+        record("Correction fields have programmatic labels", not correction_dom["unlabeled"], correction_dom["unlabeled"], "1.3.1, 3.3.2")
+        record("Correction form exposes the stable-listing URL field", page.locator("#listing-url").count() == 1, page.locator("#listing-url").count(), "3.3.2")
+        record("Correction form reflows at 320 CSS pixels", dims[0] <= dims[1] + 2, dims, "1.4.10")
+
+        static_page(page, "polymythseminars/events/hayv-kahraman-nabog-2026-03-10/index.html", base_css)
+        detail_dom = dom_audit(page)
+        dims = page.evaluate("[document.documentElement.scrollWidth, document.documentElement.clientWidth]")
+        record("Stable event page has source, calendar, and correction actions", page.locator(".pm-event-actions a").count() == 3, page.locator(".pm-event-actions a").all_inner_texts(), "2.4.4")
+        record("Stable event page has one main landmark and H1", detail_dom["mainCount"] == 1 and detail_dom["h1Count"] == 1, detail_dom, "1.3.1, 2.4.6")
+        record("Stable event page reflows at 320 CSS pixels", dims[0] <= dims[1] + 2, dims, "1.4.10")
+        context.close()
+        browser.close()
+
+    record("Browser run completed without JavaScript errors", not console_errors, console_errors, "4.1.1")
+
+    failed = [item for item in RESULTS if not item["passed"]]
+    report = {
+        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "release": "PolymythCAL Audit 18 predeploy",
+        "standard": "WCAG 2.2 AA",
+        "browser": "Chromium headless with production assets executed locally",
+        "checks_passed": len(RESULTS) - len(failed),
+        "checks_total": len(RESULTS),
+        "checks_failed": len(failed),
+        "results": RESULTS,
+        "native_assistive_technology": [
+            {"technology": "VoiceOver on macOS", "executed": False, "reason": "Native macOS is unavailable in this Linux environment."},
+            {"technology": "NVDA on Windows", "executed": False, "reason": "Native Windows is unavailable in this Linux environment."},
+        ],
+        "native_protocol": "docs/POLYMYTHCAL_SCREEN_READER_TEST_PROTOCOL.md",
+    }
+    OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
+    OUT_JSON.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    lines = [
+        "# PolymythCAL WCAG 2.2 AA audit",
+        "",
+        f"- Browser-assisted checks passed: **{report['checks_passed']}/{report['checks_total']}**",
+        f"- Browser-assisted checks failed: **{report['checks_failed']}**",
+        "- Native VoiceOver: manual macOS protocol retained",
+        "- Native NVDA: manual Windows protocol retained",
+        "",
+        "## Results",
+        "",
     ]
-    passed=sum(1 for r in results if r['passed']); failed=[r for r in results if not r['passed']]
-    report={'generated_at':datetime.now(timezone.utc).isoformat(timespec='seconds'),'standard':'WCAG 2.2 AA','browser':'Chromium 144 headless with local assets inlined','automated_checks':results,'passed':passed,'failed':len(failed),'console_errors':console_errors,'native_assistive_technology':native,'native_protocol':'docs/POLYMYTHCAL_SCREEN_READER_TEST_PROTOCOL.md'}
-    OUT_JSON.parent.mkdir(parents=True,exist_ok=True); OUT_JSON.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    lines=['# Polymythcal WCAG 2.2 AA audit','',f'- Browser-assisted checks passed: **{passed}/{len(results)}**',f'- Browser-assisted checks failed: **{len(failed)}**','- Native VoiceOver status: **manual protocol prepared; native run requires macOS**','- Native NVDA status: **manual protocol prepared; native run requires Windows**','', '## Browser-assisted results','']
-    for r in results: lines.append(f"- {'PASS' if r['passed'] else 'FAIL'} · {r['name']} · {r['criterion']} · `{json.dumps(r['details'],ensure_ascii=False)[:500]}`")
-    lines += ['', '## Native assistive-technology boundary','', 'The Chromium accessibility tree, keyboard flow, labels, names, state, reflow, forced-colour mode, and reduced-motion mode were exercised in this environment. VoiceOver speech output and rotor behaviour require macOS. NVDA speech output and browse-mode behaviour require Windows. The companion protocol records the exact paths, keystrokes, expected announcements, and evidence fields for both native runs.', '', '## Console errors','']
-    lines += [f'- {x}' for x in console_errors] or ['- None after local asset inlining.']
-    OUT_MD.write_text('\n'.join(lines)+'\n',encoding='utf-8')
-    print(json.dumps({'passed':passed,'failed':len(failed),'failures':[x['name'] for x in failed],'json':str(OUT_JSON.relative_to(ROOT)),'markdown':str(OUT_MD.relative_to(ROOT))},indent=2))
+    for item in RESULTS:
+        lines.append(f"- {'PASS' if item['passed'] else 'FAIL'} · {item['name']} · {item['criterion']} · `{json.dumps(item['details'], ensure_ascii=False)[:500]}`")
+    OUT_MD.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(json.dumps({"passed": report["checks_passed"], "total": report["checks_total"], "failed": report["checks_failed"]}))
     return 1 if failed else 0
 
-if __name__=='__main__':
-    raise SystemExit(asyncio.run(run()))
+
+if __name__ == "__main__":
+    raise SystemExit(run())

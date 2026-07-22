@@ -22,7 +22,8 @@ const mustInclude = [
   'verify-meaninglib-search.js',
   'verify-ai-access-pack.js',
   'build-public-deploy.js',
-  'verify-final6-deploy-contract.js'
+  'verify-final6-deploy-contract.js',
+  'verify-predeploy-automation.js'
 ];
 check('package verify:all points to central runner', pkg.scripts && pkg.scripts['verify:all'] === 'node scripts/verify-all-runner.js');
 check('package verify:release points to central runner', pkg.scripts && pkg.scripts['verify:release'] === 'node scripts/verify-all-runner.js');

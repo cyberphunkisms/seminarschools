@@ -1,11 +1,11 @@
 {
   "status": "canonical-calendar-master-summary",
-  "checked_at": "2026-07-09T14:45:00Z",
+  "checked_at": "2026-07-22T03:01:25Z",
   "canonical_event_file": "data/polymyth-seminar-events.json",
   "public_event_file": "polymythseminars/events.json",
-  "canonical_event_count": 513,
-  "public_event_count": 513,
+  "canonical_event_count": 839,
+  "public_event_count": 839,
   "public_copy_byte_identical_to_master": true,
   "retired_legacy_empty_file": "data/history/retired-empty-seminars-json-2026-07-09.json",
-  "note": "data/seminars.json was an empty legacy artifact. The live public calendar data is the byte-identical pair listed above."
+  "note": "The canonical and public Polymythcal event files are byte-identical and contain the complete Audit 18 corpus."
 }
