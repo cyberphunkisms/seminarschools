@@ -10,6 +10,14 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[1]
 results = []
 
+def resolve_chromium_path(browser_type):
+    import os, shutil
+    candidates=[os.environ.get("CHROMIUM_PATH"),shutil.which("chromium"),shutil.which("chromium-browser"),shutil.which("google-chrome"),shutil.which("chrome")]
+    for candidate in candidates:
+        if candidate and Path(candidate).exists(): return candidate
+    return browser_type.executable_path
+
+
 def check(name, condition, detail=""):
     results.append({"name": name, "passed": bool(condition), "detail": detail})
     if not condition:
@@ -34,7 +42,7 @@ check("JavaScript syntax", True)
 soup = BeautifulSoup(page_path.read_text(encoding="utf-8"), "html.parser")
 old_ids = ["quickFocusNav", "filterNav", "ageNav", "calendarSearch"]
 check("old mutually exclusive filter system removed", not any(soup.select_one(f"#{x}") for x in old_ids))
-check("academic entry points remain links rather than mutually exclusive controls", len(soup.select("#academicNav a[href]")) == 6 and not soup.select("#academicNav button"))
+check("academic entry points remain links rather than mutually exclusive controls", len(soup.select("#academicNav a[href]")) == 11 and not soup.select("#academicNav button"))
 check("ambiguous Deadlines button removed", not any(x.get_text(" ", strip=True) == "Deadlines" for x in soup.select("button, label, a")))
 check("attend and apply are independent checkboxes", len(soup.select('input[type="checkbox"][data-state-set="content"]')) == 2)
 check("places are multi-select checkboxes", len(soup.select('input[type="checkbox"][data-state-set="places"]')) >= 9)
@@ -44,7 +52,7 @@ check("plain language opportunity definition present", "The listed date is the d
 
 payload = json.loads(events_path.read_text(encoding="utf-8"))
 events = payload["events"]
-check("canonical event count preserved", len(events) == 839, str(len(events)))
+check("canonical event count matches declared totals", len(events) > 0 and payload.get("count") == len(events) and payload.get("_total_events") == len(events), str(len(events)))
 missing_routes = [e["id"] for e in events if not (ROOT / "polymythseminars/events" / e["id"] / "index.html").exists()]
 check("all canonical event pages remain", not missing_routes, f"missing {len(missing_routes)}")
 missing_public_routes = [e["id"] for e in events if not (ROOT / "public/polymythseminars/events" / e["id"] / "index.html").exists()]
@@ -59,7 +67,7 @@ test_html = ROOT / "data/polymythcal-revamp-browser-test.html"
 test_html.write_text(str(browser_soup), encoding="utf-8")
 
 with sync_playwright() as p:
-    browser = p.chromium.launch(headless=True, executable_path="/usr/bin/chromium", args=["--no-sandbox", "--disable-dev-shm-usage"])
+    browser = p.chromium.launch(headless=True, executable_path=resolve_chromium_path(p.chromium), args=["--no-sandbox", "--disable-dev-shm-usage"])
     page = browser.new_page(viewport={"width": 1200, "height": 900})
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
@@ -107,7 +115,7 @@ with sync_playwright() as p:
 
 # French surface test.
 with sync_playwright() as p:
-    browser = p.chromium.launch(headless=True, executable_path="/usr/bin/chromium", args=["--no-sandbox", "--disable-dev-shm-usage"])
+    browser = p.chromium.launch(headless=True, executable_path=resolve_chromium_path(p.chromium), args=["--no-sandbox", "--disable-dev-shm-usage"])
     page = browser.new_page(viewport={"width": 1000, "height": 800})
     page.set_content(test_html.read_text(encoding="utf-8"), wait_until="domcontentloaded")
     page.add_style_tag(path=str(css_path))

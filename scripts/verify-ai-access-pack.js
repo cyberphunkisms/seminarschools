@@ -6,6 +6,7 @@ const child_process = require('child_process');
 const { search } = require('./build-ai-access-pack.js');
 
 const root = process.cwd();
+const releaseTimestamp = JSON.parse(fs.readFileSync(path.join(root, 'RELEASE_MANIFEST.json'), 'utf8')).generated_at || '1970-01-01T00:00:00Z';
 const outDir = path.join(root, 'hf_export', 'ai_access_pack');
 const reportsDir = path.join(outDir, 'reports');
 const mdPath = path.join(outDir, 'latest_access_pack.md');
@@ -78,7 +79,7 @@ function main(){
   }
   const report = [
     '# Meaninglib AI Access Pack verification report','',
-    `Generated: ${new Date().toISOString()}`,'',
+    `Generated: ${releaseTimestamp}`,'',
     `Latest markdown: hf_export/ai_access_pack/latest_access_pack.md`,
     `Latest JSON: hf_export/ai_access_pack/latest_access_pack.json`,
     `Activation markdown: hf_export/ai_access_pack/MEPHISTODATA_ACTIVATION.md`,'',

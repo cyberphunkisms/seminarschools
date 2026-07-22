@@ -10,6 +10,8 @@ const read = (p) => fs.readFileSync(path.join(ROOT, p), 'utf8');
 const json = (p) => JSON.parse(read(p));
 const exists = (p) => fs.existsSync(path.join(ROOT, p));
 const listDirs = (p) => fs.readdirSync(path.join(ROOT, p), {withFileTypes: true}).filter(x => x.isDirectory()).map(x => x.name);
+const releaseManifest = json('RELEASE_MANIFEST.json');
+const releaseTimestamp = releaseManifest.generated_at || '1970-01-01T00:00:00Z';
 const checks = [];
 const add = (name, passed, details = {}) => checks.push({name, passed: Boolean(passed), details});
 
@@ -113,7 +115,7 @@ add('Public routes expose English, French, and default alternates', ['polymythse
 
 const failed = checks.filter(c => !c.passed);
 const output = {
-  generated_at: new Date().toISOString(),
+  generated_at: releaseTimestamp,
   audit: 'Polymythcal Audit 14 completion verification',
   checks,
   passed: checks.length - failed.length,

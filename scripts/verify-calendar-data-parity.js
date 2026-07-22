@@ -23,7 +23,7 @@ if (fallbackMatch) {
     if (!Array.isArray(fallback.events) || ids(fallback.events) !== ids(pub.events)) fail.push('Fallback event IDs do not match public event file.');
   }
 } else {
-  // Audit 16+ deliberately keeps the 839-record corpus out of the HTML shell.
+  // The current client shell deliberately keeps the full event corpus out of the HTML shell.
   if (!html.includes('id="pmEventList"')) fail.push('Calendar has neither an embedded fallback nor the lightweight client-shell mount.');
   if (!app.includes('const DATA_URL = "/polymythseminars/events.json"')) fail.push('Client shell does not fetch the canonical public event file.');
   if (!app.includes('/polymythseminars/subscribe/')) fail.push('Client shell lacks a readable failure route when event data cannot load.');

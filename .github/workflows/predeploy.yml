@@ -22,7 +22,38 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
+      - name: Setup Node 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install calendar test dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 python-dateutil jsonschema
+      - name: Test adapters and lifecycle on this operating system
+        run: |
+          npm run test:polymythcal-adapters
+          npm run test:polymythcal-lifecycle
+      - name: Build exactly as Netlify builds
+        run: npm run build
+      - name: Verify release automation contract
+        run: npm run verify:predeploy-automation
+
+  tracked-public-regression:
+    name: Build survives legacy tracked public state
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Node 24
         uses: actions/setup-node@v6
         with:
@@ -30,10 +61,16 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
-      - name: Build exactly as Netlify builds
+      - name: Generate public once
         run: npm run build
-      - name: Verify release automation contract
-        run: npm run verify:predeploy-automation
+      - name: Reproduce legacy repository state
+        shell: bash
+        run: |
+          sed -i -E '/^\/?public\/$/d' .gitignore
+          git add -f public
+          test -n "$(git ls-files public)"
+      - name: Prove production build remains deployable
+        run: npm run build
   full-audit:
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -41,7 +78,7 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Setup Node 24
         uses: actions/setup-node@v6
         with:
@@ -70,15 +107,18 @@ jobs:
         run: node scripts/verify-polymythcal-audit14.js
       - name: Interaction and design browser audit
         run: python scripts/audit-polymythcal-interactivity-design.py
+      - name: Dedicated entry-page browser audit
+        run: python scripts/audit-polymythcal-entry-pages.py
       - name: WCAG browser audit
         run: python scripts/audit-polymythcal-wcag22.py
       - name: Upload audit evidence
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: polymythcal-predeploy-evidence
           path: |
-            data/polymythcal-audit19/**
+            data/polymythcal-audit21/**
+            data/polymythcal-audit21/interaction-design-browser-audit.json
             data/polymythcal-wcag22-browser-audit.json
             POLYMYTHCAL_WCAG22_AA_AUDIT_2026-07-22.md
             scripts/reports/release-gate-report.json

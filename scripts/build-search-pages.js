@@ -22,7 +22,6 @@ const ROOT = path.resolve(__dirname, '..');
 const SITE = 'https://seminarschools.com';
 // Keep generation aligned with the site’s publication date, rather than container UTC.
 const TODAY = process.env.SITE_BUILD_DATE || new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto' }).format(new Date());
-const NOW = new Date();
 const CHECK = process.argv.includes('--check');
 let writes = 0;
 let errors = [];
@@ -334,20 +333,24 @@ function staticEventCard(event) {
   return `<article class="event" data-date="${attr(event.date || '')}" data-type="${attr(event.type || 'other')}"><div class="date-col"><span class="day">${esc(new Intl.DateTimeFormat('en-CA',{day:'2-digit',timeZone:'America/Toronto'}).format(new Date(event.date)))}</span><span class="mon">${esc(new Intl.DateTimeFormat('en-CA',{month:'short',timeZone:'America/Toronto'}).format(new Date(event.date)))}</span></div><div class="body-col"><h2 class="title"><a href="${route}">${esc(event.title)}</a></h2>${by}<div class="event-meta">${esc(date)}${event.venue ? ` · ${esc(event.venue)}` : ''}</div>${event.description ? `<p class="event-desc">${esc(cleanSentence(event.description,260))}</p>` : ''}</div></article>`;
 }
 function eventEligible(event) {
-  const start = new Date(event.date || '');
-  const end = new Date(event.end_date || event.date || '');
-  if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime()) || end.getTime() < NOW.getTime()) return false;
-  const horizon = new Date(NOW);
+  const start = String(event.date || '').slice(0, 10);
+  const end = String(event.end_date || event.date || '').slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(start) || !/^\d{4}-\d{2}-\d{2}$/.test(end) || end < TODAY) return false;
+  const horizon = new Date(`${TODAY}T12:00:00-04:00`);
   horizon.setFullYear(horizon.getFullYear() + 1);
-  return start.getTime() <= horizon.getTime();
+  return start <= horizon.toISOString().slice(0, 10);
 }
 function eventIndexable(event) {
   // Event-detail ownership belongs to build-polymythcal-audit13.py. Keep the
   // sitemap contract aligned with that canonical builder's robots policy.
+  const city=String(event.city || '').trim().toLowerCase();
+  const venue=String(event.venue || '').trim().toLowerCase();
+  const placeholders=new Set(['','unknown','location unconfirmed','location unconfirmed · lieu non confirmé','lieu non confirmé']);
   return event.confirmation_status === 'confirmed'
     && event.date_precision === 'exact'
-    && !['', 'Unknown'].includes(String(event.city || ''))
-    && !['cancelled', 'missing-on-source'].includes(event.lifecycle_status);
+    && !placeholders.has(city)
+    && !placeholders.has(venue)
+    && !['cancelled', 'missing-on-source', 'archived'].includes(event.lifecycle_status);
 }
 function injectEventRoot(events) {
   const rel='polymythseminars/index.html';
@@ -511,7 +514,6 @@ function main(){
     // by the canonical PolymythCAL builder. The deploy build still refreshes
     // archive status as dates pass, then contributes only current, indexable
     // routes to the sitemap. Redirect aliases remain untouched.
-    archiveExpiredStableEventPages(events);
     const eventIndex=events.filter(event => eventEligible(event) && eventIndexable(event)).map(event => {
       const route=eventRoute(event);
       return {route,url:routeUrl(route)};

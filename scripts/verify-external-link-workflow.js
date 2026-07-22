@@ -13,7 +13,7 @@ check('workflow runs manually', text.includes('workflow_dispatch'));
 check('workflow runs on a schedule', text.includes('schedule:'));
 check('workflow invokes live external link checker', text.includes('scripts/audit-external-links-live.js'));
 check('workflow runs strict live checks', text.includes('EXTERNAL_LINK_STRICT: "1"') || text.includes('EXTERNAL_LINK_STRICT: 1'));
-check('workflow uploads live report artifact', text.includes('actions/upload-artifact@v6') && text.includes('external-link-live-report.json'));
+check('workflow uploads live report artifact', /actions\/upload-artifact@v(?:7|[89]|[1-9][0-9]+)/.test(text) && text.includes('external-link-live-report.json'));
 if (fail) {
   console.error('\nEXTERNAL LINK WORKFLOW CHECK FAILED');
   process.exit(1);

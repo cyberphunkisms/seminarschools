@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html data-theme-policy="fixed" lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -31,7 +31,7 @@
   --mono: 'JetBrains Mono', ui-monospace, monospace;
   --bg: #0a0908; --bg1: #131210; --bg2: #1c1a17;
   --brd: #2a2722; --brd2: #3d3830;
-  --txt: #e8e2d4; --dim: #8a8275; --fnt: #5a5448;
+  --txt: #e8e2d4; --dim: #8a8275; --fnt: #9b9283;
   --fire: #d97515; --fire2: #f4a032;
   --gorgon: #6b3d4a; --sabachtan: #c4a878; --method: #6b8a7a;
   --idiom: #8a6b4a; --degorgon: #4a6b5a; --citation: #c9a66b;
@@ -148,7 +148,6 @@ body {
 </head>
 <body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="archive-tool">
 <a class="skip-link" href="#main-content">Skip to main content</a>
-<div id="main-content"></div>
 <div class="keyboard-hint" tabindex="-1"><span class="route-note-kicker">Keyboard</span><kbd>/</kbd> search, <kbd>?</kbd> help, <kbd>←</kbd>/<kbd>→</kbd> move wide panels.</div>
 <!-- CL_SELF_ROUTE_NOTE -->
 <div class="route-note tool-route-note" role="note"><span class="route-note-kicker">Archive tool</span>Filter terms, then follow the matching entry.</div>
@@ -157,7 +156,7 @@ body {
 <a class="brand" href="/polymyth/methodologylist/"><em>polymyth</em> concordance</a>
 <a href="/polymyth/sitemap/">sitemap</a>
 </div>
-<div class="wrap" role="main">
+<div class="wrap" role="main" id="main-content">
 <div id="content"><div class="loading">Loading concordance index…</div></div>
 </div>
 <script>

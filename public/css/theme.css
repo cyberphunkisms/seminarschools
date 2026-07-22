@@ -72,7 +72,7 @@
  * "this is Seminar Schools" — same across every page. The fg
  * is warm dark (not pure black) for a printed-paper feel.
  * ============================================================ */
-:root {
+:root:not([data-theme-policy="fixed"]) {
   /* Surfaces */
   --bg: #F5EBE4;
   --bg-soft: #FAF4ED;
@@ -119,7 +119,7 @@
  * Manual light override: <html class="light"> wins.
  * ============================================================ */
 @media (prefers-color-scheme: dark) {
-  :root:not(.light) {
+  :root:not(.light):not([data-theme-policy="fixed"]) {
     --bg: #1A1410;
     --bg-soft: #2A2018;
     --bg-rgb: 26, 20, 16;
@@ -136,8 +136,8 @@
   }
 }
 
-:root.dark,
-:root[data-theme="dark"] {
+:root.dark:not([data-theme-policy="fixed"]),
+:root[data-theme="dark"]:not([data-theme-policy="fixed"]) {
   --bg: #1A1410;
   --bg-soft: #2A2018;
   --bg-rgb: 26, 20, 16;

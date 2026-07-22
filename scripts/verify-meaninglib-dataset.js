@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = process.cwd();
+const releaseTimestamp = JSON.parse(fs.readFileSync(path.join(ROOT, 'RELEASE_MANIFEST.json'), 'utf8')).generated_at || '1970-01-01T00:00:00Z';
 const OUT = path.join(ROOT, 'hf_export');
 const reportLines = [];
 let failures = 0;
@@ -100,7 +101,7 @@ function main() {
 
   const reportPath = path.join(ROOT, 'hf_export/reports/verification_report.md');
   fs.mkdirSync(path.dirname(reportPath), { recursive: true });
-  fs.writeFileSync(reportPath, `# Meaninglib dataset verification report\n\nGenerated: ${new Date().toISOString()}\n\nFailures: ${failures}\nWarnings: ${warnings}\n\n${reportLines.map(line => `- ${line}`).join('\n')}\n`, 'utf8');
+  fs.writeFileSync(reportPath, `# Meaninglib dataset verification report\n\nGenerated: ${releaseTimestamp}\n\nFailures: ${failures}\nWarnings: ${warnings}\n\n${reportLines.map(line => `- ${line}`).join('\n')}\n`, 'utf8');
 
   if (failures) {
     console.error(`Meaninglib dataset verification failed with ${failures} failure(s).`);

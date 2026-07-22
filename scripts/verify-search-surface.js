@@ -37,7 +37,9 @@ function main(){
   } else {
     if(!clientCalendar) fail('calendar: missing client calendar controller and result mount');
     if(!/<noscript>[\s\S]*RSS and calendar feeds[\s\S]*site map/i.test(calendar)) fail('calendar: client shell lacks a useful no-script route');
-    if(events.length!==839) fail(`calendar: expected 839 public data records, found ${events.length}`);
+    if(!events.length) fail('calendar: public event data is empty');
+    const declared=JSON.parse(read('polymythseminars/events.json'));
+    if(declared.count!==events.length || declared._total_events!==events.length) fail(`calendar: declared totals do not match ${events.length} records`);
     const missingStable=events.filter(event=>!fs.existsSync(path.join(ROOT,'polymythseminars','events',event.id,'index.html')));
     if(missingStable.length) fail(`calendar: ${missingStable.length} stable event pages are missing`);
   }

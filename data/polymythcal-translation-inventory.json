@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-21T15:06:10+00:00",
+  "generated_at": "2026-07-22T14:30:00-04:00",
   "languages": [
     "en-CA",
     "fr-CA"
   ],
-  "interface_dictionary_entries": 69,
-  "calendar_renderer_dictionary_entries": 136,
+  "runtime_translation_markers": 1,
+  "static_french_dictionary_entries": 161,
   "surfaces": [
     {
       "surface": "Main calendar",
@@ -41,12 +41,89 @@
       "status": "complete",
       "required_markers": 3,
       "missing_markers": []
+    },
+    {
+      "surface": "Dedicated route: writingclub",
+      "path": "/writingclub/",
+      "status": "complete",
+      "required_markers": 4,
+      "missing_markers": []
+    },
+    {
+      "surface": "Dedicated route: writingkids",
+      "path": "/writingkids/",
+      "status": "complete",
+      "required_markers": 4,
+      "missing_markers": []
+    },
+    {
+      "surface": "Dedicated route: writingjuniors",
+      "path": "/writingjuniors/",
+      "status": "complete",
+      "required_markers": 4,
+      "missing_markers": []
+    },
+    {
+      "surface": "Dedicated route: writingteens",
+      "path": "/writingteens/",
+      "status": "complete",
+      "required_markers": 4,
+      "missing_markers": []
+    },
+    {
+      "surface": "Dedicated route: writinggrads",
+      "path": "/writinggrads/",
+      "status": "complete",
+      "required_markers": 4,
+      "missing_markers": []
+    },
+    {
+      "surface": "Dedicated route: university",
+      "path": "/university/",
+      "status": "complete",
+      "required_markers": 4,
+      "missing_markers": []
+    },
+    {
+      "surface": "Dedicated route: philosophy",
+      "path": "/philosophy/",
+      "status": "complete",
+      "required_markers": 4,
+      "missing_markers": []
+    },
+    {
+      "surface": "Dedicated route: humanities",
+      "path": "/humanities/",
+      "status": "complete",
+      "required_markers": 4,
+      "missing_markers": []
+    },
+    {
+      "surface": "Dedicated route: cfps",
+      "path": "/cfps/",
+      "status": "complete",
+      "required_markers": 4,
+      "missing_markers": []
+    },
+    {
+      "surface": "Dedicated route: lectures",
+      "path": "/lectures/",
+      "status": "complete",
+      "required_markers": 4,
+      "missing_markers": []
+    },
+    {
+      "surface": "Dedicated route: fellowships",
+      "path": "/fellowships/",
+      "status": "complete",
+      "required_markers": 4,
+      "missing_markers": []
     }
   ],
   "canonical_event_pages": 839,
   "canonical_event_pages_with_bilingual_actions": 839,
   "focused_feeds": 11,
   "focused_feeds_with_english_and_french_labels": 11,
-  "content_policy": "Organizer titles, descriptions, proper names, and source-language material remain in their source language. Navigation, filters, states, qualifications, actions, forms, feed labels, and calendar instructions are maintained in English and French.",
+  "content_policy": "Organizer titles, descriptions, proper names, and source-language material remain in their source language. Navigation, filters, states, qualifications, actions, forms, dedicated-route guidance, feed labels, and calendar instructions are maintained in English and French.",
   "complete": true
 }

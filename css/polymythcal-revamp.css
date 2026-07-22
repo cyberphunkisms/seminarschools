@@ -14,6 +14,13 @@
   --pm-sans: "DM Sans", system-ui, sans-serif;
 }
 
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --pm-accent: #e2a58f;--pm-good: #79cda3;--pm-warning: #e6ba72;--pm-shadow: 0 14px 38px rgba(0, 0, 0, 0.22);
+  }
+}
+
 :root.dark,
 :root[data-theme="dark"] {
   --pm-accent: #e2a58f;
@@ -799,3 +806,13 @@ a { color: inherit; }
   .pm-date-box.ongoing .pm-date-end,
   .pm-date-box.ongoing .pm-date-year { display: inline; font-size: .8rem; font-family: var(--pm-sans); }
 }
+
+/* Audit 21 unified dedicated entry pages */
+.pm-route-context{margin-block:1rem;padding:.9rem 1rem}
+.pm-route-context p{margin:0}
+.pm-dedicated-links{display:flex;flex-wrap:wrap;gap:.55rem 1rem;align-items:flex-start}
+.pm-dedicated-group{display:flex;flex-wrap:wrap;gap:.4rem .7rem;align-items:center}
+.pm-dedicated-group>span:first-child{font-weight:700}
+.pm-dedicated-links a[aria-current="page"]{font-weight:700;text-decoration-thickness:.16em;text-underline-offset:.25em}
+.pm-noscript ul{display:grid;gap:.6rem;padding-left:1.25rem}
+@media (max-width:760px){.pm-dedicated-group{display:grid;grid-template-columns:1fr}.pm-dedicated-links{display:grid;gap:1rem}}

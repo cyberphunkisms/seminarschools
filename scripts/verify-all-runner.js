@@ -35,6 +35,7 @@ const checks = [
   'node scripts/verify-polymythcalendar-ux-efficiency.js',
   'node scripts/verify-polymythcal-scraper-layout.js',
   'node scripts/verify-polymythcal-scraper-ui.js',
+  'node scripts/run-python.js scripts/audit-polymythcal-entry-pages.py',
   'node scripts/verify-site-interactivity.js',
   'node scripts/build-writing-shortcuts.js --check',
   'node scripts/verify-writing-shortcuts.js',
@@ -107,6 +108,8 @@ const checks = [
   'node scripts/verify-bookwormcard-gate.js'
 ];
 const concurrency = Number(process.env.VERIFY_ALL_CONCURRENCY || 4);
+const releaseManifest = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'RELEASE_MANIFEST.json'), 'utf8'));
+const releaseTimestamp = releaseManifest.generated_at || '1970-01-01T00:00:00Z';
 function run(cmd, { quiet = true } = {}) {
   return new Promise((resolve, reject) => {
     const start = Date.now();
@@ -131,12 +134,13 @@ function writeGateReport(status, started, passedCommands, failures) {
   fs.mkdirSync(reportDir, { recursive: true });
   const total = checks.length + sequential.length;
   const report = {
-    generated_at: new Date().toISOString(),
+    generated_at: releaseTimestamp,
     status,
     total_checks: total,
     passed_checks: passedCommands.length,
     failed_checks: failures.map(e => ({ cmd: e.cmd, code: e.code || 1, ms: e.ms || null })),
-    duration_ms: Date.now() - started,
+    duration_ms: null,
+    duration_note: 'Runtime duration is printed to the console and intentionally omitted from committed evidence.',
     rule: 'Every command in scripts/verify-all-runner.js is a release blocker.'
   };
   fs.writeFileSync(path.join(reportDir, 'release-gate-report.json'), JSON.stringify(report, null, 2) + '\n');

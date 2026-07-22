@@ -12,7 +12,7 @@ const app = read('js/polymythcal-revamp.js');
 check('calendar page exists', cal.length > 1000);
 check('calendar uses the lightweight client shell', cal.includes('id="pmEventList"') && cal.includes('/js/polymythcal-revamp.js'));
 check('calendar avoids an embedded full-corpus fallback', !cal.includes('id="events-fallback"') && cal.length < 100000);
-check('calendar carries current build stamp', cal.includes('name="ss-build"') && cal.includes('20260721-audit18'));
+check('calendar carries current build stamp', cal.includes('name="ss-build"') && cal.includes('20260722-audit21'));
 check('calendar application fetches the public event path', app.includes('const DATA_URL = "/polymythseminars/events.json"'));
 check('calendar application renders official source links', app.includes('event.source_url') && app.includes('rel="noopener noreferrer"'));
 check('calendar has a readable load-failure route', app.includes('loadError') && app.includes('/polymythseminars/subscribe/'));

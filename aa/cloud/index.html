@@ -49,7 +49,7 @@
   See CL.md for the full project queue.
   ============================================================================
 -->
-<html lang="en">
+<html data-theme-policy="fixed" lang="en">
 <head>
 <meta charset="utf-8"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
@@ -77,12 +77,13 @@
   --bg2:#1a1714;
   --ink:#f0e8d4;
   --ink2:#c8b896;
-  --dim:#7a6e58;
-  --faint:#4a4338;
+  --dim:#9c8f78;
+  --faint:#837c70;
   --accent:#e8a04a;
   --accent2:#d65a2a;
   --line:rgba(232,160,74,0.12);
   --line-active:rgba(232,160,74,0.35);
+  --rule2:#51473c;
 
   /* Tradition palette, AA6 audit May 2026: each color reflects content domain.
      See TRAD_COLOR in JS for rationale per hue. Both must stay in sync. */
@@ -1105,8 +1106,7 @@ body.untrans-focus .bubble{ opacity:0.5; transition: opacity 0.6s; }
 <link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
 </head>
 <body data-geometry="indra-web" data-indra-intensity="0.075" data-page-weight="heavy" data-route-type="archive-tool">
-<a class="skip-link" href="#main-content">Skip to main content</a>
-<div id="main-content"></div>
+<a class="skip-link" href="#header">Skip to main content</a>
 <div class="keyboard-hint" tabindex="-1"><span class="route-note-kicker">Keyboard</span><kbd>/</kbd> search, <kbd>?</kbd> help, <kbd>←</kbd>/<kbd>→</kbd> move wide panels.</div>
 <!-- CL_SELF_ROUTE_NOTE -->
 <div class="route-note tool-route-note" role="note"><span class="route-note-kicker">Archive tool</span>Use search, /, Esc, and the visible controls to move through the archetype cloud.</div>
@@ -37760,9 +37760,9 @@ if (document.readyState === 'loading'){
 </script>
 <!-- aa* sibling-pages unified nav -->
 <div id="aa-sibling-nav" style="position:fixed;top:8px;right:12px;z-index:55;font-family:'JetBrains Mono',monospace;font-size:11px;display:flex;gap:4px;">
-<a href="/aa/" onmouseout="this.style.color='rgba(180,180,180,0.6)';this.style.borderColor='rgba(180,180,180,0.3)'" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" style="background:transparent;border:1px solid rgba(180,180,180,0.3);color:rgba(180,180,180,0.6);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:all .15s;display:inline-block;">catalog</a>
-<span style="background:rgba(217,117,21,0.12);border:1px solid rgba(217,117,21,0.4);color:#d97515;padding:4px 10px;border-radius:2px;font-family:inherit;font-size:11px;cursor:default;">· cloud</span>
-<a href="/aa/views/" onmouseout="this.style.color='rgba(180,180,180,0.6)';this.style.borderColor='rgba(180,180,180,0.3)'" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" style="background:transparent;border:1px solid rgba(180,180,180,0.3);color:rgba(180,180,180,0.6);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:all .15s;display:inline-block;">views</a>
+<a href="/aa/" onmouseout="this.style.color='var(--dim)';this.style.borderColor='var(--rule2)'" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" style="background:transparent;border:1px solid var(--rule2);color:var(--dim);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:all .15s;display:inline-block;">catalog</a>
+<span style="background:var(--bg2);border:1px solid var(--accent);color:var(--accent);padding:4px 10px;border-radius:2px;font-family:inherit;font-size:11px;cursor:default;">· cloud</span>
+<a href="/aa/views/" onmouseout="this.style.color='var(--dim)';this.style.borderColor='var(--rule2)'" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" style="background:transparent;border:1px solid var(--rule2);color:var(--dim);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:all .15s;display:inline-block;">views</a>
 </div>
 <!-- A25: search/filter overlay -->
 <div id="search-overlay">

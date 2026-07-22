@@ -5,13 +5,14 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:404e1d58a780654328b1@seminarschools.com
-DTSTAMP:20260721T150607Z
+DTSTAMP:20260721T160000Z
 DTSTART;VALUE=DATE:20260721
-DTEND;VALUE=DATE:20260829
+DTEND;VALUE=DATE:20260830
 SUMMARY:Oasis estivale
 LOCATION:Location unconfirmed · Lieu non confirmé
 DESCRIPTION:Schedule note: Recurring summer program.
-URL:https://seminarschools.com/polymythseminars/events/research-9b88349ee892/
+URL:https://seminarschools.com/polymythseminars/events/research-9b88349ee
+ 892/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

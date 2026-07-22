@@ -76,10 +76,12 @@ for (const dir of PUBLIC_DIRS) {
   copyDir(path.join(ROOT, dir), dir);
 }
 // Release marker for humans checking a deployed build.
+const releaseManifestPath = path.join(ROOT, 'RELEASE_MANIFEST.json');
+const releaseManifest = fs.existsSync(releaseManifestPath) ? JSON.parse(fs.readFileSync(releaseManifestPath, 'utf8')) : {};
 const release = {
   release_id: fs.existsSync(path.join(ROOT, 'RELEASE_ID.txt')) ? fs.readFileSync(path.join(ROOT, 'RELEASE_ID.txt'), 'utf8').trim() : 'local-dev',
   publish_dir: 'public',
-  generated_at: new Date().toISOString(),
+  generated_at: releaseManifest.generated_at || null,
   note: 'Generated deploy surface. Full source/operator archive remains in the zip root; Netlify publishes only this directory.'
 };
 fs.writeFileSync(path.join(OUT, 'site-release.json'), JSON.stringify(release, null, 2) + '\n');

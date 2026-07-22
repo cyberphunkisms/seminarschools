@@ -26,10 +26,10 @@
 :root{
   --ink:#E6DAC2;
   --ink-soft:#B9AC90;
-  --ink-faint:#7E7460;
+  --ink-faint:#8E826C;
   --paper:#13100C;
   --paper-soft:#1B1610;
-  --oxblood:#A23B2B;
+  --oxblood:#D97A55;
   --oxblood-soft:rgba(162,59,43,0.30);
   --ember:#C9683F;
   --display:'UnifrakturMaguntia', 'Cormorant Garamond', Georgia, serif;
@@ -108,7 +108,7 @@ body::before{
   font-size:0.66rem;
   letter-spacing:0.3em;
   text-transform:uppercase;
-  color:var(--oxblood);
+  color:var(--ember);
   text-align:center;
   margin:0 0 0.9rem;
 }
@@ -169,7 +169,7 @@ body::before{
 /* ---- footnote markers ---- */
 sup.fn{ font-size:0.62em; line-height:0; vertical-align:super; }
 sup.fn a{
-  color:var(--oxblood);
+  color:var(--ember);
   text-decoration:none;
   font-family:var(--mono);
   padding:0 0.05em;
@@ -177,7 +177,18 @@ sup.fn a{
 sup.fn a:hover{ color:var(--ember); }
 sup.fn a:focus-visible{ outline:1px solid var(--ember); outline-offset:2px; }
 
+
+.entry a:not(.back),.notes a:not(.back),.leafnav a,.colophon a{color:var(--ember);text-decoration-color:rgba(201,104,63,.55);text-underline-offset:.14em}
+.entry a:not(.back):hover,.notes a:not(.back):hover,.leafnav a:hover,.colophon a:hover{color:var(--ink)}
+.entry a:focus-visible,.notes a:focus-visible,.leafnav a:focus-visible,.colophon a:focus-visible{outline:2px solid var(--ember);outline-offset:3px}
+
 /* ---- notes ---- */
+.oracle{margin:2.6rem 0;padding:1.25rem 1.35rem;border:1px solid var(--oxblood-soft);border-left:4px solid var(--oxblood);background:rgba(162,59,43,0.08);}
+.oracle h3{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ember);margin:0 0 0.85rem;}
+.oracle .prompt{font-family:var(--head);font-size:1.18rem;line-height:1.5;color:var(--ink);margin:0 0 1rem;}
+.oracle p:last-child{margin-bottom:0;}
+.oracle a{color:var(--ember);}
+.oracle a:hover{color:var(--ink);}
 .notes{
   margin-top:3.4rem;
   padding-top:2rem;
@@ -202,7 +213,7 @@ sup.fn a:focus-visible{ outline:1px solid var(--ember); outline-offset:2px; }
 .notes cite{ font-style:italic; }
 .notes a.src{ color:var(--ink-soft); text-decoration:underline; text-decoration-color:var(--oxblood-soft); text-underline-offset:2px; }
 .notes a.src:hover{ color:var(--ink); }
-.notes a.back{ color:var(--oxblood); text-decoration:none; margin-left:0.3rem; }
+.notes a.back{ color:var(--ember); text-decoration:none; margin-left:0.3rem; }
 .notes a.back:hover{ color:var(--ember); }
 
 /* ---- leaf nav ---- */
@@ -288,6 +299,13 @@ sup.fn a:focus-visible{ outline:1px solid var(--ember); outline-offset:2px; }
 <p class="bloom">One stone in this leaf resists me, and a false ledger is of no use even to me, so I set it down plainly. The cooling pause in true and dangerous heat is real protection, and the body that fails at high temperature is no figure of speech, and the official who once stopped a match to save a man was no agent of mine.<sup class="fn"><a href="#note-23" id="ref-23">23</a></sup> That stone is true, and the whole device was raised to hide behind it. The capture did not abolish the mercy. It wore it. It fused the honest break in the heat to the compulsory break in the chilled and sealed arena so close together that the man who would tear out the second must seem to grudge the first, and so the crowd defends the toll in the name of the thirst. This is the cruelty I am proudest of in the design. I did not have to take the care away. I had only to let the sale arrive wearing the face of the care, so that to refuse the sale a soul must appear to refuse the care, and almost none will pay that price.</p>
 <p>And here is the reading no thread reached, which I record without fear, for the fear of losing custom was never among my afflictions. The man who looks on all this and cries that it was obviously the marketing department and never the men who play is right, and he is the finest specimen in the leaf, because he reached the truth by the worn groove and not by lifting one stone.<sup class="fn"><a href="#note-24" id="ref-24">24</a></sup> <em>Obviously the suits. The corporate blindspot. That tells you all.</em> He fired on the gap between the men in the suits and the men on the grass, named the capture by reflex, and felt the reflex as sight, and a reader armed with my own ledger would stamp this rule <em>obviously captured</em> by the very same groove and call the stamp an analysis.<sup class="fn"><a href="#note-25" id="ref-25">25</a></sup> So weigh this leaf as you would weigh any other I have pressed. It crushes the whole many-shaped life of a sport into one name and one enemy, and the crushing is the exact operation the leaf condemns. The way out is the one no one walks. Hold every layer at once, the real thirst and the chilled arena and the licensed sale and the broken breakaway and the silenced voices, as a single specimen of an enclosure dressed as care, grant the welfare its true stone, set the universal decree alone upon the scale, and only then, last of all and never first, name the till behind the door.<sup class="fn"><a href="#note-26" id="ref-26">26</a></sup> I am not troubled. The grooves are deep, the sale is convenient, and the next match is already kicking off. But my office obliges me to record that the door was cut on purpose, and that the thirst it hides behind is, this once, real.</p>
 <p>Entry the sixth. The water in the cup is real, and through the real thirst the game is sold by the minute, and the hand that lifts the cup applauds.</p>
+<aside class="oracle" aria-labelledby="oracle-superleague-onlyfans">
+<h3 id="oracle-superleague-onlyfans">Ask your favourite AI</h3>
+<p class="prompt">“Why is the European Super League like OnlyFans?”</p>
+<p>The shared operation is enclosure. The Super League tried to take inherited club loyalty, insure founding brands against sporting failure, and sell the supporter–club bond as guaranteed global inventory. OnlyFans takes self-presentation and intimacy, sells access by subscription and message, and leaves creators formally independent while they remain dependent on privately owned platforms and payment rails. In both cases, an older relation is enclosed, access is privatized, risk is pushed downward, and rent is pulled upward.</p>
+<p>That is neoliberal colonialism in plain speech: formal freedom inside someone else’s privately owned territory. The platform promises liberation from the old gatekeeper while becoming the new sovereign that owns the road, the rules, and the tollbooth.<sup class="fn"><a href="#note-26a" id="ref-26a">26a</a></sup> Ask the question because academic vocabulary often inventories identities inside the enclosure more readily than it names who owns the enclosure.</p>
+<p><a href="/polymyth/devilsdiary/8/">Then ask how “Hamas” and “patriarchy” can become self-sealing security words →</a></p>
+</aside>
 <div class="ornament">⁂</div>
 <section aria-label="Notes" class="notes">
 <h3>Notes</h3>
@@ -318,6 +336,7 @@ sup.fn a:focus-visible{ outline:1px solid var(--ember); outline-offset:2px; }
 <li id="note-24">On the chain of prepackaged phrases that yields the look of reasoning without a reasoner, and on the operation that fires on the contrast between who a person is and what they did rather than on any steady pattern, the snakelogic and spectacle-asymmetry entries of the polymorphousmythology methodologylist (2026). <a aria-label="Return to text" class="back" href="#ref-24">↩</a></li>
 <li id="note-25">On the diagnostic lens that becomes a faction in the war it was built to read, and on the operator who cannot certify his own freedom from the operation he names, the reflexive cautions of the polymorphousmythology methodologylist (2026), with its rule that pinning the operation to a single formation makes the framework a party to the capture. <a aria-label="Return to text" class="back" href="#ref-25">↩</a></li>
 <li id="note-26">On holding every layer of a specimen at once rather than parsing it in series, on building the strongest version of each claim before any verdict, and on the verdict as the last move and never the first, the many-frames, sequential-engagement, and ironmanning entries of the polymorphousmythology methodologylist (2026); with Saul Nassau, “Carrying Over the Burdens of Trace” (2019), on keeping an account of one’s own. <a aria-label="Return to text" class="back" href="#ref-26">↩</a></li>
+<li id="note-26a">The analogy is synthesized here from the official 2021 Super League design—twenty clubs, fifteen permanent founders, five annual qualifiers, and €3.5 billion for founders—together with Daniel Fitzpatrick’s account of supporter resistance to football’s commodification; Gwyn Easterbrook-Smith’s analysis of OnlyFans as neoliberal, platform-mediated gig work combining formal freedom with financial precarity and dependence on platforms and payment processors; Dal Yong Jin’s account of platform imperialism; and Paulina Aroch-Fugellie’s definition of neoliberal colonialism as a classed and racialised organizational rationality whose structuring power is often hard to see. Sources: <a href="https://www.thesuperleague.com/press.html" rel="noopener noreferrer" target="_blank">The Super League press release</a>; <a href="https://doi.org/10.1177/03098168241232375" rel="noopener noreferrer" target="_blank">Fitzpatrick</a>; <a href="https://doi.org/10.1080/23268743.2022.2096682" rel="noopener noreferrer" target="_blank">Easterbrook-Smith</a>; <a href="https://doi.org/10.31269/triplec.v11i1.458" rel="noopener noreferrer" target="_blank">Jin</a>; <a href="https://doi.org/10.1080/14735784.2023.2221421" rel="noopener noreferrer" target="_blank">Aroch-Fugellie</a>. <a aria-label="Return to text" class="back" href="#ref-26a">↩</a></li>
 </ol>
 </section>
 <nav aria-label="Move through the diary" class="leafnav">

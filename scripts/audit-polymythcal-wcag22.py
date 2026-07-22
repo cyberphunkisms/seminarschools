@@ -22,6 +22,7 @@ OUT_JSON = ROOT / "data" / "polymythcal-wcag22-browser-audit.json"
 OUT_MD = ROOT / "POLYMYTHCAL_WCAG22_AA_AUDIT_2026-07-22.md"
 CHROMIUM = "/usr/bin/chromium"
 RESULTS: list[dict[str, Any]] = []
+RELEASE = json.loads((ROOT / "RELEASE_MANIFEST.json").read_text(encoding="utf-8"))
 
 
 def resolve_chromium_path(browser_type) -> str:
@@ -180,7 +181,8 @@ def run() -> int:
         record("Save-search control becomes available for a meaningful view", page.locator("#pmSaveSearch").is_enabled(), page.locator("#pmSaveSearch").is_enabled(), "3.2.2")
         page.locator("#pmSaveSearch").click()
         saved_searches = page.evaluate("JSON.parse(localStorage.getItem('polymythcal.savedSearches.v2') || '[]')")
-        record("Device-local saved search preserves URL state", len(saved_searches) == 1 and "q=philosophy" in saved_searches[0].get("href", ""), saved_searches, "3.2.3, 4.1.2")
+        saved_search_evidence = [{**item, 'savedAt': RELEASE.get('generated_at')} for item in saved_searches]
+        record("Device-local saved search preserves URL state", len(saved_searches) == 1 and "q=philosophy" in saved_searches[0].get("href", ""), saved_search_evidence, "3.2.3, 4.1.2")
         page.locator("#pmShare").click()
         page.wait_for_timeout(50)
         copied = page.evaluate("window.__copied")
@@ -280,8 +282,8 @@ def run() -> int:
 
     failed = [item for item in RESULTS if not item["passed"]]
     report = {
-        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "release": "PolymythCAL Audit 18 predeploy",
+        "generated_at": RELEASE.get("generated_at"),
+        "release": "PolymythCAL Audit 21 end-to-end",
         "standard": "WCAG 2.2 AA",
         "browser": "Chromium headless with production assets executed locally",
         "checks_passed": len(RESULTS) - len(failed),

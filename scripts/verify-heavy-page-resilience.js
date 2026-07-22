@@ -1,27 +1,9 @@
 #!/usr/bin/env node
 'use strict';
-const fs=require('fs'); const path=require('path');
-const ROOT=path.resolve(__dirname,'..');
-const failures=[];
-function read(rel){return fs.readFileSync(path.join(ROOT,rel),'utf8')}
-function fail(x){failures.push(x)}
-const css=read('css/alive.css');
-if(!css.includes('CL_SUGGESTION_PASS_CONTRACT')) fail('missing CL suggestion pass CSS contract');
-if(!css.includes('content-visibility: auto')) fail('missing heavy-page content-visibility containment');
-const expected=['polymyth/methodologylist/index.html','teacherresources/index.html','aa/index.html','polymyth/campaigncodex/index.html'];
-for(const rel of expected){ const html=read(rel); if(!/data-page-weight=["']heavy["']/.test(html)) fail(`${rel} missing heavy page marker`); }
-const calendar=read('polymythseminars/index.html');
-if(/data-page-weight=["']heavy["']/.test(calendar)) fail('lightweight PolymythCAL shell is incorrectly marked heavy');
-if(Buffer.byteLength(calendar,'utf8')>=100000) fail('lightweight PolymythCAL shell exceeds 100 KB');
-const shortcuts=['writingkids','writingjuniors','writingteens','writinggrads','writingclub','university','philosophy','humanities','cfps','lectures','fellowships'];
-for(const route of shortcuts){
-  const html=read(`${route}/index.html`);
-  const m=html.match(/<script[^>]*id=["']events-fallback["'][^>]*>([\s\S]*?)<\/script>/);
-  if(!m){ fail(`${route} missing events fallback`); continue; }
-  let data; try{data=JSON.parse(m[1])}catch(e){ fail(`${route} fallback JSON malformed`); continue; }
-  if(!Array.isArray(data.events)) fail(`${route} fallback lacks events array`);
-  if((data.events||[]).length>60) fail(`${route} fallback is too large for a route-specific shortcut: ${(data.events||[]).length}`);
-  if(!/data-source=["']\/polymythseminars\/events\.json["']/.test(m[0])) fail(`${route} fallback missing canonical data-source marker`);
-}
-if(failures.length){ console.error('HEAVY PAGE RESILIENCE FAILED'); failures.forEach(f=>console.error(' - '+f)); process.exit(1); }
-console.log('HEAVY PAGE RESILIENCE PASSED — large pages are render-contained, PolymythCAL stays lightweight, and shortcut pages carry compact route-specific fallbacks.');
+const fs=require('fs');const path=require('path');const ROOT=path.resolve(__dirname,'..');const failures=[];
+const read=rel=>fs.readFileSync(path.join(ROOT,rel),'utf8');const fail=x=>failures.push(x);
+const alive=read('css/alive.css');const calendarCss=read('css/polymythcal-revamp.css');if(!alive.includes('CL_SUGGESTION_PASS_CONTRACT'))fail('missing CL suggestion pass CSS contract');if(!alive.includes('content-visibility: auto')&&!calendarCss.includes('content-visibility: auto'))fail('missing heavy-page content-visibility containment');
+for(const rel of ['polymyth/methodologylist/index.html','teacherresources/index.html','aa/index.html','polymyth/campaigncodex/index.html']){const html=read(rel);if(!/data-page-weight=["']heavy["']/.test(html))fail(`${rel} missing heavy page marker`);}
+const routes=['polymythseminars','writingkids','writingjuniors','writingteens','writinggrads','writingclub','university','philosophy','humanities','cfps','lectures','fellowships'];
+for(const route of routes){const rel=`${route}/index.html`;const html=read(rel);const bytes=Buffer.byteLength(html,'utf8');if(/data-page-weight=["']heavy["']/.test(html))fail(`${rel} is incorrectly marked heavy`);if(bytes>=100000)fail(`${rel} exceeds 100 KB: ${bytes}`);if(!html.includes('id="pmEventList"')||!html.includes('/js/polymythcal-revamp.js'))fail(`${rel} missing lightweight shared shell`);if(html.includes('id="events-fallback"')||html.includes('id="eventsContainer"'))fail(`${rel} embeds a legacy event corpus`);const noscript=(html.match(/<noscript>([\s\S]*?)<\/noscript>/i)||[])[1]||'';const count=(noscript.match(/href="\/polymythseminars\/events\//g)||[]).length;if(route!=='polymythseminars'&&count>40)fail(`${rel} no-script fallback exceeds 40 listings: ${count}`);}
+if(failures.length){console.error('HEAVY PAGE RESILIENCE FAILED');failures.forEach(f=>console.error(' - '+f));process.exit(1);}console.log(`HEAVY PAGE RESILIENCE PASSED — large reference pages stay render-contained while ${routes.length} PolymythCAL entry pages remain lightweight client shells with compact no-script access.`);

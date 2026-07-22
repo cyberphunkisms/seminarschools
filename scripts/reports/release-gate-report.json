@@ -1,9 +1,10 @@
 {
-  "generated_at": "2026-07-22T05:05:23.889Z",
+  "generated_at": "2026-07-22T14:30:00-04:00",
   "status": "passed",
-  "total_checks": 91,
-  "passed_checks": 91,
+  "total_checks": 92,
+  "passed_checks": 92,
   "failed_checks": [],
-  "duration_ms": 7879,
+  "duration_ms": null,
+  "duration_note": "Runtime duration is printed to the console and intentionally omitted from committed evidence.",
   "rule": "Every command in scripts/verify-all-runner.js is a release blocker."
 }

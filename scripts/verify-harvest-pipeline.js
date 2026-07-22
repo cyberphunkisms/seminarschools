@@ -36,8 +36,8 @@ for (const workflow of ['.github/workflows/scrape-seminars.yml', '.github/workfl
   const s = read(workflow);
   for (const needle of [
     'timeout-minutes: 45',
-    'actions/upload-artifact@v6',
-    'actions/checkout@v5',
+    'actions/upload-artifact@v7',
+    'actions/checkout@v6',
     'actions/setup-node@v6',
     'actions/setup-python@v6',
     'concurrency:',
@@ -54,8 +54,8 @@ for (const workflow of ['.github/workflows/scrape-seminars.yml', '.github/workfl
     'Summarize harvest diagnostics',
     'Verify generated calendar',
   ]) need(s, needle, workflow, problems);
-  if (!/actions\/checkout@v(5|6|7)/.test(s)) problems.push(`${workflow} must use a Node 24-compatible checkout action.`);
-  if (!/actions\/setup-node@v(5|6)/.test(s)) problems.push(`${workflow} must use a Node 24-compatible setup-node action.`);
+  if (!/actions\/checkout@v(?:6|7|[89]|[1-9][0-9])/.test(s)) problems.push(`${workflow} must use a Node 24-compatible checkout action.`);
+  if (!/actions\/setup-node@v(?:6|7|[89]|[1-9][0-9])/.test(s)) problems.push(`${workflow} must use a Node 24-compatible setup-node action.`);
   if (!/actions\/setup-python@v6/.test(s)) problems.push(`${workflow} must use a Node 24-compatible setup-python action.`);
 }
 const seminarPrompt = read('scripts/seminars-prompt.md');

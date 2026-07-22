@@ -5,13 +5,14 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:d4dc60bcc2b7772bb25d@seminarschools.com
-DTSTAMP:20260721T150607Z
+DTSTAMP:20260721T160000Z
 DTSTART;VALUE=DATE:20260726
-DTEND;VALUE=DATE:20260830
+DTEND;VALUE=DATE:20260831
 SUMMARY:Prescott Summer Concert Series
 LOCATION:Kinsmen Amphitheatre
 DESCRIPTION:Schedule note: Every Sunday in July and August.
-URL:https://seminarschools.com/polymythseminars/events/research-b358691fdd5f/
+URL:https://seminarschools.com/polymythseminars/events/research-b358691fd
+ d5f/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

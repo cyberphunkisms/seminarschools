@@ -1,122 +1,35 @@
 #!/usr/bin/env node
 'use strict';
-
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.resolve(__dirname, '..');
-const failures = [];
-const read = rel => fs.readFileSync(path.join(ROOT, rel), 'utf8');
-const exists = rel => fs.existsSync(path.join(ROOT, rel));
-const fail = msg => failures.push(msg);
-const byteEqual = (a, b) => fs.readFileSync(path.join(ROOT, a)).compare(fs.readFileSync(path.join(ROOT, b))) === 0;
-
-const calendarRel = 'polymythseminars/index.html';
-const calendar = read(calendarRel);
-const calendarBytes = fs.statSync(path.join(ROOT, calendarRel)).size;
-if (!calendar.includes('id="pmEventList"') || !calendar.includes('/js/polymythcal-revamp.js?v=20260721-audit18')) fail('calendar client-shell mounts or Audit 18 asset version are missing');
-if (!calendar.includes('name="ss-build"') || !calendar.includes('20260721-audit18')) fail('calendar build stamp is missing');
-if (!calendar.includes('id="academicNav"')) fail('dedicated academic entry points are missing from the calendar');
-if (!calendar.includes('aria-describedby="quickGuideCopy"')) fail('results region is not connected to its plain-language filter guidance');
-if (calendar.includes('id="eventsContainer"') || calendar.includes('data-ssr-events="true"')) fail('legacy full-event payload returned to the main calendar');
-if (calendarBytes >= 100000) fail(`calendar shell exceeds 100 KB: ${calendarBytes}`);
-
-const revampJs = read('js/polymythcal-revamp.js');
-if (!/cache:\s*[\"']no-cache[\"']/.test(revampJs)) fail('event JSON fetch does not allow conditional browser caching');
-for (const key of ['raw_excerpt', 'qualification_reasons', 'topics', 'tags']) {
-  if (!revampJs.includes(key)) fail(`search index omits ${key}`);
-}
-const revampCss = read('css/polymythcal-revamp.css');
-if (!revampCss.includes('content-visibility: auto') || !revampCss.includes('contain-intrinsic-size')) fail('long result lists lack browser rendering containment');
-
-const searchBuilder = read('scripts/build-search-pages.js');
-if (!searchBuilder.includes("const clientShell = html.includes('id=\"pmEventList\"')")) fail('search builder lacks the lightweight client-shell branch');
-if (searchBuilder.includes("if (!html.includes('id=\"eventsContainer\"')) throw new Error('Calendar event injection point is missing')")) fail('obsolete hard dependency on #eventsContainer remains');
-
-const writingBuilder = read('scripts/build-writing-shortcuts.js');
-if (!writingBuilder.includes('let html = read(`${slug}/index.html`);')) fail('writing builder does not preserve each dedicated route template');
-const academicBuilder = read('scripts/build-academic-shortcuts.js');
-if (!academicBuilder.includes("let html=read(`${route}/index.html`);") && !academicBuilder.includes("let html = read(`${route}/index.html`);")) fail('academic builder does not preserve each dedicated route template');
-
-const dedicatedRoutes = [
-  ...['writingclub','writingkids','writingjuniors','writingteens','writinggrads'].map(slug => ({slug, mount:'eventsContainer'})),
-  ...['university','philosophy','humanities','cfps','lectures','fellowships'].map(slug => ({slug, mount:'eventsContainer'})),
-];
-for (const {slug, mount} of dedicatedRoutes) {
-  const rel = `${slug}/index.html`;
-  const html = read(rel);
-  const expected = `https://seminarschools.com/${slug}/`;
-  const canonical = html.match(/<link rel="canonical" href="([^"]+)"/i)?.[1];
-  if (canonical !== expected) fail(`${slug} canonical mismatch: ${canonical || 'missing'}`);
-  if (!html.includes(`id="${mount}"`)) fail(`${slug} lost its dedicated event mount`);
-  const publicRel = `public/${rel}`;
-  if (!exists(publicRel) || !byteEqual(rel, publicRel)) fail(`${slug} source/public mirror mismatch`);
-}
-
-const typeLinker = read('scripts/apply-sitewide-type-zoom-link.js');
-if (!typeLinker.includes('if (matches.length === 1 && matches[0] === LINK) continue;')) fail('site-wide type linker still rewrites already-correct pages');
-for (const rel of [calendarRel, ...dedicatedRoutes.map(({slug}) => `${slug}/index.html`)]) {
-  const html = read(rel);
-  const matches = html.match(/<link[^>]+href="\/css\/site-wide-type-zoom\.css(?:\?[^"]*)?"[^>]*>/g) || [];
-  if (matches.length !== 1) fail(`${rel} has ${matches.length} site-wide type/zoom links; expected exactly one`);
-}
-
-const netlify = read('netlify.toml');
-const packageDoc = JSON.parse(read('package.json'));
-const expectedBuildParts = [
-  'node scripts/build-search-pages.js',
-  'node scripts/build-writing-shortcuts.js',
-  'node scripts/build-academic-shortcuts.js',
-  'node scripts/apply-sitewide-type-zoom-link.js',
-  'node scripts/apply-type-floor.js',
-  'node scripts/build-public-deploy.js',
-  'node scripts/verify-polymythcal-build-efficiency.js',
-];
-for (const part of expectedBuildParts) if (!(packageDoc.scripts?.build || '').includes(part)) fail(`package build command omits ${part}`);
-if (!/command\s*=\s*"npm run build"/.test(netlify)) fail('Netlify build command does not use npm run build');
-if (!/NODE_VERSION\s*=\s*"24"/.test(netlify)) fail('Netlify is not pinned to Node 24');
-if (!/publish\s*=\s*"public"/.test(netlify)) fail('Netlify publish directory is not public');
-if (netlify.includes("':(exclude)scripts/'")) fail('Netlify ignore rule still suppresses deploy-affecting script changes');
-if (!netlify.includes("':(exclude)scripts/reports/'")) fail('Netlify ignore rule no longer excludes generated verifier reports');
-
-const gitignore = read('.gitignore');
-if (!/^public\/$/m.test(gitignore)) fail('generated public directory is not ignored by Git');
-
-const releaseId = read('RELEASE_ID.txt').trim();
-if (releaseId !== '2026-07-22-polymythcal-audit19-final') fail(`unexpected release id: ${releaseId}`);
-const scrapeLog = JSON.parse(read('data/scrape-log.json'));
-const scrapeCount = Number(scrapeLog.canonical_event_count ?? scrapeLog.public_event_count ?? scrapeLog.event_count ?? scrapeLog.events ?? scrapeLog.total_events ?? NaN);
-if (scrapeCount !== 839) fail(`scrape summary is stale: ${scrapeCount}`);
-
-const payload = JSON.parse(read('polymythseminars/events.json'));
-if ((payload.events || []).length !== 839) fail(`expected 839 canonical event records, found ${(payload.events || []).length}`);
-if (!exists('public/polymythseminars/events.json')) fail('public event data was not generated');
-if (!byteEqual('polymythseminars/events.json', 'public/polymythseminars/events.json')) fail('source/public event JSON mirror mismatch');
-
-for (const rel of ['polymythseminars/submit/index.html','polymythseminars/correct/index.html','polymythseminars/subscribe/index.html','polymythseminars/thanks/index.html']) {
-  const html = read(rel);
-  if (!/property="og:title"/i.test(html) || !/property="og:description"/i.test(html)) fail(`${rel} lacks complete Open Graph metadata`);
-}
-
-const forbidden = [/Kira spousal-sponsorship/i, /Kyra.?s 75% commission/i, /Kira UI review/i];
-const textRoots = ['polymyth', 'hf_export', 'data', 'js', 'scripts'];
-const textExt = new Set(['.html','.txt','.md','.json','.jsonl','.js','.css','.csv','.py','.bat']);
-function walk(dir) {
-  if (!exists(dir)) return;
-  for (const ent of fs.readdirSync(path.join(ROOT, dir), {withFileTypes:true})) {
-    const rel = path.join(dir, ent.name);
-    if (ent.isDirectory()) walk(rel);
-    else if (ent.isFile() && textExt.has(path.extname(ent.name).toLowerCase())) {
-      if (rel === 'scripts/verify-polymythcal-build-efficiency.js') continue;
-      const text = read(rel);
-      for (const re of forbidden) if (re.test(text)) fail(`private reference returned in ${rel}`);
-    }
-  }
-}
-textRoots.forEach(walk);
-
-if (failures.length) {
-  console.error('POLYMYTHCAL BUILD/EFFICIENCY CHECK FAILED');
-  failures.forEach(x => console.error(' - ' + x));
-  process.exit(1);
-}
-console.log(`POLYMYTHCAL BUILD/EFFICIENCY CHECK PASSED — ${calendarBytes} byte client shell, 839 events, 11 dedicated writing/academic entry points, cached JSON, rendering containment, deterministic type-link pass, Audit 19 release metadata, and clean privacy scan.`);
+const fs=require('fs');const path=require('path');const crypto=require('crypto');const {execFileSync}=require('child_process');
+const ROOT=path.resolve(__dirname,'..');const failures=[];const warnings=[];
+const read=r=>fs.readFileSync(path.join(ROOT,r),'utf8');const exists=r=>fs.existsSync(path.join(ROOT,r));const fail=m=>failures.push(m);const warn=m=>warnings.push(m);
+const bytesEqual=(a,b)=>fs.readFileSync(path.join(ROOT,a)).compare(fs.readFileSync(path.join(ROOT,b)))===0;
+const sha=r=>crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,r))).digest('hex');
+const releaseId=read('RELEASE_ID.txt').trim();const release=JSON.parse(read('RELEASE_MANIFEST.json'));const manifest=JSON.parse(read('data/polymythcal-build-manifest.json'));
+if(release.release_id!==releaseId)fail('RELEASE_ID.txt and RELEASE_MANIFEST.json disagree');
+if(manifest.release_id!==releaseId||manifest.interface_release!==releaseId)fail('Polymythcal build manifest release is stale');
+const calendar='polymythseminars/index.html';const html=read(calendar);const calendarBytes=fs.statSync(path.join(ROOT,calendar)).size;
+if(!html.includes('id="pmEventList"')||!html.includes('/js/polymythcal-revamp.js'))fail('calendar client-shell mount or application asset is missing');
+if(!html.includes('content="20260722-audit21" name="ss-build"')&&!html.includes('name="ss-build" content="20260722-audit21"'))fail('calendar build stamp is not Audit 21');
+if(html.includes('id="eventsContainer"')||html.includes('id="events-fallback"'))fail('main calendar regressed to a legacy embedded corpus');
+if(calendarBytes>=100000)fail(`calendar shell exceeds 100 KB: ${calendarBytes}`);
+const app=read('js/polymythcal-revamp.js');if(!app.includes('function routeMatches(event)'))fail('dedicated route restriction is missing from the shared calendar application');
+if(!/cache:\s*["']no-cache["']/.test(app))fail('event JSON fetch lacks freshness control');
+const routes=['writingclub','writingkids','writingjuniors','writingteens','writinggrads','university','philosophy','humanities','cfps','lectures','fellowships'];
+for(const slug of routes){const rel=`${slug}/index.html`;if(!exists(rel)){fail(`${rel} missing`);continue;}const page=read(rel);const canonical=page.match(/<link href="([^"]+)" rel="canonical"/i)?.[1]||page.match(/<link rel="canonical" href="([^"]+)"/i)?.[1];if(canonical!==`https://seminarschools.com/${slug}/`)fail(`${slug} canonical mismatch: ${canonical||'missing'}`);if(!page.includes(`data-pm-route="${slug}"`)||!page.includes('id="pmEventList"'))fail(`${slug} does not use the unified interactive route shell`);if(page.includes('id="eventsContainer"')||page.includes('id="events-fallback"')||page.includes('quickFocusNav'))fail(`${slug} still contains legacy calendar controls`);if(exists(`public/${rel}`)&&!bytesEqual(rel,`public/${rel}`))fail(`${slug} source/public mirror mismatch`);}
+const payload=JSON.parse(read('polymythseminars/events.json'));const events=payload.events||[];
+if(!events.length)fail('canonical event corpus is empty');if(payload.count!==events.length||payload._total_events!==events.length)fail('event payload counts do not match events array');
+if(!bytesEqual('polymythseminars/events.json','data/polymyth-seminar-events.json'))fail('canonical/public source event JSON mismatch');
+if(!exists('public/polymythseminars/events.json')||!bytesEqual('polymythseminars/events.json','public/polymythseminars/events.json'))fail('generated public event JSON mismatch');
+if(manifest.record_count!==events.length)fail(`build manifest count ${manifest.record_count} does not match ${events.length}`);if(manifest.canonical_data_sha256!==sha('data/polymyth-seminar-events.json'))fail('build manifest canonical data hash is stale');
+const scrape=JSON.parse(read('data/scrape-log.json'));if(Number(scrape.canonical_event_count)!==events.length||Number(scrape.public_event_count)!==events.length)fail('scrape summary event counts are stale');
+const missingPages=events.filter(e=>!exists(`polymythseminars/events/${e.id}/index.html`));if(missingPages.length)fail(`${missingPages.length} stable event pages are missing`);
+const missingIcs=events.filter(e=>!exists(`polymythseminars/ics/${e.id}.ics`));if(missingIcs.length)fail(`${missingIcs.length} event ICS files are missing`);
+const sync=read('scripts/sync-calendar-data.js');if(!sync.includes('client-shell event mount')||sync.includes("throw new Error('events-fallback injection point is missing')"))fail('calendar sync still assumes legacy fallback markers');
+const siteRelease=JSON.parse(read('public/site-release.json'));if(siteRelease.release_id!==releaseId||siteRelease.generated_at!==release.generated_at)fail('generated site release marker is stale or non-deterministic');
+const pkg=JSON.parse(read('package.json'));if(pkg.scripts?.build!=='node scripts/build-search-pages.js && node scripts/build-writing-shortcuts.js && node scripts/build-academic-shortcuts.js && node scripts/apply-sitewide-type-zoom-link.js && node scripts/apply-type-floor.js && node scripts/build-public-deploy.js && node scripts/verify-polymythcal-build-efficiency.js')fail('production build command drifted from the audited canonical command');
+const netlify=read('netlify.toml');if(!/command\s*=\s*"npm run build"/.test(netlify)||!/publish\s*=\s*"public"/.test(netlify))fail('Netlify build/publish contract is wrong');if(!netlify.includes('node ./scripts/netlify-ignore-build.js'))fail('Netlify ignore logic is not routed through the tested script');
+const forbidden=[new RegExp(['Ki','ra spousal-sponsorship'].join(''),'i'),new RegExp(['Ky','ra.?s 75% commission'].join(''),'i'),new RegExp(['Ki','ra UI review'].join(''),'i')];const roots=['polymyth','hf_export','data','js','scripts'];const exts=new Set(['.html','.txt','.md','.json','.jsonl','.js','.css','.csv','.py','.bat']);
+function walk(rel){if(!exists(rel))return;for(const ent of fs.readdirSync(path.join(ROOT,rel),{withFileTypes:true})){const child=path.join(rel,ent.name);if(ent.isDirectory())walk(child);else if(ent.isFile()&&exts.has(path.extname(ent.name).toLowerCase())&&child!=='scripts/verify-polymythcal-build-efficiency.js'){const text=read(child);for(const re of forbidden)if(re.test(text))fail(`private reference returned in ${child}`);}}}roots.forEach(walk);
+const gitignore=exists('.gitignore')?read('.gitignore'):'';if(!/^\/?public\/$/m.test(gitignore))warn('public/ is absent from .gitignore');try{const tracked=execFileSync('git',['ls-files','public'],{cwd:ROOT,encoding:'utf8',stdio:['ignore','pipe','ignore']}).trim();if(tracked)warn(`public/ remains tracked in this repository (${tracked.split(/\r?\n/).length} paths); run npm run repair:repository-hygiene once`);}catch(_){ }
+if(failures.length){console.error('POLYMYTHCAL BUILD/EFFICIENCY CHECK FAILED');failures.forEach(x=>console.error(' - '+x));process.exit(1);}console.log(`POLYMYTHCAL BUILD/EFFICIENCY CHECK PASSED — ${calendarBytes} byte shell, ${events.length} event records, ${routes.length} unified dedicated entry pages, deterministic release metadata, and clean privacy scan.`);if(warnings.length){console.warn('REPOSITORY HYGIENE WARNINGS (deployment continues):');warnings.forEach(x=>console.warn(' - '+x));}

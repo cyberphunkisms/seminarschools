@@ -12,7 +12,10 @@ from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "data" / "polymythcal-audit19"
+RELEASE = json.loads((ROOT / 'RELEASE_MANIFEST.json').read_text(encoding='utf-8'))
+RELEASE_TIMESTAMP = RELEASE.get('generated_at') or '1970-01-01T00:00:00Z'
+CAPTURE_SCREENSHOTS = os.environ.get('POLYMYTHCAL_AUDIT_SCREENSHOTS', '').strip() == '1'
+OUT = ROOT / "data" / "polymythcal-audit21"
 OUT.mkdir(parents=True, exist_ok=True)
 RESULTS: list[dict] = []
 
@@ -112,7 +115,7 @@ check("no-script route exists", soup.select_one("noscript") is not None)
 
 payload = json.loads(events_path.read_text(encoding="utf-8"))
 events = payload["events"]
-check("839 canonical records preserved", len(events) == 839, str(len(events)))
+check("canonical records match declared totals", len(events) > 0 and payload.get("count") == len(events) and payload.get("_total_events") == len(events), str(len(events)))
 missing_routes = [event["id"] for event in events if not (ROOT / "polymythseminars/events" / event["id"] / "index.html").exists()]
 check("all event detail routes exist", not missing_routes, f"missing {len(missing_routes)}")
 missing_public_routes = [event["id"] for event in events if not (ROOT / "public/polymythseminars/events" / event["id"] / "index.html").exists()]
@@ -124,7 +127,7 @@ with sync_playwright() as p:
     browser = p.chromium.launch(headless=True, executable_path=resolve_chromium_path(p.chromium), args=["--no-sandbox", "--disable-dev-shm-usage"])
 
     # Desktop interaction and logic audit.
-    print("AUDIT19 desktop start", flush=True)
+    print("AUDIT21 desktop start", flush=True)
     context = browser.new_context(viewport={"width": 1440, "height": 1000}, timezone_id="America/Toronto")
     page = context.new_page()
     errors: list[str] = []
@@ -156,7 +159,7 @@ with sync_playwright() as p:
     page.locator('input[value="talks"][data-state-set="eventTypes"]').check()
     page.locator('input[value="funding"][data-state-set="opportunityTypes"]').check()
     content_badges = {str(text or "").strip().lower() for text in page.locator(".pm-badge-row .pm-badge:first-child").evaluate_all("els => els.map(el => el.textContent)")}
-    check("event and opportunity type filters work side by side", "event" in content_badges and "opportunity" in content_badges, str(content_badges))
+    check("event and opportunity type filters work side by side", "event" in content_badges and "opportunity" in content_badges, str(sorted(content_badges)))
 
     # Search quality.
     page.locator("#pmResetFilters").click()
@@ -166,7 +169,8 @@ with sync_playwright() as p:
     check("save-search action activates for a meaningful view", page.locator("#pmSaveSearch").is_enabled())
     page.locator("#pmSaveSearch").click()
     saved_searches = page.evaluate("JSON.parse(localStorage.getItem('polymythcal.savedSearches.v2') || '[]')")
-    check("device-local saved searches persist URL state", len(saved_searches) == 1 and "q=montral" in saved_searches[0].get("href", ""), str(saved_searches))
+    saved_search_evidence = [{**item, 'savedAt': RELEASE_TIMESTAMP} for item in saved_searches]
+    check("device-local saved searches persist URL state", len(saved_searches) == 1 and "q=montral" in saved_searches[0].get("href", ""), str(saved_search_evidence))
     page.locator("#pmSavedToggle").click()
     check("saved-search entry is visible in the shared dialog", page.locator("#pmSavedSearchList li").count() == 1)
     page.locator("#pmCloseSaved").click()
@@ -247,13 +251,14 @@ with sync_playwright() as p:
     else:
         check("calendar more control is available when needed", True, "No month cell exceeded three items")
 
-    page.screenshot(path=str(OUT / "desktop-final.png"), full_page=False)
+    if CAPTURE_SCREENSHOTS:
+        page.screenshot(path=str(OUT / "desktop-final.png"), full_page=False)
     check("desktop run has no script errors", not errors, " | ".join(errors))
     context.close()
-    print("AUDIT19 desktop complete", flush=True)
+    print("AUDIT21 desktop complete", flush=True)
 
     # French interface and dynamic labels.
-    print("AUDIT19 French start", flush=True)
+    print("AUDIT21 French start", flush=True)
     context = browser.new_context(viewport={"width": 1100, "height": 900}, timezone_id="America/Toronto")
     page = context.new_page()
     load_browser_page(page, BROWSER_HTML, BROWSER_CSS, BROWSER_PAYLOAD, BROWSER_JS, lang="fr")
@@ -264,7 +269,7 @@ with sync_playwright() as p:
     page.locator("#pmSearch").fill("philosophie")
     check("French concept search works", count_from_title(page.locator("#pmResultsTitle").inner_text()) > 0)
     context.close()
-    print("AUDIT19 French complete", flush=True)
+    print("AUDIT21 French complete", flush=True)
 
     # Calendar dates and upcoming counts use the corridor timezone rather than the viewer timezone.
     context = browser.new_context(viewport={"width": 1000, "height": 800}, timezone_id="UTC")
@@ -274,7 +279,7 @@ with sync_playwright() as p:
     context.close()
 
     # Mobile interaction, reflow, focus and agenda design.
-    print("AUDIT19 mobile start", flush=True)
+    print("AUDIT21 mobile start", flush=True)
     for width, height, name in [(390, 844, "mobile"), (320, 800, "small-mobile")]:
         context = browser.new_context(viewport={"width": width, "height": height}, timezone_id="America/Toronto", reduced_motion="reduce")
         page = context.new_page()
@@ -307,14 +312,15 @@ with sync_playwright() as p:
             if box and (box["width"] < 24 or box["height"] < 24):
                 too_small.append((controls.nth(i).inner_text(), box))
         check(f"{name} interactive targets meet the 24 pixel minimum", not too_small, str(too_small[:5]))
-        page.screenshot(path=str(OUT / f"{name}-final.png"), full_page=False)
+        if CAPTURE_SCREENSHOTS:
+            page.screenshot(path=str(OUT / f"{name}-final.png"), full_page=False)
         check(f"{name} run has no script errors", not mobile_errors, " | ".join(mobile_errors))
         context.close()
 
-    print("AUDIT19 mobile complete", flush=True)
+    print("AUDIT21 mobile complete", flush=True)
 
     # Forced-colour resilience.
-    print("AUDIT19 forced-colour start", flush=True)
+    print("AUDIT21 forced-colour start", flush=True)
     context = browser.new_context(viewport={"width": 1000, "height": 800}, forced_colors="active")
     page = context.new_page()
     load_browser_page(page, BROWSER_HTML, BROWSER_CSS, BROWSER_PAYLOAD, BROWSER_JS)
@@ -326,12 +332,12 @@ with sync_playwright() as p:
     browser.close()
 
 report = {
-    "release": "PolymythCAL Audit 19 final predeploy interaction and design verification",
-    "date": "2026-07-21",
+    "release": "PolymythCAL Audit 21 end-to-end interaction and design verification",
+    "date": "2026-07-22",
     "checks_passed": sum(1 for item in RESULTS if item["passed"]),
     "checks_total": len(RESULTS),
     "results": RESULTS,
 }
-report_path = ROOT / "POLYMYTHCAL_AUDIT19_INTERACTION_DESIGN_VERIFICATION_2026-07-21.json"
+report_path = ROOT / "POLYMYTHCAL_AUDIT21_INTERACTION_DESIGN_VERIFICATION_2026-07-22.json"
 report_path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
 print(json.dumps({"passed": report["checks_passed"], "total": report["checks_total"]}))

@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-22T04:59:03+00:00",
-  "release": "PolymythCAL Audit 18 predeploy",
+  "generated_at": "2026-07-22T14:30:00-04:00",
+  "release": "PolymythCAL Audit 21 end-to-end",
   "standard": "WCAG 2.2 AA",
   "browser": "Chromium headless with production assets executed locally",
   "checks_passed": 42,
@@ -163,7 +163,7 @@
           "id": "blank?q=philosophy&places=montreal%2Ctoronto-gta",
           "href": "blank?q=philosophy&places=montreal%2Ctoronto-gta",
           "label": "“philosophy” + Toronto and GTA + Montréal and West Island",
-          "savedAt": "2026-07-22T04:58:57.664Z"
+          "savedAt": "2026-07-22T14:30:00-04:00"
         }
       ],
       "criterion": "3.2.3, 4.1.2",
@@ -343,7 +343,7 @@
       "name": "Stable event page has source, calendar, and correction actions",
       "passed": true,
       "details": [
-        "Official source · Source officielle ↗",
+        "Official or institutional source · Source officielle ou institutionnelle ↗",
         "Add to calendar · Ajouter au calendrier",
         "Correct this listing · Corriger cette fiche"
       ],

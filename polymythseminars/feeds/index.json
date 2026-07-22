@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T15:06:09.228187+00:00",
+  "generated_at": "2026-07-22T18:30:00Z",
   "feeds": [
     {
       "id": "all",
@@ -56,13 +56,13 @@
       "ics": "/polymythseminars/feeds/civic.ics"
     },
     {
-      "id": "deadlines",
-      "label": "Calls for papers, contests, fellowships, and deadlines",
-      "label_en": "Calls for papers, contests, fellowships, and deadlines",
-      "label_fr": "Appels, concours, bourses et échéances",
-      "count": 120,
-      "rss": "/polymythseminars/feeds/deadlines.xml",
-      "ics": "/polymythseminars/feeds/deadlines.ics"
+      "id": "opportunities",
+      "label": "Applications, calls, competitions, fellowships, and funding",
+      "label_en": "Applications, calls, competitions, fellowships, and funding",
+      "label_fr": "Candidatures, appels, concours, bourses et financement",
+      "count": 125,
+      "rss": "/polymythseminars/feeds/opportunities.xml",
+      "ics": "/polymythseminars/feeds/opportunities.ics"
     },
     {
       "id": "toronto",

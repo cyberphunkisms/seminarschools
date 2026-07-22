@@ -72,15 +72,17 @@
   --ink:#1a1614;
   --ink2:#3d352d;
   --dim:#6b5d4f;
-  --faint:#9c8e7f;
+  --ink-dim:var(--dim);
+  --faint:#75685b;
   --rule:#c9bea8;
   --rule2:#a89c83;
   --accent-light: #8b2e1f;
   --accent-dark: #e87050;
   --accent: var(--accent-light);
-  --accent2:#c8501f;
+  --accent2:#9f3d18;
   --highlight:#fff4cc;
 }
+
 html{background:var(--bg)}
 body{
   background:var(--bg);
@@ -234,7 +236,7 @@ h1 em{font-style:italic;color:var(--accent);font-weight:500}
 .pending-grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:8px}
 .pending-card{border:1px solid var(--rule2);border-left:3px solid #d97515;background:var(--bg);padding:24px 28px;font-family:'Inter',sans-serif;line-height:1.55}
 .pc-kicker{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.5px;text-transform:uppercase}
-.pc-id{color:#d97515;font-weight:600}
+.pc-id{color:var(--accent);font-weight:600}
 .pc-status{color:var(--ink-dim);background:rgba(217,117,21,0.08);padding:2px 8px;border-radius:2px;font-size:0.72rem}
 .pc-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--ink);line-height:1.25;margin:4px 0 16px;letter-spacing:-.01em}
 .pc-section-label{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--ink-dim);margin-top:18px;margin-bottom:6px;font-weight:600}
@@ -242,14 +244,14 @@ h1 em{font-style:italic;color:var(--accent);font-weight:500}
 .pc-prose--history{font-style:italic;color:var(--ink-dim);border-left:2px solid var(--rule);padding-left:12px}
 .pc-options{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
 .pc-options li{padding:10px 14px;background:rgba(217,117,21,0.04);border:1px solid var(--rule);border-radius:2px;font-size:14px;line-height:1.55}
-.pc-opt-mark{font-family:'JetBrains Mono',monospace;font-size:11px;color:#d97515;font-weight:700;margin-right:8px}
+.pc-opt-mark{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);font-weight:700;margin-right:8px}
 .pc-meta-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px;padding:14px 16px;background:var(--bg-soft,rgba(0,0,0,0.02));border-radius:2px;border:1px solid var(--rule)}
 .pc-meta-cell{font-size:13px}
 .pc-meta-k{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--ink-dim);margin-bottom:4px;font-weight:600}
 .pc-meta-v{color:var(--ink);line-height:1.5}
 .pc-related{list-style:none;padding:0;margin:0;font-size:12px;color:var(--ink-dim);font-family:'JetBrains Mono',monospace}
 .pc-related li{padding:3px 0;letter-spacing:.2px}
-.pc-related li:before{content:'→ ';color:#d97515;margin-right:2px}
+.pc-related li:before{content:'→ ';color:var(--accent);margin-right:2px}
 .mode-btn{
   padding:13px 18px;background:transparent;border:none;
   font-family:'JetBrains Mono', monospace;font-size:11px;
@@ -1603,6 +1605,11 @@ footer a:hover{color:var(--accent)}
   }
 </style>
 <link rel="stylesheet" href="/css/theme.css?v=cl91">
+<style data-page-theme="aa">
+:root{--bg:#f4f0e6;--bg2:#ebe5d4;--bg3:#e0d7c0;--ink:#1a1614;--ink2:#3d352d;--dim:#6b5d4f;--ink-dim:var(--dim);--faint:#75685b;--rule:#c9bea8;--rule2:#a89c83;--accent-light:#8b2e1f;--accent-dark:#ef8b68;--accent:var(--accent-light);--accent2:#9f3d18;--highlight:#fff4cc;}
+@media (prefers-color-scheme:dark){:root:not(.light){--bg:#0f0d0b;--bg2:#191612;--bg3:#241f19;--ink:#f1e8d6;--ink2:#d2c4ad;--dim:#a99b86;--faint:#8c7f6d;--rule:#4a4034;--rule2:#6b5d4a;--highlight:#342d1d;--accent:#ef8b68;--accent2:#f2a36b;--green:#8fc28f;--grey:#aaa094;}}
+:root.dark,:root[data-theme="dark"]{--bg:#0f0d0b;--bg2:#191612;--bg3:#241f19;--ink:#f1e8d6;--ink2:#d2c4ad;--dim:#a99b86;--faint:#8c7f6d;--rule:#4a4034;--rule2:#6b5d4a;--highlight:#342d1d;--accent:#ef8b68;--accent2:#f2a36b;--green:#8fc28f;--grey:#aaa094;}
+</style>
 <link rel="stylesheet" href="/css/mobile-overlay.css?v=cl91">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>/* CL-2026-06-04 #3: dark-mode ink override so body text reads on dark bg */:root.dark{
@@ -58060,11 +58067,11 @@ render();
 
 <!-- A14: Removed entries surface -->
 <div id="removed-entries-surface" style="position:fixed;bottom:8px;right:12px;z-index:60;font-family:'JetBrains Mono',monospace;font-size:11px;">
-  <button id="removed-toggle" onclick="toggleRemovedPanel()" style="background:transparent;border:1px solid rgba(180,180,180,0.3);color:rgba(180,180,180,0.6);padding:4px 8px;cursor:pointer;border-radius:2px;font-family:inherit;font-size:11px;">
+  <button id="removed-toggle" onclick="toggleRemovedPanel()" style="background:transparent;border:1px solid var(--rule2);color:var(--dim);padding:4px 8px;cursor:pointer;border-radius:2px;font-family:inherit;font-size:11px;">
     removed: <span id="removed-count">0</span>
   </button>
-  <div id="removed-panel" style="display:none;position:absolute;bottom:32px;right:0;background:rgba(20,18,15,0.95);border:1px solid rgba(180,180,180,0.3);padding:12px 16px;min-width:280px;max-width:420px;max-height:50vh;overflow-y:auto;color:rgba(220,220,220,0.85);">
-    <div style="font-weight:500;margin-bottom:8px;color:#d97515;">Removed entries</div>
+  <div id="removed-panel" style="display:none;position:absolute;bottom:32px;right:0;background:var(--bg2);border:1px solid var(--rule2);padding:12px 16px;min-width:280px;max-width:420px;max-height:50vh;overflow-y:auto;color:var(--ink);">
+    <div style="font-weight:500;margin-bottom:8px;color:var(--accent);">Removed entries</div>
     <div id="removed-list"></div>
   </div>
 </div>
@@ -58077,13 +58084,13 @@ render();
     const listEl = document.getElementById('removed-list');
     if (listEl){
       if (REMOVED_ENTRIES.length === 0){
-        listEl.innerHTML = '<div style="color:rgba(180,180,180,0.5);font-style:italic;">No removed entries logged. Future removals will appear here.</div>';
+        listEl.innerHTML = '<div style="color:var(--dim);font-style:italic;">No removed entries logged. Future removals will appear here.</div>';
       } else {
         listEl.innerHTML = REMOVED_ENTRIES.map(r =>
-          '<div style="padding:6px 0;border-top:1px solid rgba(180,180,180,0.15);">' +
+          '<div style="padding:6px 0;border-top:1px solid var(--rule);">' +
           '<div><strong>' + (r.original_label || r.tagId) + '</strong> in <em>' + r.taxId + '</em></div>' +
-          '<div style="color:rgba(180,180,180,0.6);margin-top:2px;">' + (r.reason || '(no reason given)') + '</div>' +
-          '<div style="color:rgba(180,180,180,0.4);font-size:0.72rem;margin-top:2px;">' + (r.removed_at || '(no date)') + '</div>' +
+          '<div style="color:var(--dim);margin-top:2px;">' + (r.reason || '(no reason given)') + '</div>' +
+          '<div style="color:var(--faint);font-size:0.72rem;margin-top:2px;">' + (r.removed_at || '(no date)') + '</div>' +
           '</div>'
         ).join('');
       }
@@ -58100,9 +58107,9 @@ function toggleRemovedPanel(){
 
 <!-- aa* sibling-pages unified nav -->
 <div id="aa-sibling-nav" style="position:fixed;top:8px;right:12px;z-index:55;font-family:'JetBrains Mono',monospace;font-size:11px;display:flex;gap:4px;">
-  <span style="background:rgba(217,117,21,0.12);border:1px solid rgba(217,117,21,0.4);color:#d97515;padding:4px 10px;border-radius:2px;font-family:inherit;font-size:11px;cursor:default;">&middot; catalog</span>
-  <a href="/aa/cloud/" style="background:transparent;border:1px solid rgba(180,180,180,0.3);color:rgba(180,180,180,0.6);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:all .15s;display:inline-block;" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" onmouseout="this.style.color='rgba(180,180,180,0.6)';this.style.borderColor='rgba(180,180,180,0.3)'">cloud</a>
-  <a href="/aa/views/" style="background:transparent;border:1px solid rgba(180,180,180,0.3);color:rgba(180,180,180,0.6);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:all .15s;display:inline-block;" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" onmouseout="this.style.color='rgba(180,180,180,0.6)';this.style.borderColor='rgba(180,180,180,0.3)'">views</a>
+  <span style="background:var(--bg2);border:1px solid var(--accent);color:var(--accent);padding:4px 10px;border-radius:2px;font-family:inherit;font-size:11px;cursor:default;">&middot; catalog</span>
+  <a href="/aa/cloud/" style="background:transparent;border:1px solid var(--rule2);color:var(--dim);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:all .15s;display:inline-block;" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" onmouseout="this.style.color='var(--dim)';this.style.borderColor='var(--rule2)'">cloud</a>
+  <a href="/aa/views/" style="background:transparent;border:1px solid var(--rule2);color:var(--dim);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:all .15s;display:inline-block;" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" onmouseout="this.style.color='var(--dim)';this.style.borderColor='var(--rule2)'">views</a>
 </div>
 <script src="/js/theme.js?v=cl91" defer></script>
 <script src="/js/mandala.js?v=cl91" defer></script>

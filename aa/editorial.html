@@ -35,14 +35,15 @@
   --ink:#1a1614;
   --ink2:#3d352d;
   --dim:#6b5d4f;
-  --faint:#9c8e7f;
+  --faint:#75685b;
   --rule:#c9bea8;
   --rule2:#a89c83;
   --accent:#8b2e1f;
-  --accent2:#c8501f;
+  --accent2:#9f3d18;
   --green:#4a6a4a;
-  --grey:#7a7064;
+  --grey:#62594f;
 }
+
 html,body{background:var(--bg);color:var(--ink);font-family:'Cormorant Garamond', Georgia, serif;line-height:1.55}
 body{padding:48px 24px 96px;max-width:920px;margin:0 auto}
 .header{border-bottom:1px solid var(--rule);padding-bottom:20px;margin-bottom:36px}
@@ -81,6 +82,11 @@ body{padding:48px 24px 96px;max-width:920px;margin:0 auto}
 <meta content="summary" name="twitter:card"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Libre+Baskerville:ital@0;1&amp;family=DM+Sans:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <link href="/css/theme.css?v=cl91" rel="stylesheet"/>
+<style data-page-theme="aa">
+:root{--bg:#f4f0e6;--bg2:#ebe5d4;--bg3:#e0d7c0;--ink:#1a1614;--ink2:#3d352d;--dim:#6b5d4f;--faint:#75685b;--rule:#c9bea8;--rule2:#a89c83;--accent-light:#8b2e1f;--accent-dark:#ef8b68;--accent:var(--accent-light);--accent2:#9f3d18;--green:#4a6a4a;--grey:#62594f;}
+@media (prefers-color-scheme:dark){:root:not(.light){--bg:#0f0d0b;--bg2:#191612;--bg3:#241f19;--ink:#f1e8d6;--ink2:#d2c4ad;--dim:#a99b86;--faint:#8c7f6d;--rule:#4a4034;--rule2:#6b5d4a;--highlight:#342d1d;--accent:#ef8b68;--accent2:#f2a36b;--green:#8fc28f;--grey:#aaa094;}}
+:root.dark,:root[data-theme="dark"]{--bg:#0f0d0b;--bg2:#191612;--bg3:#241f19;--ink:#f1e8d6;--ink2:#d2c4ad;--dim:#a99b86;--faint:#8c7f6d;--rule:#4a4034;--rule2:#6b5d4a;--highlight:#342d1d;--accent:#ef8b68;--accent2:#f2a36b;--green:#8fc28f;--grey:#aaa094;}
+</style>
 <style>/* CL-2026-06-04 #3: dark-mode ink override so body text reads on dark bg */:root.dark{
   --bg:#16120E; --bg2:#1F1A14; --bg3:#28221A;
   --ink:#E8DEC7; --ink2:#C8BCA5;

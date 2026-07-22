@@ -36,7 +36,8 @@
       saveSearch: "Save search",
       searchSaved: "Search saved",
       savedItems: "Saved items",
-      source: "Official source",
+      officialSource: "Official or institutional source",
+      sourceListing: "Source listing",
       details: "View details",
       timePending: "Time unpublished",
       placePending: "Location unpublished",
@@ -91,7 +92,8 @@
       saveSearch: "Enregistrer la recherche",
       searchSaved: "Recherche enregistrée",
       savedItems: "Éléments enregistrés",
-      source: "Source officielle",
+      officialSource: "Source officielle ou institutionnelle",
+      sourceListing: "Fiche source",
       details: "Voir les détails",
       timePending: "Heure non publiée",
       placePending: "Lieu non publié",
@@ -256,7 +258,42 @@
     "Polymythcal needs JavaScript for interactive filtering. You can still use the": "Polymythcal exige JavaScript pour le filtrage interactif. Vous pouvez toujours utiliser les",
     "RSS and calendar feeds": "fils RSS et calendriers",
     "or browse the": "ou consulter le",
-    "site map": "plan du site"
+    "site map": "plan du site",
+    "Writing opportunities": "Possibilités d’écriture",
+    "All writing opportunities": "Toutes les possibilités d’écriture",
+    "Writing opportunities for kids": "Possibilités d’écriture pour les enfants",
+    "Writing opportunities for juniors": "Possibilités d’écriture pour les jeunes",
+    "Writing opportunities for teens": "Possibilités d’écriture pour les adolescents",
+    "Writing opportunities for Grades 11 and 12": "Possibilités d’écriture pour les 11e et 12e années",
+    "Academic calendar": "Calendrier universitaire",
+    "Academic opportunities": "Possibilités universitaires",
+    "University and graduate opportunities": "Possibilités universitaires et aux cycles supérieurs",
+    "Philosophy and ethics": "Philosophie et éthique",
+    "Humanities": "Sciences humaines",
+    "Calls for papers and proposals": "Appels de communications et de propositions",
+    "Talks and lectures": "Causeries et conférences",
+    "Fellowships, grants, and residencies": "Bourses, subventions et résidences",
+    "Writing contests, prizes, publications, and submission opportunities for young writers.": "Concours, prix, publications et possibilités de soumission pour les jeunes auteurs.",
+    "Elementary-friendly writing contests and publication opportunities.": "Concours d’écriture et possibilités de publication adaptés au primaire.",
+    "Middle-grade writing contests and publication opportunities.": "Concours d’écriture et possibilités de publication pour le premier cycle du secondaire.",
+    "High-school writing contests, prizes, and publication opportunities.": "Concours, prix et possibilités de publication pour les élèves du secondaire.",
+    "Senior high-school writing contests and portfolio-building opportunities.": "Concours d’écriture et possibilités de portfolio pour les élèves de 11e et 12e années.",
+    "University talks, conferences, workshops, calls, and academic opportunities.": "Causeries, conférences, ateliers, appels et possibilités universitaires.",
+    "Philosophy talks, conferences, workshops, calls for papers, and fellowships.": "Causeries, conférences, ateliers, appels de communications et bourses en philosophie.",
+    "Humanities talks, conferences, workshops, calls, and opportunities.": "Causeries, conférences, ateliers, appels et possibilités en sciences humaines.",
+    "Calls for papers, proposals, abstracts, and conference submissions.": "Appels de communications, propositions, résumés et soumissions à des conférences.",
+    "Public talks, lectures, panels, colloquia, and speaker events.": "Causeries publiques, conférences, panels, colloques et rencontres avec des conférenciers.",
+    "Fellowships, grants, residencies, scholarships, and funding opportunities.": "Bourses, subventions, résidences et possibilités de financement.",
+    "Dedicated Polymythcal view": "Vue Polymythcal spécialisée",
+    "limits the results to this entry point. Every filter below still works inside this view.": "limite les résultats à ce point d’entrée. Tous les filtres ci-dessous fonctionnent dans cette vue.",
+    "Browse all Polymythcal listings": "Parcourir toutes les fiches Polymythcal",
+    "All writing": "Toute l’écriture",
+    "Kids": "Enfants",
+    "Juniors": "Jeunes",
+    "Teens": "Adolescents",
+    "Grades 11 and 12": "11e et 12e années",
+    "Academic": "Universitaire",
+    "Writing": "Écriture"
   };
 
   const searchSynonyms = {
@@ -274,10 +311,14 @@
   const lang = new URLSearchParams(location.search).get("lang") === "fr" ? "fr" : "en";
   const t = translations[lang];
   document.documentElement.lang = lang === "fr" ? "fr-CA" : "en-CA";
+  const routeSlug = document.body.dataset.pmRoute || "";
+  const routeDefaultContent = document.body.dataset.pmDefaultContent || "both";
+  const defaultContentValues = routeDefaultContent === "attend" ? ["attend"] : routeDefaultContent === "apply" ? ["apply"] : ["attend", "apply"];
+  const defaultContent = () => new Set(defaultContentValues);
 
   const state = {
     q: "",
-    content: new Set(["attend", "apply"]),
+    content: defaultContent(),
     time: "upcoming",
     places: new Set(),
     topics: new Set(),
@@ -544,7 +585,7 @@
       const raw = params.get(key);
       if (raw) state[key] = new Set(raw.split(",").filter(value => valid.has(value)));
     }
-    if (!state.content.size) state.content = new Set(["attend", "apply"]);
+    if (!state.content.size) state.content = defaultContent();
     const rawMonth = params.get("month");
     if (/^\d{4}-\d{2}$/.test(rawMonth || "")) {
       const [year, month] = rawMonth.split("-").map(Number);
@@ -564,8 +605,8 @@
     for (const key of SET_KEYS) {
       if (!state[key]?.size) continue;
       const values = [...state[key]].sort();
-      const defaultContent = key === "content" && values.length === 2 && values.includes("attend") && values.includes("apply");
-      if (!defaultContent) params.set(key, values.join(","));
+      const isDefaultContent = key === "content" && values.length === defaultContentValues.length && defaultContentValues.every(value => values.includes(value));
+      if (!isDefaultContent) params.set(key, values.join(","));
     }
     const query = params.toString();
     return `${location.pathname}${query ? `?${query}` : ""}${location.hash || ""}`;
@@ -652,7 +693,20 @@
     }));
   }
 
+  function routeMatches(event) {
+    if (!routeSlug) return true;
+    const writing = Array.isArray(event.writing_bands) ? event.writing_bands.map(String) : [];
+    const academic = Array.isArray(event.academic_bands) ? event.academic_bands.map(String) : [];
+    if (routeSlug === "writingclub") return event.type === "contest" && writing.length > 0;
+    if (routeSlug === "writingkids") return event.type === "contest" && writing.includes("kids");
+    if (routeSlug === "writingjuniors") return event.type === "contest" && writing.includes("juniors");
+    if (routeSlug === "writingteens") return event.type === "contest" && writing.includes("teens");
+    if (routeSlug === "writinggrads") return event.type === "contest" && writing.includes("grads");
+    return academic.includes(routeSlug);
+  }
+
   function matchesFilters(event, ignoreKey = "") {
+    if (!routeMatches(event)) return false;
     if (ignoreKey !== "content" && !state.content.has(event._content)) return false;
     if (ignoreKey !== "time" && !eventInTime(event)) return false;
     if (ignoreKey !== "places" && !setMatches(state.places, event._place)) return false;
@@ -773,6 +827,12 @@
     return `<time class="pm-date-box" datetime="${isoDate(date)}" aria-label="${escapeHtml(formatDate(date, { dateStyle: "long" }))}"><span class="pm-date-month">${escapeHtml(formatDate(date, { month: "short" }))}</span><span class="pm-date-day">${date.getDate()}</span><span class="pm-date-year">${date.getFullYear()}</span></time>`;
   }
 
+  function sourceLabel(event) {
+    return ["official", "official-or-institutional", "institutional"].includes(String(event.source_quality || "").toLowerCase())
+      ? t.officialSource
+      : t.sourceListing;
+  }
+
   function cardHtml(event) {
     const descriptionText = event.description && event.description !== event.venue ? truncate(event.description) : "";
     const saved = savedIds.has(event.id);
@@ -793,7 +853,7 @@
           ${descriptionText ? `<p class="pm-event-description">${escapeHtml(descriptionText)}</p>` : ""}
           <div class="pm-card-actions">
             <a class="pm-action primary-link" href="${routeFor(event)}">${escapeHtml(t.details)} <span aria-hidden="true">→</span></a>
-            ${event.source_url ? `<a class="pm-action" href="${escapeHtml(event.source_url)}" rel="noopener noreferrer">${escapeHtml(t.source)}</a>` : ""}
+            ${event.source_url ? `<a class="pm-action" href="${escapeHtml(event.source_url)}" rel="noopener noreferrer">${escapeHtml(sourceLabel(event))}</a>` : ""}
             <button type="button" class="pm-action pm-save" data-save-id="${escapeHtml(event.id)}" aria-pressed="${saved}" aria-label="${escapeHtml(saved ? `${t.saved}: ${event.title}` : `${t.save}: ${event.title}`)}">${escapeHtml(saved ? t.saved : t.save)}</button>
           </div>
         </div>
@@ -910,7 +970,8 @@
   function activeFilterItems() {
     const items = [];
     if (state.q) items.push({ key: "q", value: "", label: `“${state.q}”` });
-    if (state.content.size === 1) items.push({ key: "content", value: [...state.content][0], label: state.content.has("attend") ? t.eventsOnly : t.opportunitiesOnly });
+    const contentIsDefault = state.content.size === defaultContentValues.length && defaultContentValues.every(value => state.content.has(value));
+    if (!contentIsDefault) items.push({ key: "content", value: [...state.content][0] || "", label: state.content.has("attend") && !state.content.has("apply") ? t.eventsOnly : t.opportunitiesOnly });
     if (state.time !== "upcoming") items.push({ key: "time", value: state.time, label: labelFor(`time:${state.time}`) });
     for (const key of ["places", "topics", "eventTypes", "opportunityTypes", "audiences", "formats", "statuses"]) {
       for (const value of state[key]) items.push({ key, value, label: labelFor(`${key}:${value}`) });
@@ -933,7 +994,7 @@
     $$('[data-clear-section]').forEach(button => {
       const key = button.dataset.clearSection;
       let active = false;
-      if (key === "content") active = state.content.size !== 2;
+      if (key === "content") active = !(state.content.size === defaultContentValues.length && defaultContentValues.every(value => state.content.has(value)));
       else if (key === "time") active = state.time !== "upcoming";
       else if (key === "types") active = state.eventTypes.size > 0 || state.opportunityTypes.size > 0;
       else active = state[key]?.size > 0;
@@ -957,8 +1018,9 @@
   function renderFacetCounts() {
     $$('[data-count-for]').forEach(node => {
       const [key, value] = node.dataset.countFor.split(":");
-      const total = allEvents.filter(event => eventHasFacet(event, key, value)).length;
-      const count = allEvents.filter(event => matchesFilters(event, key) && eventHasFacet(event, key, value)).length;
+      const routeEvents = allEvents.filter(routeMatches);
+      const total = routeEvents.filter(event => eventHasFacet(event, key, value)).length;
+      const count = routeEvents.filter(event => matchesFilters(event, key) && eventHasFacet(event, key, value)).length;
       node.textContent = count.toLocaleString(lang === "fr" ? "fr-CA" : "en-CA");
       const label = node.closest("label");
       const input = label?.querySelector("input");
@@ -1071,7 +1133,7 @@
 
   function resetFilters(options = {}) {
     state.q = "";
-    state.content = new Set(["attend", "apply"]);
+    state.content = defaultContent();
     state.time = "upcoming";
     for (const key of ["places", "topics", "eventTypes", "opportunityTypes", "audiences", "formats", "statuses"]) state[key].clear();
     state.sort = "soonest";
@@ -1083,7 +1145,7 @@
   }
 
   function clearSection(key) {
-    if (key === "content") state.content = new Set(["attend", "apply"]);
+    if (key === "content") state.content = defaultContent();
     else if (key === "time") state.time = "upcoming";
     else if (key === "types") { state.eventTypes.clear(); state.opportunityTypes.clear(); }
     else if (state[key] instanceof Set) state[key].clear();
@@ -1095,7 +1157,7 @@
   function removeFilter(key, value) {
     if (key === "q") { state.q = ""; $("#pmSearch").value = ""; }
     else if (key === "time") state.time = "upcoming";
-    else if (key === "content") state.content = new Set(["attend", "apply"]);
+    else if (key === "content") state.content = defaultContent();
     else if (state[key] instanceof Set) state[key].delete(value);
     state.visible = PAGE_SIZE;
     syncControlsFromState();
@@ -1174,7 +1236,7 @@
     state.visible = PAGE_SIZE;
     render();
     $("#pmStatus").textContent = t.presetApplied(label);
-    if (matchMedia("(max-width: 760px)").matches) $("#pmQuickStarts").open = false;
+    if (matchMedia("(max-width: 760px)").matches && $("#pmQuickStarts")) $("#pmQuickStarts").open = false;
     $("#pmResults").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -1182,7 +1244,7 @@
     const mobile = matchMedia("(max-width: 760px)").matches;
     const hasIncomingFilters = activeFilterItems().length > 0;
     $("#pmFilterDrawer").open = !mobile || hasIncomingFilters;
-    $("#pmQuickStarts").open = !mobile;
+    if ($("#pmQuickStarts")) $("#pmQuickStarts").open = !mobile;
   }
 
   function bindEvents() {

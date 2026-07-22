@@ -9,7 +9,7 @@
   # or generated verifier reports. Build scripts remain deploy-affecting. Exit 0 = skip, exit 1 = build, mirroring git diff
   # --quiet semantics. Robot pushes still build because they change
   # seminars/ and festivals/ alongside the logs.
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude).github/' ':(exclude)data/history/' ':(exclude)data/scrape-log.json' ':(exclude)scripts/reports/'"
+  ignore = "node ./scripts/netlify-ignore-build.js"
 
 [build.environment]
   NODE_VERSION = "24"

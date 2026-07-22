@@ -5,13 +5,14 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:085da9b529dcfe43cf02@seminarschools.com
-DTSTAMP:20260721T150607Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260524
-DTEND;VALUE=DATE:20260525
+DTEND;VALUE=DATE:20260526
 SUMMARY:Doors Open Toronto
 LOCATION:Citywide including Aga Khan Museum and Ismaili Centre
 DESCRIPTION:
-URL:https://seminarschools.com/polymythseminars/events/doors-open-toronto-2026-05-24/
+URL:https://seminarschools.com/polymythseminars/events/doors-open-toronto
+ -2026-05-24/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

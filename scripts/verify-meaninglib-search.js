@@ -5,6 +5,7 @@ const path = require('path');
 const { search } = require('./query-meaninglib.js');
 
 const root = process.cwd();
+const releaseTimestamp = JSON.parse(fs.readFileSync(path.join(root, 'RELEASE_MANIFEST.json'), 'utf8')).generated_at || '1970-01-01T00:00:00Z';
 const indexPath = path.join(root, 'hf_export', 'search', 'meaninglib_search_index.json');
 const reportsDir = path.join(root, 'hf_export', 'reports');
 const reportPath = path.join(reportsDir, 'meaninglib_search_verify_report.md');
@@ -97,7 +98,7 @@ function main() {
   const report = [
     '# Meaninglib search verification report',
     '',
-    `Generated: ${new Date().toISOString()}`,
+    `Generated: ${releaseTimestamp}`,
     '',
     `Index: hf_export/search/meaninglib_search_index.json`,
     `Documents: ${index.total_docs}`,

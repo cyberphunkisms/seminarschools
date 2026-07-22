@@ -3,27 +3,66 @@ VERSION:2.0
 PRODID:-//Seminar Schools//Polymythcal//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:Polymythcal — Application opportunities · Possibilités de candidature
+X-WR-CALNAME:Polymythcal — Applications\, calls\, competitions\, fellowsh
+ ips\, and funding · Candidatures\, appels\, concours\, bourses et financem
+ ent
 X-WR-TIMEZONE:America/Toronto
 BEGIN:VEVENT
+UID:671c5992b78b710e8a28@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART:20260415T160000Z
+SUMMARY:2026 Lionel Gelber Prize Ceremony and Lecture
+LOCATION:Munk School of Global Affairs\, U of T (online)\, Online
+DESCRIPTION:Author of Thinking Historically (Yale UP).
+URL:https://seminarschools.com/polymythseminars/events/2026-lionel-gelber-p
+ rize-ceremony-and-lecture-2026-04-15/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:e1ee68b4a489b9af4b3e@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART:20260423T170000Z
+SUMMARY:Frank Watson Book Prize Lecture: Patrons and Politics in the Making
+  of Scottish History
+LOCATION:University of Guelph History / Centre for Scottish Studies\, Guelp
+ h
+URL:https://seminarschools.com/polymythseminars/events/frank-watson-book-pr
+ ize-lecture-patrons-and-politi-2026-04-23/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:54127fca8a5b391305e3@seminarschools.com
-DTSTAMP:20260721T150609Z
-DTSTART:20260519T190000
-DTEND:20260522T235900
+DTSTAMP:20260720T040000Z
+DTSTART:20260519T230000Z
+DTEND:20260523T035900Z
 SUMMARY:JHI Writing Retreat (application deadline Apr 28)
-LOCATION:Jackman Humanities Institute\, 10th Floor\, 170 St. George St
-DESCRIPTION:
+LOCATION:Jackman Humanities Institute\, 10th Floor\, 170 St. George St\, Un
+ known
 URL:https://seminarschools.com/polymythseminars/events/jhi-writing-retreat-
  application-deadline-apr-28-2026-05-19/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:27f00ca6ea24ed112074@seminarschools.com
+DTSTAMP:20260628T042537Z
+DTSTART:20260526T140000Z
+DTEND:20260615T220000Z
+SUMMARY:Sin Wai Kin: ESSENCE (CONTACT exhibition)
+LOCATION:CONTACT Gallery\, 80 Spadina Ave Suite 205\, Toronto\, Toronto
+DESCRIPTION:Solo exhibition by Sin Wai Kin (Turner Prize 2022 shortlist). T
+ hrough mid-June via CONTACT Photography Festival.
+URL:https://seminarschools.com/polymythseminars/events/sin-wai-kin-essence-
+ contact-exhibition-2026-05-26/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:8820925d2b27895b0e41@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T042537Z
 DTSTART;VALUE=DATE:20260701
+DTEND;VALUE=DATE:20260702
 SUMMARY:CFP: Toronto Workshop on Moral Psychology and Moral Theory
 LOCATION:Department of Philosophy\, University of Toronto\, JHB\, 170 St Ge
- orge St
+ orge St\, Toronto
 DESCRIPTION:Submission deadline. Workshop Nov 7-8\, 2026. Topics: Philosoph
  y of Cognitive Science\, Value Theory.
 URL:https://seminarschools.com/polymythseminars/events/cfp-toronto-workshop
@@ -32,12 +71,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:617cadde876658b2f795@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260701
+DTEND;VALUE=DATE:20260702
 SUMMARY:International Studies Association 2027 Convention
 LOCATION:Special-program deadlines June and July\, confirm the general call
  . International relations. Atlanta\, March 2027\, with a virtual option for
-  Global South scholars.
+  Global South scholars.\, Online
 DESCRIPTION:Special-program deadlines June and July\, confirm the general c
  all. International relations. Atlanta\, March 2027\, with a virtual option 
  for Global South scholars.
@@ -47,12 +87,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:a97edabc9b4f442ec54f@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260701
+DTEND;VALUE=DATE:20260702
 SUMMARY:Journal of Humanistic Psychology\, Authenticity in Lived-Experience
   Work
 LOCATION:Abstract deadline\, July 1. Special issue on authenticity in peer 
- and lived-experience workforces. Sage. Journal special issue.
+ and lived-experience workforces. Sage. Journal special issue.\, Unknown
 DESCRIPTION:Abstract deadline\, July 1. Special issue on authenticity in pe
  er and lived-experience workforces. Sage. Journal special issue.
 URL:https://seminarschools.com/polymythseminars/events/journal-of-humanisti
@@ -61,11 +102,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:b72583f604f567c7e5fc@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T042537Z
 DTSTART;VALUE=DATE:20260703
+DTEND;VALUE=DATE:20260704
 SUMMARY:CFP: International Association for Philosophy of Time (Eastern APA 
  2027)
-LOCATION:Submission deadline (conference: Boston\, Jan 13–16 2027)
+LOCATION:Submission deadline (conference: Boston\, Jan 13–16 2027)\, Unkn
+ own
 DESCRIPTION:Abstract deadline for the IAPT session at the 2027 Eastern APA.
 URL:https://seminarschools.com/polymythseminars/events/cfp-international-as
  sociation-for-philosophy-of-time-eastern-2026-07-03/
@@ -73,11 +116,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:76d262e519184019c14c@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T042537Z
 DTSTART;VALUE=DATE:20260704
+DTEND;VALUE=DATE:20260705
 SUMMARY:CFP: University of Toronto Philosophy Graduate Conference 2026
 LOCATION:Department of Philosophy\, University of Toronto\, JHB\, 170 St Ge
- orge St
+ orge St\, Toronto
 DESCRIPTION:Submission deadline 11:59pm EST. Conference Oct 16-17\, 2026. K
  eynotes Don Garrett (NYU)\, Alva Noe (UC Berkeley).
 URL:https://seminarschools.com/polymythseminars/events/cfp-university-of-to
@@ -86,12 +130,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:7ebac3078675f0559aed@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260706
+DTEND;VALUE=DATE:20260707
 SUMMARY:Write the World Monthly Competitions
 LOCATION:Monthly competitions\, a new genre each month\, opening the first 
  Monday. Poetry\, fiction\, journalism\, screenwriting\, and more. Open worl
- dwide\, ages 13 to 19. Free. Cash prizes and expert review.
+ dwide\, ages 13 to 19. Free. Cash prizes and expert review.\, Unknown
 DESCRIPTION:Monthly competitions\, a new genre each month\, opening the fir
  st Monday. Poetry\, fiction\, journalism\, screenwriting\, and more. Open w
  orldwide\, ages 13 to 19. Free. Cash prizes and expert review.
@@ -101,12 +146,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:9ea6be8692daf0e96e3a@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260715
+DTEND;VALUE=DATE:20260716
 SUMMARY:PAMLA 2026 Conference
 LOCATION:Panel submission window\, projected\; confirm with the organizer. 
  Literature and languages. Seattle\, November 2026. Pacific Ancient and Mode
- rn Language Association. Confirm on the portal.
+ rn Language Association. Confirm on the portal.\, Unknown
 DESCRIPTION:Panel submission window\, projected\; confirm with the organize
  r. Literature and languages. Seattle\, November 2026. Pacific Ancient and M
  odern Language Association. Confirm on the portal.
@@ -116,10 +162,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:d3c84c52a97e9430df10@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20260715
+DTEND;VALUE=DATE:20260716
 SUMMARY:The Aristotle Contest
-LOCATION:Canada-wide high-school philosophy essay contest
+LOCATION:Canada-wide high-school philosophy essay contest\, Unknown
 DESCRIPTION:Verified 2026 deadline. Canadian high-school students submit on
  e philosophy essay of up to 1\,200 words on one of the official questions. 
  English and French submissions are welcome. Cash prizes are awarded for fir
@@ -130,11 +177,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:8d010e9811ff858bd30f@seminarschools.com
-DTSTAMP:20260721T150609Z
-DTSTART:20260731T180000
+DTSTAMP:20260720T040000Z
+DTSTART:20260731T220000Z
 SUMMARY:Foyle Young Poets of the Year Award 2026
 LOCATION:Poetry submission deadline\, 6 PM ET. Any theme\, up to 40 lines. 
- Open worldwide\, ages 11 to 17. Free. AI-written poems barred.
+ Open worldwide\, ages 11 to 17. Free. AI-written poems barred.\, Unknown
 DESCRIPTION:Poetry submission deadline\, 6 PM ET. Any theme\, up to 40 line
  s. Open worldwide\, ages 11 to 17. Free. AI-written poems barred.
 URL:https://seminarschools.com/polymythseminars/events/foyle-young-poets-aw
@@ -142,13 +189,24 @@ URL:https://seminarschools.com/polymythseminars/events/foyle-young-poets-aw
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:e85782a8bb827d5f9cf3@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART:20260731T230000Z
+SUMMARY:OSA Toronto Panorama (steelpan competition)
+LOCATION:Lamport Stadium\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/osa-toronto-panorama
+ -steelpan-competition-2026-07-31/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:de665bdeed412d59d9c7@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260731
+DTEND;VALUE=DATE:20260801
 SUMMARY:Polar Expressions Summer Writing Contest 2026
 LOCATION:Submission deadline. Poetry up to 48 lines or a short story up to 
  750 words. Open to Canadian residents of all ages\, with a division for age
- s 15 and under. Free.
+ s 15 and under. Free.\, Unknown
 DESCRIPTION:Submission deadline. Poetry up to 48 lines or a short story up 
  to 750 words. Open to Canadian residents of all ages\, with a division for 
  ages 15 and under. Free.
@@ -158,13 +216,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:aa1ee0e5335f0922b192@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260731
+DTEND;VALUE=DATE:20260801
 SUMMARY:R.A. Butler Prize in Politics and International Studies
 LOCATION:Submission deadline\, projected from the annual July window. Polit
  ics or international studies essay\, up to 3000 words. Penultimate-year stu
  dents worldwide. Free. Trinity College\, Cambridge. Confirm the date on the
-  site.
+  site.\, Unknown
 DESCRIPTION:Submission deadline\, projected from the annual July window. Po
  litics or international studies essay\, up to 3000 words. Penultimate-year 
  students worldwide. Free. Trinity College\, Cambridge. Confirm the date on 
@@ -175,13 +234,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:a33a02d6ecc99f20130f@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260801
+DTEND;VALUE=DATE:20260802
 SUMMARY:The Concord Review
 LOCATION:Rolling deadlines\, next August 1 for the Winter issue. History re
  search essay\, roughly 4000 to 21000 words. Secondary students worldwide\, 
  sole author. Seventy US dollar submission fee. Publishes about five percent
- .
+ .\, Unknown
 DESCRIPTION:Rolling deadlines\, next August 1 for the Winter issue. History
   research essay\, roughly 4000 to 21000 words. Secondary students worldwide
  \, sole author. Seventy US dollar submission fee. Publishes about five perc
@@ -192,13 +252,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:df17a5fb45146ef7070f@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260801
+DTEND;VALUE=DATE:20260802
 SUMMARY:Trinity College Cambridge Subject Essay Prizes
 LOCATION:Submission deadline\, projected from the summer window. Subject es
  says in English\, law\, history\, philosophy\, and more\, around 2000 to 25
  00 words. Year 12 and 13 students worldwide. Free. Some prizes skip a year\
- , confirm each on the site.
+ , confirm each on the site.\, Unknown
 DESCRIPTION:Submission deadline\, projected from the summer window. Subject
   essays in English\, law\, history\, philosophy\, and more\, around 2000 to
   2500 words. Year 12 and 13 students worldwide. Free. Some prizes skip a ye
@@ -209,11 +270,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:6b0fd47ae7d05472e596@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260803
+DTEND;VALUE=DATE:20260804
 SUMMARY:Archaeological Institute of America 2027 Annual Meeting
 LOCATION:Second deadline\, August 3\, workshops\, open papers\, and posters
- \, with roundtables to November 1. Boston\, January 2027.
+ \, with roundtables to November 1. Boston\, January 2027.\, Unknown
 DESCRIPTION:Second deadline\, August 3\, workshops\, open papers\, and post
  ers\, with roundtables to November 1. Boston\, January 2027.
 URL:https://seminarschools.com/polymythseminars/events/archaeological-insti
@@ -222,13 +284,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:ff268d34b4b0b0a4d154@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260814
+DTEND;VALUE=DATE:20260815
 SUMMARY:New York Times Summer Reading Contest
 LOCATION:Submission window\, June 5 to August 14\, open now. Respond to any
  thing in the Times that drew you in. Open worldwide\, ages 13 to 19\, middl
  e and high school. Free. Part of the recurring Learning Network contest cal
- endar.
+ endar.\, Unknown
 DESCRIPTION:Submission window\, June 5 to August 14\, open now. Respond to 
  anything in the Times that drew you in. Open worldwide\, ages 13 to 19\, mi
  ddle and high school. Free. Part of the recurring Learning Network contest 
@@ -239,12 +302,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:1fd45ceb90b98bace1ef@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260815
+DTEND;VALUE=DATE:20260816
 SUMMARY:Association of American Law Schools 2027 Annual Meeting
 LOCATION:Section calls vary\, projected\; confirm with the organizer. Legal
   education\, theme Emancipate Academic Freedom. New York\, January 2027. Co
- nfirm on the site.
+ nfirm on the site.\, Unknown
 DESCRIPTION:Section calls vary\, projected\; confirm with the organizer. Le
  gal education\, theme Emancipate Academic Freedom. New York\, January 2027.
   Confirm on the site.
@@ -254,12 +318,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:589de34668d321efe4ff@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260815
+DTEND;VALUE=DATE:20260816
 SUMMARY:Renaissance Society of America\, Philadelphia 2027
 LOCATION:Submission deadline\, August 15. Renaissance and early-modern sess
  ions and papers. RSA members\, sessions need a degree-holding presenter. Ph
- iladelphia\, March 2027.
+ iladelphia\, March 2027.\, Unknown
 DESCRIPTION:Submission deadline\, August 15. Renaissance and early-modern s
  essions and papers. RSA members\, sessions need a degree-holding presenter.
   Philadelphia\, March 2027.
@@ -269,12 +334,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:9f4211604dce7365dda3@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260829
+DTEND;VALUE=DATE:20260830
 SUMMARY:Marshall Society Essay Competition in Economics
 LOCATION:Submission deadline\, projected from the late-August window. Econo
  mics essay on a set question\, about 1500 words. Pre-university students wo
- rldwide. Free. University of Cambridge. Confirm the date on the site.
+ rldwide. Free. University of Cambridge. Confirm the date on the site.\, Unk
+ nown
 DESCRIPTION:Submission deadline\, projected from the late-August window. Ec
  onomics essay on a set question\, about 1500 words. Pre-university students
   worldwide. Free. University of Cambridge. Confirm the date on the site.
@@ -284,11 +351,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:06e31774297a47f7d98a@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260831
+DTEND;VALUE=DATE:20260901
 SUMMARY:International Medieval Congress\, Leeds 2027\, Communities
 LOCATION:Paper deadline\, August 31\, sessions September 30. Medieval studi
- es\, theme Communities. University of Leeds\, July 2027\, hybrid.
+ es\, theme Communities. University of Leeds\, July 2027\, hybrid.\, Unknown
 DESCRIPTION:Paper deadline\, August 31\, sessions September 30. Medieval st
  udies\, theme Communities. University of Leeds\, July 2027\, hybrid.
 URL:https://seminarschools.com/polymythseminars/events/international-mediev
@@ -297,12 +365,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:ccc54905a1d393462af4@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260901
+DTEND;VALUE=DATE:20260902
 SUMMARY:Metaphysical Society of America 2027 Meeting
 LOCATION:Submission deadline\, September 1. Metaphysics abstracts and full 
  papers\, theme Habits of Being. Open\, with student and early-career prizes
- . Gonzaga University\, March 2027.
+ . Gonzaga University\, March 2027.\, Unknown
 DESCRIPTION:Submission deadline\, September 1. Metaphysics abstracts and fu
  ll papers\, theme Habits of Being. Open\, with student and early-career pri
  zes. Gonzaga University\, March 2027.
@@ -312,10 +381,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:b9c72780a7a1fbe9860b@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20260910
+DTEND;VALUE=DATE:20260911
 SUMMARY:Harvard Radcliffe Fellowship application deadline\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for the Harvard Radcliffe Fellowship. In
  terdisciplinary humanities\, arts\, social sciences\, sciences\, and public
   scholarship. Confirm active deadline and eligibility on the official site.
@@ -325,10 +395,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:ae342051bdcda26555ff@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T042537Z
 DTSTART;VALUE=DATE:20260913
+DTEND;VALUE=DATE:20260914
 SUMMARY:Invention to Impact Training Program Fall 2026 Application Deadline
-LOCATION:McGill University\, Montréal
+LOCATION:McGill University\, Montréal\, Montréal
 DESCRIPTION:Official McGill Faculty of Science events listing includes the 
  Invention to Impact Training Program Fall 2026 application deadline on Sept
  ember 13\, 2026.
@@ -337,12 +408,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:d5ee4d26b9e2ef1d4c7a@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260915
+DTEND;VALUE=DATE:20260916
 SUMMARY:EHESS\, Exploring Plantation Records
 LOCATION:Submission deadline is listed as September 15\; confirm the year. 
  History of slavery\, French Caribbean. EHESS\, Paris\, June 2027. Confirm o
- n the site.
+ n the site.\, Unknown
 DESCRIPTION:Submission deadline is listed as September 15\; confirm the yea
  r. History of slavery\, French Caribbean. EHESS\, Paris\, June 2027. Confir
  m on the site.
@@ -352,12 +424,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:181275fe5f36ff41a609@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260915
+DTEND;VALUE=DATE:20260916
 SUMMARY:International Congress on Medieval Studies\, Kalamazoo 62nd
 LOCATION:Submission deadline\, September 15. Medieval studies\, interdiscip
  linary. Open\, graduate students welcome. Western Michigan University\, May
-  2027\, hybrid.
+  2027\, hybrid.\, Unknown
 DESCRIPTION:Submission deadline\, September 15. Medieval studies\, interdis
  ciplinary. Open\, graduate students welcome. Western Michigan University\, 
  May 2027\, hybrid.
@@ -367,12 +440,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:d0f3f2586891560d99f0@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260916
+DTEND;VALUE=DATE:20260917
 SUMMARY:College Art Association 115th\, Call for Participation
 LOCATION:Participation window\, chairs select by about September 16. Art hi
  story and visual studies. CAA members. New York\, February 2027. Session pr
- oposals already closed.
+ oposals already closed.\, Unknown
 DESCRIPTION:Participation window\, chairs select by about September 16. Art
   history and visual studies. CAA members. New York\, February 2027. Session
   proposals already closed.
@@ -382,12 +456,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:d0c99e17dcd4d92c7ac9@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260918
+DTEND;VALUE=DATE:20260919
 SUMMARY:MLA 2027 Convention\, just-in-time sessions
 LOCATION:Just-in-time session window\, open through about September 18. Lit
  erature and languages. MLA members. Los Angeles\, January 2027. Most regula
- r sessions already closed.
+ r sessions already closed.\, Unknown
 DESCRIPTION:Just-in-time session window\, open through about September 18. 
  Literature and languages. MLA members. Los Angeles\, January 2027. Most reg
  ular sessions already closed.
@@ -397,10 +472,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:b658df112cddf9fbab7a@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20260925
+DTEND;VALUE=DATE:20260926
 SUMMARY:ACLS Fellowship competition\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for American Council of Learned Societie
  s fellowship competitions. Humanities and interpretive social science resea
  rch support\; eligibility varies by program. Confirm active competition dea
@@ -411,10 +487,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:894dc03820c923f4d098@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20261001
 SUMMARY:ACLA Annual Meeting seminar proposal deadline\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch and proposal deadline window for the Ame
  rican Comparative Literature Association annual meeting. Comparative litera
  ture\, theory\, world literature\, and interdisciplinary humanities. Confir
@@ -425,12 +502,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:5d04a1b116a1632b35b0@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20261001
 SUMMARY:Elizabeth Bowen Review\, Volume 8
 LOCATION:Submission deadline\, September 30. Essays up to 6000 words\, Why 
  Bowen Matters. Irish and modernist literary studies. Journal\, double-blind
-  review.
+  review.\, Unknown
 DESCRIPTION:Submission deadline\, September 30. Essays up to 6000 words\, W
  hy Bowen Matters. Irish and modernist literary studies. Journal\, double-bl
  ind review.
@@ -440,10 +518,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:a3be241d8bd3b7f30053@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20261001
 SUMMARY:Hamilton Public Library Power of the Pen
-LOCATION:Hamilton regional contest\, ages 12 to 18
+LOCATION:Hamilton regional contest\, ages 12 to 18\, Hamilton
 DESCRIPTION:Deadline projected from the annual September window. Hamilton-a
  rea youth submit original poetry or short stories in English. Free. This is
   a regional library contest\, so Hamilton eligibility applies. Confirm the 
@@ -454,10 +533,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:9814775067a6d283d119@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20261001
 SUMMARY:Institute for Human Sciences Vienna fellowships\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for IWM fellowships. Political thought\,
   history\, public humanities\, social science\, democracy\, religion\, and 
  European studies. Confirm active programs and deadlines on the official sit
@@ -468,11 +548,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:f7ed32226cbbf779a927@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20261001
 SUMMARY:Journal of the Georgia Philological Association
 LOCATION:Submission deadline\, September 30. Literature\, language\, philol
- ogy\, interdisciplinary humanities. Journal.
+ ogy\, interdisciplinary humanities. Journal.\, Unknown
 DESCRIPTION:Submission deadline\, September 30. Literature\, language\, phi
  lology\, interdisciplinary humanities. Journal.
 URL:https://seminarschools.com/polymythseminars/events/journal-of-the-georg
@@ -481,12 +562,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:e2a6712dd9a065434d05@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20261001
 SUMMARY:Verge\, Studies in Global Asias 14.2
 LOCATION:Proposal deadline\, September 30\, essays May 2027. Special issue\
  , The Cultural Labor of Internationalism. Global Asias scholarship. Penn St
- ate. Journal special issue.
+ ate. Journal special issue.\, Unknown
 DESCRIPTION:Proposal deadline\, September 30\, essays May 2027. Special iss
  ue\, The Cultural Labor of Internationalism. Global Asias scholarship. Penn
   State. Journal special issue.
@@ -496,11 +578,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:cd01eae6e6a3e1881861@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261002
 SUMMARY:AAR Southeast Region 2027 Annual Meeting
 LOCATION:Submission deadline\, October 1\, undergraduate award papers Decem
- ber 15. Religious studies. Virginia Commonwealth University\, March 2027.
+ ber 15. Religious studies. Virginia Commonwealth University\, March 2027.\,
+  Unknown
 DESCRIPTION:Submission deadline\, October 1\, undergraduate award papers De
  cember 15. Religious studies. Virginia Commonwealth University\, March 2027
  .
@@ -510,10 +594,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:9e6a471bc4f5f3643f8a@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261002
 SUMMARY:Getty Scholar Grants\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for Getty Scholar Grants. Art history\, 
  conservation\, humanities\, visual culture\, museum studies\, and research 
  collections. Confirm active deadline on the official site.
@@ -523,12 +608,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:7bcf94c34d9e692de4f7@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261002
 SUMMARY:SAAS 18th Conference\, Negotiating Identity and Power
 LOCATION:Panel and paper deadline projected\; confirm with the organizer. A
  merican studies and literature. Universidad de Oviedo\, March 2027. Spanish
-  Association for American Studies. Confirm on the site.
+  Association for American Studies. Confirm on the site.\, Unknown
 DESCRIPTION:Panel and paper deadline projected\; confirm with the organizer
  . American studies and literature. Universidad de Oviedo\, March 2027. Span
  ish Association for American Studies. Confirm on the site.
@@ -538,10 +624,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:ce2364096918892c04f3@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20261002
+DTEND;VALUE=DATE:20261003
 SUMMARY:National Humanities Center Fellowship deadline\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for National Humanities Center fellowshi
  ps. Advanced humanities research fellowship\; eligibility and application r
  equirements vary by cycle. Confirm active deadline on the official site.
@@ -551,13 +638,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:c54bced1a2971d9ebd4c@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20261008
+DTEND;VALUE=DATE:20261009
 SUMMARY:YoungArts National Arts Competition
 LOCATION:Not eligible for most Toronto students\, US citizens\, residents\,
   or those able to receive US taxable income only. Submission deadline proje
  cted from the October window. Writing categories\, ages 15 to 18. Thirty-fi
- ve dollar fee with waivers.
+ ve dollar fee with waivers.\, Toronto
 DESCRIPTION:Not eligible for most Toronto students\, US citizens\, resident
  s\, or those able to receive US taxable income only. Submission deadline pr
  ojected from the October window. Writing categories\, ages 15 to 18. Thirty
@@ -568,10 +656,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:b857b5b7c800c13f641b@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20261015
+DTEND;VALUE=DATE:20261016
 SUMMARY:HASTAC opportunities and CFP scan\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for HASTAC opportunities. Digital humani
  ties\, pedagogy\, grants\, collaborative projects\, fellowships\, and confe
  rence calls. Confirm active calls on the official opportunities page.
@@ -581,13 +670,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:fb3c8ad98d5d08419b24@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20261015
+DTEND;VALUE=DATE:20261016
 SUMMARY:Hermann Weber Conference 9th\, Communist Regimes and the World Econ
  omy
 LOCATION:Submission deadline projected\; confirm with the organizer. Histor
  y\, communist regimes and the world economy since the 1970s. University of 
- Regensburg\, April 2027. Confirm on the site.
+ Regensburg\, April 2027. Confirm on the site.\, Unknown
 DESCRIPTION:Submission deadline projected\; confirm with the organizer. His
  tory\, communist regimes and the world economy since the 1970s. University 
  of Regensburg\, April 2027. Confirm on the site.
@@ -597,10 +687,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:6c7f4f7d1a240343f5e0@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20261015
+DTEND;VALUE=DATE:20261016
 SUMMARY:Institute for Advanced Study fellowship applications\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for Institute for Advanced Study School 
  of Historical Studies and Social Science membership/fellowship applications
  . Confirm active deadlines and fields on the official site.
@@ -609,11 +700,23 @@ URL:https://seminarschools.com/polymythseminars/events/institute-for-advanc
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:45686163f616db3bdf34@seminarschools.com
+DTSTAMP:20260628T042537Z
+DTSTART;VALUE=DATE:20261022
+DTEND;VALUE=DATE:20261023
+SUMMARY:COC Centre Stage: Ensemble Studio Competition & Gala
+LOCATION:Four Seasons Centre for the Performing Arts\, Unknown
+URL:https://seminarschools.com/polymythseminars/events/coc-centre-stage-ens
+ emble-studio-competition-gala-2026-10-22/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:1d3540b62a9b0b648041@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20261023
+DTEND;VALUE=DATE:20261024
 SUMMARY:ACLS Dissertation Innovation Fellowship\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for ACLS dissertation and early-career c
  ompetitions. Humanities doctoral research\, methods\, and scholarly develop
  ment\; eligibility varies by program. Confirm active competition deadlines 
@@ -624,10 +727,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:6dfffb52df46306da9ec@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T042537Z
 DTSTART;VALUE=DATE:20261027
+DTEND;VALUE=DATE:20261028
 SUMMARY:CFP: Athens Institute 22nd International Conference on Philosophy
-LOCATION:Submission deadline (conference: Athens\, May 24–29 2027)
+LOCATION:Submission deadline (conference: Athens\, May 24–29 2027)\, Unkn
+ own
 DESCRIPTION:Abstract submission deadline.
 URL:https://seminarschools.com/polymythseminars/events/cfp-athens-institute
  -22nd-international-conference-on-philos-2026-10-27/
@@ -635,11 +740,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:0917e0b24dbe5a7980d2@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20261029
+DTEND;VALUE=DATE:20261030
 SUMMARY:Law and Society Association 2027 International Meeting
 LOCATION:Submission deadline projected\, the call opens about summer. Socio
- -legal studies. University of Hong Kong\, June 2027. Confirm on the site.
+ -legal studies. University of Hong Kong\, June 2027. Confirm on the site.\,
+  Unknown
 DESCRIPTION:Submission deadline projected\, the call opens about summer. So
  cio-legal studies. University of Hong Kong\, June 2027. Confirm on the site
  .
@@ -649,10 +756,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:f2bb397496995043b427@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
 SUMMARY:American Academy in Rome Rome Prize\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for the Rome Prize. Humanities\, arts\, 
  historic preservation\, architecture\, landscape architecture\, literature\
  , design\, and visual arts. Confirm active deadline and citizenship rules o
@@ -663,10 +771,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:5b693d8a4073da7ba3ec@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
 SUMMARY:Dumbarton Oaks fellowships and awards\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for Dumbarton Oaks fellowships. Byzantin
  e studies\, pre-Columbian studies\, garden and landscape history\, art hist
  ory\, archaeology\, and material culture. Confirm active deadline on the of
@@ -677,10 +786,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:27ebac67f3aa18235214@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
 SUMMARY:Royal Canadian Legion Literary Contest
-LOCATION:Canada-wide via local Legion branches\, grades 4 to 12
+LOCATION:Canada-wide via local Legion branches\, grades 4 to 12\, Unknown
 DESCRIPTION:Local branch deadlines vary\, so this placeholder marks the ann
  ual Remembrance contest window. Students submit an original essay or poem o
  n Remembrance in English\, French\, or bilingual format. Junior essays are 
@@ -692,12 +802,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bb5e627c89badf48878d@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
 SUMMARY:Bennington Young Writers Awards
 LOCATION:Submission deadline\, opens September 1. Poetry\, fiction\, or non
  fiction. Open worldwide\, grades 9 to 12\, with a teacher sponsor. Free. Pr
- izes to two thousand dollars plus Bennington scholarships.
+ izes to two thousand dollars plus Bennington scholarships.\, Unknown
 DESCRIPTION:Submission deadline\, opens September 1. Poetry\, fiction\, or 
  nonfiction. Open worldwide\, grades 9 to 12\, with a teacher sponsor. Free.
   Prizes to two thousand dollars plus Bennington scholarships.
@@ -707,13 +818,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:14ceea14274fc623e2f8@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
 SUMMARY:CBC Literary Prizes
 LOCATION:Eligibility note\, entrants must have reached the age of majority\
  , 18 in Ontario\, so most high schoolers wait. Next is the Short Story Priz
  e\, opening September\, about a November deadline. Twenty-five dollar fee. 
- Canadian residents. Confirm on the site.
+ Canadian residents. Confirm on the site.\, Unknown
 DESCRIPTION:Eligibility note\, entrants must have reached the age of majori
  ty\, 18 in Ontario\, so most high schoolers wait. Next is the Short Story P
  rize\, opening September\, about a November deadline. Twenty-five dollar fe
@@ -724,13 +836,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:432f8ae9884db860a330@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
 SUMMARY:Digital Humanities 2027\, Creativity
 LOCATION:Submission deadline projected\; confirm with the organizer\; the c
  all is expected late 2026. Digital humanities\, theme Creativity. Universit
  y of Galway\, June and July 2027. Alliance of Digital Humanities Organizati
- ons.
+ ons.\, Unknown
 DESCRIPTION:Submission deadline projected\; confirm with the organizer\; th
  e call is expected late 2026. Digital humanities\, theme Creativity. Univer
  sity of Galway\, June and July 2027. Alliance of Digital Humanities Organiz
@@ -741,12 +854,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:c013f6886d184b423109@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
 SUMMARY:International Conference on Medical Humanities
 LOCATION:Submission deadline projected from the annual late-year window\; c
  onfirm with the organizer. Medical humanities\, interdisciplinary. Online. 
- Confirm on the site.
+ Confirm on the site.\, Online
 DESCRIPTION:Submission deadline projected from the annual late-year window\
  ; confirm with the organizer. Medical humanities\, interdisciplinary. Onlin
  e. Confirm on the site.
@@ -756,12 +870,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:f25147ee2f4ea08080a2@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
 SUMMARY:Society for Global Nineteenth-Century Studies 2027 World Congress
 LOCATION:Submission deadline projected\; confirm with the organizer. Global
   nineteenth-century studies. Valparaiso\, Chile\, July 2027. Confirm on the
-  site.
+  site.\, Unknown
 DESCRIPTION:Submission deadline projected\; confirm with the organizer. Glo
  bal nineteenth-century studies. Valparaiso\, Chile\, July 2027. Confirm on 
  the site.
@@ -771,10 +886,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:8db7f65abaac68275a6b@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20261104
+DTEND;VALUE=DATE:20261105
 SUMMARY:CASBS fellowship applications\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for Center for Advanced Study in the Beh
  avioral Sciences fellowships. Social sciences\, humanities-adjacent researc
  h\, law\, ethics\, politics\, culture\, and public life. Confirm active dea
@@ -785,10 +901,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:3ff85c96d1cfc20fd1d8@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20261115
+DTEND;VALUE=DATE:20261116
 SUMMARY:Huntington Library fellowships\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for Huntington Library fellowships. Arch
  ives\, rare books\, literature\, history\, American studies\, British studi
  es\, and humanities research. Confirm active deadline on the official site.
@@ -798,11 +915,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:fefbecf6fffa434f204a@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20261115
+DTEND;VALUE=DATE:20261116
 SUMMARY:Princeton UCHV visiting faculty and fellowship opportunities\, proj
  ected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for Princeton University Center for Huma
  n Values fellowships and funding. Ethics\, political philosophy\, bioethics
  \, law and normative thinking\, human values\, and visiting scholar opportu
@@ -813,10 +931,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:e0d1a3efb95290fbab4c@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20261119
+DTEND;VALUE=DATE:20261120
 SUMMARY:OSSTF Student Achievement Awards
-LOCATION:Ontario public secondary schools\, grades 9 to 12
+LOCATION:Ontario public secondary schools\, grades 9 to 12\, Unknown
 DESCRIPTION:School-to-district deadline projected from the latest verified 
  November cycle. Ontario public secondary students submit writing\, visual a
  rt\, or digital media on an annual theme. Writing is capped at 750 words\, 
@@ -828,11 +947,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:1adf884caf88c3957976@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20261120
+DTEND;VALUE=DATE:20261121
 SUMMARY:Polar Expressions Student Writing Contest 2026
 LOCATION:Submission deadline. Poetry up to 32 lines or a short story up to 
- 450 words. Canadian students\, kindergarten to grade 12. Free.
+ 450 words. Canadian students\, kindergarten to grade 12. Free.\, Unknown
 DESCRIPTION:Submission deadline. Poetry up to 32 lines or a short story up 
  to 450 words. Canadian students\, kindergarten to grade 12. Free.
 URL:https://seminarschools.com/polymythseminars/events/polar-expressions-st
@@ -841,12 +961,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:a3146c5307464b4297a2@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20261130
+DTEND;VALUE=DATE:20261201
 SUMMARY:Association for Law\, Property\, and Society 2027 Meeting
 LOCATION:Submission deadline projected from a late-November window\; confir
  m with the organizer. Property law\, interdisciplinary. Cardiff University\
- , 2027. Confirm on the site.
+ , 2027. Confirm on the site.\, Unknown
 DESCRIPTION:Submission deadline projected from a late-November window\; con
  firm with the organizer. Property law\, interdisciplinary. Cardiff Universi
  ty\, 2027. Confirm on the site.
@@ -856,12 +977,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:d30728dd59c78201385b@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20261130
+DTEND;VALUE=DATE:20261201
 SUMMARY:Patricia Grodd Poetry Prize for Young Writers
 LOCATION:Poetry submission window\, November 1 to 30. One unpublished poem.
   Open internationally\, grades 10 and 11. Free. Winner publishes in The Ken
- yon Review and earns a Young Writers workshop scholarship.
+ yon Review and earns a Young Writers workshop scholarship.\, Unknown
 DESCRIPTION:Poetry submission window\, November 1 to 30. One unpublished po
  em. Open internationally\, grades 10 and 11. Free. Winner publishes in The 
  Kenyon Review and earns a Young Writers workshop scholarship.
@@ -871,10 +993,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:1bea69cb035ce37bdf76@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20261130
+DTEND;VALUE=DATE:20261201
 SUMMARY:SHARP annual conference CFP\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for the Society for the History of Autho
  rship\, Reading and Publishing annual conference. Book history\, bibliograp
  hy\, media history\, archives\, and print culture. Confirm active year on t
@@ -885,10 +1008,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:2f6472c8e800a31de13b@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20261130
+DTEND;VALUE=DATE:20261201
 SUMMARY:Society for Applied Philosophy annual conference CFP\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for the Society for Applied Philosophy a
  nnual conference. Applied ethics\, public philosophy\, political philosophy
  \, law\, medicine\, technology\, and social practice. Confirm active year o
@@ -899,10 +1023,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:a7025e27463a624eaf59@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20261130
+DTEND;VALUE=DATE:20261201
 SUMMARY:Warburg Institute fellowships\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for Warburg Institute fellowships. Intel
  lectual history\, Renaissance studies\, art history\, magic\, memory\, hist
  ory of ideas\, and cultural history. Confirm active deadline on the officia
@@ -913,10 +1038,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:47844f9620c74bf0c05f@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20261215
+DTEND;VALUE=DATE:20261216
 SUMMARY:CHCI annual meeting proposals\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for Consortium of Humanities Centers and
   Institutes annual meeting proposals. Humanities centers\, institutes\, pub
  lic humanities\, and interdisciplinary research networks. Confirm active ye
@@ -927,13 +1053,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:97c78dac65adc09e55c7@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20261215
+DTEND;VALUE=DATE:20261216
 SUMMARY:Scholastic Art and Writing Awards
 LOCATION:Regional deadlines\, projected across the December to January wind
  ow. Eleven writing categories. Students in the US and Canada\, grades 7 to 
  12\, age 13 and over. Ten dollar per entry with waivers. Final work cannot 
- be AI-generated. Confirm your region on the site.
+ be AI-generated. Confirm your region on the site.\, Unknown
 DESCRIPTION:Regional deadlines\, projected across the December to January w
  indow. Eleven writing categories. Students in the US and Canada\, grades 7 
  to 12\, age 13 and over. Ten dollar per entry with waivers. Final work cann
@@ -944,10 +1071,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:dfacf5c123733d57b9a3@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20261219
+DTEND;VALUE=DATE:20261220
 SUMMARY:French for the Future National Essay Contest
-LOCATION:Canada-wide French essay scholarship contest\, grades 10 to 12
+LOCATION:Canada-wide French essay scholarship contest\, grades 10 to 12\, U
+ nknown
 DESCRIPTION:Deadline projected from the latest verified October to December
   cycle. Students write a 750 word essay in French in French-as-a-first-lang
  uage or French-as-a-second-language categories. Free. Scholarship prizes su
@@ -959,11 +1088,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:6cade204aa7d6673ecbe@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20261231
+DTEND;VALUE=DATE:20270101
 SUMMARY:Journal of Marlowe Studies 2027 Issue
 LOCATION:Submission window\, projected\; confirm with the organizer. Early-
- modern literary studies. Sheffield Hallam University. Journal.
+ modern literary studies. Sheffield Hallam University. Journal.\, Unknown
 DESCRIPTION:Submission window\, projected\; confirm with the organizer. Ear
  ly-modern literary studies. Sheffield Hallam University. Journal.
 URL:https://seminarschools.com/polymythseminars/events/journal-of-marlowe-s
@@ -972,11 +1102,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:817d2943d068c91905dd@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20261231
+DTEND;VALUE=DATE:20270101
 SUMMARY:The Space Between\, Literature and Culture 1914 to 1945
 LOCATION:Rolling submissions for the 2027 and 2028 issues. Interwar literar
- y and cultural studies. Journal.
+ y and cultural studies. Journal.\, Unknown
 DESCRIPTION:Rolling submissions for the 2027 and 2028 issues. Interwar lite
  rary and cultural studies. Journal.
 URL:https://seminarschools.com/polymythseminars/events/the-space-between-li
@@ -985,12 +1116,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:115d54e6921bd6efc167@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270105
+DTEND;VALUE=DATE:20270106
 SUMMARY:Canadian Philosophical Association Congress
 LOCATION:Submission deadline projected from the annual January window. Pape
  rs and symposia across philosophy. CPA members\, held with the Congress of 
- the Humanities. Confirm on the site.
+ the Humanities. Confirm on the site.\, Unknown
 DESCRIPTION:Submission deadline projected from the annual January window. P
  apers and symposia across philosophy. CPA members\, held with the Congress 
  of the Humanities. Confirm on the site.
@@ -1000,11 +1132,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:1ee0cc62f27b4391cfb4@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270109
+DTEND;VALUE=DATE:20270110
 SUMMARY:Midwest AAR 2027 Annual Meeting
 LOCATION:Submission deadline projected from the annual January window. Reli
- gious studies\, membership not required to submit. Confirm on the site.
+ gious studies\, membership not required to submit. Confirm on the site.\, U
+ nknown
 DESCRIPTION:Submission deadline projected from the annual January window. R
  eligious studies\, membership not required to submit. Confirm on the site.
 URL:https://seminarschools.com/polymythseminars/events/midwest-aar-2027-ann
@@ -1013,11 +1147,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:c8b10a0f8a8109de2d12@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20270110
+DTEND;VALUE=DATE:20270111
 SUMMARY:British Society for Ethical Theory annual conference CFP\, projecte
  d
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for the British Society for Ethical Theo
  ry annual conference. Normative ethics\, metaethics\, moral psychology\, an
  d value theory. Confirm active year on the official site.
@@ -1027,11 +1162,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:da93c76814c89a370fcd@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270114
+DTEND;VALUE=DATE:20270115
 SUMMARY:American Political Science Association 2027 Annual Meeting
 LOCATION:Submission deadline projected from the annual January window. Poli
- tical science. APSA. Annual meeting. Confirm on the site.
+ tical science. APSA. Annual meeting. Confirm on the site.\, Unknown
 DESCRIPTION:Submission deadline projected from the annual January window. P
  olitical science. APSA. Annual meeting. Confirm on the site.
 URL:https://seminarschools.com/polymythseminars/events/american-political-s
@@ -1040,11 +1176,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:c81ecd7914b8f7109b86@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270115
+DTEND;VALUE=DATE:20270116
 SUMMARY:American Ethnological Society Spring 2027 Conference
 LOCATION:Submission deadline projected from the annual January window. Cult
- ural anthropology. American Ethnological Society. Confirm on the site.
+ ural anthropology. American Ethnological Society. Confirm on the site.\, Un
+ known
 DESCRIPTION:Submission deadline projected from the annual January window. C
  ultural anthropology. American Ethnological Society. Confirm on the site.
 URL:https://seminarschools.com/polymythseminars/events/american-ethnologica
@@ -1053,10 +1191,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:c495e83c0357ec7ca658@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20270115
+DTEND;VALUE=DATE:20270116
 SUMMARY:European Society for Aesthetics annual conference CFP\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for the European Society for Aesthetics 
  annual conference. Aesthetics\, philosophy of art\, art theory\, literature
  \, music\, film\, and visual culture. Confirm active year on the official s
@@ -1067,10 +1206,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:e7d7b3862dbe3122b6c6@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20270115
+DTEND;VALUE=DATE:20270116
 SUMMARY:Folger Shakespeare Library fellowships\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for Folger fellowships. Shakespeare\, ea
  rly modern studies\, performance\, book history\, and library collections. 
  Confirm active deadline on the official site.
@@ -1080,11 +1220,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:4722bb9e17b2193e68c8@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270115
+DTEND;VALUE=DATE:20270116
 SUMMARY:Society for History in the Federal Government 2027 Meeting
 LOCATION:Submission deadline projected from the annual January window. Publ
- ic and federal history. Washington area. Confirm on the site.
+ ic and federal history. Washington area. Confirm on the site.\, Unknown
 DESCRIPTION:Submission deadline projected from the annual January window. P
  ublic and federal history. Washington area. Confirm on the site.
 URL:https://seminarschools.com/polymythseminars/events/society-for-history-
@@ -1093,13 +1234,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:e25573030eb68acebb78@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270120
+DTEND;VALUE=DATE:20270121
 SUMMARY:Society for Phenomenology and Existential Philosophy 64th Conferenc
  e
 LOCATION:Submission deadline projected from the annual January window. Cont
  inental philosophy papers\, panels\, and book sessions. Members worldwide. 
- Loyola University Chicago. Confirm on the site.
+ Loyola University Chicago. Confirm on the site.\, Unknown
 DESCRIPTION:Submission deadline projected from the annual January window. C
  ontinental philosophy papers\, panels\, and book sessions. Members worldwid
  e. Loyola University Chicago. Confirm on the site.
@@ -1109,11 +1251,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:67031e50b54427faedaa@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20270131
+DTEND;VALUE=DATE:20270201
 SUMMARY:British Society for the History of Philosophy annual conference CFP
  \, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for the British Society for the History 
  of Philosophy annual conference. History of philosophy\, intellectual histo
  ry\, ancient\, medieval\, modern\, and non-canonical traditions. Confirm ac
@@ -1125,11 +1268,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:029184d96568ff81af4c@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
 SUMMARY:ICMA-sponsored session\, CAA 2028
 LOCATION:Session deadline projected from the annual February window. Mediev
- al art history. International Center of Medieval Art. Confirm on the site.
+ al art history. International Center of Medieval Art. Confirm on the site.\
+ , Unknown
 DESCRIPTION:Session deadline projected from the annual February window. Med
  ieval art history. International Center of Medieval Art. Confirm on the sit
  e.
@@ -1139,11 +1284,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:84e7cf9888473020ca6d@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
 SUMMARY:North American Society for Social Philosophy conference CFP\, proje
  cted
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for the North American Society for Socia
  l Philosophy conference. Social philosophy\, political philosophy\, ethics\
  , law\, democracy\, oppression\, justice\, and public life. Confirm active 
@@ -1154,12 +1300,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:8adba46fc5d440328115@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
 SUMMARY:Philosophy of Management 18th Annual Conference
 LOCATION:Submission deadline projected from the annual February window. Phi
  losophy of management and organization. EM Normandie\, Paris. Confirm on th
- e site.
+ e site.\, Unknown
 DESCRIPTION:Submission deadline projected from the annual February window. 
  Philosophy of management and organization. EM Normandie\, Paris. Confirm on
   the site.
@@ -1169,12 +1316,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:f26c3f6fff091a6e283d@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
 SUMMARY:SBL International Meeting 2027
 LOCATION:Submission deadline projected\; confirm with the organizer. Biblic
  al studies and religion. Leuven\, Belgium\, July 2027. Society of Biblical 
- Literature. Confirm on the site.
+ Literature. Confirm on the site.\, Unknown
 DESCRIPTION:Submission deadline projected\; confirm with the organizer. Bib
  lical studies and religion. Leuven\, Belgium\, July 2027. Society of Biblic
  al Literature. Confirm on the site.
@@ -1184,10 +1332,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:4781c49aa1f2c9c2e0a0@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20270213
+DTEND;VALUE=DATE:20270214
 SUMMARY:OECTA Young Authors Awards
-LOCATION:Ontario Catholic-school pathway\, JK to grade 12
+LOCATION:Ontario Catholic-school pathway\, JK to grade 12\, Unknown
 DESCRIPTION:School-level deadline projected from the latest verified Februa
  ry cycle. Students enter short story\, poem\, nonfiction\, and\, from grade
  s 5 to 12\, play categories. English and French tracks. Provincial entries 
@@ -1199,10 +1348,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:73969bd395d5de6c0837@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20270215
+DTEND;VALUE=DATE:20270216
 SUMMARY:ASOR annual meeting abstract deadline\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for the American Society of Overseas Res
  earch annual meeting. Archaeology\, ancient Near East\, biblical studies\, 
  religious studies\, material culture\, and heritage. Confirm active year on
@@ -1213,11 +1363,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:a6083ac4a2640d21909e@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270215
+DTEND;VALUE=DATE:20270216
 SUMMARY:American Historical Association 2028 Annual Meeting
 LOCATION:Submission deadline projected from the annual mid-February window.
-  History\, all fields. AHA members. Annual meeting. Confirm on the site.
+  History\, all fields. AHA members. Annual meeting. Confirm on the site.\, 
+ Unknown
 DESCRIPTION:Submission deadline projected from the annual mid-February wind
  ow. History\, all fields. AHA members. Annual meeting. Confirm on the site.
 URL:https://seminarschools.com/polymythseminars/events/american-historical-
@@ -1226,10 +1378,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:32f1e8848a8aa509453b@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20270215
+DTEND;VALUE=DATE:20270216
 SUMMARY:European Society for Analytic Philosophy congress CFP\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for the European Society for Analytic Ph
  ilosophy congress. Analytic philosophy across metaphysics\, epistemology\, 
  ethics\, logic\, mind\, language\, science\, and political philosophy. Conf
@@ -1240,12 +1393,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:a7e3e2c97d1f6415569e@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270215
+DTEND;VALUE=DATE:20270216
 SUMMARY:Poetry In Voice Write Contest
 LOCATION:Submission window\, projected August 15 to February 15\, monthly w
  inners. Poetry. Canadian students\, grades 7 to 12\, under 19. Free. Future
- Verse intensive for senior winners. Confirm on the site.
+ Verse intensive for senior winners. Confirm on the site.\, Unknown
 DESCRIPTION:Submission window\, projected August 15 to February 15\, monthl
  y winners. Poetry. Canadian students\, grades 7 to 12\, under 19. Free. Fut
  ureVerse intensive for senior winners. Confirm on the site.
@@ -1255,10 +1409,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:793ad622c5e0ad08b4a9@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20270220
+DTEND;VALUE=DATE:20270221
 SUMMARY:Meaning of Home Student Contest
-LOCATION:Canada-wide online\, grades 4 to 6
+LOCATION:Canada-wide online\, grades 4 to 6\, Online
 DESCRIPTION:Deadline projected from the latest verified January to February
   cycle. Students in grades 4 to 6 submit a 50 to 300 word composition\, ess
  ay\, or poem on what home means to them. Free\, English or French\, with Ha
@@ -1270,12 +1425,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:a0cb500c5e6cac611aba@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270225
+DTEND;VALUE=DATE:20270226
 SUMMARY:American Sociological Association 2027 Annual Meeting
 LOCATION:Main paper deadline projected\, the call opens about November. Soc
  iology\, theme Realizing the Promise of Sociology. Chicago\, August 2027. C
- onfirm on the site.
+ onfirm on the site.\, Unknown
 DESCRIPTION:Main paper deadline projected\, the call opens about November. 
  Sociology\, theme Realizing the Promise of Sociology. Chicago\, August 2027
  . Confirm on the site.
@@ -1285,12 +1441,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:aa4ecf0dffa17ef3105a@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270228
+DTEND;VALUE=DATE:20270301
 SUMMARY:Amazon Canada First Novel Award Youth Short Story
 LOCATION:Deadline approximate\, projected from the winter window\; confirm 
  with the organizer. Short story. Canadian teens\, ages 13 to 17. Free. Conf
- irm the date on the site.
+ irm the date on the site.\, Unknown
 DESCRIPTION:Deadline approximate\, projected from the winter window\; confi
  rm with the organizer. Short story. Canadian teens\, ages 13 to 17. Free. C
  onfirm the date on the site.
@@ -1300,12 +1457,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:e65928ad772005997560@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270228
+DTEND;VALUE=DATE:20270301
 SUMMARY:CBC First Page Student Writing Challenge
 LOCATION:Submission deadline\, projected from the annual February window. O
  ne opening page of a novel set 150 years ahead\, 300 to 400 words. Canadian
-  residents\, grades 7 to 12. Free. Confirm the date on the site.
+  residents\, grades 7 to 12. Free. Confirm the date on the site.\, Unknown
 DESCRIPTION:Submission deadline\, projected from the annual February window
  . One opening page of a novel set 150 years ahead\, 300 to 400 words. Canad
  ian residents\, grades 7 to 12. Free. Confirm the date on the site.
@@ -1315,10 +1473,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:c87c1565a942356d6a00@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20270228
+DTEND;VALUE=DATE:20270301
 SUMMARY:Ottawa Public Library Awesome Authors Youth Writing Contest
-LOCATION:Ottawa regional contest\, ages 9 to 18
+LOCATION:Ottawa regional contest\, ages 9 to 18\, Unknown
 DESCRIPTION:Deadline projected from the latest verified February cycle. Ott
  awa-area youth submit short stories\, poems\, or comics\, with English and 
  French opportunities. Free. This is a regional library contest\, so Ottawa 
@@ -1330,12 +1489,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:e8eb5a8640b12eb63e62@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270228
+DTEND;VALUE=DATE:20270301
 SUMMARY:River of Words Poetry and Art Contest
 LOCATION:Deadline approximate\, projected from the late-February window\; c
  onfirm with the organizer. Poetry and art on a watershed theme. Students wo
- rldwide\, kindergarten to grade 12. Free. Confirm the date on the site.
+ rldwide\, kindergarten to grade 12. Free. Confirm the date on the site.\, U
+ nknown
 DESCRIPTION:Deadline approximate\, projected from the late-February window\
  ; confirm with the organizer. Poetry and art on a watershed theme. Students
   worldwide\, kindergarten to grade 12. Free. Confirm the date on the site.
@@ -1345,12 +1506,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:a40e877b7c3bb97c3fdc@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270306
+DTEND;VALUE=DATE:20270307
 SUMMARY:American Academy of Religion 2027 Annual Meeting
 LOCATION:Submission deadline projected from the annual March window. Religi
  ous studies and theology. AAR members. Washington\, November 2027. Confirm 
- on the site.
+ on the site.\, Unknown
 DESCRIPTION:Submission deadline projected from the annual March window. Rel
  igious studies and theology. AAR members. Washington\, November 2027. Confi
  rm on the site.
@@ -1360,11 +1522,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:3742760f307f76b17f02@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270309
+DTEND;VALUE=DATE:20270310
 SUMMARY:American Society for Bioethics and Humanities 2027 Conference
 LOCATION:Submission deadline projected from the annual March window. Bioeth
- ics and health humanities. Columbus\, October 2027. Confirm on the site.
+ ics and health humanities. Columbus\, October 2027. Confirm on the site.\, 
+ Unknown
 DESCRIPTION:Submission deadline projected from the annual March window. Bio
  ethics and health humanities. Columbus\, October 2027. Confirm on the site.
 URL:https://seminarschools.com/polymythseminars/events/american-society-for
@@ -1373,10 +1537,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:e2ef96dd27138b11e6f5@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20270313
+DTEND;VALUE=DATE:20270314
 SUMMARY:Canadian Nuclear Society Essay Contest
-LOCATION:Canada-wide STEM communication essay contest\, grades 9 to 12
+LOCATION:Canada-wide STEM communication essay contest\, grades 9 to 12\, Un
+ known
 DESCRIPTION:Deadline projected from the latest verified March cycle. Canadi
  an students in grades 9 to 12\, or Quebec Secondary III to V\, submit an or
  iginal essay of 1\,000 words or less in English or French. Cash prizes are 
@@ -1387,10 +1553,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:b1f2c982a3da38842f3f@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20270315
+DTEND;VALUE=DATE:20270316
 SUMMARY:NIAS fellowships\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for Netherlands Institute for Advanced S
  tudy fellowships. Humanities and social sciences. Confirm active deadline a
  nd eligibility on the official site.
@@ -1400,13 +1567,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:d759f7c035cbf5d974b8@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270322
+DTEND;VALUE=DATE:20270323
 SUMMARY:Toronto Public Library Young Voices Magazine
 LOCATION:Submission deadline\, projected from the annual March window. Poem
  s\, stories\, reviews\, comics. Teens who live\, work\, or study in Toronto
  \, ages 12 to 19. Free. Strict AI ban. Publication\, no cash prize. Confirm
-  on the site.
+  on the site.\, Toronto
 DESCRIPTION:Submission deadline\, projected from the annual March window. P
  oems\, stories\, reviews\, comics. Teens who live\, work\, or study in Toro
  nto\, ages 12 to 19. Free. Strict AI ban. Publication\, no cash prize. Conf
@@ -1417,10 +1585,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:1b99bae9340daa9b7f48@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20270331
+DTEND;VALUE=DATE:20270401
 SUMMARY:Kids Write 4 Kids
-LOCATION:Canada-wide online\, grades 4 to 8
+LOCATION:Canada-wide online\, grades 4 to 8\, Online
 DESCRIPTION:Annual deadline projected from the official October 1 to March 
  31 cycle. Canadian students in grades 4 to 8 submit original fact\, fiction
  \, prose\, or poetry up to 5\,000 words. Free. Winners become published aut
@@ -1432,10 +1601,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:f4e5c58495de189287f1@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20270331
+DTEND;VALUE=DATE:20270401
 SUMMARY:YABS Young Writers Award
-LOCATION:Alberta province-wide\, grades 4 to 9
+LOCATION:Alberta province-wide\, grades 4 to 9\, Online
 DESCRIPTION:Annual deadline projected from the official December 1 to March
   31 window. Alberta students in grades 4 to 9 submit an original short stor
  y up to 2\,500 words. Free. Winners receive books\, certificates\, and an o
@@ -1447,12 +1617,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:39974f03a053f1b3c51a@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270331
+DTEND;VALUE=DATE:20270401
 SUMMARY:Indigenous Arts and Stories
 LOCATION:Program appears on hiatus\, confirm with the organizer before rely
  ing on it. Historically a March 31 deadline. Creative writing and art. Cana
- dians of Indigenous ancestry\, ages 6 to 29. Free.
+ dians of Indigenous ancestry\, ages 6 to 29. Free.\, Unknown
 DESCRIPTION:Program appears on hiatus\, confirm with the organizer before r
  elying on it. Historically a March 31 deadline. Creative writing and art. C
  anadians of Indigenous ancestry\, ages 6 to 29. Free.
@@ -1462,13 +1633,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:2b0b26e035bbb67f58eb@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270331
+DTEND;VALUE=DATE:20270401
 SUMMARY:Princeton Ten-Minute Play Contest
 LOCATION:Deadline projected from the annual March window\, or once 250 entr
  ies fill. One ten-minute play\, up to ten pages. Eleventh-grade students or
   the international equivalent. Free. Princeton University. Confirm on the s
- ite.
+ ite.\, Unknown
 DESCRIPTION:Deadline projected from the annual March window\, or once 250 e
  ntries fill. One ten-minute play\, up to ten pages. Eleventh-grade students
   or the international equivalent. Free. Princeton University. Confirm on th
@@ -1479,10 +1651,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:433354f3a1d3ef94f605@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20270401
+DTEND;VALUE=DATE:20270402
 SUMMARY:Vancouver Writers Fest Youth Writing Contest
-LOCATION:British Columbia province-wide\, grades 5 to 12
+LOCATION:British Columbia province-wide\, grades 5 to 12\, Unknown
 DESCRIPTION:Opening date placeholder for the next spring cycle. BC students
   submit previously unpublished short stories or personal essays. Elementary
   submissions are up to 1\,000 words and high-school submissions up to 1\,50
@@ -1494,12 +1667,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:4775122ec0d9d1ce1faa@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270405
+DTEND;VALUE=DATE:20270406
 SUMMARY:Society for Classical Studies 2028 Annual Meeting
 LOCATION:Submission deadline projected from the annual April window. Classi
  cs. SCS members. Annual meeting with the Archaeological Institute. Confirm 
- on the site.
+ on the site.\, Unknown
 DESCRIPTION:Submission deadline projected from the annual April window. Cla
  ssics. SCS members. Annual meeting with the Archaeological Institute. Confi
  rm on the site.
@@ -1509,11 +1683,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:03737c6e45476fba840f@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270410
+DTEND;VALUE=DATE:20270411
 SUMMARY:Italian Art Society session\, CAA 2028
 LOCATION:Session deadline projected from the annual April window. Italian a
  rt history. Italian Art Society at the CAA conference. Confirm on the site.
+ \, Unknown
 DESCRIPTION:Session deadline projected from the annual April window. Italia
  n art history. Italian Art Society at the CAA conference. Confirm on the si
  te.
@@ -1523,13 +1699,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:7ccc2a96e3bb7e024be4@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270415
+DTEND;VALUE=DATE:20270416
 SUMMARY:Stephen Leacock Student Humorous Writing Competition
 LOCATION:Postmark deadline\, projected from the annual April window. Humoro
  us short story or essay\, about 1500 words\, mailed. Ontario students\, age
  s 14 to 19. Five dollar fee. Fifteen hundred dollar first prize. Confirm on
-  the site.
+  the site.\, Unknown
 DESCRIPTION:Postmark deadline\, projected from the annual April window. Hum
  orous short story or essay\, about 1500 words\, mailed. Ontario students\, 
  ages 14 to 19. Five dollar fee. Fifteen hundred dollar first prize. Confirm
@@ -1540,12 +1717,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bc966a80688ae2e28081@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
 SUMMARY:International Virginia Woolf Conference 36th
 LOCATION:Submission deadline projected from the annual spring window. Moder
  nist literary studies. Annual conference\, location rotates. Confirm on the
-  site.
+  site.\, Unknown
 DESCRIPTION:Submission deadline projected from the annual spring window. Mo
  dernist literary studies. Annual conference\, location rotates. Confirm on 
  the site.
@@ -1555,10 +1733,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:1dfccacbd0ee4c6787eb@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
 SUMMARY:Jessamy Stursberg Poetry Prize for Canadian Youth
-LOCATION:Canada-wide poetry prize\, grades 7 to 12
+LOCATION:Canada-wide poetry prize\, grades 7 to 12\, Unknown
 DESCRIPTION:Deadline approximate. Submissions open annually in September. C
  anadian youth poets submit one poem of up to one page. Cash prizes are awar
  ded in junior and senior categories. Confirm the active deadline on the Lea
@@ -1569,11 +1748,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:5a28cc1dbff836226909@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
 SUMMARY:Queen's Commonwealth Writing Competition
 LOCATION:International Commonwealth contest\, Canadians eligible\, 18 and u
- nder
+ nder\, Unknown
 DESCRIPTION:Deadline projected from the annual April 30 cycle. Entrants wri
  te one piece of up to 1\,000 words responding to an official prompt\, with 
  forms including poem\, letter\, article\, story\, essay\, or short script. 
@@ -1585,13 +1765,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:13ea0f3d1c9b182da99d@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270501
+DTEND;VALUE=DATE:20270502
 SUMMARY:The Adroit Prizes for Poetry and Prose
 LOCATION:Submission window\, projected from the annual April to May cycle. 
  Up to five poems or three prose works. Secondary and undergraduate students
   worldwide. Fifteen US dollar fee with waivers. Confirm the date on the sit
- e.
+ e.\, Unknown
 DESCRIPTION:Submission window\, projected from the annual April to May cycl
  e. Up to five poems or three prose works. Secondary and undergraduate stude
  nts worldwide. Fifteen US dollar fee with waivers. Confirm the date on the 
@@ -1602,11 +1783,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:167d9005baceec525564@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270506
+DTEND;VALUE=DATE:20270507
 SUMMARY:American Anthropological Association 2027 Annual Meeting
 LOCATION:Submission deadline projected from the annual spring window. Anthr
- opology\, unified single call. AAA. Confirm on the site.
+ opology\, unified single call. AAA. Confirm on the site.\, Unknown
 DESCRIPTION:Submission deadline projected from the annual spring window. An
  thropology\, unified single call. AAA. Confirm on the site.
 URL:https://seminarschools.com/polymythseminars/events/american-anthropolog
@@ -1615,12 +1797,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:3ad802e81ab3e3893547@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270514
+DTEND;VALUE=DATE:20270515
 SUMMARY:AIES 2027\, AI Ethics and Society
 LOCATION:Submission deadline projected from the annual spring window\; conf
  irm with the organizer. AI ethics\, interdisciplinary. AAAI and ACM confere
- nce. Confirm on the site.
+ nce. Confirm on the site.\, Unknown
 DESCRIPTION:Submission deadline projected from the annual spring window\; c
  onfirm with the organizer. AI ethics\, interdisciplinary. AAAI and ACM conf
  erence. Confirm on the site.
@@ -1630,12 +1813,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:9b85397fbaf4ff5f3a56@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270516
 SUMMARY:Paris Conference on AI and Digital Ethics 2027
 LOCATION:Submission deadline projected from the annual spring window\; conf
  irm with the organizer. AI ethics\, interdisciplinary\, with a journal trac
- k. Paris. Confirm on the site.
+ k. Paris. Confirm on the site.\, Unknown
 DESCRIPTION:Submission deadline projected from the annual spring window\; c
  onfirm with the organizer. AI ethics\, interdisciplinary\, with a journal t
  rack. Paris. Confirm on the site.
@@ -1645,10 +1829,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:b96b192e130b034ed22b@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20270531
+DTEND;VALUE=DATE:20270601
 SUMMARY:CNIB Braille Creative Writing Contest
-LOCATION:Canada-wide\, K to grade 12\, braille submissions
+LOCATION:Canada-wide\, K to grade 12\, braille submissions\, Unknown
 DESCRIPTION:Deadline projected from the official March 1 to May 31 annual w
  indow. Students submit a braille short story\, essay\, or poem in English o
  r French on any topic\, up to 4\,000 words. Free. Cash prizes are awarded i
@@ -1659,13 +1844,14 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:1a323de763beb522aab9@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270531
+DTEND;VALUE=DATE:20270601
 SUMMARY:James Bartleman Indigenous Youth Creative Writing Award
 LOCATION:Submission deadline\, projected from the annual May window. Any cr
  eative writing. Indigenous students enrolled in and resident in Ontario\, u
  nder 18. Free. Twenty-five hundred dollars to up to six recipients. Confirm
-  on the site.
+  on the site.\, Unknown
 DESCRIPTION:Submission deadline\, projected from the annual May window. Any
   creative writing. Indigenous students enrolled in and resident in Ontario\
  , under 18. Free. Twenty-five hundred dollars to up to six recipients. Conf
@@ -1676,12 +1862,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:1354472ce3efee602150@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270531
+DTEND;VALUE=DATE:20270601
 SUMMARY:John Locke Institute Global Essay Prize 2027
 LOCATION:Essay submission deadline\, approximate. Annual prize across ten s
  ubjects\, registration opens about February\, 2026 deadline was May 31. Ope
- n worldwide\, under 19. Free. Confirm the date on the site.
+ n worldwide\, under 19. Free. Confirm the date on the site.\, Unknown
 DESCRIPTION:Essay submission deadline\, approximate. Annual prize across te
  n subjects\, registration opens about February\, 2026 deadline was May 31. 
  Open worldwide\, under 19. Free. Confirm the date on the site.
@@ -1691,10 +1878,12 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:6620328e3ddf702f84e9@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20270608
+DTEND;VALUE=DATE:20270609
 SUMMARY:Fraser Institute Student Essay Contest
-LOCATION:Canada-wide and Canadian students abroad\, high school division
+LOCATION:Canada-wide and Canadian students abroad\, high school division\, 
+ Unknown
 DESCRIPTION:Deadline projected from the latest verified June cycle. High-sc
  hool students submit a 1\,000 to 1\,500 word essay with references on publi
  c policy and economics. Cash prizes are awarded in the high-school division
@@ -1705,10 +1894,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:08672bb92d7988bc266f@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260628T205500Z
 DTSTART;VALUE=DATE:20270610
+DTEND;VALUE=DATE:20270611
 SUMMARY:Diverse Minds Manitoba
-LOCATION:Manitoba high-school illustrated children's book contest
+LOCATION:Manitoba high-school illustrated children's book contest\, Unknown
 DESCRIPTION:Deadline projected from the latest verified June cycle. Manitob
  a high-school students write and illustrate an original children's book for
   a K to grade 5 audience on diversity and inclusion. Students may work indi
@@ -1721,12 +1911,13 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:1fc1cf2678addc560764@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20270615
+DTEND;VALUE=DATE:20270616
 SUMMARY:USC Cinema and Media Studies Graduate Conference\, Delirium
 LOCATION:Deadline projected for the next annual cycle\; confirm with the or
  ganizer. Media studies\, graduate. University of Southern California. Gradu
- ate conference. Confirm on the site.
+ ate conference. Confirm on the site.\, Unknown
 DESCRIPTION:Deadline projected for the next annual cycle\; confirm with the
   organizer. Media studies\, graduate. University of Southern California. Gr
  aduate conference. Confirm on the site.
@@ -1736,10 +1927,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:13a46e9aa203c3491994@seminarschools.com
-DTSTAMP:20260721T150609Z
+DTSTAMP:20260629T224500Z
 DTSTART;VALUE=DATE:20271101
+DTEND;VALUE=DATE:20271102
 SUMMARY:Philosophy of Science Association biennial meeting CFP\, projected
-LOCATION:Global / online submission deadline
+LOCATION:Global / online submission deadline\, Online
 DESCRIPTION:Projected source watch for the Philosophy of Science Associatio
  n biennial meeting. Philosophy of science\, history and philosophy of scien
  ce\, science studies\, and methodology. Confirm active year on the official

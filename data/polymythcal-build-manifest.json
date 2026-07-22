@@ -1,17 +1,28 @@
 {
-  "build_id": "audit19-final-predeploy-2026-07-22",
-  "generated_at": "2026-07-22T05:00:00-04:00",
-  "canonical_data_sha256": "fe905ae4e70f210535c9d178043f9c8e8250f696b7fb48de20730ca11e06773d",
+  "build_id": "audit21-end-to-end",
+  "release_id": "2026-07-22-polymythcal-audit21-end-to-end",
+  "generated_at": "2026-07-22T14:30:00-04:00",
+  "canonical_data_sha256": "4e4c7da33aaa9a53213c860503544a6f58dc50d3a9e8eaf2b50a8ef76f789d16",
   "schema_sha256": "cd18b7a225d7ed4200ca430f8544981a50de46acc613f2fc2fb971b473fdcbac",
   "record_count": 839,
   "confirmed_count": 243,
   "unconfirmed_count": 596,
   "source_count": 418,
-  "research_import_count_2026_07_21": 326,
-  "interface_release": "audit19-final-predeploy-2026-07-22",
-  "interface_interaction_design_checks": 94,
-  "interface_clarity_checks": 29,
-  "current_record_count_next_12_months": 574,
-  "interface_wcag_browser_checks": 42,
-  "full_repository_verifier_checks": 91
+  "current_record_count_next_12_months": 585,
+  "interface_release": "2026-07-22-polymythcal-audit21-end-to-end",
+  "deployment_contract": "Netlify generates public/ from source; Windows deployer packages may additionally include the same generated public/ tree.",
+  "route_shells": [
+    "polymythseminars",
+    "writingclub",
+    "writingkids",
+    "writingjuniors",
+    "writingteens",
+    "writinggrads",
+    "university",
+    "philosophy",
+    "humanities",
+    "cfps",
+    "lectures",
+    "fellowships"
+  ]
 }

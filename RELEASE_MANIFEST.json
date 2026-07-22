@@ -1,17 +1,14 @@
 {
-  "release_id": "2026-07-22-polymythcal-audit19-final",
-  "generated_at": "2026-07-22T05:00:00-04:00",
+  "release_id": "2026-07-22-polymythcal-audit21-end-to-end",
+  "generated_at": "2026-07-22T14:30:00-04:00",
   "publish_dir": "public",
-  "release_type": "Netlify source package",
+  "release_type": "Unified Git, Netlify, Windows deployer, and Polymythcal publication release",
   "notes": [
-    "Final PolymythCAL pre-deploy hardening based on Audit 18.",
-    "Aligned Netlify, local development, and GitHub Actions on Node.js 24.",
-    "Moved the production build chain into package.json and made Netlify call npm run build.",
-    "Pinned the sole production dependency exactly and verified its lockfile integrity record.",
-    "Added multi-platform clean-build CI, scheduled dependency health checks, and Dependabot configuration.",
-    "Added a structured native VoiceOver and NVDA sign-off issue template while retaining the complete manual protocol.",
-    "Made browser audit scripts portable across local Chromium and Playwright-managed Chromium installations.",
-    "Updated release and PolymythCAL build metadata to the current 839-event corpus and current audit counts.",
-    "Preserved the privacy cleanup, lightweight calendar shell, saved searches, bilingual filters, feeds, forms, event pages, aliases, and ICS files."
+    "Audit 21 validates one end-to-end deployment contract instead of separate incompatible package assumptions.",
+    "The main calendar and all eleven writing and academic entry pages now use the same clear multi-select interface and canonical event corpus.",
+    "Event counts, dependency checks, build manifests, and release verification are data-driven so legitimate future harvests do not fail on stale hard-coded totals.",
+    "The Polymythcal publication pipeline supports both the current client shell and legacy fallback pages, rebuilds stable event pages and ICS files, updates feeds and manifests, and regenerates the public deploy surface.",
+    "Generated public files remain safe for the Windows deployer package while Netlify generates the same public surface from source. Git hygiene is verified and repaired separately.",
+    "Native VoiceOver and NVDA sign-off remains an explicit platform test with a recorded protocol rather than an automated claim."
   ]
 }

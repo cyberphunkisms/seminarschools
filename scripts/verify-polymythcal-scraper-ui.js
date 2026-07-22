@@ -32,12 +32,13 @@ for (const needle of ['function eventMatchesSearch','function matchesFilters','e
 if (main.includes('Leads needing details') || main.includes('watchlistPanel')) problems.push('main Polymythcal should keep qualification leads out of the public results interface');
 if (main.includes('data-focus="deadlines"')) problems.push('main Polymythcal must not restore the ambiguous Deadlines shortcut');
 
-// Dedicated shortcut pages retain their richer legacy source/watchlist context.
+// Dedicated entry pages use the same clear multi-select client shell and route-specific corpus restriction.
 const dedicated = ['writingclub','writingkids','writingjuniors','writingteens','writinggrads','university','philosophy','humanities','cfps','lectures','fellowships'];
 for (const route of dedicated) {
   const rel = `${route}/index.html`;
   const page = read(rel);
-  for (const needle of ['calendarSearch','quickFocusNav','watchlistPanel','Leads needing details','watchlist-fallback','fetchWatchlistWithFallback','getFilteredLeads','matchesSearch','focusMatches','topic-tag','Source-confirmed leads stay here until time and place are confirmed','Pick a filter']) if (!page.includes(needle)) problems.push(`${rel} must keep ${needle}`);
+  for (const needle of [`data-pm-route="${route}"`,'id="pmSearch"','id="pmFilterDrawer"','id="pmEventList"','/js/polymythcal-revamp.js']) if (!page.includes(needle)) problems.push(`${rel} must keep ${needle}`);
+  for (const forbidden of ['quickFocusNav','watchlistPanel','events-fallback','calendarSearch','data-focus="deadlines"']) if (page.includes(forbidden)) problems.push(`${rel} must not restore legacy control ${forbidden}`);
 }
 
 const canonical = readJson('polymythseminars/events.json');
@@ -53,4 +54,4 @@ if (canonical) {
 if (!fs.existsSync(path.join(ROOT, 'polymythseminars/watchlist.json'))) problems.push('public watchlist compatibility file is missing');
 if (main.includes('Thank You Ma’am Teaching Activities as a static collection page')) problems.push('polymythseminars/index.html leaked unrelated non-front-facing resource language.');
 if (problems.length) { console.error('POLYMYTHCAL SCRAPER/UI GUARD FAILED\n- ' + problems.join('\n- ')); process.exit(1); }
-console.log('POLYMYTHCAL SCRAPER/UI OK — source recall, qualified uncertainty, clear main facets, and dedicated lead context are guarded.');
+console.log('POLYMYTHCAL SCRAPER/UI OK — source recall, qualified uncertainty, clear shared facets, route-specific entry pages, and private lead separation are guarded.');

@@ -17,7 +17,7 @@
     {
       "name": "page is lightweight",
       "passed": true,
-      "detail": "25851 bytes"
+      "detail": "26154 bytes"
     },
     {
       "name": "source and deploy page match",
@@ -80,7 +80,7 @@
       "detail": ""
     },
     {
-      "name": "canonical event count preserved",
+      "name": "canonical event count matches declared totals",
       "passed": true,
       "detail": "839"
     },

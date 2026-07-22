@@ -92,8 +92,9 @@ requireTrue(tree.includes('href="/reviews/"'), 'visible sitemap omits reviews');
 const llms = read(path.join(ROOT, 'llms.txt'));
 requireTrue(llms.includes('https://seminarschools.com/reviews/'), 'llms.txt omits reviews');
 
+const release = JSON.parse(read(path.join(ROOT, 'RELEASE_MANIFEST.json')));
 const report = {
-  generated_at: new Date().toISOString(),
+  generated_at: release.generated_at || '1970-01-01T00:00:00Z',
   status: failures.length ? 'failed' : 'passed',
   source_html_files: sourceHtml.length,
   public_html_files: publicHtml.length,

@@ -24,7 +24,7 @@
 - PASS · Device-local saved event state persists · 4.1.2 · `["research-f7322782aec1"]`
 - PASS · Saved listings open as a labelled modal dialog · 2.4.3, 4.1.2 · `"pmSavedTitle"`
 - PASS · Save-search control becomes available for a meaningful view · 3.2.2 · `true`
-- PASS · Device-local saved search preserves URL state · 3.2.3, 4.1.2 · `[{"id": "blank?q=philosophy&places=montreal%2Ctoronto-gta", "href": "blank?q=philosophy&places=montreal%2Ctoronto-gta", "label": "“philosophy” + Toronto and GTA + Montréal and West Island", "savedAt": "2026-07-22T04:58:57.664Z"}]`
+- PASS · Device-local saved search preserves URL state · 3.2.3, 4.1.2 · `[{"id": "blank?q=philosophy&places=montreal%2Ctoronto-gta", "href": "blank?q=philosophy&places=montreal%2Ctoronto-gta", "label": "“philosophy” + Toronto and GTA + Montréal and West Island", "savedAt": "2026-07-22T14:30:00-04:00"}]`
 - PASS · Share-view control exposes the current URL state · 3.2.3 · `"https://seminarschools.com/blank?q=philosophy&places=montreal%2Ctoronto-gta"`
 - PASS · Desktop calendar view exposes a six-week grid · 1.3.1 · `42`
 - PASS · View toggle exposes its pressed state · 4.1.2 · `"true"`
@@ -45,7 +45,7 @@
 - PASS · Correction fields have programmatic labels · 1.3.1, 3.3.2 · `[]`
 - PASS · Correction form exposes the stable-listing URL field · 3.3.2 · `1`
 - PASS · Correction form reflows at 320 CSS pixels · 1.4.10 · `[320, 320]`
-- PASS · Stable event page has source, calendar, and correction actions · 2.4.4 · `["Official source · Source officielle ↗", "Add to calendar · Ajouter au calendrier", "Correct this listing · Corriger cette fiche"]`
+- PASS · Stable event page has source, calendar, and correction actions · 2.4.4 · `["Official or institutional source · Source officielle ou institutionnelle ↗", "Add to calendar · Ajouter au calendrier", "Correct this listing · Corriger cette fiche"]`
 - PASS · Stable event page has one main landmark and H1 · 1.3.1, 2.4.6 · `{"duplicates": [], "unlabeled": [], "unnamedButtons": 0, "unnamedLinks": 0, "jumps": [], "skipTarget": true, "mainCount": 1, "h1Count": 1, "lang": "en-CA"}`
 - PASS · Stable event page reflows at 320 CSS pixels · 1.4.10 · `[320, 320]`
 - PASS · Browser run completed without JavaScript errors · 4.1.1 · `[]`

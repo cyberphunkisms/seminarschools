@@ -1,7 +1,7 @@
 {
   "name": "seminar-schools-leizu-pipeline",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Secure Leizu intake, payment, booking, and confirmation pipeline.",
   "scripts": {
     "verify:payments": "node scripts/verify-payments.js",
@@ -72,7 +72,7 @@
     "query:meaninglib": "node scripts/query-meaninglib.js",
     "start:meaninglib-dashboard": "node scripts/meaninglib-dashboard-server.js",
     "verify:meaninglib-dashboard": "node scripts/verify-meaninglib-dashboard.js",
-    "sync:meaninglib-hf": "python scripts/sync-meaninglib-hf.py",
+    "sync:meaninglib-hf": "node scripts/run-python.js scripts/sync-meaninglib-hf.py",
     "verify:ml-stop-psychologism": "node scripts/verify-ml-stop-psychologism.js",
     "verify:ml-ai-prose-tells": "node scripts/verify-ml-ai-prose-tells.js",
     "verify:ml-antibacktracking": "node scripts/verify-ml-antibacktracking.js",
@@ -113,17 +113,24 @@
     "verify:audit11": "node scripts/verify-audit11-website-decisions.js",
     "verify:about-page": "node scripts/verify-main-page.js",
     "verify:audit12": "node scripts/verify-audit12-mobile-web-hybrid.js",
-    "verify:polymythcal-truth": "python3 scripts/validate-polymythcal.py && node scripts/verify-polymythcal-audit13.js",
-    "test:polymythcal-adapters": "python3 -m unittest scripts/test_polymythcal_adapters.py",
-    "test:polymythcal-lifecycle": "python3 -m unittest scripts/test_polymythcal_lifecycle.py",
-    "build:polymythcal": "python3 scripts/finalize-polymythcal-publication.py",
+    "verify:polymythcal-truth": "node scripts/run-python.js scripts/validate-polymythcal.py && node scripts/verify-polymythcal-audit13.js",
+    "test:polymythcal-adapters": "node scripts/run-python.js -m unittest scripts/test_polymythcal_adapters.py",
+    "test:polymythcal-lifecycle": "node scripts/run-python.js -m unittest scripts/test_polymythcal_lifecycle.py",
+    "build:polymythcal": "node scripts/run-python.js scripts/finalize-polymythcal-publication.py",
     "verify:polymythcal-audit14": "node scripts/verify-polymythcal-audit14.js",
-    "audit:polymythcal-wcag22": "python3 scripts/audit-polymythcal-wcag22.py",
+    "audit:polymythcal-wcag22": "node scripts/run-python.js scripts/audit-polymythcal-wcag22.py",
     "verify:polymythcal-complete": "npm run test:polymythcal-adapters && npm run test:polymythcal-lifecycle && npm run build:polymythcal && npm run audit:polymythcal-wcag22 && npm run verify:polymythcal-audit14",
     "verify:polymyth-entry-points": "node scripts/verify-polymyth-entry-points.js",
     "verify:polymythcal-build-efficiency": "node scripts/verify-polymythcal-build-efficiency.js",
     "build": "node scripts/build-search-pages.js && node scripts/build-writing-shortcuts.js && node scripts/build-academic-shortcuts.js && node scripts/apply-sitewide-type-zoom-link.js && node scripts/apply-type-floor.js && node scripts/build-public-deploy.js && node scripts/verify-polymythcal-build-efficiency.js",
-    "verify:predeploy-automation": "node scripts/verify-predeploy-automation.js"
+    "verify:predeploy-automation": "node scripts/verify-predeploy-automation.js",
+    "verify:repository-hygiene": "node scripts/verify-repository-hygiene.js",
+    "repair:repository-hygiene": "node scripts/repair-repository-hygiene.js",
+    "audit:polymythcal-interactivity": "node scripts/run-python.js scripts/audit-polymythcal-interactivity-design.py",
+    "verify:dependency-health": "node scripts/verify-dependency-health.js",
+    "verify:netlify-ignore": "node scripts/verify-netlify-ignore-build.js",
+    "update:polymythcal-manifest": "node scripts/update-polymythcal-build-manifest.js",
+    "audit:polymythcal-entry-pages": "node scripts/run-python.js scripts/audit-polymythcal-entry-pages.py"
   },
   "dependencies": {
     "@netlify/blobs": "10.1.0"

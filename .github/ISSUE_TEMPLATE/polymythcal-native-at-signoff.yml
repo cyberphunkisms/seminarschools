@@ -19,7 +19,7 @@ body:
     id: release
     attributes:
       label: Release ID or commit
-      placeholder: 2026-07-22-polymythcal-audit19-final
+      placeholder: 2026-07-22-polymythcal-audit21-final
     validations:
       required: true
   - type: input

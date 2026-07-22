@@ -1,66 +1,18 @@
 #!/usr/bin/env node
 'use strict';
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.resolve(__dirname, '..');
-const read = rel => fs.readFileSync(path.join(ROOT, rel), 'utf8');
-const json = rel => JSON.parse(read(rel));
-const exists = rel => fs.existsSync(path.join(ROOT, rel));
-const failures = [];
-const check = (ok, msg) => { if (!ok) failures.push(msg); };
-const release = '2026-07-22-polymythcal-audit19-final';
-const releaseId = read('RELEASE_ID.txt').trim();
-const releaseManifest = json('RELEASE_MANIFEST.json');
-const buildManifest = json('data/polymythcal-build-manifest.json');
-check(releaseId === release, `release ID mismatch: ${releaseId}`);
-check(releaseManifest.release_id === release, `release manifest mismatch: ${releaseManifest.release_id}`);
-check(buildManifest.build_id === 'audit19-final-predeploy-2026-07-22', `PolymythCAL build manifest is stale: ${buildManifest.build_id}`);
-check(buildManifest.record_count === 839, `build manifest event count is ${buildManifest.record_count}`);
-check(buildManifest.full_repository_verifier_checks === 91, 'build manifest full verifier count is not 91');
-const pkg = json('package.json');
-const lock = json('package-lock.json');
-check(pkg.engines && pkg.engines.node === '>=24 <25', 'package Node engine is not Node 24');
-check(pkg.packageManager === 'npm@11', 'package manager declaration is not npm@11');
-check(read('.nvmrc').trim() === '24', '.nvmrc is not 24');
-const expectedBuildParts = [
-  'node scripts/build-search-pages.js',
-  'node scripts/build-writing-shortcuts.js',
-  'node scripts/build-academic-shortcuts.js',
-  'node scripts/apply-sitewide-type-zoom-link.js',
-  'node scripts/apply-type-floor.js',
-  'node scripts/build-public-deploy.js',
-  'node scripts/verify-polymythcal-build-efficiency.js'
-];
-check(typeof pkg.scripts?.build === 'string', 'package build script is missing');
-for (const part of expectedBuildParts) check(pkg.scripts.build.includes(part), `package build script omits ${part}`);
-const netlify = read('netlify.toml');
-check(/command\s*=\s*"npm run build"/.test(netlify), 'Netlify does not call npm run build');
-check(/NODE_VERSION\s*=\s*"24"/.test(netlify), 'Netlify Node version is not 24');
-check(/publish\s*=\s*"public"/.test(netlify), 'Netlify publish directory is not public');
-check(pkg.dependencies?.['@netlify/blobs'] === '10.1.0', 'production dependency is not exactly pinned');
-check(lock.packages?.['']?.dependencies?.['@netlify/blobs'] === '10.1.0', 'lockfile root dependency is not exact');
-const dep = lock.packages?.['node_modules/@netlify/blobs'];
-check(dep?.version === '10.1.0' && /^sha512-/.test(dep?.integrity || ''), 'locked dependency version or integrity is invalid');
-for (const rel of ['.github/dependabot.yml','.github/workflows/dependency-health.yml','.github/workflows/predeploy.yml','.github/ISSUE_TEMPLATE/polymythcal-native-at-signoff.yml','docs/POLYMYTHCAL_SCREEN_READER_TEST_PROTOCOL.md']) check(exists(rel), `${rel} is missing`);
-const predeploy = read('.github/workflows/predeploy.yml');
-for (const os of ['ubuntu-latest','windows-latest','macos-latest']) check(predeploy.includes(os), `predeploy matrix omits ${os}`);
-for (const cmd of ['npm run build','npm run verify:all','audit-polymythcal-interactivity-design.py','audit-polymythcal-wcag22.py']) check(predeploy.includes(cmd), `predeploy workflow omits ${cmd}`);
-const dependencyWorkflow = read('.github/workflows/dependency-health.yml');
-check(dependencyWorkflow.includes('npm audit --omit=dev'), 'dependency workflow lacks production npm audit');
-check(dependencyWorkflow.includes('verify-dependency-health.js'), 'dependency workflow lacks lockfile contract verification');
-const protocol = read('docs/POLYMYTHCAL_SCREEN_READER_TEST_PROTOCOL.md');
-check(protocol.includes('polymythcal-native-at-signoff.yml'), 'native AT protocol lacks release sign-off handoff');
-const interactionAudit = read('scripts/audit-polymythcal-interactivity-design.py');
-check(interactionAudit.includes('polymythcal-audit19'), 'interaction audit output path is stale');
-check(interactionAudit.includes('resolve_chromium_path'), 'interaction audit lacks portable Chromium resolution');
-const wcagAudit = read('scripts/audit-polymythcal-wcag22.py');
-check(wcagAudit.includes('resolve_chromium_path'), 'WCAG audit lacks portable Chromium resolution');
-const packager = read('scripts/package-netlify-source.py');
-check(packager.includes('FIXED_TIME = (2026, 7, 22'), 'source package timestamp is stale');
-check(packager.includes('"polymythcal-audit19"'), 'source package does not exclude Audit 19 screenshots');
-if (failures.length) {
-  console.error('PRE-DEPLOY AUTOMATION CONTRACT FAILED');
-  failures.forEach(x => console.error(' - ' + x));
-  process.exit(1);
-}
-console.log('PRE-DEPLOY AUTOMATION CONTRACT PASSED — release metadata, Node 24, one canonical build command, exact dependency lock, multi-platform CI, advisory checks, portable browser audits, native AT handoff, and source packaging are aligned.');
+const fs=require('fs');const path=require('path');const ROOT=path.resolve(__dirname,'..');
+const read=r=>fs.readFileSync(path.join(ROOT,r),'utf8');const json=r=>JSON.parse(read(r));const exists=r=>fs.existsSync(path.join(ROOT,r));const failures=[];const check=(ok,msg)=>{if(!ok)failures.push(msg);};
+const releaseId=read('RELEASE_ID.txt').trim();const release=json('RELEASE_MANIFEST.json');const manifest=json('data/polymythcal-build-manifest.json');const payload=json('polymythseminars/events.json');const events=payload.events||[];
+check(release.release_id===releaseId,'release manifest and release ID disagree');check(manifest.release_id===releaseId&&manifest.interface_release===releaseId,'Polymythcal build manifest release is stale');check(manifest.record_count===events.length&&payload.count===events.length&&payload._total_events===events.length,'event counts are inconsistent');
+const pkg=json('package.json');const lock=json('package-lock.json');check(pkg.engines?.node==='>=24 <25','package Node engine is not Node 24');check(pkg.packageManager==='npm@11','package manager is not npm 11');check(read('.nvmrc').trim()==='24','.nvmrc is not Node 24');
+const canonical='node scripts/build-search-pages.js && node scripts/build-writing-shortcuts.js && node scripts/build-academic-shortcuts.js && node scripts/apply-sitewide-type-zoom-link.js && node scripts/apply-type-floor.js && node scripts/build-public-deploy.js && node scripts/verify-polymythcal-build-efficiency.js';check(pkg.scripts?.build===canonical,'production build command differs from the audited canonical command');
+for(const name of ['verify:dependency-health','verify:netlify-ignore','verify:repository-hygiene','repair:repository-hygiene','build:polymythcal','test:polymythcal-adapters','test:polymythcal-lifecycle','audit:polymythcal-entry-pages'])check(Boolean(pkg.scripts?.[name]),`package script ${name} is missing`);
+const dep=pkg.dependencies?.['@netlify/blobs'];check(/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(dep||''),'production dependency is not exactly pinned');check(lock.packages?.['']?.dependencies?.['@netlify/blobs']===dep,'lockfile root dependency differs from package.json');check(lock.packages?.['node_modules/@netlify/blobs']?.version===dep,'locked dependency version differs from package.json');check(/^sha512-/.test(lock.packages?.['node_modules/@netlify/blobs']?.integrity||''),'locked dependency lacks SHA-512 integrity');
+const netlify=read('netlify.toml');check(/command\s*=\s*"npm run build"/.test(netlify),'Netlify does not call npm run build');check(/NODE_VERSION\s*=\s*"24"/.test(netlify),'Netlify Node version is not 24');check(/publish\s*=\s*"public"/.test(netlify),'Netlify publish directory is not public');check(netlify.includes('node ./scripts/netlify-ignore-build.js'),'Netlify ignore command is not the tested Node script');
+for(const rel of ['.github/dependabot.yml','.github/workflows/dependency-health.yml','.github/workflows/predeploy.yml','.github/ISSUE_TEMPLATE/polymythcal-native-at-signoff.yml','docs/POLYMYTHCAL_SCREEN_READER_TEST_PROTOCOL.md','scripts/netlify-ignore-build.js','scripts/run-python.js','scripts/audit-polymythcal-entry-pages.py','REPAIR_PUBLIC_GIT_TRACKING_ONCE.bat'])check(exists(rel),`${rel} is missing`);
+const dependabot=read('.github/dependabot.yml');check(dependabot.includes('npm-maintenance:'),'Dependabot npm updates are not grouped');check(dependabot.includes('action-maintenance:'),'Dependabot action updates are not grouped');
+const workflows=fs.readdirSync(path.join(ROOT,'.github/workflows')).filter(x=>/\.ya?ml$/.test(x)).map(x=>read(`.github/workflows/${x}`)).join('\n');check(!workflows.includes('actions/checkout@v5'),'workflow still uses checkout v5');check(!workflows.includes('actions/upload-artifact@v6'),'workflow still uses upload-artifact v6');check(workflows.includes('actions/checkout@v6'),'workflow lacks checkout v6');check(workflows.includes('actions/upload-artifact@v7'),'workflow lacks upload-artifact v7');
+const predeploy=read('.github/workflows/predeploy.yml');for(const os of ['ubuntu-latest','windows-latest','macos-latest'])check(predeploy.includes(os),`predeploy matrix omits ${os}`);for(const cmd of ['npm run build','npm run verify:predeploy-automation','npm run test:polymythcal-adapters','npm run test:polymythcal-lifecycle','python scripts/audit-polymythcal-entry-pages.py'])check(predeploy.includes(cmd),`predeploy matrix omits ${cmd}`);check(predeploy.includes('tracked-public-regression'),'predeploy lacks tracked-public regression');check(predeploy.includes('full-audit'),'predeploy lacks full audit');
+const routes=['writingclub','writingkids','writingjuniors','writingteens','writinggrads','university','philosophy','humanities','cfps','lectures','fellowships'];for(const slug of routes){const page=read(`${slug}/index.html`);check(page.includes(`data-pm-route="${slug}"`)&&page.includes('id="pmEventList"'),`${slug} does not use the unified route shell`);}
+for(const rel of ['scripts/package-netlify-source.py','scripts/package-deployer-compatible.py']){const text=read(rel);check(text.includes('RELEASE_MANIFEST.json'),`${rel} does not derive metadata from the release manifest`);check(!text.includes('FIXED_TIME = (2026'),`${rel} still hard-codes a release timestamp`);}
+if(failures.length){console.error('PRE-DEPLOY AUTOMATION CONTRACT FAILED');failures.forEach(x=>console.error(' - '+x));process.exit(1);}console.log(`PRE-DEPLOY AUTOMATION CONTRACT PASSED — release ${releaseId}, ${events.length} events, one canonical build, dynamic dependency lock validation, current Actions, cross-platform Python and Node checks, unified entry pages, and both deployment formats are aligned.`);

@@ -42,11 +42,30 @@
   --accent: var(--accent-light);
   --accent-rgb: 139,94,60;
   --bg: #F1ECDC;
+  --card: #FAF6EA;
+  --card-hover: #FFFDF6;
+  --gold: #765F1F;
+  --gold-soft: rgba(118,95,31,0.10);
+  --neutral: #687267;
   --geo-density: 0.18;
   --geo2-density: 0.10;
 }
-
-
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --card: #2A2018;
+    --card-hover: #342820;
+    --gold: #D2B86B;
+    --gold-soft: rgba(210,184,107,0.12);
+    --neutral: #9BAB9A;
+  }
+}
+:root.dark,:root[data-theme="dark"] {
+  --card: #2A2018;
+  --card-hover: #342820;
+  --gold: #D2B86B;
+  --gold-soft: rgba(210,184,107,0.12);
+  --neutral: #9BAB9A;
+}
 
 body {
   background: var(--bg);
