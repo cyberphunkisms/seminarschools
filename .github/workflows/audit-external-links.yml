@@ -23,7 +23,7 @@ jobs:
         run: node scripts/audit-external-links-live.js
       - name: Upload report
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: external-link-live-report
           path: scripts/reports/external-link-live-report.json

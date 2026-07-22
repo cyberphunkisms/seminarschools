@@ -55,7 +55,7 @@ jobs:
           exit "$status"
       - name: Upload advisory evidence
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: npm-audit-report
           path: npm-audit.json

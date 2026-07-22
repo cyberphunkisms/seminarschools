@@ -74,7 +74,7 @@ jobs:
         run: python scripts/audit-polymythcal-wcag22.py
       - name: Upload audit evidence
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: polymythcal-predeploy-evidence
           path: |
