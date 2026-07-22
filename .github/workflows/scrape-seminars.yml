@@ -57,7 +57,7 @@ jobs:
           npm run verify:polymythcal-audit14
       - name: Create publication pull request
         if: success()
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: automation/polymythcal-${{ github.workflow }}
