@@ -109,7 +109,7 @@
 
 /* ============================================================
  * LETTER SIZE — persisted font scaling. Added 2026-06-04 per
- * Kira UI review. Hooks: [data-fz="up" | "down" | "reset"].
+ * UI review. Hooks: [data-fz="up" | "down" | "reset"].
  * Scales the html base size through --font-scale (theme.css
  * applies the calc) and persists to localStorage. Uses event
  * delegation and its own data hooks, so it never collides with

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * Regression guard for the static, non-JavaScript search surface.
- * It verifies that catalog entries, calendar records, and methodology sections
- * are present in served HTML before browser scripts run.
+ * Regression guard for searchable public surfaces.
+ * Catalog and methodology indexes remain server-rendered. Polymythcal uses a
+ * lightweight client shell backed by a public JSON index and stable event pages.
  */
 'use strict';
 const fs = require('fs');
@@ -31,8 +31,16 @@ function main(){
   const events=JSON.parse(read('polymythseminars/events.json')).events||[];
   const staticEvents=(calendar.match(/<!-- SS_STATIC_EVENTS_START -->([\s\S]*?)<!-- SS_STATIC_EVENTS_END -->/)||[])[1]||'';
   const eventCards=count(/<article class="event"/g,staticEvents);
-  if(!calendar.includes('data-ssr-events="true"')) fail('calendar: missing static event marker');
-  if(eventCards!==manifest.upcomingEvents) fail(`calendar: expected ${manifest.upcomingEvents} server-delivered event cards, found ${eventCards}`);
+  const clientCalendar=/\/js\/polymythcal-revamp\.js/.test(calendar)&&/id="pmEventList"/.test(calendar);
+  if(calendar.includes('data-ssr-events="true"')) {
+    if(eventCards!==manifest.upcomingEvents) fail(`calendar: expected ${manifest.upcomingEvents} server-delivered event cards, found ${eventCards}`);
+  } else {
+    if(!clientCalendar) fail('calendar: missing client calendar controller and result mount');
+    if(!/<noscript>[\s\S]*RSS and calendar feeds[\s\S]*site map/i.test(calendar)) fail('calendar: client shell lacks a useful no-script route');
+    if(events.length!==839) fail(`calendar: expected 839 public data records, found ${events.length}`);
+    const missingStable=events.filter(event=>!fs.existsSync(path.join(ROOT,'polymythseminars','events',event.id,'index.html')));
+    if(missingStable.length) fail(`calendar: ${missingStable.length} stable event pages are missing`);
+  }
   if(/<div class="count-line" id="countLine">Loading events/i.test(calendar)) fail('calendar: initial HTML still says Loading events');
 
   const method=read('polymyth/methodologylist/index.html');
@@ -57,6 +65,6 @@ function main(){
   if(/Disallow:\s*\/teacherresources\//i.test(robots)) fail('robots: teacher resource routes are blocked');
 
   if(failures.length){ console.error('SEARCH SURFACE CHECK FAILED'); failures.forEach(x=>console.error(' - '+x)); process.exit(1); }
-  console.log(`SEARCH SURFACE CHECK PASSED — ${expectedResources} catalog resources, ${eventCards} current event cards, ${manifest.methodologySections} methodology sections, ${urls.length} sitemap URLs.`);
+  console.log(`SEARCH SURFACE CHECK PASSED — ${expectedResources} catalog resources, ${events.length} public calendar records with stable pages, ${manifest.methodologySections} methodology sections, ${urls.length} sitemap URLs.`);
 }
 try{main()}catch(err){console.error('SEARCH SURFACE CHECK FAILED:',err.stack||err.message);process.exit(1)}

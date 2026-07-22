@@ -42,7 +42,7 @@
   --font-multilingual: var(--font-body);
 
   /* Canonical content width — one reading measure across the site.
-     Added 2026-06-04 per Kira UI review; page widths ranged 600 to 1400px. */
+     Added 2026-06-04 per UI review; page widths ranged 600 to 1400px. */
   --content-width: 768px;
 
   /* Letter-size scale, driven by the A-/A+ controls in /js/theme.js. */
@@ -229,7 +229,7 @@ body {
 
 
 /* ============================================================
- * TYPE CANON ALIASES — added 2026-06-04 per Kira UI review.
+ * TYPE CANON ALIASES — added 2026-06-04 per UI review.
  * Pages historically used --display / --serif / --body / --sans /
  * --mono with divergent values (Fraunces, Newsreader, EB Garamond,
  * Playfair, Spectral). Map every alias to the one canon so the

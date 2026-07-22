@@ -119,7 +119,8 @@
     "build:polymythcal": "python3 scripts/finalize-polymythcal-publication.py",
     "verify:polymythcal-audit14": "node scripts/verify-polymythcal-audit14.js",
     "audit:polymythcal-wcag22": "python3 scripts/audit-polymythcal-wcag22.py",
-    "verify:polymythcal-complete": "npm run test:polymythcal-adapters && npm run test:polymythcal-lifecycle && npm run build:polymythcal && npm run audit:polymythcal-wcag22 && npm run verify:polymythcal-audit14"
+    "verify:polymythcal-complete": "npm run test:polymythcal-adapters && npm run test:polymythcal-lifecycle && npm run build:polymythcal && npm run audit:polymythcal-wcag22 && npm run verify:polymythcal-audit14",
+    "verify:polymyth-entry-points": "node scripts/verify-polymyth-entry-points.js"
   },
   "dependencies": {
     "@netlify/blobs": "^10.1.0"

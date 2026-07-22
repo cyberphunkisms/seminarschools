@@ -15,6 +15,7 @@ const latestMd = path.join(outDir, 'latest_access_pack.md');
 const latestJson = path.join(outDir, 'latest_access_pack.json');
 const latestReport = path.join(reportsDir, 'latest_access_pack_report.md');
 const activationMd = path.join(outDir, 'MEPHISTODATA_ACTIVATION.md');
+const publicActivationMd = path.join(root, 'polymyth', 'mephistodata-activation.md');
 
 const STOP = new Set(['the','a','an','and','or','but','if','then','else','of','to','in','on','for','with','by','as','is','are','was','were','be','being','been','this','that','these','those','it','its','into','from','at','about','not','no','yes','do','does','did','can','could','should','would','will','may','might','must','than','when','where','what','which','who','whom','whose','how','why','you','your','we','our','they','their','them','he','she','his','her','i','me','my','ours','also','all','any','each','one','two','three','first','second','third','via','per','within','without','over','under','up','down','out','more','less','same','other','new','old','entry','title','body','id','role','link','links','source','json','jsonl','index','file','files','route','routes','rule','rules','https','http','www','com']);
 
@@ -270,7 +271,10 @@ function main(){
   };
   fs.writeFileSync(latestMd, markdown, 'utf8');
   fs.writeFileSync(latestJson, JSON.stringify(json, null, 2), 'utf8');
-  fs.writeFileSync(activationMd, renderActivation(), 'utf8');
+  const activationText = renderActivation();
+  fs.writeFileSync(activationMd, activationText, 'utf8');
+  ensureDir(path.dirname(publicActivationMd));
+  fs.writeFileSync(publicActivationMd, activationText, 'utf8');
   const report = [
     '# Meaninglib AI Access Pack report', '',
     `Generated: ${generated}`,
@@ -289,6 +293,7 @@ function main(){
   console.log(`Wrote: ${rel(latestMd)}`);
   console.log(`Wrote: ${rel(latestJson)}`);
   console.log(`Wrote: ${rel(activationMd)}`);
+  console.log(`Published: ${rel(publicActivationMd)}`);
   console.log(`Report: ${rel(latestReport)}`);
 }
 if(require.main === module) main();

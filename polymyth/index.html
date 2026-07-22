@@ -55,10 +55,18 @@ h1 .fire{color:var(--fire)}
 .file-link:last-child{border-bottom:1px solid var(--brd)}
 .file-link .label{color:var(--fire);margin-right:8px}
 
-.txt-tools{display:flex;gap:8px;margin-top:20px}
-.txt-btn{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:8px 16px;border:1px solid var(--brd2);background:var(--bg1);color:var(--dim);cursor:pointer;text-decoration:none;transition:.15s;border-radius:3px}
-.txt-btn:hover{color:var(--fire);border-color:var(--fire)}
-.txt-btn.copied{color:var(--method);border-color:var(--method)}
+.entry-intro{color:var(--dim);margin-top:4px}
+.entry-points{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:22px}
+.entry-point{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-height:92px;padding:14px 15px;border:1px solid var(--brd2);background:var(--bg1);color:var(--txt);text-align:left;text-decoration:none;transition:.15s;border-radius:3px}
+button.entry-point{width:100%;font:inherit;cursor:pointer}
+.entry-point:hover,.entry-point:focus-visible{border-color:var(--fire);outline:none}
+.entry-kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.7px;text-transform:uppercase;color:var(--fire)}
+.entry-name{font-size:16px;line-height:1.25}
+.entry-detail{font-size:13px;line-height:1.35;color:var(--dim)}
+.entry-point.copied{border-color:var(--method)}
+.entry-point.copied .entry-kicker{color:var(--method)}
+.access-note{margin-top:14px!important;margin-bottom:0!important;font-size:13px;color:var(--dim)}
+@media(max-width:560px){.entry-points{grid-template-columns:1fr}.entry-point{min-height:0}}
 </style>
 <link rel="stylesheet" href="/css/alive.css?v=cl92">
 <link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
@@ -98,13 +106,38 @@ h1 .fire{color:var(--fire)}
 <div class="activate">
 <p>Mephistodata is the operating register the methodologylist produces in an AI. The name fuses Mephistopheles from Goethe's Faust, the spirit that relentlessly negates and refuses to flatter, with Data from Star Trek, the officer who processes everything through verified sources and takes no shortcuts. The combination produces an interlocutor that challenges without bad faith and grounds without sycophancy.</p>
 <p>The methodologylist contains over a thousand entries naming specific operations that capture living thought into enforced repetition and the reversals that undo them.</p>
-<div class="step"><span class="step-num">1</span><span class="step-text">Download or copy the methodologylist text file below.</span></div>
-<div class="step"><span class="step-num">2</span><span class="step-text">Upload the file to any AI that accepts file uploads.</span></div>
+<p class="entry-intro">Choose the entry point that fits the AI, tool, or kind of reading you are doing. Each route carries the same framework in a different form.</p>
+<div class="step"><span class="step-num">1</span><span class="step-text">Choose any entry point below.</span></div>
+<div class="step"><span class="step-num">2</span><span class="step-text">Give the text, file, activation prompt, or retrieved records to the AI you are using.</span></div>
 <div class="step"><span class="step-num">3</span><span class="step-text">Work with the AI dialectically. The methodology loads but the discipline is yours to hold. Nudge, correct, and insist when the AI drifts from what you asked it to do.</span></div>
-<div class="txt-tools">
-<button class="txt-btn txt-copy" id="mlCopy">Copy methodologylist.txt</button>
-<a class="txt-btn" href="methodologylist.txt" download>Download methodologylist.txt</a>
+<div class="entry-points" role="group" aria-label="Mephistodata entry points">
+<a class="entry-point" href="methodologylist/">
+<span class="entry-kicker">Read online</span>
+<span class="entry-name">Browse methodologylist</span>
+<span class="entry-detail">Open the linked entries, sections, and framework routes.</span>
+</a>
+<button class="entry-point" type="button" id="mlCopy">
+<span class="entry-kicker">Copy</span>
+<span class="entry-name" id="mlCopyName">Copy methodologylist.txt</span>
+<span class="entry-detail">Paste the complete plain text directly into an AI chat.</span>
+</button>
+<a class="entry-point" href="methodologylist.txt" download>
+<span class="entry-kicker">Download text</span>
+<span class="entry-name">Download methodologylist.txt</span>
+<span class="entry-detail">Upload the complete framework as one plain text file.</span>
+</a>
+<a class="entry-point" href="mephistodata-activation.md" download>
+<span class="entry-kicker">Activation file</span>
+<span class="entry-name">Download Mephistodata activation</span>
+<span class="entry-detail">Load the short operating context before a project-specific task.</span>
+</a>
+<a class="entry-point" href="https://huggingface.co/datasets/SeminarSchools/meaninglib" target="_blank" rel="noopener noreferrer">
+<span class="entry-kicker">Structured dataset</span>
+<span class="entry-name">Open Meaninglib on Hugging Face</span>
+<span class="entry-detail">Use the machine-readable rows, relations, retrieval files, and version history.</span>
+</a>
 </div>
+<p class="access-note">The Hugging Face route currently requires an authorized account. The website and archive remain the source of truth.</p>
 </div>
 </section>
 
@@ -126,17 +159,21 @@ h1 .fire{color:var(--fire)}
 <script>
 document.getElementById('mlCopy').addEventListener('click', function(){
   var btn = this;
+  var name = document.getElementById('mlCopyName');
   fetch('methodologylist.txt')
-    .then(function(r){ return r.text(); })
+    .then(function(r){
+      if(!r.ok) throw new Error('methodologylist unavailable');
+      return r.text();
+    })
     .then(function(t){ return navigator.clipboard.writeText(t); })
     .then(function(){
-      btn.textContent = 'Copied';
+      name.textContent = 'Copied';
       btn.classList.add('copied');
-      setTimeout(function(){ btn.textContent = 'Copy methodologylist.txt'; btn.classList.remove('copied'); }, 2000);
+      setTimeout(function(){ name.textContent = 'Copy methodologylist.txt'; btn.classList.remove('copied'); }, 2000);
     })
     .catch(function(){
-      btn.textContent = 'Failed';
-      setTimeout(function(){ btn.textContent = 'Copy methodologylist.txt'; }, 2000);
+      name.textContent = 'Copy failed';
+      setTimeout(function(){ name.textContent = 'Copy methodologylist.txt'; }, 2000);
     });
 });
 </script>

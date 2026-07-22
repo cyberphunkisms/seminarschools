@@ -25,8 +25,16 @@ for (const route of POLY_ROUTES){
   if (!/id="quickGuideCopy"/.test(html) || !/Open a title to reach the official source|Open a title for the official source|Open a title for the stable Polymythcal page/.test(html)) errors.push(`${rel} missing plain-language use guide`);
   if (/onclick="/.test(html)) errors.push(`${rel} contains inline onclick handler`);
   if (/document\.title/.test(html)) errors.push(`${rel} mutates document.title`);
-  if (/scheduleScrollToToday\('auto'\);\s*}\s*}\s*function dispatchRender/.test(html)) errors.push(`${rel} still anchors on every dispatchRender`);
-  if (!/function dispatchRender\(opts\)/.test(html)) errors.push(`${rel} dispatchRender does not preserve scroll state`);
+  if (route === 'polymythseminars') {
+    if (!/polymythcal-revamp\.js/.test(html)) errors.push(`${rel} does not load the external Polymythcal interaction controller`);
+    const appPath=path.join(ROOT,'js','polymythcal-revamp.js');
+    const app=fs.existsSync(appPath)?fs.readFileSync(appPath,'utf8'):'';
+    if (!/function render\(\)/.test(app) || !/writeStateToUrl\(\)/.test(app)) errors.push(`${rel} external controller lacks stable render and URL-state handling`);
+    if (/scrollIntoView\(/.test(app) && !/behavior:\s*["']smooth["']/.test(app)) warnings.push(`${rel} contains a non-smooth programmatic scroll`);
+  } else {
+    if (/scheduleScrollToToday\('auto'\);\s*}\s*}\s*function dispatchRender/.test(html)) errors.push(`${rel} still anchors on every dispatchRender`);
+    if (!/function dispatchRender\(opts\)/.test(html)) errors.push(`${rel} dispatchRender does not preserve scroll state`);
+  }
 }
 const rootFiles = fs.readdirSync(ROOT);
 for (const junk of rootFiles){

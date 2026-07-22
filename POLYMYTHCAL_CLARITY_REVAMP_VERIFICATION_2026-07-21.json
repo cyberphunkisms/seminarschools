@@ -1,0 +1,148 @@
+{
+  "release": "Polymythcal clarity revamp",
+  "date": "2026-07-21",
+  "checks_passed": 28,
+  "checks_total": 28,
+  "results": [
+    {
+      "name": "revamped page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "deploy mirror exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "page is lightweight",
+      "passed": true,
+      "detail": "24912 bytes"
+    },
+    {
+      "name": "source and deploy page match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source and deploy JavaScript match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source and deploy CSS match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "JavaScript syntax",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "old mutually exclusive filter system removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ambiguous Deadlines button removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "attend and apply are independent checkboxes",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "places are multi-select checkboxes",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "topics are multi-select checkboxes",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "time alone uses radios",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "plain language opportunity definition present",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "canonical event count preserved",
+      "passed": true,
+      "detail": "839"
+    },
+    {
+      "name": "all canonical event pages remain",
+      "passed": true,
+      "detail": "missing 0"
+    },
+    {
+      "name": "all deploy event pages remain",
+      "passed": true,
+      "detail": "missing 0"
+    },
+    {
+      "name": "initial client render",
+      "passed": true,
+      "detail": "50"
+    },
+    {
+      "name": "initial result count is populated",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "both content entry points active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "multiple places can coexist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "multiple topics can coexist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "calendar view renders",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "device-local save works",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "320 pixel reflow",
+      "passed": true,
+      "detail": "[320, 320]"
+    },
+    {
+      "name": "browser has no script errors",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "French interface activates",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "French search placeholder",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

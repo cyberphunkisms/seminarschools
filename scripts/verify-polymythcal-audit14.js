@@ -46,8 +46,9 @@ add('Event IDs and identity keys are unique', new Set(events.map(e => e.id)).siz
 
 const main = read('polymythseminars/index.html');
 const features = read('js/polymythcal-features.js');
-const css = read('css/polymythcal-features.css');
-add('Bilingual typo-tolerant search is wired', ['normalizeSearchText', 'BILINGUAL_SEARCH_GROUPS', 'editDistance', 'PM_LANG', 'PM_FR'].every(m => main.includes(m)), {});
+const revamp = read('js/polymythcal-revamp.js');
+const css = read('css/polymythcal-features.css') + read('css/polymythcal-revamp.css');
+add('Bilingual typo-tolerant search is wired', (['normalizeSearchText', 'BILINGUAL_SEARCH_GROUPS', 'editDistance', 'PM_LANG', 'PM_FR'].every(m => main.includes(m))) || (['normalizeText', 'searchSynonyms', 'editDistance', 'translations', 'fr:'].every(m => revamp.includes(m))), {});
 const filterParams = ['q', 'cat', 'age', 'focus', 'view', 'mode', 'lang'];
 add('Filters are URL-backed and shareable', filterParams.every(p => features.includes(`'${p}'`) || features.includes(`"${p}"`)) && /history\.(replaceState|pushState)/.test(features) && /navigator\.share|clipboard/.test(features), {parameters: filterParams});
 const localKeys = ['polymythcal.savedEvents.v1', 'polymythcal.savedSearches.v1'];
@@ -100,8 +101,8 @@ add('Scheduled harvest workflows run adapter, lifecycle, publication, and audit 
   return /test_polymythcal_adapters/.test(w) && /test_polymythcal_lifecycle/.test(w) && /verify:polymythcal-audit14/.test(w);
 }) && mergeScripts.every(p => /finalize-polymythcal-publication/.test(read(p))), {workflows, mergeScripts});
 
-const mainScript = features + main;
-add('Calendar language switch covers generated and static interface text', countOccurrences(mainScript, 'pmT(') >= 20 && /translateStaticCalendarChrome/.test(features) && /label_fr/.test(features), {translationCalls: countOccurrences(mainScript, 'pmT(')});
+const mainScript = features + revamp + main;
+add('Calendar language switch covers generated and static interface text', (countOccurrences(mainScript, 'pmT(') >= 20 && /translateStaticCalendarChrome/.test(features) && /label_fr/.test(features)) || (/function translateStatic\(\)/.test(revamp) && /const translations/.test(revamp) && /staticFrench/.test(revamp) && /hreflang/.test(main)), {translationCalls: countOccurrences(mainScript, 'pmT(')});
 add('Public routes expose English, French, and default alternates', ['polymythseminars/index.html', 'polymythseminars/submit/index.html', 'polymythseminars/correct/index.html', 'polymythseminars/subscribe/index.html'].every(p => {
   const h = read(p).toLowerCase();
   return h.includes('hreflang="en-ca"') && h.includes('hreflang="fr-ca"') && h.includes('hreflang="x-default"');
