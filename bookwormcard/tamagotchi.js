@@ -97,7 +97,50 @@
   var feedingStatusTimer = null;
   var cursorOffsetX = 0;  // -1 to 1, where the cursor is relative to box center
   var cursorOffsetY = 0;
-  var idleCheckInterval = null;
+  var idleCheckTimer = null;
+  var idleLifecycleBound = false;
+  var idleMotionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+
+  function idleMotionAllowed(){
+    return document.documentElement.dataset.motion !== 'calm' && !(idleMotionQuery && idleMotionQuery.matches);
+  }
+
+  function clearIdleCheck(){
+    if(idleCheckTimer) clearTimeout(idleCheckTimer);
+    idleCheckTimer = null;
+  }
+
+  function scheduleIdleCheck(){
+    clearIdleCheck();
+    if(!container || document.hidden || !idleMotionAllowed()) return;
+    idleCheckTimer = setTimeout(function idleTick(){
+      idleCheckTimer = null;
+      checkIdle();
+      scheduleIdleCheck();
+    }, 5000);
+  }
+
+  function syncIdleLifecycle(){
+    document.removeEventListener('mousemove', handleMouseMove);
+    if(container && !document.hidden && idleMotionAllowed()){
+      document.addEventListener('mousemove', handleMouseMove, {passive:true});
+    }
+    scheduleIdleCheck();
+  }
+
+  function bindIdleLifecycle(){
+    if(idleLifecycleBound) return;
+    idleLifecycleBound = true;
+    document.addEventListener('visibilitychange', syncIdleLifecycle);
+    if(idleMotionQuery){
+      if(idleMotionQuery.addEventListener) idleMotionQuery.addEventListener('change', syncIdleLifecycle);
+      else if(idleMotionQuery.addListener) idleMotionQuery.addListener(syncIdleLifecycle);
+    }
+    new MutationObserver(syncIdleLifecycle).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-motion']
+    });
+  }
 
   // ============================================================
   // BUILD DOM — call init() once
@@ -119,11 +162,8 @@
     // Attach listeners. Cursor tracking only — the typing/feeding
     // reaction is no longer driven by per-keystroke events. Feeding
     // fires once per Enter via the external Tamagotchi.reactToFeed call.
-    document.addEventListener('mousemove', handleMouseMove);
-
-    // Idle check tick
-    if(idleCheckInterval) clearInterval(idleCheckInterval);
-    idleCheckInterval = setInterval(checkIdle, 5000);
+    bindIdleLifecycle();
+    syncIdleLifecycle();
 
     render();
     return true;
@@ -131,7 +171,7 @@
 
   function destroy(){
     document.removeEventListener('mousemove', handleMouseMove);
-    if(idleCheckInterval) clearInterval(idleCheckInterval);
+    clearIdleCheck();
     container = null;
   }
 

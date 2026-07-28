@@ -13,9 +13,11 @@ jobs:
   clean-build:
     name: Clean build (${{ matrix.os }})
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        # Ubuntu receives the complete clean build in full-audit below. Keep
+        # this matrix for the two additional operating-system contracts.
+        os: [windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     env:
@@ -26,27 +28,44 @@ jobs:
       - name: Setup Node 24
         uses: actions/setup-node@v6
         with:
-          node-version: "24"
+          node-version: "24.14.0"
           cache: npm
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
-          python-version: "3.12"
-      - name: Install locked dependencies
-        run: npm ci --no-audit --no-fund
+          python-version: "3.12.13"
+          cache: pip
+          cache-dependency-path: requirements-audit.txt
       - name: Install calendar test dependencies
-        run: python -m pip install --disable-pip-version-check beautifulsoup4 python-dateutil jsonschema
+        run: python -m pip install --disable-pip-version-check --requirement requirements-audit.txt
       - name: Test adapters and lifecycle on this operating system
         run: |
           npm run test:polymythcal-adapters
+          npm run test:polymythcal-harvest
           npm run test:polymythcal-lifecycle
+          npm run test:polymythcal-sharding
+          npm run test:polymythcal-audit43
+          npm run test:polymythcal-audit47
+          npm run test:polymythcal-deterministic-before-agent
+          npm run test:polymythcal-occurrence-merge
+          npm run test:polymythcal-festival-merge
+          npm run test:festival-pipeline
       - name: Build exactly as Netlify builds
         run: npm run build
+      - name: Verify Audit 48 calendar clients on this operating system
+        run: npm run verify:audit48-calendar-clients
+      - name: Verify frozen history and Audit 45 translations
+        env:
+          PYTHON_BIN: python
+        run: |
+          npm run verify:frozen-audit43
+          npm run verify:audit45-translations
       - name: Verify release automation contract
         run: npm run verify:predeploy-automation
 
   tracked-public-regression:
     name: Build survives legacy tracked public state
+    needs: clean-build
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
@@ -57,12 +76,10 @@ jobs:
       - name: Setup Node 24
         uses: actions/setup-node@v6
         with:
-          node-version: "24"
+          node-version: "24.14.0"
           cache: npm
-      - name: Install locked dependencies
-        run: npm ci --no-audit --no-fund
       - name: Generate public once
-        run: npm run build
+        run: npm run build:public-deploy
       - name: Reproduce legacy repository state
         shell: bash
         run: |
@@ -72,8 +89,9 @@ jobs:
       - name: Prove production build remains deployable
         run: npm run build
   full-audit:
+    needs: clean-build
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 75
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     steps:
@@ -82,44 +100,53 @@ jobs:
       - name: Setup Node 24
         uses: actions/setup-node@v6
         with:
-          node-version: "24"
+          node-version: "24.14.0"
           cache: npm
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
-          python-version: "3.12"
+          python-version: "3.12.13"
           cache: pip
+          cache-dependency-path: requirements-audit.txt
       - name: Install locked JavaScript dependencies
         run: npm ci --no-audit --no-fund
+      - name: Verify production function dependency resolution
+        run: npm run verify:function-dependencies
       - name: Install audit dependencies
-        run: python -m pip install --disable-pip-version-check beautifulsoup4 requests python-dateutil jsonschema playwright
-      - name: Install Playwright Chromium
-        run: python -m playwright install --with-deps chromium
+        run: python -m pip install --disable-pip-version-check --requirement requirements-audit.txt
       - name: Production build
         run: npm run build
       - name: Full repository verifier
-        run: npm run verify:all
-      - name: Adapter and lifecycle tests
-        run: |
-          python -m unittest scripts/test_polymythcal_adapters.py
-          python -m unittest scripts/test_polymythcal_lifecycle.py
-      - name: Audit 14 structural verifier
-        run: node scripts/verify-polymythcal-audit14.js
-      - name: Interaction and design browser audit
-        run: python scripts/audit-polymythcal-interactivity-design.py
-      - name: Dedicated entry-page browser audit
-        run: python scripts/audit-polymythcal-entry-pages.py
-      - name: WCAG browser audit
-        run: python scripts/audit-polymythcal-wcag22.py
-      - name: Upload audit evidence
+        run: npm run verify:all:built
+      - name: Verify current Audit 48 live-harvest evidence
+        run: npm run verify:audit48-live-harvest:current
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Audit 45 translation browser matrix
+        run: npm run audit:audit45-browser
+      - name: Verify fresh Audit 45 browser evidence
+        run: npm run verify:audit45-current-browser-evidence
+      - name: Upload Audit 45 evidence
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: polymythcal-predeploy-evidence
+          name: audit45-predeploy-translation-evidence
+          retention-days: 14
           path: |
-            data/polymythcal-audit21/**
-            data/polymythcal-audit21/interaction-design-browser-audit.json
-            data/polymythcal-wcag22-browser-audit.json
-            POLYMYTHCAL_WCAG22_AA_AUDIT_2026-07-22.md
+            data/audit43-frozen-sha256.json
+            data/audit42-frozen-sha256.json
+            data/audit45-translation-governance.json
+            data/audit45-browser/**
+            WEBSITE_AUDIT44_FULL_TRANSLATION_REPORT_2026-07-25.md
+            WEBSITE_AUDIT45_FULL_TRANSLATION_IMPLEMENTATION_REPORT_2026-07-25.md
+            WEBSITE_AUDIT48_CALENDAR_CLIENT_INTEROPERABILITY_REPORT_2026-07-26.md
+            WEBSITE_AUDIT48_EXTERNAL_VALIDATION_INTEROPERABILITY_REPORT_2026-07-26.md
+            WEBSITE_AUDIT49_TECHNICAL_EFFICIENCY_RESILIENCE_REPORT_2026-07-26.md
+            AUDIT48_NATIVE_DEVICE_AT_TEST_PROTOCOL_2026-07-26.md
+            AUDIT48_CALENDAR_VENDOR_IMPORT_PROTOCOL_2026-07-26.md
+            .github/ISSUE_TEMPLATE/polymythcal-native-at-signoff.yml
+            data/audit48-browser/**
+            scripts/reports/audit48-*.json
+            scripts/reports/audit49-*.json
             scripts/reports/release-gate-report.json
           if-no-files-found: warn

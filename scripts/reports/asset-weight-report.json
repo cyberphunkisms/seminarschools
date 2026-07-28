@@ -1,206 +1,500 @@
 {
-  "generatedAt": "2026-07-08T23:19:32.432Z",
-  "totalFiles": 1484,
+  "generatedAt": "2026-07-28T21:45:00-04:00",
+  "scope": "public",
+  "totalFiles": 4887,
+  "totalBytes": 127142139,
+  "byExtension": {
+    ".pdf": {
+      "files": 36,
+      "bytes": 39213591
+    },
+    ".json": {
+      "files": 27,
+      "bytes": 13310917
+    },
+    ".html": {
+      "files": 3748,
+      "bytes": 41714783
+    },
+    ".txt": {
+      "files": 47,
+      "bytes": 10040079
+    },
+    ".xlsx": {
+      "files": 3,
+      "bytes": 11059188
+    },
+    ".zip": {
+      "files": 1,
+      "bytes": 1487828
+    },
+    ".jsonl": {
+      "files": 2,
+      "bytes": 521528
+    },
+    ".ics": {
+      "files": 857,
+      "bytes": 2070382
+    },
+    ".xml": {
+      "files": 16,
+      "bytes": 1877690
+    },
+    ".csv": {
+      "files": 8,
+      "bytes": 866270
+    },
+    ".js": {
+      "files": 46,
+      "bytes": 1184472
+    },
+    ".docx": {
+      "files": 3,
+      "bytes": 786100
+    },
+    ".jpg": {
+      "files": 27,
+      "bytes": 1669088
+    },
+    ".png": {
+      "files": 7,
+      "bytes": 371191
+    },
+    ".md": {
+      "files": 17,
+      "bytes": 432669
+    },
+    ".css": {
+      "files": 20,
+      "bytes": 279946
+    },
+    ".woff2": {
+      "files": 11,
+      "bytes": 227768
+    },
+    "[none]": {
+      "files": 2,
+      "bytes": 22466
+    },
+    ".xsl": {
+      "files": 1,
+      "bytes": 3066
+    },
+    ".ico": {
+      "files": 1,
+      "bytes": 1810
+    },
+    ".svg": {
+      "files": 1,
+      "bytes": 546
+    },
+    ".sha256": {
+      "files": 6,
+      "bytes": 761
+    }
+  },
   "largestAssets": [
     {
-      "path": "hf_export/data/all_meaninglib_rows.jsonl",
-      "size": 16454759
+      "path": "polymyth/archive/pre-meaninglib/year-of-the-snakes-source.pdf",
+      "size": 19159263,
+      "extension": ".pdf"
     },
     {
-      "path": "hf_export/data/ml/methodologylist.jsonl",
-      "size": 12116100
-    },
-    {
-      "path": "hf_export/search/meaninglib_search_index.json",
-      "size": 10946133
-    },
-    {
-      "path": "polymyth/methodologylist/index.html",
-      "size": 3828122
-    },
-    {
-      "path": "hf_export/data/ml/sections/methodology.jsonl",
-      "size": 3707897
-    },
-    {
-      "path": "polymyth/methodologylist.txt",
-      "size": 3654446
-    },
-    {
-      "path": "hf_export/data/cc/campaigncodex.jsonl",
-      "size": 2092625
-    },
-    {
-      "path": "bookwormcard/pdf/bookwormcard.pdf",
-      "size": 1994830
-    },
-    {
-      "path": "polymyth/methodologylist/methodology/index.html",
-      "size": 1826428
+      "path": "polymyth/archive/pre-meaninglib/contentinternet-idiomary-source.pdf",
+      "size": 16428085,
+      "extension": ".pdf"
     },
     {
       "path": "polymyth/concordance/concordance-index.json",
-      "size": 1726337
+      "size": 6776761,
+      "extension": ".json"
+    },
+    {
+      "path": "polymyth/methodologylist/index.html",
+      "size": 3989374,
+      "extension": ".html"
+    },
+    {
+      "path": "polymyth/methodologylist.txt",
+      "size": 3798597,
+      "extension": ".txt"
+    },
+    {
+      "path": "polymyth/research/metoo-critical-academic-premise-audit-2026-07-27.xlsx",
+      "size": 3727484,
+      "extension": ".xlsx"
+    },
+    {
+      "path": "polymyth/research/metoo-critical-academic-premise-audit-WITHDRAWN-90-38-1-2026-07-27.xlsx",
+      "size": 3709980,
+      "extension": ".xlsx"
+    },
+    {
+      "path": "polymyth/research/metoo-foundational-dissent-research-audit-2026-07-27.xlsx",
+      "size": 3621724,
+      "extension": ".xlsx"
+    },
+    {
+      "path": "bookwormcard/pdf/bookwormcard.pdf",
+      "size": 1994830,
+      "extension": ".pdf"
+    },
+    {
+      "path": "polymyth/methodologylist/methodology/index.html",
+      "size": 1889020,
+      "extension": ".html"
+    },
+    {
+      "path": "polymythlib/data/polymyth-data.json",
+      "size": 1859586,
+      "extension": ".json"
     },
     {
       "path": "polymyth/methodologylist-methodology.txt",
-      "size": 1713192
-    },
-    {
-      "path": "aa/index.html",
-      "size": 1509786
-    },
-    {
-      "path": "hf_export/data/bb/bookwormburrows.jsonl",
-      "size": 1441045
-    },
-    {
-      "path": "aa/cloud/index.html",
-      "size": 1321615
-    },
-    {
-      "path": "hf_export/data/ml/sections/citation.jsonl",
-      "size": 1096018
-    },
-    {
-      "path": "polymyth/campaigncodex/index.html",
-      "size": 1031487
-    },
-    {
-      "path": "polymyth/campaigncodex.txt",
-      "size": 965580
-    },
-    {
-      "path": "hf_export/data/ml/sections/gorgonification.jsonl",
-      "size": 817930
-    },
-    {
-      "path": "teacherresources/index.html",
-      "size": 776783
-    },
-    {
-      "path": "hf_export/data/mc/modulecanon.jsonl",
-      "size": 770636
-    },
-    {
-      "path": "polymythseminars/index.html",
-      "size": 709367
-    },
-    {
-      "path": "polymyth/bookwormburrows.txt",
-      "size": 666131
-    },
-    {
-      "path": "hf_export/data/ml/sections/coreplus.jsonl",
-      "size": 623927
-    },
-    {
-      "path": "polymyth/bookwormburrows/index.html",
-      "size": 563944
-    },
-    {
-      "path": "data/polymyth-seminar-events.json",
-      "size": 529670
+      "size": 1767975,
+      "extension": ".txt"
     },
     {
       "path": "polymythseminars/events.json",
-      "size": 529670
+      "size": 1660948,
+      "extension": ".json"
+    },
+    {
+      "path": "aa/index.html",
+      "size": 1522049,
+      "extension": ".html"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-all-cv-outputs.zip",
+      "size": 1487828,
+      "extension": ".zip"
+    },
+    {
+      "path": "aa/cloud/index.html",
+      "size": 1331170,
+      "extension": ".html"
+    },
+    {
+      "path": "polymyth/campaigncodex/index.html",
+      "size": 1034225,
+      "extension": ".html"
+    },
+    {
+      "path": "polymyth/campaigncodex.txt",
+      "size": 965598,
+      "extension": ".txt"
+    },
+    {
+      "path": "polymythseminars/browse.json",
+      "size": 854846,
+      "extension": ".json"
+    },
+    {
+      "path": "polymyth/bookwormburrows.txt",
+      "size": 727599,
+      "extension": ".txt"
+    },
+    {
+      "path": "polymythlib/data/backbone-index.json",
+      "size": 656141,
+      "extension": ".json"
+    },
+    {
+      "path": "polymyth/bookwormburrows/index.html",
+      "size": 610767,
+      "extension": ".html"
     },
     {
       "path": "polymyth/methodologylist/citation/index.html",
-      "size": 518480
+      "size": 584558,
+      "extension": ".html"
     },
     {
       "path": "polymyth/methodologylist-citation.txt",
-      "size": 427329
+      "size": 458781,
+      "extension": ".txt"
+    },
+    {
+      "path": "teacherresources/index.html",
+      "size": 445357,
+      "extension": ".html"
     },
     {
       "path": "polymyth/methodologylist/gorgonification/index.html",
-      "size": 398956
-    },
-    {
-      "path": "polymyth/modulecanon/index.html",
-      "size": 393927
-    },
-    {
-      "path": "leizu/flyer/index.html",
-      "size": 375227
-    },
-    {
-      "path": "leizu/index.html",
-      "size": 369050
-    },
-    {
-      "path": "hf_export/data/ml/sections/degorgonification.jsonl",
-      "size": 366969
-    },
-    {
-      "path": "hf_export/data/ml/sections/pending.jsonl",
-      "size": 361131
+      "size": 442416,
+      "extension": ".html"
     },
     {
       "path": "polymyth/methodologylist-gorgonification.txt",
-      "size": 359743
+      "size": 399251,
+      "extension": ".txt"
     },
     {
-      "path": "university/index.html",
-      "size": 358230
+      "path": "polymyth/modulecanon/index.html",
+      "size": 394504,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/fa/index.html",
+      "size": 389003,
+      "extension": ".html"
+    },
+    {
+      "path": "polymyth/research/metoo-critical-academic-premise-audit-2026-07-27.jsonl",
+      "size": 385793,
+      "extension": ".jsonl"
+    },
+    {
+      "path": "polymythseminars/feeds/all.ics",
+      "size": 384747,
+      "extension": ".ics"
+    },
+    {
+      "path": "leizu/fr/index.html",
+      "size": 382613,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/zh-hans/index.html",
+      "size": 379553,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/index.html",
+      "size": 379548,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/zh-hant/index.html",
+      "size": 379543,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/fa/flyer/index.html",
+      "size": 377787,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/fr/flyer/index.html",
+      "size": 377753,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/zh-hans/flyer/index.html",
+      "size": 377724,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/zh-hant/flyer/index.html",
+      "size": 377724,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/flyer/index.html",
+      "size": 376442,
+      "extension": ".html"
+    }
+  ],
+  "largestRuntimeAssets": [
+    {
+      "path": "polymyth/concordance/concordance-index.json",
+      "size": 6776761,
+      "extension": ".json"
+    },
+    {
+      "path": "polymyth/methodologylist/index.html",
+      "size": 3989374,
+      "extension": ".html"
+    },
+    {
+      "path": "polymyth/methodologylist/methodology/index.html",
+      "size": 1889020,
+      "extension": ".html"
+    },
+    {
+      "path": "polymythlib/data/polymyth-data.json",
+      "size": 1859586,
+      "extension": ".json"
+    },
+    {
+      "path": "polymythseminars/events.json",
+      "size": 1660948,
+      "extension": ".json"
+    },
+    {
+      "path": "aa/index.html",
+      "size": 1522049,
+      "extension": ".html"
+    },
+    {
+      "path": "aa/cloud/index.html",
+      "size": 1331170,
+      "extension": ".html"
+    },
+    {
+      "path": "polymyth/campaigncodex/index.html",
+      "size": 1034225,
+      "extension": ".html"
+    },
+    {
+      "path": "polymythseminars/browse.json",
+      "size": 854846,
+      "extension": ".json"
+    },
+    {
+      "path": "polymythlib/data/backbone-index.json",
+      "size": 656141,
+      "extension": ".json"
+    },
+    {
+      "path": "polymyth/bookwormburrows/index.html",
+      "size": 610767,
+      "extension": ".html"
+    },
+    {
+      "path": "polymyth/methodologylist/citation/index.html",
+      "size": 584558,
+      "extension": ".html"
+    },
+    {
+      "path": "teacherresources/index.html",
+      "size": 445357,
+      "extension": ".html"
+    },
+    {
+      "path": "polymyth/methodologylist/gorgonification/index.html",
+      "size": 442416,
+      "extension": ".html"
+    },
+    {
+      "path": "polymyth/modulecanon/index.html",
+      "size": 394504,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/fa/index.html",
+      "size": 389003,
+      "extension": ".html"
+    },
+    {
+      "path": "polymythseminars/feeds/all.ics",
+      "size": 384747,
+      "extension": ".ics"
+    },
+    {
+      "path": "leizu/fr/index.html",
+      "size": 382613,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/zh-hans/index.html",
+      "size": 379553,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/index.html",
+      "size": 379548,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/zh-hant/index.html",
+      "size": 379543,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/fa/flyer/index.html",
+      "size": 377787,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/fr/flyer/index.html",
+      "size": 377753,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/zh-hans/flyer/index.html",
+      "size": 377724,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/zh-hant/flyer/index.html",
+      "size": 377724,
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/flyer/index.html",
+      "size": 376442,
+      "extension": ".html"
+    },
+    {
+      "path": "polymythseminars/feed.xml",
+      "size": 341391,
+      "extension": ".xml"
     },
     {
       "path": "teacherresources/feed.xml",
-      "size": 343516
-    },
-    {
-      "path": "hf_export/data/relations/crossrefs.jsonl",
-      "size": 334828
-    },
-    {
-      "path": "polymyth/modulecanon.txt",
-      "size": 332448
-    },
-    {
-      "path": "polymyth/methodologylist/coreplus/index.html",
-      "size": 312339
-    },
-    {
-      "path": "hf_export/data/ml/sections/idiomary.jsonl",
-      "size": 308096
-    },
-    {
-      "path": "humanities/index.html",
-      "size": 293936
+      "size": 305713,
+      "extension": ".xml"
     },
     {
       "path": "bookwormcard/print/index.html",
-      "size": 289790
+      "size": 283688,
+      "extension": ".html"
     },
     {
-      "path": "polymyth/methodologylist-coreplus.txt",
-      "size": 287799
-    },
-    {
-      "path": "cfps/index.html",
-      "size": 271589
-    },
-    {
-      "path": "hf_export/data/ml/sections/polycognate.jsonl",
-      "size": 263560
-    },
-    {
-      "path": "hf_export/data/ml/sections/studylist.jsonl",
-      "size": 259110
-    },
-    {
-      "path": "all_entries.json",
-      "size": 258695
-    },
-    {
-      "path": "buckets.json",
-      "size": 233831
+      "path": "saul/fa/index.html",
+      "size": 281476,
+      "extension": ".html"
     },
     {
       "path": "saul/index.html",
-      "size": 231295
+      "size": 281407,
+      "extension": ".html"
+    },
+    {
+      "path": "saul/fr/index.html",
+      "size": 281386,
+      "extension": ".html"
+    },
+    {
+      "path": "saul/zh-hans/index.html",
+      "size": 281338,
+      "extension": ".html"
+    },
+    {
+      "path": "saul/zh-hant/index.html",
+      "size": 281337,
+      "extension": ".html"
+    },
+    {
+      "path": "js/vendor/d3-7.9.0.min.js",
+      "size": 279706,
+      "extension": ".js"
+    },
+    {
+      "path": "polymythseminars/feeds/unconfirmed.ics",
+      "size": 278586,
+      "extension": ".ics"
+    },
+    {
+      "path": "all_entries.json",
+      "size": 258695,
+      "extension": ".json"
+    },
+    {
+      "path": "polymyth/methodologylist/coreplus/index.html",
+      "size": 243789,
+      "extension": ".html"
+    },
+    {
+      "path": "polymythseminars/feeds/unconfirmed.xml",
+      "size": 243362,
+      "extension": ".xml"
+    },
+    {
+      "path": "bookwormcard/index.html",
+      "size": 234378,
+      "extension": ".html"
     }
   ]
 }

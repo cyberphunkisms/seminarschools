@@ -3,6 +3,7 @@
 /** Verifies Netlify headers enforce CSP and include the live external script hosts used by the site. */
 const fs = require('fs');
 const path = require('path');
+const { isGeneratedDependencyDirectory } = require('./repository-walk-policy');
 const ROOT = path.resolve(__dirname, '..');
 let fail = 0;
 function read(rel) { try { return fs.readFileSync(path.join(ROOT, rel), 'utf8'); } catch { return ''; } }
@@ -25,7 +26,7 @@ for (const rel of headerFiles) {
 const externalScriptHosts = new Set();
 function walk(dir) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (['.git','node_modules','.netlify','public'].includes(e.name)) continue;
+    if (['.git','.netlify','public'].includes(e.name) || isGeneratedDependencyDirectory(e.name)) continue;
     const full = path.join(dir, e.name);
     if (e.isDirectory()) walk(full);
     else if (e.isFile() && e.name.endsWith('.html')) {

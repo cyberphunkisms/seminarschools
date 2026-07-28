@@ -1,0 +1,172 @@
+/* ==========================================================================
+   CALM UX — steady interaction contract (2026-07-23)
+   State changes stay visible without moving targets, scroll-following scenery,
+   typewriter delays, entrance choreography, or pointer-driven decoration.
+   Loaded last on every page.
+   ========================================================================== */
+
+:root { --ui-state-duration: 70ms; }
+html { scroll-behavior: auto !important; }
+
+/* A legacy `will-change: transform` on body creates a containing block for
+   every fixed descendant even when body never transforms. Corner controls
+   then anchor to the full document height instead of the viewport. */
+html[data-motion="calm"] body {
+  will-change: auto !important;
+}
+
+/* Stop decorative and entrance animation everywhere. Components remain
+   interactive; their selected/open states simply appear immediately. */
+html[data-motion="calm"] *,
+html[data-motion="calm"] *::before,
+html[data-motion="calm"] *::after {
+  animation: none !important;
+  scroll-behavior: auto !important;
+}
+
+/* Keep only brief colour/border feedback on controls. Never transition layout,
+   transforms, height, position, or opacity across a click. */
+html[data-motion="calm"] :where(a, button, summary, label, select, input, textarea,
+  [role="button"], [role="tab"], [role="link"],
+  .btn, .pill, .chip, .filter-chip, .tab, .theme-toggle,
+  .path-card, .course, .tier, .element-card, .fruit, .card, .tile,
+  .lecture, .event, .entry, .row, .foot-row, details) {
+  transition-property: color, background-color, border-color, box-shadow !important;
+  transition-duration: var(--ui-state-duration) !important;
+  transition-delay: 0s !important;
+  transition-timing-function: linear !important;
+  touch-action: manipulation;
+}
+
+html[data-motion="calm"] :where(a, button, summary, label, [role="button"], [role="tab"],
+  .btn, .pill, .chip, .filter-chip, .tab, .theme-toggle,
+  .path-card, .course, .tier, .element-card, .fruit, .card, .tile,
+  .lecture, .event, .entry, .row, .foot-row, .idx-row):hover,
+html[data-motion="calm"] :where(a, button, summary, label, [role="button"], [role="tab"],
+  .btn, .pill, .chip, .filter-chip, .tab, .theme-toggle,
+  .path-card, .course, .tier, .element-card, .fruit, .card, .tile,
+  .lecture, .event, .entry, .row, .foot-row, .idx-row):active {
+  transform: none !important;
+  filter: none !important;
+}
+
+/* Historic page styles sometimes remove outlines while adding hover motion.
+   Calm mode supplies one stable, high-visibility focus treatment without
+   changing a component's dimensions or corner shape. */
+html[data-motion="calm"] :where(a[href], button, summary, input, select, textarea,
+  [tabindex], [role="button"], [role="tab"], [role="link"]):focus-visible {
+  outline: 3px solid var(--ss-focus-ring, var(--accent, currentColor)) !important;
+  outline-offset: 3px !important;
+}
+
+/* Anything previously waiting for a reveal is visible at first paint. */
+html[data-motion="calm"] :where(.iv-pre, .iv-in, .reveal, .reveal-in,
+  .tier, .titanic .word, .titanic .char, .compound .word,
+  .panel.show, [data-reveal], [data-animate]) {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+.indra-ripple, .firefly, .atomic-flash,
+.leaf-canvas, #leaf-canvas, .floating-leaf, .flutter-leaf { display: none !important; }
+
+/* Scroll geometry: fixed, transform-only, and pointer-safe. Bespoke page
+   diagrams stay still; the shared #indraLayer supplies the universal scroll cue. */
+#indraLayer, #indraLayer svg, #geo, #geo2, #geo svg, #geo2 svg {
+  transition: none !important;
+  animation: none !important;
+}
+#indraLayer { will-change: transform !important; }
+
+/* Home map and cards use colour/focus only. */
+.home .panel, .home .idx-row, .home .idx-row .arr, .home .path-card,
+.home #web .thread, .home #web .halo, .home #web .dot, .home #web .label-plate {
+  transition: none !important;
+}
+.home .idx-row:hover, .home .idx-row:focus-visible { padding-left: 0 !important; }
+.home .idx-row:hover .arr, .home .idx-row:focus-visible .arr { transform: none !important; }
+
+/* Leizu selections remain legible without bounce, spin, leaves, or confetti. */
+.course.selected, .course.selected::before, .element-card.selected,
+.element-card.selected .element-glyph, .element-card:hover .element-glyph,
+.course-check, .course-count.bump, .policy-modal, .policy-modal-card,
+.branch, .fruit, .fruit.selected, .tier, .tier:hover {
+  animation: none !important;
+  transform: none !important;
+}
+
+/* Polymythcal: stable filter geometry and immediate cards. */
+.pm-button, .pm-choice, .pm-active-chip, .pm-event-card, .pm-calendar-day,
+.pm-action, .pm-view-button, .pm-entry-points button {
+  transform: none !important;
+  animation: none !important;
+}
+.pm-event-card { content-visibility: visible !important; contain-intrinsic-size: auto !important; }
+.pm-count, #pmResultsTitle, #pmFilterResultPreview, #pmMobileFilterCount, #pmSavedCount {
+  font-variant-numeric: tabular-nums;
+}
+.pm-active-panel, .pm-active { min-height: 3.75rem; }
+.pm-choice.zero-results { opacity: .58; }
+.pm-choice.zero-results:has(input:checked) { opacity: 1; }
+
+/* Bookwormcard remains a game, but reading and input never move the viewport. */
+body[data-route-type="bookwormcard"] :where(#rain-canvas, .rain-canvas, .cursor-block,
+  .matrix-rain, .cinematic, .worm-pulse, .tamagotchi-pulse) {
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition-duration: .001ms !important;
+    transition-delay: 0s !important;
+  }
+  #indraLayer { will-change: auto !important; }
+  :where(.scroll-shell, .table-wrap, [data-keyboard-scroll]) {
+    scroll-snap-type: none !important;
+  }
+}
+
+/* Site-wide decorative systems yield to the single shared scroll geometry. */
+html[data-motion="calm"] :where(#geo, #geo2, #rain-canvas, .rain-canvas, .matrix-rain) {
+  display: none !important;
+}
+html[data-motion="calm"] :where(.field-toggle, #geometryToggle, #modeToggle) {
+  display: none !important;
+}
+
+/* Polymythcal controls retain a fixed box before and after interaction. */
+html[data-motion="calm"] .pm-search-clear {
+  top: .45rem !important;
+  bottom: .45rem !important;
+  height: auto !important;
+  transform: none !important;
+}
+html[data-motion="calm"] .pm-active.is-empty {
+  display: grid !important;
+}
+html[data-motion="calm"] #pmResetFilters:disabled {
+  display: inline-flex !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+html[data-motion="calm"] .pm-section-clear[hidden] {
+  display: inline-flex !important;
+  visibility: hidden !important;
+}
+html[data-motion="calm"] .pm-section-clear.is-inactive {
+  visibility: visible;
+}
+html[data-motion="calm"] .pm-event-card,
+html[data-motion="calm"] body[data-page-weight="heavy"] :where(.event, .entry, .lecture, .pm-event-card) {
+  content-visibility: visible !important;
+  contain-intrinsic-size: auto !important;
+  contain: none !important;
+}
+
+/* Fixed-position helpers must not animate into view or cover active controls. */
+html[data-motion="calm"] :where(.keyboard-hint, .touch-bar, .mobile-bar, .pm-mobile-bar) {
+  transition: none !important;
+}

@@ -31,6 +31,10 @@
       "type": "string",
       "minLength": 12
     },
+    "occurrence_key": {
+      "type": "string",
+      "minLength": 12
+    },
     "record_kind": {
       "enum": [
         "event",
@@ -79,6 +83,9 @@
     "source_id": {
       "type": "string"
     },
+    "publisher": {
+      "type": "string"
+    },
     "source_quality": {
       "enum": [
         "official-or-institutional",
@@ -105,7 +112,8 @@
           "participant-attendance-unconfirmed",
           "official-source-unconfirmed",
           "aggregator-only",
-          "private-status-unconfirmed"
+          "private-status-unconfirmed",
+          "organizer-unconfirmed"
         ]
       }
     },

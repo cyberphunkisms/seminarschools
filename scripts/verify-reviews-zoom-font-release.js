@@ -3,17 +3,18 @@
 
 const fs = require('fs');
 const path = require('path');
+const { isGeneratedDependencyDirectory } = require('./repository-walk-policy');
 const ROOT = path.resolve(__dirname, '..');
 const PUBLIC = path.join(ROOT, 'public');
 const LINKEDIN = 'https://www.linkedin.com/in/seminarschools/overlay/Position/1409449435/treasury/?profileId=ACoAAAoVpaQBwFL59ASEITFxwp8D-hzMxzfApMM';
-const CONTRACT = '/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a';
+const CONTRACT = '/css/site-wide-type-zoom.css';
 const failures = [];
 
 function read(p) { return fs.readFileSync(p, 'utf8'); }
 function walk(dir, out = []) {
   if (!fs.existsSync(dir)) return out;
   for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (ent.name === 'node_modules' || ent.name === '.git') continue;
+    if (ent.name === '.git' || isGeneratedDependencyDirectory(ent.name)) continue;
     const full = path.join(dir, ent.name);
     if (ent.isDirectory()) walk(full, out);
     else if (ent.isFile()) out.push(full);
@@ -24,20 +25,34 @@ function rel(p) { return path.relative(ROOT, p).replace(/\\/g, '/'); }
 function stripCssComments(s) { return s.replace(/\/\*[\s\S]*?\*\//g, ''); }
 function requireTrue(ok, message) { if (!ok) failures.push(message); }
 
+const release = JSON.parse(read(path.join(ROOT, 'RELEASE_MANIFEST.json')));
+const currentAssetVersion = String(release.polymythcal_asset_version || '');
+const siteWideApplier = read(path.join(ROOT, 'scripts', 'apply-sitewide-type-zoom-link.js'));
+const siteWideAssetVersion = siteWideApplier.match(/const BUILD = ['"]([^'"]+)['"];/)?.[1] || '';
+const allowedContractVersions = new Set([currentAssetVersion, siteWideAssetVersion].filter(Boolean));
+requireTrue(allowedContractVersions.size > 0, 'no owned site-wide type/zoom asset version is available');
+
 const sourceHtml = walk(ROOT).filter(p => p.endsWith('.html') && !p.startsWith(PUBLIC + path.sep) && !p.includes(path.join('scripts','fixtures') + path.sep));
 const publicHtml = walk(PUBLIC).filter(p => p.endsWith('.html'));
+const deployableSourceHtml = sourceHtml.filter(p => rel(p) !== 'dashboard/index.html');
 const auditedSourceHtml = sourceHtml.filter(p => !/^google.*\.html$/i.test(path.basename(p)));
 const auditedPublicHtml = publicHtml.filter(p => !/^google.*\.html$/i.test(path.basename(p)));
 requireTrue(sourceHtml.length > 1000, `source HTML count unexpectedly low: ${sourceHtml.length}`);
-requireTrue(sourceHtml.length === publicHtml.length, `source/public HTML count differs: ${sourceHtml.length}/${publicHtml.length}`);
+requireTrue(deployableSourceHtml.length === publicHtml.length, `deployable source/public HTML count differs: ${deployableSourceHtml.length}/${publicHtml.length}`);
 
 for (const file of auditedSourceHtml) {
   const text = read(file);
   const where = rel(file);
   const isRedirect = /http-equiv=["']refresh["']/i.test(text) && /location\.replace\(/.test(text);
   if (isRedirect) continue;
-  const contractCount = (text.match(/data-site-wide-type-zoom="20260710-reviews-zoom-font-a"/g) || []).length;
-  requireTrue(contractCount === 1, `${where}: expected exactly one site-wide type/zoom contract link, found ${contractCount}`);
+  const contractLinks = text.match(/<link\b[^>]*href=["']\/css\/site-wide-type-zoom\.css\?v=[^"']+["'][^>]*>/gi) || [];
+  requireTrue(contractLinks.length === 1, `${where}: expected exactly one site-wide type/zoom contract link, found ${contractLinks.length}`);
+  if (contractLinks.length === 1) {
+    const hrefVersion = contractLinks[0].match(/href=["']\/css\/site-wide-type-zoom\.css\?v=([^"']+)["']/i)?.[1] || '';
+    const dataVersion = contractLinks[0].match(/data-site-wide-type-zoom=["']([^"']+)["']/i)?.[1] || '';
+    requireTrue(hrefVersion === dataVersion, `${where}: type/zoom href and data tokens disagree`);
+    requireTrue(allowedContractVersions.has(hrefVersion), `${where}: type/zoom token is not owned by the current build`);
+  }
   const viewportTags = text.match(/<meta\b[^>]*>/gi) || [];
   requireTrue(viewportTags.some(tag => /name=["']viewport["']/i.test(tag) && /content=["'][^"']*width=device-width/i.test(tag)), `${where}: missing responsive viewport`);
   requireTrue(!/user-scalable\s*=\s*no/i.test(text), `${where}: disables user zoom`);
@@ -84,7 +99,11 @@ for (const file of styleFiles) {
 const saul = read(path.join(ROOT, 'saul', 'index.html'));
 requireTrue(saul.includes('href="/reviews/"'), 'Saul page does not link to the reviews page');
 const footer = read(path.join(ROOT, 'js', 'footer.js'));
-requireTrue(footer.includes("['Reviews & references', '/reviews/']"), 'shared footer does not expose reviews');
+requireTrue(
+  footer.includes("reviews: 'Reviews & references'") &&
+  footer.includes("[copy.reviews, '/reviews/']"),
+  'shared localized footer does not expose reviews'
+);
 const sitemap = read(path.join(ROOT, 'sitemap.xml'));
 requireTrue(sitemap.includes('<loc>https://seminarschools.com/reviews/</loc>'), 'XML sitemap omits reviews');
 const tree = read(path.join(ROOT, 'polymyth', 'sitemap', 'index.html'));
@@ -92,7 +111,6 @@ requireTrue(tree.includes('href="/reviews/"'), 'visible sitemap omits reviews');
 const llms = read(path.join(ROOT, 'llms.txt'));
 requireTrue(llms.includes('https://seminarschools.com/reviews/'), 'llms.txt omits reviews');
 
-const release = JSON.parse(read(path.join(ROOT, 'RELEASE_MANIFEST.json')));
 const report = {
   generated_at: release.generated_at || '1970-01-01T00:00:00Z',
   status: failures.length ? 'failed' : 'passed',
@@ -115,7 +133,16 @@ const report = {
 };
 const reportDir = path.join(ROOT, 'scripts', 'reports');
 fs.mkdirSync(reportDir, { recursive: true });
-fs.writeFileSync(path.join(reportDir, 'reviews-zoom-font-release.json'), JSON.stringify(report, null, 2) + '\n');
+const reportFile = path.join(reportDir, 'reviews-zoom-font-release.json');
+const renderedReport = JSON.stringify(report, null, 2) + '\n';
+if (!fs.existsSync(reportFile) || fs.readFileSync(reportFile, 'utf8') !== renderedReport) {
+  fs.writeFileSync(reportFile, renderedReport);
+}
+if (process.env.SS_REPORT_OUTPUT_MTIME) {
+  const outputMtime = new Date(process.env.SS_REPORT_OUTPUT_MTIME);
+  if (Number.isNaN(outputMtime.getTime())) throw new Error('SS_REPORT_OUTPUT_MTIME must be a valid timestamp');
+  fs.utimesSync(reportFile, outputMtime, outputMtime);
+}
 
 if (failures.length) {
   console.error('REVIEWS / ZOOM / FONT RELEASE CHECK FAILED');

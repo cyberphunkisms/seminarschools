@@ -138,7 +138,7 @@ footer{border-top:1px solid var(--brd);margin-top:56px;padding-top:22px;font-fam
 </style>
 <link rel="stylesheet" href="/mobile-slim.css?v=cl93" media="screen and (max-width:640px)">
 <link rel="stylesheet" href="/css/alive.css?v=cl93">
-<link rel="stylesheet" href="/css/theme.css?v=cl93">
+<link rel="stylesheet" href="/css/theme.css?v=20260725-audit45">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ResearchProject","name":"BBT · BookwormBurrows Therapy","url":"https://seminarschools.com/bb/bbt/","description":"Upcoming research branch synthesizing therapeutic tabletop role-playing, bibliotherapy, psychodrama, transformative role-play, affective modifiers, and human-guided AI storytelling.","status":"https://schema.org/ResearchProject","parentOrganization":{"@type":"Organization","name":"Seminar Schools","url":"https://seminarschools.com/"}}
 </script>
@@ -252,7 +252,7 @@ footer{border-top:1px solid var(--brd);margin-top:56px;padding-top:22px;font-fam
 <script defer src="/js/indra.js?v=cl93"></script>
 <script defer src="/js/footer.js?v=cl93"></script>
 <script defer src="/js/autolink.js?v=cl93"></script>
-<script defer src="/js/site-keyboard-enhancements.js"></script>
+<script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>
 '''

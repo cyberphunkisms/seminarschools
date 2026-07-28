@@ -10,6 +10,8 @@
  * ============================================================ */
 (function () {
   'use strict';
+  if (window.__ssThemeToggleMounted) return;
+  window.__ssThemeToggleMounted = true;
 
   var STORAGE_KEY = 'ss-theme';
   var html = document.documentElement;
@@ -110,36 +112,72 @@
 /* ============================================================
  * LETTER SIZE — persisted font scaling. Added 2026-06-04 per
  * UI review. Hooks: [data-fz="up" | "down" | "reset"].
- * Scales the html base size through --font-scale (theme.css
- * applies the calc) and persists to localStorage. Uses event
+ * Scales the readable site base through --ss-user-font-size and persists to
+ * localStorage. Uses event
  * delegation and its own data hooks, so it never collides with
  * any page's bespoke text-size script.
  * ============================================================ */
 (function () {
   'use strict';
+  if (window.__ssFontScaleMounted) return;
+  window.__ssFontScaleMounted = true;
   var KEY = 'ss-fontscale';
-  var MIN = 0.85, MAX = 1.45, STEP = 0.0833;
+  var MIN = 15.5 / 16, MAX = 1.45, STEP = 0.0833;
   var root = document.documentElement;
 
   function get() {
-    try { var v = parseFloat(localStorage.getItem(KEY)); return isNaN(v) ? 1 : v; }
+    try { var v = parseFloat(localStorage.getItem(KEY)); return isNaN(v) ? 1 : clamp(v); }
     catch (e) { return 1; }
   }
   function clamp(v) { return Math.max(MIN, Math.min(MAX, Math.round(v * 1000) / 1000)); }
-  function apply(v) { root.style.setProperty('--font-scale', String(v)); root.style.fontSize = (v === 1 ? '' : (16 * v) + 'px'); }
+  function apply(v) {
+    root.style.setProperty('--font-scale', String(v));
+    if (v === 1) root.style.removeProperty('--ss-user-font-size');
+    else root.style.setProperty('--ss-user-font-size', Math.max(15.5, 16 * v) + 'px');
+    root.style.removeProperty('font-size');
+  }
   function save(v) {
     try { if (v === 1) localStorage.removeItem(KEY); else localStorage.setItem(KEY, String(v)); }
     catch (e) {}
   }
-  function resetVis(v) {
-    var btns = document.querySelectorAll('[data-fz="reset"]');
-    for (var i = 0; i < btns.length; i++) btns[i].style.display = (v === 1 ? 'none' : '');
+  function announceSize(message) {
+    var live = document.getElementById('font-size-live');
+    if (!live) {
+      live = document.createElement('div');
+      live.id = 'font-size-live';
+      live.className = 'sr-only';
+      live.setAttribute('role', 'status');
+      live.setAttribute('aria-live', 'polite');
+      document.body.appendChild(live);
+    }
+    live.textContent = '';
+    window.setTimeout(function () { live.textContent = message; }, 20);
+  }
+  function updateControls(v) {
+    var groups = document.querySelectorAll('.ss-fz');
+    for (var g = 0; g < groups.length; g++) {
+      if (!groups[g].hasAttribute('role')) groups[g].setAttribute('role', 'group');
+    }
+    var btns = document.querySelectorAll('[data-fz]');
+    for (var i = 0; i < btns.length; i++) {
+      var button = btns[i];
+      var action = button.getAttribute('data-fz');
+      if (!button.hasAttribute('aria-label') && button.title) button.setAttribute('aria-label', button.title);
+      if (action === 'down') button.disabled = v <= MIN + 0.0005;
+      if (action === 'up') button.disabled = v >= MAX - 0.0005;
+      if (action === 'reset') {
+        var active = Math.abs(v - 1) > 0.0005;
+        button.classList.toggle('is-active', active);
+        button.disabled = !active;
+        button.setAttribute('aria-hidden', active ? 'false' : 'true');
+      }
+    }
   }
 
   // Apply stored scale immediately to avoid a flash of unscaled type.
   apply(get());
 
-  function init() { resetVis(get()); }
+  function init() { updateControls(get()); }
 
   document.addEventListener('click', function (e) {
     var b = e.target && e.target.closest ? e.target.closest('[data-fz]') : null;
@@ -150,7 +188,17 @@
     else if (act === 'down') v = clamp(v - STEP);
     else if (act === 'reset') v = 1;
     else return;
-    apply(v); save(v); resetVis(v);
+    apply(v);
+    save(v);
+    updateControls(v);
+    announceSize(act === 'reset' ? 'Text size reset.' : act === 'up' ? 'Text size increased.' : 'Text size decreased.');
+  });
+
+  window.addEventListener('storage', function (event) {
+    if (event.key !== KEY) return;
+    var v = get();
+    apply(v);
+    updateControls(v);
   });
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
@@ -158,10 +206,16 @@
 })();
 
 
-/* CL-2026-06-04 #6: shared site footer nav. Injected only on pages that have no <footer> of their own. */
+/* Lightweight end navigation for pages that do not load the canonical footer.
+ * The DOMContentLoaded check can see later defer scripts, so routes that load
+ * footer.js never receive both navigation systems. */
 (function(){
   function inject(){
-    if (document.querySelector('.ss-sitenav') || document.querySelector('footer')) return;
+    if (
+      document.querySelector('.ss-sitenav') ||
+      document.querySelector('footer') ||
+      document.querySelector('script[src*="js/footer.js"]')
+    ) return;
     var here=(location.pathname.replace(/\/+$/,'')||'/');
     /* Hierarchy refactor: branch-aware footer. Up to Home, across to branch siblings only, no full roster. First-pass branch map; open to correction. */
     function nrm(p){return p.replace(/\/+$/,'')||'/';}

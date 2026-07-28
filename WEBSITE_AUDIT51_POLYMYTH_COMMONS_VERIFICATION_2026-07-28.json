@@ -1,0 +1,62 @@
+{
+  "audit": 51,
+  "date": "2026-07-28",
+  "release_id": "2026-07-28-site-audit51-polymyth-commons-generation0",
+  "status": "passed",
+  "counts": {
+    "unique_named_records": 346,
+    "book_mentions": 393,
+    "core_candidates": 128,
+    "commons_projects_scope": 154,
+    "supporting_ecosystem": 167,
+    "concepts_and_comparisons": 25,
+    "unique_printed_links": 437,
+    "printed_link_occurrences": 484,
+    "distinct_hosts": 252,
+    "commons_forms": 43,
+    "book_project_types": 79,
+    "relationship_terms": 50,
+    "current_status_seeds": 20,
+    "stable_entity_pages": 346,
+    "pdf_pages_inspected": 383,
+    "embedded_pdf_hyperlinks": 0
+  },
+  "gates": {
+    "data_schema": "passed",
+    "stable_ids_unique": "passed",
+    "source_entity_pages": "passed",
+    "public_entity_pages": "passed",
+    "directory_scopes": "passed",
+    "research_mode": "passed",
+    "table_view": "passed",
+    "book_backbone_explorer": "passed",
+    "method_and_governance": "passed",
+    "contribution_routes": "passed",
+    "teacher_resources_integration": "passed",
+    "polymythcal_integration": "passed",
+    "home_map_integration": "passed",
+    "sitemap": "passed",
+    "llms_txt": "passed",
+    "static_javascript_syntax": "passed",
+    "public_deploy_parity": "passed",
+    "app_lint": "passed",
+    "app_typescript": "passed",
+    "managed_production_build": "passed",
+    "managed_production_deployment": "passed"
+  },
+  "quality_model": {
+    "universal_project_score": false,
+    "factual_feature_signals": true,
+    "record_completeness_signals": true,
+    "transparent_curated_collections": true
+  },
+  "external_validation": [
+    "Native Safari",
+    "Branded Firefox",
+    "VoiceOver",
+    "NVDA",
+    "Physical devices",
+    "Real-user validation"
+  ],
+  "security_audit_performed": false
+}

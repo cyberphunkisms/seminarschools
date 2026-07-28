@@ -128,7 +128,7 @@ POST_TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="{fonts_url}" rel="stylesheet">
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/main.css?v=20260725-audit45">
 <style>
 :root {{
   --display: {display};

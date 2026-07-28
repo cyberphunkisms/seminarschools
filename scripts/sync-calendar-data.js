@@ -18,7 +18,7 @@ data._total_events=data.events.length;
 data._comment='Consolidated Polymythcal events. Auto-written after harvests and verified manual additions. Drives /polymythseminars/.';
 const text=JSON.stringify(data,null,2)+'\n';
 let writes=Number(writeIfChanged(PUBLIC,text))+Number(writeIfChanged(MASTER,text));
-let watchlist={generated_at:data._generated_at||null,count:0,rule:'watchlist only: not published as calendar events until time/place is confirmed',items:[]};
+let watchlist={generated_at:data._generated_at||null,count:0,rule:'internal recheck state for leads without a real event date; dated announcements stay public with exact qualification reasons',items:[]};
 if(fs.existsSync(WATCHLIST_DATA)){
   watchlist=JSON.parse(read(WATCHLIST_DATA));
   if(!Array.isArray(watchlist.items)) watchlist.items=[];

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Seminar Schools | Toronto Reading, Teaching &amp; Projects</title>
@@ -8,16 +9,16 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seminarschools.com/about/">
 <meta property="og:title" content="About Seminar Schools | Toronto Reading, Teaching &amp; Projects">
-<meta property="og:description" content="Tutoring through Leizu Academy, public seminars, a polymythcalendar, teacher resources, and writing rooted in serious reading.">
+<meta property="og:description" content="Polymyth Commons, Leizu Academy tutoring, public seminars, Polymythcal, teacher resources, and writing rooted in serious reading.">
 <meta property="og:image" content="https://seminarschools.com/og-image.png">
 <meta name="twitter:image" content="https://seminarschools.com/og-image.png">
 <meta property="og:site_name" content="Seminar Schools">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="About Seminar Schools | Toronto Reading, Teaching &amp; Projects">
-<meta name="twitter:description" content="Tutoring through Leizu Academy, public seminars, a polymythcalendar, teacher resources, and writing rooted in serious reading.">
+<meta name="twitter:description" content="Polymyth Commons, Leizu Academy tutoring, public seminars, Polymythcal, teacher resources, and writing rooted in serious reading.">
 <!-- /Open Graph -->
 
-<meta name="description" content="Seminar Schools brings Leizu tutoring, public reading, teacher resources, and independent writing into one Toronto practice.">
+<meta name="description" content="Seminar Schools brings Polymyth Commons, Leizu tutoring, public reading, teacher resources, and independent writing into one Toronto practice.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
@@ -147,9 +148,14 @@
     text-shadow: none !important;
   }
 
-  /* 4. Freeze tier color cycling on one warm cream for every section */
+  /* 4. Freeze tier color cycling on the active professional theme */
   body:not(.party).tier-applied {
-    background-color: #F5EBE4 !important;
+    background-color: var(--bg) !important;
+  }
+
+  html[data-motion="calm"] .progress,
+  html[data-motion="calm"] .descent-marker {
+    display: none !important;
   }
 
   /* 5. Hide all the spawning decorations */
@@ -1286,15 +1292,41 @@ input[type="button"] {
   }
 }
 </script>
-<link rel="stylesheet" href="/css/theme.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=20260725-audit45">
 <link rel="stylesheet" href="/css/mobile-overlay.css?v=cl91">
 
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
-<link rel="stylesheet" href="/css/main-writing-readability-2026.css?v=20260718-map-archive-final8">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link rel="stylesheet" href="/css/main-writing-readability-2026.css?v=20260725-audit45-saul-runtime">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<style id="audit35-about-ui">
+/* Keep fixed reading controls clear of the full-height header, and let the
+   smallest header expose every destination without squeezed or clipped type. */
+.topbar .brand,.topbar .nav a{min-height:44px}
+.topbar .nav a{display:inline-flex;align-items:center}
+@media (min-width:769px){
+  .ss-fz{top:calc(6.25rem + env(safe-area-inset-top,0px))!important}
+}
+@media (max-width:420px){
+  .topbar{gap:.75rem}
+  .topbar .brand{flex:0 0 auto}
+  .topbar .nav{max-width:58vw;flex-wrap:nowrap!important;justify-content:flex-start;
+    overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;
+    scroll-padding-inline:.25rem}
+  .topbar .nav a{flex:0 0 auto}
+}
+@media (forced-colors:active){
+  .frame{display:none}
+  .topbar{background:Canvas!important;border-bottom-color:CanvasText!important}
+}
+@media print{
+  .frame{display:none!important}
+}
+</style>
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="map">
+<body data-geometry="indra-web" data-indra-intensity="0.070" data-route-type="map">
 <style id="ss-fz-style">.ss-fz{position:fixed;top:4.15rem;right:.8rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:44px;height:44px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 <!-- Theme toggle (light/dark mode). System preference is the default;
      clicking flips. localStorage persists the choice. -->
@@ -1359,6 +1391,7 @@ input[type="button"] {
 
   <div class="threshold-paths reveal delay-4" aria-label="Continue by kind of work">
     <a class="path-card" href="/polymythseminars/"><span class="path-k">Public calendar</span><strong>Find events, contests, and deadlines without losing the source trail.</strong><span>Search public lectures, calls, fellowships, festivals, and writing opportunities in one view.</span></a>
+    <a class="path-card" href="/polymythcommons/"><span class="path-k">Library of libraries</span><strong>Find the library or commons project that already holds the work.</strong><span>Search Polymythlib, explore the Ostrom book backbone, or follow the Commons method.</span></a>
     <a class="path-card" href="/bb/"><span class="path-k">Reading game</span><strong>Turn a text into a playable encounter that still depends on evidence.</strong><span>Make a wormcard, then move into teacher-guided choices inside the text-world.</span></a>
     <a class="path-card" href="/aa/"><span class="path-k">AA* into polymyth</span><strong>Enter the archive when the project itself is your object of study.</strong><span>Open the AA* archive, then follow its routes into polymyth and ML*.</span></a>
     <a class="path-card" href="/saul/"><span class="path-k">Professional record</span><strong>Read the CV as a general record for work, teaching, writing, and collaboration.</strong><span>Choose a professional focus, share the selected view, or download the matching monochrome CV.</span></a>
@@ -1369,13 +1402,13 @@ input[type="button"] {
   </div>
 </section>
 
-<section id="lectures" class="tier" data-tier="2" data-name="Upcoming GTA Lectures" data-roman="ii">
-  <div class="tier-label-vertical"><span class="num">ii</span><span class="label">Lectures</span></div>
-  <h2 class="compound words">Upcoming GTA <em>Lectures.</em></h2>
-  <p class="body reveal delay-2">Toronto has more free public lectures than one person can attend. The calendar below shows the strongest upcoming events. <a href="/marginalia">Marginalia</a> carries longer reflections on selected talks.</p>
+<section id="lectures" class="tier" data-tier="2" data-name="Upcoming Polymythcal Listings" data-roman="ii">
+  <div class="tier-label-vertical"><span class="num">ii</span><span class="label">Listings</span></div>
+  <h2 class="compound words">Upcoming <em>Polymythcal listings.</em></h2>
+  <p class="body reveal delay-2">The calendar below shows the next six Polymythcal listings in chronological order within the coming 90 days. Open each source to confirm details before going. <a href="/marginalia">Marginalia</a> carries longer reflections on selected talks.</p>
   <div class="lecture-list stagger reveal delay-3" id="featured-lectures">
-    <div class="lecture-loading" style="grid-column:1/-1;padding:2rem 0;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)">Loading lectures…</div>
-    <div class="lecture-tail"><span>This week and next month. See <a href="/polymythseminars/">polymythcalendar</a> for all.</span><a href="/polymythseminars/">polymythcalendar &rarr;</a></div>
+    <div class="lecture-loading" style="grid-column:1/-1;padding:2rem 0;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)">Loading listings…</div>
+    <div class="lecture-tail"><span>Next six within 90 days. See <a href="/polymythseminars/">Polymythcal</a> for all.</span><a href="/polymythseminars/">Polymythcal &rarr;</a></div>
   </div>
 </section>
 
@@ -1431,13 +1464,19 @@ input[type="button"] {
 <section id="community" class="tier" data-tier="5" data-name="Community" data-roman="v">
   <div class="tier-label-vertical"><span class="num">v</span><span class="label">Community</span></div>
   <h2 class="compound words">Community <em>projects.</em></h2>
-  <p class="body reveal delay-2">Five public projects extend the work beyond tutoring. They are free and open. Dates appear through <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="prompt">&gt;</span>open_transmission<span class="cursor">_</span></a> when each is ready.</p>
+  <p class="body reveal delay-2">Seven public projects extend the work beyond tutoring. They are free and open. Dates appear through <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="prompt">&gt;</span>open_transmission<span class="cursor">_</span></a> when each is ready.</p>
   <div class="community-list stagger reveal delay-3">
     <div class="project featured">
       <div class="micro">Open seminar</div>
       <div class="name"><a href="/agora/" style="color:inherit;text-decoration:none">The Agora</a></div>
-      <div class="what">A free seminar in Toronto or online. The text goes out first. Readers gather and work through it together. No registration is required.</div>
+      <div class="what">A free seminar in Toronto or online. Join the announcement list for the text, date, and online link, then gather and work through the reading together.</div>
       <div class="status">Forthcoming</div>
+    </div>
+    <div class="project">
+      <div class="micro">Library of libraries</div>
+      <div class="name"><a href="/polymythcommons/" style="color:inherit;text-decoration:none">Polymyth Commons</a></div>
+      <div class="what">A link-only directory of libraries, archives, repositories, portals, commons projects, and the systems that help shared knowledge live.</div>
+      <div class="status">Live · Generation 0</div>
     </div>
     <div class="project">
       <div class="micro">Public art</div>
@@ -1447,7 +1486,7 @@ input[type="button"] {
     </div>
     <div class="project">
       <div class="micro">Pedagogical game</div>
-      <div class="name"><a href="/bookwormcard/" style="color:inherit;text-decoration:none">bookwormburrows</a></div>
+      <div class="name"><a href="/bb/" style="color:inherit;text-decoration:none">bookwormburrows</a></div>
       <div class="what">A learning game where a text becomes a world to enter, read, and play. It is built for classrooms and the social network it can grow. The social layer is for participants eighteen and over.</div>
       <div class="status">Live</div>
     </div>
@@ -1462,6 +1501,12 @@ input[type="button"] {
       <div class="name"><a href="/nutrition/" style="color:inherit;text-decoration:none">Nutrition</a></div>
       <div class="what">Notes from the kitchen on food, cost, and origin. Diaspora groceries over branded supplements.</div>
       <div class="status">In development</div>
+    </div>
+    <div class="project">
+      <div class="micro">Teacher library</div>
+      <div class="name"><a href="/teacherresources/" style="color:inherit;text-decoration:none">Teacher Resources</a></div>
+      <div class="what">Free classroom materials arranged by subject, level, format, and curriculum, with direct links to their original sources.</div>
+      <div class="status">Live</div>
     </div>
   </div>
 </section>
@@ -1511,14 +1556,12 @@ input[type="button"] {
   <div class="colophon"><span class="seal-mini"></span> Seminar Schools in Toronto, 2026</div>
   <div class="footer-links">
 <a href="#threshold">Return to the beginning</a>
-<a href="/polymythseminars/">polymythcalendar</a>
+<a href="/polymythcommons/">Polymyth Commons</a>
+<a href="/polymythseminars/">Polymythcal</a>
 <a href="mailto:saulnassau@protonmail.com">Contact</a>
 <a href="/polymyth/sitemap/">Site Map</a>
   </div>
 </section>
-
-<script src="/js/lenis.min.js?v=cl91" defer></script>
-
 <script>
   // ===== Headlines =====
   function wrapWords(html) {
@@ -1795,27 +1838,14 @@ input[type="button"] {
 
   // Defer build to after first paint, build into BOTH layers
   function initGeo() {
+    if (document.documentElement.dataset.motion === 'calm') return;
     const svg = buildMandala();
     document.getElementById('geo').innerHTML = svg;
     document.getElementById('geo2').innerHTML = svg;
   }
   if ('requestIdleCallback' in window) requestIdleCallback(initGeo, { timeout: 200 });
   else setTimeout(initGeo, 50);
-
-  // ===== Lenis (color smoothness) =====
-  let lenis = null;
-  function initLenis() {
-    if (typeof Lenis === 'undefined') { setTimeout(initLenis, 30); return; }
-    lenis = new Lenis({
-      duration: 1.4,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      smoothTouch: false,
-    });
-    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
-  }
-  initLenis();
+  // Native scrolling is intentionally retained for stable input and wheel behaviour.
 
   // ===== Tier palette (DEFAULT: bright) =====
   const tiers = [
@@ -1870,6 +1900,11 @@ input[type="button"] {
   const progress = document.getElementById('progress');
   const topbar = document.getElementById('topbar');
   const body = document.body;
+  const calmMode = document.documentElement.dataset.motion === 'calm';
+  if (calmMode) {
+    body.classList.add('tier-applied');
+    body.classList.remove('party');
+  }
 
   let sectionBounds = [];
   function refreshBounds() {
@@ -1950,6 +1985,7 @@ input[type="button"] {
     const scrollY = window.scrollY || document.documentElement.scrollTop;
     if (scrollY === lastScrollY) return;
     lastScrollY = scrollY;
+    if (calmMode) return;
 
     const docH = document.documentElement.scrollHeight - window.innerHeight;
     const pct = docH > 0 ? Math.min(1, Math.max(0, scrollY / docH)) : 0;
@@ -1989,16 +2025,18 @@ input[type="button"] {
     pending = true;
     requestAnimationFrame(() => { update(); pending = false; });
   }
-  window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule);
-  schedule();
+  if (!calmMode) {
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    schedule();
+  }
 
   // ===== Firefly trail (CSS-driven, zero-bandwidth ephemeral) =====
   // Occasionally emit a tiny accent-colored dot at the cursor position.
   // Each dot fades out and is removed within 1.2s. Throttled to ~5 per second max.
   // Uses no images, no canvas, no continuous loop, just transient DOM nodes that the
   // garbage collector reclaims. Honors prefers-reduced-motion (will not emit).
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (document.documentElement.dataset.motion !== 'calm' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     let lastEmit = 0;
     let lastX = -1, lastY = -1;
     document.addEventListener('mousemove', (e) => {
@@ -2164,7 +2202,7 @@ input[type="button"] {
     currentlyGlowing = newGlowing;
   }
 
-  document.addEventListener('mousemove', (e) => {
+  if (document.documentElement.dataset.motion !== 'calm') document.addEventListener('mousemove', (e) => {
     if (lightState !== 1) return;
     const now = performance.now();
     if (now - lastGlowMove < 50) return;
@@ -2189,8 +2227,10 @@ input[type="button"] {
 (function() {
   const btn = document.getElementById('modeToggle');
   const body = document.body;
+  const calmMode = document.documentElement.dataset.motion === 'calm';
   // Default to professional mode. Creative mode is opt-in.
   function setMode(party) {
+    if (calmMode) party = false;
     if (party) {
       body.classList.add('party');
       btn.textContent = '← professional';
@@ -2203,17 +2243,23 @@ input[type="button"] {
         if (typeof applyMode === 'function') applyMode();
       }
     }
-    try { localStorage.setItem('ss-mode', party ? 'party' : 'pro'); } catch(e) {}
+    if (!calmMode) {
+      try { localStorage.setItem('ss-mode', party ? 'party' : 'pro'); } catch(e) {}
+    }
   }
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    setMode(!body.classList.contains('party'));
-  });
-  // Restore previous preference if stored
-  try {
-    const saved = localStorage.getItem('ss-mode');
-    if (saved === 'party') setMode(true);
-  } catch(e) {}
+  if (calmMode) {
+    setMode(false);
+  } else {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setMode(!body.classList.contains('party'));
+    });
+    // Restore previous preference if stored
+    try {
+      const saved = localStorage.getItem('ss-mode');
+      if (saved === 'party') setMode(true);
+    } catch(e) {}
+  }
 })();
 
 // ===== Geometry interaction =====
@@ -2241,6 +2287,7 @@ input[type="button"] {
     }
   }
   apply();
+  if (document.documentElement.dataset.motion === 'calm') return;
   btn.addEventListener('click', function(){
     awake = !awake;
     try { localStorage.setItem('ss-main-geometry', awake ? 'awake' : 'quiet'); } catch(e) {}
@@ -2278,16 +2325,14 @@ input[type="button"] {
 
 <script>
 function fetchEventsWithFallback(){
-  // Single source: the published events file. The two former fallbacks
-  // (/data/ is 404'd by design, /seminars/ is not served) only produced the
-  // console 404, so they are dropped. The calendar page carries an embedded
-  // snapshot fallback; this teaser simply loads the file on the live site.
-  var urls = ['/polymythseminars/events.json?v=20260709'];
+  // This teaser uses the compact feed generated by the Polymythcal pipeline;
+  // the full event corpus stays on the calendar route.
+  var urls = ['/polymythseminars/featured.json?v=20260728-audit53'];
   return (async function(){
     var lastErr = null;
     for (var i=0;i<urls.length;i++){
       try {
-        var r = await fetch(urls[i], { cache: 'no-store' });
+        var r = await fetch(urls[i], { cache: 'default' });
         if (!r.ok) { lastErr = new Error(urls[i]+' \u2192 HTTP '+r.status); continue; }
         var d = await r.json();
         if ((d.events||[]).length) { d._loadedFrom = urls[i]; return d; }
@@ -2350,7 +2395,7 @@ function fetchEventsWithFallback(){
       if (lectures.length === 0) {
         var empty = document.createElement('div');
         empty.style.cssText = 'grid-column:1/-1;padding:2rem 0;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)';
-        empty.textContent = 'No events in this window. See the polymythcalendar.';
+        empty.textContent = 'No listings in this window. See Polymythcal.';
         container.insertBefore(empty, tail);
         return;
       }
@@ -2392,7 +2437,7 @@ function fetchEventsWithFallback(){
     .catch(function(err) {
       var loading = container.querySelector('.lecture-loading');
       if (loading) {
-        loading.textContent = 'Events unavailable. See /polymythseminars/ for the polymythcalendar.';
+        loading.textContent = 'Listings unavailable. See /polymythseminars/ for Polymythcal.';
       }
     });
 })();
@@ -2400,8 +2445,8 @@ function fetchEventsWithFallback(){
 
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
-<script src="/js/footer.js?v=20260719-audit11-decisions" defer></script>
+<script src="/js/footer.js?v=20260725-audit45-footer" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
-<script defer src="/js/site-keyboard-enhancements.js"></script>
+<script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

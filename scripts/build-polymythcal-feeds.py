@@ -2,8 +2,10 @@
 """Generate deterministic bilingual RSS and calendar-subscription feeds."""
 from __future__ import annotations
 
+import argparse
 import html
 import json
+import os
 import re
 from datetime import date, datetime, time, timedelta, timezone
 from email.utils import format_datetime
@@ -16,7 +18,21 @@ OUT = ROOT / 'polymythseminars/feeds'
 RELEASE = ROOT / 'RELEASE_MANIFEST.json'
 BASE = 'https://seminarschools.com/polymythseminars/'
 TORONTO = ZoneInfo('America/Toronto')
-ASSET_VERSION = '20260722-audit21'
+RELEASE_DOC = json.loads(RELEASE.read_text(encoding='utf-8'))
+ASSET_VERSION = str(RELEASE_DOC.get('polymythcal_asset_version') or '')
+if not re.fullmatch(r'[0-9]{8}-[a-z0-9-]+', ASSET_VERSION):
+    raise SystemExit('RELEASE_MANIFEST.json has no valid polymythcal_asset_version')
+BUILD_OUTPUT_MTIME = None
+if os.environ.get('SS_BUILD_OUTPUT_MTIME'):
+    try:
+        output_moment = datetime.fromisoformat(
+            os.environ['SS_BUILD_OUTPUT_MTIME'].replace('Z', '+00:00')
+        )
+        if output_moment.tzinfo is None:
+            output_moment = output_moment.replace(tzinfo=timezone.utc)
+        BUILD_OUTPUT_MTIME = output_moment.timestamp()
+    except ValueError as error:
+        raise SystemExit('SS_BUILD_OUTPUT_MTIME must be a valid timestamp') from error
 
 
 def text(event) -> str:
@@ -33,6 +49,24 @@ def cats(event) -> set[str]:
     return {str(event.get('type') or ''), *map(str, event.get('secondary_types') or [])}
 
 
+ARTS_TEXT_RE = re.compile(
+    r'\b(?:art|arts|artist|artists|artistic|artwork|artworks|film|cinema|music|'
+    r'musical|theatre|theater|festival|exhibition|gallery)\b'
+)
+
+
+def has_french_source_language(event) -> bool:
+    """Use declared source languages, never a place name, as language evidence."""
+    languages = {
+        str(event.get('source_language') or '').strip().lower(),
+        *(
+            str(language or '').strip().lower()
+            for language in (event.get('source_languages') or [])
+        ),
+    }
+    return any(language == 'fr' or language.startswith('fr-') for language in languages)
+
+
 FOCUSES = {
     'all': ('All listings', 'Toutes les fiches', lambda event: True),
     'confirmed': ('Confirmed listings', 'Fiches confirmées', lambda event: event.get('confirmation_status') == 'confirmed'),
@@ -47,7 +81,7 @@ FOCUSES = {
         'Arts, festivals, exhibitions, performances, and screenings',
         'Arts, festivals, expositions, spectacles et projections',
         lambda event: bool(cats(event) & {'festival', 'exhibition', 'performance', 'screening', 'reading'})
-        or bool(re.search(r'art|film|cinema|music|theatre|festival|exhibition|gallery', text(event))),
+        or bool(ARTS_TEXT_RE.search(text(event))),
     ),
     'civic': (
         'Civic action and community listings',
@@ -72,31 +106,24 @@ FOCUSES = {
     'fr': (
         'French-language listings',
         'Fiches de langue française',
-        lambda event: str(event.get('source_language') or '').lower().startswith('fr')
-        or bool(re.search(r'\b(montréal|conférence|atelier|exposition|bibliothèque)\b', text(event))),
+        has_french_source_language,
     ),
 }
 
 
 def read_release_datetime() -> datetime:
-    value = None
-    if RELEASE.exists():
+    """Resolve one stable Toronto build moment for all date-sensitive feeds."""
+    override = str(os.environ.get('SITE_BUILD_DATE') or '').strip()
+    if override:
+        if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', override):
+            raise SystemExit('SITE_BUILD_DATE must use YYYY-MM-DD')
         try:
-            value = json.loads(RELEASE.read_text(encoding='utf-8')).get('generated_at')
-        except Exception:
-            pass
-    if not value and DATA.exists():
-        try:
-            payload = json.loads(DATA.read_text(encoding='utf-8'))
-            value = payload.get('_generated_at') or payload.get('_lifecycle_reconciled_at')
-        except Exception:
-            pass
-    if not value:
-        value = '2026-07-22T14:30:00-04:00'
-    parsed = datetime.fromisoformat(str(value).replace('Z', '+00:00'))
-    if parsed.tzinfo is None:
-        parsed = parsed.replace(tzinfo=TORONTO)
-    return parsed.astimezone(timezone.utc)
+            build_day = date.fromisoformat(override)
+        except ValueError as error:
+            raise SystemExit('SITE_BUILD_DATE is not a real calendar date') from error
+    else:
+        build_day = datetime.now(TORONTO).date()
+    return datetime.combine(build_day, time(12, 0), TORONTO).astimezone(timezone.utc)
 
 
 BUILD_DT = read_release_datetime()
@@ -107,9 +134,13 @@ BUILD_RFC_DATE = format_datetime(BUILD_DT)
 def write_text_if_changed(path: Path, value: str) -> bool:
     encoded = value.encode('utf-8')
     if path.exists() and path.read_bytes() == encoded:
+        if BUILD_OUTPUT_MTIME is not None:
+            os.utime(path, (BUILD_OUTPUT_MTIME, BUILD_OUTPUT_MTIME))
         return False
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(encoded)
+    if BUILD_OUTPUT_MTIME is not None:
+        os.utime(path, (BUILD_OUTPUT_MTIME, BUILD_OUTPUT_MTIME))
     return True
 
 
@@ -124,14 +155,22 @@ def escape_ics(value) -> str:
 def fold_ics_line(line: str) -> str:
     encoded = line.encode('utf-8')
     chunks = []
-    while len(encoded) > 75:
-        cut = 75
-        while cut > 0 and (encoded[cut] & 0xC0) == 0x80:
+    first = True
+    while encoded:
+        # RFC 5545 section 3.1 limits the complete physical content line to
+        # 75 octets. Continuation lines begin with one SPACE, so their text
+        # payload has a 74-octet budget. Never split a UTF-8 code point.
+        limit = 75 if first else 74
+        cut = min(limit, len(encoded))
+        while cut < len(encoded) and cut > 0 and (encoded[cut] & 0xC0) == 0x80:
             cut -= 1
-        chunks.append(encoded[:cut].decode('utf-8'))
+        if cut == 0:
+            raise ValueError('Unable to fold an iCalendar line at a UTF-8 boundary')
+        prefix = '' if first else ' '
+        chunks.append(prefix + encoded[:cut].decode('utf-8'))
         encoded = encoded[cut:]
-    chunks.append(encoded.decode('utf-8'))
-    return '\r\n '.join(chunks)
+        first = False
+    return '\r\n'.join(chunks)
 
 
 def parse_datetime(value) -> datetime | None:
@@ -294,18 +333,49 @@ def build_subscribe_page(manifest) -> str:
             f'<span lang="fr">{html.escape(feed["label_fr"])}</span> ({feed["count"]})'
             '</span><span>'
             f'<a href="{html.escape(feed["rss"], quote=True)}">RSS</a> · '
-            f'<a href="{html.escape(feed["ics"], quote=True)}">ICS</a>'
+            f'<a type="text/calendar" href="{html.escape(feed["ics"], quote=True)}">ICS</a>'
             '</span></li>'
         )
-    return f'''<!doctype html><html lang="en-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Polymythcal subscriptions · Abonnements Polymythcal</title><meta property="og:type" content="website"><meta property="og:url" content="https://seminarschools.com/polymythseminars/subscribe/"><meta property="og:title" content="Polymythcal subscriptions · Abonnements Polymythcal"><meta property="og:description" content="Focused RSS and calendar subscriptions for Polymythcal listings."><meta property="og:image" content="https://seminarschools.com/og-image.png"><meta name="description" content="Focused Polymythcal RSS and calendar subscriptions for confirmed, regional, civic, arts, learning, opportunity, English, and French listings."><meta name="robots" content="index,follow"><link rel="canonical" href="https://seminarschools.com/polymythseminars/subscribe/"><link rel="alternate" hreflang="en-ca" href="https://seminarschools.com/polymythseminars/subscribe/"><link rel="alternate" hreflang="fr-ca" href="https://seminarschools.com/polymythseminars/subscribe/?lang=fr"><link rel="alternate" hreflang="x-default" href="https://seminarschools.com/polymythseminars/subscribe/"><link rel="stylesheet" href="/css/theme.css"><link rel="stylesheet" href="/css/alive.css"><link rel="stylesheet" href="/css/polymythcal-features.css?v={ASSET_VERSION}"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a"></head><body data-route-type="calendar-form" data-geometry="indra-web" data-indra-intensity="0.055"><a class="skip-link" href="#main-content">Skip to subscriptions · Aller aux abonnements</a><main class="pm-form-shell" id="main-content"><p><a href="/polymythseminars/">← Polymythcal</a></p><h1>Subscriptions · <span lang="fr">Abonnements</span></h1><p>RSS works in feed readers. ICS works in calendar apps. · <span lang="fr">RSS fonctionne dans les lecteurs de fils. ICS fonctionne dans les applications de calendrier.</span></p><ul class="pm-feed-list">{''.join(rows)}</ul></main><script src="/js/theme.js" defer></script><script src="/js/polymythcal-features.js?v={ASSET_VERSION}" defer></script><script defer src="/js/site-keyboard-enhancements.js"></script><script defer src="/js/mandala.js?v=cl91"></script><script defer src="/js/indra.js?v=cl91"></script></body></html>'''
+    return f'''<!doctype html><html lang="en-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Polymythcal subscriptions · Abonnements Polymythcal</title><meta property="og:type" content="website"><meta property="og:url" content="https://seminarschools.com/polymythseminars/subscribe/"><meta property="og:title" content="Polymythcal subscriptions · Abonnements Polymythcal"><meta property="og:description" content="Focused RSS and calendar subscriptions for Polymythcal listings."><meta property="og:image" content="https://seminarschools.com/og-image.png"><meta name="description" content="Focused Polymythcal RSS and calendar subscriptions for confirmed, regional, civic, arts, learning, opportunity, English, and French listings."><meta name="robots" content="index,follow"><link rel="canonical" href="https://seminarschools.com/polymythseminars/subscribe/"><link rel="alternate" hreflang="en-ca" href="https://seminarschools.com/polymythseminars/subscribe/"><link rel="alternate" hreflang="fr-ca" href="https://seminarschools.com/polymythseminars/subscribe/?lang=fr"><link rel="alternate" hreflang="x-default" href="https://seminarschools.com/polymythseminars/subscribe/"><link rel="stylesheet" href="/css/theme.css?v={ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css"><link rel="stylesheet" href="/css/polymythcal-features.css?v={ASSET_VERSION}"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={ASSET_VERSION}" data-site-wide-type-zoom="{ASSET_VERSION}"></head><body data-route-type="calendar-form" data-geometry="indra-web" data-indra-intensity="0.055"><a class="skip-link" href="#main-content">Skip to subscriptions · Aller aux abonnements</a><main class="pm-form-shell" id="main-content"><p><a href="/polymythseminars/">← Polymythcal</a></p><h1>Subscriptions · <span lang="fr">Abonnements</span></h1><p>RSS works in feed readers. ICS works in calendar apps. · <span lang="fr">RSS fonctionne dans les lecteurs de fils. ICS fonctionne dans les applications de calendrier.</span></p><ul class="pm-feed-list">{''.join(rows)}</ul></main><script src="/js/theme.js" defer></script><script src="/js/polymythcal-features.js?v={ASSET_VERSION}" defer></script><script defer src="/js/site-keyboard-enhancements.js?v={ASSET_VERSION}"></script><script defer src="/js/mandala.js?v=cl91"></script><script defer src="/js/indra.js?v=cl91"></script></body></html>'''
+
+
+def build_featured(events) -> bool:
+    # About needs a compact teaser rather than the full event corpus. Keep
+    # enough future records for its client-side rolling window.
+    build_day = BUILD_DT.astimezone(TORONTO).date()
+    upcoming = []
+    for event in events:
+        start_day = parse_calendar_date(event.get('date'))
+        if not start_day or start_day < build_day:
+            continue
+        upcoming.append({
+            key: event.get(key)
+            for key in ('id', 'date', 'title', 'speaker_or_director', 'venue', 'source_url')
+            if event.get(key) not in (None, '')
+        })
+        if len(upcoming) >= 64:
+            break
+    featured_payload = {
+        'generated_at': BUILD_DT.isoformat().replace('+00:00', 'Z'),
+        'count': len(upcoming),
+        'events': upcoming,
+    }
+    return write_json_if_changed(ROOT / 'polymythseminars/featured.json', featured_payload)
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--featured-only', action='store_true')
+    args = parser.parse_args()
     payload = json.loads(DATA.read_text(encoding='utf-8'))
     events = sorted(payload.get('events', []), key=lambda event: (str(event.get('date') or ''), str(event.get('title') or '')))
+    updated = int(build_featured(events))
+    if args.featured_only:
+        print(f'Built compact featured feed; {updated} files updated')
+        return
+
     OUT.mkdir(parents=True, exist_ok=True)
     manifest = []
-    updated = 0
 
     for name, (label_en, label_fr, predicate) in FOCUSES.items():
         subset = [event for event in events if predicate(event)]
@@ -327,7 +397,10 @@ def main():
 
     # Preserve the historical URL without presenting the ambiguous label in the UI.
     opportunities_rss = (OUT / 'opportunities.xml').read_text(encoding='utf-8')
-    opportunities_ics = (OUT / 'opportunities.ics').read_text(encoding='utf-8')
+    # Path.read_text() performs universal-newline conversion. Decode bytes
+    # directly so the historical alias remains byte-identical and retains
+    # the CRLF transport required by iCalendar clients.
+    opportunities_ics = (OUT / 'opportunities.ics').read_bytes().decode('utf-8')
     updated += int(write_text_if_changed(OUT / 'deadlines.xml', opportunities_rss))
     updated += int(write_text_if_changed(OUT / 'deadlines.ics', opportunities_ics))
 
@@ -337,7 +410,7 @@ def main():
     }
     updated += int(write_json_if_changed(OUT / 'index.json', index_payload))
     updated += int(write_text_if_changed(ROOT / 'polymythseminars/subscribe/index.html', build_subscribe_page(manifest)))
-    print(f'Built {len(manifest)} focused bilingual RSS/ICS pairs and subscription index; {updated} files updated')
+    print(f'Built {len(manifest)} focused bilingual RSS/ICS pairs, compact featured feed, and subscription index; {updated} files updated')
 
 
 if __name__ == '__main__':

@@ -19,13 +19,27 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT_JSON = ROOT / "data" / "polymythcal-wcag22-browser-audit.json"
-OUT_MD = ROOT / "POLYMYTHCAL_WCAG22_AA_AUDIT_2026-07-22.md"
+OUT_MD = ROOT / "POLYMYTHCAL_WCAG22_AA_AUDIT35_2026-07-23.md"
 CHROMIUM = "/usr/bin/chromium"
 RESULTS: list[dict[str, Any]] = []
 RELEASE = json.loads((ROOT / "RELEASE_MANIFEST.json").read_text(encoding="utf-8"))
 
 
-def resolve_chromium_path(browser_type) -> str:
+def preserve_report_mtime(path: Path) -> None:
+    value = os.environ.get("SS_REPORT_OUTPUT_MTIME")
+    if not value:
+        return
+    try:
+        moment = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError as error:
+        raise SystemExit("SS_REPORT_OUTPUT_MTIME must be a valid timestamp") from error
+    if moment.tzinfo is None:
+        moment = moment.replace(tzinfo=timezone.utc)
+    timestamp = moment.timestamp()
+    os.utime(path, (timestamp, timestamp))
+
+
+def resolve_chromium_path(browser_type) -> str | None:
     configured = os.environ.get("CHROMIUM_PATH", "").strip()
     candidates = [configured, "/usr/bin/chromium", "/usr/bin/chromium-browser", "/usr/bin/google-chrome", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"]
     for candidate in candidates:
@@ -33,8 +47,18 @@ def resolve_chromium_path(browser_type) -> str:
             return candidate
     managed = getattr(browser_type, "executable_path", "")
     if managed and Path(managed).exists():
-        return managed
+        # Let Playwright launch the matching managed headless shell. Forcing
+        # its full-Chrome path can break process-singleton setup in CI.
+        return None
     raise FileNotFoundError("Chromium was not found. Set CHROMIUM_PATH or run: python -m playwright install chromium")
+
+
+def launch_chromium(browser_type):
+    options = {"headless": True, "args": ["--no-sandbox", "--disable-dev-shm-usage"]}
+    explicit_path = resolve_chromium_path(browser_type)
+    if explicit_path:
+        options["executable_path"] = explicit_path
+    return browser_type.launch(**options)
 
 
 def record(name: str, passed: bool, details: Any, criterion: str, scope: str = "browser-assisted") -> None:
@@ -132,7 +156,7 @@ def run() -> int:
     console_errors: list[str] = []
 
     with sync_playwright() as pw:
-        browser = pw.chromium.launch(headless=True, executable_path=resolve_chromium_path(pw.chromium), args=["--no-sandbox", "--disable-dev-shm-usage"])
+        browser = launch_chromium(pw.chromium)
 
         # Desktop, English, full interaction model.
         context = browser.new_context(viewport={"width": 1280, "height": 900}, timezone_id="America/Toronto")
@@ -148,7 +172,7 @@ def run() -> int:
         record("Calendar skip link targets the results region", dom["skipTarget"], dom, "2.4.1")
         record("Calendar heading order avoids skipped levels", not dom["jumps"], dom["jumps"], "1.3.1, 2.4.6")
         record("Calendar declares Canadian English", dom["lang"] == "en-CA", dom["lang"], "3.1.1")
-        record("Initial results render in a bounded page", page.locator(".pm-event-card").count() == 50, page.locator(".pm-event-card").count(), "2.4.6")
+        record("Initial results render in a bounded page", page.locator(".pm-event-card").count() == 24, page.locator(".pm-event-card").count(), "2.4.6")
         initial_count = count_from_title(page.locator("#pmResultsTitle").inner_text())
         record("Result count is announced in the results heading", initial_count > 0, page.locator("#pmResultsTitle").inner_text(), "4.1.3")
         record("Events and opportunities can remain selected together", page.locator('input[data-state-set="content"]:checked').count() == 2, page.locator('input[data-state-set="content"]:checked').count(), "3.2.2")
@@ -225,7 +249,7 @@ def run() -> int:
         load_calendar(page, html, css, payload, app_js, "?lang=fr&q=montral&places=montreal")
         record("French URL state restores page language", page.locator("html").get_attribute("lang") == "fr-CA", page.locator("html").get_attribute("lang"), "3.1.1, 3.1.2")
         record("French URL state restores search and place filters", page.locator("#pmSearch").input_value() == "montral" and page.locator('input[value="montreal"][data-state-set="places"]').is_checked(), {"query": page.locator("#pmSearch").input_value()}, "3.2.3")
-        record("French controls use translated visible labels", page.locator("#pmLookingForTitle").inner_text() == "Que voulez-vous trouver?", page.locator("#pmLookingForTitle").inner_text(), "3.1.2")
+        record("French controls use translated visible labels", page.locator("#pmLookingForTitle").inner_text() == "Que voulez-vous inclure?", page.locator("#pmLookingForTitle").inner_text(), "3.1.2")
         context.close()
 
         # Mobile reflow, drawer, agenda, and target sizes.
@@ -282,8 +306,11 @@ def run() -> int:
 
     failed = [item for item in RESULTS if not item["passed"]]
     report = {
+        "audit": 35,
         "generated_at": RELEASE.get("generated_at"),
-        "release": "PolymythCAL Audit 21 end-to-end",
+        "executed_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "release_id": RELEASE.get("release_id"),
+        "release": "PolymythCAL Audit 35 end-to-end",
         "standard": "WCAG 2.2 AA",
         "browser": "Chromium headless with production assets executed locally",
         "checks_passed": len(RESULTS) - len(failed),
@@ -298,6 +325,7 @@ def run() -> int:
     }
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     OUT_JSON.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    preserve_report_mtime(OUT_JSON)
     lines = [
         "# PolymythCAL WCAG 2.2 AA audit",
         "",
@@ -312,6 +340,7 @@ def run() -> int:
     for item in RESULTS:
         lines.append(f"- {'PASS' if item['passed'] else 'FAIL'} · {item['name']} · {item['criterion']} · `{json.dumps(item['details'], ensure_ascii=False)[:500]}`")
     OUT_MD.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    preserve_report_mtime(OUT_MD)
     print(json.dumps({"passed": report["checks_passed"], "total": report["checks_total"], "failed": report["checks_failed"]}))
     return 1 if failed else 0
 

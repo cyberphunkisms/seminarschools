@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sitemap. Seminar Schools.</title>
@@ -286,7 +287,7 @@ h1 em { color: var(--accent); font-style: italic; }
   border: 1px solid var(--rule);
   border-radius: 999px;
   color: var(--fg-soft);
-  transition: all 0.15s;
+  transition:color 0.15s,background-color 0.15s,border-color 0.15s,opacity 0.15s,transform 0.15s;
 }
 .view-toggle a:hover { border-color: var(--accent); color: var(--accent); }
 .view-toggle a.current { border-color: var(--accent); color: var(--accent); background: rgba(184, 86, 56, 0.08); }
@@ -333,10 +334,12 @@ h1 em { color: var(--accent); font-style: italic; }
 <!-- /Open Graph -->
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
-<link rel="stylesheet" href="/css/theme.css?v=cl91">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link rel="stylesheet" href="/css/theme.css?v=20260725-audit45">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="archive-map">
+<body data-geometry="indra-web" data-indra-intensity="0.095" data-route-type="archive-map">
 <!-- CL_SELF_ROUTE_NOTE -->
 <div class="route-note archive-route-note" role="note"><span class="route-note-kicker">Archive map</span>Route map for the polymyth materials.</div>
 
@@ -396,7 +399,7 @@ h1 em { color: var(--accent); font-style: italic; }
             <a href="/polymythseminars/" class="name-link"><span class="name">Calendar</span></a>
             <span class="path">/polymythseminars/</span>
             <span class="status live">Live</span>
-            <span class="blurb">Interactive month-grid calendar of seminars and festivals across the GO Transit network. Filter by category, pick events, export to iCal or PDF.</span>
+            <span class="blurb">Searchable calendar of events and opportunities from Toronto to Montréal. Filter by date, place, topic, audience, and type; open source links and subscribe or export.</span>
           </div>
         </li>
         <li>
@@ -491,10 +494,25 @@ h1 em { color: var(--accent); font-style: italic; }
       <ul>
         <li>
           <div class="node">
+            <a href="/polymythcommons/" class="name-link"><span class="name">Polymyth Commons</span></a>
+            <span class="path">/polymythcommons/</span>
+            <span class="status live">Live</span>
+            <span class="blurb">The Commons umbrella for Polymythlib, Teacher Resources, Polymythcal, shared method, contribution, and governance.</span>
+          </div>
+          <ul>
+            <li><a href="/polymythlib/">Polymythlib directory</a><br><span class="desc">Search 346 libraries, commons projects, supporting systems, and comparison records.</span></li>
+            <li><a href="/polymythlib/collections/">Curated collections</a><br><span class="desc">Question-led paths with visible selection rules.</span></li>
+            <li><a href="/polymythlib/book-backbone/">Ostrom book backbone</a><br><span class="desc">Search the named records, printed links, commons forms, project types, and relationship vocabulary.</span></li>
+            <li><a href="/polymythlib/method/">Method and governance</a><br><span class="desc">Evidence layers, expansion logic, descriptive signals, maintenance, and governance.</span></li>
+            <li><a href="/polymythlib/contribute/">Contribute</a><br><span class="desc">Suggest a project, correction, broken link, relationship, representative description, or preservation route.</span></li>
+          </ul>
+        </li>
+        <li>
+          <div class="node">
             <a href="/teacherresources/" class="name-link"><span class="name">Teacher Resources</span></a>
             <span class="path">/teacherresources/</span>
             <span class="status live">Live</span>
-            <span class="blurb">A curated catalog of free teaching materials. 554 entries across 50 collections, K-12 plus IB plus AP across eleven subjects.</span>
+            <span class="blurb">A searchable collection of 644 classroom resources across 25 collections, with filters for subject, grade, program, province, and format.</span>
           </div>
         </li>
         <li><a href="/aitr/">AI Teacher Resources</a><br><span class="desc">Teaching games requiring an AI in the room. DENOTE and Monster Battle.</span></li>
@@ -779,8 +797,8 @@ h1 em { color: var(--accent); font-style: italic; }
 
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
-<script src="/js/footer.js?v=20260719-audit11-decisions" defer></script>
+<script src="/js/footer.js?v=20260725-audit45-footer" defer></script>
 <script src="/js/theme.js?v=cl91" defer></script>
-<script defer src="/js/site-keyboard-enhancements.js"></script>
+<script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

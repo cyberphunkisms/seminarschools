@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Begin with Leizu. Tell me about your student.</title>
@@ -25,9 +26,15 @@
 <link rel="canonical" href="https://seminarschools.com/leizu/intake/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="alternate" hreflang="en" href="https://seminarschools.com/leizu/intake/">
+<link rel="alternate" hreflang="fr" href="https://seminarschools.com/leizu/fr/intake/">
+<link rel="alternate" hreflang="zh-Hant" href="https://seminarschools.com/leizu/zh-hant/intake/">
+<link rel="alternate" hreflang="zh-Hans" href="https://seminarschools.com/leizu/zh-hans/intake/">
+<link rel="alternate" hreflang="fa" href="https://seminarschools.com/leizu/fa/intake/">
+<link rel="alternate" hreflang="x-default" href="https://seminarschools.com/leizu/intake/">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+TC:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
-<link rel="stylesheet" href="/css/theme.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=20260725-audit45">
 <style>
 :root{
   --paper:#F4EFE3;
@@ -47,7 +54,7 @@
 :root.dark, :root[data-theme="dark"]{--paper:#1A2014;--paper-deep:#242C1C;--ink:#E8DEC7;--ink-soft:#B8AC8E;--rule:#5A5240;--mulberry-deep:#C98092;--mulberry-fruit:#D69AA8;--mulberry-fruit-ripe:#E0AEB8;--shadow:rgba(0,0,0,0.4);}
 @media (prefers-color-scheme: dark){ :root:not(.light){--paper:#1A2014;--paper-deep:#242C1C;--ink:#E8DEC7;--ink-soft:#B8AC8E;--rule:#5A5240;--mulberry-deep:#C98092;--mulberry-fruit:#D69AA8;--mulberry-fruit-ripe:#E0AEB8;--shadow:rgba(0,0,0,0.4);} }
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:auto;}
 body{background:var(--paper);color:var(--ink);font-family:var(--display);font-size:1.06rem;line-height:1.65;-webkit-font-smoothing:antialiased;}
 .page{max-width:620px;margin:0 auto;padding:4.5rem 1.5rem 7rem;}
 
@@ -86,7 +93,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
 .chip input{position:absolute;opacity:0;width:0;height:0;}
 .chip span{display:inline-block;font-family:var(--mono);font-size:0.8rem;letter-spacing:0.04em;color:var(--ink-soft);
   padding:0.45rem 0.95rem;border:1px solid var(--rule);border-radius:22px;cursor:pointer;
-  transition:all 0.25s ease;background:transparent;user-select:none;}
+  transition:color 0.25s ease,background-color 0.25s ease,border-color 0.25s ease,opacity 0.25s ease,transform 0.25s ease;background:transparent;user-select:none;}
 .chip span:hover{border-color:var(--mulberry-fruit);color:var(--mulberry-deep);}
 .chip input:checked + span{background:var(--mulberry-deep);border-color:var(--mulberry-deep);color:var(--paper);}
 .chip input:focus-visible + span{box-shadow:0 0 0 2px var(--mulberry-fruit);}
@@ -101,7 +108,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
 .bubble{margin:3rem 0 1rem;}
 .bubble-toggle{width:100%;text-align:left;background:var(--paper-deep);border:1px solid var(--rule);border-radius:30px;
   font-family:var(--display);font-size:1.18rem;color:var(--mulberry-deep);padding:1.05rem 1.6rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:all 0.3s ease;}
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:color 0.3s ease,background-color 0.3s ease,border-color 0.3s ease,opacity 0.3s ease,transform 0.3s ease;}
 .bubble-toggle:hover{border-color:var(--mulberry-fruit);background:var(--paper);}
 .bubble-toggle:focus-visible{outline:none;box-shadow:0 0 0 2px var(--mulberry-fruit);}
 .bubble-toggle .mark{font-family:var(--mono);font-size:1.4rem;line-height:1;transition:transform 0.4s ease;color:var(--mulberry-fruit);}
@@ -180,9 +187,11 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
 }
 </style>
   <link rel="stylesheet" href="/leizu/revamp.css?v=20260627a">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body class="leizu-revamp" data-geometry="indra-web" data-indra-intensity="0.075">
+<body class="leizu-revamp" data-geometry="indra-web" data-indra-intensity="0.070">
 <a class="skip-link" href="#content">Skip to main content</a>
 <nav class="leizu-site-nav" aria-label="Leizu Academy">
   <a class="leizu-mark" href="/leizu/">嫘祖學院 <span aria-hidden="true">·</span> Leizu</a>
@@ -218,7 +227,9 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
       <input type="hidden" name="language" id="language" value="">
       <p class="gotcha"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 
-      <section class="selection-summary" id="selection-summary" hidden aria-labelledby="selection-summary-title"></section>
+      <section class="selection-summary" id="selection-summary" hidden aria-labelledby="selection-summary-title">
+        <div class="selection-summary-title" id="selection-summary-title">Your selection</div>
+      </section>
 
       <!-- ---- the short required core ---- -->
       <div class="field reveal in">
@@ -376,8 +387,9 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
 
   <footer class="colophon">
     <p>嫘祖學院 · Leizu Academy · A practice within <a href="/">Seminar Schools</a> · <a href="/leizu/teach">Teach at Leizu</a> · <a href="/leizu/scholarship">Scholarships</a> · <a href="/leizu">Back to curriculum</a> · <a href="mailto:saulnassau@protonmail.com">Contact</a></p>
-  </footer></main>
+  </footer>
 </div>
+</main>
 
 
 <script src="/leizu/payment-config.js?v=cl96"></script>
@@ -486,13 +498,14 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
     if(selectedEslCourseNames) selectedEslCourseNames.value = eslCourseNames.join(', ');
 
     box.replaceChildren();
+    var summaryTitle = appendText(box, 'div', 'selection-summary-title', 'Your selection');
+    summaryTitle.id = 'selection-summary-title';
     if(!product && !courses.length && !eslCourses.length && !sourceRequiresReview()){
       box.hidden = true;
       updateSubjectPrompt();
       updatePlanPicker();
       return;
     }
-    appendText(box, 'div', 'selection-summary-title', 'Your selection');
     if(sourceRequiresReview()) appendCourseRow(box, 'Route', ['Portfolio intake']);
     if(product) appendCourseRow(box, 'Plan', [product.label]);
     if(selectedPath && pathLabels[selectedPath.value]) appendCourseRow(box, 'Selected path', [pathLabels[selectedPath.value]]);
@@ -549,7 +562,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
       offerNote.hidden = false;
       offerNote.textContent = portfolioRoute ? 'Your work receives a personal review before payment.' : 'I will read what you sent and reply with the right plan, usually within one day.';
     }
-    window.scrollTo({top:0, behavior:'smooth'});
+    window.scrollTo({top:0, behavior:'auto'});
   }
   function nativeAction(){
     var query = new URLSearchParams();
@@ -640,7 +653,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
       event.preventDefault();
       if(setTier(button.getAttribute('data-payment-key'))){
         clearError();
-        form.scrollIntoView({behavior:'smooth', block:'start'});
+        form.scrollIntoView({behavior:'auto', block:'start'});
       }
     });
   });
@@ -665,7 +678,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
       if(requiredBubble) requiredBubble.classList.add('open');
       if(requiredToggle) requiredToggle.setAttribute('aria-expanded', 'true');
       showError('Choose a published plan below before moving from your selected subjects to secure payment.', false);
-      if(requiredBubble) requiredBubble.scrollIntoView({behavior:'smooth', block:'center'});
+      if(requiredBubble) requiredBubble.scrollIntoView({behavior:'auto', block:'center'});
       return;
     }
     clearError();
@@ -690,11 +703,11 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 2px
   }
 })();
 </script>
-<script src="/leizu/language-state.js?v=cl96" defer></script>
+<script src="/leizu/language-state.js?v=20260725-audit45" defer></script>
 <script src="/js/theme.js?v=cl91" defer></script>
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
-<script src="/js/footer.js?v=20260719-audit11-decisions" defer></script>
-<script defer src="/js/site-keyboard-enhancements.js"></script>
+<script src="/js/footer.js?v=20260725-audit45-footer" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

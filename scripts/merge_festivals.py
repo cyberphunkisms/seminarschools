@@ -18,6 +18,7 @@ import json
 import re
 import sys
 from datetime import datetime, timezone
+from email.utils import format_datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -61,7 +62,7 @@ def round_to_hour(iso_date):
 
 def host_of(url):
     try:
-        return urlparse(url).netloc.lower().lstrip("www.")
+        return urlparse(url).netloc.lower().removeprefix("www.")
     except Exception:
         return ""
 
@@ -180,10 +181,16 @@ def enforce_date_sanity(records, max_days_ahead=365):
     kept, dropped = [], []
     for r in records:
         try:
-            dt = datetime.fromisoformat(r["date"])
-            if dt.tzinfo is None:
-                dt = dt.replace(tzinfo=timezone.utc)
-            days_ahead = (dt - now).days
+            start = datetime.fromisoformat(r["date"])
+            if start.tzinfo is None:
+                start = start.replace(tzinfo=timezone.utc)
+            lifecycle_date = start
+            if r.get("end_date"):
+                end = datetime.fromisoformat(r["end_date"])
+                if end.tzinfo is None:
+                    end = end.replace(tzinfo=timezone.utc)
+                lifecycle_date = max(start, end)
+            days_ahead = (start - now).days
             if days_ahead > max_days_ahead:
                 dropped.append({
                     "title": r.get("title", "?"),
@@ -192,11 +199,12 @@ def enforce_date_sanity(records, max_days_ahead=365):
                     "reason": f"more than {max_days_ahead} days in future, likely stale-rollover"
                 })
                 continue
-            if days_ahead < -7:
+            days_since_lifecycle = (lifecycle_date - now).days
+            if days_since_lifecycle < -7:
                 dropped.append({
                     "title": r.get("title", "?"),
                     "date": r["date"],
-                    "days_ahead": days_ahead,
+                    "days_ahead": days_since_lifecycle,
                     "reason": f"event ended more than 7 days ago, stale"
                 })
                 continue
@@ -281,6 +289,14 @@ def xml_escape(s):
              .replace("'", "&apos;"))
 
 
+def rss_date(value):
+    """Return an RFC 822-compatible RSS date for an ISO timestamp."""
+    parsed = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return format_datetime(parsed.astimezone(timezone.utc), usegmt=True)
+
+
 def write_rss(records):
     items = sorted(records, key=lambda r: r["date"], reverse=True)
     rss_items = []
@@ -288,9 +304,10 @@ def write_rss(records):
         title = xml_escape(r["title"] or "Untitled")
         link = xml_escape(r["source_url"])
         desc = xml_escape(r.get("raw_excerpt") or "")
+        published = rss_date(r["date"])
         rss_items.append(
             f"<item><title>{title}</title><link>{link}</link>"
-            f"<pubDate>{r['date']}</pubDate><guid isPermaLink=\"false\">{r['id']}</guid>"
+            f"<pubDate>{published}</pubDate><guid isPermaLink=\"false\">{r['id']}</guid>"
             f"<description>{desc}</description></item>"
         )
     feed = (
@@ -300,7 +317,7 @@ def write_rss(records):
         '<title>Seminar Schools — Toronto Festivals</title>'
         '<link>https://seminarschools.com/festivals/</link>'
         '<description>Toronto-GTA festivals passing the polymyth-broadened test.</description>'
-        f'<lastBuildDate>{now_iso()}</lastBuildDate>'
+        f'<lastBuildDate>{rss_date(now_iso())}</lastBuildDate>'
         + "".join(rss_items)
         + '</channel></rss>'
     )
@@ -326,6 +343,11 @@ def write_log(harvest_data, final_records, aggregator_drops):
                             key=lambda x: -x["count"]),
         "by_type": sorted([{"type": k, "count": v} for k, v in by_type.items()],
                           key=lambda x: -x["count"]),
+        "source_yields": (
+            harvest_data.get("source_yields")
+            if isinstance(harvest_data.get("source_yields"), list)
+            else []
+        ),
         "aggregator_leak_examples": aggregator_drops[:5],
     }
     LOG_PATH.parent.mkdir(parents=True, exist_ok=True)

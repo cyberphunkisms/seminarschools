@@ -5,6 +5,8 @@
  * Stripe and Cal.com remain server-verified downstream of the intake form.
  */
 (function(){
+  if(window.__leizuBookingButtonMounted)return;
+  window.__leizuBookingButtonMounted=true;
   function config(){ return window.LEIZU_PAYMENT_CONFIG; }
   function productFor(key){
     var c = config();
@@ -38,11 +40,15 @@
     var esl = sanitizeIds(options.eslCourseIds);
     var path = String(options.path || '').toLowerCase();
     var lang = String(options.lang || '').toLowerCase();
+    var languageSegments = {fr:'fr',zh:'zh-hant',zhs:'zh-hans',fa:'fa'};
     if(courses.length) params.set('courses', courses.join(','));
     if(esl.length) params.set('esl_courses', esl.join(','));
     if(['forest','ib','ossd'].indexOf(path) !== -1) params.set('path', path);
     if(['fr','zh','zhs','fa'].indexOf(lang) !== -1) params.set('lang', lang);
-    return '/leizu/intake/' + (params.toString() ? '?' + params.toString() : '');
+    var intakePath = languageSegments[lang]
+      ? '/leizu/' + languageSegments[lang] + '/intake/'
+      : '/leizu/intake/';
+    return intakePath + (params.toString() ? '?' + params.toString() : '');
   }
   function getPaymentKeyForCart(selectedCourseIds, options){
     if(options === true) return 'forest_year_monthly';
@@ -65,7 +71,7 @@
   }
   function refreshIntakeCtas(){
     var state = currentPickerState();
-    document.querySelectorAll('a[data-payment-key],a[data-intake-source],a[href^="/leizu/intake"]').forEach(function(link){
+    document.querySelectorAll('a[data-payment-key],a[data-intake-source],a[href^="/leizu/"][href*="/intake/"],a[href^="/leizu/intake"]').forEach(function(link){
       var intent = intentForLink(link);
       if(intent.tier && !productFor(intent.tier)) return;
       link.href = buildIntakeUrl({
@@ -94,7 +100,7 @@
         var notice = document.getElementById('selection-notice');
         if(notice){ notice.hidden=false; notice.textContent='Choose at least one subject before continuing.'; }
         var subjects = document.getElementById('subjects');
-        if(subjects) subjects.scrollIntoView({behavior:'smooth', block:'start'});
+        if(subjects) subjects.scrollIntoView({behavior:'auto', block:'start'});
         return;
       }
       var notice = document.getElementById('selection-notice');
@@ -106,8 +112,14 @@
   window.LEIZU_REFRESH_INTAKE_CTAS = refreshIntakeCtas;
   window.getPaymentKeyForCart = getPaymentKeyForCart;
   document.addEventListener('leizu:pickerchange', refreshIntakeCtas);
-  document.addEventListener('DOMContentLoaded', function(){
+  function initializeBookingButton(){
     refreshIntakeCtas();
     window.setTimeout(buildBookingHandler, 100);
-  });
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initializeBookingButton, {once:true});
+  } else {
+    initializeBookingButton();
+  }
+  window.addEventListener('pageshow', refreshIntakeCtas);
 })();

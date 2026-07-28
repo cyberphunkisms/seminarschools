@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
 RELEASE = '2026-07-18-map-archive-interaction-final8'
-ASSET_VERSION = '20260718-map-archive-final8'
+ASSET_VERSION = '20260725-audit45-saul-runtime'
 MARKER = 'FINAL8_MAP_ARCHIVE_INTERACTION_POLISH'
 
 

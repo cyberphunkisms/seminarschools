@@ -1,6 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme-policy="fixed">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
+<script>document.documentElement.classList.add('bookwormcard-js')</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bookwormcard · Make a bookwormburrows Character Card</title>
@@ -849,11 +851,54 @@
 </style>
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
-<link rel="stylesheet" href="/css/theme.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=20260725-audit45">
 <style id="final8-linklike-button">.linklike-button{appearance:none;border:0;background:none;color:inherit;font:inherit;padding:0;text-decoration:underline;text-underline-offset:.18em;cursor:pointer}</style>
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<style id="audit35-bookwormcard-ui">
+/* The runtime class is set before first paint. No-JS visitors still receive the
+   complete explanatory section, while JS users do not watch it collapse. */
+html.bookwormcard-js #static-bookwormcard-context{display:none}
+.bookwormcard-runtime-title{display:none!important}
+html.bookwormcard-js .bookwormcard-runtime-title{display:block!important}
+
+/* Keep the desktop toolbar keyboard/touch operable too. */
+#toggles button,#toggles a{min-width:44px;min-height:44px}
+#menu .menu-item .tooltip{width:min(500px,calc(100vw - 2rem));max-width:calc(100vw - 2rem)}
+
+/* The late fixed-footer rule used to override the earlier short-screen escape.
+   Put help and secondary actions back into document flow where screen height is
+   scarce so they never cover the prompt or one another. */
+@media (max-width:900px),(max-height:650px){
+  #toggles{flex-wrap:wrap}
+  .keys-hint{position:relative;inset:auto;width:100%;max-height:none;
+    padding:.65rem 1rem;gap:.35rem .8rem}
+  .keys-hint .skip-game-link{display:flex;margin-left:0}
+  .keys-hint .skip-game-link a,.keys-hint .skip-game-link button{
+    display:inline-flex;align-items:center;min-height:44px;padding:.35rem 0;
+    white-space:normal;text-align:left;overflow-wrap:anywhere}
+  body.bypass-mode .bypass-help{position:static;display:flex;align-items:center;
+    width:max-content;max-width:calc(100% - 2rem);min-height:44px;
+    margin:.6rem 1rem .2rem auto;padding:.35rem 0}
+  body:not(.bypass-mode) .bypass-help{display:none}
+  #menu .menu-item.selected .tooltip{position:static;transform:none;width:100%;
+    max-width:none;margin:.4rem 0 0}
+}
+@media (forced-colors:active){
+  body,body::before,body::after{background:Canvas!important;color:CanvasText!important;
+    text-shadow:none!important}
+  #rain-canvas{display:none!important}
+  #toggles button,#toggles a,#menu,#card-preview,#student-start-card{
+    border-color:CanvasText!important;background:Canvas!important;color:CanvasText!important;
+    box-shadow:none!important;text-shadow:none!important}
+}
+@media print{
+  .skip-link,.bypass-help,#static-bookwormcard-context{display:none!important}
+}
+</style>
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body class="bypass-mode bookwormcard-page" data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="game-tool" data-page-weight="heavy">
+<body class="bypass-mode bookwormcard-page" data-geometry="indra-web" data-indra-intensity="0.095" data-route-type="game-tool" data-page-weight="heavy">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:none;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 <!-- bb* QR logo -->
@@ -1023,7 +1068,7 @@
   <input type="hidden" name="hegeliane-full">
 </form>
 
-<canvas id="rain-canvas"></canvas>
+<canvas id="rain-canvas" data-rain-color="#ff3ee0" data-rain-fade="rgba(8,7,13,0.06)"></canvas>
 <div id="toggles" role="toolbar" aria-label="Bookwormcard display options">
   <button id="t-esl" type="button" aria-pressed="false" title="turn plain-language help on or off"><span>ESL</span></button>
   <button id="t-theme" type="button" aria-pressed="false" title="switch light or dark mode"><span>☀</span></button>
@@ -1037,7 +1082,7 @@
 <div id="tier-cinematic"><div class="tier-text"></div></div>
 
 <div class="layout">
-  <h2 class="sr-only">Bookwormcard · BookwormBurrows character gate</h2>
+  <h1 class="sr-only bookwormcard-runtime-title">Bookwormcard · BookwormBurrows character gate</h1>
 <main id="main-content" class="terminal">
     <div class="header">
       <span>bookwormburrows · <b>/bookwormcard/</b></span>
@@ -1047,7 +1092,7 @@
     <div id="input-area">
       <div id="prompt-line">
         <span class="prompt-arrow">›</span>
-        <input id="user-input" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Bookwormcard response">
+        <input id="user-input" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Bookwormcard response" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-controls="menu" aria-expanded="false">
         <span id="cursor-block"></span>
       </div>
       <div id="word-count" aria-hidden="true"></div>
@@ -1914,6 +1959,7 @@ function restoreFromSavePayload(payload){
   }
   if(resumeState && STATES[resumeState] && resumeState !== 'bypass' && resumeState !== 'submitting'){
     currentState = resumeState;
+    window.dispatchEvent(new CustomEvent('bookwormcard-statechange'));
     appendLine(loadSummary, {gap:false});
     appendLine('<span class="quiet">resuming from where you left off.</span>', {gap:true, instant:true});
     STATES[resumeState].enter();
@@ -2385,7 +2431,7 @@ document.addEventListener('keydown', function(e){
 });
 
 // Prefers-reduced-motion: skip all typing animations
-if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+if(document.documentElement.dataset.motion === 'calm' || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)){
   var origAppend = appendLine;
   appendLine = function(text, opts){
     opts = opts || {};
@@ -2415,7 +2461,7 @@ function setPrompt(hint, multiline){
     placeholderEl.textContent = '';
   }
   inputEl.setAttribute('aria-label', 'Bookwormcard response' + (hint ? ': ' + hint : ''));
-  inputEl.focus();
+  inputEl.focus({preventScroll:true});
 }
 
 function swapToTextarea(){
@@ -2444,9 +2490,10 @@ function swapToInput(){
 }
 
 function attachInputHandler(){
+  configureMenuInput(inputEl);
   inputEl.addEventListener('keydown', handleInputKey);
   inputEl.addEventListener('input', handleInputChange);
-  inputEl.focus();
+  inputEl.focus({preventScroll:true});
 }
 
 function handleInputKey(e){
@@ -2550,6 +2597,7 @@ function handleInputKey(e){
           appendLine('<span class="quiet">type a new answer to overwrite, or press up again to go further back.</span>', {gap:true, instant:true});
         }
         currentState = prev;
+        window.dispatchEvent(new CustomEvent('bookwormcard-statechange'));
         renderProgressDots();
         saveCheckpoint();
         STATES[prev].enter();
@@ -2671,12 +2719,13 @@ attachInputHandler();
     if(prev) prev.style.opacity = inAnimal ? '1' : '0.35';
     if(next) next.style.opacity = inAnimal ? '1' : '0.35';
   }
-  setInterval(syncAnimalButtons, 400);
+  syncAnimalButtons();
+  window.addEventListener('bookwormcard-statechange', syncAnimalButtons);
   bar.addEventListener('click', function(e){
     var btn = e.target.closest('.tb-btn');
     if(!btn) return;
     var action = btn.getAttribute('data-action');
-    if(inputEl) inputEl.focus();
+    if(inputEl) inputEl.focus({preventScroll:true});
     if(action === 'prev-animal' || action === 'next-animal'){
       if(currentState !== 'animal') return;
       var total = (animalCycleList.length || 0) + 1;
@@ -2742,17 +2791,61 @@ document.addEventListener('keydown', function(e){
 // ============================================================
 // MENU MANAGEMENT (38 animals, 12 months)
 // ============================================================
+function menuOptionId(index){
+  return 'bookwormcard-menu-option-' + index;
+}
+function configureMenuInput(el){
+  if(!el || el.tagName !== 'INPUT') return;
+  el.setAttribute('role','combobox');
+  el.setAttribute('aria-autocomplete','list');
+  el.setAttribute('aria-haspopup','listbox');
+  el.setAttribute('aria-controls','menu');
+  el.setAttribute('aria-expanded', menuEl && menuEl.classList.contains('visible') ? 'true' : 'false');
+}
+function setMenuExpanded(expanded){
+  if(!inputEl || inputEl.tagName !== 'INPUT') return;
+  inputEl.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  if(!expanded) inputEl.removeAttribute('aria-activedescendant');
+}
+function syncMenuSelection(){
+  var options = Array.prototype.slice.call(menuEl.querySelectorAll('.menu-item'));
+  var active = options.find(function(el){
+    return !el.classList.contains('hidden')
+      && parseInt(el.getAttribute('data-index'), 10) === menuIndex;
+  });
+  if(!active){
+    active = options.find(function(el){ return !el.classList.contains('hidden'); }) || null;
+    if(active) menuIndex = parseInt(active.getAttribute('data-index'), 10);
+  }
+  options.forEach(function(el){
+    var selected = el === active;
+    el.classList.toggle('selected', selected);
+    el.setAttribute('aria-selected', selected ? 'true' : 'false');
+  });
+  if(active){
+    menuEl.setAttribute('aria-activedescendant', active.id);
+    if(inputEl && inputEl.tagName === 'INPUT') inputEl.setAttribute('aria-activedescendant', active.id);
+  } else {
+    menuEl.removeAttribute('aria-activedescendant');
+    if(inputEl) inputEl.removeAttribute('aria-activedescendant');
+  }
+}
 function showMenu(items, breadcrumb){
   menuItems = items;
   menuIndex = 0;
   menuBreadcrumb = breadcrumb || '';
   renderMenu();
   menuEl.classList.add('visible');
+  setMenuExpanded(true);
+  syncMenuSelection();
 }
 function menuClose(){
   menuEl.classList.remove('visible');
+  menuEl.removeAttribute('aria-activedescendant');
+  setMenuExpanded(false);
   menuItems = [];
   menuBreadcrumb = '';
+  menuEl.innerHTML = '';
 }
 function renderMenu(){
   menuEl.innerHTML = '';
@@ -2773,22 +2866,27 @@ function renderMenu(){
     }
     var el = document.createElement('div');
     el.className = 'menu-item' + (i===menuIndex?' selected':'');
+    el.id = menuOptionId(i);
     el.setAttribute('data-index', i);
     el.setAttribute('role','option');
+    el.setAttribute('aria-selected', i===menuIndex ? 'true' : 'false');
     var emoji = item.emoji||'';
     var html = '<span class="menu-emoji">'+escapeHtml(emoji)+'</span>'
       + '<span>'+escapeHtml(item.label)+'</span>'
       + (item.meta?'<span class="menu-meta">'+escapeHtml(item.meta)+'</span>':'');
     if(item.tooltip){
-      html += '<div class="tooltip">'+escapeHtml(item.tooltip)+'</div>';
+      html += '<div class="tooltip" id="'+menuOptionId(i)+'-description">'+escapeHtml(item.tooltip)+'</div>';
+      el.setAttribute('aria-describedby', menuOptionId(i)+'-description');
     }
     el.innerHTML = html;
     el.addEventListener('click', function(){
       menuIndex = i;
+      syncMenuSelection();
       menuSelect();
     });
     menuEl.appendChild(el);
   });
+  syncMenuSelection();
   scrollMenuToSelected();
 }
 function scrollMenuToSelected(){
@@ -2807,15 +2905,16 @@ function menuMove(delta){
   var currentVisIdx = visible.indexOf(currentEl);
   if(currentVisIdx<0)currentVisIdx = 0;
   var newIdx = (currentVisIdx + delta + visible.length) % visible.length;
-  menuEl.querySelectorAll('.menu-item').forEach(function(el){el.classList.remove('selected');});
-  visible[newIdx].classList.add('selected');
   menuIndex = parseInt(visible[newIdx].getAttribute('data-index'), 10);
+  syncMenuSelection();
   scrollMenuToSelected();
 }
 function filterMenu(q){
   if(!q){
     menuEl.querySelectorAll('.menu-item').forEach(function(el){el.classList.remove('hidden');});
     menuEl.querySelectorAll('.menu-section').forEach(function(el){el.classList.remove('hidden');});
+    syncMenuSelection();
+    scrollMenuToSelected();
     return;
   }
   menuEl.querySelectorAll('.menu-item').forEach(function(el){
@@ -2827,6 +2926,8 @@ function filterMenu(q){
       el.classList.add('hidden');
     }
   });
+  syncMenuSelection();
+  scrollMenuToSelected();
 }
 function menuSelect(){
   if(menuItems.length===0)return;
@@ -3121,7 +3222,7 @@ function renderAnimalCyclePreview(){
     }
     setPrompt('← → to browse · enter to choose');
     showAnimalCycleLine('<span class="quiet">browsing:</span> <span class="answer">the worm</span> <span class="quiet">· press → to see the others, ← to go back. enter to choose.</span>');
-    if(inputEl && typeof inputEl.focus === 'function') inputEl.focus();
+    if(inputEl && typeof inputEl.focus === 'function') inputEl.focus({preventScroll:true});
     return;
   }
   var animal = animalCycleList[animalCycleIndex - 1];
@@ -3148,7 +3249,7 @@ function renderAnimalCyclePreview(){
   // and the input lost focus, the inputEl-level keydown handler would
   // stop firing. The document-level fallback at line ~2420 still
   // works, but re-focusing the input ensures both handlers stay live.
-  if(inputEl && typeof inputEl.focus === 'function') inputEl.focus();
+  if(inputEl && typeof inputEl.focus === 'function') inputEl.focus({preventScroll:true});
 }
 
 // Lock in the animal at the current cycle position. Worm position
@@ -3269,6 +3370,7 @@ var STATES = {
         var resumeState = checkpoint.currentState;
         if(resumeState && STATES[resumeState] && resumeState !== 'bypass' && resumeState !== 'submitting'){
           currentState = resumeState;
+          window.dispatchEvent(new CustomEvent('bookwormcard-statechange'));
           STATES[resumeState].enter();
         } else {
           transitionTo('review');
@@ -4036,6 +4138,7 @@ var STATES = {
           appendLine('', {gap:true, instant:true});
         }
         currentState = 'edit-pick';
+        window.dispatchEvent(new CustomEvent('bookwormcard-statechange'));
       } else if(cmd==='copy' || cmd==='copy text' || cmd==='save text' || cmd==='clipboard'){
         copyCardToClipboard();
       } else if(cmd==='blank' || cmd==='blank card' || cmd==='print blank' || cmd==='print blank card'){
@@ -4394,6 +4497,7 @@ function transitionTo(name){
     markWormcardStarted();
   }
   currentState = name;
+  window.dispatchEvent(new CustomEvent('bookwormcard-statechange'));
   renderProgressDots();
   saveCheckpoint();
   // Watch for the false→true transition into a fully-filled card so
@@ -4461,7 +4565,7 @@ function handleAdvance(input, raw){
         });
       }
       inputEl.value = '';
-      inputEl.focus();
+      inputEl.focus({preventScroll:true});
       return;
     }
   }
@@ -4469,6 +4573,7 @@ function handleAdvance(input, raw){
     var prev = stateHistory.pop();
     if(prev){
       currentState = prev;
+      window.dispatchEvent(new CustomEvent('bookwormcard-statechange'));
       renderProgressDots();
       saveCheckpoint();
       var s = STATES[prev];
@@ -4482,7 +4587,7 @@ function handleAdvance(input, raw){
       window.GeminiBridge.disable();
       appendLine('<span class="system">gemini layer disabled. running static-only for this session.</span>', {gap:true, instant:true});
       inputEl.value = '';
-      inputEl.focus();
+      inputEl.focus({preventScroll:true});
       return;
     }
   }
@@ -4691,51 +4796,18 @@ function buildQualityHistorySummary(){
 }
 
 // ============================================================
-// MATRIX RAIN BACKGROUND (very subtle)
-// ============================================================
-(function(){
-  var canvas = document.getElementById('rain-canvas');
-  var ctx = canvas.getContext('2d');
-  var w, h, cols, drops;
-  var chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-  function resize(){
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-    cols = Math.floor(w/16);
-    drops = [];
-    for(var i=0;i<cols;i++) drops[i] = Math.random()*h;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-  function draw(){
-    if(document.hidden) return;
-    ctx.fillStyle = 'rgba(8,7,13,0.06)';
-    ctx.fillRect(0,0,w,h);
-    ctx.fillStyle = '#ff3ee0';
-    ctx.font = '14px monospace';
-    for(var i=0;i<drops.length;i++){
-      var c = chars[Math.floor(Math.random()*chars.length)];
-      ctx.fillText(c, i*16, drops[i]);
-      drops[i] += 16;
-      if(drops[i] > h && Math.random()>0.975) drops[i] = 0;
-    }
-  }
-  // Throttled to ~12fps for low CPU
-  if(!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    setInterval(draw, 80);
-  }
-})();
-
-// ============================================================
 // BOOT
 // ============================================================
-window.addEventListener('load', function(){
+var bookwormcardBooted = false;
+function bootBookwormcard(){
+  if(bookwormcardBooted) return;
+  bookwormcardBooted = true;
   document.body.classList.add('game-ready');
   renderProgressDots();
   var startBtn = document.getElementById('start-wormcard');
   if(startBtn){
     startBtn.addEventListener('click', function(){
-      if(inputEl) inputEl.focus();
+      if(inputEl) inputEl.focus({preventScroll:true});
       if(currentState === 'bypass'){
         handleAdvance('', '');
       } else if(currentState === 'review'){
@@ -4758,7 +4830,13 @@ window.addEventListener('load', function(){
   installLegendPanel();
   installDragDropSaveLoader();
   STATES.bypass.enter();
-});
+}
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', bootBookwormcard, {once:true});
+} else {
+  bootBookwormcard();
+}
+window.addEventListener('pageshow', bootBookwormcard);
 
 // ============================================================
 // LEGEND PANEL, closes the silent-visualization critique. The
@@ -5041,22 +5119,20 @@ function syncTamagotchi(){
   });
 }
 
-// click anywhere to refocus input
-document.addEventListener('click', function(e){
-  if(e.target.closest('.menu-item')) return;
-  if(e.target.tagName === 'A') return;
-  if(e.target.closest('#toggles')) return;
-  if(e.target.tagName === 'BUTTON') return;
-  if(!typing) inputEl.focus();
+// Keep focus behaviour local to the response area so unrelated clicks never move the page.
+document.getElementById('input-area')?.addEventListener('click', function(e){
+  if(e.target.closest('a, button, [role="button"]')) return;
+  if(!typing && inputEl && typeof inputEl.focus === 'function') inputEl.focus({preventScroll:true});
 });
 
 })();
 </script>
+<script src="/js/bookworm-rain.js?v=20260724-rain-lifecycle" defer></script>
 <script src="/js/theme.js?v=cl91" defer></script>
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
-<script src="/js/footer.js?v=20260719-audit11-decisions" defer></script>
+<script src="/js/footer.js?v=20260725-audit45-footer" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
-<script defer src="/js/site-keyboard-enhancements.js"></script>
+<script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

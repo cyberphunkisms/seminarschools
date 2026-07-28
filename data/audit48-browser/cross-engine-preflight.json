@@ -1,0 +1,168 @@
+{
+  "schema": "seminar-schools-audit48-cross-engine-preflight-v1",
+  "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
+  "generated_at": "2026-07-26T15:45:00-04:00",
+  "playwright_version": "1.61.1",
+  "status": "incomplete",
+  "execution_status": "pending",
+  "execution_blocker": "",
+  "platform": "linux",
+  "architecture": "x64",
+  "browser_storage": "$PLAYWRIGHT_DEFAULT_CACHE",
+  "source_program": "scripts/audit48-cross-engine-browser.js",
+  "source_program_sha256": "aeed67f00554bdba56736bfcb3ebe2a527b20e9835a03d63e7f82f28a2d1f5ec",
+  "engines": [
+    {
+      "name": "firefox",
+      "installed": false,
+      "executable": false,
+      "executable_path": "$PLAYWRIGHT_DEFAULT_CACHE/firefox-1532/firefox/firefox",
+      "lookup_error": ""
+    },
+    {
+      "name": "webkit",
+      "installed": false,
+      "executable": false,
+      "executable_path": "$PLAYWRIGHT_DEFAULT_CACHE/webkit-2311/pw_run.sh",
+      "lookup_error": ""
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "leizu-fr-desktop",
+      "route": "/leizu/fr/",
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1440,
+        "height": 1000
+      },
+      "locale": "fr-CA"
+    },
+    {
+      "id": "leizu-fa-mobile",
+      "route": "/leizu/fa/",
+      "viewport": "mobile",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "locale": "fa-IR"
+    },
+    {
+      "id": "leizu-zh-hans-intake-mobile",
+      "route": "/leizu/zh-hans/intake/",
+      "viewport": "mobile",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "locale": "zh-CN"
+    },
+    {
+      "id": "polymythcal-fr-desktop",
+      "route": "/polymythseminars/fr/",
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1440,
+        "height": 1000
+      },
+      "locale": "fr-CA"
+    },
+    {
+      "id": "polymythcal-writing-fr-mobile",
+      "route": "/writingclub/fr/",
+      "viewport": "mobile",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "locale": "fr-CA"
+    },
+    {
+      "id": "polymythcal-fr-event-mobile",
+      "route": "/polymythseminars/fr/events/0397c5dce167/",
+      "viewport": "mobile",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "locale": "fr-CA"
+    },
+    {
+      "id": "polymythcal-fr-submit-mobile",
+      "route": "/polymythseminars/fr/submit/",
+      "viewport": "mobile",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "locale": "fr-CA"
+    },
+    {
+      "id": "saul-fa-mobile",
+      "route": "/saul/fa/",
+      "viewport": "mobile",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "locale": "fa-IR"
+    },
+    {
+      "id": "teacherresources-language-filter-desktop",
+      "route": "/teacherresources/",
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1440,
+        "height": 1000
+      },
+      "locale": "en-CA"
+    },
+    {
+      "id": "bb-why-zh-mobile",
+      "route": "/bb/why/zh/",
+      "viewport": "mobile",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "locale": "zh-CN"
+    },
+    {
+      "id": "methodologylist-search-desktop",
+      "route": "/polymyth/methodologylist/",
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1440,
+        "height": 1000
+      },
+      "locale": "en-CA"
+    },
+    {
+      "id": "campaigncodex-search-mobile",
+      "route": "/polymyth/campaigncodex/",
+      "viewport": "mobile",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "locale": "en-CA"
+    }
+  ],
+  "scenario_count": 12,
+  "intended_engine_scenario_count": 24,
+  "external_requests": "blocked-during-execution",
+  "claims": {
+    "runtime_checks_executed": 0,
+    "runtime_pass_claimed": false
+  },
+  "limitations": [
+    "A preflight proves browser-program readiness and binary availability only.",
+    "Playwright Firefox is a patched recent Firefox build rather than branded Firefox.",
+    "Playwright WebKit is derived from WebKit main and is not branded Safari.",
+    "Linux WebKit execution remains supplemental to native macOS Safari validation."
+  ],
+  "references": [
+    "https://playwright.dev/docs/browsers"
+  ]
+}

@@ -7,6 +7,7 @@
  */
 const fs = require('fs');
 const path = require('path');
+const {parseSeedWithAddenda} = require('./lib/parse-seed-with-addenda');
 
 const argv = process.argv.slice(2);
 const dryRun = argv.includes('--dry-run');
@@ -56,7 +57,7 @@ function groupBySection(entries) {
 if (!fs.existsSync(HTML_PATH)) throw new Error('Missing ' + HTML_PATH);
 if (!fs.existsSync(FULL_TXT_PATH)) throw new Error('Missing ' + FULL_TXT_PATH + '. Run regen-methodologylist-txt.js first.');
 
-const entries = parseSeedArray(HTML_PATH);
+const entries = parseSeedWithAddenda(fs.readFileSync(HTML_PATH, 'utf8'));
 const bySection = groupBySection(entries);
 const sections = [...bySection.keys()].sort();
 const fullBytes = bytes('polymyth/methodologylist.txt');

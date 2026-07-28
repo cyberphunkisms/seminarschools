@@ -13,6 +13,15 @@ must('Static crawler-readable context exists outside noscript', /<section id="st
 must('Static context links to BB, about, glossary, and blank card', /href="\/bb\/"/.test(html) && /href="\/bookwormcard\/about\/"/.test(html) && /href="\/bookwormcard\/glossary\/"/.test(html) && /href="\/bookwormcard\/print\/\?blank=1"/.test(html));
 must('Static context includes privacy/data note', /Privacy\/data note/.test(html) && /optional feedback layer/.test(html) && /checkpoints in your browser/.test(html));
 must('Runtime hides static context only after game-ready class', /body\.game-ready #static-bookwormcard-context\{display:none\}/.test(html) && /classList\.add\('game-ready'\)/.test(html));
+must(
+  'Audit 41: the live game exposes an H1 while no-JavaScript keeps the static H1 exclusively',
+  /<h1 class="sr-only bookwormcard-runtime-title">Bookwormcard · BookwormBurrows character gate<\/h1>/.test(html)
+    && /\.bookwormcard-runtime-title\{display:none!important\}/.test(html)
+    && /html\.bookwormcard-js \.bookwormcard-runtime-title\{display:block!important\}/.test(html)
+    && !/<h2 class="sr-only">Bookwormcard · BookwormBurrows character gate<\/h2>/.test(html)
+);
+must('Visible controls boot at DOM readiness instead of waiting for slow assets', /DOMContentLoaded', bootBookwormcard, \{once:true\}/.test(html) && !/window\.addEventListener\('load', function\(\)/.test(html));
+must('Bookwormcard boot is idempotent across pageshow restoration', /if\(bookwormcardBooted\) return;/.test(html) && /window\.addEventListener\('pageshow', bootBookwormcard\)/.test(html));
 must('ESL button is visible and bound', /id="t-esl"[\s\S]*<span>ESL<\/span>/.test(html) && !/id="t-esl"[^>]*display\s*:\s*none/.test(html) && /addEventListener\('click', toggleEsl\)/.test(html));
 must('ESL mode adds plain-language helper copy', /function eslExplanationFor/.test(html) && /Plain English:/.test(html) && /addEslHelperAfter/.test(html));
 must('Theme button exists and uses direct Bookwormcard light\/dark toggle', /id="t-theme"/.test(html) && /function toggleTheme/.test(html) && /body\.light-mode/.test(html) && /data-bw-theme/.test(html));
@@ -29,4 +38,4 @@ if (failures.length) {
   for (const f of failures) console.error(' - ' + f);
   process.exit(1);
 }
-console.log('Bookwormcard gate verification passed: static BB context, ESL helpers, theme/contrast/text controls, mobile-safe shell, and data notice are present.');
+console.log('Bookwormcard gate verification passed: static BB context, exclusive live/no-JavaScript H1 ownership, ESL helpers, theme/contrast/text controls, mobile-safe shell, and data notice are present.');

@@ -56,13 +56,23 @@ function parseRedirects() {
   for (const s of sources) {
     const fp=path.join(ROOT,s); if(!fs.existsSync(fp)) continue;
     const text=fs.readFileSync(fp,'utf8');
+    const seen=new Map();
     if(s==='_redirects') {
-      for(const line of text.split(/\r?\n/)) {
+      for(const [index,line] of text.split(/\r?\n/).entries()) {
         const t=line.trim(); if(!t||t.startsWith('#')) continue;
-        const parts=t.split(/\s+/); if(parts[0]?.startsWith('/')) rows.push(parts[0]);
+        const parts=t.split(/\s+/);
+        if(parts[0]?.startsWith('/')) {
+          if(seen.has(parts[0])) fail(`${s}: duplicate source ${parts[0]} on lines ${seen.get(parts[0])} and ${index+1}`);
+          else seen.set(parts[0],index+1);
+          rows.push(parts[0]);
+        }
       }
     } else {
-      for(const m of text.matchAll(/\bfrom\s*=\s*"([^"]+)"/g)) rows.push(m[1]);
+      for(const m of text.matchAll(/\bfrom\s*=\s*"([^"]+)"/g)) {
+        if(seen.has(m[1])) fail(`${s}: duplicate redirect source ${m[1]}`);
+        else seen.set(m[1],true);
+        rows.push(m[1]);
+      }
     }
   }
   return rows;

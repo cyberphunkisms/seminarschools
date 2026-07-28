@@ -1,0 +1,413 @@
+{
+  "schema": "seminar-schools-audit43-approved-browser-v1",
+  "release_id": "2026-07-25-site-audit43-approved-evolution-weekly-final",
+  "generated_at": "2026-07-25T14:18:38-04:00",
+  "source_program": "scripts/audit43-approved-browser.py",
+  "source_program_sha256": "27d03e38daa992dd5bc0f18fffef366906122474b236d75f11372daa4b6a491d",
+  "browser": "Chromium 138.0.7204.23",
+  "status": "passed",
+  "summary": {
+    "assertions": 63,
+    "passed": 63,
+    "failed": 0,
+    "screenshots": 6
+  },
+  "checks": [
+    {
+      "name": "home desktop: HTTP success",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "home desktop: six original project marks",
+      "passed": true,
+      "detail": "6"
+    },
+    {
+      "name": "home desktop: preserved six project routes",
+      "passed": true,
+      "detail": "{'/bb/', '/saul/', '/aa/', '/leizu/', '/polymythseminars/', '/teacherresources/'}"
+    },
+    {
+      "name": "home desktop: project marks have stable geometry",
+      "passed": true,
+      "detail": "[[242.3125, 54], [242.3125, 54], [242.3125, 54], [242.3125, 54], [242.3125, 54], [242.3125, 54]]"
+    },
+    {
+      "name": "home desktop: no horizontal overflow",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0, 'h1': 1, 'label': 'home desktop'}"
+    },
+    {
+      "name": "home desktop: CLS at or below 0.1",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0, 'h1': 1, 'label': 'home desktop'}"
+    },
+    {
+      "name": "home desktop: one visible H1",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0, 'h1': 1, 'label': 'home desktop'}"
+    },
+    {
+      "name": "home desktop: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "home desktop: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "home mobile: HTTP success",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "home mobile: six original project marks",
+      "passed": true,
+      "detail": "6"
+    },
+    {
+      "name": "home mobile: preserved six project routes",
+      "passed": true,
+      "detail": "{'/bb/', '/saul/', '/aa/', '/leizu/', '/polymythseminars/', '/teacherresources/'}"
+    },
+    {
+      "name": "home mobile: project marks have stable geometry",
+      "passed": true,
+      "detail": "[[268.5625, 54], [268.5625, 54], [268.5625, 54], [268.5625, 54], [268.5625, 54], [268.5625, 54]]"
+    },
+    {
+      "name": "home mobile: no horizontal overflow",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0.0061, 'h1': 1, 'label': 'home mobile'}"
+    },
+    {
+      "name": "home mobile: CLS at or below 0.1",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0.0061, 'h1': 1, 'label': 'home mobile'}"
+    },
+    {
+      "name": "home mobile: one visible H1",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0.0061, 'h1': 1, 'label': 'home mobile'}"
+    },
+    {
+      "name": "home mobile: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "home mobile: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "nearby: no browser geolocation permission requested",
+      "passed": true,
+      "detail": "manual origin control"
+    },
+    {
+      "name": "nearby: selection activates nearest sort",
+      "passed": true,
+      "detail": "nearest"
+    },
+    {
+      "name": "nearby: URL preserves selected origin",
+      "passed": true,
+      "detail": "http://127.0.0.1:46787/polymythseminars/?sort=nearest&near=downtown-toronto"
+    },
+    {
+      "name": "nearby: visible cards expose approximate distance",
+      "passed": true,
+      "detail": "['Approx. 0.0 km from Downtown Toronto · city estimate', 'Approx. 0.0 km from Downtown Toronto · city estimate', 'Approx. 0.0 km from Downtown Toronto · city estimate', 'Approx. 0.0 km from Downtown Toronto · city estimate', 'Approx. 0.0 km from Downtown Toronto · city estimate']"
+    },
+    {
+      "name": "nearby: visible known distances are nondecreasing",
+      "passed": true,
+      "detail": "[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]"
+    },
+    {
+      "name": "nearby: labels disclose estimate precision",
+      "passed": true,
+      "detail": "['Approx. 0.0 km from Downtown Toronto · city estimate', 'Approx. 0.0 km from Downtown Toronto · city estimate', 'Approx. 0.0 km from Downtown Toronto · city estimate', 'Approx. 0.0 km from Downtown Toronto · city estimate', 'Approx. 0.0 km from Downtown Toronto · city estimate']"
+    },
+    {
+      "name": "polymythcal nearby: no horizontal overflow",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0, 'h1': 1, 'label': 'polymythcal nearby'}"
+    },
+    {
+      "name": "polymythcal nearby: CLS at or below 0.1",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0, 'h1': 1, 'label': 'polymythcal nearby'}"
+    },
+    {
+      "name": "polymythcal nearby: one visible H1",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0, 'h1': 1, 'label': 'polymythcal nearby'}"
+    },
+    {
+      "name": "polymythcal nearby: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "polymythcal nearby: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "reader: starts opt-in and off",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "reader: toggle applies quiet view",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "reader AA: no horizontal overflow",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0, 'h1': 1, 'label': 'reader AA'}"
+    },
+    {
+      "name": "reader AA: CLS at or below 0.1",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0, 'h1': 1, 'label': 'reader AA'}"
+    },
+    {
+      "name": "reader AA: one visible H1",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0, 'h1': 1, 'label': 'reader AA'}"
+    },
+    {
+      "name": "reader AA: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "reader AA: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "reader: preference persists to another eligible route",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "reader: catalog route remains outside allowlist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "candidates: undated lead renders outside calendar cards",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "candidates: missing date is explicit",
+      "passed": true,
+      "detail": "Organizer signals\n\nAnnouncements awaiting a date\n\nThese are public organizer announcements that may become events. They stay outside the dated calendar until an event date is published.\n\nDATE PENDING\nMARCH\n\nTenant march details coming soon\n\nToronto Tenant Union · event date, start time, assembly location\n\nA public tenant march is being organized. Date, time, and assembly location will be announced.\n\nOpen original announcement\n\nChecked Jul 25, 2026"
+    },
+    {
+      "name": "candidate surface: no horizontal overflow",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0, 'h1': 1, 'label': 'candidate surface'}"
+    },
+    {
+      "name": "candidate surface: CLS at or below 0.1",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0, 'h1': 1, 'label': 'candidate surface'}"
+    },
+    {
+      "name": "candidate surface: one visible H1",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0, 'h1': 1, 'label': 'candidate surface'}"
+    },
+    {
+      "name": "candidate surface: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "candidate surface: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "teacher: first-match action starts disabled",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "teacher: filtered first-match action enables",
+      "passed": true,
+      "detail": "1 resource across 1 collection"
+    },
+    {
+      "name": "teacher: filtered result has a real route",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "teacher filtered: no horizontal overflow",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0.0002, 'h1': 1, 'label': 'teacher filtered'}"
+    },
+    {
+      "name": "teacher filtered: CLS at or below 0.1",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0.0002, 'h1': 1, 'label': 'teacher filtered'}"
+    },
+    {
+      "name": "teacher filtered: one visible H1",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0.0002, 'h1': 1, 'label': 'teacher filtered'}"
+    },
+    {
+      "name": "teacher filtered: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "teacher filtered: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "teacher: Enter opens the first visible match",
+      "passed": true,
+      "detail": "/teacherresources/ela/ela-pd-british/macbeth-27b6a5a9/ -> http://127.0.0.1:46787/teacherresources/ela/ela-pd-british/macbeth-27b6a5a9/"
+    },
+    {
+      "name": "motion: reduced-motion media query is active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "motion: shared View Transition sheet loads",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "BB: human teacher/DM workflow remains explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "BB: no site session-runner control appears",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "BB reduced motion: no horizontal overflow",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0, 'h1': 1, 'label': 'BB reduced motion'}"
+    },
+    {
+      "name": "BB reduced motion: CLS at or below 0.1",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0, 'h1': 1, 'label': 'BB reduced motion'}"
+    },
+    {
+      "name": "BB reduced motion: one visible H1",
+      "passed": true,
+      "detail": "{'overflow': 0, 'cls': 0, 'h1': 1, 'label': 'BB reduced motion'}"
+    },
+    {
+      "name": "BB reduced motion: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "BB reduced motion: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    }
+  ],
+  "metrics": [
+    {
+      "overflow": 0,
+      "cls": 0,
+      "h1": 1,
+      "label": "home desktop"
+    },
+    {
+      "overflow": 0,
+      "cls": 0.0061,
+      "h1": 1,
+      "label": "home mobile"
+    },
+    {
+      "overflow": 0,
+      "cls": 0,
+      "h1": 1,
+      "label": "polymythcal nearby"
+    },
+    {
+      "overflow": 0,
+      "cls": 0,
+      "h1": 1,
+      "label": "reader AA"
+    },
+    {
+      "overflow": 0,
+      "cls": 0,
+      "h1": 1,
+      "label": "candidate surface"
+    },
+    {
+      "overflow": 0,
+      "cls": 0.0002,
+      "h1": 1,
+      "label": "teacher filtered"
+    },
+    {
+      "overflow": 0,
+      "cls": 0,
+      "h1": 1,
+      "label": "BB reduced motion"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "data/audit43-browser/screenshots/candidate-surface.png",
+      "bytes": 158551,
+      "sha256": "cc69ff1bc1b78ac4b8412b4e2872aae7595510757a2d6db66b219d872ed17ef5"
+    },
+    {
+      "path": "data/audit43-browser/screenshots/home-desktop.png",
+      "bytes": 170088,
+      "sha256": "420054cce19f4b7ad0f793614e8e5d4a2d707ea4cfa8e487a5ecf5d681567ce2"
+    },
+    {
+      "path": "data/audit43-browser/screenshots/home-mobile.png",
+      "bytes": 70615,
+      "sha256": "bfa31a71161c188b0b0f5fc31fd21d4c3da4ec2445161eb77d5719a01b114500"
+    },
+    {
+      "path": "data/audit43-browser/screenshots/polymythcal-nearby.png",
+      "bytes": 156730,
+      "sha256": "8bcbc5b1ecc0ea1aff71a6fa1bc10c9208ed6b7957cedb8d62e131117890afd0"
+    },
+    {
+      "path": "data/audit43-browser/screenshots/reader-view.png",
+      "bytes": 168189,
+      "sha256": "7a0e4b83bee54b347d5bdb5b35da706a6f66354b7e706eac2fe4e2d62f012c33"
+    },
+    {
+      "path": "data/audit43-browser/screenshots/teacher-first-match.png",
+      "bytes": 120858,
+      "sha256": "cc49e144c56fade76b263cc6842aecef3a8445c1bcc603d36de0775f9b71c587"
+    }
+  ],
+  "limitations": [
+    "This is fresh container Chromium evidence, not native Firefox or Safari.",
+    "Native VoiceOver and NVDA require compatible external operating systems.",
+    "The candidate test uses a deterministic intercepted public payload so the empty production candidate state does not hide the interaction contract."
+  ]
+}

@@ -12,11 +12,46 @@ const exists = (p) => fs.existsSync(path.join(ROOT, p));
 const listDirs = (p) => fs.readdirSync(path.join(ROOT, p), {withFileTypes: true}).filter(x => x.isDirectory()).map(x => x.name);
 const releaseManifest = json('RELEASE_MANIFEST.json');
 const releaseTimestamp = releaseManifest.generated_at || '1970-01-01T00:00:00Z';
+const SITE = 'https://seminarschools.com';
+const CURRENT_EVENT_COUNT = 833;
+const EXPLICIT_LEGACY_ALIAS_COUNT = 12;
+const GENERATED_ENGLISH_ALIAS_COUNT = 857;
 const checks = [];
 const add = (name, passed, details = {}) => checks.push({name, passed: Boolean(passed), details});
 
 function countOccurrences(text, needle) {
   return text.split(needle).length - 1;
+}
+
+function htmlAttribute(source, element, attribute) {
+  const tag = source.match(new RegExp(`<${element}\\b([^>]*)>`, 'i'));
+  if (!tag) return '';
+  const value = tag[1].match(new RegExp(`\\b${attribute}=["']([^"']*)["']`, 'i'));
+  return value?.[1] || '';
+}
+
+function metaContent(source, name) {
+  const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return source.match(new RegExp(`<meta\\b(?=[^>]*\\bname=["']${escaped}["'])(?=[^>]*\\bcontent=["']([^"']*)["'])[^>]*>`, 'i'))?.[1] || '';
+}
+
+function canonicalHref(source) {
+  return source.match(/<link\b(?=[^>]*\brel=["']canonical["'])(?=[^>]*\bhref=["']([^"']*)["'])[^>]*>/i)?.[1] || '';
+}
+
+function hasAlternate(source, language, href) {
+  const escapedLanguage = language.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const escapedHref = href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`<link\\b(?=[^>]*\\brel=["']alternate["'])(?=[^>]*\\bhreflang=["']${escapedLanguage}["'])(?=[^>]*\\bhref=["']${escapedHref}["'])[^>]*>`, 'i').test(source);
+}
+
+function pythonHtmlEscape(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
 }
 
 const sourcesDoc = json('scripts/sources.json');
@@ -62,7 +97,32 @@ const thanks = read('polymythseminars/thanks/index.html');
 for (const [label, html] of [['submission', submit], ['correction', correct]]) {
   add(`Public ${label} form is deployable and labelled`, /data-netlify=["']true["']/.test(html) && /<label\b/i.test(html) && /required/i.test(html) && /hreflang=["']fr-ca["']/i.test(html), {});
 }
-add('Submission confirmation is bilingual and noindex', /Envoi reçu|Submission received/.test(thanks) && /noindex/i.test(thanks), {});
+const thanksFr = read('polymythseminars/fr/thanks/index.html');
+const thanksRoutes = [
+  {
+    locale: 'en-CA',
+    html: thanks,
+    canonical: `${SITE}/polymythseminars/thanks/`,
+    heading: 'Thank you: details received',
+  },
+  {
+    locale: 'fr-CA',
+    html: thanksFr,
+    canonical: `${SITE}/polymythseminars/fr/thanks/`,
+    heading: 'Merci : renseignements reçus',
+  },
+];
+const thanksFailures = [];
+for (const route of thanksRoutes) {
+  if (htmlAttribute(route.html, 'html', 'lang') !== route.locale) thanksFailures.push(`${route.locale}: wrong root language`);
+  if (metaContent(route.html, 'robots') !== 'noindex,follow') thanksFailures.push(`${route.locale}: confirmation is indexable`);
+  if (canonicalHref(route.html) !== route.canonical) thanksFailures.push(`${route.locale}: wrong canonical`);
+  if (!route.html.includes(`<h1>${route.heading}</h1>`)) thanksFailures.push(`${route.locale}: localized heading missing`);
+  if (!hasAlternate(route.html, 'en-CA', `${SITE}/polymythseminars/thanks/`)) thanksFailures.push(`${route.locale}: English alternate missing`);
+  if (!hasAlternate(route.html, 'fr-CA', `${SITE}/polymythseminars/fr/thanks/`)) thanksFailures.push(`${route.locale}: French alternate missing`);
+  if (!hasAlternate(route.html, 'x-default', `${SITE}/polymythseminars/thanks/`)) thanksFailures.push(`${route.locale}: default alternate missing`);
+}
+add('Dedicated English and French submission confirmations are localized, reciprocal, and noindex', thanksFailures.length === 0, {routes: thanksRoutes.length, failures: thanksFailures});
 
 const feedManifest = json('polymythseminars/feeds/index.json');
 const feeds = feedManifest.feeds || [];
@@ -71,9 +131,63 @@ const feedFilesOk = feeds.every(f => {
   return paths.every(exists);
 });
 add('Focused RSS and calendar subscriptions are complete', feeds.length === 11 && feedFilesOk && feeds.every(f => f.label_en && f.label_fr && Number.isInteger(f.count)), {feeds: feeds.length});
-add('Subscription index exposes bilingual feed labels', /label_fr/.test(features) && /Abonnements|Subscribe/.test(read('polymythseminars/subscribe/index.html')), {});
+const subscribe = read('polymythseminars/subscribe/index.html');
+const subscribeFr = read('polymythseminars/fr/subscribe/index.html');
+const feedManifestSha = crypto.createHash('sha256').update(read('polymythseminars/feeds/index.json')).digest('hex');
+const subscriptionFailures = [];
+for (const [locale, html, canonical] of [
+  ['en-CA', subscribe, `${SITE}/polymythseminars/subscribe/`],
+  ['fr-CA', subscribeFr, `${SITE}/polymythseminars/fr/subscribe/`],
+]) {
+  if (htmlAttribute(html, 'html', 'lang') !== locale) subscriptionFailures.push(`${locale}: wrong root language`);
+  if (canonicalHref(html) !== canonical) subscriptionFailures.push(`${locale}: wrong canonical`);
+  if (metaContent(html, 'translation-source') !== 'polymythseminars/feeds/index.json') subscriptionFailures.push(`${locale}: wrong translation source`);
+  if (metaContent(html, 'translation-source-sha256') !== feedManifestSha) subscriptionFailures.push(`${locale}: stale translation source hash`);
+  if (metaContent(html, 'translation-status') !== 'complete-owned-copy') subscriptionFailures.push(`${locale}: incomplete translation status`);
+  if (!hasAlternate(html, 'en-CA', `${SITE}/polymythseminars/subscribe/`)) subscriptionFailures.push(`${locale}: English alternate missing`);
+  if (!hasAlternate(html, 'fr-CA', `${SITE}/polymythseminars/fr/subscribe/`)) subscriptionFailures.push(`${locale}: French alternate missing`);
+  if (!hasAlternate(html, 'x-default', `${SITE}/polymythseminars/subscribe/`)) subscriptionFailures.push(`${locale}: default alternate missing`);
+}
+for (const feed of feeds) {
+  if (!subscribe.includes(`>${feed.label_en} (${feed.count})</span>`)) subscriptionFailures.push(`${feed.id}: English label/count missing`);
+  if (!subscribeFr.includes(`>${feed.label_fr} (${feed.count})</span>`)) subscriptionFailures.push(`${feed.id}: French label/count missing`);
+  for (const route of [subscribe, subscribeFr]) {
+    if (!route.includes(`href="${feed.rss}"`) || !route.includes(`href="${feed.ics}"`)) subscriptionFailures.push(`${feed.id}: feed links missing from one locale`);
+  }
+}
+add('Dedicated English and French subscription indexes exactly expose the governed feed labels', subscriptionFailures.length === 0, {feeds: feeds.length, routes: 2, failures: subscriptionFailures});
 
 const eventDirs = listDirs('polymythseminars/events');
+const legacySlug = value => String(value || 'event').toLowerCase().replace('&', ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 76) || 'event';
+const legacyAlias = value => `${legacySlug(value)}-${crypto.createHash('sha1').update(String(value)).digest('hex').slice(0, 8)}`;
+const canonicalIds = new Set(events.map(event => String(event.id || event.identity_key)));
+const explicitAliases = new Map();
+const expectedAliases = new Map();
+const aliasConflicts = [];
+function registerExpectedAlias(alias, target) {
+  if (alias === target) return;
+  if (canonicalIds.has(alias)) {
+    aliasConflicts.push(`${alias} collides with a canonical event`);
+    return;
+  }
+  if (expectedAliases.has(alias) && expectedAliases.get(alias) !== target) {
+    aliasConflicts.push(`${alias} maps to multiple events`);
+    return;
+  }
+  expectedAliases.set(alias, target);
+}
+for (const event of events) {
+  const target = String(event.id || event.identity_key);
+  registerExpectedAlias(legacyAlias(target), target);
+  for (const value of event.legacy_ids || []) {
+    const legacyId = String(value);
+    if (canonicalIds.has(legacyId)) aliasConflicts.push(`${legacyId} explicit alias collides with a canonical event`);
+    if (explicitAliases.has(legacyId) && explicitAliases.get(legacyId) !== target) aliasConflicts.push(`${legacyId} explicit alias maps to multiple events`);
+    explicitAliases.set(legacyId, target);
+    registerExpectedAlias(legacyId, target);
+    registerExpectedAlias(legacyAlias(legacyId), target);
+  }
+}
 let canonicalPages = 0;
 let aliasPages = 0;
 for (const d of eventDirs) {
@@ -83,11 +197,134 @@ for (const d of eventDirs) {
   if (/noindex,follow/i.test(html) && /Event moved|Fiche déplacée/.test(html)) aliasPages += 1;
   else if (/data-route-type=["']calendar-event["']/.test(html)) canonicalPages += 1;
 }
-const icsCount = fs.readdirSync(path.join(ROOT, 'polymythseminars/ics')).filter(f => f.endsWith('.ics')).length;
-add('Stable event pages, legacy aliases, and per-event calendars are synchronized', canonicalPages === events.length && aliasPages === events.length && icsCount === events.length, {canonicalPages, aliasPages, icsCount, events: events.length});
+const icsFiles = fs.readdirSync(path.join(ROOT, 'polymythseminars/ics')).filter(f => f.endsWith('.ics')).sort();
+const icsCount = icsFiles.length;
+const expectedIcsFiles = [...canonicalIds, ...explicitAliases.keys()].map(id => `${id}.ics`).sort();
+const exactIcsSet = JSON.stringify(icsFiles) === JSON.stringify(expectedIcsFiles);
+const legacyIcsMismatches = [];
+for (const [alias, target] of explicitAliases) {
+  const aliasFile = path.join(ROOT, 'polymythseminars', 'ics', `${alias}.ics`);
+  const targetFile = path.join(ROOT, 'polymythseminars', 'ics', `${target}.ics`);
+  if (!fs.existsSync(aliasFile) || !fs.existsSync(targetFile) || !fs.readFileSync(aliasFile).equals(fs.readFileSync(targetFile))) {
+    legacyIcsMismatches.push(`${alias}: not byte-identical to ${target}`);
+  }
+}
+const missingOrWrongAliases = [];
+for (const [alias, target] of expectedAliases) {
+  const rel = `polymythseminars/events/${alias}/index.html`;
+  const publicRel = `public/${rel}`;
+  if (!exists(rel)) {
+    missingOrWrongAliases.push(`${alias}: missing`);
+    continue;
+  }
+  const aliasHtml = read(rel);
+  const targetPath = `/polymythseminars/events/${target}/`;
+  if (!/noindex,follow/i.test(aliasHtml) || !aliasHtml.includes(targetPath)) missingOrWrongAliases.push(`${alias}: wrong target`);
+  if (!exists(publicRel) || !fs.readFileSync(path.join(ROOT, rel)).equals(fs.readFileSync(path.join(ROOT, publicRel)))) missingOrWrongAliases.push(`${alias}: public mismatch`);
+}
+add(
+  '833 stable event pages, generated redirects, and 12 explicit legacy ICS aliases are synchronized',
+  events.length === CURRENT_EVENT_COUNT
+    && canonicalPages === CURRENT_EVENT_COUNT
+    && expectedAliases.size === GENERATED_ENGLISH_ALIAS_COUNT
+    && aliasPages === GENERATED_ENGLISH_ALIAS_COUNT
+    && explicitAliases.size === EXPLICIT_LEGACY_ALIAS_COUNT
+    && icsCount === CURRENT_EVENT_COUNT + EXPLICIT_LEGACY_ALIAS_COUNT
+    && exactIcsSet
+    && legacyIcsMismatches.length === 0
+    && aliasConflicts.length === 0
+    && missingOrWrongAliases.length === 0,
+  {
+    canonicalPages,
+    aliasPages,
+    expectedAliases: expectedAliases.size,
+    explicitLegacyAliases: explicitAliases.size,
+    icsCount,
+    events: events.length,
+    exactIcsSet,
+    legacyIcsMismatches,
+    aliasConflicts,
+    missingOrWrongAliases: missingOrWrongAliases.slice(0, 20),
+  }
+);
 
 const translation = json('data/polymythcal-translation-inventory.json');
-add('Holistic English and French translation inventory is complete', translation.complete === true && translation.canonical_event_pages_with_bilingual_actions === events.length && translation.focused_feeds_with_english_and_french_labels === feeds.length, translation);
+const translationGovernance = json('data/audit45-translation-governance.json');
+const eventSourceSha = crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT, 'polymythseminars/events.json'))).digest('hex');
+const localizedRouteFailures = [];
+if (!fs.readFileSync(path.join(ROOT, 'polymythseminars/events.json')).equals(fs.readFileSync(path.join(ROOT, 'data/polymyth-seminar-events.json')))) {
+  localizedRouteFailures.push('canonical event data copies differ');
+}
+for (const event of events) {
+  const eventId = String(event.id || event.identity_key);
+  const encodedId = encodeURIComponent(eventId);
+  const title = pythonHtmlEscape(String(event.title || 'Untitled listing').trim().replace(/\s+/g, ' '));
+  const sourceLanguages = event.source_languages;
+  if (!Array.isArray(sourceLanguages)) {
+    localizedRouteFailures.push(`${eventId}: source_languages is not an array`);
+    continue;
+  }
+  const sourcePartLanguage = sourceLanguages.length === 1 ? sourceLanguages[0] : 'und';
+  if (event.source_language === 'und' && event.source_language_review !== 'required') {
+    localizedRouteFailures.push(`${eventId}: unknown source language lost its review requirement`);
+  }
+  for (const route of [
+    {
+      relative: `polymythseminars/events/${eventId}/index.html`,
+      locale: 'en-CA',
+      status: 'canonical-interface-source-verbatim',
+      canonical: `${SITE}/polymythseminars/events/${encodedId}/`,
+    },
+    {
+      relative: `polymythseminars/fr/events/${eventId}/index.html`,
+      locale: 'fr-CA',
+      status: 'localized-interface-source-verbatim',
+      canonical: `${SITE}/polymythseminars/fr/events/${encodedId}/`,
+    },
+  ]) {
+    if (!exists(route.relative)) {
+      localizedRouteFailures.push(`${route.relative}: missing`);
+      continue;
+    }
+    const html = read(route.relative);
+    const heading = html.match(/<h1\b([^>]*)>([\s\S]*?)<\/h1>/i);
+    const headingLanguage = heading?.[1].match(/\blang=["']([^"']+)["']/i)?.[1] || '';
+    if (htmlAttribute(html, 'html', 'lang') !== route.locale) localizedRouteFailures.push(`${route.relative}: wrong root language`);
+    if (canonicalHref(html) !== route.canonical) localizedRouteFailures.push(`${route.relative}: wrong canonical`);
+    if (metaContent(html, 'translation-source') !== 'polymythseminars/events.json') localizedRouteFailures.push(`${route.relative}: wrong translation source`);
+    if (metaContent(html, 'translation-source-sha256') !== eventSourceSha) localizedRouteFailures.push(`${route.relative}: stale source hash`);
+    if (metaContent(html, 'translation-status') !== route.status) localizedRouteFailures.push(`${route.relative}: wrong translation status`);
+    if (!heading || heading[2] !== title) localizedRouteFailures.push(`${route.relative}: organizer title was altered`);
+    if (headingLanguage !== sourcePartLanguage) localizedRouteFailures.push(`${route.relative}: organizer title language boundary is wrong`);
+    if (!hasAlternate(html, 'en-CA', `${SITE}/polymythseminars/events/${encodedId}/`)) localizedRouteFailures.push(`${route.relative}: English alternate missing`);
+    if (!hasAlternate(html, 'fr-CA', `${SITE}/polymythseminars/fr/events/${encodedId}/`)) localizedRouteFailures.push(`${route.relative}: French alternate missing`);
+    if (!hasAlternate(html, 'x-default', `${SITE}/polymythseminars/events/${encodedId}/`)) localizedRouteFailures.push(`${route.relative}: default alternate missing`);
+  }
+}
+const frenchEventDirs = new Set(listDirs('polymythseminars/fr/events'));
+const expectedFrenchEventDirs = new Set([...canonicalIds, ...explicitAliases.keys()]);
+const exactFrenchRouteTree = frenchEventDirs.size === expectedFrenchEventDirs.size
+  && [...frenchEventDirs].every(eventId => expectedFrenchEventDirs.has(eventId));
+const governanceCounts = translationGovernance.counts || {};
+add(
+  'Audit 45 English/French event routes preserve organizer text and source-language boundaries',
+  events.length === CURRENT_EVENT_COUNT
+    && translationGovernance.english_source_of_truth === true
+    && translationGovernance.organizer_text_policy === 'preserve verbatim; mark source language; never silently translate'
+    && governanceCounts.polymythcal_interface_locales === 2
+    && governanceCounts.polymythcal_event_routes_per_locale === CURRENT_EVENT_COUNT
+    && governanceCounts.polymythcal_french_legacy_alias_routes === EXPLICIT_LEGACY_ALIAS_COUNT
+    && exactFrenchRouteTree
+    && localizedRouteFailures.length === 0,
+  {
+    events: events.length,
+    interfaceLocales: governanceCounts.polymythcal_interface_locales,
+    eventRoutesPerLocale: governanceCounts.polymythcal_event_routes_per_locale,
+    frenchLegacyAliases: governanceCounts.polymythcal_french_legacy_alias_routes,
+    exactFrenchRouteTree,
+    failures: localizedRouteFailures.slice(0, 20),
+  }
+);
 
 const wcag = json('data/polymythcal-wcag22-browser-audit.json');
 const wcagPassed = wcag.checks_passed ?? wcag.passed ?? 0;
@@ -101,10 +338,24 @@ add('Feature CSS includes touch targets, focus, forced colours, reflow, and redu
 
 const workflows = ['.github/workflows/scrape-seminars.yml', '.github/workflows/scrape-festivals.yml'];
 const mergeScripts = ['scripts/merge_and_finalize.py', 'scripts/merge_festivals.py'];
-add('Scheduled harvest workflows run adapter, lifecycle, publication, and audit gates', workflows.every(p => {
+const predeployWorkflow = read('.github/workflows/predeploy.yml');
+const releaseRunner = read('scripts/verify-all-runner.js');
+add('Scheduled harvests use fast data gates and predeploy retains full adapter, lifecycle, publication, and Audit 14 gates', workflows.every(p => {
   const w = read(p);
-  return /test_polymythcal_adapters/.test(w) && /test_polymythcal_lifecycle/.test(w) && /verify:polymythcal-audit14/.test(w);
-}) && mergeScripts.every(p => /finalize-polymythcal-publication/.test(read(p))), {workflows, mergeScripts});
+  return /validate-polymythcal\.py/.test(w)
+    && /verify:calendar-data/.test(w)
+    && /requirements-harvest\.txt/.test(w)
+    && !/python3 -m unittest/.test(w)
+    && !/verify:polymythcal-audit14/.test(w);
+}) && /test:polymythcal-adapters/.test(predeployWorkflow)
+  && /test:polymythcal-lifecycle/.test(predeployWorkflow)
+  && /npm run verify:all:built/.test(predeployWorkflow)
+  && /verify-polymythcal-audit14\.js/.test(releaseRunner)
+  && mergeScripts.every(p => /finalize-polymythcal-publication/.test(read(p))), {
+    workflows,
+    predeploy: '.github/workflows/predeploy.yml',
+    mergeScripts,
+  });
 
 const mainScript = features + revamp + main;
 add('Calendar language switch covers generated and static interface text', (countOccurrences(mainScript, 'pmT(') >= 20 && /translateStaticCalendarChrome/.test(features) && /label_fr/.test(features)) || (/function translateStatic\(\)/.test(revamp) && /const translations/.test(revamp) && /staticFrench/.test(revamp) && /hreflang/.test(main)), {translationCalls: countOccurrences(mainScript, 'pmT(')});
@@ -135,7 +386,17 @@ const output = {
   },
 };
 const serialized = JSON.stringify(output, null, 2) + '\n';
-fs.writeFileSync(path.join(ROOT, 'AUDIT14_PACKAGE_VERIFICATION_2026-07-20.json'), serialized);
+const outputFile = path.join(ROOT, 'AUDIT14_PACKAGE_VERIFICATION_2026-07-20.json');
+if (!fs.existsSync(outputFile) || fs.readFileSync(outputFile, 'utf8') !== serialized) {
+  fs.writeFileSync(outputFile, serialized);
+}
+if (process.env.SS_REPORT_OUTPUT_MTIME) {
+  const stamp = new Date(process.env.SS_REPORT_OUTPUT_MTIME);
+  if (Number.isNaN(stamp.getTime())) {
+    throw new Error('SS_REPORT_OUTPUT_MTIME must be a valid timestamp');
+  }
+  fs.utimesSync(outputFile, stamp, stamp);
+}
 const digest = crypto.createHash('sha256').update(serialized).digest('hex');
 console.log(`Polymythcal Audit 14: ${output.passed}/${checks.length} checks passed; ${failed.length} failed.`);
 console.log(`Verification SHA-256: ${digest}`);

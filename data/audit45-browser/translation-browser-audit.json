@@ -1,0 +1,808 @@
+{
+  "schema": "seminar-schools-audit45-translation-browser-v1",
+  "release_id": "2026-07-25-site-audit45-full-translation-localization-final",
+  "generated_at": "2026-07-25T18:45:00-04:00",
+  "status": "passed",
+  "browser": "149.0.7827.55",
+  "external_requests": "blocked",
+  "source_program": "scripts/audit45-translation-browser.js",
+  "source_program_sha256": "06ad5d4cc4b079e37699554a3e78235a0f12e4a766e7e53222247e61951d3b35",
+  "checks_total": 127,
+  "checks_passed": 127,
+  "checks_failed": 0,
+  "checks": [
+    {
+      "name": "release manifest identifies Audit 45",
+      "passed": true,
+      "detail": "2026-07-25-site-audit45-full-translation-localization-final"
+    },
+    {
+      "name": "Leizu French home desktop: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "Leizu French home: correct root language",
+      "passed": true,
+      "detail": "{\"lang\":\"fr\",\"dir\":\"ltr\",\"pending\":false,\"dataLang\":\"fr\"}"
+    },
+    {
+      "name": "Leizu French home: no language-pending flash state",
+      "passed": true,
+      "detail": "{\"lang\":\"fr\",\"dir\":\"ltr\",\"pending\":false,\"dataLang\":\"fr\"}"
+    },
+    {
+      "name": "Leizu French home: runtime state is French",
+      "passed": true,
+      "detail": "{\"lang\":\"fr\",\"dir\":\"ltr\",\"pending\":false,\"dataLang\":\"fr\"}"
+    },
+    {
+      "name": "Leizu French home: Persian switch uses a dedicated route",
+      "passed": true,
+      "detail": "http://127.0.0.1:32771/leizu/fa/"
+    },
+    {
+      "name": "Leizu French home: intake link remains in French funnel",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Leizu French home desktop: CLS is at or below 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Leizu French home desktop: document has no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Leizu French home desktop: visible elements stay inside viewport",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Leizu French home desktop: exactly one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "Leizu French home desktop: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Leizu French home desktop: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Leizu Persian home mobile: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "Leizu Persian home: correct RTL root",
+      "passed": true,
+      "detail": "{\"lang\":\"fa\",\"dir\":\"rtl\",\"pending\":false,\"dataLang\":\"fa\"}"
+    },
+    {
+      "name": "Leizu Persian home: no language-pending flash state",
+      "passed": true,
+      "detail": "{\"lang\":\"fa\",\"dir\":\"rtl\",\"pending\":false,\"dataLang\":\"fa\"}"
+    },
+    {
+      "name": "Leizu Persian home: runtime state is Persian",
+      "passed": true,
+      "detail": "{\"lang\":\"fa\",\"dir\":\"rtl\",\"pending\":false,\"dataLang\":\"fa\"}"
+    },
+    {
+      "name": "Leizu Persian home: intake link remains in Persian funnel",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Leizu Persian home mobile: CLS is at or below 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Leizu Persian home mobile: document has no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Leizu Persian home mobile: visible elements stay inside viewport",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Leizu Persian home mobile: exactly one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "Leizu Persian home mobile: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Leizu Persian home mobile: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Leizu Simplified Chinese intake mobile: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "Leizu intake: translated reference summary is visible",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Leizu intake: English contract source has an explicit boundary",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Leizu intake: preferred language posts with the form",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Leizu intake: form action stays on dedicated localized route",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Leizu intake: bilingual-review status is declared",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Leizu Simplified Chinese intake mobile: CLS is at or below 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Leizu Simplified Chinese intake mobile: document has no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Leizu Simplified Chinese intake mobile: visible elements stay inside viewport",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Leizu Simplified Chinese intake mobile: exactly one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "Leizu Simplified Chinese intake mobile: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Leizu Simplified Chinese intake mobile: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Polymythcal French home desktop: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "Polymythcal French: correct root language",
+      "passed": true,
+      "detail": "{\"lang\":\"fr-CA\",\"dir\":\"ltr\",\"pending\":false}"
+    },
+    {
+      "name": "Polymythcal French: no pending-language class",
+      "passed": true,
+      "detail": "{\"lang\":\"fr-CA\",\"dir\":\"ltr\",\"pending\":false}"
+    },
+    {
+      "name": "Polymythcal French: English switch is a dedicated route",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Polymythcal French: event cards open French utility pages",
+      "passed": true,
+      "detail": "/polymythseminars/fr/events/874ad14c70b3/"
+    },
+    {
+      "name": "Polymythcal French: submit flow stays French",
+      "passed": true,
+      "detail": "/polymythseminars/fr/submit/"
+    },
+    {
+      "name": "Polymythcal French: correct flow stays French",
+      "passed": true,
+      "detail": "/polymythseminars/fr/correct/"
+    },
+    {
+      "name": "Polymythcal French: subscribe flow stays French",
+      "passed": true,
+      "detail": "/polymythseminars/fr/subscribe/"
+    },
+    {
+      "name": "Polymythcal French: one language preference key",
+      "passed": true,
+      "detail": "{\"language\":\"fr\",\"legacyKeys\":[]}"
+    },
+    {
+      "name": "Polymythcal French: no bilingual all-listings label",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Polymythcal French home desktop: CLS is at or below 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Polymythcal French home desktop: document has no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Polymythcal French home desktop: visible elements stay inside viewport",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Polymythcal French home desktop: exactly one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "Polymythcal French home desktop: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Polymythcal French home desktop: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Polymythcal French focused calendar mobile: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "Polymythcal focused French: listed events use French routes",
+      "passed": true,
+      "detail": "[\"/polymythseminars/fr/events/foyle-young-poets-award-2026-deadline/\",\"/polymythseminars/fr/events/r-a-butler-prize-in-politics-and-international-studies-2026/\",\"/polymythseminars/fr/events/the-concord-review-2026/\",\"/polymythseminars/fr/events/trinity-college-cambridge-subject-essay-prizes-2026/\",\"/polymythseminars/fr/events/new-york-times-summer-reading-contest-2026/\",\"/polymythseminars/fr/events/marshall-society-essay-competition-in-economics-2026/\",\"/polymythseminars/fr/events/hamilton-public-library-power-of-the-pen-2026/\",\"/polymythseminars/fr/events/bennington-young-writers-awards-2026/\"]"
+    },
+    {
+      "name": "Polymythcal focused French: main calendar link stays French",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Polymythcal French focused calendar mobile: CLS is at or below 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Polymythcal French focused calendar mobile: document has no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Polymythcal French focused calendar mobile: visible elements stay inside viewport",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Polymythcal French focused calendar mobile: exactly one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "Polymythcal French focused calendar mobile: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Polymythcal French focused calendar mobile: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Polymythcal French event mobile: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "Polymythcal event: organizer title declares its source language",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Polymythcal event: original wording policy is visible",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Polymythcal event: correction route stays French",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Polymythcal event: reciprocal English alternate exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Polymythcal French event mobile: CLS is at or below 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Polymythcal French event mobile: document has no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Polymythcal French event mobile: visible elements stay inside viewport",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Polymythcal French event mobile: exactly one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "Polymythcal French event mobile: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Polymythcal French event mobile: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Polymythcal French submission form mobile: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "Polymythcal submit: French interface language posts with form",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Polymythcal submit: success action stays French",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Polymythcal submit: all required fields retain labels",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Polymythcal French submission form mobile: CLS is at or below 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Polymythcal French submission form mobile: document has no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Polymythcal French submission form mobile: visible elements stay inside viewport",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Polymythcal French submission form mobile: exactly one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "Polymythcal French submission form mobile: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Polymythcal French submission form mobile: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Saul Persian archive mobile: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "Saul Persian: localized archive hero is visible",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Saul Persian: English application spectrum is hidden",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Saul Persian: career archive remains rendered",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Saul Persian: English application CV boundary is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Saul Persian archive mobile: CLS is at or below 0.1",
+      "passed": true,
+      "detail": "0.0088"
+    },
+    {
+      "name": "Saul Persian archive mobile: document has no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Saul Persian archive mobile: visible elements stay inside viewport",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Saul Persian archive mobile: exactly one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "Saul Persian archive mobile: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Saul Persian archive mobile: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Saul Traditional Chinese archive desktop: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "Saul Traditional Chinese: localized archive hero is visible",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Saul Traditional Chinese: document language tag is precise",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Saul Traditional Chinese: route language state is precise",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Saul Traditional Chinese archive desktop: CLS is at or below 0.1",
+      "passed": true,
+      "detail": "0.0212"
+    },
+    {
+      "name": "Saul Traditional Chinese archive desktop: document has no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Saul Traditional Chinese archive desktop: visible elements stay inside viewport",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Saul Traditional Chinese archive desktop: exactly one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "Saul Traditional Chinese archive desktop: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Saul Traditional Chinese archive desktop: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Teacher Resources source-language finder desktop: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "Teacher Resources: French source-language chip is available",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Teacher Resources: French filter only shows compatible resources",
+      "passed": true,
+      "detail": "[\"fr-CA\",\"fr-CA\",\"fr-CA\",\"fr-CA\",\"fr-CA\",\"fr-CA\",\"fr-CA\",\"fr-CA\",\"fr-CA\",\"fr-CA\",\"fr-CA\",\"fr-CA\"]"
+    },
+    {
+      "name": "Teacher Resources: source-language filter is shareable",
+      "passed": true,
+      "detail": "http://127.0.0.1:32771/teacherresources/?language=fr-CA"
+    },
+    {
+      "name": "Teacher Resources: filter announces a nonzero result count",
+      "passed": true,
+      "detail": "26 resources across 2 collections"
+    },
+    {
+      "name": "Teacher Resources: reset clears language URL state",
+      "passed": true,
+      "detail": "http://127.0.0.1:32771/teacherresources/"
+    },
+    {
+      "name": "Teacher Resources source-language finder desktop: CLS is at or below 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Teacher Resources source-language finder desktop: document has no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "Teacher Resources source-language finder desktop: visible elements stay inside viewport",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Teacher Resources source-language finder desktop: exactly one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "Teacher Resources source-language finder desktop: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Teacher Resources source-language finder desktop: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "BB Simplified Chinese Why essay mobile: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "BB Chinese: precise Simplified Chinese root",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "BB Chinese: translated skip link is present",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "BB Chinese: references heading is translated",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "BB Chinese: English references have language boundaries",
+      "passed": true,
+      "detail": "23/23"
+    },
+    {
+      "name": "BB Chinese: local return link is translated",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "BB Simplified Chinese Why essay mobile: CLS is at or below 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "BB Simplified Chinese Why essay mobile: document has no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "BB Simplified Chinese Why essay mobile: visible elements stay inside viewport",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "BB Simplified Chinese Why essay mobile: exactly one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "BB Simplified Chinese Why essay mobile: no page exceptions",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "BB Simplified Chinese Why essay mobile: no failed local responses",
+      "passed": true,
+      "detail": "[]"
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Leizu French home desktop",
+      "cls": 0,
+      "documentOverflow": 0,
+      "visibleH1": 1,
+      "badEdges": [],
+      "language": "fr",
+      "direction": "ltr"
+    },
+    {
+      "label": "Leizu Persian home mobile",
+      "cls": 0,
+      "documentOverflow": 0,
+      "visibleH1": 1,
+      "badEdges": [],
+      "language": "fa",
+      "direction": "rtl"
+    },
+    {
+      "label": "Leizu Simplified Chinese intake mobile",
+      "cls": 0,
+      "documentOverflow": 0,
+      "visibleH1": 1,
+      "badEdges": [],
+      "language": "zh-Hans",
+      "direction": "ltr"
+    },
+    {
+      "label": "Polymythcal French home desktop",
+      "cls": 0,
+      "documentOverflow": 0,
+      "visibleH1": 1,
+      "badEdges": [],
+      "language": "fr-CA",
+      "direction": "ltr"
+    },
+    {
+      "label": "Polymythcal French focused calendar mobile",
+      "cls": 0,
+      "documentOverflow": 0,
+      "visibleH1": 1,
+      "badEdges": [],
+      "language": "fr-CA",
+      "direction": "ltr"
+    },
+    {
+      "label": "Polymythcal French event mobile",
+      "cls": 0,
+      "documentOverflow": 0,
+      "visibleH1": 1,
+      "badEdges": [],
+      "language": "fr-CA",
+      "direction": "ltr"
+    },
+    {
+      "label": "Polymythcal French submission form mobile",
+      "cls": 0,
+      "documentOverflow": 0,
+      "visibleH1": 1,
+      "badEdges": [],
+      "language": "fr-CA",
+      "direction": "ltr"
+    },
+    {
+      "label": "Saul Persian archive mobile",
+      "cls": 0.0088,
+      "documentOverflow": 0,
+      "visibleH1": 1,
+      "badEdges": [],
+      "language": "fa",
+      "direction": "rtl"
+    },
+    {
+      "label": "Saul Traditional Chinese archive desktop",
+      "cls": 0.0212,
+      "documentOverflow": 0,
+      "visibleH1": 1,
+      "badEdges": [],
+      "language": "zh-Hant",
+      "direction": "ltr"
+    },
+    {
+      "label": "Teacher Resources source-language finder desktop",
+      "cls": 0,
+      "documentOverflow": 0,
+      "visibleH1": 1,
+      "badEdges": [],
+      "language": "en",
+      "direction": "ltr"
+    },
+    {
+      "label": "BB Simplified Chinese Why essay mobile",
+      "cls": 0,
+      "documentOverflow": 0,
+      "visibleH1": 1,
+      "badEdges": [],
+      "language": "zh-Hans",
+      "direction": "ltr"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "screenshots/bb-why-zh-mobile.png",
+      "sha256": "cb630b2d24e0624ca93ffec3626ab2398d2a499bbf909caf86ade46644a7d622",
+      "bytes": 49927
+    },
+    {
+      "file": "screenshots/leizu-fa-mobile.png",
+      "sha256": "f6f51e9cabc891a854e40a4c794e7f9f8f89345fcf382648c7119a34d21efc13",
+      "bytes": 90358
+    },
+    {
+      "file": "screenshots/leizu-fr-desktop.png",
+      "sha256": "8cde50372f032160264319baf6ee4e822f5e93ccc6c76856641c2b46d89fcf7a",
+      "bytes": 362038
+    },
+    {
+      "file": "screenshots/leizu-zh-hans-intake-mobile.png",
+      "sha256": "d92a7bbe5d178d6df0f4ee44f2d62f5e93d0f65a0119fbe41ef12c1fda7ec4cd",
+      "bytes": 108005
+    },
+    {
+      "file": "screenshots/polymythcal-fr-desktop.png",
+      "sha256": "4605a43deb5425d887a7587d90473aec5afdac618eb8d3915917feb094adc41e",
+      "bytes": 165340
+    },
+    {
+      "file": "screenshots/polymythcal-fr-event-mobile.png",
+      "sha256": "68b06e060d89b148e81e283f5d18d025e641e7d3682e82f9e6f7806fbb18637f",
+      "bytes": 53505
+    },
+    {
+      "file": "screenshots/polymythcal-fr-submit-mobile.png",
+      "sha256": "9a499ec13aa8a38e8677c588e9d4ee5eff46795decccfdebbee72060ed660ceb",
+      "bytes": 31767
+    },
+    {
+      "file": "screenshots/polymythcal-writing-fr-mobile.png",
+      "sha256": "3b59ead2e4203014f3c3ea1a32d8414b30c63f59488bdb5163a32b0b7a7e7ae9",
+      "bytes": 84266
+    },
+    {
+      "file": "screenshots/saul-fa-mobile.png",
+      "sha256": "160f5b5b349b3c861e8df8467f83fcf7165cdc1e0a60a70db42a0412ed05a724",
+      "bytes": 100474
+    },
+    {
+      "file": "screenshots/saul-zh-hant-desktop.png",
+      "sha256": "9c27a061d0bae1d556aed116a6e1c4cd88e53af66fb5672454b8fb4aa1082d98",
+      "bytes": 333913
+    },
+    {
+      "file": "screenshots/teacherresources-language-filter.png",
+      "sha256": "ea3eaca8129357807ac6f949efc2f029d772dc3a351b3df1b8407fd2f60fc6fa",
+      "bytes": 159480
+    }
+  ]
+}

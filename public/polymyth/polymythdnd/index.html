@@ -2,6 +2,7 @@
 
 <html data-theme-policy="fixed" lang="en">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="index,follow" name="robots"/>
@@ -35,8 +36,8 @@
 </script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#0a0908;--bg1:#131210;--bg2:#1c1a17;--bg3:#252320;
@@ -141,6 +142,10 @@ h2 .small{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--fnt)
 .footer{margin-top:48px;padding-top:24px;border-top:1px solid var(--brd);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--fnt);text-transform:uppercase;letter-spacing:.5px;line-height:1.8}
 .footer a{color:var(--dim);text-decoration:none;border-bottom:1px solid var(--brd2)}
 .footer a:hover{color:var(--fire);border-bottom-color:var(--fire)}
+.bb-qr-header{display:grid;grid-template-columns:72px minmax(0,1fr);gap:24px;align-items:start}
+.bb-qr-header-copy{min-width:0}
+.bb-qr-link{position:static;display:block;width:72px;height:72px;border:0;border-radius:6px;overflow:hidden;background:transparent;box-shadow:0 2px 8px rgba(0,0,0,.15);line-height:0}
+.bb-qr-link img{display:block;width:100%;height:100%}
 
 @media (max-width:700px){
   .wrap{padding:20px 14px 60px}
@@ -150,21 +155,26 @@ h2 .small{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--fnt)
   .cat-bar{grid-template-columns:140px 1fr;gap:10px}
   .chip{font-size:13px;padding:6px 10px}
   .detail-card{padding:18px 18px}
+  .bb-qr-header{grid-template-columns:64px minmax(0,1fr);gap:14px}
+  .bb-qr-link{width:64px;height:64px}
 }
 </style>
 <link href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)" rel="stylesheet"/>
 <link href="/css/alive.css?v=cl91" rel="stylesheet"/>
-<link href="/css/theme.css?v=cl91" rel="stylesheet"/>
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link href="/css/theme.css?v=20260725-audit45" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="archive">
+<body data-geometry="indra-web" data-indra-intensity="0.095" data-route-type="archive">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <!-- CL_SELF_ROUTE_NOTE -->
 <div class="route-note archive-route-note" role="note"><span class="route-note-kicker">Game archive</span>D&amp;D-adjacent polymyth material for project readers.</div>
 <!-- bb* QR logo -->
-<a aria-label="Bookwormburrows ouroboros QR. Links to bookwormcard." href="/bookwormcard/" style="position:fixed;top:20px;right:20px;width:72px;height:72px;z-index:9999;display:block;background:transparent;border:none;line-height:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);border-radius:6px;overflow:hidden;" title="Bookwormcard. Scan with phone or click to open."><img alt="bb* ouroboros QR logo" height="405" loading="lazy" src="/bookwormcard/qr-ouroboros-indra.png" style="width:100%;height:100%;display:block;" width="405"/></a>
 <div class="wrap" role="main" id="main-content">
-<header>
+<header class="bb-qr-header">
+<a aria-label="Bookwormburrows ouroboros QR. Links to BookwormCard." class="bb-qr-link" data-bb-qr="" href="/bookwormcard/" title="BookwormCard. Scan with a phone or click to open."><img alt="bb* ouroboros QR logo" height="405" loading="lazy" src="/bookwormcard/qr-ouroboros-indra.png" width="405"/></a>
+<div class="bb-qr-header-copy">
 <h1>Polymythdnd compatibility landscape<span class="ast">*</span></h1>
 <p class="sub">a DM's reference. what to steal, what to skip, what to avoid.</p>
 <div class="meta">
@@ -173,6 +183,7 @@ h2 .small{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--fnt)
 <span><span class="c">4</span> table functions</span>
 <span><span class="c">25</span> synthesis edges</span>
 <span><span class="c">7</span> anti-synthesis</span>
+</div>
 </div>
 </header>
 <p class="intro">
@@ -606,9 +617,9 @@ catGrid.addEventListener('click', e => {
 </script>
 <script defer="" src="/js/mandala.js?v=cl91"></script>
 <script defer="" src="/js/indra.js?v=cl91"></script>
-<script defer="" src="/js/footer.js?v=20260719-audit11-decisions"></script>
+<script defer="" src="/js/footer.js?v=20260725-audit45-footer"></script>
 <script defer="" src="/js/autolink.js?v=cl91"></script>
 <script defer="" src="/js/theme.js?v=cl91"></script>
-<script defer="" src="/js/site-keyboard-enhancements.js"></script>
+<script defer="" src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

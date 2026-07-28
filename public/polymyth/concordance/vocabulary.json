@@ -2,7 +2,7 @@
   "version": 2,
   "updated": "2026-07-09",
   "note": "Canonical contentinternet vocabulary and linkability registry. Raw star-file source remains unmutated. Generated HTML autolinks important terms through the concordance. Built by scripts/build-meaninglib-linkability-registry.js from curated terms, current vocabulary, and stable star-file lexicon cues.",
-  "totalTerms": 838,
+  "totalTerms": 853,
   "terms": [
     {
       "canonical": "related-to-blob-stone-army-typecasting-psychologism-spectacle-asymmetry-loophole-count-exit-vocabulary",
@@ -492,6 +492,12 @@
       "source": "existing-curated,star-tag"
     },
     {
+      "canonical": "anti-limitless-personal-jurisdiction",
+      "pattern": "\\banti[\\s\\-_]+limitless[\\s\\-_]+personal[\\s\\-_]+jurisdiction\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
       "canonical": "categorization-bias",
       "pattern": "\\bcategorization[\\s\\-_]+bias\\b|\\bCategorization[\\s\\-_]+Bias\\b",
       "aliases": [],
@@ -621,6 +627,12 @@
       "source": "existing-curated,star-tag"
     },
     {
+      "canonical": "dictionary-definition-gorgonification",
+      "pattern": "\\bdictionary[\\s\\-_]+definition[\\s\\-_]+gorgonification\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
       "canonical": "gesture-ritual-idiom-narrative",
       "pattern": "\\bgesture[\\s\\-_]+ritual[\\s\\-_]+idiom[\\s\\-_]+narrative\\b",
       "aliases": [],
@@ -677,6 +689,12 @@
     {
       "canonical": "conversation-is-not-artifact",
       "pattern": "\\bconversation[\\s\\-_]+is[\\s\\-_]+not[\\s\\-_]+artifact\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "feminism-as-gorgon-operation",
+      "pattern": "\\bfeminism[\\s\\-_]+as[\\s\\-_]+gorgon[\\s\\-_]+operation\\b",
       "aliases": [],
       "source": "existing-curated,star-tag"
     },
@@ -855,6 +873,12 @@
       "source": "existing-curated,star-tag"
     },
     {
+      "canonical": "no-default-feminist-frame",
+      "pattern": "\\bno[\\s\\-_]+default[\\s\\-_]+feminist[\\s\\-_]+frame\\b",
+      "aliases": [],
+      "source": "star-tag"
+    },
+    {
       "canonical": "polycognate-dictionary-inaugural",
       "pattern": "\\bpolycognate[\\s\\-_]+dictionary[\\s\\-_]+inaugural\\b",
       "aliases": [],
@@ -879,6 +903,12 @@
       "pattern": "\\bcognition[\\s\\-_]+scale[\\s\\-_]+gorgonification\\b",
       "aliases": [],
       "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "fraser-hegelianegirl-hypothesis",
+      "pattern": "\\bfraser[\\s\\-_]+hegelianegirl[\\s\\-_]+hypothesis\\b",
+      "aliases": [],
+      "source": "star-tag"
     },
     {
       "canonical": "gorgonification",
@@ -1054,11 +1084,17 @@
       "canonical": "balanced-consequence-closer",
       "pattern": "\\bbalanced[\\s\\-_]+consequence[\\s\\-_]+closer\\b",
       "aliases": [],
-      "source": "star-tag"
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "belonging-outside-belonging",
       "pattern": "\\bbelonging[\\s\\-_]+outside[\\s\\-_]+belonging\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "commodified-emotional-labor",
+      "pattern": "\\bcommodified[\\s\\-_]+emotional[\\s\\-_]+labor\\b",
       "aliases": [],
       "source": "existing-curated,star-tag"
     },
@@ -1303,6 +1339,12 @@
       "source": "existing-curated,star-tag"
     },
     {
+      "canonical": "source-system-separation",
+      "pattern": "\\bsource[\\s\\-_]+system[\\s\\-_]+separation\\b",
+      "aliases": [],
+      "source": "star-tag"
+    },
+    {
       "canonical": "spirit-of-the-law",
       "pattern": "\\bspirit[\\s\\-_]+of[\\s\\-_]+the[\\s\\-_]+law\\b",
       "aliases": [],
@@ -1318,7 +1360,7 @@
       "canonical": "dont-be-a-gorgon",
       "pattern": "\\bdont[\\s\\-_]+be[\\s\\-_]+a[\\s\\-_]+gorgon\\b",
       "aliases": [],
-      "source": "star-tag"
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "hole-in-hole-out",
@@ -1425,6 +1467,12 @@
     {
       "canonical": "neoliberalism-as-term",
       "pattern": "\\bneoliberalism[\\s\\-_]+as[\\s\\-_]+term\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "personal-is-political",
+      "pattern": "\\bpersonal[\\s\\-_]+is[\\s\\-_]+political\\b",
       "aliases": [],
       "source": "existing-curated,star-tag"
     },
@@ -1572,6 +1620,12 @@
     {
       "canonical": "master-pupil-chains",
       "pattern": "\\bmaster[\\s\\-_]+pupil[\\s\\-_]+chains\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "no-faction-shortcut",
+      "pattern": "\\bno[\\s\\-_]+faction[\\s\\-_]+shortcut\\b",
       "aliases": [],
       "source": "existing-curated,star-tag"
     },
@@ -1844,7 +1898,7 @@
       "canonical": "vicarious-traumatization",
       "pattern": "\\bvicarious[\\s\\-_]+traumatization\\b",
       "aliases": [],
-      "source": "existing-curated,star-tag"
+      "source": "existing-curated"
     },
     {
       "canonical": "ai-decided-batch",
@@ -2314,7 +2368,7 @@
       "canonical": "protection-apparatus",
       "pattern": "\\bprotection[\\s\\-_]+apparatus\\b",
       "aliases": [],
-      "source": "existing-curated,star-tag"
+      "source": "existing-curated"
     },
     {
       "canonical": "psychological-safety",
@@ -2463,6 +2517,12 @@
     {
       "canonical": "independent-arrival",
       "pattern": "\\bindependent[\\s\\-_]+arrival\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "internal-gorgonwars",
+      "pattern": "\\binternal[\\s\\-_]+gorgonwars\\b",
       "aliases": [],
       "source": "existing-curated,star-tag"
     },
@@ -2748,6 +2808,12 @@
       "source": "existing-curated,star-tag"
     },
     {
+      "canonical": "capture-narrative",
+      "pattern": "\\bcapture[\\s\\-_]+narrative\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
       "canonical": "charity-parasitic",
       "pattern": "\\bcharity[\\s\\-_]+parasitic\\b",
       "aliases": [],
@@ -3012,7 +3078,7 @@
       "canonical": "inactive-runtime",
       "pattern": "\\binactive[\\s\\-_]+runtime\\b",
       "aliases": [],
-      "source": "star-tag"
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "lever-discipline",
@@ -3192,7 +3258,7 @@
       "canonical": "historical-stub",
       "pattern": "\\bhistorical[\\s\\-_]+stub\\b",
       "aliases": [],
-      "source": "star-tag"
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "jester-aperture",
@@ -3227,6 +3293,12 @@
     {
       "canonical": "polymyth-engine",
       "pattern": "\\bpolymyth[\\s\\-_]+engine\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "qualifier-twist",
+      "pattern": "\\bqualifier[\\s\\-_]+twist\\b",
       "aliases": [],
       "source": "existing-curated,star-tag"
     },
@@ -3277,6 +3349,12 @@
       "pattern": "\\bsibling[\\s\\-_]+cluster\\b",
       "aliases": [],
       "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "source-verified",
+      "pattern": "\\bsource[\\s\\-_]+verified\\b",
+      "aliases": [],
+      "source": "star-tag"
     },
     {
       "canonical": "stanley-kubrick",
@@ -3722,7 +3800,7 @@
       "canonical": "core-history",
       "pattern": "\\bcore[\\s\\-_]+history\\b",
       "aliases": [],
-      "source": "star-tag"
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "definitionfederation",
@@ -4047,6 +4125,12 @@
     {
       "canonical": "anti-twist",
       "pattern": "\\banti[\\s\\-_]+twist\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
+    },
+    {
+      "canonical": "arendtianfeminism",
+      "pattern": "\\barendtianfeminism\\b",
       "aliases": [],
       "source": "existing-curated,star-tag"
     },
@@ -4932,6 +5016,12 @@
       "pattern": "toll[- ]?booth",
       "aliases": [],
       "source": "existing-curated"
+    },
+    {
+      "canonical": "unresolved",
+      "pattern": "\\bunresolved\\b",
+      "aliases": [],
+      "source": "existing-curated,star-tag"
     },
     {
       "canonical": "unverified",

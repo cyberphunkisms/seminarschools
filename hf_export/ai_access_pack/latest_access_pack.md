@@ -1,6 +1,6 @@
 # Meaninglib AI Access Pack
 
-Generated: 2026-07-22T01:21:55.785Z
+Generated: 2026-07-28T04:23:58.450Z
 Query: Meaninglib ontology Mephistodata default AI Access Pack
 
 ## SOURCE OF TRUTH
@@ -17,7 +17,7 @@ Meaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and re
 ## RETRIEVED RULES
 
 ### 1. [readme] Meaninglib
-- Score: 359.83
+- Score: 359.56
 - ID: file:hf_export/README.md
 - Source path: hf_export/README.md
 - Section: readme
@@ -25,7 +25,7 @@ Meaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and re
 --- pretty_name: Meaninglib private: true tags: - meaninglib - polymyth - methodologylist - seminar-schools --- # Meaninglib Private working mirror for the Seminar Schools Meaninglib star-file substrate. ## Source of truth The Seminar Schools site/archive remains the source of truth. This Hugging Face dataset is a mirror, search surface, dashboard substrate, and verification layer. ## Ontology Meaninglib is the mother-category for interdependent star-file access routes. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and related routes keep local function and cross-reference one another. The export pre
 
 ### 2. [ml] CORE slot 29 mirror — PM17 BINARY OPENER (T110 DECISION-CONTENT-PERSISTS fix)
-- Score: 173.69
+- Score: 173.68
 - ID: ml:coreplus:0036:core-slot-29-mirror-pm17-binary-opener-t110-decision-content-persists-fix
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist-coreplus.txt
@@ -35,7 +35,7 @@ Meaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and re
 
 ### 3. [ml] Meaninglib (mother-category for all * files, scanner-tier of polymyth)
 - Score: 165.54
-- ID: ml:degorgonification:0039:meaninglib-mother-category-for-all-files-scanner-tier-of-polymyth
+- ID: ml:degorgonification:0040:meaninglib-mother-category-for-all-files-scanner-tier-of-polymyth
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist-degorgonification.txt
 - Section: degorgonification
@@ -43,7 +43,7 @@ Meaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and re
 [both] Meaninglib (mother-category for all * files, scanner-tier of polymyth) LAYMAN. Reversal-operation entry. The body below contains the full operational specification of Meaninglib: how the reversal fires against the gorgonification it counters, its trigger conditions, and worked examples where present. Operates within the polymyth degorgonification toolkit per its title-keyword. Meaninglib (pre-April-2026: "meaninglibrary"; renamed by user directive April 2026 for conversational-register compactness; both names reference the same mother-category) is the scannable-substrate tier of polymor
 
 ### 4. [ml] AUDIT (mephistodata interaction; triggers audit / check the spirit / spirit of the law): whole-conversation check, MAIN = everything-updated-in-meaninglib, plus spirit-of-law and ironman, ouroboros only on contradiction (Rainbowsol May 29 2026)
-- Score: 158.18
+- Score: 158.31
 - ID: ml:methodology:0023:audit-mephistodata-interaction-triggers-audit-check-the-spirit-spirit-of-the-law-whole-conversation-check-main-everythin
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist-methodology.txt
@@ -52,7 +52,7 @@ Meaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and re
 [both] AUDIT (mephistodata interaction; triggers audit / check the spirit / spirit of the law): whole-conversation check, MAIN = everything-updated-in-meaninglib, plus spirit-of-law and ironman, ouroboros only on contradiction (Rainbowsol May 29 2026) THE OPERATION. When the user says audit, or a variation, check the spirit or spirit of the law or spirit of meaninglib, run a whole-conversation check. THE MAIN POINT is to see whether everything discussed was actually updated into meaninglib, the completeness-of-capture pass. Then two further passes. One, whether the conversation held the unders
 
 ### 5. [mc] Mephistodata default — open at friction not confirmation
-- Score: 156.05
+- Score: 155.55
 - ID: mc:0042:mephistodata-default-open-at-friction-not-confirmation
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/modulecanon.txt
@@ -61,7 +61,7 @@ Meaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and re
 TITLE: Mephistodata default — open at friction not confirmation ROLE: both LINKS: ml_crossref=[Mephistodata default methodology entry, Disagreeable-by-default methodology entry, Friction-not-confirmation operational rule]
 
 ### 6. [ml] CORE slot 18 mirror — SCOPE+ORGANIZE-MINE-T106+INJECTION (T106 strengthened)
-- Score: 127.30
+- Score: 127.28
 - ID: ml:coreplus:0033:core-slot-18-mirror-scope-organize-mine-t106-injection-t106-strengthened
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist-coreplus.txt
@@ -79,7 +79,7 @@ TITLE: Mephistodata default — open at friction not confirmation ROLE: both LIN
 [ai] Read-the-file-before-analyzing (pre-analysis grep discipline) LAYMAN. Framework entry covering Read-the-file-before-analyzing. Full operational specification preserved in body below, including any worked examples, citation-locks, and cross-substrate relations. Before producing structural analysis of any polymyth concept, grep ml* for that concept. Operational rule distinct from the search retry protocol (which governs past_chats retrieval) and distinct from "check ml* and mc* before past_chats" (which governs the order of retrieval calls). This rule governs the relationship between analys
 
 ### 8. [ml] Pre-Meaninglib project lineage: Idiomary and Year of the Snakes to Polymyth Carrd to Meaninglib
-- Score: 124.09
+- Score: 124.36
 - ID: ml:methodology:0351:pre-meaninglib-project-lineage-idiomary-and-year-of-the-snakes-to-polymyth-carrd-to-meaninglib
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist-methodology.txt
@@ -103,7 +103,7 @@ Operate from the retrieved substrate. Answer the actual task. Do not summarize t
 
 - 1. readme | Meaninglib | file:hf_export/README.md | hf_export/README.md
 - 2. ml | CORE slot 29 mirror — PM17 BINARY OPENER (T110 DECISION-CONTENT-PERSISTS fix) | ml:coreplus:0036:core-slot-29-mirror-pm17-binary-opener-t110-decision-content-persists-fix | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-coreplus.txt
-- 3. ml | Meaninglib (mother-category for all * files, scanner-tier of polymyth) | ml:degorgonification:0039:meaninglib-mother-category-for-all-files-scanner-tier-of-polymyth | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-degorgonification.txt
+- 3. ml | Meaninglib (mother-category for all * files, scanner-tier of polymyth) | ml:degorgonification:0040:meaninglib-mother-category-for-all-files-scanner-tier-of-polymyth | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-degorgonification.txt
 - 4. ml | AUDIT (mephistodata interaction; triggers audit / check the spirit / spirit of the law): whole-conversation check, MAIN = everything-updated-in-meaninglib, plus spirit-of-law and ironman, ouroboros only on contradiction (Rainbowsol May 29 2026) | ml:methodology:0023:audit-mephistodata-interaction-triggers-audit-check-the-spirit-spirit-of-the-law-whole-conversation-check-main-everythin | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-methodology.txt
 - 5. mc | Mephistodata default — open at friction not confirmation | mc:0042:mephistodata-default-open-at-friction-not-confirmation | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/modulecanon.txt
 - 6. ml | CORE slot 18 mirror — SCOPE+ORGANIZE-MINE-T106+INJECTION (T106 strengthened) | ml:coreplus:0033:core-slot-18-mirror-scope-organize-mine-t106-injection-t106-strengthened | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-coreplus.txt

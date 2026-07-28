@@ -1,0 +1,374 @@
+{
+  "audit": 41,
+  "release": "Audit 41 full depth and rollover browser verification",
+  "release_id": "2026-07-25-site-audit41-depth-rollover-density-final",
+  "generated_at": "2026-07-25T09:56:53-04:00",
+  "executed_at": "2026-07-25T14:05:28.638013Z",
+  "browser": "Chromium 138.0.7204.23",
+  "engine": "Chromium",
+  "route_cases": 8,
+  "routes": [
+    {
+      "route": "/bookwormcard/",
+      "label": "bookwormcard"
+    },
+    {
+      "route": "/teacherresources/",
+      "label": "teacher-resources"
+    },
+    {
+      "route": "/polymythseminars/",
+      "label": "polymythcal"
+    },
+    {
+      "route": "/polymythseminars/events/0cc0dee6936c/",
+      "label": "upcoming-event"
+    },
+    {
+      "route": "/polymythseminars/events/0397c5dce167/",
+      "label": "expired-event"
+    },
+    {
+      "route": "/bb/",
+      "label": "bb"
+    },
+    {
+      "route": "/polymyth/methodologylist/",
+      "label": "methodology"
+    },
+    {
+      "route": "/",
+      "label": "home"
+    }
+  ],
+  "checks_total": 64,
+  "checks_passed": 64,
+  "checks_failed": 0,
+  "results": [
+    {
+      "name": "bookwormcard: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "bookwormcard: document title",
+      "passed": true,
+      "detail": "Bookwormcard \u00b7 Make a bookwormburrows Character Card"
+    },
+    {
+      "name": "bookwormcard: one main landmark",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "bookwormcard: one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "bookwormcard: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "bookwormcard: no runtime errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "bookwormcard: no failed local requests",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "bookwormcard: focused depth contract",
+      "passed": true,
+      "detail": "Bookwormcard \u00b7 BookwormBurrows character gate"
+    },
+    {
+      "name": "teacher-resources: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "teacher-resources: document title",
+      "passed": true,
+      "detail": "Teacher Resources for English, OSSD & IB | Seminar Schools"
+    },
+    {
+      "name": "teacher-resources: one main landmark",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "teacher-resources: one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "teacher-resources: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "teacher-resources: no runtime errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "teacher-resources: no failed local requests",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "teacher-resources: focused depth contract",
+      "passed": true,
+      "detail": "false->true; panel=True; resources=644"
+    },
+    {
+      "name": "polymythcal: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "polymythcal: document title",
+      "passed": true,
+      "detail": "Polymythcal | Seminar Schools"
+    },
+    {
+      "name": "polymythcal: one main landmark",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "polymythcal: one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "polymythcal: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "polymythcal: no runtime errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "polymythcal: no failed local requests",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "polymythcal: focused depth contract",
+      "passed": true,
+      "detail": "24 visible event cards"
+    },
+    {
+      "name": "upcoming-event: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "upcoming-event: document title",
+      "passed": true,
+      "detail": "Toronto International Festival of Authors (TIFA) 2026 \u00b7 2026-10-28 \u00b7 Polymythcal"
+    },
+    {
+      "name": "upcoming-event: one main landmark",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "upcoming-event: one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "upcoming-event: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "upcoming-event: no runtime errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "upcoming-event: no failed local requests",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "upcoming-event: focused depth contract",
+      "passed": true,
+      "detail": "robots=index,follow; Event=True"
+    },
+    {
+      "name": "expired-event: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "expired-event: document title",
+      "passed": true,
+      "detail": "Pride Toronto \u2014 Dyke Rally & March \u00b7 2026-06-27 \u00b7 Polymythcal"
+    },
+    {
+      "name": "expired-event: one main landmark",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "expired-event: one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "expired-event: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "expired-event: no runtime errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "expired-event: no failed local requests",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "expired-event: focused depth contract",
+      "passed": true,
+      "detail": "robots=noindex,follow; Event=False"
+    },
+    {
+      "name": "bb: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "bb: document title",
+      "passed": true,
+      "detail": "bookwormburrows | AI-Assisted Reading and Seminar Game"
+    },
+    {
+      "name": "bb: one main landmark",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "bb: one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "bb: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "bb: no runtime errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "bb: no failed local requests",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "bb: focused depth contract",
+      "passed": true,
+      "detail": "BB and DM named"
+    },
+    {
+      "name": "methodology: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "methodology: document title",
+      "passed": true,
+      "detail": "Polymyth Methodologylist*"
+    },
+    {
+      "name": "methodology: one main landmark",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "methodology: one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "methodology: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "methodology: no runtime errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "methodology: no failed local requests",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "methodology: focused depth contract",
+      "passed": true,
+      "detail": "tabs=17; entries=1139"
+    },
+    {
+      "name": "home: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "home: document title",
+      "passed": true,
+      "detail": "Polymythcal, Tutoring, Resources & Projects | Seminar Schools"
+    },
+    {
+      "name": "home: one main landmark",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "home: one visible H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "home: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "home: no runtime errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "home: no failed local requests",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "home: focused depth contract",
+      "passed": true,
+      "detail": "7 Polymythcal links"
+    }
+  ],
+  "environment_limits": [
+    "Native VoiceOver requires macOS hardware and was not executed.",
+    "Native NVDA requires Windows and was not executed.",
+    "Firefox and WebKit require an unrestricted compatible host for final sign-off."
+  ]
+}

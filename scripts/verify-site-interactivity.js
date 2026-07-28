@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 'use strict';
-const fs=require('fs');const path=require('path');const ROOT=path.resolve(__dirname,'..');
+const fs=require('fs');const path=require('path');const {isGeneratedDependencyDirectory}=require('./repository-walk-policy');const ROOT=path.resolve(__dirname,'..');
 const POLY_ROUTES=['polymythseminars','writingclub','writingkids','writingjuniors','writingteens','writinggrads','university','philosophy','humanities','cfps','lectures','fellowships'];let errors=[];let warnings=[];
 const read=rel=>fs.readFileSync(path.join(ROOT,rel),'utf8');const exists=rel=>fs.existsSync(path.join(ROOT,rel));
-function allFiles(dir,out=[]){for(const name of fs.readdirSync(dir)){if(['.git','node_modules','.netlify','public'].includes(name))continue;const p=path.join(dir,name);const st=fs.statSync(p);if(st.isDirectory())allFiles(p,out);else out.push(p);}return out;}
+function allFiles(dir,out=[]){for(const name of fs.readdirSync(dir)){if(['.git','.netlify','public'].includes(name)||isGeneratedDependencyDirectory(name))continue;const p=path.join(dir,name);const st=fs.statSync(p);if(st.isDirectory())allFiles(p,out);else out.push(p);}return out;}
 const appPath=path.join(ROOT,'js','polymythcal-revamp.js');const app=fs.existsSync(appPath)?fs.readFileSync(appPath,'utf8'):'';
 if(!/function render\(\)/.test(app)||!/writeStateToUrl\(\)/.test(app)||!/function routeMatches\(event\)/.test(app)) errors.push('shared Polymythcal controller lacks render, URL-state, or route-restriction handling');
-if(/scrollIntoView\(/.test(app)&&!/behavior:\s*["']smooth["']/.test(app)) warnings.push('shared Polymythcal controller contains a non-smooth programmatic scroll');
+if(/behavior:\s*["']smooth["']/.test(app)) errors.push('shared Polymythcal controller still requests smooth programmatic scrolling');
 for(const route of POLY_ROUTES){
  const rel=`${route}/index.html`;if(!exists(rel)){errors.push(`missing ${rel}`);continue;}const html=read(rel);
  const h1=(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)||[])[1]||'';if(!h1.replace(/<[^>]+>/g,'').trim()) errors.push(`${rel} visible h1 is empty`);
  if(route==='polymythseminars'){if(!/Polymythcal/i.test(h1)) errors.push(`${rel} main h1 does not identify Polymythcal`);}else if(!html.includes(`data-pm-route="${route}"`)) errors.push(`${rel} lacks route identity`);
  if(!/id="polymythContext"/.test(html)||!/id="polymythDescription"/.test(html)) errors.push(`${rel} missing context/description fields`);
- if(!/id="quickGuideCopy"/.test(html)||!/Open a title to reach the official source|Open a title for the official source|Open a title for the stable Polymythcal page/.test(html)) errors.push(`${rel} missing plain-language use guide`);
+ if(!/id="quickGuideCopy"/.test(html)||!/Open a title for details/.test(html)) errors.push(`${rel} missing plain-language use guide`);
  if(!/polymythcal-revamp\.js/.test(html)) errors.push(`${rel} does not load the shared Polymythcal interaction controller`);
  if(/onclick="/.test(html)) errors.push(`${rel} contains inline onclick handler`);
  if(/document\.title/.test(html)) errors.push(`${rel} mutates document.title`);

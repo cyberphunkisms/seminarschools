@@ -3,11 +3,19 @@
   var path = document.currentScript && document.currentScript.dataset.txt;
   if(!path) return;
 
-  var bar = document.createElement('div');
-  bar.className = 'txt-tools';
-  bar.innerHTML =
-    '<button class="txt-btn txt-copy" title="Copy TXT to clipboard">Copy TXT</button>' +
-    '<a class="txt-btn txt-dl" href="' + path + '" download title="Download TXT file">Download TXT</a>';
+  var bar = document.querySelector('.txt-tools[data-txt-tools]');
+  var needsInsert = !bar;
+  if(!bar){
+    bar = document.createElement('div');
+    bar.className = 'txt-tools';
+    bar.setAttribute('data-txt-tools', '');
+    bar.innerHTML =
+      '<button type="button" class="txt-btn txt-copy" title="Copy TXT to clipboard">Copy TXT</button>' +
+      '<a class="txt-btn txt-dl" href="' + path + '" download title="Download TXT file">Download TXT</a>';
+  }else{
+    var download = bar.querySelector('.txt-dl');
+    if(download) download.setAttribute('href', path);
+  }
 
   var css = document.createElement('style');
   css.textContent =
@@ -15,16 +23,20 @@
     '.txt-btn{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.5px;' +
     'text-transform:uppercase;padding:6px 14px;border:1px solid var(--brd2);' +
     'background:var(--bg1);color:var(--dim);cursor:pointer;text-decoration:none;' +
-    'transition:.15s;border-radius:3px}' +
+    'transition:color .15s,border-color .15s;border-radius:3px}' +
     '.txt-btn:hover{color:var(--fire);border-color:var(--fire)}' +
     '.txt-btn.copied{color:var(--method);border-color:var(--method)}';
   document.head.appendChild(css);
 
-  var header = document.querySelector('header');
-  if(header) header.appendChild(bar);
-  else document.body.prepend(bar);
+  if(needsInsert){
+    var header = document.querySelector('header');
+    if(header) header.appendChild(bar);
+    else document.body.prepend(bar);
+  }
 
-  bar.querySelector('.txt-copy').addEventListener('click', function(){
+  var copy = bar.querySelector('.txt-copy');
+  if(!copy) return;
+  copy.addEventListener('click', function(){
     var btn = this;
     fetch(path)
       .then(function(r){ return r.text(); })

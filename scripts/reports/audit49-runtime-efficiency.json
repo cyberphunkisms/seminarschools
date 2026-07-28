@@ -1,0 +1,45 @@
+{
+  "schema": "seminar-schools-audit49-runtime-efficiency-v1",
+  "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
+  "generated_at": "2026-07-26T15:45:00-04:00",
+  "status": "passed",
+  "metrics": {
+    "active_runtime_files": 3439,
+    "files_with_intervals": 10,
+    "interval_calls": 10,
+    "bounded_leaf_routes": 10,
+    "startup_timer_slots_bounded": 45,
+    "public_runtime_mirrors_identical": 10,
+    "forced_public_data_revalidation_fetches": 0,
+    "bounded_public_data_assets": 24,
+    "bounded_public_data_bytes": 9774758
+  },
+  "interval_files": {
+    "leizu/fa/index.html": 1,
+    "leizu/fa/teach/index.html": 1,
+    "leizu/fr/index.html": 1,
+    "leizu/fr/teach/index.html": 1,
+    "leizu/index.html": 1,
+    "leizu/teach/index.html": 1,
+    "leizu/zh-hans/index.html": 1,
+    "leizu/zh-hans/teach/index.html": 1,
+    "leizu/zh-hant/index.html": 1,
+    "leizu/zh-hant/teach/index.html": 1
+  },
+  "cache_policies": {
+    "polymyth_text_mirrors": "public, max-age=86400, stale-while-revalidate=604800",
+    "florilegium_posts": "public, max-age=3600, must-revalidate",
+    "polymythcal_candidates": "public, max-age=300, must-revalidate",
+    "saul_public_data": "public, max-age=86400, stale-while-revalidate=604800"
+  },
+  "invariants": {
+    "english_source_of_truth": true,
+    "organizer_authored_text_verbatim": true,
+    "high_stakes_leizu_noindex_preserved": true,
+    "bb_teacher_led": true,
+    "cadence_changed": false,
+    "security_audit_performed": false,
+    "deployment_performed": false
+  },
+  "failures": []
+}

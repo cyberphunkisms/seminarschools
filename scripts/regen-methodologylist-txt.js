@@ -32,6 +32,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const {parseSeedWithAddenda} = require('./lib/parse-seed-with-addenda');
 
 const argv = process.argv.slice(2);
 const dryRun = argv.includes('--dry-run');
@@ -70,7 +71,7 @@ function parseSeedArray(filePath) {
   return eval(html.slice(arrStart, arrEnd + 1));
 }
 
-const ml = parseSeedArray(HTML_PATH);
+const ml = parseSeedWithAddenda(fs.readFileSync(HTML_PATH, 'utf8'));
 console.log('Parsed', ml.length, 'entries from ml*');
 
 // ------------------------------------------------------------------

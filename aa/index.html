@@ -43,12 +43,14 @@
 -->
 <html lang="en">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
+<script>document.documentElement.classList.add('aa-js');window.setTimeout(()=>document.documentElement.classList.add('aa-ready'),3000)</script>
 <meta charset="UTF-8">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Archetype Archive &amp; Taxonomy Index | aa*</title>
-<meta name="description" content="A comprehensive reference catalog of every existing archetype taxonomy across depth psychology, comparative mythology, folklore, dramaturgy, religion, gaming, and indigenous traditions. Search by taxonomy, by tag, or by category.">
+<meta name="description" content="A sourced, cross-tradition reference catalog of archetype taxonomies across depth psychology, mythology, folklore, dramaturgy, religion, gaming, and Indigenous traditions.">
 <link rel="canonical" href="https://seminarschools.com/aa/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seminarschools.com/aa/">
@@ -62,7 +64,7 @@
 <meta name="twitter:image" content="https://seminarschools.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Inter:wght@400;500;600&amp;family=Libre+Baskerville:ital@0;1&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -163,6 +165,17 @@ h1 em{font-style:italic;color:var(--accent);font-weight:500}
   color:var(--ink2);
   margin:0 0 12px;
 }
+.synthesis-intro summary{
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+  font-weight:500;
+  font-size:22px;
+  color:var(--ink2);
+  cursor:pointer;
+  width:max-content;
+  max-width:100%;
+}
+.synthesis-intro[open] summary{margin-bottom:14px}
 .synthesis-intro p{
   font-size:15px;
   line-height:1.55;
@@ -770,7 +783,6 @@ main{max-width:1280px;margin:0 auto;padding:32px 24px 80px;min-height:50vh}
   border:1px solid var(--rule, #d8d4cc);
   border-left:3px solid #8e7ab8;
   padding:18px 20px 16px 20px;
-  cursor:pointer;
   transition:border-color 0.2s, transform 0.15s, box-shadow 0.2s;
   position:relative;
 }
@@ -862,7 +874,7 @@ main{max-width:1280px;margin:0 auto;padding:32px 24px 80px;min-height:50vh}
 .tax-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(380px, 1fr));gap:20px}
 .tax-card{
   background:var(--bg2);border:1px solid var(--rule);padding:24px 22px 20px;
-  cursor:pointer;transition:background-color 0.18s, border-color 0.18s, color 0.18s;position:relative;overflow:hidden;
+  transition:background-color 0.18s, border-color 0.18s, color 0.18s;position:relative;overflow:hidden;
   contain:layout style paint;
 }
 .tax-card::before{
@@ -911,6 +923,8 @@ main{max-width:1280px;margin:0 auto;padding:32px 24px 80px;min-height:50vh}
   padding:48px 56px;position:relative;margin-bottom:40px;
   box-shadow:8px 8px 0 var(--ink);
 }
+.detail-panel:focus{outline:none}
+.detail-panel.untranslatable-detail{padding:0}
 .detail-close{
   position:absolute;top:16px;right:16px;background:transparent;
   border:1px solid var(--rule2);width:36px;height:36px;cursor:pointer;
@@ -1055,6 +1069,7 @@ main{max-width:1280px;margin:0 auto;padding:32px 24px 80px;min-height:50vh}
 .tp-mass-member{
   font-family:'JetBrains Mono', monospace;
   font-size:11px;
+  line-height:1.25;
   padding:4px 10px;
   background:var(--bg);
   border:1px solid var(--rule);
@@ -1455,6 +1470,7 @@ main{max-width:1280px;margin:0 auto;padding:32px 24px 80px;min-height:50vh}
   line-height:1;letter-spacing:-2px;margin-bottom:16px;
 }
 .tp-name em{font-style:italic;color:var(--accent)}
+.tp-name:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
 .tp-summary{
   font-size:18px;font-style:italic;color:var(--ink2);margin-bottom:8px;
   max-width:680px;line-height:1.45;
@@ -1485,7 +1501,7 @@ main{max-width:1280px;margin:0 auto;padding:32px 24px 80px;min-height:50vh}
 }
 .tp-occ{
   background:var(--bg2);border:1px solid var(--rule);padding:18px 20px;
-  cursor:pointer;transition:background-color 0.15s, border-color 0.15s, color 0.15s;position:relative;
+  transition:background-color 0.15s, border-color 0.15s, color 0.15s;position:relative;
   border-left:4px solid var(--trad-color, var(--accent));
 }
 .tp-occ:hover{background:var(--bg);border-color:var(--ink2)}
@@ -1512,7 +1528,7 @@ main{max-width:1280px;margin:0 auto;padding:32px 24px 80px;min-height:50vh}
 .cat-results{display:flex;flex-direction:column;gap:8px}
 .cat-group{
   background:var(--bg2);border:1px solid var(--rule);padding:24px 26px;margin-bottom:18px;
-  cursor:pointer;transition:background-color 0.15s, border-color 0.15s, color 0.15s;
+  transition:background-color 0.15s, border-color 0.15s, color 0.15s;
 }
 .cat-group:hover{background:var(--bg);border-color:var(--ink)}
 .cat-group-name{
@@ -1524,6 +1540,29 @@ main{max-width:1280px;margin:0 auto;padding:32px 24px 80px;min-height:50vh}
   font-family:'JetBrains Mono', monospace;font-size:0.72rem;letter-spacing:1.5px;
   text-transform:uppercase;color:var(--dim);margin-bottom:18px;
   padding-bottom:14px;border-bottom:1px dotted var(--rule2);
+}
+.aa-card-open{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  margin-top:16px;
+  padding:8px 13px;
+  border:1px solid var(--rule2);
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.72rem;
+  font-weight:600;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:background-color 0.12s, border-color 0.12s, color 0.12s;
+}
+.aa-card-open:hover{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.tp-mass-member:is(button){
+  min-height:36px;
+  appearance:none;
 }
 .cat-occurrences{
   display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:10px;
@@ -1604,14 +1643,14 @@ footer a:hover{color:var(--accent)}
     }
   }
 </style>
-<link rel="stylesheet" href="/css/theme.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=20260725-audit45">
 <style data-page-theme="aa">
 :root{--bg:#f4f0e6;--bg2:#ebe5d4;--bg3:#e0d7c0;--ink:#1a1614;--ink2:#3d352d;--dim:#6b5d4f;--ink-dim:var(--dim);--faint:#75685b;--rule:#c9bea8;--rule2:#a89c83;--accent-light:#8b2e1f;--accent-dark:#ef8b68;--accent:var(--accent-light);--accent2:#9f3d18;--highlight:#fff4cc;}
 @media (prefers-color-scheme:dark){:root:not(.light){--bg:#0f0d0b;--bg2:#191612;--bg3:#241f19;--ink:#f1e8d6;--ink2:#d2c4ad;--dim:#a99b86;--faint:#8c7f6d;--rule:#4a4034;--rule2:#6b5d4a;--highlight:#342d1d;--accent:#ef8b68;--accent2:#f2a36b;--green:#8fc28f;--grey:#aaa094;}}
 :root.dark,:root[data-theme="dark"]{--bg:#0f0d0b;--bg2:#191612;--bg3:#241f19;--ink:#f1e8d6;--ink2:#d2c4ad;--dim:#a99b86;--faint:#8c7f6d;--rule:#4a4034;--rule2:#6b5d4a;--highlight:#342d1d;--accent:#ef8b68;--accent2:#f2a36b;--green:#8fc28f;--grey:#aaa094;}
 </style>
 <link rel="stylesheet" href="/css/mobile-overlay.css?v=cl91">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>/* CL-2026-06-04 #3: dark-mode ink override so body text reads on dark bg */:root.dark{
   --bg:#16120E; --bg2:#1F1A14; --bg3:#28221A;
   --ink:#E8DEC7; --ink2:#C8BCA5;
@@ -1625,12 +1664,90 @@ footer a:hover{color:var(--accent)}
 </style>
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<style id="audit35-aa-ui">
+/* Reserve the asynchronously populated filter line so it cannot pull the
+   archive downward after first paint. */
+.aa-js:not(.aa-ready) footer{display:none}
+.filter-row{min-height:44px}
+.mode-btn:focus-visible,.filter-chip:focus-visible,.ctrl-chip:focus-visible,
+.detail-close:focus-visible,.aa-card-open:focus-visible,
+.tp-mass-member:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.detail-overlay{overscroll-behavior:contain}
+.detail-panel,.dp-source{min-width:0;overflow-wrap:anywhere}
+
+/* Leave the theme control its own lane. Inline legacy styles on this sibling
+   switcher require an explicit route-local override. */
+#aa-sibling-nav{right:calc(4.75rem + env(safe-area-inset-right,0px))!important}
+#aa-sibling-nav>a,#aa-sibling-nav>span{display:inline-flex!important;align-items:center;
+  justify-content:center;min-height:44px}
+
+/* A multi-row sticky filter deck can consume most of a phone or a short
+   landscape viewport. Each control family stays complete but becomes one
+   deliberate, keyboard-scrollable row in normal document flow. */
+@media (max-width:900px),(max-height:650px){
+  .search-section{position:static;transform:none;contain:none;padding:14px 16px}
+  .search-inner{flex-direction:column;align-items:stretch}
+  .search-box{min-width:0}
+  .mode-toggle,.filter-row,.controls-row{width:100%;max-width:1280px;flex-wrap:nowrap;
+    overflow-x:auto;overflow-y:hidden;overscroll-behavior-inline:contain;
+    -webkit-overflow-scrolling:touch;scrollbar-width:thin;scroll-padding-inline:.25rem}
+  .mode-btn,.filter-chip,.ctrl-chip{flex:0 0 auto;min-height:44px}
+  .mode-btn{flex-basis:auto}
+  .filter-row{margin-top:10px}
+  .controls-row{gap:12px}
+  .ctrl-group{flex:0 0 auto;flex-wrap:nowrap;min-width:max-content}
+}
+@media (max-width:820px){
+  #aa-sibling-nav{right:calc(.75rem + env(safe-area-inset-right,0px))!important}
+}
+/* On narrow screens the sibling switcher belongs in the document directly
+   below the route note. Keeping it in flow prevents it from covering that
+   note while preserving the fixed desktop switcher. */
+@media (max-width:900px),(max-height:420px){
+  #aa-sibling-nav{
+    position:static!important;inset:auto!important;z-index:auto!important;
+    width:calc(100% - 1rem);max-width:100%;margin:.25rem .5rem .75rem;
+    padding:0;justify-content:flex-start;overflow-x:auto;overflow-y:hidden;
+    overscroll-behavior-inline:contain;scrollbar-width:thin
+  }
+  #aa-sibling-nav>a,#aa-sibling-nav>span{flex:0 0 auto}
+}
+@media (max-height:650px){
+  .detail-overlay{padding:8px}
+  .detail-panel{max-height:calc(100vh - 16px);max-height:calc(100dvh - 16px);
+    overflow:auto;overscroll-behavior:contain;margin:0;padding:28px 32px}
+}
+@media (forced-colors:active){
+  .search-section,.mode-toggle,.filter-chip,.ctrl-chip,.detail-panel{
+    background:Canvas!important;color:CanvasText!important;border-color:CanvasText!important;
+    box-shadow:none!important}
+  .mode-btn.active,.filter-chip.active,.ctrl-chip.active{
+    background:Highlight!important;color:HighlightText!important}
+}
+@media print{
+  @page{margin:.6in}
+  html,body{background:#fff!important;color:#111!important}
+  body{background-image:none!important}
+  #aa-sibling-nav,.search-section,.theme-toggle,.ss-fz,.skip-link,.route-note,
+  #indraLayer{display:none!important}
+  header{padding-top:0!important;background:#fff!important;color:#111!important}
+  main{max-width:none!important;padding-left:0!important;padding-right:0!important}
+  .tax-card,.meta-card,.setting-card,.pending-card,.tag-page,.detail-panel{
+    background:#fff!important;color:#111!important;box-shadow:none!important;
+    border-color:#666!important;break-inside:avoid}
+}
+</style>
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<script src="/js/audit43-reader.js?v=20260725-audit43"></script>
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
+<!-- Audit49 generic WebPage schema -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://seminarschools.com/aa/#webpage","url":"https://seminarschools.com/aa/","name":"Archetype Archive & Taxonomy Index | aa*","description":"A sourced, cross-tradition reference catalog of archetype taxonomies across depth psychology, mythology, folklore, dramaturgy, religion, gaming, and Indigenous traditions.","inLanguage":"en","isPartOf":{"@id":"https://seminarschools.com/#website"}}</script>
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="archive" data-page-weight="heavy">
+<body data-reader-eligible="true" data-geometry="indra-web" data-indra-intensity="0.095" data-route-type="archive" data-page-weight="heavy">
 <!-- CL_SELF_ROUTE_NOTE -->
 <div class="route-note archive-route-note" role="note"><span class="route-note-kicker">Archive</span>Search or filter first, then open an entry.</div>
-<style id="ss-fz-style">.ss-fz{position:fixed;top:auto;bottom:1rem;left:1rem;right:auto;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
+<style id="ss-fz-style">.ss-fz{position:fixed;top:auto;bottom:1rem;left:1rem;right:auto;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" data-fz-placement="bottom-left" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 
 
 <!-- Theme toggle (light/dark mode). System preference is the default;
@@ -1645,17 +1762,25 @@ footer a:hover{color:var(--accent)}
      to the archive search. -->
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
+<!-- aa* sibling-pages unified nav. It stays fixed on wide screens and enters
+     normal flow here on narrow screens so it cannot cover the route note. -->
+<div id="aa-sibling-nav" style="position:fixed;top:8px;right:12px;z-index:55;font-family:'JetBrains Mono',monospace;font-size:11px;display:flex;gap:4px;">
+  <span style="background:var(--bg2);border:1px solid var(--accent);color:var(--accent);padding:4px 10px;border-radius:2px;font-family:inherit;font-size:11px;cursor:default;">&middot; catalog</span>
+  <a href="/aa/cloud/" style="background:transparent;border:1px solid var(--rule2);color:var(--dim);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:color .15s,background-color .15s,border-color .15s,opacity .15s,transform .15s;display:inline-block;" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" onmouseout="this.style.color='var(--dim)';this.style.borderColor='var(--rule2)'">cloud</a>
+  <a href="/aa/views/" style="background:transparent;border:1px solid var(--rule2);color:var(--dim);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:color .15s,background-color .15s,border-color .15s,opacity .15s,transform .15s;display:inline-block;" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" onmouseout="this.style.color='var(--dim)';this.style.borderColor='var(--rule2)'">views</a>
+</div>
+
 <header id="home-link">
   <div class="head-inner">
     <div class="eyebrow">
       <span><a href="/" style="color:inherit;text-decoration:none;border-bottom:1px dotted currentColor;opacity:0.85">&larr; Seminar Schools</a></span>
       <span>A Reference Catalog</span>
-      <span id="head-tax-count">333 Taxonomies</span>
+      <span id="head-tax-count">404 Taxonomies</span>
       <span>14 Traditions</span>
       <span id="head-tag-count">Tags</span>
     </div>
     <h1>aa* <em>Archetype Archive</em></h1>
-    <p class="tagline">A polymorphous mythology archive. Every archetype taxonomy ever published, from Theophrastus's thirty character sketches in 319 BCE to the Magic: The Gathering color pie. Browse by tradition, by tag, by archetypal mass. Watch the same figure appear under different names across cultures.</p>
+    <p class="tagline">A wide, sourced catalog of archetype taxonomies, from Theophrastus’s character sketches to contemporary game systems. Browse by tradition, tag, or archetypal mass.</p>
     <p class="subtagline">
       <span>No analysis · No synthesis</span>
       <span>Every entry sourced</span>
@@ -1667,14 +1792,12 @@ footer a:hover{color:var(--accent)}
 
     <p class="polymyth-funnel">Following patterns across myths, games, and stories? The connected framework lives at <a href="/polymyth/">polymorphousmythology</a>.</p>
 
-<section class="synthesis-intro">
-  <h2>For writers, designers, anyone playing out connections.</h2>
-  <p>An archetype rarely belongs to one tradition. The trickster appears as Anansi in West African folklore. The same figure turns up as Loki in Norse myth. As Sun Wukong in Chinese literature. As Reynard in medieval European chapbooks. As Hermes in Greek myth. As Iktomi in Lakota oral tradition. The structural role recurs across radically separated origins. The archive lays these convergences side by side. A writer building a new trickster can see what the figure has done a thousand times before. They can also see what no instance has yet tried.</p>
-  <p>The same dynamic holds for the sage. Jung calls it the Wise Old Man. Pearson calls it the Sage. Vogler calls it the Mentor. Daoist tradition has the 仙生. Hindu tradition has the rishi. Native American traditions have the elder. Cinema has Yoda. Each name marks the same structural function rendered through a different tongue. Pulling three of these into the same field reveals what they share. Pulling all of them reveals what only one of them does. That variation is where the new character lives.</p>
-  <p class="si-example"><b>How to use it.</b> Search a concept. Click any tag to see every taxonomy that names it. Open the cloud-growth view for the spatial play. Click a tradition. Click a taxonomy. Click a tag. Concepts converge as luminous meeting-points. Every word is one node. The more traditions a concept appears in, the more visibly it glows. Cross-tradition convergences read as the polymyth jackpot. A figure recurring without diffusion tells you the structural slot is real rather than derivative.</p>
-  <p>The archive holds the data. The cloud lets the imagination move through it.</p>
+<details class="synthesis-intro">
+  <summary>How to use the archive</summary>
+  <p>Search a figure or concept, open an entry, then follow its tags across traditions. Recurring roles appear under different names; their differences are often where a new character or argument begins.</p>
+  <p class="si-example">For a spatial view of the same relationships, open the cloud-growth view.</p>
   <a href="/aa/cloud/" class="si-cloud-cta">Open the cloud-growth view →</a>
-</section>
+</details>
 
 <div class="search-section">
   <div class="search-inner">
@@ -1683,30 +1806,30 @@ footer a:hover{color:var(--accent)}
       <input id="search-input" type="text" aria-label="Search the archetype archive" placeholder="Search 'Trickster' or 'Pearson' or 'Greek' …" autocomplete="off">
     </div>
     <div class="mode-toggle" role="navigation" aria-label="Browse modes">
-      <button class="mode-btn active" data-mode="taxonomy">Taxonomies</button>
-      <button class="mode-btn" data-mode="tag">Tags / Convergences</button>
-      <button class="mode-btn" data-mode="untranslatable">Untranslatables</button>
-      <button class="mode-btn" data-mode="meta">Critiques</button>
-      <button class="mode-btn" data-mode="setting">Settings</button>
-      <button class="mode-btn" data-mode="pending">Pending</button>
-      <button class="mode-btn" data-mode="tree">Tree</button>
+      <button type="button" class="mode-btn active" data-mode="taxonomy" aria-pressed="true">Taxonomies</button>
+      <button type="button" class="mode-btn" data-mode="tag" aria-pressed="false">Tags / Convergences</button>
+      <button type="button" class="mode-btn" data-mode="untranslatable" aria-pressed="false">Untranslatables</button>
+      <button type="button" class="mode-btn" data-mode="meta" aria-pressed="false">Critiques</button>
+      <button type="button" class="mode-btn" data-mode="setting" aria-pressed="false">Settings</button>
+      <button type="button" class="mode-btn" data-mode="pending" aria-pressed="false">Pending</button>
+      <button type="button" class="mode-btn" data-mode="tree" aria-pressed="false">Tree</button>
     </div>
   </div>
   <div class="filter-row" id="filter-row"></div>
   <div class="controls-row" id="controls-row">
     <div class="ctrl-group">
       <span class="ctrl-label">Sort</span>
-      <button class="ctrl-chip active" data-ctrl="sort" data-val="tradition">Tradition → Year</button>
-      <button class="ctrl-chip" data-ctrl="sort" data-val="year-asc">Year ↑</button>
-      <button class="ctrl-chip" data-ctrl="sort" data-val="year-desc">Year ↓</button>
-      <button class="ctrl-chip" data-ctrl="sort" data-val="alpha">A to Z</button>
-      <button class="ctrl-chip" data-ctrl="sort" data-val="converge">Convergence ↓</button>
+      <button type="button" class="ctrl-chip active" data-ctrl="sort" data-val="tradition" aria-pressed="true">Tradition → Year</button>
+      <button type="button" class="ctrl-chip" data-ctrl="sort" data-val="year-asc" aria-pressed="false">Year ↑</button>
+      <button type="button" class="ctrl-chip" data-ctrl="sort" data-val="year-desc" aria-pressed="false">Year ↓</button>
+      <button type="button" class="ctrl-chip" data-ctrl="sort" data-val="alpha" aria-pressed="false">A to Z</button>
+      <button type="button" class="ctrl-chip" data-ctrl="sort" data-val="converge" aria-pressed="false">Convergence ↓</button>
     </div>
     <div class="ctrl-group">
       <span class="ctrl-label">Show</span>
-      <button class="ctrl-chip active" data-ctrl="conv" data-val="all">All</button>
-      <button class="ctrl-chip" data-ctrl="conv" data-val="cross">Cross-tradition only</button>
-      <button class="ctrl-chip" data-ctrl="conv" data-val="singleton">Singletons only</button>
+      <button type="button" class="ctrl-chip active" data-ctrl="conv" data-val="all" aria-pressed="true">All</button>
+      <button type="button" class="ctrl-chip" data-ctrl="conv" data-val="cross" aria-pressed="false">Cross-tradition only</button>
+      <button type="button" class="ctrl-chip" data-ctrl="conv" data-val="singleton" aria-pressed="false">Singletons only</button>
     </div>
   </div>
 </div>
@@ -1726,12 +1849,12 @@ footer a:hover{color:var(--accent)}
 </div>
 
 <main id="main-content">
-  <div class="results-meta" id="results-meta"></div>
+  <div class="results-meta" id="results-meta" role="status" aria-live="polite" aria-atomic="true"></div>
   <div id="results"></div>
 </main>
 
-<div class="detail-overlay" id="detail-overlay">
-  <div class="detail-panel" id="detail-panel"></div>
+<div class="detail-overlay" id="detail-overlay" aria-hidden="true">
+  <div class="detail-panel" id="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detail-title" tabindex="-1"></div>
 </div>
 
 <footer>
@@ -56929,6 +57052,38 @@ let sortMode = 'tradition';  // 'tradition' | 'year-asc' | 'year-desc' | 'alpha'
 let convergenceFilter = 'all';  // 'all' | 'cross' | 'singleton'
 let neighborhoodId = null;  // when set, filter to entries sharing ≥1 tag with this taxonomy
 let savedScrollY = 0;  // scroll position preserved across detail-overlay open/close
+let detailReturnFocus = null;
+let modalBackground = [];
+
+function activateDetailOverlay() {
+  const overlay = document.getElementById('detail-overlay');
+  const panel = document.getElementById('detail-panel');
+  if (!overlay || !panel) return;
+  const alreadyOpen = overlay.classList.contains('open');
+  if (!alreadyOpen) {
+    savedScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    if (document.activeElement instanceof HTMLElement) detailReturnFocus = document.activeElement;
+    modalBackground = Array.from(document.body.children).filter(element => {
+      if (element === overlay || element.tagName === 'SCRIPT' || element.inert) return false;
+      element.inert = true;
+      return true;
+    });
+  }
+  overlay.setAttribute('aria-hidden', 'false');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  window.requestAnimationFrame(() => {
+    const firstControl = panel.querySelector('.detail-close, button, a[href], input, select, textarea');
+    (firstControl || panel).focus();
+  });
+}
+
+function detailFocusableElements() {
+  const panel = document.getElementById('detail-panel');
+  if (!panel) return [];
+  return Array.from(panel.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'))
+    .filter(element => !element.hidden && element.getAttribute('aria-hidden') !== 'true');
+}
 
 // Update header counts
 document.getElementById('head-tax-count').textContent = TAXONOMIES.length + ' Taxonomies';
@@ -56964,11 +57119,11 @@ function renderFilters() {
   TAXONOMIES.forEach(t => { counts[t.tradition] = (counts[t.tradition]||0) + 1; });
   const order = ['depth','myth','folk','lit','drama','relig','game','pers','brand','fan','child','crit','esot','indig'];
   let html = '<span class="filter-label">Filter</span>';
-  html += `<button class="filter-chip ${activeFilter===null?'active':''}" data-trad="">All <span class="ct">${TAXONOMIES.length}</span></button>`;
+  html += `<button type="button" class="filter-chip ${activeFilter===null?'active':''}" data-trad="" aria-pressed="${activeFilter===null}">All <span class="ct">${TAXONOMIES.length}</span></button>`;
   order.forEach(code => {
     if (!counts[code]) return;
     const active = activeFilter === code ? 'active' : '';
-    html += `<button class="filter-chip ${active}" data-trad="${code}" style="--trad-color:${tradColor(code)}">${tradLabel(code)} <span class="ct">${counts[code]}</span></button>`;
+    html += `<button type="button" class="filter-chip ${active}" data-trad="${code}" aria-pressed="${activeFilter===code}" style="--trad-color:${tradColor(code)}">${tradLabel(code)} <span class="ct">${counts[code]}</span></button>`;
   });
   row.innerHTML = html;
   row.querySelectorAll('.filter-chip').forEach(b => {
@@ -57200,14 +57355,12 @@ function renderTaxonomyMode() {
         ${confluenceChip}
         ${t.note ? `<div class="tc-note">${highlight(t.note, query)}</div>` : ''}
         ${catsPreview ? `<div class="tc-cats">${highlight(catsPreview, query)}</div>` : ''}
+        <button type="button" class="aa-card-open" data-open-taxonomy="${escapeHtml(t.id)}" aria-label="Open details for ${escapeHtml(t.name)}">Open details</button>
       </article>
     `;
   });
   html += '</div>';
   root.innerHTML = html;
-  root.querySelectorAll('.tax-card').forEach(card => {
-    card.addEventListener('click', () => openDetail(card.dataset.id));
-  });
 }
 
 function renderUntranslatableMode() {
@@ -57253,14 +57406,12 @@ function renderUntranslatableMode() {
         <div class="uc-approx">${highlight(u.approximation || '', query)}</div>
         <div class="uc-kinds">${kindsHtml}</div>
         <a href="/aa/cloud/?focus=untranslatables-gateway" class="uc-cloud-link" onclick="event.stopPropagation()">→ view in cloud</a>
+        <button type="button" class="aa-card-open" data-open-untranslatable="${escapeHtml(u.id)}" aria-label="Open details for ${escapeHtml(u.term)}">Open details</button>
       </article>
     `;
   });
   html += '</div>';
   root.innerHTML = html;
-  root.querySelectorAll('.untrans-card').forEach(card => {
-    card.addEventListener('click', () => openUntranslatableDetail(card.dataset.untransId));
-  });
 }
 
 // Search untranslatables across term, native_script, transliteration, language,
@@ -57477,8 +57628,9 @@ function openUntranslatableDetail(id) {
   const u = UNTRANSLATABLES.find(x => x.id === id);
   if (!u) return;
   const overlay = document.getElementById('detail-overlay');
-  if (!overlay) {
-    console.warn('detail-overlay element not found in DOM');
+  const panel = document.getElementById('detail-panel');
+  if (!overlay || !panel) {
+    console.warn('detail overlay elements not found in DOM');
     return;
   }
   const VERIF_LABELS = {
@@ -57497,11 +57649,12 @@ function openUntranslatableDetail(id) {
     return `<a href="#" onclick="event.preventDefault(); openUntranslatableDetail('${escapeHtml(adjId)}')" style="display:inline-block;margin-right:12px;color:#8e7ab8;border-bottom:1px solid #8e7ab8aa">${escapeHtml(adj.term)} <span style="opacity:0.6">(${escapeHtml(adj.language)})</span></a>`;
   }).join('');
   const tagsHtml = (u.tags || []).map(t => `<span style="display:inline-block;font-family:'JetBrains Mono',monospace;font-size:0.72rem;background:rgba(142,122,184,0.12);color:#6a4f9a;padding:2px 8px;margin:2px 4px 2px 0">${escapeHtml(t)}</span>`).join('');
-  overlay.innerHTML = `
-    <div class="overlay-inner" style="max-width:780px;margin:60px auto;background:#fff;padding:40px 48px;border:1px solid #d8d4cc">
-      <button onclick="closeUntranslatableDetail()" style="position:absolute;top:20px;right:20px;background:none;border:none;font-size:24px;cursor:pointer;color:#6a6256">×</button>
+  panel.classList.add('untranslatable-detail');
+  panel.innerHTML = `
+    <button type="button" class="detail-close" aria-label="Close entry details">×</button>
+    <div class="overlay-inner" style="max-width:780px;margin:0 auto;background:#fff;padding:40px 48px;border:1px solid #d8d4cc">
       <div style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:#8e7ab8;margin-bottom:8px">${escapeHtml(u.language_family || '')} · ${escapeHtml(VERIF_LABELS[u.verification_status] || '')}</div>
-      <h1 style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:600;margin:0 0 4px 0">${escapeHtml(u.term)}</h1>
+      <h2 id="detail-title" style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:600;margin:0 0 4px 0">${escapeHtml(u.term)}</h2>
       ${u.native_script && u.native_script !== u.term ? `<div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-style:italic;color:#7a5a9c;margin-bottom:6px">${escapeHtml(u.native_script)}${u.transliteration ? ' · ' + escapeHtml(u.transliteration) : ''}${u.ipa ? ' · ' + escapeHtml(u.ipa) : ''}</div>` : (u.ipa ? `<div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:#7a5a9c;margin-bottom:6px">${escapeHtml(u.ipa)}</div>` : '')}
       <div style="font-size:14px;color:#6a6256;margin-bottom:24px">${escapeHtml(u.language || '')}</div>
       <div style="margin-bottom:24px">
@@ -57520,13 +57673,12 @@ function openUntranslatableDetail(id) {
       <a href="/aa/cloud/?focus=untranslatables-gateway" style="display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#8e7ab8;border:1px solid #8e7ab8;padding:8px 16px;text-decoration:none">→ explore in cloud</a>
     </div>
   `;
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;overflow-y:auto;display:block';
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeUntranslatableDetail(); }, { once:true });
+  panel.querySelector('.detail-close').addEventListener('click', closeDetail);
+  activateDetailOverlay();
 }
 
 function closeUntranslatableDetail() {
-  const overlay = document.getElementById('detail-overlay');
-  if (overlay) overlay.style.display = 'none';
+  closeDetail();
 }
 
 function renderTagMode() {
@@ -57550,22 +57702,51 @@ function renderTagMode() {
     html += `<div class="cat-group" data-tag-id="${t.id}">
       <h2 class="cat-group-name">${highlight(t.display, query)} ${crossNote}</h2>
       <div class="cat-group-count">Appears in ${t.count} taxonomy ${t.count === 1 ? 'entry' : 'entries'} · ${traditions}</div>
+      <button type="button" class="aa-card-open" data-open-tag="${escapeHtml(t.id)}" aria-label="Open convergence details for ${escapeHtml(t.display)}">Open details</button>
     </div>`;
   });
   html += '</div>';
   root.innerHTML = html;
-  root.querySelectorAll('.cat-group').forEach(el => {
-    el.addEventListener('click', () => openTagPage(el.dataset.tagId));
-  });
 }
 
-function openTagPage(tagId) {
+let tagReturnFocus = null;
+let tagReturnTagId = null;
+let tagReturnScrollY = 0;
+
+function openTagPage(tagId, invoker = null) {
+  if (!TAG_BY_ID[tagId]) return;
+  if (!activeTagId) {
+    tagReturnFocus = invoker || (document.activeElement instanceof HTMLElement ? document.activeElement : null);
+    tagReturnTagId = invoker?.dataset.openTag || invoker?.dataset.tagId || tagId;
+    tagReturnScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+  }
   activeTagId = tagId;
   renderTagPage();
+  window.requestAnimationFrame(() => {
+    document.getElementById('main-content')?.scrollIntoView({behavior:'auto', block:'start'});
+    document.querySelector('.tp-name')?.focus({preventScroll:true});
+  });
 }
 function clearTagView() {
+  const returnTarget = tagReturnFocus;
+  const returnTagId = tagReturnTagId;
+  const returnScrollY = tagReturnScrollY;
   activeTagId = null;
   render();
+  tagReturnFocus = null;
+  tagReturnTagId = null;
+  tagReturnScrollY = 0;
+  window.requestAnimationFrame(() => {
+    window.scrollTo({top:returnScrollY, left:window.scrollX, behavior:'auto'});
+    const replacement = Array.from(document.querySelectorAll('button[data-open-tag]'))
+      .find(button => button.dataset.openTag === returnTagId);
+    const target = returnTarget?.isConnected
+      ? returnTarget
+      : replacement || document.querySelector('.mode-btn[aria-pressed="true"]');
+    if (target) {
+      try { target.focus({preventScroll:true}); } catch (error) { target.focus(); }
+    }
+  });
 }
 window.clearTagView = clearTagView;
 
@@ -57579,10 +57760,10 @@ function renderTreeMode() {
 
   let html = `<div class="tree-controls">
     <span class="tc-label">Tree view</span>
-    <button class="tree-toggle ${treeView==='tradition'?'active':''}" data-tv="tradition">By Tradition</button>
-    <button class="tree-toggle ${treeView==='mass'?'active':''}" data-tv="mass">By Archetypal Mass</button>
-    <button class="tree-action" id="tree-expand-all">Expand All</button>
-    <button class="tree-action" id="tree-collapse-all">Collapse All</button>
+    <button type="button" class="tree-toggle ${treeView==='tradition'?'active':''}" data-tv="tradition" aria-pressed="${treeView==='tradition'}">By Tradition</button>
+    <button type="button" class="tree-toggle ${treeView==='mass'?'active':''}" data-tv="mass" aria-pressed="${treeView==='mass'}">By Archetypal Mass</button>
+    <button type="button" class="tree-action" id="tree-expand-all">Expand All</button>
+    <button type="button" class="tree-action" id="tree-collapse-all">Collapse All</button>
   </div>`;
 
   if (treeView === 'tradition') {
@@ -57617,7 +57798,7 @@ function renderTreeMode() {
   document.querySelectorAll('.tree-tag-link').forEach(el => {
     el.addEventListener('click', e => {
       e.preventDefault(); e.stopPropagation();
-      openTagPage(el.dataset.tagId);
+      openTagPage(el.dataset.tagId, el);
     });
   });
 }
@@ -57754,7 +57935,7 @@ function renderTagPage() {
   
   let html = `<div class="tag-page">
     <div class="tp-eyebrow">Tag · Cross-Tradition Convergence</div>
-    <h1 class="tp-name">${escapeHtml(tag.display)}</h1>
+    <h1 class="tp-name" tabindex="-1">${escapeHtml(tag.display)}</h1>
     <p class="tp-summary">This archetypal name appears in ${occs.length} taxonomy ${occs.length===1?'entry':'entries'} across ${traditions.length} tradition${traditions.length===1?'':'s'}. Each occurrence is shown below under its parent taxonomy with the original category-string preserved verbatim.</p>
     <div class="tp-traditions">
       ${traditions.map(h => `<span class="tp-trad-pill" style="color:${tradColor(h)};border-color:${tradColor(h)}">${tradLabel(h)}</span>`).join('')}
@@ -57781,14 +57962,14 @@ function renderTagPage() {
     if (TAG_BY_ID[group.canonical] && group.canonical !== tag.id) {
       const canonTag = TAG_BY_ID[group.canonical];
       const canonCount = tagOccCount(group.canonical);
-      html += `<a class="tp-mass-member canonical" data-tag-id="${escapeHtml(group.canonical)}">${escapeHtml(canonTag.display)} <span style="opacity:0.7">·${canonCount}</span></a>`;
+      html += `<button type="button" class="tp-mass-member canonical" data-open-tag="${escapeHtml(group.canonical)}" aria-label="Open convergence details for ${escapeHtml(canonTag.display)}">${escapeHtml(canonTag.display)} <span style="opacity:0.7">·${canonCount}</span></button>`;
     } else if (group.canonical === tag.id) {
       html += `<span class="tp-mass-member canonical" style="cursor:default">${escapeHtml(tag.display)} <span style="opacity:0.7">(canonical)</span></span>`;
     }
     others.filter(m => m !== group.canonical).forEach(m => {
       const t = TAG_BY_ID[m];
       const c = tagOccCount(m);
-      html += `<a class="tp-mass-member" data-tag-id="${escapeHtml(m)}">${escapeHtml(t.display)} <span style="opacity:0.6">·${c}</span></a>`;
+      html += `<button type="button" class="tp-mass-member" data-open-tag="${escapeHtml(m)}" aria-label="Open convergence details for ${escapeHtml(t.display)}">${escapeHtml(t.display)} <span style="opacity:0.6">·${c}</span></button>`;
     });
     html += `</div>`;
     if (group.note) html += `<div class="tp-mass-note">${escapeHtml(group.note)}</div>`;
@@ -57811,21 +57992,13 @@ function renderTagPage() {
         <div class="tpo-orig">${escapeHtml(tax.originator)}, ${yearStr}</div>
         <div class="tpo-cat-label">Listed in original as</div>
         <div class="tpo-cat">"${escapeHtml(occ.original)}"</div>
+        <button type="button" class="aa-card-open" data-open-taxonomy="${escapeHtml(tax.id)}" aria-label="Open details for ${escapeHtml(tax.name)}">Open details</button>
       </article>`;
     });
     html += `</div></div>`;
   });
   
   document.getElementById('results').innerHTML = html;
-  document.querySelectorAll('.tp-occ').forEach(el => {
-    el.addEventListener('click', () => openDetail(el.dataset.taxId));
-  });
-  document.querySelectorAll('.tp-mass-member[data-tag-id]').forEach(el => {
-    el.addEventListener('click', () => {
-      const tid = el.dataset.tagId;
-      if (tid && TAG_BY_ID[tid]) openTagPage(tid);
-    });
-  });
 }
 
 // ============ DETAIL PANEL ============
@@ -57937,15 +58110,16 @@ function openDetail(id) {
     ${t.source_book ? `<div class="dp-source-book">${escapeHtml(t.source_book)}</div>` : ''}
   `;
   const panel = document.getElementById('detail-panel');
+  panel.classList.remove('untranslatable-detail');
   panel.style.setProperty('--trad-color', tradColor(t.tradition));
   
   // Count how many of this taxonomy's categories appear in other taxonomies
   const sharedCount = occs.filter(o => tagOccCount(o.tagId) > 1).length;
   
   panel.innerHTML = `
-    <button class="detail-close" aria-label="Close">×</button>
+    <button type="button" class="detail-close" aria-label="Close entry details">×</button>
     <div class="dp-trad">${tradLabel(t.tradition)}</div>
-    <h2 class="dp-name">${escapeHtml(t.name)}</h2>
+    <h2 class="dp-name" id="detail-title">${escapeHtml(t.name)}</h2>
     <div class="dp-orig">${escapeHtml(t.originator)} · ${yearStr}${yearEnd}</div>
     <div class="dp-meta-grid">
       <div><label>Count</label><span>${escapeHtml(String(t.count))}</span></div>
@@ -57961,9 +58135,8 @@ function openDetail(id) {
     <div class="dp-section"><h3>Source</h3><div class="dp-source">${sourceHtml}</div></div>
     ${sharedCount > 0 ? `<button class="dp-lens" data-lens-tax="${t.id}">⌖ Show Neighborhood, ${sharedCount} entr${sharedCount===1?'y':'ies'} share ≥1 tag</button>` : ''}
   `;
-  document.getElementById('detail-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
   panel.querySelector('.detail-close').addEventListener('click', closeDetail);
+  activateDetailOverlay();
   panel.querySelector('.dp-lens')?.addEventListener('click', () => {
     activateNeighborhood(t.id);
     if (mode !== 'taxonomy') switchMode('taxonomy');
@@ -57984,26 +58157,72 @@ function openDetail(id) {
       closeDetail();
       // Switch to tag mode and open tag-page in one render pass.
       mode = 'tag';
-      document.querySelectorAll('.mode-btn').forEach(mb => mb.classList.toggle('active', mb.dataset.mode === 'tag'));
+      document.querySelectorAll('.mode-btn').forEach(mb => {
+        const active = mb.dataset.mode === 'tag';
+        mb.classList.toggle('active', active);
+        mb.setAttribute('aria-pressed', String(active));
+      });
       document.getElementById('search-input').placeholder = "Search a tag, 'Trickster', 'Hero', 'Mother', 'Shadow', 'Warrior' …";
       document.getElementById('search-input').disabled = false;
       document.getElementById('filter-row').style.display = '';
       document.getElementById('controls-row').style.display = 'none';
-      openTagPage(tagId);
+      openTagPage(tagId, b);
     });
   });
 }
 function closeDetail() {
-  document.getElementById('detail-overlay').classList.remove('open');
+  const overlay = document.getElementById('detail-overlay');
+  const panel = document.getElementById('detail-panel');
+  if (!overlay || !overlay.classList.contains('open')) return;
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  modalBackground.forEach(element => {
+    if (element.isConnected) element.inert = false;
+  });
+  modalBackground = [];
+  if (panel) panel.classList.remove('untranslatable-detail');
+  const returnTarget = detailReturnFocus;
+  const returnScrollY = savedScrollY;
+  detailReturnFocus = null;
+  window.requestAnimationFrame(() => {
+    window.scrollTo({top:returnScrollY, left:window.scrollX, behavior:'auto'});
+    if (returnTarget && returnTarget.isConnected) {
+      try { returnTarget.focus({preventScroll:true}); } catch (error) { returnTarget.focus(); }
+    }
+  });
 }
 document.getElementById('detail-overlay').addEventListener('click', e => {
   if (e.target.id === 'detail-overlay') closeDetail();
 });
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    if (document.getElementById('detail-overlay').classList.contains('open')) closeDetail();
-    else if (activeTagId) clearTagView();
+  const overlay = document.getElementById('detail-overlay');
+  if (overlay.classList.contains('open')) {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeDetail();
+      return;
+    }
+    if (e.key === 'Tab') {
+      const focusable = detailFocusableElements();
+      const panel = document.getElementById('detail-panel');
+      if (!focusable.length) {
+        e.preventDefault();
+        panel.focus();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && (document.activeElement === first || !panel.contains(document.activeElement))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && (document.activeElement === last || !panel.contains(document.activeElement))) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  } else if (e.key === 'Escape' && activeTagId) {
+    clearTagView();
   }
 });
 
@@ -58015,10 +58234,25 @@ document.getElementById('home-link').addEventListener('click', () => {
 });
 
 // ============ MODE / INPUT ============
-function switchMode(m) {
+const availableModes = new Set(Array.from(document.querySelectorAll('.mode-btn')).map(button => button.dataset.mode));
+function modeFromHash() {
+  const candidate = new URLSearchParams(window.location.hash.replace(/^#/, '')).get('mode');
+  return candidate && availableModes.has(candidate) ? candidate : null;
+}
+function syncModeHash(m) {
+  const nextHash = '#mode=' + encodeURIComponent(m);
+  if (window.location.hash === nextHash) return;
+  history.replaceState(null, '', window.location.pathname + window.location.search + nextHash);
+}
+function switchMode(m, updateHash = true) {
+  if (!availableModes.has(m)) return;
   mode = m;
   activeTagId = null;
-  document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === m));
+  document.querySelectorAll('.mode-btn').forEach(b => {
+    const active = b.dataset.mode === m;
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-pressed', String(active));
+  });
   const ph = m === 'taxonomy'
     ? "Search 'Trickster' or 'Pearson' or 'Greek' or 'twelve' …"
     : m === 'tree'
@@ -58028,10 +58262,15 @@ function switchMode(m) {
   document.getElementById('search-input').disabled = (m === 'tree');
   document.getElementById('filter-row').style.display = (m === 'tree') ? 'none' : '';
   document.getElementById('controls-row').style.display = (m === 'taxonomy') ? '' : 'none';
+  if (updateHash) syncModeHash(m);
   render();
 }
 document.querySelectorAll('.mode-btn').forEach(b => {
   b.addEventListener('click', () => switchMode(b.dataset.mode));
+});
+window.addEventListener('hashchange', () => {
+  const hashMode = modeFromHash();
+  if (hashMode && hashMode !== mode) switchMode(hashMode, false);
 });
 let searchTimer;
 document.getElementById('search-input').addEventListener('input', e => {
@@ -58045,6 +58284,22 @@ document.getElementById('search-input').addEventListener('input', e => {
 // ============ INIT ============
 renderFilters();
 
+// Result cards expose one native control each. Delegating here avoids replacing
+// keyboard handlers after every filtered render and leaves nested links alone.
+document.getElementById('results').addEventListener('click', event => {
+  const action = event.target instanceof Element
+    ? event.target.closest('button[data-open-taxonomy], button[data-open-untranslatable], button[data-open-tag]')
+    : null;
+  if (!action || !event.currentTarget.contains(action)) return;
+  if (action.dataset.openTaxonomy) {
+    openDetail(action.dataset.openTaxonomy);
+  } else if (action.dataset.openUntranslatable) {
+    openUntranslatableDetail(action.dataset.openUntranslatable);
+  } else if (action.dataset.openTag && TAG_BY_ID[action.dataset.openTag]) {
+    openTagPage(action.dataset.openTag, action);
+  }
+});
+
 // Wire sort / convergence-filter buttons
 document.querySelectorAll('.ctrl-chip').forEach(b => {
   b.addEventListener('click', () => {
@@ -58056,17 +58311,21 @@ document.querySelectorAll('.ctrl-chip').forEach(b => {
       convergenceFilter = val;
     }
     document.querySelectorAll(`.ctrl-chip[data-ctrl="${ctrl}"]`).forEach(c => {
-      c.classList.toggle('active', c.dataset.val === val);
+      const active = c.dataset.val === val;
+      c.classList.toggle('active', active);
+      c.setAttribute('aria-pressed', String(active));
     });
     render();
   });
 });
 
-render();
+const initialMode = modeFromHash();
+if (initialMode) switchMode(initialMode, false);
+else render();
 </script>
 
 <!-- A14: Removed entries surface -->
-<div id="removed-entries-surface" style="position:fixed;bottom:8px;right:12px;z-index:60;font-family:'JetBrains Mono',monospace;font-size:11px;">
+<div id="removed-entries-surface" hidden style="position:fixed;bottom:8px;right:12px;z-index:60;font-family:'JetBrains Mono',monospace;font-size:11px;">
   <button id="removed-toggle" onclick="toggleRemovedPanel()" style="background:transparent;border:1px solid var(--rule2);color:var(--dim);padding:4px 8px;cursor:pointer;border-radius:2px;font-family:inherit;font-size:11px;">
     removed: <span id="removed-count">0</span>
   </button>
@@ -58077,23 +58336,21 @@ render();
 </div>
 <script>
 (function(){
-  // Initialize the count from REMOVED_ENTRIES at load
-  if (typeof REMOVED_ENTRIES !== 'undefined'){
+  // Keep the editorial audit control out of the public surface until it has records.
+  if (typeof REMOVED_ENTRIES !== 'undefined' && REMOVED_ENTRIES.length > 0){
+    const surface = document.getElementById('removed-entries-surface');
+    if (surface) surface.hidden = false;
     const countEl = document.getElementById('removed-count');
     if (countEl) countEl.textContent = REMOVED_ENTRIES.length;
     const listEl = document.getElementById('removed-list');
     if (listEl){
-      if (REMOVED_ENTRIES.length === 0){
-        listEl.innerHTML = '<div style="color:var(--dim);font-style:italic;">No removed entries logged. Future removals will appear here.</div>';
-      } else {
-        listEl.innerHTML = REMOVED_ENTRIES.map(r =>
-          '<div style="padding:6px 0;border-top:1px solid var(--rule);">' +
-          '<div><strong>' + (r.original_label || r.tagId) + '</strong> in <em>' + r.taxId + '</em></div>' +
-          '<div style="color:var(--dim);margin-top:2px;">' + (r.reason || '(no reason given)') + '</div>' +
-          '<div style="color:var(--faint);font-size:0.72rem;margin-top:2px;">' + (r.removed_at || '(no date)') + '</div>' +
-          '</div>'
-        ).join('');
-      }
+      listEl.innerHTML = REMOVED_ENTRIES.map(r =>
+        '<div style="padding:6px 0;border-top:1px solid var(--rule);">' +
+        '<div><strong>' + (r.original_label || r.tagId) + '</strong> in <em>' + r.taxId + '</em></div>' +
+        '<div style="color:var(--dim);margin-top:2px;">' + (r.reason || '(no reason given)') + '</div>' +
+        '<div style="color:var(--faint);font-size:0.72rem;margin-top:2px;">' + (r.removed_at || '(no date)') + '</div>' +
+        '</div>'
+      ).join('');
     }
   }
 })();
@@ -58105,17 +58362,11 @@ function toggleRemovedPanel(){
 
 
 
-<!-- aa* sibling-pages unified nav -->
-<div id="aa-sibling-nav" style="position:fixed;top:8px;right:12px;z-index:55;font-family:'JetBrains Mono',monospace;font-size:11px;display:flex;gap:4px;">
-  <span style="background:var(--bg2);border:1px solid var(--accent);color:var(--accent);padding:4px 10px;border-radius:2px;font-family:inherit;font-size:11px;cursor:default;">&middot; catalog</span>
-  <a href="/aa/cloud/" style="background:transparent;border:1px solid var(--rule2);color:var(--dim);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:all .15s;display:inline-block;" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" onmouseout="this.style.color='var(--dim)';this.style.borderColor='var(--rule2)'">cloud</a>
-  <a href="/aa/views/" style="background:transparent;border:1px solid var(--rule2);color:var(--dim);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:all .15s;display:inline-block;" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" onmouseout="this.style.color='var(--dim)';this.style.borderColor='var(--rule2)'">views</a>
-</div>
 <script src="/js/theme.js?v=cl91" defer></script>
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
-<script src="/js/footer.js?v=20260719-audit11-decisions" defer></script>
+<script src="/js/footer.js?v=20260725-audit45-footer" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
-<script defer src="/js/site-keyboard-enhancements.js"></script>
+<script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

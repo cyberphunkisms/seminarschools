@@ -3,6 +3,7 @@
 /** Verifies polymyth/manifest.txt against canonical ml* and current mirrors. */
 const fs = require('fs');
 const path = require('path');
+const {parseSeedWithAddenda} = require('./lib/parse-seed-with-addenda');
 const ROOT = path.resolve(__dirname, '..');
 const HTML_PATH = path.join(ROOT, 'polymyth/methodologylist/index.html');
 const MANIFEST_PATH = path.join(ROOT, 'polymyth/manifest.txt');
@@ -33,7 +34,7 @@ function parseSeedArray(filePath) {
 }
 function bytes(rel) { return fs.statSync(path.join(ROOT, rel)).size; }
 function comma(n) { return n.toLocaleString('en-US'); }
-const entries = parseSeedArray(HTML_PATH);
+const entries = parseSeedWithAddenda(fs.readFileSync(HTML_PATH, 'utf8'));
 const manifest = fs.existsSync(MANIFEST_PATH) ? fs.readFileSync(MANIFEST_PATH, 'utf8') : '';
 const bySection = new Map();
 for (const e of entries) {

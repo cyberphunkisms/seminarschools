@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-lang="en">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Toronto Tutor for OSSD, IB &amp; Writing | Leizu Academy</title>
@@ -25,6 +26,12 @@
 <link rel="canonical" href="https://seminarschools.com/leizu/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="alternate" hreflang="en" href="https://seminarschools.com/leizu/">
+<link rel="alternate" hreflang="fr" href="https://seminarschools.com/leizu/fr/">
+<link rel="alternate" hreflang="zh-Hant" href="https://seminarschools.com/leizu/zh-hant/">
+<link rel="alternate" hreflang="zh-Hans" href="https://seminarschools.com/leizu/zh-hans/">
+<link rel="alternate" hreflang="fa" href="https://seminarschools.com/leizu/fa/">
+<link rel="alternate" hreflang="x-default" href="https://seminarschools.com/leizu/">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600&family=Vazirmatn:wght@400;500&family=JetBrains+Mono:wght@300;400;500&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -127,7 +134,7 @@
 [data-lang="fa"] .chapter-num,
 [data-lang="fa"] .esl-banner{direction:ltr;}
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;font-size:calc(16px * var(--type-scale));}
+html{scroll-behavior:auto;font-size:calc(16px * var(--type-scale));}
 body{
   background:var(--paper);color:var(--ink);
   font-family:var(--display);
@@ -138,7 +145,7 @@ body{
     radial-gradient(circle at 20% 10%,rgba(107,142,90,0.05) 0%,transparent 40%),
     radial-gradient(circle at 80% 80%,rgba(139,90,60,0.04) 0%,transparent 40%);
 }
-a{color:var(--mulberry-deep);text-decoration:none;border-bottom:1px solid var(--rule);transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);}
+a{color:var(--mulberry-deep);text-decoration:none;border-bottom:1px solid var(--rule);transition:color 0.3s cubic-bezier(0.34,1.56,0.64,1),background-color 0.3s cubic-bezier(0.34,1.56,0.64,1),border-color 0.3s cubic-bezier(0.34,1.56,0.64,1),opacity 0.3s cubic-bezier(0.34,1.56,0.64,1),transform 0.3s cubic-bezier(0.34,1.56,0.64,1);}
 a:hover{color:var(--accent);border-bottom-color:var(--accent);}
 
 
@@ -280,10 +287,10 @@ section.chapter:last-of-type{border-bottom:none;}
 .pillar-name{font-family:var(--display);font-size:2.1rem;font-style:italic;font-weight:500;color:var(--ink);}
 [data-lang="zh"] .pillar-name,[data-lang="zhs"] .pillar-name,[data-lang="fa"] .pillar-name{font-style:normal;}
 .pillar-element{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;margin-left:auto;}
-.pillar-select-all{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-soft);cursor:pointer;border:1px solid var(--rule);padding:0.45rem 0.85rem;background:transparent;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);}
+.pillar-select-all{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-soft);cursor:pointer;border:1px solid var(--rule);padding:0.45rem 0.85rem;background:transparent;transition:color 0.3s cubic-bezier(0.34,1.56,0.64,1),background-color 0.3s cubic-bezier(0.34,1.56,0.64,1),border-color 0.3s cubic-bezier(0.34,1.56,0.64,1),opacity 0.3s cubic-bezier(0.34,1.56,0.64,1),transform 0.3s cubic-bezier(0.34,1.56,0.64,1);}
 .pillar-select-all:hover{background:var(--mulberry-deep);color:var(--paper);border-color:var(--mulberry-deep);transform:translateY(-2px);box-shadow:0 4px 10px var(--shadow);}
 
-.course{margin-bottom:1.25rem;padding:1.1rem 1.4rem;border-left:1px solid var(--rule);cursor:pointer;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);background:transparent;position:relative;pointer-events:auto;}
+.course{margin-bottom:1.25rem;padding:1.1rem 1.4rem;border-left:1px solid var(--rule);cursor:pointer;transition:color 0.4s cubic-bezier(0.34,1.56,0.64,1),background-color 0.4s cubic-bezier(0.34,1.56,0.64,1),border-color 0.4s cubic-bezier(0.34,1.56,0.64,1),opacity 0.4s cubic-bezier(0.34,1.56,0.64,1),transform 0.4s cubic-bezier(0.34,1.56,0.64,1);background:transparent;position:relative;pointer-events:auto;}
 .course:focus-visible{outline:2px solid var(--mulberry-deep);outline-offset:4px;}
 .course:hover{border-left-color:var(--accent);background:var(--silk-pale);transform:translateX(6px) scale(1.01);}
 [data-lang="fa"] .course:hover{transform:translateX(-6px) scale(1.01);}
@@ -343,7 +350,7 @@ section.chapter:last-of-type{border-bottom:none;}
 .cart-item-flag.flag-paper{color:#E5C49E;background:rgba(160,113,80,0.2);border-color:rgba(160,113,80,0.4);}
 .cart-item-flag.flag-esl{color:#C5E0A8;background:rgba(143,171,120,0.15);border-color:rgba(143,171,120,0.4);font-style:italic;}
 .cart-detail-empty{font-style:italic;color:#C7B89B;font-size:0.95rem;padding:0.4rem 0;}
-.btn-clear,.btn-book{font-family:var(--mono);font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;padding:0.7rem 1.2rem;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);text-decoration:none;border:1px solid;font-weight:600;}
+.btn-clear,.btn-book{font-family:var(--mono);font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;padding:0.7rem 1.2rem;cursor:pointer;transition:color 0.3s cubic-bezier(0.34,1.56,0.64,1),background-color 0.3s cubic-bezier(0.34,1.56,0.64,1),border-color 0.3s cubic-bezier(0.34,1.56,0.64,1),opacity 0.3s cubic-bezier(0.34,1.56,0.64,1),transform 0.3s cubic-bezier(0.34,1.56,0.64,1);text-decoration:none;border:1px solid;font-weight:600;}
 .btn-clear{background:transparent;border-color:#E8DEC7;color:#E8DEC7;}
 .btn-clear:hover{background:#E8DEC7;color:#2D3F26;transform:translateY(-2px);}
 .btn-book{background:#8B5A3C;border-color:#8B5A3C;color:#F4EFE3;border-bottom:1px solid #8B5A3C;}
@@ -368,7 +375,7 @@ section.chapter:last-of-type{border-bottom:none;}
 .policy-modal-checkbox input:checked + .policy-modal-checkbox-visual::before{content:"✓";}
 .policy-modal-checkbox-text{font-family:var(--display);font-size:0.95rem;color:var(--ink);line-height:1.5;}
 .policy-modal-actions{display:flex;gap:0.75rem;justify-content:flex-end;flex-wrap:wrap;}
-.policy-modal-cancel,.policy-modal-accept{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;padding:0.7rem 1.2rem;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);border:1px solid;background:transparent;}
+.policy-modal-cancel,.policy-modal-accept{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;padding:0.7rem 1.2rem;cursor:pointer;transition:color 0.3s cubic-bezier(0.34,1.56,0.64,1),background-color 0.3s cubic-bezier(0.34,1.56,0.64,1),border-color 0.3s cubic-bezier(0.34,1.56,0.64,1),opacity 0.3s cubic-bezier(0.34,1.56,0.64,1),transform 0.3s cubic-bezier(0.34,1.56,0.64,1);border:1px solid;background:transparent;}
 .policy-modal-cancel{border-color:var(--rule);color:var(--ink-soft);}
 .policy-modal-cancel:hover{border-color:var(--ink);color:var(--ink);}
 .policy-modal-accept{background:var(--accent);border-color:var(--accent);color:var(--paper);}
@@ -389,7 +396,7 @@ section.chapter:last-of-type{border-bottom:none;}
 
 /* TREE MODE */
 
-.fruit{cursor:pointer;transition:all 0.5s cubic-bezier(0.34,1.8,0.64,1);transform-origin:center;transform-box:fill-box;}
+.fruit{cursor:pointer;transition:color 0.5s cubic-bezier(0.34,1.8,0.64,1),background-color 0.5s cubic-bezier(0.34,1.8,0.64,1),border-color 0.5s cubic-bezier(0.34,1.8,0.64,1),opacity 0.5s cubic-bezier(0.34,1.8,0.64,1),transform 0.5s cubic-bezier(0.34,1.8,0.64,1);transform-origin:center;transform-box:fill-box;}
 .fruit:hover{transform:scale(1.5) translateY(-3px);}
 .fruit:hover .fruit-body{fill:var(--mulberry-fruit-ripe)!important;}
 .fruit.selected{transform:scale(1.6) translateY(-2px);}
@@ -416,7 +423,7 @@ section.chapter:last-of-type{border-bottom:none;}
 .tiers{display:grid;gap:1.25rem;align-items:stretch;}
 .tiers-simple{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
 .tiers-flagship{grid-template-columns:repeat(auto-fit,minmax(340px,1fr));}
-.tier{background:var(--paper-deep);padding:1.85rem 1.5rem;border-top:2px solid var(--rule);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);display:flex;flex-direction:column;min-height:240px;}
+.tier{background:var(--paper-deep);padding:1.85rem 1.5rem;border-top:2px solid var(--rule);transition:color 0.4s cubic-bezier(0.34,1.56,0.64,1),background-color 0.4s cubic-bezier(0.34,1.56,0.64,1),border-color 0.4s cubic-bezier(0.34,1.56,0.64,1),opacity 0.4s cubic-bezier(0.34,1.56,0.64,1),transform 0.4s cubic-bezier(0.34,1.56,0.64,1);display:flex;flex-direction:column;min-height:240px;}
 .tier > .tier-detail{margin-top:auto;padding-top:0.75rem;}
 .tier:hover{transform:translateY(-6px);box-shadow:0 12px 28px var(--shadow);}
 .tier.flagship{background:var(--mulberry-deep);color:var(--paper);border-top:2px solid var(--accent);grid-column:span 1;min-height:280px;}
@@ -660,7 +667,7 @@ footer.colophon a{border-bottom-color:var(--rule);}
 .chrome-group{display:flex;align-items:center;gap:0.2rem;}
 .chrome-label{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-soft);margin-right:0.25rem;}
 .chrome-rule{width:1px;height:1.1rem;background:var(--rule);opacity:0.55;}
-.chrome-bar button{background:none;border:none;font-family:var(--mono);font-size:0.82rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-soft);cursor:pointer;padding:0.32rem 0.56rem;min-height:34px;min-width:34px;transition:all 0.2s;border-radius:1px;}
+.chrome-bar button{background:none;border:none;font-family:var(--mono);font-size:0.82rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-soft);cursor:pointer;padding:0.32rem 0.56rem;min-height:34px;min-width:34px;transition:color 0.2s,background-color 0.2s,border-color 0.2s,opacity 0.2s,transform 0.2s;border-radius:1px;}
 .chrome-bar button:hover:not(:disabled){color:var(--ink);background:color-mix(in srgb,var(--mulberry-leaf) 18%,transparent);}
 .chrome-bar button.active{background:var(--mulberry-deep);color:var(--paper);}
 .chrome-bar button:disabled{opacity:0.45;cursor:not-allowed;}
@@ -995,7 +1002,7 @@ footer.colophon a{border-bottom-color:var(--rule);}
 .fee .holds li::before{content:"";position:absolute;left:0;top:0.55em;width:0.45rem;height:0.45rem;border-radius:50%;background:var(--mulberry-leaf);}
 .fee .fy-head{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-soft);margin:1rem 0 0.5rem;}
 .fee .pay-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin:0 0 0.4rem;}
-.fee .pay-pick{font-family:var(--mono);font-size:0.74rem;letter-spacing:0.04em;color:var(--ink-soft);padding:0.4rem 0.9rem;min-height:44px;display:inline-flex;align-items:center;border:1px solid var(--rule);border-radius:20px;cursor:pointer;background:transparent;transition:all 0.25s ease;}
+.fee .pay-pick{font-family:var(--mono);font-size:0.74rem;letter-spacing:0.04em;color:var(--ink-soft);padding:0.4rem 0.9rem;min-height:44px;display:inline-flex;align-items:center;border:1px solid var(--rule);border-radius:20px;cursor:pointer;background:transparent;transition:color 0.25s ease,background-color 0.25s ease,border-color 0.25s ease,opacity 0.25s ease,transform 0.25s ease;}
 .fee .pay-pick:hover{border-color:var(--mulberry-fruit);color:var(--mulberry-deep);}
 .fee .pay-pick[aria-pressed="true"]{background:var(--mulberry-deep);border-color:var(--mulberry-deep);color:var(--paper);}
 .fee .buy{display:inline-block;background:var(--mulberry-deep);color:var(--paper);text-decoration:none;font-family:var(--display);font-size:1.12rem;padding:0.7rem 1.8rem;border-radius:3px;border:none;cursor:pointer;margin-top:1.1rem;}
@@ -1097,15 +1104,56 @@ footer.colophon a{border-bottom-color:var(--rule);}
   ]
 }
 </script>
-<link rel="stylesheet" href="/css/theme.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=20260725-audit45">
 <link rel="stylesheet" href="/css/mobile-overlay.css?v=cl91">
 
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
   <link rel="stylesheet" href="/leizu/revamp.css?v=20260627a">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<style id="audit35-leizu-ui">
+/* The consolidated control bar used 34px controls even though it is the main
+   language/reading interface. Keep the compact visual treatment but give every
+   action a full target in every input mode. */
+.chrome-bar button{min-width:44px;min-height:44px}
+.lang-btn[data-lang-set="zh"]::after,
+.lang-btn[data-lang-set="zhs"]::after,
+.lang-btn[data-lang-set="fa"]::after{
+  font-family:var(--mono);font-size:.52rem;line-height:1;letter-spacing:.02em;
+  margin-inline-start:.28rem;opacity:.72
+}
+.lang-btn[data-lang-set="zh"]::after{content:"TC"}
+.lang-btn[data-lang-set="zhs"]::after{content:"SC"}
+.lang-btn[data-lang-set="fa"]::after{content:"FA"}
+.chrome-bar button:focus-visible,.leizu-site-nav a:focus-visible{
+  outline:2px solid var(--accent);outline-offset:3px}
+@media (max-width:900px),(max-height:650px){
+  .chrome-bar{max-height:calc(100vh - 1rem);max-height:calc(100dvh - 1rem);
+    overflow:auto;overscroll-behavior:contain;gap:.2rem;padding:.3rem}
+  .chrome-group{flex-wrap:nowrap}
+}
+@media (pointer:coarse),(max-height:650px){
+  .chrome-bar.chrome-hidden{
+    opacity:1;transform:none;pointer-events:auto
+  }
+}
+@media (forced-colors:active){
+  .chrome-bar{background:Canvas!important;border-color:CanvasText!important;
+    box-shadow:none!important}
+  .chrome-bar button{border:1px solid ButtonText!important;color:ButtonText!important}
+  .chrome-bar button.active,.chrome-bar button[aria-pressed="true"]{
+    background:Highlight!important;color:HighlightText!important}
+  .pricing-panel,.esl-banner{background:Canvas!important;color:CanvasText!important;
+    border:1px solid CanvasText!important;box-shadow:none!important}
+}
+@media print{
+  .chrome-bar,.pricing-panel,.esl-banner{display:none!important}
+}
+</style>
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body class="leizu-revamp leizu-home" data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="service" data-page-weight="heavy">
+<body class="leizu-revamp leizu-home" data-geometry="indra-web" data-indra-intensity="0.070" data-route-type="service" data-page-weight="heavy">
 
 
 <!-- Skip-link: visually hidden until keyboard-focused. WCAG 2.4.1.
@@ -1122,12 +1170,12 @@ footer.colophon a{border-bottom-color:var(--rule);}
 
 <nav class="chrome-bar" aria-label="Page controls" data-i18n-aria="ui.chrome.controls">
   <div class="chrome-group" role="group" aria-label="Language" data-i18n-aria="ui.chrome.language">
-    <button type="button" class="lang-btn active" data-lang-set="en">EN</button>
+    <button type="button" class="lang-btn active" data-lang-set="en" aria-label="English">EN</button>
     <button type="button" class="esl-btn" data-esl-toggle aria-pressed="false" title="ESL register (English-acquisition mode). Available when EN is the active language." data-i18n-title="ui.esl.title">ESL</button>
-    <button type="button" class="lang-btn" data-lang-set="fr">FR</button>
-    <button type="button" class="lang-btn" data-lang-set="zh">繁</button>
-    <button type="button" class="lang-btn" data-lang-set="zhs">简</button>
-    <button type="button" class="lang-btn" data-lang-set="fa">فا</button>
+    <button type="button" class="lang-btn" data-lang-set="fr" aria-label="Français">FR</button>
+    <button type="button" class="lang-btn" data-lang-set="zh" aria-label="繁體中文">繁</button>
+    <button type="button" class="lang-btn" data-lang-set="zhs" aria-label="简体中文">简</button>
+    <button type="button" class="lang-btn" data-lang-set="fa" aria-label="فارسی">فا</button>
   </div>
   <span class="chrome-rule" aria-hidden="true"></span>
   <div class="chrome-group" role="group" aria-label="Text size" data-i18n-aria="ui.chrome.size">
@@ -1171,10 +1219,10 @@ footer.colophon a{border-bottom-color:var(--rule);}
       <p data-i18n="hero.aside.copy">Start with the work in front of you. Leave better prepared for the next.</p>
     </aside>
   </div>
-  <div class="hero-facts" aria-label="Leizu Academy overview">
-    <div class="hero-fact"><strong data-i18n="hero.fact.subjects.title">Five subjects</strong><span data-i18n="hero.fact.subjects.copy">History, English, Philosophy, Media Literacy, and Social Studies</span></div>
-    <div class="hero-fact"><strong data-i18n="hero.fact.time.title">Ninety minutes</strong><span data-i18n="hero.fact.time.copy">Reading, discussion, practice, and feedback</span></div>
-    <div class="hero-fact"><strong data-i18n="hero.fact.routes.title">Flexible paths</strong><span data-i18n="hero.fact.routes.copy">OSSD, IB, AP, independent study, and applications</span></div>
+  <div class="hero-facts" role="list" aria-label="Leizu Academy overview">
+    <div class="hero-fact" role="listitem"><strong data-i18n="hero.fact.subjects.title">Five subjects</strong><span data-i18n="hero.fact.subjects.copy">History, English, Philosophy, Media Literacy, and Social Studies</span></div>
+    <div class="hero-fact" role="listitem"><strong data-i18n="hero.fact.time.title">Ninety minutes</strong><span data-i18n="hero.fact.time.copy">Reading, discussion, practice, and feedback</span></div>
+    <div class="hero-fact" role="listitem"><strong data-i18n="hero.fact.routes.title">Flexible paths</strong><span data-i18n="hero.fact.routes.copy">OSSD, IB, AP, independent study, and applications</span></div>
   </div>
   <div class="masthead-meta">
     <span class="masthead-meta-group">
@@ -1200,7 +1248,7 @@ footer.colophon a{border-bottom-color:var(--rule);}
         <p data-i18n="approach.p2">The lesson begins with the work that matters now and leaves the student better prepared for the next text, assignment, exam, or question.</p>
       </div>
     </div>
-    <aside class="academy-promise" data-i18n="approach.promise" data-i18n-html><strong>Teaching here is active.</strong> Students read, speak, write, revise, and return to the work until they can make and defend an answer of their own.</aside>
+    <aside class="academy-promise" role="note" data-i18n="approach.promise" data-i18n-html><strong>Teaching here is active.</strong> Students read, speak, write, revise, and return to the work until they can make and defend an answer of their own.</aside>
   </div>
 </section>
 
@@ -1395,6 +1443,7 @@ footer.colophon a{border-bottom-color:var(--rule);}
       <p data-i18n="plans.question" data-i18n-html>Questions before you begin? <a href="/leizu/intake/?source=contact" data-intake-source="contact">Send a note</a>.</p>
     </div>
   </div>
+  </div>
   <div class="policy-block">
     <div class="policy-head" data-i18n="plans.policy.title">Cancellation and rescheduling</div>
     <p data-i18n="plans.policy.copy" data-i18n-html>Read the <a href="/leizu/policies/">Leizu policies</a> before payment. They set the current terms for cancellations, rescheduling, refunds, and missed sessions.</p>
@@ -1532,7 +1581,7 @@ footer.colophon a{border-bottom-color:var(--rule);}
 
 </div>
 
-<div class="pricing-panel" id="pricing-panel">
+<div class="pricing-panel" id="pricing-panel" inert aria-hidden="true">
   <div class="pricing-row pricing-row-top">
     <div class="pricing-summary" id="pricing-summary-toggle" role="button" tabindex="0" aria-expanded="false" aria-controls="pricing-cart-detail" aria-label="Show selected courses" data-i18n-aria="panel.show">
       <div class="pricing-count">
@@ -1560,7 +1609,7 @@ footer.colophon a{border-bottom-color:var(--rule);}
 </div>
 
 <!-- N28 - Policies acceptance modal. Triggered when user clicks Book Consultation. -->
-<div class="policy-modal" id="policy-modal" role="dialog" aria-modal="true" aria-labelledby="policy-modal-title" aria-hidden="true">
+<div class="policy-modal" id="policy-modal" role="dialog" aria-modal="true" aria-labelledby="policy-modal-title" aria-hidden="true" hidden inert>
   <div class="policy-modal-backdrop" id="policy-modal-backdrop" aria-hidden="true"></div>
   <div class="policy-modal-card">
     <button class="policy-modal-close" id="policy-modal-close" type="button" aria-label="Close" data-i18n-aria="modal.close">×</button>
@@ -2577,8 +2626,6 @@ function saveCartState(){
     (d.g||[]).forEach(x=>eslIntensiveGoals.add(x));
   }catch(err){}
 })();
-document.addEventListener('click', ()=>setTimeout(saveCartState,0), true);
-document.addEventListener('keyup', ()=>setTimeout(saveCartState,0), true);
 let eslIntensiveDeepMastery = false;
 const ESL_DEEP_MASTERY_SESSIONS = 14;
 
@@ -2806,7 +2853,9 @@ function updatePricingPanel(){
     continue:{en:'Continue to intake',zh:'繼續填表',zhs:'继续填写表格',fa:'ادامه به فرم',fr:'Continuer vers le formulaire'},
     emptyNotice:{en:'Choose at least one subject before continuing.',zh:'請先選擇至少一門課程。',zhs:'请先选择至少一门课程。',fa:'پیش از ادامه، دست‌کم یک درس انتخاب کنید.',fr:'Choisissez au moins une matière avant de continuer.'}
   };
-  const text = copy[lang] || copy.en;
+  const text = Object.fromEntries(
+    Object.entries(copy).map(([key, translations]) => [key, translations[lang] || translations.en])
+  );
   const countEl = document.getElementById('count-num');
   const oldCount = parseInt(countEl.textContent) || 0;
   countEl.textContent = n;
@@ -2828,7 +2877,15 @@ function updatePricingPanel(){
   if(savingsEl){ savingsEl.innerHTML=''; savingsEl.style.display='none'; }
   if(bookBtn) bookBtn.textContent = text.continue;
   if(notice){ notice.hidden = true; notice.textContent = text.emptyNotice; }
-  if(n > 0) panel.classList.add('visible'); else panel.classList.remove('visible');
+  if(n > 0){
+    panel.removeAttribute('inert');
+    panel.setAttribute('aria-hidden','false');
+    panel.classList.add('visible');
+  }else{
+    panel.setAttribute('inert','');
+    panel.setAttribute('aria-hidden','true');
+    panel.classList.remove('visible');
+  }
   syncSelectionVisuals();
 }
 
@@ -3228,6 +3285,7 @@ function renderBuilding(){
       } else {
         paperFlagged.delete(courseId);
       }
+      saveCartState();
       renderBuilding();
       syncSelectionVisuals();
       updatePricingPanel();
@@ -3259,6 +3317,7 @@ function renderBuilding(){
         // A12: clear paper flag when leaving in-person
         if(paperFlagged.has(courseId)) paperFlagged.delete(courseId);
       }
+      saveCartState();
       // Re-render the catalog so both segments + the paper chip
       // reflect the new state in one consistent pass.
       renderBuilding();
@@ -3295,6 +3354,7 @@ function renderBuilding(){
         if(visual) visual.textContent = '✦';
         if(label) label.textContent = (lang==='zh'?'紙本':lang==='zhs'?'纸本':lang==='fa'?'کاغذ':lang==='fr'?'PAPIER':'PAPER');
       }
+      saveCartState();
       updatePricingPanel();
     };
     el.addEventListener('click', handler);
@@ -3312,6 +3372,7 @@ function renderBuilding(){
       const goal = el.dataset.eslGoal;
       if(eslIntensiveGoals.has(goal)) eslIntensiveGoals.delete(goal);
       else eslIntensiveGoals.add(goal);
+      saveCartState();
       // Re-render the panel to reflect new state and update booking
       renderBuilding();
       syncSelectionVisuals();
@@ -3340,6 +3401,7 @@ function renderBuilding(){
           if(c.eslIntensive && !selected.has(c.id)) selected.add(c.id);
         }));
       }
+      saveCartState();
       renderBuilding();
       syncSelectionVisuals();
       updatePricingPanel();
@@ -3480,16 +3542,39 @@ function toggleTheme(){
 // Re-appears when the mouse enters the top 80px hover-zone OR when the bar itself is hovered.
 let _chromeHideTimer = null;
 const CHROME_HIDE_DELAY_MS = 5000;
+function chromeBarStaysVisible(){
+  if(document.documentElement.getAttribute('data-motion') === 'calm') return true;
+  if(!window.matchMedia) return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    || window.matchMedia('(pointer: coarse)').matches
+    || window.matchMedia('(max-height: 650px)').matches;
+}
+function scheduleChromeHide(){
+  const bar = document.querySelector('.chrome-bar');
+  if(_chromeHideTimer) clearTimeout(_chromeHideTimer);
+  _chromeHideTimer = null;
+  if(!bar || chromeBarStaysVisible()
+    || bar.contains(document.activeElement)
+    || bar.matches(':hover')) return;
+  _chromeHideTimer = setTimeout(hideChromeBar, CHROME_HIDE_DELAY_MS);
+}
 function showChromeBar(){
   const bar = document.querySelector('.chrome-bar');
   if(!bar) return;
   bar.classList.remove('chrome-hidden');
-  if(_chromeHideTimer) clearTimeout(_chromeHideTimer);
-  _chromeHideTimer = setTimeout(hideChromeBar, CHROME_HIDE_DELAY_MS);
+  scheduleChromeHide();
 }
 function hideChromeBar(){
   const bar = document.querySelector('.chrome-bar');
   if(!bar) return;
+  if(chromeBarStaysVisible()
+    || bar.contains(document.activeElement)
+    || bar.matches(':hover')){
+    bar.classList.remove('chrome-hidden');
+    if(_chromeHideTimer) clearTimeout(_chromeHideTimer);
+    _chromeHideTimer = null;
+    return;
+  }
   bar.classList.add('chrome-hidden');
 }
 
@@ -3650,8 +3735,22 @@ Object.entries(COURSES).forEach(([key, pillar]) => {
 });
 
 const LEIZU_SUPPORTED_LANGS = ['en','fr','zh','zhs','fa'];
+const LEIZU_LANGUAGE_SEGMENTS = {fr:'fr',zh:'zh-hant',zhs:'zh-hans',fa:'fa'};
 function normaliseLeizuLang(value){
   return LEIZU_SUPPORTED_LANGS.includes(String(value || '').toLowerCase()) ? String(value).toLowerCase() : 'en';
+}
+function leizuLangFromPath(){
+  const match = window.location.pathname.match(/^\/leizu\/(fr|zh-hant|zh-hans|fa)(?:\/|$)/);
+  if(!match) return '';
+  return {fr:'fr','zh-hant':'zh','zh-hans':'zhs',fa:'fa'}[match[1]] || '';
+}
+function leizuPathForLanguage(pathname, lang){
+  const clean = String(pathname || '/leizu/').replace(/\/index\.html$/, '/');
+  const withoutLanguage = clean.replace(/^\/leizu\/(?:fr|zh-hant|zh-hans|fa)(?=\/|$)/, '/leizu');
+  if(lang === 'en') return withoutLanguage === '/leizu' ? '/leizu/' : withoutLanguage;
+  const segment = LEIZU_LANGUAGE_SEGMENTS[normaliseLeizuLang(lang)];
+  const suffix = withoutLanguage.replace(/^\/leizu\/?/, '');
+  return `/leizu/${segment}/${suffix}`;
 }
 function syncLeizuLanguageLinks(lang){
   const activeLang = normaliseLeizuLang(lang);
@@ -3661,13 +3760,15 @@ function syncLeizuLanguageLinks(lang){
     let url;
     try { url = new URL(raw, window.location.origin); } catch(e){ return; }
     if(url.origin !== window.location.origin || !url.pathname.startsWith('/leizu')) return;
-    if(activeLang === 'en') url.searchParams.delete('lang');
-    else url.searchParams.set('lang', activeLang);
+    url.searchParams.delete('lang');
+    url.pathname = leizuPathForLanguage(url.pathname, activeLang);
     link.setAttribute('href', url.pathname + (url.search || '') + (url.hash || ''));
   });
 }
 function preferredLeizuLang(){
   try{
+    const fromPath = leizuLangFromPath();
+    if(fromPath) return fromPath;
     const fromUrl = new URLSearchParams(window.location.search).get('lang');
     if(LEIZU_SUPPORTED_LANGS.includes(String(fromUrl || '').toLowerCase())) return String(fromUrl).toLowerCase();
     const fromStorage = localStorage.getItem('leizu-lang');
@@ -3722,6 +3823,7 @@ function applyLang(lang){
   // N34, Update ESL button availability based on current language
   syncESLAvailability(lang);
   syncLeizuLanguageLinks(lang);
+  document.documentElement.classList.remove('leizu-lang-pending');
 }
 
 const TYPE_SCALE_MIN = 0.8;
@@ -3758,6 +3860,9 @@ function mulberryLeafPath(s){
 }
 
 const leafCanvas = document.getElementById('leaf-canvas');
+function clearFlutterLeaves(){
+  leafCanvas.replaceChildren();
+}
 function spawnFlutterLeaf(scrollDriven){
   const leaf = document.createElement('div');
   leaf.className = 'flutter-leaf';
@@ -3786,19 +3891,65 @@ function spawnFlutterLeaf(scrollDriven){
 }
 
 let ambientInterval;
-function startAmbient(){ambientInterval = setInterval(()=>{if(!document.hidden) spawnFlutterLeaf(false);},1300);}
+const initialLeafTimers = new Set();
+const leizuReducedMotion = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+function leizuMotionEnabled(){
+  return document.documentElement.dataset.motion !== 'calm'
+    && !(leizuReducedMotion && leizuReducedMotion.matches);
+}
+function clearInitialLeafTimers(){
+  for(const timer of initialLeafTimers) clearTimeout(timer);
+  initialLeafTimers.clear();
+}
+function stopAmbient(clearLeaves=false){
+  if(ambientInterval) clearInterval(ambientInterval);
+  ambientInterval = null;
+  if(clearLeaves){
+    clearInitialLeafTimers();
+    clearFlutterLeaves();
+  }
+}
+function startAmbient(){
+  stopAmbient();
+  if(document.hidden || !leizuMotionEnabled()) return;
+  ambientInterval = setInterval(()=>{
+    if(!document.hidden && leizuMotionEnabled()) spawnFlutterLeaf(false);
+  },1300);
+}
 let lastScrollY = window.scrollY;
 let scrollLeafCooldown = 0;
 window.addEventListener('scroll',()=>{
   const dy = window.scrollY - lastScrollY;
   lastScrollY = window.scrollY;
+  if(!leizuMotionEnabled()) return;
   scrollLeafCooldown -= 1;
   if(Math.abs(dy)>20 && scrollLeafCooldown<=0){spawnFlutterLeaf(true);scrollLeafCooldown=8;}
 },{passive:true});
-document.addEventListener('visibilitychange',()=>{if(document.hidden) clearInterval(ambientInterval); else startAmbient();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden) stopAmbient(true); else startAmbient();});
+window.addEventListener('pagehide',()=>{
+  stopAmbient(true);
+  if(_chromeHideTimer) clearTimeout(_chromeHideTimer);
+  _chromeHideTimer = null;
+});
+window.addEventListener('pageshow',()=>{
+  startAmbient();
+  scheduleChromeHide();
+});
+if(leizuReducedMotion && leizuReducedMotion.addEventListener){
+  leizuReducedMotion.addEventListener('change',()=>{if(leizuMotionEnabled()) startAmbient(); else stopAmbient(true);});
+}
+new MutationObserver(()=>{if(leizuMotionEnabled()) startAmbient(); else stopAmbient(true);})
+  .observe(document.documentElement,{attributes:true,attributeFilter:['data-motion']});
 
 document.getElementById('btn-clear').addEventListener('click',clearAll);
-document.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.langSet)));
+document.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=>{
+  const next = normaliseLeizuLang(b.dataset.langSet);
+  try { localStorage.setItem('leizu-lang', next); } catch(e){}
+  const url = new URL(window.location.href);
+  url.searchParams.delete('lang');
+  url.pathname = leizuPathForLanguage(url.pathname, next);
+  window.location.assign(url.pathname + (url.search || '') + (url.hash || ''));
+}));
 // N35, Size-btn wiring made defensive. Each button gets its own handler closure so the
 // disabled check fires before stepTypeSize, preventing any race with chrome-bar transitions.
 document.querySelectorAll('.size-btn[data-size-step]').forEach(b => {
@@ -3835,9 +3986,14 @@ document.querySelectorAll('.theme-btn[data-theme-toggle]').forEach(b=>b.addEvent
   }, {passive: true});
   // Stay visible while hovering the bar itself
   bar.addEventListener('mouseenter', showChromeBar);
+  bar.addEventListener('mouseleave', scheduleChromeHide);
   // Reset timer on any interaction with the bar
   bar.addEventListener('click', showChromeBar);
   bar.addEventListener('focusin', showChromeBar);
+  bar.addEventListener('focusout', () => {
+    // Let focus finish moving before deciding whether it stayed in the group.
+    setTimeout(scheduleChromeHide, 0);
+  });
   // Touch: tap top of screen to reveal (mobile)
   document.addEventListener('touchstart', (e) => {
     if(e.touches[0] && e.touches[0].clientY <= HOVER_ZONE_PX){
@@ -3857,11 +4013,21 @@ document.querySelectorAll('.theme-btn[data-theme-toggle]').forEach(b=>b.addEvent
   const acceptBtn = document.getElementById('policy-modal-accept');
   const checkbox = document.getElementById('policy-modal-confirm');
   const bookBtn = document.getElementById('btn-book');
+  const backgroundNodes = Array.from(document.body.children)
+    .filter(node => node !== modal && node.tagName !== 'SCRIPT');
+  let backgroundInertState = [];
+  let lastFocused = null;
 
   function openModal(){
+    if(modal.getAttribute('data-open') === 'true') return;
     // Reset state every open
     checkbox.checked = false;
     acceptBtn.disabled = true;
+    lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : bookBtn;
+    backgroundInertState = backgroundNodes.map(node => [node, node.inert]);
+    backgroundNodes.forEach(node => { node.inert = true; });
+    modal.hidden = false;
+    modal.inert = false;
     modal.setAttribute('data-open','true');
     modal.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
@@ -3870,7 +4036,13 @@ document.querySelectorAll('.theme-btn[data-theme-toggle]').forEach(b=>b.addEvent
   function closeModal(){
     modal.setAttribute('data-open','false');
     modal.setAttribute('aria-hidden','true');
+    modal.inert = true;
+    modal.hidden = true;
+    backgroundInertState.forEach(([node, wasInert]) => { node.inert = wasInert; });
+    backgroundInertState = [];
     document.body.style.overflow = '';
+    const focusTarget = lastFocused && lastFocused.isConnected ? lastFocused : bookBtn;
+    if(focusTarget) focusTarget.focus();
   }
   // Exposed so booking-button.js can fall back to the mailto flow
   // when a Stripe Payment Link is missing or still a placeholder.
@@ -3912,7 +4084,31 @@ document.querySelectorAll('.theme-btn[data-theme-toggle]').forEach(b=>b.addEvent
   backdrop.addEventListener('click', closeModal);
   // Escape key closes modal
   document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape' && modal.getAttribute('data-open') === 'true') closeModal();
+    if(modal.getAttribute('data-open') !== 'true') return;
+    if(e.key === 'Escape'){
+      e.preventDefault();
+      closeModal();
+      return;
+    }
+    if(e.key !== 'Tab') return;
+    const focusable = Array.from(modal.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])'))
+      .filter(node => !node.closest('[hidden]'));
+    if(!focusable.length){
+      e.preventDefault();
+      return;
+    }
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if(!modal.contains(document.activeElement)){
+      e.preventDefault();
+      first.focus();
+    }else if(e.shiftKey && document.activeElement === first){
+      e.preventDefault();
+      last.focus();
+    }else if(!e.shiftKey && document.activeElement === last){
+      e.preventDefault();
+      first.focus();
+    }
   });
 })();
 
@@ -3940,6 +4136,7 @@ function setAllCoursesInPerson(){
   Object.values(COURSES).forEach(pillar => {
     pillar.courses.forEach(c => { inPersonFlagged.add(c.id); });
   });
+  saveCartState();
   renderBuilding();
   updatePricingPanel();
 }
@@ -3947,6 +4144,7 @@ function setAllCoursesOnline(){
   inPersonFlagged.clear();
   // A12 constraint: paper requires in-person. Clear paper too.
   paperFlagged.clear();
+  saveCartState();
   renderBuilding();
   updatePricingPanel();
 }
@@ -3960,7 +4158,13 @@ function setAllCoursesOnline(){
   document.querySelectorAll('.masthead-lang-btn[data-meta-lang]').forEach(btn => {
     btn.addEventListener('click', () => {
       const lang = btn.dataset.metaLang;
-      if(typeof applyLang === 'function') applyLang(lang);
+      if(typeof applyLang === 'function'){
+        try { localStorage.setItem('leizu-lang', lang); } catch(e){}
+        const url = new URL(window.location.href);
+        url.searchParams.delete('lang');
+        url.pathname = leizuPathForLanguage(url.pathname, lang);
+        window.location.assign(url.pathname + (url.search || '') + (url.hash || ''));
+      }
     });
   });
 })();
@@ -3974,7 +4178,13 @@ renderElements();
 renderBuilding();
 updatePricingPanel();
 startAmbient();
-for(let i=0;i<5;i++) setTimeout(()=>spawnFlutterLeaf(Math.random()>0.5),i*350);
+for(let i=0;i<5;i++){
+  const timer = setTimeout(()=>{
+    initialLeafTimers.delete(timer);
+    if(!document.hidden && leizuMotionEnabled()) spawnFlutterLeaf(Math.random()>0.5);
+  },i*350);
+  initialLeafTimers.add(timer);
+}
 
 // === ROUTE SELECTOR (A18) ===
 // Tracks current route and applies visual filtering to the catalog.
@@ -4139,7 +4349,7 @@ document.querySelectorAll('.chapter-prose,.elements-grid,.tiers,.format-grid,.po
 <script src="/js/theme.js?v=cl91" defer></script>
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
-<script src="/js/footer.js?v=20260719-audit11-decisions" defer></script>
-<script defer src="/js/site-keyboard-enhancements.js"></script>
+<script src="/js/footer.js?v=20260725-audit45-footer" defer></script>
+<script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

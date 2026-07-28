@@ -42,10 +42,10 @@ function makeWorld(opts){
   if(opts.hasPcv){const p=node('div');p.id='printCv';}
   const projEl=opts.projCls?(()=>{const e=node('nav');e.className=opts.projCls;return e;})():null;
   const sections=[];for(let i=0;i<opts.sectionCount;i++){const top=i*1000;sections.push({getBoundingClientRect(){return{top:top-win.scrollY,height:1000};}});}
-  const documentElement=node('html');Object.defineProperty(documentElement,'scrollHeight',{get(){return 4000;}});
+  const documentElement=node('html');documentElement.dataset={motion:opts.motion||'active'};Object.defineProperty(documentElement,'scrollHeight',{get(){return 4000;}});
   const body=node('body');
   const doc={documentElement,body,createElement:t=>node(t),getElementById:id=>byId[id]||null,querySelector:sel=>/project-/.test(sel)?projEl:null,querySelectorAll:sel=>sel==='section'?sections:[],addEventListener:(t,fn)=>addH(t,fn),hidden:false,readyState:'complete'};
-  const win={};Object.assign(win,{document:doc,window:win,Math,console,matchMedia:()=>({matches:false,addListener(){},removeListener(){},addEventListener(){},removeEventListener(){}}),innerWidth:1200,innerHeight:800,scrollY:0,requestAnimationFrame:cb=>{try{cb();}catch(_){}return 0;},setTimeout:()=>0,setInterval:()=>0,clearTimeout:()=>0,performance:{_t:0,now(){this._t+=50;return this._t;}},addEventListener:(t,fn)=>addH(t,fn),location:{pathname:opts.path},Event:function(type){this.type=type;}});
+  const win={};Object.assign(win,{document:doc,window:win,Math,console,matchMedia:()=>({matches:false,addListener(){},removeListener(){},addEventListener(){},removeEventListener(){}}),innerWidth:1200,innerHeight:800,scrollY:0,requestAnimationFrame:cb=>{try{cb(win.performance.now());}catch(_){}return 0;},cancelAnimationFrame:()=>{},setTimeout:()=>0,setInterval:()=>0,clearTimeout:()=>0,performance:{_t:0,now(){this._t+=50;return this._t;}},addEventListener:(t,fn)=>addH(t,fn),location:{pathname:opts.path},Event:function(type){this.type=type;}});
   return{win,fire:type=>(handlers[type]||[]).forEach(fn=>{try{fn(new win.Event(type));}catch(_){}}),cssVars,layer:()=>byId.indraLayer||null,geo:()=>byId.geo||null};
 }
 function execPage(opts,cfg){

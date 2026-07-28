@@ -2,6 +2,7 @@
 
 <html data-theme-policy="fixed" lang="en">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
 <meta charset="utf-8"/>
 <meta content="Private teacher-facing campaign board for the Thank You Ma’am classroom campaign." name="description"/>
 <link href="https://seminarschools.com/campaigns/thank-you-mam/dm-board/" rel="canonical"/>
@@ -73,9 +74,16 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 .time-slot {
   display: flex;
   align-items: center;
+  width: 100%;
   gap: 8px;
   padding: 4px 8px;
   background: var(--surface-2);
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
   border-left: 3px solid transparent;
   cursor: pointer;
   font-size: 12px;
@@ -89,13 +97,20 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 
 .npc-list { display: flex; flex-direction: column; gap: 4px; }
 .npc-card {
+  width: 100%;
   background: var(--surface-2);
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
   padding: 8px 10px;
   border-left: 3px solid var(--blue);
   cursor: pointer;
 }
-.npc-card .name { font-weight: 700; font-size: 13px; }
-.npc-card .loc { font-size: 11px; color: var(--text-dim); }
+.npc-card .name { display: block; font-weight: 700; font-size: 13px; }
+.npc-card .loc { display: block; font-size: 11px; color: var(--text-dim); }
 .npc-card.met { border-left-color: var(--green); }
 .npc-card.met .name::after { content: " ✓"; color: var(--green); font-size:0.72rem; }
 
@@ -120,7 +135,11 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
   min-height: 300px;
 }
 .block {
+  width: 100%;
   background: var(--surface-2);
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
   border: 1px solid var(--border);
   padding: 8px;
   font-size:0.72rem;
@@ -128,7 +147,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
   display: flex;
   flex-direction: column;
   gap: 2px;
-  transition: all 0.15s;
+  transition:color 0.15s,background-color 0.15s,border-color 0.15s,opacity 0.15s,transform 0.15s;
   position: relative;
 }
 .block:hover { border-color: var(--accent); background: var(--surface-3); }
@@ -152,7 +171,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
   border: 1px solid var(--border);
   color: var(--text-dim);
   cursor: pointer;
-  transition: all 0.15s;
+  transition:color 0.15s,background-color 0.15s,border-color 0.15s,opacity 0.15s,transform 0.15s;
 }
 .trigger-chip.fireable { border-color: var(--green); color: var(--green); }
 .trigger-chip.fired { border-color: var(--text-faint); color: var(--text-faint); text-decoration: line-through; }
@@ -190,7 +209,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
   align-items: center;
   gap: 8px;
   font-family: var(--font);
-  transition: all 0.15s;
+  transition:color 0.15s,background-color 0.15s,border-color 0.15s,opacity 0.15s,transform 0.15s;
 }
 .tool-btn:hover { border-color: var(--accent); background: var(--surface-3); }
 .tool-btn .tool-code { font-family: var(--mono); font-size:0.72rem; color: var(--accent-dim); min-width: 52px; }
@@ -237,6 +256,16 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
   font-family: var(--font);
   margin-top: 12px;
 }
+.time-slot:focus-visible,
+.npc-card:focus-visible,
+.block:focus-visible,
+.trigger-chip:focus-visible,
+.tool-btn:focus-visible,
+.layer-toggle button:focus-visible,
+.modal .close-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
 
 /* AMBIENT */
 .ambient-bar {
@@ -255,13 +284,73 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 ::-webkit-scrollbar-track { background: var(--surface); }
 ::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--border); }
+
+@media (max-width: 900px) {
+  body {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+  .board {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    height: auto;
+    min-height: 100vh;
+  }
+  .topbar {
+    grid-column: 1;
+    align-items: flex-start;
+    padding: 12px;
+  }
+  .topbar .layer-toggle {
+    margin-left: 0;
+    width: 100%;
+  }
+  .topbar .layer-toggle button {
+    flex: 1;
+    min-height: 44px;
+  }
+  .left,
+  .center,
+  .right {
+    overflow: visible;
+  }
+  .left,
+  .right,
+  .map-area,
+  .triggers {
+    padding: 16px;
+  }
+  .harlem-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-height: 0;
+  }
+  .block {
+    min-height: 92px;
+  }
+  .ambient-bar {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 440px) {
+  .harlem-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .block {
+    min-height: 72px;
+  }
+}
 </style>
 <link href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)" rel="stylesheet"/>
 <link href="/css/alive.css?v=cl91" rel="stylesheet"/>
-<link href="/css/theme.css?v=cl91" rel="stylesheet"/>
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link href="/css/theme.css?v=20260725-audit45" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.075">
+<body data-geometry="indra-web" data-indra-intensity="0.095">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <h1 class="sr-only">DM Board</h1>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div aria-label="Adjust text size" class="ss-fz"><button data-fz="down" title="Decrease text size" type="button">A-</button><button data-fz="up" title="Increase text size" type="button">A+</button><button class="reset" data-fz="reset" style="display:none" title="Reset text size" type="button">↺</button></div>
@@ -272,8 +361,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 <span class="clock" id="gameClock">SAT 11:00 PM</span>
 <span id="windowNote" style="color:var(--text-dim);font-size:11px">Hour 29 of 63</span>
 <div class="layer-toggle">
-<button class="active" id="layerA" onclick="setLayer('A')">Layer A · Dream</button>
-<button id="layerB" onclick="setLayer('B')">Layer B · Real</button>
+<button class="active" id="layerA" type="button" aria-pressed="true" onclick="setLayer('A')">Layer A · Dream</button>
+<button id="layerB" type="button" aria-pressed="false" onclick="setLayer('B')">Layer B · Real</button>
 </div>
 </div>
 <!-- LEFT PANEL -->
@@ -287,7 +376,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 <div class="center">
 <div class="map-area">
 <div class="scene-header">Active Scene</div>
-<div class="scene-title" id="sceneTitle">East 128th Street between Madison and Park</div>
+<div class="scene-title" id="sceneTitle" aria-live="polite" aria-atomic="true">East 128th Street between Madison and Park</div>
 <div class="scene-desc" id="sceneDesc">Saturday 11 PM. Mrs. Luella Bates Washington Jones is walking home from the beauty shop. A large purse hangs from her shoulder. The street is lit by a single streetlight. Layer A overlay: Hughes texts ambient on building walls. A faint radio from an upper window plays WLIB.</div>
 <div class="harlem-grid" id="harlemGrid"></div>
 </div>
@@ -312,8 +401,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 </div>
 </div>
 <!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-<div class="modal" id="modalContent"></div>
+<div class="modal-overlay" id="modalOverlay" aria-hidden="true" inert onclick="closeModal(event)">
+<div class="modal" id="modalContent" role="dialog" aria-modal="true" tabindex="-1"></div>
 </div>
 <script>
 // ===== GAME STATE =====
@@ -446,11 +535,11 @@ const dmTools = [
 function renderTimeline() {
   const el = document.getElementById('timeline');
   el.innerHTML = timeSlots.map(s => `
-    <div class="time-slot ${s.hour === state.currentTime ? 'active' : ''}" onclick="setTime(${s.hour})">
+    <button type="button" class="time-slot ${s.hour === state.currentTime ? 'active' : ''}" aria-pressed="${s.hour === state.currentTime ? 'true' : 'false'}" onclick="setTime(${s.hour})">
       <span class="time">${formatHour(s.hour)}</span>
       <span class="label">${s.label.split('·').pop().trim()}</span>
       ${s.npcs > 0 ? `<span class="npc-count">${s.npcs}</span>` : ''}
-    </div>
+    </button>
   `).join('');
 }
 
@@ -458,10 +547,10 @@ function renderNPCs() {
   const el = document.getElementById('npcList');
   const active = npcs.filter(n => n.hours.includes(state.currentTime));
   el.innerHTML = active.map(n => `
-    <div class="npc-card ${state.metNPCs.has(n.id) ? 'met' : ''}" onclick="showNPC('${n.id}')" style="border-left-color:${n.color}">
-      <div class="name">${n.name}</div>
-      <div class="loc">${n.loc}</div>
-    </div>
+    <button type="button" class="npc-card ${state.metNPCs.has(n.id) ? 'met' : ''}" onclick="showNPC('${n.id}')" aria-label="${n.name}, ${n.loc}${state.metNPCs.has(n.id) ? ', met' : ', not met'}" style="border-left-color:${n.color}">
+      <span class="name">${n.name}</span>
+      <span class="loc">${n.loc}</span>
+    </button>
   `).join('');
 }
 
@@ -470,7 +559,7 @@ function renderMap() {
   el.innerHTML = blocks.map(b => {
     const hasNPC = npcs.some(n => n.hours.includes(state.currentTime) && n.loc.toLowerCase().includes(b.poi.toLowerCase().split(' ')[0]));
     return `
-    <div class="block ${b.id === '128th' ? 'has-bookworm' : ''}" onclick="selectBlock('${b.id}')">
+    <button type="button" class="block ${b.id === '128th' ? 'has-bookworm' : ''}" onclick="selectBlock('${b.id}')" aria-label="Show ${b.street}: ${b.poi}">
       <span class="street">${b.street}</span>
       <span class="poi">${b.poi}</span>
       ${state.layer === 'A' && b.layer_a ? `<span class="layer-a">${b.layer_a}</span>` : ''}
@@ -478,7 +567,7 @@ function renderMap() {
         ${b.id === '128th' ? '<span class="dot bw"></span>' : ''}
         ${hasNPC ? '<span class="dot npc"></span>' : ''}
       </div>
-    </div>`;
+    </button>`;
   }).join('');
 }
 
@@ -498,13 +587,13 @@ function renderTriggers() {
   
   threads.forEach(t => {
     const isActive = activeThreadIds.includes(t.id);
-    html += `<div class="trigger-chip" style="display:block;width:100%;margin-bottom:4px;padding:6px 8px;border-left:3px solid ${t.color};${isActive ? 'background:var(--surface-3);color:var(--text)' : ''}" onclick="showThread(${t.id})">`;
+    html += `<button type="button" class="trigger-chip" style="display:block;width:100%;margin-bottom:4px;padding:6px 8px;border-left:3px solid ${t.color};${isActive ? 'background:var(--surface-3);color:var(--text)' : ''}" onclick="showThread(${t.id})">`;
     html += `<span style="font-weight:700;color:${t.color}">${t.id}. ${t.name}</span>`;
     html += `<span style="margin-left:8px;font-size:0.72rem;color:var(--text-dim)">${t.desc}</span>`;
     if (isActive) {
       html += `<span style="margin-left:8px;font-size:0.72rem;color:var(--green)">● ACTIVE</span>`;
     }
-    html += `</div>`;
+    html += `</button>`;
   });
   
   // Always show Hughes thread as available
@@ -527,7 +616,7 @@ function showThread(id) {
   crossings.filter(c => c.threads.includes(id)).forEach(c => {
     html += `<div style="font-size:11px;color:var(--text-dim);padding:2px 0">${c.name} (${c.desc.split('.')[0]})</div>`;
   });
-  html += `<button class="close-btn" onclick="closeModalDirect()">Close</button>`;
+  html += `<button type="button" class="close-btn" onclick="closeModalDirect()">Close</button>`;
   openModal(html);
 }
 
@@ -552,7 +641,7 @@ function renderBookworms() {
 function renderDMTools() {
   const el = document.getElementById('dmTools');
   el.innerHTML = dmTools.map(t => `
-    <button class="tool-btn" onclick="showTool('${t.code}')">
+    <button type="button" class="tool-btn" onclick="showTool('${t.code}')">
       <span class="tool-code">${t.code}</span>
       <span class="tool-name">${t.name}</span>
     </button>
@@ -588,6 +677,8 @@ function setLayer(l) {
   state.layer = l;
   document.getElementById('layerA').classList.toggle('active', l === 'A');
   document.getElementById('layerB').classList.toggle('active', l === 'B');
+  document.getElementById('layerA').setAttribute('aria-pressed', l === 'A' ? 'true' : 'false');
+  document.getElementById('layerB').setAttribute('aria-pressed', l === 'B' ? 'true' : 'false');
   renderMap();
 }
 
@@ -634,14 +725,14 @@ function updateAmbient(h) {
 
 function showNPC(id) {
   const n = npcs.find(x => x.id === id);
-  openModal(`<h3 style="color:${n.color}">${n.name}</h3><p><strong>Location:</strong> ${n.loc}</p><p>${n.role}</p><p><strong>Active hours:</strong> ${n.hours.map(formatHour).join(', ')}</p><button class="close-btn" onclick="toggleMet('${n.id}')">Toggle Met/Unmet</button> <button class="close-btn" onclick="closeModalDirect()">Close</button>`);
+  openModal(`<h3 style="color:${n.color}">${n.name}</h3><p><strong>Location:</strong> ${n.loc}</p><p>${n.role}</p><p><strong>Active hours:</strong> ${n.hours.map(formatHour).join(', ')}</p><button type="button" class="close-btn" onclick="toggleMet('${n.id}')">Toggle Met/Unmet</button> <button type="button" class="close-btn" onclick="closeModalDirect()">Close</button>`);
 }
 
 // showProject removed — replaced by showThread in renderTriggers block
 
 function showTool(code) {
   const t = dmTools.find(x => x.code === code);
-  openModal(`<h3>${t.code}: ${t.name}</h3><p>${t.desc}</p><button class="close-btn" onclick="closeModalDirect()">Close</button>`);
+  openModal(`<h3>${t.code}: ${t.name}</h3><p>${t.desc}</p><button type="button" class="close-btn" onclick="closeModalDirect()">Close</button>`);
 }
 
 function selectBlock(id) {
@@ -654,12 +745,61 @@ function selectBlock(id) {
 function toggleMet(id) { state.metNPCs.has(id) ? state.metNPCs.delete(id) : state.metNPCs.add(id); renderNPCs(); closeModalDirect(); }
 function toggleFired(code) { state.firedProjects.has(code) ? state.firedProjects.delete(code) : state.firedProjects.add(code); renderTriggers(); closeModalDirect(); }
 
+let modalReturnFocus = null;
 function openModal(html) {
-  document.getElementById('modalContent').innerHTML = html;
-  document.getElementById('modalOverlay').classList.add('open');
+  const overlay = document.getElementById('modalOverlay');
+  const modal = document.getElementById('modalContent');
+  modalReturnFocus = document.activeElement;
+  modal.innerHTML = html;
+  const title = modal.querySelector('h2, h3');
+  if (title) {
+    title.id = 'dm-modal-title';
+    modal.setAttribute('aria-labelledby', title.id);
+  } else {
+    modal.removeAttribute('aria-labelledby');
+    modal.setAttribute('aria-label', 'Details');
+  }
+  overlay.removeAttribute('inert');
+  overlay.setAttribute('aria-hidden', 'false');
+  overlay.classList.add('open');
+  const firstControl = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  (firstControl || modal).focus();
 }
 function closeModal(e) { if (e.target === document.getElementById('modalOverlay')) closeModalDirect(); }
-function closeModalDirect() { document.getElementById('modalOverlay').classList.remove('open'); }
+function closeModalDirect() {
+  const overlay = document.getElementById('modalOverlay');
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+  overlay.setAttribute('inert', '');
+  if (modalReturnFocus && document.contains(modalReturnFocus)) modalReturnFocus.focus();
+  modalReturnFocus = null;
+}
+document.addEventListener('keydown', function(event) {
+  const overlay = document.getElementById('modalOverlay');
+  if (!overlay.classList.contains('open')) return;
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    closeModalDirect();
+    return;
+  }
+  if (event.key !== 'Tab') return;
+  const controls = Array.from(overlay.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+    .filter(function(control) { return !control.disabled && control.getClientRects().length; });
+  if (!controls.length) {
+    event.preventDefault();
+    document.getElementById('modalContent').focus();
+    return;
+  }
+  const first = controls[0];
+  const last = controls[controls.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+});
 
 // ===== INIT =====
 renderTimeline();
@@ -673,7 +813,7 @@ renderLog();
 <script defer="" src="/js/theme.js?v=cl91"></script>
 <script defer="" src="/js/mandala.js?v=cl91"></script>
 <script defer="" src="/js/indra.js?v=cl91"></script>
-<script defer="" src="/js/footer.js?v=20260719-audit11-decisions"></script>
-<script defer="" src="/js/site-keyboard-enhancements.js"></script>
+<script defer="" src="/js/footer.js?v=20260725-audit45-footer"></script>
+<script defer="" src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

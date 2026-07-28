@@ -1,0 +1,585 @@
+{
+  "schema": "seminar-schools-frozen-release-evidence-v1",
+  "release": "Audit 42",
+  "release_id": "2026-07-25-site-audit42-ledger-closure-multimode-final",
+  "generated_at": "2026-07-25T11:05:10-04:00",
+  "rule": "Every listed byte is historical evidence and must remain unchanged in Audit 43 and later releases.",
+  "file_count": 115,
+  "files": [
+    {
+      "path": "WEBSITE_AUDIT42_COMPLETE_LEDGER_CLOSURE_REPORT_2026-07-25.md",
+      "bytes": 15726,
+      "sha256": "87418b90aa890427367109e1edc263bda834a80b016da2421db7597cca6f7056"
+    },
+    {
+      "path": "data/audit42-design-token-inventory.json",
+      "bytes": 1776935,
+      "sha256": "cfb15a3eb05dc85524be566690eb76fb8d44d77a5b1bf6e903035c2c27439300"
+    },
+    {
+      "path": "data/audit42-editorial-density-inventory.json",
+      "bytes": 11964,
+      "sha256": "b792d968bfb2f73da4717fb71fad9b0398546c493fff418d9c098296a4e135e0"
+    },
+    {
+      "path": "data/audit42-inherited-browser/depth/full-depth-browser-audit.json",
+      "bytes": 9308,
+      "sha256": "736bf891a2b6fb6408256a5cc6912a0e5850ca49b33b7d8335f68d638b2404e0"
+    },
+    {
+      "path": "data/audit42-inherited-browser/depth/screenshots/bookwormcard.png",
+      "bytes": 349690,
+      "sha256": "eddb4f081d3050bf31d9933f72511466176e9c3d489672d723b2c3bd9841dd7d"
+    },
+    {
+      "path": "data/audit42-inherited-browser/depth/screenshots/expired-event.png",
+      "bytes": 104282,
+      "sha256": "7a4a6bc81b72cc7556ef1846eeb3874ca6e2649c7ef8965113dda0381f1a107d"
+    },
+    {
+      "path": "data/audit42-inherited-browser/depth/screenshots/teacher-resources.png",
+      "bytes": 111978,
+      "sha256": "51d3986db6be9465caebe2e2124df115b1f9105fcb6642311d52643f54c06c01"
+    },
+    {
+      "path": "data/audit42-inherited-browser/depth/screenshots/upcoming-event.png",
+      "bytes": 118026,
+      "sha256": "1ecdac9b7c45c28af7fb749eb711ff038c67b90abd1e6316e9435f0f7a58251d"
+    },
+    {
+      "path": "data/audit42-inherited-browser/entry-pages/entry-pages-browser-audit.json",
+      "bytes": 25334,
+      "sha256": "46f805dc0493b38ff84b07cbd7428a961c46c494c2ed0b77d95a38a168b90219"
+    },
+    {
+      "path": "data/audit42-inherited-browser/interaction/desktop-final.png",
+      "bytes": 155611,
+      "sha256": "110f30d834fb16bb7ae8ad868ddd997f0fd2cd1836252ab028df53000571c8b1"
+    },
+    {
+      "path": "data/audit42-inherited-browser/interaction/interaction-design-browser-audit.json",
+      "bytes": 12172,
+      "sha256": "c20189c1fca9d4c81ddd014551a6178afcb5164c07c0d43e7d4a8dc454f7dab0"
+    },
+    {
+      "path": "data/audit42-inherited-browser/interaction/mobile-final.png",
+      "bytes": 73600,
+      "sha256": "b8360d8bc596aecea22af5b75513b917ea370cc403ac0d4cea6116e0061f63a9"
+    },
+    {
+      "path": "data/audit42-inherited-browser/interaction/small-mobile-final.png",
+      "bytes": 68032,
+      "sha256": "d54059c3bf4c351f88c9f450e8d0985d6d7a454e2cfc592316946e63f9337547"
+    },
+    {
+      "path": "data/audit42-inherited-browser/programs/depth.py",
+      "bytes": 10076,
+      "sha256": "f2ec0058fd7c652ae543bbddc9bed3a7541e9c0da635904745a230099404fec9"
+    },
+    {
+      "path": "data/audit42-inherited-browser/programs/entry-pages.py",
+      "bytes": 11600,
+      "sha256": "96ee677c987d25f3b28520dc7083992ed284ecaf04ab88acf18296eeb84406fd"
+    },
+    {
+      "path": "data/audit42-inherited-browser/programs/interaction.py",
+      "bytes": 25550,
+      "sha256": "7071688a95750f2a759380d41ab0bf405d6c34643dfc14503f1ccb2c9473ad51"
+    },
+    {
+      "path": "data/audit42-inherited-browser/programs/routes.py",
+      "bytes": 26066,
+      "sha256": "614db313d31a8c31195a54c35ab67c2b373e894fbadcf491a7ad3c78fedd792a"
+    },
+    {
+      "path": "data/audit42-inherited-browser/programs/runtime.py",
+      "bytes": 20423,
+      "sha256": "a16bb2c76cc8250172beddcd3129751d906be22d761142b1a15c35285a39e208"
+    },
+    {
+      "path": "data/audit42-inherited-browser/programs/stress.py",
+      "bytes": 15951,
+      "sha256": "91cababb840751ab1fd8d21961965712aafa97a3af90a811200b637b22a95d4f"
+    },
+    {
+      "path": "data/audit42-inherited-browser/programs/wcag.py",
+      "bytes": 22466,
+      "sha256": "f601b4b57e208ea5a96d0a6841152ce86740096ac81e52d01325fbc216980bfc"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/aa-desktop.png",
+      "bytes": 130792,
+      "sha256": "d7bc0a93f16b0aef0ba4ec6a6767a51a66615d32c46af9c8522aca24132ed78a"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/aa-forced-colors.png",
+      "bytes": 51560,
+      "sha256": "0cad2ed2639c29840ad7d3ccadd6ab28a0e6dfc02bb7f512b6984540f60b0baa"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/aa-landscape-short.png",
+      "bytes": 81039,
+      "sha256": "de98c34e0135537be8884caedfd9f91bf53e1045751289b0179790a7b8ae3766"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/aa-mobile-short.png",
+      "bytes": 55077,
+      "sha256": "8a315ca334f621043b06741f83b97f4e0f88fdded43b29d9f70a72ff9708622d"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/about-desktop.png",
+      "bytes": 147940,
+      "sha256": "d6a8d2d2895563eb8a43ca1fe3220cf3095495a5d49ba1ecb10c167b37edec91"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/about-landscape-short.png",
+      "bytes": 95998,
+      "sha256": "9ccd9fb5b2241477fb95434aeefdd417b08ce93c83e784db752b696ce6966750"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/about-mobile-short.png",
+      "bytes": 75183,
+      "sha256": "2a9c4058c609c16624444442c32a9bf9235df37456d122cb86b71c0d54e0845d"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/agora-desktop.png",
+      "bytes": 76915,
+      "sha256": "203bb8784ffa10f4e743a49fb2fff49dac30992bdc4894a52af7ee571d3ed650"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/agora-landscape-short.png",
+      "bytes": 44918,
+      "sha256": "4eedaccf926f2082fcecbe4a6028dfd8420df2ccfe64dab053312491bea92eee"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/agora-mobile-short.png",
+      "bytes": 41094,
+      "sha256": "a3800c0d00df84ea401a0cce2572323862405c71d4e23eaee8327f2a74317e3d"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/bb-desktop.png",
+      "bytes": 154848,
+      "sha256": "f3a47e7837fb4fa4e6b3feab915e36745d7382e11392a1ad301f80127b014315"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/bb-forced-colors.png",
+      "bytes": 50136,
+      "sha256": "9c3c6ff22fc1966769f7cf1d638c9e505f31d92577840807ed5b7ebaf02965ae"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/bb-landscape-short.png",
+      "bytes": 75771,
+      "sha256": "858f4c04083b57453e7d6726371dead4440d6f78456c3e03a33903f6b36d8765"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/bb-mobile-short.png",
+      "bytes": 74365,
+      "sha256": "ba31e2dc13b52030d9108b46127bec6878b497b2b82f42ed3fdd95c3d490fb34"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/bookwormcard-desktop.png",
+      "bytes": 282248,
+      "sha256": "b9fbf0db99505ec83208e23e3282f06b8d70a78cbeff40b6879cc720ebef4358"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/bookwormcard-forced-colors.png",
+      "bytes": 2842,
+      "sha256": "3a4fec990a4a47f1426a212097d2ac542367987be8b1ea2be46141ff15f49750"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/bookwormcard-landscape-short.png",
+      "bytes": 175842,
+      "sha256": "67435a3f84b7d9badcdb44eab9d0b3a4cf253ed29b2d93316a3f948f5469b915"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/bookwormcard-mobile-short.png",
+      "bytes": 118457,
+      "sha256": "425503b6b8c25108c8ca2dbcbc50a5db8ab17ecee45198efe9a913ca4d98bcfd"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/cv-desktop.png",
+      "bytes": 355443,
+      "sha256": "598c9b9450daab2f7d64ba56de0f4a3990068475251be81b553ac64978e4ef16"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/cv-landscape-short.png",
+      "bytes": 193886,
+      "sha256": "c81f27a25ceb9a1ecaaaf29edadafb85107072e25e4b8b19ed357961275ce4fb"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/cv-mobile-short.png",
+      "bytes": 122077,
+      "sha256": "ec7b1cf993b914b18deb76f78d245ec2a1a2623050f429cf7fa73209c4a4e79f"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/home-desktop.png",
+      "bytes": 115228,
+      "sha256": "82a3ebd98ac3edd5f19bd96e46ddc52a5474ad1b09649a3f39ef581bc9645346"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/home-forced-colors.png",
+      "bytes": 52326,
+      "sha256": "866800123f775d4b696c0879c02a571ef222797de511a779ff0880ee3f5cecde"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/home-landscape-short.png",
+      "bytes": 69445,
+      "sha256": "410443d51a8d2798cc7772673074809f2b424c9e838cce871de856bd15988e15"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/home-mobile-short.png",
+      "bytes": 41183,
+      "sha256": "89d82ba58e5e04c2ae21fc833aeffe3214b59cbe1fcddf1acf777e98c86352c2"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/leizu-desktop.png",
+      "bytes": 262075,
+      "sha256": "e5abe1d10c390a9081bb10932f0d1258460b1f2d0e3d3a97ebc71c18a31469eb"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/leizu-landscape-short.png",
+      "bytes": 146614,
+      "sha256": "a4b44c571797da7aaab9aecdc81235f08f3b8899d0efc32e706581085f8ad4b2"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/leizu-mobile-short.png",
+      "bytes": 50548,
+      "sha256": "e0c3e5495c5a89febb0fffdd44e5d35bd2deae9b6479ad01e41f8295b58d82f1"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/methodology-list-desktop.png",
+      "bytes": 99587,
+      "sha256": "77ef2769591ea0592761b215a3ab2bc64df55c991374a2779dfcd90d144ca81f"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/methodology-list-landscape-short.png",
+      "bytes": 56893,
+      "sha256": "ec2959aa3e1b91e3a8920c432757753e445d47dd130789a6ef78188bc04a12c2"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/methodology-list-mobile-short.png",
+      "bytes": 56682,
+      "sha256": "86a301f7a893c3b89a4d60955cd08d923b583da8d7a9b0316e4a22235dfaa849"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/polymythcal-desktop.png",
+      "bytes": 112097,
+      "sha256": "050563dba30d69600e368c695e6356f053557da9fce91f6dcac8ccbe5b003748"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/polymythcal-forced-colors.png",
+      "bytes": 62492,
+      "sha256": "2d5a6ea6d27e0dd827ff0b53a0ce7853959be89861d951a37575fe7219129277"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/polymythcal-landscape-short.png",
+      "bytes": 68102,
+      "sha256": "0c11a2db5db99ae1658b668ded9608fc5403fb96f7c0b9aac8ff3060d3d5659b"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/polymythcal-mobile-short.png",
+      "bytes": 67732,
+      "sha256": "4ec3b0dfaec17f22ac04baf80b8d7b10ba77d05164a58d67465bc6e995673833"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/route-resilience-browser-audit.json",
+      "bytes": 186848,
+      "sha256": "83be5591f02282a9aeeddea98aec68575d976ccfb6070a2ff5a5dec5fa212b1d"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/teacher-resources-desktop.png",
+      "bytes": 79950,
+      "sha256": "bbc8ebe12c662953d68d2a320e17c421bcc824cd61708a047da0224a51a7ab56"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/teacher-resources-forced-colors.png",
+      "bytes": 44806,
+      "sha256": "64d714f7ff8eedbffcc27eaedc720d573f052206013d59a4093f44767a4ecb83"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/teacher-resources-landscape-short.png",
+      "bytes": 39273,
+      "sha256": "6d66b443906db1a10a5a77c01d1db93f0f97fc97e6e6fa71af9bd8b5d9584892"
+    },
+    {
+      "path": "data/audit42-inherited-browser/routes/teacher-resources-mobile-short.png",
+      "bytes": 43049,
+      "sha256": "68a42452c94841de8ce5f499d9496cb711401a35a4fc98ff850219b498b5731f"
+    },
+    {
+      "path": "data/audit42-inherited-browser/run-summary.json",
+      "bytes": 1368,
+      "sha256": "31c2bc3030a6709b755eea89633b4171ac39e5050e8ad4cd9470608c405d16f1"
+    },
+    {
+      "path": "data/audit42-inherited-browser/runtime/runtime-continuity-browser-audit.json",
+      "bytes": 49956,
+      "sha256": "9d50a381efe3a46b3a6fb703c5355b17c429d1672ae4a86c13f78bc075aa112d"
+    },
+    {
+      "path": "data/audit42-inherited-browser/runtime/screenshots/deep-link-1.png",
+      "bytes": 154632,
+      "sha256": "765f786f55040d018be835e5773315d29502731426c327ded330802f1910eb14"
+    },
+    {
+      "path": "data/audit42-inherited-browser/runtime/screenshots/deep-link-2.png",
+      "bytes": 179290,
+      "sha256": "864aa4e44add0b45cc922b6c1245ec187aa14ec80752c42ecf68fd7e9ba79615"
+    },
+    {
+      "path": "data/audit42-inherited-browser/runtime/screenshots/deep-link-3.png",
+      "bytes": 346183,
+      "sha256": "4370bf7eb2b52902f59707631744298b12bf3ff430bc675b2156d7bd233ddadc"
+    },
+    {
+      "path": "data/audit42-inherited-browser/runtime/screenshots/deep-link-4.png",
+      "bytes": 373488,
+      "sha256": "47b5bd09e0255dd8f60244bd1801cb54a02bf40d043f05f8c69e18caa41865bc"
+    },
+    {
+      "path": "data/audit42-inherited-browser/runtime/screenshots/dm-board-mobile.png",
+      "bytes": 67317,
+      "sha256": "30304dccbd789c042bd0bb4e90d2b05e8553f086eeeb13d9b88b58e2328de89b"
+    },
+    {
+      "path": "data/audit42-inherited-browser/runtime/screenshots/teacher-resources-reset.png",
+      "bytes": 111727,
+      "sha256": "c65bc9cfe463a08385a292a7940f0069727073ba2671735c164294d4c15b1e01"
+    },
+    {
+      "path": "data/audit42-inherited-browser/stress/project-failure-stress.json",
+      "bytes": 4523,
+      "sha256": "88c085c02cf03a21963312d905bab20a6cfcde6820ab35a3eb9c889f4fd97d36"
+    },
+    {
+      "path": "data/audit42-inherited-browser/wcag/wcag22-browser-audit.json",
+      "bytes": 11355,
+      "sha256": "6a50e7759d01081d73901b554f5ff3cf65b6d470ff5bad87dc6e8d19ae3315a6"
+    },
+    {
+      "path": "data/audit42-inherited-browser/wcag/wcag22-browser-audit.md",
+      "bytes": 4827,
+      "sha256": "ec1d2bc3b0109f6a165bbac686a36e6ff62caa7cd6c6c796b69d24e5e86abb43"
+    },
+    {
+      "path": "data/audit42-multimode-browser/multimode-browser-audit.json",
+      "bytes": 71386,
+      "sha256": "17d44ed20de0c9bdb829154df917801199da69b4552416add07663702c72dfe2"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/foldable-landscape-bb.png",
+      "bytes": 88001,
+      "sha256": "e89b5c5d6ecb4b2fb1fa48e907677b4a0d0891307f9d670fe28986602c8707da"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/foldable-landscape-bookwormcard.png",
+      "bytes": 142684,
+      "sha256": "49678a96ed67cb53d0eace683a137daeb82a587b4d927b8d0c13145a0d46c562"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/foldable-landscape-home.png",
+      "bytes": 53699,
+      "sha256": "82f4298bbc328b716c654aa93ecbfec2d0d72e5dacfb1afae6a6541c14ad81a9"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/foldable-landscape-polymythcal.png",
+      "bytes": 69592,
+      "sha256": "1cbcec03ca742a08c582c14ea62d925917d312fa3231df7e74b31394378790d3"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/foldable-landscape-teacher-resources.png",
+      "bytes": 53391,
+      "sha256": "d00b1c95c7826efd39fb3c45eee8da5429a8243ac687ec1d946f84513f5e7a4a"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/foldable-landscape-thank-you-mam-pregame.png",
+      "bytes": 65379,
+      "sha256": "a54225f968fe21d36c42b8cbaa2627a70aeb49567c084dd440d15cf8f03c5b86"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/foldable-landscape-thank-you-mam.png",
+      "bytes": 133876,
+      "sha256": "c4ab213fe61b80e010e2b0e571d557644c37a810c209673e43c856452a1f778e"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/grayscale-polymythcal.png",
+      "bytes": 137158,
+      "sha256": "bd49b4aa5cea864d3f4a70867e16bd4538a15177ac586192c2b74546e75fed58"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/print-polymythcal.png",
+      "bytes": 144429,
+      "sha256": "109ca9f1545624b3378cf80d830fdff8c6f265bc25bd083a8565528a39380c56"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/reduced-transparency-home.png",
+      "bytes": 152066,
+      "sha256": "5de62d47f5c52701122c7d6d3c76f2f25b4f9ba7c54b3e1a23893e5146d0d213"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/reduced-transparency-leizu.png",
+      "bytes": 328496,
+      "sha256": "9e22f632d0535d5363fee3934ddacacedb5c65af2751cca2a257eb2be472cecb"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/reduced-transparency-polymythcal.png",
+      "bytes": 145268,
+      "sha256": "10ccbb6146c8fccbcfb128ea33f426aab8e8e4cf2534a0aa3325a96f877bd503"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/text-spacing-bookwormcard.png",
+      "bytes": 330677,
+      "sha256": "d2e10ebb9ec283257f095eda79667fbea2af884341c0bfd30a3450dbd32d1b73"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/text-spacing-polymythcal.png",
+      "bytes": 127488,
+      "sha256": "9bf1e3831deb7dd0449d95b5a9d41a1ed8b67b44250e659b5495a60faff9a35e"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/text-spacing-teacher-resources.png",
+      "bytes": 68919,
+      "sha256": "15aa46ff61caeaaea8b171c86ca8d2a5dd5ee1fbf873ff50b0c9e2bc755541d4"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/ultrawide-bb.png",
+      "bytes": 283945,
+      "sha256": "8df1d85389ae1ab33d88a15c40a7cb51af105ee40f5e28912ef436d48d989d63"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/ultrawide-bookwormcard.png",
+      "bytes": 400079,
+      "sha256": "80573de0e8ccae2c00bb14b6083ee1c3c431a3b3f471f9b3126aae8d507809ec"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/ultrawide-home.png",
+      "bytes": 182234,
+      "sha256": "de7748917ad05a3815dd0e88321c207b8beecc04602e8ba08ee027fdc8e36610"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/ultrawide-polymythcal.png",
+      "bytes": 159909,
+      "sha256": "ebc656d30c6fd4643e9909b2a71e6f964619eac01486e97e5b6b002b5e3ceee0"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/ultrawide-teacher-resources.png",
+      "bytes": 117136,
+      "sha256": "141dee5257436dd711ef508256b139263c6b9cae5756eb0b3734562d87a5a991"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/ultrawide-thank-you-mam-pregame.png",
+      "bytes": 150074,
+      "sha256": "01dd72f8a288a5ad0bf1c630ae51fb8c419f90ad70cebe9d68bb03f089d9fae7"
+    },
+    {
+      "path": "data/audit42-multimode-browser/screenshots/ultrawide-thank-you-mam.png",
+      "bytes": 527162,
+      "sha256": "198debb8170f42b97beefdf9216e835befbfc5bf26c1dab52c33537646fb9202"
+    },
+    {
+      "path": "data/audit42-site-inventory.json",
+      "bytes": 1050201,
+      "sha256": "e9afb5300d82b40f8c6603877c67b4900d378a6ce9d9c8e3524cc2a4976fbeff"
+    },
+    {
+      "path": "data/audit42-symbol-vocabulary-inventory.json",
+      "bytes": 297458,
+      "sha256": "d0b1edfad19dfa8c9c5de7e3c3eecbf64208ddb021cc47078a50147e00e04a3b"
+    },
+    {
+      "path": "data/audit42-visual-baseline.json",
+      "bytes": 672243,
+      "sha256": "c6a2fcc17d10339367d00502db3c3c885a513d72874caf6bbcc4ca27c86d4379"
+    },
+    {
+      "path": "scripts/__pycache__/audit42-multimode-browser.cpython-312.pyc",
+      "bytes": 59616,
+      "sha256": "7720b734739907a0684fd21538c19c57bc0b24805bcb7a7b4cba9b3a9119ac08"
+    },
+    {
+      "path": "scripts/__pycache__/run-audit42-inherited-browser-all.cpython-312.pyc",
+      "bytes": 4880,
+      "sha256": "f31561ae2ddb72e1619921c198e7b7f20d62d6d34553d9c0c7b11e70cd7ea3e3"
+    },
+    {
+      "path": "scripts/__pycache__/run-audit42-inherited-browser.cpython-312.pyc",
+      "bytes": 18004,
+      "sha256": "0457a817f1dba7e50e9bbca8d01f2ded296fd2e233283f00e17982ec05a63ff4"
+    },
+    {
+      "path": "scripts/apply-audit42-release-stamp.js",
+      "bytes": 8455,
+      "sha256": "2acd6bf4171881e11b7537f48e7f58f37701d27addf29d12a792caed5afbfce1"
+    },
+    {
+      "path": "scripts/audit42-multimode-browser.py",
+      "bytes": 50956,
+      "sha256": "e6eec0032eefa26d80d0223e52cbbdcbaccd015e62835c964f9245787adfaed6"
+    },
+    {
+      "path": "scripts/build-audit42-design-token-inventory.js",
+      "bytes": 21308,
+      "sha256": "2fa9ada52f8752c5e369fc6c899033105ee0ad79c0bcd83e42a1f1cbfb9acebf"
+    },
+    {
+      "path": "scripts/build-audit42-editorial-density-inventory.js",
+      "bytes": 14451,
+      "sha256": "ff4db8774a1a2d91202723c99698b8ae7ad7617a5599e8eb3eb6fcb747e30de2"
+    },
+    {
+      "path": "scripts/build-audit42-site-inventory.js",
+      "bytes": 6097,
+      "sha256": "f4e9714822349ede3afa88f44e6b5c2d8b926e0cefe613517b6cdbce12ffb8f1"
+    },
+    {
+      "path": "scripts/build-audit42-symbol-vocabulary-inventory.js",
+      "bytes": 20319,
+      "sha256": "95b5538b71355c25b4fe08afcd145cbfd2bb8ed56c763d36f0ade631596c9931"
+    },
+    {
+      "path": "scripts/build-audit42-visual-baseline.js",
+      "bytes": 4643,
+      "sha256": "30c176b21fda508fd86bf0e37a44fc3826baf5112b7d3d312dc4e77e4769f571"
+    },
+    {
+      "path": "scripts/lib/audit42-png-signature.js",
+      "bytes": 12535,
+      "sha256": "a2b22f11bf901d3d491fb53df557f82b7aeb4b617d16157bbf41723922eaf468"
+    },
+    {
+      "path": "scripts/run-audit42-inherited-browser-all.py",
+      "bytes": 2847,
+      "sha256": "f150007b2f5b900f7c422b7d79a68b84af338f2fba9f393ba012b0da0b7962ab"
+    },
+    {
+      "path": "scripts/run-audit42-inherited-browser.py",
+      "bytes": 16170,
+      "sha256": "f65ae1380eae2b444adaee7989ffe45001ee642c1719e80f619ac205865f55c9"
+    },
+    {
+      "path": "scripts/test-audit42-visual-baseline.js",
+      "bytes": 2329,
+      "sha256": "179bc30abdf8b64c675abd5c71e17c922c68f7f5301a1ac3514712a28ee1666b"
+    },
+    {
+      "path": "scripts/verify-audit42-browser-evidence.js",
+      "bytes": 11868,
+      "sha256": "e941016fbe05d82f28a44a428f5a4b6a0a8ee7f4c8e497fef5334483145bb671"
+    },
+    {
+      "path": "scripts/verify-audit42-inherited-browser-evidence.js",
+      "bytes": 14497,
+      "sha256": "ac287c6aa99e63bddc12e4d3c59fbf73593c9c6f86f52cd69fb65c05c5600ca5"
+    },
+    {
+      "path": "scripts/verify-audit42-ledger-closure.js",
+      "bytes": 19918,
+      "sha256": "4086ca2f7e4ab862513b499bb9e0be8bdf5bd3690d6ba269377502eaaa3fede4"
+    },
+    {
+      "path": "scripts/verify-audit42-visual-baseline.js",
+      "bytes": 3015,
+      "sha256": "a9e623bf442762f92c0714456d53af9a8f1c2734b14729a975c05285a38c4bb6"
+    }
+  ]
+}

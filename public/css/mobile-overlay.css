@@ -18,6 +18,9 @@
    children. The overlay does not touch desktop layouts that already
    work — only stops the page from being wider than the viewport. */
 html, body { max-width: 100%; overflow-x: hidden; }
+@supports (overflow: clip) {
+  html, body { overflow-x: clip; }
+}
 
 /* Replaced and embedded content cannot exceed the viewport on any
    device. Targets the most common mobile-overflow culprits. */

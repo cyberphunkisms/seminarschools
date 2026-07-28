@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0",
+  "release_date": "2026-07-28",
+  "target": "ML* / polymyth/methodologylist",
+  "baseline_entry_count": 1145,
+  "integrated_entry_count": 23,
+  "release_entry_count": 1168,
+  "sources": [
+    {
+      "supplied_name": "mythology integration project(2).pdf",
+      "stored_path": "data/author-sources/mythology-integration-project-249pp-2026-07-28.pdf",
+      "extracted_path": "data/author-sources/mythology-integration-project-249pp-extracted-2026-07-28.txt",
+      "sha256": "6d13bdf796ca47080d25cf0fd96f4ddec6dcb035f5f0f28adde8f98932797599",
+      "pages": 249,
+      "extracted_words": 114515,
+      "audit": {
+        "ledger_path": "docs/ml-mythology-integration-audit-2026-07-28/pdf1-ledger.md",
+        "ledger_sha256": "ee59e565f73af9c200645b88e87ca9a8407044f25bb312db95aaeb371e02d054",
+        "rows": 120,
+        "integrate": 50,
+        "preserve_source_note": 55,
+        "defer": 15,
+        "external_leads": 24
+      }
+    },
+    {
+      "supplied_name": "here is mythology project we are going to be working on_ working on a project centered on mythology as the primary focus(1).pdf",
+      "stored_path": "data/author-sources/mythology-project-10pp-2026-07-28.pdf",
+      "extracted_path": "data/author-sources/mythology-project-10pp-extracted-2026-07-28.txt",
+      "sha256": "521dad30ec03be00c449529453b2b3aa66180f1000e6734827f029a8f3fbb405",
+      "pages": 10,
+      "extracted_words": 2870,
+      "audit": {
+        "ledger_path": "docs/ml-mythology-integration-audit-2026-07-28/pdf2-ledger.md",
+        "ledger_sha256": "cfb096c498337e911ad5a3b88229ac5070b30fbce7c52b2185e15d9ac1038e5e",
+        "ideas": 104,
+        "integrate": 24,
+        "preserve_source_note": 62,
+        "defer": 18
+      }
+    },
+    {
+      "supplied_name": "Pasted text(57).txt",
+      "stored_path": "polymyth/research/mythology-integration-project-selected-ledger-2026-07-28.txt",
+      "sha256": "aae923dba847c3852b46e8a3db88eaf02a0b60563c4294ccfada768a1515f843",
+      "lines": 511,
+      "words": 8011,
+      "atomic_records": 501,
+      "status_counts": {
+        "C": 209,
+        "C/Q": 54,
+        "C/P": 12,
+        "C/P/Q": 8,
+        "Q": 120,
+        "P": 8,
+        "P/Q": 14,
+        "Q/P": 2,
+        "X": 74
+      }
+    },
+    {
+      "supplied_name": "Pasted text (2)(6).txt",
+      "stored_path": "polymyth/research/mezo-logic-lucas-six-film-source-2026-07-28.txt",
+      "sha256": "8b8c361d304b935641eae128cb05dd6019851a15034d9ba14ebc7320f97b8e3a",
+      "lines": 512,
+      "words": 4284,
+      "source_roles": {
+        "user_prompts": 4,
+        "assistant_blocks": 4
+      },
+      "authority_note": "The user introduced Mezo logic and stated that comparison requires prior internal consistency. The detailed workflow and Lucas six-film verdict remain provenance-labelled assistant analysis unless independently ratified."
+    }
+  ],
+  "integration": {
+    "source_path": "polymyth/methodologylist/mythology-integration-addendum.js",
+    "parser_path": "scripts/lib/parse-seed-with-addenda.js",
+    "audit_ledger_path": "docs/ml-mythology-integration-audit-2026-07-28/pastes-and-source-ledger.md",
+    "audit_ledger_sha256": "1a7d19e050fd4f1f07c8c87945852059c632ef146663fa28e7c6880e2e88bac3",
+    "policy": [
+      "Confirmed operations may enter active ML* after duplicate and conflict review.",
+      "Questions remain studylist or pending.",
+      "Proposals remain proposals.",
+      "Exclusions remain negative controls.",
+      "Assistant synthesis never becomes direct user canon through repetition.",
+      "Later direct user corrections control older source layers."
+    ]
+  },
+  "held_conflicts": [
+    "The older 10-page retrospective restricts Spinoza differently from current ML*; current direct canon remains controlling.",
+    "Older Point and closure material is superseded and remains source history.",
+    "The older PDF does not identify the Philosopher's Stone with the sun or rays with perspectives; later direct canon remains controlling.",
+    "The Lucas six-film Force verdict remains provisional pending a primary-film audit.",
+    "Unratified assistant motives, mappings, names, and faction roles remain proposals or questions."
+  ],
+  "scope_lock": {
+    "cv_changed": false,
+    "saul_subtree_policy": "The saul/ and public/saul/ trees must remain byte-identical to the audited 2026-07-27 baseline."
+  }
+}

@@ -1,0 +1,41 @@
+/* Audit 45 — compact language-specific fallbacks.
+ * Remote fonts remain an enhancement; readable system fonts are always next. */
+html[lang^="zh-Hant"] body,
+[lang^="zh-Hant"] {
+  font-family: "Noto Serif TC", "Songti TC", "Songti SC", STSong,
+    "Microsoft JhengHei", MingLiU, serif;
+}
+
+html[lang^="zh-Hans"] body,
+[lang^="zh-Hans"] {
+  font-family: "Noto Serif SC", "Songti SC", STSong, SimSun,
+    "Microsoft YaHei", sans-serif;
+}
+
+html[lang^="fa"] body,
+[lang^="fa"] {
+  font-family: Vazirmatn, "Noto Naskh Arabic", "Noto Sans Arabic",
+    Tahoma, Arial, sans-serif;
+}
+
+html[lang^="fa"] {
+  text-underline-position: under;
+}
+
+html[lang^="zh"] input,
+html[lang^="zh"] textarea,
+html[lang^="zh"] select,
+html[lang^="zh"] button,
+html[lang^="fa"] input,
+html[lang^="fa"] textarea,
+html[lang^="fa"] select,
+html[lang^="fa"] button {
+  font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .audit45-localized-summary,
+  .ss-foot {
+    scroll-behavior: auto;
+  }
+}

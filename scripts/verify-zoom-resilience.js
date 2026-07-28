@@ -7,11 +7,12 @@
 */
 const fs = require('fs');
 const path = require('path');
+const { isGeneratedDependencyDirectory } = require('./repository-walk-policy');
 const ROOT = path.resolve(__dirname, '..');
 const SKIP = new Set(['.git', 'node_modules', '.netlify', 'public', 'fixtures']);
 function walk(dir, acc = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (SKIP.has(e.name)) continue;
+    if (SKIP.has(e.name) || isGeneratedDependencyDirectory(e.name)) continue;
     const full = path.join(dir, e.name);
     if (e.isDirectory()) walk(full, acc);
     else if (e.isFile() && e.name.endsWith('.html')) acc.push(full);
@@ -32,7 +33,7 @@ else {
     ['global min-width:0 guard', /min-width:\s*0/],
     ['text wrapping guard', /overflow-wrap:\s*(break-word|anywhere)/],
     ['replaced media max-width guard', /img,\s*svg,\s*video,\s*canvas,\s*iframe/],
-    ['Indra layer zoom guard', /#indraLayer\s*\{[\s\S]*inset:\s*-14vmax/],
+    ['Indra layer zoom guard', /#indraLayer\s*\{[\s\S]*inset:\s*-\d+(?:\.\d+)?vmax/],
     ['900px zoom media query', /@media\s*\(max-width:\s*900px\)/],
     ['760px one-column reflow query', /@media\s*\(max-width:\s*760px\)/],
     ['calendar event unwrap rule', /\.cal-ev[\s\S]*white-space:\s*normal/]

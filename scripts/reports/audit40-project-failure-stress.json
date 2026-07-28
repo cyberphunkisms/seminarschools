@@ -1,0 +1,155 @@
+{
+  "audit": 40,
+  "release_id": "2026-07-24-site-audit40-browser-runtime-continuity-final",
+  "generated_at": "2026-07-24T23:55:43-04:00",
+  "executed_at": "2026-07-25T03:59:18+00:00",
+  "release": "Audit40 project failure-mode and stress",
+  "checks_passed": 27,
+  "checks_total": 27,
+  "checks_failed": 0,
+  "results": [
+    {
+      "name": "Canonical Polymythcal inventory remains 838",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Teacher source inventory remains 644",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Polymythcal keeps 24-item initial batch",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Polymythcal duplicate evaluation is inert",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Polymythcal reports storage quota fallback honestly",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Polymythcal quota mode has no script errors",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Impossible Polymythcal date triggers one bounded retry",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Valid retry restores the full UI batch",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Polymythcal network failure makes exactly two attempts",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Polymythcal falls back to a validated last-good copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Cached Polymythcal data is visibly labelled",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Slow Polymythcal requests time out twice, then stop",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Failed load clears busy state",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Visible retry recovers without reloading the page",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Timeout and recovery have no page errors",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Interrupted navigation aborts the in-flight calendar request",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Teacher Resources preserves all 644 server-rendered cards",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Corrupt saved filter shapes are ignored",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Teacher Resources continues in URL-only mode when storage is full",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Teacher finder duplicate evaluation adds no chips",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "A duplicated finder does not double-toggle a filter",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Copied view survives history API failure",
+      "passed": true,
+      "detail": "http://audit.local/teacherresources/?subject=ela%2Cmath"
+    },
+    {
+      "name": "Rapid search settles on the latest query",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Rapid search produces a coherent nonempty result",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Teacher finder restores an interrupted back-forward-cache search",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Repeated expand/collapse ends in a coherent state",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Teacher failure/stress run has no page errors",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "invariants": {
+    "polymythcal_records": 838,
+    "polymythcal_event_types": 32,
+    "teacher_resources": 644,
+    "teacher_collections": 25,
+    "teacher_groups": 7,
+    "scraper_cadence_changed": false
+  }
+}

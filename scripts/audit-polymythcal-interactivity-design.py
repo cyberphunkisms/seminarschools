@@ -5,6 +5,7 @@ import json
 import os
 import re
 import subprocess
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import quote
 
@@ -15,12 +16,12 @@ ROOT = Path(__file__).resolve().parents[1]
 RELEASE = json.loads((ROOT / 'RELEASE_MANIFEST.json').read_text(encoding='utf-8'))
 RELEASE_TIMESTAMP = RELEASE.get('generated_at') or '1970-01-01T00:00:00Z'
 CAPTURE_SCREENSHOTS = os.environ.get('POLYMYTHCAL_AUDIT_SCREENSHOTS', '').strip() == '1'
-OUT = ROOT / "data" / "polymythcal-audit21"
+OUT = ROOT / "data" / "polymythcal-audit35"
 OUT.mkdir(parents=True, exist_ok=True)
 RESULTS: list[dict] = []
 
 
-def resolve_chromium_path(browser_type) -> str:
+def resolve_chromium_path(browser_type) -> str | None:
     configured = os.environ.get("CHROMIUM_PATH", "").strip()
     candidates = [configured, "/usr/bin/chromium", "/usr/bin/chromium-browser", "/usr/bin/google-chrome", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"]
     for candidate in candidates:
@@ -28,8 +29,19 @@ def resolve_chromium_path(browser_type) -> str:
             return candidate
     managed = getattr(browser_type, "executable_path", "")
     if managed and Path(managed).exists():
-        return managed
+        # Let Playwright choose its purpose-built headless shell. Passing the
+        # managed full-Chrome path explicitly bypasses that selection and can
+        # fail inside otherwise supported CI/container sandboxes.
+        return None
     raise FileNotFoundError("Chromium was not found. Set CHROMIUM_PATH or run: python -m playwright install chromium")
+
+
+def launch_chromium(browser_type):
+    options = {"headless": True, "args": ["--no-sandbox", "--disable-dev-shm-usage"]}
+    explicit_path = resolve_chromium_path(browser_type)
+    if explicit_path:
+        options["executable_path"] = explicit_path
+    return browser_type.launch(**options)
 
 
 def check(name: str, condition: bool, detail: str = "") -> None:
@@ -45,7 +57,7 @@ def browser_assets():
         node.decompose()
     css = "\n".join(
         (ROOT / rel).read_text(encoding="utf-8")
-        for rel in ["css/theme.css", "css/alive.css", "css/site-wide-type-zoom.css", "css/polymythcal-revamp.css"]
+        for rel in ["css/theme.css", "css/alive.css", "css/site-wide-type-zoom.css", "css/polymythcal-revamp.css", "css/calm-ux.css"]
         if (ROOT / rel).exists()
     )
     payload = json.loads((ROOT / "polymythseminars" / "events.json").read_text(encoding="utf-8"))
@@ -55,6 +67,7 @@ def browser_assets():
 
 def load_browser_page(page, html, css, payload, app_js, lang="en", search=None):
     page.set_content(html, wait_until="domcontentloaded")
+    page.evaluate("document.documentElement.setAttribute('data-motion', 'calm')")
     page.add_style_tag(content=css)
     page.evaluate("""data => {
       window.__pmStore = {};
@@ -82,6 +95,12 @@ def count_from_title(text: str) -> int:
     if not match:
         return 0
     return int(re.sub(r"\D", "", match.group(1)))
+
+
+def fill_search(page, value: str) -> None:
+    page.locator("#pmSearch").fill(value)
+    # The production interface debounces the large results render by 110 ms.
+    page.wait_for_timeout(180)
 
 
 page_path = ROOT / "polymythseminars" / "index.html"
@@ -124,10 +143,10 @@ check("all public event routes exist", not missing_public_routes, f"missing {len
 BROWSER_HTML, BROWSER_CSS, BROWSER_PAYLOAD, BROWSER_JS = browser_assets()
 
 with sync_playwright() as p:
-    browser = p.chromium.launch(headless=True, executable_path=resolve_chromium_path(p.chromium), args=["--no-sandbox", "--disable-dev-shm-usage"])
+    browser = launch_chromium(p.chromium)
 
     # Desktop interaction and logic audit.
-    print("AUDIT21 desktop start", flush=True)
+    print("AUDIT35 desktop start", flush=True)
     context = browser.new_context(viewport={"width": 1440, "height": 1000}, timezone_id="America/Toronto")
     page = context.new_page()
     errors: list[str] = []
@@ -136,10 +155,12 @@ with sync_playwright() as p:
     load_browser_page(page, BROWSER_HTML, BROWSER_CSS, BROWSER_PAYLOAD, BROWSER_JS)
     initial_count = count_from_title(page.locator("#pmResultsTitle").inner_text())
     check("initial results load", initial_count > 0, str(initial_count))
-    check("initial render is paginated", page.locator(".pm-event-card").count() == 50, str(page.locator(".pm-event-card").count()))
-    check("default reset action is absent rather than dead", page.locator("#pmResetFilters").is_hidden())
-    check("empty current-choices panel is removed from the layout", page.locator("#pmActivePanel").is_hidden())
-    check("dataset-empty opportunity categories stay hidden", page.locator('input[value="applications"][data-state-set="opportunityTypes"]').locator("xpath=..").is_hidden() and page.locator('input[value="other-opportunities"][data-state-set="opportunityTypes"]').locator("xpath=..").is_hidden())
+    check("initial render is paginated", page.locator(".pm-event-card").count() == 24, str(page.locator(".pm-event-card").count()))
+    reset_box = page.locator("#pmResetFilters").bounding_box()
+    reset_visibility = page.locator("#pmResetFilters").evaluate("el => getComputedStyle(el).visibility")
+    check("default reset action reserves space without presenting a dead control", reset_box is not None and reset_visibility == "hidden" and page.locator("#pmResetFilters").is_disabled(), f"box={reset_box}, visibility={reset_visibility}")
+    check("empty current-choices panel keeps a stable footprint", page.locator("#pmActivePanel").is_visible() and "is-empty" in (page.locator("#pmActivePanel").get_attribute("class") or ""))
+    check("dataset-empty opportunity categories stay visible and disabled", page.locator('input[value="applications"][data-state-set="opportunityTypes"]').locator("xpath=..").is_visible() and page.locator('input[value="applications"][data-state-set="opportunityTypes"]').is_disabled() and page.locator('input[value="other-opportunities"][data-state-set="opportunityTypes"]').locator("xpath=..").is_visible() and page.locator('input[value="other-opportunities"][data-state-set="opportunityTypes"]').is_disabled())
     check("fellowship filter remains visible and clickable", page.locator('input[value="funding"][data-state-set="opportunityTypes"]').is_visible() and not page.locator('input[value="funding"][data-state-set="opportunityTypes"]').is_disabled())
 
     # Multi-select and logic.
@@ -163,7 +184,8 @@ with sync_playwright() as p:
 
     # Search quality.
     page.locator("#pmResetFilters").click()
-    page.locator("#pmSearch").fill("montral")
+    fill_search(page, "montral")
+    page.wait_for_timeout(180)
     fuzzy_count = count_from_title(page.locator("#pmResultsTitle").inner_text())
     check("typo-tolerant Montréal search works", fuzzy_count > 0, str(fuzzy_count))
     check("save-search action activates for a meaningful view", page.locator("#pmSaveSearch").is_enabled())
@@ -178,8 +200,8 @@ with sync_playwright() as p:
     page.locator("#pmClearSearch").click()
     check("clear-search empties query and restores results", page.locator("#pmSearch").input_value() == "" and count_from_title(page.locator("#pmResultsTitle").inner_text()) == initial_count)
 
-    page.locator("#pmSearch").fill("À l’écoute des archives")
-    page.wait_for_timeout(100)
+    fill_search(page, "À l’écoute des archives")
+    page.wait_for_timeout(180)
     meta = page.locator(".pm-event-meta").first.inner_text()
     check("placeholder venues are cleaned from cards", "Lieu non confirmé" not in meta and "Location unconfirmed" not in meta, meta)
     page.locator("#pmClearSearch").click()
@@ -217,10 +239,10 @@ with sync_playwright() as p:
 
     # Date-only parsing and ongoing presentation in Toronto timezone.
     page.locator("#pmResetFilters").click()
-    page.locator("#pmSearch").fill("Game On! Exhibition")
+    fill_search(page, "Game On! Exhibition")
     check("ongoing listings are labelled as ongoing", page.locator(".pm-date-status").first.inner_text().strip().lower() == "ongoing")
     page.locator("#pmClearSearch").click()
-    page.locator("#pmSearch").fill("BollywoodMonster Mashup 2026")
+    fill_search(page, "BollywoodMonster Mashup 2026")
     source_event = next(event for event in events if "BollywoodMonster Mashup 2026" in event.get("title", ""))
     rendered_date = page.locator(".pm-date-box").first.get_attribute("datetime")
     check("date-only values do not shift a day in Toronto", rendered_date == source_event["date"][:10], f"rendered {rendered_date}, source {source_event['date']}")
@@ -230,7 +252,7 @@ with sync_playwright() as p:
     page.locator('[data-view="calendar"]').click()
     check("desktop calendar renders 42 day cells", page.locator(".pm-calendar-day").count() == 42)
     check("desktop calendar grid is visible", page.locator(".pm-calendar-grid-view").evaluate("el => getComputedStyle(el).display") != "none")
-    check("calendar status describes the whole matching view", "Showing 50" not in page.locator("#pmStatus").inner_text() and "calendar view" in page.locator("#pmStatus").inner_text())
+    check("calendar status describes the whole matching view", "Showing 24" not in page.locator("#pmStatus").inner_text() and "calendar view" in page.locator("#pmStatus").inner_text())
     check("multi-day listings are consolidated above the grid", page.locator(".pm-calendar-running").count() == 1 and not page.locator(".pm-calendar-running").evaluate("el => el.open"))
     day_link_counts = page.locator(".pm-calendar-day").evaluate_all("els => els.map(el => el.querySelectorAll('a').length)")
     check("calendar days begin compact", max(day_link_counts or [0]) <= 3, str(max(day_link_counts or [0])))
@@ -255,10 +277,10 @@ with sync_playwright() as p:
         page.screenshot(path=str(OUT / "desktop-final.png"), full_page=False)
     check("desktop run has no script errors", not errors, " | ".join(errors))
     context.close()
-    print("AUDIT21 desktop complete", flush=True)
+    print("AUDIT35 desktop complete", flush=True)
 
     # French interface and dynamic labels.
-    print("AUDIT21 French start", flush=True)
+    print("AUDIT35 French start", flush=True)
     context = browser.new_context(viewport={"width": 1100, "height": 900}, timezone_id="America/Toronto")
     page = context.new_page()
     load_browser_page(page, BROWSER_HTML, BROWSER_CSS, BROWSER_PAYLOAD, BROWSER_JS, lang="fr")
@@ -266,10 +288,10 @@ with sync_playwright() as p:
     page.locator('input[value="philosophy"][data-state-set="topics"]').check()
     active_text = page.locator('[data-remove-filter="topics"]').first.inner_text()
     check("French active choices remain translated", "Philosophie" in active_text, active_text)
-    page.locator("#pmSearch").fill("philosophie")
+    fill_search(page, "philosophie")
     check("French concept search works", count_from_title(page.locator("#pmResultsTitle").inner_text()) > 0)
     context.close()
-    print("AUDIT21 French complete", flush=True)
+    print("AUDIT35 French complete", flush=True)
 
     # Calendar dates and upcoming counts use the corridor timezone rather than the viewer timezone.
     context = browser.new_context(viewport={"width": 1000, "height": 800}, timezone_id="UTC")
@@ -279,7 +301,7 @@ with sync_playwright() as p:
     context.close()
 
     # Mobile interaction, reflow, focus and agenda design.
-    print("AUDIT21 mobile start", flush=True)
+    print("AUDIT35 mobile start", flush=True)
     for width, height, name in [(390, 844, "mobile"), (320, 800, "small-mobile")]:
         context = browser.new_context(viewport={"width": width, "height": height}, timezone_id="America/Toronto", reduced_motion="reduce")
         page = context.new_page()
@@ -288,9 +310,12 @@ with sync_playwright() as p:
         load_browser_page(page, BROWSER_HTML, BROWSER_CSS, BROWSER_PAYLOAD, BROWSER_JS)
         check(f"{name} filter drawer starts collapsed", not page.locator("#pmFilterDrawer").evaluate("el => el.open"))
         check(f"{name} quick starts begin collapsed", not page.locator("#pmQuickStarts").evaluate("el => el.open"))
-        check(f"{name} empty active panel stays out of the way", page.locator("#pmActivePanel").is_hidden())
+        check(f"{name} empty active panel keeps a stable footprint", page.locator("#pmActivePanel").is_visible() and "is-empty" in (page.locator("#pmActivePanel").get_attribute("class") or ""))
         widths = page.evaluate("[document.documentElement.scrollWidth, document.documentElement.clientWidth]")
-        check(f"{name} has no horizontal page overflow", widths[0] == widths[1], str(widths))
+        # A stable scrollbar gutter can make scrollWidth smaller than
+        # clientWidth in headless Chromium. Only excess scroll width is
+        # overflow; exact equality is not required.
+        check(f"{name} has no horizontal page overflow", widths[0] <= widths[1] + 1, str(widths))
         result_y = page.locator("#pmResultsTitle").bounding_box()["y"]
         check(f"{name} reaches results without a filter wall", result_y < 900, str(result_y))
         page.locator("#pmMobileFilters").click()
@@ -301,7 +326,7 @@ with sync_playwright() as p:
         page.locator("#pmMobileResults").click()
         page.locator('[data-view="calendar"]').click()
         check(f"{name} calendar uses vertical agenda", page.locator(".pm-calendar-agenda").evaluate("el => getComputedStyle(el).display") != "none")
-        check(f"{name} calendar status avoids list pagination language", "Showing 50" not in page.locator("#pmStatus").inner_text())
+        check(f"{name} calendar status avoids list pagination language", "Showing 24" not in page.locator("#pmStatus").inner_text())
         if page.locator(".pm-calendar-running").count():
             check(f"{name} multi-day panel starts collapsed", not page.locator(".pm-calendar-running").evaluate("el => el.open"))
         check(f"{name} desktop calendar grid is hidden", page.locator(".pm-calendar-grid-view").evaluate("el => getComputedStyle(el).display") == "none")
@@ -317,10 +342,10 @@ with sync_playwright() as p:
         check(f"{name} run has no script errors", not mobile_errors, " | ".join(mobile_errors))
         context.close()
 
-    print("AUDIT21 mobile complete", flush=True)
+    print("AUDIT35 mobile complete", flush=True)
 
     # Forced-colour resilience.
-    print("AUDIT21 forced-colour start", flush=True)
+    print("AUDIT35 forced-colour start", flush=True)
     context = browser.new_context(viewport={"width": 1000, "height": 800}, forced_colors="active")
     page = context.new_page()
     load_browser_page(page, BROWSER_HTML, BROWSER_CSS, BROWSER_PAYLOAD, BROWSER_JS)
@@ -332,12 +357,18 @@ with sync_playwright() as p:
     browser.close()
 
 report = {
-    "release": "PolymythCAL Audit 21 end-to-end interaction and design verification",
-    "date": "2026-07-22",
+    "audit": 35,
+    "release": "PolymythCAL Audit 35 end-to-end interaction and design verification",
+    "release_id": RELEASE.get("release_id"),
+    "generated_at": RELEASE_TIMESTAMP,
+    "executed_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     "checks_passed": sum(1 for item in RESULTS if item["passed"]),
     "checks_total": len(RESULTS),
     "results": RESULTS,
 }
-report_path = ROOT / "POLYMYTHCAL_AUDIT21_INTERACTION_DESIGN_VERIFICATION_2026-07-22.json"
-report_path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
+report_path = OUT / "interaction-design-browser-audit.json"
+report_path.write_text(
+    json.dumps(report, indent=2, ensure_ascii=False) + "\n",
+    encoding="utf-8",
+)
 print(json.dumps({"passed": report["checks_passed"], "total": report["checks_total"]}))

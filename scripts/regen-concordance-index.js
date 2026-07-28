@@ -17,6 +17,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const {parseSeedWithAddenda} = require('./lib/parse-seed-with-addenda');
 
 const argv = process.argv.slice(2);
 const dryRun = argv.includes('--dry-run');
@@ -102,7 +103,9 @@ for (const src of SOURCES) {
     console.log('Skipping', src.id, '- file not found:', fullPath);
     continue;
   }
-  const seed = parseSeedArray(fullPath);
+  const seed = src.id === 'ml'
+    ? parseSeedWithAddenda(fs.readFileSync(fullPath, 'utf8'))
+    : parseSeedArray(fullPath);
   console.log('Parsed', seed.length, 'entries from', src.id + '*');
   totalEntries += seed.length;
 

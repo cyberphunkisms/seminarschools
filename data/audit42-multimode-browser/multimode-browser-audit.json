@@ -1,0 +1,2338 @@
+{
+  "audit": 42,
+  "release": "Audit 42 multimode maintenance closure",
+  "release_id": "2026-07-25-site-audit42-ledger-closure-multimode-final",
+  "generated_at": "2026-07-25T11:05:10-04:00",
+  "executed_at": "2026-07-25T16:01:11.659258Z",
+  "browser": "Chromium 138.0.7204.23",
+  "engine": "Chromium",
+  "browser_program_sha256": "e6eec0032eefa26d80d0223e52cbbdcbaccd015e62835c964f9245787adfaed6",
+  "checks_total": 367,
+  "checks_passed": 367,
+  "checks_failed": 0,
+  "results": [
+    {
+      "name": "ultrawide home: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "ultrawide home: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "ultrawide home: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "ultrawide home: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "ultrawide home: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide home: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide home: long-task regression budget",
+      "passed": true,
+      "detail": "0.0ms / 250ms"
+    },
+    {
+      "name": "ultrawide polymythcal: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "ultrawide polymythcal: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "ultrawide polymythcal: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "ultrawide polymythcal: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "ultrawide polymythcal: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide polymythcal: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide polymythcal: long-task regression budget",
+      "passed": true,
+      "detail": "0.0ms / 250ms"
+    },
+    {
+      "name": "ultrawide teacher-resources: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "ultrawide teacher-resources: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "ultrawide teacher-resources: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "ultrawide teacher-resources: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "ultrawide teacher-resources: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide teacher-resources: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide teacher-resources: long-task regression budget",
+      "passed": true,
+      "detail": "0.0ms / 250ms"
+    },
+    {
+      "name": "ultrawide bb: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "ultrawide bb: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "ultrawide bb: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "ultrawide bb: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "ultrawide bb: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide bb: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide bb: long-task regression budget",
+      "passed": true,
+      "detail": "57.0ms / 250ms"
+    },
+    {
+      "name": "ultrawide bookwormcard: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "ultrawide bookwormcard: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "ultrawide bookwormcard: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 2}"
+    },
+    {
+      "name": "ultrawide bookwormcard: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "ultrawide bookwormcard: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide bookwormcard: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide bookwormcard: long-task regression budget",
+      "passed": true,
+      "detail": "0.0ms / 250ms"
+    },
+    {
+      "name": "ultrawide leizu: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "ultrawide leizu: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "ultrawide leizu: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "ultrawide leizu: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "ultrawide leizu: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide leizu: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide leizu: long-task regression budget",
+      "passed": true,
+      "detail": "119.0ms / 300ms"
+    },
+    {
+      "name": "ultrawide saul: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "ultrawide saul: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "ultrawide saul: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "ultrawide saul: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "ultrawide saul: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide saul: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide saul: long-task regression budget",
+      "passed": true,
+      "detail": "131.0ms / 250ms"
+    },
+    {
+      "name": "ultrawide aa: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "ultrawide aa: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "ultrawide aa: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "ultrawide aa: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "ultrawide aa: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide aa: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide aa: long-task regression budget",
+      "passed": true,
+      "detail": "97.0ms / 250ms"
+    },
+    {
+      "name": "ultrawide aitr: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "ultrawide aitr: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "ultrawide aitr: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "ultrawide aitr: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "ultrawide aitr: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide aitr: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide aitr: long-task regression budget",
+      "passed": true,
+      "detail": "59.0ms / 250ms"
+    },
+    {
+      "name": "ultrawide campaigncodex: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "ultrawide campaigncodex: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "ultrawide campaigncodex: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "ultrawide campaigncodex: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "ultrawide campaigncodex: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide campaigncodex: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide campaigncodex: long-task regression budget",
+      "passed": true,
+      "detail": "170.0ms / 350ms"
+    },
+    {
+      "name": "ultrawide methodology: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "ultrawide methodology: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "ultrawide methodology: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "ultrawide methodology: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "ultrawide methodology: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide methodology: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide methodology: long-task regression budget",
+      "passed": true,
+      "detail": "429.0ms / 700ms"
+    },
+    {
+      "name": "ultrawide thank-you-mam: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "ultrawide thank-you-mam: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "ultrawide thank-you-mam: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "ultrawide thank-you-mam: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "ultrawide thank-you-mam: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide thank-you-mam: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide thank-you-mam: long-task regression budget",
+      "passed": true,
+      "detail": "85.0ms / 250ms"
+    },
+    {
+      "name": "ultrawide thank-you-mam-pregame: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "ultrawide thank-you-mam-pregame: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "ultrawide thank-you-mam-pregame: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "ultrawide thank-you-mam-pregame: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "ultrawide thank-you-mam-pregame: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide thank-you-mam-pregame: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "ultrawide thank-you-mam-pregame: long-task regression budget",
+      "passed": true,
+      "detail": "80.0ms / 250ms"
+    },
+    {
+      "name": "foldable-landscape home: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "foldable-landscape home: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "foldable-landscape home: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "foldable-landscape home: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "foldable-landscape home: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape home: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape polymythcal: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "foldable-landscape polymythcal: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "foldable-landscape polymythcal: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "foldable-landscape polymythcal: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "foldable-landscape polymythcal: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape polymythcal: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape teacher-resources: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "foldable-landscape teacher-resources: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "foldable-landscape teacher-resources: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "foldable-landscape teacher-resources: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "foldable-landscape teacher-resources: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape teacher-resources: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape bb: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "foldable-landscape bb: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "foldable-landscape bb: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "foldable-landscape bb: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "foldable-landscape bb: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape bb: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape bookwormcard: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "foldable-landscape bookwormcard: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "foldable-landscape bookwormcard: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 2}"
+    },
+    {
+      "name": "foldable-landscape bookwormcard: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "foldable-landscape bookwormcard: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape bookwormcard: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape leizu: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "foldable-landscape leizu: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "foldable-landscape leizu: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "foldable-landscape leizu: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "foldable-landscape leizu: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape leizu: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape saul: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "foldable-landscape saul: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "foldable-landscape saul: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "foldable-landscape saul: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "foldable-landscape saul: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape saul: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape aa: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "foldable-landscape aa: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "foldable-landscape aa: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "foldable-landscape aa: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "foldable-landscape aa: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape aa: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape aitr: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "foldable-landscape aitr: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "foldable-landscape aitr: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "foldable-landscape aitr: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "foldable-landscape aitr: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape aitr: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape campaigncodex: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "foldable-landscape campaigncodex: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "foldable-landscape campaigncodex: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "foldable-landscape campaigncodex: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "foldable-landscape campaigncodex: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape campaigncodex: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape methodology: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "foldable-landscape methodology: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "foldable-landscape methodology: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "foldable-landscape methodology: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "foldable-landscape methodology: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape methodology: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape thank-you-mam: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "foldable-landscape thank-you-mam: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "foldable-landscape thank-you-mam: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "foldable-landscape thank-you-mam: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "foldable-landscape thank-you-mam: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape thank-you-mam: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape thank-you-mam-pregame: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "foldable-landscape thank-you-mam-pregame: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "foldable-landscape thank-you-mam-pregame: exactly one visible H1",
+      "passed": true,
+      "detail": "{'visible': 1, 'total': 1}"
+    },
+    {
+      "name": "foldable-landscape thank-you-mam-pregame: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "foldable-landscape thank-you-mam-pregame: fixed controls do not collide",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "foldable-landscape thank-you-mam-pregame: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "text spacing home: no page overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "text spacing home: no clipped reading text",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "text spacing polymythcal: no page overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "text spacing polymythcal: no clipped reading text",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "text spacing teacher-resources: no page overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "text spacing teacher-resources: no clipped reading text",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "text spacing bb: no page overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "text spacing bb: no clipped reading text",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "text spacing bookwormcard: no page overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "text spacing bookwormcard: no clipped reading text",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "text spacing leizu: no page overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "text spacing leizu: no clipped reading text",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "text spacing saul: no page overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "text spacing saul: no clipped reading text",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "text spacing campaigncodex: no page overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "text spacing campaigncodex: no clipped reading text",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "text spacing methodology: no page overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "text spacing methodology: no clipped reading text",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "reduced transparency home: preference emulated",
+      "passed": true,
+      "detail": "True"
+    },
+    {
+      "name": "reduced transparency home: backdrop filters removed",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "reduced transparency polymythcal: preference emulated",
+      "passed": true,
+      "detail": "True"
+    },
+    {
+      "name": "reduced transparency polymythcal: backdrop filters removed",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "reduced transparency teacher-resources: preference emulated",
+      "passed": true,
+      "detail": "True"
+    },
+    {
+      "name": "reduced transparency teacher-resources: backdrop filters removed",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "reduced transparency leizu: preference emulated",
+      "passed": true,
+      "detail": "True"
+    },
+    {
+      "name": "reduced transparency leizu: backdrop filters removed",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "reduced transparency saul: preference emulated",
+      "passed": true,
+      "detail": "True"
+    },
+    {
+      "name": "reduced transparency saul: backdrop filters removed",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "print polymythcal: every filtered result is rendered",
+      "passed": true,
+      "detail": "{'total': 19, 'cards': 19, 'filtersDisplay': 'none', 'sourceAfter': '\" (https://philevents.org/event/show/141342)\"'}"
+    },
+    {
+      "name": "print polymythcal: filter controls are removed",
+      "passed": true,
+      "detail": "none"
+    },
+    {
+      "name": "print polymythcal: external source URLs are exposed",
+      "passed": true,
+      "detail": "\" (https://philevents.org/event/show/141342)\""
+    },
+    {
+      "name": "print teacher resources: all 644 resources remain present",
+      "passed": true,
+      "detail": "644"
+    },
+    {
+      "name": "print teacher resources: finder controls are removed",
+      "passed": true,
+      "detail": "none"
+    },
+    {
+      "name": "print teacher resources: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "print event detail: action links remain readable",
+      "passed": true,
+      "detail": "{'links': 3, 'exposed': 3}"
+    },
+    {
+      "name": "print event detail: action destinations are exposed",
+      "passed": true,
+      "detail": "{'links': 3, 'exposed': 3}"
+    },
+    {
+      "name": "preferences home: explicit dark theme persists",
+      "passed": true,
+      "detail": "{'dark': True, 'fontScale': 1.15}"
+    },
+    {
+      "name": "preferences home: font scale persists",
+      "passed": true,
+      "detail": "1.15"
+    },
+    {
+      "name": "preferences polymythcal: explicit dark theme persists",
+      "passed": true,
+      "detail": "{'dark': True, 'fontScale': 1.15}"
+    },
+    {
+      "name": "preferences polymythcal: font scale persists",
+      "passed": true,
+      "detail": "1.15"
+    },
+    {
+      "name": "preferences teacher-resources: explicit dark theme persists",
+      "passed": true,
+      "detail": "{'dark': True, 'fontScale': 1.15}"
+    },
+    {
+      "name": "preferences teacher-resources: font scale persists",
+      "passed": true,
+      "detail": "1.15"
+    },
+    {
+      "name": "preferences bb: explicit dark theme persists",
+      "passed": true,
+      "detail": "{'dark': True, 'fontScale': 1.15}"
+    },
+    {
+      "name": "preferences bb: font scale persists",
+      "passed": true,
+      "detail": "1.15"
+    },
+    {
+      "name": "preferences saul: explicit dark theme persists",
+      "passed": true,
+      "detail": "{'dark': True, 'fontScale': 1.15}"
+    },
+    {
+      "name": "preferences saul: font scale persists",
+      "passed": true,
+      "detail": "1.15"
+    },
+    {
+      "name": "blocked preferences home: route remains operational",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "blocked preferences home: no uncaught storage error",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "blocked preferences polymythcal: route remains operational",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "blocked preferences polymythcal: no uncaught storage error",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "blocked preferences teacher-resources: route remains operational",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "blocked preferences teacher-resources: no uncaught storage error",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "keyboard polymythcal: slash focuses search",
+      "passed": true,
+      "detail": "pmSearch"
+    },
+    {
+      "name": "keyboard polymythcal: editable keys stay in the input",
+      "passed": true,
+      "detail": "ab/c"
+    },
+    {
+      "name": "keyboard polymythcal: modified slash is ignored",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "keyboard polymythcal: saved dialog opens",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "keyboard polymythcal: Escape closes saved dialog",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "keyboard teacher resources: slash focuses search",
+      "passed": true,
+      "detail": "search"
+    },
+    {
+      "name": "keyboard teacher resources: arrow stays in search",
+      "passed": true,
+      "detail": "search"
+    },
+    {
+      "name": "keyboard bookwormcard: listbox opens with active descendant",
+      "passed": true,
+      "detail": "{'expanded': 'true', 'active': 'bookwormcard-menu-option-1'}"
+    },
+    {
+      "name": "keyboard bookwormcard: active option is selected",
+      "passed": true,
+      "detail": "true"
+    },
+    {
+      "name": "no-JS home: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "no-JS home: semantic main and H1",
+      "passed": true,
+      "detail": "{'main': 1, 'h1': 1, 'text': 1069, 'links': 17, 'staticResourceEntries': 0, 'staticMethodologyEditions': 0, 'methodologyTextLinks': 0, 'overflow': 0}"
+    },
+    {
+      "name": "no-JS home: meaningful text remains",
+      "passed": true,
+      "detail": "1069"
+    },
+    {
+      "name": "no-JS home: links remain available",
+      "passed": true,
+      "detail": "17"
+    },
+    {
+      "name": "no-JS home: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "no-JS polymythcal: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "no-JS polymythcal: semantic main and H1",
+      "passed": true,
+      "detail": "{'main': 1, 'h1': 1, 'text': 2567, 'links': 18, 'staticResourceEntries': 0, 'staticMethodologyEditions': 0, 'methodologyTextLinks': 0, 'overflow': 0}"
+    },
+    {
+      "name": "no-JS polymythcal: meaningful text remains",
+      "passed": true,
+      "detail": "2567"
+    },
+    {
+      "name": "no-JS polymythcal: links remain available",
+      "passed": true,
+      "detail": "18"
+    },
+    {
+      "name": "no-JS polymythcal: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "no-JS teacher-resources: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "no-JS teacher-resources: semantic main and H1",
+      "passed": true,
+      "detail": "{'main': 1, 'h1': 1, 'text': 760, 'links': 685, 'staticResourceEntries': 644, 'staticMethodologyEditions': 0, 'methodologyTextLinks': 0, 'overflow': 0}"
+    },
+    {
+      "name": "no-JS teacher-resources: meaningful text remains",
+      "passed": true,
+      "detail": "760"
+    },
+    {
+      "name": "no-JS teacher-resources: links remain available",
+      "passed": true,
+      "detail": "685"
+    },
+    {
+      "name": "no-JS teacher-resources: all static resource links remain",
+      "passed": true,
+      "detail": "644"
+    },
+    {
+      "name": "no-JS teacher-resources: native disclosure reveals entries",
+      "passed": true,
+      "detail": "31"
+    },
+    {
+      "name": "no-JS teacher-resources: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "no-JS bb: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "no-JS bb: semantic main and H1",
+      "passed": true,
+      "detail": "{'main': 1, 'h1': 1, 'text': 2084, 'links': 10, 'staticResourceEntries': 0, 'staticMethodologyEditions': 0, 'methodologyTextLinks': 0, 'overflow': 0}"
+    },
+    {
+      "name": "no-JS bb: meaningful text remains",
+      "passed": true,
+      "detail": "2084"
+    },
+    {
+      "name": "no-JS bb: links remain available",
+      "passed": true,
+      "detail": "10"
+    },
+    {
+      "name": "no-JS bb: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "no-JS bookwormcard: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "no-JS bookwormcard: semantic main and H1",
+      "passed": true,
+      "detail": "{'main': 1, 'h1': 2, 'text': 2599, 'links': 10, 'staticResourceEntries': 0, 'staticMethodologyEditions': 0, 'methodologyTextLinks': 0, 'overflow': 0}"
+    },
+    {
+      "name": "no-JS bookwormcard: meaningful text remains",
+      "passed": true,
+      "detail": "2599"
+    },
+    {
+      "name": "no-JS bookwormcard: links remain available",
+      "passed": true,
+      "detail": "10"
+    },
+    {
+      "name": "no-JS bookwormcard: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "no-JS methodology: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "no-JS methodology: semantic main and H1",
+      "passed": true,
+      "detail": "{'main': 1, 'h1': 1, 'text': 1628, 'links': 31, 'staticResourceEntries': 0, 'staticMethodologyEditions': 16, 'methodologyTextLinks': 3, 'overflow': 0}"
+    },
+    {
+      "name": "no-JS methodology: meaningful text remains",
+      "passed": true,
+      "detail": "1628"
+    },
+    {
+      "name": "no-JS methodology: links remain available",
+      "passed": true,
+      "detail": "31"
+    },
+    {
+      "name": "no-JS methodology: all static section editions remain",
+      "passed": true,
+      "detail": "16"
+    },
+    {
+      "name": "no-JS methodology: complete plain-text route remains",
+      "passed": true,
+      "detail": "3"
+    },
+    {
+      "name": "no-JS methodology: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "extension proxy home: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "extension proxy home: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "extension proxy home: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "extension proxy polymythcal: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "extension proxy polymythcal: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "extension proxy polymythcal: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "extension proxy teacher-resources: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "extension proxy teacher-resources: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "extension proxy teacher-resources: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "extension proxy bookwormcard: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "extension proxy bookwormcard: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "extension proxy bookwormcard: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "extension proxy leizu: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "extension proxy leizu: no page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "extension proxy leizu: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "grayscale polymythcal: selection retains checked state and text",
+      "passed": true,
+      "detail": "{'checked': True, 'text': 'Toronto and GTA\\n116'}"
+    },
+    {
+      "name": "QR desktop thank-you-mam: HTTP success and canonical destination",
+      "passed": true,
+      "detail": "{'status': 200, 'href': '/bookwormcard/'}"
+    },
+    {
+      "name": "QR desktop thank-you-mam: in-flow control remains visible and operable",
+      "passed": true,
+      "detail": "{'visible': True, 'width': 72, 'height': 72, 'href': '/bookwormcard/', 'overlaps': []}"
+    },
+    {
+      "name": "QR desktop thank-you-mam: fixed controls do not cover the QR",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "QR desktop thank-you-mam-pregame: HTTP success and canonical destination",
+      "passed": true,
+      "detail": "{'status': 200, 'href': '/bookwormcard/'}"
+    },
+    {
+      "name": "QR desktop thank-you-mam-pregame: in-flow control remains visible and operable",
+      "passed": true,
+      "detail": "{'visible': True, 'width': 72, 'height': 72, 'href': '/bookwormcard/', 'overlaps': []}"
+    },
+    {
+      "name": "QR desktop thank-you-mam-pregame: fixed controls do not cover the QR",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "QR desktop bookwormburrows: HTTP success and canonical destination",
+      "passed": true,
+      "detail": "{'status': 200, 'href': '/bookwormcard/'}"
+    },
+    {
+      "name": "QR desktop bookwormburrows: in-flow control remains visible and operable",
+      "passed": true,
+      "detail": "{'visible': True, 'width': 72, 'height': 72, 'href': '/bookwormcard/', 'overlaps': []}"
+    },
+    {
+      "name": "QR desktop bookwormburrows: fixed controls do not cover the QR",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "QR desktop campaigncodex: HTTP success and canonical destination",
+      "passed": true,
+      "detail": "{'status': 200, 'href': '/bookwormcard/'}"
+    },
+    {
+      "name": "QR desktop campaigncodex: in-flow control remains visible and operable",
+      "passed": true,
+      "detail": "{'visible': True, 'width': 72, 'height': 72, 'href': '/bookwormcard/', 'overlaps': []}"
+    },
+    {
+      "name": "QR desktop campaigncodex: fixed controls do not cover the QR",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "QR desktop polymythdnd: HTTP success and canonical destination",
+      "passed": true,
+      "detail": "{'status': 200, 'href': '/bookwormcard/'}"
+    },
+    {
+      "name": "QR desktop polymythdnd: in-flow control remains visible and operable",
+      "passed": true,
+      "detail": "{'visible': True, 'width': 72, 'height': 72, 'href': '/bookwormcard/', 'overlaps': []}"
+    },
+    {
+      "name": "QR desktop polymythdnd: fixed controls do not cover the QR",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "QR foldable-landscape thank-you-mam: HTTP success and canonical destination",
+      "passed": true,
+      "detail": "{'status': 200, 'href': '/bookwormcard/'}"
+    },
+    {
+      "name": "QR foldable-landscape thank-you-mam: in-flow control remains visible and operable",
+      "passed": true,
+      "detail": "{'visible': True, 'width': 72, 'height': 72, 'href': '/bookwormcard/', 'overlaps': []}"
+    },
+    {
+      "name": "QR foldable-landscape thank-you-mam: fixed controls do not cover the QR",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "QR foldable-landscape thank-you-mam-pregame: HTTP success and canonical destination",
+      "passed": true,
+      "detail": "{'status': 200, 'href': '/bookwormcard/'}"
+    },
+    {
+      "name": "QR foldable-landscape thank-you-mam-pregame: in-flow control remains visible and operable",
+      "passed": true,
+      "detail": "{'visible': True, 'width': 72, 'height': 72, 'href': '/bookwormcard/', 'overlaps': []}"
+    },
+    {
+      "name": "QR foldable-landscape thank-you-mam-pregame: fixed controls do not cover the QR",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "QR foldable-landscape bookwormburrows: HTTP success and canonical destination",
+      "passed": true,
+      "detail": "{'status': 200, 'href': '/bookwormcard/'}"
+    },
+    {
+      "name": "QR foldable-landscape bookwormburrows: in-flow control remains visible and operable",
+      "passed": true,
+      "detail": "{'visible': True, 'width': 72, 'height': 72, 'href': '/bookwormcard/', 'overlaps': []}"
+    },
+    {
+      "name": "QR foldable-landscape bookwormburrows: fixed controls do not cover the QR",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "QR foldable-landscape campaigncodex: HTTP success and canonical destination",
+      "passed": true,
+      "detail": "{'status': 200, 'href': '/bookwormcard/'}"
+    },
+    {
+      "name": "QR foldable-landscape campaigncodex: in-flow control remains visible and operable",
+      "passed": true,
+      "detail": "{'visible': True, 'width': 72, 'height': 72, 'href': '/bookwormcard/', 'overlaps': []}"
+    },
+    {
+      "name": "QR foldable-landscape campaigncodex: fixed controls do not cover the QR",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "QR foldable-landscape polymythdnd: HTTP success and canonical destination",
+      "passed": true,
+      "detail": "{'status': 200, 'href': '/bookwormcard/'}"
+    },
+    {
+      "name": "QR foldable-landscape polymythdnd: in-flow control remains visible and operable",
+      "passed": true,
+      "detail": "{'visible': True, 'width': 72, 'height': 72, 'href': '/bookwormcard/', 'overlaps': []}"
+    },
+    {
+      "name": "QR foldable-landscape polymythdnd: fixed controls do not cover the QR",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "QR mobile thank-you-mam: HTTP success and canonical destination",
+      "passed": true,
+      "detail": "{'status': 200, 'href': '/bookwormcard/'}"
+    },
+    {
+      "name": "QR mobile thank-you-mam: in-flow control remains visible and operable",
+      "passed": true,
+      "detail": "{'visible': True, 'width': 64, 'height': 64, 'href': '/bookwormcard/', 'overlaps': []}"
+    },
+    {
+      "name": "QR mobile thank-you-mam: fixed controls do not cover the QR",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "QR mobile thank-you-mam-pregame: HTTP success and canonical destination",
+      "passed": true,
+      "detail": "{'status': 200, 'href': '/bookwormcard/'}"
+    },
+    {
+      "name": "QR mobile thank-you-mam-pregame: in-flow control remains visible and operable",
+      "passed": true,
+      "detail": "{'visible': True, 'width': 64, 'height': 64, 'href': '/bookwormcard/', 'overlaps': []}"
+    },
+    {
+      "name": "QR mobile thank-you-mam-pregame: fixed controls do not cover the QR",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "QR mobile bookwormburrows: HTTP success and canonical destination",
+      "passed": true,
+      "detail": "{'status': 200, 'href': '/bookwormcard/'}"
+    },
+    {
+      "name": "QR mobile bookwormburrows: in-flow control remains visible and operable",
+      "passed": true,
+      "detail": "{'visible': True, 'width': 64, 'height': 64, 'href': '/bookwormcard/', 'overlaps': []}"
+    },
+    {
+      "name": "QR mobile bookwormburrows: fixed controls do not cover the QR",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "QR mobile campaigncodex: HTTP success and canonical destination",
+      "passed": true,
+      "detail": "{'status': 200, 'href': '/bookwormcard/'}"
+    },
+    {
+      "name": "QR mobile campaigncodex: in-flow control remains visible and operable",
+      "passed": true,
+      "detail": "{'visible': True, 'width': 64, 'height': 64, 'href': '/bookwormcard/', 'overlaps': []}"
+    },
+    {
+      "name": "QR mobile campaigncodex: fixed controls do not cover the QR",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "QR mobile polymythdnd: HTTP success and canonical destination",
+      "passed": true,
+      "detail": "{'status': 200, 'href': '/bookwormcard/'}"
+    },
+    {
+      "name": "QR mobile polymythdnd: in-flow control remains visible and operable",
+      "passed": true,
+      "detail": "{'visible': True, 'width': 64, 'height': 64, 'href': '/bookwormcard/', 'overlaps': []}"
+    },
+    {
+      "name": "QR mobile polymythdnd: fixed controls do not cover the QR",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "4x CPU home: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "4x CPU home: perceived-ready budget",
+      "passed": true,
+      "detail": "{'label': 'home', 'route': '/', 'cpu_throttle_rate': 4, 'ready_ms': 783.3, 'interaction_ms': 112.7, 'max_long_task_ms': 218, 'long_task_count': 4}"
+    },
+    {
+      "name": "4x CPU home: interaction and long-task budgets",
+      "passed": true,
+      "detail": "{'label': 'home', 'route': '/', 'cpu_throttle_rate': 4, 'ready_ms': 783.3, 'interaction_ms': 112.7, 'max_long_task_ms': 218, 'long_task_count': 4}"
+    },
+    {
+      "name": "4x CPU polymythcal: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "4x CPU polymythcal: perceived-ready budget",
+      "passed": true,
+      "detail": "{'label': 'polymythcal', 'route': '/polymythseminars/', 'cpu_throttle_rate': 4, 'ready_ms': 1367.0, 'interaction_ms': 377.3, 'max_long_task_ms': 220, 'long_task_count': 5}"
+    },
+    {
+      "name": "4x CPU polymythcal: interaction and long-task budgets",
+      "passed": true,
+      "detail": "{'label': 'polymythcal', 'route': '/polymythseminars/', 'cpu_throttle_rate': 4, 'ready_ms': 1367.0, 'interaction_ms': 377.3, 'max_long_task_ms': 220, 'long_task_count': 5}"
+    },
+    {
+      "name": "4x CPU teacher-resources: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "4x CPU teacher-resources: perceived-ready budget",
+      "passed": true,
+      "detail": "{'label': 'teacher-resources', 'route': '/teacherresources/', 'cpu_throttle_rate': 4, 'ready_ms': 979.1, 'interaction_ms': 377.2, 'max_long_task_ms': 181, 'long_task_count': 2}"
+    },
+    {
+      "name": "4x CPU teacher-resources: interaction and long-task budgets",
+      "passed": true,
+      "detail": "{'label': 'teacher-resources', 'route': '/teacherresources/', 'cpu_throttle_rate': 4, 'ready_ms': 979.1, 'interaction_ms': 377.2, 'max_long_task_ms': 181, 'long_task_count': 2}"
+    },
+    {
+      "name": "4x CPU bookwormcard: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "4x CPU bookwormcard: perceived-ready budget",
+      "passed": true,
+      "detail": "{'label': 'bookwormcard', 'route': '/bookwormcard/', 'cpu_throttle_rate': 4, 'ready_ms': 909.4, 'interaction_ms': 106.7, 'max_long_task_ms': 137, 'long_task_count': 3}"
+    },
+    {
+      "name": "4x CPU bookwormcard: interaction and long-task budgets",
+      "passed": true,
+      "detail": "{'label': 'bookwormcard', 'route': '/bookwormcard/', 'cpu_throttle_rate': 4, 'ready_ms': 909.4, 'interaction_ms': 106.7, 'max_long_task_ms': 137, 'long_task_count': 3}"
+    },
+    {
+      "name": "4x CPU methodology: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "4x CPU methodology: perceived-ready budget",
+      "passed": true,
+      "detail": "{'label': 'methodology', 'route': '/polymyth/methodologylist/', 'cpu_throttle_rate': 4, 'ready_ms': 4274.1, 'interaction_ms': 1172.7, 'max_long_task_ms': 2215, 'long_task_count': 10}"
+    },
+    {
+      "name": "4x CPU methodology: interaction and long-task budgets",
+      "passed": true,
+      "detail": "{'label': 'methodology', 'route': '/polymyth/methodologylist/', 'cpu_throttle_rate': 4, 'ready_ms': 4274.1, 'interaction_ms': 1172.7, 'max_long_task_ms': 2215, 'long_task_count': 10}"
+    },
+    {
+      "name": "long-session home: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "long-session home: repeated theme toggles settle coherently",
+      "passed": true,
+      "detail": "{'control': 'audit-delegation-probe', 'iterations': 50, 'before': 'light', 'after': 'light', 'toggleCount': 1, 'liveRegions': 1, 'pressed': 'false'}"
+    },
+    {
+      "name": "long-session home: filter and history cycles settle coherently",
+      "passed": true,
+      "detail": "{'history': {'iterations': 30, 'pathname': '/', 'search': ''}, 'state': {'pathname': '/', 'search': '', 'mainCount': 1, 'visibleH1': 1}}"
+    },
+    {
+      "name": "long-session home: no page or local request failures",
+      "passed": true,
+      "detail": "{'page_errors': [], 'failed_local': []}"
+    },
+    {
+      "name": "long-session home: JS heap growth budget",
+      "passed": true,
+      "detail": "{'label': 'home', 'route': '/', 'theme_iterations': 50, 'state_history_iterations': 30, 'warmup_iterations': 2, 'theme_control': 'audit-delegation-probe', 'gc_before': True, 'gc_after': True, 'before': {'documents': 1, 'event_listeners': 62, 'dom_nodes': 805, 'js_heap_used_bytes': 5211288}, 'after': {'documents': 1, 'event_listeners': 62, 'dom_nodes': 805, 'js_heap_used_bytes': 5230536}, 'delta': {'documents': 0, 'event_listeners': 0, 'dom_nodes': 0, 'js_heap_used_bytes': 19248}, 'budgets': {'js_heap_used_bytes': 8388608, 'dom_nodes': 100, 'documents': 1, 'event_listeners': 16}}"
+    },
+    {
+      "name": "long-session home: DOM node growth budget",
+      "passed": true,
+      "detail": "{'label': 'home', 'route': '/', 'theme_iterations': 50, 'state_history_iterations': 30, 'warmup_iterations': 2, 'theme_control': 'audit-delegation-probe', 'gc_before': True, 'gc_after': True, 'before': {'documents': 1, 'event_listeners': 62, 'dom_nodes': 805, 'js_heap_used_bytes': 5211288}, 'after': {'documents': 1, 'event_listeners': 62, 'dom_nodes': 805, 'js_heap_used_bytes': 5230536}, 'delta': {'documents': 0, 'event_listeners': 0, 'dom_nodes': 0, 'js_heap_used_bytes': 19248}, 'budgets': {'js_heap_used_bytes': 8388608, 'dom_nodes': 100, 'documents': 1, 'event_listeners': 16}}"
+    },
+    {
+      "name": "long-session home: document growth budget",
+      "passed": true,
+      "detail": "{'label': 'home', 'route': '/', 'theme_iterations': 50, 'state_history_iterations': 30, 'warmup_iterations': 2, 'theme_control': 'audit-delegation-probe', 'gc_before': True, 'gc_after': True, 'before': {'documents': 1, 'event_listeners': 62, 'dom_nodes': 805, 'js_heap_used_bytes': 5211288}, 'after': {'documents': 1, 'event_listeners': 62, 'dom_nodes': 805, 'js_heap_used_bytes': 5230536}, 'delta': {'documents': 0, 'event_listeners': 0, 'dom_nodes': 0, 'js_heap_used_bytes': 19248}, 'budgets': {'js_heap_used_bytes': 8388608, 'dom_nodes': 100, 'documents': 1, 'event_listeners': 16}}"
+    },
+    {
+      "name": "long-session home: event-listener growth budget",
+      "passed": true,
+      "detail": "{'label': 'home', 'route': '/', 'theme_iterations': 50, 'state_history_iterations': 30, 'warmup_iterations': 2, 'theme_control': 'audit-delegation-probe', 'gc_before': True, 'gc_after': True, 'before': {'documents': 1, 'event_listeners': 62, 'dom_nodes': 805, 'js_heap_used_bytes': 5211288}, 'after': {'documents': 1, 'event_listeners': 62, 'dom_nodes': 805, 'js_heap_used_bytes': 5230536}, 'delta': {'documents': 0, 'event_listeners': 0, 'dom_nodes': 0, 'js_heap_used_bytes': 19248}, 'budgets': {'js_heap_used_bytes': 8388608, 'dom_nodes': 100, 'documents': 1, 'event_listeners': 16}}"
+    },
+    {
+      "name": "long-session polymythcal: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "long-session polymythcal: repeated theme toggles settle coherently",
+      "passed": true,
+      "detail": "{'control': 'native', 'iterations': 50, 'before': 'light', 'after': 'light', 'toggleCount': 1, 'liveRegions': 1, 'pressed': 'false'}"
+    },
+    {
+      "name": "long-session polymythcal: filter and history cycles settle coherently",
+      "passed": true,
+      "detail": "{'history': {'iterations': 30, 'pathname': '/polymythseminars/', 'search': ''}, 'state': {'pathname': '/polymythseminars/', 'search': '', 'mainCount': 1, 'visibleH1': 1, 'input': '', 'resultCards': 24, 'busy': 'false'}}"
+    },
+    {
+      "name": "long-session polymythcal: no page or local request failures",
+      "passed": true,
+      "detail": "{'page_errors': [], 'failed_local': []}"
+    },
+    {
+      "name": "long-session polymythcal: JS heap growth budget",
+      "passed": true,
+      "detail": "{'label': 'polymythcal', 'route': '/polymythseminars/', 'theme_iterations': 50, 'state_history_iterations': 30, 'warmup_iterations': 2, 'theme_control': 'native', 'gc_before': True, 'gc_after': True, 'before': {'documents': 1, 'event_listeners': 47, 'dom_nodes': 2550, 'js_heap_used_bytes': 4046012}, 'after': {'documents': 1, 'event_listeners': 47, 'dom_nodes': 2550, 'js_heap_used_bytes': 4182064}, 'delta': {'documents': 0, 'event_listeners': 0, 'dom_nodes': 0, 'js_heap_used_bytes': 136052}, 'budgets': {'js_heap_used_bytes': 33554432, 'dom_nodes': 1000, 'documents': 1, 'event_listeners': 32}}"
+    },
+    {
+      "name": "long-session polymythcal: DOM node growth budget",
+      "passed": true,
+      "detail": "{'label': 'polymythcal', 'route': '/polymythseminars/', 'theme_iterations': 50, 'state_history_iterations': 30, 'warmup_iterations': 2, 'theme_control': 'native', 'gc_before': True, 'gc_after': True, 'before': {'documents': 1, 'event_listeners': 47, 'dom_nodes': 2550, 'js_heap_used_bytes': 4046012}, 'after': {'documents': 1, 'event_listeners': 47, 'dom_nodes': 2550, 'js_heap_used_bytes': 4182064}, 'delta': {'documents': 0, 'event_listeners': 0, 'dom_nodes': 0, 'js_heap_used_bytes': 136052}, 'budgets': {'js_heap_used_bytes': 33554432, 'dom_nodes': 1000, 'documents': 1, 'event_listeners': 32}}"
+    },
+    {
+      "name": "long-session polymythcal: document growth budget",
+      "passed": true,
+      "detail": "{'label': 'polymythcal', 'route': '/polymythseminars/', 'theme_iterations': 50, 'state_history_iterations': 30, 'warmup_iterations': 2, 'theme_control': 'native', 'gc_before': True, 'gc_after': True, 'before': {'documents': 1, 'event_listeners': 47, 'dom_nodes': 2550, 'js_heap_used_bytes': 4046012}, 'after': {'documents': 1, 'event_listeners': 47, 'dom_nodes': 2550, 'js_heap_used_bytes': 4182064}, 'delta': {'documents': 0, 'event_listeners': 0, 'dom_nodes': 0, 'js_heap_used_bytes': 136052}, 'budgets': {'js_heap_used_bytes': 33554432, 'dom_nodes': 1000, 'documents': 1, 'event_listeners': 32}}"
+    },
+    {
+      "name": "long-session polymythcal: event-listener growth budget",
+      "passed": true,
+      "detail": "{'label': 'polymythcal', 'route': '/polymythseminars/', 'theme_iterations': 50, 'state_history_iterations': 30, 'warmup_iterations': 2, 'theme_control': 'native', 'gc_before': True, 'gc_after': True, 'before': {'documents': 1, 'event_listeners': 47, 'dom_nodes': 2550, 'js_heap_used_bytes': 4046012}, 'after': {'documents': 1, 'event_listeners': 47, 'dom_nodes': 2550, 'js_heap_used_bytes': 4182064}, 'delta': {'documents': 0, 'event_listeners': 0, 'dom_nodes': 0, 'js_heap_used_bytes': 136052}, 'budgets': {'js_heap_used_bytes': 33554432, 'dom_nodes': 1000, 'documents': 1, 'event_listeners': 32}}"
+    },
+    {
+      "name": "long-session teacher-resources: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "long-session teacher-resources: repeated theme toggles settle coherently",
+      "passed": true,
+      "detail": "{'control': 'audit-delegation-probe', 'iterations': 50, 'before': 'light', 'after': 'light', 'toggleCount': 1, 'liveRegions': 1, 'pressed': 'false'}"
+    },
+    {
+      "name": "long-session teacher-resources: filter and history cycles settle coherently",
+      "passed": true,
+      "detail": "{'history': {'iterations': 30, 'pathname': '/teacherresources/', 'search': ''}, 'state': {'pathname': '/teacherresources/', 'search': '', 'mainCount': 1, 'visibleH1': 1, 'input': '', 'resultText': '644 resources across 25 collections', 'entries': 644}}"
+    },
+    {
+      "name": "long-session teacher-resources: no page or local request failures",
+      "passed": true,
+      "detail": "{'page_errors': [], 'failed_local': []}"
+    },
+    {
+      "name": "long-session teacher-resources: JS heap growth budget",
+      "passed": true,
+      "detail": "{'label': 'teacher-resources', 'route': '/teacherresources/', 'theme_iterations': 50, 'state_history_iterations': 30, 'warmup_iterations': 2, 'theme_control': 'audit-delegation-probe', 'gc_before': True, 'gc_after': True, 'before': {'documents': 1, 'event_listeners': 47, 'dom_nodes': 12443, 'js_heap_used_bytes': 2466352}, 'after': {'documents': 1, 'event_listeners': 47, 'dom_nodes': 12443, 'js_heap_used_bytes': 2502772}, 'delta': {'documents': 0, 'event_listeners': 0, 'dom_nodes': 0, 'js_heap_used_bytes': 36420}, 'budgets': {'js_heap_used_bytes': 25165824, 'dom_nodes': 500, 'documents': 1, 'event_listeners': 32}}"
+    },
+    {
+      "name": "long-session teacher-resources: DOM node growth budget",
+      "passed": true,
+      "detail": "{'label': 'teacher-resources', 'route': '/teacherresources/', 'theme_iterations': 50, 'state_history_iterations': 30, 'warmup_iterations': 2, 'theme_control': 'audit-delegation-probe', 'gc_before': True, 'gc_after': True, 'before': {'documents': 1, 'event_listeners': 47, 'dom_nodes': 12443, 'js_heap_used_bytes': 2466352}, 'after': {'documents': 1, 'event_listeners': 47, 'dom_nodes': 12443, 'js_heap_used_bytes': 2502772}, 'delta': {'documents': 0, 'event_listeners': 0, 'dom_nodes': 0, 'js_heap_used_bytes': 36420}, 'budgets': {'js_heap_used_bytes': 25165824, 'dom_nodes': 500, 'documents': 1, 'event_listeners': 32}}"
+    },
+    {
+      "name": "long-session teacher-resources: document growth budget",
+      "passed": true,
+      "detail": "{'label': 'teacher-resources', 'route': '/teacherresources/', 'theme_iterations': 50, 'state_history_iterations': 30, 'warmup_iterations': 2, 'theme_control': 'audit-delegation-probe', 'gc_before': True, 'gc_after': True, 'before': {'documents': 1, 'event_listeners': 47, 'dom_nodes': 12443, 'js_heap_used_bytes': 2466352}, 'after': {'documents': 1, 'event_listeners': 47, 'dom_nodes': 12443, 'js_heap_used_bytes': 2502772}, 'delta': {'documents': 0, 'event_listeners': 0, 'dom_nodes': 0, 'js_heap_used_bytes': 36420}, 'budgets': {'js_heap_used_bytes': 25165824, 'dom_nodes': 500, 'documents': 1, 'event_listeners': 32}}"
+    },
+    {
+      "name": "long-session teacher-resources: event-listener growth budget",
+      "passed": true,
+      "detail": "{'label': 'teacher-resources', 'route': '/teacherresources/', 'theme_iterations': 50, 'state_history_iterations': 30, 'warmup_iterations': 2, 'theme_control': 'audit-delegation-probe', 'gc_before': True, 'gc_after': True, 'before': {'documents': 1, 'event_listeners': 47, 'dom_nodes': 12443, 'js_heap_used_bytes': 2466352}, 'after': {'documents': 1, 'event_listeners': 47, 'dom_nodes': 12443, 'js_heap_used_bytes': 2502772}, 'delta': {'documents': 0, 'event_listeners': 0, 'dom_nodes': 0, 'js_heap_used_bytes': 36420}, 'budgets': {'js_heap_used_bytes': 25165824, 'dom_nodes': 500, 'documents': 1, 'event_listeners': 32}}"
+    },
+    {
+      "name": "standalone manifest: display remains standalone",
+      "passed": true,
+      "detail": "standalone"
+    },
+    {
+      "name": "standalone manifest: orientation supports rotation and foldables",
+      "passed": true,
+      "detail": "any"
+    },
+    {
+      "name": "standalone manifest: start URL and scope remain root",
+      "passed": true,
+      "detail": "{'start_url': '/', 'scope': '/'}"
+    }
+  ],
+  "metrics": [
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 0,
+      "longTaskCount": 0,
+      "mode": "ultrawide",
+      "route": "/",
+      "label": "home"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 0,
+      "longTaskCount": 0,
+      "mode": "ultrawide",
+      "route": "/polymythseminars/",
+      "label": "polymythcal"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 0,
+      "longTaskCount": 0,
+      "mode": "ultrawide",
+      "route": "/teacherresources/",
+      "label": "teacher-resources"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 57,
+      "longTaskCount": 1,
+      "mode": "ultrawide",
+      "route": "/bb/",
+      "label": "bb"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 2,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 0,
+      "longTaskCount": 0,
+      "mode": "ultrawide",
+      "route": "/bookwormcard/",
+      "label": "bookwormcard"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 119,
+      "longTaskCount": 1,
+      "mode": "ultrawide",
+      "route": "/leizu/",
+      "label": "leizu"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 131,
+      "longTaskCount": 4,
+      "mode": "ultrawide",
+      "route": "/saul/",
+      "label": "saul"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 97,
+      "longTaskCount": 4,
+      "mode": "ultrawide",
+      "route": "/aa/",
+      "label": "aa"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 59,
+      "longTaskCount": 2,
+      "mode": "ultrawide",
+      "route": "/aitr/",
+      "label": "aitr"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 170,
+      "longTaskCount": 3,
+      "mode": "ultrawide",
+      "route": "/polymyth/campaigncodex/",
+      "label": "campaigncodex"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 429,
+      "longTaskCount": 3,
+      "mode": "ultrawide",
+      "route": "/polymyth/methodologylist/",
+      "label": "methodology"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 85,
+      "longTaskCount": 1,
+      "mode": "ultrawide",
+      "route": "/campaigns/thank-you-mam/",
+      "label": "thank-you-mam"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 80,
+      "longTaskCount": 1,
+      "mode": "ultrawide",
+      "route": "/campaigns/thank-you-mam/pregame/",
+      "label": "thank-you-mam-pregame"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 0,
+      "longTaskCount": 0,
+      "mode": "foldable-landscape",
+      "route": "/",
+      "label": "home"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 0,
+      "longTaskCount": 0,
+      "mode": "foldable-landscape",
+      "route": "/polymythseminars/",
+      "label": "polymythcal"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 0,
+      "longTaskCount": 0,
+      "mode": "foldable-landscape",
+      "route": "/teacherresources/",
+      "label": "teacher-resources"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 53,
+      "longTaskCount": 1,
+      "mode": "foldable-landscape",
+      "route": "/bb/",
+      "label": "bb"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 2,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 0,
+      "longTaskCount": 0,
+      "mode": "foldable-landscape",
+      "route": "/bookwormcard/",
+      "label": "bookwormcard"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 73,
+      "longTaskCount": 1,
+      "mode": "foldable-landscape",
+      "route": "/leizu/",
+      "label": "leizu"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 0,
+      "longTaskCount": 0,
+      "mode": "foldable-landscape",
+      "route": "/saul/",
+      "label": "saul"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 86,
+      "longTaskCount": 2,
+      "mode": "foldable-landscape",
+      "route": "/aa/",
+      "label": "aa"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 0,
+      "longTaskCount": 0,
+      "mode": "foldable-landscape",
+      "route": "/aitr/",
+      "label": "aitr"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 159,
+      "longTaskCount": 3,
+      "mode": "foldable-landscape",
+      "route": "/polymyth/campaigncodex/",
+      "label": "campaigncodex"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 456,
+      "longTaskCount": 3,
+      "mode": "foldable-landscape",
+      "route": "/polymyth/methodologylist/",
+      "label": "methodology"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 67,
+      "longTaskCount": 1,
+      "mode": "foldable-landscape",
+      "route": "/campaigns/thank-you-mam/",
+      "label": "thank-you-mam"
+    },
+    {
+      "overflow": 0,
+      "mainVisible": 1,
+      "h1Total": 1,
+      "h1Visible": 1,
+      "fixedCollisions": [],
+      "maxLongTaskMs": 57,
+      "longTaskCount": 1,
+      "mode": "foldable-landscape",
+      "route": "/campaigns/thank-you-mam/pregame/",
+      "label": "thank-you-mam-pregame"
+    }
+  ],
+  "cpu_metrics": [
+    {
+      "label": "home",
+      "route": "/",
+      "cpu_throttle_rate": 4,
+      "ready_ms": 783.3,
+      "interaction_ms": 112.7,
+      "max_long_task_ms": 218,
+      "long_task_count": 4
+    },
+    {
+      "label": "polymythcal",
+      "route": "/polymythseminars/",
+      "cpu_throttle_rate": 4,
+      "ready_ms": 1367.0,
+      "interaction_ms": 377.3,
+      "max_long_task_ms": 220,
+      "long_task_count": 5
+    },
+    {
+      "label": "teacher-resources",
+      "route": "/teacherresources/",
+      "cpu_throttle_rate": 4,
+      "ready_ms": 979.1,
+      "interaction_ms": 377.2,
+      "max_long_task_ms": 181,
+      "long_task_count": 2
+    },
+    {
+      "label": "bookwormcard",
+      "route": "/bookwormcard/",
+      "cpu_throttle_rate": 4,
+      "ready_ms": 909.4,
+      "interaction_ms": 106.7,
+      "max_long_task_ms": 137,
+      "long_task_count": 3
+    },
+    {
+      "label": "methodology",
+      "route": "/polymyth/methodologylist/",
+      "cpu_throttle_rate": 4,
+      "ready_ms": 4274.1,
+      "interaction_ms": 1172.7,
+      "max_long_task_ms": 2215,
+      "long_task_count": 10
+    }
+  ],
+  "long_session_metrics": [
+    {
+      "label": "home",
+      "route": "/",
+      "theme_iterations": 50,
+      "state_history_iterations": 30,
+      "warmup_iterations": 2,
+      "theme_control": "audit-delegation-probe",
+      "gc_before": true,
+      "gc_after": true,
+      "before": {
+        "documents": 1,
+        "event_listeners": 62,
+        "dom_nodes": 805,
+        "js_heap_used_bytes": 5211288
+      },
+      "after": {
+        "documents": 1,
+        "event_listeners": 62,
+        "dom_nodes": 805,
+        "js_heap_used_bytes": 5230536
+      },
+      "delta": {
+        "documents": 0,
+        "event_listeners": 0,
+        "dom_nodes": 0,
+        "js_heap_used_bytes": 19248
+      },
+      "budgets": {
+        "js_heap_used_bytes": 8388608,
+        "dom_nodes": 100,
+        "documents": 1,
+        "event_listeners": 16
+      }
+    },
+    {
+      "label": "polymythcal",
+      "route": "/polymythseminars/",
+      "theme_iterations": 50,
+      "state_history_iterations": 30,
+      "warmup_iterations": 2,
+      "theme_control": "native",
+      "gc_before": true,
+      "gc_after": true,
+      "before": {
+        "documents": 1,
+        "event_listeners": 47,
+        "dom_nodes": 2550,
+        "js_heap_used_bytes": 4046012
+      },
+      "after": {
+        "documents": 1,
+        "event_listeners": 47,
+        "dom_nodes": 2550,
+        "js_heap_used_bytes": 4182064
+      },
+      "delta": {
+        "documents": 0,
+        "event_listeners": 0,
+        "dom_nodes": 0,
+        "js_heap_used_bytes": 136052
+      },
+      "budgets": {
+        "js_heap_used_bytes": 33554432,
+        "dom_nodes": 1000,
+        "documents": 1,
+        "event_listeners": 32
+      }
+    },
+    {
+      "label": "teacher-resources",
+      "route": "/teacherresources/",
+      "theme_iterations": 50,
+      "state_history_iterations": 30,
+      "warmup_iterations": 2,
+      "theme_control": "audit-delegation-probe",
+      "gc_before": true,
+      "gc_after": true,
+      "before": {
+        "documents": 1,
+        "event_listeners": 47,
+        "dom_nodes": 12443,
+        "js_heap_used_bytes": 2466352
+      },
+      "after": {
+        "documents": 1,
+        "event_listeners": 47,
+        "dom_nodes": 12443,
+        "js_heap_used_bytes": 2502772
+      },
+      "delta": {
+        "documents": 0,
+        "event_listeners": 0,
+        "dom_nodes": 0,
+        "js_heap_used_bytes": 36420
+      },
+      "budgets": {
+        "js_heap_used_bytes": 25165824,
+        "dom_nodes": 500,
+        "documents": 1,
+        "event_listeners": 32
+      }
+    }
+  ],
+  "screenshots": 22,
+  "coverage": [
+    "ultrawide and foldable-like viewport geometry",
+    "visible H1 and long-task route budgets",
+    "WCAG text-spacing override",
+    "reduced transparency",
+    "complete filtered-calendar print and print URLs",
+    "theme and text-size preference persistence and blocked storage",
+    "shortcut collision behavior",
+    "no-JavaScript semantic extraction proxy",
+    "injected extension-interference proxy",
+    "grayscale state proxy",
+    "five-route QR overlay collision matrix",
+    "4x low-end mobile CPU perceived-performance tracing",
+    "long-session theme/filter/history heap and DOM trend matrix",
+    "standalone manifest rotation"
+  ],
+  "environment_limits": [
+    "Native Firefox and Safari/WebKit require a compatible unrestricted host.",
+    "Native VoiceOver requires macOS hardware.",
+    "Native NVDA requires Windows hardware.",
+    "Real browser extensions, voice control, foldable hinges, and low-end battery or thermal behavior require physical-device testing."
+  ]
+}

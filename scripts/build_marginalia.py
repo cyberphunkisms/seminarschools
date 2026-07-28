@@ -56,7 +56,7 @@ POST_TEMPLATE = '''<!DOCTYPE html>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#14110D">
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/main.css?v=20260725-audit45">
 <style>
 :root {{
   --accent: #983425;

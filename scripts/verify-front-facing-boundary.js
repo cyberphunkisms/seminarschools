@@ -2,6 +2,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+const { isGeneratedDependencyDirectory } = require('./repository-walk-policy');
 const ROOT = path.resolve(__dirname, '..');
 const errors = [];
 function read(rel){ return fs.readFileSync(path.join(ROOT, rel), 'utf8'); }
@@ -27,7 +28,17 @@ function requireNotVisible(rel, tokens){
   const text = visible(read(rel));
   tokens.forEach(t => { if(text.includes(t)) errors.push(`${rel}: internal/admin phrase visible: "${t}"`); });
 }
-requireHas('saul/index.html', [
+const ultimateSaul = read('saul/index.html').includes('data-cv-ultimate="true"');
+requireHas('saul/index.html', ultimateSaul ? [
+  'Curriculum vitae',
+  'Role-focused views',
+  'Build a focused CV',
+  'Complete application CV with every verified experience row visible.',
+  'Key Skills',
+  'Places behind the work',
+  'Historical Career & Project Archive',
+  'Finished one-page application CV'
+] : [
   'Curriculum vitae',
   'Selected experience',
   'Current focus',
@@ -163,7 +174,7 @@ const forbidden = [
 function walk(dir){
   for(const ent of fs.readdirSync(path.join(ROOT, dir), {withFileTypes:true})){
     const rel = path.posix.join(dir, ent.name);
-    if(rel === 'node_modules' || rel === 'public') continue;
+    if(rel === 'public' || isGeneratedDependencyDirectory(ent.name)) continue;
     if(excludedPrefixes.some(x => rel.startsWith(x))) continue;
     if(ent.isDirectory()) walk(rel);
     else if(ent.isFile() && ent.name.endsWith('.html')){
@@ -174,7 +185,8 @@ function walk(dir){
 }
 walk('.');
 const resourcesHtml = read('teacherresources/index.html');
-if(resourcesHtml.includes('"id":"lang-hughes"')) errors.push('teacherresources: retired Thank You Ma’am standalone group still present in resources-data.');
+const resourcesData = read('teacherresources/resources-data.json');
+if(resourcesData.includes('"id":"lang-hughes"')) errors.push('teacherresources: retired Thank You Ma’am standalone group still present in resources-data.');
 if(exists('teacherresources/lang-hughes/index.html')) errors.push('teacherresources: retired /teacherresources/lang-hughes/ page still exists.');
 if(read('sitemap.xml').includes('/teacherresources/lang-hughes/')) errors.push('sitemap: retired /teacherresources/lang-hughes/ URLs still listed.');
 if(!read('_redirects').includes('/teacherresources/lang-hughes/* /teacherresources/ 301')) errors.push('_redirects: retired Thank You Ma’am resource route lacks redirect.');

@@ -14,6 +14,7 @@ Manual events take precedence over scraped duplicates by
 
 import hashlib
 import json
+import os
 import re
 import sys
 from datetime import datetime, timezone
@@ -25,8 +26,25 @@ except ImportError:
     print("FATAL: jsonschema not installed. pip install jsonschema", file=sys.stderr)
     sys.exit(1)
 
+from polymythcal_adapters import (
+    event_identity_aliases,
+    event_occurrence_key,
+    records_represent_same_occurrence,
+)
+from polymythcal_source_health import source_health_gate_error
+
 ROOT = Path(__file__).resolve().parent.parent
 HARVEST_PATH = Path("/tmp/seminars-output.json")
+_DETERMINISTIC_PROTEST_VALUE = os.environ.get(
+    "POLYMYTHCAL_DETERMINISTIC_PROTEST_PATH",
+    "/tmp/polymythcal-protests.json",
+)
+DETERMINISTIC_PROTEST_PATH = (
+    Path(_DETERMINISTIC_PROTEST_VALUE)
+    if _DETERMINISTIC_PROTEST_VALUE
+    else None
+)
+DETERMINISTIC_STRUCTURED_PATH = Path("/tmp/polymythcal-structured.json")
 MANUAL_PATH = ROOT / "data" / "manual-events.json"
 SCHEMA_PATH = ROOT / "data" / "seminars-schema.json"
 OUT_PATH = ROOT / "seminars" / "events.json"
@@ -79,6 +97,125 @@ def load_harvest():
         sys.exit(1)
 
 
+def merge_source_yield_telemetry(existing_rows, deterministic_rows, stream):
+    """Keep one top-level row per source while retaining both crawl stages."""
+    combined = [dict(row) for row in (existing_rows or []) if isinstance(row, dict)]
+    positions = {
+        str(row.get("source_id") or ""): index
+        for index, row in enumerate(combined)
+        if str(row.get("source_id") or "")
+    }
+    for raw in deterministic_rows or []:
+        if not isinstance(raw, dict):
+            continue
+        source_id = str(raw.get("source_id") or "")
+        if not source_id:
+            continue
+        observation = dict(raw)
+        observation["stream"] = stream
+        if source_id not in positions:
+            row = dict(raw)
+            row["stage"] = "deterministic"
+            row["deterministic_stream"] = stream
+            combined.append(row)
+            positions[source_id] = len(combined) - 1
+            continue
+        index = positions[source_id]
+        paid = combined[index]
+        observations = list(paid.get("deterministic_observations") or [])
+        observations.append(observation)
+        paid_status = str(paid.get("status") or "")
+        if paid_status == "skipped-deterministic-success":
+            merged = {**paid, **raw}
+            merged["paid_agent_status"] = paid_status
+            merged["stage"] = "deterministic"
+        else:
+            merged = dict(paid)
+            merged["stage"] = "paid-agent+deterministic"
+        merged["deterministic_observations"] = observations
+        combined[index] = merged
+    return combined
+
+
+def merge_deterministic_protests(harvest_data):
+    """Fold the deterministic no-shard protest stage into the agent harvest.
+
+    Incomplete dated announcements stay in ``events`` with native unconfirmed
+    metadata. They are never diverted to the legacy hidden watchlist.
+    """
+    if DETERMINISTIC_PROTEST_PATH is None or not DETERMINISTIC_PROTEST_PATH.exists():
+        return harvest_data
+    try:
+        deterministic = json.loads(
+            DETERMINISTIC_PROTEST_PATH.read_text(encoding="utf-8")
+        )
+    except (OSError, json.JSONDecodeError) as exc:
+        print(
+            f"FATAL: deterministic protest harvest is unreadable: {exc}",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    if deterministic.get("sharded") is not False:
+        print("FATAL: deterministic protest harvest must declare sharded=false", file=sys.stderr)
+        sys.exit(1)
+    gate_error = source_health_gate_error(
+        deterministic,
+        stream_label="deterministic protest",
+        expected_stream="deterministic-protests",
+        expected_scope="all-enabled-protest-sources-unsharded",
+    )
+    if gate_error:
+        print(f"FATAL: {gate_error}", file=sys.stderr)
+        sys.exit(1)
+    result = dict(harvest_data)
+    result["events"] = list(harvest_data.get("events") or []) + list(
+        deterministic.get("events") or []
+    )
+    result["source_yields"] = merge_source_yield_telemetry(
+        harvest_data.get("source_yields") or [],
+        deterministic.get("source_yields") or [],
+        "deterministic-protests",
+    )
+    result["deterministic_protest_summary"] = deterministic.get("summary") or {}
+    return result
+
+
+def merge_deterministic_structured_events(harvest_data):
+    """Add priority structured-source records without replacing any stream."""
+    if not DETERMINISTIC_STRUCTURED_PATH.exists():
+        return harvest_data
+    try:
+        deterministic = json.loads(
+            DETERMINISTIC_STRUCTURED_PATH.read_text(encoding="utf-8")
+        )
+    except (OSError, json.JSONDecodeError) as exc:
+        print(
+            f"FATAL: deterministic structured harvest is unreadable: {exc}",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    gate_error = source_health_gate_error(
+        deterministic,
+        stream_label="deterministic structured",
+        expected_stream="deterministic-structured-events",
+        expected_scope="priority-plus-rotating-deterministic-non-protest",
+    )
+    if gate_error:
+        print(f"FATAL: {gate_error}", file=sys.stderr)
+        sys.exit(1)
+    result = dict(harvest_data)
+    result["events"] = list(harvest_data.get("events") or []) + list(
+        deterministic.get("events") or []
+    )
+    result["source_yields"] = merge_source_yield_telemetry(
+        harvest_data.get("source_yields") or [],
+        deterministic.get("source_yields") or [],
+        "deterministic-structured-events",
+    )
+    result["deterministic_structured_summary"] = deterministic.get("summary") or {}
+    return result
+
+
 def load_manual():
     """Read manual-events.json and convert each entry to the schema shape."""
     if not MANUAL_PATH.exists():
@@ -90,12 +227,17 @@ def load_manual():
 
     records = []
     for entry in data.get("events", []):
+        # Superseded manual seeds remain in the source file as an audit trail,
+        # but must not be reintroduced after lifecycle reconciliation has
+        # assigned them to a stronger canonical record.
+        if entry.get("superseded_by"):
+            continue
         try:
             dt = datetime.fromisoformat(entry["date"])
         except Exception:
             continue
         iso = dt.isoformat(timespec="minutes")
-        record_id = make_id(entry.get("source_url", entry["title"]), iso, entry["title"])
+        record_id = entry.get("id") or make_id(entry.get("source_url", entry["title"]), iso, entry["title"])
         # Optional end_date
         end_iso = None
         if entry.get("end_date"):
@@ -103,7 +245,7 @@ def load_manual():
                 end_iso = datetime.fromisoformat(entry["end_date"]).isoformat(timespec="minutes")
             except Exception:
                 end_iso = None
-        records.append({
+        record = {
             "id": record_id,
             "date": iso,
             "end_date": end_iso,
@@ -129,7 +271,18 @@ def load_manual():
             "parent_id": entry.get("parent_id"),
             "is_parent_festival": entry.get("is_parent_festival", False),
             "age_band": entry.get("age_band"),
-        })
+        }
+        for field in (
+            "city", "province", "country", "corridor_zone", "timezone",
+            "identity_key", "legacy_ids", "confirmation_status",
+            "qualification_reasons", "record_kind", "date_precision",
+            "time_precision", "source_quality", "source_language",
+            "platform_adapter", "organizer", "lifecycle_status",
+            "missing_count",
+        ):
+            if entry.get(field) is not None:
+                record[field] = entry[field]
+        records.append(record)
     return records
 
 
@@ -141,14 +294,45 @@ def _url_specificity(url):
     return (str(url).count("/") + len(str(url))) if url else 0
 
 
+def _same_exact_event(left, right):
+    if normalize_title(left.get("title", "")) != normalize_title(right.get("title", "")):
+        return False
+    try:
+        left_date = datetime.fromisoformat(str(left.get("date") or "").replace("Z", "+00:00"))
+        right_date = datetime.fromisoformat(str(right.get("date") or "").replace("Z", "+00:00"))
+        if left_date != right_date:
+            return False
+    except (TypeError, ValueError):
+        if str(left.get("date") or "") != str(right.get("date") or ""):
+            return False
+    left_venue = re.sub(r"\W+", "", str(left.get("venue") or "").lower())
+    right_venue = re.sub(r"\W+", "", str(right.get("venue") or "").lower())
+    return bool(left_venue and left_venue == right_venue)
+
+
 def _fold(into, order, rec):
-    """Fold one record into the keyed map, keyed on (title, calendar day).
-    Unions types on collision and upgrades the base toward the richest values."""
-    key = (normalize_title(rec["title"]), str(rec.get("date", ""))[:10])
+    """Fold only the same occurrence; preserve same-title same-day sessions."""
+    rec = dict(rec)
+    rec.setdefault("identity_aliases", event_identity_aliases(rec))
+    rec.setdefault("occurrence_key", event_occurrence_key(rec))
+    if not rec.get("identity_key") or rec["identity_key"] in rec["identity_aliases"]:
+        rec["identity_key"] = rec["occurrence_key"]
+    key = ("occurrence", str(rec["occurrence_key"]))
     if key not in into:
-        into[key] = dict(rec)
-        order.append(key)
-        return
+        compatible = next(
+            (
+                existing_key
+                for existing_key, existing in into.items()
+                if records_represent_same_occurrence(existing, rec)
+                or _same_exact_event(existing, rec)
+            ),
+            None,
+        )
+        if compatible is None:
+            into[key] = rec
+            order.append(key)
+            return
+        key = compatible
     base = into[key]
     sec = list(base.get("secondary_types") or [])
     for t in [rec.get("type")] + list(rec.get("secondary_types") or []):
@@ -171,12 +355,16 @@ def _fold(into, order, rec):
         base["source_url"] = rec["source_url"]
     if not base.get("age_band") and rec.get("age_band"):
         base["age_band"] = rec["age_band"]
+    base["identity_aliases"] = list(dict.fromkeys(
+        list(base.get("identity_aliases") or event_identity_aliases(base))
+        + list(rec.get("identity_aliases") or event_identity_aliases(rec))
+    ))
 
 
 def merge(harvest_records, manual_records):
     """One event, one record. Manual wins base fields; collisions union types.
-    Dedupes within each input as well as across them, keyed on
-    (normalized_title, date_rounded_to_hour)."""
+    Dedupes exact or compatible representations without collapsing distinct
+    sessions that merely share a title and calendar day."""
     into, order = {}, []
     for r in manual_records:
         _fold(into, order, r)
@@ -270,12 +458,10 @@ def write_rss(records, out_path=None, channel_title=None, channel_link=None, cha
 
 
 def write_watchlist(harvest_data, final_records=None):
-    """Persist provisional event leads without publishing them as events.
+    """Persist only leads that still lack a real event date.
 
-    Watchlist records are source-confirmed leads with missing details, such as
-    time/place TBD. They keep scraper memory and search recall without inventing
-    an event time or venue. A public mirror lets Polymythcal surface them as
-    "needs details" leads, clearly outside the event feed.
+    Dated announcements with missing time or location belong in the main
+    chronology as native unconfirmed records.
     """
     items = harvest_data.get("watchlist", [])
     if not isinstance(items, list):
@@ -301,12 +487,14 @@ def write_watchlist(harvest_data, final_records=None):
         key = wl_key(item)
         if not key or key in published:
             continue
+        if item.get("date"):
+            continue
         merged[key] = item
     out_items = sorted(merged.values(), key=lambda x: x.get("date", "") or x.get("date_text", ""))
     payload = {
         "generated_at": now_iso(),
         "count": len(out_items),
-        "rule": "watchlist only: not published as calendar events until time/place is confirmed; existing leads persist until confirmed or published",
+        "rule": "internal recheck state for leads without a real event date; dated announcements belong in the public chronology with exact qualification reasons",
         "items": out_items,
     }
     WATCHLIST_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
@@ -366,7 +554,9 @@ def write_log(harvest_data, final_records):
 
 def main():
     print("=== merge_and_finalize ===")
-    harvest_data = load_harvest()
+    harvest_data = merge_deterministic_structured_events(
+        merge_deterministic_protests(load_harvest())
+    )
     harvest_records = harvest_data.get("events", [])
     print(f"harvest: {len(harvest_records)} records")
 

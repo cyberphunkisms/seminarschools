@@ -16,8 +16,8 @@ STATUS_FILE="${LOG_DIR}/${STREAM}-${RUN_ID}.status.json"
 LATEST_STATUS_FILE="${LOG_DIR}/${STREAM}-latest.status.json"
 MAX_TURNS="${MAX_TURNS:-90}"
 MAX_BUDGET_USD="${MAX_BUDGET_USD:-10.00}"
-HARVEST_TIMEOUT_SECONDS="${HARVEST_TIMEOUT_SECONDS:-2100}"
-HARVEST_ATTEMPTS="${HARVEST_ATTEMPTS:-2}"
+HARVEST_TIMEOUT_SECONDS="${HARVEST_TIMEOUT_SECONDS:-1500}"
+HARVEST_ATTEMPTS="${HARVEST_ATTEMPTS:-1}"
 FESTIVAL_SHARD_COUNT="${FESTIVAL_SHARD_COUNT:-7}"
 STRICT_HARVEST_FAILURES="${STRICT_HARVEST_FAILURES:-false}"
 HARVEST_STRICT="${HARVEST_STRICT:-0}"
@@ -40,9 +40,14 @@ is_strict_harvest() {
 }
 
 write_status() {
-  local code="$1" stage="${2:-agent}" message="${3:-}" attempt="${4:-0}"
+  local code="$1" stage="${2:-agent}" message="${3:-}" attempt="${4:-0}" agent_code="${5:-$1}"
   local kind status
   kind="$(failure_kind_for_code "${code}")"
+  if [[ "${stage}" == "merge" ]]; then
+    kind="merge-failure"
+  elif [[ "${stage}" == "verify" ]]; then
+    kind="verification-failure"
+  fi
   if [[ "${code}" == "0" ]]; then
     status="success"
   elif [[ "${kind}" == "configuration" || "${stage}" == "merge" || "${stage}" == "verify" ]]; then
@@ -50,12 +55,12 @@ write_status() {
   else
     status="skipped"
   fi
-  python3 - "$STATUS_FILE" "$LATEST_STATUS_FILE" "$code" "$status" "$stage" "$kind" "$message" "$attempt" "$HARVEST_ATTEMPTS" "$TODAY" "$RUN_ID" "$LOG_FILE" "$MAX_TURNS" "$MAX_BUDGET_USD" "$HARVEST_TIMEOUT_SECONDS" "$FESTIVAL_SHARD_COUNT" "$STRICT_HARVEST_FAILURES" "$HARVEST_STRICT" "$CLAUDE_MODEL" <<'PY'
+  python3 - "$STATUS_FILE" "$LATEST_STATUS_FILE" "$code" "$status" "$stage" "$kind" "$message" "$attempt" "$HARVEST_ATTEMPTS" "$TODAY" "$RUN_ID" "$LOG_FILE" "$MAX_TURNS" "$MAX_BUDGET_USD" "$HARVEST_TIMEOUT_SECONDS" "$FESTIVAL_SHARD_COUNT" "$STRICT_HARVEST_FAILURES" "$HARVEST_STRICT" "$CLAUDE_MODEL" "$agent_code" "$(failure_kind_for_code "${agent_code}")" <<'PY'
 import json, shutil, sys
 (
     out, latest, code, status, stage, kind, message, attempt, attempts, today,
     run_id, log, turns, budget, timeout, shard_count, strict_flag, harvest_strict,
-    model,
+    model, agent_code, agent_failure_kind,
 ) = sys.argv[1:]
 payload = {
     "stream": "festivals",
@@ -65,6 +70,14 @@ payload = {
     "exit_code": int(code),
     "stage": stage,
     "failure_kind": kind,
+    "publication_status": (
+        "published" if stage in {"published", "published-deterministic"} and int(code) == 0
+        else "blocked" if status == "failed"
+        else "pending" if int(code) == 0
+        else "unchanged"
+    ),
+    "agent_exit_code": int(agent_code),
+    "agent_failure_kind": agent_failure_kind,
     "message": message,
     "attempt": int(attempt),
     "attempts": int(attempts),
@@ -119,8 +132,11 @@ if ! [[ "${HARVEST_ATTEMPTS}" =~ ^[1-9][0-9]*$ ]]; then
   soft_exit_or_fail 78 "HARVEST_ATTEMPTS must be a positive integer." 0
 fi
 
-RUN_SLOT=$(( $(date -u +%s) / 259200 ))
-SHARD=$(( RUN_SLOT % FESTIVAL_SHARD_COUNT ))
+# Advance once per scheduled week. Manual reruns during the same calendar week
+# repeat the same shard, so they cannot consume the next week in the rotation.
+# With the default seven shards, the complete non-anchor roster is covered
+# every seven weekly runs without increasing cadence or credit use.
+SHARD="$(python3 scripts/polymythcal_sharding.py shard --date "${TODAY}" --count "${FESTIVAL_SHARD_COUNT}")"
 PROMPT_BODY="Today is ${TODAY} (UTC). This run's SHARD number is ${SHARD} (0-$((FESTIVAL_SHARD_COUNT-1))). FESTIVAL_SHARD_COUNT is ${FESTIVAL_SHARD_COUNT}. $(cat "${PROMPT_FILE}")"
 echo "=== polymythcalendar festivals harvest ${RUN_ID}; shard ${SHARD}/${FESTIVAL_SHARD_COUNT}; model ${CLAUDE_MODEL}; max ${HARVEST_TIMEOUT_SECONDS}s; budget ${MAX_BUDGET_USD}; turns ${MAX_TURNS}; attempts ${HARVEST_ATTEMPTS} ==="
 
@@ -143,7 +159,9 @@ for ATTEMPT in $(seq 1 "${HARVEST_ATTEMPTS}"); do
     break
   fi
   echo "::warning::festivals harvest attempt ${ATTEMPT} exited ${CLAUDE_STATUS}" | tee -a "${LOG_FILE}"
-  sleep 10
+  if [[ "${ATTEMPT}" -lt "${HARVEST_ATTEMPTS}" ]]; then
+    sleep 10
+  fi
 done
 
 if [[ "${CLAUDE_STATUS}" -ne 0 ]]; then
@@ -154,26 +172,18 @@ if [[ ! -f "${OUTPUT_FILE}" ]]; then
 fi
 
 set +e
-python3 - "${OUTPUT_FILE}" <<'PY'
-import json, sys
-p = sys.argv[1]
-try:
-    data = json.load(open(p, encoding='utf-8'))
-except Exception as e:
-    raise SystemExit(f"ERROR: malformed harvest JSON: {e}")
-if not isinstance(data, dict) or not isinstance(data.get('events'), list):
-    raise SystemExit('ERROR: harvest JSON must be an object with an events array')
-for i, e in enumerate(data['events']):
-    if not isinstance(e, dict) or not all(e.get(k) for k in ('title', 'date', 'source_url')):
-        raise SystemExit(f'ERROR: harvest record {i} lacks title, date, or source_url')
-print(f"=== valid full harvest: {len(data['events'])} records ===")
-PY
+python3 scripts/validate_harvest_source_ledger.py festivals \
+  --harvest "${OUTPUT_FILE}" \
+  --roster scripts/festivals-sources.json
 VALIDATE_STATUS="$?"
 set -e
 if [[ "${VALIDATE_STATUS}" -ne 0 ]]; then
-  soft_exit_or_fail 66 "Harvest JSON failed validation; data was left unchanged." "${HARVEST_ATTEMPTS}"
+  soft_exit_or_fail 66 "Harvest JSON or source accounting failed validation; data was left unchanged." "${HARVEST_ATTEMPTS}"
 fi
 
 write_status 0 "agent" "Claude harvest produced a valid output file; merging." "${HARVEST_ATTEMPTS}"
-python3 scripts/merge_festivals.py
+if ! python3 scripts/merge_festivals.py; then
+  write_status 67 "merge" "Festival harvest merge, rebuild, or verification failed." "${HARVEST_ATTEMPTS}" 0
+  exit 67
+fi
 write_status 0 "published" "Festival harvest merged, rebuilt, and verified." "${HARVEST_ATTEMPTS}"

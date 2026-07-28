@@ -3,6 +3,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { isGeneratedDependencyDirectory } = require('./repository-walk-policy');
 const root = path.resolve(__dirname, '..');
 const fail = [];
 
@@ -20,7 +21,7 @@ function lacks(rel, token) {
 }
 function walk(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (['node_modules', '.git', '.netlify', 'public'].includes(entry.name)) continue;
+    if (['.git', '.netlify', 'public'].includes(entry.name) || isGeneratedDependencyDirectory(entry.name)) continue;
     const abs = path.join(dir, entry.name);
     if (entry.isDirectory()) walk(abs, out);
     else if (entry.isFile() && entry.name.endsWith('.html')) out.push(abs);
@@ -29,6 +30,7 @@ function walk(dir, out = []) {
 }
 
 if (!/^\d{4}-\d{2}-\d{2}-.+/.test(read('RELEASE_ID.txt').trim())) fail.push('release id malformed');
+const ultimate = read('saul/index.html').includes('data-cv-ultimate="true"');
 
 for (const token of [
   'minmax(min(100%,190px),1fr)',
@@ -40,7 +42,7 @@ for (const token of [
 const footerPages = walk(root).filter(abs => fs.readFileSync(abs, 'utf8').includes('/js/footer.js'));
 for (const abs of footerPages) {
   const html = fs.readFileSync(abs, 'utf8');
-  if (!html.includes('/js/footer.js?v=20260719-audit11-decisions')) {
+  if (!html.includes('/js/footer.js?v=20260725-audit45-footer')) {
     fail.push(`${path.relative(root, abs)}: stale footer cache key`);
   }
 }
@@ -49,10 +51,24 @@ if (footerPages.length < 70) fail.push(`footer cache coverage unexpectedly low: 
 for (const token of ['white-space: nowrap', 'grid-template-columns: 24px minmax(86px, auto) minmax(0, 1fr)']) has('about/index.html', token);
 has('index.html', "sabachtan:{dx:20,dy:10,a:'start'}");
 
-for (const rel of ['saul/index.html', 'saul/cv/general/index.html', 'saul/cv/teaching/index.html', 'saul/hospitality/index.html']) {
-  has(rel, '<h2 class="cv-spectrum__section-label">Selected experience</h2>');
-  has(rel, '<h3>');
-  lacks(rel, '<h4>');
+if (ultimate) {
+  for (const token of [
+    'Teaching &amp; Learning',
+    'Research, Community &amp; Volunteer Work',
+    'Additional Work Experience',
+    'Key Skills',
+  ]) has('saul/index.html', token);
+  for (const rel of ['saul/cv/general/index.html', 'saul/cv/teaching/index.html', 'saul/hospitality/index.html']) {
+    has(rel, 'http-equiv="refresh"');
+    has(rel, 'Opening the requested');
+  }
+  lacks('saul/index.html', '<h4>');
+} else {
+  for (const rel of ['saul/index.html', 'saul/cv/general/index.html', 'saul/cv/teaching/index.html', 'saul/hospitality/index.html']) {
+    has(rel, '<h2 class="cv-spectrum__section-label">Selected experience</h2>');
+    has(rel, '<h3>');
+    lacks(rel, '<h4>');
+  }
 }
 for (const token of ['data-cv-map-rescue', 'Map blank? Open full map', 'cv-map-rescue']) has('saul/index.html', token);
 for (const token of ['.cv-map-rescue{']) has('saul/assets/saul-cv-spectrum-2026.css', token);

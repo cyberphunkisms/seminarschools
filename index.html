@@ -6,21 +6,22 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="https://seminarschools.com/">
-<meta property="og:title" content="Polymythcal, Tutoring, Resources &amp; Projects | Seminar Schools">
+<meta property="og:title" content="Polymyth Commons, Polymythcal, Tutoring &amp; Resources | Seminar Schools">
 <meta property="og:image" content="https://seminarschools.com/og-image.png">
-<meta property="og:description" content="Seminar Schools is a project web led by Polymythcal, with public events, tutoring, teacher resources, reading games, essays, and the polymorphousmythology framework.">
+<meta property="og:description" content="Seminar Schools is a project web led by Polymythcal and Polymyth Commons, with public events, a library of libraries, tutoring, teacher resources, reading games, essays, and the polymorphousmythology framework.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seminarschools.com/">
 <meta property="og:site_name" content="Seminar Schools">
 <meta name="twitter:card" content="summary">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Polymythcal, Tutoring, Resources &amp; Projects | Seminar Schools</title>
-<meta name="description" content="Seminar Schools is a project web led by Polymythcal, with public events, tutoring, teacher resources, reading games, essays, and the polymorphousmythology framework.">
+<script src="/js/theme-init.js?v=20260722-anti-jerk-antiyap"></script>
+<title>Polymyth Commons, Polymythcal, Tutoring &amp; Resources | Seminar Schools</title>
+<meta name="description" content="Seminar Schools is a project web led by Polymythcal and Polymyth Commons, with public events, a library of libraries, tutoring, teacher resources, reading games, essays, and the polymorphousmythology framework.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
-<link rel="stylesheet" href="/css/theme.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=20260725-audit45">
 <style>
 :root{
   --bg:#F5EBE4; --bg-soft:#FAF4ED; --ink:#2A1A14; --ink-soft:#4A3A30; --muted:#6B5F54;
@@ -31,7 +32,7 @@
 @media(prefers-color-scheme:dark){:root:not(.light){--bg:#171210;--bg-soft:#211a15;--ink:#ECE3D2;--ink-soft:#C9BCA6;--muted:#8E806E;--line:rgba(236,227,210,.14);--accent:#c87a5a;}}
 :root.dark,:root[data-theme="dark"]{--bg:#171210;--bg-soft:#211a15;--ink:#ECE3D2;--ink-soft:#C9BCA6;--muted:#8E806E;--line:rgba(236,227,210,.14);--accent:#c87a5a;}
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:auto;}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;}
 a{color:inherit;text-decoration:none;}
 .mono{font-family:var(--mono);}
@@ -103,8 +104,8 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
   .panel{left:1rem;right:1rem;bottom:1rem;max-width:none;padding:1rem 1.05rem;}
   .descend-sq{display:none;}
   .map-rail{display:flex;gap:.55rem;overflow:auto;padding:.8rem 1rem 1rem;border-bottom:1px solid var(--line);scrollbar-width:thin;}
-  .map-rail button{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;background:var(--bg-soft);color:var(--ink-soft);padding:.55rem .75rem;font-family:var(--mono);font-size:0.72rem;letter-spacing:.06em;cursor:pointer;}
-  .map-rail button.on{border-color:var(--n);color:var(--n);background:color-mix(in srgb,var(--n) 10%,var(--bg-soft));}
+  .map-rail a{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;background:var(--bg-soft);color:var(--ink-soft);padding:.55rem .75rem;font-family:var(--mono);font-size:0.72rem;letter-spacing:.06em;cursor:pointer;}
+  .map-rail a.on{border-color:var(--n);color:var(--n);background:color-mix(in srgb,var(--n) 10%,var(--bg-soft));}
 }
 @media(prefers-reduced-motion:reduce){.jewel .halo,.jewel .dot,.jewel .label-plate,.thread{transition:none!important;}}
 
@@ -151,6 +152,49 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
 .path-card .path-k{font-family:var(--mono);font-size:0.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);}
 .path-card strong{font-family:var(--serif);font-weight:500;font-size:1.05rem;line-height:1.16;}
 .path-card span:last-child{font-size:.9rem;line-height:1.42;color:var(--ink-soft);}
+.path-mark{--mark-a:var(--accent);--mark-b:var(--c3);position:relative;display:block;height:54px;margin:-.15rem -.15rem .15rem;overflow:hidden;border:1px solid color-mix(in srgb,var(--mark-a) 28%,var(--line));border-radius:9px;background:
+  radial-gradient(circle at 78% 28%,color-mix(in srgb,var(--mark-b) 30%,transparent) 0 8px,transparent 8.5px),
+  linear-gradient(135deg,color-mix(in srgb,var(--mark-a) 15%,transparent),transparent 62%);}
+.path-mark::before,.path-mark::after{content:"";position:absolute;box-sizing:border-box;border:1px solid color-mix(in srgb,var(--mark-a) 72%,var(--ink));}
+.path-mark::before{width:58px;height:58px;left:12px;top:17px;transform:rotate(28deg);}
+.path-mark::after{width:26px;height:26px;left:42px;top:8px;border-radius:50%;}
+.path-mark[data-project="polymythcal"]{--mark-a:var(--c3);--mark-b:var(--c2);background:
+  repeating-linear-gradient(90deg,transparent 0 15px,color-mix(in srgb,var(--c3) 16%,transparent) 15px 16px),
+  radial-gradient(circle at 76% 50%,transparent 0 12px,color-mix(in srgb,var(--c3) 62%,transparent) 12.5px 13.5px,transparent 14px 21px,color-mix(in srgb,var(--c2) 48%,transparent) 21.5px 22.5px,transparent 23px),
+  linear-gradient(135deg,color-mix(in srgb,var(--c3) 13%,transparent),transparent);}
+.path-mark[data-project="polymythcal"]::before{left:20px;top:9px;width:38px;height:38px;border-radius:50%;transform:none;}
+.path-mark[data-project="polymythcal"]::after{left:37px;top:4px;width:1px;height:48px;border-width:0 0 0 1px;border-radius:0;transform:rotate(34deg);}
+.path-mark[data-project="commons"]{--mark-a:var(--c7);--mark-b:var(--c4);background:
+  radial-gradient(circle at 28% 50%,transparent 0 10px,color-mix(in srgb,var(--mark-a) 42%,transparent) 11px 12px,transparent 13px),
+  radial-gradient(circle at 57% 50%,transparent 0 16px,color-mix(in srgb,var(--mark-b) 40%,transparent) 17px 18px,transparent 19px),
+  color-mix(in srgb,var(--bg-soft) 91%,var(--mark-a));}
+.path-mark[data-project="commons"]::before{left:22px;top:14px;width:70px;height:28px;border-radius:50%;transform:none;}
+.path-mark[data-project="commons"]::after{left:62px;top:8px;width:28px;height:28px;border-radius:50%;background:color-mix(in srgb,var(--bg-soft) 82%,transparent);}
+.path-mark[data-project="leizu"]{--mark-a:var(--c1);--mark-b:var(--c6);}
+.path-mark[data-project="leizu"]::before{left:17px;top:13px;width:66px;height:28px;border-radius:3px;transform:skewX(-18deg);}
+.path-mark[data-project="leizu"]::after{left:29px;top:7px;width:66px;height:28px;border-radius:3px;transform:skewX(-18deg);background:color-mix(in srgb,var(--bg-soft) 76%,transparent);}
+.path-mark[data-project="teacher"]{--mark-a:var(--c7);--mark-b:var(--c1);background:
+  linear-gradient(90deg,transparent 24%,color-mix(in srgb,var(--c7) 35%,transparent) 24% 26%,transparent 26% 49%,color-mix(in srgb,var(--c7) 35%,transparent) 49% 51%,transparent 51% 74%,color-mix(in srgb,var(--c7) 35%,transparent) 74% 76%,transparent 76%),
+  linear-gradient(color-mix(in srgb,var(--c7) 14%,transparent),transparent);}
+.path-mark[data-project="teacher"]::before{left:14px;top:11px;width:92px;height:32px;transform:none;border-radius:2px;}
+.path-mark[data-project="teacher"]::after{left:67px;top:18px;width:26px;height:18px;border-width:0 0 1px 1px;border-radius:0;transform:skewY(-24deg);}
+.path-mark[data-project="bb"]{--mark-a:var(--c5);--mark-b:var(--c4);background:
+  radial-gradient(ellipse at 24% 108%,transparent 0 23px,color-mix(in srgb,var(--c5) 58%,transparent) 23.5px 25px,transparent 25.5px 34px,color-mix(in srgb,var(--c4) 42%,transparent) 34.5px 36px,transparent 36.5px),
+  linear-gradient(125deg,color-mix(in srgb,var(--c5) 13%,transparent),transparent);}
+.path-mark[data-project="bb"]::before{left:65px;top:18px;width:47px;height:14px;border-radius:50%;transform:rotate(-11deg);}
+.path-mark[data-project="bb"]::after{left:102px;top:15px;width:9px;height:9px;border-radius:50%;background:var(--mark-a);}
+.path-mark[data-project="aa"]{--mark-a:var(--c4);--mark-b:var(--c2);background:
+  radial-gradient(circle at 22px 16px,var(--mark-a) 0 2px,transparent 2.5px),
+  radial-gradient(circle at 78px 37px,var(--mark-b) 0 2px,transparent 2.5px),
+  radial-gradient(circle at 116px 12px,var(--mark-a) 0 2px,transparent 2.5px),
+  linear-gradient(150deg,color-mix(in srgb,var(--c4) 14%,transparent),transparent);}
+.path-mark[data-project="aa"]::before{left:19px;top:18px;width:101px;height:1px;border-width:1px 0 0;transform:rotate(3deg);}
+.path-mark[data-project="aa"]::after{left:53px;top:5px;width:30px;height:30px;border-radius:0;transform:rotate(45deg);}
+.path-mark[data-project="cv"]{--mark-a:var(--c6);--mark-b:var(--c7);background:
+  linear-gradient(90deg,color-mix(in srgb,var(--c6) 22%,transparent) 0 22%,transparent 22% 28%,color-mix(in srgb,var(--c7) 17%,transparent) 28% 71%,transparent 71%),
+  linear-gradient(135deg,color-mix(in srgb,var(--c6) 10%,transparent),transparent);}
+.path-mark[data-project="cv"]::before{left:19px;top:10px;width:84px;height:34px;transform:none;border-radius:2px;}
+.path-mark[data-project="cv"]::after{left:49px;top:17px;width:43px;height:1px;border-width:1px 0 0;border-radius:0;box-shadow:0 8px 0 color-mix(in srgb,var(--mark-a) 72%,var(--ink)),0 16px 0 color-mix(in srgb,var(--mark-a) 72%,var(--ink));}
 @media(max-width:520px){.path-grid{grid-template-columns:1fr}.path-card{border-radius:10px;padding:.9rem;}}
 </style>
 <script type="application/ld+json">
@@ -198,17 +242,45 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
   .jewel.core .lab{font-size:20px;}
   .jewel.priority .lab{font-size:18px;}
   .hint{max-width:calc(100% - 2rem);padding:.3rem .48rem;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--bg-soft) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);line-height:1.35;}
-  .map-rail{align-items:center;scroll-snap-type:x proximity;overscroll-behavior-x:contain;scroll-padding-inline:4.5rem;}
-  .map-rail button{min-height:44px;scroll-snap-align:center;display:inline-flex;align-items:center;gap:.42rem;padding:.58rem .78rem;}
-  .map-rail button.on{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--n) 45%,transparent);}
-  .map-rail button:focus-visible{outline:2px solid var(--n);outline-offset:2px;}
+  .map-rail{align-items:center;overscroll-behavior-x:contain;}
+  .map-rail a{min-height:44px;display:inline-flex;align-items:center;gap:.42rem;padding:.58rem .78rem;}
+  .map-rail a.on{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--n) 45%,transparent);}
+  .map-rail a:focus-visible{outline:2px solid var(--n);outline-offset:2px;}
   .map-rail .rail-index{font-size:.61rem;opacity:.7;}
 }
 </style>
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<style id="audit35-home-ui">
+/* Route-local resilience: large enough header targets, legible system-color mode,
+   and an index-first printout instead of an ink-heavy interactive canvas. */
+.bar .brand,.bar .book{display:inline-flex;align-items:center;min-height:44px}
+@media (forced-colors:active){
+  .thread,.ring{stroke:CanvasText}
+  .jewel .dot,.jewel .label-plate{fill:Canvas;stroke:LinkText}
+  .jewel .lab{fill:CanvasText}
+  .path-card,.map-rail a{border:1px solid CanvasText}
+  .path-card.featured{box-shadow:none}
+  .path-mark{forced-color-adjust:none;background:Canvas!important;border-color:CanvasText}
+  .path-mark::before,.path-mark::after{border-color:CanvasText;background:Canvas}
+}
+@media print{
+  @page{margin:.6in}
+  html,body{background:#fff!important;color:#111!important}
+  body{background-image:none!important}
+  .skip-link,.stage,.map-rail,.descend-sq,#indraLayer{display:none!important}
+  .bar{position:static!important;padding:0 0 .65rem!important;background:#fff!important;
+    color:#111!important;border-bottom:1px solid #555!important;backdrop-filter:none!important}
+  .bar .book{border-color:#111!important}
+  .lede,.index,.foot{max-width:none!important;padding-left:0!important;padding-right:0!important}
+  .path-card,.idx-row{background:#fff!important;color:#111!important;border-color:#777!important;
+    box-shadow:none!important;break-inside:avoid}
+}
+</style>
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body class="home" data-indra-intensity="0.075" data-geometry="indra-web" data-route-type="home">
-<a class="skip-link" href="#index">Skip to main content</a>
+<body class="home" data-indra-intensity="0.070" data-geometry="indra-web" data-route-type="home" data-motion="calm">
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
 <header class="bar">
   <a class="brand" href="/">Seminar<b>Schools</b></a>
@@ -224,23 +296,25 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
   <div class="panel" id="panel" role="region" aria-label="Selected project" aria-live="polite"></div>
   <button class="descend-sq" id="descendSq" type="button" aria-label="Scroll down into the page" title="Scroll down">&#8595;</button>
 </section>
-<div class="map-rail" id="mapRail" role="toolbar" aria-label="Project web selector"></div>
+<nav class="map-rail" id="mapRail" aria-label="Project links"></nav>
 
+<main id="main-content">
 <div class="lede">
   <h1>A room of readers working a hard text together reaches what <em>none of them</em> could reach alone.</h1>
-  <p>Seminar Schools connects Polymythcal, tutoring, public reading, teacher resources, writing, and learning games in one project web.</p>
+  <p>Find events, tutoring, teaching materials, reading games, essays, and the full CV.</p>
 
 
   <section class="work-paths" aria-labelledby="home-pathways-title">
-    <h2 id="home-pathways-title">Start with the work in front of you.</h2>
-    <p class="path-intro">Study support, public events, classroom materials, reading games, project archives, and the full CV are available below.</p>
+    <h2 id="home-pathways-title">Start here.</h2>
+    <p class="path-intro">Choose a section.</p>
     <div class="path-grid">
-      <a class="path-card featured" href="/polymythseminars/"><span class="path-k">Polymythcal · public calendar</span><strong>Find talks, contests, calls for papers, fellowships, festivals, and public events.</strong><span>Search by date, category, audience, location, and source freshness.</span></a>
-      <a class="path-card" href="/leizu/"><span class="path-k">Leizu Academy · tutoring</span><strong>A student needs steadier reading, writing, or humanities work.</strong><span>View tutoring plans, session structure, policies, intake, and scholarship information.</span></a>
-      <a class="path-card" href="/teacherresources/"><span class="path-k">Teaching materials</span><strong>A teacher wants useful outside resources without digging through scattered tabs.</strong><span>Search classroom resources by subject and level, with direct links to the original material.</span></a>
-      <a class="path-card" href="/bb/"><span class="path-k">Reading game</span><strong>A class or reading group wants to turn a difficult text into playable choices.</strong><span>Make a wormcard, then use the rule library to guide students through choices inside the text.</span></a>
-      <a class="path-card" href="/aa/"><span class="path-k">AA* and polymyth</span><strong>A reader wants the project archive and the theory machinery behind the work.</strong><span>Open the archive, then follow its routes into polymyth and ML*.</span></a>
-      <a class="path-card" href="/saul/"><span class="path-k">CV</span><strong>An employer, school, collaborator, or grant reader wants Saul Karim Nassau’s record.</strong><span>Open the full professional record, choose a focus, and download the matching monochrome CV.</span></a>
+      <a class="path-card featured" href="/polymythseminars/"><span class="path-mark" data-project="polymythcal" aria-hidden="true"></span><span class="path-k">Polymythcal</span><strong>Find events and application deadlines.</strong><span>Filter by date, place, topic, and audience.</span></a>
+      <a class="path-card" href="/polymythcommons/"><span class="path-mark" data-project="commons" aria-hidden="true"></span><span class="path-k">Polymyth Commons</span><strong>Find the library or commons project that already holds the work.</strong><span>Search Polymythlib, the book backbone, and shared methods.</span></a>
+      <a class="path-card" href="/leizu/"><span class="path-mark" data-project="leizu" aria-hidden="true"></span><span class="path-k">Tutoring</span><strong>Reading, writing, humanities, OSSD, and IB.</strong><span>See subjects, plans, and scholarships.</span></a>
+      <a class="path-card" href="/teacherresources/"><span class="path-mark" data-project="teacher" aria-hidden="true"></span><span class="path-k">Teaching materials</span><strong>Free resources by subject and level.</strong><span>Open the original source.</span></a>
+      <a class="path-card" href="/bb/"><span class="path-mark" data-project="bb" aria-hidden="true"></span><span class="path-k">Reading game</span><strong>Turn a difficult text into a game.</strong><span>Make a wormcard or open the rules.</span></a>
+      <a class="path-card" href="/aa/"><span class="path-mark" data-project="aa" aria-hidden="true"></span><span class="path-k">Essays and archive</span><strong>Open Polymyth, Meaninglib, and AA*.</strong><span>Read essays, methods, and project records.</span></a>
+      <a class="path-card" href="/saul/"><span class="path-mark" data-project="cv" aria-hidden="true"></span><span class="path-k">CV</span><strong>Saul Karim Nassau’s work and experience.</strong><span>View the full CV or choose a focus.</span></a>
     </div>
   </section>
 
@@ -254,9 +328,10 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
   </div>
 </div>
 
-<main class="index" id="index">
-  <div class="col-head"><span>The index</span><span>everything, directly</span></div>
+<section class="index" id="index" aria-labelledby="all-sections-title">
+  <div class="col-head"><span id="all-sections-title">All sections</span><span>direct links</span></div>
   <div class="idx-grid" id="idxGrid"></div>
+</section>
 </main>
 
 <footer class="foot">
@@ -274,23 +349,24 @@ body.home #indraLayer{color:var(--indra-active,var(--ink));transition:opacity .4
 const cv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const NODES = [
   {id:'core', label:'Seminar Schools', href:'/about/', tier:0, c:'--ink', k:'The practice', plain:'About the whole project web', d:'The conceptual centre of Seminar Schools, with its public work, teaching practice, and deeper account of the seminar method.'},
-  {id:'calendar', label:'polymythcalendar', href:'/polymythseminars/', tier:2, c:'--c3', k:'Public calendar', plain:'Events and deadlines', priority:true, d:'Talks, readings, exhibitions, festivals, contests, CFPs, fellowships, and public opportunities in one searchable calendar.'},
+  {id:'calendar', label:'Polymythcal', href:'/polymythseminars/', tier:2, c:'--c3', k:'Public calendar', plain:'Events and deadlines', priority:true, d:'Talks, readings, exhibitions, festivals, contests, CFPs, fellowships, and public opportunities in one searchable calendar.'},
+  {id:'commons', label:'Polymyth Commons', href:'/polymythcommons/', tier:1, c:'--c7', k:'Library of libraries', plain:'Libraries and commons work', d:'Polymythlib points to libraries, archives, repositories, portals, networks, standards, and preservation projects while their knowledge stays at the source.'},
   {id:'leizu', label:'Leizu Academy', href:'/leizu', tier:1, c:'--c1', k:'Tutoring', plain:'Study support', d:'Individual tutoring for OSSD, IB, and university preparation.'},
   {id:'teach', label:'Teacher Resources', href:'/teacherresources/', tier:1, c:'--c7', k:'Teacher library', plain:'Classroom materials', d:'Free classroom-ready materials arranged by subject.'},
   {id:'agora', label:'The Agora', href:'/agora/', tier:1, c:'--c2', k:'Public seminar', plain:'Reading together', d:'A free public seminar for readers in Toronto and online.'},
   {id:'marginalia', label:'Marginalia', href:'/marginalia', tier:2, c:'--c6', k:'Essays', plain:'Lecture writing', d:'Writing shaped by lectures and conversations across Toronto.'},
-  {id:'polymyth', label:'polymorphousmythology', href:'/polymyth/methodologylist', tier:2, c:'--c4', k:'Framework', plain:'Theory and archive', d:'A framework for tracing how symbols, figures, and stories gather meaning through use.'},
+  {id:'polymyth', label:'polymorphousmythology', href:'/polymyth/', tier:2, c:'--c4', k:'Framework', plain:'Theory and archive', d:'A framework for tracing how symbols, figures, and stories gather meaning through use.'},
   {id:'bb', label:'bookwormburrows', href:'/bb/', tier:3, c:'--c5', k:'Reading game', plain:'Text-based learning game', d:'A text becomes a world to enter, read, and play.'},
   {id:'ohm', label:'Ohm Dome', href:'/ohm-dome/', tier:3, c:'--c5', k:'Public art', plain:'Installation prototype', prototype:true, d:'A public light installation prototype shaped by heartbeat, breath, and proximity.'},
   {id:'sabachtan', label:'Sabachtan Seminar', href:'/agora/#sabachtan', tier:3, c:'--c6', k:'Seminar series', plain:'Framework prototype', prototype:true, d:'A developing seminar on first questions, abandonment, and the ground beneath the framework.'},
 ];
-const CLUSTERS = [ ['leizu','teach','agora'], ['calendar','marginalia'], ['polymyth','bb','sabachtan'] ];
+const CLUSTERS = [ ['leizu','teach','agora'], ['calendar','commons','marginalia'], ['polymyth','bb','sabachtan'] ];
 const W=1000,H=700,CX=W*.5,CY=H*.47;
 const RING={1:135,2:215,3:292};
-const ANG={leizu:330,teach:205,agora:55,calendar:255,marginalia:150,polymyth:95,bb:25,ohm:290,sabachtan:120};
+const ANG={leizu:330,teach:205,agora:55,calendar:255,commons:145,marginalia:150,polymyth:95,bb:25,ohm:290,sabachtan:120};
 const LABEL={
   core:{dx:0,dy:53,a:'middle'},leizu:{dx:25,dy:7,a:'start'},teach:{dx:-24,dy:7,a:'end'},agora:{dx:24,dy:7,a:'start'},
-  calendar:{dx:-16,dy:-17,a:'end'},marginalia:{dx:-20,dy:7,a:'end'},polymyth:{dx:20,dy:9,a:'start'},
+  calendar:{dx:-16,dy:-17,a:'end'},commons:{dx:-24,dy:-15,a:'end'},marginalia:{dx:-20,dy:7,a:'end'},polymyth:{dx:20,dy:9,a:'start'},
   bb:{dx:20,dy:8,a:'start'},ohm:{dx:18,dy:-16,a:'start'},sabachtan:{dx:20,dy:10,a:'start'}
 };
 const pos={core:{x:CX,y:CY}};
@@ -312,7 +388,7 @@ CLUSTERS.forEach(cl=>{for(let i=0;i<cl.length;i++)for(let j=i+1;j<cl.length;j++)
 const panel=document.getElementById('panel');
 const rail=document.getElementById('mapRail');
 const jewelEls={};
-let activeId=null,lastPointer='mouse';
+let activeId=null;
 function radius(n){if(n.priority)return 14;return n.tier===0?22:n.tier===1?12:n.tier===2?10:8;}
 function setPanel(n,col){
   panel.style.setProperty('--n',col);
@@ -321,20 +397,20 @@ function setPanel(n,col){
 }
 function selectNode(n){
   const col=cv(n.c);
-  Object.keys(jewelEls).forEach(id=>{const g=jewelEls[id];g.classList.remove('on');g.setAttribute('aria-pressed','false');});
+  Object.keys(jewelEls).forEach(id=>{const g=jewelEls[id];g.classList.remove('on');});
   Object.keys(threadEls).forEach(id=>threadEls[id].forEach(t=>t.classList.remove('lit')));
-  jewelEls[n.id].classList.add('on');jewelEls[n.id].setAttribute('aria-pressed','true');
+  jewelEls[n.id].classList.add('on');
   (threadEls[n.id]||[]).forEach(t=>{t.classList.add('lit');t.style.setProperty('--litc',col);});
   activeId=n.id;
   document.body.style.setProperty('--indra-active',col);
   document.body.style.setProperty('--indra-opacity',n.id==='core'?'.036':'.075');
   document.body.dataset.activeProject=n.id;
   setPanel(n,col);
-  rail.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.node===n.id));
+  rail.querySelectorAll('a').forEach(b=>b.classList.toggle('on',b.dataset.node===n.id));
 }
 NODES.forEach(n=>{
   const p=pos[n.id],col=cv(n.c),r=radius(n),L=LABEL[n.id];
-  const g=el('g',{class:'jewel'+(n.tier===0?' core':'')+(n.priority?' priority':''),tabindex:'0',role:'button','aria-label':`Show ${n.label}, ${n.plain||n.k}${n.prototype?', prototype':''}`,'aria-pressed':'false'});
+  const g=el('g',{class:'jewel'+(n.tier===0?' core':'')+(n.priority?' priority':''),tabindex:'0',role:'link','aria-label':`${n.label}: ${n.plain||n.k}${n.prototype?', prototype':''}`});
   g.style.setProperty('--n',col);
   g.appendChild(el('circle',{class:'halo',cx:p.x,cy:p.y,r:r*2.65}));
   g.appendChild(el('circle',{class:'dot',cx:p.x,cy:p.y,r}));
@@ -346,18 +422,12 @@ NODES.forEach(n=>{
   g.insertBefore(plate,lab);
   g.appendChild(el('circle',{class:'hit',cx:p.x,cy:p.y,r:Math.max(r*2.9,24)}));
   jewelEls[n.id]=g;
-  g.addEventListener('mouseenter',()=>selectNode(n));
   g.addEventListener('focus',()=>selectNode(n));
-  g.addEventListener('pointerup',e=>{lastPointer=e.pointerType||'mouse';});
-  g.addEventListener('click',()=>{
-    if(lastPointer==='touch'||lastPointer==='pen'||activeId!==n.id){selectNode(n);return;}
-    window.location.assign(n.href);
-  });
+  g.addEventListener('click',()=>window.location.assign(n.href));
   g.addEventListener('keydown',e=>{
-    if(e.key===' '){e.preventDefault();selectNode(n);}
-    if(e.key==='Enter'){e.preventDefault();if(activeId===n.id)window.location.assign(n.href);else selectNode(n);}
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();window.location.assign(n.href);}
   });
-  const b=document.createElement('button');b.type='button';b.dataset.node=n.id;b.textContent=n.label+(n.prototype?' · P':'');b.title=n.plain+(n.prototype?' · Prototype':'');b.style.setProperty('--n',col);b.addEventListener('click',()=>selectNode(n));rail.appendChild(b);
+  const b=document.createElement('a');b.href=n.href;b.dataset.node=n.id;b.textContent=n.label+(n.prototype?' · P':'');b.title=n.plain+(n.prototype?' · Prototype':'');b.style.setProperty('--n',col);rail.appendChild(b);
 });
 selectNode(NODES.find(n=>n.id==='calendar')||NODES[0]);
 // Core ink follows the theme toggle as well as the page's first render.
@@ -377,20 +447,18 @@ NODES.filter(n=>n.tier>0).forEach((n,i)=>{
   if(window.__seminarSchoolsMobileWebHybrid)return;
   window.__seminarSchoolsMobileWebHybrid=true;
   const mobile=window.matchMedia('(max-width:720px)');
-  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)');
   const svg=document.getElementById('web');
   const rail=document.getElementById('mapRail');
   const hint=document.getElementById('mapInstruction');
-  if(!svg||!rail||typeof NODES==='undefined'||typeof pos==='undefined'||typeof selectNode!=='function')return;
+  if(!svg||!rail||typeof NODES==='undefined'||typeof selectNode!=='function')return;
   const FULL={x:0,y:0,w:1000,h:700};
-  let frame=0;
-  const buttons=Array.from(rail.querySelectorAll('button'));
-  const buttonById=Object.fromEntries(buttons.map(b=>[b.dataset.node,b]));
+  const buttons=Array.from(rail.querySelectorAll('a'));
   buttons.forEach((button,index)=>{
     const node=NODES.find(n=>n.id===button.dataset.node);
     button.innerHTML='<span class="rail-index">'+String(index+1).padStart(2,'0')+'</span><span>'+node.label+(node.prototype?' · P':'')+'</span>';
     button.setAttribute('aria-label',node.label+', '+(node.plain||node.k)+(node.prototype?', prototype':''));
-    button.setAttribute('aria-pressed','false');
+    button.removeAttribute('aria-pressed');
+    button.addEventListener('focus',()=>selectNode(node));
     button.addEventListener('keydown',event=>{
       let next=index;
       if(event.key==='ArrowRight'||event.key==='ArrowDown')next=(index+1)%buttons.length;
@@ -399,8 +467,6 @@ NODES.filter(n=>n.tier>0).forEach((n,i)=>{
       else if(event.key==='End')next=buttons.length-1;
       else return;
       event.preventDefault();
-      const target=NODES.find(n=>n.id===buttons[next].dataset.node);
-      selectNode(target);
       buttons[next].focus();
     });
   });
@@ -408,44 +474,12 @@ NODES.filter(n=>n.tier>0).forEach((n,i)=>{
     const hit=g.querySelector('.hit');
     if(hit)hit.dataset.desktopRadius=hit.getAttribute('r');
   });
-  function targetFor(node){
-    if(!mobile.matches||node.id==='core')return FULL;
-    const p=pos[node.id],c=pos.core,w=660,h=520;
-    const midX=(c.x*.35+p.x*.65),midY=(c.y*.4+p.y*.6);
-    return {
-      x:Math.max(-35,Math.min(1000-w+35,midX-w/2)),
-      y:Math.max(-40,Math.min(700-h+40,midY-h/2)),
-      w,h
-    };
-  }
-  function parseView(){
-    const v=(svg.getAttribute('viewBox')||'0 0 1000 700').trim().split(/\s+/).map(Number);
-    return {x:v[0],y:v[1],w:v[2],h:v[3]};
-  }
-  function writeView(v){svg.setAttribute('viewBox',[v.x,v.y,v.w,v.h].map(n=>Number(n.toFixed(2))).join(' '));}
-  function moveView(target,animate){
-    cancelAnimationFrame(frame);
-    if(!animate||reduce.matches){writeView(target);return;}
-    const start=parseView(),startAt=performance.now(),duration=230;
-    const ease=t=>1-Math.pow(1-t,3);
-    const step=now=>{
-      const t=Math.min(1,(now-startAt)/duration),e=ease(t);
-      writeView({x:start.x+(target.x-start.x)*e,y:start.y+(target.y-start.y)*e,w:start.w+(target.w-start.w)*e,h:start.h+(target.h-start.h)*e});
-      if(t<1)frame=requestAnimationFrame(step);
-    };
-    frame=requestAnimationFrame(step);
-  }
-  function centerRail(node,animate){
-    const button=buttonById[node.id];
-    if(!button||!mobile.matches)return;
-    const left=Math.max(0,button.offsetLeft-(rail.clientWidth-button.offsetWidth)/2);
-    rail.scrollTo({left,behavior:animate&&!reduce.matches?'smooth':'auto'});
-  }
-  function sync(node,animate=true){
+  function writeView(v){svg.setAttribute('viewBox',[v.x,v.y,v.w,v.h].join(' '));}
+  function sync(node){
     buttons.forEach(button=>{
       const on=button.dataset.node===node.id;
       button.classList.toggle('on',on);
-      button.setAttribute('aria-pressed',String(on));
+      button.removeAttribute('aria-pressed');
       button.tabIndex=on?0:-1;
     });
     Object.entries(jewelEls).forEach(([id,g])=>{
@@ -456,28 +490,40 @@ NODES.filter(n=>n.tier>0).forEach((n,i)=>{
     });
     if(hint)hint.textContent=mobile.matches?(node.plain+' · '+(NODES.indexOf(node)+1)+'/'+NODES.length):'Choose a jewel';
     svg.dataset.focusNode=node.id;
-    moveView(targetFor(node),animate&&mobile.matches);
-    requestAnimationFrame(()=>centerRail(node,animate));
+    writeView(FULL);
   }
   const baseSelect=selectNode;
-  selectNode=function(node){baseSelect(node);sync(node,true);};
+  selectNode=function(node){baseSelect(node);sync(node);};
   function refresh(){
     const node=NODES.find(n=>n.id===activeId)||NODES.find(n=>n.id==='calendar')||NODES[0];
-    sync(node,false);
+    sync(node);
+  }
+  let resizeFrame=0;
+  function scheduleRefresh(){
+    if(resizeFrame)return;
+    resizeFrame=requestAnimationFrame(()=>{
+      resizeFrame=0;
+      refresh();
+    });
   }
   if(mobile.addEventListener)mobile.addEventListener('change',refresh);else mobile.addListener(refresh);
-  window.addEventListener('resize',refresh,{passive:true});
+  window.addEventListener('resize',scheduleRefresh,{passive:true});
+  window.addEventListener('pageshow',scheduleRefresh);
+  window.addEventListener('pagehide',()=>{
+    if(resizeFrame)cancelAnimationFrame(resizeFrame);
+    resizeFrame=0;
+  });
   refresh();
 })();
 </script>
 <script>
-(function(){var d=document.getElementById("descendSq");if(d)d.addEventListener("click",function(){var t=document.querySelector(".lede");if(t)t.scrollIntoView({behavior:"smooth",block:"start"});});})();
+(function(){var d=document.getElementById("descendSq");if(d)d.addEventListener("click",function(){var t=document.querySelector(".lede");if(t)t.scrollIntoView({behavior:"auto",block:"start"});});})();
 </script>
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/theme.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
-<script src="/js/footer.js?v=20260719-audit11-decisions" defer></script>
+<script src="/js/footer.js?v=20260725-audit45-footer" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
-<script defer src="/js/site-keyboard-enhancements.js"></script>
+<script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

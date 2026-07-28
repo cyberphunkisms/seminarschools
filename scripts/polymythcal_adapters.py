@@ -15,6 +15,7 @@ import urllib.parse
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Iterable
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from bs4 import BeautifulSoup
 
@@ -25,6 +26,9 @@ ADAPTER_NAMES = {
     "festival",
     "french-language",
     "civic-action",
+    "wordpress-tec",
+    "action-network",
+    "campaign-page",
 }
 
 FRENCH_MONTHS = {
@@ -42,6 +46,12 @@ ENGLISH_MONTHS = {
     "december": 12, "dec": 12,
 }
 MONTHS = {**ENGLISH_MONTHS, **FRENCH_MONTHS}
+MONTH_ABBREVIATION_PERIOD_RE = re.compile(
+    r"\b(Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec|"
+    r"janv|févr|fevr|avr|juil|sept|oct|nov|déc|dec)\.(?=\s+\d)",
+    re.I,
+)
+MAX_HTML_EVENT_TEXT = 24000
 
 STATUS_PATTERNS = {
     "cancelled": re.compile(r"\b(cancelled|canceled|annul(?:é|e|ée|ees|és)?|annulation)\b", re.I),
@@ -57,7 +67,21 @@ PROFILE_SELECTORS = {
     "library": [".cp-event", ".event-card", "article.event", "[data-event-id]", "article", "li"],
     "festival": [".schedule-item", ".program-item", ".event-card", "article.event", "article", "li"],
     "french-language": ["article.evenement", ".carte-evenement", ".event-card", "article", "li"],
-    "civic-action": ["article.action", ".action-card", ".event-card", "article.event", "article", "li"],
+    "civic-action": [
+        "article.action", ".action-card", ".event-card", "article.event",
+        ".news-post-content", ".single-post-content", "article", "li",
+    ],
+    "wordpress-tec": [".tribe-events-calendar-list__event-row", ".tribe-events-pro-photo__event", ".type-tribe_events", ".event-card", "article"],
+    "action-network": [
+        ".event-detail", ".action-event", ".event-card", "article.event",
+        ".news-post-content", ".single-post-content",
+        "main article", "article",
+    ],
+    "campaign-page": [
+        ".location-card", ".event-location-card", "[data-event-location]",
+        ".action-card", ".event-card", ".news-post-content",
+        ".single-post-content", "tbody tr", "article",
+    ],
 }
 
 PROFILE_DEFAULT_TYPES = {
@@ -67,7 +91,197 @@ PROFILE_DEFAULT_TYPES = {
     "festival": "festival",
     "french-language": "other",
     "civic-action": "protest",
+    "wordpress-tec": "other",
+    "action-network": "protest",
+    "campaign-page": "protest",
 }
+
+CREATOR_ATTENDANCE_RE = re.compile(
+    r"\b(director|filmmaker|creator|cast|writer|cinematographer|producer|"
+    r"principal collaborator)s?\s+(?:in attendance|attending|present)|"
+    r"\b(?:q\s*&\s*a|conversation|introduction)\s+(?:with|by)\s+(?:the\s+)?"
+    r"(?:director|filmmaker|creator|cast|writer|cinematographer|producer|principal collaborator)\b",
+    re.I,
+)
+
+TORONTO_SOURCE_IDS = {
+    "c4e", "jhi", "revue", "agora-self", "uoft-philosophy", "york-events",
+    "practical-philosophy-on", "empire-club", "canadian-club", "massey-rth",
+    "tso", "coc", "national-ballet", "to-live", "koerner-hall", "soulpepper",
+    "mirvish", "rom", "aga-khan", "tpl-salon-series", "u-t-lecture-series",
+    "tmu-research-events", "rom-talks",
+}
+KINGSTON_SOURCE_IDS = {"queens-events", "kingston-writersfest"}
+MONTREAL_SOURCE_IDS = {
+    "montreal-jazz", "osheaga", "concordia-fofa", "mcgill-science",
+}
+ONLINE_SOURCE_IDS = {
+    "philevents-cfp", "upenn-cfp", "pw-grants", "reedsy-contests",
+    "apa-meeting-submissions",
+}
+GLOBAL_SOURCE_GEOGRAPHY = {
+    "princeton-uchv": ("Princeton", "outside-corridor", "America/New_York"),
+    "harvard-safra-ethics": ("Cambridge, MA", "outside-corridor", "America/New_York"),
+    "harvard-mahindra-humanities": ("Cambridge, MA", "outside-corridor", "America/New_York"),
+    "stanford-humanities-center": ("Stanford", "outside-corridor", "America/Los_Angeles"),
+    "cambridge-crassh": ("Cambridge, UK", "outside-corridor", "Europe/London"),
+    "oxford-torch": ("Oxford", "outside-corridor", "Europe/London"),
+    "institute-philosophy-london": ("London", "outside-corridor", "Europe/London"),
+}
+
+
+def creator_attendance_confirmed(text: str) -> bool:
+    return bool(CREATOR_ATTENDANCE_RE.search(text or ""))
+
+
+def infer_source_geography(source: dict) -> tuple[str, str, str]:
+    """Return a truthful source-level fallback when an event omits geography.
+
+    Event-level structured location remains authoritative. These defaults keep
+    deterministic records schema-valid without pretending that worldwide CFP
+    directories have a physical Toronto venue.
+    """
+    city = str(source.get("city") or source.get("region") or "").strip()
+    corridor = str(source.get("corridor_zone") or "").strip()
+    timezone_name = str(source.get("timezone") or "").strip()
+    source_id = str(source.get("id") or "")
+    if source_id in TORONTO_SOURCE_IDS:
+        inferred = ("Toronto", "toronto", "America/Toronto")
+    elif source_id in KINGSTON_SOURCE_IDS:
+        inferred = ("Kingston", "kingston", "America/Toronto")
+    elif source_id in MONTREAL_SOURCE_IDS:
+        inferred = ("Montréal", "montreal", "America/Toronto")
+    elif source_id in ONLINE_SOURCE_IDS:
+        inferred = ("Online", "online-global", "UTC")
+    elif source_id in GLOBAL_SOURCE_GEOGRAPHY:
+        inferred = GLOBAL_SOURCE_GEOGRAPHY[source_id]
+    else:
+        text = " ".join(
+            str(source.get(key) or "")
+            for key in ("id", "name", "events_url", "base_url", "scope")
+        ).lower()
+        if str(source.get("scope") or "") == "global-academic":
+            inferred = ("Online / location varies", "online-global", "UTC")
+        elif re.search(r"\b(montr[ée]al|mcgill|concordia)\b", text):
+            inferred = ("Montréal", "montreal", "America/Toronto")
+        elif re.search(r"\b(kingston|queen['’]?s)\b", text):
+            inferred = ("Kingston", "kingston", "America/Toronto")
+        elif re.search(r"\b(toronto|uoft|utoronto|yorku|rom\b|aga khan)\b", text):
+            inferred = ("Toronto", "toronto", "America/Toronto")
+        elif str(source.get("default_type") or "") in {"cfp", "contest"}:
+            inferred = ("Online", "online-global", "UTC")
+        else:
+            inferred = ("Location varies", "unknown", "America/Toronto")
+    return (
+        city or inferred[0],
+        corridor or inferred[1],
+        timezone_name or inferred[2],
+    )
+
+
+def canonical_event_url(value: str) -> str:
+    """Normalize an event URL without deleting event-identifying parameters."""
+    if not value:
+        return ""
+    parsed = urllib.parse.urlsplit(str(value).strip())
+    if parsed.scheme not in {"http", "https"}:
+        return ""
+    query = [
+        (key, val)
+        for key, val in urllib.parse.parse_qsl(parsed.query, keep_blank_values=True)
+        if not key.lower().startswith(("utm_", "fbclid", "gclid"))
+    ]
+    path = re.sub(r"/{2,}", "/", parsed.path or "/")
+    if path != "/":
+        path = path.rstrip("/")
+    return urllib.parse.urlunsplit(
+        (parsed.scheme.lower(), parsed.netloc.lower(), path, urllib.parse.urlencode(query), "")
+    )
+
+
+def event_identity_key(record: dict) -> str:
+    """Return the unique public-record identity for one occurrence.
+
+    Stable UID/URL aliases are deliberately kept separately for reschedule
+    reconciliation. The public identity includes the occurrence discriminator
+    so repeated events never violate the calendar's uniqueness contract.
+    """
+    return event_occurrence_key(record)
+
+
+def event_identity_aliases(record: dict) -> list[str]:
+    """All stable identities known for cross-format reconciliation.
+
+    A feed UID is canonical and survives URL changes. The canonical URL alias
+    lets a server-rendered announcement merge with the same event found in an
+    ICS/API response.
+    """
+    external_uid = str(
+        record.get("external_uid")
+        or record.get("uid")
+        or record.get("event_uid")
+        or ""
+    ).strip()
+    source_id = str(record.get("source_id") or "").strip().lower()
+    title = re.sub(r"\W+", "", str(record.get("title") or "").lower())[:180]
+    url = canonical_event_url(str(record.get("source_url") or ""))
+    bases = []
+    if external_uid:
+        bases.append(f"uid::{source_id}::{external_uid}")
+    if url:
+        bases.append(f"url::{source_id}::{url}::{title}")
+    if not bases:
+        organizer = re.sub(
+            r"\W+", "", str(record.get("organizer") or "").lower()
+        )[:120]
+        bases.append(f"fallback::{source_id}::{title}::{organizer}")
+    return [
+        hashlib.sha256(basis.encode("utf-8")).hexdigest()[:24]
+        for basis in bases
+    ]
+
+
+def event_occurrence_key(record: dict) -> str:
+    """Distinct occurrence key, preserving repeat performances and locations."""
+    aliases = list(record.get("identity_aliases") or event_identity_aliases(record))
+    identity = str(aliases[0])
+    date_value = str(record.get("date") or "")
+    venue = re.sub(r"\W+", "", str(record.get("venue") or "").lower())[:180]
+    recurrence = str(record.get("recurrence_id") or "").strip()
+    basis = f"{identity}::{recurrence or date_value}::{venue}"
+    return hashlib.sha256(basis.encode("utf-8")).hexdigest()[:24]
+
+
+def records_represent_same_occurrence(left: dict, right: dict) -> bool:
+    """Merge incomplete listing/feed views without collapsing real repeats."""
+    aliases_left = set(left.get("identity_aliases") or event_identity_aliases(left))
+    aliases_right = set(right.get("identity_aliases") or event_identity_aliases(right))
+    if not aliases_left.intersection(aliases_right):
+        return False
+    if str(left.get("date") or "")[:10] != str(right.get("date") or "")[:10]:
+        return False
+    left_venue = re.sub(r"\W+", "", str(left.get("venue") or "").lower())
+    right_venue = re.sub(r"\W+", "", str(right.get("venue") or "").lower())
+    generic_venue = re.compile(
+        r"^(?:|locationtbd|locationtba|tbd|tba|online|virtual|"
+        r"toronto|montreal|montréal|kingston)$",
+        re.I,
+    )
+    left_generic = bool(generic_venue.fullmatch(left_venue))
+    right_generic = bool(generic_venue.fullmatch(right_venue))
+    venue_compatible = (
+        left_generic
+        or right_generic
+        or left_venue in right_venue
+        or right_venue in left_venue
+    )
+    incomplete = (
+        left.get("time_precision") != "exact"
+        or right.get("time_precision") != "exact"
+        or left_generic
+        or right_generic
+    )
+    return venue_compatible and incomplete
 
 
 def stable_id(source_url: str, date_value: str, title: str) -> str:
@@ -100,6 +314,15 @@ def normalise_source_config(source: dict) -> dict:
     else:
         out.setdefault("source_mode", "discovery")
         out.setdefault("harvest_enabled", False)
+    city, corridor, timezone_name = infer_source_geography(out)
+    if not out.get("city"):
+        out["city"] = city
+    if not out.get("region"):
+        out["region"] = city
+    if not out.get("corridor_zone"):
+        out["corridor_zone"] = corridor
+    if not out.get("timezone"):
+        out["timezone"] = timezone_name
     return out
 
 
@@ -107,6 +330,14 @@ def infer_adapter(source: dict) -> str | None:
     text = " ".join(str(source.get(k, "")) for k in (
         "id", "name", "events_url", "url", "base_url", "notes", "language", "region", "city"
     )).lower()
+    if "actionnetwork.org/" in text:
+        return "action-network"
+    if any(x in text for x in ("tribe_events", "the events calendar", "/wp-json/tribe/events/")):
+        return "wordpress-tec"
+    if any(x in text for x in ("campaign locations", "protest locations", "day of action locations")):
+        return "campaign-page"
+    if str(source.get("default_type") or "") == "protest":
+        return "civic-action"
     if any(x in text for x in ("protest", "civic", "rally", "solidarity", "labour", "labor", "activism", "action call")):
         return "civic-action"
     if any(x in text for x in ("library", "bibliothèque", "bibliotheque", "bibliocommons", "banq", "public library")):
@@ -136,17 +367,44 @@ def _strip_accents_for_month(value: str) -> str:
             .replace("î", "i").replace("ï", "i").replace("û", "u").replace("ù", "u"))
 
 
-def parse_datetime_text(text: str, *, default_year: int | None = None, tz_offset_hours: int = -4) -> tuple[datetime | None, bool]:
+def _source_timezone(timezone_name: str | None, tz_offset_hours: int | None = None):
+    if timezone_name:
+        try:
+            return ZoneInfo(timezone_name)
+        except ZoneInfoNotFoundError:
+            pass
+    return timezone(timedelta(hours=-4 if tz_offset_hours is None else tz_offset_hours))
+
+
+def parse_datetime_text(
+    text: str,
+    *,
+    default_year: int | None = None,
+    reference_date: datetime | None = None,
+    timezone_name: str = "America/Toronto",
+    tz_offset_hours: int | None = None,
+) -> tuple[datetime | None, bool]:
     """Parse ISO, English, and French event dates without guessing a time."""
     if not text:
         return None, False
     raw = re.sub(r"\s+", " ", text).strip()
-    iso = re.search(r"\b(20\d{2})-(\d{2})-(\d{2})(?:[T\s](\d{1,2}):(\d{2}))?", raw)
+    raw = MONTH_ABBREVIATION_PERIOD_RE.sub(r"\1", raw)
+    iso = re.search(
+        r"\b(20\d{2}-\d{2}-\d{2})(?:[T\s](\d{1,2}):(\d{2})(?::\d{2}(?:\.\d+)?)?(Z|[+-]\d{2}:?\d{2})?)?",
+        raw,
+    )
     if iso:
-        y, m, d = map(int, iso.group(1, 2, 3))
-        has_time = iso.group(4) is not None
-        h, minute = (int(iso.group(4) or 0), int(iso.group(5) or 0))
-        return datetime(y, m, d, h, minute, tzinfo=timezone(timedelta(hours=tz_offset_hours))), has_time
+        has_time = iso.group(2) is not None
+        value = iso.group(1)
+        if has_time:
+            value += f"T{iso.group(2)}:{iso.group(3)}{iso.group(4) or ''}"
+        try:
+            parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+            if parsed.tzinfo is None:
+                parsed = parsed.replace(tzinfo=_source_timezone(timezone_name, tz_offset_hours))
+            return parsed, has_time
+        except ValueError:
+            pass
 
     clean = _strip_accents_for_month(raw)
     month_re = "|".join(sorted({re.escape(_strip_accents_for_month(k)) for k in MONTHS}, key=len, reverse=True))
@@ -177,25 +435,41 @@ def parse_datetime_text(text: str, *, default_year: int | None = None, tz_offset
         else:
             return None, False
     if not year:
-        year = default_year or datetime.now().year
+        reference = reference_date or datetime.now()
+        if reference.tzinfo is not None:
+            reference = reference.replace(tzinfo=None)
+        year = default_year or reference.year
         trial = datetime(year, month, day)
-        if trial < datetime.now() - timedelta(days=60):
+        if trial < reference - timedelta(days=60):
             year += 1
 
     hour = minute = 0
     has_time = False
-    time_match = re.search(r"\b(\d{1,2})(?::|\s*h\s*)(\d{2})?\s*(a\.?m\.?|p\.?m\.?)?\b", clean, re.I)
+    time_match = None
+    for candidate in re.finditer(
+        r"\b(\d{1,2})(?::|\s*h\s*)(\d{2})?\s*(a\.?m\.?|p\.?m\.?)?\b",
+        clean,
+        re.I,
+    ):
+        token = candidate.group(0)
+        if ":" in token or "h" in token or candidate.group(3):
+            time_match = candidate
+            break
     if time_match:
         h = int(time_match.group(1)); minute = int(time_match.group(2) or 0); ap = (time_match.group(3) or "").lower()
-        # Avoid mistaking the date day for a time when no separator/AM/PM exists.
-        token = time_match.group(0)
-        if ":" in token or "h" in token or ap:
-            if ap.startswith("p") and h < 12: h += 12
-            if ap.startswith("a") and h == 12: h = 0
-            if 0 <= h <= 23 and 0 <= minute <= 59:
-                hour = h; has_time = True
+        if ap.startswith("p") and h < 12: h += 12
+        if ap.startswith("a") and h == 12: h = 0
+        if 0 <= h <= 23 and 0 <= minute <= 59:
+            hour = h; has_time = True
     try:
-        return datetime(year, month, day, hour, minute, tzinfo=timezone(timedelta(hours=tz_offset_hours))), has_time
+        return datetime(
+            year,
+            month,
+            day,
+            hour,
+            minute,
+            tzinfo=_source_timezone(timezone_name, tz_offset_hours),
+        ), has_time
     except ValueError:
         return None, False
 
@@ -225,6 +499,8 @@ def _location(node) -> str:
             bits = [address.get("streetAddress"), address.get("addressLocality"), address.get("addressRegion")]
             address_text = ", ".join(str(x) for x in bits if x)
             return ", ".join(x for x in (name, address_text) if x)
+        if isinstance(address, str):
+            return ", ".join(x for x in (name, address.strip()) if x)
         return str(name or address or "")
     if isinstance(node, list):
         return "; ".join(filter(None, (_location(x) for x in node)))
@@ -233,40 +509,122 @@ def _location(node) -> str:
 
 def _profile_type(adapter: str, text: str, source: dict) -> str:
     value = (text or "").lower()
+    protest_terms = re.compile(
+        r"\b(protest|rally|march|manifestation|picket|picket line|vigil|grève|greve|"
+        r"walkout|sit-in|teach-in|occupation|blockade|day of action|solidarity action|"
+        r"counter-protest|counterprotest|mobilization|mobilisation|rassemblement|piquetage)\b",
+        re.I,
+    )
+    civic_source = (
+        adapter in {"civic-action", "action-network", "campaign-page"}
+        or source.get("default_type") == "protest"
+    )
+    about_protest = bool(
+        re.search(
+            r"\b(lecture|talk|panel|book|film|screening|exhibition|exhibit|archive|history|study)\b"
+            r".{0,60}\b(about|on|of|examining|exploring)\b.{0,40}"
+            r"\b(protests?|marches?|demonstrations?)\b",
+            value,
+            re.I,
+        )
+        or re.search(
+            r"\b(protests?|marches?|demonstrations?)\b.{0,50}"
+            r"\b(history|photography|posters?|archive|study|film|screening|"
+            r"exhibition|exhibit|lecture|panel|book)\b",
+            value,
+            re.I,
+        )
+    )
+    explicit_assembly = bool(
+        re.search(
+            r"\b(join|attend|gather|assemble|meet|route|starting at|march from|"
+            r"picket line|take to the streets|day of action)\b.{0,80}"
+            r"\b(protest|rally|march|picket|walkout|strike|sit-in|demonstration)\b|"
+            r"\b(protest|rally|march|picket|walkout|strike|sit-in|demonstration)\b"
+            r".{0,80}\b(at|from|outside|join|gather|assemble|meet)\b",
+            value,
+            re.I,
+        )
+    )
+    if not about_protest and (
+        (civic_source and protest_terms.search(value))
+        or explicit_assembly
+        or (
+            re.search(r"\bdemonstration\b", value)
+            and civic_source
+        )
+    ):
+        return "protest"
     if re.search(r"\b(call for papers|cfp|appel à communications|appel de propositions)\b", value): return "cfp"
     if re.search(r"\b(contest|competition|concours)\b", value): return "contest"
+    if re.search(r"\b(book launch|lancement de livre)\b", value): return "book-launch"
+    if re.search(r"\b(book talk|author talk|discussion avec l['’]auteur)\b", value): return "book-talk"
+    if re.search(r"\b(artist talk|conversation avec l['’]artiste)\b", value): return "artist-talk"
+    if re.search(r"\b(scholar talk)\b", value): return "scholar-talk"
+    if re.search(r"\b(philosophy caf[eé]|café philosophique)\b", value): return "philosophy-cafe"
+    if re.search(r"\b(live podcast|podcast live|live podcast recording)\b", value): return "podcast-live"
+    if re.search(r"\b(panel|roundtable|table ronde)\b", value): return "panel"
+    if re.search(r"\b(symposium|symposium)\b", value): return "symposium"
+    if re.search(r"\b(colloquium|colloque)\b", value): return "colloquium"
+    if re.search(r"\b(webinar|webinaire)\b", value): return "webinar"
+    if re.search(r"\b(forum)\b", value): return "forum"
+    if re.search(r"\b(thesis defence|thesis defense|dissertation defence|dissertation defense|soutenance)\b", value): return "defence"
+    if re.search(r"\b(memorial|commemoration|commémoration)\b", value): return "memorial"
+    if re.search(r"\b(celebration|célébration)\b", value): return "celebration"
+    if re.search(r"\b(networking|réseautage)\b", value): return "networking"
+    if re.search(r"\b(residency|résidence)\b", value): return "residency"
+    if re.search(r"\b(retreat|retraite)\b", value): return "retreat"
+    if re.search(r"\b(public meeting|town hall|assemblée publique)\b", value): return "meeting"
+    if re.search(r"\b(site-specific art|site specific art)\b", value): return "site-specific-art"
+    if re.search(r"\b(festival of form)\b", value): return "festival-of-form"
+    if re.search(r"\b(cultural reproduction)\b", value): return "cultural-reproduction"
     if re.search(r"\b(exhibition|exhibit|exposition)\b", value): return "exhibition"
     if re.search(r"\b(screening|film|cinéma|cinema|projection)\b", value): return "screening"
+    if re.search(r"\b(performance|theatre|theater|concert|dance|opera|ballet)\b", value): return "performance"
+    if re.search(r"\b(festival|carnival|parade)\b", value): return "festival"
     if re.search(r"\b(workshop|atelier|formation)\b", value): return "workshop"
     if re.search(r"\b(reading|lecture d['’]auteur|book launch|lancement)\b", value): return "reading"
     if re.search(r"\b(conference|symposium|colloquium|colloque|congrès|congres)\b", value): return "conference"
-    if re.search(r"\b(lecture|talk|seminar|séminaire|conférence|conference)\b", value): return "lecture"
-    if re.search(r"\b(protest|rally|march|manifestation|picket|vigil|grève|greve)\b", value): return "protest"
+    if re.search(r"\b(lecture|seminar|séminaire|conférence|conference)\b", value): return "lecture"
+    if re.search(r"\b(talk|conversation)\b", value): return "talk"
+    if re.search(r"\b(gathering|assembly|assemblée)\b", value): return "gathering"
     if adapter == "festival": return "festival"
     return str(source.get("default_type") or PROFILE_DEFAULT_TYPES.get(adapter) or "other")
 
 
+def classify_adapter_event_type(adapter: str, text: str, source: dict) -> str:
+    """Public classification hook shared by structured-feed crawlers."""
+    return _profile_type(adapter, text, source)
+
+
 def _record(source: dict, adapter: str, title: str, dt: datetime, has_time: bool, url: str,
             venue: str, raw: str, *, end_date: datetime | None = None, organizer: str | None = None,
-            series_title: str | None = None) -> dict:
+            series_title: str | None = None, lifecycle_status: str | None = None,
+            external_uid: str | None = None) -> dict:
     full_url = urllib.parse.urljoin(source_url(source), url or source_url(source))
-    lifecycle = lifecycle_from_text(" ".join((title, raw)))
+    explicit_organizer = organizer or (
+        str(source.get("name") or "") if source.get("source_is_organizer") else ""
+    )
+    lifecycle = lifecycle_status or lifecycle_from_text(" ".join((title, raw)))
     source_lang = str(source.get("language") or ("fr" if adapter == "french-language" else "en"))
     confidence = 90 if has_time and venue else 74 if (has_time or venue) else 58
     if lifecycle in {"cancelled", "postponed", "rescheduled"}: confidence = max(confidence, 80)
     event_type = _profile_type(adapter, " ".join((title, raw)), source)
     record_kind = "festival" if event_type == "festival" else ("civic-action" if event_type == "protest" else "event")
-    return {
+    result = {
         "id": stable_id(full_url, dt.isoformat(timespec="minutes"), title),
         "date": dt.isoformat(timespec="minutes"),
         "end_date": end_date.isoformat(timespec="minutes") if end_date else None,
         "title": re.sub(r"\s+", " ", title).strip()[:240],
-        "venue": re.sub(r"\s+", " ", venue or str(source.get("default_venue") or source.get("city") or "")).strip()[:240],
+        "venue": re.sub(
+            r"\s+", " ", venue or str(source.get("default_venue") or "")
+        ).strip()[:240],
         "source_url": full_url,
         "source_id": source.get("id"),
         "type": event_type,
         "secondary_types": ["community"] if adapter in {"municipal", "library", "civic-action"} and event_type != "community" else [],
-        "organizer": organizer or source.get("name"),
+        "organizer": explicit_organizer,
+        "publisher": source.get("name"),
         "series_title": series_title,
         "raw_excerpt": re.sub(r"\s+", " ", raw).strip()[:700],
         "source_language": source_lang,
@@ -278,11 +636,66 @@ def _record(source: dict, adapter: str, title: str, dt: datetime, has_time: bool
         "date_precision": "exact" if has_time else "date",
         "time_precision": "exact" if has_time else "unknown",
         "lifecycle_status": lifecycle,
+        "external_uid": external_uid or None,
         "confidence": confidence,
-        "attendance_confirmed": confidence >= 80,
+        "attendance_confirmed": (
+            creator_attendance_confirmed(" ".join((title, raw)))
+            if event_type == "screening"
+            else bool(explicit_organizer)
+        ),
+        "attendance_evidence": (
+            "explicit creator/principal attendance language"
+            if event_type == "screening"
+            and creator_attendance_confirmed(" ".join((title, raw)))
+            else ""
+        ),
         "review_status": "auto-published" if confidence >= 70 else "needs-review",
         "scraped_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
+    result["identity_aliases"] = event_identity_aliases(result)
+    result["occurrence_key"] = event_occurrence_key(result)
+    result["identity_key"] = result["occurrence_key"]
+    return result
+
+
+def _jsonld_url(node: dict, fallback: str) -> str:
+    """Read the common string and object forms of JSON-LD event URLs."""
+    for value in (
+        node.get("url"),
+        node.get("@id"),
+        node.get("mainEntityOfPage"),
+    ):
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+        if isinstance(value, dict):
+            nested = value.get("@id") or value.get("url")
+            if isinstance(nested, str) and nested.strip():
+                return nested.strip()
+    return fallback
+
+
+def _jsonld_identifier(node: dict) -> str:
+    value = node.get("identifier")
+    values = value if isinstance(value, list) else [value]
+    for candidate in values:
+        if isinstance(candidate, (str, int, float)) and str(candidate).strip():
+            return str(candidate).strip()
+        if isinstance(candidate, dict):
+            nested = candidate.get("value") or candidate.get("@id")
+            if nested is not None and str(nested).strip():
+                return str(nested).strip()
+    return ""
+
+
+def _jsonld_lifecycle(node: dict) -> str | None:
+    status = str(node.get("eventStatus") or "").lower()
+    if status.endswith("eventcancelled"):
+        return "cancelled"
+    if status.endswith("eventpostponed"):
+        return "postponed"
+    if status.endswith("eventrescheduled"):
+        return "rescheduled"
+    return None
 
 
 def _parse_jsonld(html_text: str, source: dict, adapter: str) -> list[dict]:
@@ -296,15 +709,28 @@ def _parse_jsonld(html_text: str, source: dict, adapter: str) -> list[dict]:
         for node in _jsonld_nodes(data):
             if not _is_event_jsonld(node): continue
             title = str(node.get("name") or node.get("headline") or "").strip()
-            dt, has_time = parse_datetime_text(str(node.get("startDate") or ""))
+            dt, has_time = parse_datetime_text(
+                str(node.get("startDate") or ""),
+                timezone_name=str(source.get("timezone") or "America/Toronto"),
+            )
             if not title or not dt: continue
-            end_dt, _ = parse_datetime_text(str(node.get("endDate") or ""))
+            end_dt, _ = parse_datetime_text(
+                str(node.get("endDate") or ""),
+                timezone_name=str(source.get("timezone") or "America/Toronto"),
+            )
             desc = str(node.get("description") or title)
             records.append(_record(
                 source, adapter, title, dt, has_time,
-                str(node.get("url") or source_url(source)), _location(node.get("location")), desc,
+                _jsonld_url(
+                    node,
+                    str(source.get("_document_url") or source_url(source)),
+                ),
+                _location(node.get("location")),
+                desc,
                 end_date=end_dt, organizer=_location(node.get("organizer")) or None,
                 series_title=str(node.get("superEvent", {}).get("name") or "") if isinstance(node.get("superEvent"), dict) else None,
+                lifecycle_status=_jsonld_lifecycle(node),
+                external_uid=_jsonld_identifier(node),
             ))
     return records
 
@@ -319,38 +745,263 @@ def _candidate_nodes(soup: BeautifulSoup, adapter: str):
             yield node
 
 
+HTML_DATE_CANDIDATE_RE = re.compile(
+    r"\b(?:20\d{2}-\d{2}-\d{2}|"
+    r"(?:January|February|March|April|May|June|July|August|September|October|November|December|"
+    r"Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec|"
+    r"janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre)"
+    r"\s+\d{1,2}(?:st|nd|rd|th)?(?:,\s*20\d{2})?|"
+    r"\d{1,2}(?:er|e|st|nd|rd|th)?\s+(?:"
+    r"January|February|March|April|May|June|July|August|September|October|November|December|"
+    r"janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre)"
+    r"(?:\s+20\d{2})?)\b",
+    re.I,
+)
+
+
+TIME_CANDIDATE_RE = re.compile(
+    r"\b(?:[01]?\d|2[0-3])(?::|\s*h\s*)[0-5]\d"
+    r"(?:\s*(?:a\.?m\.?|p\.?m\.?))?\b|"
+    r"\b(?:1[0-2]|0?[1-9])\s*(?:a\.?m\.?|p\.?m\.?)\b",
+    re.I,
+)
+EVENT_LINK_PATH_RE = re.compile(
+    r"/(?:event|events|action|actions|campaign|rally|march|protest|calendar|"
+    r"news|latest-news|whats-on)(?:/|$)",
+    re.I,
+)
+
+
+def select_event_datetime_text(text: str, explicit_value: str = "") -> str:
+    """Select one exact event date token and its nearest time.
+
+    Returning an entire article window allowed parsers to choose an earlier
+    publication or application date. The selected token is now always first,
+    and unrelated dates are never handed back to ``parse_datetime_text``.
+    """
+    if explicit_value:
+        return explicit_value
+    cleaned = MONTH_ABBREVIATION_PERIOD_RE.sub(r"\1", text)
+    cleaned = re.sub(
+        r"\b(?:published|posted|updated|last modified|mise à jour)\s*(?:on|le)?\s*"
+        r"(?:20\d{2}-\d{2}-\d{2}|"
+        r"[A-Za-zÀ-ÿ]+\s+\d{1,2}(?:st|nd|rd|th)?(?:,\s*20\d{2})?|"
+        r"\d{1,2}(?:er|e)?\s+[A-Za-zÀ-ÿ]+(?:\s+20\d{2})?)",
+        " ",
+        cleaned,
+        flags=re.I,
+    )
+    matches = list(HTML_DATE_CANDIDATE_RE.finditer(cleaned))
+    if not matches:
+        return ""
+    event_language = re.compile(
+        r"\b(event date|join us|takes? place|when|starts?|doors|rally|march|"
+        r"protest|picket|walkout|lecture|panel|workshop|screening|festival|"
+        r"conference|deadline|submission due|on view)\b",
+        re.I,
+    )
+    publication_language = re.compile(
+        r"\b(published|posted|updated|modified|release date|article date|"
+        r"applications? (?:open|start)|registration opens?|tickets? on sale)\b",
+        re.I,
+    )
+    ranked = []
+    for index, match in enumerate(matches):
+        previous_end = matches[index - 1].end() if index else 0
+        next_start = matches[index + 1].start() if index + 1 < len(matches) else len(cleaned)
+        before = cleaned[max(previous_end, match.start() - 110): match.start()]
+        after = cleaned[match.end(): min(next_start, match.end() + 120)]
+        window = before + " " + match.group(0) + " " + after
+        nearby_time = TIME_CANDIDATE_RE.search(after[:90])
+        score = (
+            8 * len(event_language.findall(window))
+            - 12 * len(publication_language.findall(window))
+            + (5 if nearby_time else 0)
+        )
+        ranked.append((score, -index, match))
+    _, _, selected = max(ranked, key=lambda row: (row[0], row[1]))
+    selected_index = matches.index(selected)
+    next_start = (
+        matches[selected_index + 1].start()
+        if selected_index + 1 < len(matches)
+        else len(cleaned)
+    )
+    previous_end = matches[selected_index - 1].end() if selected_index else 0
+    after = cleaned[selected.end(): min(next_start, selected.end() + 100)]
+    before = cleaned[max(previous_end, selected.start() - 50): selected.start()]
+    nearby_time = TIME_CANDIDATE_RE.search(after) or TIME_CANDIDATE_RE.search(before)
+    return " ".join(
+        part for part in (selected.group(0), nearby_time.group(0) if nearby_time else "") if part
+    )
+
+
+def _ranked_event_date_text(node, text: str) -> str:
+    """Prefer actual event language over article publication metadata."""
+    explicit = node.select_one(
+        "[data-start],[itemprop='startDate'],time.event-date,"
+        ".event-date time,.event-time time,[data-event-date]"
+    )
+    explicit_value = str(
+        node.get("data-start")
+        or node.get("data-event-date")
+        or node.get("data-date")
+        or ""
+    )
+    if explicit:
+        explicit_value = str(
+            explicit.get("data-start")
+            or explicit.get("data-event-date")
+            or explicit.get("datetime")
+            or explicit.get_text(" ", strip=True)
+            or ""
+        )
+    node_classes = " ".join(str(x) for x in (node.get("class") or [])).lower()
+    if not explicit_value and any(token in node_classes for token in ("event", "action", "calendar", "schedule")):
+        event_time = node.find("time", datetime=True)
+        if event_time and not re.search(
+            r"(?:publish|post|update|modified|entry-date)",
+            " ".join(str(x) for x in (event_time.get("class") or [])).lower()
+            + " "
+            + str(event_time.get("itemprop") or "").lower(),
+        ):
+            explicit_value = str(event_time.get("datetime") or "")
+    return select_event_datetime_text(text, explicit_value)
+
+
+def _event_title_and_href(node) -> tuple[str, str]:
+    """Choose the event heading link, not an earlier category/navigation link."""
+    title_node = node.select_one(
+        ".event-title,.cp-event-title,[itemprop='name'],"
+        "h1,h2,h3,h4,.title"
+    )
+    title = title_node.get_text(" ", strip=True) if title_node else ""
+    preferred = None
+    if title_node:
+        if title_node.name == "a" and title_node.get("href"):
+            preferred = title_node
+        else:
+            preferred = title_node.find("a", href=True)
+            if not preferred:
+                parent_link = title_node.find_parent("a", href=True)
+                if parent_link and node in parent_link.parents:
+                    preferred = parent_link
+    if preferred:
+        return title or preferred.get_text(" ", strip=True), str(preferred.get("href") or "")
+
+    scored = []
+    for index, anchor in enumerate(node.find_all("a", href=True)):
+        anchor_text = anchor.get_text(" ", strip=True)
+        low = anchor_text.lower()
+        score = 0
+        if anchor.find_parent(["h1", "h2", "h3", "h4"]):
+            score += 10
+        if EVENT_LINK_PATH_RE.search(urllib.parse.urlsplit(str(anchor["href"])).path):
+            score += 5
+        if 4 <= len(anchor_text) <= 240 and low not in {
+            "learn more", "read more", "details", "see more", "category",
+        }:
+            score += 3
+        if title and re.sub(r"\W+", "", anchor_text.lower()) in re.sub(
+            r"\W+", "", title.lower()
+        ):
+            score += 3
+        scored.append((score, -index, anchor))
+    if not scored:
+        return title, ""
+    best_score, _, chosen = max(scored, key=lambda row: (row[0], row[1]))
+    if title and best_score < 5:
+        return title, ""
+    return title or chosen.get_text(" ", strip=True), str(chosen.get("href") or "")
+
+
 def parse_html(html_text: str, source_config: dict, adapter: str | None = None) -> list[dict]:
     source = normalise_source_config(source_config)
     adapter = adapter or source.get("platform_adapter") or infer_adapter(source) or "municipal"
     if adapter not in ADAPTER_NAMES:
         raise ValueError(f"Unsupported Polymythcal adapter: {adapter}")
     structured = _parse_jsonld(html_text, source, adapter)
-    if structured:
-        return _dedupe(structured)
-
+    announcement_reference = None
+    try:
+        announcement_reference = datetime.fromisoformat(
+            str(source.get("_announcement_reference") or "").replace("Z", "+00:00")
+        )
+    except ValueError:
+        pass
     soup = BeautifulSoup(html_text, "html.parser")
-    records: list[dict] = []
+    records: list[dict] = list(structured)
     for node in _candidate_nodes(soup, adapter):
-        text = node.get_text(" ", strip=True)
-        if len(text) < 12 or len(text) > 2400: continue
-        title_node = node.select_one("h1,h2,h3,h4,.title,.event-title,.cp-event-title,[itemprop='name']")
-        link = node.find("a", href=True)
-        title = (title_node.get_text(" ", strip=True) if title_node else (link.get_text(" ", strip=True) if link else ""))
+        full_text = node.get_text(" ", strip=True)
+        if len(full_text) < 12:
+            continue
+        # Advance callouts often live in long organizer news articles. Keep a
+        # bounded parsing window instead of discarding the entire article.
+        text = full_text[:MAX_HTML_EVENT_TEXT]
+        title, href = _event_title_and_href(node)
+        primary_heading = node.find("h1")
+        if (
+            source.get("_document_url")
+            and primary_heading
+            and not primary_heading.find("a", href=True)
+        ):
+            # A detail article's unlinked H1 identifies the current document.
+            # A donation, RSVP, or social link inside its body is supporting
+            # material rather than the canonical announcement URL.
+            href = str(source["_document_url"])
         if len(title) < 4 or title.lower() in {"learn more", "read more", "details", "voir plus", "en savoir plus"}: continue
-        date_text = " ".join(filter(None, [
-            node.get("data-start", ""), node.get("data-date", ""),
-            (node.select_one("time") or {}).get("datetime", "") if node.select_one("time") else "",
-            text,
-        ]))
-        dt, has_time = parse_datetime_text(date_text)
+        date_text = _ranked_event_date_text(
+            node,
+            " ".join(
+                filter(
+                    None,
+                    [
+                        str(node.get("data-start", "")),
+                        str(node.get("data-date", "")),
+                        text,
+                    ],
+                )
+            ),
+        )
+        dt, has_time = parse_datetime_text(
+            date_text,
+            default_year=(
+                announcement_reference.year if announcement_reference else None
+            ),
+            reference_date=announcement_reference,
+            timezone_name=str(source.get("timezone") or "America/Toronto"),
+        )
         if not dt: continue
         end_dt = None
         end_attr = node.get("data-end", "")
-        if end_attr: end_dt, _ = parse_datetime_text(end_attr)
-        venue_node = node.select_one(".location,.venue,.event-location,[itemprop='location'],.lieu,.place")
-        venue = venue_node.get_text(" ", strip=True) if venue_node else str(source.get("default_venue") or source.get("city") or "")
-        href = link.get("href") if link else source_url(source)
-        organizer_node = node.select_one(".organizer,.host,.department,.organisation,.organisateur")
+        if end_attr:
+            end_dt, _ = parse_datetime_text(
+                end_attr,
+                default_year=(
+                    announcement_reference.year if announcement_reference else None
+                ),
+                reference_date=announcement_reference,
+                timezone_name=str(source.get("timezone") or "America/Toronto"),
+            )
+        venue_node = node.select_one(
+            ".location,.venue,.event-location,[itemprop='location'],"
+            "[itemprop='streetAddress'],address,.lieu,.place,"
+            "[data-location],[data-venue],[data-address]"
+        )
+        venue = (
+            venue_node.get_text(" ", strip=True)
+            if venue_node
+            else str(
+                node.get("data-location")
+                or node.get("data-venue")
+                or node.get("data-address")
+                or source.get("default_venue")
+                or ""
+            )
+        )
+        href = href or str(source.get("_document_url") or source_url(source))
+        organizer_node = node.select_one(
+            ".organizer,.host,.hosted-by,.presented-by,.department,"
+            ".organisation,.organisateur,[itemprop='organizer']"
+        )
         organizer = organizer_node.get_text(" ", strip=True) if organizer_node else None
         parent = node.select_one(".festival-name,.series,.event-series")
         records.append(_record(source, adapter, title, dt, has_time, href, venue, text,
@@ -361,11 +1012,60 @@ def parse_html(html_text: str, source_config: dict, adapter: str | None = None) 
 
 
 def _dedupe(records: list[dict]) -> list[dict]:
-    best: dict[tuple, dict] = {}
+    best: dict[str, dict] = {}
     for record in records:
-        key = (re.sub(r"\W+", "", record.get("title", "").lower())[:120], record.get("date", "")[:16])
-        if key not in best or int(record.get("confidence", 0)) > int(best[key].get("confidence", 0)):
+        record.setdefault("identity_aliases", event_identity_aliases(record))
+        record.setdefault("occurrence_key", event_occurrence_key(record))
+        if not record.get("identity_key") or record["identity_key"] in record["identity_aliases"]:
+            record["identity_key"] = record["occurrence_key"]
+        key = str(record["occurrence_key"])
+        if key not in best:
+            compatible = next(
+                (
+                    prior_key
+                    for prior_key, prior in best.items()
+                    if records_represent_same_occurrence(prior, record)
+                ),
+                None,
+            )
+            if compatible:
+                key = compatible
+        if key not in best:
             best[key] = record
+            continue
+        prior = best[key]
+        record_score = (
+            int(bool(record.get("time_precision") == "exact")) * 3
+            + int(bool(record.get("venue"))) * 2
+            + int(bool(record.get("organizer")))
+            + int(record.get("confidence", 0)) / 100
+        )
+        prior_score = (
+            int(bool(prior.get("time_precision") == "exact")) * 3
+            + int(bool(prior.get("venue"))) * 2
+            + int(bool(prior.get("organizer")))
+            + int(prior.get("confidence", 0)) / 100
+        )
+        richer, other = (record, prior) if record_score > prior_score else (prior, record)
+        merged = dict(other)
+        merged.update({k: v for k, v in richer.items() if v not in (None, "", [])})
+        if prior.get("raw_excerpt") and record.get("raw_excerpt"):
+            merged["raw_excerpt"] = max(
+                (prior["raw_excerpt"], record["raw_excerpt"]),
+                key=len,
+            )
+        aliases = list(
+            dict.fromkeys(
+                event_identity_aliases(merged)
+                + list(prior.get("identity_aliases") or event_identity_aliases(prior))
+                + list(record.get("identity_aliases") or event_identity_aliases(record))
+            )
+        )
+        merged["identity_aliases"] = aliases
+        merged["occurrence_key"] = event_occurrence_key(merged)
+        merged["identity_key"] = merged["occurrence_key"]
+        del best[key]
+        best[merged["occurrence_key"]] = merged
     return list(best.values())
 
 

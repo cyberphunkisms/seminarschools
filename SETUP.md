@@ -34,13 +34,13 @@ The `.gitignore` in the bundle excludes internal scratchpads, .DS_Store, .pyc, a
 
 Netlify dashboard → your seminarschools.com site (project legendary-arithmetic-e35ce4) → Site configuration → Build & deploy → Continuous deployment → "Link site to Git" (or similar wording in current Netlify UI).
 
-Pick GitHub. Authorize Netlify GitHub App for the cyberphunkisms account if not already. Select `cyberphunkisms/seminarschools-site`. Branch: `main`. Build command: (leave blank, static site). Publish directory: (leave blank or `/`, the repo root is the publish root). Click "Deploy site".
+Pick GitHub. Authorize the Netlify GitHub App for the cyberphunkisms account if not already. Select `cyberphunkisms/seminarschools-site` and branch `main`. Keep the repository's `netlify.toml` settings: build command `npm run build`, publish directory `public`. Do not override the publish directory with the repository root. Click "Deploy site".
 
-Netlify will rebuild from the GitHub repo. The first build should look identical to your last drag-and-drop deploy because the bundle contains the same files.
+Netlify will rebuild the allowlisted public site from the GitHub repo while keeping source, audit, and operator files outside the published directory.
 
 ### 4. Verify the first auto-deploy worked
 
-Visit seminarschools.com. Spot-check the home page, /seminars/, /florilegium/, /leizu/. All should render correctly. If anything is broken, check the Netlify deploy log for missing files.
+Visit seminarschools.com. Spot-check the home page, `/polymythseminars/`, `/florilegium/`, and `/leizu/`. All should render correctly. If anything is broken, check the Netlify deploy log for the first failed build or verification command.
 
 ### 5. Enable Actions and trigger first cron run
 
@@ -48,19 +48,21 @@ GitHub repo → Settings → Actions → General → "Allow all actions and reus
 
 GitHub repo → Actions tab → "Scrape seminars" workflow in the left sidebar → "Run workflow" button on the right → branch `main` → "Run workflow".
 
-The workflow runs in 1-2 minutes. It produces a commit titled "Update seminars calendar (YYYY-MM-DD)" with `seminars/events.json`, `seminars/feed.xml`, and internal audit files in `/data/`. Netlify auto-deploys on this commit.
+The workflow harvests and validates the calendar, then opens a publication pull request. The canonical event corpus is `data/polymyth-seminar-events.json`; the public copy is `polymythseminars/events.json`. Review the event and lifecycle diff before merging. Netlify deploys after the pull request is merged.
 
-Visit seminarschools.com/seminars/ after the Netlify deploy completes (another 1-2 minutes). The page should now show real events from JHI plus any from Agora plus any from Revue.
+Visit `seminarschools.com/polymythseminars/` after the merged change deploys. The calendar should show the newly verified records.
 
 ## Ongoing operation
 
-Daily at 11:00 UTC (07:00 Toronto), the cron fires. Scraper runs. Fresh `events.json` and `feed.xml` get committed. Netlify auto-deploys. The live calendar refreshes. You do nothing.
+The seminar harvest runs Mondays and Thursdays at 08:18 UTC. The festival harvest runs Tuesdays and Fridays at 09:42 UTC. Each successful run opens or updates a reviewable pull request; it does not write directly to the live branch.
 
 To edit the site outside the cron (add a page, fix a typo, update a price), the workflow changes.
 - Before Path 2: drag-and-drop a zip to Netlify.
 - After Path 2: edit files in your local clone of this repo, commit, push. Netlify auto-deploys on push.
 
-If you ever want to manually trigger a scrape between scheduled runs (a venue announces a major event, you want it up immediately), Actions tab → "Scrape seminars" → "Run workflow".
+To trigger an extra harvest, use Actions → "Scrape seminars" or "Scrape festivals" → "Run workflow", then review and merge the resulting publication pull request.
+
+`npm run verify:all` is the portable repository gate. The strict browser-based entry-page audit is intentionally separate: install `requirements-audit.txt`, run `python -m playwright install chromium`, then run `npm run audit:polymythcal-entry-pages:strict`.
 
 ## Reverting to drag-and-drop
 

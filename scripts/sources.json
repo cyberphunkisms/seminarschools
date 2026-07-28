@@ -1,5 +1,5 @@
 {
-  "$schema_note": "Venue roster for /scripts/seminars-prompt.md. Each entry declares the venue, its event-list URL, default event type, tier priority, and render_mode hint. Read by Claude headless harvest weekly. The agent handles extraction; render_mode is a strategy hint for fetch-difficulty, not a parser selector. tier_priority 1 = must crawl, 2 = if budget permits, 3 = low priority, 4 = optional.",
+  "$schema_note": "Venue roster for deterministic discovery and /scripts/seminars-prompt.md. Every active row (enabled is not false) declares its event-list URL, default event type, tier priority, and render_mode hint. The deterministic stage crawls every eligible tier-1 non-protest source each run plus one stable shard of supported non-protest sources; the paid agent keeps its existing schedule. Disabled legacy rows remain inactive. render_mode is a fetch-strategy hint, not a parser selector. tier_priority 1 = every run, 2 = high, 3 = lower, 4 = optional.",
   "$updated": "2026-07-20 audit14 completion: dedicated platform adapters, lifecycle, public features, translation, feeds, accessibility.",
   "sources": [
     {
@@ -316,10 +316,65 @@
         "https://www.findaprotest.info/canada/ontario/toronto",
         "https://www.findaprotest.info/canada/on/toronto"
       ],
-      "notes": "Server-rendered Toronto protest and solidarity-event index. Follow detail pages and publish only events with a specific date, time, location, organizer, source_url, and raw_excerpt. Save-the-date/TBD listings go to the watchlist.",
+      "notes": "Server-rendered Toronto protest and solidarity-event index. Follow detail pages. A real future date and source URL create a native record; missing time or assembly location stays public with exact qualification reasons and a recheck time.",
       "render_mode": "static",
       "fetcher": "findaprotest-toronto",
       "platform_adapter": "civic-action",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "environmental-defence-nojetsto",
+      "name": "Environmental Defence / NoJetsTO",
+      "tier_priority": 1,
+      "default_type": "protest",
+      "base_url": "https://environmentaldefence.ca/nojetsto/",
+      "events_url": "https://environmentaldefence.ca/nojetsto/events/",
+      "additional_urls": [
+        "https://environmentaldefence.ca/category/media/"
+      ],
+      "notes": "Public campaign event and media routes. Seed references: https://environmentaldefence.ca/nojetsto/events/ and https://environmentaldefence.ca/category/media/.",
+      "render_mode": "static",
+      "platform_adapter": "civic-action",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "spring-magazine-events",
+      "name": "Spring Magazine events",
+      "tier_priority": 2,
+      "default_type": "protest",
+      "base_url": "https://springmag.ca/",
+      "events_url": "https://springmag.ca/events",
+      "notes": "Public organizer calendar seed: https://springmag.ca/events.",
+      "render_mode": "static",
+      "platform_adapter": "civic-action",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "protest-doug-ford-campaigns",
+      "name": "Protest Doug Ford campaign locations",
+      "tier_priority": 2,
+      "default_type": "protest",
+      "base_url": "https://protestdougford.com/",
+      "events_url": "https://protestdougford.com/july-25th-protest-locations/",
+      "notes": "Public multi-location campaign-page seed. The parser extracts Toronto rows separately. Seed reference: https://protestdougford.com/july-25th-protest-locations/.",
+      "render_mode": "static",
+      "platform_adapter": "campaign-page",
+      "source_mode": "crawl",
+      "harvest_enabled": true
+    },
+    {
+      "id": "action-network-public-organizer-links",
+      "name": "Action Network public event links",
+      "tier_priority": 2,
+      "default_type": "protest",
+      "base_url": "https://actionnetwork.org/",
+      "events_url": "https://actionnetwork.org/events/river-run-2026",
+      "notes": "Known public event-page pattern seed from CUPE/Free Grassy Narrows: https://actionnetwork.org/events/river-run-2026. This is a crawl bootstrap; public Action Network links discovered on allowlisted organizer pages use the same adapter.",
+      "render_mode": "static",
+      "platform_adapter": "action-network",
       "source_mode": "crawl",
       "harvest_enabled": true
     },
@@ -936,6 +991,16 @@
       "base_url": "https://opseu.org/events/",
       "events_url": "https://opseu.org/events/",
       "render_mode": "javascript",
+      "additional_urls": [
+        "https://opseu.org/latest-news/",
+        "https://opseu.org/latest-news/events-calendar/"
+      ],
+      "city": "Toronto",
+      "corridor_zone": "toronto",
+      "timezone": "America/Toronto",
+      "platform_adapter": "civic-action",
+      "source_is_organizer": true,
+      "notes": "Use the server-readable /latest-news/ and /latest-news/events-calendar/ routes when the visual events calendar returns a client-rendered shell.",
       "source_mode": "crawl",
       "harvest_enabled": true
     },
@@ -4927,6 +4992,8 @@
     {
       "id": "kingston-city",
       "name": "City of Kingston Events",
+      "tier_priority": 2,
+      "default_type": "community",
       "url": "https://www.cityofkingston.ca/arts-culture-and-events/city-calendar-and-events/",
       "region": "Kingston",
       "city": "Kingston",
@@ -4939,6 +5006,7 @@
       "status": "active",
       "adapter": "discovery-detail",
       "events_url": "https://www.cityofkingston.ca/arts-culture-and-events/city-calendar-and-events/",
+      "render_mode": "server-rendered",
       "platform_adapter": "municipal",
       "source_mode": "crawl",
       "harvest_enabled": true
@@ -4946,6 +5014,8 @@
     {
       "id": "kfpl-events",
       "name": "Kingston Frontenac Public Library",
+      "tier_priority": 2,
+      "default_type": "workshop",
       "url": "https://calendar.kfpl.ca/events",
       "region": "Kingston",
       "city": "Kingston",
@@ -4958,6 +5028,7 @@
       "status": "active",
       "adapter": "discovery-detail",
       "events_url": "https://calendar.kfpl.ca/events",
+      "render_mode": "server-rendered",
       "platform_adapter": "library",
       "source_mode": "crawl",
       "harvest_enabled": true
@@ -4965,6 +5036,8 @@
     {
       "id": "agnes-events",
       "name": "Agnes Etherington Art Centre",
+      "tier_priority": 2,
+      "default_type": "artist-talk",
       "url": "https://agnes.queensu.ca/participate/events/",
       "region": "Kingston",
       "city": "Kingston",
@@ -4977,12 +5050,15 @@
       "status": "active",
       "adapter": "discovery-detail",
       "events_url": "https://agnes.queensu.ca/participate/events/",
+      "render_mode": "server-rendered",
       "source_mode": "crawl",
       "harvest_enabled": true
     },
     {
       "id": "gananoque-events",
       "name": "Town of Gananoque Events",
+      "tier_priority": 2,
+      "default_type": "community",
       "url": "https://www.gananoque.ca/community-services/events",
       "region": "Gananoque",
       "city": "Gananoque",
@@ -4995,6 +5071,7 @@
       "status": "active",
       "adapter": "discovery-detail",
       "events_url": "https://www.gananoque.ca/community-services/events",
+      "render_mode": "server-rendered",
       "platform_adapter": "municipal",
       "source_mode": "crawl",
       "harvest_enabled": true
@@ -5002,6 +5079,8 @@
     {
       "id": "thousand-islands-playhouse",
       "name": "Thousand Islands Playhouse",
+      "tier_priority": 2,
+      "default_type": "performance",
       "url": "https://www.1000islandsplayhouse.com/",
       "region": "Gananoque",
       "city": "Gananoque",
@@ -5014,12 +5093,15 @@
       "status": "active",
       "adapter": "discovery-detail",
       "events_url": "https://www.1000islandsplayhouse.com/",
+      "render_mode": "server-rendered",
       "source_mode": "crawl",
       "harvest_enabled": true
     },
     {
       "id": "brockville-arts-centre",
       "name": "Brockville Arts Centre",
+      "tier_priority": 2,
+      "default_type": "performance",
       "url": "https://brockvilleartscentre.com/",
       "region": "Brockville",
       "city": "Brockville",
@@ -5032,12 +5114,15 @@
       "status": "active",
       "adapter": "discovery-detail",
       "events_url": "https://brockvilleartscentre.com/",
+      "render_mode": "server-rendered",
       "source_mode": "crawl",
       "harvest_enabled": true
     },
     {
       "id": "brockville-library",
       "name": "Brockville Public Library",
+      "tier_priority": 2,
+      "default_type": "workshop",
       "url": "https://brockvillelibrary.ca/",
       "region": "Brockville",
       "city": "Brockville",
@@ -5050,6 +5135,7 @@
       "status": "active",
       "adapter": "discovery-detail",
       "events_url": "https://brockvillelibrary.ca/",
+      "render_mode": "server-rendered",
       "platform_adapter": "library",
       "source_mode": "crawl",
       "harvest_enabled": true
@@ -5057,6 +5143,8 @@
     {
       "id": "cornwall-events",
       "name": "City of Cornwall Events",
+      "tier_priority": 2,
+      "default_type": "community",
       "url": "https://www.cornwall.ca/en/play-here/events.aspx",
       "region": "Cornwall",
       "city": "Cornwall",
@@ -5069,6 +5157,7 @@
       "status": "active",
       "adapter": "discovery-detail",
       "events_url": "https://www.cornwall.ca/en/play-here/events.aspx",
+      "render_mode": "server-rendered",
       "platform_adapter": "municipal",
       "source_mode": "crawl",
       "harvest_enabled": true
@@ -5076,6 +5165,8 @@
     {
       "id": "cornwall-library",
       "name": "Cornwall Public Library",
+      "tier_priority": 2,
+      "default_type": "workshop",
       "url": "https://library.cornwall.on.ca/",
       "region": "Cornwall",
       "city": "Cornwall",
@@ -5088,6 +5179,7 @@
       "status": "active",
       "adapter": "discovery-detail",
       "events_url": "https://library.cornwall.on.ca/",
+      "render_mode": "server-rendered",
       "platform_adapter": "library",
       "source_mode": "crawl",
       "harvest_enabled": true
@@ -5095,6 +5187,8 @@
     {
       "id": "montreal-ville",
       "name": "Ville de Montréal Événements",
+      "tier_priority": 2,
+      "default_type": "community",
       "url": "https://montreal.ca/evenements",
       "region": "Montréal",
       "city": "Montréal",
@@ -5107,6 +5201,7 @@
       "status": "active",
       "adapter": "discovery-detail",
       "events_url": "https://montreal.ca/evenements",
+      "render_mode": "server-rendered",
       "platform_adapter": "municipal",
       "source_mode": "crawl",
       "harvest_enabled": true
@@ -5114,6 +5209,8 @@
     {
       "id": "banq-events",
       "name": "BAnQ Activités",
+      "tier_priority": 2,
+      "default_type": "reading",
       "url": "https://www.banq.qc.ca/calendrier/",
       "region": "Montréal",
       "city": "Montréal",
@@ -5126,6 +5223,7 @@
       "status": "active",
       "adapter": "discovery-detail",
       "events_url": "https://www.banq.qc.ca/calendrier/",
+      "render_mode": "server-rendered",
       "platform_adapter": "library",
       "source_mode": "crawl",
       "harvest_enabled": true
@@ -5133,6 +5231,8 @@
     {
       "id": "udem-events",
       "name": "Université de Montréal Événements",
+      "tier_priority": 2,
+      "default_type": "lecture",
       "url": "https://calendrier.umontreal.ca/",
       "region": "Montréal",
       "city": "Montréal",
@@ -5145,6 +5245,7 @@
       "status": "active",
       "adapter": "discovery-detail",
       "events_url": "https://calendrier.umontreal.ca/",
+      "render_mode": "server-rendered",
       "platform_adapter": "university",
       "source_mode": "crawl",
       "harvest_enabled": true
@@ -5152,6 +5253,8 @@
     {
       "id": "uqam-events",
       "name": "UQAM Calendrier",
+      "tier_priority": 2,
+      "default_type": "lecture",
       "url": "https://evenements.uqam.ca/",
       "region": "Montréal",
       "city": "Montréal",
@@ -5164,6 +5267,7 @@
       "status": "active",
       "adapter": "discovery-detail",
       "events_url": "https://evenements.uqam.ca/",
+      "render_mode": "server-rendered",
       "platform_adapter": "university",
       "source_mode": "crawl",
       "harvest_enabled": true
@@ -5171,6 +5275,8 @@
     {
       "id": "cinematheque-events",
       "name": "Cinémathèque québécoise",
+      "tier_priority": 2,
+      "default_type": "screening",
       "url": "https://www.cinematheque.qc.ca/fr/cinema/",
       "region": "Montréal",
       "city": "Montréal",
@@ -5183,6 +5289,7 @@
       "status": "active",
       "adapter": "discovery-detail",
       "events_url": "https://www.cinematheque.qc.ca/fr/cinema/",
+      "render_mode": "server-rendered",
       "platform_adapter": "french-language",
       "source_mode": "crawl",
       "harvest_enabled": true
@@ -5190,6 +5297,8 @@
     {
       "id": "phi-events",
       "name": "PHI Events",
+      "tier_priority": 2,
+      "default_type": "exhibition",
       "url": "https://phi.ca/en/events/",
       "region": "Montréal",
       "city": "Montréal",
@@ -5202,12 +5311,15 @@
       "status": "active",
       "adapter": "discovery-detail",
       "events_url": "https://phi.ca/en/events/",
+      "render_mode": "server-rendered",
       "source_mode": "crawl",
       "harvest_enabled": true
     },
     {
       "id": "cca-events",
       "name": "Canadian Centre for Architecture",
+      "tier_priority": 2,
+      "default_type": "artist-talk",
       "url": "https://www.cca.qc.ca/en/events",
       "region": "Montréal",
       "city": "Montréal",
@@ -5220,6 +5332,7 @@
       "status": "active",
       "adapter": "discovery-detail",
       "events_url": "https://www.cca.qc.ca/en/events",
+      "render_mode": "server-rendered",
       "source_mode": "crawl",
       "harvest_enabled": true
     },

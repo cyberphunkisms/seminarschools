@@ -2,6 +2,7 @@
 <!-- USAGE: load this file to run AITR, AI Teacher Resources, at the table. Holds games, assignments, projects, and lessons that need an AI in the room to run. Boundary CL-47 and CL-61. Aliases: AITR, TR*, teacherresources*. -->
 <html lang="en">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index,follow">
@@ -23,7 +24,7 @@
 <link rel="related" href="https://seminarschools.com/polymyth/bookwormburrows/" title="bb* bookwormburrows">
 <link rel="related" href="https://seminarschools.com/polymyth/campaigncodex/" title="cc* campaigncodex">
 <link rel="related" href="https://seminarschools.com/polymyth/modulecanon/index.html" title="mc* modulecanon">
-<link rel="stylesheet" href="/css/theme.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=20260725-audit45">
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -54,9 +55,13 @@ h1 em{font-style:italic;color:var(--accent)}
 .empty{color:var(--muted);font-style:italic;padding:30px 0}
 footer{margin-top:50px}
 </style>
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
+<!-- Audit49 generic WebPage schema -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://seminarschools.com/aitr/#webpage","url":"https://seminarschools.com/aitr/","name":"AI Teacher Resources | Games, Lessons & Projects","description":"AITR, AI Teacher Resources. Original games, assignments, projects, and lessons that need an AI in the room to run. Sibling to ml, bb, cc, mc. DENOTE is the first game.","inLanguage":"en","isPartOf":{"@id":"https://seminarschools.com/#website"}}</script>
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="tool">
+<body data-geometry="indra-web" data-indra-intensity="0.070" data-route-type="tool">
 <a class="skip-link" href="#content">Skip to main content</a>
 <!-- CL_SELF_ROUTE_NOTE -->
 <div class="route-note tool-route-note" role="note"><span class="route-note-kicker">AI-assisted classroom work</span>Original activities, games, assignments, and projects.</div>
@@ -71,17 +76,57 @@ footer{margin-top:50px}
     <div class="row"><span class="lbl">Holds</span><span>Games, assignments, projects, lessons.</span></div>
     <div class="row"><span class="lbl">Use</span><span>Teacher-facing activities with clear classroom roles.</span></div>
     <div class="row"><span class="lbl">Method</span><span>Evidence, play, writing, and guided discussion.</span></div>
-    <div class="row"><span class="lbl">Entries</span><span id="total">1</span></div>
+    <div class="row"><span class="lbl">Entries</span><span id="total">2</span></div>
   </div>
 
   <div class="controls">
     <input type="search" class="search" id="search" placeholder="Search title, premise, subject, type&hellip;" aria-label="Search activities">
   </div>
-  <div class="tabs" id="tabs"></div>
-  <div class="count" id="count"></div>
+  <div class="tabs" id="tabs" role="group" aria-label="Filter activities by type"></div>
+  <div class="count" id="count" role="status" aria-live="polite" aria-atomic="true"></div>
 
-  <div id="entries"></div>
-  <div class="empty" id="empty" hidden>No activities match.</div>
+  <div id="entries" data-dynamic-fragments="seed-ids"></div>
+  <div class="empty" id="empty" hidden>
+    <p>No activities match.</p>
+    <button class="tab" id="clear-activities" type="button">Clear search and filters</button>
+  </div>
+  <noscript>
+    <section aria-labelledby="activities-without-javascript">
+      <h2 id="activities-without-javascript">Activities</h2>
+      <p class="count">Search and type filters need JavaScript; the complete activities remain readable below.</p>
+      <article class="card">
+        <div class="type">game</div>
+        <h2>DENOTE</h2>
+        <div class="meta">High school + adult · ESL and ELA, philosophy of language</div>
+        <p class="premise">The AI deals a pair of concepts to two teams, and they race to chain each one down through its own meaning. The first team to reach the floor or close the circle with clean moves wins.</p>
+        <div class="sec-label">How to run it</div>
+        <ol>
+          <li>Deal one level-appropriate concept to each team.</li>
+          <li>Each team defines its concept without using the word or its root.</li>
+          <li>Lift one word from that definition and define it the same way; keep descending.</li>
+          <li>Finish at a word too plain to simplify or at a clean loop back to an earlier word.</li>
+          <li>Allow challenges for smuggled roots, reused words, or premature loops.</li>
+        </ol>
+        <div class="sec-label">Where AI helps</div>
+        <p class="ai">The AI deals paired concepts, tracks both chains, judges challenges, and calls the first clean finish.</p>
+      </article>
+      <article class="card">
+        <div class="type">game</div>
+        <h2>Monster Battle</h2>
+        <div class="meta">Elementary, ages 6 to 10 · ESL and ELA, descriptive language</div>
+        <p class="premise">Two children invent monsters and duel through description. There are no hit points; the richer and more vivid telling wins.</p>
+        <div class="sec-label">How to run it</div>
+        <ol>
+          <li>Each child invents and richly describes a monster.</li>
+          <li>The AI sets an age-appropriate arena.</li>
+          <li>Players alternate a described move and a response for three exchanges each.</li>
+          <li>The AI presses for sensory detail, narrates the clash, and resolves the winner on storytelling quality.</li>
+        </ol>
+        <div class="sec-label">Where AI helps</div>
+        <p class="ai">The AI holds the turn sequence, prompts sharper detail, keeps the scene age-right, and judges narrative weight.</p>
+      </article>
+    </section>
+  </noscript>
 
 </div>
 
@@ -144,6 +189,8 @@ function renderTabs(){
     const b = document.createElement('button');
     b.className = 'tab';
     b.textContent = t === 'all' ? 'all' : t + 's';
+    b.type = 'button';
+    b.setAttribute('aria-controls', 'entries');
     b.setAttribute('aria-pressed', String(t === activeType));
     b.onclick = ()=>{ activeType = t; renderTabs(); renderEntries(); };
     host.appendChild(b);
@@ -164,7 +211,7 @@ function renderEntries(){
   document.getElementById('empty').hidden = rows.length > 0;
   document.getElementById('count').textContent = rows.length + (rows.length===1?' activity':' activities') + (activeType==='all'?'':' in '+activeType+'s');
   host.innerHTML = rows.map(e=>`
-    <div class="card" id="${e.id}">
+    <div class="card" id="${e.id}" tabindex="-1">
       <div class="type">${e.type}</div>
       <h2>${e.t}</h2>
       <div class="meta">${e.band? e.band+' &middot; ':''}${e.level}</div>
@@ -176,18 +223,41 @@ function renderEntries(){
       <div class="sec-label">The lesson under it</div>
       <div class="lesson">${e.lesson}</div>
     </div>`).join('');
+  const fragment = decodeURIComponent(window.location.hash.replace(/^#/, ''));
+  const target = rows.find(entry => entry.id === fragment)
+    ? document.getElementById(fragment)
+    : null;
+  if(target) requestAnimationFrame(()=>{
+    target.scrollIntoView({block:'start'});
+    target.focus({preventScroll:true});
+  });
 }
 
 document.getElementById('total').textContent = SEED.length;
 document.getElementById('search').addEventListener('input', renderEntries);
+document.getElementById('clear-activities').addEventListener('click', ()=>{
+  document.getElementById('search').value = '';
+  activeType = 'all';
+  renderTabs();
+  renderEntries();
+  document.getElementById('search').focus();
+});
+window.addEventListener('hashchange', ()=>{
+  const fragment = decodeURIComponent(window.location.hash.replace(/^#/, ''));
+  if(!SEED.some(entry => entry.id === fragment)) return;
+  document.getElementById('search').value = '';
+  activeType = 'all';
+  renderTabs();
+  renderEntries();
+});
 renderTabs();
 renderEntries();
 </script>
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
-<script src="/js/footer.js?v=20260719-audit11-decisions" defer></script>
+<script src="/js/footer.js?v=20260725-audit45-footer" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
 <script src="/js/theme.js?v=cl91" defer></script>
-<script defer src="/js/site-keyboard-enhancements.js"></script>
+<script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

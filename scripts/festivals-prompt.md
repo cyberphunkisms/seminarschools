@@ -40,9 +40,9 @@ The line is fuzzy. When uncertain, capture and flag with lower confidence.
 
 ## Coverage rotation and regional anchors
 
-The festival roster is intentionally wider than one bounded harvest. The runner supplies `SHARD` and `FESTIVAL_SHARD_COUNT` at the top of the prompt; the default is seven daily shards. Crawl these official-source groups:
+The festival roster is intentionally wider than one bounded harvest. The runner supplies `SHARD` and `FESTIVAL_SHARD_COUNT` at the top of the prompt; the default is seven once-weekly scheduled slots. Crawl these official-source groups:
 
-1. **Every-run regional anchors.** Toronto Fringe, SummerWorks, Brott Music Festival, Kingston WritersFest, Montréal International Jazz Festival, OSHEAGA, MUTEK Montréal, and Fantasia. These sources establish the Toronto, Southern Ontario, Kingston, and Montréal baseline and run every day.
+1. **Every-run regional anchors.** Toronto Fringe, SummerWorks, Brott Music Festival, Kingston WritersFest, Montréal International Jazz Festival, OSHEAGA, MUTEK Montréal, and Fantasia. These sources establish the Toronto, Southern Ontario, Kingston, and Montréal baseline and run every scheduled Tuesday harvest.
 2. **This run’s shard.** From the remaining `primary_sources` in `festivals-sources.json`, crawl only entries whose zero-based position satisfies `position % FESTIVAL_SHARD_COUNT == SHARD`. Record the others as `skipped-shard` in the source accounting.
 
 Across the default seven consecutive runs, or across one full `FESTIVAL_SHARD_COUNT` cycle if that value changes, the full festival roster is covered. Spend the bounded budget on the every-run anchors before the assigned shard. A source that cannot be reached receives an explicit `unreachable` status; it does not collapse the whole harvest. Before the budget is exhausted, write a valid JSON file with verified parent festival records and any verified children already collected; a smaller verified harvest is better than a failed run.
@@ -90,11 +90,12 @@ Emit a single JSON object to `/tmp/festivals-output.json` matching `/data/semina
 ```json
 {
   "generated_at": "ISO-8601 timestamp UTC",
-  "events": [ <record>, <record>, ... ]
+  "events": [ <record>, <record>, ... ],
+  "source_yields": [ <one row per primary source, in roster order> ]
 }
 ```
 
-The output JSON must also include a `source_yields` array with one entry for every `primary_sources` record, in roster order, using `crawled`, `skipped-shard`, `unreachable`, or `budget-exhausted`. This gives the next run a visible coverage ledger.
+The output JSON must also include a `source_yields` array with exactly one entry for every `primary_sources` record, in roster order, using `crawled`, `skipped-shard`, `unreachable`, or `budget-exhausted`. Every event must use a primary-source `source_id`, and each row's non-negative integer `events` value must equal the exact number of output events carrying that ID. `skipped-shard`, `unreachable`, and `budget-exhausted` rows must report zero. Duplicate, missing, unknown, reordered, invalid-status, or miscounted rows fail validation and leave public data unchanged. This gives the next run a trustworthy visible coverage ledger.
 
 Each record's `type` field uses one of the new polymyth types when appropriate:
 - `festival-of-form` for jazz festivals, music festivals, fringe theatre, literary festivals

@@ -40,7 +40,8 @@ const snippetAllowed = (f, type, count) => allow.snippetAllow.some(s => s.file =
 
 // strip scripts, styles, comments, then tags -> visible text (latin1-safe)
 function visibleText(s){
-  s = s.replace(/<script[\s\S]*?<\/script>/gi,' ')
+  s = s.replace(/<head[\s\S]*?<\/head>/gi,' ')
+       .replace(/<script[\s\S]*?<\/script>/gi,' ')
        .replace(/<style[\s\S]*?<\/style>/gi,' ')
        .replace(/<!--[\s\S]*?-->/g,' ')
        .replace(/<[^>]+>/g,' ');
@@ -86,7 +87,11 @@ for (const f of files){
   const authoredOnly = s
     .replace(/<!-- SS_STATIC_CATALOG_START -->[\s\S]*?<!-- SS_STATIC_CATALOG_END -->/g, ' ')
     .replace(/<!-- SS_STATIC_EVENTS_START -->[\s\S]*?<!-- SS_STATIC_EVENTS_END -->/g, ' ')
-    .replace(/<section id="static-methodology-editions"[\s\S]*?<\/section>/g, ' ');
+    .replace(/<(?:section|details) id="static-methodology-editions"[\s\S]*?<\/(?:section|details)>/g, ' ')
+    // Organizer-supplied Polymythcal titles/descriptions remain verbatim and
+    // are explicitly outside the site's authored-register doctrine.
+    .replace(/<([a-z][\w:-]*)\b[^>]*\bdata-source-language=["'][^"']*["'][^>]*>[\s\S]*?<\/\1>/gi, ' ')
+    .replace(/<nav\b[^>]*\bclass=["'][^"']*\bpm-event-related\b[^"']*["'][^>]*>[\s\S]*?<\/nav>/gi, ' ');
   const vt = visibleText(authoredOnly);
 
   const generatedEventDetail = f.startsWith('polymythseminars/events/');

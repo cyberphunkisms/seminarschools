@@ -2,6 +2,7 @@
 <!-- USAGE: load this file to run bookwormburrows at the table. Holds game-system doctrine and all table craft, narration and adjudication and pacing. Boundary CL-47. Narrator mode T118 BB-FULL-DM-STORYMODE. -->
 <html data-theme-policy="fixed" lang="en">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index,follow">
@@ -23,6 +24,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="related" href="https://seminarschools.com/polymyth/methodologylist/index.html" title="ml* methodologylist">
 <link rel="related" href="https://seminarschools.com/polymyth/modulecanon/index.html" title="mc* modulecanon (v2 curriculum-map index)">
 <link rel="related" href="https://seminarschools.com/polymyth/campaigncodex/" title="cc* campaigncodex (D&amp;D-based OSSD English curriculum, peer to mc*)">
@@ -49,7 +51,6 @@
 }
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
 --bg:#0a0908;--bg1:#131210;--bg2:#1c1a17;
@@ -76,6 +77,10 @@ h1 .ast{color:var(--fire);font-style:italic}
 .bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
 .sr{flex:1;min-width:180px;background:var(--bg1);border:1px solid var(--brd);color:var(--txt);padding:8px 14px;font-family:inherit;font-size:14px;border-radius:2px}
 .sr:focus{outline:none;border-color:var(--fire)}
+.sort-control{display:flex;align-items:center;gap:8px;color:var(--fnt);font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+.sort-select{min-height:44px;background:var(--bg1);border:1px solid var(--brd);color:var(--txt);padding:8px 34px 8px 12px;font-family:'EB Garamond',Georgia,serif;font-size:14px;text-transform:none;letter-spacing:normal;border-radius:2px}
+.sort-select:hover{border-color:var(--brd2)}
+.sort-select:focus-visible{outline:2px solid var(--fire);outline-offset:3px}
 .btn{background:transparent;border:1px solid var(--brd2);color:var(--txt);padding:8px 16px;font-family:inherit;font-size:14px;cursor:pointer;border-radius:2px;transition:.15s}
 .btn:hover{background:var(--bg1);border-color:var(--fire)}
 .bf{background:var(--fire);color:var(--bg);border-color:var(--fire);font-weight:500}
@@ -125,6 +130,16 @@ h1 .ast{color:var(--fire);font-style:italic}
 .etags:focus{outline:none;color:var(--dim)}
 .anchor{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--fnt);margin-top:6px;opacity:.4}
 .anchor:hover{opacity:1}
+.entry-links{margin-top:10px;border-top:1px dashed var(--brd);padding-top:8px}
+.entry-links summary{cursor:pointer;color:var(--teal2);font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.entry-links-groups{display:grid;gap:10px;padding-top:9px}
+.entry-links-label{display:block;color:var(--fnt);font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.entry-links-list{list-style:none;display:flex;flex-wrap:wrap;gap:5px 12px}
+.entry-links-list li{min-width:0}
+.entry-link{color:var(--teal2);text-decoration-thickness:1px;text-underline-offset:3px}
+.entry-link:hover{color:var(--txt)}
+.entry-link-missing{color:var(--fnt);font-style:italic}
+.entry:target{border-color:var(--fire)}
 .del{position:absolute;bottom:18px;right:22px;font-size:12px;color:var(--fnt);cursor:pointer;opacity:0;transition:.15s}
 .entry:hover .del{opacity:.6}
 .del:hover{color:var(--fire);opacity:1}
@@ -136,7 +151,11 @@ h1 .ast{color:var(--fire);font-style:italic}
 .cle{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--fnt);margin-bottom:8px}
 .cle .ts{color:var(--fire);margin-right:8px}
 .cdep{color:var(--fnt);font-size:12px;font-family:'JetBrains Mono',monospace;margin-top:4px;font-style:italic}
-@media(max-width:640px){.wrap{padding:20px 14px 60px}h1{font-size:28px}.entry{padding:14px 16px}.tabs{gap:4px}.tab{padding:6px 10px;font-size:13px}}
+.bb-qr-header{display:grid;grid-template-columns:72px minmax(0,1fr);gap:24px;align-items:start}
+.bb-qr-header-copy{min-width:0}
+.bb-qr-link{position:static;display:block;width:72px;height:72px;border:0;border-radius:6px;overflow:hidden;background:transparent;box-shadow:0 2px 8px rgba(0,0,0,.15);line-height:0}
+.bb-qr-link img{display:block;width:100%;height:100%}
+@media(max-width:640px){.wrap{padding:20px 14px 60px}h1{font-size:28px}.entry{padding:14px 16px}.tabs{gap:4px}.tab{padding:6px 10px;font-size:13px}.sort-control{width:100%;justify-content:space-between}.sort-select{flex:1;max-width:16rem}.bb-qr-header{grid-template-columns:64px minmax(0,1fr);gap:14px}.bb-qr-link{width:64px;height:64px}}
 
 @media print {
   /* Reset background to white to save ink */
@@ -151,6 +170,7 @@ h1 .ast{color:var(--fire);font-style:italic}
   h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
   p, li { page-break-inside: avoid; orphans: 3; widows: 3; }
   section, article, .chapter, .entry { page-break-inside: avoid; }
+  .sort-control { display: none !important; }
   /* Use full page width */
   main, .wrap, .frame, .page, .container { padding: 1rem !important; max-width: 100% !important; margin: 0 !important; }
 }
@@ -180,12 +200,14 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 <link rel="related" href="https://seminarschools.com/polymyth/sitemap/" title="Site map (navigational hub)">
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
-<link rel="stylesheet" href="/css/theme.css?v=cl91">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link rel="stylesheet" href="/css/theme.css?v=20260725-audit45">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<script src="/js/audit43-reader.js?v=20260725-audit43"></script>
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="teacher-rule-library" data-page-weight="heavy">
+<body data-reader-eligible="true" data-geometry="indra-web" data-indra-intensity="0.095" data-route-type="teacher-rule-library" data-page-weight="heavy">
 <!-- bb* QR logo -->
-<a href="/bookwormcard/" title="Bookwormcard. Scan with phone or click to open." aria-label="Bookwormburrows ouroboros QR. Links to bookwormcard." style="position:fixed;top:20px;right:20px;width:72px;height:72px;z-index:9999;display:block;background:transparent;border:none;line-height:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);border-radius:6px;overflow:hidden;"><img loading="lazy" src="/bookwormcard/qr-ouroboros-indra.png" alt="bb* ouroboros QR logo" width="405" height="405" style="width:100%;height:100%;display:block;"></a>
 
 <a class="skip-link" href="#mainwrap">Skip to main content</a>
 <!--
@@ -233,7 +255,9 @@ https://seminarschools.com/polymyth/bookwormburrows.txt
 ================================================================
 -->
 <div class="wrap" id="mainwrap">
-<header>
+<header class="bb-qr-header">
+<a aria-label="Bookwormburrows ouroboros QR. Links to BookwormCard." class="bb-qr-link" data-bb-qr="" href="/bookwormcard/" title="BookwormCard. Scan with a phone or click to open."><img alt="bb* ouroboros QR logo" height="405" loading="lazy" src="/bookwormcard/qr-ouroboros-indra.png" width="405"/></a>
+<div class="bb-qr-header-copy">
 <h1>Bookwormburrows<span class="ast">*</span></h1>
 <div class="sub">BB, BookwormBurrows, and PolymythDND name the same teacher-led academic TTRPG. Texts and media become worlds, burrowing wormcards become character sheets, assignments become quests, and the teacher stays the voice at the table.</div>
 <div class="arch">Simple rule: the teacher is the Dimensional Master. The teacher may use paper notes, documents, or a chosen AI tool for preparation and continuity. The sealed exegesis stays protected. Bookworms read, write, study, choose, and change. The full teacher/archive system stays underneath each student-friendly note.</div>
@@ -247,6 +271,7 @@ For the full operations file as plain text, visit:
 <span>entries: <span class="c" id="total">0</span></span>
 <span>section: <span class="c" id="secCt">0</span></span>
 <span id="saveState">ready</span>
+</div>
 </div>
 </header>
 <main>
@@ -271,6 +296,14 @@ For the full operations file as plain text, visit:
 
 <div class="bar">
 <input class="sr" id="search" placeholder="Search all sections: simple notes and original archive text…" aria-label="Search all sections" />
+<label class="sort-control" for="sort">
+<span>sort</span>
+<select class="sort-select" id="sort">
+<option value="curated">Curated order</option>
+<option value="title">Title A–Z</option>
+<option value="id">Record ID A–Z</option>
+</select>
+</label>
 </div>
 
 <details class="teacher-tools" id="teacherTools">
@@ -938,6 +971,7 @@ let entries = [];
 let changelog = [];
 let currentSection = 'methodology';
 let searchQuery = '';
+let sortMode = 'curated';
 
 const SK = 'bb:entries:kid-friendly-v1';
 const CK = 'bb:changelog:kid-friendly-v1';
@@ -948,7 +982,7 @@ async function loadEntries(){
     if(r) entries = JSON.parse(r.value);
   }catch(e){}
   if(!entries || !entries.length){
-    entries = SEED.map((e,i)=>({...e, id:`seed-${i}`, created:Date.now()}));
+    entries = SEED.map((e,i)=>({...e, id:e.id || `seed-${i}`, created:Date.now()}));
     await saveAll();
   }
   try{const c = await window.storage.get(CK); if(c) changelog = JSON.parse(c.value)}catch(e){}
@@ -1521,6 +1555,150 @@ function originalBlockFor(entry){
   return chunks.join('');
 }
 
+const RECORD_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._:-]*$/;
+const SOURCE_RECORD_ID_BY_TITLE = new Map(
+  SEED.filter(source=>source.id && source.t).map(source=>[source.t, String(source.id)])
+);
+const SOURCE_RECORD_ID_BY_BODY = new Map(
+  SEED.filter(source=>source.id && source.b).map(source=>[source.b, String(source.id)])
+);
+
+function recordIdFor(entry){
+  const storedId = String((entry && entry.id) || '').trim();
+  const legacySeed = /^seed-(\d+)$/.exec(storedId);
+  if(legacySeed){
+    const matchingId = (entry.t && SOURCE_RECORD_ID_BY_TITLE.get(entry.t))
+      || (entry.b && SOURCE_RECORD_ID_BY_BODY.get(entry.b));
+    if(matchingId) return matchingId;
+    const source = SEED[Number(legacySeed[1])];
+    if(source && source.id) return String(source.id);
+  }
+  return storedId;
+}
+
+function normalizedRecordLinks(value){
+  const values = Array.isArray(value) ? value : String(value || '').split(',');
+  return [...new Set(values
+    .map(id=>String(id).trim())
+    .filter(id=>RECORD_ID_PATTERN.test(id)))];
+}
+
+function recordDomId(recordId){
+  return `bb-entry-${recordId}`;
+}
+
+function entriesByRecordId(){
+  const index = new Map();
+  entries.forEach(entry=>{
+    const recordId = recordIdFor(entry);
+    if(RECORD_ID_PATTERN.test(recordId) && !index.has(recordId)) index.set(recordId, entry);
+  });
+  return index;
+}
+
+function appendRelatedLinks(container, entry, bbIndex){
+  const bbLinks = normalizedRecordLinks(entry.bb_links);
+  const ccLinks = normalizedRecordLinks(entry.cc_links);
+  if(!bbLinks.length && !ccLinks.length) return;
+
+  const related = document.createElement('details');
+  related.className = 'entry-links';
+  const summary = document.createElement('summary');
+  summary.textContent = `related records (${bbLinks.length + ccLinks.length})`;
+  related.appendChild(summary);
+
+  const groups = document.createElement('div');
+  groups.className = 'entry-links-groups';
+
+  function addGroup(label, links, type){
+    if(!links.length) return;
+    const group = document.createElement('div');
+    group.className = 'entry-links-group';
+    const heading = document.createElement('span');
+    heading.className = 'entry-links-label';
+    heading.textContent = label;
+    group.appendChild(heading);
+    const list = document.createElement('ul');
+    list.className = 'entry-links-list';
+    list.setAttribute('aria-label', label);
+    links.forEach(recordId=>{
+      const item = document.createElement('li');
+      if(type === 'bb'){
+        const target = bbIndex.get(recordId);
+        if(target){
+          const link = document.createElement('a');
+          const title = String(target.t || '').trim();
+          link.className = 'entry-link';
+          link.href = `#${recordDomId(recordId)}`;
+          link.textContent = title ? `${recordId} — ${title}` : recordId;
+          link.setAttribute('aria-label', title ? `BB record ${recordId}: ${title}` : `BB record ${recordId}`);
+          item.appendChild(link);
+        } else {
+          const missing = document.createElement('span');
+          missing.className = 'entry-link-missing';
+          missing.textContent = `${recordId} — unavailable`;
+          missing.setAttribute('aria-label', `BB record ${recordId} is unavailable in this build`);
+          item.appendChild(missing);
+        }
+      } else {
+        const link = document.createElement('a');
+        link.className = 'entry-link';
+        link.href = `/polymyth/campaigncodex/#${recordId}`;
+        link.textContent = recordId;
+        link.setAttribute('aria-label', `Campaign Codex record ${recordId}`);
+        item.appendChild(link);
+      }
+      list.appendChild(item);
+    });
+    group.appendChild(list);
+    groups.appendChild(group);
+  }
+
+  addGroup('BB records', bbLinks, 'bb');
+  addGroup('Campaign Codex records', ccLinks, 'cc');
+  related.appendChild(groups);
+  container.appendChild(related);
+}
+
+function sortEntries(filtered){
+  if(sortMode === 'curated') return filtered;
+  const curatedPosition = new Map(entries.map((entry,index)=>[entry,index]));
+  const keyFor = sortMode === 'id'
+    ? entry=>recordIdFor(entry)
+    : entry=>studentTitleFor(entry);
+  return filtered.slice().sort((a,b)=>{
+    const compared = keyFor(a).localeCompare(keyFor(b), undefined, {numeric:true, sensitivity:'base'});
+    return compared || curatedPosition.get(a) - curatedPosition.get(b);
+  });
+}
+
+function hashRecordId(){
+  let fragment = '';
+  try{ fragment = decodeURIComponent(location.hash.replace(/^#/, '')); }catch(e){ return ''; }
+  const prefix = 'bb-entry-';
+  const recordId = fragment.startsWith(prefix) ? fragment.slice(prefix.length) : '';
+  return RECORD_ID_PATTERN.test(recordId) ? recordId : '';
+}
+
+function activateHashRecord(){
+  const recordId = hashRecordId();
+  if(!recordId) return false;
+  const targetEntry = entriesByRecordId().get(recordId);
+  if(!targetEntry) return false;
+  currentSection = targetEntry.s;
+  searchQuery = '';
+  document.getElementById('search').value = '';
+  render();
+  requestAnimationFrame(()=>{
+    const target = document.getElementById(recordDomId(recordId));
+    if(target){
+      target.scrollIntoView({block:'start'});
+      target.focus({preventScroll:true});
+    }
+  });
+  return true;
+}
+
 
 function renderTabs(){
   const tabs = document.getElementById('tabs');
@@ -1531,7 +1709,11 @@ function renderTabs(){
     btn.className = 'tab' + (currentSection===s.id?' on':'');
     btn.dataset.s = s.id;
     btn.innerHTML = `${s.label}<span class="n">${count}</span>`;
-    btn.onclick = ()=>{ currentSection = s.id; render(); };
+    btn.onclick = ()=>{
+      if(hashRecordId()) history.replaceState(null, '', location.pathname + location.search);
+      currentSection = s.id;
+      render();
+    };
     tabs.appendChild(btn);
   });
 }
@@ -1557,6 +1739,8 @@ function renderEntries(){
       studentExtraFor(e).toLowerCase().includes(q)
     ));
   }
+  filtered = sortEntries(filtered);
+  const bbIndex = entriesByRecordId();
   list.innerHTML = '';
   if(!filtered.length){
     list.innerHTML = `<div class="empty">${hasSearch ? 'No entries found across all sections.' : 'No entries yet in this section.'}</div>`;
@@ -1566,6 +1750,11 @@ function renderEntries(){
     const d = document.createElement('div');
     d.className = 'entry';
     d.dataset.s = e.s;
+    const recordId = recordIdFor(e);
+    if(RECORD_ID_PATTERN.test(recordId)) d.id = recordDomId(recordId);
+    d.tabIndex = -1;
+    d.setAttribute('role', 'article');
+    d.setAttribute('aria-label', String(e.t || recordId || 'Bookwormburrows record'));
     if(isEditMode()){
       d.innerHTML = `
         <div class="mode-note">Edit mode shows the original archive fields.</div>
@@ -1573,7 +1762,7 @@ function renderEntries(){
         <div class="eb" contenteditable="true">${escape(e.b||'')}</div>
         ${e.x?`<div class="ex" contenteditable="true">${escape(e.x)}</div>`:''}
         <div class="etags" contenteditable="true">${escape(e.tg||'')}</div>
-        <div class="anchor">#${e.id}</div>
+        <div class="anchor">#${recordId}</div>
         <div class="del" data-id="${e.id}">delete</div>
       `;
     } else {
@@ -1590,9 +1779,10 @@ function renderEntries(){
         ${hard?`<div class="glossary-help">${escape(hard)}</div>`:''}
         <details class="original-note"><summary>full teacher / archive note kept</summary>${originalBlockFor(e)}</details>
         <div class="etags">${escape(e.tg||'')}</div>
-        <div class="anchor">#${e.id}</div>
+        <div class="anchor">#${recordId}</div>
       `;
     }
+    appendRelatedLinks(d, e, bbIndex);
     list.appendChild(d);
   });
   if(isEditMode()){
@@ -1629,7 +1819,18 @@ function render(){
 function isEditMode(){ return new URLSearchParams(location.search).get('edit') === '1'; }
 function escape(s){ return String(s).replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-document.getElementById('search').oninput = (e)=>{ searchQuery = e.target.value; render(); };
+document.getElementById('search').oninput = (e)=>{
+  if(hashRecordId()) history.replaceState(null, '', location.pathname + location.search);
+  searchQuery = e.target.value;
+  render();
+};
+document.getElementById('sort').onchange = (e)=>{
+  sortMode = e.target.value;
+  render();
+};
+window.addEventListener('hashchange', ()=>{
+  activateHashRecord();
+});
 
 document.getElementById('addEntry').onclick = async ()=>{
   const t = prompt('Entry title:'); if(!t) return;
@@ -1677,7 +1878,7 @@ async function init(){
       await saveAll();
     }
   }catch(e){}
-  render();
+  if(!activateHashRecord()) render();
 }
 init();
 </script>
@@ -1685,10 +1886,10 @@ init();
 </main>
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
-<script src="/js/footer.js?v=20260719-audit11-decisions" defer></script>
+<script src="/js/footer.js?v=20260725-audit45-footer" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
 <script src="/js/theme.js?v=cl91" defer></script>
 <script src="/js/txt-tools.js" data-txt="../bookwormburrows.txt"></script>
-<script defer src="/js/site-keyboard-enhancements.js"></script>
+<script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

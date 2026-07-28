@@ -1,0 +1,161 @@
+/*
+ * Audit 43 additive interaction layer.
+ *
+ * This file intentionally does not replace project styles. It supplies a
+ * quiet cross-document transition and an opt-in reader view on an explicit
+ * long-form allowlist.
+ */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: a43-page-out 110ms ease-out both;
+}
+
+::view-transition-new(root) {
+  animation: a43-page-in 150ms ease-out both;
+}
+
+@keyframes a43-page-out {
+  to { opacity: .92; }
+}
+
+@keyframes a43-page-in {
+  from { opacity: .88; }
+}
+
+.a43-reader-control {
+  position: fixed;
+  z-index: 70;
+  right: max(.7rem, env(safe-area-inset-right));
+  bottom: max(.7rem, env(safe-area-inset-bottom));
+  margin: 0;
+  pointer-events: none;
+}
+
+.a43-reader-toggle {
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid color-mix(in srgb, currentColor 34%, transparent);
+  border-radius: 999px;
+  padding: .55rem .82rem;
+  background: color-mix(in srgb, Canvas 92%, transparent);
+  color: CanvasText;
+  box-shadow: 0 8px 28px rgba(20, 16, 12, .14);
+  font: 650 .78rem/1.1 system-ui, sans-serif;
+  letter-spacing: .01em;
+  pointer-events: auto;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.a43-reader-toggle:hover {
+  border-color: currentColor;
+}
+
+.a43-reader-toggle:focus-visible {
+  outline: 3px solid Highlight;
+  outline-offset: 3px;
+}
+
+.a43-reader-toggle[aria-pressed="true"] {
+  background: CanvasText;
+  color: Canvas;
+}
+
+html.a43-reader-mode body[data-reader-eligible="true"] {
+  --a43-reader-paper: color-mix(in srgb, Canvas 96%, #efe8d9);
+  --a43-reader-ink: CanvasText;
+  background: var(--a43-reader-paper) !important;
+  color: var(--a43-reader-ink) !important;
+}
+
+html.a43-reader-mode body[data-reader-eligible="true"] :is(
+  .mandala-bg,
+  .mandala-field,
+  .indra-bg,
+  .indra-field,
+  .geometry-layer,
+  .bg-geometry,
+  canvas[aria-hidden="true"]
+) {
+  opacity: .035 !important;
+  filter: grayscale(1);
+}
+
+html.a43-reader-mode body[data-reader-eligible="true"] main {
+  width: min(100% - 2rem, 78rem);
+  margin-inline: auto;
+}
+
+html.a43-reader-mode body[data-reader-eligible="true"] main :is(
+  p,
+  li,
+  blockquote,
+  dd
+) {
+  max-width: 76ch;
+  line-height: 1.72;
+}
+
+html.a43-reader-mode body[data-reader-eligible="true"] main :is(
+  p,
+  li,
+  blockquote
+) {
+  text-wrap: pretty;
+}
+
+html.a43-reader-mode body[data-reader-eligible="true"] main :is(
+  article,
+  section,
+  details,
+  .card,
+  .panel,
+  .entry
+) {
+  scroll-margin-top: 1rem;
+}
+
+html.a43-reader-mode body[data-reader-eligible="true"] main img {
+  max-width: min(100%, 56rem);
+}
+
+@media (max-width: 520px) {
+  .a43-reader-control {
+    right: max(.45rem, env(safe-area-inset-right));
+    bottom: max(.45rem, env(safe-area-inset-bottom));
+  }
+
+  .a43-reader-toggle {
+    padding-inline: .7rem;
+  }
+
+  html.a43-reader-mode body[data-reader-eligible="true"] main {
+    width: min(100% - 1rem, 78rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+
+@media print {
+  .a43-reader-control {
+    display: none !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .a43-reader-toggle {
+    forced-color-adjust: auto;
+    border: 1px solid ButtonText;
+    background: ButtonFace;
+    color: ButtonText;
+    box-shadow: none;
+  }
+}

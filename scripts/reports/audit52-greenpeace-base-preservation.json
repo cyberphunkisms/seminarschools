@@ -1,0 +1,864 @@
+{
+  "schema": "seminarschools.audit52.base-preservation.v1",
+  "audit": 52,
+  "generated_at": "2026-07-29T00:24:11+09:00",
+  "status": "passed",
+  "input_archive": "ss-site-audit50-greenpeace-cv-editable-complete-2026-07-28(1).zip",
+  "input_archive_sha256": "a7256d204ee677eda973d416eec1eb1791cf705780fabfbc0154c0326f394079",
+  "input_package_manifest_sha256": "d4fde562af858f47ad97e4b3b38b47e01c707c09829b1fb7c6bc806b7e32e104",
+  "original_files_checked": 10164,
+  "original_files_missing": [],
+  "original_files_modified_count": 39,
+  "original_files_modified": [
+    "RELEASE_ID.txt",
+    "RELEASE_MANIFEST.json",
+    "_headers",
+    "about/index.html",
+    "css/polymythcal-revamp.css",
+    "data/audit45-translation-governance.json",
+    "index.html",
+    "llms.txt",
+    "package.json",
+    "polymyth/sitemap/index.html",
+    "polymythseminars/fr/index.html",
+    "polymythseminars/index.html",
+    "public/_headers",
+    "public/about/index.html",
+    "public/css/polymythcal-revamp.css",
+    "public/index.html",
+    "public/llms.txt",
+    "public/polymyth/sitemap/index.html",
+    "public/polymythseminars/fr/index.html",
+    "public/polymythseminars/index.html",
+    "public/saul/fa/index.html",
+    "public/saul/fr/index.html",
+    "public/saul/zh-hans/index.html",
+    "public/saul/zh-hant/index.html",
+    "public/site-release.json",
+    "public/sitemap.xml",
+    "public/teacherresources/index.html",
+    "saul/fa/index.html",
+    "saul/fr/index.html",
+    "saul/zh-hans/index.html",
+    "saul/zh-hant/index.html",
+    "scripts/build-public-deploy.js",
+    "scripts/reports/asset-weight-budget.json",
+    "scripts/reports/asset-weight-report.json",
+    "scripts/reports/external-link-inventory.json",
+    "scripts/reports/runtime-delivery-resilience.json",
+    "scripts/verify-public-deploy-parity.js",
+    "sitemap.xml",
+    "teacherresources/index.html"
+  ],
+  "cv_greenpeace_files_checked": 160,
+  "cv_greenpeace_files_missing": [],
+  "cv_greenpeace_files_modified": [],
+  "cv_greenpeace_expected_aggregate_sha256": "e2a414109f5b4a39aefc94f3e5d833551410a518a54f23b5a86b649df2fc61f7",
+  "cv_greenpeace_files": [
+    {
+      "path": "SAUL_CV_GREENPEACE_EDITABLE_RELEASE_2026-07-28.md",
+      "bytes": 2136,
+      "sha256": "40704d9b97823995eaf29ab61bcc7bcffe12c5bf52fb1a2417a1327f7c49e168"
+    },
+    {
+      "path": "SAUL_ONLINE_CV_610_POINT_SYNTHESIS_UPDATE_2026-07-11.md",
+      "bytes": 3203,
+      "sha256": "0e8ff6caae0a282ef49dccf1a345f693416d4825489d78efe7434acd4512d465"
+    },
+    {
+      "path": "data/audits/SAUL_ONLINE_CV_610_POINT_SYNTHESIS_UPDATE_2026-07-11.md",
+      "bytes": 3203,
+      "sha256": "0e8ff6caae0a282ef49dccf1a345f693416d4825489d78efe7434acd4512d465"
+    },
+    {
+      "path": "data/saul-cv-canonical-2026.json",
+      "bytes": 36530,
+      "sha256": "6304c7d894ee5f0c9f5a6a59c095077a2bb78da7f15b58f46fa9bd78b7e8d425"
+    },
+    {
+      "path": "data/saul-cv-pdf-manifest.json",
+      "bytes": 11389,
+      "sha256": "09c577e7e4fc0afcf567d3efc7d495d17bec7f93d8479d5ec7dce51cc93adf85"
+    },
+    {
+      "path": "data/saul-cv-records.json",
+      "bytes": 39830,
+      "sha256": "b64b56e279a675ad8854083897b392c4dec8516c2118cc66bafca2a66d6b6cd1"
+    },
+    {
+      "path": "data/saul-ultimate-school-cv-2026.json",
+      "bytes": 23921,
+      "sha256": "de82fa1de2146855297b434840b13bb0cb24d3c7e84b66b18efe5fd76316fe82"
+    },
+    {
+      "path": "docs/SAUL_CV_EDITING_GUIDE.md",
+      "bytes": 1570,
+      "sha256": "3b43d76d582bef6bbb0107ce47cd1ca12e91f0278dee35f00b3e27a3f085f521"
+    },
+    {
+      "path": "docs/SAUL_CV_PERFORMANCE_SYNTHESIS_AUDIT_2026-07-18.md",
+      "bytes": 3191,
+      "sha256": "6509dacfbba6f4470d6fd9ff1ebbf4854ef6e170923417b2ad655c2b5209b7f6"
+    },
+    {
+      "path": "docs/SAUL_CV_VISUAL_GOVERNANCE_2026-07-16.md",
+      "bytes": 898,
+      "sha256": "04bc453880c441e30ac4481bfb6f46ad76a083715d7d89828c07401a798ac034"
+    },
+    {
+      "path": "docs/SAUL_CV_VISUAL_WEB_PROFESSIONAL_PDF_RELEASE_2026-07-16.md",
+      "bytes": 760,
+      "sha256": "745e1092c3c9a7fcecc8ca24775fecb5dad12558bc9d7e5bb49a6a55b4a77347"
+    },
+    {
+      "path": "docs/SAUL_CV_WEBSITE_AND_PDF_ALL_POV_AUDIT_2026-07-16.md",
+      "bytes": 2298,
+      "sha256": "956b0c1e6b47a143a43dc5c9047f1adcf3b34fdd5961d2f534d74c3fa6e9f393"
+    },
+    {
+      "path": "docs/SAUL_CV_WEBSITE_AND_PDF_ALL_POV_CRITIQUE_2026-07-16.md",
+      "bytes": 7902,
+      "sha256": "74ee158e27d40b86192be38bb1da23b55286514b4cc44e289f58aacc5bd31d0d"
+    },
+    {
+      "path": "docs/SAUL_CV_WEBSITE_FIRST_PROFESSIONAL_PDF_RELEASE_2026-07-16.md",
+      "bytes": 1921,
+      "sha256": "2a0dee7d854bf6695432ce91ed02c31af6adddcb731ca7543e86268611518835"
+    },
+    {
+      "path": "public/saul/assets/saul-cv-canonical-2026.json",
+      "bytes": 36530,
+      "sha256": "6304c7d894ee5f0c9f5a6a59c095077a2bb78da7f15b58f46fa9bd78b7e8d425"
+    },
+    {
+      "path": "public/saul/assets/saul-cv-modular-2026.css",
+      "bytes": 6217,
+      "sha256": "ce5b6cfef487edcc9656eeaf201db591a49e846a17becb2c81e573c3c56f6779"
+    },
+    {
+      "path": "public/saul/assets/saul-cv-modular-2026.js",
+      "bytes": 6328,
+      "sha256": "5d5a3aa9e1e20ef69ecf26868f2a38c15e1695c215700c0d1ced967afcfc5cfb"
+    },
+    {
+      "path": "public/saul/assets/saul-cv-spectrum-2026.css",
+      "bytes": 29794,
+      "sha256": "170ec8de5385ec690beae0b8e8c336d0a4fe2b84b312022ef10c49bb7a86fc6e"
+    },
+    {
+      "path": "public/saul/assets/saul-cv-spectrum-2026.js",
+      "bytes": 13803,
+      "sha256": "d91b33f086af7018f2f59c723667cd23b0a178d07b7ea84346830fc33f73ae03"
+    },
+    {
+      "path": "public/saul/assets/saul-cv-v3.css",
+      "bytes": 7049,
+      "sha256": "4c8395a35067209b24547bb70ed96c5ba22b1908e9ad72d720a387c3f5758e96"
+    },
+    {
+      "path": "public/saul/assets/saul-cv-v3.js",
+      "bytes": 4929,
+      "sha256": "38add3faac4232ceca659786ed6bd3c5fb6f8e55e1f3906006db2d2edc35a004"
+    },
+    {
+      "path": "public/saul/assets/saul-ultimate-cv-2026.css",
+      "bytes": 22308,
+      "sha256": "a73b2eb15b2a0147567276a5a446d4632a448113af32adbadad215c4c28c6a29"
+    },
+    {
+      "path": "public/saul/assets/saul-ultimate-cv-modules-2026.js",
+      "bytes": 5774,
+      "sha256": "7c36cafd94d000cb841edb539e4fbdd1cdd484f89034134e552c3c53590545f5"
+    },
+    {
+      "path": "public/saul/assets/saul-ultimate-school-cv-2026.json",
+      "bytes": 26315,
+      "sha256": "bcb13cdb6dbb5962b4d58606c618d2cd65ce7ad3f57a9df5d8a21b271c596b5e"
+    },
+    {
+      "path": "public/saul/cv.docx",
+      "bytes": 262039,
+      "sha256": "93193993445f060abf0854bfd772274d89577eef9c674c1a40ec776bf17fc61c"
+    },
+    {
+      "path": "public/saul/cv.pdf",
+      "bytes": 143245,
+      "sha256": "2f672aca4535ee8938b66e2419509a828dd7b4d62edcfd88b3204721e29981da"
+    },
+    {
+      "path": "public/saul/cv/arts-culture/index.html",
+      "bytes": 1222,
+      "sha256": "01e43df902e6ca5f0266af61a9853f642b84f8ff4bfc565d9a28e99a0bb1580d"
+    },
+    {
+      "path": "public/saul/cv/community/index.html",
+      "bytes": 1213,
+      "sha256": "db3a6a14ffe27b1c163d4b2d667d61044be850ea08501d66e28d37366962881d"
+    },
+    {
+      "path": "public/saul/cv/customer-education/index.html",
+      "bytes": 1240,
+      "sha256": "d8b2ed7907e1c715168381ed98bca53ad8b7ba2d2527cb3530656fd6901866a8"
+    },
+    {
+      "path": "public/saul/cv/education/index.html",
+      "bytes": 1213,
+      "sha256": "8f64b4e743e0e61d743d8a164dafbe537ace09c1c38d381578e6eed9d597e2b7"
+    },
+    {
+      "path": "public/saul/cv/general/index.html",
+      "bytes": 1165,
+      "sha256": "e0947530f17d51a58c22ce0b34cb3454d2a3ecea6999f31c8619583e5ffb9d09"
+    },
+    {
+      "path": "public/saul/cv/hospitality/index.html",
+      "bytes": 1219,
+      "sha256": "a25ba058b6025685c1f9de028290351a419755f1ea5c878f7d7b99d453e01816"
+    },
+    {
+      "path": "public/saul/cv/performance/index.html",
+      "bytes": 1219,
+      "sha256": "ae730639a21b572d96a0e1158175e2f3dc0ba83557cef003b6174a21ba2fe483"
+    },
+    {
+      "path": "public/saul/cv/portfolio/index.html",
+      "bytes": 1210,
+      "sha256": "98a9ff07a4da9b9b8f4457d91836aa0bd593b0c40472f4e40c894f978b2eb46b"
+    },
+    {
+      "path": "public/saul/cv/programs/index.html",
+      "bytes": 1210,
+      "sha256": "6ba7140c5581725a1bbf0015882831f776f59a003f25257c25aefdca98c19a64"
+    },
+    {
+      "path": "public/saul/cv/research/index.html",
+      "bytes": 1210,
+      "sha256": "ae60f3aeeafad25ac0690c25e4fba37dfe2ff2be7fa191ef2cf6d73593112e5a"
+    },
+    {
+      "path": "public/saul/cv/teaching/index.html",
+      "bytes": 1210,
+      "sha256": "5ab8969d1500980be2979f58de221e205f8bc67a16d2e9c64646dc738a4809c1"
+    },
+    {
+      "path": "public/saul/cv/volunteer-events/index.html",
+      "bytes": 1234,
+      "sha256": "a59b4eb33d8ee11fb27feed59912050c72cb52dc98c88f9924548c568bac7f6e"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-all-cv-outputs.zip",
+      "bytes": 1487828,
+      "sha256": "8dd264203fa657d4b18446d012b0648e8f80057894cea7b2d044f609e6206d23"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-arts-culture-cv-ats.pdf",
+      "bytes": 30573,
+      "sha256": "c014797886184df1f1415ef57d7aefe9439886b8d32f8b9e52dc1bf914307daa"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-arts-culture-cv.pdf",
+      "bytes": 30574,
+      "sha256": "322d096283240aae5cf5707b43e3e8d455d028e967513432519a3ed2f3e90f26"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-arts-culture-cv.txt",
+      "bytes": 2187,
+      "sha256": "dde7787001fefd6a671aa7429848bb2f0a3b191629a1e4f3c43664f9fedeb2a2"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-community-cv-ats.pdf",
+      "bytes": 30656,
+      "sha256": "a3d122f7dd8151e5836978a35fa6fc7020af622a01243fe6e9685db1f6a2fca3"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-community-cv.pdf",
+      "bytes": 30665,
+      "sha256": "f07ff079a1c1c7f78579111d30b34189317ba3e3ec9e0ce4a54c503c712c7d58"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-community-cv.txt",
+      "bytes": 2500,
+      "sha256": "43b09f5f0dbee16021c790c3dfaa5e646d0b0a324a2126bf8a4db54554f1f190"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-complete-career-archive-cv.pdf",
+      "bytes": 47720,
+      "sha256": "14179d05b8ccef82c9f0b7d2a4dba3916a478e24d4155a79b5b70708f7f6b51c"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-customer-education-cv-ats.pdf",
+      "bytes": 30690,
+      "sha256": "a86b06c00e4db98f534fb1a05500a535bec0470c541e7bfec158721fb551d782"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-customer-education-cv.pdf",
+      "bytes": 30696,
+      "sha256": "7d4fd29b7dd446e57026d287bd1a05524bdcb87bb6ce7fd4d3d31b07a4b289d9"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-customer-education-cv.txt",
+      "bytes": 2748,
+      "sha256": "56c119e4000d61b007e39b8e7d04e3d55488ddc04092ea2d2e1a2e6cd76a7dc5"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-education-cv-ats.pdf",
+      "bytes": 30197,
+      "sha256": "6021ab7d7e6fa18066735c09554bef3a543bfecd418eb7f9da47df8e39e8966e"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-education-cv.pdf",
+      "bytes": 30198,
+      "sha256": "877870e899fca257b5b816dcec0da5aae05d46706fd3ac05bd386cc036424df3"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-education-cv.txt",
+      "bytes": 1823,
+      "sha256": "5860771427705957ff4eacf2715d754c529005112782900c2f8f8c3518a5782b"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-general-cv-ats.pdf",
+      "bytes": 32519,
+      "sha256": "d003f6ce821e261af1030b0253a36475f0153a6f0d4036f19f9d960e1632f562"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-general-cv.pdf",
+      "bytes": 32528,
+      "sha256": "a373859abb1cecfad85ba4d920cba56a94282f6568fc73d187e2c0a62cdfb0a1"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-general-cv.txt",
+      "bytes": 5138,
+      "sha256": "4dd54bf6413653082924791ff68bfc9af4f2fe7ad9c370965e84763ab6dec140"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-hospitality-cv-ats.pdf",
+      "bytes": 30273,
+      "sha256": "b772c5e99a727c1e3852fcd085386fa81773a066a6ad14a8bfa583fa0712c843"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-hospitality-cv.pdf",
+      "bytes": 30273,
+      "sha256": "0316053fa75c95ab13b2bc0c0fe69a53c3294acc9a7adaefa6de4ef468f0ed3c"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-hospitality-cv.txt",
+      "bytes": 2036,
+      "sha256": "b563cb285f0be3ee928dd3a1b572dea5fc619b53fb154cab21827fc982c6f75e"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-performance-cv-ats.pdf",
+      "bytes": 29990,
+      "sha256": "7e900f3a4d20128c888af6c76a808c62e0ca50aa0f23f8e74c6088d4361bda1d"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-performance-cv.pdf",
+      "bytes": 29990,
+      "sha256": "a163a76cc855d0f8aa8f29ceb41875a92e2fc09782aa7daea792875e5da127e9"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-performance-cv.txt",
+      "bytes": 1509,
+      "sha256": "7bca403c7dfb5f4146910812b648e3e4b954848fcc43a07ee951ebf155abe803"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-portfolio-cv-ats.pdf",
+      "bytes": 32453,
+      "sha256": "1cd7499f9b8c5db2de223a6faddd329f32484dc09ef7b4364a2ddcb6d8b9a480"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-portfolio-cv.pdf",
+      "bytes": 32465,
+      "sha256": "ec4e7d7e1883398529d97e79ac23693c2a6b477e585daf105aa25e46b0238d1a"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-portfolio-cv.txt",
+      "bytes": 4991,
+      "sha256": "c149a5b2c613ae854c102bf6ea1fa2f18d369fdcc25cca2e236b29b66a511d17"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-programs-cv-ats.pdf",
+      "bytes": 30547,
+      "sha256": "439d67d656e2179a45c3f025c74ae878a92a34997d16ea814121c2a0ec033059"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-programs-cv.pdf",
+      "bytes": 30546,
+      "sha256": "e6522191a25d332efa0b8f2f091e38fe5456fb2fa6d12340db4b8ace4c841ff5"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-programs-cv.txt",
+      "bytes": 2416,
+      "sha256": "999144b63ed3b67dd120a3e2b0968d22a1f9dd9a97babe29f51d7dde042c3361"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-research-cv-ats.pdf",
+      "bytes": 30078,
+      "sha256": "9626839585111cdba4feea0fef01af7bae3b17b0bd112172ef913d3ec70eefda"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-research-cv.pdf",
+      "bytes": 30079,
+      "sha256": "9c118aa84b7a6478162f01ba6c72bc32c01cbcad84c45aa230382becff737f49"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-research-cv.txt",
+      "bytes": 1753,
+      "sha256": "3977d7b0cfd9755134df24bc6112e46be0508818eab2f0f90ad0d74bfda2d17b"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-teaching-cv-ats.pdf",
+      "bytes": 30729,
+      "sha256": "90f547bc432ffbd9460401180903b034a630a7e26572cb7fcfc5e2c5ea68ab97"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-teaching-cv.pdf",
+      "bytes": 30726,
+      "sha256": "30d6f3b0e5ab0969ea55b62c6610ec01900ebb31f22ac5668f0e274fa933f5ca"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-teaching-cv.txt",
+      "bytes": 2797,
+      "sha256": "32b80a7a7e5d937946bec5b4ebf2369d033ee701f34021b22e2995f4a8baa47e"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-gmail.docx",
+      "bytes": 262022,
+      "sha256": "0b75c0a222df837efafd1231128e6c67f0c9c13d8f7747adde4ac95cc161978b"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-gmail.pdf",
+      "bytes": 143265,
+      "sha256": "1fac93c853970ab86cda5c56fca6bf0a92c19bbb8b136de2a615882771592e16"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-protonmail.docx",
+      "bytes": 262039,
+      "sha256": "93193993445f060abf0854bfd772274d89577eef9c674c1a40ec776bf17fc61c"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-protonmail.pdf",
+      "bytes": 143245,
+      "sha256": "2f672aca4535ee8938b66e2419509a828dd7b4d62edcfd88b3204721e29981da"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-volunteer-events-cv-ats.pdf",
+      "bytes": 30832,
+      "sha256": "6e72751f8c44221500ba07fadbf80feb85c2bce768bc6559f5cafdd78f70a4aa"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-volunteer-events-cv.pdf",
+      "bytes": 30843,
+      "sha256": "e7223f5cb9b541a5c68c7786374e5db0e764385f0ef113cd0eb53ff61e8dfa5c"
+    },
+    {
+      "path": "public/saul/downloads/saul-karim-nassau-volunteer-events-cv.txt",
+      "bytes": 2732,
+      "sha256": "e62f383451f89b2314690d96f4710aeac8ed1e0819a824dcfa2e7f17010ec128"
+    },
+    {
+      "path": "saul/assets/saul-cv-canonical-2026.json",
+      "bytes": 36530,
+      "sha256": "6304c7d894ee5f0c9f5a6a59c095077a2bb78da7f15b58f46fa9bd78b7e8d425"
+    },
+    {
+      "path": "saul/assets/saul-cv-modular-2026.css",
+      "bytes": 6217,
+      "sha256": "ce5b6cfef487edcc9656eeaf201db591a49e846a17becb2c81e573c3c56f6779"
+    },
+    {
+      "path": "saul/assets/saul-cv-modular-2026.js",
+      "bytes": 6328,
+      "sha256": "5d5a3aa9e1e20ef69ecf26868f2a38c15e1695c215700c0d1ced967afcfc5cfb"
+    },
+    {
+      "path": "saul/assets/saul-cv-spectrum-2026.css",
+      "bytes": 29794,
+      "sha256": "170ec8de5385ec690beae0b8e8c336d0a4fe2b84b312022ef10c49bb7a86fc6e"
+    },
+    {
+      "path": "saul/assets/saul-cv-spectrum-2026.js",
+      "bytes": 13803,
+      "sha256": "d91b33f086af7018f2f59c723667cd23b0a178d07b7ea84346830fc33f73ae03"
+    },
+    {
+      "path": "saul/assets/saul-cv-v3.css",
+      "bytes": 7049,
+      "sha256": "4c8395a35067209b24547bb70ed96c5ba22b1908e9ad72d720a387c3f5758e96"
+    },
+    {
+      "path": "saul/assets/saul-cv-v3.js",
+      "bytes": 4929,
+      "sha256": "38add3faac4232ceca659786ed6bd3c5fb6f8e55e1f3906006db2d2edc35a004"
+    },
+    {
+      "path": "saul/assets/saul-ultimate-cv-2026.css",
+      "bytes": 22308,
+      "sha256": "a73b2eb15b2a0147567276a5a446d4632a448113af32adbadad215c4c28c6a29"
+    },
+    {
+      "path": "saul/assets/saul-ultimate-cv-modules-2026.js",
+      "bytes": 5774,
+      "sha256": "7c36cafd94d000cb841edb539e4fbdd1cdd484f89034134e552c3c53590545f5"
+    },
+    {
+      "path": "saul/assets/saul-ultimate-school-cv-2026.json",
+      "bytes": 26315,
+      "sha256": "bcb13cdb6dbb5962b4d58606c618d2cd65ce7ad3f57a9df5d8a21b271c596b5e"
+    },
+    {
+      "path": "saul/cv.docx",
+      "bytes": 262039,
+      "sha256": "93193993445f060abf0854bfd772274d89577eef9c674c1a40ec776bf17fc61c"
+    },
+    {
+      "path": "saul/cv.pdf",
+      "bytes": 143245,
+      "sha256": "2f672aca4535ee8938b66e2419509a828dd7b4d62edcfd88b3204721e29981da"
+    },
+    {
+      "path": "saul/cv/arts-culture/index.html",
+      "bytes": 1222,
+      "sha256": "01e43df902e6ca5f0266af61a9853f642b84f8ff4bfc565d9a28e99a0bb1580d"
+    },
+    {
+      "path": "saul/cv/community/index.html",
+      "bytes": 1213,
+      "sha256": "db3a6a14ffe27b1c163d4b2d667d61044be850ea08501d66e28d37366962881d"
+    },
+    {
+      "path": "saul/cv/customer-education/index.html",
+      "bytes": 1240,
+      "sha256": "d8b2ed7907e1c715168381ed98bca53ad8b7ba2d2527cb3530656fd6901866a8"
+    },
+    {
+      "path": "saul/cv/education/index.html",
+      "bytes": 1213,
+      "sha256": "8f64b4e743e0e61d743d8a164dafbe537ace09c1c38d381578e6eed9d597e2b7"
+    },
+    {
+      "path": "saul/cv/general/index.html",
+      "bytes": 1165,
+      "sha256": "e0947530f17d51a58c22ce0b34cb3454d2a3ecea6999f31c8619583e5ffb9d09"
+    },
+    {
+      "path": "saul/cv/hospitality/index.html",
+      "bytes": 1219,
+      "sha256": "a25ba058b6025685c1f9de028290351a419755f1ea5c878f7d7b99d453e01816"
+    },
+    {
+      "path": "saul/cv/performance/index.html",
+      "bytes": 1219,
+      "sha256": "ae730639a21b572d96a0e1158175e2f3dc0ba83557cef003b6174a21ba2fe483"
+    },
+    {
+      "path": "saul/cv/portfolio/index.html",
+      "bytes": 1210,
+      "sha256": "98a9ff07a4da9b9b8f4457d91836aa0bd593b0c40472f4e40c894f978b2eb46b"
+    },
+    {
+      "path": "saul/cv/programs/index.html",
+      "bytes": 1210,
+      "sha256": "6ba7140c5581725a1bbf0015882831f776f59a003f25257c25aefdca98c19a64"
+    },
+    {
+      "path": "saul/cv/research/index.html",
+      "bytes": 1210,
+      "sha256": "ae60f3aeeafad25ac0690c25e4fba37dfe2ff2be7fa191ef2cf6d73593112e5a"
+    },
+    {
+      "path": "saul/cv/teaching/index.html",
+      "bytes": 1210,
+      "sha256": "5ab8969d1500980be2979f58de221e205f8bc67a16d2e9c64646dc738a4809c1"
+    },
+    {
+      "path": "saul/cv/volunteer-events/index.html",
+      "bytes": 1234,
+      "sha256": "a59b4eb33d8ee11fb27feed59912050c72cb52dc98c88f9924548c568bac7f6e"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-all-cv-outputs.zip",
+      "bytes": 1487828,
+      "sha256": "8dd264203fa657d4b18446d012b0648e8f80057894cea7b2d044f609e6206d23"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-arts-culture-cv-ats.pdf",
+      "bytes": 30573,
+      "sha256": "c014797886184df1f1415ef57d7aefe9439886b8d32f8b9e52dc1bf914307daa"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-arts-culture-cv.pdf",
+      "bytes": 30574,
+      "sha256": "322d096283240aae5cf5707b43e3e8d455d028e967513432519a3ed2f3e90f26"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-arts-culture-cv.txt",
+      "bytes": 2187,
+      "sha256": "dde7787001fefd6a671aa7429848bb2f0a3b191629a1e4f3c43664f9fedeb2a2"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-community-cv-ats.pdf",
+      "bytes": 30656,
+      "sha256": "a3d122f7dd8151e5836978a35fa6fc7020af622a01243fe6e9685db1f6a2fca3"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-community-cv.pdf",
+      "bytes": 30665,
+      "sha256": "f07ff079a1c1c7f78579111d30b34189317ba3e3ec9e0ce4a54c503c712c7d58"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-community-cv.txt",
+      "bytes": 2500,
+      "sha256": "43b09f5f0dbee16021c790c3dfaa5e646d0b0a324a2126bf8a4db54554f1f190"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-complete-career-archive-cv.pdf",
+      "bytes": 47720,
+      "sha256": "14179d05b8ccef82c9f0b7d2a4dba3916a478e24d4155a79b5b70708f7f6b51c"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-customer-education-cv-ats.pdf",
+      "bytes": 30690,
+      "sha256": "a86b06c00e4db98f534fb1a05500a535bec0470c541e7bfec158721fb551d782"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-customer-education-cv.pdf",
+      "bytes": 30696,
+      "sha256": "7d4fd29b7dd446e57026d287bd1a05524bdcb87bb6ce7fd4d3d31b07a4b289d9"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-customer-education-cv.txt",
+      "bytes": 2748,
+      "sha256": "56c119e4000d61b007e39b8e7d04e3d55488ddc04092ea2d2e1a2e6cd76a7dc5"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-education-cv-ats.pdf",
+      "bytes": 30197,
+      "sha256": "6021ab7d7e6fa18066735c09554bef3a543bfecd418eb7f9da47df8e39e8966e"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-education-cv.pdf",
+      "bytes": 30198,
+      "sha256": "877870e899fca257b5b816dcec0da5aae05d46706fd3ac05bd386cc036424df3"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-education-cv.txt",
+      "bytes": 1823,
+      "sha256": "5860771427705957ff4eacf2715d754c529005112782900c2f8f8c3518a5782b"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-general-cv-ats.pdf",
+      "bytes": 32519,
+      "sha256": "d003f6ce821e261af1030b0253a36475f0153a6f0d4036f19f9d960e1632f562"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-general-cv.pdf",
+      "bytes": 32528,
+      "sha256": "a373859abb1cecfad85ba4d920cba56a94282f6568fc73d187e2c0a62cdfb0a1"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-general-cv.txt",
+      "bytes": 5138,
+      "sha256": "4dd54bf6413653082924791ff68bfc9af4f2fe7ad9c370965e84763ab6dec140"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-hospitality-cv-ats.pdf",
+      "bytes": 30273,
+      "sha256": "b772c5e99a727c1e3852fcd085386fa81773a066a6ad14a8bfa583fa0712c843"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-hospitality-cv.pdf",
+      "bytes": 30273,
+      "sha256": "0316053fa75c95ab13b2bc0c0fe69a53c3294acc9a7adaefa6de4ef468f0ed3c"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-hospitality-cv.txt",
+      "bytes": 2036,
+      "sha256": "b563cb285f0be3ee928dd3a1b572dea5fc619b53fb154cab21827fc982c6f75e"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-performance-cv-ats.pdf",
+      "bytes": 29990,
+      "sha256": "7e900f3a4d20128c888af6c76a808c62e0ca50aa0f23f8e74c6088d4361bda1d"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-performance-cv.pdf",
+      "bytes": 29990,
+      "sha256": "a163a76cc855d0f8aa8f29ceb41875a92e2fc09782aa7daea792875e5da127e9"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-performance-cv.txt",
+      "bytes": 1509,
+      "sha256": "7bca403c7dfb5f4146910812b648e3e4b954848fcc43a07ee951ebf155abe803"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-portfolio-cv-ats.pdf",
+      "bytes": 32453,
+      "sha256": "1cd7499f9b8c5db2de223a6faddd329f32484dc09ef7b4364a2ddcb6d8b9a480"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-portfolio-cv.pdf",
+      "bytes": 32465,
+      "sha256": "ec4e7d7e1883398529d97e79ac23693c2a6b477e585daf105aa25e46b0238d1a"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-portfolio-cv.txt",
+      "bytes": 4991,
+      "sha256": "c149a5b2c613ae854c102bf6ea1fa2f18d369fdcc25cca2e236b29b66a511d17"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-programs-cv-ats.pdf",
+      "bytes": 30547,
+      "sha256": "439d67d656e2179a45c3f025c74ae878a92a34997d16ea814121c2a0ec033059"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-programs-cv.pdf",
+      "bytes": 30546,
+      "sha256": "e6522191a25d332efa0b8f2f091e38fe5456fb2fa6d12340db4b8ace4c841ff5"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-programs-cv.txt",
+      "bytes": 2416,
+      "sha256": "999144b63ed3b67dd120a3e2b0968d22a1f9dd9a97babe29f51d7dde042c3361"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-research-cv-ats.pdf",
+      "bytes": 30078,
+      "sha256": "9626839585111cdba4feea0fef01af7bae3b17b0bd112172ef913d3ec70eefda"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-research-cv.pdf",
+      "bytes": 30079,
+      "sha256": "9c118aa84b7a6478162f01ba6c72bc32c01cbcad84c45aa230382becff737f49"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-research-cv.txt",
+      "bytes": 1753,
+      "sha256": "3977d7b0cfd9755134df24bc6112e46be0508818eab2f0f90ad0d74bfda2d17b"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-teaching-cv-ats.pdf",
+      "bytes": 30729,
+      "sha256": "90f547bc432ffbd9460401180903b034a630a7e26572cb7fcfc5e2c5ea68ab97"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-teaching-cv.pdf",
+      "bytes": 30726,
+      "sha256": "30d6f3b0e5ab0969ea55b62c6610ec01900ebb31f22ac5668f0e274fa933f5ca"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-teaching-cv.txt",
+      "bytes": 2797,
+      "sha256": "32b80a7a7e5d937946bec5b4ebf2369d033ee701f34021b22e2995f4a8baa47e"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-gmail.docx",
+      "bytes": 262022,
+      "sha256": "0b75c0a222df837efafd1231128e6c67f0c9c13d8f7747adde4ac95cc161978b"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-gmail.pdf",
+      "bytes": 143265,
+      "sha256": "1fac93c853970ab86cda5c56fca6bf0a92c19bbb8b136de2a615882771592e16"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-protonmail.docx",
+      "bytes": 262039,
+      "sha256": "93193993445f060abf0854bfd772274d89577eef9c674c1a40ec776bf17fc61c"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-protonmail.pdf",
+      "bytes": 143245,
+      "sha256": "2f672aca4535ee8938b66e2419509a828dd7b4d62edcfd88b3204721e29981da"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-volunteer-events-cv-ats.pdf",
+      "bytes": 30832,
+      "sha256": "6e72751f8c44221500ba07fadbf80feb85c2bce768bc6559f5cafdd78f70a4aa"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-volunteer-events-cv.pdf",
+      "bytes": 30843,
+      "sha256": "e7223f5cb9b541a5c68c7786374e5db0e764385f0ef113cd0eb53ff61e8dfa5c"
+    },
+    {
+      "path": "saul/downloads/saul-karim-nassau-volunteer-events-cv.txt",
+      "bytes": 2732,
+      "sha256": "e62f383451f89b2314690d96f4710aeac8ed1e0819a824dcfa2e7f17010ec128"
+    },
+    {
+      "path": "scripts/audits/SAUL_TRUE_MODULAR_CV_RESTORE_AUDIT.md",
+      "bytes": 1057,
+      "sha256": "3665b910afa2d7d8da989592ce7928ba02c2e8c5bfb4181ed1b9a3f93df1dfe0"
+    },
+    {
+      "path": "scripts/build-saul-cv-outputs.py",
+      "bytes": 36294,
+      "sha256": "4a253c629a0c6a7bf8c79e5702955e7fe9ca6b13b3eafed0b07395ab418edc7f"
+    },
+    {
+      "path": "scripts/build-saul-cv-professional.py",
+      "bytes": 76749,
+      "sha256": "7007059561c98da319e9d6446a204b863257728af5d8f2b70b0bd6f30d10b821"
+    },
+    {
+      "path": "scripts/build-saul-ultimate-web-cv.py",
+      "bytes": 41482,
+      "sha256": "9ad717bacac9362f6ebd1563a518c5ef4935ac15e73b388e46335c8233d8fa8e"
+    },
+    {
+      "path": "scripts/export-saul-cv-records.js",
+      "bytes": 1943,
+      "sha256": "bee83534f8ed3731b9a59d7772279177cb027c330cf6a265db7e2c48e10df046"
+    },
+    {
+      "path": "scripts/reports/saul-cv-component-interaction-audit-2026-07-16.json",
+      "bytes": 1379,
+      "sha256": "08440e2bc21f0fc413df796942ecc35959764cef151e47ac619b6d6e609dd0cc"
+    },
+    {
+      "path": "scripts/reports/saul-cv-final-regression-audit-2026-07-16.json",
+      "bytes": 10322,
+      "sha256": "a0d04909adbb87c88049641ab00af32c94f1b014fae9afe0ffc7435b42d76149"
+    },
+    {
+      "path": "scripts/reports/saul-cv-focused-route-audit-2026-07-16.json",
+      "bytes": 6239,
+      "sha256": "be225e0d79a555d608cfdb9d30d987ffbf86b9c1862d2f1f565d0faf5a1159bc"
+    },
+    {
+      "path": "scripts/reports/saul-cv-pdf-preflight-audit-2026-07-16.json",
+      "bytes": 24872,
+      "sha256": "ef70d454d9125a09f0a60461ec6867a57dffe33cf34ccadb118f10cd2aa2eab4"
+    },
+    {
+      "path": "scripts/verify-saul-cv-release.py",
+      "bytes": 14748,
+      "sha256": "f18223b663c0dcd80f8ad7bf3e0b8cfe860b91b922c8e0d459a49ef2595f3679"
+    },
+    {
+      "path": "scripts/verify-saul-cv-whitespace.js",
+      "bytes": 10181,
+      "sha256": "1349118a0c8c6af1a39502bba1621294ef60560fff6abdcbdf0f78f33d825a03"
+    },
+    {
+      "path": "scripts/verify-saul-modular-cv.js",
+      "bytes": 956,
+      "sha256": "f931f5d423fb4e249f5bd75da2c66ef82bdd8c92aa1f191fceb73a8f00fb7be8"
+    },
+    {
+      "path": "scripts/verify-saul-ultimate-web-cv.js",
+      "bytes": 16969,
+      "sha256": "31f2da9c2a94f160e23f9d71ce7965ffab02e93c7eb963cc1b73b104f4e73239"
+    },
+    {
+      "path": "templates/saul-ultimate-school-cv-template.docx",
+      "bytes": 261969,
+      "sha256": "79b972c0b8d6e8689b6ca85904bbdc177b3e0e696c2aa8de86fe1fa566fb6dc3"
+    }
+  ],
+  "interpretation": {
+    "original_files_missing": "Every file supplied in the input package remains present.",
+    "original_files_modified": "These are intentional Audit 52 integration, release, public-mirror, and report edits.",
+    "cv_greenpeace_files_modified": "An empty list confirms byte-for-byte preservation of the supplied Greenpeace/CV surface."
+  }
+}

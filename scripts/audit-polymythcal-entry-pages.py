@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT_DIR = ROOT / 'data' / 'polymythcal-audit21'
+OUT_DIR = ROOT / 'data' / 'polymythcal-audit35'
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 OUT_JSON = OUT_DIR / 'entry-pages-browser-audit.json'
 TORONTO = ZoneInfo('America/Toronto')
@@ -39,7 +39,7 @@ def check(name: str, passed: bool, detail='') -> None:
         raise AssertionError(f'{name}: {detail}')
 
 
-def chromium_path(browser_type) -> str:
+def chromium_path(browser_type) -> str | None:
     candidates = [
         os.environ.get('CHROMIUM_PATH', '').strip(),
         '/usr/bin/chromium',
@@ -52,8 +52,22 @@ def chromium_path(browser_type) -> str:
             return candidate
     managed = getattr(browser_type, 'executable_path', '')
     if managed and Path(managed).exists():
-        return managed
+        # Keep Playwright's managed headless-shell selection intact. An
+        # explicit executable path is only needed for a configured or system
+        # browser.
+        return None
     raise FileNotFoundError('Chromium was not found. Set CHROMIUM_PATH or install Playwright Chromium.')
+
+
+def launch_chromium(browser_type):
+    options = {
+        'headless': True,
+        'args': ['--no-sandbox', '--disable-dev-shm-usage'],
+    }
+    explicit_path = chromium_path(browser_type)
+    if explicit_path:
+        options['executable_path'] = explicit_path
+    return browser_type.launch(**options)
 
 
 def route_matches(event: dict, slug: str) -> bool:
@@ -111,11 +125,7 @@ for slug, (_, _, default_content) in ROUTES.items():
     check(f'{slug}: canonical corpus has eligible records', len(eligible) > 0, len(eligible))
 
 with sync_playwright() as playwright:
-    browser = playwright.chromium.launch(
-        headless=True,
-        executable_path=chromium_path(playwright.chromium),
-        args=['--no-sandbox', '--disable-dev-shm-usage'],
-    )
+    browser = launch_chromium(playwright.chromium)
     for slug, (_, _, default_content) in ROUTES.items():
         context = browser.new_context(viewport={'width': 1280, 'height': 900}, timezone_id='America/Toronto')
         page = context.new_page()
@@ -139,7 +149,7 @@ with sync_playwright() as playwright:
         total = count_from_title(page.locator('#pmResultsTitle').inner_text())
         cards = page.locator('.pm-event-card')
         check(f'{slug}: interactive results load', total > 0, total)
-        check(f'{slug}: pagination count is coherent', cards.count() == min(total, 50), f'{cards.count()} cards / {total} total')
+        check(f'{slug}: pagination count is coherent', cards.count() == min(total, 24), f'{cards.count()} cards / {total} total')
         allowed_ids = {str(event.get('id')) for event in events if route_matches(event, slug) and current_event(event)}
         shown_ids = []
         for href in cards.locator('a[href*="/polymythseminars/events/"]').evaluate_all('nodes => [...new Set(nodes.map(n => n.getAttribute("href")))]'):
@@ -181,14 +191,16 @@ with sync_playwright() as playwright:
     page.add_script_tag(content=french_js)
     page.wait_for_function("document.querySelector('#pmResultsTitle') && !/Loading|Chargement/.test(document.querySelector('#pmResultsTitle').textContent)", timeout=30_000)
     check('French dedicated route translates route heading', 'Philosophie' in page.locator('h1').inner_text())
-    check('French dedicated route translates filters', (page.locator('#pmLookingForTitle').text_content() or '').strip() == 'Que voulez-vous trouver?')
+    check('French dedicated route translates filters', (page.locator('#pmLookingForTitle').text_content() or '').strip() == 'Que voulez-vous inclure?')
     check('French dedicated route reflows at 390px', page.evaluate('document.documentElement.scrollWidth <= window.innerWidth'), page.evaluate('document.documentElement.scrollWidth'))
     context.close()
     browser.close()
 
 report = {
+    'audit': 35,
     'release_id': json.loads((ROOT / 'RELEASE_MANIFEST.json').read_text(encoding='utf-8')).get('release_id'),
     'generated_at': json.loads((ROOT / 'RELEASE_MANIFEST.json').read_text(encoding='utf-8')).get('generated_at'),
+    'executed_at': datetime.now(ZoneInfo('UTC')).isoformat(timespec='seconds'),
     'routes': list(ROUTES),
     'checks_passed': sum(1 for result in RESULTS if result['passed']),
     'checks_total': len(RESULTS),

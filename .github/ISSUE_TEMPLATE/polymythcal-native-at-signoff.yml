@@ -1,69 +1,59 @@
-name: PolymythCAL native screen-reader sign-off
-description: Record the required VoiceOver or NVDA spoken-output pass for a release.
-title: "[PolymythCAL AT sign-off] "
+name: Polymythcal native accessibility sign-off
+description: Record one Audit 48 native browser, screen-reader, physical-device, or real-user matrix row.
+title: "[Audit 48 native sign-off] "
 labels:
   - accessibility
-  - polymythcal
 body:
   - type: dropdown
-    id: platform
+    id: matrix
     attributes:
-      label: Native platform and screen reader
+      label: Matrix row
       options:
-        - macOS, Safari, VoiceOver
-        - Windows, Chrome, NVDA
-        - Windows, Firefox, NVDA
+        - macOS Safari with VoiceOver
+        - Windows Firefox with NVDA
+        - Windows Chrome with NVDA
+        - iPhone Safari with VoiceOver
+        - Android Chrome with TalkBack
+        - Real-user task session
     validations:
       required: true
   - type: input
     id: release
     attributes:
-      label: Release ID or commit
-      placeholder: 2026-07-22-polymythcal-audit21-final
-    validations:
-      required: true
-  - type: input
-    id: versions
-    attributes:
-      label: OS, browser, and assistive-technology versions
+      label: Release ID
+      value: 2026-07-26-site-audit48-external-validation-interoperability-final
     validations:
       required: true
   - type: textarea
-    id: protocol
+    id: versions
     attributes:
-      label: Protocol results
-      description: Copy the cases from docs/POLYMYTHCAL_SCREEN_READER_TEST_PROTOCOL.md and record Pass, Fail, or Blocked with the exact spoken output.
+      label: Device, operating system, browser, and assistive-technology versions
     validations:
       required: true
-  - type: checkboxes
-    id: coverage
+  - type: textarea
+    id: routes
     attributes:
-      label: Required coverage
-      options:
-        - label: Main calendar structure, skip link, search, filters, and live result announcements were tested.
-          required: true
-        - label: Saved event, saved search, saved-items dialog, and feed controls were tested.
-          required: true
-        - label: List and calendar views, keyboard date-grid behavior, and stable event pages were tested.
-          required: true
-        - label: Submission and correction forms were tested.
-          required: true
-        - label: French mode, 400% zoom/reflow, high contrast, and reduced motion were tested.
-          required: true
+      label: Routes and tasks completed
+      description: Follow AUDIT48_NATIVE_DEVICE_AT_TEST_PROTOCOL_2026-07-26.md.
+    validations:
+      required: true
+  - type: textarea
+    id: results
+    attributes:
+      label: Passes, failures, and blocked checks
+      description: Include exact spoken output or control state needed to explain a failure. Do not include sensitive form content.
+    validations:
+      required: true
   - type: textarea
     id: evidence
     attributes:
-      label: Evidence links and defects
-      description: Add recordings, screenshots, exact spoken phrases, and links to any repair issues.
-    validations:
-      required: true
-  - type: dropdown
-    id: outcome
+      label: Consent-safe evidence locations
+  - type: checkboxes
+    id: signoff
     attributes:
-      label: Sign-off outcome
+      label: Sign-off
       options:
-        - Pass
-        - Fail
-        - Blocked
-    validations:
-      required: true
+        - label: Every release-blocking failure has a passing retest.
+          required: true
+        - label: Any recording or identifying information was collected with consent.
+          required: true

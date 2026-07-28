@@ -19,7 +19,8 @@ function main(){
   if(!html.includes('id="pmEventList"')||!html.includes('/js/polymythcal-revamp.js')) fail(`${slug}: missing shared interactive Polymythcal shell`);
   if(/eventsContainer|quickFocusNav|watchlistPanel|calendarSearch|data-focus="deadlines"/.test(html)) fail(`${slug}: legacy calendar controls remain`);
   if(!html.includes(`https://seminarschools.com/${slug}/`)) fail(`${slug}: missing route-specific canonical/schema URL`);
-  if(!html.includes(`aria-current="page">${html.match(/<h1>([^<]+)/)?.[1]||''}`) && !html.includes(`href="/${slug}/" aria-current="page"`)) fail(`${slug}: dedicated navigation does not identify the current route`);
+  const heading=html.match(/<h1>([^<]+)/)?.[1]||'';if(!html.includes('class="pm-route-context')||!html.includes(`<strong>${heading}</strong> is selected.`)) fail(`${slug}: focused-route context does not identify the current route`);
+  if(html.includes(`href="/${slug}/" aria-current="page"`)) fail(`${slug}: other-calendar navigation redundantly links the current route`);
   if(noscriptCount(html)!==Math.min(expected,40)) fail(`${slug}: expected ${Math.min(expected,40)} no-script listings, found ${noscriptCount(html)}`);
   if(!sitemap.includes(`${SITE}/${slug}/`)) fail(`${slug}: missing from sitemap`);
   if(!redirects.includes(`/${slug}`)) fail(`${slug}: missing slashless redirect`);

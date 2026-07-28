@@ -1,10 +1,18 @@
 {
-  "generated_at": "2026-07-22T14:30:00-04:00",
+  "generated_at": "2026-07-26T15:45:00-04:00",
   "status": "passed",
-  "total_checks": 92,
-  "passed_checks": 92,
+  "total_checks": 158,
+  "passed_checks": 158,
   "failed_checks": [],
   "duration_ms": null,
   "duration_note": "Runtime duration is printed to the console and intentionally omitted from committed evidence.",
-  "rule": "Every command in scripts/verify-all-runner.js is a release blocker."
+  "command_timeout_ms": 600000,
+  "execution_mode": "reuse-build",
+  "preparation_covered_checks": [
+    "node scripts/run-python.js scripts/verify-audit45-translations.py",
+    "node scripts/verify-audit49-metadata-surface.js",
+    "node scripts/verify-audit49-runtime-efficiency.js",
+    "node scripts/verify-audit49-build-packaging-efficiency.js"
+  ],
+  "rule": "Every active command and every preparation-covered command in scripts/verify-all-runner.js is a release blocker."
 }

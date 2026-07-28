@@ -1,0 +1,93 @@
+{
+  "release_id": "2026-07-24-site-audit39-discovery-continuity-route-resilience-final",
+  "generated_at": "2026-07-24T23:05:00-04:00",
+  "algorithm": "sha256",
+  "purpose": "Freeze selected Audit 39 reports and gates as immutable historical evidence before Audit 40.",
+  "historical_metrics": {
+    "polymythcal_events": 838,
+    "polymythcal_types": 32,
+    "registered_sources": 422,
+    "event_aliases": 842,
+    "teacher_resources": 644,
+    "teacher_collections": 25,
+    "teacher_groups": 7,
+    "methodology_entries": 1139,
+    "polymythcal_page_size": 24,
+    "portable_release_checks": 132,
+    "public_parity_files": 3550,
+    "package_members": 7802
+  },
+  "file_count": 14,
+  "files": [
+    {
+      "path": "WEBSITE_AUDIT39_DISCOVERY_CONTINUITY_ROUTE_RESILIENCE_REPORT_2026-07-24.md",
+      "bytes": 16624,
+      "sha256": "6baeca8dff802de0ae1c049102d639b35580bcc529fb5ce15935b8e35a0f0b9d"
+    },
+    {
+      "path": "data/audit38-frozen-sha256.json",
+      "bytes": 3180,
+      "sha256": "bc5864a87fd7f209940232365e223c737567f9631e0e24b162f39fe176070bc3"
+    },
+    {
+      "path": "scripts/apply-audit39-release-stamp.js",
+      "bytes": 6261,
+      "sha256": "32a944fdd7e3fc3de68b1455e769e048c6724465d02c88b2e94a2ecc0981e2e5"
+    },
+    {
+      "path": "scripts/run-audit39-browser.py",
+      "bytes": 6769,
+      "sha256": "e51a3519b818465cab1997f9047446acdb8db850fd81caf4aab88f7dd225a21f"
+    },
+    {
+      "path": "scripts/verify-audit39-browser-evidence.js",
+      "bytes": 4809,
+      "sha256": "621cdb3e1288dea1bf52a45f8ed2b13fcb375e52f5a4d457e92206ac179cd32b"
+    },
+    {
+      "path": "scripts/verify-audit39-cache-coherence.js",
+      "bytes": 2955,
+      "sha256": "dcf3c8fddf0bc7cd4ce72356c8b32a109757b20d88223892d240a320b05e1e46"
+    },
+    {
+      "path": "scripts/verify-audit39-evolution.js",
+      "bytes": 25893,
+      "sha256": "1cf1540a5dbd998c69d5ef8c82dba5260ffdb6ec61664bcefbb706c23df0c077"
+    },
+    {
+      "path": "scripts/verify-audit39-font-delivery.js",
+      "bytes": 3884,
+      "sha256": "e09191db607aa40c35bcbb6199ac009a5a7131d47ec1509bfb11ce142865c9d3"
+    },
+    {
+      "path": "scripts/verify-audit39-generated-routes.js",
+      "bytes": 17303,
+      "sha256": "2efd6f2a9d8fb8663e4013f7b87dcab4047d9d9b8eef615c0e96bea6abbebb9e"
+    },
+    {
+      "path": "scripts/verify-audit39-methodology-runtime.js",
+      "bytes": 1983,
+      "sha256": "d9b0f3c0e3b749f85e91939487ba7ecd21a2a914dd7c793cb49d8ec9fb15a57f"
+    },
+    {
+      "path": "scripts/verify-audit39-package-roundtrip.js",
+      "bytes": 2310,
+      "sha256": "985191ff4891e84e39578de94771939544e131127576aee466a3bffb9c3651e5"
+    },
+    {
+      "path": "scripts/verify-audit39-protest-recall.js",
+      "bytes": 6668,
+      "sha256": "b8bd9175e669294c2acd39e4a3bc46747484c7f9438be015ff002d7614e9b236"
+    },
+    {
+      "path": "scripts/verify-audit39-runtime-ui.mjs",
+      "bytes": 5457,
+      "sha256": "a12842c69fd34e58f66a2b470e7f0729ff9f3385b71f53a5e52d1431e849bea6"
+    },
+    {
+      "path": "scripts/verify-frozen-audit38.js",
+      "bytes": 2612,
+      "sha256": "1a7d098684ab7cef88d96e65fb10b70b1ef016f51b20e4a9ea44d3252928a1f4"
+    }
+  ]
+}

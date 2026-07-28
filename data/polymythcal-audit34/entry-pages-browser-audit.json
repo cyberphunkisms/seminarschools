@@ -1,0 +1,1068 @@
+{
+  "audit": 34,
+  "release_id": "2026-07-23-site-audit34-impeccable-ui-efficiency-final",
+  "generated_at": "2026-07-23T20:00:00-04:00",
+  "executed_at": "2026-07-24T02:13:50+00:00",
+  "routes": [
+    "writingclub",
+    "writingkids",
+    "writingjuniors",
+    "writingteens",
+    "writinggrads",
+    "university",
+    "philosophy",
+    "humanities",
+    "cfps",
+    "lectures",
+    "fellowships"
+  ],
+  "checks_passed": 209,
+  "checks_total": 209,
+  "results": [
+    {
+      "name": "writingclub: source page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingclub: public page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingclub: source and public match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingclub: route identity is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingclub: default content is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingclub: canonical URL is correct",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingclub: lightweight route page",
+      "passed": true,
+      "detail": "27723"
+    },
+    {
+      "name": "writingclub: legacy controls absent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingclub: no-script listings exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingclub: canonical corpus has eligible records",
+      "passed": true,
+      "detail": "37"
+    },
+    {
+      "name": "writingkids: source page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingkids: public page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingkids: source and public match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingkids: route identity is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingkids: default content is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingkids: canonical URL is correct",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingkids: lightweight route page",
+      "passed": true,
+      "detail": "23921"
+    },
+    {
+      "name": "writingkids: legacy controls absent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingkids: no-script listings exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingkids: canonical corpus has eligible records",
+      "passed": true,
+      "detail": "13"
+    },
+    {
+      "name": "writingjuniors: source page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingjuniors: public page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingjuniors: source and public match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingjuniors: route identity is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingjuniors: default content is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingjuniors: canonical URL is correct",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingjuniors: lightweight route page",
+      "passed": true,
+      "detail": "25008"
+    },
+    {
+      "name": "writingjuniors: legacy controls absent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingjuniors: no-script listings exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingjuniors: canonical corpus has eligible records",
+      "passed": true,
+      "detail": "20"
+    },
+    {
+      "name": "writingteens: source page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingteens: public page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingteens: source and public match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingteens: route identity is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingteens: default content is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingteens: canonical URL is correct",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingteens: lightweight route page",
+      "passed": true,
+      "detail": "27183"
+    },
+    {
+      "name": "writingteens: legacy controls absent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingteens: no-script listings exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingteens: canonical corpus has eligible records",
+      "passed": true,
+      "detail": "34"
+    },
+    {
+      "name": "writinggrads: source page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writinggrads: public page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writinggrads: source and public match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writinggrads: route identity is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writinggrads: default content is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writinggrads: canonical URL is correct",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writinggrads: lightweight route page",
+      "passed": true,
+      "detail": "27377"
+    },
+    {
+      "name": "writinggrads: legacy controls absent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writinggrads: no-script listings exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writinggrads: canonical corpus has eligible records",
+      "passed": true,
+      "detail": "34"
+    },
+    {
+      "name": "university: source page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "university: public page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "university: source and public match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "university: route identity is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "university: default content is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "university: canonical URL is correct",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "university: lightweight route page",
+      "passed": true,
+      "detail": "33517"
+    },
+    {
+      "name": "university: legacy controls absent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "university: no-script listings exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "university: canonical corpus has eligible records",
+      "passed": true,
+      "detail": "42"
+    },
+    {
+      "name": "philosophy: source page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "philosophy: public page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "philosophy: source and public match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "philosophy: route identity is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "philosophy: default content is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "philosophy: canonical URL is correct",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "philosophy: lightweight route page",
+      "passed": true,
+      "detail": "30551"
+    },
+    {
+      "name": "philosophy: legacy controls absent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "philosophy: no-script listings exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "philosophy: canonical corpus has eligible records",
+      "passed": true,
+      "detail": "24"
+    },
+    {
+      "name": "humanities: source page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "humanities: public page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "humanities: source and public match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "humanities: route identity is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "humanities: default content is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "humanities: canonical URL is correct",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "humanities: lightweight route page",
+      "passed": true,
+      "detail": "33095"
+    },
+    {
+      "name": "humanities: legacy controls absent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "humanities: no-script listings exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "humanities: canonical corpus has eligible records",
+      "passed": true,
+      "detail": "39"
+    },
+    {
+      "name": "cfps: source page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cfps: public page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cfps: source and public match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cfps: route identity is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cfps: default content is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cfps: canonical URL is correct",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cfps: lightweight route page",
+      "passed": true,
+      "detail": "24401"
+    },
+    {
+      "name": "cfps: legacy controls absent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cfps: no-script listings exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cfps: canonical corpus has eligible records",
+      "passed": true,
+      "detail": "12"
+    },
+    {
+      "name": "lectures: source page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "lectures: public page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "lectures: source and public match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "lectures: route identity is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "lectures: default content is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "lectures: canonical URL is correct",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "lectures: lightweight route page",
+      "passed": true,
+      "detail": "25576"
+    },
+    {
+      "name": "lectures: legacy controls absent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "lectures: no-script listings exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "lectures: canonical corpus has eligible records",
+      "passed": true,
+      "detail": "15"
+    },
+    {
+      "name": "fellowships: source page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fellowships: public page exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fellowships: source and public match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fellowships: route identity is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fellowships: default content is explicit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fellowships: canonical URL is correct",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fellowships: lightweight route page",
+      "passed": true,
+      "detail": "25006"
+    },
+    {
+      "name": "fellowships: legacy controls absent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fellowships: no-script listings exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fellowships: canonical corpus has eligible records",
+      "passed": true,
+      "detail": "16"
+    },
+    {
+      "name": "writingclub: interactive results load",
+      "passed": true,
+      "detail": "37"
+    },
+    {
+      "name": "writingclub: pagination count is coherent",
+      "passed": true,
+      "detail": "24 cards / 37 total"
+    },
+    {
+      "name": "writingclub: every rendered result belongs to the route corpus",
+      "passed": true,
+      "detail": "24 shown"
+    },
+    {
+      "name": "writingclub: apply-only default is honoured",
+      "passed": true,
+      "detail": "24/24"
+    },
+    {
+      "name": "writingclub: at least one additional filter is clickable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingclub: clicked filter remains selected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingclub: clicked filter becomes removable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingclub: reset restores original route count",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingclub: browser console remains clean",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "writingkids: interactive results load",
+      "passed": true,
+      "detail": "13"
+    },
+    {
+      "name": "writingkids: pagination count is coherent",
+      "passed": true,
+      "detail": "13 cards / 13 total"
+    },
+    {
+      "name": "writingkids: every rendered result belongs to the route corpus",
+      "passed": true,
+      "detail": "13 shown"
+    },
+    {
+      "name": "writingkids: apply-only default is honoured",
+      "passed": true,
+      "detail": "13/13"
+    },
+    {
+      "name": "writingkids: at least one additional filter is clickable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingkids: clicked filter remains selected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingkids: clicked filter becomes removable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingkids: reset restores original route count",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingkids: browser console remains clean",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "writingjuniors: interactive results load",
+      "passed": true,
+      "detail": "20"
+    },
+    {
+      "name": "writingjuniors: pagination count is coherent",
+      "passed": true,
+      "detail": "20 cards / 20 total"
+    },
+    {
+      "name": "writingjuniors: every rendered result belongs to the route corpus",
+      "passed": true,
+      "detail": "20 shown"
+    },
+    {
+      "name": "writingjuniors: apply-only default is honoured",
+      "passed": true,
+      "detail": "20/20"
+    },
+    {
+      "name": "writingjuniors: at least one additional filter is clickable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingjuniors: clicked filter remains selected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingjuniors: clicked filter becomes removable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingjuniors: reset restores original route count",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingjuniors: browser console remains clean",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "writingteens: interactive results load",
+      "passed": true,
+      "detail": "34"
+    },
+    {
+      "name": "writingteens: pagination count is coherent",
+      "passed": true,
+      "detail": "24 cards / 34 total"
+    },
+    {
+      "name": "writingteens: every rendered result belongs to the route corpus",
+      "passed": true,
+      "detail": "24 shown"
+    },
+    {
+      "name": "writingteens: apply-only default is honoured",
+      "passed": true,
+      "detail": "24/24"
+    },
+    {
+      "name": "writingteens: at least one additional filter is clickable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingteens: clicked filter remains selected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingteens: clicked filter becomes removable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingteens: reset restores original route count",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writingteens: browser console remains clean",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "writinggrads: interactive results load",
+      "passed": true,
+      "detail": "34"
+    },
+    {
+      "name": "writinggrads: pagination count is coherent",
+      "passed": true,
+      "detail": "24 cards / 34 total"
+    },
+    {
+      "name": "writinggrads: every rendered result belongs to the route corpus",
+      "passed": true,
+      "detail": "24 shown"
+    },
+    {
+      "name": "writinggrads: apply-only default is honoured",
+      "passed": true,
+      "detail": "24/24"
+    },
+    {
+      "name": "writinggrads: at least one additional filter is clickable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writinggrads: clicked filter remains selected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writinggrads: clicked filter becomes removable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writinggrads: reset restores original route count",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "writinggrads: browser console remains clean",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "university: interactive results load",
+      "passed": true,
+      "detail": "42"
+    },
+    {
+      "name": "university: pagination count is coherent",
+      "passed": true,
+      "detail": "24 cards / 42 total"
+    },
+    {
+      "name": "university: every rendered result belongs to the route corpus",
+      "passed": true,
+      "detail": "24 shown"
+    },
+    {
+      "name": "university: at least one additional filter is clickable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "university: clicked filter remains selected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "university: clicked filter becomes removable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "university: reset restores original route count",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "university: browser console remains clean",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "philosophy: interactive results load",
+      "passed": true,
+      "detail": "24"
+    },
+    {
+      "name": "philosophy: pagination count is coherent",
+      "passed": true,
+      "detail": "24 cards / 24 total"
+    },
+    {
+      "name": "philosophy: every rendered result belongs to the route corpus",
+      "passed": true,
+      "detail": "24 shown"
+    },
+    {
+      "name": "philosophy: at least one additional filter is clickable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "philosophy: clicked filter remains selected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "philosophy: clicked filter becomes removable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "philosophy: reset restores original route count",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "philosophy: browser console remains clean",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "humanities: interactive results load",
+      "passed": true,
+      "detail": "39"
+    },
+    {
+      "name": "humanities: pagination count is coherent",
+      "passed": true,
+      "detail": "24 cards / 39 total"
+    },
+    {
+      "name": "humanities: every rendered result belongs to the route corpus",
+      "passed": true,
+      "detail": "24 shown"
+    },
+    {
+      "name": "humanities: at least one additional filter is clickable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "humanities: clicked filter remains selected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "humanities: clicked filter becomes removable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "humanities: reset restores original route count",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "humanities: browser console remains clean",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "cfps: interactive results load",
+      "passed": true,
+      "detail": "12"
+    },
+    {
+      "name": "cfps: pagination count is coherent",
+      "passed": true,
+      "detail": "12 cards / 12 total"
+    },
+    {
+      "name": "cfps: every rendered result belongs to the route corpus",
+      "passed": true,
+      "detail": "12 shown"
+    },
+    {
+      "name": "cfps: apply-only default is honoured",
+      "passed": true,
+      "detail": "12/12"
+    },
+    {
+      "name": "cfps: at least one additional filter is clickable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cfps: clicked filter remains selected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cfps: clicked filter becomes removable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cfps: reset restores original route count",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cfps: browser console remains clean",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "lectures: interactive results load",
+      "passed": true,
+      "detail": "15"
+    },
+    {
+      "name": "lectures: pagination count is coherent",
+      "passed": true,
+      "detail": "15 cards / 15 total"
+    },
+    {
+      "name": "lectures: every rendered result belongs to the route corpus",
+      "passed": true,
+      "detail": "15 shown"
+    },
+    {
+      "name": "lectures: attend-only default is honoured",
+      "passed": true,
+      "detail": "15/15"
+    },
+    {
+      "name": "lectures: at least one additional filter is clickable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "lectures: clicked filter remains selected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "lectures: clicked filter becomes removable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "lectures: reset restores original route count",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "lectures: browser console remains clean",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "fellowships: interactive results load",
+      "passed": true,
+      "detail": "16"
+    },
+    {
+      "name": "fellowships: pagination count is coherent",
+      "passed": true,
+      "detail": "16 cards / 16 total"
+    },
+    {
+      "name": "fellowships: every rendered result belongs to the route corpus",
+      "passed": true,
+      "detail": "16 shown"
+    },
+    {
+      "name": "fellowships: apply-only default is honoured",
+      "passed": true,
+      "detail": "16/16"
+    },
+    {
+      "name": "fellowships: at least one additional filter is clickable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fellowships: clicked filter remains selected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fellowships: clicked filter becomes removable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fellowships: reset restores original route count",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fellowships: browser console remains clean",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "French dedicated route translates route heading",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "French dedicated route translates filters",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "French dedicated route reflows at 390px",
+      "passed": true,
+      "detail": "375"
+    }
+  ]
+}

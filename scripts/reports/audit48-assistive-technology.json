@@ -1,0 +1,47 @@
+{
+  "schema": "seminar-schools-audit48-assistive-technology-v1",
+  "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
+  "generated_at": "2026-07-26T15:45:00-04:00",
+  "status": "passed",
+  "scope": "repository-wide static assistive-technology prerequisites",
+  "metrics": {
+    "source_html_documents": 3395,
+    "interactive_documents": 2505,
+    "redirect_documents": 890,
+    "documents_with_two_progressive_h1_variants": 1,
+    "static_ids": 10654,
+    "static_aria_id_references": 2759,
+    "skip_links": 2501,
+    "images": 25,
+    "buttons": 1110
+  },
+  "machine_validated_contracts": [
+    "declared-document-language",
+    "single-main-landmark",
+    "single-effective-h1-with-bookwormcard-progressive-enhancement-contract",
+    "source-order-tab-navigation",
+    "unique-static-ids",
+    "resolved-static-aria-id-references",
+    "resolved-skip-links",
+    "image-alt-contract",
+    "static-button-names",
+    "existing-keyboard-input-and-browser-accessibility-gates"
+  ],
+  "native_execution_status": "requires-native-operating-systems-physical-devices-and-human-observation",
+  "native_runs_required": [
+    "macOS Safari with VoiceOver",
+    "Windows Firefox with NVDA",
+    "Windows Chrome with NVDA",
+    "iPhone Safari with VoiceOver",
+    "Android Chrome with TalkBack",
+    "real-user task completion and comprehension session"
+  ],
+  "references": [
+    "https://support.apple.com/guide/voiceover/welcome-voic010/mac",
+    "https://support.apple.com/guide/voiceover/vo35709/mac",
+    "https://download.nvaccess.org/documentation/en/userGuide.html",
+    "https://www.nvaccess.org/get-help/"
+  ],
+  "protocol": "AUDIT48_NATIVE_DEVICE_AT_TEST_PROTOCOL_2026-07-26.md",
+  "failures": []
+}

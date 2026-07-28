@@ -1,0 +1,325 @@
+{
+  "schema": "seminar-schools-frozen-audit-evidence-v1",
+  "algorithm": "sha256",
+  "release_id": "2026-07-24-site-audit40-browser-runtime-continuity-final",
+  "asset_version": "20260724-audit40",
+  "file_count": 60,
+  "historical_metrics": {
+    "polymythcal_events": 838,
+    "polymythcal_types": 32,
+    "registered_sources": 422,
+    "event_aliases": 842,
+    "teacher_resources": 644,
+    "teacher_collections": 25,
+    "teacher_groups": 7,
+    "methodology_entries": 1139,
+    "polymythcal_page_size": 24,
+    "portable_release_checks": 135,
+    "public_parity_files": 3550,
+    "package_members": 7910,
+    "browser_assertions": 818,
+    "runtime_route_cases": 24
+  },
+  "files": [
+    {
+      "path": "POLYMYTHCAL_WCAG22_AA_AUDIT40_2026-07-24.md",
+      "bytes": 4836,
+      "sha256": "77f9e2f5f188279ec8261f76fea0bbb09c9d25682a49a8ba26bb37930704fa03"
+    },
+    {
+      "path": "WEBSITE_AUDIT40_BROWSER_RUNTIME_CONTINUITY_REPORT_2026-07-24.md",
+      "bytes": 13361,
+      "sha256": "c4c41e2ecb402d12a9e14468296aae17592c06143f5804821f1576f3044605fb"
+    },
+    {
+      "path": "data/audit40-browser/runtime-continuity-browser-audit.json",
+      "bytes": 47218,
+      "sha256": "fe228ee549cde731c3d72a046d4f521a131bd19d950986c63f82b7fd5c812c88"
+    },
+    {
+      "path": "data/audit40-browser/screenshots/deep-link-1.png",
+      "bytes": 154845,
+      "sha256": "886a9bcb8615d171f7621aa3733c1b3ae17737887a01780afeaabda0ccb1a48f"
+    },
+    {
+      "path": "data/audit40-browser/screenshots/deep-link-2.png",
+      "bytes": 179473,
+      "sha256": "44551f4df4405d409977ee672d0e1b206160168f3ad3f830cfd1e7848e012056"
+    },
+    {
+      "path": "data/audit40-browser/screenshots/deep-link-3.png",
+      "bytes": 356552,
+      "sha256": "54f0778c368786d86b435da10002cbc5cc227c1f059f65fed6f0596a92ffea64"
+    },
+    {
+      "path": "data/audit40-browser/screenshots/deep-link-4.png",
+      "bytes": 383699,
+      "sha256": "4d008f9a70586f822c6e8a3b7eb5f8e0cc2b4977816a79f83ff7c4ae9aef1324"
+    },
+    {
+      "path": "data/audit40-browser/screenshots/dm-board-mobile.png",
+      "bytes": 67317,
+      "sha256": "30304dccbd789c042bd0bb4e90d2b05e8553f086eeeb13d9b88b58e2328de89b"
+    },
+    {
+      "path": "data/audit40-browser/screenshots/teacher-resources-reset.png",
+      "bytes": 110931,
+      "sha256": "4ee4ab017aebe5ca96528891770c66ff43558531b1881b0c7d61f8070c281153"
+    },
+    {
+      "path": "data/audit40-route-browser/aa-desktop.png",
+      "bytes": 130792,
+      "sha256": "d7bc0a93f16b0aef0ba4ec6a6767a51a66615d32c46af9c8522aca24132ed78a"
+    },
+    {
+      "path": "data/audit40-route-browser/aa-forced-colors.png",
+      "bytes": 51560,
+      "sha256": "0cad2ed2639c29840ad7d3ccadd6ab28a0e6dfc02bb7f512b6984540f60b0baa"
+    },
+    {
+      "path": "data/audit40-route-browser/aa-landscape-short.png",
+      "bytes": 81046,
+      "sha256": "0d6dbc6a5eb167c372890e376efa291f0521946311c340bf1d8a6be7c2bcc5a5"
+    },
+    {
+      "path": "data/audit40-route-browser/aa-mobile-short.png",
+      "bytes": 55077,
+      "sha256": "8a315ca334f621043b06741f83b97f4e0f88fdded43b29d9f70a72ff9708622d"
+    },
+    {
+      "path": "data/audit40-route-browser/about-desktop.png",
+      "bytes": 147940,
+      "sha256": "d6a8d2d2895563eb8a43ca1fe3220cf3095495a5d49ba1ecb10c167b37edec91"
+    },
+    {
+      "path": "data/audit40-route-browser/about-landscape-short.png",
+      "bytes": 95998,
+      "sha256": "9ccd9fb5b2241477fb95434aeefdd417b08ce93c83e784db752b696ce6966750"
+    },
+    {
+      "path": "data/audit40-route-browser/about-mobile-short.png",
+      "bytes": 75182,
+      "sha256": "0263ee37f5dd9176cab4c7615c76f25c04a272e981979954f3be29bf94fec2b3"
+    },
+    {
+      "path": "data/audit40-route-browser/agora-desktop.png",
+      "bytes": 76916,
+      "sha256": "237b2c906c0d5ba93174a06a22f8fb3c23929df59c50057d6dd4c813704d8a6c"
+    },
+    {
+      "path": "data/audit40-route-browser/agora-landscape-short.png",
+      "bytes": 44918,
+      "sha256": "ce7f1a950365cd76a9e33a8160ca478b36e48664fa8692314dd5b041686ab255"
+    },
+    {
+      "path": "data/audit40-route-browser/agora-mobile-short.png",
+      "bytes": 41094,
+      "sha256": "a3800c0d00df84ea401a0cce2572323862405c71d4e23eaee8327f2a74317e3d"
+    },
+    {
+      "path": "data/audit40-route-browser/bb-desktop.png",
+      "bytes": 154848,
+      "sha256": "f3a47e7837fb4fa4e6b3feab915e36745d7382e11392a1ad301f80127b014315"
+    },
+    {
+      "path": "data/audit40-route-browser/bb-forced-colors.png",
+      "bytes": 50136,
+      "sha256": "9c3c6ff22fc1966769f7cf1d638c9e505f31d92577840807ed5b7ebaf02965ae"
+    },
+    {
+      "path": "data/audit40-route-browser/bb-landscape-short.png",
+      "bytes": 75771,
+      "sha256": "858f4c04083b57453e7d6726371dead4440d6f78456c3e03a33903f6b36d8765"
+    },
+    {
+      "path": "data/audit40-route-browser/bb-mobile-short.png",
+      "bytes": 74610,
+      "sha256": "bafc69784e3b279e8df0d0c5cf71662e0ccf63a18496c878cdce706033df381a"
+    },
+    {
+      "path": "data/audit40-route-browser/bookwormcard-desktop.png",
+      "bytes": 282248,
+      "sha256": "b9fbf0db99505ec83208e23e3282f06b8d70a78cbeff40b6879cc720ebef4358"
+    },
+    {
+      "path": "data/audit40-route-browser/bookwormcard-forced-colors.png",
+      "bytes": 2842,
+      "sha256": "3a4fec990a4a47f1426a212097d2ac542367987be8b1ea2be46141ff15f49750"
+    },
+    {
+      "path": "data/audit40-route-browser/bookwormcard-landscape-short.png",
+      "bytes": 175842,
+      "sha256": "67435a3f84b7d9badcdb44eab9d0b3a4cf253ed29b2d93316a3f948f5469b915"
+    },
+    {
+      "path": "data/audit40-route-browser/bookwormcard-mobile-short.png",
+      "bytes": 118457,
+      "sha256": "425503b6b8c25108c8ca2dbcbc50a5db8ab17ecee45198efe9a913ca4d98bcfd"
+    },
+    {
+      "path": "data/audit40-route-browser/cv-desktop.png",
+      "bytes": 355443,
+      "sha256": "598c9b9450daab2f7d64ba56de0f4a3990068475251be81b553ac64978e4ef16"
+    },
+    {
+      "path": "data/audit40-route-browser/cv-landscape-short.png",
+      "bytes": 194088,
+      "sha256": "1b9c0b27a665383e40b31237d6a28e312cd36ad164bf16f9d2976e31b035b9a2"
+    },
+    {
+      "path": "data/audit40-route-browser/cv-mobile-short.png",
+      "bytes": 122077,
+      "sha256": "ec7b1cf993b914b18deb76f78d245ec2a1a2623050f429cf7fa73209c4a4e79f"
+    },
+    {
+      "path": "data/audit40-route-browser/home-desktop.png",
+      "bytes": 115230,
+      "sha256": "081f8a373513be785eec4a55f978f2efef02304c915c1e3fcb1ef80785fda3b1"
+    },
+    {
+      "path": "data/audit40-route-browser/home-forced-colors.png",
+      "bytes": 52326,
+      "sha256": "866800123f775d4b696c0879c02a571ef222797de511a779ff0880ee3f5cecde"
+    },
+    {
+      "path": "data/audit40-route-browser/home-landscape-short.png",
+      "bytes": 69430,
+      "sha256": "973f0f14115854b7823cae0bb1a85450988e36c5d2edd1b7ab5c628d84606f59"
+    },
+    {
+      "path": "data/audit40-route-browser/home-mobile-short.png",
+      "bytes": 41181,
+      "sha256": "7b56ee61524b2c3b12aa64c465eb4bfdabc087b5bcd22f2f81176bc93895f1ae"
+    },
+    {
+      "path": "data/audit40-route-browser/leizu-desktop.png",
+      "bytes": 262125,
+      "sha256": "23c6ee9c6b8f6b56226ae4b25c43df37e14d5e4ffe97995445e729bc5e66e49a"
+    },
+    {
+      "path": "data/audit40-route-browser/leizu-landscape-short.png",
+      "bytes": 147233,
+      "sha256": "fe7ace0e1ee1dc1933d86d767b5cac0885e0f005a76f5915e45e7302e5d5e8a7"
+    },
+    {
+      "path": "data/audit40-route-browser/leizu-mobile-short.png",
+      "bytes": 50833,
+      "sha256": "12c04ff557539ec91b8627ff5da200e6367cd7353b606c3edb155933277139ba"
+    },
+    {
+      "path": "data/audit40-route-browser/methodology-list-desktop.png",
+      "bytes": 99587,
+      "sha256": "77ef2769591ea0592761b215a3ab2bc64df55c991374a2779dfcd90d144ca81f"
+    },
+    {
+      "path": "data/audit40-route-browser/methodology-list-landscape-short.png",
+      "bytes": 56893,
+      "sha256": "ec2959aa3e1b91e3a8920c432757753e445d47dd130789a6ef78188bc04a12c2"
+    },
+    {
+      "path": "data/audit40-route-browser/methodology-list-mobile-short.png",
+      "bytes": 56682,
+      "sha256": "86a301f7a893c3b89a4d60955cd08d923b583da8d7a9b0316e4a22235dfaa849"
+    },
+    {
+      "path": "data/audit40-route-browser/polymythcal-desktop.png",
+      "bytes": 114166,
+      "sha256": "abee448aab197e853d8d5bad6f28dc0958d69220bd743bddb82a5a33cc90da03"
+    },
+    {
+      "path": "data/audit40-route-browser/polymythcal-forced-colors.png",
+      "bytes": 62584,
+      "sha256": "e3fb97b2f8adf770253a8d20825ee49729c97d6646c0e4fd29180a425eaf1fe7"
+    },
+    {
+      "path": "data/audit40-route-browser/polymythcal-landscape-short.png",
+      "bytes": 68056,
+      "sha256": "629c96a5680f9b8b82810bd078fb7d5e461022367314f0a64cb1b3ebafd66017"
+    },
+    {
+      "path": "data/audit40-route-browser/polymythcal-mobile-short.png",
+      "bytes": 67778,
+      "sha256": "57315848ff2568d9b44ef8d57a8c69ec0ca19f23a9babfa983847d8c6cb977f6"
+    },
+    {
+      "path": "data/audit40-route-browser/route-resilience-browser-audit.json",
+      "bytes": 185366,
+      "sha256": "640300d6ae472d4c30341947aaf406a6ce1bc23d6beca4ab39bd2c1ecd4d35dd"
+    },
+    {
+      "path": "data/audit40-route-browser/teacher-resources-desktop.png",
+      "bytes": 79522,
+      "sha256": "0c32c32986b9af810de6fada8ea2740f85dc5b18ebcc22db3b68c0b870a5ec42"
+    },
+    {
+      "path": "data/audit40-route-browser/teacher-resources-forced-colors.png",
+      "bytes": 44875,
+      "sha256": "05a5fcba71e305774eed83b0bacbcf6a8a9738003df495b7e5156204cf369407"
+    },
+    {
+      "path": "data/audit40-route-browser/teacher-resources-landscape-short.png",
+      "bytes": 39273,
+      "sha256": "6d66b443906db1a10a5a77c01d1db93f0f97fc97e6e6fa71af9bd8b5d9584892"
+    },
+    {
+      "path": "data/audit40-route-browser/teacher-resources-mobile-short.png",
+      "bytes": 43049,
+      "sha256": "68a42452c94841de8ce5f499d9496cb711401a35a4fc98ff850219b498b5731f"
+    },
+    {
+      "path": "data/polymythcal-audit40/entry-pages-browser-audit.json",
+      "bytes": 24611,
+      "sha256": "d81b61f34458904c99a0b4cc957c4140108a592a0df8ea0440f5d69a7b465b3a"
+    },
+    {
+      "path": "data/polymythcal-audit40/interaction-design-browser-audit.json",
+      "bytes": 11429,
+      "sha256": "4d52a524b168ce20de1c9d468e6063587d5be1f6d03701d09227c827a30da06c"
+    },
+    {
+      "path": "data/polymythcal-audit40/wcag22-browser-audit.json",
+      "bytes": 10660,
+      "sha256": "9f67fb62f5bff2d44a0d54b69c260cd748bad7c3243ad9b0597fbdc498bb512e"
+    },
+    {
+      "path": "scripts/apply-audit40-release-stamp.js",
+      "bytes": 7441,
+      "sha256": "5d9c503b43bc0d025d221f241be83c0e448b9edbaa130c8127d88f503b75f73b"
+    },
+    {
+      "path": "scripts/audit40-browser-runtime.py",
+      "bytes": 20392,
+      "sha256": "ae66fc82916c618ebe28daf7f2b9fe7c9fda7f90fde5b18c73d3b071ff99e947"
+    },
+    {
+      "path": "scripts/reports/audit40-project-failure-stress.json",
+      "bytes": 3811,
+      "sha256": "814472138f8ae4080f28e21ef4dab4b4a6d16b0dfb9946ec1efac19706915c26"
+    },
+    {
+      "path": "scripts/run-audit40-browser.py",
+      "bytes": 6612,
+      "sha256": "339ffe8fc6bd18eee3df99d45abcfdc51851e755a95eee841bcf3604661c2633"
+    },
+    {
+      "path": "scripts/verify-audit40-browser-evidence.js",
+      "bytes": 6443,
+      "sha256": "2207762c962e1cb22b8826fe435c6c6401241dfc552fe79ac37748c32d33e5ec"
+    },
+    {
+      "path": "scripts/verify-audit40-content-structure.js",
+      "bytes": 6716,
+      "sha256": "a57c0101c3e29dd7033169edccdce0cca0fa02e38dd7d754da2d74b31fdec76b"
+    },
+    {
+      "path": "scripts/verify-audit40-evolution.js",
+      "bytes": 13742,
+      "sha256": "d95e89be1554c401ad0b14ace765e17901248a6107098424c1c7666c4cc10e47"
+    },
+    {
+      "path": "scripts/verify-audit40-runtime-efficiency.js",
+      "bytes": 8805,
+      "sha256": "67fbbbe7a7fa198aa485e2f75dd6c8033fef32edad0cd459b93472646a7c4a2e"
+    }
+  ]
+}

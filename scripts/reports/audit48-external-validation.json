@@ -1,0 +1,48 @@
+{
+  "schema": "seminar-schools-audit48-external-validation-v1",
+  "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
+  "generated_at": "2026-07-26T15:45:00-04:00",
+  "status": "passed",
+  "machine_validation_status": "passed",
+  "metrics": {
+    "interactive_source_pages": 2505,
+    "redirect_source_pages": 890,
+    "calendar_tests": 9,
+    "calendar_files": 857,
+    "parsed_calendar_events": 4172,
+    "intended_cross_engine_scenarios": 24,
+    "cross_engine_runtime_checks": 0,
+    "live_source_bindings": 200,
+    "live_endpoint_bindings": 227,
+    "unique_live_requests": 219
+  },
+  "completed": [
+    "strict-rfc5545-calendar-corpus-and-independent-parser-roundtrip",
+    "calendar-http-and-link-media-contract",
+    "repository-wide-assistive-technology-dom-prerequisites",
+    "portable-firefox-webkit-program-and-honest-blocked-preflight",
+    "bounded-read-only-current-endpoint-probe",
+    "seminar-and-protest-scheduled-selection-dry-runs",
+    "exact-once-weekly-cadence-continuity"
+  ],
+  "external_execution_required": [
+    "branded Firefox validation",
+    "native macOS Safari and VoiceOver validation",
+    "Windows NVDA with Firefox and Chrome",
+    "physical iPhone and Android validation",
+    "real-user task completion and comprehension session",
+    "Google Calendar, Apple Calendar, and Outlook account imports",
+    "post-deploy calendar subscription refresh"
+  ],
+  "references": [
+    "https://playwright.dev/docs/browsers",
+    "https://support.apple.com/guide/voiceover/welcome-voic010/mac",
+    "https://download.nvaccess.org/documentation/en/userGuide.html",
+    "https://www.rfc-editor.org/rfc/rfc5545",
+    "https://support.google.com/calendar/answer/37118?hl=en",
+    "https://support.apple.com/guide/calendar/import-or-export-calendars-icl1023/mac",
+    "https://support.microsoft.com/en-us/office/import-or-subscribe-to-a-calendar-in-outlook-com-or-outlook-on-the-web-cff1429c-5af6-41ec-a5b4-74f2c278e98c"
+  ],
+  "failures": [],
+  "policy": "Audit 48 preserves English source truth, verbatim organizer text, noindex high-stakes Leizu translations pending bilingual review, BB teacher-led delivery without a session runner, frozen historical evidence, exactly-once-weekly workflows, and the no-security-audit boundary."
+}

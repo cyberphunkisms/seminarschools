@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://seminarschools.com/data/polymythcal-source-schema.json",
+  "title": "Polymythcal source roster",
+  "type": "object",
+  "required": [
+    "sources"
+  ],
+  "properties": {
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "events_url",
+          "source_mode",
+          "harvest_enabled"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "events_url": {
+            "type": "string",
+            "minLength": 1
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "harvest_enabled": {
+            "type": "boolean"
+          },
+          "source_mode": {
+            "enum": [
+              "crawl",
+              "discovery",
+              "manual"
+            ]
+          },
+          "tier_priority": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4
+          },
+          "default_type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "render_mode": {
+            "enum": [
+              "drupal",
+              "google-sites",
+              "javascript",
+              "manual",
+              "server-rendered",
+              "static",
+              "todo",
+              "wordpress"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "not": {
+                "properties": {
+                  "enabled": {
+                    "const": false
+                  }
+                },
+                "required": [
+                  "enabled"
+                ]
+              }
+            },
+            "then": {
+              "required": [
+                "tier_priority",
+                "default_type",
+                "render_mode"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

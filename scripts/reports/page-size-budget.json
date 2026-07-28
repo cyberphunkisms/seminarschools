@@ -1,106 +1,149 @@
 {
-  "schema": "page-size-budget-v2",
-  "updated": "2026-07-10",
-  "policy": "Budget tracks current large HTML pages after the BB mechanics synthesis, public BBT research synthesis, and the documented pre-Meaninglib source integration. Canonical source pages and complete link registers remain intact; ceilings permit intentional documented growth while blocking accidental bloat.",
+  "schema": "page-size-budget-v3",
+  "updated": "2026-07-27",
+  "policy": "Audit 45 budgets the current deploy surface. Large canonical reference pages and full localized Leizu compositions retain narrow explicit ceilings; obsolete calendar-shell exceptions remain removed. Any new HTML above 350 KB requires a documented budget entry.",
   "budgetedLargePages": [
     {
       "path": "polymyth/methodologylist/index.html",
-      "bytes": 3920948,
+      "baselineBytes": 3998792,
+      "ceilingBytes": 4000000,
       "route": "/polymyth/methodologylist/",
-      "ceilingBytes": 3955948,
-      "status": "canonical-heavy; pre-Meaninglib lineage, verbatim rule, recovered ouroboros logic, Carrd bridge, and citation entries added intentionally; 35 KB guard remains before dialectical chunking decision"
+      "status": "canonical long-form reference; narrow ceiling blocks accidental corpus duplication"
     },
     {
       "path": "polymyth/methodologylist/methodology/index.html",
-      "bytes": 1851467,
+      "baselineBytes": 1865976,
+      "ceilingBytes": 1900000,
       "route": "/polymyth/methodologylist/methodology/",
-      "ceilingBytes": 1886467,
-      "status": "canonical-heavy; July 10 BBT public research synthesis propagated intentionally; 35 KB guard preserves room for small canonical corrections before dialectical chunking decision"
+      "status": "canonical methodology section; explicit long-form exception"
     },
     {
       "path": "aa/index.html",
-      "bytes": 1509786,
+      "baselineBytes": 1510531,
+      "ceilingBytes": 1550000,
       "route": "/aa/",
-      "ceilingBytes": 1544786,
-      "status": "canonical-heavy; ML*/archive source order preserved; guard prevents regression before dialectical chunking decision"
+      "status": "canonical archive interface; explicit long-form exception"
     },
     {
       "path": "aa/cloud/index.html",
-      "bytes": 1321615,
+      "baselineBytes": 1321841,
+      "ceilingBytes": 1360000,
       "route": "/aa/cloud/",
-      "ceilingBytes": 1356615,
-      "status": "canonical-heavy; ML*/archive source order preserved; guard prevents regression before dialectical chunking decision"
+      "status": "canonical cloud archive; explicit long-form exception"
     },
     {
       "path": "polymyth/campaigncodex/index.html",
-      "bytes": 1031512,
+      "baselineBytes": 1031850,
+      "ceilingBytes": 1070000,
       "route": "/polymyth/campaigncodex/",
-      "ceilingBytes": 1065961,
-      "status": "canonical-heavy; ML*/archive source order preserved; guard prevents regression before dialectical chunking decision"
-    },
-    {
-      "path": "teacherresources/index.html",
-      "bytes": 776968,
-      "route": "/teacherresources/",
-      "ceilingBytes": 955068,
-      "status": "known-heavy; render-contained and budgeted to prevent regression"
-    },
-    {
-      "path": "polymythseminars/index.html",
-      "bytes": 727205,
-      "route": "/polymythseminars/",
-      "ceilingBytes": 739811,
-      "status": "calendar/shortcut page after route-specific fallback reduction; guard prevents fallback bloat returning"
+      "status": "canonical campaign reference; explicit long-form exception"
     },
     {
       "path": "polymyth/bookwormburrows/index.html",
-      "bytes": 602200,
+      "baselineBytes": 602568,
+      "ceilingBytes": 630000,
       "route": "/polymyth/bookwormburrows/",
-      "ceilingBytes": 623415,
-      "status": "known-heavy 246-entry BB rule library after July 10 BBT synthesis; render-contained with existing regression ceiling"
+      "status": "canonical rule library with render containment"
     },
     {
       "path": "polymyth/methodologylist/citation/index.html",
-      "bytes": 572905,
+      "baselineBytes": 578628,
+      "ceilingBytes": 610000,
       "route": "/polymyth/methodologylist/citation/",
-      "ceilingBytes": 607905,
-      "status": "canonical-heavy; complete occurrence-level source links and all recovered Urban Dictionary URLs added intentionally; 35 KB guard remains before dialectical chunking decision"
+      "status": "canonical citation register; explicit link-rich exception"
+    },
+    {
+      "path": "teacherresources/index.html",
+      "baselineBytes": 412242,
+      "ceilingBytes": 450000,
+      "route": "/teacherresources/",
+      "status": "server-rendered 644-resource finder with render containment"
+    },
+    {
+      "path": "leizu/fa/index.html",
+      "baselineBytes": 388321,
+      "ceilingBytes": 405000,
+      "route": "/leizu/fa/",
+      "status": "Persian localized programme composition with bounded English source fallback"
+    },
+    {
+      "path": "leizu/fr/index.html",
+      "baselineBytes": 381931,
+      "ceilingBytes": 405000,
+      "route": "/leizu/fr/",
+      "status": "French localized programme composition with bounded English source fallback"
+    },
+    {
+      "path": "leizu/zh-hans/index.html",
+      "baselineBytes": 378871,
+      "ceilingBytes": 405000,
+      "route": "/leizu/zh-hans/",
+      "status": "Simplified Chinese localized programme composition with bounded English source fallback"
+    },
+    {
+      "path": "leizu/zh-hant/index.html",
+      "baselineBytes": 378861,
+      "ceilingBytes": 405000,
+      "route": "/leizu/zh-hant/",
+      "status": "Traditional Chinese localized programme composition with bounded English source fallback"
+    },
+    {
+      "path": "leizu/fa/flyer/index.html",
+      "baselineBytes": 377358,
+      "ceilingBytes": 410000,
+      "route": "/leizu/fa/flyer/",
+      "status": "Persian localized print/flyer composition"
+    },
+    {
+      "path": "leizu/zh-hant/flyer/index.html",
+      "baselineBytes": 377340,
+      "ceilingBytes": 410000,
+      "route": "/leizu/zh-hant/flyer/",
+      "status": "Traditional Chinese localized print/flyer composition"
+    },
+    {
+      "path": "leizu/zh-hans/flyer/index.html",
+      "baselineBytes": 377340,
+      "ceilingBytes": 410000,
+      "route": "/leizu/zh-hans/flyer/",
+      "status": "Simplified Chinese localized print/flyer composition"
+    },
+    {
+      "path": "leizu/fr/flyer/index.html",
+      "baselineBytes": 377334,
+      "ceilingBytes": 410000,
+      "route": "/leizu/fr/flyer/",
+      "status": "French localized print/flyer composition"
     },
     {
       "path": "polymyth/methodologylist/gorgonification/index.html",
-      "bytes": 398956,
+      "baselineBytes": 442233,
+      "ceilingBytes": 455000,
       "route": "/polymyth/methodologylist/gorgonification/",
-      "ceilingBytes": 423928,
-      "status": "known-heavy; render-contained and budgeted to prevent regression"
+      "status": "canonical methodology section; updated for the verified July 28 mythology-source integration and provenance controls"
     },
     {
       "path": "polymyth/modulecanon/index.html",
-      "bytes": 393927,
+      "baselineBytes": 394323,
+      "ceilingBytes": 425000,
       "route": "/polymyth/modulecanon/",
-      "ceilingBytes": 423927,
-      "status": "known-heavy; render-contained and budgeted to prevent regression"
+      "status": "canonical module reference with render containment"
     },
     {
       "path": "leizu/flyer/index.html",
-      "bytes": 375227,
+      "baselineBytes": 375616,
+      "ceilingBytes": 410000,
       "route": "/leizu/flyer/",
-      "ceilingBytes": 405227,
-      "status": "known-heavy; render-contained and budgeted to prevent regression"
-    },
-    {
-      "path": "university/index.html",
-      "bytes": 375359,
-      "route": "/university/",
-      "ceilingBytes": 392959,
-      "status": "calendar/shortcut page after route-specific fallback reduction; guard prevents fallback bloat returning"
+      "status": "intentional print/flyer composition"
     },
     {
       "path": "leizu/index.html",
-      "bytes": 369050,
+      "baselineBytes": 371999,
+      "ceilingBytes": 405000,
       "route": "/leizu/",
-      "ceilingBytes": 399060,
-      "status": "known-heavy; render-contained and budgeted to prevent regression"
+      "status": "multilingual canonical programme page"
     }
   ],
-  "unbudgetedLimitBytes": 500000
+  "unbudgetedLimitBytes": 350000,
+  "warningLimitBytes": 250000
 }

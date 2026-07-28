@@ -149,13 +149,13 @@ def card_html(selected: str = 'general', focused_route: bool = False) -> str:
   <nav class="cv-spectrum__focus" aria-label="Choose a CV focus">
     <div class="cv-spectrum__focus-heading">
       <div><span>Current focus</span><strong data-cv-current>{escape(m['label'])}</strong></div>
-      <button type="button" data-cv-copy>Share this view</button>
+      <button type="button" data-cv-copy>Share this view</button><span class="cv-spectrum__status" data-cv-share-status aria-live="polite" aria-atomic="true"></span>
     </div>
     <div class="cv-spectrum__focus-row">{primary_links}</div>
     <details class="cv-spectrum__more-paths"><summary>More focused views</summary><div>{secondary_links}</div></details>
   </nav>
 
-  <div class="cv-spectrum__preview" aria-live="polite">
+  <div class="cv-spectrum__preview">
     <section class="cv-spectrum__experience">
       <div class="cv-spectrum__experience-head"><h2 class="cv-spectrum__section-label">Selected experience</h2><a href="/saul/#careerArchive">Complete record ↓</a></div>
       <div data-cv-jobs>{module_records_html(m, 5)}</div>
@@ -209,7 +209,7 @@ body:has(.cv-spectrum)>.skip-link:focus{left:1rem}
 .cv-spectrum__hero{display:grid;grid-template-columns:minmax(175px,235px) minmax(0,1fr);gap:clamp(1.25rem,3.2vw,2.75rem);align-items:center;padding:clamp(1.25rem,3.6vw,2.8rem);margin:0;border:0;text-align:left}
 .cv-spectrum__portrait{margin:0;position:relative}.cv-spectrum__portrait img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:24px;filter:saturate(.88) contrast(1.02);box-shadow:0 14px 34px rgba(26,29,31,.15)}.cv-spectrum__portrait::after{content:"";position:absolute;inset:8px -8px -8px 8px;border:1px solid color-mix(in srgb,var(--focus) 46%,transparent);border-radius:24px;z-index:-1}.cv-spectrum__portrait figcaption{margin-top:.72rem;color:var(--cv-muted);font:500 .67rem/1.45 var(--sans,system-ui);letter-spacing:.025em}
 .cv-spectrum__identity .cv-kicker{display:block;color:var(--focus-ink);font:750 .71rem/1 var(--sans,system-ui);letter-spacing:.13em;text-transform:uppercase;margin-bottom:.56rem}.cv-spectrum__identity h1{font-family:var(--serif,Georgia,serif);font-size:clamp(2.45rem,6vw,5.25rem);font-weight:500;letter-spacing:-.042em;line-height:.9;margin:0;max-width:13ch}.cv-spectrum__identity h1 .post{font:750 .22em/1 var(--sans,system-ui);letter-spacing:.11em;color:var(--focus-ink);white-space:nowrap;margin-left:.34em}.cv-spectrum__identity h1 .post:empty{display:none}.cv-spectrum__role{margin:.82rem 0 .35rem;color:var(--focus-ink);font:800 .77rem/1.2 var(--sans,system-ui);letter-spacing:.105em;text-transform:uppercase}.cv-spectrum__identity .cv-lede{max-width:72ch;margin:0;color:var(--cv-muted);font-size:clamp(.91rem,1.15vw,1rem);line-height:1.68}.cv-spectrum__contact{display:flex;flex-wrap:wrap;gap:.34rem 1rem;margin-top:1rem;font:650 .72rem/1.4 var(--sans,system-ui)}.cv-spectrum__contact a{color:inherit;text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--focus) 42%,transparent)}
-.cv-spectrum__focus{padding:.95rem clamp(1.25rem,3.6vw,2.8rem) 1.05rem;border-top:1px solid var(--cv-rule);border-bottom:1px solid var(--cv-rule);background:rgba(255,255,255,.38)}.cv-spectrum__focus-heading{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:.72rem}.cv-spectrum__focus-heading span{display:block;color:var(--cv-muted);font:750 .63rem/1 var(--sans,system-ui);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.28rem}.cv-spectrum__focus-heading strong{display:block;font:600 clamp(1rem,2vw,1.25rem)/1.2 var(--serif,Georgia,serif)}.cv-spectrum__focus-heading button{border:0;background:transparent;color:var(--focus-ink);cursor:pointer;font:750 .68rem/1.2 var(--sans,system-ui);text-decoration:underline;text-underline-offset:.2em;padding:.25rem}
+.cv-spectrum__focus{padding:.95rem clamp(1.25rem,3.6vw,2.8rem) 1.05rem;border-top:1px solid var(--cv-rule);border-bottom:1px solid var(--cv-rule);background:rgba(255,255,255,.38)}.cv-spectrum__focus-heading{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:.72rem}.cv-spectrum__focus-heading span{display:block;color:var(--cv-muted);font:750 .63rem/1 var(--sans,system-ui);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.28rem}.cv-spectrum__focus-heading strong{display:block;font:600 clamp(1rem,2vw,1.25rem)/1.2 var(--serif,Georgia,serif)}.cv-spectrum__focus-heading button{border:0;background:transparent;color:var(--focus-ink);cursor:pointer;font:750 .68rem/1.2 var(--sans,system-ui);text-decoration:underline;text-underline-offset:.2em;padding:.25rem}.cv-spectrum__status{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 .cv-spectrum__focus-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem}.cv-spectrum__lens{position:relative;display:flex;align-items:center;gap:.5rem;min-height:42px;padding:.55rem .65rem;border:1px solid var(--cv-rule);border-radius:11px;background:rgba(255,255,255,.35);color:var(--cv-ink);text-decoration:none;min-width:0}.cv-spectrum__lens>span{width:.48rem;height:.48rem;border-radius:50%;background:var(--lens);box-shadow:0 0 0 4px color-mix(in srgb,var(--lens) 10%,transparent);flex:0 0 auto}.cv-spectrum__lens strong{font:650 .74rem/1.15 var(--sans,system-ui);overflow-wrap:anywhere}.cv-spectrum__lens:hover,.cv-spectrum__lens[aria-current="page"]{background:color-mix(in srgb,var(--lens) 8%,white);border-color:color-mix(in srgb,var(--lens) 50%,transparent)}.cv-spectrum__lens[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--lens)}
 .cv-spectrum__more-paths{margin-top:.6rem}.cv-spectrum__more-paths>summary{cursor:pointer;color:var(--cv-muted);font:700 .68rem/1.4 var(--sans,system-ui)}.cv-spectrum__more-paths>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem;margin-top:.55rem}
 .cv-spectrum__preview{display:grid;grid-template-columns:minmax(0,1.52fr) minmax(225px,.68fr);gap:clamp(1.25rem,3vw,2.4rem);padding:clamp(1.25rem,3.6vw,2.6rem)}.cv-spectrum__section-label{color:var(--focus-ink);font:800 .67rem/1 var(--sans,system-ui);letter-spacing:.12em;text-transform:uppercase;margin:0 0 .78rem}.cv-spectrum__experience-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}.cv-spectrum__experience-head>a{color:var(--focus-ink);font:750 .67rem/1.2 var(--sans,system-ui);text-decoration:none}.cv-spectrum__job{position:relative;padding:.7rem 0 .78rem 1rem;border-top:1px solid var(--cv-rule)}.cv-spectrum__job:first-of-type{border-top:0;padding-top:0}.cv-spectrum__job::before{content:"";position:absolute;left:0;top:.9rem;width:3px;height:calc(100% - 1.5rem);border-radius:2px;background:color-mix(in srgb,var(--focus) 55%,transparent)}.cv-spectrum__job h3{margin:0;font:600 1rem/1.25 var(--serif,Georgia,serif)}.cv-spectrum__job h3 a{color:inherit;text-decoration-thickness:.07em;text-underline-offset:.14em}.cv-spectrum__job h3 span{font-style:italic;font-weight:400;color:var(--cv-muted)}.cv-spectrum__job-meta{margin:.13rem 0 .28rem;color:var(--cv-muted);font:650 .66rem/1.35 var(--sans,system-ui);letter-spacing:.025em}.cv-spectrum__job ul{margin:0;padding-left:1rem;color:var(--cv-muted);font-size:.79rem;line-height:1.52}.cv-spectrum__job li+li{margin-top:.14rem}
@@ -239,6 +239,8 @@ WEB_JS = r'''
   'use strict';
   const root = document.querySelector('[data-cv-spectrum]');
   if (!root) return;
+  const selectionCount = root.querySelector('[data-cv-selection-count]');
+  if (selectionCount) selectionCount.removeAttribute('aria-live');
   const dataUrl = '/saul/assets/saul-cv-canonical-2026.json';
   let data = null;
   let selected = [];
@@ -299,7 +301,7 @@ WEB_JS = r'''
     return `<article class="cv-spectrum__job"><h3>${title}${org}</h3><p class="cv-spectrum__job-meta">${meta}</p><ul>${bullets}</ul></article>`;
   };
   const escapeHTML = value => String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-  const render = () => {
+  const render = (announceFocus = false) => {
     const module = combineModules(selected);
     root.style.setProperty('--focus', module.color || '#665A78');
     root.querySelectorAll('[data-cv-role],[data-cv-current]').forEach(el => el.textContent = module.label);
@@ -317,6 +319,10 @@ WEB_JS = r'''
       if (on) el.setAttribute('aria-current', 'page'); else el.removeAttribute('aria-current');
     });
     root.querySelectorAll('[data-cv-blend]').forEach(box => box.checked = selected.includes(box.value));
+    if (announceFocus) {
+      const status = root.querySelector('[data-cv-share-status]');
+      if (status) status.textContent = `CV focus updated: ${module.label}.`;
+    }
     const designed = root.querySelector('[data-cv-designed]');
     const ats = root.querySelector('[data-cv-ats]');
     const text = root.querySelector('[data-cv-text]');
@@ -341,7 +347,7 @@ WEB_JS = r'''
     const nextUrl = routeFor(next);
     if (push && root.dataset.focusedRoute === 'true') { location.assign(nextUrl); return; }
     selected = next;
-    render();
+    render(true);
     if (push) history.pushState({focus:selected}, '', nextUrl);
   };
   // Focus choices are ordinary links. The same URL therefore renders the same
@@ -365,7 +371,7 @@ WEB_JS = r'''
     setTimeout(() => button.textContent = 'Share this view', 1600);
   });
   root.querySelector('[data-cv-print]')?.addEventListener('click', () => window.print());
-  addEventListener('popstate', () => { selected = pathFocus(); render(); });
+  addEventListener('popstate', () => { selected = pathFocus(); render(true); });
   fetch(dataUrl, {credentials:'same-origin'}).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => {
     data = d; selected = pathFocus(); render();
   }).catch(err => console.error('CV data failed to load', err));
@@ -467,7 +473,7 @@ def focused_page(slug: str, alias: bool = False) -> str:
                        'telephone': contact['phone'], 'address': {'@type': 'PostalAddress',
                        'addressLocality': 'Toronto', 'addressRegion': 'Ontario', 'addressCountry': 'CA'}}
     })
-    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(description)}"><meta name="robots" content="{robots}"><link rel="canonical" href="{canonical_url}"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/manifest.json"><meta property="og:type" content="profile"><meta property="og:title" content="{escape(title)}"><meta property="og:description" content="{escape(description)}"><meta property="og:url" content="{page_url}"><meta property="og:image" content="https://seminarschools.com/img/saul.jpg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{escape(title)}"><meta name="twitter:description" content="{escape(description)}"><meta name="twitter:image" content="https://seminarschools.com/img/saul.jpg"><link rel="stylesheet" href="/css/theme.css?v=cl91"><link rel="stylesheet" href="/css/alive.css?v=cl91"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a"><link rel="stylesheet" href="/saul/assets/saul-cv-spectrum-2026.css?v=20260718-performance-final7"><script type="application/ld+json">{schema}</script></head><body data-geometry="indra-web" data-indra-intensity="0.085" data-route-type="cv" data-cv-purpose="general-employment"><a class="cv-spectrum__site-link" href="/about/">← Seminar Schools</a><a class="skip-link" href="#main-content">Skip to main content</a><main id="main-content" class="page">{card_html(slug, True)}<section class="cv-map-section" aria-labelledby="routeArchiveTitle"><div class="section-intro"><div><span class="archive-eyebrow">Same visual system</span><h2 id="routeArchiveTitle">Continue through the complete career archive</h2></div><p>This link opens the modular CV card with {escape(m['label'])} selected. Open the full CV for the map, complete timeline, every focus area, and combined views.</p></div><p><a href="/saul/#careerArchive">Open the complete modular CV and work record →</a></p></section></main><script defer src="/js/mandala.js?v=cl91"></script><script defer src="/js/indra.js?v=cl91"></script><script defer src="/js/site-keyboard-enhancements.js"></script><script defer src="/saul/assets/saul-cv-spectrum-2026.js?v=20260718-performance-final7"></script></body></html>'''
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(description)}"><meta name="robots" content="{robots}"><link rel="canonical" href="{canonical_url}"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/manifest.json"><meta property="og:type" content="profile"><meta property="og:title" content="{escape(title)}"><meta property="og:description" content="{escape(description)}"><meta property="og:url" content="{page_url}"><meta property="og:image" content="https://seminarschools.com/img/saul.jpg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{escape(title)}"><meta name="twitter:description" content="{escape(description)}"><meta name="twitter:image" content="https://seminarschools.com/img/saul.jpg"><link rel="stylesheet" href="/css/theme.css?v=20260725-audit45"><link rel="stylesheet" href="/css/alive.css?v=cl91"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45"><link rel="stylesheet" href="/saul/assets/saul-cv-spectrum-2026.css?v=20260718-performance-final7"><script type="application/ld+json">{schema}</script></head><body data-geometry="indra-web" data-indra-intensity="0.085" data-route-type="cv" data-cv-purpose="general-employment"><a class="cv-spectrum__site-link" href="/about/">← Seminar Schools</a><a class="skip-link" href="#main-content">Skip to main content</a><main id="main-content" class="page">{card_html(slug, True)}<section class="cv-map-section" aria-labelledby="routeArchiveTitle"><div class="section-intro"><div><span class="archive-eyebrow">Same visual system</span><h2 id="routeArchiveTitle">Continue through the complete career archive</h2></div><p>This link opens the modular CV card with {escape(m['label'])} selected. Open the full CV for the map, complete timeline, every focus area, and combined views.</p></div><p><a href="/saul/#careerArchive">Open the complete modular CV and work record →</a></p></section></main><script defer src="/js/mandala.js?v=cl91"></script><script defer src="/js/indra.js?v=cl91"></script><script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script><script defer src="/saul/assets/saul-cv-spectrum-2026.js?v=20260718-performance-final7"></script></body></html>'''
 
 
 for slug in modules:
@@ -1007,7 +1013,12 @@ const fs=require('fs'),path=require('path');const root=path.resolve(__dirname,'.
 if(!css.includes('grid-template-columns:minmax(0,1.52fr) minmax(225px,.68fr)'))f.push('visual web preview grid missing');if(!css.includes('cv-spectrum__rainbow'))f.push('web spectrum missing');if(m.design_system!=='professional-monochrome')f.push('PDF design separation missing');for(const o of m.outputs){if(o.pages!==1)f.push(o.path+' exceeds one page')}
 if(f.length){console.error('SAUL CV LAYOUT CHECK FAILED');f.forEach(x=>console.error(' - '+x));process.exit(1)}console.log('SAUL CV LAYOUT CHECK PASSED - visual spectrum website and separate professional monochrome one-page PDFs verified.');
 '''
-(ROOT / 'scripts' / 'verify-saul-cv-whitespace.js').write_text(VERIFY_LAYOUT, encoding='utf-8')
+# The exhaustive 128-state historical and 2,048-state current whitespace
+# verifier is a maintained release source. Rebuilding CV artifacts must never
+# replace it with this legacy four-assertion bootstrap template.
+layout_guard = ROOT / 'scripts' / 'verify-saul-cv-whitespace.js'
+if not layout_guard.is_file():
+    raise FileNotFoundError(f'missing maintained CV whitespace verifier: {layout_guard}')
 
 # Package script entry.
 pkg_path = ROOT / 'package.json'

@@ -1,14 +1,26 @@
 {
   "schema": "external-link-inventory-v1",
-  "generatedAt": "2026-07-22T14:30:00-04:00",
-  "totalExternalLinks": 1995,
+  "generatedAt": "2026-07-28T11:20:00-04:00",
+  "totalExternalLinks": 3698,
   "topHosts": [
+    {
+      "host": "mitpress.mit.edu",
+      "count": 347
+    },
     {
       "host": "www.gutenberg.org",
       "count": 111
     },
     {
+      "host": "seminarschools.com",
+      "count": 90
+    },
+    {
       "host": "www.urbandictionary.com",
+      "count": 76
+    },
+    {
+      "host": "www.gananoque.ca",
       "count": 76
     },
     {
@@ -21,15 +33,15 @@
     },
     {
       "host": "en.wikipedia.org",
-      "count": 57
+      "count": 58
+    },
+    {
+      "host": "archive.org",
+      "count": 51
     },
     {
       "host": "www.warmuseum.ca",
       "count": 48
-    },
-    {
-      "host": "archive.org",
-      "count": 46
     },
     {
       "host": "www.inquirygroup.org",
@@ -44,19 +56,31 @@
       "count": 41
     },
     {
-      "host": "seminarschools.com",
+      "host": "doi.org",
       "count": 41
     },
     {
-      "host": "www.gananoque.ca",
+      "host": "calendly.com",
+      "count": 40
+    },
+    {
+      "host": "www.southstormont.ca",
+      "count": 40
+    },
+    {
+      "host": "ago.ca",
       "count": 38
     },
     {
-      "host": "doi.org",
-      "count": 37
+      "host": "www.imdb.com",
+      "count": 34
     },
     {
-      "host": "www.imdb.com",
+      "host": "harbourfrontcentre.com",
+      "count": 34
+    },
+    {
+      "host": "www.cambridge.ca",
       "count": 34
     },
     {
@@ -64,184 +88,160 @@
       "count": 32
     },
     {
+      "host": "www.humanities.utoronto.ca",
+      "count": 32
+    },
+    {
+      "host": "uchv.princeton.edu",
+      "count": 32
+    },
+    {
+      "host": "www.ville.vaudreuil-dorion.qc.ca",
+      "count": 32
+    },
+    {
+      "host": "agakhanmuseum.org",
+      "count": 30
+    },
+    {
+      "host": "www.hamilton.ca",
+      "count": 30
+    },
+    {
       "host": "openstax.org",
       "count": 29
     },
     {
-      "host": "www.youtube.com",
-      "count": 27
+      "host": "www.rom.on.ca",
+      "count": 28
+    },
+    {
+      "host": "www.concordia.ca",
+      "count": 28
     },
     {
       "host": "youtu.be",
       "count": 26
     },
     {
+      "host": "philevents.org",
+      "count": 24
+    },
+    {
+      "host": "www.markham.ca",
+      "count": 24
+    },
+    {
+      "host": "www.cca.qc.ca",
+      "count": 24
+    },
+    {
       "host": "jerrywbrown.com",
       "count": 24
     },
     {
-      "host": "www.southstormont.ca",
-      "count": 20
-    },
-    {
-      "host": "ago.ca",
-      "count": 19
-    },
-    {
-      "host": "harbourfrontcentre.com",
-      "count": 17
-    },
-    {
-      "host": "www.cambridge.ca",
-      "count": 17
-    },
-    {
-      "host": "www.humanities.utoronto.ca",
-      "count": 16
-    },
-    {
-      "host": "uchv.princeton.edu",
-      "count": 16
-    },
-    {
-      "host": "www.ville.vaudreuil-dorion.qc.ca",
-      "count": 16
-    },
-    {
-      "host": "agakhanmuseum.org",
-      "count": 15
-    },
-    {
-      "host": "www.concordia.ca",
-      "count": 15
-    },
-    {
-      "host": "www.hamilton.ca",
-      "count": 15
-    },
-    {
-      "host": "www.rom.on.ca",
-      "count": 14
-    },
-    {
-      "host": "torontocarnival.ca",
-      "count": 12
-    },
-    {
-      "host": "philevents.org",
-      "count": 12
-    },
-    {
-      "host": "www.markham.ca",
-      "count": 12
-    },
-    {
-      "host": "www.cca.qc.ca",
-      "count": 12
+      "host": "www.youtube.com",
+      "count": 23
     },
     {
       "host": "torontojazz.com",
-      "count": 11
+      "count": 22
     },
     {
       "host": "www.artsci.utoronto.ca",
-      "count": 11
+      "count": 22
     },
     {
-      "host": "inquirygroup.org",
-      "count": 11
-    },
-    {
-      "host": "www.toronto.ca",
-      "count": 10
+      "host": "torontocarnival.ca",
+      "count": 20
     },
     {
       "host": "www.shawfest.com",
-      "count": 10
+      "count": 20
     },
     {
       "host": "www.sociology.utoronto.ca",
-      "count": 10
+      "count": 20
     },
     {
       "host": "www.waterloo.ca",
-      "count": 10
-    },
-    {
-      "host": "www.loc.gov",
-      "count": 10
+      "count": 20
     },
     {
       "host": "munkschool.utoronto.ca",
-      "count": 9
+      "count": 18
     },
     {
       "host": "brockvilleartscentre.com",
-      "count": 9
+      "count": 18
     },
     {
-      "host": "calendly.com",
-      "count": 8
+      "host": "www.google.com",
+      "count": 17
+    },
+    {
+      "host": "www.toronto.ca",
+      "count": 16
     },
     {
       "host": "summerworks.ca",
-      "count": 8
+      "count": 16
     },
     {
       "host": "www.queensu.ca",
-      "count": 8
+      "count": 16
     },
     {
       "host": "phi.ca",
-      "count": 8
+      "count": 16
     },
     {
       "host": "www.mississauga.ca",
-      "count": 8
+      "count": 16
     },
     {
       "host": "www.cityofkingston.ca",
-      "count": 8
+      "count": 16
     },
     {
       "host": "www.kingstongrand.ca",
-      "count": 8
+      "count": 16
     },
     {
       "host": "www.cornwall.ca",
-      "count": 8
+      "count": 16
     },
     {
       "host": "brockvilletourism.com",
-      "count": 8
+      "count": 16
     },
     {
       "host": "www.library.cornwall.on.ca",
-      "count": 8
+      "count": 16
     },
     {
-      "host": "www.archives.gov.on.ca",
-      "count": 8
+      "host": "cal.com",
+      "count": 15
+    },
+    {
+      "host": "www.earlham.edu",
+      "count": 15
     },
     {
       "host": "philosophy.utoronto.ca",
-      "count": 7
+      "count": 14
     },
     {
       "host": "www.uoguelph.ca",
-      "count": 7
+      "count": 14
     },
     {
       "host": "www.soulpepper.ca",
-      "count": 7
+      "count": 14
     },
     {
       "host": "www.coc.ca",
-      "count": 7
-    },
-    {
-      "host": "www.tso.ca",
-      "count": 7
+      "count": 14
     }
   ],
   "importantSample": [
@@ -421,6 +421,126 @@
       "host": "buymeacoffee.com"
     },
     {
+      "source": "leizu/fa/donate/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/fa/donate/index.html",
+      "href": "https://buymeacoffee.com/cyberphunk",
+      "host": "buymeacoffee.com"
+    },
+    {
+      "source": "leizu/fa/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/fa/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/fa/index.html",
+      "href": "https://cal.com/seminarschools/session",
+      "host": "cal.com"
+    },
+    {
+      "source": "leizu/fa/index.html",
+      "href": "https://cal.com/seminarschools/forest-year-session",
+      "host": "cal.com"
+    },
+    {
+      "source": "leizu/fa/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/fa/intake/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/fa/intake/index.html",
+      "href": "https://cal.com/seminarschools/class",
+      "host": "cal.com"
+    },
+    {
+      "source": "leizu/fa/policies/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/fa/scholarship/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/fa/teach/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/fr/donate/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/fr/donate/index.html",
+      "href": "https://buymeacoffee.com/cyberphunk",
+      "host": "buymeacoffee.com"
+    },
+    {
+      "source": "leizu/fr/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/fr/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/fr/index.html",
+      "href": "https://cal.com/seminarschools/session",
+      "host": "cal.com"
+    },
+    {
+      "source": "leizu/fr/index.html",
+      "href": "https://cal.com/seminarschools/forest-year-session",
+      "host": "cal.com"
+    },
+    {
+      "source": "leizu/fr/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/fr/intake/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/fr/intake/index.html",
+      "href": "https://cal.com/seminarschools/class",
+      "host": "cal.com"
+    },
+    {
+      "source": "leizu/fr/policies/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/fr/scholarship/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/fr/teach/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
       "source": "leizu/index.html",
       "href": "https://calendly.com/kyrah0131/leizu",
       "host": "calendly.com"
@@ -467,6 +587,126 @@
     },
     {
       "source": "leizu/teach/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/zh-hans/donate/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/zh-hans/donate/index.html",
+      "href": "https://buymeacoffee.com/cyberphunk",
+      "host": "buymeacoffee.com"
+    },
+    {
+      "source": "leizu/zh-hans/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/zh-hans/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/zh-hans/index.html",
+      "href": "https://cal.com/seminarschools/session",
+      "host": "cal.com"
+    },
+    {
+      "source": "leizu/zh-hans/index.html",
+      "href": "https://cal.com/seminarschools/forest-year-session",
+      "host": "cal.com"
+    },
+    {
+      "source": "leizu/zh-hans/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/zh-hans/intake/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/zh-hans/intake/index.html",
+      "href": "https://cal.com/seminarschools/class",
+      "host": "cal.com"
+    },
+    {
+      "source": "leizu/zh-hans/policies/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/zh-hans/scholarship/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/zh-hans/teach/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/zh-hant/donate/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/zh-hant/donate/index.html",
+      "href": "https://buymeacoffee.com/cyberphunk",
+      "host": "buymeacoffee.com"
+    },
+    {
+      "source": "leizu/zh-hant/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/zh-hant/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/zh-hant/index.html",
+      "href": "https://cal.com/seminarschools/session",
+      "host": "cal.com"
+    },
+    {
+      "source": "leizu/zh-hant/index.html",
+      "href": "https://cal.com/seminarschools/forest-year-session",
+      "host": "cal.com"
+    },
+    {
+      "source": "leizu/zh-hant/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/zh-hant/intake/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/zh-hant/intake/index.html",
+      "href": "https://cal.com/seminarschools/class",
+      "host": "cal.com"
+    },
+    {
+      "source": "leizu/zh-hant/policies/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/zh-hant/scholarship/index.html",
+      "href": "https://calendly.com/kyrah0131/leizu",
+      "host": "calendly.com"
+    },
+    {
+      "source": "leizu/zh-hant/teach/index.html",
       "href": "https://calendly.com/kyrah0131/leizu",
       "host": "calendly.com"
     },
@@ -756,19 +996,9 @@
       "host": "www.torontomu.ca"
     },
     {
-      "source": "polymythseminars/events/98410ad8a93b/index.html",
-      "href": "https://www.toronto.ca/explore-enjoy/festivals-events/nuitblanche/",
-      "host": "www.toronto.ca"
-    },
-    {
       "source": "polymythseminars/events/9ac6d796dcc2/index.html",
       "href": "https://fanexpohq.com/fanexpocanada",
       "host": "fanexpohq.com"
-    },
-    {
-      "source": "polymythseminars/events/9da10dbbb785/index.html",
-      "href": "https://www.toronto.ca/explore-enjoy/festivals-events/nuitblanche/",
-      "host": "www.toronto.ca"
     },
     {
       "source": "polymythseminars/events/9ed3d573f427/index.html",
@@ -1201,22 +1431,12 @@
       "host": "www.nxne.com"
     },
     {
-      "source": "polymythseminars/events/caribana-grand-parade-2026-08-01/index.html",
-      "href": "https://www.caribanatoronto.com/events/parade",
-      "host": "www.caribanatoronto.com"
-    },
-    {
       "source": "polymythseminars/events/caribana-junior-king-queen-showcase-2026-07-11/index.html",
       "href": "https://torontocarnival.ca/events/",
       "host": "torontocarnival.ca"
     },
     {
       "source": "polymythseminars/events/caribana-king-queen-showcase-2026-07-31/index.html",
-      "href": "https://torontocarnival.ca/events/",
-      "host": "torontocarnival.ca"
-    },
-    {
-      "source": "polymythseminars/events/caribana-official-launch-2026-2026-06-13/index.html",
       "href": "https://torontocarnival.ca/events/",
       "host": "torontocarnival.ca"
     },
@@ -2524,226 +2744,6 @@
       "source": "polymythseminars/events/research-01ec0aa92536/index.html",
       "href": "https://phi.ca/fr/evenements/",
       "host": "phi.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-0210052c3257/index.html",
-      "href": "https://phi.ca/fr/evenements/",
-      "host": "phi.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-02315e585077/index.html",
-      "href": "https://www.southstormont.ca/parks-recreation-culture/summer-event-programs/",
-      "host": "www.southstormont.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-02adad38091c/index.html",
-      "href": "https://calendar.southstormont.ca/",
-      "host": "calendar.southstormont.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-03ceb993d3cf/index.html",
-      "href": "https://phi.ca/fr/evenements/",
-      "host": "phi.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-04d92240a8bd/index.html",
-      "href": "https://www.gananoque.ca/town-hall/council-meetings",
-      "host": "www.gananoque.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-04fa4e010bd4/index.html",
-      "href": "https://www.ville.vaudreuil-dorion.qc.ca/en/leisure-and-culture/activities-and-events",
-      "host": "www.ville.vaudreuil-dorion.qc.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-055388e61a04/index.html",
-      "href": "https://www.concordia.ca/events.html",
-      "host": "www.concordia.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-08c06668b352/index.html",
-      "href": "https://www.southstormont.ca/parks-recreation-culture/summer-event-programs/",
-      "host": "www.southstormont.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-0987ebbe5474/index.html",
-      "href": "https://www.southstormont.ca/parks-recreation-culture/summer-event-programs/",
-      "host": "www.southstormont.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-0a2db1412ec8/index.html",
-      "href": "https://www.concordia.ca/events.html",
-      "host": "www.concordia.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-0ac316b8ee4d/index.html",
-      "href": "https://www.southstormont.ca/parks-recreation-culture/summer-event-programs/",
-      "host": "www.southstormont.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-0b1b7fcca265/index.html",
-      "href": "https://www.hamilton.ca/things-do/festivals-events/events-calendar",
-      "host": "www.hamilton.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-0ba42f129c40/index.html",
-      "href": "https://www.mississauga.ca/events-and-attractions/events-calendar/",
-      "host": "www.mississauga.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-0d9049ce121d/index.html",
-      "href": "https://www.cityofkingston.ca/arts-culture-and-events/feature-events/",
-      "host": "www.cityofkingston.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-0f7a5e5dc433/index.html",
-      "href": "https://www.cambridge.ca/recreation-culture/events-festivals/cambridge-summer-live/",
-      "host": "www.cambridge.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-0fa32746a9d5/index.html",
-      "href": "https://www.ville.vaudreuil-dorion.qc.ca/en/leisure-and-culture/activities-and-events",
-      "host": "www.ville.vaudreuil-dorion.qc.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-0fdd132ebff8/index.html",
-      "href": "https://brockvilleartscentre.com/events/",
-      "host": "brockvilleartscentre.com"
-    },
-    {
-      "source": "polymythseminars/events/research-102f5eac3d2f/index.html",
-      "href": "https://www.southdundas.com/events-calendar/sdfes-summer-splash-1",
-      "host": "www.southdundas.com"
-    },
-    {
-      "source": "polymythseminars/events/research-1031987842be/index.html",
-      "href": "https://www.queensu.ca/eventscalendar/",
-      "host": "www.queensu.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-10cafcecc087/index.html",
-      "href": "https://www.pointe-claire.ca/en/events/",
-      "host": "www.pointe-claire.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-1173f707557a/index.html",
-      "href": "https://calendar.southstormont.ca/",
-      "host": "calendar.southstormont.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-1409cc9cee55/index.html",
-      "href": "https://www.pointe-claire.ca/en/events/",
-      "host": "www.pointe-claire.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-1433c3b85117/index.html",
-      "href": "https://www.markham.ca/about-city-markham/events/event-listings",
-      "host": "www.markham.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-14569c1da832/index.html",
-      "href": "https://www.queensu.ca/eventscalendar/",
-      "host": "www.queensu.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-170d166cdf26/index.html",
-      "href": "https://www.ville.vaudreuil-dorion.qc.ca/fr/loisirs-et-culture/programmation-estivale",
-      "host": "www.ville.vaudreuil-dorion.qc.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-175c996d2a2e/index.html",
-      "href": "https://phi.ca/fr/evenements/",
-      "host": "phi.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-1846b238253a/index.html",
-      "href": "https://www.concordia.ca/events.html",
-      "host": "www.concordia.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-1a7af3f97064/index.html",
-      "href": "https://www.mississauga.ca/events-and-attractions/events-calendar/",
-      "host": "www.mississauga.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-1ae2b53ca213/index.html",
-      "href": "https://www.kingstongrand.ca/events",
-      "host": "www.kingstongrand.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-1b86c10cc535/index.html",
-      "href": "https://www.hamilton.ca/things-do/festivals-events/events-calendar",
-      "host": "www.hamilton.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-1c0aa0354759/index.html",
-      "href": "https://www.gananoque.ca/town-hall/council-meetings",
-      "host": "www.gananoque.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-1c7203beffa4/index.html",
-      "href": "https://www.concordia.ca/events.html",
-      "host": "www.concordia.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-1eb8c81597e9/index.html",
-      "href": "https://www.brampton.ca/EN/Arts-Culture-Tourism/Festivals-and-Events/Pages/City-Sponsored-Festivals.aspx",
-      "host": "www.brampton.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-1f10fe54597b/index.html",
-      "href": "https://cornwalltourism.com/events/",
-      "host": "cornwalltourism.com"
-    },
-    {
-      "source": "polymythseminars/events/research-1fc1d5f8f5ec/index.html",
-      "href": "https://www.cornwall.ca/en/city-hall/council-meetings.aspx",
-      "host": "www.cornwall.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-22166d4682e1/index.html",
-      "href": "https://brockvilletourism.com/events/",
-      "host": "brockvilletourism.com"
-    },
-    {
-      "source": "polymythseminars/events/research-22ba7473261c/index.html",
-      "href": "https://www.gananoque.ca/community-services/events",
-      "host": "www.gananoque.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-243e93510489/index.html",
-      "href": "https://www.ville.vaudreuil-dorion.qc.ca/fr/loisirs-et-culture/le-405",
-      "host": "www.ville.vaudreuil-dorion.qc.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-26920d04fc52/index.html",
-      "href": "https://www.prescott.ca/explore/events-festivals-promotions/",
-      "host": "www.prescott.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-27adaf17b5d5/index.html",
-      "href": "https://www.cca.qc.ca/fr/calendrier/",
-      "host": "www.cca.qc.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-27bc2e85922a/index.html",
-      "href": "https://www.southstormont.ca/parks-recreation-culture/summer-event-programs/",
-      "host": "www.southstormont.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-286ff22503ee/index.html",
-      "href": "https://www.markham.ca/about-city-markham/events/event-listings",
-      "host": "www.markham.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-287b1f5a1050/index.html",
-      "href": "https://www.concordia.ca/events.html",
-      "host": "www.concordia.ca"
-    },
-    {
-      "source": "polymythseminars/events/research-293f230f1292/index.html",
-      "href": "https://harbourfrontcentre.com/whats-on/",
-      "host": "harbourfrontcentre.com"
     }
   ]
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Toronto Public Seminars &amp; Reading Groups | The Agora</title>
@@ -23,8 +24,8 @@
 <meta name="theme-color" content="#1F2A1A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/main.css?v=cl91">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=JetBrains+Mono:wght@400;500&amp;family=Libre+Baskerville:ital@0;1&amp;family=DM+Sans:wght@400;500;700&amp;family=GFS+Didot&amp;family=Andada+Pro:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css?v=20260725-audit45">
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/site.js?v=cl91" defer></script>
 <style>
@@ -149,21 +150,36 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/css/theme.css?v=cl91">
+<link rel="stylesheet" href="/css/theme.css?v=20260725-audit45">
 <link rel="stylesheet" href="/css/mobile-overlay.css?v=cl91">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
-<link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Andada+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
 <style id="type-identity">/* Greek Font Society Didot: the Greek typographic tradition itself, for the assembly */
 :root{--display:'GFS Didot', Georgia, serif;--body:'Andada Pro', Georgia, serif;}
 .titanic,.compound{letter-spacing:0.01em;} ::selection{background:rgba(196,106,60,0.25);}
 </style>
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<style id="audit35-agora-ui">
+.topbar .brand,.project-nav a,.next-session a,.door a{
+  display:inline-flex!important;align-items:center;min-height:44px}
+.project-nav{overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;
+  scroll-padding-inline:.25rem}
+.next-session a,.door a{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.project-nav a:focus-visible,.next-session a:focus-visible,.door a:focus-visible{
+  outline:2px solid currentColor;outline-offset:3px}
+@media (forced-colors:active){
+  .next-session,.door{background:Canvas!important;color:CanvasText!important;
+    border:1px solid CanvasText!important}
+}
+</style>
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="archive">
+<body data-geometry="indra-web" data-indra-intensity="0.070" data-route-type="project">
 <!-- CL_SELF_ROUTE_NOTE -->
-<div class="route-note archive-route-note" role="note"><span class="route-note-kicker">Archive</span>Public-learning and gathering materials.</div>
+<div class="route-note archive-route-note" role="note"><span class="route-note-kicker">Open seminar</span>Read the text, then join in Toronto or online.</div>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 
 <!-- Theme toggle (light/dark mode). System preference is the default;
@@ -193,7 +209,7 @@
 </header>
 
 <main>
-<nav class="project-nav" aria-label="Projects"><a href="/">Home</a><a href="/polymythseminars/">polymythcalendar</a><a href="/agora/" class="current">Agora</a><a href="/marginalia/">Marginalia</a><a href="/about/#community">All projects →</a></nav>
+<nav class="project-nav" aria-label="Projects"><a href="/">Home</a><a href="/polymythseminars/">Polymythcal</a><a href="/agora/" class="current">Agora</a><a href="/marginalia/">Marginalia</a><a href="/about/#community">All projects →</a></nav>
 
 <section id="threshold" class="tier reveal" data-tier="1" data-name="Threshold" data-roman="i">
   <div class="tier-label-vertical"><span class="num">i</span><span class="label">Threshold</span></div>
@@ -203,7 +219,7 @@
   <div class="threshold-coords reveal delay-3">
     <div class="row"><span class="lbl">Where</span><span class="val">Earl Bales Park, or online over Google Meet</span></div>
     <div class="row"><span class="lbl">When</span><span class="val">Announced per session. Email to be notified.</span></div>
-    <div class="row"><span class="lbl">Cost</span><span class="val">Free. No registration.</span></div>
+    <div class="row"><span class="lbl">Cost</span><span class="val">Free. Join the announcement list for dates and online access.</span></div>
     <div class="row"><span class="lbl">Format</span><span class="val">One text. Everyone has read it. We talk.</span></div>
   </div>
 
@@ -224,7 +240,7 @@
     <div class="door door-polymyth" style="padding:1.5rem 1.75rem;background:rgba(0,0,0,0.02);border:1px solid rgba(0,0,0,0.08);">
       <div style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--fg-soft,#666);font-weight:600;margin-bottom:0.6rem;">From Seminar Schools</div>
       <p style="font-family:var(--body);font-size:1rem;line-height:1.55;margin:0 0 1rem 0;">An open seminar within the practice. Each session has a text. The willingness to be wrong out loud is the ticket.</p>
-      <a href="/" style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent,#7a4828);font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent,#7a4828);padding-bottom:0.15rem;">About Seminar Schools &rarr;</a>
+      <a href="/about/" style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent,#7a4828);font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent,#7a4828);padding-bottom:0.15rem;">About Seminar Schools &rarr;</a>
     </div>
   </div>
 
@@ -260,7 +276,7 @@
   <div class="micro">IV. Where</div>
   <h2 class="compound words">The Barry Zukerman Amphitheatre, Earl Bales Park, <em>or online over Google Meet.</em></h2>
   <div class="body">
-    <p>Each session is held either in person or online. The mode is announced with the date. When in person: Earl Bales Park sits in North York, Toronto, and the Barry Zukerman Amphitheatre is an open-air stage area within the park, with seating built into the landscape. Bring a cushion if the stone seats are unkind to you. When online: a Google Meet link is shared with everyone who has signed up.</p>
+    <p>Each session is held either in person or online, with the mode announced alongside the date. In person, we meet at the Barry Zukerman Amphitheatre in Earl Bales Park. Online, the Google Meet link goes to the announcement list.</p>
     <dl class="detail-grid">
       <dt>Address</dt><dd>4169 Bathurst Street, Toronto, ON</dd>
       <dt>Nearest TTC</dt><dd>Sheppard West Station, then bus 7</dd>
@@ -301,7 +317,7 @@
   <div class="micro">VIII. The single rule</div>
   <h2 class="compound words">Read the text. Show up. Sit. <em>Speak when you have something to say.</em></h2>
   <div class="body">
-    <p>No registration is required. No introductions are needed. The seminar method does not depend on who is in the room. Only on whether the people in the room have read.</p>
+    <p>There is no application or attendance fee. Join the announcement list for dates and online links, read the text, and come ready to discuss it.</p>
   </div>
 </section>
 
@@ -350,8 +366,8 @@
 </div>
 <script src="/js/theme.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
-<script src="/js/footer.js?v=20260719-audit11-decisions" defer></script>
+<script src="/js/footer.js?v=20260725-audit45-footer" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
-<script defer src="/js/site-keyboard-enhancements.js"></script>
+<script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

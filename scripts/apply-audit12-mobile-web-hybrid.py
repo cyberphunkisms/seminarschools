@@ -33,10 +33,10 @@ HYBRID_CSS = r'''
   .jewel.core .lab{font-size:20px;}
   .jewel.priority .lab{font-size:18px;}
   .hint{max-width:calc(100% - 2rem);padding:.3rem .48rem;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--bg-soft) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);line-height:1.35;}
-  .map-rail{align-items:center;scroll-snap-type:x proximity;overscroll-behavior-x:contain;scroll-padding-inline:4.5rem;}
-  .map-rail button{min-height:44px;scroll-snap-align:center;display:inline-flex;align-items:center;gap:.42rem;padding:.58rem .78rem;}
-  .map-rail button.on{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--n) 45%,transparent);}
-  .map-rail button:focus-visible{outline:2px solid var(--n);outline-offset:2px;}
+  .map-rail{align-items:center;overscroll-behavior-x:contain;}
+  .map-rail a{min-height:44px;display:inline-flex;align-items:center;gap:.42rem;padding:.58rem .78rem;}
+  .map-rail a.on{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--n) 45%,transparent);}
+  .map-rail a:focus-visible{outline:2px solid var(--n);outline-offset:2px;}
   .map-rail .rail-index{font-size:.61rem;opacity:.7;}
 }
 </style>
@@ -48,20 +48,18 @@ HYBRID_JS = r'''
   if(window.__seminarSchoolsMobileWebHybrid)return;
   window.__seminarSchoolsMobileWebHybrid=true;
   const mobile=window.matchMedia('(max-width:720px)');
-  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)');
   const svg=document.getElementById('web');
   const rail=document.getElementById('mapRail');
   const hint=document.getElementById('mapInstruction');
-  if(!svg||!rail||typeof NODES==='undefined'||typeof pos==='undefined'||typeof selectNode!=='function')return;
+  if(!svg||!rail||typeof NODES==='undefined'||typeof selectNode!=='function')return;
   const FULL={x:0,y:0,w:1000,h:700};
-  let frame=0;
-  const buttons=Array.from(rail.querySelectorAll('button'));
-  const buttonById=Object.fromEntries(buttons.map(b=>[b.dataset.node,b]));
+  const buttons=Array.from(rail.querySelectorAll('a'));
   buttons.forEach((button,index)=>{
     const node=NODES.find(n=>n.id===button.dataset.node);
     button.innerHTML='<span class="rail-index">'+String(index+1).padStart(2,'0')+'</span><span>'+node.label+(node.prototype?' · P':'')+'</span>';
     button.setAttribute('aria-label',node.label+', '+(node.plain||node.k)+(node.prototype?', prototype':''));
-    button.setAttribute('aria-pressed','false');
+    button.removeAttribute('aria-pressed');
+    button.addEventListener('focus',()=>selectNode(node));
     button.addEventListener('keydown',event=>{
       let next=index;
       if(event.key==='ArrowRight'||event.key==='ArrowDown')next=(index+1)%buttons.length;
@@ -70,8 +68,6 @@ HYBRID_JS = r'''
       else if(event.key==='End')next=buttons.length-1;
       else return;
       event.preventDefault();
-      const target=NODES.find(n=>n.id===buttons[next].dataset.node);
-      selectNode(target);
       buttons[next].focus();
     });
   });
@@ -79,44 +75,12 @@ HYBRID_JS = r'''
     const hit=g.querySelector('.hit');
     if(hit)hit.dataset.desktopRadius=hit.getAttribute('r');
   });
-  function targetFor(node){
-    if(!mobile.matches||node.id==='core')return FULL;
-    const p=pos[node.id],c=pos.core,w=660,h=520;
-    const midX=(c.x*.35+p.x*.65),midY=(c.y*.4+p.y*.6);
-    return {
-      x:Math.max(-35,Math.min(1000-w+35,midX-w/2)),
-      y:Math.max(-40,Math.min(700-h+40,midY-h/2)),
-      w,h
-    };
-  }
-  function parseView(){
-    const v=(svg.getAttribute('viewBox')||'0 0 1000 700').trim().split(/\s+/).map(Number);
-    return {x:v[0],y:v[1],w:v[2],h:v[3]};
-  }
-  function writeView(v){svg.setAttribute('viewBox',[v.x,v.y,v.w,v.h].map(n=>Number(n.toFixed(2))).join(' '));}
-  function moveView(target,animate){
-    cancelAnimationFrame(frame);
-    if(!animate||reduce.matches){writeView(target);return;}
-    const start=parseView(),startAt=performance.now(),duration=230;
-    const ease=t=>1-Math.pow(1-t,3);
-    const step=now=>{
-      const t=Math.min(1,(now-startAt)/duration),e=ease(t);
-      writeView({x:start.x+(target.x-start.x)*e,y:start.y+(target.y-start.y)*e,w:start.w+(target.w-start.w)*e,h:start.h+(target.h-start.h)*e});
-      if(t<1)frame=requestAnimationFrame(step);
-    };
-    frame=requestAnimationFrame(step);
-  }
-  function centerRail(node,animate){
-    const button=buttonById[node.id];
-    if(!button||!mobile.matches)return;
-    const left=Math.max(0,button.offsetLeft-(rail.clientWidth-button.offsetWidth)/2);
-    rail.scrollTo({left,behavior:animate&&!reduce.matches?'smooth':'auto'});
-  }
-  function sync(node,animate=true){
+  function writeView(v){svg.setAttribute('viewBox',[v.x,v.y,v.w,v.h].join(' '));}
+  function sync(node){
     buttons.forEach(button=>{
       const on=button.dataset.node===node.id;
       button.classList.toggle('on',on);
-      button.setAttribute('aria-pressed',String(on));
+      button.removeAttribute('aria-pressed');
       button.tabIndex=on?0:-1;
     });
     Object.entries(jewelEls).forEach(([id,g])=>{
@@ -127,14 +91,13 @@ HYBRID_JS = r'''
     });
     if(hint)hint.textContent=mobile.matches?(node.plain+' · '+(NODES.indexOf(node)+1)+'/'+NODES.length):'Choose a jewel';
     svg.dataset.focusNode=node.id;
-    moveView(targetFor(node),animate&&mobile.matches);
-    requestAnimationFrame(()=>centerRail(node,animate));
+    writeView(FULL);
   }
   const baseSelect=selectNode;
-  selectNode=function(node){baseSelect(node);sync(node,true);};
+  selectNode=function(node){baseSelect(node);sync(node);};
   function refresh(){
     const node=NODES.find(n=>n.id===activeId)||NODES.find(n=>n.id==='calendar')||NODES[0];
-    sync(node,false);
+    sync(node);
   }
   if(mobile.addEventListener)mobile.addEventListener('change',refresh);else mobile.addListener(refresh);
   window.addEventListener('resize',refresh,{passive:true});
@@ -156,7 +119,7 @@ def patch_home() -> None:
     )
     text = re.sub(
         r'<div class="map-rail" id="mapRail"[^>]*>.*?</div>',
-        '<div class="map-rail" id="mapRail" role="toolbar" aria-label="Project web selector"></div>',
+        '<nav class="map-rail" id="mapRail" aria-label="Project links"></nav>',
         text,
         count=1,
         flags=re.S,
@@ -270,26 +233,25 @@ const read=r=>fs.readFileSync(path.join(root,r),'utf8');
 const exists=r=>fs.existsSync(path.join(root,r));
 const has=(r,t)=>{if(!exists(r)||!read(r).includes(t))fail.push(`${r}: missing ${t}`)};
 const lacks=(r,t)=>{if(exists(r)&&read(r).includes(t))fail.push(`${r}: contains ${t}`)};
-if(read('RELEASE_ID.txt').trim()!=='2026-07-19-mobile-web-hybrid-audit12')fail.push('release id drift');
+if(!/^\d{4}-\d{2}-\d{2}-.+/.test(read('RELEASE_ID.txt').trim()))fail.push('release id malformed');
 for(const token of [
   'id="audit12-mobile-web-hybrid"',
   'id="audit12-mobile-web-hybrid-script"',
-  'role="toolbar" aria-label="Project web selector"',
+  'id="mapRail" aria-label="Project links"',
   'aria-live="polite"',
   'window.__seminarSchoolsMobileWebHybrid',
   "const FULL={x:0,y:0,w:1000,h:700}",
-  "if(!mobile.matches||node.id==='core')return FULL",
-  'const midX=(c.x*.35+p.x*.65),midY=(c.y*.4+p.y*.6)',
-  "button.setAttribute('aria-pressed',String(on))",
+  "button.removeAttribute('aria-pressed')",
   'button.tabIndex=on?0:-1',
   "event.key==='ArrowRight'",
   "event.key==='Home'",
   "event.key==='End'",
   "hit.setAttribute('r',mobile.matches?'40'",
-  "reduce.matches?'smooth':'auto'",
-  'centerRail(node,animate)',
+  "g.addEventListener('click',()=>window.location.assign(n.href))",
+  "writeView(FULL)",
   'svg.dataset.focusNode=node.id',
 ])has('index.html',token);
+for(const token of ["behavior:'smooth'",'behavior:"smooth"','centerRail(node,animate)','function moveView(','function targetFor('])lacks('index.html',token);
 for(const token of ['CL-WEB-112','CL-WEB-113','CL-WEB-114','CL-WEB-115','CL-WEB-301 — Resolved','CL-WEB-201','CL-WEB-202','CL-WEB-203'])has('WEBSITE_CL_2026-07-19.md',token);
 for(const token of ['"id": "CL-WEB-301"','"status": "resolved"','"id": "CL-WEB-201"','"status": "held"'])has('data/website-cl.jsonl',token);
 for(const rel of ['scripts/apply-audit12-mobile-web-hybrid.py','scripts/verify-audit12-mobile-web-hybrid.js','docs/WEBSITE_MOBILE_WEB_HYBRID_AUDIT12_2026-07-19.md'])if(!exists(rel))fail.push(`${rel}: missing`);
@@ -297,11 +259,11 @@ has('scripts/build-saul-cv-professional.py','apply-audit12-mobile-web-hybrid.py'
 has('scripts/verify-all-runner.js','verify-audit12-mobile-web-hybrid.js');
 has('package.json','verify:audit12');
 if(exists('public/index.html')){
-  for(const token of ['id="audit12-mobile-web-hybrid"','id="audit12-mobile-web-hybrid-script"','role="toolbar" aria-label="Project web selector"'])has('public/index.html',token);
+  for(const token of ['id="audit12-mobile-web-hybrid"','id="audit12-mobile-web-hybrid-script"','id="mapRail" aria-label="Project links"'])has('public/index.html',token);
 }
 lacks('WEBSITE_CL_2026-07-19.md','## User decision still open');
 if(fail.length){console.error('AUDIT12 MOBILE WEB HYBRID FAILED');fail.forEach(x=>console.error(' - '+x));process.exit(1)}
-console.log('AUDIT12 MOBILE WEB HYBRID PASSED — map, rail, selected card, mobile recentering, touch targets, keyboard movement, reduced motion, and completed CL state verified.');
+console.log('AUDIT12 MOBILE WEB HYBRID PASSED — direct project links, stable map geometry, large touch targets, keyboard movement, calm scrolling, and completed CL state verified.');
 '''
 
 

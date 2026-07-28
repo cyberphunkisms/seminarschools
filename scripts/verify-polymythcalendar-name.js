@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Public naming gate: the calendar's public-facing name is polymythcalendar.
+ * Public naming gate: the calendar's public-facing name is Polymythcal.
  * The canonical implementation route remains /polymythseminars/ for compatibility.
  */
 const fs = require('fs');
@@ -58,4 +58,4 @@ if (findings.length) {
   for (const f of findings) console.error(`  - ${f}`);
   process.exit(1);
 }
-console.log(`polymythcalendar naming gate passed (${files.length} public files scanned).`);
+console.log(`Polymythcal naming gate passed (${files.length} public files scanned).`);

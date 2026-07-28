@@ -1,7 +1,18 @@
 (() => {
   "use strict";
 
-  const DATA_URL = "/polymythseminars/events.json";
+  // Keep the controller idempotent if an optimizer, preview, or interrupted
+  // navigation evaluates the deferred bundle more than once.
+  if (window.__ssPolymythcalRevampMounted) return;
+  window.__ssPolymythcalRevampMounted = true;
+
+  // Calendar shells load the compact browse projection. The complete canonical
+  // record remains public at /polymythseminars/events.json for feeds, detail
+  // pages, research, and downstream reuse.
+  const DATA_URL = "/polymythseminars/browse.json";
+  const DATA_CACHE = "polymythcal-browse-v1";
+  const FETCH_TIMEOUT_MS = 12000;
+  const FETCH_ATTEMPTS = 2;
   const CALENDAR_TIME_ZONE = "America/Toronto";
   const CALENDAR_DATE_FORMATTER = new Intl.DateTimeFormat("en-CA", {
     timeZone: CALENDAR_TIME_ZONE,
@@ -11,16 +22,25 @@
   });
   let cachedTodayMinute = -1;
   let cachedCalendarToday = null;
-  const PAGE_SIZE = 50;
+  const PAGE_SIZE = 24;
   const SAVED_KEY = "polymythcal.savedEvents.v2";
+  const LEGACY_SAVED_KEY = "polymythcal.savedEvents.v1";
   const SEARCHES_KEY = "polymythcal.savedSearches.v2";
+  const LEGACY_SEARCHES_KEY = "polymythcal.savedSearches.v1";
+  const LANGUAGE_KEY = "polymythcal.lang.v1";
   const SET_KEYS = ["content", "places", "topics", "eventTypes", "opportunityTypes", "audiences", "formats", "statuses"];
   const STATE_KEYS = ["content", "time", ...SET_KEYS.filter(key => key !== "content")];
+  const ARTS_TOPIC_RE = /\b(?:art|arts|artist|artists|artistic|artwork|artworks|gallery|museum|exhibition|film|cinema|screening|media|documentary|animation|music|musical|concert|theatre|theater|dance|performance|opera)\b/;
 
   const translations = {
     en: {
       loading: "Loading the calendar",
       loadError: "The calendar data could not be loaded. Refresh the page or use the calendar feeds.",
+      unavailable: "Calendar temporarily unavailable",
+      retry: "Try loading again",
+      retrying: "The calendar is taking longer than expected. Trying once more…",
+      cachedData: "Showing the last calendar copy saved by this browser. Reconnect for current listings.",
+      savedForVisit: "Saved for this visit. Device storage is unavailable.",
       eventsFound: count => `${count.toLocaleString("en-CA")} ${count === 1 ? "listing" : "listings"}`,
       shown: (shown, total) => `Showing ${shown.toLocaleString("en-CA")} of ${total.toLocaleString("en-CA")}`,
       calendarStatus: total => `${total.toLocaleString("en-CA")} matching listings in calendar view`,
@@ -31,6 +51,10 @@
       saved: "Saved",
       save: "Save",
       remove: "Remove",
+      undo: "Undo",
+      removedSaved: title => `Removed ${title}.`,
+      removedSearch: title => `Removed saved search ${title}.`,
+      restored: title => `Restored ${title}.`,
       savedEmpty: "You have no saved listings yet.",
       savedSearchesEmpty: "You have no saved searches yet.",
       saveSearch: "Save search",
@@ -43,12 +67,14 @@
       placePending: "Location unpublished",
       confirmed: "Confirmed details",
       detailsPending: "Some details pending",
-      checkedOn: "Checked",
+      checkedOn: "Last checked",
       projectedDate: "Projected date",
+      organizerPending: "Official confirmation pending",
       past: "Past",
       attend: "Event",
       apply: "Opportunity",
       loadMore: "Show more",
+      loadMoreCount: count => `Show ${count.toLocaleString("en-CA")} more`,
       shared: "Share link copied",
       shareOpened: "Share options opened",
       shareFail: "The share link is ready in your address bar.",
@@ -72,11 +98,19 @@
       until: "Until",
       ongoingNow: "Ongoing now",
       runningThisMonth: count => `${count.toLocaleString("en-CA")} ongoing or multi-day ${count === 1 ? "listing" : "listings"} this month`,
-      runningHelp: "Shown once here instead of being repeated on every calendar day."
+      runningHelp: "Shown once here instead of being repeated on every calendar day.",
+      approximateDistance: (distance, origin, precision) => `Approx. ${distance} km from ${origin} · ${precision}`,
+      venueEstimate: "venue estimate",
+      cityEstimate: "city estimate"
     },
     fr: {
       loading: "Chargement du calendrier",
       loadError: "Les données du calendrier sont indisponibles. Actualisez la page ou utilisez les fils du calendrier.",
+      unavailable: "Calendrier temporairement indisponible",
+      retry: "Réessayer le chargement",
+      retrying: "Le chargement prend plus de temps que prévu. Nouvel essai…",
+      cachedData: "Affichage de la dernière copie du calendrier enregistrée par ce navigateur. Reconnectez-vous pour obtenir les fiches actuelles.",
+      savedForVisit: "Enregistré pour cette visite. Le stockage de l’appareil est indisponible.",
       eventsFound: count => `${count.toLocaleString("fr-CA")} ${count === 1 ? "fiche" : "fiches"}`,
       shown: (shown, total) => `${shown.toLocaleString("fr-CA")} sur ${total.toLocaleString("fr-CA")} affichées`,
       calendarStatus: total => `${total.toLocaleString("fr-CA")} fiches correspondantes en vue calendrier`,
@@ -87,6 +121,10 @@
       saved: "Enregistré",
       save: "Enregistrer",
       remove: "Retirer",
+      undo: "Annuler",
+      removedSaved: title => `${title} a été retiré.`,
+      removedSearch: title => `La recherche enregistrée ${title} a été retirée.`,
+      restored: title => `${title} a été rétabli.`,
       savedEmpty: "Vous n’avez encore enregistré aucune fiche.",
       savedSearchesEmpty: "Vous n’avez encore enregistré aucune recherche.",
       saveSearch: "Enregistrer la recherche",
@@ -99,12 +137,14 @@
       placePending: "Lieu non publié",
       confirmed: "Détails confirmés",
       detailsPending: "Certains détails à confirmer",
-      checkedOn: "Vérifié le",
+      checkedOn: "Dernière vérification",
       projectedDate: "Date projetée",
+      organizerPending: "Confirmation officielle en attente",
       past: "Passé",
       attend: "Événement",
       apply: "Possibilité",
       loadMore: "Afficher plus",
+      loadMoreCount: count => `Afficher ${count.toLocaleString("fr-CA")} de plus`,
       shared: "Lien de partage copié",
       shareOpened: "Options de partage ouvertes",
       shareFail: "Le lien de partage est prêt dans la barre d’adresse.",
@@ -128,7 +168,10 @@
       until: "Jusqu’au",
       ongoingNow: "En cours maintenant",
       runningThisMonth: count => `${count.toLocaleString("fr-CA")} ${count === 1 ? "fiche en cours ou sur plusieurs jours" : "fiches en cours ou sur plusieurs jours"} ce mois-ci`,
-      runningHelp: "Affichées une seule fois ici plutôt que répétées chaque jour du calendrier."
+      runningHelp: "Affichées une seule fois ici plutôt que répétées chaque jour du calendrier.",
+      approximateDistance: (distance, origin, precision) => `Environ ${distance} km de ${origin} · ${precision}`,
+      venueEstimate: "estimation du lieu",
+      cityEstimate: "estimation de la ville"
     }
   };
 
@@ -136,13 +179,37 @@
     "Skip to results": "Aller aux résultats",
     "Switch colour theme": "Changer le thème de couleurs",
     "Seminar Schools public calendar": "Calendrier public de Seminar Schools",
-    "Find public events to attend and opportunities to apply for across Toronto, Kingston, Montréal, and the communities between them.": "Trouvez des événements publics et des possibilités de candidature à Toronto, Kingston, Montréal et dans les communautés qui les relient.",
+    "calendar vertical": "volet calendrier",
+    "focused calendar": "calendrier ciblé",
+    "is selected. Use the filters below,": "— vue active. Utilisez les filtres ci-dessous,",
+    ", or return to": ", ou retournez à",
+    "Calendar data at a glance": "Aperçu des données du calendrier",
+    "Browse by interest or place": "Parcourir par intérêt ou lieu",
+    "Focused Polymythcal calendars": "Calendriers Polymythcal ciblés",
+    "Related Polymyth Commons projects": "Projets connexes de Polymyth Commons",
+    "July 21, 2026": "21 juillet 2026",
+    "Find events to attend and opportunities to apply for from Toronto to Montréal.": "Trouvez des événements et des possibilités de candidature de Toronto à Montréal.",
     "Search the calendar": "Rechercher dans le calendrier",
     "Clear search": "Effacer la recherche",
     "Show results": "Voir les résultats",
-    "Search accepts English, French, accents, and close spellings such as “Montral”.": "La recherche accepte le français, l’anglais, les accents et les orthographes proches comme « Montral ».",
+    "English, French, accents, and close spellings work.": "Le français, l’anglais, les accents et les orthographes proches fonctionnent.",
+    "Shortcuts": "Raccourcis",
     "Popular starting points": "Points de départ populaires",
-    "Each shortcut starts a fresh view": "Chaque raccourci ouvre une nouvelle vue",
+    "Start by goal, interest, or place": "Commencer par un but, un intérêt ou un lieu",
+    "Shortcuts reset the filters": "Les raccourcis réinitialisent les filtres",
+    "Search": "Rechercher",
+    "Calendar tools": "Outils du calendrier",
+    "Personal calendar tools": "Outils de calendrier personnels",
+    "Contribute and language": "Contribution et langue",
+    "Current filter choices": "Choix de filtres actuels",
+    "Choose list or calendar view": "Choisir la vue liste ou calendrier",
+    "Focused Polymythcal view": "Vue Polymythcal ciblée",
+    "Other focused calendars": "Autres calendriers ciblés",
+    "Choose another focused view": "Choisir une autre vue ciblée",
+    "Browse by focus": "Parcourir par thème",
+    "Choose one or more opportunity types.": "Choisissez un ou plusieurs types de possibilités.",
+    "browse every listing": "parcourir toutes les fiches",
+    
     "Philosophy and ethics": "Philosophie et éthique",
     "Humanities": "Sciences humaines",
     "Talks and lectures": "Causeries et conférences",
@@ -151,8 +218,37 @@
     "Fellowships and grants": "Bourses et subventions",
     "Toronto and GTA": "Toronto et RGT",
     "Kingston to Montréal": "Kingston à Montréal",
-    "Dedicated pages": "Pages spécialisées",
-    "Dedicated academic calendar pages": "Pages spécialisées du calendrier universitaire",
+    "Then narrow by interest or place": "Puis préciser par intérêt ou lieu",
+    "Today": "Aujourd’hui",
+    "What do you want to do?": "Que voulez-vous faire?",
+    "Find something today": "Trouver quelque chose aujourd’hui",
+    "Events happening or continuing today": "Événements qui ont lieu ou se poursuivent aujourd’hui",
+    "Plan this week": "Planifier cette semaine",
+    "Events in the next seven days": "Événements des sept prochains jours",
+    "Go to an event": "Participer à un événement",
+    "Talks, festivals, workshops, arts, and community gatherings": "Causeries, festivals, ateliers, arts et rencontres communautaires",
+    "Meet an application deadline": "Respecter une date limite",
+    "Calls, contests, fellowships, grants, and submissions": "Appels, concours, bourses, subventions et soumissions",
+    "Find youth or family listings": "Trouver des fiches jeunesse ou famille",
+    "Student, youth, family, and all-ages options": "Options pour élèves, jeunes, familles et tous âges",
+    "Find something for educators": "Trouver quelque chose pour le personnel éducatif",
+    "Professional learning and education-focused listings": "Perfectionnement professionnel et fiches axées sur l’éducation",
+    "Join online": "Participer en ligne",
+    "Remote events and opportunities from any place": "Événements et possibilités à distance, où que vous soyez",
+    "listings in this index": "fiches dans cet index",
+    "index generated": "index produit",
+    "Weekly": "Chaque semaine",
+    "scheduled refresh cadence": "rythme de mise à jour prévu",
+    "Source attached": "Source jointe",
+    "status, evidence, and correction route": "statut, preuves et voie de correction",
+    "Need classroom material?": "Besoin de matériel pédagogique?",
+    "Search 644 Teacher Resources.": "Parcourez 644 ressources pédagogiques.",
+    "Looking for a library?": "Vous cherchez une bibliothèque?",
+    "Browse libraries and commons projects in Polymythlib.": "Parcourez les bibliothèques et les communs dans Polymythlib.",
+    "See the whole Commons": "Voir l’ensemble des communs",
+    "Understand the collection, calendar, directory, and shared method.": "Comprenez la collection, le calendrier, le répertoire et la méthode partagée.",
+    "Focused calendars": "Calendriers ciblés",
+    "Focused academic calendars": "Calendriers universitaires ciblés",
     "University+": "Université+",
     "Philosophy": "Philosophie",
     "Calls for papers": "Appels de communications",
@@ -173,15 +269,16 @@
     "Filters": "Filtres",
     "No extra filters": "Aucun filtre supplémentaire",
     "Loading…": "Chargement…",
-    "What do you want to find?": "Que voulez-vous trouver?",
+    "Show": "Afficher",
     "Clear": "Effacer",
-    "Choose events, opportunities, or both.": "Choisissez les événements, les possibilités ou les deux.",
+    "What do you want to find?": "Que voulez-vous inclure?",
+    "Choose one or both.": "Choisissez l’un, l’autre ou les deux.",
     "Events to attend": "Événements auxquels participer",
-    "Talks, workshops, festivals, performances, exhibitions, screenings, meetings, and community events.": "Causeries, ateliers, festivals, spectacles, expositions, projections, réunions et activités communautaires.",
+    "Talks, workshops, festivals, performances, exhibitions, screenings, and community events.": "Causeries, ateliers, festivals, spectacles, expositions, projections et activités communautaires.",
     "Opportunities to apply for": "Possibilités de candidature",
-    "Calls for papers, competitions, fellowships, grants, residencies, awards, and other applications. The listed date is the deadline.": "Appels de communications, concours, bourses, subventions, résidences, prix et autres candidatures. La date affichée est la date limite.",
+    "Calls for papers, competitions, fellowships, grants, residencies, and awards. The date shown is when applications close.": "Appels de communications, concours, bourses, subventions, résidences et prix. La date affichée est la date de clôture.",
     "When?": "Quand?",
-    "Choose one date window.": "Choisissez une période.",
+    "Choose one range.": "Choisissez une période.",
     "Date range": "Période",
     "Upcoming": "À venir",
     "Next 7 days": "7 prochains jours",
@@ -190,7 +287,7 @@
     "Next 12 months": "12 prochains mois",
     "All dates": "Toutes les dates",
     "Where?": "Où?",
-    "Choose any number of areas.": "Choisissez autant de régions que nécessaire.",
+    "Choose any number.": "Choisissez autant de régions que nécessaire.",
     "Places": "Lieux",
     "Hamilton and Burlington": "Hamilton et Burlington",
     "Guelph and Waterloo Region": "Guelph et région de Waterloo",
@@ -237,24 +334,35 @@
     "Listing status": "État de la fiche",
     "Confirmed details": "Détails confirmés",
     "Some details pending": "Certains détails à confirmer",
-    "Current choices": "Choix actuels",
+    "Selected": "Sélection",
     "Upcoming events and opportunities": "Événements et possibilités à venir",
     "Reset all": "Tout réinitialiser",
     "View results": "Voir les résultats",
     "Calendar listings": "Fiches du calendrier",
+    "Choose filters to narrow the list.": "Choisissez des filtres pour réduire la liste.",
+    "Undo": "Annuler",
+    "Organizer signals": "Signaux des organisateurs",
+    "Announcements awaiting a date": "Annonces en attente d’une date",
+    "These are public organizer announcements that may become events. They stay outside the dated calendar until an event date is published.": "Ce sont des annonces publiques d’organisateurs qui pourraient devenir des événements. Elles restent hors du calendrier daté jusqu’à la publication d’une date.",
     "Keyboard:": "Clavier :",
     "search ·": "rechercher ·",
     "change calendar month ·": "changer de mois ·",
     "close saved listings": "fermer les fiches enregistrées",
-    "Choose a filter to narrow the list. Multiple choices inside one group are combined.": "Choisissez un filtre pour préciser la liste. Plusieurs choix dans un même groupe sont combinés.",
+    "Filters in the same group are combined.": "Les filtres d’un même groupe sont combinés.",
     "Sort results": "Trier les résultats",
+    "Near": "Près de",
+    "No nearby ranking": "Sans classement par proximité",
+    "Approximate distance; no location permission.": "Distance approximative; aucune autorisation de localisation.",
+    "Rank near a place": "Classer près d’un lieu",
+    "Optional approximate ranking. The calendar asks for no location permission.": "Classement approximatif facultatif. Le calendrier ne demande aucune autorisation de localisation.",
     "Soonest first": "Plus proche en premier",
     "Farthest date first": "Date la plus éloignée en premier",
     "Title A to Z": "Titre de A à Z",
+    "Nearest to selected place": "Le plus près du lieu choisi",
     "List": "Liste",
     "Calendar": "Calendrier",
     "Show more": "Afficher plus",
-    "Open a title for the stable Polymythcal page. Every listing also links to its official source. Missing times and locations stay visible as pending details. Saved listings remain on this device.": "Ouvrez un titre pour accéder à la page Polymythcal stable. Chaque fiche mène aussi à sa source officielle. Les heures et lieux manquants restent indiqués. Les fiches enregistrées restent sur cet appareil.",
+    "Open a title for details, the official source, calendar download, and corrections. Saved items stay on this device.": "Ouvrez un titre pour les détails, la source officielle, le téléchargement du calendrier et les corrections. Les éléments enregistrés restent sur cet appareil.",
     "Polymythcal needs JavaScript for interactive filtering. You can still use the": "Polymythcal exige JavaScript pour le filtrage interactif. Vous pouvez toujours utiliser les",
     "RSS and calendar feeds": "fils RSS et calendriers",
     "or browse the": "ou consulter le",
@@ -284,8 +392,8 @@
     "Calls for papers, proposals, abstracts, and conference submissions.": "Appels de communications, propositions, résumés et soumissions à des conférences.",
     "Public talks, lectures, panels, colloquia, and speaker events.": "Causeries publiques, conférences, panels, colloques et rencontres avec des conférenciers.",
     "Fellowships, grants, residencies, scholarships, and funding opportunities.": "Bourses, subventions, résidences et possibilités de financement.",
-    "Dedicated Polymythcal view": "Vue Polymythcal spécialisée",
-    "limits the results to this entry point. Every filter below still works inside this view.": "limite les résultats à ce point d’entrée. Tous les filtres ci-dessous fonctionnent dans cette vue.",
+    "Focused Polymythcal calendar": "Calendrier Polymythcal ciblé",
+    "shows this group first. Every filter below still works.": "affiche d’abord ce groupe. Tous les filtres ci-dessous fonctionnent encore.",
     "Browse all Polymythcal listings": "Parcourir toutes les fiches Polymythcal",
     "All writing": "Toute l’écriture",
     "Kids": "Enfants",
@@ -306,11 +414,87 @@
     montreal: ["montreal"], toronto: ["toronto"], kingston: ["kingston"]
   };
 
+  const NEARBY_ORIGINS = Object.freeze({
+    "yonge-lawrence": { label: "Yonge & Lawrence", latitude: 43.7252, longitude: -79.4023 },
+    "downtown-toronto": { label: "Downtown Toronto", latitude: 43.6532, longitude: -79.3832 },
+    scarborough: { label: "Scarborough", latitude: 43.7764, longitude: -79.2318 },
+    "north-york": { label: "North York", latitude: 43.7615, longitude: -79.4111 },
+    "west-toronto": { label: "West Toronto", latitude: 43.6505, longitude: -79.4505 },
+    "east-toronto": { label: "East Toronto", latitude: 43.6764, longitude: -79.3191 },
+    mississauga: { label: "Mississauga", latitude: 43.5890, longitude: -79.6441 },
+    hamilton: { label: "Hamilton", latitude: 43.2557, longitude: -79.8711 },
+    "guelph-waterloo": { label: "Guelph / Waterloo", latitude: 43.4977, longitude: -80.3359 },
+    kingston: { label: "Kingston", latitude: 44.2312, longitude: -76.4860 },
+    brockville: { label: "Brockville", latitude: 44.5895, longitude: -75.6843 },
+    cornwall: { label: "Cornwall", latitude: 45.0213, longitude: -74.7303 },
+    montreal: { label: "Montréal", latitude: 45.5019, longitude: -73.5674 }
+  });
+
+  const CITY_POINTS = Object.freeze([
+    [/\btoronto\b/, 43.6532, -79.3832],
+    [/\bmississauga\b/, 43.5890, -79.6441],
+    [/\bbrampton\b/, 43.7315, -79.7624],
+    [/\bmarkham\b/, 43.8561, -79.3370],
+    [/\bvaughan\b/, 43.8361, -79.4983],
+    [/\boakville\b/, 43.4675, -79.6877],
+    [/\brichmond hill\b/, 43.8828, -79.4403],
+    [/\bhamilton\b/, 43.2557, -79.8711],
+    [/\bburlington\b/, 43.3255, -79.7990],
+    [/\bguelph\b/, 43.5448, -80.2482],
+    [/\bwaterloo\b/, 43.4643, -80.5204],
+    [/\bkitchener\b/, 43.4516, -80.4925],
+    [/\bcambridge\b/, 43.3616, -80.3144],
+    [/\bkingston\b/, 44.2312, -76.4860],
+    [/\bgananoque\b/, 44.3311, -76.1627],
+    [/\bbrockville\b/, 44.5895, -75.6843],
+    [/\bprescott\b/, 44.7168, -75.5193],
+    [/\bcornwall\b/, 45.0213, -74.7303],
+    [/\bsouth stormont\b/, 45.0020, -74.9350],
+    [/\bsouth dundas\b/, 44.8990, -75.1830],
+    [/\bmontr(?:eal|éal)\b/, 45.5019, -73.5674],
+    [/\bvaudreuil\b/, 45.4001, -74.0325],
+    [/\bdollard\b/, 45.4944, -73.8242],
+    [/\bpointe claire\b/, 45.4487, -73.8167]
+  ]);
+
+  const TORONTO_VENUE_POINTS = Object.freeze([
+    [/\bscarborough|neilson park\b/, 43.7764, -79.2318],
+    [/\byork university|york federation|keele campus\b/, 43.7735, -79.5019],
+    [/\bdownsview\b/, 43.7438, -79.4827],
+    [/\bnorth york\b/, 43.7615, -79.4111],
+    [/\bwoodbine|beaches|danforth|gerrard india|queen street east\b/, 43.6764, -79.3191],
+    [/\bexhibition|lamport|roncesvalles|lakeshore boulevard\b/, 43.6356, -79.4255],
+    [/\bharbourfront|queens quay|toronto music garden|ward s island|biidaasige\b/, 43.6380, -79.3810],
+    [/\buniversity of toronto|u of t|queen s park|queens park|royal ontario museum|massey college|devonshire|st george|bloor yorkville|koerner hall\b/, 43.6677, -79.3948],
+    [/\btoronto reference library|appel salon|789 yonge|tarragon theatre\b/, 43.6717, -79.3866],
+    [/\bcity hall|nathan phillips|sankofa|yonge dundas|tmu|victoria st\b/, 43.6537, -79.3839],
+    [/\btiff|king st|metro toronto convention|roy thomson|david pecaut\b/, 43.6455, -79.3865],
+    [/\bchurch wellesley|church street\b/, 43.6664, -79.3815],
+    [/\bst clair\b/, 43.6874, -79.4300]
+  ]);
+
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
-  const lang = new URLSearchParams(location.search).get("lang") === "fr" ? "fr" : "en";
+  const mobileViewport = matchMedia("(max-width: 760px)");
+  function pathLanguage() {
+    const path = location.pathname.replace(/\/index\.html$/, "/");
+    if (/^\/polymythseminars\/fr(?:\/|$)/.test(path)) return "fr";
+    if (/^\/(?:writingclub|writingkids|writingjuniors|writingteens|writinggrads|university|philosophy|humanities|cfps|lectures|fellowships)\/fr(?:\/|$)/.test(path)) return "fr";
+    if (/^\/polymythseminars\/(?:events\/[^/]+\/|submit\/|correct\/|subscribe\/|thanks\/)?$/.test(path)) return "en";
+    if (/^\/(?:writingclub|writingkids|writingjuniors|writingteens|writinggrads|university|philosophy|humanities|cfps|lectures|fellowships)\/$/.test(path)) return "en";
+    return "";
+  }
+  function preferredLanguage() {
+    const fromPath = pathLanguage();
+    if (fromPath) return fromPath;
+    if (new URLSearchParams(location.search).get("lang") === "fr") return "fr";
+    try { return localStorage.getItem(LANGUAGE_KEY) === "fr" ? "fr" : "en"; }
+    catch (_) { return "en"; }
+  }
+  const lang = preferredLanguage();
   const t = translations[lang];
   document.documentElement.lang = lang === "fr" ? "fr-CA" : "en-CA";
+  try { localStorage.setItem(LANGUAGE_KEY, lang); } catch (_) {}
   const routeSlug = document.body.dataset.pmRoute || "";
   const routeDefaultContent = document.body.dataset.pmDefaultContent || "both";
   const defaultContentValues = routeDefaultContent === "attend" ? ["attend"] : routeDefaultContent === "apply" ? ["apply"] : ["attend", "apply"];
@@ -328,18 +512,30 @@
     formats: new Set(),
     statuses: new Set(),
     sort: "soonest",
+    near: "",
     view: "list",
     visible: PAGE_SIZE,
     calendarMonth: startOfMonth(calendarToday())
   };
 
   let allEvents = [];
+  let routeEvents = [];
   let filteredEvents = [];
+  const routeFacetTotals = new Map();
+  let searchRenderTimer = null;
+  let lastListSignature = "";
+  let lastCalendarSignature = "";
   let savedIds = loadSaved();
   let savedSearches = loadSavedSearches();
-  let searchWriteTimer = null;
+  let lastSavedRemoval = null;
   let lastFocusedElement = null;
+  let calendarLoading = false;
+  let activeLoadController = null;
+  let loadRequestId = 0;
+  let pageLeaving = false;
+  let calendarDataSource = "none";
   const expandedCalendarDays = new Set();
+  let printSnapshot = null;
 
   function startOfDay(value) {
     const d = new Date(value);
@@ -382,7 +578,17 @@
     if (!value) return null;
     const text = String(value).trim();
     const dateOnly = text.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-    if (dateOnly) return new Date(Date.UTC(Number(dateOnly[1]), Number(dateOnly[2]) - 1, Number(dateOnly[3]), 12));
+    if (dateOnly) {
+      const year = Number(dateOnly[1]);
+      const month = Number(dateOnly[2]);
+      const day = Number(dateOnly[3]);
+      const parsed = new Date(Date.UTC(year, month - 1, day, 12));
+      return parsed.getUTCFullYear() === year &&
+        parsed.getUTCMonth() === month - 1 &&
+        parsed.getUTCDate() === day
+        ? parsed
+        : null;
+    }
     const d = new Date(text);
     return Number.isNaN(d.getTime()) ? null : d;
   }
@@ -409,15 +615,20 @@
   }
 
   function textBlob(event) {
+    const secondaryTypes = Array.isArray(event.secondary_types) ? event.secondary_types : [];
     return normalizeText([
       event.title, event.description, event.speaker_or_director, event.venue, event.city,
-      event.country, event.type, ...(event.secondary_types || []), event.age_band,
+      event.country, event.type, ...secondaryTypes, event.age_band,
       event.source_id, event.source_name, event.organizer, event.raw_excerpt, event.topics, event.tags, event.qualification_reasons
     ].join(" "));
   }
 
   function classifyContent(event) {
     const blob = textBlob(event);
+    const confirmedDatedEvent = event.record_kind === "event" &&
+      event.confirmation_status === "confirmed" &&
+      ["lecture", "performance"].includes(event.type);
+    if (confirmedDatedEvent) return "attend";
     const opportunity = event.record_kind === "opportunity" ||
       ["cfp", "contest", "residency"].includes(event.type) ||
       /\b(deadline|apply|application|fellowship|grant|prize|award|competition|call for|submission)\b/.test(blob);
@@ -446,7 +657,7 @@
     if (/philosoph|ethic|political theory|metaphys|epistem|phenomen|hegel|kant|aristotle/.test(blob)) topics.push("philosophy");
     if (/literature|literary|writing|writer|poetry|poet|book|reading|author|essay|novel/.test(blob)) topics.push("writing");
     if (/film|cinema|screening|media|documentary|animation/.test(blob)) topics.push("film");
-    if (/art|artist|gallery|museum|exhibition|music|concert|theatre|theater|dance|performance|opera/.test(blob)) topics.push("arts");
+    if (ARTS_TOPIC_RE.test(blob)) topics.push("arts");
     if (/civic|council|public meeting|community|protest|democracy|politic|policy|justice|activis/.test(blob)) topics.push("civic");
     if (/science|technology|digital|artificial intelligence|\bai\b|biology|physics|environment|climate|health/.test(blob)) topics.push("science");
     if (/education|teaching|teacher|student|school|university|graduate|lecture|conference|workshop|symposium|colloquium/.test(blob)) topics.push("learning");
@@ -499,6 +710,45 @@
     return "pending";
   }
 
+  function eventPoint(event) {
+    const latitude = Number(event.latitude);
+    const longitude = Number(event.longitude);
+    if (Number.isFinite(latitude) && Number.isFinite(longitude)) {
+      return { latitude, longitude, precision: event.location_precision === "venue" ? "venue" : "city" };
+    }
+    const city = normalizeText(event.city);
+    const venue = normalizeText(event.venue);
+    const joined = `${venue} ${city}`;
+    if (/\b(online|virtual|zoom|global)\b/.test(joined)) return null;
+    if (city.includes("toronto")) {
+      const venueMatch = TORONTO_VENUE_POINTS.find(([pattern]) => pattern.test(venue));
+      if (venueMatch) {
+        return { latitude: venueMatch[1], longitude: venueMatch[2], precision: "venue" };
+      }
+    }
+    const cityMatch = CITY_POINTS.find(([pattern]) => pattern.test(city));
+    return cityMatch
+      ? { latitude: cityMatch[1], longitude: cityMatch[2], precision: "city" }
+      : null;
+  }
+
+  function distanceKm(origin, point) {
+    if (!origin || !point) return null;
+    const radians = value => value * Math.PI / 180;
+    const lat1 = radians(origin.latitude);
+    const lat2 = radians(point.latitude);
+    const deltaLat = lat2 - lat1;
+    const deltaLon = radians(point.longitude - origin.longitude);
+    const a = Math.sin(deltaLat / 2) ** 2
+      + Math.cos(lat1) * Math.cos(lat2) * Math.sin(deltaLon / 2) ** 2;
+    return 6371.0088 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  function eventDistance(event) {
+    const origin = NEARBY_ORIGINS[state.near];
+    return origin ? distanceKm(origin, event._point) : null;
+  }
+
   function hydrate(event) {
     const start = parseDate(event.date);
     const end = parseDate(event.end_date) || start;
@@ -518,30 +768,60 @@
       _opportunityType: classifyOpportunityType(event),
       _audiences: classifyAudience(event),
       _format: classifyFormat(event),
-      _status: event.confirmation_status === "confirmed" ? "confirmed" : "pending"
+      _status: event.confirmation_status === "confirmed" ? "confirmed" : "pending",
+      _point: eventPoint(event)
     };
   }
 
   function loadSaved() {
-    try { return new Set(JSON.parse(localStorage.getItem(SAVED_KEY) || "[]")); }
+    try {
+      const value = JSON.parse(localStorage.getItem(SAVED_KEY) || "[]");
+      const current = Array.isArray(value) ? value.filter(id => typeof id === "string" && id) : [];
+      const legacy = JSON.parse(localStorage.getItem(LEGACY_SAVED_KEY) || "[]");
+      const migrated = Array.isArray(legacy)
+        ? legacy.map(item => typeof item === "string" ? item : item?.id).filter(id => typeof id === "string" && id)
+        : [];
+      const combined = [...new Set([...current, ...migrated])];
+      if (migrated.length) localStorage.setItem(SAVED_KEY, JSON.stringify(combined));
+      return new Set(combined);
+    }
     catch (_) { return new Set(); }
   }
 
   function persistSaved() {
-    try { localStorage.setItem(SAVED_KEY, JSON.stringify([...savedIds])); }
-    catch (_) { /* Device storage may be disabled. */ }
+    try {
+      localStorage.setItem(SAVED_KEY, JSON.stringify([...savedIds]));
+      return true;
+    } catch (_) {
+      return false;
+    }
   }
 
   function loadSavedSearches() {
     try {
       const value = JSON.parse(localStorage.getItem(SEARCHES_KEY) || "[]");
-      return Array.isArray(value) ? value.filter(item => item && typeof item.href === "string" && typeof item.label === "string").slice(0, 20) : [];
+      const current = Array.isArray(value) ? value.filter(item => item && typeof item.href === "string" && typeof item.label === "string") : [];
+      const legacy = JSON.parse(localStorage.getItem(LEGACY_SEARCHES_KEY) || "[]");
+      const migrated = Array.isArray(legacy) ? legacy.map(item => {
+        if (!item || typeof item !== "object" || typeof item.label !== "string") return null;
+        const href = typeof item.href === "string"
+          ? item.href
+          : `/polymythseminars/${typeof item.query === "string" ? item.query : ""}`;
+        return { id: href, href, label: item.label, savedAt: item.savedAt || item.created || new Date(0).toISOString() };
+      }).filter(Boolean) : [];
+      const combined = [...current, ...migrated.filter(item => !current.some(existing => existing.href === item.href))].slice(0, 20);
+      if (migrated.length) localStorage.setItem(SEARCHES_KEY, JSON.stringify(combined));
+      return combined;
     } catch (_) { return []; }
   }
 
   function persistSavedSearches() {
-    try { localStorage.setItem(SEARCHES_KEY, JSON.stringify(savedSearches.slice(0, 20))); }
-    catch (_) { /* Device storage may be disabled. */ }
+    try {
+      localStorage.setItem(SEARCHES_KEY, JSON.stringify(savedSearches.slice(0, 20)));
+      return true;
+    } catch (_) {
+      return false;
+    }
   }
 
   function translateStatic() {
@@ -566,6 +846,13 @@
       languageLink.textContent = "English";
       languageLink.hreflang = "en-CA";
     }
+    $$('a[href^="/polymythseminars/"]').forEach(link => {
+      if (link.id === "pmLanguageLink") return;
+      const url = new URL(link.getAttribute("href"), location.origin);
+      if (!/^\/polymythseminars\/(?:events\/|submit\/|correct\/|subscribe\/|$)/.test(url.pathname)) return;
+      url.pathname = url.pathname.replace(/^\/polymythseminars\/(?!fr\/)/, "/polymythseminars/fr/");
+      link.setAttribute("href", url.pathname + url.search + url.hash);
+    });
   }
 
   function validValuesFor(key) {
@@ -576,10 +863,17 @@
     const params = new URLSearchParams(location.search);
     state.q = params.get("q") || "";
     $("#pmSearch").value = state.q;
+    state.content = defaultContent();
+    for (const key of SET_KEYS.filter(key => key !== "content")) state[key] = new Set();
     const times = new Set($$('input[name="pm-time"]').map(input => input.value));
     state.time = times.has(params.get("time")) ? params.get("time") : "upcoming";
-    state.sort = ["soonest", "latest", "title"].includes(params.get("sort")) ? params.get("sort") : "soonest";
+    state.near = Object.hasOwn(NEARBY_ORIGINS, params.get("near")) ? params.get("near") : "";
+    state.sort = ["soonest", "latest", "title", "nearest"].includes(params.get("sort")) ? params.get("sort") : "soonest";
+    if (state.sort === "nearest" && !state.near) state.sort = "soonest";
     state.view = ["list", "calendar"].includes(params.get("view")) ? params.get("view") : "list";
+    state.visible = PAGE_SIZE;
+    state.calendarMonth = startOfMonth(calendarToday());
+    expandedCalendarDays.clear();
     for (const key of SET_KEYS) {
       const valid = validValuesFor(key);
       const raw = params.get(key);
@@ -596,10 +890,10 @@
 
   function buildUrl(targetLang = lang) {
     const params = new URLSearchParams();
-    if (targetLang === "fr") params.set("lang", "fr");
     if (state.q) params.set("q", state.q);
     if (state.time !== "upcoming") params.set("time", state.time);
     if (state.sort !== "soonest") params.set("sort", state.sort);
+    if (state.near) params.set("near", state.near);
     if (state.view !== "list") params.set("view", state.view);
     if (state.view === "calendar" && monthKey(state.calendarMonth) !== monthKey(calendarToday())) params.set("month", monthKey(state.calendarMonth));
     for (const key of SET_KEYS) {
@@ -609,7 +903,12 @@
       if (!isDefaultContent) params.set(key, values.join(","));
     }
     const query = params.toString();
-    return `${location.pathname}${query ? `?${query}` : ""}${location.hash || ""}`;
+    const current = location.pathname.replace(/\/index\.html$/, "/");
+    const focusedMatch = current.match(/^\/(writingclub|writingkids|writingjuniors|writingteens|writinggrads|university|philosophy|humanities|cfps|lectures|fellowships)(?:\/fr)?\/$/);
+    const pathname = focusedMatch
+      ? `/${focusedMatch[1]}/${targetLang === "fr" ? "fr/" : ""}`
+      : targetLang === "fr" ? "/polymythseminars/fr/" : "/polymythseminars/";
+    return `${pathname}${query ? `?${query}` : ""}${location.hash || ""}`;
   }
 
   function writeStateToUrl() {
@@ -631,6 +930,9 @@
     });
     $$('input[name="pm-time"]').forEach(input => { input.checked = input.value === state.time; });
     $("#pmSort").value = state.sort;
+    $("#pmNear").value = state.near;
+    const nearestOption = $('#pmSort option[value="nearest"]');
+    if (nearestOption) nearestOption.disabled = !state.near;
     $$('[data-view]').forEach(button => button.setAttribute("aria-pressed", String(button.dataset.view === state.view)));
   }
 
@@ -640,6 +942,7 @@
     const end = event._endDay || event._startDay;
     if (state.time === "all") return true;
     if (end < today) return false;
+    if (state.time === "today") return event._startDay <= today && end >= today;
     if (state.time === "upcoming") return true;
     const limits = { "7d": 7, "30d": 30, "90d": 90, "365d": 365 };
     const limit = addDays(today, limits[state.time] || 365);
@@ -693,6 +996,27 @@
     }));
   }
 
+  function searchRank(event, query) {
+    const normalizedQuery = normalizeText(query).trim();
+    if (!normalizedQuery) return 0;
+    const title = normalizeText(event.title || "");
+    if (title === normalizedQuery) return 0;
+    if (title.startsWith(normalizedQuery)) return 1;
+    if (title.includes(normalizedQuery)) return 2;
+
+    const tokens = normalizedQuery.split(/\s+/).filter(Boolean);
+    const titleWords = new Set(title.split(/\s+/).filter(Boolean));
+    const titleMatches = tokens.filter(token => {
+      if (titleWords.has(token)) return true;
+      if (token.length < 4) return false;
+      const threshold = token.length >= 8 ? 2 : 1;
+      return [...titleWords].some(word => editDistance(token, word, threshold) <= threshold);
+    }).length;
+    if (titleMatches === tokens.length) return 3;
+    if (titleMatches > 0) return 4;
+    return 5;
+  }
+
   function routeMatches(event) {
     if (!routeSlug) return true;
     const writing = Array.isArray(event.writing_bands) ? event.writing_bands.map(String) : [];
@@ -730,8 +1054,19 @@
   }
 
   function applyFilters() {
-    filteredEvents = allEvents.filter(event => matchesFilters(event));
+    filteredEvents = routeEvents.filter(event => matchesFilters(event));
     filteredEvents.sort((a, b) => {
+      if (state.q && state.sort !== "nearest") {
+        const rankDiff = searchRank(a, state.q) - searchRank(b, state.q);
+        if (rankDiff) return rankDiff;
+      }
+      if (state.sort === "nearest") {
+        const aDistance = eventDistance(a);
+        const bDistance = eventDistance(b);
+        const distanceDiff = (aDistance ?? Number.POSITIVE_INFINITY)
+          - (bDistance ?? Number.POSITIVE_INFINITY);
+        if (distanceDiff) return distanceDiff;
+      }
       const aDate = state.sort === "latest" ? (a._startDay?.getTime() || 0) : (chronologicalDate(a)?.getTime() || 0);
       const bDate = state.sort === "latest" ? (b._startDay?.getTime() || 0) : (chronologicalDate(b)?.getTime() || 0);
       const dateDiff = aDate - bDate;
@@ -754,7 +1089,7 @@
   function formatMeta(event) {
     const parts = [];
     if (event.time_precision === "unknown") parts.push(t.timePending);
-    else if (event._start && (event._start.getHours() || event._start.getMinutes())) parts.push(formatEventTime(event._start, { hour: "numeric", minute: "2-digit" }));
+    else if (event.time_precision === "exact" && event._start) parts.push(formatEventTime(event._start, { hour: "numeric", minute: "2-digit" }));
     const rawVenue = String(event.venue || "").trim();
     const normalizedVenue = normalizeText(rawVenue);
     const venueIsPlaceholder = /unconfirm|non confirm|unpublished|pending|unknown|location|lieu/.test(normalizedVenue);
@@ -766,7 +1101,9 @@
   }
 
   function routeFor(event) {
-    return `/polymythseminars/events/${encodeURIComponent(event.id)}/`;
+    return lang === "fr"
+      ? `/polymythseminars/fr/events/${encodeURIComponent(event.id)}/`
+      : `/polymythseminars/events/${encodeURIComponent(event.id)}/`;
   }
 
   function escapeHtml(value) {
@@ -804,6 +1141,7 @@
     const reasons = Array.isArray(event.qualification_reasons) ? event.qualification_reasons.map(normalizeText) : [];
     const projected = reasons.some(reason => reason.includes("current edition unconfirmed") || reason.includes("projected"));
     if (projected) items.push(t.projectedDate);
+    if (reasons.some(reason => reason.includes("official source unconfirmed"))) items.push(t.organizerPending);
     const end = event._endDay || event._startDay;
     if (end && end < calendarToday()) items.push(t.past);
     const checkedRaw = event.last_checked_at || event.scraped_at || event.first_seen_at;
@@ -811,14 +1149,48 @@
     if (checked && !Number.isNaN(checked.getTime())) {
       items.push(`${t.checkedOn} ${formatEventTime(checked, { year: "numeric", month: "short", day: "numeric" })}`);
     }
-    return items;
+    return [...new Set(items)];
   }
 
   function freshnessHtml(event) {
     return `<p class="pm-freshness-row">${eventFreshness(event).map(item => `<span>${escapeHtml(item)}</span>`).join('<span aria-hidden="true">·</span>')}</p>`;
   }
 
+  function renderDataSummary(payload, fallbackCount) {
+    const count = Number.isInteger(payload?._canonical_count)
+      ? payload._canonical_count
+      : (Number.isInteger(payload?.count) ? payload.count : fallbackCount);
+    const countElement = $("#pmListingCount");
+    if (countElement && Number.isFinite(count)) {
+      countElement.textContent = Number(count).toLocaleString(lang === "fr" ? "fr-CA" : "en-CA");
+    }
+    const generated = payload?._generated_at ? new Date(payload._generated_at) : null;
+    const dateElement = $("#pmDataUpdated");
+    if (dateElement && generated && !Number.isNaN(generated.getTime())) {
+      dateElement.textContent = formatEventTime(generated, {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+      dateElement.dataset.generatedAt = generated.toISOString();
+    }
+  }
+
+  function distanceHtml(event) {
+    const origin = NEARBY_ORIGINS[state.near];
+    const distance = eventDistance(event);
+    if (!origin || distance === null) return "";
+    const rounded = distance < 10 ? distance.toFixed(1) : Math.round(distance).toLocaleString(lang === "fr" ? "fr-CA" : "en-CA");
+    const precision = event._point?.precision === "venue" ? t.venueEstimate : t.cityEstimate;
+    return `<p class="pm-distance">${escapeHtml(t.approximateDistance(rounded, origin.label, precision))}</p>`;
+  }
+
   function dateBoxHtml(event) {
+    if (event._content === "apply") {
+      const date = event._startDay;
+      const deadline = lang === "fr" ? "Échéance" : "Deadline";
+      return `<time class="pm-date-box deadline" datetime="${isoDate(date)}" aria-label="${escapeHtml(`${deadline}. ${formatDate(date, { dateStyle: "long" })}`)}"><span class="pm-date-status">${deadline}</span><span class="pm-date-month">${escapeHtml(formatDate(date, { month: "short" }))}</span><span class="pm-date-day">${date.getDate()}</span><span class="pm-date-year">${date.getFullYear()}</span></time>`;
+    }
     if (isOngoing(event)) {
       const end = event._endDay;
       return `<time class="pm-date-box ongoing" datetime="${isoDate(end)}" aria-label="${escapeHtml(`${t.ongoing}. ${t.until} ${formatDate(end, { dateStyle: "long" })}`)}"><span class="pm-date-status">${escapeHtml(t.ongoing)}</span><span class="pm-date-until">${escapeHtml(t.until)}</span><span class="pm-date-end">${escapeHtml(formatDate(end, { month: "short", day: "numeric" }))}</span><span class="pm-date-year">${end.getFullYear()}</span></time>`;
@@ -828,9 +1200,16 @@
   }
 
   function sourceLabel(event) {
-    return ["official", "official-or-institutional", "institutional"].includes(String(event.source_quality || "").toLowerCase())
+    const quality = ["official", "official-or-institutional", "institutional"].includes(String(event.source_quality || "").toLowerCase())
       ? t.officialSource
       : t.sourceListing;
+    try {
+      const host = new URL(event.source_url).hostname.replace(/^www\./, "");
+      return host ? `${quality} · ${host}` : quality;
+    } catch (_) {
+      const sourceId = String(event.source_id || "").trim();
+      return sourceId ? `${quality} · ${sourceId}` : quality;
+    }
   }
 
   function cardHtml(event) {
@@ -849,6 +1228,7 @@
           </div>
           <h3 class="pm-event-title"><a href="${routeFor(event)}">${escapeHtml(event.title)}</a></h3>
           <p class="pm-event-meta">${escapeHtml(formatMeta(event))}</p>
+          ${distanceHtml(event)}
           ${freshnessHtml(event)}
           ${descriptionText ? `<p class="pm-event-description">${escapeHtml(descriptionText)}</p>` : ""}
           <div class="pm-card-actions">
@@ -863,6 +1243,12 @@
   function renderList() {
     const container = $("#pmEventList");
     const slice = filteredEvents.slice(0, state.visible);
+    const signature = `${state.visible}|${slice.map(event => event.id).join("|")}`;
+    if (signature === lastListSignature) {
+      $("#pmLoadMore").hidden = slice.length >= filteredEvents.length;
+      return;
+    }
+    lastListSignature = signature;
     if (!slice.length) {
       container.innerHTML = `<div class="pm-empty"><h3>${escapeHtml(t.noResults)}</h3><p>${escapeHtml(t.noResultsHelp)}</p><button class="pm-button primary" type="button" data-clear-all>${escapeHtml(t.clearAll)}</button></div>`;
       $("#pmLoadMore").hidden = true;
@@ -881,8 +1267,10 @@
       parts.push(cardHtml(event));
     }
     container.innerHTML = parts.join("");
-    $("#pmLoadMore").hidden = slice.length >= filteredEvents.length;
-    $("#pmLoadMore").textContent = t.loadMore;
+    const remaining = Math.max(0, filteredEvents.length - slice.length);
+    const nextCount = Math.min(PAGE_SIZE, remaining);
+    $("#pmLoadMore").hidden = remaining === 0;
+    $("#pmLoadMore").textContent = nextCount ? t.loadMoreCount(nextCount) : t.loadMore;
   }
 
   function calendarEventMap(rangeStart, rangeEnd) {
@@ -909,6 +1297,9 @@
   function renderCalendar() {
     const root = $("#pmCalendar");
     const month = state.calendarMonth;
+    const signature = `${month.getFullYear()}-${month.getMonth()}|${filteredEvents.map(event => event.id).join("|")}|${[...expandedCalendarDays].sort().join("|")}`;
+    if (signature === lastCalendarSignature) return;
+    lastCalendarSignature = signature;
     const first = startOfMonth(month);
     const monthEnd = new Date(month.getFullYear(), month.getMonth() + 1, 0, 23, 59, 59, 999);
     const gridStart = addDays(first, -first.getDay());
@@ -933,7 +1324,7 @@
       const limit = expanded ? events.length : 3;
       const links = events.slice(0, limit).map(event => `<a href="${routeFor(event)}" title="${escapeHtml(event.title)}">${escapeHtml(event.title)}</a>`).join("");
       const more = events.length > 3 && !expanded ? `<button type="button" class="pm-calendar-more" data-expand-day="${key}">${escapeHtml(t.calendarMore(events.length - 3))}</button>` : "";
-      days.push(`<section class="pm-calendar-day${outside ? " outside" : ""}${isToday ? " today" : ""}" aria-label="${escapeHtml(formatDate(date, { dateStyle: "long" }))}"><span class="pm-calendar-number">${date.getDate()}</span>${links}${more}</section>`);
+      days.push(`<section class="pm-calendar-day${outside ? " outside" : ""}${isToday ? " today" : ""}" data-calendar-date="${key}" tabindex="-1" aria-label="${escapeHtml(formatDate(date, { dateStyle: "long" }))}"><span class="pm-calendar-number">${date.getDate()}</span>${links}${more}</section>`);
     }
     const agendaDays = [];
     const last = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate();
@@ -973,6 +1364,7 @@
     const contentIsDefault = state.content.size === defaultContentValues.length && defaultContentValues.every(value => state.content.has(value));
     if (!contentIsDefault) items.push({ key: "content", value: [...state.content][0] || "", label: state.content.has("attend") && !state.content.has("apply") ? t.eventsOnly : t.opportunitiesOnly });
     if (state.time !== "upcoming") items.push({ key: "time", value: state.time, label: labelFor(`time:${state.time}`) });
+    if (state.near) items.push({ key: "near", value: state.near, label: `${lang === "fr" ? "Près de" : "Near"} ${NEARBY_ORIGINS[state.near].label}` });
     for (const key of ["places", "topics", "eventTypes", "opportunityTypes", "audiences", "formats", "statuses"]) {
       for (const value of state[key]) items.push({ key, value, label: labelFor(`${key}:${value}`) });
     }
@@ -998,7 +1390,9 @@
       else if (key === "time") active = state.time !== "upcoming";
       else if (key === "types") active = state.eventTypes.size > 0 || state.opportunityTypes.size > 0;
       else active = state[key]?.size > 0;
-      button.hidden = !active;
+      button.hidden = false;
+      button.disabled = !active;
+      button.classList.toggle("is-inactive", !active);
       button.textContent = t.clearSection;
     });
   }
@@ -1016,28 +1410,50 @@
   }
 
   function renderFacetCounts() {
-    $$('[data-count-for]').forEach(node => {
+    const contexts = new Map();
+    const controls = $$('[data-count-for]');
+    for (const node of controls) {
+      const [key] = node.dataset.countFor.split(":");
+      if (!contexts.has(key)) contexts.set(key, routeEvents.filter(event => matchesFilters(event, key)));
+    }
+    const countsByKey = new Map();
+    for (const [key, events] of contexts) {
+      const counts = new Map();
+      for (const event of events) {
+        const values = key === "content" ? [event._content]
+          : key === "places" ? [event._place]
+          : key === "topics" ? event._topics
+          : key === "eventTypes" ? (event._content === "attend" ? [event._eventType] : [])
+          : key === "opportunityTypes" ? (event._content === "apply" ? [event._opportunityType] : [])
+          : key === "audiences" ? event._audiences
+          : key === "formats" ? [event._format]
+          : key === "statuses" ? [event._status] : [];
+        for (const value of values) counts.set(value, (counts.get(value) || 0) + 1);
+      }
+      countsByKey.set(key, counts);
+    }
+    for (const node of controls) {
       const [key, value] = node.dataset.countFor.split(":");
-      const routeEvents = allEvents.filter(routeMatches);
-      const total = routeEvents.filter(event => eventHasFacet(event, key, value)).length;
-      const count = routeEvents.filter(event => matchesFilters(event, key) && eventHasFacet(event, key, value)).length;
+      const count = countsByKey.get(key)?.get(value) || 0;
       node.textContent = count.toLocaleString(lang === "fr" ? "fr-CA" : "en-CA");
       const label = node.closest("label");
       const input = label?.querySelector("input");
       if (label && input) {
-        // Hide choices that cannot add any result in the current context. A selected
-        // zero-result choice stays visible so the user can always remove it.
-        label.hidden = (total === 0 || count === 0) && !input.checked;
-        label.classList.toggle("zero-results", count === 0 && input.checked);
-        input.disabled = false;
+        const unavailable = count === 0 && !input.checked;
+        label.hidden = false;
+        label.classList.toggle("zero-results", unavailable);
+        input.disabled = unavailable;
       }
-    });
+    }
   }
 
   function renderCounts() {
     $("#pmResultsTitle").textContent = t.eventsFound(filteredEvents.length);
     const shown = Math.min(state.visible, filteredEvents.length);
-    $("#pmStatus").textContent = filteredEvents.length ? (state.view === "calendar" ? t.calendarStatus(filteredEvents.length) : t.shown(shown, filteredEvents.length)) : "";
+    $(".pm-results-count").textContent = filteredEvents.length ? t.resultsReady(filteredEvents.length) : t.noResults;
+    $("#pmStatus").textContent = filteredEvents.length
+      ? (state.view === "calendar" ? t.calendarStatus(filteredEvents.length) : t.shown(shown, filteredEvents.length))
+      : t.noResults;
     $("#pmFilterResultPreview").textContent = t.resultPreview(filteredEvents.length);
     $("#pmMobileResults").textContent = t.viewResults(filteredEvents.length);
     $("#pmJumpResults").textContent = t.viewResults(filteredEvents.length);
@@ -1062,14 +1478,21 @@
     const href = buildUrl(lang);
     const item = { id: href, href, label: currentSearchLabel(), savedAt: new Date().toISOString() };
     savedSearches = [item, ...savedSearches.filter(existing => existing.href !== href)].slice(0, 20);
-    persistSavedSearches();
+    const persisted = persistSavedSearches();
     renderSaved();
     const button = $("#pmSaveSearch");
     button.textContent = t.searchSaved;
-    $("#pmStatus").textContent = t.searchSaved;
+    $("#pmStatus").textContent = persisted ? t.searchSaved : t.savedForVisit;
     setTimeout(() => { button.textContent = t.saveSearch; }, 1600);
   }
 
+
+  function updateSavedSummary() {
+    const eventCount = [...savedIds].filter(id => allEvents.some(event => event.id === id)).length;
+    $("#pmSavedCount").textContent = String(eventCount + savedSearches.length);
+    $("#pmSaveSearch").disabled = !hasCustomSearch();
+    $("#pmSaveSearch").textContent = t.saveSearch;
+  }
   function renderSaved() {
     const list = $("#pmSavedList");
     const events = allEvents.filter(event => savedIds.has(event.id)).sort((a, b) => (a._start || 0) - (b._start || 0));
@@ -1080,9 +1503,49 @@
     searchList.innerHTML = savedSearches.length
       ? `<ul>${savedSearches.map(item => `<li class="pm-saved-item pm-saved-search-item"><div><a href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a><span>${escapeHtml(lang === "fr" ? "Ouvrir cette vue enregistrée" : "Open this saved view")}</span></div><button type="button" class="pm-button subtle" data-remove-search="${escapeHtml(item.id)}" aria-label="${escapeHtml(`${t.remove}: ${item.label}`)}">${escapeHtml(t.remove)}</button></li>`).join("")}</ul>`
       : `<p class="pm-empty-saved">${escapeHtml(t.savedSearchesEmpty)}</p>`;
-    $("#pmSavedCount").textContent = String(events.length + savedSearches.length);
-    $("#pmSaveSearch").disabled = !hasCustomSearch();
-    $("#pmSaveSearch").textContent = t.saveSearch;
+    updateSavedSummary();
+  }
+
+  function offerSavedUndo(removal) {
+    if (!removal) return;
+    lastSavedRemoval = removal;
+    const region = $("#pmUndoRegion");
+    const message = $("#pmUndoMessage");
+    const button = $("#pmUndoSaved");
+    if (!region || !message || !button) return;
+    message.textContent = removal.kind === "event"
+      ? t.removedSaved(removal.label)
+      : t.removedSearch(removal.label);
+    button.textContent = t.undo;
+    region.hidden = false;
+    button.focus({ preventScroll: true });
+  }
+
+  function undoSavedRemoval() {
+    if (!lastSavedRemoval) return;
+    const removal = lastSavedRemoval;
+    lastSavedRemoval = null;
+    if (removal.kind === "event") {
+      savedIds.add(removal.id);
+      persistSaved();
+      updateSaveButtons(removal.id);
+    } else {
+      savedSearches = [
+        removal.item,
+        ...savedSearches.filter(item => item.id !== removal.item.id)
+      ].slice(0, 20);
+      persistSavedSearches();
+      renderSaved();
+    }
+    const region = $("#pmUndoRegion");
+    if (region) region.hidden = true;
+    $("#pmStatus").textContent = t.restored(removal.label);
+    const restoredLink = $(
+      removal.kind === "event"
+        ? `#pmSavedList a[href="${CSS.escape(routeFor(removal.event))}"]`
+        : `#pmSavedSearchList a[href="${CSS.escape(removal.item.href)}"]`
+    );
+    restoredLink?.focus({ preventScroll: true });
   }
 
   function updateSaveButtons(id) {
@@ -1098,6 +1561,13 @@
 
   function renderPresetStates() {
     const checks = {
+      today: state.time === "today",
+      week: state.time === "7d",
+      attend: state.content.size === 1 && state.content.has("attend"),
+      apply: state.content.size === 1 && state.content.has("apply"),
+      families: state.audiences.size === 2 && ["youth", "families"].every(x => state.audiences.has(x)),
+      educators: state.audiences.size === 1 && state.audiences.has("educators"),
+      online: state.formats.size === 1 && state.formats.has("online"),
       philosophy: state.topics.size === 1 && state.topics.has("philosophy"),
       humanities: state.topics.size === 3 && ["philosophy", "writing", "arts"].every(x => state.topics.has(x)),
       lectures: state.content.size === 1 && state.content.has("attend") && state.eventTypes.size === 1 && state.eventTypes.has("talks"),
@@ -1126,9 +1596,47 @@
       $("#pmEventList").hidden = false;
       renderList();
     }
-    renderSaved();
+    updateSavedSummary();
+    const savedDialog = $("#pmSavedPanel");
+    if (savedDialog?.open) renderSaved();
     $("#pmClearSearch").hidden = !state.q;
     writeStateToUrl();
+    if (calendarDataSource === "cache") $("#pmStatus").textContent = t.cachedData;
+  }
+
+  function prepareCompletePrintView() {
+    if (!allEvents.length || printSnapshot) return;
+    printSnapshot = {
+      visible: state.visible,
+      eventListHidden: $("#pmEventList").hidden,
+      calendarHidden: $("#pmCalendar").hidden
+    };
+    state.visible = Math.max(state.visible, filteredEvents.length);
+    lastListSignature = "";
+    renderList();
+    $("#pmEventList").hidden = false;
+    $("#pmCalendar").hidden = true;
+  }
+
+  function restoreInteractiveViewAfterPrint() {
+    if (!printSnapshot) return;
+    state.visible = printSnapshot.visible;
+    $("#pmEventList").hidden = printSnapshot.eventListHidden;
+    $("#pmCalendar").hidden = printSnapshot.calendarHidden;
+    printSnapshot = null;
+    lastListSignature = "";
+    render();
+  }
+
+  function renderWithAnchor(anchor, callback = render) {
+    const node = anchor instanceof Element ? anchor.closest('.pm-filter-section, .pm-panel, details') : null;
+    const before = node?.getBoundingClientRect().top;
+    callback();
+    if (node && Number.isFinite(before)) {
+      const after = node.getBoundingClientRect().top;
+      const delta = after - before;
+      if (Math.abs(delta) > 1) window.scrollBy(0, delta);
+    }
   }
 
   function resetFilters(options = {}) {
@@ -1137,6 +1645,7 @@
     state.time = "upcoming";
     for (const key of ["places", "topics", "eventTypes", "opportunityTypes", "audiences", "formats", "statuses"]) state[key].clear();
     state.sort = "soonest";
+    state.near = "";
     state.visible = PAGE_SIZE;
     $("#pmSearch").value = "";
     syncControlsFromState();
@@ -1158,6 +1667,10 @@
     if (key === "q") { state.q = ""; $("#pmSearch").value = ""; }
     else if (key === "time") state.time = "upcoming";
     else if (key === "content") state.content = defaultContent();
+    else if (key === "near") {
+      state.near = "";
+      if (state.sort === "nearest") state.sort = "soonest";
+    }
     else if (state[key] instanceof Set) state[key].delete(value);
     state.visible = PAGE_SIZE;
     syncControlsFromState();
@@ -1197,7 +1710,7 @@
     writeStateToUrl();
     const base = location.origin && location.origin !== "null" ? location.origin : "https://seminarschools.com";
     const url = new URL(buildUrl(lang), base).href;
-    if (navigator.share && matchMedia("(max-width: 760px)").matches) {
+    if (navigator.share && mobileViewport.matches) {
       try {
         await navigator.share({ title: document.title, url });
         $("#pmStatus").textContent = t.shareOpened;
@@ -1222,6 +1735,13 @@
   function applyPreset(name, label) {
     resetFilters();
     const presets = {
+      today: () => { state.content = new Set(["attend"]); state.time = "today"; },
+      week: () => { state.content = new Set(["attend"]); state.time = "7d"; },
+      attend: () => { state.content = new Set(["attend"]); },
+      apply: () => { state.content = new Set(["apply"]); },
+      families: () => { ["youth", "families"].forEach(x => state.audiences.add(x)); },
+      educators: () => state.audiences.add("educators"),
+      online: () => state.formats.add("online"),
       philosophy: () => state.topics.add("philosophy"),
       humanities: () => ["philosophy", "writing", "arts"].forEach(x => state.topics.add(x)),
       lectures: () => { state.content = new Set(["attend"]); state.eventTypes.add("talks"); },
@@ -1234,32 +1754,55 @@
     presets[name]?.();
     syncControlsFromState();
     state.visible = PAGE_SIZE;
-    render();
+    renderWithAnchor(document.activeElement);
     $("#pmStatus").textContent = t.presetApplied(label);
-    if (matchMedia("(max-width: 760px)").matches && $("#pmQuickStarts")) $("#pmQuickStarts").open = false;
-    $("#pmResults").scrollIntoView({ behavior: "smooth", block: "start" });
+    // Keep the page anchored. Presets update in place; the explicit Results
+    // button remains available for people who want to jump down.
+  }
+
+  function syncResponsiveDisclosureState() {
+    const drawer = $("#pmFilterDrawer");
+    const button = $("#pmMobileFilters");
+    if (drawer && button) {
+      button.setAttribute("aria-expanded", String(drawer.open));
+    }
   }
 
   function configureResponsivePanels() {
-    const mobile = matchMedia("(max-width: 760px)").matches;
-    const hasIncomingFilters = activeFilterItems().length > 0;
-    $("#pmFilterDrawer").open = !mobile || hasIncomingFilters;
+    const mobile = mobileViewport.matches;
+    $("#pmFilterDrawer").open = !mobile;
     if ($("#pmQuickStarts")) $("#pmQuickStarts").open = !mobile;
+    syncResponsiveDisclosureState();
+    // The stylesheet paints these same responsive states before this deferred
+    // controller runs. Mark hydration only after the native details states
+    // agree, so opening or closing them never moves the page after first paint.
+    document.documentElement.classList.add("pm-ui-ready");
   }
 
   function bindEvents() {
     $("#pmSearch").addEventListener("input", event => {
       state.q = event.target.value.trim();
       state.visible = PAGE_SIZE;
-      render();
-      clearTimeout(searchWriteTimer);
-      searchWriteTimer = setTimeout(writeStateToUrl, 150);
+
+      // Keep the clear control physically stable and immediately available.
+      // Results remain lightly debounced, while this control never waits for
+      // a large event-list render before appearing or disappearing.
+      $("#pmClearSearch").hidden = !state.q;
+      const saveSearchButton = $("#pmSaveSearch");
+      if (saveSearchButton) saveSearchButton.disabled = !hasCustomSearch();
+
+      clearTimeout(searchRenderTimer);
+      searchRenderTimer = setTimeout(() => {
+        render();
+        searchRenderTimer = null;
+      }, 110);
     });
 
     document.addEventListener("keydown", event => {
       const target = event.target;
       const typing = target instanceof HTMLElement && (target.matches("input, textarea, select") || target.isContentEditable);
-      if (!typing && event.key === "/") {
+      const unmodifiedShortcut = !event.ctrlKey && !event.metaKey && !event.altKey;
+      if (!typing && unmodifiedShortcut && event.key === "/") {
         event.preventDefault();
         $("#pmSearch").focus();
         return;
@@ -1273,6 +1816,27 @@
       }
     });
 
+    window.addEventListener("popstate", () => {
+      const requestedLang = new URLSearchParams(location.search).get("lang") === "fr" ? "fr" : "en";
+      if (requestedLang !== lang) {
+        location.reload();
+        return;
+      }
+      readStateFromUrl();
+      configureResponsivePanels();
+      lastListSignature = "";
+      lastCalendarSignature = "";
+      render();
+    });
+
+    const filterDrawer = $("#pmFilterDrawer");
+    filterDrawer.addEventListener("toggle", syncResponsiveDisclosureState);
+    if (typeof mobileViewport.addEventListener === "function") {
+      mobileViewport.addEventListener("change", configureResponsivePanels);
+    } else if (typeof mobileViewport.addListener === "function") {
+      mobileViewport.addListener(configureResponsivePanels);
+    }
+
     document.addEventListener("change", event => {
       const input = event.target;
       if (input.matches('[data-state-set]')) {
@@ -1285,16 +1849,24 @@
           return;
         }
         state.visible = PAGE_SIZE;
-        render();
+        renderWithAnchor(input);
       }
       if (input.matches('input[name="pm-time"]')) {
         state.time = input.value;
         state.visible = PAGE_SIZE;
-        render();
+        renderWithAnchor(input);
       }
       if (input.id === "pmSort") {
         state.sort = input.value;
-        render();
+        renderWithAnchor(input);
+      }
+      if (input.id === "pmNear") {
+        state.near = Object.hasOwn(NEARBY_ORIGINS, input.value) ? input.value : "";
+        if (state.near) state.sort = "nearest";
+        else if (state.sort === "nearest") state.sort = "soonest";
+        state.visible = PAGE_SIZE;
+        syncControlsFromState();
+        renderWithAnchor(input);
       }
     });
 
@@ -1302,8 +1874,24 @@
       const clearAll = event.target.closest("[data-clear-all]");
       if (clearAll) { resetFilters({ focusSearch: true }); return; }
 
+      if (event.target.closest("[data-retry-calendar]")) {
+        await loadCalendarData();
+        return;
+      }
+
       const clearSearch = event.target.closest("#pmClearSearch");
-      if (clearSearch) { state.q = ""; $("#pmSearch").value = ""; state.visible = PAGE_SIZE; render(); $("#pmSearch").focus(); return; }
+      if (clearSearch) {
+        // Cancel pending search work before clearing. Otherwise a delayed
+        // render can arrive under the pointer and make the control unstable.
+        clearTimeout(searchRenderTimer);
+        searchRenderTimer = null;
+        state.q = "";
+        $("#pmSearch").value = "";
+        state.visible = PAGE_SIZE;
+        render();
+        $("#pmSearch").focus({ preventScroll: true });
+        return;
+      }
 
       const clearSectionButton = event.target.closest("[data-clear-section]");
       if (clearSectionButton) { clearSection(clearSectionButton.dataset.clearSection); return; }
@@ -1320,14 +1908,21 @@
       }
 
       const loadMore = event.target.closest("#pmLoadMore");
-      if (loadMore) { state.visible += PAGE_SIZE; render(); loadMore.focus(); return; }
+      if (loadMore) {
+        state.visible += PAGE_SIZE;
+        lastListSignature = "";
+        render();
+        requestAnimationFrame(() => $("#pmLoadMore")?.focus({ preventScroll: true }));
+        return;
+      }
 
       const save = event.target.closest("[data-save-id]");
       if (save) {
         const id = save.dataset.saveId;
         if (savedIds.has(id)) savedIds.delete(id); else savedIds.add(id);
-        persistSaved();
+        const persisted = persistSaved();
         updateSaveButtons(id);
+        if (!persisted) $("#pmStatus").textContent = t.savedForVisit;
         save.focus();
         return;
       }
@@ -1335,20 +1930,40 @@
       const removeSaved = event.target.closest("[data-remove-saved]");
       if (removeSaved) {
         const id = removeSaved.dataset.removeSaved;
+        const removedEvent = allEvents.find(item => item.id === id);
         savedIds.delete(id);
-        persistSaved();
+        const persisted = persistSaved();
         updateSaveButtons(id);
+        if (removedEvent) {
+          offerSavedUndo({
+            kind: "event",
+            id,
+            event: removedEvent,
+            label: removedEvent.title
+          });
+        }
+        if (!persisted) $("#pmStatus").textContent = t.savedForVisit;
         return;
       }
 
       const removeSearch = event.target.closest("[data-remove-search]");
       if (removeSearch) {
+        const removedItem = savedSearches.find(item => item.id === removeSearch.dataset.removeSearch);
         savedSearches = savedSearches.filter(item => item.id !== removeSearch.dataset.removeSearch);
-        persistSavedSearches();
+        const persisted = persistSavedSearches();
         renderSaved();
+        if (removedItem) {
+          offerSavedUndo({
+            kind: "search",
+            item: removedItem,
+            label: removedItem.label
+          });
+        }
+        if (!persisted) $("#pmStatus").textContent = t.savedForVisit;
         return;
       }
 
+      if (event.target.closest("#pmUndoSaved")) { undoSavedRemoval(); return; }
       if (event.target.closest("#pmSaveSearch")) { saveCurrentSearch(); return; }
       if (event.target.closest("#pmSavedToggle")) { openSavedDialog(); return; }
       if (event.target.closest("#pmCloseSaved")) { closeSavedDialog(); return; }
@@ -1371,21 +1986,23 @@
       if (expandDay) {
         expandedCalendarDays.add(expandDay.dataset.expandDay);
         renderCalendar();
-        const day = $(`[data-expand-day="${CSS.escape(expandDay.dataset.expandDay)}"]`);
-        day?.focus();
+        const day = $(`[data-calendar-date="${CSS.escape(expandDay.dataset.expandDay)}"]`);
+        day?.focus({ preventScroll: true });
         return;
       }
 
       if (event.target.closest("#pmJumpResults") || event.target.closest("#pmMobileResults")) {
         $("#pmFilterDrawer").open = false;
-        $("#pmResults").scrollIntoView({ behavior: "smooth", block: "start" });
-        $("#pmResultsTitle").focus({ preventScroll: true });
+        requestAnimationFrame(() => {
+          $("#pmResults").scrollIntoView({ behavior: "auto", block: "start" });
+          $("#pmResultsTitle").focus({ preventScroll: true });
+        });
         return;
       }
 
       if (event.target.closest("#pmMobileFilters")) {
         $("#pmFilterDrawer").open = true;
-        $("#pmFilterDrawer").scrollIntoView({ behavior: "smooth", block: "start" });
+        $("#pmFilterDrawer").querySelector('summary')?.focus({ preventScroll: true });
         return;
       }
     });
@@ -1395,27 +2012,267 @@
     dialog.addEventListener("close", () => { if (lastFocusedElement?.focus) lastFocusedElement.focus(); });
   }
 
-  async function init() {
-    translateStatic();
-    bindEvents();
-    readStateFromUrl();
-    configureResponsivePanels();
-    $("#pmStatus").textContent = t.loading;
+  function setCalendarControlsDisabled(disabled) {
+    $$([
+      "#pmSearch",
+      "#pmClearSearch",
+      "#pmSort",
+      "#pmNear",
+      "#pmJumpResults",
+      "#pmMobileResults",
+      "[data-state-set]",
+      'input[name="pm-time"]',
+      "[data-preset]",
+      "[data-view]",
+      "[data-clear-section]",
+      "#pmResetFilters"
+    ].join(",")).forEach(control => {
+      control.disabled = disabled;
+    });
+  }
+
+  function abortError() {
     try {
-      const response = await fetch(DATA_URL, { cache: "no-cache" });
+      return new DOMException("Calendar loading was interrupted", "AbortError");
+    } catch (_) {
+      const error = new Error("Calendar loading was interrupted");
+      error.name = "AbortError";
+      return error;
+    }
+  }
+
+  function waitForRetry(milliseconds, signal) {
+    return new Promise((resolve, reject) => {
+      if (signal.aborted) {
+        reject(abortError());
+        return;
+      }
+      const onAbort = () => {
+        clearTimeout(timer);
+        reject(abortError());
+      };
+      const timer = setTimeout(() => {
+        signal.removeEventListener("abort", onAbort);
+        resolve();
+      }, milliseconds);
+      signal.addEventListener("abort", onAbort, { once: true });
+    });
+  }
+
+  function validateCalendarPayload(payload) {
+    const raw = Array.isArray(payload)
+      ? payload
+      : (payload && typeof payload === "object" ? (payload.events || payload.items) : null);
+    if (!Array.isArray(raw) || raw.length === 0) {
+      throw new Error("Calendar payload contained no listings");
+    }
+
+    if (payload && !Array.isArray(payload)) {
+      for (const key of ["count", "_canonical_count", "_total_events"]) {
+        const declared = payload[key];
+        if (Number.isInteger(declared) && declared !== raw.length) {
+          throw new Error(`Calendar payload ${key} did not match its listings`);
+        }
+      }
+    }
+
+    const ids = new Set();
+    raw.forEach((event, index) => {
+      if (!event || typeof event !== "object" || Array.isArray(event)) {
+        throw new Error(`Calendar listing ${index + 1} was malformed`);
+      }
+      if (typeof event.id !== "string" || !event.id.trim() || ids.has(event.id)) {
+        throw new Error(`Calendar listing ${index + 1} had a missing or duplicate id`);
+      }
+      if (typeof event.title !== "string" || !event.title.trim()) {
+        throw new Error(`Calendar listing ${event.id} had no title`);
+      }
+      if (typeof event.date !== "string" || !parseDate(event.date)) {
+        throw new Error(`Calendar listing ${event.id} had an unusable date`);
+      }
+      if (event.end_date && !parseDate(event.end_date)) {
+        throw new Error(`Calendar listing ${event.id} had an unusable end date`);
+      }
+      ids.add(event.id);
+    });
+    return raw;
+  }
+
+  async function fetchCalendarPayload(signal) {
+    const controller = new AbortController();
+    let timedOut = false;
+    const relayAbort = () => controller.abort();
+    signal.addEventListener("abort", relayAbort, { once: true });
+    const timeout = setTimeout(() => {
+      timedOut = true;
+      controller.abort();
+    }, FETCH_TIMEOUT_MS);
+
+    try {
+      const response = await fetch(DATA_URL, {
+        // Honour the audited five-minute HTTP freshness window. `no-cache`
+        // forced a revalidation on every cross-route calendar visit.
+        cache: "default",
+        signal: controller.signal,
+        headers: { Accept: "application/json" }
+      });
+      if (signal.aborted) throw abortError();
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const payload = await response.json();
-      const raw = Array.isArray(payload) ? payload : (payload.events || payload.items || []);
-      allEvents = raw.map(hydrate).filter(event => event._start);
+      return { payload, raw: validateCalendarPayload(payload) };
+    } catch (error) {
+      if (signal.aborted) throw abortError();
+      if (timedOut) throw new Error("Calendar request timed out");
+      throw error;
+    } finally {
+      clearTimeout(timeout);
+      signal.removeEventListener("abort", relayAbort);
+    }
+  }
+
+  async function fetchCalendarWithRetry(signal) {
+    let lastError = null;
+    for (let attempt = 0; attempt < FETCH_ATTEMPTS; attempt += 1) {
+      try {
+        return await fetchCalendarPayload(signal);
+      } catch (error) {
+        if (error?.name === "AbortError") throw error;
+        lastError = error;
+        if (attempt + 1 < FETCH_ATTEMPTS) {
+          $("#pmStatus").textContent = t.retrying;
+          await waitForRetry(650, signal);
+        }
+      }
+    }
+    throw lastError || new Error("Calendar request failed");
+  }
+
+  async function persistCalendarCache(payload) {
+    if (!("caches" in window) || typeof Response !== "function") return;
+    try {
+      const cache = await caches.open(DATA_CACHE);
+      const payloadVersion = String(payload?._generated_at || "");
+      const existing = await cache.match(DATA_URL);
+      if (
+        payloadVersion
+        && existing?.headers.get("X-Polymythcal-Version") === payloadVersion
+      ) return;
+      const body = JSON.stringify(payload);
+      await cache.put(DATA_URL, new Response(body, {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Polymythcal-Cache": "last-good",
+          "X-Polymythcal-Version": payloadVersion
+        }
+      }));
+    } catch (_) {
+      // Cache Storage can be unavailable, full, or disabled. Live data remains.
+    }
+  }
+
+  async function readCalendarCache() {
+    if (!("caches" in window)) return null;
+    try {
+      const cache = await caches.open(DATA_CACHE);
+      const response = await cache.match(DATA_URL);
+      if (!response) return null;
+      const payload = await response.json();
+      return { payload, raw: validateCalendarPayload(payload) };
+    } catch (_) {
+      return null;
+    }
+  }
+
+  async function loadCalendarData() {
+    if (calendarLoading || pageLeaving) return;
+    calendarLoading = true;
+    const requestId = ++loadRequestId;
+    const controller = new AbortController();
+    activeLoadController = controller;
+    const results = $("#pmResults");
+    results.setAttribute("aria-busy", "true");
+    setCalendarControlsDisabled(true);
+    $("#pmStatus").textContent = t.loading;
+    try {
+      let loaded;
+      let source = "network";
+      try {
+        loaded = await fetchCalendarWithRetry(controller.signal);
+      } catch (networkError) {
+        if (networkError?.name === "AbortError") throw networkError;
+        loaded = await readCalendarCache();
+        if (!loaded) throw networkError;
+        source = "cache";
+      }
+      if (controller.signal.aborted || requestId !== loadRequestId || pageLeaving) throw abortError();
+
+      allEvents = loaded.raw.map(hydrate);
+      if (allEvents.some(event => !event._start)) throw new Error("Calendar payload contained unusable dates");
+      renderDataSummary(loaded.payload, loaded.raw.length);
+      routeEvents = allEvents.filter(routeMatches);
+      calendarDataSource = source;
+      routeFacetTotals.clear();
+      lastListSignature = "";
+      lastCalendarSignature = "";
       const validIds = new Set(allEvents.map(event => event.id));
       const cleaned = new Set([...savedIds].filter(id => validIds.has(id)));
       if (cleaned.size !== savedIds.size) { savedIds = cleaned; persistSaved(); }
+      setCalendarControlsDisabled(false);
       render();
+      renderSaved();
+      if (source === "network") void persistCalendarCache(loaded.payload);
+      else $("#pmStatus").textContent = t.cachedData;
     } catch (error) {
+      if (error?.name === "AbortError") return;
       console.error(error);
+      allEvents = [];
+      routeEvents = [];
+      filteredEvents = [];
+      calendarDataSource = "none";
+      lastListSignature = "";
+      lastCalendarSignature = "";
+      $("#pmResultsTitle").textContent = t.unavailable;
+      $(".pm-results-count").textContent = t.loadError;
+      $("#pmFilterResultPreview").textContent = t.unavailable;
       $("#pmStatus").textContent = t.loadError;
-      $("#pmEventList").innerHTML = `<div class="pm-empty"><h3>${escapeHtml(t.loadError)}</h3><p><a href="/polymythseminars/subscribe/">${escapeHtml(lang === "fr" ? "Fils et abonnements calendrier" : "Feeds and calendar subscriptions")}</a></p></div>`;
+      $("#pmCalendar").hidden = true;
+      $("#pmEventList").hidden = false;
+      $("#pmLoadMore").hidden = true;
+      $("#pmEventList").innerHTML = `<div class="pm-empty"><h3>${escapeHtml(t.unavailable)}</h3><p>${escapeHtml(t.loadError)}</p><p class="pm-empty-actions"><button class="pm-button primary" data-retry-calendar type="button">${escapeHtml(t.retry)}</button><a class="pm-link-button" href="/polymythseminars/subscribe/">${escapeHtml(lang === "fr" ? "Fils et abonnements calendrier" : "Feeds and calendar subscriptions")}</a></p></div>`;
+    } finally {
+      if (requestId === loadRequestId) {
+        calendarLoading = false;
+        activeLoadController = null;
+        results.setAttribute("aria-busy", "false");
+      }
     }
+  }
+
+  function init() {
+    translateStatic();
+    document.documentElement.classList.remove("pm-lang-pending");
+    bindEvents();
+    readStateFromUrl();
+    configureResponsivePanels();
+    window.addEventListener("online", () => {
+      if (calendarDataSource !== "network") loadCalendarData();
+    }, { passive: true });
+    window.addEventListener("pagehide", () => {
+      pageLeaving = true;
+      loadRequestId += 1;
+      calendarLoading = false;
+      clearTimeout(searchRenderTimer);
+      activeLoadController?.abort();
+      activeLoadController = null;
+    });
+    window.addEventListener("pageshow", event => {
+      pageLeaving = false;
+      if (event.persisted) configureResponsivePanels();
+      if (event.persisted && calendarDataSource === "none") loadCalendarData();
+    });
+    window.addEventListener("beforeprint", prepareCompletePrintView);
+    window.addEventListener("afterprint", restoreInteractiveViewAfterPrint);
+    loadCalendarData();
   }
 
   init();

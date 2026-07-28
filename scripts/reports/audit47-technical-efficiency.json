@@ -1,0 +1,49 @@
+{
+  "schema": "seminar-schools-audit47-technical-efficiency-v1",
+  "release_id": "2026-07-26-site-audit47-technical-efficiency-continuity-final",
+  "generated_at": "2026-07-26T16:00:00-04:00",
+  "status": "failed",
+  "metrics": {
+    "canonical_events": 833,
+    "event_types": 32,
+    "sources": 422,
+    "explicit_legacy_identifiers": 12,
+    "generated_english_alias_routes": 857,
+    "french_alias_routes": 12,
+    "methodology_archive_sections": 16,
+    "methodology_archive_rows": 1168,
+    "localized_leizu_secondary_routes": 36,
+    "predeploy_npm_dependency_installs": 1,
+    "source_html_files": 3396,
+    "public_html_files": 3748
+  },
+  "fixes": [
+    "deduplicated-calendar-identity-continuity",
+    "canonical-legacy-ics-parity",
+    "bounded-dst-safe-recurrence",
+    "declared-language-and-bounded-topic-classification",
+    "http-and-cache-storage-reuse",
+    "methodology-and-campaigncodex-search-efficiency",
+    "localized-main-landmark-repair",
+    "dependency-install-and-public-walk-efficiency",
+    "deterministic-build-output-stamping-and-transient-sync-resilience",
+    "idempotent-verification-evidence",
+    "postprocessor-aware-generated-route-consistency",
+    "current-contract-verifier-compatibility",
+    "manifest-owned-asset-token-verification"
+  ],
+  "failures": [
+    "RELEASE_ID.txt is not Audit 49",
+    "release manifest is not Audit 49"
+  ],
+  "external_validation_remaining": [
+    "Firefox native-engine validation",
+    "Safari/WebKit native-engine validation",
+    "VoiceOver validation",
+    "NVDA validation",
+    "physical-device and real-user validation",
+    "Google, Apple, and Outlook calendar-client import validation",
+    "live scheduled harvest and current source-endpoint validation"
+  ],
+  "policy": "Audit 47 preserves user-approved design, translation, organizer-text, weekly-cadence, BB teacher-led, frozen-history, and no-security-audit boundaries while making current runtime and build paths smoother."
+}

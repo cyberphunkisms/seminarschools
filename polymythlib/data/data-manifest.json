@@ -1,0 +1,93 @@
+{
+  "release": "2026-07-28.g0.3",
+  "generated": "2026-07-28",
+  "schema": {
+    "name": "Polymyth Commons Generation 0",
+    "version": "1.0.0",
+    "documentation": "https://seminarschools.com/polymythlib/method/#record-model"
+  },
+  "rights": {
+    "metadata": "Polymyth-authored metadata may be reused with attribution to Polymyth Commons.",
+    "source": "Book-derived citations and source-grounded summaries remain subject to the rights of their source. The dataset does not reproduce book chapters.",
+    "externalLinks": "Linked projects and documents retain their own terms and rights."
+  },
+  "source": {
+    "shortCitation": "Charlotte Hess and Elinor Ostrom, eds., Understanding Knowledge as a Commons: From Theory to Practice",
+    "publisher": "MIT Press",
+    "publicationYear": 2007,
+    "suppliedEditionNote": "Supplied 2011 MIT Press paperback PDF",
+    "bookUrl": "https://mitpress.mit.edu/9780262516037/understanding-knowledge-as-a-commons/",
+    "extractionDate": "2026-07-28"
+  },
+  "counts": {
+    "projects": 346,
+    "projectMentions": 393,
+    "coreCandidates": 128,
+    "commonsProjects": 154,
+    "supportingEcosystem": 167,
+    "conceptsAndComparisons": 25,
+    "printedLinks": 437,
+    "linkOccurrences": 484,
+    "linkHosts": 252,
+    "commonsForms": 43,
+    "projectTypes": 79,
+    "currentStatusSeeds": 20,
+    "relationshipTypes": 50,
+    "pdfPagesInspected": 383,
+    "embeddedPdfHyperlinks": 0
+  },
+  "files": [
+    {
+      "path": "polymyth-data.json",
+      "sha256": "16a8e466aee547a4937048760de8e93917da0695bbc3467b59218b6c8ba74c78"
+    },
+    {
+      "path": "directory-index.json",
+      "sha256": "206946a25de87555fb4f8ecc587fd0f64ea91154601d6550ab52057899fea530"
+    },
+    {
+      "path": "backbone-index.json",
+      "sha256": "38a92418680f60d565187912c09d6bbe0d6d511108ed4bff4427755ca4f4e7ad"
+    },
+    {
+      "path": "collections.json",
+      "sha256": "6dbd87e88e4b2907b38353e1c6031c9b333a5aa919ec518721f724b919c1246c"
+    },
+    {
+      "path": "projects.csv",
+      "sha256": "2ee32b01b1ca4af50df49c2c2d46c878614c20fcd80992f3ee5d485c4585a891"
+    },
+    {
+      "path": "book-mentions.csv",
+      "sha256": "e00f6d0d8351b292f4f1e3a5d2fb87369319d6beea81551ce0b91098eff1d2db"
+    },
+    {
+      "path": "book-links.csv",
+      "sha256": "f9ad3fe9b83c3004a52975d9be7bd3d0fb82545736908de971b2c139ab8cbfb6"
+    },
+    {
+      "path": "link-occurrences.csv",
+      "sha256": "cc05dc35b3fecdc49dbb760f9dbe09f8c3738e02505abde8dfe59efcd6fb1160"
+    },
+    {
+      "path": "commons-forms.csv",
+      "sha256": "42b2dce57e23e350f8b63ffd5a74056924d2c8ca15c1dc93e983e6084d90f360"
+    },
+    {
+      "path": "book-project-types.csv",
+      "sha256": "133d8bdbd57ca46a30a074614491412992b10393ea2aafef6cfdafcb0c748654"
+    },
+    {
+      "path": "current-status.csv",
+      "sha256": "566fbf4872f6d30a9f4c9830ea110192354cb63897dadd958c07404ddf814251"
+    },
+    {
+      "path": "relationship-vocabulary.csv",
+      "sha256": "244bf89327399e625243637acf5d0654be4b212e494a43f93d5f6984340f3d65"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "d378921909ab861736d88718c97f6f7ceb133b149a5af0377560354dbb37c233"
+    }
+  ]
+}

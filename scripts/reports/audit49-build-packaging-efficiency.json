@@ -1,0 +1,65 @@
+{
+  "schema": "seminar-schools-audit49-build-packaging-efficiency-v1",
+  "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
+  "generated_at": "2026-07-26T15:45:00-04:00",
+  "status": "passed",
+  "metrics": {
+    "baseline_reuse_runner_checks": 158,
+    "baseline_reuse_runner_wall_ms": 23225,
+    "command_timeout_ms": 600000,
+    "timeout_regression_observed_ms": 1006,
+    "sequential_failure_report_regression_passed": true,
+    "package_regression_tests": 10,
+    "archive_benchmark_files": 5,
+    "archive_benchmark_input_bytes": 75857344,
+    "archive_audit48_wall_ms": 3276,
+    "archive_audit49_wall_ms": 3242,
+    "archive_source_read_passes_before": 2,
+    "archive_source_read_passes_after": 1,
+    "archive_compatible_sha256": "c722e42d278abd6c3f97c3c13907fc62896bea169184c1e72fe03445bae1c3be",
+    "ci_canonical_linux_builds_before": 2,
+    "ci_canonical_linux_builds_after": 1,
+    "deployer_explicit_duplicate_parity_scans_before": 1,
+    "deployer_explicit_duplicate_parity_scans_after": 0,
+    "deployer_explicit_duplicate_browser_gates_before": 1,
+    "deployer_explicit_duplicate_browser_gates_after": 0,
+    "selection": {
+      "deployer": {
+        "directories_pruned": 1,
+        "directories_visited": 6923,
+        "files_considered": 10154,
+        "files_selected": 10153,
+        "public_files_selected": 4515,
+        "selected_bytes_excluding_this_report": 354406397
+      },
+      "source": {
+        "directories_pruned": 2,
+        "directories_visited": 3505,
+        "files_considered": 5639,
+        "files_selected": 5638,
+        "public_files_selected": 0,
+        "selected_bytes_excluding_this_report": 234664477
+      }
+    }
+  },
+  "fixes": [
+    "sequential-failure-reporting",
+    "bounded-command-runtime",
+    "pruned-shared-package-selection",
+    "single-source-pass-archive-hashing",
+    "source-mutation-detection",
+    "exclusive-package-output-lock",
+    "exclusive-public-build-lock",
+    "archive-input-and-transaction-validation",
+    "deduplicated-deployer-gates",
+    "deduplicated-linux-ci-build",
+    "metadata-aware-frozen-gate-successors"
+  ],
+  "invariants": {
+    "weekly_workflows_changed": false,
+    "frozen_audit_evidence_changed": false,
+    "security_audit_performed": false,
+    "deployment_performed": false
+  },
+  "failures": []
+}

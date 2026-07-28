@@ -2,6 +2,7 @@
 
 <html lang="en">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>transmission complete · bookwormburrows</title>
@@ -48,7 +49,7 @@
   p.dim{color:var(--fg-dim);text-shadow:none;font-size:1rem}
   .ascii{margin:1.5rem 0;color:var(--fg-dim);text-shadow:none;font-size:0.95rem;letter-spacing:0;line-height:1.2;white-space:pre}
   .links{margin-top:2rem;padding-top:1rem;border-top:1px dashed var(--fg-darker);display:flex;flex-wrap:wrap;gap:1rem;font-size:1rem}
-  .links a{padding:0.4rem 0.8rem;border:1px solid var(--fg-dim);text-decoration:none;border-bottom:1px solid var(--fg-dim);transition:all 0.1s}
+  .links a{padding:0.4rem 0.8rem;border:1px solid var(--fg-dim);text-decoration:none;border-bottom:1px solid var(--fg-dim);transition:color 0.1s,background-color 0.1s,border-color 0.1s,opacity 0.1s,transform 0.1s}
   .links a:hover{background:var(--fg-darker);border-color:var(--fg);color:var(--fg)}
   .cursor{display:inline-block;width:0.6rem;height:1.2rem;background:var(--fg);box-shadow:var(--glow);animation:blink 1s step-end infinite;vertical-align:text-bottom;margin-left:1px}
   @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
@@ -59,13 +60,15 @@
 </style>
 <link href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)" rel="stylesheet"/>
 <link href="/css/alive.css?v=cl91" rel="stylesheet"/>
-<link href="/css/theme.css?v=cl91" rel="stylesheet"/>
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link href="/css/theme.css?v=20260725-audit45" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.075">
+<body data-geometry="indra-web" data-indra-intensity="0.095">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div aria-label="Adjust text size" class="ss-fz"><button data-fz="down" title="Decrease text size" type="button">A-</button><button data-fz="up" title="Increase text size" type="button">A+</button><button class="reset" data-fz="reset" style="display:none" title="Reset text size" type="button">↺</button></div>
-<canvas id="rain-canvas"></canvas>
+<canvas id="rain-canvas" data-rain-color="#33ff66" data-rain-fade="rgba(10,14,10,0.06)"></canvas>
 <div class="wrap" role="main" id="main-content">
 <div class="header">/bookwormcard/success/</div>
 <h1>// transmission complete<span class="cursor"></span></h1>
@@ -88,43 +91,11 @@
 <a href="/">[ seminarschools ]</a>
 </div>
 </div>
-<script>
-(function(){
-  var canvas = document.getElementById('rain-canvas');
-  var ctx = canvas.getContext('2d');
-  var w, h, cols, drops;
-  var chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-  function resize(){
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-    cols = Math.floor(w/16);
-    drops = [];
-    for(var i=0;i<cols;i++) drops[i] = Math.random()*h;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-  function draw(){
-    if(document.hidden) return;
-    ctx.fillStyle = 'rgba(10,14,10,0.06)';
-    ctx.fillRect(0,0,w,h);
-    ctx.fillStyle = '#33ff66';
-    ctx.font = '14px monospace';
-    for(var i=0;i<drops.length;i++){
-      var c = chars[Math.floor(Math.random()*chars.length)];
-      ctx.fillText(c, i*16, drops[i]);
-      drops[i] += 16;
-      if(drops[i] > h && Math.random()>0.975) drops[i] = 0;
-    }
-  }
-  if(!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    setInterval(draw, 80);
-  }
-})();
-</script>
+<script src="/js/bookworm-rain.js?v=20260724-rain-lifecycle" defer></script>
 <script defer="" src="/js/theme.js?v=cl91"></script>
 <script defer="" src="/js/mandala.js?v=cl91"></script>
 <script defer="" src="/js/indra.js?v=cl91"></script>
-<script defer="" src="/js/footer.js?v=20260719-audit11-decisions"></script>
-<script defer="" src="/js/site-keyboard-enhancements.js"></script>
+<script defer="" src="/js/footer.js?v=20260725-audit45-footer"></script>
+<script defer="" src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

@@ -9,14 +9,20 @@ function check(name, ok){ console.log((ok ? 'PASS' : 'FAIL') + '  ' + name); if 
 
 const cal = read('polymythseminars/index.html');
 const app = read('js/polymythcal-revamp.js');
+const release = json('RELEASE_MANIFEST.json');
+const assetVersion = String(release?.polymythcal_asset_version || '');
+check('release manifest owns a valid Polymythcal asset version', /^[0-9]{8}-[a-z0-9-]+$/.test(assetVersion));
 check('calendar page exists', cal.length > 1000);
 check('calendar uses the lightweight client shell', cal.includes('id="pmEventList"') && cal.includes('/js/polymythcal-revamp.js'));
 check('calendar avoids an embedded full-corpus fallback', !cal.includes('id="events-fallback"') && cal.length < 100000);
-check('calendar carries current build stamp', cal.includes('name="ss-build"') && cal.includes('20260722-audit21'));
-check('calendar application fetches the public event path', app.includes('const DATA_URL = "/polymythseminars/events.json"'));
+check('calendar carries the manifest-owned build stamp', cal.includes('name="ss-build"') && cal.includes(`content="${assetVersion}"`));
+check('calendar application fetches the compact public browser path', app.includes('const DATA_URL = "/polymythseminars/browse.json"'));
 check('calendar application renders official source links', app.includes('event.source_url') && app.includes('rel="noopener noreferrer"'));
 check('calendar has a readable load-failure route', app.includes('loadError') && app.includes('/polymythseminars/subscribe/'));
-check('calendar revalidates cached event data efficiently', app.includes('cache: "no-cache"'));
+check(
+  'calendar honours the five-minute HTTP freshness window',
+  app.includes('cache: "default"') && !app.includes('cache: "no-cache"'),
+);
 
 const data = json('data/polymyth-seminar-events.json');
 check('event data file parses', !!data);
@@ -33,7 +39,7 @@ try {
 const feed = read('polymythseminars/feed.xml');
 check('rss feed present with items', feed.includes('<item>'));
 const home = read('about/index.html');
-check('main page fetches the public events file', home.includes("'/polymythseminars/events.json"));
+check('main page fetches the versioned compact featured-events file', home.includes(`/polymythseminars/featured.json?v=${assetVersion}`));
 check('main page wraps titles in source_url links', home.includes('source_url'));
 check('main page uses the fallback loader', home.includes('fetchEventsWithFallback'));
 const ntl = read('netlify.toml');

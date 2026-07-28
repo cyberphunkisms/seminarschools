@@ -1,0 +1,89 @@
+{
+  "release_id": "2026-07-24-site-audit36-discovery-resilience-final",
+  "generated_at": "2026-07-24T13:15:00-04:00",
+  "algorithm": "sha256",
+  "purpose": "Freeze selected Audit 36 reports and gates as immutable historical evidence before Audit 37.",
+  "file_count": 16,
+  "files": [
+    {
+      "path": "WEBSITE_AUDIT36_DISCOVERY_RESILIENCE_REPORT_2026-07-24.md",
+      "bytes": 13431,
+      "sha256": "97a03201d93a4f84aff87a73551239d4492f3c277f7953c45c186c898a2c4b66"
+    },
+    {
+      "path": "data/audit35-frozen-sha256.json",
+      "bytes": 8793,
+      "sha256": "d269d0620b876e5babbe2678c61ed55429eaac236e57703738543939aab6695d"
+    },
+    {
+      "path": "scripts/apply-audit36-release-stamp.js",
+      "bytes": 6071,
+      "sha256": "ad44bd739d5f5ff8094ffa5185097cb9278afa62b925ad9ec9ccc1b4ed946940"
+    },
+    {
+      "path": "scripts/audit-audit36-route-resilience.py",
+      "bytes": 26021,
+      "sha256": "a9145d7a01102f15b28bd93798d581d694f4f17a995e8a8ea9dfac1051ea5ffd"
+    },
+    {
+      "path": "scripts/audit-polymythcal-entry-pages-audit36.py",
+      "bytes": 11578,
+      "sha256": "0455836a84f935c19411fc89e9a7f04790da26d9bb1800c5fe4841c0f643874f"
+    },
+    {
+      "path": "scripts/audit-polymythcal-interactivity-design-audit36.py",
+      "bytes": 25372,
+      "sha256": "ce1b02928b4489bb53826bbd0af25d990d9973b66e70aaf522dd01ae2b5ef164"
+    },
+    {
+      "path": "scripts/audit-polymythcal-wcag22-audit36.py",
+      "bytes": 22393,
+      "sha256": "0f64d7bc2bc1aa5785861273ae50f586502b99548e84d523ab4fab8f88e5b297"
+    },
+    {
+      "path": "scripts/audit-project-failure-stress-audit36.py",
+      "bytes": 15925,
+      "sha256": "48d7d30b1e0110a90882e0c8b641fe7da6f0e12e3946e1036cdd89ef994479a9"
+    },
+    {
+      "path": "scripts/verify-audit36-aa-dialog.mjs",
+      "bytes": 2773,
+      "sha256": "62ab243c78233675e973b157d7f958e55d4d5f92deded4224d4e75e80e3f1b0a"
+    },
+    {
+      "path": "scripts/verify-audit36-aitr-resilience.mjs",
+      "bytes": 2589,
+      "sha256": "591eacf0314c71fbf2c77e82c87bb77e8dacce0374f6eff5108dbae527133747"
+    },
+    {
+      "path": "scripts/verify-audit36-animation-lifecycle.mjs",
+      "bytes": 5106,
+      "sha256": "e9c1aae5ff151b4ef4fe366e064553dc5a23cb20c9658b07b284dff6a5d1a21f"
+    },
+    {
+      "path": "scripts/verify-audit36-artifact-atomicity.js",
+      "bytes": 4293,
+      "sha256": "3ebe82683c4cd0f7eeb5ed1b42af7abeed38d630c68662207bc9bdf2484ae678"
+    },
+    {
+      "path": "scripts/verify-audit36-browser-evidence.js",
+      "bytes": 3659,
+      "sha256": "ad73799dd7a696edbb64dcc04488d8b0130c58be31adc1229516466cc8bf3090"
+    },
+    {
+      "path": "scripts/verify-audit36-evolution.js",
+      "bytes": 22359,
+      "sha256": "7cc9d89e585e9b33b452fb0af790365956e19b4c58fc0725d81f58e28831f0f9"
+    },
+    {
+      "path": "scripts/verify-audit36-graph-resilience.mjs",
+      "bytes": 4481,
+      "sha256": "70caaf48608d1853496acb6d34bcaeae3b838fd62f31e69ebfbacbd3787695fd"
+    },
+    {
+      "path": "scripts/verify-audit36-visual-p0.mjs",
+      "bytes": 7142,
+      "sha256": "608078fd51ef3bdffcdf4d26c7d4b60c08badc39d1f857551bbecd99c2d2e680"
+    }
+  ]
+}

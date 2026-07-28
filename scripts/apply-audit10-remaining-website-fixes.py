@@ -189,11 +189,11 @@ def patch_map_recovery() -> None:
 def patch_search_generator_dependencies() -> None:
     rel = 'scripts/build-search-pages.js'
     text = read(rel)
-    zoom = '<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">'
+    zoom = '<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">'
     anchor = '<link rel="stylesheet" href="/css/alive.css?v=cl91">'
     if zoom not in text:
         text = text.replace(anchor, anchor + '\n' + zoom)
-    text = text.replace('\n<script defer src="/js/site-keyboard-enhancements.js"></script>', '')
+    text = text.replace('\n<script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>', '')
     write(rel, text)
 
 
@@ -224,7 +224,7 @@ def patch_event_permalink_retention() -> None:
   if (robots.test(html)) html = html.replace(robots, '<meta name=\"robots\" content=\"noindex,follow\">');
   else html = html.replace('</head>', '<meta name=\"robots\" content=\"noindex,follow\">\n</head>');
   html = html.replace(/<script\b[^>]*type=[\"']application\/ld\+json[\"'][^>]*>\s*\{[^<]*\"@type\"\s*:\s*\"Event\"[^<]*\}\s*<\/script>\s*/gi, '');
-  html = html.replace('\n<script defer src=\"/js/site-keyboard-enhancements.js\"></script>', '');
+  html = html.replace('\n<script defer src=\"/js/site-keyboard-enhancements.js?v=20260725-audit45\"></script>', '');
   if (!html.includes('data-event-archive-note')) {
     const note = '<div class=\"callout\" data-event-archive-note=\"true\"><strong>Past event.</strong> This permalink is retained as an archive record. Check the original source for a current edition or related event.</div>';
     html = html.replace(/(<h1\b[^>]*>[\s\S]*?<\/h1>)/i, `$1${note}`);

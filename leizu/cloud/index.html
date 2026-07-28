@@ -37,6 +37,7 @@
 -->
 <html data-theme-policy="fixed" lang="en">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
 <meta charset="utf-8"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
@@ -44,7 +45,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Leizu Academy / cloud, curriculum growth</title>
 <meta content="Explore the Leizu Academy curriculum as five connected subjects, courses, routes, and shared themes." name="description"/>
-<link href="https://seminarschools.com/leizu/cloud/" rel="canonical"/>
+<link rel="canonical" href="https://seminarschools.com/leizu/cloud/">
 <meta content="Leizu Academy / cloud, curriculum growth" property="og:title"/>
 <meta content="Leizu Academy curriculum in cloud-growth mode. Five subjects of the productive cycle expand into courses, paths, and cross-subject thematic threads." property="og:description"/>
 <meta content="website" property="og:type"/>
@@ -53,6 +54,12 @@
 <meta content="summary" name="twitter:card"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link rel="alternate" hreflang="en" href="https://seminarschools.com/leizu/cloud/">
+<link rel="alternate" hreflang="fr" href="https://seminarschools.com/leizu/fr/cloud/">
+<link rel="alternate" hreflang="zh-Hant" href="https://seminarschools.com/leizu/zh-hant/cloud/">
+<link rel="alternate" hreflang="zh-Hans" href="https://seminarschools.com/leizu/zh-hans/cloud/">
+<link rel="alternate" hreflang="fa" href="https://seminarschools.com/leizu/fa/cloud/">
+<link rel="alternate" hreflang="x-default" href="https://seminarschools.com/leizu/cloud/">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=JetBrains+Mono:wght@300;400;500&amp;family=Noto+Serif+TC:wght@400;500;600&amp;family=Noto+Sans+TC:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -95,6 +102,7 @@ html,body{
 #canvas{
   position:fixed;inset:0;
   cursor:grab;
+  touch-action:none;
   background:radial-gradient(ellipse at center, #14110d 0%, #0a0807 70%, #050403 100%);
 }
 #canvas.dragging{cursor:grabbing}
@@ -220,6 +228,13 @@ html,body{
 /* ==================== NODES ==================== */
 .node{
   position:absolute;
+  appearance:none;
+  -webkit-appearance:none;
+  border:0;
+  margin:0;
+  background:transparent;
+  color:inherit;
+  font:inherit;
   transform:translate(-50%,-50%);
   cursor:pointer;
   transition:opacity 0.4s, color 0.3s, text-shadow 0.3s, transform 0.15s ease-out;
@@ -235,11 +250,16 @@ html,body{
   animation: nodeGrow 0.75s cubic-bezier(0.34, 1.46, 0.64, 1) backwards;
 }
 .node.dragging{cursor:grabbing;animation:none}
-.node:hover{
+.node:hover,
+.node:focus-visible{
   color:var(--accent);
   text-shadow:0 0 12px rgba(232,160,74,0.5);
   z-index:10;
   transform:translate(-50%,-50%) scale(1.08);  /* slight pop on hover */
+}
+.node:focus-visible{
+  outline:2px solid currentColor;
+  outline-offset:3px;
 }
 .node.visited{opacity:0.45}
 .node.active{
@@ -392,7 +412,7 @@ html,body{
   cursor:pointer;
   font-family:inherit;
   font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;
-  transition:all 0.15s;
+  transition:color 0.15s,background-color 0.15s,border-color 0.15s,opacity 0.15s,transform 0.15s;
 }
 #controls button:hover{
   border-color:var(--accent);
@@ -564,7 +584,9 @@ html,body{
   cursor:pointer;font-size:16px;line-height:1;
   padding:4px;font-family:inherit;
 }
-#detail .dt-close:hover{color:var(--accent)}
+#detail .dt-close:hover,
+#detail .dt-close:focus-visible{color:var(--accent)}
+#detail .dt-close:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 
 /* ==================== EMPTY STATE GUIDE ==================== */
 #guide{
@@ -607,10 +629,12 @@ html,body{
 <link href="/css/mobile-overlay.css?v=cl91" rel="stylesheet"/>
 <link href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)" rel="stylesheet"/>
 <link href="/css/alive.css?v=cl91" rel="stylesheet"/>
-<link href="/css/theme.css?v=cl91" rel="stylesheet"/>
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link href="/css/theme.css?v=20260725-audit45" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.075" data-route-type="tool">
+<body data-geometry="indra-web" data-indra-intensity="0.070" data-route-type="tool">
 <a class="skip-link" href="#header">Skip to main content</a>
 <div class="keyboard-hint" tabindex="-1"><span class="route-note-kicker">Keyboard</span><kbd>/</kbd> search, <kbd>?</kbd> help, <kbd>←</kbd>/<kbd>→</kbd> move wide panels.</div>
 <h1 class="sr-only">Cloud</h1>
@@ -656,7 +680,7 @@ html,body{
 <div class="leg-item">brighter glow = more subjects converging</div>
 </div>
 </div>
-<div id="detail"></div>
+<div aria-hidden="true" aria-label="Curriculum node details" id="detail" role="region"></div>
 <!-- ==================== EMPTY STATE GUIDE ==================== -->
 <div id="guide">
 <div id="guide-text">
@@ -894,10 +918,50 @@ const NEUTRAL_COLOR = '#7a6e58';
 let panX = 0, panY = 0, zoom = 1;
 let isDragging = false, dragStartX = 0, dragStartY = 0, dragStartPanX = 0, dragStartPanY = 0;
 let didDrag = false;
+let canvasRectCache = null;
+let inputFrame = 0;
+let pendingMousePoint = null;
+let transformPending = false;
+
+function invalidateCanvasRect(){
+  canvasRectCache = null;
+}
+
+function getCanvasRect(){
+  if (!canvasRectCache) canvasRectCache = canvas.getBoundingClientRect();
+  return canvasRectCache;
+}
+
+function scheduleInputFrame(){
+  if (inputFrame) return;
+  inputFrame = requestAnimationFrame(() => {
+    inputFrame = 0;
+    if (pendingMousePoint){
+      const point = pendingMousePoint;
+      pendingMousePoint = null;
+      const rect = getCanvasRect();
+      const sx = point.x - rect.left;
+      const sy = point.y - rect.top;
+      mouseWorldX = (sx - rect.width / 2 - panX) / zoom;
+      mouseWorldY = (sy - rect.height / 2 - panY) / zoom;
+      mouseActive = true;
+    }
+    if (transformPending){
+      transformPending = false;
+      applyTransform();
+    }
+  });
+}
+
+function scheduleTransform(){
+  transformPending = true;
+  scheduleInputFrame();
+}
 
 function applyTransform(){
-  const cx = canvas.clientWidth / 2;
-  const cy = canvas.clientHeight / 2;
+  const rect = getCanvasRect();
+  const cx = rect.width / 2;
+  const cy = rect.height / 2;
   inner.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
   // SVG is positioned at top-left (0,0) while inner is at center (50%,50%).
   // Add canvas-center offset to SVG transform so world (0,0) renders at the
@@ -1425,7 +1489,8 @@ function spawnFromNode(node){
 
 // ==================== RENDERING ====================
 function renderNode(node){
-  const el = document.createElement('div');
+  const el = document.createElement('button');
+  el.type = 'button';
   el.className = `node node--${node.type} spawning`;
   el.dataset.id = node.id;
   el.style.left = node.x + 'px';
@@ -1764,8 +1829,53 @@ function lerp(a, b, t){ return a + (b - a) * t; }
 let mouseWorldX = 0, mouseWorldY = 0;
 let mouseActive = false;
 let simRunning = false;
+let simPending = false;
+let simFrameId = 0;
+let simStartedAt = 0;
+let simSettledFrames = 0;
 let simEnergy = 0;
 let simFrameCount = 0;
+const SIM_MAX_ACTIVE_MS = 5000;
+const reducedMotionQuery = window.matchMedia
+  ? window.matchMedia('(prefers-reduced-motion: reduce)')
+  : { matches: false };
+
+function leizuCloudMotionAllowed(){
+  return !reducedMotionQuery.matches &&
+    document.documentElement.dataset.motion !== 'calm';
+}
+
+function leizuSimulationAllowed(){
+  return !document.hidden && leizuCloudMotionAllowed();
+}
+
+function stopSimulation(clearPending){
+  simRunning = false;
+  if (simFrameId){
+    cancelAnimationFrame(simFrameId);
+    simFrameId = 0;
+  }
+  if (clearPending) simPending = false;
+}
+
+function scheduleSimulationFrame(){
+  if (!simRunning || simFrameId || !leizuSimulationAllowed()) return;
+  simFrameId = requestAnimationFrame(simLoop);
+}
+
+function syncSimulationLifecycle(){
+  if (!leizuSimulationAllowed()){
+    stopSimulation(false);
+    return;
+  }
+  if (!simPending) return;
+  if (performance.now() - simStartedAt >= SIM_MAX_ACTIVE_MS){
+    stopSimulation(true);
+    return;
+  }
+  simRunning = true;
+  scheduleSimulationFrame();
+}
 
 function simTick(){
   const arr = [...nodes.values()];
@@ -1922,15 +2032,23 @@ function simTick(){
   // Per-frame camera tracking amplified sim noise into visible POV drift.
 }
 
-function simLoop(){
-  if (!simRunning) return;
+function simLoop(timestamp){
+  simFrameId = 0;
+  if (!simRunning || !leizuSimulationAllowed()){
+    stopSimulation(false);
+    return;
+  }
   simTick();
   simFrameCount++;
-  // Sim never auto-stops anymore. The orbit force + brownian jitter keep the
-  // cloud gently drifting forever, and the camera-lerp continuously tracks the
-  // visual centroid. Stopping would create the abrupt jerk you noticed.
-  // (Reset / nodes-cleared sets simRunning=false explicitly.)
-  requestAnimationFrame(simLoop);
+  if (simEnergy < 0.018) simSettledFrames++; else simSettledFrames = 0;
+  if (simSettledFrames >= 18 ||
+      simFrameCount >= 240 ||
+      timestamp - simStartedAt >= SIM_MAX_ACTIVE_MS){
+    simSettledFrames = 0;
+    stopSimulation(true);
+    return;
+  }
+  scheduleSimulationFrame();
 }
 
 // ==================== AUTOFIT ====================
@@ -2059,13 +2177,22 @@ function autoFit(focusId, customGroup){
   if (userOverrodeZoom || isDragging) return;
   const t = computeAutoFitTarget(focusId, customGroup);
   if (!t) return;
-  inner.style.transition = `transform ${AUTOFIT_DUR}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
-  edgesSvg.style.transition = `transform ${AUTOFIT_DUR}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
+  const animateCamera = leizuCloudMotionAllowed();
+  inner.style.transition = animateCamera
+    ? `transform ${AUTOFIT_DUR}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`
+    : 'none';
+  edgesSvg.style.transition = animateCamera
+    ? `transform ${AUTOFIT_DUR}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`
+    : 'none';
   panX = t.panX;
   panY = t.panY;
   zoom = t.zoom;
   applyTransform();
   if (autoFitTimer) clearTimeout(autoFitTimer);
+  if (!animateCamera){
+    autoFitTimer = null;
+    return;
+  }
   autoFitTimer = setTimeout(() => {
     inner.style.transition = '';
     edgesSvg.style.transition = '';
@@ -2074,6 +2201,10 @@ function autoFit(focusId, customGroup){
 }
 
 function reheatSim(){
+  if (!leizuSimulationAllowed()){
+    stopSimulation(true);
+    return;
+  }
   // Tiny jitter (0.005) just to break perfect angular symmetry. With spawn
   // radius = springTarget, there's no radial spring force at t=0, so we don't
   // need significant velocity injection, repulsion will spread siblings apart.
@@ -2082,10 +2213,11 @@ function reheatSim(){
     node.vy += (Math.random() - 0.5) * 0.005;
   });
   simFrameCount = 0;
-  if (!simRunning){
-    simRunning = true;
-    requestAnimationFrame(simLoop);
-  }
+  simSettledFrames = 0;
+  simStartedAt = performance.now();
+  simPending = true;
+  simRunning = true;
+  scheduleSimulationFrame();
 }
 
 function setActive(nodeId){
@@ -2107,8 +2239,25 @@ function setActive(nodeId){
 }
 
 // ==================== DETAIL PANEL ====================
+let detailReturnFocus = null;
+
+function focusWithoutScroll(element){
+  if (!element || !element.isConnected || typeof element.focus !== 'function') return;
+  try {
+    element.focus({ preventScroll: true });
+  } catch (error) {
+    element.focus();
+  }
+}
+
+function closeDetail(restoreFocus){
+  detail.classList.remove('open');
+  detail.setAttribute('aria-hidden', 'true');
+  if (detail.contains(document.activeElement)) document.activeElement.blur();
+  if (restoreFocus !== false) focusWithoutScroll(detailReturnFocus);
+}
+
 function showDetailFromNode(node){
-  const detail = document.getElementById('detail');
   if (!detail) return;
   let kicker = '', title = node.label || '', body = '', extra = '';
 
@@ -2174,8 +2323,12 @@ function showDetailFromNode(node){
     <div class="dt-note">${escapeHtml(body)}</div>
     ${extra ? `<div class="dt-note" style="opacity:0.78;margin-top:8px;font-size:13px;white-space:pre-wrap">${escapeHtml(extra)}</div>` : ''}
   `;
+  if (node.el && node.el.isConnected) detailReturnFocus = node.el;
   detail.classList.add('open');
-  detail.querySelector('.dt-close').addEventListener('click', () => detail.classList.remove('open'));
+  detail.setAttribute('aria-hidden', 'false');
+  const closeButton = detail.querySelector('.dt-close');
+  closeButton.addEventListener('click', () => closeDetail(true));
+  focusWithoutScroll(closeButton);
 }
 
 function escapeHtml(s){
@@ -2197,19 +2350,28 @@ function panToward(targetX, targetY, smooth){
   const cy = window.innerHeight / 2;
   const desiredPanX = cx - targetX * zoom;
   const desiredPanY = cy - targetY * zoom;
-  if (smooth){
+  const nextPanX = smooth ? panX * 0.4 + desiredPanX * 0.6 : desiredPanX;
+  const nextPanY = smooth ? panY * 0.4 + desiredPanY * 0.6 : desiredPanY;
+  if (autoFitTimer){
+    clearTimeout(autoFitTimer);
+    autoFitTimer = null;
+  }
+  if (smooth && leizuCloudMotionAllowed()){
     inner.style.transition = 'transform 0.6s ease';
     edgesSvg.style.transition = 'transform 0.6s ease';
-    panX = panX * 0.4 + desiredPanX * 0.6;
-    panY = panY * 0.4 + desiredPanY * 0.6;
+    panX = nextPanX;
+    panY = nextPanY;
     applyTransform();
-    setTimeout(() => {
+    autoFitTimer = setTimeout(() => {
       inner.style.transition = '';
       edgesSvg.style.transition = '';
+      autoFitTimer = null;
     }, 650);
   } else {
-    panX = desiredPanX;
-    panY = desiredPanY;
+    inner.style.transition = 'none';
+    edgesSvg.style.transition = 'none';
+    panX = nextPanX;
+    panY = nextPanY;
     applyTransform();
   }
 }
@@ -2238,15 +2400,11 @@ canvas.addEventListener('mousedown', e => {
 // Track mouse in WORLD coordinates for magnetism, nodes near the cursor
 // get extra damping each tick so they settle and become easy to click.
 canvas.addEventListener('mousemove', e => {
-  const rect = canvas.getBoundingClientRect();
-  const sx = e.clientX - rect.left;
-  const sy = e.clientY - rect.top;
-  // Reverse the inner transform: world(x,y) renders at (W/2 + panX + x*zoom, ...)
-  mouseWorldX = (sx - canvas.clientWidth / 2 - panX) / zoom;
-  mouseWorldY = (sy - canvas.clientHeight / 2 - panY) / zoom;
-  mouseActive = true;
+  pendingMousePoint = { x: e.clientX, y: e.clientY };
+  scheduleInputFrame();
 });
 canvas.addEventListener('mouseleave', () => {
+  pendingMousePoint = null;
   mouseActive = false;
 });
 
@@ -2260,7 +2418,7 @@ window.addEventListener('mousemove', e => {
   }
   panX = dragStartPanX + dx;
   panY = dragStartPanY + dy;
-  applyTransform();
+  scheduleTransform();
 });
 window.addEventListener('mouseup', () => {
   isDragging = false;
@@ -2272,7 +2430,7 @@ window.addEventListener('mouseup', () => {
 canvas.addEventListener('wheel', e => {
   e.preventDefault();
   userOverrodeZoom = true; // user is zooming manually, stop auto-fit
-  const rect = canvas.getBoundingClientRect();
+  const rect = getCanvasRect();
   const mx = e.clientX - rect.left;
   const my = e.clientY - rect.top;
   const factor = e.deltaY > 0 ? 0.92 : 1.08;
@@ -2283,7 +2441,7 @@ canvas.addEventListener('wheel', e => {
   zoom = newZoom;
   panX = mx - wx * zoom;
   panY = my - wy * zoom;
-  applyTransform();
+  scheduleTransform();
 }, { passive: false });
 
 // Touch support, basic
@@ -2299,13 +2457,18 @@ canvas.addEventListener('touchmove', e => {
     const dy = e.touches[0].clientY - touchStart.y;
     panX = touchStart.panX + dx;
     panY = touchStart.panY + dy;
-    applyTransform();
+    scheduleTransform();
   }
 }, { passive: true });
 canvas.addEventListener('touchend', () => { touchStart = null; }, { passive: true });
 
 // ==================== INIT ====================
 function reset(){
+  stopSimulation(true);
+  if (autoFitTimer) clearTimeout(autoFitTimer);
+  autoFitTimer = null;
+  inner.style.transition = 'none';
+  edgesSvg.style.transition = 'none';
   nodes.clear();
   edges.length = 0;
   nextNodeId = 0;
@@ -2313,7 +2476,7 @@ function reset(){
   while (inner.firstChild) inner.removeChild(inner.firstChild);
   while (edgesLayer.firstChild) edgesLayer.removeChild(edgesLayer.firstChild);
   while (bubblesLayer.firstChild) bubblesLayer.removeChild(bubblesLayer.firstChild);
-  detail.classList.remove('open');
+  closeDetail(false);
   guide.classList.remove('hidden');
 
   // Place the seed at origin
@@ -2331,7 +2494,6 @@ function reset(){
   panX = 0; panY = 0; zoom = 1;
   applyTransform();
   updateStatus();
-  simRunning = false;
   simFrameCount = 0;
   simEnergy = 0;
   userOverrodeZoom = false;
@@ -2366,7 +2528,7 @@ function showCopyToast(text){
 // Keyboard
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape'){
-    detail.classList.remove('open');
+    if (detail.classList.contains('open')) closeDetail(true);
   } else if (e.key === 'r' && (e.metaKey || e.ctrlKey)){
     e.preventDefault();
     reset();
@@ -2374,9 +2536,49 @@ document.addEventListener('keydown', e => {
 });
 
 // Re-apply transform on window resize so SVG and inner stay aligned
+let resizeFrame = 0;
 window.addEventListener('resize', () => {
+  invalidateCanvasRect();
+  if (resizeFrame) return;
+  resizeFrame = requestAnimationFrame(() => {
+    resizeFrame = 0;
+    applyTransform();
+  });
+}, { passive: true });
+
+function listenForMediaChange(query, handler){
+  if (!query) return;
+  if (query.addEventListener) query.addEventListener('change', handler);
+  else if (query.addListener) query.addListener(handler);
+}
+
+document.addEventListener('visibilitychange', syncSimulationLifecycle);
+window.addEventListener('pageshow', () => {
+  invalidateCanvasRect();
   applyTransform();
+  syncSimulationLifecycle();
 });
+window.addEventListener('pagehide', () => {
+  stopSimulation(false);
+  if (inputFrame) cancelAnimationFrame(inputFrame);
+  inputFrame = 0;
+  pendingMousePoint = null;
+  transformPending = false;
+  invalidateCanvasRect();
+  if (resizeFrame) cancelAnimationFrame(resizeFrame);
+  resizeFrame = 0;
+  if (autoFitTimer) clearTimeout(autoFitTimer);
+  autoFitTimer = null;
+  inner.style.transition = 'none';
+  edgesSvg.style.transition = 'none';
+});
+listenForMediaChange(reducedMotionQuery, syncSimulationLifecycle);
+if ('MutationObserver' in window){
+  new MutationObserver(syncSimulationLifecycle).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-motion']
+  });
+}
 
 // Legend toggle (collapse). The previous S/M/L/XL size cycler is gone;
 // the legend is now a single readable size. Toggle is the only control.
@@ -2407,12 +2609,12 @@ document.addEventListener('keydown', e => {
 // Boot
 reset();
 </script>
-<script defer="" src="/leizu/language-state.js?v=cl96"></script>
+<script defer="" src="/leizu/language-state.js?v=20260725-audit45"></script>
 <script defer="" src="/js/theme.js?v=cl91"></script>
 <script defer="" src="/js/mandala.js?v=cl91"></script>
 <script defer="" src="/js/indra.js?v=cl91"></script>
-<script defer="" src="/js/footer.js?v=20260719-audit11-decisions"></script>
+<script defer="" src="/js/footer.js?v=20260725-audit45-footer"></script>
 <script defer="" src="/js/autolink.js?v=cl91"></script>
-<script defer="" src="/js/site-keyboard-enhancements.js"></script>
+<script defer="" src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

@@ -10,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 RELEASE = '2026-07-19-polymythcal-about-cl-audit11'
 DATE = '2026-07-19'
-FOOTER_KEY = '20260719-audit11-decisions'
+FOOTER_KEY = '20260725-audit45-footer'
 
 
 def read(rel: str) -> str:
@@ -328,7 +328,7 @@ for(const t of ['CL-WEB-201','CL-WEB-202','CL-WEB-203','CL-WEB-301'])has('WEBSIT
 has('saul/index.html','audit11-mobile-cv-return-link');
 for(const t of ["'about'","'main'"])has('scripts/build-public-deploy.js',t);
 for(const t of ['apply-final8-website-polish.py','apply-final9-mephistodata-website-hardening.py','apply-audit10-remaining-website-fixes.py','apply-audit11-website-decisions.py'])has('scripts/build-saul-cv-professional.py',t);
-has('scripts/verify-audit10-remaining-website.js','/js/footer.js?v=20260719-audit11-decisions');
+has('scripts/verify-audit10-remaining-website.js','/js/footer.js?v=20260725-audit45-footer');
 const active=[];
 function walk(d){for(const e of fs.readdirSync(d,{withFileTypes:true})){if(['public','docs','.git','node_modules'].includes(e.name))continue;const p=path.join(d,e.name);if(e.isDirectory())walk(p);else if(/\.(html|xml|txt)$/.test(e.name))active.push(p)}}
 walk(root);

@@ -1,0 +1,104 @@
+{
+  "audit": 52,
+  "date": "2026-07-28",
+  "release_id": "2026-07-28-site-audit52-polymyth-commons-greenpeace-merge-final",
+  "status": "passed",
+  "input_package": {
+    "name": "ss-site-audit50-greenpeace-cv-editable-complete-2026-07-28(1).zip",
+    "sha256": "a7256d204ee677eda973d416eec1eb1791cf705780fabfbc0154c0326f394079"
+  },
+  "counts": {
+    "unique_named_records": 346,
+    "book_mentions": 393,
+    "core_candidates": 128,
+    "commons_projects_scope": 154,
+    "supporting_ecosystem": 167,
+    "concepts_and_comparisons": 25,
+    "unique_printed_links": 437,
+    "printed_link_occurrences": 484,
+    "distinct_hosts": 252,
+    "commons_forms": 43,
+    "book_project_types": 79,
+    "relationship_terms": 50,
+    "current_status_seeds": 20,
+    "stable_entity_pages": 346,
+    "pdf_pages_inspected": 383,
+    "embedded_pdf_hyperlinks": 0,
+    "teacher_resources": 644,
+    "teacher_collections": 25,
+    "polymythcal_canonical_events": 833
+  },
+  "collections": {
+    "library": 42,
+    "open_access": 40,
+    "preservation": 53,
+    "community": 41,
+    "infrastructure": 47,
+    "core_book_candidates": 128
+  },
+  "payloads": {
+    "directory_index_raw_bytes": 216201,
+    "directory_index_gzip_bytes": 27750,
+    "directory_index_gzip_ceiling": 40000,
+    "backbone_index_raw_bytes": 656141,
+    "backbone_index_gzip_bytes": 99193,
+    "backbone_index_gzip_ceiling": 120000
+  },
+  "preservation": {
+    "original_files_missing": 0,
+    "cv_greenpeace_files_checked": 160,
+    "cv_greenpeace_files_modified": 0,
+    "evidence": "scripts/reports/audit52-greenpeace-base-preservation.json"
+  },
+  "gates": {
+    "commons_data_schema_and_counts": "passed",
+    "stable_ids_and_entity_pages": "passed",
+    "compact_data_indexes": "passed",
+    "field_specific_evidence_signals": "passed",
+    "collections_and_quick_starts": "passed",
+    "contribution_and_preservation_routes": "passed",
+    "home_visible_card": "passed",
+    "home_desktop_project_map": "passed",
+    "home_mobile_project_rail": "passed",
+    "about_integration": "passed",
+    "teacher_resources_integration": "passed",
+    "polymythcal_english_integration": "passed",
+    "polymythcal_french_integration": "passed",
+    "human_and_xml_sitemaps": "passed",
+    "llms_txt": "passed",
+    "source_public_deploy_parity": "passed",
+    "translation_source_hash_governance": "passed",
+    "keyboard_navigation": "passed",
+    "zoom_resilience": "passed",
+    "visible_input_labels": "passed",
+    "responsive_contracts": "passed",
+    "seo_and_social_metadata": "passed",
+    "csp_and_runtime_delivery": "passed",
+    "data_hygiene": "passed",
+    "page_and_asset_weight_budgets": "passed",
+    "greenpeace_cv_release": "passed",
+    "greenpeace_cv_byte_preservation": "passed",
+    "archive_crc_sha256_and_sidecar": "passed"
+  },
+  "quality_model": {
+    "universal_project_score": false,
+    "field_specific_evidence_states": true,
+    "book_current_and_curation_layers_separate": true,
+    "transparent_collection_rules": true
+  },
+  "browser_preview": {
+    "server_started": true,
+    "cloud_browser_local_url_permission": "declined",
+    "interaction_evidence": "external_follow_up"
+  },
+  "external_follow_up": [
+    "Native Safari",
+    "Branded Firefox",
+    "VoiceOver",
+    "NVDA",
+    "Physical-device observation",
+    "Real-user validation",
+    "Live review of all 437 historical external links",
+    "Dedicated penetration testing"
+  ]
+}

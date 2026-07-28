@@ -36,7 +36,7 @@
 /leizuacademy /leizu  301
 /teach        /leizu/teach  301
 /journal      /marginalia  301
-/reviews      /reviews/  301
+/reviews      /reviews/  301!
 /scholarship  /leizu/scholarship  301
 /donate       /leizu/donate  301
 
@@ -99,6 +99,34 @@
 #   /saul/teaching/kitchen           (same outcome as the previous line)
 #   /saul/kitchen/teaching/community/performance
 #   /cv/kitchen, /cv/teaching/kitchen, etc.
+# Retired 2026 focus-CV pages now resolve to the one verified application CV.
+# Saul modular application-CV routes
+/saul/cv/general/  /saul/#experienceLedger  301
+/saul/cv/hospitality/  /saul/?focus=hospitality#experienceLedger  301
+/saul/hospitality/  /saul/?focus=hospitality#experienceLedger  301
+/saul/kitchen/  /saul/?focus=hospitality#experienceLedger  301
+/saul/culinary/  /saul/?focus=hospitality#experienceLedger  301
+/saul/food/  /saul/?focus=hospitality#experienceLedger  301
+/saul/restaurant/  /saul/?focus=hospitality#experienceLedger  301
+/saul/cv/research/  /saul/?focus=research#experienceLedger  301
+/saul/cv/teaching/  /saul/?focus=teaching#experienceLedger  301
+/saul/cv/programs/  /saul/?focus=programs#experienceLedger  301
+/saul/cv/customer-education/  /saul/?focus=customer-education#experienceLedger  301
+/saul/cv/arts-culture/  /saul/?focus=arts-culture#experienceLedger  301
+/saul/cv/performance/  /saul/?focus=performance#experienceLedger  301
+/saul/performance/  /saul/?focus=performance#experienceLedger  301
+/saul/theatre/  /saul/?focus=performance#experienceLedger  301
+/saul/theater/  /saul/?focus=performance#experienceLedger  301
+/saul/screenarts/  /saul/?focus=performance#experienceLedger  301
+/saul/cv/community/  /saul/?focus=community#experienceLedger  301
+/saul/cv/volunteer-events/  /saul/?focus=volunteer-events#experienceLedger  301
+/saul/cv/education/  /saul/?focus=education#experienceLedger  301
+/saul/teaching/education/  /saul/?focus=teaching,education#experienceLedger  301
+/saul/kitchen/community/  /saul/?focus=hospitality,community#experienceLedger  301
+/saul/cv/portfolio/  /saul/?archive=portfolio#careerArchive  301
+/saul/portfolio/  /saul/?archive=portfolio#careerArchive  301
+/saul/projects/  /saul/?archive=portfolio#careerArchive  301
+/saul/seminarschools/  /saul/?archive=portfolio#careerArchive  301
 /saul/*       /saul/index.html  200
 /cv           /saul/index.html  200
 /cv/*         /saul/index.html  200
@@ -327,32 +355,7 @@
 /SURFACE_TRANSLATION_HARDENING_REPORT_2026-07-09.md /404.html 404!
 
 # Operator/report artifact blocks added by linkability overhaul
-/BB_STAR_FULL_GAME_CRITIQUE_2026-06-30.md /404.html 404!
-/BOOKWORMCARD_TECHNICAL_AUDIT.md /404.html 404!
-/CRAWLABILITY_INDEXATION_AUDIT.md /404.html 404!
 /MEANINGLIB_COLLECTIVE_SYNCHRONICITY_UPDATE_2026-07-09.md /404.html 404!
-/POLYMYTHCALENDAR_BACKBONE_AUDIT.json /404.html 404!
-/POLYMYTHCALENDAR_BACKBONE_UPDATE_AUDIT.md /404.html 404!
-/POLYMYTHCALENDAR_FULL_CRITIQUE_AUDIT.md /404.html 404!
-/POLYMYTHCALENDAR_SCRAPER_FAILURE_FIX_AUDIT.json /404.html 404!
-/POLYMYTHCALENDAR_SCRAPER_FAILURE_FIX_AUDIT.md /404.html 404!
-/POLYMYTHCALENDAR_SCRAPER_FAILURE_HARDENING_AUDIT.md /404.html 404!
-/POLYMYTHCALENDAR_SCRAPER_LAYMAN_SETUP.md /404.html 404!
-/POLYMYTHCALENDAR_SCRAPE_WORKFLOW_AUDIT_2026-06-29.json /404.html 404!
-/POLYMYTHCALENDAR_SCRAPE_WORKFLOW_AUDIT_2026-06-29.md /404.html 404!
-/POLYMYTHCALENDAR_TECHNICAL_AUDIT_2026-06-29.json /404.html 404!
-/POLYMYTHCALENDAR_TECHNICAL_AUDIT_2026-06-29.md /404.html 404!
-/POLYMYTHCALENDAR_YOUTH_WRITING_CONTESTS_UPDATE_AUDIT.json /404.html 404!
-/POLYMYTHCALENDAR_YOUTH_WRITING_CONTESTS_UPDATE_AUDIT.md /404.html 404!
-/POLYMYTH_FIX_REPORT_2026-07-09.md /404.html 404!
-/RELEASE_ID.txt /404.html 404!
-/RELEASE_MANIFEST.json /404.html 404!
-/SETUP.md /404.html 404!
-/SITE_HEALTH_DASHBOARD_2026-06-30.md /404.html 404!
-/TYPOGRAPHY_AND_CONTROLS_AUDIT.md /404.html 404!
-/VERIFY_ALL_OUTPUT.txt /404.html 404!
-/WRITING_SHORTCUT_ROUTES_AUDIT.json /404.html 404!
-/WRITING_SHORTCUT_ROUTES_AUDIT.md /404.html 404!
 /LINKABILITY_OVERHAUL_REPORT_2026-07-09.md /404.html 404!
 /LINKABILITY_SPIRIT_AUDIT_2026-07-09.md /404.html 404!
 

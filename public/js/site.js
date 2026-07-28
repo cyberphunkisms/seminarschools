@@ -6,6 +6,8 @@
 
 (function() {
   'use strict';
+  if (window.__ssSharedSiteMounted) return;
+  window.__ssSharedSiteMounted = true;
 
   // Site build stamp — update on every deploy
   var SITE_BUILD = 'cl91 · 2026-06-25';
@@ -138,7 +140,7 @@
         return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
       } catch (e) { return iso; }
     }
-    fetch('/florilegium/posts.json', { cache: 'no-cache' })
+    fetch('/florilegium/posts.json', { cache: 'default' })
       .then(function(r) { return r.json(); })
       .then(function(data) {
         var posts = (data && data.posts) || [];
@@ -181,10 +183,13 @@
   // Initialize everything when DOM is ready
   // ============================================================
   function init() {
-    initRevealObserver();
-    initTopbarScroll();
-    initRevealWrapping();
-    initDescentMarker();
+    var calm = document.documentElement.dataset.motion === 'calm';
+    if (!calm) {
+      initRevealObserver();
+      initTopbarScroll();
+      initRevealWrapping();
+      initDescentMarker();
+    }
     initPostList();
     initBuildStamp();
   }

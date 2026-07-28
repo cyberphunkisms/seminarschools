@@ -1,276 +1,346 @@
 {
-  "release": "2026-07-18-mephistodata-sentence-discipline-final9",
-  "design_system": "professional-monochrome",
-  "outputs": [
+  "release": "2026-07-28-greenpeace-cv-editable",
+  "status": "active",
+  "source_of_truth": "data/saul-ultimate-school-cv-2026.json",
+  "template": "templates/saul-ultimate-school-cv-template.docx",
+  "application_experience_rows": 37,
+  "application_sections": [
+    16,
+    13,
+    8
+  ],
+  "application_row_leading_points": 12.5,
+  "policy": {
+    "one_edit_rebuilds_every_output": true,
+    "gmail_and_protonmail_differ_only_by_email": true,
+    "role_focused_pdfs_are_distinct_outputs": true,
+    "everything_pdf_contains_application_and_historical_records": true
+  },
+  "application_outputs": [
     {
-      "slug": "general",
+      "edition": "protonmail",
+      "format": "docx",
+      "email": "saulnassau@protonmail.com",
+      "path": "saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-protonmail.docx",
+      "pages": 1,
+      "bytes": 262039,
+      "sha256": "93193993445f060abf0854bfd772274d89577eef9c674c1a40ec776bf17fc61c"
+    },
+    {
+      "edition": "protonmail",
+      "format": "pdf",
+      "email": "saulnassau@protonmail.com",
+      "path": "saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-protonmail.pdf",
+      "pages": 1,
+      "bytes": 143245,
+      "sha256": "2f672aca4535ee8938b66e2419509a828dd7b4d62edcfd88b3204721e29981da"
+    },
+    {
+      "edition": "gmail",
+      "format": "docx",
+      "email": "salarnas@gmail.com",
+      "path": "saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-gmail.docx",
+      "pages": 1,
+      "bytes": 262022,
+      "sha256": "0b75c0a222df837efafd1231128e6c67f0c9c13d8f7747adde4ac95cc161978b"
+    },
+    {
+      "edition": "gmail",
+      "format": "pdf",
+      "email": "salarnas@gmail.com",
+      "path": "saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-gmail.pdf",
+      "pages": 1,
+      "bytes": 143265,
+      "sha256": "1fac93c853970ab86cda5c56fca6bf0a92c19bbb8b136de2a615882771592e16"
+    }
+  ],
+  "modular_outputs": [
+    {
+      "focus": "general",
       "type": "designed",
       "path": "saul/downloads/saul-karim-nassau-general-cv.pdf",
       "pages": 1,
-      "extractable_characters": 2934,
-      "sha256": "05631abfcfdf605270f59a3251b60bd9f2ddb9e189186ac2f6083dd99681bfb3",
-      "scale": 1.12,
-      "rainbow": false,
-      "geometry": false
+      "bytes": 32528,
+      "sha256": "a373859abb1cecfad85ba4d920cba56a94282f6568fc73d187e2c0a62cdfb0a1"
     },
     {
-      "slug": "general",
+      "focus": "general",
       "type": "ats",
       "path": "saul/downloads/saul-karim-nassau-general-cv-ats.pdf",
       "pages": 1,
-      "extractable_characters": 2874,
-      "sha256": "47fa2d601261b0970ab1873bfe7ca26666b26c87bbc277a1b33e4a1a36b74abb",
-      "scale": 1.0,
-      "rainbow": false,
-      "geometry": false
+      "bytes": 32519,
+      "sha256": "d003f6ce821e261af1030b0253a36475f0153a6f0d4036f19f9d960e1632f562"
     },
     {
-      "slug": "hospitality",
-      "type": "designed",
-      "path": "saul/downloads/saul-karim-nassau-hospitality-cv.pdf",
-      "pages": 1,
-      "extractable_characters": 3330,
-      "sha256": "f86591dcb726862396b3941453b8a5328bac96a8d06d6ed04de6932596311726",
-      "scale": 1.12,
-      "rainbow": false,
-      "geometry": false
+      "focus": "general",
+      "type": "text",
+      "path": "saul/downloads/saul-karim-nassau-general-cv.txt",
+      "bytes": 5138,
+      "sha256": "4dd54bf6413653082924791ff68bfc9af4f2fe7ad9c370965e84763ab6dec140"
     },
     {
-      "slug": "hospitality",
-      "type": "ats",
-      "path": "saul/downloads/saul-karim-nassau-hospitality-cv-ats.pdf",
-      "pages": 1,
-      "extractable_characters": 3204,
-      "sha256": "6e92338a48b2d4ad3934d57870ac49529e602c84fee9577d2230133baea2e87f",
-      "scale": 1.0,
-      "rainbow": false,
-      "geometry": false
-    },
-    {
-      "slug": "research",
-      "type": "designed",
-      "path": "saul/downloads/saul-karim-nassau-research-cv.pdf",
-      "pages": 1,
-      "extractable_characters": 2470,
-      "sha256": "be77a9aa374edef3d67e86399b6ab990a17bc9f6b65d54828fa436ea74e02ad3",
-      "scale": 1.12,
-      "rainbow": false,
-      "geometry": false
-    },
-    {
-      "slug": "research",
-      "type": "ats",
-      "path": "saul/downloads/saul-karim-nassau-research-cv-ats.pdf",
-      "pages": 1,
-      "extractable_characters": 2407,
-      "sha256": "ace9aa4c6202b8b891b40e208dba8ce6cdd3c1e93c6f9cbc9937a15e8c23b94e",
-      "scale": 1.0,
-      "rainbow": false,
-      "geometry": false
-    },
-    {
-      "slug": "teaching",
+      "focus": "teaching",
       "type": "designed",
       "path": "saul/downloads/saul-karim-nassau-teaching-cv.pdf",
       "pages": 1,
-      "extractable_characters": 2583,
-      "sha256": "1032a18bca3ddaa7b490c651ce2744957ae429d04f7ee8fc40ffed99e8a745e4",
-      "scale": 1.12,
-      "rainbow": false,
-      "geometry": false
+      "bytes": 30726,
+      "sha256": "30d6f3b0e5ab0969ea55b62c6610ec01900ebb31f22ac5668f0e274fa933f5ca"
     },
     {
-      "slug": "teaching",
+      "focus": "teaching",
       "type": "ats",
       "path": "saul/downloads/saul-karim-nassau-teaching-cv-ats.pdf",
       "pages": 1,
-      "extractable_characters": 2555,
-      "sha256": "96e51fba70562614e6e2a832a84db26d02bec37a1d88618c5225ff81b355d612",
-      "scale": 1.0,
-      "rainbow": false,
-      "geometry": false
+      "bytes": 30729,
+      "sha256": "90f547bc432ffbd9460401180903b034a630a7e26572cb7fcfc5e2c5ea68ab97"
     },
     {
-      "slug": "programs",
+      "focus": "teaching",
+      "type": "text",
+      "path": "saul/downloads/saul-karim-nassau-teaching-cv.txt",
+      "bytes": 2797,
+      "sha256": "32b80a7a7e5d937946bec5b4ebf2369d033ee701f34021b22e2995f4a8baa47e"
+    },
+    {
+      "focus": "research",
+      "type": "designed",
+      "path": "saul/downloads/saul-karim-nassau-research-cv.pdf",
+      "pages": 1,
+      "bytes": 30079,
+      "sha256": "9c118aa84b7a6478162f01ba6c72bc32c01cbcad84c45aa230382becff737f49"
+    },
+    {
+      "focus": "research",
+      "type": "ats",
+      "path": "saul/downloads/saul-karim-nassau-research-cv-ats.pdf",
+      "pages": 1,
+      "bytes": 30078,
+      "sha256": "9626839585111cdba4feea0fef01af7bae3b17b0bd112172ef913d3ec70eefda"
+    },
+    {
+      "focus": "research",
+      "type": "text",
+      "path": "saul/downloads/saul-karim-nassau-research-cv.txt",
+      "bytes": 1753,
+      "sha256": "3977d7b0cfd9755134df24bc6112e46be0508818eab2f0f90ad0d74bfda2d17b"
+    },
+    {
+      "focus": "programs",
       "type": "designed",
       "path": "saul/downloads/saul-karim-nassau-programs-cv.pdf",
       "pages": 1,
-      "extractable_characters": 2551,
-      "sha256": "8f2f47da9a7262a32d57bc5642ba8dd97218afe23a16510ec8ee0964162d2a37",
-      "scale": 1.12,
-      "rainbow": false,
-      "geometry": false
+      "bytes": 30546,
+      "sha256": "e6522191a25d332efa0b8f2f091e38fe5456fb2fa6d12340db4b8ace4c841ff5"
     },
     {
-      "slug": "programs",
+      "focus": "programs",
       "type": "ats",
       "path": "saul/downloads/saul-karim-nassau-programs-cv-ats.pdf",
       "pages": 1,
-      "extractable_characters": 2486,
-      "sha256": "3498d4f01529a4d475d7654b6b00009d4084ee61c12434a9f57788ff6c031f12",
-      "scale": 1.0,
-      "rainbow": false,
-      "geometry": false
+      "bytes": 30547,
+      "sha256": "439d67d656e2179a45c3f025c74ae878a92a34997d16ea814121c2a0ec033059"
     },
     {
-      "slug": "customer-education",
+      "focus": "programs",
+      "type": "text",
+      "path": "saul/downloads/saul-karim-nassau-programs-cv.txt",
+      "bytes": 2416,
+      "sha256": "999144b63ed3b67dd120a3e2b0968d22a1f9dd9a97babe29f51d7dde042c3361"
+    },
+    {
+      "focus": "customer-education",
       "type": "designed",
       "path": "saul/downloads/saul-karim-nassau-customer-education-cv.pdf",
       "pages": 1,
-      "extractable_characters": 2621,
-      "sha256": "59a27ee0be5c68dfbdc6900e3668057736260ee51ee8bc1075d5a55eb5419b40",
-      "scale": 1.12,
-      "rainbow": false,
-      "geometry": false
+      "bytes": 30696,
+      "sha256": "7d4fd29b7dd446e57026d287bd1a05524bdcb87bb6ce7fd4d3d31b07a4b289d9"
     },
     {
-      "slug": "customer-education",
+      "focus": "customer-education",
       "type": "ats",
       "path": "saul/downloads/saul-karim-nassau-customer-education-cv-ats.pdf",
       "pages": 1,
-      "extractable_characters": 2547,
-      "sha256": "e27c0c196769de356186dd3822f3e1aa1ecadae4c6282745babcf2f34e570b84",
-      "scale": 1.0,
-      "rainbow": false,
-      "geometry": false
+      "bytes": 30690,
+      "sha256": "a86b06c00e4db98f534fb1a05500a535bec0470c541e7bfec158721fb551d782"
     },
     {
-      "slug": "arts-culture",
-      "type": "designed",
-      "path": "saul/downloads/saul-karim-nassau-arts-culture-cv.pdf",
-      "pages": 1,
-      "extractable_characters": 2427,
-      "sha256": "daa44704f30b8f3d40d446941082529e9eb45e603b0ef0e595abb0123b7df99a",
-      "scale": 1.12,
-      "rainbow": false,
-      "geometry": false
+      "focus": "customer-education",
+      "type": "text",
+      "path": "saul/downloads/saul-karim-nassau-customer-education-cv.txt",
+      "bytes": 2748,
+      "sha256": "56c119e4000d61b007e39b8e7d04e3d55488ddc04092ea2d2e1a2e6cd76a7dc5"
     },
     {
-      "slug": "arts-culture",
-      "type": "ats",
-      "path": "saul/downloads/saul-karim-nassau-arts-culture-cv-ats.pdf",
-      "pages": 1,
-      "extractable_characters": 2362,
-      "sha256": "34d20fa5ce84dd433dc8836057c417478f136f380344b52905be6c3fa297ffcb",
-      "scale": 1.0,
-      "rainbow": false,
-      "geometry": false
-    },
-    {
-      "slug": "performance",
-      "type": "designed",
-      "path": "saul/downloads/saul-karim-nassau-performance-cv.pdf",
-      "pages": 1,
-      "extractable_characters": 3175,
-      "sha256": "ecfd5bed2eff4b4a8b51f88796bd2c838570dc91dcaea64b321cafd9020f56a0",
-      "scale": 1.12,
-      "rainbow": false,
-      "geometry": false
-    },
-    {
-      "slug": "performance",
-      "type": "ats",
-      "path": "saul/downloads/saul-karim-nassau-performance-cv-ats.pdf",
-      "pages": 1,
-      "extractable_characters": 3157,
-      "sha256": "fd27c1dc90ef2d6411459d9bdd0125510e5758d671f0898cec471f0835905dcd",
-      "scale": 1.0,
-      "rainbow": false,
-      "geometry": false
-    },
-    {
-      "slug": "portfolio",
-      "type": "designed",
-      "path": "saul/downloads/saul-karim-nassau-portfolio-cv.pdf",
-      "pages": 1,
-      "extractable_characters": 2578,
-      "sha256": "ac69831f83b153c6c9a4e8c203790aa29a9855dbb5d97903d5d75c507456f648",
-      "scale": 1.12,
-      "rainbow": false,
-      "geometry": false
-    },
-    {
-      "slug": "portfolio",
-      "type": "ats",
-      "path": "saul/downloads/saul-karim-nassau-portfolio-cv-ats.pdf",
-      "pages": 1,
-      "extractable_characters": 2508,
-      "sha256": "589c5c30a9c80082f95e644f68334b11ed3098c052e7bc1801262c4caee2bf16",
-      "scale": 1.0,
-      "rainbow": false,
-      "geometry": false
-    },
-    {
-      "slug": "community",
+      "focus": "community",
       "type": "designed",
       "path": "saul/downloads/saul-karim-nassau-community-cv.pdf",
       "pages": 1,
-      "extractable_characters": 2690,
-      "sha256": "29f3e284ae4cb57f19584aa2b470f40d9175b1da63c70ac0f3fad6846299401d",
-      "scale": 1.12,
-      "rainbow": false,
-      "geometry": false
+      "bytes": 30665,
+      "sha256": "f07ff079a1c1c7f78579111d30b34189317ba3e3ec9e0ce4a54c503c712c7d58"
     },
     {
-      "slug": "community",
+      "focus": "community",
       "type": "ats",
       "path": "saul/downloads/saul-karim-nassau-community-cv-ats.pdf",
       "pages": 1,
-      "extractable_characters": 2626,
-      "sha256": "046495df789439467b490243e70258db747332e436ee2c540edb80d67f350822",
-      "scale": 1.0,
-      "rainbow": false,
-      "geometry": false
+      "bytes": 30656,
+      "sha256": "a3d122f7dd8151e5836978a35fa6fc7020af622a01243fe6e9685db1f6a2fca3"
     },
     {
-      "slug": "volunteer-events",
+      "focus": "community",
+      "type": "text",
+      "path": "saul/downloads/saul-karim-nassau-community-cv.txt",
+      "bytes": 2500,
+      "sha256": "43b09f5f0dbee16021c790c3dfaa5e646d0b0a324a2126bf8a4db54554f1f190"
+    },
+    {
+      "focus": "volunteer-events",
       "type": "designed",
       "path": "saul/downloads/saul-karim-nassau-volunteer-events-cv.pdf",
       "pages": 1,
-      "extractable_characters": 2590,
-      "sha256": "758444dbe77614dafffc3eb591442beec58da0b0cde2f4bd19b728fe2bbe3134",
-      "scale": 1.12,
-      "rainbow": false,
-      "geometry": false
+      "bytes": 30843,
+      "sha256": "e7223f5cb9b541a5c68c7786374e5db0e764385f0ef113cd0eb53ff61e8dfa5c"
     },
     {
-      "slug": "volunteer-events",
+      "focus": "volunteer-events",
       "type": "ats",
       "path": "saul/downloads/saul-karim-nassau-volunteer-events-cv-ats.pdf",
       "pages": 1,
-      "extractable_characters": 2518,
-      "sha256": "3deebe336685d7f189d2abfb13b4342aa3180a604522bd4b7822b2144b0ecf5d",
-      "scale": 1.0,
-      "rainbow": false,
-      "geometry": false
+      "bytes": 30832,
+      "sha256": "6e72751f8c44221500ba07fadbf80feb85c2bce768bc6559f5cafdd78f70a4aa"
     },
     {
-      "slug": "education",
+      "focus": "volunteer-events",
+      "type": "text",
+      "path": "saul/downloads/saul-karim-nassau-volunteer-events-cv.txt",
+      "bytes": 2732,
+      "sha256": "e62f383451f89b2314690d96f4710aeac8ed1e0819a824dcfa2e7f17010ec128"
+    },
+    {
+      "focus": "hospitality",
+      "type": "designed",
+      "path": "saul/downloads/saul-karim-nassau-hospitality-cv.pdf",
+      "pages": 1,
+      "bytes": 30273,
+      "sha256": "0316053fa75c95ab13b2bc0c0fe69a53c3294acc9a7adaefa6de4ef468f0ed3c"
+    },
+    {
+      "focus": "hospitality",
+      "type": "ats",
+      "path": "saul/downloads/saul-karim-nassau-hospitality-cv-ats.pdf",
+      "pages": 1,
+      "bytes": 30273,
+      "sha256": "b772c5e99a727c1e3852fcd085386fa81773a066a6ad14a8bfa583fa0712c843"
+    },
+    {
+      "focus": "hospitality",
+      "type": "text",
+      "path": "saul/downloads/saul-karim-nassau-hospitality-cv.txt",
+      "bytes": 2036,
+      "sha256": "b563cb285f0be3ee928dd3a1b572dea5fc619b53fb154cab21827fc982c6f75e"
+    },
+    {
+      "focus": "arts-culture",
+      "type": "designed",
+      "path": "saul/downloads/saul-karim-nassau-arts-culture-cv.pdf",
+      "pages": 1,
+      "bytes": 30574,
+      "sha256": "322d096283240aae5cf5707b43e3e8d455d028e967513432519a3ed2f3e90f26"
+    },
+    {
+      "focus": "arts-culture",
+      "type": "ats",
+      "path": "saul/downloads/saul-karim-nassau-arts-culture-cv-ats.pdf",
+      "pages": 1,
+      "bytes": 30573,
+      "sha256": "c014797886184df1f1415ef57d7aefe9439886b8d32f8b9e52dc1bf914307daa"
+    },
+    {
+      "focus": "arts-culture",
+      "type": "text",
+      "path": "saul/downloads/saul-karim-nassau-arts-culture-cv.txt",
+      "bytes": 2187,
+      "sha256": "dde7787001fefd6a671aa7429848bb2f0a3b191629a1e4f3c43664f9fedeb2a2"
+    },
+    {
+      "focus": "performance",
+      "type": "designed",
+      "path": "saul/downloads/saul-karim-nassau-performance-cv.pdf",
+      "pages": 1,
+      "bytes": 29990,
+      "sha256": "a163a76cc855d0f8aa8f29ceb41875a92e2fc09782aa7daea792875e5da127e9"
+    },
+    {
+      "focus": "performance",
+      "type": "ats",
+      "path": "saul/downloads/saul-karim-nassau-performance-cv-ats.pdf",
+      "pages": 1,
+      "bytes": 29990,
+      "sha256": "7e900f3a4d20128c888af6c76a808c62e0ca50aa0f23f8e74c6088d4361bda1d"
+    },
+    {
+      "focus": "performance",
+      "type": "text",
+      "path": "saul/downloads/saul-karim-nassau-performance-cv.txt",
+      "bytes": 1509,
+      "sha256": "7bca403c7dfb5f4146910812b648e3e4b954848fcc43a07ee951ebf155abe803"
+    },
+    {
+      "focus": "education",
       "type": "designed",
       "path": "saul/downloads/saul-karim-nassau-education-cv.pdf",
       "pages": 1,
-      "extractable_characters": 2297,
-      "sha256": "a96e63a088d8019ba2de4a1dbc4ae215fcfd13c529ac611fde890d5aa4ca6f5b",
-      "scale": 1.12,
-      "rainbow": false,
-      "geometry": false
+      "bytes": 30198,
+      "sha256": "877870e899fca257b5b816dcec0da5aae05d46706fd3ac05bd386cc036424df3"
     },
     {
-      "slug": "education",
+      "focus": "education",
       "type": "ats",
       "path": "saul/downloads/saul-karim-nassau-education-cv-ats.pdf",
       "pages": 1,
-      "extractable_characters": 2233,
-      "sha256": "5ed3cf2800c6f0b884debe341b529ec7640415dff0d9c6e8aa0663885500cfe8",
-      "scale": 1.0,
-      "rainbow": false,
-      "geometry": false
+      "bytes": 30197,
+      "sha256": "6021ab7d7e6fa18066735c09554bef3a543bfecd418eb7f9da47df8e39e8966e"
+    },
+    {
+      "focus": "education",
+      "type": "text",
+      "path": "saul/downloads/saul-karim-nassau-education-cv.txt",
+      "bytes": 1823,
+      "sha256": "5860771427705957ff4eacf2715d754c529005112782900c2f8f8c3518a5782b"
+    },
+    {
+      "focus": "portfolio",
+      "type": "designed",
+      "path": "saul/downloads/saul-karim-nassau-portfolio-cv.pdf",
+      "pages": 1,
+      "bytes": 32465,
+      "sha256": "ec4e7d7e1883398529d97e79ac23693c2a6b477e585daf105aa25e46b0238d1a"
+    },
+    {
+      "focus": "portfolio",
+      "type": "ats",
+      "path": "saul/downloads/saul-karim-nassau-portfolio-cv-ats.pdf",
+      "pages": 1,
+      "bytes": 32453,
+      "sha256": "1cd7499f9b8c5db2de223a6faddd329f32484dc09ef7b4364a2ddcb6d8b9a480"
+    },
+    {
+      "focus": "portfolio",
+      "type": "text",
+      "path": "saul/downloads/saul-karim-nassau-portfolio-cv.txt",
+      "bytes": 4991,
+      "sha256": "c149a5b2c613ae854c102bf6ea1fa2f18d369fdcc25cca2e236b29b66a511d17"
     }
   ],
-  "archive": {
+  "everything_output": {
     "path": "saul/downloads/saul-karim-nassau-complete-career-archive-cv.pdf",
-    "pages": 4,
-    "sha256": "19b30aec6757865367e81e578d86f549933dfcf98b80386b35fb625cd597efaa",
-    "design_system": "professional-monochrome"
+    "pages": 5,
+    "bytes": 47720,
+    "sha256": "14179d05b8ccef82c9f0b7d2a4dba3916a478e24d4155a79b5b70708f7f6b51c"
+  },
+  "bundle": {
+    "path": "saul/downloads/saul-karim-nassau-all-cv-outputs.zip",
+    "bytes": 1487828,
+    "sha256": "8dd264203fa657d4b18446d012b0648e8f80057894cea7b2d044f609e6206d23"
   }
 }

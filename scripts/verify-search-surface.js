@@ -9,6 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const SITE = 'https://seminarschools.com';
+const {RESOURCE_LABEL_ALIASES,resourceTaxonomyLabel,resourceDescription,resourceReviewSection}=require('./build-search-pages');
 let failures = [];
 function read(rel){ return fs.readFileSync(path.join(ROOT, rel),'utf8'); }
 function fail(s){ failures.push(s); }
@@ -19,13 +20,46 @@ function checkGeneratedPage(url, label){ const rel=sourcePath(url); if(!fs.exist
 function main(){
   const manifest=JSON.parse(read('scripts/search-surface-manifest.json'));
   const catalog=read('teacherresources/index.html');
-  const data=extractJsonScript(catalog,'resources-data');
-  const expectedResources=(data.groups||[]).flatMap(g=>g.categories||[]).reduce((n,c)=>n+(c.entries||[]).length,0);
+  const data=JSON.parse(read('teacherresources/resources-data.json'));
+  const finder=read('teacherresources/finder.js');
+  const entries=(data.groups||[]).flatMap(group=>(group.categories||[]).flatMap(category=>category.entries||[]));
+  const expectedResources=entries.length;
   const staticCatalog=(catalog.match(/<!-- SS_STATIC_CATALOG_START -->([\s\S]*?)<!-- SS_STATIC_CATALOG_END -->/)||[])[1]||'';
   const cardCount=count(/class="entry(?:\s|")/g,staticCatalog);
   if(!catalog.includes('data-ssr-catalog="true"')) fail('catalog: missing static catalog marker');
   if(cardCount!==expectedResources) fail(`catalog: expected ${expectedResources} server-delivered cards, found ${cardCount}`);
   if(manifest.resourceDetailPages!==expectedResources) fail(`catalog manifest: expected ${expectedResources} detail pages, found ${manifest.resourceDetailPages}`);
+
+  const expectedAliases={
+    subject:{sciences:'Sciences',cs:'Computer Science',french:'French/FSL'},
+    format:{'french-lesson':'French Lesson','museum-lesson':'Museum Lesson','indigenous-pdf':'Indigenous Education PDF'},
+    curriculum:{atlantic:'Atlantic Canada'}
+  };
+  for(const [kind,aliases] of Object.entries(expectedAliases)){
+    for(const [code,label] of Object.entries(aliases)){
+      if(RESOURCE_LABEL_ALIASES[kind]?.[code]!==label) fail(`catalog taxonomy: ${kind} alias ${code} is not declared as ${label}`);
+      if(resourceTaxonomyLabel({},kind,code)!==label) fail(`catalog taxonomy: ${kind} alias ${code} does not resolve`);
+      if(!finder.includes(`${code.includes('-')?`'${code}'`:code}: '${label}'`) && !finder.includes(`'${code}': '${label}'`)) {
+        fail(`catalog browser taxonomy: ${kind} alias ${code} is not declared as ${label}`);
+      }
+    }
+  }
+  for(const [index,entry] of entries.entries()){
+    for(const kind of ['subject','format','curriculum']){
+      const code=entry[kind];
+      if(code && !resourceTaxonomyLabel(data,kind,code)) fail(`catalog taxonomy: entry ${index+1} has unresolved ${kind} code ${code}`);
+    }
+  }
+  if(!catalog.includes('/teacherresources/finder.js')) fail('catalog browser: route-scoped finder controller is missing');
+  if(catalog.includes('id="resources-data"')) fail('catalog browser: duplicate inline resource dataset remains');
+  if(resourceReviewSection({})!=='') fail('catalog detail: empty records still generate a Classroom fit section');
+  const noteReview=resourceReviewSection({notes:'Specific classroom note.'});
+  if(!noteReview.includes('<h2>Classroom fit</h2>') || !noteReview.includes('Specific classroom note.')) fail('catalog detail: genuine notes do not generate a Classroom fit section');
+  const blurbReview=resourceReviewSection({notes:' ',blurb:'Specific classroom blurb.'});
+  if(!blurbReview.includes('Specific classroom blurb.')) fail('catalog detail: a genuine blurb is not used when notes are blank');
+  const aliasDescription=resourceDescription({title:'Museum source',format:'museum-lesson',grade:'all'},{},{},data);
+  if(!aliasDescription.includes('Museum Lesson')) fail('catalog detail: fallback descriptions do not use resolved taxonomy labels');
+  if(read('scripts/build-search-pages.js').includes('The record keeps subject, level, and source visible')) fail('catalog detail: generic Classroom fit filler remains in the generator');
 
   const calendar=read('polymythseminars/index.html');
   const events=JSON.parse(read('polymythseminars/events.json')).events||[];
@@ -49,6 +83,45 @@ function main(){
   const sections=count(/href="\/polymyth\/methodologylist\/[^"/]+\//g,method);
   if(!method.includes('id="static-methodology-editions"')) fail('methodology list: missing static section index');
   if(sections<manifest.methodologySections) fail(`methodology list: expected at least ${manifest.methodologySections} static section links, found ${sections}`);
+  if(!method.includes('<h3>Pending User Authorship</h3>')) fail('methodology list: pending-user-authorship section lacks a human-readable root label');
+  if(method.includes("getElementById('search').addEventListener('input',render)")) fail('methodology list: search still renders synchronously on every input event');
+  for(const token of [
+    "getElementById('search').addEventListener('input',scheduleSearchRender)",
+    'searchRenderTimer = setTimeout(()=>{',
+    'if(!_entryTitleIndex) _entryTitleIndex = buildEntryTitleIndex();',
+    'const sectionCounts = entrySectionCounts();',
+    'entrySearchText(e).includes(q)',
+    "const tagQuery=q.startsWith('tg:')?q.slice(3).trim():null;",
+    'candidate.trim().toLowerCase() === needle',
+    'entryHasExactTag(e,tagQuery)',
+    "searchInput.value = 'tg:' + tag",
+  ]) {
+    if(!method.includes(token)) fail(`methodology list: missing bounded search/index runtime token ${token}`);
+  }
+  if(method!==read('public/polymyth/methodologylist/index.html')) fail('methodology list: source/public runtime mirrors diverge');
+  if(count(/invalidateEntryIndexes\(\);/g,method)<5) fail('methodology list: entry indexes are not invalidated after load, edit, add, delete, and import mutations');
+  for(const url of manifest.methodologyPrefixes||[]){
+    const rel=sourcePath(url);
+    if(!read(rel).includes('data-page-weight="heavy"')) fail(`methodology archive: heavy-page rendering contract missing in ${rel}`);
+  }
+  const pendingAuthorship=read('polymyth/methodologylist/pending-user-authorship/index.html');
+  if(!pendingAuthorship.includes('<h1>Pending User Authorship</h1>')) fail('methodology list: pending-user-authorship generated page lacks a human-readable H1');
+  if(!pendingAuthorship.includes('<title>Pending User Authorship | Polymyth Methodologylist | Seminar Schools</title>')) fail('methodology list: pending-user-authorship generated page lacks a human-readable title');
+
+  const campaign=read('polymyth/campaigncodex/index.html');
+  if(campaign.includes("getElementById('search').addEventListener('input', render)")) fail('campaign codex: search still renders synchronously on every input event');
+  for(const token of [
+    'const normalizedEntrySearchText = new WeakMap();',
+    'normalizedEntrySearchText.get(entry)',
+    'normalizedEntrySearchText.set(entry,text)',
+    'searchRenderTimer = setTimeout(() => {',
+    '},120);',
+    'entrySearchText(e).includes(search)',
+    "getElementById('search').addEventListener('input', scheduleSearchRender)",
+  ]) {
+    if(!campaign.includes(token)) fail(`campaign codex: missing bounded search runtime token ${token}`);
+  }
+  if(campaign!==read('public/polymyth/campaigncodex/index.html')) fail('campaign codex: source/public runtime mirrors diverge');
 
   const sitemap=read('sitemap.xml');
   const urls=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);

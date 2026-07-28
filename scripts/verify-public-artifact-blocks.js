@@ -53,7 +53,7 @@ if (publish !== 'public') {
 // If /public exists locally, scan it as the true deploy surface.
 const pubRoot = path.join(ROOT, 'public');
 if (fs.existsSync(pubRoot)) {
-  const bannedTop = ['scripts','data','hf_export','netlify','.github','package.json','package-lock.json','netlify.toml','SETUP.md'];
+  const bannedTop = ['scripts','data','dashboard','hf_export','netlify','.github','package.json','package-lock.json','netlify.toml','SETUP.md'];
   for (const p of bannedTop) if (fs.existsSync(path.join(pubRoot, p))) failures.push(`public/${p} reached the publish directory`);
   const opRe = rootArtifactRe;
   function walk(dir) {

@@ -1,0 +1,47 @@
+{
+  "audit": 42,
+  "contract": "audit42-inherited-browser-v1",
+  "release_id": "2026-07-25-site-audit42-ledger-closure-multimode-final",
+  "generated_at": "2026-07-25T11:05:10-04:00",
+  "release_manifest_sha256": "060fe21b419292c6d82a076419084a0f0d4f0f1fbab7042cdeb3017a20949f36",
+  "started_at": "2026-07-25T15:56:38.317122Z",
+  "completed_at": "2026-07-25T15:59:54.898835Z",
+  "suite_count": 7,
+  "combined_checks": 882,
+  "suites": [
+    {
+      "suite": "interaction",
+      "checks": 94
+    },
+    {
+      "suite": "entry-pages",
+      "checks": 209
+    },
+    {
+      "suite": "wcag",
+      "checks": 42
+    },
+    {
+      "suite": "routes",
+      "checks": 252
+    },
+    {
+      "suite": "stress",
+      "checks": 27
+    },
+    {
+      "suite": "runtime",
+      "checks": 194
+    },
+    {
+      "suite": "depth",
+      "checks": 64
+    }
+  ],
+  "wrapper_program_path": "scripts/run-audit42-inherited-browser-all.py",
+  "wrapper_program_sha256": "f150007b2f5b900f7c422b7d79a68b84af338f2fba9f393ba012b0da0b7962ab",
+  "adapter_program_path": "scripts/run-audit42-inherited-browser.py",
+  "adapter_program_sha256": "f65ae1380eae2b444adaee7989ffe45001ee642c1719e80f619ac205865f55c9",
+  "verifier_program_path": "scripts/verify-audit42-inherited-browser-evidence.js",
+  "verifier_program_sha256": "ac287c6aa99e63bddc12e4d3c59fbf73593c9c6f86f52cd69fb65c05c5600ca5"
+}

@@ -1,189 +1,172 @@
 /* =========================================================================
-   ALIVE — site-wide aliveness layer (rev June 13 2026)
-   Pairs with /js/indra.js. Transform/opacity/shadow/filter only: no layout
-   reflow, compositor-friendly. Every interactive element responds to hover,
-   focus, and press; every structural surface carries at least one life
-   gesture. ~4KB, cached site-wide. prefers-reduced-motion kills all motion.
+   ALIVE — steady site-wide interaction + scroll geometry (2026-07-23)
+
+   The visual system keeps the shared Indra geometry on every page while
+   removing layout-moving microinteractions. Scroll movement is transform-only
+   and driven by /js/indra.js. Clickable things respond through colour, border,
+   underline, and focus — never by jumping away from the pointer.
    ========================================================================= */
 
-/* ---- Geometric substrate mounted by indra.js -------------------------- */
+html {
+  scroll-behavior: auto;
+  scroll-padding-block-start: clamp(4.5rem, 12vh, 7rem);
+  scroll-padding-block-end: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* Clip page-level overflow without turning the root into a horizontal scroll
+   container. Purpose-built tables, maps, rails, and code shells keep their own
+   local scrolling below. */
+@supports (overflow: clip) {
+  html,
+  body { overflow-x: clip !important; }
+}
+
+/* VISIBLE_GEOMETRY_CONTRACT — every public page carries a fixed, edge-masked
+   instance of the same mandala. It sits above opaque page shells so it remains
+   visible, but the clear centre protects reading and controls. */
 #indraLayer {
-  position: fixed; inset: -12vh -12vw; z-index: 0;
-  pointer-events: none; will-change: transform;
-  mix-blend-mode: soft-light;
+  position: fixed;
+  inset: -18vmax;
+  z-index: 2147481000;
+  pointer-events: none;
+  user-select: none;
+  color: var(--geo-ink, var(--accent, currentColor));
+  opacity: var(--indra-opacity, .075);
+  transform-origin: 50% 50%;
+  contain: strict;
+  will-change: transform;
+  overflow: hidden;
+  -webkit-mask-image: radial-gradient(ellipse 62% 58% at 50% 46%, transparent 0 43%, rgba(0,0,0,.18) 58%, #000 82%);
+  mask-image: radial-gradient(ellipse 62% 58% at 50% 46%, transparent 0 43%, rgba(0,0,0,.18) 58%, #000 82%);
 }
-#indraLayer circle { transition: fill-opacity 3.5s ease-in-out, opacity 3.5s ease-in-out, stroke-opacity 3.5s ease-in-out; }
-#indraLayer circle.eco-c { fill: currentColor; fill-opacity: 0.08; }
-#indraLayer circle.eco-d { fill-opacity: 0; opacity: 0.18; }
-#indraLayer svg { width: 100%; height: 100%; }
-#indraLayer .geo-stroke { stroke: currentColor; }
-body > main, body > header, body > footer, body > nav, body > section { position: relative; z-index: 1; }
-
-/* ---- Click ripple: a jewel of the net flaring at the touch ------------ */
-.indra-ripple {
-  position: fixed; z-index: 2147483000; pointer-events: none;
-  width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%;
-  border: 1.5px solid currentColor; opacity: 0.5;
-  animation: indra-ripple 0.65s cubic-bezier(0.2, 0.6, 0.3, 1) forwards;
+#indraLayer svg {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  display: block;
+  overflow: visible;
+  transform-box: fill-box;
 }
-@keyframes indra-ripple { to { transform: scale(11); opacity: 0; } }
+#indraLayer .geo-stroke {
+  stroke: currentColor;
+  vector-effect: non-scaling-stroke;
+}
+#indraLayer circle[fill]:not([fill="none"]) { fill-opacity: .42; }
 
-/* ---- Reveal on scroll (JS-applied, so no-JS shows everything) --------- */
-.iv-pre { opacity: 1; transform: translateY(10px); }
-.iv-in {
-  opacity: 1; transform: translateY(0);
-  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16, 0.8, 0.3, 1);
+/* Calm, legible interaction feedback. */
+:where(a, button, summary, label, select, input, textarea,
+  [role="button"], [role="tab"], [role="link"],
+  .btn, .pill, .chip, .filter-chip, .tab, .theme-toggle,
+  .card, .tile, .event, .entry, .lecture, .path-card, .idx-row) {
+  touch-action: manipulation;
+  transition-property: color, background-color, border-color, box-shadow, text-decoration-color;
+  transition-duration: 90ms;
+  transition-timing-function: linear;
 }
 
-/* ======================================================================
-   INTERACTIVE LIFE — every clickable element, hover devices only.
-   The selector net is deliberately wide: links, buttons, summaries,
-   labels, and the project's recurring interactive classes.
-   ====================================================================== */
-@media (hover: hover) and (pointer: fine) {
-
-  /* Baseline transition on anything that can be pressed or clicked */
-  a, button, summary, label, select,
-  [role="button"], [role="tab"], [role="link"], [tabindex]:not([tabindex="-1"]),
-  input[type="submit"], input[type="button"], input[type="checkbox"], input[type="radio"],
-  .btn, .card, .pill, .chip, .filter-chip, .tab, .entry, .lecture, .event,
-  .node, .name-link, .leg-item, .item, .row, .tile, .cta, .skip-link,
-  .faq-item, .card-header, .foot-row, .theme-toggle, details {
-    transition: transform 0.18s cubic-bezier(0.2,0.7,0.3,1),
-                box-shadow 0.18s ease, opacity 0.18s ease,
-                background-color 0.18s ease, color 0.18s ease,
-                border-color 0.18s ease, filter 0.18s ease;
-  }
-
-  /* Lift family: cards, tiles, panels rise and gain shadow */
-  .card:hover, .tile:hover, .lecture:hover, .event:hover,
-  .faq-item:hover, .leg-item:hover, .entry:hover {
-    transform: translateY(-1.5px);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-  }
-
-  /* Nudge family: buttons and small controls lift slightly */
-  button:hover, .btn:hover, [role="button"]:hover, .cta:hover,
-  input[type="submit"]:hover, input[type="button"]:hover,
-  .theme-toggle:hover, summary:hover {
-    transform: translateY(-1.5px);
-    filter: brightness(1.04);
-  }
-
-  /* Pill / chip / tab family: brighten and gently grow */
-  .pill:hover, .chip:hover, .filter-chip:hover, .tab:hover {
-    transform: translateY(-1px);
-    filter: brightness(1.04);
-  }
-
-  /* Link family: text links draw a living underline that grows from left */
-  a.name-link, a.title, .leaves .title, .card a, p a, li a, .entry a {
-    background-image: linear-gradient(currentColor, currentColor);
-    background-size: 0% 1px;
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    transition: background-size 0.28s cubic-bezier(0.2,0.7,0.3,1), color 0.18s ease;
-  }
-  a.name-link:hover, a.title:hover, .leaves .title:hover,
-  .card a:hover, p a:hover, li a:hover, .entry a:hover {
-    background-size: 100% 1px;
-  }
-
-  /* Graph nodes pulse outward on hover */
-  .node:hover { transform: scale(1.05); filter: brightness(1.06); }
-
-  /* Rows slide a hair on hover, the table breathing */
-  .row:hover, .foot-row:hover { transform: translateX(2px); }
-
-  /* PRESS: everything settles inward when clicked */
-  a:active, button:active, summary:active, label:active,
-  [role="button"]:active, .btn:active, .pill:active, .chip:active,
-  .filter-chip:active, .tab:active, .card:active, .tile:active,
-  .node:active, .cta:active, input[type="submit"]:active,
-  input[type="button"]:active, .theme-toggle:active {
-    transform: translateY(0) scale(0.97);
-    filter: brightness(0.98);
-    transition-duration: 0.08s;
+@media (hover:hover) and (pointer:fine) {
+  :where(a[href]):hover { text-decoration-thickness: max(1px, .08em); text-underline-offset: .18em; }
+  :where(button, summary, [role="button"], .btn, .pill, .chip, .filter-chip, .tab):hover {
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 28%, transparent);
   }
 }
 
-/* ======================================================================
-   AMBIENT LIFE — touch and hover alike. Subtle perpetual motion so even
-   idle elements feel alive, tied to the same rhythm as the web.
-   ====================================================================== */
-
-/* Selected state arrives with a single settle, not a perpetual pulse.
-   Motion without cause reads as kitsch; motion that marks a change reads
-   as intent. The selected element simply rests brighter once chosen. */
-.pill.on, .chip.on, .filter-chip.on, .tab.on, [aria-selected="true"] {
-  animation: alive-settle 0.32s cubic-bezier(0.2,0.7,0.3,1);
-}
-@keyframes alive-settle {
-  from { transform: scale(0.96); }
-  to { transform: scale(1); }
-}
-
-/* details/summary open with a soft unfold */
-details[open] > *:not(summary) {
-  animation: alive-unfold 0.4s cubic-bezier(0.16,0.8,0.3,1) both;
-}
-@keyframes alive-unfold {
-  from { opacity: 0; transform: translateY(-6px); }
-  to { opacity: 1; transform: none; }
-}
-
-/* Inputs wake on focus with a living ring */
-input:focus, textarea:focus, select:focus {
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
-  box-shadow: 0 0 0 3px rgba(127,127,127,0.18);
-}
-
-/* ---- Keyboard life ---------------------------------------------------- */
 :focus-visible {
-  outline: 1.5px solid currentColor; outline-offset: 2px;
-  border-radius: 2px; opacity: 0.95;
+  outline: 3px solid var(--ss-focus-ring, var(--accent, currentColor));
+  outline-offset: 3px;
 }
 
-/* ---- Print safety ----------------------------------------------------- */
-@media print {
-  #indraLayer, .indra-ripple { display: none; }
-  .iv-pre { opacity: 1 !important; transform: none !important; }
-  * { animation: none !important; }
+/* Shared keyboard targets stay clear of sticky mastheads and fixed corner
+   controls when browsers scroll focused content into view. */
+:where(a[href], button, summary, input, select, textarea, [tabindex]):focus-visible,
+:target {
+  scroll-margin-block-start: clamp(4.5rem, 12vh, 7rem);
+  scroll-margin-block-end: calc(4.75rem + env(safe-area-inset-bottom, 0px));
 }
 
-/* ---- Kill switch outranks everything above ---------------------------- */
-@media (prefers-reduced-motion: reduce) {
-  #indraLayer { transform: none !important; }
-  .indra-ripple { display: none; }
-  .iv-pre { opacity: 1; transform: none; }
-  .iv-in { transition: none; }
-  *, *::before, *::after { animation: none !important; }
-  a, button, .btn, .card, .pill, .chip, .tab, .entry, .lecture, .event,
-  .node, .name-link, .row, .tile, summary, label, details {
-    transition: none !important;
+/* Native and shared controls retain a reliable target without enlarging
+   ordinary inline prose links. */
+:where(button, summary, select, input[type="button"], input[type="submit"],
+  input[type="reset"], [role="button"], .button, .btn, .cta,
+  .pill, .chip, .filter-chip, .tab) {
+  min-block-size: 44px;
+}
+
+:where(button, summary, [role="button"], .button, .btn, .cta,
+  .pill, .chip, .filter-chip, .tab) {
+  -webkit-tap-highlight-color: color-mix(in srgb, currentColor 16%, transparent);
+}
+
+:where(button, input, select, textarea):disabled,
+:where([role="button"], [role="tab"])[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+/* Dialogs and popovers remain reachable on short screens and at high zoom. */
+:where(dialog, [role="dialog"], [role="alertdialog"]) {
+  max-inline-size: calc(100% - 2rem - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
+  max-block-size: calc(100svh - 2rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+:where(.table-wrap, .scroll-shell, [data-keyboard-scroll]) {
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+
+/* No layout-moving hover or press states. */
+:where(a, button, summary, label, [role="button"], [role="tab"],
+  .btn, .pill, .chip, .filter-chip, .tab, .theme-toggle,
+  .card, .tile, .event, .entry, .lecture, .path-card, .idx-row):hover,
+:where(a, button, summary, label, [role="button"], [role="tab"],
+  .btn, .pill, .chip, .filter-chip, .tab, .theme-toggle,
+  .card, .tile, .event, .entry, .lecture, .path-card, .idx-row):active {
+  transform: none !important;
+  filter: none !important;
+}
+
+/* Old reveal/ripple hooks remain harmless if a historic page still emits them. */
+.indra-ripple { display: none !important; }
+.iv-pre, .iv-in { opacity: 1 !important; transform: none !important; }
+
+@media (max-width: 760px) {
+  #indraLayer {
+    inset: -24vmax;
+    -webkit-mask-image: radial-gradient(ellipse 74% 62% at 50% 48%, transparent 0 34%, rgba(0,0,0,.14) 52%, #000 78%);
+    mask-image: radial-gradient(ellipse 74% 62% at 50% 48%, transparent 0 34%, rgba(0,0,0,.14) 52%, #000 78%);
   }
 }
 
-/* Depth bands: outer circles more transparent, inner more present.
-   Phase-staggered transitions so focus racks slowly across the web. */
-#indraLayer circle.depth-far  { opacity: 0.55; transition-delay: 0s; }
-#indraLayer circle.depth-mid  { opacity: 0.75; transition-delay: 0.8s; }
-#indraLayer circle.depth-near { opacity: 0.92; transition-delay: 1.6s; }
-
-
-/* VISIBLE_GEOMETRY_CONTRACT — every public page can carry the Indra substrate.
-   Page-specific intensity is controlled with body[data-indra-intensity] and
-   respected by /js/indra.js. Keep geometry ornamental, pointer-safe, and print-safe. */
-body[data-geometry="indra-web"] #indraLayer {
-  color: var(--geo-ink, currentColor);
-  filter: saturate(0.92) contrast(1.04);
+@media (forced-colors: active) {
+  #indraLayer { display: none; }
+  :focus-visible {
+    outline-color: Highlight;
+  }
 }
-body[data-geometry="indra-web"] main,
-body[data-geometry="indra-web"] .page,
-body[data-geometry="indra-web"] .shell,
-body[data-geometry="indra-web"] .calendar-shell {
-  position: relative;
-  z-index: 1;
+
+@media print {
+  #indraLayer, .indra-ripple { display: none !important; }
+  * { animation: none !important; transition: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  #indraLayer { will-change: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: .001ms !important; }
+}
+
+@media (pointer: coarse) {
+  /* iOS focuses fields without viewport zoom when their computed type is at
+     least 16px, including wide tablets outside phone-only breakpoints. */
+  :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+    font-size: max(1rem, 16px);
+  }
 }
 
 /* =========================================================================
@@ -270,10 +253,8 @@ body {
   max-width: calc(100vw - 2rem);
 }
 #indraLayer {
-  inset: -14vmax;
   width: auto;
   height: auto;
-  contain: paint;
   max-width: none;
 }
 #indraLayer svg {
@@ -432,11 +413,11 @@ body {
    ============================================================ */
 :where(.path-grid, .threshold-paths, .work-paths) { min-width: 0; }
 :where(.path-grid, .threshold-paths) > * { min-width: 0; }
-:where(body[data-page-weight="heavy"]) :where(.resource-row, .entry, .event, .lecture, article, details, section.card, .index-row) {
+:where(body[data-page-weight="heavy"]) :where(.resource-row, .entry, .event, .lecture, article, main details:not(.static-methodology-editions), section.card, .index-row) {
   content-visibility: auto;
   contain-intrinsic-size: 1px 320px;
 }
-:where(body[data-page-weight="heavy"]) :where(.resource-row:focus-within, .entry:focus-within, .event:focus-within, article:focus-within, details[open]) {
+:where(body[data-page-weight="heavy"]) :where(.resource-row:focus-within, .entry:focus-within, .event:focus-within, article:focus-within, main details:not(.static-methodology-editions)[open]) {
   content-visibility: visible;
 }
 :where(body[data-route-type]) :where(.path-card, .threshold-route, .resource-card, .entry, .event, .lecture) {
@@ -452,7 +433,7 @@ body {
   text-wrap: pretty;
 }
 @supports not (content-visibility: auto) {
-  :where(body[data-page-weight="heavy"]) :where(.resource-row, .entry, .event, .lecture, article, details, section.card, .index-row) {
+  :where(body[data-page-weight="heavy"]) :where(.resource-row, .entry, .event, .lecture, article, main details:not(.static-methodology-editions), section.card, .index-row) {
     contain: layout paint style;
   }
 }

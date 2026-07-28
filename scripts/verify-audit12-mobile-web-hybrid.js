@@ -10,31 +10,39 @@ if(!/^\d{4}-\d{2}-\d{2}-.+/.test(read('RELEASE_ID.txt').trim()))fail.push('relea
 for(const token of [
   'id="audit12-mobile-web-hybrid"',
   'id="audit12-mobile-web-hybrid-script"',
-  'role="toolbar" aria-label="Project web selector"',
+  'id="mapRail" aria-label="Project links"',
   'aria-live="polite"',
   'window.__seminarSchoolsMobileWebHybrid',
   "const FULL={x:0,y:0,w:1000,h:700}",
-  "if(!mobile.matches||node.id==='core')return FULL",
-  'const midX=(c.x*.35+p.x*.65),midY=(c.y*.4+p.y*.6)',
-  "button.setAttribute('aria-pressed',String(on))",
+  "button.removeAttribute('aria-pressed')",
   'button.tabIndex=on?0:-1',
   "event.key==='ArrowRight'",
   "event.key==='Home'",
   "event.key==='End'",
   "hit.setAttribute('r',mobile.matches?'40'",
-  "reduce.matches?'smooth':'auto'",
-  'centerRail(node,animate)',
+  "g.addEventListener('click',()=>window.location.assign(n.href))",
+  "writeView(FULL)",
   'svg.dataset.focusNode=node.id',
 ])has('index.html',token);
+for(const token of ["behavior:'smooth'",'behavior:"smooth"','centerRail(node,animate)','function moveView(','function targetFor('])lacks('index.html',token);
 for(const token of ['CL-WEB-112','CL-WEB-113','CL-WEB-114','CL-WEB-115','CL-WEB-301 — Resolved','CL-WEB-201','CL-WEB-202','CL-WEB-203'])has('WEBSITE_CL_2026-07-19.md',token);
-for(const token of ['"id": "CL-WEB-301"','"status": "resolved"','"id": "CL-WEB-201"','"status": "held"'])has('data/website-cl.jsonl',token);
+for(const token of [
+  '"id": "CL-WEB-301"',
+  '"status": "resolved"',
+  '"id": "CL-WEB-201"',
+  '"status": "complete"',
+  '"id": "CL-WEB-202"',
+  '"status": "inventory_complete_direction_pending"',
+  '"id": "CL-WEB-203"',
+  '"status": "automated_complete_external_pending"'
+])has('data/website-cl.jsonl',token);
 for(const rel of ['scripts/apply-audit12-mobile-web-hybrid.py','scripts/verify-audit12-mobile-web-hybrid.js','docs/WEBSITE_MOBILE_WEB_HYBRID_AUDIT12_2026-07-19.md'])if(!exists(rel))fail.push(`${rel}: missing`);
 has('scripts/build-saul-cv-professional.py','apply-audit12-mobile-web-hybrid.py');
 has('scripts/verify-all-runner.js','verify-audit12-mobile-web-hybrid.js');
 has('package.json','verify:audit12');
 if(exists('public/index.html')){
-  for(const token of ['id="audit12-mobile-web-hybrid"','id="audit12-mobile-web-hybrid-script"','role="toolbar" aria-label="Project web selector"'])has('public/index.html',token);
+  for(const token of ['id="audit12-mobile-web-hybrid"','id="audit12-mobile-web-hybrid-script"','id="mapRail" aria-label="Project links"'])has('public/index.html',token);
 }
 lacks('WEBSITE_CL_2026-07-19.md','## User decision still open');
 if(fail.length){console.error('AUDIT12 MOBILE WEB HYBRID FAILED');fail.forEach(x=>console.error(' - '+x));process.exit(1)}
-console.log('AUDIT12 MOBILE WEB HYBRID PASSED — map, rail, selected card, mobile recentering, touch targets, keyboard movement, reduced motion, and completed CL state verified.');
+console.log('AUDIT12 MOBILE WEB HYBRID PASSED — direct project links, stable map geometry, large touch targets, keyboard movement, calm scrolling, and truthful current CL states verified.');

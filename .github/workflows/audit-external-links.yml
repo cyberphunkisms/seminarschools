@@ -9,6 +9,9 @@ jobs:
     timeout-minutes: 20
     env:
       EXTERNAL_LINK_CHECK_LIMIT: "350"
+      EXTERNAL_LINK_CONCURRENCY: "16"
+      EXTERNAL_LINK_PER_HOST_CONCURRENCY: "4"
+      EXTERNAL_LINK_TIMEOUT_MS: "9000"
       EXTERNAL_LINK_STRICT: "1"
     steps:
       - name: Checkout
@@ -16,11 +19,26 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: "24"
+          node-version: "24.14.0"
       - name: Offline external link inventory
         run: node scripts/audit-external-links.js
+      - name: Verify rotating weekly shard coverage
+        run: node scripts/verify-external-link-live-shards.js
+      - name: Restore bounded live-check cache
+        uses: actions/cache/restore@v4
+        with:
+          path: scripts/reports/external-link-live-cache.json
+          key: external-link-live-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            external-link-live-v1-${{ runner.os }}-
       - name: Live external link audit
         run: node scripts/audit-external-links-live.js
+      - name: Save bounded live-check cache
+        if: always() && hashFiles('scripts/reports/external-link-live-cache.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: scripts/reports/external-link-live-cache.json
+          key: external-link-live-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v7

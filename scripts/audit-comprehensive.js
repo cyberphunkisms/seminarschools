@@ -19,6 +19,7 @@
  */
 const fs = require('fs');
 const path = require('path');
+const { isGeneratedDependencyDirectory } = require('./repository-walk-policy');
 const ROOT = path.resolve(__dirname, '..');
 
 let issues = [], warnings = [];
@@ -29,7 +30,7 @@ function walkHTML(dir) {
   let out = [];
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     const p = path.join(dir, e.name);
-    if (/^(node_modules|\.git|_retired)$/.test(e.name)) continue;
+    if (/^(\.git|_retired)$/.test(e.name) || isGeneratedDependencyDirectory(e.name)) continue;
     if (e.isDirectory()) out.push(...walkHTML(p));
     else if (e.name.endsWith('.html')) out.push(p);
   }

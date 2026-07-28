@@ -1,0 +1,1761 @@
+{
+  "audit": 41,
+  "release_id": "2026-07-25-site-audit41-depth-rollover-density-final",
+  "generated_at": "2026-07-25T09:56:53-04:00",
+  "executed_at": "2026-07-25T14:01:26.543289Z",
+  "browser": "Chromium headless shell",
+  "browser_version": "138.0.7204.23",
+  "route_cases": 24,
+  "checks_total": 194,
+  "checks_passed": 194,
+  "checks_failed": 0,
+  "results": [
+    {
+      "name": "desktop home: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "desktop home: document title",
+      "passed": true,
+      "detail": "Polymythcal, Tutoring, Resources & Projects | Seminar Schools"
+    },
+    {
+      "name": "desktop home: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop home: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop home: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop home: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "desktop home: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop teacher-resources: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "desktop teacher-resources: document title",
+      "passed": true,
+      "detail": "Teacher Resources for English, OSSD & IB | Seminar Schools"
+    },
+    {
+      "name": "desktop teacher-resources: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop teacher-resources: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop teacher-resources: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop teacher-resources: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "desktop teacher-resources: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop polymythcal: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "desktop polymythcal: document title",
+      "passed": true,
+      "detail": "Polymythcal | Seminar Schools"
+    },
+    {
+      "name": "desktop polymythcal: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop polymythcal: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop polymythcal: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop polymythcal: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "desktop polymythcal: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop aa: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "desktop aa: document title",
+      "passed": true,
+      "detail": "Archetype Archive & Taxonomy Index | aa*"
+    },
+    {
+      "name": "desktop aa: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop aa: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop aa: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop aa: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "desktop aa: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop bb: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "desktop bb: document title",
+      "passed": true,
+      "detail": "bookwormburrows | AI-Assisted Reading and Seminar Game"
+    },
+    {
+      "name": "desktop bb: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop bb: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop bb: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop bb: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "desktop bb: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop aitr: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "desktop aitr: document title",
+      "passed": true,
+      "detail": "AI Teacher Resources | Games, Lessons & Projects"
+    },
+    {
+      "name": "desktop aitr: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop aitr: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop aitr: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop aitr: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "desktop aitr: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop bookwormcard: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "desktop bookwormcard: document title",
+      "passed": true,
+      "detail": "Bookwormcard \u00b7 Make a bookwormburrows Character Card"
+    },
+    {
+      "name": "desktop bookwormcard: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop bookwormcard: semantic H1",
+      "passed": true,
+      "detail": "2"
+    },
+    {
+      "name": "desktop bookwormcard: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop bookwormcard: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "desktop bookwormcard: CLS at most 0.1",
+      "passed": true,
+      "detail": "0.0015129304108796296"
+    },
+    {
+      "name": "desktop leizu: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "desktop leizu: document title",
+      "passed": true,
+      "detail": "Toronto Tutor for OSSD, IB & Writing | Leizu Academy"
+    },
+    {
+      "name": "desktop leizu: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop leizu: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop leizu: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop leizu: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "desktop leizu: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop saul: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "desktop saul: document title",
+      "passed": true,
+      "detail": "Saul Karim Nassau - General / Any Role CV"
+    },
+    {
+      "name": "desktop saul: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop saul: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop saul: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop saul: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "desktop saul: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop campaigncodex: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "desktop campaigncodex: document title",
+      "passed": true,
+      "detail": "Campaigncodex | D&D-Based OSSD English Curriculum"
+    },
+    {
+      "name": "desktop campaigncodex: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop campaigncodex: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop campaigncodex: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop campaigncodex: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "desktop campaigncodex: CLS at most 0.1",
+      "passed": true,
+      "detail": "0.01578360768175583"
+    },
+    {
+      "name": "desktop dm-board: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "desktop dm-board: document title",
+      "passed": true,
+      "detail": "DM Board \u00b7 Thank You M'am \u00b7 cmp-001"
+    },
+    {
+      "name": "desktop dm-board: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop dm-board: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop dm-board: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop dm-board: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "desktop dm-board: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop methodology: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "desktop methodology: document title",
+      "passed": true,
+      "detail": "Polymyth Methodologylist*"
+    },
+    {
+      "name": "desktop methodology: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop methodology: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "desktop methodology: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "desktop methodology: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "desktop methodology: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile home: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "mobile home: document title",
+      "passed": true,
+      "detail": "Polymythcal, Tutoring, Resources & Projects | Seminar Schools"
+    },
+    {
+      "name": "mobile home: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile home: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile home: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile home: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "mobile home: CLS at most 0.1",
+      "passed": true,
+      "detail": "0.0060793264371351114"
+    },
+    {
+      "name": "mobile teacher-resources: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "mobile teacher-resources: document title",
+      "passed": true,
+      "detail": "Teacher Resources for English, OSSD & IB | Seminar Schools"
+    },
+    {
+      "name": "mobile teacher-resources: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile teacher-resources: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile teacher-resources: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile teacher-resources: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "mobile teacher-resources: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile polymythcal: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "mobile polymythcal: document title",
+      "passed": true,
+      "detail": "Polymythcal | Seminar Schools"
+    },
+    {
+      "name": "mobile polymythcal: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile polymythcal: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile polymythcal: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile polymythcal: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "mobile polymythcal: CLS at most 0.1",
+      "passed": true,
+      "detail": "0.00031299967641674716"
+    },
+    {
+      "name": "mobile aa: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "mobile aa: document title",
+      "passed": true,
+      "detail": "Archetype Archive & Taxonomy Index | aa*"
+    },
+    {
+      "name": "mobile aa: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile aa: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile aa: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile aa: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "mobile aa: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile bb: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "mobile bb: document title",
+      "passed": true,
+      "detail": "bookwormburrows | AI-Assisted Reading and Seminar Game"
+    },
+    {
+      "name": "mobile bb: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile bb: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile bb: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile bb: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "mobile bb: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile aitr: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "mobile aitr: document title",
+      "passed": true,
+      "detail": "AI Teacher Resources | Games, Lessons & Projects"
+    },
+    {
+      "name": "mobile aitr: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile aitr: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile aitr: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile aitr: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "mobile aitr: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile bookwormcard: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "mobile bookwormcard: document title",
+      "passed": true,
+      "detail": "Bookwormcard \u00b7 Make a bookwormburrows Character Card"
+    },
+    {
+      "name": "mobile bookwormcard: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile bookwormcard: semantic H1",
+      "passed": true,
+      "detail": "2"
+    },
+    {
+      "name": "mobile bookwormcard: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile bookwormcard: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "mobile bookwormcard: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile leizu: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "mobile leizu: document title",
+      "passed": true,
+      "detail": "Toronto Tutor for OSSD, IB & Writing | Leizu Academy"
+    },
+    {
+      "name": "mobile leizu: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile leizu: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile leizu: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile leizu: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "mobile leizu: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile saul: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "mobile saul: document title",
+      "passed": true,
+      "detail": "Saul Karim Nassau - General / Any Role CV"
+    },
+    {
+      "name": "mobile saul: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile saul: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile saul: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile saul: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "mobile saul: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile campaigncodex: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "mobile campaigncodex: document title",
+      "passed": true,
+      "detail": "Campaigncodex | D&D-Based OSSD English Curriculum"
+    },
+    {
+      "name": "mobile campaigncodex: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile campaigncodex: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile campaigncodex: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile campaigncodex: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "mobile campaigncodex: CLS at most 0.1",
+      "passed": true,
+      "detail": "0.014567282855281779"
+    },
+    {
+      "name": "mobile dm-board: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "mobile dm-board: document title",
+      "passed": true,
+      "detail": "DM Board \u00b7 Thank You M'am \u00b7 cmp-001"
+    },
+    {
+      "name": "mobile dm-board: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile dm-board: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile dm-board: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile dm-board: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "mobile dm-board: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile methodology: HTTP success",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "mobile methodology: document title",
+      "passed": true,
+      "detail": "Polymyth Methodologylist*"
+    },
+    {
+      "name": "mobile methodology: one visible main",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile methodology: semantic H1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "mobile methodology: no horizontal overflow",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "mobile methodology: no runtime errors",
+      "passed": true,
+      "detail": "{'pageErrors': [], 'failedLocalRequests': []}"
+    },
+    {
+      "name": "mobile methodology: CLS at most 0.1",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "deep link /aitr/#denote: target visible",
+      "passed": true,
+      "detail": "{'visible': True, 'focused': True, 'top': 216, 'text': 'game\\n      DENOTE\\n      High school + adult \u00b7 ESL and ELA, philosophy of language\\n      The AI deals a pair of concepts to two teams, and they race to chain eac'}"
+    },
+    {
+      "name": "deep link /aitr/#denote: target focused",
+      "passed": true,
+      "detail": "{'visible': True, 'focused': True, 'top': 216, 'text': 'game\\n      DENOTE\\n      High school + adult \u00b7 ESL and ELA, philosophy of language\\n      The AI deals a pair of concepts to two teams, and they race to chain eac'}"
+    },
+    {
+      "name": "deep link /aitr/#denote: target content",
+      "passed": true,
+      "detail": "game\n      DENOTE\n      High school + adult \u00b7 ESL and ELA, philosophy of language\n      The AI deals a pair of concepts to two teams, and they race to chain eac"
+    },
+    {
+      "name": "deep link /aitr/#monster-battle: target visible",
+      "passed": true,
+      "detail": "{'visible': True, 'focused': True, 'top': 108, 'text': 'game\\n      Monster Battle\\n      Elementary, ages 6 to 10 \u00b7 ESL and ELA, descriptive language\\n      Two children each invent a monster, describe it richly, and d'}"
+    },
+    {
+      "name": "deep link /aitr/#monster-battle: target focused",
+      "passed": true,
+      "detail": "{'visible': True, 'focused': True, 'top': 108, 'text': 'game\\n      Monster Battle\\n      Elementary, ages 6 to 10 \u00b7 ESL and ELA, descriptive language\\n      Two children each invent a monster, describe it richly, and d'}"
+    },
+    {
+      "name": "deep link /aitr/#monster-battle: target content",
+      "passed": true,
+      "detail": "game\n      Monster Battle\n      Elementary, ages 6 to 10 \u00b7 ESL and ELA, descriptive language\n      Two children each invent a monster, describe it richly, and d"
+    },
+    {
+      "name": "deep link /polymyth/campaigncodex/#cc-cmp001-curriculum-anchor-map: target visible",
+      "passed": true,
+      "detail": "{'visible': True, 'focused': True, 'top': 216, 'text': \"cc-cmp001-curriculum-anchor-mapcmp-001 curriculum anchor map (session-move to specific-expectation mapping)Maps cmp-001 Hughes Thank You M'am Session 001 phases\"}"
+    },
+    {
+      "name": "deep link /polymyth/campaigncodex/#cc-cmp001-curriculum-anchor-map: target focused",
+      "passed": true,
+      "detail": "{'visible': True, 'focused': True, 'top': 216, 'text': \"cc-cmp001-curriculum-anchor-mapcmp-001 curriculum anchor map (session-move to specific-expectation mapping)Maps cmp-001 Hughes Thank You M'am Session 001 phases\"}"
+    },
+    {
+      "name": "deep link /polymyth/campaigncodex/#cc-cmp001-curriculum-anchor-map: target content",
+      "passed": true,
+      "detail": "cc-cmp001-curriculum-anchor-mapcmp-001 curriculum anchor map (session-move to specific-expectation mapping)Maps cmp-001 Hughes Thank You M'am Session 001 phases"
+    },
+    {
+      "name": "deep link /polymyth/campaigncodex/#cc-cmp001-curriculum-anchor-map: correct section",
+      "passed": true,
+      "detail": "cc"
+    },
+    {
+      "name": "deep link /polymyth/campaigncodex/#cc-cmp001-triangulation-rubric: target visible",
+      "passed": true,
+      "detail": "{'visible': True, 'focused': True, 'top': 108, 'text': \"cc-cmp001-triangulation-rubriccmp-001 triangulation rubric (three evidence kinds to achievement-chart mapping)Maps cmp-001 Hughes Thank You M'am session outputs\"}"
+    },
+    {
+      "name": "deep link /polymyth/campaigncodex/#cc-cmp001-triangulation-rubric: target focused",
+      "passed": true,
+      "detail": "{'visible': True, 'focused': True, 'top': 108, 'text': \"cc-cmp001-triangulation-rubriccmp-001 triangulation rubric (three evidence kinds to achievement-chart mapping)Maps cmp-001 Hughes Thank You M'am session outputs\"}"
+    },
+    {
+      "name": "deep link /polymyth/campaigncodex/#cc-cmp001-triangulation-rubric: target content",
+      "passed": true,
+      "detail": "cc-cmp001-triangulation-rubriccmp-001 triangulation rubric (three evidence kinds to achievement-chart mapping)Maps cmp-001 Hughes Thank You M'am session outputs"
+    },
+    {
+      "name": "deep link /polymyth/campaigncodex/#cc-cmp001-triangulation-rubric: correct section",
+      "passed": true,
+      "detail": "cc"
+    },
+    {
+      "name": "AA pending state deep link",
+      "passed": true,
+      "detail": "true"
+    },
+    {
+      "name": "Leizu dynamic summary label resolves",
+      "passed": true,
+      "detail": "{'labelledby': 'selection-summary-title', 'labelText': 'Your selection', 'text': 'Your selectionPlanTerm \u00b7 $400 over 3 monthsThese choices are included with your intake. Add context below.'}"
+    },
+    {
+      "name": "Leizu selected plan is announced",
+      "passed": true,
+      "detail": "Your selectionPlanTerm \u00b7 $400 over 3 monthsThese choices are included with your intake. Add context below."
+    },
+    {
+      "name": "Teacher Resources live search narrows",
+      "passed": true,
+      "detail": "1 resource across 1 collection"
+    },
+    {
+      "name": "Teacher Resources Escape resets",
+      "passed": true,
+      "detail": "644 resources across 25 collections"
+    },
+    {
+      "name": "DM board mobile single-column reflow",
+      "passed": true,
+      "detail": "{'columns': '369px', 'bodyOverflowY': 'auto', 'overflow': 0, 'centerWidth': 369, 'rightWidth': 369}"
+    },
+    {
+      "name": "DM board native control inventory",
+      "passed": true,
+      "detail": "60"
+    },
+    {
+      "name": "DM board keyboard changes time",
+      "passed": true,
+      "detail": "{'before': 'SAT 11:00 PM', 'after': 'FRIDAY 6:00 PM'}"
+    },
+    {
+      "name": "DM board dialog opens with focus and name",
+      "passed": true,
+      "detail": "{'open': True, 'ariaHidden': 'false', 'focusInside': True, 'labelled': True}"
+    },
+    {
+      "name": "DM board Escape closes dialog",
+      "passed": true,
+      "detail": "{'open': False, 'ariaHidden': 'true', 'inert': True}"
+    },
+    {
+      "name": "DM board dialog returns focus",
+      "passed": true,
+      "detail": "True"
+    },
+    {
+      "name": "DM board interaction has no runtime errors",
+      "passed": true,
+      "detail": "[]"
+    }
+  ],
+  "metrics": [
+    {
+      "title": "Polymythcal, Tutoring, Resources & Projects | Seminar Schools",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 2683,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 14,
+      "transferSize": 337176,
+      "route": "/",
+      "label": "home",
+      "viewport": "desktop",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Teacher Resources for English, OSSD & IB | Seminar Schools",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 1633,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 15,
+      "transferSize": 193969,
+      "route": "/teacherresources/",
+      "label": "teacher-resources",
+      "viewport": "desktop",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Polymythcal | Seminar Schools",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 8835,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 14,
+      "transferSize": 991048,
+      "route": "/polymythseminars/",
+      "label": "polymythcal",
+      "viewport": "desktop",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Archetype Archive & Taxonomy Index | aa*",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 4905,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 15,
+      "transferSize": 276779,
+      "route": "/aa/",
+      "label": "aa",
+      "viewport": "desktop",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "bookwormburrows | AI-Assisted Reading and Seminar Game",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 2404,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 14,
+      "transferSize": 268661,
+      "route": "/bb/",
+      "label": "bb",
+      "viewport": "desktop",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "AI Teacher Resources | Games, Lessons & Projects",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 4190,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 12,
+      "transferSize": 266454,
+      "route": "/aitr/",
+      "label": "aitr",
+      "viewport": "desktop",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Bookwormcard \u00b7 Make a bookwormburrows Character Card",
+      "mainCount": 1,
+      "h1Count": 2,
+      "bodyTextLength": 1796,
+      "overflow": 0,
+      "cls": 0.0015129304108796296,
+      "layoutShifts": [
+        {
+          "value": 0.0015129304108796296,
+          "sources": [
+            {
+              "tag": "DIV",
+              "id": "input-area",
+              "className": "",
+              "previousRect": {
+                "x": 188,
+                "y": 846,
+                "width": 662,
+                "height": 54,
+                "top": 846,
+                "right": 850,
+                "bottom": 900,
+                "left": 188
+              },
+              "currentRect": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0,
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              }
+            },
+            {
+              "tag": "SPAN",
+              "id": "cursor-block",
+              "className": "",
+              "previousRect": {
+                "x": 829,
+                "y": 841,
+                "width": 32,
+                "height": 42,
+                "top": 841,
+                "right": 861,
+                "bottom": 883,
+                "left": 829
+              },
+              "currentRect": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0,
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              }
+            }
+          ]
+        }
+      ],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 26,
+      "transferSize": 647237,
+      "route": "/bookwormcard/",
+      "label": "bookwormcard",
+      "viewport": "desktop",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Toronto Tutor for OSSD, IB & Writing | Leizu Academy",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 14890,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 1,
+      "maxLongTaskMs": 88,
+      "resourceCount": 17,
+      "transferSize": 137133,
+      "route": "/leizu/",
+      "label": "leizu",
+      "viewport": "desktop",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Saul Karim Nassau - General / Any Role CV",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 5728,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 1,
+      "maxLongTaskMs": 56,
+      "resourceCount": 20,
+      "transferSize": 443332,
+      "route": "/saul/",
+      "label": "saul",
+      "viewport": "desktop",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Campaigncodex | D&D-Based OSSD English Curriculum",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 595359,
+      "overflow": 0,
+      "cls": 0.01578360768175583,
+      "layoutShifts": [
+        {
+          "value": 0.01578360768175583,
+          "sources": [
+            {
+              "tag": "DIV",
+              "id": "",
+              "className": "sdesc",
+              "previousRect": {
+                "x": 187,
+                "y": 378,
+                "width": 1052,
+                "height": 98,
+                "top": 378,
+                "right": 1239,
+                "bottom": 476,
+                "left": 187
+              },
+              "currentRect": {
+                "x": 187,
+                "y": 434,
+                "width": 1052,
+                "height": 98,
+                "top": 434,
+                "right": 1239,
+                "bottom": 532,
+                "left": 187
+              }
+            },
+            {
+              "tag": "DIV",
+              "id": "",
+              "className": "sdesc",
+              "previousRect": {
+                "x": 187,
+                "y": 492,
+                "width": 1052,
+                "height": 144,
+                "top": 492,
+                "right": 1239,
+                "bottom": 636,
+                "left": 187
+              },
+              "currentRect": {
+                "x": 187,
+                "y": 548,
+                "width": 1052,
+                "height": 144,
+                "top": 548,
+                "right": 1239,
+                "bottom": 692,
+                "left": 187
+              }
+            },
+            {
+              "tag": "DIV",
+              "id": "",
+              "className": "tabs",
+              "previousRect": {
+                "x": 187,
+                "y": 652,
+                "width": 1052,
+                "height": 44,
+                "top": 652,
+                "right": 1239,
+                "bottom": 696,
+                "left": 187
+              },
+              "currentRect": {
+                "x": 187,
+                "y": 708,
+                "width": 1052,
+                "height": 44,
+                "top": 708,
+                "right": 1239,
+                "bottom": 752,
+                "left": 187
+              }
+            },
+            {
+              "tag": "DIV",
+              "id": "",
+              "className": "bar",
+              "previousRect": {
+                "x": 187,
+                "y": 712,
+                "width": 1052,
+                "height": 34,
+                "top": 712,
+                "right": 1239,
+                "bottom": 746,
+                "left": 187
+              },
+              "currentRect": {
+                "x": 187,
+                "y": 768,
+                "width": 1052,
+                "height": 34,
+                "top": 768,
+                "right": 1239,
+                "bottom": 802,
+                "left": 187
+              }
+            },
+            {
+              "tag": "DIV",
+              "id": "entries",
+              "className": "",
+              "previousRect": {
+                "x": 187,
+                "y": 762,
+                "width": 1052,
+                "height": 138,
+                "top": 762,
+                "right": 1239,
+                "bottom": 900,
+                "left": 187
+              },
+              "currentRect": {
+                "x": 187,
+                "y": 818,
+                "width": 1052,
+                "height": 82,
+                "top": 818,
+                "right": 1239,
+                "bottom": 900,
+                "left": 187
+              }
+            }
+          ]
+        }
+      ],
+      "longTaskCount": 2,
+      "maxLongTaskMs": 135,
+      "resourceCount": 17,
+      "transferSize": 406592,
+      "route": "/polymyth/campaigncodex/",
+      "label": "campaigncodex",
+      "viewport": "desktop",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "DM Board \u00b7 Thank You M'am \u00b7 cmp-001",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 3451,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 11,
+      "transferSize": 101410,
+      "route": "/campaigns/thank-you-mam/dm-board/",
+      "label": "dm-board",
+      "viewport": "desktop",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Polymyth Methodologylist*",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 1848823,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 3,
+      "maxLongTaskMs": 415,
+      "resourceCount": 16,
+      "transferSize": 286788,
+      "route": "/polymyth/methodologylist/",
+      "label": "methodology",
+      "viewport": "desktop",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Polymythcal, Tutoring, Resources & Projects | Seminar Schools",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 2723,
+      "overflow": 0,
+      "cls": 0.0060793264371351114,
+      "layoutShifts": [
+        {
+          "value": 0.0060793264371351114,
+          "sources": [
+            {
+              "tag": "P",
+              "id": "mapInstruction",
+              "className": "hint",
+              "previousRect": {
+                "x": 226,
+                "y": 84,
+                "width": 133,
+                "height": 26,
+                "top": 84,
+                "right": 359,
+                "bottom": 110,
+                "left": 226
+              },
+              "currentRect": {
+                "x": 118,
+                "y": 84,
+                "width": 241,
+                "height": 26,
+                "top": 84,
+                "right": 359,
+                "bottom": 110,
+                "left": 118
+              }
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "className": "on",
+              "previousRect": {
+                "x": 162,
+                "y": 649,
+                "width": 108,
+                "height": 44,
+                "top": 649,
+                "right": 270,
+                "bottom": 693,
+                "left": 162
+              },
+              "currentRect": {
+                "x": 181,
+                "y": 649,
+                "width": 128,
+                "height": 44,
+                "top": 649,
+                "right": 309,
+                "bottom": 693,
+                "left": 181
+              }
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "className": "",
+              "previousRect": {
+                "x": 278,
+                "y": 649,
+                "width": 97,
+                "height": 44,
+                "top": 649,
+                "right": 375,
+                "bottom": 693,
+                "left": 278
+              },
+              "currentRect": {
+                "x": 317,
+                "y": 649,
+                "width": 58,
+                "height": 44,
+                "top": 649,
+                "right": 375,
+                "bottom": 693,
+                "left": 317
+              }
+            }
+          ]
+        }
+      ],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 14,
+      "transferSize": 337176,
+      "route": "/",
+      "label": "home",
+      "viewport": "mobile",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Teacher Resources for English, OSSD & IB | Seminar Schools",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 1484,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 15,
+      "transferSize": 193969,
+      "route": "/teacherresources/",
+      "label": "teacher-resources",
+      "viewport": "mobile",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Polymythcal | Seminar Schools",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 6982,
+      "overflow": 0,
+      "cls": 0.00031299967641674716,
+      "layoutShifts": [
+        {
+          "value": 0.00031299967641674716,
+          "sources": [
+            {
+              "tag": "SPAN",
+              "id": "",
+              "className": "",
+              "previousRect": {
+                "x": 37,
+                "y": 382,
+                "width": 174,
+                "height": 21,
+                "top": 382,
+                "right": 211,
+                "bottom": 403,
+                "left": 37
+              },
+              "currentRect": {
+                "x": 16,
+                "y": 382,
+                "width": 174,
+                "height": 21,
+                "top": 382,
+                "right": 190,
+                "bottom": 403,
+                "left": 16
+              }
+            }
+          ]
+        }
+      ],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 14,
+      "transferSize": 991048,
+      "route": "/polymythseminars/",
+      "label": "polymythcal",
+      "viewport": "mobile",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Archetype Archive & Taxonomy Index | aa*",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 1949,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 15,
+      "transferSize": 276779,
+      "route": "/aa/",
+      "label": "aa",
+      "viewport": "mobile",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "bookwormburrows | AI-Assisted Reading and Seminar Game",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 2404,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 14,
+      "transferSize": 268661,
+      "route": "/bb/",
+      "label": "bb",
+      "viewport": "mobile",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "AI Teacher Resources | Games, Lessons & Projects",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 4190,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 12,
+      "transferSize": 266454,
+      "route": "/aitr/",
+      "label": "aitr",
+      "viewport": "mobile",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Bookwormcard \u00b7 Make a bookwormburrows Character Card",
+      "mainCount": 1,
+      "h1Count": 2,
+      "bodyTextLength": 1665,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 26,
+      "transferSize": 647237,
+      "route": "/bookwormcard/",
+      "label": "bookwormcard",
+      "viewport": "mobile",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Toronto Tutor for OSSD, IB & Writing | Leizu Academy",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 14890,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 1,
+      "maxLongTaskMs": 65,
+      "resourceCount": 17,
+      "transferSize": 137133,
+      "route": "/leizu/",
+      "label": "leizu",
+      "viewport": "mobile",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Saul Karim Nassau - General / Any Role CV",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 5573,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 20,
+      "transferSize": 443332,
+      "route": "/saul/",
+      "label": "saul",
+      "viewport": "mobile",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Campaigncodex | D&D-Based OSSD English Curriculum",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 595359,
+      "overflow": 0,
+      "cls": 0.014567282855281779,
+      "layoutShifts": [
+        {
+          "value": 0.014567282855281779,
+          "sources": [
+            {
+              "tag": "DIV",
+              "id": "",
+              "className": "sdesc",
+              "previousRect": {
+                "x": 24,
+                "y": 623,
+                "width": 327,
+                "height": 221,
+                "top": 623,
+                "right": 351,
+                "bottom": 844,
+                "left": 24
+              },
+              "currentRect": {
+                "x": 24,
+                "y": 679,
+                "width": 327,
+                "height": 165,
+                "top": 679,
+                "right": 351,
+                "bottom": 844,
+                "left": 24
+              }
+            }
+          ]
+        }
+      ],
+      "longTaskCount": 2,
+      "maxLongTaskMs": 151,
+      "resourceCount": 17,
+      "transferSize": 406592,
+      "route": "/polymyth/campaigncodex/",
+      "label": "campaigncodex",
+      "viewport": "mobile",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "DM Board \u00b7 Thank You M'am \u00b7 cmp-001",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 3451,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 0,
+      "maxLongTaskMs": 0,
+      "resourceCount": 11,
+      "transferSize": 101410,
+      "route": "/campaigns/thank-you-mam/dm-board/",
+      "label": "dm-board",
+      "viewport": "mobile",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    },
+    {
+      "title": "Polymyth Methodologylist*",
+      "mainCount": 1,
+      "h1Count": 1,
+      "bodyTextLength": 1848823,
+      "overflow": 0,
+      "cls": 0,
+      "layoutShifts": [],
+      "longTaskCount": 3,
+      "maxLongTaskMs": 486,
+      "resourceCount": 16,
+      "transferSize": 286788,
+      "route": "/polymyth/methodologylist/",
+      "label": "methodology",
+      "viewport": "mobile",
+      "pageErrors": [],
+      "failedLocalRequests": []
+    }
+  ],
+  "held_direction_decisions": [
+    {
+      "route": "/polymyth/methodologylist/",
+      "decision": "Server rendering or list virtualization",
+      "reason": "Audit 41 removed the archive's layout shift. Replacing its full-payload rendering to eliminate the remaining startup long task would change the delivery architecture."
+    }
+  ],
+  "environment_limits": [
+    "Native VoiceOver on macOS was unavailable.",
+    "Native NVDA on Windows was unavailable.",
+    "Firefox launch was blocked by the container user-namespace/profile runtime.",
+    "WebKit host libraries were unavailable in the read-only system image."
+  ]
+}

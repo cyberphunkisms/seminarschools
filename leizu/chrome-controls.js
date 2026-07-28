@@ -5,6 +5,8 @@
  * ============================================================ */
 (function(){
   'use strict';
+  if(window.__leizuChromeControlsMounted)return;
+  window.__leizuChromeControlsMounted=true;
   var root = document.documentElement;
 
   function safeLocalSet(key, value){ try{ localStorage.setItem(key, value); }catch(e){} }

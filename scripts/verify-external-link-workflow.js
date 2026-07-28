@@ -14,6 +14,14 @@ check('workflow runs on a schedule', text.includes('schedule:'));
 check('workflow invokes live external link checker', text.includes('scripts/audit-external-links-live.js'));
 check('workflow runs strict live checks', text.includes('EXTERNAL_LINK_STRICT: "1"') || text.includes('EXTERNAL_LINK_STRICT: 1'));
 check('workflow uploads live report artifact', /actions\/upload-artifact@v(?:7|[89]|[1-9][0-9]+)/.test(text) && text.includes('external-link-live-report.json'));
+check('workflow remains once weekly on Sunday', /cron:\s*["']17 10 \* \* 0["']/.test(text));
+check('workflow preserves the exact 350-URL ceiling', /EXTERNAL_LINK_CHECK_LIMIT:\s*["']350["']/.test(text));
+check('workflow configures bounded global concurrency', /EXTERNAL_LINK_CONCURRENCY:\s*["']16["']/.test(text));
+check('workflow configures per-host throttling', /EXTERNAL_LINK_PER_HOST_CONCURRENCY:\s*["']4["']/.test(text));
+check('workflow restores the bounded live cache', text.includes('actions/cache/restore@v4') && text.includes('scripts/reports/external-link-live-cache.json'));
+check('workflow saves the bounded live cache even after strict failures', text.includes('actions/cache/save@v4') && text.includes("if: always() && hashFiles('scripts/reports/external-link-live-cache.json') != ''"));
+check('workflow cache key is unique per run attempt', text.includes('github.run_id') && text.includes('github.run_attempt'));
+check('workflow cache restore prefix is schema- and OS-scoped', text.includes('external-link-live-v1-${{ runner.os }}-'));
 if (fail) {
   console.error('\nEXTERNAL LINK WORKFLOW CHECK FAILED');
   process.exit(1);

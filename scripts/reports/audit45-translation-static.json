@@ -1,0 +1,31 @@
+{
+  "schema": "seminar-schools-audit45-translation-static-v1",
+  "release": "audit45",
+  "assertions": 18565,
+  "passed": 18565,
+  "failed": 0,
+  "metrics": {
+    "events": 833,
+    "event_types": 32,
+    "sources": 422,
+    "french_event_routes": 833,
+    "french_event_legacy_alias_routes": 12,
+    "leizu_localized_routes": 40,
+    "saul_localized_routes": 4,
+    "teacher_resources": 644,
+    "teacher_language_counts": {
+      "en-CA": 618,
+      "fr-CA": 23,
+      "mul": 3
+    },
+    "methodology_entries": 1168,
+    "governed_route_records": 61,
+    "event_source_language_counts": {
+      "und": 796,
+      "fr-CA": 24,
+      "mul": 13
+    },
+    "scrape_cadence": "exactly once weekly"
+  },
+  "failures": []
+}

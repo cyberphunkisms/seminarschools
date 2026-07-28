@@ -23,15 +23,15 @@ Capture organized public protests of all sorts: demonstrations, marches, rallies
 
 1. **Cause or issue.** The protest is about something nameable.
 2. **Organizer or convening group.** A named coalition, union, organization, or public callout. Use `null` only when the listing genuinely omits it.
-3. **Time and place.** A specific date, start time, and assembly location are publicly stated.
+3. **Date and public trace.** A specific future date and a public source URL are stated. Start time and assembly location may remain pending when the record is clearly tagged unconfirmed.
 
 Capture protests across the entire political spectrum. Do not filter by cause, viewpoint, or sympathy. "Of all sorts" is literal. Record the protest as published and let the reader judge.
 
-Set `type` to `protest`. Fill the `four_condition_test` object honestly against the seminar definition, which for a protest usually means only condition 1 is true. Inclusion rests on the three protest criteria above, not on the seminar test. The same citation discipline applies. Every protest record must carry a `raw_excerpt` and a `source_url` from the listing that confirms it. Do not invent a protest and do not list a rumored or unconfirmed action.
+Set `type` to `protest`. Fill the `four_condition_test` object honestly against the seminar definition, which for a protest usually means only condition 1 is true. Inclusion rests on the protest criteria above. Every protest record must carry a `raw_excerpt` and a `source_url` from the public announcement. A dated announcement missing time or location stays in `events` with `confirmation_status: "unconfirmed"` and exact `qualification_reasons`. A callout missing its event date stays out until the source publishes one.
 
-Protest sources are now in the venue roster as `labour-council` and `protest-civic`. Also surface protests from any announcement you can confirm with a `source_url` and a verbatim `raw_excerpt`. Treat an unconfirmable protest as nonexistent.
+The deterministic protest stage crawls every enabled `default_type: "protest"` source before this agent stage, without sharding. The runner supplies the exact IDs whose deterministic crawl fully succeeded; leave only those sources to the retained deterministic output. A protest source with a partial, blocked, failed, confirmed-empty, or not-modified deterministic result remains eligible for this run's paid shard so a failed server-readable route does not become a coverage gap.
 
-**Find a Protest source rule.** Crawl `findaprotest-toronto` every run before sharding. Fetch the Toronto index, follow each event detail page, and preserve the detail URL. Publish an event only when the detail page gives a specific date, start time, specific assembly location or venue, organizer, and raw excerpt. If the page says `TBD`, `Not available`, `MORE INFO TO BE SHARED SOON`, or only city-level location, do not publish it in `events`; put it in `qualification queue` with `status: "needs-time-place"` or `status: "needs-location"`, preserving title, organizer, date text, detail URL, raw excerpt, and topics.
+**Find a Protest source rule.** The deterministic stage handles `findaprotest-toronto`, fetches the Toronto index, follows event detail pages, and reports blocks or fetch failures explicitly. A detail page with a real future date stays in the public chronology. Missing time produces `time-unconfirmed`; a city-level or missing assembly point produces `location-unconfirmed`; an aggregator-only announcement also produces `aggregator-only`. Preserve the organizer, detail URL, original excerpt, first-seen time, and recheck time.
 
 **Topic discovery.** Keep `FIFA`, `World Cup`, `football`, `Palestine`, `Human Rights`, and organizer names visible in `raw_excerpt` or `topics` when present. This is for search recall only; do not infer a protest category from a topic. Classify by the listing: `protest` for rallies, marches, vigils, strikes, pickets, sit-ins, or demonstrations; `community` or `exhibition` for exhibits and teach-ins that are not public street actions.
 
@@ -71,10 +71,10 @@ The full venue roster is in `/scripts/sources.json`. Read that file first. Each 
 
 Coverage rules (budget-safe rotation, June 29 2026):
 
-The roster is larger than one run's budget, so coverage rotates across the shard count supplied by the runner. The runner provides both this run's SHARD number and the SHARD_COUNT at the top of the prompt. Crawl exactly these sources, in this order:
+The roster is larger than one run's budget, so coverage rotates across the shard count supplied by the runner. The runner provides this run's SHARD number, SHARD_COUNT, and a deterministic-success skip list at the top of the prompt. Do not recrawl an ID in that skip list. Crawl exactly these other sources, in this order:
 
-1. **Every-run set.** All sources with `tier_priority` 1.
-2. **This run's shard.** Of every remaining source, including sources whose `default_type` is `screening`, `cfp`, or `contest`, crawl only those whose zero-based position in the `sources` array satisfies `position % SHARD_COUNT == SHARD`. Skip the rest and record them as `skipped-shard` in the source accounting below.
+1. **Every-run set.** All sources with `tier_priority` 1 except IDs in the deterministic-success skip list.
+2. **This run's shard.** Of every remaining source not in the deterministic-success skip list, including sources whose `default_type` is `screening`, `cfp`, or `contest`, crawl only those whose zero-based position in the `sources` array satisfies `position % SHARD_COUNT == SHARD`. The runner accounts for all out-of-shard rows; do not emit them.
 3. **Urgency reserve.** If budget remains after the every-run set and assigned shard, crawl at most five extra `cfp`, `contest`, or `screening` sources where the listing itself suggests a deadline or event within the next 30 days. Record those as `crawled-urgency-reserve` in the source accounting.
 
 Across a complete shard cycle this covers the full roster without trying to crawl 140+ sources in one action run. Within the run, if the budget runs low, finish the every-run set before starting the shard, and record any source you could not reach as `budget-exhausted` rather than silently dropping it. Before the budget is exhausted, write a valid JSON file with the records already verified; a smaller verified harvest is better than a failed run.
@@ -85,15 +85,17 @@ Across a complete shard cycle this covers the full roster without trying to craw
 
 If a fetch returns a 403, a WAF page, or empty content, try once more with the venue's `base_url` instead. Then move on and record the status.
 
-## Source accounting (fail-loud, required)
+## Attempted-source accounting (fail-loud, required)
 
-The output JSON must carry a `source_yields` array with one entry for EVERY source in `sources.json`, no exceptions, in roster order:
+The output JSON must carry a compact `source_yields` array containing exactly one row for every source you were assigned: every non-skipped Tier-1 source and every non-skipped source in this run's shard. Do not copy the full 422-source roster into the output. Do not emit rows for deterministic-success, disabled/manual/non-HTTP, or ordinary out-of-shard sources; the runner expands those rows deterministically after validating your output.
 
 ```json
-"source_yields": [ {"source_id": "...", "status": "crawled", "events": 3}, {"source_id": "...", "status": "crawled", "events": 0}, {"source_id": "...", "status": "skipped-shard", "events": 0}, {"source_id": "...", "status": "unreachable", "events": 0}, ... ]
+"source_yields": [ {"source_id": "...", "status": "crawled", "events": 3}, {"source_id": "...", "status": "crawled", "events": 0}, {"source_id": "...", "status": "unreachable", "events": 0}, {"source_id": "...", "status": "budget-exhausted", "events": 0} ]
 ```
 
-Statuses: `crawled` (fetched and parsed, events may be 0), `skipped-shard` (outside this week's shard), `unreachable` (fetch failed after the base_url retry), `budget-exhausted` (run out of budget before reaching it). A crawled source with zero events is a normal, honest result. An omitted source is a failure of this accounting rule. The post-processor turns this table into the public scrape log, so the zero-yield sources become a visible worklist instead of an invisible gap.
+Assigned-source statuses: `crawled` (fetched and parsed, events may be 0), `unreachable` (fetch failed after the base_url retry), or `budget-exhausted` (run out of budget before reaching it). For an urgency-reserve source outside the assigned set, use exactly `crawled-urgency-reserve`; only `cfp`, `contest`, or `screening` sources qualify, and at most five such rows are allowed. Never emit `skipped-deterministic-success`, `skipped-disabled`, or `skipped-shard`; the validator derives those from `sources.json`, SHARD, SHARD_COUNT, and the runner's deterministic-success IDs.
+
+Every event must use a `source_id` from your compact accounting rows. Each row's integer `events` value must equal the exact number of output events carrying that `source_id`; non-producing statuses must report zero. Duplicate, missing, unknown, ineligible-reserve, or miscounted rows fail validation and leave public data unchanged. The post-processor expands the compact table into a full roster-ordered ledger, so coverage gaps remain visible without spending model output tokens restating hundreds of mechanically known skips.
 
 ## Capture completeness, link specificity, multi-type, nesting, and merging
 
@@ -121,27 +123,26 @@ Write a single JSON object to `/tmp/seminars-output.json` matching `/data/semina
 ```json
 {
   "generated_at": "ISO-8601 timestamp UTC",
-  "events": [ <record>, <record>, ... ],
   "events": [ <confirmed and unconfirmed records together; every uncertain record must include confirmation_status="unconfirmed" and exact qualification_reasons> ],
-  "source_yields": [ <one entry per rostered source, see Source accounting> ]
+  "source_yields": [ <one entry per assigned or urgency-reserve source, see Attempted-source accounting> ]
 }
 ```
 
 Each `<record>` is an object with these required fields:
 
 - `id`: SHA-1 of `source_url::date_iso`, first 12 hex chars. Compute it.
-- `date`: ISO 8601 with timezone. Toronto is `-04:00` in EDT (April-October).
+- `date`: ISO 8601 with the date-specific `America/Toronto` offset. Summer dates use `-04:00`; winter dates use `-05:00`.
 - `end_date`: ISO 8601 for any event spanning more than one day, set to the last day. A two-day workshop is one record with `date` on day one and `end_date` on day two. `null` only for single-day events.
 - `title`: exact title as published. No editorial rewriting.
 - `venue`: venue name plus address when knowable.
 - `source_url`: the event's own detail-page URL. Follow through from any listing to the specific event page. Fall back to a listing page only when no per-event page exists, and never to a bare festival homepage when a dated event page exists.
 - `source_id`: the `id` from `sources.json` that this came from.
-- `type`: the primary type, one of `lecture`, `screening`, `reading`, `artist-talk`, `panel`, `scholar-talk`, `philosophy-cafe`, `conference`, `workshop`, `symposium`, `colloquium`, `book-talk`, `book-launch`, `exhibition`, `site-specific-art`, `performance`, `festival-of-form`, `cultural-reproduction`, `gathering`, `protest`, `community`, `cfp`, `contest`, `podcast-live`, `other`. Pick the closest. This drives the event's colour.
+- `type`: the primary type, one of `lecture`, `screening`, `reading`, `artist-talk`, `panel`, `podcast-live`, `scholar-talk`, `philosophy-cafe`, `conference`, `workshop`, `symposium`, `colloquium`, `book-talk`, `book-launch`, `talk`, `forum`, `webinar`, `exhibition`, `site-specific-art`, `performance`, `festival-of-form`, `festival`, `cultural-reproduction`, `gathering`, `memorial`, `celebration`, `networking`, `residency`, `retreat`, `meeting`, `protest`, `community`, `cfp`, `defence`, `contest`, `other`. Pick the closest. This drives the event's colour.
 - `secondary_types`: array of additional types from the same set when the event is genuinely more than one. Empty array when it is a single type.
 - `age_band`: stated entrant or attendee age band or eligibility, or `null`. Examples: `Youth (13-18)`, `Grades 9-12`, `Undergraduate`, `All ages`.
 - `speaker_or_director`: named speaker(s) or `null`.
 - `attendance_confirmed`: boolean. Screenings: true only if director attendance is explicit in the listing. Lectures: true if speaker is named.
-- `confidence`: integer 0-100. 90+ = explicitly stated date/title/venue. 70-89 = inferred from context. Below 70 = do not include.
+- `confidence`: integer 0-100. 90+ = explicitly stated date/title/venue. 70-89 = partially specified. A source-backed future event below 70 stays visible only when `confirmation_status` and exact `qualification_reasons` explain the uncertainty.
 - `four_condition_test`: object with four boolean fields. Fill honestly.
 - `raw_excerpt`: verbatim excerpt (max 500 chars) from the source page that confirms the event. **Required for citation trace.**
 - `scraped_at`: ISO 8601 timestamp UTC, the moment of fetch.
@@ -158,7 +159,7 @@ Each `<record>` is an object with these required fields:
 
 - If a venue page is unreachable, log it in the JSON output as an empty result for that `source_id`. Do not invent events.
 - If the **date** is "TBA" or "date forthcoming," skip the entry. A missing date is fatal; a missing speaker or venue is not.
-- Do not store the literal string "TBA" in `speaker_or_director` or `venue`. If either is unannounced, run one resolving search; if it stays unknown, set the field to `null` and keep `confidence` in the 70-to-79 band.
+- Do not store the literal string "TBA" in `speaker_or_director` or `venue`. If either is unannounced, use `null` for the speaker and an empty string for the venue, then add the relevant qualification reason.
 - If the title is generic placeholder text ("Event title" or "Coming soon"), skip.
 - If a date has already passed, skip.
 

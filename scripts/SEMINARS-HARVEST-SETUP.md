@@ -109,13 +109,14 @@ If costs drift, audit `data/scrape-log.json` for per-source counts. A
 venue returning zero week after week may have moved its listing page or
 implemented stronger anti-bot. Update its `events_url` in `sources.json`.
 
-## Adjusting cadence
+## Locked cadence
 
 `.github/workflows/scrape-seminars.yml` line 30: `cron: '0 6 * * 1'`.
 Monday 06:00 UTC = 02:00 Toronto EDT.
 
-Daily: `0 6 * * *`. Twice-weekly: `0 6 * * 1,4`. Biweekly: requires
-external scheduler since cron does not natively support `every other week`.
+The production cadence is once weekly. Change it only through a new explicit
+cost-and-coverage decision; manual diagnostics must not consume a later
+weekly shard.
 
 ## Adding venues
 

@@ -54,7 +54,9 @@ must('PolymythDND rules capture current clarification pass', rules.includes('Cur
 must('PolymythDND rules define the teacher-AI Dimensional Master', rules.includes('teacher and AI form the Dimensional Master together') && rules.includes('Rainbowsol names Saul specifically') && rules.includes('AI-assisted play is the priority design surface'));
 must('Campaign NPC schedule separates setupnpcs and improvnpcs', npcSchedule.includes('setupnpcs') && npcSchedule.includes('improvnpcs'));
 must('Campaign codex pages carry current BB campaign ruling', campaignCodex.includes('Current BB ruling for campaigns') && campaignTxt.includes('CURRENT BB / POLYMYTHDND CAMPAIGN RULING'));
-must('Studylist carries the 33rd BB clarification entry', studyTxt.includes('STUDYLIST (33 entries)') && studyTxt.includes('BB* / PolymythDND clarification and next build queue'));
+const studyCountMatch = studyTxt.match(/STUDYLIST \((\d+) entries\)/);
+const studyCount = studyCountMatch ? Number(studyCountMatch[1]) : 0;
+must('Studylist preserves the BB clarification entry after later additions', studyCount >= 33 && studyTxt.includes('BB* / PolymythDND clarification and next build queue'));
 must('Methodologylist mirror carries BB clarification entry', studyFull.includes('BB* / PolymythDND clarification and next build queue'));
 must('Studylist page carries BB clarification entry', studyPage.includes('BB* / PolymythDND clarification and next build queue'));
 

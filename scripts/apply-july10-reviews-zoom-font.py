@@ -3,7 +3,7 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-BUILD = '20260710-reviews-zoom-font-a'
+BUILD = '20260725-audit45'
 GLOBAL_LINK = f'<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={BUILD}" data-site-wide-type-zoom="{BUILD}">'
 
 css = r'''/* ========================================================================

@@ -1,14 +1,25 @@
 {
-  "release_id": "2026-07-22-polymythcal-audit21-end-to-end",
-  "generated_at": "2026-07-22T14:30:00-04:00",
+  "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
+  "generated_at": "2026-07-28T21:45:00-04:00",
+  "polymythcal_asset_version": "20260728-audit53",
   "publish_dir": "public",
-  "release_type": "Unified Git, Netlify, Windows deployer, and Polymythcal publication release",
+  "release_type": "Audit 53 shared discovery and evidence architecture for Teacher Resources, Polymythcal, and Polymyth Commons",
   "notes": [
-    "Audit 21 validates one end-to-end deployment contract instead of separate incompatible package assumptions.",
-    "The main calendar and all eleven writing and academic entry pages now use the same clear multi-select interface and canonical event corpus.",
-    "Event counts, dependency checks, build manifests, and release verification are data-driven so legitimate future harvests do not fail on stale hard-coded totals.",
-    "The Polymythcal publication pipeline supports both the current client shell and legacy fallback pages, rebuilds stable event pages and ICS files, updates feeds and manifests, and regenerates the public deploy surface.",
-    "Generated public files remain safe for the Windows deployer package while Netlify generates the same public surface from source. Git hygiene is verified and repaired separately.",
-    "Native VoiceOver and NVDA sign-off remains an explicit platform test with a recorded protocol rather than an automated claim."
+    "Teacher Resources now opens with search, offers six task-led starting paths, and then preserves the complete seven-group and 25-collection shelf structure.",
+    "All 644 Teacher Resources retain their existing public routes and now carry stable TR identifiers, stable route keys, complete collection descriptions, normalized live taxonomy, honest missing-curriculum labels, and complete feed coverage.",
+    "Teacher Resources remains intentionally English while preserving source-language metadata. It does not add a session runner or automatic pedagogical sequence.",
+    "Polymythcal now offers goal-led paths for today, this week, attendance, deadlines, youth and families, educators, and online participation while preserving its detailed filters.",
+    "Polymythcal retains 833 canonical events, 32 types, feeds, ICS files, route aliases, 24-card pagination, bounded cached fallback, private approximate nearby ranking, and exactly once-weekly refresh cadence.",
+    "English and French calendar routes remain reciprocal. Unknown times publish as dates rather than midnight, application dates are visibly labeled as deadlines, and application-only records do not emit Event schema.",
+    "Saved calendar events now round-trip as versioned ID arrays across the main and focused calendars, with separate metadata and migration from the earlier saved-state formats.",
+    "Polymyth Commons retains 346 stable records, 393 book mentions, 437 printed links, 43 commons forms, 79 project types, and 50 relationship terms.",
+    "Eight Polymyth Commons collections now publish one versioned rule set with selection logic, anchor records, counts, and stable member IDs shared by the static directory and hosted application.",
+    "Commons record pages distinguish current homes, continuing services, surviving archives, surviving documentation, and book-era pointers. Book-derived descriptions are labeled source-grounded summaries.",
+    "Every Commons book mention and current-status row now carries a stable project join. CSV nested data is machine-readable, and the data manifest publishes schema context, rights context, and SHA-256 file digests.",
+    "The Commons generator and its deterministic inspected workbook input ship with the source package.",
+    "The Seminar Schools home, About, Teacher Resources, English and French Polymythcal, human sitemap, XML sitemap, and llms.txt retain direct Polymyth Commons routes.",
+    "The newest Greenpeace and Saul CV deliverables remain byte-identical across all 160 protected files.",
+    "Native VoiceOver, NVDA, branded Safari and Firefox, physical-device, real-user, vendor-account calendar import, and deployed subscription-refresh validation remain external evidence rather than simulated passes.",
+    "No security audit was performed."
   ]
 }

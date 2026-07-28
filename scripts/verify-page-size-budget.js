@@ -1,22 +1,32 @@
 #!/usr/bin/env node
 'use strict';
 const fs=require('fs'); const path=require('path');
+const {isGeneratedDependencyDirectory}=require('./repository-walk-policy');
 const ROOT=path.resolve(__dirname,'..');
 function configuredPublishDir(){ const fp=path.join(ROOT,'netlify.toml'); if(!fs.existsSync(fp)) return '.'; const m=fs.readFileSync(fp,'utf8').match(/\bpublish\s*=\s*"([^"]+)"/); return m?m[1]:'.'; }
 const SITE_ROOT=path.resolve(ROOT, configuredPublishDir());
 const budgetPath=path.join(ROOT,'scripts','reports','page-size-budget.json');
 const failures=[]; const warnings=[];
-function walk(dir,acc=[]){ for(const e of fs.readdirSync(dir,{withFileTypes:true})){ if(['.git','node_modules','.netlify','public'].includes(e.name)) continue; const full=path.join(dir,e.name); if(e.isDirectory()) walk(full,acc); else if(e.isFile() && e.name.endsWith('.html')) acc.push(full); } return acc; }
+function walk(dir,acc=[]){ for(const e of fs.readdirSync(dir,{withFileTypes:true})){ if(['.git','.netlify','public'].includes(e.name)||isGeneratedDependencyDirectory(e.name)) continue; const full=path.join(dir,e.name); if(e.isDirectory()) walk(full,acc); else if(e.isFile() && e.name.endsWith('.html')) acc.push(full); } return acc; }
 if(!fs.existsSync(budgetPath)){ console.error('PAGE SIZE BUDGET FAILED — missing scripts/reports/page-size-budget.json'); process.exit(1); }
 const budget=JSON.parse(fs.readFileSync(budgetPath,'utf8'));
+if(budget.schema!=='page-size-budget-v3') failures.push(`unsupported page budget schema ${budget.schema||'missing'}`);
 const byPath=new Map((budget.budgetedLargePages||[]).map(x=>[x.path,x]));
+if(byPath.size!==(budget.budgetedLargePages||[]).length) failures.push('page-size budget contains duplicate paths');
+for(const row of budget.budgetedLargePages||[]){
+  const file=path.join(SITE_ROOT,row.path);
+  if(!fs.existsSync(file)){ failures.push(`${row.path} budget entry has no deployed file`); continue; }
+  const size=fs.statSync(file).size;
+  if(!Number.isInteger(row.baselineBytes)||!Number.isInteger(row.ceilingBytes)||row.baselineBytes<=0||row.ceilingBytes<row.baselineBytes) failures.push(`${row.path} has an invalid baseline/ceiling`);
+  if(size<=(budget.unbudgetedLimitBytes||350000)) failures.push(`${row.path} is now ${size} bytes and no longer needs a large-page exception`);
+}
 for(const f of walk(SITE_ROOT)){
   const rel=path.relative(SITE_ROOT,f).replace(/\\/g,'/'); const size=fs.statSync(f).size;
   const row=byPath.get(rel);
   if(row){ if(size > row.ceilingBytes) failures.push(`${rel} ${size} exceeds budget ceiling ${row.ceilingBytes}`); }
-  else if(size > (budget.unbudgetedLimitBytes || 500000)) failures.push(`${rel} is ${size} bytes and lacks a page-size budget entry`);
-  else if(size > 350000) warnings.push(`${rel} is ${size} bytes`);
+  else if(size > (budget.unbudgetedLimitBytes || 350000)) failures.push(`${rel} is ${size} bytes and lacks a page-size budget entry`);
+  else if(size > (budget.warningLimitBytes || 250000)) warnings.push(`${rel} is ${size} bytes`);
 }
 if(failures.length){ console.error('PAGE SIZE BUDGET FAILED'); failures.forEach(f=>console.error(' - '+f)); process.exit(1); }
-console.log(`PAGE SIZE BUDGET PASSED — ${(budget.budgetedLargePages||[]).length} known-heavy pages budgeted; no unbudgeted HTML over ${budget.unbudgetedLimitBytes||500000} bytes.`);
+console.log(`PAGE SIZE BUDGET PASSED — ${(budget.budgetedLargePages||[]).length} current heavy pages budgeted; no stale exception and no unbudgeted HTML over ${budget.unbudgetedLimitBytes||350000} bytes.`);
 if(warnings.length) console.log(`PAGE SIZE BUDGET WARNINGS — ${warnings.length} medium-heavy pages tracked below hard budget.`);

@@ -25,7 +25,7 @@ if (fallbackMatch) {
 } else {
   // The current client shell deliberately keeps the full event corpus out of the HTML shell.
   if (!html.includes('id="pmEventList"')) fail.push('Calendar has neither an embedded fallback nor the lightweight client-shell mount.');
-  if (!app.includes('const DATA_URL = "/polymythseminars/events.json"')) fail.push('Client shell does not fetch the canonical public event file.');
+  if (!app.includes('const DATA_URL = "/polymythseminars/browse.json"')) fail.push('Client shell does not fetch the compact public browser payload.');
   if (!app.includes('/polymythseminars/subscribe/')) fail.push('Client shell lacks a readable failure route when event data cannot load.');
   if (Buffer.byteLength(html, 'utf8') >= 100000) fail.push('Client shell is unexpectedly heavy despite omitting the embedded fallback.');
 }

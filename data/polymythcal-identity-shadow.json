@@ -1,0 +1,10 @@
+{
+  "schema": "polymythcal-identity-reschedule-shadow-v1",
+  "generated_at": "2026-07-25T00:00:00+00:00",
+  "mode": "diagnostic-only-backward-compatible",
+  "rule": "The production matcher remains authoritative. Richer URL, UID, organizer, title, and temporal signals are recorded but cannot merge or reschedule an event in this release.",
+  "decisions": 0,
+  "agreements": 0,
+  "disagreements": 0,
+  "items": []
+}

@@ -48,7 +48,7 @@ check("attend and apply are independent checkboxes", len(soup.select('input[type
 check("places are multi-select checkboxes", len(soup.select('input[type="checkbox"][data-state-set="places"]')) >= 9)
 check("topics are multi-select checkboxes", len(soup.select('input[type="checkbox"][data-state-set="topics"]')) >= 7)
 check("time alone uses radios", len(soup.select('input[type="radio"][name="pm-time"]')) >= 5)
-check("plain language opportunity definition present", "The listed date is the deadline" in page_path.read_text(encoding="utf-8"))
+check("plain language opportunity definition present", "The date shown is when applications close." in page_path.read_text(encoding="utf-8"))
 
 payload = json.loads(events_path.read_text(encoding="utf-8"))
 events = payload["events"]
@@ -72,7 +72,10 @@ with sync_playwright() as p:
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.set_content(test_html.read_text(encoding="utf-8"), wait_until="domcontentloaded")
-    page.add_style_tag(path=str(css_path))
+    page.evaluate("document.documentElement.setAttribute('data-motion', 'calm')")
+    for style_path in [ROOT / "css/theme.css", ROOT / "css/alive.css", ROOT / "css/site-wide-type-zoom.css", css_path, ROOT / "css/calm-ux.css"]:
+        if style_path.exists():
+            page.add_style_tag(path=str(style_path))
     page.evaluate("""() => {
       const store = {};
       Object.defineProperty(window, 'localStorage', { value: {
@@ -85,7 +88,7 @@ with sync_playwright() as p:
     page.add_script_tag(path=str(js_path))
     page.wait_for_selector(".pm-event-card", timeout=30_000)
 
-    check("initial client render", page.locator(".pm-event-card").count() == 50, str(page.locator(".pm-event-card").count()))
+    check("initial client render", page.locator(".pm-event-card").count() == 24, str(page.locator(".pm-event-card").count()))
     check("initial result count is populated", "listings" in page.locator("#pmResultsTitle").inner_text())
     check("both content entry points active", page.locator('input[data-state-set="content"]:checked').count() == 2)
 
@@ -118,7 +121,10 @@ with sync_playwright() as p:
     browser = p.chromium.launch(headless=True, executable_path=resolve_chromium_path(p.chromium), args=["--no-sandbox", "--disable-dev-shm-usage"])
     page = browser.new_page(viewport={"width": 1000, "height": 800})
     page.set_content(test_html.read_text(encoding="utf-8"), wait_until="domcontentloaded")
-    page.add_style_tag(path=str(css_path))
+    page.evaluate("document.documentElement.setAttribute('data-motion', 'calm')")
+    for style_path in [ROOT / "css/theme.css", ROOT / "css/alive.css", ROOT / "css/site-wide-type-zoom.css", css_path, ROOT / "css/calm-ux.css"]:
+        if style_path.exists():
+            page.add_style_tag(path=str(style_path))
     page.evaluate("""() => {
       const store = {};
       Object.defineProperty(window, 'localStorage', { value: {
@@ -134,7 +140,7 @@ with sync_playwright() as p:
     )
     page.add_script_tag(content=french_js)
     page.wait_for_selector(".pm-event-card", timeout=30_000)
-    check("French interface activates", page.locator("#pmLookingForTitle").inner_text() == "Que voulez-vous trouver?")
+    check("French interface activates", page.locator("#pmLookingForTitle").inner_text() == "Que voulez-vous inclure?")
     check("French search placeholder", page.locator("#pmSearch").get_attribute("placeholder").startswith("Rechercher"))
     browser.close()
 

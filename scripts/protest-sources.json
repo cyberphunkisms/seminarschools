@@ -1,0 +1,240 @@
+{
+  "$schema_note": "Deterministic Polymythcal protest-discovery additions. The harvester also includes every enabled scripts/sources.json entry whose default_type is protest. These records are public crawl seeds and corroboration endpoints, never hand-authored calendar events.",
+  "$updated": "2026-07-23",
+  "crawl_policy": {
+    "sharded": false,
+    "max_pages_per_source": 12,
+    "max_depth": 3,
+    "max_elapsed_seconds_per_source": 90,
+    "max_workers": 6,
+    "request_timeout_seconds": 10,
+    "unresolved_recheck_hours": 168,
+    "confirmed_recheck_hours": 168,
+    "undated_candidate_expiry_days": 90
+  },
+  "sources": [
+    {
+      "id": "opseu",
+      "name": "OPSEU/SEFPO",
+      "default_type": "protest",
+      "base_url": "https://opseu.org/events/",
+      "events_url": "https://opseu.org/events/",
+      "additional_urls": [
+        "https://opseu.org/latest-news/",
+        "https://opseu.org/latest-news/events-calendar/"
+      ],
+      "city": "Toronto",
+      "corridor_zone": "toronto",
+      "timezone": "America/Toronto",
+      "platform_adapter": "civic-action",
+      "source_quality": "official-or-institutional",
+      "source_is_organizer": true,
+      "harvest_enabled": true,
+      "browser_harvest": true,
+      "ocr_harvest": false,
+      "undated_candidates": true,
+      "mixed_calendar": true,
+      "include_event_patterns": [
+        "\\b(protest|rally|march|picket|strike|walkout|day of action|solidarity action|demonstration|mobilization|mobilisation|rassemblement)\\b"
+      ],
+      "exclude_event_patterns": [
+        "\\b(annual convention|training session|steward school|committee meeting|executive meeting)\\b"
+      ],
+      "allowed_event_types": [
+        "protest"
+      ],
+      "notes": "The visual calendar can return a client-rendered shell. Always crawl the official server-readable News and events stream and calendar route for advance campaign, strike, rally, and meeting announcements."
+    },
+    {
+      "id": "environmental-defence-nojetsto",
+      "name": "Environmental Defence / NoJetsTO",
+      "default_type": "protest",
+      "base_url": "https://environmentaldefence.ca/nojetsto/",
+      "events_url": "https://environmentaldefence.ca/nojetsto/events/",
+      "additional_urls": [
+        "https://environmentaldefence.ca/category/media/"
+      ],
+      "city": "Toronto",
+      "corridor_zone": "toronto",
+      "timezone": "America/Toronto",
+      "platform_adapter": "civic-action",
+      "source_quality": "official-or-institutional",
+      "source_is_organizer": true,
+      "harvest_enabled": true,
+      "notes": "Public campaign event and media routes. Seed references: https://environmentaldefence.ca/nojetsto/events/ and https://environmentaldefence.ca/category/media/."
+    },
+    {
+      "id": "spring-magazine-events",
+      "name": "Spring Magazine events",
+      "default_type": "protest",
+      "base_url": "https://springmag.ca/",
+      "events_url": "https://springmag.ca/events",
+      "city": "Toronto",
+      "corridor_zone": "toronto",
+      "timezone": "America/Toronto",
+      "platform_adapter": "civic-action",
+      "source_quality": "official-or-institutional",
+      "harvest_enabled": true,
+      "browser_harvest": true,
+      "ocr_harvest": true,
+      "undated_candidates": true,
+      "notes": "Public organizer calendar seed: https://springmag.ca/events."
+    },
+    {
+      "id": "protest-doug-ford-campaigns",
+      "name": "Protest Doug Ford campaign locations",
+      "default_type": "protest",
+      "base_url": "https://protestdougford.com/",
+      "events_url": "https://protestdougford.com/july-25th-protest-locations/",
+      "city": "Toronto",
+      "corridor_zone": "toronto",
+      "timezone": "America/Toronto",
+      "platform_adapter": "campaign-page",
+      "source_quality": "official-or-institutional",
+      "source_is_organizer": true,
+      "harvest_enabled": true,
+      "notes": "Public multi-location campaign-page seed. The parser extracts Toronto rows separately. Seed reference: https://protestdougford.com/july-25th-protest-locations/."
+    },
+    {
+      "id": "action-network-public-organizer-links",
+      "name": "Action Network public event links",
+      "default_type": "protest",
+      "base_url": "https://actionnetwork.org/",
+      "events_url": "https://actionnetwork.org/events/river-run-2026",
+      "city": "Toronto",
+      "corridor_zone": "toronto",
+      "timezone": "America/Toronto",
+      "platform_adapter": "action-network",
+      "source_quality": "official-or-institutional",
+      "harvest_enabled": true,
+      "discovery_rule": "Follow actionnetwork.org/events links reached from allowlisted organizer pages. Parse public event pages and JSON-LD; do not treat the organizer-scoped API as a global search API.",
+      "notes": "Known public event-page pattern seed from CUPE/Free Grassy Narrows: https://actionnetwork.org/events/river-run-2026. The URL is a crawl bootstrap, not a calendar record."
+    },
+    {
+      "id": "labour-council",
+      "browser_harvest": true,
+      "ocr_harvest": false,
+      "undated_candidates": true,
+      "mixed_calendar": true,
+      "include_event_patterns": [
+        "\\b(protest|rally|march|picket|strike|walkout|day of action|solidarity action|demonstration|mobilization|mobilisation)\\b"
+      ],
+      "exclude_event_patterns": [
+        "\\b(annual meeting|training session|committee meeting|labour education course)\\b"
+      ],
+      "allowed_event_types": [
+        "protest"
+      ]
+    },
+    {
+      "id": "ofl",
+      "browser_harvest": true,
+      "ocr_harvest": false,
+      "undated_candidates": true,
+      "mixed_calendar": true,
+      "include_event_patterns": [
+        "\\b(protest|rally|march|picket|strike|walkout|day of action|solidarity action|demonstration|mobilization|mobilisation)\\b"
+      ],
+      "exclude_event_patterns": [
+        "\\b(annual convention|training session|committee meeting|executive meeting)\\b"
+      ],
+      "allowed_event_types": [
+        "protest"
+      ]
+    },
+    {
+      "id": "cupe-ontario",
+      "undated_candidates": true,
+      "mixed_calendar": true,
+      "include_event_patterns": [
+        "\\b(protest|rally|march|picket|strike|walkout|day of action|solidarity action|demonstration|mobilization|mobilisation)\\b"
+      ],
+      "exclude_event_patterns": [
+        "\\b(convention|conference|training|school|committee meeting)\\b"
+      ],
+      "allowed_event_types": [
+        "protest"
+      ]
+    },
+    {
+      "id": "kairos",
+      "undated_candidates": true,
+      "mixed_calendar": true,
+      "include_event_patterns": [
+        "\\b(protest|rally|march|vigil|picket|day of action|solidarity action|demonstration|mobilization|mobilisation)\\b"
+      ],
+      "exclude_event_patterns": [
+        "\\b(webinar|worship service|training session|conference)\\b"
+      ],
+      "allowed_event_types": [
+        "protest"
+      ]
+    },
+    {
+      "id": "acorn-toronto",
+      "browser_harvest": true,
+      "ocr_harvest": true,
+      "undated_candidates": true
+    },
+    {
+      "id": "mwac",
+      "browser_harvest": true,
+      "ocr_harvest": true,
+      "undated_candidates": true
+    },
+    {
+      "id": "free-grassy",
+      "browser_harvest": true,
+      "ocr_harvest": true,
+      "undated_candidates": true
+    },
+    {
+      "id": "ontario-health-coalition",
+      "browser_harvest": true,
+      "ocr_harvest": true,
+      "undated_candidates": true
+    },
+    {
+      "id": "toronto350",
+      "browser_harvest": true,
+      "ocr_harvest": true,
+      "undated_candidates": true
+    },
+    {
+      "id": "yfs",
+      "browser_harvest": true,
+      "ocr_harvest": true,
+      "undated_candidates": true,
+      "mixed_calendar": true,
+      "include_event_patterns": [
+        "\\b(protest|rally|march|picket|walkout|strike|day of action|solidarity action|demonstration|mobilization|mobilisation)\\b"
+      ],
+      "exclude_event_patterns": [
+        "\\b(club fair|social night|orientation|workshop|training session)\\b"
+      ],
+      "allowed_event_types": [
+        "protest"
+      ]
+    }
+  ],
+  "corroboration_sources": [
+    {
+      "id": "tps-news-releases-rss",
+      "name": "Toronto Police Service news releases",
+      "events_url": "https://www.tps.ca/media-centre/news-releases/rss/",
+      "timezone": "America/Toronto",
+      "role": "corroboration",
+      "harvest_enabled": true,
+      "notes": "Official future demonstration and road-closure advisories. Corroborates date, route, and location; never supplies cause or organizer by itself. Reference: https://www.tps.ca/media-centre/news-releases/rss/."
+    },
+    {
+      "id": "toronto-road-restrictions",
+      "name": "City of Toronto road restrictions",
+      "events_url": "https://gis.toronto.ca/arcgis/rest/services/cot_geospatial2/FeatureServer/5/query?where=IS_CURRENT%3D%27Y%27&outFields=IS_CURRENT%2CSTART_DATE_TIME%2CEND_DATE_TIME%2CMAIN_ROAD%2CAT_ROAD%2CFROM_ROAD%2CTO_ROAD%2CNOTE%2CDESCRIPTION%2CISSUETYPE&returnGeometry=false&f=json",
+      "timezone": "America/Toronto",
+      "role": "corroboration",
+      "harvest_enabled": true,
+      "notes": "Bounded query against the official City FeatureServer road-restrictions layer. Fields: IS_CURRENT, START_DATE_TIME, END_DATE_TIME, MAIN_ROAD, AT_ROAD, FROM_ROAD, TO_ROAD, NOTE, DESCRIPTION, and ISSUETYPE. Corroborates timing and location only; never creates a protest record by itself. Layer reference: https://gis.toronto.ca/arcgis/rest/services/cot_geospatial2/FeatureServer/5 and dataset reference: https://open.toronto.ca/dataset/road-restrictions/."
+    }
+  ]
+}

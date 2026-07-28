@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 'use strict';
 const fs=require('fs'); const path=require('path'); const ROOT=path.resolve(__dirname,'..');
+const {isGeneratedDependencyDirectory}=require('./repository-walk-policy');
 const outDir=path.join(ROOT,'scripts','reports'); fs.mkdirSync(outDir,{recursive:true});
 const release=JSON.parse(fs.readFileSync(path.join(ROOT,'RELEASE_MANIFEST.json'),'utf8')); const releaseTimestamp=release.generated_at||'1970-01-01T00:00:00Z';
 const domainCounts=new Map(); let total=0; const important=[];
-function walk(d,acc=[]){ for(const e of fs.readdirSync(d,{withFileTypes:true})){ if(['.git','node_modules','.netlify','public'].includes(e.name)) continue; const f=path.join(d,e.name); if(e.isDirectory()) walk(f,acc); else if(e.name.endsWith('.html')) acc.push(f); } return acc; }
+function walk(d,acc=[]){ for(const e of fs.readdirSync(d,{withFileTypes:true})){ if(['.git','.netlify','public'].includes(e.name)||isGeneratedDependencyDirectory(e.name)) continue; const f=path.join(d,e.name); if(e.isDirectory()) walk(f,acc); else if(e.name.endsWith('.html')) acc.push(f); } return acc; }
 for(const f of walk(ROOT)){
   const rel=path.relative(ROOT,f).replace(/\\/g,'/'); const html=fs.readFileSync(f,'utf8');
   for(const m of html.matchAll(/<a\b[^>]*href=["'](https?:\/\/[^"']+)["'][^>]*>/gi)){

@@ -1,0 +1,73 @@
+{
+  "release_id": "2026-07-24-site-audit37-source-health-runtime-polish-final",
+  "generated_at": "2026-07-24T13:15:00-04:00",
+  "algorithm": "sha256",
+  "purpose": "Freeze selected Audit 37 reports and gates as immutable historical evidence before Audit 38.",
+  "historical_metrics": {
+    "polymythcal_events": 838,
+    "polymythcal_types": 32,
+    "qualified_unconfirmed_events": 595,
+    "registered_sources": 422,
+    "teacher_resources": 644,
+    "teacher_collections": 25,
+    "teacher_groups": 7
+  },
+  "file_count": 11,
+  "files": [
+    {
+      "path": "WEBSITE_AUDIT37_SOURCE_HEALTH_RUNTIME_POLISH_REPORT_2026-07-24.md",
+      "bytes": 8345,
+      "sha256": "a261b12d47764f6f4862e6ff9c16299b033eb54f6648fd453f4d19f246cbf016"
+    },
+    {
+      "path": "data/audit36-frozen-sha256.json",
+      "bytes": 3144,
+      "sha256": "ed19dada95c66c9755e385fa61f9ff165f99dce018613b3ba40037a77e888757"
+    },
+    {
+      "path": "scripts/apply-audit37-release-stamp.js",
+      "bytes": 7058,
+      "sha256": "b8103492bff52786398bf7310d604e52a224ca1cdb5136427ce061e0ab60b513"
+    },
+    {
+      "path": "scripts/audit-audit37-route-resilience.py",
+      "bytes": 26021,
+      "sha256": "989a7130de16631ff116afaed4e78e82945a75d978bc7269d0b889bc6dd9a562"
+    },
+    {
+      "path": "scripts/audit-polymythcal-entry-pages-audit37.py",
+      "bytes": 11578,
+      "sha256": "bc3d71358f39152f19879219b9e7521be614c9aaedd959fd92b55ff7d996d3e8"
+    },
+    {
+      "path": "scripts/audit-polymythcal-interactivity-design-audit37.py",
+      "bytes": 25372,
+      "sha256": "2e11478ba766310e0af21c7d0e253856bd61cc4b6dc774ab4d15ca935d1352e0"
+    },
+    {
+      "path": "scripts/audit-polymythcal-wcag22-audit37.py",
+      "bytes": 22393,
+      "sha256": "f4824ebacb08efb5c15aff162f70d1d08251ee2cab6158d2d2376cebccae7382"
+    },
+    {
+      "path": "scripts/audit-project-failure-stress-audit37.py",
+      "bytes": 15925,
+      "sha256": "363792fc524aa2fc6e3d74c7df5a96d482a258c9f9cd1696a8425e724b170af6"
+    },
+    {
+      "path": "scripts/verify-audit37-browser-evidence.js",
+      "bytes": 3667,
+      "sha256": "36d376cbae68a68ed616fe260619cbd461584b18e18ce9fdfd78cf28ec96a8e9"
+    },
+    {
+      "path": "scripts/verify-audit37-evolution.js",
+      "bytes": 16593,
+      "sha256": "dd530bccfedbbd9d917f9b1ad2f625ab45b89b62d2ec62377fc495c0d44948f4"
+    },
+    {
+      "path": "scripts/verify-audit37-source-health.js",
+      "bytes": 5900,
+      "sha256": "5cacaadc1cf4d6cab944932960b233869c2cd25230d180567d8acd4b24ba89ba"
+    }
+  ]
+}

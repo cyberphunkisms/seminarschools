@@ -1,0 +1,93 @@
+{
+  "release_id": "2026-07-24-site-audit38-harvest-operational-integrity-final",
+  "generated_at": "2026-07-24T21:59:00-04:00",
+  "algorithm": "sha256",
+  "purpose": "Freeze selected Audit 38 reports and gates as immutable historical evidence before Audit 39.",
+  "historical_metrics": {
+    "polymythcal_events": 838,
+    "polymythcal_types": 32,
+    "registered_sources": 422,
+    "every_run_deterministic_sources": 41,
+    "rotating_deterministic_sources": 213,
+    "teacher_resources": 644,
+    "teacher_collections": 25,
+    "teacher_groups": 7,
+    "methodology_entries": 1139,
+    "polymythcal_page_size": 24,
+    "portable_release_checks": 124,
+    "public_parity_files": 3550
+  },
+  "file_count": 14,
+  "files": [
+    {
+      "path": "WEBSITE_AUDIT38_HARVEST_OPERATIONAL_INTEGRITY_REPORT_2026-07-24.md",
+      "bytes": 14230,
+      "sha256": "7d21a74409b2aaa2e960df4d2cba7038c46cd266d67ad7ee36194f44a5b20ea4"
+    },
+    {
+      "path": "data/audit37-frozen-sha256.json",
+      "bytes": 2524,
+      "sha256": "334174cb33b125df9d81b33048af063d1f2fabbfb42b67f9f728c582e8ebc8dd"
+    },
+    {
+      "path": "scripts/apply-audit38-release-stamp.js",
+      "bytes": 6545,
+      "sha256": "ff24000f9b1e5af7abbaed63c3127ae8d1ab6bcc9570c41fdb0155394ca077ea"
+    },
+    {
+      "path": "scripts/live-content-integrity.js",
+      "bytes": 7259,
+      "sha256": "7865d8684c28321e9f9057c6c1628f6a8dce53d5a10290df69025f8cf495e6c2"
+    },
+    {
+      "path": "scripts/run-audit38-browser.py",
+      "bytes": 1778,
+      "sha256": "4e7b5b53875409fdf6225f640efaaeb9b7aee8fbc1e086e16a29eea45f6ca78e"
+    },
+    {
+      "path": "scripts/test-live-content-integrity.js",
+      "bytes": 2843,
+      "sha256": "74612486f81d82db4d141a496e3765b836215ac1e30bccf664ed50059280b07a"
+    },
+    {
+      "path": "scripts/verify-aa-saul-runtime-smoothness.mjs",
+      "bytes": 7464,
+      "sha256": "71717d847bc77be6815f92ccd399bb48324107942d29daecb918c2e2dc8fb403"
+    },
+    {
+      "path": "scripts/verify-audit38-accessibility-p0.mjs",
+      "bytes": 6109,
+      "sha256": "b3cc80379ed4f5cfd18f7f1f4a7a49b51e005b1e143d426df32a2b9162404ece"
+    },
+    {
+      "path": "scripts/verify-audit38-browser-evidence.js",
+      "bytes": 3733,
+      "sha256": "6a3045684dfa9279f7fbe096a2ae010a5f8eb4348e31f37d632da0f73a29b4aa"
+    },
+    {
+      "path": "scripts/verify-audit38-evolution.js",
+      "bytes": 21432,
+      "sha256": "8d3f48c7fd3952e94601e03786a9018e93499df1d55b6518ce61c4993643bc84"
+    },
+    {
+      "path": "scripts/verify-audit38-methodology-state.js",
+      "bytes": 11014,
+      "sha256": "17860014cc18f3e3da680dc4976e15b90ee3d6499f7b5e87ff1d789211e67a4d"
+    },
+    {
+      "path": "scripts/verify-frozen-audit37.js",
+      "bytes": 2428,
+      "sha256": "19c3366e46d316c6000f6cafddd876e0a7444d157919e61650f580e77553ee87"
+    },
+    {
+      "path": "scripts/verify-live-content-integrity.js",
+      "bytes": 1359,
+      "sha256": "610c3c556368c75e62032c542a631177f2e7aa7e19349881b30805d1e4a097fe"
+    },
+    {
+      "path": "scripts/verify-polymythcal-source-health.js",
+      "bytes": 5258,
+      "sha256": "31edeaec8b0abc7ecfe0b70c5d2289c78538c8a9b153897e17df7304e8072948"
+    }
+  ]
+}

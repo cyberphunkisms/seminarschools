@@ -2,9 +2,36 @@
   "resourceRoutes": 676,
   "resourceDetailPages": 644,
   "resourceCollectionPages": 32,
-  "upcomingEvents": 585,
-  "indexableEvents": 69,
-  "methodologyEntries": 1139,
+  "resourceGroupPrefixes": [
+    "https://seminarschools.com/teacherresources/ela/",
+    "https://seminarschools.com/teacherresources/sci/",
+    "https://seminarschools.com/teacherresources/math/",
+    "https://seminarschools.com/teacherresources/fsl/",
+    "https://seminarschools.com/teacherresources/hist/",
+    "https://seminarschools.com/teacherresources/ind/",
+    "https://seminarschools.com/teacherresources/ib/"
+  ],
+  "upcomingEvents": 510,
+  "indexableEvents": 54,
+  "methodologyEntries": 1168,
   "methodologySections": 16,
-  "sitemapUrls": 847
+  "methodologyPrefixes": [
+    "https://seminarschools.com/polymyth/methodologylist/analysis/",
+    "https://seminarschools.com/polymyth/methodologylist/citation/",
+    "https://seminarschools.com/polymyth/methodologylist/corehistory/",
+    "https://seminarschools.com/polymyth/methodologylist/coreplus/",
+    "https://seminarschools.com/polymyth/methodologylist/degorgonification/",
+    "https://seminarschools.com/polymyth/methodologylist/framework-core/",
+    "https://seminarschools.com/polymyth/methodologylist/gorgonification/",
+    "https://seminarschools.com/polymyth/methodologylist/idiomary/",
+    "https://seminarschools.com/polymyth/methodologylist/learnings/",
+    "https://seminarschools.com/polymyth/methodologylist/methodology/",
+    "https://seminarschools.com/polymyth/methodologylist/pending/",
+    "https://seminarschools.com/polymyth/methodologylist/pending-user-authorship/",
+    "https://seminarschools.com/polymyth/methodologylist/polycognate/",
+    "https://seminarschools.com/polymyth/methodologylist/rainbowsol/",
+    "https://seminarschools.com/polymyth/methodologylist/sabachtan/",
+    "https://seminarschools.com/polymyth/methodologylist/studylist/"
+  ],
+  "sitemapUrls": 1263
 }

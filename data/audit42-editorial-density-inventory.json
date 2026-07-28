@@ -1,0 +1,203 @@
+{
+  "schema": "seminar-schools-audit42-editorial-density-inventory-v1",
+  "release_id": "2026-07-25-site-audit42-ledger-closure-multimode-final",
+  "release_generated_at": "2026-07-25T11:05:10-04:00",
+  "source_fingerprint_sha256": "bb9672d6f7ebbf37704a2464a1d2d787c7b363eef65d3c639d8f0fc3705ac409",
+  "scope": {
+    "audit_queue_source": "Website Audit 34 Tier 2 route-by-route editorial density follow-up",
+    "project_entry_routes": [
+      "/bb/",
+      "/polymyth/",
+      "/leizu/"
+    ],
+    "teacher_resource_rule": "All 644 canonical Teacher Resources records and rendered routes are scanned; authored notes/blurbs with at least 75 words are listed route by route.",
+    "source_files_fingerprinted": 649,
+    "excluded": [
+      "Linked research, rule-library, policy, and archive routes are not silently folded into the three named project-entry-route measurements.",
+      "Navigation, footer, script, style, template, noscript, and SVG text are excluded from prose counts.",
+      "This is an inventory and review queue, not authorization for automatic copy rewriting."
+    ]
+  },
+  "thresholds": {
+    "long_teacher_description_words": 75,
+    "long_project_paragraph_words": 120,
+    "teacher_review_method": "greater than both the Tukey upper fence and a 120-word absolute floor",
+    "teacher_tukey_upper_fence_words": 84.75,
+    "teacher_effective_review_threshold_words": 120
+  },
+  "summary": {
+    "project_routes": 3,
+    "teacher_detail_routes_scanned": 644,
+    "teacher_descriptions_measured": 100,
+    "teacher_long_descriptions_listed": 8,
+    "teacher_review_outliers": 0,
+    "unexplained_project_outliers": 0,
+    "disposition": "no unexplained outliers; preserve intentional project and catalog density"
+  },
+  "teacher_description_distribution": {
+    "minimum_words": 5,
+    "first_quartile_words": 26,
+    "median_words": 36.5,
+    "third_quartile_words": 49.5,
+    "maximum_words": 112
+  },
+  "project_routes": [
+    {
+      "family": "bb",
+      "route": "/bb/",
+      "file": "bb/index.html",
+      "main_words": 270,
+      "paragraphs": 6,
+      "headings": 7,
+      "native_disclosures": 0,
+      "average_paragraph_words": 20.2,
+      "longest_paragraph_words": 32,
+      "paragraphs_at_least_120_words": 0,
+      "disposition": "concise_ui_preserved",
+      "review_flag": false,
+      "disposition_note": "The landing route uses short action cards and a compact play explanation; the linked research and rules routes carry the depth."
+    },
+    {
+      "family": "polymyth",
+      "route": "/polymyth/",
+      "file": "polymyth/index.html",
+      "main_words": 1214,
+      "paragraphs": 14,
+      "headings": 1,
+      "native_disclosures": 1,
+      "average_paragraph_words": 75.8,
+      "longest_paragraph_words": 203,
+      "paragraphs_at_least_120_words": 4,
+      "disposition": "intentional_longform_editorial_preserved",
+      "review_flag": false,
+      "disposition_note": "The project entry includes an authored philosophical account. Its long paragraphs are editorial substance, while tool entry points remain brief and separately scannable."
+    },
+    {
+      "family": "leizu",
+      "route": "/leizu/",
+      "file": "leizu/index.html",
+      "main_words": 1539,
+      "paragraphs": 29,
+      "headings": 17,
+      "native_disclosures": 0,
+      "average_paragraph_words": 18.1,
+      "longest_paragraph_words": 35,
+      "paragraphs_at_least_120_words": 0,
+      "disposition": "intentional_catalog_and_reference_density_preserved",
+      "review_flag": false,
+      "disposition_note": "The route combines course selection, programme terms, pricing, and parent FAQs. Chapter grouping and clearly labelled question structures contain this decision-support density."
+    }
+  ],
+  "long_teacher_resource_descriptions": [
+    {
+      "route": "/teacherresources/ela/ela-inst-guides/mantle-of-the-expert-students-as-harlem-community-journalists-investigating--5eebad72/",
+      "file": "teacherresources/ela/ela-inst-guides/mantle-of-the-expert-students-as-harlem-community-journalists-investigating--5eebad72/index.html",
+      "collection": "ela/ela-inst-guides",
+      "title": "Mantle of the Expert: students as Harlem community journalists investigating the purse-snatch",
+      "words": 112,
+      "characters": 766,
+      "sentences": 8,
+      "preview": "Heathcote’s approach: students are cast as a team of experts with a commission from a fictional client. For Thank You M’am: students are journalists for the Amsterdam News (Harlem’s Black newspaper, operating in 1958)…",
+      "disposition": "intentional_catalog_detail_preserved",
+      "review_flag": false,
+      "disposition_note": "Longer than the catalog norm, but within the conservative outlier fence; source and classroom-fit specificity are preserved."
+    },
+    {
+      "route": "/teacherresources/ela/ela-inst-guides/hot-seating-interrogate-mrs-jones-or-roger-in-character-fadea9fb/",
+      "file": "teacherresources/ela/ela-inst-guides/hot-seating-interrogate-mrs-jones-or-roger-in-character-fadea9fb/index.html",
+      "collection": "ela/ela-inst-guides",
+      "title": "Hot Seating: interrogate Mrs. Jones or Roger in character",
+      "words": 96,
+      "characters": 614,
+      "sentences": 7,
+      "preview": "One student or teacher sits in role as a character and answers questions from the class. For Thank You M’am: teacher-as-Mrs-Jones answers why she brought Roger home instead of calling the police; student-as-Roger answ…",
+      "disposition": "intentional_catalog_detail_preserved",
+      "review_flag": false,
+      "disposition_note": "Longer than the catalog norm, but within the conservative outlier fence; source and classroom-fit specificity are preserved."
+    },
+    {
+      "route": "/teacherresources/ela/ela-inst-guides/conscience-alley-should-roger-take-the-money-from-mrs-jones-s-purse-c9e4b975/",
+      "file": "teacherresources/ela/ela-inst-guides/conscience-alley-should-roger-take-the-money-from-mrs-jones-s-purse-c9e4b975/index.html",
+      "collection": "ela/ela-inst-guides",
+      "title": "Conscience Alley: should Roger take the money from Mrs. Jones’s purse?",
+      "words": 94,
+      "characters": 611,
+      "sentences": 10,
+      "preview": "Class forms two lines. A student walks between them as Roger at the moment Mrs. Jones leaves her purse unattended on the daybed. One side whispers reasons to take the money; the other side whispers reasons not to. The…",
+      "disposition": "intentional_catalog_detail_preserved",
+      "review_flag": false,
+      "disposition_note": "Longer than the catalog norm, but within the conservative outlier fence; source and classroom-fit specificity are preserved."
+    },
+    {
+      "route": "/teacherresources/ela/ela-inst-writing/presto-plans-roger-writes-mrs-jones-10-years-later-creative-writing-letter-a-9f01e23e/",
+      "file": "teacherresources/ela/ela-inst-writing/presto-plans-roger-writes-mrs-jones-10-years-later-creative-writing-letter-a-9f01e23e/index.html",
+      "collection": "ela/ela-inst-writing",
+      "title": "Presto Plans: Roger writes Mrs. Jones 10 years later (creative writing letter assignment)",
+      "words": 87,
+      "characters": 623,
+      "sentences": 4,
+      "preview": "Full pedagogical walkthrough: pre-reading discussion questions (second chances, power of kindness, It takes a village proverb), during-reading comprehension stops, post-reading discussion, then culminating creative wr…",
+      "disposition": "intentional_catalog_detail_preserved",
+      "review_flag": false,
+      "disposition_note": "Longer than the catalog norm, but within the conservative outlier fence; source and classroom-fit specificity are preserved."
+    },
+    {
+      "route": "/teacherresources/hist/hist-us-primary/hughes-house-at-20-east-127th-street-nyc-landmark-nrhp-listed-1982-ae574ac7/",
+      "file": "teacherresources/hist/hist-us-primary/hughes-house-at-20-east-127th-street-nyc-landmark-nrhp-listed-1982-ae574ac7/index.html",
+      "collection": "hist/hist-us-primary",
+      "title": "Hughes House at 20 East 127th Street (NYC Landmark, NRHP listed 1982)",
+      "words": 82,
+      "characters": 504,
+      "sentences": 7,
+      "preview": "Official landmark designation report. Hughes occupied the top floor of this 1869 Italianate brownstone as a workroom from 1947 to 1967. The Harpers purchased the house in 1947; Hughes moved in with them. For the campa…",
+      "disposition": "intentional_catalog_detail_preserved",
+      "review_flag": false,
+      "disposition_note": "Longer than the catalog norm, but within the conservative outlier fence; source and classroom-fit specificity are preserved."
+    },
+    {
+      "route": "/teacherresources/ela/ela-inst-guides/role-on-the-wall-visual-character-mapping-for-roger-and-mrs-jones-c46ed0ad/",
+      "file": "teacherresources/ela/ela-inst-guides/role-on-the-wall-visual-character-mapping-for-roger-and-mrs-jones-c46ed0ad/index.html",
+      "collection": "ela/ela-inst-guides",
+      "title": "Role on the Wall: visual character mapping for Roger and Mrs. Jones",
+      "words": 79,
+      "characters": 501,
+      "sentences": 6,
+      "preview": "Draw an outline of the character on a large sheet. Outside the outline: what others see (actions, speech, appearance). Inside: what the character feels, thinks, fears, wants. For Roger: outside shows the attempted the…",
+      "disposition": "intentional_catalog_detail_preserved",
+      "review_flag": false,
+      "disposition_note": "Longer than the catalog norm, but within the conservative outlier fence; source and classroom-fit specificity are preserved."
+    },
+    {
+      "route": "/teacherresources/hist/hist-us-primary/20-east-127th-street-langston-hughes-house-langston-hughes-place-f2451832/",
+      "file": "teacherresources/hist/hist-us-primary/20-east-127th-street-langston-hughes-house-langston-hughes-place-f2451832/index.html",
+      "collection": "hist/hist-us-primary",
+      "title": "20 East 127th Street: Langston Hughes House (Langston Hughes Place)",
+      "words": 79,
+      "characters": 456,
+      "sentences": 7,
+      "preview": "Hughes lived on the top floor from 1947 to 1967 with the Emerson and Ethel Harper family. Wrote Montage of a Dream Deferred (1951) and I Wonder as I Wander here. NYC Landmark 1981, NRHP 1982. Now home to I, Too, Arts…",
+      "disposition": "intentional_catalog_detail_preserved",
+      "review_flag": false,
+      "disposition_note": "Longer than the catalog norm, but within the conservative outlier fence; source and classroom-fit specificity are preserved."
+    },
+    {
+      "route": "/teacherresources/ela/ela-inst-writing/the-apology-letter-roger-writes-mrs-luella-bates-washington-jones-writing-as-6130a00b/",
+      "file": "teacherresources/ela/ela-inst-writing/the-apology-letter-roger-writes-mrs-luella-bates-washington-jones-writing-as-6130a00b/index.html",
+      "collection": "ela/ela-inst-writing",
+      "title": "The Apology Letter: Roger writes Mrs. Luella Bates Washington Jones (writing assessment)",
+      "words": 75,
+      "characters": 487,
+      "sentences": 7,
+      "preview": "Students write as Roger, 20 years after the encounter, composing a thank-you and apology letter to Mrs. Jones. Letter quality determines writing quality assessment. Stronger writing earns a higher level, which opens r…",
+      "disposition": "intentional_catalog_detail_preserved",
+      "review_flag": false,
+      "disposition_note": "Longer than the catalog norm, but within the conservative outlier fence; source and classroom-fit specificity are preserved."
+    }
+  ],
+  "editorial_policy": [
+    "Concise task UI remains concise.",
+    "Authored longform, reference, programme, and catalog detail is not treated as verbosity solely because it is dense.",
+    "Only conservative statistical outliers receive review flags.",
+    "No copy was removed, flattened, or automatically rewritten by this audit."
+  ]
+}

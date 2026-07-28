@@ -5,6 +5,8 @@ const ignorePath=path.join(ROOT,'.gitignore');const ignore=fs.existsSync(ignoreP
 if(!/^\/?public\/$/m.test(ignore))problems.push('Add public/ to .gitignore.');
 if(!/(^|\n)__pycache__\//.test(ignore))problems.push('Add __pycache__/ to .gitignore.');
 if(!/(^|\n)\*\.pyc($|\n)/.test(ignore))problems.push('Add *.pyc to .gitignore.');
+if(!/(^|\n)\.venv-\*\//.test(ignore))problems.push('Add .venv-*/ to .gitignore.');
+for(const cache of ['.pytest_cache/','.mypy_cache/','.ruff_cache/'])if(!ignore.includes(cache))problems.push(`Add ${cache} to .gitignore.`);
 try{
  const tracked=execFileSync('git',['ls-files'],{cwd:ROOT,encoding:'utf8'}).split(/\r?\n/).filter(Boolean);
  const publicPaths=tracked.filter(rel=>rel==='public'||rel.startsWith('public/'));

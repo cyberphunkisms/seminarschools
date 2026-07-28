@@ -1,0 +1,446 @@
+{
+  "schema": "seminar-schools-translation-governance-v1",
+  "release": "audit45",
+  "english_source_of_truth": true,
+  "organizer_text_policy": "preserve verbatim; mark source language; never silently translate",
+  "high_stakes_policy": "localized draft remains visibly subordinate to English until bilingual review",
+  "routes": [
+    {
+      "route": "/leizu/fr/",
+      "locale": "fr",
+      "source": "leizu/index.html",
+      "source_sha256": "035f19bdd62a261ac1dbff9142c1313e3fa6b868f5a5347bd3f3677fa0df0337",
+      "status": "complete-owned-copy"
+    },
+    {
+      "route": "/leizu/zh-hant/",
+      "locale": "zh-Hant",
+      "source": "leizu/index.html",
+      "source_sha256": "035f19bdd62a261ac1dbff9142c1313e3fa6b868f5a5347bd3f3677fa0df0337",
+      "status": "complete-owned-copy"
+    },
+    {
+      "route": "/leizu/zh-hans/",
+      "locale": "zh-Hans",
+      "source": "leizu/index.html",
+      "source_sha256": "035f19bdd62a261ac1dbff9142c1313e3fa6b868f5a5347bd3f3677fa0df0337",
+      "status": "complete-owned-copy"
+    },
+    {
+      "route": "/leizu/fa/",
+      "locale": "fa",
+      "source": "leizu/index.html",
+      "source_sha256": "035f19bdd62a261ac1dbff9142c1313e3fa6b868f5a5347bd3f3677fa0df0337",
+      "status": "complete-owned-copy"
+    },
+    {
+      "route": "/leizu/fr/intake/",
+      "locale": "fr",
+      "source": "leizu/intake/index.html",
+      "source_sha256": "34f04530f522ec92233a5be2cae26d2fb174f9305febe3c241176146bc8738f4",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/zh-hant/intake/",
+      "locale": "zh-Hant",
+      "source": "leizu/intake/index.html",
+      "source_sha256": "34f04530f522ec92233a5be2cae26d2fb174f9305febe3c241176146bc8738f4",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/zh-hans/intake/",
+      "locale": "zh-Hans",
+      "source": "leizu/intake/index.html",
+      "source_sha256": "34f04530f522ec92233a5be2cae26d2fb174f9305febe3c241176146bc8738f4",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/fa/intake/",
+      "locale": "fa",
+      "source": "leizu/intake/index.html",
+      "source_sha256": "34f04530f522ec92233a5be2cae26d2fb174f9305febe3c241176146bc8738f4",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/fr/booking-success/",
+      "locale": "fr",
+      "source": "leizu/booking-success/index.html",
+      "source_sha256": "395fe88fa7266ec0842da4a21076e8bdd49609c09d40d63224ae34cdc8137ab9",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/zh-hant/booking-success/",
+      "locale": "zh-Hant",
+      "source": "leizu/booking-success/index.html",
+      "source_sha256": "395fe88fa7266ec0842da4a21076e8bdd49609c09d40d63224ae34cdc8137ab9",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/zh-hans/booking-success/",
+      "locale": "zh-Hans",
+      "source": "leizu/booking-success/index.html",
+      "source_sha256": "395fe88fa7266ec0842da4a21076e8bdd49609c09d40d63224ae34cdc8137ab9",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/fa/booking-success/",
+      "locale": "fa",
+      "source": "leizu/booking-success/index.html",
+      "source_sha256": "395fe88fa7266ec0842da4a21076e8bdd49609c09d40d63224ae34cdc8137ab9",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/fr/policies/",
+      "locale": "fr",
+      "source": "leizu/policies/index.html",
+      "source_sha256": "6063ba6357532fa0cd7a21121ac295d2330dd9b98a8032af1f97b689279f4a03",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/zh-hant/policies/",
+      "locale": "zh-Hant",
+      "source": "leizu/policies/index.html",
+      "source_sha256": "6063ba6357532fa0cd7a21121ac295d2330dd9b98a8032af1f97b689279f4a03",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/zh-hans/policies/",
+      "locale": "zh-Hans",
+      "source": "leizu/policies/index.html",
+      "source_sha256": "6063ba6357532fa0cd7a21121ac295d2330dd9b98a8032af1f97b689279f4a03",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/fa/policies/",
+      "locale": "fa",
+      "source": "leizu/policies/index.html",
+      "source_sha256": "6063ba6357532fa0cd7a21121ac295d2330dd9b98a8032af1f97b689279f4a03",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/fr/scholarship/",
+      "locale": "fr",
+      "source": "leizu/scholarship/index.html",
+      "source_sha256": "ef70dc21487d6de21a4ca51f880c63fc6fb64a08d5fe67d0af54c2599bc386bd",
+      "status": "localized-owned-copy"
+    },
+    {
+      "route": "/leizu/zh-hant/scholarship/",
+      "locale": "zh-Hant",
+      "source": "leizu/scholarship/index.html",
+      "source_sha256": "ef70dc21487d6de21a4ca51f880c63fc6fb64a08d5fe67d0af54c2599bc386bd",
+      "status": "localized-owned-copy"
+    },
+    {
+      "route": "/leizu/zh-hans/scholarship/",
+      "locale": "zh-Hans",
+      "source": "leizu/scholarship/index.html",
+      "source_sha256": "ef70dc21487d6de21a4ca51f880c63fc6fb64a08d5fe67d0af54c2599bc386bd",
+      "status": "localized-owned-copy"
+    },
+    {
+      "route": "/leizu/fa/scholarship/",
+      "locale": "fa",
+      "source": "leizu/scholarship/index.html",
+      "source_sha256": "ef70dc21487d6de21a4ca51f880c63fc6fb64a08d5fe67d0af54c2599bc386bd",
+      "status": "localized-owned-copy"
+    },
+    {
+      "route": "/leizu/fr/donate/",
+      "locale": "fr",
+      "source": "leizu/donate/index.html",
+      "source_sha256": "ca91e98c8e0a3bcd55a65d20076199950c988624e28566caa91873eba3101385",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/zh-hant/donate/",
+      "locale": "zh-Hant",
+      "source": "leizu/donate/index.html",
+      "source_sha256": "ca91e98c8e0a3bcd55a65d20076199950c988624e28566caa91873eba3101385",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/zh-hans/donate/",
+      "locale": "zh-Hans",
+      "source": "leizu/donate/index.html",
+      "source_sha256": "ca91e98c8e0a3bcd55a65d20076199950c988624e28566caa91873eba3101385",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/fa/donate/",
+      "locale": "fa",
+      "source": "leizu/donate/index.html",
+      "source_sha256": "ca91e98c8e0a3bcd55a65d20076199950c988624e28566caa91873eba3101385",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/fr/teach/",
+      "locale": "fr",
+      "source": "leizu/teach/index.html",
+      "source_sha256": "e26ea3ac9d4296e575fbab12cced7b71b5f6b2c56562c79724ab2f004caa5a0a",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/zh-hant/teach/",
+      "locale": "zh-Hant",
+      "source": "leizu/teach/index.html",
+      "source_sha256": "e26ea3ac9d4296e575fbab12cced7b71b5f6b2c56562c79724ab2f004caa5a0a",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/zh-hans/teach/",
+      "locale": "zh-Hans",
+      "source": "leizu/teach/index.html",
+      "source_sha256": "e26ea3ac9d4296e575fbab12cced7b71b5f6b2c56562c79724ab2f004caa5a0a",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/fa/teach/",
+      "locale": "fa",
+      "source": "leizu/teach/index.html",
+      "source_sha256": "e26ea3ac9d4296e575fbab12cced7b71b5f6b2c56562c79724ab2f004caa5a0a",
+      "status": "draft-bilingual-review-required"
+    },
+    {
+      "route": "/leizu/fr/toronto-tutoring/",
+      "locale": "fr",
+      "source": "leizu/toronto-tutoring/index.html",
+      "source_sha256": "f13d58e22841dd56e970b796f08418cc6316fb85e5c053af1eed8e676b384306",
+      "status": "localized-owned-copy"
+    },
+    {
+      "route": "/leizu/zh-hant/toronto-tutoring/",
+      "locale": "zh-Hant",
+      "source": "leizu/toronto-tutoring/index.html",
+      "source_sha256": "f13d58e22841dd56e970b796f08418cc6316fb85e5c053af1eed8e676b384306",
+      "status": "localized-owned-copy"
+    },
+    {
+      "route": "/leizu/zh-hans/toronto-tutoring/",
+      "locale": "zh-Hans",
+      "source": "leizu/toronto-tutoring/index.html",
+      "source_sha256": "f13d58e22841dd56e970b796f08418cc6316fb85e5c053af1eed8e676b384306",
+      "status": "localized-owned-copy"
+    },
+    {
+      "route": "/leizu/fa/toronto-tutoring/",
+      "locale": "fa",
+      "source": "leizu/toronto-tutoring/index.html",
+      "source_sha256": "f13d58e22841dd56e970b796f08418cc6316fb85e5c053af1eed8e676b384306",
+      "status": "localized-owned-copy"
+    },
+    {
+      "route": "/leizu/fr/cloud/",
+      "locale": "fr",
+      "source": "leizu/cloud/index.html",
+      "source_sha256": "66e632a32f064ffc7b1b9787daffa40353189389a7db027c38747bc8569fac93",
+      "status": "localized-owned-copy"
+    },
+    {
+      "route": "/leizu/zh-hant/cloud/",
+      "locale": "zh-Hant",
+      "source": "leizu/cloud/index.html",
+      "source_sha256": "66e632a32f064ffc7b1b9787daffa40353189389a7db027c38747bc8569fac93",
+      "status": "localized-owned-copy"
+    },
+    {
+      "route": "/leizu/zh-hans/cloud/",
+      "locale": "zh-Hans",
+      "source": "leizu/cloud/index.html",
+      "source_sha256": "66e632a32f064ffc7b1b9787daffa40353189389a7db027c38747bc8569fac93",
+      "status": "localized-owned-copy"
+    },
+    {
+      "route": "/leizu/fa/cloud/",
+      "locale": "fa",
+      "source": "leizu/cloud/index.html",
+      "source_sha256": "66e632a32f064ffc7b1b9787daffa40353189389a7db027c38747bc8569fac93",
+      "status": "localized-owned-copy"
+    },
+    {
+      "route": "/leizu/fr/flyer/",
+      "locale": "fr",
+      "source": "leizu/flyer/index.html",
+      "source_sha256": "bae7e24c67a04123aeff66ed31461bccdbb343cac5d76fe1307d52c3c3cef59c",
+      "status": "localized-owned-copy"
+    },
+    {
+      "route": "/leizu/zh-hant/flyer/",
+      "locale": "zh-Hant",
+      "source": "leizu/flyer/index.html",
+      "source_sha256": "bae7e24c67a04123aeff66ed31461bccdbb343cac5d76fe1307d52c3c3cef59c",
+      "status": "localized-owned-copy"
+    },
+    {
+      "route": "/leizu/zh-hans/flyer/",
+      "locale": "zh-Hans",
+      "source": "leizu/flyer/index.html",
+      "source_sha256": "bae7e24c67a04123aeff66ed31461bccdbb343cac5d76fe1307d52c3c3cef59c",
+      "status": "localized-owned-copy"
+    },
+    {
+      "route": "/leizu/fa/flyer/",
+      "locale": "fa",
+      "source": "leizu/flyer/index.html",
+      "source_sha256": "bae7e24c67a04123aeff66ed31461bccdbb343cac5d76fe1307d52c3c3cef59c",
+      "status": "localized-owned-copy"
+    },
+    {
+      "route_pattern": "/polymythseminars/fr/events/{event_id}/",
+      "locale": "fr-CA",
+      "source": "polymythseminars/events.json",
+      "source_sha256": "941f9be6c4f741a813431a2617ee67d7b850d09993d07b3da5dd0a7a17666b0a",
+      "status": "localized-interface-source-verbatim",
+      "count": 833,
+      "legacy_alias_count": 12
+    },
+    {
+      "route": "/polymythseminars/fr/",
+      "locale": "fr-CA",
+      "source": "polymythseminars/index.html",
+      "source_sha256": "575b17320535cba8b640c6ec7bebb9afdde1813bebff5b68b17d307cde7ea697",
+      "status": "complete-owned-interface"
+    },
+    {
+      "route": "/writingclub/fr/",
+      "locale": "fr-CA",
+      "source": "writingclub/index.html",
+      "source_sha256": "38d9ab0ae41228694cb83c942782797514ca46deff2a9bf6c66114f47e3ccac2",
+      "status": "complete-owned-interface"
+    },
+    {
+      "route": "/writingkids/fr/",
+      "locale": "fr-CA",
+      "source": "writingkids/index.html",
+      "source_sha256": "cc06b7f7bfeebde1570441a16b6c0bce27266c63d827e4eb97bb49c79eddcd06",
+      "status": "complete-owned-interface"
+    },
+    {
+      "route": "/writingjuniors/fr/",
+      "locale": "fr-CA",
+      "source": "writingjuniors/index.html",
+      "source_sha256": "83d8d2c85ffc486ce966883bed280ec5fbbbe15ff2ffec0bdb9717ec60761a62",
+      "status": "complete-owned-interface"
+    },
+    {
+      "route": "/writingteens/fr/",
+      "locale": "fr-CA",
+      "source": "writingteens/index.html",
+      "source_sha256": "881da00b4a5d81b03869e2bd97d1d84cdbabbcc3ed7b18b44c1ffbec25adff78",
+      "status": "complete-owned-interface"
+    },
+    {
+      "route": "/writinggrads/fr/",
+      "locale": "fr-CA",
+      "source": "writinggrads/index.html",
+      "source_sha256": "ba56cd9fd604ad0567c6daf0dfd5b398a8631f61771693ee1140cbefdf95aaa1",
+      "status": "complete-owned-interface"
+    },
+    {
+      "route": "/university/fr/",
+      "locale": "fr-CA",
+      "source": "university/index.html",
+      "source_sha256": "4746bc96637e7a6a47ec06dd4dd380e7b70cdfd9b54caa8c48cfe8f669e59cf4",
+      "status": "complete-owned-interface"
+    },
+    {
+      "route": "/philosophy/fr/",
+      "locale": "fr-CA",
+      "source": "philosophy/index.html",
+      "source_sha256": "73a864d71d1045949fd7b3b2576601e45500d73e004a33a0e92ff5eb36af4eb5",
+      "status": "complete-owned-interface"
+    },
+    {
+      "route": "/humanities/fr/",
+      "locale": "fr-CA",
+      "source": "humanities/index.html",
+      "source_sha256": "98e5acc7cd34e238b70830e76fcd5b24ed9d99a8abd37d69b64945ac6f4c05a7",
+      "status": "complete-owned-interface"
+    },
+    {
+      "route": "/cfps/fr/",
+      "locale": "fr-CA",
+      "source": "cfps/index.html",
+      "source_sha256": "d33c4a95caa3d2cec3574c9540bf0b95f65ca746f28e56acf3fd48ab57ec0fe6",
+      "status": "complete-owned-interface"
+    },
+    {
+      "route": "/lectures/fr/",
+      "locale": "fr-CA",
+      "source": "lectures/index.html",
+      "source_sha256": "22d27dacb6d8e9b4c6a030fab9fab9eba69ae51911bd483899fdfc80a471389a",
+      "status": "complete-owned-interface"
+    },
+    {
+      "route": "/fellowships/fr/",
+      "locale": "fr-CA",
+      "source": "fellowships/index.html",
+      "source_sha256": "2dc8f45f6af2f62c0b363380bafc843ffbb7c4c013db3187a80723db5f7c988d",
+      "status": "complete-owned-interface"
+    },
+    {
+      "route": "/polymythseminars/fr/submit/",
+      "locale": "fr-CA",
+      "source": "polymythseminars/submit/index.html",
+      "source_sha256": "9edb249fc82d30008e4d04d6a44b266b59e093c09835976fec4b472e384ccd0c",
+      "status": "complete-owned-copy"
+    },
+    {
+      "route": "/polymythseminars/fr/correct/",
+      "locale": "fr-CA",
+      "source": "polymythseminars/correct/index.html",
+      "source_sha256": "b15785641667b90fc71078608f21081fcabd4a3a505615f34b0ebbf9354a6230",
+      "status": "complete-owned-copy"
+    },
+    {
+      "route": "/polymythseminars/fr/subscribe/",
+      "locale": "fr-CA",
+      "source": "polymythseminars/feeds/index.json",
+      "source_sha256": "a2fc9d86073f371eeb051ceb9eb3a35364c60b1ee359dd074fa6740deb179974",
+      "status": "complete-owned-copy"
+    },
+    {
+      "route": "/saul/fr/",
+      "locale": "fr",
+      "source": "saul/index.html",
+      "source_sha256": "0a90e092ddc4c30f3c26fdffa9f06faae6506cbd1ff9930ce8a7f67858a6c05e",
+      "status": "localized-career-archive"
+    },
+    {
+      "route": "/saul/zh-hant/",
+      "locale": "zh-Hant",
+      "source": "saul/index.html",
+      "source_sha256": "0a90e092ddc4c30f3c26fdffa9f06faae6506cbd1ff9930ce8a7f67858a6c05e",
+      "status": "localized-career-archive"
+    },
+    {
+      "route": "/saul/zh-hans/",
+      "locale": "zh-Hans",
+      "source": "saul/index.html",
+      "source_sha256": "0a90e092ddc4c30f3c26fdffa9f06faae6506cbd1ff9930ce8a7f67858a6c05e",
+      "status": "localized-career-archive"
+    },
+    {
+      "route": "/saul/fa/",
+      "locale": "fa",
+      "source": "saul/index.html",
+      "source_sha256": "0a90e092ddc4c30f3c26fdffa9f06faae6506cbd1ff9930ce8a7f67858a6c05e",
+      "status": "localized-career-archive"
+    },
+    {
+      "route": "/bb/why/zh/",
+      "locale": "zh-Hans",
+      "source": "bb/why/index.html",
+      "source_sha256": "0fcc3bb86d7b35d85168051ab44243a7662032e5b37fb0ae79d022d8e26bc562",
+      "status": "complete-owned-copy"
+    }
+  ],
+  "counts": {
+    "leizu_locales": 4,
+    "polymythcal_interface_locales": 2,
+    "polymythcal_event_routes_per_locale": 833,
+    "polymythcal_french_legacy_alias_routes": 12,
+    "saul_archive_locales": 4,
+    "teacher_resources": 644
+  }
+}

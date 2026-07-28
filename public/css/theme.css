@@ -47,6 +47,7 @@
 
   /* Letter-size scale, driven by the A-/A+ controls in /js/theme.js. */
   --font-scale: 1;
+  color-scheme: light;
 }
 
 
@@ -133,6 +134,7 @@
     --rule-soft: rgba(232, 222, 199, 0.10);
 
     --accent: var(--accent-dark);
+    color-scheme: dark;
   }
 }
 
@@ -151,6 +153,11 @@
   --rule-soft: rgba(232, 222, 199, 0.10);
 
   --accent: var(--accent-dark);
+  color-scheme: dark;
+}
+
+:root.light:not([data-theme-policy="fixed"]) {
+  color-scheme: light;
 }
 
 
@@ -169,8 +176,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border: 1px solid var(--rule);
   border-radius: 50%;

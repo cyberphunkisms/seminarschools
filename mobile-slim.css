@@ -6,6 +6,9 @@
 
 /* Never let a page scroll sideways on a phone. */
 html, body { overflow-x: hidden; }
+@supports (overflow: clip) {
+  html, body { overflow-x: clip; }
+}
 html { -webkit-text-size-adjust: 100%; }
 
 /* Media never exceeds the viewport. */
@@ -29,7 +32,11 @@ table { display: block; max-width: 100%; overflow-x: auto; }
 
 /* The floating text-size widget drops to the bottom corner on phones,
    where it cannot collide with any header or nav. */
-.ss-fz { top: auto !important; bottom: 1rem !important; right: 1rem !important; }
+.ss-fz {
+  top: auto !important;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px)) !important;
+  right: calc(1rem + env(safe-area-inset-right, 0px)) !important;
+}
 
 /* Fixed or sticky headers lose excess padding on small screens. */
 .topbar, header.topbar { flex-wrap: wrap; }

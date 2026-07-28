@@ -1,0 +1,366 @@
+{
+  "schema": "seminar-schools-audit49-technical-efficiency-v1",
+  "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
+  "asset_version": "20260726-audit49",
+  "package_version": "1.0.6",
+  "generated_at": "2026-07-26T15:45:00-04:00",
+  "status": "passed",
+  "scope": {
+    "decision": "aggregate current component evidence without repeating full repository walks",
+    "active_html": {
+      "source_roots": [
+        ".well-known",
+        "agora",
+        "aitr",
+        "aa",
+        "bb",
+        "bookwormcard",
+        "campaigns",
+        "cfps",
+        "fellowships",
+        "florilegium",
+        "humanities",
+        "lectures",
+        "leizu",
+        "about",
+        "main",
+        "marginalia",
+        "nutrition",
+        "ohm-dome",
+        "philosophy",
+        "polymyth",
+        "polymythcal",
+        "polymythseminars",
+        "reviews",
+        "saul",
+        "seminars",
+        "sitemap",
+        "teacherresources",
+        "university",
+        "writingclub",
+        "writinggrads",
+        "writingjuniors",
+        "writingkids",
+        "writingteens"
+      ],
+      "public_mirror": "public/",
+      "exclusions": [
+        "frozen historical evidence",
+        "operator-only HTML outside the canonical public allowlist",
+        "search-engine verification token files"
+      ]
+    },
+    "inherited_external_evidence_program": "scripts/reports/audit48-external-validation.json",
+    "preserved_historical_evidence": "Audit 37 through Audit 43 frozen gates"
+  },
+  "component_reports": {
+    "metadata": {
+      "path": "scripts/reports/audit49-metadata-surface.json",
+      "schema": "seminar-schools-audit49-metadata-surface-v1",
+      "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
+      "generated_at": "2026-07-26T15:45:00-04:00",
+      "status": "passed"
+    },
+    "runtime": {
+      "path": "scripts/reports/audit49-runtime-efficiency.json",
+      "schema": "seminar-schools-audit49-runtime-efficiency-v1",
+      "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
+      "generated_at": "2026-07-26T15:45:00-04:00",
+      "status": "passed"
+    },
+    "build_packaging": {
+      "path": "scripts/reports/audit49-build-packaging-efficiency.json",
+      "schema": "seminar-schools-audit49-build-packaging-efficiency-v1",
+      "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
+      "generated_at": "2026-07-26T15:45:00-04:00",
+      "status": "passed"
+    },
+    "audit48_external_validation": {
+      "path": "scripts/reports/audit48-external-validation.json",
+      "schema": "seminar-schools-audit48-external-validation-v1",
+      "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
+      "generated_at": "2026-07-26T15:45:00-04:00",
+      "status": "passed",
+      "machine_validation_status": "passed"
+    }
+  },
+  "metrics": {
+    "metadata": {
+      "source_html_documents": 3395,
+      "public_html_documents": 3395,
+      "interactive_documents": 2505,
+      "redirect_documents": 890,
+      "indexable_documents": 891,
+      "noindex_documents": 2504,
+      "sitemap_urls": 911,
+      "schema_blocks": 2289,
+      "schema_documents": 903,
+      "indexable_documents_without_schema": 1,
+      "intentional_schema_exemptions": 1,
+      "hreflang_links": 5430,
+      "hreflang_documents": 1755,
+      "source_public_byte_identical": 3395,
+      "generated_teacher_resource_documents": 678,
+      "generated_event_documents": 2535,
+      "documents_with_one_title": 3395,
+      "documents_with_one_description": 2506,
+      "documents_with_one_viewport": 3395,
+      "documents_with_one_canonical": 3394,
+      "documents_with_one_robots_directive": 3358,
+      "sitemap_non_html_resources": 20
+    },
+    "page_size_distribution": {
+      "over_100_kib": 40,
+      "over_250_kib": 26,
+      "over_500_kib": 7,
+      "largest_bytes": 3989374,
+      "gzip_over_100_kib": 20,
+      "gzip_over_250_kib": 4,
+      "gzip_over_500_kib": 2,
+      "largest_gzip_bytes": 1217370
+    },
+    "runtime": {
+      "active_runtime_files": 3439,
+      "files_with_intervals": 10,
+      "interval_calls": 10,
+      "bounded_leaf_routes": 10,
+      "startup_timer_slots_bounded": 45,
+      "public_runtime_mirrors_identical": 10,
+      "forced_public_data_revalidation_fetches": 0,
+      "bounded_public_data_assets": 24,
+      "bounded_public_data_bytes": 9774758
+    },
+    "cache_policies": {
+      "polymyth_text_mirrors": "public, max-age=86400, stale-while-revalidate=604800",
+      "florilegium_posts": "public, max-age=3600, must-revalidate",
+      "polymythcal_candidates": "public, max-age=300, must-revalidate",
+      "saul_public_data": "public, max-age=86400, stale-while-revalidate=604800"
+    },
+    "build_packaging": {
+      "baseline_reuse_runner_checks": 158,
+      "baseline_reuse_runner_wall_ms": 23225,
+      "command_timeout_ms": 600000,
+      "timeout_regression_observed_ms": 1006,
+      "sequential_failure_report_regression_passed": true,
+      "package_regression_tests": 10,
+      "archive_benchmark_files": 5,
+      "archive_benchmark_input_bytes": 75857344,
+      "archive_audit48_wall_ms": 3276,
+      "archive_audit49_wall_ms": 3242,
+      "archive_source_read_passes_before": 2,
+      "archive_source_read_passes_after": 1,
+      "archive_compatible_sha256": "c722e42d278abd6c3f97c3c13907fc62896bea169184c1e72fe03445bae1c3be",
+      "ci_canonical_linux_builds_before": 2,
+      "ci_canonical_linux_builds_after": 1,
+      "deployer_explicit_duplicate_parity_scans_before": 1,
+      "deployer_explicit_duplicate_parity_scans_after": 0,
+      "deployer_explicit_duplicate_browser_gates_before": 1,
+      "deployer_explicit_duplicate_browser_gates_after": 0,
+      "selection": {
+        "deployer": {
+          "directories_pruned": 1,
+          "directories_visited": 6923,
+          "files_considered": 10154,
+          "files_selected": 10153,
+          "public_files_selected": 4515,
+          "selected_bytes_excluding_this_report": 354406397
+        },
+        "source": {
+          "directories_pruned": 2,
+          "directories_visited": 3505,
+          "files_considered": 5639,
+          "files_selected": 5638,
+          "public_files_selected": 0,
+          "selected_bytes_excluding_this_report": 234664477
+        }
+      }
+    },
+    "audit48_external_validation": {
+      "interactive_source_pages": 2505,
+      "redirect_source_pages": 890,
+      "calendar_tests": 9,
+      "calendar_files": 857,
+      "parsed_calendar_events": 4172,
+      "intended_cross_engine_scenarios": 24,
+      "cross_engine_runtime_checks": 0,
+      "live_source_bindings": 200,
+      "live_endpoint_bindings": 227,
+      "unique_live_requests": 219
+    },
+    "translation_governance": {
+      "governed_route_records": 61,
+      "high_stakes_draft_routes": 20,
+      "static_translation_metrics": {
+        "events": 833,
+        "event_types": 32,
+        "sources": 422,
+        "french_event_routes": 833,
+        "french_event_legacy_alias_routes": 12,
+        "leizu_localized_routes": 40,
+        "saul_localized_routes": 4,
+        "teacher_resources": 644,
+        "teacher_language_counts": {
+          "en-CA": 618,
+          "fr-CA": 23,
+          "mul": 3
+        },
+        "methodology_entries": 1168,
+        "governed_route_records": 61,
+        "event_source_language_counts": {
+          "und": 796,
+          "fr-CA": 24,
+          "mul": 13
+        },
+        "scrape_cadence": "exactly once weekly"
+      }
+    }
+  },
+  "issue_counts": {
+    "duplicate_tags": 0,
+    "missing_metadata": 0,
+    "invalid_metadata": 0,
+    "schema": 0,
+    "duplicate_indexable_titles": 0,
+    "duplicate_indexable_descriptions": 0,
+    "duplicate_indexable_canonicals": 0,
+    "hreflang": 0,
+    "crawl": 0,
+    "source_public": 0,
+    "generator_ownership": 0
+  },
+  "completed_local_evidence": [
+    "repository-wide active HTML metadata and source/public parity gate",
+    "runtime interval lifecycle and bounded static-data cache gate",
+    "runner, build, CI, and package resilience regressions",
+    "strict-rfc5545-calendar-corpus-and-independent-parser-roundtrip",
+    "calendar-http-and-link-media-contract",
+    "repository-wide-assistive-technology-dom-prerequisites",
+    "portable-firefox-webkit-program-and-honest-blocked-preflight",
+    "bounded-read-only-current-endpoint-probe",
+    "seminar-and-protest-scheduled-selection-dry-runs",
+    "exact-once-weekly-cadence-continuity"
+  ],
+  "external_execution_status": "required-outside-this-workspace",
+  "external_execution_required": [
+    "branded Firefox validation",
+    "native macOS Safari and VoiceOver validation",
+    "Windows NVDA with Firefox and Chrome",
+    "physical iPhone and Android validation",
+    "real-user task completion and comprehension session",
+    "Google Calendar, Apple Calendar, and Outlook account imports",
+    "post-deploy calendar subscription refresh",
+    "reachable protest-source browser/OCR validation",
+    "authorized festival paid-agent execution"
+  ],
+  "weekly_workflow_schedules": {
+    ".github/workflows/audit-external-links.yml": "17 10 * * 0",
+    ".github/workflows/dependency-health.yml": "37 13 * * 1",
+    ".github/workflows/scrape-festivals.yml": "42 9 * * 2",
+    ".github/workflows/scrape-polymythcal-protests.yml": "18 8 * * 3",
+    ".github/workflows/scrape-seminars.yml": "47 8 * * 1"
+  },
+  "preserved_audit_freezes": [
+    "audit37",
+    "audit38",
+    "audit39",
+    "audit40",
+    "audit41",
+    "audit42",
+    "audit43"
+  ],
+  "invariants": {
+    "english_source_of_truth": true,
+    "organizer_authored_text_verbatim": true,
+    "high_stakes_leizu_noindex_preserved": true,
+    "bb_teacher_led_without_site_owned_runner": true,
+    "exact_weekly_workflows_preserved": true,
+    "frozen_audit_evidence_changed": false,
+    "external_only_rows_relabelled": false,
+    "native_browser_execution_claimed": false,
+    "security_audit_performed": false,
+    "deployment_performed": false
+  },
+  "fixes": [
+    "repository-wide-metadata-and-crawl-contract",
+    "localized-generator-metadata-ownership",
+    "bounded-runtime-lifecycle",
+    "bounded-static-data-caching",
+    "failure-safe-bounded-verification",
+    "single-pass-locked-archive-writing",
+    "pruned-shared-package-selection",
+    "deduplicated-ci-and-deployer-work",
+    "metadata-aware-frozen-gate-successors",
+    "current-release-and-package-wiring"
+  ],
+  "references": [
+    {
+      "topic": "robots meta directives",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag"
+    },
+    {
+      "topic": "canonical URL signals",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+    },
+    {
+      "topic": "localized versions and hreflang",
+      "url": "https://developers.google.com/search/docs/specialty/international/localized-versions"
+    },
+    {
+      "topic": "sitemap construction",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"
+    },
+    {
+      "topic": "structured-data fundamentals",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data"
+    },
+    {
+      "topic": "HTTP caching semantics",
+      "url": "https://www.rfc-editor.org/rfc/rfc9111"
+    },
+    {
+      "topic": "page visibility lifecycle",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API"
+    },
+    {
+      "topic": "animation-frame scheduling",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame"
+    },
+    {
+      "topic": "bounded child-process execution",
+      "url": "https://nodejs.org/api/child_process.html"
+    },
+    {
+      "topic": "ZIP archive implementation reference",
+      "url": "https://docs.python.org/3/library/zipfile.html"
+    },
+    {
+      "topic": "iCalendar interoperability",
+      "url": "https://www.rfc-editor.org/rfc/rfc5545"
+    },
+    {
+      "topic": "Playwright browser coverage",
+      "url": "https://playwright.dev/docs/browsers"
+    },
+    {
+      "topic": "native VoiceOver reference",
+      "url": "https://support.apple.com/guide/voiceover/welcome-voic010/mac"
+    },
+    {
+      "topic": "native NVDA reference",
+      "url": "https://download.nvaccess.org/documentation/en/userGuide.html"
+    },
+    {
+      "topic": "Google Calendar import reference",
+      "url": "https://support.google.com/calendar/answer/37118?hl=en"
+    },
+    {
+      "topic": "Apple Calendar import reference",
+      "url": "https://support.apple.com/guide/calendar/import-or-export-calendars-icl1023/mac"
+    },
+    {
+      "topic": "Outlook import and subscription reference",
+      "url": "https://support.microsoft.com/en-us/office/import-or-subscribe-to-a-calendar-in-outlook-com-or-outlook-on-the-web-cff1429c-5af6-41ec-a5b4-74f2c278e98c"
+    }
+  ],
+  "failures": []
+}

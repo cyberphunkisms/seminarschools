@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://seminarschools.com/schemas/polymythcal-protest-candidates-v2.json",
+  "title": "Polymythcal deterministic protest candidate state",
+  "type": "object",
+  "required": [
+    "version",
+    "updated_at",
+    "items",
+    "source_health"
+  ],
+  "properties": {
+    "version": {
+      "enum": [
+        1,
+        2
+      ]
+    },
+    "announcements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "record_kind",
+          "identity_key",
+          "title",
+          "source_id",
+          "source_url",
+          "first_seen_at",
+          "last_checked_at",
+          "next_recheck_at",
+          "confirmation_status",
+          "qualification_reasons",
+          "missing_details",
+          "lifecycle_status"
+        ],
+        "properties": {
+          "record_kind": {
+            "const": "announcement-candidate"
+          },
+          "identity_key": {
+            "type": "string",
+            "minLength": 16
+          },
+          "confirmation_status": {
+            "const": "unconfirmed"
+          },
+          "missing_details": {
+            "type": "array",
+            "contains": {
+              "const": "event-date"
+            }
+          },
+          "lifecycle_status": {
+            "enum": [
+              "awaiting-date",
+              "missing-on-source"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "identity_key",
+          "occurrence_key",
+          "title",
+          "source_id",
+          "source_url",
+          "first_seen_at",
+          "last_checked_at",
+          "next_recheck_at",
+          "confirmation_status",
+          "qualification_reasons",
+          "lifecycle_status"
+        ],
+        "properties": {
+          "identity_key": {
+            "type": "string",
+            "minLength": 16
+          },
+          "occurrence_key": {
+            "type": "string",
+            "minLength": 16
+          },
+          "confirmation_status": {
+            "enum": [
+              "confirmed",
+              "unconfirmed"
+            ]
+          },
+          "qualification_reasons": {
+            "type": "array"
+          },
+          "missing_details": {
+            "type": "array"
+          },
+          "next_recheck_at": {
+            "type": "string"
+          },
+          "missing_count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "source_health": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "source_id",
+          "status",
+          "checked_at"
+        ],
+        "properties": {
+          "status": {
+            "enum": [
+              "success",
+              "partial-failure",
+              "not-modified",
+              "confirmed-empty",
+              "fetch-error",
+              "blocked",
+              "parse-empty-regression"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -34,6 +34,22 @@ for(const key of ['forest_year_upfront', 'forest_year_two', 'forest_year_term', 
 assert(home.includes('https://calendly.com/kyrah0131/leizu'), 'Chinese consultation CTA no longer points to the approved Calendly route.');
 assert(home.includes('中文諮詢服務'), 'Chinese consultation CTA label is missing from the public page.');
 assert(home.includes('Plan selected in intake'), 'Course selector still implies an unconfigured automatic price.');
+assert(home.includes('Object.entries(copy).map(([key, translations])'), 'Pricing-panel translations are not resolved by message key and active language.');
+assert(!home.includes('const text = copy[lang] || copy.en'), 'Pricing panel still treats message keys as language keys.');
+assert(!home.includes("document.addEventListener('click', ()=>setTimeout(saveCartState,0), true)"), 'Leizu still serializes the full cart after every page click.');
+assert(!home.includes("document.addEventListener('keyup', ()=>setTimeout(saveCartState,0), true)"), 'Leizu still serializes the full cart after every keyup.');
+for(const snippet of [
+  "paperFlagged.add(courseId);\n      } else {\n        paperFlagged.delete(courseId);\n      }\n      saveCartState();",
+  "if(paperFlagged.has(courseId)) paperFlagged.delete(courseId);\n      }\n      saveCartState();",
+  "else eslIntensiveGoals.add(goal);\n      saveCartState();",
+  "if(c.eslIntensive && !selected.has(c.id)) selected.add(c.id);\n        }));\n      }\n      saveCartState();",
+  "pillar.courses.forEach(c => { inPersonFlagged.add(c.id); });\n  });\n  saveCartState();",
+  "paperFlagged.clear();\n  saveCartState();",
+]) {
+  assert(home.includes(snippet), 'A real Leizu cart mutation does not persist exactly at its handler: ' + snippet.slice(0, 48));
+}
+assert(home.includes("document.documentElement.getAttribute('data-motion') === 'calm'"), 'Leizu calm mode can still auto-hide its chrome controls.');
+assert(home.includes("window.matchMedia('(prefers-reduced-motion: reduce)').matches"), 'Leizu reduced-motion mode can still auto-hide its chrome controls.');
 assert(home.includes('/leizu/policies/'), 'Home page no longer routes policy details to the canonical policy page.');
 assert(home.includes('data-i18n="faq.a7" data-i18n-html'), 'FAQ policy answer cannot preserve the policy link after a language change.');
 assert(!home.includes("'faq.a7':'Cancel or reschedule with at least 72 hours"), 'A language dictionary still hard-codes cancellation terms outside the canonical policy page.');

@@ -27,8 +27,8 @@ CL means Component List. Each line records one website component, its state, and
 - CL-WEB-115 — Mobile map targets expand to a practical touch size while desktop geometry and the full desktop view remain unchanged.
 - CL-WEB-301 — Resolved. The synchronized hybrid was selected and implemented through CL-WEB-112 to CL-WEB-115.
 
-## Held until the focused pass
+## Current state after the focused audit series
 
-- CL-WEB-201 — Polymythcal calendar improvement. Review verification states, filtering, event detail pages, source freshness, and harvest workflow together.
-- CL-WEB-202 — Holistic translation update. Complete route-level translation inventory, language parity, metadata, directionality, and translation status in one coordinated pass.
-- CL-WEB-203 — Whole-site accessibility audit. Audit WCAG 2.2 AA across keyboard use, focus order, landmarks, names and labels, contrast, zoom, reduced motion, forms, maps, dynamic content, PDFs, and mobile states.
+- CL-WEB-201 — Complete for the deployable Polymythcal product and its deterministic scraper contracts. Filtering, bilingual detail routes, source freshness, protest-recall fixtures, workflow cost boundaries, feeds, saved state, rollover, and recovery are release-gated. A successful live scheduled harvest and current external-source health remain operational evidence, not a site-code blocker.
+- CL-WEB-202 — Inventory complete, direction pending. The public route inventory now records declared language, direction, alternates, and translation state across the deployable site. Translating every English-only project requires a target-language and editorial-scope decision.
+- CL-WEB-203 — Automated coverage complete, native sign-off pending. Static and Chromium gates cover representative route families, keyboard use, focus, landmarks, labels, contrast modes, zoom, text spacing, reduced motion and transparency, forms, dynamic content, print, and PDF inventory. Native VoiceOver, NVDA, Safari, Firefox, and manual PDF reading-order sign-off remain external.

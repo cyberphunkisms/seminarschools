@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const {parseSeedWithAddenda} = require('./lib/parse-seed-with-addenda');
 const root = path.resolve(__dirname, '..');
 const files = {
   canonical: 'polymyth/methodologylist/index.html',
@@ -59,7 +60,7 @@ function parseSeedArray(filePath) {
   if (arrEnd === -1) throw new Error('Could not find end of SEED array.');
   return eval(html.slice(arrStart, arrEnd + 1));
 }
-const ml = parseSeedArray(path.join(root, files.canonical));
+const ml = parseSeedWithAddenda(fs.readFileSync(path.join(root, files.canonical), 'utf8'));
 const bySection = new Map();
 for (const e of ml) bySection.set(e.s || 'unknown', (bySection.get(e.s || 'unknown') || 0) + 1);
 const sectionCount = bySection.size;

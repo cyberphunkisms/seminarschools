@@ -2,6 +2,10 @@
   'use strict';
   const root = document.querySelector('[data-cv-spectrum]');
   if (!root) return;
+  if (root.dataset.cvSpectrumMounted === 'true') return;
+  root.dataset.cvSpectrumMounted = 'true';
+  const selectionCount = root.querySelector('[data-cv-selection-count]');
+  if (selectionCount) selectionCount.removeAttribute('aria-live');
   const dataUrl = '/saul/assets/saul-cv-canonical-2026.json';
   let data = null;
   let selected = [];
@@ -73,7 +77,7 @@
     const org = r.organization ? ` <span>- ${escapeHTML(r.organization)}</span>` : '';
     const meta = [r.location, r.dates].filter(Boolean).map(escapeHTML).join(' · ');
     const bullets = (r.bullets || []).slice(0, 2).map(x => `<li>${escapeHTML(x)}</li>`).join('');
-    return `<article class="cv-spectrum__job"><h4>${title}${org}</h4><p class="cv-spectrum__job-meta">${meta}</p><ul>${bullets}</ul></article>`;
+    return `<article class="cv-spectrum__job"><h3>${title}${org}</h3><p class="cv-spectrum__job-meta">${meta}</p><ul>${bullets}</ul></article>`;
   };
   const preparePrintJobs = () => {
     if (printJobs?.isConnected) return printJobs;
@@ -89,7 +93,7 @@
     return printJobs;
   };
   const clearPrintJobs = () => { if (printJobs?.isConnected) printJobs.remove(); printJobs = null; };
-  const render = () => {
+  const render = (announceFocus = false) => {
     const module = combineModules(selected);
     root.style.setProperty('--focus', module.color || '#665A78');
     document.documentElement.style.setProperty('--cv-focus', module.color || '#665A78');
@@ -112,6 +116,10 @@
     root.querySelectorAll('[data-cv-blend]').forEach(box => box.checked = selected.includes(box.value));
     const count = root.querySelector('[data-cv-selection-count]');
     if (count) count.textContent = selected.length === 0 ? 'Choose focus areas to combine.' : selected.length === 1 ? '1 area selected. Choose one more area for a combined view.' : `${selected.length} areas selected. Combined view ready.`;
+    if (announceFocus) {
+      const status = root.querySelector('[data-cv-share-status]');
+      if (status) status.textContent = `CV focus updated: ${module.label}.`;
+    }
     const designed = root.querySelector('[data-cv-designed]');
     const ats = root.querySelector('[data-cv-ats]');
     const text = root.querySelector('[data-cv-text]');
@@ -136,7 +144,7 @@
     const nextUrl = routeFor(next);
     if (push && root.dataset.focusedRoute === 'true') { location.assign(nextUrl); return; }
     selected = next;
-    render();
+    render(true);
     if (push) history.pushState({focus:selected}, '', nextUrl);
   };
   root.querySelectorAll('[data-cv-blend]').forEach(box => box.addEventListener('change', () => setSelected([...root.querySelectorAll('[data-cv-blend]:checked')].map(x => x.value))));
@@ -160,18 +168,31 @@
   root.querySelector('[data-cv-print]')?.addEventListener('click', () => { preparePrintJobs(); requestAnimationFrame(() => window.print()); });
   addEventListener('beforeprint', preparePrintJobs);
   addEventListener('afterprint', clearPrintJobs);
-  addEventListener('popstate', () => { selected = pathFocus(); render(); });
+  addEventListener('popstate', () => { selected = pathFocus(); render(true); });
 
   const mapFrame = document.querySelector('[data-cv-map-frame]');
   if (mapFrame) {
     const stage = mapFrame.closest('[data-cv-map-stage]');
-    const loaded = () => stage?.classList.add('is-loaded');
+    const status = stage?.querySelector('.cv-map-loading');
+    const loaded = () => {
+      stage?.classList.remove('is-unavailable');
+      stage?.classList.add('is-loaded');
+      if (status) status.textContent = 'Interactive map loaded';
+    };
+    const unavailable = () => {
+      stage?.classList.remove('is-loaded');
+      stage?.classList.add('is-unavailable');
+      if (status) status.textContent = 'Interactive map unavailable. Use the open-map link.';
+    };
     mapFrame.addEventListener('load', loaded, {once:true});
-    mapFrame.addEventListener('error', () => stage?.classList.add('is-unavailable'), {once:true});
-    if (mapFrame.contentDocument?.readyState === 'complete') loaded();
-    window.setTimeout(() => {
-      if (!stage?.classList.contains('is-loaded')) stage?.classList.add('is-unavailable');
-    }, 6500);
+    mapFrame.addEventListener('error', unavailable, {once:true});
+    try {
+      if (mapFrame.contentDocument?.readyState === 'complete') loaded();
+    } catch {
+      // Cross-origin map frames normally hide contentDocument. The load/error
+      // events remain authoritative; a fixed timer caused false failures for
+      // lazy frames that had not entered the viewport yet.
+    }
   }
   const localNav = document.querySelector('[data-cv-local-nav]');
   if (localNav && 'IntersectionObserver' in window) {

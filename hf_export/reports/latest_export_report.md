@@ -1,6 +1,6 @@
 # Meaninglib Hugging Face export report
 
-Exported: 2026-07-22T01:21:50.997Z
+Exported: 2026-07-28T04:23:52.471Z
 
 Target repo: SeminarSchools/meaninglib
 
@@ -12,9 +12,9 @@ Target repo: SeminarSchools/meaninglib
 - cc: 296
 - manifest: 2
 - mc: 234
-- ml: 1272
+- ml: 1302
 
-Total rows: 2052
+Total rows: 2082
 
 ## Ontology lock
 

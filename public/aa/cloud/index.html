@@ -51,6 +51,7 @@
 -->
 <html data-theme-policy="fixed" lang="en">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
 <meta charset="utf-8"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
@@ -113,6 +114,7 @@ html,body{
 #canvas{
   position:fixed;inset:0;
   cursor:grab;
+  touch-action:none;
   background:radial-gradient(ellipse at center, #14110d 0%, #0a0807 70%, #050403 100%);
 }
 #canvas.dragging{cursor:grabbing}
@@ -271,6 +273,15 @@ html,body{
    the catalog page for actual tag exploration). */
 #mobile-outliner { display: none; }
 @media (max-width: 600px) {
+  html, body {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    user-select: text;
+    -webkit-user-select: text;
+  }
   #canvas, #cloud-stage, #legend, #stage-controls,
   .depth-toggle, .legend, #edges-legend, #node-counts {
     display: none !important;
@@ -303,6 +314,9 @@ html,body{
   }
   #mobile-outliner details summary {
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
     padding: 8px 0;
     font-size: 16px;
     color: rgba(232, 226, 212, 0.92);
@@ -345,8 +359,10 @@ html,body{
     border-bottom: 1px dotted rgba(180, 180, 180, 0.25);
   }
   #mobile-outliner .mo-tax-list a:active,
-  #mobile-outliner .mo-tax-list a:focus {
+  #mobile-outliner .mo-tax-list a:focus-visible {
     color: rgba(232, 200, 144, 0.95);
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
   }
   #mobile-outliner .mo-tax-meta {
     display: block;
@@ -553,6 +569,13 @@ html,body{
 /* ==================== NODES ==================== */
 .node{
   position:absolute;
+  appearance:none;
+  -webkit-appearance:none;
+  border:0;
+  margin:0;
+  background:transparent;
+  color:inherit;
+  font:inherit;
   transform:translate(-50%,-50%);
   cursor:pointer;
   transition:opacity 0.4s, color 0.3s, text-shadow 0.3s, transform 0.15s ease-out;
@@ -568,11 +591,16 @@ html,body{
   animation: nodeGrow 0.75s cubic-bezier(0.34, 1.46, 0.64, 1) backwards;
 }
 .node.dragging{cursor:grabbing;animation:none}
-.node:hover{
+.node:hover,
+.node:focus-visible{
   color:var(--accent);
   text-shadow:0 0 12px rgba(232,160,74,0.5);
   z-index:10;
   transform:translate(-50%,-50%) scale(1.08);  /* slight pop on hover */
+}
+.node:focus-visible{
+  outline:2px solid currentColor;
+  outline-offset:3px;
 }
 .node.visited{opacity:0.45}
 .node.active{
@@ -823,7 +851,7 @@ body.untrans-focus .bubble{ opacity:0.5; transition: opacity 0.6s; }
   cursor:pointer;
   font-family:inherit;
   font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;
-  transition:all 0.15s;
+  transition:color 0.15s,background-color 0.15s,border-color 0.15s,opacity 0.15s,transform 0.15s;
 }
 #controls button:hover{
   border-color:var(--accent);
@@ -1043,6 +1071,8 @@ body.untrans-focus .bubble{ opacity:0.5; transition: opacity 0.6s; }
   border-top:1px dotted var(--faint, rgba(150,140,120,0.25));
 }
 #detail .dt-tag-chip{
+  appearance:none;
+  -webkit-appearance:none;
   display:inline-block;
   font-family:'JetBrains Mono','Courier New',monospace;
   font-size:0.72rem;letter-spacing:0.3px;
@@ -1052,12 +1082,18 @@ body.untrans-focus .bubble{ opacity:0.5; transition: opacity 0.6s; }
   color:var(--dim, #9a8a78);
   border-radius:2px;
   cursor:pointer;
-  transition:all 0.15s ease;
+  transition:color 0.15s ease,background-color 0.15s ease,border-color 0.15s ease,opacity 0.15s ease,transform 0.15s ease;
 }
-#detail .dt-tag-chip:hover{
+#detail .dt-tag-chip:hover,
+#detail .dt-tag-chip:focus-visible{
   background:rgba(201,166,107,0.18);
   border-color:rgba(201,166,107,0.55);
   color:var(--accent, #c9a66b);
+}
+#detail .dt-tag-chip:focus-visible,
+#detail .dt-close:focus-visible{
+  outline:2px solid currentColor;
+  outline-offset:2px;
 }
 
 /* ==================== EMPTY STATE GUIDE ==================== */
@@ -1101,16 +1137,18 @@ body.untrans-focus .bubble{ opacity:0.5; transition: opacity 0.6s; }
 <link href="/css/mobile-overlay.css?v=cl91" rel="stylesheet"/>
 <link href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)" rel="stylesheet"/>
 <link href="/css/alive.css?v=cl91" rel="stylesheet"/>
-<link href="/css/theme.css?v=cl91" rel="stylesheet"/>
+<link href="/css/theme.css?v=20260725-audit45" rel="stylesheet"/>
 <style>.polymyth-funnel{max-width:900px;margin:.8rem auto;padding:.7rem .9rem;border:1px solid currentColor;font-family:system-ui,sans-serif;font-size:.9rem;line-height:1.45}.polymyth-funnel a{color:inherit;text-decoration:underline}</style>
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.075" data-page-weight="heavy" data-route-type="archive-tool">
+<body data-geometry="indra-web" data-indra-intensity="0.095" data-page-weight="heavy" data-route-type="archive-tool">
 <a class="skip-link" href="#header">Skip to main content</a>
 <div class="keyboard-hint" tabindex="-1"><span class="route-note-kicker">Keyboard</span><kbd>/</kbd> search, <kbd>?</kbd> help, <kbd>←</kbd>/<kbd>→</kbd> move wide panels.</div>
 <!-- CL_SELF_ROUTE_NOTE -->
 <div class="route-note tool-route-note" role="note"><span class="route-note-kicker">Archive tool</span>Use search, /, Esc, and the visible controls to move through the archetype cloud.</div>
-<style id="ss-fz-style">.ss-fz{position:fixed;top:auto;bottom:1rem;left:1rem;right:auto;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div aria-label="Adjust text size" class="ss-fz"><button data-fz="down" title="Decrease text size" type="button">A-</button><button data-fz="up" title="Increase text size" type="button">A+</button><button class="reset" data-fz="reset" style="display:none" title="Reset text size" type="button">↺</button></div>
+<style id="ss-fz-style">.ss-fz{position:fixed;top:auto;bottom:1rem;left:1rem;right:auto;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div aria-label="Adjust text size" class="ss-fz" data-fz-placement="bottom-left"><button data-fz="down" title="Decrease text size" type="button">A-</button><button data-fz="up" title="Increase text size" type="button">A+</button><button class="reset" data-fz="reset" style="display:none" title="Reset text size" type="button">↺</button></div>
 <!-- ==================== CHROME ==================== -->
 <div class="chrome" id="header" role="main">
 <div id="title"><em>aa*</em> <span data-i18n="title_rest">/ cloud, recursive growth</span> · <a data-i18n="classic_link" href="/aa/">classic view →</a></div>
@@ -1171,7 +1209,7 @@ body.untrans-focus .bubble{ opacity:0.5; transition: opacity 0.6s; }
 <div class="leg-item">brighter glow = more traditions converging</div>
 </div>
 </div>
-<div id="detail"></div>
+<div aria-hidden="true" aria-label="Node details" id="detail" role="region"></div>
 <!-- ==================== EMPTY STATE GUIDE ==================== -->
 <div id="guide">
 <div id="guide-text">
@@ -34975,10 +35013,50 @@ const NOT_ARCHETYPAL_IDS = new Set([
 let panX = 0, panY = 0, zoom = 1;
 let isDragging = false, dragStartX = 0, dragStartY = 0, dragStartPanX = 0, dragStartPanY = 0;
 let didDrag = false;
+let canvasRectCache = null;
+let inputFrame = 0;
+let pendingMousePoint = null;
+let transformPending = false;
+
+function invalidateCanvasRect(){
+  canvasRectCache = null;
+}
+
+function getCanvasRect(){
+  if (!canvasRectCache) canvasRectCache = canvas.getBoundingClientRect();
+  return canvasRectCache;
+}
+
+function scheduleInputFrame(){
+  if (inputFrame) return;
+  inputFrame = requestAnimationFrame(() => {
+    inputFrame = 0;
+    if (pendingMousePoint){
+      const point = pendingMousePoint;
+      pendingMousePoint = null;
+      const rect = getCanvasRect();
+      const sx = point.x - rect.left;
+      const sy = point.y - rect.top;
+      mouseWorldX = (sx - rect.width / 2 - panX) / zoom;
+      mouseWorldY = (sy - rect.height / 2 - panY) / zoom;
+      mouseActive = true;
+    }
+    if (transformPending){
+      transformPending = false;
+      applyTransform();
+    }
+  });
+}
+
+function scheduleTransform(){
+  transformPending = true;
+  scheduleInputFrame();
+}
 
 function applyTransform(){
-  const cx = canvas.clientWidth / 2;
-  const cy = canvas.clientHeight / 2;
+  const rect = getCanvasRect();
+  const cx = rect.width / 2;
+  const cy = rect.height / 2;
   inner.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
   // SVG is positioned at top-left (0,0) while inner is at center (50%,50%).
   // Add canvas-center offset to SVG transform so world (0,0) renders at the
@@ -35852,7 +35930,8 @@ function spawnFromNode(node, opts){
 
 // ==================== RENDERING ====================
 function renderNode(node){
-  const el = document.createElement('div');
+  const el = document.createElement('button');
+  el.type = 'button';
   el.className = `node node--${node.type} spawning node--fresh`;  // A24: fresh-node cue
   el.dataset.id = node.id;
   el.style.left = node.x + 'px';
@@ -36831,8 +36910,64 @@ function lerp(a, b, t){ return a + (b - a) * t; }
 let mouseWorldX = 0, mouseWorldY = 0;
 let mouseActive = false;
 let simRunning = false;
+let simPending = false;
+let simFrameId = 0;
+let simStartedAt = 0;
+let simCalmFrames = 0;
 let simEnergy = 0;
 let simFrameCount = 0;
+const SIM_MAX_ACTIVE_MS = 8000;
+const SIM_CALM_ENERGY = 0.02;
+const SIM_CALM_FRAME_LIMIT = 24;
+const reducedMotionQuery = window.matchMedia
+  ? window.matchMedia('(prefers-reduced-motion: reduce)')
+  : { matches: false };
+const mobileOutlinerQuery = window.matchMedia
+  ? window.matchMedia('(max-width: 600px)')
+  : { matches: window.innerWidth <= 600 };
+
+function cloudMotionAllowed(){
+  return !reducedMotionQuery.matches &&
+    document.documentElement.dataset.motion !== 'calm';
+}
+
+function isMobileOutlinerMode(){
+  return window.matchMedia ? mobileOutlinerQuery.matches : window.innerWidth <= 600;
+}
+
+function simulationAllowed(){
+  return !document.hidden &&
+    cloudMotionAllowed() &&
+    !isMobileOutlinerMode();
+}
+
+function stopSimulation(clearPending){
+  simRunning = false;
+  if (simFrameId){
+    window.cancelAnimationFrame(simFrameId);
+    simFrameId = 0;
+  }
+  if (clearPending) simPending = false;
+}
+
+function scheduleSimulationFrame(){
+  if (!simRunning || simFrameId || !simulationAllowed()) return;
+  simFrameId = window.requestAnimationFrame(simLoop);
+}
+
+function syncSimulationLifecycle(){
+  if (!simulationAllowed()){
+    stopSimulation(false);
+    return;
+  }
+  if (!simPending) return;
+  if (performance.now() - simStartedAt >= SIM_MAX_ACTIVE_MS){
+    stopSimulation(true);
+    return;
+  }
+  simRunning = true;
+  scheduleSimulationFrame();
+}
 
 function simTick(){
   const arr = [...nodes.values()];
@@ -36997,15 +37132,23 @@ function simTick(){
   // Per-frame camera tracking amplified sim noise into visible POV drift.
 }
 
-function simLoop(){
-  if (!simRunning) return;
+function simLoop(timestamp){
+  simFrameId = 0;
+  if (!simRunning || !simulationAllowed()){
+    stopSimulation(false);
+    return;
+  }
   simTick();
   simFrameCount++;
-  // Sim never auto-stops anymore. The orbit force + brownian jitter keep the
-  // cloud gently drifting forever, and the camera-lerp continuously tracks the
-  // visual centroid. Stopping would create the abrupt jerk you noticed.
-  // (Reset / nodes-cleared sets simRunning=false explicitly.)
-  requestAnimationFrame(simLoop);
+  simCalmFrames = eggT() >= 1 && simEnergy <= SIM_CALM_ENERGY
+    ? simCalmFrames + 1
+    : 0;
+  const elapsed = timestamp - simStartedAt;
+  if (elapsed >= SIM_MAX_ACTIVE_MS || simCalmFrames >= SIM_CALM_FRAME_LIMIT){
+    stopSimulation(true);
+    return;
+  }
+  scheduleSimulationFrame();
 }
 
 // ==================== AUTOFIT ====================
@@ -37134,13 +37277,22 @@ function autoFit(focusId, customGroup){
   if (userOverrodeZoom || isDragging) return;
   const t = computeAutoFitTarget(focusId, customGroup);
   if (!t) return;
-  inner.style.transition = `transform ${AUTOFIT_DUR}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
-  edgesSvg.style.transition = `transform ${AUTOFIT_DUR}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
+  const animateCamera = cloudMotionAllowed();
+  inner.style.transition = animateCamera
+    ? `transform ${AUTOFIT_DUR}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`
+    : 'none';
+  edgesSvg.style.transition = animateCamera
+    ? `transform ${AUTOFIT_DUR}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`
+    : 'none';
   panX = t.panX;
   panY = t.panY;
   zoom = t.zoom;
   applyTransform();
   if (autoFitTimer) clearTimeout(autoFitTimer);
+  if (!animateCamera){
+    autoFitTimer = null;
+    return;
+  }
   autoFitTimer = setTimeout(() => {
     inner.style.transition = '';
     edgesSvg.style.transition = '';
@@ -37157,10 +37309,15 @@ function reheatSim(){
     node.vy += (Math.random() - 0.5) * 0.005;
   });
   simFrameCount = 0;
-  if (!simRunning){
-    simRunning = true;
-    requestAnimationFrame(simLoop);
+  simCalmFrames = 0;
+  simStartedAt = performance.now();
+  simPending = true;
+  if (!simulationAllowed()){
+    stopSimulation(false);
+    return;
   }
+  simRunning = true;
+  scheduleSimulationFrame();
 }
 
 function setActive(nodeId){
@@ -37182,6 +37339,46 @@ function setActive(nodeId){
 }
 
 // ==================== DETAIL PANEL ====================
+let detailReturnFocus = null;
+let tagOverlayReturnFocus = null;
+
+function focusWithoutScroll(element){
+  if (!element || !element.isConnected || typeof element.focus !== 'function') return;
+  try {
+    element.focus({ preventScroll: true });
+  } catch (error) {
+    element.focus();
+  }
+}
+
+function closeDetail(restoreFocus){
+  const shouldRestore = restoreFocus !== false;
+  detail.classList.remove('open');
+  detail.setAttribute('aria-hidden', 'true');
+  if (detail.contains(document.activeElement)) document.activeElement.blur();
+  if (shouldRestore) focusWithoutScroll(detailReturnFocus);
+}
+
+function mountDetail(node){
+  if (node && node.el && node.el.isConnected) detailReturnFocus = node.el;
+  detail.classList.add('open');
+  detail.setAttribute('aria-hidden', 'false');
+  const closeButton = detail.querySelector('.dt-close');
+  if (!closeButton) return;
+  closeButton.addEventListener('click', () => closeDetail(true));
+  focusWithoutScroll(closeButton);
+}
+
+function closeTagOverlay(restoreFocus){
+  const overlay = document.getElementById('tag-overlay');
+  if (!overlay || overlay.hidden) return;
+  const shouldRestore = restoreFocus !== false;
+  overlay.hidden = true;
+  overlay.style.display = 'none';
+  if (overlay.contains(document.activeElement)) document.activeElement.blur();
+  if (shouldRestore) focusWithoutScroll(tagOverlayReturnFocus);
+}
+
 function showDetailFromNode(node){
   if (node.type === 'taxonomy'){
     const t = node.data.tax;
@@ -37194,8 +37391,7 @@ function showDetailFromNode(node){
       ${t.disputed ? `<div class="dt-disputed">${escapeHtml(t.disputed)}</div>` : ''}
       ${t.source_url ? `<div class="dt-source"><a href="${escapeHtml(t.source_url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t.source_url)}</a></div>` : ''}
     `;
-    detail.classList.add('open');
-    detail.querySelector('.dt-close').addEventListener('click', () => detail.classList.remove('open'));
+    mountDetail(node);
   } else {
     // Non-taxonomy: pull explanation from whatever native data source exists.
     // Every node type already has substantive content somewhere, this just
@@ -37355,7 +37551,7 @@ function showDetailFromNode(node){
     let tagsHtml = '';
     if (node._renderTags && node._renderTags.length > 0){
       const chips = node._renderTags.map(t =>
-        '<span class="dt-tag-chip" data-tag="' + escapeHtml(t) + '">' + escapeHtml(t) + '</span>'
+        '<button type="button" class="dt-tag-chip" data-tag="' + escapeHtml(t) + '">' + escapeHtml(t) + '</button>'
       ).join('');
       tagsHtml = '<div class="dt-tags">' + chips + '</div>';
       delete node._renderTags;
@@ -37368,8 +37564,7 @@ function showDetailFromNode(node){
       ${extra ? `<div class="dt-note" style="opacity:0.7;margin-top:6px;font-size:12px">${escapeHtml(extra)}</div>` : ''}
       ${tagsHtml}
     `;
-    detail.classList.add('open');
-    detail.querySelector('.dt-close').addEventListener('click', () => detail.classList.remove('open'));
+    mountDetail(node);
     // Wire up tag-chip clicks. For now, clicking a tag opens a small overlay
     // listing other untranslatables that carry the same tag (in-file scope).
     // Cross-file tag traversal is the deferred heavy version.
@@ -37387,24 +37582,32 @@ function showDetailFromNode(node){
 // Click any to navigate detail panel to that entry.
 function showTagOverlay(tag){
   if (!window.UNTRANSLATABLES) return;
+  tagOverlayReturnFocus = document.activeElement;
   const matches = UNTRANSLATABLES.filter(u => (u.tags || []).includes(tag));
   let overlay = document.getElementById('tag-overlay');
   if (!overlay){
     overlay = document.createElement('div');
     overlay.id = 'tag-overlay';
+    overlay.hidden = true;
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'false');
+    overlay.setAttribute('aria-label', 'Entries with matching tag');
     overlay.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--bg, #1a1816);border:1px solid var(--rule, #3a3530);padding:20px 24px;max-width:480px;max-height:70vh;overflow-y:auto;z-index:1000;font-family:"Cormorant Garamond",serif;color:var(--ink, #e6dccb);box-shadow:0 12px 40px rgba(0,0,0,0.6);';
     document.body.appendChild(overlay);
   }
   const items = matches.map(u =>
-    '<div class="tag-match" data-id="' + escapeHtml(u.id) + '" style="padding:6px 0;cursor:pointer;border-bottom:1px dotted #3a3530"><strong>' + escapeHtml(u.term) + '</strong> <span style="opacity:0.6;font-size:12px">' + escapeHtml(u.language) + '</span></div>'
+    '<button type="button" class="tag-match" data-id="' + escapeHtml(u.id) + '" style="display:block;width:100%;padding:6px 0;cursor:pointer;border:0;border-bottom:1px dotted #3a3530;background:none;color:inherit;font:inherit;text-align:left"><strong>' + escapeHtml(u.term) + '</strong> <span style="opacity:0.6;font-size:12px">' + escapeHtml(u.language) + '</span></button>'
   ).join('');
   overlay.innerHTML =
-    '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px"><div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:0.6">tag</div><button id="tag-overlay-close" style="background:none;border:none;color:var(--ink);font-size:20px;cursor:pointer">×</button></div>' +
+    '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px"><div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:0.6">tag</div><button type="button" id="tag-overlay-close" aria-label="Close matching entries" style="background:none;border:none;color:var(--ink);font-size:20px;cursor:pointer">×</button></div>' +
     '<div style="font-size:18px;margin-bottom:14px;color:var(--accent, #c9a66b)">' + escapeHtml(tag) + '</div>' +
     '<div style="font-size:11px;opacity:0.6;margin-bottom:10px">' + matches.length + ' entries carry this tag</div>' +
     items;
+  overlay.hidden = false;
   overlay.style.display = 'block';
-  document.getElementById('tag-overlay-close').addEventListener('click', () => overlay.style.display = 'none');
+  const closeButton = document.getElementById('tag-overlay-close');
+  closeButton.addEventListener('click', () => closeTagOverlay(true));
+  focusWithoutScroll(closeButton);
   overlay.querySelectorAll('.tag-match').forEach(el => {
     el.addEventListener('click', () => {
       const id = el.getAttribute('data-id');
@@ -37417,7 +37620,7 @@ function showTagOverlay(tag){
           foundNode = n;
         }
       });
-      overlay.style.display = 'none';
+      closeTagOverlay(false);
       if (foundNode){
         showDetailFromNode(foundNode);
       } else {
@@ -37447,19 +37650,28 @@ function panToward(targetX, targetY, smooth){
   const cy = window.innerHeight / 2;
   const desiredPanX = cx - targetX * zoom;
   const desiredPanY = cy - targetY * zoom;
-  if (smooth){
+  const nextPanX = smooth ? panX * 0.4 + desiredPanX * 0.6 : desiredPanX;
+  const nextPanY = smooth ? panY * 0.4 + desiredPanY * 0.6 : desiredPanY;
+  if (autoFitTimer){
+    clearTimeout(autoFitTimer);
+    autoFitTimer = null;
+  }
+  if (smooth && cloudMotionAllowed()){
     inner.style.transition = 'transform 0.6s ease';
     edgesSvg.style.transition = 'transform 0.6s ease';
-    panX = panX * 0.4 + desiredPanX * 0.6;
-    panY = panY * 0.4 + desiredPanY * 0.6;
+    panX = nextPanX;
+    panY = nextPanY;
     applyTransform();
-    setTimeout(() => {
+    autoFitTimer = setTimeout(() => {
       inner.style.transition = '';
       edgesSvg.style.transition = '';
+      autoFitTimer = null;
     }, 650);
   } else {
-    panX = desiredPanX;
-    panY = desiredPanY;
+    inner.style.transition = 'none';
+    edgesSvg.style.transition = 'none';
+    panX = nextPanX;
+    panY = nextPanY;
     applyTransform();
   }
 }
@@ -37488,15 +37700,11 @@ canvas.addEventListener('mousedown', e => {
 // Track mouse in WORLD coordinates for magnetism, nodes near the cursor
 // get extra damping each tick so they settle and become easy to click.
 canvas.addEventListener('mousemove', e => {
-  const rect = canvas.getBoundingClientRect();
-  const sx = e.clientX - rect.left;
-  const sy = e.clientY - rect.top;
-  // Reverse the inner transform: world(x,y) renders at (W/2 + panX + x*zoom, ...)
-  mouseWorldX = (sx - canvas.clientWidth / 2 - panX) / zoom;
-  mouseWorldY = (sy - canvas.clientHeight / 2 - panY) / zoom;
-  mouseActive = true;
+  pendingMousePoint = { x: e.clientX, y: e.clientY };
+  scheduleInputFrame();
 });
 canvas.addEventListener('mouseleave', () => {
+  pendingMousePoint = null;
   mouseActive = false;
 });
 
@@ -37510,7 +37718,7 @@ window.addEventListener('mousemove', e => {
   }
   panX = dragStartPanX + dx;
   panY = dragStartPanY + dy;
-  applyTransform();
+  scheduleTransform();
 });
 window.addEventListener('mouseup', () => {
   isDragging = false;
@@ -37522,7 +37730,7 @@ window.addEventListener('mouseup', () => {
 canvas.addEventListener('wheel', e => {
   e.preventDefault();
   userOverrodeZoom = true; // user is zooming manually, stop auto-fit
-  const rect = canvas.getBoundingClientRect();
+  const rect = getCanvasRect();
   const mx = e.clientX - rect.left;
   const my = e.clientY - rect.top;
   const factor = e.deltaY > 0 ? 0.92 : 1.08;
@@ -37533,7 +37741,7 @@ canvas.addEventListener('wheel', e => {
   zoom = newZoom;
   panX = mx - wx * zoom;
   panY = my - wy * zoom;
-  applyTransform();
+  scheduleTransform();
 }, { passive: false });
 
 // Touch support, basic
@@ -37549,13 +37757,17 @@ canvas.addEventListener('touchmove', e => {
     const dy = e.touches[0].clientY - touchStart.y;
     panX = touchStart.panX + dx;
     panY = touchStart.panY + dy;
-    applyTransform();
+    scheduleTransform();
   }
 }, { passive: true });
 canvas.addEventListener('touchend', () => { touchStart = null; }, { passive: true });
 
 // ==================== INIT ====================
 function reset(){
+  if (autoFitTimer) clearTimeout(autoFitTimer);
+  autoFitTimer = null;
+  inner.style.transition = 'none';
+  edgesSvg.style.transition = 'none';
   nodes.clear();
   edges.length = 0;
   edgeKeySet.clear();  // J5: keep set in sync with edges
@@ -37564,7 +37776,8 @@ function reset(){
   while (inner.firstChild) inner.removeChild(inner.firstChild);
   while (edgesLayer.firstChild) edgesLayer.removeChild(edgesLayer.firstChild);
   while (bubblesLayer.firstChild) bubblesLayer.removeChild(bubblesLayer.firstChild);
-  detail.classList.remove('open');
+  closeTagOverlay(false);
+  closeDetail(false);
   guide.classList.remove('hidden');
 
   // Place the seed at origin
@@ -37582,8 +37795,9 @@ function reset(){
   panX = 0; panY = 0; zoom = 1;
   applyTransform();
   updateStatus();
-  simRunning = false;
+  stopSimulation(true);
   simFrameCount = 0;
+  simCalmFrames = 0;
   simEnergy = 0;
   userOverrodeZoom = false;
 }
@@ -37617,17 +37831,35 @@ function showCopyToast(text){
 // Keyboard
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape'){
-    detail.classList.remove('open');
+    const searchOverlay = document.getElementById('search-overlay');
+    if (searchOverlay && searchOverlay.classList.contains('on')) return;
+    const tagOverlay = document.getElementById('tag-overlay');
+    if (tagOverlay && !tagOverlay.hidden){
+      closeTagOverlay(true);
+    } else if (detail.classList.contains('open')){
+      closeDetail(true);
+    }
   } else if (e.key === 'r' && (e.metaKey || e.ctrlKey)){
     e.preventDefault();
     reset();
   }
 });
 
-// Re-apply transform on window resize so SVG and inner stay aligned
+// Keep the desktop canvas aligned and the mobile fallback synchronized across
+// responsive resizes. The matchMedia boundary is authoritative at exactly
+// 600px, matching the CSS fallback query.
+let cloudResizeFrame = 0;
 window.addEventListener('resize', () => {
-  applyTransform();
-});
+  invalidateCanvasRect();
+  if (cloudResizeFrame) return;
+  cloudResizeFrame = requestAnimationFrame(() => {
+    cloudResizeFrame = 0;
+    if (!isMobileOutlinerMode()) applyTransform();
+    syncCloudEnvironment();
+  });
+}, { passive: true });
+window.addEventListener('orientationchange', invalidateCanvasRect, { passive: true });
+window.addEventListener('orientationchange', syncCloudEnvironment, { passive: true });
 
 // Legend toggle (collapse). The previous S/M/L/XL size cycler is gone;
 // the legend is now a single readable size. Toggle is the only control.
@@ -37658,111 +37890,182 @@ document.addEventListener('keydown', e => {
 // Boot
 reset();
 
-// AA7 phase 1: populate edges legend from registry once the DOM is ready.
-// Idempotent, safe to call again if the legend ever needs to refresh.
-if (document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', buildEdgesLegend);
+// AA7 phase 1: responsive/cloud controls are initialized through one
+// idempotent path so parser timing, BFCache restores, and breakpoint changes
+// cannot leave half-wired UI behind.
+let searchReturnFocus = null;
+let closeSearchOverlay = () => {};
 
-  // A25: search/filter overlay wiring
-  document.addEventListener('DOMContentLoaded', () => {
-    const overlay = document.getElementById('search-overlay');
-    const input = document.getElementById('search-overlay-input');
-    if (!overlay || !input) return;
+function wireSearchOverlay(){
+  const overlay = document.getElementById('search-overlay');
+  const input = document.getElementById('search-overlay-input');
+  if (!overlay || !input || overlay.dataset.wired === 'true') return;
+  overlay.dataset.wired = 'true';
 
-    function clearFilter(){
-      document.querySelectorAll('.node.dim-filtered').forEach(n => {
-        n.classList.remove('dim-filtered');
-      });
-    }
-    function closeOverlay(){
-      overlay.classList.remove('on');
-      input.value = '';
-      clearFilter();
-      input.blur();
-    }
+  function clearFilter(){
+    document.querySelectorAll('.node.dim-filtered').forEach(n => {
+      n.classList.remove('dim-filtered');
+    });
+  }
+  closeSearchOverlay = function(restoreFocus){
+    overlay.classList.remove('on');
+    input.value = '';
+    clearFilter();
+    input.blur();
+    if (restoreFocus !== false) focusWithoutScroll(searchReturnFocus);
+  };
 
-    document.addEventListener('keydown', (e) => {
-      const inInput = (document.activeElement &&
-                       (document.activeElement.tagName === 'INPUT' ||
-                        document.activeElement.tagName === 'TEXTAREA'));
-      if (e.key === 'Escape'){
-        if (overlay.classList.contains('on')){
-          closeOverlay();
-          e.preventDefault();
-        }
-        return;
-      }
-      if (e.key === '/' && !inInput){
+  document.addEventListener('keydown', (e) => {
+    const inInput = (document.activeElement &&
+                     (document.activeElement.tagName === 'INPUT' ||
+                      document.activeElement.tagName === 'TEXTAREA'));
+    if (e.key === 'Escape'){
+      if (overlay.classList.contains('on')){
+        closeSearchOverlay(true);
         e.preventDefault();
-        overlay.classList.add('on');
-        input.focus();
-        input.select();
       }
-    });
-
-    input.addEventListener('input', (e) => {
-      const q = e.target.value.toLowerCase().trim();
-      if (!q){ clearFilter(); return; }
-      document.querySelectorAll('.node').forEach(n => {
-        const label = (n.textContent || '').toLowerCase();
-        if (label.includes(q)){
-          n.classList.remove('dim-filtered');
-        } else {
-          n.classList.add('dim-filtered');
-        }
-      });
-    });
-  });
-
-  // A28: mobile outliner build (only when viewport < 600px)
-  document.addEventListener('DOMContentLoaded', () => {
-    if (window.innerWidth >= 600) return;
-    const container = document.getElementById('mobile-outliner-content');
-    if (!container) return;
-    if (typeof TAXONOMIES === 'undefined' || typeof TRADITIONS === 'undefined'){
-      container.innerHTML = '<div style="color:rgba(180,180,180,0.6);">Catalog data not yet loaded.</div>';
       return;
     }
-    // Group taxonomies by tradition
-    const byTrad = {};
-    TAXONOMIES.forEach(t => {
-      const trad = t.tradition || 'other';
-      (byTrad[trad] = byTrad[trad] || []).push(t);
-    });
-    // Render in TRADITIONS-key order so depth comes first, etc
-    const tradOrder = Object.keys(TRADITIONS);
-    let html = '';
-    tradOrder.forEach(tradKey => {
-      const taxes = byTrad[tradKey];
-      if (!taxes || !taxes.length) return;
-      const tradInfo = TRADITIONS[tradKey];
-      const sorted = taxes.slice().sort((a, b) => (a.year || 9999) - (b.year || 9999));
-      html += '<details>';
-      html += '<summary><span class="mo-trad-summary" style="color:' + (tradInfo.color || '#888') + '">'
-            + (tradInfo.label || tradKey) + '</span><span class="mo-trad-count">'
-            + taxes.length + '</span></summary>';
-      html += '<ul class="mo-tax-list">';
-      sorted.forEach(tax => {
-        const yr = tax.year ? (tax.year_end ? tax.year + '–' + tax.year_end : tax.year) : '';
-        const orig = tax.originator || '';
-        html += '<li><a href="/aa/#' + encodeURIComponent(tax.id) + '">'
-              + (tax.name || tax.id) + '</a>';
-        html += '<span class="mo-tax-meta">' + (orig ? orig + ' · ' : '') + yr + '</span>';
-        html += '</li>';
-      });
-      html += '</ul></details>';
-    });
-    container.innerHTML = html || '<div>No taxonomies loaded.</div>';
+    if (e.key === '/' && !inInput && !isMobileOutlinerMode()){
+      e.preventDefault();
+      searchReturnFocus = document.activeElement;
+      overlay.classList.add('on');
+      input.focus();
+      input.select();
+    }
   });
-} else {
+
+  input.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase().trim();
+    if (!q){ clearFilter(); return; }
+    document.querySelectorAll('.node').forEach(n => {
+      const label = (n.textContent || '').toLowerCase();
+      n.classList.toggle('dim-filtered', !label.includes(q));
+    });
+  });
+}
+
+function buildMobileOutliner(){
+  const container = document.getElementById('mobile-outliner-content');
+  if (!container || container.dataset.built === 'true') return;
+  if (typeof TAXONOMIES === 'undefined' || typeof TRADITIONS === 'undefined'){
+    container.textContent = 'Catalog data not yet loaded.';
+    return;
+  }
+
+  const byTrad = {};
+  TAXONOMIES.forEach(t => {
+    const trad = t.tradition || 'other';
+    (byTrad[trad] = byTrad[trad] || []).push(t);
+  });
+  let html = '';
+  Object.keys(TRADITIONS).forEach(tradKey => {
+    const taxes = byTrad[tradKey];
+    if (!taxes || !taxes.length) return;
+    const tradInfo = TRADITIONS[tradKey];
+    const color = /^#[0-9a-f]{3,8}$/i.test(tradInfo.color || '') ? tradInfo.color : '#888';
+    const sorted = taxes.slice().sort((a, b) => (a.year || 9999) - (b.year || 9999));
+    html += '<details>';
+    html += '<summary><span class="mo-trad-summary" style="color:' + color + '">'
+          + escapeHtml(tradInfo.label || tradKey) + '</span><span class="mo-trad-count">'
+          + taxes.length + '</span></summary>';
+    html += '<ul class="mo-tax-list">';
+    sorted.forEach(tax => {
+      const yr = tax.year ? (tax.year_end ? tax.year + '–' + tax.year_end : tax.year) : '';
+      const orig = tax.originator || '';
+      html += '<li><a href="/aa/#' + encodeURIComponent(tax.id) + '">'
+            + escapeHtml(tax.name || tax.id) + '</a>';
+      html += '<span class="mo-tax-meta">'
+            + escapeHtml((orig ? orig + ' · ' : '') + yr) + '</span>';
+      html += '</li>';
+    });
+    html += '</ul></details>';
+  });
+  container.innerHTML = html || '<div>No taxonomies loaded.</div>';
+  container.dataset.built = 'true';
+}
+
+function syncCloudEnvironment(){
+  const mobile = isMobileOutlinerMode();
+  const outliner = document.getElementById('mobile-outliner');
+  const activeElement = document.activeElement;
+  const searchOverlay = document.getElementById('search-overlay');
+  const tagOverlay = document.getElementById('tag-overlay');
+  const focusWasInDesktopSurface =
+    (canvas && canvas.contains(activeElement)) ||
+    detail.contains(activeElement) ||
+    (searchOverlay && searchOverlay.contains(activeElement)) ||
+    (tagOverlay && tagOverlay.contains(activeElement));
+  const focusWasInOutliner = outliner && outliner.contains(activeElement);
+  document.documentElement.classList.toggle('aa-mobile-outliner-active', mobile);
+  if (outliner){
+    outliner.setAttribute('aria-hidden', mobile ? 'false' : 'true');
+    outliner.inert = !mobile;
+  }
+  if (canvas){
+    canvas.setAttribute('aria-hidden', mobile ? 'true' : 'false');
+    canvas.inert = mobile;
+  }
+  if (mobile){
+    buildMobileOutliner();
+    closeSearchOverlay(false);
+    closeTagOverlay(false);
+    closeDetail(false);
+    if (focusWasInDesktopSurface && outliner){
+      focusWithoutScroll(outliner.querySelector('summary, a'));
+    }
+  } else if (focusWasInOutliner){
+    const activeNode = activeNodeId !== null ? nodes.get(activeNodeId) : null;
+    focusWithoutScroll((activeNode && activeNode.el) || inner.querySelector('.node'));
+  }
+  syncSimulationLifecycle();
+}
+
+function initializeCloudUi(){
   buildEdgesLegend();
+  wireSearchOverlay();
+  syncCloudEnvironment();
+}
+
+function listenForMediaChange(query, handler){
+  if (!query) return;
+  if (query.addEventListener) query.addEventListener('change', handler);
+  else if (query.addListener) query.addListener(handler);
+}
+
+document.addEventListener('visibilitychange', syncSimulationLifecycle);
+window.addEventListener('pageshow', invalidateCanvasRect);
+window.addEventListener('pageshow', syncCloudEnvironment);
+window.addEventListener('pagehide', () => stopSimulation(false));
+window.addEventListener('pagehide', () => {
+  if (inputFrame) cancelAnimationFrame(inputFrame);
+  inputFrame = 0;
+  pendingMousePoint = null;
+  transformPending = false;
+  invalidateCanvasRect();
+  if (cloudResizeFrame) cancelAnimationFrame(cloudResizeFrame);
+  cloudResizeFrame = 0;
+});
+listenForMediaChange(reducedMotionQuery, syncSimulationLifecycle);
+listenForMediaChange(mobileOutlinerQuery, syncCloudEnvironment);
+if ('MutationObserver' in window){
+  new MutationObserver(syncSimulationLifecycle).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-motion']
+  });
+}
+
+if (document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initializeCloudUi, { once: true });
+} else {
+  initializeCloudUi();
 }
 </script>
 <!-- aa* sibling-pages unified nav -->
 <div id="aa-sibling-nav" style="position:fixed;top:8px;right:12px;z-index:55;font-family:'JetBrains Mono',monospace;font-size:11px;display:flex;gap:4px;">
-<a href="/aa/" onmouseout="this.style.color='var(--dim)';this.style.borderColor='var(--rule2)'" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" style="background:transparent;border:1px solid var(--rule2);color:var(--dim);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:all .15s;display:inline-block;">catalog</a>
+<a href="/aa/" onmouseout="this.style.color='var(--dim)';this.style.borderColor='var(--rule2)'" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" style="background:transparent;border:1px solid var(--rule2);color:var(--dim);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:color .15s,background-color .15s,border-color .15s,opacity .15s,transform .15s;display:inline-block;">catalog</a>
 <span style="background:var(--bg2);border:1px solid var(--accent);color:var(--accent);padding:4px 10px;border-radius:2px;font-family:inherit;font-size:11px;cursor:default;">· cloud</span>
-<a href="/aa/views/" onmouseout="this.style.color='var(--dim)';this.style.borderColor='var(--rule2)'" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" style="background:transparent;border:1px solid var(--rule2);color:var(--dim);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:all .15s;display:inline-block;">views</a>
+<a href="/aa/views/" onmouseout="this.style.color='var(--dim)';this.style.borderColor='var(--rule2)'" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" style="background:transparent;border:1px solid var(--rule2);color:var(--dim);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:color .15s,background-color .15s,border-color .15s,opacity .15s,transform .15s;display:inline-block;">views</a>
 </div>
 <!-- A25: search/filter overlay -->
 <div id="search-overlay">
@@ -37780,8 +38083,8 @@ if (document.readyState === 'loading'){
 <script defer="" src="/js/theme.js?v=cl91"></script>
 <script defer="" src="/js/mandala.js?v=cl91"></script>
 <script defer="" src="/js/indra.js?v=cl91"></script>
-<script defer="" src="/js/footer.js?v=20260719-audit11-decisions"></script>
+<script defer="" src="/js/footer.js?v=20260725-audit45-footer"></script>
 <script defer="" src="/js/autolink.js?v=cl91"></script>
-<script defer="" src="/js/site-keyboard-enhancements.js"></script>
+<script defer="" src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

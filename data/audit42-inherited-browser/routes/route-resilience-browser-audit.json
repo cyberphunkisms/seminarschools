@@ -1,0 +1,5371 @@
+{
+  "audit": 42,
+  "release": "Audit42 route resilience and recovery",
+  "release_id": "2026-07-25-site-audit42-ledger-closure-multimode-final",
+  "generated_at": "2026-07-25T11:05:10-04:00",
+  "executed_at": "2026-07-25T15:59:16+00:00",
+  "engine": "Chromium",
+  "phase": "all",
+  "font_mode": "third-party fonts blocked; system fallback audited",
+  "routes": [
+    "/",
+    "/main/",
+    "/bb/",
+    "/bookwormcard/",
+    "/aa/",
+    "/leizu/",
+    "/saul/",
+    "/agora/",
+    "/teacherresources/",
+    "/polymythseminars/",
+    "/polymyth/methodologylist/"
+  ],
+  "viewports": [
+    "desktop",
+    "mobile-short",
+    "landscape-short"
+  ],
+  "checks_passed": 252,
+  "checks_total": 252,
+  "checks_failed": 0,
+  "results": [
+    {
+      "name": "home desktop: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "home desktop: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Polymythcal, Tutoring, Resources & Projects | Seminar Schools', 'headings': ['A room of readers working a hard text together reaches what none of them could reach alone.'], 'semanticHeadings': ['A room of readers working a hard text together reaches what none of them could reach alone.'], 'bodyTextLength': 2683, 'links': 48}"
+    },
+    {
+      "name": "home desktop: no horizontal page drift",
+      "passed": true,
+      "detail": "1351/1366"
+    },
+    {
+      "name": "home desktop: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "home desktop: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "home desktop: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 184, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': 'SeminarSchools', 'width': 139, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Open Polymythcal', 'width': 151, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'g', 'id': '', 'text': 'Seminar Schools', 'width': 175, 'height': 109, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'g', 'id': '', 'text': 'Polymythcal', 'width': 151, 'height': 69, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'g', 'id': '', 'text': 'Leizu Academy', 'width': 161, 'height': 59, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'g', 'id': '', 'text': 'Teacher Resources', 'width': 185, 'height': 59, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'g', 'id': '', 'text': 'The Agora', 'width': 127, 'height': 59, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "home desktop: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "about desktop: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "about desktop: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'About Seminar Schools | Toronto Reading, Teaching & Projects', 'headings': ['Seminar Schools.'], 'semanticHeadings': ['Seminar Schools.'], 'bodyTextLength': 7550, 'links': 77}"
+    },
+    {
+      "name": "about desktop: no horizontal page drift",
+      "passed": true,
+      "detail": "1351/1366"
+    },
+    {
+      "name": "about desktop: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "about desktop: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "about desktop: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'BUTTON', 'id': '', 'text': 'A-', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'A+', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 184, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': 'Seminar Schools', 'width': 219, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'saulnassau@protonmail.com', 'width': 209, 'height': 22, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Tutoring', 'width': 75, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Events', 'width': 56, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Resources', 'width': 86, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "about desktop: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "bb desktop: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "bb desktop: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'bookwormburrows | AI-Assisted Reading and Seminar Game', 'headings': ['bookwormburrows·enter the burrow'], 'semanticHeadings': ['bookwormburrows·enter the burrow'], 'bodyTextLength': 2404, 'links': 41}"
+    },
+    {
+      "name": "bb desktop: no horizontal page drift",
+      "passed": true,
+      "detail": "1351/1366"
+    },
+    {
+      "name": "bb desktop: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "bb desktop: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "bb desktop: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 184, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'BUTTON', 'id': '', 'text': 'A-', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'A+', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'wormcard', 'width': 93, 'height': 21, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Dimensional Master', 'width': 182, 'height': 21, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'For players\\n    Make your wormcard.\\n    Answer a few questio', 'width': 456, 'height': 372, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'wormcard', 'width': 152, 'height': 35, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'For guides and teachers\\n    Run a burrow with wormcards.\\n   ', 'width': 456, 'height': 372, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "bb desktop: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "bookwormcard desktop: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "bookwormcard desktop: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Bookwormcard · Make a bookwormburrows Character Card', 'headings': ['Bookwormcard · BookwormBurrows character gate'], 'semanticHeadings': ['Bookwormcard is the character gate for BookwormBurrows', 'Bookwormcard · BookwormBurrows character gate'], 'bodyTextLength': 1796, 'links': 22}"
+    },
+    {
+      "name": "bookwormcard desktop: no horizontal page drift",
+      "passed": true,
+      "detail": "1351/1366"
+    },
+    {
+      "name": "bookwormcard desktop: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "bookwormcard desktop: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "bookwormcard desktop: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'BUTTON', 'id': '', 'text': '←', 'width': 65, 'height': 47, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '→', 'width': 65, 'height': 47, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'back', 'width': 117, 'height': 47, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'skip', 'width': 117, 'height': 47, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'why?', 'width': 117, 'height': 47, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'finish', 'width': 140, 'height': 47, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'enter ↵', 'width': 655, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': 'legend-toggle', 'text': '?', 'width': 24, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "bookwormcard desktop: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "aa desktop: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "aa desktop: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Archetype Archive & Taxonomy Index | aa*', 'headings': ['aa* Archetype Archive'], 'semanticHeadings': ['aa* Archetype Archive'], 'bodyTextLength': 3793, 'links': 53}"
+    },
+    {
+      "name": "aa desktop: no horizontal page drift",
+      "passed": true,
+      "detail": "1351/1366"
+    },
+    {
+      "name": "aa desktop: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "aa desktop: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'BUTTON', 'id': '', 'text': 'A-', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'A+', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '☀\\n  ☾', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 184, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': 'cloud', 'width': 55, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'views', 'width': 55, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': '← Seminar Schools', 'width': 171, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'cloud-growth view →', 'width': 145, 'height': 14, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "aa desktop: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "leizu desktop: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "leizu desktop: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Toronto Tutor for OSSD, IB & Writing | Leizu Academy', 'headings': ['Leizu Academy'], 'semanticHeadings': ['Leizu Academy'], 'bodyTextLength': 14890, 'links': 50}"
+    },
+    {
+      "name": "leizu desktop: no horizontal page drift",
+      "passed": true,
+      "detail": "1351/1366"
+    },
+    {
+      "name": "leizu desktop: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "leizu desktop: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "leizu desktop: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 184, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'BUTTON', 'id': '', 'text': 'EN', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'ESL', 'width': 48, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'FR', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '繁', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '简', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'فا', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'A−', 'width': 46, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "leizu desktop: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "cv desktop: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "cv desktop: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Saul Karim Nassau - General / Any Role CV', 'headings': ['Saul Karim Nassau'], 'semanticHeadings': ['Saul Karim Nassau'], 'bodyTextLength': 5703, 'links': 58}"
+    },
+    {
+      "name": "cv desktop: no horizontal page drift",
+      "passed": true,
+      "detail": "1356/1366"
+    },
+    {
+      "name": "cv desktop: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "cv desktop: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "cv desktop: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': '← Seminar Schools', 'width': 133, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '☀\\n☾', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 174, 'height': 38, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'BUTTON', 'id': 'fzUp', 'text': 'A+', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': 'fzDown', 'text': 'A-', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'English', 'width': 70, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '繁體中文', 'width': 31, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '简体中文', 'width': 31, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "cv desktop: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "agora desktop: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "agora desktop: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Toronto Public Seminars & Reading Groups | The Agora', 'headings': ['The Agora.'], 'semanticHeadings': ['The Agora.'], 'bodyTextLength': 5325, 'links': 40}"
+    },
+    {
+      "name": "agora desktop: no horizontal page drift",
+      "passed": true,
+      "detail": "1351/1366"
+    },
+    {
+      "name": "agora desktop: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "agora desktop: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "agora desktop: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'BUTTON', 'id': '', 'text': 'A-', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'A+', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '☀\\n  ☾', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 184, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': 'Seminar Schools', 'width': 153, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Home', 'width': 34, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Polymythcal', 'width': 93, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Agora', 'width': 42, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "agora desktop: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "teacher-resources desktop: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "teacher-resources desktop: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Teacher Resources for English, OSSD & IB | Seminar Schools', 'headings': ['Teacher Resources.'], 'semanticHeadings': ['Teacher Resources.'], 'bodyTextLength': 1633, 'links': 702}"
+    },
+    {
+      "name": "teacher-resources desktop: no horizontal page drift",
+      "passed": true,
+      "detail": "1351/1366"
+    },
+    {
+      "name": "teacher-resources desktop: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "teacher-resources desktop: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "teacher-resources desktop: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to catalog', 'width': 142, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': 'Seminar Schools', 'width': 153, 'height': 19, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Home', 'width': 34, 'height': 19, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Polymythcal', 'width': 93, 'height': 19, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Agora', 'width': 42, 'height': 19, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Marginalia', 'width': 84, 'height': 19, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Resources', 'width': 76, 'height': 19, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'All projects →', 'width': 118, 'height': 19, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "teacher-resources desktop: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "polymythcal desktop: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "polymythcal desktop: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Polymythcal | Seminar Schools', 'headings': ['Polymythcal'], 'semanticHeadings': ['Polymythcal'], 'bodyTextLength': 8835, 'links': 105}"
+    },
+    {
+      "name": "polymythcal desktop: no horizontal page drift",
+      "passed": true,
+      "detail": "1351/1366"
+    },
+    {
+      "name": "polymythcal desktop: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "polymythcal desktop: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "polymythcal desktop: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to results', 'width': 141, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'BUTTON', 'id': '', 'text': '☀☾', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'INPUT', 'id': 'pmSearch', 'text': '', 'width': 827, 'height': 54, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': 'pmJumpResults', 'text': 'View 540 results', 'width': 168, 'height': 54, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'SUMMARY', 'id': '', 'text': 'Popular starting pointsShortcuts reset the filters', 'width': 1040, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'Philosophy and ethics', 'width': 179, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'Humanities', 'width': 106, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'Talks and lectures', 'width': 151, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "polymythcal desktop: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "methodology-list desktop: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "methodology-list desktop: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Polymyth Methodologylist*', 'headings': ['Polymyth Methodologylist*'], 'semanticHeadings': ['Polymyth Methodologylist*'], 'bodyTextLength': 1848823, 'links': 5250}"
+    },
+    {
+      "name": "methodology-list desktop: no horizontal page drift",
+      "passed": true,
+      "detail": "1351/1366"
+    },
+    {
+      "name": "methodology-list desktop: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "methodology-list desktop: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 184, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': '*', 'width': 18, 'height': 42, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'sabachtan gnosticism', 'width': 163, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'polymyth operations', 'width': 154, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'gorgonification', 'width': 122, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'degorgonification', 'width': 138, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'idiomary', 'width': 65, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'contentinternet', 'width': 122, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "methodology-list desktop: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "home mobile-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "home mobile-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Polymythcal, Tutoring, Resources & Projects | Seminar Schools', 'headings': ['A room of readers working a hard text together reaches what none of them could reach alone.'], 'semanticHeadings': ['A room of readers working a hard text together reaches what none of them could reach alone.'], 'bodyTextLength': 2723, 'links': 58}"
+    },
+    {
+      "name": "home mobile-short: no horizontal page drift",
+      "passed": true,
+      "detail": "345/360"
+    },
+    {
+      "name": "home mobile-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00459"
+    },
+    {
+      "name": "home mobile-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "home mobile-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 175, 'height': 39, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': 'SeminarSchools', 'width': 133, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Open Polymythcal', 'width': 144, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'g', 'id': '', 'text': 'Seminar Schools', 'width': 70, 'height': 42, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'g', 'id': '', 'text': 'Polymythcal', 'width': 167, 'height': 56, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'g', 'id': '', 'text': 'Leizu Academy', 'width': 279, 'height': 103, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'g', 'id': '', 'text': 'Teacher Resources', 'width': 139, 'height': 107, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'g', 'id': '', 'text': 'The Agora', 'width': 248, 'height': 164, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "home mobile-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "about mobile-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "about mobile-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'About Seminar Schools | Toronto Reading, Teaching & Projects', 'headings': ['Seminar Schools.'], 'semanticHeadings': ['Seminar Schools.'], 'bodyTextLength': 7216, 'links': 76}"
+    },
+    {
+      "name": "about mobile-short: no horizontal page drift",
+      "passed": true,
+      "detail": "345/360"
+    },
+    {
+      "name": "about mobile-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "about mobile-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "about mobile-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'BUTTON', 'id': '', 'text': 'A-', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'A+', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 175, 'height': 39, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': 'Seminar Schools', 'width': 209, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Tutoring', 'width': 73, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Events', 'width': 55, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Resources', 'width': 84, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'BB', 'width': 19, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "about mobile-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "bb mobile-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "bb mobile-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'bookwormburrows | AI-Assisted Reading and Seminar Game', 'headings': ['bookwormburrows·enter the burrow'], 'semanticHeadings': ['bookwormburrows·enter the burrow'], 'bodyTextLength': 2404, 'links': 41}"
+    },
+    {
+      "name": "bb mobile-short: no horizontal page drift",
+      "passed": true,
+      "detail": "345/360"
+    },
+    {
+      "name": "bb mobile-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "bb mobile-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "bb mobile-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 175, 'height': 39, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'BUTTON', 'id': '', 'text': 'A-', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'A+', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'wormcard', 'width': 83, 'height': 19, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Dimensional Master', 'width': 162, 'height': 19, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'For players\\n    Make your wormcard.\\n    Answer a few questio', 'width': 284, 'height': 294, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'wormcard', 'width': 109, 'height': 25, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'For guides and teachers\\n    Run a burrow with wormcards.\\n   ', 'width': 284, 'height': 442, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "bb mobile-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "bookwormcard mobile-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "bookwormcard mobile-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Bookwormcard · Make a bookwormburrows Character Card', 'headings': ['Bookwormcard · BookwormBurrows character gate'], 'semanticHeadings': ['Bookwormcard is the character gate for BookwormBurrows', 'Bookwormcard · BookwormBurrows character gate'], 'bodyTextLength': 1665, 'links': 22}"
+    },
+    {
+      "name": "bookwormcard mobile-short: no horizontal page drift",
+      "passed": true,
+      "detail": "345/360"
+    },
+    {
+      "name": "bookwormcard mobile-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "bookwormcard mobile-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "bookwormcard mobile-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'BUTTON', 'id': '', 'text': '←', 'width': 60, 'height': 45, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '→', 'width': 60, 'height': 45, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'back', 'width': 129, 'height': 45, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'skip', 'width': 83, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'why?', 'width': 72, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'finish', 'width': 94, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'enter ↵', 'width': 262, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': 'legend-toggle', 'text': '?', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "bookwormcard mobile-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "aa mobile-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "aa mobile-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Archetype Archive & Taxonomy Index | aa*', 'headings': ['aa* Archetype Archive'], 'semanticHeadings': ['aa* Archetype Archive'], 'bodyTextLength': 1553, 'links': 53}"
+    },
+    {
+      "name": "aa mobile-short: no horizontal page drift",
+      "passed": true,
+      "detail": "345/360"
+    },
+    {
+      "name": "aa mobile-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "aa mobile-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'BUTTON', 'id': '', 'text': 'A-', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'A+', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '☀\\n  ☾', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 175, 'height': 39, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': 'cloud', 'width': 55, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'views', 'width': 55, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': '← Seminar Schools', 'width': 166, 'height': 14, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'cloud-growth view →', 'width': 145, 'height': 14, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "aa mobile-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "leizu mobile-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "leizu mobile-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Toronto Tutor for OSSD, IB & Writing | Leizu Academy', 'headings': ['Leizu Academy'], 'semanticHeadings': ['Leizu Academy'], 'bodyTextLength': 14890, 'links': 50}"
+    },
+    {
+      "name": "leizu mobile-short: no horizontal page drift",
+      "passed": true,
+      "detail": "345/360"
+    },
+    {
+      "name": "leizu mobile-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "leizu mobile-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "leizu mobile-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 175, 'height': 39, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'BUTTON', 'id': '', 'text': 'EN', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'ESL', 'width': 46, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'FR', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '繁', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '简', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'فا', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'A−', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "leizu mobile-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "cv mobile-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "cv mobile-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Saul Karim Nassau - General / Any Role CV', 'headings': ['Saul Karim Nassau'], 'semanticHeadings': ['Saul Karim Nassau'], 'bodyTextLength': 4569, 'links': 58}"
+    },
+    {
+      "name": "cv mobile-short: no horizontal page drift",
+      "passed": true,
+      "detail": "350/360"
+    },
+    {
+      "name": "cv mobile-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "cv mobile-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "cv mobile-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': '← Seminar Schools', 'width': 146, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '☀\\n☾', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 166, 'height': 36, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'BUTTON', 'id': '', 'text': 'English', 'width': 67, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '繁體中文', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '简体中文', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'فارسی', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'Français', 'width': 52, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "cv mobile-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "agora mobile-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "agora mobile-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Toronto Public Seminars & Reading Groups | The Agora', 'headings': ['The Agora.'], 'semanticHeadings': ['The Agora.'], 'bodyTextLength': 5226, 'links': 40}"
+    },
+    {
+      "name": "agora mobile-short: no horizontal page drift",
+      "passed": true,
+      "detail": "345/360"
+    },
+    {
+      "name": "agora mobile-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "agora mobile-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "agora mobile-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'BUTTON', 'id': '', 'text': 'A-', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'A+', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '☀\\n  ☾', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 175, 'height': 39, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': 'Seminar Schools', 'width': 146, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Home', 'width': 32, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Polymythcal', 'width': 88, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Agora', 'width': 40, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "agora mobile-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "teacher-resources mobile-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "teacher-resources mobile-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Teacher Resources for English, OSSD & IB | Seminar Schools', 'headings': ['Teacher Resources.'], 'semanticHeadings': ['Teacher Resources.'], 'bodyTextLength': 1153, 'links': 702}"
+    },
+    {
+      "name": "teacher-resources mobile-short: no horizontal page drift",
+      "passed": true,
+      "detail": "345/360"
+    },
+    {
+      "name": "teacher-resources mobile-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "teacher-resources mobile-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "teacher-resources mobile-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to catalog', 'width': 135, 'height': 39, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': 'Seminar Schools', 'width': 146, 'height': 18, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Home', 'width': 32, 'height': 32, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Polymythcal', 'width': 88, 'height': 32, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Agora', 'width': 40, 'height': 32, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Marginalia', 'width': 80, 'height': 32, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Resources', 'width': 72, 'height': 32, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'All projects →', 'width': 112, 'height': 32, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "teacher-resources mobile-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "polymythcal mobile-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "polymythcal mobile-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Polymythcal | Seminar Schools', 'headings': ['Polymythcal'], 'semanticHeadings': ['Polymythcal'], 'bodyTextLength': 6982, 'links': 105}"
+    },
+    {
+      "name": "polymythcal mobile-short: no horizontal page drift",
+      "passed": true,
+      "detail": "345/360"
+    },
+    {
+      "name": "polymythcal mobile-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00056"
+    },
+    {
+      "name": "polymythcal mobile-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "polymythcal mobile-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to results', 'width': 135, 'height': 38, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'BUTTON', 'id': '', 'text': '☀☾', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'INPUT', 'id': 'pmSearch', 'text': '', 'width': 310, 'height': 54, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': 'pmJumpResults', 'text': 'View 540 results', 'width': 310, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'SUMMARY', 'id': '', 'text': 'Popular starting pointsShortcuts reset the filters', 'width': 336, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': 'pmShare', 'text': 'Share view', 'width': 105, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': 'pmSavedToggle', 'text': 'Saved 0', 'width': 85, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Get calendar updates', 'width': 317, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "polymythcal mobile-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "methodology-list mobile-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "methodology-list mobile-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Polymyth Methodologylist*', 'headings': ['Polymyth Methodologylist*'], 'semanticHeadings': ['Polymyth Methodologylist*'], 'bodyTextLength': 1848823, 'links': 5250}"
+    },
+    {
+      "name": "methodology-list mobile-short: no horizontal page drift",
+      "passed": true,
+      "detail": "345/360"
+    },
+    {
+      "name": "methodology-list mobile-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "methodology-list mobile-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 175, 'height': 39, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': '*', 'width': 16, 'height': 36, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'sabachtan gnosticism', 'width': 163, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'polymyth operations', 'width': 154, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'gorgonification', 'width': 122, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'degorgonification', 'width': 138, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'idiomary', 'width': 65, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'contentinternet', 'width': 122, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "methodology-list mobile-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "home landscape-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "home landscape-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Polymythcal, Tutoring, Resources & Projects | Seminar Schools', 'headings': ['A room of readers working a hard text together reaches what none of them could reach alone.'], 'semanticHeadings': ['A room of readers working a hard text together reaches what none of them could reach alone.'], 'bodyTextLength': 2683, 'links': 48}"
+    },
+    {
+      "name": "home landscape-short: no horizontal page drift",
+      "passed": true,
+      "detail": "1009/1024"
+    },
+    {
+      "name": "home landscape-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "home landscape-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "home landscape-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 181, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': 'SeminarSchools', 'width': 137, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Open Polymythcal', 'width': 149, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'g', 'id': '', 'text': 'Seminar Schools', 'width': 163, 'height': 102, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'g', 'id': '', 'text': 'Polymythcal', 'width': 141, 'height': 65, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'g', 'id': '', 'text': 'Leizu Academy', 'width': 150, 'height': 56, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'g', 'id': '', 'text': 'Teacher Resources', 'width': 173, 'height': 56, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'g', 'id': '', 'text': 'The Agora', 'width': 119, 'height': 56, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "home landscape-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "about landscape-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "about landscape-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'About Seminar Schools | Toronto Reading, Teaching & Projects', 'headings': ['Seminar Schools.'], 'semanticHeadings': ['Seminar Schools.'], 'bodyTextLength': 7550, 'links': 77}"
+    },
+    {
+      "name": "about landscape-short: no horizontal page drift",
+      "passed": true,
+      "detail": "1009/1024"
+    },
+    {
+      "name": "about landscape-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "about landscape-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "about landscape-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'BUTTON', 'id': '', 'text': 'A-', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'A+', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 181, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': 'Seminar Schools', 'width': 215, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'saulnassau@protonmail.com', 'width': 206, 'height': 21, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Tutoring', 'width': 76, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Events', 'width': 57, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Resources', 'width': 87, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "about landscape-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "bb landscape-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "bb landscape-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'bookwormburrows | AI-Assisted Reading and Seminar Game', 'headings': ['bookwormburrows·enter the burrow'], 'semanticHeadings': ['bookwormburrows·enter the burrow'], 'bodyTextLength': 2404, 'links': 41}"
+    },
+    {
+      "name": "bb landscape-short: no horizontal page drift",
+      "passed": true,
+      "detail": "1009/1024"
+    },
+    {
+      "name": "bb landscape-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "bb landscape-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "bb landscape-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 181, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'BUTTON', 'id': '', 'text': 'A-', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'A+', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'wormcard', 'width': 93, 'height': 21, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Dimensional Master', 'width': 182, 'height': 21, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'For players\\n    Make your wormcard.\\n    Answer a few questio', 'width': 456, 'height': 372, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'wormcard', 'width': 152, 'height': 35, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'For guides and teachers\\n    Run a burrow with wormcards.\\n   ', 'width': 456, 'height': 372, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "bb landscape-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "bookwormcard landscape-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "bookwormcard landscape-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Bookwormcard · Make a bookwormburrows Character Card', 'headings': ['Bookwormcard · BookwormBurrows character gate'], 'semanticHeadings': ['Bookwormcard is the character gate for BookwormBurrows', 'Bookwormcard · BookwormBurrows character gate'], 'bodyTextLength': 1796, 'links': 22}"
+    },
+    {
+      "name": "bookwormcard landscape-short: no horizontal page drift",
+      "passed": true,
+      "detail": "1009/1024"
+    },
+    {
+      "name": "bookwormcard landscape-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "bookwormcard landscape-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "bookwormcard landscape-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'BUTTON', 'id': '', 'text': '←', 'width': 86, 'height': 46, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '→', 'width': 86, 'height': 46, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'back', 'width': 158, 'height': 46, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'skip', 'width': 158, 'height': 46, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'why?', 'width': 158, 'height': 46, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'finish', 'width': 180, 'height': 46, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'enter ↵', 'width': 857, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': 'legend-toggle', 'text': '?', 'width': 24, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "bookwormcard landscape-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "aa landscape-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "aa landscape-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Archetype Archive & Taxonomy Index | aa*', 'headings': ['aa* Archetype Archive'], 'semanticHeadings': ['aa* Archetype Archive'], 'bodyTextLength': 1949, 'links': 53}"
+    },
+    {
+      "name": "aa landscape-short: no horizontal page drift",
+      "passed": true,
+      "detail": "1009/1024"
+    },
+    {
+      "name": "aa landscape-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "aa landscape-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'BUTTON', 'id': '', 'text': 'A-', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'A+', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '☀\\n  ☾', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 181, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': 'cloud', 'width': 55, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'views', 'width': 55, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': '← Seminar Schools', 'width': 170, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'cloud-growth view →', 'width': 145, 'height': 14, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "aa landscape-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "leizu landscape-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "leizu landscape-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Toronto Tutor for OSSD, IB & Writing | Leizu Academy', 'headings': ['Leizu Academy'], 'semanticHeadings': ['Leizu Academy'], 'bodyTextLength': 14890, 'links': 50}"
+    },
+    {
+      "name": "leizu landscape-short: no horizontal page drift",
+      "passed": true,
+      "detail": "1009/1024"
+    },
+    {
+      "name": "leizu landscape-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "leizu landscape-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "leizu landscape-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 181, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'BUTTON', 'id': '', 'text': 'EN', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'ESL', 'width': 47, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'FR', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '繁', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '简', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'فا', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'A−', 'width': 45, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "leizu landscape-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "cv landscape-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "cv landscape-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Saul Karim Nassau - General / Any Role CV', 'headings': ['Saul Karim Nassau'], 'semanticHeadings': ['Saul Karim Nassau'], 'bodyTextLength': 4920, 'links': 58}"
+    },
+    {
+      "name": "cv landscape-short: no horizontal page drift",
+      "passed": true,
+      "detail": "1014/1024"
+    },
+    {
+      "name": "cv landscape-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "cv landscape-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "cv landscape-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': '← Seminar Schools', 'width': 130, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '☀\\n☾', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 172, 'height': 37, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'BUTTON', 'id': 'fzUp', 'text': 'A+', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': 'fzDown', 'text': 'A-', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'English', 'width': 69, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '繁體中文', 'width': 31, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '简体中文', 'width': 31, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "cv landscape-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "agora landscape-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "agora landscape-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Toronto Public Seminars & Reading Groups | The Agora', 'headings': ['The Agora.'], 'semanticHeadings': ['The Agora.'], 'bodyTextLength': 5325, 'links': 40}"
+    },
+    {
+      "name": "agora landscape-short: no horizontal page drift",
+      "passed": true,
+      "detail": "1009/1024"
+    },
+    {
+      "name": "agora landscape-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "agora landscape-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "agora landscape-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'BUTTON', 'id': '', 'text': 'A-', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'A+', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': '☀\\n  ☾', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 181, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': 'Seminar Schools', 'width': 150, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Home', 'width': 33, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Polymythcal', 'width': 91, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Agora', 'width': 42, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "agora landscape-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "teacher-resources landscape-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "teacher-resources landscape-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Teacher Resources for English, OSSD & IB | Seminar Schools', 'headings': ['Teacher Resources.'], 'semanticHeadings': ['Teacher Resources.'], 'bodyTextLength': 1307, 'links': 702}"
+    },
+    {
+      "name": "teacher-resources landscape-short: no horizontal page drift",
+      "passed": true,
+      "detail": "1009/1024"
+    },
+    {
+      "name": "teacher-resources landscape-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "teacher-resources landscape-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "teacher-resources landscape-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to catalog', 'width': 139, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': 'Seminar Schools', 'width': 150, 'height': 19, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Home', 'width': 33, 'height': 19, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Polymythcal', 'width': 91, 'height': 19, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Agora', 'width': 42, 'height': 19, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Marginalia', 'width': 83, 'height': 19, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'Resources', 'width': 75, 'height': 19, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'All projects →', 'width': 116, 'height': 19, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "teacher-resources landscape-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "polymythcal landscape-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "polymythcal landscape-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Polymythcal | Seminar Schools', 'headings': ['Polymythcal'], 'semanticHeadings': ['Polymythcal'], 'bodyTextLength': 8835, 'links': 105}"
+    },
+    {
+      "name": "polymythcal landscape-short: no horizontal page drift",
+      "passed": true,
+      "detail": "1009/1024"
+    },
+    {
+      "name": "polymythcal landscape-short: layout stays visually stable",
+      "passed": true,
+      "detail": "CLS 0.00000"
+    },
+    {
+      "name": "polymythcal landscape-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "polymythcal landscape-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to results', 'width': 139, 'height': 39, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'BUTTON', 'id': '', 'text': '☀☾', 'width': 44, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'INPUT', 'id': 'pmSearch', 'text': '', 'width': 767, 'height': 54, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': 'pmJumpResults', 'text': 'View 540 results', 'width': 165, 'height': 54, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'SUMMARY', 'id': '', 'text': 'Popular starting pointsShortcuts reset the filters', 'width': 977, 'height': 44, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'Philosophy and ethics', 'width': 176, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'Humanities', 'width': 104, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'BUTTON', 'id': '', 'text': 'Talks and lectures', 'width': 149, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "polymythcal landscape-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "methodology-list landscape-short: route responds",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "methodology-list landscape-short: document identity remains visible",
+      "passed": true,
+      "detail": "{'title': 'Polymyth Methodologylist*', 'headings': ['Polymyth Methodologylist*'], 'semanticHeadings': ['Polymyth Methodologylist*'], 'bodyTextLength': 1848823, 'links': 5547}"
+    },
+    {
+      "name": "methodology-list landscape-short: no horizontal page drift",
+      "passed": true,
+      "detail": "1009/1024"
+    },
+    {
+      "name": "methodology-list landscape-short: positioned controls stay recoverable",
+      "passed": true,
+      "detail": "{'outOfBounds': [], 'collisions': []}"
+    },
+    {
+      "name": "methodology-list landscape-short: first keyboard path is visible",
+      "passed": true,
+      "detail": "[{'tag': 'A', 'id': '', 'text': 'Skip to main content', 'width': 181, 'height': 40, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': True}, {'tag': 'A', 'id': '', 'text': '*', 'width': 18, 'height': 42, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'sabachtan gnosticism', 'width': 163, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'polymyth operations', 'width': 154, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'gorgonification', 'width': 122, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'degorgonification', 'width': 138, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'idiomary', 'width': 65, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}, {'tag': 'A', 'id': '', 'text': 'contentinternet', 'width': 122, 'height': 15, 'inViewport': True, 'unobscured': True, 'outline': True, 'shadow': False}]"
+    },
+    {
+      "name": "methodology-list landscape-short: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "home forced colors: content remains available",
+      "passed": true,
+      "detail": "{'title': 'Polymythcal, Tutoring, Resources & Projects | Seminar Schools', 'headings': ['A room of readers working a hard text together reaches what none of them could reach alone.'], 'semanticHeadings': ['A room of readers working a hard text together reaches what none of them could reach alone.'], 'bodyTextLength': 2723, 'links': 58, 'scrollWidth': 375, 'clientWidth': 390, 'overflow': 0, 'controls': 0, 'undersized': [], 'positioned': 2, 'positionedOutOfBounds': [], 'fixedCollisions': []}"
+    },
+    {
+      "name": "home forced colors: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "bb forced colors: content remains available",
+      "passed": true,
+      "detail": "{'title': 'bookwormburrows | AI-Assisted Reading and Seminar Game', 'headings': ['bookwormburrows·enter the burrow'], 'semanticHeadings': ['bookwormburrows·enter the burrow'], 'bodyTextLength': 2404, 'links': 41, 'scrollWidth': 375, 'clientWidth': 390, 'overflow': 0, 'controls': 2, 'undersized': [], 'positioned': 1, 'positionedOutOfBounds': [], 'fixedCollisions': []}"
+    },
+    {
+      "name": "bb forced colors: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "bookwormcard forced colors: content remains available",
+      "passed": true,
+      "detail": "{'title': 'Bookwormcard · Make a bookwormburrows Character Card', 'headings': ['Bookwormcard · BookwormBurrows character gate'], 'semanticHeadings': ['Bookwormcard is the character gate for BookwormBurrows', 'Bookwormcard · BookwormBurrows character gate'], 'bodyTextLength': 1665, 'links': 22, 'scrollWidth': 375, 'clientWidth': 390, 'overflow': 0, 'controls': 17, 'undersized': [], 'positioned': 1, 'positionedOutOfBounds': [], 'fixedCollisions': []}"
+    },
+    {
+      "name": "bookwormcard forced colors: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "aa forced colors: content remains available",
+      "passed": true,
+      "detail": "{'title': 'Archetype Archive & Taxonomy Index | aa*', 'headings': ['aa* Archetype Archive'], 'semanticHeadings': ['aa* Archetype Archive'], 'bodyTextLength': 1949, 'links': 53, 'scrollWidth': 375, 'clientWidth': 390, 'overflow': 0, 'controls': 439, 'undersized': [], 'positioned': 3, 'positionedOutOfBounds': [], 'fixedCollisions': []}"
+    },
+    {
+      "name": "aa forced colors: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "teacher-resources forced colors: content remains available",
+      "passed": true,
+      "detail": "{'title': 'Teacher Resources for English, OSSD & IB | Seminar Schools', 'headings': ['Teacher Resources.'], 'semanticHeadings': ['Teacher Resources.'], 'bodyTextLength': 1484, 'links': 702, 'scrollWidth': 375, 'clientWidth': 390, 'overflow': 0, 'controls': 50, 'undersized': [{'tag': 'INPUT', 'id': 'search', 'text': '', 'width': 1, 'height': 1}], 'positioned': 2, 'positionedOutOfBounds': [], 'fixedCollisions': []}"
+    },
+    {
+      "name": "teacher-resources forced colors: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "polymythcal forced colors: content remains available",
+      "passed": true,
+      "detail": "{'title': 'Polymythcal | Seminar Schools', 'headings': ['Polymythcal'], 'semanticHeadings': ['Polymythcal'], 'bodyTextLength': 6982, 'links': 105, 'scrollWidth': 375, 'clientWidth': 390, 'overflow': 0, 'controls': 54, 'undersized': [{'tag': 'INPUT', 'id': 'pmSearch', 'text': '', 'width': 336, 'height': 21}, {'tag': 'SELECT', 'id': 'pmSort', 'text': 'Soonest first\\nFarthest date first\\nTitle A to Z', 'width': 1, 'height': 1}], 'positioned': 4, 'positionedOutOfBounds': [], 'fixedCollisions': []}"
+    },
+    {
+      "name": "polymythcal forced colors: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "teacher resources stress: geometry search reports results",
+      "passed": true,
+      "detail": "0 resources across 0 collections"
+    },
+    {
+      "name": "teacher resources stress: indigenous search reports results",
+      "passed": true,
+      "detail": "22 resources across 3 collections"
+    },
+    {
+      "name": "teacher resources stress: Shakespeare search reports results",
+      "passed": true,
+      "detail": "16 resources across 2 collections"
+    },
+    {
+      "name": "teacher resources stress: cleared search reports results",
+      "passed": true,
+      "detail": "644 resources across 25 collections"
+    },
+    {
+      "name": "teacher resources stress: filter state reaches the URL without storage",
+      "passed": true,
+      "detail": "http://127.0.0.1:44453/teacherresources/?subject=ela"
+    },
+    {
+      "name": "teacher resources stress: popstate restores the requested view",
+      "passed": true,
+      "detail": "geometry"
+    },
+    {
+      "name": "teacher resources stress: repeated bundle evaluation is idempotent",
+      "passed": true,
+      "detail": "41/41"
+    },
+    {
+      "name": "teacher resources stress: clear restores the complete catalog",
+      "passed": true,
+      "detail": "644 resources across 25 collections"
+    },
+    {
+      "name": "teacher resources stress: no uncaught script errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "polymythcal recovery: canonical browser payload renders",
+      "passed": true,
+      "detail": "24"
+    },
+    {
+      "name": "polymythcal recovery: validated last-good payload survives network failure",
+      "passed": true,
+      "detail": "24"
+    },
+    {
+      "name": "polymythcal recovery: cached refresh has no uncaught errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "polymythcal recovery: empty-cache failure keeps a retry action",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "polymythcal recovery: retry recovers without a page reload",
+      "passed": true,
+      "detail": "24"
+    },
+    {
+      "name": "polymythcal recovery: retry path has no uncaught errors",
+      "passed": true,
+      "detail": "[]"
+    }
+  ],
+  "metrics": [
+    {
+      "route": "/",
+      "label": "home",
+      "viewport": "desktop",
+      "geometry": {
+        "title": "Polymythcal, Tutoring, Resources & Projects | Seminar Schools",
+        "headings": [
+          "A room of readers working a hard text together reaches what none of them could reach alone."
+        ],
+        "semanticHeadings": [
+          "A room of readers working a hard text together reaches what none of them could reach alone."
+        ],
+        "bodyTextLength": 2683,
+        "links": 48,
+        "scrollWidth": 1351,
+        "clientWidth": 1366,
+        "overflow": 0,
+        "controls": 1,
+        "undersized": [],
+        "positioned": 2,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 184,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "SeminarSchools",
+            "width": 139,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Open Polymythcal",
+            "width": 151,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "g",
+            "id": "",
+            "text": "Seminar Schools",
+            "width": 175,
+            "height": 109,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "g",
+            "id": "",
+            "text": "Polymythcal",
+            "width": 151,
+            "height": 69,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "g",
+            "id": "",
+            "text": "Leizu Academy",
+            "width": 161,
+            "height": 59,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "g",
+            "id": "",
+            "text": "Teacher Resources",
+            "width": 185,
+            "height": 59,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "g",
+            "id": "",
+            "text": "The Agora",
+            "width": 127,
+            "height": 59,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/main/",
+      "label": "about",
+      "viewport": "desktop",
+      "geometry": {
+        "title": "About Seminar Schools | Toronto Reading, Teaching & Projects",
+        "headings": [
+          "Seminar Schools."
+        ],
+        "semanticHeadings": [
+          "Seminar Schools."
+        ],
+        "bodyTextLength": 7550,
+        "links": 77,
+        "scrollWidth": 1351,
+        "clientWidth": 1366,
+        "overflow": 0,
+        "controls": 2,
+        "undersized": [],
+        "positioned": 4,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A-",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A+",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 184,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Seminar Schools",
+            "width": 219,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "saulnassau@protonmail.com",
+            "width": 209,
+            "height": 22,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Tutoring",
+            "width": 75,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Events",
+            "width": 56,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Resources",
+            "width": 86,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/bb/",
+      "label": "bb",
+      "viewport": "desktop",
+      "geometry": {
+        "title": "bookwormburrows | AI-Assisted Reading and Seminar Game",
+        "headings": [
+          "bookwormburrows·enter the burrow"
+        ],
+        "semanticHeadings": [
+          "bookwormburrows·enter the burrow"
+        ],
+        "bodyTextLength": 2404,
+        "links": 41,
+        "scrollWidth": 1351,
+        "clientWidth": 1366,
+        "overflow": 0,
+        "controls": 2,
+        "undersized": [],
+        "positioned": 2,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 184,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A-",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A+",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "wormcard",
+            "width": 93,
+            "height": 21,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Dimensional Master",
+            "width": 182,
+            "height": 21,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "For players\n    Make your wormcard.\n    Answer a few questio",
+            "width": 456,
+            "height": 372,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "wormcard",
+            "width": 152,
+            "height": 35,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "For guides and teachers\n    Run a burrow with wormcards.\n   ",
+            "width": 456,
+            "height": 372,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/bookwormcard/",
+      "label": "bookwormcard",
+      "viewport": "desktop",
+      "geometry": {
+        "title": "Bookwormcard · Make a bookwormburrows Character Card",
+        "headings": [
+          "Bookwormcard · BookwormBurrows character gate"
+        ],
+        "semanticHeadings": [
+          "Bookwormcard is the character gate for BookwormBurrows",
+          "Bookwormcard · BookwormBurrows character gate"
+        ],
+        "bodyTextLength": 1796,
+        "links": 22,
+        "scrollWidth": 1351,
+        "clientWidth": 1366,
+        "overflow": 0,
+        "controls": 17,
+        "undersized": [],
+        "positioned": 2,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "←",
+            "width": 65,
+            "height": 47,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "→",
+            "width": 65,
+            "height": 47,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "back",
+            "width": 117,
+            "height": 47,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "skip",
+            "width": 117,
+            "height": 47,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "why?",
+            "width": 117,
+            "height": 47,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "finish",
+            "width": 140,
+            "height": 47,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "enter ↵",
+            "width": 655,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "legend-toggle",
+            "text": "?",
+            "width": 24,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/aa/",
+      "label": "aa",
+      "viewport": "desktop",
+      "geometry": {
+        "title": "Archetype Archive & Taxonomy Index | aa*",
+        "headings": [
+          "aa* Archetype Archive"
+        ],
+        "semanticHeadings": [
+          "aa* Archetype Archive"
+        ],
+        "bodyTextLength": 3793,
+        "links": 53,
+        "scrollWidth": 1351,
+        "clientWidth": 1366,
+        "overflow": 0,
+        "controls": 439,
+        "undersized": [],
+        "positioned": 5,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A-",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A+",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "☀\n  ☾",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 184,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "cloud",
+            "width": 55,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "views",
+            "width": 55,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "← Seminar Schools",
+            "width": 171,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "cloud-growth view →",
+            "width": 145,
+            "height": 14,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/leizu/",
+      "label": "leizu",
+      "viewport": "desktop",
+      "geometry": {
+        "title": "Toronto Tutor for OSSD, IB & Writing | Leizu Academy",
+        "headings": [
+          "Leizu Academy"
+        ],
+        "semanticHeadings": [
+          "Leizu Academy"
+        ],
+        "bodyTextLength": 14890,
+        "links": 50,
+        "scrollWidth": 1351,
+        "clientWidth": 1366,
+        "overflow": 0,
+        "controls": 52,
+        "undersized": [],
+        "positioned": 2,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 184,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "EN",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "ESL",
+            "width": 48,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "FR",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "繁",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "简",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "فا",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A−",
+            "width": 46,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/saul/",
+      "label": "cv",
+      "viewport": "desktop",
+      "geometry": {
+        "title": "Saul Karim Nassau - General / Any Role CV",
+        "headings": [
+          "Saul Karim Nassau"
+        ],
+        "semanticHeadings": [
+          "Saul Karim Nassau"
+        ],
+        "bodyTextLength": 5703,
+        "links": 58,
+        "scrollWidth": 1356,
+        "clientWidth": 1366,
+        "overflow": 0,
+        "controls": 49,
+        "undersized": [],
+        "positioned": 5,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "← Seminar Schools",
+            "width": 133,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "☀\n☾",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 174,
+            "height": 38,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "BUTTON",
+            "id": "fzUp",
+            "text": "A+",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "fzDown",
+            "text": "A-",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "English",
+            "width": 70,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "繁體中文",
+            "width": 31,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "简体中文",
+            "width": 31,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/agora/",
+      "label": "agora",
+      "viewport": "desktop",
+      "geometry": {
+        "title": "Toronto Public Seminars & Reading Groups | The Agora",
+        "headings": [
+          "The Agora."
+        ],
+        "semanticHeadings": [
+          "The Agora."
+        ],
+        "bodyTextLength": 5325,
+        "links": 40,
+        "scrollWidth": 1351,
+        "clientWidth": 1366,
+        "overflow": 0,
+        "controls": 3,
+        "undersized": [],
+        "positioned": 5,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A-",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A+",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "☀\n  ☾",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 184,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Seminar Schools",
+            "width": 153,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Home",
+            "width": 34,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Polymythcal",
+            "width": 93,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Agora",
+            "width": 42,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/teacherresources/",
+      "label": "teacher-resources",
+      "viewport": "desktop",
+      "geometry": {
+        "title": "Teacher Resources for English, OSSD & IB | Seminar Schools",
+        "headings": [
+          "Teacher Resources."
+        ],
+        "semanticHeadings": [
+          "Teacher Resources."
+        ],
+        "bodyTextLength": 1633,
+        "links": 702,
+        "scrollWidth": 1351,
+        "clientWidth": 1366,
+        "overflow": 0,
+        "controls": 50,
+        "undersized": [
+          {
+            "tag": "INPUT",
+            "id": "search",
+            "text": "",
+            "width": 1,
+            "height": 1
+          }
+        ],
+        "positioned": 3,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to catalog",
+            "width": 142,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Seminar Schools",
+            "width": 153,
+            "height": 19,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Home",
+            "width": 34,
+            "height": 19,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Polymythcal",
+            "width": 93,
+            "height": 19,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Agora",
+            "width": 42,
+            "height": 19,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Marginalia",
+            "width": 84,
+            "height": 19,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Resources",
+            "width": 76,
+            "height": 19,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "All projects →",
+            "width": 118,
+            "height": 19,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/polymythseminars/",
+      "label": "polymythcal",
+      "viewport": "desktop",
+      "geometry": {
+        "title": "Polymythcal | Seminar Schools",
+        "headings": [
+          "Polymythcal"
+        ],
+        "semanticHeadings": [
+          "Polymythcal"
+        ],
+        "bodyTextLength": 8835,
+        "links": 105,
+        "scrollWidth": 1351,
+        "clientWidth": 1366,
+        "overflow": 0,
+        "controls": 51,
+        "undersized": [
+          {
+            "tag": "INPUT",
+            "id": "pmSearch",
+            "text": "",
+            "width": 1001,
+            "height": 22
+          },
+          {
+            "tag": "SELECT",
+            "id": "pmSort",
+            "text": "Soonest first\nFarthest date first\nTitle A to Z",
+            "width": 1,
+            "height": 1
+          }
+        ],
+        "positioned": 2,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to results",
+            "width": 141,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "☀☾",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "INPUT",
+            "id": "pmSearch",
+            "text": "",
+            "width": 827,
+            "height": 54,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "pmJumpResults",
+            "text": "View 540 results",
+            "width": 168,
+            "height": 54,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "SUMMARY",
+            "id": "",
+            "text": "Popular starting pointsShortcuts reset the filters",
+            "width": 1040,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "Philosophy and ethics",
+            "width": 179,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "Humanities",
+            "width": 106,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "Talks and lectures",
+            "width": 151,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/polymyth/methodologylist/",
+      "label": "methodology-list",
+      "viewport": "desktop",
+      "geometry": {
+        "title": "Polymyth Methodologylist*",
+        "headings": [
+          "Polymyth Methodologylist*"
+        ],
+        "semanticHeadings": [
+          "Polymyth Methodologylist*"
+        ],
+        "bodyTextLength": 1848823,
+        "links": 5250,
+        "scrollWidth": 1351,
+        "clientWidth": 1366,
+        "overflow": 0,
+        "controls": 29,
+        "undersized": [],
+        "positioned": 1,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 184,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "*",
+            "width": 18,
+            "height": 42,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "sabachtan gnosticism",
+            "width": 163,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "polymyth operations",
+            "width": 154,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "gorgonification",
+            "width": 122,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "degorgonification",
+            "width": 138,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "idiomary",
+            "width": 65,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "contentinternet",
+            "width": 122,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/",
+      "label": "home",
+      "viewport": "mobile-short",
+      "geometry": {
+        "title": "Polymythcal, Tutoring, Resources & Projects | Seminar Schools",
+        "headings": [
+          "A room of readers working a hard text together reaches what none of them could reach alone."
+        ],
+        "semanticHeadings": [
+          "A room of readers working a hard text together reaches what none of them could reach alone."
+        ],
+        "bodyTextLength": 2723,
+        "links": 58,
+        "scrollWidth": 345,
+        "clientWidth": 360,
+        "overflow": 0,
+        "controls": 0,
+        "undersized": [],
+        "positioned": 2,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 175,
+            "height": 39,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "SeminarSchools",
+            "width": 133,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Open Polymythcal",
+            "width": 144,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "g",
+            "id": "",
+            "text": "Seminar Schools",
+            "width": 70,
+            "height": 42,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "g",
+            "id": "",
+            "text": "Polymythcal",
+            "width": 167,
+            "height": 56,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "g",
+            "id": "",
+            "text": "Leizu Academy",
+            "width": 279,
+            "height": 103,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "g",
+            "id": "",
+            "text": "Teacher Resources",
+            "width": 139,
+            "height": 107,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "g",
+            "id": "",
+            "text": "The Agora",
+            "width": 248,
+            "height": 164,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0045893554687500004,
+      "pageErrors": []
+    },
+    {
+      "route": "/main/",
+      "label": "about",
+      "viewport": "mobile-short",
+      "geometry": {
+        "title": "About Seminar Schools | Toronto Reading, Teaching & Projects",
+        "headings": [
+          "Seminar Schools."
+        ],
+        "semanticHeadings": [
+          "Seminar Schools."
+        ],
+        "bodyTextLength": 7216,
+        "links": 76,
+        "scrollWidth": 345,
+        "clientWidth": 360,
+        "overflow": 0,
+        "controls": 2,
+        "undersized": [],
+        "positioned": 4,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A-",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A+",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 175,
+            "height": 39,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Seminar Schools",
+            "width": 209,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Tutoring",
+            "width": 73,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Events",
+            "width": 55,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Resources",
+            "width": 84,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "BB",
+            "width": 19,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/bb/",
+      "label": "bb",
+      "viewport": "mobile-short",
+      "geometry": {
+        "title": "bookwormburrows | AI-Assisted Reading and Seminar Game",
+        "headings": [
+          "bookwormburrows·enter the burrow"
+        ],
+        "semanticHeadings": [
+          "bookwormburrows·enter the burrow"
+        ],
+        "bodyTextLength": 2404,
+        "links": 41,
+        "scrollWidth": 345,
+        "clientWidth": 360,
+        "overflow": 0,
+        "controls": 2,
+        "undersized": [],
+        "positioned": 1,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 175,
+            "height": 39,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A-",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A+",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "wormcard",
+            "width": 83,
+            "height": 19,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Dimensional Master",
+            "width": 162,
+            "height": 19,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "For players\n    Make your wormcard.\n    Answer a few questio",
+            "width": 284,
+            "height": 294,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "wormcard",
+            "width": 109,
+            "height": 25,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "For guides and teachers\n    Run a burrow with wormcards.\n   ",
+            "width": 284,
+            "height": 442,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/bookwormcard/",
+      "label": "bookwormcard",
+      "viewport": "mobile-short",
+      "geometry": {
+        "title": "Bookwormcard · Make a bookwormburrows Character Card",
+        "headings": [
+          "Bookwormcard · BookwormBurrows character gate"
+        ],
+        "semanticHeadings": [
+          "Bookwormcard is the character gate for BookwormBurrows",
+          "Bookwormcard · BookwormBurrows character gate"
+        ],
+        "bodyTextLength": 1665,
+        "links": 22,
+        "scrollWidth": 345,
+        "clientWidth": 360,
+        "overflow": 0,
+        "controls": 17,
+        "undersized": [],
+        "positioned": 1,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "←",
+            "width": 60,
+            "height": 45,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "→",
+            "width": 60,
+            "height": 45,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "back",
+            "width": 129,
+            "height": 45,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "skip",
+            "width": 83,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "why?",
+            "width": 72,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "finish",
+            "width": 94,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "enter ↵",
+            "width": 262,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "legend-toggle",
+            "text": "?",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/aa/",
+      "label": "aa",
+      "viewport": "mobile-short",
+      "geometry": {
+        "title": "Archetype Archive & Taxonomy Index | aa*",
+        "headings": [
+          "aa* Archetype Archive"
+        ],
+        "semanticHeadings": [
+          "aa* Archetype Archive"
+        ],
+        "bodyTextLength": 1553,
+        "links": 53,
+        "scrollWidth": 345,
+        "clientWidth": 360,
+        "overflow": 0,
+        "controls": 439,
+        "undersized": [],
+        "positioned": 3,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A-",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A+",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "☀\n  ☾",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 175,
+            "height": 39,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "cloud",
+            "width": 55,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "views",
+            "width": 55,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "← Seminar Schools",
+            "width": 166,
+            "height": 14,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "cloud-growth view →",
+            "width": 145,
+            "height": 14,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/leizu/",
+      "label": "leizu",
+      "viewport": "mobile-short",
+      "geometry": {
+        "title": "Toronto Tutor for OSSD, IB & Writing | Leizu Academy",
+        "headings": [
+          "Leizu Academy"
+        ],
+        "semanticHeadings": [
+          "Leizu Academy"
+        ],
+        "bodyTextLength": 14890,
+        "links": 50,
+        "scrollWidth": 345,
+        "clientWidth": 360,
+        "overflow": 0,
+        "controls": 52,
+        "undersized": [],
+        "positioned": 2,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 175,
+            "height": 39,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "EN",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "ESL",
+            "width": 46,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "FR",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "繁",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "简",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "فا",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A−",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/saul/",
+      "label": "cv",
+      "viewport": "mobile-short",
+      "geometry": {
+        "title": "Saul Karim Nassau - General / Any Role CV",
+        "headings": [
+          "Saul Karim Nassau"
+        ],
+        "semanticHeadings": [
+          "Saul Karim Nassau"
+        ],
+        "bodyTextLength": 4569,
+        "links": 58,
+        "scrollWidth": 350,
+        "clientWidth": 360,
+        "overflow": 0,
+        "controls": 47,
+        "undersized": [],
+        "positioned": 3,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "← Seminar Schools",
+            "width": 146,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "☀\n☾",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 166,
+            "height": 36,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "English",
+            "width": 67,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "繁體中文",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "简体中文",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "فارسی",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "Français",
+            "width": 52,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/agora/",
+      "label": "agora",
+      "viewport": "mobile-short",
+      "geometry": {
+        "title": "Toronto Public Seminars & Reading Groups | The Agora",
+        "headings": [
+          "The Agora."
+        ],
+        "semanticHeadings": [
+          "The Agora."
+        ],
+        "bodyTextLength": 5226,
+        "links": 40,
+        "scrollWidth": 345,
+        "clientWidth": 360,
+        "overflow": 0,
+        "controls": 3,
+        "undersized": [],
+        "positioned": 4,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A-",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A+",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "☀\n  ☾",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 175,
+            "height": 39,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Seminar Schools",
+            "width": 146,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Home",
+            "width": 32,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Polymythcal",
+            "width": 88,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Agora",
+            "width": 40,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/teacherresources/",
+      "label": "teacher-resources",
+      "viewport": "mobile-short",
+      "geometry": {
+        "title": "Teacher Resources for English, OSSD & IB | Seminar Schools",
+        "headings": [
+          "Teacher Resources."
+        ],
+        "semanticHeadings": [
+          "Teacher Resources."
+        ],
+        "bodyTextLength": 1153,
+        "links": 702,
+        "scrollWidth": 345,
+        "clientWidth": 360,
+        "overflow": 0,
+        "controls": 50,
+        "undersized": [
+          {
+            "tag": "INPUT",
+            "id": "search",
+            "text": "",
+            "width": 1,
+            "height": 1
+          }
+        ],
+        "positioned": 2,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to catalog",
+            "width": 135,
+            "height": 39,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Seminar Schools",
+            "width": 146,
+            "height": 18,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Home",
+            "width": 32,
+            "height": 32,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Polymythcal",
+            "width": 88,
+            "height": 32,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Agora",
+            "width": 40,
+            "height": 32,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Marginalia",
+            "width": 80,
+            "height": 32,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Resources",
+            "width": 72,
+            "height": 32,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "All projects →",
+            "width": 112,
+            "height": 32,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/polymythseminars/",
+      "label": "polymythcal",
+      "viewport": "mobile-short",
+      "geometry": {
+        "title": "Polymythcal | Seminar Schools",
+        "headings": [
+          "Polymythcal"
+        ],
+        "semanticHeadings": [
+          "Polymythcal"
+        ],
+        "bodyTextLength": 6982,
+        "links": 105,
+        "scrollWidth": 345,
+        "clientWidth": 360,
+        "overflow": 0,
+        "controls": 54,
+        "undersized": [
+          {
+            "tag": "INPUT",
+            "id": "pmSearch",
+            "text": "",
+            "width": 306,
+            "height": 21
+          },
+          {
+            "tag": "SELECT",
+            "id": "pmSort",
+            "text": "Soonest first\nFarthest date first\nTitle A to Z",
+            "width": 1,
+            "height": 1
+          }
+        ],
+        "positioned": 4,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to results",
+            "width": 135,
+            "height": 38,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "☀☾",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "INPUT",
+            "id": "pmSearch",
+            "text": "",
+            "width": 310,
+            "height": 54,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "pmJumpResults",
+            "text": "View 540 results",
+            "width": 310,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "SUMMARY",
+            "id": "",
+            "text": "Popular starting pointsShortcuts reset the filters",
+            "width": 336,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "pmShare",
+            "text": "Share view",
+            "width": 105,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "pmSavedToggle",
+            "text": "Saved 0",
+            "width": 85,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Get calendar updates",
+            "width": 317,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0005575052897135416,
+      "pageErrors": []
+    },
+    {
+      "route": "/polymyth/methodologylist/",
+      "label": "methodology-list",
+      "viewport": "mobile-short",
+      "geometry": {
+        "title": "Polymyth Methodologylist*",
+        "headings": [
+          "Polymyth Methodologylist*"
+        ],
+        "semanticHeadings": [
+          "Polymyth Methodologylist*"
+        ],
+        "bodyTextLength": 1848823,
+        "links": 5250,
+        "scrollWidth": 345,
+        "clientWidth": 360,
+        "overflow": 0,
+        "controls": 29,
+        "undersized": [],
+        "positioned": 1,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 175,
+            "height": 39,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "*",
+            "width": 16,
+            "height": 36,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "sabachtan gnosticism",
+            "width": 163,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "polymyth operations",
+            "width": 154,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "gorgonification",
+            "width": 122,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "degorgonification",
+            "width": 138,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "idiomary",
+            "width": 65,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "contentinternet",
+            "width": 122,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/",
+      "label": "home",
+      "viewport": "landscape-short",
+      "geometry": {
+        "title": "Polymythcal, Tutoring, Resources & Projects | Seminar Schools",
+        "headings": [
+          "A room of readers working a hard text together reaches what none of them could reach alone."
+        ],
+        "semanticHeadings": [
+          "A room of readers working a hard text together reaches what none of them could reach alone."
+        ],
+        "bodyTextLength": 2683,
+        "links": 48,
+        "scrollWidth": 1009,
+        "clientWidth": 1024,
+        "overflow": 0,
+        "controls": 1,
+        "undersized": [],
+        "positioned": 2,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 181,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "SeminarSchools",
+            "width": 137,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Open Polymythcal",
+            "width": 149,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "g",
+            "id": "",
+            "text": "Seminar Schools",
+            "width": 163,
+            "height": 102,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "g",
+            "id": "",
+            "text": "Polymythcal",
+            "width": 141,
+            "height": 65,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "g",
+            "id": "",
+            "text": "Leizu Academy",
+            "width": 150,
+            "height": 56,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "g",
+            "id": "",
+            "text": "Teacher Resources",
+            "width": 173,
+            "height": 56,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "g",
+            "id": "",
+            "text": "The Agora",
+            "width": 119,
+            "height": 56,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/main/",
+      "label": "about",
+      "viewport": "landscape-short",
+      "geometry": {
+        "title": "About Seminar Schools | Toronto Reading, Teaching & Projects",
+        "headings": [
+          "Seminar Schools."
+        ],
+        "semanticHeadings": [
+          "Seminar Schools."
+        ],
+        "bodyTextLength": 7550,
+        "links": 77,
+        "scrollWidth": 1009,
+        "clientWidth": 1024,
+        "overflow": 0,
+        "controls": 2,
+        "undersized": [],
+        "positioned": 4,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A-",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A+",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 181,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Seminar Schools",
+            "width": 215,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "saulnassau@protonmail.com",
+            "width": 206,
+            "height": 21,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Tutoring",
+            "width": 76,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Events",
+            "width": 57,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Resources",
+            "width": 87,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/bb/",
+      "label": "bb",
+      "viewport": "landscape-short",
+      "geometry": {
+        "title": "bookwormburrows | AI-Assisted Reading and Seminar Game",
+        "headings": [
+          "bookwormburrows·enter the burrow"
+        ],
+        "semanticHeadings": [
+          "bookwormburrows·enter the burrow"
+        ],
+        "bodyTextLength": 2404,
+        "links": 41,
+        "scrollWidth": 1009,
+        "clientWidth": 1024,
+        "overflow": 0,
+        "controls": 2,
+        "undersized": [],
+        "positioned": 2,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 181,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A-",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A+",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "wormcard",
+            "width": 93,
+            "height": 21,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Dimensional Master",
+            "width": 182,
+            "height": 21,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "For players\n    Make your wormcard.\n    Answer a few questio",
+            "width": 456,
+            "height": 372,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "wormcard",
+            "width": 152,
+            "height": 35,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "For guides and teachers\n    Run a burrow with wormcards.\n   ",
+            "width": 456,
+            "height": 372,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/bookwormcard/",
+      "label": "bookwormcard",
+      "viewport": "landscape-short",
+      "geometry": {
+        "title": "Bookwormcard · Make a bookwormburrows Character Card",
+        "headings": [
+          "Bookwormcard · BookwormBurrows character gate"
+        ],
+        "semanticHeadings": [
+          "Bookwormcard is the character gate for BookwormBurrows",
+          "Bookwormcard · BookwormBurrows character gate"
+        ],
+        "bodyTextLength": 1796,
+        "links": 22,
+        "scrollWidth": 1009,
+        "clientWidth": 1024,
+        "overflow": 0,
+        "controls": 17,
+        "undersized": [],
+        "positioned": 1,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "←",
+            "width": 86,
+            "height": 46,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "→",
+            "width": 86,
+            "height": 46,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "back",
+            "width": 158,
+            "height": 46,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "skip",
+            "width": 158,
+            "height": 46,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "why?",
+            "width": 158,
+            "height": 46,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "finish",
+            "width": 180,
+            "height": 46,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "enter ↵",
+            "width": 857,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "legend-toggle",
+            "text": "?",
+            "width": 24,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/aa/",
+      "label": "aa",
+      "viewport": "landscape-short",
+      "geometry": {
+        "title": "Archetype Archive & Taxonomy Index | aa*",
+        "headings": [
+          "aa* Archetype Archive"
+        ],
+        "semanticHeadings": [
+          "aa* Archetype Archive"
+        ],
+        "bodyTextLength": 1949,
+        "links": 53,
+        "scrollWidth": 1009,
+        "clientWidth": 1024,
+        "overflow": 0,
+        "controls": 439,
+        "undersized": [],
+        "positioned": 4,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A-",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A+",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "☀\n  ☾",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 181,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "cloud",
+            "width": 55,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "views",
+            "width": 55,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "← Seminar Schools",
+            "width": 170,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "cloud-growth view →",
+            "width": 145,
+            "height": 14,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/leizu/",
+      "label": "leizu",
+      "viewport": "landscape-short",
+      "geometry": {
+        "title": "Toronto Tutor for OSSD, IB & Writing | Leizu Academy",
+        "headings": [
+          "Leizu Academy"
+        ],
+        "semanticHeadings": [
+          "Leizu Academy"
+        ],
+        "bodyTextLength": 14890,
+        "links": 50,
+        "scrollWidth": 1009,
+        "clientWidth": 1024,
+        "overflow": 0,
+        "controls": 52,
+        "undersized": [],
+        "positioned": 2,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 181,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "EN",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "ESL",
+            "width": 47,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "FR",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "繁",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "简",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "فا",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A−",
+            "width": 45,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/saul/",
+      "label": "cv",
+      "viewport": "landscape-short",
+      "geometry": {
+        "title": "Saul Karim Nassau - General / Any Role CV",
+        "headings": [
+          "Saul Karim Nassau"
+        ],
+        "semanticHeadings": [
+          "Saul Karim Nassau"
+        ],
+        "bodyTextLength": 4920,
+        "links": 58,
+        "scrollWidth": 1014,
+        "clientWidth": 1024,
+        "overflow": 0,
+        "controls": 49,
+        "undersized": [],
+        "positioned": 5,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "← Seminar Schools",
+            "width": 130,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "☀\n☾",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 172,
+            "height": 37,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "BUTTON",
+            "id": "fzUp",
+            "text": "A+",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "fzDown",
+            "text": "A-",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "English",
+            "width": 69,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "繁體中文",
+            "width": 31,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "简体中文",
+            "width": 31,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/agora/",
+      "label": "agora",
+      "viewport": "landscape-short",
+      "geometry": {
+        "title": "Toronto Public Seminars & Reading Groups | The Agora",
+        "headings": [
+          "The Agora."
+        ],
+        "semanticHeadings": [
+          "The Agora."
+        ],
+        "bodyTextLength": 5325,
+        "links": 40,
+        "scrollWidth": 1009,
+        "clientWidth": 1024,
+        "overflow": 0,
+        "controls": 3,
+        "undersized": [],
+        "positioned": 5,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A-",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "A+",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "☀\n  ☾",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 181,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Seminar Schools",
+            "width": 150,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Home",
+            "width": 33,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Polymythcal",
+            "width": 91,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Agora",
+            "width": 42,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/teacherresources/",
+      "label": "teacher-resources",
+      "viewport": "landscape-short",
+      "geometry": {
+        "title": "Teacher Resources for English, OSSD & IB | Seminar Schools",
+        "headings": [
+          "Teacher Resources."
+        ],
+        "semanticHeadings": [
+          "Teacher Resources."
+        ],
+        "bodyTextLength": 1307,
+        "links": 702,
+        "scrollWidth": 1009,
+        "clientWidth": 1024,
+        "overflow": 0,
+        "controls": 50,
+        "undersized": [
+          {
+            "tag": "INPUT",
+            "id": "search",
+            "text": "",
+            "width": 1,
+            "height": 1
+          }
+        ],
+        "positioned": 3,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to catalog",
+            "width": 139,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Seminar Schools",
+            "width": 150,
+            "height": 19,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Home",
+            "width": 33,
+            "height": 19,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Polymythcal",
+            "width": 91,
+            "height": 19,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Agora",
+            "width": 42,
+            "height": 19,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Marginalia",
+            "width": 83,
+            "height": 19,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Resources",
+            "width": 75,
+            "height": 19,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "All projects →",
+            "width": 116,
+            "height": 19,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/polymythseminars/",
+      "label": "polymythcal",
+      "viewport": "landscape-short",
+      "geometry": {
+        "title": "Polymythcal | Seminar Schools",
+        "headings": [
+          "Polymythcal"
+        ],
+        "semanticHeadings": [
+          "Polymythcal"
+        ],
+        "bodyTextLength": 8835,
+        "links": 105,
+        "scrollWidth": 1009,
+        "clientWidth": 1024,
+        "overflow": 0,
+        "controls": 51,
+        "undersized": [
+          {
+            "tag": "INPUT",
+            "id": "pmSearch",
+            "text": "",
+            "width": 939,
+            "height": 22
+          },
+          {
+            "tag": "SELECT",
+            "id": "pmSort",
+            "text": "Soonest first\nFarthest date first\nTitle A to Z",
+            "width": 1,
+            "height": 1
+          }
+        ],
+        "positioned": 2,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to results",
+            "width": 139,
+            "height": 39,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "☀☾",
+            "width": 44,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "INPUT",
+            "id": "pmSearch",
+            "text": "",
+            "width": 767,
+            "height": 54,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "pmJumpResults",
+            "text": "View 540 results",
+            "width": 165,
+            "height": 54,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "SUMMARY",
+            "id": "",
+            "text": "Popular starting pointsShortcuts reset the filters",
+            "width": 977,
+            "height": 44,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "Philosophy and ethics",
+            "width": 176,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "Humanities",
+            "width": 104,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "Talks and lectures",
+            "width": 149,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    },
+    {
+      "route": "/polymyth/methodologylist/",
+      "label": "methodology-list",
+      "viewport": "landscape-short",
+      "geometry": {
+        "title": "Polymyth Methodologylist*",
+        "headings": [
+          "Polymyth Methodologylist*"
+        ],
+        "semanticHeadings": [
+          "Polymyth Methodologylist*"
+        ],
+        "bodyTextLength": 1848823,
+        "links": 5547,
+        "scrollWidth": 1009,
+        "clientWidth": 1024,
+        "overflow": 0,
+        "controls": 29,
+        "undersized": [],
+        "positioned": 1,
+        "positionedOutOfBounds": [],
+        "fixedCollisions": []
+      },
+      "focus": {
+        "visited": [
+          {
+            "tag": "A",
+            "id": "",
+            "text": "Skip to main content",
+            "width": 181,
+            "height": 40,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": true
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "*",
+            "width": 18,
+            "height": 42,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "sabachtan gnosticism",
+            "width": 163,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "polymyth operations",
+            "width": 154,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "gorgonification",
+            "width": 122,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "degorgonification",
+            "width": 138,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "idiomary",
+            "width": 65,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          },
+          {
+            "tag": "A",
+            "id": "",
+            "text": "contentinternet",
+            "width": 122,
+            "height": 15,
+            "inViewport": true,
+            "unobscured": true,
+            "outline": true,
+            "shadow": false
+          }
+        ],
+        "allInViewport": true,
+        "allUnobscured": true,
+        "hasFocusCue": true
+      },
+      "cls": 0.0,
+      "pageErrors": []
+    }
+  ],
+  "held_direction_findings": [],
+  "suite": "routes",
+  "inherited_from_audit": 37,
+  "adapter_contract": "audit42-inherited-browser-v1",
+  "source_program_path": "scripts/audit-audit37-route-resilience.py",
+  "source_program_sha256": "989a7130de16631ff116afaed4e78e82945a75d978bc7269d0b889bc6dd9a562",
+  "adapted_program_path": "data/audit42-inherited-browser/programs/routes.py",
+  "adapted_program_sha256": "614db313d31a8c31195a54c35ab67c2b373e894fbadcf491a7ad3c78fedd792a",
+  "adapter_program_path": "scripts/run-audit42-inherited-browser.py",
+  "adapter_program_sha256": "f65ae1380eae2b444adaee7989ffe45001ee642c1719e80f619ac205865f55c9",
+  "release_manifest_sha256": "060fe21b419292c6d82a076419084a0f0d4f0f1fbab7042cdeb3017a20949f36"
+}

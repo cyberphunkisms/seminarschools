@@ -1,0 +1,404 @@
+{
+  "audit": 39,
+  "generated_at": "2026-07-24T22:30:00-04:00",
+  "executed_at": "2026-07-25T03:09:45+00:00",
+  "release_id": "2026-07-24-site-audit39-discovery-continuity-route-resilience-final",
+  "release": "PolymythCAL Audit 39 end-to-end",
+  "standard": "WCAG 2.2 AA",
+  "browser": "Chromium headless with production assets executed locally",
+  "checks_passed": 42,
+  "checks_total": 42,
+  "checks_failed": 0,
+  "results": [
+    {
+      "name": "Calendar IDs are unique",
+      "passed": true,
+      "details": [],
+      "criterion": "4.1.1",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Calendar form controls have programmatic labels",
+      "passed": true,
+      "details": [],
+      "criterion": "1.3.1, 3.3.2, 4.1.2",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Calendar buttons and links have accessible names",
+      "passed": true,
+      "details": {
+        "buttons": 0,
+        "links": 0
+      },
+      "criterion": "2.4.4, 4.1.2",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Calendar has one main landmark and one H1",
+      "passed": true,
+      "details": {
+        "duplicates": [],
+        "unlabeled": [],
+        "unnamedButtons": 0,
+        "unnamedLinks": 0,
+        "jumps": [],
+        "skipTarget": true,
+        "mainCount": 1,
+        "h1Count": 1,
+        "lang": "en-CA"
+      },
+      "criterion": "1.3.1, 2.4.6",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Calendar skip link targets the results region",
+      "passed": true,
+      "details": {
+        "duplicates": [],
+        "unlabeled": [],
+        "unnamedButtons": 0,
+        "unnamedLinks": 0,
+        "jumps": [],
+        "skipTarget": true,
+        "mainCount": 1,
+        "h1Count": 1,
+        "lang": "en-CA"
+      },
+      "criterion": "2.4.1",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Calendar heading order avoids skipped levels",
+      "passed": true,
+      "details": [],
+      "criterion": "1.3.1, 2.4.6",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Calendar declares Canadian English",
+      "passed": true,
+      "details": "en-CA",
+      "criterion": "3.1.1",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Initial results render in a bounded page",
+      "passed": true,
+      "details": 24,
+      "criterion": "2.4.6",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Result count is announced in the results heading",
+      "passed": true,
+      "details": "548 listings",
+      "criterion": "4.1.3",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Events and opportunities can remain selected together",
+      "passed": true,
+      "details": 2,
+      "criterion": "3.2.2",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "First Tab reaches the visible-on-focus skip link",
+      "passed": true,
+      "details": {
+        "tag": "A",
+        "cls": "skip-link",
+        "outline": "solid"
+      },
+      "criterion": "2.1.1, 2.4.1, 2.4.7, 2.4.11",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Slash keyboard shortcut focuses search",
+      "passed": true,
+      "details": "pmSearch",
+      "criterion": "2.1.1",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Multiple place filters remain operable together",
+      "passed": true,
+      "details": 2,
+      "criterion": "3.2.2",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Close-spelling Montréal search returns results",
+      "passed": true,
+      "details": 175,
+      "criterion": "3.3.2",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Device-local saved event state persists",
+      "passed": true,
+      "details": [
+        "research-c401c4895c3f"
+      ],
+      "criterion": "4.1.2",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Saved listings open as a labelled modal dialog",
+      "passed": true,
+      "details": "pmSavedTitle",
+      "criterion": "2.4.3, 4.1.2",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Save-search control becomes available for a meaningful view",
+      "passed": true,
+      "details": true,
+      "criterion": "3.2.2",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Device-local saved search preserves URL state",
+      "passed": true,
+      "details": [
+        {
+          "id": "blank?q=philosophy&places=montreal%2Ctoronto-gta",
+          "href": "blank?q=philosophy&places=montreal%2Ctoronto-gta",
+          "label": "“philosophy” + Toronto and GTA + Montréal and West Island",
+          "savedAt": "2026-07-24T22:30:00-04:00"
+        }
+      ],
+      "criterion": "3.2.3, 4.1.2",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Share-view control exposes the current URL state",
+      "passed": true,
+      "details": "https://seminarschools.com/blank?q=philosophy&places=montreal%2Ctoronto-gta",
+      "criterion": "3.2.3",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Desktop calendar view exposes a six-week grid",
+      "passed": true,
+      "details": 42,
+      "criterion": "1.3.1",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "View toggle exposes its pressed state",
+      "passed": true,
+      "details": "true",
+      "criterion": "4.1.2",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Chromium accessibility tree names every exposed control",
+      "passed": true,
+      "details": [],
+      "criterion": "4.1.2",
+      "scope": "screen-reader proxy"
+    },
+    {
+      "name": "Reduced-motion preference suppresses motion",
+      "passed": true,
+      "details": {
+        "transition": "0s",
+        "animation": "0s",
+        "scroll": "auto"
+      },
+      "criterion": "2.3.3",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Forced-colour mode preserves visible keyboard focus",
+      "passed": true,
+      "details": {
+        "tag": "A",
+        "cls": "skip-link",
+        "outline": "solid",
+        "width": "3px"
+      },
+      "criterion": "1.4.11, 2.4.7",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "French URL state restores page language",
+      "passed": true,
+      "details": "fr-CA",
+      "criterion": "3.1.1, 3.1.2",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "French URL state restores search and place filters",
+      "passed": true,
+      "details": {
+        "query": "montral"
+      },
+      "criterion": "3.2.3",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "French controls use translated visible labels",
+      "passed": true,
+      "details": "Que voulez-vous inclure?",
+      "criterion": "3.1.2",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Calendar reflows at 320 CSS pixels",
+      "passed": true,
+      "details": [
+        305,
+        320
+      ],
+      "criterion": "1.4.10",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Mobile filter drawer starts collapsed",
+      "passed": true,
+      "details": false,
+      "criterion": "3.2.1",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Mobile filter button opens the filter drawer",
+      "passed": true,
+      "details": true,
+      "criterion": "4.1.2",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Mobile calendar uses a vertical agenda",
+      "passed": true,
+      "details": "block",
+      "criterion": "1.3.1, 1.4.10",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Visible mobile targets meet the 24-pixel minimum",
+      "passed": true,
+      "details": [],
+      "criterion": "2.5.8",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Submission fields have programmatic labels",
+      "passed": true,
+      "details": [],
+      "criterion": "1.3.1, 3.3.2",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Submission form has one main landmark and H1",
+      "passed": true,
+      "details": {
+        "duplicates": [],
+        "unlabeled": [],
+        "unnamedButtons": 0,
+        "unnamedLinks": 0,
+        "jumps": [],
+        "skipTarget": true,
+        "mainCount": 1,
+        "h1Count": 1,
+        "lang": "en-CA"
+      },
+      "criterion": "1.3.1, 2.4.6",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Submission form reflows at 320 CSS pixels",
+      "passed": true,
+      "details": [
+        320,
+        320
+      ],
+      "criterion": "1.4.10",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Correction fields have programmatic labels",
+      "passed": true,
+      "details": [],
+      "criterion": "1.3.1, 3.3.2",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Correction form exposes the stable-listing URL field",
+      "passed": true,
+      "details": 1,
+      "criterion": "3.3.2",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Correction form reflows at 320 CSS pixels",
+      "passed": true,
+      "details": [
+        320,
+        320
+      ],
+      "criterion": "1.4.10",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Stable event page has source, calendar, and correction actions",
+      "passed": true,
+      "details": [
+        "Official or institutional source · Source officielle ou institutionnelle ↗",
+        "Add to calendar · Ajouter au calendrier",
+        "Correct this listing · Corriger cette fiche"
+      ],
+      "criterion": "2.4.4",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Stable event page has one main landmark and H1",
+      "passed": true,
+      "details": {
+        "duplicates": [],
+        "unlabeled": [],
+        "unnamedButtons": 0,
+        "unnamedLinks": 0,
+        "jumps": [],
+        "skipTarget": true,
+        "mainCount": 1,
+        "h1Count": 1,
+        "lang": "en-CA"
+      },
+      "criterion": "1.3.1, 2.4.6",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Stable event page reflows at 320 CSS pixels",
+      "passed": true,
+      "details": [
+        320,
+        320
+      ],
+      "criterion": "1.4.10",
+      "scope": "browser-assisted"
+    },
+    {
+      "name": "Browser run completed without JavaScript errors",
+      "passed": true,
+      "details": [],
+      "criterion": "4.1.1",
+      "scope": "browser-assisted"
+    }
+  ],
+  "native_assistive_technology": [
+    {
+      "technology": "VoiceOver on macOS",
+      "executed": false,
+      "reason": "Native macOS is unavailable in this Linux environment."
+    },
+    {
+      "technology": "NVDA on Windows",
+      "executed": false,
+      "reason": "Native Windows is unavailable in this Linux environment."
+    }
+  ],
+  "native_protocol": "docs/POLYMYTHCAL_SCREEN_READER_TEST_PROTOCOL.md"
+}

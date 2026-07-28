@@ -15,6 +15,7 @@
 -->
 <html lang="en">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
 <meta charset="utf-8"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
@@ -25,7 +26,7 @@
 <meta content="Editorial decisions log for the aa* archetype archive. Schema versions, routing decisions, refusals." name="description"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Libre+Baskerville:ital@0;1&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -80,8 +81,8 @@ body{padding:48px 24px 96px;max-width:920px;margin:0 auto}
 <meta content="https://seminarschools.com/aa/editorial" property="og:url"/>
 <meta content="Seminar Schools" property="og:site_name"/>
 <meta content="summary" name="twitter:card"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Libre+Baskerville:ital@0;1&amp;family=DM+Sans:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
-<link href="/css/theme.css?v=cl91" rel="stylesheet"/>
+
+<link href="/css/theme.css?v=20260725-audit45" rel="stylesheet"/>
 <style data-page-theme="aa">
 :root{--bg:#f4f0e6;--bg2:#ebe5d4;--bg3:#e0d7c0;--ink:#1a1614;--ink2:#3d352d;--dim:#6b5d4f;--faint:#75685b;--rule:#c9bea8;--rule2:#a89c83;--accent-light:#8b2e1f;--accent-dark:#ef8b68;--accent:var(--accent-light);--accent2:#9f3d18;--green:#4a6a4a;--grey:#62594f;}
 @media (prefers-color-scheme:dark){:root:not(.light){--bg:#0f0d0b;--bg2:#191612;--bg3:#241f19;--ink:#f1e8d6;--ink2:#d2c4ad;--dim:#a99b86;--faint:#8c7f6d;--rule:#4a4034;--rule2:#6b5d4a;--highlight:#342d1d;--accent:#ef8b68;--accent2:#f2a36b;--green:#8fc28f;--grey:#aaa094;}}
@@ -97,11 +98,13 @@ body{padding:48px 24px 96px;max-width:920px;margin:0 auto}
 }</style>
 <link href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)" rel="stylesheet"/>
 <link href="/css/alive.css?v=cl91" rel="stylesheet"/>
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.075">
+<body data-geometry="indra-web" data-indra-intensity="0.095">
 <a class="skip-link" href="#main-content">Skip to main content</a>
-<style id="ss-fz-style">.ss-fz{position:fixed;top:auto;bottom:1rem;left:1rem;right:auto;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><button aria-label="Switch to dark mode" aria-pressed="false" class="theme-toggle" type="button"><span aria-hidden="true" class="sun">☀</span><span aria-hidden="true" class="moon">☾</span></button><div aria-label="Adjust text size" class="ss-fz"><button data-fz="down" title="Decrease text size" type="button">A-</button><button data-fz="up" title="Increase text size" type="button">A+</button><button class="reset" data-fz="reset" style="display:none" title="Reset text size" type="button">↺</button></div>
+<style id="ss-fz-style">.ss-fz{position:fixed;top:auto;bottom:1rem;left:1rem;right:auto;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><button aria-label="Switch to dark mode" aria-pressed="false" class="theme-toggle" type="button"><span aria-hidden="true" class="sun">☀</span><span aria-hidden="true" class="moon">☾</span></button><div aria-label="Adjust text size" class="ss-fz" data-fz-placement="bottom-left"><button data-fz="down" title="Decrease text size" type="button">A-</button><button data-fz="up" title="Increase text size" type="button">A+</button><button class="reset" data-fz="reset" style="display:none" title="Reset text size" type="button">↺</button></div>
 <header class="header">
 <div class="header-eyebrow">aa* archetype archive</div>
 <h1>Editorial Log</h1>
@@ -284,7 +287,7 @@ body{padding:48px 24px 96px;max-width:920px;margin:0 auto}
 <script defer="" src="/js/theme.js?v=cl91"></script>
 <script defer="" src="/js/mandala.js?v=cl91"></script>
 <script defer="" src="/js/indra.js?v=cl91"></script>
-<script defer="" src="/js/footer.js?v=20260719-audit11-decisions"></script>
-<script defer="" src="/js/site-keyboard-enhancements.js"></script>
+<script defer="" src="/js/footer.js?v=20260725-audit45-footer"></script>
+<script defer="" src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

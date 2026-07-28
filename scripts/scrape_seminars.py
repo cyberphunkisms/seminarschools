@@ -33,7 +33,13 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-from polymythcal_adapters import infer_adapter, normalise_source_config, parse_source_with_adapter
+from polymythcal_adapters import (
+    creator_attendance_confirmed,
+    infer_adapter,
+    normalise_source_config,
+    parse_source_with_adapter,
+)
+from polymythcal_discovery import crawl_source
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -197,7 +203,7 @@ def event_text(record):
     parts = [
         record.get("title"), record.get("type"), record.get("speaker_or_director"),
         record.get("venue"), record.get("raw_excerpt"), record.get("description"),
-        record.get("age_band"), record.get("source_id"),
+        record.get("attendance_evidence"), record.get("age_band"), record.get("source_id"),
     ]
     for key in ("secondary_types", "topics", "subjects", "genres", "academic_bands"):
         val = record.get(key)
@@ -369,7 +375,10 @@ def build_revue_records(blocks, source_config):
                 "attendance_confirmed": True,
                 "confidence": 90,
                 "four_condition_test": empty_four_condition(),
-                "raw_excerpt": title_text[:500],
+                "raw_excerpt": (
+                    f"{title_text} — director in attendance (explicit source marker)"
+                )[:500],
+                "attendance_evidence": "director in attendance (explicit source marker)",
                 "scraped_at": now_iso(),
                 "review_status": "auto-published",
                 "marginalia_url": None,
@@ -909,7 +918,11 @@ def _event_record(source_config, title, dt, url, venue, raw, confidence, status=
         'secondary_types': secondary_types or [],
         'age_band': None,
         'speaker_or_director': None,
-        'attendance_confirmed': confidence >= 80,
+        'attendance_confirmed': (
+            creator_attendance_confirmed(f"{title}\n{raw}\n{venue}")
+            if etype == "screening"
+            else confidence >= 80
+        ),
         'confidence': int(confidence),
         'four_condition_test': {
             'time_place': confidence >= 70,
@@ -1225,15 +1238,22 @@ def fetch_platform_event_source(source_config):
     url = source_config.get("events_url") or ""
     if not str(url).startswith(("http://", "https://")):
         return []
-    ical_records = fetch_ical_then_html(source_config)
-    if ical_records:
-        for record in ical_records:
-            record.setdefault("platform_adapter", source_config.get("platform_adapter"))
-            record.setdefault("source_language", source_config.get("language", "en"))
-        return ical_records
-    response = fetch(url)
-    response.raise_for_status()
-    return parse_source_with_adapter(response.text, source_config)
+    result = crawl_source(
+        source_config,
+        max_pages=int(source_config.get("max_pages_per_run") or 24),
+        max_depth=int(source_config.get("max_crawl_depth") or 3),
+    )
+    if result.status in {"fetch-error", "blocked", "parse-empty-regression"}:
+        details = "; ".join(
+            f"{item.url}: {item.status} {item.error}".strip()
+            for item in result.fetches
+            if item.status in {"fetch-error", "blocked"}
+        )
+        raise RuntimeError(
+            f"{source_config.get('id')} discovery status={result.status}"
+            + (f" ({details})" if details else "")
+        )
+    return result.records
 
 
 def fetch_todo(source_config):
@@ -1308,9 +1328,10 @@ def deduplicate(records):
 
 def filter_to_verified_only(records):
     """
-    Public calendar stays strict: records below the auto-publish threshold
-    do not appear as events. Provisional civic leads with a real source but
-    missing time/place move to the watchlist instead of being lost.
+    Date-backed public announcements stay in the chronology. Missing time or
+    location is represented by native unconfirmed metadata instead of a hidden
+    watchlist. Missing-date leads remain internal until a real future date is
+    published by the source.
     """
     kept = []
     dropped = []
@@ -1319,11 +1340,58 @@ def filter_to_verified_only(records):
         if r.get("review_status") == "manual":
             kept.append(r)
             continue
+        if r.get("type") == "screening" and not creator_attendance_confirmed(event_text(r)):
+            r["review_status"] = "rejected"
+            r["rejection_reason"] = "creator-attendance-unconfirmed"
+            dropped.append(r)
+            continue
         status = provisional_status(r)
         if status:
-            r["review_status"] = "queued"
-            r["status"] = status
-            watchlist.append(r)
+            source_url = str(r.get("source_url") or "")
+            try:
+                event_dt = datetime.fromisoformat(str(r.get("date") or "").replace("Z", "+00:00"))
+                if event_dt.tzinfo is None:
+                    event_dt = event_dt.replace(tzinfo=timezone.utc)
+                is_future = event_dt >= datetime.now(timezone.utc) - timedelta(days=1)
+            except (TypeError, ValueError):
+                is_future = False
+            if source_url.startswith(("http://", "https://")) and is_future:
+                reasons = []
+                time_precision = str(r.get("time_precision") or "")
+                if (
+                    status == "needs-time-place"
+                    or time_precision == "unknown"
+                    or "T00:00" in str(r.get("date") or "")
+                ):
+                    reasons.append("time-unconfirmed")
+                    r["time_precision"] = "unknown"
+                    r.setdefault("date_precision", "date")
+                venue = str(r.get("venue") or "").strip()
+                if (
+                    status in {"needs-location", "needs-time-place"}
+                    or not venue
+                    or venue.lower() in {
+                        "toronto", "toronto, ontario", "toronto, ontario, canada",
+                        "montréal", "montreal", "kingston", "tbd", "tba",
+                    }
+                ):
+                    reasons.append("location-unconfirmed")
+                r["confirmation_status"] = "unconfirmed"
+                r["qualification_reasons"] = list(dict.fromkeys(reasons))
+                r["review_status"] = "auto-published"
+                r["status"] = "details-pending"
+                r["source_quality"] = (
+                    "aggregator-or-social"
+                    if r.get("source_id") == "findaprotest-toronto"
+                    else r.get("source_quality", "official-or-institutional")
+                )
+                r["last_checked_at"] = r.get("scraped_at") or now_iso()
+                r.setdefault("lifecycle_status", "active")
+                kept.append(r)
+            else:
+                r["review_status"] = "queued"
+                r["status"] = "needs-date"
+                watchlist.append(r)
             continue
         if r.get("confidence", 0) >= CONFIDENCE_AUTO_PUBLISH_THRESHOLD:
             r["review_status"] = "auto-published"
@@ -1431,12 +1499,14 @@ def write_outputs(kept, dropped, watchlist, log):
         key = _wl_key(item)
         if not key or key in published_keys:
             continue
+        if item.get("date"):
+            continue
         merged_watchlist[key] = item
     watchlist_items = sorted(merged_watchlist.values(), key=lambda r: r.get("date", "") or r.get("date_text", ""))
     watchlist_payload = {
         "generated_at": now_iso(),
         "count": len(watchlist_items),
-        "rule": "source-confirmed leads with missing time/place stay out of events until verified; existing leads persist until confirmed or published",
+        "rule": "internal recheck state for leads without a real event date; dated announcements stay public with exact qualification reasons",
         "items": watchlist_items,
     }
     WATCHLIST_PATH.write_text(json.dumps(watchlist_payload, indent=2), encoding="utf-8")

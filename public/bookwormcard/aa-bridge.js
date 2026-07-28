@@ -35,6 +35,13 @@
   var panel = null;
   var onPickCallback = null;
   var hiddenElements = [];
+  var returnFocus = null;
+
+  function focusWithoutScroll(element){
+    if(!element || !element.focus) return;
+    try { element.focus({preventScroll:true}); }
+    catch(error){ element.focus(); }
+  }
 
   // ============================================================
   // PUBLIC API
@@ -42,6 +49,9 @@
   function open(opts){
     opts = opts || {};
     onPickCallback = opts.onPick || null;
+    if(!isOpen()){
+      returnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    }
     if(!panel){
       build();
     }
@@ -54,6 +64,9 @@
     document.removeEventListener('keydown', handleKeyDown);
     hidePanel();
     onPickCallback = null;
+    var target = returnFocus;
+    returnFocus = null;
+    if(target && target.isConnected) focusWithoutScroll(target);
   }
   function handleKeyDown(e){
     if(e.key === 'Escape' && isOpen()){
@@ -83,6 +96,9 @@
     panel = document.createElement('div');
     panel.id = 'aa-bridge-panel';
     panel.className = 'aa-bridge-panel';
+    panel.setAttribute('role', 'region');
+    panel.setAttribute('aria-label', 'Archetype browser');
+    panel.setAttribute('aria-hidden', 'true');
     panel.innerHTML = '\n' +
       '  <div class="aa-bridge-header">\n' +
       '    <div class="aa-bridge-title">archetype browser</div>\n' +
@@ -110,6 +126,7 @@
   // ============================================================
   function showPanel(){
     panel.classList.add('aa-bridge-visible');
+    panel.setAttribute('aria-hidden', 'false');
     // Hide the wormcard preview so they don't compete for space
     hiddenElements = [];
     var cardPre = document.getElementById('card-preview');
@@ -122,7 +139,10 @@
     });
   }
   function hidePanel(){
-    if(panel) panel.classList.remove('aa-bridge-visible');
+    if(panel){
+      panel.classList.remove('aa-bridge-visible');
+      panel.setAttribute('aria-hidden', 'true');
+    }
     hiddenElements.forEach(function(h){ h.el.style.display = h.prev || ''; });
     hiddenElements = [];
   }
@@ -146,6 +166,7 @@
       grid.appendChild(btn);
     });
     body.appendChild(grid);
+    if(isOpen()) focusWithoutScroll(grid.querySelector('.aa-tag-btn'));
   }
 
   function renderTagDetail(tagId){
@@ -202,6 +223,7 @@
       pickArchetype(tag);
     });
     body.appendChild(pickAbstract);
+    focusWithoutScroll(back);
   }
 
   function pickFigure(tag, fig, tax){
@@ -268,7 +290,7 @@
     '.aa-bridge-footer a:hover{color:var(--fg);text-decoration:underline}',
     /* tag grid */
     '.aa-tag-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:0.4rem}',
-    '.aa-tag-btn{background:rgba(0,0,0,0.4);border:1px solid var(--fg-darker);color:var(--fg-dim);font-family:inherit;font-size:0.95rem;padding:0.4rem 0.5rem;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:0.1rem;text-align:left;line-height:1.2;transition:all 0.15s}',
+    '.aa-tag-btn{background:rgba(0,0,0,0.4);border:1px solid var(--fg-darker);color:var(--fg-dim);font-family:inherit;font-size:0.95rem;padding:0.4rem 0.5rem;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:0.1rem;text-align:left;line-height:1.2;transition:color 0.15s,background-color 0.15s,border-color 0.15s,opacity 0.15s,transform 0.15s}',
     '.aa-tag-btn:hover{border-color:var(--fg);color:var(--fg);background:rgba(255,176,0,0.05)}',
     '.aa-tag-name{font-size:1rem;letter-spacing:0.3px}',
     '.aa-tag-count{font-size:0.7rem;color:var(--fg-darker);letter-spacing:1px}',

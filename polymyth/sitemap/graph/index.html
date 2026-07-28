@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sitemap (graph). Seminar Schools.</title>
@@ -20,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" defer></script>
+<script src="/js/vendor/d3-7.9.0.min.js" defer></script>
 <style>
 :root {
   --display: 'Fraunces', Georgia, serif;
@@ -53,22 +54,25 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
   height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
 a { color: inherit; text-decoration: none; }
 a.skip-link { position: absolute; top: -40px; left: 0; background: var(--accent); color: var(--bg); padding: 0.5rem 1rem; z-index: 200; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; }
 a.skip-link:focus { top: 0; }
 
-.topbar { display: flex; justify-content: space-between; padding: 1rem 2rem; border-bottom: 1px solid var(--rule); font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; background: var(--bg); }
+.topbar { display: flex; flex: none; justify-content: space-between; padding: 1rem 2rem; border-bottom: 1px solid var(--rule); font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; background: var(--bg); }
 .topbar .brand em { font-style: italic; color: var(--accent); }
 .topbar .right { color: var(--fg-soft); }
 
-.view-toggle { position: sticky; top: 0; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--rule); padding: 0.7rem 2rem; display: flex; gap: 1rem; align-items: center; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; }
+.view-toggle { position: relative; z-index: 50; flex: none; background: var(--bg); border-bottom: 1px solid var(--rule); padding: 0.5rem 2rem; display: flex; gap: 1rem; align-items: center; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; }
 .view-toggle .label { color: var(--fg-fade); }
-.view-toggle a { padding: 0.3rem 0.8rem; border: 1px solid var(--rule); border-radius: 999px; color: var(--fg-soft); transition: all 0.15s; }
+.view-toggle a { min-height: 44px; padding: 0.55rem 0.8rem; border: 1px solid var(--rule); border-radius: 999px; color: var(--fg-soft); transition: border-color 0.15s, color 0.15s, background-color 0.15s; display: inline-flex; align-items: center; }
 .view-toggle a:hover { border-color: var(--accent); color: var(--accent); }
 .view-toggle a.current { border-color: var(--accent); color: var(--accent); background: rgba(184, 86, 56, 0.08); }
 
-.graph-frame { position: relative; width: 100%; height: calc(100vh - 100px); overflow: hidden; }
+.graph-frame { position: relative; width: 100%; flex: 1 1 auto; min-height: 0; overflow: hidden; }
 #graph-svg { width: 100%; height: 100%; cursor: grab; background: var(--bg); }
 #graph-svg:active { cursor: grabbing; }
 
@@ -88,24 +92,24 @@ a.skip-link:focus { top: 0; }
 .node-label.highlighted { fill: var(--fg); font-weight: 500; }
 
 /* Legend */
-.legend { position: absolute; top: 1rem; left: 1rem; background: rgba(245, 235, 228, 0.94); border: 1px solid var(--rule); border-radius: 8px; padding: 0.8rem 1rem; font-family: var(--mono); font-size:0.72rem; letter-spacing: 0.08em; text-transform: uppercase; max-width: 200px; backdrop-filter: blur(4px); }
+.legend { position: absolute; z-index: 10; top: 1rem; left: 1rem; background: rgba(245, 235, 228, 0.94); border: 1px solid var(--rule); border-radius: 8px; padding: 0.8rem 1rem; font-family: var(--mono); font-size:0.72rem; letter-spacing: 0.08em; text-transform: uppercase; max-width: 200px; backdrop-filter: blur(4px); }
 .legend h2 { font-size:0.72rem; letter-spacing: 0.16em; margin-bottom: 0.5rem; color: var(--fg-fade); }
 .legend ul { list-style: none; }
 .legend li { display: flex; align-items: center; gap: 0.5rem; padding: 0.18rem 0; }
 .legend .swatch { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
 /* Search + controls */
-.controls { position: absolute; top: 1rem; right: 1rem; background: rgba(245, 235, 228, 0.94); border: 1px solid var(--rule); border-radius: 8px; padding: 0.6rem 0.8rem; font-family: var(--mono); font-size: 0.7rem; backdrop-filter: blur(4px); display: flex; flex-direction: column; gap: 0.4rem; min-width: 200px; }
-.controls input { font-family: var(--mono); font-size: 0.72rem; padding: 0.4rem 0.6rem; border: 1px solid var(--rule); border-radius: 999px; background: var(--bg); color: var(--fg); outline: none; width: 100%; }
+.controls { position: absolute; z-index: 20; top: 1rem; right: 1rem; background: rgba(245, 235, 228, 0.94); border: 1px solid var(--rule); border-radius: 8px; padding: 0.6rem 0.8rem; font-family: var(--mono); font-size: 0.7rem; backdrop-filter: blur(4px); display: flex; flex-direction: column; gap: 0.4rem; min-width: 200px; }
+.controls input { min-height: 44px; font-family: var(--mono); font-size: 0.72rem; padding: 0.55rem 0.65rem; border: 1px solid var(--rule); border-radius: 999px; background: var(--bg); color: var(--fg); outline: none; width: 100%; }
 .controls input:focus { border-color: var(--accent); }
-.controls button { font-family: var(--mono); font-size:0.72rem; letter-spacing: 0.16em; text-transform: uppercase; padding: 0.4rem 0.7rem; border: 1px solid var(--rule); border-radius: 999px; background: transparent; color: var(--fg-soft); cursor: pointer; transition: all 0.15s; }
+.controls button { min-height: 44px; font-family: var(--mono); font-size:0.72rem; letter-spacing: 0.16em; text-transform: uppercase; padding: 0.55rem 0.7rem; border: 1px solid var(--rule); border-radius: 999px; background: transparent; color: var(--fg-soft); cursor: pointer; transition: border-color 0.15s, color 0.15s; }
 .controls button:hover { border-color: var(--accent); color: var(--accent); }
 .controls .stats { color: var(--fg-fade); font-size:0.72rem; letter-spacing: 0.1em; text-transform: uppercase; padding-top: 0.2rem; }
 
 /* Detail panel */
-.detail-panel { position: absolute; bottom: 1rem; right: 1rem; left: 1rem; max-width: 480px; margin-left: auto; background: var(--bg); border: 1px solid var(--rule); border-radius: 10px; padding: 1.2rem 1.4rem 1.4rem; box-shadow: 0 6px 20px rgba(42, 26, 20, 0.12); transform: translateY(120%); opacity: 0; transition: transform 0.25s ease, opacity 0.25s ease; pointer-events: none; }
+.detail-panel { position: absolute; z-index: 60; bottom: 1rem; right: 1rem; left: 1rem; max-width: 480px; margin-left: auto; background: var(--bg); border: 1px solid var(--rule); border-radius: 10px; padding: 1.2rem 1.4rem 1.4rem; box-shadow: 0 6px 20px rgba(42, 26, 20, 0.12); transform: translateY(120%); opacity: 0; transition: transform 0.25s ease, opacity 0.25s ease; pointer-events: none; }
 .detail-panel.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-.detail-panel .close { position: absolute; top: 0.7rem; right: 1rem; background: transparent; border: none; cursor: pointer; font-family: var(--mono); font-size: 0.9rem; color: var(--fg-fade); }
+.detail-panel .close { position: absolute; top: 0.35rem; right: 0.5rem; min-width: 44px; min-height: 44px; background: transparent; border: none; cursor: pointer; font-family: var(--mono); font-size: 0.9rem; color: var(--fg-fade); }
 .detail-panel .close:hover { color: var(--accent); }
 .detail-panel h2 { font-family: var(--display); font-size: 1.3rem; font-weight: 500; color: var(--fg); margin-bottom: 0.3rem; padding-right: 1.5rem; line-height: 1.2; }
 .detail-panel .panel-path { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 0.7rem; }
@@ -113,7 +117,7 @@ a.skip-link:focus { top: 0; }
 .detail-panel .panel-stats { font-family: var(--mono); font-size:0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-fade); margin-bottom: 0.9rem; display: flex; gap: 1.4rem; flex-wrap: wrap; }
 .detail-panel .panel-stats strong { color: var(--fg); font-weight: 500; }
 .detail-panel .actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-.detail-panel .actions a { display: inline-block; font-family: var(--mono); font-size:0.72rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.5rem 0.9rem; border: 1px solid var(--accent); color: var(--accent); border-radius: 999px; transition: all 0.15s; }
+.detail-panel .actions a { display: inline-flex; align-items: center; min-height: 44px; font-family: var(--mono); font-size:0.72rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.5rem 0.9rem; border: 1px solid var(--accent); color: var(--accent); border-radius: 999px; transition: border-color 0.15s, color 0.15s, background-color 0.15s; }
 .detail-panel .actions a:hover { background: var(--accent); color: var(--bg); }
 .detail-panel .actions a.secondary { border-color: var(--rule); color: var(--fg-soft); }
 .detail-panel .actions a.secondary:hover { border-color: var(--fg-soft); background: transparent; color: var(--fg); }
@@ -123,6 +127,13 @@ a.skip-link:focus { top: 0; }
 .connections a { display: inline-block; padding: 0.1rem 0.4rem; margin: 0.1rem 0.2rem 0.1rem 0; border: 1px solid var(--rule-soft); border-radius: 4px; color: var(--fg-soft); }
 .connections a:hover { color: var(--accent); border-color: var(--accent); }
 
+:where(a, button, input, .node-group):focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.node-group:focus-visible .node-circle { stroke: var(--fg); stroke-width: 4; }
+.graph-fallback { position: absolute; z-index: 70; inset: 50% auto auto 50%; width: min(34rem, calc(100% - 2rem)); transform: translate(-50%, -50%); padding: 1rem 1.2rem; border: 1px solid var(--accent); border-radius: 10px; background: var(--bg); color: var(--fg); text-align: center; }
+.graph-fallback a { color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; }
+.graph-footer { flex: none; background: var(--bg); border-top: 1px solid var(--rule); padding: 0.5rem 1rem; font-family: var(--mono); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--fg-fade); display:flex; justify-content:space-between; align-items:center; }
+.graph-footer a { color: var(--accent); border-bottom: 1px solid var(--accent); }
+
 /* Mobile */
 @media (max-width: 720px) {
   .topbar { padding: 0.7rem 1rem; }
@@ -130,31 +141,29 @@ a.skip-link:focus { top: 0; }
   .legend { top: auto; bottom: 1rem; left: 1rem; right: 1rem; max-width: none; }
   .controls { top: 0.6rem; left: 0.6rem; right: 0.6rem; max-width: none; }
   .detail-panel { left: 0.6rem; right: 0.6rem; }
-  .graph-frame { height: calc(100vh - 90px); }
+  .view-toggle { overflow-x: auto; }
+  .view-toggle .label:last-child { margin-left: 0 !important; }
 }
-.actions button,.connections button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;cursor:pointer}.connections button{display:block;width:100%;text-align:left;padding:.35rem .45rem;margin:.15rem 0;border-color:transparent}.connections button:hover{border-color:currentColor}
-.actions button,.connections button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;cursor:pointer}.connections button{display:block;width:100%;text-align:left;padding:.35rem .45rem;margin:.15rem 0;border-color:transparent}.connections button:hover{border-color:currentColor}
-.actions button,.connections button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;cursor:pointer}.connections button{display:block;width:100%;text-align:left;padding:.35rem .45rem;margin:.15rem 0;border-color:transparent}.connections button:hover{border-color:currentColor}
-.actions button,.connections button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;cursor:pointer}.connections button{display:block;width:100%;text-align:left;padding:.35rem .45rem;margin:.15rem 0;border-color:transparent}.connections button:hover{border-color:currentColor}
-.actions button,.connections button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;cursor:pointer}.connections button{display:block;width:100%;text-align:left;padding:.35rem .45rem;margin:.15rem 0;border-color:transparent}.connections button:hover{border-color:currentColor}
-.actions button,.connections button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;cursor:pointer}.connections button{display:block;width:100%;text-align:left;padding:.35rem .45rem;margin:.15rem 0;border-color:transparent}.connections button:hover{border-color:currentColor}
-.actions button,.connections button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;cursor:pointer}.connections button{display:block;width:100%;text-align:left;padding:.35rem .45rem;margin:.15rem 0;border-color:transparent}.connections button:hover{border-color:currentColor}
-.actions button,.connections button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;cursor:pointer}.connections button{display:block;width:100%;text-align:left;padding:.35rem .45rem;margin:.15rem 0;border-color:transparent}.connections button:hover{border-color:currentColor}
-.actions button,.connections button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;cursor:pointer}.connections button{display:block;width:100%;text-align:left;padding:.35rem .45rem;margin:.15rem 0;border-color:transparent}.connections button:hover{border-color:currentColor}
-.actions button,.connections button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;cursor:pointer}.connections button{display:block;width:100%;text-align:left;padding:.35rem .45rem;margin:.15rem 0;border-color:transparent}.connections button:hover{border-color:currentColor}
-.actions button,.connections button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;cursor:pointer}.connections button{display:block;width:100%;text-align:left;padding:.35rem .45rem;margin:.15rem 0;border-color:transparent}.connections button:hover{border-color:currentColor}
-.actions button,.connections button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;cursor:pointer}.connections button{display:block;width:100%;text-align:left;padding:.35rem .45rem;margin:.15rem 0;border-color:transparent}.connections button:hover{border-color:currentColor}
-.actions button,.connections button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;cursor:pointer}.connections button{display:block;width:100%;text-align:left;padding:.35rem .45rem;margin:.15rem 0;border-color:transparent}.connections button:hover{border-color:currentColor}
-.actions button,.connections button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;cursor:pointer}.connections button{display:block;width:100%;text-align:left;padding:.35rem .45rem;margin:.15rem 0;border-color:transparent}.connections button:hover{border-color:currentColor}
+.actions button,.connections button{min-height:44px;font:inherit;color:inherit;background:transparent;border:1px solid currentColor;cursor:pointer}.connections button{display:block;width:100%;text-align:left;padding:.55rem .45rem;margin:.15rem 0;border-color:transparent}.connections button:hover{border-color:currentColor}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
+@media (forced-colors: active) {
+  .legend, .controls, .detail-panel, .graph-fallback { background: Canvas; border-color: CanvasText; }
+  .node-circle { forced-color-adjust: auto; fill: Canvas; stroke: CanvasText; }
+  .link { stroke: CanvasText; }
+}
 </style>
 <link rel="stylesheet" href="/css/mobile-overlay.css?v=cl91">
 <script src="/js/site.js?v=cl91" defer></script>
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
 <link rel="stylesheet" href="/css/alive.css?v=cl91">
-<link rel="stylesheet" href="/css/theme.css?v=cl91">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260710-reviews-zoom-font-a" data-site-wide-type-zoom="20260710-reviews-zoom-font-a">
+<link rel="stylesheet" href="/css/theme.css?v=20260725-audit45">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.075">
+<body data-geometry="indra-web" data-indra-intensity="0.095">
 
 <a href="#main" class="skip-link">Skip to content</a>
 
@@ -173,7 +182,11 @@ a.skip-link:focus { top: 0; }
 
 <h1 class="sr-only">Polymyth Graph</h1>
 <main id="main" class="graph-frame">
-  <svg id="graph-svg" role="img" aria-label="Interactive force-directed graph of site pages and their cross-links"></svg>
+  <p id="graph-help" class="sr-only">Use the arrow keys to move between page nodes. Press Enter or Space to inspect a node.</p>
+  <svg id="graph-svg" role="group" aria-label="Interactive force-directed graph of site pages and their cross-links" aria-describedby="graph-help"></svg>
+  <div id="graph-fallback" class="graph-fallback" role="alert" hidden>
+    The graph could not load. The complete <a href="/polymyth/sitemap/">tree sitemap</a> remains available.
+  </div>
 
   <aside class="legend" aria-label="Node category legend">
     <h2>Categories</h2>
@@ -194,7 +207,7 @@ a.skip-link:focus { top: 0; }
     <div class="stats" id="stats">Loading&hellip;</div>
   </div>
 
-  <section class="detail-panel" id="detail" aria-live="polite">
+  <section class="detail-panel" id="detail" aria-live="polite" aria-hidden="true" inert>
     <button class="close" id="detail-close" aria-label="Close detail panel">&times;</button>
     <h2 id="d-title">Page</h2>
     <div class="panel-path" id="d-path">/path/</div>
@@ -216,12 +229,41 @@ a.skip-link:focus { top: 0; }
 
 <script>
 (function() {
-  function init() {
-    if (typeof d3 === 'undefined') { setTimeout(init, 50); return; }
+  function showFallback(message) {
+    const fallback = document.getElementById('graph-fallback');
+    const stats = document.getElementById('stats');
+    if (fallback) {
+      fallback.firstChild.textContent = `${message} `;
+      fallback.hidden = false;
+    }
+    if (stats) stats.textContent = 'Graph unavailable';
+  }
 
-    const raw = JSON.parse(document.getElementById('graph-data').textContent);
+  function init() {
+    if (window.__seminarSchoolsGraphMounted) return;
+    window.__seminarSchoolsGraphMounted = true;
+    if (typeof window.d3 === 'undefined') {
+      showFallback('The interactive graph library did not load.');
+      return;
+    }
+
+    const d3 = window.d3;
+    let raw;
+    try {
+      raw = JSON.parse(document.getElementById('graph-data').textContent);
+      if (!Array.isArray(raw.nodes) || !Array.isArray(raw.edges) || raw.nodes.length === 0) {
+        throw new Error('Graph data is incomplete');
+      }
+    } catch (error) {
+      showFallback('The graph data could not be read.');
+      return;
+    }
     const nodes = raw.nodes.map(n => Object.assign({}, n));
     const links = raw.edges.map(e => ({ source: e.source, target: e.target }));
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const steadyLayout = () =>
+      reducedMotionQuery.matches ||
+      document.documentElement.dataset.motion === 'calm';
 
     const catColor = {
       home: 'var(--cat-home)',
@@ -278,10 +320,35 @@ a.skip-link:focus { top: 0; }
       .data(nodes)
       .join('g')
       .attr('class', 'node-group')
+      .attr('role', 'button')
+      .attr('tabindex', (d, index) => index === 0 ? 0 : -1)
+      .attr('aria-pressed', 'false')
+      .attr('aria-label', d => `${d.title || d.id}. ${d.in || 0} inbound links, ${d.out || 0} outbound links.`)
       .call(drag(sim))
+      .on('focus', function() {
+        nodeG.attr('tabindex', -1);
+        d3.select(this).attr('tabindex', 0);
+      })
       .on('click', (event, d) => {
         event.stopPropagation();
         selectNode(d);
+      })
+      .on('keydown', function(event, d) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          selectNode(d);
+          return;
+        }
+        const current = nodes.indexOf(d);
+        let next = current;
+        if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (current + 1) % nodes.length;
+        else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = (current - 1 + nodes.length) % nodes.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = nodes.length - 1;
+        else return;
+        event.preventDefault();
+        const target = nodeG.nodes()[next];
+        if (target) target.focus();
       });
 
     nodeG.append('circle')
@@ -300,23 +367,35 @@ a.skip-link:focus { top: 0; }
       return parts[parts.length - 1].replace(/\.html$/, '').replace(/_/g, ' ');
     }
 
-    sim.on('tick', () => {
+    function renderPositions() {
       linkSel
         .attr('x1', d => d.source.x)
         .attr('y1', d => d.source.y)
         .attr('x2', d => d.target.x)
         .attr('y2', d => d.target.y);
       nodeG.attr('transform', d => `translate(${d.x},${d.y})`);
-    });
+    }
+    sim.on('tick', renderPositions);
+    if (steadyLayout()) {
+      sim.stop();
+      for (let index = 0; index < 300; index += 1) sim.tick();
+      renderPositions();
+    }
 
     function drag(simulation) {
       function dragstarted(event, d) {
-        if (!event.active) simulation.alphaTarget(0.3).restart();
+        if (!event.active && !steadyLayout()) simulation.alphaTarget(0.3).restart();
         d.fx = d.x; d.fy = d.y;
       }
-      function dragged(event, d) { d.fx = event.x; d.fy = event.y; }
+      function dragged(event, d) {
+        d.fx = event.x; d.fy = event.y;
+        if (steadyLayout()) {
+          d.x = event.x; d.y = event.y;
+          renderPositions();
+        }
+      }
       function dragended(event, d) {
-        if (!event.active) simulation.alphaTarget(0);
+        if (!event.active && !steadyLayout()) simulation.alphaTarget(0);
         d.fx = null; d.fy = null;
       }
       return d3.drag().on('start', dragstarted).on('drag', dragged).on('end', dragended);
@@ -324,9 +403,12 @@ a.skip-link:focus { top: 0; }
 
     // Selection / focus logic
     let selected = null;
+    let selectedElement = null;
 
     function selectNode(d) {
       selected = d;
+      selectedElement = nodeG.filter(n => n.id === d.id).node();
+      nodeG.attr('aria-pressed', n => n.id === d.id ? 'true' : 'false');
       // Compute outbound and inbound for this node
       const out = links.filter(l => (l.source.id || l.source) === d.id);
       const inc = links.filter(l => (l.target.id || l.target) === d.id);
@@ -352,12 +434,19 @@ a.skip-link:focus { top: 0; }
       openDetail(d, [...outIds], [...incIds]);
     }
 
-    function clearSelection() {
+    function clearSelection(restoreFocus) {
+      const focusTarget = selectedElement;
       selected = null;
+      selectedElement = null;
+      nodeG.attr('aria-pressed', 'false');
       linkSel.classed('outbound', false).classed('inbound', false).classed('dimmed', false);
       nodeG.select('.node-circle').classed('dimmed', false).classed('highlighted', false);
       nodeG.select('.node-label').classed('dimmed', false).classed('highlighted', false);
-      document.getElementById('detail').classList.remove('open');
+      const detail = document.getElementById('detail');
+      detail.classList.remove('open');
+      detail.setAttribute('aria-hidden', 'true');
+      detail.inert = true;
+      if (restoreFocus && focusTarget) focusTarget.focus();
     }
 
     // Detail panel
@@ -375,31 +464,44 @@ a.skip-link:focus { top: 0; }
       const focus = document.getElementById('d-focus');
       focus.onclick = () => {
         const transform = d3.zoomIdentity.translate(width / 2 - d.x * 2, height / 2 - d.y * 2).scale(2);
-        svg.transition().duration(750).call(zoom.transform, transform);
+        const reducedMotion = steadyLayout();
+        svg.transition().duration(reducedMotion ? 0 : 750).call(zoom.transform, transform);
       };
 
       const conn = document.getElementById('d-connections');
-      let html = '';
-      if (outIds.length) {
-        html += '<strong>Links out to</strong>';
-        outIds.forEach(id => { html += `<button type="button" data-id="${id}">${id}</button>`; });
+      conn.replaceChildren();
+      function addConnections(label, ids) {
+        if (!ids.length) return;
+        const heading = document.createElement('strong');
+        heading.textContent = label;
+        conn.appendChild(heading);
+        ids.forEach(id => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.textContent = id;
+          button.addEventListener('click', () => {
+            const target = nodes.find(n => n.id === id);
+            if (target) selectNode(target);
+          });
+          conn.appendChild(button);
+        });
       }
-      if (incIds.length) {
-        html += '<strong>Linked from</strong>';
-        incIds.forEach(id => { html += `<button type="button" data-id="${id}">${id}</button>`; });
-      }
-      conn.innerHTML = html;
-      conn.querySelectorAll('button[data-id]').forEach(a => {
-        a.onclick = () => {
-          const target = nodes.find(n => n.id === a.dataset.id);
-          if (target) selectNode(target);
-        };
-      });
+      addConnections('Links out to', outIds);
+      addConnections('Linked from', incIds);
 
-      document.getElementById('detail').classList.add('open');
+      const detail = document.getElementById('detail');
+      detail.inert = false;
+      detail.setAttribute('aria-hidden', 'false');
+      detail.classList.add('open');
     }
 
-    document.getElementById('detail-close').onclick = clearSelection;
+    document.getElementById('detail-close').onclick = () => clearSelection(true);
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && selected) {
+        clearSelection(true);
+        event.preventDefault();
+      }
+    });
 
     // Search
     const searchInput = document.getElementById('search');
@@ -429,23 +531,82 @@ a.skip-link:focus { top: 0; }
     document.getElementById('btn-reset').onclick = () => {
       clearSelection();
       searchInput.value = '';
-      svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity);
+      svg.transition().duration(steadyLayout() ? 0 : 500).call(zoom.transform, d3.zoomIdentity);
     };
 
     // Stats
     document.getElementById('stats').textContent = `${nodes.length} pages · ${links.length} edges`;
 
-    // Resize handler
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        width = container.clientWidth;
-        height = container.clientHeight;
-        svg.attr('viewBox', `0 0 ${width} ${height}`);
-        sim.force('center', d3.forceCenter(width / 2, height / 2));
-        sim.alpha(0.3).restart();
-      }, 200);
+    // Container-aware, frame-coalesced resize lifecycle. A ResizeObserver
+    // catches flex/layout changes that do not emit a window resize.
+    let resizeFrame = 0;
+    function settleGraph(ticks) {
+      sim.alpha(0.3).stop();
+      for (let index = 0; index < ticks; index += 1) sim.tick();
+      renderPositions();
+    }
+    function resizeGraph() {
+      resizeFrame = 0;
+      const nextWidth = container.clientWidth;
+      const nextHeight = container.clientHeight;
+      if (nextWidth <= 0 || nextHeight <= 0) return;
+      if (nextWidth === width && nextHeight === height) return;
+      width = nextWidth;
+      height = nextHeight;
+      svg.attr('viewBox', `0 0 ${width} ${height}`);
+      sim.force('center', d3.forceCenter(width / 2, height / 2));
+      if (steadyLayout()) settleGraph(120);
+      else sim.alpha(0.3).restart();
+    }
+    function scheduleResize() {
+      if (resizeFrame) return;
+      resizeFrame = requestAnimationFrame(resizeGraph);
+    }
+    let resizeObserver = null;
+    if ('ResizeObserver' in window) {
+      resizeObserver = new ResizeObserver(scheduleResize);
+      resizeObserver.observe(container);
+    } else {
+      window.addEventListener('resize', scheduleResize, { passive: true });
+    }
+
+    let graphWasSteady = steadyLayout();
+    function syncGraphMotion() {
+      if (document.hidden) {
+        sim.stop();
+        return;
+      }
+      const graphIsSteady = steadyLayout();
+      if (graphIsSteady) {
+        if (!graphWasSteady) settleGraph(120);
+        else sim.stop();
+      } else {
+        sim.alpha(0.2).restart();
+      }
+      graphWasSteady = graphIsSteady;
+    }
+    document.addEventListener('visibilitychange', syncGraphMotion);
+    if (reducedMotionQuery.addEventListener) {
+      reducedMotionQuery.addEventListener('change', syncGraphMotion);
+    } else if (reducedMotionQuery.addListener) {
+      reducedMotionQuery.addListener(syncGraphMotion);
+    }
+    let motionObserver = null;
+    if ('MutationObserver' in window) {
+      motionObserver = new MutationObserver(syncGraphMotion);
+      motionObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-motion']
+      });
+    }
+    window.addEventListener('pageshow', () => {
+      scheduleResize();
+      if (!steadyLayout()) sim.alpha(Math.max(sim.alpha(), 0.1)).restart();
+    });
+    window.addEventListener('pagehide', () => {
+      if (resizeFrame) cancelAnimationFrame(resizeFrame);
+      resizeFrame = 0;
+      sim.stop();
     });
   }
 
@@ -457,15 +618,15 @@ a.skip-link:focus { top: 0; }
 })();
 </script>
 
-<footer style="position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:1px solid var(--rule);padding:0.5rem 1rem;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--fg-fade);display:flex;justify-content:space-between;align-items:center;">
+<footer class="graph-footer">
   <span>&copy; 2026 Seminar Schools &middot; Toronto</span>
-  <span><a href="/" style="color:var(--accent);border-bottom:1px solid var(--accent)">&larr; Home</a></span>
+  <span><a href="/">&larr; Home</a></span>
 </footer>
 
 <script src="/js/mandala.js?v=cl91" defer></script>
 <script src="/js/indra.js?v=cl91" defer></script>
-<script src="/js/footer.js?v=20260719-audit11-decisions" defer></script>
+<script src="/js/footer.js?v=20260725-audit45-footer" defer></script>
 <script src="/js/theme.js?v=cl91" defer></script>
-<script defer src="/js/site-keyboard-enhancements.js"></script>
+<script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>
 </html>

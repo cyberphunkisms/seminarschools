@@ -1,0 +1,850 @@
+{
+  "release": "2026-07-28-greenpeace-cv-editable",
+  "contact": {
+    "name": "Saul Karim M Hosaini Nassau, MA",
+    "role": "Educator | Community Organizer",
+    "location": "Toronto, Ontario",
+    "phone": "416-771-0382",
+    "public_email": "saulnassau@protonmail.com",
+    "alternate_email": "salarnas@gmail.com",
+    "site_label": "seminarschools.com/saul",
+    "site_url": "https://seminarschools.com/saul/",
+    "reviews_label": "seminarschools.com/reviews",
+    "reviews_url": "https://seminarschools.com/reviews/"
+  },
+  "profile": "Educator & community organizer with 12+ years of international teaching experience across 15 curricula & programs, supporting 2,000+ students from early childhood through adult education. Experience includes OSSD, IB, AP, A Level, ESL, STEM, humanities & university preparation, with successful instructional inspections in Ontario & British Columbia.",
+  "focus_modules": [
+    {
+      "id": "general",
+      "label": "General / Any Role",
+      "short_label": "General",
+      "color": "#665A78",
+      "route": "/saul/cv/general/",
+      "summary": "Cross-sector experience spanning education, research, programs, community work, hospitality, event operations & performance.",
+      "default_view": true,
+      "skills": [
+        "Clear Written & Verbal Communication",
+        "Research & Synthesis",
+        "Teaching & Facilitation",
+        "Program & Event Coordination",
+        "Student, Family & Participant Support",
+        "Cross-Cultural Communication",
+        "Public Presentation & Audience Engagement",
+        "Digital Publishing",
+        "Independent Project Delivery"
+      ]
+    },
+    {
+      "id": "teaching",
+      "label": "Teaching & Education",
+      "short_label": "Teaching",
+      "color": "#347CA5",
+      "route": "/saul/cv/teaching/",
+      "summary": "Teaching across OSSD, IB, AP, A Level, ESL, IELTS, early childhood, secondary, adult & university-level settings.",
+      "skills": [
+        "Teaching & Facilitation",
+        "Curriculum Design",
+        "Assessment & Feedback",
+        "Multilingual Learner Support",
+        "Clear Written & Verbal Communication",
+        "Student, Family & Participant Support",
+        "Cross-Cultural Communication",
+        "Public Presentation & Audience Engagement"
+      ]
+    },
+    {
+      "id": "research",
+      "label": "Research & Evaluation",
+      "short_label": "Research",
+      "color": "#5268A3",
+      "route": "/saul/cv/research/",
+      "summary": "Academic & applied research across constitutional studies, conflict analysis, ritual studies, source synthesis & program evaluation.",
+      "skills": [
+        "Research & Synthesis",
+        "Clear Written & Verbal Communication",
+        "Assessment & Feedback",
+        "Curriculum Design",
+        "Digital Publishing",
+        "Independent Project Delivery"
+      ]
+    },
+    {
+      "id": "programs",
+      "label": "Program & Event Coordination",
+      "short_label": "Programs & Events",
+      "color": "#478568",
+      "route": "/saul/cv/programs/",
+      "summary": "Program delivery, event logistics, volunteer coordination, budgeting, participant communication & public programming.",
+      "skills": [
+        "Program & Event Coordination",
+        "Student, Family & Participant Support",
+        "Clear Written & Verbal Communication",
+        "Cross-Cultural Communication",
+        "Public Presentation & Audience Engagement",
+        "Independent Project Delivery"
+      ]
+    },
+    {
+      "id": "customer-education",
+      "label": "Customer Education & Support",
+      "short_label": "Customer Support",
+      "color": "#3F817E",
+      "route": "/saul/cv/customer-education/",
+      "summary": "Clear instruction, multilingual guidance, accessible participant support, feedback, communication & practical problem-solving.",
+      "skills": [
+        "Teaching & Facilitation",
+        "Student, Family & Participant Support",
+        "Clear Written & Verbal Communication",
+        "Multilingual Learner Support",
+        "Assessment & Feedback",
+        "Cross-Cultural Communication"
+      ]
+    },
+    {
+      "id": "community",
+      "label": "Community Engagement",
+      "short_label": "Community",
+      "color": "#567F5E",
+      "route": "/saul/cv/community/",
+      "summary": "Community programming, relationship-building, accessible support, intercultural teamwork & public participation.",
+      "skills": [
+        "Student, Family & Participant Support",
+        "Program & Event Coordination",
+        "Cross-Cultural Communication",
+        "Teaching & Facilitation",
+        "Clear Written & Verbal Communication",
+        "Independent Project Delivery"
+      ]
+    },
+    {
+      "id": "volunteer-events",
+      "label": "Volunteer & Event Operations",
+      "short_label": "Volunteer & Events",
+      "color": "#806A4C",
+      "route": "/saul/cv/volunteer-events/",
+      "summary": "Event setup, participant support, accessibility, food service, shared operations, public safety & volunteer coordination.",
+      "skills": [
+        "Program & Event Coordination",
+        "Student, Family & Participant Support",
+        "Cross-Cultural Communication",
+        "Public Presentation & Audience Engagement",
+        "Clear Written & Verbal Communication"
+      ]
+    },
+    {
+      "id": "hospitality",
+      "label": "Kitchen, Food Service & Hospitality",
+      "short_label": "Kitchen & Hospitality",
+      "color": "#946A1E",
+      "route": "/saul/kitchen/",
+      "summary": "Kitchen operations, meal planning, counter & table service, cash handling, staff training, shift leadership & event service.",
+      "skills": [
+        "Program & Event Coordination",
+        "Student, Family & Participant Support",
+        "Clear Written & Verbal Communication",
+        "Cross-Cultural Communication",
+        "Independent Project Delivery"
+      ]
+    },
+    {
+      "id": "arts-culture",
+      "label": "Arts & Culture",
+      "short_label": "Arts & Culture",
+      "color": "#98546D",
+      "route": "/saul/cv/arts-culture/",
+      "summary": "Drama, film, cultural programming, collaborative production, public engagement & creative learning.",
+      "skills": [
+        "Public Presentation & Audience Engagement",
+        "Teaching & Facilitation",
+        "Program & Event Coordination",
+        "Research & Synthesis",
+        "Clear Written & Verbal Communication",
+        "Cross-Cultural Communication"
+      ]
+    },
+    {
+      "id": "performance",
+      "label": "Performance & Live Events",
+      "short_label": "Performance",
+      "color": "#6D5AA0",
+      "route": "/saul/performance/",
+      "summary": "Stage, screen, interviewing, live presentation, improvisation, audience awareness & event operations.",
+      "skills": [
+        "Public Presentation & Audience Engagement",
+        "Clear Written & Verbal Communication",
+        "Teaching & Facilitation",
+        "Program & Event Coordination",
+        "Cross-Cultural Communication"
+      ]
+    },
+    {
+      "id": "education",
+      "label": "Education & Academic Background",
+      "short_label": "Education",
+      "color": "#9A607B",
+      "route": "/saul/cv/education/",
+      "summary": "Interdisciplinary education in philosophy, political science, economics, critical thought & screen arts.",
+      "skills": [
+        "Research & Synthesis",
+        "Clear Written & Verbal Communication",
+        "Teaching & Facilitation",
+        "Curriculum Design",
+        "Assessment & Feedback",
+        "Public Presentation & Audience Engagement"
+      ]
+    },
+    {
+      "id": "portfolio",
+      "label": "Portfolio & Digital Projects",
+      "short_label": "Portfolio",
+      "color": "#A45C51",
+      "route": "/saul/portfolio/",
+      "summary": "Published teaching resources, public-information research, digital archives & clearly labelled projects in development.",
+      "skills": [
+        "Digital Publishing",
+        "Research & Synthesis",
+        "Curriculum Design",
+        "Clear Written & Verbal Communication",
+        "Independent Project Delivery"
+      ],
+      "archive_only": true
+    }
+  ],
+  "core_skills": [
+    "Teaching & Facilitation",
+    "Curriculum Design",
+    "Assessment & Feedback",
+    "Research & Synthesis",
+    "Multilingual Learner Support",
+    "Clear Written & Verbal Communication",
+    "Program & Event Coordination",
+    "Cross-Cultural Communication",
+    "Student, Family & Participant Support",
+    "Public Presentation & Audience Engagement",
+    "Digital Publishing",
+    "Independent Project Delivery"
+  ],
+  "experience_sections": [
+    {
+      "id": "teaching-learning",
+      "title": "Teaching & Learning",
+      "records": [
+        {
+          "id": "T01",
+          "focus": [
+            "teaching",
+            "customer-education",
+            "programs"
+          ],
+          "role": "Occasional Instructor",
+          "description": "Early Childhood STEM",
+          "organization": "RoboThink Toronto (Markham)",
+          "dates": "Jan 2026–Present"
+        },
+        {
+          "id": "T02",
+          "focus": [
+            "teaching",
+            "customer-education",
+            "arts-culture",
+            "performance"
+          ],
+          "role": "Occasional Instructor",
+          "description": "Early Childhood English & Drama",
+          "organization": "Happy Learning Education Center (Toronto)",
+          "dates": "Jan 2026–Present"
+        },
+        {
+          "id": "T03",
+          "focus": [
+            "teaching",
+            "customer-education"
+          ],
+          "role": "Teacher",
+          "description": "OSSD English & Humanities",
+          "organization": "Willowdale High School (Toronto)",
+          "dates": "Jun 2025–May 2026"
+        },
+        {
+          "id": "T04",
+          "focus": [
+            "general",
+            "teaching",
+            "customer-education"
+          ],
+          "role": "Occasional Teacher",
+          "description": "OSSD, IB, AP, ESL & Social Studies",
+          "organization": "Intelligent International (GTA)",
+          "dates": "Feb 2023–Present"
+        },
+        {
+          "id": "T05",
+          "focus": [
+            "general",
+            "teaching",
+            "customer-education",
+            "education"
+          ],
+          "role": "Teacher",
+          "description": "IB & OSSD",
+          "organization": "NOIC Academy (Markham)",
+          "dates": "Sep 2023–May 2025"
+        },
+        {
+          "id": "T06",
+          "focus": [
+            "teaching",
+            "programs",
+            "volunteer-events",
+            "arts-culture"
+          ],
+          "role": "Instructor",
+          "description": "International English Curriculum & Activities",
+          "organization": "Tamwood Education Camps (Canada)",
+          "dates": "May 2023–Aug 2024"
+        },
+        {
+          "id": "T07",
+          "focus": [
+            "teaching",
+            "customer-education"
+          ],
+          "role": "Online Educator",
+          "description": "English",
+          "organization": "Smart Native (Hong Kong / online)",
+          "dates": "Jul 2020–Feb 2024"
+        },
+        {
+          "id": "T08",
+          "focus": [
+            "teaching",
+            "customer-education",
+            "community"
+          ],
+          "role": "ESL Instructor",
+          "description": "Adult ESL, International Learners",
+          "organization": "Access Education (Toronto)",
+          "dates": "Jan 2021–May 2022"
+        },
+        {
+          "id": "T09",
+          "focus": [
+            "teaching",
+            "customer-education"
+          ],
+          "role": "Teacher",
+          "description": "OSSD & AP, Two Appointments",
+          "organization": "Toronto Central Academy (Toronto)",
+          "dates": "Jan–Jul 2019 & Jan–Aug 2020"
+        },
+        {
+          "id": "T10",
+          "focus": [
+            "teaching",
+            "customer-education"
+          ],
+          "role": "Teacher",
+          "description": "A Level English, AP Economics, AP English & IELTS",
+          "organization": "Chongqing No. 1 Intl. Studies School (China)",
+          "dates": "Sep–Dec 2019"
+        },
+        {
+          "id": "T11",
+          "focus": [
+            "teaching",
+            "customer-education"
+          ],
+          "role": "Teacher",
+          "description": "English, Economics & Social Studies",
+          "organization": "Pattison High School (Vancouver)",
+          "dates": "Jan 2017–Jan 2019"
+        },
+        {
+          "id": "T12",
+          "focus": [
+            "teaching",
+            "customer-education"
+          ],
+          "role": "Adult Instructor",
+          "description": "Vancouver School Board Program",
+          "organization": "East Van Education Center (Vancouver)",
+          "dates": "2017–2018"
+        },
+        {
+          "id": "T13",
+          "focus": [
+            "teaching",
+            "customer-education"
+          ],
+          "role": "ESL Teacher",
+          "description": "American K–12 Immersion, Ages 2–12",
+          "organization": "Best Learning English (Shenzhen)",
+          "dates": "Jul–Dec 2016"
+        },
+        {
+          "id": "T14",
+          "focus": [
+            "teaching",
+            "customer-education",
+            "community",
+            "volunteer-events"
+          ],
+          "role": "Volunteer ESL Teacher",
+          "description": "Early Childhood",
+          "organization": "Sanxin Schools (Zhongshan)",
+          "dates": "Jan–Jun 2016"
+        },
+        {
+          "id": "T15",
+          "focus": [
+            "teaching",
+            "research",
+            "education",
+            "arts-culture"
+          ],
+          "role": "Teaching Assistant",
+          "description": "Philosophy & Critical Theory Seminars",
+          "organization": "European Graduate School (Switzerland)",
+          "dates": "Sep 2014–Jun 2015"
+        },
+        {
+          "id": "T16",
+          "focus": [
+            "teaching",
+            "customer-education",
+            "community",
+            "volunteer-events"
+          ],
+          "role": "English Language Volunteer",
+          "description": "Informal English Learner Support",
+          "organization": "Independent Learning Centre (Egypt)",
+          "dates": "Nov–Dec 2015"
+        }
+      ]
+    },
+    {
+      "id": "research-community-volunteer",
+      "title": "Research, Community & Volunteer Work",
+      "records": [
+        {
+          "id": "C01",
+          "focus": [
+            "general",
+            "community",
+            "programs",
+            "volunteer-events",
+            "arts-culture"
+          ],
+          "role": "Volunteer",
+          "description": "Event Operations & Participant Support",
+          "organization": "BUMI Festival (Toronto area)",
+          "dates": "2025–Present"
+        },
+        {
+          "id": "C02",
+          "focus": [
+            "general",
+            "community",
+            "volunteer-events",
+            "customer-education"
+          ],
+          "role": "Sighted Guide Volunteer",
+          "description": "Accessible Participant Support",
+          "organization": "CNIB Night Steps (North York)",
+          "dates": "May–Jun 2025"
+        },
+        {
+          "id": "R01",
+          "focus": [
+            "research",
+            "education",
+            "arts-culture"
+          ],
+          "role": "Master’s Thesis",
+          "description": "Ritual Studies",
+          "organization": "European Graduate School, Professor Catherine Malabou",
+          "dates": "2018–2019"
+        },
+        {
+          "id": "C03",
+          "focus": [
+            "community",
+            "programs",
+            "volunteer-events",
+            "hospitality",
+            "arts-culture"
+          ],
+          "role": "Volunteer",
+          "description": "Cooking, Construction & Film Support",
+          "organization": "Flydende By, Floating City (Copenhagen)",
+          "dates": "2015–2016"
+        },
+        {
+          "id": "C04",
+          "focus": [
+            "community",
+            "programs",
+            "volunteer-events",
+            "hospitality"
+          ],
+          "role": "Ship’s Chef & Crew",
+          "description": "Meal Planning & Shared Operations",
+          "organization": "S/V Hawila (Denmark / Baltic)",
+          "dates": "2015–2016"
+        },
+        {
+          "id": "C05",
+          "focus": [
+            "general",
+            "community",
+            "programs",
+            "research"
+          ],
+          "role": "Community Development Manager",
+          "description": "Budgeting, Volunteers & Public Programs",
+          "organization": "Campus Crops, McGill (Montreal)",
+          "dates": "Sep 2011–Aug 2015"
+        },
+        {
+          "id": "R02",
+          "focus": [
+            "research",
+            "education"
+          ],
+          "role": "Research Assistant",
+          "description": "Somalian Protracted Civil Conflict",
+          "organization": "McGill University, Professor Michael Brecher",
+          "dates": "2014"
+        },
+        {
+          "id": "R03",
+          "focus": [
+            "research",
+            "education"
+          ],
+          "role": "Research Assistant",
+          "description": "Research Group on Constitutional Studies",
+          "organization": "McGill University, Professor Jacob T. Levy",
+          "dates": "2013"
+        },
+        {
+          "id": "C06",
+          "focus": [
+            "community",
+            "programs",
+            "volunteer-events",
+            "research",
+            "education"
+          ],
+          "role": "Conference Organizer",
+          "description": "University & Secondary Model UN",
+          "organization": "McMUN & SSUNS, IRSAM, McGill (Montreal)",
+          "dates": "c. 2011–2013"
+        },
+        {
+          "id": "C07",
+          "focus": [
+            "community",
+            "volunteer-events",
+            "hospitality"
+          ],
+          "role": "Volunteer Farm Worker",
+          "description": "Organic Agriculture & Intercultural Teamwork",
+          "organization": "WWOOF (Multiple countries, incl. Azores)",
+          "dates": "2008–2016"
+        },
+        {
+          "id": "C10",
+          "focus": [
+            "general",
+            "community",
+            "programs",
+            "volunteer-events"
+          ],
+          "role": "Fundraiser & Volunteer Coordinator",
+          "description": "Fundraising & Volunteer Coordination",
+          "organization": "Greenpeace",
+          "dates": "2006–2010",
+          "archive": {
+            "section_weight": 1,
+            "categories": [
+              "community",
+              "volunteer"
+            ],
+            "title": "Fundraiser & Volunteer Coordinator, Greenpeace",
+            "note": "Fundraising & Volunteer Coordination",
+            "description": "Fundraising and volunteer coordination for Greenpeace.",
+            "source": "User-provided employment record and screenshot, 2026-07-28"
+          }
+        },
+        {
+          "id": "C08",
+          "focus": [
+            "community",
+            "volunteer-events",
+            "arts-culture",
+            "performance"
+          ],
+          "role": "On-Camera Interviewer",
+          "description": "Volunteer Youth Media",
+          "organization": "Street Kids International / Claude Watson (Toronto)",
+          "dates": "2006"
+        },
+        {
+          "id": "C09",
+          "focus": [
+            "community",
+            "volunteer-events",
+            "customer-education"
+          ],
+          "role": "Summer Volunteer",
+          "description": "Resident Care, Recreation & Administration",
+          "organization": "Carefree Lodge Long-Term Care Home (North York)",
+          "dates": "2005–2008"
+        }
+      ]
+    },
+    {
+      "id": "additional-work",
+      "title": "Additional Work Experience",
+      "records": [
+        {
+          "id": "W01",
+          "focus": [
+            "general",
+            "programs",
+            "hospitality"
+          ],
+          "role": "Assistant Manager",
+          "description": "Staff Training & Shift Leadership",
+          "organization": "Pizza Pizza (Toronto)",
+          "dates": "c. 2020–early 2023"
+        },
+        {
+          "id": "W02",
+          "focus": [
+            "general",
+            "programs",
+            "volunteer-events",
+            "hospitality"
+          ],
+          "role": "Event Security & Front-of-House",
+          "description": "De-escalation, Public Safety & Service",
+          "organization": "Toronto Venues & Contracts (Toronto)",
+          "dates": "c. 2018–early 2023"
+        },
+        {
+          "id": "W03",
+          "focus": [
+            "hospitality"
+          ],
+          "role": "Chef",
+          "description": "Planning & Kitchen Operations",
+          "organization": "Private Winery Estate (Florence)",
+          "dates": "c. 2017–2018"
+        },
+        {
+          "id": "W04",
+          "focus": [
+            "programs",
+            "volunteer-events",
+            "hospitality"
+          ],
+          "role": "Chef",
+          "description": "Event & Festival Catering",
+          "organization": "Private Events & Festival Catering",
+          "dates": "c. 2017–2018"
+        },
+        {
+          "id": "W05",
+          "focus": [
+            "programs",
+            "volunteer-events",
+            "hospitality",
+            "arts-culture"
+          ],
+          "role": "Front-of-House, Kitchen & Event Security",
+          "description": "Team Service",
+          "organization": "La Plante & Other Mile End Venues (Montreal)",
+          "dates": "c. 2009–2014"
+        },
+        {
+          "id": "A01",
+          "focus": [
+            "arts-culture",
+            "performance"
+          ],
+          "role": "On-Camera Performer",
+          "description": "Commercial Performance",
+          "organization": "GEICO “California” Commercial (San Francisco)",
+          "dates": "2012"
+        },
+        {
+          "id": "A02",
+          "focus": [
+            "arts-culture",
+            "performance",
+            "education"
+          ],
+          "role": "Stage Performer",
+          "description": "Jesus Christ Superstar, Sears Drama Festival & One Thousand & One Nights",
+          "organization": "Claude Watson (Toronto)",
+          "dates": "2005–2008"
+        },
+        {
+          "id": "W06",
+          "focus": [
+            "general",
+            "hospitality"
+          ],
+          "role": "Crew Member",
+          "description": "Counter, Kitchen & Cash",
+          "organization": "Pizza Pizza (Toronto / Montreal)",
+          "dates": "c. 2004–2009"
+        }
+      ]
+    }
+  ],
+  "education": [
+    "MA Philosophy, Art & Critical Thought, European Graduate School (2019)",
+    "BA Political Science, Economics & Philosophy, McGill University (2014)",
+    "Claude Watson Screen Arts, Script Writing & Editing, Earl Haig Secondary School (2009)"
+  ],
+  "credentials": [
+    "IB Theory of Knowledge 2023",
+    "TESOL, Indiana University 2016",
+    "AODA Accessibility Standards 2026",
+    "Berkley Invigilation Standards 2019",
+    "Food Handler 2006",
+    "Smart Serve (Historical)",
+    "Ontario Security Guard Licence (Historical)",
+    "Bronze Cross & First Aid"
+  ],
+  "professional_learning": [
+    "Nonviolent Communication",
+    "Cognitive Behavioral Therapy",
+    "Motivation Coaching",
+    "Mindfulness I–III & Master",
+    "Social Impact Strategy",
+    "Community Building Strategies"
+  ],
+  "methods_tools": [
+    "Google Forms",
+    "Excel Budgeting & Tracking",
+    "Online Classroom Tools & LMS",
+    "Microsoft & Adobe",
+    "Digital Publishing",
+    "Python, Data Science & ML Training"
+  ],
+  "courses": {
+    "ontario": [
+      [
+        "CHC2D",
+        "Canadian History Since World War I"
+      ],
+      [
+        "CHV2O",
+        "Civics & Citizenship"
+      ],
+      [
+        "GLC2O",
+        "Career Studies"
+      ],
+      [
+        "ENG2D",
+        "English, Grade 10"
+      ],
+      [
+        "ENG3U",
+        "English, Grade 11"
+      ],
+      [
+        "ENG4U",
+        "English, Grade 12"
+      ],
+      [
+        "OLC4O",
+        "Ontario Secondary School Literacy Course"
+      ],
+      [
+        "EMS3O",
+        "Media Studies"
+      ],
+      [
+        "CGG3O",
+        "Travel & Tourism"
+      ],
+      [
+        "HSP3U",
+        "Introduction to Anthropology, Psychology & Sociology"
+      ],
+      [
+        "BBB4M",
+        "International Business Fundamentals"
+      ],
+      [
+        "CGW4U",
+        "World Issues"
+      ],
+      [
+        "HFA4U",
+        "Nutrition & Health"
+      ],
+      [
+        "HHS4U",
+        "Families in Canada"
+      ],
+      [
+        "HSB4U",
+        "Challenge & Change in Society"
+      ],
+      [
+        "CHW3M",
+        "World History to the End of the Fifteenth Century"
+      ],
+      [
+        "CHY4U",
+        "World History Since the Fifteenth Century"
+      ],
+      [
+        "CHI4U",
+        "Canada: History, Identity & Culture"
+      ],
+      [
+        "HZB3M",
+        "Philosophy: The Big Questions"
+      ],
+      [
+        "HZT4U",
+        "Philosophy: Questions & Theories"
+      ],
+      [
+        "9–12",
+        "Economics & Social Studies"
+      ]
+    ],
+    "international": [
+      "IB Diploma Courses",
+      "IB Theory of Knowledge",
+      "AP Economics",
+      "AP English Language & Composition",
+      "A Level English Literature",
+      "IELTS Preparation",
+      "ESL across CEFR A1–C1",
+      "Academic English Transition Support",
+      "University Preparation & Admissions Support",
+      "Early Childhood STEM, Drama & English"
+    ]
+  },
+  "languages": [
+    "Farsi Advanced",
+    "French Basic",
+    "Mandarin Basic"
+  ],
+  "downloads": {
+    "proton_pdf": "/saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-protonmail.pdf",
+    "proton_docx": "/saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-protonmail.docx",
+    "gmail_pdf": "/saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-gmail.pdf",
+    "gmail_docx": "/saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-gmail.docx"
+  }
+}

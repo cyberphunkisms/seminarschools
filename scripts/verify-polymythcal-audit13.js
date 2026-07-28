@@ -13,9 +13,21 @@ const checks=[
  [data.events.every(e=>e.city&&e.corridor_zone&&e.timezone),'structured geography'],
  [data.events.some(e=>e.corridor_zone==='montreal'),'Montréal data'],
  [html.includes('Kingston to Montréal')&&html.includes('data-state-set="places"')&&html.includes('data-label-key="statuses:pending"'),'corridor and confirmation filters'],
- [client.includes('freshnessHtml(event)')&&client.includes('Official source')&&fs.readdirSync(path.join(root,'polymythseminars/events')).some(id=>{const f=path.join(root,'polymythseminars/events',id,'index.html');return fs.existsSync(f)&&fs.readFileSync(f,'utf8').includes('truth-chip')}),'truth display'],
+ [
+  client.includes('freshnessHtml(event)') &&
+    client.includes('officialSource:') &&
+    client.includes('sourceLabel(event)') &&
+    fs.readdirSync(path.join(root,'polymythseminars/events')).some(id=>{const f=path.join(root,'polymythseminars/events',id,'index.html');return fs.existsSync(f)&&fs.readFileSync(f,'utf8').includes('truth-chip')}),
+  'truth display',
+ ],
  [css.includes('@media (max-width: 760px)')&&css.includes('.pm-calendar-agenda')&&!css.includes('max-height: 100vh'),'normal mobile scroll'],
- [sem.includes('RUN_SLOT=')&&fest.includes('RUN_SLOT='),'rotating run slots'],
+ [
+  sem.includes('polymythcal_sharding.py shard') &&
+    fest.includes('polymythcal_sharding.py shard') &&
+    !sem.includes('/ 259200') &&
+    !fest.includes('/ 259200'),
+  'gap-free scheduled shard rotation',
+ ],
  [!sem.includes('Write,Bash')&&!fest.includes('Write,Bash'),'no agent shell'],
  [fs.existsSync(path.join(root,'data/polymythcal-build-manifest.json')),'build manifest'],
  [data.events.every(e=>fs.existsSync(path.join(root,'polymythseminars/events',e.id,'index.html'))),'all event pages'],

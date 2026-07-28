@@ -1,0 +1,104 @@
+name: Scrape Polymythcal protests
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "18 8 * * 3"
+concurrency:
+  group: polymythcal-publish-${{ github.ref }}
+  cancel-in-progress: false
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24.14.0"
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.13"
+          cache: pip
+          cache-dependency-path: |
+            requirements-harvest.txt
+            requirements-harvest-browser.txt
+      - name: Install calendar dependencies
+        run: python3 -m pip install --disable-pip-version-check --requirement requirements-harvest-browser.txt
+      - name: Restore retained parsed-response cache
+        uses: actions/cache/restore@v4
+        with:
+          path: data/polymythcal-http-cache.json
+          key: polymythcal-parsed-http-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            polymythcal-parsed-http-v1-${{ runner.os }}-
+      - name: Install bounded browser and flyer OCR runtime
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr tesseract-ocr-fra
+          python3 -m playwright install --with-deps chromium
+      - name: Render configured JavaScript sources and OCR likely flyers
+        run: python3 scripts/harvest_protests_browser_ocr.py --output /tmp/polymythcal-protest-browser-ocr.json
+      - name: Harvest every protest source without sharding
+        run: python3 scripts/harvest_protests.py --browser-ocr-input /tmp/polymythcal-protest-browser-ocr.json --output /tmp/polymythcal-protests.json
+      - name: Publish native confirmed and unconfirmed protest records
+        run: python3 scripts/publish_protest_harvest.py --input /tmp/polymythcal-protests.json
+      - name: Build separate undated-announcement surface
+        run: python3 scripts/build-polymythcal-candidate-surface.py
+      - name: Verify generated calendar
+        run: |
+          python3 scripts/validate-polymythcal.py
+          npm run verify:calendar-data
+      - name: Summarize deterministic harvest
+        if: always()
+        run: |
+          if test -f /tmp/polymythcal-protests.json; then
+            python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          payload = json.load(open("/tmp/polymythcal-protests.json", encoding="utf-8"))
+          print("## Deterministic protest harvest\n")
+          for key, value in payload.get("summary", {}).items():
+              print(f"- **{key}:** {value}")
+          PY
+          else
+            echo "## Deterministic protest harvest" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "Harvest output was not produced." >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Create publication pull request
+        if: success()
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/polymythcal-protests
+          delete-branch: true
+          commit-message: "Update Polymythcal protest candidates"
+          title: "Polymythcal deterministic protest update"
+          body: "All enabled protest sources were crawled without sharding. Review event changes, visible qualification reasons, lifecycle changes, and explicit source-health diagnostics."
+          labels: polymythcal,automated-harvest
+      - name: Preserve deterministic diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: polymythcal-protest-harvest
+          retention-days: 7
+          if-no-files-found: warn
+          path: |
+            /tmp/polymythcal-protests.json
+            /tmp/polymythcal-protest-browser-ocr.json
+            data/polymythcal-protest-candidates.json
+            data/polymythcal-http-cache.json
+            data/polymythcal-identity-shadow.json
+      - name: Save retained parsed-response cache
+        if: always() && hashFiles('data/polymythcal-http-cache.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: data/polymythcal-http-cache.json
+          key: polymythcal-parsed-http-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}

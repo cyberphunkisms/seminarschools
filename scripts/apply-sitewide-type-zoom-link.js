@@ -2,8 +2,9 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+const { isGeneratedDependencyDirectory } = require('./repository-walk-policy');
 const ROOT = path.resolve(__dirname, '..');
-const BUILD = '20260710-reviews-zoom-font-a';
+const BUILD = '20260725-audit45';
 const LINK = `<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=${BUILD}" data-site-wide-type-zoom="${BUILD}">`;
 const SKIP = new Set(['.git', 'node_modules', '.netlify', 'public']);
 // Match tagged and legacy untagged copies so each document ends with one link.
@@ -11,7 +12,7 @@ const TYPE_LINK_RE = /<link\b[^>]*href=["']\/css\/site-wide-type-zoom\.css(?:\?[
 let changed = 0;
 function walk(dir) {
   for (const ent of fs.readdirSync(dir, {withFileTypes:true})) {
-    if (SKIP.has(ent.name)) continue;
+    if (SKIP.has(ent.name) || isGeneratedDependencyDirectory(ent.name)) continue;
     const full = path.join(dir, ent.name);
     if (ent.isDirectory()) walk(full);
     else if (ent.isFile() && ent.name.endsWith('.html') && !/^google.*\.html$/i.test(ent.name)) {

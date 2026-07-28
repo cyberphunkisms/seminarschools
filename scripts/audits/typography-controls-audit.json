@@ -1,6 +1,6 @@
 {
-  "checkedFiles": 2495,
-  "tinyFontDeclarationsUnder10_5px": 14,
+  "checkedFiles": 3790,
+  "tinyFontDeclarationsUnder10_5px": 30,
   "examples": [
     {
       "file": "about/index.html",
@@ -28,9 +28,84 @@
       "px": 8.8
     },
     {
+      "file": "css/polymyth-commons.css",
+      "value": "0.65rem",
+      "px": 10.4
+    },
+    {
+      "file": "css/polymyth-commons.css",
+      "value": "0.58rem",
+      "px": 9.3
+    },
+    {
+      "file": "css/polymyth-commons.css",
+      "value": "0.65rem",
+      "px": 10.4
+    },
+    {
+      "file": "css/polymyth-commons.css",
+      "value": "0.61rem",
+      "px": 9.8
+    },
+    {
+      "file": "css/polymyth-commons.css",
+      "value": "0.62rem",
+      "px": 9.9
+    },
+    {
+      "file": "css/polymyth-commons.css",
+      "value": "0.62rem",
+      "px": 9.9
+    },
+    {
+      "file": "css/polymyth-commons.css",
+      "value": "0.62rem",
+      "px": 9.9
+    },
+    {
+      "file": "css/polymyth-commons.css",
+      "value": "0.65rem",
+      "px": 10.4
+    },
+    {
+      "file": "css/polymyth-commons.css",
+      "value": "0.62rem",
+      "px": 9.9
+    },
+    {
+      "file": "css/polymyth-commons.css",
+      "value": "0.62rem",
+      "px": 9.9
+    },
+    {
       "file": "index.html",
       "value": ".61rem",
       "px": 9.8
+    },
+    {
+      "file": "leizu/fa/index.html",
+      "value": ".52rem",
+      "px": 8.3
+    },
+    {
+      "file": "leizu/fr/index.html",
+      "value": ".52rem",
+      "px": 8.3
+    },
+    {
+      "file": "leizu/index.html",
+      "value": ".52rem",
+      "px": 8.3
+    },
+    {
+      "file": "leizu/zh-hans/index.html",
+      "value": ".52rem",
+      "px": 8.3
+    },
+    {
+      "file": "leizu/zh-hant/index.html",
+      "value": ".52rem",
+      "px": 8.3
     },
     {
       "file": "polymyth/devilsdiary/1/index.html",
@@ -69,6 +144,11 @@
     },
     {
       "file": "polymyth/devilsdiary/8/index.html",
+      "value": "0.62em",
+      "px": 9.9
+    },
+    {
+      "file": "polymyth/devilsdiary/9/index.html",
       "value": "0.62em",
       "px": 9.9
     }

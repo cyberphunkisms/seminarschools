@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 const fs=require('fs'); const path=require('path');
+const {isGeneratedDependencyDirectory}=require('./repository-walk-policy');
 const ROOT=path.resolve(__dirname,'..'); const SITE='https://seminarschools.com';
 const sitemap=fs.readFileSync(path.join(ROOT,'sitemap.xml'),'utf8');
 const locs=[...sitemap.matchAll(/<loc>https:\/\/seminarschools\.com([^<]+)<\/loc>/g)].map(m=>m[1]);
@@ -18,7 +19,7 @@ for(const route of locs){
   else counts.other++;
   if(!existsFor(route)){ counts.missing++; failures.push(`${route} listed in sitemap but file is missing`); }
 }
-const htmls=[]; function walk(d){ for(const e of fs.readdirSync(d,{withFileTypes:true})){ if(['.git','node_modules','.netlify','public'].includes(e.name)) continue; const f=path.join(d,e.name); if(e.isDirectory()) walk(f); else if(e.name==='index.html') htmls.push(f); } } walk(ROOT);
+const htmls=[]; function walk(d){ for(const e of fs.readdirSync(d,{withFileTypes:true})){ if(['.git','.netlify','public'].includes(e.name)||isGeneratedDependencyDirectory(e.name)) continue; const f=path.join(d,e.name); if(e.isDirectory()) walk(f); else if(e.name==='index.html') htmls.push(f); } } walk(ROOT);
 let classifiedMissing=0;
 for(const f of htmls){ const rel=path.relative(ROOT,f).replace(/\\/g,'/'); const route=rel==='index.html' ? '/' : '/' + rel.slice(0,-'index.html'.length); if(!sitemap.includes(`<loc>${SITE}${route}</loc>`)){ const html=fs.readFileSync(f,'utf8'); const noindex=/<meta\b(?=[^>]*name=["']robots["'])(?=[^>]*content=["'][^"']*noindex)[^>]*>/i.test(html); if(noindex || route.startsWith('/data/') || route.startsWith('/scripts/') || route.includes('/success/') || route.includes('/print/') || route.includes('/pdf/')) classifiedMissing++; else failures.push(`${route} is indexable-looking HTML missing from sitemap`); } }
 if(failures.length){ console.error('SITEMAP CLASSIFICATION FAILED'); failures.slice(0,140).forEach(f=>console.error(' - '+f)); if(failures.length>140) console.error(` ... ${failures.length-140} more`); process.exit(1); }

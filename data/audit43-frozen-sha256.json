@@ -1,0 +1,90 @@
+{
+  "schema": "seminar-schools-frozen-release-evidence-v1",
+  "release": "Audit 43",
+  "release_id": "2026-07-25-site-audit43-approved-evolution-weekly-final",
+  "generated_at": "2026-07-25T14:18:38-04:00",
+  "rule": "Every listed byte is historical evidence and must remain unchanged in Audit 45 and later releases.",
+  "file_count": 16,
+  "files": [
+    {
+      "path": "WEBSITE_AUDIT43_APPROVED_EVOLUTION_REPORT_2026-07-25.md",
+      "bytes": 6744,
+      "sha256": "a1dd9c768135586d1cdf8911dea8ae921ff936a6a37a7019a5c1ed878079d4ca"
+    },
+    {
+      "path": "data/audit43-browser/approved-direction-browser-audit.json",
+      "bytes": 12750,
+      "sha256": "7cac96e1fdc1ce8bbf07354f04628e3cbaf73b6a3f3167ef204d92a443f03780"
+    },
+    {
+      "path": "data/audit43-browser/screenshots/candidate-surface.png",
+      "bytes": 158551,
+      "sha256": "cc69ff1bc1b78ac4b8412b4e2872aae7595510757a2d6db66b219d872ed17ef5"
+    },
+    {
+      "path": "data/audit43-browser/screenshots/home-desktop.png",
+      "bytes": 170088,
+      "sha256": "420054cce19f4b7ad0f793614e8e5d4a2d707ea4cfa8e487a5ecf5d681567ce2"
+    },
+    {
+      "path": "data/audit43-browser/screenshots/home-mobile.png",
+      "bytes": 70615,
+      "sha256": "bfa31a71161c188b0b0f5fc31fd21d4c3da4ec2445161eb77d5719a01b114500"
+    },
+    {
+      "path": "data/audit43-browser/screenshots/polymythcal-nearby.png",
+      "bytes": 156730,
+      "sha256": "8bcbc5b1ecc0ea1aff71a6fa1bc10c9208ed6b7957cedb8d62e131117890afd0"
+    },
+    {
+      "path": "data/audit43-browser/screenshots/reader-view.png",
+      "bytes": 168189,
+      "sha256": "7a0e4b83bee54b347d5bdb5b35da706a6f66354b7e706eac2fe4e2d62f012c33"
+    },
+    {
+      "path": "data/audit43-browser/screenshots/teacher-first-match.png",
+      "bytes": 120858,
+      "sha256": "cc49e144c56fade76b263cc6842aecef3a8445c1bcc603d36de0775f9b71c587"
+    },
+    {
+      "path": "data/audit43-continuity-inventory.json",
+      "bytes": 2995,
+      "sha256": "eabf6d47e3e665b499c3a73cc346c1f98c717fccd997b368543879b6c487f448"
+    },
+    {
+      "path": "scripts/apply-audit43-approved-ui.js",
+      "bytes": 4633,
+      "sha256": "ffdb17bdd6851714e0b63b40a99a71b50aa072392c13ae58c823f4bb5dd16066"
+    },
+    {
+      "path": "scripts/apply-audit43-release-stamp.js",
+      "bytes": 7886,
+      "sha256": "e185b8ec9f01354cb1683a66895a275064d0dfde10e2b41e857effd5b125d0e3"
+    },
+    {
+      "path": "scripts/audit43-approved-browser.py",
+      "bytes": 17686,
+      "sha256": "27d03e38daa992dd5bc0f18fffef366906122474b236d75f11372daa4b6a491d"
+    },
+    {
+      "path": "scripts/build-audit43-continuity-inventory.js",
+      "bytes": 7622,
+      "sha256": "f19b5b57efe62d5640076f0464751cf7f66fdb7ff97543f51aeaf67116854edf"
+    },
+    {
+      "path": "scripts/test_polymythcal_audit43.py",
+      "bytes": 7071,
+      "sha256": "ef676a48024deaf8da768bc564cbaf7b0e1ba9f0940062389fa271e5193208d7"
+    },
+    {
+      "path": "scripts/verify-audit43-approved-direction.js",
+      "bytes": 10594,
+      "sha256": "61b392371e4fdafb60df1d09fe3896d1701f098876aff325660bbeebf58f2fe4"
+    },
+    {
+      "path": "scripts/verify-audit43-browser-evidence.js",
+      "bytes": 4340,
+      "sha256": "f5a1d4628d51b6f923d5f179fa78b083ec778317b0a8ef2b073e3bbd491670f4"
+    }
+  ]
+}

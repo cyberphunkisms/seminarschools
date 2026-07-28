@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+UID:river-run-2026@cupe.on.ca
+DTSTART;VALUE=DATE:20260924
+SUMMARY:River Run 2026
+DESCRIPTION:Grassy Narrows solidarity march and rally. Start time and assembly location TBD.
+URL:https://cupe.on.ca/event/river-run-2026/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:winter-solidarity@cupe.on.ca
+DTSTART;TZID=America/Toronto:20261215T183000
+DTEND;TZID=America/Toronto:20261215T200000
+SUMMARY:Winter Solidarity Rally
+LOCATION:123 University Avenue\, Toronto
+DESCRIPTION:Public labour solidarity rally.
+URL:https://cupe.on.ca/event/winter-solidarity-rally/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

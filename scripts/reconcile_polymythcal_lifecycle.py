@@ -4,12 +4,15 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import itertools
 import json
 import re
 from collections import Counter
 from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlparse
+from zoneinfo import ZoneInfo
 
 from dateutil.rrule import rrulestr
 
@@ -21,6 +24,7 @@ DEFAULT_SCRAPE_LOG = ROOT / 'data/scrape-log.json'
 CANCEL_RE = re.compile(r'\b(cancelled|canceled|annul(?:é|e|ée|és|ees)?|annulation)\b', re.I)
 POSTPONE_RE = re.compile(r'\b(postponed|report(?:é|e|ée|és|ees)?|remis(?:e)?|différé(?:e)?)\b', re.I)
 RESCHED_RE = re.compile(r'\b(rescheduled|reprogrammé(?:e)?|nouvelle date|date modifiée|date changed?)\b', re.I)
+DEFAULT_TIMEZONE = 'America/Toronto'
 
 
 def utc_stamp() -> str:
@@ -54,6 +58,26 @@ def title_source_key(event) -> str:
     return f'{norm(event.get("title"))}|{norm(source_key(event))}'
 
 
+def primary_identifiers(event) -> set[str]:
+    return {
+        str(value)
+        for value in (event.get('id'), event.get('identity_key'))
+        if value not in (None, '')
+    }
+
+
+def legacy_identifiers(event) -> set[str]:
+    return {
+        str(value)
+        for value in (event.get('legacy_ids') or [])
+        if value not in (None, '')
+    }
+
+
+def record_identifiers(event) -> set[str]:
+    return primary_identifiers(event) | legacy_identifiers(event)
+
+
 def same_moment(a, b) -> bool:
     if str(a or '') == str(b or ''):
         return True
@@ -65,6 +89,144 @@ def same_moment(a, b) -> bool:
         return False
 
 
+def parse_event_datetime(event, value):
+    try:
+        parsed = datetime.fromisoformat(str(value or '').replace('Z', '+00:00'))
+    except (TypeError, ValueError):
+        return None
+    if parsed.tzinfo is None:
+        try:
+            parsed = parsed.replace(tzinfo=ZoneInfo(str(event.get('timezone') or DEFAULT_TIMEZONE)))
+        except Exception:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
+
+
+def event_interval(event):
+    start = parse_event_datetime(event, event.get('date'))
+    if start is None:
+        return None
+    try:
+        end = parse_event_datetime(event, event.get('end_date') or event.get('date'))
+    except Exception:
+        end = start
+    if end is None:
+        end = start
+    return (min(start, end), max(start, end))
+
+
+def is_shadow_record(event) -> bool:
+    venue = norm(event.get('venue'))
+    placeholder_venue = not venue or any(token in venue for token in (
+        'locationunconfirmed', 'venueunconfirmed', 'tobedeclared', 'tbd',
+    ))
+    parsed = urlparse(str(event.get('source_url') or ''))
+    generic_path = bool(re.search(r'/(?:events?|calendar)(?:\.html)?/?$', parsed.path, re.I))
+    return placeholder_venue or generic_path
+
+
+def record_quality(event) -> tuple:
+    parsed = urlparse(str(event.get('source_url') or ''))
+    return (
+        int(not is_shadow_record(event)),
+        int(bool(event.get('attendance_confirmed'))),
+        int(event.get('confidence') or 0),
+        len(parsed.path or ''),
+        len(str(event.get('description') or event.get('raw_excerpt') or '')),
+    )
+
+
+def collapse_shadow_duplicates(records, *, include_changes=False):
+    """Collapse only obvious overlapping title/city shadows.
+
+    Repeated sessions remain separate. A pair is eligible only when its
+    normalized title and city match, date ranges overlap, and at least one
+    record points to a generic calendar or an unconfirmed venue.
+    """
+    result = []
+    changes = []
+    for raw in records:
+        event = deepcopy(raw)
+        interval = event_interval(event)
+        match_index = None
+        match_reason = None
+        forced_winner = None
+        for index, existing in enumerate(result):
+            if legacy_identifiers(existing) & primary_identifiers(event):
+                match_index = index
+                match_reason = 'known-legacy-id'
+                forced_winner = 'existing'
+                break
+            if legacy_identifiers(event) & primary_identifiers(existing):
+                match_index = index
+                match_reason = 'known-legacy-id'
+                forced_winner = 'event'
+                break
+            if norm(existing.get('title')) != norm(event.get('title')):
+                continue
+            existing_city = norm(existing.get('city'))
+            event_city = norm(event.get('city'))
+            if not existing_city or not event_city or existing_city != event_city:
+                continue
+            existing_interval = event_interval(existing)
+            if not interval or not existing_interval:
+                continue
+            if interval[1] < existing_interval[0] or existing_interval[1] < interval[0]:
+                continue
+            if not (is_shadow_record(existing) or is_shadow_record(event)):
+                continue
+            match_index = index
+            match_reason = 'overlapping-title-city-shadow'
+            break
+        if match_index is None:
+            result.append(event)
+            continue
+
+        existing = result[match_index]
+        if forced_winner == 'event':
+            winner, shadow = event, existing
+        elif forced_winner == 'existing':
+            winner, shadow = existing, event
+        else:
+            winner, shadow = (
+                (event, existing)
+                if record_quality(event) > record_quality(existing)
+                else (existing, event)
+            )
+
+        winner_primary = primary_identifiers(winner)
+        legacy = []
+        for value in (
+            *(winner.get('legacy_ids') or []),
+            *(shadow.get('legacy_ids') or []),
+            shadow.get('id'),
+            shadow.get('identity_key'),
+        ):
+            value = str(value) if value not in (None, '') else ''
+            if value and value not in winner_primary and value not in legacy:
+                legacy.append(value)
+        if legacy:
+            winner['legacy_ids'] = legacy
+        notes = list(winner.get('lifecycle_notes') or [])
+        note = 'Collapsed an overlapping generic calendar shadow with the same title and city.'
+        if note not in notes:
+            notes.append(note)
+        winner['lifecycle_notes'] = notes
+        result[match_index] = winner
+        changes.append({
+            'identity_key': identity(winner),
+            'change': 'collapsed-shadow',
+            'reason': match_reason,
+            'title': winner.get('title'),
+            'winner_id': winner.get('id'),
+            'winner_identity_key': winner.get('identity_key') or identity(winner),
+            'shadow_id': shadow.get('id'),
+            'shadow_identity_key': shadow.get('identity_key') or identity(shadow),
+            'preserved_legacy_ids': list(winner.get('legacy_ids') or []),
+        })
+    return (result, changes) if include_changes else result
+
+
 def successful_sources(path: Path) -> set[str]:
     if not path.exists():
         return set()
@@ -72,7 +234,17 @@ def successful_sources(path: Path) -> set[str]:
         data = json.loads(path.read_text(encoding='utf-8'))
     except Exception:
         return set()
-    return {str(item.get('id')) for item in data.get('sources', []) if item.get('status') == 'ok'}
+    successful = set()
+    accepted = {'ok', 'crawled', 'success', 'succeeded'}
+    for item in data.get('sources', []):
+        source_id = item.get('id') or item.get('source_id')
+        if source_id and str(item.get('status') or '').lower() in accepted:
+            successful.add(str(source_id))
+    for item in data.get('source_yields', []):
+        source_id = item.get('source_id') or item.get('id')
+        if source_id and str(item.get('status') or '').lower() in accepted:
+            successful.add(str(source_id))
+    return successful
 
 
 def write_json_if_changed(path: Path, payload) -> bool:
@@ -101,7 +273,12 @@ def expand_recurrence(records):
             continue
         try:
             start = datetime.fromisoformat(str(event['date']).replace('Z', '+00:00'))
-            dates = list(rrulestr(rule, dtstart=start))[:366]
+            zone = ZoneInfo(str(event.get('timezone') or DEFAULT_TIMEZONE))
+            if start.tzinfo is None:
+                start = start.replace(tzinfo=zone)
+            else:
+                start = start.astimezone(zone)
+            dates = list(itertools.islice(rrulestr(rule, dtstart=start), 366))
         except Exception:
             failed = deepcopy(event)
             failed.setdefault('lifecycle_notes', []).append('recurrence-parse-failed')
@@ -110,7 +287,12 @@ def expand_recurrence(records):
         duration = None
         if event.get('end_date'):
             try:
-                duration = datetime.fromisoformat(str(event['end_date']).replace('Z', '+00:00')) - start
+                end = datetime.fromisoformat(str(event['end_date']).replace('Z', '+00:00'))
+                if end.tzinfo is None:
+                    end = end.replace(tzinfo=zone)
+                else:
+                    end = end.astimezone(zone)
+                duration = end - start
             except Exception:
                 pass
         sid = series_identity(event)
@@ -141,7 +323,8 @@ def text_status(event):
 
 def reconcile(current, previous, ok_sources, stamp: str | None = None, missing_threshold=2):
     stamp = stamp or utc_stamp()
-    current = expand_recurrence(current)
+    collapsed, collapse_changes = collapse_shadow_duplicates(current, include_changes=True)
+    current = expand_recurrence(collapsed)
     prev_by_identity = {identity(event): event for event in previous}
     previous_title_source_counts = Counter(title_source_key(event) for event in previous)
     current_title_source_counts = Counter(title_source_key(event) for event in current)
@@ -151,7 +334,8 @@ def reconcile(current, previous, ok_sources, stamp: str | None = None, missing_t
         if previous_title_source_counts[title_source_key(event)] == 1
     }
     seen = set()
-    changes = []
+    seen_identifiers = set()
+    changes = list(collapse_changes)
     result = []
 
     for raw in current:
@@ -159,6 +343,7 @@ def reconcile(current, previous, ok_sources, stamp: str | None = None, missing_t
         ident = identity(event)
         event['identity_key'] = ident
         seen.add(ident)
+        seen_identifiers.update(record_identifiers(event))
         ts_key = title_source_key(event)
         prior = prev_by_identity.get(ident)
         if prior is None and current_title_source_counts[ts_key] == 1:
@@ -184,6 +369,15 @@ def reconcile(current, previous, ok_sources, stamp: str | None = None, missing_t
                 'to': event.get('date'),
                 'title': event.get('title'),
             })
+        elif event.get('lifecycle_status') == 'missing-on-source':
+            # Deterministic candidate state can carry a still-missing record
+            # forward for public rechecks. Its presence in the merged calendar
+            # does not itself prove that the source reappeared.
+            event['missing_count'] = max(
+                int(event.get('missing_count') or 0),
+                int((prior or {}).get('missing_count') or 0),
+                missing_threshold,
+            )
         elif prior and prior.get('lifecycle_status') == 'missing-on-source':
             event['lifecycle_status'] = 'active'
             event['reappeared_at'] = stamp
@@ -202,7 +396,7 @@ def reconcile(current, previous, ok_sources, stamp: str | None = None, missing_t
 
     for prior in previous:
         ident = identity(prior)
-        if ident in seen:
+        if ident in seen or record_identifiers(prior) & seen_identifiers:
             continue
         sid = source_key(prior)
         if sid not in ok_sources:

@@ -1,7 +1,23 @@
 {
-  "generated_at": "2026-07-22T13:43:42+00:00",
+  "generated_at": "2026-07-23T15:07:58+00:00",
   "previous_count": 839,
   "input_count": 839,
-  "output_count": 839,
-  "changes": []
+  "output_count": 838,
+  "changes": [
+    {
+      "identity_key": "2a731be0c80e51e047ff",
+      "change": "collapsed-shadow",
+      "reason": "overlapping-title-city-shadow",
+      "title": "The Let Down Reflex at the FOFA Gallery",
+      "winner_id": "fdc0f440490c",
+      "winner_identity_key": "2a731be0c80e51e047ff",
+      "shadow_id": "research-90988e54ea05",
+      "shadow_identity_key": "5a34126e195202c2490a",
+      "preserved_legacy_ids": [
+        "research-90988e54ea05",
+        "5a34126e195202c2490a"
+      ]
+    }
+  ],
+  "status": "updated"
 }
