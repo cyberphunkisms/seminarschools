@@ -1,10 +1,10 @@
 {
   "schema": "seminar-schools-audit49-runtime-efficiency-v1",
-  "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
-  "generated_at": "2026-07-26T15:45:00-04:00",
+  "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
+  "generated_at": "2026-07-28T21:45:00-04:00",
   "status": "passed",
   "metrics": {
-    "active_runtime_files": 3439,
+    "active_runtime_files": 3443,
     "files_with_intervals": 10,
     "interval_calls": 10,
     "bounded_leaf_routes": 10,
@@ -12,7 +12,7 @@
     "public_runtime_mirrors_identical": 10,
     "forced_public_data_revalidation_fetches": 0,
     "bounded_public_data_assets": 24,
-    "bounded_public_data_bytes": 9774758
+    "bounded_public_data_bytes": 9784625
   },
   "interval_files": {
     "leizu/fa/index.html": 1,

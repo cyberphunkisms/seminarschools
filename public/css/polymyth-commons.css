@@ -341,7 +341,7 @@ main {
   box-shadow: 0 10px 35px rgb(70 37 22 / 9%);
   color: var(--ink);
   font-family: var(--mono);
-  font-size: 0.65rem;
+  font-size:0.72rem;
   letter-spacing: 0.06em;
   line-height: 1.25;
   text-align: center;
@@ -400,7 +400,7 @@ main {
   width: 3.7rem;
   min-height: 3.7rem;
   background: var(--paper-deep);
-  font-size: 0.58rem;
+  font-size:0.72rem;
 }
 
 .stats-band {
@@ -990,7 +990,7 @@ main {
   padding-top: 0.35rem;
   color: var(--rust);
   font-family: var(--mono);
-  font-size: 0.65rem;
+  font-size:0.72rem;
 }
 
 .result-main h2 {
@@ -1124,7 +1124,7 @@ main {
 .data-table th {
   color: var(--ink-soft);
   font-family: var(--mono);
-  font-size: 0.62rem;
+  font-size:0.72rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -1319,7 +1319,7 @@ main {
 .fact dt {
   color: var(--ink-soft);
   font-family: var(--mono);
-  font-size: 0.62rem;
+  font-size:0.72rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -1416,7 +1416,7 @@ main {
   flex: none;
   color: var(--ink);
   font-family: var(--mono);
-  font-size: 0.62rem;
+  font-size:0.72rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -1640,7 +1640,7 @@ main {
 .flow-step span {
   color: var(--rust);
   font-family: var(--mono);
-  font-size: 0.65rem;
+  font-size:0.72rem;
 }
 
 .flow-step strong {
@@ -1701,7 +1701,7 @@ main {
   border-top: 1px solid var(--line);
   color: var(--ink-soft);
   font-family: var(--mono);
-  font-size: 0.62rem;
+  font-size:0.72rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -1810,7 +1810,7 @@ main {
   }
 
   .seminar-link {
-    font-size: 0.62rem;
+    font-size:0.72rem;
   }
 
   .primary-nav {

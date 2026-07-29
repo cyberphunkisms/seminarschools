@@ -6,6 +6,7 @@ from __future__ import annotations
 import html
 import hashlib
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -835,10 +836,23 @@ def update_redirects() -> None:
 
 
 def main() -> None:
-    subprocess.run(
-        [sys.executable, str(ROOT / "scripts" / "build-saul-cv-outputs.py")],
-        check=True,
+    # Netlify publishes the committed, already-verified DOCX/PDF download set.
+    # Rebuilding those binary documents requires python-docx, pypdf, ReportLab,
+    # LibreOffice, and project fonts that are intentionally outside the static
+    # site build image. The verifier immediately following this script still
+    # rejects missing or altered committed outputs.
+    reuse_generated_documents = (
+        "--reuse-generated-documents" in sys.argv
+        or os.environ.get("npm_lifecycle_event", "").strip() == "build"
+        or os.environ.get("NETLIFY", "").strip().lower() in {"1", "true", "yes"}
     )
+    if not reuse_generated_documents:
+        subprocess.run(
+            [sys.executable, str(ROOT / "scripts" / "build-saul-cv-outputs.py")],
+            check=True,
+        )
+    else:
+        print("Static-site build: reusing committed, verified Saul CV document outputs.")
     clean_legacy_canonical()
     synchronize_legacy_downloads()
     retire_focused_routes()

@@ -1,8 +1,8 @@
 {
   "generatedAt": "2026-07-28T21:45:00-04:00",
   "scope": "public",
-  "totalFiles": 4887,
-  "totalBytes": 127142139,
+  "totalFiles": 4888,
+  "totalBytes": 127706636,
   "byExtension": {
     ".pdf": {
       "files": 36,
@@ -10,15 +10,15 @@
     },
     ".json": {
       "files": 27,
-      "bytes": 13310917
+      "bytes": 13315877
     },
     ".html": {
-      "files": 3748,
-      "bytes": 41714783
+      "files": 3749,
+      "bytes": 42265456
     },
     ".txt": {
       "files": 47,
-      "bytes": 10040079
+      "bytes": 10049003
     },
     ".xlsx": {
       "files": 3,
@@ -26,7 +26,7 @@
     },
     ".zip": {
       "files": 1,
-      "bytes": 1487828
+      "bytes": 1487777
     },
     ".jsonl": {
       "files": 2,
@@ -66,7 +66,7 @@
     },
     ".css": {
       "files": 20,
-      "bytes": 279946
+      "bytes": 279937
     },
     ".woff2": {
       "files": 11,
@@ -106,17 +106,17 @@
     },
     {
       "path": "polymyth/concordance/concordance-index.json",
-      "size": 6776761,
+      "size": 6781721,
       "extension": ".json"
     },
     {
       "path": "polymyth/methodologylist/index.html",
-      "size": 3989374,
+      "size": 3994098,
       "extension": ".html"
     },
     {
       "path": "polymyth/methodologylist.txt",
-      "size": 3798597,
+      "size": 3803059,
       "extension": ".txt"
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "polymyth/methodologylist/methodology/index.html",
-      "size": 1889020,
+      "size": 1893914,
       "extension": ".html"
     },
     {
@@ -151,7 +151,7 @@
     },
     {
       "path": "polymyth/methodologylist-methodology.txt",
-      "size": 1767975,
+      "size": 1772437,
       "extension": ".txt"
     },
     {
@@ -166,7 +166,7 @@
     },
     {
       "path": "saul/downloads/saul-karim-nassau-all-cv-outputs.zip",
-      "size": 1487828,
+      "size": 1487777,
       "extension": ".zip"
     },
     {
@@ -298,17 +298,17 @@
   "largestRuntimeAssets": [
     {
       "path": "polymyth/concordance/concordance-index.json",
-      "size": 6776761,
+      "size": 6781721,
       "extension": ".json"
     },
     {
       "path": "polymyth/methodologylist/index.html",
-      "size": 3989374,
+      "size": 3994098,
       "extension": ".html"
     },
     {
       "path": "polymyth/methodologylist/methodology/index.html",
-      "size": 1889020,
+      "size": 1893914,
       "extension": ".html"
     },
     {
@@ -443,27 +443,27 @@
     },
     {
       "path": "saul/fa/index.html",
-      "size": 281476,
-      "extension": ".html"
-    },
-    {
-      "path": "saul/index.html",
-      "size": 281407,
+      "size": 281605,
       "extension": ".html"
     },
     {
       "path": "saul/fr/index.html",
-      "size": 281386,
+      "size": 281515,
       "extension": ".html"
     },
     {
       "path": "saul/zh-hans/index.html",
-      "size": 281338,
+      "size": 281467,
       "extension": ".html"
     },
     {
       "path": "saul/zh-hant/index.html",
-      "size": 281337,
+      "size": 281466,
+      "extension": ".html"
+    },
+    {
+      "path": "saul/index.html",
+      "size": 281423,
       "extension": ".html"
     },
     {

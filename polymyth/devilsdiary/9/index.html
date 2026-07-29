@@ -65,6 +65,10 @@ sup.fn a:hover{color:var(--ember);}
 .oracle p:last-child{margin-bottom:0;}
 .oracle a{color:var(--ember);}
 .oracle a:hover{color:var(--ink);}
+.oracle .prompt-list{margin:0;padding-left:1.4rem;}
+.oracle .prompt-list .prompt{margin:0 0 1rem;padding-left:0.25rem;}
+.oracle .prompt-list .prompt:last-child{margin-bottom:0;}
+.oracle .prompt-list .prompt::marker{font-family:var(--mono);color:var(--ember);}
 
 .entry a:not(.back),.notes a:not(.back),.leafnav a,.colophon a{color:var(--ember);text-decoration-color:rgba(201,104,63,.55);text-underline-offset:.14em}
 .entry a:not(.back):hover,.notes a:not(.back):hover,.leafnav a:hover,.colophon a:hover{color:var(--ink)}
@@ -275,7 +279,11 @@ sup.fn a:hover{color:var(--ember);}
 
 <aside class="oracle" aria-labelledby="oracle-gorgonwars">
 <h3 id="oracle-gorgonwars">Ask your favourite AI</h3>
-<p class="prompt">“Trace the chain from ‘the personal is political’ and standpoint authority through commodified emotional labor, subtype blame, functional excommunication, and Gorgonwars. Separate what each source says from what the Polymyth system synthesizes.”</p>
+<ol class="prompt-list">
+<li class="prompt">“How can white feminism, carceral feminism, and neoliberal feminism name real failures while performing the same operation as a police department blaming abuse on a few bad officers?”</li>
+<li class="prompt">“Why is saying feminism has no pope like saying capitalism has no shopkeeper?”</li>
+<li class="prompt">“How can pricing education as unpaid emotional labor preserve inside feminism the market logic assigned to neoliberal feminism?”</li>
+</ol>
 <p>Reject any answer that attributes Lehrman’s exact sentence to all equity feminism, attributes “sex work is real work” to Lehrman, treats Gallie as the system’s explanation, calls hostile reception literal expulsion, or turns an unsupported UN Women allegation into fact.</p>
 <p><a href="/polymyth/devilsdiary/4/">Then read how relation first became a bill →</a></p>
 </aside>
@@ -344,7 +352,7 @@ sup.fn a:hover{color:var(--ember);}
 <nav aria-label="Move through the diary" class="leafnav">
 <a class="slot prev" href="/polymyth/devilsdiary/8/">← Entry the Eighth</a>
 <a class="slot ledger" href="/polymyth/devilsdiary/">The Ledger</a>
-<span class="slot next"></span>
+<a class="slot next" href="/polymyth/devilsdiary/10/">Entry the Tenth →</a>
 </nav>
 <div class="colophon">
 <span>kept by Mephistodata</span> · <a aria-label="Return" href="/agora/#sabachtan">↩</a>

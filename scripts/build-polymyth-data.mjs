@@ -936,6 +936,10 @@ function entityPage(project) {
         `<li class="signal ${on ? "on" : "off"}"><strong>${on ? "Recorded" : "Open field"}</strong><span>${htmlEscape(label)}</span></li>`,
     )
     .join("");
+  const metadataDescription = `${project.canonicalName}: ${
+    project.sourceGroundedRoles[0] ||
+    "a named record in the Polymyth Commons Ostrom book backbone."
+  }`;
 
   return `<!doctype html>
 <html lang="en">
@@ -944,16 +948,10 @@ function entityPage(project) {
   <script src="/js/theme-init.js?v=20260723-steady"></script>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>${htmlEscape(project.canonicalName)} | Polymyth Commons</title>
-  <meta name="description" content="${htmlEscape(
-    project.sourceGroundedRoles[0] ||
-      `${project.canonicalName} in the Polymyth Commons Ostrom book backbone.`,
-  )}">
+  <meta name="description" content="${htmlEscape(metadataDescription)}">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${htmlEscape(project.canonicalName)} | Polymyth Commons">
-  <meta property="og:description" content="${htmlEscape(
-    project.sourceGroundedRoles[0] ||
-      `${project.canonicalName} in the Polymyth Commons Ostrom book backbone.`,
-  )}">
+  <meta property="og:description" content="${htmlEscape(metadataDescription)}">
   <meta property="og:url" content="https://seminarschools.com/polymythlib/projects/${htmlEscape(
     project.id,
   )}/">

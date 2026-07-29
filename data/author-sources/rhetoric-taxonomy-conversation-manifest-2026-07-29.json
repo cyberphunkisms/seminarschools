@@ -1,0 +1,73 @@
+{
+  "schema": "seminarschools.rhetoric-taxonomy-conversation-manifest.v1",
+  "date": "2026-07-29",
+  "source_type": "direct conversation rulings and research synthesis",
+  "scope": "ML* rhetoric taxonomy",
+  "canonical_addendum": "polymyth/methodologylist/rhetoric-taxonomy-addendum.js",
+  "complete_ledger": "data/author-sources/rhetoric-taxonomy-conversation-ledger-2026-07-29.md",
+  "status_counts": {
+    "addendum_entries": 11,
+    "settled_methodology_entries": 6,
+    "settled_scanner_entries": 1,
+    "provisional_pending_entries": 2,
+    "deferred_studylist_entries": 1,
+    "source_ledger_entries": 1
+  },
+  "settled_rulings": [
+    "Use a multi-level matrix rather than a single mutually exclusive tree.",
+    "Separate sophistical move from Sophist actor.",
+    "Treat Kayfabe as a performance contract.",
+    "Treat marketing as a reward or function.",
+    "Treat Gorgon as an actor-state and Gorgonification as a process.",
+    "Keep Snakelogic as an existing mechanism rather than a new rhetoric family.",
+    "Place Trickster inside the Jester and Fool family.",
+    "Place Troll as its own operator category.",
+    "Route Panderer and Flatterer into Sirenism.",
+    "Preserve Parrhesiast as a distinct category that can overlap Jester.",
+    "Expand Baselinemorality through commodification, legitimation or moralization, normalization, and enforcement.",
+    "Treat virtue signalling as a surface description rather than the controlling diagnosis."
+  ],
+  "provisional_research": [
+    "Siren subtype hierarchy",
+    "Prostitutionism",
+    "Moralized commodification",
+    "Legitimator or Consecrator",
+    "Indoctrinator",
+    "Rule Enforcer or Inquisitor",
+    "Recruiter or Proselytizer",
+    "Exhorter, Mobilizer, Agitator, or Inciter",
+    "Agent Provocateur",
+    "Moral Crusader or Rule Creator",
+    "Accuser or Kategoria",
+    "Apologist or Image Repairer",
+    "Gatekeeper",
+    "Confidence Operator or Con Artist",
+    "Functionary, Careerist, or Classical Hypocrite",
+    "Coercer or Threatener",
+    "False-authority cluster",
+    "Maieutic Midwife",
+    "Deliberative Counselor",
+    "Mediator",
+    "Witness or Testifier",
+    "Rhetorical Listener",
+    "Relay, Messenger, or Amplifier"
+  ],
+  "explicit_deferrals": [
+    "Fool monograph",
+    "LinkedIn response",
+    "Dedicated nuance hivemindidiom entry pending later in-the-wild audit"
+  ],
+  "explicit_exclusions": [
+    "Anna's Archive from the current taxonomy task",
+    "Separate Trickster operator family",
+    "Troll nested under Sophism",
+    "Panderer or Flatterer as an independent top-level family",
+    "Promoter or Marketer as an operator family",
+    "New Snakelogic category",
+    "Instant moral certainty as the essence of Siren",
+    "Virtue signalling as the deepest diagnosis",
+    "Suffering or cancellation as automatic Jester certification",
+    "Falsehood as a necessary Siren condition",
+    "Premature canonization of provisional candidates"
+  ]
+}

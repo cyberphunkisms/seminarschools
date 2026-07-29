@@ -192,6 +192,7 @@ const checks = [
   'node scripts/verify-audit12-mobile-web-hybrid.js',
   'node scripts/verify-front-facing-boundary.js',
   'node scripts/verify-polymyth-entry-points.js',
+  'node scripts/verify-polymyth-editorial-prompts.js',
   'node scripts/verify-meaninglib-dataset.js',
   'node scripts/verify-linkability-overhaul.js',
   'node scripts/verify-meaninglib-dashboard.js',

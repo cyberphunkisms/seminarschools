@@ -1,9 +1,15 @@
 {
-  "generated_at": "2026-07-26T15:45:00-04:00",
-  "status": "passed",
+  "generated_at": "2026-07-28T21:45:00-04:00",
+  "status": "failed",
   "total_checks": 158,
-  "passed_checks": 158,
-  "failed_checks": [],
+  "passed_checks": 7,
+  "failed_checks": [
+    {
+      "cmd": "node scripts/verify-audit48-browser-program.js",
+      "code": 1,
+      "ms": 41
+    }
+  ],
   "duration_ms": null,
   "duration_note": "Runtime duration is printed to the console and intentionally omitted from committed evidence.",
   "command_timeout_ms": 600000,

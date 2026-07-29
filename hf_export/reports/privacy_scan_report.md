@@ -1,9 +1,9 @@
 # Meaninglib privacy scan report
 
-Generated: 2026-07-28T04:23:53.841Z
+Generated: 2026-07-29T13:07:09.145Z
 
 Failures: 0
-Warnings: 5
+Warnings: 8
 
 ## Failures
 
@@ -13,9 +13,12 @@ Warnings: 5
 
 - hf_export/data/cc/campaigncodex.jsonl: North American phone-like string pattern found (200)
 - hf_export/data/mc/modulecanon.jsonl: North American phone-like string pattern found (26)
-- hf_export/data/ml/sections/citation.jsonl: North American phone-like string pattern found (44)
+- hf_export/data/ml/sections/citation.jsonl: North American phone-like string pattern found (50)
+- hf_export/data/ml/sections/gorgonification.jsonl: North American phone-like string pattern found (2)
 - hf_export/data/ml/sections/idiomary.jsonl: North American phone-like string pattern found (2)
-- hf_export/data/ml/sections/methodology.jsonl: North American phone-like string pattern found (6)
+- hf_export/data/ml/sections/methodology.jsonl: North American phone-like string pattern found (12)
+- hf_export/data/ml/sections/pending.jsonl: North American phone-like string pattern found (8)
+- hf_export/data/ml/sections/studylist.jsonl: North American phone-like string pattern found (2)
 
 ## Scan notes
 

@@ -26,6 +26,7 @@ node_modules
 node_modules/
 .netlify
 .netlify/
+/CONTINUALLY_EDITABLE_FILES/
 *.log
 SeminarSchools-Deploy-*.log
 __pycache__/
@@ -35,4 +36,5 @@ venv/
 .DS_Store
 Thumbs.db
 # END Seminar Schools deploy safety
+
 

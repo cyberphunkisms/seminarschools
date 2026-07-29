@@ -1,7 +1,7 @@
 # Meaninglib AI Access Pack
 
-Generated: 2026-07-28T04:23:58.450Z
-Query: Meaninglib ontology Mephistodata default AI Access Pack
+Generated: 2026-07-29T13:07:19.413Z
+Query: siren jester fool troll sophist kayfabe rhetoric gorgonification
 
 ## SOURCE OF TRUTH
 Seminar Schools site/archive is the source of truth. Hugging Face and hf_export are mirror, retrieval, dashboard, and verification layers.
@@ -10,82 +10,81 @@ Seminar Schools site/archive is the source of truth. Hugging Face and hf_export 
 Meaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and related routes are interdependent access routes with local functions. Do not treat ml* as a ruler over the other star-files.
 
 ## LOADED ROUTES
-- readme
 - ml
-- mc
 
 ## RETRIEVED RULES
 
-### 1. [readme] Meaninglib
-- Score: 359.56
-- ID: file:hf_export/README.md
-- Source path: hf_export/README.md
-- Section: readme
-
---- pretty_name: Meaninglib private: true tags: - meaninglib - polymyth - methodologylist - seminar-schools --- # Meaninglib Private working mirror for the Seminar Schools Meaninglib star-file substrate. ## Source of truth The Seminar Schools site/archive remains the source of truth. This Hugging Face dataset is a mirror, search surface, dashboard substrate, and verification layer. ## Ontology Meaninglib is the mother-category for interdependent star-file access routes. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and related routes keep local function and cross-reference one another. The export pre
-
-### 2. [ml] CORE slot 29 mirror — PM17 BINARY OPENER (T110 DECISION-CONTENT-PERSISTS fix)
-- Score: 173.68
-- ID: ml:coreplus:0036:core-slot-29-mirror-pm17-binary-opener-t110-decision-content-persists-fix
-- Source path: hf_export/data/all_meaninglib_rows.jsonl
-- Route: https://seminarschools.com/polymyth/methodologylist-coreplus.txt
-- Section: coreplus
-
-[ai] CORE slot 29 mirror — PM17 BINARY OPENER (T110 DECISION-CONTENT-PERSISTS fix) Memory slot 29 holds the PM17 BINARY OPENER compressed-trigger governing every response opener. Two registers: Mephistodata-would-say (Shakespearean-Faustian-hypercitation voice) OR Mephistodata-bloomed (TLDR-layman, all referents unpacked, zero info loss, shorter than would-say). NO third register. T110 SCOPE FIX (May 22 2026). Previous scope rule said "bloom scope = 1 response; next defaults to would-say." This produced a failure mode where decision-content surfacing across multiple turns dropped out of bloom
-
-### 3. [ml] Meaninglib (mother-category for all * files, scanner-tier of polymyth)
-- Score: 165.54
-- ID: ml:degorgonification:0040:meaninglib-mother-category-for-all-files-scanner-tier-of-polymyth
-- Source path: hf_export/data/all_meaninglib_rows.jsonl
-- Route: https://seminarschools.com/polymyth/methodologylist-degorgonification.txt
-- Section: degorgonification
-
-[both] Meaninglib (mother-category for all * files, scanner-tier of polymyth) LAYMAN. Reversal-operation entry. The body below contains the full operational specification of Meaninglib: how the reversal fires against the gorgonification it counters, its trigger conditions, and worked examples where present. Operates within the polymyth degorgonification toolkit per its title-keyword. Meaninglib (pre-April-2026: "meaninglibrary"; renamed by user directive April 2026 for conversational-register compactness; both names reference the same mother-category) is the scannable-substrate tier of polymor
-
-### 4. [ml] AUDIT (mephistodata interaction; triggers audit / check the spirit / spirit of the law): whole-conversation check, MAIN = everything-updated-in-meaninglib, plus spirit-of-law and ironman, ouroboros only on contradiction (Rainbowsol May 29 2026)
-- Score: 158.31
-- ID: ml:methodology:0023:audit-mephistodata-interaction-triggers-audit-check-the-spirit-spirit-of-the-law-whole-conversation-check-main-everythin
+### 1. [ml] Jester, Fool, and Trickster are one family with distinct story and register variants
+- Score: 153.28
+- ID: ml:methodology:0368:jester-fool-and-trickster-are-one-family-with-distinct-story-and-register-variants
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist-methodology.txt
 - Section: methodology
 
-[both] AUDIT (mephistodata interaction; triggers audit / check the spirit / spirit of the law): whole-conversation check, MAIN = everything-updated-in-meaninglib, plus spirit-of-law and ironman, ouroboros only on contradiction (Rainbowsol May 29 2026) THE OPERATION. When the user says audit, or a variation, check the spirit or spirit of the law or spirit of meaninglib, run a whole-conversation check. THE MAIN POINT is to see whether everything discussed was actually updated into meaninglib, the completeness-of-capture pass. Then two further passes. One, whether the conversation held the unders
+[both] Jester, Fool, and Trickster are one family with distinct story and register variants SETTLED FAMILY RULING. Trickster belongs inside the Jester/Fool family. Trickster is no longer a separate top-level rhetoric operator. The family can contain mythic, ritual, comic, literary, political, and rhetorical variants without flattening their exact stories. FORM AND ETHICS. Comic or liminal license identifies a performance position. It supplies no automatic ethical certification. A counsel-bearing Jester uses that position so a difficult claim can remain in the room. TRUTH-SACRIFICE TEST. Under
 
-### 5. [mc] Mephistodata default — open at friction not confirmation
-- Score: 155.55
-- ID: mc:0042:mephistodata-default-open-at-friction-not-confirmation
-- Source path: hf_export/data/all_meaninglib_rows.jsonl
-- Route: https://seminarschools.com/polymyth/modulecanon.txt
-- Section: modulecanon
-
-TITLE: Mephistodata default — open at friction not confirmation ROLE: both LINKS: ml_crossref=[Mephistodata default methodology entry, Disagreeable-by-default methodology entry, Friction-not-confirmation operational rule]
-
-### 6. [ml] CORE slot 18 mirror — SCOPE+ORGANIZE-MINE-T106+INJECTION (T106 strengthened)
-- Score: 127.28
-- ID: ml:coreplus:0033:core-slot-18-mirror-scope-organize-mine-t106-injection-t106-strengthened
-- Source path: hf_export/data/all_meaninglib_rows.jsonl
-- Route: https://seminarschools.com/polymyth/methodologylist-coreplus.txt
-- Section: coreplus
-
-[ai] CORE slot 18 mirror — SCOPE+ORGANIZE-MINE-T106+INJECTION (T106 strengthened) Memory slot 18 holds the SCOPE+ORGANIZE-MINE-T106+INJECTION compressed-trigger. Three rules pair under one slot because they govern the same disposition: AI takes routing/organizational/scope decisions itself rather than asking the user. SCOPE RULE. "Robust bang for buck, marginal utility across every factor." Size every task to where one more unit of effort stops producing meaningfully more value. State scope-call in one line, do not ask per-turn. Origin: April 19 2026 OSSD research conversation. ORGANIZE-MINE-T
-
-### 7. [ml] Read-the-file-before-analyzing (pre-analysis grep discipline)
-- Score: 125.11
-- ID: ml:methodology:0158:read-the-file-before-analyzing-pre-analysis-grep-discipline
+### 2. [ml] Sophist actor versus sophistical move
+- Score: 148.74
+- ID: ml:methodology:0369:sophist-actor-versus-sophistical-move
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist-methodology.txt
 - Section: methodology
 
-[ai] Read-the-file-before-analyzing (pre-analysis grep discipline) LAYMAN. Framework entry covering Read-the-file-before-analyzing. Full operational specification preserved in body below, including any worked examples, citation-locks, and cross-substrate relations. Before producing structural analysis of any polymyth concept, grep ml* for that concept. Operational rule distinct from the search retry protocol (which governs past_chats retrieval) and distinct from "check ml* and mc* before past_chats" (which governs the order of retrieval calls). This rule governs the relationship between analys
+[both] Sophist actor versus sophistical move LAYMAN. A bad argument does not automatically make its speaker a Sophist. The move and the actor occupy different levels. SOPHISTICAL MOVE. A verbal or argumentative maneuver that manufactures apparent warrant, blocks correction, shifts the burden, changes the claim, or wins an exchange without answering the substance. A sincere speaker, Gorgon, Jester, Troll, Siren, teacher, or ordinary reasoner can use one. SOPHIST ACTOR. A recurring operator who governs the maneuver and uses verbal facility without answerable commitment. Actor attribution require
 
-### 8. [ml] Pre-Meaninglib project lineage: Idiomary and Year of the Snakes to Polymyth Carrd to Meaninglib
-- Score: 124.36
-- ID: ml:methodology:0351:pre-meaninglib-project-lineage-idiomary-and-year-of-the-snakes-to-polymyth-carrd-to-meaninglib
+### 3. [ml] Rhetorical operator and axis candidate ledger after Siren, Jester, Troll, Sophist, and Gorgon
+- Score: 133.36
+- ID: ml:pending:0143:rhetorical-operator-and-axis-candidate-ledger-after-siren-jester-troll-sophist-and-gorgon
+- Source path: hf_export/data/all_meaninglib_rows.jsonl
+- Route: https://seminarschools.com/polymyth/methodologylist-pending.txt
+- Section: pending
+
+[both] Rhetorical operator and axis candidate ledger after Siren, Jester, Troll, Sophist, and Gorgon STATUS. The current set has genuine gaps. Every item below remains a candidate until its admission condition, defeat condition, level, and collisions survive dialectical testing. CORRUPTIVE OR EXTRACTIVE CANDIDATES. 1. Legitimator or Consecrator. Makes a contingent practice or order seem right, necessary, natural, inevitable, expert-approved, or authorized. Test operator family versus normative-function axis. Highest-value relation: Baselinemorality. 2. Indoctrinator. Installs doctrine while su
+
+### 4. [ml] Troll as its own operator category
+- Score: 130.85
+- ID: ml:methodology:0370:troll-as-its-own-operator-category
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist-methodology.txt
 - Section: methodology
 
-[both] Pre-Meaninglib project lineage: Idiomary and Year of the Snakes to Polymyth Carrd to Meaninglib PROJECT GENEALOGY. Contentinternet Idiomary and The Year of the Snakes are pre-Meaninglib project layers. Polymyth Portal at polymyth.carrd.co is the intermediate activation layer. Meaninglib is the current rendition. THE RELATION. The older projects are sources, prototypes, and historical strata. Meaninglib inherits terms, methods, problems, links, and passages from them while also revising their organization and current rulings. An earlier statement can remain historically exact while a lat
+[both] Troll as its own operator category SETTLED PLACEMENT. Troll is its own operator category. Trolling names a tactic. Troll names a recurring role organized around producing reaction, antagonism, confusion, disruption, threshold pressure, or spectator amusement. SEPARATION FROM SOPHIST. Troll is no longer nested wholly under Eristic Sophism. A Troll can use sophistical moves, true claims, false claims, irony, sincerity, kayfabe, insult, questions, or silence. The governing end is the engineered reaction or disturbance. MORALLY OPEN RANGE. Provocation can expose a contradiction, test a thre
+
+### 5. [ml] N85. Medusa-Medea-Siren three-sensory-channel reading — sight, word, and sound distinction. | origin: c627d4f9. | resolution: already present in Medusa-Medea-Siren convergence (research findings); no new entry required.
+- Score: 110.70
+- ID: ml:pending:0045:n85-medusa-medea-siren-three-sensory-channel-reading-sight-word-and-sound-distinction-origin-c627d4f9-resolution-already
+- Source path: hf_export/data/all_meaninglib_rows.jsonl
+- Route: https://seminarschools.com/polymyth/methodologylist-pending.txt
+- Section: pending
+
+[RESOLVED/DUPLICATE] N85. Medusa-Medea-Siren three-sensory-channel reading — sight, word, and sound distinction. | origin: c627d4f9. | resolution: already present in Medusa-Medea-Siren convergence (research findings); no new entry required.
+
+### 6. [ml] Siren rhetorical operator, required umbrella with provisional hierarchy
+- Score: 100.40
+- ID: ml:pending:0142:siren-rhetorical-operator-required-umbrella-with-provisional-hierarchy
+- Source path: hf_export/data/all_meaninglib_rows.jsonl
+- Route: https://seminarschools.com/polymyth/methodologylist-pending.txt
+- Section: pending
+
+[both] Siren rhetorical operator, required umbrella with provisional hierarchy STATUS. Siren is required in the rhetoric taxonomy. Its governing discriminator is settled enough for testing. Its complete hierarchy and named subtypes remain unratified. WORKING CORE. Siren strategically uses attraction, attention, trust, desire, moral authority, apparent intimacy, knowledge, scandal, or revelation to preserve dependency or extract value. Siren is self-aware enough to adapt the song. One utterance cannot establish that awareness. PROSTITUTION OR STOREFRONT. For this project the Siren appears throu
+
+### 7. [ml] Kayfabe as an orthogonal performance contract
+- Score: 99.50
+- ID: ml:methodology:0371:kayfabe-as-an-orthogonal-performance-contract
+- Source path: hf_export/data/all_meaninglib_rows.jsonl
+- Route: https://seminarschools.com/polymyth/methodologylist-methodology.txt
+- Section: methodology
+
+[both] Kayfabe as an orthogonal performance contract LAYMAN. Kayfabe answers how performers and audiences relate to a constructed reality. It does not by itself answer what kind of operator is speaking or what end the performance serves. PERFORMANCE CONTRACT. Participants sustain characters, conflicts, stakes, and reality-status as meaningful even when scripting, exaggeration, coordination, or production is partly known. Sincerity and construction can coexist. ORTHOGONAL USE. Jesters, Trolls, Sirens, Demagogues, Gorgons, ordinary entertainers, and political actors can all use a kayfabe contrac
+
+### 8. [ml] Rhetoric taxonomy conversation source and status ledger, 2026-07-29
+- Score: 99.01
+- ID: ml:citation:0341:rhetoric-taxonomy-conversation-source-and-status-ledger-2026-07-29
+- Source path: hf_export/data/all_meaninglib_rows.jsonl
+- Route: https://seminarschools.com/polymyth/methodologylist-citation.txt
+- Section: citation
+
+[both] Rhetoric taxonomy conversation source and status ledger, 2026-07-29 SOURCE. A July 2026 conversation expanded the question of saying extreme claims for marketing into a multi-level rhetoric taxonomy. The conversation directly corrected several category placements, generated research candidates, and explicitly deferred the Fool monograph. STATUS DISCIPLINE. Direct author corrections enter as settled placements. Candidate operators, subtypes, and mythic figures remain provisional. The taxonomy remains dialectical and no complete tree has been ratified. PACKAGE LEDGER. data/author-sources/
 
 ## ANTI-TWIST CHECK
 - Preserve route function, source hierarchy, page type, audience, and local authority.
@@ -101,11 +100,11 @@ Operate from the retrieved substrate. Answer the actual task. Do not summarize t
 
 ## CITATION PAYLOAD
 
-- 1. readme | Meaninglib | file:hf_export/README.md | hf_export/README.md
-- 2. ml | CORE slot 29 mirror — PM17 BINARY OPENER (T110 DECISION-CONTENT-PERSISTS fix) | ml:coreplus:0036:core-slot-29-mirror-pm17-binary-opener-t110-decision-content-persists-fix | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-coreplus.txt
-- 3. ml | Meaninglib (mother-category for all * files, scanner-tier of polymyth) | ml:degorgonification:0040:meaninglib-mother-category-for-all-files-scanner-tier-of-polymyth | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-degorgonification.txt
-- 4. ml | AUDIT (mephistodata interaction; triggers audit / check the spirit / spirit of the law): whole-conversation check, MAIN = everything-updated-in-meaninglib, plus spirit-of-law and ironman, ouroboros only on contradiction (Rainbowsol May 29 2026) | ml:methodology:0023:audit-mephistodata-interaction-triggers-audit-check-the-spirit-spirit-of-the-law-whole-conversation-check-main-everythin | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-methodology.txt
-- 5. mc | Mephistodata default — open at friction not confirmation | mc:0042:mephistodata-default-open-at-friction-not-confirmation | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/modulecanon.txt
-- 6. ml | CORE slot 18 mirror — SCOPE+ORGANIZE-MINE-T106+INJECTION (T106 strengthened) | ml:coreplus:0033:core-slot-18-mirror-scope-organize-mine-t106-injection-t106-strengthened | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-coreplus.txt
-- 7. ml | Read-the-file-before-analyzing (pre-analysis grep discipline) | ml:methodology:0158:read-the-file-before-analyzing-pre-analysis-grep-discipline | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-methodology.txt
-- 8. ml | Pre-Meaninglib project lineage: Idiomary and Year of the Snakes to Polymyth Carrd to Meaninglib | ml:methodology:0351:pre-meaninglib-project-lineage-idiomary-and-year-of-the-snakes-to-polymyth-carrd-to-meaninglib | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-methodology.txt
+- 1. ml | Jester, Fool, and Trickster are one family with distinct story and register variants | ml:methodology:0368:jester-fool-and-trickster-are-one-family-with-distinct-story-and-register-variants | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-methodology.txt
+- 2. ml | Sophist actor versus sophistical move | ml:methodology:0369:sophist-actor-versus-sophistical-move | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-methodology.txt
+- 3. ml | Rhetorical operator and axis candidate ledger after Siren, Jester, Troll, Sophist, and Gorgon | ml:pending:0143:rhetorical-operator-and-axis-candidate-ledger-after-siren-jester-troll-sophist-and-gorgon | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-pending.txt
+- 4. ml | Troll as its own operator category | ml:methodology:0370:troll-as-its-own-operator-category | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-methodology.txt
+- 5. ml | N85. Medusa-Medea-Siren three-sensory-channel reading — sight, word, and sound distinction. | origin: c627d4f9. | resolution: already present in Medusa-Medea-Siren convergence (research findings); no new entry required. | ml:pending:0045:n85-medusa-medea-siren-three-sensory-channel-reading-sight-word-and-sound-distinction-origin-c627d4f9-resolution-already | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-pending.txt
+- 6. ml | Siren rhetorical operator, required umbrella with provisional hierarchy | ml:pending:0142:siren-rhetorical-operator-required-umbrella-with-provisional-hierarchy | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-pending.txt
+- 7. ml | Kayfabe as an orthogonal performance contract | ml:methodology:0371:kayfabe-as-an-orthogonal-performance-contract | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-methodology.txt
+- 8. ml | Rhetoric taxonomy conversation source and status ledger, 2026-07-29 | ml:citation:0341:rhetoric-taxonomy-conversation-source-and-status-ledger-2026-07-29 | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist-citation.txt

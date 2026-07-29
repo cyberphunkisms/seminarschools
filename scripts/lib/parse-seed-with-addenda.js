@@ -93,6 +93,21 @@ function parseMythologyIntegrationAddendum() {
   );
 }
 
+function parseRhetoricTaxonomyAddendum() {
+  const addendumPath = path.resolve(
+    __dirname,
+    '../../polymyth/methodologylist/rhetoric-taxonomy-addendum.js'
+  );
+  if (!fs.existsSync(addendumPath)) {
+    throw new Error('Missing rhetoric taxonomy addendum: ' + addendumPath);
+  }
+  const source = fs.readFileSync(addendumPath, 'utf8');
+  return parseDeclaredArray(
+    source,
+    'const RHETORIC_TAXONOMY_ADDENDUM'
+  );
+}
+
 function entryKey(entry) {
   return entry.id || [entry.s || '', entry.t || ''].join('\u0000');
 }
@@ -102,6 +117,7 @@ function parseSeedWithAddenda(html) {
     ...parseDeclaredArray(html, 'const SEED'),
     ...parseSnakelogicExampleAddendum(html),
     ...parseMythologyIntegrationAddendum(),
+    ...parseRhetoricTaxonomyAddendum(),
   ];
   const seen = new Set();
   return combined.filter((entry) => {
@@ -115,6 +131,7 @@ function parseSeedWithAddenda(html) {
 module.exports = {
   parseDeclaredArray,
   parseMythologyIntegrationAddendum,
+  parseRhetoricTaxonomyAddendum,
   parseSeedWithAddenda,
   parseSnakelogicExampleAddendum,
 };

@@ -14,8 +14,9 @@ const HTML_ROOTS = [
   '.well-known', 'agora', 'aitr', 'aa', 'bb', 'bookwormcard', 'campaigns',
   'cfps', 'fellowships', 'florilegium', 'humanities', 'lectures', 'leizu',
   'about', 'main', 'marginalia', 'nutrition', 'ohm-dome', 'philosophy',
-  'polymyth', 'polymythcal', 'polymythseminars', 'reviews', 'saul', 'seminars',
-  'sitemap', 'teacherresources', 'university', 'writingclub', 'writinggrads',
+  'polymyth', 'polymythcal', 'polymythcommons', 'polymythlib',
+  'polymythseminars', 'reviews', 'saul', 'seminars', 'sitemap',
+  'teacherresources', 'university', 'writingclub', 'writinggrads',
   'writingjuniors', 'writingkids', 'writingteens',
 ];
 const EXEMPT = new Set([

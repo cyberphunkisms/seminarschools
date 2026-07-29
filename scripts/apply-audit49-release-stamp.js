@@ -2,9 +2,11 @@
 'use strict';
 
 /**
- * Apply the Audit 49 manifest-owned asset token to active source HTML before
- * localized routes bind their English source hashes. Historical audit evidence
- * and browser programs stay outside this intentionally narrow surface.
+ * Apply the manifest-owned asset token to active source HTML before localized
+ * routes bind their English source hashes. This remains the historical Audit 49
+ * migration step in the build chain, while the target now comes from the current
+ * manifest so later releases remain buildable. Historical audit evidence and
+ * browser programs stay outside this intentionally narrow surface.
  */
 const fs = require('fs');
 const path = require('path');
@@ -14,9 +16,7 @@ const {
 
 const ROOT = path.resolve(__dirname, '..');
 const CHECK = process.argv.includes('--check');
-const PREVIOUS_ASSET = '20260726-audit48';
-const EXPECTED_RELEASE =
-  '2026-07-26-site-audit49-technical-efficiency-resilience-final';
+const FALLBACK_PREVIOUS_ASSET = '20260726-audit48';
 const SOURCE_HTML_ROOTS = [
   '.well-known', 'agora', 'aitr', 'aa', 'bb', 'bookwormcard', 'campaigns',
   'cfps', 'fellowships', 'florilegium', 'humanities', 'lectures', 'leizu',
@@ -28,13 +28,32 @@ const SOURCE_HTML_ROOTS = [
 const manifest = JSON.parse(
   fs.readFileSync(path.join(ROOT, 'RELEASE_MANIFEST.json'), 'utf8'),
 );
+const currentRelease = String(manifest.release_id || '').trim();
 const currentAsset = String(manifest.polymythcal_asset_version || '');
-if (manifest.release_id !== EXPECTED_RELEASE) {
-  throw new Error(`Audit 49 release stamp cannot target ${manifest.release_id}`);
+if (!currentRelease) {
+  throw new Error('Manifest release_id must be a non-empty string');
 }
-if (currentAsset !== '20260726-audit49') {
-  throw new Error(`Audit 49 release stamp cannot use ${currentAsset}`);
+if (!/^\d{8}-audit\d+$/.test(currentAsset)) {
+  throw new Error(
+    `Manifest polymythcal_asset_version has invalid format: ${currentAsset}`,
+  );
 }
+const previousAssets = new Set([FALLBACK_PREVIOUS_ASSET]);
+try {
+  const previousManifest = JSON.parse(
+    fs.readFileSync(
+      path.join(ROOT, 'data', 'polymythcal-build-manifest.json'),
+      'utf8',
+    ),
+  );
+  const previousAsset = String(
+    previousManifest.polymythcal_asset_version || '',
+  ).trim();
+  if (/^\d{8}-audit\d+$/.test(previousAsset)) previousAssets.add(previousAsset);
+} catch {
+  // A first build may not have a prior generated manifest.
+}
+previousAssets.delete(currentAsset);
 
 const requestedMtime = process.env.SS_BUILD_OUTPUT_MTIME
   ? new Date(process.env.SS_BUILD_OUTPUT_MTIME)
@@ -71,13 +90,17 @@ for (const target of [...new Set(files)].sort()) {
     if (error?.code === 'ENOENT') continue;
     throw error;
   }
-  if (!before.includes(PREVIOUS_ASSET)) continue;
+  const staleAssets = [...previousAssets].filter(asset => before.includes(asset));
+  if (!staleAssets.length) continue;
   const relative = path.relative(ROOT, target).split(path.sep).join('/');
   if (CHECK) {
     stale.push(relative);
     continue;
   }
-  const after = before.split(PREVIOUS_ASSET).join(currentAsset);
+  const after = staleAssets.reduce(
+    (source, asset) => source.split(asset).join(currentAsset),
+    before,
+  );
   const temporary = `${target}.audit49-tmp`;
   fs.writeFileSync(temporary, after, {mode: fs.statSync(target).mode});
   fs.renameSync(temporary, target);
@@ -86,12 +109,14 @@ for (const target of [...new Set(files)].sort()) {
 }
 
 if (stale.length) {
-  console.error(`AUDIT49 RELEASE STAMP CHECK FAILED — ${stale.length} stale pages`);
+  console.error(
+    `MANIFEST RELEASE STAMP CHECK FAILED — ${stale.length} stale pages`,
+  );
   stale.slice(0, 100).forEach(relative => console.error(` - ${relative}`));
   process.exit(1);
 }
 console.log(
-  `AUDIT49 RELEASE STAMP ${CHECK ? 'CHECK ' : ''}PASSED — `
+  `MANIFEST RELEASE STAMP ${CHECK ? 'CHECK ' : ''}PASSED — `
   + `${files.length} active source pages inspected, ${changed} updated, `
-  + 'historical audit evidence untouched.',
+  + `target ${currentRelease} / ${currentAsset}; historical audit evidence untouched.`,
 );

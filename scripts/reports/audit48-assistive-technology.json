@@ -1,19 +1,19 @@
 {
   "schema": "seminar-schools-audit48-assistive-technology-v1",
-  "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
-  "generated_at": "2026-07-26T15:45:00-04:00",
+  "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
+  "generated_at": "2026-07-28T21:45:00-04:00",
   "status": "passed",
   "scope": "repository-wide static assistive-technology prerequisites",
   "metrics": {
-    "source_html_documents": 3395,
-    "interactive_documents": 2505,
+    "source_html_documents": 3396,
+    "interactive_documents": 2506,
     "redirect_documents": 890,
     "documents_with_two_progressive_h1_variants": 1,
-    "static_ids": 10654,
-    "static_aria_id_references": 2759,
-    "skip_links": 2501,
+    "static_ids": 10773,
+    "static_aria_id_references": 2784,
+    "skip_links": 2503,
     "images": 25,
-    "buttons": 1110
+    "buttons": 1129
   },
   "machine_validated_contracts": [
     "declared-document-language",
