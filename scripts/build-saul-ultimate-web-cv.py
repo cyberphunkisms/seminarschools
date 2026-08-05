@@ -259,10 +259,13 @@ def update_metadata(source: str) -> str:
             },
         },
     }
+    # Own the complete JSON-LD insertion boundary, including whitespace.
+    # Removing only the tag left one newline behind on every generator pass.
     source = re.sub(
-        r'<script type="application/ld\+json">.*?</script>',
-        "",
+        r'\s*<script type="application/ld\+json">.*?</script>\s*(?=</head>)',
+        "\n",
         source,
+        count=1,
         flags=re.S,
     )
     structured_data = (
@@ -548,10 +551,14 @@ def update_page(path: Path) -> None:
         source,
         count=1,
     )
+    # Own this complete insertion boundary as well. The generator runs twice
+    # in the canonical build, so leaving its old newline caused repeat growth.
     source = re.sub(
-        r'<script defer src="/saul/assets/saul-ultimate-cv-modules-2026\.js\?[^"]*"></script>',
-        "",
+        r'\s*<script\b(?=[^>]*\bsrc=["\']/saul/assets/saul-ultimate-cv-modules-2026\.js\?[^"\']*["\'])[^>]*></script>\s*(?=</body>)',
+        "\n",
         source,
+        count=1,
+        flags=re.S,
     )
     source = source.replace(
         'data-saul-modular-cv="true"',

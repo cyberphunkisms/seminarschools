@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://seminarschools.com"
 AUDIT_VERSION = "20260725-audit45"
 AUDIT43_VERSION = "20260725-audit43"
+GEOMETRY_ASSET_VERSION = "20260805-geometry-hardening"
 POLYMYTHCAL_ASSET_VERSION = str(
     json.loads((ROOT / "RELEASE_MANIFEST.json").read_text(encoding="utf-8")).get(
         "polymythcal_asset_version"
@@ -766,13 +767,13 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
 <link rel="alternate" hreflang="fr-CA" href="{SITE}/polymythseminars/fr/events/{encoded}/">
 <link rel="alternate" hreflang="x-default" href="{SITE}/polymythseminars/events/{encoded}/">
 <link rel="stylesheet" href="/css/theme.css?v={POLYMYTHCAL_ASSET_VERSION}">
-<link rel="stylesheet" href="/css/alive.css"><link rel="stylesheet" href="/css/polymythcal-features.css?v={POLYMYTHCAL_ASSET_VERSION}">
+<link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_ASSET_VERSION}"><link rel="stylesheet" href="/css/polymythcal-features.css?v={POLYMYTHCAL_ASSET_VERSION}">
 <link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={POLYMYTHCAL_ASSET_VERSION}" data-site-wide-type-zoom="{POLYMYTHCAL_ASSET_VERSION}">
 <link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 {schema_markup}
 </head>
-<body data-route-type="calendar-event" data-geometry="indra-web" data-indra-intensity="0.105" data-event-id="{meta_escape(event_id)}">
+<body data-route-type="calendar-event" data-geometry="indra-web" data-indra-intensity="0.105" data-geometry-role="relation return" data-event-id="{meta_escape(event_id)}">
 <a class="skip-link" href="#main-content">{labels["skip"]}</a>
 <main id="main-content" class="pm-event-page">
 <nav class="pm-event-nav" aria-label="{'Navigation de la fiche' if french else 'Event navigation'}"><a href="/polymythseminars/{'fr/' if french else ''}">{labels["all"]}</a><a href="/polymythcommons/">Polymyth Commons</a><a href="{alternate_path}" hreflang="{'en-CA' if french else 'fr-CA'}">{labels["language"]}</a></nav>
@@ -793,7 +794,7 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
 <a class="pm-event-action" href="/polymythseminars/{'fr/' if french else ''}correct/?event={meta_escape(canonical)}">{labels["correct"]}</a></div></footer>
 </article></main>
 <script src="/js/theme.js" defer></script><script src="/js/polymythcal-features.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script>
-<script src="/js/site-keyboard-enhancements.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/mandala.js?v=cl91" defer></script><script src="/js/indra.js?v=cl91" defer></script>
+<script src="/js/site-keyboard-enhancements.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/mandala.js?v={GEOMETRY_ASSET_VERSION}" defer></script><script src="/js/indra.js?v={GEOMETRY_ASSET_VERSION}" defer></script>
 </body></html>
 '''
 
@@ -814,17 +815,17 @@ def french_event_alias_page(alias_id: str, target_id: str, source_sha: str) -> s
 <meta http-equiv="refresh" content="0;url={meta_escape(target_path)}">
 <title>Fiche déplacée · Polymythcal</title>
 <link rel="canonical" href="{meta_escape(canonical)}">
-<link rel="stylesheet" href="/css/alive.css">
+<link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_ASSET_VERSION}">
 <link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={POLYMYTHCAL_ASSET_VERSION}" data-site-wide-type-zoom="{POLYMYTHCAL_ASSET_VERSION}">
 <link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-route-type="calendar-event-alias" data-geometry="indra-web" data-indra-intensity="0.105" data-legacy-event-id="{meta_escape(alias_id)}">
+<body data-route-type="calendar-event-alias" data-geometry="indra-web" data-indra-intensity="0.105" data-geometry-role="return" data-legacy-event-id="{meta_escape(alias_id)}">
 <main id="main-content" class="pm-event-page"><h1>Fiche déplacée</h1>
 <p>Cette ancienne adresse mène maintenant à la fiche stable.</p>
 <p><a href="{meta_escape(target_path)}">Ouvrir la fiche stable</a></p></main>
 <script>location.replace({json.dumps(target_path, ensure_ascii=False)})</script>
-<script src="/js/mandala.js?v=cl91" defer></script><script src="/js/indra.js?v=cl91" defer></script>
+<script src="/js/mandala.js?v={GEOMETRY_ASSET_VERSION}" defer></script><script src="/js/indra.js?v={GEOMETRY_ASSET_VERSION}" defer></script>
 </body></html>
 '''
 
@@ -867,14 +868,16 @@ def polymyth_form(kind: str, lang: str, source_sha: str = "") -> str:
 <meta name="robots" content="noindex,follow">{governance_meta}
 <title>{title} · Polymythcal</title><meta name="description" content="{meta_escape(lead)}"><meta property="og:title" content="{meta_escape(title)} · Polymythcal"><meta property="og:description" content="{meta_escape(lead)}"><meta property="og:url" content="{SITE}{path}"><meta property="og:locale" content="{'fr_CA' if french else 'en_CA'}">
 <link rel="canonical" href="{SITE}{path}"><link rel="alternate" hreflang="en-CA" href="{SITE}/polymythseminars/{kind}/"><link rel="alternate" hreflang="fr-CA" href="{SITE}/polymythseminars/fr/{kind}/"><link rel="alternate" hreflang="x-default" href="{SITE}/polymythseminars/{kind}/">
-<link rel="stylesheet" href="/css/theme.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css"><link rel="stylesheet" href="/css/polymythcal-features.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={POLYMYTHCAL_ASSET_VERSION}" data-site-wide-type-zoom="{POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
+<link rel="stylesheet" href="/css/theme.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_ASSET_VERSION}"><link rel="stylesheet" href="/css/polymythcal-features.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={POLYMYTHCAL_ASSET_VERSION}" data-site-wide-type-zoom="{POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
-</head><body data-route-type="calendar-form" data-geometry="indra-web" data-indra-intensity="0.105"><a class="skip-link" href="#main-content">{"Aller au formulaire" if french else "Skip to form"}</a>
+</head><body data-route-type="calendar-form" data-geometry="indra-web" data-indra-intensity="0.105" data-geometry-role="return"><a class="skip-link" href="#main-content">{"Aller au formulaire" if french else "Skip to form"}</a>
 <main id="main-content" class="pm-form-shell"><nav class="pm-event-nav"><a href="/polymythseminars/{'fr/' if french else ''}">← Polymythcal</a><a href="{other}">{"English" if french else "Français"}</a></nav>
 <h1>{title}</h1><p>{lead}</p><form name="{form_name}" method="POST" action="/polymythseminars/{'fr/' if french else ''}thanks/" data-netlify="true" netlify-honeypot="website">
 <input type="hidden" name="form-name" value="{form_name}"><input type="hidden" name="interface_language" value="{'fr-CA' if french else 'en-CA'}"><p hidden><label>Leave empty <input name="website" autocomplete="off"></label></p>
 {''.join(rows)}<label><input type="checkbox" name="accuracy_confirmation" value="yes" required> {"Je confirme que ces renseignements sont exacts et peuvent être publiés." if french else "I confirm that this information is accurate and publicly shareable."}</label>
-<button type="submit">{submit}</button></form></main><script src="/js/theme.js" defer></script><script src="/js/polymythcal-features.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/site-keyboard-enhancements.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/mandala.js?v=cl91" defer></script><script src="/js/indra.js?v=cl91" defer></script><script src="/js/footer.js?v=20260805-predeploy-audit" defer></script></body></html>'''
+<button type="submit">{submit}</button></form></main><script src="/js/theme.js" defer></script><script src="/js/polymythcal-features.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/site-keyboard-enhancements.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/mandala.js?v={GEOMETRY_ASSET_VERSION}" defer></script>
+<script src="/js/indra.js?v={GEOMETRY_ASSET_VERSION}" defer></script>
+<script src="/js/footer.js?v=20260805-predeploy-audit" defer></script></body></html>'''
 
 
 def polymyth_thanks(lang: str) -> str:
@@ -890,9 +893,9 @@ def polymyth_thanks(lang: str) -> str:
 <meta charset="utf-8"><script src="/js/theme-init.js?v=20260723-steady"></script><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,follow"><title>{title} · Polymythcal</title><meta name="description" content="{meta_escape(lead)}"><meta property="og:title" content="{meta_escape(title)} · Polymythcal"><meta property="og:description" content="{meta_escape(lead)}"><meta property="og:url" content="{SITE}{path}"><meta property="og:locale" content="{'fr_CA' if french else 'en_CA'}">
 <link rel="canonical" href="{SITE}{path}"><link rel="alternate" hreflang="en-CA" href="{SITE}/polymythseminars/thanks/"><link rel="alternate" hreflang="fr-CA" href="{SITE}/polymythseminars/fr/thanks/"><link rel="alternate" hreflang="x-default" href="{SITE}/polymythseminars/thanks/">
-<link rel="stylesheet" href="/css/theme.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css"><link rel="stylesheet" href="/css/polymythcal-features.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={POLYMYTHCAL_ASSET_VERSION}" data-site-wide-type-zoom="{POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
+<link rel="stylesheet" href="/css/theme.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_ASSET_VERSION}"><link rel="stylesheet" href="/css/polymythcal-features.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={POLYMYTHCAL_ASSET_VERSION}" data-site-wide-type-zoom="{POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
-</head><body data-route-type="calendar-form" data-geometry="indra-web" data-indra-intensity="0.105"><main id="main-content" class="pm-form-shell"><p class="pm-event-kicker">Polymythcal</p><h1>{title}</h1><p>{lead}</p><p><a class="pm-event-action primary" href="/polymythseminars/{'fr/' if french else ''}">{"Retour au calendrier" if french else "Return to the calendar"}</a></p></main><script src="/js/theme.js" defer></script><script src="/js/site-keyboard-enhancements.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/mandala.js?v=cl91" defer></script><script src="/js/indra.js?v=cl91" defer></script><script src="/js/footer.js?v=20260805-predeploy-audit" defer></script></body></html>'''
+</head><body data-route-type="calendar-form" data-geometry="indra-web" data-indra-intensity="0.105" data-geometry-role="return"><main id="main-content" class="pm-form-shell"><p class="pm-event-kicker">Polymythcal</p><h1>{title}</h1><p>{lead}</p><p><a class="pm-event-action primary" href="/polymythseminars/{'fr/' if french else ''}">{"Retour au calendrier" if french else "Return to the calendar"}</a></p></main><script src="/js/theme.js" defer></script><script src="/js/site-keyboard-enhancements.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/mandala.js?v={GEOMETRY_ASSET_VERSION}" defer></script><script src="/js/indra.js?v={GEOMETRY_ASSET_VERSION}" defer></script><script src="/js/footer.js?v=20260805-predeploy-audit" defer></script></body></html>'''
 
 
 def subscriptions_page(lang: str, feeds: dict, source_sha: str) -> str:
@@ -904,8 +907,8 @@ def subscriptions_page(lang: str, feeds: dict, source_sha: str) -> str:
     path = f"/polymythseminars/{'fr/' if french else ''}subscribe/"
     title = "Abonnements Polymythcal" if french else "Polymythcal subscriptions"
     lead = "RSS fonctionne dans les lecteurs de fils. ICS fonctionne dans les applications de calendrier." if french else "RSS works in feed readers. ICS works in calendar apps."
-    return f'''<!doctype html><html lang="{'fr-CA' if french else 'en-CA'}"><head><meta charset="utf-8"><script src="/js/theme-init.js?v=20260723-steady"></script><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title}</title><meta name="description" content="{meta_escape(lead)}"><meta name="robots" content="index,follow"><meta name="translation-source" content="polymythseminars/feeds/index.json"><meta name="translation-source-sha256" content="{source_sha}"><meta name="translation-status" content="complete-owned-copy"><meta property="og:title" content="{meta_escape(title)}"><meta property="og:description" content="{meta_escape(lead)}"><meta property="og:url" content="{SITE}{path}"><meta property="og:locale" content="{'fr_CA' if french else 'en_CA'}"><link rel="canonical" href="{SITE}{path}"><link rel="alternate" hreflang="en-CA" href="{SITE}/polymythseminars/subscribe/"><link rel="alternate" hreflang="fr-CA" href="{SITE}/polymythseminars/fr/subscribe/"><link rel="alternate" hreflang="x-default" href="{SITE}/polymythseminars/subscribe/"><link rel="stylesheet" href="/css/theme.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css"><link rel="stylesheet" href="/css/polymythcal-features.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={POLYMYTHCAL_ASSET_VERSION}" data-site-wide-type-zoom="{POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
-<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady"></head><body data-route-type="calendar-form" data-geometry="indra-web" data-indra-intensity="0.105"><main class="pm-form-shell" id="main-content"><nav class="pm-event-nav"><a href="/polymythseminars/{'fr/' if french else ''}">← Polymythcal</a><a href="/polymythseminars/{'' if french else 'fr/'}subscribe/">{"English" if french else "Français"}</a></nav><h1>{title}</h1><p>{lead}</p><ul class="pm-feed-list">{rows}</ul></main><script src="/js/polymythcal-features.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/site-keyboard-enhancements.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/mandala.js?v=cl91" defer></script><script src="/js/indra.js?v=cl91" defer></script><script src="/js/footer.js?v=20260805-predeploy-audit" defer></script></body></html>'''
+    return f'''<!doctype html><html lang="{'fr-CA' if french else 'en-CA'}"><head><meta charset="utf-8"><script src="/js/theme-init.js?v=20260723-steady"></script><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title}</title><meta name="description" content="{meta_escape(lead)}"><meta name="robots" content="index,follow"><meta name="translation-source" content="polymythseminars/feeds/index.json"><meta name="translation-source-sha256" content="{source_sha}"><meta name="translation-status" content="complete-owned-copy"><meta property="og:title" content="{meta_escape(title)}"><meta property="og:description" content="{meta_escape(lead)}"><meta property="og:url" content="{SITE}{path}"><meta property="og:locale" content="{'fr_CA' if french else 'en_CA'}"><link rel="canonical" href="{SITE}{path}"><link rel="alternate" hreflang="en-CA" href="{SITE}/polymythseminars/subscribe/"><link rel="alternate" hreflang="fr-CA" href="{SITE}/polymythseminars/fr/subscribe/"><link rel="alternate" hreflang="x-default" href="{SITE}/polymythseminars/subscribe/"><link rel="stylesheet" href="/css/theme.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_ASSET_VERSION}"><link rel="stylesheet" href="/css/polymythcal-features.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={POLYMYTHCAL_ASSET_VERSION}" data-site-wide-type-zoom="{POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady"></head><body data-route-type="calendar-form" data-geometry="indra-web" data-indra-intensity="0.105" data-geometry-role="return"><main class="pm-form-shell" id="main-content"><nav class="pm-event-nav"><a href="/polymythseminars/{'fr/' if french else ''}">← Polymythcal</a><a href="/polymythseminars/{'' if french else 'fr/'}subscribe/">{"English" if french else "Français"}</a></nav><h1>{title}</h1><p>{lead}</p><ul class="pm-feed-list">{rows}</ul></main><script src="/js/polymythcal-features.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/site-keyboard-enhancements.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/mandala.js?v={GEOMETRY_ASSET_VERSION}" defer></script><script src="/js/indra.js?v={GEOMETRY_ASSET_VERSION}" defer></script><script src="/js/footer.js?v=20260805-predeploy-audit" defer></script></body></html>'''
 
 
 def build_polymythcal(governance: list[dict]) -> list[str]:

@@ -465,9 +465,14 @@ check(
   'release commands do not retain the ten-minute upper bound',
 );
 check(
-  packagingMetrics.timeout_regression_observed_ms >= 900
-    && packagingMetrics.timeout_regression_observed_ms <= 3000,
-  'bounded-runner timeout regression is outside its accepted window',
+  packagingMetrics.timeout_regression_target_ms === 1000
+    && packagingMetrics.timeout_regression_within_tolerance === true,
+  'bounded-runner timeout regression did not pass its deterministic 1000ms contract',
+);
+check(
+  packagingMetrics.selection?.deployer?.disposable_directory_pruning_enforced === true
+    && packagingMetrics.selection?.source?.disposable_directory_pruning_enforced === true,
+  'package selection does not retain its environment-independent pruning contract',
 );
 check(
   packagingMetrics.sequential_failure_report_regression_passed === true,
@@ -735,6 +740,9 @@ const buildOrder = [
   'update-polymythcal-build-manifest.js',
   'build-public-deploy.js',
   'verify-public-deploy-parity.js',
+  'verify-visible-geometry.js',
+  'verify-meaningful-geometry.js',
+  'verify-geometry.js',
   'verify-audit49-metadata-surface.js',
   'verify-audit49-runtime-efficiency.js',
   'verify-audit49-build-packaging-efficiency.js',
@@ -747,6 +755,7 @@ for (const token of buildOrder) {
     'build-audit45-localized-routes.py',
     'apply-audit45-translation-ui.js',
     'apply-audit49-metadata-hygiene.js',
+    'apply-visible-geometry.js',
   ].includes(token) ? 2 : 1;
   check(
     count(build, token) === expectedExecutions,
@@ -754,6 +763,13 @@ for (const token of buildOrder) {
   );
   previousBuildIndex = index;
 }
+const finalGeometryApply = build.lastIndexOf('apply-visible-geometry.js');
+check(
+  count(build, 'apply-visible-geometry.js') === 2
+    && finalGeometryApply > build.lastIndexOf('apply-audit49-metadata-hygiene.js')
+    && finalGeometryApply < build.indexOf('update-polymythcal-build-manifest.js'),
+  'canonical build does not reapply geometry after the last page generator',
+);
 check(
   !build.includes('verify-audit49-technical-efficiency.js'),
   'canonical build executes the aggregate before Audit 48 external evidence is refreshed',
@@ -761,6 +777,10 @@ check(
 check(
   !build.includes('apply-audit48-release-stamp.js'),
   'canonical build still applies the superseded Audit 48 release stamp',
+);
+check(
+  !build.includes('verify-visible-geometry-browser.mjs'),
+  'canonical Netlify build includes the browser-only geometry gate',
 );
 
 const reusedPreparation = section(
@@ -800,6 +820,12 @@ for (const token of [
     `runner does not safely suppress duplicate or parallel execution of ${token}`,
   );
 }
+check(
+  sequentialSection.includes('verify-build-idempotence.js')
+    && sequentialSection.indexOf('verify-build-idempotence.js')
+      < sequentialSection.indexOf('verify-visible-geometry-browser.mjs'),
+  'sequential runner does not enforce a fixed-point build before browser verification',
+);
 check(
   sequentialSection.includes('verify-audit48-external-validation.js'),
   'sequential runner does not refresh Audit 48 external evidence',
@@ -1068,7 +1094,7 @@ function renderMarkdown() {
     `- Every release-runner command has a ${formatNumber(b.command_timeout_ms)} ms upper bound, and a prerequisite failure writes a fresh failed report instead of leaving stale passing evidence.`,
     '- The public builder and package writer use recoverable exclusive locks. Package inputs reject duplicates, symlinks, escaping paths, output-transaction artifacts, and files that mutate during archive creation.',
     `- Archive creation moved from ${formatNumber(b.archive_source_read_passes_before)} source reads per member to ${formatNumber(b.archive_source_read_passes_after)} while retaining the compatibility SHA-256 ${code(b.archive_compatible_sha256 || 'missing')}.`,
-    `- Shared top-down selection pruned ${formatNumber(selection.deployer?.directories_pruned)} deployer directories and ${formatNumber(selection.source?.directories_pruned)} source-package directories before descent.`,
+    '- Shared top-down selection enforces dependency and generated-directory pruning before descent; the committed report is independent of whether those disposable directories happen to exist locally.',
     `- The deployer selection retained ${formatNumber(selection.deployer?.files_selected)} files; the source package retained ${formatNumber(selection.source?.files_selected)} files.`,
     '- Linux performs the canonical full audit once. Windows and macOS retain portable coverage, and the deployer inherits runner-owned parity/browser gates instead of repeating them.',
     '- Metadata-aware Audit 49 successors preserve the frozen Audit 36 assertions while excluding inert non-JavaScript script payloads from inline-code analysis.',

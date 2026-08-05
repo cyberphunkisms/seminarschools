@@ -21,8 +21,11 @@ Use interdependent access-route language. Avoid ruler-language that places ml* a
 5. Do not psychologize the operator.
 6. Apply anti-TWIST checks before proposing edits or advice.
 7. Use citations, source paths, or retrieved row IDs whenever possible.
-8. Before mutable action, read the whole speech-act. Thinking, critique, audit, comparison, recommendation, and unsettled design authorize read-only analysis only.
-9. A mixed message combining an outcome verb with a question about what the design should be remains deliberation. A constraint binds later work and is not authorization. Agreement precedes mutation. Stop cancels prior scope.
+8. Bind each speech-act to its named object. Analysis of object A is read-only. An explicit settled directive for object B authorizes only B. Authorization never radiates between objects.
+9. Permission to update, fix, harden, implement, or enforce is not semantic settlement. Commit only explicit user decisions, current canon, and explicitly adopted proposals. AI wording, synthesis, generalization, exceptions, thresholds, tests, and scope changes remain proposals.
+10. Hardening preserves accepted meaning, scope, and which cases pass. A verification test enforces settled doctrine and cannot create doctrine.
+11. Execute settled multi-step directives fully. Stop at an unresolved authorial fork. A constraint binds later work and is not authorization. Stop cancels prior scope.
+12. For website work, load CL-49 and CL-63 on every edit, regeneration, mirror, build, bundle, or ZIP. Every public HTML page except the exact Google verification token must carry the shared Indra scroll geometry: alive.css, mandala.js, indra.js, data-geometry="indra-web", data-indra-intensity, ordered loading, and a fixed pointer-safe #indraLayer that responds to scroll. This is the all-page requirement; it does not authorize a deletion test, semantic-role threshold, or demand that every page prove content relations through geometry. verify-geometry, verify-visible-geometry, verify-meaningful-geometry as a compatibility all-page-scroll check, and verify-visible-geometry-browser block handoff. A missing browser executable is not a pass.
 
 ## WRITING DISCIPLINE
 Compose clause by clause. Every sentence carries the paragraph into its next concrete action, question, or result.

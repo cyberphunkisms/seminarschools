@@ -106,6 +106,9 @@ const buildOrder = [
   'update-polymythcal-build-manifest.js',
   'build-public-deploy.js',
   'verify-public-deploy-parity.js',
+  'verify-visible-geometry.js',
+  'verify-meaningful-geometry.js',
+  'verify-geometry.js',
   'verify-audit45-translations.py',
   'verify-audit49-metadata-surface.js',
   'verify-audit49-runtime-efficiency.js',
@@ -118,12 +121,46 @@ for (const token of buildOrder) {
   check(index > previous, `production build omits or misorders ${token}`);
   previous = index;
 }
+const finalGeometryApply = build.lastIndexOf('apply-visible-geometry.js');
+check((build.match(/apply-visible-geometry\.js/g) || []).length === 2, 'production build must apply geometry before and after all page generators');
+check(
+  finalGeometryApply > build.lastIndexOf('apply-audit49-metadata-hygiene.js')
+    && finalGeometryApply < build.indexOf('update-polymythcal-build-manifest.js'),
+  'final geometry pass is not downstream of every page generator',
+);
+const fullRunner = read('scripts/verify-all-runner.js');
+for (const gate of ['verify-geometry.js', 'verify-visible-geometry.js', 'verify-meaningful-geometry.js', 'verify-visible-geometry-browser.mjs']) {
+  check(fullRunner.includes(`node scripts/${gate}`), `predeploy full runner lacks ${gate}`);
+}
+check(
+  (fullRunner.match(/node scripts\/verify-ml-dialectical-hardening\.js/g) || []).length === 1,
+  'predeploy full runner must execute the no-jump semantic-authority gate exactly once',
+);
+const browserGeometryCommand = 'node scripts/verify-visible-geometry-browser.mjs';
+const browserGeometryIndex = fullRunner.indexOf(browserGeometryCommand);
+const idempotenceCommand = 'node scripts/verify-build-idempotence.js';
+const idempotenceIndex = fullRunner.indexOf(idempotenceCommand);
+check(
+  (fullRunner.match(/node scripts\/verify-visible-geometry-browser\.mjs/g) || []).length === 1
+    && browserGeometryIndex > fullRunner.indexOf('const sequential = [')
+    && browserGeometryIndex < fullRunner.indexOf('const checks = ['),
+  'predeploy browser geometry gate is not a single sequential full-runner command',
+);
+check(
+  (fullRunner.match(/node scripts\/verify-build-idempotence\.js/g) || []).length === 1
+    && idempotenceIndex > fullRunner.indexOf('const sequential = [')
+    && idempotenceIndex < browserGeometryIndex,
+  'predeploy idempotence gate is not a single sequential post-build command',
+);
+check(!build.includes('verify-visible-geometry-browser.mjs'), 'browser geometry gate must remain outside the production/Netlify build');
 check(!build.includes('build-audit43-continuity-inventory.js'), 'build rewrites frozen Audit 43 evidence');
 
 for (const [name, command] of Object.entries({
   'build:public-deploy': 'node scripts/build-public-deploy.js',
   'verify:public-parity': 'node scripts/verify-public-deploy-parity.js',
   'verify:all:built': 'node scripts/verify-all-runner.js --reuse-build',
+  'verify:build-idempotence': 'node scripts/verify-build-idempotence.js',
+  'verify:ml-dialectical-hardening': 'node scripts/verify-ml-dialectical-hardening.js',
   'verify:frozen-audit43': 'node scripts/verify-frozen-audit43.js',
   'verify:audit45-translations': 'node scripts/run-python.js scripts/verify-audit45-translations.py',
   'audit:audit45-browser': 'node scripts/audit45-translation-browser.js',
@@ -294,10 +331,12 @@ for (const staleCurrentCommand of [
 ]) {
   check(!predeploy.includes(staleCurrentCommand), `predeploy still executes ${staleCurrentCommand}`);
 }
+const chromiumInstall = 'npx playwright install --with-deps chromium';
 check(
-  predeploy.indexOf('npx playwright install --with-deps chromium')
-    > predeploy.indexOf('npm run verify:all:built'),
-  'Chromium installation is not deferred until portable gates pass',
+  (predeploy.match(/npx playwright install --with-deps chromium/g) || []).length === 1
+    && predeploy.indexOf(chromiumInstall) > predeploy.indexOf('npm ci')
+    && predeploy.indexOf(chromiumInstall) < predeploy.indexOf('npm run verify:all:built'),
+  'Chromium must be installed exactly once before the full runner executes its browser geometry gate',
 );
 check(
   predeploy.indexOf('npm run verify:audit45-current-browser-evidence')

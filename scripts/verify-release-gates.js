@@ -45,8 +45,10 @@ check(lock.version === '1.0.6' && lock.packages?.['']?.version === '1.0.6', 'pac
 for (const [name, command] of Object.entries({
   'verify:all': 'node scripts/verify-all-runner.js',
   'verify:all:built': 'node scripts/verify-all-runner.js --reuse-build',
+  'verify:build-idempotence': 'node scripts/verify-build-idempotence.js',
   'verify:all:serial': 'node scripts/verify-all-runner.js --concurrency=1',
   'verify:release': 'node scripts/verify-all-runner.js',
+  'verify:ml-dialectical-hardening': 'node scripts/verify-ml-dialectical-hardening.js',
   'verify:frozen-audit43': 'node scripts/verify-frozen-audit43.js',
   'build:audit45-language-model': 'node scripts/run-python.js scripts/apply-audit45-language-model.py',
   'build:audit45-leizu-i18n': 'node scripts/build-leizu-i18n-source.js',
@@ -82,6 +84,8 @@ for (const [name, command] of Object.entries({
   'verify:audit49-runtime-efficiency': 'node scripts/verify-audit49-runtime-efficiency.js',
   'verify:audit49-build-packaging-efficiency': 'node scripts/verify-audit49-build-packaging-efficiency.js',
   'verify:audit49-technical-efficiency': 'node scripts/verify-audit49-technical-efficiency.js',
+  'verify:meaningful-geometry': 'node scripts/verify-meaningful-geometry.js',
+  'verify:visible-geometry-browser': 'node scripts/verify-visible-geometry-browser.mjs',
   'verify:cloud-input-runtime': 'node scripts/verify-cloud-input-runtime.js',
   'verify:redirect-coherence': 'node scripts/verify-redirect-policy-coherence.js',
 })) {
@@ -119,6 +123,9 @@ const buildOrder = [
   'update-polymythcal-build-manifest.js',
   'build-public-deploy.js',
   'verify-public-deploy-parity.js',
+  'verify-visible-geometry.js',
+  'verify-meaningful-geometry.js',
+  'verify-geometry.js',
   'verify-audit45-translations.py',
   'verify-audit49-metadata-surface.js',
   'verify-audit49-runtime-efficiency.js',
@@ -130,6 +137,37 @@ for (const token of buildOrder) {
   check(index > previous, `canonical build order omits or misorders ${token}`);
   previous = index;
 }
+const finalGeometryApply = build.lastIndexOf('apply-visible-geometry.js');
+check((build.match(/apply-visible-geometry\.js/g) || []).length === 2, 'canonical build must apply geometry before and after all page generators');
+check(
+  finalGeometryApply > build.lastIndexOf('apply-audit49-metadata-hygiene.js')
+    && finalGeometryApply < build.indexOf('update-polymythcal-build-manifest.js'),
+  'final geometry pass is not immediately downstream of page generation',
+);
+for (const gate of ['verify-geometry.js', 'verify-visible-geometry.js', 'verify-meaningful-geometry.js', 'verify-visible-geometry-browser.mjs']) {
+  check(runner.includes(`node scripts/${gate}`), `full release runner lacks ${gate}`);
+}
+check(
+  (runner.match(/node scripts\/verify-ml-dialectical-hardening\.js/g) || []).length === 1,
+  'full release runner must execute the no-jump semantic-authority gate exactly once',
+);
+const browserGeometryCommand = 'node scripts/verify-visible-geometry-browser.mjs';
+const browserGeometryIndex = runner.indexOf(browserGeometryCommand);
+const idempotenceCommand = 'node scripts/verify-build-idempotence.js';
+const idempotenceIndex = runner.indexOf(idempotenceCommand);
+check(
+  (runner.match(/node scripts\/verify-visible-geometry-browser\.mjs/g) || []).length === 1
+    && browserGeometryIndex > runner.indexOf('const sequential = [')
+    && browserGeometryIndex < runner.indexOf('const checks = ['),
+  'browser geometry gate must run exactly once in the full runner sequential phase',
+);
+check(
+  (runner.match(/node scripts\/verify-build-idempotence\.js/g) || []).length === 1
+    && idempotenceIndex > runner.indexOf('const sequential = [')
+    && idempotenceIndex < browserGeometryIndex,
+  'build idempotence must run exactly once after preparation and before browser verification',
+);
+check(!build.includes('verify-visible-geometry-browser.mjs'), 'browser geometry gate must remain outside the production/Netlify build');
 check(!build.includes('build-audit43-continuity-inventory.js'), 'canonical build mutates frozen Audit 43 inventory');
 
 for (const token of [

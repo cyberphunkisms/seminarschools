@@ -9,11 +9,17 @@ const fs = require('fs');
 const path = require('path');
 const { isGeneratedDependencyDirectory } = require('./repository-walk-policy');
 const ROOT = path.resolve(__dirname, '..');
+const GEOMETRY_CONTRACTS = JSON.parse(
+  fs.readFileSync(path.join(ROOT, 'data', 'geometry-route-contracts.json'), 'utf8'),
+);
+const GOOGLE_TOKEN = 'google20234ae70106ee9d.html';
+const GOOGLE_TOKEN_TEXT = 'google-site-verification: google20234ae70106ee9d.html\n';
 const SKIP = new Set([
   'node_modules', '.git', '.netlify', 'public', 'fixtures',
   '.public-build-staging', '.public-build-previous',
 ]);
-const VERSION = '20260723-steady';
+const STEADY_VERSION = '20260723-steady';
+const GEOMETRY_VERSION = '20260805-geometry-hardening';
 const OUTPUT_MTIME = process.env.SS_BUILD_OUTPUT_MTIME
   ? new Date(process.env.SS_BUILD_OUTPUT_MTIME)
   : null;
@@ -26,13 +32,13 @@ function walk(dir, out = []) {
     if (SKIP.has(ent.name) || isGeneratedDependencyDirectory(ent.name)) continue;
     const full = path.join(dir, ent.name);
     if (ent.isDirectory()) walk(full, out);
-    else if (ent.isFile() && ent.name.endsWith('.html') && !/^google.*\.html$/i.test(ent.name)) out.push(full);
+    else if (ent.isFile() && ent.name.endsWith('.html')) out.push(full);
   }
   return out;
 }
 function rel(file) { return path.relative(ROOT, file).replace(/\\/g, '/'); }
 function intensityFor(r) {
-  if (r === 'index.html') return '0.026';
+  if (r === 'index.html') return '0.040';
   if (/^polymythseminars\//.test(r) || r === 'polymythseminars/index.html') return '0.105';
   if (/^(writingclub|writingkids|writingjuniors|writingteens|writinggrads|university|philosophy|humanities|cfps|lectures|fellowships)\//.test(r)) return '0.095';
   if (/^saul\//.test(r)) return '0.075';
@@ -40,16 +46,48 @@ function intensityFor(r) {
   if (/^(polymyth|bb|bookwormcard|campaigns|aa)\//.test(r)) return '0.095';
   return '0.070';
 }
+function routeTypeFor(r, html) {
+  const existing = (html.match(/<body\b[^>]*\bdata-route-type\s*=\s*(['"])([^'"]+)\1/i) || [])[2];
+  if (existing) {
+    if (!GEOMETRY_CONTRACTS.route_types[existing]) {
+      throw new Error(`${r}: unknown data-route-type ${existing}; add its structural geometry role before building`);
+    }
+    return existing;
+  }
+  if (/http-equiv=["']refresh["']/i.test(html) && /location\.replace\(/.test(html)) return 'redirect';
+  if (r === '404.html') return 'error';
+  if (r === 'aa/editorial.html') return 'archive-tool';
+  if (/^bookwormcard\/(?:pdf|print)\/index\.html$/.test(r)) return 'game-print';
+  if (r === 'bookwormcard/success/index.html') return 'form-success';
+  if (r === 'campaigns/index.html') return 'campaign';
+  if (/^campaigns\//.test(r)) return 'campaign-tool';
+  if (r === 'dashboard/index.html') return 'tool';
+  if (/^leizu\/(?:[^/]+\/)?booking-success\/index\.html$/.test(r)) return 'form-success';
+  if (/^leizu\/(?:[^/]+\/)?intake\/index\.html$/.test(r)) return 'service-form';
+  if (/^polymyth\/(?:devils-notebook|devilsdiary)\//.test(r)) return 'publication';
+  if (r === 'polymyth/sitemap/graph/index.html') return 'map';
+  if (r === 'teacherresources/pedagogical-case/index.html') return 'teacher-manual';
+  throw new Error(`${r}: missing data-route-type; classify its structural geometry role before building`);
+}
 function ensureHead(html) {
   if (!/<head\b/i.test(html) || !/<\/head>/i.test(html)) return html;
 
   // Pre-paint state must execute synchronously before styles can flash.
   if (!/\/js\/theme-init\.js/i.test(html)) {
-    html = html.replace(/<head\b([^>]*)>/i, m => `${m}\n<script src="/js/theme-init.js?v=${VERSION}"></script>`);
+    html = html.replace(/<head\b([^>]*)>/i, m => `${m}\n<script src="/js/theme-init.js?v=${STEADY_VERSION}"></script>`);
   }
 
-  if (!/\/css\/alive\.css/i.test(html)) {
-    html = html.replace(/<\/head>/i, `<link rel="stylesheet" href="/css/alive.css?v=${VERSION}">\n</head>`);
+  const aliveLink = `<link rel="stylesheet" href="/css/alive.css?v=${GEOMETRY_VERSION}">`;
+  let aliveLinks = 0;
+  html = html.replace(
+    /<link\b(?=[^>]*\bhref=["'][^"']*\/css\/alive\.css(?:\?[^"']*)?["'])[^>]*>/ig,
+    () => {
+      aliveLinks += 1;
+      return aliveLinks === 1 ? aliveLink : '';
+    },
+  );
+  if (aliveLinks === 0) {
+    html = html.replace(/<\/head>/i, `<link rel="stylesheet" href="/css/alive.css?v=${GEOMETRY_VERSION}">\n</head>`);
   }
 
   // Calm UX must be the last stylesheet in the head so historic page-specific
@@ -64,34 +102,49 @@ function ensureHead(html) {
   if (calmLinks.length === 1) {
     const [calmLink] = calmLinks;
     const isCanonical = /\brel=["'][^"']*\bstylesheet\b[^"']*["']/i.test(calmLink[0])
-      && calmLink[0].includes(`href="/css/calm-ux.css?v=${VERSION}"`);
+      && calmLink[0].includes(`href="/css/calm-ux.css?v=${STEADY_VERSION}"`);
     const laterHead = head.slice(calmLink.index + calmLink[0].length);
     const laterStylesheet = /<link\b(?=[^>]*\brel=["'][^"']*\bstylesheet\b[^"']*["'])[^>]*>/i
       .test(laterHead);
     if (isCanonical && !laterStylesheet) return html;
   }
   html = html.replace(/\s*<link\b[^>]*href=["'][^"']*\/css\/calm-ux\.css[^"']*["'][^>]*>\s*/ig, '\n');
-  html = html.replace(/<\/head>/i, `<link rel="stylesheet" href="/css/calm-ux.css?v=${VERSION}">\n</head>`);
+  html = html.replace(/<\/head>/i, `<link rel="stylesheet" href="/css/calm-ux.css?v=${STEADY_VERSION}">\n</head>`);
   return html;
 }
-function ensureBody(html, intensity) {
+function ensureBody(html, intensity, routeType) {
+  const roles = GEOMETRY_CONTRACTS.route_types[routeType];
+  if (!Array.isArray(roles) || roles.length === 0) {
+    throw new Error(`${routeType}: missing structural geometry roles`);
+  }
   return html.replace(/<body\b([^>]*)>/i, (m, attrs) => {
     let a = attrs || '';
+    if (!/data-route-type\s*=/.test(a)) a += ` data-route-type="${routeType}"`;
+    else a = a.replace(/data-route-type\s*=\s*(['"])[\s\S]*?\1/, `data-route-type="${routeType}"`);
     if (!/data-geometry\s*=/.test(a)) a += ' data-geometry="indra-web"';
     else a = a.replace(/data-geometry\s*=\s*(['"])[\s\S]*?\1/, 'data-geometry="indra-web"');
     if (!/data-indra-intensity\s*=/.test(a)) a += ` data-indra-intensity="${intensity}"`;
     else a = a.replace(/data-indra-intensity\s*=\s*(['"])[\s\S]*?\1/, `data-indra-intensity="${intensity}"`);
+    if (!/data-geometry-role\s*=/.test(a)) a += ` data-geometry-role="${roles.join(' ')}"`;
+    else a = a.replace(/data-geometry-role\s*=\s*(['"])[\s\S]*?\1/, `data-geometry-role="${roles.join(' ')}"`);
     return `<body${a}>`;
   });
 }
 function ensureScripts(html) {
   if (!/<\/body>/i.test(html)) return html;
-  const hasMandala = /\/js\/mandala\.js/i.test(html);
-  const hasIndra = /\/js\/indra\.js/i.test(html);
-  let inject = '';
-  if (!hasMandala) inject += `<script src="/js/mandala.js?v=${VERSION}" defer></script>\n`;
-  if (!hasIndra) inject += `<script src="/js/indra.js?v=${VERSION}" defer></script>\n`;
-  if (inject) html = html.replace(/<\/body>/i, inject + '</body>');
+  // These two scripts are a coupled dependency: mandala defines the shared
+  // geometry utilities consumed by Indra. Remove stale/duplicate references,
+  // then install one canonical pair immediately before the shared footer (or
+  // at the end of body when the page has no shared footer).
+  html = html.replace(
+    /<script\b(?=[^>]*\bsrc=["'][^"']*\/js\/(?:mandala|indra)\.js(?:\?[^"']*)?["'])[^>]*>\s*<\/script>[ \t]*(?:\r?\n)?/ig,
+    '',
+  );
+  const inject = `<script src="/js/mandala.js?v=${GEOMETRY_VERSION}" defer></script>\n`
+    + `<script src="/js/indra.js?v=${GEOMETRY_VERSION}" defer></script>\n`;
+  const footer = /<script\b(?=[^>]*\bsrc=["'][^"']*\/js\/footer\.js(?:\?[^"']*)?["'])[^>]*>/i.exec(html);
+  if (footer) html = html.slice(0, footer.index) + inject + html.slice(footer.index);
+  else html = html.replace(/<\/body>/i, inject + '</body>');
   return html;
 }
 
@@ -100,9 +153,14 @@ const files = walk(ROOT);
 for (const file of files) {
   const r = rel(file);
   let html = fs.readFileSync(file, 'utf8');
+  if (r === GOOGLE_TOKEN) {
+    if (html !== GOOGLE_TOKEN_TEXT) throw new Error(`${GOOGLE_TOKEN}: verification token bytes changed`);
+    continue;
+  }
   const old = html;
+  const routeType = routeTypeFor(r, html);
   html = ensureHead(html);
-  html = ensureBody(html, intensityFor(r));
+  html = ensureBody(html, intensityFor(r), routeType);
   html = ensureScripts(html);
   if (html !== old) {
     fs.writeFileSync(file, html, 'utf8');

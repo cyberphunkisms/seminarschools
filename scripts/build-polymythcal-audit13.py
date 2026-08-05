@@ -12,6 +12,7 @@ ASSET_VERSION=str(release.get('polymythcal_asset_version') or '')
 if not re.fullmatch(r'[0-9]{8}-[a-z0-9-]+',ASSET_VERSION): raise SystemExit('RELEASE_MANIFEST.json has no valid polymythcal_asset_version')
 AUDIT43_VERSION='20260725-audit43'
 STEADY_VERSION='20260723-steady'
+GEOMETRY_VERSION='20260805-geometry-hardening'
 EVENT_GEOMETRY_INTENSITY='0.105'
 CHECK='--check' in sys.argv
 OUTPUT_MTIME_TEXT=str(os.environ.get('SS_BUILD_OUTPUT_MTIME') or '').strip()
@@ -60,6 +61,9 @@ def calendar_event_signature(value):
  robots=first_tag('meta',lambda tag:tag_attribute(tag,'name').lower()=='robots')
  official=first_tag('a',lambda tag:'pm-event-action' in tag_attribute(tag,'class').split() and 'primary' in tag_attribute(tag,'class').split())
  calendar=first_tag('a',lambda tag:tag_attribute(tag,'type').lower()=='text/calendar')
+ alive=first_tag('link',lambda tag:bool(re.search(r'/css/alive\.css(?:\?|$)',tag_attribute(tag,'href'))))
+ mandala=first_tag('script',lambda tag:bool(re.search(r'/js/mandala\.js(?:\?|$)',tag_attribute(tag,'src'))))
+ indra=first_tag('script',lambda tag:bool(re.search(r'/js/indra\.js(?:\?|$)',tag_attribute(tag,'src'))))
  signature={
   'event_id':tag_attribute(body.group(0),'data-event-id'),
   'canonical':tag_attribute(canonical,'href'),
@@ -69,6 +73,10 @@ def calendar_event_signature(value):
   'official_source':tag_attribute(official,'href'),
   'calendar_file':tag_attribute(calendar,'href'),
   'archived':bool(re.search(r'\bdata-event-archive-note\s*=\s*["\']true["\']',value,flags=re.I)),
+  'geometry_role':tag_attribute(body.group(0),'data-geometry-role'),
+  'geometry_assets':[
+   tag_attribute(alive,'href'),tag_attribute(mandala,'src'),tag_attribute(indra,'src'),
+  ],
  }
  return json.dumps(signature,ensure_ascii=False,sort_keys=True,separators=(',',':'))
 def comparable_html(value):
@@ -287,13 +295,13 @@ for e in events:
 <link rel="alternate" hreflang="fr-ca" href="{canonical}?lang=fr">
 <link rel="alternate" hreflang="x-default" href="{canonical}">
 <link rel="stylesheet" href="/css/theme.css?v={ASSET_VERSION}">
-<link rel="stylesheet" href="/css/alive.css">
+<link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_VERSION}">
 <link rel="stylesheet" href="/css/polymythcal-features.css?v={ASSET_VERSION}">
 <link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={ASSET_VERSION}" data-site-wide-type-zoom="{ASSET_VERSION}">
 {schema_markup}<link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
 <link rel="stylesheet" href="/css/calm-ux.css?v={STEADY_VERSION}">
 </head>
-<body data-route-type="calendar-event" data-geometry="indra-web" data-indra-intensity="{EVENT_GEOMETRY_INTENSITY}" data-event-id="{html.escape(sid,quote=True)}">
+<body data-route-type="calendar-event" data-geometry="indra-web" data-indra-intensity="{EVENT_GEOMETRY_INTENSITY}" data-geometry-role="relation return" data-event-id="{html.escape(sid,quote=True)}">
 <a class="skip-link" href="#main-content">Skip to event · Aller à la fiche</a>
 <main id="main-content" class="pm-event-page">
 <nav class="pm-event-nav" aria-label="Event navigation · Navigation de la fiche"><a href="/polymythseminars/">← All listings · Toutes les fiches</a><a href="?lang=fr" hreflang="fr-CA">Français</a></nav>
@@ -322,8 +330,8 @@ for e in events:
 <script src="/js/theme.js" defer></script>
 <script src="/js/polymythcal-features.js?v={ASSET_VERSION}" defer></script>
 <script src="/js/site-keyboard-enhancements.js?v={ASSET_VERSION}" defer></script>
-<script src="/js/mandala.js?v=cl91" defer></script>
-<script src="/js/indra.js?v=cl91" defer></script>
+<script src="/js/mandala.js?v={GEOMETRY_VERSION}" defer></script>
+<script src="/js/indra.js?v={GEOMETRY_VERSION}" defer></script>
 </body>
 </html>'''
 
@@ -345,10 +353,10 @@ for e in events:
    write_if_changed(icsdir/(legacy_id+'.ics'),canonical_ics[sid])
 for alias_id,sid in sorted(alias_targets.items()):
  target=f'/polymythseminars/events/{urllib.parse.quote(sid)}/'; alias_folder=out/alias_id; alias_folder.mkdir(parents=True,exist_ok=True)
- alias_page=f'<!doctype html><html lang="en-CA"><head>\n<script src="/js/theme-init.js?v={STEADY_VERSION}"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url={html.escape(target,quote=True)}"><link rel="canonical" href="https://seminarschools.com{html.escape(target,quote=True)}"><title>Event moved · Fiche déplacée</title><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={ASSET_VERSION}" data-site-wide-type-zoom="{ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={STEADY_VERSION}">\n<link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">\n<link rel="stylesheet" href="/css/calm-ux.css?v={STEADY_VERSION}">\n</head><body data-route-type="calendar-event-alias" data-legacy-event-id="{html.escape(alias_id,quote=True)}" data-geometry="indra-web" data-indra-intensity="{EVENT_GEOMETRY_INTENSITY}"><main><h1>Event moved · Fiche déplacée</h1><p><a href="{html.escape(target,quote=True)}">Open the stable event page · Ouvrir la fiche stable</a></p></main><script>location.replace({json.dumps(target)})</script><script src="/js/mandala.js?v={STEADY_VERSION}" defer></script>\n<script src="/js/indra.js?v={STEADY_VERSION}" defer></script>\n</body></html>'
+ alias_page=f'<!doctype html><html lang="en-CA"><head>\n<script src="/js/theme-init.js?v={STEADY_VERSION}"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url={html.escape(target,quote=True)}"><link rel="canonical" href="https://seminarschools.com{html.escape(target,quote=True)}"><title>Event moved · Fiche déplacée</title><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={ASSET_VERSION}" data-site-wide-type-zoom="{ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_VERSION}">\n<link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">\n<link rel="stylesheet" href="/css/calm-ux.css?v={STEADY_VERSION}">\n</head><body data-route-type="calendar-event-alias" data-legacy-event-id="{html.escape(alias_id,quote=True)}" data-geometry="indra-web" data-indra-intensity="{EVENT_GEOMETRY_INTENSITY}" data-geometry-role="return"><main><h1>Event moved · Fiche déplacée</h1><p><a href="{html.escape(target,quote=True)}">Open the stable event page · Ouvrir la fiche stable</a></p></main><script>location.replace({json.dumps(target)})</script><script src="/js/mandala.js?v={GEOMETRY_VERSION}" defer></script>\n<script src="/js/indra.js?v={GEOMETRY_VERSION}" defer></script>\n</body></html>'
  write_if_changed(alias_folder/'index.html',alias_page)
 alias=ROOT/'polymythcal';alias.mkdir(exist_ok=True)
-write_if_changed(alias/'index.html',f'<!doctype html><html lang="en-CA"><head>\n<script src="/js/theme-init.js?v={STEADY_VERSION}"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url=/polymythseminars/"><link rel="canonical" href="https://seminarschools.com/polymythseminars/"><title>Polymythcal</title><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={ASSET_VERSION}" data-site-wide-type-zoom="{ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={STEADY_VERSION}">\n<link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">\n<link rel="stylesheet" href="/css/calm-ux.css?v={STEADY_VERSION}">\n</head><body data-geometry="indra-web" data-indra-intensity="0.070"><main><h1>Polymythcal</h1><p><a href="/polymythseminars/">Open Polymythcal</a></p></main><script>location.replace("/polymythseminars/")</script><script src="/js/mandala.js?v={STEADY_VERSION}" defer></script>\n<script src="/js/indra.js?v={STEADY_VERSION}" defer></script>\n</body></html>')
+write_if_changed(alias/'index.html',f'<!doctype html><html lang="en-CA"><head>\n<script src="/js/theme-init.js?v={STEADY_VERSION}"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url=/polymythseminars/"><link rel="canonical" href="https://seminarschools.com/polymythseminars/"><title>Polymythcal</title><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={ASSET_VERSION}" data-site-wide-type-zoom="{ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_VERSION}">\n<link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">\n<link rel="stylesheet" href="/css/calm-ux.css?v={STEADY_VERSION}">\n</head><body data-route-type="redirect" data-geometry="indra-web" data-indra-intensity="0.070" data-geometry-role="return"><main><h1>Polymythcal</h1><p><a href="/polymythseminars/">Open Polymythcal</a></p></main><script>location.replace("/polymythseminars/")</script><script src="/js/mandala.js?v={GEOMETRY_VERSION}" defer></script>\n<script src="/js/indra.js?v={GEOMETRY_VERSION}" defer></script>\n</body></html>')
 if check_errors:
  print('POLYMYTHCAL DETAIL CHECK FAILED')
  for error in check_errors[:120]:print(' - '+error)

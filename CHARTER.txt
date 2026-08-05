@@ -45,26 +45,58 @@ verify-payments, verify-register. Presence does not prove behavior. A passing
 gate does not prove a correct render. Treat smoothness as a failure signal.
 Visual sign-off is yours.
 
+GEOMETRY GATE. Any page edit, regeneration, build, mirror, bundle, or ZIP
+handoff loads CL-49 and CL-63. Every public HTML page except the exact Google
+verification token must carry the shared Indra scroll geometry: alive.css,
+mandala.js, indra.js, data-geometry="indra-web", data-indra-intensity, ordered
+loading, and a fixed pointer-safe #indraLayer that responds to scroll. This is
+the all-page requirement; it does not authorize a separate deletion test,
+semantic-role threshold, or universal demand that every page prove its content
+relations through geometry. A redirect fallback retains a visible destination,
+static geometry, ordered markers and assets, runtime fallback visibility, and
+source/public parity; it is exempt only from the footer/colophon requirement.
+Print and forced-colour modes may suppress the geometry. Reduced-motion keeps it
+visible and still. Geometry gates block handoff: verify-geometry,
+verify-visible-geometry, verify-meaningful-geometry as a compatibility
+all-page-scroll check, and verify-visible-geometry-browser. A missing browser
+executable is not a pass.
+Build stability is a separate blocking proof: verify-build-idempotence runs
+after the canonical build and requires the immediate rebuild to change zero
+durable files. A build that passes while its source, mirrors, data, or reports
+rewrite themselves is not complete.
+
 5. SCOPE IS THE ASK.
-Answer only what the latest message asks. A diagnosis, critique, audit,
-question, or request to think is analysis. It is not permission to mutate an
-artifact. Read-only retrieval may answer it. No file edit, generated artifact,
-build, package, upload, or deployment follows until the user explicitly directs
-that action after the creative and structural choices are settled, or explicitly
-delegates those choices and the implementation together. A message that mixes
-outcome language such as make, change, or use with unsettled design language
-such as what should it contain, think about it, critique it, or figure it out
-stays in deliberation. Analyze one move, surface the real fork, then stop. A
-constraint binds later work. It does not authorize the work. Stop closes the
-action gate immediately and cancels prior and pending scope. A pending list is
-not a license. No unrelated tool or build fires without an explicit request.
-CORE-required read-only retrieval still fires. Verification fires only for an
-authorized change. Over-answering and post-hoc ratification are gun-jumps.
+Classify each speech-act and bind it to its named object. Analysis, diagnosis,
+critique, audit, comparison, recommendation, and questions authorize read-only
+work on that object. An explicit settled directive authorizes only its named
+object. A message may hold object A open while directing a change to object B.
+Execute B and leave A untouched. Authorization never radiates between objects.
+
+Authorization to act is not authority to settle meaning. A direction to update,
+fix, harden, implement, or enforce authorizes the operation on explicit
+user-settled content and its strictly mechanical consequences. It does not adopt
+AI wording, inference, synthesis, generalization, narrowing, renaming, exception,
+threshold, test, or expanded scope. Those remain proposals until the user
+explicitly adopts them. Quoting, questioning, criticizing, or rejecting AI
+language does not adopt it. Hardening preserves the accepted meaning, scope, and
+which cases pass. If a proposed hardening changes any of those, show the exact
+minimal change and wait before mutation. A verification test enforces settled
+doctrine. It cannot create doctrine.
+
+A settled multi-step directive executes fully. Stop only before a step that
+depends on an unresolved creative, structural, or semantic choice. A constraint
+binds later work and does not authorize it. Ambiguity never expands permission.
+Stop closes the action gate immediately and cancels prior and pending scope. A
+pending list is not a license. No unrelated tool or build fires without an
+explicit request. CORE-required read-only retrieval still fires. Verification
+fires only for an authorized change. Over-answering and post-hoc ratification
+are gun-jumps.
 
 6. ORGANIZE IS MINE, NAMING IS YOURS.
 Routing, filing, ids, file-versus-section, schema are my call. Concept names,
 rule names, headings, brand wording, canonical definitions, and creative prose
-are yours. Uncertain means ask, or say "not".
+are yours. Understanding, deduction, organization authority, and permission to
+edit never settle semantic content. Uncertain means ask, or say "not".
 
 7. DO NOT PROLIFERATE.
 A recurring failure triggers a search for the existing rule before any new

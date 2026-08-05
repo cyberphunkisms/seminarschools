@@ -113,13 +113,13 @@
     },
     "page_size_distribution": {
       "over_100_kib": 40,
-      "over_250_kib": 26,
+      "over_250_kib": 27,
       "over_500_kib": 7,
-      "largest_bytes": 3996037,
+      "largest_bytes": 4017602,
       "gzip_over_100_kib": 20,
       "gzip_over_250_kib": 4,
       "gzip_over_500_kib": 2,
-      "largest_gzip_bytes": 1219740
+      "largest_gzip_bytes": 1227638
     },
     "runtime": {
       "active_runtime_files": 3444,
@@ -130,7 +130,7 @@
       "public_runtime_mirrors_identical": 10,
       "forced_public_data_revalidation_fetches": 0,
       "bounded_public_data_assets": 24,
-      "bounded_public_data_bytes": 9850128
+      "bounded_public_data_bytes": 9894283
     },
     "cache_policies": {
       "polymyth_text_mirrors": "public, max-age=86400, stale-while-revalidate=604800",
@@ -139,10 +139,11 @@
       "saul_public_data": "public, max-age=86400, stale-while-revalidate=604800"
     },
     "build_packaging": {
-      "baseline_reuse_runner_checks": 158,
+      "baseline_reuse_runner_checks": 159,
       "baseline_reuse_runner_wall_ms": 23225,
       "command_timeout_ms": 600000,
-      "timeout_regression_observed_ms": 1008,
+      "timeout_regression_target_ms": 1000,
+      "timeout_regression_within_tolerance": true,
       "sequential_failure_report_regression_passed": true,
       "package_regression_tests": 10,
       "archive_benchmark_files": 5,
@@ -160,20 +161,20 @@
       "deployer_explicit_duplicate_browser_gates_after": 0,
       "selection": {
         "deployer": {
-          "directories_pruned": 1,
           "directories_visited": 7634,
-          "files_considered": 10944,
-          "files_selected": 10943,
+          "files_considered": 10950,
+          "files_selected": 10949,
           "public_files_selected": 4891,
-          "selected_bytes_excluding_this_report": 389130948
+          "selected_bytes_excluding_this_report": 390418231,
+          "disposable_directory_pruning_enforced": true
         },
         "source": {
-          "directories_pruned": 2,
           "directories_visited": 3861,
-          "files_considered": 6053,
-          "files_selected": 6052,
+          "files_considered": 6059,
+          "files_selected": 6058,
           "public_files_selected": 0,
-          "selected_bytes_excluding_this_report": 261064967
+          "selected_bytes_excluding_this_report": 261897938,
+          "disposable_directory_pruning_enforced": true
         }
       }
     },

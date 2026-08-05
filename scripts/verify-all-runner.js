@@ -38,6 +38,9 @@ const fullBuildPreparation = [
 ];
 const reusedBuildPreparation = [
   'node scripts/verify-public-deploy-parity.js',
+  'node scripts/verify-visible-geometry.js',
+  'node scripts/verify-meaningful-geometry.js',
+  'node scripts/verify-geometry.js',
   'node scripts/run-python.js scripts/verify-audit45-translations.py',
   'node scripts/verify-audit49-metadata-surface.js',
   'node scripts/verify-audit49-runtime-efficiency.js',
@@ -45,6 +48,12 @@ const reusedBuildPreparation = [
 ];
 const sequential = [
   ...(reuseBuild ? reusedBuildPreparation : fullBuildPreparation),
+  // A passing build is not enough: the immediately repeated build must be a
+  // byte-for-byte fixed point across source, deploy, data, and current reports.
+  'node scripts/verify-build-idempotence.js',
+  // Browser geometry is deliberately outside the Netlify production build,
+  // but remains a blocking, sequential predeploy check after Chromium setup.
+  'node scripts/verify-visible-geometry-browser.mjs',
   'node scripts/verify-meaninglib-search.js',
   'node scripts/verify-audit48-assistive-technology.js',
   'node scripts/verify-audit48-browser-program.js',
@@ -143,6 +152,7 @@ const checks = [
   'node scripts/verify-polymythcalendar-name.js',
   'node scripts/verify-geometry.js',
   'node scripts/verify-visible-geometry.js',
+  'node scripts/verify-meaningful-geometry.js',
   'node scripts/verify-zoom-resilience.js',
   'node scripts/verify-reviews-zoom-font-release.js',
   'node scripts/verify-register.js',
@@ -199,6 +209,8 @@ const checks = [
   'node scripts/verify-ml-antibacktracking.js',
   'node scripts/verify-ml-gorgonwars-premise-split.js',
   'node scripts/verify-ml-power-scope.js',
+  'node scripts/verify-ml-dialectical-hardening.js',
+  'node scripts/verify-ml-geometry-hardening.js',
   'node scripts/verify-ai-access-pack.js',
   'node scripts/verify-site-integrity.js',
   'node scripts/verify-professional-readiness.js',
@@ -210,6 +222,9 @@ const checks = [
 // them in the full runner. Reuse mode refreshes the same blockers in its own
 // preparation before the current external and aggregate release checks.
 const canonicalBuildCoveredChecks = new Set([
+  'node scripts/verify-visible-geometry.js',
+  'node scripts/verify-geometry.js',
+  'node scripts/verify-meaningful-geometry.js',
   'node scripts/verify-polymythcal-featured.js',
   'node scripts/verify-polymythcal-browser-payload.js',
   'node scripts/verify-polymythcal-build-efficiency.js',
@@ -220,6 +235,9 @@ const canonicalBuildCoveredChecks = new Set([
   'node scripts/verify-audit49-build-packaging-efficiency.js'
 ]);
 const reusedBuildPreparationChecks = new Set([
+  'node scripts/verify-visible-geometry.js',
+  'node scripts/verify-meaningful-geometry.js',
+  'node scripts/verify-geometry.js',
   'node scripts/run-python.js scripts/verify-audit45-translations.py',
   'node scripts/verify-audit49-metadata-surface.js',
   'node scripts/verify-audit49-runtime-efficiency.js',

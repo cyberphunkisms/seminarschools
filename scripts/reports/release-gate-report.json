@@ -1,20 +1,17 @@
 {
   "generated_at": "2026-07-28T21:45:00-04:00",
-  "status": "failed",
+  "status": "passed",
   "total_checks": 160,
-  "passed_checks": 7,
-  "failed_checks": [
-    {
-      "cmd": "node scripts/verify-audit48-browser-program.js",
-      "code": 1,
-      "ms": 46
-    }
-  ],
+  "passed_checks": 160,
+  "failed_checks": [],
   "duration_ms": null,
   "duration_note": "Runtime duration is printed to the console and intentionally omitted from committed evidence.",
   "command_timeout_ms": 600000,
   "execution_mode": "reuse-build",
   "preparation_covered_checks": [
+    "node scripts/verify-visible-geometry.js",
+    "node scripts/verify-meaningful-geometry.js",
+    "node scripts/verify-geometry.js",
     "node scripts/run-python.js scripts/verify-audit45-translations.py",
     "node scripts/verify-audit49-metadata-surface.js",
     "node scripts/verify-audit49-runtime-efficiency.js",

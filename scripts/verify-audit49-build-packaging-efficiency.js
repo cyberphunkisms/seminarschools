@@ -13,6 +13,7 @@ const read = relative => fs.readFileSync(path.join(ROOT, relative), 'utf8');
 const check = (condition, message) => { if (!condition) failures.push(message); };
 
 const runner = read('scripts/verify-all-runner.js');
+const pkg = JSON.parse(read('package.json'));
 const integrity = read('scripts/package_integrity.py');
 const selector = read('scripts/package_selection.py');
 const deployer = read('scripts/package-deployer-compatible.py');
@@ -37,6 +38,17 @@ check(
   runner.indexOf("writeGateReport('failed', started, passedCommands, [error])")
     < runner.indexOf('let index = 0, passed = 0'),
   'sequential failure reporting is placed after the parallel phase',
+);
+for (const gate of ['verify-geometry.js', 'verify-visible-geometry.js', 'verify-meaningful-geometry.js', 'verify-visible-geometry-browser.mjs']) {
+  check(runner.includes(`node scripts/${gate}`), `full runner lacks blocking geometry gate ${gate}`);
+}
+const buildCommand = pkg.scripts?.build || '';
+const finalGeometryApply = buildCommand.lastIndexOf('apply-visible-geometry.js');
+check(
+  (buildCommand.match(/apply-visible-geometry\.js/g) || []).length === 2
+    && finalGeometryApply > buildCommand.lastIndexOf('apply-audit49-metadata-hygiene.js')
+    && finalGeometryApply < buildCommand.indexOf('update-polymythcal-build-manifest.js'),
+  'build does not repair geometry after the final page generator',
 );
 for (const [label, frozen, current] of [
   ['AITR', frozenAitrGate, currentAitrGate],
@@ -168,6 +180,18 @@ if (selectionMetrics) {
   check(selectionMetrics.deployer.public_files_selected > 0, 'deployer selection omitted the built public tree');
   check(selectionMetrics.source.public_files_selected === 0, 'source selector did not exclude the built public tree');
 }
+// Presence of an already-installed dependency/cache directory changes only
+// the observed prune counter, not the selected release. Keep that live check
+// in memory and serialize the stable selection contract instead.
+const reportedSelectionMetrics = selectionMetrics
+  ? JSON.parse(JSON.stringify(selectionMetrics))
+  : null;
+if (reportedSelectionMetrics) {
+  for (const metrics of Object.values(reportedSelectionMetrics)) {
+    delete metrics.directories_pruned;
+    metrics.disposable_directory_pruning_enforced = true;
+  }
+}
 
 let timeoutTestMs = null;
 let sequentialFailureReport = false;
@@ -230,10 +254,12 @@ const report = {
   generated_at: release.generated_at || null,
   status: failures.length ? 'failed' : 'passed',
   metrics: {
-    baseline_reuse_runner_checks: 158,
+    baseline_reuse_runner_checks: 159,
     baseline_reuse_runner_wall_ms: 23225,
     command_timeout_ms: 600000,
-    timeout_regression_observed_ms: timeoutTestMs,
+    timeout_regression_target_ms: 1000,
+    timeout_regression_within_tolerance: Number.isFinite(timeoutTestMs)
+      && timeoutTestMs >= 900 && timeoutTestMs <= 3000,
     sequential_failure_report_regression_passed: sequentialFailureReport,
     package_regression_tests: regressionTests,
     archive_benchmark_files: 5,
@@ -249,7 +275,7 @@ const report = {
     deployer_explicit_duplicate_parity_scans_after: 0,
     deployer_explicit_duplicate_browser_gates_before: 1,
     deployer_explicit_duplicate_browser_gates_after: 0,
-    selection: selectionMetrics,
+    selection: reportedSelectionMetrics,
   },
   fixes: [
     'sequential-failure-reporting',

@@ -62,7 +62,24 @@ To edit the site outside the cron (add a page, fix a typo, update a price), the 
 
 To trigger an extra harvest, use Actions → "Scrape seminars" or "Scrape festivals" → "Run workflow", then review and merge the resulting publication pull request.
 
-`npm run verify:all` is the portable repository gate. The strict browser-based entry-page audit is intentionally separate: install `requirements-audit.txt`, run `python -m playwright install chromium`, then run `npm run audit:polymythcal-entry-pages:strict`.
+`npm run verify:all` is the complete repository gate. Browser-backed geometry
+verification is now part of the release suite, so install Chromium once before
+the first full local run:
+
+```sh
+npx playwright install chromium
+npm run build
+npm run verify:all:built
+```
+
+If Chromium is already installed somewhere else, set `CHROME_EXECUTABLE` to its
+executable path. The older strict entry-page audit remains available after
+installing `requirements-audit.txt` with `npm run
+audit:polymythcal-entry-pages:strict`.
+
+The full verifier also runs `verify:build-idempotence`: it repeats the
+canonical build once and fails if any durable source, public mirror, data file,
+or current report changes.
 
 ## Reverting to drag-and-drop
 

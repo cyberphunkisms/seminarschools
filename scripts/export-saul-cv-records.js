@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 const root = path.resolve(__dirname, '..');
+const release = JSON.parse(fs.readFileSync(path.join(root, 'RELEASE_MANIFEST.json'), 'utf8'));
 const src = fs.readFileSync(path.join(root, 'saul', 'index.html'), 'utf8');
 const m = src.match(/const D = (\[[\s\S]*?\n\]);/);
 if (!m) throw new Error('Could not read Saul CV data array');
@@ -32,7 +33,7 @@ const records = D.map((row, index) => {
   };
 });
 const out = {
-  generated_at: new Date().toISOString(),
+  generated_at: release.generated_at || null,
   purpose: 'Structured factual snapshot and verification ledger for the modular online CV. The live page remains the public rendering source.',
   locked_wording: {
     experience: '12+ years of international teaching experience',

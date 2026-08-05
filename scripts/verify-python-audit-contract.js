@@ -77,7 +77,11 @@ check(runner.includes('verify-polymythcal-calendar-clients.py'), 'verify:all omi
 check(runner.includes('verify_audit48_live_harvest.py'), 'verify:all omits Audit 48 live evidence');
 check(
   !/audit45-translation-browser\.js|audit48-cross-engine-browser\.js|audit43-approved-browser\.py|run-audit(?:38|39|40|41|42-inherited)-browser/.test(runner),
-  'portable verify:all directly invokes a browser program',
+  'verify:all directly invokes a historical evidence-producing browser program',
+);
+check(
+  runner.includes('verify-visible-geometry-browser.mjs'),
+  'verify:all omits the current computed-render geometry gate',
 );
 
 const workflow = read('.github/workflows/predeploy.yml');
@@ -96,8 +100,13 @@ check(
   !workflow.includes('npm install --no-save --package-lock=false --ignore-scripts playwright@1.61.1'),
   'predeploy retains the redundant second Playwright package install',
 );
+const chromiumInstall = 'npx playwright install --with-deps chromium';
+check(workflow.includes(chromiumInstall), `predeploy omits ${chromiumInstall}`);
+check(
+  workflow.indexOf(chromiumInstall) < workflow.indexOf(portableVerification),
+  `${chromiumInstall} does not run before the full verifier's computed-render geometry gate`,
+);
 for (const command of [
-  'npx playwright install --with-deps chromium',
   'npm run audit:audit45-browser',
   'npm run verify:audit45-current-browser-evidence',
 ]) {
@@ -156,7 +165,7 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(
-  'PYTHON/BROWSER AUDIT CONTRACT CHECK PASSED — portable gates stay browser-free, '
-  + 'lock-pinned Playwright is installed once, Audit 45 owns fresh Chromium evidence, '
+  'PYTHON/BROWSER AUDIT CONTRACT CHECK PASSED — historical evidence-producing browser programs stay external, '
+  + 'lock-pinned Playwright is installed once before the current computed-render geometry gate, Audit 45 owns fresh Chromium evidence, '
   + 'Audit 48 keeps cross-engine execution outside portable gates, and Audit 43 remains immutable.',
 );

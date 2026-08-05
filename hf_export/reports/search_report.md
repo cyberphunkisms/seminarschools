@@ -1,10 +1,10 @@
 # Meaninglib search build report
 
-Generated: 2026-08-04T22:37:09.505Z
+Generated: 2026-08-05T16:56:02.855Z
 
 Index: hf_export/search/meaninglib_search_index.json
 Documents: 2097
-Terms: 28375
+Terms: 28384
 
 ## Star-file document counts
 

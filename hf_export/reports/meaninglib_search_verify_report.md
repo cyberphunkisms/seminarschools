@@ -26,7 +26,7 @@ Query: Meaninglib ontology
 
 Query: interdependence rule
 
-1. [readme] Meaninglib (265.63)
+1. [readme] Meaninglib (265.62)
    - hf_export/README.md
 2. [ml] CL-60 INTERDEPENDENT DEFINITION — define each element by its own function and its interlock, never by ordinal or list-position (2026-06-14) (150.47)
    - hf_export/data/all_meaninglib_rows.jsonl
@@ -47,7 +47,7 @@ Query: ML* hierarchy language governs BB*
    - hf_export/data/all_meaninglib_rows.jsonl
 3. [mc] ml* deep reading — canonical-source discipline (169.87)
    - hf_export/data/all_meaninglib_rows.jsonl
-4. [ml] Siren rhetorical operator, required umbrella with provisional hierarchy (169.87)
+4. [ml] Siren rhetorical operator, required umbrella with provisional hierarchy (166.87)
    - hf_export/data/all_meaninglib_rows.jsonl
 5. [ml] Pedagogical ontology (165.79)
    - hf_export/data/all_meaninglib_rows.jsonl
@@ -56,7 +56,7 @@ Query: ML* hierarchy language governs BB*
 
 Query: stop psychologism
 
-1. [ml] Stop psychologism in operator-facing diagnosis, describe the failure not the user interior state (131.48)
+1. [ml] Stop psychologism in operator-facing diagnosis, describe the failure not the user interior state (131.33)
    - hf_export/data/all_meaninglib_rows.jsonl
 2. [ml] Psychologism (87.23)
    - hf_export/data/all_meaninglib_rows.jsonl
@@ -64,22 +64,22 @@ Query: stop psychologism
    - hf_export/data/all_meaninglib_rows.jsonl
 4. [ml] CORE slot 9 mirror — PSYCHOLOGISM AUDIT (74.44)
    - hf_export/data/all_meaninglib_rows.jsonl
-5. [ml] [288] Toni Morrison attribution trail: All art is knowing when to stop (65.21)
+5. [ml] [288] Toni Morrison attribution trail: All art is knowing when to stop (65.00)
    - hf_export/data/all_meaninglib_rows.jsonl
 
 ### PASS: AI prose tells law review top result retrieves ml* rule
 
 Query: AI prose tells
 
-1. [ml] AI prose tells as smoothness failure, law review convergence rule (140.62)
+1. [ml] AI prose tells as smoothness failure, law review convergence rule (140.59)
    - hf_export/data/all_meaninglib_rows.jsonl
-2. [ml] Voice audit at write-time (PM4 applies to AI prose) (95.31)
+2. [ml] Voice audit at write-time (PM4 applies to AI prose) (95.28)
    - hf_export/data/all_meaninglib_rows.jsonl
 3. [ml] "That tells you all" (62.21)
    - hf_export/data/all_meaninglib_rows.jsonl
-4. [ml] N133. Five pentagram books are AI-free. Definitional constraint on the pentagram-book project. The five books are written by the user without AI text-generation assistance. AI conversation IS permitted as research, note-taking, and dialectical interlocutor (the conversations themselves serve as note-corpus per N132 above), but the prose of the books is the user's prose, not co-written. This is the achievement-mode that distinguishes the pentagram-books from any other writing-output. (a) BLOCKED ON: book titles (long-standing P6 pending). (b) BLOCKER TYPE: user authorship. (c) WHAT THE USER NEEDS TO PROVIDE: the five titles + the pentagram structural assignments (which book sits at which vertex). (d) CROSS-REFS: N132 verbatim-corpus extraction (the legitimate AI-assisted research-mode for these books); pentagram-titles long-standing P6 pending item; user's standing rule that AI does not coin polymyth names (no-naming rule, memory slot 30); studylist section microbook stubs (Marshmellowmonster, Microbook: Jesters, Microbook: Rainbows, etc., all of which are Rainbowsol-named — same discipline applies to the pentagram books). (61.56)
+4. [ml] N133. Five pentagram books are AI-free. Definitional constraint on the pentagram-book project. The five books are written by the user without AI text-generation assistance. AI conversation IS permitted as research, note-taking, and dialectical interlocutor (the conversations themselves serve as note-corpus per N132 above), but the prose of the books is the user's prose, not co-written. This is the achievement-mode that distinguishes the pentagram-books from any other writing-output. (a) BLOCKED ON: book titles (long-standing P6 pending). (b) BLOCKER TYPE: user authorship. (c) WHAT THE USER NEEDS TO PROVIDE: the five titles + the pentagram structural assignments (which book sits at which vertex). (d) CROSS-REFS: N132 verbatim-corpus extraction (the legitimate AI-assisted research-mode for these books); pentagram-titles long-standing P6 pending item; user's standing rule that AI does not coin polymyth names (no-naming rule, memory slot 30); studylist section microbook stubs (Marshmellowmonster, Microbook: Jesters, Microbook: Rainbows, etc., all of which are Rainbowsol-named — same discipline applies to the pentagram books). (61.53)
    - hf_export/data/all_meaninglib_rows.jsonl
-5. [ml] PM4. Zero-dashes rule (em/en/hyphen-attach) in user-facing prose (61.43)
+5. [ml] PM4. Zero-dashes rule (em/en/hyphen-attach) in user-facing prose (61.42)
    - hf_export/data/all_meaninglib_rows.jsonl
 
 ### PASS: Bookwormburrows identity query retrieves bb* identity at top
@@ -146,13 +146,13 @@ Query: campaigncodex
 
 Query: HTML txt mirror
 
-1. [ml] ML*-DUAL-WRITE (txt/HTML sync rule) (732.74)
+1. [ml] ML*-DUAL-WRITE (txt/HTML sync rule) (732.66)
    - hf_export/data/all_meaninglib_rows.jsonl
-2. [ml] ml*/bb* HTML-vs-txt sync discipline (canonical-source rule) (211.41)
+2. [ml] ml*/bb* HTML-vs-txt sync discipline (canonical-source rule) (211.37)
    - hf_export/data/all_meaninglib_rows.jsonl
-3. [manifest] methodologylist section manifest (184.51)
+3. [manifest] methodologylist section manifest (184.49)
    - hf_export/data/all_meaninglib_rows.jsonl
-4. [ml] methodologylist full text mirror (163.19)
+4. [ml] methodologylist full text mirror (163.14)
    - hf_export/data/all_meaninglib_rows.jsonl
-5. [ml] CORE slot 3 mirror — SCANNER+LEXICON (142.20)
+5. [ml] CORE slot 3 mirror — SCANNER+LEXICON (142.04)
    - hf_export/data/all_meaninglib_rows.jsonl

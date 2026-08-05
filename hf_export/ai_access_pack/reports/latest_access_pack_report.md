@@ -1,6 +1,6 @@
 # Meaninglib AI Access Pack report
 
-Generated: 2026-08-04T22:37:09.970Z
+Generated: 2026-08-05T16:56:03.323Z
 Query: Meaninglib ontology Mephistodata default AI Access Pack
 Rows: 8
 Markdown: hf_export/ai_access_pack/latest_access_pack.md
