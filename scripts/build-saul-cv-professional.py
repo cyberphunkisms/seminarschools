@@ -1031,15 +1031,15 @@ pkg_path.write_text(json.dumps(pkg, indent=2) + '\n', encoding='utf-8')
 (ROOT / 'docs' / 'SAUL_CV_VISUAL_WEB_PROFESSIONAL_PDF_RELEASE_2026-07-16.md').write_text(f'''# Saul Visual Web / Professional PDF Release - 2026-07-16\n\n- Website: one mild-spectrum modular card shared by all 12 focused routes.\n- Website hierarchy: portrait and profile, compact focus rail, selected experience, skills, one professional-PDF action, secondary formats, optional combinations.\n- Main page: Writing titles receive a stable title column and descriptions receive the flexible column.\n- PDFs: 12 professional monochrome one-page PDFs, 12 ATS-safe one-page PDFs, 12 plain-text outputs and one complete archive PDF.\n- PDF spectrum/geometry: absent.\n- Education rule: MA and academic details appear only in the Education output or an Education-selected web state.\n- Current canonical release: `{canonical['release']}`.\n''', encoding='utf-8')
 
 
-# Ordered post-build migrations. Audit12 is authoritative last.
+# Ordered post-build migrations. The retired Audit11/Audit12 homepage
+# migrations are intentionally excluded so they cannot restore project
+# priority or first-click navigation over the current homepage contract.
 # Compatibility marker used by Final8 hook detection: polish_script = ROOT /
 import subprocess, sys
 for migration_name in [
     'apply-final8-website-polish.py',
     'apply-final9-mephistodata-website-hardening.py',
     'apply-audit10-remaining-website-fixes.py',
-    'apply-audit11-website-decisions.py',
-    'apply-audit12-mobile-web-hybrid.py',
 ]:
     migration = ROOT / 'scripts' / migration_name
     if migration.is_file():

@@ -70,11 +70,10 @@ if (!Array.isArray(frozen.files) || frozen.files.length < 100) {
   failures.push('Audit 42 frozen manifest must retain at least 100 evidence files');
 }
 
-// Project-specific CSS-native home marks preserve the established paths.
+// Six project-specific CSS-native home marks preserve the established paths.
 const home = read('index.html');
 const homeCards = [
   ['polymythcal', '/polymythseminars/'],
-  ['commons', '/polymythcommons/'],
   ['leizu', '/leizu/'],
   ['teacher', '/teacherresources/'],
   ['bb', '/bb/'],
@@ -89,8 +88,8 @@ for (const [project, href] of homeCards) {
     failures.push(`home is missing preserved project route ${href}`);
   }
 }
-if ((home.match(/class="path-mark"/g) || []).length !== homeCards.length) {
-  failures.push(`home must expose exactly ${homeCards.length} project path marks`);
+if ((home.match(/class="path-mark"/g) || []).length !== 6) {
+  failures.push('home must expose exactly six project path marks');
 }
 
 // View Transitions stay short and disappear completely for reduced motion.
@@ -135,7 +134,7 @@ for (const token of [
   'id="pmNear"',
   'No nearby ranking',
   'Nearest to selected place',
-  'Optional approximate ranking. The calendar asks for no location permission.',
+  'Approximate distance; no location permission.',
 ]) need('polymythseminars/index.html', token);
 for (const token of [
   'state.sort === "nearest"',

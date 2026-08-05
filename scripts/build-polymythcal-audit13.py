@@ -42,7 +42,38 @@ def legacy_slug(value):
  text=html.unescape(str(value or 'event')).lower().replace('&',' and ')
  return re.sub(r'[^a-z0-9]+','-',text).strip('-')[:76] or 'event'
 def legacy_alias(sid): return f'{legacy_slug(sid)}-{hashlib.sha1(str(sid).encode()).hexdigest()[:8]}'
+def tag_attribute(tag,name):
+ match=re.search(rf'\b{re.escape(name)}\s*=\s*(["\'])(.*?)\1',tag,flags=re.I|re.S)
+ return html.unescape(match.group(2)).strip() if match else ''
+def calendar_event_signature(value):
+ body=re.search(r'<body\b[^>]*>',value,flags=re.I)
+ if not body or tag_attribute(body.group(0),'data-route-type')!='calendar-event':return None
+ def first_tag(name,predicate=lambda _tag:True):
+  for found in re.finditer(rf'<{name}\b[^>]*>',value,flags=re.I):
+   if predicate(found.group(0)):return found.group(0)
+  return ''
+ def visible(tag_name):
+  found=re.search(rf'<{tag_name}\b[^>]*>([\s\S]*?)</{tag_name}\s*>',value,flags=re.I)
+  if not found:return ''
+  return re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',found.group(1)))).strip()
+ canonical=first_tag('link',lambda tag:'canonical' in tag_attribute(tag,'rel').lower().split())
+ robots=first_tag('meta',lambda tag:tag_attribute(tag,'name').lower()=='robots')
+ official=first_tag('a',lambda tag:'pm-event-action' in tag_attribute(tag,'class').split() and 'primary' in tag_attribute(tag,'class').split())
+ calendar=first_tag('a',lambda tag:tag_attribute(tag,'type').lower()=='text/calendar')
+ signature={
+  'event_id':tag_attribute(body.group(0),'data-event-id'),
+  'canonical':tag_attribute(canonical,'href'),
+  'title':visible('h1'),
+  'date':visible('time'),
+  'robots':tag_attribute(robots,'content').lower(),
+  'official_source':tag_attribute(official,'href'),
+  'calendar_file':tag_attribute(calendar,'href'),
+  'archived':bool(re.search(r'\bdata-event-archive-note\s*=\s*["\']true["\']',value,flags=re.I)),
+ }
+ return json.dumps(signature,ensure_ascii=False,sort_keys=True,separators=(',',':'))
 def comparable_html(value):
+ signature=calendar_event_signature(value)
+ if signature is not None:return signature
  # The site-wide stylesheet postprocessor owns this cache token after the
  # event-detail generator runs. Normalize only that downstream-owned value so
  # --check continues to detect route/content drift without reporting a false

@@ -1,9 +1,9 @@
 {
   "schema": "seminar-schools-audit49-technical-efficiency-v1",
-  "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
-  "asset_version": "20260726-audit49",
+  "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
+  "asset_version": "20260728-audit53",
   "package_version": "1.0.6",
-  "generated_at": "2026-07-26T15:45:00-04:00",
+  "generated_at": "2026-07-28T21:45:00-04:00",
   "status": "passed",
   "scope": {
     "decision": "aggregate current component evidence without repeating full repository walks",
@@ -30,6 +30,8 @@
         "philosophy",
         "polymyth",
         "polymythcal",
+        "polymythcommons",
+        "polymythlib",
         "polymythseminars",
         "reviews",
         "saul",
@@ -57,70 +59,70 @@
     "metadata": {
       "path": "scripts/reports/audit49-metadata-surface.json",
       "schema": "seminar-schools-audit49-metadata-surface-v1",
-      "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
-      "generated_at": "2026-07-26T15:45:00-04:00",
+      "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
+      "generated_at": "2026-07-28T21:45:00-04:00",
       "status": "passed"
     },
     "runtime": {
       "path": "scripts/reports/audit49-runtime-efficiency.json",
       "schema": "seminar-schools-audit49-runtime-efficiency-v1",
-      "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
-      "generated_at": "2026-07-26T15:45:00-04:00",
+      "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
+      "generated_at": "2026-07-28T21:45:00-04:00",
       "status": "passed"
     },
     "build_packaging": {
       "path": "scripts/reports/audit49-build-packaging-efficiency.json",
       "schema": "seminar-schools-audit49-build-packaging-efficiency-v1",
-      "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
-      "generated_at": "2026-07-26T15:45:00-04:00",
+      "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
+      "generated_at": "2026-07-28T21:45:00-04:00",
       "status": "passed"
     },
     "audit48_external_validation": {
       "path": "scripts/reports/audit48-external-validation.json",
       "schema": "seminar-schools-audit48-external-validation-v1",
-      "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
-      "generated_at": "2026-07-26T15:45:00-04:00",
+      "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
+      "generated_at": "2026-07-28T21:45:00-04:00",
       "status": "passed",
       "machine_validation_status": "passed"
     }
   },
   "metrics": {
     "metadata": {
-      "source_html_documents": 3395,
-      "public_html_documents": 3395,
-      "interactive_documents": 2505,
+      "source_html_documents": 3748,
+      "public_html_documents": 3748,
+      "interactive_documents": 2858,
       "redirect_documents": 890,
-      "indexable_documents": 891,
-      "noindex_documents": 2504,
-      "sitemap_urls": 911,
-      "schema_blocks": 2289,
-      "schema_documents": 903,
+      "indexable_documents": 1219,
+      "noindex_documents": 2529,
+      "sitemap_urls": 1239,
+      "schema_blocks": 2617,
+      "schema_documents": 1231,
       "indexable_documents_without_schema": 1,
       "intentional_schema_exemptions": 1,
       "hreflang_links": 5430,
       "hreflang_documents": 1755,
-      "source_public_byte_identical": 3395,
+      "source_public_byte_identical": 3748,
       "generated_teacher_resource_documents": 678,
       "generated_event_documents": 2535,
-      "documents_with_one_title": 3395,
-      "documents_with_one_description": 2506,
-      "documents_with_one_viewport": 3395,
-      "documents_with_one_canonical": 3394,
-      "documents_with_one_robots_directive": 3358,
+      "documents_with_one_title": 3748,
+      "documents_with_one_description": 2859,
+      "documents_with_one_viewport": 3748,
+      "documents_with_one_canonical": 3747,
+      "documents_with_one_robots_directive": 3359,
       "sitemap_non_html_resources": 20
     },
     "page_size_distribution": {
       "over_100_kib": 40,
       "over_250_kib": 26,
       "over_500_kib": 7,
-      "largest_bytes": 3989374,
+      "largest_bytes": 3996037,
       "gzip_over_100_kib": 20,
       "gzip_over_250_kib": 4,
       "gzip_over_500_kib": 2,
-      "largest_gzip_bytes": 1217370
+      "largest_gzip_bytes": 1219740
     },
     "runtime": {
-      "active_runtime_files": 3439,
+      "active_runtime_files": 3444,
       "files_with_intervals": 10,
       "interval_calls": 10,
       "bounded_leaf_routes": 10,
@@ -128,7 +130,7 @@
       "public_runtime_mirrors_identical": 10,
       "forced_public_data_revalidation_fetches": 0,
       "bounded_public_data_assets": 24,
-      "bounded_public_data_bytes": 9774758
+      "bounded_public_data_bytes": 9850128
     },
     "cache_policies": {
       "polymyth_text_mirrors": "public, max-age=86400, stale-while-revalidate=604800",
@@ -140,7 +142,7 @@
       "baseline_reuse_runner_checks": 158,
       "baseline_reuse_runner_wall_ms": 23225,
       "command_timeout_ms": 600000,
-      "timeout_regression_observed_ms": 1006,
+      "timeout_regression_observed_ms": 1008,
       "sequential_failure_report_regression_passed": true,
       "package_regression_tests": 10,
       "archive_benchmark_files": 5,
@@ -159,24 +161,24 @@
       "selection": {
         "deployer": {
           "directories_pruned": 1,
-          "directories_visited": 6923,
-          "files_considered": 10154,
-          "files_selected": 10153,
-          "public_files_selected": 4515,
-          "selected_bytes_excluding_this_report": 354406397
+          "directories_visited": 7634,
+          "files_considered": 10944,
+          "files_selected": 10943,
+          "public_files_selected": 4891,
+          "selected_bytes_excluding_this_report": 389130948
         },
         "source": {
           "directories_pruned": 2,
-          "directories_visited": 3505,
-          "files_considered": 5639,
-          "files_selected": 5638,
+          "directories_visited": 3861,
+          "files_considered": 6053,
+          "files_selected": 6052,
           "public_files_selected": 0,
-          "selected_bytes_excluding_this_report": 234664477
+          "selected_bytes_excluding_this_report": 261064967
         }
       }
     },
     "audit48_external_validation": {
-      "interactive_source_pages": 2505,
+      "interactive_source_pages": 2858,
       "redirect_source_pages": 890,
       "calendar_tests": 9,
       "calendar_files": 857,
@@ -204,7 +206,7 @@
           "fr-CA": 23,
           "mul": 3
         },
-        "methodology_entries": 1168,
+        "methodology_entries": 1182,
         "governed_route_records": 61,
         "event_source_language_counts": {
           "und": 796,

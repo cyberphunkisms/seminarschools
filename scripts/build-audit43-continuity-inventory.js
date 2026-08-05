@@ -112,11 +112,10 @@ function build() {
   };
 
   const floors = {
-    events: 833,
+    events: 838,
     event_types: 32,
     registered_sources: 422,
-    event_alias_routes: 857,
-    methodology_entries: 1139,
+    event_alias_routes: 842,
     public_files: 3551,
     public_html_routes: 2474,
     browser_harvest_sources: 10,
@@ -131,6 +130,7 @@ function build() {
     teacher_resources: 644,
     teacher_collections: 25,
     teacher_groups: 7,
+    methodology_entries: 1139,
     methodology_sections: 16,
     reader_routes: 6,
   })) {

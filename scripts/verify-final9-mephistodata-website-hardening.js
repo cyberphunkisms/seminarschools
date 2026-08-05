@@ -19,9 +19,9 @@ for(const token of ['A spare credential belongs beside the action it explains.',
 for(const token of ['## WRITING DISCIPLINE','bolted-on also/category appendages','balanced consequence-summary/two-outcome closers','Use the deletion test.']) has('hf_export/ai_access_pack/MEPHISTODATA_ACTIVATION.md', token);
 
 const directCopyPairs = [
-  ['index.html','Choose a section.'],
-  ['index.html','Find events and application deadlines.'],
-  ['index.html','Filter by date, place, topic, and audience.'],
+  ['index.html','Select a project to preview it. Open it from the description.'],
+  ['index.html','Every project has the same weight.'],
+  ['index.html','Its plain-language description will appear here before you leave this page.'],
   ['about/index.html','Choose a professional focus, share the selected view, or download the matching monochrome CV.'],
   ['about/index.html','is a PhD candidate in Education.']
 ];
@@ -42,7 +42,7 @@ if(!/^\d{4}-\d{2}-\d{2}-.+/.test(String(canonical.release||''))) fail.push('cano
 const canonicalText = JSON.stringify(canonical);
 if(ultimate){
   if(!read('saul/index.html').includes('Supported transport, information, security, and crowd flow during festival operations and participated in 2025 and 2026 planning.')) fail.push('BUMI operational archive detail missing');
-  for(const token of ['"application_experience_rows":36','"application_phd_excluded":true','"application_downloads_have_email_only_variants":true']) if(!canonicalText.includes(token)) fail.push(`ultimate canonical missing ${token}`);
+  for(const token of ['"application_experience_rows":37','"application_phd_excluded":true','"application_downloads_have_email_only_variants":true']) if(!canonicalText.includes(token)) fail.push(`ultimate canonical missing ${token}`);
 }else if(!canonicalText.includes('Supported transport, information, security, and crowd flow during festival operations and participated in 2025 and 2026 planning.')) fail.push('BUMI operational bullet missing');
 if(canonicalText.includes('Helps with transport, information, security and crowd support;')) fail.push('old BUMI bullet returned');
 if(/TELUS/i.test(canonicalText)) fail.push('TELUS returned to canonical CV');
@@ -71,9 +71,9 @@ has('scripts/build-saul-cv-professional.py','apply-final9-mephistodata-website-h
 has('scripts/verify-all-runner.js','verify-final9-mephistodata-website-hardening.js');
 
 if(exists('public/index.html')){
-  has('public/index.html','Choose a section.');
-  has('public/index.html','Find events and application deadlines.');
-  has('public/index.html','Filter by date, place, topic, and audience.');
+  has('public/index.html','Select a project to preview it. Open it from the description.');
+  has('public/index.html','Every project has the same weight.');
+  has('public/index.html','Its plain-language description will appear here before you leave this page.');
   has('public/about/index.html','is a PhD candidate in Education.');
   has('public/saul/index.html',ultimate ? 'Finished one-page application CV' : 'Use the webpage for the visual record. Download a monochrome PDF for applications.');
 }

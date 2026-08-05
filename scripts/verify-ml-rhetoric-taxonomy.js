@@ -37,6 +37,7 @@ function key(entry) {
 const expected = {
   'rhetoric-taxonomy-source-ledger-2026-07-29': 'citation',
   'rhetoric-taxonomy-level-matrix-2026-07-29': 'methodology',
+  'rhetoric-taxonomy-settled-figure-routing-2026-07-29': 'methodology',
   'rhetoric-taxonomy-jester-fool-trickster-family-2026-07-29': 'methodology',
   'rhetoric-taxonomy-sophist-actor-move-split-2026-07-29': 'methodology',
   'rhetoric-taxonomy-troll-operator-2026-07-29': 'methodology',
@@ -58,8 +59,8 @@ const combined = parseSeedWithAddenda(html);
 assert(historical.length === 1141, 'historical SEED changed from 1,141 to ' + historical.length);
 assert(snakelogic.length === 6, 'Snakelogic addendum changed from 6 to ' + snakelogic.length);
 assert(mythology.length === 23, 'mythology addendum changed from 23 to ' + mythology.length);
-assert(rhetoric.length === 11, 'rhetoric addendum must contain 11 entries, found ' + rhetoric.length);
-assert(combined.length === 1181, 'combined ML* must contain 1,181 entries, found ' + combined.length);
+assert(rhetoric.length === 12, 'rhetoric addendum must contain 12 entries, found ' + rhetoric.length);
+assert(combined.length === 1182, 'combined ML* must contain 1,182 entries, found ' + combined.length);
 assert(combined.length === raw.length, 'combined parser silently removed one or more raw entries');
 
 const seen = new Set();
@@ -92,7 +93,7 @@ for (const [id, section] of Object.entries(expected)) {
   );
 }
 
-const rhetoricScript = '/polymyth/methodologylist/rhetoric-taxonomy-addendum.js?v=20260729';
+const rhetoricScript = '/polymyth/methodologylist/rhetoric-taxonomy-addendum.js?v=20260729b';
 assert(html.includes('<script src="' + rhetoricScript + '"></script>'), 'rhetoric addendum script tag is missing');
 assert(
   html.indexOf(rhetoricScript) < html.indexOf('const LIVE_SEED=Object.freeze(['),
@@ -121,7 +122,7 @@ assert(
 );
 
 const manifest = JSON.parse(read('data/author-sources/rhetoric-taxonomy-conversation-manifest-2026-07-29.json'));
-assert(manifest.status_counts.addendum_entries === 11, 'conversation manifest addendum count is stale');
+assert(manifest.status_counts.addendum_entries === 12, 'conversation manifest addendum count is stale');
 assert(
   read('data/author-sources/rhetoric-taxonomy-conversation-ledger-2026-07-29.md').includes('The Fool monograph is deferred'),
   'conversation ledger lost the Fool monograph deferral'
@@ -152,5 +153,5 @@ for (const relative of parityFiles) {
 }
 
 console.log(
-  'ML RHETORIC TAXONOMY VERIFIED — 1,141 historical + 6 Snakelogic + 23 mythology + 11 rhetoric = 1,181 unique entries; mirrors, static pages, source ledgers, collision corrections, and public parity passed.'
+  'ML RHETORIC TAXONOMY VERIFIED — 1,141 historical + 6 Snakelogic + 23 mythology + 12 rhetoric = 1,182 unique entries; mirrors, static pages, source ledgers, collision corrections, and public parity passed.'
 );

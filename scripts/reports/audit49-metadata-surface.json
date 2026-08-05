@@ -53,11 +53,11 @@
     "public_html_documents": 3748,
     "interactive_documents": 2858,
     "redirect_documents": 890,
-    "indexable_documents": 1243,
-    "noindex_documents": 2505,
-    "sitemap_urls": 1263,
-    "schema_blocks": 2641,
-    "schema_documents": 1255,
+    "indexable_documents": 1219,
+    "noindex_documents": 2529,
+    "sitemap_urls": 1239,
+    "schema_blocks": 2617,
+    "schema_documents": 1231,
     "indexable_documents_without_schema": 1,
     "intentional_schema_exemptions": 1,
     "hreflang_links": 5430,
@@ -76,30 +76,30 @@
     "over_100_kib": 40,
     "over_250_kib": 26,
     "over_500_kib": 7,
-    "largest_bytes": 3994098,
+    "largest_bytes": 3996037,
     "gzip_over_100_kib": 20,
     "gzip_over_250_kib": 4,
     "gzip_over_500_kib": 2,
-    "largest_gzip_bytes": 1219021
+    "largest_gzip_bytes": 1219740
   },
   "top_page_size_outliers": [
     {
       "file": "polymyth/methodologylist/index.html",
       "route": "/polymyth/methodologylist/",
-      "bytes": 3994098,
-      "kibibytes": 3900.5,
-      "gzip_bytes": 1219021,
-      "gzip_kibibytes": 1190.5,
+      "bytes": 3996037,
+      "kibibytes": 3902.4,
+      "gzip_bytes": 1219740,
+      "gzip_kibibytes": 1191.2,
       "indexable": true,
       "redirect": false
     },
     {
       "file": "polymyth/methodologylist/methodology/index.html",
       "route": "/polymyth/methodologylist/methodology/",
-      "bytes": 1893914,
-      "kibibytes": 1849.5,
-      "gzip_bytes": 592979,
-      "gzip_kibibytes": 579.1,
+      "bytes": 1909503,
+      "kibibytes": 1864.7,
+      "gzip_bytes": 598210,
+      "gzip_kibibytes": 584.2,
       "indexable": true,
       "redirect": false
     },
@@ -146,10 +146,20 @@
     {
       "file": "polymyth/methodologylist/citation/index.html",
       "route": "/polymyth/methodologylist/citation/",
-      "bytes": 584558,
-      "kibibytes": 570.9,
-      "gzip_bytes": 132805,
-      "gzip_kibibytes": 129.7,
+      "bytes": 586589,
+      "kibibytes": 572.8,
+      "gzip_bytes": 133586,
+      "gzip_kibibytes": 130.5,
+      "indexable": true,
+      "redirect": false
+    },
+    {
+      "file": "polymyth/methodologylist/gorgonification/index.html",
+      "route": "/polymyth/methodologylist/gorgonification/",
+      "bytes": 445873,
+      "kibibytes": 435.4,
+      "gzip_bytes": 133102,
+      "gzip_kibibytes": 130,
       "indexable": true,
       "redirect": false
     },
@@ -164,21 +174,11 @@
       "redirect": false
     },
     {
-      "file": "polymyth/methodologylist/gorgonification/index.html",
-      "route": "/polymyth/methodologylist/gorgonification/",
-      "bytes": 442416,
-      "kibibytes": 432,
-      "gzip_bytes": 131842,
-      "gzip_kibibytes": 128.8,
-      "indexable": true,
-      "redirect": false
-    },
-    {
       "file": "polymyth/modulecanon/index.html",
       "route": "/polymyth/modulecanon/",
-      "bytes": 394504,
+      "bytes": 394512,
       "kibibytes": 385.3,
-      "gzip_bytes": 113746,
+      "gzip_bytes": 113743,
       "gzip_kibibytes": 111.1,
       "indexable": true,
       "redirect": false
@@ -296,9 +296,9 @@
     {
       "file": "saul/fa/index.html",
       "route": "/saul/fa/",
-      "bytes": 281605,
+      "bytes": 281609,
       "kibibytes": 275,
-      "gzip_bytes": 80439,
+      "gzip_bytes": 80442,
       "gzip_kibibytes": 78.6,
       "indexable": true,
       "redirect": false
@@ -306,9 +306,9 @@
     {
       "file": "saul/fr/index.html",
       "route": "/saul/fr/",
-      "bytes": 281515,
+      "bytes": 281519,
       "kibibytes": 274.9,
-      "gzip_bytes": 80423,
+      "gzip_bytes": 80426,
       "gzip_kibibytes": 78.5,
       "indexable": true,
       "redirect": false
@@ -316,9 +316,9 @@
     {
       "file": "saul/zh-hans/index.html",
       "route": "/saul/zh-hans/",
-      "bytes": 281467,
+      "bytes": 281471,
       "kibibytes": 274.9,
-      "gzip_bytes": 80446,
+      "gzip_bytes": 80449,
       "gzip_kibibytes": 78.6,
       "indexable": true,
       "redirect": false
@@ -326,9 +326,9 @@
     {
       "file": "saul/zh-hant/index.html",
       "route": "/saul/zh-hant/",
-      "bytes": 281466,
+      "bytes": 281470,
       "kibibytes": 274.9,
-      "gzip_bytes": 80439,
+      "gzip_bytes": 80442,
       "gzip_kibibytes": 78.6,
       "indexable": true,
       "redirect": false

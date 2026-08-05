@@ -1,15 +1,19 @@
 {
   "schema": "external-link-inventory-v1",
-  "generatedAt": "2026-07-28T11:20:00-04:00",
-  "totalExternalLinks": 3698,
+  "generatedAt": "2026-07-28T21:45:00-04:00",
+  "totalExternalLinks": 4328,
   "topHosts": [
+    {
+      "host": "forms.gle",
+      "count": 693
+    },
     {
       "host": "mitpress.mit.edu",
       "count": 347
     },
     {
       "host": "www.gutenberg.org",
-      "count": 111
+      "count": 112
     },
     {
       "host": "seminarschools.com",
@@ -44,6 +48,10 @@
       "count": 48
     },
     {
+      "host": "doi.org",
+      "count": 42
+    },
+    {
       "host": "www.inquirygroup.org",
       "count": 42
     },
@@ -53,10 +61,6 @@
     },
     {
       "host": "docs.google.com",
-      "count": 41
-    },
-    {
-      "host": "doi.org",
       "count": 41
     },
     {
@@ -177,7 +181,7 @@
     },
     {
       "host": "www.google.com",
-      "count": 17
+      "count": 16
     },
     {
       "host": "www.toronto.ca",
@@ -224,7 +228,7 @@
       "count": 15
     },
     {
-      "host": "www.earlham.edu",
+      "host": "www.canada.ca",
       "count": 15
     },
     {
@@ -237,10 +241,6 @@
     },
     {
       "host": "www.soulpepper.ca",
-      "count": 14
-    },
-    {
-      "host": "www.coc.ca",
       "count": 14
     }
   ],

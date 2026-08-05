@@ -278,6 +278,7 @@ if (
 const runner = read('scripts/verify-all-runner.js');
 for (const command of [
   'node scripts/verify-audit41-event-rollover.js',
+  'node scripts/run-python.js scripts/verify-audit45-translations.py',
   'node scripts/verify-audit46-technical-efficiency.js',
   'node scripts/verify-cloud-input-runtime.js',
   'node scripts/verify-redirect-policy-coherence.js',

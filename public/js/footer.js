@@ -1,4 +1,4 @@
-/* 20260725-audit45-footer
+/* 20260725-audit45-footer; evolved 20260805-predeploy-audit-footer
  * Canonical site footer. Self-styled with token fallbacks so it reads
  * consistently on any page's palette. Authored contextual footers stay in
  * place; this navigation is appended once as the site-wide wayfinding layer. */
@@ -10,17 +10,20 @@
       var s = document.createElement('style');
       s.id = 'ss-foot-css';
       s.textContent = [
-        '.ss-foot{font-family:"JetBrains Mono",ui-monospace,monospace;color:var(--ink,var(--fg,#2A1A14));',
+        '.ss-foot{font-family:"JetBrains Mono",ui-monospace,monospace;color:inherit;',
         'max-width:1180px;margin:4rem auto 0;padding:1.8rem 1.6rem 2.6rem;',
         'border-top:1px solid currentColor;border-color:color-mix(in srgb,currentColor 18%,transparent);}',
-        '.ss-foot .ss-brand{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;opacity:.85;margin-bottom:1.3rem;}',
-        '.ss-foot .ss-col-title{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;opacity:.58;margin:0 0 .45rem;font-weight:600;}',
+        '.home .ss-foot{max-width:1280px;margin-top:1.5rem;}',
+        '.ss-foot .ss-brand{font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.3rem;}',
+        '.ss-foot .ss-col-title{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;margin:0 0 .45rem;font-weight:600;}',
         '.ss-foot .ss-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:1.5rem 1.2rem;}',
         '.ss-foot a{display:flex;align-items:center;min-height:44px;color:inherit;text-decoration:none;font-size:.86rem;line-height:1.45;',
-        'opacity:.82;border-bottom:1px solid transparent;width:max-content;max-width:100%;overflow-wrap:normal;word-break:normal;hyphens:none;transition:opacity .15s,border-color .15s;}',
+        'opacity:.9;border-bottom:1px solid transparent;width:max-content;max-width:100%;overflow-wrap:normal;word-break:normal;hyphens:none;transition:opacity .15s,border-color .15s;}',
         '.ss-foot a:hover,.ss-foot a:focus-visible{opacity:1;border-bottom-color:currentColor;}',
+        '.ss-foot a:focus-visible{outline:2px solid currentColor;outline-offset:3px;}',
+        '.ss-foot a[aria-current="page"]{opacity:1;font-weight:700;text-decoration:underline;text-underline-offset:.3em;}',
         '.ss-foot .prototype-mark{display:inline-flex;align-items:center;justify-content:center;width:1.2em;height:1.2em;margin-left:.3em;border:1px solid currentColor;border-radius:50%;font-size:.64em;font-weight:700;vertical-align:.12em;}',
-        '.ss-foot .ss-base{margin-top:1.7rem;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5;}',
+        '.ss-foot .ss-base{margin-top:1.7rem;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;}',
         '@media(max-width:460px){.ss-foot{padding-left:1rem;padding-right:1rem}.ss-foot .ss-cols{grid-template-columns:1fr}.ss-foot a{width:100%;padding:.28rem 0}}'
       ].join('');
       document.head.appendChild(s);
@@ -73,9 +76,9 @@
     var prototypeMark = '<span class="prototype-mark" aria-label="' + copy.prototype + '" title="' + copy.prototype + '">P</span>';
     var cols = [
       [copy.learn, [['Leizu Academy', localPath('leizu', '/leizu/')], [copy.teacher, '/teacherresources/'], [copy.aiTeacher, '/aitr/'], ['The Agora', '/agora/']]],
-      [copy.whatsOn, [['Polymythcal', localPath('polymythcal', '/polymythseminars/')], ['Marginalia', '/marginalia']]],
-      [copy.work, [['polymorphousmythology', '/polymyth/'], ['bookwormburrows', '/bb/']]],
-      [copy.projects, [['Ohm Dome ' + prototypeMark, '/ohm-dome/'], [copy.festivals, localPath('polymythcal', '/polymythseminars/')], ['Florilegium', '/florilegium/'], [copy.nutrition, '/nutrition/']]],
+      [copy.whatsOn, [['Polymythcal', localPath('polymythcal', '/polymythseminars/')], ['Polymyth Commons', '/polymythcommons/'], ['Polymythlib', '/polymythlib/']]],
+      [copy.work, [['Marginalia', '/marginalia/'], ['Florilegium', '/florilegium/'], ['polymorphousmythology', '/polymyth/'], ['AA*', '/aa/'], ['bookwormburrows', '/bb/']]],
+      [copy.projects, [['Ohm Dome ' + prototypeMark, '/ohm-dome/'], ['Sabachtan Seminar ' + prototypeMark, '/agora/#sabachtan'], [copy.nutrition, '/nutrition/']]],
       [copy.aboutGroup, [[copy.cv, localPath('saul', '/saul/')], [copy.reviews, '/reviews/'], [copy.about, '/about/'], [copy.sitemap, '/polymyth/sitemap/'], [copy.email, 'mailto:saulnassau@protonmail.com']]]
     ];
     var html = '<div class="ss-brand">Seminar Schools.</div><div class="ss-cols">';
@@ -88,6 +91,7 @@
 
     var foot = document.createElement('footer');
     foot.className = 'ss-foot';
+    foot.setAttribute('aria-label', 'Seminar Schools site navigation');
     foot.lang = rawLanguage || 'en';
     foot.dir = locale === 'fa' ? 'rtl' : 'ltr';
     foot.innerHTML = html;

@@ -17,11 +17,12 @@ const SOURCE_HTML_ROOTS = [
   '.well-known', 'agora', 'aitr', 'aa', 'bb', 'bookwormcard', 'campaigns',
   'cfps', 'fellowships', 'florilegium', 'humanities', 'lectures', 'leizu',
   'about', 'main', 'marginalia', 'nutrition', 'ohm-dome', 'philosophy',
-  'polymyth', 'polymythcal', 'polymythseminars', 'reviews', 'saul', 'seminars',
+  'polymyth', 'polymythcal', 'polymythcommons', 'polymythlib',
+  'polymythseminars', 'reviews', 'saul', 'seminars',
   'sitemap', 'teacherresources', 'university', 'writingclub', 'writinggrads',
   'writingjuniors', 'writingkids', 'writingteens',
 ];
-const EXPECTED_INTERACTIVE_DOCUMENTS = 2506;
+const EXPECTED_INTERACTIVE_DOCUMENTS = 2858;
 const EXPECTED_REDIRECT_DOCUMENTS = 890;
 const ID_REFERENCE_ATTRIBUTES = [
   'aria-labelledby',

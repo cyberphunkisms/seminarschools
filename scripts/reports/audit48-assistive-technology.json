@@ -5,15 +5,15 @@
   "status": "passed",
   "scope": "repository-wide static assistive-technology prerequisites",
   "metrics": {
-    "source_html_documents": 3396,
-    "interactive_documents": 2506,
+    "source_html_documents": 3748,
+    "interactive_documents": 2858,
     "redirect_documents": 890,
     "documents_with_two_progressive_h1_variants": 1,
-    "static_ids": 10773,
-    "static_aria_id_references": 2784,
-    "skip_links": 2503,
+    "static_ids": 13250,
+    "static_aria_id_references": 2783,
+    "skip_links": 2855,
     "images": 25,
-    "buttons": 1129
+    "buttons": 1149
   },
   "machine_validated_contracts": [
     "declared-document-language",

@@ -48,6 +48,31 @@ STATUS. The level separation and listed placements are settled. The exact number
     tg: 'methodology, rhetoric-taxonomy, multi-level-matrix, utterance, tactic, operator, governing-end, audience-endpoint, performance-contract, awareness, truth-relation, reward, authority, apparatus, state-process-effect, no-premature-tree, 2026-07-29'
   },
   {
+    id: 'rhetoric-taxonomy-settled-figure-routing-2026-07-29',
+    s: 'methodology',
+    r: 'both',
+    t: 'Settled mythic, literary, and project routing after analytic classification',
+    b: `ROUTING RULE. No figure supplies a total personality or universal essence. A figure carries only the operation supported by its exact tradition, episode, reception, or established project use. Analytic level and status must remain visible.
+
+GORGONIFICATION NESTING. Echo, Pan, the Erinyes or Furies, Cerberus, Mammon, and the Hydra remain distinguishable mechanisms inside Gorgonification rather than new rival operator families. Echo carries repetition and relay. Pan carries acute fear. The Erinyes carry punitive pursuit. Cerberus carries boundary enforcement. Mammon carries a monetizing value regime. Hydra carries regenerative or recursively multiplying structure. Their differences survive the nesting.
+
+STONE PEOPLE. Stone People are the red-pilled response-state in the present project routing. Midas belongs inside that response as the subtype that turns every relation into exchange value. Black-pilled, Nimrod, and Citadel positions remain separate.
+
+PIED PIPER. The Pied Piper is required for recruitment, procession, and the endpoint at which an audience becomes a coordinated following or new carrier. This differs from the Siren, whose governing relation is attraction joined to dependency preservation or extraction.
+
+FAUSTIAN NEGATION. Faustian Mephistopheles and the Devil's Advocate carry answerable negation: criticism that risks a position, remains corrigible, and can open a blocked gate. The flat image of the Devil as mere corrupter does not exhaust the Faustian perspective. Preserve the project aphorism: “The highway to hell is paved with good intentions, but the gates of heaven are opened by the devil's advocate.”
+
+PROMETHEUS. Prometheus has source-layered dual membership. Hesiodic Prometheus can route through the Trickster or Jester family. The Aeschylean reception can route through the Sabachtan Gnostic or condemned-benefactor position. The recensions must never be silently fused.
+
+JOB AND SAUL. Job is a target or scene position caught in a wager without consent and rule-theater, not another sophistry operator. Saul Goodman remains inside the settled Jester, Fool, and Trickster family as the jester aperture that can read the performance as performance. The existing Job, Howard, and Saul entry remains controlling.
+
+CAREERIST SPLIT. Careerist divides into Sellout and Bureaucratic Careerist or Functionary. Ariel selling her voice is the settled project anchor for the Sellout: capacity or integrity is traded for access. The bureaucratic figure remains open because office, gatekeeping, sincere script capture, and strategic career preservation require separate evidence.
+
+STATUS. These are project routings accepted through direct author correction. They do not ratify every exact historical source claim, close the Fool monograph, or convert the remaining candidate crosswalk into canon.`,
+    x: 'Cross-reference Gorgonification; Stone People; Red pill; Midas; Jester’s privilege; Why Saul wins where Job could not; Mephistodata; Sabachtan Gnostic; Magic / Wizardry; and the rhetoric taxonomy conversation ledger.',
+    tg: 'methodology, rhetoric-taxonomy, settled-routing, mythic-crosswalk, gorgonification, echo, pan, erinyes, cerberus, mammon, hydra, stone-people, red-pill, midas, pied-piper, faustian-mephistopheles, devils-advocate, prometheus, job, saul-goodman, careerist, sellout, ariel, bureaucratic-functionary, source-layering, 2026-07-29'
+  },
+  {
     id: 'rhetoric-taxonomy-jester-fool-trickster-family-2026-07-29',
     s: 'methodology',
     r: 'both',
@@ -193,7 +218,7 @@ OPEN HIERARCHY QUESTION. The conversation places Siren within broad Sophist terr
     s: 'pending',
     r: 'both',
     t: 'Rhetorical operator and axis candidate ledger after Siren, Jester, Troll, Sophist, and Gorgon',
-    b: `STATUS. The current set has genuine gaps. Every item below remains a candidate until its admission condition, defeat condition, level, and collisions survive dialectical testing.
+    b: `STATUS. The analytic inventory is complete enough: every opening term is preserved and can be typed by level. The items below are boundary questions, candidate subtypes, or exact-figure problems rather than evidence of a missing top-level continent. Every unresolved item remains a candidate until its admission condition, defeat condition, level, and collisions survive dialectical testing.
 
 CORRUPTIVE OR EXTRACTIVE CANDIDATES.
 
@@ -207,10 +232,21 @@ CORRUPTIVE OR EXTRACTIVE CANDIDATES.
 8. Accuser or Kategoria. Organizes judgment around a charge and demanded answer. Test forensic scene role versus operator family.
 9. Apologist or Image Repairer. Repairs legitimacy, reputation, or jurisdiction after challenge. Test scene role versus Legitimator subtype.
 10. Gatekeeper. Controls entry, recognition, visibility, or eligibility. Test authority position versus rhetorical operator.
-11. Confidence Operator or Con Artist. Converts trust into bounded extraction. Test terminal extraction versus Siren's preserved dependency.
-12. Functionary, Careerist, or Classical Hypocrite. Administers a line for advantage without requiring belief. Test against Kenocharism's Classical Hypocrite, Operator, Gorgon state, and unresolved Nimrod.
+11. Confidence Operator or Con Artist. Converts trust into bounded extraction. Keep the row as a diagnostic while denying it independent top-family status provisionally. One-off extraction routes toward corrupt Trickster. Durable return and dependency route toward Siren. Counterfeit expertise routes toward Charlatan or Credentialism.
+12. Careerist split. Sellout trades voice, capacity, integrity, or constituency for access or advancement. Bureaucratic Careerist or Functionary administers a line for security or advancement. Strategic motive requires longitudinal evidence. A sincere script-bound clerk may instead be a Gorgon. Ariel selling her voice is the settled Sellout anchor. The bureaucratic figure remains open.
 13. Coercer or Threatener. Secures compliance by making refusal costly. This may mark the boundary between rhetoric and force.
-14. False-authority cluster. Quack sincerely mistakes incompetence for competence. Charlatan knows the claimed competence is false. Predatory expert possesses competence and abuses its authority. These may remain awareness and authority modifiers.
+14. False-authority cluster. Credentialism lets a token, office, title, or rank substitute for tested warrant. Quack sincerely mistakes incompetence for competence. Charlatan knowingly stages expertise. Predatory expert possesses competence and abuses its authority. Rank-protected incompetence claims deference from office without using the trust-to-extraction sequence of a confidence operator. These remain authority and awareness modifiers unless evidence establishes another governing family.
+
+PROVISIONAL FIGURE CROSSWALK.
+
+- Kafka's Doorkeeper is a strong candidate for procedural gatekeeping and indefinite bureaucratic delay. The story establishes office and blocked access more clearly than personal career advancement. Kafka's Officer fits fanatical procedure more than ordinary career preservation.
+- Job's friends or comforters are candidates for Legitimator, Apologist, or Baselinemorality Gorgon when preserving theodicy outranks hearing Job. Their initial seven-day silence remains a negative control.
+- The satan in Job is the Accuser–Tester and a possible Agent Provocateur because ordeal is used to make response into evidence. The modern infiltration element is absent.
+- Zapp Brannigan is a proposed popular-media anchor for rank-protected incompetence or the credentialed buffoon. He is not a confidence man.
+- The Wizard of Oz is a proposed staged-authority or Charlatan figure. The Scarecrow diploma is a proposed credentialism scene. Existing Oz rainbow and portal uses remain separate.
+- The Grand Inquisitor is a proposed paternalistic Indoctrinator and Moral Crusader hybrid. Existing Kenocharism treatment remains controlling.
+- Ariadne is a proposed exit-giving Counselor. Chiron is a proposed capacity-building Teacher. Philomela is a proposed Witness whose testimony changes medium. Odysseus bound at the mast is a proposed self-binding or resistant Listener.
+- Bogeyman does not presently require an independent family. It can remain a proposed threat-image or folk-devil face within securitization, Gorgonification, or Moral Crusader analysis.
 
 CONSTRUCTIVE OR AUDIENCE-LIBERATING CANDIDATES.
 

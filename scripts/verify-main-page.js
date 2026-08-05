@@ -5,6 +5,7 @@ const path = require('path');
 const root = path.resolve(__dirname, '..');
 const page = fs.readFileSync(path.join(root, 'about', 'index.html'), 'utf8');
 const home = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const footer = fs.readFileSync(path.join(root, 'js', 'footer.js'), 'utf8');
 let failed = 0;
 function check(ok, label) {
   console.log((ok ? 'PASS  ' : 'FAIL  ') + label);
@@ -18,7 +19,7 @@ check(page.includes('geo-flower'), 'about page can quiet ornamental geometry ind
 check(!page.includes('// ===== Loop =====') && !page.includes('function tryLoop()'), 'about page does not auto-loop at the footer');
 check(!page.includes('Rubber-band pull-up at top'), 'about page does not intercept ordinary top scrolling');
 check(page.includes('href="#threshold">Return to the beginning</a>'), 'footer has an explicit return link');
-check(home.includes("href:'/about/', tier:0"), 'homepage core jewel links to about page');
+check(home.includes('data-homepage-contract="business-card-project-web-v1"') && footer.includes("'/about/'"), 'homepage contract and shared navigation retain the About route');
 check((page.match(/<script\b/gi) || []).length === (page.match(/<\/script>/gi) || []).length, 'about page has balanced script tags');
 if (failed) {
   console.error(`\n${failed} about-page guard(s) failed.`);

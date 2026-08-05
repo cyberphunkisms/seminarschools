@@ -1,7 +1,7 @@
 # Website Audit 49 — Technical Efficiency and Resilience
 
-Release: `2026-07-26-site-audit49-technical-efficiency-resilience-final`
-Asset version: `20260726-audit49`
+Release: `2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final`
+Asset version: `20260728-audit53`
 Package version: `1.0.6`
 Status: PASS
 
@@ -15,11 +15,11 @@ This is a code, evidence, and release-orchestration audit. It does not represent
 
 | Surface | Result | Current evidence |
 | --- | ---: | --- |
-| Active HTML | 3,395 documents | 3,395 byte-identical public mirrors; 2,505 interactive; 890 redirects |
-| Crawl/indexing | 891 indexable / 2,504 noindex | 911 sitemap URLs; 5,430 hreflang links |
-| Structured data | 2,289 JSON-LD blocks | 903 documents; 1 declared indexable exemption |
+| Active HTML | 3,748 documents | 3,748 byte-identical public mirrors; 2,858 interactive; 890 redirects |
+| Crawl/indexing | 1,219 indexable / 2,529 noindex | 1,239 sitemap URLs; 5,430 hreflang links |
+| Structured data | 2,617 JSON-LD blocks | 1,231 documents; 1 declared indexable exemption |
 | Runtime lifecycle | 10 interval files | 10 bounded routes; 45 bounded startup timer slots |
-| Static-data delivery | 24 assets | 9.32 MiB under explicit bounded cache policies; 0 forced revalidations |
+| Static-data delivery | 24 assets | 9.39 MiB under explicit bounded cache policies; 0 forced revalidations |
 | Package resilience | 10 regressions | 2→1 archive source-read passes; compatible SHA-256 retained |
 | CI/deployer work | 2→1 canonical Linux builds | duplicate deployer parity scans and browser gates reduced to zero |
 | Audit 48 machine evidence | 857 calendars / 4,172 parsed VEVENT representations | 24 intended engine scenarios; 0 runtime engine checks honestly recorded |
@@ -32,7 +32,7 @@ The aggregate reads the component metrics directly from the JSON reports. It doe
 
 - Added one repository-wide classifier for interactive versus redirect HTML, index/noindex state, title, description, viewport, canonical, robots, JSON-LD, hreflang, sitemap membership, source/public parity, and page-size distribution.
 - Corrected metadata ownership at generators so rebuilds preserve the fix: localized Leizu funnel summaries, French event date titles, French calendar shells, teacher-resource category pages, the BB landing title, calendar legacy aliases, and intentional WebPage schema coverage.
-- Closed every recorded metadata issue group at zero across 3,395 active source documents and the same number of public mirrors.
+- Closed every recorded metadata issue group at zero across 3,748 active source documents and the same number of public mirrors.
 - Retained 1 indexable schema gap because it is exactly matched by 1 declared historical-archive exemption.
 
 Google documents robots directives, canonical signals, localized alternates, sitemaps, and structured data at the official references listed below. Audit 49 treats those signals as one coherent contract rather than five unrelated spot checks.
@@ -41,7 +41,7 @@ Google documents robots directives, canonical signals, localized alternates, sit
 
 - Inventoried every active repeating browser timer. The only remaining intervals are the 10 intentional Leizu ambient-leaf intervals across English, French, Traditional Chinese, Simplified Chinese, and Persian landing/teaching routes.
 - Those intervals stop on hidden pages, navigation, reduced-motion, and calm states; clear pending startup timers and animated nodes; and restart only after an eligible back-forward-cache restoration.
-- Bound 24 large public data assets (9.32 MiB) to explicit browser and edge cache policies, while removing redundant forced revalidation from Florilegium and Polymythcal candidate fetches.
+- Bound 24 large public data assets (9.39 MiB) to explicit browser and edge cache policies, while removing redundant forced revalidation from Florilegium and Polymythcal candidate fetches.
 
 The runtime decisions follow HTTP cache semantics, the Page Visibility lifecycle, and animation-frame scheduling references cited below.
 
@@ -51,26 +51,26 @@ The runtime decisions follow HTTP cache semantics, the Page Visibility lifecycle
 - The public builder and package writer use recoverable exclusive locks. Package inputs reject duplicates, symlinks, escaping paths, output-transaction artifacts, and files that mutate during archive creation.
 - Archive creation moved from 2 source reads per member to 1 while retaining the compatibility SHA-256 `c722e42d278abd6c3f97c3c13907fc62896bea169184c1e72fe03445bae1c3be`.
 - Shared top-down selection pruned 1 deployer directories and 2 source-package directories before descent.
-- The deployer selection retained 10,153 files; the source package retained 5,638 files.
+- The deployer selection retained 10,943 files; the source package retained 6,052 files.
 - Linux performs the canonical full audit once. Windows and macOS retain portable coverage, and the deployer inherits runner-owned parity/browser gates instead of repeating them.
 - Metadata-aware Audit 49 successors preserve the frozen Audit 36 assertions while excluding inert non-JavaScript script payloads from inline-code analysis.
 
 ## Page-size distribution
 
-The permanent ceilings are 4 MiB raw and 1,280 KiB gzip. Current maxima are 3.80 MiB raw and 1.16 MiB gzip.
+The permanent ceilings are 4 MiB raw and 1,280 KiB gzip. Current maxima are 3.81 MiB raw and 1.16 MiB gzip.
 
 | Route | Raw bytes | Gzip bytes | Indexable |
 | --- | ---: | ---: | :---: |
-| `/polymyth/methodologylist/` | 3,989,374 | 1,217,370 | yes |
-| `/polymyth/methodologylist/methodology/` | 1,888,837 | 591,338 | yes |
+| `/polymyth/methodologylist/` | 3,996,037 | 1,219,740 | yes |
+| `/polymyth/methodologylist/methodology/` | 1,909,503 | 598,210 | yes |
 | `/aa/` | 1,522,049 | 244,590 | yes |
 | `/aa/cloud/` | 1,331,170 | 289,880 | no |
 | `/polymyth/campaigncodex/` | 1,034,225 | 333,857 | yes |
 | `/polymyth/bookwormburrows/` | 610,767 | 210,610 | yes |
-| `/polymyth/methodologylist/citation/` | 584,375 | 132,734 | yes |
-| `/teacherresources/` | 445,506 | 51,846 | yes |
-| `/polymyth/methodologylist/gorgonification/` | 442,233 | 131,771 | yes |
-| `/polymyth/modulecanon/` | 394,504 | 113,746 | yes |
+| `/polymyth/methodologylist/citation/` | 586,589 | 133,586 | yes |
+| `/polymyth/methodologylist/gorgonification/` | 445,873 | 133,102 | yes |
+| `/teacherresources/` | 445,357 | 53,694 | yes |
+| `/polymyth/modulecanon/` | 394,512 | 113,743 | yes |
 
 These are governed outliers, not unexamined omissions. The two Methodology pages remain the strongest future candidates for structural payload splitting, but both remain under the release ceilings.
 

@@ -1,19 +1,19 @@
 {
   "schema": "page-size-budget-v3",
-  "updated": "2026-07-27",
-  "policy": "Audit 45 budgets the current deploy surface. Large canonical reference pages and full localized Leizu compositions retain narrow explicit ceilings; obsolete calendar-shell exceptions remain removed. Any new HTML above 350 KB requires a documented budget entry.",
+  "updated": "2026-08-05",
+  "policy": "The predeployment audit budgets the current deploy surface after approved methodology and rhetoric-taxonomy corpus growth. Large canonical reference pages and full localized Leizu compositions retain narrow explicit ceilings; obsolete calendar-shell exceptions remain removed. Any new HTML above 350 KB requires a documented budget entry.",
   "budgetedLargePages": [
     {
       "path": "polymyth/methodologylist/index.html",
-      "baselineBytes": 3998792,
-      "ceilingBytes": 4000000,
+      "baselineBytes": 4005163,
+      "ceilingBytes": 4040000,
       "route": "/polymyth/methodologylist/",
       "status": "canonical long-form reference; narrow ceiling blocks accidental corpus duplication"
     },
     {
       "path": "polymyth/methodologylist/methodology/index.html",
-      "baselineBytes": 1865976,
-      "ceilingBytes": 1900000,
+      "baselineBytes": 1913157,
+      "ceilingBytes": 1945000,
       "route": "/polymyth/methodologylist/methodology/",
       "status": "canonical methodology section; explicit long-form exception"
     },

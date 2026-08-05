@@ -91,6 +91,8 @@
     "verify:ml-ai-prose-tells": "node scripts/verify-ml-ai-prose-tells.js",
     "verify:ml-antibacktracking": "node scripts/verify-ml-antibacktracking.js",
     "verify:ml-gorgonwars-premise-split": "node scripts/verify-ml-gorgonwars-premise-split.js",
+    "verify:ml-power-scope": "node scripts/verify-ml-power-scope.js",
+    "verify:ml-dialectical-hardening": "node scripts/verify-ml-dialectical-hardening.js",
     "build:ai-access-pack": "node scripts/build-ai-access-pack.js",
     "verify:ai-access-pack": "node scripts/verify-ai-access-pack.js",
     "query:ai-access-pack": "node scripts/build-ai-access-pack.js --query",

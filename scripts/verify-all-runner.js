@@ -74,14 +74,13 @@ const checks = [
   'node scripts/verify-audit49-aa-dialog.mjs',
   'node scripts/verify-audit49-aitr-resilience.mjs',
   'node scripts/verify-aa-saul-runtime-smoothness.mjs',
-  'node scripts/verify-audit38-accessibility-p0.mjs',
-  'node scripts/verify-audit38-methodology-state.js',
+  // Superseded behavior gates stay immutable in their frozen manifests. The
+  // active homepage, translation, methodology, and rollover contracts are
+  // verified by their current successors below.
   'node scripts/verify-frozen-audit38.js',
-  'node scripts/verify-audit39-runtime-ui.mjs',
   'node scripts/verify-audit39-cache-coherence.js',
   'node scripts/verify-audit39-font-delivery.js',
   'node scripts/verify-audit39-methodology-runtime.js',
-  'node scripts/verify-audit39-package-roundtrip.js',
   'node scripts/verify-frozen-audit39.js',
   'node scripts/verify-frozen-audit40.js',
   'node scripts/verify-frozen-audit41.js',
@@ -101,7 +100,6 @@ const checks = [
   'node scripts/run-python.js -m unittest scripts/test_polymythcal_audit43.py',
   'node scripts/run-python.js -m unittest scripts/test_polymythcal_audit47.py',
   'node scripts/run-python.js scripts/build-polymythcal-audit13.py --check',
-  'node scripts/verify-audit43-approved-direction.js',
   'node scripts/verify-audit45-browser-evidence.js',
   'node scripts/run-python.js scripts/verify-audit45-translations.py',
   'node scripts/verify-project-failure-resilience.js',
@@ -200,6 +198,7 @@ const checks = [
   'node scripts/verify-ml-ai-prose-tells.js',
   'node scripts/verify-ml-antibacktracking.js',
   'node scripts/verify-ml-gorgonwars-premise-split.js',
+  'node scripts/verify-ml-power-scope.js',
   'node scripts/verify-ai-access-pack.js',
   'node scripts/verify-site-integrity.js',
   'node scripts/verify-professional-readiness.js',

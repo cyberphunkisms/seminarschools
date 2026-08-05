@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/** Audit 49 is current; Audit 48 evidence remains active and earlier evidence is immutable. */
+/** Audit 53 is current; earlier audit evidence remains active and immutable. */
 const fs = require('fs');
 const path = require('path');
 
@@ -37,9 +37,9 @@ try {
   failures.push(`release JSON is invalid: ${error.message}`);
 }
 
-const expectedRelease = '2026-07-26-site-audit49-technical-efficiency-resilience-final';
+const expectedRelease = '2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final';
 check(manifest.release_id === expectedRelease, `current release is ${manifest.release_id}`);
-check(manifest.polymythcal_asset_version === '20260726-audit49', `current asset version is ${manifest.polymythcal_asset_version}`);
+check(manifest.polymythcal_asset_version === '20260728-audit53', `current asset version is ${manifest.polymythcal_asset_version}`);
 check(pkg.version === '1.0.6', `package version is ${pkg.version}`);
 check(lock.version === '1.0.6' && lock.packages?.['']?.version === '1.0.6', 'package-lock version is not 1.0.6');
 for (const [name, command] of Object.entries({

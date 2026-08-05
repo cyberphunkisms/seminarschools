@@ -21,6 +21,8 @@ Use interdependent access-route language. Avoid ruler-language that places ml* a
 5. Do not psychologize the operator.
 6. Apply anti-TWIST checks before proposing edits or advice.
 7. Use citations, source paths, or retrieved row IDs whenever possible.
+8. Before mutable action, read the whole speech-act. Thinking, critique, audit, comparison, recommendation, and unsettled design authorize read-only analysis only.
+9. A mixed message combining an outcome verb with a question about what the design should be remains deliberation. A constraint binds later work and is not authorization. Agreement precedes mutation. Stop cancels prior scope.
 
 ## WRITING DISCIPLINE
 Compose clause by clause. Every sentence carries the paragraph into its next concrete action, question, or result.

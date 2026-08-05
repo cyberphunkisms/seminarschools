@@ -14,6 +14,8 @@ const AUDIT46_RELEASE_ID = '2026-07-26-site-audit46-technical-efficiency-rollove
 const AUDIT47_RELEASE_ID = '2026-07-26-site-audit47-technical-efficiency-continuity-final';
 const AUDIT48_RELEASE_ID = '2026-07-26-site-audit48-external-validation-interoperability-final';
 const AUDIT49_RELEASE_ID = '2026-07-26-site-audit49-technical-efficiency-resilience-final';
+const CURRENT_RELEASE_ID = '2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final';
+const CURRENT_ASSET_VERSION = '20260728-audit53';
 const failures = [];
 let assertions = 0;
 
@@ -42,9 +44,9 @@ try {
 }
 
 check(report.schema === 'seminar-schools-audit45-translation-browser-v1', 'unexpected evidence schema');
-check(manifest.release_id === AUDIT49_RELEASE_ID, `manifest release is ${manifest.release_id}`);
+check(manifest.release_id === CURRENT_RELEASE_ID, `manifest release is ${manifest.release_id}`);
 check(
-  manifest.polymythcal_asset_version === '20260726-audit49',
+  manifest.polymythcal_asset_version === CURRENT_ASSET_VERSION,
   `translation asset version is ${manifest.polymythcal_asset_version}`,
 );
 const inheritedEvidence = report.release_id === AUDIT45_RELEASE_ID;

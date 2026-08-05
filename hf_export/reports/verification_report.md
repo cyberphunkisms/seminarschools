@@ -14,8 +14,8 @@ Warnings: 0
 - PASS: found hf_export/data/relations/crossrefs.jsonl
 - PASS: found hf_export/reports/latest_export_report.md
 - PASS: found hf_export/schemas/meaninglib_entry.schema.json
-- PASS: total rows: 2095
-- PASS: ml row count 1315
+- PASS: total rows: 2096
+- PASS: ml row count 1316
 - PASS: bb row count 246
 - PASS: mc row count 234
 - PASS: cc row count 296

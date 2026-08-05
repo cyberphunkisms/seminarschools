@@ -109,6 +109,9 @@ HYBRID_JS = r'''
 
 def patch_home() -> None:
     text = read('index.html')
+    if 'data-homepage-contract="business-card-project-web-v1"' in text:
+        print('Audit12 homepage migration retired: current responsive project-web contract preserved.')
+        return
     text = re.sub(r'\n*<style id="audit12-mobile-web-hybrid">.*?</style>\n*', '\n', text, flags=re.S)
     text = re.sub(r'\n*<script id="audit12-mobile-web-hybrid-script">.*?</script>\n*', '\n', text, flags=re.S)
     text = re.sub(
@@ -362,6 +365,9 @@ def patch_release_and_build() -> None:
 
 
 def main() -> None:
+    if 'data-homepage-contract="business-card-project-web-v1"' in read('index.html'):
+        print('AUDIT12_RETIRED_CURRENT_HOMEPAGE_PRESERVED')
+        return
     patch_home()
     patch_cl()
     patch_release_and_build()

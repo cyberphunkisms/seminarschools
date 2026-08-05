@@ -129,7 +129,7 @@ function main() {
   const sources = JSON.parse(read('scripts/sources.json')).sources || [];
   const categories = (teacher.groups || []).flatMap(group => group.categories || []);
   const entries = categories.flatMap(category => category.entries || []);
-  if (events.length !== 833) fail(`Polymythcal canonical event count changed: ${events.length}/833`);
+  if (events.length < 838) fail(`Polymythcal event floor regressed: ${events.length}`);
   if (new Set(events.map(event => event.type)).size < 32) fail('Polymythcal type floor regressed');
   if (sources.length < 422) fail(`Polymythcal source floor regressed: ${sources.length}`);
   if (entries.length !== 644 || categories.length !== 25 || teacher.groups.length !== 7) {
@@ -187,7 +187,7 @@ function main() {
   }
 
   const eventIds = new Set(events.map(event => String(event.id)));
-  let eventPageCount = 0;
+  const eventTitles = new Map();
   const expectedSitemapEvents = new Set(events.filter(eventSitemapEligible).map(event => `${SITE}/polymythseminars/events/${encodeURIComponent(event.id)}/`));
   const actualSitemapEvents = new Set(sitemapUrls.filter(url => url.startsWith(`${SITE}/polymythseminars/events/`)));
   if (expectedSitemapEvents.size !== actualSitemapEvents.size || [...expectedSitemapEvents].some(url => !actualSitemapEvents.has(url))) {
@@ -222,8 +222,8 @@ function main() {
     const pageTitle = titleOf(html);
     const dateToken = String(event.date || '').slice(0, 10);
     if (dateToken && !pageTitle.includes(dateToken)) fail(`${rel}: event title lacks date disambiguation`);
-    if (!pageTitle) fail(`${rel}: canonical event title is missing`);
-    eventPageCount++;
+    if (eventTitles.has(pageTitle)) fail(`${rel}: duplicate canonical event title shared with ${eventTitles.get(pageTitle)}`);
+    else eventTitles.set(pageTitle, rel);
     const hasEventSchema = jsonScripts(html).some(record => record['@type'] === 'Event');
     if (hasEventSchema !== indexable) fail(`${rel}: Event schema confidence does not match indexability`);
     const relatedBlock = html.match(/<nav class="pm-event-related"[\s\S]*?<\/nav>/i)?.[0] || '';
@@ -233,7 +233,7 @@ function main() {
       fail(`${rel}: related-event navigation contains an invalid target`);
     }
   }
-  if (eventPageCount !== events.length) fail(`canonical event page parity changed: ${eventPageCount}/${events.length}`);
+  if (eventTitles.size !== events.length) fail(`canonical event title parity changed: ${eventTitles.size}/${events.length}`);
   if (!relatedEventPages) fail('no canonical event page received related-event recovery navigation');
 
   const eventDirectory = path.join(ROOT, 'polymythseminars', 'events');
@@ -287,6 +287,7 @@ function main() {
   runCheck(process.execPath, ['scripts/build-search-pages.js', '--check'], 'static search-surface check');
   runCheck(process.execPath, ['scripts/build-writing-shortcuts.js', '--check'], 'writing route-shell check');
   runCheck(process.execPath, ['scripts/build-academic-shortcuts.js', '--check'], 'academic route-shell check');
+  runCheck(process.env.PYTHON_BIN || 'python3', ['scripts/build-polymythcal-audit13.py', '--check'], 'canonical event-detail check');
   const afterCheckDigest = ownedOutputDigest();
   if (afterCheckDigest !== beforeCheckDigest) fail('generator check modes modified owned output files');
 

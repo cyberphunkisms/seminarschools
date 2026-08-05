@@ -1,15 +1,17 @@
 #!/usr/bin/env node
 'use strict';
 
-/** Verify the active Audit 48 programs and schemas under the current Audit 49 release. */
+/** Verify the active Audit 48 programs and preserved evidence under Audit 53. */
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const REPORT = path.join(ROOT, 'scripts', 'reports', 'audit48-external-validation.json');
 const EXPECTED_RELEASE =
+  '2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final';
+const EXPECTED_ASSET = '20260728-audit53';
+const PRESERVED_EVIDENCE_RELEASE =
   '2026-07-26-site-audit49-technical-efficiency-resilience-final';
-const EXPECTED_ASSET = '20260726-audit49';
 const EXPECTED_PACKAGE = '1.0.6';
 const failures = [];
 
@@ -46,9 +48,9 @@ const calendar = json('scripts/reports/audit48-calendar-client-interoperability.
 const browser = json('data/audit48-browser/cross-engine-preflight.json');
 const live = json('scripts/reports/audit48-live-harvest-endpoints.json');
 
-check(read('RELEASE_ID.txt').trim() === EXPECTED_RELEASE, 'RELEASE_ID.txt is not Audit 49');
-check(manifest.release_id === EXPECTED_RELEASE, 'release manifest is not Audit 49');
-check(manifest.polymythcal_asset_version === EXPECTED_ASSET, 'Audit 49 asset token is missing');
+check(read('RELEASE_ID.txt').trim() === EXPECTED_RELEASE, 'RELEASE_ID.txt is not the current release');
+check(manifest.release_id === EXPECTED_RELEASE, 'release manifest is not the current release');
+check(manifest.polymythcal_asset_version === EXPECTED_ASSET, 'current asset token is missing');
 check(pkg.version === EXPECTED_PACKAGE, `package version is ${pkg.version}`);
 check(exists('scripts/apply-audit48-approved-ui.js'), 'current safe UI applicator is missing');
 check(
@@ -66,9 +68,9 @@ check(
   'assistive-technology evidence is not bound to the current release',
 );
 check(
-  assistive.metrics?.interactive_documents === 2506
+  assistive.metrics?.interactive_documents === 2858
     && assistive.metrics?.redirect_documents === 890
-    && assistive.metrics?.source_html_documents === 3396,
+    && assistive.metrics?.source_html_documents === 3748,
   'assistive-technology source inventory changed',
 );
 check(
@@ -86,7 +88,11 @@ check(
     && calendar.status === 'pass',
   'calendar-client interoperability evidence did not pass',
 );
-check(calendar.release_id === EXPECTED_RELEASE, 'calendar evidence is not bound to the current release');
+check(
+  calendar.release_id === EXPECTED_RELEASE
+    && calendar.generated_at === manifest.generated_at,
+  'calendar evidence is not bound to the current rerun',
+);
 check(
   calendar.metrics?.tests_passed === 9
     && calendar.metrics?.tests_run === 9
@@ -109,7 +115,7 @@ check(
   browser.schema === 'seminar-schools-audit48-cross-engine-preflight-v1',
   'cross-engine preflight schema changed',
 );
-check(browser.release_id === EXPECTED_RELEASE, 'cross-engine preflight is not bound to the current release');
+check(browser.release_id === PRESERVED_EVIDENCE_RELEASE, 'preserved cross-engine preflight has unexpected lineage');
 check(
   browser.scenario_count === 12 && browser.intended_engine_scenario_count === 24,
   'cross-engine program coverage changed',

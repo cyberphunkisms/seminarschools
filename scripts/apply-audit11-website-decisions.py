@@ -72,6 +72,9 @@ def patch_about_route() -> None:
 
 def patch_home_priority() -> None:
     text = read('index.html')
+    if 'data-homepage-contract="business-card-project-web-v1"' in text:
+        print('Audit11 homepage migration retired: current neutral project-web contract preserved.')
+        return
     text = text.replace('Toronto Tutoring, Public Seminars &amp; Teacher Resources | Seminar Schools', 'Polymythcal, Tutoring, Resources &amp; Projects | Seminar Schools')
     text = text.replace('Toronto tutoring in English, philosophy, history, and writing, plus free public seminars, teacher resources, and experimental learning from Seminar Schools.', 'Seminar Schools is a project web led by Polymythcal, with public events, tutoring, teacher resources, reading games, essays, and the polymorphousmythology framework.')
     text = re.sub(r'<a class="book" href="/leizu/?">Book a session</a>', '<a class="book" href="/polymythseminars/">Open Polymythcal</a>', text, count=1)
@@ -434,6 +437,9 @@ for migration_name in [
 
 
 def main() -> None:
+    if 'data-homepage-contract="business-card-project-web-v1"' in read('index.html'):
+        print('AUDIT11_RETIRED_CURRENT_HOMEPAGE_PRESERVED')
+        return
     patch_about_route()
     patch_home_priority()
     patch_prototype_badges()

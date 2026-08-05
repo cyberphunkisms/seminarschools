@@ -1,13 +1,13 @@
 {
   "generated_at": "2026-07-28T21:45:00-04:00",
   "status": "failed",
-  "total_checks": 158,
+  "total_checks": 160,
   "passed_checks": 7,
   "failed_checks": [
     {
       "cmd": "node scripts/verify-audit48-browser-program.js",
       "code": 1,
-      "ms": 41
+      "ms": 46
     }
   ],
   "duration_ms": null,

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/** Audit 47 invariant continuity under the current Audit 49 release. */
+/** Audit 47 invariant continuity under the current Audit 53 release. */
 const fs = require('fs');
 const path = require('path');
 const {parseSeedWithAddenda} = require('./lib/parse-seed-with-addenda');
@@ -9,8 +9,8 @@ const {parseSeedWithAddenda} = require('./lib/parse-seed-with-addenda');
 const ROOT = path.resolve(__dirname, '..');
 const REPORT = path.join(ROOT, 'scripts', 'reports', 'audit47-technical-efficiency.json');
 const AUDIT47_RELEASE = '2026-07-26-site-audit47-technical-efficiency-continuity-final';
-const EXPECTED_RELEASE = '2026-07-26-site-audit49-technical-efficiency-resilience-final';
-const EXPECTED_ASSET = '20260726-audit49';
+const EXPECTED_RELEASE = '2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final';
+const EXPECTED_ASSET = '20260728-audit53';
 const EXPECTED_EVENTS = 833;
 const EXPECTED_EXPLICIT_ALIASES = 12;
 const EXPECTED_GENERATED_ENGLISH_ALIASES = 857;
@@ -97,9 +97,9 @@ function meta(html, name) {
 }
 
 const release = json('RELEASE_MANIFEST.json');
-check(read('RELEASE_ID.txt').trim() === EXPECTED_RELEASE, 'RELEASE_ID.txt is not Audit 49');
-check(release.release_id === EXPECTED_RELEASE, 'release manifest is not Audit 49');
-check(release.polymythcal_asset_version === EXPECTED_ASSET, 'Polymythcal asset version is not Audit 49');
+check(read('RELEASE_ID.txt').trim() === EXPECTED_RELEASE, 'RELEASE_ID.txt is not the current release');
+check(release.release_id === EXPECTED_RELEASE, 'release manifest is not the current release');
+check(release.polymythcal_asset_version === EXPECTED_ASSET, 'Polymythcal asset version is not current');
 check((release.notes || []).includes('No security audit was performed.'), 'release manifest does not preserve the no-security-audit boundary');
 
 const eventPayload = json('polymythseminars/events.json');

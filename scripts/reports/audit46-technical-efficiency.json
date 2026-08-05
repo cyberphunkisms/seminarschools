@@ -1,13 +1,13 @@
 {
   "schema": "seminar-schools-audit46-technical-efficiency-v1",
-  "release_id": "2026-07-26-site-audit49-technical-efficiency-resilience-final",
-  "generated_at": "2026-07-26T15:45:00-04:00",
-  "site_build_date": "2026-07-28",
+  "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
+  "generated_at": "2026-07-28T21:45:00-04:00",
+  "site_build_date": "2026-08-05",
   "status": "passed",
   "metrics": {
-    "source_html_files": 3395,
-    "public_html_files": 3395,
-    "audit43_stylesheet_references": 6790,
+    "source_html_files": 3396,
+    "public_html_files": 3396,
+    "audit43_stylesheet_references": 6792,
     "audit43_reader_references": 12,
     "duplicate_audit43_stylesheet_references": 0,
     "duplicate_audit43_reader_references": 0,
@@ -17,7 +17,7 @@
     "compatible_redirect_overlaps": 82,
     "predeploy_npm_ci_steps": 1,
     "predeploy_npm_install_steps": 1,
-    "expired_bilingual_event_routes": 644
+    "expired_bilingual_event_routes": 770
   },
   "failures": [],
   "policy": "Current Toronto rollover, one shared asset request per pathname, exact runtimes, lean weekly jobs, streamed package verification, coherent redirects, and bounded large-index caching are release blockers."

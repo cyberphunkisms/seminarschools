@@ -26,8 +26,8 @@ const MARKDOWN = path.join(
   'WEBSITE_AUDIT49_TECHNICAL_EFFICIENCY_RESILIENCE_REPORT_2026-07-26.md',
 );
 const EXPECTED_RELEASE =
-  '2026-07-26-site-audit49-technical-efficiency-resilience-final';
-const EXPECTED_ASSET = '20260726-audit49';
+  '2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final';
+const EXPECTED_ASSET = '20260728-audit53';
 const EXPECTED_PACKAGE = '1.0.6';
 
 const COMPONENTS = {

@@ -1,8 +1,8 @@
 {
   "generatedAt": "2026-07-28T21:45:00-04:00",
   "scope": "public",
-  "totalFiles": 4888,
-  "totalBytes": 127706636,
+  "totalFiles": 4891,
+  "totalBytes": 128095037,
   "byExtension": {
     ".pdf": {
       "files": 36,
@@ -10,19 +10,19 @@
     },
     ".json": {
       "files": 27,
-      "bytes": 13315877
+      "bytes": 13343305
     },
     ".html": {
       "files": 3749,
-      "bytes": 42265456
+      "bytes": 42318499
     },
     ".txt": {
       "files": 47,
-      "bytes": 10049003
+      "bytes": 10133074
     },
     ".xlsx": {
-      "files": 3,
-      "bytes": 11059188
+      "files": 4,
+      "bytes": 11252692
     },
     ".zip": {
       "files": 1,
@@ -38,15 +38,15 @@
     },
     ".xml": {
       "files": 16,
-      "bytes": 1877690
+      "bytes": 1874522
     },
     ".csv": {
       "files": 8,
       "bytes": 866270
     },
     ".js": {
-      "files": 46,
-      "bytes": 1184472
+      "files": 47,
+      "bytes": 1217483
     },
     ".docx": {
       "files": 3,
@@ -62,7 +62,7 @@
     },
     ".md": {
       "files": 17,
-      "bytes": 432669
+      "bytes": 433059
     },
     ".css": {
       "files": 20,
@@ -89,8 +89,8 @@
       "bytes": 546
     },
     ".sha256": {
-      "files": 6,
-      "bytes": 761
+      "files": 7,
+      "bytes": 883
     }
   },
   "largestAssets": [
@@ -106,17 +106,17 @@
     },
     {
       "path": "polymyth/concordance/concordance-index.json",
-      "size": 6781721,
+      "size": 6809514,
       "extension": ".json"
     },
     {
       "path": "polymyth/methodologylist/index.html",
-      "size": 3994098,
+      "size": 4005161,
       "extension": ".html"
     },
     {
       "path": "polymyth/methodologylist.txt",
-      "size": 3803059,
+      "size": 3845289,
       "extension": ".txt"
     },
     {
@@ -130,7 +130,7 @@
       "extension": ".xlsx"
     },
     {
-      "path": "polymyth/research/metoo-foundational-dissent-research-audit-2026-07-27.xlsx",
+      "path": "polymyth/research/metoo-foundational-dissent-full-archive-2026-07-28.xlsx",
       "size": 3621724,
       "extension": ".xlsx"
     },
@@ -141,7 +141,7 @@
     },
     {
       "path": "polymyth/methodologylist/methodology/index.html",
-      "size": 1893914,
+      "size": 1913157,
       "extension": ".html"
     },
     {
@@ -151,7 +151,7 @@
     },
     {
       "path": "polymyth/methodologylist-methodology.txt",
-      "size": 1772437,
+      "size": 1790129,
       "extension": ".txt"
     },
     {
@@ -161,7 +161,7 @@
     },
     {
       "path": "aa/index.html",
-      "size": 1522049,
+      "size": 1522050,
       "extension": ".html"
     },
     {
@@ -171,12 +171,12 @@
     },
     {
       "path": "aa/cloud/index.html",
-      "size": 1331170,
+      "size": 1331171,
       "extension": ".html"
     },
     {
       "path": "polymyth/campaigncodex/index.html",
-      "size": 1034225,
+      "size": 1034226,
       "extension": ".html"
     },
     {
@@ -201,42 +201,42 @@
     },
     {
       "path": "polymyth/bookwormburrows/index.html",
-      "size": 610767,
+      "size": 610768,
       "extension": ".html"
     },
     {
       "path": "polymyth/methodologylist/citation/index.html",
-      "size": 584558,
+      "size": 586589,
       "extension": ".html"
     },
     {
       "path": "polymyth/methodologylist-citation.txt",
-      "size": 458781,
+      "size": 460609,
       "extension": ".txt"
     },
     {
-      "path": "teacherresources/index.html",
-      "size": 445357,
+      "path": "polymyth/methodologylist/gorgonification/index.html",
+      "size": 445873,
       "extension": ".html"
     },
     {
-      "path": "polymyth/methodologylist/gorgonification/index.html",
-      "size": 442416,
+      "path": "teacherresources/index.html",
+      "size": 445358,
       "extension": ".html"
     },
     {
       "path": "polymyth/methodologylist-gorgonification.txt",
-      "size": 399251,
+      "size": 402473,
       "extension": ".txt"
     },
     {
       "path": "polymyth/modulecanon/index.html",
-      "size": 394504,
+      "size": 394513,
       "extension": ".html"
     },
     {
       "path": "leizu/fa/index.html",
-      "size": 389003,
+      "size": 389004,
       "extension": ".html"
     },
     {
@@ -251,64 +251,64 @@
     },
     {
       "path": "leizu/fr/index.html",
-      "size": 382613,
+      "size": 382614,
       "extension": ".html"
     },
     {
       "path": "leizu/zh-hans/index.html",
-      "size": 379553,
+      "size": 379554,
       "extension": ".html"
     },
     {
       "path": "leizu/index.html",
-      "size": 379548,
+      "size": 379549,
       "extension": ".html"
     },
     {
       "path": "leizu/zh-hant/index.html",
-      "size": 379543,
+      "size": 379544,
       "extension": ".html"
     },
     {
       "path": "leizu/fa/flyer/index.html",
-      "size": 377787,
+      "size": 377788,
       "extension": ".html"
     },
     {
       "path": "leizu/fr/flyer/index.html",
-      "size": 377753,
+      "size": 377754,
       "extension": ".html"
     },
     {
       "path": "leizu/zh-hans/flyer/index.html",
-      "size": 377724,
+      "size": 377725,
       "extension": ".html"
     },
     {
       "path": "leizu/zh-hant/flyer/index.html",
-      "size": 377724,
+      "size": 377725,
       "extension": ".html"
     },
     {
       "path": "leizu/flyer/index.html",
-      "size": 376442,
+      "size": 376443,
       "extension": ".html"
     }
   ],
   "largestRuntimeAssets": [
     {
       "path": "polymyth/concordance/concordance-index.json",
-      "size": 6781721,
+      "size": 6809514,
       "extension": ".json"
     },
     {
       "path": "polymyth/methodologylist/index.html",
-      "size": 3994098,
+      "size": 4005161,
       "extension": ".html"
     },
     {
       "path": "polymyth/methodologylist/methodology/index.html",
-      "size": 1893914,
+      "size": 1913157,
       "extension": ".html"
     },
     {
@@ -323,17 +323,17 @@
     },
     {
       "path": "aa/index.html",
-      "size": 1522049,
+      "size": 1522050,
       "extension": ".html"
     },
     {
       "path": "aa/cloud/index.html",
-      "size": 1331170,
+      "size": 1331171,
       "extension": ".html"
     },
     {
       "path": "polymyth/campaigncodex/index.html",
-      "size": 1034225,
+      "size": 1034226,
       "extension": ".html"
     },
     {
@@ -348,32 +348,32 @@
     },
     {
       "path": "polymyth/bookwormburrows/index.html",
-      "size": 610767,
+      "size": 610768,
       "extension": ".html"
     },
     {
       "path": "polymyth/methodologylist/citation/index.html",
-      "size": 584558,
-      "extension": ".html"
-    },
-    {
-      "path": "teacherresources/index.html",
-      "size": 445357,
+      "size": 586589,
       "extension": ".html"
     },
     {
       "path": "polymyth/methodologylist/gorgonification/index.html",
-      "size": 442416,
+      "size": 445873,
+      "extension": ".html"
+    },
+    {
+      "path": "teacherresources/index.html",
+      "size": 445358,
       "extension": ".html"
     },
     {
       "path": "polymyth/modulecanon/index.html",
-      "size": 394504,
+      "size": 394513,
       "extension": ".html"
     },
     {
       "path": "leizu/fa/index.html",
-      "size": 389003,
+      "size": 389004,
       "extension": ".html"
     },
     {
@@ -383,47 +383,47 @@
     },
     {
       "path": "leizu/fr/index.html",
-      "size": 382613,
+      "size": 382614,
       "extension": ".html"
     },
     {
       "path": "leizu/zh-hans/index.html",
-      "size": 379553,
+      "size": 379554,
       "extension": ".html"
     },
     {
       "path": "leizu/index.html",
-      "size": 379548,
+      "size": 379549,
       "extension": ".html"
     },
     {
       "path": "leizu/zh-hant/index.html",
-      "size": 379543,
+      "size": 379544,
       "extension": ".html"
     },
     {
       "path": "leizu/fa/flyer/index.html",
-      "size": 377787,
+      "size": 377788,
       "extension": ".html"
     },
     {
       "path": "leizu/fr/flyer/index.html",
-      "size": 377753,
+      "size": 377754,
       "extension": ".html"
     },
     {
       "path": "leizu/zh-hans/flyer/index.html",
-      "size": 377724,
+      "size": 377725,
       "extension": ".html"
     },
     {
       "path": "leizu/zh-hant/flyer/index.html",
-      "size": 377724,
+      "size": 377725,
       "extension": ".html"
     },
     {
       "path": "leizu/flyer/index.html",
-      "size": 376442,
+      "size": 376443,
       "extension": ".html"
     },
     {
@@ -438,32 +438,32 @@
     },
     {
       "path": "bookwormcard/print/index.html",
-      "size": 283688,
+      "size": 283689,
       "extension": ".html"
     },
     {
       "path": "saul/fa/index.html",
-      "size": 281605,
+      "size": 281610,
       "extension": ".html"
     },
     {
       "path": "saul/fr/index.html",
-      "size": 281515,
+      "size": 281520,
       "extension": ".html"
     },
     {
       "path": "saul/zh-hans/index.html",
-      "size": 281467,
+      "size": 281472,
       "extension": ".html"
     },
     {
       "path": "saul/zh-hant/index.html",
-      "size": 281466,
+      "size": 281471,
       "extension": ".html"
     },
     {
       "path": "saul/index.html",
-      "size": 281423,
+      "size": 281428,
       "extension": ".html"
     },
     {
@@ -483,7 +483,7 @@
     },
     {
       "path": "polymyth/methodologylist/coreplus/index.html",
-      "size": 243789,
+      "size": 249838,
       "extension": ".html"
     },
     {
@@ -493,7 +493,7 @@
     },
     {
       "path": "bookwormcard/index.html",
-      "size": 234378,
+      "size": 234379,
       "extension": ".html"
     }
   ]

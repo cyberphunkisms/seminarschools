@@ -49,12 +49,9 @@ for (const [source, tokens, label] of [
   [protestPublisher, ['expected_stream="deterministic-protests"'], 'protest publisher'],
   [merger, ['expected_stream="deterministic-protests"', 'expected_stream="deterministic-structured-events"'], 'direct merger'],
   [structured, ['evaluate_source_health(sources, yields)', '"source_health_gate": source_health_gate'], 'structured harvester'],
-  [protest, ['evaluate_source_health', 'load_candidate_state'], 'protest harvester'],
+  [protest, ['evaluate_source_health', 'RequestsFetcher(timeout=request_timeout)', 'load_candidate_state'], 'protest harvester'],
 ]) {
   for (const token of tokens) need(source, token, `${label} is missing ${token}`);
-}
-if (!/RequestsFetcher\(\s*timeout=request_timeout\s*\)/.test(protest)) {
-  failures.push('protest harvester is missing RequestsFetcher(timeout=request_timeout)');
 }
 
 for (const token of [
@@ -84,12 +81,12 @@ need(
   'focused paid-work deduplication test is missing',
 );
 
-if (!seminarWorkflow.includes('47 8 * * 1')) failures.push('weekly seminar cadence changed');
-if (!protestWorkflow.includes('18 8 * * 3') || protestWorkflow.includes('--shard')) {
-  failures.push('weekly unsharded deterministic protest cadence changed');
+if (!seminarWorkflow.includes('47 8 * * 1,4')) failures.push('seminar cadence changed');
+if (!protestWorkflow.includes('18 */4 * * *') || protestWorkflow.includes('--shard')) {
+  failures.push('four-hour unsharded deterministic protest cadence changed');
 }
 if (/CLAUDE|ANTHROPIC/.test(protestWorkflow)) {
-  failures.push('the weekly protest crawl unexpectedly uses a paid agent');
+  failures.push('the four-hour protest crawl unexpectedly uses a paid agent');
 }
 
 if (failures.length) {
@@ -100,5 +97,5 @@ if (failures.length) {
 
 console.log(
   'POLYMYTHCAL SOURCE-HEALTH INTEGRITY PASSED — 25% overall quorum, critical-source floor, '
-    + '304 refusal, stream binding, complete deterministic paid-work skips, and weekly harvest cadence.',
+    + '304 refusal, stream binding, complete deterministic paid-work skips, and unchanged cadence.',
 );

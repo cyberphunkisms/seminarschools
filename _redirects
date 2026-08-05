@@ -72,7 +72,7 @@
 /bb/success/*       /bookwormcard/success/:splat 301
 /bb/success         /bookwormcard/success/     301
 /bb/tests/*         /bookwormcard/tests/:splat 301
-/bb/tests           /bookwormcard/tests/       301
+/bb/tests           /bookwormcard/             301
 
 # Burrow Notebook (Bookwormburrows Series II) short URLs
 /notebook   /polymyth/notebook/   301

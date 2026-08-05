@@ -6,7 +6,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const STYLE = '/css/audit45-localization.css?v=20260725-audit45';
-const FOOTER = '/js/footer.js?v=20260725-audit45-footer';
+const FOOTER = '/js/footer.js?v=20260805-predeploy-audit';
 const roots = [
   'leizu/fr', 'leizu/zh-hant', 'leizu/zh-hans', 'leizu/fa',
   'polymythseminars/events', 'polymythseminars/fr',

@@ -7,7 +7,7 @@
     "baseline_reuse_runner_checks": 158,
     "baseline_reuse_runner_wall_ms": 23225,
     "command_timeout_ms": 600000,
-    "timeout_regression_observed_ms": 1015,
+    "timeout_regression_observed_ms": 1008,
     "sequential_failure_report_regression_passed": true,
     "package_regression_tests": 10,
     "archive_benchmark_files": 5,
@@ -26,19 +26,19 @@
     "selection": {
       "deployer": {
         "directories_pruned": 1,
-        "directories_visited": 7635,
-        "files_considered": 10940,
-        "files_selected": 10939,
-        "public_files_selected": 4888,
-        "selected_bytes_excluding_this_report": 388225593
+        "directories_visited": 7634,
+        "files_considered": 10944,
+        "files_selected": 10943,
+        "public_files_selected": 4891,
+        "selected_bytes_excluding_this_report": 389130948
       },
       "source": {
         "directories_pruned": 2,
-        "directories_visited": 3862,
-        "files_considered": 6052,
-        "files_selected": 6051,
+        "directories_visited": 3861,
+        "files_considered": 6053,
+        "files_selected": 6052,
         "public_files_selected": 0,
-        "selected_bytes_excluding_this_report": 260518957
+        "selected_bytes_excluding_this_report": 261064967
       }
     }
   },

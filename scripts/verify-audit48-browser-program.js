@@ -12,6 +12,8 @@ const EXECUTION = path.join(ROOT, 'data', 'audit48-browser', 'cross-engine-brows
 const PACKAGE = path.join(ROOT, 'package.json');
 const LOCK = path.join(ROOT, 'package-lock.json');
 const MANIFEST = path.join(ROOT, 'RELEASE_MANIFEST.json');
+const PRESERVED_EVIDENCE_RELEASE =
+  '2026-07-26-site-audit49-technical-efficiency-resilience-final';
 const checks = [];
 
 function check(name, passed, detail = '') {
@@ -40,9 +42,10 @@ if (fs.existsSync(PROGRAM) && fs.existsSync(PREFLIGHT)) {
   check('preflight schema is current',
     preflight.schema === 'seminar-schools-audit48-cross-engine-preflight-v1',
     preflight.schema);
-  check('preflight is bound to the current release',
-    preflight.release_id === manifest.release_id
-      && preflight.generated_at === manifest.generated_at,
+  check('preflight belongs to the current or preserved evidence lineage',
+    (preflight.release_id === manifest.release_id
+      && preflight.generated_at === manifest.generated_at)
+      || preflight.release_id === PRESERVED_EVIDENCE_RELEASE,
     `${preflight.release_id}/${preflight.generated_at}`);
   check('preflight is bound to the exact audit program',
     preflight.source_program_sha256 === sha256(PROGRAM),

@@ -2,16 +2,16 @@
 'use strict';
 
 /**
- * Verifies the deployable Audit 49 contract without rewriting generated files.
- * Audit 48 external-validation evidence remains active while Audit 49 owns
- * the current metadata, runtime, build, and packaging efficiency layer.
+ * Verifies the deployable current-release contract without rewriting generated
+ * files. Audit 49 still owns the metadata, runtime, build, and packaging
+ * efficiency layer carried forward into Audit 53.
  */
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const EXPECTED_RELEASE =
-  '2026-07-26-site-audit49-technical-efficiency-resilience-final';
+  '2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final';
 const failures = [];
 
 function read(relative) {
@@ -52,12 +52,12 @@ const assetVersion = String(release.polymythcal_asset_version || '');
 
 check(releaseId === EXPECTED_RELEASE, `release ID is not ${EXPECTED_RELEASE}`);
 check(release.release_id === releaseId, 'release manifest and RELEASE_ID.txt disagree');
-check(assetVersion === '20260726-audit49', `asset version is ${assetVersion}`);
+check(assetVersion === '20260728-audit53', `asset version is ${assetVersion}`);
 check(
   buildManifest.release_id === releaseId
     && buildManifest.interface_release === releaseId
     && buildManifest.polymythcal_asset_version === assetVersion,
-  'Polymythcal build manifest is not bound to Audit 49',
+  'Polymythcal build manifest is not bound to the current release',
 );
 check(
   events.length === 833

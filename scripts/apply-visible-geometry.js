@@ -32,6 +32,7 @@ function walk(dir, out = []) {
 }
 function rel(file) { return path.relative(ROOT, file).replace(/\\/g, '/'); }
 function intensityFor(r) {
+  if (r === 'index.html') return '0.026';
   if (/^polymythseminars\//.test(r) || r === 'polymythseminars/index.html') return '0.105';
   if (/^(writingclub|writingkids|writingjuniors|writingteens|writinggrads|university|philosophy|humanities|cfps|lectures|fellowships)\//.test(r)) return '0.095';
   if (/^saul\//.test(r)) return '0.075';

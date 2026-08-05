@@ -344,6 +344,65 @@ High-value future contrast:
 - No premature canonization of provisional candidates.
 - No new “nuance” entry in this pass. Current ML* already records the word's gorgonification in the goth worked example. A later in-the-wild audit can decide whether it needs a dedicated entry.
 
+## Later continuation: category-completeness and figure routing
+
+### Completeness verdict
+
+The analytic inventory is complete enough for continued use. Every phrase from the two opening inventories is preserved, and every current item can be typed by the thirteen-level matrix. No missing top-level continent of rhetoric was found.
+
+This does not permanently close the taxonomy. The remaining work concerns:
+
+- exact parentage where a governing end can overlap another family
+- strategic-awareness tests for actor labels
+- exact mythic, literary, scriptural, folkloric, or popular-media embodiments
+- source-layer distinctions among different recensions of the same figure
+
+The remaining work is routing and source control rather than discovery of another unclassified domain.
+
+### Settled routing from direct author correction
+
+- Echo, Pan, the Erinyes or Furies, Cerberus, Mammon, and the Hydra remain distinct mechanisms nested inside Gorgonification.
+- Midas routes inside Stone People as a red-pill subtype that converts relations into exchange value. Black-pill, Nimrod, and Citadel positions remain separate.
+- Pied Piper is required for recruitment, procession, and the endpoint at which the audience becomes a following or new carrier. Siren remains the dependency and extraction relation.
+- Faustian Mephistopheles and the Devil's Advocate carry answerable negation rather than the flat image of evil.
+- Prometheus has source-layered dual membership: Hesiodic Trickster or Jester and Aeschylean or Sabachtan condemned benefactor.
+- Job is a target and scene position caught in wager-without-consent and rule-theater. Saul Goodman remains a Jester, Fool, or Trickster aperture rather than a new family.
+- Careerist divides into Sellout and Bureaucratic Careerist or Functionary.
+- Ariel selling her voice is the settled project anchor for the Sellout.
+
+### Corrected internal routing
+
+- Siren is not automatically a conscious Gorgon and is not automatically a Sophist subtype. Its settled working core is strategic attraction, adaptation, dependency preservation, repeated capture, or extraction. Sophist and Gorgon relations are separately tested overlaps.
+- Trickster routes inside the Jester or Fool family.
+- Troll remains an independent operator, while trolling remains a tactic.
+- Moral Crusader or Rule Creator now has an explicit analytic row rather than appearing only inside prose.
+- Careerist is no longer bundled without distinction with Functionary and Classical Hypocrite.
+
+### Provisional operator routing
+
+- Confidence Operator remains a diagnostic row rather than an independent top family. A one-off con may route toward corrupt Trickster. Durable return and dependency route toward Siren. Counterfeit expertise routes toward Charlatan or Credentialism.
+- False authority divides by mechanism. Credentialism substitutes token or office for tested warrant. Charlatanry knowingly stages expertise. Quackery may be sincere incompetence. Predatory expertise abuses real competence. Rank-protected incompetence claims deference from office without using the confidence-fraud sequence.
+- A strategic bureaucratic careerist administers a line for security or advancement. A sincere script-bound clerk may be a Gorgon. Office alone establishes neither motive.
+
+### Provisional figure crosswalk
+
+- Kafka's Doorkeeper: procedural gatekeeping and indefinite bureaucratic delay; personal career advancement remains unproven.
+- Kafka's Officer: fanatical procedure rather than ordinary career preservation.
+- Job's friends or comforters: Legitimator, Apologist, or Baselinemorality Gorgon when preserving theodicy outranks hearing Job; their seven-day silence remains a negative control.
+- The satan in Job: Accuser–Tester and possible Agent Provocateur; the modern infiltration element is absent.
+- Zapp Brannigan: rank-protected incompetent or credentialed buffoon, not a confidence man.
+- Wizard of Oz: staged-authority or Charlatan candidate; the Scarecrow diploma is a credentialism scene candidate.
+- Grand Inquisitor: paternalistic Indoctrinator and Moral Crusader hybrid candidate.
+- Ariadne: exit-giving Counselor candidate.
+- Chiron: capacity-building Teacher candidate.
+- Philomela: Witness whose testimony changes medium candidate.
+- Odysseus bound at the mast: self-binding or resistant Listener candidate.
+- Bogeyman: no independent family presently needed; retain only as a possible threat-image or folk-devil face inside securitization, Gorgonification, or Moral Crusader analysis.
+
+### Source and status rule
+
+The crosswalk contains mythic, literary, scriptural, folkloric, project, and popular-media figures. It must not flatten the whole pool into “mythological beings.” A settled project routing does not automatically settle every historical source claim. A proposed figure remains proposed until the exact story, episode, recension, governing operation, admission condition, and defeat condition survive review.
+
 ## Research references
 
 www.classics.mit.edu/Aristotle/rhetoric.1.i.html

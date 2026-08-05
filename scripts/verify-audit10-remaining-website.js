@@ -42,14 +42,15 @@ for (const token of [
 const footerPages = walk(root).filter(abs => fs.readFileSync(abs, 'utf8').includes('/js/footer.js'));
 for (const abs of footerPages) {
   const html = fs.readFileSync(abs, 'utf8');
-  if (!html.includes('/js/footer.js?v=20260725-audit45-footer')) {
+  if (!html.includes('/js/footer.js?v=20260805-predeploy-audit')) {
     fail.push(`${path.relative(root, abs)}: stale footer cache key`);
   }
 }
 if (footerPages.length < 70) fail.push(`footer cache coverage unexpectedly low: ${footerPages.length}`);
 
 for (const token of ['white-space: nowrap', 'grid-template-columns: 24px minmax(86px, auto) minmax(0, 1fr)']) has('about/index.html', token);
-has('index.html', "sabachtan:{dx:20,dy:10,a:'start'}");
+has('index.html', "id:'sabachtan'");
+has('index.html', 'data-homepage-contract="business-card-project-web-v1"');
 
 if (ultimate) {
   for (const token of [

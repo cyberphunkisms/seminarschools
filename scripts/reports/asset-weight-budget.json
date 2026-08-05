@@ -1,6 +1,6 @@
 {
   "schema": "asset-weight-budget-v1",
-  "updated": "2026-07-28",
+  "updated": "2026-08-05",
   "policy": "Audit 52 constrains the generated public deploy surface. The total ceiling includes the approved dedicated localization routes, the complete Saul CV source/public parity surface and fixed downloads, the current-plus-withdrawn 129-row MeToo premise-audit workbooks required by the July 27 provenance record, the July 28 public mythology-integration source ledgers plus 23-entry ML* addendum, and the 346 stable Polymyth Commons records with their versioned link-only directory data. Build-only Teacher Resources data is excluded. Large archival sources, research workbooks, the concordance, pinned graph engine, and fully bilingual Polymythcal controller retain narrow exceptions; all other runtime and media assets use type limits. Polymyth Commons additionally enforces compact browser-index gzip ceilings while retaining its complete reusable JSON and CSV releases.",
   "totalPublicCeilingBytes": 130000000,
   "limitsByExtension": {
@@ -37,9 +37,9 @@
     },
     {
       "path": "polymyth/concordance/concordance-index.json",
-      "baselineBytes": 6635569,
-      "ceilingBytes": 6800000,
-      "reason": "complete public concordance index"
+      "baselineBytes": 6809514,
+      "ceilingBytes": 6900000,
+      "reason": "complete public concordance index after approved methodology and rhetoric-taxonomy corpus growth"
     },
     {
       "path": "polymyth/research/metoo-critical-academic-premise-audit-2026-07-27.xlsx",
