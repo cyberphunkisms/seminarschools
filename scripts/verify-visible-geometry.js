@@ -10,7 +10,8 @@ const path=require('path');
 const {isGeneratedDependencyDirectory}=require('./repository-walk-policy');
 const ROOT=process.cwd();
 const PUBLIC=path.join(ROOT,'public');
-const ASSET_VERSION='20260805-geometry-hardening';
+const ASSET_VERSION='20260806-front-facing-geometry';
+const GEOMETRY_CONTRACTS=JSON.parse(fs.readFileSync(path.join(ROOT,'data','geometry-route-contracts.json'),'utf8'));
 const GOOGLE_TOKEN='google20234ae70106ee9d.html';
 const GOOGLE_TOKEN_BYTES=Buffer.from('google-site-verification: google20234ae70106ee9d.html\n','utf8');
 const SOURCE_SKIP=new Set(['.git','node_modules','.netlify','public','fixtures']);
@@ -72,6 +73,17 @@ function geometryHideRules(css){
   }
   return [...new Set(failures)];
 }
+function geometryOpacityValues(css){
+  const screen=stripAllowedMedia(css.replace(/\/\*[\s\S]*?\*\//g,''));
+  const values=[];let match;
+  const rules=/([^{}]+)\{([^{}]*)\}/g;
+  while((match=rules.exec(screen))){
+    if(!/#indraLayer\b/.test(match[1]))continue;
+    const opacity=match[2].match(/(?:^|;)\s*opacity\s*:\s*([0-9]*\.?[0-9]+)/i);
+    if(opacity)values.push(Number(opacity[1]));
+  }
+  return values.filter(Number.isFinite);
+}
 const cssCache=new Map();
 function inspectLinkedCss(html,base,pageRoute,label,errors){
   const links=[...html.matchAll(/<link\b[^>]*\brel=["'][^"']*stylesheet[^"']*["'][^>]*\bhref=["']([^"']+)["'][^>]*>|<link\b[^>]*\bhref=["']([^"']+)["'][^>]*\brel=["'][^"']*stylesheet[^"']*["'][^>]*>/ig)]
@@ -105,6 +117,7 @@ function inspect(files,base,label,errors,coverage){
     const r=rel(base,file); const html=fs.readFileSync(file,'utf8');
     if(r===GOOGLE_TOKEN)continue;
     if(!/<body\b/i.test(html)){errors.push(`${label}:${r}: missing body element`);continue;}
+    const bodyTag=(html.match(/<body\b[^>]*>/i)||[])[0]||'';
     const isRedirect=/http-equiv=["']refresh["']/i.test(html)&&/location\.replace\(/.test(html);
     const alive=assetTags(html,/<link\b[^>]*href=["'][^"']*\/css\/alive\.css[^"']*["'][^>]*>/ig);
     const mandala=assetTags(html,/<script\b[^>]*src=["'][^"']*\/js\/mandala\.js[^"']*["'][^>]*>/ig);
@@ -119,21 +132,37 @@ function inspect(files,base,label,errors,coverage){
     const indraIndex=html.search(/<script\b[^>]*src=["'][^"']*\/js\/indra\.js/i);
     const footerIndex=html.search(/<script\b[^>]*src=["'][^"']*\/js\/footer\.js/i);
     if(!(mandalaIndex>=0&&indraIndex>mandalaIndex&&(footerIndex<0||footerIndex>indraIndex)))errors.push(`${label}:${r}: geometry assets must load mandala then indra then footer`);
-    if(!/<body\b[^>]*data-geometry=["']indra-web["']/i.test(html))errors.push(`${label}:${r}: body missing data-geometry="indra-web"`);
-    if(!/<body\b[^>]*data-route-type=["'][^"']+["']/i.test(html))errors.push(`${label}:${r}: body missing data-route-type`);
-    if(!/<body\b[^>]*data-geometry-role=["'][^"']+["']/i.test(html))errors.push(`${label}:${r}: body missing data-geometry-role`);
+    for(const attribute of ['data-geometry','data-route-type','data-geometry-role','data-indra-intensity']){
+      const count=(bodyTag.match(new RegExp(`\\b${attribute}\\s*=`, 'ig'))||[]).length;
+      if(count!==1)errors.push(`${label}:${r}: expected one ${attribute} body attribute, found ${count}`);
+    }
+    if(!/\bdata-geometry=["']indra-web["']/i.test(bodyTag))errors.push(`${label}:${r}: body missing data-geometry="indra-web"`);
+    const routeType=(bodyTag.match(/\bdata-route-type=["']([^"']+)["']/i)||[])[1];
+    const geometryRole=(bodyTag.match(/\bdata-geometry-role=["']([^"']+)["']/i)||[])[1];
+    if(!routeType)errors.push(`${label}:${r}: body missing data-route-type`);
+    else if(!GEOMETRY_CONTRACTS.route_types[routeType])errors.push(`${label}:${r}: unknown route type ${routeType}`);
+    if(!geometryRole)errors.push(`${label}:${r}: body missing data-geometry-role`);
+    else if(routeType&&GEOMETRY_CONTRACTS.route_types[routeType]){
+      const expected=GEOMETRY_CONTRACTS.route_types[routeType].join(' ');
+      const actual=geometryRole.trim().replace(/\s+/g,' ');
+      if(actual!==expected)errors.push(`${label}:${r}: geometry role "${actual}" does not match ${routeType} contract "${expected}"`);
+    }
+    const geometryFloor=hasStructuralForeground(html)?0.055:0.06;
     const intensity=html.match(/<body\b[^>]*data-indra-intensity=["']([0-9.]+)["']/i);
     if(!intensity)errors.push(`${label}:${r}: body missing data-indra-intensity`);
     else {
-      const n=Number(intensity[1]);const floor=hasStructuralForeground(html)?0.025:0.04;
-      if(!Number.isFinite(n)||n<floor||n>0.13)errors.push(`${label}:${r}: geometry intensity ${intensity[1]} outside ${floor.toFixed(3)}–0.13 for this foreground mode`);
+      const n=Number(intensity[1]);
+      if(!Number.isFinite(n)||n<geometryFloor||n>0.13)errors.push(`${label}:${r}: geometry intensity ${intensity[1]} outside ${geometryFloor.toFixed(3)}–0.13 for this foreground mode`);
     }
     const inlineStyles=[...html.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi)].map(match=>match[1]).join('\n');
+    const opacityCaps=geometryOpacityValues(inlineStyles).filter(value=>value<geometryFloor);
+    if(opacityCaps.length)errors.push(`${label}:${r}: inline CSS caps #indraLayer opacity below ${geometryFloor.toFixed(3)} (${opacityCaps.join(', ')})`);
     const screenStyles=inlineStyles
       .replace(/@media\s+print\s*\{[\s\S]*?\}\s*\}/gi,'')
       .replace(/@media\s*\(forced-colors:\s*active\)\s*\{[\s\S]*?\}\s*\}/gi,'');
-    if(/#indraLayer\s*\{[^}]*(?:display\s*:\s*none|visibility\s*:\s*hidden|opacity\s*:\s*0(?:\D|$)|z-index\s*:\s*-)/i.test(screenStyles))errors.push(`${label}:${r}: ordinary screen CSS hides or buries #indraLayer`);
+    if(/#indraLayer\s*\{[^}]*(?:display\s*:\s*none|visibility\s*:\s*hidden|opacity\s*:\s*0(?:\.0*)?(?:\s*!important)?\s*(?:;|})|z-index\s*:\s*-)/i.test(screenStyles))errors.push(`${label}:${r}: ordinary screen CSS hides or buries #indraLayer`);
     if(/getElementById\(["']indraLayer["']\)[\s\S]{0,120}(?:remove\(|display\s*=\s*["']none|visibility\s*=\s*["']hidden)/i.test(html))errors.push(`${label}:${r}: page script hides or removes #indraLayer`);
+    if(/\bid=["']indraLayer["']/i.test(html))errors.push(`${label}:${r}: HTML must not hardcode runtime-owned #indraLayer`);
     const inlineHides=geometryHideRules(inlineStyles);
     if(inlineHides.length)errors.push(`${label}:${r}: inline CSS hides/buries geometry via ${inlineHides.join(', ')}`);
     inspectLinkedCss(html,base,r,label,errors);

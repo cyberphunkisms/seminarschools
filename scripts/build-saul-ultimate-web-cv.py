@@ -77,12 +77,26 @@ def download_controls(compact: bool = False) -> str:
     contact = DATA["contact"]
     downloads = DATA["downloads"]
     compact_class = " cv-downloads--compact" if compact else ""
-    return f"""<div class="cv-downloads{compact_class}" aria-label="Verified one-page CV downloads">
-<div class="cv-downloads__heading"><span>Finished one-page application CV</span><strong>Choose the email shown in the file</strong></div>
-<div class="cv-downloads__edition"><span>ProtonMail · {esc(contact['public_email'])}</span><a class="cv-downloads__primary" href="{esc(downloads['proton_pdf'])}">PDF</a><a href="{esc(downloads['proton_docx'])}">Word</a></div>
-<div class="cv-downloads__edition"><span>Gmail · {esc(contact['alternate_email'])}</span><a class="cv-downloads__primary" href="{esc(downloads['gmail_pdf'])}">PDF</a><a href="{esc(downloads['gmail_docx'])}">Word</a></div>
-<div class="cv-downloads__edition"><span>Complete record · every application &amp; historical entry</span><a class="cv-downloads__primary" href="/saul/downloads/saul-karim-nassau-complete-career-archive-cv.pdf">EVERYTHING PDF</a><a href="/saul/downloads/saul-karim-nassau-all-cv-outputs.zip">All CV files</a></div>
+    return f"""<div class="cv-downloads{compact_class}" aria-label="CV downloads">
+<div class="cv-downloads__heading"><span>CV downloads</span><strong>Professional &amp; full-history formats</strong></div>
+<div class="cv-downloads__edition"><span>Professional CV</span><a aria-label="Professional CV in PDF format" class="cv-downloads__primary" href="{esc(downloads['proton_pdf'])}">PDF</a><a aria-label="Professional CV in Word format" href="{esc(downloads['proton_docx'])}">Word</a></div>
+<div class="cv-downloads__edition"><span>Full career history</span><a aria-label="Full career history in PDF format" href="/saul/downloads/saul-karim-nassau-complete-career-archive-cv.pdf">PDF</a></div>
 </div>"""
+
+
+def evidence_highlights() -> str:
+    rows = []
+    for index, highlight in enumerate(DATA.get("public_highlights", []), start=1):
+        rows.append(
+            f"""<li class="cv-evidence__item" data-evidence-id="{esc(highlight['id'])}" data-focus="{esc(' '.join(highlight['focus']))}">
+<span aria-hidden="true" class="cv-evidence__number">{index:02d}</span>
+<div><h3>{esc(highlight['title'])}</h3><p>{esc(highlight['body'])}</p></div>
+</li>"""
+        )
+    return f"""<section class="cv-evidence" id="evidenceHighlights" aria-labelledby="evidenceHighlightsHeading">
+<div class="cv-evidence__heading"><div><span>Selected evidence</span><h2 id="evidenceHighlightsHeading">How the work was done</h2></div><p>Specific examples across education, volunteer management, programs, events, research, accessibility, arts &amp; service operations.</p></div>
+<ol class="cv-evidence__list">{''.join(rows)}</ol>
+</section>"""
 
 
 def focus_controls() -> str:
@@ -94,7 +108,7 @@ def focus_controls() -> str:
     ]
     portfolio = next(module for module in modules if module.get("archive_only"))
     controls = [
-        '<button aria-pressed="true" class="cv-focus__all" data-focus-reset type="button">General / Complete CV</button>'
+        '<button aria-pressed="true" class="cv-focus__all" data-focus-reset type="button">All experience</button>'
     ]
     for module in application_modules:
         controls.append(
@@ -103,7 +117,7 @@ def focus_controls() -> str:
 </label>"""
         )
     controls.append(
-        f"""<a class="cv-focus__portfolio" href="/saul/?archive=portfolio#careerArchive" style="--focus-color:{esc(portfolio['color'])}">{esc(portfolio['short_label'])}<span>Archive</span></a>"""
+        f"""<a class="cv-focus__portfolio" href="/saul/?archive=portfolio#careerArchive" style="--focus-color:{esc(portfolio['color'])}">{esc(portfolio['short_label'])}<span>Full history</span></a>"""
     )
     public_modules = [
         {
@@ -123,9 +137,9 @@ def focus_controls() -> str:
         .replace("</", "<\\/")
     )
     return f"""<section class="cv-focus" aria-labelledby="cvFocusHeading" data-cv-focus>
-<div class="cv-focus__heading"><div><span>Role-focused views</span><h2 id="cvFocusHeading">Build a focused CV</h2></div><p data-focus-summary>Complete application CV with every verified experience row visible.</p></div>
-<fieldset class="cv-focus__controls" aria-controls="experienceLedger"><legend class="cv-ultimate__sr-only">Application CV focus areas</legend>{''.join(controls)}</fieldset>
-<div class="cv-focus__status"><p data-cv-share-status="" aria-atomic="true" aria-live="polite" class="cv-spectrum__status">Showing <strong data-visible-count>{total_experiences()}</strong> of <strong>{total_experiences()}</strong> experiences</p><a data-focus-pdf href="/saul/downloads/saul-karim-nassau-general-cv.pdf">Download complete modular PDF</a><button data-focus-print hidden type="button">Print / save combined view</button><button data-copy-focus type="button">Copy focused-view link</button></div>
+<div class="cv-focus__heading"><div><span>Experience by field</span><h2 id="cvFocusHeading">Explore relevant experience</h2></div><p data-focus-summary>Select one or more fields to narrow the evidence, skills &amp; work history below.</p></div>
+<fieldset class="cv-focus__controls" aria-controls="experienceLedger"><legend class="cv-ultimate__sr-only">Experience fields</legend>{''.join(controls)}</fieldset>
+<div class="cv-focus__status"><p data-cv-share-status="" aria-atomic="true" aria-live="polite" class="cv-spectrum__status">Showing <strong data-visible-count>{total_experiences()}</strong> of <strong>{total_experiences()}</strong> experiences</p><a data-focus-pdf href="/saul/downloads/saul-karim-nassau-general-cv.pdf">Download general CV</a><button data-focus-print hidden type="button">Print selected view</button><button data-copy-focus type="button">Copy link to this view</button></div>
 <script id="cvFocusData" type="application/json">{module_json}</script>
 </section>"""
 
@@ -135,14 +149,14 @@ def build_cv_html() -> str:
     experiences = "".join(experience_section(section) for section in DATA["experience_sections"])
     skills = "".join(
         f'<li data-core-skill="{esc(skill)}">{esc(skill)}</li>'
-        for skill in DATA["core_skills"]
+        for skill in DATA.get("web_core_skills", DATA["core_skills"])
     )
     details = [
         ("Education", DATA["education"]),
-        ("Credentials", DATA["credentials"]),
+        ("Credentials", DATA.get("web_credentials", DATA["credentials"])),
         ("Professional Learning", DATA["professional_learning"]),
-        ("Methods & Tools", DATA["methods_tools"]),
-        ("Languages", DATA["languages"]),
+        ("Methods & Tools", DATA.get("web_methods_tools", DATA["methods_tools"])),
+        ("Languages", DATA.get("web_languages", DATA["languages"])),
     ]
     detail_html = "".join(
         f"<div><dt>{esc(label)}</dt><dd>{inline_list(values)}</dd></div>"
@@ -165,18 +179,16 @@ def build_cv_html() -> str:
 <a href="{esc(contact['site_url'])}">{esc(contact['site_label'])}</a>
 <a href="{esc(contact['reviews_url'])}">{esc(contact['reviews_label'])}</a>
 </div>
-<p class="cv-ultimate__profile">{esc(DATA['profile'])}</p>
+<p class="cv-ultimate__profile">{esc(DATA.get('web_profile', DATA['profile']))}</p>
 <ul class="cv-ultimate__facts" aria-label="Career summary">
-<li><strong>12+</strong><span>Years</span></li>
-<li><strong>15</strong><span>Curricula &amp; Programs</span></li>
-<li><strong>2,000+</strong><span>Students</span></li>
-<li><strong>Ontario &amp; BC</strong><span>Inspections</span></li>
+{''.join(f"<li><strong>{esc(fact['value'])}</strong><span>{esc(fact['label'])}</span></li>" for fact in DATA.get('impact_facts', []))}
 </ul>
 {download_controls(compact=True)}
 </div>
 </header>
 <a class="cv-ultimate__curriculum-band" href="#courses"><span>Curriculum scope</span><strong>OSSD · IB · AP · A Level · ESL · IELTS · STEM · Humanities · University Preparation</strong><span>See every course ↓</span></a>
 {focus_controls()}
+{evidence_highlights()}
 <div class="cv-ultimate__layout">
 <aside class="cv-ultimate__skills" aria-labelledby="coreSkillsHeading">
 <h2 id="coreSkillsHeading">Key Skills</h2>
@@ -192,7 +204,6 @@ def build_cv_html() -> str:
 <dl>{detail_html}</dl>
 </section>
 {course_list()}
-{download_controls()}
 <footer class="cv-ultimate__footer">
 <a href="{esc(contact['reviews_url'])}">Reviews {esc(contact['reviews_label'])}</a>
 <span aria-hidden="true">|</span>
@@ -203,11 +214,11 @@ def build_cv_html() -> str:
 
 def update_metadata(source: str) -> str:
     contact = DATA["contact"]
-    title = "Saul Karim M Hosaini Nassau, MA - Educator and Community Organizer"
+    title = "Saul Karim Nassau | Educator, Program Coordinator & Community Organizer"
     description = (
-        "Modular application CV for Saul Karim M Hosaini Nassau, MA, with complete "
-        "teaching, research, community, volunteer, hospitality, operations, performance, "
-        "education, credentials, courses and language experience."
+        "Toronto educator, program coordinator & community organizer with 12+ years of "
+        "international teaching experience, 2,000+ learners supported, and extensive "
+        "volunteer, event, research & public-information work."
     )
     source = re.sub(r"<title>.*?</title>", f"<title>{esc(title)}</title>", source, count=1)
     source = re.sub(
@@ -243,14 +254,18 @@ def update_metadata(source: str) -> str:
     schema = {
         "@context": "https://schema.org",
         "@type": "ProfilePage",
+        "@id": contact["site_url"] + "#profile",
         "name": title,
         "url": contact["site_url"],
+        "inLanguage": "en",
         "mainEntity": {
             "@type": "Person",
-            "name": contact["name"],
+            "@id": contact["site_url"] + "#saul-karim-nassau",
+            "name": "Saul Karim M Hosaini Nassau",
+            "honorificSuffix": "MA",
             "email": contact["public_email"],
             "telephone": contact["phone"],
-            "jobTitle": "Educator and Community Organizer",
+            "jobTitle": "Educator, Program Coordinator and Community Organizer",
             "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Toronto",
@@ -341,6 +356,90 @@ def update_archive_consistency(source: str) -> str:
         ),
         'fr: "Anglais · Français, farsi et mandarin de niveau élémentaire"': (
             'fr: "Anglais · Farsi (avancé) · Français et mandarin (élémentaires)"'
+        ),
+        'en: "English · Farsi (advanced) · French & Mandarin (basic)"': (
+            'en: "English · Farsi (advanced speaking and reading; slower written communication) · French & Mandarin (basic)"'
+        ),
+        'zh: "英語 · 波斯語（進階）· 法語及普通話（基礎）"': (
+            'zh: "英語 · 波斯語（口說及閱讀進階；書寫較慢）· 法語及普通話（基礎）"'
+        ),
+        'zhs: "英语 · 波斯语（高级）· 法语及普通话（基础）"': (
+            'zhs: "英语 · 波斯语（口语及阅读高级；书写较慢）· 法语及普通话（基础）"'
+        ),
+        'fa: "انگلیسی · فارسی (پیشرفته) · فرانسوی و ماندارین (پایه)"': (
+            'fa: "انگلیسی · فارسی (گفتار و خواندن پیشرفته؛ نوشتن آهسته‌تر) · فرانسوی و ماندارین (پایه)"'
+        ),
+        'fr: "Anglais · Farsi (avancé) · Français et mandarin (élémentaires)"': (
+            'fr: "Anglais · Farsi (expression orale et lecture avancées; écriture plus lente) · Français et mandarin (élémentaires)"'
+        ),
+        "Google Forms, questionnaire design, and thematic response review": (
+            "Google Forms, questionnaires, feedback review, and program improvement"
+        ),
+        "Excel formulas, tables, charts, budgeting, and descriptive analysis": (
+            "Excel budgeting, formulas, tables, charts, volunteer and program tracking, and descriptive analysis"
+        ),
+        "Word reports, whiteboard-led seminars, workshops, and presentations": (
+            "Word, PowerPoint, and Outlook for reports, workshops, presentations, and participant communication"
+        ),
+        "Source verification, accessibility, link integrity, and data-quality review": (
+            "Source verification, accessibility, link and navigation testing, HTML, CSS, and digital publishing"
+        ),
+        '"en": "polymyth / AA*"': '"en": "Polymyth Research Archive"',
+        '"polymyth / AA*": {': '"Polymyth Research Archive": {',
+        'title:{zh:"polymyth／AA* 研究框架",zhs:"polymyth／AA* 研究框架",fa:"چارچوب پژوهشی polymyth / AA*",fr:"Cadre de recherche polymyth / AA*"}': (
+            'title:{zh:"Polymyth 研究檔案",zhs:"Polymyth 研究档案",fa:"بایگانی پژوهشی Polymyth",fr:"Archive de recherche Polymyth"}'
+        ),
+        (
+            "Research and writing framework used to organize concepts, citations, project records, "
+            "and methodological rules across the website. The archive distinguishes user-authored "
+            "source material from public-facing summaries."
+        ): (
+            "Research archive organizing concepts, citations, project records, and methodological "
+            "documentation across the website."
+        ),
+        'desc:{zh:"用於整理全站概念、引文、專案紀錄與方法規則的研究及寫作框架。檔案把使用者撰寫的原始材料與公開摘要清楚分開。",zhs:"用于整理全站概念、引文、项目记录与方法规则的研究及写作框架。档案把用户撰写的原始材料与公开摘要清楚分开。",fa:"چارچوب پژوهش و نگارش برای سازمان‌دهی مفاهیم، ارجاعات، سوابق پروژه و قواعد روش‌شناختی سایت. بایگانی مواد اصلی کاربر را از خلاصه‌های عمومی جدا می‌کند.",fr:"Cadre de recherche et d’écriture qui organise les concepts, citations, dossiers de projet et règles méthodologiques du site. L’archive distingue les sources rédigées par l’utilisateur des résumés publics."}': (
+            'desc:{zh:"整理全站概念、引文、專案紀錄與方法文件的研究檔案。",zhs:"整理全站概念、引文、项目记录与方法文件的研究档案。",fa:"بایگانی پژوهشی برای سازمان‌دهی مفاهیم، ارجاعات، سوابق پروژه و اسناد روش‌شناختی سایت.",fr:"Archive de recherche organisant les concepts, citations, dossiers de projet et documents méthodologiques du site."}'
+        ),
+        '"en": "Community Development Manager, Campus Crops Farmers Market"': (
+            '"en": "Community Development Manager, Campus Crops at McGill"'
+        ),
+        '"en": "Budgeting, volunteer coordination, partner relationships"': (
+            '"en": "Approximately 20 core volunteers; full-cycle coordination; associated farmers\' market; budgeting"'
+        ),
+        '"zh": "志工協調、預算、夥伴網絡"': (
+            '"zh": "約二十名核心志願者；全流程協調；相關農夫市集；預算"'
+        ),
+        '"zhs": "志愿者协调、预算、伙伴网络"': (
+            '"zhs": "约二十名核心志愿者；全流程协调；相关农夫市集；预算"'
+        ),
+        '"fa": "هماهنگی، بودجه، شبکه"': (
+            '"fa": "حدود بیست داوطلب اصلی؛ هماهنگی کامل؛ بازار کشاورزان وابسته؛ بودجه"'
+        ),
+        '"fr": "Coordination, budgétisation, réseau"': (
+            '"fr": "Environ vingt bénévoles principaux; cycle complet; marché fermier associé; budget"'
+        ),
+        (
+            "Paid community development role with a student-run urban agriculture initiative at "
+            "McGill. Redesigned budgeting and expense tracking in Excel, coordinated volunteers, "
+            "supported community programming, and developed partner relationships."
+        ): (
+            "Paid community development role with Campus Crops at McGill. Personally managed "
+            "recruitment, interviewing, orientation, role placement, ongoing support, evaluation, "
+            "and records for approximately 20 core volunteers, plus additional recruitment and "
+            "coordination for the associated farmers' market. Managed budgets, partner relationships, "
+            "public programs, and on-site operations, and rebuilt expense tracking in Excel."
+        ),
+        '"zh": "麥基爾大學學生自主都市農業計畫。"': (
+            '"zh": "在麥基爾大學 Campus Crops 的受薪社區發展職務。親自管理約二十名核心志願者的招募、面試、導入、職務安排、持續支援、評估與紀錄，並另行負責相關農夫市集的招募與協調。管理預算、夥伴關係、公共項目與現場營運，並以 Excel 重建支出追蹤。"'
+        ),
+        '"zhs": "麦吉尔大学学生自主都市农业计划。"': (
+            '"zhs": "在麦吉尔大学 Campus Crops 的受薪社区发展职务。亲自管理约二十名核心志愿者的招募、面试、导入、职务安排、持续支持、评估与记录，并另行负责相关农夫市集的招募与协调。管理预算、伙伴关系、公共项目与现场运营，并以 Excel 重建支出追踪。"'
+        ),
+        '"fa": "طرح کشاورزی شهری دانشجویی در مک‌گیل."': (
+            '"fa": "نقش حرفه‌ای توسعهٔ اجتماعی در Campus Crops دانشگاه McGill. جذب، مصاحبه، معارفه، جایابی، پشتیبانی مستمر، ارزیابی و سوابق حدود بیست داوطلب اصلی را شخصاً مدیریت کردم و جذب و هماهنگی بیشتری برای بازار کشاورزان وابسته انجام دادم. بودجه، روابط با شرکا، برنامه‌های عمومی و عملیات محل را اداره و پیگیری هزینه‌ها را در Excel بازسازی کردم."'
+        ),
+        '"fr": "Initiative d\'agriculture urbaine étudiante à McGill."': (
+            '"fr": "Poste rémunéré de développement communautaire à Campus Crops, McGill. J\'ai géré personnellement le recrutement, les entrevues, l\'orientation, l\'affectation, le soutien continu, l\'évaluation et les dossiers d\'environ vingt bénévoles principaux, ainsi qu\'un recrutement et une coordination supplémentaires pour le marché fermier associé. J\'ai géré les budgets, les partenaires, les programmes publics et les opérations sur place, et reconstruit le suivi des dépenses dans Excel."'
         ),
         '"Teacher, Intelligent International"': (
             '"Occasional Teacher, Intelligent International"'
@@ -485,6 +584,31 @@ def update_archive_consistency(source: str) -> str:
             '"2025–Present",\n    [\n      "volunteer",\n      "community",\n'
             '      "performance"\n    ],\n    {\n      "en": "Volunteer, BUMI Festival"'
         ),
+        '"en": "Bronze Cross Swimming Certificate"': (
+            '"en": "Bronze Cross & First Aid Training (Historical)"'
+        ),
+        '"zh": "銅十字游泳證書"': '"zh": "銅十字與急救訓練（歷史）"',
+        '"zhs": "铜十字游泳证书"': '"zhs": "铜十字与急救训练（历史）"',
+        '"fa": "گواهینامه شنای برنز کراس"': (
+            '"fa": "آموزش تاریخی برنز کراس و کمک‌های اولیه"'
+        ),
+        '"fr": "Certificat Croix de bronze"': (
+            '"fr": "Formation historique Croix de bronze et premiers soins"'
+        ),
+        '"Bronze Cross Swimming Certificate": {': (
+            '"Bronze Cross & First Aid Training (Historical)": {'
+        ),
+        '"Completed at age 16"': '"c. 2006 (not current)"',
+        '"en": "Lifesaving and water safety"': (
+            '"en": "Historical lifesaving and water-safety training; not current"'
+        ),
+        (
+            "Completed Bronze Cross and First Aid at age 16, developing lifesaving "
+            "and water-safety skills."
+        ): (
+            "Completed Bronze Cross and associated First Aid training c. 2006; "
+            "this training is not current."
+        ),
     }
     for old, new in replacements.items():
         source = source.replace(old, new)
@@ -527,6 +651,19 @@ def update_archive_consistency(source: str) -> str:
         '"Separate from the application CV above; includes personal projects, '
         'early education, short courses & other historical records."',
     )
+    archive_letters = DATA.get("archive_letters")
+    if archive_letters:
+        letters_payload = json.dumps(archive_letters, ensure_ascii=False, indent=2)
+        pattern = r"const LETTERS = \{.*?\n\};\n(?=// ={10,}\n// URL ROUTING)"
+        if not re.search(pattern, source, flags=re.S):
+            raise RuntimeError("Could not replace front-facing CV archive letters")
+        source = re.sub(
+            pattern,
+            "const LETTERS = " + letters_payload + ";\n",
+            source,
+            count=1,
+            flags=re.S,
+        )
     return source
 
 
@@ -579,6 +716,10 @@ def update_page(path: Path) -> None:
     )
     source = update_archive_consistency(source)
     source = update_metadata(source)
+    source = source.replace(
+        '<nav aria-label="CV sections" class="cv-local-nav" data-cv-local-nav=""><a aria-current="location" href="#cvOverview">CV</a><a href="#places">Map</a><a href="#careerArchive">Historical Archive</a><a href="#eduHead">Education</a><a href="#methodsHead">Methods</a></nav>',
+        '<nav aria-label="CV sections" class="cv-local-nav" data-cv-local-nav=""><a aria-current="location" href="#cvOverview">CV</a><a href="#evidenceHighlights">Evidence</a><a href="#experienceLedger">Experience</a><a href="#educationLearningHeading">Education</a><a href="#places">Map</a><a href="#careerArchive">Full history</a></nav>',
+    )
     source = source.replace(
         "</body>",
         '<script defer src="/saul/assets/saul-ultimate-cv-modules-2026.js?v=20260727-modular"></script>\n</body>',
@@ -771,20 +912,20 @@ def retire_focused_routes() -> None:
 <meta content="0; url={destination}" http-equiv="refresh">
 <meta content="noindex,follow" name="robots">
 <link href="https://seminarschools.com{destination}" rel="canonical">
-<script src="/js/theme-init.js"></script>
-<link rel="stylesheet" href="/css/alive.css">
+<script src="/js/theme-init.js?v=20260723-steady"></script>
+<link rel="stylesheet" href="/css/alive.css?v=20260806-front-facing-geometry">
 <link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
 <link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
-<title>Saul Karim Nassau — Focused CV</title>
+<title>Saul Karim Nassau — Relevant Experience</title>
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.075" data-page-weight="light" data-route-type="cv-redirect">
+<body data-geometry="indra-web" data-indra-intensity="0.075" data-page-weight="light" data-route-type="cv-redirect" data-geometry-role="return">
 <main>
-<h1>Focused CV</h1>
-<p data-cv-share-status="" aria-atomic="true" aria-live="polite" class="cv-spectrum__status">Opening the requested <a href="{destination}">modular CV view</a>.</p>
+<h1>Saul Nassau — Relevant Experience</h1>
+<p data-cv-share-status="" aria-atomic="true" aria-live="polite" class="cv-spectrum__status">Opening the <a href="{destination}">selected experience view</a>.</p>
 </main>
-<script defer src="/js/mandala.js"></script>
-<script defer src="/js/indra.js"></script>
+<script defer src="/js/mandala.js?v=20260806-front-facing-geometry"></script>
+<script defer src="/js/indra.js?v=20260806-front-facing-geometry"></script>
 </body>
 </html>
 """

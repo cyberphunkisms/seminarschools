@@ -391,7 +391,7 @@ check("translateX(-50%)" not in text("saul/assets/saul-cv-spectrum-2026.css"),
 check("SAUL_AUDIT45_ARCHIVE_COPY" in saul and "localizeArchiveDate" in saul,
       "Saul missing-record/date parity repair is absent")
 for marker in (
-    "The Agora", "Ohm Dome", "polymyth / AA*", "Polymythcal", "Florilegium",
+    "The Agora", "Ohm Dome", "Polymyth Research Archive", "Polymythcal", "Florilegium",
     "AODA Training", "BUMI Festival", "Claude Watson",
 ):
     check(marker in saul, f"Saul translation repair lost {marker}")

@@ -80,14 +80,14 @@
   var tier = routeTier(path);
   var requested = parseFloat(body.getAttribute('data-indra-intensity'));
   var defaultOpacity = tier === 'expressive' ? 0.105 : tier === 'quiet' ? 0.060 : 0.075;
-  var opacity = Number.isFinite(requested) ? clamp(requested, 0.04, 0.13) : defaultOpacity;
-  // A verified foreground geometry may quiet the shared scroll layer to 0.025.
+  var opacity = Number.isFinite(requested) ? clamp(requested, 0.06, 0.13) : defaultOpacity;
+  // A verified foreground geometry may quiet the shared scroll layer without making it disappear.
   var structuralForeground = document.getElementById('geo') ||
     document.getElementById('geo2') ||
     document.getElementById('geoLayer') ||
     document.getElementById('projectMap') ||
     document.querySelector('[data-geometry-foreground="structural"]');
-  if (structuralForeground) opacity = Math.max(0.025, opacity * 0.72);
+  if (structuralForeground) opacity = Math.max(0.055, opacity * 0.90);
 
   var seed = seedOf(path + '|' + structuralSignature);
   var baseRotation = ((seed % 1600) / 1600) * 24 - 12;

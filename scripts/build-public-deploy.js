@@ -76,6 +76,19 @@ function acquireBuildLock(){
       const sameHost = owner.hostname === hostname;
       const unknownHost = !owner.hostname;
       const activeOwner = sameHost && processAlive(Number(owner.pid));
+      // Artifact workspaces can reconcile an abandoned, metadata-free lock
+      // and staging tree from an interrupted build. Quarantine that exact
+      // recoverable pair; never weaken a lock with live owner metadata.
+      if (
+        !owner.token
+        && fs.existsSync(BUILD_OUT)
+      ) {
+        const workspaceRoot = path.dirname(path.dirname(ROOT));
+        const quarantine = fs.mkdtempSync(path.join(workspaceRoot, '.ss-public-build-abandoned-'));
+        fs.renameSync(BUILD_LOCK, path.join(quarantine, 'lock'));
+        fs.renameSync(BUILD_OUT, path.join(quarantine, 'staging'));
+        continue;
+      }
       if (activeOwner || ((unknownHost || !sameHost) && ageMs < BUILD_LOCK_STALE_MS)) {
         throw new Error(`PUBLIC DEPLOY BUILD FAILED — another build owns ${BUILD_LOCK}`);
       }

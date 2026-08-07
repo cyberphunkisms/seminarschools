@@ -334,11 +334,16 @@ def verify_website(data: dict) -> None:
     for required in (
         "Fundraiser &amp; Volunteer Coordinator",
         "2006–2010",
+        "saul-karim-nassau-ultimate-school-cv-2026-protonmail.pdf",
+        "saul-karim-nassau-ultimate-school-cv-2026-protonmail.docx",
         "saul-karim-nassau-complete-career-archive-cv.pdf",
-        "saul-karim-nassau-all-cv-outputs.zip",
         "saul-karim-nassau-general-cv.pdf",
     ):
         need(required in html, f"website is missing {required}")
+    need(
+        "saul-karim-nassau-all-cv-outputs.zip" not in html,
+        "the public website exposes the owner-facing CV output archive",
+    )
 
 
 def main() -> None:
@@ -359,7 +364,7 @@ def main() -> None:
         "SAUL CV RELEASE CHECK PASSED — 37 application experiences, 65 historical "
         "records, exact 11/10-point hierarchy, four heading-only 0.5-point spacers, "
         "zero experience-row gaps, right-tabbed dates, email-only application variants, "
-        "and distinct modular/EVERYTHING outputs."
+        "and distinct role-focused and complete-career outputs."
     )
 
 

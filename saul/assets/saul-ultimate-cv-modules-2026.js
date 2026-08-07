@@ -24,6 +24,7 @@
   const focusPdf = focusPanel.querySelector("[data-focus-pdf]");
   const focusPrint = focusPanel.querySelector("[data-focus-print]");
   const rows = [...root.querySelectorAll("[data-experience-id]")];
+  const evidenceItems = [...root.querySelectorAll("[data-evidence-id]")];
   const sections = [...root.querySelectorAll("[data-experience-section]")];
   const skillItems = [...root.querySelectorAll("[data-core-skill]")];
   const skillHeading = root.querySelector("#coreSkillsHeading");
@@ -69,6 +70,13 @@
       if (matches) count += 1;
     });
 
+    evidenceItems.forEach((item) => {
+      const tags = (item.dataset.focus || "").split(/\s+/).filter(Boolean);
+      const matches =
+        selected.length === 0 || tags.some((tag) => selectedSet.has(tag));
+      setFilteredOut(item, !matches);
+    });
+
     sections.forEach((section) => {
       const sectionRows = [...section.querySelectorAll("[data-experience-id]")];
       const shown = sectionRows.filter(
@@ -105,7 +113,7 @@
     if (summary) {
       if (selected.length === 0) {
         summary.textContent =
-          "Complete application CV with every verified experience row visible.";
+          "Select one or more fields to narrow the evidence, skills & work history below.";
       } else if (selected.length === 1) {
         summary.textContent = moduleById.get(selected[0])?.summary || "";
       } else {
@@ -123,7 +131,7 @@
           `/saul/downloads/saul-karim-nassau-${focusId}-cv.pdf`;
         focusPdf.textContent = selected.length
           ? `Download ${module?.short_label || focusId} PDF`
-          : "Download complete modular PDF";
+          : "Download general CV";
         focusPdf.hidden = false;
         focusPrint.hidden = true;
       } else {
@@ -156,7 +164,7 @@
       await navigator.clipboard.writeText(location.href);
       copyButton.textContent = "Link copied";
       window.setTimeout(() => {
-        copyButton.textContent = "Copy focused-view link";
+        copyButton.textContent = "Copy link to this view";
       }, 1800);
     } catch {
       copyButton.textContent = "Copy unavailable";

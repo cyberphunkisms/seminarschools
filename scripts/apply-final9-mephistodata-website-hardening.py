@@ -158,9 +158,9 @@ def patch_front_pages() -> None:
             ('Bookwormburrows begins with a wormcard, then moves into teacher-guided choices inside the text-world.',
              'Make a wormcard, then move into teacher-guided choices inside the text-world.'),
             ('AA* carries its own path while pointing interested readers toward polymyth and ML* without twisting either layer.',
-             'Open the AA* archive, then follow its routes into polymyth and ML*.'),
+             'Explore the Archetype Archive and follow its sources into the wider Polymyth framework.'),
             ('The CV is not a Leizu-only funnel; it is the broad employment and project-history page.',
-             'Choose a professional focus, share the selected view, or download the matching monochrome CV.'),
+             'Explore Saul’s experience by field, share the selected view, or download a one-page CV.'),
             ('Toronto has more free public lectures than one person can attend. This page keeps the strongest upcoming events in view. <a href="/marginalia">Marginalia</a> carries the longer reflections.',
              'Toronto has more free public lectures than one person can attend. The calendar below shows the strongest upcoming events. <a href="/marginalia">Marginalia</a> carries longer reflections on selected talks.'),
             ('Seminar Schools hosts that practice through Leizu Academy, the Agora, Ohm Dome, the polymythcalendar, and Marginalia. Each project offers a different entrance into the same room.',
@@ -273,7 +273,7 @@ for(const token of ['## WRITING DISCIPLINE','bolted-on also/category appendages'
 for(const pair of [
   ['index.html','Study support, public events, classroom materials, reading games, project archives, and the full CV are available below.'],
   ['index.html','Search public talks, contests, calls for papers, fellowships, and festivals by date, type, and source freshness.'],
-  ['about/index.html','Choose a professional focus, share the selected view, or download the matching monochrome CV.'],
+  ['about/index.html','Explore Saul’s experience by field, share the selected view, or download a one-page CV.'],
   ['about/index.html','is a PhD candidate in Education.'],
   ['saul/index.html','Use the webpage for the visual record. Download a monochrome PDF for applications.']
 ]) has(pair[0], pair[1]);

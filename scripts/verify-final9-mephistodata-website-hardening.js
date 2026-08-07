@@ -22,11 +22,11 @@ const directCopyPairs = [
   ['index.html','Select a project to preview it. Open it from the description.'],
   ['index.html','Every project has the same weight.'],
   ['index.html','Its plain-language description will appear here before you leave this page.'],
-  ['about/index.html','Choose a professional focus, share the selected view, or download the matching monochrome CV.'],
+  ['about/index.html','Explore Saul’s experience by field, share the selected view, or download a one-page CV.'],
   ['about/index.html','is a PhD candidate in Education.']
 ];
 directCopyPairs.push(ultimate
-  ? ['saul/index.html','Finished one-page application CV']
+  ? ['saul/index.html','One-page CV downloads']
   : ['saul/index.html','Use the webpage for the visual record. Download a monochrome PDF for applications.']);
 for(const pair of directCopyPairs) has(pair[0], pair[1]);
 for(const pair of [
@@ -54,7 +54,7 @@ if(routePages.length < 13) fail.push(`focused CV route count ${routePages.length
 for(const rel of routePages){
   if(ultimate){
     has(rel, 'http-equiv="refresh"');
-    has(rel, 'Opening the requested');
+    has(rel, 'selected experience view');
     has(rel, 'data-cv-share-status=""');
   }else{
     has(rel, 'Use the webpage for the visual record. Download a monochrome PDF for applications.');
@@ -75,7 +75,7 @@ if(exists('public/index.html')){
   has('public/index.html','Every project has the same weight.');
   has('public/index.html','Its plain-language description will appear here before you leave this page.');
   has('public/about/index.html','is a PhD candidate in Education.');
-  has('public/saul/index.html',ultimate ? 'Finished one-page application CV' : 'Use the webpage for the visual record. Download a monochrome PDF for applications.');
+  has('public/saul/index.html',ultimate ? 'One-page CV downloads' : 'Use the webpage for the visual record. Download a monochrome PDF for applications.');
 }
 if(fail.length){ console.error('FINAL9 MEPHISTODATA WEBSITE HARDENING FAILED'); fail.forEach(x=>console.error(' - '+x)); process.exit(1); }
 console.log(`FINAL9 MEPHISTODATA WEBSITE HARDENING PASSED - ${routePages.length} focused routes, canonical writing discipline, direct front-facing copy, and Final8 interaction invariants verified.`);

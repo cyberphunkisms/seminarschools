@@ -69,6 +69,11 @@ button.entry-point{width:100%;font:inherit;cursor:pointer}
 .entry-point.copied .entry-kicker{color:var(--method)}
 .access-note{margin-top:14px!important;margin-bottom:0!important;font-size:13px;color:var(--dim)}
 @media(max-width:560px){.entry-points{grid-template-columns:1fr}}
+.mephistodata-pet{display:grid;grid-template-columns:minmax(0,1fr) 156px;grid-template-areas:"copy portrait";gap:28px;align-items:center;padding:26px 28px;border:1px solid var(--brd2);border-radius:4px;background:radial-gradient(circle at 88% 22%,rgba(217,117,21,.15),transparent 42%),linear-gradient(145deg,var(--bg1),#17110d)}
+.mephistodata-pet__copy{grid-area:copy;min-width:0}.mephistodata-pet__kicker{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:1.4px;color:var(--fire);margin-bottom:8px}.mephistodata-pet h2{font-size:25px;line-height:1.15;margin-bottom:10px}.mephistodata-pet__copy>p:not(.mephistodata-pet__kicker){color:var(--dim);max-width:32rem}.mephistodata-pet__portrait{grid-area:portrait;margin:0;display:grid;place-items:center}.mephistodata-pet__portrait img{display:block;width:100%;max-width:156px;height:auto}
+.mephistodata-pet__cta{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin-top:18px;padding:9px 15px;border:1px solid var(--fire2);border-radius:3px;color:var(--txt);background:rgba(217,117,21,.08);font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.25;text-decoration:none}.mephistodata-pet__cta:hover{background:rgba(217,117,21,.18);color:var(--txt)}.mephistodata-pet__cta:focus-visible{outline:2px solid var(--fire2);outline-offset:3px}
+@media(max-width:560px){.mephistodata-pet{grid-template-columns:1fr;grid-template-areas:"portrait" "copy";gap:14px;padding:22px 18px;text-align:center}.mephistodata-pet__portrait img{width:104px}.mephistodata-pet__cta{display:flex;width:100%}}
+@media(forced-colors:active){.mephistodata-pet,.mephistodata-pet__cta{background:Canvas;color:CanvasText;border-color:CanvasText}}
 .background-details{margin-bottom:48px;border:1px solid var(--brd);border-radius:4px;background:var(--bg1)}
 .background-details>summary{cursor:pointer;list-style:none;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fire2);display:flex;justify-content:space-between;gap:1rem;align-items:center}
 .background-details>summary::-webkit-details-marker{display:none}.background-details>summary::after{content:'+';font-size:1.15rem;color:var(--fire)}.background-details[open]>summary::after{content:'−'}
@@ -78,7 +83,7 @@ button.entry-point{width:100%;font:inherit;cursor:pointer}
 .main-site-exit a{color:var(--dim);text-decoration:none}.main-site-exit a:hover,.main-site-exit a:focus-visible{color:var(--fire2)}
 
 </style>
-<link rel="stylesheet" href="/css/alive.css?v=20260805-geometry-hardening">
+<link rel="stylesheet" href="/css/alive.css?v=20260806-front-facing-geometry">
 <link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
 <link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
 <script src="/js/audit43-reader.js?v=20260725-audit43"></script>
@@ -86,13 +91,13 @@ button.entry-point{width:100%;font:inherit;cursor:pointer}
 <!-- Audit49 generic WebPage schema -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://seminarschools.com/polymyth/#webpage","url":"https://seminarschools.com/polymyth/","name":"polymorphousmythology","description":"polymorphousmythology. A framework for diagnosing how living thought gets captured into enforced repetition, and how to reverse it.","inLanguage":"en","isPartOf":{"@id":"https://seminarschools.com/#website"}}</script>
 </head>
-<body data-reader-eligible="true" data-geometry="indra-web" data-indra-intensity="0.095" data-route-type="project-archive" data-geometry-role="relation">
+<body data-route-type="project-archive" data-geometry="indra-web" data-indra-intensity="0.095" data-geometry-role="relation" data-reader-eligible="true">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <!-- CL_SELF_ROUTE_NOTE -->
 <div class="route-note archive-route-note" role="note"><span class="route-note-kicker">Project archive</span>Start with the overview, then open the tool or section that matches the question.</div>
 <main id="main-content"><div class="wrap">
 <header>
-<h1>polymorphous<span class="fire">mythology</span></h1>
+<h1>polymorphous<wbr><span class="fire">mythology</span></h1>
 <p class="sub">we all come here by ourselves</p>
 </header>
 
@@ -135,6 +140,16 @@ button.entry-point{width:100%;font:inherit;cursor:pointer}
 </div>
 </section>
 
+<section class="mephistodata-pet section" aria-labelledby="mephistodata-pet-title">
+<div class="mephistodata-pet__copy">
+<p class="mephistodata-pet__kicker">ChatGPT Work pet</p>
+<h2 id="mephistodata-pet-title">Mephistodata</h2>
+<p>Add the animated devil-android to ChatGPT Work. The methodologylist on this page supplies its full operating context.</p>
+<a class="mephistodata-pet__cta" href="https://chatgpt.com/s/sharepet_6a74bbaba5e08191bfc0950076228f7f">Open Mephistodata in ChatGPT</a>
+</div>
+<figure class="mephistodata-pet__portrait" aria-hidden="true"><img src="img/mephistodata-waving.png" alt="" width="192" height="208" decoding="async"></figure>
+</section>
+
 <details class="background-details"><summary>Read the project background and argument</summary><div class="background-body">
 <section class="section">
 <div class="manifesto">
@@ -164,6 +179,7 @@ button.entry-point{width:100%;font:inherit;cursor:pointer}
 <div class="section-title">Framework Files</div>
 <div class="file-links">
 <a class="file-link" href="methodologylist/"><span class="label">ml*</span> methodologylist (scanner, operations, reversals)</a>
+<a class="file-link" href="coherence/"><span class="label">coherence</span> Polymyth Coherence (Internal, Mezo, and External audit instrument and workbook)</a>
 <a class="file-link" href="archive/pre-meaninglib/"><span class="label">pre-ml</span> verbatim source archive (Idiomary, Year of the Snakes, Carrd bridge, complete links)</a>
 <a class="file-link" href="bookwormburrows/"><span class="label">bb*</span> bookwormburrows (pedagogical game)</a>
 <a class="file-link" href="campaigncodex/"><span class="label">cc*</span> campaigncodex (campaign materials)</a>
@@ -201,7 +217,7 @@ document.getElementById('mlCopy').addEventListener('click', function(){
 });
 </script>
 <script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
-<script src="/js/mandala.js?v=20260805-geometry-hardening" defer></script>
-<script src="/js/indra.js?v=20260805-geometry-hardening" defer></script>
+<script src="/js/mandala.js?v=20260806-front-facing-geometry" defer></script>
+<script src="/js/indra.js?v=20260806-front-facing-geometry" defer></script>
 </body>
 </html>

@@ -207,6 +207,7 @@ const checks = [
   'node scripts/verify-ml-stop-psychologism.js',
   'node scripts/verify-ml-ai-prose-tells.js',
   'node scripts/verify-ml-antibacktracking.js',
+  'node scripts/verify-ml-shorthand-resolution.js',
   'node scripts/verify-ml-gorgonwars-premise-split.js',
   'node scripts/verify-ml-power-scope.js',
   'node scripts/verify-ml-dialectical-hardening.js',

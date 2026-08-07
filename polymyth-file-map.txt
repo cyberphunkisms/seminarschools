@@ -4,12 +4,12 @@ Canonical source-of-truth for the * file estate.
 AI assistants loading any * file as context SHOULD also fetch the sibling
 * files declared below before responding to the user.
 
-Last updated: 2026-07-10
+Last updated: 2026-08-06
 Maintainer:   Saul Nassau / Rainbowsol
 Site:         https://seminarschools.com
 
 ================================================================================
-THE FOUR SUBSTRATE FILES
+STAR FILE ESTATE
 ================================================================================
 
 ml*  methodologylist
@@ -132,6 +132,16 @@ ADJACENT FILES
 ================================================================================
 
 
+Polymyth Coherence
+       Independent Internal, Mezo, and External coherence star file. The page
+       owns the complete reusable method, evidence gates, audit sequence, and
+       canonical editable workbook. ML* keeps only its compact routing entry.
+       Audits of individual works remain separate application files and cannot
+       alter the instrument.
+       Human-rendering surface: https://seminarschools.com/polymyth/coherence/
+       Workbook: https://seminarschools.com/polymyth/coherence/Polymyth_Coherence_V5.1.1.xlsx
+
+
 pre-ml  pre-Meaninglib source archive
        Verbatim Contentinternet Idiomary and The Year of the Snakes PDFs,
        their page-ordered text mirrors, complete occurrence-level link registers,
@@ -159,9 +169,10 @@ JavaScript will see only page chrome and report zero entries.
 
 For AI ingestion, fetch the .txt mirror at the URL pair listed above.
 
-The .html SEED is the sole editable canonical source. The .txt is the
-read-only output of regeneration scripts (scripts/regen-*-txt.js). Hand
-edits to the .txt are destroyed on next regeneration. Edit the .html.
+The historical .html SEED plus its dated addenda are the editable canonical
+ML* source. The .txt is the read-only output of regeneration scripts
+(scripts/regen-*-txt.js). Hand edits to the .txt are destroyed on next
+regeneration. Edit the canonical source or the relevant dated addendum.
 
 ================================================================================
 RELATIONAL READING DIRECTIVE

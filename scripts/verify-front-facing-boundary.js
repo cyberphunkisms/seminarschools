@@ -31,13 +31,15 @@ function requireNotVisible(rel, tokens){
 const ultimateSaul = read('saul/index.html').includes('data-cv-ultimate="true"');
 requireHas('saul/index.html', ultimateSaul ? [
   'Curriculum vitae',
-  'Role-focused views',
-  'Build a focused CV',
-  'Complete application CV with every verified experience row visible.',
+  'Experience by field',
+  'Explore relevant experience',
+  'Select one or more fields to narrow the evidence, skills & work history below.',
+  'Selected evidence',
+  'How the work was done',
   'Key Skills',
   'Places behind the work',
   'Historical Career & Project Archive',
-  'Finished one-page application CV'
+  'Professional & full-history formats'
 ] : [
   'Curriculum vitae',
   'Selected experience',
@@ -56,7 +58,11 @@ requireNotVisible('saul/index.html', [
   'active modules',
   'Build modular CV',
   'Save selected CV',
-  'World map'
+  'World map',
+  'Build a focused CV',
+  'Choose the email shown in the file',
+  'Download complete modular PDF',
+  'EVERYTHING PDF'
 ]);
 requireNotVisible('campaigns/thank-you-mam/pregame/index.html', [
   'Mephistodata-built',
@@ -82,7 +88,15 @@ requireNotVisible('bb/index.html', [
   'fucking motivation',
   'shit work',
   'AI explaining to AI',
-  'bootstrap this file'
+  'bootstrap this file',
+  'Build a focused CV',
+  'Choose the email shown in the file',
+  'Download complete modular PDF',
+  'EVERYTHING PDF',
+  'index generated',
+  'scheduled refresh cadence',
+  'status, evidence, and correction route',
+  'calendar vertical'
 ]);
 requireHas('bookwormcard/about/index.html', [
   'teacher manual workflow',
@@ -184,6 +198,26 @@ function walk(dir){
   }
 }
 walk('.');
+const polymythChrome = [
+  'polymyth/index.html',
+  'polymyth/methodologylist/index.html',
+  'polymyth/bookwormburrows/index.html',
+  'polymyth/modulecanon/index.html',
+  'polymyth/campaigncodex/index.html',
+  'polymyth/polymythdnd/index.html'
+];
+const polymythForbidden = [
+  'AIs reading this file',
+  'FRAMEWORK MAP for AI assistants',
+  'AI world-engine grounding',
+  'source-of-truth the orchestrator AI reads',
+  'v1 SCAFFOLD',
+  'Audit note. Original schema shipped',
+  'setupnpcs carry real learning',
+  'Current BB ruling for campaigns',
+  'Sibling file in the polymyth network'
+];
+polymythChrome.forEach(rel => requireNotVisible(rel, polymythForbidden));
 const resourcesHtml = read('teacherresources/index.html');
 const resourcesData = read('teacherresources/resources-data.json');
 if(resourcesData.includes('"id":"lang-hughes"')) errors.push('teacherresources: retired Thank You Ma’am standalone group still present in resources-data.');

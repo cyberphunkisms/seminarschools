@@ -868,7 +868,7 @@ function entityPage(project) {
       }<p class="source-note">Verification basis · ${htmlEscape(
         project.confidence || "confidence not set",
       )} · checked ${htmlEscape(project.verified)}</p>`
-    : `<p>This record currently carries the historical book evidence. A current-web review can add present-day status evidence while preserving that historical layer.</p><a class="button small" href="/polymythlib/contribute/?record=${encodeURIComponent(
+    : `<p>Current status has not yet been verified. The historical book evidence remains available below.</p><a class="button small" href="/polymythlib/contribute/?record=${encodeURIComponent(
         project.id,
       )}&amp;kind=status">Propose current evidence</a>`;
   const mentionsHtml = project.mentions.length
@@ -929,7 +929,7 @@ function entityPage(project) {
             )} · shared type ${htmlEscape(primaryCategory)}</span></li>`,
         )
         .join("")}</ul>`
-    : "<p>This record currently has an open connection field.</p>";
+    : "<p>No related entries are recorded yet.</p>";
   const signalHtml = signals
     .map(
       ([label, on]) =>
@@ -963,11 +963,11 @@ function entityPage(project) {
   )}/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/css/polymyth-commons.css?v=20260728-g0-3">
-  <link rel="stylesheet" href="/css/alive.css?v=20260723-steady">
-  <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
+  <link rel="stylesheet" href="/css/alive.css?v=20260806-front-facing-geometry">
   <link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+  <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.070" data-route-type="commons-record">
+<body data-geometry="indra-web" data-indra-intensity="0.070" data-route-type="commons-record" data-geometry-role="relation return">
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header"><div class="site-header-inner"><a class="site-brand" href="/polymythcommons/"><span class="brand-seal" aria-hidden="true"></span><span>Polymyth <i>Commons</i></span></a><nav class="primary-nav" aria-label="Polymyth Commons"><a href="/polymythlib/">Directory</a><a href="/polymythlib/collections/">Collections</a><a href="/polymythlib/book-backbone/">Book backbone</a><a href="/polymythlib/method/">Method</a><a href="/polymythlib/contribute/">Contribute</a></nav><a class="seminar-link" href="/">Seminar Schools ↗</a></div></header>
   <main class="page entity-page" id="main-content">
@@ -977,8 +977,6 @@ function entityPage(project) {
     <header class="entity-hero">
       <div><p class="record-id">${htmlEscape(
         project.id,
-      )} · generation ${htmlEscape(
-        project.discoveryGeneration,
       )} · ${htmlEscape(project.scope)}</p><h1>${htmlEscape(
         project.canonicalName,
       )}</h1><p class="entity-summary">${htmlEscape(
@@ -1028,21 +1026,21 @@ function entityPage(project) {
             ? `${htmlEscape(
                 project.currentOperator,
               )} is recorded as the current operator or parent.`
-            : "Operator, funding, and governance documentation remain open evidence fields for this record."
+            : "Current organization, funding, and governance details have not yet been verified."
         }</p><h3>Preservation</h3><p>${
           preservationLanguage
-            ? "The book record contains archive, library, repository, or preservation-relevant language. A current preservation endpoint remains an open field awaiting direct source evidence."
-            : "Preservation documentation remains an open evidence field. Historical access pointers stay visible below."
+            ? "The book record contains archive, library, repository, or preservation language. No current preservation endpoint has been verified."
+            : "No current preservation information has been verified. Historical access links remain below."
         }</p></section>
         <section class="entity-section" id="book"><h2>As documented in the book</h2><p>This section presents source-grounded summaries with the book’s chapter and pagination. Present-day status appears in its own evidence layer.</p>${mentionsHtml}</section>
         <section class="entity-section" id="sources"><h2>Sources and pointers</h2><ul class="source-list">${sourcesHtml}</ul></section>
-        <section class="entity-section" id="connections"><h2>Related by book type</h2><p>This generated list uses the shared normalized book type <strong>${htmlEscape(
+        <section class="entity-section" id="connections"><h2>Related by book type</h2><p>These entries share the book type <strong>${htmlEscape(
           primaryCategory || "unclassified",
-        )}</strong>. It does not yet assert a sourced project-to-project relationship.</p>${relatedHtml}</section>
+        )}</strong>. No direct relationship has been verified.</p>${relatedHtml}</section>
       </div>
       <aside class="record-aside"><section class="record-card"><h2>Record signals</h2><p>These describe Polymyth’s evidence and review coverage for this record.</p><ul class="signal-list">${signalHtml}</ul></section><section class="record-card"><h2>Record history</h2><ol class="timeline"><li><strong>2007 book layer</strong><span>Named at ${htmlEscape(
         project.printedPageReferences || "the cited pages",
-      )}.</span></li><li><strong>28 July 2026</strong><span>Generation-0 extraction published.</span></li>${
+      )}.</span></li><li><strong>28 July 2026</strong><span>Book record published.</span></li>${
         project.verified
           ? `<li><strong>${htmlEscape(
               project.verified,
@@ -1051,10 +1049,10 @@ function entityPage(project) {
       }</ol></section></aside>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-grid"><div><p class="footer-name">Polymyth Commons</p><p>A directory of libraries, commons projects, and the systems that help shared knowledge live.</p></div><nav aria-label="Commons sections"><a href="/polymythlib/">Polymythlib</a><a href="/polymythlib/book-backbone/">Book backbone</a><a href="/polymythlib/method/">Method and governance</a><a href="/polymythlib/contribute/">Suggest or correct a record</a></nav><nav aria-label="Seminar Schools collections"><a href="/teacherresources/">Teacher Resources ↗</a><a href="/polymythseminars/">Polymythcal ↗</a><a href="/polymyth/">polymorphousmythology ↗</a></nav></div><div class="footer-base"><span>Generation 0 published 28 July 2026</span><span>Facts, verification, and curation remain separate.</span></div></footer>
+  <footer class="site-footer"><div class="footer-grid"><div><p class="footer-name">Polymyth Commons</p><p>A directory of libraries, commons projects, and the systems that help shared knowledge live.</p></div><nav aria-label="Commons sections"><a href="/polymythlib/">Polymythlib</a><a href="/polymythlib/book-backbone/">Book backbone</a><a href="/polymythlib/method/">Method and governance</a><a href="/polymythlib/contribute/">Suggest or correct a record</a></nav><nav aria-label="Seminar Schools collections"><a href="/teacherresources/">Teacher Resources ↗</a><a href="/polymythseminars/">Polymythcal ↗</a><a href="/polymyth/">polymorphousmythology ↗</a></nav></div><div class="footer-base"><span>Published 28 July 2026</span><span>Facts, verification, and curation remain separate.</span></div></footer>
   <script src="/js/site-keyboard-enhancements.js?v=20260725-audit45" defer></script>
-  <script src="/js/mandala.js?v=20260723-steady" defer></script>
-  <script src="/js/indra.js?v=20260723-steady" defer></script>
+  <script src="/js/mandala.js?v=20260806-front-facing-geometry" defer></script>
+  <script src="/js/indra.js?v=20260806-front-facing-geometry" defer></script>
 </body>
 </html>
 `;

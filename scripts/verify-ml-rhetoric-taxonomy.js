@@ -6,6 +6,7 @@ const path = require('path');
 const {
   parseDeclaredArray,
   parseMythologyIntegrationAddendum,
+  parsePolymythCoherenceRoutingAddendum,
   parseRhetoricTaxonomyAddendum,
   parseSeedWithAddenda,
   parseSnakelogicExampleAddendum,
@@ -53,14 +54,16 @@ const historical = parseDeclaredArray(html, 'const SEED');
 const snakelogic = parseSnakelogicExampleAddendum(html);
 const mythology = parseMythologyIntegrationAddendum();
 const rhetoric = parseRhetoricTaxonomyAddendum();
-const raw = [...historical, ...snakelogic, ...mythology, ...rhetoric];
+const coherence = parsePolymythCoherenceRoutingAddendum();
+const raw = [...historical, ...snakelogic, ...mythology, ...rhetoric, ...coherence];
 const combined = parseSeedWithAddenda(html);
 
 assert(historical.length === 1141, 'historical SEED changed from 1,141 to ' + historical.length);
 assert(snakelogic.length === 6, 'Snakelogic addendum changed from 6 to ' + snakelogic.length);
 assert(mythology.length === 23, 'mythology addendum changed from 23 to ' + mythology.length);
 assert(rhetoric.length === 12, 'rhetoric addendum must contain 12 entries, found ' + rhetoric.length);
-assert(combined.length === 1182, 'combined ML* must contain 1,182 entries, found ' + combined.length);
+assert(coherence.length === 1, 'Polymyth Coherence routing addendum must contain one entry, found ' + coherence.length);
+assert(combined.length === 1183, 'combined ML* must contain 1,183 entries, found ' + combined.length);
 assert(combined.length === raw.length, 'combined parser silently removed one or more raw entries');
 
 const seen = new Set();
@@ -100,6 +103,18 @@ assert(
   'rhetoric addendum must load before LIVE_SEED is created'
 );
 assert(html.includes('...RHETORIC_TAXONOMY_ADDENDUM'), 'LIVE_SEED does not spread the rhetoric addendum');
+
+const coherenceScript = '/polymyth/methodologylist/polymyth-coherence-routing-addendum.js?v=20260806';
+assert(html.includes('<script src="' + coherenceScript + '"></script>'), 'Polymyth Coherence routing addendum script tag is missing');
+assert(
+  html.indexOf(coherenceScript) < html.indexOf('const LIVE_SEED=Object.freeze(['),
+  'Polymyth Coherence routing addendum must load before LIVE_SEED is created'
+);
+assert(html.includes('...POLYMYTH_COHERENCE_ROUTING_ADDENDUM'), 'LIVE_SEED does not spread the Polymyth Coherence routing addendum');
+assert(
+  combined.some(entry => entry.id === 'method-polymyth-coherence-star-file-routing-2026-08-06'),
+  'combined ML* is missing the Polymyth Coherence routing entry'
+);
 
 const forbidden = [
   'Trump is the pop-culture instantiation running the operation',
@@ -153,5 +168,5 @@ for (const relative of parityFiles) {
 }
 
 console.log(
-  'ML RHETORIC TAXONOMY VERIFIED — 1,141 historical + 6 Snakelogic + 23 mythology + 12 rhetoric = 1,182 unique entries; mirrors, static pages, source ledgers, collision corrections, and public parity passed.'
+  'ML RHETORIC TAXONOMY VERIFIED — 1,141 historical + 6 Snakelogic + 23 mythology + 12 rhetoric + 1 Polymyth Coherence route = 1,183 unique entries; mirrors, static pages, source ledgers, collision corrections, and public parity passed.'
 );

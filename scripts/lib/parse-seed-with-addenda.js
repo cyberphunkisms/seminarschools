@@ -108,6 +108,21 @@ function parseRhetoricTaxonomyAddendum() {
   );
 }
 
+function parsePolymythCoherenceRoutingAddendum() {
+  const addendumPath = path.resolve(
+    __dirname,
+    '../../polymyth/methodologylist/polymyth-coherence-routing-addendum.js'
+  );
+  if (!fs.existsSync(addendumPath)) {
+    throw new Error('Missing Polymyth Coherence routing addendum: ' + addendumPath);
+  }
+  const source = fs.readFileSync(addendumPath, 'utf8');
+  return parseDeclaredArray(
+    source,
+    'const POLYMYTH_COHERENCE_ROUTING_ADDENDUM'
+  );
+}
+
 function entryKey(entry) {
   return entry.id || [entry.s || '', entry.t || ''].join('\u0000');
 }
@@ -118,6 +133,7 @@ function parseSeedWithAddenda(html) {
     ...parseSnakelogicExampleAddendum(html),
     ...parseMythologyIntegrationAddendum(),
     ...parseRhetoricTaxonomyAddendum(),
+    ...parsePolymythCoherenceRoutingAddendum(),
   ];
   const seen = new Set();
   return combined.filter((entry) => {
@@ -131,6 +147,7 @@ function parseSeedWithAddenda(html) {
 module.exports = {
   parseDeclaredArray,
   parseMythologyIntegrationAddendum,
+  parsePolymythCoherenceRoutingAddendum,
   parseRhetoricTaxonomyAddendum,
   parseSeedWithAddenda,
   parseSnakelogicExampleAddendum,

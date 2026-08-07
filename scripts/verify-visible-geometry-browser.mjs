@@ -137,9 +137,13 @@ if (missing.length) {
   process.exit(1);
 }
 
+const customExecutable = process.env.CHROME_EXECUTABLE || (fs.existsSync('/tmp/chromium') ? '/tmp/chromium' : '');
 const browser = await chromium.launch({
   headless: true,
-  executablePath: process.env.CHROME_EXECUTABLE || (fs.existsSync('/tmp/chromium') ? '/tmp/chromium' : chromium.executablePath())
+  executablePath: customExecutable || chromium.executablePath(),
+  args: customExecutable
+    ? ['--no-sandbox', '--disable-gpu', '--disable-webgl', '--use-gl=disabled']
+    : []
 });
 const errors = [];
 let checks = 0;
@@ -234,7 +238,7 @@ async function inspect(representative, viewport, label, reducedMotion = 'no-pref
     const prefix = `${representative.routeType}:${representative.foregroundMode}:${label}:${representative.route}`;
     if (result.missing) errors.push(`${prefix}: #indraLayer missing`);
     else {
-      const opacityFloor = representative.foregroundMode === 'structural' ? 0.025 : 0.04;
+      const opacityFloor = representative.foregroundMode === 'structural' ? 0.055 : 0.06;
       if (result.display === 'none' || result.visibility === 'hidden' || !(result.opacity >= opacityFloor)) errors.push(`${prefix}: geometry opacity ${result.opacity} is below ${opacityFloor}`);
       if (result.color === 'transparent' || /rgba\([^)]*,\s*0(?:\.0*)?\s*\)/i.test(result.color)) errors.push(`${prefix}: geometry colour is transparent`);
       if (result.position !== 'fixed') errors.push(`${prefix}: geometry is not fixed`);

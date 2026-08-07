@@ -3,16 +3,16 @@
   "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
   "status": "passed",
   "metrics": {
-    "html_files": 3749,
-    "mitigated_external_font_stylesheets": 133,
+    "html_files": 3750,
+    "mitigated_external_font_stylesheets": 134,
     "deferred_external_scripts": 0,
     "lazy_external_iframes": 5,
     "lazy_external_images": 2,
-    "bounded_local_code_assets": 57,
-    "bounded_local_code_references": 40615,
+    "bounded_local_code_assets": 60,
+    "bounded_local_code_references": 40628,
     "bounded_runtime_json_assets": 2,
     "bounded_runtime_data_assets": 24,
-    "bounded_runtime_data_bytes": 9894283
+    "bounded_runtime_data_bytes": 9906407
   },
   "failures": [],
   "policy": "Third-party render dependencies must be preconnected/non-blocking or lazy; local static assets and the large concordance index use bounded caching while calendar data revalidates quickly."

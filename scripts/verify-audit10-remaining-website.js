@@ -61,7 +61,7 @@ if (ultimate) {
   ]) has('saul/index.html', token);
   for (const rel of ['saul/cv/general/index.html', 'saul/cv/teaching/index.html', 'saul/hospitality/index.html']) {
     has(rel, 'http-equiv="refresh"');
-    has(rel, 'Opening the requested');
+    has(rel, 'selected experience view');
   }
   lacks('saul/index.html', '<h4>');
 } else {

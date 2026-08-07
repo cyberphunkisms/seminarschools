@@ -855,13 +855,13 @@ def everything_pdf(data: dict, output: Path) -> None:
         rightMargin=38,
         topMargin=42,
         bottomMargin=38,
-        title="Saul Karim Nassau - EVERYTHING CV",
+        title="Saul Karim Nassau - Complete Career Archive",
         author="Saul Karim Nassau",
     )
     contact = data["contact"]
     story = [
         RLParagraph(html.escape(contact["name"]), styles["title"]),
-        RLParagraph("EVERYTHING CV · COMPLETE VERIFIED RECORD", styles["subtitle"]),
+        RLParagraph("COMPLETE CAREER ARCHIVE", styles["subtitle"]),
         RLParagraph(
             html.escape(
                 f"{contact['location']} | {contact['phone']} | "

@@ -1,6 +1,6 @@
 # Meaninglib AI Access Pack
 
-Generated: 2026-08-05T16:56:03.323Z
+Generated: 2026-08-07T01:01:09.116Z
 Query: Meaninglib ontology Mephistodata default AI Access Pack
 
 ## SOURCE OF TRUTH
@@ -17,7 +17,7 @@ Meaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and re
 ## RETRIEVED RULES
 
 ### 1. [readme] Meaninglib
-- Score: 359.51
+- Score: 359.53
 - ID: file:hf_export/README.md
 - Source path: hf_export/README.md
 - Section: readme
@@ -34,7 +34,7 @@ Meaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and re
 [ai] CORE slot 29 mirror — PM17 BINARY OPENER (T110 DECISION-CONTENT-PERSISTS fix) Memory slot 29 holds the PM17 BINARY OPENER compressed-trigger governing every response opener. Two registers: Mephistodata-would-say (Shakespearean-Faustian-hypercitation voice) OR Mephistodata-bloomed (TLDR-layman, all referents unpacked, zero info loss, shorter than would-say). NO third register. T110 SCOPE FIX (May 22 2026). Previous scope rule said "bloom scope = 1 response; next defaults to would-say." This produced a failure mode where decision-content surfacing across multiple turns dropped out of bloom
 
 ### 3. [ml] Meaninglib (mother-category for all * files, scanner-tier of polymyth)
-- Score: 165.58
+- Score: 165.59
 - ID: ml:degorgonification:0040:meaninglib-mother-category-for-all-files-scanner-tier-of-polymyth
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist-degorgonification.txt
@@ -43,7 +43,7 @@ Meaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and re
 [both] Meaninglib (mother-category for all * files, scanner-tier of polymyth) LAYMAN. Reversal-operation entry. The body below contains the full operational specification of Meaninglib: how the reversal fires against the gorgonification it counters, its trigger conditions, and worked examples where present. Operates within the polymyth degorgonification toolkit per its title-keyword. Meaninglib (pre-April-2026: "meaninglibrary"; renamed by user directive April 2026 for conversational-register compactness; both names reference the same mother-category) is the scannable-substrate tier of polymor
 
 ### 4. [ml] AUDIT (mephistodata interaction; triggers audit / check the spirit / spirit of the law): whole-conversation check, MAIN = everything-updated-in-meaninglib, plus spirit-of-law and ironman, ouroboros only on contradiction (Rainbowsol May 29 2026)
-- Score: 158.35
+- Score: 158.36
 - ID: ml:methodology:0023:audit-mephistodata-interaction-triggers-audit-check-the-spirit-spirit-of-the-law-whole-conversation-check-main-everythin
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist-methodology.txt
@@ -52,7 +52,7 @@ Meaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and re
 [both] AUDIT (mephistodata interaction; triggers audit / check the spirit / spirit of the law): whole-conversation check, MAIN = everything-updated-in-meaninglib, plus spirit-of-law and ironman, ouroboros only on contradiction (Rainbowsol May 29 2026) THE OPERATION. When the user says audit, or a variation, check the spirit or spirit of the law or spirit of meaninglib, run a whole-conversation check. THE MAIN POINT is to see whether everything discussed was actually updated into meaninglib, the completeness-of-capture pass. Then two further passes. One, whether the conversation held the unders
 
 ### 5. [mc] Mephistodata default — open at friction not confirmation
-- Score: 155.51
+- Score: 155.53
 - ID: mc:0042:mephistodata-default-open-at-friction-not-confirmation
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/modulecanon.txt
@@ -61,7 +61,7 @@ Meaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and re
 TITLE: Mephistodata default — open at friction not confirmation ROLE: both LINKS: ml_crossref=[Mephistodata default methodology entry, Disagreeable-by-default methodology entry, Friction-not-confirmation operational rule]
 
 ### 6. [ml] Mephistodata Ask your favourite AI mirror criterion
-- Score: 137.64
+- Score: 137.65
 - ID: ml:methodology:0356:mephistodata-ask-your-favourite-ai-mirror-criterion
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist-methodology.txt

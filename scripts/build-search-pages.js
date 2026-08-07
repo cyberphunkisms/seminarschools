@@ -25,7 +25,7 @@ const {
 
 const ROOT = path.resolve(__dirname, '..');
 const SITE = 'https://seminarschools.com';
-const GEOMETRY_VERSION = '20260805-geometry-hardening';
+const GEOMETRY_VERSION = '20260806-front-facing-geometry';
 const GEOMETRY_CONTRACTS = JSON.parse(
   fs.readFileSync(path.join(ROOT, 'data', 'geometry-route-contracts.json'), 'utf8'),
 );
@@ -190,7 +190,7 @@ function htmlPage({title, description, canonical, crumbs, body, schema = [], rob
     ...schema
   ];
   return `${pageHead({title, description, canonical, schema:graph, robots, css})}
-<body data-route-type="${attr(typeAttr)}"${weightAttr} data-geometry="indra-web" data-indra-intensity="${geometryIntensity(canonical)}" data-geometry-role="${attr(geometryRoles.join(' '))}">
+<body data-route-type="${attr(typeAttr)}" data-geometry="indra-web" data-indra-intensity="${geometryIntensity(canonical)}" data-geometry-role="${attr(geometryRoles.join(' '))}"${weightAttr}>
 <a class="skip-link" href="#content">Skip to content</a>
 <header class="catalog-top"><a href="/" class="brand">Seminar <em>Schools</em></a><nav aria-label="Primary"><a href="/teacherresources/">Teacher Resources</a><a href="/polymythseminars/">Polymythcal</a><a href="/polymythcommons/">Polymyth Commons</a><a href="/leizu/">Leizu Academy</a></nav></header>
 <main id="content" class="catalog-page">

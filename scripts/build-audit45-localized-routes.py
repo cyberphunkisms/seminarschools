@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://seminarschools.com"
 AUDIT_VERSION = "20260725-audit45"
 AUDIT43_VERSION = "20260725-audit43"
-GEOMETRY_ASSET_VERSION = "20260805-geometry-hardening"
+GEOMETRY_ASSET_VERSION = "20260806-front-facing-geometry"
 POLYMYTHCAL_ASSET_VERSION = str(
     json.loads((ROOT / "RELEASE_MANIFEST.json").read_text(encoding="utf-8")).get(
         "polymythcal_asset_version"
@@ -42,6 +42,7 @@ LEIZU_LOCALES = {
     "fa": ("fa", "rtl"),
 }
 SAUL_LOCALES = LEIZU_LOCALES
+SAUL_PERSON_ID = f"{SITE}/saul/#saul-karim-nassau"
 FOCUSED = (
     "writingclub", "writingkids", "writingjuniors", "writingteens",
     "writinggrads", "university", "philosophy", "humanities", "cfps",
@@ -53,23 +54,9 @@ def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def comparable_generated_html(content: str) -> str:
-    return re.sub(
-        r'<link\b[^>]*href=["\']/css/audit45-localization\.css[^"\']*["\'][^>]*>\s*',
-        "",
-        content,
-        flags=re.I,
-    )
-
-
 def write(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    if (
-        path.exists()
-        and path.suffix.lower() == ".html"
-        and comparable_generated_html(path.read_text(encoding="utf-8"))
-        == comparable_generated_html(content)
-    ):
+    if path.exists() and path.read_text(encoding="utf-8") == content:
         return
     if not path.exists() or path.read_text(encoding="utf-8") != content:
         prior_mtime = path.stat().st_mtime if path.exists() else None
@@ -106,6 +93,52 @@ def replace_canonical(text: str, url: str) -> str:
 
 def replace_title(text: str, title: str) -> str:
     return re.sub(r"<title>[\s\S]*?</title>", f"<title>{htmllib.escape(title)}</title>", text, count=1, flags=re.I)
+
+
+def localize_saul_profile_schema(text: str, url: str, name: str, language: str) -> str:
+    """Give each Saul locale its own ProfilePage while preserving one Person."""
+    pattern = re.compile(
+        r'(<script\b(?=[^>]*\btype=["\']application/ld\+json["\'])[^>]*>)'
+        r'(?P<payload>[\s\S]*?)'
+        r'(</script>)',
+        re.I,
+    )
+    replaced = False
+
+    def replacement(match: re.Match[str]) -> str:
+        nonlocal replaced
+        try:
+            schema = json.loads(match.group("payload"))
+        except json.JSONDecodeError:
+            return match.group(0)
+        schema_types = schema.get("@type") if isinstance(schema, dict) else None
+        if not (
+            schema_types == "ProfilePage"
+            or isinstance(schema_types, list) and "ProfilePage" in schema_types
+        ):
+            return match.group(0)
+        main_entity = schema.get("mainEntity")
+        if not isinstance(main_entity, dict):
+            raise RuntimeError("Saul ProfilePage JSON-LD has no object mainEntity")
+        schema.update(
+            {
+                "@id": f"{url}#profile",
+                "url": url,
+                "name": name,
+                "inLanguage": language,
+            }
+        )
+        main_entity["@id"] = SAUL_PERSON_ID
+        replaced = True
+        payload = json.dumps(schema, ensure_ascii=False, separators=(",", ":")).replace(
+            "</", "<\\/"
+        )
+        return match.group(1) + payload + match.group(3)
+
+    localized = pattern.sub(replacement, text)
+    if not replaced:
+        raise RuntimeError("Could not find Saul ProfilePage JSON-LD to localize")
+    return localized
 
 
 def replace_hreflang_block(text: str, links: list[tuple[str, str]]) -> str:
@@ -526,6 +559,23 @@ def clone_leizu_funnel(governance: list[dict]) -> list[str]:
             )
             localized = localize_leizu_navigation(localized, segment)
             localized = replace_or_add_meta(localized, "og:locale", tag.replace("-", "_"), prop=True)
+            localization_style = (
+                f'<link rel="stylesheet" href="/css/audit45-localization.css?v={AUDIT_VERSION}" '
+                'data-audit45-localization="true">'
+            )
+            localized = re.sub(
+                r'<link\b[^>]*href=["\']/css/audit45-localization\.css[^"\']*["\'][^>]*>\s*',
+                "",
+                localized,
+                flags=re.I,
+            )
+            localized = re.sub(
+                r'(<link\b[^>]*href=["\'][^"\']*/css/audit43-approved\.css[^"\']*["\'][^>]*>)',
+                lambda match: localization_style + "\n" + match.group(1),
+                localized,
+                count=1,
+                flags=re.I,
+            )
             style = (
                 "<style>"
                 ".audit45-localized-summary{max-width:72rem;margin:1rem auto 1.4rem;padding:1rem 1.15rem;"
@@ -537,6 +587,24 @@ def clone_leizu_funnel(governance: list[dict]) -> list[str]:
                 "</style>"
             )
             localized = localized.replace("</head>", style + "</head>", 1)
+            if route == "cloud" and "application/ld+json" not in localized.partition("</head>")[0]:
+                schema = {
+                    "@context": "https://schema.org",
+                    "@type": "WebPage",
+                    "@id": f"{localized_url}#webpage",
+                    "url": localized_url,
+                    "name": localized_title,
+                    "description": summary,
+                    "inLanguage": tag,
+                    "isPartOf": {"@id": f"{SITE}/#website"},
+                }
+                schema_block = (
+                    "<!-- Audit49 generic WebPage schema -->\n"
+                    '<script type="application/ld+json">'
+                    + json.dumps(schema, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+                    + "</script>\n"
+                )
+                localized = localized.replace("</head>", schema_block + "</head>", 1)
             review_text = ""
             if status.startswith("draft"):
                 review_text = {
@@ -1179,6 +1247,7 @@ html[data-saul-archive-language="fa"] .audit45-saul-archive-hero{text-align:righ
         localized = replace_or_add_meta(localized, "og:locale", tag.replace("-", "_"), prop=True)
         localized = replace_canonical(localized, url)
         localized = replace_hreflang_block(localized, links)
+        localized = localize_saul_profile_schema(localized, url, title, tag)
         localized = add_governance_meta(localized, "saul/index.html", source_sha, "localized-career-archive")
         selected_locale = internal[segment]
         localized = re.sub(

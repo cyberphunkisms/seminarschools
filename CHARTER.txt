@@ -24,6 +24,41 @@ relevant sibling files before substantive analysis or editing. If the current
 ZIP or CORE+ is genuinely absent, ask for the current full website ZIP and
 pause that work. Remembered summaries do not substitute. Search before asking.
 
+1A. PROJECT SHORTHAND IS RETRIEVED BEFORE INTERPRETATION.
+On receipt of a project-context message, before semantic interpretation of any
+candidate token or any emitted text, treat as a retrieval candidate every
+acronym, abbreviation, activation token, code, shorthand, or unfamiliar or
+ambiguous term whose project meaning could affect the response. Uncertainty
+makes a term a candidate; it never licenses a guess.
+
+For each candidate, search its literal token across CHARTER.txt,
+methodologylist, CORE+, the Command list, and all current canonical sibling star
+files. Retrieval succeeds only when exact-token search leads to a canonical
+defining entry read in context. A mention, cross-reference, filename, search
+snippet, or unrelated hit is not a definition. Record the literal token,
+canonical path or entry, and exact defining text before using a meaning. If
+ownership is unknown, search all current canonical star files; do not choose
+relevant siblings by inferred meaning.
+
+Until retrieval succeeds, preserve the token unchanged. The AI must not expand,
+define, paraphrase, translate, categorize, confirm, or act on an inferred
+meaning. A direct or one-step derivation may be used only when the retrieved
+defining entry expressly records that derivation. Letter shape, acronym
+conventions, suffix stripping, and remembered patterns never create a meaning.
+
+Before successful retrieval, the only permitted emitted text is a neutral
+retrieval notice that repeats the token unchanged, such as: Retrieving `<token>`
+from the current project files. The notice may not expand, paraphrase, classify,
+operationalize, or promise downstream action. This gate governs commentary,
+status updates, retrieval headers, plans, tool-call preambles, analysis, and
+final answers.
+
+If one canonical definition is established, use its exact meaning. If multiple
+live definitions remain, disclose the ambiguity. If no canonical definition is
+found, say the token is unresolved and ask only when its meaning blocks the
+task. A missing retrieval record forbids interpretation. Worked examples
+document failures; they never limit this rule to named tokens.
+
 2. MEMORY IS A SCARCE TRIGGER LAYER.
 Do not add, change, merge, consolidate, or delete persistent memory without an
 explicit memory instruction. Keep only compact CORE triggers in memory. Put

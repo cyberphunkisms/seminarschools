@@ -88,41 +88,41 @@
   },
   "metrics": {
     "metadata": {
-      "source_html_documents": 3748,
-      "public_html_documents": 3748,
-      "interactive_documents": 2858,
+      "source_html_documents": 3749,
+      "public_html_documents": 3749,
+      "interactive_documents": 2859,
       "redirect_documents": 890,
-      "indexable_documents": 1219,
-      "noindex_documents": 2529,
-      "sitemap_urls": 1239,
-      "schema_blocks": 2617,
-      "schema_documents": 1231,
+      "indexable_documents": 1218,
+      "noindex_documents": 2531,
+      "sitemap_urls": 1238,
+      "schema_blocks": 2616,
+      "schema_documents": 1230,
       "indexable_documents_without_schema": 1,
       "intentional_schema_exemptions": 1,
       "hreflang_links": 5430,
       "hreflang_documents": 1755,
-      "source_public_byte_identical": 3748,
+      "source_public_byte_identical": 3749,
       "generated_teacher_resource_documents": 678,
       "generated_event_documents": 2535,
-      "documents_with_one_title": 3748,
-      "documents_with_one_description": 2859,
-      "documents_with_one_viewport": 3748,
-      "documents_with_one_canonical": 3747,
-      "documents_with_one_robots_directive": 3359,
+      "documents_with_one_title": 3749,
+      "documents_with_one_description": 2860,
+      "documents_with_one_viewport": 3749,
+      "documents_with_one_canonical": 3748,
+      "documents_with_one_robots_directive": 3360,
       "sitemap_non_html_resources": 20
     },
     "page_size_distribution": {
       "over_100_kib": 40,
       "over_250_kib": 27,
       "over_500_kib": 7,
-      "largest_bytes": 4017602,
+      "largest_bytes": 4023829,
       "gzip_over_100_kib": 20,
       "gzip_over_250_kib": 4,
       "gzip_over_500_kib": 2,
-      "largest_gzip_bytes": 1227638
+      "largest_gzip_bytes": 1230073
     },
     "runtime": {
-      "active_runtime_files": 3444,
+      "active_runtime_files": 3446,
       "files_with_intervals": 10,
       "interval_calls": 10,
       "bounded_leaf_routes": 10,
@@ -130,7 +130,7 @@
       "public_runtime_mirrors_identical": 10,
       "forced_public_data_revalidation_fetches": 0,
       "bounded_public_data_assets": 24,
-      "bounded_public_data_bytes": 9894283
+      "bounded_public_data_bytes": 9906407
     },
     "cache_policies": {
       "polymyth_text_mirrors": "public, max-age=86400, stale-while-revalidate=604800",
@@ -161,25 +161,25 @@
       "deployer_explicit_duplicate_browser_gates_after": 0,
       "selection": {
         "deployer": {
-          "directories_visited": 7634,
-          "files_considered": 10950,
-          "files_selected": 10949,
-          "public_files_selected": 4891,
-          "selected_bytes_excluding_this_report": 390418231,
+          "directories_visited": 7638,
+          "files_considered": 10964,
+          "files_selected": 10963,
+          "public_files_selected": 4895,
+          "selected_bytes_excluding_this_report": 396020803,
           "disposable_directory_pruning_enforced": true
         },
         "source": {
-          "directories_visited": 3861,
-          "files_considered": 6059,
-          "files_selected": 6058,
+          "directories_visited": 3863,
+          "files_considered": 6069,
+          "files_selected": 6068,
           "public_files_selected": 0,
-          "selected_bytes_excluding_this_report": 261897938,
+          "selected_bytes_excluding_this_report": 264740331,
           "disposable_directory_pruning_enforced": true
         }
       }
     },
     "audit48_external_validation": {
-      "interactive_source_pages": 2858,
+      "interactive_source_pages": 2859,
       "redirect_source_pages": 890,
       "calendar_tests": 9,
       "calendar_files": 857,
@@ -207,7 +207,7 @@
           "fr-CA": 23,
           "mul": 3
         },
-        "methodology_entries": 1182,
+        "methodology_entries": 1183,
         "governed_route_records": 61,
         "event_source_language_counts": {
           "und": 796,

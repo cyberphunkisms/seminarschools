@@ -68,9 +68,9 @@ check(
   'assistive-technology evidence is not bound to the current release',
 );
 check(
-  assistive.metrics?.interactive_documents === 2858
+  assistive.metrics?.interactive_documents === 2859
     && assistive.metrics?.redirect_documents === 890
-    && assistive.metrics?.source_html_documents === 3748,
+    && assistive.metrics?.source_html_documents === 3749,
   'assistive-technology source inventory changed',
 );
 check(

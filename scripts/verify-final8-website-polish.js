@@ -20,7 +20,7 @@ if(ultimate){
   if(modules.length!==12)fail.push(`ultimate focus module count ${modules.length}`);
   for(const slug of ['general','hospitality','research','teaching','programs','customer-education','arts-culture','performance','community','volunteer-events','education','portfolio']){
     const x=read(`saul/cv/${slug}/index.html`);
-    ['http-equiv="refresh"','Opening the requested','data-cv-share-status=""'].forEach(t=>need(x,t,`${slug} redirect missing ${t}`));
+    ['http-equiv="refresh"','selected experience view','data-cv-share-status=""'].forEach(t=>need(x,t,`${slug} redirect missing ${t}`));
   }
 }else{
   ['cv-map-section--enhanced','data-cv-map-frame','cv-map-threads','Text location list','data-cv-local-nav','id="archiveCount"','archive=','document.createElement("details")','renderedArchiveCount','data-cv-print-template'].forEach(t=>need(main,t,`main Saul missing ${t}`));

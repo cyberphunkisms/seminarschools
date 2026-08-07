@@ -93,6 +93,7 @@
     "verify:ml-stop-psychologism": "node scripts/verify-ml-stop-psychologism.js",
     "verify:ml-ai-prose-tells": "node scripts/verify-ml-ai-prose-tells.js",
     "verify:ml-antibacktracking": "node scripts/verify-ml-antibacktracking.js",
+    "verify:ml-shorthand-resolution": "node scripts/verify-ml-shorthand-resolution.js",
     "verify:ml-gorgonwars-premise-split": "node scripts/verify-ml-gorgonwars-premise-split.js",
     "verify:ml-power-scope": "node scripts/verify-ml-power-scope.js",
     "verify:ml-dialectical-hardening": "node scripts/verify-ml-dialectical-hardening.js",

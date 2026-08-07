@@ -39,34 +39,66 @@ const escapeHTML = value =>
     "<": "&lt;",
     ">": "&gt;",
     '"': "&quot;",
-    "'": "&#39;",
+    "'": "&#x27;",
   })[char]);
 const digest = file =>
   crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");
+const normalize = value => String(value || "").replace(/\s+/g, " ").trim();
+const stripMarkup = value => normalize(
+  String(value || "")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&#39;/g, "'")
+    .replace(/&quot;/g, '"')
+);
+const parseEmbeddedJson = (name, endMarker) => {
+  const marker = `const ${name} = `;
+  const start = html.indexOf(marker);
+  const end = start >= 0 ? html.indexOf(endMarker, start + marker.length) : -1;
+  need(start >= 0 && end > start, `rendered archive assignment is missing: ${name}`);
+  if (start < 0 || end <= start) return null;
+  const source = html
+    .slice(start + marker.length, end)
+    .trim()
+    .replace(/;\s*$/, "");
+  try {
+    return JSON.parse(source);
+  } catch (error) {
+    failures.push(`rendered archive assignment is invalid JSON: ${name} (${error.message})`);
+    return null;
+  }
+};
 
 const start = html.indexOf('<section class="cv-ultimate"');
 const end = html.indexOf('<section aria-labelledby="cvMapTitle"', start);
 need(start >= 0 && end > start, "ultimate CV section markers are missing");
 const cv = start >= 0 && end > start ? html.slice(start, end) : "";
-const plain = cv
-  .replace(/<[^>]+>/g, " ")
-  .replace(/&amp;/g, "&")
-  .replace(/&nbsp;/g, " ")
-  .replace(/&#39;/g, "'")
-  .replace(/&quot;/g, '"')
-  .replace(/\s+/g, " ");
+const plain = stripMarkup(cv);
 
+const archiveLetters = parseEmbeddedJson(
+  "LETTERS",
+  "// ===========================================================================\n// URL ROUTING"
+);
+const archiveRecords = parseEmbeddedJson("D", "// Audit 45:");
+
+const buildCommand = packageData.scripts?.["build:saul-cv"] || "";
 need(
-  packageData.scripts?.["build:saul-cv"] ===
-    "node scripts/run-python.js scripts/build-saul-ultimate-web-cv.py && node scripts/verify-saul-ultimate-web-cv.js && node scripts/run-python.js scripts/verify-saul-cv-release.py",
-  "build:saul-cv can invoke a retired CV generator"
+  buildCommand.includes("scripts/build-saul-ultimate-web-cv.py") &&
+    buildCommand.includes("scripts/verify-saul-ultimate-web-cv.js") &&
+    buildCommand.includes("scripts/verify-saul-cv-release.py") &&
+    !buildCommand.includes("build-saul-cv-professional.py"),
+  "build:saul-cv is not wired through the current builder and release checks"
 );
 need(
   downloadManifest.status === "active" &&
     downloadManifest.application_outputs?.length === 4 &&
     downloadManifest.modular_outputs?.length === 36 &&
+    downloadManifest.everything_output?.path?.endsWith(
+      "saul-karim-nassau-complete-career-archive-cv.pdf"
+    ) &&
     downloadManifest.policy?.role_focused_pdfs_are_distinct_outputs === true,
-  "download manifest does not describe the editable application, modular and EVERYTHING outputs"
+  "download manifest does not describe the application, role-focused and full-history outputs"
 );
 
 const expectedCounts = [16, 13, 8];
@@ -140,154 +172,287 @@ need(
   "the verified Greenpeace experience is missing from the canonical application ledger"
 );
 
-for (const required of [
-  "12+ years",
-  "15 curricula & programs",
-  "2,000+ students",
-  "successful instructional inspections in Ontario & British Columbia",
-  "La Plante & Other Mile End Venues",
-  "Fundraiser & Volunteer Coordinator",
-  "Greenpeace",
-  "2006–2010",
-  "Somalian Protracted Civil Conflict",
-  "Research Group on Constitutional Studies",
-  "Professor Catherine Malabou",
-  "Jun 2025–May 2026",
-  "seminarschools.com/saul",
-  "seminarschools.com/reviews",
+const campusCrops = records.find(record =>
+  /Campus Crops/i.test(record.organization || "")
+);
+need(
+  campusCrops?.role === "Community Development Manager",
+  "Campus Crops must retain the verified formal title Community Development Manager"
+);
+need(
+  campusCrops?.focus?.includes("volunteer-events"),
+  "Campus Crops is missing from the Volunteer & Events focus"
+);
+need(
+  /(?:~|approximately\s*)20\s+(?:core\s+)?volunteers/i.test(
+    `${campusCrops?.description || ""} ${data.public_highlights?.find(item => item.id === "H02")?.body || ""}`
+  ),
+  "Campus Crops no longer identifies the approximately 20 core volunteers"
+);
+
+const highlights = data.public_highlights || [];
+need(highlights.length >= 9, "the public CV must retain its selected evidence highlights");
+need(
+  new Set(highlights.map(item => item.id)).size === highlights.length,
+  "public evidence highlight IDs must be unique"
+);
+need(
+  (cv.match(/data-evidence-id=/g) || []).length === highlights.length,
+  "the rendered evidence-highlight count does not match the canonical source"
+);
+for (const highlight of highlights) {
+  need(
+    Array.isArray(highlight.focus) && highlight.focus.includes("general"),
+    `${highlight.id} is missing general-view focus metadata`
+  );
+  need(
+    cv.includes(escapeHTML(highlight.title)) && cv.includes(escapeHTML(highlight.body)),
+    `${highlight.id} is not rendered from the canonical evidence source`
+  );
+}
+
+const highlightById = new Map(highlights.map(item => [item.id, item]));
+const highlightText = id => normalize(
+  `${highlightById.get(id)?.title || ""} ${highlightById.get(id)?.body || ""}`
+);
+for (const [id, checks] of Object.entries({
+  H01: [
+    /student governments/i,
+    /substantial initial (?:time|work)/i,
+    /run them independently/i,
+    /Model UN/i,
+    /environmental/i,
+    /yearbook/i,
+    /reviewed, approved (?:&|and) signed.*volunteer-hour/i,
+  ],
+  H02: [
+    /Campus Crops/i,
+    /recruited, interviewed, oriented, placed, supported (?:&|and) evaluated/i,
+    /20 core volunteers/i,
+    /maintained their records/i,
+    /farmers['’] market/i,
+    /additional recruitment (?:&|and) coordination/i,
+  ],
+  H03: [/curricula/i, /evaluation|feedback/i, /participant certificates/i],
+  H04: [/McMUN/i, /1,600 delegates/i, /BUMI Festival/i, /crowd flow/i],
+  H05: [/refugee-support initiative/i, /\$8,000/i, /six countries/i],
+})) {
+  const text = highlightText(id);
+  need(Boolean(text), `required public evidence highlight is missing: ${id}`);
+  for (const pattern of checks) {
+    need(pattern.test(text), `${id} is missing verified evidence: ${pattern}`);
+  }
+}
+
+const applicationRecordText = normalize(JSON.stringify(records));
+need(
+  !/refugee[- ]support|refugee initiative/i.test(applicationRecordText),
+  "the public refugee-support highlight entered the formal application rows"
+);
+
+for (const [label, pattern] of [
+  ["visitor-facing role breadth", /Educator\s*\|\s*Program Coordinator\s*\|\s*Community Organizer/i],
+  ["12+ years in education", /12\+\s+years/i],
+  ["2,000+ learners", /2,000\+\s+learners/i],
+  ["15 curricula and programs", /15\s+curricula\s*(?:&|and)\s*programs/i],
+  ["approximately 20 core volunteers", /~20\s+core volunteers/i],
+  ["Greenpeace role", /Fundraiser\s*(?:&|and)\s*Volunteer Coordinator.*Greenpeace/i],
+  ["MA co-supervisors", /Vesna Madzoski\s*(?:&|and)\s*Catherine Malabou/i],
+  ["Michael Brecher research", /Michael Brecher/i],
+  ["current public CV URL", /seminarschools\.com\/saul/i],
+  ["reviews URL", /seminarschools\.com\/reviews/i],
 ]) {
-  need(plain.includes(required), `rendered CV is missing required text: ${required}`);
+  need(pattern.test(plain), `rendered CV is missing ${label}`);
 }
 
 for (const forbidden of [
   /\bph\.?d\.?\b/i,
   /\bleizu\b/i,
-  /independent refugee support/i,
   /\btelus\b/i,
   /\b1,000\+/i,
   /saulnassau\.com/i,
+  /Bronze Cross\s*&\s*First Aid/i,
 ]) {
-  need(!forbidden.test(plain), `rendered CV contains forbidden text: ${forbidden}`);
-}
-
-for (const retiredDoctoralClaim of [
-  "博士研究",
-  "دکترای",
-  "travail doctoral",
-]) {
-  need(
-    !html.toLocaleLowerCase().includes(retiredDoctoralClaim.toLocaleLowerCase()),
-    `career archive contains a retired doctoral claim: ${retiredDoctoralClaim}`
-  );
+  need(!forbidden.test(plain), `rendered application CV contains retired text: ${forbidden}`);
 }
 need(
   !/\bph\.?d\.?\b|doctoral|博士|دکترا/i.test(html),
   "the /saul page contains a retired doctoral or PhD claim"
 );
 
+const webCredentials = data.web_credentials || data.credentials || [];
+const bronzeCredential = webCredentials.find(value => /Bronze Cross/i.test(value)) || "";
 need(
-  cv.includes(`mailto:${data.contact.public_email}`),
-  "public contact email target is missing"
+  /Bronze Cross/i.test(bronzeCredential) &&
+    /First Aid/i.test(bronzeCredential) &&
+    /2006/i.test(bronzeCredential) &&
+    /Not Current|Historical/i.test(bronzeCredential),
+  "Bronze Cross must be presented as c. 2006 First Aid training that is not current"
 );
 need(
-  cv.includes(data.contact.alternate_email),
-  "alternate Gmail edition is not identified"
+  plain.includes(bronzeCredential),
+  "the rendered application CV is missing the historical Bronze Cross wording"
 );
+
+const webLanguages = data.web_languages || data.languages || [];
+const webLanguageText = normalize(webLanguages.join(" | "));
+for (const [label, pattern] of [
+  ["advanced Farsi speaking", /Farsi:?.*Advanced.*Speaking/i],
+  ["advanced Farsi reading", /Farsi:?.*Advanced.*Reading/i],
+  ["slower Farsi writing", /Farsi:?.*(?:Functional.*Slower|Slower).*Writing/i],
+  ["basic French", /French:\s*Basic/i],
+  ["basic Mandarin", /Mandarin:\s*Basic/i],
+]) {
+  need(pattern.test(webLanguageText), `canonical web languages omit ${label}`);
+}
+for (const value of webLanguages) {
+  need(plain.includes(value), `rendered CV is missing detailed language text: ${value}`);
+}
+
+const mailtoTargets = [...cv.matchAll(/href="mailto:([^"]+)"/g)].map(match => match[1]);
+need(mailtoTargets.length === 1, "the public CV must expose one direct email contact");
+need(
+  !data.contact.alternate_email || !cv.includes(data.contact.alternate_email),
+  "the private alternate-email edition is exposed on the public CV"
+);
+need(
+  (cv.match(/class="cv-downloads(?:\s|"|--)/g) || []).length === 1 &&
+    !cv.includes("cv-ultimate__downloads"),
+  "the public CV must have one simplified download block"
+);
+for (const [label, pattern] of [
+  ["professional PDF", /aria-label="Professional CV in PDF format"[^>]+href="[^"]+\.pdf"/],
+  ["professional Word file", /aria-label="Professional CV in Word format"[^>]+href="[^"]+\.docx"/],
+  ["full-history PDF", /aria-label="Full career history in PDF format"[^>]+href="[^"]+\.pdf"/],
+]) {
+  need(pattern.test(cv), `simplified downloads are missing the ${label}`);
+}
+for (const retiredDownloadCopy of [
+  /Choose a contact edition/i,
+  /Gmail edition/i,
+  /ProtonMail edition/i,
+  /EVERYTHING CV/i,
+]) {
+  need(!retiredDownloadCopy.test(plain), `public downloads contain retired copy: ${retiredDownloadCopy}`);
+}
+
 need(
   !html.includes("saul-cv-spectrum-2026.js"),
   "obsolete spectrum runtime is still loaded on /saul/"
 );
 need(
-  html.includes("saul-ultimate-cv-2026.css?v=20260727-modular"),
+  /href="\.\/assets\/saul-ultimate-cv-2026\.css(?:\?[^" ]*)?"/.test(html),
   "ultimate CV stylesheet is not loaded"
 );
 need(
-  html.includes("saul-ultimate-cv-modules-2026.js?v=20260727-modular"),
+  /src="(?:\.\/|\/saul\/)assets\/saul-ultimate-cv-modules-2026\.js(?:\?[^" ]*)?"/.test(html),
   "modular focus runtime is not loaded"
 );
+
+const jsonLdBlocks = [...html.matchAll(
+  /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g
+)];
+need(jsonLdBlocks.length === 1, "the page must contain exactly one JSON-LD block");
+if (jsonLdBlocks.length === 1) {
+  try {
+    const structuredProfile = JSON.parse(jsonLdBlocks[0][1]);
+    need(structuredProfile["@type"] === "ProfilePage", "JSON-LD must describe a ProfilePage");
+    need(
+      structuredProfile.url === "https://seminarschools.com/saul/" &&
+        structuredProfile.inLanguage === "en",
+      "JSON-LD has the wrong canonical English profile URL or language"
+    );
+    need(
+      /Educator/i.test(structuredProfile.mainEntity?.jobTitle || "") &&
+        /Program Coordinator/i.test(structuredProfile.mainEntity?.jobTitle || "") &&
+        /Community Organizer/i.test(structuredProfile.mainEntity?.jobTitle || ""),
+      "JSON-LD does not reflect the public role breadth"
+    );
+  } catch (error) {
+    failures.push(`the JSON-LD profile is invalid JSON: ${error.message}`);
+  }
+}
+
 need(
-  (html.match(/<script type="application\/ld\+json">/g) || []).length === 1,
-  "the page must contain exactly one JSON-LD block"
-);
-need(
-  !canonical.education.some(value => /phd/i.test(value)),
+  !(canonical.education || []).some(value => /phd/i.test(value)),
   "legacy canonical education still contains PhD"
 );
 need(
-  canonical.rules.ultimate_application_cv === true,
+  canonical.rules?.ultimate_application_cv === true,
   "legacy canonical does not point to the ultimate application CV"
 );
 need(
   Array.isArray(canonical.focus_modules) && canonical.focus_modules.length === 12,
   "public canonical CV data is missing the twelve declared focus paths"
 );
-for (const required of [
-  "I have 12+ years of international teaching experience across 15 curricula &amp; programs",
-  "Word reports, whiteboard-led seminars, workshops, and presentations",
-  "English · Farsi (advanced) · French & Mandarin (basic)",
-  "英語 · 波斯語（進階）· 法語及普通話（基礎）",
-  "英语 · 波斯语（高级）· 法语及普通话（基础）",
-  "انگلیسی · فارسی (پیشرفته) · فرانسوی و ماندارین (پایه)",
-  "Anglais · Farsi (avancé) · Français et mandarin (élémentaires)",
-  "Key Skills",
-  "Smart Serve (Historical)",
-  "Ontario Security Guard Licence (Historical)",
-  "MA Philosophy, Art &amp; Critical Thought, European Graduate School (2019)",
-  "BA Political Science, Economics &amp; Philosophy, McGill University (2014)",
-  '"Occasional Teacher, Intelligent International"',
-  '"Occasional Instructor, RoboThink Toronto, Markham"',
-  '"Occasional Instructor, Happy Learning Education Center"',
-  '"兼任教師，Intelligent International"',
-  '"兼任教师，Intelligent International"',
-  '"معلم موردی، Intelligent International"',
-  '"Enseignant occasionnel, Intelligent International"',
-  '"兼任講師，RoboThink, 萬錦"',
-  '"兼任讲师，RoboThink, 万锦"',
-  '"مدرس موردی، RoboThink, مارکهام"',
-  '"Formateur occasionnel, RoboThink, Markham"',
-  '"兼任講師，Happy Learning"',
-  '"兼任讲师，Happy Learning"',
-  '"مدرس موردی، Happy Learning"',
-  '"Formateur occasionnel, Happy Learning"',
-  '"Early Childhood STEM"',
-  '"幼兒 STEM"',
-  '"幼儿 STEM"',
-  '"STEM دوران کودکی"',
-  '"STIM – petite enfance"',
-  '"Jun 2025–May 2026"',
-]) {
-  need(html.includes(required), `career archive is missing the corrected value: ${required}`);
+
+need(
+  archiveLetters &&
+    JSON.stringify(archiveLetters) === JSON.stringify(data.archive_letters),
+  "the JavaScript-rendered archive introductions drifted from the canonical source"
+);
+const archiveVisitorParts = [];
+for (const [category, letter] of Object.entries(archiveLetters || {})) {
+  const title = normalize(letter?.title?.en);
+  const bodyHtml = letter?.body?.en || "";
+  const body = stripMarkup(bodyHtml);
+  const paragraphs = (bodyHtml.match(/<p\b/gi) || []).length;
+  const sentences = (body.match(/[.!?](?:\s|$)/g) || []).length;
+  need(Boolean(title) && Boolean(body), `archive introduction is incomplete: ${category}`);
+  need(
+    body.length <= 900 && paragraphs <= 3 && sentences <= 8,
+    `archive introduction is too long for a public visitor: ${category}`
+  );
+  archiveVisitorParts.push(title, body);
 }
-for (const forbidden of [
-  "more than a thousand students",
-  "一千多名",
-  "بیش از هزار دانش‌آموز",
-  "plus de mille étudiants",
-  "I have taught in six countries across fifteen curricula",
-  "我曾在六個國家、橫跨十五種課綱中任教",
-  "我曾在六个国家、横跨十五种课纲中任教",
-  "من در شش کشور و در پانزده برنامهٔ درسی تدریس کرده‌ام",
-  "J'ai enseigné dans six pays à travers quinze curricula",
-  "Word and PowerPoint reports",
-  "English · Basic French, Farsi, and Mandarin",
-  "up to Grade 4",
-  "四年級",
-  "四年级",
-  "پایهٔ چهارم",
-  "4e année",
-  'moduleHelper: "Choose one or more areas before downloading."',
-  "Thousands of learners",
-  "Core Skills",
-  '"Jun 2025–Feb 2026"',
-]) {
-  need(!html.includes(forbidden), `career archive still contains stale text: ${forbidden}`);
+
+need(
+  Array.isArray(archiveRecords) && archiveRecords.length === 65,
+  "the JavaScript-rendered historical archive must retain all 65 records"
+);
+for (const record of archiveRecords || []) {
+  const title = normalize(record?.[3]?.en);
+  const note = normalize(record?.[4]?.en);
+  const description = normalize(record?.[6]?.en);
+  need(description.length <= 600, `archive description is too long for a public visitor: ${title}`);
+  archiveVisitorParts.push(title, note, description);
 }
-const archiveDataStart = html.indexOf("const D = [");
-const archiveDataEnd = html.indexOf("\n];", archiveDataStart);
-const archiveDataSource =
-  archiveDataStart >= 0 && archiveDataEnd > archiveDataStart
-    ? html.slice(archiveDataStart, archiveDataEnd)
-    : "";
+const archiveVisitorText = normalize(archiveVisitorParts.join(" "));
+for (const internalOrYappy of [
+  /my ideal classroom has three teachers/i,
+  /the work nobody sees/i,
+  /user-authored source material/i,
+  /public-facing summar(?:y|ies)/i,
+  /source of truth/i,
+  /\bfront-facing\b/i,
+  /\bcanonical (?:copy|data|record|source)\b/i,
+  /\bas an AI\b|\bAI assistant\b/i,
+  /\bPolymyth\s*\/\s*AA\*/i,
+]) {
+  need(
+    !internalOrYappy.test(archiveVisitorText),
+    `JavaScript-rendered archive exposes internal or over-written copy: ${internalOrYappy}`
+  );
+}
+need(
+  (archiveRecords || []).some(record => record?.[3]?.en === "Polymyth Research Archive"),
+  "the rendered archive is missing the public Polymyth Research Archive name"
+);
+const archiveBronze = (archiveRecords || []).find(record =>
+  /Bronze Cross/i.test(record?.[3]?.en || "")
+);
+need(
+  archiveBronze &&
+    /2006/i.test(`${archiveBronze[1]} ${archiveBronze?.[6]?.en || ""}`) &&
+    /not current/i.test(`${archiveBronze[1]} ${archiveBronze?.[4]?.en || ""} ${archiveBronze?.[6]?.en || ""}`),
+  "the historical archive must describe Bronze Cross and First Aid as c. 2006 training that is not current"
+);
+need(
+  (archiveRecords || []).some(record =>
+    /Independent Refugee Support Initiative/i.test(record?.[3]?.en || "")
+  ),
+  "the authorized refugee-support initiative is missing from the public historical archive"
+);
 need(
   historicalData.records?.length === 65 &&
     historicalData.records.some(record => /Greenpeace/.test(record.title || "")),
@@ -312,12 +477,20 @@ for (const pattern of [
   /\.cv-ultimate__row time\s*\{[\s\S]*?text-align:\s*right;[\s\S]*?white-space:\s*nowrap;/,
   /@media print[\s\S]*?\.cv-ultimate__row-copy,[\s\S]*?font-size:\s*11pt;/,
   /@media print[\s\S]*?\.cv-ultimate__description\s*\{[\s\S]*?font-size:\s*10pt;/,
+  /@media \(max-width:\s*680px\)[\s\S]*?\.cv-ultimate__hero\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\);/,
+  /@media \(max-width:\s*680px\)[\s\S]*?\.cv-ultimate__facts\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);/,
+  /@media \(max-width:\s*680px\)[\s\S]*?\.cv-downloads__edition\s*\{[^}]*flex:\s*1\s+1\s+15rem;/,
 ]) {
   need(pattern.test(css), `stylesheet invariant is missing: ${pattern}`);
 }
+const printCss = css.slice(css.indexOf("@media print"));
 need(
-  (css.match(/\.5pt/g) || []).length === 2,
-  "0.5pt spacing must appear only below experience-section headings on screen and in print"
+  css.indexOf("@media print") >= 0 && !/data-filtered-out/.test(printCss),
+  "print CSS overrides the selected-view filtering"
+);
+need(
+  /\[data-filtered-out="true"\][^\{]*\{\s*display:\s*none;/.test(css),
+  "screen and print views do not share a persistent filtered-out rule"
 );
 need(
   /\.cv-ultimate__portrait img\s*\{[^}]*aspect-ratio:\s*1\s*\/\s*1;[^}]*border-radius:\s*50%;[^}]*object-fit:\s*cover;[^}]*object-position:\s*50%\s+38%;/.test(css),
@@ -443,5 +616,5 @@ if (failures.length) {
 }
 
 console.log(
-  "SAUL ULTIMATE WEB CV CHECK PASSED — 37 rows, 16/13/8 sections, Greenpeace and La Plante retained, right-aligned dates, zero row gaps, distinct modular/EVERYTHING PDFs and one-source editable outputs."
+  "SAUL ULTIMATE WEB CV CHECK PASSED — 37 application rows, nine evidence highlights, 65 historical records, verified front-facing copy, persistent focus filtering, simplified downloads and distinct complete-career outputs."
 );

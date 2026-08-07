@@ -19,7 +19,7 @@ const SKIP = new Set([
   '.public-build-staging', '.public-build-previous',
 ]);
 const STEADY_VERSION = '20260723-steady';
-const GEOMETRY_VERSION = '20260805-geometry-hardening';
+const GEOMETRY_VERSION = '20260806-front-facing-geometry';
 const OUTPUT_MTIME = process.env.SS_BUILD_OUTPUT_MTIME
   ? new Date(process.env.SS_BUILD_OUTPUT_MTIME)
   : null;
@@ -38,7 +38,7 @@ function walk(dir, out = []) {
 }
 function rel(file) { return path.relative(ROOT, file).replace(/\\/g, '/'); }
 function intensityFor(r) {
-  if (r === 'index.html') return '0.040';
+  if (r === 'index.html') return '0.060';
   if (/^polymythseminars\//.test(r) || r === 'polymythseminars/index.html') return '0.105';
   if (/^(writingclub|writingkids|writingjuniors|writingteens|writinggrads|university|philosophy|humanities|cfps|lectures|fellowships)\//.test(r)) return '0.095';
   if (/^saul\//.test(r)) return '0.075';
@@ -65,6 +65,8 @@ function routeTypeFor(r, html) {
   if (/^leizu\/(?:[^/]+\/)?booking-success\/index\.html$/.test(r)) return 'form-success';
   if (/^leizu\/(?:[^/]+\/)?intake\/index\.html$/.test(r)) return 'service-form';
   if (/^polymyth\/(?:devils-notebook|devilsdiary)\//.test(r)) return 'publication';
+  if (/^marginalia\/[^/]+\/index\.html$/.test(r)) return 'archive';
+  if (/^(?:nutrition|agora|sabachtan-seminar|ohm-dome)\/[^/]+\/index\.html$/.test(r)) return 'publication';
   if (r === 'polymyth/sitemap/graph/index.html') return 'map';
   if (r === 'teacherresources/pedagogical-case/index.html') return 'teacher-manual';
   throw new Error(`${r}: missing data-route-type; classify its structural geometry role before building`);
@@ -119,15 +121,15 @@ function ensureBody(html, intensity, routeType) {
   }
   return html.replace(/<body\b([^>]*)>/i, (m, attrs) => {
     let a = attrs || '';
-    if (!/data-route-type\s*=/.test(a)) a += ` data-route-type="${routeType}"`;
-    else a = a.replace(/data-route-type\s*=\s*(['"])[\s\S]*?\1/, `data-route-type="${routeType}"`);
-    if (!/data-geometry\s*=/.test(a)) a += ' data-geometry="indra-web"';
-    else a = a.replace(/data-geometry\s*=\s*(['"])[\s\S]*?\1/, 'data-geometry="indra-web"');
-    if (!/data-indra-intensity\s*=/.test(a)) a += ` data-indra-intensity="${intensity}"`;
-    else a = a.replace(/data-indra-intensity\s*=\s*(['"])[\s\S]*?\1/, `data-indra-intensity="${intensity}"`);
-    if (!/data-geometry-role\s*=/.test(a)) a += ` data-geometry-role="${roles.join(' ')}"`;
-    else a = a.replace(/data-geometry-role\s*=\s*(['"])[\s\S]*?\1/, `data-geometry-role="${roles.join(' ')}"`);
-    return `<body${a}>`;
+    for (const attribute of ['data-route-type', 'data-geometry', 'data-indra-intensity', 'data-geometry-role']) {
+      const pattern = new RegExp(`\\s+${attribute}\\s*=\\s*(["'])[^"']*\\1`, 'ig');
+      a = a.replace(pattern, '');
+    }
+    const geometry = ` data-route-type="${routeType}"`
+      + ' data-geometry="indra-web"'
+      + ` data-indra-intensity="${intensity}"`
+      + ` data-geometry-role="${roles.join(' ')}"`;
+    return `<body${geometry}${a}>`;
   });
 }
 function ensureScripts(html) {
@@ -152,6 +154,7 @@ let changed = 0;
 const files = walk(ROOT);
 for (const file of files) {
   const r = rel(file);
+  const priorMtimeMs = fs.statSync(file).mtimeMs;
   let html = fs.readFileSync(file, 'utf8');
   if (r === GOOGLE_TOKEN) {
     if (html !== GOOGLE_TOKEN_TEXT) throw new Error(`${GOOGLE_TOKEN}: verification token bytes changed`);
@@ -166,6 +169,13 @@ for (const file of files) {
     fs.writeFileSync(file, html, 'utf8');
     changed += 1;
   }
-  if (OUTPUT_MTIME) fs.utimesSync(file, OUTPUT_MTIME, OUTPUT_MTIME);
+  if (OUTPUT_MTIME) {
+    const configuredMs = OUTPUT_MTIME.getTime();
+    const preservedMs = priorMtimeMs > Date.now() + 60_000
+      ? Math.max(configuredMs, priorMtimeMs + 2_000)
+      : configuredMs;
+    const preserved = new Date(preservedMs);
+    fs.utimesSync(file, preserved, preserved);
+  }
 }
 console.log(`STEADY GEOMETRY APPLY — ${changed} of ${files.length} source HTML files updated.`);

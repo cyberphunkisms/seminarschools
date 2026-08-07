@@ -22,7 +22,7 @@ const SOURCE_HTML_ROOTS = [
   'sitemap', 'teacherresources', 'university', 'writingclub', 'writinggrads',
   'writingjuniors', 'writingkids', 'writingteens',
 ];
-const EXPECTED_INTERACTIVE_DOCUMENTS = 2858;
+const EXPECTED_INTERACTIVE_DOCUMENTS = 2859;
 const EXPECTED_REDIRECT_DOCUMENTS = 890;
 const ID_REFERENCE_ATTRIBUTES = [
   'aria-labelledby',

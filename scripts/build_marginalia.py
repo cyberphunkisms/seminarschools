@@ -38,6 +38,7 @@ BLOG_MANIFEST = ROOT / 'blog' / 'posts.json'
 POST_TEMPLATE = '''<!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title} — Marginalia. Seminar Schools.</title>
@@ -57,6 +58,7 @@ POST_TEMPLATE = '''<!DOCTYPE html>
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#14110D">
 <link rel="stylesheet" href="/css/main.css?v=20260725-audit45">
+<link rel="stylesheet" href="/css/alive.css?v=20260806-front-facing-geometry">
 <style>
 :root {{
   --accent: #983425;
@@ -97,8 +99,9 @@ POST_TEMPLATE = '''<!DOCTYPE html>
 }}
 .back-row a:hover {{ opacity: 0.7; }}
 </style>
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body>
+<body data-geometry="indra-web" data-indra-intensity="0.070" data-route-type="archive" data-geometry-role="relation movement">
 <div class="wrap" id="main-content">
 
 <header class="topbar" id="topbar">
@@ -139,6 +142,8 @@ POST_TEMPLATE = '''<!DOCTYPE html>
   }}
 }})();
 </script>
+<script src="/js/mandala.js?v=20260806-front-facing-geometry" defer></script>
+<script src="/js/indra.js?v=20260806-front-facing-geometry" defer></script>
 </body>
 </html>
 '''

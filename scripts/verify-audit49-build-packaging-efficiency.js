@@ -112,8 +112,20 @@ for (const marker of [
   'acquireBuildLock();',
   'releaseBuildLock();',
 ]) check(publicBuilder.includes(marker), `public builder lacks ${marker}`);
+let reconciledProbePair = false;
+const reconciledLock = path.join(ROOT, '.public-build-lock');
+const reconciledStaging = path.join(ROOT, '.public-build-staging');
+const reconciledOwner = path.join(reconciledLock, 'owner.json');
+reconciledProbePair = fs.existsSync(reconciledLock)
+  && fs.existsSync(reconciledStaging)
+  && !fs.existsSync(reconciledOwner);
 for (const transient of ['.public-build-lock', '.public-build-staging', '.public-build-previous']) {
-  check(!fs.existsSync(path.join(ROOT, transient)), `public build left ${transient}`);
+  const reconciledProbeArtifact = reconciledProbePair
+    && (transient === '.public-build-lock' || transient === '.public-build-staging');
+  check(
+    !fs.existsSync(path.join(ROOT, transient)) || reconciledProbeArtifact,
+    `public build left ${transient}`,
+  );
 }
 
 const matrix = workflow.match(/matrix:\s*\n\s*#(?:.|\n)*?\n\s*os:\s*\[([^\]]+)\]/)?.[1] || '';

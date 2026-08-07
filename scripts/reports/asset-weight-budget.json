@@ -1,8 +1,8 @@
 {
   "schema": "asset-weight-budget-v1",
-  "updated": "2026-08-05",
-  "policy": "Audit 52 constrains the generated public deploy surface. The total ceiling includes the approved dedicated localization routes, the complete Saul CV source/public parity surface and fixed downloads, the current-plus-withdrawn 129-row MeToo premise-audit workbooks required by the July 27 provenance record, the July 28 public mythology-integration source ledgers plus 23-entry ML* addendum, and the 346 stable Polymyth Commons records with their versioned link-only directory data. Build-only Teacher Resources data is excluded. Large archival sources, research workbooks, the concordance, pinned graph engine, and fully bilingual Polymythcal controller retain narrow exceptions; all other runtime and media assets use type limits. Polymyth Commons additionally enforces compact browser-index gzip ceilings while retaining its complete reusable JSON and CSV releases.",
-  "totalPublicCeilingBytes": 130000000,
+  "updated": "2026-08-06",
+  "policy": "Audit 52 constrains the generated public deploy surface. The total ceiling includes the approved dedicated localization routes, the complete Saul CV source/public parity surface and fixed downloads, the current-plus-withdrawn 129-row MeToo premise-audit workbooks required by the July 27 provenance record, the July 28 public mythology-integration source ledgers plus 23-entry ML* addendum, the canonical Polymyth Coherence V5.1.1 workbook, and the 346 stable Polymyth Commons records with their versioned link-only directory data. Build-only Teacher Resources data is excluded. Large archival sources, research workbooks, the concordance, pinned graph engine, and fully bilingual Polymythcal controller retain narrow exceptions; all other runtime and media assets use type limits. Polymyth Commons additionally enforces compact browser-index gzip ceilings while retaining its complete reusable JSON and CSV releases.",
+  "totalPublicCeilingBytes": 132000000,
   "limitsByExtension": {
     ".css": 50000,
     ".gif": 500000,
@@ -52,6 +52,12 @@
       "baselineBytes": 3709980,
       "ceilingBytes": 3800000,
       "reason": "withdrawn 129-row MeToo premise audit preserved for provenance"
+    },
+    {
+      "path": "polymyth/coherence/Polymyth_Coherence_V5.1.1.xlsx",
+      "baselineBytes": 2711354,
+      "ceilingBytes": 2800000,
+      "reason": "canonical repaired Polymyth Coherence V5.1.1 workbook"
     },
     {
       "path": "js/vendor/d3-7.9.0.min.js",

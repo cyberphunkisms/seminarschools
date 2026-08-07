@@ -217,14 +217,14 @@ expect(methodHtml.includes("www.w3.org/TR/vocab-dcat-3"), "method must cite DCAT
 
 const home = read("index.html");
 expect(
-  home.includes('class="path-card" href="/polymythcommons/"') &&
-    home.includes("id:'commons', label:'Polymyth Commons', href:'/polymythcommons/'"),
+  home.includes('<a href="/polymythcommons/">Polymyth Commons</a>') &&
+    /id:'commons',[^\n]*label:'Polymyth Commons',[^\n]*href:'\/polymythcommons\/'/.test(home),
   "home must link Polymyth Commons in both the visible path card and the project map",
 );
 expect(home.includes("id:'commons'"), "home map must include Polymyth Commons");
 expect(
-  home.includes("Polymyth Commons, Polymythcal, Tutoring"),
-  "home title must name Polymyth Commons",
+  home.includes("<title>Seminar Schools | Education, Research &amp; Public Programs</title>"),
+  "home title must describe the public site",
 );
 expect(
   read("teacherresources/index.html").includes("Polymyth Commons"),
