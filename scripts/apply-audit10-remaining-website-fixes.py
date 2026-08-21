@@ -38,7 +38,7 @@ def patch_footer() -> None:
     )
     text = text.replace(
         "'opacity:.82;border-bottom:1px solid transparent;width:max-content;max-width:100%;transition:opacity .15s,border-color .15s;}',",
-        "'opacity:.82;border-bottom:1px solid transparent;width:max-content;max-width:100%;overflow-wrap:normal;word-break:normal;hyphens:none;transition:opacity .15s,border-color .15s;}',"
+        "'opacity:.82;border-bottom:1px solid transparent;width:fit-content;max-width:100%;overflow-wrap:anywhere;word-break:normal;hyphens:none;transition:opacity .15s,border-color .15s;}',"
     )
     mobile = "'.ss-foot .ss-base{margin-top:1.7rem;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5;}'"
     mobile_new = mobile + ",\n        '@media(max-width:460px){.ss-foot{padding-left:1rem;padding-right:1rem}.ss-foot .ss-cols{grid-template-columns:1fr}.ss-foot a{width:100%;line-height:1.65;padding:.28rem 0}}'"

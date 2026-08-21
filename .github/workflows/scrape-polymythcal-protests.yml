@@ -33,7 +33,7 @@ jobs:
       - name: Install calendar dependencies
         run: python3 -m pip install --disable-pip-version-check --requirement requirements-harvest-browser.txt
       - name: Restore retained parsed-response cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: data/polymythcal-http-cache.json
           key: polymythcal-parsed-http-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
@@ -48,6 +48,8 @@ jobs:
         run: python3 scripts/harvest_protests_browser_ocr.py --output /tmp/polymythcal-protest-browser-ocr.json
       - name: Harvest every protest source without sharding
         run: python3 scripts/harvest_protests.py --browser-ocr-input /tmp/polymythcal-protest-browser-ocr.json --output /tmp/polymythcal-protests.json
+      - name: Detect mature per-source protest anomalies
+        run: python3 scripts/check-polymythcal-source-anomalies.py --stream protests-deterministic --current /tmp/polymythcal-protests.json --history data/harvest-source-history.json --report /tmp/protests-deterministic-source-anomalies.json --strict --write-history
       - name: Publish native confirmed and unconfirmed protest records
         run: python3 scripts/publish_protest_harvest.py --input /tmp/polymythcal-protests.json
       - name: Build separate undated-announcement surface
@@ -93,12 +95,13 @@ jobs:
           path: |
             /tmp/polymythcal-protests.json
             /tmp/polymythcal-protest-browser-ocr.json
+            /tmp/protests-deterministic-source-anomalies.json
             data/polymythcal-protest-candidates.json
             data/polymythcal-http-cache.json
             data/polymythcal-identity-shadow.json
       - name: Save retained parsed-response cache
         if: always() && hashFiles('data/polymythcal-http-cache.json') != ''
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: data/polymythcal-http-cache.json
           key: polymythcal-parsed-http-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}

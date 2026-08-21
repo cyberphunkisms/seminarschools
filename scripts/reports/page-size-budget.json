@@ -1,12 +1,12 @@
 {
   "schema": "page-size-budget-v3",
-  "updated": "2026-08-05",
-  "policy": "The predeployment audit budgets the current deploy surface after approved methodology and rhetoric-taxonomy corpus growth. Large canonical reference pages and full localized Leizu compositions retain narrow explicit ceilings; obsolete calendar-shell exceptions remain removed. Any new HTML above 350 KB requires a documented budget entry.",
+  "updated": "2026-08-13",
+  "policy": "The predeployment audit budgets the current deploy surface after approved methodology, CORE/CORE+ activation and history, rhetoric-taxonomy, and source-first discovery growth. Large canonical reference pages, the complete server-rendered Teacher Resources finder, and full localized Leizu compositions retain narrow explicit ceilings; obsolete calendar-shell exceptions remain removed. Any new HTML above 350 KB requires a documented budget entry.",
   "budgetedLargePages": [
     {
       "path": "polymyth/methodologylist/index.html",
-      "baselineBytes": 4005163,
-      "ceilingBytes": 4040000,
+      "baselineBytes": 4135124,
+      "ceilingBytes": 4176000,
       "route": "/polymyth/methodologylist/",
       "status": "canonical long-form reference; narrow ceiling blocks accidental corpus duplication"
     },
@@ -54,10 +54,10 @@
     },
     {
       "path": "teacherresources/index.html",
-      "baselineBytes": 412242,
-      "ceilingBytes": 450000,
+      "baselineBytes": 702685,
+      "ceilingBytes": 730000,
       "route": "/teacherresources/",
-      "status": "server-rendered 644-resource finder with render containment"
+      "status": "complete server-rendered 645-resource source-first finder; each record keeps its original-source action and secondary catalog-detail route, with render containment"
     },
     {
       "path": "leizu/fa/index.html",

@@ -1,0 +1,78 @@
+{
+  "schema": "seminar-schools-canonical-ownership-map-v1",
+  "rule": "Every governed output pattern has exactly one canonical writer. Mutating release writers share the FP-05 release_build lock.",
+  "owners": [
+    {
+      "id": "public-deploy-tree",
+      "writer": "SITE_PACKAGE/scripts/build-public-deploy.js",
+      "inputs": ["SITE_PACKAGE/**"],
+      "outputs": ["SITE_PACKAGE/public/**"],
+      "classification": "public_generated",
+      "lock_scope": "release_build"
+    },
+    {
+      "id": "site-package-manifest",
+      "writer": "SITE_PACKAGE/scripts/package-front-facing-mephistodata-release.py",
+      "inputs": ["SITE_PACKAGE/**"],
+      "outputs": ["SITE_PACKAGE/PACKAGE_CONTENTS_SHA256.json"],
+      "classification": "private_release_metadata",
+      "lock_scope": "release_build"
+    },
+    {
+      "id": "complete-package-manifest",
+      "writer": "SITE_PACKAGE/scripts/package-front-facing-mephistodata-release.py",
+      "inputs": ["SITE_PACKAGE/**", "EDITABLE_MASTERS/**", "DEPLOY_TOOLS/**"],
+      "outputs": ["PACKAGE_CONTENTS_SHA256.json"],
+      "classification": "private_release_metadata",
+      "lock_scope": "release_build"
+    },
+    {
+      "id": "complete-release-archive",
+      "writer": "SITE_PACKAGE/scripts/package-front-facing-mephistodata-release.py",
+      "inputs": ["SITE_PACKAGE/**", "EDITABLE_MASTERS/**", "DEPLOY_TOOLS/**"],
+      "outputs": ["ss-site-*.zip", "ss-site-*.zip.sha256"],
+      "classification": "private_complete_handoff",
+      "lock_scope": "release_build"
+    },
+    {
+      "id": "external-audit-receipt",
+      "writer": "SITE_PACKAGE/scripts/create-artifact-audit-receipt.py",
+      "inputs": ["ss-site-*.zip", "ss-site-*.zip.sha256", "ss-site-*.zip.clean-room-report.json", "ss-site-*.zip.disaster-recovery-report.json", "PACKAGE_CONTENTS_SHA256.json", "SITE_PACKAGE/scripts/reports/futureproofing-gate-report.json"],
+      "outputs": ["ss-site-*.zip.audit-receipt.json"],
+      "classification": "public_handoff_evidence",
+      "lock_scope": "release_build"
+    },
+    {
+      "id": "futureproofing-gate-report",
+      "writer": "SITE_PACKAGE/scripts/verify-futureproofing-contract.py",
+      "inputs": ["SITE_PACKAGE/data/futureproofing/futureproofing-contract.json"],
+      "outputs": ["SITE_PACKAGE/scripts/reports/futureproofing-gate-report.json"],
+      "classification": "private_release_evidence",
+      "lock_scope": "release_build"
+    },
+    {
+      "id": "release-gate-report",
+      "writer": "SITE_PACKAGE/scripts/verify-all-runner.js",
+      "inputs": ["SITE_PACKAGE/scripts/verify-all-runner.js", "SITE_PACKAGE/RELEASE_MANIFEST.json", "SITE_PACKAGE/**"],
+      "outputs": ["SITE_PACKAGE/scripts/reports/release-gate-report.json"],
+      "classification": "private_release_evidence",
+      "lock_scope": "release_build"
+    },
+    {
+      "id": "clean-room-release-report",
+      "writer": "SITE_PACKAGE/scripts/verify-clean-room-release.py",
+      "inputs": ["ss-site-*.zip", "ss-site-clean-room.zip"],
+      "outputs": ["ss-site-*.zip.clean-room-report.json"],
+      "classification": "private_release_evidence",
+      "lock_scope": "release_build"
+    },
+    {
+      "id": "disaster-recovery-report",
+      "writer": "SITE_PACKAGE/scripts/verify-disaster-recovery.py",
+      "inputs": ["ss-site-*.zip", "ss-site-*.zip.sha256"],
+      "outputs": ["ss-site-*.zip.disaster-recovery-report.json"],
+      "classification": "private_release_evidence",
+      "lock_scope": "release_build"
+    }
+  ]
+}

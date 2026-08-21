@@ -1,0 +1,13 @@
+{
+  "schema": "polymythcal-source-anomaly-history-v1",
+  "contract_id": "FP-10",
+  "policy": {
+    "minimum_baseline_observations": 3,
+    "history_limit_per_source": 12,
+    "collapse_ratio": 0.2,
+    "spike_ratio": 5.0,
+    "minimum_collapse_baseline": 5,
+    "minimum_spike_value": 20
+  },
+  "streams": {}
+}

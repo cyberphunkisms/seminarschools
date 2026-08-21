@@ -151,8 +151,10 @@ function inspectSourcePostprocessorState(files) {
   }
 }
 
-const siteBuildDate = resolveSiteBuildDate({root: ROOT, override: null});
-if (siteBuildDate !== currentTorontoDate()) fail(`site build date ${siteBuildDate} is not current in Toronto`);
+const siteBuildDate = resolveSiteBuildDate({root: ROOT});
+if (resolveSiteBuildDate({root: ROOT, override: null}) !== currentTorontoDate()) {
+  fail('site build date does not fall back to the current Toronto day when no override is supplied');
+}
 if (resolveSiteBuildDate({root: ROOT, override: '2026-02-03'}) !== '2026-02-03') {
   fail('SITE_BUILD_DATE override is not deterministic');
 }
@@ -264,7 +266,7 @@ if (deployerFloor < 9900) {
   fail('deployer package file floor does not protect the Audit 46 release surface');
 }
 
-const build = pkg.scripts?.build || '';
+const build = pkg.scripts?.['build:locked'] || '';
 const normalizer = 'node scripts/normalize-shared-asset-references.js';
 const activeApprovedUi = 'node scripts/apply-audit48-approved-ui.js';
 if (
@@ -277,7 +279,7 @@ if (
 }
 const runner = read('scripts/verify-all-runner.js');
 for (const command of [
-  'node scripts/verify-audit41-event-rollover.js',
+  'node scripts/verify-current-event-rollover.js',
   'node scripts/run-python.js scripts/verify-audit45-translations.py',
   'node scripts/verify-audit46-technical-efficiency.js',
   'node scripts/verify-cloud-input-runtime.js',
@@ -339,7 +341,7 @@ const report = {
   status: failures.length ? 'failed' : 'passed',
   metrics,
   failures,
-  policy: 'Current Toronto rollover, one shared asset request per pathname, exact runtimes, lean weekly jobs, streamed package verification, coherent redirects, and bounded large-index caching are release blockers.',
+  policy: 'Configured release-day rollover with a current-Toronto fallback, one shared asset request per pathname, exact runtimes, lean weekly jobs, streamed package verification, coherent redirects, and bounded large-index caching are release blockers.',
 };
 fs.mkdirSync(path.dirname(REPORT), {recursive: true});
 const renderedReport = JSON.stringify(report, null, 2) + '\n';
@@ -357,5 +359,5 @@ if (failures.length) {
 console.log(
   `AUDIT46 TECHNICAL EFFICIENCY PASSED — ${metrics.source_html_files} source and `
     + `${metrics.public_html_files} public HTML files, zero duplicate shared requests, `
-    + `current Toronto rollover, one npm install, exact runtimes, and streamed package verification.`,
+    + `release-day rollover with a Toronto fallback, one npm install, exact runtimes, and streamed package verification.`,
 );

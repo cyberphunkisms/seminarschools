@@ -6,7 +6,7 @@
  * surface is built first; the remaining read-only guards run with bounded
  * concurrency.
  */
-const { spawn } = require('child_process');
+const { spawn, spawnSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
@@ -33,14 +33,60 @@ if (
   process.exit(2);
 }
 
+function assertLiveReleaseLock() {
+  const result = spawnSync(
+    process.execPath,
+    [
+      path.join(__dirname, 'run-python.js'),
+      path.join(__dirname, 'assert-build-lock.py'),
+      '--delivery-root',
+      path.resolve(process.cwd(), '..'),
+    ],
+    { cwd: process.cwd(), encoding: 'utf8' },
+  );
+  if (result.status !== 0) {
+    const detail = String(result.stderr || result.stdout || '').trim();
+    throw new Error(`release gate report writer has no live release-build lock${detail ? `: ${detail}` : ''}`);
+  }
+}
+
+function writeTextAtomic(file, content) {
+  const directory = path.dirname(file);
+  fs.mkdirSync(directory, { recursive: true });
+  const temporary = path.join(
+    directory,
+    `.${path.basename(file)}.part-${process.pid}-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+  );
+  let descriptor;
+  try {
+    descriptor = fs.openSync(temporary, 'wx', 0o600);
+    fs.writeFileSync(descriptor, content, 'utf8');
+    fs.fsyncSync(descriptor);
+    fs.closeSync(descriptor);
+    descriptor = undefined;
+    fs.renameSync(temporary, file);
+    if (process.platform !== 'win32') {
+      const directoryDescriptor = fs.openSync(directory, 'r');
+      try { fs.fsyncSync(directoryDescriptor); } finally { fs.closeSync(directoryDescriptor); }
+    }
+  } finally {
+    if (descriptor !== undefined) fs.closeSync(descriptor);
+    try { fs.unlinkSync(temporary); } catch (error) { if (error.code !== 'ENOENT') throw error; }
+  }
+}
+
 const fullBuildPreparation = [
   'npm run build'
 ];
 const reusedBuildPreparation = [
   'node scripts/verify-public-deploy-parity.js',
+  'node scripts/verify-release-asset-identity.js',
+  'node scripts/verify-front-facing-boundary.js',
   'node scripts/verify-visible-geometry.js',
   'node scripts/verify-meaningful-geometry.js',
   'node scripts/verify-geometry.js',
+  'node scripts/run-python.js scripts/verify-polymyth-coherence-workbook.py',
+  'node scripts/verify-polymyth-entry-points.js',
   'node scripts/run-python.js scripts/verify-audit45-translations.py',
   'node scripts/verify-audit49-metadata-surface.js',
   'node scripts/verify-audit49-runtime-efficiency.js',
@@ -51,30 +97,57 @@ const sequential = [
   // A passing build is not enough: the immediately repeated build must be a
   // byte-for-byte fixed point across source, deploy, data, and current reports.
   'node scripts/verify-build-idempotence.js',
-  // Browser geometry is deliberately outside the Netlify production build,
-  // but remains a blocking, sequential predeploy check after Chromium setup.
-  'node scripts/verify-visible-geometry-browser.mjs',
+  // Canonical CORE and its generated retrieval surfaces are a single ordered
+  // contract. Keep these out of the parallel pool so no report/build writer
+  // can race the counts, hashes, or package-facing mirrors they inspect.
+  'node scripts/verify-methodologylist-manifest.js',
+  'node scripts/verify-core-coreplus-alignment.js',
+  'node scripts/verify-meaninglib-dataset.js',
   'node scripts/verify-meaninglib-search.js',
+  'node scripts/verify-ai-access-pack.js',
+  // Rendered audience/reflow and geometry proof are deliberately outside the
+  // Netlify production build, but remain sequential release blockers.
+  'node scripts/verify-front-facing-overlap-browser.js',
+  'node scripts/verify-teacherresources-state-layout-browser.js',
+  'node scripts/verify-home-map-browser.js',
+  'node scripts/verify-polymythcal-sets13-15-browser.js',
+  'node scripts/verify-visible-geometry-browser.mjs',
   'node scripts/verify-audit48-assistive-technology.js',
   'node scripts/verify-audit48-browser-program.js',
   'node scripts/run-python.js scripts/verify-polymythcal-calendar-clients.py',
   'node scripts/run-python.js -m unittest scripts/test_audit48_live_harvest.py',
   'node scripts/run-python.js scripts/verify_audit48_live_harvest.py',
   'node scripts/verify-audit48-external-validation.js',
+];
+
+// Preservation hashes must observe a quiescent tree. Keep the deliberate
+// failure tests and the source-stage FP-01..FP-15 aggregate after every
+// parallel report writer has finished, otherwise an atomic report replacement
+// can race FP-02's successor digest.
+const finalSequential = [
+  // Refresh byte-selection evidence only after every parallel report writer is
+  // quiescent, then refresh its raw-hashed aggregate consumer. The component
+  // excludes exactly the five self-updating JSON/Markdown evidence files from
+  // its diagnostic byte total; all selected files still remain packaged and
+  // manifest-hashed.
+  'node scripts/verify-audit49-build-packaging-efficiency.js',
   'node scripts/verify-audit49-technical-efficiency.js',
+  'npm run test:futureproofing',
+  'npm run verify:futureproofing',
 ];
 
 const checks = [
   'node scripts/verify-critical.js',
   'node scripts/verify-predeploy-automation.js',
   'node scripts/verify-repository-walk-policy.js',
-  'node scripts/verify-methodologylist-manifest.js',
   'node scripts/verify-regen-safety.js',
   'node scripts/verify-data-hygiene.js',
   'node scripts/verify-csp-enforced.js',
   'node scripts/verify-external-link-workflow.js',
   'node scripts/verify-external-link-live-shards.js',
+  'node scripts/verify-polymythcal-source-health-current.js',
   'node scripts/verify-release-gates.js',
+  'node scripts/verify-release-asset-identity.js',
   'node scripts/verify-audit35-route-ui.mjs',
   'node scripts/verify-audit36-visual-p0.mjs',
   'node scripts/verify-audit36-graph-resilience.mjs',
@@ -93,7 +166,7 @@ const checks = [
   'node scripts/verify-frozen-audit39.js',
   'node scripts/verify-frozen-audit40.js',
   'node scripts/verify-frozen-audit41.js',
-  'node scripts/verify-audit41-event-rollover.js',
+  'node scripts/verify-current-event-rollover.js',
   'node scripts/verify-frozen-audit42.js',
   'node scripts/verify-frozen-audit43.js',
   'node scripts/verify-audit46-technical-efficiency.js',
@@ -114,8 +187,8 @@ const checks = [
   'node scripts/verify-project-failure-resilience.js',
   'node scripts/verify-autolink-performance.js',
   'node scripts/verify-frozen-audit37.js',
-  'node scripts/verify-live-content-integrity.js',
-  'node scripts/test-live-content-integrity.js',
+  'node scripts/current/verify-live-content-integrity.js',
+  'node scripts/current/test-live-content-integrity.js',
   'node scripts/test-harvest-status-summary.js',
   'node scripts/test-merge-seminar-occurrences.js',
   'node scripts/test-merge-festival-occurrences.js',
@@ -180,7 +253,7 @@ const checks = [
   'node scripts/verify-runtime-delivery-resilience.js',
   'node scripts/verify-payments.js',
   'node scripts/verify-leizu-pipeline.js',
-  'node scripts/verify-leizu-experience.js',
+  'node scripts/current/verify-leizu-experience.js',
   'node scripts/verify-leizu-course-picker.js',
   'node scripts/verify-leizu-simplified-chinese.js',
   'node scripts/verify-leizu-persian.js',
@@ -191,6 +264,7 @@ const checks = [
   'node scripts/verify-bb-kid-friendly.js',
   'node scripts/verify-bb-why.js',
   'node scripts/verify-bbt-upcoming.js',
+  'node scripts/verify-bb-mechanics-synthesis.js',
   'node scripts/verify-main-page.js',
   'node scripts/verify-main-leizu-funnel.js',
   'node scripts/verify-final8-website-polish.js',
@@ -198,10 +272,9 @@ const checks = [
   'node scripts/verify-audit10-remaining-website.js',
   'node scripts/verify-audit11-website-decisions.js',
   'node scripts/verify-audit12-mobile-web-hybrid.js',
-  'node scripts/verify-front-facing-boundary.js',
+  'node scripts/run-python.js scripts/verify-polymyth-coherence-workbook.py',
   'node scripts/verify-polymyth-entry-points.js',
   'node scripts/verify-polymyth-editorial-prompts.js',
-  'node scripts/verify-meaninglib-dataset.js',
   'node scripts/verify-linkability-overhaul.js',
   'node scripts/verify-meaninglib-dashboard.js',
   'node scripts/verify-ml-stop-psychologism.js',
@@ -212,7 +285,6 @@ const checks = [
   'node scripts/verify-ml-power-scope.js',
   'node scripts/verify-ml-dialectical-hardening.js',
   'node scripts/verify-ml-geometry-hardening.js',
-  'node scripts/verify-ai-access-pack.js',
   'node scripts/verify-site-integrity.js',
   'node scripts/verify-professional-readiness.js',
   'node scripts/verify-seo.js',
@@ -223,6 +295,7 @@ const checks = [
 // them in the full runner. Reuse mode refreshes the same blockers in its own
 // preparation before the current external and aggregate release checks.
 const canonicalBuildCoveredChecks = new Set([
+  'node scripts/verify-release-asset-identity.js',
   'node scripts/verify-visible-geometry.js',
   'node scripts/verify-geometry.js',
   'node scripts/verify-meaningful-geometry.js',
@@ -230,20 +303,19 @@ const canonicalBuildCoveredChecks = new Set([
   'node scripts/verify-polymythcal-browser-payload.js',
   'node scripts/verify-polymythcal-build-efficiency.js',
   'node scripts/verify-steady-ui.js',
+  'node scripts/run-python.js scripts/verify-polymyth-coherence-workbook.py',
+  'node scripts/verify-polymyth-entry-points.js',
   'node scripts/run-python.js scripts/verify-audit45-translations.py',
   'node scripts/verify-audit49-metadata-surface.js',
   'node scripts/verify-audit49-runtime-efficiency.js',
   'node scripts/verify-audit49-build-packaging-efficiency.js'
 ]);
-const reusedBuildPreparationChecks = new Set([
-  'node scripts/verify-visible-geometry.js',
-  'node scripts/verify-meaningful-geometry.js',
-  'node scripts/verify-geometry.js',
-  'node scripts/run-python.js scripts/verify-audit45-translations.py',
-  'node scripts/verify-audit49-metadata-surface.js',
-  'node scripts/verify-audit49-runtime-efficiency.js',
-  'node scripts/verify-audit49-build-packaging-efficiency.js'
-]);
+// Derive this coverage from the commands that actually run. A handwritten
+// duplicate could otherwise keep suppressing a check after its preparation
+// command had been removed.
+const reusedBuildPreparationChecks = new Set(
+  reusedBuildPreparation.filter(command => checks.includes(command)),
+);
 const preparationCoveredChecks = reuseBuild
   ? reusedBuildPreparationChecks
   : canonicalBuildCoveredChecks;
@@ -308,9 +380,10 @@ function run(cmd, { quiet = true } = {}) {
   });
 }
 function writeGateReport(status, started, passedCommands, failures) {
+  assertLiveReleaseLock();
   const reportDir = path.join(process.cwd(), 'scripts', 'reports');
   fs.mkdirSync(reportDir, { recursive: true });
-  const total = activeChecks.length + sequential.length;
+  const total = activeChecks.length + sequential.length + finalSequential.length;
   const report = {
     generated_at: releaseTimestamp,
     status,
@@ -329,7 +402,7 @@ function writeGateReport(status, started, passedCommands, failures) {
   const reportFile = path.join(reportDir, 'release-gate-report.json');
   const renderedReport = JSON.stringify(report, null, 2) + '\n';
   if (!fs.existsSync(reportFile) || fs.readFileSync(reportFile, 'utf8') !== renderedReport) {
-    fs.writeFileSync(reportFile, renderedReport);
+    writeTextAtomic(reportFile, renderedReport);
   }
   if (process.env.SS_REPORT_OUTPUT_MTIME) {
     const outputMtime = new Date(process.env.SS_REPORT_OUTPUT_MTIME);
@@ -346,10 +419,12 @@ function printFailures(failures) {
   }
 }
 async function main() {
+  assertLiveReleaseLock();
   const started = Date.now();
   const passedCommands = [];
   const mode = reuseBuild ? 'reuse verified canonical build' : 'self-build public surface';
-  console.log(`VERIFY ALL FAST — ${activeChecks.length + sequential.length} checks, concurrency ${concurrency}, timeout ${commandTimeoutMs}ms, mode: ${mode}`);
+  const totalChecks = activeChecks.length + sequential.length + finalSequential.length;
+  console.log(`VERIFY ALL FAST — ${totalChecks} checks, concurrency ${concurrency}, timeout ${commandTimeoutMs}ms, mode: ${mode}`);
   for (const cmd of sequential) {
     try {
       const r = await run(cmd, { quiet: true });
@@ -386,9 +461,21 @@ async function main() {
     process.exitCode = 1;
     return;
   }
+  for (const cmd of finalSequential) {
+    try {
+      const r = await run(cmd, { quiet: true });
+      console.log(`PASS ${String(r.ms).padStart(6)}ms  ${cmd}`);
+      passedCommands.push(cmd);
+    } catch (error) {
+      writeGateReport('failed', started, passedCommands, [error]);
+      printFailures([error]);
+      process.exitCode = 1;
+      return;
+    }
+  }
   const elapsed = Date.now() - started;
   writeGateReport('passed', started, passedCommands, []);
-  console.log(`VERIFY ALL FAST PASSED — ${passed + sequential.length}/${activeChecks.length + sequential.length} checks in ${(elapsed/1000).toFixed(1)}s.`);
+  console.log(`VERIFY ALL FAST PASSED — ${passedCommands.length}/${totalChecks} checks in ${(elapsed/1000).toFixed(1)}s.`);
 }
 if (require.main === module) {
   main().catch(e => { console.error(e && e.stack || e); process.exit(1); });

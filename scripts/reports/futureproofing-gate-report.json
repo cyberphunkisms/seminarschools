@@ -1,0 +1,133 @@
+{
+  "contract_total_controls": 15,
+  "contract_version": "2026-08-14.1",
+  "executed": [
+    {
+      "command": [
+        "python3",
+        "scripts/verify-audit53-base-preservation.py"
+      ],
+      "exit_code": 0,
+      "id": "FP-02"
+    },
+    {
+      "command": [
+        "node",
+        "scripts/verify-article-body-fingerprints.js"
+      ],
+      "exit_code": 0,
+      "id": "FP-03"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/verify-canonical-ownership.py"
+      ],
+      "exit_code": 0,
+      "id": "FP-04"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "scripts.test_futureproofing_contracts.BuildLockTests"
+      ],
+      "exit_code": 0,
+      "id": "FP-05"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "verify:futureproofing:gate-defects"
+      ],
+      "exit_code": 0,
+      "id": "FP-07"
+    },
+    {
+      "command": [
+        "node",
+        "scripts/verify-browser-tier-contract.js"
+      ],
+      "exit_code": 0,
+      "id": "FP-08"
+    },
+    {
+      "command": [
+        "node",
+        "scripts/verify-live-evidence-policy.js"
+      ],
+      "exit_code": 0,
+      "id": "FP-09"
+    },
+    {
+      "command": [
+        "node",
+        "scripts/verify-source-anomaly-contract.js"
+      ],
+      "exit_code": 0,
+      "id": "FP-10"
+    },
+    {
+      "command": [
+        "node",
+        "scripts/verify-external-destination-contracts.js"
+      ],
+      "exit_code": 0,
+      "id": "FP-11"
+    },
+    {
+      "command": [
+        "node",
+        "scripts/verify-route-tombstones.js"
+      ],
+      "exit_code": 0,
+      "id": "FP-12"
+    },
+    {
+      "command": [
+        "node",
+        "scripts/verify-data-migrations.js"
+      ],
+      "exit_code": 0,
+      "id": "FP-13"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/verify-public-private-boundary.py"
+      ],
+      "exit_code": 0,
+      "id": "FP-15"
+    }
+  ],
+  "failed_checks": [],
+  "implemented_controls": 15,
+  "passed_checks": 12,
+  "pending_checks": [],
+  "post_package_checks": [
+    "FP-01",
+    "FP-06",
+    "FP-14"
+  ],
+  "rule": "A release is blocked unless every FP-01 through FP-15 entry is implemented, names an executable verifier, names deliberate failure evidence, and records the evidence fields that bind its result.",
+  "schema": "seminar-schools-futureproofing-gate-report-v1",
+  "scope": "source-stage",
+  "source_stage_controls": [
+    "FP-02",
+    "FP-03",
+    "FP-04",
+    "FP-05",
+    "FP-07",
+    "FP-08",
+    "FP-09",
+    "FP-10",
+    "FP-11",
+    "FP-12",
+    "FP-13",
+    "FP-15"
+  ],
+  "status": "passed",
+  "total_checks": 12
+}

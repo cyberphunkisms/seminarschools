@@ -1,0 +1,254 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://seminarschools.com/polymyth/coherence/Polymyth_Coherence_Assessment_Schema_V5.1.2.json",
+  "$ref": "#/$defs/caseHandoff",
+  "title": "Polymyth Coherence V5.1.2 blank assessment handoff",
+  "description": "A model-neutral, answer-free handoff schema for starting a new case with the canonical blank workbook. This file contains no completed case audit or expected case verdict.",
+  "x-instrument": {
+    "version": "V5.1.2",
+    "workbook": "Polymyth_Coherence_Assessment_Instrument_V5.1.2.xlsx",
+    "applicationProtocol": "Polymyth_Coherence_AI_Application_Protocol_V5.1.2.md",
+    "sha256": "0624c76e0ae1351dcfe6a9d2cabf6e4e581820b63a0fc40e5ad755bbd1d93550",
+    "formulaCount": 85768,
+    "formulaSignatureWithFinalLf": "94a9cd749e53b71c056c2a41c68d27cdb9a344eaf9bb3865b37a27f2b58684be",
+    "formulaSerialization": "workbook sheet order; row-major cells; sheet<TAB>coordinate<TAB>formula<LF>; final LF included"
+  },
+  "x-blankState": {
+    "isBlankInstrument": true,
+    "completedCaseCount": 0,
+    "templateCaseId": "TEMPLATE-001",
+    "templateIsACompletedCase": false,
+    "templateQaRows": 40,
+    "templateQaStatus": "Not checked",
+    "workedApplicationsAreAnAnswerKey": false
+  },
+  "x-workbook": {
+    "sheetCount": 35,
+    "criteriaGovernanceAndReferenceSheets": [
+      "START HERE",
+      "GOVERNING RULES",
+      "INTERNAL",
+      "MEZO",
+      "EXTERNAL",
+      "CROSS-LAYER",
+      "BOUNDARY CASES",
+      "DEBATES",
+      "SOURCES",
+      "RULE-SOURCE MAP",
+      "COVERAGE",
+      "CODEBOOK",
+      "CHANGELOG"
+    ],
+    "protocolAndInstrumentTestSheets": [
+      "AUDIT PROTOCOL",
+      "QA MASTER",
+      "REGRESSION TESTS",
+      "V5 INTEGRITY"
+    ],
+    "applicationSheets": [
+      "AUDIT INDEX",
+      "SCENE-EVENT LEDGER",
+      "STATE-TIME-SPACE",
+      "RULE-CAPABILITY",
+      "KNOWLEDGE-DECISION",
+      "CAUSAL-TRANSITIONS",
+      "FINDINGS-REPAIRS",
+      "RED-TEAM QA",
+      "MEZO RELATIONS",
+      "EXTERNAL CLAIMS",
+      "SCOPE-CORPUS",
+      "PRODUCTION DEFECTS",
+      "ORGANIZING FORM",
+      "TRUTH-DIRECTION",
+      "SECOND-ORDER",
+      "INTERPRETATIONS",
+      "QA EVIDENCE",
+      "SALIENCE PROFILE"
+    ],
+    "referenceCounts": {
+      "governingRules": 52,
+      "internalRules": 177,
+      "mezoRules": 59,
+      "externalRules": 36,
+      "crossLayerRules": 45,
+      "debates": 89,
+      "sources": 286,
+      "ruleSourceMappings": 844,
+      "coverageRecords": 182,
+      "protocolEntriesP0ThroughP23": 24,
+      "mandatoryQaChecks": 40,
+      "syntheticRegressionFixtures": 22
+    },
+    "writeBoundary": {
+      "criteriaProtocolReferenceAndTestSheetsAreCaseImmutable": true,
+      "formulaCellsAreImmutable": true,
+      "tableHeadersIdsValidationListsAndRegressionFixturesAreImmutable": true,
+      "newCaseValuesBelongOnlyInApplicationInputFields": true
+    }
+  },
+  "x-protocol": {
+    "protocolFit": {
+      "required": true,
+      "allowed": [
+        "Applicable",
+        "Applicable with Adaptation",
+        "Outside Protocol Scope"
+      ],
+      "outsideProtocolScopeReceivesPolymythVerdict": false
+    },
+    "auditDepth": {
+      "required": true,
+      "allowed": [
+        "Screening",
+        "Standard",
+        "Deep"
+      ],
+      "screeningCanCertifyAbsenceOrFullQualification": false,
+      "standardCanCertifyFullOrCleanClaims": false,
+      "deepRequiredForFullOrCleanClaims": true,
+      "smallerScopeResultsPropagateAutomatically": false
+    },
+    "requiredInputs": [
+      "exact work or title",
+      "exact version, cut, edition, or released artifact",
+      "medium",
+      "declared corpus and canon",
+      "explicit exclusions",
+      "scope ID",
+      "timeline or organizing model",
+      "intended claim and audit depth",
+      "primary artifact and exact locators",
+      "tradition-specific evidential and relational conditions",
+      "permissions where constitutive",
+      "required adaptations",
+      "schema remainder"
+    ],
+    "automation": {
+      "allowed": [
+        "extract locators",
+        "propose ledger entries",
+        "perform deterministic completeness checks",
+        "flag candidate contradictions or gaps",
+        "organize evidence for human review"
+      ],
+      "notEstablishedByAutomationAlone": [
+        "repair ruling",
+        "Deep verdict",
+        "Full qualification",
+        "independent review"
+      ],
+      "humanAdjudicatorRequired": true,
+      "genuinelyDifferentIndependentReviewerRequired": true,
+      "taskSpecificValidationRequired": true
+    },
+    "fullQualificationGates": [
+      "protocol fit permits the assessment",
+      "audit depth is Deep",
+      "primary artifact obtained and declared coverage complete",
+      "V5 INTEGRITY is PASS",
+      "Q-001 through Q-040 are complete and valid",
+      "auditor and independent reviewer are different people",
+      "qualified conclusion is present",
+      "Internal is Pass",
+      "at least one substantive Mezo relation is Pass and no declared load-bearing Mezo relation fails",
+      "at least one substantive External claim is supported and no applicable External blocker remains",
+      "no unresolved material finding, evidence gap, production contradiction, or invalid link remains"
+    ]
+  },
+  "$defs": {
+    "caseHandoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+      "caseId",
+      "workTitle",
+      "exactVersion",
+      "medium",
+      "declaredCorpus",
+      "exclusions",
+      "scopeId",
+      "organizingModel",
+      "protocolFit",
+      "adaptations",
+      "schemaRemainder",
+      "auditDepth",
+      "intendedClaim",
+      "primaryArtifact",
+      "primaryLocators",
+      "auditor",
+      "independentReviewer",
+      "proposedEntries",
+      "humanRulings",
+      "reviewerRulings",
+      "layerResults",
+      "blockerCodes",
+      "qualifiedConclusion"
+      ],
+      "properties": {
+      "caseId": { "type": ["string", "null"], "description": "A unique non-template Case ID." },
+      "workTitle": { "type": ["string", "null"] },
+      "exactVersion": { "type": ["string", "null"] },
+      "medium": { "type": ["string", "null"] },
+      "declaredCorpus": { "type": ["string", "null"] },
+      "exclusions": { "type": "array", "items": { "type": "string" } },
+      "scopeId": { "type": ["string", "null"] },
+      "organizingModel": { "type": ["string", "null"] },
+      "protocolFit": { "type": ["string", "null"], "enum": [null, "Applicable", "Applicable with Adaptation", "Outside Protocol Scope"] },
+      "adaptations": { "type": "array", "items": { "type": "string" } },
+      "schemaRemainder": { "type": "array", "items": { "type": "string" } },
+      "auditDepth": { "type": ["string", "null"], "enum": [null, "Screening", "Standard", "Deep"] },
+      "intendedClaim": { "type": ["string", "null"] },
+      "primaryArtifact": { "type": ["string", "null"] },
+      "primaryLocators": { "type": "array", "items": { "type": "string" } },
+      "auditor": { "type": ["string", "null"] },
+      "independentReviewer": { "type": ["string", "null"] },
+      "proposedEntries": { "type": "array", "items": { "type": "object" } },
+      "humanRulings": { "type": "array", "items": { "type": "object" } },
+      "reviewerRulings": { "type": "array", "items": { "type": "object" } },
+      "layerResults": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["internal", "mezo", "external"],
+        "properties": {
+          "internal": { "type": ["string", "null"] },
+          "mezo": { "type": ["string", "null"] },
+          "external": { "type": ["string", "null"] }
+        }
+      },
+      "blockerCodes": { "type": "array", "items": { "type": "string" } },
+        "qualifiedConclusion": { "type": ["string", "null"] }
+      }
+    }
+  },
+  "examples": [
+    {
+      "caseId": null,
+      "workTitle": null,
+      "exactVersion": null,
+      "medium": null,
+      "declaredCorpus": null,
+      "exclusions": [],
+      "scopeId": null,
+      "organizingModel": null,
+      "protocolFit": null,
+      "adaptations": [],
+      "schemaRemainder": [],
+      "auditDepth": null,
+      "intendedClaim": null,
+      "primaryArtifact": null,
+      "primaryLocators": [],
+      "auditor": null,
+      "independentReviewer": null,
+      "proposedEntries": [],
+      "humanRulings": [],
+      "reviewerRulings": [],
+      "layerResults": {
+        "internal": null,
+        "mezo": null,
+        "external": null
+      },
+      "blockerCodes": [],
+      "qualifiedConclusion": null
+    }
+  ]
+}

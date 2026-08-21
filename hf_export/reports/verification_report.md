@@ -1,6 +1,6 @@
 # Meaninglib dataset verification report
 
-Generated: 2026-07-28T21:45:00-04:00
+Generated: 2026-08-15T18:00:00-04:00
 
 Failures: 0
 Warnings: 0
@@ -14,11 +14,16 @@ Warnings: 0
 - PASS: found hf_export/data/relations/crossrefs.jsonl
 - PASS: found hf_export/reports/latest_export_report.md
 - PASS: found hf_export/schemas/meaninglib_entry.schema.json
-- PASS: total rows: 2097
-- PASS: ml row count 1317
+- PASS: total rows: 1969
+- PASS: all export rows share one timestamp: 2026-08-13T04:00:00.000Z
+- PASS: export timestamp matches deterministic build timestamp 2026-08-13T04:00:00.000Z
+- PASS: ML row count exactly matches canonical: 1189
+- PASS: all_meaninglib_rows contains exactly 1189 canonical ML rows
 - PASS: bb row count 246
 - PASS: mc row count 234
 - PASS: cc row count 296
+- PASS: ML section counts exactly match canonical Methodologylist
+- PASS: portable CORE HF row is exact, canonical, and present on every ML export surface
 - PASS: star_file_map includes ml
 - PASS: star_file_map includes bb
 - PASS: star_file_map includes mc
@@ -27,4 +32,4 @@ Warnings: 0
 - PASS: README names Meaninglib
 - PASS: README states interdependence ontology
 - PASS: README avoids rejected ML* hierarchy language
-- PASS: jsonl files found: 26
+- PASS: jsonl files found: 27

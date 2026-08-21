@@ -10,20 +10,17 @@
  */
 const fs = require('fs');
 const path = require('path');
+const {
+  difference,
+  expectedPolymythcalEventRoutes,
+  inspectEventRouteDirectory,
+  isRedirect,
+  sourceHtmlDocuments,
+  summarizeValues,
+} = require('./lib/source-html-inventory');
 
 const ROOT = path.resolve(__dirname, '..');
 const REPORT = path.join(ROOT, 'scripts', 'reports', 'audit48-assistive-technology.json');
-const SOURCE_HTML_ROOTS = [
-  '.well-known', 'agora', 'aitr', 'aa', 'bb', 'bookwormcard', 'campaigns',
-  'cfps', 'fellowships', 'florilegium', 'humanities', 'lectures', 'leizu',
-  'about', 'main', 'marginalia', 'nutrition', 'ohm-dome', 'philosophy',
-  'polymyth', 'polymythcal', 'polymythcommons', 'polymythlib',
-  'polymythseminars', 'reviews', 'saul', 'seminars',
-  'sitemap', 'teacherresources', 'university', 'writingclub', 'writinggrads',
-  'writingjuniors', 'writingkids', 'writingteens',
-];
-const EXPECTED_INTERACTIVE_DOCUMENTS = 2859;
-const EXPECTED_REDIRECT_DOCUMENTS = 890;
 const ID_REFERENCE_ATTRIBUTES = [
   'aria-labelledby',
   'aria-describedby',
@@ -35,6 +32,17 @@ const metrics = {
   source_html_documents: 0,
   interactive_documents: 0,
   redirect_documents: 0,
+  canonical_events: 0,
+  explicit_legacy_event_ids: 0,
+  expected_english_event_routes: 0,
+  expected_french_event_routes: 0,
+  expected_english_event_aliases: 0,
+  expected_french_event_aliases: 0,
+  english_event_routes: 0,
+  french_event_routes: 0,
+  canonical_event_documents: 0,
+  event_redirect_documents: 0,
+  non_event_documents: 0,
   documents_with_two_progressive_h1_variants: 0,
   static_ids: 0,
   static_aria_id_references: 0,
@@ -56,23 +64,6 @@ function read(relative) {
 }
 function check(condition, message) {
   if (!condition) failures.push(message);
-}
-function walkHtml(relative) {
-  const start = file(relative);
-  if (!fs.existsSync(start)) return [];
-  const results = [];
-  const stack = [start];
-  while (stack.length) {
-    const active = stack.pop();
-    for (const entry of fs.readdirSync(active, {withFileTypes: true})) {
-      const target = path.join(active, entry.name);
-      if (entry.isDirectory()) stack.push(target);
-      else if (entry.isFile() && entry.name.endsWith('.html')) {
-        results.push(path.relative(ROOT, target).split(path.sep).join('/'));
-      }
-    }
-  }
-  return results;
 }
 function attribute(source, name) {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -96,24 +87,16 @@ function textAlternative(body) {
     .replace(/\s+/g, ' ')
     .trim();
 }
-function isRedirect(html) {
-  return /<meta\b(?=[^>]*\bhttp-equiv=["']refresh["'])[^>]*>/i.test(html);
-}
-
-const rootHtml = fs.readdirSync(ROOT, {withFileTypes: true})
-  .filter(entry => entry.isFile() && entry.name.endsWith('.html'))
-  .map(entry => entry.name)
-  .filter(name => !/^google.*\.html$/i.test(name));
-const documents = [...new Set([
-  ...rootHtml,
-  ...SOURCE_HTML_ROOTS.flatMap(walkHtml),
-])].sort();
+const documents = sourceHtmlDocuments(ROOT);
+const documentSet = new Set(documents);
+const redirectSet = new Set();
 metrics.source_html_documents = documents.length;
 
 for (const relative of documents) {
   const raw = read(relative);
   if (isRedirect(raw)) {
     metrics.redirect_documents += 1;
+    redirectSet.add(relative);
     continue;
   }
   metrics.interactive_documents += 1;
@@ -205,20 +188,113 @@ for (const relative of documents) {
   }
 }
 
-check(
-  metrics.interactive_documents === EXPECTED_INTERACTIVE_DOCUMENTS,
-  `interactive source inventory is ${metrics.interactive_documents}/${EXPECTED_INTERACTIVE_DOCUMENTS}`,
-);
-check(
-  metrics.redirect_documents === EXPECTED_REDIRECT_DOCUMENTS,
-  `redirect source inventory is ${metrics.redirect_documents}/${EXPECTED_REDIRECT_DOCUMENTS}`,
-);
+check(metrics.source_html_documents > 0, 'source HTML inventory is empty');
+check(metrics.interactive_documents > 0, 'interactive source inventory is empty');
 check(
   metrics.source_html_documents
-    === EXPECTED_INTERACTIVE_DOCUMENTS + EXPECTED_REDIRECT_DOCUMENTS,
-  `source HTML inventory is ${metrics.source_html_documents}/`
-    + `${EXPECTED_INTERACTIVE_DOCUMENTS + EXPECTED_REDIRECT_DOCUMENTS}`,
+    === metrics.interactive_documents + metrics.redirect_documents,
+  'interactive and redirect inventories do not partition source HTML exactly',
 );
+
+let currentEvents = [];
+try {
+  const payload = JSON.parse(read('polymythseminars/events.json'));
+  currentEvents = payload.events || [];
+  check(Array.isArray(payload.events), 'polymythseminars/events.json has no events array');
+} catch (error) {
+  failures.push(`polymythseminars/events.json is invalid JSON: ${error.message}`);
+}
+
+try {
+  const expectedRoutes = expectedPolymythcalEventRoutes(currentEvents);
+  const englishRoutes = inspectEventRouteDirectory(ROOT, 'polymythseminars/events');
+  const frenchRoutes = inspectEventRouteDirectory(ROOT, 'polymythseminars/fr/events');
+  const missingEnglish = difference(expectedRoutes.englishRouteIds, englishRoutes.routeIds);
+  const extraEnglish = difference(englishRoutes.routeIds, expectedRoutes.englishRouteIds);
+  const missingFrench = difference(expectedRoutes.frenchRouteIds, frenchRoutes.routeIds);
+  const extraFrench = difference(frenchRoutes.routeIds, expectedRoutes.frenchRouteIds);
+
+  metrics.canonical_events = expectedRoutes.canonicalIds.size;
+  metrics.explicit_legacy_event_ids = expectedRoutes.explicitLegacyEntries;
+  metrics.expected_english_event_routes = expectedRoutes.englishRouteIds.size;
+  metrics.expected_french_event_routes = expectedRoutes.frenchRouteIds.size;
+  metrics.expected_english_event_aliases = expectedRoutes.englishAliases.size;
+  metrics.expected_french_event_aliases = expectedRoutes.frenchAliases.size;
+  metrics.english_event_routes = englishRoutes.htmlRouteIds.size;
+  metrics.french_event_routes = frenchRoutes.htmlRouteIds.size;
+  metrics.canonical_event_documents = [...expectedRoutes.canonicalIds].reduce(
+    (count, id) => count
+      + Number(englishRoutes.htmlRouteIds.has(id))
+      + Number(frenchRoutes.htmlRouteIds.has(id)),
+    0,
+  );
+  metrics.event_redirect_documents = [...englishRoutes.htmlRouteIds]
+    .filter(id => !expectedRoutes.canonicalIds.has(id)).length
+    + [...frenchRoutes.htmlRouteIds]
+      .filter(id => !expectedRoutes.canonicalIds.has(id)).length;
+  metrics.non_event_documents = metrics.source_html_documents
+    - metrics.english_event_routes - metrics.french_event_routes;
+
+  check(
+    missingEnglish.length === 0,
+    `English event routes are missing: ${summarizeValues(missingEnglish)}`,
+  );
+  check(
+    extraEnglish.length === 0,
+    `English event routes are stale or unowned: ${summarizeValues(extraEnglish)}`,
+  );
+  check(
+    missingFrench.length === 0,
+    `French event routes are missing: ${summarizeValues(missingFrench)}`,
+  );
+  check(
+    extraFrench.length === 0,
+    `French event routes are stale or unowned: ${summarizeValues(extraFrench)}`,
+  );
+  check(
+    englishRoutes.missingIndexIds.length === 0,
+    `English event route directories lack index.html: ${summarizeValues(englishRoutes.missingIndexIds)}`,
+  );
+  check(
+    frenchRoutes.missingIndexIds.length === 0,
+    `French event route directories lack index.html: ${summarizeValues(frenchRoutes.missingIndexIds)}`,
+  );
+
+  const canonicalPaths = [...expectedRoutes.canonicalIds].flatMap(id => [
+    `polymythseminars/events/${id}/index.html`,
+    `polymythseminars/fr/events/${id}/index.html`,
+  ]);
+  const aliasPaths = [
+    ...[...expectedRoutes.englishAliases.keys()]
+      .map(id => `polymythseminars/events/${id}/index.html`),
+    ...[...expectedRoutes.frenchAliases.keys()]
+      .map(id => `polymythseminars/fr/events/${id}/index.html`),
+  ];
+  const missingCanonicalDocuments = canonicalPaths.filter(relative => !documentSet.has(relative));
+  const redirectCanonicalDocuments = canonicalPaths.filter(relative => redirectSet.has(relative));
+  const missingAliasDocuments = aliasPaths.filter(relative => !documentSet.has(relative));
+  const interactiveAliasDocuments = aliasPaths
+    .filter(relative => documentSet.has(relative) && !redirectSet.has(relative));
+  check(
+    missingCanonicalDocuments.length === 0,
+    `canonical event documents are missing: ${summarizeValues(missingCanonicalDocuments)}`,
+  );
+  check(
+    redirectCanonicalDocuments.length === 0,
+    `canonical event documents became redirects: ${summarizeValues(redirectCanonicalDocuments)}`,
+  );
+  check(
+    missingAliasDocuments.length === 0,
+    `event alias documents are missing: ${summarizeValues(missingAliasDocuments)}`,
+  );
+  check(
+    interactiveAliasDocuments.length === 0,
+    `event alias documents are not redirects: ${summarizeValues(interactiveAliasDocuments)}`,
+  );
+  check(metrics.non_event_documents > 0, 'non-event source HTML inventory is empty');
+} catch (error) {
+  failures.push(`Polymythcal event-route inventory is invalid: ${error.message}`);
+}
 
 const keyboardGate = read('scripts/verify-keyboard-navigation.js');
 const inputGate = read('scripts/verify-visible-input-labels.js');
@@ -252,6 +328,7 @@ const report = {
     'resolved-skip-links',
     'image-alt-contract',
     'static-button-names',
+    'dynamic-canonical-and-legacy-event-route-inventory',
     'existing-keyboard-input-and-browser-accessibility-gates',
   ],
   native_execution_status: 'requires-native-operating-systems-physical-devices-and-human-observation',

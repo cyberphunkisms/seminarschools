@@ -13,11 +13,17 @@ if (!match) throw new Error('Missing #graph-data payload');
 
 const graph = JSON.parse(match[2]);
 const coherenceId = '/polymyth/coherence/';
+const obsoleteMarginaliaReviewId = '/marginalia/example-review/';
+graph.nodes = graph.nodes.filter(node => node.id !== obsoleteMarginaliaReviewId);
+graph.edges = graph.edges.filter(edge => (
+  edge.source !== obsoleteMarginaliaReviewId
+  && edge.target !== obsoleteMarginaliaReviewId
+));
 const existing = graph.nodes.find(node => node.id === coherenceId);
 const coherence = {
   id: coherenceId,
   title: 'Polymyth Coherence',
-  desc: 'Reusable Internal–Mezo–External audit instrument and canonical workbook.',
+  desc: 'Blank Internal–Mezo–External assessment instrument with a model-neutral application protocol; case results remain separate.',
   category: 'framework',
   in: 2,
   out: 2,
@@ -26,9 +32,12 @@ if (existing) Object.assign(existing, coherence);
 else graph.nodes.push(coherence);
 
 const countUpdates = new Map([
+  ['/', {in: 23}],
+  ['/florilegium/', {in: 10}],
+  ['/marginalia/', {in: 8}],
   ['/polymyth/methodologylist/', {in: 11, out: 8}],
-  ['/polymyth/sitemap/', {in: 14, out: 41}],
-  ['/polymyth/sitemap/graph/', {out: 40}],
+  ['/polymyth/sitemap/', {in: 14, out: 40}],
+  ['/polymyth/sitemap/graph/', {out: 39}],
 ]);
 for (const node of graph.nodes) {
   const update = countUpdates.get(node.id);

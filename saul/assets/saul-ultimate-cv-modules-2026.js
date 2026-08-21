@@ -24,7 +24,6 @@
   const focusPdf = focusPanel.querySelector("[data-focus-pdf]");
   const focusPrint = focusPanel.querySelector("[data-focus-print]");
   const rows = [...root.querySelectorAll("[data-experience-id]")];
-  const evidenceItems = [...root.querySelectorAll("[data-evidence-id]")];
   const sections = [...root.querySelectorAll("[data-experience-section]")];
   const skillItems = [...root.querySelectorAll("[data-core-skill]")];
   const skillHeading = root.querySelector("#coreSkillsHeading");
@@ -70,13 +69,6 @@
       if (matches) count += 1;
     });
 
-    evidenceItems.forEach((item) => {
-      const tags = (item.dataset.focus || "").split(/\s+/).filter(Boolean);
-      const matches =
-        selected.length === 0 || tags.some((tag) => selectedSet.has(tag));
-      setFilteredOut(item, !matches);
-    });
-
     sections.forEach((section) => {
       const sectionRows = [...section.querySelectorAll("[data-experience-id]")];
       const shown = sectionRows.filter(
@@ -113,7 +105,7 @@
     if (summary) {
       if (selected.length === 0) {
         summary.textContent =
-          "Select one or more fields to narrow the evidence, skills & work history below.";
+          "Select one or more fields to narrow the skills and work history below.";
       } else if (selected.length === 1) {
         summary.textContent = moduleById.get(selected[0])?.summary || "";
       } else {
@@ -124,14 +116,13 @@
     }
     if (focusPdf && focusPrint) {
       if (selected.length <= 1) {
-        const focusId = selected[0] || "general";
-        const module = moduleById.get(focusId);
-        focusPdf.href =
-          module?.pdf ||
-          `/saul/downloads/saul-karim-nassau-${focusId}-cv.pdf`;
-        focusPdf.textContent = selected.length
-          ? `Download ${module?.short_label || focusId} PDF`
-          : "Download general CV";
+        const focusId = selected[0];
+        const module = focusId ? moduleById.get(focusId) : null;
+        focusPdf.href = module?.pdf ||
+          "/saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-protonmail.pdf";
+        focusPdf.textContent = module
+          ? `Download ${module.short_label || focusId} PDF`
+          : "Download professional CV";
         focusPdf.hidden = false;
         focusPrint.hidden = true;
       } else {

@@ -200,6 +200,7 @@
         ].join(' '));
         return {
           element: entryElement,
+          shell: entryElement.closest('.entry-shell'),
           format: entryElement.dataset.format || '',
           grade: entryElement.dataset.grade || '',
           subject: entryElement.dataset.subject || '',
@@ -241,7 +242,7 @@
   };
   var announceTimer = null;
   var expandLabelFrame = null;
-  var storageWritable = true;
+  var LEGACY_FILTER_STORAGE_KEYS = ['tr-filters-v4', 'tr-filters-v3', 'tr-filters-v2'];
 
   var counts = {
     subjects: {},
@@ -410,21 +411,11 @@
     });
   }
 
-  function persistLocalState() {
+  function clearLegacyLocalState() {
     try {
-      localStorage.setItem('tr-filters-v4', JSON.stringify({
-        search: state.search,
-        formats: Array.from(state.formats),
-        grades: Array.from(state.grades),
-        subjects: Array.from(state.subjects),
-        curricula: Array.from(state.curricula),
-        languages: Array.from(state.languages)
-      }));
-      storageWritable = true;
-    } catch (error) {
-      storageWritable = false;
-    }
-    controls.dataset.persistence = storageWritable ? 'device-and-url' : 'url-only';
+      LEGACY_FILTER_STORAGE_KEYS.forEach(function (key) { localStorage.removeItem(key); });
+    } catch (error) {}
+    controls.dataset.persistence = 'url-only';
   }
 
   function buildStatePath() {
@@ -451,7 +442,6 @@
   }
 
   function saveState() {
-    persistLocalState();
     var path = buildStatePath();
     try {
       history.replaceState(null, '', path);
@@ -475,6 +465,7 @@
         category.entries.forEach(function (entry) {
           var matches = entryMatches(entry, queryTokens, null, searchMatchCache);
           entry.element.hidden = !matches;
+          if (entry.shell) entry.shell.hidden = !matches;
           if (matches) category.matches += 1;
         });
         category.element.hidden = category.matches === 0;
@@ -585,55 +576,23 @@
     return false;
   }
 
-  function restoreState(options) {
-    options = options || {};
+  function restoreState() {
     resetState();
-    var restored = false;
     try {
       var params = new URLSearchParams(location.search);
-      var supportedQuery = ['q', 'subject', 'grade', 'format', 'curriculum', 'language'].some(function (key) {
-        return params.has(key);
+      state.search = params.get('q') || '';
+      ['subject', 'grade', 'format', 'curriculum', 'language'].forEach(function (key) {
+        var value = params.get(key);
+        if (!value) return;
+        var set = key === 'subject' ? state.subjects :
+          key === 'grade' ? state.grades :
+          key === 'format' ? state.formats :
+          key === 'curriculum' ? state.curricula : state.languages;
+        value.split(',').filter(function (item) {
+          return validFilterValue(key, item);
+        }).forEach(function (item) { set.add(item); });
       });
-      if (supportedQuery) {
-        state.search = params.get('q') || '';
-        ['subject', 'grade', 'format', 'curriculum', 'language'].forEach(function (key) {
-          var value = params.get(key);
-          if (!value) return;
-          var set = key === 'subject' ? state.subjects :
-            key === 'grade' ? state.grades :
-            key === 'format' ? state.formats :
-            key === 'curriculum' ? state.curricula : state.languages;
-          value.split(',').filter(function (item) {
-            return validFilterValue(key, item);
-          }).forEach(function (item) { set.add(item); });
-        });
-        restored = true;
-      }
     } catch (error) {}
-
-    if (!restored && options.allowLocal !== false) {
-      try {
-        var saved = JSON.parse(
-          localStorage.getItem('tr-filters-v4') ||
-          localStorage.getItem('tr-filters-v3') ||
-          localStorage.getItem('tr-filters-v2') ||
-          'null'
-        );
-        if (saved && typeof saved === 'object' && !Array.isArray(saved)) {
-          state.search = typeof saved.search === 'string' ? saved.search : '';
-          (Array.isArray(saved.formats) ? saved.formats : []).filter(function (value) { return validFilterValue('format', value); })
-            .forEach(function (value) { state.formats.add(value); });
-          (Array.isArray(saved.grades) ? saved.grades : []).filter(function (value) { return validFilterValue('grade', value); })
-            .forEach(function (value) { state.grades.add(value); });
-          (Array.isArray(saved.subjects) ? saved.subjects : []).filter(function (value) { return validFilterValue('subject', value); })
-            .forEach(function (value) { state.subjects.add(value); });
-          (Array.isArray(saved.curricula) ? saved.curricula : []).filter(function (value) { return validFilterValue('curriculum', value); })
-            .forEach(function (value) { state.curricula.add(value); });
-          (Array.isArray(saved.languages) ? saved.languages : []).filter(function (value) { return validFilterValue('language', value); })
-            .forEach(function (value) { state.languages.add(value); });
-        }
-      } catch (error) {}
-    }
     searchInput.value = state.search;
   }
 
@@ -803,7 +762,7 @@
   window.addEventListener('popstate', function () {
     window.clearTimeout(searchTimer);
     searchTimer = null;
-    restoreState({ allowLocal: false });
+    restoreState();
     applyFilters({ skipSave: true });
   });
 
@@ -816,14 +775,16 @@
       window.cancelAnimationFrame(expandLabelFrame);
       expandLabelFrame = null;
     }
-    state.search = searchInput.value.trim();
-    persistLocalState();
   });
   window.addEventListener('pageshow', function (event) {
-    if (event.persisted) flushSearchAndApply();
+    if (!event.persisted) return;
+    restoreState();
+    applyFilters({ skipSave: true });
   });
 
-  restoreState({ allowLocal: true });
-  // Normalize restored local preferences into the shareable URL.
-  applyFilters();
+  clearLegacyLocalState();
+  restoreState();
+  // Initial navigation is read-only: explicit query state is authoritative and
+  // a clean /teacherresources/ URL always opens the complete catalog.
+  applyFilters({ skipSave: true });
 })();

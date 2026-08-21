@@ -8,11 +8,12 @@
 const fs = require('fs');
 const path = require('path');
 const {parseSeedWithAddenda} = require('./lib/parse-seed-with-addenda');
+const {generatedAt} = require('./lib/deterministic-timestamp');
 
 const argv = process.argv.slice(2);
 const dryRun = argv.includes('--dry-run');
 const dateArg = argv.find(a => /^\d{4}-\d{2}-\d{2}$/.test(a));
-const BUILD_DATE = dateArg || new Date().toISOString().slice(0, 10);
+const BUILD_DATE = dateArg || generatedAt().slice(0, 10);
 
 const ROOT = path.resolve(__dirname, '..');
 const HTML_PATH = path.join(ROOT, 'polymyth/methodologylist/index.html');

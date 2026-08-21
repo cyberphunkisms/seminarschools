@@ -28,6 +28,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { resolveSiteBuildDate } = require('./polymythcal-build-date');
 
 const argv = process.argv.slice(2);
 const dryRun = argv.includes('--dry-run');
@@ -605,7 +606,7 @@ function studentBody(entry) {
 // ------------------------------------------------------------------
 // Build content
 // ------------------------------------------------------------------
-const today = new Date().toISOString().slice(0, 10);
+const today = resolveSiteBuildDate({ root: projectRoot });
 const out = [];
 
 out.push('========================================================================');

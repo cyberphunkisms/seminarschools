@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Seminar Schools//Polymythcal//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:13db3d4302ba2a6d96c4@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART;VALUE=DATE:20270421
+DTEND;VALUE=DATE:20270424
+SUMMARY:Séminaire des profs 2027
+LOCATION:Assemblée nationale du Québec
+DESCRIPTION:Three-day parliamentary and civic-education seminar for teach
+ ers\, pedagogical advisers\, school spiritual-care and community-involve
+ ment staff\, and education students.
+URL:https://seminarschools.com/polymythseminars/events/quebec-seminaire-d
+ es-profs-2027/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

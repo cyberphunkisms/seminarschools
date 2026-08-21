@@ -135,21 +135,23 @@ requireEntryText(coreMap, 'b', 'SEMANTIC-AUTHORITY PRECEDENCE.', 'the active pre
 requireEntryText(coreMap, 'b', 'They override deduction-first, commit-or-ask, execute-dont-equivocate, ORGANIZE-MINE, and the AI-conduct naming exemption on that semantic axis.', 'the conflicting-rule precedence');
 requireEntryText(coreMap, 'b', 'None converts AI understanding into authorial settlement.', 'the semantic-authority ceiling');
 
-requireText('CHARTER.txt', 'Analysis, diagnosis,\ncritique, audit, comparison, recommendation, and questions authorize read-only\nwork on that object.', 'the bootstrap analysis boundary');
-requireText('CHARTER.txt', 'Authorization never radiates between objects.', 'the bootstrap object boundary');
-requireText('CHARTER.txt', 'Authorization to act is not authority to settle meaning.', 'the bootstrap action/meaning boundary');
-requireText('CHARTER.txt', 'Quoting, questioning, criticizing, or rejecting AI\nlanguage does not adopt it.', 'the bootstrap quotation boundary');
-requireText('CHARTER.txt', 'Hardening preserves the accepted meaning, scope, and\nwhich cases pass.', 'the bootstrap hardening boundary');
-requireText('CHARTER.txt', 'A verification test enforces settled\ndoctrine. It cannot create doctrine.', 'the bootstrap test boundary');
-requireText('CHARTER.txt', 'A settled multi-step directive executes fully.', 'the bootstrap settled-multi-step rule');
-requireText('CHARTER.txt', 'Understanding, deduction, organization authority, and permission to\nedit never settle semantic content.', 'the bootstrap authorship boundary');
-requireText('CHARTER.txt', 'constraint\nbinds later work and does not authorize it.', 'the bootstrap constraint boundary');
-requireText('CHARTER.txt', 'Stop closes the action gate immediately', 'the bootstrap stop gate');
+requireText('CHARTER.txt', 'Question/deliberation/review/audit/compare/critique/run-through => answer/one analytical move only.', 'the portable CORE questions and analysis-only boundary');
+requireText('CHARTER.txt', 'Directive => named scope/target.', 'the portable CORE named-target boundary');
+requireText('CHARTER.txt', 'Any file, memory, artifact, publication, deployment, or adjacent-object mutation requires explicit target permission.', 'the portable CORE no-mutation boundary');
+requireText('CHARTER.txt', 'No authority radiation.', 'the portable CORE object boundary');
+requireText('CHARTER.txt', 'Correction supersedes conflict without choosing replacement; constraint binds later authorized work.', 'the portable CORE correction and constraint boundary');
+requireText('CHARTER.txt', 'Stop=hold.', 'the portable CORE stop gate');
+for (const [needle, label] of [
+  ['Permission to update, fix, harden, implement, enforce, or continue does not ratify assistant wording', 'the expanded CORE action/meaning boundary'],
+  ['Explicit adoption of a clearly identified earlier proposal makes it accepted from that point forward.', 'the expanded CORE adoption boundary'],
+  ['"Go," "do it," "yes," and similar assent authorize only the concrete, fully specified action in the immediate context.', 'the expanded CORE narrow-assent rule'],
+  ['Personal Rules, persistent memory, existing project files, and newly created files are separate mutation targets.', 'the expanded CORE separate-target rule'],
+]) requireText('polymyth/methodologylist-coreplus.txt', needle, label);
 forbidText('CHARTER.txt', 'Pointing at an error means fix that\nerror.', 'the old bootstrap diagnosis-as-authorization rule');
 
-requireText('scripts/regen-methodologylist-txt.js', 'Authorization\n  never radiates between objects.', 'the text-mirror object boundary');
-requireText('scripts/regen-methodologylist-txt.js', 'Permission to update, fix, harden, implement, or enforce is not semantic\n  settlement.', 'the text-mirror semantic-authority gate');
-requireText('scripts/regen-methodologylist-txt.js', 'A test cannot create doctrine.', 'the text-mirror test boundary');
+requireText('scripts/regen-methodologylist-txt.js', "'framework-core', 'coreplus'", 'portable CORE-first section order');
+requireText('scripts/regen-methodologylist-txt.js', 'Opening or reading it has no independent activation effect.', 'the inert text-mirror boundary');
+requireText('scripts/regen-methodologylist-txt.js', 'syncCorePersonalRules', 'canonical portable CORE synchronization');
 requireText('scripts/build-ai-access-pack.js', 'Authorization never radiates between objects.', 'the AI access-pack object boundary');
 requireText('scripts/build-ai-access-pack.js', 'Permission to update, fix, harden, implement, or enforce is not semantic settlement.', 'the AI access-pack semantic-authority gate');
 requireText('scripts/build-ai-access-pack.js', 'A verification test enforces settled doctrine and cannot create doctrine.', 'the AI access-pack test boundary');

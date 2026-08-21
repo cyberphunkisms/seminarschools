@@ -57,7 +57,8 @@ assert(before(cal, 'const claimKey', 'await sendResendEmail'), 'Cal.com webhook 
 
 assert(netlify.includes('from = "/api/stripe-payment-webhook"'), 'Netlify is missing the Stripe webhook route.');
 assert(netlify.includes('[functions]'), 'Netlify functions directory is not configured in the [functions] section.');
-assert(netlify.includes('publish = "public"') && (/build-public-deploy\.js/.test(netlify) || (/command\s*=\s*"npm run build"/.test(netlify) && /build-public-deploy\.js/.test(packageDoc.scripts?.build || ''))), 'Netlify publish directory must be generated /public through the canonical build so the full zip root remains archival and safe.');
+const canonicalBuild = `${packageDoc.scripts?.build || ''}\n${packageDoc.scripts?.['build:locked'] || ''}`;
+assert(netlify.includes('publish = "public"') && (/build-public-deploy\.js/.test(netlify) || (/command\s*=\s*"npm run build"/.test(netlify) && /build-public-deploy\.js/.test(canonicalBuild))), 'Netlify publish directory must be generated /public through the canonical build so the full zip root remains archival and safe.');
 assert(env.includes('STRIPE_WEBHOOK_SECRET='), 'Environment example is missing STRIPE_WEBHOOK_SECRET.');
 assert(setup.includes('/api/stripe-payment-webhook'), 'Setup guide is missing the Stripe webhook step.');
 assert(setup.includes('same email as Stripe Checkout'), 'Setup guide does not document attendee-email matching.');

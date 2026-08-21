@@ -5,6 +5,7 @@ import json
 import sys
 import tempfile
 import unittest
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
@@ -413,6 +414,53 @@ class StructuredSourceHealthTests(unittest.TestCase):
             1,
         )
 
+    def test_candidate_loss_accounting_closes_exactly(self):
+        source = self.source("accounted")
+        soon = (datetime.now(timezone.utc) + timedelta(days=10)).isoformat()
+        too_late = (datetime.now(timezone.utc) + timedelta(days=181)).isoformat()
+        base = {
+            "title": "One public lecture",
+            "date": soon,
+            "source_url": source["events_url"],
+            "type": "lecture",
+            "confidence": 90,
+        }
+        result = CrawlResult(
+            source_id="accounted",
+            status="success",
+            records=[
+                base,
+                {**base, "confidence": 70},
+                {**base, "title": ""},
+                {**base, "title": "Too late", "date": too_late},
+            ],
+            fetches=[FetchOutcome(
+                url=source["events_url"],
+                status="success",
+                body="<p>Events</p>",
+                http_status=200,
+            )],
+        )
+        with mock.patch.object(structured_harvest, "crawl_source", return_value=result):
+            payload = structured_harvest.run([source], max_workers=1)
+        accounting = payload["coverage_accounting"]
+        self.assertEqual(accounting["records_parsed"], 4)
+        self.assertEqual(accounting["qualification_rejected"], 2)
+        self.assertEqual(accounting["records_qualified_before_deduplication"], 2)
+        self.assertEqual(accounting["duplicates_suppressed"], 1)
+        self.assertEqual(accounting["records_published"], 1)
+        self.assertEqual(
+            accounting["records_parsed"],
+            accounting["qualification_rejected"] + accounting["records_qualified_before_deduplication"],
+        )
+        self.assertEqual(
+            accounting["records_qualified_before_deduplication"],
+            accounting["duplicates_suppressed"] + accounting["records_published"],
+        )
+        row = payload["source_yields"][0]
+        for key, value in accounting.items():
+            self.assertEqual(row[key], value)
+
     def test_not_modified_without_retained_observation_is_not_authoritative(self):
         source = self.source("not-modified")
         source_yields = [
@@ -678,6 +726,18 @@ class WorkflowContractTests(unittest.TestCase):
         )
         self.assertLess(discovery, diagnostics)
         self.assertLess(diagnostics, publication)
+
+    def test_coverage_report_always_runs_and_is_preserved(self):
+        discovery = self.workflow.index("- name: Run deterministic priority structured discovery")
+        coverage = self.workflow.index("- name: Build deterministic harvest coverage report")
+        diagnostics = self.workflow.index("- name: Preserve structured source-health diagnostics")
+        self.assertLess(discovery, coverage)
+        self.assertLess(coverage, diagnostics)
+        coverage_step = self.workflow[coverage:diagnostics]
+        self.assertIn("if: always()", coverage_step)
+        self.assertIn("scripts/build-polymythcal-harvest-coverage-report.py", coverage_step)
+        self.assertIn("/tmp/polymythcal-structured.json", self.workflow)
+        self.assertIn("/tmp/polymythcal-harvest-coverage.json", self.workflow)
 
 
 if __name__ == "__main__":

@@ -9,12 +9,16 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from difflib import SequenceMatcher
 from pathlib import Path
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
+INVENTORY_CONTRACT = json.loads(
+    (ROOT / 'data' / 'polymythcal-inventory-contract.json').read_text(encoding='utf-8')
+)
+MINIMUM_CANONICAL_EVENTS = int(INVENTORY_CONTRACT['minimum_canonical_events'])
 RETIRED_DUPLICATE_IDS = {
     '98410ad8a93b',
     '9da10dbbb785',
@@ -22,14 +26,36 @@ RETIRED_DUPLICATE_IDS = {
     'caribana-official-launch-2026-2026-06-13',
     'caribana-grand-parade-2026-08-01',
 }
+CARIBANA_PARENT_EXPECTATIONS = {
+    # The Aug. 14 Set 10 reconstruction preserves the authoritative source
+    # records as found; it does not invent a festival hierarchy. Only the two
+    # inherited seminar-harvest occurrences carry an explicit parent link.
+    '275a3d6c2cb5': None,
+    'edb124435d99': None,
+    'caribana-junior-king-queen-showcase-2026-07-11': None,
+    'ocpa-calypso-showcase-caribana-2026-07-25': '275a3d6c2cb5',
+    'king-queen-showcase-caribana-2026-07-30': '275a3d6c2cb5',
+    'caribana-king-queen-showcase-2026-07-31': None,
+    '119d86af47de': None,
+    'caribana-pan-alive-closing-day-2026-08-02': None,
+}
 
 
 def load_module(name: str, relative: str):
-    spec = importlib.util.spec_from_file_location(name, ROOT / relative)
-    module = importlib.util.module_from_spec(spec)
-    assert spec.loader is not None
-    spec.loader.exec_module(module)
-    return module
+    path = ROOT / relative
+    scripts_path = str(path.parent)
+    added_scripts_path = scripts_path not in sys.path
+    if added_scripts_path:
+        sys.path.insert(0, scripts_path)
+    try:
+        spec = importlib.util.spec_from_file_location(name, path)
+        module = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        spec.loader.exec_module(module)
+        return module
+    finally:
+        if added_scripts_path:
+            sys.path.remove(scripts_path)
 
 
 class FeedClassificationTests(unittest.TestCase):
@@ -64,6 +90,27 @@ class FeedClassificationTests(unittest.TestCase):
             'title': 'Public art gallery tour',
             'type': 'community',
             'secondary_types': [],
+        }))
+
+    def test_civic_feed_does_not_treat_calendar_month_as_a_march(self):
+        for title, description in (
+            ('Kids Write 4 Kids', 'Submissions close March 31, 2027.'),
+            ('Inklings Book Contest', 'The January to March submission window.'),
+            ('March Writing Contest', 'A seasonal student competition.'),
+        ):
+            event = {
+                'title': title,
+                'description': description,
+                'type': 'contest',
+                'secondary_types': [],
+                'record_kind': 'opportunity',
+            }
+            self.assertFalse(self.feeds.FOCUSES['civic'][2](event), title)
+        self.assertTrue(self.feeds.FOCUSES['civic'][2]({
+            'title': 'Climate justice march',
+            'type': 'gathering',
+            'secondary_types': [],
+            'record_kind': 'event',
         }))
 
 
@@ -133,16 +180,35 @@ class RecurrenceTests(unittest.TestCase):
             end = datetime.fromisoformat(record['end_date'])
             self.assertEqual(end - start, timedelta(hours=1))
 
+    def test_interval_parser_normalizes_aware_and_date_only_endpoints(self):
+        event = {
+            'date': '2026-08-14T17:00:00-04:00',
+            'end_date': '2026-08-16',
+            'timezone': 'America/New_York',
+        }
+        start, end = self.lifecycle.event_interval(event)
+        self.assertEqual(start, datetime(2026, 8, 14, 21, 0, tzinfo=timezone.utc))
+        self.assertEqual(end, datetime(2026, 8, 16, 4, 0, tzinfo=timezone.utc))
+        self.assertIs(start.tzinfo, timezone.utc)
+        self.assertIs(end.tzinfo, timezone.utc)
+
 
 class LegacyIcsTests(unittest.TestCase):
     def test_explicit_legacy_ids_receive_canonical_ics_content(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            (root / 'scripts').mkdir()
-            shutil.copy2(
-                ROOT / 'scripts/build-polymythcal-audit13.py',
-                root / 'scripts/build-polymythcal-audit13.py',
-            )
+            for relative in (
+                'scripts/build-polymythcal-audit13.py',
+                'scripts/geometry_asset_version.py',
+                'scripts/apply-sitewide-type-zoom-link.js',
+                'data/geometry-route-contracts.json',
+                'css/alive.css',
+                'js/mandala.js',
+                'js/indra.js',
+            ):
+                destination = root / relative
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(ROOT / relative, destination)
             (root / 'polymythseminars').mkdir()
             (root / 'RELEASE_MANIFEST.json').write_text(json.dumps({
                 'generated_at': '2026-07-26T12:00:00-04:00',
@@ -191,6 +257,13 @@ class LegacyIcsTests(unittest.TestCase):
 
 
 class CurrentDataConsolidationTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.lifecycle = load_module(
+            'audit47_current_data_lifecycle',
+            'scripts/reconcile_polymythcal_lifecycle.py',
+        )
+
     def setUp(self):
         self.payloads = [
             json.loads((ROOT / relative).read_text(encoding='utf-8'))
@@ -206,7 +279,7 @@ class CurrentDataConsolidationTests(unittest.TestCase):
             events = payload['events']
             by_id = {event['id']: event for event in events}
             self.assertEqual(RETIRED_DUPLICATE_IDS & set(by_id), set())
-            self.assertEqual(len(events), 833)
+            self.assertGreaterEqual(len(events), MINIMUM_CANONICAL_EVENTS)
 
             self.assertTrue({
                 '98410ad8a93b',
@@ -232,19 +305,29 @@ class CurrentDataConsolidationTests(unittest.TestCase):
                     event.get('parent_id'),
                     'caribana-official-launch-2026-2026-06-13',
                 )
-            for event_id in (
-                'edb124435d99',
-                'caribana-junior-king-queen-showcase-2026-07-11',
-                'ocpa-calypso-showcase-caribana-2026-07-25',
-                'king-queen-showcase-caribana-2026-07-30',
-                'caribana-king-queen-showcase-2026-07-31',
-                '119d86af47de',
-                'caribana-pan-alive-closing-day-2026-08-02',
-            ):
-                self.assertEqual(by_id[event_id].get('parent_id'), '275a3d6c2cb5')
+    def test_optional_authoritative_parent_links_are_preserved(self):
+        for payload in self.payloads:
+            by_id = {event['id']: event for event in payload['events']}
+            for event_id, expected_parent in CARIBANA_PARENT_EXPECTATIONS.items():
+                self.assertIn(event_id, by_id)
+                self.assertEqual(by_id[event_id].get('parent_id'), expected_parent)
+                if expected_parent is not None:
+                    self.assertIn(expected_parent, by_id)
+                    self.assertNotEqual(event_id, expected_parent)
 
     def test_no_high_similarity_same_source_overlapping_duplicates_remain(self):
         events = self.payloads[0]['events']
+
+        reconciled, collapse_changes = self.lifecycle.collapse_shadow_duplicates(
+            events,
+            include_changes=True,
+        )
+        self.assertEqual(len(reconciled), 2_088)
+        self.assertEqual(collapse_changes, [])
+        self.assertEqual(
+            [event['id'] for event in reconciled],
+            [event['id'] for event in events],
+        )
 
         def source_key(event):
             parsed = urlsplit(str(event.get('source_url') or ''))
@@ -254,16 +337,65 @@ class CurrentDataConsolidationTests(unittest.TestCase):
             )
 
         def interval(event):
-            start = datetime.fromisoformat(str(event['date']).replace('Z', '+00:00'))
-            end = datetime.fromisoformat(
-                str(event.get('end_date') or event['date']).replace('Z', '+00:00')
+            start = self.lifecycle.parse_event_datetime(event, event['date'])
+            end = self.lifecycle.parse_event_datetime(
+                event,
+                event.get('end_date') or event['date'],
             )
+            self.assertIsNotNone(start)
+            self.assertIsNotNone(end)
+            self.assertIsNotNone(start.utcoffset())
+            self.assertIsNotNone(end.utcoffset())
             return min(start, end), max(start, end)
 
         def title_key(event):
             value = str(event.get('title') or '').casefold()
             value = self.lifecycle_words(value)
             return value
+
+        def structurally_related(first, second):
+            first_parent = str(first.get('parent_id') or '')
+            second_parent = str(second.get('parent_id') or '')
+            return (
+                first_parent == second['id']
+                or second_parent == first['id']
+                or (first_parent and first_parent == second_parent)
+            )
+
+        def opportunity_category(event):
+            """Return the named category, excluding catalog/deadline boilerplate."""
+            if event.get('record_kind') != 'opportunity':
+                return ()
+
+            import re
+
+            generic = {
+                'application', 'applications', 'call', 'calls', 'competition',
+                'competitions', 'contest', 'contests', 'deadline', 'deadlines',
+                'grant', 'grants', 'submission', 'submissions',
+            }
+            for field in ('organizer', 'source_name', 'opportunity_kind', 'type'):
+                generic.update(
+                    re.findall(r'[a-z0-9]+', str(event.get(field) or '').casefold())
+                )
+
+            return tuple(
+                token
+                for token in re.findall(
+                    r'[a-z0-9]+',
+                    str(event.get('title') or '').casefold(),
+                )
+                if token not in generic and not re.fullmatch(r'20\d{2}', token)
+            )
+
+        def distinct_named_opportunity_categories(first, second):
+            first_category = opportunity_category(first)
+            second_category = opportunity_category(second)
+            return bool(
+                first_category
+                and second_category
+                and first_category != second_category
+            )
 
         suspicious = []
         for index, first in enumerate(events):
@@ -273,6 +405,10 @@ class CurrentDataConsolidationTests(unittest.TestCase):
                 if second.get('confirmation_status') != 'confirmed':
                     continue
                 if source_key(first) != source_key(second):
+                    continue
+                if structurally_related(first, second):
+                    continue
+                if distinct_named_opportunity_categories(first, second):
                     continue
                 first_start, first_end = interval(first)
                 second_start, second_end = interval(second)

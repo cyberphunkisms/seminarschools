@@ -26,8 +26,8 @@ const MARKDOWN = path.join(
   'WEBSITE_AUDIT49_TECHNICAL_EFFICIENCY_RESILIENCE_REPORT_2026-07-26.md',
 );
 const EXPECTED_RELEASE =
-  '2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final';
-const EXPECTED_ASSET = '20260728-audit53';
+  '2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final';
+const EXPECTED_ASSET = '20260815-sets1-15-synthesis';
 const EXPECTED_PACKAGE = '1.0.6';
 
 const COMPONENTS = {
@@ -65,6 +65,7 @@ const AUDIT49_ADDITIONAL_EXTERNAL_ROWS = [
 
 const EXPECTED_WEEKLY_WORKFLOWS = {
   '.github/workflows/audit-external-links.yml': '17 10 * * 0',
+  '.github/workflows/browser-assurance.yml': '23 7 * * 0',
   '.github/workflows/dependency-health.yml': '37 13 * * 1',
   '.github/workflows/scrape-festivals.yml': '42 9 * * 2',
   '.github/workflows/scrape-polymythcal-protests.yml': '18 8 * * 3',
@@ -475,6 +476,13 @@ check(
   'package selection does not retain its environment-independent pruning contract',
 );
 check(
+  packagingMetrics.selection?.deployer?.broad_post_descent_filtering_avoided === true
+    && packagingMetrics.selection?.source?.broad_post_descent_filtering_avoided === true
+    && packagingMetrics.selection?.deployer?.files_considered === undefined
+    && packagingMetrics.selection?.source?.files_considered === undefined,
+  'package selection serializes an environment-sensitive considered-file count',
+);
+check(
   packagingMetrics.sequential_failure_report_regression_passed === true,
   'sequential prerequisite failures can retain stale passing evidence',
 );
@@ -601,23 +609,33 @@ check(
 );
 check(
   governance.high_stakes_policy
-    === 'localized draft remains visibly subordinate to English until bilingual review',
+    === 'localized summaries remain visibly distinct from complete English detail and noindex until fully translated',
   'high-stakes translation policy changed',
 );
-const draftRoutes = (governance.routes || [])
-  .filter(route => route.status === 'draft-bilingual-review-required');
-const expectedDraftRoutes = [];
-for (const segment of ['intake', 'booking-success', 'policies', 'donate', 'teach']) {
+const summaryDetailRoutes = (governance.routes || [])
+  .filter(route => route.status === 'localized-summary-english-detail');
+const expectedSummaryDetailRoutes = [];
+for (const segment of [
+  'intake',
+  'booking-success',
+  'policies',
+  'scholarship',
+  'donate',
+  'teach',
+  'toronto-tutoring',
+  'cloud',
+  'flyer',
+]) {
   for (const locale of ['fr', 'zh-hant', 'zh-hans', 'fa']) {
-    expectedDraftRoutes.push(`/leizu/${locale}/${segment}/`);
+    expectedSummaryDetailRoutes.push(`/leizu/${locale}/${segment}/`);
   }
 }
 check(
-  draftRoutes.map(route => route.route).sort().join('\n')
-    === expectedDraftRoutes.sort().join('\n'),
-  'the 20 governed high-stakes Leizu routes changed',
+  summaryDetailRoutes.map(route => route.route).sort().join('\n')
+    === expectedSummaryDetailRoutes.sort().join('\n'),
+  'the 36 governed Leizu summary-plus-English-detail routes changed',
 );
-for (const route of draftRoutes) {
+for (const route of summaryDetailRoutes) {
   const relative = `${route.route.replace(/^\/|\/$/g, '')}/index.html`;
   const html = read(relative);
   const robots = html.match(
@@ -629,9 +647,9 @@ for (const route of draftRoutes) {
   );
   check(
     html.includes(
-      '<meta name="translation-status" content="draft-bilingual-review-required">',
+      '<meta name="translation-status" content="localized-summary-english-detail">',
     ),
-    `${relative} lost its bilingual-review status marker`,
+    `${relative} lost its summary-plus-English-detail status marker`,
   );
   check(
     html.includes(
@@ -731,7 +749,7 @@ for (const [name, command] of Object.entries(expectedPackageCommands)) {
   check(pkg.scripts?.[name] === command, `package command ${name} is not ${command}`);
 }
 
-const build = pkg.scripts?.build || '';
+const build = pkg.scripts?.['build:locked'] || '';
 const buildOrder = [
   'apply-audit49-release-stamp.js',
   'build-audit45-localized-routes.py',
@@ -782,6 +800,11 @@ check(
   !build.includes('verify-visible-geometry-browser.mjs'),
   'canonical Netlify build includes the browser-only geometry gate',
 );
+check(
+  build.split(' && ').filter(step => step === 'node scripts/verify-polymythcal-sets13-15-browser.js --dom-only').length === 1
+    && !build.split(' && ').includes('node scripts/verify-polymythcal-sets13-15-browser.js'),
+  'canonical Netlify build must run the Sets 13-15 DOM-only gate without Chromium',
+);
 
 const reusedPreparation = section(
   runner,
@@ -797,12 +820,15 @@ const checksSection = section(
 const canonicalCoverage = section(
   runner,
   'const canonicalBuildCoveredChecks = new Set([',
-  'const reusedBuildPreparationChecks = new Set([',
+  'const reusedBuildPreparationChecks = new Set(',
 );
 const reuseCoverage = section(
   runner,
-  'const reusedBuildPreparationChecks = new Set([',
+  'const reusedBuildPreparationChecks = new Set(',
   'const preparationCoveredChecks = reuseBuild',
+);
+const reuseCoverageIsDerived = reuseCoverage.includes(
+  'reusedBuildPreparation.filter(command => checks.includes(command))',
 );
 for (const token of [
   'verify-audit49-metadata-surface.js',
@@ -816,7 +842,7 @@ for (const token of [
   check(
     checksSection.includes(token)
       && canonicalCoverage.includes(token)
-      && reuseCoverage.includes(token),
+      && reuseCoverageIsDerived,
     `runner does not safely suppress duplicate or parallel execution of ${token}`,
   );
 }
@@ -825,6 +851,15 @@ check(
     && sequentialSection.indexOf('verify-build-idempotence.js')
       < sequentialSection.indexOf('verify-visible-geometry-browser.mjs'),
   'sequential runner does not enforce a fixed-point build before browser verification',
+);
+check(
+  count(runner, 'node scripts/verify-polymythcal-sets13-15-browser.js') === 1
+    && !runner.includes('node scripts/verify-polymythcal-sets13-15-browser.js --dom-only')
+    && sequentialSection.indexOf('verify-polymythcal-sets13-15-browser.js')
+      > sequentialSection.indexOf('verify-home-map-browser.js')
+    && sequentialSection.indexOf('verify-polymythcal-sets13-15-browser.js')
+      < sequentialSection.indexOf('verify-visible-geometry-browser.mjs'),
+  'sequential release runner does not enforce the full Sets 13-15 browser gate after home and before geometry',
 );
 check(
   sequentialSection.includes('verify-audit48-external-validation.js'),
@@ -889,6 +924,31 @@ check(
 );
 
 const uniqueFailures = [...new Set(failures)];
+function stableBuildPackagingMetrics(source) {
+  if (!source || typeof source !== 'object') return null;
+  const metrics = JSON.parse(JSON.stringify(source));
+  // The component report measures selected bytes after excluding exactly the
+  // five self-updating evidence files in this dependency cycle: its own JSON,
+  // this aggregate JSON and Markdown companion, and the release/futureproofing
+  // reports. Every file remains selected, hashed, and packaged, while this
+  // diagnostic total stays independent of a prior run's evidence size.
+  for (const selection of Object.values(metrics.selection || {})) {
+    if (!selection || typeof selection !== 'object') continue;
+    if (!Number.isInteger(selection.selected_bytes_excluding_generated_reports)) {
+      failures.push('Audit 49 package-byte metric lost its generated-report exclusion');
+    }
+    if (
+      selection.files_considered !== undefined
+      || selection.broad_post_descent_filtering_avoided !== true
+    ) {
+      failures.push('Audit 49 package-selection evidence retained an environment-sensitive considered-file count');
+    }
+  }
+  return metrics;
+}
+const aggregateBuildPackagingMetrics = stableBuildPackagingMetrics(
+  buildPackaging.metrics,
+);
 const componentSummary = {
   metadata: {
     path: COMPONENTS.metadata.path,
@@ -941,11 +1001,11 @@ const aggregate = {
     page_size_distribution: metadata.page_size_distribution || null,
     runtime: runtime.metrics || null,
     cache_policies: runtime.cache_policies || null,
-    build_packaging: buildPackaging.metrics || null,
+    build_packaging: aggregateBuildPackagingMetrics,
     audit48_external_validation: external.metrics || null,
     translation_governance: {
       governed_route_records: (governance.routes || []).length,
-      high_stakes_draft_routes: draftRoutes.length,
+      summary_english_detail_routes: summaryDetailRoutes.length,
       static_translation_metrics: translation.metrics || null,
     },
   },
@@ -974,8 +1034,8 @@ const aggregate = {
       governance.organizer_text_policy
         === 'preserve verbatim; mark source language; never silently translate',
     high_stakes_leizu_noindex_preserved:
-      draftRoutes.length === expectedDraftRoutes.length
-      && draftRoutes.every(route => {
+      summaryDetailRoutes.length === expectedSummaryDetailRoutes.length
+      && summaryDetailRoutes.every(route => {
         const relative = `${route.route.replace(/^\/|\/$/g, '')}/index.html`;
         const html = fs.existsSync(absolute(relative))
           ? fs.readFileSync(absolute(relative), 'utf8')
@@ -1115,7 +1175,7 @@ function renderMarkdown() {
     '',
     '- English remains the translation source of truth.',
     '- Organizer-authored titles and descriptions remain verbatim, visibly source-language bounded, and are never silently translated.',
-    `- All ${formatNumber(aggregate.metrics.translation_governance.high_stakes_draft_routes)} high-stakes Leizu intake, booking-confirmation, policy, donation, and teaching routes remain ${code('noindex,follow')} until bilingual review. Each route retains its governed English-source SHA-256.`,
+    `- All ${formatNumber(aggregate.metrics.translation_governance.summary_english_detail_routes)} Leizu summary-plus-English-detail routes remain ${code('noindex,follow')} until fully translated. Each route names the English detail and retains its governed English-source SHA-256.`,
     '- BB remains teacher-led and does not add a site-owned session runner.',
     '- Content harvesting, protest harvesting, festival harvesting, link auditing, and dependency health each remain exactly once weekly at their approved cron.',
     '- Frozen Audit 37 through Audit 43 gates remain active. Audit 49 does not rewrite historical evidence.',

@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-07-26T16:00:00Z",
+  "generated_at": "2026-08-15T16:00:00Z",
   "feeds": [
     {
       "id": "all",
       "label": "All listings",
       "label_en": "All listings",
       "label_fr": "Toutes les fiches",
-      "count": 833,
+      "count": 2088,
       "rss": "/polymythseminars/feed.xml",
       "ics": "/polymythseminars/feeds/all.ics"
     },
@@ -15,7 +15,7 @@
       "label": "Confirmed listings",
       "label_en": "Confirmed listings",
       "label_fr": "Fiches confirmées",
-      "count": 238,
+      "count": 1216,
       "rss": "/polymythseminars/feeds/confirmed.xml",
       "ics": "/polymythseminars/feeds/confirmed.ics"
     },
@@ -24,7 +24,7 @@
       "label": "Unconfirmed listings",
       "label_en": "Unconfirmed listings",
       "label_fr": "Fiches non confirmées",
-      "count": 595,
+      "count": 872,
       "rss": "/polymythseminars/feeds/unconfirmed.xml",
       "ics": "/polymythseminars/feeds/unconfirmed.ics"
     },
@@ -33,7 +33,7 @@
       "label": "Learning, lectures, workshops, and readings",
       "label_en": "Learning, lectures, workshops, and readings",
       "label_fr": "Apprentissage, conférences, ateliers et lectures",
-      "count": 342,
+      "count": 1015,
       "rss": "/polymythseminars/feeds/learning.xml",
       "ics": "/polymythseminars/feeds/learning.ics"
     },
@@ -42,7 +42,7 @@
       "label": "Arts, festivals, exhibitions, performances, and screenings",
       "label_en": "Arts, festivals, exhibitions, performances, and screenings",
       "label_fr": "Arts, festivals, expositions, spectacles et projections",
-      "count": 445,
+      "count": 736,
       "rss": "/polymythseminars/feeds/arts.xml",
       "ics": "/polymythseminars/feeds/arts.ics"
     },
@@ -51,7 +51,7 @@
       "label": "Civic action and community listings",
       "label_en": "Civic action and community listings",
       "label_fr": "Actions civiques et fiches communautaires",
-      "count": 133,
+      "count": 249,
       "rss": "/polymythseminars/feeds/civic.xml",
       "ics": "/polymythseminars/feeds/civic.ics"
     },
@@ -60,7 +60,7 @@
       "label": "Applications, calls, competitions, fellowships, and funding",
       "label_en": "Applications, calls, competitions, fellowships, and funding",
       "label_fr": "Candidatures, appels, concours, bourses et financement",
-      "count": 125,
+      "count": 532,
       "rss": "/polymythseminars/feeds/opportunities.xml",
       "ics": "/polymythseminars/feeds/opportunities.ics"
     },
@@ -69,7 +69,7 @@
       "label": "Toronto listings",
       "label_en": "Toronto listings",
       "label_fr": "Fiches de Toronto",
-      "count": 168,
+      "count": 622,
       "rss": "/polymythseminars/feeds/toronto.xml",
       "ics": "/polymythseminars/feeds/toronto.ics"
     },
@@ -78,7 +78,7 @@
       "label": "Kingston to Montréal corridor",
       "label_en": "Kingston to Montréal corridor",
       "label_fr": "Corridor de Kingston à Montréal",
-      "count": 215,
+      "count": 200,
       "rss": "/polymythseminars/feeds/corridor.xml",
       "ics": "/polymythseminars/feeds/corridor.ics"
     },
@@ -87,7 +87,7 @@
       "label": "Montréal listings",
       "label_en": "Montréal listings",
       "label_fr": "Fiches de Montréal",
-      "count": 71,
+      "count": 147,
       "rss": "/polymythseminars/feeds/montreal.xml",
       "ics": "/polymythseminars/feeds/montreal.ics"
     },
@@ -96,7 +96,7 @@
       "label": "French-language listings",
       "label_en": "French-language listings",
       "label_fr": "Fiches de langue française",
-      "count": 37,
+      "count": 85,
       "rss": "/polymythseminars/feeds/fr.xml",
       "ics": "/polymythseminars/feeds/fr.ics"
     }

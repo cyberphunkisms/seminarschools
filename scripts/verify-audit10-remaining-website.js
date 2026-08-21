@@ -35,7 +35,7 @@ const ultimate = read('saul/index.html').includes('data-cv-ultimate="true"');
 for (const token of [
   'minmax(min(100%,190px),1fr)',
   '@media(max-width:460px){.ss-foot',
-  'overflow-wrap:normal;word-break:normal;hyphens:none',
+  'width:fit-content;max-width:100%;overflow-wrap:anywhere;word-break:normal;hyphens:none',
   '<nav class="ss-col" aria-label="'
 ]) has('js/footer.js', token);
 

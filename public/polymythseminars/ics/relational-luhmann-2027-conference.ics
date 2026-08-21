@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Seminar Schools//Polymythcal//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:b20ebf577b9799aa3852@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART;VALUE=DATE:20270526
+DTEND;VALUE=DATE:20270529
+SUMMARY:Relational Luhmann Conference 2027
+LOCATION:UQAM
+DESCRIPTION:International social-theory conference at UQAM in Montréal\,
+  May 26–28\, 2027.
+URL:https://seminarschools.com/polymythseminars/events/relational-luhmann
+ -2027-conference/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

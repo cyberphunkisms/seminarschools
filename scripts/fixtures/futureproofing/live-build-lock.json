@@ -1,0 +1,4 @@
+{
+  "scenario": "A second wrapped process attempts to claim a delivery root while the first wrapper holds its OS advisory lease; owner PID metadata may be stale or namespace-invisible.",
+  "expected": "the second writer exits nonzero based on lease contention, never removes the active owner's diagnostics, and a resurrected stale owner directory is reclaimed after the lease is released"
+}

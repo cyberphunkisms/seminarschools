@@ -42,7 +42,7 @@ jobs:
       - name: Install calendar dependencies
         run: python3 -m pip install --disable-pip-version-check --requirement requirements-harvest.txt
       - name: Restore retained parsed-response cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: data/polymythcal-http-cache.json
           key: polymythcal-parsed-http-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
@@ -50,6 +50,11 @@ jobs:
             polymythcal-parsed-http-v1-${{ runner.os }}-
       - name: Run deterministic priority structured discovery
         run: python3 scripts/harvest_structured_events.py --output /tmp/polymythcal-structured.json --max-pages 8 --max-elapsed-seconds 45 --max-workers 8
+      - name: Detect mature per-source deterministic anomalies
+        run: python3 scripts/check-polymythcal-source-anomalies.py --stream seminars-deterministic --current /tmp/polymythcal-structured.json --history data/harvest-source-history.json --report /tmp/seminars-deterministic-source-anomalies.json --strict --write-history
+      - name: Build deterministic harvest coverage report
+        if: always()
+        run: python3 scripts/build-polymythcal-harvest-coverage-report.py --run-date "$(date -u +%F)" --structured-run /tmp/polymythcal-structured.json --output /tmp/polymythcal-harvest-coverage.json
       - name: Preserve structured source-health diagnostics
         if: failure()
         run: |
@@ -102,6 +107,9 @@ jobs:
           retention-days: 7
           if-no-files-found: warn
           path: |
+            /tmp/polymythcal-structured.json
+            /tmp/polymythcal-harvest-coverage.json
+            /tmp/seminars-deterministic-source-anomalies.json
             data/harvest-runs/**
             data/polymythcal-lifecycle-log.json
             data/polymythcal-lifecycle-state.json
@@ -110,7 +118,7 @@ jobs:
         run: bash scripts/summarize-harvest-diagnostics.sh seminars
       - name: Save retained parsed-response cache
         if: always() && hashFiles('data/polymythcal-http-cache.json') != ''
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: data/polymythcal-http-cache.json
           key: polymythcal-parsed-http-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "contractId": "FP-11",
+  "datasets": {
+    "polymythcal": {
+      "source": "polymythseminars/events.json",
+      "recordCount": 2088,
+      "statuses": {
+        "official-organizer": 2087,
+        "source-page": 1,
+        "unavailable": 0
+      }
+    },
+    "polymyth-commons": {
+      "source": "polymythlib/data/polymyth-data.json",
+      "recordCount": 346,
+      "statuses": {
+        "current-site": 14,
+        "continuing-service": 1,
+        "surviving-archive": 2,
+        "surviving-documentation": 2,
+        "reviewed-destination": 1,
+        "book-listed-site": 100,
+        "unavailable": 226
+      }
+    },
+    "teacher-resources": {
+      "source": "teacherresources/resources-data.json",
+      "recordCount": 645,
+      "statuses": {
+        "external-publisher": 640,
+        "seminar-schools-original": 5,
+        "unavailable": 0
+      },
+      "allowedInternalOriginals": [
+        "/campaigns/thank-you-mam/",
+        "/aitr/#denote",
+        "/aitr/#monster-battle",
+        "/teacherresources/files/Pigeon_Monologues_Modular_Color_and_BW.pdf"
+      ]
+    }
+  }
+}

@@ -30,8 +30,10 @@ The script:
 import os, re, json, sys
 from pathlib import Path
 from datetime import datetime
+from geometry_asset_version import geometry_asset_version
 
 ROOT = Path(__file__).parent.parent
+GEOMETRY_VERSION = geometry_asset_version(ROOT)
 
 # Section catalog — each gets its own posts folder, accent, eyebrow text, etc.
 SECTIONS = {
@@ -130,7 +132,7 @@ POST_TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="{fonts_url}" rel="stylesheet">
 <link rel="stylesheet" href="/css/main.css?v=20260725-audit45">
-<link rel="stylesheet" href="/css/alive.css?v=20260806-front-facing-geometry">
+<link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_VERSION}">
 <style>
 :root {{
   --display: {display};
@@ -154,7 +156,7 @@ POST_TEMPLATE = """<!DOCTYPE html>
 </style>
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body{body_class} data-geometry="indra-web" data-indra-intensity="0.070" data-route-type="publication" data-geometry-role="relation return">
+<body{body_class} data-geometry="indra-web" data-indra-intensity="0.130" data-route-type="publication" data-geometry-role="relation return" data-front-facing="general-audience">
 <div class="wrap" id="main-content">
 
 <header class="topbar" id="topbar">
@@ -195,8 +197,8 @@ POST_TEMPLATE = """<!DOCTYPE html>
   }}
 }})();
 </script>
-<script src="/js/mandala.js?v=20260806-front-facing-geometry" defer></script>
-<script src="/js/indra.js?v=20260806-front-facing-geometry" defer></script>
+<script src="/js/mandala.js?v={GEOMETRY_VERSION}" defer></script>
+<script src="/js/indra.js?v={GEOMETRY_VERSION}" defer></script>
 </body>
 </html>
 """
@@ -296,6 +298,7 @@ def build(section):
         speaker_html = f'<span class="post-speaker">{speaker}</span>' if speaker else ''
         body_class = ' class="theme-dark"' if spec.get('theme_dark') else ''
         post_html = POST_TEMPLATE.format(
+            GEOMETRY_VERSION=GEOMETRY_VERSION,
             title=title.replace('"', '&quot;'),
             slug=slug,
             section_label=spec['section_label'],

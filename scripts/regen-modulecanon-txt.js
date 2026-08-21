@@ -28,6 +28,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { resolveSiteBuildDate } = require('./polymythcal-build-date');
 
 const argv = process.argv.slice(2);
 const dryRun = argv.includes('--dry-run');
@@ -172,8 +173,9 @@ if (totalEntriesLineIdx === -1) {
 // We rewrite the TOTAL ENTRIES line ourselves to update count
 const preambleLines = lines.slice(0, totalEntriesLineIdx);
 
-// Update the "last updated" line within preamble to today
-const today = new Date().toISOString().slice(0, 10);
+// Use the release build date when packaging so regenerated mirrors are
+// reproducible instead of changing with the operator's wall clock.
+const today = resolveSiteBuildDate({ root: projectRoot });
 for (let i = 0; i < preambleLines.length; i++) {
   if (preambleLines[i].startsWith('last updated:')) {
     preambleLines[i] = 'last updated: ' + today;

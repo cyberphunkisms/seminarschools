@@ -1,0 +1,4 @@
+{
+  "scenario": "Two clean-room archives differ by one byte.",
+  "expected": "verify-clean-room-release.py rejects the release"
+}

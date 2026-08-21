@@ -14,6 +14,11 @@ function check(name, ok) { console.log((ok ? 'PASS' : 'FAIL') + '  ' + name); if
 const canonical = read('polymyth/campaigncodex/index.html');
 const mirror = read('polymyth/campaigncodex.txt');
 const regen = read('scripts/regen-all-txt.js');
+const datedMirrors = [
+  'scripts/regen-modulecanon-txt.js',
+  'scripts/regen-bookwormburrows-txt.js',
+  'scripts/regen-campaigncodex-txt.js',
+];
 const pkg = JSON.parse(read('package.json') || '{}');
 check('canonical campaigncodex carries current BB ruling', canonical.includes('Current BB ruling for campaigns') && canonical.includes('cc-cmp001-landing-after'));
 check('campaigncodex text mirror carries current BB ruling', mirror.includes('CURRENT BB / POLYMYTHDND CAMPAIGN RULING') && mirror.includes('cc-cmp001-landing-after'));
@@ -21,6 +26,14 @@ check('regen-all rebuilds campaigncodex text mirror', regen.includes('regen-camp
 check('regen-all rebuilds methodologylist section mirrors', regen.includes('regen-methodologylist-sections-txt.js'));
 check('regen-all rebuilds methodologylist manifest', regen.includes('regen-methodologylist-manifest.js'));
 check('regen-all rebuilds concordance index', regen.includes('regen-concordance-index.js'));
+check(
+  'dated text mirrors honor the deterministic site build date',
+  datedMirrors.every(rel => read(rel).includes('resolveSiteBuildDate({ root: projectRoot })')),
+);
+check(
+  'regen-all renders methodologylist manifest after concordance',
+  regen.lastIndexOf('regen-methodologylist-manifest.js') > regen.lastIndexOf('regen-concordance-index.js'),
+);
 check('bb clarification gate is inside full release verification', read('scripts/verify-all-runner.js').includes('verify-bb-clarification.js'));
 check('package exposes regen:all-txt', pkg.scripts && pkg.scripts['regen:all-txt'] === 'node scripts/regen-all-txt.js');
 if (fail) {

@@ -1,0 +1,36 @@
+{
+  "schema": "seminar-schools-browser-test-tiers-v1",
+  "contract_id": "FP-08",
+  "public_root": "public",
+  "exact_exceptions": [
+    "google20234ae70106ee9d.html"
+  ],
+  "tiers": {
+    "changed": {
+      "purpose": "Render directly changed pages on pull requests; shared generators, data, CSS, or JavaScript expand the run to the release family matrix.",
+      "trigger": "pull_request",
+      "selection": "changed-pages-with-family-expansion",
+      "full_page": false
+    },
+    "family": {
+      "purpose": "Render one deterministic representative of every data-route-type before a release.",
+      "trigger": "push-or-manual",
+      "selection": "every-route-type",
+      "full_page": false
+    },
+    "full": {
+      "purpose": "Render every public HTML page from top to bottom on a schedule, split into deterministic shards.",
+      "trigger": "weekly-schedule",
+      "selection": "every-renderable-page",
+      "full_page": true,
+      "shard_count": 16
+    }
+  },
+  "required_assertions": [
+    "runtime-errors",
+    "front-facing-marker",
+    "geometry-mounted-visible-pointer-safe",
+    "horizontal-overflow",
+    "rendered-screenshot"
+  ]
+}

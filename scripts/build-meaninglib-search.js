@@ -6,6 +6,7 @@
 */
 const fs = require('fs');
 const path = require('path');
+const {generatedAt} = require('./lib/deterministic-timestamp');
 
 const root = process.cwd();
 const exportDir = path.join(root, 'hf_export');
@@ -188,7 +189,7 @@ function main() {
   }
 
   const index = {
-    generated_at: new Date().toISOString(),
+    generated_at: generatedAt(),
     version: 'meaninglib-search-v1-lexical-star-aware',
     total_docs: totalDocs,
     total_terms: Object.keys(df).length,

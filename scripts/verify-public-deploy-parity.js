@@ -4,6 +4,9 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const {
+  isGeneratedDependencyDirectory,
+} = require('./repository-walk-policy');
 
 const ROOT = path.resolve(__dirname, '..');
 const PUBLIC = path.join(ROOT, 'public');
@@ -62,7 +65,10 @@ function collectExpected(dir, relBase = '') {
   if (!fs.existsSync(dir)) return;
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const allowPolymythlibData = relBase === 'polymythlib' && entry.name === 'data';
-    if (BLOCKED_DIRS.has(entry.name) && !allowPolymythlibData) continue;
+    if (
+      (BLOCKED_DIRS.has(entry.name) && !allowPolymythlibData)
+      || isGeneratedDependencyDirectory(entry.name)
+    ) continue;
     const full = path.join(dir, entry.name);
     const rel = posix(path.join(relBase, entry.name));
     if (entry.isDirectory()) collectExpected(full, rel);
@@ -74,7 +80,9 @@ function collectFiles(dir, base, out = []) {
   if (!fs.existsSync(dir)) return out;
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) collectFiles(full, base, out);
+    if (entry.isDirectory() && !isGeneratedDependencyDirectory(entry.name)) {
+      collectFiles(full, base, out);
+    }
     else if (entry.isFile()) out.push(posix(path.relative(base, full)));
   }
   return out;

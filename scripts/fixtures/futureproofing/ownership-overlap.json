@@ -1,0 +1,8 @@
+{
+  "schema": "seminar-schools-canonical-ownership-map-v1",
+  "owners": [
+    {"id": "writer-a", "writer": "SITE_PACKAGE/scripts/a.py", "inputs": [], "outputs": ["SITE_PACKAGE/public/**"], "classification": "public_generated", "lock_scope": "release_build"},
+    {"id": "writer-b", "writer": "SITE_PACKAGE/scripts/b.py", "inputs": [], "outputs": ["SITE_PACKAGE/public/example/**"], "classification": "public_generated", "lock_scope": "release_build"}
+  ],
+  "expected": "overlapping output ownership is rejected"
+}

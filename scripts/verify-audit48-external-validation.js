@@ -1,15 +1,22 @@
 #!/usr/bin/env node
 'use strict';
 
-/** Verify the active Audit 48 programs and preserved evidence under Audit 53. */
+/** Verify the active Audit 48 programs and preserved evidence under the current release. */
 const fs = require('fs');
 const path = require('path');
+const {
+  classifySourceHtml,
+  difference,
+  expectedPolymythcalEventRoutes,
+  inspectEventRouteDirectory,
+  summarizeValues,
+} = require('./lib/source-html-inventory');
 
 const ROOT = path.resolve(__dirname, '..');
 const REPORT = path.join(ROOT, 'scripts', 'reports', 'audit48-external-validation.json');
 const EXPECTED_RELEASE =
-  '2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final';
-const EXPECTED_ASSET = '20260728-audit53';
+  '2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final';
+const EXPECTED_ASSET = '20260815-sets1-15-synthesis';
 const PRESERVED_EVIDENCE_RELEASE =
   '2026-07-26-site-audit49-technical-efficiency-resilience-final';
 const EXPECTED_PACKAGE = '1.0.6';
@@ -47,6 +54,29 @@ const assistive = json('scripts/reports/audit48-assistive-technology.json');
 const calendar = json('scripts/reports/audit48-calendar-client-interoperability.json');
 const browser = json('data/audit48-browser/cross-engine-preflight.json');
 const live = json('scripts/reports/audit48-live-harvest-endpoints.json');
+const currentEvents = json('polymythseminars/events.json').events || [];
+const currentFeeds = json('polymythseminars/feeds/index.json').feeds || [];
+const explicitAliases = currentEvents.reduce(
+  (count, event) => count + (event.legacy_ids || []).length,
+  0,
+);
+const expectedSingleEventFiles = currentEvents.length + explicitAliases;
+const expectedTotalIcsFiles = expectedSingleEventFiles + 12;
+const expectedParsedComponents = expectedSingleEventFiles
+  + currentFeeds.reduce((sum, feed) => sum + Number(feed.count || 0), 0)
+  + Number(currentFeeds.find(feed => feed.id === 'opportunities')?.count || 0);
+let sourceInventory = {documents: [], interactive: [], redirects: []};
+let expectedEventRoutes = null;
+let englishEventRoutes = null;
+let frenchEventRoutes = null;
+try {
+  sourceInventory = classifySourceHtml(ROOT);
+  expectedEventRoutes = expectedPolymythcalEventRoutes(currentEvents);
+  englishEventRoutes = inspectEventRouteDirectory(ROOT, 'polymythseminars/events');
+  frenchEventRoutes = inspectEventRouteDirectory(ROOT, 'polymythseminars/fr/events');
+} catch (error) {
+  failures.push(`current source inventory cannot be derived: ${error.message}`);
+}
 
 check(read('RELEASE_ID.txt').trim() === EXPECTED_RELEASE, 'RELEASE_ID.txt is not the current release');
 check(manifest.release_id === EXPECTED_RELEASE, 'release manifest is not the current release');
@@ -68,11 +98,69 @@ check(
   'assistive-technology evidence is not bound to the current release',
 );
 check(
-  assistive.metrics?.interactive_documents === 2859
-    && assistive.metrics?.redirect_documents === 890
-    && assistive.metrics?.source_html_documents === 3749,
-  'assistive-technology source inventory changed',
+  assistive.metrics?.interactive_documents === sourceInventory.interactive.length
+    && assistive.metrics?.redirect_documents === sourceInventory.redirects.length
+    && assistive.metrics?.source_html_documents === sourceInventory.documents.length
+    && assistive.metrics?.source_html_documents
+      === assistive.metrics?.interactive_documents + assistive.metrics?.redirect_documents,
+  'assistive-technology source inventory is not an exact current-source partition',
 );
+if (expectedEventRoutes && englishEventRoutes && frenchEventRoutes) {
+  const missingEnglish = difference(
+    expectedEventRoutes.englishRouteIds,
+    englishEventRoutes.routeIds,
+  );
+  const extraEnglish = difference(
+    englishEventRoutes.routeIds,
+    expectedEventRoutes.englishRouteIds,
+  );
+  const missingFrench = difference(
+    expectedEventRoutes.frenchRouteIds,
+    frenchEventRoutes.routeIds,
+  );
+  const extraFrench = difference(
+    frenchEventRoutes.routeIds,
+    expectedEventRoutes.frenchRouteIds,
+  );
+  check(
+    missingEnglish.length === 0 && extraEnglish.length === 0,
+    `current English event route inventory differs from the event ledger; missing `
+      + `${summarizeValues(missingEnglish)}; extra ${summarizeValues(extraEnglish)}`,
+  );
+  check(
+    missingFrench.length === 0 && extraFrench.length === 0,
+    `current French event route inventory differs from the event ledger; missing `
+      + `${summarizeValues(missingFrench)}; extra ${summarizeValues(extraFrench)}`,
+  );
+  check(
+    englishEventRoutes.missingIndexIds.length === 0
+      && frenchEventRoutes.missingIndexIds.length === 0,
+    'one or more event route directories lack index.html',
+  );
+  check(
+    assistive.metrics?.canonical_events === expectedEventRoutes.canonicalIds.size
+      && assistive.metrics?.explicit_legacy_event_ids
+        === expectedEventRoutes.explicitLegacyEntries
+      && assistive.metrics?.expected_english_event_routes
+        === expectedEventRoutes.englishRouteIds.size
+      && assistive.metrics?.expected_french_event_routes
+        === expectedEventRoutes.frenchRouteIds.size
+      && assistive.metrics?.expected_english_event_aliases
+        === expectedEventRoutes.englishAliases.size
+      && assistive.metrics?.expected_french_event_aliases
+        === expectedEventRoutes.frenchAliases.size
+      && assistive.metrics?.english_event_routes === englishEventRoutes.htmlRouteIds.size
+      && assistive.metrics?.french_event_routes === frenchEventRoutes.htmlRouteIds.size
+      && assistive.metrics?.canonical_event_documents
+        === expectedEventRoutes.canonicalIds.size * 2
+      && assistive.metrics?.event_redirect_documents
+        === expectedEventRoutes.englishAliases.size + expectedEventRoutes.frenchAliases.size
+      && assistive.metrics?.non_event_documents
+        === sourceInventory.documents.length
+          - englishEventRoutes.htmlRouteIds.size - frenchEventRoutes.htmlRouteIds.size,
+    'assistive-technology event route accounting is not derived from the current ledger',
+  );
+}
 check(
   assistive.native_execution_status
     === 'requires-native-operating-systems-physical-devices-and-human-observation',
@@ -96,8 +184,11 @@ check(
 check(
   calendar.metrics?.tests_passed === 9
     && calendar.metrics?.tests_run === 9
-    && calendar.metrics?.total_ics_files === 857
-    && calendar.metrics?.independently_parsed_vevent_components === 4172
+    && calendar.metrics?.canonical_events === currentEvents.length
+    && calendar.metrics?.explicit_legacy_ics_aliases === explicitAliases
+    && calendar.metrics?.single_event_ics_files === expectedSingleEventFiles
+    && calendar.metrics?.total_ics_files === expectedTotalIcsFiles
+    && calendar.metrics?.independently_parsed_vevent_components === expectedParsedComponents
     && calendar.metrics?.maximum_physical_line_octets === 75,
   'calendar-client evidence metrics changed',
 );
@@ -215,8 +306,12 @@ const report = {
   status: failures.length ? 'failed' : 'passed',
   machine_validation_status: failures.length ? 'failed' : 'passed',
   metrics: {
+    source_html_pages: assistive.metrics?.source_html_documents || 0,
     interactive_source_pages: assistive.metrics?.interactive_documents || 0,
     redirect_source_pages: assistive.metrics?.redirect_documents || 0,
+    canonical_events: assistive.metrics?.canonical_events || 0,
+    english_event_routes: assistive.metrics?.english_event_routes || 0,
+    french_event_routes: assistive.metrics?.french_event_routes || 0,
     calendar_tests: calendar.metrics?.tests_passed || 0,
     calendar_files: calendar.metrics?.total_ics_files || 0,
     parsed_calendar_events: calendar.metrics?.independently_parsed_vevent_components || 0,

@@ -25,11 +25,12 @@
 const fs = require('fs');
 const path = require('path');
 const {parseSeedWithAddenda} = require('./lib/parse-seed-with-addenda');
+const {generatedAt} = require('./lib/deterministic-timestamp');
 
 const argv = process.argv.slice(2);
 const dryRun = argv.includes('--dry-run');
 const dateArg = argv.find(a => /^\d{4}-\d{2}-\d{2}$/.test(a));
-const BUILD_DATE = dateArg || new Date().toISOString().slice(0, 10);
+const BUILD_DATE = dateArg || generatedAt().slice(0, 10);
 
 const scriptDir = path.dirname(__filename);
 const projectRoot = path.dirname(scriptDir);
@@ -74,7 +75,7 @@ const SECTION_LABELS = {
   learnings: 'LEARNINGS',
   coreplus: 'COREPLUS',
   corehistory: 'CORE HISTORY',
-  'framework-core': 'FRAMEWORK CORE',
+  'framework-core': 'CORE / PERSONAL RULES',
   pending: 'PENDING',
 };
 
@@ -86,6 +87,12 @@ function renderEntry(e) {
   const tags  = (e.tg || '').trim();
   const lines = [];
   lines.push('[' + role + '] ' + title);
+  if (e.id) lines.push('  canonical-id: ' + e.id);
+  const legacyAnchors = [
+    ...(e.legacy_anchor ? [e.legacy_anchor] : []),
+    ...(Array.isArray(e.legacy_anchors) ? e.legacy_anchors : []),
+  ];
+  if (legacyAnchors.length) lines.push('  legacy-anchors: ' + [...new Set(legacyAnchors)].join(', '));
   if (body) lines.push(body);
   if (ext && !body.includes(ext)) { lines.push(''); lines.push(ext); }
   if (tags) lines.push('  tags: ' + tags);

@@ -28,7 +28,7 @@
   const SEARCHES_KEY = "polymythcal.savedSearches.v2";
   const LEGACY_SEARCHES_KEY = "polymythcal.savedSearches.v1";
   const LANGUAGE_KEY = "polymythcal.lang.v1";
-  const SET_KEYS = ["content", "places", "topics", "eventTypes", "opportunityTypes", "audiences", "formats", "statuses"];
+  const SET_KEYS = ["content", "places", "topics", "eventTypes", "opportunityTypes", "presence", "academicForms", "artsFormats", "participationFormats", "civicFormats", "communityFormats", "digitalFormats", "programFormats", "audiences", "grades", "formats", "statuses"];
   const STATE_KEYS = ["content", "time", ...SET_KEYS.filter(key => key !== "content")];
   const ARTS_TOPIC_RE = /\b(?:art|arts|artist|artists|artistic|artwork|artworks|gallery|museum|exhibition|film|cinema|screening|media|documentary|animation|music|musical|concert|theatre|theater|dance|performance|opera)\b/;
 
@@ -62,7 +62,9 @@
       savedItems: "Saved items",
       officialSource: "Official or institutional source",
       sourceListing: "Source listing",
-      details: "View details",
+      openOrganizer: "Open organizer website",
+      openSource: "Open source website",
+      details: "Details",
       timePending: "Time unpublished",
       placePending: "Location unpublished",
       confirmed: "Confirmed details",
@@ -84,11 +86,9 @@
       monthToday: "Go to this month",
       noMonthResults: "No matching listings in this month.",
       removeFilter: label => `Remove ${label}`,
-      filtersSelected: count => count === 0 ? "No extra filters" : `${count} selected`,
-      viewResults: count => `View ${count.toLocaleString("en-CA")} results`,
+      filtersSelected: count => count === 0 ? "No filters selected" : `${count} selected`,
       resultPreview: count => `${count.toLocaleString("en-CA")} results`,
       oneContentRequired: "Keep at least one of Events or Opportunities selected.",
-      presetApplied: label => `${label} view opened`,
       savedOn: date => `Saved listing for ${date}`,
       resultsReady: count => `${count.toLocaleString("en-CA")} matching listings`,
       eventsOnly: "Events only",
@@ -132,6 +132,8 @@
       savedItems: "Éléments enregistrés",
       officialSource: "Source officielle ou institutionnelle",
       sourceListing: "Fiche source",
+      openOrganizer: "Voir le site de l’organisateur",
+      openSource: "Voir le site source",
       details: "Voir les détails",
       timePending: "Heure non publiée",
       placePending: "Lieu non publié",
@@ -154,11 +156,9 @@
       monthToday: "Aller au mois actuel",
       noMonthResults: "Aucune fiche correspondante ce mois-ci.",
       removeFilter: label => `Retirer ${label}`,
-      filtersSelected: count => count === 0 ? "Aucun filtre supplémentaire" : `${count} sélectionnés`,
-      viewResults: count => `Voir ${count.toLocaleString("fr-CA")} résultats`,
+      filtersSelected: count => count === 0 ? "Aucun filtre sélectionné" : `${count} sélectionnés`,
       resultPreview: count => `${count.toLocaleString("fr-CA")} résultats`,
       oneContentRequired: "Gardez au moins Événements ou Possibilités sélectionné.",
-      presetApplied: label => `Vue ${label} ouverte`,
       savedOn: date => `Fiche enregistrée pour le ${date}`,
       resultsReady: count => `${count.toLocaleString("fr-CA")} fiches correspondantes`,
       eventsOnly: "Événements seulement",
@@ -191,6 +191,7 @@
     "Find events to attend and opportunities to apply for from Toronto to Montréal.": "Trouvez des événements et des possibilités de candidature de Toronto à Montréal.",
     "Search the calendar": "Rechercher dans le calendrier",
     "Clear search": "Effacer la recherche",
+    "Results update as you type. English, French, accents, and close spellings work.": "Les résultats s’actualisent pendant la saisie. Le français, l’anglais, les accents et les orthographes proches fonctionnent.",
     "Show results": "Voir les résultats",
     "English, French, accents, and close spellings work.": "Le français, l’anglais, les accents et les orthographes proches fonctionnent.",
     "Shortcuts": "Raccourcis",
@@ -199,6 +200,7 @@
     "Shortcuts reset the filters": "Les raccourcis réinitialisent les filtres",
     "Search": "Rechercher",
     "Calendar tools": "Outils du calendrier",
+    "Save, share, subscribe, submit, or change language": "Enregistrer, partager, s’abonner, proposer une fiche ou changer de langue",
     "Personal calendar tools": "Outils de calendrier personnels",
     "Contribute and language": "Contribution et langue",
     "Current filter choices": "Choix de filtres actuels",
@@ -242,13 +244,16 @@
     "Sources linked": "Sources liées",
     "every listing": "chaque fiche",
     "Need classroom material?": "Besoin de matériel pédagogique?",
-    "Search 644 Teacher Resources.": "Parcourez 644 ressources pédagogiques.",
+    "Search 645 Teacher Resources.": "Parcourez 645 ressources pédagogiques.",
     "Looking for a library?": "Vous cherchez une bibliothèque?",
     "Browse libraries and commons projects in Polymythlib.": "Parcourez les bibliothèques et les communs dans Polymythlib.",
     "See the whole Commons": "Voir l’ensemble des communs",
     "Understand the collection, calendar, directory, and shared method.": "Comprenez la collection, le calendrier, le répertoire et la méthode partagée.",
     "Focused calendars": "Calendriers ciblés",
+    "12 collections for writing, academic, celestial, and ritual interests": "12 collections pour l’écriture, les études, le ciel et les rituels",
     "Focused academic calendars": "Calendriers universitaires ciblés",
+    "Calendars": "Calendriers",
+    "Polymorphous Mythology Calendar": "Calendrier de la mythologie polymorphe",
     "University+": "Université+",
     "Philosophy": "Philosophie",
     "Calls for papers": "Appels de communications",
@@ -267,12 +272,16 @@
     "Saved searches": "Recherches enregistrées",
     "Close saved listings": "Fermer les fiches enregistrées",
     "Filters": "Filtres",
+    "Filter listings": "Filtrer les fiches",
+    "No filters selected": "Aucun filtre sélectionné",
     "No extra filters": "Aucun filtre supplémentaire",
     "Loading…": "Chargement…",
     "Show": "Afficher",
     "Clear": "Effacer",
-    "What do you want to find?": "Que voulez-vous inclure?",
-    "Choose one or both.": "Choisissez l’un, l’autre ou les deux.",
+    "Listing type": "Type de fiche",
+    "Include events, application opportunities, or both.": "Incluez les événements, les possibilités de candidature ou les deux.",
+    "Events": "Événements",
+    "Application opportunities": "Possibilités de candidature",
     "Events to attend": "Événements auxquels participer",
     "Talks, workshops, festivals, performances, exhibitions, screenings, and community events.": "Causeries, ateliers, festivals, spectacles, expositions, projections et activités communautaires.",
     "Opportunities to apply for": "Possibilités de candidature",
@@ -281,6 +290,7 @@
     "Choose one range.": "Choisissez une période.",
     "Date range": "Période",
     "Upcoming": "À venir",
+    "All upcoming": "Toutes les dates à venir",
     "Next 7 days": "7 prochains jours",
     "Next 30 days": "30 prochains jours",
     "Next 3 months": "3 prochains mois",
@@ -301,11 +311,55 @@
     "Learning and scholarship": "Apprentissage et recherche",
     "Arts and performance": "Arts et spectacle",
     "Film and media": "Cinéma et médias",
+    "Media literacy": "Littératie médiatique",
+    "Interdisciplinary": "Interdisciplinaire",
+    "Public intellectual and academic": "Vie intellectuelle et universitaire",
+    "Social studies": "Sciences sociales",
     "Civic and community": "Vie civique et communauté",
     "Science and technology": "Science et technologie",
+    "Celestial and seasonal": "Ciel et saisons",
+    "Rituals and holidays": "Rituels et fêtes",
     "Other topics": "Autres sujets",
     "Type": "Type",
     "Choose several. Event-type choices and opportunity-type choices work side by side.": "Choisissez-en plusieurs. Les types d’événements et de possibilités fonctionnent ensemble.",
+    "Who is present?": "Qui est présent?",
+    "Filter by confirmed participant role. Participant identity pending means the discussion is confirmed but names are not yet published.": "Filtrez selon le rôle confirmé. Identité des participants à confirmer signifie que la discussion est confirmée, mais que les noms ne sont pas encore publiés.",
+    "Director or filmmaker": "Réalisateur ou cinéaste",
+    "Cast or crew": "Interprètes ou équipe",
+    "Film subject": "Personne au cœur du film",
+    "Author or writer": "Auteur ou autrice",
+    "Artist or curator": "Artiste ou commissaire",
+    "Scholar or expert": "Chercheur ou spécialiste",
+    "Performer or storyteller": "Interprète ou conteur",
+    "Production participants": "Membres de la production",
+    "Community leader, witness, survivor, or elder": "Responsable communautaire, témoin, survivant ou aîné",
+    "Host or moderator": "Animateur ou modérateur",
+    "Participant identity pending": "Identité des participants à confirmer",
+    "Academic format": "Format universitaire",
+    "Civic, legal, and labour format": "Format civique, juridique et syndical",
+    "Filter civic processes, public institutions, legal proceedings, elections, and labour action by form.": "Filtrez les processus civiques, les institutions publiques, les procédures juridiques, les élections et l’action syndicale selon leur forme.",
+    "Election or voting": "Élection ou vote",
+    "Candidate or campaign event": "Événement de candidature ou de campagne",
+    "Council, board, or committee": "Conseil, commission ou comité",
+    "Public hearing or deputation": "Audience publique ou délégation",
+    "Public consultation": "Consultation publique",
+    "Legislature or parliamentary sitting": "Séance législative ou parlementaire",
+    "Court or tribunal hearing": "Audience judiciaire ou d’un tribunal",
+    "Inquest or public inquiry": "Enquête du coroner ou enquête publique",
+    "Union meeting or conference": "Réunion ou conférence syndicale",
+    "Rally, march, or counter-protest": "Rassemblement, marche ou contre-manifestation",
+    "Picket, strike, or labour action": "Piquetage, grève ou action syndicale",
+    "Civic deadline or compliance stage": "Échéance civique ou étape de conformité",
+    "Filter the public-intellectual and academic programme by how people participate.": "Filtrez la programmation intellectuelle et universitaire selon la forme de participation.",
+    "Public lecture or scholar talk": "Conférence publique ou causerie savante",
+    "Panel, debate, or forum": "Panel, débat ou forum",
+    "Conference or symposium": "Colloque ou symposium",
+    "Colloquium or seminar": "Colloquium ou séminaire",
+    "Workshop or webinar": "Atelier ou webinaire",
+    "Thesis defence": "Soutenance de thèse ou de mémoire",
+    "Research showcase or poster session": "Vitrine de recherche ou séance d’affiches",
+    "Reading group or philosophy café": "Groupe de lecture ou café-philo",
+    "Book talk or launch": "Causerie ou lancement de livre",
     "Talks, panels, and lectures": "Causeries, panels et conférences",
     "Workshops": "Ateliers",
     "Conferences and academic events": "Colloques et activités universitaires",
@@ -313,6 +367,9 @@
     "Exhibitions": "Expositions",
     "Screenings": "Projections",
     "Community and civic events": "Activités communautaires et civiques",
+    "Celestial events": "Événements célestes",
+    "Rituals and holidays": "Rituels et fêtes",
+    "Creator-present events and talkbacks": "Rencontres avec les créateurs et discussions après spectacle",
     "Other events": "Autres événements",
     "Calls for papers and proposals": "Appels de communications et de propositions",
     "Competitions, prizes, and awards": "Concours et prix",
@@ -324,6 +381,26 @@
     "General public": "Grand public",
     "Students and youth": "Élèves et jeunes",
     "University and graduate": "Universitaire et cycles supérieurs",
+    "History and heritage": "Histoire et patrimoine",
+    "Exact grade or level": "Année scolaire ou niveau précis",
+    "Choose every grade or level that applies.": "Choisissez chaque année scolaire ou niveau applicable.",
+    "Kindergarten": "Maternelle",
+    "Grade 1": "1re année",
+    "Grade 2": "2e année",
+    "Grade 3": "3e année",
+    "Grade 4": "4e année",
+    "Grade 5": "5e année",
+    "Grade 6": "6e année",
+    "Grade 7": "7e année",
+    "Grade 8": "8e année",
+    "Grade 9": "9e année",
+    "Grade 10": "10e année",
+    "Grade 11": "11e année",
+    "Grade 12": "12e année",
+    "CEGEP": "CÉGEP",
+    "Undergraduate": "Premier cycle",
+    "Graduate": "Cycles supérieurs",
+    "Educator": "Personnel éducatif",
     "Educators": "Personnel éducatif",
     "Families and all ages": "Familles et tous âges",
     "Format": "Format",
@@ -362,7 +439,7 @@
     "List": "Liste",
     "Calendar": "Calendrier",
     "Show more": "Afficher plus",
-    "Open a title for details, the official source, calendar download, and corrections. Saved items stay on this device.": "Ouvrez un titre pour les détails, la source officielle, le téléchargement du calendrier et les corrections. Les éléments enregistrés restent sur cet appareil.",
+    "Each listing has a direct link to the organizer or source website. Open Details for the verified date, place, calendar download, and correction link. Saved items stay on this device.": "Chaque fiche mène directement au site de l’organisateur ou au site source. Ouvrez les détails pour consulter la date et le lieu vérifiés, télécharger le calendrier ou proposer une correction. Les éléments enregistrés restent sur cet appareil.",
     "Polymythcal needs JavaScript for interactive filtering. You can still use the": "Polymythcal exige JavaScript pour le filtrage interactif. Vous pouvez toujours utiliser les",
     "RSS and calendar feeds": "fils RSS et calendriers",
     "or browse the": "ou consulter le",
@@ -508,7 +585,16 @@
     topics: new Set(),
     eventTypes: new Set(),
     opportunityTypes: new Set(),
+    presence: new Set(),
+    academicForms: new Set(),
+    artsFormats: new Set(),
+    participationFormats: new Set(),
+    civicFormats: new Set(),
+    communityFormats: new Set(),
+    digitalFormats: new Set(),
+    programFormats: new Set(),
     audiences: new Set(),
+    grades: new Set(),
     formats: new Set(),
     statuses: new Set(),
     sort: "soonest",
@@ -616,15 +702,34 @@
 
   function textBlob(event) {
     const secondaryTypes = Array.isArray(event.secondary_types) ? event.secondary_types : [];
+    const contextualFields = [
+      event.entry_family, event.calendar_systems, event.traditions, event.ritual_associations,
+      event.social_functions, event.socio_note, event.celestial_system, event.astronomy_visibility,
+      event.observer_notes, event.presence_claims, event.participant_presence, event.presence_categories,
+      event.presence_mode, event.event_format, event.talkback_time_precision,
+      event.director_attendance_status, event.talkback_status, event.date_conflict,
+      event.alternate_date_ranges, event.grade_levels, event.exact_grades, event.education_levels,
+      event.grade_min, event.grade_max, event.age_range, event.access_route, event.participation_unit,
+      event.prize_form, event.languages, event.ai_rule, event.subjects, event.opportunity_kind,
+      event.research_set, event.research_set_cross_tags, event.social_studies_subfields,
+      event.media_literacy_subfields, event.interdisciplinary_domains, event.public_intellectual_academic_formats,
+      event.academic_event_forms, event.academic_disciplines, event.public_access_status, event.audience_scope, event.participant_identity_status, event.registration_required,
+      event.arts_event_forms, event.arts_disciplines, event.arts_occurrence_role, event.arts_access_status,
+      event.participatory_formats, event.participation_mode, event.participation_roles, event.facilitation_status, event.skill_level, event.drop_in_status, event.participation_evidence,
+      event.civic_legal_labour_formats, event.civic_domain, event.authority_level, event.public_role, event.participation_route, event.public_input_status, event.legal_access_status, event.collective_action_type, event.election_stage, event.access_restrictions, event.webcast_status, event.publication_restriction, event.alternate_dates, event.civic_evidence,
+      event.calendar_stage, event.series_role, event.local_grade_system
+    ];
     return normalizeText([
       event.title, event.description, event.speaker_or_director, event.venue, event.city,
       event.country, event.type, ...secondaryTypes, event.age_band,
-      event.source_id, event.source_name, event.organizer, event.raw_excerpt, event.topics, event.tags, event.qualification_reasons
+      event.source_id, event.source_name, event.organizer, event.raw_excerpt, event.topics,
+      event.tags, event.qualification_reasons, ...contextualFields
     ].join(" "));
   }
 
   function classifyContent(event) {
     const blob = textBlob(event);
+    if (event.entry_family === "civic-political-legal-labour" && event.record_kind === "event") return "attend";
     const confirmedDatedEvent = event.record_kind === "event" &&
       event.confirmation_status === "confirmed" &&
       ["lecture", "performance"].includes(event.type);
@@ -656,20 +761,184 @@
     const topics = [];
     if (/philosoph|ethic|political theory|metaphys|epistem|phenomen|hegel|kant|aristotle/.test(blob)) topics.push("philosophy");
     if (/literature|literary|writing|writer|poetry|poet|book|reading|author|essay|novel/.test(blob)) topics.push("writing");
+    if (/history|historical|heritage|archaeolog|archive|museum|oral history|remembrance|commemoration/.test(blob)) topics.push("history");
     if (/film|cinema|screening|media|documentary|animation/.test(blob)) topics.push("film");
+    if (/media literacy|news literacy|journalism|photojournalism|podcast|audio storytelling|game design|interactive media|advertising|communication studies|digital storytelling|visual communication|media information literacy/.test(blob)) topics.push("media-literacy");
+    if (/interdisciplinary|multidisciplinary|cross[- ]disciplin|scholarship|leadership program|innovation challenge|entrepreneurship|undergraduate research|research communication|science fair|public scholarship|social enterprise/.test(blob)) topics.push("interdisciplinary");
+    if ((Array.isArray(event.public_intellectual_academic_formats) && event.public_intellectual_academic_formats.length) || (Array.isArray(event.academic_event_forms) && event.academic_event_forms.length) || /public lecture|scholar talk|academic panel|colloquium|symposium|research showcase|poster session|exit seminar|book talk|book launch|distinguished lecture|academic conference|graduate conference|public webinar|faculty research showcase|lifelong learning lecture|thesis defence|oral examination|reading group|philosophy cafe/.test(blob)) topics.push("academic-events");
     if (ARTS_TOPIC_RE.test(blob)) topics.push("arts");
     if (/civic|council|public meeting|community|protest|democracy|politic|policy|justice|activis/.test(blob)) topics.push("civic");
+    if (/social studies|politic|civic|policy|econom|geograph|sociolog|anthropolog|religion|theology|law|legal|international relations|global studies|public administration|indigenous studies|model united nations|model parliament|democracy/.test(blob)) topics.push("social-studies");
     if (/science|technology|digital|artificial intelligence|\bai\b|biology|physics|environment|climate|health/.test(blob)) topics.push("science");
+    if (/astronom|celestial|eclipse|meteor|moon|solstice|equinox|planetary|comet|aurora|skywatch|ephemeris/.test(blob)) topics.push("celestial");
+    if (/ritual|holiday|observance|festival tradition|lunisolar|hijri|hebrew calendar|liturgical|ancestor veneration|zhongyuan|mid autumn|dongzhi|lantern festival|dragon boat|double ninth|lunar new year/.test(blob)) topics.push("ritual");
     if (/education|teaching|teacher|student|school|university|graduate|lecture|conference|workshop|symposium|colloquium/.test(blob)) topics.push("learning");
     if (!topics.length) topics.push("other");
-    return topics;
+    return [...new Set(topics)];
+  }
+
+  function attendanceBearingClaims(event) {
+    const allowed = new Set(["confirmed", "confirmed-remote", "identity-unannounced", "programme-confirmed"]);
+    return (Array.isArray(event.presence_claims) ? event.presence_claims : []).filter(claim => {
+      const status = normalizeText(claim?.status).replaceAll(" ", "-");
+      const scope = normalizeText(claim?.scope).replaceAll(" ", "-");
+      return allowed.has(status) && scope !== "production-credit";
+    });
+  }
+
+  function classifyPresence(event) {
+    const allowed = new Set([
+      "director-filmmaker", "cast-crew", "film-subject", "author-writer", "artist-curator",
+      "scholar-expert", "performer-storyteller", "production-participants",
+      "community-witness-elder", "host-moderator", "identity-pending"
+    ]);
+    const values = [];
+    const explicit = Array.isArray(event.presence_categories) ? event.presence_categories : [];
+    for (const value of explicit) {
+      const normalized = normalizeText(value).replaceAll(" ", "-");
+      if (allowed.has(normalized)) values.push(normalized);
+    }
+    for (const claim of attendanceBearingClaims(event)) {
+      const category = normalizeText(claim?.category).replaceAll(" ", "-");
+      if (allowed.has(category)) values.push(category);
+      const status = normalizeText(claim?.status).replaceAll(" ", "-");
+      if (status === "identity-unannounced") values.push("identity-pending");
+    }
+    if ((event.talkback_confirmed === true || event.talkback_status === "confirmed") && !attendanceBearingClaims(event).length) {
+      values.push("identity-pending");
+    }
+    return [...new Set(values)];
+  }
+
+  function classifyAcademicForms(event) {
+    const declared = [
+      ...(Array.isArray(event.academic_event_forms) ? event.academic_event_forms : []),
+      ...(Array.isArray(event.public_intellectual_academic_formats) ? event.public_intellectual_academic_formats : [])
+    ].map(value => normalizeText(value).replaceAll(" ", "-"));
+    const joined = declared.join(" ");
+    const blob = `${joined} ${textBlob(event)}`;
+    const values = [];
+    if (/lecture|scholar-talk|public-talk|keynote|online-talk|recorded-lecture|lifelong-learning-lecture/.test(blob)) values.push("public-lecture");
+    if (/panel|debate|forum|conversation|fireside-chat|policy-discussion|academic-discussion|salon/.test(blob)) values.push("panel-debate-forum");
+    if (/conference|symposium|research-conference|academic-intensive/.test(blob)) values.push("conference-symposium");
+    if (/colloquium|seminar|graduate-research-talk|exit-seminar|phd-online-seminar/.test(blob)) values.push("colloquium-seminar");
+    if (/workshop|webinar|information-session/.test(blob)) values.push("workshop-webinar");
+    if (/thesis-defence|oral-examination|doctoral-defence|masters-defence/.test(blob)) values.push("thesis-defence");
+    if (/research-showcase|poster-session|research-day|faculty-research-showcase|presentation/.test(blob)) values.push("research-showcase-poster");
+    if (/reading-group|philosophy-cafe|discussion-group|literature-and-philosophy-discussion/.test(blob)) values.push("reading-group-philosophy-cafe");
+    if (/book-talk|book-launch|author-talk/.test(blob)) values.push("book-talk-launch");
+    return [...new Set(values)];
+  }
+
+  function classifyArtsFormats(event) {
+    const declared = Array.isArray(event.arts_event_forms) ? event.arts_event_forms.map(value => normalizeText(value).replaceAll(" ", "-")) : [];
+    const blob = `${declared.join(" ")} ${textBlob(event)}`;
+    const values = [];
+    const add = value => { if (!values.includes(value)) values.push(value); };
+    for (const value of declared) {
+      if (["theatre-performance", "dance-performance", "music-performance", "opera-orchestral", "exhibition", "festival", "public-art-site-specific", "artist-curator-program", "screening-film-festival", "talkback-discussion", "multidisciplinary-performance"].includes(value)) add(value);
+    }
+    if (/theatre|theater|dramaturg|stage-production/.test(blob)) add("theatre-performance");
+    if (/dance|ballet|choreograph|social-dance/.test(blob)) add("dance-performance");
+    if (/opera|orchestra|symphon|philharmonic/.test(blob)) add("opera-orchestral");
+    if (/music|concert|jazz|choir|band|song/.test(blob)) add("music-performance");
+    if (/exhibition|gallery|museum|installation/.test(blob)) add("exhibition");
+    if (/festival|cultural-reproduction/.test(blob)) add("festival");
+    if (/public-art|site-specific|nuit-blanche/.test(blob)) add("public-art-site-specific");
+    if (/artist-talk|curator-talk|art-crawl/.test(blob)) add("artist-curator-program");
+    if (/screening|film-festival|cinema|documentary|premiere/.test(blob)) add("screening-film-festival");
+    if (/talkback|post-show|post-performance|discussion-with-artists/.test(blob) || event.talkback_status === "confirmed") add("talkback-discussion");
+    return values;
+  }
+
+  function classifyParticipationFormats(event) {
+    const declared = Array.isArray(event.participatory_formats) ? event.participatory_formats.map(value => normalizeText(value).replaceAll(" ", "-")) : [];
+    const allowed = new Set(["open-mic-stage", "writing-poetry-circle", "book-reading-group", "conversation-language", "storytelling", "zine-comics", "board-tabletop-games", "game-jam-hackathon", "maker-repair-craft", "public-art-making", "social-dance", "music-jam", "improv-theatre"]);
+    const values = declared.filter(value => allowed.has(value));
+    const blob = `${declared.join(" ")} ${textBlob(event)}`;
+    const add = value => { if (!values.includes(value)) values.push(value); };
+    if (/open-mic|open-stage|open-poetry-reading/.test(blob)) add("open-mic-stage");
+    if (/writing-circle|poetry-circle|peer-writing|poetry-sharing/.test(blob)) add("writing-poetry-circle");
+    if (/book-club|book-discussion|reading-group|community-library-open-hours/.test(blob)) add("book-reading-group");
+    if (/conversation-circle|language-exchange|facilitated-conversation|language-practice/.test(blob)) add("conversation-language");
+    if (/storytelling|story-circle|oral-tradition/.test(blob)) add("storytelling");
+    if (/zine|comic-lab|small-press/.test(blob)) add("zine-comics");
+    if (/board-game|tabletop|game-master/.test(blob)) add("board-tabletop-games");
+    if (/game-jam|hackathon|team-game-making/.test(blob)) add("game-jam-hackathon");
+    if (/repair|maker|craft|glass-blowing|embroidery|ceramic|fibre/.test(blob)) add("maker-repair-craft");
+    if (/public-art-making|guided-art-making|comic-making/.test(blob)) add("public-art-making");
+    if (/social-dance|contra-dance|lindy-hop|country-dance|cajun-dance/.test(blob)) add("social-dance");
+    if (/music-jam|klezmer-jam|traditional-music-jam|collaborative-music-making/.test(blob)) add("music-jam");
+    if (/improv-drop-in|guided-improvisation/.test(blob)) add("improv-theatre");
+    return values;
+  }
+
+  function classifyCivicFormats(event) {
+    const declared = Array.isArray(event.civic_legal_labour_formats) ? event.civic_legal_labour_formats.map(value => normalizeText(value).replaceAll(" ", "-")) : [];
+    const allowed = new Set(["election-voting", "candidate-campaign", "council-board-committee", "public-hearing-deputation", "public-consultation", "legislature-parliamentary-sitting", "court-tribunal-hearing", "inquest-public-inquiry", "union-conference", "rally-march-counterprotest", "picket-strike-labour-action", "civic-deadline-compliance"]);
+    const values = [];
+    const add = value => { if (allowed.has(value) && !values.includes(value)) values.push(value); };
+    for (const value of declared) add(value === "union-education" ? "union-conference" : value);
+    const blob = `${declared.join(" ")} ${textBlob(event)}`;
+    if (/election|electoral|advance-vot|voting-day|polling|referendum/.test(blob)) add("election-voting");
+    if (/candidate|campaign-event|campaign-session|nomination-meeting/.test(blob)) add("candidate-campaign");
+    if (/council|board-meeting|committee-meeting|design-review-panel|borough-council|school-board/.test(blob)) add("council-board-committee");
+    if (/public-hearing|deputation|committee-of-adjustment|statutory-hearing/.test(blob)) add("public-hearing-deputation");
+    if (/public-consultation|public-participation|budget-consultation|consultation-meeting/.test(blob)) add("public-consultation");
+    if (/legislature|parliamentary-sitting|house-of-commons|senate-sitting|legislative-sitting/.test(blob)) add("legislature-parliamentary-sitting");
+    if (/supreme-court|court-hearing|tribunal-hearing|appeal-hearing|judicial-hearing/.test(blob)) add("court-tribunal-hearing");
+    if (/inquest|public-inquiry|coroner/.test(blob)) add("inquest-public-inquiry");
+    if (/union-conference|union-meeting|labour-conference|worker-conference|union-education|labour-school/.test(blob)) add("union-conference");
+    if (/rally|march|counter-protest|counterprotest|demonstration|labour-day-parade/.test(blob)) add("rally-march-counterprotest");
+    if (/picket|strike|walkout|job-action|labour-action/.test(blob)) add("picket-strike-labour-action");
+    if (/deadline|compliance|registration-close|nomination-deadline|financial-filing|certification-deadline/.test(blob)) add("civic-deadline-compliance");
+    return values;
+  }
+
+  function classifyDeclaredFormats(event, field, allowedValues) {
+    const allowed = new Set(allowedValues);
+    const declared = Array.isArray(event[field]) ? event[field] : [];
+    return [...new Set(declared.map(value => normalizeText(value).replaceAll(" ", "-")).filter(value => allowed.has(value)))];
+  }
+
+  function classifyCommunityFormats(event) {
+    return classifyDeclaredFormats(event, "community_heritage_formats", [
+      "charity-walk-run-ride", "fundraiser", "benefit-performance", "food-clothing-drive",
+      "mutual-aid-action", "volunteer-day", "community-cleanup", "repair-cafe",
+      "community-garden", "neighbourhood-assembly", "community-meal", "block-party",
+      "bazaar-night-market", "newcomer-diaspora", "historical-walk", "architecture-tour",
+      "cemetery-tour", "public-dig", "reenactment", "open-archive", "doors-open",
+      "land-based-learning"
+    ]);
+  }
+
+  function classifyDigitalFormats(event) {
+    return classifyDeclaredFormats(event, "live_digital_formats", [
+      "live-podcast", "public-radio-recording", "media-taping", "livestreamed-discussion",
+      "ama", "virtual-conference", "virtual-exhibition", "virtual-festival",
+      "creator-livestream", "creator-watch-party", "game-stream", "vr-ar-event",
+      "online-premiere", "platform-native-cultural-event"
+    ]);
+  }
+
+  function classifyProgramFormats(event) {
+    return classifyDeclaredFormats(event, "course_program_formats", [
+      "public-short-course", "summer-school", "camp", "academy", "institute", "intensive",
+      "masterclass-series", "cohort-program", "mentorship-program", "film-theatre-lab",
+      "research-school", "field-school", "study-tour", "teacher-professional-development",
+      "admissions-registration", "open-house", "orientation", "convocation", "academic-showcase"
+    ]);
   }
 
   function classifyEventType(event) {
     const type = normalizeText(event.type).replaceAll(" ", "-");
-    if (["lecture", "talk", "panel", "artist-talk", "book-talk", "scholar-talk", "colloquium", "symposium", "forum"].includes(type)) return "talks";
+    const entryFamily = normalizeText(event.entry_family).replaceAll(" ", "-");
+    if (["celestial", "astrology"].includes(entryFamily)) return "celestial";
+    if (entryFamily === "ritual") return "rituals";
+    if (entryFamily.startsWith("creator-present") || event.talkback_status === "confirmed" || attendanceBearingClaims(event).length) return "creator-present";
+    if (["lecture", "talk", "panel", "artist-talk", "book-talk", "scholar-talk", "colloquium", "symposium", "forum", "seminar", "reading-group", "discussion-group"].includes(type)) return "talks";
     if (["workshop", "retreat"].includes(type)) return "workshops";
-    if (["conference", "defence", "webinar"].includes(type)) return "conferences";
+    if (["conference", "defence", "thesis-defence", "webinar"].includes(type)) return "conferences";
     if (type === "performance") return "performances";
     if (["exhibition", "site-specific-art"].includes(type) || event.record_kind === "exhibition") return "exhibitions";
     if (type === "screening") return "screenings";
@@ -700,7 +969,27 @@
     return [...new Set(groups)];
   }
 
+  function classifyGradeLevels(event) {
+    const values = [];
+    const exact = Array.isArray(event.exact_grades) ? event.exact_grades : [];
+    for (const label of exact) {
+      const normalized = normalizeText(label);
+      if (normalized === "kindergarten") values.push("k");
+      const match = normalized.match(/^grade (\d{1,2})$/);
+      if (match && Number(match[1]) >= 1 && Number(match[1]) <= 12) values.push(`g${Number(match[1])}`);
+    }
+    const levels = Array.isArray(event.education_levels) ? event.education_levels.map(normalizeText) : [];
+    const blob = normalizeText(`${event.age_band || ""} ${levels.join(" ")}`);
+    if (levels.includes("cegep") || /\bcegep\b/.test(blob)) values.push("cegep");
+    if (levels.includes("undergraduate") || /\bundergraduate|college university\b/.test(blob)) values.push("undergraduate");
+    if (levels.includes("graduate") || /\bgraduate|masters|doctoral|phd\b/.test(blob)) values.push("graduate");
+    if (levels.includes("educator") || /\beducator|teacher\b/.test(blob)) values.push("educator");
+    return [...new Set(values)];
+  }
+
   function classifyFormat(event) {
+    const declared = normalizeText(event.event_format).replaceAll(" ", "-");
+    if (["in-person", "online", "hybrid", "pending"].includes(declared)) return declared;
     const blob = normalizeText(`${event.city || ""} ${event.venue || ""} ${event.description || ""}`);
     const online = /online|virtual|zoom|webinar|livestream/.test(blob) || event.corridor_zone === "online-global";
     const inPerson = event.city && !["Unknown", "Online"].includes(event.city) && event.venue && !/online|virtual|zoom/.test(normalizeText(event.venue));
@@ -766,7 +1055,16 @@
       _topics: classifyTopic(event),
       _eventType: classifyEventType(event),
       _opportunityType: classifyOpportunityType(event),
+      _presence: classifyPresence(event),
+      _academicForms: classifyAcademicForms(event),
+      _artsFormats: classifyArtsFormats(event),
+      _participationFormats: classifyParticipationFormats(event),
+      _civicFormats: classifyCivicFormats(event),
+      _communityFormats: classifyCommunityFormats(event),
+      _digitalFormats: classifyDigitalFormats(event),
+      _programFormats: classifyProgramFormats(event),
       _audiences: classifyAudience(event),
+      _grades: classifyGradeLevels(event),
       _format: classifyFormat(event),
       _status: event.confirmation_status === "confirmed" ? "confirmed" : "pending",
       _point: eventPoint(event)
@@ -986,8 +1284,8 @@
     const tokens = normalizeText(query).split(/\s+/).filter(Boolean);
     if (!tokens.length) return true;
     return tokens.every(token => tokenVariants(token).some(variant => {
+      if (variant.length < 4) return event._words.includes(variant);
       if (event._text.includes(variant)) return true;
-      if (variant.length < 4) return false;
       const threshold = variant.length >= 8 ? 2 : 1;
       return event._words.some(word => {
         if (word.startsWith(variant) || variant.startsWith(word)) return Math.abs(word.length - variant.length) <= 2;
@@ -1037,7 +1335,16 @@
     if (ignoreKey !== "topics" && !setMatches(state.topics, event._topics)) return false;
     if (event._content === "attend" && ignoreKey !== "eventTypes" && !setMatches(state.eventTypes, event._eventType)) return false;
     if (event._content === "apply" && ignoreKey !== "opportunityTypes" && !setMatches(state.opportunityTypes, event._opportunityType)) return false;
+    if (ignoreKey !== "presence" && !setMatches(state.presence, event._presence)) return false;
+    if (ignoreKey !== "academicForms" && !setMatches(state.academicForms, event._academicForms)) return false;
+    if (ignoreKey !== "artsFormats" && !setMatches(state.artsFormats, event._artsFormats)) return false;
+    if (ignoreKey !== "participationFormats" && !setMatches(state.participationFormats, event._participationFormats)) return false;
+    if (ignoreKey !== "civicFormats" && !setMatches(state.civicFormats, event._civicFormats)) return false;
+    if (ignoreKey !== "communityFormats" && !setMatches(state.communityFormats, event._communityFormats)) return false;
+    if (ignoreKey !== "digitalFormats" && !setMatches(state.digitalFormats, event._digitalFormats)) return false;
+    if (ignoreKey !== "programFormats" && !setMatches(state.programFormats, event._programFormats)) return false;
     if (ignoreKey !== "audiences" && !setMatches(state.audiences, event._audiences)) return false;
+    if (ignoreKey !== "grades" && !setMatches(state.grades, event._grades)) return false;
     if (ignoreKey !== "formats" && !setMatches(state.formats, event._format)) return false;
     if (ignoreKey !== "statuses" && !setMatches(state.statuses, event._status)) return false;
     if (ignoreKey !== "q" && !eventMatchesSearch(event, state.q)) return false;
@@ -1124,11 +1431,13 @@
     const labels = lang === "fr" ? {
       talks: "Causerie ou conférence", workshops: "Atelier", conferences: "Colloque", performances: "Spectacle",
       exhibitions: "Exposition", screenings: "Projection", festivals: "Festival", community: "Activité communautaire",
+      celestial: "Événement céleste", rituals: "Rituel ou fête", "creator-present": "Rencontre avec les créateurs",
       "other-events": "Événement", cfp: "Appel de communications", competitions: "Concours ou prix",
       funding: "Bourse ou subvention", applications: "Candidature", "other-opportunities": "Possibilité"
     } : {
       talks: "Talk or lecture", workshops: "Workshop", conferences: "Conference", performances: "Performance",
       exhibitions: "Exhibition", screenings: "Screening", festivals: "Festival", community: "Community event",
+      celestial: "Celestial event", rituals: "Ritual or holiday", "creator-present": "Creator-present event",
       "other-events": "Event", cfp: "Call for papers", competitions: "Competition or award",
       funding: "Fellowship or grant", applications: "Application", "other-opportunities": "Opportunity"
     };
@@ -1199,16 +1508,16 @@
     return `<time class="pm-date-box" datetime="${isoDate(date)}" aria-label="${escapeHtml(formatDate(date, { dateStyle: "long" }))}"><span class="pm-date-month">${escapeHtml(formatDate(date, { month: "short" }))}</span><span class="pm-date-day">${date.getDate()}</span><span class="pm-date-year">${date.getFullYear()}</span></time>`;
   }
 
-  function sourceLabel(event) {
-    const quality = ["official", "official-or-institutional", "institutional"].includes(String(event.source_quality || "").toLowerCase())
-      ? t.officialSource
-      : t.sourceListing;
+  function sourceInfo(event) {
+    const label = ["official", "official-or-institutional", "institutional"].includes(String(event.source_quality || "").toLowerCase())
+      ? t.openOrganizer
+      : t.openSource;
     try {
       const host = new URL(event.source_url).hostname.replace(/^www\./, "");
-      return host ? `${quality} · ${host}` : quality;
+      return { label, host };
     } catch (_) {
       const sourceId = String(event.source_id || "").trim();
-      return sourceId ? `${quality} · ${sourceId}` : quality;
+      return { label, host: sourceId };
     }
   }
 
@@ -1218,6 +1527,7 @@
     const specificKind = kindLabel(event);
     const contentKind = event._content === "apply" ? t.apply : t.attend;
     const kindBadge = normalizeText(specificKind) === normalizeText(contentKind) ? "" : `<span class="pm-badge">${escapeHtml(specificKind)}</span>`;
+    const source = sourceInfo(event);
     return `
       <article class="pm-event-card" data-event-id="${escapeHtml(event.id)}">
         ${dateBoxHtml(event)}
@@ -1232,8 +1542,8 @@
           ${freshnessHtml(event)}
           ${descriptionText ? `<p class="pm-event-description">${escapeHtml(descriptionText)}</p>` : ""}
           <div class="pm-card-actions">
+            ${event.source_url ? `<a class="pm-action pm-source-action" href="${escapeHtml(event.source_url)}" rel="noopener noreferrer"><span class="pm-source-copy"><span>${escapeHtml(source.label)}</span>${source.host ? `<span class="pm-source-domain" data-allow-word-break="true">${escapeHtml(source.host)}</span>` : ""}</span><span aria-hidden="true">↗</span></a>` : ""}
             <a class="pm-action primary-link" href="${routeFor(event)}">${escapeHtml(t.details)} <span aria-hidden="true">→</span></a>
-            ${event.source_url ? `<a class="pm-action" href="${escapeHtml(event.source_url)}" rel="noopener noreferrer">${escapeHtml(sourceLabel(event))}</a>` : ""}
             <button type="button" class="pm-action pm-save" data-save-id="${escapeHtml(event.id)}" aria-pressed="${saved}" aria-label="${escapeHtml(saved ? `${t.saved}: ${event.title}` : `${t.save}: ${event.title}`)}">${escapeHtml(saved ? t.saved : t.save)}</button>
           </div>
         </div>
@@ -1365,7 +1675,7 @@
     if (!contentIsDefault) items.push({ key: "content", value: [...state.content][0] || "", label: state.content.has("attend") && !state.content.has("apply") ? t.eventsOnly : t.opportunitiesOnly });
     if (state.time !== "upcoming") items.push({ key: "time", value: state.time, label: labelFor(`time:${state.time}`) });
     if (state.near) items.push({ key: "near", value: state.near, label: `${lang === "fr" ? "Près de" : "Near"} ${NEARBY_ORIGINS[state.near].label}` });
-    for (const key of ["places", "topics", "eventTypes", "opportunityTypes", "audiences", "formats", "statuses"]) {
+    for (const key of SET_KEYS.filter(key => key !== "content")) {
       for (const value of state[key]) items.push({ key, value, label: labelFor(`${key}:${value}`) });
     }
     return items;
@@ -1382,7 +1692,6 @@
     reset.textContent = t.clearAll;
     const count = items.length;
     $("#pmFilterSelectionCount").textContent = t.filtersSelected(count);
-    $("#pmMobileFilterCount").textContent = String(count);
     $$('[data-clear-section]').forEach(button => {
       const key = button.dataset.clearSection;
       let active = false;
@@ -1403,7 +1712,16 @@
     if (key === "topics") return event._topics.includes(value);
     if (key === "eventTypes") return event._content === "attend" && event._eventType === value;
     if (key === "opportunityTypes") return event._content === "apply" && event._opportunityType === value;
+    if (key === "presence") return event._presence.includes(value);
+    if (key === "academicForms") return event._academicForms.includes(value);
+    if (key === "artsFormats") return event._artsFormats.includes(value);
+    if (key === "participationFormats") return event._participationFormats.includes(value);
+    if (key === "civicFormats") return event._civicFormats.includes(value);
+    if (key === "communityFormats") return event._communityFormats.includes(value);
+    if (key === "digitalFormats") return event._digitalFormats.includes(value);
+    if (key === "programFormats") return event._programFormats.includes(value);
     if (key === "audiences") return event._audiences.includes(value);
+    if (key === "grades") return event._grades.includes(value);
     if (key === "formats") return event._format === value;
     if (key === "statuses") return event._status === value;
     return false;
@@ -1425,7 +1743,16 @@
           : key === "topics" ? event._topics
           : key === "eventTypes" ? (event._content === "attend" ? [event._eventType] : [])
           : key === "opportunityTypes" ? (event._content === "apply" ? [event._opportunityType] : [])
+          : key === "presence" ? event._presence
+          : key === "academicForms" ? event._academicForms
+          : key === "artsFormats" ? event._artsFormats
+          : key === "participationFormats" ? event._participationFormats
+          : key === "civicFormats" ? event._civicFormats
+          : key === "communityFormats" ? event._communityFormats
+          : key === "digitalFormats" ? event._digitalFormats
+          : key === "programFormats" ? event._programFormats
           : key === "audiences" ? event._audiences
+          : key === "grades" ? event._grades
           : key === "formats" ? [event._format]
           : key === "statuses" ? [event._status] : [];
         for (const value of values) counts.set(value, (counts.get(value) || 0) + 1);
@@ -1455,8 +1782,6 @@
       ? (state.view === "calendar" ? t.calendarStatus(filteredEvents.length) : t.shown(shown, filteredEvents.length))
       : t.noResults;
     $("#pmFilterResultPreview").textContent = t.resultPreview(filteredEvents.length);
-    $("#pmMobileResults").textContent = t.viewResults(filteredEvents.length);
-    $("#pmJumpResults").textContent = t.viewResults(filteredEvents.length);
   }
 
   function hasCustomSearch() {
@@ -1559,33 +1884,11 @@
     renderSaved();
   }
 
-  function renderPresetStates() {
-    const checks = {
-      today: state.time === "today",
-      week: state.time === "7d",
-      attend: state.content.size === 1 && state.content.has("attend"),
-      apply: state.content.size === 1 && state.content.has("apply"),
-      families: state.audiences.size === 2 && ["youth", "families"].every(x => state.audiences.has(x)),
-      educators: state.audiences.size === 1 && state.audiences.has("educators"),
-      online: state.formats.size === 1 && state.formats.has("online"),
-      philosophy: state.topics.size === 1 && state.topics.has("philosophy"),
-      humanities: state.topics.size === 3 && ["philosophy", "writing", "arts"].every(x => state.topics.has(x)),
-      lectures: state.content.size === 1 && state.content.has("attend") && state.eventTypes.size === 1 && state.eventTypes.has("talks"),
-      festivals: state.content.size === 1 && state.content.has("attend") && state.eventTypes.size === 1 && state.eventTypes.has("festivals"),
-      writing: state.topics.size === 1 && state.topics.has("writing"),
-      fellowships: state.content.size === 1 && state.content.has("apply") && state.opportunityTypes.size === 1 && state.opportunityTypes.has("funding"),
-      toronto: state.places.size === 1 && state.places.has("toronto-gta"),
-      corridor: state.places.size === 5 && ["kingston", "gananoque", "brockville", "cornwall-sdg", "montreal"].every(x => state.places.has(x))
-    };
-    $$('[data-preset]').forEach(button => button.setAttribute("aria-pressed", String(Boolean(checks[button.dataset.preset]))));
-  }
-
   function render() {
     applyFilters();
     renderCounts();
     renderActiveFilters();
     renderFacetCounts();
-    renderPresetStates();
     if (state.view === "calendar") {
       $("#pmEventList").hidden = true;
       $("#pmLoadMore").hidden = true;
@@ -1643,7 +1946,7 @@
     state.q = "";
     state.content = defaultContent();
     state.time = "upcoming";
-    for (const key of ["places", "topics", "eventTypes", "opportunityTypes", "audiences", "formats", "statuses"]) state[key].clear();
+    for (const key of SET_KEYS.filter(key => key !== "content")) state[key].clear();
     state.sort = "soonest";
     state.near = "";
     state.visible = PAGE_SIZE;
@@ -1732,50 +2035,12 @@
     }
   }
 
-  function applyPreset(name, label) {
-    resetFilters();
-    const presets = {
-      today: () => { state.content = new Set(["attend"]); state.time = "today"; },
-      week: () => { state.content = new Set(["attend"]); state.time = "7d"; },
-      attend: () => { state.content = new Set(["attend"]); },
-      apply: () => { state.content = new Set(["apply"]); },
-      families: () => { ["youth", "families"].forEach(x => state.audiences.add(x)); },
-      educators: () => state.audiences.add("educators"),
-      online: () => state.formats.add("online"),
-      philosophy: () => state.topics.add("philosophy"),
-      humanities: () => ["philosophy", "writing", "arts"].forEach(x => state.topics.add(x)),
-      lectures: () => { state.content = new Set(["attend"]); state.eventTypes.add("talks"); },
-      festivals: () => { state.content = new Set(["attend"]); state.eventTypes.add("festivals"); },
-      writing: () => state.topics.add("writing"),
-      fellowships: () => { state.content = new Set(["apply"]); state.opportunityTypes.add("funding"); },
-      toronto: () => state.places.add("toronto-gta"),
-      corridor: () => ["kingston", "gananoque", "brockville", "cornwall-sdg", "montreal"].forEach(x => state.places.add(x))
-    };
-    presets[name]?.();
-    syncControlsFromState();
-    state.visible = PAGE_SIZE;
-    renderWithAnchor(document.activeElement);
-    $("#pmStatus").textContent = t.presetApplied(label);
-    // Keep the page anchored. Presets update in place; the explicit Results
-    // button remains available for people who want to jump down.
-  }
-
-  function syncResponsiveDisclosureState() {
-    const drawer = $("#pmFilterDrawer");
-    const button = $("#pmMobileFilters");
-    if (drawer && button) {
-      button.setAttribute("aria-expanded", String(drawer.open));
-    }
-  }
-
   function configureResponsivePanels() {
-    const mobile = mobileViewport.matches;
-    $("#pmFilterDrawer").open = !mobile;
-    if ($("#pmQuickStarts")) $("#pmQuickStarts").open = !mobile;
-    syncResponsiveDisclosureState();
-    // The stylesheet paints these same responsive states before this deferred
-    // controller runs. Mark hydration only after the native details states
-    // agree, so opening or closing them never moves the page after first paint.
+    // Search and the listing stay primary at every viewport. Filters begin
+    // collapsed, then retain the visitor's own open/closed choice.
+    if (!document.documentElement.classList.contains("pm-ui-ready")) {
+      $("#pmFilterDrawer").open = false;
+    }
     document.documentElement.classList.add("pm-ui-ready");
   }
 
@@ -1828,14 +2093,6 @@
       lastCalendarSignature = "";
       render();
     });
-
-    const filterDrawer = $("#pmFilterDrawer");
-    filterDrawer.addEventListener("toggle", syncResponsiveDisclosureState);
-    if (typeof mobileViewport.addEventListener === "function") {
-      mobileViewport.addEventListener("change", configureResponsivePanels);
-    } else if (typeof mobileViewport.addListener === "function") {
-      mobileViewport.addListener(configureResponsivePanels);
-    }
 
     document.addEventListener("change", event => {
       const input = event.target;
@@ -1969,9 +2226,6 @@
       if (event.target.closest("#pmCloseSaved")) { closeSavedDialog(); return; }
       if (event.target.closest("#pmShare")) { await shareCurrentView(); return; }
 
-      const preset = event.target.closest("[data-preset]");
-      if (preset) { applyPreset(preset.dataset.preset, preset.textContent.trim()); return; }
-
       const nav = event.target.closest("[data-calendar-nav]");
       if (nav) {
         if (nav.dataset.calendarNav === "today") state.calendarMonth = startOfMonth(calendarToday());
@@ -1991,20 +2245,6 @@
         return;
       }
 
-      if (event.target.closest("#pmJumpResults") || event.target.closest("#pmMobileResults")) {
-        $("#pmFilterDrawer").open = false;
-        requestAnimationFrame(() => {
-          $("#pmResults").scrollIntoView({ behavior: "auto", block: "start" });
-          $("#pmResultsTitle").focus({ preventScroll: true });
-        });
-        return;
-      }
-
-      if (event.target.closest("#pmMobileFilters")) {
-        $("#pmFilterDrawer").open = true;
-        $("#pmFilterDrawer").querySelector('summary')?.focus({ preventScroll: true });
-        return;
-      }
     });
 
     const dialog = $("#pmSavedPanel");
@@ -2018,11 +2258,8 @@
       "#pmClearSearch",
       "#pmSort",
       "#pmNear",
-      "#pmJumpResults",
-      "#pmMobileResults",
       "[data-state-set]",
       'input[name="pm-time"]',
-      "[data-preset]",
       "[data-view]",
       "[data-clear-section]",
       "#pmResetFilters"

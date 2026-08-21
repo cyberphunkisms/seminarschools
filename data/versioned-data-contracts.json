@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0.0",
+  "contractId": "FP-13",
+  "datasets": {
+    "polymythcal-events": {
+      "source": "polymythseminars/events.json",
+      "versionField": "_schema_version",
+      "currentVersion": "2.0.0",
+      "recordShape": "events",
+      "migrations": []
+    },
+    "polymyth-commons": {
+      "source": "polymythlib/data/polymyth-data.json",
+      "versionField": "schemaVersion",
+      "currentVersion": "1.0.0",
+      "recordShape": "projects",
+      "migrations": []
+    },
+    "teacher-resources": {
+      "source": "teacherresources/resources-data.json",
+      "versionField": "schemaVersion",
+      "currentVersion": "1.0.0",
+      "recordShape": "teacher-entries",
+      "migrations": [
+        {
+          "id": "teacher-resources-unversioned-to-1.0.0",
+          "from": "unversioned",
+          "to": "1.0.0"
+        }
+      ]
+    }
+  }
+}

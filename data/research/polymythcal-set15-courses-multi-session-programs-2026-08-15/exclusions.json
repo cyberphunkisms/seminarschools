@@ -1,0 +1,131 @@
+[
+  {
+    "id": "exclude-aia-monastic-archaeology-malformed-season",
+    "title": "AIA-listed monastic archaeology field school with contradictory season years",
+    "source_url": "https://www.archaeological.org/programs/professionals/fieldwork/fieldwork-list/",
+    "disposition": "excluded",
+    "reason_codes": [
+      "irreconcilable-date-contradiction"
+    ],
+    "reason": "A candidate listing exposed a season start in June 2027 and an end in July 2026. It was not normalized or silently repaired without organizer confirmation."
+  },
+  {
+    "id": "exclude-cfc-comedy-series-lab-stale-year",
+    "title": "CFC Comedy Series Lab page labeled 2026 with 2025 dates",
+    "source_url": "https://cfccreates.com/programs/",
+    "disposition": "excluded",
+    "reason_codes": [
+      "stale-or-contradictory-program-year"
+    ],
+    "reason": "The candidate page's title/year and displayed January-June 2025 dates did not align, so it was not represented as a current 2026 lab."
+  },
+  {
+    "id": "exclude-closed-past-summer-school-cycles",
+    "title": "Summer schools and camps ending before August 15, 2026",
+    "source_url": "https://www.fields.utoronto.ca/activities/workshops/past",
+    "disposition": "excluded-class",
+    "reason_codes": [
+      "ended-before-research-date"
+    ],
+    "reason": "Past 2026 cycles with no remaining deadline, session, or follow-on action were omitted even when official archives remained online."
+  },
+  {
+    "id": "exclude-ended-banff-directors-intensive-2026",
+    "title": "Banff Directors Intensive 2026",
+    "source_url": "https://www.banffcentre.ca/programs",
+    "disposition": "excluded",
+    "reason_codes": [
+      "program-ended-before-research-date"
+    ],
+    "reason": "The bounded program had already ended before August 15, 2026 and had no remaining application or delivery stage."
+  },
+  {
+    "id": "exclude-ended-banff-playwrights-lab-2026",
+    "title": "Banff Playwrights Lab 2026",
+    "source_url": "https://www.banffcentre.ca/programs",
+    "disposition": "excluded",
+    "reason_codes": [
+      "program-ended-before-research-date"
+    ],
+    "reason": "The 2026 lab was already complete by the research date and had no current actionable stage."
+  },
+  {
+    "id": "exclude-ended-naco-mentorship-2026",
+    "title": "NACO mentorship program — June 2026",
+    "source_url": "https://nac-cna.ca/en/orchestra",
+    "disposition": "excluded",
+    "reason_codes": [
+      "program-ended-before-research-date"
+    ],
+    "reason": "The surfaced June 8-25, 2026 mentorship dates were wholly past by August 15."
+  },
+  {
+    "id": "exclude-generic-degree-admissions-pages",
+    "title": "Generic evergreen degree admissions pages",
+    "source_url": "https://www.sgs.utoronto.ca/programs/",
+    "disposition": "excluded-class",
+    "reason_codes": [
+      "not-a-bounded-named-cycle"
+    ],
+    "reason": "Set 15 admits only named intake cycles with an official opening, deadline, or bounded application window; evergreen program descriptions were not converted to calendar events."
+  },
+  {
+    "id": "exclude-historical-thinking-institute-2026-existing-date-mismatch",
+    "title": "Bilingual Historical Thinking Institute 2026 (existing Set 12 record)",
+    "source_url": "https://www.canadashistory.ca/education/professional-learning/virtual-historical-thinking",
+    "existing_id": "historical-thinking-institute-2026",
+    "disposition": "excluded-and-flagged-for-correction",
+    "reason_codes": [
+      "existing-date-range-unsupported",
+      "program-ended-before-research-date"
+    ],
+    "reason": "The current official page states seven sessions ran January 14-April 8, 2026. The Set 12 record says September-December 2026, which the reviewed source does not support. It is not cross-tagged as current Set 15 coverage.",
+    "evidence": [
+      "Official source lists seven biweekly sessions from January to April 2026.",
+      "As of August 15, 2026 the program is past."
+    ]
+  },
+  {
+    "id": "exclude-michener-mri-inconsistent-heading",
+    "title": "Michener MRI for Imaging Professionals cycle with conflicting year text",
+    "source_url": "https://michener.ca/programs-courses/magnetic-resonance-imaging-mri-for-imaging-professionals/",
+    "disposition": "excluded",
+    "reason_codes": [
+      "source-year-inconsistency",
+      "safer-cycle-alternatives-available"
+    ],
+    "reason": "The page's heading described a January 2026 start while the date sequence appeared to imply January 2027. It was excluded rather than silently relabeled."
+  },
+  {
+    "id": "exclude-non-educational-open-houses",
+    "title": "Civic, commercial, real-estate, and generic museum open houses",
+    "source_url": "https://www.todocanada.ca/",
+    "disposition": "excluded-class",
+    "reason_codes": [
+      "not-educational-open-house",
+      "non-primary-aggregator"
+    ],
+    "reason": "Only institution-controlled educational recruitment/program open houses were in scope. Non-educational open houses and aggregator listings were excluded."
+  },
+  {
+    "id": "exclude-ualberta-humayma-field-school-spring-2027-tba",
+    "title": "Humayma Archaeological Field School — Spring 2027",
+    "source_url": "https://www.ualberta.ca/en/international/global-learning/go-abroad/programs/humayma-archaeological-field-school-jordan-spring-program.html",
+    "disposition": "excluded",
+    "reason_codes": [
+      "program-date-tba",
+      "application-deadline-tba"
+    ],
+    "reason": "The official institutional page leaves both Spring 2027 program dates and the application deadline TBA, so there is no bounded actionable date or defensible monitoring window."
+  },
+  {
+    "id": "exclude-undated-masterclass-pages",
+    "title": "Generic masterclass pages without a current dated session",
+    "source_url": "https://www.rcmusic.com/ggs/master-classes-and-performances/master-class-schedule",
+    "disposition": "excluded-class-except-confirmed-session",
+    "reason_codes": [
+      "no-actionable-date"
+    ],
+    "reason": "The rolling RCM series is represented only by its one currently dated session. Undated future claims were not invented."
+  }
+]

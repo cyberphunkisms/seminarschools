@@ -6,7 +6,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const ROOT = path.resolve(__dirname, "..");
-const RELEASE_ID =
+const AUDIT53_RELEASE_ID =
   "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final";
 const failures = [];
 
@@ -50,9 +50,11 @@ function sha256(buffer) {
   "polymythseminars/events.json",
 ].forEach((relative) => read(relative));
 
-expect(read("RELEASE_ID.txt").trim() === RELEASE_ID, "Audit 53 release ID mismatch");
 const release = json("RELEASE_MANIFEST.json");
-expect(release.release_id === RELEASE_ID, "Audit 53 manifest release ID mismatch");
+expect(
+  release.base_release_id === AUDIT53_RELEASE_ID,
+  "current release does not declare the preserved Audit 53 base release",
+);
 expect(
   release.notes?.some(
     (note) => note.includes("Seminar Schools home") && note.includes("Polymyth Commons"),
@@ -101,12 +103,18 @@ expect(
 expect(
   teacherIndex.includes("Start with a teaching task") &&
     teacherIndex.includes("Search and combine filters") &&
+    teacherIndex.includes("Browse by teaching area") &&
     teacherIndex.includes("All 25 collections"),
   "Teacher Resources discovery hierarchy is incomplete",
 );
 expect(
-  Buffer.byteLength(teacherIndex, "utf8") < 450000,
-  "Teacher Resources source page exceeds its raw HTML budget",
+  Buffer.byteLength(teacherIndex, "utf8") < 730000,
+  "Teacher Resources source-first page exceeds its raw HTML budget",
+);
+expect(
+  (teacherIndex.match(/class="entry-source-cta"/g) || []).length === 644 &&
+    (teacherIndex.match(/class="entry-detail"/g) || []).length === 644,
+  "Teacher Resources must expose one original-source action and one secondary detail route per record",
 );
 expect(
   (read("teacherresources/feed.xml").match(/<item>/g) || []).length === 644,
@@ -124,19 +132,34 @@ expect(
   new Set(events.map((event) => event.type)).size === 32,
   "Polymythcal must retain its 32 event types",
 );
-for (const [relative, markers] of [
+for (const [relative, markers, retired] of [
   [
     "polymythseminars/index.html",
-    ["What do you want to do?", "Plan this week", "Meet an application deadline", "/polymythcommons/"],
+    [
+      "Search the calendar",
+      "Filter listings",
+      "Each listing has a direct link to the organizer or source website.",
+      "/polymythcommons/",
+    ],
+    ["What do you want to do?", "Plan this week", "Meet an application deadline"],
   ],
   [
     "polymythseminars/fr/index.html",
-    ["Que voulez-vous faire", "Planifier cette semaine", "Respecter une date limite", "/polymythcommons/"],
+    [
+      "Rechercher dans le calendrier",
+      "Filtrer les fiches",
+      "Chaque fiche mène directement au site de l’organisateur ou au site source.",
+      "/polymythcommons/",
+    ],
+    ["Que voulez-vous faire", "Planifier cette semaine", "Respecter une date limite"],
   ],
 ]) {
   const source = read(relative);
   markers.forEach((marker) =>
     expect(source.includes(marker), `${relative} lost ${marker}`),
+  );
+  retired.forEach((marker) =>
+    expect(!source.includes(marker), `${relative} restored retired intent layer ${marker}`),
   );
 }
 const calendarApp = read("js/polymythcal-revamp.js");

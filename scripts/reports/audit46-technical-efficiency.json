@@ -1,13 +1,13 @@
 {
   "schema": "seminar-schools-audit46-technical-efficiency-v1",
-  "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
-  "generated_at": "2026-07-28T21:45:00-04:00",
-  "site_build_date": "2026-08-06",
+  "release_id": "2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final",
+  "generated_at": "2026-08-15T18:00:00-04:00",
+  "site_build_date": "2026-08-15",
   "status": "passed",
   "metrics": {
-    "source_html_files": 3397,
-    "public_html_files": 3397,
-    "audit43_stylesheet_references": 6794,
+    "source_html_files": 7211,
+    "public_html_files": 7211,
+    "audit43_stylesheet_references": 14422,
     "audit43_reader_references": 12,
     "duplicate_audit43_stylesheet_references": 0,
     "duplicate_audit43_reader_references": 0,
@@ -17,8 +17,8 @@
     "compatible_redirect_overlaps": 82,
     "predeploy_npm_ci_steps": 1,
     "predeploy_npm_install_steps": 1,
-    "expired_bilingual_event_routes": 788
+    "expired_bilingual_event_routes": 986
   },
   "failures": [],
-  "policy": "Current Toronto rollover, one shared asset request per pathname, exact runtimes, lean weekly jobs, streamed package verification, coherent redirects, and bounded large-index caching are release blockers."
+  "policy": "Configured release-day rollover with a current-Toronto fallback, one shared asset request per pathname, exact runtimes, lean weekly jobs, streamed package verification, coherent redirects, and bounded large-index caching are release blockers."
 }

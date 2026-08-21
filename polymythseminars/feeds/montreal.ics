@@ -6,98 +6,29 @@ METHOD:PUBLISH
 X-WR-CALNAME:Polymythcal — Montréal listings · Fiches de Montréal
 X-WR-TIMEZONE:America/Toronto
 BEGIN:VEVENT
-UID:ab855c99a853c0c9ff0b@seminarschools.com
-DTSTAMP:20260628T042537Z
-DTSTART;VALUE=DATE:20260625
-DTEND;VALUE=DATE:20260705
-SUMMARY:Festival International de Jazz de Montréal 2026
-LOCATION:Downtown Montréal venues\, Montréal
-DESCRIPTION:The 46th edition runs June 25 to July 4\, 2026. The official fe
- stival programme is the source for any separately listed performances.
-URL:https://seminarschools.com/polymythseminars/events/2ea6faeee4a4/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:6a784171d8de63cbbd56@seminarschools.com
-DTSTAMP:20260628T042537Z
-DTSTART:20260630T230000Z
-SUMMARY:Public Talk: Les trous noirs sous toutes leurs couleurs
-LOCATION:McGill University\, Montréal\, Montréal
-DESCRIPTION:Official McGill Faculty of Science events page lists Public Tal
- k: Les trous noirs sous toutes leurs couleurs on June 30\, 2026.
-URL:https://seminarschools.com/polymythseminars/events/7241619d213e/
+UID:6c8b237bb30ea3a3f74c@seminarschools.com
+DTSTAMP:20260815T160000Z
+DTSTART:20260205T220000Z
+DTEND:20260206T003000Z
+SUMMARY:Assemblée de quartier — Montréal-Nord
+LOCATION:Montréal-Nord\, Montréal
+DESCRIPTION:A free neighbourhood assembly for information\, exchange\, and 
+ resident participation\, with a meal and registered childcare.
+URL:https://seminarschools.com/polymythseminars/events/montreal-nord-assemb
+ lee-de-quartier-2026-02-05/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
-UID:6a356e34e6eeac0e4b47@seminarschools.com
-DTSTAMP:20260628T042537Z
-DTSTART:20260703T000000Z
-SUMMARY:Saint Levant at Festival International de Jazz de Montréal 2026
-LOCATION:TD Stage\, Montréal\, Montréal
-DESCRIPTION:Official Montréal Jazz Festival programme page lists Saint Lev
- ant on July 2\, 2026 at the TD Stage.
-URL:https://seminarschools.com/polymythseminars/events/55335321d10e/
-STATUS:CONFIRMED
-END:VEVENT
-BEGIN:VEVENT
-UID:f9f1cde02b55c90bee1b@seminarschools.com
-DTSTAMP:20260628T042537Z
-DTSTART:20260704T000000Z
-SUMMARY:Patrick Watson at Festival International de Jazz de Montréal 2026
-LOCATION:TD Stage\, Montréal\, Montréal
-DESCRIPTION:Official Montréal Jazz Festival programme page lists Patrick W
- atson on July 3\, 2026 at the TD Stage.
-URL:https://seminarschools.com/polymythseminars/events/3830157c28b8/
-STATUS:CONFIRMED
-END:VEVENT
-BEGIN:VEVENT
-UID:244fd22e6b519463c766@seminarschools.com
-DTSTAMP:20260628T042537Z
-DTSTART:20260708T170000Z
-SUMMARY:Funding Opportunities for Graduate Students in Research Programs wi
- thin the Social Sciences\, Arts and Humanities
-LOCATION:Concordia University\, Montréal\, Montréal
-DESCRIPTION:Official Concordia GradProSkills event page for a workshop on f
- unding opportunities for graduate students in social sciences\, arts and h
- umanities research programs.
-URL:https://seminarschools.com/polymythseminars/events/c7eb8ca496f2/
-STATUS:CONFIRMED
-END:VEVENT
-BEGIN:VEVENT
-UID:2a731be0c80e51e047ff@seminarschools.com
-DTSTAMP:20260628T042537Z
-DTSTART;VALUE=DATE:20260710
-DTEND;VALUE=DATE:20260822
-SUMMARY:The Let Down Reflex at the FOFA Gallery
-LOCATION:FOFA Gallery\, Concordia University\, Montréal\, Montréal
-DESCRIPTION:Official Concordia FOFA Gallery event page lists The Let Down R
- eflex exhibition running from July 10 to August 21\, 2026.
-URL:https://seminarschools.com/polymythseminars/events/fdc0f440490c/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:4b4b75f1dad4912f2266@seminarschools.com
-DTSTAMP:20260628T042537Z
-DTSTART;VALUE=DATE:20260716
-DTEND;VALUE=DATE:20260803
-SUMMARY:Fantasia International Film Festival 2026
-LOCATION:Concordia Hall\, J.A. de Sève cinemas\, and Cinéma du Musée\, M
- ontréal\, Montréal
-DESCRIPTION:Fantasia’s 30th edition runs July 16 through August 2\, 2026\
- , with screenings\, workshops\, and launch events in Montréal.
-URL:https://seminarschools.com/polymythseminars/events/a82c1caf76cf/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:1daa1b46770b24fea60c@seminarschools.com
-DTSTAMP:20260628T042537Z
-DTSTART;VALUE=DATE:20260717
-DTEND;VALUE=DATE:20260718
-SUMMARY:Teenage Sex and Death at Camp Miasma — Canadian Premiere and Q&A
-LOCATION:SGW Alumni Auditorium\, Montréal\, Montréal
-DESCRIPTION:Fantasia lists the Canadian premiere for July 17\, 2026\, with 
- Jane Schoenbrun and Hannah Einbinder in attendance for a special Q&A.
-URL:https://seminarschools.com/polymythseminars/events/dae6c0d27ea4/
+UID:f6b6a8858121a7ec3bd6@seminarschools.com
+DTSTAMP:20260815T160000Z
+DTSTART;VALUE=DATE:20260325
+DTEND;VALUE=DATE:20260326
+SUMMARY:Indigenous land-based education — Concordia public conversation
+LOCATION:Concordia University Fourth Space / online\, Montréal
+DESCRIPTION:A Montréal and online public conversation on Indigenous land-b
+ ased education.
+URL:https://seminarschools.com/polymythseminars/events/concordia-indigenous
+ -land-based-education-2026/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
@@ -538,18 +469,6 @@ URL:https://seminarschools.com/polymythseminars/events/research-c691b6fadcb
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:be0bcceda03d7078a724@seminarschools.com
-DTSTAMP:20260628T042537Z
-DTSTART;VALUE=DATE:20260731
-DTEND;VALUE=DATE:20260803
-SUMMARY:OSHEAGA 2026
-LOCATION:Parc Jean-Drapeau\, Montréal\, Montréal
-DESCRIPTION:The 2026 edition runs July 31 to August 2 at Parc Jean-Drapeau.
-  The official programme is the source for dated individual productions.
-URL:https://seminarschools.com/polymythseminars/events/8c0a1af041b0/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:69313bb01544b72dd9b3@seminarschools.com
 DTSTAMP:20260721T160000Z
 DTSTART:20260731T150000Z
@@ -572,17 +491,6 @@ DESCRIPTION:Sold out
 URL:https://seminarschools.com/polymythseminars/events/research-a72df39f23c
  2/
 STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:59d5838cfa8247e383e1@seminarschools.com
-DTSTAMP:20260628T042537Z
-DTSTART:20260802T012000Z
-SUMMARY:Tate McRae at OSHEAGA 2026
-LOCATION:Bell River Stage\, Parc Jean-Drapeau\, Montréal\, Montréal
-DESCRIPTION:Official OSHEAGA programme page lists Tate McRae on August 1\, 
- 2026 at 9:20 pm on the Bell River Stage.
-URL:https://seminarschools.com/polymythseminars/events/91219ec49135/
-STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:c1308c95b7ff1b6f863f@seminarschools.com
@@ -743,6 +651,65 @@ URL:https://seminarschools.com/polymythseminars/events/research-7e7626aa1b1
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:053f4335912643f25a2a@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260814T130000Z
+DTEND:20260925T200000Z
+SUMMARY:Concordia University Public Thesis Defences — August–September 
+ 2026
+LOCATION:Concordia University and online\, Montréal
+DESCRIPTION:Official series of free public doctoral and master's oral exami
+ nations\, represented below as separate occurrence-level records with the 
+ candidate\, discipline\, thesis title\, access mode\, venue\, and source p
+ age retained.
+URL:https://seminarschools.com/polymythseminars/events/concordia-public-the
+ sis-defences-2026-08-14-to-09-25/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:bcea08ee0149a6ab9037@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260814T130000Z
+DTEND:20260814T160000Z
+SUMMARY:Jose Luis Cortes Santander — Art Education DOCTORAL Defence
+LOCATION:EV 5.825\, Montréal
+DESCRIPTION:Free public oral examination by Jose Luis Cortes Santander in A
+ rt Education: “(In)disciplinarity: Art as Education.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-jose-l
+ uis-cortes-santander-2026-08-14/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:520785990d2595e917d2@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260814T133000Z
+DTEND:20260814T163000Z
+SUMMARY:Alex Chartrand — Communication Studies DOCTORAL Defence
+LOCATION:LB 322\, Montréal
+DESCRIPTION:Free public oral examination by Alex Chartrand in Communication
+  Studies: “Trajectories of Digital Resistance from Montreal to Berlin: T
+ he Role of Queer Algorithmic Imaginaries in Challenging Discriminatory Con
+ ditions on Social Media.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-alex-c
+ hartrand-2026-08-14/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:2d5a41b5d070e5311d37@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260814T140000Z
+DTEND:20260814T170000Z
+SUMMARY:Negarsadat Rahimi — Individualized Program in Fine Arts DOCTORAL 
+ Defence
+LOCATION:LB 205\, Montréal
+DESCRIPTION:Free public oral examination by Negarsadat Rahimi in Individual
+ ized Program in Fine Arts: “A Framework for Façade Retrofitting Decisio
+ n-Making to Decarbonize Buildings.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-negars
+ adat-rahimi-2026-08-14/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:72459bf734c72f2af1a9@seminarschools.com
 DTSTAMP:20260721T160000Z
 DTSTART;VALUE=DATE:20260817
@@ -753,6 +720,21 @@ DESCRIPTION:Camp de jour été 2026
 URL:https://seminarschools.com/polymythseminars/events/research-33f82c52d3a
  b/
 STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:442c55fa23e30427306a@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260817T150000Z
+DTEND:20260817T180000Z
+SUMMARY:Rosanne Villemaire-Krajden — Psychology DOCTORAL Defence
+LOCATION:Loyola PY 244\, Montréal
+DESCRIPTION:Free public oral examination by Rosanne Villemaire-Krajden in P
+ sychology: “Extracurricular Activity Participation and Psychosocial Deve
+ lopment in Emerging Adulthood: A Mixed-Methods Study of Wellbeing and Care
+ er Adaptability.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-rosann
+ e-villemaire-krajden-2026-08-17/
+STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:9d98473ef7bdb50b3aa9@seminarschools.com
@@ -767,6 +749,20 @@ URL:https://seminarschools.com/polymythseminars/events/research-31d15fc308b
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:6df162bcdb87f7a59fe4@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260818T140000Z
+DTEND:20260818T170000Z
+SUMMARY:Xingnan Zhou — Civil Engineering DOCTORAL Defence
+LOCATION:EV 003.309\, Montréal
+DESCRIPTION:Free public oral examination by Xingnan Zhou in Civil Engineeri
+ ng: “Multi-Scale Deep Learning Frameworks for Trajectory Prediction\, Sc
+ ene Understanding\, and Perception in Autonomous Driving.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-xingna
+ n-zhou-2026-08-18/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:8941277ff1f110e3d426@seminarschools.com
 DTSTAMP:20260721T160000Z
 DTSTART;VALUE=DATE:20260819
@@ -777,6 +773,34 @@ DESCRIPTION:Neighbourhood Festival and Outdoor Film
 URL:https://seminarschools.com/polymythseminars/events/research-04fa4e010bd
  4/
 STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:a62dc9b26f6c3886bb7c@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260819T143000Z
+DTEND:20260819T173000Z
+SUMMARY:Antônio Cavalcante Pereira — Civil Engineering DOCTORAL Defence
+LOCATION:EV 003.309\, Montréal
+DESCRIPTION:Free public oral examination by Antônio Cavalcante Pereira in 
+ Civil Engineering: “Phosphorus Attenuation from Lake Water and Sediment 
+ Using Geotextile Filtration and Air-Induced Sediment Resuspension.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-antoni
+ o-cavalcante-pereira-2026-08-19/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:92d95064d09e3fea5a49@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260819T170000Z
+DTEND:20260819T200000Z
+SUMMARY:Mahmoud Abdelrahman — Civil Engineering DOCTORAL Defence
+LOCATION:EV 001.162\, Montréal
+DESCRIPTION:Free public oral examination by Mahmoud Abdelrahman in Civil En
+ gineering: “Investigation of the compressive and in-plane shear behaviou
+ r of dry-stacked interlocking masonry compared to conventional masonry.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-mahmou
+ d-abdelrahman-2026-08-19/
+STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:8b76017baa50c2b594e9@seminarschools.com
@@ -791,14 +815,335 @@ URL:https://seminarschools.com/polymythseminars/events/research-d1f1c1d48b8
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:64c611460c74dc9dcd90@seminarschools.com
-DTSTAMP:20260628T042537Z
+UID:23e59e4a260dbc90c33b@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260820T130000Z
+DTEND:20260820T160000Z
+SUMMARY:Ariel Patricia Boyle — Psychology DOCTORAL Defence
+LOCATION:Loyola PY 244\, Montréal
+DESCRIPTION:Free public oral examination by Ariel Patricia Boyle in Psychol
+ ogy: “Investigating the influence of intolerance of uncertainty and fear
+  of depression recurrence on the development of depressive symptoms: Longi
+ tudinal studies of healthy and remitted depressed individuals.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-ariel-
+ patricia-boyle-2026-08-20/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:113f6c278f66d5e7a8bc@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260820T140000Z
+DTEND:20260820T170000Z
+SUMMARY:Amin Saber — Mechanical Engineering DOCTORAL Defence
+LOCATION:EV 1.162\, Montréal
+DESCRIPTION:Free public oral examination by Amin Saber in Mechanical Engine
+ ering: “A Robust Physics-based Thermo-Magneto-Viscoelastic Constitutive 
+ Model for Magnetorheological Elastomers with Experimental Validation.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-amin-s
+ aber-2026-08-20/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:ab772b3598f0b4c2c488@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260820T140000Z
+DTEND:20260820T170000Z
+SUMMARY:Ishfaq Bashir Sofi — Electrical and Computer Engineering DOCTORAL
+  Defence
+LOCATION:EV 2.184\, Montréal
+DESCRIPTION:Free public oral examination by Ishfaq Bashir Sofi in Electrica
+ l and Computer Engineering: “Generative Artificial Intelligence for Secu
+ re and Efficient Intrusion Detection in Imbalanced Multi-Attack Cyber Envi
+ ronments.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-ishfaq
+ -bashir-sofi-2026-08-20/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:dc4204335dd0df3e6b6f@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260820T140000Z
+DTEND:20260820T170000Z
+SUMMARY:Mahdieh Adib — Building Engineering DOCTORAL Defence
+LOCATION:EV 003.309\, Montréal
+DESCRIPTION:Free public oral examination by Mahdieh Adib in Building Engine
+ ering: “Neural Surrogate-Based Model Predictive Control for Compressed A
+ ir Energy Storage.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-mahdie
+ h-adib-2026-08-20/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:b2de58f32bf85c05c50f@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260820T173000Z
+DTEND:20260820T203000Z
+SUMMARY:Salma Elhankouri — Humanities DOCTORAL Defence
+LOCATION:Hall 1226\, Montréal
+DESCRIPTION:Free public oral examination by Salma Elhankouri in Humanities:
+  “Where Roots Flow: Portals of Trans-Indigenous Relational Practices in 
+ Montreal Contemporary Art and Research.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-salma-
+ elhankouri-2026-08-20/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:a8724d3d1c793574782c@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260821T140000Z
+DTEND:20260821T170000Z
+SUMMARY:Sean Francis Connolly-Boutin — Mechanical Engineering DOCTORAL De
+ fence
+LOCATION:EV 3.309\, Montréal
+DESCRIPTION:Free public oral examination by Sean Francis Connolly-Boutin in
+  Mechanical Engineering: “Marrying Canonical Detonation Experiments and 
+ Fundamentals with Rotating Detonation Engine Research and Development.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-sean-f
+ rancis-connolly-boutin-2026-08-21/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:46d0faf6bc1fa94babde@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260821T140000Z
+DTEND:20260821T170000Z
+SUMMARY:Shima Jalili — Mathematics DOCTORAL Defence
+LOCATION:LB 921-4\, Montréal
+DESCRIPTION:Free public oral examination by Shima Jalili in Mathematics: 
+ “Dynamic Hedging under Market Incompleteness: Time-Consistent Risk Contr
+ ol\, Jump Risk\, and Deep Hedging Applications to Cryptocurrency Markets.
+ ”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-shima-
+ jalili-2026-08-21/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:8319827d9c055c8af69b@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260821T160000Z
+DTEND:20260821T190000Z
+SUMMARY:Alina Gutiérrez Mejía — Individualized Program DOCTORAL Defence
+LOCATION:LB 362\, Montréal
+DESCRIPTION:Free public oral examination by Alina Gutiérrez Mejía in Indi
+ vidualized Program: “Visual Tools as Inclusive Facilitation Practices in
+  Diverse Organizational Teams: A Qualitative Case Study of Facilitation Co
+ nditions\, Barriers\, and Post-Session Sensemaking in a DEI Organizational
+  Context.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-alina-
+ gutierrez-mejia-2026-08-21/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:e0ecbd468e33a3f23408@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260821T180000Z
+DTEND:20260821T210000Z
+SUMMARY:Hussein Atia — Civil Engineering DOCTORAL Defence
+LOCATION:EV 003.309\, Montréal
+DESCRIPTION:Free public oral examination by Hussein Atia in Civil Engineeri
+ ng: “Finite Element Formulations for the Analysis of Thin-walled Members
+  and Composite Sections Considering the Distortional Deformations of the C
+ ross-section.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-hussei
+ n-atia-2026-08-21/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:0cac10ae1b6534c5c59b@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART;VALUE=DATE:20260824
+DTEND;VALUE=DATE:20261216
+SUMMARY:Séances du conseil municipal de Montréal — automne 2026
+LOCATION:Hôtel de ville de Montréal et webdiffusion\, Montréal
+DESCRIPTION:Séances décisionnelles publiques avec ordre du jour\, retrans
+ mission et mécanismes permettant aux citoyennes et citoyens de poser une 
+ question en personne ou par écrit.
+URL:https://seminarschools.com/polymythseminars/events/montreal-city-counci
+ l-fall-2026/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:959926250af74da2bffa@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260824T133000Z
+DTEND:20260824T163000Z
+SUMMARY:Wissam Abdallah — Mechanical Engineering DOCTORAL Defence
+LOCATION:EV 1.162\, Montréal
+DESCRIPTION:Free public oral examination by Wissam Abdallah in Mechanical E
+ ngineering: “In Vivo Investigation of Left Ventricular Flow Dynamics and
+  Energetic Dissipation in Aortic regurgitation Using 4D-flow Magnetic Reso
+ nance Imaging.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-wissam
+ -abdallah-2026-08-24/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:5bdeb52c32ef3bdc23eb@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260824T140000Z
+DTEND:20260824T170000Z
+SUMMARY:Edward Griffiths — Education DOCTORAL Defence
+LOCATION:Faubourg 5.335\, Montréal
+DESCRIPTION:Free public oral examination by Edward Griffiths in Education: 
+ “Speaking skills in Canadian core French programs: Materials\, teaching 
+ practices\, and systemic constraints.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-edward
+ -griffiths-2026-08-24/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:a4f8e182ee9f66fd1f56@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260824T140000Z
+DTEND:20260824T170000Z
+SUMMARY:Egor Shmonin — Film and Moving Image Studies DOCTORAL Defence
+LOCATION:EV 2.776\, Montréal
+DESCRIPTION:Free public oral examination by Egor Shmonin in Film and Moving
+  Image Studies: “Baltic Postpoetic Documentary: The Aesthetic of Disappe
+ arance.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-egor-s
+ hmonin-2026-08-24/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:825871513f9e791bd54e@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260824T170000Z
+DTEND:20260824T200000Z
+SUMMARY:Majid Maleki — Business Administration DOCTORAL Defence
+LOCATION:John Molson 012-101\, Montréal
+DESCRIPTION:Free public oral examination by Majid Maleki in Business Admini
+ stration: “Essays on Risk Premia and Trading in Derivatives Markets.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-majid-
+ maleki-2026-08-24/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:bf425ce26926c0e44b13@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20260824T170000Z
+SUMMARY:Séance du conseil municipal de Montréal — 24 août 2026
+LOCATION:Hôtel de ville de Montréal et webdiffusion\, Montréal
+DESCRIPTION:Séances décisionnelles publiques avec ordre du jour\, retrans
+ mission et mécanismes permettant aux citoyennes et citoyens de poser une 
+ question en personne ou par écrit.
+URL:https://seminarschools.com/polymythseminars/events/montreal-city-counci
+ l-fall-2026-2026-08-24/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:0a67742672709cae343d@seminarschools.com
+DTSTAMP:20260815T033000Z
 DTSTART:20260825T130000Z
-SUMMARY:AFSA Scientific Day — New Horizons in Health Statistics
-LOCATION:McGill University\, Montréal\, Montréal
-DESCRIPTION:Official McGill Faculty of Science events listing includes AFSA
-  Scientific Day — New Horizons in Health Statistics on August 25\, 2026.
-URL:https://seminarschools.com/polymythseminars/events/be17416e9fa8/
+SUMMARY:Séance supplémentaire du conseil municipal de Montréal — 25 ao
+ ût 2026
+LOCATION:Hôtel de ville de Montréal et webdiffusion\, Montréal
+DESCRIPTION:Séances décisionnelles publiques avec ordre du jour\, retrans
+ mission et mécanismes permettant aux citoyennes et citoyens de poser une 
+ question en personne ou par écrit.
+URL:https://seminarschools.com/polymythseminars/events/montreal-city-counci
+ l-fall-2026-2026-08-25/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:a09daa8e8d06dbae8c07@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260825T133000Z
+DTEND:20260825T163000Z
+SUMMARY:Ali Asghar Sedighi — Civil Engineering DOCTORAL Defence
+LOCATION:EV 003.309\, Montréal
+DESCRIPTION:Free public oral examination by Ali Asghar Sedighi in Civil Eng
+ ineering: “Advancing Airborne Infection Risk Assessment in Indoor Enviro
+ nments: A CFD-Based Framework Integrating Exposure Modeling\, Quanta Distr
+ ibution\, and Ventilation Control.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-ali-as
+ ghar-sedighi-2026-08-25/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:3f97fba8b41d869ba2d7@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260825T133000Z
+DTEND:20260825T163000Z
+SUMMARY:Maryam Jabbari Khasraghi — Mathematics and Statistics DOCTORAL De
+ fence
+LOCATION:LB 921-4\, Montréal
+DESCRIPTION:Free public oral examination by Maryam Jabbari Khasraghi in Mat
+ hematics and Statistics: “Testing for Cure-Rate and Sufficient Follow-Up
+  under Random Censoring using Extreme-Value Theory.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-maryam
+ -jabbari-khasraghi-2026-08-25/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:2db1d834544d00445de9@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260825T140000Z
+DTEND:20260825T170000Z
+SUMMARY:Narjes Tahaei — Computer Science DOCTORAL Defence
+LOCATION:ER 1222\, Montréal
+DESCRIPTION:Free public oral examination by Narjes Tahaei in Computer Scien
+ ce: “Annotation-Aware Language Models as Representations of Disagreement
+  and Perspective.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-narjes
+ -tahaei-2026-08-25/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:995fb137460e268954de@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260825T160000Z
+DTEND:20260825T190000Z
+SUMMARY:Joseph Trani — Biology DOCTORAL Defence
+LOCATION:Loyola SP 457.03\, Montréal
+DESCRIPTION:Free public oral examination by Joseph Trani in Biology: “Usi
+ ng Saccharomyces cerevisiae Extracellular Vesicles To Better Understand Co
+ nserved Mechanisms of Biogenesis And To Deliver Small-Molecule Drugs.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-joseph
+ -trani-2026-08-25/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:679b7014a262e0739758@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260825T173000Z
+DTEND:20260825T203000Z
+SUMMARY:Diane Roberts — Humanities — Fine Arts DOCTORAL Defence
+LOCATION:LB 1042-03\, Montréal
+DESCRIPTION:Free public oral examination by Diane Roberts in Humanities —
+  Fine Arts: “Sacred wandering: seeding new legacies of knowing\, being a
+ nd doing.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-diane-
+ roberts-2026-08-25/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:00e44e6b70a014daf256@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260826T130000Z
+DTEND:20260826T160000Z
+SUMMARY:Criscent Birungi — Mathematics and Statistics DOCTORAL Defence
+LOCATION:LB 921-4\, Montréal
+DESCRIPTION:Free public oral examination by Criscent Birungi in Mathematics
+  and Statistics: “Essays on Stochastic Control and Reinforcement Learnin
+ g for Lifecycle Retirement and Annuitization.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-crisce
+ nt-birungi-2026-08-26/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:d1d7abb1776bc142c493@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260826T140000Z
+DTEND:20260826T170000Z
+SUMMARY:Juliet Mackie — Individualized Program DOCTORAL Defence
+LOCATION:EV 11.705\, Montréal
+DESCRIPTION:Free public oral examination by Juliet Mackie in Individualized
+  Program: “Reconstituting Indigenous Identities through Portraiture and 
+ Storytelling: Reclaiming Representation for Indigenous Women and Two-Spiri
+ t People.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-juliet
+ -mackie-2026-08-26/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -811,6 +1156,88 @@ LOCATION:Location unconfirmed · Lieu non confirmé\, Montréal
 DESCRIPTION:Audience: Concordia community.
 URL:https://seminarschools.com/polymythseminars/events/research-32f970522f8
  9/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:1670fd565613bc8c6916@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260826T170000Z
+DTEND:20260826T200000Z
+SUMMARY:Mohammadreza Amini — Computer Science DOCTORAL Defence
+LOCATION:ER 1072\, Montréal
+DESCRIPTION:Free public oral examination by Mohammadreza Amini in Computer 
+ Science: “Modeling Steering Performance in 3D Virtual Environments.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-mohamm
+ adreza-amini-2026-08-26/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:fef8cfd032674aa3bb87@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260826T173000Z
+DTEND:20260826T203000Z
+SUMMARY:Jedidat Matoush — Political Science DOCTORAL Defence
+LOCATION:Hall 1225.12\, Montréal
+DESCRIPTION:Free public oral examination by Jedidat Matoush in Political Sc
+ ience: “Culture and Self-Government in Eeyou Istchee.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-jedida
+ t-matoush-2026-08-26/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:93fed444af5f5d893d86@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260827T180000Z
+DTEND:20260827T210000Z
+SUMMARY:Alexis Hotte-Kilburn — Physics DOCTORAL Defence
+LOCATION:Loyola SP 367.07\, Montréal
+DESCRIPTION:Free public oral examination by Alexis Hotte-Kilburn in Physics
+ : “Design of Integrated Photonic Realizations of Tight-Binding Hamiltoni
+ ans.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-alexis
+ -hotte-kilburn-2026-08-27/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:fecfb528c32377e27e9f@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260827T180000Z
+DTEND:20260827T210000Z
+SUMMARY:Milad Ezzati — Chemistry DOCTORAL Defence
+LOCATION:Loyola SP 265.29\, Montréal
+DESCRIPTION:Free public oral examination by Milad Ezzati in Chemistry: “T
+ he role of iron minerals in preserving organic carbon and phosphate in mar
+ ine sediments.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-milad-
+ ezzati-2026-08-27/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:32a71c41efa019210858@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260828T130000Z
+DTEND:20260828T160000Z
+SUMMARY:Maurice Jones — Humanities DOCTORAL Defence
+LOCATION:EV 11.705\, Montréal
+DESCRIPTION:Free public oral examination by Maurice Jones in Humanities: 
+ “Temporally Autonomous Spaces: A Black Quantum Rhythmanalysis of Festiva
+ ls at the Intersection of Art\, Music\, and Technology.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-mauric
+ e-jones-2026-08-28/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:b51d1d5302ca4b54a4e8@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260828T170000Z
+DTEND:20260828T200000Z
+SUMMARY:Soorena Salari — Computer Science DOCTORAL Defence
+LOCATION:Location pending\, Montréal
+DESCRIPTION:Free public oral examination by Soorena Salari in Computer Scie
+ nce: “Automatic Quantification of Medical Image Registration Quality Usi
+ ng Deep Learning.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-sooren
+ a-salari-2026-08-28/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
@@ -840,29 +1267,657 @@ URL:https://seminarschools.com/polymythseminars/events/research-c78afbac2d7
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:ae342051bdcda26555ff@seminarschools.com
-DTSTAMP:20260628T042537Z
-DTSTART;VALUE=DATE:20260913
-DTEND;VALUE=DATE:20260914
-SUMMARY:Invention to Impact Training Program Fall 2026 Application Deadline
-LOCATION:McGill University\, Montréal\, Montréal
-DESCRIPTION:Official McGill Faculty of Science events listing includes the 
- Invention to Impact Training Program Fall 2026 application deadline on Sep
- tember 13\, 2026.
-URL:https://seminarschools.com/polymythseminars/events/2d4871c236e5/
+UID:60c744e9c6af0100921b@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260831T140000Z
+DTEND:20260831T170000Z
+SUMMARY:Juanwei Chen — Information and Systems Engineering DOCTORAL Defen
+ ce
+LOCATION:EV 2.301\, Montréal
+DESCRIPTION:Free public oral examination by Juanwei Chen in Information and
+  Systems Engineering: “Cybersecurity of Virtual Power Plants in the Smar
+ t Grid.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-juanwe
+ i-chen-2026-08-31/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:66468127a14bbdfe0936@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260831T140000Z
+DTEND:20260831T170000Z
+SUMMARY:Shuyan Wan — Civil Engineering DOCTORAL Defence
+LOCATION:EV 003.309\, Montréal
+DESCRIPTION:Free public oral examination by Shuyan Wan in Civil Engineering
+ : “Multiscale Assessment of Urban Green Infrastructure: Emergy-Based Pla
+ nning\, Green Roof Adoption\, and City-Scale Environmental Performance.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-shuyan
+ -wan-2026-08-31/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:71bddc6848205f7f7f97@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART;VALUE=DATE:20260901
+DTEND;VALUE=DATE:20261104
+SUMMARY:Conseil d’arrondissement d’Anjou — automne 2026
+LOCATION:Mairie d’arrondissement d’Anjou\, Montréal
+DESCRIPTION:Séances publiques d’arrondissement avec période de question
+ s\, documents officiels et webdiffusion selon les modalités publiées.
+URL:https://seminarschools.com/polymythseminars/events/anjou-borough-counci
+ l-fall-2026/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:374c263e0abde90c349b@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART;VALUE=DATE:20260901
+DTEND;VALUE=DATE:20261202
+SUMMARY:Conseil d’arrondissement d’Outremont — automne 2026
+LOCATION:Mairie d’arrondissement d’Outremont\, Montréal
+DESCRIPTION:Séances publiques d’arrondissement avec période de question
+ s\, documents officiels et webdiffusion selon les modalités publiées.
+URL:https://seminarschools.com/polymythseminars/events/outremont-borough-co
+ uncil-fall-2026/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:17cc98f6252352eef3d1@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260901T170000Z
+DTEND:20260901T200000Z
+SUMMARY:Sneha Paul — Information and Systems Engineering DOCTORAL Defence
+LOCATION:EV 1.162\, Montréal
+DESCRIPTION:Free public oral examination by Sneha Paul in Information and S
+ ystems Engineering: “Label-Efficient 3D Point Cloud Understanding: From 
+ Representation Learning to Foundation Model Adaptation.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-sneha-
+ paul-2026-09-01/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:0c1767aa5c5653d43503@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20260901T230000Z
+SUMMARY:Séance du conseil d’arrondissement d’Anjou — 1 septembre 202
+ 6
+LOCATION:Mairie d’arrondissement d’Anjou\, Montréal
+DESCRIPTION:Séances publiques d’arrondissement avec période de question
+ s\, documents officiels et webdiffusion selon les modalités publiées.
+URL:https://seminarschools.com/polymythseminars/events/anjou-borough-counci
+ l-fall-2026-2026-09-01/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:6242fff5b100c8877246@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20260901T230000Z
+SUMMARY:Séance du conseil d’arrondissement d’Outremont — 1 septembre
+  2026
+LOCATION:Mairie d’arrondissement d’Outremont\, Montréal
+DESCRIPTION:Séances publiques d’arrondissement avec période de question
+ s\, documents officiels et webdiffusion selon les modalités publiées.
+URL:https://seminarschools.com/polymythseminars/events/outremont-borough-co
+ uncil-fall-2026-2026-09-01/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:fbb834b8cd5fa3713550@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260903T130000Z
+DTEND:20260903T160000Z
+SUMMARY:Bernardine France Anougue Tonfack — Biology DOCTORAL Defence
+LOCATION:Loyola SP 457.03\, Montréal
+DESCRIPTION:Free public oral examination by Bernardine France Anougue Tonfa
+ ck in Biology: “Habituation and ecology of western gorillas for conserva
+ tion and ecotourism in the Campo-Ma’an National Park\, Southern Cameroon
+ .”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-bernar
+ dine-france-anougue-tonfack-2026-09-03/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:f8c5d8345e29cd08a511@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260903T140000Z
+DTEND:20260903T170000Z
+SUMMARY:Jasmine Latendresse — Software Engineering DOCTORAL Defence
+LOCATION:ER 1222\, Montréal
+DESCRIPTION:Free public oral examination by Jasmine Latendresse in Software
+  Engineering: “Understanding and Supporting Software Dependency Manageme
+ nt Across the Lifecycle.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-jasmin
+ e-latendresse-2026-09-03/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:ba572be5a1b0f729645c@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART;VALUE=DATE:20260908
+DTEND;VALUE=DATE:20261208
+SUMMARY:Conseil d’arrondissement de Montréal-Nord — automne 2026
+LOCATION:Mairie d’arrondissement de Montréal-Nord\, Montréal
+DESCRIPTION:Séances publiques d’arrondissement avec période de question
+ s\, documents officiels et webdiffusion selon les modalités publiées.
+URL:https://seminarschools.com/polymythseminars/events/montreal-nord-boroug
+ h-council-fall-2026/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:4b7a5e3e3b3f37f60839@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20260908T230000Z
+SUMMARY:Séance du conseil de Montréal-Nord — 8 septembre 2026
+LOCATION:Mairie d’arrondissement de Montréal-Nord\, Montréal
+DESCRIPTION:Séances publiques d’arrondissement avec période de question
+ s\, documents officiels et webdiffusion selon les modalités publiées.
+URL:https://seminarschools.com/polymythseminars/events/montreal-nord-boroug
+ h-council-fall-2026-2026-09-08/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:6ab73f92420b71c8ab38@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260910T140000Z
+DTEND:20260910T170000Z
+SUMMARY:Rewan Toubar — Building Engineering DOCTORAL Defence
+LOCATION:EV 003.309\, Montréal
+DESCRIPTION:Free public oral examination by Rewan Toubar in Building Engine
+ ering: “Developing a Performance Metric\, Criteria\, and Process to Meas
+ ure and Predict Speech Privacy in Office Buildings.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-rewan-
+ toubar-2026-09-10/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:d06bba5e335a630fcdb3@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260911T140000Z
+DTEND:20261023T190000Z
+SUMMARY:McGill Community for Lifelong Learning Fall 2026 Lectures
+LOCATION:McGill University and online\, Montréal
+DESCRIPTION:Fall public and member-oriented lecture schedule for lifelong l
+ earners\; selected substantive lectures are stored as dated children.
+URL:https://seminarschools.com/polymythseminars/events/mcgill-mcll-fall-202
+ 6-lectures/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:e29bb251c9a8247a7a28@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260911T160000Z
+DTEND:20260911T190000Z
+SUMMARY:Scott DeJong — Communication DOCTORAL Defence
+LOCATION:EV 11.705\, Montréal
+DESCRIPTION:Free public oral examination by Scott DeJong in Communication: 
+ “Playing with Misinformation and Media Literacy: Dual dimensions of info
+ rmation manipulation\, educational responses\, and designing games in the 
+ gap.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-scott-
+ dejong-2026-09-11/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:6ab8ff93f55d8ff8b061@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260911T170000Z
+DTEND:20260911T200000Z
+SUMMARY:Ranya Essmat Saad — Art Education DOCTORAL Defence
+LOCATION:EV 5.825\, Montréal
+DESCRIPTION:Free public oral examination by Ranya Essmat Saad in Art Educat
+ ion: “Egyptian Zār: Trace\, Transformation\, and Representation of Gend
+ er-Based Violence.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-ranya-
+ essmat-saad-2026-09-11/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:fd61ecafadefa4fb818d@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART;VALUE=DATE:20260916
+DTEND;VALUE=DATE:20260917
+SUMMARY:La participation publique à Ahuntsic-Cartierville — 16 septembre
+  2026
+LOCATION:Ahuntsic-Cartierville — lieu selon l’activité\, Montréal
+DESCRIPTION:Activités contributives citoyennes publiées par l’OCPM dans
+  le cadre d’une démarche de participation publique.
+URL:https://seminarschools.com/polymythseminars/events/ocpm-ahuntsic-cartie
+ rville-public-participation-2026-2026-09-16/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:3754a746148f97c82916@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART;VALUE=DATE:20260916
+DTEND;VALUE=DATE:20260923
+SUMMARY:La participation publique à Ahuntsic-Cartierville — activités c
+ ontributives
+LOCATION:Ahuntsic-Cartierville — lieu selon l’activité\, Montréal
+DESCRIPTION:Activités contributives citoyennes publiées par l’OCPM dans
+  le cadre d’une démarche de participation publique.
+URL:https://seminarschools.com/polymythseminars/events/ocpm-ahuntsic-cartie
+ rville-public-participation-2026/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:31f90c492552e8b86055@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20260921T170000Z
+SUMMARY:Séance du conseil municipal de Montréal — 21 septembre 2026
+LOCATION:Hôtel de ville de Montréal et webdiffusion\, Montréal
+DESCRIPTION:Séances décisionnelles publiques avec ordre du jour\, retrans
+ mission et mécanismes permettant aux citoyennes et citoyens de poser une 
+ question en personne ou par écrit.
+URL:https://seminarschools.com/polymythseminars/events/montreal-city-counci
+ l-fall-2026-2026-09-21/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:0bf3f7f07c430da64fe5@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART;VALUE=DATE:20260922
+DTEND;VALUE=DATE:20260923
+SUMMARY:La participation publique à Ahuntsic-Cartierville — 22 septembre
+  2026
+LOCATION:Ahuntsic-Cartierville — lieu selon l’activité\, Montréal
+DESCRIPTION:Activités contributives citoyennes publiées par l’OCPM dans
+  le cadre d’une démarche de participation publique.
+URL:https://seminarschools.com/polymythseminars/events/ocpm-ahuntsic-cartie
+ rville-public-participation-2026-2026-09-22/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:8b4f7e91c9dc1831ae3d@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20260922T130000Z
+SUMMARY:Séance supplémentaire du conseil municipal de Montréal — 22 se
+ ptembre 2026
+LOCATION:Hôtel de ville de Montréal et webdiffusion\, Montréal
+DESCRIPTION:Séances décisionnelles publiques avec ordre du jour\, retrans
+ mission et mécanismes permettant aux citoyennes et citoyens de poser une 
+ question en personne ou par écrit.
+URL:https://seminarschools.com/polymythseminars/events/montreal-city-counci
+ l-fall-2026-2026-09-22/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:6d77a37ec7a897ff1db2@seminarschools.com
+DTSTAMP:20260815T160000Z
+DTSTART:20260924T210000Z
+DTEND:20260925T003000Z
+SUMMARY:Assemblée générale annuelle 2026 — Table de quartier de Montr
+ éal-Nord
+LOCATION:12004 boulevard Rolland\, Montréal
+DESCRIPTION:The neighbourhood table's 2026 annual assembly brings local mem
+ bers and residents together around community governance.
+URL:https://seminarschools.com/polymythseminars/events/montreal-nord-aga-20
+ 26-09-24/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:13820f106f4f1f3d8bd8@seminarschools.com
+DTSTAMP:20260815T160000Z
+DTSTART:20260924T220000Z
+DTEND:20260925T003000Z
+SUMMARY:CCA Open House for Students 2026
+LOCATION:Shaughnessy House\, Study Room\, and CCA galleries\, Montréal
+DESCRIPTION:Educational student open house introducing CCA programs\, resea
+ rch\, publications\, collection\, and exhibitions.
+URL:https://seminarschools.com/polymythseminars/events/cca-open-house-for-s
+ tudents-2026/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:7b254116be66e11aa43f@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260925T140000Z
+SUMMARY:The Great Omar
+LOCATION:McGill University / schedule-defined room\, Montréal
+DESCRIPTION:MCLL lifelong-learning lecture by Angella Lambrou.
+URL:https://seminarschools.com/polymythseminars/events/mcll-great-omar-2026
+ -09-25/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:48a1948879c9ddc2cf8f@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260925T140000Z
+SUMMARY:The Medieval Industrial Revolution
+LOCATION:McGill University / schedule-defined room\, Montréal
+DESCRIPTION:MCLL lifelong-learning lecture by Harald von Cramon.
+URL:https://seminarschools.com/polymythseminars/events/mcll-medieval-indust
+ rial-revolution-2026-09-25/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:2f925c2001b397ba45cb@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20260925T170000Z
+DTEND:20260925T200000Z
+SUMMARY:Nima Moradi — Information and Systems Engineering DOCTORAL Defenc
+ e
+LOCATION:EV 1.162\, Montréal
+DESCRIPTION:Free public oral examination by Nima Moradi in Information and 
+ Systems Engineering: “Sustainable Last-mile Parcel Delivery using Integr
+ ated Electric Transport Solutions.”
+URL:https://seminarschools.com/polymythseminars/events/concordia-phd-nima-m
+ oradi-2026-09-25/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:4c9882d6faf5e51deba4@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20261001
+SUMMARY:Relational Luhmann 2027 call for papers deadline
+LOCATION:Online / organizer-defined\, Montréal
+DESCRIPTION:Paper-proposal deadline for the Montréal conference on relatio
+ nal approaches to Niklas Luhmann.
+URL:https://seminarschools.com/polymythseminars/events/relational-luhmann-2
+ 027-cfp/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:27cb99eaadc104d4e3ed@seminarschools.com
+DTSTAMP:20260815T160000Z
+DTSTART:20261001T210000Z
+DTEND:20261203T233000Z
+SUMMARY:The Urban Unknown — CCA Youth Collective 2026
+LOCATION:Canadian Centre for Architecture\, Montréal
+DESCRIPTION:Ten-week youth research and publishing collective examining arc
+ hitecture and the city through a critical lens.
+URL:https://seminarschools.com/polymythseminars/events/cca-urban-unknown-yo
+ uth-collective-2026/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:a4fb0975489be7d51cd3@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20261006T230000Z
+SUMMARY:Séance du conseil de Montréal-Nord — 6 octobre 2026
+LOCATION:Mairie d’arrondissement de Montréal-Nord\, Montréal
+DESCRIPTION:Séances publiques d’arrondissement avec période de question
+ s\, documents officiels et webdiffusion selon les modalités publiées.
+URL:https://seminarschools.com/polymythseminars/events/montreal-nord-boroug
+ h-council-fall-2026-2026-10-06/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:006ffaf7206adcc610bc@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20261006T230000Z
+SUMMARY:Séance du conseil d’arrondissement d’Anjou — 6 octobre 2026
+LOCATION:Mairie d’arrondissement d’Anjou\, Montréal
+DESCRIPTION:Séances publiques d’arrondissement avec période de question
+ s\, documents officiels et webdiffusion selon les modalités publiées.
+URL:https://seminarschools.com/polymythseminars/events/anjou-borough-counci
+ l-fall-2026-2026-10-06/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:10f657d86693b84ad256@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20261006T230000Z
+SUMMARY:Séance du conseil d’arrondissement d’Outremont — 6 octobre 2
+ 026
+LOCATION:Mairie d’arrondissement d’Outremont\, Montréal
+DESCRIPTION:Séances publiques d’arrondissement avec période de question
+ s\, documents officiels et webdiffusion selon les modalités publiées.
+URL:https://seminarschools.com/polymythseminars/events/outremont-borough-co
+ uncil-fall-2026-2026-10-06/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:9e4d1d2bd58e256f6902@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20261009T140000Z
+SUMMARY:The Necessity for Rituals in Grief and Loss
+LOCATION:McGill University / schedule-defined room\, Montréal
+DESCRIPTION:MCLL lifelong-learning lecture by Georgia Remond.
+URL:https://seminarschools.com/polymythseminars/events/mcll-rituals-grief-l
+ oss-2026-10-09/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:851f9b31929974157daf@seminarschools.com
-DTSTAMP:20260628T042537Z
+DTSTAMP:20260814T000800Z
 DTSTART:20261015T200000Z
+DTEND:20261015T210000Z
 SUMMARY:Hughlings Jackson Lecture 2026: Behaviour\, Brain Computation\, and
   Evolution
-LOCATION:McGill University\, Montréal\, Montréal
-DESCRIPTION:Official McGill Faculty of Science events listing includes the 
- Hughlings Jackson Lecture 2026: Behaviour\, Brain Computation\, and Evolut
- ion on October 15\, 2026.
+LOCATION:McGill University\, Montréal
+DESCRIPTION:Annual Hughlings Jackson public academic lecture on behaviour\,
+  brain computation\, and evolution.
 URL:https://seminarschools.com/polymythseminars/events/285112aa8a67/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:161f5bdb826447b73526@seminarschools.com
+DTSTAMP:20260815T160000Z
+DTSTART:20261019T140000Z
+DTEND:20261019T210000Z
+SUMMARY:McGill Fall 2026 Convocation
+LOCATION:Salle Wilfrid-Pelletier\, Place des Arts\, Montréal
+DESCRIPTION:McGill's Fall 2026 convocation day\, represented with two child
+  ceremonies for exact faculty groupings.
+URL:https://seminarschools.com/polymythseminars/events/mcgill-fall-convocat
+ ion-2026/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:2f3543ed9df9542495c5@seminarschools.com
+DTSTAMP:20260815T160000Z
+DTSTART:20261019T140000Z
+DTEND:20261019T160000Z
+SUMMARY:McGill Fall 2026 Convocation — AM ceremony
+LOCATION:Salle Wilfrid-Pelletier\, Place des Arts\, Montréal
+DESCRIPTION:Morning child ceremony within McGill Fall 2026 Convocation.
+URL:https://seminarschools.com/polymythseminars/events/mcgill-fall-convocat
+ ion-am-2026/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:b386eb596c0be5645911@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20261019T170000Z
+SUMMARY:Séance du conseil municipal de Montréal — 19 octobre 2026
+LOCATION:Hôtel de ville de Montréal et webdiffusion\, Montréal
+DESCRIPTION:Séances décisionnelles publiques avec ordre du jour\, retrans
+ mission et mécanismes permettant aux citoyennes et citoyens de poser une 
+ question en personne ou par écrit.
+URL:https://seminarschools.com/polymythseminars/events/montreal-city-counci
+ l-fall-2026-2026-10-19/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:9d62b96f544e454eb5a3@seminarschools.com
+DTSTAMP:20260815T160000Z
+DTSTART:20261019T190000Z
+DTEND:20261019T210000Z
+SUMMARY:McGill Fall 2026 Convocation — PM ceremony
+LOCATION:Salle Wilfrid-Pelletier\, Place des Arts\, Montréal
+DESCRIPTION:Afternoon child ceremony within McGill Fall 2026 Convocation.
+URL:https://seminarschools.com/polymythseminars/events/mcgill-fall-convocat
+ ion-pm-2026/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:c75369646bf96431f5e9@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20261020T130000Z
+SUMMARY:Séance supplémentaire du conseil municipal de Montréal — 20 oc
+ tobre 2026
+LOCATION:Hôtel de ville de Montréal et webdiffusion\, Montréal
+DESCRIPTION:Séances décisionnelles publiques avec ordre du jour\, retrans
+ mission et mécanismes permettant aux citoyennes et citoyens de poser une 
+ question en personne ou par écrit.
+URL:https://seminarschools.com/polymythseminars/events/montreal-city-counci
+ l-fall-2026-2026-10-20/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:24978fb627787ae70f0b@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20261023T170000Z
+SUMMARY:The Rise and Fall of the Aztecs
+LOCATION:McGill University / schedule-defined room\, Montréal
+DESCRIPTION:MCLL lifelong-learning lecture by Peter Berry.
+URL:https://seminarschools.com/polymythseminars/events/mcll-rise-fall-aztec
+ s-2026-10-23/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:7238c49d007d853b1aa8@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20261103T000000Z
+SUMMARY:Séance du conseil de Montréal-Nord — 2 novembre 2026
+LOCATION:Mairie d’arrondissement de Montréal-Nord\, Montréal
+DESCRIPTION:Séances publiques d’arrondissement avec période de question
+ s\, documents officiels et webdiffusion selon les modalités publiées.
+URL:https://seminarschools.com/polymythseminars/events/montreal-nord-boroug
+ h-council-fall-2026-2026-11-02/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:e1f95804963836a7e1a7@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20261104T000000Z
+SUMMARY:Séance du conseil d’arrondissement d’Anjou — 3 novembre 2026
+LOCATION:Mairie d’arrondissement d’Anjou\, Montréal
+DESCRIPTION:Séances publiques d’arrondissement avec période de question
+ s\, documents officiels et webdiffusion selon les modalités publiées.
+URL:https://seminarschools.com/polymythseminars/events/anjou-borough-counci
+ l-fall-2026-2026-11-03/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:e5138fd9a7db1993d7be@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20261104T000000Z
+SUMMARY:Séance du conseil d’arrondissement d’Outremont — 3 novembre 
+ 2026
+LOCATION:Mairie d’arrondissement d’Outremont\, Montréal
+DESCRIPTION:Séances publiques d’arrondissement avec période de question
+ s\, documents officiels et webdiffusion selon les modalités publiées.
+URL:https://seminarschools.com/polymythseminars/events/outremont-borough-co
+ uncil-fall-2026-2026-11-03/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:1cb3cfdff25b38ee8b0a@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART;VALUE=DATE:20261112
+DTEND;VALUE=DATE:20261116
+SUMMARY:Secondary Schools' United Nations Symposium 2026
+LOCATION:Sheraton Montréal\, Montréal
+DESCRIPTION:Large Model United Nations conference for secondary-school and 
+ CEGEP delegations in Montréal\, November 12–15\, 2026.
+URL:https://seminarschools.com/polymythseminars/events/ssuns-2026-conferenc
+ e/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:36147f7f202e02140933@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20261116T180000Z
+SUMMARY:Séance du conseil municipal de Montréal — 16 novembre 2026
+LOCATION:Hôtel de ville de Montréal et webdiffusion\, Montréal
+DESCRIPTION:Séances décisionnelles publiques avec ordre du jour\, retrans
+ mission et mécanismes permettant aux citoyennes et citoyens de poser une 
+ question en personne ou par écrit.
+URL:https://seminarschools.com/polymythseminars/events/montreal-city-counci
+ l-fall-2026-2026-11-16/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:3d6853a8f15ccc542d0c@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20261117T140000Z
+SUMMARY:Séance supplémentaire du conseil municipal de Montréal — 17 no
+ vembre 2026
+LOCATION:Hôtel de ville de Montréal et webdiffusion\, Montréal
+DESCRIPTION:Séances décisionnelles publiques avec ordre du jour\, retrans
+ mission et mécanismes permettant aux citoyennes et citoyens de poser une 
+ question en personne ou par écrit.
+URL:https://seminarschools.com/polymythseminars/events/montreal-city-counci
+ l-fall-2026-2026-11-17/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:0ad844f799d66eb4221b@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20261202T000000Z
+SUMMARY:Séance du conseil d’arrondissement d’Outremont — 1 décembre
+  2026
+LOCATION:Mairie d’arrondissement d’Outremont\, Montréal
+DESCRIPTION:Séances publiques d’arrondissement avec période de question
+ s\, documents officiels et webdiffusion selon les modalités publiées.
+URL:https://seminarschools.com/polymythseminars/events/outremont-borough-co
+ uncil-fall-2026-2026-12-01/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:31ebc400c843471037f4@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20261208T000000Z
+SUMMARY:Séance du conseil de Montréal-Nord — 7 décembre 2026
+LOCATION:Mairie d’arrondissement de Montréal-Nord\, Montréal
+DESCRIPTION:Séances publiques d’arrondissement avec période de question
+ s\, documents officiels et webdiffusion selon les modalités publiées.
+URL:https://seminarschools.com/polymythseminars/events/montreal-nord-boroug
+ h-council-fall-2026-2026-12-07/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:821e501b873bc9b00578@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20261214T180000Z
+SUMMARY:Séance du conseil municipal de Montréal — 14 décembre 2026
+LOCATION:Hôtel de ville de Montréal et webdiffusion\, Montréal
+DESCRIPTION:Séances décisionnelles publiques avec ordre du jour\, retrans
+ mission et mécanismes permettant aux citoyennes et citoyens de poser une 
+ question en personne ou par écrit.
+URL:https://seminarschools.com/polymythseminars/events/montreal-city-counci
+ l-fall-2026-2026-12-14/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:7a11ad2b00156f04dc22@seminarschools.com
+DTSTAMP:20260815T033000Z
+DTSTART:20261215T140000Z
+SUMMARY:Séance supplémentaire du conseil municipal de Montréal — 15 d
+ écembre 2026
+LOCATION:Hôtel de ville de Montréal et webdiffusion\, Montréal
+DESCRIPTION:Séances décisionnelles publiques avec ordre du jour\, retrans
+ mission et mécanismes permettant aux citoyennes et citoyens de poser une 
+ question en personne ou par écrit.
+URL:https://seminarschools.com/polymythseminars/events/montreal-city-counci
+ l-fall-2026-2026-12-15/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:462363c0e77654a5be41@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART;VALUE=DATE:20270317
+DTEND;VALUE=DATE:20270321
+SUMMARY:Society for Cinema and Media Studies 2027 Conference
+LOCATION:Montréal conference venue\, Montréal
+DESCRIPTION:SCMS 2027 in Montréal.
+URL:https://seminarschools.com/polymythseminars/events/scms-2027-conference
+ /
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:b20ebf577b9799aa3852@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART;VALUE=DATE:20270526
+DTEND;VALUE=DATE:20270529
+SUMMARY:Relational Luhmann Conference 2027
+LOCATION:UQAM\, Montréal
+DESCRIPTION:International social-theory conference at UQAM in Montréal\, M
+ ay 26–28\, 2027.
+URL:https://seminarschools.com/polymythseminars/events/relational-luhmann-2
+ 027-conference/
 STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

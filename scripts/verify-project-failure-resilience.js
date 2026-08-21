@@ -4,8 +4,10 @@
 const fs = require('fs');
 const path = require('path');
 const {execFileSync} = require('child_process');
+const {loadInventoryContract} = require('./lib/polymythcal-inventory-contract');
 
 const ROOT = path.resolve(__dirname, '..');
+const inventory = loadInventoryContract(ROOT);
 const read = relative => fs.readFileSync(path.join(ROOT, relative), 'utf8');
 const polymyth = read('js/polymythcal-revamp.js');
 const teacher = read('teacherresources/finder.js');
@@ -32,20 +34,20 @@ const resourceCollections = (resources.groups || []).reduce(
   0
 );
 
-if (!Array.isArray(events) || events.length !== 833) {
-  failures.push(`Polymythcal inventory changed: expected 833 deduplicated records, found ${events?.length}`);
+if (!Array.isArray(events) || events.length < inventory.minimum_canonical_events) {
+  failures.push(`Polymythcal inventory fell below ${inventory.minimum_canonical_events}: found ${events?.length}`);
 }
-if (new Set(events.map(event => event.id)).size !== 833) {
-  failures.push('Polymythcal ids are no longer 833 unique values');
+if (Array.isArray(events) && new Set(events.map(event => event.id)).size !== events.length) {
+  failures.push('Polymythcal ids are not unique across the current canonical inventory');
 }
-if (new Set(events.map(event => event.type)).size !== 32) {
-  failures.push(`Polymythcal event type inventory changed: found ${new Set(events.map(event => event.type)).size}`);
+if (Array.isArray(events) && new Set(events.map(event => event.type)).size < inventory.minimum_event_types) {
+  failures.push(`Polymythcal event type inventory fell below ${inventory.minimum_event_types}: found ${new Set(events.map(event => event.type)).size}`);
 }
-if (!Number.isInteger(buildManifest.source_count) || buildManifest.source_count < 422) {
-  failures.push('Polymythcal source inventory fell below 422');
+if (!Number.isInteger(buildManifest.source_count) || buildManifest.source_count < inventory.minimum_sources) {
+  failures.push(`Polymythcal source inventory fell below ${inventory.minimum_sources}`);
 }
-if (resourceEntries.length !== 644) {
-  failures.push(`Teacher Resources inventory changed: expected 644, found ${resourceEntries.length}`);
+if (resourceEntries.length !== 645) {
+  failures.push(`Teacher Resources inventory changed: expected 645, found ${resourceEntries.length}`);
 }
 if ((resources.groups || []).length !== 7) {
   failures.push(`Teacher Resources group inventory changed: expected 7, found ${(resources.groups || []).length}`);
@@ -82,13 +84,12 @@ for (const [text, label] of [
 
 for (const [text, label] of [
   ['window.__ssTeacherResourcesFinderMounted', 'Teacher finder idempotent mount guard'],
-  ["controls.dataset.persistence = storageWritable ? 'device-and-url' : 'url-only'", 'Teacher storage failure mode'],
+  ["var LEGACY_FILTER_STORAGE_KEYS = ['tr-filters-v4', 'tr-filters-v3', 'tr-filters-v2']", 'Teacher legacy-state migration list'],
+  ['localStorage.removeItem(key)', 'Teacher legacy-state cleanup'],
+  ["controls.dataset.persistence = 'url-only'", 'Teacher URL-only filter authority'],
   ['function buildStateUrl()', 'history-independent share URL'],
-  ["var supportedQuery = ['q', 'subject', 'grade', 'format', 'curriculum', 'language']", 'supported-query restoration'],
-  ['Array.isArray(saved.formats)', 'corrupt stored format guard'],
-  ['Array.isArray(saved.grades)', 'corrupt stored grade guard'],
-  ['Array.isArray(saved.subjects)', 'corrupt stored subject guard'],
-  ['Array.isArray(saved.curricula)', 'corrupt stored curriculum guard'],
+  ['function restoreState()', 'URL-authoritative filter restoration'],
+  ['applyFilters({ skipSave: true })', 'read-only navigation restoration'],
   ['function scheduleExpandLabel()', 'coalesced expand-state updates'],
   ["catalog.addEventListener('toggle', scheduleExpandLabel, true)", 'coalesced toggle listener'],
   ['function flushSearchAndApply(options)', 'pending-search flush'],
@@ -116,6 +117,7 @@ if (failures.length) {
 
 console.log(
   'PROJECT FAILURE RESILIENCE CHECK PASSED — bounded calendar retry/cache/abort, ' +
-  'storage and history fallbacks, idempotent mounts, coalesced Teacher interactions, ' +
-  '833 deduplicated Polymythcal listings, 32 types, 422+ sources, and 644/25/7 Teacher inventory preserved.'
+  'URL history restoration, legacy Teacher-state cleanup, idempotent mounts, coalesced Teacher interactions, ' +
+  `${events.length} deduplicated Polymythcal listings, ${new Set(events.map(event => event.type)).size} types, ` +
+  `${buildManifest.source_count} sources, and 645/25/7 Teacher inventory preserved.`
 );

@@ -1,0 +1,8 @@
+{
+  "schema": "polymythcal-inventory-floor-v1",
+  "baseline_release": "2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final",
+  "minimum_canonical_events": 2088,
+  "minimum_sources": 779,
+  "minimum_event_types": 40,
+  "rule": "Future releases may add records, sources, or types. They must not fall below this verified floor without an explicit migration and provenance note. All derived surfaces must equal the current canonical inventory."
+}

@@ -14,8 +14,8 @@ const AUDIT46_RELEASE_ID = '2026-07-26-site-audit46-technical-efficiency-rollove
 const AUDIT47_RELEASE_ID = '2026-07-26-site-audit47-technical-efficiency-continuity-final';
 const AUDIT48_RELEASE_ID = '2026-07-26-site-audit48-external-validation-interoperability-final';
 const AUDIT49_RELEASE_ID = '2026-07-26-site-audit49-technical-efficiency-resilience-final';
-const CURRENT_RELEASE_ID = '2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final';
-const CURRENT_ASSET_VERSION = '20260728-audit53';
+const CURRENT_RELEASE_ID = '2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final';
+const CURRENT_ASSET_VERSION = '20260815-sets1-15-synthesis';
 const failures = [];
 let assertions = 0;
 

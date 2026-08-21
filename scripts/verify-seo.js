@@ -9,6 +9,7 @@
 'use strict';
 const fs=require('fs');
 const path=require('path');
+const {resolveSiteBuildDate}=require('./polymythcal-build-date');
 const ROOT=path.resolve(__dirname,'..');
 const errors=[];
 const fail=(m)=>errors.push(m);
@@ -61,7 +62,7 @@ for(const block of sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)){
 }
 if(!entries.length) fail('sitemap has no URL entries');
 const seen=new Set();
-const today=new Date().toISOString().slice(0,10);
+const today=resolveSiteBuildDate({root:ROOT});
 for(const {loc,lastmod} of entries){
   if(!loc.startsWith(SITE+'/')) fail(`sitemap has non-canonical host: ${loc}`);
   if(seen.has(loc)) fail(`sitemap repeats ${loc}`);

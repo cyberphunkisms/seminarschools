@@ -1,7 +1,7 @@
 {
   "schema": "seminar-schools-audit49-build-packaging-efficiency-v1",
-  "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
-  "generated_at": "2026-07-28T21:45:00-04:00",
+  "release_id": "2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final",
+  "generated_at": "2026-08-15T18:00:00-04:00",
   "status": "passed",
   "metrics": {
     "baseline_reuse_runner_checks": 159,
@@ -10,7 +10,7 @@
     "timeout_regression_target_ms": 1000,
     "timeout_regression_within_tolerance": true,
     "sequential_failure_report_regression_passed": true,
-    "package_regression_tests": 10,
+    "package_regression_tests": 15,
     "archive_benchmark_files": 5,
     "archive_benchmark_input_bytes": 75857344,
     "archive_audit48_wall_ms": 3276,
@@ -26,20 +26,20 @@
     "deployer_explicit_duplicate_browser_gates_after": 0,
     "selection": {
       "deployer": {
-        "directories_visited": 7638,
-        "files_considered": 10966,
-        "files_selected": 10965,
-        "public_files_selected": 4895,
-        "selected_bytes_excluding_this_report": 396210145,
-        "disposable_directory_pruning_enforced": true
+        "directories_visited": 15289,
+        "files_selected": 21346,
+        "public_files_selected": 9985,
+        "selected_bytes_excluding_generated_reports": 498764157,
+        "disposable_directory_pruning_enforced": true,
+        "broad_post_descent_filtering_avoided": true
       },
       "source": {
-        "directories_visited": 3863,
-        "files_considered": 6071,
-        "files_selected": 6070,
+        "directories_visited": 7699,
+        "files_selected": 11361,
         "public_files_selected": 0,
-        "selected_bytes_excluding_this_report": 264816213,
-        "disposable_directory_pruning_enforced": true
+        "selected_bytes_excluding_generated_reports": 326489375,
+        "disposable_directory_pruning_enforced": true,
+        "broad_post_descent_filtering_avoided": true
       }
     }
   },

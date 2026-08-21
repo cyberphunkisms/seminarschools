@@ -12,6 +12,8 @@ from collections import Counter
 from datetime import date, datetime, timezone
 from pathlib import Path
 
+from live_evidence_expiration import expiration_failures, parse_utc
+
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_REPORT = (
     ROOT / "scripts" / "reports" / "audit48-live-harvest-endpoints.json"
@@ -83,7 +85,14 @@ def main() -> int:
     parser.add_argument(
         "--require-current",
         action="store_true",
-        help="Also require evidence generated within --max-age-hours",
+        help=(
+            "Require both a current configuration match and evidence generated "
+            "within --max-age-hours"
+        ),
+    )
+    parser.add_argument(
+        "--now",
+        help=argparse.SUPPRESS,
     )
     parser.add_argument(
         "--max-age-hours",
@@ -110,24 +119,17 @@ def main() -> int:
         failures.append("report says harvest cadence changed")
 
     try:
-        generated = datetime.fromisoformat(
-            str(report.get("generated_at") or "").replace("Z", "+00:00")
-        )
-        if generated.tzinfo is None:
-            generated = generated.replace(tzinfo=timezone.utc)
-        age_hours = (
-            datetime.now(timezone.utc) - generated.astimezone(timezone.utc)
-        ).total_seconds() / 3600
-        if args.require_current:
-            if age_hours < -1:
-                failures.append("report timestamp is in the future")
-            if age_hours > args.max_age_hours:
-                failures.append(
-                    f"report is stale: {age_hours:.1f}h exceeds "
-                    f"{args.max_age_hours:.1f}h"
-                )
+        now = parse_utc(args.now) if args.now else datetime.now(timezone.utc)
     except ValueError:
-        failures.append("report generated_at is invalid")
+        failures.append("--now is invalid")
+        now = datetime.now(timezone.utc)
+    expiry_failures, expires_at, age_hours = expiration_failures(
+        report.get("generated_at"),
+        now=now,
+        max_age_hours=args.max_age_hours,
+        enforce_current=args.require_current,
+    )
+    failures.extend(expiry_failures)
 
     selection = report.get("selection") or {}
     try:
@@ -135,12 +137,18 @@ def main() -> int:
     except (ValueError, TypeError) as exc:
         failures.append(f"report run-date selection is invalid: {exc}")
     configured_hashes = report.get("configuration_sha256") or {}
+    configuration_drift: list[str] = []
     if set(configured_hashes) != set(CONFIGURATION_FILES):
         failures.append("report configuration hash inventory is incomplete")
     for relative in CONFIGURATION_FILES:
         expected_digest = hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
         if configured_hashes.get(relative) != expected_digest:
-            failures.append(f"current configuration differs from live evidence: {relative}")
+            configuration_drift.append(relative)
+    if configuration_drift and args.require_current:
+        failures.extend(
+            f"current configuration differs from live evidence: {relative}"
+            for relative in configuration_drift
+        )
     report_sources = report.get("sources")
     if not isinstance(report_sources, list):
         failures.append("report sources must be an array")
@@ -348,14 +356,27 @@ def main() -> int:
         return 1
     dry_seminars = dry_runs["seminars"]
     dry_protests = dry_runs["protests"]
+    evidence_label = (
+        "AUDIT48 HISTORICAL LIVE HARVEST EVIDENCE PASSED"
+        if configuration_drift
+        else "AUDIT48 LIVE HARVEST EVIDENCE PASSED"
+    )
+    drift_note = (
+        "; current configuration changed in "
+        + ", ".join(configuration_drift)
+        + "; run the live audit before claiming current endpoint evidence"
+        if configuration_drift
+        else ""
+    )
     print(
-        "AUDIT48 LIVE HARVEST EVIDENCE PASSED — "
+        evidence_label + " — "
         f"{len(report_sources)} source bindings, {endpoint_bindings} endpoint "
         f"bindings, {len(unique_urls)} unique live requests; "
         f"seminars {dry_seminars['selected_sources']} sources/"
         f"{dry_seminars['events']} events and protests "
         f"{dry_protests['selected_sources']} sources/"
-        f"{dry_protests['events']} events; exact weekly cadence preserved."
+        f"{dry_protests['events']} events; exact weekly cadence preserved"
+        f"{drift_note}."
     )
     return 0
 

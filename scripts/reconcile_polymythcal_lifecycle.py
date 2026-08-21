@@ -359,16 +359,27 @@ def reconcile(current, previous, ok_sources, stamp: str | None = None, missing_t
             if prior.get('date') and prior.get('date') not in old_dates:
                 old_dates.append(prior['date'])
             event['previous_dates'] = old_dates[-12:]
-            event['lifecycle_status'] = 'rescheduled'
-            event['rescheduled_at'] = stamp
             event['id'] = prior.get('id') or event.get('id')
-            changes.append({
-                'identity_key': ident,
-                'change': 'rescheduled',
-                'from': prior.get('date'),
-                'to': event.get('date'),
-                'title': event.get('title'),
-            })
+            if event.get('date_change_reason') == 'projection-correction':
+                event['lifecycle_status'] = 'active'
+                event.pop('rescheduled_at', None)
+                changes.append({
+                    'identity_key': ident,
+                    'change': 'projection-correction',
+                    'from': prior.get('date'),
+                    'to': event.get('date'),
+                    'title': event.get('title'),
+                })
+            else:
+                event['lifecycle_status'] = 'rescheduled'
+                event['rescheduled_at'] = stamp
+                changes.append({
+                    'identity_key': ident,
+                    'change': 'rescheduled',
+                    'from': prior.get('date'),
+                    'to': event.get('date'),
+                    'title': event.get('title'),
+                })
         elif event.get('lifecycle_status') == 'missing-on-source':
             # Deterministic candidate state can carry a still-missing record
             # forward for public rechecks. Its presence in the merged calendar

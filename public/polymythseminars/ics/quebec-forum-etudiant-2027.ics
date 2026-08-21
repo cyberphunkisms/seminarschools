@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Seminar Schools//Polymythcal//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:f9f62ff518b06341eb26@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART;VALUE=DATE:20270111
+DTEND;VALUE=DATE:20270116
+SUMMARY:Forum étudiant 2027
+LOCATION:Assemblée nationale du Québec
+DESCRIPTION:Five-day parliamentary simulation for Québec college and CEG
+ EP students.
+URL:https://seminarschools.com/polymythseminars/events/quebec-forum-etudi
+ ant-2027/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

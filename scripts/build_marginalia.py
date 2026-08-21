@@ -21,7 +21,7 @@ Then runs:
 The script:
   1. Reads every .md file in /marginalia/posts/
   2. Generates /marginalia/[slug]/index.html for each (using the post template)
-  3. Updates /blog/posts.json with sectionId="marginalia" entries
+  3. Reconciles the Marginalia rows in /florilegium/posts.json
   4. Reports what was added / changed
 
 Idempotent. Safe to run repeatedly.
@@ -29,11 +29,13 @@ Idempotent. Safe to run repeatedly.
 import os, re, json, sys
 from pathlib import Path
 from datetime import datetime
+from geometry_asset_version import geometry_asset_version
 
 ROOT = Path(__file__).parent.parent
+GEOMETRY_VERSION = geometry_asset_version(ROOT)
 POSTS_DIR = ROOT / 'marginalia' / 'posts'
 MARGINALIA_DIR = ROOT / 'marginalia'
-BLOG_MANIFEST = ROOT / 'blog' / 'posts.json'
+FLORILEGIUM_MANIFEST = ROOT / 'florilegium' / 'posts.json'
 
 POST_TEMPLATE = '''<!DOCTYPE html>
 <html lang="en">
@@ -58,7 +60,7 @@ POST_TEMPLATE = '''<!DOCTYPE html>
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#14110D">
 <link rel="stylesheet" href="/css/main.css?v=20260725-audit45">
-<link rel="stylesheet" href="/css/alive.css?v=20260806-front-facing-geometry">
+<link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_VERSION}">
 <style>
 :root {{
   --accent: #983425;
@@ -101,7 +103,7 @@ POST_TEMPLATE = '''<!DOCTYPE html>
 </style>
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.070" data-route-type="archive" data-geometry-role="relation movement">
+<body data-geometry="indra-web" data-indra-intensity="0.100" data-route-type="archive" data-geometry-role="relation movement" data-front-facing="general-audience">
 <div class="wrap" id="main-content">
 
 <header class="topbar" id="topbar">
@@ -126,7 +128,7 @@ POST_TEMPLATE = '''<!DOCTYPE html>
 
 <div class="back-row">
   <a href="/marginalia/">&larr; All marginalia</a>
-  <a href="/blog/">In the blog</a>
+  <a href="/florilegium/">Read the Florilegium</a>
 </div>
 
 </main>
@@ -142,8 +144,8 @@ POST_TEMPLATE = '''<!DOCTYPE html>
   }}
 }})();
 </script>
-<script src="/js/mandala.js?v=20260806-front-facing-geometry" defer></script>
-<script src="/js/indra.js?v=20260806-front-facing-geometry" defer></script>
+<script src="/js/mandala.js?v={GEOMETRY_VERSION}" defer></script>
+<script src="/js/indra.js?v={GEOMETRY_VERSION}" defer></script>
 </body>
 </html>
 '''
@@ -213,21 +215,21 @@ def build():
     if not POSTS_DIR.exists():
         POSTS_DIR.mkdir(parents=True, exist_ok=True)
         print(f'Created {POSTS_DIR}. Add .md files there to publish.')
-        return
 
     md_files = sorted(POSTS_DIR.glob('*.md'))
-    if not md_files:
-        print(f'No .md files in {POSTS_DIR}. Nothing to build.')
-        return
 
-    # Load existing manifest
-    if BLOG_MANIFEST.exists():
-        manifest = json.loads(BLOG_MANIFEST.read_text())
+    # Load the canonical reader manifest and replace its Marginalia slice.
+    # This deliberately reconciles deletions: removing a Markdown source also
+    # removes that review from public discovery on the next build.
+    if FLORILEGIUM_MANIFEST.exists():
+        manifest = json.loads(FLORILEGIUM_MANIFEST.read_text(encoding='utf-8'))
     else:
         manifest = {'posts': []}
 
-    posts = manifest.get('posts', [])
-    existing_ids = {p['id'] for p in posts if isinstance(p, dict) and 'id' in p}
+    posts = [
+        p for p in manifest.get('posts', [])
+        if not (isinstance(p, dict) and p.get('sectionId') == 'marginalia')
+    ]
 
     built = 0
     for md_path in md_files:
@@ -248,6 +250,7 @@ def build():
         post_dir = MARGINALIA_DIR / slug
         post_dir.mkdir(exist_ok=True)
         post_html = POST_TEMPLATE.format(
+            GEOMETRY_VERSION=GEOMETRY_VERSION,
             title=title.replace('"', '&quot;'),
             slug=slug,
             date_pretty=pretty_date(date),
@@ -271,22 +274,19 @@ def build():
             'tags': ['lecture-review'],
         }
 
-        # Replace existing entry if present, otherwise append
-        replaced = False
-        for i, p in enumerate(posts):
-            if isinstance(p, dict) and p.get('id') == post_id:
-                posts[i] = manifest_entry
-                replaced = True
-                break
-        if not replaced:
-            posts.append(manifest_entry)
+        posts.append(manifest_entry)
 
         built += 1
         print(f'  built /marginalia/{slug}/  ({title})')
 
     manifest['posts'] = posts
-    BLOG_MANIFEST.write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding='utf-8')
-    print(f'\n{built} post(s) built. Manifest updated.')
+    FLORILEGIUM_MANIFEST.write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False) + '\n',
+        encoding='utf-8',
+    )
+    if not md_files:
+        print(f'No .md files in {POSTS_DIR}. Marginalia discovery is empty.')
+    print(f'\n{built} post(s) built. Florilegium manifest reconciled.')
 
 
 if __name__ == '__main__':

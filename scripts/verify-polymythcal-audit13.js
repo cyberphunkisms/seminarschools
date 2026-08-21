@@ -16,8 +16,9 @@ const checks=[
  [
   client.includes('freshnessHtml(event)') &&
     client.includes('officialSource:') &&
-    client.includes('sourceLabel(event)') &&
-    fs.readdirSync(path.join(root,'polymythseminars/events')).some(id=>{const f=path.join(root,'polymythseminars/events',id,'index.html');return fs.existsSync(f)&&fs.readFileSync(f,'utf8').includes('truth-chip')}),
+    client.includes('sourceInfo(event)') &&
+    client.includes('pm-source-action') &&
+    fs.readdirSync(path.join(root,'polymythseminars/events')).some(id=>{const f=path.join(root,'polymythseminars/events',id,'index.html');return fs.existsSync(f)&&fs.readFileSync(f,'utf8').includes('truth-chip')&&fs.readFileSync(f,'utf8').includes('pm-event-primary-path')}),
   'truth display',
  ],
  [css.includes('@media (max-width: 760px)')&&css.includes('.pm-calendar-agenda')&&!css.includes('max-height: 100vh'),'normal mobile scroll'],

@@ -35,9 +35,9 @@ jobs:
         with:
           python-version: "3.12.13"
           cache: pip
-          cache-dependency-path: requirements-audit.txt
+          cache-dependency-path: requirements-audit.lock
       - name: Install calendar test dependencies
-        run: python -m pip install --disable-pip-version-check --requirement requirements-audit.txt
+        run: python -m pip install --disable-pip-version-check --require-hashes --requirement requirements-audit.lock
       - name: Test adapters and lifecycle on this operating system
         run: |
           npm run test:polymythcal-adapters
@@ -107,13 +107,13 @@ jobs:
         with:
           python-version: "3.12.13"
           cache: pip
-          cache-dependency-path: requirements-audit.txt
+          cache-dependency-path: requirements-audit.lock
       - name: Install locked JavaScript dependencies
         run: npm ci --no-audit --no-fund
       - name: Verify production function dependency resolution
         run: npm run verify:function-dependencies
       - name: Install audit dependencies
-        run: python -m pip install --disable-pip-version-check --requirement requirements-audit.txt
+        run: python -m pip install --disable-pip-version-check --require-hashes --requirement requirements-audit.lock
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
       - name: Production build

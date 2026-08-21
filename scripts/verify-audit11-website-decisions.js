@@ -8,7 +8,17 @@ const exists=r=>fs.existsSync(path.join(root,r));
 const has=(r,t)=>{if(!exists(r)||!read(r).includes(t))fail.push(`${r}: missing ${t}`)};
 const lacks=(r,t)=>{if(exists(r)&&read(r).includes(t))fail.push(`${r}: contains ${t}`)};
 if(!/^\d{4}-\d{2}-\d{2}-.+/.test(read('RELEASE_ID.txt').trim()))fail.push('release id malformed');
-for(const t of ['data-homepage-contract="business-card-project-web-v1"','Educator &amp; Director','All 15 projects','let selectedId=null',"open.textContent='Open '+project.label+' ↗'"])has('index.html',t);
+for(const t of [
+  'data-homepage-contract="business-card-project-web-v1"',
+  'Educator &amp; Director',
+  'All 15 projects',
+  'data-preview-layout="stacked-max-content"',
+  'const state={selectedId:null}',
+  "button.setAttribute('aria-pressed','false')",
+  "button.setAttribute('aria-controls',panel.id)",
+  "open.textContent='Open '+project.label+' ↗'",
+])has('index.html',t);
+for(const t of ['mobile-project-detail','aria-expanded','detail.hidden'])lacks('index.html',t);
 for(const t of ['Open Polymythcal','class="path-card featured"','priority:true','selectNode(NODES.find(n=>n.id===\'calendar\')'])lacks('index.html',t);
 has('about/index.html','https://seminarschools.com/about/');
 has('main/index.html',"location.replace('/about/'");
@@ -47,4 +57,4 @@ if(exists('public/about/index.html')){
   has('public/saul/index.html','data-archive-expand="all"');
 }
 if(fail.length){console.error('AUDIT11 WEBSITE DECISIONS FAILED');fail.forEach(x=>console.error(' - '+x));process.exit(1)}
-console.log('AUDIT11 WEBSITE DECISIONS PASSED — current neutral homepage contract, /about route, prototype markers, expandable complete CV archive, BUMI placement, visible footer groups, and website CL verified.');
+console.log('AUDIT11 WEBSITE DECISIONS PASSED — current neutral, fixed-height shared-preview homepage contract, /about route, prototype markers, expandable complete CV archive, BUMI placement, visible footer groups, and website CL verified.');

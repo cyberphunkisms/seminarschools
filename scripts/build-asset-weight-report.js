@@ -2,6 +2,8 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
+const {isGeneratedDependencyDirectory} = require('./repository-walk-policy');
 const ROOT = path.resolve(__dirname, '..');
 const PUBLIC = path.join(ROOT, 'public');
 const OUT = path.join(ROOT, 'scripts', 'reports', 'asset-weight-report.json');
@@ -14,7 +16,7 @@ if (!fs.existsSync(PUBLIC)) {
 function walk(dir, files = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) walk(full, files);
+    if (entry.isDirectory() && !isGeneratedDependencyDirectory(entry.name)) walk(full, files);
     else if (entry.isFile()) files.push(full);
   }
   return files;
@@ -24,8 +26,15 @@ const files = walk(PUBLIC);
 const assets = files.map(file => ({
   path: path.relative(PUBLIC, file).replace(/\\/g, '/'),
   size: fs.statSync(file).size,
+  sha256: crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'),
   extension: path.extname(file).toLowerCase() || '[none]'
 })).sort((a, b) => b.size - a.size || a.path.localeCompare(b.path));
+const publicTreeSha256 = crypto.createHash('sha256').update(
+  [...assets]
+    .sort((a, b) => a.path.localeCompare(b.path))
+    .map(asset => `${asset.path}\0${asset.size}\0${asset.sha256}\n`)
+    .join(''),
+).digest('hex');
 const byExtension = {};
 for (const asset of assets) {
   const row = byExtension[asset.extension] || { files: 0, bytes: 0 };
@@ -40,6 +49,7 @@ const report = {
   scope: 'public',
   totalFiles: assets.length,
   totalBytes: assets.reduce((sum, asset) => sum + asset.size, 0),
+  publicTreeSha256,
   byExtension,
   largestAssets: assets.slice(0, 40),
   largestRuntimeAssets: assets.filter(asset => runtimeExtensions.has(asset.extension)).slice(0, 40)

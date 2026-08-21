@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 import json,re,sys,urllib.parse
 from pathlib import Path
+from jsonschema import Draft202012Validator
 ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/'polymythseminars/events.json'
 SRC=ROOT/'scripts/sources.json'
+SCHEMA=ROOT/'data/polymythcal-event-schema-v2.json'
 d=json.loads(DATA.read_text(encoding='utf-8')); events=d.get('events',[])
 s=json.loads(SRC.read_text(encoding='utf-8')); sources=s if isinstance(s,list) else s.get('sources',[])
+schema=json.loads(SCHEMA.read_text(encoding='utf-8')); schema_validator=Draft202012Validator(schema)
 source_ids={x.get('id') for x in sources}
 errors=[]; ids=set(); identities=set()
 required=['id','identity_key','record_kind','date','date_precision','time_precision','title','source_url','source_quality','confirmation_status','qualification_reasons','lifecycle_status','last_checked_at','city','corridor_zone','timezone','type']
@@ -23,7 +26,14 @@ for i,e in enumerate(events):
   if e.get('confirmation_status')=='unconfirmed' and not q: errors.append(f'{label}: unconfirmed without reason')
   if e.get('confirmation_status')=='confirmed' and q: errors.append(f'{label}: confirmed with qualification reasons')
   if e.get('time_precision')=='unknown' and 'time-unconfirmed' not in q: errors.append(f'{label}: unknown time without time-unconfirmed')
+  if e.get('time_precision')=='unknown' and e.get('confirmation_status')!='unconfirmed': errors.append(f'{label}: unknown event time must remain qualified')
+  if e.get('time_precision')=='not-applicable':
+    date_only=(e.get('record_kind')=='opportunity' or e.get('type')=='deadline' or e.get('is_parent_festival') or e.get('series_role')=='parent' or (e.get('end_date') and str(e.get('date',''))[:10]!=str(e.get('end_date',''))[:10]) or e.get('program_stage') in {'admission-open','admission-deadline','registration-open','registration-deadline'})
+    if not date_only: errors.append(f'{label}: time not-applicable without date-only semantics')
   if e.get('end_date') and e.get('date') and e['end_date'] < e['date']: errors.append(f'{label}: end before start')
+  for issue in schema_validator.iter_errors(e):
+    where='.'.join(str(part) for part in issue.absolute_path) or '(record)'
+    errors.append(f'{label}: schema {where}: {issue.message}')
 if d.get('count')!=len(events) or d.get('_total_events')!=len(events): errors.append('metadata count mismatch')
 if errors:
  print('\n'.join(errors[:200]),file=sys.stderr); print(f'FAILED: {len(errors)} semantic errors',file=sys.stderr); sys.exit(1)

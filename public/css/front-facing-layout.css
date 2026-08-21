@@ -1,0 +1,11 @@
+/* Front-facing layout contract — 2026-08-09.
+   Reader text scaling must reflow without clipping or horizontal overflow. */
+@media screen and (min-width: 769px) {
+  html[data-motion="calm"] body[data-geometry-surface="about-dual-camera"] #writing .entry {
+    grid-template-columns: 50px minmax(0, 1fr) minmax(0, 1.35fr) !important;
+  }
+
+  html[data-motion="calm"] body[data-geometry-surface="about-dual-camera"] #writing .entry > * {
+    min-width: 0 !important;
+  }
+}

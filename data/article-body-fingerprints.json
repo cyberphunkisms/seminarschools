@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "contractId": "FP-03",
+  "scope": "Every source HTML route marked data-route-type=publication. Navigation, colophons, ornaments, attributes, and layout wrappers are intentionally excluded; authored text and link/media destinations are protected.",
+  "algorithm": "sha256(normalized visible article text plus ordered authored link/media destinations)",
+  "articles": [
+    { "route": "polymyth/devils-notebook/the-boy-and-the-earworm/index.html", "sha256": "7fc9f37d9a7ca7916915ab6deffa9e97ad251897d3dfbecca9fd0a50675cd9ce" },
+    { "route": "polymyth/devilsdiary/1/index.html", "sha256": "2fc92612e460a62702021482e88587226119fce8b122906fe1d99ee8e8238513" },
+    { "route": "polymyth/devilsdiary/2/index.html", "sha256": "ede8a8c06f320e7dbd25dacb3e5d6a082d1f9c0391b4486ec40bd2223e399ec2" },
+    { "route": "polymyth/devilsdiary/3/index.html", "sha256": "a05466616fc07e871eb5dfa100705d4035c101174cd23bd06892cb2de87a8faf" },
+    { "route": "polymyth/devilsdiary/4/index.html", "sha256": "1e7114f0356561867d34ef0aaf045483f0311e38e2233397c3144d579ef6c095" },
+    { "route": "polymyth/devilsdiary/5/index.html", "sha256": "016807dbe5b7ca337c1ed9b0b2309f7e60b408d37350e170c13dc76462f2cd1f" },
+    { "route": "polymyth/devilsdiary/6/index.html", "sha256": "08b27b1f7878502472e1eaf5277ee7bafa0efc0e675a369c2a2557fc82ab37b6" },
+    { "route": "polymyth/devilsdiary/7/index.html", "sha256": "e3fcab4359dcfb09e85f80d4ae897a655d3ce3d3f43ff4de2f63f11bc00467b0" },
+    { "route": "polymyth/devilsdiary/8/index.html", "sha256": "00876f804aabfed7f9167eb5d0f23631306cd4e534f58668134d57e05c0535f8" },
+    { "route": "polymyth/devilsdiary/9/index.html", "sha256": "7cf6d9ca60797b28347d8f41106ae58eea4726103d21dcfbb14f0d42b63eac11" },
+    { "route": "polymyth/devilsdiary/10/index.html", "sha256": "1637c4fbc6d02bbd60d051a7d821a48cda8732c262614e6064ac12b7343df964" },
+    { "route": "polymyth/devilsdiary/11/index.html", "sha256": "90f9e36fb0f9d1fe735d526c123dee69c1ce75fb45386451b048d5df4634c3f5" },
+    { "route": "polymyth/devilsdiary/replies/index.html", "sha256": "9ed6c3e5291be9d534d4918ea38f3b32d203d0639bd92387131b9168f4f3b834" }
+  ]
+}

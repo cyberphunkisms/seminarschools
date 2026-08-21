@@ -1,8 +1,8 @@
 {
   "schema": "seminar-schools-audit48-calendar-client-interoperability-v1",
   "audit": "Audit 48 calendar-client interoperability",
-  "generated_at": "2026-07-28T21:45:00-04:00",
-  "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
+  "generated_at": "2026-08-15T18:00:00-04:00",
+  "release_id": "2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final",
   "status": "pass",
   "checks": [
     {
@@ -45,12 +45,12 @@
   "metrics": {
     "tests_passed": 9,
     "tests_run": 9,
-    "canonical_events": 833,
-    "explicit_legacy_ics_aliases": 12,
-    "single_event_ics_files": 845,
+    "canonical_events": 2088,
+    "explicit_legacy_ics_aliases": 28,
+    "single_event_ics_files": 2116,
     "focused_and_historical_feed_ics_files": 12,
-    "total_ics_files": 857,
-    "independently_parsed_vevent_components": 4172,
+    "total_ics_files": 2128,
+    "independently_parsed_vevent_components": 10410,
     "maximum_physical_line_octets": 75,
     "independent_parser": "icalendar 7.2.0"
   },

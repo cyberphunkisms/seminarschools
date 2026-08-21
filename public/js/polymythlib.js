@@ -56,7 +56,16 @@
   }
 
   function cleanStatus(value) {
-    if (!value || value === "STATUS_UNRESOLVED") return "Current review pending";
+    const labels = {
+      STATUS_UNRESOLVED: "Current status not yet reviewed",
+      BOOK_ONLY_HISTORICAL: "Historical project",
+      ACTIVE_AT_NEW_URL: "Active at a new website",
+      ACTIVE: "Active",
+      ARCHIVED_READ_ONLY: "Archived, read-only",
+      ABSORBED: "Continued elsewhere",
+    };
+    if (!value) return "Current status not yet reviewed";
+    if (labels[value]) return labels[value];
     const text = value
       .replace(/^STATUS_/, "")
       .replaceAll("_", " ")
@@ -64,35 +73,84 @@
     return text.charAt(0).toUpperCase() + text.slice(1);
   }
 
+  const scopeLabels = {
+    "Commons Projects": "Commons projects",
+    "Supporting Ecosystem": "Supporting organizations and systems",
+    "Concepts and Comparisons": "Examples and comparisons",
+    "All Book Records": "All records",
+  };
+  const tierLabels = {
+    "Core candidate": "Main directory record",
+    "Example candidate": "Example record",
+    "Support node": "Supporting record",
+    "Context / analogy": "Context or comparison",
+  };
+  const relationLabels = {
+    direct: "Direct subject",
+    enabler: "Supporting work",
+    analogy: "Comparison",
+    example: "Example",
+  };
+
+  function displayScope(value) {
+    return scopeLabels[value] || value;
+  }
+
+  function displayTier(value) {
+    return tierLabels[value] || value;
+  }
+
+  function displayRelation(value) {
+    return relationLabels[value] || value;
+  }
+
   function endpointPresentation(project) {
-    if (!project.verified || !project.currentCanonicalUrl) return null;
+    if (!project.verified || !project.currentCanonicalUrl) {
+      const historicalHref = (project.bookPrintedUrls || []).find(Boolean);
+      return historicalHref
+        ? {
+            action: "Open website listed in the book ↗",
+            heading: "Website listed in the 2007 book",
+            href: historicalHref,
+            historical: true,
+          }
+        : null;
+    }
     if (
       project.currentStatusGroup === "ACTIVE" ||
       project.currentStatusGroup === "ACTIVE_AT_NEW_URL"
     ) {
-      return { action: "Visit current site ↗", heading: "Current home" };
+      return {
+        action: "Visit current site ↗",
+        heading: "Current home",
+        href: project.currentCanonicalUrl,
+      };
     }
     if (project.currentStatusGroup === "ABSORBED") {
       return {
         action: "Visit continuing service ↗",
         heading: "Continuing service",
+        href: project.currentCanonicalUrl,
       };
     }
     if (project.currentStatusGroup === "ARCHIVED_READ_ONLY") {
       return {
         action: "Open surviving archive ↗",
         heading: "Surviving archive",
+        href: project.currentCanonicalUrl,
       };
     }
     if (project.currentStatusGroup === "BOOK_ONLY_HISTORICAL") {
       return {
         action: "Open surviving documentation ↗",
         heading: "Surviving documentation",
+        href: project.currentCanonicalUrl,
       };
     }
     return {
       action: "Open reviewed destination ↗",
       heading: "Reviewed destination",
+      href: project.currentCanonicalUrl,
     };
   }
 
@@ -187,7 +245,13 @@
             '"' +
             (value === selected ? " selected" : "") +
             ">" +
-            esc(id === "pm-chapter" ? "Chapter " + value : value) +
+            esc(
+              id === "pm-chapter"
+                ? "Chapter " + value
+                : id === "pm-relation"
+                  ? displayRelation(value)
+                  : value,
+            ) +
             "</option>",
         )
         .join("");
@@ -308,18 +372,27 @@
         .slice(0, state.visible)
         .map((project, index) => {
           const endpoint = endpointPresentation(project);
+          const sourceHref = endpoint
+            ? externalHref(endpoint.href)
+            : "";
+          const titleHref = sourceHref || `/polymythlib/projects/${project.id}/`;
+          const titleAttrs = sourceHref
+            ? ' target="_blank" rel="noopener noreferrer" class="source-title"'
+            : "";
           const role =
             project.sourceGroundedRoles[0] ||
             project.bookPortrayal ||
-            "Named in the book backbone.";
+            "Named in the 2007 book.";
           return (
             '<article class="result-row">' +
             '<span class="result-index">' +
             String(index + 1).padStart(2, "0") +
             "</span>" +
-            '<div class="result-main"><h2><a href="/polymythlib/projects/' +
-            esc(project.id) +
-            '/">' +
+            '<div class="result-main"><h2><a href="' +
+            esc(titleHref) +
+            '"' +
+            titleAttrs +
+            '">' +
             esc(project.canonicalName) +
             "</a></h2>" +
             '<p class="result-role">' +
@@ -329,34 +402,35 @@
               ? badge(project.bookCategories[0], "")
               : "") +
             (project.candidateTier === "Core candidate"
-              ? badge("Ostrom seed", "")
+              ? badge("Main directory record", "")
               : "") +
             (project.verified
               ? badge("Checked " + project.verified, "verified")
               : badge("Book evidence", "book")) +
             "</div></div>" +
             '<div class="result-meta"><strong>' +
-            esc(project.scope) +
+            esc(displayScope(project.scope)) +
             "</strong><span>" +
             esc(project.printedPageReferences) +
             "</span><span>" +
             esc(
               project.verified
                 ? cleanStatus(project.currentStatusGroup)
-                : "Book evidence only · current review pending",
+                : "Current status not yet reviewed",
             ) +
             "</span></div>" +
-            '<div class="result-actions"><a class="button small" href="/polymythlib/projects/' +
-            esc(project.id) +
-            '/">Open record</a>' +
             (endpoint
-              ? '<a class="button small" rel="noreferrer" href="' +
-                esc(externalHref(project.currentCanonicalUrl)) +
+              ? '<div class="result-actions"><a class="button small primary" target="_blank" rel="noopener noreferrer" href="' +
+                esc(sourceHref) +
                 '">' +
                 esc(endpoint.action) +
-                "</a>"
-              : "") +
-            "</div></article>"
+                '</a><a class="button small research-link" href="/polymythlib/projects/' +
+                esc(project.id) +
+                '/">Research details</a></div>'
+              : '<div class="result-actions"><a class="button small research-link" href="/polymythlib/projects/' +
+                esc(project.id) +
+                '/">Research details</a></div>') +
+            "</article>"
           );
         })
         .join("") +
@@ -367,27 +441,38 @@
   function renderTable(projects) {
     return (
       '<div class="data-table-wrap"><table class="data-table"><caption class="sr-only">Polymythlib directory results</caption><thead><tr>' +
-      '<th scope="col">ID</th><th scope="col">Name</th><th scope="col">Type</th><th scope="col">Scope</th><th scope="col">Book pages</th><th scope="col">Current check</th>' +
+      '<th scope="col">ID</th><th scope="col">Name</th><th scope="col">Research details</th><th scope="col">Type</th><th scope="col">What this record includes</th><th scope="col">Book citation</th><th scope="col">Last checked</th>' +
       "</tr></thead><tbody>" +
       projects
         .slice(0, state.visible)
         .map(
-          (project) =>
-            "<tr><td>" +
+          (project) => {
+            const endpoint = endpointPresentation(project);
+            const sourceHref = endpoint ? externalHref(endpoint.href) : "";
+            const titleHref = sourceHref || `/polymythlib/projects/${project.id}/`;
+            const titleAttrs = sourceHref
+              ? ' target="_blank" rel="noopener noreferrer" class="source-title"'
+              : "";
+            return "<tr><td>" +
             esc(project.id) +
-            '</td><td><a href="/polymythlib/projects/' +
-            esc(project.id) +
-            '/">' +
+            '</td><td><a href="' +
+            esc(titleHref) +
+            '"' +
+            titleAttrs +
+            '">' +
             esc(project.canonicalName) +
-            "</a></td><td>" +
+            '</a></td><td><a class="research-link" href="/polymythlib/projects/' +
+            esc(project.id) +
+            '/">Research details</a></td><td>' +
             esc(project.bookCategories.join(", ")) +
             "</td><td>" +
-            esc(project.scope) +
+            esc(displayScope(project.scope)) +
             "</td><td>" +
             esc(project.printedPageReferences) +
             "</td><td>" +
-            esc(project.verified || "Current review pending") +
-            "</td></tr>",
+            esc(project.verified || "Current status not yet reviewed") +
+            "</td></tr>";
+          },
         )
         .join("") +
       "</tbody></table></div>"
@@ -416,15 +501,15 @@
           ).textContent || state.quick
         : "",
       state.category,
-      state.relation,
+      displayRelation(state.relation),
       state.status === "verified"
-        ? "Current state checked"
+        ? "Current status checked"
         : state.status === "current-url"
-          ? "Reviewed destination recorded"
+          ? "Current website recorded"
           : state.status === "book-only"
-            ? "Book evidence only"
+            ? "Current status not yet reviewed"
             : "",
-      state.tier,
+      displayTier(state.tier),
       state.chapter ? "Chapter " + state.chapter : "",
     ].filter(Boolean);
     byId("pm-active").innerHTML = active
@@ -592,7 +677,7 @@
       render();
     } catch (error) {
       byId("pm-results").innerHTML =
-        '<div class="empty-state"><h2>The directory data did not load.</h2><p>Use the Book Backbone downloads while this route is repaired.</p><a class="button" href="/polymythlib/data/projects.csv">Download projects CSV</a></div>';
+        '<div class="empty-state"><h2>The directory did not load.</h2><p>You can still use the source book downloads.</p><a class="button" href="/polymythlib/data/projects.csv">Download the project list</a></div>';
       byId("pm-result-count").textContent = "Data unavailable";
       console.error(error);
     }

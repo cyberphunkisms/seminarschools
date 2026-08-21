@@ -4,14 +4,16 @@
 /**
  * Verifies the deployable current-release contract without rewriting generated
  * files. Audit 49 still owns the metadata, runtime, build, and packaging
- * efficiency layer carried forward into Audit 53.
+ * efficiency layer carried forward into the current sitewide stability patch.
  */
 const fs = require('fs');
 const path = require('path');
+const { loadInventoryContract } = require('./lib/polymythcal-inventory-contract');
 
 const ROOT = path.resolve(__dirname, '..');
+const inventory = loadInventoryContract(ROOT);
 const EXPECTED_RELEASE =
-  '2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final';
+  '2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final';
 const failures = [];
 
 function read(relative) {
@@ -52,7 +54,7 @@ const assetVersion = String(release.polymythcal_asset_version || '');
 
 check(releaseId === EXPECTED_RELEASE, `release ID is not ${EXPECTED_RELEASE}`);
 check(release.release_id === releaseId, 'release manifest and RELEASE_ID.txt disagree');
-check(assetVersion === '20260728-audit53', `asset version is ${assetVersion}`);
+check(assetVersion === '20260815-sets1-15-synthesis', `asset version is ${assetVersion}`);
 check(
   buildManifest.release_id === releaseId
     && buildManifest.interface_release === releaseId
@@ -60,15 +62,15 @@ check(
   'Polymythcal build manifest is not bound to the current release',
 );
 check(
-  events.length === 833
-    && buildManifest.record_count === 833
-    && eventPayload.count === 833
-    && eventPayload._total_events === 833,
-  'Polymythcal does not retain the 833-event deduplicated inventory',
+  events.length >= inventory.minimum_canonical_events
+    && buildManifest.record_count === events.length
+    && eventPayload.count === events.length
+    && eventPayload._total_events === events.length,
+  `Polymythcal inventory or derived-count parity failed (${events.length}; floor ${inventory.minimum_canonical_events})`,
 );
 check(
-  teacherResources.length === 644,
-  `Teacher Resources does not retain 644 records (${teacherResources.length})`,
+  teacherResources.length === 645,
+  `Teacher Resources does not retain 645 records (${teacherResources.length})`,
 );
 
 check(pkg.engines?.node === '24.14.0', 'package Node engine is not pinned to 24.14.0');
@@ -114,7 +116,7 @@ const buildOrder = [
   'verify-audit49-runtime-efficiency.js',
   'verify-audit49-build-packaging-efficiency.js',
 ];
-const build = pkg.scripts?.build || '';
+const build = pkg.scripts?.['build:locked'] || '';
 let previous = -1;
 for (const token of buildOrder) {
   const index = build.indexOf(token);
@@ -129,6 +131,7 @@ check(
   'final geometry pass is not downstream of every page generator',
 );
 const fullRunner = read('scripts/verify-all-runner.js');
+const idempotenceSource = read('scripts/verify-build-idempotence.js');
 for (const gate of ['verify-geometry.js', 'verify-visible-geometry.js', 'verify-meaningful-geometry.js', 'verify-visible-geometry-browser.mjs']) {
   check(fullRunner.includes(`node scripts/${gate}`), `predeploy full runner lacks ${gate}`);
 }
@@ -138,6 +141,8 @@ check(
 );
 const browserGeometryCommand = 'node scripts/verify-visible-geometry-browser.mjs';
 const browserGeometryIndex = fullRunner.indexOf(browserGeometryCommand);
+const setsBrowserCommand = 'node scripts/verify-polymythcal-sets13-15-browser.js';
+const setsBrowserIndex = fullRunner.indexOf(setsBrowserCommand);
 const idempotenceCommand = 'node scripts/verify-build-idempotence.js';
 const idempotenceIndex = fullRunner.indexOf(idempotenceCommand);
 check(
@@ -152,13 +157,34 @@ check(
     && idempotenceIndex < browserGeometryIndex,
   'predeploy idempotence gate is not a single sequential post-build command',
 );
+check(
+  build.split(' && ').filter(step => step === 'node scripts/verify-polymythcal-sets13-15-browser.js --dom-only').length === 1
+    && !build.split(' && ').includes('node scripts/verify-polymythcal-sets13-15-browser.js'),
+  'production build must run one Sets 13-15 DOM-only gate and no Chromium gate',
+);
+check(
+  (fullRunner.match(/node scripts\/verify-polymythcal-sets13-15-browser\.js/g) || []).length === 1
+    && !fullRunner.includes('node scripts/verify-polymythcal-sets13-15-browser.js --dom-only')
+    && setsBrowserIndex > fullRunner.indexOf('node scripts/verify-teacherresources-state-layout-browser.js')
+    && setsBrowserIndex > fullRunner.indexOf('node scripts/verify-home-map-browser.js')
+    && setsBrowserIndex < browserGeometryIndex,
+  'predeploy full runner must run the Sets 13-15 Chromium gate after Teacher Resources/home and before browser geometry',
+);
+check(
+  idempotenceSource.includes("'scripts/reports/audit49-build-packaging-efficiency.json'")
+    && idempotenceSource.includes("'scripts/reports/release-gate-report.json'")
+    && idempotenceSource.includes('SELF_UPDATING_GENERATED_EVIDENCE.has(relative)')
+    && !idempotenceSource.includes("'scripts/reports/asset-weight-report.json'"),
+  'idempotence excludes only the two policy-token self-updating reports, not raw-hashed build output',
+);
 check(!build.includes('verify-visible-geometry-browser.mjs'), 'browser geometry gate must remain outside the production/Netlify build');
 check(!build.includes('build-audit43-continuity-inventory.js'), 'build rewrites frozen Audit 43 evidence');
 
 for (const [name, command] of Object.entries({
-  'build:public-deploy': 'node scripts/build-public-deploy.js',
+  'build:public-deploy': 'node scripts/run-python.js scripts/run-with-build-lock.py -- npm run build:public-deploy:locked',
+  'build:public-deploy:locked': 'node scripts/run-python.js scripts/assert-build-lock.py && node scripts/build-public-deploy.js',
   'verify:public-parity': 'node scripts/verify-public-deploy-parity.js',
-  'verify:all:built': 'node scripts/verify-all-runner.js --reuse-build',
+  'verify:all:built': 'node scripts/run-python.js scripts/run-with-build-lock.py -- node scripts/verify-all-runner.js --reuse-build',
   'verify:build-idempotence': 'node scripts/verify-build-idempotence.js',
   'verify:ml-dialectical-hardening': 'node scripts/verify-ml-dialectical-hardening.js',
   'verify:frozen-audit43': 'node scripts/verify-frozen-audit43.js',

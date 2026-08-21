@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { search } = require('./query-meaninglib.js');
+const {generatedAt} = require('./lib/deterministic-timestamp');
 
 const root = process.cwd();
 const releaseTimestamp = JSON.parse(fs.readFileSync(path.join(root, 'RELEASE_MANIFEST.json'), 'utf8')).generated_at || '1970-01-01T00:00:00Z';
@@ -37,6 +38,11 @@ function main() {
   const index = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
   if ((index.total_docs || 0) < 1900) fail(`index has too few docs: ${index.total_docs}`);
   pass(`index doc count ${index.total_docs}`);
+  if (process.env.MEPHISTODATA_GENERATED_AT || process.env.SOURCE_DATE_EPOCH) {
+    const expectedTimestamp = generatedAt();
+    if (index.generated_at !== expectedTimestamp) fail(`index timestamp ${index.generated_at} differs from deterministic build timestamp ${expectedTimestamp}`);
+    pass(`index timestamp matches deterministic build timestamp ${expectedTimestamp}`);
+  }
   if (!String(index.ontology_lock || '').includes('interdependent access routes')) fail('ontology lock missing interdependence language');
   pass('ontology lock states interdependence');
   if (index.docs.some(d => d.star_file === 'report')) fail('generated reports are still in default retrieval index');

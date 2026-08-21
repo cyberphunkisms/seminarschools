@@ -19,6 +19,10 @@ from polymythcal_sharding import (  # noqa: E402
 )
 
 ROSTER_PATH = ROOT / "scripts" / "sources.json"
+INVENTORY_CONTRACT = json.loads(
+    (ROOT / "data" / "polymythcal-inventory-contract.json").read_text(encoding="utf-8")
+)
+MINIMUM_SOURCE_COUNT = int(INVENTORY_CONTRACT["minimum_sources"])
 
 
 class ShardingTests(unittest.TestCase):
@@ -109,15 +113,33 @@ class DeterministicSourceSelectionTests(unittest.TestCase):
             date(2026, 1, 26),
         ]
 
-    def test_real_roster_count_and_priority_compatibility_are_unchanged(self):
-        self.assertEqual(len(self.payload["sources"]), 422)
-        self.assertEqual(len(self.priority_ids), 41)
+    def test_current_roster_floor_and_priority_selection_contract(self):
+        self.assertGreaterEqual(len(self.payload["sources"]), MINIMUM_SOURCE_COUNT)
+        source_ids = [str(source.get("id") or "") for source in self.payload["sources"]]
+        self.assertTrue(all(source_ids))
+        self.assertEqual(len(source_ids), len(set(source_ids)))
+        expected_priority_ids = {
+            source["id"]
+            for source in self.payload["sources"]
+            if source.get("enabled") is not False
+            and source.get("harvest_enabled", True)
+            and source.get("source_mode") != "manual"
+            and str(source.get("render_mode") or "").lower() != "manual"
+            and str(source.get("events_url") or "").startswith(("http://", "https://"))
+            and source.get("default_type") != "protest"
+            and int(source.get("tier_priority") or 99) == 1
+        }
+        self.assertTrue(expected_priority_ids)
+        self.assertEqual(self.priority_ids, expected_priority_ids)
         disabled = [
             source
             for source in self.payload["sources"]
             if source.get("enabled") is False
         ]
-        self.assertEqual(len(disabled), 15)
+        disabled_ids = {source["id"] for source in disabled}
+        self.assertTrue(disabled_ids)
+        self.assertFalse(disabled_ids & self.priority_ids)
+        self.assertFalse(disabled_ids & self.rotating_ids)
         self.assertTrue(
             all(
                 key not in source

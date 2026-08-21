@@ -1,0 +1,29 @@
+{
+  "history": {
+    "schema": "polymythcal-source-anomaly-history-v1",
+    "contract_id": "FP-10",
+    "policy": {
+      "minimum_baseline_observations": 3,
+      "history_limit_per_source": 12,
+      "collapse_ratio": 0.2,
+      "spike_ratio": 5,
+      "minimum_collapse_baseline": 5,
+      "minimum_spike_value": 20
+    },
+    "streams": {
+      "test": {
+        "alpha": [
+          { "observed_at": "2026-07-01T00:00:00Z", "status": "success", "events": 20, "records_parsed": 20, "pages_fetched": 2, "rejection_rate": 0.1, "confirmed_empty": false, "authoritative": true },
+          { "observed_at": "2026-07-02T00:00:00Z", "status": "success", "events": 20, "records_parsed": 20, "pages_fetched": 2, "rejection_rate": 0.1, "confirmed_empty": false, "authoritative": true },
+          { "observed_at": "2026-07-03T00:00:00Z", "status": "success", "events": 20, "records_parsed": 20, "pages_fetched": 2, "rejection_rate": 0.1, "confirmed_empty": false, "authoritative": true }
+        ]
+      }
+    }
+  },
+  "current": {
+    "generated_at": "2026-08-09T00:00:00Z",
+    "source_yields": [
+      { "source_id": "alpha", "status": "success", "events": 1, "records_parsed": 1, "pages_fetched": 2, "qualification_rejected": 0 }
+    ]
+  }
+}

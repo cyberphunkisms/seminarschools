@@ -58,6 +58,8 @@
       "enum": [
         "exact",
         "date",
+        "range",
+        "month",
         "estimated",
         "unknown"
       ]
@@ -65,8 +67,11 @@
     "time_precision": {
       "enum": [
         "exact",
+        "approximate",
+        "all-day",
         "estimated",
-        "unknown"
+        "unknown",
+        "not-applicable"
       ]
     },
     "title": {
@@ -113,7 +118,23 @@
           "official-source-unconfirmed",
           "aggregator-only",
           "private-status-unconfirmed",
-          "organizer-unconfirmed"
+          "organizer-unconfirmed",
+          "occurrence-unconfirmed",
+          "closing-date-unconfirmed",
+          "director-attendance-unconfirmed",
+          "exact-date-unconfirmed",
+          "exact-screening-date-unconfirmed",
+          "exact-talkback-participants-unconfirmed",
+          "local-deadline-varies",
+          "official-page-date-requires-reconfirmation",
+          "official-source-date-conflict",
+          "opening-date-confirmed",
+          "program-paused",
+          "recurrence-unconfirmed",
+          "platform-or-stream-unconfirmed",
+          "creator-participation-unconfirmed",
+          "programme-schedule-unconfirmed",
+          "eligibility-unconfirmed"
         ]
       }
     },
@@ -164,7 +185,10 @@
       "type": "array"
     },
     "description": {
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "speaker_or_director": {
       "type": [
@@ -174,6 +198,1128 @@
     },
     "attendance_confirmed": {
       "type": "boolean"
+    },
+    "calendar_systems": {
+      "type": "array"
+    },
+    "traditions": {
+      "type": "array"
+    },
+    "ritual_associations": {
+      "type": "array"
+    },
+    "social_functions": {
+      "type": "array"
+    },
+    "presence_claims": {
+      "type": "array"
+    },
+    "participant_presence": {
+      "type": "array"
+    },
+    "alternate_date_ranges": {
+      "type": "array"
+    },
+    "grade_levels": {
+      "type": "array"
+    },
+    "languages": {
+      "type": "array"
+    },
+    "entry_family": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "socio_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "celestial_system": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "astronomy_visibility": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "observer_notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "director_attendance_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "talkback_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "date_conflict": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_inconsistency": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "eligibility_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "age_range": {
+      "type": [
+        "string",
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "participation_unit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "access_route": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "prize_form": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "institutional_restriction": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ideological_sponsorship": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "commercial_sponsorship": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ai_rule": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "event_year": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "deadline_year": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "exact_grades": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "education_levels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "grade_min": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 12
+    },
+    "grade_max": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 12
+    },
+    "research_batch": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "_upsert_batches": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "interaction_format": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "talkback_confirmed": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "tradition_own_account": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "social_analysis": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "social_analysis_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "topics": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "opportunity_kind": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "research_set": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "research_set_cross_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "social_studies_subfields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "calendar_stage": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "series_role": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "local_grade_system": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "media_literacy_subfields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "interdisciplinary_domains": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "presence_categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "presence_mode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "event_format": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "talkback_time_precision": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_history": {
+      "type": "array"
+    },
+    "public_intellectual_academic_formats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "public_access_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "audience_scope": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "participant_identity_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "registration_required": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "academic_event_forms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Occurrence-level academic/public-intellectual forms used by the front-facing Academic format filter."
+    },
+    "academic_disciplines": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Disciplines explicitly associated with the occurrence; no discipline is inferred merely to fill coverage."
+    },
+    "arts_event_forms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Independent arts/performance/exhibition/festival forms used by the front-facing Arts format filter."
+    },
+    "arts_disciplines": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Arts disciplines evidenced by the record; separate from legacy event type."
+    },
+    "arts_occurrence_role": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Parent, child, run, or single-occurrence position in an arts programme."
+    },
+    "arts_access_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "set10_classified_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "participatory_formats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Active cultural-participation forms used by the front-facing Participation format filter."
+    },
+    "participation_mode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "participation_roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "facilitation_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "skill_level": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "drop_in_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "participation_required": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "participation_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "civic_legal_labour_formats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Independent civic, political, legal, and labour forms used by the front-facing Civic, legal, and labour format filter."
+    },
+    "civic_domain": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Primary civic, political, legal, electoral, or labour domain."
+    },
+    "authority_level": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Institutional level or collective authority responsible for the occurrence."
+    },
+    "public_role": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "What the public may do: observe, participate, vote, submit, organize, or comply."
+    },
+    "participation_route": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Verified route through which a person may attend, vote, submit, register, depute, or otherwise participate."
+    },
+    "public_input_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Whether and how public input is accepted."
+    },
+    "legal_access_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Public-access status for court, tribunal, inquest, inquiry, or statutory-hearing records."
+    },
+    "collective_action_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Collective-action form where applicable, such as rally, counter-protest, parade, picket, or union conference."
+    },
+    "election_stage": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Specific election-cycle stage, from nomination and registration through voting, certification, and compliance."
+    },
+    "access_restrictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Occurrence-specific attendance, participation, publication, capacity, identity, or procedural restrictions."
+    },
+    "webcast_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Official webcast, livestream, videoconference, recording, or access state."
+    },
+    "publication_restriction": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Publication ban, sealed-record, recording, or redistribution restriction where applicable."
+    },
+    "alternate_dates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Conflicting or alternate dates preserved from official sources rather than silently reconciled."
+    },
+    "civic_evidence": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Concise source-grounded evidence supporting the civic, legal, electoral, or labour classification and access claims."
+    },
+    "set12_classified_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "community_heritage_formats": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "charity-walk-run-ride",
+          "fundraiser",
+          "benefit-performance",
+          "food-clothing-drive",
+          "mutual-aid-action",
+          "volunteer-day",
+          "community-cleanup",
+          "repair-cafe",
+          "community-garden",
+          "neighbourhood-assembly",
+          "community-meal",
+          "block-party",
+          "bazaar-night-market",
+          "newcomer-diaspora",
+          "historical-walk",
+          "architecture-tour",
+          "cemetery-tour",
+          "public-dig",
+          "reenactment",
+          "open-archive",
+          "doors-open",
+          "land-based-learning"
+        ]
+      },
+      "description": "Independent Set 13 community, mutual-aid, heritage, and place forms."
+    },
+    "community_participation_roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "contribution_routes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "beneficiary_or_cause": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "place_relation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "community_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "community_heritage_scope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Named community, place, practice, or heritage scope supported by the official source."
+    },
+    "community_public_access_status": {
+      "enum": [
+        "as-confirmed-on-existing-source",
+        "drop-in-public",
+        "open-public",
+        "registration-public",
+        "restricted-eligibility",
+        "ticketed-public"
+      ]
+    },
+    "community_registration_required": {
+      "type": "boolean"
+    },
+    "community_participation_mode": {
+      "enum": [
+        "in-person",
+        "online",
+        "hybrid"
+      ]
+    },
+    "community_date_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "community_access_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "community_participation_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "community_beneficiary_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "community_place_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "community_heritage_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "set13_classified_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "live_digital_formats": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "live-podcast",
+          "public-radio-recording",
+          "media-taping",
+          "livestreamed-discussion",
+          "ama",
+          "virtual-conference",
+          "virtual-exhibition",
+          "virtual-festival",
+          "creator-livestream",
+          "creator-watch-party",
+          "game-stream",
+          "vr-ar-event",
+          "online-premiere",
+          "platform-native-cultural-event"
+        ]
+      },
+      "description": "Independent Set 14 live-media and digitally native forms."
+    },
+    "platform_names": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "synchronous_status": {
+      "enum": [
+        "live",
+        "live-and-replay",
+        "scheduled-premiere",
+        "asynchronous-bounded",
+        "hybrid"
+      ]
+    },
+    "audience_interaction_routes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recording_availability": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "digital_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "set14_classified_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "online_location": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Source-native online venue or access location for a Set 14 occurrence."
+    },
+    "platform": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Source-native platform detail retained alongside normalized platform_names."
+    },
+    "platform_notes": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Source-grounded platform or creator-program qualification notes."
+    },
+    "liveness_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Detailed source-reviewed liveness label retained alongside synchronous_status."
+    },
+    "synchronicity": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Detailed source-native synchronicity claim retained before Set 14 normalization."
+    },
+    "audience_interaction": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "interaction_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "interaction_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "access_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Detailed Set 14 source-native access condition retained alongside public_access_status."
+    },
+    "registration_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "replay_archive_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "recording_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "creator_participation_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "creator_participation_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "occurrence_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "replay_source_field": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "course_program_formats": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "public-short-course",
+          "summer-school",
+          "camp",
+          "academy",
+          "institute",
+          "intensive",
+          "masterclass-series",
+          "cohort-program",
+          "mentorship-program",
+          "film-theatre-lab",
+          "research-school",
+          "field-school",
+          "study-tour",
+          "teacher-professional-development",
+          "admissions-registration",
+          "open-house",
+          "orientation",
+          "convocation",
+          "academic-showcase"
+        ]
+      },
+      "description": "Independent Set 15 course, cohort, and public academic-program forms."
+    },
+    "program_stage": {
+      "enum": [
+        "program-run",
+        "session",
+        "admission-open",
+        "admission-deadline",
+        "registration-open",
+        "registration-deadline",
+        "open-house",
+        "orientation",
+        "convocation",
+        "showcase"
+      ]
+    },
+    "schedule_model": {
+      "enum": [
+        "bounded-series",
+        "fixed-cohort",
+        "rolling-admission-bounded",
+        "multi-day-intensive",
+        "single-stage"
+      ]
+    },
+    "program_stage_source_value": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Exact source-native programme-stage label retained before Set 15 normalization."
+    },
+    "program_schedule_detail": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Exact source-native schedule description retained alongside the normalized schedule model."
+    },
+    "program_start_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "program_end_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "eligibility_audience": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "registration_application_route": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "program_date_precision": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "application_deadline": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "registration_deadline": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "session_count_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "parent_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "child_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "alternate_sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "evidence_facts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "source_control": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "set15_alternate_date_details": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "set15_child_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "set15_eligibility_audience": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "set15_evidence_source_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "set15_evidence_source_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "set15_evidence_source_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "set15_parent_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "set15_program_start_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "set15_program_end_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "set15_program_evidence_facts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "set15_program_stage_source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "set15_registration_application_route": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "set15_schedule_model_source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "set15_series_role": {
+      "enum": [
+        "parent",
+        "child",
+        "standalone"
+      ]
+    },
+    "set15_series_role_source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "set15_session_count_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "set15_source_caveats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "set15_source_formats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "set15_time_precision_source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "session_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "program_evidence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "set15_classified_at": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "additionalProperties": true

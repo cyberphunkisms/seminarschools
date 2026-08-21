@@ -1,0 +1,62 @@
+{
+  "schema": "seminar-schools-futureproofing-targeted-results-v1",
+  "generated_at": "2026-08-10T02:13:10Z",
+  "scope": ["FP-07", "FP-08", "FP-09", "FP-10"],
+  "full_build_run": false,
+  "package_run": false,
+  "results": [
+    {
+      "contract_id": "FP-07",
+      "status": "passed",
+      "commands": [
+        "node scripts/test-gate-defect-fixtures.js",
+        "node scripts/verify-preservation-contracts.js",
+        "node scripts/verify-front-facing-boundary.js",
+        "node scripts/verify-teacherresources-finder.js",
+        "node scripts/verify-visible-geometry.js"
+      ],
+      "evidence": "Five deliberate geometry/front-facing/wrapping/source-link/preservation defects were rejected; 2 preserved workbook copies matched; 3,749 source and 3,748 public renderable pages passed static geometry; front-facing and Teacher Resources production gates passed."
+    },
+    {
+      "contract_id": "FP-08",
+      "status": "static-and-selection-passed",
+      "commands": [
+        "node scripts/test-browser-test-tiers.js",
+        "node scripts/verify-browser-tier-contract.js",
+        "node --check scripts/run-browser-test-tier.mjs"
+      ],
+      "evidence": "The inventory contained 3,748 renderable pages and 45 route families; changed-page expansion and 7-way shard coverage were complete and non-overlapping. The workflow installs Chromium before executing changed, family, and 16-shard scheduled full-page tiers.",
+      "local_browser_execution": "passed: the family tier rendered all 45 route types with /tmp/chromium-reaudit; expected harness-aborted cross-origin requests were separated from genuine local runtime errors"
+    },
+    {
+      "contract_id": "FP-09",
+      "status": "passed",
+      "commands": [
+        "node scripts/run-python.js -m unittest scripts/test_live_evidence_expiration.py",
+        "node scripts/verify-live-evidence-policy.js",
+        "node scripts/run-python.js scripts/verify_audit48_live_harvest.py",
+        "node scripts/run-python.js scripts/verify_audit48_live_harvest.py --require-current --now 2026-08-10T02:13:10Z"
+      ],
+      "evidence": "Four expiry boundary tests passed. Historical evidence remained valid as historical evidence. The strict current claim correctly failed because it was 343.6 hours old (336-hour limit) and its source/workflow configuration had drifted."
+    },
+    {
+      "contract_id": "FP-10",
+      "status": "passed",
+      "commands": [
+        "node scripts/run-python.js -m unittest scripts/test_polymythcal_source_anomalies.py",
+        "node scripts/verify-source-anomaly-contract.js",
+        "bash -n scripts/seminars-prompt-runner.sh scripts/festivals-prompt-runner.sh"
+      ],
+      "evidence": "Six per-source cases passed: warmup, explicit empty exemption, collapse, status regression, yield/fetch spikes, rejection spike, healthy-source isolation, bounded history, and skipped-source exclusion. Deterministic seminar/protest and agent seminar/festival checks occur before publication or merge."
+    }
+  ],
+  "workflow_yaml": {
+    "status": "passed",
+    "files": [
+      ".github/workflows/browser-assurance.yml",
+      ".github/workflows/scrape-seminars.yml",
+      ".github/workflows/scrape-festivals.yml",
+      ".github/workflows/scrape-polymythcal-protests.yml"
+    ]
+  }
+}

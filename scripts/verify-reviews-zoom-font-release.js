@@ -27,8 +27,7 @@ function requireTrue(ok, message) { if (!ok) failures.push(message); }
 
 const release = JSON.parse(read(path.join(ROOT, 'RELEASE_MANIFEST.json')));
 const currentAssetVersion = String(release.polymythcal_asset_version || '');
-const siteWideApplier = read(path.join(ROOT, 'scripts', 'apply-sitewide-type-zoom-link.js'));
-const siteWideAssetVersion = siteWideApplier.match(/const BUILD = ['"]([^'"]+)['"];/)?.[1] || '';
+const { SITEWIDE_TYPE_ZOOM_VERSION: siteWideAssetVersion } = require('./lib/sitewide-type-zoom-version');
 const allowedContractVersions = new Set([currentAssetVersion, siteWideAssetVersion].filter(Boolean));
 requireTrue(allowedContractVersions.size > 0, 'no owned site-wide type/zoom asset version is available');
 
@@ -85,7 +84,11 @@ for (const token of [
   '@media screen and (max-width: 620px)'
 ]) requireTrue(contractCss.includes(token), `site-wide type/zoom CSS is missing: ${token}`);
 
-const styleFiles = walk(ROOT).filter(p => !p.startsWith(PUBLIC + path.sep) && /\.(?:html|css)$/i.test(p));
+const styleFiles = walk(ROOT).filter(p => (
+  !p.startsWith(PUBLIC + path.sep)
+  && !p.includes(path.join('scripts', 'fixtures') + path.sep)
+  && /\.(?:html|css)$/i.test(p)
+));
 const absoluteTiny = /font-size\s*:\s*(?:8|9|10)px\b|font-size\s*:\s*0\.(?:5(?:0+)?|5[1-9]\d*|6(?:0+)?|6[1-5]\d*)rem\b/gi;
 for (const file of styleFiles) {
   const text = stripCssComments(read(file));

@@ -27,6 +27,7 @@ FIXED_GENERATED_DIRECTORIES = {
     ".public-build-staging",
     ".public-build-previous",
     ".public-build-lock",
+    ".seminar-schools-build.lock",
 }
 EXCLUDED_FILES = {
     "cv-modular-onepage-samples-2026-07-09.zip",
@@ -35,8 +36,12 @@ EXCLUDED_FILES = {
     "Saul_Karim_Nassau_CV_onepage_final_2026-07-09.pdf",
 }
 GENERATED_RELEASE_ARCHIVE = re.compile(
-    r"(?:ss-site-audit\d+[^/]*|seminarschools-(?:deployer-compatible|netlify-source)[^/]*)"
+    r"(?:ss-site-[^/]*|seminarschools-(?:deployer-compatible|netlify-source)[^/]*)"
     r"\.zip(?:\.sha256)?$",
+    re.IGNORECASE,
+)
+GENERATED_RELEASE_EVIDENCE = re.compile(
+    r"ss-site-[^/]*\.zip\.(?:audit-receipt|clean-room-report|disaster-recovery-report)\.json$",
     re.IGNORECASE,
 )
 
@@ -44,6 +49,7 @@ GENERATED_RELEASE_ARCHIVE = re.compile(
 def generated_work_dir(part: str) -> bool:
     return bool(
         re.fullmatch(r"(?:polymythcal[-_])?audit\d+(?:[-_].*)?", part, re.IGNORECASE)
+        or re.fullmatch(r"\.ss-public-build-abandoned(?:-.*)?", part, re.IGNORECASE)
         or re.fullmatch(r".*[-_]work", part, re.IGNORECASE)
         or re.fullmatch(r".*[-_]packaged[-_]test", part, re.IGNORECASE)
     )
@@ -55,6 +61,21 @@ def generated_dependency_dir(part: str) -> bool:
         re.fullmatch(r"\.?venv(?:[-_].+)?", value)
         or value in {"env", ".env", "pip-wheel-metadata", ".rsync-tmp", ".rsync-partial"}
     )
+
+
+def selected_bytes_excluding(
+    files: Iterable[Path],
+    excluded_paths: Iterable[Path],
+) -> int:
+    """Measure selected bytes without self-updating evidence files.
+
+    Report generators use this with an exact set of self-updating evidence
+    files instead of measuring their circular output state. Every supplied
+    file remains selected, hashed, and packaged; only the diagnostic byte
+    total excludes it.
+    """
+    excluded = {Path(path).resolve() for path in excluded_paths}
+    return sum(path.stat().st_size for path in files if path.resolve() not in excluded)
 
 
 def output_transaction_names(output: Path) -> set[str]:
@@ -127,6 +148,8 @@ def collect_package_files(
             relative_name = relative.as_posix()
             if relative_name in EXCLUDED_FILES or relative_name == MANIFEST_NAME:
                 continue
+            if len(relative.parts) == 1 and name == ".seminar-schools-build.lease":
+                continue
             if name == ".env" or (name.startswith(".env.") and not name.endswith(".example")):
                 continue
             if candidate.suffix.lower() in {".log", ".pyc"}:
@@ -134,6 +157,8 @@ def collect_package_files(
             if is_output_transaction_artifact(candidate, output):
                 continue
             if len(relative.parts) == 1 and GENERATED_RELEASE_ARCHIVE.fullmatch(name):
+                continue
+            if len(relative.parts) == 1 and GENERATED_RELEASE_EVIDENCE.fullmatch(name):
                 continue
             files.append(candidate)
 

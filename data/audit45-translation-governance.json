@@ -3,444 +3,444 @@
   "release": "audit45",
   "english_source_of_truth": true,
   "organizer_text_policy": "preserve verbatim; mark source language; never silently translate",
-  "high_stakes_policy": "localized draft remains visibly subordinate to English until bilingual review",
+  "high_stakes_policy": "localized summaries remain visibly distinct from complete English detail and noindex until fully translated",
   "routes": [
     {
       "route": "/leizu/fr/",
       "locale": "fr",
       "source": "leizu/index.html",
-      "source_sha256": "9c499280b85a1843126ca7dfb69cea72279f0ac71e46d99a00ae51d49608d058",
+      "source_sha256": "444c85ce5a02d5b54eb5d7e1a0621f61fa13598ca2bbbb31bcc218f00b95960e",
       "status": "complete-owned-copy"
     },
     {
       "route": "/leizu/zh-hant/",
       "locale": "zh-Hant",
       "source": "leizu/index.html",
-      "source_sha256": "9c499280b85a1843126ca7dfb69cea72279f0ac71e46d99a00ae51d49608d058",
+      "source_sha256": "444c85ce5a02d5b54eb5d7e1a0621f61fa13598ca2bbbb31bcc218f00b95960e",
       "status": "complete-owned-copy"
     },
     {
       "route": "/leizu/zh-hans/",
       "locale": "zh-Hans",
       "source": "leizu/index.html",
-      "source_sha256": "9c499280b85a1843126ca7dfb69cea72279f0ac71e46d99a00ae51d49608d058",
+      "source_sha256": "444c85ce5a02d5b54eb5d7e1a0621f61fa13598ca2bbbb31bcc218f00b95960e",
       "status": "complete-owned-copy"
     },
     {
       "route": "/leizu/fa/",
       "locale": "fa",
       "source": "leizu/index.html",
-      "source_sha256": "9c499280b85a1843126ca7dfb69cea72279f0ac71e46d99a00ae51d49608d058",
+      "source_sha256": "444c85ce5a02d5b54eb5d7e1a0621f61fa13598ca2bbbb31bcc218f00b95960e",
       "status": "complete-owned-copy"
     },
     {
       "route": "/leizu/fr/intake/",
       "locale": "fr",
       "source": "leizu/intake/index.html",
-      "source_sha256": "98f9b503ed084b9561930f252bfca765d12d3ae870d4630d610308b8b5f23f4f",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "0cd45fe25d8e53ef836917faab3a459e2e939c05439f50bc8c5a35cb6ca30ecb",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hant/intake/",
       "locale": "zh-Hant",
       "source": "leizu/intake/index.html",
-      "source_sha256": "98f9b503ed084b9561930f252bfca765d12d3ae870d4630d610308b8b5f23f4f",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "0cd45fe25d8e53ef836917faab3a459e2e939c05439f50bc8c5a35cb6ca30ecb",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hans/intake/",
       "locale": "zh-Hans",
       "source": "leizu/intake/index.html",
-      "source_sha256": "98f9b503ed084b9561930f252bfca765d12d3ae870d4630d610308b8b5f23f4f",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "0cd45fe25d8e53ef836917faab3a459e2e939c05439f50bc8c5a35cb6ca30ecb",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fa/intake/",
       "locale": "fa",
       "source": "leizu/intake/index.html",
-      "source_sha256": "98f9b503ed084b9561930f252bfca765d12d3ae870d4630d610308b8b5f23f4f",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "0cd45fe25d8e53ef836917faab3a459e2e939c05439f50bc8c5a35cb6ca30ecb",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fr/booking-success/",
       "locale": "fr",
       "source": "leizu/booking-success/index.html",
-      "source_sha256": "ede24774f6ccb4455b1bf239bb3fde756aabbefd28727997bfbc43c9e88ea0d6",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "08b5ac3443f9b1d7d6634c782a9c9184319b9b7236fb02ae8a642a1ccdfd7d41",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hant/booking-success/",
       "locale": "zh-Hant",
       "source": "leizu/booking-success/index.html",
-      "source_sha256": "ede24774f6ccb4455b1bf239bb3fde756aabbefd28727997bfbc43c9e88ea0d6",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "08b5ac3443f9b1d7d6634c782a9c9184319b9b7236fb02ae8a642a1ccdfd7d41",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hans/booking-success/",
       "locale": "zh-Hans",
       "source": "leizu/booking-success/index.html",
-      "source_sha256": "ede24774f6ccb4455b1bf239bb3fde756aabbefd28727997bfbc43c9e88ea0d6",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "08b5ac3443f9b1d7d6634c782a9c9184319b9b7236fb02ae8a642a1ccdfd7d41",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fa/booking-success/",
       "locale": "fa",
       "source": "leizu/booking-success/index.html",
-      "source_sha256": "ede24774f6ccb4455b1bf239bb3fde756aabbefd28727997bfbc43c9e88ea0d6",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "08b5ac3443f9b1d7d6634c782a9c9184319b9b7236fb02ae8a642a1ccdfd7d41",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fr/policies/",
       "locale": "fr",
       "source": "leizu/policies/index.html",
-      "source_sha256": "98d4a3711b6c3697f089c854bc3d4ccae9fa64f9efa0f9ae58d9296046e346f4",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "f1739746f29ffcbea849e32df1873fed79498a6bc120326c37b1a6c563eef913",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hant/policies/",
       "locale": "zh-Hant",
       "source": "leizu/policies/index.html",
-      "source_sha256": "98d4a3711b6c3697f089c854bc3d4ccae9fa64f9efa0f9ae58d9296046e346f4",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "f1739746f29ffcbea849e32df1873fed79498a6bc120326c37b1a6c563eef913",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hans/policies/",
       "locale": "zh-Hans",
       "source": "leizu/policies/index.html",
-      "source_sha256": "98d4a3711b6c3697f089c854bc3d4ccae9fa64f9efa0f9ae58d9296046e346f4",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "f1739746f29ffcbea849e32df1873fed79498a6bc120326c37b1a6c563eef913",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fa/policies/",
       "locale": "fa",
       "source": "leizu/policies/index.html",
-      "source_sha256": "98d4a3711b6c3697f089c854bc3d4ccae9fa64f9efa0f9ae58d9296046e346f4",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "f1739746f29ffcbea849e32df1873fed79498a6bc120326c37b1a6c563eef913",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fr/scholarship/",
       "locale": "fr",
       "source": "leizu/scholarship/index.html",
-      "source_sha256": "4ee25aa3d57086a2a1c262a52bdf33b7fac0d1df5e642e74ba068bad3cbf62f5",
-      "status": "localized-owned-copy"
+      "source_sha256": "ed96422b5f582f7ec1e4d24f425b9b7ca8cd727294e906fe36d89e02b6b46403",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hant/scholarship/",
       "locale": "zh-Hant",
       "source": "leizu/scholarship/index.html",
-      "source_sha256": "4ee25aa3d57086a2a1c262a52bdf33b7fac0d1df5e642e74ba068bad3cbf62f5",
-      "status": "localized-owned-copy"
+      "source_sha256": "ed96422b5f582f7ec1e4d24f425b9b7ca8cd727294e906fe36d89e02b6b46403",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hans/scholarship/",
       "locale": "zh-Hans",
       "source": "leizu/scholarship/index.html",
-      "source_sha256": "4ee25aa3d57086a2a1c262a52bdf33b7fac0d1df5e642e74ba068bad3cbf62f5",
-      "status": "localized-owned-copy"
+      "source_sha256": "ed96422b5f582f7ec1e4d24f425b9b7ca8cd727294e906fe36d89e02b6b46403",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fa/scholarship/",
       "locale": "fa",
       "source": "leizu/scholarship/index.html",
-      "source_sha256": "4ee25aa3d57086a2a1c262a52bdf33b7fac0d1df5e642e74ba068bad3cbf62f5",
-      "status": "localized-owned-copy"
+      "source_sha256": "ed96422b5f582f7ec1e4d24f425b9b7ca8cd727294e906fe36d89e02b6b46403",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fr/donate/",
       "locale": "fr",
       "source": "leizu/donate/index.html",
-      "source_sha256": "faee20dbc35c47c2a51e34c255ce2aa90492f541ea327a22ca897b7d0250782f",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "2926979ff58499eb8ea2c964ab15aa92ba13196f54ab8cda5fdd66eb6b149063",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hant/donate/",
       "locale": "zh-Hant",
       "source": "leizu/donate/index.html",
-      "source_sha256": "faee20dbc35c47c2a51e34c255ce2aa90492f541ea327a22ca897b7d0250782f",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "2926979ff58499eb8ea2c964ab15aa92ba13196f54ab8cda5fdd66eb6b149063",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hans/donate/",
       "locale": "zh-Hans",
       "source": "leizu/donate/index.html",
-      "source_sha256": "faee20dbc35c47c2a51e34c255ce2aa90492f541ea327a22ca897b7d0250782f",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "2926979ff58499eb8ea2c964ab15aa92ba13196f54ab8cda5fdd66eb6b149063",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fa/donate/",
       "locale": "fa",
       "source": "leizu/donate/index.html",
-      "source_sha256": "faee20dbc35c47c2a51e34c255ce2aa90492f541ea327a22ca897b7d0250782f",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "2926979ff58499eb8ea2c964ab15aa92ba13196f54ab8cda5fdd66eb6b149063",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fr/teach/",
       "locale": "fr",
       "source": "leizu/teach/index.html",
-      "source_sha256": "92bf81c0930590e2c947cc45f966cb8a6d6fc3026b4dc6013f0e1048c15495d9",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "af7c53e1dc5cbc3db5cd9a86193cfb26631ed80dbb562b11a1632a2160cac891",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hant/teach/",
       "locale": "zh-Hant",
       "source": "leizu/teach/index.html",
-      "source_sha256": "92bf81c0930590e2c947cc45f966cb8a6d6fc3026b4dc6013f0e1048c15495d9",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "af7c53e1dc5cbc3db5cd9a86193cfb26631ed80dbb562b11a1632a2160cac891",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hans/teach/",
       "locale": "zh-Hans",
       "source": "leizu/teach/index.html",
-      "source_sha256": "92bf81c0930590e2c947cc45f966cb8a6d6fc3026b4dc6013f0e1048c15495d9",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "af7c53e1dc5cbc3db5cd9a86193cfb26631ed80dbb562b11a1632a2160cac891",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fa/teach/",
       "locale": "fa",
       "source": "leizu/teach/index.html",
-      "source_sha256": "92bf81c0930590e2c947cc45f966cb8a6d6fc3026b4dc6013f0e1048c15495d9",
-      "status": "draft-bilingual-review-required"
+      "source_sha256": "af7c53e1dc5cbc3db5cd9a86193cfb26631ed80dbb562b11a1632a2160cac891",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fr/toronto-tutoring/",
       "locale": "fr",
       "source": "leizu/toronto-tutoring/index.html",
-      "source_sha256": "95460507657330f02422459cc4d1b9a66898182ba00429f0295fa9e063895477",
-      "status": "localized-owned-copy"
+      "source_sha256": "41c8f5a72f69197fec5be99ea95cbe1e55b16b741868a6bf16f327b95d3d339c",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hant/toronto-tutoring/",
       "locale": "zh-Hant",
       "source": "leizu/toronto-tutoring/index.html",
-      "source_sha256": "95460507657330f02422459cc4d1b9a66898182ba00429f0295fa9e063895477",
-      "status": "localized-owned-copy"
+      "source_sha256": "41c8f5a72f69197fec5be99ea95cbe1e55b16b741868a6bf16f327b95d3d339c",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hans/toronto-tutoring/",
       "locale": "zh-Hans",
       "source": "leizu/toronto-tutoring/index.html",
-      "source_sha256": "95460507657330f02422459cc4d1b9a66898182ba00429f0295fa9e063895477",
-      "status": "localized-owned-copy"
+      "source_sha256": "41c8f5a72f69197fec5be99ea95cbe1e55b16b741868a6bf16f327b95d3d339c",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fa/toronto-tutoring/",
       "locale": "fa",
       "source": "leizu/toronto-tutoring/index.html",
-      "source_sha256": "95460507657330f02422459cc4d1b9a66898182ba00429f0295fa9e063895477",
-      "status": "localized-owned-copy"
+      "source_sha256": "41c8f5a72f69197fec5be99ea95cbe1e55b16b741868a6bf16f327b95d3d339c",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fr/cloud/",
       "locale": "fr",
       "source": "leizu/cloud/index.html",
-      "source_sha256": "89e3b1de1f8e799e78cddedf67548fa7f8f15c75dc6a2731c55316842e47c9cc",
-      "status": "localized-owned-copy"
+      "source_sha256": "3b2d0271708dfbf07db3227aaffe5c4652d9cb5fb9345f6f3df4670dc42f3f2f",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hant/cloud/",
       "locale": "zh-Hant",
       "source": "leizu/cloud/index.html",
-      "source_sha256": "89e3b1de1f8e799e78cddedf67548fa7f8f15c75dc6a2731c55316842e47c9cc",
-      "status": "localized-owned-copy"
+      "source_sha256": "3b2d0271708dfbf07db3227aaffe5c4652d9cb5fb9345f6f3df4670dc42f3f2f",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hans/cloud/",
       "locale": "zh-Hans",
       "source": "leizu/cloud/index.html",
-      "source_sha256": "89e3b1de1f8e799e78cddedf67548fa7f8f15c75dc6a2731c55316842e47c9cc",
-      "status": "localized-owned-copy"
+      "source_sha256": "3b2d0271708dfbf07db3227aaffe5c4652d9cb5fb9345f6f3df4670dc42f3f2f",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fa/cloud/",
       "locale": "fa",
       "source": "leizu/cloud/index.html",
-      "source_sha256": "89e3b1de1f8e799e78cddedf67548fa7f8f15c75dc6a2731c55316842e47c9cc",
-      "status": "localized-owned-copy"
+      "source_sha256": "3b2d0271708dfbf07db3227aaffe5c4652d9cb5fb9345f6f3df4670dc42f3f2f",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fr/flyer/",
       "locale": "fr",
       "source": "leizu/flyer/index.html",
-      "source_sha256": "20ea436726ceacf810e1b4e7e330e806bc10a32b37f44bbe25ebda8cc398db64",
-      "status": "localized-owned-copy"
+      "source_sha256": "746ef4bbf194a37c32db24122a2cf7fe0d663ab91a00064b7152dfe7bf5fa70c",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hant/flyer/",
       "locale": "zh-Hant",
       "source": "leizu/flyer/index.html",
-      "source_sha256": "20ea436726ceacf810e1b4e7e330e806bc10a32b37f44bbe25ebda8cc398db64",
-      "status": "localized-owned-copy"
+      "source_sha256": "746ef4bbf194a37c32db24122a2cf7fe0d663ab91a00064b7152dfe7bf5fa70c",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/zh-hans/flyer/",
       "locale": "zh-Hans",
       "source": "leizu/flyer/index.html",
-      "source_sha256": "20ea436726ceacf810e1b4e7e330e806bc10a32b37f44bbe25ebda8cc398db64",
-      "status": "localized-owned-copy"
+      "source_sha256": "746ef4bbf194a37c32db24122a2cf7fe0d663ab91a00064b7152dfe7bf5fa70c",
+      "status": "localized-summary-english-detail"
     },
     {
       "route": "/leizu/fa/flyer/",
       "locale": "fa",
       "source": "leizu/flyer/index.html",
-      "source_sha256": "20ea436726ceacf810e1b4e7e330e806bc10a32b37f44bbe25ebda8cc398db64",
-      "status": "localized-owned-copy"
+      "source_sha256": "746ef4bbf194a37c32db24122a2cf7fe0d663ab91a00064b7152dfe7bf5fa70c",
+      "status": "localized-summary-english-detail"
     },
     {
       "route_pattern": "/polymythseminars/fr/events/{event_id}/",
       "locale": "fr-CA",
       "source": "polymythseminars/events.json",
-      "source_sha256": "941f9be6c4f741a813431a2617ee67d7b850d09993d07b3da5dd0a7a17666b0a",
+      "source_sha256": "4e215f0008ec322cba04d4bf66dfede94028df665b21ee76427c7a9b13dfffec",
       "status": "localized-interface-source-verbatim",
-      "count": 833,
-      "legacy_alias_count": 12
+      "count": 2088,
+      "legacy_alias_count": 28
     },
     {
       "route": "/polymythseminars/fr/",
       "locale": "fr-CA",
       "source": "polymythseminars/index.html",
-      "source_sha256": "a27615b5a0d89ab8da0cb3cb187a1f842a516f29f2bce0649ccdfc43adf390d3",
+      "source_sha256": "ee1b62030684507a99e636838066d2cb1ab8448876b67b07b35897f4426339c6",
       "status": "complete-owned-interface"
     },
     {
       "route": "/writingclub/fr/",
       "locale": "fr-CA",
       "source": "writingclub/index.html",
-      "source_sha256": "e96947979b52de116b46cabe1f89bda8f26e19034ebfb654a4fe209b9a926053",
+      "source_sha256": "dd8eba42220e0cca3799f69ad9a924516b57b9808fdc00832a7f36e07e41fbc5",
       "status": "complete-owned-interface"
     },
     {
       "route": "/writingkids/fr/",
       "locale": "fr-CA",
       "source": "writingkids/index.html",
-      "source_sha256": "613373cd4dea76c4bf0390038b9f3180a5a951feb32ff5f23db0832ee73a5922",
+      "source_sha256": "8a082c9c3ffc0f0d8f3f5f30934d2c86ce953aab79b1cc7321bda3c8714db545",
       "status": "complete-owned-interface"
     },
     {
       "route": "/writingjuniors/fr/",
       "locale": "fr-CA",
       "source": "writingjuniors/index.html",
-      "source_sha256": "4c6317135673ec6af28763bdbdf01912926837d864824e801700256489f49937",
+      "source_sha256": "73f3907c35670e0866b0e2e4496ffcf22cb1e72a6455eadbbd543f3fb4cb7d79",
       "status": "complete-owned-interface"
     },
     {
       "route": "/writingteens/fr/",
       "locale": "fr-CA",
       "source": "writingteens/index.html",
-      "source_sha256": "bf5228e3a05c604b591b51e652cfe373066f610e9e8c8eb8f0450d4ce41376c1",
+      "source_sha256": "46c012251ec8c43ac473d881635e8954b29e32b68f5882967ed12abe995c2096",
       "status": "complete-owned-interface"
     },
     {
       "route": "/writinggrads/fr/",
       "locale": "fr-CA",
       "source": "writinggrads/index.html",
-      "source_sha256": "add1af9717c8d308af7b96e34ad73743ec65a2e69ac07f122bae0ebc2e8faa81",
+      "source_sha256": "43fb5666e2c40c0520172ed1b6000e7dbd4bb6b26dd4709deda3967332609e7c",
       "status": "complete-owned-interface"
     },
     {
       "route": "/university/fr/",
       "locale": "fr-CA",
       "source": "university/index.html",
-      "source_sha256": "c50990d9e1a70bc0b646c0930e1edcd777c239b16aa470199217f18e941d173a",
+      "source_sha256": "162f017d60a47abcdfe9a4829c41057c5b02f7f1668aba48db624fc6afe3a7bd",
       "status": "complete-owned-interface"
     },
     {
       "route": "/philosophy/fr/",
       "locale": "fr-CA",
       "source": "philosophy/index.html",
-      "source_sha256": "23903ba1676d4f7e9f059433cab3012708802169c8ac8f098d3c636978a855ac",
+      "source_sha256": "44995520f4f0a04629f89618a2bff7d47ebfd4f93a39816daa113942c840cae4",
       "status": "complete-owned-interface"
     },
     {
       "route": "/humanities/fr/",
       "locale": "fr-CA",
       "source": "humanities/index.html",
-      "source_sha256": "8f1e9e9cb34cf170ec3053abff2184d7160c18479d35f8abed8b3fd92ff96360",
+      "source_sha256": "85707e9021028347c3cecc16f45f946287247502325d57c75a18267e0eec4e29",
       "status": "complete-owned-interface"
     },
     {
       "route": "/cfps/fr/",
       "locale": "fr-CA",
       "source": "cfps/index.html",
-      "source_sha256": "0761b9cf891365eddf64f8e408e3cb5fb89d4c2ac1fd565c2caf96a7062ca8f5",
+      "source_sha256": "0dcfd63d7d77a7c9f033c41fc4d0abb97e25e83f2060134539acc36cc80f6b00",
       "status": "complete-owned-interface"
     },
     {
       "route": "/lectures/fr/",
       "locale": "fr-CA",
       "source": "lectures/index.html",
-      "source_sha256": "30ce9c961753fd46a5fa4464233eaaaad8f738f68191123348e41ac5720a9635",
+      "source_sha256": "7334f395284a02634b404f3de159b556174aac5a31e1901766de5db66b29a0a1",
       "status": "complete-owned-interface"
     },
     {
       "route": "/fellowships/fr/",
       "locale": "fr-CA",
       "source": "fellowships/index.html",
-      "source_sha256": "e563124ae1439722106ecb6d09a5e08df25801aefc22390ef7e2793c6e023efa",
+      "source_sha256": "33f8b71db5f2625668aba5c9b36ca50e492f356f371cb61d3204103b0562fe9b",
       "status": "complete-owned-interface"
     },
     {
       "route": "/polymythseminars/fr/submit/",
       "locale": "fr-CA",
       "source": "polymythseminars/submit/index.html",
-      "source_sha256": "68945568ce5b8dd95a7f52a426082582628cc2cac98c907a3fd139ad62e11832",
+      "source_sha256": "d6e062ff44a49bba8405cabd22f7d1477fa57296f6510afe16725684947cf33d",
       "status": "complete-owned-copy"
     },
     {
       "route": "/polymythseminars/fr/correct/",
       "locale": "fr-CA",
       "source": "polymythseminars/correct/index.html",
-      "source_sha256": "1eac47c4bcd538811749f539a85127d6b7787dbd4c19d9bebb6d19be51336ebe",
+      "source_sha256": "8622fdc744c30fc545c3b45bb54626ada9f459261eb399e2959ccc58252693a3",
       "status": "complete-owned-copy"
     },
     {
       "route": "/polymythseminars/fr/subscribe/",
       "locale": "fr-CA",
       "source": "polymythseminars/feeds/index.json",
-      "source_sha256": "a2fc9d86073f371eeb051ceb9eb3a35364c60b1ee359dd074fa6740deb179974",
+      "source_sha256": "cbedf0288a2adbc5c818320995373660564b5554d2b8b36fa70947e640af30bb",
       "status": "complete-owned-copy"
     },
     {
       "route": "/saul/fr/",
       "locale": "fr",
       "source": "saul/index.html",
-      "source_sha256": "8e666fbe505197463750d2086d23b0025959625568973b1487a88b3a56fef380",
+      "source_sha256": "8545f094ac860665d67660191d83df1d0ff5c8d747243c17062ca13dfeccaf32",
       "status": "localized-career-archive"
     },
     {
       "route": "/saul/zh-hant/",
       "locale": "zh-Hant",
       "source": "saul/index.html",
-      "source_sha256": "8e666fbe505197463750d2086d23b0025959625568973b1487a88b3a56fef380",
+      "source_sha256": "8545f094ac860665d67660191d83df1d0ff5c8d747243c17062ca13dfeccaf32",
       "status": "localized-career-archive"
     },
     {
       "route": "/saul/zh-hans/",
       "locale": "zh-Hans",
       "source": "saul/index.html",
-      "source_sha256": "8e666fbe505197463750d2086d23b0025959625568973b1487a88b3a56fef380",
+      "source_sha256": "8545f094ac860665d67660191d83df1d0ff5c8d747243c17062ca13dfeccaf32",
       "status": "localized-career-archive"
     },
     {
       "route": "/saul/fa/",
       "locale": "fa",
       "source": "saul/index.html",
-      "source_sha256": "8e666fbe505197463750d2086d23b0025959625568973b1487a88b3a56fef380",
+      "source_sha256": "8545f094ac860665d67660191d83df1d0ff5c8d747243c17062ca13dfeccaf32",
       "status": "localized-career-archive"
     },
     {
       "route": "/bb/why/zh/",
       "locale": "zh-Hans",
       "source": "bb/why/index.html",
-      "source_sha256": "28419a5e7ee2112e55fdaae9c5348567edaa1cc72c0e97466bc8108cef2c6f38",
+      "source_sha256": "4ab9b58f5a70796dbf0e6fa138edab1022c25b19c9d3112814a565b1570a99ad",
       "status": "complete-owned-copy"
     }
   ],
   "counts": {
     "leizu_locales": 4,
     "polymythcal_interface_locales": 2,
-    "polymythcal_event_routes_per_locale": 833,
-    "polymythcal_french_legacy_alias_routes": 12,
+    "polymythcal_event_routes_per_locale": 2088,
+    "polymythcal_french_legacy_alias_routes": 28,
     "saul_archive_locales": 4,
-    "teacher_resources": 644
+    "teacher_resources": 645
   }
 }

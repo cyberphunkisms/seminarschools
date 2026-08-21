@@ -1,0 +1,281 @@
+{
+  "schema": "seminar-schools-browser-tier-report-v1",
+  "contract_id": "FP-08",
+  "tier": "family",
+  "shard_index": 0,
+  "shard_count": 1,
+  "selected": 45,
+  "failures": [],
+  "results": [
+    {
+      "route": "/aa/",
+      "route_type": "archive",
+      "screenshot_bytes": 190899,
+      "full_page": false
+    },
+    {
+      "route": "/polymyth/concordance/",
+      "route_type": "archive-index",
+      "screenshot_bytes": 172297,
+      "full_page": false
+    },
+    {
+      "route": "/polymyth/sitemap/",
+      "route_type": "archive-map",
+      "screenshot_bytes": 184287,
+      "full_page": false
+    },
+    {
+      "route": "/polymyth/notebook/",
+      "route_type": "archive-static",
+      "screenshot_bytes": 219893,
+      "full_page": false
+    },
+    {
+      "route": "/aa/cloud/",
+      "route_type": "archive-tool",
+      "screenshot_bytes": 378458,
+      "full_page": false
+    },
+    {
+      "route": "/cfps/",
+      "route_type": "calendar",
+      "screenshot_bytes": 183286,
+      "full_page": false
+    },
+    {
+      "route": "/polymythseminars/events/0397c5dce167/",
+      "route_type": "calendar-event",
+      "screenshot_bytes": 161568,
+      "full_page": false
+    },
+    {
+      "route": "/polymythseminars/events/98410ad8a93b/",
+      "route_type": "calendar-event-alias",
+      "screenshot_bytes": 62609,
+      "full_page": false
+    },
+    {
+      "route": "/polymythseminars/submit/",
+      "route_type": "calendar-form",
+      "screenshot_bytes": 93424,
+      "full_page": false
+    },
+    {
+      "route": "/campaigns/",
+      "route_type": "campaign",
+      "screenshot_bytes": 172697,
+      "full_page": false
+    },
+    {
+      "route": "/campaigns/studio-qibla/pregame/",
+      "route_type": "campaign-tool",
+      "screenshot_bytes": 291657,
+      "full_page": false
+    },
+    {
+      "route": "/polymythlib/book-backbone/",
+      "route_type": "commons-backbone",
+      "screenshot_bytes": 339187,
+      "full_page": false
+    },
+    {
+      "route": "/polymythlib/collections/",
+      "route_type": "commons-collections",
+      "screenshot_bytes": 393456,
+      "full_page": false
+    },
+    {
+      "route": "/polymythlib/contribute/",
+      "route_type": "commons-contribute",
+      "screenshot_bytes": 363919,
+      "full_page": false
+    },
+    {
+      "route": "/polymythlib/",
+      "route_type": "commons-directory",
+      "screenshot_bytes": 256707,
+      "full_page": false
+    },
+    {
+      "route": "/polymythcommons/",
+      "route_type": "commons-home",
+      "screenshot_bytes": 399278,
+      "full_page": false
+    },
+    {
+      "route": "/polymythlib/method/",
+      "route_type": "commons-method",
+      "screenshot_bytes": 309234,
+      "full_page": false
+    },
+    {
+      "route": "/polymythlib/projects/PC-0001/",
+      "route_type": "commons-record",
+      "screenshot_bytes": 365178,
+      "full_page": false
+    },
+    {
+      "route": "/saul/",
+      "route_type": "cv",
+      "screenshot_bytes": 221910,
+      "full_page": false
+    },
+    {
+      "route": "/saul/kitchen/",
+      "route_type": "cv-redirect",
+      "screenshot_bytes": 61638,
+      "full_page": false
+    },
+    {
+      "route": "/reviews/",
+      "route_type": "cv-reviews",
+      "screenshot_bytes": 327060,
+      "full_page": false
+    },
+    {
+      "route": "/404.html",
+      "route_type": "error",
+      "screenshot_bytes": 116834,
+      "full_page": false
+    },
+    {
+      "route": "/bookwormcard/success/",
+      "route_type": "form-success",
+      "screenshot_bytes": 254278,
+      "full_page": false
+    },
+    {
+      "route": "/bookwormcard/about/",
+      "route_type": "game-info",
+      "screenshot_bytes": 411606,
+      "full_page": false
+    },
+    {
+      "route": "/bb/",
+      "route_type": "game-landing",
+      "screenshot_bytes": 254964,
+      "full_page": false
+    },
+    {
+      "route": "/bookwormcard/pdf/",
+      "route_type": "game-print",
+      "screenshot_bytes": 490618,
+      "full_page": false
+    },
+    {
+      "route": "/bb/bbt/",
+      "route_type": "game-research",
+      "screenshot_bytes": 371331,
+      "full_page": false
+    },
+    {
+      "route": "/bb/why/zh/",
+      "route_type": "game-research-localized",
+      "screenshot_bytes": 177929,
+      "full_page": false
+    },
+    {
+      "route": "/bookwormcard/",
+      "route_type": "game-tool",
+      "screenshot_bytes": 417727,
+      "full_page": false
+    },
+    {
+      "route": "/",
+      "route_type": "home",
+      "screenshot_bytes": 364925,
+      "full_page": false
+    },
+    {
+      "route": "/about/",
+      "route_type": "map",
+      "screenshot_bytes": 341578,
+      "full_page": false
+    },
+    {
+      "route": "/agora/",
+      "route_type": "project",
+      "screenshot_bytes": 180334,
+      "full_page": false
+    },
+    {
+      "route": "/polymyth/",
+      "route_type": "project-archive",
+      "screenshot_bytes": 189452,
+      "full_page": false
+    },
+    {
+      "route": "/polymyth/devilsdiary/1/",
+      "route_type": "publication",
+      "screenshot_bytes": 587237,
+      "full_page": false
+    },
+    {
+      "route": "/main/",
+      "route_type": "redirect",
+      "screenshot_bytes": 65110,
+      "full_page": false
+    },
+    {
+      "route": "/teacherresources/",
+      "route_type": "resource-catalog",
+      "screenshot_bytes": 151514,
+      "full_page": false
+    },
+    {
+      "route": "/leizu/",
+      "route_type": "service",
+      "screenshot_bytes": 365508,
+      "full_page": false
+    },
+    {
+      "route": "/leizu/flyer/",
+      "route_type": "service-flyer",
+      "screenshot_bytes": 180582,
+      "full_page": false
+    },
+    {
+      "route": "/leizu/intake/",
+      "route_type": "service-form",
+      "screenshot_bytes": 305784,
+      "full_page": false
+    },
+    {
+      "route": "/leizu/donate/",
+      "route_type": "service-payment",
+      "screenshot_bytes": 365548,
+      "full_page": false
+    },
+    {
+      "route": "/leizu/policies/",
+      "route_type": "service-policy",
+      "screenshot_bytes": 282194,
+      "full_page": false
+    },
+    {
+      "route": "/leizu/teach/",
+      "route_type": "service-recruiting",
+      "screenshot_bytes": 300402,
+      "full_page": false
+    },
+    {
+      "route": "/polymyth/dmboard/",
+      "route_type": "teacher-manual",
+      "screenshot_bytes": 238201,
+      "full_page": false
+    },
+    {
+      "route": "/polymyth/bookwormburrows/",
+      "route_type": "teacher-rule-library",
+      "screenshot_bytes": 238260,
+      "full_page": false
+    },
+    {
+      "route": "/aitr/",
+      "route_type": "tool",
+      "screenshot_bytes": 176786,
+      "full_page": false
+    }
+  ]
+}

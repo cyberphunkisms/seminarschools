@@ -71,13 +71,12 @@ html[data-motion="calm"] :where(.iv-pre, .iv-in, .reveal, .reveal-in,
 .indra-ripple, .firefly, .atomic-flash,
 .leaf-canvas, #leaf-canvas, .floating-leaf, .flutter-leaf { display: none !important; }
 
-/* Scroll geometry: fixed, transform-only, and pointer-safe. Bespoke page
-   diagrams stay still; the shared #indraLayer supplies the universal scroll cue. */
-#indraLayer, #indraLayer svg, #geo, #geo2, #geo svg, #geo2 svg {
+/* Calm mode removes idle effects, never the canonical scroll camera. */
+#indraLayer, #indraLayer .indra-camera, #indraLayer svg {
   transition: none !important;
   animation: none !important;
 }
-#indraLayer { will-change: transform !important; }
+#indraLayer .indra-camera { will-change: transform !important; }
 
 /* Home map and cards use colour/focus only. */
 .home .panel, .home .idx-row, .home .idx-row .arr, .home .path-card,
@@ -123,18 +122,43 @@ body[data-route-type="bookwormcard"] :where(#rain-canvas, .rain-canvas, .cursor-
     transition-duration: .001ms !important;
     transition-delay: 0s !important;
   }
-  #indraLayer { will-change: auto !important; }
+  #indraLayer .indra-camera { will-change: auto !important; }
   :where(.scroll-shell, .table-wrap, [data-keyboard-scroll]) {
     scroll-snap-type: none !important;
   }
 }
 
-/* Site-wide decorative systems yield to the single shared scroll geometry. */
-html[data-motion="calm"] :where(#geo, #geo2, #rain-canvas, .rain-canvas, .matrix-rain) {
+/* Legacy decorative canvases may yield to the canonical field. Geometry IDs
+   are intentionally absent here: calm mode may never hide an Indra camera. */
+html[data-motion="calm"] body :where(#rain-canvas, .rain-canvas, .matrix-rain) {
   display: none !important;
 }
-html[data-motion="calm"] :where(.field-toggle, #geometryToggle, #modeToggle) {
+html[data-motion="calm"] body :where(.field-toggle, #geometryToggle, #modeToggle) {
   display: none !important;
+}
+
+/* The CV's return, theme, and type controls predate the long-form archive and
+   were fixed over whatever happened to scroll beneath them. Keep every
+   control, but place the utility row in normal document flow so it never
+   obscures prose, links, the map iframe, or keyboard focus. */
+html[data-motion="calm"] body[data-route-type="cv"] > :where(.cv-home-link, .theme-toggle, .fz-controls) {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  margin: .6rem .3rem .15rem .65rem !important;
+  vertical-align: middle;
+}
+html[data-motion="calm"] body[data-route-type="cv"] > :where(.theme-toggle, .fz-controls) {
+  display: inline-flex;
+}
+html[data-motion="calm"] body[data-route-type="cv"] .page > :where(.cv-local-nav, .cv-ultimate) {
+  max-width: 100%;
+}
+@media (max-width: 900px) {
+  body[data-route-type="cv"] .cv-ultimate__facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+  body[data-route-type="cv"] .cv-ultimate__facts { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* Polymythcal controls retain a fixed box before and after interaction. */

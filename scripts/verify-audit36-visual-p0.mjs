@@ -64,8 +64,9 @@ assert.ok(contrastRatio('#8b5cf6', '#08070d') >= 4.5, 'CRT heading contrast regr
 assert.ok(contrastRatio('#253018', '#f9f5e8') >= 4.5, 'light-mode contrast regressed');
 assert.ok(contrastRatio('#ffffff', '#000000') >= 7, 'high-contrast mode regressed');
 
-// The AA peer switcher keeps its fixed desktop treatment, but its one DOM
-// instance now sits beside the route introduction and enters flow when narrow.
+// The AA peer switcher is a route choice rather than a viewport control. Its
+// single DOM instance stays in reading order at every size and may scroll
+// horizontally without covering the archive or global controls.
 assert.equal(occurrence(aa, 'id="aa-sibling-nav"'), 1);
 const routeNoteAt = aa.indexOf('class="route-note archive-route-note"');
 const siblingNavAt = aa.indexOf('id="aa-sibling-nav"');
@@ -73,8 +74,9 @@ const headerAt = aa.indexOf('<header id="home-link">');
 assert.ok(routeNoteAt >= 0 && siblingNavAt > routeNoteAt && headerAt > siblingNavAt);
 assert.match(
   aa,
-  /@media \(max-width:900px\),\(max-height:420px\)\s*\{[\s\S]*?#aa-sibling-nav\s*\{[\s\S]*?position:static!important;[\s\S]*?inset:auto!important;/
+  /#aa-sibling-nav\s*\{[\s\S]*?position:static!important;inset:auto!important;[\s\S]*?overflow-x:auto;/
 );
+assert.doesNotMatch(aa, /#aa-sibling-nav\s*\{[^}]*position:fixed/);
 assert.match(aa, /#aa-sibling-nav>a,#aa-sibling-nav>span\{[\s\S]*?min-height:44px/);
 assert.equal((aa.match(/class="mode-btn/g) || []).length, 7, 'AA browse modes changed');
 assert.match(aa, /href="\/aa\/cloud\/"/);

@@ -5,12 +5,13 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:f6d0075d3bf54d90044d@seminarschools.com
-DTSTAMP:20260628T042537Z
-DTSTART:20260601T140000Z
-DTEND:20261231T223000Z
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260601
+DTEND;VALUE=DATE:20270101
 SUMMARY:The Impressionist Revolution: Monet to Matisse
 LOCATION:Art Gallery of Ontario\, 317 Dundas Street West
-DESCRIPTION:
+DESCRIPTION:Major exhibition from the Dallas Museum of Art\, Canadian deb
+ ut\, June 2026 opening at AGO.
 URL:https://seminarschools.com/polymythseminars/events/b62fe9ac2e56/
 STATUS:CONFIRMED
 END:VEVENT

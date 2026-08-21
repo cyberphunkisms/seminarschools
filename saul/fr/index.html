@@ -20,7 +20,7 @@
 <link rel="alternate" hreflang="fa" href="https://seminarschools.com/saul/fa/">
 <link rel="alternate" hreflang="x-default" href="https://seminarschools.com/saul/">
 <meta name="translation-source" content="saul/index.html">
-<meta name="translation-source-sha256" content="8e666fbe505197463750d2086d23b0025959625568973b1487a88b3a56fef380">
+<meta name="translation-source-sha256" content="8545f094ac860665d67660191d83df1d0ff5c8d747243c17062ca13dfeccaf32">
 <meta name="translation-status" content="localized-career-archive">
 <meta name="translation-policy" content="english-source-of-truth; no-silent-organizer-translation">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=DM+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
@@ -46,7 +46,6 @@
   --accent: var(--accent-light);
     --accent-soft: rgba(125, 95, 31, 0.10);
     --accent-line: rgba(125, 95, 31, 0.35);
-    --geo-density: 0.06;
     --serif: 'Cormorant Garamond', 'Garamond', 'Georgia', serif;
     --body: 'Libre Baskerville', 'Georgia', serif;
     --sans: 'DM Sans', system-ui, -apple-system, sans-serif;
@@ -83,33 +82,6 @@
     transition: background 0.6s ease;
   }
   a { color: inherit; }
-
-  /* ===== GEOMETRY WATERMARK (Apollonian gasket from index.html) ===== */
-  .geo {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .geo svg {
-    width: 100vh;
-    height: 100vh;
-    max-width: 100vw;
-    opacity: var(--geo-density);
-    color: var(--accent);
-    transform: scale(var(--geo-scale, 1.4)) translate(var(--geo-tx, 0px), var(--geo-ty, 0px));
-    transform-origin: center center;
-    transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform;
-  }
-
-  /* ===== PROFESSIONAL MODE (default), geometry muted ===== */
-  body:not(.party) { --geo-density: 0.04 !important; }
-  body.party { --geo-density: 0.16; }
 
   /* ===== PAGE WRAPPER ===== */
   .page {
@@ -919,9 +891,6 @@ textarea:focus-visible,
 /* ===== SAUL PAGE REVAMP ===== */
 @media screen {
   :root { --content-width: 1120px; }
-  body:not(.party) { --geo-density: 0.025 !important; }
-  body.party { --geo-density: 0.10; }
-  .geo svg { opacity: var(--geo-density); filter: saturate(0.78); }
   .page {
     width: min(100%, 1120px);
     max-width: 1120px;
@@ -1234,9 +1203,9 @@ textarea:focus-visible,
 <link href="/css/mobile-overlay.css?v=cl91" rel="stylesheet"/>
 <!-- CL-2026-06-04 #7: self-attributed role titles stripped from CV in all languages and SEO meta -->
 <link href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)" rel="stylesheet"/>
-<link rel="stylesheet" href="/css/alive.css?v=20260806-front-facing-geometry">
+<link rel="stylesheet" href="/css/alive.css?v=sha256-3ccd45ce601b">
 <style id="CL_SELF_CV_PRINT_ZOOM_GUARD">@media print{body[data-cv-purpose="general-employment"]{font-size:11pt}.cv-name,.hero-title,h1{break-after:avoid;overflow-wrap:anywhere}}@media (max-width:760px){body[data-cv-purpose="general-employment"] h1,body[data-cv-purpose="general-employment"] .name{max-width:100%;overflow-wrap:anywhere}}</style>
-<title>Archives professionnelles de Saul Karim Nassau</title><meta name="description" content="Parcours professionnel, études, projets et service communautaire en français."><meta content="index,follow,max-image-preview:large" name="robots"/><meta content="profile" property="og:type"><meta property="og:title" content="Archives professionnelles de Saul Karim Nassau"><meta property="og:description" content="Parcours professionnel, études, projets et service communautaire en français."><meta property="og:url" content="https://seminarschools.com/saul/fr/"><meta content="https://seminarschools.com/img/saul.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta name="twitter:title" content="Archives professionnelles de Saul Karim Nassau"><meta name="twitter:description" content="Parcours professionnel, études, projets et service communautaire en français."><meta content="https://seminarschools.com/img/saul.jpg" name="twitter:image"/><link rel="canonical" href="https://seminarschools.com/saul/fr/"><link href="/saul/assets/saul-ultimate-cv-2026.css?v=20260727-modular" rel="stylesheet"><style id="audit11-mobile-cv-return-link">@media(max-width:520px){body[data-cv-purpose="general-employment"]>a[href="/"]:first-of-type{position:absolute!important;background:rgba(255,253,248,.88);padding:.45rem .58rem;border:1px solid rgba(35,43,46,.18);border-radius:999px;backdrop-filter:blur(8px);}}</style><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<title>Archives professionnelles de Saul Karim Nassau</title><meta name="description" content="Parcours professionnel, études, projets et service communautaire en français."><meta content="index,follow,max-image-preview:large" name="robots"/><meta content="profile" property="og:type"><meta property="og:title" content="Archives professionnelles de Saul Karim Nassau"><meta property="og:description" content="Parcours professionnel, études, projets et service communautaire en français."><meta property="og:url" content="https://seminarschools.com/saul/fr/"><meta content="https://seminarschools.com/img/saul.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta name="twitter:title" content="Archives professionnelles de Saul Karim Nassau"><meta name="twitter:description" content="Parcours professionnel, études, projets et service communautaire en français."><meta content="https://seminarschools.com/img/saul.jpg" name="twitter:image"/><link rel="canonical" href="https://seminarschools.com/saul/fr/"><link href="/saul/assets/saul-ultimate-cv-2026.css?v=20260727-modular" rel="stylesheet"><style id="audit11-mobile-cv-return-link">@media(max-width:520px){body[data-cv-purpose="general-employment"]>a[href="/"]:first-of-type{position:absolute!important;background:rgba(255,253,248,.88);padding:.45rem .58rem;border:1px solid rgba(35,43,46,.18);border-radius:999px;backdrop-filter:blur(8px);}}</style><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260814-reader-word-integrity" data-site-wide-type-zoom="20260814-reader-word-integrity">
 <style id="audit35-cv-ui">
 .cv-home-link{display:inline-flex!important;align-items:center;min-height:44px}
 .cv-local-nav{overscroll-behavior-inline:contain;scrollbar-width:thin}
@@ -1273,7 +1242,7 @@ html[data-saul-archive-language="fa"] .audit45-saul-archive-hero{text-align:righ
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","@id":"https://seminarschools.com/saul/fr/#profile","name":"Archives professionnelles de Saul Karim Nassau","url":"https://seminarschools.com/saul/fr/","inLanguage":"fr","mainEntity":{"@type":"Person","@id":"https://seminarschools.com/saul/#saul-karim-nassau","name":"Saul Karim M Hosaini Nassau","honorificSuffix":"MA","email":"saulnassau@protonmail.com","telephone":"416-771-0382","jobTitle":"Educator, Program Coordinator and Community Organizer","address":{"@type":"PostalAddress","addressLocality":"Toronto","addressRegion":"Ontario","addressCountry":"CA"}}}</script>
 <meta property="og:locale" content="fr">
 </head>
-<body data-route-type="cv" data-geometry="indra-web" data-indra-intensity="0.075" data-geometry-role="relation movement synthesis" data-cv-purpose="general-employment" data-page-weight="heavy">
+<body data-route-type="cv" data-geometry="indra-web" data-indra-intensity="0.115" data-geometry-role="relation movement synthesis" data-geometry-key="/saul/fr/" data-geometry-seed="2ed284e90de87be7" data-geometry-register="quiet" data-geometry-profile="cv-quiet" data-front-facing="general-audience" data-cv-purpose="general-employment" data-page-weight="heavy">
 <a class="cv-home-link" href="/" onmouseout="this.style.opacity=0.65" onmouseover="this.style.opacity=1" style="position:fixed;top:0.9rem;left:1rem;z-index:1200;font-family:ui-monospace,monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:inherit;opacity:0.65;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:0.15rem;">← Seminar Schools</a>
 <!-- Theme toggle (light/dark mode). System preference is the default;
      clicking flips. localStorage persists the choice. -->
@@ -1282,8 +1251,7 @@ html[data-saul-archive-language="fa"] .audit45-saul-archive-hero{text-align:righ
 <span aria-hidden="true" class="moon">☾</span>
 </button>
 <a class="skip-link" href="#page">Skip to main content</a>
-<!-- Geometry watermark (single Apollonian gasket) -->
-<div aria-hidden="true" class="geo" id="geoLayer"></div>
+<!-- The canonical site-wide Indra runtime owns the professional background. -->
 <!-- Font size controls -->
 <div aria-label="Adjust text size" class="fz-controls">
 <button data-fz="up" id="fzUp" title="Increase text size" type="button">A+</button>
@@ -1297,7 +1265,7 @@ html[data-saul-archive-language="fa"] .audit45-saul-archive-hero{text-align:righ
 <button data-lang="fa" type="button">فارسی</button>
 <button data-lang="fr" type="button">Français</button>
 </nav>
-<nav aria-label="CV sections" class="cv-local-nav" data-cv-local-nav=""><a aria-current="location" href="#cvOverview">CV</a><a href="#evidenceHighlights">Evidence</a><a href="#experienceLedger">Experience</a><a href="#educationLearningHeading">Education</a><a href="#places">Map</a><a href="#careerArchive">Full history</a></nav><section class="audit45-saul-archive-hero" data-locale="fr" lang="fr" dir="ltr"><p>Saul Karim Nassau</p><h1>Archives de carrière</h1><p>Cette page présente l’archive complète en français. Le CV de candidature et ses PDF demeurent explicitement en anglais.</p><p><a href="/saul/" lang="en">Open the English application CV →</a></p></section><section class="audit45-saul-archive-hero" data-locale="zh" lang="zh-Hant" dir="ltr"><p>Saul Karim Nassau</p><h2>職業經歷檔案</h2><p>本頁以繁體中文呈現完整經歷檔案。求職履歷及 PDF 明確保留英文。</p><p><a href="/saul/" lang="en">Open the English application CV →</a></p></section><section class="audit45-saul-archive-hero" data-locale="zhs" lang="zh-Hans" dir="ltr"><p>Saul Karim Nassau</p><h2>职业经历档案</h2><p>本页以简体中文呈现完整经历档案。求职履历及 PDF 明确保留英文。</p><p><a href="/saul/" lang="en">Open the English application CV →</a></p></section><section class="audit45-saul-archive-hero" data-locale="fa" lang="fa" dir="rtl"><p>Saul Karim Nassau</p><h2>بایگانی سوابق حرفه‌ای</h2><p>این صفحه بایگانی کامل را به فارسی نشان می‌دهد. رزومهٔ درخواست شغل و فایل‌های PDF صریحاً انگلیسی باقی می‌مانند.</p><p><a href="/saul/" lang="en">Open the English application CV →</a></p></section><section class="cv-ultimate" data-cv-ultimate="true" id="cvOverview" aria-labelledby="cvUltimateName">
+<nav aria-label="Sections des archives professionnelles" class="cv-local-nav" data-cv-local-nav=""><a href="#places">Carte</a><a href="#careerArchive">Parcours complet</a></nav><section class="audit45-saul-archive-hero" data-locale="fr" lang="fr" dir="ltr"><p>Saul Karim Nassau</p><h1>Archives de carrière</h1><p>Cette page présente l’archive complète en français. Le CV de candidature et ses PDF demeurent explicitement en anglais.</p><p><a href="/saul/" hreflang="en">Ouvrir le CV de candidature en anglais →</a></p></section><section class="audit45-saul-archive-hero" data-locale="zh" lang="zh-Hant" dir="ltr"><p>Saul Karim Nassau</p><h2>職業經歷檔案</h2><p>本頁以繁體中文呈現完整經歷檔案。求職履歷及 PDF 明確保留英文。</p><p><a href="/saul/" hreflang="en">開啟英文求職履歷 →</a></p></section><section class="audit45-saul-archive-hero" data-locale="zhs" lang="zh-Hans" dir="ltr"><p>Saul Karim Nassau</p><h2>职业经历档案</h2><p>本页以简体中文呈现完整经历档案。求职履历及 PDF 明确保留英文。</p><p><a href="/saul/" hreflang="en">打开英文求职履历 →</a></p></section><section class="audit45-saul-archive-hero" data-locale="fa" lang="fa" dir="rtl"><p>Saul Karim Nassau</p><h2>بایگانی سوابق حرفه‌ای</h2><p>این صفحه بایگانی کامل را به فارسی نشان می‌دهد. رزومهٔ درخواست شغل و فایل‌های PDF صریحاً انگلیسی باقی می‌مانند.</p><p><a href="/saul/" hreflang="en">باز کردن رزومهٔ درخواست شغل به انگلیسی ←</a></p></section><section class="cv-ultimate" data-cv-ultimate="true" id="cvOverview" aria-labelledby="cvUltimateName">
 <div aria-hidden="true" class="cv-ultimate__spectrum"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 <header class="cv-ultimate__hero">
 <figure class="cv-ultimate__portrait">
@@ -1314,9 +1282,9 @@ html[data-saul-archive-language="fa"] .audit45-saul-archive-hero{text-align:righ
 <a href="https://seminarschools.com/saul/">seminarschools.com/saul</a>
 <a href="https://seminarschools.com/reviews/">seminarschools.com/reviews</a>
 </div>
-<p class="cv-ultimate__profile">Educator, program designer &amp; community organizer with 12+ years of international teaching experience across 15 curricula &amp; programs, supporting 2,000+ learners from early childhood through adult education. Work also spans volunteer recruitment &amp; coordination, student leadership, evaluation, public events, accessibility, research, digital publishing &amp; service operations.</p>
+<p class="cv-ultimate__profile">Educator, program coordinator &amp; community organizer with 12+ years of international teaching experience across 15 curricula &amp; programs, supporting 2,000+ learners from early childhood through adult education. Experience also includes volunteer recruitment &amp; coordination, student leadership, evaluation, public events, accessibility, research, digital publishing &amp; service operations.</p>
 <ul class="cv-ultimate__facts" aria-label="Career summary">
-<li><strong>12+</strong><span>Years in education</span></li><li><strong>2,000+</strong><span>Learners supported</span></li><li><strong>15</strong><span>Curricula &amp; programs</span></li><li><strong>~20</strong><span>Core volunteers managed</span></li>
+<li><strong>12+</strong><span>Years in education</span></li><li><strong>2,000+</strong><span>Learners supported</span></li><li><strong>15</strong><span>Curricula &amp; programs</span></li><li><strong>6</strong><span>Countries taught in</span></li>
 </ul>
 <div class="cv-downloads cv-downloads--compact" aria-label="CV downloads">
 <div class="cv-downloads__heading"><span>CV downloads</span><strong>Professional &amp; full-history formats</strong></div>
@@ -1327,7 +1295,7 @@ html[data-saul-archive-language="fa"] .audit45-saul-archive-hero{text-align:righ
 </header>
 <a class="cv-ultimate__curriculum-band" href="#courses"><span>Curriculum scope</span><strong>OSSD · IB · AP · A Level · ESL · IELTS · STEM · Humanities · University Preparation</strong><span>See every course ↓</span></a>
 <section class="cv-focus" aria-labelledby="cvFocusHeading" data-cv-focus>
-<div class="cv-focus__heading"><div><span>Experience by field</span><h2 id="cvFocusHeading">Explore relevant experience</h2></div><p data-focus-summary>Select one or more fields to narrow the evidence, skills &amp; work history below.</p></div>
+<div class="cv-focus__heading"><div><span>Experience by field</span><h2 id="cvFocusHeading">Explore relevant experience</h2></div><p data-focus-summary>Select one or more fields to narrow the skills and work history below.</p></div>
 <fieldset class="cv-focus__controls" aria-controls="experienceLedger"><legend class="cv-ultimate__sr-only">Experience fields</legend><button aria-pressed="true" class="cv-focus__all" data-focus-reset type="button">All experience</button><label class="cv-focus__option" style="--focus-color:#347CA5">
 <input data-focus-input type="checkbox" value="teaching"/><span>Teaching</span>
 </label><label class="cv-focus__option" style="--focus-color:#5268A3">
@@ -1349,39 +1317,8 @@ html[data-saul-archive-language="fa"] .audit45-saul-archive-hero{text-align:righ
 </label><label class="cv-focus__option" style="--focus-color:#9A607B">
 <input data-focus-input type="checkbox" value="education"/><span>Education</span>
 </label><a class="cv-focus__portfolio" href="/saul/?archive=portfolio#careerArchive" style="--focus-color:#A45C51">Portfolio<span>Full history</span></a></fieldset>
-<div class="cv-focus__status"><p data-cv-share-status="" aria-atomic="true" aria-live="polite" class="cv-spectrum__status">Showing <strong data-visible-count>37</strong> of <strong>37</strong> experiences</p><a data-focus-pdf href="/saul/downloads/saul-karim-nassau-general-cv.pdf">Download general CV</a><button data-focus-print hidden type="button">Print selected view</button><button data-copy-focus type="button">Copy link to this view</button></div>
-<script id="cvFocusData" type="application/json">[{"id":"general","short_label":"General","summary":"Education, program design, volunteer management, community work, research, events, service operations & performance.","skills":["Clear Written & Verbal Communication","Research & Synthesis","Teaching & Facilitation","Program & Event Coordination","Volunteer Recruitment & Coordination","Student Leadership & Club Development","Evaluation & Continuous Improvement","Student, Family & Participant Support","Cross-Cultural Communication","Public Presentation & Audience Engagement","Digital Publishing","Independent Project Delivery"],"pdf":"/saul/downloads/saul-karim-nassau-general-cv.pdf"},{"id":"teaching","short_label":"Teaching","summary":"12+ years across OSSD, IB, AP, A Level, ESL, IELTS, early childhood, secondary, adult & university-level settings, plus student leadership & club development.","skills":["Teaching & Facilitation","Curriculum Design","Assessment & Feedback","Evaluation & Continuous Improvement","Student Leadership & Club Development","Multilingual Learner Support","Clear Written & Verbal Communication","Student, Family & Participant Support","Cross-Cultural Communication","Public Presentation & Audience Engagement"],"pdf":"/saul/downloads/saul-karim-nassau-teaching-cv.pdf"},{"id":"research","short_label":"Research","summary":"Academic & applied research across constitutional studies, conflict analysis, ritual studies, source verification, evaluation & program improvement.","skills":["Research & Synthesis","Source Verification & Quality Review","Clear Written & Verbal Communication","Assessment & Feedback","Curriculum Design","Digital Publishing","Independent Project Delivery"],"pdf":"/saul/downloads/saul-karim-nassau-research-cv.pdf"},{"id":"programs","short_label":"Programs & Events","summary":"Program design, volunteer recruitment & coordination, budgets, partnerships, large-event logistics, participant communication & evaluation.","skills":["Program & Event Coordination","Volunteer Recruitment & Coordination","Evaluation & Continuous Improvement","Student, Family & Participant Support","Clear Written & Verbal Communication","Cross-Cultural Communication","Public Presentation & Audience Engagement","Independent Project Delivery"],"pdf":"/saul/downloads/saul-karim-nassau-programs-cv.pdf"},{"id":"customer-education","short_label":"Learning & Support","summary":"Live and online instruction, multilingual guidance, accessible support, learning resources, feedback loops & practical problem-solving.","skills":["Teaching & Facilitation","Student, Family & Participant Support","Clear Written & Verbal Communication","Multilingual Learner Support","Assessment & Feedback","Evaluation & Continuous Improvement","Accessibility & De-escalation","Cross-Cultural Communication"],"pdf":"/saul/downloads/saul-karim-nassau-customer-education-cv.pdf"},{"id":"community","short_label":"Community","summary":"Volunteer management, community programming, partnerships, fundraising, accessible support, intercultural teamwork & public participation.","skills":["Student, Family & Participant Support","Program & Event Coordination","Volunteer Recruitment & Coordination","Accessibility & De-escalation","Cross-Cultural Communication","Teaching & Facilitation","Clear Written & Verbal Communication","Independent Project Delivery"],"pdf":"/saul/downloads/saul-karim-nassau-community-cv.pdf"},{"id":"volunteer-events","short_label":"Volunteer & Events","summary":"Volunteer recruitment-to-evaluation, event planning, setup, participant support, accessibility, transport, public safety & crowd flow.","skills":["Program & Event Coordination","Volunteer Recruitment & Coordination","Accessibility & De-escalation","Student, Family & Participant Support","Cross-Cultural Communication","Public Presentation & Audience Engagement","Clear Written & Verbal Communication"],"pdf":"/saul/downloads/saul-karim-nassau-volunteer-events-cv.pdf"},{"id":"hospitality","short_label":"Kitchen & Hospitality","summary":"Kitchen operations, meal planning, counter & table service, cash handling, staff training, shift leadership & event service.","skills":["Program & Event Coordination","Team Training & Shift Leadership","Accessibility & De-escalation","Student, Family & Participant Support","Clear Written & Verbal Communication","Cross-Cultural Communication","Independent Project Delivery"],"pdf":"/saul/downloads/saul-karim-nassau-hospitality-cv.pdf"},{"id":"arts-culture","short_label":"Arts & Culture","summary":"Drama, film, cultural programming, collaborative production, public engagement & creative learning.","skills":["Public Presentation & Audience Engagement","Teaching & Facilitation","Program & Event Coordination","Research & Synthesis","Clear Written & Verbal Communication","Cross-Cultural Communication"],"pdf":"/saul/downloads/saul-karim-nassau-arts-culture-cv.pdf"},{"id":"performance","short_label":"Performance","summary":"Stage, screen, interviewing, live presentation, improvisation, audience awareness & event operations.","skills":["Public Presentation & Audience Engagement","Clear Written & Verbal Communication","Teaching & Facilitation","Program & Event Coordination","Cross-Cultural Communication"],"pdf":"/saul/downloads/saul-karim-nassau-performance-cv.pdf"},{"id":"education","short_label":"Education","summary":"Interdisciplinary education in philosophy, political science, economics, critical thought & screen arts.","skills":["Research & Synthesis","Clear Written & Verbal Communication","Teaching & Facilitation","Curriculum Design","Assessment & Feedback","Public Presentation & Audience Engagement"],"pdf":"/saul/downloads/saul-karim-nassau-education-cv.pdf"}]</script>
-</section>
-<section class="cv-evidence" id="evidenceHighlights" aria-labelledby="evidenceHighlightsHeading">
-<div class="cv-evidence__heading"><div><span>Selected evidence</span><h2 id="evidenceHighlightsHeading">How the work was done</h2></div><p>Specific examples across education, volunteer management, programs, events, research, accessibility, arts &amp; service operations.</p></div>
-<ol class="cv-evidence__list"><li class="cv-evidence__item" data-evidence-id="H01" data-focus="general teaching programs community volunteer-events customer-education">
-<span aria-hidden="true" class="cv-evidence__number">01</span>
-<div><h3>Student leadership built to become independent</h3><p>Across several secondary-school roles, invested substantial initial time to establish student governments, provided close structure &amp; coaching while they developed, then transferred responsibility once students could run them independently. Supported Model UN, environmental, yearbook &amp; other clubs, and reviewed, approved &amp; signed student volunteer-hour documentation.</p></div>
-</li><li class="cv-evidence__item" data-evidence-id="H02" data-focus="general community programs volunteer-events">
-<span aria-hidden="true" class="cv-evidence__number">02</span>
-<div><h3>Full-cycle volunteer management</h3><p>At Campus Crops, personally recruited, interviewed, oriented, placed, supported &amp; evaluated approximately 20 core volunteers and maintained their records. Handled additional recruitment &amp; coordination for the associated farmers&#x27; market while managing budgets, partners, public programs &amp; on-site operations.</p></div>
-</li><li class="cv-evidence__item" data-evidence-id="H03" data-focus="general teaching programs customer-education research">
-<span aria-hidden="true" class="cv-evidence__number">03</span>
-<div><h3>Program design, evaluation &amp; improvement</h3><p>Designs curricula, orientations, workshops, assessments &amp; learning resources. Uses Google Forms, questionnaires, participation &amp; progress records, observation, written feedback, discussion &amp; performance data to revise instructions and programs. Has designed &amp; operated programs that issued participant certificates.</p></div>
-</li><li class="cv-evidence__item" data-evidence-id="H04" data-focus="general programs volunteer-events community hospitality arts-culture performance">
-<span aria-hidden="true" class="cv-evidence__number">04</span>
-<div><h3>Large events &amp; live operations</h3><p>Coordinated schedules, assignments, stakeholders, deadlines, participant questions &amp; live logistics for McMUN and SSUNS, including McMUN with approximately 1,600 delegates. BUMI Festival work spans planning, setup, takedown, transport, information, security, crowd flow, guests, vendors &amp; participant needs.</p></div>
-</li><li class="cv-evidence__item" data-evidence-id="H05" data-focus="general community programs volunteer-events research">
-<span aria-hidden="true" class="cv-evidence__number">05</span>
-<div><h3>Cross-border community action</h3><p>Founded &amp; led an independent refugee-support initiative that raised more than $8,000 for food, water, legal assistance &amp; urgent needs. Translated communications, verified changing information &amp; coordinated professionals, supporters and urgent assistance across six countries.</p></div>
-</li><li class="cv-evidence__item" data-evidence-id="H06" data-focus="general teaching customer-education community volunteer-events hospitality">
-<span aria-hidden="true" class="cv-evidence__number">06</span>
-<div><h3>Accessible support &amp; calm public service</h3><p>Adapts instruction for multilingual learners &amp; varied learning needs and coordinates with students, families, teachers &amp; administrators. Experience also includes sighted-guide support at CNIB Night Steps, AODA training, long-term-care volunteering, de-escalation, public safety &amp; participant support.</p></div>
-</li><li class="cv-evidence__item" data-evidence-id="H07" data-focus="general research education teaching">
-<span aria-hidden="true" class="cv-evidence__number">07</span>
-<div><h3>Research &amp; public information</h3><p>MA thesis Carrying Over the Burdens of Trace was supervised by Vesna Madzoski &amp; Catherine Malabou. Research work includes constitutional studies with Jacob T. Levy and protracted conflict in Somalia with Michael Brecher. Seminar Schools is maintained as an independent teaching, research &amp; public-information resource through source verification, accessibility, link testing, HTML, CSS &amp; digital publishing.</p></div>
-</li><li class="cv-evidence__item" data-evidence-id="H08" data-focus="general arts-culture performance education community">
-<span aria-hidden="true" class="cv-evidence__number">08</span>
-<div><h3>Arts, screen &amp; cultural work</h3><p>Claude Watson Screen Arts training included film and video production, scriptwriting, editing, performance &amp; collaborative visual storytelling. Arts and cultural work includes stage performance, Street Kids International youth media, BUMI Festival, Floating City and the Ohm Dome public-art proposal, which remains clearly labelled as conceptual.</p></div>
-</li><li class="cv-evidence__item" data-evidence-id="H09" data-focus="general hospitality programs customer-education volunteer-events">
-<span aria-hidden="true" class="cv-evidence__number">09</span>
-<div><h3>Team leadership &amp; service operations</h3><p>As a Pizza Pizza assistant manager, trained staff and led shifts, customer service, cash, food safety &amp; day-to-day operations. Additional work across kitchens, catering, front of house and event security developed practical planning, complaint handling, crowd awareness &amp; calm decision-making under pressure.</p></div>
-</li></ol>
+<div class="cv-focus__status"><p data-cv-share-status="" aria-atomic="true" aria-live="polite" class="cv-spectrum__status">Showing <strong data-visible-count>37</strong> of <strong>37</strong> experiences</p><a data-focus-pdf href="/saul/downloads/saul-karim-nassau-ultimate-school-cv-2026-protonmail.pdf">Download professional CV</a><button data-focus-print hidden type="button">Print selected view</button><button data-copy-focus type="button">Copy link to this view</button></div>
+<script id="cvFocusData" type="application/json">[{"id":"teaching","short_label":"Teaching","summary":"12+ years across OSSD, IB, AP, A Level, ESL, IELTS, early childhood, secondary, adult & university-level settings, plus student leadership & club development.","skills":["Teaching & Facilitation","Curriculum Design","Assessment & Feedback","Evaluation & Continuous Improvement","Student Leadership & Club Development","Multilingual Learner Support","Clear Written & Verbal Communication","Student, Family & Participant Support","Cross-Cultural Communication","Public Presentation & Audience Engagement"],"pdf":"/saul/downloads/saul-karim-nassau-teaching-cv.pdf"},{"id":"research","short_label":"Research","summary":"Academic & applied research across constitutional studies, conflict analysis, ritual studies, source verification, evaluation & program improvement.","skills":["Research & Synthesis","Source Verification & Quality Review","Clear Written & Verbal Communication","Assessment & Feedback","Curriculum Design","Digital Publishing","Independent Project Delivery"],"pdf":"/saul/downloads/saul-karim-nassau-research-cv.pdf"},{"id":"programs","short_label":"Programs & Events","summary":"Program design, volunteer recruitment & coordination, budgets, partnerships, large-event logistics, participant communication & evaluation.","skills":["Program & Event Coordination","Volunteer Recruitment & Coordination","Evaluation & Continuous Improvement","Student, Family & Participant Support","Clear Written & Verbal Communication","Cross-Cultural Communication","Public Presentation & Audience Engagement","Independent Project Delivery"],"pdf":"/saul/downloads/saul-karim-nassau-programs-cv.pdf"},{"id":"customer-education","short_label":"Learning & Support","summary":"Live and online instruction, multilingual guidance, accessible support, learning resources, feedback loops & practical problem-solving.","skills":["Teaching & Facilitation","Student, Family & Participant Support","Clear Written & Verbal Communication","Multilingual Learner Support","Assessment & Feedback","Evaluation & Continuous Improvement","Accessibility & De-escalation","Cross-Cultural Communication"],"pdf":"/saul/downloads/saul-karim-nassau-customer-education-cv.pdf"},{"id":"community","short_label":"Community","summary":"Volunteer management, community programming, partnerships, fundraising, accessible support, intercultural teamwork & public participation.","skills":["Student, Family & Participant Support","Program & Event Coordination","Volunteer Recruitment & Coordination","Accessibility & De-escalation","Cross-Cultural Communication","Teaching & Facilitation","Clear Written & Verbal Communication","Independent Project Delivery"],"pdf":"/saul/downloads/saul-karim-nassau-community-cv.pdf"},{"id":"volunteer-events","short_label":"Volunteer & Events","summary":"Volunteer recruitment-to-evaluation, event planning, setup, participant support, accessibility, transport, public safety & crowd flow.","skills":["Program & Event Coordination","Volunteer Recruitment & Coordination","Accessibility & De-escalation","Student, Family & Participant Support","Cross-Cultural Communication","Public Presentation & Audience Engagement","Clear Written & Verbal Communication"],"pdf":"/saul/downloads/saul-karim-nassau-volunteer-events-cv.pdf"},{"id":"hospitality","short_label":"Kitchen & Hospitality","summary":"Kitchen operations, meal planning, counter & table service, cash handling, staff training, shift leadership & event service.","skills":["Program & Event Coordination","Team Training & Shift Leadership","Accessibility & De-escalation","Student, Family & Participant Support","Clear Written & Verbal Communication","Cross-Cultural Communication","Independent Project Delivery"],"pdf":"/saul/downloads/saul-karim-nassau-hospitality-cv.pdf"},{"id":"arts-culture","short_label":"Arts & Culture","summary":"Drama, film, cultural programming, collaborative production, public engagement & creative learning.","skills":["Public Presentation & Audience Engagement","Teaching & Facilitation","Program & Event Coordination","Research & Synthesis","Clear Written & Verbal Communication","Cross-Cultural Communication"],"pdf":"/saul/downloads/saul-karim-nassau-arts-culture-cv.pdf"},{"id":"performance","short_label":"Performance","summary":"Stage, screen, interviewing, live presentation, improvisation, audience awareness & event operations.","skills":["Public Presentation & Audience Engagement","Clear Written & Verbal Communication","Teaching & Facilitation","Program & Event Coordination","Cross-Cultural Communication"],"pdf":"/saul/downloads/saul-karim-nassau-performance-cv.pdf"},{"id":"education","short_label":"Education","summary":"Interdisciplinary education in philosophy, political science, economics, critical thought & screen arts.","skills":["Research & Synthesis","Clear Written & Verbal Communication","Teaching & Facilitation","Curriculum Design","Assessment & Feedback","Public Presentation & Audience Engagement"],"pdf":"/saul/downloads/saul-karim-nassau-education-cv.pdf"}]</script>
 </section>
 <div class="cv-ultimate__layout">
 <aside class="cv-ultimate__skills" aria-labelledby="coreSkillsHeading">
@@ -1392,165 +1329,205 @@ html[data-saul-archive-language="fa"] .audit45-saul-archive-hero{text-align:righ
 <div class="cv-ultimate__experience" data-total-experiences="37" id="experienceLedger">
 <section class="cv-ultimate__experience-section" data-experience-section="teaching-learning" aria-labelledby="teaching-learning-heading">
 <div class="cv-ultimate__section-heading"><h2 id="teaching-learning-heading">Teaching &amp; Learning</h2><span data-section-count="16">16 experiences</span></div>
+<p class="cv-ultimate__section-summary">Across several secondary-school roles, invested substantial initial time and energy to establish student governments, provided structure and coaching while they developed, then transferred responsibility once students could run them independently. Supported Model UN, environmental, yearbook and other clubs, and reviewed, approved and signed student volunteer-hour records.</p>
 <div class="cv-ultimate__rows">
 <article class="cv-ultimate__row" data-experience-id="T01" data-experience-row="teaching-learning" data-focus="teaching customer-education programs">
 <span class="cv-ultimate__sr-only">Occasional Instructor; Early Childhood STEM; RoboThink Toronto (Markham); Jan 2026–Present.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Occasional Instructor</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Early Childhood STEM</span><span class="cv-ultimate__pipe">|</span><em>RoboThink Toronto (Markham)</em></div>
 <time aria-hidden="true">Jan 2026–Present</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="T02" data-experience-row="teaching-learning" data-focus="teaching customer-education arts-culture performance">
 <span class="cv-ultimate__sr-only">Occasional Instructor; Early Childhood English &amp; Drama; Happy Learning Education Center (Toronto); Jan 2026–Present.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Occasional Instructor</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Early Childhood English &amp; Drama</span><span class="cv-ultimate__pipe">|</span><em>Happy Learning Education Center (Toronto)</em></div>
 <time aria-hidden="true">Jan 2026–Present</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="T03" data-experience-row="teaching-learning" data-focus="teaching customer-education">
 <span class="cv-ultimate__sr-only">Teacher; OSSD English &amp; Humanities; Willowdale High School (Toronto); Jun 2025–May 2026.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Teacher</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">OSSD English &amp; Humanities</span><span class="cv-ultimate__pipe">|</span><em>Willowdale High School (Toronto)</em></div>
 <time aria-hidden="true">Jun 2025–May 2026</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="T04" data-experience-row="teaching-learning" data-focus="general teaching customer-education">
 <span class="cv-ultimate__sr-only">Occasional Teacher; OSSD, IB, AP, ESL &amp; Social Studies; Intelligent International (GTA); Feb 2023–Present.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Occasional Teacher</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">OSSD, IB, AP, ESL &amp; Social Studies</span><span class="cv-ultimate__pipe">|</span><em>Intelligent International (GTA)</em></div>
 <time aria-hidden="true">Feb 2023–Present</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="T05" data-experience-row="teaching-learning" data-focus="general teaching customer-education education">
 <span class="cv-ultimate__sr-only">Teacher; IB &amp; OSSD; NOIC Academy (Markham); Sep 2023–May 2025.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Teacher</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">IB &amp; OSSD</span><span class="cv-ultimate__pipe">|</span><em>NOIC Academy (Markham)</em></div>
 <time aria-hidden="true">Sep 2023–May 2025</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="T06" data-experience-row="teaching-learning" data-focus="teaching programs volunteer-events arts-culture">
 <span class="cv-ultimate__sr-only">Instructor; International English Curriculum &amp; Activities; Tamwood Education Camps (Canada); May 2023–Aug 2024.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Instructor</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">International English Curriculum &amp; Activities</span><span class="cv-ultimate__pipe">|</span><em>Tamwood Education Camps (Canada)</em></div>
 <time aria-hidden="true">May 2023–Aug 2024</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="T07" data-experience-row="teaching-learning" data-focus="teaching customer-education">
 <span class="cv-ultimate__sr-only">Online Educator; English; Smart Native (Hong Kong / online); Jul 2020–Feb 2024.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Online Educator</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">English</span><span class="cv-ultimate__pipe">|</span><em>Smart Native (Hong Kong / online)</em></div>
 <time aria-hidden="true">Jul 2020–Feb 2024</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="T08" data-experience-row="teaching-learning" data-focus="teaching customer-education community">
 <span class="cv-ultimate__sr-only">ESL Instructor; Adult ESL, International Learners; Access Education (Toronto); Jan 2021–May 2022.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>ESL Instructor</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Adult ESL, International Learners</span><span class="cv-ultimate__pipe">|</span><em>Access Education (Toronto)</em></div>
 <time aria-hidden="true">Jan 2021–May 2022</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="T09" data-experience-row="teaching-learning" data-focus="teaching customer-education">
 <span class="cv-ultimate__sr-only">Teacher; OSSD &amp; AP, Two Appointments; Toronto Central Academy (Toronto); Jan–Jul 2019 &amp; Jan–Aug 2020.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Teacher</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">OSSD &amp; AP, Two Appointments</span><span class="cv-ultimate__pipe">|</span><em>Toronto Central Academy (Toronto)</em></div>
 <time aria-hidden="true">Jan–Jul 2019 &amp; Jan–Aug 2020</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="T10" data-experience-row="teaching-learning" data-focus="teaching customer-education">
 <span class="cv-ultimate__sr-only">Teacher; A Level English, AP Economics, AP English &amp; IELTS; Chongqing No. 1 Intl. Studies School (China); Sep–Dec 2019.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Teacher</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">A Level English, AP Economics, AP English &amp; IELTS</span><span class="cv-ultimate__pipe">|</span><em>Chongqing No. 1 Intl. Studies School (China)</em></div>
 <time aria-hidden="true">Sep–Dec 2019</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="T11" data-experience-row="teaching-learning" data-focus="teaching customer-education">
 <span class="cv-ultimate__sr-only">Teacher; English, Economics &amp; Social Studies; Pattison High School (Vancouver); Jan 2017–Jan 2019.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Teacher</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">English, Economics &amp; Social Studies</span><span class="cv-ultimate__pipe">|</span><em>Pattison High School (Vancouver)</em></div>
 <time aria-hidden="true">Jan 2017–Jan 2019</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="T12" data-experience-row="teaching-learning" data-focus="teaching customer-education">
 <span class="cv-ultimate__sr-only">Adult Instructor; Vancouver School Board Program; East Van Education Center (Vancouver); 2017–2018.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Adult Instructor</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Vancouver School Board Program</span><span class="cv-ultimate__pipe">|</span><em>East Van Education Center (Vancouver)</em></div>
 <time aria-hidden="true">2017–2018</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="T13" data-experience-row="teaching-learning" data-focus="teaching customer-education">
 <span class="cv-ultimate__sr-only">ESL Teacher; American K–12 Immersion, Ages 2–12; Best Learning English (Shenzhen); Jul–Dec 2016.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>ESL Teacher</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">American K–12 Immersion, Ages 2–12</span><span class="cv-ultimate__pipe">|</span><em>Best Learning English (Shenzhen)</em></div>
 <time aria-hidden="true">Jul–Dec 2016</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="T14" data-experience-row="teaching-learning" data-focus="teaching customer-education community volunteer-events">
 <span class="cv-ultimate__sr-only">Volunteer ESL Teacher; Early Childhood; Sanxin Schools (Zhongshan); Jan–Jun 2016.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Volunteer ESL Teacher</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Early Childhood</span><span class="cv-ultimate__pipe">|</span><em>Sanxin Schools (Zhongshan)</em></div>
 <time aria-hidden="true">Jan–Jun 2016</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="T15" data-experience-row="teaching-learning" data-focus="teaching research education arts-culture">
 <span class="cv-ultimate__sr-only">Teaching Assistant; Philosophy &amp; Critical Theory Seminars; European Graduate School (Switzerland); Sep 2014–Jun 2015.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Teaching Assistant</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Philosophy &amp; Critical Theory Seminars</span><span class="cv-ultimate__pipe">|</span><em>European Graduate School (Switzerland)</em></div>
 <time aria-hidden="true">Sep 2014–Jun 2015</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="T16" data-experience-row="teaching-learning" data-focus="teaching customer-education community volunteer-events">
 <span class="cv-ultimate__sr-only">English Language Volunteer; Informal English Learner Support; Independent Learning Centre (Egypt); Nov–Dec 2015.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>English Language Volunteer</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Informal English Learner Support</span><span class="cv-ultimate__pipe">|</span><em>Independent Learning Centre (Egypt)</em></div>
 <time aria-hidden="true">Nov–Dec 2015</time>
+
 </article>
 </div>
 </section><section class="cv-ultimate__experience-section" data-experience-section="research-community-volunteer" aria-labelledby="research-community-volunteer-heading">
 <div class="cv-ultimate__section-heading"><h2 id="research-community-volunteer-heading">Research, Community &amp; Volunteer Work</h2><span data-section-count="13">13 experiences</span></div>
+
 <div class="cv-ultimate__rows">
 <article class="cv-ultimate__row" data-experience-id="C01" data-experience-row="research-community-volunteer" data-focus="general community programs volunteer-events arts-culture">
-<span class="cv-ultimate__sr-only">Volunteer; Event Operations &amp; Participant Support; BUMI Festival (Toronto area); 2025–Present.</span>
+<span class="cv-ultimate__sr-only">Volunteer; Event Operations &amp; Participant Support; BUMI Festival (Toronto area); 2025–Present. Five days of festival operations serving nearly 2,000 participants, including planning, setup, takedown, transport, information, security, crowd flow, guest and vendor coordination, and participant support.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Volunteer</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Event Operations &amp; Participant Support</span><span class="cv-ultimate__pipe">|</span><em>BUMI Festival (Toronto area)</em></div>
 <time aria-hidden="true">2025–Present</time>
+<p class="cv-ultimate__row-detail">Five days of festival operations serving nearly 2,000 participants, including planning, setup, takedown, transport, information, security, crowd flow, guest and vendor coordination, and participant support.</p>
 </article><article class="cv-ultimate__row" data-experience-id="C02" data-experience-row="research-community-volunteer" data-focus="general community volunteer-events customer-education">
 <span class="cv-ultimate__sr-only">Sighted Guide Volunteer; Accessible Participant Support; CNIB Night Steps (North York); May–Jun 2025.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Sighted Guide Volunteer</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Accessible Participant Support</span><span class="cv-ultimate__pipe">|</span><em>CNIB Night Steps (North York)</em></div>
 <time aria-hidden="true">May–Jun 2025</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="R01" data-experience-row="research-community-volunteer" data-focus="research education arts-culture">
-<span class="cv-ultimate__sr-only">Master’s Thesis; Ritual Studies; European Graduate School; 2018–2019.</span>
+<span class="cv-ultimate__sr-only">Master’s Thesis; Ritual Studies; European Graduate School; 2018–2019. MA thesis Carrying Over the Burdens of Trace, supervised by Vesna Madzoski and Catherine Malabou.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Master’s Thesis</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Ritual Studies</span><span class="cv-ultimate__pipe">|</span><em>European Graduate School</em></div>
 <time aria-hidden="true">2018–2019</time>
+<p class="cv-ultimate__row-detail">MA thesis Carrying Over the Burdens of Trace, supervised by Vesna Madzoski and Catherine Malabou.</p>
 </article><article class="cv-ultimate__row" data-experience-id="C03" data-experience-row="research-community-volunteer" data-focus="community programs volunteer-events hospitality arts-culture">
 <span class="cv-ultimate__sr-only">Volunteer; Cooking, Construction &amp; Film Support; Flydende By, Floating City (Copenhagen); 2015–2016.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Volunteer</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Cooking, Construction &amp; Film Support</span><span class="cv-ultimate__pipe">|</span><em>Flydende By, Floating City (Copenhagen)</em></div>
 <time aria-hidden="true">2015–2016</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="C04" data-experience-row="research-community-volunteer" data-focus="community programs volunteer-events hospitality">
 <span class="cv-ultimate__sr-only">Ship’s Chef &amp; Crew; Meal Planning &amp; Shared Operations; S/V Hawila (Denmark / Baltic); 2015–2016.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Ship’s Chef &amp; Crew</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Meal Planning &amp; Shared Operations</span><span class="cv-ultimate__pipe">|</span><em>S/V Hawila (Denmark / Baltic)</em></div>
 <time aria-hidden="true">2015–2016</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="C05" data-experience-row="research-community-volunteer" data-focus="general community programs research volunteer-events">
-<span class="cv-ultimate__sr-only">Community Development Manager; ~20 Volunteers; Campus Crops, McGill (Montreal); Sep 2011–Aug 2015.</span>
+<span class="cv-ultimate__sr-only">Community Development Manager; ~20 Volunteers; Campus Crops, McGill (Montreal); Sep 2011–Aug 2015. Personally recruited, interviewed, oriented, placed, supported and evaluated approximately 20 core volunteers, maintained volunteer records, and handled additional recruitment and coordination for the associated farmers&#x27; market. Managed budgets, partner relationships, public programs and on-site operations, and rebuilt expense tracking in Excel.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Community Development Manager</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">~20 Volunteers</span><span class="cv-ultimate__pipe">|</span><em>Campus Crops, McGill (Montreal)</em></div>
 <time aria-hidden="true">Sep 2011–Aug 2015</time>
+<p class="cv-ultimate__row-detail">Personally recruited, interviewed, oriented, placed, supported and evaluated approximately 20 core volunteers, maintained volunteer records, and handled additional recruitment and coordination for the associated farmers&#x27; market. Managed budgets, partner relationships, public programs and on-site operations, and rebuilt expense tracking in Excel.</p>
 </article><article class="cv-ultimate__row" data-experience-id="R02" data-experience-row="research-community-volunteer" data-focus="research education">
 <span class="cv-ultimate__sr-only">Research Assistant; Somalian Protracted Civil Conflict; McGill University, Professor Michael Brecher; 2014.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Research Assistant</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Somalian Protracted Civil Conflict</span><span class="cv-ultimate__pipe">|</span><em>McGill University, Professor Michael Brecher</em></div>
 <time aria-hidden="true">2014</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="R03" data-experience-row="research-community-volunteer" data-focus="research education">
 <span class="cv-ultimate__sr-only">Research Assistant; Research Group on Constitutional Studies; McGill University, Professor Jacob T. Levy; 2013.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Research Assistant</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Research Group on Constitutional Studies</span><span class="cv-ultimate__pipe">|</span><em>McGill University, Professor Jacob T. Levy</em></div>
 <time aria-hidden="true">2013</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="C06" data-experience-row="research-community-volunteer" data-focus="community programs volunteer-events research education">
-<span class="cv-ultimate__sr-only">Conference Organizer; McMUN &amp; SSUNS, ~1,600 Delegates; McMUN &amp; SSUNS, IRSAM, McGill (Montreal); c. 2011–2013.</span>
+<span class="cv-ultimate__sr-only">Conference Organizer; McMUN &amp; SSUNS, ~1,600 Delegates; McMUN &amp; SSUNS, IRSAM, McGill (Montreal); c. 2011–2013. Coordinated schedules, assignments, stakeholders, deadlines, participant questions and live logistics for McMUN and SSUNS; McMUN involved approximately 1,600 delegates.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Conference Organizer</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">McMUN &amp; SSUNS, ~1,600 Delegates</span><span class="cv-ultimate__pipe">|</span><em>McMUN &amp; SSUNS, IRSAM, McGill (Montreal)</em></div>
 <time aria-hidden="true">c. 2011–2013</time>
+<p class="cv-ultimate__row-detail">Coordinated schedules, assignments, stakeholders, deadlines, participant questions and live logistics for McMUN and SSUNS; McMUN involved approximately 1,600 delegates.</p>
 </article><article class="cv-ultimate__row" data-experience-id="C07" data-experience-row="research-community-volunteer" data-focus="community volunteer-events hospitality">
 <span class="cv-ultimate__sr-only">Volunteer Farm Worker; Organic Agriculture &amp; Intercultural Teamwork; WWOOF (Multiple countries, incl. Azores); 2008–2016.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Volunteer Farm Worker</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Organic Agriculture &amp; Intercultural Teamwork</span><span class="cv-ultimate__pipe">|</span><em>WWOOF (Multiple countries, incl. Azores)</em></div>
 <time aria-hidden="true">2008–2016</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="C10" data-experience-row="research-community-volunteer" data-focus="general community programs volunteer-events">
 <span class="cv-ultimate__sr-only">Fundraiser &amp; Volunteer Coordinator; Fundraising &amp; Volunteer Coordination; Greenpeace; 2006–2010.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Fundraiser &amp; Volunteer Coordinator</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Fundraising &amp; Volunteer Coordination</span><span class="cv-ultimate__pipe">|</span><em>Greenpeace</em></div>
 <time aria-hidden="true">2006–2010</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="C08" data-experience-row="research-community-volunteer" data-focus="community volunteer-events arts-culture performance">
 <span class="cv-ultimate__sr-only">On-Camera Interviewer; Volunteer Youth Media; Street Kids International / Claude Watson (Toronto); 2006.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>On-Camera Interviewer</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Volunteer Youth Media</span><span class="cv-ultimate__pipe">|</span><em>Street Kids International / Claude Watson (Toronto)</em></div>
 <time aria-hidden="true">2006</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="C09" data-experience-row="research-community-volunteer" data-focus="community volunteer-events customer-education">
 <span class="cv-ultimate__sr-only">Summer Volunteer; Resident Care, Recreation &amp; Administration; Carefree Lodge Long-Term Care Home (North York); 2005–2008.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Summer Volunteer</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Resident Care, Recreation &amp; Administration</span><span class="cv-ultimate__pipe">|</span><em>Carefree Lodge Long-Term Care Home (North York)</em></div>
 <time aria-hidden="true">2005–2008</time>
+
 </article>
 </div>
 </section><section class="cv-ultimate__experience-section" data-experience-section="additional-work" aria-labelledby="additional-work-heading">
 <div class="cv-ultimate__section-heading"><h2 id="additional-work-heading">Additional Work Experience</h2><span data-section-count="8">8 experiences</span></div>
+
 <div class="cv-ultimate__rows">
 <article class="cv-ultimate__row" data-experience-id="W01" data-experience-row="additional-work" data-focus="general programs hospitality">
 <span class="cv-ultimate__sr-only">Assistant Manager; Staff Training &amp; Shift Leadership; Pizza Pizza (Toronto); c. 2020–early 2023.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Assistant Manager</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Staff Training &amp; Shift Leadership</span><span class="cv-ultimate__pipe">|</span><em>Pizza Pizza (Toronto)</em></div>
 <time aria-hidden="true">c. 2020–early 2023</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="W02" data-experience-row="additional-work" data-focus="general programs volunteer-events hospitality">
 <span class="cv-ultimate__sr-only">Event Security &amp; Front-of-House; De-escalation, Public Safety &amp; Service; Toronto Venues &amp; Contracts (Toronto); c. 2018–early 2023.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Event Security &amp; Front-of-House</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">De-escalation, Public Safety &amp; Service</span><span class="cv-ultimate__pipe">|</span><em>Toronto Venues &amp; Contracts (Toronto)</em></div>
 <time aria-hidden="true">c. 2018–early 2023</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="W03" data-experience-row="additional-work" data-focus="hospitality">
 <span class="cv-ultimate__sr-only">Chef; Planning &amp; Kitchen Operations; Private Winery Estate (Florence); c. 2017–2018.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Chef</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Planning &amp; Kitchen Operations</span><span class="cv-ultimate__pipe">|</span><em>Private Winery Estate (Florence)</em></div>
 <time aria-hidden="true">c. 2017–2018</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="W04" data-experience-row="additional-work" data-focus="programs volunteer-events hospitality">
 <span class="cv-ultimate__sr-only">Chef; Event &amp; Festival Catering; Private Events &amp; Festival Catering; c. 2017–2018.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Chef</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Event &amp; Festival Catering</span><span class="cv-ultimate__pipe">|</span><em>Private Events &amp; Festival Catering</em></div>
 <time aria-hidden="true">c. 2017–2018</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="W05" data-experience-row="additional-work" data-focus="programs volunteer-events hospitality arts-culture">
 <span class="cv-ultimate__sr-only">Front-of-House, Kitchen &amp; Event Security; Team Service; La Plante &amp; Other Mile End Venues (Montreal); c. 2009–2014.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Front-of-House, Kitchen &amp; Event Security</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Team Service</span><span class="cv-ultimate__pipe">|</span><em>La Plante &amp; Other Mile End Venues (Montreal)</em></div>
 <time aria-hidden="true">c. 2009–2014</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="A01" data-experience-row="additional-work" data-focus="arts-culture performance">
 <span class="cv-ultimate__sr-only">On-Camera Performer; Commercial Performance; GEICO “California” Commercial (San Francisco); 2012.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>On-Camera Performer</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Commercial Performance</span><span class="cv-ultimate__pipe">|</span><em>GEICO “California” Commercial (San Francisco)</em></div>
 <time aria-hidden="true">2012</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="A02" data-experience-row="additional-work" data-focus="arts-culture performance education">
 <span class="cv-ultimate__sr-only">Stage Performer; Jesus Christ Superstar, Sears Drama Festival &amp; One Thousand &amp; One Nights; Claude Watson (Toronto); 2005–2008.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Stage Performer</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Jesus Christ Superstar, Sears Drama Festival &amp; One Thousand &amp; One Nights</span><span class="cv-ultimate__pipe">|</span><em>Claude Watson (Toronto)</em></div>
 <time aria-hidden="true">2005–2008</time>
+
 </article><article class="cv-ultimate__row" data-experience-id="W06" data-experience-row="additional-work" data-focus="general hospitality">
 <span class="cv-ultimate__sr-only">Crew Member; Counter, Kitchen &amp; Cash; Pizza Pizza (Toronto / Montreal); c. 2004–2009.</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>Crew Member</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">Counter, Kitchen &amp; Cash</span><span class="cv-ultimate__pipe">|</span><em>Pizza Pizza (Toronto / Montreal)</em></div>
 <time aria-hidden="true">c. 2004–2009</time>
+
 </article>
 </div>
 </section>
@@ -1558,7 +1535,7 @@ html[data-saul-archive-language="fa"] .audit45-saul-archive-hero{text-align:righ
 </div>
 <section class="cv-ultimate__closing" aria-labelledby="educationLearningHeading">
 <div class="cv-ultimate__section-heading"><h2 id="educationLearningHeading">Education, Professional Learning &amp; Languages</h2></div>
-<dl><div><dt>Education</dt><dd><span>MA Philosophy, Art &amp; Critical Thought, European Graduate School (2019)</span> <span aria-hidden="true">|</span> <span>BA Political Science, Economics &amp; Philosophy, McGill University (2014)</span> <span aria-hidden="true">|</span> <span>Claude Watson Screen Arts, Script Writing &amp; Editing, Earl Haig Secondary School (2009)</span></dd></div><div><dt>Credentials</dt><dd><span>IB Theory of Knowledge 2023</span> <span aria-hidden="true">|</span> <span>TESOL, Indiana University 2016</span> <span aria-hidden="true">|</span> <span>AODA Accessibility Standards Training 2026</span> <span aria-hidden="true">|</span> <span>Berkley Invigilation Standards 2019</span> <span aria-hidden="true">|</span> <span>Food Handler (2006, Historical)</span> <span aria-hidden="true">|</span> <span>Smart Serve (Historical)</span> <span aria-hidden="true">|</span> <span>Ontario Security Guard Licence (Historical)</span> <span aria-hidden="true">|</span> <span>Bronze Cross with First Aid Training (c. 2006, Not Current)</span></dd></div><div><dt>Professional Learning</dt><dd><span>Nonviolent Communication</span> <span aria-hidden="true">|</span> <span>Cognitive Behavioral Therapy</span> <span aria-hidden="true">|</span> <span>Motivation Coaching</span> <span aria-hidden="true">|</span> <span>Mindfulness I–III &amp; Master</span> <span aria-hidden="true">|</span> <span>Social Impact Strategy</span> <span aria-hidden="true">|</span> <span>Community Building Strategies</span></dd></div><div><dt>Methods &amp; Tools</dt><dd><span>Google Forms, Questionnaires &amp; Feedback Review</span> <span aria-hidden="true">|</span> <span>Excel Budgeting, Formulas, Tables, Charts &amp; Tracking</span> <span aria-hidden="true">|</span> <span>Word, PowerPoint &amp; Outlook</span> <span aria-hidden="true">|</span> <span>Online Classroom Tools &amp; Learning-Management Systems</span> <span aria-hidden="true">|</span> <span>Microsoft &amp; Adobe Tools</span> <span aria-hidden="true">|</span> <span>HTML, CSS &amp; Digital Publishing</span> <span aria-hidden="true">|</span> <span>Source Verification, Accessibility, Link &amp; Navigation Testing</span> <span aria-hidden="true">|</span> <span>Python, Data Science &amp; Machine-Learning Training</span></dd></div><div><dt>Languages</dt><dd><span>Farsi: Advanced Speaking &amp; Reading; Functional, Slower Writing</span> <span aria-hidden="true">|</span> <span>French: Basic</span> <span aria-hidden="true">|</span> <span>Mandarin: Basic</span></dd></div></dl>
+<dl><div><dt>Education</dt><dd><span>MA Philosophy, Art &amp; Critical Thought, European Graduate School (2019)</span> <span aria-hidden="true">|</span> <span>BA Political Science, Economics &amp; Philosophy, McGill University (2014)</span> <span aria-hidden="true">|</span> <span>Claude Watson Screen Arts, Script Writing &amp; Editing, Earl Haig Secondary School (2009)</span></dd></div><div><dt>Credentials</dt><dd><span>IB Theory of Knowledge 2023</span> <span aria-hidden="true">|</span> <span>TESOL, Indiana University 2016</span> <span aria-hidden="true">|</span> <span>AODA Accessibility Standards Training 2026</span> <span aria-hidden="true">|</span> <span>Berkley Invigilation Standards 2019</span> <span aria-hidden="true">|</span> <span>Food Handler (2006, Historical)</span> <span aria-hidden="true">|</span> <span>Smart Serve (Historical)</span> <span aria-hidden="true">|</span> <span>Ontario Security Guard Licence (Historical)</span> <span aria-hidden="true">|</span> <span>Bronze Cross with First Aid Training (2006, Not Current)</span></dd></div><div><dt>Professional Learning</dt><dd><span>Nonviolent Communication</span> <span aria-hidden="true">|</span> <span>Cognitive Behavioral Therapy</span> <span aria-hidden="true">|</span> <span>Motivation Coaching</span> <span aria-hidden="true">|</span> <span>Mindfulness I–III &amp; Master</span> <span aria-hidden="true">|</span> <span>Social Impact Strategy</span> <span aria-hidden="true">|</span> <span>Community Building Strategies</span></dd></div><div><dt>Methods &amp; Tools</dt><dd><span>Google Forms, Questionnaires &amp; Feedback Review</span> <span aria-hidden="true">|</span> <span>Excel Budgeting, Formulas, Tables, Charts &amp; Tracking</span> <span aria-hidden="true">|</span> <span>Word, PowerPoint &amp; Outlook</span> <span aria-hidden="true">|</span> <span>Online Classroom Tools &amp; Learning-Management Systems</span> <span aria-hidden="true">|</span> <span>Microsoft &amp; Adobe Tools</span> <span aria-hidden="true">|</span> <span>HTML, CSS &amp; Digital Publishing</span> <span aria-hidden="true">|</span> <span>Source Verification, Accessibility, Link &amp; Navigation Testing</span> <span aria-hidden="true">|</span> <span>Python, Data Science &amp; Machine-Learning Training</span></dd></div><div><dt>Languages</dt><dd><span>Farsi: Advanced Speaking &amp; Reading; Functional, Slower Writing</span> <span aria-hidden="true">|</span> <span>French: Basic</span> <span aria-hidden="true">|</span> <span>Mandarin: Basic</span></dd></div></dl>
 </section>
 <section class="cv-ultimate__courses" id="courses" aria-labelledby="courseScopeHeading">
 <div class="cv-ultimate__section-heading"><h2 id="courseScopeHeading">Courses &amp; Programs Taught</h2></div>
@@ -1635,7 +1612,7 @@ html[data-saul-archive-language="fa"] .audit45-saul-archive-hero{text-align:righ
 <div class="credentials-head" id="languagesHead">Languages</div>
 <div class="credentials-body" id="languagesBody"></div>
 </section>
-<a class="cv-return-focus" href="#cvOverview">Return to current CV focus ↑</a><footer class="cv-footer">
+<footer class="cv-footer">
 <div class="colophon">Saul Karim Nassau · Toronto · <a href="/reviews/" style="color:inherit;border-bottom:1px dotted currentColor;text-decoration:none;">Reviews &amp; references</a> · <a href="/about/" style="color:inherit;border-bottom:1px dotted currentColor;text-decoration:none;">seminarschools.com</a></div>
 </footer>
 </section></main>
@@ -3759,7 +3736,7 @@ const D = [
   ],
   [
     1,
-    "c. 2006",
+    "2006",
     [
       "education"
     ],
@@ -3866,7 +3843,7 @@ const D = [
   ],
   [
     0,
-    "c. 2006 (not current)",
+    "2006 (not current)",
     [
       "performance",
       "education"
@@ -3883,7 +3860,7 @@ const D = [
     },
     "https://www.lifesavingsociety.com/",
     {
-      "en": "Completed Bronze Cross and associated First Aid training c. 2006; this training is not current.",
+      "en": "Completed Bronze Cross and associated First Aid training in 2006; this training is not current.",
       "zh": "加拿大紅十字會銅十字游泳認證。",
       "zhs": "加拿大红十字会铜十字游泳认证。",
       "fa": "گواهینامه شنای صلیب برنزی صلیب سرخ کانادا.",
@@ -4568,51 +4545,6 @@ window.addEventListener("popstate", () => {
 });
 
 // ===========================================================================
-// GEOMETRY (Apollonian gasket - simplified single layer for the CV)
-// ===========================================================================
-function buildGeo() {
-  const SIZE = 1000;
-  const cx = SIZE / 2, cy = SIZE / 2;
-  let svg = `<svg aria-hidden="true" viewBox="-${cx} -${cy} ${SIZE} ${SIZE}" xmlns="http://www.w3.org/2000/svg">`;
-  svg += `<g fill="none" stroke="currentColor" stroke-width="0.5">`;
-
-  const R = 380;
-  // Outer circle
-  svg += `<circle cx="0" cy="0" r="${R}"/>`;
-
-  // Six interior tangent circles
-  const r1 = R / 3;
-  for (let i = 0; i < 6; i++) {
-    const a = (i / 6) * Math.PI * 2;
-    const d = R - r1;
-    svg += `<circle cx="${(d * Math.cos(a)).toFixed(1)}" cy="${(d * Math.sin(a)).toFixed(1)}" r="${r1.toFixed(1)}"/>`;
-  }
-
-  // Central
-  svg += `<circle cx="0" cy="0" r="${r1.toFixed(1)}"/>`;
-
-  // Smaller satellites
-  const r2 = r1 / 2.5;
-  for (let i = 0; i < 12; i++) {
-    const a = (i / 12) * Math.PI * 2 + Math.PI / 12;
-    const d = R - r2 - 5;
-    svg += `<circle cx="${(d * Math.cos(a)).toFixed(1)}" cy="${(d * Math.sin(a)).toFixed(1)}" r="${r2.toFixed(1)}"/>`;
-  }
-
-  // Inner ring
-  for (let i = 0; i < 6; i++) {
-    const a = (i / 6) * Math.PI * 2 + Math.PI / 6;
-    const d = r1 * 0.85;
-    svg += `<circle cx="${(d * Math.cos(a)).toFixed(1)}" cy="${(d * Math.sin(a)).toFixed(1)}" r="${(r2 * 0.7).toFixed(1)}"/>`;
-  }
-
-  svg += `</g></svg>`;
-  document.getElementById("geoLayer").innerHTML = svg;
-}
-buildGeo();
-
-
-// ===========================================================================
 // PROFESSIONAL CV COPY
 // Public labels stay employer-facing; route and export mechanics remain behind the page behavior.
 // ===========================================================================
@@ -4766,11 +4698,10 @@ render = function() {
 render();
 </script>
 <script defer="" src="/js/theme.js?v=cl91"></script>
-<script src="/js/mandala.js?v=20260806-front-facing-geometry" defer></script>
-<script src="/js/indra.js?v=20260806-front-facing-geometry" defer></script>
+<script src="/js/mandala.js?v=sha256-3ccd45ce601b" defer></script>
+<script src="/js/indra.js?v=sha256-3ccd45ce601b" defer></script>
 <script defer="" src="/js/footer.js?v=20260805-predeploy-audit"></script>
 <script defer="" src="/js/autolink.js?v=cl91"></script>
-<script>document.addEventListener('DOMContentLoaded',function(){if(document.documentElement.dataset.motion!=='calm'&&window.PolymythMandala&&PolymythMandala.initScrollCamera&&!matchMedia('(prefers-reduced-motion: reduce)').matches){PolymythMandala.initScrollCamera({forceGlobal:true});}});</script>
 <script defer="" src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 <script defer src="/saul/assets/saul-ultimate-cv-modules-2026.js?v=20260727-modular"></script>
 </body>

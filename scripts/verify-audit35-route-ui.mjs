@@ -40,7 +40,12 @@ assert.match(html.bookwormcard, /id="student-start-card"/);
 assert.match(html.aa, /classList\.add\('aa-js'\)/);
 assert.match(html.aa, /\.aa-js:not\(\.aa-ready\) footer\{display:none\}/);
 assert.match(html.aa, /@media \(max-width:900px\),\(max-height:650px\)/);
-assert.match(html.aa, /#aa-sibling-nav\{right:calc\(4\.75rem/);
+assert.match(
+  html.aa,
+  /#aa-sibling-nav\{[\s\S]*?position:static!important;inset:auto!important;[\s\S]*?overflow-x:auto;/,
+  'AA sibling navigation must remain in flow and horizontally reflow instead of covering content'
+);
+assert.doesNotMatch(html.aa, /#aa-sibling-nav\{[^}]*position:fixed/);
 assert.equal((html.aa.match(/class="mode-btn/g) || []).length, 7, 'AA browse modes changed');
 
 for (const lang of ['en', 'fr', 'zh', 'zhs', 'fa']) {

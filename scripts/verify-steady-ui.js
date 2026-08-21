@@ -79,13 +79,16 @@ const indra = read(path.join(ROOT, 'js', 'indra.js'));
 if (/setInterval\s*\(/.test(indra)) errors.push('js/indra.js contains an interval');
 if (/pointer(move|down|up|enter|leave)/i.test(indra)) errors.push('js/indra.js follows or reacts to the pointer');
 if (!/addEventListener\(['"]scroll['"],\s*schedule/.test(indra)) errors.push('js/indra.js lacks scroll-triggered scheduling');
-if (!/if \(!raf\) raf = window\.requestAnimationFrame\(paint\)/.test(indra)) errors.push('js/indra.js lacks one-frame throttling');
+if (!/if \(raf \|\| paintFallbackTimer\) return;\s*raf = window\.requestAnimationFrame\(paint\)/.test(indra)) {
+  errors.push('js/indra.js lacks one-frame throttling across rAF and its bounded starvation fallback');
+}
 if (/requestAnimationFrame\([^)]*\)[\s\S]{0,120}requestAnimationFrame\(/.test(indra)) warnings.push('js/indra.js contains multiple rAF calls; manually confirm they are event-triggered');
 
 const calm = read(path.join(ROOT, 'css', 'calm-ux.css'));
-for (const token of ['html[data-motion="calm"]', '.pm-search-clear', '#rain-canvas', '#geo, #geo2', 'content-visibility: visible']) {
+for (const token of ['html[data-motion="calm"]', '.pm-search-clear', '#rain-canvas', '#indraLayer .indra-camera', 'content-visibility: visible']) {
   if (!calm.includes(token)) errors.push(`css/calm-ux.css missing ${token}`);
 }
+if (/(?:#geo\b|#geo2\b|#geoLayer\b)[^{}]*\{[^{}]*display\s*:\s*none/i.test(calm)) errors.push('css/calm-ux.css still hides a legacy geometry mount');
 const themeInit = read(path.join(ROOT, 'js', 'theme-init.js'));
 if (!/data-motion['"], ['"]calm/.test(themeInit)) errors.push('js/theme-init.js does not set calm mode before paint');
 const mandala = read(path.join(ROOT, 'js', 'mandala.js'));

@@ -1,5 +1,49 @@
 {
   "schema": "seminar-schools-geometry-route-contracts-v1",
+  "asset_version_scheme": "sha256-12",
+  "canonical_web": {
+    "id": "polymyth-mandala-main-v32",
+    "gasket_rotations_pi": [0, 0.4, 0.78],
+    "gasket_scales": [1, 0.618033988768953, 0.3819660112736623],
+    "gasket_opacities": [0.78, 0.58, 0.42],
+    "gaskets": 3,
+    "flowers": true,
+    "jewels": true,
+    "prismatic_jewels": true,
+    "max_depth": 6,
+    "min_radius": 0.9,
+    "gasket_circles": 568,
+    "flower_paths": 279,
+    "flower_centers": 279,
+    "jewel_prisms": 16,
+    "jewel_cores": 16,
+    "jewel_highlights": 16,
+    "circle_elements": 895,
+    "path_elements": 279,
+    "normalized_sha256": "373978f73c4bede3ad4a7547854cc3aef04ce85d92d3b2d2ddcd12f23cf664a4",
+    "semantic_sha256": "4ee88632a9eb1bb4d0062b0509163d822210f7c8acf055d4712b3ae7c5191ddc",
+    "max_shapes_per_camera": 1400,
+    "max_markup_bytes_per_camera": 240000
+  },
+  "registers": {
+    "quiet": { "default_intensity": 0.115, "minimum_scroll_displacement": 80 },
+    "standard": { "default_intensity": 0.135, "minimum_scroll_displacement": 125 },
+    "expressive": { "default_intensity": 0.200, "minimum_scroll_displacement": 180 }
+  },
+  "profiles": {
+    "single": { "cameras": 1 },
+    "about-dual": { "cameras": 2 },
+    "cv-quiet": { "cameras": 1 }
+  },
+  "coverage": {
+    "surfaces": 1,
+    "view_box": "-440 -440 880 880",
+    "opacity": 0.82,
+    "morphology_radius": 2.8,
+    "edge_halo_px": 0.25,
+    "maximum_extent_px": 1500,
+    "motion": "static"
+  },
   "allowed_roles": [
     "relation",
     "movement",

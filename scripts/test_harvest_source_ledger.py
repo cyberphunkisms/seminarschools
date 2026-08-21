@@ -10,6 +10,10 @@ from scripts.validate_harvest_source_ledger import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
+INVENTORY_CONTRACT = json.loads(
+    (ROOT / 'data' / 'polymythcal-inventory-contract.json').read_text(encoding='utf-8')
+)
+MINIMUM_SOURCE_COUNT = int(INVENTORY_CONTRACT['minimum_sources'])
 
 
 def event(source_id, number=1):
@@ -119,7 +123,7 @@ class SeminarSourceLedgerTests(unittest.TestCase):
             ],
         )
 
-    def test_real_422_source_roster_expands_from_compact_rows(self):
+    def test_current_source_roster_expands_from_compact_rows(self):
         roster = json.loads(
             (ROOT / "scripts" / "sources.json").read_text(encoding="utf-8")
         )
@@ -151,8 +155,8 @@ class SeminarSourceLedgerTests(unittest.TestCase):
             shard=3,
             shard_count=8,
         )
-        self.assertEqual(len(roster["sources"]), 422)
-        self.assertEqual(len(result["source_yields"]), 422)
+        self.assertGreaterEqual(len(roster["sources"]), MINIMUM_SOURCE_COUNT)
+        self.assertEqual(len(result["source_yields"]), len(roster["sources"]))
         self.assertLess(len(rows), len(result["source_yields"]) // 3)
 
     def test_missing_assigned_source_is_rejected(self):

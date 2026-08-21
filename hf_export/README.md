@@ -26,7 +26,7 @@ Meaninglib is the mother-category for interdependent star-file access routes. ml
 - bb* bookwormburrows
 - mc* modulecanon
 - cc* campaigncodex
-- core/coreplus mirrors inside ml*
+- portable CORE Personal Rules and current CORE+ handler access
 - manifest and file-map views
 - available aa*/aitr* route views
 

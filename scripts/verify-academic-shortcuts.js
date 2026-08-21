@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 'use strict';
-const fs=require('fs');const path=require('path');const ROOT=path.resolve(__dirname,'..');const SITE='https://seminarschools.com';
+const fs=require('fs');const path=require('path');const {resolveSiteBuildDate}=require('./polymythcal-build-date');const ROOT=path.resolve(__dirname,'..');const SITE='https://seminarschools.com';const TODAY=resolveSiteBuildDate({root:ROOT});
 const ROUTES={university:'both',philosophy:'both',humanities:'both',cfps:'apply',lectures:'attend',fellowships:'apply'};const failures=[];
 const read=rel=>fs.readFileSync(path.join(ROOT,rel),'utf8');const fail=msg=>failures.push(msg);
-function torontoDate(){return new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());}
-function current(e){const value=String(e.end_date||e.date||'').slice(0,10);return /^\d{4}-\d{2}-\d{2}$/.test(value)&&value>=torontoDate();}
+function current(e){const value=String(e.end_date||e.date||'').slice(0,10);return /^\d{4}-\d{2}-\d{2}$/.test(value)&&value>=TODAY;}
 function matches(e,slug){return Array.isArray(e.academic_bands)&&e.academic_bands.map(String).includes(slug);}
 function noscriptCount(html){const match=html.match(/<noscript>([\s\S]*?)<\/noscript>/i);return match?(match[1].match(/href="\/polymythseminars\/events\//g)||[]).length:0;}
 function main(){
@@ -18,7 +17,7 @@ function main(){
   if(!html.includes('id="pmEventList"')||!html.includes('/js/polymythcal-revamp.js')) fail(`${slug}: missing shared interactive Polymythcal shell`);
   if(/eventsContainer|quickFocusNav|watchlistPanel|calendarSearch|data-focus="deadlines"/.test(html)) fail(`${slug}: legacy calendar controls remain`);
   if(!html.includes(`https://seminarschools.com/${slug}/`)) fail(`${slug}: missing route-specific canonical/schema URL`);
-  const heading=html.match(/<h1>([^<]+)/)?.[1]||'';if(!html.includes('class="pm-route-context')||!html.includes(`<strong>${heading}</strong> is selected.`)) fail(`${slug}: focused-route context does not identify the current route`);
+  if(!html.includes('class="pm-route-context')||!html.includes('aria-label="Calendar navigation"')||!html.includes('Browse all Polymythcal listings')) fail(`${slug}: focused-route navigation is incomplete`);
   if(html.includes(`href="/${slug}/" aria-current="page"`)) fail(`${slug}: other-calendar navigation redundantly links the current route`);
   if(noscriptCount(html)!==Math.min(expected,40)) fail(`${slug}: expected ${Math.min(expected,40)} no-script listings, found ${noscriptCount(html)}`);
   if(!html.includes('application/ld+json')) fail(`${slug}: missing structured data`);

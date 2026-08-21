@@ -4,18 +4,21 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const {loadInventoryContract} = require('./lib/polymythcal-inventory-contract');
+const {
+  difference,
+  expectedPolymythcalEventRoutes,
+  inspectEventRouteDirectory,
+} = require('./lib/source-html-inventory');
 
 const ROOT = path.resolve(__dirname, '..');
+const inventory = loadInventoryContract(ROOT);
 const read = (p) => fs.readFileSync(path.join(ROOT, p), 'utf8');
 const json = (p) => JSON.parse(read(p));
 const exists = (p) => fs.existsSync(path.join(ROOT, p));
-const listDirs = (p) => fs.readdirSync(path.join(ROOT, p), {withFileTypes: true}).filter(x => x.isDirectory()).map(x => x.name);
 const releaseManifest = json('RELEASE_MANIFEST.json');
 const releaseTimestamp = releaseManifest.generated_at || '1970-01-01T00:00:00Z';
 const SITE = 'https://seminarschools.com';
-const CURRENT_EVENT_COUNT = 833;
-const EXPLICIT_LEGACY_ALIAS_COUNT = 12;
-const GENERATED_ENGLISH_ALIAS_COUNT = 857;
 const checks = [];
 const add = (name, passed, details = {}) => checks.push({name, passed: Boolean(passed), details});
 
@@ -77,6 +80,8 @@ add('Lifecycle test suite is present', exists('scripts/test_polymythcal_lifecycl
 
 const eventDoc = json('data/polymyth-seminar-events.json');
 const events = eventDoc.events || [];
+const CURRENT_EVENT_COUNT = events.length;
+add('Canonical event inventory meets the verified floor', CURRENT_EVENT_COUNT >= inventory.minimum_canonical_events, {events: CURRENT_EVENT_COUNT, floor: inventory.minimum_canonical_events});
 add('Canonical event data is internally complete', events.length === eventDoc._total_events && events.length === eventDoc.count, {events: events.length, declared: eventDoc._total_events, count: eventDoc.count});
 add('Every event has stable identity and lifecycle fields', events.every(e => e.id && e.identity_key && e.lifecycle_status && Number.isInteger(e.missing_count)), {events: events.length});
 add('Event IDs and identity keys are unique', new Set(events.map(e => e.id)).size === events.length && new Set(events.map(e => e.identity_key)).size === events.length, {events: events.length});
@@ -157,40 +162,39 @@ for (const feed of feeds) {
 }
 add('Dedicated English and French subscription indexes exactly expose the governed feed labels', subscriptionFailures.length === 0, {feeds: feeds.length, routes: 2, failures: subscriptionFailures});
 
-const eventDirs = listDirs('polymythseminars/events');
-const legacySlug = value => String(value || 'event').toLowerCase().replace('&', ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 76) || 'event';
-const legacyAlias = value => `${legacySlug(value)}-${crypto.createHash('sha1').update(String(value)).digest('hex').slice(0, 8)}`;
-const canonicalIds = new Set(events.map(event => String(event.id || event.identity_key)));
-const explicitAliases = new Map();
-const expectedAliases = new Map();
+// The canonical event manifest owns the alias contract. The shared contract
+// mirrors the two generators exactly: English receives deterministic hashed
+// aliases plus explicit legacy IDs, while French and ICS receive only the
+// explicit legacy IDs declared by each canonical event.
+const aliasContract = expectedPolymythcalEventRoutes(events);
+const canonicalIds = aliasContract.canonicalIds;
+const expectedAliases = aliasContract.englishAliases;
+const explicitAliases = aliasContract.frenchAliases;
 const aliasConflicts = [];
-function registerExpectedAlias(alias, target) {
-  if (alias === target) return;
-  if (canonicalIds.has(alias)) {
-    aliasConflicts.push(`${alias} collides with a canonical event`);
-    return;
-  }
-  if (expectedAliases.has(alias) && expectedAliases.get(alias) !== target) {
-    aliasConflicts.push(`${alias} maps to multiple events`);
-    return;
-  }
-  expectedAliases.set(alias, target);
+if (aliasContract.explicitLegacyEntries !== explicitAliases.size) {
+  aliasConflicts.push(
+    `canonical manifest declares ${aliasContract.explicitLegacyEntries} explicit legacy entries but only ${explicitAliases.size} unique route IDs`,
+  );
 }
-for (const event of events) {
-  const target = String(event.id || event.identity_key);
-  registerExpectedAlias(legacyAlias(target), target);
-  for (const value of event.legacy_ids || []) {
-    const legacyId = String(value);
-    if (canonicalIds.has(legacyId)) aliasConflicts.push(`${legacyId} explicit alias collides with a canonical event`);
-    if (explicitAliases.has(legacyId) && explicitAliases.get(legacyId) !== target) aliasConflicts.push(`${legacyId} explicit alias maps to multiple events`);
-    explicitAliases.set(legacyId, target);
-    registerExpectedAlias(legacyId, target);
-    registerExpectedAlias(legacyAlias(legacyId), target);
-  }
+
+function exactSetContract(actual, expected) {
+  const missing = difference(expected, actual);
+  const unexpected = difference(actual, expected);
+  return {exact: missing.length === 0 && unexpected.length === 0, missing, unexpected};
 }
+
+const englishRoutes = inspectEventRouteDirectory(ROOT, 'polymythseminars/events');
+const publicEnglishRoutes = inspectEventRouteDirectory(ROOT, 'public/polymythseminars/events');
+const englishRouteSet = exactSetContract(englishRoutes.routeIds, aliasContract.englishRouteIds);
+const publicEnglishRouteSet = exactSetContract(publicEnglishRoutes.routeIds, aliasContract.englishRouteIds);
+const frenchRoutes = inspectEventRouteDirectory(ROOT, 'polymythseminars/fr/events');
+const publicFrenchRoutes = inspectEventRouteDirectory(ROOT, 'public/polymythseminars/fr/events');
+const frenchRouteSet = exactSetContract(frenchRoutes.routeIds, aliasContract.frenchRouteIds);
+const publicFrenchRouteSet = exactSetContract(publicFrenchRoutes.routeIds, aliasContract.frenchRouteIds);
+
 let canonicalPages = 0;
 let aliasPages = 0;
-for (const d of eventDirs) {
+for (const d of englishRoutes.routeIds) {
   const p = `polymythseminars/events/${d}/index.html`;
   if (!exists(p)) continue;
   const html = read(p);
@@ -200,7 +204,19 @@ for (const d of eventDirs) {
 const icsFiles = fs.readdirSync(path.join(ROOT, 'polymythseminars/ics')).filter(f => f.endsWith('.ics')).sort();
 const icsCount = icsFiles.length;
 const expectedIcsFiles = [...canonicalIds, ...explicitAliases.keys()].map(id => `${id}.ics`).sort();
-const exactIcsSet = JSON.stringify(icsFiles) === JSON.stringify(expectedIcsFiles);
+const expectedIcsIds = new Set(expectedIcsFiles.map(file => file.slice(0, -4)));
+const icsIds = new Set(icsFiles.map(file => file.slice(0, -4)));
+const icsSet = exactSetContract(icsIds, expectedIcsIds);
+const publicIcsFiles = fs.readdirSync(path.join(ROOT, 'public/polymythseminars/ics')).filter(f => f.endsWith('.ics')).sort();
+const publicIcsIds = new Set(publicIcsFiles.map(file => file.slice(0, -4)));
+const publicIcsSet = exactSetContract(publicIcsIds, expectedIcsIds);
+const exactIcsSet = icsSet.exact && publicIcsSet.exact;
+const publicIcsMismatches = expectedIcsFiles.filter(file => {
+  const source = path.join(ROOT, 'polymythseminars/ics', file);
+  const published = path.join(ROOT, 'public/polymythseminars/ics', file);
+  return !fs.existsSync(source) || !fs.existsSync(published)
+    || !fs.readFileSync(source).equals(fs.readFileSync(published));
+});
 const legacyIcsMismatches = [];
 for (const [alias, target] of explicitAliases) {
   const aliasFile = path.join(ROOT, 'polymythseminars', 'ics', `${alias}.ics`);
@@ -219,18 +235,25 @@ for (const [alias, target] of expectedAliases) {
   }
   const aliasHtml = read(rel);
   const targetPath = `/polymythseminars/events/${target}/`;
-  if (!/noindex,follow/i.test(aliasHtml) || !aliasHtml.includes(targetPath)) missingOrWrongAliases.push(`${alias}: wrong target`);
+  if (metaContent(aliasHtml, 'robots') !== 'noindex,follow'
+      || htmlAttribute(aliasHtml, 'body', 'data-route-type') !== 'calendar-event-alias'
+      || canonicalHref(aliasHtml) !== `${SITE}${targetPath}`) {
+    missingOrWrongAliases.push(`${alias}: wrong target or route contract`);
+  }
   if (!exists(publicRel) || !fs.readFileSync(path.join(ROOT, rel)).equals(fs.readFileSync(path.join(ROOT, publicRel)))) missingOrWrongAliases.push(`${alias}: public mismatch`);
 }
 add(
-  '833 stable event pages, generated redirects, and 12 explicit legacy ICS aliases are synchronized',
+  'Canonical manifest exactly owns stable English event routes, redirects, and legacy ICS aliases',
   events.length === CURRENT_EVENT_COUNT
     && canonicalPages === CURRENT_EVENT_COUNT
-    && expectedAliases.size === GENERATED_ENGLISH_ALIAS_COUNT
-    && aliasPages === GENERATED_ENGLISH_ALIAS_COUNT
-    && explicitAliases.size === EXPLICIT_LEGACY_ALIAS_COUNT
-    && icsCount === CURRENT_EVENT_COUNT + EXPLICIT_LEGACY_ALIAS_COUNT
+    && aliasPages === expectedAliases.size
+    && englishRouteSet.exact
+    && publicEnglishRouteSet.exact
+    && englishRoutes.missingIndexIds.length === 0
+    && publicEnglishRoutes.missingIndexIds.length === 0
+    && icsCount === expectedIcsIds.size
     && exactIcsSet
+    && publicIcsMismatches.length === 0
     && legacyIcsMismatches.length === 0
     && aliasConflicts.length === 0
     && missingOrWrongAliases.length === 0,
@@ -242,6 +265,13 @@ add(
     icsCount,
     events: events.length,
     exactIcsSet,
+    englishRouteSet,
+    publicEnglishRouteSet,
+    missingEnglishIndexes: englishRoutes.missingIndexIds,
+    missingPublicEnglishIndexes: publicEnglishRoutes.missingIndexIds,
+    icsSet,
+    publicIcsSet,
+    publicIcsMismatches: publicIcsMismatches.slice(0, 20),
     legacyIcsMismatches,
     aliasConflicts,
     missingOrWrongAliases: missingOrWrongAliases.slice(0, 20),
@@ -301,10 +331,27 @@ for (const event of events) {
     if (!hasAlternate(html, 'x-default', `${SITE}/polymythseminars/events/${encodedId}/`)) localizedRouteFailures.push(`${route.relative}: default alternate missing`);
   }
 }
-const frenchEventDirs = new Set(listDirs('polymythseminars/fr/events'));
-const expectedFrenchEventDirs = new Set([...canonicalIds, ...explicitAliases.keys()]);
-const exactFrenchRouteTree = frenchEventDirs.size === expectedFrenchEventDirs.size
-  && [...frenchEventDirs].every(eventId => expectedFrenchEventDirs.has(eventId));
+for (const [alias, target] of explicitAliases) {
+  const relative = `polymythseminars/fr/events/${alias}/index.html`;
+  const publicRelative = `public/${relative}`;
+  if (!exists(relative)) {
+    localizedRouteFailures.push(`${relative}: missing`);
+    continue;
+  }
+  const html = read(relative);
+  if (htmlAttribute(html, 'html', 'lang') !== 'fr-CA') localizedRouteFailures.push(`${relative}: wrong root language`);
+  if (htmlAttribute(html, 'body', 'data-route-type') !== 'calendar-event-alias') localizedRouteFailures.push(`${relative}: wrong route type`);
+  if (metaContent(html, 'robots') !== 'noindex,follow') localizedRouteFailures.push(`${relative}: alias is indexable`);
+  if (metaContent(html, 'translation-status') !== 'legacy-alias') localizedRouteFailures.push(`${relative}: wrong translation status`);
+  if (metaContent(html, 'translation-source') !== 'polymythseminars/events.json') localizedRouteFailures.push(`${relative}: wrong translation source`);
+  if (metaContent(html, 'translation-source-sha256') !== eventSourceSha) localizedRouteFailures.push(`${relative}: stale source hash`);
+  if (canonicalHref(html) !== `${SITE}/polymythseminars/fr/events/${encodeURIComponent(target)}/`) localizedRouteFailures.push(`${relative}: wrong canonical target`);
+  if (!exists(publicRelative) || !fs.readFileSync(path.join(ROOT, relative)).equals(fs.readFileSync(path.join(ROOT, publicRelative)))) localizedRouteFailures.push(`${relative}: public mismatch`);
+}
+const exactFrenchRouteTree = frenchRouteSet.exact
+  && publicFrenchRouteSet.exact
+  && frenchRoutes.missingIndexIds.length === 0
+  && publicFrenchRoutes.missingIndexIds.length === 0;
 const governanceCounts = translationGovernance.counts || {};
 add(
   'Audit 45 English/French event routes preserve organizer text and source-language boundaries',
@@ -313,7 +360,7 @@ add(
     && translationGovernance.organizer_text_policy === 'preserve verbatim; mark source language; never silently translate'
     && governanceCounts.polymythcal_interface_locales === 2
     && governanceCounts.polymythcal_event_routes_per_locale === CURRENT_EVENT_COUNT
-    && governanceCounts.polymythcal_french_legacy_alias_routes === EXPLICIT_LEGACY_ALIAS_COUNT
+    && governanceCounts.polymythcal_french_legacy_alias_routes === explicitAliases.size
     && exactFrenchRouteTree
     && localizedRouteFailures.length === 0,
   {
@@ -322,6 +369,10 @@ add(
     eventRoutesPerLocale: governanceCounts.polymythcal_event_routes_per_locale,
     frenchLegacyAliases: governanceCounts.polymythcal_french_legacy_alias_routes,
     exactFrenchRouteTree,
+    frenchRouteSet,
+    publicFrenchRouteSet,
+    missingFrenchIndexes: frenchRoutes.missingIndexIds,
+    missingPublicFrenchIndexes: publicFrenchRoutes.missingIndexIds,
     failures: localizedRouteFailures.slice(0, 20),
   }
 );

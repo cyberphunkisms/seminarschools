@@ -62,7 +62,17 @@ function negdefHits(t){
   const b = (t.match(/\bnot\b[^.;:!?\n]{1,60}\bbut\b/gi) || []);
   return a.concat(b);
 }
-function fillerHits(t){ return (t.match(/\b(things?|stuff)\b/gi) || []); }
+function fillerHits(t){
+  return [...t.matchAll(/\b(things?|stuff)\b/gi)]
+    .filter(hit => {
+      // A title-cased word following another title-cased word is part of a
+      // proper name (for example, "Wild Things"), not vague filler prose.
+      if (hit[0] !== 'Things') return true;
+      const prefix = t.slice(Math.max(0, hit.index - 80), hit.index);
+      return !/\b[A-Z][A-Za-z0-9'.-]*\s+$/.test(prefix);
+    })
+    .map(hit => hit[0]);
+}
 
 const isRealPage = (f, s) =>
   !/http-equiv=["']refresh["']/i.test(s) &&
@@ -94,7 +104,10 @@ for (const f of files){
     .replace(/<nav\b[^>]*\bclass=["'][^"']*\bpm-event-related\b[^"']*["'][^>]*>[\s\S]*?<\/nav>/gi, ' ');
   const vt = visibleText(authoredOnly);
 
-  const generatedEventDetail = f.startsWith('polymythseminars/events/');
+  // English and French event-detail routes are the same generated surface.
+  // Locale nesting must not change whether source-controlled record text is
+  // treated as authored chrome.
+  const generatedEventDetail = /^polymythseminars\/(?:fr\/)?events\//.test(f);
   if (!generatedSearchSurface && !generatedEventDetail && !underAny(f, allow.proseExemptPrefixes)){
     const d = countDashes(vt);
     if (d) flag(f, 'DASH', d, d + ' dash(es) in visible copy');

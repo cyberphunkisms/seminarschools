@@ -6,7 +6,11 @@ from package_integrity import MANIFEST_NAME, write_verified_archive
 from package_selection import collect_package_files
 ROOT=Path(__file__).resolve().parents[1]
 OUTPUT=Path(sys.argv[1]).resolve() if len(sys.argv)>1 else ROOT.parent/'seminarschools-deployer-compatible.zip'
-RELEASE_MANIFEST=json.loads((ROOT/'RELEASE_MANIFEST.json').read_text(encoding='utf-8'))
+def load_current_release_manifest()->dict:
+ release=json.loads((ROOT/'RELEASE_MANIFEST.json').read_text(encoding='utf-8'))
+ if not release.get('release_id') or not release.get('generated_at'):raise SystemExit('RELEASE_MANIFEST.json lacks release_id or generated_at.')
+ if release['release_id']!=(ROOT/'RELEASE_ID.txt').read_text(encoding='utf-8').strip():raise SystemExit('RELEASE_ID.txt and RELEASE_MANIFEST.json disagree at packaging time.')
+ return release
 MIN_DEPLOYER_FILES=10020
 AUDIT49_REQUIRED=[
  'WEBSITE_AUDIT49_TECHNICAL_EFFICIENCY_RESILIENCE_REPORT_2026-07-26.md',
@@ -125,6 +129,7 @@ required=[
  'scripts/verify-audit41-runtime-efficiency.js',
  'scripts/verify-audit41-teacher-density.js',
  'scripts/verify-audit41-event-rollover.js',
+ 'scripts/verify-current-event-rollover.js',
  'scripts/verify-audit41-evolution.js',
  'scripts/run-audit41-browser.py',
  'scripts/audit41-browser-runtime.py',
@@ -262,10 +267,12 @@ required=[
  'scripts/compose_audit48_live_harvest_evidence.py',
  'scripts/test_audit48_live_harvest.py',
  'scripts/verify_audit48_live_harvest.py',
+ 'scripts/verify-polymythcal-source-health-current.js',
  'scripts/reports/audit48-live-harvest-endpoints.json',
  'scripts/verify-audit48-external-validation.js',
  'scripts/reports/audit48-external-validation.json',
  'requirements-audit.txt',
+ 'requirements-audit.lock',
 '_headers',
  '_redirects',
  '.nvmrc',
@@ -410,7 +417,9 @@ def main()->None:
   f"{selection['files_considered']} files considered; "
   f"{selection['directories_pruned']} disposable directories pruned before descent."
  )
- result=write_verified_archive(ROOT,OUTPUT,files,RELEASE_MANIFEST,'deployer-compatible')
+ release_manifest=load_current_release_manifest()
+ result=write_verified_archive(ROOT,OUTPUT,files,release_manifest,'deployer-compatible')
+ if any(result['manifest'].get(key)!=release_manifest.get(key) for key in ('release_id','generated_at')):raise SystemExit('Archive metadata does not match the packaged release manifest.')
  print(f"PACKAGED {result['file_count']} deployer files -> {OUTPUT} ({result['archive_bytes']} bytes; SHA-256 {result['archive_sha256']})")
 
 if __name__=='__main__':

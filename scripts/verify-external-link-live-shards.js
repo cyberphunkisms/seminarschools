@@ -8,6 +8,7 @@ const {
   buildShardPlan,
   buildBoundedCache,
   discoverExternalUrls,
+  failureClassification,
   isReusableCachedSuccess,
   mapWithHostLimits,
   positiveInteger,
@@ -102,6 +103,26 @@ for (const field of [
 ]) {
   check(`live report exposes ${field}`, checkerSource.includes(field));
 }
+check(
+  'strict failures are limited to confirmed 404 and 410 responses',
+  failureClassification(404) === 'confirmed-broken'
+  && failureClassification(410) === 'confirmed-broken'
+  && failureClassification(400) !== 'confirmed-broken'
+);
+check(
+  'publisher access denials are classified separately from dead links',
+  [401, 403, 407, 451].every(status => failureClassification(status) === 'access-blocked')
+);
+check(
+  'timeouts, throttling, and server errors remain transient or unverifiable',
+  failureClassification('timeout') === 'transient-or-unverifiable'
+  && failureClassification(429) === 'transient-or-unverifiable'
+  && failureClassification(503) === 'transient-or-unverifiable'
+);
+check(
+  'live report separates non-successes, strict failures, classes, and exact rows',
+  ['non_successful_selected_urls', 'strict_confirmed_broken_urls', 'failure_classifications', 'strict_failures', 'final_url', 'method'].every(field => checkerSource.includes(field))
+);
 for (const field of [
   'global_concurrency',
   'per_host_concurrency',
@@ -200,8 +221,8 @@ check(
   Math.ceil(LIMIT / 4) * 9000 < 20 * 60 * 1000,
   `${Math.ceil(LIMIT / 4) * 9000}ms timeout envelope`
 );
-check('workflow restores the live cache before checking', workflow.indexOf('actions/cache/restore@v4') < workflow.indexOf('scripts/audit-external-links-live.js'));
-check('workflow saves the live cache after checking', workflow.indexOf('actions/cache/save@v4') > workflow.indexOf('scripts/audit-external-links-live.js'));
+check('workflow restores the live cache before checking', workflow.indexOf('actions/cache/restore@v5') < workflow.indexOf('scripts/audit-external-links-live.js'));
+check('workflow saves the live cache after checking', workflow.indexOf('actions/cache/save@v5') > workflow.indexOf('scripts/audit-external-links-live.js'));
 check('workflow cache path is exact and stable', (workflow.match(/scripts\/reports\/external-link-live-cache\.json/g) || []).length >= 3);
 check('workflow cache primary key changes for every run attempt', workflow.includes('external-link-live-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}'));
 check('workflow cache restore prefix remains compatible across weekly runs', workflow.includes('external-link-live-v1-${{ runner.os }}-'));

@@ -14,9 +14,9 @@
     status: "Correct a record",
     correction: "Correct a record",
     "broken-link": "Report a broken link",
-    relationship: "Propose a relationship",
-    representative: "Project representative submission",
-    preservation: "Add a preservation route",
+    relationship: "Suggest a connection",
+    representative: "Share official project information",
+    preservation: "Add an archive or preservation link",
   };
   if (kinds[params.get("kind")]) kind.value = kinds[params.get("kind")];
 
@@ -26,13 +26,13 @@
       kind.value +
       (record.value ? " — " + record.value : "");
     const body = [
-      "Contribution type: " + kind.value,
+      "Type of update: " + kind.value,
       "Record ID or project name: " + (record.value || "[add here]"),
       "",
       "What should change or be added:",
       note.value || "[add here]",
       "",
-      "Direct evidence URLs:",
+      "Source links:",
       evidence.value || "[add one URL per line]",
       "",
       "Your relationship to the project, if relevant:",

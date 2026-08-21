@@ -194,7 +194,7 @@ function buildBoundedCache(inventoryUrls, cache, results) {
   }
   return retained;
 }
-function request(url, method='HEAD', redirects=0) {
+function requestOnce(url, method='HEAD', redirects=0) {
   return new Promise((resolve) => {
     const lib = url.startsWith('https:') ? https : http;
     const req = lib.request(url, { method, timeout: TIMEOUT_MS, headers: { 'User-Agent': 'SeminarSchoolsLinkAudit/1.0' } }, res => {
@@ -202,15 +202,98 @@ function request(url, method='HEAD', redirects=0) {
       const loc = res.headers.location;
       res.resume();
       if ([301,302,303,307,308].includes(code) && loc && redirects < 3) {
-        try { return resolve(request(new URL(loc, url).toString(), 'HEAD', redirects + 1)); } catch { }
+        try {
+          return resolve(
+            requestOnce(new URL(loc, url).toString(), method, redirects + 1)
+          );
+        } catch { }
       }
-      if ((code === 405 || code === 403) && method === 'HEAD') return resolve(request(url, 'GET', redirects));
-      resolve({ ok: code >= 200 && code < 400, status: code });
+      resolve({
+        ok: code >= 200 && code < 400,
+        status: code,
+        method,
+        final_url: url,
+      });
     });
-    req.on('timeout', () => { req.destroy(); resolve({ ok: false, status: 'timeout' }); });
-    req.on('error', err => resolve({ ok: false, status: err.code || err.message }));
+    req.on('timeout', () => {
+      req.destroy();
+      resolve({ ok: false, status: 'timeout', method, final_url: url });
+    });
+    req.on('error', err => resolve({
+      ok: false,
+      status: err.code || err.message,
+      method,
+      final_url: url,
+    }));
     req.end();
   });
+}
+
+async function request(url) {
+  const head = await requestOnce(url, 'HEAD');
+  if (head.ok) return head;
+  // HEAD support is inconsistent in the wild. A URL is not classified from a
+  // failed HEAD response alone: retry with GET so 403/405/5xx HEAD behaviour,
+  // redirects, and transport failures do not create false dead-link failures.
+  return requestOnce(url, 'GET');
+}
+
+function failureClassification(status) {
+  const numericStatus = Number(status);
+  if (numericStatus === 404 || numericStatus === 410) return 'confirmed-broken';
+  if ([401, 403, 407, 451].includes(numericStatus)) return 'access-blocked';
+  if (
+    !Number.isInteger(numericStatus)
+    || [408, 425, 429].includes(numericStatus)
+    || numericStatus >= 500
+  ) return 'transient-or-unverifiable';
+  if (numericStatus >= 400 && numericStatus < 500) return 'other-client-error';
+  return 'transient-or-unverifiable';
+}
+
+function countFailureClassifications(failures) {
+  return failures.reduce((counts, failure) => {
+    counts[failure.classification] = (counts[failure.classification] || 0) + 1;
+    return counts;
+  }, {});
+}
+
+function escapeWorkflowMessage(value) {
+  return String(value).replaceAll('%', '%25').replaceAll('\r', '%0D').replaceAll('\n', '%0A');
+}
+
+function writeGithubDiagnostics(failures, strictFailures) {
+  for (const failure of failures) {
+    const annotation = failure.classification === 'confirmed-broken' ? 'error' : 'warning';
+    console.log(
+      `::${annotation} title=External link ${failure.classification}::`
+      + escapeWorkflowMessage(
+        `${failure.url} returned ${failure.status} after ${failure.method || 'GET'}`
+      )
+    );
+  }
+  const summaryPath = process.env.GITHUB_STEP_SUMMARY;
+  if (!summaryPath) return;
+  const lines = [
+    '## External-link audit',
+    '',
+    `- Non-successful selected URLs: **${failures.length}**`,
+    `- Confirmed broken URLs that fail strict mode: **${strictFailures.length}**`,
+    '',
+  ];
+  if (failures.length) {
+    lines.push('| Classification | Status | Method | URL |', '|---|---:|---|---|');
+    for (const failure of failures) {
+      const safeUrl = String(failure.url).replaceAll('|', '%7C');
+      lines.push(
+        `| ${failure.classification} | ${failure.status} | ${failure.method || ''} | ${safeUrl} |`
+      );
+    }
+    lines.push('');
+  } else {
+    lines.push('No selected URLs returned a non-success response.', '');
+  }
+  fs.appendFileSync(summaryPath, `${lines.join('\n')}\n`);
 }
 async function main() {
   fs.mkdirSync(REPORT_DIR, { recursive: true });
@@ -242,6 +325,16 @@ async function main() {
   const prunedCacheEntries = Object.keys(cache).filter(url => !inventorySet.has(url)).length;
   fs.writeFileSync(CACHE, JSON.stringify(mergedCache, null, 2));
   const bad = Object.entries(results).filter(([, r]) => !r.ok);
+  const failures = bad.map(([url, result]) => ({
+    url,
+    status: result.status,
+    classification: failureClassification(result.status),
+    method: result.method || null,
+    final_url: result.final_url || url,
+  }));
+  const strictFailures = failures.filter(
+    failure => failure.classification === 'confirmed-broken'
+  );
   const neverCheckedUrls = plan.urls.filter(url => !hasCachedCheck(mergedCache[url]));
   const notYetScheduledUrls = plan.shards.slice(plan.shardIndex + 1).flat();
   const previouslyScheduledUrls = plan.shards.slice(0, plan.shardIndex).flat();
@@ -288,15 +381,21 @@ async function main() {
       not_yet_scheduled_urls: notYetScheduledUrls,
       full_cycle_covers_every_discovered_url_once_if_inventory_is_stable: true,
     },
-    failures: bad.map(([url, r]) => ({ url, status: r.status })),
+    non_successful_selected_urls: failures.length,
+    strict_confirmed_broken_urls: strictFailures.length,
+    failure_classifications: countFailureClassifications(failures),
+    failures,
+    strict_failures: strictFailures,
   };
   fs.writeFileSync(path.join(REPORT_DIR, 'external-link-live-report.json'), JSON.stringify(report, null, 2));
+  writeGithubDiagnostics(failures, strictFailures);
   console.log(
     `LIVE EXTERNAL LINK AUDIT COMPLETE — shard ${plan.shardIndex + 1}/${plan.shardCount}, `
     + `${urls.length}/${plan.urls.length} URLs selected, ${checked} live checks, `
-    + `${bad.length} possible failures. See scripts/reports/external-link-live-report.json`
+    + `${failures.length} non-successes, ${strictFailures.length} confirmed broken. `
+    + 'See scripts/reports/external-link-live-report.json'
   );
-  if (process.env.EXTERNAL_LINK_STRICT === '1' && bad.length) process.exit(1);
+  if (process.env.EXTERNAL_LINK_STRICT === '1' && strictFailures.length) process.exit(1);
 }
 
 if (require.main === module) {
@@ -310,6 +409,7 @@ module.exports = {
   boundedPositiveInteger,
   buildShardPlan,
   buildBoundedCache,
+  failureClassification,
   discoverExternalUrls,
   mapWithHostLimits,
   positiveInteger,

@@ -98,8 +98,13 @@ def verify_application_docx(path: Path, data: dict, expected_email: str) -> None
         "Fundraiser & Volunteer Coordinator",
         "Greenpeace",
         "La Plante & Other Mile End Venues",
+        "Farsi: Advanced Speaking & Reading; Functional, Slower Writing",
+        "French: Basic",
+        "Mandarin: Basic",
+        "Bronze Cross & First Aid Training, 2006 (Not Current)",
     ):
         need(required in whole_text, f"{path.name} is missing {required}")
+    need("Farsi Advanced" not in whole_text, f"{path.name} contains imprecise Farsi wording")
 
     heading_indexes = []
     for heading in headings:
@@ -284,11 +289,39 @@ def verify_modular_and_everything(data: dict, historical: dict, manifest: dict) 
         need(pdf_pages(path) == 1, f"modular PDF is not one page: {output['path']}")
         need(sha256(path) == output["sha256"], f"modular hash drifted: {output['path']}")
         hashes.append(output["sha256"])
-        contains_greenpeace = "Greenpeace" in pdf_text(path)
+        output_text = normalize_text(pdf_text(path))
+        contains_greenpeace = "Greenpeace" in output_text
         need(
             contains_greenpeace == (output["focus"] in expected_greenpeace),
             f"Greenpeace focus membership drifted: {output['path']}",
         )
+        for heading in ("QUALIFICATIONS", "EDUCATION", "CREDENTIALS", "LANGUAGES"):
+            need(heading in output_text, f"focused PDF is missing {heading}: {output['path']}")
+        focus_records = [
+            record
+            for section in data["experience_sections"]
+            for record in section["records"]
+            if output["focus"] in {"general", "portfolio"}
+            or output["focus"] in record.get("focus", [])
+        ]
+        for record in focus_records:
+            if record.get("web_detail"):
+                need(
+                    normalize_text(record["web_detail"]) in output_text,
+                    f"focused PDF detached or omitted {record['id']} detail: {output['path']}",
+                )
+        if output["focus"] in {
+            "teaching",
+            "programs",
+            "customer-education",
+            "community",
+            "volunteer-events",
+        }:
+            teaching_intro = data["experience_sections"][0].get("web_intro", "")
+            need(
+                normalize_text(teaching_intro) in output_text,
+                f"focused PDF is missing the integrated teaching summary: {output['path']}",
+            )
     need(len(set(hashes)) == len(hashes), "two modular PDFs are hidden aliases")
     need(
         all(value != sha256(PROTON_PDF) for value in hashes),
@@ -302,6 +335,11 @@ def verify_modular_and_everything(data: dict, historical: dict, manifest: dict) 
         "EVERYTHING PDF does not declare all 37 application records",
     )
     for section in data["experience_sections"]:
+        if section.get("web_intro"):
+            need(
+                normalize_text(section["web_intro"]) in everything_text,
+                f"EVERYTHING PDF is missing {section['id']} summary",
+            )
         for record in section["records"]:
             for required in (
                 record["role"],
@@ -310,6 +348,11 @@ def verify_modular_and_everything(data: dict, historical: dict, manifest: dict) 
                 record["dates"],
             ):
                 need(required in everything_text, f"EVERYTHING PDF is missing {record['id']}: {required}")
+            if record.get("web_detail"):
+                need(
+                    normalize_text(record["web_detail"]) in everything_text,
+                    f"EVERYTHING PDF is missing {record['id']} detail",
+                )
     need(
         len(historical.get("records", [])) == 65,
         "historical archive must contain all 65 records",
@@ -337,9 +380,12 @@ def verify_website(data: dict) -> None:
         "saul-karim-nassau-ultimate-school-cv-2026-protonmail.pdf",
         "saul-karim-nassau-ultimate-school-cv-2026-protonmail.docx",
         "saul-karim-nassau-complete-career-archive-cv.pdf",
-        "saul-karim-nassau-general-cv.pdf",
     ):
         need(required in html, f"website is missing {required}")
+    need(
+        "saul-karim-nassau-general-cv.pdf" not in html,
+        "the public website exposes the owner/index general CV",
+    )
     need(
         "saul-karim-nassau-all-cv-outputs.zip" not in html,
         "the public website exposes the owner-facing CV output archive",

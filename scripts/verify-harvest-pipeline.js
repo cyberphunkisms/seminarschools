@@ -92,9 +92,22 @@ for (const workflow of ['.github/workflows/scrape-seminars.yml', '.github/workfl
   if (!/actions\/setup-python@v6/.test(s)) problems.push(`${workflow} must use a Node 24-compatible setup-python action.`);
 }
 const seminarPrompt = read('scripts/seminars-prompt.md');
-for (const needle of ['Kingston', 'Montréal', 'A screening qualifies **only when a creator or principal collaborator is confirmed', 'type: "festival"', 'SHARD_COUNT', 'crawled-urgency-reserve', 'smaller verified harvest is better than a failed run', 'findaprotest-toronto', 'qualification_reasons', 'deterministic protest stage', '`defence`', '`meeting`', 'Do not copy the full 422-source roster into the output', "Each row's integer `events` value must equal"]) need(seminarPrompt, needle, 'scripts/seminars-prompt.md', problems);
+for (const needle of ['Kingston', 'Montréal', 'A screening qualifies **only when a creator or principal collaborator is confirmed', 'type: "festival"', 'SHARD_COUNT', 'crawled-urgency-reserve', 'smaller verified harvest is better than a failed run', 'findaprotest-toronto', 'qualification_reasons', 'deterministic protest stage', '`defence`', '`meeting`', 'Do not copy the full registered-source roster into the output', "Each row's integer `events` value must equal"]) need(seminarPrompt, needle, 'scripts/seminars-prompt.md', problems);
 const sourcesRoster = read('scripts/sources.json');
-for (const needle of ['findaprotest-toronto', 'https://www.findaprotest.info/canada/toronto']) need(sourcesRoster, needle, 'scripts/sources.json', problems);
+for (const needle of [
+  'findaprotest-toronto',
+  'https://www.findaprotest.info/canada/toronto',
+  'https://www.thepowerplant.org/whats-on/calendar',
+  'https://soundstreams.ca/upcoming-events/',
+  'https://www.fields.utoronto.ca/calendar',
+  'https://www.concordia.ca/finearts/about/galleries-venues/fofa-gallery.html',
+  'https://www.ethics.harvard.edu/calendar/upcoming',
+  'https://www.folger.edu/research/the-folger-institute/fellowships/',
+  'https://cornwalltourism.com/events/',
+]) need(sourcesRoster, needle, 'scripts/sources.json', problems);
+if (sourcesRoster.includes('https://soundstreams.ca/wp-json/tribe/events/v1/events')) {
+  problems.push('scripts/sources.json restores the retired Soundstreams Tribe endpoint that returns 404.');
+}
 const festivalPrompt = read('scripts/festivals-prompt.md');
 for (const needle of ['Kingston', 'Montréal', 'one parent festival record', 'individual production record', 'type: "festival"', 'SHARD', 'seven consecutive runs', 'source_yields', 'smaller verified harvest is better than a failed run', 'seven once-weekly scheduled slots', 'Every event must use a primary-source `source_id`']) need(festivalPrompt, needle, 'scripts/festivals-prompt.md', problems);
 if (festivalPrompt.includes('seven daily shards') || festivalPrompt.includes('run every day') || festivalPrompt.includes('twice-weekly')) {
@@ -153,6 +166,9 @@ for (const needle of [
   '47 8 * * 1',
   'Run deterministic priority structured discovery',
   'python3 scripts/harvest_structured_events.py',
+  'Build deterministic harvest coverage report',
+  'scripts/build-polymythcal-harvest-coverage-report.py',
+  '/tmp/polymythcal-harvest-coverage.json',
   'Preserve structured source-health diagnostics',
   'seminars-deterministic-failed.json',
   'publish_deterministic_polymythcal.py --structured-only',
@@ -161,6 +177,9 @@ for (const needle of [
   'id: harvest_summary',
   "if: failure() || steps.harvest_summary.outputs.degraded == 'true'",
 ]) need(seminarWorkflow, needle, '.github/workflows/scrape-seminars.yml', problems);
+if (!seminarWorkflow.includes('actions/cache/restore@v5') || !seminarWorkflow.includes('actions/cache/save@v5')) {
+  problems.push('.github/workflows/scrape-seminars.yml must use Node 24-compatible cache actions v5.');
+}
 if (!seminarWorkflow.includes('if: failure()')) {
   problems.push('.github/workflows/scrape-seminars.yml uploads diagnostics on successful runs.');
 }
@@ -173,6 +192,7 @@ for (const file of [
   'scripts/polymythcal_sharding.py',
   'scripts/harvest_protests.py',
   'scripts/harvest_structured_events.py',
+  'scripts/build-polymythcal-harvest-coverage-report.py',
   'scripts/validate_polymythcal_sources.py',
   'scripts/publish_protest_harvest.py',
   'scripts/protest-sources.json',
@@ -202,6 +222,9 @@ for (const needle of [
   'requirements-harvest-browser.txt',
   'retention-days: 7',
 ]) need(protestWorkflow, needle, '.github/workflows/scrape-polymythcal-protests.yml', problems);
+if (!protestWorkflow.includes('actions/cache/restore@v5') || !protestWorkflow.includes('actions/cache/save@v5')) {
+  problems.push('.github/workflows/scrape-polymythcal-protests.yml must use Node 24-compatible cache actions v5.');
+}
 if (protestWorkflow.includes('python3 -m unittest')) problems.push('.github/workflows/scrape-polymythcal-protests.yml repeats code-change unit tests in the weekly content job.');
 if (protestWorkflow.includes('verify:polymythcal-audit14')) problems.push('.github/workflows/scrape-polymythcal-protests.yml repeats the full Audit 14 gate in the weekly content job.');
 if (!protestWorkflow.includes('if: failure()')) problems.push('.github/workflows/scrape-polymythcal-protests.yml uploads diagnostics on successful runs.');

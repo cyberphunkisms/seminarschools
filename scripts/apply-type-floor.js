@@ -4,7 +4,9 @@ const fs=require('fs');
 const path=require('path');
 const {isGeneratedDependencyDirectory}=require('./repository-walk-policy');
 const ROOT=path.resolve(__dirname,'..');
-const SKIP=new Set(['.git','node_modules','.netlify','public']);
+// Deliberately-invalid futureproofing fixtures must survive the build unchanged
+// so the verifier can prove that it rejects them.
+const SKIP=new Set(['.git','node_modules','.netlify','public','fixtures']);
 const rx=/font-size\s*:\s*(?:0?\.(?:5|50|55|56|58|6|60|62|63|64|65)rem|(?:8|9|10)px)\b/gi;
 const breakAll=/word-break\s*:\s*break-all/gi;
 let files=0,replacements=0,wrapFixes=0;

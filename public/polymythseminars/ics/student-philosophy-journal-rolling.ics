@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Seminar Schools//Polymythcal//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:e0ae11278efe0e0ea481@seminarschools.com
+DTSTAMP:20260813T040000Z
+DTSTART;VALUE=DATE:20260814
+DTEND;VALUE=DATE:20280101
+SUMMARY:Student Philosophy Journal submissions
+LOCATION:Online / organizer-defined
+DESCRIPTION:Recurring Canadian postsecondary publication route with under
+ graduate emphasis and some graduate/informal-learner access.
+URL:https://seminarschools.com/polymythseminars/events/student-philosophy
+ -journal-rolling/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

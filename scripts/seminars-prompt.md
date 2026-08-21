@@ -87,7 +87,7 @@ If a fetch returns a 403, a WAF page, or empty content, try once more with the v
 
 ## Attempted-source accounting (fail-loud, required)
 
-The output JSON must carry a compact `source_yields` array containing exactly one row for every source you were assigned: every non-skipped Tier-1 source and every non-skipped source in this run's shard. Do not copy the full 422-source roster into the output. Do not emit rows for deterministic-success, disabled/manual/non-HTTP, or ordinary out-of-shard sources; the runner expands those rows deterministically after validating your output.
+The output JSON must carry a compact `source_yields` array containing exactly one row for every source you were assigned: every non-skipped Tier-1 source and every non-skipped source in this run's shard. Do not copy the full registered-source roster into the output. Do not emit rows for deterministic-success, disabled/manual/non-HTTP, or ordinary out-of-shard sources; the runner expands those rows deterministically after validating your output.
 
 ```json
 "source_yields": [ {"source_id": "...", "status": "crawled", "events": 3}, {"source_id": "...", "status": "crawled", "events": 0}, {"source_id": "...", "status": "unreachable", "events": 0}, {"source_id": "...", "status": "budget-exhausted", "events": 0} ]
@@ -178,3 +178,25 @@ Write the final JSON to `/tmp/seminars-output.json`. Print a one-line summary to
 Do not emit anything else to stdout. The output file is the deliverable.
 
 Qualification rule: keep listings with missing time/place in the main chronology as UNCONFIRMED and record the exact missing fact.
+
+## Creator-present theatre and occurrence rule — Medusa regression gate
+
+For theatre, performance, literary, museum, gallery, and public-humanities sources, do not stop at a season page or production run. Traverse this hierarchy whenever official pages expose it:
+
+`venue or season → named production or programme → every separately dated occurrence → attached talkback, Q&A, introduction, panel, workshop, or creator-presence annotation`.
+
+Capture a distinct child occurrence when a performance is followed by a post-show talkback or comparable exchange. Recognize literal evidence including “post-show talkback,” “talkback,” “Q&A,” “artists from the show,” “creative team,” “director present,” “playwright present,” “cast present,” “author present,” “artist present,” “curator present,” “scholar present,” “subject present,” “witness present,” “elder present,” and equivalent wording in the source language.
+
+Presence is evidence-bearing and role-specific. Store each claim with the person when named, role, status, source URL, and the exact occurrence to which it applies. Use these statuses: `confirmed`, `attendance-unconfirmed`, `explicitly-absent`, and `role-confirmed`. A confirmed talkback remains publishable when the exact participants are unannounced. Uncertainty about whether a named director attended must produce `director_attendance_status: "unconfirmed"`; it must never erase the confirmed talkback.
+
+The mandatory regression benchmark is Soulpepper / Outside the March’s 2026 production of *Medusa*. A conforming harvest must preserve the production parent, the July 8, 2026 post-show talkback child occurrence, Mitchell Cushman’s confirmed director role, his attendance as unconfirmed, the generic confirmed artist presence, the parent-child link, and the conflicting published run dates. If any element disappears, the harvest fails.
+
+## Celestial, calendrical, ritual, and holiday records
+
+Polymythcal also accepts records in the **Polymorphous Mythology Calendar** family. Keep the layers separate:
+
+- `entry_family: "celestial"` for observable astronomical events and phase instants;
+- `entry_family: "astrology"` for documented astrological timing systems, clearly labelled by system and never presented as astronomical causation;
+- `entry_family: "ritual"` for holidays, ritual periods, and calendrical observances with documented communities and date rules.
+
+For celestial records, capture the exact astronomical instant, timezone, Toronto visibility or non-visibility, observing requirements, official or primary ephemeris source, and associated ritual links only when documented. For ritual records, capture calendar system, original name, transliteration where relevant, start/end boundary, fixed/calculated/proclaimed/moon-sighting status, geographic variants, community or tradition, ritual practices, and documented social functions. Preserve the tradition’s own account separately from Polymythcal’s labelled socio-structural analysis. Never manufacture a ritual association from symbolic resemblance.

@@ -1,15 +1,24 @@
 {
-  "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
-  "generated_at": "2026-07-28T21:45:00-04:00",
-  "polymythcal_asset_version": "20260728-audit53",
+  "release_id": "2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final",
+  "base_release_id": "2026-08-14-sitewide-canonical-indra-teacherresources-home-stability-final",
+  "generated_at": "2026-08-15T18:00:00-04:00",
+  "polymythcal_asset_version": "20260815-sets1-15-synthesis",
   "publish_dir": "public",
-  "release_type": "Audit 53 shared discovery and evidence architecture for Teacher Resources, Polymythcal, and Polymyth Commons",
+  "release_type": "Polymythcal Sets 1-15 synthesis with sitewide canonical Indra geometry, Teacher Resources state/layout repair, and stable home project preview",
   "notes": [
+    "Every public HTML route receives the canonical Polymyth Mandala/Indra background field, with stable path-seeded views, visible reduced-motion behavior, and quieter professional-page presentation.",
+    "Teacher Resources treats explicit URL filters as shareable state while a clean route stays clean, clears obsolete locally persisted filters, and keeps resource cards readable across narrow and zoomed layouts.",
+    "The Seminar Schools home project map uses one stable preview region so selection no longer expands individual grid rows, while keyboard, touch, hover, and constellation relationships remain synchronized.",
     "Teacher Resources now opens with search, offers six task-led starting paths, and then preserves the complete seven-group and 25-collection shelf structure.",
-    "All 644 Teacher Resources retain their existing public routes and now carry stable TR identifiers, stable route keys, complete collection descriptions, normalized live taxonomy, honest missing-curriculum labels, and complete feed coverage.",
+    "All 645 Teacher Resources retain their existing public routes and now carry stable TR identifiers, stable route keys, complete collection descriptions, normalized live taxonomy, honest missing-curriculum labels, and complete feed coverage.",
     "Teacher Resources remains intentionally English while preserving source-language metadata. It does not add a session runner or automatic pedagogical sequence.",
     "Polymythcal now offers goal-led paths for today, this week, attendance, deadlines, youth and families, educators, and online participation while preserving its detailed filters.",
-    "Polymythcal retains 833 canonical events, 32 types, feeds, ICS files, route aliases, 24-card pagination, bounded cached fallback, private approximate nearby ranking, and exactly once-weekly refresh cadence.",
+    "Polymythcal Sets 1-12 were migrated into the repaired site shell and rebuilt through one canonical semantic pipeline rather than carrying forward the older broken shell.",
+    "Set 13 adds 120 canonical community, charity, mutual-aid, heritage, and place records plus 50 explicit cross-tags across all 22 requested formats, with 31 registered sources and nine accounted exclusions.",
+    "Set 14 adds 54 canonical live-media and digitally native records plus 90 explicit cross-tags across all 14 requested formats, with 22 registered sources and 11 accounted exclusions.",
+    "Set 15 adds 72 canonical course and multi-session-program records plus nine explicit cross-tags across all 19 requested formats, with 32 registered sources and 12 accounted exclusions.",
+    "Polymythcal now retains 2,088 canonical events backed by 1,798 manual records and 779 registered sources; the corpus exposes 64 distinct canonical type values while the locked non-regression floor requires at least 40.",
+    "Polymythcal retains feeds, ICS files, route aliases, 24-card pagination, bounded cached fallback, private approximate nearby ranking, and exactly once-weekly refresh cadence.",
     "English and French calendar routes remain reciprocal. Unknown times publish as dates rather than midnight, application dates are visibly labeled as deadlines, and application-only records do not emit Event schema.",
     "Saved calendar events now round-trip as versioned ID arrays across the main and focused calendars, with separate metadata and migration from the earlier saved-state formats.",
     "Polymyth Commons retains 346 stable records, 393 book mentions, 437 printed links, 43 commons forms, 79 project types, and 50 relationship terms.",
@@ -22,5 +31,27 @@
     "The newest Greenpeace and Saul CV deliverables remain byte-identical across all 160 protected files.",
     "Native VoiceOver, NVDA, branded Safari and Firefox, physical-device, real-user, vendor-account calendar import, and deployed subscription-refresh validation remain external evidence rather than simulated passes.",
     "No security audit was performed."
-  ]
+  ],
+  "geometry_asset_version": "sha256-3ccd45ce601b",
+  "teacherresources_asset_versions": {
+    "finder_css": "sha256-9db03c3a1002",
+    "finder_js": "sha256-f6e90cbddf2f"
+  },
+  "asset_digests": {
+    "css/alive.css": "06b7400d81178e2433524df6248c1cacb788c1227314693addf37cade530e0b8",
+    "css/calm-ux.css": "9604e563bf9d2110dc5031f75c651a68d5b7cfd07f9a220aaec0300e740f9f94",
+    "css/site-wide-type-zoom.css": "acf9276e3a82ac32c16be32fc760f5330b48e84aa507bae771bc2f4e81521da3",
+    "js/mandala.js": "0fcfd471651caad380d6190cde46319d86c1607fb4d6cc940bfbd8af6682dfad",
+    "js/indra.js": "2531f3b6cc5cfc26d3f4afed0e3c5f9f7f50544136a74af7d5c5f9c2b23240ad",
+    "index.html": "e850ab786f8de3f711c2edd0cb26e726924a2500eed6db62da97f7a9bf873e26",
+    "teacherresources/finder.css": "9db03c3a1002b01ea78311d649489c2f6b649485c96b4a7de38d02a45d25459c",
+    "teacherresources/finder.js": "f6e90cbddf2f7ef97392270a5c7720a65d315f6874e7685ba652f489b97588f4",
+    "teacherresources/index.html": "35ad7671c94c3dd05aed1a0c054ae5453e270edeff17d3066c5b229448dd93b6",
+    "data/polymyth-seminar-events.json": "4e215f0008ec322cba04d4bf66dfede94028df665b21ee76427c7a9b13dfffec",
+    "data/polymythcal-event-schema-v2.json": "ac055808ae66db101feebad598b4ca74ae91f5957fb522f59eeda3d1e8c80a42",
+    "js/polymythcal-revamp.js": "a1677be241c76c21c46c0d34436108a72b0895ee4564319f60f6a78b135bbdc4",
+    "polymythseminars/browse.json": "ccf15bac936e48ab7c043b4899b3ba700b78cddaa5986754d6047b7e5aeddc74",
+    "polymythseminars/index.html": "ee1b62030684507a99e636838066d2cb1ab8448876b67b07b35897f4426339c6",
+    "polymythseminars/fr/index.html": "71912c5bcbf97c48f398946a6abdd0e3886ca7ab4a76c98926887dff0ff71f55"
+  }
 }

@@ -23,6 +23,18 @@ function expect(condition, message) {
   if (!condition) failures.push(message);
 }
 
+function escapeAttribute(value) {
+  return String(value == null ? "" : value).replace(/[&<>"']/g, (character) =>
+    ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    })[character],
+  );
+}
+
 function countLines(relative) {
   const text = read(relative).trim();
   return text ? text.split(/\r?\n/).length : 0;
@@ -179,41 +191,158 @@ const generatedPages = data.projects.filter((project) => {
     sourceHtml.includes("/css/alive.css") &&
     sourceHtml.includes("/js/site-keyboard-enhancements.js") &&
     sourceHtml.includes('property="og:title"') &&
-    sourceHtml.includes("<strong>Recorded</strong>") &&
-    sourceHtml.includes("source-grounded summaries") &&
-    sourceHtml.includes("<h2>Related by book type</h2>") &&
+    sourceHtml.includes("<strong>Included</strong>") &&
+    sourceHtml.includes("<h2>About this project</h2>") &&
+    sourceHtml.includes("<h2>Current status</h2>") &&
+    sourceHtml.includes("<h2>What this record includes</h2>") &&
+    sourceHtml.includes("<h2>Book source</h2>") &&
+    sourceHtml.includes("<h2>Sources and links</h2>") &&
+    sourceHtml.includes("<h2>Related records</h2>") &&
+    sourceHtml.includes("<h2>Included / Still needed</h2>") &&
+    sourceHtml.includes("<h2>Updates</h2>") &&
     (sourceHtml.match(/class="signal (?:on|off)"/g) || []).length === 6
   );
 });
 expect(
   generatedPages.length === 346,
-  "all 346 stable project pages must render with sharing, keyboard, zoom, and accessible record-signal contracts",
+  "all 346 stable project pages must render with sharing, keyboard, zoom, and reader-facing record contracts",
 );
+
+const sourceDestinationProjects = (data.projects || []).filter(
+  (project) =>
+    (project.verified && project.currentCanonicalUrl) ||
+    (project.bookPrintedUrls || []).find(Boolean),
+);
+expect(
+  sourceDestinationProjects.length === 120,
+  "exactly 120 Commons records must have a direct project/source destination",
+);
+for (const project of sourceDestinationProjects) {
+  const rawDestination = project.verified && project.currentCanonicalUrl
+    ? project.currentCanonicalUrl
+    : project.bookPrintedUrls.find(Boolean);
+  const destination = /^https?:\/\//i.test(rawDestination)
+    ? rawDestination
+    : `https://${String(rawDestination).replace(/^\/+/, "")}`;
+  const html = read(`polymythlib/projects/${project.id}/index.html`);
+  expect(
+    html.includes(
+      `<a class="button primary" href="${escapeAttribute(destination)}" target="_blank" rel="noopener noreferrer">`,
+    ),
+    `${project.id} must expose its project/source destination as the primary action`,
+  );
+}
+
+const retiredRecordLabels = [
+  "At a glance",
+  "Directory scope",
+  "Candidate tier",
+  "Role in the book",
+  "Book portrayal",
+  "Current verification",
+  "Current evidence state",
+  "Commons anatomy",
+  "Record signals",
+  "Record history",
+  "Sources and pointers",
+  "Related by book type",
+  "Book evidence only · current review pending",
+  "Generation-0 source",
+  "Record signals",
+  "Named in the book backbone",
+];
+for (const project of data.projects || []) {
+  const html = read(`polymythlib/projects/${project.id}/index.html`);
+  for (const label of retiredRecordLabels) {
+    expect(!html.includes(label), `${project.id} still exposes retired label: ${label}`);
+  }
+  expect(
+    !/(?:STATUS_UNRESOLVED|BOOK_ONLY_HISTORICAL|ACTIVE_AT_NEW_URL|ARCHIVED_READ_ONLY|MEDIUM_HIGH)/.test(
+      html,
+    ),
+    `${project.id} exposes a raw status or confidence code`,
+  );
+  expect(
+    !/>\s*Book evidence\s*</.test(html),
+    `${project.id} still exposes Book evidence as a visitor label`,
+  );
+  expect(
+    !/>\s*(?:Core candidate|Example candidate|Support node|Context \/ analogy|Commons Projects|Supporting Ecosystem|Concepts and Comparisons)\s*</.test(
+      html,
+    ),
+    `${project.id} exposes a raw tier or scope label`,
+  );
+}
 
 const directoryHtml = read("polymythlib/index.html");
-expect(directoryHtml.includes("Research mode"), "directory needs Research Mode");
-expect(directoryHtml.includes("Supporting Ecosystem"), "directory needs ecosystem scope");
-expect(directoryHtml.includes("Concepts and Comparisons"), "directory needs comparison scope");
-expect(directoryHtml.includes("All Book Records"), "directory needs all-records scope");
-expect(directoryHtml.includes("Table view"), "directory needs optional table view");
-
-const methodHtml = read("polymythlib/method/index.html");
-expect(methodHtml.includes("Three layers remain distinct"), "method must separate evidence layers");
-expect(methodHtml.includes("Status is several questions"), "method must separate status dimensions");
-expect(methodHtml.includes("Relationships first, graph later"), "method must state graph sequencing");
+expect(directoryHtml.includes("More book filters"), "directory needs optional book filters");
 expect(
-  methodHtml.includes("field-specific features and evidence coverage"),
-  "method must describe the field-specific quality approach",
+  directoryHtml.includes("Supporting organizations and systems"),
+  "directory needs a reader-facing supporting-project scope",
 );
 expect(
-  methodHtml.includes("target model") &&
-    methodHtml.includes("Target node classes") &&
-    methodHtml.includes("do not yet claim a sourced relationship"),
-  "method must distinguish current implementation from the target relationship model",
+  directoryHtml.includes("Examples and comparisons"),
+  "directory needs a reader-facing comparison scope",
+);
+expect(directoryHtml.includes("All records · 346"), "directory needs all-records scope");
+expect(directoryHtml.includes("Table view"), "directory needs optional table view");
+expect(
+  directoryHtml.includes("Current status not yet reviewed") &&
+    directoryHtml.includes(">Main directory record</option>"),
+  "directory filters must use reader-facing status and directory labels",
+);
+
+const methodHtml = read("polymythlib/method/index.html");
+expect(
+  methodHtml.includes("Book history, present-day checks, and directory choices stay separate"),
+  "method must explain what stays separate",
+);
+expect(
+  methodHtml.includes("What each page shows") &&
+    !methodHtml.includes("Record signals"),
+  "method navigation must use a plain reader label",
+);
+expect(
+  methodHtml.includes("Why “current status” needs more than one answer"),
+  "method must explain status dimensions",
+);
+expect(methodHtml.includes("Connections need sources"), "method must explain sourced connections");
+expect(
+  methodHtml.includes("Included” and “Still needed” describe only what is documented"),
+  "method must explain record signals without internal terminology",
+);
+expect(
+  methodHtml.includes("Kinds of records the directory may include") &&
+    methodHtml.includes("do not claim that two projects worked together"),
+  "method must distinguish browsing suggestions from sourced connections",
 );
 expect(methodHtml.includes("www.w3.org/TR/prov-o"), "method must cite PROV-O");
 expect(methodHtml.includes("www.w3.org/TR/skos-reference"), "method must cite SKOS");
 expect(methodHtml.includes("www.w3.org/TR/vocab-dcat-3"), "method must cite DCAT");
+
+const sourceBookHtml = read("polymythlib/book-backbone/index.html");
+expect(
+  sourceBookHtml.includes("<h1>Source book index.</h1>") &&
+    sourceBookHtml.includes("Projects named in the book · 346") &&
+    !sourceBookHtml.includes("Complete generation 0"),
+  "source book index must explain itself in reader-facing language",
+);
+
+const collectionsHtml = read("polymythlib/collections/index.html");
+expect(
+  collectionsHtml.includes("Choose a path into the directory") &&
+    collectionsHtml.includes("Each topic explains what it includes") &&
+    !collectionsHtml.includes("Transparent inclusion, plural usefulness"),
+  "topic page must explain its groupings in reader-facing language",
+);
+
+const contributeHtml = read("polymythlib/contribute/index.html");
+expect(
+  contributeHtml.includes("Help keep the directory useful") &&
+    contributeHtml.includes("What happens to a suggested change") &&
+    !contributeHtml.includes("Project representative submission"),
+  "contribution page must explain the update process in reader-facing language",
+);
 
 const home = read("index.html");
 expect(
@@ -280,6 +409,13 @@ for (const [label, count] of [
 
 const directoryScript = read("js/polymythlib.js");
 const backboneScript = read("js/polymyth-backbone.js");
+const commonsCss = read("css/polymyth-commons.css");
+expect(
+  /\.primary-nav a\s*\{[^}]*flex:\s*0 0 auto;[^}]*white-space:\s*nowrap;/s.test(
+    commonsCss,
+  ),
+  "Polymyth Commons navigation labels must not collapse into vertical words on mobile",
+);
 expect(
   directoryScript.includes("/polymythlib/data/directory-index.json"),
   "directory must use its compact browser index",
@@ -292,8 +428,37 @@ expect(
   "directory must use versioned collections and preserve sort and view in shared URLs",
 );
 expect(
+  directoryScript.includes("Current status not yet reviewed") &&
+    directoryScript.includes("displayScope(project.scope)") &&
+    directoryScript.includes("displayTier(state.tier)"),
+  "directory browser must map raw data values to reader-facing labels",
+);
+expect(
+  directoryScript.includes("Named in the 2007 book.") &&
+    !directoryScript.includes("Named in the book backbone.") &&
+    !directoryScript.includes("Use the Book Backbone downloads"),
+  "directory browser fallbacks must use reader-facing source-book language",
+);
+expect(
+  directoryScript.includes("Open website listed in the book ↗") &&
+    directoryScript.includes("Research details") &&
+    directoryScript.includes('target="_blank" rel="noopener noreferrer"') &&
+    directoryScript.includes('class="source-title"'),
+  "directory results must lead with safe one-click project/source links and keep research details secondary",
+);
+expect(
+  /grid-template-columns:\s*repeat\(auto-fit,\s*minmax\(min\(100%,\s*23rem\),\s*1fr\)\)/.test(commonsCss) &&
+    /\.vertical-card h3\s*\{[^}]*overflow-wrap:\s*normal;[^}]*word-break:\s*normal;[^}]*hyphens:\s*none;/s.test(commonsCss),
+  "Commons project cards must collapse before ordinary titles split inside words",
+);
+expect(
   backboneScript.includes("/polymythlib/data/backbone-index.json"),
   "book explorer must use its compact browser index",
+);
+expect(
+  backboneScript.includes("Current status not yet reviewed") &&
+    backboneScript.includes("tierLabels[project.candidateTier]"),
+  "source book browser must map raw tier and status values before display",
 );
 expect(
   !directoryScript.includes('fetch("/polymythlib/data/polymyth-data.json")') &&
@@ -303,8 +468,8 @@ expect(
 
 const contribution = read("polymythlib/contribute/index.html");
 expect(
-  contribution.includes("<option>Add a preservation route</option>"),
-  "contribution composer must include the preservation route shown in its task list",
+  contribution.includes("<option>Add an archive or preservation link</option>"),
+  "contribution composer must include the archive option shown in its task list",
 );
 expect(
   read("polymythlib/projects/PC-0014/index.html").includes(

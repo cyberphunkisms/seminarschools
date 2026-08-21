@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Seminar Schools//Polymythcal//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:064b83c551ef514d2536@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART;VALUE=DATE:20260813
+DTEND;VALUE=DATE:20260901
+SUMMARY:U of T Engineering Lectures on Demand
+LOCATION:Online
+DESCRIPTION:Time-bounded online access to recorded engineering lectures\;
+  represented as a digital academic-program window rather than a live lec
+ ture occurrence.
+URL:https://seminarschools.com/polymythseminars/events/utoronto-engineeri
+ ng-lectures-on-demand-2026/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

@@ -9,7 +9,7 @@ records its source hash and review state.
 from __future__ import annotations
 
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 import hashlib
 import html as htmllib
 import json
@@ -17,12 +17,15 @@ import os
 import re
 import shutil
 import time
+import datetime
+from zoneinfo import ZoneInfo
+from geometry_asset_version import geometry_asset_version, geometry_body_attributes
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://seminarschools.com"
 AUDIT_VERSION = "20260725-audit45"
 AUDIT43_VERSION = "20260725-audit43"
-GEOMETRY_ASSET_VERSION = "20260806-front-facing-geometry"
+GEOMETRY_ASSET_VERSION = geometry_asset_version(ROOT)
 POLYMYTHCAL_ASSET_VERSION = str(
     json.loads((ROOT / "RELEASE_MANIFEST.json").read_text(encoding="utf-8")).get(
         "polymythcal_asset_version"
@@ -31,6 +34,11 @@ POLYMYTHCAL_ASSET_VERSION = str(
 )
 if not re.fullmatch(r"[0-9]{8}-[a-z0-9-]+", POLYMYTHCAL_ASSET_VERSION):
     raise SystemExit("RELEASE_MANIFEST.json has no valid polymythcal_asset_version")
+TYPE_ZOOM_SOURCE = (ROOT / "scripts" / "apply-sitewide-type-zoom-link.js").read_text(encoding="utf-8")
+TYPE_ZOOM_MATCH = re.search(r"const BUILD = ['\"]([^'\"]+)['\"]", TYPE_ZOOM_SOURCE)
+TYPE_ZOOM_VERSION = TYPE_ZOOM_MATCH.group(1) if TYPE_ZOOM_MATCH else ""
+if not re.fullmatch(r"[0-9]{8}-[a-z0-9-]+", TYPE_ZOOM_VERSION):
+    raise SystemExit("apply-sitewide-type-zoom-link.js has no valid BUILD version")
 # Release workspaces may reconcile the extracted 2034-stamped source tree
 # between subprocesses. Generated Audit 45 outputs use a later deterministic
 # floor so their verified content remains authoritative through packaging.
@@ -538,7 +546,7 @@ def clone_leizu_funnel(governance: list[dict]) -> list[str]:
         for segment, (tag, direction) in LEIZU_LOCALES.items():
             localized = re.sub(
                 r"<html\b[^>]*>",
-                f'<html lang="{tag}" dir="{direction}" data-leizu-localized="reviewed-draft">',
+                f'<html lang="{tag}" dir="{direction}" data-leizu-localized="localized-summary">',
                 base_text,
                 count=1,
                 flags=re.I,
@@ -551,7 +559,10 @@ def clone_leizu_funnel(governance: list[dict]) -> list[str]:
             localized = replace_or_add_meta(localized, "og:description", summary, prop=True)
             suffix = f"{route}/"
             localized_url = f"{SITE}/leizu/{segment}/{suffix}"
-            status = "draft-bilingual-review-required" if route in {"policies", "intake", "booking-success", "donate", "teach"} else "localized-owned-copy"
+            # These routes contain a localized summary followed by the full
+            # English source page. Keep that distinction explicit for readers
+            # and search engines until each page is fully translated.
+            status = "localized-summary-english-detail"
             localized = replace_hreflang_block(localized, leizu_links(route))
             localized = replace_canonical(localized, localized_url)
             localized = add_governance_meta(
@@ -605,23 +616,25 @@ def clone_leizu_funnel(governance: list[dict]) -> list[str]:
                     + "</script>\n"
                 )
                 localized = localized.replace("</head>", schema_block + "</head>", 1)
-            review_text = ""
-            if status.startswith("draft"):
-                review_text = {
-                    "fr": "Traduction informative complète de référence; la version anglaise demeure la version contractuelle jusqu’à la révision bilingue.",
-                    "zh-hant": "此為完整參考譯文；雙語審校完成前，英文版本仍為合約依據。",
-                    "zh-hans": "此为完整参考译文；双语审校完成前，英文版本仍为合同依据。",
-                    "fa": "این ترجمهٔ کامل برای اطلاع است؛ تا بازبینی دوزبانه، نسخهٔ انگلیسی مبنای قراردادی می‌ماند.",
-                }[segment]
+            review_text = {
+                "fr": "Résumé en français; les renseignements complets ci-dessous sont en anglais.",
+                "zh-hant": "以上為繁體中文摘要；下方完整內容為英文。",
+                "zh-hans": "以上为简体中文摘要；下方完整内容为英文。",
+                "fa": "خلاصه به فارسی است؛ جزئیات کامل در ادامه به انگلیسی آمده است.",
+            }[segment]
+            english_link_text = {
+                "fr": "Ouvrir la page anglaise",
+                "zh-hant": "開啟英文頁面",
+                "zh-hans": "打开英文页面",
+                "fa": "باز کردن صفحهٔ انگلیسی",
+            }[segment]
             summary_html = (
                 f'<section class="audit45-localized-summary" lang="{tag}" dir="{direction}" '
                 'aria-labelledby="audit45-localized-title">'
                 f'<h1 id="audit45-localized-title">{htmllib.escape(title_text)}</h1>'
                 f'<p>{htmllib.escape(summary)}</p>'
-                + (
-                    f'<p class="audit45-review">{htmllib.escape(review_text)}</p>'
-                    if review_text else ""
-                )
+                + f'<p class="audit45-review">{htmllib.escape(review_text)} '
+                f'<a href="/leizu/{route}/" hreflang="en">{htmllib.escape(english_link_text)} →</a></p>'
                 + "</section>"
             )
             localized = re.sub(
@@ -697,13 +710,11 @@ def clone_leizu_funnel(governance: list[dict]) -> list[str]:
                 localized,
                 flags=re.I,
             )
-            localized = replace_or_add_meta(localized, "robots", "noindex,follow" if status.startswith("draft") else "index,follow")
+            localized = replace_or_add_meta(localized, "robots", "noindex,follow")
             localized = replace_or_add_meta(localized, "og:url", localized_url, prop=True)
             out = ROOT / "leizu" / segment / route / "index.html"
             write(out, localized)
             governance.append({"route": f"/leizu/{segment}/{route}/", "locale": tag, "source": f"leizu/{route}/index.html", "source_sha256": source_sha, "status": status})
-            if not status.startswith("draft"):
-                urls.append(localized_url)
     return urls
 
 
@@ -713,22 +724,26 @@ PM_LABELS = {
         "confirmed": "Confirmed", "pending": "Some details pending", "past": "Past event",
         "archive": "This page remains as an archive. Check the source for a current edition.",
         "date": "Date", "deadline": "Deadline", "place": "Place", "status": "Status", "about": "About this listing",
-        "pending_details": "Details still pending", "qualification": "Qualification",
+        "pending_details": "Details still pending",
         "previous": "Previous date", "related": "Related listings", "checked": "Last checked",
-        "official": "Official or institutional source", "source": "Source listing",
+        "official": "Open organizer website", "source": "Open source website",
         "calendar": "Add to calendar", "correct": "Correct this listing",
-        "source_language": "Organizer text language", "unknown": "Not yet determined",
+        "continue": "Continue on the organizer or source website",
+        "source_language": "Original listing language",
+        "place_pending": "Location details still pending",
     },
     "fr": {
         "skip": "Aller à la fiche", "all": "← Toutes les fiches", "language": "English",
         "confirmed": "Confirmé", "pending": "Certains détails à confirmer", "past": "Événement passé",
         "archive": "Cette page demeure dans les archives. Consultez la source pour une édition actuelle.",
         "date": "Date", "deadline": "Échéance", "place": "Lieu", "status": "Statut", "about": "À propos de cette fiche",
-        "pending_details": "Détails à confirmer", "qualification": "Précision",
+        "pending_details": "Détails à confirmer",
         "previous": "Date précédente", "related": "Fiches connexes", "checked": "Dernière vérification",
-        "official": "Source officielle ou institutionnelle", "source": "Fiche source",
+        "official": "Voir le site de l’organisateur", "source": "Voir le site source",
         "calendar": "Ajouter au calendrier", "correct": "Corriger cette fiche",
-        "source_language": "Langue du texte de l’organisateur", "unknown": "Pas encore déterminée",
+        "continue": "Continuer sur le site de l’organisateur ou le site source",
+        "source_language": "Langue de la fiche originale",
+        "place_pending": "Lieu exact à confirmer",
     },
 }
 
@@ -741,11 +756,199 @@ def event_source_languages(event: dict) -> list[str]:
     return [] if value in {"und", "mul"} else [value]
 
 
+PM_SOURCE_LANGUAGE_NAMES = {
+    "en": {
+        "en": "English", "en-CA": "English", "fr": "French",
+        "fr-CA": "French", "zh": "Chinese", "zh-Hans": "Simplified Chinese",
+        "zh-Hant": "Traditional Chinese", "fa": "Farsi",
+    },
+    "fr": {
+        "en": "anglais", "en-CA": "anglais", "fr": "français",
+        "fr-CA": "français", "zh": "chinois", "zh-Hans": "chinois simplifié",
+        "zh-Hant": "chinois traditionnel", "fa": "persan",
+    },
+}
+
+PM_QUALIFICATION_COPY = {
+    "en": {
+        "time-unconfirmed": "The exact time has not yet been confirmed.",
+        "location-unconfirmed": "The exact location has not yet been confirmed.",
+        "official-source-unconfirmed": "An official or institutional source has not yet been confirmed.",
+        "current-edition-unconfirmed": "A current edition has not yet been confirmed.",
+    },
+    "fr": {
+        "time-unconfirmed": "L’heure exacte n’est pas encore confirmée.",
+        "location-unconfirmed": "Le lieu exact n’est pas encore confirmé.",
+        "official-source-unconfirmed": "Aucune source officielle ou institutionnelle n’est encore confirmée.",
+        "current-edition-unconfirmed": "Aucune édition actuelle n’est encore confirmée.",
+    },
+}
+
+
+def event_language_label(code: str, lang: str) -> str:
+    names = PM_SOURCE_LANGUAGE_NAMES[lang]
+    return names.get(
+        code,
+        "Language noted in the original listing"
+        if lang == "en" else "Langue indiquée dans la fiche originale",
+    )
+
+
+def event_qualification_copy(reason: object, lang: str) -> str:
+    key = str(reason or "").strip()
+    return PM_QUALIFICATION_COPY[lang].get(
+        key,
+        "Some listing details still need confirmation."
+        if lang == "en" else "Certains détails de la fiche restent à confirmer.",
+    )
+
+
+EVENT_CONTEXT_FIELDS = (
+    ("Entry family", "Famille de fiche", "entry_family"),
+    ("Calendar systems", "Systèmes calendaires", "calendar_systems"),
+    ("Traditions", "Traditions", "traditions"),
+    ("Ritual associations", "Associations rituelles", "ritual_associations"),
+    ("Social functions", "Fonctions sociales", "social_functions"),
+    ("Social context", "Contexte social", "socio_note"),
+    ("Viewing notes", "Conseils d’observation", ("astronomy_visibility", "observer_notes")),
+    ("Presence categories", "Catégories de présence", "presence_categories"),
+    ("Participants and presence", "Participants et présence", ("presence_claims", "participant_presence")),
+    ("Presence mode", "Mode de présence", "presence_mode"),
+    ("Interaction format", "Format de l’échange", "interaction_format"),
+    ("Academic event formats", "Formats intellectuels et universitaires", ("academic_event_forms", "public_intellectual_academic_formats")),
+    ("Academic disciplines", "Disciplines universitaires", "academic_disciplines"),
+    ("Arts formats", "Formats artistiques", "arts_event_forms"),
+    ("Arts disciplines", "Disciplines artistiques", "arts_disciplines"),
+    ("Arts occurrence role", "Rôle dans le programme artistique", "arts_occurrence_role"),
+    ("Participation formats", "Formats participatifs", "participatory_formats"),
+    ("Participation mode", "Mode de participation", "participation_mode"),
+    ("Participation roles", "Rôles des participants", "participation_roles"),
+    ("Facilitation", "Animation", "facilitation_status"),
+    ("Skill level", "Niveau", "skill_level"),
+    ("Drop-in status", "Accès libre ou inscription", "drop_in_status"),
+    ("Participation evidence", "Preuve de participation", "participation_evidence"),
+    ("Civic, legal, and labour formats", "Formats civiques, juridiques et syndicaux", "civic_legal_labour_formats"),
+    ("Civic domain", "Domaine civique", "civic_domain"),
+    ("Authority level", "Niveau d’autorité", "authority_level"),
+    ("Public role", "Rôle du public", "public_role"),
+    ("Participation route", "Voie de participation", "participation_route"),
+    ("Public input", "Participation du public", "public_input_status"),
+    ("Legal access", "Accès juridique", "legal_access_status"),
+    ("Collective action", "Action collective", "collective_action_type"),
+    ("Election stage", "Étape électorale", "election_stage"),
+    ("Access restrictions", "Restrictions d’accès", "access_restrictions"),
+    ("Webcast status", "État de la webdiffusion", "webcast_status"),
+    ("Publication restriction", "Restriction de publication", "publication_restriction"),
+    ("Alternate dates", "Dates alternatives", "alternate_dates"),
+    ("Civic evidence", "Preuve civique", "civic_evidence"),
+    ("Community, charity, heritage, and place formats", "Formats communautaires, caritatifs, patrimoniaux et territoriaux", "community_heritage_formats"),
+    ("Community participation roles", "Rôles de participation communautaire", "community_participation_roles"),
+    ("Contribution routes", "Voies de contribution", "contribution_routes"),
+    ("Beneficiary or cause", "Bénéficiaire ou cause", "beneficiary_or_cause"),
+    ("Relation to place", "Relation au lieu", "place_relation"),
+    ("Community evidence", "Preuve communautaire", "community_evidence"),
+    ("Community or heritage scope", "Portée communautaire ou patrimoniale", "community_heritage_scope"),
+    ("Community public access", "Accès public communautaire", "community_public_access_status"),
+    ("Community registration required", "Inscription communautaire requise", "community_registration_required"),
+    ("Community participation mode", "Mode de participation communautaire", "community_participation_mode"),
+    ("Community date evidence", "Preuve de date communautaire", "community_date_evidence"),
+    ("Community access evidence", "Preuve d’accès communautaire", "community_access_evidence"),
+    ("Community participation evidence", "Preuve de participation communautaire", "community_participation_evidence"),
+    ("Community beneficiary evidence", "Preuve du bénéficiaire communautaire", "community_beneficiary_evidence"),
+    ("Community place evidence", "Preuve du lien au lieu", "community_place_evidence"),
+    ("Community heritage evidence", "Preuve patrimoniale communautaire", "community_heritage_evidence"),
+    ("Live and digital formats", "Formats en direct et numériques", "live_digital_formats"),
+    ("Platforms", "Plateformes", "platform_names"),
+    ("Live status", "État de diffusion en direct", "synchronous_status"),
+    ("Audience interaction", "Interaction avec le public", "audience_interaction_routes"),
+    ("Recording availability", "Disponibilité de l’enregistrement", "recording_availability"),
+    ("Digital evidence", "Preuve numérique", "digital_evidence"),
+    ("Online location", "Lieu en ligne", "online_location"),
+    ("Platform detail", "Détail de la plateforme", "platform"),
+    ("Platform notes", "Notes sur la plateforme", "platform_notes"),
+    ("Liveness detail", "Détail du direct", "liveness_status"),
+    ("Synchronicity detail", "Détail de la synchronicité", "synchronicity"),
+    ("Audience interaction detail", "Détail de l’interaction avec le public", "audience_interaction"),
+    ("Interaction status", "État de l’interaction", "interaction_status"),
+    ("Interaction evidence", "Preuve de l’interaction", "interaction_evidence"),
+    ("Digital access status", "État de l’accès numérique", "access_status"),
+    ("Digital access route", "Voie d’accès numérique", "access_route"),
+    ("Replay or archive status", "État de la reprise ou de l’archive", "replay_archive_status"),
+    ("Recording evidence", "Preuve de l’enregistrement", "recording_evidence"),
+    ("Creator participation status", "État de la participation du créateur", "creator_participation_status"),
+    ("Creator participation evidence", "Preuve de la participation du créateur", "creator_participation_evidence"),
+    ("Digital occurrence evidence", "Preuve de l’occurrence numérique", "occurrence_evidence"),
+    ("Replay source detail", "Détail de la source de reprise", "replay_source_field"),
+    ("Course and program formats", "Formats de cours et de programmes", "course_program_formats"),
+    ("Program stage", "Étape du programme", "program_stage"),
+    ("Source program stage", "Étape du programme selon la source", "program_stage_source_value"),
+    ("Schedule model", "Modèle d’horaire", "schedule_model"),
+    ("Schedule detail", "Détail de l’horaire", "program_schedule_detail"),
+    ("Program start", "Début du programme", "program_start_date"),
+    ("Program end", "Fin du programme", "program_end_date"),
+    ("Eligibility and audience", "Admissibilité et public visé", "eligibility_audience"),
+    ("Registration or application route", "Voie d’inscription ou de candidature", "registration_application_route"),
+    ("Session count", "Nombre de séances", "session_count"),
+    ("Program evidence", "Preuve du programme", "program_evidence"),
+    ("Public access", "Accès public", "public_access_status"),
+    ("Audience", "Public visé", "audience_scope"),
+    ("Registration required", "Inscription requise", "registration_required"),
+    ("Institutional restriction", "Restriction institutionnelle", "institutional_restriction"),
+    ("Participant identity", "Identité des participants", "participant_identity_status"),
+    ("Talkback status", "État de la discussion", "talkback_status"),
+    ("Director attendance", "Présence de la mise en scène", "director_attendance_status"),
+    ("Date discrepancy", "Divergence de dates", "date_conflict"),
+    ("Source inconsistency", "Incohérence de la source", "source_inconsistency"),
+)
+
+
+def event_context_value(value: object) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, dict):
+        pieces = []
+        for key in ("person", "collective", "role", "category", "status", "mode", "scope", "min", "max"):
+            item = value.get(key)
+            if item not in (None, "", "not-applicable", "unknown", "production-credit"):
+                pieces.append(str(item).replace("-", " "))
+        return " — ".join(pieces) if pieces else json.dumps(value, ensure_ascii=False, sort_keys=True)
+    if isinstance(value, list):
+        return "; ".join(filter(None, (event_context_value(item) for item in value)))
+    text = str(value).strip()
+    return "" if text.casefold() in {"unknown", "not-applicable"} else text
+
+
+def event_context_html(event: dict, lang: str) -> str:
+    rows = []
+    label_index = 1 if lang == "fr" else 0
+    for label_en, label_fr, field in EVENT_CONTEXT_FIELDS:
+        fields = field if isinstance(field, tuple) else (field,)
+        value = next(
+            (event.get(name) for name in fields if event.get(name) not in (None, "", [], {})),
+            None,
+        )
+        text = event_context_value(value)
+        if text:
+            label = (label_en, label_fr)[label_index]
+            rows.append(f"<div><dt>{htmllib.escape(label)}</dt><dd>{htmllib.escape(text)}</dd></div>")
+    if not rows:
+        return ""
+    heading = "Contexte et preuves" if lang == "fr" else "Context and evidence"
+    return (
+        f'<section class="pm-event-context"><h2>{heading}</h2>'
+        f'<dl class="pm-event-facts">{"".join(rows)}</dl></section>'
+    )
+
+
 def event_page(event: dict, lang: str, related: list[dict], robots: str, source_sha: str) -> str:
     labels = PM_LABELS[lang]
     event_id = str(event.get("id") or event.get("identity_key"))
     encoded = quote(event_id, safe="")
     french = lang == "fr"
+    relative_path = f"polymythseminars/{'fr/' if french else ''}events/{event_id}/index.html"
+    geometry_attrs = geometry_body_attributes(
+        ROOT, relative_path, "calendar-event", register="quiet"
+    )
     translation_status = (
         "localized-interface-source-verbatim"
         if french
@@ -759,7 +962,7 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
     description_source = str(event.get("description") or event.get("raw_excerpt") or "")
     source_languages = event_source_languages(event)
     source_lang = source_languages[0] if len(source_languages) == 1 else "und"
-    source_label = ", ".join(source_languages) if source_languages else labels["unknown"]
+    source_label = ", ".join(event_language_label(code, lang) for code in source_languages)
     confirmation = str(event.get("confirmation_status") or "unconfirmed")
     status = labels["confirmed"] if confirmation == "confirmed" else labels["pending"]
     date = str(event.get("date") or "")
@@ -780,12 +983,28 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
         else date[:10]
     ) or labels["pending"]
     date_label = labels["deadline"] if str(event.get("record_kind") or "") == "opportunity" else labels["date"]
-    venue = str(event.get("venue") or labels["pending"])
+    venue = str(event.get("venue") or "").strip()
+    if not venue or venue.casefold().startswith("location unconfirmed"):
+        venue = labels["place_pending"]
     city = str(event.get("city") or "")
+    city = "" if city.strip().casefold() in {"", "unknown", "not yet determined"} else city.strip()
     source_url = str(event.get("source_url") or "")
     high_source = str(event.get("source_quality") or "").lower() in {"official", "official-or-institutional", "institutional"}
     ended = bool(re.search(r"pm-event-archive", (ROOT / "polymythseminars" / "events" / event_id / "index.html").read_text(encoding="utf-8", errors="ignore")))
-    qualifier = " · ".join(str(value).replace("-", " ") for value in event.get("qualification_reasons") or [])
+    qualification_items = [
+        event_qualification_copy(value, lang)
+        for value in event.get("qualification_reasons") or []
+    ]
+    qualification_tokens = " ".join(sorted(
+        str(value) for value in event.get("qualification_reasons") or [] if str(value)
+    ))
+    qualification_items = list(dict.fromkeys(qualification_items))
+    qualification_html = "".join(
+        f"<li>{htmllib.escape(item)}</li>" for item in qualification_items
+    )
+    context_html = event_context_html(event, lang)
+    checked = str(event.get("last_checked_at") or "").strip()[:10]
+    previous_dates = [str(value) for value in event.get("previous_dates") or [] if str(value)]
     related_html = ""
     if related:
         rows = "".join(
@@ -794,12 +1013,15 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
         )
         related_html = f'<nav class="pm-event-related" aria-labelledby="pm-related-title"><h2 id="pm-related-title">{labels["related"]}</h2><ul>{rows}</ul></nav>'
     source_schema_language: object = source_languages if source_languages else "und"
+    location_schema = {"@type": "Place", "name": venue}
+    if city:
+        location_schema["address"] = city
     schema = {
         "@context": "https://schema.org", "@type": "Event", "name": title_source,
         "startDate": date_machine, "endDate": end_machine or None,
         "description": description_source or title_source, "url": canonical,
         "sameAs": source_url or None, "inLanguage": source_schema_language,
-        "location": {"@type": "Place", "name": venue, "address": city},
+        "location": location_schema,
     }
     schema = {key: value for key, value in schema.items() if value not in (None, "")}
     schema_markup = (
@@ -812,7 +1034,8 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
     )
     meta_description = (
         ("Fiche Polymythcal en français. " if french else "Polymythcal event listing. ")
-        + f"{title_source}. {date[:10]}. {city}."
+        + f"{title_source}. {date[:10]}."
+        + (f" {city}." if city else "")
     )[:160]
     return f'''<!doctype html>
 <html lang="{'fr-CA' if french else 'en-CA'}">
@@ -836,12 +1059,13 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
 <link rel="alternate" hreflang="x-default" href="{SITE}/polymythseminars/events/{encoded}/">
 <link rel="stylesheet" href="/css/theme.css?v={POLYMYTHCAL_ASSET_VERSION}">
 <link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_ASSET_VERSION}"><link rel="stylesheet" href="/css/polymythcal-features.css?v={POLYMYTHCAL_ASSET_VERSION}">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={POLYMYTHCAL_ASSET_VERSION}" data-site-wide-type-zoom="{POLYMYTHCAL_ASSET_VERSION}">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={TYPE_ZOOM_VERSION}" data-site-wide-type-zoom="{TYPE_ZOOM_VERSION}">
+<link rel="stylesheet" href="/css/audit45-localization.css?v={AUDIT_VERSION}" data-audit45-localization="true">
 <link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 {schema_markup}
 </head>
-<body data-route-type="calendar-event" data-geometry="indra-web" data-indra-intensity="0.105" data-geometry-role="relation return" data-event-id="{meta_escape(event_id)}">
+<body {geometry_attrs} data-event-id="{meta_escape(event_id)}" data-confirmation-status="{meta_escape(confirmation)}" data-lifecycle-status="{meta_escape(event.get('lifecycle_status') or 'active')}">
 <a class="skip-link" href="#main-content">{labels["skip"]}</a>
 <main id="main-content" class="pm-event-page">
 <nav class="pm-event-nav" aria-label="{'Navigation de la fiche' if french else 'Event navigation'}"><a href="/polymythseminars/{'fr/' if french else ''}">{labels["all"]}</a><a href="/polymythcommons/">Polymyth Commons</a><a href="{alternate_path}" hreflang="{'en-CA' if french else 'fr-CA'}">{labels["language"]}</a></nav>
@@ -850,19 +1074,23 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
 <h1 lang="{meta_escape(source_lang)}" data-source-language="{meta_escape(source_label)}">{htmllib.escape(title_source)}</h1></header>
 {f'<div class="callout pm-event-archive" data-event-archive-note="true"><strong>{labels["past"]}.</strong> {labels["archive"]}</div>' if ended else ''}
 <dl class="pm-event-facts"><div><dt>{date_label}</dt><dd><time datetime="{meta_escape(date_machine)}">{htmllib.escape(date_display)}</time></dd></div>
-<div><dt>{labels["place"]}</dt><dd><strong lang="{meta_escape(source_lang)}" data-source-language="{meta_escape(source_label)}">{htmllib.escape(venue)}</strong><span>{htmllib.escape(city)}</span></dd></div>
+<div><dt>{labels["place"]}</dt><dd><strong lang="{meta_escape(source_lang)}" data-source-language="{meta_escape(source_label)}">{htmllib.escape(venue)}</strong>{f'<span>{htmllib.escape(city)}</span>' if city else ''}</dd></div>
 <div><dt>{labels["status"]}</dt><dd>{status}</dd></div>
-<div><dt>{labels["source_language"]}</dt><dd>{htmllib.escape(source_label)}</dd></div></dl>
-{f'<section class="pm-event-description"><h2>{labels["about"]}</h2><p lang="{meta_escape(source_lang)}" data-source-language="{meta_escape(source_label)}">{htmllib.escape(description_source)}</p></section>' if description_source else ''}
-{f'<details class="pm-event-pending"><summary>{labels["pending_details"]}</summary><p><strong>{labels["qualification"]}:</strong> {htmllib.escape(qualifier)}</p></details>' if qualifier else ''}
-{related_html}
-<footer class="pm-event-footer"><p class="pm-event-checked"><strong>{labels["checked"]}:</strong> {htmllib.escape(str(event.get("last_checked_at") or "Unknown")[:10])}</p>
+{f'<div><dt>{labels["source_language"]}</dt><dd>{htmllib.escape(source_label)}</dd></div>' if source_languages else ''}</dl>
+<section class="pm-event-primary-path" aria-label="{labels["continue"]}"><p>{labels["continue"]}</p>
 <div class="pm-event-actions">{f'<a class="pm-event-action primary" href="{meta_escape(source_url)}" rel="noopener noreferrer">{labels["official"] if high_source else labels["source"]} ↗</a>' if source_url else ''}
 <a class="pm-event-action" type="text/calendar" href="/polymythseminars/ics/{meta_escape(event_id)}.ics">{labels["calendar"]}</a>
-<a class="pm-event-action" href="/polymythseminars/{'fr/' if french else ''}correct/?event={meta_escape(canonical)}">{labels["correct"]}</a></div></footer>
+<a class="pm-event-action" href="/polymythseminars/{'fr/' if french else ''}correct/?event={meta_escape(canonical)}">{labels["correct"]}</a></div></section>
+{f'<section class="pm-event-description"><h2>{labels["about"]}</h2><p lang="{meta_escape(source_lang)}" data-source-language="{meta_escape(source_label)}">{htmllib.escape(description_source)}</p></section>' if description_source else ''}
+{context_html}
+{f'<details class="pm-event-pending" data-qualification-reasons="{meta_escape(qualification_tokens)}"><summary>{labels["pending_details"]}</summary><ul>{qualification_html}</ul></details>' if qualification_html else ''}
+{f'<p class="pm-event-previous"><strong>{labels["previous"]}:</strong> {htmllib.escape(" · ".join(previous_dates))}</p>' if previous_dates else ''}
+{related_html}
+<footer class="pm-event-footer">{f'<p class="pm-event-checked"><strong>{labels["checked"]}:</strong> {htmllib.escape(checked)}</p>' if checked else ''}</footer>
 </article></main>
 <script src="/js/theme.js" defer></script><script src="/js/polymythcal-features.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script>
-<script src="/js/site-keyboard-enhancements.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/mandala.js?v={GEOMETRY_ASSET_VERSION}" defer></script><script src="/js/indra.js?v={GEOMETRY_ASSET_VERSION}" defer></script>
+<script src="/js/site-keyboard-enhancements.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/mandala.js?v={GEOMETRY_ASSET_VERSION}" defer></script>
+<script src="/js/indra.js?v={GEOMETRY_ASSET_VERSION}" defer></script>
 </body></html>
 '''
 
@@ -884,11 +1112,11 @@ def french_event_alias_page(alias_id: str, target_id: str, source_sha: str) -> s
 <title>Fiche déplacée · Polymythcal</title>
 <link rel="canonical" href="{meta_escape(canonical)}">
 <link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_ASSET_VERSION}">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={POLYMYTHCAL_ASSET_VERSION}" data-site-wide-type-zoom="{POLYMYTHCAL_ASSET_VERSION}">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={TYPE_ZOOM_VERSION}" data-site-wide-type-zoom="{TYPE_ZOOM_VERSION}">
 <link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-route-type="calendar-event-alias" data-geometry="indra-web" data-indra-intensity="0.105" data-geometry-role="return" data-legacy-event-id="{meta_escape(alias_id)}">
+<body data-route-type="calendar-event-alias" data-geometry="indra-web" data-indra-intensity="0.100" data-geometry-role="return" data-front-facing="general-audience" data-legacy-event-id="{meta_escape(alias_id)}">
 <main id="main-content" class="pm-event-page"><h1>Fiche déplacée</h1>
 <p>Cette ancienne adresse mène maintenant à la fiche stable.</p>
 <p><a href="{meta_escape(target_path)}">Ouvrir la fiche stable</a></p></main>
@@ -918,6 +1146,10 @@ def polymyth_form(kind: str, lang: str, source_sha: str = "") -> str:
     title, lead, fields, submit = PM_FORM_COPY[kind][lang]
     french = lang == "fr"
     path = f"/polymythseminars/{'fr/' if french else ''}{kind}/"
+    relative_path = f"polymythseminars/{'fr/' if french else ''}{kind}/index.html"
+    geometry_attrs = geometry_body_attributes(
+        ROOT, relative_path, "calendar-form", register="quiet"
+    )
     other = f"/polymythseminars/{'' if french else 'fr/'}{kind}/"
     form_name = "polymythcal-event-submission" if kind == "submit" else "polymythcal-correction"
     rows = []
@@ -936,9 +1168,9 @@ def polymyth_form(kind: str, lang: str, source_sha: str = "") -> str:
 <meta name="robots" content="noindex,follow">{governance_meta}
 <title>{title} · Polymythcal</title><meta name="description" content="{meta_escape(lead)}"><meta property="og:title" content="{meta_escape(title)} · Polymythcal"><meta property="og:description" content="{meta_escape(lead)}"><meta property="og:url" content="{SITE}{path}"><meta property="og:locale" content="{'fr_CA' if french else 'en_CA'}">
 <link rel="canonical" href="{SITE}{path}"><link rel="alternate" hreflang="en-CA" href="{SITE}/polymythseminars/{kind}/"><link rel="alternate" hreflang="fr-CA" href="{SITE}/polymythseminars/fr/{kind}/"><link rel="alternate" hreflang="x-default" href="{SITE}/polymythseminars/{kind}/">
-<link rel="stylesheet" href="/css/theme.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_ASSET_VERSION}"><link rel="stylesheet" href="/css/polymythcal-features.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={POLYMYTHCAL_ASSET_VERSION}" data-site-wide-type-zoom="{POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
+<link rel="stylesheet" href="/css/theme.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_ASSET_VERSION}"><link rel="stylesheet" href="/css/polymythcal-features.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={TYPE_ZOOM_VERSION}" data-site-wide-type-zoom="{TYPE_ZOOM_VERSION}"><link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
-</head><body data-route-type="calendar-form" data-geometry="indra-web" data-indra-intensity="0.105" data-geometry-role="return"><a class="skip-link" href="#main-content">{"Aller au formulaire" if french else "Skip to form"}</a>
+</head><body {geometry_attrs}><a class="skip-link" href="#main-content">{"Aller au formulaire" if french else "Skip to form"}</a>
 <main id="main-content" class="pm-form-shell"><nav class="pm-event-nav"><a href="/polymythseminars/{'fr/' if french else ''}">← Polymythcal</a><a href="{other}">{"English" if french else "Français"}</a></nav>
 <h1>{title}</h1><p>{lead}</p><form name="{form_name}" method="POST" action="/polymythseminars/{'fr/' if french else ''}thanks/" data-netlify="true" netlify-honeypot="website">
 <input type="hidden" name="form-name" value="{form_name}"><input type="hidden" name="interface_language" value="{'fr-CA' if french else 'en-CA'}"><p hidden><label>Leave empty <input name="website" autocomplete="off"></label></p>
@@ -951,6 +1183,10 @@ def polymyth_form(kind: str, lang: str, source_sha: str = "") -> str:
 def polymyth_thanks(lang: str) -> str:
     french = lang == "fr"
     path = f"/polymythseminars/{'fr/' if french else ''}thanks/"
+    relative_path = f"polymythseminars/{'fr/' if french else ''}thanks/index.html"
+    geometry_attrs = geometry_body_attributes(
+        ROOT, relative_path, "calendar-form", register="quiet"
+    )
     title = "Merci : renseignements reçus" if french else "Thank you: details received"
     lead = (
         "Les renseignements ont été reçus. Ils seront vérifiés auprès de la source officielle avant toute publication."
@@ -961,9 +1197,9 @@ def polymyth_thanks(lang: str) -> str:
 <meta charset="utf-8"><script src="/js/theme-init.js?v=20260723-steady"></script><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,follow"><title>{title} · Polymythcal</title><meta name="description" content="{meta_escape(lead)}"><meta property="og:title" content="{meta_escape(title)} · Polymythcal"><meta property="og:description" content="{meta_escape(lead)}"><meta property="og:url" content="{SITE}{path}"><meta property="og:locale" content="{'fr_CA' if french else 'en_CA'}">
 <link rel="canonical" href="{SITE}{path}"><link rel="alternate" hreflang="en-CA" href="{SITE}/polymythseminars/thanks/"><link rel="alternate" hreflang="fr-CA" href="{SITE}/polymythseminars/fr/thanks/"><link rel="alternate" hreflang="x-default" href="{SITE}/polymythseminars/thanks/">
-<link rel="stylesheet" href="/css/theme.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_ASSET_VERSION}"><link rel="stylesheet" href="/css/polymythcal-features.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={POLYMYTHCAL_ASSET_VERSION}" data-site-wide-type-zoom="{POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
+<link rel="stylesheet" href="/css/theme.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_ASSET_VERSION}"><link rel="stylesheet" href="/css/polymythcal-features.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={TYPE_ZOOM_VERSION}" data-site-wide-type-zoom="{TYPE_ZOOM_VERSION}"><link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
-</head><body data-route-type="calendar-form" data-geometry="indra-web" data-indra-intensity="0.105" data-geometry-role="return"><main id="main-content" class="pm-form-shell"><p class="pm-event-kicker">Polymythcal</p><h1>{title}</h1><p>{lead}</p><p><a class="pm-event-action primary" href="/polymythseminars/{'fr/' if french else ''}">{"Retour au calendrier" if french else "Return to the calendar"}</a></p></main><script src="/js/theme.js" defer></script><script src="/js/site-keyboard-enhancements.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/mandala.js?v={GEOMETRY_ASSET_VERSION}" defer></script><script src="/js/indra.js?v={GEOMETRY_ASSET_VERSION}" defer></script><script src="/js/footer.js?v=20260805-predeploy-audit" defer></script></body></html>'''
+</head><body {geometry_attrs}><main id="main-content" class="pm-form-shell"><p class="pm-event-kicker">Polymythcal</p><h1>{title}</h1><p>{lead}</p><p><a class="pm-event-action primary" href="/polymythseminars/{'fr/' if french else ''}">{"Retour au calendrier" if french else "Return to the calendar"}</a></p></main><script src="/js/theme.js" defer></script><script src="/js/site-keyboard-enhancements.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/mandala.js?v={GEOMETRY_ASSET_VERSION}" defer></script><script src="/js/indra.js?v={GEOMETRY_ASSET_VERSION}" defer></script><script src="/js/footer.js?v=20260805-predeploy-audit" defer></script></body></html>'''
 
 
 def subscriptions_page(lang: str, feeds: dict, source_sha: str) -> str:
@@ -973,10 +1209,34 @@ def subscriptions_page(lang: str, feeds: dict, source_sha: str) -> str:
         for feed in feeds.get("feeds", [])
     )
     path = f"/polymythseminars/{'fr/' if french else ''}subscribe/"
+    relative_path = f"polymythseminars/{'fr/' if french else ''}subscribe/index.html"
+    geometry_attrs = geometry_body_attributes(
+        ROOT, relative_path, "calendar-form", register="quiet"
+    )
     title = "Abonnements Polymythcal" if french else "Polymythcal subscriptions"
-    lead = "RSS fonctionne dans les lecteurs de fils. ICS fonctionne dans les applications de calendrier." if french else "RSS works in feed readers. ICS works in calendar apps."
-    return f'''<!doctype html><html lang="{'fr-CA' if french else 'en-CA'}"><head><meta charset="utf-8"><script src="/js/theme-init.js?v=20260723-steady"></script><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title}</title><meta name="description" content="{meta_escape(lead)}"><meta name="robots" content="index,follow"><meta name="translation-source" content="polymythseminars/feeds/index.json"><meta name="translation-source-sha256" content="{source_sha}"><meta name="translation-status" content="complete-owned-copy"><meta property="og:title" content="{meta_escape(title)}"><meta property="og:description" content="{meta_escape(lead)}"><meta property="og:url" content="{SITE}{path}"><meta property="og:locale" content="{'fr_CA' if french else 'en_CA'}"><link rel="canonical" href="{SITE}{path}"><link rel="alternate" hreflang="en-CA" href="{SITE}/polymythseminars/subscribe/"><link rel="alternate" hreflang="fr-CA" href="{SITE}/polymythseminars/fr/subscribe/"><link rel="alternate" hreflang="x-default" href="{SITE}/polymythseminars/subscribe/"><link rel="stylesheet" href="/css/theme.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_ASSET_VERSION}"><link rel="stylesheet" href="/css/polymythcal-features.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={POLYMYTHCAL_ASSET_VERSION}" data-site-wide-type-zoom="{POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
-<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady"></head><body data-route-type="calendar-form" data-geometry="indra-web" data-indra-intensity="0.105" data-geometry-role="return"><main class="pm-form-shell" id="main-content"><nav class="pm-event-nav"><a href="/polymythseminars/{'fr/' if french else ''}">← Polymythcal</a><a href="/polymythseminars/{'' if french else 'fr/'}subscribe/">{"English" if french else "Français"}</a></nav><h1>{title}</h1><p>{lead}</p><ul class="pm-feed-list">{rows}</ul></main><script src="/js/polymythcal-features.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/site-keyboard-enhancements.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/mandala.js?v={GEOMETRY_ASSET_VERSION}" defer></script><script src="/js/indra.js?v={GEOMETRY_ASSET_VERSION}" defer></script><script src="/js/footer.js?v=20260805-predeploy-audit" defer></script></body></html>'''
+    lead = (
+        "Ces fils RSS et calendriers ICS contiennent les mêmes fiches que Polymythcal."
+        if french else
+        "These RSS feeds and ICS calendars contain the same listings shown in Polymythcal."
+    )
+    page_url = f"{SITE}{path}"
+    schema = {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": f"{page_url}#webpage",
+        "url": page_url,
+        "name": title,
+        "description": lead,
+        "inLanguage": "fr-CA" if french else "en-CA",
+        "isPartOf": {"@id": f"{SITE}/#website"},
+    }
+    schema_block = (
+        '<script type="application/ld+json">'
+        + json.dumps(schema, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+        + "</script>"
+    )
+    return f'''<!doctype html><html lang="{'fr-CA' if french else 'en-CA'}"><head><meta charset="utf-8"><script src="/js/theme-init.js?v=20260723-steady"></script><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title}</title><meta name="description" content="{meta_escape(lead)}"><meta name="robots" content="index,follow"><meta name="translation-source" content="polymythseminars/feeds/index.json"><meta name="translation-source-sha256" content="{source_sha}"><meta name="translation-status" content="complete-owned-copy"><meta property="og:title" content="{meta_escape(title)}"><meta property="og:description" content="{meta_escape(lead)}"><meta property="og:url" content="{SITE}{path}"><meta property="og:locale" content="{'fr_CA' if french else 'en_CA'}"><link rel="canonical" href="{SITE}{path}"><link rel="alternate" hreflang="en-CA" href="{SITE}/polymythseminars/subscribe/"><link rel="alternate" hreflang="fr-CA" href="{SITE}/polymythseminars/fr/subscribe/"><link rel="alternate" hreflang="x-default" href="{SITE}/polymythseminars/subscribe/"><link rel="stylesheet" href="/css/theme.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_ASSET_VERSION}"><link rel="stylesheet" href="/css/polymythcal-features.css?v={POLYMYTHCAL_ASSET_VERSION}"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={TYPE_ZOOM_VERSION}" data-site-wide-type-zoom="{TYPE_ZOOM_VERSION}"><link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">{schema_block}</head><body {geometry_attrs}><main class="pm-form-shell" id="main-content"><nav class="pm-event-nav"><a href="/polymythseminars/{'fr/' if french else ''}">← Polymythcal</a><a href="/polymythseminars/{'' if french else 'fr/'}subscribe/">{"English" if french else "Français"}</a></nav><h1>{title}</h1><p>{lead}</p><ul class="pm-feed-list">{rows}</ul></main><script src="/js/polymythcal-features.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/site-keyboard-enhancements.js?v={POLYMYTHCAL_ASSET_VERSION}" defer></script><script src="/js/mandala.js?v={GEOMETRY_ASSET_VERSION}" defer></script><script src="/js/indra.js?v={GEOMETRY_ASSET_VERSION}" defer></script><script src="/js/footer.js?v=20260805-predeploy-audit" defer></script></body></html>'''
 
 
 def build_polymythcal(governance: list[dict]) -> list[str]:
@@ -1011,44 +1271,52 @@ def build_polymythcal(governance: list[dict]) -> list[str]:
     for child in french_event_root.iterdir():
         if child.is_dir() and child.name not in valid_event_directories:
             shutil.rmtree(child)
+    build_date_override = str(os.environ.get("SITE_BUILD_DATE") or "").strip()
+    if build_date_override:
+        try:
+            related_today = datetime.date.fromisoformat(build_date_override)
+        except ValueError as exc:
+            raise SystemExit(f"SITE_BUILD_DATE is not a real calendar date: {exc}")
+    else:
+        related_today = datetime.datetime.now(ZoneInfo("America/Toronto")).date()
+    related_placeholders = {
+        "", "unknown", "location unconfirmed",
+        "location unconfirmed · lieu non confirmé", "lieu non confirmé",
+    }
+
+    def related_day(item: dict, field: str = "date") -> datetime.date | None:
+        value = str(item.get(field) or "")[:10]
+        try:
+            return datetime.date.fromisoformat(value)
+        except ValueError:
+            return None
+
     def related_for(event: dict) -> list[dict]:
         event_id = str(event.get("id") or event.get("identity_key"))
-        event_day = int(re.sub(r"\D", "", str(event.get("date") or "")[:10]) or "0")
-
-        def rank(item: dict) -> tuple:
-            item_day = int(re.sub(r"\D", "", str(item.get("date") or "")[:10]) or "0")
-            same_city = bool(
-                event.get("city")
-                and item.get("city")
-                and str(event.get("city")).casefold() == str(item.get("city")).casefold()
-                and str(event.get("city")).casefold() not in {"unknown", "online"}
-            )
-            same_venue = bool(
-                event.get("venue")
-                and item.get("venue")
-                and str(event.get("venue")).casefold() == str(item.get("venue")).casefold()
-            )
-            score = (
-                int(same_city) * 8
-                + int(str(event.get("type") or "") == str(item.get("type") or "")) * 5
-                + int(str(event.get("record_kind") or "") == str(item.get("record_kind") or "")) * 3
-                + int(same_venue) * 2
-            )
-            return (
-                -score,
-                abs(item_day - event_day),
-                str(item.get("date") or ""),
-                str(item.get("title") or "").casefold(),
-                str(item.get("id") or item.get("identity_key") or ""),
-            )
-
-        return sorted(
-            [
-                item for item in events
-                if str(item.get("id") or item.get("identity_key")) != event_id
-            ],
-            key=rank,
-        )[:3]
+        event_type = str(event.get("type") or "").strip().casefold()
+        event_city = str(event.get("city") or "").strip().casefold()
+        event_day = related_day(event)
+        ranked = []
+        for item in events:
+            item_id = str(item.get("id") or item.get("identity_key"))
+            if item_id == event_id or item.get("lifecycle_status") in {"cancelled", "missing-on-source", "archived"}:
+                continue
+            item_end = related_day(item, "end_date") or related_day(item)
+            if item_end is None or item_end < related_today:
+                continue
+            item_type = str(item.get("type") or "").strip().casefold()
+            item_city = str(item.get("city") or "").strip().casefold()
+            same_type = bool(event_type and item_type == event_type)
+            same_city = bool(event_city and event_city not in related_placeholders and item_city == event_city)
+            if not same_type and not same_city:
+                continue
+            item_day = related_day(item)
+            distance = abs((item_day - event_day).days) if item_day and event_day else 99_999
+            score = int(same_type) * 5 + int(same_city) * 4
+            ranked.append((
+                -score, distance, str(item.get("title") or "").casefold(), item_id, item,
+            ))
+        return [row[-1] for row in sorted(ranked)[:3]]
     sitemap_urls: list[str] = []
     for event in events:
         event_id = str(event.get("id") or event.get("identity_key"))
@@ -1178,6 +1446,44 @@ SAUL_HERO = {
     "zh-hans": ("职业经历档案", "本页以简体中文呈现完整经历档案。求职履历及 PDF 明确保留英文。"),
     "fa": ("بایگانی سوابق حرفه‌ای", "این صفحه بایگانی کامل را به فارسی نشان می‌دهد. رزومهٔ درخواست شغل و فایل‌های PDF صریحاً انگلیسی باقی می‌مانند."),
 }
+SAUL_HERO_LINK = {
+    "fr": "Ouvrir le CV de candidature en anglais →",
+    "zh-hant": "開啟英文求職履歷 →",
+    "zh-hans": "打开英文求职履历 →",
+    "fa": "باز کردن رزومهٔ درخواست شغل به انگلیسی ←",
+}
+SAUL_NAV = {
+    "fr": ("Sections du parcours", "Carte", "Parcours complet"),
+    "zh-hant": ("履歷章節", "地圖", "完整經歷"),
+    "zh-hans": ("履历章节", "地图", "完整经历"),
+    "fa": ("بخش‌های سوابق", "نقشه", "سابقهٔ کامل"),
+}
+SAUL_ARCHIVE_NAV = {
+    "fr": {
+        "label": "Sections des archives professionnelles",
+        "map": "Carte",
+        "history": "Parcours complet",
+        "english_cv": "Ouvrir le CV de candidature en anglais →",
+    },
+    "zh-hant": {
+        "label": "專業經歷檔案章節",
+        "map": "地圖",
+        "history": "完整經歷",
+        "english_cv": "開啟英文求職履歷 →",
+    },
+    "zh-hans": {
+        "label": "职业经历档案章节",
+        "map": "地图",
+        "history": "完整经历",
+        "english_cv": "打开英文求职简历 →",
+    },
+    "fa": {
+        "label": "بخش‌های بایگانی حرفه‌ای",
+        "map": "نقشه",
+        "history": "سابقهٔ کامل",
+        "english_cv": "باز کردن رزومهٔ انگلیسی →",
+    },
+}
 
 
 def build_saul(governance: list[dict]) -> list[str]:
@@ -1199,7 +1505,6 @@ html[data-saul-archive-language="zh"] .audit45-saul-archive-hero[data-locale="zh
 html[data-saul-archive-language="zhs"] .audit45-saul-archive-hero[data-locale="zhs"],
 html[data-saul-archive-language="fa"] .audit45-saul-archive-hero[data-locale="fa"]{display:block}
 html[data-saul-archive-language]:not([data-saul-archive-language="en"]) :is(.cv-spectrum,.cv-ultimate){display:none!important}
-html[data-saul-archive-language]:not([data-saul-archive-language="en"]) .cv-local-nav a[href="#cvOverview"]{display:none}
 html[data-saul-archive-language="fa"] .audit45-saul-archive-hero{text-align:right}
 </style>'''
         text = text.replace("</head>", css + "</head>", 1)
@@ -1210,7 +1515,7 @@ html[data-saul-archive-language="fa"] .audit45-saul-archive-hero{text-align:righ
             heroes.append(
                 f'<section class="audit45-saul-archive-hero" data-locale="{internal[segment]}" lang="{tag}" dir="{direction}">'
                 f'<p>Saul Karim Nassau</p><h2>{title}</h2><p>{lead}</p>'
-                f'<p><a href="/saul/" lang="en">Open the English application CV →</a></p></section>'
+                f'<p><a href="/saul/" hreflang="en">{SAUL_HERO_LINK[segment]}</a></p></section>'
             )
         marker = '<section class="cv-ultimate"' if '<section class="cv-ultimate"' in text else '<section class="cv-spectrum"'
         text = text.replace(marker, "".join(heroes) + marker, 1)
@@ -1223,6 +1528,16 @@ html[data-saul-archive-language="fa"] .audit45-saul-archive-hero{text-align:righ
         text,
         flags=re.I,
     )
+    internal = {"fr": "fr", "zh-hant": "zh", "zh-hans": "zhs", "fa": "fa"}
+    for segment, selected_locale in internal.items():
+        text = re.sub(
+            rf'(<section\b[^>]*\baudit45-saul-archive-hero\b[^>]*\bdata-locale=["\']{re.escape(selected_locale)}["\'][^>]*>[\s\S]*?<p><a\b[^>]*href=["\']/saul/["\'][^>]*>)[\s\S]*?(</a></p></section>)',
+            rf'\1{SAUL_HERO_LINK[segment]}\2',
+            text,
+            count=1,
+            flags=re.I,
+        )
+    text = re.sub(r'(<a\b[^>]*href=["\']/saul/["\'])\s+lang=["\']en["\']', r'\1 hreflang="en"', text)
     write(source, text)
     source_sha = sha(source)
     urls = []
@@ -1249,7 +1564,53 @@ html[data-saul-archive-language="fa"] .audit45-saul-archive-hero{text-align:righ
         localized = replace_hreflang_block(localized, links)
         localized = localize_saul_profile_schema(localized, url, title, tag)
         localized = add_governance_meta(localized, "saul/index.html", source_sha, "localized-career-archive")
+        nav_label, map_label, history_label = SAUL_NAV[segment]
+        localized_nav = (
+            f'<nav aria-label="{nav_label}" class="cv-local-nav" data-cv-local-nav="">'
+            f'<a href="#places">{map_label}</a>'
+            f'<a href="#careerArchive">{history_label}</a></nav>'
+        )
+        localized = re.sub(
+            r'<nav\b[^>]*\bclass=["\'][^"\']*\bcv-local-nav\b[^"\']*["\'][^>]*>[\s\S]*?</nav>',
+            localized_nav,
+            localized,
+            count=1,
+            flags=re.I,
+        )
         selected_locale = internal[segment]
+        archive_nav = SAUL_ARCHIVE_NAV[segment]
+        localized_nav = (
+            f'<nav aria-label="{meta_escape(archive_nav["label"])}" class="cv-local-nav" '
+            'data-cv-local-nav="">'
+            f'<a href="#places">{htmllib.escape(archive_nav["map"])}</a>'
+            f'<a href="#careerArchive">{htmllib.escape(archive_nav["history"])}</a>'
+            '</nav>'
+        )
+        localized = re.sub(
+            r'<nav\b(?=[^>]*\bclass=["\'][^"\']*\bcv-local-nav\b)[^>]*>[\s\S]*?</nav>',
+            localized_nav,
+            localized,
+            count=1,
+            flags=re.I,
+        )
+        localized = re.sub(
+            rf'(<section\b[^>]*\bdata-locale=["\']{re.escape(selected_locale)}["\'][^>]*>[\s\S]*?'
+            r'<a\b(?=[^>]*\bhref=["\']/saul/["\'])[^>]*>)[\s\S]*?(</a>)',
+            lambda match: (
+                match.group(1)
+                + htmllib.escape(archive_nav["english_cv"])
+                + match.group(2)
+            ),
+            localized,
+            count=1,
+            flags=re.I,
+        )
+        localized = re.sub(
+            r'<a\b(?=[^>]*\bclass=["\'][^"\']*\bcv-return-focus\b)[^>]*>[\s\S]*?</a>',
+            "",
+            localized,
+            flags=re.I,
+        )
         localized = re.sub(
             rf'(<section\b[^>]*\baudit45-saul-archive-hero\b[^>]*\bdata-locale=["\']{re.escape(selected_locale)}["\'][^>]*>[\s\S]*?)<h2>([\s\S]*?)</h2>',
             r"\1<h1>\2</h1>",
@@ -1317,7 +1678,66 @@ def update_sitemap(urls: list[str]) -> None:
     # canonical sitemap does not already own. This keeps first-run migration
     # complete and every later build duplicate-free.
     text = re.sub(r"\s*<!-- AUDIT45_LOCALIZED_START -->[\s\S]*?<!-- AUDIT45_LOCALIZED_END -->\s*", "\n", text)
-    unique = sorted(set(urls))
+    # Summary-only Leizu locale routes are useful language wayfinding pages,
+    # but they are not full translations. Remove any copies added by an
+    # earlier search/sitemap build while they remain noindex.
+    partial_leizu = re.compile(
+        r"\s*<url>\s*<loc>https://seminarschools\.com/leizu/(?:fr|fa|zh-hans|zh-hant)/"
+        r"(?:booking-success|cloud|donate|flyer|intake|policies|scholarship|teach|toronto-tutoring)/"
+        r"</loc>[\s\S]*?</url>\s*",
+        re.I,
+    )
+    text = partial_leizu.sub("\n", text)
+    # Localized route generation must not restore an event URL that the
+    # canonical event builder has classified as noindex. Some artifact
+    # workspaces can reconcile a future-stamped sitemap between subprocesses,
+    # so enforce the page's current robots policy again at this final writer.
+    event_entry = re.compile(
+        r"\s*<url>\s*<loc>(https://seminarschools\.com/polymythseminars/(?:fr/)?events/[^<]+/)</loc>"
+        r"[\s\S]*?</url>\s*",
+        re.I,
+    )
+
+    def retain_indexable_event(match: re.Match[str]) -> str:
+        url = htmllib.unescape(match.group(1))
+        route = unquote(url.removeprefix(SITE).lstrip("/"))
+        page = ROOT / route / "index.html"
+        if not page.exists():
+            return ""
+        source = page.read_text(encoding="utf-8", errors="ignore")
+        robots_match = re.search(
+            r'<meta\s+name="robots"\s+content="([^"]+)"', source, re.I
+        )
+        robots = robots_match.group(1).casefold() if robots_match else "noindex,follow"
+        return "" if "noindex" in robots else match.group(0)
+
+    text = event_entry.sub(retain_indexable_event, text)
+    text = re.sub(r"(?m)^[ \t]+$", "", text)
+    text = re.sub(r"\n{2,}", "\n", text)
+    text = re.sub(r"(?m)^<url>", "  <url>", text)
+    # This is the final sitemap writer. Reconcile the managed event URLs from
+    # the generated pages' actual robots policy in both languages so an
+    # earlier working-horizon index cannot silently omit a confirmed,
+    # indexable canonical page (or leave an English/French mismatch).
+    indexable_event_urls: list[str] = []
+    for relative, url_prefix in (
+        (Path("polymythseminars/events"), "/polymythseminars/events/"),
+        (Path("polymythseminars/fr/events"), "/polymythseminars/fr/events/"),
+    ):
+        base = ROOT / relative
+        if not base.exists():
+            continue
+        for page in sorted(base.glob("*/index.html")):
+            source = page.read_text(encoding="utf-8", errors="ignore")
+            robots_match = re.search(
+                r'<meta\s+name="robots"\s+content="([^"]+)"', source, re.I
+            )
+            robots = robots_match.group(1).casefold() if robots_match else "noindex,follow"
+            if "noindex" not in robots:
+                indexable_event_urls.append(
+                    f"{SITE}{url_prefix}{quote(page.parent.name, safe='')}/"
+                )
+    unique = sorted(set([*urls, *indexable_event_urls]))
     existing = set(re.findall(r"<loc>([^<]+)</loc>", text))
     missing = [url for url in unique if htmllib.escape(url) not in existing and url not in existing]
     block = "\n<!-- AUDIT45_LOCALIZED_START -->\n" + "\n".join(
@@ -1349,7 +1769,7 @@ def main() -> None:
         "release": "audit45",
         "english_source_of_truth": True,
         "organizer_text_policy": "preserve verbatim; mark source language; never silently translate",
-        "high_stakes_policy": "localized draft remains visibly subordinate to English until bilingual review",
+        "high_stakes_policy": "localized summaries remain visibly distinct from complete English detail and noindex until fully translated",
         "routes": governance,
         "counts": {
             "leizu_locales": 4,
@@ -1357,7 +1777,7 @@ def main() -> None:
             "polymythcal_event_routes_per_locale": event_count,
             "polymythcal_french_legacy_alias_routes": french_alias_count,
             "saul_archive_locales": 4,
-            "teacher_resources": 644,
+            "teacher_resources": 645,
         },
     }
     write(ROOT / "data" / "audit45-translation-governance.json", json.dumps(payload, ensure_ascii=False, indent=2) + "\n")

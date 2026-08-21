@@ -1,9 +1,9 @@
 {
   "schema": "seminar-schools-audit49-technical-efficiency-v1",
-  "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
-  "asset_version": "20260728-audit53",
+  "release_id": "2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final",
+  "asset_version": "20260815-sets1-15-synthesis",
   "package_version": "1.0.6",
-  "generated_at": "2026-07-28T21:45:00-04:00",
+  "generated_at": "2026-08-15T18:00:00-04:00",
   "status": "passed",
   "scope": {
     "decision": "aggregate current component evidence without repeating full repository walks",
@@ -59,70 +59,70 @@
     "metadata": {
       "path": "scripts/reports/audit49-metadata-surface.json",
       "schema": "seminar-schools-audit49-metadata-surface-v1",
-      "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
-      "generated_at": "2026-07-28T21:45:00-04:00",
+      "release_id": "2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final",
+      "generated_at": "2026-08-15T18:00:00-04:00",
       "status": "passed"
     },
     "runtime": {
       "path": "scripts/reports/audit49-runtime-efficiency.json",
       "schema": "seminar-schools-audit49-runtime-efficiency-v1",
-      "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
-      "generated_at": "2026-07-28T21:45:00-04:00",
+      "release_id": "2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final",
+      "generated_at": "2026-08-15T18:00:00-04:00",
       "status": "passed"
     },
     "build_packaging": {
       "path": "scripts/reports/audit49-build-packaging-efficiency.json",
       "schema": "seminar-schools-audit49-build-packaging-efficiency-v1",
-      "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
-      "generated_at": "2026-07-28T21:45:00-04:00",
+      "release_id": "2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final",
+      "generated_at": "2026-08-15T18:00:00-04:00",
       "status": "passed"
     },
     "audit48_external_validation": {
       "path": "scripts/reports/audit48-external-validation.json",
       "schema": "seminar-schools-audit48-external-validation-v1",
-      "release_id": "2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final",
-      "generated_at": "2026-07-28T21:45:00-04:00",
+      "release_id": "2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final",
+      "generated_at": "2026-08-15T18:00:00-04:00",
       "status": "passed",
       "machine_validation_status": "passed"
     }
   },
   "metrics": {
     "metadata": {
-      "source_html_documents": 3749,
-      "public_html_documents": 3749,
-      "interactive_documents": 2859,
-      "redirect_documents": 890,
-      "indexable_documents": 1218,
-      "noindex_documents": 2531,
-      "sitemap_urls": 1238,
-      "schema_blocks": 2616,
-      "schema_documents": 1230,
+      "source_html_documents": 7563,
+      "public_html_documents": 7563,
+      "interactive_documents": 5370,
+      "redirect_documents": 2193,
+      "indexable_documents": 1950,
+      "noindex_documents": 5613,
+      "sitemap_urls": 1970,
+      "schema_blocks": 3366,
+      "schema_documents": 1978,
       "indexable_documents_without_schema": 1,
       "intentional_schema_exemptions": 1,
-      "hreflang_links": 5430,
-      "hreflang_documents": 1755,
-      "source_public_byte_identical": 3749,
-      "generated_teacher_resource_documents": 678,
-      "generated_event_documents": 2535,
-      "documents_with_one_title": 3749,
-      "documents_with_one_description": 2860,
-      "documents_with_one_viewport": 3749,
-      "documents_with_one_canonical": 3748,
-      "documents_with_one_robots_directive": 3360,
+      "hreflang_links": 12960,
+      "hreflang_documents": 4265,
+      "source_public_byte_identical": 7563,
+      "generated_teacher_resource_documents": 679,
+      "generated_event_documents": 6348,
+      "documents_with_one_title": 7563,
+      "documents_with_one_description": 5371,
+      "documents_with_one_viewport": 7563,
+      "documents_with_one_canonical": 7562,
+      "documents_with_one_robots_directive": 7175,
       "sitemap_non_html_resources": 20
     },
     "page_size_distribution": {
-      "over_100_kib": 40,
+      "over_100_kib": 39,
       "over_250_kib": 27,
-      "over_500_kib": 7,
-      "largest_bytes": 4023829,
-      "gzip_over_100_kib": 20,
+      "over_500_kib": 8,
+      "largest_bytes": 4135253,
+      "gzip_over_100_kib": 21,
       "gzip_over_250_kib": 4,
       "gzip_over_500_kib": 2,
-      "largest_gzip_bytes": 1230073
+      "largest_gzip_bytes": 1264836
     },
     "runtime": {
-      "active_runtime_files": 3446,
+      "active_runtime_files": 7260,
       "files_with_intervals": 10,
       "interval_calls": 10,
       "bounded_leaf_routes": 10,
@@ -130,7 +130,7 @@
       "public_runtime_mirrors_identical": 10,
       "forced_public_data_revalidation_fetches": 0,
       "bounded_public_data_assets": 24,
-      "bounded_public_data_bytes": 9906407
+      "bounded_public_data_bytes": 10163778
     },
     "cache_policies": {
       "polymyth_text_mirrors": "public, max-age=86400, stale-while-revalidate=604800",
@@ -145,7 +145,7 @@
       "timeout_regression_target_ms": 1000,
       "timeout_regression_within_tolerance": true,
       "sequential_failure_report_regression_passed": true,
-      "package_regression_tests": 10,
+      "package_regression_tests": 15,
       "archive_benchmark_files": 5,
       "archive_benchmark_input_bytes": 75857344,
       "archive_audit48_wall_ms": 3276,
@@ -161,29 +161,33 @@
       "deployer_explicit_duplicate_browser_gates_after": 0,
       "selection": {
         "deployer": {
-          "directories_visited": 7638,
-          "files_considered": 10964,
-          "files_selected": 10963,
-          "public_files_selected": 4895,
-          "selected_bytes_excluding_this_report": 396020803,
-          "disposable_directory_pruning_enforced": true
+          "directories_visited": 15289,
+          "files_selected": 21346,
+          "public_files_selected": 9985,
+          "selected_bytes_excluding_generated_reports": 498764157,
+          "disposable_directory_pruning_enforced": true,
+          "broad_post_descent_filtering_avoided": true
         },
         "source": {
-          "directories_visited": 3863,
-          "files_considered": 6069,
-          "files_selected": 6068,
+          "directories_visited": 7699,
+          "files_selected": 11361,
           "public_files_selected": 0,
-          "selected_bytes_excluding_this_report": 264740331,
-          "disposable_directory_pruning_enforced": true
+          "selected_bytes_excluding_generated_reports": 326489375,
+          "disposable_directory_pruning_enforced": true,
+          "broad_post_descent_filtering_avoided": true
         }
       }
     },
     "audit48_external_validation": {
-      "interactive_source_pages": 2859,
-      "redirect_source_pages": 890,
+      "source_html_pages": 7563,
+      "interactive_source_pages": 5370,
+      "redirect_source_pages": 2193,
+      "canonical_events": 2088,
+      "english_event_routes": 4232,
+      "french_event_routes": 2116,
       "calendar_tests": 9,
-      "calendar_files": 857,
-      "parsed_calendar_events": 4172,
+      "calendar_files": 2128,
+      "parsed_calendar_events": 10410,
       "intended_cross_engine_scenarios": 24,
       "cross_engine_runtime_checks": 0,
       "live_source_bindings": 200,
@@ -192,27 +196,29 @@
     },
     "translation_governance": {
       "governed_route_records": 61,
-      "high_stakes_draft_routes": 20,
+      "summary_english_detail_routes": 36,
       "static_translation_metrics": {
-        "events": 833,
-        "event_types": 32,
-        "sources": 422,
-        "french_event_routes": 833,
-        "french_event_legacy_alias_routes": 12,
+        "events": 2088,
+        "event_types": 64,
+        "sources": 779,
+        "french_event_routes": 2088,
+        "french_event_legacy_alias_routes": 28,
         "leizu_localized_routes": 40,
         "saul_localized_routes": 4,
-        "teacher_resources": 644,
+        "teacher_resources": 645,
         "teacher_language_counts": {
-          "en-CA": 618,
+          "en-CA": 619,
           "fr-CA": 23,
           "mul": 3
         },
-        "methodology_entries": 1183,
+        "methodology_entries": 1189,
         "governed_route_records": 61,
         "event_source_language_counts": {
-          "und": 796,
-          "fr-CA": 24,
-          "mul": 13
+          "en-CA": 1422,
+          "und": 578,
+          "fr-CA": 62,
+          "mul": 24,
+          "en-US": 2
         },
         "scrape_cadence": "exactly once weekly"
       }
@@ -257,6 +263,7 @@
   ],
   "weekly_workflow_schedules": {
     ".github/workflows/audit-external-links.yml": "17 10 * * 0",
+    ".github/workflows/browser-assurance.yml": "23 7 * * 0",
     ".github/workflows/dependency-health.yml": "37 13 * * 1",
     ".github/workflows/scrape-festivals.yml": "42 9 * * 2",
     ".github/workflows/scrape-polymythcal-protests.yml": "18 8 * * 3",

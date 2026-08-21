@@ -10,6 +10,8 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const {parseSeedWithAddenda} = require('./lib/parse-seed-with-addenda');
+const {generatedAt} = require('./lib/deterministic-timestamp');
 
 const ROOT = process.cwd();
 const OUT = path.join(ROOT, 'hf_export');
@@ -17,7 +19,7 @@ const DATA = path.join(OUT, 'data');
 const REPORTS = path.join(OUT, 'reports');
 const SCHEMAS = path.join(OUT, 'schemas');
 const EVAL = path.join(OUT, 'eval');
-const now = new Date().toISOString();
+const now = generatedAt();
 
 function exists(rel) {
   return fs.existsSync(path.join(ROOT, rel));
@@ -67,8 +69,8 @@ function routeForSource(rel) {
   if (rel === 'polymyth-file-map.txt') return 'https://seminarschools.com/polymyth-file-map.txt';
   return '';
 }
-function rowBase({ id, star_file, title, body, section, source_txt, source_html = '', canonical_status = 'derived_txt', route = '', tags = [], crossrefs = [], record_type = 'entry' }) {
-  const originalBody = String(body || '').trim();
+function rowBase({ id, star_file, title, body, section, source_txt, source_html = '', canonical_status = 'derived_txt', route = '', tags = [], crossrefs = [], record_type = 'entry', preserve_body = false }) {
+  const originalBody = preserve_body ? String(body || '') : String(body || '').trim();
   const cleanBody = sanitizeForHfExport(originalBody);
   return {
     id,
@@ -83,6 +85,7 @@ function rowBase({ id, star_file, title, body, section, source_txt, source_html 
     tags,
     crossrefs,
     record_type,
+    body_redacted: cleanBody !== originalBody,
     source_hash: hash(originalBody),
     exported_at: now,
     embedding_text: [star_file, section, title, cleanBody].filter(Boolean).join('\n\n').slice(0, 120000)
@@ -99,45 +102,44 @@ function firstNonemptyLine(text) {
   return text.split(/\r?\n/).map(x => x.trim()).find(Boolean) || '';
 }
 
-function parseMlSection(sectionKey, rel) {
-  const text = read(rel);
+function parseCanonicalMethodologylist() {
+  const canonicalRel = 'polymyth/methodologylist/index.html';
+  const entries = parseSeedWithAddenda(read(canonicalRel));
+  const seenIds = new Set();
   const rows = [];
-  const chunks = [];
-  const lines = text.split(/\r?\n/);
-  let current = [];
-  const startRe = /^\[[^\]]+\]\s+.+/;
-  for (const line of lines) {
-    if (startRe.test(line) && current.length) {
-      chunks.push(current.join('\n').trim());
-      current = [line];
-    } else {
-      current.push(line);
-    }
-  }
-  if (current.join('').trim()) chunks.push(current.join('\n').trim());
-
-  let i = 0;
-  for (const chunk of chunks) {
-    const first = firstNonemptyLine(chunk);
-    const tagMatch = first.match(/^\[([^\]]+)\]\s+(.+)$/);
-    const title = tagMatch ? tagMatch[2].trim() : first.replace(/^#+\s*/, '').trim();
-    const localTags = tagMatch ? tagMatch[1].split(/[,/ ]+/).filter(Boolean) : [];
-    if (!title || /^#|^===|^Polymyth Methodologylist/.test(title)) continue;
-    i += 1;
+  const counts = {};
+  entries.forEach((entry, index) => {
+    const section = String(entry.s || 'unknown').trim();
+    const title = String(entry.t || '<untitled>').trim();
+    const canonicalId = String(entry.id || '').trim();
+    const id = canonicalId || `ml:${section}:${slugify(title)}:${hash(`${section}\0${title}`).slice(0, 12)}`;
+    if (seenIds.has(id)) throw new Error(`duplicate canonical Methodologylist export id: ${id}`);
+    seenIds.add(id);
+    counts[section] = (counts[section] || 0) + 1;
+    // The canonical body is exported byte-for-byte. Provenance/extension text
+    // remains separately discoverable through the source HTML and tags; it is
+    // never spliced into the canonical rule body or its source hash.
+    const body = String(entry.b || '');
+    const tags = String(entry.tg || '').split(',').map(value => value.trim()).filter(Boolean);
+    const sectionMirror = `polymyth/methodologylist-${section}.txt`;
     rows.push(rowBase({
-      id: `ml:${sectionKey}:${String(i).padStart(4, '0')}:${slugify(title)}`,
+      id,
       star_file: 'ml',
       title,
-      body: chunk,
-      section: sectionKey,
-      source_txt: rel,
-      source_html: `polymyth/methodologylist/${sectionKey}/index.html`,
-      canonical_status: 'derived_txt',
-      tags: ['ml', sectionKey, ...localTags],
-      crossrefs: extractCrossrefs(chunk)
+      body,
+      section,
+      source_txt: exists(sectionMirror) ? sectionMirror : '',
+      source_html: canonicalRel,
+      canonical_status: 'canonical_html',
+      route: canonicalId
+        ? `https://seminarschools.com/polymyth/methodologylist/#${canonicalId}`
+        : `https://seminarschools.com/polymyth/methodologylist/?section=${encodeURIComponent(section)}`,
+      tags: ['ml', section, ...tags],
+      crossrefs: extractCrossrefs(body),
+      preserve_body: true,
     }));
-  }
-  return rows;
+  });
+  return {entries, rows, counts};
 }
 
 function parseSeparatorFile({ star, sectionFallback, rel, htmlRel }) {
@@ -220,13 +222,13 @@ function parseHtmlRoute({ star, rel, title, section = 'route' }) {
 
 function buildStarFileMap() {
   const files = [
-    { star_file: 'ml', name: 'methodologylist', function: 'first-load AI scanner, methodology, citation discipline, anti-TWIST, writing rules, core/coreplus mirrors', source_txt: 'polymyth/methodologylist.txt', source_html: 'polymyth/methodologylist/index.html' },
+    { star_file: 'ml', name: 'methodologylist', function: 'first-load AI scanner, methodology, citation discipline, anti-TWIST, writing rules, and canonical CORE / CORE+ rules', source_txt: 'polymyth/methodologylist.txt', source_html: 'polymyth/methodologylist/index.html' },
     { star_file: 'bb', name: 'bookwormburrows', function: 'dimensional pedagogy game operations substrate', source_txt: 'polymyth/bookwormburrows.txt', source_html: 'polymyth/bookwormburrows/index.html' },
     { star_file: 'mc', name: 'modulecanon', function: 'delivery-agnostic curriculum module substrate', source_txt: 'polymyth/modulecanon.txt', source_html: 'polymyth/modulecanon/index.html' },
     { star_file: 'cc', name: 'campaigncodex', function: 'campaign-level curriculum and game content substrate', source_txt: 'polymyth/campaigncodex.txt', source_html: 'polymyth/campaigncodex/index.html' },
     { star_file: 'aa', name: 'archetype archive', function: 'archetype/archive access route when available', source_txt: '', source_html: 'aa/index.html' },
     { star_file: 'aitr', name: 'AI teacher resources route', function: 'AI/teacher-resource access route when available', source_txt: '', source_html: 'aitr/index.html' },
-    { star_file: 'core', name: 'core/coreplus', function: 'memory-tier behavioral discipline mirrored inside ml*', source_txt: 'polymyth/methodologylist-coreplus.txt', source_html: 'polymyth/methodologylist/coreplus/index.html' }
+    { star_file: 'core', name: 'core/coreplus', function: 'portable CORE Personal Rules plus current CORE+ dispatch and active-handler access', source_txt: 'polymyth/methodologylist-coreplus.txt', source_html: 'polymyth/methodologylist/coreplus/index.html' }
   ];
   return files.filter(f => (f.source_txt && exists(f.source_txt)) || (f.source_html && exists(f.source_html))).map(f => ({
     ...f,
@@ -252,19 +254,13 @@ function main() {
   ensureDir(DATA); ensureDir(REPORTS); ensureDir(SCHEMAS); ensureDir(EVAL);
 
   const allRows = [];
-  const mlRows = [];
-
-  const mlFull = parseWholeDocument({ star: 'ml', rel: 'polymyth/methodologylist.txt', htmlRel: 'polymyth/methodologylist/index.html', title: 'methodologylist full text mirror', section: 'full' });
-  mlRows.push(...mlFull);
-
-  const sectionFiles = fs.readdirSync(path.join(ROOT, 'polymyth'))
-    .filter(name => /^methodologylist-.+\.txt$/.test(name))
-    .sort();
-  for (const name of sectionFiles) {
-    const sectionKey = name.replace(/^methodologylist-/, '').replace(/\.txt$/, '');
-    const rows = parseMlSection(sectionKey, `polymyth/${name}`);
-    mlRows.push(...rows);
-    writeJsonl(`data/ml/sections/${sectionKey}.jsonl`, rows);
+  const canonicalMl = parseCanonicalMethodologylist();
+  const mlRows = canonicalMl.rows;
+  for (const sectionKey of Object.keys(canonicalMl.counts).sort()) {
+    writeJsonl(
+      `data/ml/sections/${sectionKey}.jsonl`,
+      mlRows.filter(row => row.section === sectionKey),
+    );
   }
   writeJsonl('data/ml/methodologylist.jsonl', mlRows);
   allRows.push(...mlRows);
@@ -333,10 +329,10 @@ function main() {
   ].map(jsonLine).join(''));
 
   const counts = allRows.reduce((acc, row) => { acc[row.star_file] = (acc[row.star_file] || 0) + 1; return acc; }, {});
-  const report = `# Meaninglib Hugging Face export report\n\nExported: ${now}\n\nTarget repo: SeminarSchools/meaninglib\n\n## Counts\n\n${Object.entries(counts).sort().map(([k,v]) => `- ${k}: ${v}`).join('\n')}\n\nTotal rows: ${allRows.length}\n\n## Ontology lock\n\nMeaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and related routes are interdependent access routes with local functions. Hugging Face mirrors this structure and does not rename, flatten, or govern it.\n`;
+  const report = `# Meaninglib Hugging Face export report\n\nExported: ${now}\n\nTarget repo: SeminarSchools/meaninglib\n\n## Counts\n\n${Object.entries(counts).sort().map(([k,v]) => `- ${k}: ${v}`).join('\n')}\n\nTotal rows: ${allRows.length}\nCanonical Methodologylist rows: ${mlRows.length}\n\n## Methodologylist sections\n\n${Object.entries(canonicalMl.counts).sort().map(([section, count]) => `- ${section}: ${count}`).join('\n')}\n\n## Ontology lock\n\nMeaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and related routes are interdependent access routes with local functions. Hugging Face mirrors this structure and does not rename, flatten, or govern it.\n`;
   writeText('reports/latest_export_report.md', report);
 
-  const readme = `---\npretty_name: Meaninglib\nprivate: true\ntags:\n- meaninglib\n- polymyth\n- methodologylist\n- seminar-schools\n---\n\n# Meaninglib\n\nPrivate working mirror for the Seminar Schools Meaninglib star-file substrate.\n\n## Source of truth\n\nThe Seminar Schools site/archive remains the source of truth. This Hugging Face dataset is a mirror, search surface, dashboard substrate, and verification layer.\n\n## Ontology\n\nMeaninglib is the mother-category for interdependent star-file access routes. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and related routes keep local function and cross-reference one another. The export preserves this relation instead of treating ml* as a ruler over the others.\n\n## Included first-pass routes\n\n- ml* methodologylist\n- bb* bookwormburrows\n- mc* modulecanon\n- cc* campaigncodex\n- core/coreplus mirrors inside ml*\n- manifest and file-map views\n- available aa*/aitr* route views\n\n## AI Access Pack\n\nGenerate task-specific AI handoff files after export with \`npm run build:ai-access-pack\`.\n\nCurrent handoff files live at:\n\n- \`hf_export/ai_access_pack/MEPHISTODATA_ACTIVATION.md\`\n- \`hf_export/ai_access_pack/latest_access_pack.md\`\n- \`hf_export/ai_access_pack/latest_access_pack.json\`\n\nFor another AI, paste \`MEPHISTODATA_ACTIVATION.md\` first, then paste or retrieve a task-specific \`latest_access_pack.md\`. If this dataset remains private, external AIs need pasted text or authorized access. Public browser access requires the Hugging Face repository or a curated companion Space to be public or protected.\n\n## Privacy stance\n\nPrivate first. Public curated views can be created later after ontology, privacy, and verification checks pass.\n\n## Generated by\n\n\`npm run export:meaninglib-dataset\`\n`;
+  const readme = `---\npretty_name: Meaninglib\nprivate: true\ntags:\n- meaninglib\n- polymyth\n- methodologylist\n- seminar-schools\n---\n\n# Meaninglib\n\nPrivate working mirror for the Seminar Schools Meaninglib star-file substrate.\n\n## Source of truth\n\nThe Seminar Schools site/archive remains the source of truth. This Hugging Face dataset is a mirror, search surface, dashboard substrate, and verification layer.\n\n## Ontology\n\nMeaninglib is the mother-category for interdependent star-file access routes. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and related routes keep local function and cross-reference one another. The export preserves this relation instead of treating ml* as a ruler over the others.\n\n## Included first-pass routes\n\n- ml* methodologylist\n- bb* bookwormburrows\n- mc* modulecanon\n- cc* campaigncodex\n- portable CORE Personal Rules and current CORE+ handler access\n- manifest and file-map views\n- available aa*/aitr* route views\n\n## AI Access Pack\n\nGenerate task-specific AI handoff files after export with \`npm run build:ai-access-pack\`.\n\nCurrent handoff files live at:\n\n- \`hf_export/ai_access_pack/MEPHISTODATA_ACTIVATION.md\`\n- \`hf_export/ai_access_pack/latest_access_pack.md\`\n- \`hf_export/ai_access_pack/latest_access_pack.json\`\n\nFor another AI, paste \`MEPHISTODATA_ACTIVATION.md\` first, then paste or retrieve a task-specific \`latest_access_pack.md\`. If this dataset remains private, external AIs need pasted text or authorized access. Public browser access requires the Hugging Face repository or a curated companion Space to be public or protected.\n\n## Privacy stance\n\nPrivate first. Public curated views can be created later after ontology, privacy, and verification checks pass.\n\n## Generated by\n\n\`npm run export:meaninglib-dataset\`\n`;
   writeText('README.md', readme);
 
   console.log(`Meaninglib export complete: ${allRows.length} rows`);

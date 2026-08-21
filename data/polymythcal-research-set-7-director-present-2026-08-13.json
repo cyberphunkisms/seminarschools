@@ -1,0 +1,1032 @@
+{
+  "schema": "polymythcal-director-present-set7-research-ledger-v1",
+  "generated_at": "2026-08-13T20:08:00-04:00",
+  "source_batch": "manual-polymythcal-director-present-set7-2026-08-13",
+  "research_set": "7-Director-Filmmaker-Present",
+  "record_count": 9,
+  "cross_tagged_existing_ids": [
+    "soulpepper-medusa-talkback-2026-07-08"
+  ],
+  "records": [
+    {
+      "id": "hot-docs-nekai-walks-director-subject-q-and-a-2026-08-14",
+      "identity_key": "4155631c4b1118c9e242",
+      "date": "2026-08-14T19:00:00-04:00",
+      "title": "Nekai Walks — Q&A with director Rico King and film subject Nekai Foster",
+      "type": "screening",
+      "secondary_types": [
+        "creator-present"
+      ],
+      "speaker_or_director": "Hot Docs",
+      "organizer": "Hot Docs",
+      "venue": "Hot Docs Ted Rogers Cinema",
+      "source_url": "https://boxoffice.hotdocs.ca/websales/pages/info.aspx?evtinfo=635512~cf285ddd-dacb-4f18-89b8-1252c6dcffa6",
+      "source_id": "hot-docs",
+      "source_name": "Hot Docs",
+      "description": "Toronto screening followed by an in-person Q&A with director Rico King and film subject Nekai Foster.",
+      "age_band": "Public audience; ticket or registration required",
+      "subjects": [
+        "Media Literacy",
+        "Creator-Present",
+        "director-filmmaker",
+        "film-subject"
+      ],
+      "topics": [
+        "media-literacy",
+        "film",
+        "creator-present"
+      ],
+      "tags": [
+        "Set 7",
+        "creator-present",
+        "film",
+        "q-and-a"
+      ],
+      "calendar_stage": "screening with post-screening discussion",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "exact",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 7 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-director-present-set7-2026-08-13:hot-docs-nekai-walks-director-subject-q-and-a-2026-08-14",
+      "research_source_ref": "7-Director-Filmmaker-Present",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-director-present-set7-2026-08-13",
+      "research_set": "7-Director-Filmmaker-Present",
+      "presence_categories": [
+        "director-filmmaker",
+        "film-subject"
+      ],
+      "participation_unit": "audience member",
+      "access_route": "ticketed or registered public screening",
+      "registration_url": "https://boxoffice.hotdocs.ca/websales/pages/info.aspx?evtinfo=635512~cf285ddd-dacb-4f18-89b8-1252c6dcffa6",
+      "_upsert_batches": [
+        "manual-polymythcal-director-present-set7-2026-08-13"
+      ],
+      "entry_family": "creator-present",
+      "_src": "manual-polymythcal-director-present-set7-2026-08-13",
+      "education_levels": [
+        "open",
+        "professional"
+      ],
+      "interaction_format": "post-screening Q&A",
+      "event_format": "in-person",
+      "presence_mode": "in-person",
+      "talkback_confirmed": true,
+      "talkback_status": "confirmed",
+      "director_attendance_status": "confirmed",
+      "presence_claims": [
+        {
+          "person": "Rico King",
+          "role": "director",
+          "category": "director-filmmaker",
+          "status": "confirmed",
+          "mode": "in-person",
+          "scope": "discussion",
+          "evidence": "Official event page explicitly announces a Q&A with director Rico King."
+        },
+        {
+          "person": "Nekai Foster",
+          "role": "film subject",
+          "category": "film-subject",
+          "status": "confirmed",
+          "mode": "in-person",
+          "scope": "discussion",
+          "evidence": "Official event page explicitly announces a Q&A with film subject Nekai Foster."
+        }
+      ],
+      "participant_presence": [
+        "Rico King — director (confirmed, in-person, discussion)",
+        "Nekai Foster — film subject (confirmed, in-person, discussion)"
+      ]
+    },
+    {
+      "id": "hot-docs-green-valley-director-q-and-a-2026-08-15",
+      "identity_key": "e5e1758aa5e7a04cf66f",
+      "date": "2026-08-15T15:30:00-04:00",
+      "title": "Green Valley — Q&A with director Morgan Tams",
+      "type": "screening",
+      "secondary_types": [
+        "creator-present"
+      ],
+      "speaker_or_director": "Hot Docs",
+      "organizer": "Hot Docs",
+      "venue": "Hot Docs Ted Rogers Cinema",
+      "source_url": "https://boxoffice.hotdocs.ca/websales/pages/info.aspx?evtinfo=637211~cf285ddd-dacb-4f18-89b8-1252c6dcffa6",
+      "source_id": "hot-docs",
+      "source_name": "Hot Docs",
+      "description": "Toronto screening followed by an in-person Q&A with director Morgan Tams.",
+      "age_band": "Public audience; ticket or registration required",
+      "subjects": [
+        "Media Literacy",
+        "Creator-Present",
+        "director-filmmaker"
+      ],
+      "topics": [
+        "media-literacy",
+        "film",
+        "creator-present"
+      ],
+      "tags": [
+        "Set 7",
+        "creator-present",
+        "film",
+        "q-and-a"
+      ],
+      "calendar_stage": "screening with post-screening discussion",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "exact",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 7 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-director-present-set7-2026-08-13:hot-docs-green-valley-director-q-and-a-2026-08-15",
+      "research_source_ref": "7-Director-Filmmaker-Present",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-director-present-set7-2026-08-13",
+      "research_set": "7-Director-Filmmaker-Present",
+      "presence_categories": [
+        "director-filmmaker"
+      ],
+      "participation_unit": "audience member",
+      "access_route": "ticketed or registered public screening",
+      "registration_url": "https://boxoffice.hotdocs.ca/websales/pages/info.aspx?evtinfo=637211~cf285ddd-dacb-4f18-89b8-1252c6dcffa6",
+      "_upsert_batches": [
+        "manual-polymythcal-director-present-set7-2026-08-13"
+      ],
+      "entry_family": "creator-present",
+      "_src": "manual-polymythcal-director-present-set7-2026-08-13",
+      "education_levels": [
+        "open",
+        "professional"
+      ],
+      "interaction_format": "post-screening Q&A",
+      "event_format": "in-person",
+      "presence_mode": "in-person",
+      "talkback_confirmed": true,
+      "talkback_status": "confirmed",
+      "director_attendance_status": "confirmed",
+      "presence_claims": [
+        {
+          "person": "Morgan Tams",
+          "role": "director",
+          "category": "director-filmmaker",
+          "status": "confirmed",
+          "mode": "in-person",
+          "scope": "discussion",
+          "evidence": "Official event page explicitly announces a Q&A with director Morgan Tams."
+        }
+      ],
+      "participant_presence": [
+        "Morgan Tams — director (confirmed, in-person, discussion)"
+      ]
+    },
+    {
+      "id": "hot-docs-wild-inside-director-virtual-q-and-a-2026-08-16",
+      "identity_key": "54ab6a9c452fd66a4eb6",
+      "date": "2026-08-16T15:45:00-04:00",
+      "title": "Wild Inside — virtual Q&A with director Penny Lane",
+      "type": "screening",
+      "secondary_types": [
+        "creator-present"
+      ],
+      "speaker_or_director": "Hot Docs",
+      "organizer": "Hot Docs",
+      "venue": "Hot Docs Ted Rogers Cinema",
+      "source_url": "https://boxoffice.hotdocs.ca/websales/pages/info.aspx?evtinfo=635533~cf285ddd-dacb-4f18-89b8-1252c6dcffa6",
+      "source_id": "hot-docs",
+      "source_name": "Hot Docs",
+      "description": "In-person Toronto screening followed by a virtual Q&A with director Penny Lane.",
+      "age_band": "Public audience; ticket or registration required",
+      "subjects": [
+        "Media Literacy",
+        "Creator-Present",
+        "director-filmmaker"
+      ],
+      "topics": [
+        "media-literacy",
+        "film",
+        "creator-present"
+      ],
+      "tags": [
+        "Set 7",
+        "creator-present",
+        "film",
+        "q-and-a"
+      ],
+      "calendar_stage": "screening with post-screening discussion",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "exact",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 7 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-director-present-set7-2026-08-13:hot-docs-wild-inside-director-virtual-q-and-a-2026-08-16",
+      "research_source_ref": "7-Director-Filmmaker-Present",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-director-present-set7-2026-08-13",
+      "research_set": "7-Director-Filmmaker-Present",
+      "presence_categories": [
+        "director-filmmaker"
+      ],
+      "participation_unit": "audience member",
+      "access_route": "ticketed or registered public screening",
+      "registration_url": "https://boxoffice.hotdocs.ca/websales/pages/info.aspx?evtinfo=635533~cf285ddd-dacb-4f18-89b8-1252c6dcffa6",
+      "_upsert_batches": [
+        "manual-polymythcal-director-present-set7-2026-08-13"
+      ],
+      "entry_family": "creator-present",
+      "_src": "manual-polymythcal-director-present-set7-2026-08-13",
+      "education_levels": [
+        "open",
+        "professional"
+      ],
+      "interaction_format": "post-screening Q&A",
+      "event_format": "hybrid",
+      "presence_mode": "remote",
+      "talkback_confirmed": true,
+      "talkback_status": "confirmed",
+      "director_attendance_status": "confirmed-remote",
+      "presence_claims": [
+        {
+          "person": "Penny Lane",
+          "role": "director",
+          "category": "director-filmmaker",
+          "status": "confirmed",
+          "mode": "remote",
+          "scope": "discussion",
+          "evidence": "Official event page explicitly announces a virtual Q&A with director Penny Lane."
+        }
+      ],
+      "participant_presence": [
+        "Penny Lane — director (confirmed, remote, discussion)"
+      ]
+    },
+    {
+      "id": "hot-docs-antidiva-carole-pope-director-q-and-a-2026-08-16",
+      "identity_key": "6cdeccf80fdc496638be",
+      "date": "2026-08-16T19:00:00-04:00",
+      "title": "Antidiva: The Carole Pope Confessions — Q&A with director Michelle Mama",
+      "type": "screening",
+      "secondary_types": [
+        "creator-present"
+      ],
+      "speaker_or_director": "Hot Docs",
+      "organizer": "Hot Docs",
+      "venue": "Hot Docs Ted Rogers Cinema",
+      "source_url": "https://boxoffice.hotdocs.ca/websales/pages/info.aspx?epguid=a2104450-7e47-4369-a17d-c247570c3939&evtinfo=637214~cf285ddd-dacb-4f18-89b8-1252c6dcffa6&mdy=8%2F16%2F2026",
+      "source_id": "hot-docs",
+      "source_name": "Hot Docs",
+      "description": "Toronto screening followed by an in-person Q&A with director Michelle Mama.",
+      "age_band": "Public audience; ticket or registration required",
+      "subjects": [
+        "Media Literacy",
+        "Creator-Present",
+        "director-filmmaker"
+      ],
+      "topics": [
+        "media-literacy",
+        "film",
+        "creator-present"
+      ],
+      "tags": [
+        "Set 7",
+        "creator-present",
+        "film",
+        "q-and-a"
+      ],
+      "calendar_stage": "screening with post-screening discussion",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "exact",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 7 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-director-present-set7-2026-08-13:hot-docs-antidiva-carole-pope-director-q-and-a-2026-08-16",
+      "research_source_ref": "7-Director-Filmmaker-Present",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-director-present-set7-2026-08-13",
+      "research_set": "7-Director-Filmmaker-Present",
+      "presence_categories": [
+        "director-filmmaker"
+      ],
+      "participation_unit": "audience member",
+      "access_route": "ticketed or registered public screening",
+      "registration_url": "https://boxoffice.hotdocs.ca/websales/pages/info.aspx?epguid=a2104450-7e47-4369-a17d-c247570c3939&evtinfo=637214~cf285ddd-dacb-4f18-89b8-1252c6dcffa6&mdy=8%2F16%2F2026",
+      "_upsert_batches": [
+        "manual-polymythcal-director-present-set7-2026-08-13"
+      ],
+      "entry_family": "creator-present",
+      "_src": "manual-polymythcal-director-present-set7-2026-08-13",
+      "education_levels": [
+        "open",
+        "professional"
+      ],
+      "interaction_format": "post-screening Q&A",
+      "event_format": "in-person",
+      "presence_mode": "in-person",
+      "talkback_confirmed": true,
+      "talkback_status": "confirmed",
+      "director_attendance_status": "confirmed",
+      "presence_claims": [
+        {
+          "person": "Michelle Mama",
+          "role": "director",
+          "category": "director-filmmaker",
+          "status": "confirmed",
+          "mode": "in-person",
+          "scope": "discussion",
+          "evidence": "Official event page explicitly announces a Q&A with director Michelle Mama."
+        }
+      ],
+      "participant_presence": [
+        "Michelle Mama — director (confirmed, in-person, discussion)"
+      ]
+    },
+    {
+      "id": "revue-withdrawal-director-q-and-a-2026-08-19",
+      "identity_key": "0eaba4e12d9236a082e5",
+      "date": "2026-08-19T21:30:00-04:00",
+      "title": "Withdrawal — Q&A with writer-director-editor Aaron Strand",
+      "type": "screening",
+      "secondary_types": [
+        "creator-present"
+      ],
+      "speaker_or_director": "The Revue Cinema",
+      "organizer": "The Revue Cinema",
+      "venue": "The Revue Cinema",
+      "source_url": "https://revuecinema.ca/films/revue-event-withdrawal-canadian-theatrical-premiere-with-director-in-attendance/",
+      "source_id": "the-revue-cinema",
+      "source_name": "The Revue Cinema",
+      "description": "Canadian theatrical-premiere screening followed by a Q&A with writer, director, and editor Aaron Strand, moderated by Felicia Maroni.",
+      "age_band": "Public audience; ticket or registration required",
+      "subjects": [
+        "Media Literacy",
+        "Creator-Present",
+        "director-filmmaker",
+        "host-moderator"
+      ],
+      "topics": [
+        "media-literacy",
+        "film",
+        "creator-present"
+      ],
+      "tags": [
+        "Set 7",
+        "creator-present",
+        "film",
+        "q-and-a"
+      ],
+      "calendar_stage": "screening with post-screening discussion",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "exact",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 7 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-director-present-set7-2026-08-13:revue-withdrawal-director-q-and-a-2026-08-19",
+      "research_source_ref": "7-Director-Filmmaker-Present",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-director-present-set7-2026-08-13",
+      "research_set": "7-Director-Filmmaker-Present",
+      "presence_categories": [
+        "director-filmmaker",
+        "host-moderator"
+      ],
+      "participation_unit": "audience member",
+      "access_route": "ticketed or registered public screening",
+      "registration_url": "https://revuecinema.ca/films/revue-event-withdrawal-canadian-theatrical-premiere-with-director-in-attendance/",
+      "_upsert_batches": [
+        "manual-polymythcal-director-present-set7-2026-08-13"
+      ],
+      "entry_family": "creator-present",
+      "_src": "manual-polymythcal-director-present-set7-2026-08-13",
+      "education_levels": [
+        "open",
+        "professional"
+      ],
+      "interaction_format": "post-screening Q&A",
+      "event_format": "in-person",
+      "presence_mode": "in-person",
+      "talkback_confirmed": true,
+      "talkback_status": "confirmed",
+      "director_attendance_status": "confirmed",
+      "presence_claims": [
+        {
+          "person": "Aaron Strand",
+          "role": "writer, director, and editor",
+          "category": "director-filmmaker",
+          "status": "confirmed",
+          "mode": "in-person",
+          "scope": "discussion",
+          "evidence": "Official Revue page states director in attendance and names the Q&A participant."
+        },
+        {
+          "person": "Felicia Maroni",
+          "role": "moderator",
+          "category": "host-moderator",
+          "status": "confirmed",
+          "mode": "in-person",
+          "scope": "discussion",
+          "evidence": "Official Revue page names the moderator."
+        }
+      ],
+      "participant_presence": [
+        "Aaron Strand — writer, director, and editor (confirmed, in-person, discussion)",
+        "Felicia Maroni — moderator (confirmed, in-person, discussion)"
+      ]
+    },
+    {
+      "id": "revue-leonora-morning-light-directors-q-and-a-2026-09-14",
+      "identity_key": "b11e9e6fecf3471bcc04",
+      "date": "2026-09-14T18:30:00-04:00",
+      "title": "Leonora in the Morning Light — Q&A with filmmakers Lena Vurma and Thor Klein",
+      "type": "screening",
+      "secondary_types": [
+        "creator-present"
+      ],
+      "speaker_or_director": "The Revue Cinema",
+      "organizer": "The Revue Cinema",
+      "venue": "The Revue Cinema",
+      "source_url": "https://revuecinema.ca/films/revue-event-leonora-in-the-morning-light-canadian-theatrical-premiere/",
+      "source_id": "the-revue-cinema",
+      "source_name": "The Revue Cinema",
+      "description": "Canadian theatrical-premiere screening followed by a Q&A with filmmakers and directors Lena Vurma and Thor Klein.",
+      "age_band": "Public audience; ticket or registration required",
+      "subjects": [
+        "Media Literacy",
+        "Creator-Present",
+        "director-filmmaker"
+      ],
+      "topics": [
+        "media-literacy",
+        "film",
+        "creator-present"
+      ],
+      "tags": [
+        "Set 7",
+        "creator-present",
+        "film",
+        "q-and-a"
+      ],
+      "calendar_stage": "screening with post-screening discussion",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "exact",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 7 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-director-present-set7-2026-08-13:revue-leonora-morning-light-directors-q-and-a-2026-09-14",
+      "research_source_ref": "7-Director-Filmmaker-Present",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-director-present-set7-2026-08-13",
+      "research_set": "7-Director-Filmmaker-Present",
+      "presence_categories": [
+        "director-filmmaker"
+      ],
+      "participation_unit": "audience member",
+      "access_route": "ticketed or registered public screening",
+      "registration_url": "https://revuecinema.ca/films/revue-event-leonora-in-the-morning-light-canadian-theatrical-premiere/",
+      "_upsert_batches": [
+        "manual-polymythcal-director-present-set7-2026-08-13"
+      ],
+      "entry_family": "creator-present",
+      "_src": "manual-polymythcal-director-present-set7-2026-08-13",
+      "education_levels": [
+        "open",
+        "professional"
+      ],
+      "interaction_format": "post-screening Q&A",
+      "event_format": "in-person",
+      "presence_mode": "in-person",
+      "talkback_confirmed": true,
+      "talkback_status": "confirmed",
+      "director_attendance_status": "confirmed",
+      "presence_claims": [
+        {
+          "person": "Lena Vurma",
+          "role": "filmmaker and director",
+          "category": "director-filmmaker",
+          "status": "confirmed",
+          "mode": "in-person",
+          "scope": "discussion",
+          "evidence": "Official Revue page explicitly announces the filmmaker Q&A."
+        },
+        {
+          "person": "Thor Klein",
+          "role": "filmmaker and director",
+          "category": "director-filmmaker",
+          "status": "confirmed",
+          "mode": "in-person",
+          "scope": "discussion",
+          "evidence": "Official Revue page explicitly announces the filmmaker Q&A."
+        }
+      ],
+      "participant_presence": [
+        "Lena Vurma — filmmaker and director (confirmed, in-person, discussion)",
+        "Thor Klein — filmmaker and director (confirmed, in-person, discussion)"
+      ]
+    },
+    {
+      "id": "revue-cash-cow-director-producer-q-and-a-2026-09-15",
+      "identity_key": "8c6ee28cd3b5a1565d15",
+      "date": "2026-09-15T21:30:00-04:00",
+      "title": "Cash Cow — Q&A with director-star Matt Barats and producer-editor Whit Conway",
+      "type": "screening",
+      "secondary_types": [
+        "creator-present"
+      ],
+      "speaker_or_director": "The Revue Cinema",
+      "organizer": "The Revue Cinema",
+      "venue": "The Revue Cinema",
+      "source_url": "https://revuecinema.ca/films/stompbox-cash-cow-qa-with-director-star-matt-barats/",
+      "source_id": "the-revue-cinema",
+      "source_name": "The Revue Cinema",
+      "description": "Screening followed by an in-person Q&A with director and star Matt Barats and producer and editor Whit Conway.",
+      "age_band": "Public audience; ticket or registration required",
+      "subjects": [
+        "Media Literacy",
+        "Creator-Present",
+        "director-filmmaker"
+      ],
+      "topics": [
+        "media-literacy",
+        "film",
+        "creator-present"
+      ],
+      "tags": [
+        "Set 7",
+        "creator-present",
+        "film",
+        "q-and-a"
+      ],
+      "calendar_stage": "screening with post-screening discussion",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "exact",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 7 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-director-present-set7-2026-08-13:revue-cash-cow-director-producer-q-and-a-2026-09-15",
+      "research_source_ref": "7-Director-Filmmaker-Present",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-director-present-set7-2026-08-13",
+      "research_set": "7-Director-Filmmaker-Present",
+      "presence_categories": [
+        "director-filmmaker"
+      ],
+      "participation_unit": "audience member",
+      "access_route": "ticketed or registered public screening",
+      "registration_url": "https://revuecinema.ca/films/stompbox-cash-cow-qa-with-director-star-matt-barats/",
+      "_upsert_batches": [
+        "manual-polymythcal-director-present-set7-2026-08-13"
+      ],
+      "entry_family": "creator-present",
+      "_src": "manual-polymythcal-director-present-set7-2026-08-13",
+      "education_levels": [
+        "open",
+        "professional"
+      ],
+      "interaction_format": "post-screening Q&A",
+      "event_format": "in-person",
+      "presence_mode": "in-person",
+      "talkback_confirmed": true,
+      "talkback_status": "confirmed",
+      "director_attendance_status": "confirmed",
+      "presence_claims": [
+        {
+          "person": "Matt Barats",
+          "role": "director and performer",
+          "category": "director-filmmaker",
+          "status": "confirmed",
+          "mode": "in-person",
+          "scope": "discussion",
+          "evidence": "Official Revue page explicitly names the director-star as attending the Q&A."
+        },
+        {
+          "person": "Whit Conway",
+          "role": "producer and editor",
+          "category": "director-filmmaker",
+          "status": "confirmed",
+          "mode": "in-person",
+          "scope": "discussion",
+          "evidence": "Official Revue page explicitly names the producer-editor as attending the Q&A."
+        }
+      ],
+      "participant_presence": [
+        "Matt Barats — director and performer (confirmed, in-person, discussion)",
+        "Whit Conway — producer and editor (confirmed, in-person, discussion)"
+      ]
+    },
+    {
+      "id": "paradise-lunar-sway-director-cast-q-and-a-2026-08-28",
+      "identity_key": "bd62a5ab77467a7e2b9f",
+      "date": "2026-08-28T20:30:00-04:00",
+      "title": "Lunar Sway — Q&A with director Nick Butler, Liza Weil, and Grace Glowicki",
+      "type": "screening",
+      "secondary_types": [
+        "creator-present"
+      ],
+      "speaker_or_director": "Lunar Sway film team",
+      "organizer": "Lunar Sway film team",
+      "venue": "Paradise Theatre",
+      "source_url": "https://www.instagram.com/p/Dbl9x_mlY1_/",
+      "source_id": "lunar-sway-official",
+      "source_name": "Lunar Sway film team",
+      "description": "Advance Toronto screening followed by a Q&A with director Nick Butler and performers Liza Weil and Grace Glowicki.",
+      "age_band": "Public audience; ticket or registration required",
+      "subjects": [
+        "Media Literacy",
+        "Creator-Present",
+        "director-filmmaker",
+        "cast-crew"
+      ],
+      "topics": [
+        "media-literacy",
+        "film",
+        "creator-present"
+      ],
+      "tags": [
+        "Set 7",
+        "creator-present",
+        "film",
+        "q-and-a"
+      ],
+      "calendar_stage": "screening with post-screening discussion",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "exact",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Organizer-controlled film announcement reviewed alongside Paradise Theatre's official coming-soon schedule on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-director-present-set7-2026-08-13:paradise-lunar-sway-director-cast-q-and-a-2026-08-28",
+      "research_source_ref": "7-Director-Filmmaker-Present",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-director-present-set7-2026-08-13",
+      "research_set": "7-Director-Filmmaker-Present",
+      "presence_categories": [
+        "director-filmmaker",
+        "cast-crew"
+      ],
+      "participation_unit": "audience member",
+      "access_route": "ticketed or registered public screening",
+      "registration_url": "https://www.instagram.com/p/Dbl9x_mlY1_/",
+      "_upsert_batches": [
+        "manual-polymythcal-director-present-set7-2026-08-13"
+      ],
+      "entry_family": "creator-present",
+      "_src": "manual-polymythcal-director-present-set7-2026-08-13",
+      "education_levels": [
+        "open",
+        "professional"
+      ],
+      "interaction_format": "post-screening Q&A",
+      "event_format": "in-person",
+      "presence_mode": "in-person",
+      "talkback_confirmed": true,
+      "talkback_status": "confirmed",
+      "director_attendance_status": "confirmed",
+      "presence_claims": [
+        {
+          "person": "Nick Butler",
+          "role": "director",
+          "category": "director-filmmaker",
+          "status": "confirmed",
+          "mode": "in-person",
+          "scope": "discussion",
+          "evidence": "Organizer-controlled film announcement names Nick Butler for the August 28 Q&A."
+        },
+        {
+          "person": "Liza Weil",
+          "role": "performer",
+          "category": "cast-crew",
+          "status": "confirmed",
+          "mode": "in-person",
+          "scope": "discussion",
+          "evidence": "Organizer-controlled film announcement names Liza Weil for the August 28 Q&A."
+        },
+        {
+          "person": "Grace Glowicki",
+          "role": "performer",
+          "category": "cast-crew",
+          "status": "confirmed",
+          "mode": "in-person",
+          "scope": "discussion",
+          "evidence": "Organizer-controlled film announcement names Grace Glowicki for the August 28 Q&A."
+        }
+      ],
+      "participant_presence": [
+        "Nick Butler — director (confirmed, in-person, discussion)",
+        "Liza Weil — performer (confirmed, in-person, discussion)",
+        "Grace Glowicki — performer (confirmed, in-person, discussion)"
+      ]
+    },
+    {
+      "id": "hot-docs-bootstraps-filmmaker-special-guest-q-and-a-2026-08-22",
+      "identity_key": "386af0d2a05f200d0d2e",
+      "date": "2026-08-22T18:00:00-04:00",
+      "title": "Bootstraps — Q&A with filmmakers and special guests",
+      "type": "screening",
+      "secondary_types": [
+        "creator-present"
+      ],
+      "speaker_or_director": "Hot Docs / Basic Income Earth Network Congress",
+      "organizer": "Hot Docs / Basic Income Earth Network Congress",
+      "venue": "Hot Docs Ted Rogers Cinema",
+      "source_url": "https://boxoffice.hotdocs.ca/websales/pages/info.aspx?epguid=a2104450-7e47-4369-a17d-c247570c3939&evtinfo=645918~cf285ddd-dacb-4f18-89b8-1252c6dcffa6&mdy=8%2F22%2F2026",
+      "source_id": "hot-docs-basic-income-earth-network-congress",
+      "source_name": "Hot Docs / Basic Income Earth Network Congress",
+      "description": "Documentary screening and closing reception followed by a Q&A with filmmakers and special guests. The page credits director Deia Schlosberg but does not confirm that she will attend.",
+      "age_band": "Public audience; ticket or registration required",
+      "subjects": [
+        "Media Literacy",
+        "Creator-Present",
+        "director-filmmaker",
+        "identity-pending"
+      ],
+      "topics": [
+        "media-literacy",
+        "film",
+        "creator-present"
+      ],
+      "tags": [
+        "Set 7",
+        "creator-present",
+        "film",
+        "q-and-a"
+      ],
+      "calendar_stage": "screening with post-screening discussion",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "exact",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 7 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-director-present-set7-2026-08-13:hot-docs-bootstraps-filmmaker-special-guest-q-and-a-2026-08-22",
+      "research_source_ref": "7-Director-Filmmaker-Present",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-director-present-set7-2026-08-13",
+      "research_set": "7-Director-Filmmaker-Present",
+      "presence_categories": [
+        "director-filmmaker",
+        "identity-pending"
+      ],
+      "participation_unit": "audience member",
+      "access_route": "ticketed or registered public screening",
+      "registration_url": "https://boxoffice.hotdocs.ca/websales/pages/info.aspx?epguid=a2104450-7e47-4369-a17d-c247570c3939&evtinfo=645918~cf285ddd-dacb-4f18-89b8-1252c6dcffa6&mdy=8%2F22%2F2026",
+      "_upsert_batches": [
+        "manual-polymythcal-director-present-set7-2026-08-13"
+      ],
+      "entry_family": "creator-present",
+      "_src": "manual-polymythcal-director-present-set7-2026-08-13",
+      "education_levels": [
+        "open",
+        "professional"
+      ],
+      "interaction_format": "post-screening Q&A",
+      "event_format": "in-person",
+      "presence_mode": "in-person",
+      "talkback_confirmed": true,
+      "talkback_status": "confirmed",
+      "director_attendance_status": "unconfirmed",
+      "presence_claims": [
+        {
+          "person": "Filmmakers and special guests",
+          "role": "Q&A participants",
+          "category": "director-filmmaker",
+          "status": "identity-unannounced",
+          "mode": "in-person",
+          "scope": "discussion",
+          "evidence": "Official event page confirms filmmakers and special guests but does not name them."
+        },
+        {
+          "person": "Deia Schlosberg",
+          "role": "director",
+          "category": "director-filmmaker",
+          "status": "attendance-unconfirmed",
+          "mode": "unknown",
+          "scope": "discussion",
+          "evidence": "Official page confirms the directing credit, not attendance."
+        }
+      ],
+      "participant_presence": [
+        "Filmmakers and special guests — Q&A participants (identity-unannounced, in-person, discussion)",
+        "Deia Schlosberg — director (attendance-unconfirmed, unknown, discussion)"
+      ]
+    }
+  ],
+  "exclusions": [
+    {
+      "title": "Everyone Is Lying to You for Money — Hot Docs, August 15, 2026",
+      "reason": "The current official event page does not explicitly confirm a Q&A or creator attendance; social snippets were not promoted over the occurrence page."
+    },
+    {
+      "title": "Stale TIFF event and legacy programme pages",
+      "reason": "Search results surfaced older editions under live URLs. They were excluded rather than misdated as 2026 occurrences."
+    },
+    {
+      "title": "General film credits without attendance language",
+      "reason": "A director, writer, producer, or cast credit proves role only and never proves presence at a screening or discussion."
+    },
+    {
+      "title": "Broad festival calendars without occurrence-level participants",
+      "reason": "Retained as source watches for later programme releases; no generic festival span was converted into a director-present claim."
+    }
+  ],
+  "notes": [
+    "Director and filmmaker attendance is attached to a dated occurrence, not inferred from a creator credit.",
+    "In-person, remote, mixed, and identity-unannounced participation remain distinct.",
+    "A confirmed Q&A survives even when the exact attending filmmaker is not named.",
+    "Official occurrence pages outrank broad calendars; stale legacy pages remain exclusions rather than current events."
+  ]
+}

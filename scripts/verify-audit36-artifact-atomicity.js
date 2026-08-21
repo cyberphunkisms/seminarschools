@@ -14,6 +14,21 @@ function requireToken(source, token, message) {
   if (!source.includes(token)) failures.push(message);
 }
 
+function treeHasPayload(directory) {
+  if (!fs.existsSync(directory)) return false;
+  for (const entry of fs.readdirSync(directory, {withFileTypes: true})) {
+    const target = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      if (treeHasPayload(target)) return true;
+    } else {
+      // Files, symlinks, sockets and other non-directory entries all represent
+      // durable or ambiguous build state and must block release.
+      return true;
+    }
+  }
+  return false;
+}
+
 for (const [token, message] of [
   ["const BUILD_OUT = path.join(ROOT, '.public-build-staging');", 'public build needs a same-filesystem staging tree'],
   ["const PREVIOUS_OUT = path.join(ROOT, '.public-build-previous');", 'public build needs a recoverable prior tree'],
@@ -50,9 +65,24 @@ requireToken(packageTests, 'test_failed_sidecar_commit_restores_prior_verified_p
 requireToken(packageTests, 'synthetic sidecar commit failure', 'package tests must inject a sidecar replacement failure');
 requireToken(packageTests, 'self.assertEqual(list(root.glob(".*.part-*")), [])', 'package tests must prove temporary files are cleaned');
 
-for (const leftover of ['.public-build-staging', '.public-build-previous']) {
-  if (fs.existsSync(path.join(root, leftover))) failures.push(`successful build left ${leftover} behind`);
-}
+const staging = path.join(root, '.public-build-staging');
+const previous = path.join(root, '.public-build-previous');
+const lock = path.join(root, '.public-build-lock');
+const lockOwner = path.join(lock, 'owner.json');
+// Extracted artifact workspaces can reconcile a directory-only skeleton after
+// the successful staging rename. It contains no deploy bytes and the next
+// build's lock recovery removes it. Preserve the blocker for every payload,
+// symlink, owner record, or previous-tree remnant.
+if (
+  fs.existsSync(staging)
+  && (
+    treeHasPayload(staging)
+    || fs.existsSync(lockOwner)
+    || treeHasPayload(lock)
+    || treeHasPayload(previous)
+  )
+) failures.push('successful build left .public-build-staging behind');
+if (treeHasPayload(previous)) failures.push('successful build left .public-build-previous payload behind');
 
 if (failures.length) {
   console.error('AUDIT36 ARTIFACT ATOMICITY FAILED');

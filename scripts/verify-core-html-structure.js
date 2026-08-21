@@ -6,10 +6,19 @@ const ROOT = path.resolve(__dirname, '..');
 const TARGETS = [
   'aa/index.html',
   'leizu/index.html',
+  'leizu/fr/index.html',
+  'leizu/fa/index.html',
+  'leizu/zh-hans/index.html',
+  'leizu/zh-hant/index.html',
   'leizu/intake/index.html',
   'leizu/teach/index.html',
   'polymyth/campaigncodex/index.html',
-  'polymyth/methodologylist/index.html'
+  'polymyth/methodologylist/index.html',
+  'public/leizu/index.html',
+  'public/leizu/fr/index.html',
+  'public/leizu/fa/index.html',
+  'public/leizu/zh-hans/index.html',
+  'public/leizu/zh-hant/index.html'
 ];
 const VOID = new Set('area base br col embed hr img input link meta param source track wbr'.split(' '));
 const OPTIONAL_CLOSE = {

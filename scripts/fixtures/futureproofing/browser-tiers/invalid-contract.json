@@ -1,0 +1,9 @@
+{
+  "schema": "seminar-schools-browser-test-tiers-v1",
+  "contract_id": "FP-08",
+  "tiers": {
+    "changed": { "selection": "one-homepage-only" },
+    "family": { "selection": "sample-some-route-types" },
+    "full": { "selection": "sample-pages", "full_page": false, "shard_count": 1 }
+  }
+}

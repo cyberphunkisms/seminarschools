@@ -11,6 +11,7 @@ from datetime import date, datetime, time, timedelta, timezone
 from email.utils import format_datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from geometry_asset_version import geometry_asset_version
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'polymythseminars/events.json'
@@ -22,7 +23,7 @@ RELEASE_DOC = json.loads(RELEASE.read_text(encoding='utf-8'))
 ASSET_VERSION = str(RELEASE_DOC.get('polymythcal_asset_version') or '')
 if not re.fullmatch(r'[0-9]{8}-[a-z0-9-]+', ASSET_VERSION):
     raise SystemExit('RELEASE_MANIFEST.json has no valid polymythcal_asset_version')
-GEOMETRY_VERSION = '20260806-front-facing-geometry'
+GEOMETRY_VERSION = geometry_asset_version(ROOT)
 BUILD_OUTPUT_MTIME = None
 if os.environ.get('SS_BUILD_OUTPUT_MTIME'):
     try:
@@ -53,6 +54,14 @@ def cats(event) -> set[str]:
 ARTS_TEXT_RE = re.compile(
     r'\b(?:art|arts|artist|artists|artistic|artwork|artworks|film|cinema|music|'
     r'musical|theatre|theater|festival|exhibition|gallery)\b'
+)
+
+CIVIC_TEXT_RE = re.compile(
+    r'\b(?:civic|protest|rally|solidarity|demonstration|vigil)\b|'
+    r'\bcommunity action\b'
+)
+CIVIC_ACTION_TITLE_RE = re.compile(
+    r'\b(?:trans|dyke|climate justice|solidarity|protest)\s+march\b'
 )
 
 
@@ -89,7 +98,8 @@ FOCUSES = {
         'Actions civiques et fiches communautaires',
         lambda event: event.get('record_kind') == 'civic-action'
         or bool(cats(event) & {'protest', 'community', 'demonstration', 'rally', 'march', 'vigil'})
-        or bool(re.search(r'civic|protest|rally|march|solidarity|community action', text(event))),
+        or bool(CIVIC_ACTION_TITLE_RE.search(str(event.get('title') or '').lower()))
+        or bool(CIVIC_TEXT_RE.search(text(event))),
     ),
     'opportunities': (
         'Applications, calls, competitions, fellowships, and funding',
@@ -213,6 +223,11 @@ def event_time_lines(event) -> list[str]:
         lines = ['DTSTART:' + start.astimezone(timezone.utc).strftime('%Y%m%dT%H%M%SZ')]
         end = parse_datetime(event.get('end_date'))
         if end:
+            if end <= start:
+                event_id = event.get('id') or event.get('identity_key') or '<unknown>'
+                raise ValueError(
+                    f'{event_id}: exact calendar end must be later than its start'
+                )
             lines.append('DTEND:' + end.astimezone(timezone.utc).strftime('%Y%m%dT%H%M%SZ'))
         return lines
 
@@ -337,7 +352,7 @@ def build_subscribe_page(manifest) -> str:
             f'<a type="text/calendar" href="{html.escape(feed["ics"], quote=True)}">ICS</a>'
             '</span></li>'
         )
-    return f'''<!doctype html><html lang="en-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Polymythcal subscriptions · Abonnements Polymythcal</title><meta property="og:type" content="website"><meta property="og:url" content="https://seminarschools.com/polymythseminars/subscribe/"><meta property="og:title" content="Polymythcal subscriptions · Abonnements Polymythcal"><meta property="og:description" content="Focused RSS and calendar subscriptions for Polymythcal listings."><meta property="og:image" content="https://seminarschools.com/og-image.png"><meta name="description" content="Focused Polymythcal RSS and calendar subscriptions for confirmed, regional, civic, arts, learning, opportunity, English, and French listings."><meta name="robots" content="index,follow"><link rel="canonical" href="https://seminarschools.com/polymythseminars/subscribe/"><link rel="alternate" hreflang="en-ca" href="https://seminarschools.com/polymythseminars/subscribe/"><link rel="alternate" hreflang="fr-ca" href="https://seminarschools.com/polymythseminars/subscribe/?lang=fr"><link rel="alternate" hreflang="x-default" href="https://seminarschools.com/polymythseminars/subscribe/"><link rel="stylesheet" href="/css/theme.css?v={ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_VERSION}"><link rel="stylesheet" href="/css/polymythcal-features.css?v={ASSET_VERSION}"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={ASSET_VERSION}" data-site-wide-type-zoom="{ASSET_VERSION}"></head><body data-route-type="calendar-form" data-geometry="indra-web" data-indra-intensity="0.070" data-geometry-role="return"><a class="skip-link" href="#main-content">Skip to subscriptions · Aller aux abonnements</a><main class="pm-form-shell" id="main-content"><p><a href="/polymythseminars/">← Polymythcal</a></p><h1>Subscriptions · <span lang="fr">Abonnements</span></h1><p>RSS works in feed readers. ICS works in calendar apps. · <span lang="fr">RSS fonctionne dans les lecteurs de fils. ICS fonctionne dans les applications de calendrier.</span></p><ul class="pm-feed-list">{''.join(rows)}</ul></main><script src="/js/theme.js" defer></script><script src="/js/polymythcal-features.js?v={ASSET_VERSION}" defer></script><script defer src="/js/site-keyboard-enhancements.js?v={ASSET_VERSION}"></script><script src="/js/mandala.js?v={GEOMETRY_VERSION}" defer></script><script src="/js/indra.js?v={GEOMETRY_VERSION}" defer></script></body></html>'''
+    return f'''<!doctype html><html lang="en-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Polymythcal subscriptions · Abonnements Polymythcal</title><meta property="og:type" content="website"><meta property="og:url" content="https://seminarschools.com/polymythseminars/subscribe/"><meta property="og:title" content="Polymythcal subscriptions · Abonnements Polymythcal"><meta property="og:description" content="Focused RSS and calendar subscriptions for Polymythcal listings."><meta property="og:image" content="https://seminarschools.com/og-image.png"><meta name="description" content="Focused Polymythcal RSS and calendar subscriptions for confirmed, regional, civic, arts, learning, opportunity, English, and French listings."><meta name="robots" content="index,follow"><link rel="canonical" href="https://seminarschools.com/polymythseminars/subscribe/"><link rel="alternate" hreflang="en-ca" href="https://seminarschools.com/polymythseminars/subscribe/"><link rel="alternate" hreflang="fr-ca" href="https://seminarschools.com/polymythseminars/subscribe/?lang=fr"><link rel="alternate" hreflang="x-default" href="https://seminarschools.com/polymythseminars/subscribe/"><link rel="stylesheet" href="/css/theme.css?v={ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_VERSION}"><link rel="stylesheet" href="/css/polymythcal-features.css?v={ASSET_VERSION}"><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={ASSET_VERSION}" data-site-wide-type-zoom="{ASSET_VERSION}"></head><body data-route-type="calendar-form" data-geometry="indra-web" data-indra-intensity="0.100" data-geometry-role="return" data-front-facing="general-audience"><a class="skip-link" href="#main-content">Skip to subscriptions · Aller aux abonnements</a><main class="pm-form-shell" id="main-content"><p><a href="/polymythseminars/">← Polymythcal</a></p><h1>Subscriptions · <span lang="fr">Abonnements</span></h1><p>RSS works in feed readers. ICS works in calendar apps. · <span lang="fr">RSS fonctionne dans les lecteurs de fils. ICS fonctionne dans les applications de calendrier.</span></p><ul class="pm-feed-list">{''.join(rows)}</ul></main><script src="/js/theme.js" defer></script><script src="/js/polymythcal-features.js?v={ASSET_VERSION}" defer></script><script defer src="/js/site-keyboard-enhancements.js?v={ASSET_VERSION}"></script><script src="/js/mandala.js?v={GEOMETRY_VERSION}" defer></script><script src="/js/indra.js?v={GEOMETRY_VERSION}" defer></script></body></html>'''
 
 
 def build_featured(events) -> bool:

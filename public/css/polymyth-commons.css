@@ -164,6 +164,11 @@ summary:focus-visible {
   text-transform: uppercase;
 }
 
+.primary-nav a {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
 .primary-nav a:hover,
 .seminar-link:hover {
   color: var(--rust);
@@ -472,7 +477,7 @@ main {
 
 .vertical-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 23rem), 1fr));
   border: 1px solid var(--line);
   border-radius: 1.4rem;
   overflow: hidden;
@@ -512,6 +517,10 @@ main {
   font-weight: 400;
   letter-spacing: -0.04em;
   line-height: 1;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+  text-wrap: balance;
 }
 
 .vertical-card p {
@@ -1081,6 +1090,16 @@ main {
   min-height: 38px;
 }
 
+.result-actions .research-link {
+  background: transparent;
+  color: var(--ink);
+}
+
+.result-main .source-title {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
 .empty-state {
   padding: 4rem 1rem;
   border-top: 1px solid var(--ink);
@@ -1260,6 +1279,14 @@ main {
 
 .entity-actions .button {
   width: 100%;
+}
+
+.destination-note {
+  display: block;
+  max-width: 30rem;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  line-height: 1.45;
 }
 
 .entity-grid {
@@ -1866,6 +1893,11 @@ main {
     border-left: 0;
   }
 
+  .ledger-row {
+    grid-template-columns: 2.6rem minmax(0, 1fr) auto;
+    gap: 0.55rem;
+  }
+
   .intent-grid,
   .collection-grid,
   .principle-grid,
@@ -1983,6 +2015,48 @@ main {
   }
 }
 
+@media (max-width: 480px) {
+  .vertical-card {
+    padding-inline: 1rem;
+  }
+
+  .vertical-card h3 {
+    font-size: clamp(1.2rem, 7vw, 1.55rem);
+    letter-spacing: -0.025em;
+  }
+
+  body[data-route-type="commons-home"] .hero-copy h1,
+  body[data-route-type="commons-directory"] .page-intro h1 {
+    font-size: min(13vw, 2.5rem);
+    letter-spacing: -0.03em;
+  }
+
+  body[data-route-type="commons-record"] .entity-hero h1 {
+    font-size: min(14vw, 2.5rem);
+    letter-spacing: -0.025em;
+  }
+
+  .backbone-ledger {
+    padding-inline: 1rem;
+    background:
+      repeating-linear-gradient(
+        #281710,
+        #281710 2.4rem,
+        #735c4e 2.45rem,
+        #281710 2.5rem
+      );
+  }
+
+  .ledger-row {
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
+
+  .ledger-row > :last-child {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -2038,5 +2112,228 @@ main {
 
   .result-row {
     break-inside: avoid;
+  }
+}
+
+/* Keep the public Commons introduction readable at every supported text size.
+   The original display scale forced this complete title into as many as eight
+   narrow lines inside the two-column book panel on wide screens. */
+body[data-route-type="commons-home"] .backbone-copy h2 {
+  font-size: clamp(2.25rem, 3.4vw, 2.9rem);
+  line-height: 0.98;
+}
+
+/* ========================================================================
+   POLYMYTHLIB REFLOW CONTRACT — 2026-08-09
+
+   Fixed metadata and action tracks once left enlarged record names only a
+   few characters wide. Keep the number beside one flexible reading column,
+   then place metadata and actions below the description.
+   ======================================================================== */
+body[data-route-type="commons-directory"] .result-row {
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 0.85rem 1rem;
+}
+
+body[data-route-type="commons-directory"] .result-main,
+body[data-route-type="commons-directory"] .result-meta,
+body[data-route-type="commons-directory"] .result-actions {
+  grid-column: 2;
+  min-width: 0;
+}
+
+body[data-route-type="commons-directory"] .result-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+}
+
+body[data-route-type="commons-directory"] .result-meta strong {
+  margin-bottom: 0;
+}
+
+body[data-route-type="commons-directory"] .result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+body[data-route-type="commons-directory"] .result-actions a {
+  min-width: min(100%, 7rem);
+}
+
+/* Keep keyboard-focused links clear: these research pages retain top and
+   footer navigation without pinning an opaque masthead over long records. */
+body[data-route-type^="commons-"] .site-header {
+  position: static;
+}
+
+/* The full research navigation and sidebars need an earlier responsive
+   transition than ordinary body copy, especially with enlarged text. */
+@media (max-width: 1200px) {
+  body[data-route-type^="commons-"] .site-header-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  body[data-route-type^="commons-"] .primary-nav {
+    order: 3;
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 0 0 0.75rem;
+  }
+
+  body[data-route-type="commons-directory"] .directory-layout,
+  body[data-route-type="commons-method"] .method-grid,
+  body[data-route-type="commons-record"] .entity-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body[data-route-type="commons-directory"] .filters,
+  body[data-route-type="commons-method"] .method-aside,
+  body[data-route-type="commons-record"] .record-aside {
+    position: static;
+  }
+
+  body[data-route-type="commons-directory"] .filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 1rem;
+  }
+
+  body[data-route-type="commons-directory"] :is(.filter-head, .research-toggle, .advanced-filters) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 700px) {
+  body[data-route-type="commons-directory"] .view-tools {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    width: 100%;
+  }
+
+  body[data-route-type="commons-directory"] .view-tools .quick-label {
+    grid-column: 1 / -1;
+  }
+
+  body[data-route-type="commons-directory"] .view-tools select {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  body[data-route-type="commons-directory"] .result-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body[data-route-type="commons-directory"] :is(.result-index, .result-main, .result-meta, .result-actions) {
+    grid-column: 1;
+  }
+
+  body[data-route-type="commons-directory"] .result-index {
+    padding-top: 0;
+  }
+}
+
+/* ========================================================================
+   COMMONS NARROW-SCREEN REFLOW — 2026-08-09
+
+   Project-source citations are the one deliberate exception to the site's
+   ordinary-word integrity rule: a visible technical URL must be able to
+   break before it forces the whole research page wider than the viewport.
+   The remaining rules keep Commons headings, evidence signals, and counts
+   readable with 145% text without splitting ordinary words.
+   ======================================================================== */
+.source-list.source-citations a {
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+}
+
+@media (max-width: 700px) {
+  body[data-route-type="commons-home"] .section-head h2,
+  body[data-route-type="commons-home"] .intent-card h3 {
+    font-size: clamp(1.15rem, 7vw, 1.6rem);
+    line-height: 1.12;
+  }
+
+  body[data-route-type="commons-home"] .intent-card,
+  body[data-route-type="commons-home"] .backbone-copy {
+    padding: 1.15rem;
+  }
+
+  body[data-route-type="commons-home"] .backbone-copy h2 {
+    font-size: clamp(1.35rem, 8vw, 1.8rem);
+    line-height: 1.05;
+  }
+
+  body[data-route-type="commons-directory"] .page-intro h1 {
+    font-size: min(13vw, 3.2rem);
+    letter-spacing: -0.03em;
+  }
+
+  body[data-route-type="commons-method"] .page-intro h1 {
+    font-size: min(13vw, 3.2rem);
+    letter-spacing: -0.03em;
+  }
+
+  body[data-route-type="commons-method"] .method-section h2 {
+    font-size: clamp(1.35rem, 8vw, 1.8rem);
+    line-height: 1.06;
+  }
+
+  body[data-route-type="commons-method"] .layer {
+    padding: 1rem;
+  }
+
+  body[data-route-type="commons-method"] .layer strong {
+    font-size: 1.2rem;
+  }
+
+  body[data-route-type="commons-record"] .signal {
+    display: grid;
+    grid-template-columns: 0.72rem minmax(0, 1fr);
+    align-items: start;
+  }
+
+  body[data-route-type="commons-record"] .signal::before {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  body[data-route-type="commons-record"] .signal strong {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  body[data-route-type="commons-record"] .signal span {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  body[data-route-type="commons-home"] .stats-band {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body[data-route-type="commons-home"] .stat,
+  body[data-route-type="commons-home"] .stat:nth-child(2n),
+  body[data-route-type="commons-home"] .stat:last-child {
+    grid-column: auto;
+    border-right: 0;
+  }
+
+  body[data-route-type="commons-home"] .stat {
+    border-top: 1px solid var(--line);
+  }
+
+  body[data-route-type="commons-home"] .stat:first-child {
+    border-top: 0;
+  }
+
+  body[data-route-type="commons-home"] .map-node {
+    font-size:0.72rem;
+    letter-spacing: 0.03em;
   }
 }

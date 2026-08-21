@@ -1,0 +1,4 @@
+.reader-copy, .reader-copy h1, .reader-copy a {
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}

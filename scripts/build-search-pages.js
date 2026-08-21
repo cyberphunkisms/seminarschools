@@ -19,20 +19,39 @@ const path = require('path');
 const {parseSeedWithAddenda} = require('./lib/parse-seed-with-addenda');
 const crypto = require('crypto');
 const {
+  assertGeometryVersionScheme,
+  geometryBodyAttributes,
+  geometryAssetVersion,
+} = require('./lib/geometry-asset-version');
+const { SITEWIDE_TYPE_ZOOM_VERSION } = require('./lib/sitewide-type-zoom-version');
+const { SITEWIDE_KEYBOARD_VERSION } = require('./lib/sitewide-keyboard-version');
+const {
+  assertDestination,
+  teacherResourceDestination,
+} = require('./lib/external-destination-contracts');
+const { assertCurrentDatasetVersion } = require('./lib/versioned-data-migrations');
+const {
   dateOneYearAfter,
   resolveSiteBuildDate,
 } = require('./polymythcal-build-date');
 
 const ROOT = path.resolve(__dirname, '..');
 const SITE = 'https://seminarschools.com';
-const GEOMETRY_VERSION = '20260806-front-facing-geometry';
 const GEOMETRY_CONTRACTS = JSON.parse(
   fs.readFileSync(path.join(ROOT, 'data', 'geometry-route-contracts.json'), 'utf8'),
 );
+assertGeometryVersionScheme(GEOMETRY_CONTRACTS);
+const GEOMETRY_VERSION = geometryAssetVersion(ROOT);
+const EXTERNAL_DESTINATION_CONTRACTS = JSON.parse(
+  fs.readFileSync(path.join(ROOT, 'data', 'external-destination-contracts.json'), 'utf8'),
+);
+const TEACHER_INTERNAL_ORIGINALS = EXTERNAL_DESTINATION_CONTRACTS
+  .datasets['teacher-resources'].allowedInternalOriginals;
 // Resolve one Toronto calendar day per build. SITE_BUILD_DATE keeps fixtures
 // and reproducibility checks deterministic while ordinary deploys roll over.
 const TODAY = resolveSiteBuildDate({ root: ROOT });
 const CHECK = process.argv.includes('--check');
+const TEACHER_ONLY = process.argv.includes('--teacher-only');
 const OUTPUT_MTIME = process.env.SS_BUILD_OUTPUT_MTIME
   ? new Date(process.env.SS_BUILD_OUTPUT_MTIME)
   : null;
@@ -51,10 +70,27 @@ function comparableGeneratedContent(rel, content) {
     '',
   );
   if (rel === 'sitemap.xml') {
+    const localizedBlock = value.match(
+      /<!-- AUDIT45_LOCALIZED_START -->([\s\S]*?)<!-- AUDIT45_LOCALIZED_END -->/,
+    )?.[1] || '';
+    const eventEntry = /<url>\s*<loc>(https:\/\/seminarschools\.com\/polymythseminars\/(?:fr\/)?events\/[^<]+\/)<\/loc>(?:\s*<lastmod>([^<]+)<\/lastmod>)?\s*<\/url>/g;
+    const eventSignatures = [];
+    for (const match of localizedBlock.matchAll(eventEntry)) {
+      // Audit 45's final sitemap writer may place a newly indexable event in
+      // its managed block without a lastmod. Treat that placement as the
+      // release-day entry the canonical search writer would emit. Duplicates
+      // remain in the signature and therefore still fail the exact check.
+      eventSignatures.push(`${match[1]}\t${match[2] || TODAY}`);
+    }
     value = value.replace(
       /\s*<!-- AUDIT45_LOCALIZED_START -->[\s\S]*?<!-- AUDIT45_LOCALIZED_END -->\s*/g,
       '\n',
     );
+    value = value.replace(eventEntry, (entry, url, lastmod) => {
+      eventSignatures.push(`${url}\t${lastmod || ''}`);
+      return '';
+    });
+    value += `\n<!-- SS_CANONICAL_EVENT_SITEMAP\n${eventSignatures.sort().join('\n')}\n-->`;
   }
   return value.replace(/\n{3,}/g, '\n\n').trim();
 }
@@ -120,14 +156,6 @@ function humanDate(date) {
   if (Number.isNaN(d.getTime())) return String(date || 'Date to be confirmed');
   return new Intl.DateTimeFormat('en-CA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/Toronto', timeZoneName: 'short' }).format(d);
 }
-function geometryIntensity(canonical) {
-  if (/\/polymythseminars\//.test(canonical)) return '0.105';
-  if (/\/(?:writingclub|writingkids|writingjuniors|writingteens|writinggrads|university|philosophy|humanities|cfps|lectures|fellowships)\//.test(canonical)) return '0.095';
-  if (canonical.includes('/saul/')) return '0.075';
-  if (/\/teacherresources\//.test(canonical)) return '0.060';
-  if (/\/(?:polymyth|bb|bookwormcard|campaigns|aa)\//.test(canonical)) return '0.095';
-  return '0.070';
-}
 function pageHead({ title, description, canonical, schema = [], robots = 'index,follow', css = '/teacherresources/catalog.css?v=20260725-audit45' }) {
   const cards = [
     `<meta property="og:type" content="website">`,
@@ -153,7 +181,7 @@ function pageHead({ title, description, canonical, schema = [], robots = 'index,
 <link rel="canonical" href="${attr(canonical)}">
 <link rel="stylesheet" href="${css}">
 <link rel="stylesheet" href="/css/alive.css?v=${GEOMETRY_VERSION}">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=${SITEWIDE_TYPE_ZOOM_VERSION}" data-site-wide-type-zoom="${SITEWIDE_TYPE_ZOOM_VERSION}">
 ${cards}
 ${schemas}
 <link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
@@ -179,25 +207,30 @@ function visibleBreadcrumb(items) {
 }
 function htmlPage({title, description, canonical, crumbs, body, schema = [], robots, css, routeType, pageWeight}) {
   const typeAttr = routeType || (canonical.includes('/polymyth/methodologylist/') ? 'archive' : canonical.includes('/teacherresources/') ? 'resource-catalog' : canonical.includes('/polymythseminars/events/') ? 'calendar' : 'archive');
-  const geometryRoles = GEOMETRY_CONTRACTS.route_types[typeAttr];
-  if (!Array.isArray(geometryRoles) || geometryRoles.length === 0) {
-    throw new Error(`Missing structural geometry roles for generated route type: ${typeAttr}`);
-  }
+  const canonicalPath = new URL(canonical).pathname;
+  const geometryAttrs = geometryBodyAttributes(
+    GEOMETRY_CONTRACTS,
+    sourcePathFor(canonicalPath),
+    typeAttr,
+  );
   const weightAttr = pageWeight ? ` data-page-weight="${attr(pageWeight)}"` : '';
+  const wordBreakAttr = canonical.includes('/polymyth/methodologylist/')
+    ? ' data-allow-word-break="true"'
+    : '';
   const graph = [
     { '@context':'https://schema.org', '@type':'WebPage', '@id': canonical + '#webpage', url: canonical, name:title, description, inLanguage:'en-CA', isPartOf:{ '@id': SITE + '/#website' } },
     ...(crumbs ? [breadcrumb(crumbs)] : []),
     ...schema
   ];
   return `${pageHead({title, description, canonical, schema:graph, robots, css})}
-<body data-route-type="${attr(typeAttr)}" data-geometry="indra-web" data-indra-intensity="${geometryIntensity(canonical)}" data-geometry-role="${attr(geometryRoles.join(' '))}"${weightAttr}>
+<body ${geometryAttrs}${weightAttr}>
 <a class="skip-link" href="#content">Skip to content</a>
 <header class="catalog-top"><a href="/" class="brand">Seminar <em>Schools</em></a><nav aria-label="Primary"><a href="/teacherresources/">Teacher Resources</a><a href="/polymythseminars/">Polymythcal</a><a href="/polymythcommons/">Polymyth Commons</a><a href="/leizu/">Leizu Academy</a></nav></header>
-<main id="content" class="catalog-page">
+<main id="content" class="catalog-page"${wordBreakAttr}>
 ${body}
 </main>
 <footer class="catalog-footer"><a href="/teacherresources/">Teacher Resources</a> · <a href="/polymythcommons/">Polymyth Commons</a> · <a href="https://forms.gle/tqciJxYKNR5x2CtU7">Suggest or correct a resource</a> · <a href="/">Seminar Schools</a> · Toronto</footer>
-<script src="/js/site-keyboard-enhancements.js?v=20260725-audit45" defer></script>
+<script src="/js/site-keyboard-enhancements.js?v=${SITEWIDE_KEYBOARD_VERSION}" defer></script>
 <script src="/js/mandala.js?v=${GEOMETRY_VERSION}" defer></script>
 <script src="/js/indra.js?v=${GEOMETRY_VERSION}" defer></script>
 </body>
@@ -249,8 +282,26 @@ function parseSeedArray(html) {
   return eval(html.slice(arrStart, arrEnd + 1));
 }
 
-const RESOURCE_CSS = `/* Generated static catalog pages: crawlable HTML with the same calm, readable surface. */
+const RESOURCE_CSS_BASE = `/* Generated static catalog pages: crawlable HTML with the same calm, readable surface. */
 :root{--bg:#f7f5ef;--ink:#1f211e;--muted:#65675f;--line:#d9d6ca;--paper:#fffdf8;--accent:#52654d;--gold:#947a2c;--max:980px}*{box-sizing:border-box}html{scroll-behavior:auto}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Georgia,serif}.catalog-top{display:flex;gap:1.5rem;justify-content:space-between;align-items:center;padding:1rem max(1rem,calc((100vw - var(--max))/2));border-bottom:1px solid var(--line);font-family:Arial,sans-serif;font-size:.9rem}.catalog-top nav{display:flex;gap:1rem;flex-wrap:wrap}.brand{font-size:1.05rem;font-weight:700;text-decoration:none;color:var(--ink);letter-spacing:.02em}.brand em{font-weight:400}.catalog-top a,.catalog-footer a{color:inherit;text-decoration:none;border-bottom:1px solid transparent}.catalog-top a:hover,.catalog-footer a:hover{border-color:currentColor}.catalog-page{max-width:var(--max);margin:0 auto;padding:3rem 1.1rem 4rem}.eyebrow{font:600 .76rem/1.2 Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 .75rem}.catalog-page h1{font-size:clamp(2rem,5vw,3.6rem);line-height:1.08;letter-spacing:-.03em;margin:.1rem 0 1rem}.catalog-page h2{font-size:1.45rem;line-height:1.2;margin:2.5rem 0 .8rem}.catalog-page h3{font-size:1.1rem;margin:.2rem 0}.lede{font-size:1.15rem;max-width:70ch;color:#34362f}.breadcrumbs{font:14px/1.4 Arial,sans-serif;color:var(--muted);margin:0 0 1.5rem}.breadcrumbs ol{display:flex;flex-wrap:wrap;gap:.3rem;list-style:none;margin:0;padding:0}.breadcrumbs li:not(:last-child)::after{content:"/";margin-left:.3rem}.breadcrumbs a{color:inherit}.resource-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:1rem;margin:1.5rem 0}.resource-card{display:block;background:var(--paper);border:1px solid var(--line);padding:1rem 1.05rem;text-decoration:none;color:inherit;border-radius:.35rem}.resource-card:hover{border-color:var(--accent)}.resource-card h2{font-size:1.02rem;line-height:1.3;margin:.2rem 0}.resource-card p{font-size:.92rem;color:var(--muted);margin:.55rem 0 0}.resource-meta{font:12px/1.45 Arial,sans-serif;letter-spacing:.015em;color:var(--muted);margin:.5rem 0 0}.resource-list{display:grid;gap:.8rem;margin:1.25rem 0}.resource-row{display:block;background:var(--paper);border:1px solid var(--line);padding:1rem 1.1rem;text-decoration:none;color:inherit;border-radius:.3rem}.resource-row:hover{border-color:var(--accent)}.resource-row h2,.resource-row h3{margin:0;font-size:1.08rem}.resource-row p{margin:.35rem 0 0;color:var(--muted);font-size:.94rem}.button{display:inline-block;background:var(--accent);color:white!important;text-decoration:none;padding:.65rem .9rem;border-radius:.25rem;font:600 .9rem/1 Arial,sans-serif}.button.secondary{background:transparent;color:var(--ink)!important;border:1px solid var(--ink)}.definition{background:var(--paper);border-left:4px solid var(--gold);padding:1.2rem 1.25rem;margin:1.4rem 0}.definition dl{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:.35rem 1rem;margin:0}.definition dt{font:600 .84rem/1.4 Arial,sans-serif;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}.definition dd{margin:0}.callout{background:#edf1ea;border-left:4px solid var(--accent);padding:1rem 1.1rem;margin:1.4rem 0}.catalog-footer{max-width:var(--max);margin:0 auto;padding:1.5rem 1.1rem 2.5rem;border-top:1px solid var(--line);font:13px/1.5 Arial,sans-serif;color:var(--muted)}.skip-link{position:absolute;left:-999px;top:0}.skip-link:focus{left:0;background:#fff;padding:.75rem;z-index:3}@media(max-width:650px){.catalog-top{align-items:flex-start;flex-direction:column;gap:.5rem}.catalog-page{padding-top:2rem}.definition dl{grid-template-columns:1fr}.resource-grid{grid-template-columns:1fr}}\n`;
+
+const RESOURCE_CSS = RESOURCE_CSS_BASE + `
+/* Original publishers and hosts are the primary action; catalog notes remain
+   a distinct secondary route. */
+.catalog-page h1,.catalog-page h2,.catalog-page h3,.resource-row h2,.resource-row h3{overflow-wrap:normal;word-break:normal;hyphens:none}
+.resource-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr))}
+.resource-meta{max-width:100%;overflow-wrap:anywhere;word-break:normal}
+.resource-source-link{color:inherit;text-decoration-thickness:1px;text-underline-offset:.18em}
+.resource-source-link:hover,.resource-source-link:focus-visible{color:var(--accent)}
+.resource-actions{display:flex;flex-wrap:wrap;align-items:stretch;gap:.55rem;margin-top:.85rem}
+.resource-actions .button{display:inline-flex;align-items:center;line-height:1.35;white-space:normal}
+.source-banner{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1rem;margin:1.25rem 0;padding:1rem 1.1rem;border:1px solid var(--line);border-left:4px solid var(--accent);background:var(--paper)}
+.source-banner p{flex:1 1 18rem;margin:0;color:var(--muted);font-size:.92rem}
+.source-banner .button{line-height:1.35;white-space:normal}
+@media(max-width:650px){
+  .resource-actions .button,.source-banner .button{width:100%;max-width:100%;justify-content:center;white-space:normal;overflow-wrap:anywhere;word-break:normal;text-align:center}
+}
+`;
 
 const RESOURCE_LABEL_ALIASES = Object.freeze({
   subject: Object.freeze({
@@ -391,13 +442,23 @@ function staticResourceCard(entry, category, group, data, index) {
   // annotation is excluded, and all-grade cards so their grade context is
   // explicit even though the compact visible metadata omits it.
   const accessibleName = entry.notes || entry.grade === 'all'
-    ? ` aria-label="${attr(resourceAccessibleName(entry, data))}"`
+    ? ` aria-label="${attr(`${resourceAccessibleName(entry, data)}; opens original resource${entry.host ? ` on ${entry.host}` : ''}`)}"`
     : '';
   const stripe = ({'holt-worktext':'apparatus','pearson-notebook':'apparatus','mcdougal-littell':'apparatus','contest-paper':'apparatus','ib-paper':'apparatus','released-test':'apparatus','full-book':'archive','anthology':'archive','aggregator':'archive','gutenberg-text':'archive','openstax-book':'archive','ck12-book':'archive','khan-course':'archive','french-text':'archive','clean-text':'clean'})[entry.format] || 'clean';
   const languageValues = resourceLanguages(entry);
   const partLang = compactCatalogLanguagePartAttribute(entry);
   const languageBadge = compactCatalogLanguageBadge(entry);
-  return `<a${accessibleName} class="entry stripe-${stripe}" href="${route}" data-format="${attr(entry.format||'')}" data-grade="${attr(entry.grade||'')}" data-subject="${attr(entry.subject||'')}" data-curriculum="${attr(entry.curriculum||'')}" data-l="${attr(languageValues.join(','))}"><div class="entry-main"><div class="entry-title"${partLang}>${esc(entry.title)}</div>${entry.author ? `<div class="entry-byline">${esc(entry.author)}</div>` : ''}</div><div class="entry-meta">${meta.map((m,j)=>`<span class="${j===0?'subj':'host'}">${esc(m)}</span>`).join('')}${languageBadge}</div>${entry.notes ? `<div class="entry-notes">${esc(entry.notes)}</div>` : ''}</a>`.replace(' data-curriculum=""', '');
+  return `<div class="entry-shell"><a${accessibleName} class="entry stripe-${stripe}" href="${attr(entry.url)}" target="_blank" rel="noopener noreferrer" data-detail-route="${route}" data-format="${attr(entry.format||'')}" data-grade="${attr(entry.grade||'')}" data-subject="${attr(entry.subject||'')}" data-curriculum="${attr(entry.curriculum||'')}" data-l="${attr(languageValues.join(','))}"><div class="entry-main"><div class="entry-title"${partLang}>${esc(entry.title)}</div>${entry.author ? `<div class="entry-byline">${esc(entry.author)}</div>` : ''}</div><div class="entry-meta">${meta.map((m,j)=>`<span class="${j===0?'subj':'host'}">${esc(m)}</span>`).join('')}${languageBadge}</div>${entry.notes ? `<div class="entry-notes">${esc(entry.notes)}</div>` : ''}<span class="entry-source-cta">Open original resource${entry.host ? ` on ${esc(entry.host)}` : ''} ↗</span></a><a class="entry-detail" href="${route}">Details &amp; source notes</a></div>`.replace(' data-curriculum=""', '');
+}
+
+function renderTeacherAreaIndex(data) {
+  const cards = (data.groups || []).map(group => {
+    const resources = (group.categories || []).reduce((total, category) => total + (category.entries || []).length, 0);
+    const collections = (group.categories || []).length;
+    const collectionLabel = collections === 1 ? 'collection' : 'collections';
+    return `<a class="teacher-area-card" href="/teacherresources/${slug(group.id)}/"><strong>${esc(group.title)}</strong><span>${esc(group.kicker || 'Classroom resources from named sources')}</span><small>${resources} resources · ${collections} ${collectionLabel}</small></a>`;
+  }).join('');
+  return `<section aria-labelledby="teacher-areas-title" class="teacher-areas" id="teacher-areas"><div class="teacher-section-head"><p class="teacher-section-kicker">Browse by teaching area</p><h2 id="teacher-areas-title">Choose a subject</h2><p>Choose a subject to see its collections. Resource titles and highlighted source buttons go directly to the original publisher, archive, or organization; “Details &amp; source notes” opens the catalog record.</p></div><nav aria-label="Teaching areas" class="teacher-area-grid">${cards}</nav></section>`;
 }
 function renderResourceCatalogRoot(data) {
   const groups = data.groups || [];
@@ -444,10 +505,36 @@ function normalizeResourceFinderSemantics(html) {
 function injectResourceRoot(data) {
   const rel = 'teacherresources/index.html';
   let html = normalizeResourceFinderSemantics(read(rel));
+  const resourceCount = (data.groups || []).reduce(
+    (total, group) => total + (group.categories || []).reduce(
+      (groupTotal, category) => groupTotal + (category.entries || []).length,
+      0,
+    ),
+    0,
+  );
+  const collectionCount = (data.groups || []).reduce(
+    (total, group) => total + (group.categories || []).length,
+    0,
+  );
+  html = html
+    .replace(/Search \d+ classroom resources/g, `Search ${resourceCount} classroom resources`)
+    .replace(/"numberOfItems": \d+/, `"numberOfItems": ${resourceCount}`)
+    .replace(/<div><dt>\d+<\/dt><dd>classroom resources<\/dd><\/div>/,
+      `<div><dt>${resourceCount}</dt><dd>classroom resources</dd></div>`)
+    .replace(/Search across all \d+ records\./,
+      `Search across all ${resourceCount} records.`)
+    .replace(/>\d+ resources across \d+ collections<\/div>/,
+      `>${resourceCount} resources across ${collectionCount} collections</div>`);
   const markup = renderResourceCatalogRoot(data);
   if (!html.includes('id="catalog"')) throw new Error('Teacher resources catalog injection point is missing');
   html = html.replace(/<div id="catalog"[^>]*>/, '<div id="catalog" data-ssr-catalog="true">');
   html = replaceDivInner(html, 'catalog', `\n<!-- SS_STATIC_CATALOG_START -->\n${markup}\n<!-- SS_STATIC_CATALOG_END -->\n`);
+  const areaIndex = renderTeacherAreaIndex(data);
+  if (html.includes('id="teacher-areas"')) {
+    html = html.replace(/<section\b[^>]*\bid="teacher-areas"[^>]*>[\s\S]*?<\/section>/i, areaIndex);
+  } else {
+    html = html.replace('<div class="browse-heading">', `${areaIndex}\n<div class="browse-heading">`);
+  }
   write(rel, html);
 }
 function generateResourcePages(data) {
@@ -486,7 +573,8 @@ function generateResourcePages(data) {
       const cards = category.entries.map(entry => {
         const route = resourceRoute(group, category, entry, globalIndex++);
         const d = resourceDescription(entry, category, group, data);
-        return `<a aria-label="${attr(resourceAccessibleName(entry, data))}" class="resource-row" href="${route}"><h2${languagePartAttribute(entry)}>${esc(entry.title)}</h2>${entry.author ? `<p>${esc(entry.author)}</p>` : ''}<div class="resource-meta">${esc(resourceMeta(entry,data).join(' · '))} · ${esc(resourceLanguageLabel(entry))}</div><p>${esc(cleanSentence(d, 260))}</p></a>`;
+        const sourceLabel = `Open original resource${entry.host ? ` on ${entry.host}` : ''}`;
+        return `<article class="resource-row"><h2${languagePartAttribute(entry)}><a aria-label="${attr(`${resourceAccessibleName(entry, data)}; opens original resource${entry.host ? ` on ${entry.host}` : ''}`)}" class="resource-source-link" href="${attr(entry.url)}" target="_blank" rel="noopener noreferrer">${esc(entry.title)}</a></h2>${entry.author ? `<p>${esc(entry.author)}</p>` : ''}<div class="resource-meta">${esc(resourceMeta(entry,data).join(' · '))} · ${esc(resourceLanguageLabel(entry))}</div><p>${esc(cleanSentence(d, 260))}</p><div class="resource-actions"><a class="button" href="${attr(entry.url)}" target="_blank" rel="noopener noreferrer">${esc(sourceLabel)} ↗</a><a class="button secondary" href="${route}">Details &amp; source notes</a></div></article>`;
       }).join('\n');
       const categoryCrumbs = [...topCrumbs,{name:group.title,url:groupUrl},{name:category.title,url:catUrl}];
       const body = `${visibleBreadcrumb(categoryCrumbs)}<p class="eyebrow">${esc(group.title)}</p><h1>${esc(category.title)}</h1><p class="lede">${esc(category.blurb || category.kicker || catDesc)}</p><div class="resource-list">${cards}</div><p><a class="button secondary" href="${groupRoute}">Back to ${esc(group.title)}</a></p>`;
@@ -507,8 +595,9 @@ function generateResourcePages(data) {
         const catRoute = `/teacherresources/${slug(group.id)}/${slug(category.id)}/`;
         const meta = resourceMeta(entry, data);
         const desc = resourceDescription(entry, category, group, data);
-        const availability = entry.url ? `<p><a class="button" href="${attr(entry.url)}" target="_blank" rel="noopener noreferrer">Open resource${entry.host ? ` on ${esc(entry.host)}` : ''}</a></p>` : '';
         const sourceHost = entry.host || (entry.url ? (()=>{try{return new URL(entry.url, SITE).hostname.replace(/^www\./,'')}catch(e){return ''}})() : '');
+        const sourceLabel = `Open original resource${sourceHost ? ` on ${sourceHost}` : ''}`;
+        const sourceBanner = `<div class="source-banner"><a class="button" href="${attr(entry.url)}" target="_blank" rel="noopener noreferrer">${esc(sourceLabel)} ↗</a><p>This catalog page keeps the classroom description, source notes, and related resources separate from the original website.</p></div>`;
         const seoDescription = cleanSentence(`${entry.title} for ${category.title}. ${desc}${sourceHost ? ` Source: ${sourceHost}.` : ''}`, 300);
         const details = [
           ['Collection', `<a href="${catRoute}">${esc(category.title)}</a>`],
@@ -521,7 +610,7 @@ function generateResourcePages(data) {
         ].map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join('');
         const detailCrumbs = [...topCrumbs,{name:group.title,url:routeUrl(groupRoute)},{name:category.title,url:routeUrl(catRoute)},{name:entry.title,url}];
         const related = relatedResourceLinks(entry, entryOffset, category, group, data, categoryStartIndex);
-        const body = `${visibleBreadcrumb(detailCrumbs)}<p class="eyebrow">Catalogued teaching resource</p><h1${languagePartAttribute(entry)}>${esc(entry.title)}</h1>${entry.author ? `<p class="lede">By ${esc(entry.author)}</p>` : ''}<div class="definition"><dl>${details}</dl></div>${resourceReviewSection(entry)}${availability}${related}<p><a class="button secondary" href="${catRoute}">Back to ${esc(category.title)}</a></p>`;
+        const body = `${visibleBreadcrumb(detailCrumbs)}<p class="eyebrow">Teaching resource</p><h1${languagePartAttribute(entry)}>${esc(entry.title)}</h1>${entry.author ? `<p class="lede">By ${esc(entry.author)}</p>` : ''}${sourceBanner}<div class="definition"><dl>${details}</dl></div>${resourceReviewSection(entry)}${related}<p><a class="button secondary" href="${catRoute}">Back to ${esc(category.title)}</a></p>`;
         const schema = [{ '@context':'https://schema.org','@type':'LearningResource','@id':url+'#resource',url,name:entry.title,description:desc,author:entry.author || undefined,educationalLevel:entry.grade || undefined,learningResourceType:resourceTaxonomyLabel(data, 'format', entry.format, entry.format || undefined),about:resourceTaxonomyLabel(data, 'subject', entry.subject, entry.subject || undefined),inLanguage:resourceLanguages(entry),isPartOf:{'@id':routeUrl(catRoute)+'#collection'},sameAs:entry.url ? new URL(entry.url, SITE).href : undefined }];
         // Avoid serializing undefined properties.
         const normalized = schema.map(o=>Object.fromEntries(Object.entries(o).filter(([,v])=>v !== undefined && v !== '')));
@@ -613,6 +702,7 @@ function eventIndexable(event) {
   const placeholders=new Set(['','unknown','location unconfirmed','location unconfirmed · lieu non confirmé','lieu non confirmé']);
   return event.confirmation_status === 'confirmed'
     && event.date_precision === 'exact'
+    && event.record_kind !== 'opportunity'
     && !placeholders.has(city)
     && !placeholders.has(venue)
     && !['cancelled', 'missing-on-source', 'archived'].includes(event.lifecycle_status)
@@ -656,7 +746,7 @@ function archiveGeneratedEventPage(ix) {
   else html = html.replace('</head>', '<meta name="robots" content="noindex,follow">\n</head>');
   html = html.replace(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>\s*\{[^<]*"@type"\s*:\s*"Event"[^<]*\}\s*<\/script>\s*/gi, '');
   html = html.replace(/"eventStatus"\s*:\s*"https:\/\/schema\.org\/EventScheduled"/g, '"eventStatus":"https://schema.org/EventCompleted"');
-  html = html.replace('\n<script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>', '');
+  html = html.replace(`\n<script defer src="/js/site-keyboard-enhancements.js?v=${SITEWIDE_KEYBOARD_VERSION}"></script>`, '');
   if (!html.includes('data-event-archive-note')) {
     const note = '<div class="callout" data-event-archive-note="true"><strong>Past event.</strong> This permalink is retained as an archive record. Check the original source for a current edition or related event.</div>';
     html = html.replace(/(<h1\b[^>]*>[\s\S]*?<\/h1>)/i, `$1${note}`);
@@ -720,11 +810,11 @@ function generateEventPages(events) {
   return indexable;
 }
 
-const SECTION_LABELS={methodology:'Methodology',gorgonification:'Gorgonification',degorgonification:'Degorgonification',analysis:'Analysis',sabachtan:'Sabachtan Gnosticism',idiomary:'Idiomary',citation:'Citations',studylist:'Study List',rainbowsol:'Rainbowsol',polycognate:'Polycognate',learnings:'Learnings',coreplus:'CORE+',corehistory:'CORE History','framework-core':'Framework Core',pending:'Pending','pending-user-authorship':'Pending User Authorship'};
+const SECTION_LABELS={methodology:'Methodology',gorgonification:'Gorgonification',degorgonification:'Degorgonification',analysis:'Analysis',sabachtan:'Sabachtan Gnosticism',idiomary:'Idiomary',citation:'Citations',studylist:'Study List',rainbowsol:'Rainbowsol',polycognate:'Polycognate',learnings:'Learnings',coreplus:'CORE+',corehistory:'CORE History','framework-core':'CORE / Personal Rules',pending:'Pending','pending-user-authorship':'Pending User Authorship'};
 function methodologyStaticIndex(seed) {
   const counts={}; seed.forEach(e=>counts[e.s||'unknown']=(counts[e.s||'unknown']||0)+1);
-  const links=Object.entries(counts).sort((a,b)=>a[0].localeCompare(b[0])).map(([section,count])=>`<a class="resource-card" href="/polymyth/methodologylist/${slug(section)}/"><h3>${esc(SECTION_LABELS[section]||section)}</h3><p>${count} indexed framework entries in a static HTML edition.</p></a>`).join('\n');
-  return `<details id="static-methodology-editions" class="static-methodology-editions"><summary>Static HTML editions by section</summary><p>Each edition has permanent entry anchors. The interactive browser remains below.</p><div class="resource-grid">${links}</div></details>`;
+  const links=Object.entries(counts).sort((a,b)=>a[0].localeCompare(b[0])).map(([section,count])=>`<a class="resource-card" href="/polymyth/methodologylist/${slug(section)}/"><h3>${esc(SECTION_LABELS[section]||section)}</h3><p>${count} framework entries.</p></a>`).join('\n');
+  return `<details id="static-methodology-editions" class="static-methodology-editions"><summary>Browse by section</summary><p>Each section collects its entries on one page and gives every entry a permanent link.</p><div class="resource-grid">${links}</div></details>`;
 }
 function injectMethodologyRoot(seed) {
   const rel='polymyth/methodologylist/index.html'; let html=read(rel);
@@ -753,6 +843,25 @@ function injectMethodologyRoot(seed) {
 }
 function generateMethodologyPages(seed) {
   const by={}; for(const e of seed){(by[e.s||'unknown'] ||= []).push(e);}
+  const sectionBySlug=new Map(Object.keys(by).map(section=>[slug(section),section]));
+  const crossSectionAliases={};
+  for(const [section,entries] of Object.entries(by)) {
+    entries.forEach((entry,index)=>{
+      const anchor=entry.id || `${section}-${slug(entry.t)}-${hash(entry.t+'|'+index)}`;
+      const aliases=[
+        ...(entry.legacy_anchor ? [entry.legacy_anchor] : []),
+        ...(Array.isArray(entry.legacy_anchors) ? entry.legacy_anchors : []),
+      ];
+      for(const alias of new Set(aliases)) {
+        const legacySectionSlug=[...sectionBySlug.keys()]
+          .sort((a,b)=>b.length-a.length)
+          .find(sectionSlug=>alias===sectionSlug || alias.startsWith(sectionSlug+'-'));
+        const legacySection=legacySectionSlug && sectionBySlug.get(legacySectionSlug);
+        if(!legacySection || legacySection===section) continue;
+        (crossSectionAliases[legacySection] ||= []).push({alias,section,anchor,title:entry.t || 'Untitled entry'});
+      }
+    });
+  }
   const routes=[];
   for(const section of Object.keys(by).sort()) {
     const entries=by[section];
@@ -760,12 +869,23 @@ function generateMethodologyPages(seed) {
     const label=SECTION_LABELS[section]||section;
     const cards=entries.map((entry,index)=>{
       const anchor=entry.id || `${section}-${slug(entry.t)}-${hash(entry.t+'|'+index)}`;
+      const legacyAnchors=[
+        ...(entry.legacy_anchor ? [entry.legacy_anchor] : []),
+        ...(Array.isArray(entry.legacy_anchors) ? entry.legacy_anchors : []),
+      ].filter(value=>value && value!==anchor && value.startsWith(slug(section)+'-'));
+      const aliasMarkup=[...new Set(legacyAnchors)]
+        .map(alias=>`<span id="${attr(alias)}" class="legacy-anchor-alias" aria-hidden="true"></span>`)
+        .join('');
       const tags=entry.tg ? `<div class="resource-meta">${esc(entry.tg)}</div>` : '';
-      return `<article class="resource-row" id="${attr(anchor)}"><h2>${esc(entry.t || 'Untitled entry')}</h2><p>${linkExternalUrls(entry.b || '')}</p>${entry.x ? `<p>${linkExternalUrls(entry.x)}</p>`:''}${tags}<p><a href="#${attr(anchor)}">Permanent link</a></p></article>`;
+      return `${aliasMarkup}<article class="resource-row" id="${attr(anchor)}"><h2>${esc(entry.t || 'Untitled entry')}</h2><p>${linkExternalUrls(entry.b || '')}</p>${entry.x ? `<p>${linkExternalUrls(entry.x)}</p>`:''}${tags}<p><a href="#${attr(anchor)}">Permanent link</a></p></article>`;
     }).join('\n');
     const desc=`${entries.length} polymyth framework entries in the ${label} section, presented as a static HTML reference edition.`;
     const crumbs=[{name:'Seminar Schools',url:SITE+'/'},{name:'Polymyth Methodologylist',url:SITE+'/polymyth/methodologylist/'},{name:label,url}];
-    const body=`${visibleBreadcrumb(crumbs)}<p class="eyebrow">Polymyth framework</p><h1>${esc(label)}</h1><p class="lede">${esc(desc)}</p><p class="archive-route-note route-note">Static archive route for this methodologylist section. Use this page for crawlable entry anchors, or open the interactive methodologylist for search and full navigation.</p><p><a class="button secondary" href="/polymyth/methodologylist/">Open the interactive methodologylist</a></p><div class="resource-list">${cards}</div>`;
+    const movedAliases=(crossSectionAliases[section] || []).map(({alias,section:movedSection,anchor,title})=>{
+      const target=`/polymyth/methodologylist/${slug(movedSection)}/#${anchor}`;
+      return `<p id="${attr(alias)}" class="archive-route-note route-note legacy-route-alias">This permanent entry moved: <a href="${attr(target)}">${esc(title)}</a>.</p>`;
+    }).join('\n');
+    const body=`${visibleBreadcrumb(crumbs)}<p class="eyebrow">Polymyth framework</p><h1>${esc(label)}</h1><p class="lede">${esc(desc)}</p><p class="archive-route-note route-note">This page gathers the ${esc(label)} entries in one place. Each entry has a permanent link; use the complete methodologylist to search across every section.</p><p><a class="button secondary" href="/polymyth/methodologylist/">Search the complete methodologylist</a></p>${movedAliases}<div class="resource-list">${cards}</div>`;
     const schema=[{'@context':'https://schema.org','@type':'CollectionPage','@id':url+'#collection',url,name:`Polymyth Methodologylist: ${label}`,description:desc,numberOfItems:entries.length}];
     write(sourcePathFor(route),htmlPage({title:`${label} | Polymyth Methodologylist | Seminar Schools`,description:desc,canonical:url,crumbs,body,schema,css:'/teacherresources/catalog.css?v=20260725-audit45',pageWeight:'heavy'}));
     routes.push({route,url});
@@ -776,7 +896,11 @@ function generateMethodologyPages(seed) {
 function escapeXml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');}
 function generateSitemap(generated, previousManifest = {}) {
   const existing=read('sitemap.xml');
-  const existingUrls=[...existing.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);
+  const searchOwnedExisting=existing.replace(
+    /\s*<!-- AUDIT45_LOCALIZED_START -->[\s\S]*?<!-- AUDIT45_LOCALIZED_END -->\s*/g,
+    '\n',
+  );
+  const existingUrls=[...searchOwnedExisting.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);
   // Remove only routes owned by this generated surface. Preserve hand-authored
   // teacher-resource and methodology pages that happen to share a parent path.
   const groupPrefixes=[...new Set(generated.resources.filter(x=>x.kind==='group').map(x=>x.url))];
@@ -811,6 +935,17 @@ function main(){
     const previousManifest=readPreviousSearchSurfaceManifest();
     write('teacherresources/catalog.css', RESOURCE_CSS);
     const resourceData=JSON.parse(read('teacherresources/resources-data.json'));
+    assertCurrentDatasetVersion('teacher-resources', resourceData);
+    for (const group of resourceData.groups || []) {
+      for (const category of group.categories || []) {
+        for (const entry of category.entries || []) {
+          assertDestination(
+            teacherResourceDestination(entry, TEACHER_INTERNAL_ORIGINALS),
+            `Teacher resource ${entry.id || entry.title}`,
+          );
+        }
+      }
+    }
     injectResourceRoot(resourceData);
     const resources=generateResourcePages(resourceData);
     const resourceGroupPrefixes=[...new Set(resources.filter(item=>item.kind==='group').map(item=>item.url))];
@@ -821,15 +956,34 @@ function main(){
       'Browse the current Teacher Resources catalog'
     );
 
-    const events=JSON.parse(read('polymythseminars/events.json')).events || [];
+    if (TEACHER_ONLY) {
+      const resourceDetails = resources.filter(item => item.kind === 'resource').length;
+      const resourceCollections = resources.length - resourceDetails;
+      console.log(
+        `TEACHER SEARCH SURFACE ${CHECK ? 'CHECK' : 'BUILD'} — ${resources.length} pages, `
+        + `${resourceDetails} resources, ${resourceCollections} teaching-area and collection pages`
+        + `${CHECK ? '' : `, ${writes} files updated`}.`,
+      );
+      if (errors.length) {
+        errors.forEach(error => console.error('FAIL ' + error));
+        process.exit(1);
+      }
+      return;
+    }
+
+    const eventDocument=JSON.parse(read('polymythseminars/events.json'));
+    assertCurrentDatasetVersion('polymythcal-events', eventDocument);
+    const events=eventDocument.events || [];
     injectEventRoot(events);
     // Stable event pages, legacy aliases, archive notes, and per-event ICS files
     // are owned by the canonical Polymythcal builder. This search builder refuses
-    // a stale canonical surface instead of partially patching it, then contributes
-    // only current, indexable routes to the sitemap. Redirect aliases remain
-    // untouched.
+    // a stale canonical surface instead of partially patching it. The calendar
+    // listing itself keeps its one-year working horizon, while the sitemap
+    // includes every non-past detail page whose canonical builder marks
+    // indexable—including confirmed exact events beyond that horizon. Redirect
+    // aliases remain untouched.
     archiveExpiredStableEventPages(events);
-    const eventIndex=events.filter(event => eventEligible(event) && eventIndexable(event)).map(event => {
+    const eventIndex=events.filter(eventIndexable).map(event => {
       const route=eventRoute(event);
       return {route,url:routeUrl(route)};
     });

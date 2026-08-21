@@ -1,0 +1,4 @@
+{
+  "scenario": "Change one archive byte after a valid receipt is generated.",
+  "expected": "verify-artifact-audit-receipt.py exits nonzero with an archive digest mismatch"
+}

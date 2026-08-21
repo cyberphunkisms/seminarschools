@@ -1,0 +1,86 @@
+{
+  "schema": "polymythcal-live-media-digitally-native-set14-exclusions-v1",
+  "generated_at": "2026-08-15T18:00:00-04:00",
+  "source_batch": "manual-polymythcal-live-media-digitally-native-set14-2026-08-15",
+  "research_set": "14-Live-Media-and-Digitally-Native-Events",
+  "exclusion_count": 11,
+  "exclusions": [
+    {
+      "candidate": "1iota / public audience show landing pages without dated inventory",
+      "source_url": "https://1iota.com/",
+      "decision": "exclude-undated-listings",
+      "reason": "Platform-controlled audience listings are not importable until an occurrence date/time is exposed. The dated On Camera Audiences Price Is Right listings were used instead.",
+      "reconsider_if": "A dated official taping slot becomes publicly visible."
+    },
+    {
+      "candidate": "Generic VR/AR event calendars and roundup articles",
+      "source_url": null,
+      "decision": "exclude-secondary-sources",
+      "reason": "Set 14 source policy requires organizer- or platform-controlled primary evidence; secondary calendars were not used to create records.",
+      "reconsider_if": "The event’s organizer publishes a dated official page."
+    },
+    {
+      "candidate": "Jimmy Kimmel Live guest/airing schedules",
+      "source_url": "https://abc.com/show/6f5a02b6-dfc9-4e15-8f2b-15ff7fbc10f9",
+      "decision": "exclude-airing-not-taping",
+      "reason": "An episode air date is not evidence of the public audience taping occurrence requested for media tapings.",
+      "reconsider_if": "An authorized audience provider publishes a dated taping."
+    },
+    {
+      "candidate": "ROM Online Exhibitions portal",
+      "source_url": "https://www.rom.on.ca/online-exhibitions",
+      "decision": "exclude-from-event-import",
+      "reason": "Persistent resource portal with no occurrence or date-specific live/launch marker in the reviewed evidence.",
+      "reconsider_if": "A dated opening, guided virtual tour, or live curator event is published."
+    },
+    {
+      "candidate": "Smithsonian Water’s Edge program",
+      "source_url": "https://americanindian.si.edu/calendar",
+      "decision": "exclude-misclassified-virtual-result",
+      "reason": "Detailed organizer evidence describes an in-person, capacity-limited museum program; a search label alone is insufficient to call it virtual.",
+      "reconsider_if": "The museum publishes a webcast or virtual-attendance link."
+    },
+    {
+      "candidate": "The Discovery of Insulin at the University of Toronto — permanent virtual exhibition",
+      "source_url": "https://alumni.utoronto.ca/events/online-events-activities",
+      "decision": "exclude-undated-persistent-resource",
+      "reason": "Official U of T page calls it permanent but gives no dated launch or occurrence; Set 14 proposal excludes generic/undated channels and resources.",
+      "reconsider_if": "A dated launch, curator tour, or scheduled live program is published."
+    },
+    {
+      "candidate": "U of T Engineering Lectures on Demand",
+      "baseline_id": "utoronto-engineering-lectures-on-demand-2026",
+      "decision": "do-not-cross-tag-as-live-event",
+      "reason": "Already exists in the baseline and is an on-demand collection rather than a synchronous occurrence; no duplicate is created.",
+      "reconsider_if": "A scheduled live premiere or discussion is attached to the series."
+    },
+    {
+      "candidate": "U of T Public History Lab: Hitler and Stalin Today",
+      "baseline_id": "utoronto-public-history-lab-hitler-stalin-timothy-snyder-2026",
+      "decision": "do-not-cross-tag-as-live-event",
+      "reason": "Baseline and official hub describe an on-demand date window; no live participation or launch moment is evidenced.",
+      "reconsider_if": "An official synchronous Q&A or watch party is announced."
+    },
+    {
+      "candidate": "Untitled David Fincher Netflix release article",
+      "source_url": "https://www.netflix.com/tudum/articles/david-fincher-new-film-release-date",
+      "decision": "exclude-insufficient-public-identity",
+      "reason": "The reviewed official article provides release sequencing but not a stable public film title suitable for a durable event ID.",
+      "reconsider_if": "Netflix announces the title and preserves the December 23 online release date."
+    },
+    {
+      "candidate": "WOFFF Eventive/search duplicates",
+      "source_url": "https://watch.eventive.org/",
+      "decision": "deduplicate-to-organizer-record",
+      "reason": "The organizer-controlled WOFFF record is authoritative; platform mirrors must not become duplicate festival identities.",
+      "reconsider_if": "Use only as an access URL attached to the existing WOFFF stable ID."
+    },
+    {
+      "candidate": "World Food Forum 2026 Zoom Events listing",
+      "source_url": "https://www.fao.org/world-food-forum/en",
+      "decision": "exclude-pending-primary-occurrence-page",
+      "reason": "A platform search card indicated dates, but this pass did not recover a stable organizer-controlled occurrence page with the same virtual-access evidence.",
+      "reconsider_if": "FAO/WFF publishes a stable 2026 event page linking the official online venue."
+    }
+  ]
+}

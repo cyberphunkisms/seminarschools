@@ -21,9 +21,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=DM+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/alive.css?v=20260806-front-facing-geometry">
+<link rel="stylesheet" href="/css/alive.css?v=sha256-3ccd45ce601b">
 <link rel="stylesheet" href="/css/theme.css?v=20260725-audit45">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260814-reader-word-integrity" data-site-wide-type-zoom="20260814-reader-word-integrity">
 <link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 <style>
@@ -136,20 +136,29 @@ button,a{-webkit-tap-highlight-color:transparent}
   fill:var(--ink);font:600 13px var(--sans);paint-order:stroke;stroke:var(--paper-soft);
   stroke-width:5px;stroke-linejoin:round;user-select:none;pointer-events:all;
 }
-.project-node:hover .node-halo,.project-node.active .node-halo{opacity:1}
-.project-node:hover .node-dot,.project-node.active .node-dot{fill:var(--node);r:12px}
+.project-node:hover .node-halo{opacity:.45}
+.project-node.active .node-halo{opacity:1}
+.project-node:hover .node-dot{fill:color-mix(in srgb,var(--node) 22%,var(--paper-soft));r:11px}
+.project-node.active .node-dot{fill:var(--node);r:12px}
 .project-panel{
-  position:sticky;top:2rem;min-height:19rem;padding:1.75rem 0 1.75rem 1.75rem;
+  position:sticky;top:2rem;display:grid;grid-template-columns:minmax(0,1fr);min-height:19rem;
+  padding:1.75rem 0 1.75rem 1.75rem;
   border-left:1px solid var(--line);background:transparent;
 }
+.project-preview-card{
+  grid-area:1/1;min-width:0;align-self:start;visibility:hidden;pointer-events:none;
+}
+.project-preview-card.is-current{visibility:visible;pointer-events:auto}
+.project-preview-card[aria-hidden="true"] .open-project{visibility:hidden}
 .panel-symbol{display:block;margin-bottom:2.5rem;color:var(--accent);font:400 4rem/1 var(--serif)}
 .panel-color{display:block;width:3rem;height:.35rem;margin-bottom:3rem;border-radius:999px}
-.project-panel h3{margin:0 0 1rem;font:500 clamp(1.8rem,3vw,2.8rem)/1 var(--serif);letter-spacing:-.035em}
+.project-panel h3{margin:0 0 1rem;font:500 clamp(1.8rem,3vw,2.8rem)/1 var(--serif);letter-spacing:-.035em;overflow-wrap:anywhere}
 .project-panel .panel-description{margin:0;color:var(--ink-soft);font-size:.92rem;line-height:1.7}
 .project-panel .prototype{margin-top:1.2rem}
 .project-panel .open-project{
   display:inline-flex;align-items:center;min-height:44px;margin-top:2rem;padding:0 1rem;
-  border:1px solid var(--ink);border-radius:999px;font:600 .74rem var(--mono);text-decoration:none;
+  max-width:100%;border:1px solid var(--ink);border-radius:999px;font:600 .74rem var(--mono);
+  text-decoration:none;overflow-wrap:anywhere;
 }
 .project-panel .open-project:hover,.project-panel .open-project:focus-visible{background:var(--ink);color:var(--paper-soft)}
 .index{max-width:none;margin:0;padding:0}
@@ -160,21 +169,19 @@ button,a{-webkit-tap-highlight-color:transparent}
   padding:1.1rem;border:0;background:transparent;color:var(--ink);font-family:var(--sans);
   text-align:left;cursor:pointer;
 }
-.project-list button:hover,.project-list button.active{background:color-mix(in srgb,var(--node) 9%,transparent)}
+.project-list button:hover{background:color-mix(in srgb,var(--node) 5%,transparent)}
+.project-list button.active{
+  background:color-mix(in srgb,var(--node) 12%,transparent);
+  box-shadow:inset .28rem 0 0 var(--node);
+}
+.project-list button.active:hover{background:color-mix(in srgb,var(--node) 15%,transparent)}
 .project-mark{width:.72rem;height:.72rem;margin-top:.12rem;border:2px solid var(--node);border-radius:50%}
 .project-list strong,.project-list small{display:block}
 .project-list strong{font:600 .9rem/1.25 var(--sans)}
 .project-list small{margin-top:.35rem;color:var(--muted);font:500 .68rem/1.4 var(--mono)}
-.mobile-project-detail{display:block;padding:0 1.1rem 1.25rem 2.9rem}
-.mobile-project-detail[hidden]{display:none}
-.mobile-project-detail p{margin:0;color:var(--ink-soft);font-size:.86rem;line-height:1.6}
-.mobile-project-detail a{
-  display:inline-flex;align-items:center;min-height:44px;margin-top:.75rem;
-  font:600 .72rem var(--mono);text-underline-offset:.25rem;
-}
 .noscript-list{columns:2;margin-top:1.5rem;padding:1rem;border:1px solid var(--line)}
 .noscript-list a{display:block;min-height:44px;padding:.6rem 0;text-underline-offset:.25rem}
-.project-list button:focus-visible,.card-contact a:focus-visible,.project-panel .open-project:focus-visible,.mobile-project-detail a:focus-visible{
+.project-list button:focus-visible,.card-contact a:focus-visible,.project-panel .open-project:focus-visible{
   position:relative;z-index:2;outline:2px solid var(--paper-soft);box-shadow:0 0 0 4px var(--ink);
 }
 @media(max-width:1080px){
@@ -205,7 +212,7 @@ button,a{-webkit-tap-highlight-color:transparent}
   .web-layout{display:block;padding:1.5rem 0}
   .map-shell{display:block;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .project-map{width:100%;min-height:0;height:auto}
-  .project-panel{display:none}
+  .project-panel{display:grid;min-height:0;margin-top:1.25rem;padding:1.25rem 0 0;border-top:1px solid var(--line)}
   .project-list{grid-template-columns:1fr}
   .project-list button{min-height:4.8rem}
   .noscript-list{columns:1}
@@ -213,6 +220,14 @@ button,a{-webkit-tap-highlight-color:transparent}
 @media(max-width:400px){
   .card-contact{flex-direction:column;align-items:stretch;gap:0}
   .card-contact a{width:100%}
+  .project-list button{
+    grid-template-columns:.55rem minmax(0,1fr);gap:.35rem;padding:.7rem .45rem;
+  }
+  .project-mark{width:.55rem;height:.55rem;border-width:1px}
+  .project-list strong{
+    font-size:clamp(.65rem,4.6vw,.9rem);overflow-wrap:normal;word-break:normal;
+  }
+  .project-list small{font-size:0.72rem}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -224,7 +239,7 @@ button,a{-webkit-tap-highlight-color:transparent}
   .project-node.active .node-dot{fill:Highlight;stroke:Highlight}
   .threads line.active{stroke:Highlight}
   .project-list button.active{outline:3px solid Highlight;outline-offset:-3px;background:Canvas}
-  .project-list button:focus-visible,.card-contact a:focus-visible,.project-panel .open-project:focus-visible,.mobile-project-detail a:focus-visible{
+  .project-list button:focus-visible,.card-contact a:focus-visible,.project-panel .open-project:focus-visible{
     outline:3px solid Highlight;box-shadow:none;
   }
 }
@@ -232,9 +247,6 @@ button,a{-webkit-tap-highlight-color:transparent}
   .card-instruction,.project-map,.project-panel{display:none!important}
   .business-card,.web-section{width:100%;margin:0;padding:1rem 0}
   .project-list{grid-template-columns:repeat(2,1fr)}
-  .mobile-project-detail[hidden]{display:block!important}
-  .mobile-project-detail p{display:none}
-  .mobile-project-detail a::after{content:" (https://seminarschools.com" attr(href) ")";font-weight:400}
   .ss-foot{display:none!important}
 }
 </style>
@@ -270,7 +282,7 @@ button,a{-webkit-tap-highlight-color:transparent}
 </script>
 <!-- audit35-home-ui: historical lineage; current contract is business-card-project-web-v1. -->
 </head>
-<body data-route-type="home" data-geometry="indra-web" data-indra-intensity="0.060" data-geometry-role="relation movement synthesis" class="home" data-homepage-contract="business-card-project-web-v1">
+<body data-route-type="home" data-geometry="indra-web" data-indra-intensity="0.200" data-geometry-role="relation movement synthesis" data-geometry-key="/" data-geometry-seed="8a5edab282632443" data-geometry-register="expressive" data-geometry-profile="single" data-front-facing="general-audience" class="home" data-homepage-contract="business-card-project-web-v1">
 <a class="skip-link" href="#project-web">Skip to the project web</a>
 <header class="business-card" aria-labelledby="site-title">
     <div class="identity-block">
@@ -325,11 +337,14 @@ button,a{-webkit-tap-highlight-color:transparent}
         </svg>
       </div>
 
-      <aside class="project-panel" id="projectPanel" aria-live="polite" aria-atomic="true" aria-label="Selected project description">
-        <span class="panel-symbol" aria-hidden="true">○</span>
-        <p class="panel-kind">Nothing is preselected</p>
-        <h3>Begin anywhere.</h3>
-        <p class="panel-description">Select a labelled point in the web. Its plain-language description will appear here before you leave this page.</p>
+      <aside class="project-panel" id="projectPanel" data-preview-layout="stacked-max-content" aria-live="polite" aria-atomic="true" aria-label="Project preview">
+        <p class="sr-only" id="projectPreviewStatus">No project selected. Begin anywhere.</p>
+        <article class="project-preview-card is-current" data-preview-id="none" aria-hidden="false">
+          <span class="panel-symbol" aria-hidden="true">○</span>
+          <p class="panel-kind">Nothing is preselected</p>
+          <h3>Begin anywhere.</h3>
+          <p class="panel-description">Select a labelled point in the web. Its plain-language description will appear here before you leave this page.</p>
+        </article>
       </aside>
     </div>
 
@@ -372,7 +387,7 @@ button,a{-webkit-tap-highlight-color:transparent}
     {id:'commons',label:'Polymyth Commons',kind:'Library of libraries',description:'A public route into libraries, archives, repositories, portals, commons projects, and preservation systems.',href:'/polymythcommons/',color:'#18777c',x:622,y:586,labelX:646,labelY:592,anchor:'start'},
     {id:'polymythlib',label:'Polymythlib',kind:'Library directory',description:'A library of libraries that keeps knowledge at its source while making collections easier to discover.',href:'/polymythlib/',color:'#1e8449',x:275,y:566,labelX:251,labelY:572,anchor:'end'},
     {id:'marginalia',label:'Marginalia',kind:'Essays',description:'Writing shaped by lectures, exhibitions, seminars, and conversations across Toronto.',href:'/marginalia/',color:'#6c3fb5',x:188,y:345,labelX:164,labelY:351,anchor:'end'},
-    {id:'florilegium',label:'Florilegium',kind:'Selected writing',description:'A growing collection of passages and pieces, with routes back to the projects where each one began.',href:'/florilegium/',color:'#9a516d',x:718,y:458,labelX:742,labelY:464,anchor:'start'},
+    {id:'florilegium',label:'Florilegium',kind:'Selected writing',description:'Essays and commentary from the public seminars, research projects, and teaching practice.',href:'/florilegium/',color:'#9a516d',x:718,y:458,labelX:742,labelY:464,anchor:'start'},
     {id:'polymyth',label:'polymorphousmythology',kind:'Framework and archive',description:'A framework for tracing how symbols, figures, stories, and arguments gather meaning through use.',href:'/polymyth/',color:'#1e8449',x:462,y:42,labelX:462,labelY:22,anchor:'middle'},
     {id:'aa',label:'AA*',kind:'Archetype archive',description:'An archive and editorial route into the project’s archetypes, sources, and connected research.',href:'/aa/',color:'#6c3fb5',x:774,y:150,labelX:796,labelY:156,anchor:'start'},
     {id:'ohm',label:'Ohm Dome',kind:'Public art prototype',description:'A developing public light installation shaped by heartbeat, breath, proximity, and collective presence.',href:'/ohm-dome/',color:'#1f6fb2',x:790,y:610,labelX:812,labelY:616,anchor:'start',prototype:true},
@@ -391,7 +406,19 @@ button,a{-webkit-tap-highlight-color:transparent}
   const mapNodes=document.getElementById('mapNodes');
   const list=document.getElementById('projectList');
   const panel=document.getElementById('projectPanel');
-  let selectedId=null;
+  const previewStatus=document.getElementById('projectPreviewStatus');
+  const previews=new Map();
+  const PROJECT_LABEL_BREAKS={
+    bb:['bookworm','burrows'],
+    polymyth:['polymorphous','mythology']
+  };
+  function setPreviewHeading(heading,project){
+    const parts=PROJECT_LABEL_BREAKS[project.id];
+    if(!parts){heading.textContent=project.label;return}
+    heading.append(parts[0],document.createElement('wbr'),parts[1]);
+  }
+  const state={selectedId:null};
+  previews.set('none',panel.querySelector('[data-preview-id="none"]'));
 
   function svg(name,attributes){
     const element=document.createElementNS(NS,name);
@@ -407,6 +434,36 @@ button,a{-webkit-tap-highlight-color:transparent}
   RELATIONSHIPS.forEach(([from,to])=>addLine(byId[from],byId[to],true));
 
   PROJECTS.forEach(project=>{
+    const preview=document.createElement('article');
+    preview.className='project-preview-card';
+    preview.dataset.previewId=project.id;
+    preview.setAttribute('aria-hidden','true');
+    preview.setAttribute('inert','');
+    const color=document.createElement('span');
+    color.className='panel-color';
+    color.style.background=project.color;
+    color.setAttribute('aria-hidden','true');
+    const kind=document.createElement('p');
+    kind.className='panel-kind';kind.textContent=project.kind;
+    const heading=document.createElement('h3');
+    setPreviewHeading(heading,project);
+    const description=document.createElement('p');
+    description.className='panel-description';description.textContent=project.description;
+    preview.append(color,kind,heading,description);
+    if(project.prototype){
+      const prototype=document.createElement('p');
+      prototype.className='prototype';prototype.textContent='P · Prototype';
+      preview.appendChild(prototype);
+    }
+    const open=document.createElement('a');
+    open.className='open-project';open.href=project.href;open.textContent='Open '+project.label+' ↗';
+    open.tabIndex=-1;
+    preview.appendChild(open);
+    panel.appendChild(preview);
+    previews.set(project.id,preview);
+  });
+
+  PROJECTS.forEach(project=>{
     const group=svg('g',{class:'project-node','data-id':project.id,style:'--node:'+project.color});
     group.appendChild(svg('circle',{class:'node-hit',cx:project.x,cy:project.y,r:26}));
     group.appendChild(svg('circle',{class:'node-halo',cx:project.x,cy:project.y,r:20}));
@@ -414,7 +471,7 @@ button,a{-webkit-tap-highlight-color:transparent}
     const label=svg('text',{x:project.labelX,y:project.labelY,'text-anchor':project.anchor});
     label.textContent=project.label+(project.prototype?' · P':'');
     group.appendChild(label);
-    group.addEventListener('click',()=>selectProject(selectedId===project.id?null:project.id));
+    group.addEventListener('click',()=>setSelectedProject(state.selectedId===project.id?null:project.id));
     mapNodes.appendChild(group);
   });
 
@@ -426,52 +483,18 @@ button,a{-webkit-tap-highlight-color:transparent}
     const button=document.createElement('button');
     button.type='button';
     button.id='project-button-'+project.id;
-    button.setAttribute('aria-expanded','false');
+    button.setAttribute('aria-pressed','false');
+    button.setAttribute('aria-controls',panel.id);
     button.innerHTML='<span class="project-mark" aria-hidden="true"></span><span><strong></strong><small></small></span>';
     button.querySelector('strong').textContent=project.label+(project.prototype?' · P':'');
     button.querySelector('small').textContent=project.kind;
-    button.addEventListener('click',()=>selectProject(selectedId===project.id?null:project.id));
-    const detail=document.createElement('div');
-    detail.className='mobile-project-detail';
-    detail.id='project-detail-'+project.id;
-    detail.setAttribute('role','region');
-    detail.setAttribute('aria-labelledby',button.id);
-    detail.hidden=true;
-    button.setAttribute('aria-controls',detail.id);
-    const description=document.createElement('p');
-    description.textContent=project.description;
-    const open=document.createElement('a');
-    open.href=project.href;open.textContent='Open '+project.label+' ↗';
-    detail.append(description,open);
-    item.append(button,detail);
+    button.addEventListener('click',()=>setSelectedProject(state.selectedId===project.id?null:project.id));
+    item.appendChild(button);
     list.appendChild(item);
   });
 
-  function neutralPanel(){
-    panel.innerHTML='<span class="panel-symbol" aria-hidden="true">○</span><p class="panel-kind">Nothing is preselected</p><h3>Begin anywhere.</h3><p class="panel-description">Select a labelled point in the web. Its plain-language description will appear here before you leave this page.</p>';
-  }
-  function selectedPanel(project){
-    panel.textContent='';
-    const color=document.createElement('span');
-    color.className='panel-color';color.style.background=project.color;
-    const kind=document.createElement('p');
-    kind.className='panel-kind';kind.textContent=project.kind;
-    const heading=document.createElement('h3');
-    heading.textContent=project.label;
-    const description=document.createElement('p');
-    description.className='panel-description';description.textContent=project.description;
-    panel.append(color,kind,heading,description);
-    if(project.prototype){
-      const prototype=document.createElement('p');
-      prototype.className='prototype';prototype.textContent='P · Prototype';
-      panel.appendChild(prototype);
-    }
-    const open=document.createElement('a');
-    open.className='open-project';open.href=project.href;open.textContent='Open '+project.label+' ↗';
-    panel.appendChild(open);
-  }
-  function selectProject(id){
-    selectedId=id;
+  function renderSelection(){
+    const id=state.selectedId;
     const selected=id?byId[id]:null;
     document.querySelectorAll('.project-node').forEach(node=>node.classList.toggle('active',node.dataset.id===id));
     document.querySelectorAll('.threads line').forEach(line=>{
@@ -482,18 +505,33 @@ button,a{-webkit-tap-highlight-color:transparent}
     document.querySelectorAll('.project-list-item').forEach(item=>{
       const active=item.dataset.id===id;
       const button=item.querySelector('button');
-      const detail=item.querySelector('.mobile-project-detail');
       button.classList.toggle('active',active);
-      button.setAttribute('aria-expanded',String(active));
-      detail.hidden=!active;
+      button.setAttribute('aria-pressed',String(active));
     });
-    if(selected)selectedPanel(selected);else neutralPanel();
+    const activePreviewId=id||'none';
+    previews.forEach((preview,previewId)=>{
+      const active=previewId===activePreviewId;
+      preview.classList.toggle('is-current',active);
+      preview.setAttribute('aria-hidden',String(!active));
+      preview.toggleAttribute('inert',!active);
+      const open=preview.querySelector('.open-project');
+      if(open)open.tabIndex=active?0:-1;
+    });
+    panel.dataset.selectedId=activePreviewId;
+    previewStatus.textContent=selected
+      ?selected.label+'. '+selected.kind+'. '+selected.description
+      :'No project selected. Begin anywhere.';
   }
+  function setSelectedProject(id){
+    state.selectedId=id&&byId[id]?id:null;
+    renderSelection();
+  }
+  renderSelection();
 })();
 </script>
 <script src="/js/theme.js?v=cl91" defer></script>
-<script src="/js/mandala.js?v=20260806-front-facing-geometry" defer></script>
-<script src="/js/indra.js?v=20260806-front-facing-geometry" defer></script>
+<script src="/js/mandala.js?v=sha256-3ccd45ce601b" defer></script>
+<script src="/js/indra.js?v=sha256-3ccd45ce601b" defer></script>
 <script src="/js/footer.js?v=20260805-predeploy-audit" defer></script>
 <script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
 </body>

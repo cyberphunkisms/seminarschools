@@ -136,3 +136,11 @@ You have `WebFetch`, `Read`, `Write`, `Bash`. The runner caps spend at the MAX_B
 Write final JSON to `/tmp/festivals-output.json`. Print a one-line summary to stdout with total record count, parent vs child breakdown, and per-source counts. Then exit.
 
 Do not emit anything else to stdout. The output file is the deliverable.
+
+## Theatre/performance talkbacks and creator-present child events
+
+Festival and venue harvests must descend from the parent festival or season into every named production and then every separately dated occurrence. A post-show talkback, Q&A, introduction, panel, or creator-attended performance is a distinct child record when the official source ties it to one performance date.
+
+The rule is not limited to film directors. Capture director, playwright, author, poet, artist, curator, composer, cast, creative-team, subject, witness, survivor, elder, knowledge-keeper, organizer, or represented-community presence when explicitly documented. Store generic “artists from the show” as confirmed artist presence even when no names are supplied. Store a named person’s production role separately from evidence that the person attended the occurrence.
+
+A confirmed talkback with unconfirmed participants remains discoverable. Do not convert uncertainty about the director into omission of the whole event. The 2026 Soulpepper / Outside the March *Medusa* production and its July 8 post-show talkback are the mandatory regression example: parent production, child occurrence, confirmed talkback, confirmed director role, unconfirmed director attendance, and conflicting run dates must all survive.

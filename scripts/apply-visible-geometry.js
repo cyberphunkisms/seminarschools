@@ -8,6 +8,15 @@
 const fs = require('fs');
 const path = require('path');
 const { isGeneratedDependencyDirectory } = require('./repository-walk-policy');
+const {
+  assertGeometryVersionScheme,
+  geometryBodyAttributes,
+  geometryAssetVersion,
+  geometryKeyForRelativeHtmlPath,
+  geometryProfileFor,
+  geometryRegisterForKey,
+  geometrySeedForKey,
+} = require('./lib/geometry-asset-version');
 const ROOT = path.resolve(__dirname, '..');
 const GEOMETRY_CONTRACTS = JSON.parse(
   fs.readFileSync(path.join(ROOT, 'data', 'geometry-route-contracts.json'), 'utf8'),
@@ -19,7 +28,8 @@ const SKIP = new Set([
   '.public-build-staging', '.public-build-previous',
 ]);
 const STEADY_VERSION = '20260723-steady';
-const GEOMETRY_VERSION = '20260806-front-facing-geometry';
+assertGeometryVersionScheme(GEOMETRY_CONTRACTS);
+const GEOMETRY_VERSION = geometryAssetVersion(ROOT);
 const OUTPUT_MTIME = process.env.SS_BUILD_OUTPUT_MTIME
   ? new Date(process.env.SS_BUILD_OUTPUT_MTIME)
   : null;
@@ -37,15 +47,13 @@ function walk(dir, out = []) {
   return out;
 }
 function rel(file) { return path.relative(ROOT, file).replace(/\\/g, '/'); }
-function intensityFor(r) {
-  if (r === 'index.html') return '0.060';
-  if (/^polymythseminars\//.test(r) || r === 'polymythseminars/index.html') return '0.105';
-  if (/^(writingclub|writingkids|writingjuniors|writingteens|writinggrads|university|philosophy|humanities|cfps|lectures|fellowships)\//.test(r)) return '0.095';
-  if (/^saul\//.test(r)) return '0.075';
-  if (/^teacherresources\//.test(r)) return '0.060';
-  if (/^(polymyth|bb|bookwormcard|campaigns|aa)\//.test(r)) return '0.095';
-  return '0.070';
-}
+// Preserve the finalizer's small public helper API for strict verifiers and
+// downstream build tooling while the canonical calculations live in one
+// shared module with generated-page builders.
+function geometryKeyFor(r) { return geometryKeyForRelativeHtmlPath(r); }
+function registerFor(r) { return geometryRegisterForKey(geometryKeyFor(r)); }
+function profileFor(r, routeType) { return geometryProfileFor(r, routeType); }
+function seedFor(r) { return geometrySeedForKey(geometryKeyFor(r)); }
 function routeTypeFor(r, html) {
   const existing = (html.match(/<body\b[^>]*\bdata-route-type\s*=\s*(['"])([^'"]+)\1/i) || [])[2];
   if (existing) {
@@ -114,21 +122,14 @@ function ensureHead(html) {
   html = html.replace(/<\/head>/i, `<link rel="stylesheet" href="/css/calm-ux.css?v=${STEADY_VERSION}">\n</head>`);
   return html;
 }
-function ensureBody(html, intensity, routeType) {
-  const roles = GEOMETRY_CONTRACTS.route_types[routeType];
-  if (!Array.isArray(roles) || roles.length === 0) {
-    throw new Error(`${routeType}: missing structural geometry roles`);
-  }
+function ensureBody(html, r, routeType) {
   return html.replace(/<body\b([^>]*)>/i, (m, attrs) => {
     let a = attrs || '';
-    for (const attribute of ['data-route-type', 'data-geometry', 'data-indra-intensity', 'data-geometry-role']) {
+    for (const attribute of ['data-route-type', 'data-geometry', 'data-indra-intensity', 'data-geometry-role', 'data-geometry-key', 'data-geometry-seed', 'data-geometry-register', 'data-geometry-profile', 'data-geometry-surface', 'data-front-facing']) {
       const pattern = new RegExp(`\\s+${attribute}\\s*=\\s*(["'])[^"']*\\1`, 'ig');
       a = a.replace(pattern, '');
     }
-    const geometry = ` data-route-type="${routeType}"`
-      + ' data-geometry="indra-web"'
-      + ` data-indra-intensity="${intensity}"`
-      + ` data-geometry-role="${roles.join(' ')}"`;
+    const geometry = ` ${geometryBodyAttributes(GEOMETRY_CONTRACTS, r, routeType)}`;
     return `<body${geometry}${a}>`;
   });
 }
@@ -150,32 +151,67 @@ function ensureScripts(html) {
   return html;
 }
 
-let changed = 0;
-const files = walk(ROOT);
-for (const file of files) {
-  const r = rel(file);
-  const priorMtimeMs = fs.statSync(file).mtimeMs;
-  let html = fs.readFileSync(file, 'utf8');
-  if (r === GOOGLE_TOKEN) {
-    if (html !== GOOGLE_TOKEN_TEXT) throw new Error(`${GOOGLE_TOKEN}: verification token bytes changed`);
-    continue;
-  }
-  const old = html;
-  const routeType = routeTypeFor(r, html);
-  html = ensureHead(html);
-  html = ensureBody(html, intensityFor(r), routeType);
-  html = ensureScripts(html);
-  if (html !== old) {
-    fs.writeFileSync(file, html, 'utf8');
-    changed += 1;
-  }
-  if (OUTPUT_MTIME) {
-    const configuredMs = OUTPUT_MTIME.getTime();
-    const preservedMs = priorMtimeMs > Date.now() + 60_000
-      ? Math.max(configuredMs, priorMtimeMs + 2_000)
-      : configuredMs;
-    const preserved = new Date(preservedMs);
-    fs.utimesSync(file, preserved, preserved);
-  }
+function removeLegacyLayerOpacity(html) {
+  /* Page-local opacity ownership predates the register contract and can use
+     !important to defeat the canonical level. Remove only that declaration;
+     unrelated historic inline styling remains byte-stable. */
+  return html.replace(/#indraLayer\s*\{([^{}]*)\}/gi, (rule, declarations) => {
+    const kept = declarations.replace(/(?:^|;)\s*opacity\s*:\s*[^;}]+\s*(?=;|$);?/gi, ';');
+    return kept.replace(/[;\s]+/g, '') ? `#indraLayer {${kept}}` : '';
+  });
 }
-console.log(`STEADY GEOMETRY APPLY — ${changed} of ${files.length} source HTML files updated.`);
+
+function applyGeometryToHtml(html, r) {
+  const routeType = routeTypeFor(r, html);
+  html = removeLegacyLayerOpacity(html);
+  html = ensureHead(html);
+  html = ensureBody(html, r, routeType);
+  html = ensureScripts(html);
+  return html;
+}
+
+function applyAllSourcePages() {
+  let changed = 0;
+  const files = walk(ROOT);
+  for (const file of files) {
+    const r = rel(file);
+    const priorMtimeMs = fs.statSync(file).mtimeMs;
+    let html = fs.readFileSync(file, 'utf8');
+    if (r === GOOGLE_TOKEN) {
+      if (html !== GOOGLE_TOKEN_TEXT) throw new Error(`${GOOGLE_TOKEN}: verification token bytes changed`);
+      continue;
+    }
+    const old = html;
+    html = applyGeometryToHtml(html, r);
+    if (html !== old) {
+      fs.writeFileSync(file, html, 'utf8');
+      changed += 1;
+    }
+    // Artifact workspaces may restore an older extracted copy when a rewrite
+    // falls back from its future release-stamp mtime to wall-clock time. Keep a
+    // regenerated page newer than its prior future-stamped version even when a
+    // caller did not provide an explicit deterministic timestamp.
+    if (OUTPUT_MTIME || (html !== old && priorMtimeMs > Date.now() + 60_000)) {
+      const configuredMs = OUTPUT_MTIME ? OUTPUT_MTIME.getTime() : priorMtimeMs + 2_000;
+      const preservedMs = priorMtimeMs > Date.now() + 60_000
+        ? Math.max(configuredMs, priorMtimeMs + 2_000)
+        : configuredMs;
+      const preserved = new Date(preservedMs);
+      fs.utimesSync(file, preserved, preserved);
+    }
+  }
+  console.log(`STEADY GEOMETRY APPLY — ${changed} of ${files.length} source HTML files updated with ${GEOMETRY_VERSION}.`);
+}
+
+module.exports = {
+  GEOMETRY_VERSION,
+  applyGeometryToHtml,
+  removeLegacyLayerOpacity,
+  geometryKeyFor,
+  profileFor,
+  registerFor,
+  routeTypeFor,
+  seedFor,
+};
+
+if (require.main === module) applyAllSourcePages();

@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Seminar Schools//Polymythcal//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:f4196b90eca28df80a01@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260923
+DTEND;VALUE=DATE:20260925
+SUMMARY:Meta Connect 2026 virtual livestream
+LOCATION:Virtual livestream
+DESCRIPTION:Two-day virtual livestream conference covering AI\, AI glasse
+ s\, VR\, developer tools\, a keynote\, developer state of the union\, an
+ d technical sessions.
+URL:https://seminarschools.com/polymythseminars/events/meta-connect-virtu
+ al-livestream-2026/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

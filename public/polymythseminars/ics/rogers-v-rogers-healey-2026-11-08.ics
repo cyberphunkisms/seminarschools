@@ -5,14 +5,16 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:e5a742d97d12d910aa76@seminarschools.com
-DTSTAMP:20260628T042537Z
-DTSTART;VALUE=DATE:20261108
-DTEND;VALUE=DATE:20261207
-SUMMARY:Rogers v. Rogers (Healey)
-LOCATION:Crow's Theatre
-DESCRIPTION:Canadian Stage / Crow's Theatre co-production.
+DTSTAMP:20260814T000800Z
+DTSTART:20261108T190000Z
+DTEND:20261214T040000Z
+SUMMARY:Rogers v. Rogers
+LOCATION:Berkeley Street Theatre
+DESCRIPTION:Canadian Stage production written by Michael Healey and direc
+ ted by Chris Abraham\; the post-show talkback is stored as a child occur
+ rence.
 URL:https://seminarschools.com/polymythseminars/events/rogers-v-rogers-he
  aley-2026-11-08/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

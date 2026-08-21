@@ -1,0 +1,15 @@
+{
+  "schema": "seminar-schools-live-evidence-policy-v1",
+  "contract_id": "FP-09",
+  "claims": [
+    {
+      "id": "audit48-live-harvest-endpoints",
+      "report": "scripts/reports/audit48-live-harvest-endpoints.json",
+      "generated_at_field": "generated_at",
+      "max_age_hours": 336,
+      "strict_verifier": "node scripts/run-python.js scripts/verify_audit48_live_harvest.py --require-current",
+      "release_workflow": ".github/workflows/predeploy.yml",
+      "historical_mode_may_not_claim_current": true
+    }
+  ]
+}

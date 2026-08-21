@@ -62,13 +62,40 @@ for (const [id, href] of expected) {
 }
 
 check(home.includes('aria-hidden="true" focusable="false"'), 'visual map is removed from the duplicate keyboard path');
-check(home.includes("button.setAttribute('aria-expanded','false')"), 'text controls expose expansion state');
-check(home.includes("button.setAttribute('aria-controls',detail.id)"), 'text controls identify their adjacent project description');
-check(home.includes("detail.className='mobile-project-detail'"), 'descriptions expand beside the selected project at every width');
+check(home.includes("button.setAttribute('aria-pressed','false')"), 'text controls expose selection state without expansion');
+check(home.includes("button.setAttribute('aria-controls',panel.id)"), 'every text control identifies the one shared preview region');
+check(home.includes('data-preview-layout="stacked-max-content"'), 'the shared preview declares its stable stacked layout');
+const previewRule = (home.match(/\.project-preview-card\{([^}]*)\}/) || [])[1] || '';
+check(previewRule.includes('grid-area:1/1'), 'all preview states occupy one grid cell');
+check(previewRule.includes('visibility:hidden') && !previewRule.includes('position:absolute'), 'inactive previews stay in layout to reserve the maximum wrapped height');
+check(home.includes('.project-preview-card.is-current{visibility:visible;pointer-events:auto}'), 'exactly the current preview becomes visible and interactive');
+check(home.includes("previews.set('none',panel.querySelector('[data-preview-id=\"none\"]'))"), 'the stable preview stack includes the neutral no-selection state');
+check(home.includes("preview.className='project-preview-card'"), 'every project receives one state in the shared preview stack');
+check(
+  home.includes("bb:['bookworm','burrows']")
+    && home.includes("polymyth:['polymorphous','mythology']")
+    && home.includes("heading.append(parts[0],document.createElement('wbr'),parts[1])"),
+  'long compound project names receive semantic mobile wrap opportunities',
+);
+check(home.includes("preview.toggleAttribute('inert',!active)"), 'inactive preview links are removed from interaction');
+check(!home.includes('mobile-project-detail') && !home.includes('detail.hidden') && !home.includes('aria-expanded'), 'no project description expands inside a list item');
 check(home.includes('.project-map{pointer-events:none}'), 'unlabelled compact map nodes are not interactive');
-check(home.includes("group.addEventListener('click',()=>selectProject(selectedId===project.id?null:project.id))"), 'map selection previews and toggles a project');
+check(home.includes("group.addEventListener('click',()=>setSelectedProject(state.selectedId===project.id?null:project.id))"), 'map click previews and toggles a project');
+check(home.includes("button.addEventListener('click',()=>setSelectedProject(state.selectedId===project.id?null:project.id))"), 'native list buttons preserve click, keyboard, and touch activation');
 check(home.includes("open.textContent='Open '+project.label+' ↗'"), 'an explicit open action follows every preview');
-check(home.includes('let selectedId=null'), 'the whole network opens without a default project');
+check(home.includes('const state={selectedId:null}'), 'the whole network opens without a default project');
+const renderBlock = (home.match(/function renderSelection\(\)\{([\s\S]*?)\n  \}\n  function setSelectedProject/) || [])[1] || '';
+for (const token of [
+  "document.querySelectorAll('.project-node')",
+  "document.querySelectorAll('.threads line')",
+  "document.querySelectorAll('.project-list-item')",
+  'previews.forEach',
+  'panel.dataset.selectedId=activePreviewId',
+]) check(renderBlock.includes(token), 'one render state synchronizes ' + token);
+check(!/addEventListener\(['"](?:mouseenter|mouseover|pointerenter|mousemove|pointermove)/.test(home), 'hover never activates or changes project state');
+check(home.includes('.project-list button:hover{') && home.includes('.project-list button.active{'), 'list hover and active states have distinct rules');
+check(home.includes('.project-node:hover .node-halo{opacity:.45}') && home.includes('.project-node.active .node-halo{opacity:1}'), 'map hover and active states are visually distinct');
+check(/@media\(max-width:760px\)\{[\s\S]*?\.project-panel\{display:grid;/.test(home), 'the same stable preview remains present on mobile and narrow zoom layouts');
 check(home.includes("sort((a,b)=>a.label.localeCompare"), 'the complete text index is alphabetical');
 check(home.includes('min-height:44px'), 'project and contact controls retain practical touch targets');
 check(home.includes('@media(forced-colors:active)'), 'forced-colour support remains present');

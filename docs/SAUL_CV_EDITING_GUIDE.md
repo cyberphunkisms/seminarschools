@@ -42,18 +42,24 @@ the application documents:
 - `web_profile` replaces `profile` in the web hero.
 - `impact_facts` supplies the hero fact cards. Each item has `value` and
   `label`.
-- `public_highlights` supplies the selected-evidence cards. Each item has a
-  stable `id`, one or more `focus` values, a `title` and a plain-text `body`.
-  The focus values control the same field filters used by experience records.
 - `web_core_skills`, `web_credentials`, `web_methods_tools` and
   `web_languages` override their unprefixed counterparts on the website only.
   Every web override is optional; when it is absent, the builder falls back to
   the corresponding shared field.
+- `web_intro` belongs on an experience section when a concise summary applies
+  across several roles. It is rendered directly below that section heading.
+- `web_detail` belongs on an individual experience record when the compact
+  application row needs supporting detail. It is rendered directly below that
+  role and carried into the matching role-focused PDFs, text exports and the
+  complete career archive.
 
-Keep `public_highlights.body` as plain text because the builder escapes it.
 Use the application fields when a factual correction must reach both the web
 page and downloadable CVs. Use a `web_*` field only for a presentation change
 that should remain website-specific.
+
+Do not recreate a separate evidence, proof or “how the work was done” panel.
+Put evidence beside the role or section it explains so a visitor does not have
+to reconcile two parallel versions of the CV.
 
 ### Historical archive introductions
 
@@ -80,7 +86,8 @@ That command runs the CV pipeline in this order:
    committed verified binary outputs.
 2. `build-saul-ultimate-web-cv.py` synchronizes the legacy mirrors and
    downloads, retires focused routes, updates redirects, rebuilds `/saul/`,
-   applies the archive consistency corrections and injects `archive_letters`.
+   integrates section and role details, applies the archive consistency
+   corrections and injects `archive_letters`.
 3. `export-saul-cv-records.js` regenerates `data/saul-cv-records.json` from the
    rebuilt historical archive.
 4. `verify-saul-ultimate-web-cv.js` checks the web CV and generated surfaces.
@@ -114,4 +121,10 @@ Ordinary factual edits belong in the JSON file. Edit the template only when chan
 - Each underlined section heading has one genuine 0.5 pt spacer before its first row.
 - Dates use a right-aligned tab stop.
 - The application CV remains one US Letter page.
+- The no-selection website download points to the professional application CV;
+  the general modular PDF remains an owner/index output rather than the public
+  default.
+- Non-general role-focused PDFs remain one page and include relevant experience
+  by section, any matching `web_detail`, and compact Education, Credentials and
+  Languages sections.
 - `seminarschools.com/saul` and `seminarschools.com/reviews` remain the public links.

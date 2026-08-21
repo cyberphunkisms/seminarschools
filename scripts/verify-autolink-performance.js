@@ -117,6 +117,14 @@ check(
   source.includes("a.href = '/polymyth/concordance/?term='"),
   'generated concordance destinations were lost'
 );
+check(
+  source.includes("closest('a, [data-no-autolink]"),
+  'autolink must not create invalid nested links inside an existing anchor'
+);
+check(
+  source.includes("a.contentEditable = 'false'"),
+  'derived links inside editable records must remain independently keyboard-focusable'
+);
 
 function runIncrementalRuntimeCheck() {
   const walkRoots = [];

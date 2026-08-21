@@ -35,6 +35,7 @@ for (const name of shouldKeep) {
 
 const guardedScanners = [
   'scripts/build-public-deploy.js',
+  'scripts/build-asset-weight-report.js',
   'scripts/apply-sitewide-type-zoom-link.js',
   'scripts/apply-type-floor.js',
   'scripts/apply-visible-geometry.js',
@@ -45,11 +46,13 @@ const guardedScanners = [
   'scripts/verify-audit10-remaining-website.js',
   'scripts/verify-audit11-website-decisions.js',
   'scripts/verify-audit33-evolution.js',
+  'scripts/verify-audit49-metadata-surface.js',
   'scripts/verify-csp-enforced.js',
   'scripts/verify-final8-website-polish.js',
   'scripts/verify-front-facing-boundary.js',
   'scripts/verify-keyboard-navigation.js',
   'scripts/verify-page-size-budget.js',
+  'scripts/verify-public-deploy-parity.js',
   'scripts/verify-reviews-zoom-font-release.js',
   'scripts/verify-site-interactivity.js',
   'scripts/verify-sitemap-classification.js',

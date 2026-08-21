@@ -13,11 +13,36 @@ import subprocess
 import sys
 import zipfile
 from pathlib import Path
+from geometry_asset_version import geometry_asset_version
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT / "data" / "saul-ultimate-school-cv-2026.json"
 DATA = json.loads(DATA_PATH.read_text(encoding="utf-8"))
+GEOMETRY_VERSION = geometry_asset_version(ROOT)
+STATIC_SITE_BUILD_LIFECYCLES = frozenset({"build", "build:locked"})
+
+
+def should_reuse_generated_documents(
+    argv: list[str] | None = None,
+    environ: dict[str, str] | None = None,
+) -> bool:
+    """Keep committed document binaries immutable during static-site builds.
+
+    `npm run build` delegates to `npm run build:locked`, and npm replaces
+    npm_lifecycle_event for that child command. Both lifecycle values therefore
+    identify the same static-site build. Explicit CV output builds omit these
+    lifecycle values and continue to regenerate DOCX/PDF/ZIP artifacts.
+    """
+    argv = sys.argv if argv is None else argv
+    environ = os.environ if environ is None else environ
+    lifecycle = environ.get("npm_lifecycle_event", "").strip()
+    netlify = environ.get("NETLIFY", "").strip().lower()
+    return (
+        "--reuse-generated-documents" in argv
+        or lifecycle in STATIC_SITE_BUILD_LIFECYCLES
+        or netlify in {"1", "true", "yes"}
+    )
 
 
 def total_experiences() -> int:
@@ -37,19 +62,34 @@ def inline_list(values: list[str]) -> str:
 def experience_section(section: dict) -> str:
     rows = []
     for record in section["records"]:
+        detail = record.get("web_detail", "")
         accessible = (
             f"{record['role']}; {record['description']}; "
             f"{record['organization']}; {record['dates']}."
+            + (f" {detail}" if detail else "")
+        )
+        detail_html = (
+            f'<p class="cv-ultimate__row-detail">{esc(detail)}</p>'
+            if detail
+            else ""
         )
         rows.append(
             f"""<article class="cv-ultimate__row" data-experience-id="{esc(record['id'])}" data-experience-row="{esc(section['id'])}" data-focus="{esc(' '.join(record['focus']))}">
 <span class="cv-ultimate__sr-only">{esc(accessible)}</span>
 <div aria-hidden="true" class="cv-ultimate__row-copy"><strong>{esc(record['role'])}</strong><span class="cv-ultimate__pipe">|</span><span class="cv-ultimate__description">{esc(record['description'])}</span><span class="cv-ultimate__pipe">|</span><em>{esc(record['organization'])}</em></div>
 <time aria-hidden="true">{esc(record['dates'])}</time>
+{detail_html}
 </article>"""
         )
+    intro = section.get("web_intro", "")
+    intro_html = (
+        f'<p class="cv-ultimate__section-summary">{esc(intro)}</p>'
+        if intro
+        else ""
+    )
     return f"""<section class="cv-ultimate__experience-section" data-experience-section="{esc(section['id'])}" aria-labelledby="{esc(section['id'])}-heading">
 <div class="cv-ultimate__section-heading"><h2 id="{esc(section['id'])}-heading">{esc(section['title'])}</h2><span data-section-count="{len(section['records'])}">{len(section['records'])} experiences</span></div>
+{intro_html}
 <div class="cv-ultimate__rows">
 {''.join(rows)}
 </div>
@@ -84,21 +124,6 @@ def download_controls(compact: bool = False) -> str:
 </div>"""
 
 
-def evidence_highlights() -> str:
-    rows = []
-    for index, highlight in enumerate(DATA.get("public_highlights", []), start=1):
-        rows.append(
-            f"""<li class="cv-evidence__item" data-evidence-id="{esc(highlight['id'])}" data-focus="{esc(' '.join(highlight['focus']))}">
-<span aria-hidden="true" class="cv-evidence__number">{index:02d}</span>
-<div><h3>{esc(highlight['title'])}</h3><p>{esc(highlight['body'])}</p></div>
-</li>"""
-        )
-    return f"""<section class="cv-evidence" id="evidenceHighlights" aria-labelledby="evidenceHighlightsHeading">
-<div class="cv-evidence__heading"><div><span>Selected evidence</span><h2 id="evidenceHighlightsHeading">How the work was done</h2></div><p>Specific examples across education, volunteer management, programs, events, research, accessibility, arts &amp; service operations.</p></div>
-<ol class="cv-evidence__list">{''.join(rows)}</ol>
-</section>"""
-
-
 def focus_controls() -> str:
     modules = DATA["focus_modules"]
     application_modules = [
@@ -130,16 +155,16 @@ def focus_controls() -> str:
             ),
         }
         for module in modules
-        if not module.get("archive_only")
+        if not module.get("archive_only") and not module.get("default_view")
     ]
     module_json = (
         json.dumps(public_modules, ensure_ascii=False, separators=(",", ":"))
         .replace("</", "<\\/")
     )
     return f"""<section class="cv-focus" aria-labelledby="cvFocusHeading" data-cv-focus>
-<div class="cv-focus__heading"><div><span>Experience by field</span><h2 id="cvFocusHeading">Explore relevant experience</h2></div><p data-focus-summary>Select one or more fields to narrow the evidence, skills &amp; work history below.</p></div>
+<div class="cv-focus__heading"><div><span>Experience by field</span><h2 id="cvFocusHeading">Explore relevant experience</h2></div><p data-focus-summary>Select one or more fields to narrow the skills and work history below.</p></div>
 <fieldset class="cv-focus__controls" aria-controls="experienceLedger"><legend class="cv-ultimate__sr-only">Experience fields</legend>{''.join(controls)}</fieldset>
-<div class="cv-focus__status"><p data-cv-share-status="" aria-atomic="true" aria-live="polite" class="cv-spectrum__status">Showing <strong data-visible-count>{total_experiences()}</strong> of <strong>{total_experiences()}</strong> experiences</p><a data-focus-pdf href="/saul/downloads/saul-karim-nassau-general-cv.pdf">Download general CV</a><button data-focus-print hidden type="button">Print selected view</button><button data-copy-focus type="button">Copy link to this view</button></div>
+<div class="cv-focus__status"><p data-cv-share-status="" aria-atomic="true" aria-live="polite" class="cv-spectrum__status">Showing <strong data-visible-count>{total_experiences()}</strong> of <strong>{total_experiences()}</strong> experiences</p><a data-focus-pdf href="{esc(DATA['downloads']['proton_pdf'])}">Download professional CV</a><button data-focus-print hidden type="button">Print selected view</button><button data-copy-focus type="button">Copy link to this view</button></div>
 <script id="cvFocusData" type="application/json">{module_json}</script>
 </section>"""
 
@@ -188,7 +213,6 @@ def build_cv_html() -> str:
 </header>
 <a class="cv-ultimate__curriculum-band" href="#courses"><span>Curriculum scope</span><strong>OSSD · IB · AP · A Level · ESL · IELTS · STEM · Humanities · University Preparation</strong><span>See every course ↓</span></a>
 {focus_controls()}
-{evidence_highlights()}
 <div class="cv-ultimate__layout">
 <aside class="cv-ultimate__skills" aria-labelledby="coreSkillsHeading">
 <h2 id="coreSkillsHeading">Key Skills</h2>
@@ -598,7 +622,9 @@ def update_archive_consistency(source: str) -> str:
         '"Bronze Cross Swimming Certificate": {': (
             '"Bronze Cross & First Aid Training (Historical)": {'
         ),
-        '"Completed at age 16"': '"c. 2006 (not current)"',
+        '"Completed at age 16"': '"2006 (not current)"',
+        '"c. 2006"': '"2006"',
+        '"c. 2006 (not current)"': '"2006 (not current)"',
         '"en": "Lifesaving and water safety"': (
             '"en": "Historical lifesaving and water-safety training; not current"'
         ),
@@ -606,7 +632,14 @@ def update_archive_consistency(source: str) -> str:
             "Completed Bronze Cross and First Aid at age 16, developing lifesaving "
             "and water-safety skills."
         ): (
+            "Completed Bronze Cross and associated First Aid training in 2006; "
+            "this training is not current."
+        ),
+        (
             "Completed Bronze Cross and associated First Aid training c. 2006; "
+            "this training is not current."
+        ): (
+            "Completed Bronze Cross and associated First Aid training in 2006; "
             "this training is not current."
         ),
     }
@@ -716,9 +749,19 @@ def update_page(path: Path) -> None:
     )
     source = update_archive_consistency(source)
     source = update_metadata(source)
-    source = source.replace(
-        '<nav aria-label="CV sections" class="cv-local-nav" data-cv-local-nav=""><a aria-current="location" href="#cvOverview">CV</a><a href="#places">Map</a><a href="#careerArchive">Historical Archive</a><a href="#eduHead">Education</a><a href="#methodsHead">Methods</a></nav>',
-        '<nav aria-label="CV sections" class="cv-local-nav" data-cv-local-nav=""><a aria-current="location" href="#cvOverview">CV</a><a href="#evidenceHighlights">Evidence</a><a href="#experienceLedger">Experience</a><a href="#educationLearningHeading">Education</a><a href="#places">Map</a><a href="#careerArchive">Full history</a></nav>',
+    source = re.sub(
+        r'<nav\b[^>]*\bclass=["\'][^"\']*\bcv-local-nav\b[^"\']*["\'][^>]*>[\s\S]*?</nav>',
+        '<nav aria-label="CV sections" class="cv-local-nav" data-cv-local-nav=""><a aria-current="location" href="#cvOverview">CV</a><a href="#experienceLedger">Experience</a><a href="#educationLearningHeading">Education</a><a href="#places">Map</a><a href="#careerArchive">Full history</a></nav>',
+        source,
+        count=1,
+        flags=re.I,
+    )
+    source = re.sub(
+        r'<a class="cv-return-focus" href="#cvOverview">.*?</a>',
+        "",
+        source,
+        count=1,
+        flags=re.S,
     )
     source = source.replace(
         "</body>",
@@ -913,26 +956,28 @@ def retire_focused_routes() -> None:
 <meta content="noindex,follow" name="robots">
 <link href="https://seminarschools.com{destination}" rel="canonical">
 <script src="/js/theme-init.js?v=20260723-steady"></script>
-<link rel="stylesheet" href="/css/alive.css?v=20260806-front-facing-geometry">
+<link rel="stylesheet" href="/css/alive.css?v={geometry_version}">
 <link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
 <link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 <title>Saul Karim Nassau — Relevant Experience</title>
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.075" data-page-weight="light" data-route-type="cv-redirect" data-geometry-role="return">
+<body data-geometry="indra-web" data-indra-intensity="0.095" data-page-weight="light" data-route-type="cv-redirect" data-geometry-role="return" data-front-facing="general-audience">
 <main>
 <h1>Saul Nassau — Relevant Experience</h1>
 <p data-cv-share-status="" aria-atomic="true" aria-live="polite" class="cv-spectrum__status">Opening the <a href="{destination}">selected experience view</a>.</p>
 </main>
-<script defer src="/js/mandala.js?v=20260806-front-facing-geometry"></script>
-<script defer src="/js/indra.js?v=20260806-front-facing-geometry"></script>
+<script defer src="/js/mandala.js?v={geometry_version}"></script>
+<script defer src="/js/indra.js?v={geometry_version}"></script>
 </body>
 </html>
 """
     for path, destination in route_destinations.items():
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(
-            redirect_template.format(destination=esc(destination)),
+            redirect_template.format(
+                destination=esc(destination), geometry_version=GEOMETRY_VERSION
+            ),
             encoding="utf-8",
         )
 
@@ -989,11 +1034,7 @@ def main() -> None:
     # LibreOffice, and project fonts that are intentionally outside the static
     # site build image. The verifier immediately following this script still
     # rejects missing or altered committed outputs.
-    reuse_generated_documents = (
-        "--reuse-generated-documents" in sys.argv
-        or os.environ.get("npm_lifecycle_event", "").strip() == "build"
-        or os.environ.get("NETLIFY", "").strip().lower() in {"1", "true", "yes"}
-    )
+    reuse_generated_documents = should_reuse_generated_documents()
     if not reuse_generated_documents:
         subprocess.run(
             [sys.executable, str(ROOT / "scripts" / "build-saul-cv-outputs.py")],

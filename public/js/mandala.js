@@ -14,6 +14,24 @@
 
 (function(global) {
   const PHI = 1.6180339887;
+  const CANONICAL_ID = 'polymyth-mandala-main-v32';
+  const CANONICAL_OPTIONS = Object.freeze({
+    gaskets: Object.freeze([
+      Object.freeze({ rot: 0, scale: 1, op: 0.78 }),
+      Object.freeze({ rot: Math.PI * 0.4, scale: 1 / PHI, op: 0.58 }),
+      Object.freeze({ rot: Math.PI * 0.78, scale: 1 / (PHI * PHI), op: 0.42 })
+    ]),
+    flowers: true,
+    jewels: true,
+    maxDepth: 6,
+    minRadius: 0.9
+  });
+  let canonicalTemplate = '';
+
+  function safeIdPrefix(value) {
+    const clean = String(value || 'indra').replace(/[^a-zA-Z0-9_-]+/g, '-');
+    return clean || 'indra';
+  }
 
   function descartesCurvature(k1, k2, k3, sign) {
     const s = k1*k2 + k2*k3 + k1*k3;
@@ -86,6 +104,9 @@
 
   function buildMandala(opts) {
     opts = opts || {};
+    const idPrefix = safeIdPrefix(opts.idPrefix);
+    const jewelCoreId = `${idPrefix}-jewel-core`;
+    const jewelPrismId = `${idPrefix}-jewel-prism`;
     const gaskets = opts.gaskets || [
       { rot: 0,             scale: 1,            op: 0.78 },
       { rot: Math.PI*0.42,  scale: 1/PHI,        op: 0.58 },
@@ -102,11 +123,19 @@
     const useVines = opts.vines === true;
 
     let geom = `<defs>
-      <radialGradient id="jewelCore" cx="35%" cy="35%" r="65%">
+      <radialGradient id="${jewelCoreId}" cx="35%" cy="35%" r="65%">
         <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
         <stop offset="25%" stop-color="currentColor" stop-opacity="0.85"/>
         <stop offset="70%" stop-color="currentColor" stop-opacity="0.55"/>
         <stop offset="100%" stop-color="currentColor" stop-opacity="0.25"/>
+      </radialGradient>
+      <radialGradient id="${jewelPrismId}" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="transparent" stop-opacity="0"/>
+        <stop offset="82%" stop-color="transparent" stop-opacity="0"/>
+        <stop offset="88%" stop-color="#ff4477" stop-opacity="0.55"/>
+        <stop offset="92%" stop-color="#ffaa22" stop-opacity="0.55"/>
+        <stop offset="96%" stop-color="#44aaff" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#aa44ff" stop-opacity="0"/>
       </radialGradient>
     </defs>`;
 
@@ -132,7 +161,7 @@
         const op = c.k<0 ? g.op*0.5 : Math.max(0.32, g.op - (c.d||0)*0.045);
         const x = (c.x + offsetX).toFixed(1);
         const y = (c.y + offsetY).toFixed(1);
-        const circleSvg = `<circle class="geo-stroke" cx="${x}" cy="${y}" r="${r.toFixed(1)}" stroke-width="${sw.toFixed(2)}" opacity="${op.toFixed(2)}" fill="none"/>`;
+        const circleSvg = `<circle class="geo-stroke geo-gasket-circle" data-gasket="${gIdx}" cx="${x}" cy="${y}" r="${r.toFixed(1)}" stroke-width="${sw.toFixed(2)}" opacity="${op.toFixed(2)}" fill="none"/>`;
         // Depth parity routes the circle to one of the two counter-rotating
         // groups. The bounding ring (k<0) stays in group A so the frame holds.
         if ((c.d || 0) % 2 === 0 || c.k < 0) { geomCW += circleSvg; } else { geomCCW += circleSvg; }
@@ -181,9 +210,9 @@
               const tipX = tx + dirX*flowerR, tipY = ty + dirY*flowerR;
               petals += `M ${sx.toFixed(1)} ${sy.toFixed(1)} Q ${tipX.toFixed(1)} ${tipY.toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)} `;
             }
-            geom += `<path class="geo-stroke" d="${petals}" stroke-width="${flowerSw.toFixed(2)}" opacity="${flowerOp.toFixed(2)}" fill="none"/>`;
+            geom += `<path class="geo-stroke geo-flower" data-gasket="${gIdx}" d="${petals}" stroke-width="${flowerSw.toFixed(2)}" opacity="${flowerOp.toFixed(2)}" fill="none"/>`;
             const dotR = Math.max(0.4, flowerR * 0.1);
-            geom += `<circle cx="${tx.toFixed(1)}" cy="${ty.toFixed(1)}" r="${dotR.toFixed(1)}" fill="currentColor" opacity="${(flowerOp*0.9).toFixed(2)}"/>`;
+            geom += `<circle class="geo-flower-center" data-gasket="${gIdx}" cx="${tx.toFixed(1)}" cy="${ty.toFixed(1)}" r="${dotR.toFixed(1)}" fill="currentColor" opacity="${(flowerOp*0.9).toFixed(2)}"/>`;
             flowerPositions.push({ x: tx, y: ty, r: flowerR, op: flowerOp });
           }
         }
@@ -269,9 +298,10 @@
         const d = Math.sqrt(j.x*j.x+j.y*j.y);
         const r = d < 80 ? 2.6 : d < 200 ? 2.0 : 1.4;
         const x = j.x.toFixed(1), y = j.y.toFixed(1);
-        geom += `<circle cx="${x}" cy="${y}" r="${r.toFixed(1)}" fill="url(#jewelCore)" opacity="0.85"/>`;
+        geom += `<circle class="geo-jewel geo-jewel-prism" cx="${x}" cy="${y}" r="${(r*1.35).toFixed(2)}" fill="url(#${jewelPrismId})" opacity="0.7"/>`;
+        geom += `<circle class="geo-jewel geo-jewel-core" cx="${x}" cy="${y}" r="${r.toFixed(1)}" fill="url(#${jewelCoreId})" opacity="0.85"/>`;
         const hx = (j.x - r*0.35).toFixed(1), hy = (j.y - r*0.35).toFixed(1);
-        geom += `<circle cx="${hx}" cy="${hy}" r="${(r*0.28).toFixed(2)}" fill="#ffffff" opacity="0.75"/>`;
+        geom += `<circle class="geo-jewel geo-jewel-highlight" cx="${hx}" cy="${hy}" r="${(r*0.28).toFixed(2)}" fill="#ffffff" opacity="0.75"/>`;
       });
     }
 
@@ -280,7 +310,23 @@
     // rotation pivots on the SVG origin, not each group's bounding box.
     const groupA = `<g class="spin-a" style="transform-box:view-box;transform-origin:0 0;transform:rotate(var(--spin-a,0deg));">${geomCW}</g>`;
     const groupB = `<g class="spin-b" style="transform-box:view-box;transform-origin:0 0;transform:rotate(var(--spin-b,0deg));">${geomCCW}</g>`;
-    return `<svg viewBox="-380 -380 760 760" xmlns="http://www.w3.org/2000/svg">${groupA}${groupB}${geom}</svg>`;
+    return `<svg class="polymyth-mandala" data-canonical-web="${CANONICAL_ID}" viewBox="-380 -380 760 760" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">${groupA}${groupB}${geom}</svg>`;
+  }
+
+  function buildCanonical(options) {
+    options = options || {};
+    if (!canonicalTemplate) {
+      canonicalTemplate = buildMandala({
+        gaskets: CANONICAL_OPTIONS.gaskets,
+        flowers: CANONICAL_OPTIONS.flowers,
+        jewels: CANONICAL_OPTIONS.jewels,
+        maxDepth: CANONICAL_OPTIONS.maxDepth,
+        minRadius: CANONICAL_OPTIONS.minRadius,
+        idPrefix: '__INDRA_CANONICAL__'
+      });
+    }
+    const prefix = safeIdPrefix(options.idPrefix || 'indra');
+    return canonicalTemplate.replace(/__INDRA_CANONICAL__/g, prefix);
   }
 
   // Per-project parameter presets — same substrate, different jazz
@@ -447,7 +493,10 @@
       }
       const docH = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       const p = Math.max(0, Math.min(1, (window.scrollY || 0) / docH));
-      const span = Math.max(1, CAMERA_PRIMARY.length - 1);
+      // The final waypoint intentionally closes the path back to the first.
+      // Full-page traversal stops at the last distinct view so bottom-of-page
+      // geometry cannot become visually identical to the top.
+      const span = Math.max(1, CAMERA_PRIMARY.length - 2);
       const f = p * span;
       const idx = Math.min(span - 1, Math.floor(f));
       return { idx: idx, t: f - idx };
@@ -504,9 +553,13 @@
       });
     }
 
-    // Calm and reduced-motion modes are responsive without interpolation.
-    // They schedule at most one paint per scroll/resize burst.
-    if (reduced || calm) {
+    // Reduced motion paints one visible camera state and never binds scrolling.
+    // Calm mode remains scroll-responsive without interpolation or idle work.
+    if (reduced) {
+      staticUpdate();
+      return;
+    }
+    if (calm) {
       window.addEventListener('scroll', staticUpdate, { passive: true });
       window.addEventListener('resize', staticUpdate, { passive: true });
       staticUpdate();
@@ -689,6 +742,9 @@
 
   global.PolymythMandala = {
     build: buildMandala,
+    buildCanonical: buildCanonical,
+    canonicalId: CANONICAL_ID,
+    canonicalOptions: CANONICAL_OPTIONS,
     presets: PRESETS,
     initForProject: function(projectKey) {
       const opts = PRESETS[projectKey];

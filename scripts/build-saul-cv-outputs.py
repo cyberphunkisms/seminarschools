@@ -236,11 +236,15 @@ def replace_experience_sections(doc: Document, data: dict, row_leading: float) -
     sample = next(
         p for p in doc.paragraphs if p.text.startswith("Occasional Instructor |")
     )
-    scale_by_body: dict[str, int] = {}
+    scale_by_identity: dict[tuple[str, str, str], int] = {}
     for paragraph in doc.paragraphs:
         if "\t" not in paragraph.text:
             continue
-        body = paragraph.text.split("\t", 1)[0]
+        body, dates = paragraph.text.rsplit("\t", 1)
+        parts = body.split(" | ")
+        if len(parts) < 3:
+            continue
+        identity = (parts[0].strip(), parts[-1].strip(), dates.strip())
         scale = 100
         for run in paragraph.runs:
             rpr = run._element.rPr
@@ -248,7 +252,7 @@ def replace_experience_sections(doc: Document, data: dict, row_leading: float) -
             if width is not None:
                 scale = int(width.get(qn("w:val"), "100"))
                 break
-        scale_by_body[body] = scale
+        scale_by_identity[identity] = scale
 
     for index in range(len(data["experience_sections"]) - 1, -1, -1):
         section = data["experience_sections"][index]
@@ -268,15 +272,16 @@ def replace_experience_sections(doc: Document, data: dict, row_leading: float) -
         cursor = spacer
         for record in section["records"]:
             cursor = clone_paragraph_after(sample, cursor)
-            body = (
-                f"{record['role']} | {record['description']} | "
-                f"{record['organization']}"
+            identity = (
+                record["role"],
+                record["organization"],
+                record["dates"],
             )
             build_experience_row(
                 cursor,
                 record,
                 row_leading=row_leading,
-                character_scale=scale_by_body.get(body, 100),
+                character_scale=scale_by_identity.get(identity, 100),
             )
 
 
@@ -567,6 +572,22 @@ def records_for_focus(data: dict, focus_id: str) -> list[dict]:
     return [record for record in records if focus_id in record.get("focus", [])]
 
 
+def sections_for_focus(data: dict, focus_id: str) -> list[tuple[dict, list[dict]]]:
+    grouped = []
+    for section in data["experience_sections"]:
+        if focus_id == "general":
+            records = list(section["records"])
+        else:
+            records = [
+                record
+                for record in section["records"]
+                if focus_id in record.get("focus", [])
+            ]
+        if records:
+            grouped.append((section, records))
+    return grouped
+
+
 def draw_compressed_text(
     cv: canvas.Canvas,
     text: str,
@@ -592,6 +613,9 @@ def modular_pdf(data: dict, module: dict, output: Path, *, ats: bool) -> None:
     records = records_for_focus(data, module["id"])
     if not records and module.get("archive_only"):
         records = all_application_records(data)
+    grouped = sections_for_focus(data, module["id"])
+    if not grouped and module.get("archive_only"):
+        grouped = sections_for_focus(data, "general")
     cv = canvas.Canvas(str(output), pagesize=letter, pageCompression=1)
     cv.setTitle(
         f"Saul Karim Nassau - {module['label']} CV"
@@ -624,7 +648,7 @@ def modular_pdf(data: dict, module: dict, output: Path, *, ats: bool) -> None:
     cv.setLineWidth(1)
     cv.line(left, PAGE_H - 67, right, PAGE_H - 67)
 
-    y = PAGE_H - 82
+    y = PAGE_H - 80
     y = draw_wrapped(
         cv,
         module["summary"],
@@ -633,10 +657,10 @@ def modular_pdf(data: dict, module: dict, output: Path, *, ats: bool) -> None:
         width,
         font="CVSans",
         size=7.7,
-        leading=9.2,
-        max_lines=3,
+        leading=9.1,
+        max_lines=2,
     )
-    y -= 2
+    y -= 1
     skills = " | ".join(module.get("skills", data["core_skills"]))
     y = draw_wrapped(
         cv,
@@ -645,41 +669,122 @@ def modular_pdf(data: dict, module: dict, output: Path, *, ats: bool) -> None:
         y,
         width,
         font="CVSans",
-        size=6.8,
-        leading=8.2,
-        max_lines=3,
+        size=6.7,
+        leading=8.0,
+        max_lines=2,
     )
-    y -= 5
-    cv.setFont("CVSans-Bold", 8.4)
-    cv.setFillColor(INK)
-    cv.drawString(left, y, f"SELECTED EXPERIENCE · {len(records)}")
-    y -= 10
+    y -= 4
+    cv.setStrokeColor(RULE)
+    cv.setLineWidth(0.5)
 
-    bottom = 54
-    available = max(1, y - bottom)
-    row_leading = min(16.0, available / max(1, len(records)))
-    row_leading = max(9.4, row_leading)
     date_width = 92
     content_width = width - date_width - 8
-    role_size = 7.7 if ats else 8.0
-    for record in records:
-        row = (
-            f"{record['role']} | {record['description']} | "
-            f"{record['organization']}"
-        )
-        draw_compressed_text(
-            cv,
-            row,
-            left,
-            y,
-            content_width,
-            font="CVSans",
-            size=role_size,
-        )
-        cv.setFont("CVSans", 7.5)
+    role_size = 7.6 if ats else 7.9
+    section_intro_focus = {
+        "teaching",
+        "programs",
+        "customer-education",
+        "community",
+        "volunteer-events",
+    }
+    for section, section_records in grouped:
+        cv.setFillColor(INK)
+        cv.setFont("CVSans-Bold", 8.0)
+        cv.drawString(left, y, section["title"].upper())
         cv.setFillColor(MUTED)
-        cv.drawRightString(right, y, record["dates"])
-        y -= row_leading
+        cv.setFont("CVSans", 6.3)
+        cv.drawRightString(right, y, f"{len(section_records)} relevant roles")
+        y -= 3
+        cv.line(left, y, right, y)
+        y -= 8.5
+
+        if section.get("web_intro") and module["id"] in section_intro_focus:
+            y = draw_wrapped(
+                cv,
+                section["web_intro"],
+                left,
+                y,
+                width,
+                font="CVSans",
+                size=6.25,
+                leading=7.35,
+                color=MUTED,
+                max_lines=4,
+            )
+            y -= 2
+
+        for record in section_records:
+            row = (
+                f"{record['role']} | {record['description']} | "
+                f"{record['organization']}"
+            )
+            draw_compressed_text(
+                cv,
+                row,
+                left,
+                y,
+                content_width,
+                font="CVSans",
+                size=role_size,
+            )
+            cv.setFont("CVSans", 7.3)
+            cv.setFillColor(MUTED)
+            cv.drawRightString(right, y, record["dates"])
+            y -= 9.7
+            detail = record.get("web_detail")
+            if detail:
+                y = draw_wrapped(
+                    cv,
+                    detail,
+                    left + 8,
+                    y,
+                    width - 8,
+                    font="CVSans",
+                    size=6.15,
+                    leading=7.2,
+                    color=MUTED,
+                    max_lines=4,
+                )
+                y -= 1.5
+        y -= 4
+
+    cv.setStrokeColor(INK)
+    cv.setLineWidth(0.8)
+    cv.line(left, y, right, y)
+    y -= 10
+    cv.setFont("CVSans-Bold", 7.5)
+    cv.setFillColor(INK)
+    cv.drawString(left, y, "QUALIFICATIONS")
+    y -= 9
+
+    qualification_rows = [
+        ("EDUCATION", data["education"]),
+        ("CREDENTIALS", data["credentials"]),
+        ("LANGUAGES", data.get("web_languages", data["languages"])),
+    ]
+    label_width = 67
+    for label, values in qualification_rows:
+        cv.setFont("CVSans-Bold", 6.3)
+        cv.setFillColor(INK)
+        cv.drawString(left, y, label)
+        y = draw_wrapped(
+            cv,
+            " | ".join(values),
+            left + label_width,
+            y,
+            width - label_width,
+            font="CVSans",
+            size=6.15,
+            leading=7.25,
+            color=INK,
+            max_lines=4,
+        )
+        y -= 2
+
+    if y < 43:
+        raise RuntimeError(
+            f"Focused CV content overflowed one page for {module['id']}: y={y:.1f}"
+        )
 
     cv.setStrokeColor(RULE)
     cv.setLineWidth(0.7)
@@ -714,15 +819,28 @@ def modular_text(data: dict, module: dict) -> str:
         "KEY SKILLS",
         " | ".join(module.get("skills", data["core_skills"])),
         "",
-        f"SELECTED EXPERIENCE ({len(records)})",
+        f"RELEVANT EXPERIENCE ({len(records)})",
     ]
-    lines.extend(
-        (
-            f"{record['role']} | {record['description']} | "
-            f"{record['organization']} | {record['dates']}"
-        )
-        for record in records
-    )
+    grouped = sections_for_focus(data, module["id"])
+    if not grouped and module.get("archive_only"):
+        grouped = sections_for_focus(data, "general")
+    for section, section_records in grouped:
+        lines.extend(["", section["title"].upper()])
+        if section.get("web_intro") and module["id"] in {
+            "teaching",
+            "programs",
+            "customer-education",
+            "community",
+            "volunteer-events",
+        }:
+            lines.append(section["web_intro"])
+        for record in section_records:
+            lines.append(
+                f"{record['role']} | {record['description']} | "
+                f"{record['organization']} | {record['dates']}"
+            )
+            if record.get("web_detail"):
+                lines.append(record["web_detail"])
     lines.extend(
         [
             "",
@@ -870,11 +988,18 @@ def everything_pdf(data: dict, output: Path) -> None:
             ),
             styles["meta"],
         ),
-        RLParagraph(html.escape(data["profile"]), styles["body"]),
+        RLParagraph(
+            html.escape(data.get("web_profile", data["profile"])),
+            styles["body"],
+        ),
         RLParagraph("APPLICATION EXPERIENCE · 37 RECORDS", styles["h2"]),
     ]
     for section in data["experience_sections"]:
         story.append(RLParagraph(html.escape(section["title"]), styles["h2"]))
+        if section.get("web_intro"):
+            story.append(
+                RLParagraph(html.escape(section["web_intro"]), styles["meta"])
+            )
         for record in section["records"]:
             line = (
                 f"<b>{html.escape(record['role'])}</b> | "
@@ -883,6 +1008,13 @@ def everything_pdf(data: dict, output: Path) -> None:
                 f"{html.escape(record['dates'])}"
             )
             story.append(RLParagraph(line, styles["body"]))
+            if record.get("web_detail"):
+                story.append(
+                    RLParagraph(
+                        html.escape(record["web_detail"]),
+                        styles["meta"],
+                    )
+                )
 
     story.extend(
         [

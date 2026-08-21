@@ -20,10 +20,12 @@ function check(condition, message) {
 }
 
 const requirements = read('requirements-audit.txt');
+const auditLock = read('requirements-audit.lock');
 for (const dependency of [
   'beautifulsoup4',
   'icalendar',
   'jsonschema',
+  'openpyxl',
   'playwright',
   'python-dateutil',
   'requests',
@@ -34,6 +36,11 @@ for (const dependency of [
     `${dependency} is not pinned in requirements-audit.txt`,
   );
 }
+const lockedPins = [...auditLock.matchAll(/^([A-Za-z0-9_.-]+)==([^\s\\]+)\s+\\$/gm)];
+const lockedHashes = [...auditLock.matchAll(/^\s+--hash=sha256:([a-f0-9]{64})(?:\s+\\)?$/gm)];
+check(lockedPins.length === 22, `requirements-audit.lock has ${lockedPins.length} resolved pins, expected 22`);
+check(lockedHashes.length === 332, `requirements-audit.lock has ${lockedHashes.length} artifact hashes, expected 332`);
+check(!/(?:^|\n)(?!\s*#)(?!\s*$)(?![A-Za-z0-9_.-]+==[^\s\\]+\s+\\$)(?!\s+--hash=sha256:[a-f0-9]{64}(?:\s+\\)?$).+/m.test(auditLock), 'requirements-audit.lock contains an unsupported unhashed line');
 
 const pkg = JSON.parse(read('package.json'));
 const lock = JSON.parse(read('package-lock.json'));
@@ -92,6 +99,11 @@ check(
   'predeploy omits portable cross-platform Audit 48 calendar verification',
 );
 check(workflow.includes(lockedInstall), `predeploy omits ${lockedInstall}`);
+check(
+  (workflow.match(/cache-dependency-path: requirements-audit\.lock/g) || []).length === 2
+    && (workflow.match(/--require-hashes --requirement requirements-audit\.lock/g) || []).length === 2,
+  'predeploy does not use the complete hash-locked Python audit runtime in both jobs',
+);
 check(
   workflow.indexOf(lockedInstall) < workflow.indexOf(portableVerification),
   'locked JavaScript dependencies are not installed before portable verification',

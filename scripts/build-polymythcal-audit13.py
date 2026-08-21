@@ -4,6 +4,7 @@ from __future__ import annotations
 from pathlib import Path
 from zoneinfo import ZoneInfo
 import datetime, hashlib, html, json, os, re, shutil, sys, urllib.parse
+from geometry_asset_version import geometry_asset_version, geometry_body_attributes
 ROOT=Path(__file__).resolve().parents[1]
 payload=json.loads((ROOT/'polymythseminars/events.json').read_text(encoding='utf-8'))
 events=payload.get('events',[])
@@ -12,8 +13,11 @@ ASSET_VERSION=str(release.get('polymythcal_asset_version') or '')
 if not re.fullmatch(r'[0-9]{8}-[a-z0-9-]+',ASSET_VERSION): raise SystemExit('RELEASE_MANIFEST.json has no valid polymythcal_asset_version')
 AUDIT43_VERSION='20260725-audit43'
 STEADY_VERSION='20260723-steady'
-GEOMETRY_VERSION='20260806-front-facing-geometry'
-EVENT_GEOMETRY_INTENSITY='0.105'
+type_zoom_source=(ROOT/'scripts'/'apply-sitewide-type-zoom-link.js').read_text(encoding='utf-8')
+type_zoom_match=re.search(r"const BUILD = '([^']+)'",type_zoom_source)
+TYPE_ZOOM_VERSION=type_zoom_match.group(1) if type_zoom_match else ''
+if not re.fullmatch(r'[0-9]{8}-[a-z0-9-]+',TYPE_ZOOM_VERSION):raise SystemExit('site-wide type/zoom build identifier is invalid')
+GEOMETRY_VERSION=geometry_asset_version(ROOT)
 CHECK='--check' in sys.argv
 OUTPUT_MTIME_TEXT=str(os.environ.get('SS_BUILD_OUTPUT_MTIME') or '').strip()
 OUTPUT_MTIME=None
@@ -57,6 +61,22 @@ def calendar_event_signature(value):
   found=re.search(rf'<{tag_name}\b[^>]*>([\s\S]*?)</{tag_name}\s*>',value,flags=re.I)
   if not found:return ''
   return re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',found.group(1)))).strip()
+ def visible_fragment(fragment):
+  return re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',fragment or ''))).strip()
+ def class_tag(name,class_name,source=value):
+  return first_tag(name,lambda tag:class_name in tag_attribute(tag,'class').split()) if source is value else next((found.group(0) for found in re.finditer(rf'<{name}\b[^>]*>',source,flags=re.I) if class_name in tag_attribute(found.group(0),'class').split()),'')
+ def class_state(tag,owner):
+  return sorted(token for token in tag_attribute(tag,'class').split() if token!=owner)
+ def normalized_place(text,kind):
+  normalized=visible_fragment(text)
+  pending={
+   'venue':{'','location unconfirmed','location unconfirmed · lieu non confirmé','location details still pending','lieu exact à confirmer','lieu non confirmé'},
+   'city':{'','unknown','not yet determined'},
+  }
+  return '__pending__' if normalized.casefold() in pending[kind] else normalized
+ def section_fragment(class_name,tag_name='section'):
+  found=re.search(rf'<{tag_name}\b(?=[^>]*\bclass=["\'][^"\']*\b{re.escape(class_name)}\b)[^>]*>([\s\S]*?)</{tag_name}\s*>',value,flags=re.I)
+  return found.group(1) if found else ''
  canonical=first_tag('link',lambda tag:'canonical' in tag_attribute(tag,'rel').lower().split())
  robots=first_tag('meta',lambda tag:tag_attribute(tag,'name').lower()=='robots')
  official=first_tag('a',lambda tag:'pm-event-action' in tag_attribute(tag,'class').split() and 'primary' in tag_attribute(tag,'class').split())
@@ -64,15 +84,55 @@ def calendar_event_signature(value):
  alive=first_tag('link',lambda tag:bool(re.search(r'/css/alive\.css(?:\?|$)',tag_attribute(tag,'href'))))
  mandala=first_tag('script',lambda tag:bool(re.search(r'/js/mandala\.js(?:\?|$)',tag_attribute(tag,'src'))))
  indra=first_tag('script',lambda tag:bool(re.search(r'/js/indra\.js(?:\?|$)',tag_attribute(tag,'src'))))
+ context=re.search(r'<section\b(?=[^>]*\bclass=["\'][^"\']*\bpm-event-context\b)[^>]*>([\s\S]*?)</section\s*>',value,flags=re.I)
+ context_values=[]
+ if context:
+  for item in re.finditer(r'<dd\b[^>]*>([\s\S]*?)</dd\s*>',context.group(1),flags=re.I):
+   context_values.append(visible_fragment(item.group(1)))
+ facts=re.search(r'<dl\b(?=[^>]*\bclass=["\'][^"\']*\bpm-event-facts\b)[^>]*>([\s\S]*?)</dl\s*>',value,flags=re.I)
+ fact_values=list(re.finditer(r'<dd\b[^>]*>([\s\S]*?)</dd\s*>',facts.group(1),flags=re.I)) if facts else []
+ place_fragment=fact_values[1].group(1) if len(fact_values)>1 else ''
+ venue_match=re.search(r'<strong\b[^>]*>([\s\S]*?)</strong\s*>',place_fragment,flags=re.I)
+ city_match=re.search(r'<span\b[^>]*>([\s\S]*?)</span\s*>',place_fragment,flags=re.I)
+ description_fragment=section_fragment('pm-event-description')
+ description_match=re.search(r'<p\b[^>]*>([\s\S]*?)</p\s*>',description_fragment,flags=re.I)
+ truth=class_tag('span','truth-chip')
+ lifecycle=class_tag('span','pm-lifecycle')
+ pending_tag=class_tag('details','pm-event-pending')
+ pending_reasons=sorted(filter(None,tag_attribute(pending_tag,'data-qualification-reasons').split()))
+ previous=class_tag('p','pm-event-previous')
+ previous_body=re.search(r'<p\b[^>]*>([\s\S]*?)</p\s*>',value[value.find(previous):] if previous else '',flags=re.I)
+ previous_values=visible_fragment(re.sub(r'<strong\b[^>]*>[\s\S]*?</strong\s*>','',previous_body.group(1),count=1,flags=re.I)) if previous_body else ''
+ checked=class_tag('p','pm-event-checked')
+ checked_body=re.search(r'<p\b[^>]*>([\s\S]*?)</p\s*>',value[value.find(checked):] if checked else '',flags=re.I)
+ checked_value=visible_fragment(re.sub(r'<strong\b[^>]*>[\s\S]*?</strong\s*>','',checked_body.group(1),count=1,flags=re.I)) if checked_body else ''
+ related_fragment=section_fragment('pm-event-related','nav')
+ related=[]
+ for link in re.finditer(r'<a\b[^>]*>([\s\S]*?)</a\s*>',related_fragment,flags=re.I):
+  href=tag_attribute(link.group(0),'href')
+  route=re.search(r'/polymythseminars/(?:fr/)?events/([^/?#]+)/?',href,flags=re.I)
+  if route:related.append([urllib.parse.unquote(route.group(1)),visible_fragment(link.group(1))])
  signature={
   'event_id':tag_attribute(body.group(0),'data-event-id'),
   'canonical':tag_attribute(canonical,'href'),
   'title':visible('h1'),
   'date':visible('time'),
+  'description':visible_fragment(description_match.group(1)) if description_match else '',
+  'venue':normalized_place(venue_match.group(1) if venue_match else '','venue'),
+  'city':normalized_place(city_match.group(1) if city_match else '','city'),
+  'confirmation_status':tag_attribute(body.group(0),'data-confirmation-status') or class_state(truth,'truth-chip'),
+  'lifecycle_status':tag_attribute(body.group(0),'data-lifecycle-status') or class_state(lifecycle,'pm-lifecycle') or 'active',
   'robots':tag_attribute(robots,'content').lower(),
   'official_source':tag_attribute(official,'href'),
   'calendar_file':tag_attribute(calendar,'href'),
   'archived':bool(re.search(r'\bdata-event-archive-note\s*=\s*["\']true["\']',value,flags=re.I)),
+  'qualification_reasons':pending_reasons,
+  'previous_dates':previous_values,
+  'last_checked':checked_value,
+  'related':related,
+  # Localized route generation owns translated labels, but every researched
+  # value must remain a fixed point of the canonical event generator.
+  'context_values':context_values,
   'geometry_role':tag_attribute(body.group(0),'data-geometry-role'),
   'geometry_assets':[
    tag_attribute(alive,'href'),tag_attribute(mandala,'src'),tag_attribute(indra,'src'),
@@ -95,6 +155,21 @@ def comparable_html(value):
  value=re.sub(r'(<h1)\s+lang=["\'][^"\']*["\']',r'\1',value,count=1,flags=re.I)
  return re.sub(r'\s+',' ',value).strip()
 def write_if_changed(path:Path,text:str):
+ if path.suffix.lower()=='.html' and (
+  'data-route-type="calendar-event-alias"' in text
+  or path==ROOT/'polymythcal'/'index.html'
+ ):
+  # Alias fallbacks are normalized later by the canonical pipeline. Emit the
+  # final cache key here too, so clean generation and immediate rebuilds are
+  # the same fixed point even under an external generated-file reconciler.
+  text=re.sub(
+   r'(/css/site-wide-type-zoom\.css\?v=)[^"\']+',
+   rf'\g<1>{TYPE_ZOOM_VERSION}',text,flags=re.I,
+  )
+  text=re.sub(
+   r'(data-site-wide-type-zoom=["\'])[^"\']+',
+   rf'\g<1>{TYPE_ZOOM_VERSION}',text,flags=re.I,
+  )
  old=path.read_bytes().decode('utf-8') if path.exists() else None
  if old!=text:
   if path.suffix.lower()=='.html' and old is not None and comparable_html(old)==comparable_html(text):return
@@ -190,6 +265,124 @@ def event_meta_description(e,title_text,venue,city):
  facts=date_label+(f' at {location}' if location else '')+'.'
  detail=str(e.get('description') or e.get('raw_excerpt') or '').strip()
  return clean_meta(f'{title_text}. {facts} {detail}',160)
+def context_value(value):
+ if value is None:return ''
+ if isinstance(value,dict):
+  pieces=[]
+  for key in ('person','collective','role','category','status','mode','scope','min','max'):
+   item=value.get(key)
+   if item not in (None,'','not-applicable','unknown','production-credit'):
+    pieces.append(str(item).replace('-',' '))
+  return ' — '.join(pieces) if pieces else json.dumps(value,ensure_ascii=False,sort_keys=True)
+ if isinstance(value,list):return '; '.join(filter(None,(context_value(item) for item in value)))
+ text=str(value).strip()
+ return '' if text.casefold() in {'unknown','not-applicable'} else text
+CONTEXT_FIELDS=[
+ ('Entry family','Famille de fiche','entry_family'),
+ ('Calendar systems','Systèmes calendaires','calendar_systems'),
+ ('Traditions','Traditions','traditions'),
+ ('Ritual associations','Associations rituelles','ritual_associations'),
+ ('Social functions','Fonctions sociales','social_functions'),
+ ('Social context','Contexte social','socio_note'),
+ ('Viewing notes','Conseils d’observation',('astronomy_visibility','observer_notes')),
+ ('Presence categories','Catégories de présence','presence_categories'),
+ ('Participants and presence','Participants et présence',('presence_claims','participant_presence')),
+ ('Presence mode','Mode de présence','presence_mode'),
+ ('Interaction format','Format de l’échange','interaction_format'),
+ ('Academic event formats','Formats intellectuels et universitaires',('academic_event_forms','public_intellectual_academic_formats')),
+ ('Academic disciplines','Disciplines universitaires','academic_disciplines'),
+ ('Arts formats','Formats artistiques','arts_event_forms'),
+ ('Arts disciplines','Disciplines artistiques','arts_disciplines'),
+ ('Arts occurrence role','Rôle dans le programme artistique','arts_occurrence_role'),
+ ('Participation formats','Formats participatifs','participatory_formats'),
+ ('Participation mode','Mode de participation','participation_mode'),
+ ('Participation roles','Rôles des participants','participation_roles'),
+ ('Facilitation','Animation','facilitation_status'),
+ ('Skill level','Niveau','skill_level'),
+ ('Drop-in status','Accès libre ou inscription','drop_in_status'),
+ ('Participation evidence','Preuve de participation','participation_evidence'),
+ ('Civic, legal, and labour formats','Formats civiques, juridiques et syndicaux','civic_legal_labour_formats'),
+ ('Civic domain','Domaine civique','civic_domain'),
+ ('Authority level','Niveau d’autorité','authority_level'),
+ ('Public role','Rôle du public','public_role'),
+ ('Participation route','Voie de participation','participation_route'),
+ ('Public input','Participation du public','public_input_status'),
+ ('Legal access','Accès juridique','legal_access_status'),
+ ('Collective action','Action collective','collective_action_type'),
+ ('Election stage','Étape électorale','election_stage'),
+ ('Access restrictions','Restrictions d’accès','access_restrictions'),
+ ('Webcast status','État de la webdiffusion','webcast_status'),
+ ('Publication restriction','Restriction de publication','publication_restriction'),
+ ('Alternate dates','Dates alternatives','alternate_dates'),
+ ('Civic evidence','Preuve civique','civic_evidence'),
+ ('Community, charity, heritage, and place formats','Formats communautaires, caritatifs, patrimoniaux et territoriaux','community_heritage_formats'),
+ ('Community participation roles','Rôles de participation communautaire','community_participation_roles'),
+ ('Contribution routes','Voies de contribution','contribution_routes'),
+ ('Beneficiary or cause','Bénéficiaire ou cause','beneficiary_or_cause'),
+ ('Relation to place','Relation au lieu','place_relation'),
+ ('Community evidence','Preuve communautaire','community_evidence'),
+ ('Community or heritage scope','Portée communautaire ou patrimoniale','community_heritage_scope'),
+ ('Community public access','Accès public communautaire','community_public_access_status'),
+ ('Community registration required','Inscription communautaire requise','community_registration_required'),
+ ('Community participation mode','Mode de participation communautaire','community_participation_mode'),
+ ('Community date evidence','Preuve de date communautaire','community_date_evidence'),
+ ('Community access evidence','Preuve d’accès communautaire','community_access_evidence'),
+ ('Community participation evidence','Preuve de participation communautaire','community_participation_evidence'),
+ ('Community beneficiary evidence','Preuve du bénéficiaire communautaire','community_beneficiary_evidence'),
+ ('Community place evidence','Preuve du lien au lieu','community_place_evidence'),
+ ('Community heritage evidence','Preuve patrimoniale communautaire','community_heritage_evidence'),
+ ('Live and digital formats','Formats en direct et numériques','live_digital_formats'),
+ ('Platforms','Plateformes','platform_names'),
+ ('Live status','État de diffusion en direct','synchronous_status'),
+ ('Audience interaction','Interaction avec le public','audience_interaction_routes'),
+ ('Recording availability','Disponibilité de l’enregistrement','recording_availability'),
+ ('Digital evidence','Preuve numérique','digital_evidence'),
+ ('Online location','Lieu en ligne','online_location'),
+ ('Platform detail','Détail de la plateforme','platform'),
+ ('Platform notes','Notes sur la plateforme','platform_notes'),
+ ('Liveness detail','Détail du direct','liveness_status'),
+ ('Synchronicity detail','Détail de la synchronicité','synchronicity'),
+ ('Audience interaction detail','Détail de l’interaction avec le public','audience_interaction'),
+ ('Interaction status','État de l’interaction','interaction_status'),
+ ('Interaction evidence','Preuve de l’interaction','interaction_evidence'),
+ ('Digital access status','État de l’accès numérique','access_status'),
+ ('Digital access route','Voie d’accès numérique','access_route'),
+ ('Replay or archive status','État de la reprise ou de l’archive','replay_archive_status'),
+ ('Recording evidence','Preuve de l’enregistrement','recording_evidence'),
+ ('Creator participation status','État de la participation du créateur','creator_participation_status'),
+ ('Creator participation evidence','Preuve de la participation du créateur','creator_participation_evidence'),
+ ('Digital occurrence evidence','Preuve de l’occurrence numérique','occurrence_evidence'),
+ ('Replay source detail','Détail de la source de reprise','replay_source_field'),
+ ('Course and program formats','Formats de cours et de programmes','course_program_formats'),
+ ('Program stage','Étape du programme','program_stage'),
+ ('Source program stage','Étape du programme selon la source','program_stage_source_value'),
+ ('Schedule model','Modèle d’horaire','schedule_model'),
+ ('Schedule detail','Détail de l’horaire','program_schedule_detail'),
+ ('Program start','Début du programme','program_start_date'),
+ ('Program end','Fin du programme','program_end_date'),
+ ('Eligibility and audience','Admissibilité et public visé','eligibility_audience'),
+ ('Registration or application route','Voie d’inscription ou de candidature','registration_application_route'),
+ ('Session count','Nombre de séances','session_count'),
+ ('Program evidence','Preuve du programme','program_evidence'),
+ ('Public access','Accès public','public_access_status'),
+ ('Audience','Public visé','audience_scope'),
+ ('Registration required','Inscription requise','registration_required'),
+ ('Institutional restriction','Restriction institutionnelle','institutional_restriction'),
+ ('Participant identity','Identité des participants','participant_identity_status'),
+ ('Talkback status','État de la discussion','talkback_status'),
+ ('Director attendance','Présence de la mise en scène','director_attendance_status'),
+ ('Date discrepancy','Divergence de dates','date_conflict'),
+ ('Source inconsistency','Incohérence de la source','source_inconsistency'),
+]
+def event_context_html(e):
+ rows=[]
+ for label_en,label_fr,field in CONTEXT_FIELDS:
+  fields=field if isinstance(field,tuple) else (field,)
+  value=next((e.get(name) for name in fields if e.get(name) not in (None,'',[],{})),None)
+  text=context_value(value)
+  if text:rows.append(f'<div><dt>{html.escape(label_en)} · {html.escape(label_fr)}</dt><dd>{html.escape(text)}</dd></div>')
+ if not rows:return ''
+ return '<section class="pm-event-context"><h2>Context and evidence · Contexte et preuves</h2><dl class="pm-event-facts">'+''.join(rows)+'</dl></section>'
 def related_events(event):
  sid=str(event.get('id') or event.get('identity_key'))
  event_type=str(event.get('type') or '').strip().lower()
@@ -238,23 +431,28 @@ for e in events:
  title_date_counts[title_date_key]=title_date_counts.get(title_date_key,0)+1
 for e in events:
  sid=str(e.get('id') or e.get('identity_key')); folder=out/sid; folder.mkdir(parents=True,exist_ok=True)
+ event_geometry_attrs=geometry_body_attributes(
+  ROOT,f'polymythseminars/events/{sid}/index.html','calendar-event',register='quiet'
+ )
  title_text=str(e.get('title') or 'Untitled listing'); title=html.escape(title_text)
  source_text=str(e.get('source_url') or ''); source=html.escape(source_text,quote=True)
  reasons=' · '.join(labels.get(x,str(x).replace('-',' ').title()) for x in e.get('qualification_reasons',[]))
+ qualification_tokens=' '.join(sorted(str(x) for x in e.get('qualification_reasons',[]) if str(x)))
  confirmation=str(e.get('confirmation_status') or 'unconfirmed'); lifecycle=str(e.get('lifecycle_status') or 'active')
  end_value=parse_iso(e.get('end_date') or e.get('date'),e.get('timezone') or DEFAULT_TZ)
  end_day=end_value.date() if isinstance(end_value,datetime.datetime) else end_value
  past=bool(end_day and end_day<TODAY)
  city=str(e.get('city') or 'Unknown'); venue=str(e.get('venue') or 'Location unconfirmed · Lieu non confirmé')
  desc=str(e.get('description') or e.get('raw_excerpt') or '')
- indexable=confirmation=='confirmed' and e.get('date_precision')=='exact' and valid_location(e) and lifecycle not in {'cancelled','missing-on-source','archived'} and not past
+ context_html=event_context_html(e)
+ indexable=confirmation=='confirmed' and e.get('date_precision')=='exact' and e.get('record_kind')!='opportunity' and valid_location(e) and lifecycle not in {'cancelled','missing-on-source','archived'} and not past
  robots='index,follow' if indexable else 'noindex,follow'
  canonical=f'https://seminarschools.com/polymythseminars/events/{urllib.parse.quote(sid)}/'
  schema={'@context':'https://schema.org','@type':'Event','name':title_text,'startDate':e.get('date'),'description':event_meta_description(e,title_text,venue,city),'eventStatus':{'postponed':'https://schema.org/EventPostponed','rescheduled':'https://schema.org/EventRescheduled'}.get(lifecycle,'https://schema.org/EventScheduled'),'url':canonical,'sameAs':source_text or None,'inLanguage':e.get('source_language') or 'en'} if indexable else None
  if schema and e.get('end_date'):schema['endDate']=e.get('end_date')
  if schema:schema['location']={'@type':'Place','name':venue,'address':city}
  if schema:schema={k:v for k,v in schema.items() if v is not None}
- source_label='Official or institutional source · Source officielle ou institutionnelle' if str(e.get('source_quality') or '').lower() in {'official','official-or-institutional','institutional'} else 'Source listing · Fiche source'
+ source_label='Open organizer website · Ouvrir le site de l’organisateur' if str(e.get('source_quality') or '').lower() in {'official','official-or-institutional','institutional'} else 'Open source website · Ouvrir le site source'
  status_text='Confirmed · Confirmé' if confirmation=='confirmed' else 'Some details pending · Certains détails à confirmer'
  when_text=html.escape(format_when(e))
  date_value=html.escape(str(e.get('date') or '')[:32],quote=True)
@@ -301,7 +499,7 @@ for e in events:
 {schema_markup}<link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
 <link rel="stylesheet" href="/css/calm-ux.css?v={STEADY_VERSION}">
 </head>
-<body data-route-type="calendar-event" data-geometry="indra-web" data-indra-intensity="{EVENT_GEOMETRY_INTENSITY}" data-geometry-role="relation return" data-event-id="{html.escape(sid,quote=True)}">
+<body {event_geometry_attrs} data-event-id="{html.escape(sid,quote=True)}" data-confirmation-status="{html.escape(confirmation,quote=True)}" data-lifecycle-status="{html.escape(lifecycle,quote=True)}">
 <a class="skip-link" href="#main-content">Skip to event · Aller à la fiche</a>
 <main id="main-content" class="pm-event-page">
 <nav class="pm-event-nav" aria-label="Event navigation · Navigation de la fiche"><a href="/polymythseminars/">← All listings · Toutes les fiches</a><a href="?lang=fr" hreflang="fr-CA">Français</a></nav>
@@ -317,13 +515,15 @@ for e in events:
 <div><dt>Place · Lieu</dt><dd><strong>{html.escape(venue)}</strong><span>{html.escape(city)}</span></dd></div>
 <div><dt>Status · Statut</dt><dd>{status_text}</dd></div>
 </dl>
+<section class="pm-event-primary-path" aria-label="Continue on the organizer or source website · Continuer sur le site de l’organisateur ou le site source"><p>Continue on the organizer or source website · Continuer sur le site de l’organisateur ou le site source</p>
+<div class="pm-event-actions">{f'<a class="pm-event-action primary" href="{source}" rel="noopener noreferrer">{source_label} ↗</a>' if source_text else ''}<a class="pm-event-action" type="text/calendar" href="/polymythseminars/ics/{html.escape(sid,quote=True)}.ics">Add to calendar · Ajouter au calendrier</a><a class="pm-event-action" href="/polymythseminars/correct/?event={html.escape(canonical,quote=True)}">Correct this listing · Corriger cette fiche</a></div></section>
 {f'<section class="pm-event-description"><h2>About this listing · À propos</h2><p>{html.escape(desc)}</p></section>' if desc else ''}
-{f'<details class="pm-event-pending"><summary>Details still pending · Détails à confirmer</summary><p><strong>Qualification · Précision:</strong> {html.escape(reasons)}</p></details>' if reasons else ''}
+{context_html}
+{f'<details class="pm-event-pending" data-qualification-reasons="{html.escape(qualification_tokens,quote=True)}"><summary>Details still pending · Détails à confirmer</summary><p><strong>Qualification · Précision:</strong> {html.escape(reasons)}</p></details>' if reasons else ''}
 {f'<p class="pm-event-previous"><strong>Previous date · Date précédente:</strong> {html.escape(" · ".join(e.get("previous_dates") or []))}</p>' if e.get('previous_dates') else ''}
 {related_html}
 <footer class="pm-event-footer">
 <p class="pm-event-checked"><strong>Last checked · Dernière vérification:</strong> {html.escape(str(e.get('last_checked_at') or 'Unknown'))[:10]}</p>
-<div class="pm-event-actions">{f'<a class="pm-event-action primary" href="{source}" rel="noopener noreferrer">{source_label} ↗</a>' if source_text else ''}<a class="pm-event-action" type="text/calendar" href="/polymythseminars/ics/{html.escape(sid,quote=True)}.ics">Add to calendar · Ajouter au calendrier</a><a class="pm-event-action" href="/polymythseminars/correct/?event={html.escape(canonical,quote=True)}">Correct this listing · Corriger cette fiche</a></div>
 </footer>
 </article>
 </main>
@@ -337,6 +537,11 @@ for e in events:
 
  write_if_changed(folder/'index.html',page)
  lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Seminar Schools//Polymythcal//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',f'UID:{ics_escape(e.get("identity_key") or sid)}@seminarschools.com',f'DTSTAMP:{deterministic_stamp(e)}']
+ if e.get('time_precision')=='exact':
+  exact_start=parse_iso(e.get('date'),e.get('timezone') or DEFAULT_TZ)
+  exact_end=parse_iso(e.get('end_date'),e.get('timezone') or DEFAULT_TZ)
+  if isinstance(exact_start,datetime.datetime) and isinstance(exact_end,datetime.datetime) and exact_end<=exact_start:
+   raise ValueError(f'{sid}: exact calendar end must be later than its start')
  start=ics_start(e.get('date'),e.get('time_precision'),e.get('timezone') or DEFAULT_TZ)
  if start:lines.append(start)
  end=ics_end(e.get('end_date'),e.get('time_precision'),e.get('timezone') or DEFAULT_TZ)
@@ -353,10 +558,16 @@ for e in events:
    write_if_changed(icsdir/(legacy_id+'.ics'),canonical_ics[sid])
 for alias_id,sid in sorted(alias_targets.items()):
  target=f'/polymythseminars/events/{urllib.parse.quote(sid)}/'; alias_folder=out/alias_id; alias_folder.mkdir(parents=True,exist_ok=True)
- alias_page=f'<!doctype html><html lang="en-CA"><head>\n<script src="/js/theme-init.js?v={STEADY_VERSION}"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url={html.escape(target,quote=True)}"><link rel="canonical" href="https://seminarschools.com{html.escape(target,quote=True)}"><title>Event moved · Fiche déplacée</title><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={ASSET_VERSION}" data-site-wide-type-zoom="{ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_VERSION}">\n<link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">\n<link rel="stylesheet" href="/css/calm-ux.css?v={STEADY_VERSION}">\n</head><body data-route-type="calendar-event-alias" data-geometry="indra-web" data-indra-intensity="{EVENT_GEOMETRY_INTENSITY}" data-geometry-role="return" data-legacy-event-id="{html.escape(alias_id,quote=True)}"><main><h1>Event moved · Fiche déplacée</h1><p><a href="{html.escape(target,quote=True)}">Open the stable event page · Ouvrir la fiche stable</a></p></main><script>location.replace({json.dumps(target)})</script><script src="/js/mandala.js?v={GEOMETRY_VERSION}" defer></script>\n<script src="/js/indra.js?v={GEOMETRY_VERSION}" defer></script>\n</body></html>'
+ alias_geometry_attrs=geometry_body_attributes(
+  ROOT,f'polymythseminars/events/{alias_id}/index.html','calendar-event-alias',register='quiet'
+ )
+ alias_page=f'<!doctype html><html lang="en-CA"><head>\n<script src="/js/theme-init.js?v={STEADY_VERSION}"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url={html.escape(target,quote=True)}"><link rel="canonical" href="https://seminarschools.com{html.escape(target,quote=True)}"><title>Event moved · Fiche déplacée</title><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={ASSET_VERSION}" data-site-wide-type-zoom="{ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_VERSION}">\n<link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">\n<link rel="stylesheet" href="/css/calm-ux.css?v={STEADY_VERSION}">\n</head><body {alias_geometry_attrs} data-legacy-event-id="{html.escape(alias_id,quote=True)}"><main><h1>Event moved · Fiche déplacée</h1><p><a href="{html.escape(target,quote=True)}">Open the stable event page · Ouvrir la fiche stable</a></p></main><script>location.replace({json.dumps(target)})</script><script src="/js/mandala.js?v={GEOMETRY_VERSION}" defer></script>\n<script src="/js/indra.js?v={GEOMETRY_VERSION}" defer></script>\n</body></html>'
  write_if_changed(alias_folder/'index.html',alias_page)
 alias=ROOT/'polymythcal';alias.mkdir(exist_ok=True)
-write_if_changed(alias/'index.html',f'<!doctype html><html lang="en-CA"><head>\n<script src="/js/theme-init.js?v={STEADY_VERSION}"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url=/polymythseminars/"><link rel="canonical" href="https://seminarschools.com/polymythseminars/"><title>Polymythcal</title><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={ASSET_VERSION}" data-site-wide-type-zoom="{ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_VERSION}">\n<link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">\n<link rel="stylesheet" href="/css/calm-ux.css?v={STEADY_VERSION}">\n</head><body data-route-type="redirect" data-geometry="indra-web" data-indra-intensity="0.070" data-geometry-role="return"><main><h1>Polymythcal</h1><p><a href="/polymythseminars/">Open Polymythcal</a></p></main><script>location.replace("/polymythseminars/")</script><script src="/js/mandala.js?v={GEOMETRY_VERSION}" defer></script>\n<script src="/js/indra.js?v={GEOMETRY_VERSION}" defer></script>\n</body></html>')
+redirect_geometry_attrs=geometry_body_attributes(
+ ROOT,'polymythcal/index.html','redirect',register='standard'
+)
+write_if_changed(alias/'index.html',f'<!doctype html><html lang="en-CA"><head>\n<script src="/js/theme-init.js?v={STEADY_VERSION}"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url=/polymythseminars/"><link rel="canonical" href="https://seminarschools.com/polymythseminars/"><title>Polymythcal</title><style>@media(max-width:400px){{h1{{font-size:clamp(1.5rem,10vw,2rem);overflow-wrap:normal;word-break:normal}}}}</style><link rel="stylesheet" href="/css/site-wide-type-zoom.css?v={ASSET_VERSION}" data-site-wide-type-zoom="{ASSET_VERSION}"><link rel="stylesheet" href="/css/alive.css?v={GEOMETRY_VERSION}">\n<link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">\n<link rel="stylesheet" href="/css/calm-ux.css?v={STEADY_VERSION}">\n</head><body {redirect_geometry_attrs}><main><h1>Polymythcal</h1><p>Public seminars, lectures, festivals, and community events now live on the Polymythcal calendar.</p><p><a href="/polymythseminars/">Open Polymythcal</a></p></main><script>location.replace("/polymythseminars/")</script><script src="/js/mandala.js?v={GEOMETRY_VERSION}" defer></script>\n<script src="/js/indra.js?v={GEOMETRY_VERSION}" defer></script>\n</body></html>')
 if check_errors:
  print('POLYMYTHCAL DETAIL CHECK FAILED')
  for error in check_errors[:120]:print(' - '+error)

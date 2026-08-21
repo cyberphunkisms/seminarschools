@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Seminar Schools//Polymythcal//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:c7107d517f5876ea4eb7@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260924
+DTEND;VALUE=DATE:20260927
+SUMMARY:SAH Virtual Conference 2026
+LOCATION:Online via Zoom
+DESCRIPTION:Three-day online conference of paper sessions and roundtables
+  presenting architectural-history research.
+URL:https://seminarschools.com/polymythseminars/events/sah-virtual-confer
+ ence-2026/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

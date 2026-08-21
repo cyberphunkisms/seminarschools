@@ -5,7 +5,7 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:45e4439fb5af53cf63ca@seminarschools.com
-DTSTAMP:20260628T042537Z
+DTSTAMP:20260815T220000Z
 DTSTART;VALUE=DATE:20270508
 DTEND;VALUE=DATE:20270530
 SUMMARY:The Elixir of Love (Donizetti)
@@ -13,6 +13,6 @@ LOCATION:Four Seasons Centre for the Performing Arts
 DESCRIPTION:Canadian Opera Company 2026/27 season.
 URL:https://seminarschools.com/polymythseminars/events/the-elixir-of-love
  -donizetti-2027-05-08/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

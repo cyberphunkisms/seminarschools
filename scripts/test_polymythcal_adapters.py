@@ -13,7 +13,15 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from harvest_structured_events import load_priority_sources, qualify
 from merge_and_finalize import merge as merge_for_publication
 from merge_and_finalize import validate as validate_finalizer
-from polymythcal_adapters import infer_adapter, normalise_source_config, parse_html
+from polymythcal_adapters import (
+    creator_attendance_confirmed,
+    creator_interaction_format,
+    creator_presence_claims,
+    director_attendance_confirmed,
+    infer_adapter,
+    normalise_source_config,
+    parse_html,
+)
 from validate_polymythcal_sources import validation_errors
 
 FIXTURES = ROOT / "scripts" / "fixtures" / "polymythcal"
@@ -65,7 +73,24 @@ class AdapterTests(unittest.TestCase):
 
     def test_priority_sources_have_nonempty_canonical_geography(self):
         sources = load_priority_sources()
-        self.assertEqual(len(sources), 41)
+        roster = json.loads(
+            (ROOT / "scripts" / "sources.json").read_text(encoding="utf-8")
+        )
+        expected_ids = {
+            source["id"]
+            for source in roster["sources"]
+            if source.get("enabled") is not False
+            and source.get("harvest_enabled", True)
+            and source.get("source_mode") != "manual"
+            and str(source.get("render_mode") or "").lower() != "manual"
+            and str(source.get("events_url") or "").startswith(("http://", "https://"))
+            and source.get("default_type") != "protest"
+            and int(source.get("tier_priority") or 99) == 1
+        }
+        actual_ids = [source["id"] for source in sources]
+        self.assertTrue(expected_ids)
+        self.assertEqual(len(actual_ids), len(set(actual_ids)))
+        self.assertEqual(set(actual_ids), expected_ids)
         for source in sources:
             with self.subTest(source=source["id"]):
                 self.assertTrue(source.get("city"))
@@ -192,6 +217,37 @@ class AdapterTests(unittest.TestCase):
         by_title = {e["title"]: e for e in events}
         self.assertEqual(by_title["Climate Justice March"]["type"], "protest")
         self.assertEqual(by_title["Housing Rally"]["lifecycle_status"], "cancelled")
+
+    def test_post_show_talkback_preserves_generic_artist_presence_without_inventing_director_attendance(self):
+        text = (
+            "Directed by Mitchell Cushman. The performance is followed by a "
+            "post-show talkback with artists from the show."
+        )
+        self.assertEqual(creator_interaction_format(text), "post-show talkback")
+        self.assertTrue(creator_attendance_confirmed(text))
+        self.assertFalse(director_attendance_confirmed(text))
+        claims = creator_presence_claims(text)
+        self.assertTrue(any(
+            claim.get("role") == "artists from production"
+            and claim.get("status") == "confirmed"
+            for claim in claims
+        ))
+        self.assertFalse(any(
+            claim.get("role") == "director"
+            and claim.get("status") == "confirmed"
+            for claim in claims
+        ))
+
+    def test_explicit_director_q_and_a_confirms_director_attendance(self):
+        text = "The screening is followed by a Q&A with director Mitchell Cushman."
+        self.assertEqual(creator_interaction_format(text), "q-and-a")
+        self.assertTrue(creator_attendance_confirmed(text))
+        self.assertTrue(director_attendance_confirmed(text))
+        self.assertTrue(any(
+            claim.get("role") == "director"
+            and claim.get("status") == "confirmed"
+            for claim in creator_presence_claims(text)
+        ))
 
 if __name__ == "__main__":
     unittest.main()

@@ -41,7 +41,6 @@ const STEPS = [
   { name: 'bookwormburrows', script: 'regen-bookwormburrows-txt.js', txtPath: 'polymyth/bookwormburrows.txt' },
   { name: 'campaigncodex',   script: 'regen-campaigncodex-txt.js',   txtPath: 'polymyth/campaigncodex.txt' },
   { name: 'ml-section-mirrors', script: 'regen-methodologylist-sections-txt.js', txtPath: 'polymyth/methodologylist-studylist.txt' },
-  { name: 'ml-manifest', script: 'regen-methodologylist-manifest.js', txtPath: 'polymyth/manifest.txt' },
 ];
 
 let failures = 0;
@@ -81,6 +80,22 @@ try {
 } catch (err) {
   failures++;
   console.error('[concordance-index] FAIL:', err.message);
+}
+
+// The manifest records the concordance byte count, so it must be rendered
+// after the concordance rather than from the previous run's index.
+const manifestPath = path.join(projectRoot, 'polymyth/manifest.txt');
+const mBefore = fs.existsSync(manifestPath) ? fs.statSync(manifestPath).size : 0;
+try {
+  const mScript = path.join(scriptDir, 'regen-methodologylist-manifest.js');
+  const mCmd = 'node ' + JSON.stringify(mScript) + (dryRun ? ' --dry-run' : '');
+  execSync(mCmd, { cwd: projectRoot, encoding: 'utf-8' });
+  const mAfter = fs.existsSync(manifestPath) ? fs.statSync(manifestPath).size : 0;
+  const mDelta = mAfter - mBefore;
+  console.log('[ml-manifest] OK (' + mBefore + ' -> ' + mAfter + ', delta ' + (mDelta >= 0 ? '+' : '') + mDelta + ')');
+} catch (err) {
+  failures++;
+  console.error('[ml-manifest] FAIL:', err.message);
 }
 
 console.log('========================================================================');

@@ -219,12 +219,14 @@ h1 em{font-style:italic;color:var(--accent);font-weight:500}
   border-top:1px solid var(--rule);
   border-bottom:1px solid var(--rule);
   padding:20px 24px;
-  position:sticky;
-  top:0;
+  position:static;
   z-index:100;
   transform:translateZ(0);
   contain:layout style;
 }
+.aa-reader-intro{max-width:900px;margin:0 auto 1.2rem;padding:0 1rem;color:var(--ink2);font-size:1rem;line-height:1.55}
+body[data-route-type="archive"]>.ss-fz,
+body[data-route-type="archive"]>.theme-toggle{position:static!important;inset:auto!important;margin:.5rem .25rem .25rem .5rem;vertical-align:middle}
 .search-inner{max-width:1280px;margin:0 auto;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
 .search-box{flex:1;min-width:280px;position:relative}
 #search-input{
@@ -1663,8 +1665,8 @@ footer a:hover{color:var(--accent)}
 .polymyth-funnel a{color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor;}
 </style>
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
-<link rel="stylesheet" href="/css/alive.css?v=20260806-front-facing-geometry">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/alive.css?v=sha256-3ccd45ce601b">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260814-reader-word-integrity" data-site-wide-type-zoom="20260814-reader-word-integrity">
 <style id="audit35-aa-ui">
 /* Reserve the asynchronously populated filter line so it cannot pull the
    archive downward after first paint. */
@@ -1676,11 +1678,16 @@ footer a:hover{color:var(--accent)}
 .detail-overlay{overscroll-behavior:contain}
 .detail-panel,.dp-source{min-width:0;overflow-wrap:anywhere}
 
-/* Leave the theme control its own lane. Inline legacy styles on this sibling
-   switcher require an explicit route-local override. */
-#aa-sibling-nav{right:calc(4.75rem + env(safe-area-inset-right,0px))!important}
+/* Keep the sibling switcher in the reading order. It is a route choice, not a
+   viewport control, and must never cover the archive or the global controls. */
+#aa-sibling-nav{
+  position:static!important;inset:auto!important;z-index:auto!important;
+  width:calc(100% - 1rem);max-width:100%;margin:.25rem .5rem .75rem;
+  justify-content:flex-start;overflow-x:auto;overflow-y:hidden;
+  overscroll-behavior-inline:contain;scrollbar-width:thin
+}
 #aa-sibling-nav>a,#aa-sibling-nav>span{display:inline-flex!important;align-items:center;
-  justify-content:center;min-height:44px}
+  justify-content:center;min-height:44px;flex:0 0 auto}
 
 /* A multi-row sticky filter deck can consume most of a phone or a short
    landscape viewport. Each control family stays complete but becomes one
@@ -1697,21 +1704,6 @@ footer a:hover{color:var(--accent)}
   .filter-row{margin-top:10px}
   .controls-row{gap:12px}
   .ctrl-group{flex:0 0 auto;flex-wrap:nowrap;min-width:max-content}
-}
-@media (max-width:820px){
-  #aa-sibling-nav{right:calc(.75rem + env(safe-area-inset-right,0px))!important}
-}
-/* On narrow screens the sibling switcher belongs in the document directly
-   below the route note. Keeping it in flow prevents it from covering that
-   note while preserving the fixed desktop switcher. */
-@media (max-width:900px),(max-height:420px){
-  #aa-sibling-nav{
-    position:static!important;inset:auto!important;z-index:auto!important;
-    width:calc(100% - 1rem);max-width:100%;margin:.25rem .5rem .75rem;
-    padding:0;justify-content:flex-start;overflow-x:auto;overflow-y:hidden;
-    overscroll-behavior-inline:contain;scrollbar-width:thin
-  }
-  #aa-sibling-nav>a,#aa-sibling-nav>span{flex:0 0 auto}
 }
 @media (max-height:650px){
   .detail-overlay{padding:8px}
@@ -1730,7 +1722,7 @@ footer a:hover{color:var(--accent)}
   html,body{background:#fff!important;color:#111!important}
   body{background-image:none!important}
   #aa-sibling-nav,.search-section,.theme-toggle,.ss-fz,.skip-link,.route-note,
-  #indraLayer{display:none!important}
+  #indraLayer {display:none!important}
   header{padding-top:0!important;background:#fff!important;color:#111!important}
   main{max-width:none!important;padding-left:0!important;padding-right:0!important}
   .tax-card,.meta-card,.setting-card,.pending-card,.tag-page,.detail-panel{
@@ -1744,7 +1736,7 @@ footer a:hover{color:var(--accent)}
 <!-- Audit49 generic WebPage schema -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://seminarschools.com/aa/#webpage","url":"https://seminarschools.com/aa/","name":"Archetype Archive & Taxonomy Index | aa*","description":"A sourced, cross-tradition reference catalog of archetype taxonomies across depth psychology, mythology, folklore, dramaturgy, religion, gaming, and Indigenous traditions.","inLanguage":"en","isPartOf":{"@id":"https://seminarschools.com/#website"}}</script>
 </head>
-<body data-route-type="archive" data-geometry="indra-web" data-indra-intensity="0.095" data-geometry-role="relation movement" data-reader-eligible="true" data-page-weight="heavy">
+<body data-route-type="archive" data-geometry="indra-web" data-indra-intensity="0.200" data-geometry-role="relation movement" data-geometry-key="/aa/" data-geometry-seed="a39675fe82711ee7" data-geometry-register="expressive" data-geometry-profile="single" data-front-facing="general-audience" data-reader-eligible="true" data-page-weight="heavy">
 <!-- CL_SELF_ROUTE_NOTE -->
 <div class="route-note archive-route-note" role="note"><span class="route-note-kicker">Archive</span>Search or filter first, then open an entry.</div>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:auto;bottom:1rem;left:1rem;right:auto;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" data-fz-placement="bottom-left" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
@@ -1764,7 +1756,7 @@ footer a:hover{color:var(--accent)}
 
 <!-- aa* sibling-pages unified nav. It stays fixed on wide screens and enters
      normal flow here on narrow screens so it cannot cover the route note. -->
-<div id="aa-sibling-nav" style="position:fixed;top:8px;right:12px;z-index:55;font-family:'JetBrains Mono',monospace;font-size:11px;display:flex;gap:4px;">
+<div id="aa-sibling-nav" style="font-family:'JetBrains Mono',monospace;font-size:11px;display:flex;gap:4px;">
   <span style="background:var(--bg2);border:1px solid var(--accent);color:var(--accent);padding:4px 10px;border-radius:2px;font-family:inherit;font-size:11px;cursor:default;">&middot; catalog</span>
   <a href="/aa/cloud/" style="background:transparent;border:1px solid var(--rule2);color:var(--dim);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:color .15s,background-color .15s,border-color .15s,opacity .15s,transform .15s;display:inline-block;" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" onmouseout="this.style.color='var(--dim)';this.style.borderColor='var(--rule2)'">cloud</a>
   <a href="/aa/views/" style="background:transparent;border:1px solid var(--rule2);color:var(--dim);padding:4px 10px;text-decoration:none;border-radius:2px;font-family:inherit;font-size:11px;transition:color .15s,background-color .15s,border-color .15s,opacity .15s,transform .15s;display:inline-block;" onmouseover="this.style.color='#d97515';this.style.borderColor='#d97515'" onmouseout="this.style.color='var(--dim)';this.style.borderColor='var(--rule2)'">views</a>
@@ -1849,6 +1841,7 @@ footer a:hover{color:var(--accent)}
 </div>
 
 <main id="main-content">
+  <p class="aa-reader-intro">Search the archive, choose a browsing mode, or open an entry to compare sourced archetype systems across traditions.</p>
   <div class="results-meta" id="results-meta" role="status" aria-live="polite" aria-atomic="true"></div>
   <div id="results"></div>
 </main>
@@ -58363,8 +58356,8 @@ function toggleRemovedPanel(){
 
 
 <script src="/js/theme.js?v=cl91" defer></script>
-<script src="/js/mandala.js?v=20260806-front-facing-geometry" defer></script>
-<script src="/js/indra.js?v=20260806-front-facing-geometry" defer></script>
+<script src="/js/mandala.js?v=sha256-3ccd45ce601b" defer></script>
+<script src="/js/indra.js?v=sha256-3ccd45ce601b" defer></script>
 <script src="/js/footer.js?v=20260805-predeploy-audit" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
 <script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>

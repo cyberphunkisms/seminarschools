@@ -26,7 +26,7 @@ def main() -> int:
             file=sys.stderr,
         )
         print(
-            "Install them with: python -m pip install --requirement requirements-audit.txt",
+            "Install them with: python -m pip install --require-hashes --requirement requirements-audit.lock",
             file=sys.stderr,
         )
         return 1

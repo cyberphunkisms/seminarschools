@@ -96,12 +96,39 @@ PROFILE_DEFAULT_TYPES = {
     "campaign-page": "protest",
 }
 
+CREATOR_ROLE_PATTERN = (
+    r"(?:director|filmmaker|creator|cast(?:\s+members?)?|writer|playwright|author|poet|"
+    r"artist|curator|scholar|researcher|composer|translator|editor|organizer|activist|"
+    r"subject|witness|survivor|elder|knowledge keeper|creative team|"
+    r"artists? from (?:the )?(?:show|production)|cinematographer|producer|principal collaborator)"
+)
 CREATOR_ATTENDANCE_RE = re.compile(
-    r"\b(director|filmmaker|creator|cast|writer|cinematographer|producer|"
-    r"principal collaborator)s?\s+(?:in attendance|attending|present)|"
-    r"\b(?:q\s*&\s*a|conversation|introduction)\s+(?:with|by)\s+(?:the\s+)?"
-    r"(?:director|filmmaker|creator|cast|writer|cinematographer|producer|principal collaborator)\b",
+    rf"\b{CREATOR_ROLE_PATTERN}\b(?:[^.\n]{{0,80}})"
+    r"\b(?:in attendance|attending|present|will attend|will be present|joins?|appears?)\b|"
+    rf"\b(?:q\s*(?:&|and)\s*a|talkback|conversation|introduction|panel|masterclass|live commentary)"
+    rf"\s+(?:with|by|featuring)\s+(?:the\s+)?{CREATOR_ROLE_PATTERN}\b",
     re.I,
+)
+DIRECTOR_ATTENDANCE_RE = re.compile(
+    r"\bdirector\b(?:[^.\n]{0,80})\b(?:in attendance|attending|present|will attend|will be present|joins?|appears?)\b|"
+    r"\b(?:q\s*(?:&|and)\s*a|talkback|conversation|introduction|panel|masterclass|live commentary)"
+    r"\s+(?:with|by|featuring)\s+(?:the\s+)?director\b",
+    re.I,
+)
+TALKBACK_RE = re.compile(
+    r"\b(?:post[- ]show|post[- ]performance)?\s*talkback\b|"
+    r"\bpost[- ](?:show|performance)\s+(?:discussion|conversation|q\s*(?:&|and)\s*a)\b",
+    re.I,
+)
+CREATOR_INTERACTION_PATTERNS = (
+    ("post-show talkback", TALKBACK_RE),
+    ("q-and-a", re.compile(r"\bq\s*(?:&|and)\s*a\b|\bquestion(?:s)? and answer(?:s)?\b", re.I)),
+    ("post-performance discussion", re.compile(r"\bpost[- ](?:show|performance)\s+(?:discussion|conversation)\b", re.I)),
+    ("live commentary", re.compile(r"\blive commentary\b", re.I)),
+    ("masterclass", re.compile(r"\bmasterclass\b", re.I)),
+    ("introduction", re.compile(r"\b(?:introduced|introduction)\s+(?:by|with)\b", re.I)),
+    ("conversation", re.compile(r"\bconversation\s+(?:with|featuring)\b", re.I)),
+    ("panel", re.compile(r"\bpanel\s+(?:with|featuring)\b", re.I)),
 )
 
 TORONTO_SOURCE_IDS = {
@@ -131,7 +158,48 @@ GLOBAL_SOURCE_GEOGRAPHY = {
 
 
 def creator_attendance_confirmed(text: str) -> bool:
+    """Return true only when creator/participant presence is stated explicitly."""
     return bool(CREATOR_ATTENDANCE_RE.search(text or ""))
+
+
+def director_attendance_confirmed(text: str) -> bool:
+    """Do not infer director attendance from a director credit plus a generic talkback."""
+    return bool(DIRECTOR_ATTENDANCE_RE.search(text or ""))
+
+
+def creator_interaction_format(text: str) -> str:
+    """Identify public access to people connected to a work, across media."""
+    value = text or ""
+    for label, pattern in CREATOR_INTERACTION_PATTERNS:
+        if pattern.search(value):
+            return label
+    return ""
+
+
+def creator_presence_claims(text: str) -> list[dict]:
+    """Extract conservative, evidence-bearing role claims without inventing names."""
+    value = text or ""
+    interaction = creator_interaction_format(value)
+    claims: list[dict] = []
+    if re.search(r"\bartists? from (?:the )?(?:show|production)\b", value, re.I):
+        claims.append({
+            "role": "artists from production",
+            "status": "confirmed",
+            "evidence": interaction or "explicit attendance language",
+        })
+    if interaction and re.search(r"\bcreative team\b", value, re.I):
+        claims.append({
+            "role": "creative team",
+            "status": "confirmed",
+            "evidence": interaction,
+        })
+    if director_attendance_confirmed(value):
+        claims.append({
+            "role": "director",
+            "status": "confirmed",
+            "evidence": "explicit director attendance language",
+        })
+    return claims
 
 
 def infer_source_geography(source: dict) -> tuple[str, str, str]:
@@ -609,8 +677,14 @@ def _record(source: dict, adapter: str, title: str, dt: datetime, has_time: bool
     source_lang = str(source.get("language") or ("fr" if adapter == "french-language" else "en"))
     confidence = 90 if has_time and venue else 74 if (has_time or venue) else 58
     if lifecycle in {"cancelled", "postponed", "rescheduled"}: confidence = max(confidence, 80)
-    event_type = _profile_type(adapter, " ".join((title, raw)), source)
+    presence_text = " ".join((title, raw))
+    event_type = _profile_type(adapter, presence_text, source)
     record_kind = "festival" if event_type == "festival" else ("civic-action" if event_type == "protest" else "event")
+    interaction_format = creator_interaction_format(presence_text)
+    creator_presence = creator_attendance_confirmed(presence_text)
+    director_presence = director_attendance_confirmed(presence_text)
+    talkback_confirmed = bool(TALKBACK_RE.search(presence_text))
+    presence_claims = creator_presence_claims(presence_text)
     result = {
         "id": stable_id(full_url, dt.isoformat(timespec="minutes"), title),
         "date": dt.isoformat(timespec="minutes"),
@@ -638,16 +712,24 @@ def _record(source: dict, adapter: str, title: str, dt: datetime, has_time: bool
         "lifecycle_status": lifecycle,
         "external_uid": external_uid or None,
         "confidence": confidence,
-        "attendance_confirmed": (
-            creator_attendance_confirmed(" ".join((title, raw)))
-            if event_type == "screening"
-            else bool(explicit_organizer)
-        ),
+        "attendance_confirmed": bool(creator_presence or interaction_format or explicit_organizer),
         "attendance_evidence": (
-            "explicit creator/principal attendance language"
-            if event_type == "screening"
-            and creator_attendance_confirmed(" ".join((title, raw)))
+            "explicit creator or participant attendance language"
+            if creator_presence
+            else f"confirmed {interaction_format}"
+            if interaction_format
             else ""
+        ),
+        "interaction_format": interaction_format or None,
+        "talkback_confirmed": talkback_confirmed,
+        "talkback_status": "confirmed" if talkback_confirmed else None,
+        "presence_claims": presence_claims,
+        "director_attendance_status": (
+            "confirmed"
+            if director_presence
+            else "unconfirmed"
+            if interaction_format and re.search(r"\bdirector\b", presence_text, re.I)
+            else None
         ),
         "review_status": "auto-published" if confidence >= 70 else "needs-review",
         "scraped_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),

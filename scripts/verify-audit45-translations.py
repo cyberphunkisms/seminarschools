@@ -18,6 +18,12 @@ import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+INVENTORY_CONTRACT = json.loads(
+    (ROOT / 'data' / 'polymythcal-inventory-contract.json').read_text(encoding='utf-8')
+)
+MINIMUM_EVENT_COUNT = int(INVENTORY_CONTRACT['minimum_canonical_events'])
+MINIMUM_SOURCE_COUNT = int(INVENTORY_CONTRACT['minimum_sources'])
+MINIMUM_EVENT_TYPES = int(INVENTORY_CONTRACT['minimum_event_types'])
 REPORT = ROOT / "scripts" / "reports" / "audit45-translation-static.json"
 SITE = "https://seminarschools.com"
 LOCALES = {
@@ -35,8 +41,7 @@ FOCUSED = (
     "writinggrads", "university", "philosophy", "humanities", "cfps",
     "lectures", "fellowships",
 )
-CURRENT_EVENT_COUNT = 833
-FRENCH_LEGACY_ALIAS_COUNT = 12
+FRENCH_LEGACY_ALIAS_COUNT = 28
 
 failures: list[str] = []
 assertions = 0
@@ -121,16 +126,16 @@ teacher_entries = [
     for entry in category.get("entries", [])
 ]
 check(
-    len(events) == CURRENT_EVENT_COUNT,
-    f"Polymythcal event count changed: {len(events)}/{CURRENT_EVENT_COUNT}",
+    len(events) >= MINIMUM_EVENT_COUNT,
+    f"Polymythcal event inventory fell below its verified floor: {len(events)}/{MINIMUM_EVENT_COUNT}",
 )
 check(
-    len({event["id"] for event in events}) == CURRENT_EVENT_COUNT,
+    len({event["id"] for event in events}) == len(events),
     "Polymythcal IDs are not unique",
 )
-check(len({event["type"] for event in events}) == 32, "Polymythcal type count changed from 32")
-check(len(sources) == 422, f"Polymythcal source count changed: {len(sources)}/422")
-check(len(teacher_entries) == 644, f"Teacher Resources count changed: {len(teacher_entries)}/644")
+check(len({event["type"] for event in events}) >= MINIMUM_EVENT_TYPES, f"Polymythcal type inventory fell below {MINIMUM_EVENT_TYPES}")
+check(len(sources) >= MINIMUM_SOURCE_COUNT, f"Polymythcal source inventory fell below {MINIMUM_SOURCE_COUNT}: {len(sources)}")
+check(len(teacher_entries) == 645, f"Teacher Resources count changed: {len(teacher_entries)}/645")
 check(len(teacher_document["groups"]) == 7, "Teacher Resources group count changed from 7")
 check(sum(len(group.get("categories", [])) for group in teacher_document["groups"]) == 25,
       "Teacher Resources collection count changed from 25")
@@ -175,7 +180,7 @@ for event in events:
         check(event.get("source_language_review") == "required",
               f"{event['id']}: unknown source language lost recheck requirement")
 check(
-    sum(event_languages.values()) == CURRENT_EVENT_COUNT,
+    sum(event_languages.values()) == len(events),
     "Source-language totals do not cover every event",
 )
 check(all(entry.get("source_languages") for entry in teacher_entries),
@@ -206,6 +211,13 @@ home_markers = {
     "zh-hans": "私人辅导，线上及多伦多面授",
     "fa": "آموزش خصوصی، آنلاین و در تورنتو",
 }
+summary_language_markers = {
+    "fr": "anglais",
+    "zh-hant": "英文",
+    "zh-hans": "英文",
+    "fa": "انگلیسی",
+}
+leizu_sitemap = text("sitemap.xml")
 for segment, (tag, direction) in LOCALES.items():
     source = text(f"leizu/{segment}/index.html")
     check(html_attr(source, "html", "lang") == tag, f"Leizu {segment}: wrong root language")
@@ -226,7 +238,7 @@ for segment, (tag, direction) in LOCALES.items():
         check(canonical(route_source) == f"{SITE}/leizu/{segment}/{route}/",
               f"{relative}: wrong canonical")
         check('class="audit45-localized-summary"' in route_source,
-              f"{relative}: localized owned-copy summary missing")
+              f"{relative}: localized summary missing")
         main_match = re.search(r'<main\b([^>]*)>([\s\S]*?)</main>', route_source, re.I)
         check(main_match is not None, f"{relative}: primary main landmark missing")
         if main_match:
@@ -249,22 +261,48 @@ for segment, (tag, direction) in LOCALES.items():
         if re.search(r"<form\b", route_source, re.I):
             check(f'name="preferred_language" value="{tag}"' in route_source,
                   f"{relative}: form language state is not preserved")
+        unlocalized_targets = re.findall(
+            r'<(?:a|form)\b(?=[^>]*\b(?:href|action)=["\']/leizu/(?!fr/|zh-hant/|zh-hans/|fa/))[^>]*>',
+            route_source,
+            re.I,
+        )
         check(
-            not re.search(
-                r'<(?:a|form)\b[^>]*\b(?:href|action)=["\']/leizu/(?!fr/|zh-hant/|zh-hans/|fa/)',
-                route_source,
-                re.I,
-            ),
+            all(re.search(r'\bhreflang=["\']en["\']', target, re.I) for target in unlocalized_targets),
             f"{relative}: navigation language state is not preserved",
         )
         status = meta(route_source, "translation-status")
-        if route in {"policies", "intake", "booking-success", "donate", "teach"}:
-            check(status == "draft-bilingual-review-required",
-                  f"{relative}: high-stakes copy bypassed bilingual review")
-            check(meta(route_source, "robots") == "noindex,follow",
-                  f"{relative}: unreviewed high-stakes route became indexable")
-        else:
-            check(status == "localized-owned-copy", f"{relative}: localized status missing")
+        check(status == "localized-summary-english-detail",
+              f"{relative}: summary-plus-English-detail status missing")
+        check(meta(route_source, "robots") == "noindex,follow",
+              f"{relative}: partial translation became indexable")
+        summary_match = re.search(
+            r'<section\b(?=[^>]*\bclass=["\'][^"\']*\baudit45-localized-summary\b)[^>]*>([\s\S]*?)</section>',
+            route_source,
+            re.I,
+        )
+        check(
+            bool(summary_match and 'class="audit45-review"' in summary_match.group(1)),
+            f"{relative}: honest language boundary note is missing",
+        )
+        check(
+            bool(summary_match and summary_language_markers[segment] in strip_markup(summary_match.group(1))),
+            f"{relative}: language boundary does not name the English detail",
+        )
+        check(
+            bool(
+                summary_match
+                and re.search(
+                    rf'<a\b(?=[^>]*\bhref=["\']/leizu/{re.escape(route)}/["\'])(?=[^>]*\bhreflang=["\']en["\'])[^>]*>',
+                    summary_match.group(1),
+                    re.I,
+                )
+            ),
+            f"{relative}: immediate link to the complete English page is missing",
+        )
+        check(
+            f"{SITE}/leizu/{segment}/{route}/" not in leizu_sitemap,
+            f"{relative}: partial translation appears in the sitemap",
+        )
 
 # Polymythcal route tree and byte-faithful organizer content.
 french_event_root = ROOT / "polymythseminars" / "fr" / "events"
@@ -354,6 +392,7 @@ for slug in ("polymythseminars", *FOCUSED):
             marker in source
             for marker in (
                 "Points de départ populaires",
+                "Calendriers ciblés",
                 "Autres calendriers ciblés",
                 "Commencer par un but, un intérêt ou un lieu",
             )
@@ -375,7 +414,8 @@ features = text("js/polymythcal-features.js")
 check(revamp.count('const LANGUAGE_KEY = "polymythcal.lang.v1"') == 1,
       "Polymythcal has more than one language-state contract")
 for marker in (
-    "/polymythseminars/fr/", "Popular starting points", "Calendar tools",
+    "/polymythseminars/fr/", "Filter listings", "Calendar tools",
+    "12 collections for writing, academic, celestial, and ritual interests",
     "Focused Polymythcal view", "Other focused calendars",
 ):
     check(marker in revamp, f"Polymythcal localization runtime lost {marker}")
@@ -413,7 +453,7 @@ for segment, (tag, direction) in LOCALES.items():
 teacher_index = text("teacherresources/index.html")
 check('id="language-chips"' in teacher_index and "Source language" in teacher_index,
       "Teacher Resources source-language filter surface is missing")
-check(len(re.findall(r'\bdata-l=["\'][^"\']+["\']', teacher_index)) == 644,
+check(len(re.findall(r'\bdata-l=["\'][^"\']+["\']', teacher_index)) == 645,
       "Teacher Resources SSR entries do not all expose source language")
 finder = text("teacherresources/finder.js")
 for marker in ("LANGUAGES", "tr-filters-v4", "params.set('language'", "state.languages"):
@@ -423,7 +463,7 @@ for page in (ROOT / "teacherresources").rglob("index.html"):
     source = page.read_text(encoding="utf-8")
     if '"@type":"LearningResource"' in source:
         detail_pages.append((page, source))
-check(len(detail_pages) == 644, f"Teacher Resources detail route count changed: {len(detail_pages)}/644")
+check(len(detail_pages) == 645, f"Teacher Resources detail route count changed: {len(detail_pages)}/645")
 for page, source in detail_pages:
     check('"inLanguage":[' in source, f"{page.relative_to(ROOT)}: LearningResource.inLanguage missing")
     check("<dt>Source language</dt>" in source, f"{page.relative_to(ROOT)}: visible source language missing")
@@ -509,5 +549,5 @@ print(
     "AUDIT 45 TRANSLATION GATE PASSED — "
     f"{assertions}/{assertions} assertions; {len(events)} events; 40 Leizu routes; "
     f"{len(canonical_event_ids)} French event routes plus "
-    f"{len(legacy_alias_targets)} aliases; 644 Teacher Resources; weekly cadence preserved."
+    f"{len(legacy_alias_targets)} aliases; 645 Teacher Resources; weekly cadence preserved."
 )

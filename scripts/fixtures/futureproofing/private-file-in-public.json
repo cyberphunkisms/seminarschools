@@ -1,0 +1,7 @@
+{
+  "scenarios": [
+    "An EDITABLE_MASTERS directory or token-bearing file appears in the public tree.",
+    "The complete handoff carries internally consistent manifests for only nine of the ten canonical editable masters."
+  ],
+  "expected": "verify-public-private-boundary.py exits nonzero for either boundary violation"
+}

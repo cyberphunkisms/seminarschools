@@ -1,0 +1,157 @@
+{
+  "schema": "seminar-schools-futureproofing-contract-v1",
+  "contract_version": "2026-08-14.1",
+  "rule": "A release is blocked unless every FP-01 through FP-15 entry is implemented, names an executable verifier, names deliberate failure evidence, and records the evidence fields that bind its result.",
+  "items": [
+    {
+      "id": "FP-01",
+      "name": "artifact_bound_audit_receipts",
+      "status": "implemented",
+      "stage": "post_package",
+      "gate_command": ["python3", "scripts/verify-artifact-audit-receipt.py", "{archive}"],
+      "verifier_paths": ["scripts/verify-artifact-audit-receipt.py"],
+      "fixture_paths": ["scripts/fixtures/futureproofing/receipt-tamper.json"],
+      "evidence_fields": ["archive.sha256", "exact sibling paths for sidecar/receipt/clean-room/DR", "checksum_sidecar.sha256", "embedded_manifest.sha256", "package_manifest.sha256", "gate_report.sha256", "audit_report.sha256", "clean_room_report.sha256", "clean_room_report.total_checks=5", "clean_room_report.mode", "clean_room_report.canonical_pipeline", "clean_room_report.byte_identical", "clean_room_report.sidecar_identical", "clean_room_report.pipeline_id", "clean_room_report.pipeline_steps_sha256", "clean_room_report.pipeline_helpers", "clean_room_report.pinned_python_audit_dependencies", "clean_room_report.receipt_creation_executable_rehash", "clean_room_report.source_snapshot", "clean_room_report.external_inputs_sha256", "disaster_recovery_report.sha256", "disaster_recovery_report.total_checks=5", "disaster_recovery_report.restored_tree_sha256", "release.package_release_id", "release.runtime_release_id", "gate_report.total_checks", "tools"]
+    },
+    {
+      "id": "FP-02",
+      "name": "approved_change_deletion_ledger",
+      "status": "implemented",
+      "stage": "source",
+      "gate_command": ["python3", "scripts/verify-audit53-base-preservation.py"],
+      "verifier_paths": ["scripts/verify-audit53-base-preservation.py"],
+      "fixture_paths": ["scripts/fixtures/futureproofing/unapproved-deletion-ledger.json"],
+      "evidence_fields": ["baseline.sha256", "approved_deletions[].before_sha256", "approved_transition.previous_transition", "approved_transition.approved_successor_additions[].before_sha256", "approved_transition.approved_successor_additions[].after_sha256", "approved_transition.retained_previous_paths_current_content_policy_sha256", "approved_transition.modified_paths_sha256", "approved_transition.modified_content_policy_sha256", "approved_transition.raw_content_hashed_count", "approved_transition.generated_evidence_content_exclusions"]
+    },
+    {
+      "id": "FP-03",
+      "name": "article_body_fingerprints",
+      "status": "implemented",
+      "stage": "source",
+      "gate_command": ["node", "scripts/verify-article-body-fingerprints.js"],
+      "verifier_paths": ["scripts/verify-article-body-fingerprints.js"],
+      "fixture_paths": ["scripts/fixtures/futureproofing/article-body/changed-prose.html"],
+      "evidence_fields": ["route", "sha256", "normalized authored text", "ordered authored link/media destinations"]
+    },
+    {
+      "id": "FP-04",
+      "name": "canonical_ownership_map",
+      "status": "implemented",
+      "stage": "source",
+      "gate_command": ["python3", "scripts/verify-canonical-ownership.py"],
+      "verifier_paths": ["scripts/verify-canonical-ownership.py"],
+      "fixture_paths": ["scripts/fixtures/futureproofing/ownership-overlap.json"],
+      "evidence_fields": ["owners[].writer", "owners[].outputs", "owners[].classification", "owners[].lock_scope"]
+    },
+    {
+      "id": "FP-05",
+      "name": "single_writer_build_lock",
+      "status": "implemented",
+      "stage": "source",
+      "gate_command": ["python3", "-m", "unittest", "scripts.test_futureproofing_contracts.BuildLockTests"],
+      "verifier_paths": ["scripts/run-with-build-lock.py", "scripts/build_lock.py"],
+      "fixture_paths": ["scripts/fixtures/futureproofing/live-build-lock.json"],
+      "evidence_fields": ["token", "lease_file", "lease_backend", "hostname", "pid", "pid_namespace", "process_start_ticks", "created_epoch", "scope"]
+    },
+    {
+      "id": "FP-06",
+      "name": "clean_room_reproducible_releases",
+      "status": "implemented",
+      "stage": "post_package",
+      "gate_command": ["python3", "scripts/verify-clean-room-release.py", "--reference-archive", "{complete_archive}", "--source-root", "{verified_delivery_snapshot}", "--report", "{clean_room_report}"],
+      "verifier_paths": ["scripts/verify-clean-room-release.py", "scripts/clean_room_copy.py", "scripts/run-with-build-lock.py", "scripts/build-clean-room-release.py", "scripts/audit_python_dependencies.py"],
+      "fixture_paths": ["scripts/fixtures/futureproofing/reproducibility-drift.json"],
+      "evidence_fields": ["mode", "canonical_pipeline", "total_checks=5", "left.sha256", "right.sha256", "byte_identical", "sidecar_identical", "manifest_identical", "source_snapshot_matches_archive", "archive_rebuild_inputs", "pipeline_id", "pipeline_steps", "pipeline_helpers[].sha256", "pipeline_helpers[].trusted_sha256", "pipeline_helpers[].matches_trusted_helper", "pinned_python_audit_dependencies.requirements_path", "pinned_python_audit_dependencies.sha256", "pinned_python_audit_dependencies.lock_path", "pinned_python_audit_dependencies.lock_sha256", "pinned_python_audit_dependencies.locked_distributions", "pinned_python_audit_dependencies.locked_artifact_hash_count", "pinned_python_audit_dependencies.all_locked_artifacts_sha256_hashed", "pinned_python_audit_dependencies.installed_distributions", "pinned_python_audit_dependencies.installed_inventory_matches_lock", "pinned_python_audit_dependencies_verified", "source_snapshot.tree_sha256", "source_snapshot.file_count", "source_snapshot.total_bytes", "release_id", "generated_at", "external_inputs.allowlisted_inherited_names", "external_inputs.inherited_value_fingerprints", "external_inputs.fixed_values", "external_inputs.python", "external_inputs.executable_files[].sha256", "external_inputs.executable_files[].clean_room_host_attested"]
+    },
+    {
+      "id": "FP-07",
+      "name": "gate_the_gates_fixtures",
+      "status": "implemented",
+      "stage": "source",
+      "gate_command": ["npm", "run", "verify:futureproofing:gate-defects"],
+      "verifier_paths": ["scripts/test-gate-defect-fixtures.js", "scripts/lib/futureproofing-contract-checks.js", "scripts/verify-preservation-contracts.js"],
+      "fixture_paths": ["scripts/fixtures/futureproofing/geometry-missing-indra.html", "scripts/fixtures/futureproofing/front-facing-internal-copy.html", "scripts/fixtures/futureproofing/wrapping-break-all.css", "scripts/fixtures/futureproofing/source-link-internal-primary.json", "scripts/fixtures/futureproofing/preservation-tampered.json"],
+      "evidence_fields": ["geometry defects", "front-facing defects", "wrapping defects", "source-first defects", "preservation size and SHA-256 defects"]
+    },
+    {
+      "id": "FP-08",
+      "name": "tiered_browser_testing",
+      "status": "implemented",
+      "stage": "source",
+      "gate_command": ["node", "scripts/verify-browser-tier-contract.js"],
+      "verifier_paths": ["scripts/verify-browser-tier-contract.js", "scripts/run-browser-test-tier.mjs", "scripts/lib/browser-test-tiers.js"],
+      "fixture_paths": ["scripts/fixtures/futureproofing/browser-tiers/invalid-contract.json"],
+      "evidence_fields": ["changed-page family expansion", "every route type", "every renderable page", "full-page screenshot", "deterministic shards"]
+    },
+    {
+      "id": "FP-09",
+      "name": "live_evidence_expiration",
+      "status": "implemented",
+      "stage": "source",
+      "gate_command": ["node", "scripts/verify-live-evidence-policy.js"],
+      "verifier_paths": ["scripts/verify-live-evidence-policy.js", "scripts/live_evidence_expiration.py", "scripts/verify_audit48_live_harvest.py"],
+      "fixture_paths": ["scripts/fixtures/futureproofing/live-evidence/expired-report.json"],
+      "evidence_fields": ["generated_at", "max_age_hours", "expires_at", "historical/current claim boundary", "predeploy strict verifier"]
+    },
+    {
+      "id": "FP-10",
+      "name": "scraper_anomaly_detection",
+      "status": "implemented",
+      "stage": "source",
+      "gate_command": ["node", "scripts/verify-source-anomaly-contract.js"],
+      "verifier_paths": ["scripts/verify-source-anomaly-contract.js", "scripts/check-polymythcal-source-anomalies.py", "scripts/polymythcal_source_anomalies.py"],
+      "fixture_paths": ["scripts/fixtures/futureproofing/source-anomalies/collapse-run.json"],
+      "evidence_fields": ["source_id", "status", "events", "records_parsed", "pages_fetched", "rejection_rate", "baseline_observations", "blocking_anomalies"]
+    },
+    {
+      "id": "FP-11",
+      "name": "external_destination_status",
+      "status": "implemented",
+      "stage": "source",
+      "gate_command": ["node", "scripts/verify-external-destination-contracts.js"],
+      "verifier_paths": ["scripts/verify-external-destination-contracts.js"],
+      "fixture_paths": ["scripts/fixtures/futureproofing/external-destinations/invalid-destinations.json"],
+      "evidence_fields": ["dataset", "recordCount", "statuses"]
+    },
+    {
+      "id": "FP-12",
+      "name": "route_tombstone_registry",
+      "status": "implemented",
+      "stage": "source",
+      "gate_command": ["node", "scripts/verify-route-tombstones.js"],
+      "verifier_paths": ["scripts/verify-route-tombstones.js"],
+      "fixture_paths": ["scripts/fixtures/futureproofing/route-tombstones/live-route-reuse.html", "scripts/fixtures/futureproofing/route-tombstones/redirect-fallback.html"],
+      "evidence_fields": ["route", "status", "target", "source", "decision"]
+    },
+    {
+      "id": "FP-13",
+      "name": "versioned_data_migrations",
+      "status": "implemented",
+      "stage": "source",
+      "gate_command": ["node", "scripts/verify-data-migrations.js"],
+      "verifier_paths": ["scripts/verify-data-migrations.js"],
+      "fixture_paths": ["scripts/fixtures/futureproofing/data-migrations/future-version.json", "scripts/fixtures/futureproofing/data-migrations/identity-loss.json"],
+      "evidence_fields": ["dataset", "currentVersion", "migrations", "stableId", "recordCount"]
+    },
+    {
+      "id": "FP-14",
+      "name": "disaster_recovery_verification",
+      "status": "implemented",
+      "stage": "post_package",
+      "gate_command": ["python3", "scripts/verify-disaster-recovery.py", "{archive}"],
+      "verifier_paths": ["scripts/verify-disaster-recovery.py"],
+      "fixture_paths": ["scripts/fixtures/futureproofing/corrupt-recovery-archive.json"],
+      "evidence_fields": ["archive.sha256", "archive.file_count", "restored_tree.sha256", "editable_masters.file_count", "required_roots"]
+    },
+    {
+      "id": "FP-15",
+      "name": "permanent_public_private_boundary",
+      "status": "implemented",
+      "stage": "source",
+      "gate_command": ["python3", "scripts/verify-public-private-boundary.py"],
+      "verifier_paths": ["scripts/verify-public-private-boundary.py"],
+      "fixture_paths": ["scripts/fixtures/futureproofing/private-file-in-public.json"],
+      "evidence_fields": ["public_root", "private_roots", "public_forbidden_top_level", "complete_package_required_roots", "secret_patterns"]
+    }
+  ]
+}

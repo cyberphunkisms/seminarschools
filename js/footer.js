@@ -18,7 +18,7 @@
         '.ss-foot .ss-col-title{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;margin:0 0 .45rem;font-weight:600;}',
         '.ss-foot .ss-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:1.5rem 1.2rem;}',
         '.ss-foot a{display:flex;align-items:center;min-height:44px;color:inherit;text-decoration:none;font-size:.86rem;line-height:1.45;',
-        'opacity:.9;border-bottom:1px solid transparent;width:max-content;max-width:100%;overflow-wrap:normal;word-break:normal;hyphens:none;transition:opacity .15s,border-color .15s;}',
+        'opacity:.9;border-bottom:1px solid transparent;width:fit-content;max-width:100%;overflow-wrap:anywhere;word-break:normal;hyphens:none;transition:opacity .15s,border-color .15s;}',
         '.ss-foot a:hover,.ss-foot a:focus-visible{opacity:1;border-bottom-color:currentColor;}',
         '.ss-foot a:focus-visible{outline:2px solid currentColor;outline-offset:3px;}',
         '.ss-foot a[aria-current="page"]{opacity:1;font-weight:700;text-decoration:underline;text-underline-offset:.3em;}',

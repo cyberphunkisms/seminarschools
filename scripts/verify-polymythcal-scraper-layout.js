@@ -26,25 +26,24 @@ for (const [rel, needle, label] of [
 // Current front-facing clarity architecture.
 for (const [rel, needle, label] of [
   ['polymythseminars/index.html','id="pmSearch"','front-facing search input'],
-  ['polymythseminars/index.html','id="pmQuickStarts"','popular starting points'],
-  ['polymythseminars/index.html','data-preset="philosophy"','philosophy starting point'],
-  ['polymythseminars/index.html','data-preset="humanities"','humanities starting point'],
-  ['polymythseminars/index.html','data-preset="lectures"','talks starting point'],
-  ['polymythseminars/index.html','data-preset="festivals"','festival starting point'],
-  ['polymythseminars/index.html','data-preset="writing"','writing starting point'],
-  ['polymythseminars/index.html','data-preset="fellowships"','fellowship starting point'],
-  ['polymythseminars/index.html','data-preset="toronto"','Toronto starting point'],
-  ['polymythseminars/index.html','data-preset="corridor"','corridor starting point'],
+  ['polymythseminars/index.html','Results update as you type.','live-search guidance'],
+  ['polymythseminars/index.html','id="pmFocusedCalendars"','focused calendars disclosure'],
+  ['polymythseminars/index.html','id="pmCalendarTools"','secondary calendar tools'],
   ['polymythseminars/index.html','data-state-set="opportunityTypes"','separate opportunity filters'],
   ['js/polymythcal-revamp.js','function eventMatchesSearch','single current search function'],
   ['js/polymythcal-revamp.js','function matchesFilters','single current filter function'],
   ['js/polymythcal-revamp.js','event.raw_excerpt','raw excerpt search'],
   ['js/polymythcal-revamp.js','event.topics','source topic search'],
-  ['js/polymythcal-revamp.js','event.source_url','official source actions']
+  ['js/polymythcal-revamp.js','event.source_url','official source actions'],
+  ['js/polymythcal-revamp.js','class="pm-action pm-source-action"','primary one-click source action']
 ]) need(rel, needle, label);
 forbid('polymythseminars/index.html','id="eventSearch"','duplicate internal search input');
 forbid('polymythseminars/index.html','data-focus="deadlines"','ambiguous Deadlines quick filter');
 forbid('polymythseminars/index.html','polymythcal-tools','duplicate tool panel');
+forbid('polymythseminars/index.html','id="pmQuickStarts"','redundant quick-start layer');
+forbid('polymythseminars/index.html','data-preset=','redundant preset controls');
+forbid('polymythseminars/index.html','id="pmJumpResults"','duplicate results button');
+forbid('polymythseminars/index.html','id="pmMobileBar"','duplicate mobile action bar');
 const app = read('js/polymythcal-revamp.js');
 if ((app.match(/function eventMatchesSearch\(/g) || []).length !== 1) problems.push('polymythcal app must define eventMatchesSearch exactly once');
 if ((app.match(/function matchesFilters\(/g) || []).length !== 1) problems.push('polymythcal app must define matchesFilters exactly once');
@@ -58,4 +57,4 @@ if (problems.length) {
   problems.forEach(p => console.error(' - ' + p));
   process.exit(1);
 }
-console.log('POLYMYTHCAL SCRAPER/LAYOUT CHECK PASSED — harvest pipeline, qualified uncertainty, raw excerpt/topic search, and clear starting points are guarded.');
+console.log('POLYMYTHCAL SCRAPER/LAYOUT CHECK PASSED — harvest pipeline, qualified uncertainty, source-first actions, and the simplified list-first interface are guarded.');

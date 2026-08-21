@@ -123,10 +123,6 @@ function parsePolymythCoherenceRoutingAddendum() {
   );
 }
 
-function entryKey(entry) {
-  return entry.id || [entry.s || '', entry.t || ''].join('\u0000');
-}
-
 function parseSeedWithAddenda(html) {
   const combined = [
     ...parseDeclaredArray(html, 'const SEED'),
@@ -135,13 +131,27 @@ function parseSeedWithAddenda(html) {
     ...parseRhetoricTaxonomyAddendum(),
     ...parsePolymythCoherenceRoutingAddendum(),
   ];
-  const seen = new Set();
-  return combined.filter((entry) => {
-    const key = entryKey(entry);
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
+  const seenIds = new Map();
+  const seenSemanticOwners = new Map();
+  for (const [index, entry] of combined.entries()) {
+    const section = String(entry.s || '').trim();
+    const title = String(entry.t || '').trim();
+    const semanticKey = [section, title].join('\u0000');
+    if (seenSemanticOwners.has(semanticKey)) {
+      const first = seenSemanticOwners.get(semanticKey);
+      throw new Error(
+        `Duplicate Methodologylist semantic owner at ${index}: ${section || '<missing section>'} / ${title || '<missing title>'}; first seen at ${first}`,
+      );
+    }
+    seenSemanticOwners.set(semanticKey, index);
+    if (entry.id) {
+      if (seenIds.has(entry.id)) {
+        throw new Error(`Duplicate Methodologylist id ${entry.id} at ${index}; first seen at ${seenIds.get(entry.id)}`);
+      }
+      seenIds.set(entry.id, index);
+    }
+  }
+  return combined;
 }
 
 module.exports = {

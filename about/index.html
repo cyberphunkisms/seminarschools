@@ -50,10 +50,6 @@
     --accent: var(--accent-light);
     --accent-rgb: 138, 74, 50;
     --rule: rgba(42,26,20,0.10);
-    --geo-scale: 7;
-    --geo-tx: -120px;
-    --geo-ty: -30px;
-    --geo-density: 0.25;
     --frame-radius: 94%;
   }
 
@@ -80,10 +76,7 @@
      Every decorative override below is scoped to body:not(.party)
      ============================================================ */
 
-  /* 1. Geometry opacity: default 0.08/0.05, party 0.25/0.15 */
-  body:not(.party) { --geo-density: 0.08 !important; --geo2-density: 0.04 !important; }
-
-  /* 2. Text halos: default muted */
+  /* 1. Text halos: default muted */
   body:not(.party) .titanic .word::before,
   body:not(.party) .titanic .char::before,
   body:not(.party) .compound .word::before,
@@ -109,7 +102,7 @@
     opacity: 0.35;
   }
 
-  /* 3. Text shadows: kill the glow in professional mode */
+  /* 2. Text shadows: kill the glow in professional mode */
   body:not(.party) .titanic,
   body:not(.party) .compound,
   body:not(.party) .body,
@@ -148,7 +141,7 @@
     text-shadow: none !important;
   }
 
-  /* 4. Freeze tier color cycling on the active professional theme */
+  /* 3. Freeze tier color cycling on the active professional theme */
   body:not(.party).tier-applied {
     background-color: var(--bg) !important;
   }
@@ -158,20 +151,20 @@
     display: none !important;
   }
 
-  /* 5. Hide all the spawning decorations */
+  /* 4. Hide all the spawning decorations */
   body:not(.party) .firefly,
   body:not(.party) .atomic-flash { display: none !important; }
 
-  /* 6. Dark mode honored site-wide; forced-light lock removed (audit Jun 2026). */
+  /* 5. Dark mode honored site-wide; forced-light lock removed (audit Jun 2026). */
 
-  /* 7. Descent marker, tier labels, coordinates: reduce contrast */
+  /* 6. Descent marker, tier labels, coordinates: reduce contrast */
   body:not(.party) .descent-marker,
   body:not(.party) .tier-label-vertical,
   body:not(.party) .threshold-coords {
     opacity: 0.55;
   }
 
-  /* 8. Headline italic reveals: keep structure, reduce accent saturation */
+  /* 7. Headline italic reveals: keep structure, reduce accent saturation */
   body:not(.party) .compound em,
   body:not(.party) .titanic em {
     color: #8a4a32;
@@ -200,42 +193,6 @@
   }
   .mode-toggle:hover { opacity: 0.85; color: var(--accent); }
   body.party .mode-toggle { opacity: 0.55; }
-
-  /* ===== GEOMETRIC FIELD (two independent layers) ===== */
-  .geo {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    will-change: opacity;
-    opacity: var(--geo-density);
-    transition: opacity 0.6s ease;
-  }
-  .geo svg {
-    width: 140vh;
-    height: 140vh;
-    overflow: visible;
-    transform: scale(var(--geo-scale)) translate(var(--geo-tx), var(--geo-ty));
-    transform-origin: center center;
-    will-change: transform;
-    color: var(--accent);
-    transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .geo .stroke { stroke: currentColor; fill: none; vector-effect: non-scaling-stroke; }
-  /* Second layer: own transform variables, lower opacity */
-  #geo2 {
-    z-index: 0;
-    opacity: var(--geo2-density, 0.15);
-  }
-  #geo2 svg {
-    transform: scale(var(--geo2-scale, 6)) translate(var(--geo2-tx, 100px), var(--geo2-ty, -40px));
-    transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform;
-  }
 
   /* ===== SOFT CIRCULAR VIEWER FRAME ===== */
   .frame {
@@ -445,8 +402,6 @@
     --accent: #E0996A;
     --accent-rgb: 224, 153, 106;
     --rule: rgba(232,222,199,0.14);
-    --geo-density: 0.5;
-    --geo2-density: 0.3;
   }
   html.dark body, :root[data-theme="dark"] body {
     background: #1A1410 !important;
@@ -497,14 +452,17 @@
   .descent-marker .tick.active { background: var(--accent); opacity: 1; height: 22px; }
 
   .topbar {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    position: sticky; top: 0; z-index: 100;
     padding: 1.4rem 4vw;
     display: flex; justify-content: space-between; align-items: center;
-    background: transparent;
-    border-bottom: 1px solid transparent;
+    background: var(--bg);
+    border-bottom: 1px solid rgba(var(--accent-rgb, 31, 42, 26), 0.24);
+    box-shadow: 0 1px 0 rgba(var(--bg-rgb, 245, 235, 228), 0.9);
     transition: padding 0.4s ease, background 0.4s ease, border-color 0.4s ease;
   }
   .topbar.scrolled { padding: 0.85rem 4vw; }
+  html { scroll-padding-top: 7rem; }
+  :where(main, section)[id] { scroll-margin-top: 7rem; }
   .brand {
     font-family: var(--display); font-size: 1.4rem; font-weight: 500;
     color: var(--fg);
@@ -1004,6 +962,11 @@
   .open-transmission .cursor { display: inline-block; animation: ot-blink 1.05s steps(2) infinite; margin-left: 0.05em; }
   @keyframes ot-blink { 50% { opacity: 0; } }
 
+  @media (max-width: 1100px) {
+    .lecture { grid-template-columns: 24px minmax(86px, auto) minmax(0, 1fr); gap: 0.7rem; }
+    .lecture .venue { display: none; }
+  }
+
   @media (max-width: 768px) {
     * { cursor: auto; }
     .descent-marker, .tier-label-vertical { display: none; }
@@ -1017,7 +980,6 @@
     #threshold { padding: 8rem 5vw 6rem !important; }
     .titanic { font-size: clamp(2.2rem, 12vw, 4rem); }
     .compound { font-size: clamp(1.6rem, 7vw, 2.5rem); }
-    .geo svg { width: 110vh; height: 110vh; }
     #threshold .titanic, #threshold .threshold-meta, #threshold .threshold-coords,
     #lectures .compound, #lectures .body,
     #academy .compound, #academy .academy-detail, #academy .academy-program,
@@ -1041,15 +1003,13 @@
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition: none !important; animation: none !important; }
-    .geo svg { transform: scale(7) translate(-120px, -30px); }
-    #geo2 svg { transform: scale(6) translate(100px, -40px); }
   }
 
 @media print {
   /* Reset background to white to save ink */
   body { background: white !important; color: #000 !important; -webkit-print-color-adjust: economy; print-color-adjust: economy; }
   /* Hide interactive UI chrome */
-  .topbar, .nav, nav, .menu, .actions, .filter-nav, .langs, .fz-controls, .mode-toggle, .modeToggle, .geo, .progress, .descent-marker, .live-settings, .booking-button, button, .btn, [role="button"] { display: none !important; }
+  .topbar, .nav, nav, .menu, .actions, .filter-nav, .langs, .fz-controls, .mode-toggle, .modeToggle, .progress, .descent-marker, .live-settings, .booking-button, button, .btn, [role="button"] { display: none !important; }
   /* Hide trailing footer chrome */
   .colophon, .footer-links, footer { color: #555 !important; border-top: 1px solid #ccc; padding-top: 0.5rem; margin-top: 1rem; }
   /* Make links printable: show URL after link text for printout */
@@ -1150,18 +1110,6 @@ input[type="button"] {
 
 
   /* ===== MAIN PAGE REVISION · clarity before ornament ===== */
-  :root { --geo-px: 0px; --geo-py: 0px; --geo2-px: 0px; --geo2-py: 0px; }
-  #geo svg {
-    transform: scale(var(--geo-scale)) translate(calc(var(--geo-tx) + var(--geo-px)), calc(var(--geo-ty) + var(--geo-py)));
-  }
-  #geo2 svg {
-    transform: scale(var(--geo2-scale, 6)) translate(calc(var(--geo2-tx, 100px) + var(--geo2-px)), calc(var(--geo2-ty, -40px) + var(--geo2-py)));
-  }
-  body[data-geometry="quiet"] #geo { opacity: 0.065 !important; }
-  body[data-geometry="quiet"] #geo2 { opacity: 0.028 !important; }
-  body[data-geometry="awake"] #geo { opacity: 0.105 !important; }
-  body[data-geometry="awake"] #geo2 { opacity: 0.045 !important; }
-  body:not(.party) .geo .geo-flower { opacity: 0.10 !important; }
   body:not(.party) .titanic .word::before,
   body:not(.party) .titanic .char::before,
   body:not(.party) .compound .word::before,
@@ -1182,25 +1130,6 @@ input[type="button"] {
   body:not(.party) .terms::before,
   body:not(.party) #about .about-side p::before,
   body:not(.party) #footer-loop .colophon::before { display: none !important; }
-  .field-toggle {
-    position: fixed;
-    right: 1.45rem;
-    bottom: 3.55rem;
-    z-index: 10000;
-    border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent);
-    background: color-mix(in srgb, var(--bg) 82%, transparent);
-    color: var(--fg);
-    backdrop-filter: blur(10px);
-    padding: 0.42rem 0.62rem;
-    font-family: var(--sans);
-    font-size:0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    cursor: pointer;
-    opacity: 0.72;
-    transition: opacity 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-  }
-  .field-toggle:hover, .field-toggle[aria-pressed="true"] { opacity: 1; border-color: var(--accent); color: var(--accent); }
   .threshold-routes {
     grid-column: 1 / span 8;
     grid-row: 3;
@@ -1268,11 +1197,9 @@ input[type="button"] {
     #threshold .threshold-meta, .threshold-routes, .threshold-paths, #threshold .threshold-coords { grid-column: 1 / -1; grid-row: auto; }
     .threshold-routes { grid-template-columns: 1fr; margin-top: 1.4rem; }
     .threshold-route { min-height: auto; }
-    .field-toggle { right: 1rem; bottom: 3.4rem; }
     #footer-loop .footer-links { justify-content: flex-start; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .field-toggle { display: none; }
     .threshold-route:hover { transform: none; }
   }
 
@@ -1296,16 +1223,23 @@ input[type="button"] {
 <link rel="stylesheet" href="/css/mobile-overlay.css?v=cl91">
 
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
-<link rel="stylesheet" href="/css/alive.css?v=20260806-front-facing-geometry">
+<link rel="stylesheet" href="/css/alive.css?v=sha256-3ccd45ce601b">
 <link rel="stylesheet" href="/css/main-writing-readability-2026.css?v=20260725-audit45-saul-runtime">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260814-reader-word-integrity" data-site-wide-type-zoom="20260814-reader-word-integrity">
 <style id="audit35-about-ui">
-/* Keep fixed reading controls clear of the full-height header, and let the
+/* Keep reader controls clear of the sticky header, and let the
    smallest header expose every destination without squeezed or clipped type. */
 .topbar .brand,.topbar .nav a{min-height:44px}
 .topbar .nav a{display:inline-flex;align-items:center}
 @media (min-width:769px){
   .ss-fz{top:calc(6.25rem + env(safe-area-inset-top,0px))!important}
+}
+/* At enlarged text sizes the address, brand and complete navigation cannot
+   share one 1024px row without forcing horizontal overflow. The address is
+   available on the contact/CV routes; preserve all navigation destinations. */
+@media (min-width:769px) and (max-width:1279px){
+  .topbar-email{display:none}
+  .topbar .nav{min-width:0}
 }
 @media (max-width:420px){
   .topbar{gap:.75rem}
@@ -1326,15 +1260,13 @@ input[type="button"] {
 <link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-route-type="map" data-geometry="indra-web" data-indra-intensity="0.070" data-geometry-role="relation movement synthesis">
+<body data-route-type="map" data-geometry="indra-web" data-indra-intensity="0.115" data-geometry-role="relation movement synthesis" data-geometry-key="/about/" data-geometry-seed="4f10f17be161adfe" data-geometry-register="quiet" data-geometry-profile="about-dual" data-front-facing="general-audience">
 <style id="ss-fz-style">.ss-fz{position:fixed;top:4.15rem;right:.8rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:44px;height:44px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 <!-- Theme toggle (light/dark mode). System preference is the default;
      clicking flips. localStorage persists the choice. -->
 <!-- CL-2026-06-04 #2: dead light/dark toggle removed; home uses its own scroll-driven palette -->
 
 
-<div class="geo" id="geo"></div>
-<div class="geo" id="geo2"></div>
 <div class="frame"></div>
 <div class="progress" id="progress"></div>
 
@@ -1440,22 +1372,21 @@ input[type="button"] {
   <div class="founder-name reveal delay-2">Saul Nassau</div>
   <div class="founder-body reveal delay-3">
     <p class="body">A seminar asks readers to make a claim, test it against the text and each other, then revise it in public. Disagreement becomes the bond instead of the wedge. Two prepared readers and one good text are enough to begin.</p>
-    <p class="body">Leizu Academy handles tutoring and the Agora hosts public reading. Ohm Dome develops a public gathering structure, while polymythcal tracks events and deadlines and Marginalia carries longer essays.</p>
-    <p class="body">Saul Nassau runs Seminar Schools. He has taught for fifteen years across six countries. He holds an MA in Philosophy from the European Graduate School, where he studied with Žižek and Agamben, read Hegel with George di Giovanni at McGill, and is a PhD candidate in Education.</p>
+    <p class="body">Leizu Academy handles tutoring and the Agora hosts public reading. Ohm Dome develops a public gathering structure, while Polymythcal tracks events and deadlines and Marginalia carries longer essays.</p>
+    <p class="body">Saul Nassau runs Seminar Schools. He has more than twelve years of teaching and program experience across six countries. He holds an MA in Philosophy from the European Graduate School and has also studied at McGill University.</p>
   </div>
   <div class="founder-grid reveal delay-4">
     <div class="founder-block">
       <div class="micro">Formation</div>
       <div class="item">MA in Philosophy from the European Graduate School</div>
-      <div class="item">PhD candidate in Education</div>
       <div class="item">IB Theory of Knowledge certified</div>
       <div class="item">TESOL from Indiana University</div>
     </div>
     <div class="founder-block">
       <div class="micro">Practice</div>
-      <div class="item">Fifteen years of classroom teaching</div>
+      <div class="item">More than twelve years in teaching and programs</div>
       <div class="item">Taught in six countries</div>
-      <div class="item">Works in English, Mandarin, French, and Farsi</div>
+      <div class="item">English; advanced spoken and read Farsi; basic French and Mandarin</div>
       <div class="item"><a href="/saul">Full CV &rarr;</a></div>
     </div>
   </div>
@@ -1464,7 +1395,7 @@ input[type="button"] {
 <section id="community" class="tier" data-tier="5" data-name="Community" data-roman="v">
   <div class="tier-label-vertical"><span class="num">v</span><span class="label">Community</span></div>
   <h2 class="compound words">Community <em>projects.</em></h2>
-  <p class="body reveal delay-2">Seven public projects extend the work beyond tutoring. They are free and open. Dates appear through <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="prompt">&gt;</span>open_transmission<span class="cursor">_</span></a> when each is ready.</p>
+  <p class="body reveal delay-2">Seven public projects extend the work beyond tutoring. They are free and open. Dates appear in the <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">public reading and announcements document</a> when each is ready.</p>
   <div class="community-list stagger reveal delay-3">
     <div class="project featured">
       <div class="micro">Open seminar</div>
@@ -1594,257 +1525,6 @@ input[type="button"] {
     el.querySelectorAll('.word').forEach((w, i) => w.style.transitionDelay = (0.08 * i + 0.05) + 's');
   });
 
-  // ============================================================================
-  // POLYMYTH MANDALA v32, APOLLONIAN ROOTS + FLOWERING
-  // ============================================================================
-  // LAYER 1 (ROOTS): Three Apollonian gaskets at golden-ratio scales overlaid.
-  //   The mathematical root system. Descartes' theorem. Moiré confluence.
-  // LAYER 2 (FLOWERS): Multi-petal blooms sprouting from every tangency point.
-  //   Flower size proportional to the tangent circles (math determines form).
-  //   Petal count varies with recursion depth. Rotation varies per position.
-  //   The flowers grow FROM the math. The math comes first. Always.
-  // LAYER 3 (JEWELS): Indra's Net at cross-gasket near-tangencies.
-  //   Concrescence points where independent structures touch.
-  // ============================================================================
-
-  function descartesCurvature(k1, k2, k3, sign) {
-    const s = k1*k2 + k2*k3 + k1*k3;
-    return s < 0 ? null : k1 + k2 + k3 + sign * 2 * Math.sqrt(s);
-  }
-
-  function descartesCenter(c1, c2, c3, k4, sign) {
-    const z1r=c1.x*c1.k, z1i=c1.y*c1.k;
-    const z2r=c2.x*c2.k, z2i=c2.y*c2.k;
-    const z3r=c3.x*c3.k, z3i=c3.y*c3.k;
-    const sr=z1r+z2r+z3r, si=z1i+z2i+z3i;
-    const p12r=z1r*z2r-z1i*z2i, p12i=z1r*z2i+z1i*z2r;
-    const p23r=z2r*z3r-z2i*z3i, p23i=z2r*z3i+z2i*z3r;
-    const p13r=z1r*z3r-z1i*z3i, p13i=z1r*z3i+z1i*z3r;
-    const ir=p12r+p23r+p13r, ii=p12i+p23i+p13i;
-    const mag=Math.sqrt(ir*ir+ii*ii), sm=Math.sqrt(mag), ha=Math.atan2(ii,ir)/2;
-    const sqr=sm*Math.cos(ha), sqi=sm*Math.sin(ha);
-    return { x:(sr+sign*2*sqr)/k4, y:(si+sign*2*sqi)/k4 };
-  }
-
-  // Build one complete Apollonian gasket, rotated by `rot` radians.
-  // Returns array of {x, y, r} circles.
-  function buildGasket(rot, scale) {
-    const circles = [];
-    const R = 300 * scale;
-    const rIn = R * Math.sqrt(3) / (Math.sqrt(3) + 2);
-    const dC = 2 * rIn / Math.sqrt(3);
-    const cosR = Math.cos(rot), sinR = Math.sin(rot);
-
-    function rotPt(x, y) { return { x: x*cosR - y*sinR, y: x*sinR + y*cosR }; }
-
-    // Seed circles (rotated)
-    const c0p = rotPt(0, 0);
-    const seed = [{ x:c0p.x, y:c0p.y, k:-1/R, d:0 }];
-    for (let i = 0; i < 3; i++) {
-      const a = (i/3)*Math.PI*2 - Math.PI/2;
-      const p = rotPt(Math.cos(a)*dC, Math.sin(a)*dC);
-      seed.push({ x:p.x, y:p.y, k:1/rIn, d:0 });
-    }
-    seed.forEach(c => circles.push(c));
-
-    const MAX_D = 6, MIN_R = 0.9;
-    const seen = new Set();
-    const cKey = (x,y,r) => `${Math.round(x*8)},${Math.round(y*8)},${Math.round(r*8)}`;
-
-    function fillGap(a, b, c, depth) {
-      if (depth > MAX_D) return;
-      const k4 = descartesCurvature(a.k, b.k, c.k, 1);
-      if (k4 === null || k4 <= 0) return;
-      const r4 = 1/k4;
-      if (r4 < MIN_R) return;
-      const cen = descartesCenter(a, b, c, k4, 1);
-      const key = cKey(cen.x, cen.y, r4);
-      if (seen.has(key)) return;
-      seen.add(key);
-      const ok = [a,b,c].every(p => {
-        const dd = Math.sqrt((cen.x-p.x)**2+(cen.y-p.y)**2);
-        const rp = 1/Math.abs(p.k);
-        const target = p.k < 0 ? Math.abs(rp-r4) : rp+r4;
-        return Math.abs(dd-target) < Math.max(2, target*0.1);
-      });
-      if (!ok) return;
-      const nc = { x:cen.x, y:cen.y, k:k4, d:depth };
-      circles.push(nc);
-      fillGap(a,b,nc,depth+1); fillGap(b,c,nc,depth+1); fillGap(a,c,nc,depth+1);
-    }
-
-    fillGap(seed[0],seed[1],seed[2],1);
-    fillGap(seed[0],seed[2],seed[3],1);
-    fillGap(seed[0],seed[1],seed[3],1);
-    fillGap(seed[1],seed[2],seed[3],1);
-
-    return circles;
-  }
-
-  function buildMandala() {
-    // THREE independent gaskets at GOLDEN-RATIO scales.
-    // Phi-ratio separation makes each voice visibly a different generation.
-    const PHI = 1.6180339887;
-    const gaskets = [
-      { rot: 0,              scale: 1.0,       op: 0.78 },  // primary voice
-      { rot: Math.PI * 0.4,  scale: 1/PHI,     op: 0.58 },  // second voice (phi smaller)
-      { rot: Math.PI * 0.78, scale: 1/(PHI*PHI), op: 0.42 },  // third voice (phi² smaller)
-    ];
-
-    let geom = `<defs>
-      <radialGradient id="jewelCore" cx="35%" cy="35%" r="65%">
-        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-        <stop offset="25%" stop-color="currentColor" stop-opacity="0.85"/>
-        <stop offset="70%" stop-color="currentColor" stop-opacity="0.55"/>
-        <stop offset="100%" stop-color="currentColor" stop-opacity="0.25"/>
-      </radialGradient>
-      <radialGradient id="jewelPrism" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="transparent" stop-opacity="0"/>
-        <stop offset="82%" stop-color="transparent" stop-opacity="0"/>
-        <stop offset="88%" stop-color="#ff4477" stop-opacity="0.55"/>
-        <stop offset="92%" stop-color="#ffaa22" stop-opacity="0.55"/>
-        <stop offset="96%" stop-color="#44aaff" stop-opacity="0.55"/>
-        <stop offset="100%" stop-color="#aa44ff" stop-opacity="0"/>
-      </radialGradient>
-    </defs>`;
-    const allCircles = []; // for cross-gasket jewel detection
-
-    gaskets.forEach((g, gIdx) => {
-      const circles = buildGasket(g.rot, g.scale);
-      circles.forEach(c => {
-        const r = 1/Math.abs(c.k);
-        // FLATTER opacity curve, depth 6+ still reads at 0.4+
-        const sw = c.k<0 ? 0.5 : Math.max(0.18, 0.75-(c.d||0)*0.07);
-        const op = c.k<0 ? g.op*0.5 : Math.max(0.32, g.op - (c.d||0)*0.045);
-        geom += `<circle class="stroke" cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="${r.toFixed(1)}" stroke-width="${sw.toFixed(2)}" opacity="${op.toFixed(2)}" fill="none"/>`;
-        // Store for cross-gasket analysis
-        if (r > 2) {
-          for (let i = 0; i < 8; i++) {
-            const a = (i/8)*Math.PI*2;
-            allCircles.push({ x: c.x+Math.cos(a)*r, y: c.y+Math.sin(a)*r, g: gIdx });
-          }
-        }
-      });
-
-      // ===== FLOWERS SPROUTING FROM MATHEMATICAL ROOTS =====
-      // At every same-gasket tangency, a multi-petal flower blooms.
-      // Flower size proportional to the smaller tangent circle (math determines form).
-      // Petal count varies with depth (shallow=more petals, deep=fewer).
-      // Rotation varies per position for organic feel.
-      for (let i = 0; i < circles.length; i++) {
-        const ci = circles[i];
-        const ri = 1/Math.abs(ci.k);
-        if (ri < 4) continue;
-        for (let j = i+1; j < circles.length; j++) {
-          const cj = circles[j];
-          const rj = 1/Math.abs(cj.k);
-          if (rj < 4) continue;
-          const dx = cj.x-ci.x, dy = cj.y-ci.y;
-          const dist = Math.sqrt(dx*dx+dy*dy);
-          const targetExt = ri+rj;
-          const targetInt = Math.abs(ri-rj);
-          const isExtTangent = Math.abs(dist-targetExt) < Math.max(1.5, targetExt*0.06);
-          const isIntTangent = Math.abs(dist-targetInt) < Math.max(1.5, targetInt*0.06);
-          if (!isExtTangent && !isIntTangent) continue;
-          // Tangent point (where the flower grows)
-          const t = isExtTangent ? ri/dist : (ci.k<0 ? -ri/dist : ri/dist);
-          const tx = ci.x + dx*t;
-          const ty = ci.y + dy*t;
-          const depth = Math.max(ci.d||0, cj.d||0);
-          const flowerR = Math.min(ri, rj) * 0.35;
-          if (flowerR < 1.5) continue;
-          // Petal count: 5-7, varies with depth and position
-          const nPetals = depth < 2 ? 7 : depth < 4 ? 6 : 5;
-          // Rotation offset: varies per flower for organic asymmetry
-          const rotOff = (tx * 0.1 + ty * 0.07 + depth * 0.5);
-          const flowerOp = Math.max(0.18, g.op * 0.55 - depth * 0.04);
-          const flowerSw = Math.max(0.12, 0.38 - depth * 0.035);
-          // Draw multi-petal flower
-          let petals = '';
-          for (let p = 0; p < nPetals; p++) {
-            const a = (p / nPetals) * Math.PI * 2 + rotOff;
-            const dirX = Math.cos(a), dirY = Math.sin(a);
-            const perpX = -dirY, perpY = dirX;
-            const baseW = flowerR * 0.28;
-            // Petal: quadratic bezier from one side of base to the other, tip as control point
-            const sx = tx + perpX*baseW, sy = ty + perpY*baseW;
-            const ex = tx - perpX*baseW, ey = ty - perpY*baseW;
-            const tipX = tx + dirX*flowerR, tipY = ty + dirY*flowerR;
-            petals += `M ${sx.toFixed(1)} ${sy.toFixed(1)} Q ${tipX.toFixed(1)} ${tipY.toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)} `;
-          }
-          geom += `<path class="stroke geo-flower" d="${petals}" stroke-width="${flowerSw.toFixed(2)}" opacity="${flowerOp.toFixed(2)}" fill="none"/>`;
-          // Small center dot (the pistil)
-          const dotR = Math.max(0.4, flowerR * 0.1);
-          geom += `<circle class="geo-flower" cx="${tx.toFixed(1)}" cy="${ty.toFixed(1)}" r="${dotR.toFixed(1)}" fill="currentColor" opacity="${(flowerOp*0.9).toFixed(2)}"/>`;
-        }
-      }
-    });
-
-    // ===== INDRA'S NET JEWELS, CONCRESCENCE =====
-    // Where circles from DIFFERENT gaskets nearly cross = moiré meeting points.
-    // These are the concrescence points where independent structures touch.
-    const PROX = 4, CELL = PROX*2;
-    const grid = new Map();
-    allCircles.forEach((p,i) => {
-      const k = `${Math.floor(p.x/CELL)},${Math.floor(p.y/CELL)}`;
-      if (!grid.has(k)) grid.set(k, []);
-      grid.get(k).push(i);
-    });
-
-    const candidates = [];
-    for (let i = 0; i < allCircles.length; i++) {
-      const p = allCircles[i];
-      const cx = Math.floor(p.x/CELL), cy = Math.floor(p.y/CELL);
-      for (let dx = -1; dx <= 1; dx++) {
-        for (let dy = -1; dy <= 1; dy++) {
-          const cell = grid.get(`${cx+dx},${cy+dy}`);
-          if (!cell) continue;
-          for (const j of cell) {
-            if (j <= i) continue;
-            const q = allCircles[j];
-            if (q.g === p.g) continue; // MUST be different gasket (confluence preserved)
-            const ddx=p.x-q.x, ddy=p.y-q.y;
-            if (ddx*ddx+ddy*ddy < PROX*PROX) {
-              candidates.push({ x:(p.x+q.x)/2, y:(p.y+q.y)/2 });
-            }
-          }
-        }
-      }
-    }
-
-    // Deduplicate jewels
-    const jewels = [];
-    const JSEP = 8;
-    candidates.forEach(c => {
-      if (!jewels.some(e => (c.x-e.x)**2+(c.y-e.y)**2 < JSEP*JSEP)) jewels.push(c);
-    });
-    jewels.forEach(j => {
-      const d = Math.sqrt(j.x*j.x+j.y*j.y);
-      // Three size classes by scale of intersection (greater-wheel / rosette / petal-interior)
-      const r = d < 80 ? 2.6 : d < 200 ? 2.0 : 1.4;
-      const x = j.x.toFixed(1), y = j.y.toFixed(1);
-      // Prismatic ring (rainbow dispersion at facet edge)
-      geom += `<circle cx="${x}" cy="${y}" r="${(r*1.35).toFixed(2)}" fill="url(#jewelPrism)" opacity="0.7"/>`;
-      // Gradient core (faceted inner depth)
-      geom += `<circle cx="${x}" cy="${y}" r="${r.toFixed(1)}" fill="url(#jewelCore)" opacity="0.85"/>`;
-      // Specular highlight (reads as refractive surface)
-      const hx = (j.x - r*0.35).toFixed(1), hy = (j.y - r*0.35).toFixed(1);
-      geom += `<circle cx="${hx}" cy="${hy}" r="${(r*0.28).toFixed(2)}" fill="#ffffff" opacity="0.75"/>`;
-    });
-
-    return `<svg aria-hidden="true" viewBox="-380 -380 760 760" xmlns="http://www.w3.org/2000/svg">${geom}</svg>`;
-  }
-
-
-  // Defer build to after first paint, build into BOTH layers
-  function initGeo() {
-    if (document.documentElement.dataset.motion === 'calm') return;
-    const svg = buildMandala();
-    document.getElementById('geo').innerHTML = svg;
-    document.getElementById('geo2').innerHTML = svg;
-  }
-  if ('requestIdleCallback' in window) requestIdleCallback(initGeo, { timeout: 200 });
-  else setTimeout(initGeo, 50);
   // Native scrolling is intentionally retained for stable input and wheel behaviour.
 
   // ===== Tier palette (DEFAULT: bright) =====
@@ -1859,37 +1539,6 @@ input[type="button"] {
     { bg: '#F2E5E6', fg: '#200E12', accent: '#A84858' },
   ];
 
-  // ===== Section camera vantage points =====
-  // x, y in SVG coords (mandala viewBox -500..500). Translation inverted.
-  // Each section visits a different organic region of the structure.
-  // Zoom 8-15x keeps every position rich-detail.
-  // ===== Section camera vantage points =====
-  // PRIMARY CAMERA: visits specific pores and depths of the gasket.
-  const sectionSettings = [
-    { x:  120, y:   30, zoom:  7, density: 0.55 },  // i Threshold, right pore
-    { x:   40, y:  -30, zoom:  5, density: 0.60 },  // ii Lectures, wide view
-    { x:   10, y: -130, zoom: 10, density: 0.55 },  // iii Academy, top pore deep
-    { x:    0, y:   50, zoom: 12, density: 0.55 },  // iv Founder, central gap
-    { x: -110, y:   50, zoom:  8, density: 0.58 },  // v Community, left pore
-    { x:  -60, y:  120, zoom: 11, density: 0.55 },  // vi Writing, bottom-left deep
-    { x:   20, y:  -10, zoom:  6, density: 0.55 },  // vii About, center wide
-    { x:   70, y: -100, zoom:  9, density: 0.55 },  // viii Admission, top-right
-    { x:  120, y:   30, zoom:  7, density: 0.55 },  // loop
-  ];
-  // SECOND CAMERA: visits the OPPOSITE regions at every section.
-  // Creates moiré at the journey level, two independent readings of the same structure.
-  const sectionSettings2 = [
-    { x: -100, y:   40, zoom:  6, density: 0.35 },  // left pore while primary is right
-    { x:    0, y:   50, zoom:  8, density: 0.38 },  // center while primary is wide
-    { x:   80, y:  100, zoom:  8, density: 0.35 },  // bottom-right while primary is top
-    { x: -120, y:  -80, zoom:  7, density: 0.35 },  // outer while primary is center-deep
-    { x:   40, y: -110, zoom:  9, density: 0.38 },  // top while primary is left
-    { x:  100, y:  -30, zoom:  8, density: 0.35 },  // right pore while primary is bottom-left
-    { x:  -80, y:  100, zoom:  9, density: 0.35 },  // bottom-left while primary is center
-    { x:  -40, y:   20, zoom:  7, density: 0.35 },  // center-left while primary is top-right
-    { x: -100, y:   40, zoom:  6, density: 0.35 },  // loop
-  ];
-
   // ===== Cached refs =====
   const sections = Array.from(document.querySelectorAll('section.tier'));
   const root = document.documentElement.style;
@@ -1901,6 +1550,7 @@ input[type="button"] {
   const topbar = document.getElementById('topbar');
   const body = document.body;
   const calmMode = document.documentElement.dataset.motion === 'calm';
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (calmMode) {
     body.classList.add('tier-applied');
     body.classList.remove('party');
@@ -1920,40 +1570,6 @@ input[type="button"] {
   function toRgbStr(arr) { return `${Math.round(arr[0])},${Math.round(arr[1])},${Math.round(arr[2])}`; }
 
   const tierHex = tiers.map(t => ({ bg: hex(t.bg), fg: hex(t.fg), accent: hex(t.accent) }));
-
-  let lastGeoUpdate = 0;
-  function updateGeometry(currentIdx, sectionLocalProgress) {
-    const now = performance.now();
-    if (now - lastGeoUpdate < 33) return;
-    lastGeoUpdate = now;
-
-    const t = sectionLocalProgress;
-    const ease = t * t * t * (t * (t * 6 - 15) + 10);
-
-    // PRIMARY CAMERA
-    const cur = sectionSettings[currentIdx] || sectionSettings[0];
-    const nxt = sectionSettings[Math.min(sectionSettings.length - 1, currentIdx + 1)] || cur;
-    const zoom = cur.zoom + (nxt.zoom - cur.zoom) * ease;
-    const tx = cur.x + (nxt.x - cur.x) * ease;
-    const ty = cur.y + (nxt.y - cur.y) * ease;
-    const density = cur.density + (nxt.density - cur.density) * ease;
-    root.setProperty('--geo-scale', zoom.toFixed(2));
-    root.setProperty('--geo-tx', (-tx).toFixed(1) + 'px');
-    root.setProperty('--geo-ty', (-ty).toFixed(1) + 'px');
-    root.setProperty('--geo-density', density.toFixed(2));
-
-    // SECOND CAMERA (independent journey through same structure)
-    const cur2 = sectionSettings2[currentIdx] || sectionSettings2[0];
-    const nxt2 = sectionSettings2[Math.min(sectionSettings2.length - 1, currentIdx + 1)] || cur2;
-    const zoom2 = cur2.zoom + (nxt2.zoom - cur2.zoom) * ease;
-    const tx2 = cur2.x + (nxt2.x - cur2.x) * ease;
-    const ty2 = cur2.y + (nxt2.y - cur2.y) * ease;
-    const density2 = cur2.density + (nxt2.density - cur2.density) * ease;
-    root.setProperty('--geo2-scale', zoom2.toFixed(2));
-    root.setProperty('--geo2-tx', (-tx2).toFixed(1) + 'px');
-    root.setProperty('--geo2-ty', (-ty2).toFixed(1) + 'px');
-    root.setProperty('--geo2-density', density2.toFixed(2));
-  }
 
   let lastBg = '';
   function updateColor(pct) {
@@ -1980,19 +1596,22 @@ input[type="button"] {
     }
   }
 
+  function updateTopbarState() {
+    const currentScrollY = window.scrollY || document.documentElement.scrollTop;
+    topbar.classList.toggle('scrolled', currentScrollY > 80);
+  }
+  updateTopbarState();
+  window.addEventListener('scroll', updateTopbarState, { passive: true });
+
   let lastScrollY = -1;
   function update() {
     const scrollY = window.scrollY || document.documentElement.scrollTop;
     if (scrollY === lastScrollY) return;
     lastScrollY = scrollY;
-    if (calmMode) return;
+    updateTopbarState();
 
     const docH = document.documentElement.scrollHeight - window.innerHeight;
     const pct = docH > 0 ? Math.min(1, Math.max(0, scrollY / docH)) : 0;
-    progress.style.width = (pct * 100) + '%';
-
-    if (scrollY > 80) topbar.classList.add('scrolled');
-    else topbar.classList.remove('scrolled');
 
     const viewportCenter = scrollY + window.innerHeight / 2;
     let currentIdx = 0;
@@ -2003,11 +1622,9 @@ input[type="button"] {
       }
     }
     if (!sectionBounds[currentIdx]) return;
-    const b = sectionBounds[currentIdx];
-    const sectionLocalProgress = (viewportCenter - b.top) / (b.bottom - b.top);
-
+    if (calmMode || reducedMotion) return;
+    progress.style.width = (pct * 100) + '%';
     updateColor(pct);
-    updateGeometry(currentIdx, sectionLocalProgress);
 
     const name = sections[currentIdx].dataset.name;
     const roman = sections[currentIdx].dataset.roman;
@@ -2025,11 +1642,11 @@ input[type="button"] {
     pending = true;
     requestAnimationFrame(() => { update(); pending = false; });
   }
-  if (!calmMode) {
+  if (!reducedMotion) {
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', schedule);
-    schedule();
   }
+  schedule();
 
   // ===== Firefly trail (CSS-driven, zero-bandwidth ephemeral) =====
   // Occasionally emit a tiny accent-colored dot at the cursor position.
@@ -2090,13 +1707,9 @@ input[type="button"] {
       body.classList.remove('dark');
       clearAllGlow();
       for (let i = 0; i < tierHex.length; i++) tierHex[i] = brightTierHex[i];
-      root.setProperty('--geo-density', '0.25');
-      root.setProperty('--geo2-density', '0.15');
     } else if (lightState === 1) {
       body.classList.add('dark');
       for (let i = 0; i < tierHex.length; i++) tierHex[i] = darkTierHex[i];
-      root.setProperty('--geo-density', '0.55');
-      root.setProperty('--geo2-density', '0.35');
     } else {
       body.classList.add('dark');
       clearAllGlow();
@@ -2221,7 +1834,6 @@ input[type="button"] {
   // return link instead of looping or resisting ordinary scroll gestures.
 </script>
 
-<button type="button" class="field-toggle" id="geometryToggle" aria-pressed="true">geometry awake</button>
 <button type="button" class="mode-toggle" id="modeToggle" aria-label="Toggle creative mode">creative mode →</button>
 <script>
 (function() {
@@ -2262,63 +1874,6 @@ input[type="button"] {
   }
 })();
 
-// ===== Geometry interaction =====
-// The field follows the reader lightly without a permanent animation loop.
-// An explicit control raises or lowers the response, and reduced-motion
-// settings keep the field still.
-(function(){
-  const body = document.body;
-  const root = document.documentElement.style;
-  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const btn = document.getElementById('geometryToggle');
-  if (!btn) return;
-  let awake = true;
-  try { awake = localStorage.getItem('ss-main-geometry') !== 'quiet'; } catch(e) {}
-  function apply(){
-    body.dataset.geometry = awake ? 'awake' : 'quiet';
-    btn.setAttribute('aria-pressed', awake ? 'true' : 'false');
-    btn.textContent = awake ? 'geometry awake' : 'geometry quiet';
-    btn.setAttribute('aria-label', awake ? 'Set the background geometry to quiet' : 'Awaken the background geometry');
-    if (reduced || !awake) {
-      root.setProperty('--geo-px', '0px');
-      root.setProperty('--geo-py', '0px');
-      root.setProperty('--geo2-px', '0px');
-      root.setProperty('--geo2-py', '0px');
-    }
-  }
-  apply();
-  if (document.documentElement.dataset.motion === 'calm') return;
-  btn.addEventListener('click', function(){
-    awake = !awake;
-    try { localStorage.setItem('ss-main-geometry', awake ? 'awake' : 'quiet'); } catch(e) {}
-    apply();
-  });
-  if (reduced) return;
-  let raf = 0;
-  let point = null;
-  function applyPointer(){
-    raf = 0;
-    if (!point) return;
-    const strength = awake ? 8 : 3;
-    const x = (point.x / window.innerWidth - 0.5) * strength;
-    const y = (point.y / window.innerHeight - 0.5) * strength;
-    root.setProperty('--geo-px', x.toFixed(2) + 'px');
-    root.setProperty('--geo-py', y.toFixed(2) + 'px');
-    root.setProperty('--geo2-px', (-x * 0.55).toFixed(2) + 'px');
-    root.setProperty('--geo2-py', (-y * 0.55).toFixed(2) + 'px');
-  }
-  document.addEventListener('pointermove', function(e){
-    if (e.pointerType === 'touch') return;
-    point = {x:e.clientX, y:e.clientY};
-    if (!raf) raf = requestAnimationFrame(applyPointer);
-  }, {passive:true});
-  document.addEventListener('pointerleave', function(){
-    root.setProperty('--geo-px', '0px');
-    root.setProperty('--geo-py', '0px');
-    root.setProperty('--geo2-px', '0px');
-    root.setProperty('--geo2-py', '0px');
-  });
-})();
 </script>
 
 <script src="/js/theme.js?v=cl91" defer></script>
@@ -2327,7 +1882,7 @@ input[type="button"] {
 function fetchEventsWithFallback(){
   // This teaser uses the compact feed generated by the Polymythcal pipeline;
   // the full event corpus stays on the calendar route.
-  var urls = ['/polymythseminars/featured.json?v=20260728-audit53'];
+  var urls = ['/polymythseminars/featured.json?v=20260815-sets1-15-synthesis'];
   return (async function(){
     var lastErr = null;
     for (var i=0;i<urls.length;i++){
@@ -2443,8 +1998,8 @@ function fetchEventsWithFallback(){
 })();
 </script>
 
-<script src="/js/mandala.js?v=20260806-front-facing-geometry" defer></script>
-<script src="/js/indra.js?v=20260806-front-facing-geometry" defer></script>
+<script src="/js/mandala.js?v=sha256-3ccd45ce601b" defer></script>
+<script src="/js/indra.js?v=sha256-3ccd45ce601b" defer></script>
 <script src="/js/footer.js?v=20260805-predeploy-audit" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
 <script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>

@@ -1,8 +1,8 @@
 {
   "schema": "asset-weight-budget-v1",
-  "updated": "2026-08-06",
-  "policy": "Audit 52 constrains the generated public deploy surface. The total ceiling includes the approved dedicated localization routes, the complete Saul CV source/public parity surface and fixed downloads, the current-plus-withdrawn 129-row MeToo premise-audit workbooks required by the July 27 provenance record, the July 28 public mythology-integration source ledgers plus 23-entry ML* addendum, the canonical Polymyth Coherence V5.1.1 workbook, and the 346 stable Polymyth Commons records with their versioned link-only directory data. Build-only Teacher Resources data is excluded. Large archival sources, research workbooks, the concordance, pinned graph engine, and fully bilingual Polymythcal controller retain narrow exceptions; all other runtime and media assets use type limits. Polymyth Commons additionally enforces compact browser-index gzip ceilings while retaining its complete reusable JSON and CSV releases.",
-  "totalPublicCeilingBytes": 132000000,
+  "updated": "2026-08-21",
+  "policy": "Audit 52 constrains the generated public deploy surface. The total ceiling includes the approved dedicated localization routes, the complete Saul CV source/public parity surface and fixed downloads, the current-plus-withdrawn 129-row MeToo premise-audit workbooks required by the July 27 provenance record, the July 28 public mythology-integration source ledgers plus 23-entry ML* addendum, the August 13 lossless CORE and CORE+ reorganization with exact current and historical public mirrors plus Devil's Diary Entry 11 source-method corrections, the August 14 canonical Indra geometry contract on every public HTML page plus the Teacher Resources and homepage stability repairs, the blank canonical Polymyth Coherence V5.1.2 assessment instrument, the 346 stable Polymyth Commons records with their versioned link-only directory data, the August 15 lossless synthesis of Polymythcal research Sets 1–15 with 2,088 canonical events, bilingual researched-evidence detail pages, 55 explicit Set 13–15 facets, and fixed-point semantic signatures covering descriptions, locations, status evidence, previous dates, last-check dates, and related-event identities, and the August 21 addition of the eight-page Pigeon monologues classroom PDF and generated Teacher Resources detail route. Build-only Teacher Resources data is excluded. The 172,302,619-byte aggregate ceiling leaves 27,837 bytes above the verified 172,274,782-byte deploy. Large archival sources, research workbooks, the concordance, pinned graph engine, complete canonical and compact Polymythcal datasets, and the fully bilingual Polymythcal controller retain narrow exceptions; all other runtime and media assets use type limits. Polymyth Commons and Polymythcal additionally enforce compact browser-index gzip ceilings while retaining their complete reusable canonical data.",
+  "totalPublicCeilingBytes": 172302619,
   "limitsByExtension": {
     ".css": 50000,
     ".gif": 500000,
@@ -54,10 +54,10 @@
       "reason": "withdrawn 129-row MeToo premise audit preserved for provenance"
     },
     {
-      "path": "polymyth/coherence/Polymyth_Coherence_V5.1.1.xlsx",
-      "baselineBytes": 2711354,
-      "ceilingBytes": 2800000,
-      "reason": "canonical repaired Polymyth Coherence V5.1.1 workbook"
+      "path": "polymyth/coherence/Polymyth_Coherence_Assessment_Instrument_V5.1.2.xlsx",
+      "baselineBytes": 2771628,
+      "ceilingBytes": 2850000,
+      "reason": "blank canonical Polymyth Coherence V5.1.2 assessment instrument"
     },
     {
       "path": "js/vendor/d3-7.9.0.min.js",
@@ -67,9 +67,21 @@
     },
     {
       "path": "js/polymythcal-revamp.js",
-      "baselineBytes": 110769,
-      "ceilingBytes": 112000,
-      "reason": "complete English and French calendar controller with goal-led discovery; 29.3 KB gzip"
+      "baselineBytes": 131226,
+      "ceilingBytes": 132000,
+      "reason": "complete English and French Sets 1–15 calendar controller with goal-led discovery and 55 explicit Set 13–15 facets"
+    },
+    {
+      "path": "polymythseminars/events.json",
+      "baselineBytes": 8025204,
+      "ceilingBytes": 8050000,
+      "reason": "complete reusable 2,088-record canonical Polymythcal corpus with source provenance and researched Sets 1–15 fields"
+    },
+    {
+      "path": "polymythseminars/browse.json",
+      "baselineBytes": 4144211,
+      "ceilingBytes": 4160000,
+      "reason": "lossless browser projection for 2,088 Polymythcal records and the 55 Set 13–15 filter values"
     }
   ]
 }

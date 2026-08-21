@@ -158,8 +158,8 @@
 :root{--display:'GFS Didot', Georgia, serif;--body:'Andada Pro', Georgia, serif;}
 .titanic,.compound{letter-spacing:0.01em;} ::selection{background:rgba(196,106,60,0.25);}
 </style>
-<link rel="stylesheet" href="/css/alive.css?v=20260806-front-facing-geometry">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/alive.css?v=sha256-3ccd45ce601b">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260814-reader-word-integrity" data-site-wide-type-zoom="20260814-reader-word-integrity">
 <style id="audit35-agora-ui">
 .topbar .brand,.project-nav a,.next-session a,.door a{
   display:inline-flex!important;align-items:center;min-height:44px}
@@ -168,6 +168,15 @@
 .next-session a,.door a{max-width:100%;white-space:normal;overflow-wrap:anywhere}
 .project-nav a:focus-visible,.next-session a:focus-visible,.door a:focus-visible{
   outline:2px solid currentColor;outline-offset:3px}
+@media (max-width:420px){
+  /* At 145% text, the wrap, tier, and callout formerly consumed three nested
+     layers of horizontal padding, leaving only 77px for reader copy. Preserve
+     the framed callout while giving whole words a real reading measure. */
+  #threshold{padding-inline:0!important}
+  .next-session{padding-inline:.75rem!important}
+  .next-session>div{overflow-wrap:normal!important;word-break:normal!important;
+    hyphens:none!important}
+}
 @media (forced-colors:active){
   .next-session,.door{background:Canvas!important;color:CanvasText!important;
     border:1px solid CanvasText!important}
@@ -176,7 +185,7 @@
 <link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-route-type="project" data-geometry="indra-web" data-indra-intensity="0.070" data-geometry-role="relation movement synthesis">
+<body data-route-type="project" data-geometry="indra-web" data-indra-intensity="0.200" data-geometry-role="relation movement synthesis" data-geometry-key="/agora/" data-geometry-seed="e5989d1278eb0996" data-geometry-register="expressive" data-geometry-profile="single" data-front-facing="general-audience">
 <!-- CL_SELF_ROUTE_NOTE -->
 <div class="route-note archive-route-note" role="note"><span class="route-note-kicker">Open seminar</span>Read the text, then join in Toronto or online.</div>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:inline-flex;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
@@ -289,7 +298,7 @@
   <div class="micro">V. When</div>
   <h2 class="compound words">Each session is convened when participants gather. <em>Dates announced ahead of time.</em></h2>
   <div class="body">
-    <p>The Agora is convened as participants gather. There is no fixed cadence. Each session is announced ahead of time with the text, the date, and the mode. <a href="mailto:saulnassau@protonmail.com?subject=Notify%20me%20about%20the%20next%20Agora%20session">Email me</a> to be added to the announcement list, or subscribe to the <a class="open-transmission" href="/agora/feed.xml" type="application/rss+xml"><span class="prompt">&gt;</span>rss_feed<span class="cursor">_</span></a> in any RSS reader.</p>
+    <p>The Agora meets when participants gather, so there is no fixed schedule. Each session is announced in advance with the reading, date, and whether it is online or in person. <a href="mailto:saulnassau@protonmail.com?subject=Notify%20me%20about%20the%20next%20Agora%20session">Join the email announcement list</a> or subscribe to the <a class="open-transmission" href="/agora/feed.xml" type="application/rss+xml">Agora RSS feed</a>.</p>
   </div>
 </section>
 
@@ -326,7 +335,7 @@
   <h2 class="compound words">One strand reads the cry from the cross beside <em>the gnostic tradition.</em></h2>
   <div class="body">
     <p>The Agora runs themed strands, each a run of gatherings around one inheritance. The Sabachtan Gnosticism strand reads the cry from the cross (sabachthani, "why have you forsaken me") next to the gnostic tradition, taking both as texts that refuse the easy synthesis and ask the reader to sit with abandonment as a structural feature of the inheritance rather than a problem to be solved. The strand reads them as adjacent rather than identical, looking for what each tradition keeps that the other lets go of.<a class="veil" href="/polymyth/devilsdiary/" aria-label="marginal note">&dagger;</a></p>
-    <p>Source texts live in a <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="prompt">&gt;</span>open_transmission<span class="cursor">_</span></a> public reading doc, shared ahead of each gathering. The rule is the Agora's rule: read the text, show up, speak when you have something to say.</p>
+    <p>Source texts are shared ahead of each gathering in the <a class="open-transmission" href="https://docs.google.com/document/d/18Y5HjH6ooFS9YTOv-JWm6y29uhLnbTgXMkfKus1ysNw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">public reading and announcements document</a>. The rule is the Agora's rule: read the text, show up, speak when you have something to say.</p>
   </div>
 </section>
 
@@ -364,8 +373,8 @@
 
 </div>
 <script src="/js/theme.js?v=cl91" defer></script>
-<script src="/js/mandala.js?v=20260806-front-facing-geometry" defer></script>
-<script src="/js/indra.js?v=20260806-front-facing-geometry" defer></script>
+<script src="/js/mandala.js?v=sha256-3ccd45ce601b" defer></script>
+<script src="/js/indra.js?v=sha256-3ccd45ce601b" defer></script>
 <script src="/js/footer.js?v=20260805-predeploy-audit" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
 <script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>

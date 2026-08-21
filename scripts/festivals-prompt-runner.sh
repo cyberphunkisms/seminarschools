@@ -181,6 +181,16 @@ if [[ "${VALIDATE_STATUS}" -ne 0 ]]; then
   soft_exit_or_fail 66 "Harvest JSON or source accounting failed validation; data was left unchanged." "${HARVEST_ATTEMPTS}"
 fi
 
+if ! python3 scripts/check-polymythcal-source-anomalies.py \
+  --stream festivals-agent \
+  --current "${OUTPUT_FILE}" \
+  --history data/harvest-source-history.json \
+  --report "${LOG_DIR}/festivals-agent-source-anomalies.json" \
+  --strict \
+  --write-history; then
+  soft_exit_or_fail 68 "Mature per-source anomaly detected; anomalous festival data was not merged." "${HARVEST_ATTEMPTS}"
+fi
+
 write_status 0 "agent" "Claude harvest produced a valid output file; merging." "${HARVEST_ATTEMPTS}"
 if ! python3 scripts/merge_festivals.py; then
   write_status 67 "merge" "Festival harvest merge, rebuild, or verification failed." "${HARVEST_ATTEMPTS}" 0

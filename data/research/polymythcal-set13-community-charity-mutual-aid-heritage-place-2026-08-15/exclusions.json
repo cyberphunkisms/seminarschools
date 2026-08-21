@@ -1,0 +1,62 @@
+[
+  {
+    "candidate": "City of Toronto Archives autumn 2026 house-history workshops",
+    "source_url": "https://www.toronto.ca/city-government/accountability-operations-customer-service/access-city-information-or-records/city-of-toronto-archives/",
+    "decision": "exclude-date-tba",
+    "reason": "The official source says autumn dates are coming; no placeholder date is created."
+  },
+  {
+    "candidate": "City of Toronto Community Environment Days schedule",
+    "source_url": "https://www.toronto.ca/services-payments/recycling-organics-garbage/community-environment-days/",
+    "decision": "exclude-unverified-dates",
+    "reason": "The reviewed official surface did not expose stable event-level dates suitable for ingestion; do not infer dates from an annual program."
+  },
+  {
+    "candidate": "Community Fridges Toronto network",
+    "source_url": "https://communityfridgesto.org/about",
+    "decision": "exclude-from-event-ledger",
+    "reason": "Important 24/7 mutual-aid infrastructure, but the reviewed official page does not identify a discrete dated 2026 occurrence. Treat as a service-directory entity, not an invented event."
+  },
+  {
+    "candidate": "Daily Bread host-your-own food drive",
+    "source_url": "https://www.dailybread.ca/get-involved/hosting-and-fundraising/",
+    "decision": "exclude-undated",
+    "reason": "Evergreen participation pathway with no specific scheduled occurrence; the dated Red Bag campaign is represented instead."
+  },
+  {
+    "candidate": "Durham Newcomer Day 2026",
+    "source_url": "https://www.durhamimmigration.ca/",
+    "decision": "exclude-insufficient-primary-event-page",
+    "reason": "Only an official social/search snippet surfaced; no durable organizer event page with a full date-and-access record was confirmed."
+  },
+  {
+    "candidate": "Hart House Block Party",
+    "source_url": "https://harthouse.ca/events",
+    "decision": "exclude-missing-date",
+    "reason": "An official event surface was found but a reliable 2026 date was not visible in the reviewed evidence."
+  },
+  {
+    "candidate": "Leamy Lake NCC public archaeological digs",
+    "source_url": "https://ncc-ccn.gc.ca/events/public-archaeological-digs",
+    "decision": "exclude-unrendered-calendar-dates",
+    "reason": "The official page describes ongoing digs but the reviewed text did not expose exact selectable days. Philippe Lake's explicit August dates are included."
+  },
+  {
+    "candidate": "Toronto Cemetery Tours recurring tours",
+    "source_url": "https://www.torontocemeterytours.com/",
+    "decision": "exclude-wrong-cycle",
+    "reason": "The surfaced event details were from 2024; no projection into 2026 is allowed."
+  },
+  {
+    "candidate": "Vaudreuil-Dorion neighbourhood festivals and outdoor films",
+    "existing_ids": [
+      "research-f3d85dd3fc24",
+      "research-0fa32746a9d5",
+      "research-82a69cc1bf69",
+      "research-b0de2d28ed82",
+      "research-04fa4e010bd4"
+    ],
+    "decision": "reviewed-no-set13-cross-tag",
+    "reason": "Community-place relevance is clear, but the existing evidence calls them neighbourhood festivals rather than block parties; avoid stretching the normalized block-party facet."
+  }
+]

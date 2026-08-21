@@ -278,7 +278,14 @@ def load_manual():
             "qualification_reasons", "record_kind", "date_precision",
             "time_precision", "source_quality", "source_language",
             "platform_adapter", "organizer", "lifecycle_status",
-            "missing_count",
+            "missing_count", "writing_bands", "academic_bands", "subjects",
+            "genres", "eligibility_region", "opportunity_kind",
+            "application_url", "registration_url", "submission_url",
+            "rules_url", "deadline_confidence", "source_notes", "topics",
+            "tags", "source_name", "source_languages",
+            "source_language_method", "source_language_review",
+            "lifecycle_notes", "recurrence_note", "previous_dates",
+            "date_change_reason",
         ):
             if entry.get(field) is not None:
                 record[field] = entry[field]

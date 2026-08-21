@@ -23,11 +23,11 @@ from icalendar import Calendar
 
 ROOT = Path(__file__).resolve().parents[1]
 TORONTO = ZoneInfo("America/Toronto")
-EXPECTED_CANONICAL_EVENTS = 833
-EXPECTED_EXPLICIT_ALIASES = 12
-EXPECTED_EVENT_ICS_FILES = 845
+INVENTORY_CONTRACT = json.loads(
+    (ROOT / "data" / "polymythcal-inventory-contract.json").read_text(encoding="utf-8")
+)
+MINIMUM_CANONICAL_EVENTS = int(INVENTORY_CONTRACT["minimum_canonical_events"])
 EXPECTED_FEED_ICS_FILES = 12
-EXPECTED_TOTAL_ICS_FILES = 857
 ALLOWED_STATUSES = {"CONFIRMED", "TENTATIVE", "CANCELLED"}
 
 
@@ -72,11 +72,19 @@ def parse_source_datetime(value, timezone_name="America/Toronto"):
 
 def load_feed_builder():
     path = ROOT / "scripts" / "build-polymythcal-feeds.py"
-    spec = importlib.util.spec_from_file_location("audit48_feed_builder", path)
-    module = importlib.util.module_from_spec(spec)
-    assert spec.loader is not None
-    spec.loader.exec_module(module)
-    return module
+    scripts_path = str(path.parent)
+    added_scripts_path = scripts_path not in sys.path
+    if added_scripts_path:
+        sys.path.insert(0, scripts_path)
+    try:
+        spec = importlib.util.spec_from_file_location("audit48_feed_builder", path)
+        module = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        spec.loader.exec_module(module)
+        return module
+    finally:
+        if added_scripts_path:
+            sys.path.remove(scripts_path)
 
 
 class CurrentCalendarCorpusTests(unittest.TestCase):
@@ -102,13 +110,15 @@ class CurrentCalendarCorpusTests(unittest.TestCase):
             path.stem for path in (ROOT / "polymythseminars" / "feeds").glob("*.ics")
         }
 
-        self.assertEqual(len(self.events), EXPECTED_CANONICAL_EVENTS)
-        self.assertEqual(len(self.aliases), EXPECTED_EXPLICIT_ALIASES)
+        self.assertGreaterEqual(len(self.events), MINIMUM_CANONICAL_EVENTS)
         self.assertEqual(actual_event_names, expected_event_names)
-        self.assertEqual(len(actual_event_names), EXPECTED_EVENT_ICS_FILES)
+        self.assertEqual(len(actual_event_names), len(self.events) + len(self.aliases))
         self.assertEqual(actual_feed_names, expected_feed_names)
         self.assertEqual(len(actual_feed_names), EXPECTED_FEED_ICS_FILES)
-        self.assertEqual(len(all_ics_files()), EXPECTED_TOTAL_ICS_FILES)
+        self.assertEqual(
+            len(all_ics_files()),
+            len(self.events) + len(self.aliases) + EXPECTED_FEED_ICS_FILES,
+        )
 
     def test_every_file_has_strict_rfc5545_transport_framing(self):
         for path in all_ics_files():
@@ -179,11 +189,26 @@ class CurrentCalendarCorpusTests(unittest.TestCase):
                     self.assertEqual(event_url.netloc, "seminarschools.com")
                     self.assertTrue(event_url.path.startswith("/polymythseminars/events/"))
 
-        # 845 single-event files plus the 3,327 events represented by the
-        # eleven focused feeds and the historical deadlines feed alias.
-        self.assertEqual(parsed_component_count, 4172)
+        focused_components = sum(int(feed["count"]) for feed in self.manifest)
+        deadlines_components = next(
+            int(feed["count"])
+            for feed in self.manifest
+            if str(feed["id"]) == "opportunities"
+        )
+        expected_components = (
+            len(self.events) + len(self.aliases)
+            + focused_components
+            + deadlines_components
+        )
+        self.assertEqual(parsed_component_count, expected_components)
 
     def test_canonical_single_event_files_match_source_semantics(self):
+        ttc_parent = self.by_id["ttc-board-fall-2026"]
+        self.assertEqual(ttc_parent.get("time_precision"), "not-applicable")
+        self.assertEqual(
+            str(ttc_parent.get("date"))[:10],
+            str(ttc_parent.get("end_date"))[:10],
+        )
         for event_id, source in self.by_id.items():
             path = ROOT / "polymythseminars" / "ics" / f"{event_id}.ics"
             with self.subTest(event_id=event_id):
@@ -366,8 +391,19 @@ class CalendarBuilderEdgeCaseTests(unittest.TestCase):
             root = Path(directory)
             (root / "scripts").mkdir()
             (root / "polymythseminars").mkdir()
-            for name in ("build-polymythcal-feeds.py", "build-polymythcal-audit13.py"):
-                shutil.copy2(ROOT / "scripts" / name, root / "scripts" / name)
+            for relative in (
+                "scripts/build-polymythcal-feeds.py",
+                "scripts/build-polymythcal-audit13.py",
+                "scripts/geometry_asset_version.py",
+                "scripts/apply-sitewide-type-zoom-link.js",
+                "data/geometry-route-contracts.json",
+                "css/alive.css",
+                "js/mandala.js",
+                "js/indra.js",
+            ):
+                destination = root / relative
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(ROOT / relative, destination)
             (root / "RELEASE_MANIFEST.json").write_text(
                 json.dumps(
                     {

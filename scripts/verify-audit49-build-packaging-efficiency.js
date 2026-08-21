@@ -19,6 +19,7 @@ const selector = read('scripts/package_selection.py');
 const deployer = read('scripts/package-deployer-compatible.py');
 const sourcePackager = read('scripts/package-netlify-source.py');
 const publicBuilder = read('scripts/build-public-deploy.js');
+const technicalAggregate = read('scripts/verify-audit49-technical-efficiency.js');
 const packageTests = read('scripts/test_package_integrity.py');
 const workflow = read('.github/workflows/predeploy.yml');
 const frozenAitrGate = read('scripts/verify-audit36-aitr-resilience.mjs');
@@ -42,7 +43,7 @@ check(
 for (const gate of ['verify-geometry.js', 'verify-visible-geometry.js', 'verify-meaningful-geometry.js', 'verify-visible-geometry-browser.mjs']) {
   check(runner.includes(`node scripts/${gate}`), `full runner lacks blocking geometry gate ${gate}`);
 }
-const buildCommand = pkg.scripts?.build || '';
+const buildCommand = pkg.scripts?.['build:locked'] || '';
 const finalGeometryApply = buildCommand.lastIndexOf('apply-visible-geometry.js');
 check(
   (buildCommand.match(/apply-visible-geometry\.js/g) || []).length === 2
@@ -93,6 +94,8 @@ for (const marker of [
   'generated_dependency_dir(name)',
   'is_output_transaction_artifact(candidate, output)',
   'GENERATED_RELEASE_ARCHIVE',
+  '".seminar-schools-build.lock"',
+  'name == ".seminar-schools-build.lease"',
 ]) check(selector.includes(marker), `shared package selector lacks ${marker}`);
 for (const [label, source] of [['deployer', deployer], ['source', sourcePackager]]) {
   check(source.includes('from package_selection import collect_package_files'), `${label} packager bypasses shared selection`);
@@ -101,6 +104,12 @@ for (const [label, source] of [['deployer', deployer], ['source', sourcePackager
 }
 check(!deployer.includes("'verify:audit45-current-browser-evidence'"), 'deployer repeats the runner-owned Audit 45 evidence gate');
 check(!deployer.includes('def verify_public_parity'), 'deployer repeats the runner-owned public parity scan');
+check(
+  technicalAggregate.includes('stableBuildPackagingMetrics')
+    && technicalAggregate.includes('selected_bytes_excluding_generated_reports')
+    && !technicalAggregate.includes('delete selection.selected_bytes_excluding_generated_reports'),
+  'Audit 49 aggregate does not retain the status-independent package-byte total',
+);
 check(runner.includes('node scripts/verify-audit45-browser-evidence.js'), 'full runner lacks inherited Audit 45 evidence gate');
 check(runner.includes('node scripts/verify-public-deploy-parity.js'), 'reuse runner lacks public parity');
 
@@ -119,11 +128,24 @@ const reconciledOwner = path.join(reconciledLock, 'owner.json');
 reconciledProbePair = fs.existsSync(reconciledLock)
   && fs.existsSync(reconciledStaging)
   && !fs.existsSync(reconciledOwner);
+function isEmptyTransientDirectory(candidate) {
+  if (!fs.existsSync(candidate)) return false;
+  const stats = fs.lstatSync(candidate);
+  if (!stats.isDirectory() || stats.isSymbolicLink()) return false;
+  return fs.readdirSync(candidate, { withFileTypes: true }).every(entry => (
+    entry.isDirectory()
+      && !entry.isSymbolicLink()
+      && isEmptyTransientDirectory(path.join(candidate, entry.name))
+  ));
+}
 for (const transient of ['.public-build-lock', '.public-build-staging', '.public-build-previous']) {
+  const transientPath = path.join(ROOT, transient);
   const reconciledProbeArtifact = reconciledProbePair
     && (transient === '.public-build-lock' || transient === '.public-build-staging');
   check(
-    !fs.existsSync(path.join(ROOT, transient)) || reconciledProbeArtifact,
+    !fs.existsSync(transientPath)
+      || isEmptyTransientDirectory(transientPath)
+      || reconciledProbeArtifact,
     `public build left ${transient}`,
   );
 }
@@ -165,12 +187,17 @@ if (!python) {
     'from pathlib import Path',
     'root=Path(sys.argv[1]).resolve()',
     "sys.path.insert(0,str(root/'scripts'))",
-    'from package_selection import collect_package_files',
+    'from package_selection import collect_package_files,selected_bytes_excluding',
     "report=(root/'scripts/reports/audit49-build-packaging-efficiency.json').resolve()",
+    "technical_report=(root/'scripts/reports/audit49-technical-efficiency.json').resolve()",
+    "technical_markdown=(root/'WEBSITE_AUDIT49_TECHNICAL_EFFICIENCY_RESILIENCE_REPORT_2026-07-26.md').resolve()",
+    "release_report=(root/'scripts/reports/release-gate-report.json').resolve()",
+    "futureproof_report=(root/'scripts/reports/futureproofing-gate-report.json').resolve()",
+    'generated_reports={report,technical_report,technical_markdown,release_report,futureproof_report}',
     "deployer,ds=collect_package_files(root,root.parent/'audit49-probe-deployer.zip')",
     "source,ss=collect_package_files(root,root.parent/'audit49-probe-source.zip',excluded_top_level={'public'})",
-    "ds['selected_bytes_excluding_this_report']=sum(p.stat().st_size for p in deployer if p.resolve()!=report)",
-    "ss['selected_bytes_excluding_this_report']=sum(p.stat().st_size for p in source if p.resolve()!=report)",
+    "ds['selected_bytes_excluding_generated_reports']=selected_bytes_excluding(deployer,generated_reports)",
+    "ss['selected_bytes_excluding_generated_reports']=selected_bytes_excluding(source,generated_reports)",
     "ds['public_files_selected']=sum(1 for p in deployer if p.relative_to(root).parts[0]=='public')",
     "ss['public_files_selected']=sum(1 for p in source if p.relative_to(root).parts[0]=='public')",
     "print(json.dumps({'deployer':ds,'source':ss},sort_keys=True))",
@@ -192,16 +219,19 @@ if (selectionMetrics) {
   check(selectionMetrics.deployer.public_files_selected > 0, 'deployer selection omitted the built public tree');
   check(selectionMetrics.source.public_files_selected === 0, 'source selector did not exclude the built public tree');
 }
-// Presence of an already-installed dependency/cache directory changes only
-// the observed prune counter, not the selected release. Keep that live check
-// in memory and serialize the stable selection contract instead.
+// Presence of an already-installed dependency/cache directory changes the
+// observed prune counter, while an excluded root integrity manifest changes
+// files_considered. Neither changes the selected release. Keep both live
+// checks in memory and serialize their stable boolean contracts instead.
 const reportedSelectionMetrics = selectionMetrics
   ? JSON.parse(JSON.stringify(selectionMetrics))
   : null;
 if (reportedSelectionMetrics) {
   for (const metrics of Object.values(reportedSelectionMetrics)) {
     delete metrics.directories_pruned;
+    delete metrics.files_considered;
     metrics.disposable_directory_pruning_enforced = true;
+    metrics.broad_post_descent_filtering_avoided = true;
   }
 }
 
@@ -230,18 +260,32 @@ if (process.platform !== 'win32') {
 
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'audit49-runner-failure-'));
   try {
-    fs.writeFileSync(path.join(temp, 'RELEASE_MANIFEST.json'), '{"generated_at":"2026-07-26T00:00:00Z"}\n');
+    const site = path.join(temp, 'SITE_PACKAGE');
+    fs.mkdirSync(site, {recursive: true});
+    fs.writeFileSync(path.join(site, 'RELEASE_MANIFEST.json'), '{"generated_at":"2026-07-26T00:00:00Z"}\n');
     const bin = path.join(temp, 'bin');
     fs.mkdirSync(bin);
     const fakeNode = path.join(bin, 'node');
     fs.writeFileSync(fakeNode, '#!/bin/sh\nexit 7\n');
     fs.chmodSync(fakeNode, 0o755);
+    const lockedRunner = [
+      'import os, subprocess, sys',
+      `sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'scripts'))})`,
+      'from build_lock import ReleaseBuildLock',
+      `delivery = ${JSON.stringify(temp)}`,
+      `site = ${JSON.stringify(site)}`,
+      `command = [${JSON.stringify(process.execPath)}, ${JSON.stringify(path.join(ROOT, 'scripts', 'verify-all-runner.js'))}, '--reuse-build', '--timeout-ms=5000']`,
+      "os.environ.pop('SS_RELEASE_BUILD_LOCK_TOKEN', None)",
+      'with ReleaseBuildLock(delivery):',
+      '    completed = subprocess.run(command, cwd=site, env=os.environ.copy())',
+      'raise SystemExit(completed.returncode)',
+    ].join('\n');
     const result = spawnSync(
-      process.execPath,
-      [path.join(ROOT, 'scripts', 'verify-all-runner.js'), '--reuse-build', '--timeout-ms=5000'],
-      {cwd: temp, env: {...process.env, PATH: `${bin}${path.delimiter}${process.env.PATH || ''}`}, encoding: 'utf8'},
+      python[0],
+      [...python.slice(1), '-c', lockedRunner],
+      {cwd: ROOT, env: {...process.env, PATH: `${bin}${path.delimiter}${process.env.PATH || ''}`}, encoding: 'utf8'},
     );
-    const failedReport = JSON.parse(fs.readFileSync(path.join(temp, 'scripts', 'reports', 'release-gate-report.json'), 'utf8'));
+    const failedReport = JSON.parse(fs.readFileSync(path.join(site, 'scripts', 'reports', 'release-gate-report.json'), 'utf8'));
     sequentialFailureReport = result.status === 1 && failedReport.status === 'failed' && failedReport.failed_checks.length === 1;
     check(sequentialFailureReport, 'sequential prerequisite failure left a stale passing gate report');
   } finally {

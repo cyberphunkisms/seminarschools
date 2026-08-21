@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 'use strict';
 
-/** Audit 47 invariant continuity under the current Audit 53 release. */
+/** Audit 47 invariant continuity under the current sitewide stability patch. */
 const fs = require('fs');
 const path = require('path');
 const {parseSeedWithAddenda} = require('./lib/parse-seed-with-addenda');
+const {loadInventoryContract} = require('./lib/polymythcal-inventory-contract');
 
 const ROOT = path.resolve(__dirname, '..');
+const inventory = loadInventoryContract(ROOT);
 const REPORT = path.join(ROOT, 'scripts', 'reports', 'audit47-technical-efficiency.json');
 const AUDIT47_RELEASE = '2026-07-26-site-audit47-technical-efficiency-continuity-final';
-const EXPECTED_RELEASE = '2026-07-28-site-audit53-shared-discovery-teacherresources-polymythcal-commons-final';
-const EXPECTED_ASSET = '20260728-audit53';
-const EXPECTED_EVENTS = 833;
-const EXPECTED_EXPLICIT_ALIASES = 12;
-const EXPECTED_GENERATED_ENGLISH_ALIASES = 857;
+const EXPECTED_RELEASE = '2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final';
+const EXPECTED_ASSET = '20260815-sets1-15-synthesis';
+const EXPECTED_EXPLICIT_ALIASES = 28;
 const SOURCE_HTML_ROOTS = [
   '.well-known', 'agora', 'aitr', 'aa', 'bb', 'bookwormcard', 'campaigns',
   'cfps', 'fellowships', 'florilegium', 'humanities', 'lectures', 'leizu',
@@ -109,15 +109,15 @@ const sources = json('scripts/sources.json').sources || [];
 metrics.canonical_events = events.length;
 metrics.event_types = new Set(events.map(event => event.type)).size;
 metrics.sources = sources.length;
-check(events.length === EXPECTED_EVENTS, `canonical event inventory is ${events.length}/${EXPECTED_EVENTS}`);
-check(ids.size === EXPECTED_EVENTS, `canonical event IDs are ${ids.size}/${EXPECTED_EVENTS} unique`);
-check(metrics.event_types === 32, `event type inventory changed: ${metrics.event_types}/32`);
-check(sources.length === 422, `source inventory changed: ${sources.length}/422`);
+check(events.length >= inventory.minimum_canonical_events, `canonical event inventory is ${events.length}; floor ${inventory.minimum_canonical_events}`);
+check(ids.size === events.length, `canonical event IDs are ${ids.size}/${events.length} unique`);
+check(metrics.event_types >= inventory.minimum_event_types, `event type inventory fell below ${inventory.minimum_event_types}: ${metrics.event_types}`);
+check(sources.length >= inventory.minimum_sources, `source inventory fell below ${inventory.minimum_sources}: ${sources.length}`);
 check(byteEqual('polymythseminars/events.json', 'data/polymyth-seminar-events.json'), 'canonical event payloads are not byte-identical');
 
 const lifecycle = json('data/polymythcal-lifecycle-state.json').events || [];
-check(lifecycle.length === EXPECTED_EVENTS, `lifecycle inventory is ${lifecycle.length}/${EXPECTED_EVENTS}`);
-check(new Set(lifecycle.map(event => String(event.id))).size === EXPECTED_EVENTS, 'lifecycle IDs are not unique');
+check(lifecycle.length === events.length, `lifecycle inventory is ${lifecycle.length}/${events.length}`);
+check(new Set(lifecycle.map(event => String(event.id))).size === lifecycle.length, 'lifecycle IDs are not unique');
 check(lifecycle.every(event => ids.has(String(event.id))), 'lifecycle state contains a noncanonical event ID');
 
 const expectedRetiredTargets = new Map([
@@ -155,10 +155,13 @@ for (const [alias, target] of aliasTargets) {
 }
 const englishEventDirectories = directories('polymythseminars/events');
 metrics.generated_english_alias_routes = englishEventDirectories.filter(id => !ids.has(id)).length;
-check(
-  metrics.generated_english_alias_routes === EXPECTED_GENERATED_ENGLISH_ALIASES,
-  `English generated alias routes are ${metrics.generated_english_alias_routes}/${EXPECTED_GENERATED_ENGLISH_ALIASES}`,
-);
+check(metrics.generated_english_alias_routes >= aliasTargets.size, `English generated alias routes omit one or more of ${aliasTargets.size} explicit aliases`);
+for (const alias of englishEventDirectories.filter(id => !ids.has(id))) {
+  const html = read(`polymythseminars/events/${alias}/index.html`);
+  const target = canonicalOf(html).match(/\/polymythseminars\/events\/([^/]+)\/$/)?.[1] || '';
+  check(meta(html, 'robots') === 'noindex,follow', `${alias}: English generated alias is indexable`);
+  check(ids.has(decodeURIComponent(target)), `${alias}: English generated alias target is not canonical`);
+}
 for (const [alias, target] of aliasTargets) {
   const html = read(`polymythseminars/events/${alias}/index.html`);
   check(meta(html, 'robots') === 'noindex,follow', `${alias}: English explicit alias is indexable`);
@@ -171,7 +174,7 @@ for (const [alias, target] of aliasTargets) {
   check(canonicalOf(html) === `https://seminarschools.com/polymythseminars/fr/events/${encodeURIComponent(target)}/`, `${alias}: French alias canonical is wrong`);
 }
 metrics.french_alias_routes = directories('polymythseminars/fr/events').filter(id => !ids.has(id)).length;
-check(metrics.french_alias_routes === EXPECTED_EXPLICIT_ALIASES, `French alias routes are ${metrics.french_alias_routes}/${EXPECTED_EXPLICIT_ALIASES}`);
+check(metrics.french_alias_routes === aliasTargets.size, `French alias routes are ${metrics.french_alias_routes}/${aliasTargets.size}`);
 
 const app = read('js/polymythcal-revamp.js');
 for (const marker of [
@@ -290,7 +293,14 @@ for (const command of [
   'node scripts/run-python.js -m unittest scripts/test_polymythcal_audit47.py',
   'node scripts/run-python.js scripts/build-polymythcal-audit13.py --check',
   'node scripts/verify-polymythcal-build-efficiency.js',
+  'node scripts/verify-polymythcal-sets13-15-browser.js',
 ]) check(runner.includes(command), `release runner omits ${command}`);
+const lockedBuildSteps = String(pkg.scripts?.['build:locked'] || '').split(' && ');
+check(
+  lockedBuildSteps.filter(step => step === 'node scripts/verify-polymythcal-sets13-15-browser.js --dom-only').length === 1
+    && !lockedBuildSteps.includes('node scripts/verify-polymythcal-sets13-15-browser.js'),
+  'production build does not isolate the Sets 13-15 DOM-only gate from the full release browser gate',
+);
 check(runner.includes('renderedReport') && runner.includes("fs.readFileSync(reportFile, 'utf8') !== renderedReport"), 'release-gate report rewrites unchanged content');
 check(read('scripts/verify-audit46-technical-efficiency.js').includes("fs.readFileSync(REPORT, 'utf8') !== renderedReport"), 'Audit 46 report rewrites unchanged content');
 check(read('scripts/verify-audit45-translations.py').includes('REPORT.read_text(encoding="utf-8") != rendered_report'), 'Audit 45 report rewrites unchanged content');

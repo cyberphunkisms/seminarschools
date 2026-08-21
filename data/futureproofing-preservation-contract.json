@@ -1,0 +1,17 @@
+{
+  "schema": "seminar-schools-futureproofing-preservation-v1",
+  "contract_id": "FP-07",
+  "purpose": "Protect the accepted blank Polymyth Coherence instrument and its deploy twin from silent replacement.",
+  "files": [
+    {
+      "path": "polymyth/coherence/Polymyth_Coherence_Assessment_Instrument_V5.1.2.xlsx",
+      "bytes": 2771628,
+      "sha256": "0624c76e0ae1351dcfe6a9d2cabf6e4e581820b63a0fc40e5ad755bbd1d93550"
+    },
+    {
+      "path": "public/polymyth/coherence/Polymyth_Coherence_Assessment_Instrument_V5.1.2.xlsx",
+      "bytes": 2771628,
+      "sha256": "0624c76e0ae1351dcfe6a9d2cabf6e4e581820b63a0fc40e5ad755bbd1d93550"
+    }
+  ]
+}

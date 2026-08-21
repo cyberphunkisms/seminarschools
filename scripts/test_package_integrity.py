@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 import os
+import sys
 import tempfile
 import unittest
 import zipfile
@@ -15,7 +17,50 @@ from scripts.package_integrity import (
     verify_file_member,
     write_verified_archive,
 )
-from scripts.package_selection import collect_package_files
+from scripts.package_selection import collect_package_files, selected_bytes_excluding
+
+
+def load_package_release_module():
+    scripts_dir = Path(__file__).resolve().parent
+    module_path = scripts_dir / "package-front-facing-mephistodata-release.py"
+    spec = importlib.util.spec_from_file_location("package_front_facing_release", module_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"cannot load package release module: {module_path}")
+    module = importlib.util.module_from_spec(spec)
+    sys.path.insert(0, str(scripts_dir))
+    try:
+        spec.loader.exec_module(module)
+    finally:
+        sys.path.pop(0)
+    return module
+
+
+class PortableCoreLengthGateTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.release_module = load_package_release_module()
+
+    def assertCoreLength(self, text: str, accepted: bool) -> None:
+        if accepted:
+            self.release_module.validate_portable_core_length(text)
+        else:
+            with self.assertRaisesRegex(ValueError, "UTF-16-unit"):
+                self.release_module.validate_portable_core_length(text)
+
+    def test_ascii_utf16_boundary(self) -> None:
+        self.assertCoreLength("x" * 5000, True)
+        self.assertCoreLength("x" * 5001, False)
+
+    def test_multibyte_utf8_bytes_are_informational(self) -> None:
+        accepted = "é" * 5000
+        metrics = self.release_module.validate_portable_core_length(accepted)
+        self.assertEqual(metrics["utf16_units"], 5000)
+        self.assertEqual(metrics["utf8_bytes"], 10000)
+        self.assertCoreLength("é" * 5001, False)
+
+    def test_surrogate_pair_utf16_boundary(self) -> None:
+        self.assertCoreLength("😀" * 2500, True)
+        self.assertCoreLength(("😀" * 2500) + "x", False)
 
 
 class PackageIntegrityTests(unittest.TestCase):
@@ -259,6 +304,63 @@ class PackageIntegrityTests(unittest.TestCase):
 
 
 class PackageSelectionTests(unittest.TestCase):
+    def test_generated_report_byte_metric_is_status_independent(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            output = root / "release.zip"
+            content = root / "content.txt"
+            audit49_report = root / "audit49-build-packaging-efficiency.json"
+            technical_report = root / "audit49-technical-efficiency.json"
+            release_report = root / "release-gate-report.json"
+            futureproof_report = root / "futureproofing-gate-report.json"
+            content.write_bytes(b"durable-content")
+            audit49_report.write_bytes(b"self-updating-audit49")
+            technical_report.write_bytes(b"self-updating-aggregate")
+            release_report.write_bytes(b'{"status":"failed","details":[1,2,3]}')
+            futureproof_report.write_bytes(b'{"status":"failed"}')
+            files, _ = collect_package_files(root, output)
+            excluded = (
+                audit49_report,
+                technical_report,
+                release_report,
+                futureproof_report,
+            )
+            before = selected_bytes_excluding(files, excluded)
+
+            release_report.write_bytes(b'{"status":"passed"}')
+            audit49_report.write_bytes(b"different-self-report-size")
+            technical_report.write_bytes(b"different-aggregate-size-and-content")
+            futureproof_report.write_bytes(b'{"status":"passed","checks":12}')
+            after = selected_bytes_excluding(files, excluded)
+
+            self.assertEqual(before, len(b"durable-content"))
+            self.assertEqual(after, before)
+
+    def test_selector_prunes_root_abandoned_public_build_only(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            output = root / "release.zip"
+            abandoned = root / ".ss-public-build-abandoned-manual-fixture" / "staging"
+            abandoned.mkdir(parents=True)
+            (abandoned / "index.html").write_text("stale public build\n", encoding="utf-8")
+            nested = (
+                root
+                / "data"
+                / ".ss-public-build-abandoned-preserved-evidence"
+                / "evidence.json"
+            )
+            nested.parent.mkdir(parents=True)
+            nested.write_text("{}\n", encoding="utf-8")
+
+            files, stats = collect_package_files(root, output)
+            selected = [path.relative_to(root).as_posix() for path in files]
+
+            self.assertEqual(
+                selected,
+                ["data/.ss-public-build-abandoned-preserved-evidence/evidence.json"],
+            )
+            self.assertEqual(stats["directories_pruned"], 1)
+
     def test_selector_prunes_disposable_trees_and_preserves_nested_evidence(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
@@ -283,6 +385,15 @@ class PackageSelectionTests(unittest.TestCase):
                 "temporary\n",
                 encoding="utf-8",
             )
+            (root / ".seminar-schools-build.lock").mkdir()
+            (root / ".seminar-schools-build.lock" / "owner.json").write_text(
+                '{"token":"transient"}\n',
+                encoding="utf-8",
+            )
+            (root / ".seminar-schools-build.lease").write_text(
+                "stable advisory-lock inode; never package\n",
+                encoding="utf-8",
+            )
             (root / "data" / "polymythcal-audit35").mkdir(parents=True)
             (root / "data" / "polymythcal-audit35" / "evidence.json").write_text(
                 "{}\n",
@@ -295,6 +406,12 @@ class PackageSelectionTests(unittest.TestCase):
             output.write_bytes(b"prior package")
             Path(str(output) + ".sha256").write_text("prior digest\n", encoding="utf-8")
             (root / ".ss-site-audit49-final.zip.part-123").write_bytes(b"partial")
+            for suffix in (
+                ".audit-receipt.json",
+                ".clean-room-report.json",
+                ".disaster-recovery-report.json",
+            ):
+                (root / f"ss-site-prior.zip{suffix}").write_text("{}\n", encoding="utf-8")
 
             files, stats = collect_package_files(
                 root,
@@ -313,8 +430,10 @@ class PackageSelectionTests(unittest.TestCase):
                 ],
             )
             self.assertEqual(stats["files_selected"], 4)
-            self.assertGreaterEqual(stats["directories_pruned"], 4)
-            self.assertLess(stats["files_considered"], 10)
+            self.assertGreaterEqual(stats["directories_pruned"], 5)
+            # Three sibling release-evidence fixtures are considered and then
+            # deliberately excluded in addition to the original selection set.
+            self.assertLess(stats["files_considered"], 14)
 
 
 if __name__ == "__main__":

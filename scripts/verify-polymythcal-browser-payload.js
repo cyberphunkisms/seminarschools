@@ -39,8 +39,8 @@ check(browserBytes.equals(publicBrowserBytes), 'Source and generated-public brow
 check(browser._schema === 'polymythcal-browser-payload-v1', 'Browser payload schema marker is missing or wrong.');
 check(Array.isArray(canonical.events) && Array.isArray(browser.events), 'Canonical or browser events array is missing.');
 check(
-  canonical.events.length === 833,
-  `Canonical corpus differs from the Audit 47 deduplicated inventory (${canonical.events.length}/833).`
+  canonical.events.length === manifest.record_count,
+  `Canonical corpus differs from the release-owned inventory (${canonical.events.length}/${manifest.record_count}).`
 );
 check(browser.count === browser.events.length, 'Browser payload count does not match its events array.');
 check(browser._canonical_count === canonical.events.length, 'Browser payload canonical count is stale.');

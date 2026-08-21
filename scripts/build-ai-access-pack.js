@@ -5,6 +5,8 @@
 */
 const fs = require('fs');
 const path = require('path');
+const {loadCanonicalCore} = require('./sync-core-personal-rules');
+const {generatedAt} = require('./lib/deterministic-timestamp');
 
 const root = process.cwd();
 const exportDir = path.join(root, 'hf_export');
@@ -61,7 +63,7 @@ function inferStarHints(query){
   if(/\b(mc|mcstar|modulecanon|module canon|curriculum module|delivery agnostic)\b/.test(q)) hints.add('mc');
   if(/\b(cc|ccstar|campaigncodex|campaign codex|campaign level)\b/.test(q)) hints.add('cc');
   if(/\b(ml|mlstar|methodologylist|anti twist|antitwist|gorgonification|degorgonification|psychologism|mephistodata|ouroboros|citation discipline|ai prose|law review|bolted on|category appendage|consequence closer|obvious competence|abstract selfhood|generic ethical announcement|dual write|txt html|html txt|text mirror)\b/.test(q)) hints.add('ml');
-  if(/\b(core|corestar|coreplus|core\+)\b/.test(q)) hints.add('core');
+  if(/\b(core|corestar|coreplus|core\+|personal rules|portable core)\b/.test(q)) hints.add('core');
   if(/\b(meaninglib|interdependence|mother category|starfile|star file|ontology|hierarchy)\b/.test(q)){ hints.add('readme'); hints.add('relations'); }
   return hints;
 }
@@ -109,6 +111,12 @@ function scoreDoc(doc, tokens, query, idf){
   if(mephistodataQuery && String(doc.section || '').toLowerCase() === 'pending') score -= 35;
   if(activationQuery && accessDoc) score += 60;
   if(activationQuery && ontologyDoc) score += 45;
+  const portableCoreQuery = qnorm.includes('personal rules') || qnorm.includes('portable core') || qnorm.includes('follow core+');
+  const portableCoreDoc = titleNorm.includes('core / personal rules') || String(doc.id || '').includes('core-personal-rules-current');
+  const currentCoreMapDoc = titleNorm.includes('core current map');
+  if(portableCoreQuery && portableCoreDoc) score += 220;
+  if(portableCoreQuery && currentCoreMapDoc) score += 140;
+  if(portableCoreQuery && String(doc.section || '').toLowerCase() === 'corehistory') score -= 120;
   if(qnorm.length > 3){
     const phrase = qnorm.replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
     if(phrase && titleNorm.includes(phrase)) score += 18;
@@ -144,16 +152,29 @@ function search(query, topK=8){
 }
 
 function renderActivation(){
+  const core = loadCanonicalCore();
+  const embeddedCore = core.document.endsWith('\n') ? core.document.slice(0, -1) : core.document;
   return [
     '# MEPHISTODATA ACTIVATION',
     '',
-    'Paste this whole file into another AI before asking it to work on Seminar Schools, Meaninglib, ML*, BB*, MC*, CC*, polymyth, or related tasks.',
+    "Paste this whole file into another AI when the task materially or explicitly concerns Seminar Schools, Meaninglib, ML*, BB*, MC*, CC*, Polymyth, Mephistodata, Devil's Diary, CORE, or CORE+. Reading this file for an unrelated task does not activate ML*.",
+    '',
+    '## EXACT CORE / PERSONAL RULES',
+    `Canonical id: ${core.id}`,
+    `SHA-256 (exact UTF-8 document including the final newline): ${core.sha256}`,
+    '',
+    '<!-- BEGIN EXACT CORE -->',
+    embeddedCore,
+    '<!-- END EXACT CORE -->',
     '',
     '## SOURCE OF TRUTH',
     'Seminar Schools site/archive is the source of truth. Hugging Face is a mirror, retrieval, dashboard, and verification layer.',
+    'Canonical CORE+ locator: https://seminarschools.com/polymyth/methodologylist-coreplus.txt',
+    'Canonical full Methodologylist locator: https://seminarschools.com/polymyth/methodologylist.txt',
     '',
-    '## LOAD STATEMENT',
-    'Treat Mephistodata as an operating context for this session. Load Meaninglib as the substrate for interpreting the task.',
+    '## CONDITIONAL PROJECT LOAD',
+    'When the exact CORE activation test fires, retrieve the newest canonical CORE+ map, the handler required by the task, and the relevant Meaninglib routes. Otherwise apply portable CORE alone. Do not make Mephistodata or ML* session-wide merely because this file was opened.',
+    "For Devil's Diary work, load the current CORE+ Devil's Diary dispatch plus the base recipe, comprehensive article rules, Audience-register separation, anti-twisting and SOURCE-STATUS owners, Interpretive pleonexia, and the Mephistodata mirror criterion before drafting.",
     '',
     '## ONTOLOGY LOCK',
     'Meaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and related routes are interdependent access routes with local functions.',
@@ -161,7 +182,7 @@ function renderActivation(){
     'Use interdependent access-route language. Avoid ruler-language that places ml* above bb*, mc*, cc*, core*, aa*, or aitr*.',
     '',
     '## OPERATING MODE',
-    '1. Retrieve the relevant Meaninglib rows before answering.',
+    '1. Apply portable CORE, then retrieve the current CORE+ map and relevant Meaninglib rows before answering.',
     '2. Preserve local route function, source hierarchy, page type, audience, and local authority.',
     '3. Keep star-files scannable instead of flattening them into one undifferentiated text blob.',
     '4. Name mechanical failures, missed files, wrong routing, lost invariants, and violated rules.',
@@ -172,7 +193,7 @@ function renderActivation(){
     '9. Permission to update, fix, harden, implement, or enforce is not semantic settlement. Commit only explicit user decisions, current canon, and explicitly adopted proposals. AI wording, synthesis, generalization, exceptions, thresholds, tests, and scope changes remain proposals.',
     '10. Hardening preserves accepted meaning, scope, and which cases pass. A verification test enforces settled doctrine and cannot create doctrine.',
     '11. Execute settled multi-step directives fully. Stop at an unresolved authorial fork. A constraint binds later work and is not authorization. Stop cancels prior scope.',
-    '12. For website work, load CL-49 and CL-63 on every edit, regeneration, mirror, build, bundle, or ZIP. Every public HTML page except the exact Google verification token must carry the shared Indra scroll geometry: alive.css, mandala.js, indra.js, data-geometry="indra-web", data-indra-intensity, ordered loading, and a fixed pointer-safe #indraLayer that responds to scroll. This is the all-page requirement; it does not authorize a deletion test, semantic-role threshold, or demand that every page prove content relations through geometry. verify-geometry, verify-visible-geometry, verify-meaningful-geometry as a compatibility all-page-scroll check, and verify-visible-geometry-browser block handoff. A missing browser executable is not a pass.',
+    '12. For website work, load CL-49, CL-63, and PM12 on every edit, regeneration, mirror, build, bundle, or ZIP. Every public HTML page except the exact Google verification token must carry data-front-facing="general-audience" and the shared Indra scroll geometry: alive.css, mandala.js, indra.js, data-geometry="indra-web", data-indra-intensity, ordered loading, and a fixed pointer-safe #indraLayer that responds to scroll. Write for a cold general reader: identify what the page is, why it exists, and how to use it before specialized material; never expose builder notes, audit chatter, pipeline labels, internal IDs, or AI self-instruction as visible copy. The rule covers source HTML, generators, templates, browser-injected copy, translations, and deployment mirrors. Geometry presence alone does not pass: quiet professional pages remain plainly perceptible, browser proof compares composed renders with the layer shown and hidden, and scrollable pages meet a register-specific minimum displacement while reduced motion remains visible and still. verify-geometry, verify-visible-geometry, verify-meaningful-geometry as a compatibility all-page-scroll check, verify-visible-geometry-browser, verify-front-facing-boundary, and verify-front-facing-overlap-browser block handoff. The rendered gate checks text reflow, fixed-control collisions, focus visibility, and anchor clearance. A body marker, passing grep, or missing browser executable is not a pass.',
     '',
     '## WRITING DISCIPLINE',
     'Compose clause by clause. Every sentence carries the paragraph into its next concrete action, question, or result.',
@@ -204,7 +225,7 @@ function renderActivation(){
 }
 
 function renderPack(query, results){
-  const generated = new Date().toISOString();
+  const generated = generatedAt();
   const routes = [...new Set(results.map(r => r.doc.star_file).filter(Boolean))];
   const lines = [];
   lines.push('# Meaninglib AI Access Pack');
@@ -217,6 +238,10 @@ function renderPack(query, results){
   lines.push('');
   lines.push('## ONTOLOGY LOCK');
   lines.push('Meaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and related routes are interdependent access routes with local functions. Do not treat ml* as a ruler over the other star-files.');
+  lines.push('');
+  lines.push('## CORE / CORE+ GATES');
+  lines.push('NO RANDOM ARTIFACTS. Analysis, critique, audit, verification, correction, or methodology work does not authorize a new durable artifact. A requirement invented or amended during the same task cannot authorize its own file. Audit results default to the response.');
+  lines.push('NO PLANTED CONCLUSION. Build every Ask your favourite AI question from exact source language or neutral source facts. The question must leave the article’s interpretation for the answer. The answer must do the interpretation.');
   lines.push('');
   lines.push('## LOADED ROUTES');
   lines.push(routes.length ? routes.map(r => `- ${r}`).join('\n') : '- none');

@@ -64,12 +64,6 @@ const methodology = read('polymyth/methodologylist-methodology.txt');
 const coreplus = read('polymyth/methodologylist-coreplus.txt');
 const fullMirror = read('polymyth/methodologylist.txt');
 
-const charterRule = block(
-  charter,
-  '1A. PROJECT SHORTHAND IS RETRIEVED BEFORE INTERPRETATION.',
-  '2. MEMORY IS A SCARCE TRIGGER LAYER.',
-  'CHARTER 1A',
-);
 const canonicalQ7 = blocks(
   canonical,
   'Q7. PROJECT-SHORTHAND-INFERENCE.',
@@ -100,7 +94,6 @@ const mirrorTrigger = blocks(
 )[0];
 
 const controllingBlocks = [
-  [charterRule, 'CHARTER 1A'],
   ...canonicalQ7.map((value, index) => [value, `canonical Q7 block ${index + 1}`]),
   [canonicalTrigger, 'canonical CORE trigger iii'],
 ];
@@ -123,6 +116,11 @@ const requiredDoctrine = [
 for (const [text, label] of controllingBlocks) {
   for (const phrase of requiredDoctrine) requirePhrase(text, phrase, label);
 }
+
+requirePhrase(charter, 'Continuity reference=>retrieval only.', 'portable CORE continuity trigger');
+requirePhrase(charter, 'Before using/revising/claiming existing work: retrieve newest canonical source in context;', 'portable CORE newest-source trigger');
+requirePhrase(charter, 'never reconstruct.', 'portable CORE reconstruction boundary');
+requirePhrase(coreplus, 'the current CORE+ map, the active handler, and relevant sibling files', 'CORE+ handler load order');
 
 if (JSON.stringify(sortedNormalized(canonicalQ7)) !== JSON.stringify(sortedNormalized(mirrorQ7))) {
   throw new Error('Canonical Q7 doctrine does not match its generated methodology TXT mirror.');

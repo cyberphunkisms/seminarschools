@@ -8,33 +8,39 @@
 
   const tables = {
     projects: {
-      label: "Named records",
+      label: "Projects named in the book",
       csv: "projects.csv",
       count: () => data.projects.length,
     },
     links: {
-      label: "Printed links",
+      label: "Links printed in the book",
       csv: "book-links.csv",
       count: () => data.bookLinks.length,
     },
     forms: {
-      label: "Commons forms",
+      label: "Forms of knowledge sharing",
       csv: "commons-forms.csv",
       count: () => data.commonsForms.length,
     },
     types: {
-      label: "Book project types",
+      label: "Kinds of projects",
       csv: "book-project-types.csv",
       count: () => data.projectTypes.length,
     },
     relationships: {
-      label: "Relationship vocabulary",
+      label: "Ways projects connect",
       csv: "relationship-vocabulary.csv",
       count: () => data.relationships.length,
     },
   };
 
   const byId = (id) => document.getElementById(id);
+  const tierLabels = {
+    "Core candidate": "Main directory record",
+    "Example candidate": "Example record",
+    "Support node": "Supporting record",
+    "Context / analogy": "Context or comparison",
+  };
   const esc = (value) =>
     String(value == null ? "" : value)
       .replaceAll("&", "&amp;")
@@ -140,13 +146,13 @@
           '/">' +
           esc(project.canonicalName) +
           "</a></td><td>" +
-          esc(project.candidateTier) +
+          esc(tierLabels[project.candidateTier] || project.candidateTier) +
           "</td><td>" +
           esc(project.bookCategories.join(", ")) +
           "</td><td>" +
           esc(project.printedPageReferences) +
           "</td><td>" +
-          esc(project.verified || "Current review pending") +
+          esc(project.verified || "Current status not yet reviewed") +
           "</td></tr>",
       )
       .join("");
@@ -239,23 +245,23 @@
     let body = "";
     if (tab === "projects") {
       header =
-        "<th>ID</th><th>Name</th><th>Candidate tier</th><th>Book type</th><th>Pages</th><th>Current check</th>";
+        "<th>ID</th><th>Name</th><th>Directory status</th><th>Type in the book</th><th>Book citation</th><th>Last checked</th>";
       body = projectRows(items);
     } else if (tab === "links") {
       header =
-        "<th>ID</th><th>Printed pointer</th><th>Nearby project</th><th>Context</th><th>Printed pages</th><th>Occurrences</th>";
+        "<th>ID</th><th>Link printed in the book</th><th>Project named nearby</th><th>How it appears</th><th>Book citation</th><th>Times printed</th>";
       body = linkRows(items);
     } else if (tab === "forms") {
       header =
-        "<th>ID</th><th>Commons form</th><th>Family</th><th>Definition</th><th>Book pages</th>";
+        "<th>ID</th><th>Form of knowledge sharing</th><th>Group</th><th>Description</th><th>Book citation</th>";
       body = formRows(items);
     } else if (tab === "types") {
       header =
-        "<th>ID</th><th>Project type</th><th>Family</th><th>Book function</th><th>Scope</th><th>Book pages</th>";
+        "<th>ID</th><th>Kind of project</th><th>Group</th><th>How the book uses it</th><th>What it includes</th><th>Book citation</th>";
       body = typeRows(items);
     } else {
       header =
-        "<th>ID</th><th>Relationship</th><th>Family</th><th>Book basis</th>";
+        "<th>ID</th><th>Connection</th><th>Group</th><th>How the book describes it</th>";
       body = relationshipRows(items);
     }
     byId("backbone-table").innerHTML =
@@ -282,7 +288,7 @@
     byId("backbone-search").placeholder =
       "Search " + tables[tab].label.toLowerCase();
     byId("backbone-count").innerHTML =
-      "<strong>" + matching.length + "</strong> matching rows";
+      "<strong>" + matching.length + "</strong> matching entries";
     byId("backbone-download").href =
       "/polymythlib/data/" + tables[tab].csv;
     const params = new URLSearchParams();

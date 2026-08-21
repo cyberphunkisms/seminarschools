@@ -72,10 +72,16 @@
     var copy=labels[requested],note=document.createElement('aside');
     note.id='leizu-language-note';note.setAttribute('role','status');note.lang=requested==='zh'?'zh-Hant':requested==='zhs'?'zh-Hans':requested;
     note.dir=requested==='fa'?'rtl':'ltr';
-    note.style.cssText='position:fixed;z-index:2000;inset:auto 1rem 1rem 1rem;max-width:48rem;margin:auto;padding:.75rem .9rem;border:1px solid currentColor;border-radius:.5rem;background:Canvas;color:CanvasText;box-shadow:0 .4rem 1.4rem rgba(0,0,0,.22);font:500 .84rem/1.45 system-ui,sans-serif;';
+    note.style.cssText='position:relative;z-index:auto;max-width:48rem;margin:1rem auto;padding:.75rem .9rem;border:1px solid currentColor;border-radius:.5rem;background:Canvas;color:CanvasText;font:500 .84rem/1.45 system-ui,sans-serif;';
     note.append(document.createTextNode(copy.notice+' '));
     var back=document.createElement('a');back.href=route('/leizu/',requested);back.textContent=copy.back;back.style.color='inherit';note.appendChild(back);
-    document.body.appendChild(note);
+    var main=document.querySelector('main');
+    if(main)main.insertBefore(note,main.firstChild);
+    else{
+      var landmark=document.querySelector('.route-note,[role="main"]');
+      if(landmark&&landmark.parentNode)landmark.parentNode.insertBefore(note,landmark.nextSibling);
+      else document.body.insertBefore(note,document.body.firstChild);
+    }
   }
   function init(){preserveLinks();showNotice()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();

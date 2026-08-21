@@ -48,8 +48,30 @@ const OPERATOR_RE = /(?:AUDIT|REPORT|PATCH|VERIFY|OUTPUT|SETUP|DEPLOY|PRIVATE|SE
 function posix(p){ return p.replace(/\\/g, '/'); }
 function ensureDir(p){ fs.mkdirSync(p, { recursive: true }); }
 function copyFile(src, dst){ ensureDir(path.dirname(dst)); fs.copyFileSync(src, dst); }
-function removeDir(p){ fs.rmSync(p, { recursive: true, force: true }); }
+function removeDir(p){
+  fs.rmSync(p, {
+    recursive: true,
+    force: true,
+    maxRetries: 5,
+    retryDelay: 100,
+  });
+}
 let buildLockToken = null;
+function claimBuildLock(hostname){
+  buildLockToken = `${hostname}:${process.pid}:${Date.now()}`;
+  try {
+    fs.writeFileSync(BUILD_LOCK_META, JSON.stringify({
+      token: buildLockToken,
+      hostname,
+      pid: process.pid,
+      created_epoch_ms: Date.now(),
+    }) + '\n', { flag: 'wx' });
+  } catch (error) {
+    buildLockToken = null;
+    throw error;
+  }
+  process.once('exit', releaseBuildLock);
+}
 function processAlive(pid){
   if (!Number.isInteger(pid) || pid <= 0) return false;
   try { process.kill(pid, 0); return true; }
@@ -89,20 +111,26 @@ function acquireBuildLock(){
         fs.renameSync(BUILD_OUT, path.join(quarantine, 'staging'));
         continue;
       }
+      // Some extracted artifact workspaces recreate an old empty lock
+      // directory between subprocesses. Once it is safely beyond the brief
+      // mkdir-to-owner-file window, claim that empty directory atomically
+      // instead of treating it as a live build or deleting broad state.
+      if (!owner.token && fs.readdirSync(BUILD_LOCK).length === 0 && ageMs > 2_000) {
+        try {
+          claimBuildLock(hostname);
+          return;
+        } catch (claimError) {
+          if (claimError.code === 'EEXIST') continue;
+          throw claimError;
+        }
+      }
       if (activeOwner || ((unknownHost || !sameHost) && ageMs < BUILD_LOCK_STALE_MS)) {
         throw new Error(`PUBLIC DEPLOY BUILD FAILED — another build owns ${BUILD_LOCK}`);
       }
       removeDir(BUILD_LOCK);
       continue;
     }
-    buildLockToken = `${hostname}:${process.pid}:${Date.now()}`;
-    fs.writeFileSync(BUILD_LOCK_META, JSON.stringify({
-      token: buildLockToken,
-      hostname,
-      pid: process.pid,
-      created_epoch_ms: Date.now(),
-    }) + '\n');
-    process.once('exit', releaseBuildLock);
+    claimBuildLock(hostname);
     return;
   }
   throw new Error(`PUBLIC DEPLOY BUILD FAILED — could not acquire ${BUILD_LOCK}`);
@@ -128,6 +156,11 @@ function prepareBuildOutput(){
 function commitBuildOutput(){
   let movedCurrent = false;
   if (fs.existsSync(OUT)) {
+    // Reconciled artifact workspaces can recreate an empty directory skeleton
+    // after prepareBuildOutput() removes it. This is the fixed transient
+    // destination owned by the current build lease, so clear it again at the
+    // atomic commit boundary before renaming the live tree.
+    if (fs.existsSync(PREVIOUS_OUT)) removeDir(PREVIOUS_OUT);
     fs.renameSync(OUT, PREVIOUS_OUT);
     movedCurrent = true;
   }
@@ -188,6 +221,16 @@ const release = {
   generated_at: releaseManifest.generated_at || null,
   note: 'Generated deploy surface. Full source/operator archive remains in the zip root; Netlify publishes only this directory.'
 };
+for (const field of [
+  'base_release_id',
+  'geometry_asset_version',
+  'teacherresources_asset_versions',
+  'asset_digests',
+]) {
+  if (Object.prototype.hasOwnProperty.call(releaseManifest, field)) {
+    release[field] = releaseManifest[field];
+  }
+}
 fs.writeFileSync(path.join(BUILD_OUT, 'site-release.json'), JSON.stringify(release, null, 2) + '\n');
 // Hygiene check: the deploy dir must not contain tool/operator roots.
 const failures = [];

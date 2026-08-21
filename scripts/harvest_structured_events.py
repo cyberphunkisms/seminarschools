@@ -13,6 +13,7 @@ import argparse
 import concurrent.futures
 import json
 import sys
+from collections import Counter
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -76,18 +77,26 @@ def load_scheduled_sources(
     )
 
 
-def qualify(record: dict, source: dict, checked_at: datetime) -> dict | None:
+def qualify_with_reason(
+    record: dict,
+    source: dict,
+    checked_at: datetime,
+) -> tuple[dict | None, str | None]:
+    """Qualify one parsed record and preserve an explicit rejection reason."""
     source = normalise_source_config(source)
-    if not all(record.get(key) for key in ("title", "date", "source_url")):
-        return None
+    for key in ("title", "date", "source_url"):
+        if not record.get(key):
+            return None, f"missing-required-{key.replace('_', '-')}"
     try:
         event_dt = datetime.fromisoformat(str(record["date"]).replace("Z", "+00:00"))
         if event_dt.tzinfo is None:
             event_dt = event_dt.replace(tzinfo=timezone.utc)
     except (TypeError, ValueError):
-        return None
-    if event_dt < checked_at - timedelta(days=1) or event_dt > checked_at + timedelta(days=180):
-        return None
+        return None, "invalid-date"
+    if event_dt < checked_at - timedelta(days=1):
+        return None, "outside-publication-window-past"
+    if event_dt > checked_at + timedelta(days=180):
+        return None, "outside-publication-window-future"
     if record.get("type") == "screening":
         screening_evidence = " ".join(
             str(record.get(key) or "")
@@ -97,7 +106,7 @@ def qualify(record: dict, source: dict, checked_at: datetime) -> dict | None:
             )
         )
         if not creator_attendance_confirmed(screening_evidence):
-            return None
+            return None, "screening-creator-attendance-unconfirmed"
         record = dict(record)
         record["attendance_confirmed"] = True
     result = dict(record)
@@ -137,7 +146,13 @@ def qualify(record: dict, source: dict, checked_at: datetime) -> dict | None:
     result["first_seen_at"] = result.get("first_seen_at") or checked_at.isoformat(timespec="seconds")
     result["last_checked_at"] = checked_at.isoformat(timespec="seconds")
     result["scraped_at"] = checked_at.isoformat(timespec="seconds")
-    return result
+    return result, None
+
+
+def qualify(record: dict, source: dict, checked_at: datetime) -> dict | None:
+    """Compatibility wrapper for callers that only need the qualified row."""
+    qualified, _ = qualify_with_reason(record, source, checked_at)
+    return qualified
 
 
 def run(
@@ -150,8 +165,9 @@ def run(
     parsed_cache: ParsedResponseCache | None = None,
 ) -> dict:
     now = datetime.now(timezone.utc)
-    events = []
+    candidate_events = []
     yields = []
+    accounting = {}
 
     def crawl_one(source):
         return crawl_source(
@@ -188,22 +204,71 @@ def run(
                 )
 
     for source in sources:
-        result = results[str(source.get("id") or "")]
-        yields.append(result.source_yield())
+        source_id = str(source.get("id") or "")
+        result = results[source_id]
+        rejection_reasons = Counter()
+        qualified_before_deduplication = 0
         for record in result.records:
-            qualified = qualify(record, source, now)
+            qualified, rejection_reason = qualify_with_reason(record, source, now)
             if qualified:
-                events.append(qualified)
+                qualified_before_deduplication += 1
+                candidate_events.append((qualified, source_id))
+            else:
+                rejection_reasons[rejection_reason or "unspecified"] += 1
+        accounting[source_id] = {
+            "records_parsed": len(result.records),
+            "records_qualified_before_deduplication": qualified_before_deduplication,
+            "qualification_rejected": sum(rejection_reasons.values()),
+            "qualification_rejection_reasons": dict(sorted(rejection_reasons.items())),
+            "duplicates_suppressed": 0,
+            "records_published": 0,
+        }
+        source_yield = result.source_yield()
+        source_yield.update(accounting[source_id])
+        yields.append(source_yield)
     by_key = {}
-    for event in events:
+    for event, source_id in candidate_events:
         key = event["occurrence_key"]
         prior = by_key.get(key)
-        if not prior or int(event.get("confidence") or 0) > int(prior.get("confidence") or 0):
-            by_key[key] = event
+        if not prior:
+            by_key[key] = (event, source_id)
+            continue
+        prior_event, prior_source_id = prior
+        if int(event.get("confidence") or 0) > int(prior_event.get("confidence") or 0):
+            accounting[prior_source_id]["duplicates_suppressed"] += 1
+            by_key[key] = (event, source_id)
+        else:
+            accounting[source_id]["duplicates_suppressed"] += 1
+    for _, source_id in by_key.values():
+        accounting[source_id]["records_published"] += 1
+    for source_yield in yields:
+        source_id = str(source_yield.get("source_id") or "")
+        source_yield.update(accounting[source_id])
     result_events = sorted(
-        by_key.values(),
+        (event for event, _ in by_key.values()),
         key=lambda item: (str(item.get("date") or ""), str(item.get("title") or "")),
     )
+    coverage_accounting = {
+        "records_parsed": sum(row["records_parsed"] for row in accounting.values()),
+        "records_qualified_before_deduplication": sum(
+            row["records_qualified_before_deduplication"]
+            for row in accounting.values()
+        ),
+        "qualification_rejected": sum(
+            row["qualification_rejected"] for row in accounting.values()
+        ),
+        "qualification_rejection_reasons": dict(sorted(sum(
+            (
+                Counter(row["qualification_rejection_reasons"])
+                for row in accounting.values()
+            ),
+            Counter(),
+        ).items())),
+        "duplicates_suppressed": sum(
+            row["duplicates_suppressed"] for row in accounting.values()
+        ),
+        "records_published": len(result_events),
+    }
     source_health_gate = evaluate_source_health(sources, yields)
     return {
         "stream": "deterministic-structured-events",
@@ -213,9 +278,13 @@ def run(
         "events": result_events,
         "source_yields": yields,
         "source_health_gate": source_health_gate,
+        "coverage_accounting": coverage_accounting,
         "summary": {
             "sources": len(sources),
             "events": len(result_events),
+            "records_parsed": coverage_accounting["records_parsed"],
+            "qualification_rejected": coverage_accounting["qualification_rejected"],
+            "duplicates_suppressed": coverage_accounting["duplicates_suppressed"],
             "source_failures": sum(
                 row.get("status") in {
                     "partial-failure", "fetch-error", "blocked", "parse-empty-regression"

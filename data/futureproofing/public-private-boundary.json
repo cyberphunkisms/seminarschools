@@ -1,0 +1,18 @@
+{
+  "schema": "seminar-schools-public-private-boundary-v1",
+  "delivery_root": "..",
+  "public_root": "SITE_PACKAGE/public",
+  "private_roots": ["EDITABLE_MASTERS", "DEPLOY_TOOLS", "SITE_PACKAGE/scripts", "SITE_PACKAGE/data", "SITE_PACKAGE/.github", "SITE_PACKAGE/hf_export"],
+  "complete_package_required_roots": ["SITE_PACKAGE", "EDITABLE_MASTERS", "DEPLOY_TOOLS"],
+  "public_forbidden_top_level": ["EDITABLE_MASTERS", "DEPLOY_TOOLS", "scripts", "data", ".github", "hf_export", "dashboard", "node_modules", ".git", ".netlify"],
+  "public_forbidden_files": ["package.json", "package-lock.json", "netlify.toml", ".env", ".env.local", ".npmrc"],
+  "public_forbidden_name_pattern": "(?:AUDIT|REPORT|PRIVATE|SECRET|TOKEN|HANDOFF|CRITIQUE)",
+  "secret_patterns": [
+    "(?:sk-(?:proj|svcacct|admin)-[A-Za-z0-9_-]{20,}|sk-[A-Za-z0-9]{32,})",
+    "(?<![A-Za-z0-9_])gh[pousr]_[A-Za-z0-9_]{20,}",
+    "AKIA[0-9A-Z]{16}",
+    "(?:HF_TOKEN|OPENAI_API_KEY|GITHUB_TOKEN|STRIPE_SECRET_KEY)\\s*=\\s*[^\\s]+"
+  ],
+  "required_private_manifests": ["EDITABLE_MASTERS/EDITABLE_MASTERS_MANIFEST.json", "EDITABLE_MASTERS/SHA256SUMS.txt"],
+  "rule": "Public deploys contain reader-facing files only. Complete handoff ZIPs retain source, operator tooling, and editable masters. No complete-handoff root may be copied beneath SITE_PACKAGE/public."
+}

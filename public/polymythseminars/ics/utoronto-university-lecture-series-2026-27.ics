@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Seminar Schools//Polymythcal//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:d5a29e4490c2bcf0c11a@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART:20261008T180000Z
+DTEND:20270311T200000Z
+SUMMARY:University of Toronto University Lecture Series 2026–27
+LOCATION:University of Toronto St. George Campus
+DESCRIPTION:In-person hour-long talks across history\, politics\, geograp
+ hy\, art\, science\, architecture\, media\, and related fields\; every a
+ nnounced lecture is stored as its own child occurrence.
+URL:https://seminarschools.com/polymythseminars/events/utoronto-universit
+ y-lecture-series-2026-27/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

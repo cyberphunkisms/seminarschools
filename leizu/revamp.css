@@ -11,9 +11,86 @@ body.leizu-revamp {
     radial-gradient(circle at 96% 28%, color-mix(in srgb, var(--mulberry-fruit) 11%, transparent), transparent 30rem),
     linear-gradient(180deg, color-mix(in srgb, var(--paper) 98%, var(--mulberry-leaf) 2%), var(--paper));
 }
+.leizu-free-classes {
+  width:min(1200px, calc(100% - 4rem));
+  margin:4.75rem auto 0;
+  padding:clamp(1.6rem, 3vw, 2.25rem);
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto;
+  align-items:center;
+  gap:1.5rem 2.5rem;
+  border:1px solid color-mix(in srgb, var(--mulberry-leaf) 48%, var(--paper));
+  border-top:4px solid var(--mulberry-leaf);
+  border-radius:.65rem;
+  color:var(--paper);
+  background:
+    radial-gradient(circle at 88% 10%, color-mix(in srgb, var(--mulberry-fruit) 72%, transparent), transparent 18rem),
+    linear-gradient(135deg, var(--mulberry-deep), color-mix(in srgb, var(--mulberry-deep) 78%, #111 22%));
+  box-shadow:0 .9rem 2.5rem color-mix(in srgb, var(--mulberry-deep) 20%, transparent);
+  position:relative;
+  z-index:29;
+}
+.leizu-free-classes-copy { max-width:49rem; }
+.leizu-free-classes-eyebrow {
+  margin:0 0 .55rem;
+  color:color-mix(in srgb, var(--paper) 86%, var(--mulberry-leaf));
+  font-family:var(--mono, monospace);
+  font-size:.74rem;
+  font-weight:700;
+  letter-spacing:.14em;
+  line-height:1.35;
+  text-transform:uppercase;
+}
+.leizu-free-classes h2 {
+  margin:0 0 .7rem;
+  padding:0;
+  border:0;
+  color:var(--paper);
+  font-family:var(--display, Georgia, serif);
+  font-size:clamp(2rem, 4vw, 3.35rem);
+  font-weight:500;
+  line-height:1.03;
+  scroll-margin-block-start:9rem;
+}
+.leizu-free-classes-copy > p:last-child {
+  max-width:62ch;
+  margin:0;
+  color:color-mix(in srgb, var(--paper) 90%, transparent);
+  font-size:clamp(1rem, 1.5vw, 1.16rem);
+  line-height:1.55;
+}
+.leizu-free-classes-cta {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:3.2rem;
+  max-width:100%;
+  padding:.78rem 1.15rem;
+  border:2px solid var(--paper);
+  border-radius:.3rem;
+  color:var(--mulberry-deep);
+  background:var(--paper);
+  font-family:var(--display, Georgia, serif);
+  font-size:1.08rem;
+  font-weight:700;
+  line-height:1.2;
+  text-align:center;
+  text-decoration:none;
+  white-space:normal;
+  transition:transform .2s ease, background .2s ease, color .2s ease;
+}
+.leizu-free-classes-cta:hover,
+.leizu-free-classes-cta:focus-visible {
+  color:var(--paper);
+  background:transparent;
+  transform:translateY(-2px);
+}
 .leizu-site-nav {
   width:min(1200px, calc(100% - 4rem));
-  margin:1.25rem auto 0;
+  /* The global reading controls are fixed at the top edge. Reserve a real
+     lane beneath them so Leizu's own navigation is never hidden or
+     untabbable, including at the 145% reader-text setting. */
+  margin:.75rem auto 0;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -29,6 +106,9 @@ body.leizu-revamp {
   font-size:.68rem;
   letter-spacing:.1em;
   text-transform:uppercase;
+}
+body.leizu-revamp:not(.leizu-home) > .leizu-site-nav {
+  margin-top:4.75rem;
 }
 .leizu-site-nav .leizu-mark {
   color:var(--mulberry-deep);
@@ -264,16 +344,37 @@ body.leizu-revamp {
 .leizu-revamp .policy h2 { border:0; padding:0; margin-top:.45rem; }
 .leizu-revamp .policies-footer { margin-top:3.5rem; }
 
+@media (max-width:1100px) {
+  .leizu-free-classes {
+    grid-template-columns:1fr;
+    align-items:start;
+    gap:1.25rem;
+  }
+  .leizu-free-classes-cta { justify-self:start; }
+}
 @media (max-width:900px) {
+  .leizu-free-classes {
+    width:min(100% - 2rem, 1200px);
+    grid-template-columns:1fr;
+    align-items:start;
+    gap:1.25rem;
+  }
+  .leizu-free-classes-cta { justify-self:start; }
   .leizu-site-nav { width:min(100% - 2rem, 1200px); border-radius:.5rem; align-items:flex-start; }
   .leizu-site-nav .leizu-nav-links { justify-content:flex-start; }
   .leizu-home .masthead-grid,
   .leizu-home .academy-intro { grid-template-columns:1fr; }
   .leizu-home .elements-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .leizu-home .hero-aside { max-width:44rem; }
+  .leizu-home .contact-block { grid-template-columns:1fr; }
+}
+@media (max-width:820px) {
+  body.leizu-revamp:not(.leizu-home) > .leizu-site-nav { margin-top:.75rem; }
 }
 @media (max-width:640px) {
-  .leizu-site-nav { margin-top:.7rem; padding:.8rem; gap:.75rem; }
+  .leizu-free-classes { margin-top:7.75rem; padding:1.4rem; }
+  .leizu-free-classes-cta { width:100%; }
+  .leizu-site-nav { margin-top:.75rem; padding:.8rem; gap:.75rem; }
   .leizu-site-nav .leizu-mark { width:100%; }
   .leizu-site-nav .leizu-nav-links { gap:.5rem .8rem; font-size:0.72rem; }
   .leizu-site-nav .leizu-nav-zh { padding:.35rem .55rem; }
@@ -291,6 +392,72 @@ body.leizu-revamp {
   .leizu-home .catalogue-lead { display:block; }
   .leizu-home .catalogue-note { margin-top:1rem; }
   .leizu-home .scholar-cta { padding-left:1.25rem; padding-right:1.25rem; }
+
+  /* Keep localized controls readable when users enlarge text. Each control
+     stays fully operable, but may take a second line instead of forcing the
+     entire page wider than the viewport. */
+  .leizu-home .masthead-meta-group {
+    display:flex;
+    flex-wrap:wrap;
+    width:100%;
+    max-width:100%;
+  }
+  .leizu-home .masthead-meta-btn {
+    min-width:0;
+    max-width:100%;
+    overflow-wrap:anywhere;
+  }
+  .leizu-home .course-venue-segmented {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    flex:1 1 100%;
+    width:100%;
+    max-width:100%;
+  }
+  .leizu-home .venue-seg {
+    min-width:0;
+    justify-content:center;
+    padding:.35rem .4rem;
+  }
+  .leizu-home .venue-seg-label {
+    min-width:0;
+    letter-spacing:.08em;
+    line-height:1.25;
+    overflow-wrap:anywhere;
+    text-align:center;
+  }
+  .leizu-home .faq-a,
+  .leizu-home .faq-a a {
+    min-width:0;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+  }
+  .leizu-home .esl-intensive-deep-row,
+  .leizu-home .esl-intensive-deep-note {
+    min-width:0;
+    max-width:100%;
+  }
+  .leizu-home .esl-intensive-deep {
+    max-width:100%;
+    white-space:normal;
+  }
+}
+
+/* LEIZU_READER_WORD_INTEGRITY
+   Course and FAQ prose is injected directly into divs, so the shared
+   paragraph/link guard cannot reach those text nodes. Keep ordinary Latin
+   words intact even at enlarged text; CJK retains its native line-breaking
+   behaviour under `word-break: normal`. */
+.leizu-home :where(.subject, .gloss, .course-desc, .faq-a) {
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none !important;
+}
+@media (max-width:420px) {
+  /* Preserve the enlarged-text setting while giving the longest EN/FR
+     subject names enough unbroken inline space inside their cards. */
+  .leizu-home .element-card { padding-inline:.8rem; }
+  .leizu-home .element-card .subject { font-size:1.3rem; }
 }
 
 /* The course selector captures intent. It does not quote retired bundle prices. */

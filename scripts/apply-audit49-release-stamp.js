@@ -16,7 +16,10 @@ const {
 
 const ROOT = path.resolve(__dirname, '..');
 const CHECK = process.argv.includes('--check');
-const FALLBACK_PREVIOUS_ASSET = '20260726-audit48';
+const FALLBACK_PREVIOUS_ASSETS = Object.freeze([
+  '20260726-audit48',
+  '20260728-audit53',
+]);
 const SOURCE_HTML_ROOTS = [
   '.well-known', 'agora', 'aitr', 'aa', 'bb', 'bookwormcard', 'campaigns',
   'cfps', 'fellowships', 'florilegium', 'humanities', 'lectures', 'leizu',
@@ -33,12 +36,12 @@ const currentAsset = String(manifest.polymythcal_asset_version || '');
 if (!currentRelease) {
   throw new Error('Manifest release_id must be a non-empty string');
 }
-if (!/^\d{8}-audit\d+$/.test(currentAsset)) {
+if (!/^\d{8}-[a-z0-9-]+$/.test(currentAsset)) {
   throw new Error(
     `Manifest polymythcal_asset_version has invalid format: ${currentAsset}`,
   );
 }
-const previousAssets = new Set([FALLBACK_PREVIOUS_ASSET]);
+const previousAssets = new Set(FALLBACK_PREVIOUS_ASSETS);
 try {
   const previousManifest = JSON.parse(
     fs.readFileSync(
@@ -49,7 +52,7 @@ try {
   const previousAsset = String(
     previousManifest.polymythcal_asset_version || '',
   ).trim();
-  if (/^\d{8}-audit\d+$/.test(previousAsset)) previousAssets.add(previousAsset);
+  if (/^\d{8}-[a-z0-9-]+$/.test(previousAsset)) previousAssets.add(previousAsset);
 } catch {
   // A first build may not have a prior generated manifest.
 }

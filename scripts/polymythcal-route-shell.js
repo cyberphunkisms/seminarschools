@@ -2,9 +2,13 @@
 const fs = require('fs');
 const path = require('path');
 const {resolveSiteBuildDate} = require('./polymythcal-build-date');
+const {geometryBodyAttributes} = require('./lib/geometry-asset-version');
 const ROOT = path.resolve(__dirname, '..');
 const SITE = 'https://seminarschools.com';
 const TODAY = resolveSiteBuildDate({root:ROOT});
+const GEOMETRY_CONTRACTS = JSON.parse(
+  fs.readFileSync(path.join(ROOT, 'data', 'geometry-route-contracts.json'), 'utf8'),
+);
 const ROUTES = {
   writingclub: {group:'writing', band:'club', defaultContent:'apply', kicker:'Writing opportunities', heading:'All writing opportunities', description:'Writing contests, prizes, publications, and submission opportunities for young writers.'},
   writingkids: {group:'writing', band:'kids', defaultContent:'apply', kicker:'Writing opportunities', heading:'Writing opportunities for kids', description:'Elementary-friendly writing contests and publication opportunities.'},
@@ -74,9 +78,9 @@ function routeLinks(active, excludeActive=false){
   return groups.map(([label,slugs])=>`<span class="pm-dedicated-group"><span>${label}</span>${slugs.filter(slug=>!excludeActive || slug!==active).map(slug=>`<a href="/${slug}/"${slug===active?' aria-current="page"':''}>${esc(ROUTES[slug].heading)}</a>`).join('')}</span>`).join('');
 }
 function focusedRouteNavigation(active){
-  return `<details class="pm-quick-starts" id="pmQuickStarts" open="">
-<summary class="pm-quick-summary"><span>Other focused calendars</span><span class="pm-summary-note">Choose another focused view</span></summary>
-<div class="pm-quick-body"><div class="pm-dedicated-row"><span>Browse by focus</span><nav aria-label="Other focused Polymythcal calendars" class="pm-dedicated-links" id="academicNav">${routeLinks(active,true)}</nav></div></div>
+  return `<details class="pm-secondary-tools pm-panel" id="pmFocusedCalendars">
+<summary><strong>Other focused calendars</strong><span>Choose another focused view</span></summary>
+<div class="pm-secondary-tools-body"><nav aria-label="Other focused Polymythcal calendars" class="pm-dedicated-links" id="academicNav">${routeLinks(active,true)}</nav></div>
 </details>`;
 }
 function focusContentMode(html, mode){
@@ -91,6 +95,7 @@ function focusContentMode(html, mode){
 function buildRoutePage(slug, payload){
   const cfg=ROUTES[slug]; if(!cfg) throw new Error(`unknown Polymythcal route: ${slug}`);
   let html=read('polymythseminars/index.html');
+  const listingCount=Array.isArray(payload.events)?payload.events.length:0;
   const url=`${SITE}/${slug}/`;
   const frenchUrl=`${SITE}/${slug}/fr/`;
   const title=`${cfg.heading} | Polymythcal | Seminar Schools`;
@@ -103,9 +108,18 @@ function buildRoutePage(slug, payload){
     html=html.replace(/(<meta(?=[^>]*\bname=["']viewport["'])[^>]*>)/i,'$1\n<meta name="robots" content="index,follow">');
   }
   html=replaceLocaleLinks(html,url,frenchUrl);
+  html=html.replace(/(<dt\b[^>]*\bid=["']pmListingCount["'][^>]*>)[\s\S]*?(<\/dt>)/i,`$1${listingCount}$2`);
   html=html.replace(/<body([^>]*)>/i,(m,attrs)=>{
-    const steadyAttrs=String(attrs).replace(/data-indra-intensity=(["'])[^"']*\1/i,'data-indra-intensity="0.095"');
-    return `<body${steadyAttrs} data-pm-route="${slug}" data-pm-default-content="${cfg.defaultContent}">`;
+    /* Preserve page-specific body state, but derive the finalizer-owned
+       geometry contract from the focused route's own pathname. Cloning the
+       Polymythcal shell's key/seed made every generated shortcut depend on the
+       source page's camera until the later catch-all finalizer repaired it. */
+    let preserved=attrs || '';
+    for(const attribute of ['data-route-type','data-geometry','data-indra-intensity','data-geometry-role','data-geometry-key','data-geometry-seed','data-geometry-register','data-geometry-profile','data-geometry-surface','data-front-facing']){
+      preserved=preserved.replace(new RegExp(`\\s+${attribute}\\s*=\\s*(["'])[^"']*\\1`,'ig'),'');
+    }
+    const geometry=geometryBodyAttributes(GEOMETRY_CONTRACTS,`${slug}/index.html`,'calendar');
+    return `<body ${geometry}${preserved} data-pm-route="${slug}" data-pm-default-content="${cfg.defaultContent}">`;
   });
   html=html.replace(
     /<header class="pm-header">[\s\S]*?<\/header>/i,
@@ -113,13 +127,13 @@ function buildRoutePage(slug, payload){
 <p class="pm-commons-context"><a href="/polymythcommons/">Polymyth Commons</a><span aria-hidden="true"> / </span>focused calendar</p>
 <h1>${esc(cfg.heading)}</h1>
 <p class="pm-lede" id="polymythContext">${esc(cfg.description)}</p></header>
-<section class="pm-route-context pm-panel" aria-label="Focused Polymythcal view"><p><strong>${esc(cfg.heading)}</strong> is selected. Use the filters below, <a href="/polymythseminars/">browse every listing</a>, or return to <a href="/polymythcommons/">Polymyth Commons</a>.</p></section>`,
+<section class="pm-route-context pm-panel" aria-label="Calendar navigation"><p><a href="/polymythseminars/">Browse all Polymythcal listings</a> or return to <a href="/polymythcommons/">Polymyth Commons</a>.</p></section>`,
   );
-  html=html.replace(/<details class="pm-quick-starts" id="pmQuickStarts"[\s\S]*?<\/details>/i,focusedRouteNavigation(slug));
+  html=html.replace(/<details class="pm-secondary-tools pm-panel" id="pmFocusedCalendars"[\s\S]*?<\/details>/i,focusedRouteNavigation(slug));
   html=focusContentMode(html,cfg.defaultContent);
   html=html.replace(/<h2 id="pmResultsTitle">[\s\S]*?<\/h2>/i,`<h2 id="pmResultsTitle">${esc(cfg.heading)} listings</h2>`);
   const events=(payload.events||[]).filter(e=>matchesRoute(e,slug)).filter(currentEvent).slice(0,40);
-  const noScript=`<noscript><section class="pm-noscript pm-panel"><h2>${esc(cfg.heading)}</h2><p>These current listings are available without JavaScript.</p><ul>${events.map(e=>`<li><a href="/polymythseminars/events/${encodeURIComponent(e.id)}/">${esc(e.title)}</a> <span>${esc(String(e.date||'').slice(0,10))}</span></li>`).join('')}</ul><p><a href="/polymythseminars/subscribe/">RSS and calendar feeds</a> · <a href="/sitemap/">Site map</a></p></section></noscript>`;
+  const noScript=`<noscript><section class="pm-noscript pm-panel"><h2>${esc(cfg.heading)}</h2><p>These current listings are available without JavaScript.</p><!-- SS_STATIC_EVENTS_START --><ul>${events.map(e=>`<li><a href="/polymythseminars/events/${encodeURIComponent(e.id)}/">${esc(e.title)}</a> <span>${esc(String(e.date||'').slice(0,10))}</span></li>`).join('')}</ul><!-- SS_STATIC_EVENTS_END --><p><a href="/polymythseminars/subscribe/">RSS and calendar feeds</a> · <a href="/sitemap/">Site map</a></p></section></noscript>`;
   html=html.replace(/<noscript>[\s\S]*?<\/noscript>/i,noScript);
   html=html.replace(/"url": "https:\/\/seminarschools\.com\/polymythseminars\/"/,`"url": "${url}"`)
     .replace(/"name": "Polymythcal"/,`"name": ${JSON.stringify(cfg.heading)}`)

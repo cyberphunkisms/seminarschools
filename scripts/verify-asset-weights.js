@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 'use strict';
-const fs=require('fs'); const path=require('path'); const ROOT=path.resolve(__dirname,'..');
+const fs=require('fs'); const path=require('path'); const crypto=require('crypto'); const ROOT=path.resolve(__dirname,'..');
 const {isGeneratedDependencyDirectory}=require('./repository-walk-policy');
 const reportPath=path.join(ROOT,'scripts','reports','asset-weight-report.json');
 const budgetPath=path.join(ROOT,'scripts','reports','asset-weight-budget.json');
@@ -11,10 +11,16 @@ if(!fs.existsSync(publicPath)) failures.push('missing generated public deploy su
 if(!fs.existsSync(reportPath)) failures.push('missing scripts/reports/asset-weight-report.json');
 if(!fs.existsSync(budgetPath)) failures.push('missing scripts/reports/asset-weight-budget.json');
 let publicFiles=[];let totalBytes=0;let knownCount=0;
+let publicTreeSha256='';
 function walk(d,acc=[]){ for(const e of fs.readdirSync(d,{withFileTypes:true})){ const f=path.join(d,e.name); if(e.isDirectory()&&!isGeneratedDependencyDirectory(e.name)) walk(f,acc); else if(e.isFile()) acc.push(f); } return acc; }
 if(fs.existsSync(publicPath)) {
   publicFiles=walk(publicPath,[]);
   totalBytes=publicFiles.reduce((sum,file)=>sum+fs.statSync(file).size,0);
+  publicTreeSha256=crypto.createHash('sha256').update(publicFiles.map(file=>({
+    path:path.relative(publicPath,file).replace(/\\/g,'/'),
+    size:fs.statSync(file).size,
+    sha256:crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'),
+  })).sort((a,b)=>a.path.localeCompare(b.path)).map(row=>`${row.path}\0${row.size}\0${row.sha256}\n`).join('')).digest('hex');
 }
 if(fs.existsSync(reportPath)) {
   const r=JSON.parse(fs.readFileSync(reportPath,'utf8'));
@@ -23,6 +29,7 @@ if(fs.existsSync(reportPath)) {
   if(r.generatedAt!==release.generated_at) failures.push('asset report release timestamp is stale');
   if(r.totalFiles!==publicFiles.length) failures.push(`asset report file count is stale: ${r.totalFiles} != ${publicFiles.length}`);
   if(r.totalBytes!==totalBytes) failures.push(`asset report byte count is stale: ${r.totalBytes} != ${totalBytes}`);
+  if(r.publicTreeSha256!==publicTreeSha256) failures.push(`asset report public-tree digest is stale: ${r.publicTreeSha256||'missing'} != ${publicTreeSha256}`);
 }
 if(fs.existsSync(budgetPath)){
   const budget=JSON.parse(fs.readFileSync(budgetPath,'utf8'));

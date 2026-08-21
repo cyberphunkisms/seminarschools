@@ -12,6 +12,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
+const {isGeneratedDependencyDirectory} = require('./repository-walk-policy');
 
 const ROOT = path.resolve(__dirname, '..');
 const PUBLIC = path.join(ROOT, 'public');
@@ -97,7 +98,7 @@ function walkHtml(relative) {
     const active = stack.pop();
     for (const entry of fs.readdirSync(active, {withFileTypes: true})) {
       const target = path.join(active, entry.name);
-      if (entry.isDirectory()) stack.push(target);
+      if (entry.isDirectory() && !isGeneratedDependencyDirectory(entry.name)) stack.push(target);
       else if (entry.isFile() && entry.name.endsWith('.html')) {
         out.push(posix(path.relative(ROOT, target)));
       }

@@ -98,7 +98,7 @@
       if (!rootParent) return;
       var rootTag = rootParent.tagName;
       if (rootTag === 'A' || rootTag === 'SCRIPT' || rootTag === 'STYLE' || rootTag === 'CODE' || rootTag === 'PRE' || rootTag === 'TEXTAREA' || rootTag === 'INPUT' || rootTag === 'BUTTON' || rootTag === 'SELECT') return;
-      if (rootParent.closest && rootParent.closest('[data-no-autolink], nav, .topbar, .keyboard-hint, .route-note, .site-footer')) return;
+      if (rootParent.closest && rootParent.closest('a, [data-no-autolink], nav, .topbar, .keyboard-hint, .route-note, .site-footer')) return;
       if (rootParent.classList && rootParent.classList.contains('ci-link')) return;
       textNodes.push(root);
       return;
@@ -110,7 +110,7 @@
       if (!p) continue;
       var tag = p.tagName;
       if (tag === 'A' || tag === 'SCRIPT' || tag === 'STYLE' || tag === 'CODE' || tag === 'PRE' || tag === 'TEXTAREA' || tag === 'INPUT' || tag === 'BUTTON' || tag === 'SELECT') continue;
-      if (p.closest && p.closest('[data-no-autolink], nav, .topbar, .keyboard-hint, .route-note, .site-footer')) continue;
+      if (p.closest && p.closest('a, [data-no-autolink], nav, .topbar, .keyboard-hint, .route-note, .site-footer')) continue;
       if (p.classList && p.classList.contains('ci-link')) continue;
       textNodes.push(node);
     }
@@ -136,6 +136,12 @@
       a.className = 'ci-link';
       a.href = '/polymyth/concordance/?term=' + encodeURIComponent(canonicalFor(match[0]));
       a.textContent = match[0];
+      // A nested link inside an editing host otherwise transfers focus to the
+      // host in Chromium. Keep the derived link keyboard-reachable without
+      // changing the saved source text (the editor still reads textContent).
+      if (tn.parentElement && tn.parentElement.closest('[contenteditable="true"]')) {
+        a.contentEditable = 'false';
+      }
       frag.appendChild(a);
       lastIdx = COMBINED_RE.lastIndex;
     }

@@ -1,0 +1,3759 @@
+{
+  "schema": "polymythcal-interdisciplinary-set6-research-ledger-v1",
+  "generated_at": "2026-08-13T20:08:00-04:00",
+  "source_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+  "research_set": "6-Interdisciplinary-General",
+  "record_count": 42,
+  "cross_tagged_existing_ids": [
+    "breakthrough-junior-challenge-2026-peer-review",
+    "breakthrough-junior-challenge-2026-results",
+    "breakthrough-junior-challenge-2026-submission",
+    "codeart-changemaker-2027-deadline",
+    "connecther-film-festival-2026-deadline",
+    "one-earth-young-filmmakers-2027-deadline",
+    "one-earth-young-filmmakers-2027-premieres"
+  ],
+  "records": [
+    {
+      "id": "loran-2027-applications-open",
+      "identity_key": "7b05e19c3923a6f0924c",
+      "date": "2026-09-09T00:00:00-04:00",
+      "title": "Loran Award 2027 applications open",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Loran Scholars Foundation",
+      "organizer": "Loran Scholars Foundation",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://loranscholar.ca/becoming-a-scholar/",
+      "source_id": "loran-scholars-foundation",
+      "source_name": "Loran Scholars Foundation",
+      "description": "Opening of applications for the 2027 Loran Award cycle.",
+      "age_band": "Eligible Canadian high-school and CEGEP students under current rules",
+      "subjects": [
+        "Interdisciplinary",
+        "Scholarship",
+        "Leadership",
+        "Community Service"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "scholarship",
+        "leadership",
+        "community service"
+      ],
+      "opportunity_kind": "undergraduate scholarship",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "loran-2027-application-deadline",
+      "series_title": "Loran Award 2027",
+      "series_role": "child",
+      "calendar_stage": "applications opening",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:loran-2027-applications-open",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Scholarship",
+        "Leadership",
+        "Community Service"
+      ],
+      "participation_unit": "individual applicant",
+      "access_route": "direct application",
+      "application_url": "https://loranscholar.ca/becoming-a-scholar/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary",
+        "CEGEP"
+      ]
+    },
+    {
+      "id": "loran-2027-application-deadline",
+      "identity_key": "2ff5d338397028785d49",
+      "date": "2026-10-15T12:00:00-04:00",
+      "title": "Loran Award 2027 application deadline",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Loran Scholars Foundation",
+      "organizer": "Loran Scholars Foundation",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://loranscholar.ca/becoming-a-scholar/",
+      "source_id": "loran-scholars-foundation",
+      "source_name": "Loran Scholars Foundation",
+      "description": "Noon Eastern deadline for the 2027 Loran Award.",
+      "age_band": "Eligible Canadian high-school and CEGEP students under current rules",
+      "subjects": [
+        "Interdisciplinary",
+        "Scholarship",
+        "Leadership",
+        "Community Service"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "scholarship",
+        "leadership",
+        "community service"
+      ],
+      "opportunity_kind": "undergraduate scholarship",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "series_title": "Loran Award 2027",
+      "series_role": "parent",
+      "calendar_stage": "application closing",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:loran-2027-application-deadline",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Scholarship",
+        "Leadership",
+        "Community Service"
+      ],
+      "participation_unit": "individual applicant",
+      "access_route": "direct application",
+      "prize_form": "renewable undergraduate scholarship, mentorship, and experiential support",
+      "application_url": "https://loranscholar.ca/becoming-a-scholar/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary",
+        "CEGEP"
+      ]
+    },
+    {
+      "id": "terry-fox-humanitarian-award-2027-open",
+      "identity_key": "5e3219d52cdca3a5ebf6",
+      "date": "2026-11-01T00:00:00-07:00",
+      "title": "Terry Fox Humanitarian Award 2027 applications open",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Terry Fox Humanitarian Award Program",
+      "organizer": "Terry Fox Humanitarian Award Program",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://terryfoxawards.ca/applicant-information/",
+      "source_id": "terry-fox-humanitarian-award-program",
+      "source_name": "Terry Fox Humanitarian Award Program",
+      "description": "Opening of the 2027 application cycle.",
+      "age_band": "Eligible Canadian graduating secondary students and current first-year postsecondary students",
+      "subjects": [
+        "Interdisciplinary",
+        "Scholarship",
+        "Humanitarian Service",
+        "Leadership"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "scholarship",
+        "humanitarian service",
+        "leadership"
+      ],
+      "opportunity_kind": "undergraduate scholarship",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "terry-fox-humanitarian-award-2027-deadline",
+      "series_title": "Terry Fox Humanitarian Award 2027",
+      "series_role": "child",
+      "calendar_stage": "applications opening",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Vancouver",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:terry-fox-humanitarian-award-2027-open",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Scholarship",
+        "Humanitarian Service",
+        "Leadership"
+      ],
+      "participation_unit": "individual applicant",
+      "access_route": "direct application",
+      "application_url": "https://terryfoxawards.ca/applicant-information/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary",
+        "college",
+        "undergraduate"
+      ]
+    },
+    {
+      "id": "terry-fox-humanitarian-award-2027-deadline",
+      "identity_key": "99d572e3bd2269416b4e",
+      "date": "2026-12-01T23:59:00-08:00",
+      "title": "Terry Fox Humanitarian Award 2027 application deadline",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Terry Fox Humanitarian Award Program",
+      "organizer": "Terry Fox Humanitarian Award Program",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://terryfoxawards.ca/applicant-information/",
+      "source_id": "terry-fox-humanitarian-award-program",
+      "source_name": "Terry Fox Humanitarian Award Program",
+      "description": "Pacific Time deadline for the 2027 award cycle.",
+      "age_band": "Eligible Canadian graduating secondary students and current first-year postsecondary students",
+      "subjects": [
+        "Interdisciplinary",
+        "Scholarship",
+        "Humanitarian Service",
+        "Leadership"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "scholarship",
+        "humanitarian service",
+        "leadership"
+      ],
+      "opportunity_kind": "undergraduate scholarship",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "series_title": "Terry Fox Humanitarian Award 2027",
+      "series_role": "parent",
+      "calendar_stage": "application closing",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Vancouver",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:terry-fox-humanitarian-award-2027-deadline",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Scholarship",
+        "Humanitarian Service",
+        "Leadership"
+      ],
+      "participation_unit": "individual applicant",
+      "access_route": "direct application",
+      "prize_form": "renewable scholarship",
+      "application_url": "https://terryfoxawards.ca/applicant-information/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary",
+        "college",
+        "undergraduate"
+      ]
+    },
+    {
+      "id": "schulich-leader-scholarships-2027-school-nomination",
+      "identity_key": "c79acf46e6ce79ae6451",
+      "date": "2027-01-27T00:00:00-05:00",
+      "title": "Schulich Leader Scholarships 2027 school-nomination deadline",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Schulich Foundation",
+      "organizer": "Schulich Foundation",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://schulichleaders.com/application/",
+      "source_id": "schulich-foundation",
+      "source_name": "Schulich Foundation",
+      "description": "Deadline for Canadian secondary schools and CEGEPs to nominate candidates.",
+      "age_band": "Canadian graduating high-school and CEGEP students",
+      "subjects": [
+        "Interdisciplinary",
+        "Scholarship",
+        "STEM",
+        "Leadership"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "scholarship",
+        "stem",
+        "leadership"
+      ],
+      "opportunity_kind": "undergraduate STEM scholarship",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "schulich-leader-scholarships-2027-offer-period",
+      "series_title": "Schulich Leader Scholarships 2027",
+      "series_role": "child",
+      "calendar_stage": "school nomination closing",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:schulich-leader-scholarships-2027-school-nomination",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Scholarship",
+        "STEM",
+        "Leadership"
+      ],
+      "participation_unit": "school nominee",
+      "access_route": "school nomination",
+      "prize_form": "major undergraduate STEM scholarship",
+      "institutional_restriction": "A school or CEGEP nomination is required.",
+      "registration_url": "https://schulichleaders.com/application/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary",
+        "CEGEP"
+      ]
+    },
+    {
+      "id": "schulich-leader-scholarships-2027-nominee-application",
+      "identity_key": "63ec219b7105d34874f9",
+      "date": "2027-02-17T00:00:00-05:00",
+      "title": "Schulich Leader Scholarships 2027 nominee-application deadline",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Schulich Foundation",
+      "organizer": "Schulich Foundation",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://schulichleaders.com/application/",
+      "source_id": "schulich-foundation",
+      "source_name": "Schulich Foundation",
+      "description": "Deadline for nominated students to complete the 2027 application.",
+      "age_band": "Nominated Canadian graduating high-school and CEGEP students",
+      "subjects": [
+        "Interdisciplinary",
+        "Scholarship",
+        "STEM",
+        "Leadership"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "scholarship",
+        "stem",
+        "leadership"
+      ],
+      "opportunity_kind": "undergraduate STEM scholarship",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "schulich-leader-scholarships-2027-offer-period",
+      "series_title": "Schulich Leader Scholarships 2027",
+      "series_role": "child",
+      "calendar_stage": "nominee application closing",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:schulich-leader-scholarships-2027-nominee-application",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Scholarship",
+        "STEM",
+        "Leadership"
+      ],
+      "participation_unit": "individual nominee",
+      "access_route": "application after school nomination",
+      "prize_form": "major undergraduate STEM scholarship",
+      "institutional_restriction": "Only school-nominated students may apply.",
+      "application_url": "https://schulichleaders.com/application/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary",
+        "CEGEP"
+      ]
+    },
+    {
+      "id": "schulich-leader-scholarships-2027-offer-period",
+      "identity_key": "55e899a308f5e7f3a6ef",
+      "date": "2027-03-08T00:00:00-05:00",
+      "end_date": "2027-06-15T23:59:00-04:00",
+      "title": "Schulich Leader Scholarships 2027 offer period",
+      "type": "ceremony",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Schulich Foundation",
+      "organizer": "Schulich Foundation",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://schulichleaders.com/application/",
+      "source_id": "schulich-foundation",
+      "source_name": "Schulich Foundation",
+      "description": "Official offer period for participating universities to make 2027 Schulich Leader Scholarship offers.",
+      "age_band": "Nominated applicants and participating Canadian universities",
+      "subjects": [
+        "Interdisciplinary",
+        "Scholarship",
+        "STEM",
+        "Leadership"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "scholarship",
+        "stem",
+        "leadership"
+      ],
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "series_title": "Schulich Leader Scholarships 2027",
+      "series_role": "parent",
+      "calendar_stage": "offer period",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:schulich-leader-scholarships-2027-offer-period",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Scholarship",
+        "STEM",
+        "Leadership"
+      ],
+      "participation_unit": "selected nominee",
+      "access_route": "selection by participating universities",
+      "prize_form": "major undergraduate STEM scholarship",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary",
+        "CEGEP"
+      ]
+    },
+    {
+      "id": "mccall-macbain-2027-international-deadline",
+      "identity_key": "d3b7147f9dc8051c042a",
+      "date": "2026-08-19T16:00:00-04:00",
+      "title": "McCall MacBain Scholars 2027 international application deadline",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "McCall MacBain Scholarships",
+      "organizer": "McCall MacBain Scholarships",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://mccallmacbainscholars.org/apply/",
+      "source_id": "mccall-macbain-scholarships",
+      "source_name": "McCall MacBain Scholarships",
+      "description": "Eastern Time deadline for applicants outside Canada and the United States.",
+      "age_band": "Eligible graduate-program applicants outside Canada and the United States",
+      "subjects": [
+        "Interdisciplinary",
+        "Graduate Scholarship",
+        "Leadership",
+        "Interdisciplinary Study"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "graduate scholarship",
+        "leadership",
+        "interdisciplinary study"
+      ],
+      "opportunity_kind": "graduate scholarship",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "mccall-macbain-2027-canada-us-deadline",
+      "series_title": "McCall MacBain Scholars 2027",
+      "series_role": "child",
+      "calendar_stage": "international application closing",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:mccall-macbain-2027-international-deadline",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Graduate Scholarship",
+        "Leadership",
+        "Interdisciplinary Study"
+      ],
+      "participation_unit": "individual applicant",
+      "access_route": "direct application with references",
+      "prize_form": "fully funded graduate scholarship and leadership program",
+      "application_url": "https://mccallmacbainscholars.org/apply/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "undergraduate",
+        "graduate"
+      ]
+    },
+    {
+      "id": "mccall-macbain-2027-canada-us-deadline",
+      "identity_key": "d8f6fe11a3abe1e7556b",
+      "date": "2026-09-23T16:00:00-04:00",
+      "title": "McCall MacBain Scholars 2027 Canada and United States deadline",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "McCall MacBain Scholarships",
+      "organizer": "McCall MacBain Scholarships",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://mccallmacbainscholars.org/apply/",
+      "source_id": "mccall-macbain-scholarships",
+      "source_name": "McCall MacBain Scholarships",
+      "description": "Eastern Time deadline for applicants in Canada and the United States, including Canadians abroad under the current rules.",
+      "age_band": "Eligible graduate-program applicants in Canada and the United States",
+      "subjects": [
+        "Interdisciplinary",
+        "Graduate Scholarship",
+        "Leadership",
+        "Interdisciplinary Study"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "graduate scholarship",
+        "leadership",
+        "interdisciplinary study"
+      ],
+      "opportunity_kind": "graduate scholarship",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "series_title": "McCall MacBain Scholars 2027",
+      "series_role": "parent",
+      "calendar_stage": "Canada/United States application closing",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:mccall-macbain-2027-canada-us-deadline",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Graduate Scholarship",
+        "Leadership",
+        "Interdisciplinary Study"
+      ],
+      "participation_unit": "individual applicant",
+      "access_route": "direct application with references",
+      "prize_form": "fully funded graduate scholarship and leadership program",
+      "application_url": "https://mccallmacbainscholars.org/apply/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "undergraduate",
+        "graduate"
+      ]
+    },
+    {
+      "id": "td-scholarships-community-leadership-2027-watch",
+      "identity_key": "f1394ba687afaaea97a7",
+      "date": "2026-11-01T00:00:00-04:00",
+      "title": "TD Scholarships for Community Leadership 2027 watch",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "TD Bank Group",
+      "organizer": "TD Bank Group",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://www.td.com/ca/en/personal-banking/solutions/student-banking/community-leadership-scholarship-for-canadians",
+      "source_id": "td-bank-group",
+      "source_name": "TD Bank Group",
+      "description": "The next Canadian community-leadership scholarship cycle is legitimate, but its exact 2027 deadline is not yet published. The displayed date is a monitoring marker, not a confirmed deadline or event date.",
+      "age_band": "Eligible Canadian secondary students",
+      "subjects": [
+        "Interdisciplinary",
+        "Scholarship",
+        "Community Leadership",
+        "Service"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "scholarship",
+        "community leadership",
+        "service"
+      ],
+      "opportunity_kind": "undergraduate scholarship",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 78,
+      "record_kind": "opportunity",
+      "date_precision": "estimated",
+      "time_precision": "unknown",
+      "deadline_confidence": "annual-watch-date-unannounced",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "recurrence_note": "Annual Canadian scholarship cycle.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "current-edition-unconfirmed",
+        "date-unconfirmed",
+        "time-unconfirmed"
+      ],
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:td-scholarships-community-leadership-2027-watch",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Scholarship",
+        "Community Leadership",
+        "Service"
+      ],
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary"
+      ]
+    },
+    {
+      "id": "shad-2027-program-watch",
+      "identity_key": "518c0d3ffb8acca1db10",
+      "date": "2026-09-01T00:00:00-04:00",
+      "title": "Shad 2027 program application watch",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Shad Canada",
+      "organizer": "Shad Canada",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://www.shad.ca/apply/",
+      "source_id": "shad-canada",
+      "source_name": "Shad Canada",
+      "description": "The 2027 application cycle for the Canadian STEAM and entrepreneurship program is not yet fully dated. The displayed date is a monitoring marker, not a confirmed deadline or event date.",
+      "age_band": "Eligible Canadian secondary students",
+      "subjects": [
+        "Interdisciplinary",
+        "STEAM",
+        "Entrepreneurship",
+        "Leadership",
+        "Summer Program"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "steam",
+        "entrepreneurship",
+        "leadership",
+        "summer program"
+      ],
+      "opportunity_kind": "summer enrichment program",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 78,
+      "record_kind": "opportunity",
+      "date_precision": "estimated",
+      "time_precision": "unknown",
+      "deadline_confidence": "annual-watch-date-unannounced",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "recurrence_note": "Annual summer program.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "current-edition-unconfirmed",
+        "date-unconfirmed",
+        "time-unconfirmed"
+      ],
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:shad-2027-program-watch",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "STEAM",
+        "Entrepreneurship",
+        "Leadership",
+        "Summer Program"
+      ],
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary"
+      ]
+    },
+    {
+      "id": "diamond-challenge-2027-opens",
+      "identity_key": "26dc83b95054f6ae55e9",
+      "date": "2026-09-16T00:00:00-04:00",
+      "title": "Diamond Challenge 2027 submissions open",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "University of Delaware Horn Entrepreneurship",
+      "organizer": "University of Delaware Horn Entrepreneurship",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://diamondchallenge.org/competition/",
+      "source_id": "university-of-delaware-horn-entrepreneurship",
+      "source_name": "University of Delaware Horn Entrepreneurship",
+      "description": "Opening of the 2027 global high-school entrepreneurship competition.",
+      "age_band": "Ages 14-18 worldwide",
+      "subjects": [
+        "Interdisciplinary",
+        "Entrepreneurship",
+        "Social Innovation",
+        "Business Innovation"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "entrepreneurship",
+        "social innovation",
+        "business innovation"
+      ],
+      "opportunity_kind": "youth entrepreneurship competition",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "diamond-challenge-summit-2027",
+      "series_title": "Diamond Challenge 2027",
+      "series_role": "child",
+      "calendar_stage": "submissions opening",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:diamond-challenge-2027-opens",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Entrepreneurship",
+        "Social Innovation",
+        "Business Innovation"
+      ],
+      "participation_unit": "team of 2-4 students",
+      "access_route": "team registration and submission",
+      "registration_url": "https://diamondchallenge.org/competition/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary"
+      ],
+      "age_range": {
+        "min": 14,
+        "max": 18
+      }
+    },
+    {
+      "id": "diamond-challenge-2027-deadline",
+      "identity_key": "653d528c7b087abe707c",
+      "date": "2027-01-14T17:00:00-05:00",
+      "title": "Diamond Challenge 2027 submission deadline",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "University of Delaware Horn Entrepreneurship",
+      "organizer": "University of Delaware Horn Entrepreneurship",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://diamondchallenge.org/competition/",
+      "source_id": "university-of-delaware-horn-entrepreneurship",
+      "source_name": "University of Delaware Horn Entrepreneurship",
+      "description": "Eastern Time deadline for business-innovation and social-innovation concepts.",
+      "age_band": "Ages 14-18 worldwide",
+      "subjects": [
+        "Interdisciplinary",
+        "Entrepreneurship",
+        "Social Innovation",
+        "Business Innovation"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "entrepreneurship",
+        "social innovation",
+        "business innovation"
+      ],
+      "opportunity_kind": "youth entrepreneurship competition",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "diamond-challenge-summit-2027",
+      "series_title": "Diamond Challenge 2027",
+      "series_role": "child",
+      "calendar_stage": "submission closing",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:diamond-challenge-2027-deadline",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Entrepreneurship",
+        "Social Innovation",
+        "Business Innovation"
+      ],
+      "participation_unit": "team of 2-4 students",
+      "access_route": "team submission",
+      "prize_form": "awards, mentoring, and summit participation",
+      "submission_url": "https://diamondchallenge.org/competition/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary"
+      ],
+      "age_range": {
+        "min": 14,
+        "max": 18
+      }
+    },
+    {
+      "id": "diamond-challenge-2027-advancing-teams",
+      "identity_key": "46838b85495b5da75fcd",
+      "date": "2027-02-10T00:00:00-05:00",
+      "title": "Diamond Challenge 2027 advancing teams announcement",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "University of Delaware Horn Entrepreneurship",
+      "organizer": "University of Delaware Horn Entrepreneurship",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://diamondchallenge.org/competition/",
+      "source_id": "university-of-delaware-horn-entrepreneurship",
+      "source_name": "University of Delaware Horn Entrepreneurship",
+      "description": "Scheduled announcement of teams advancing from the first evaluation stage.",
+      "age_band": "Ages 14-18 entrants",
+      "subjects": [
+        "Interdisciplinary",
+        "Entrepreneurship",
+        "Social Innovation",
+        "Business Innovation"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "entrepreneurship",
+        "social innovation",
+        "business innovation"
+      ],
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "diamond-challenge-summit-2027",
+      "series_title": "Diamond Challenge 2027",
+      "series_role": "child",
+      "calendar_stage": "advancing teams announcement",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:diamond-challenge-2027-advancing-teams",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Entrepreneurship",
+        "Social Innovation",
+        "Business Innovation"
+      ],
+      "participation_unit": "selected team",
+      "access_route": "selection from submissions",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary"
+      ],
+      "age_range": {
+        "min": 14,
+        "max": 18
+      }
+    },
+    {
+      "id": "diamond-challenge-2027-finalists",
+      "identity_key": "01bf165e4a995cf0618f",
+      "date": "2027-03-09T00:00:00-05:00",
+      "title": "Diamond Challenge 2027 finalist announcement",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "University of Delaware Horn Entrepreneurship",
+      "organizer": "University of Delaware Horn Entrepreneurship",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://diamondchallenge.org/competition/",
+      "source_id": "university-of-delaware-horn-entrepreneurship",
+      "source_name": "University of Delaware Horn Entrepreneurship",
+      "description": "Scheduled finalist announcement for the 2027 Summit.",
+      "age_band": "Ages 14-18 entrants",
+      "subjects": [
+        "Interdisciplinary",
+        "Entrepreneurship",
+        "Social Innovation",
+        "Business Innovation"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "entrepreneurship",
+        "social innovation",
+        "business innovation"
+      ],
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "diamond-challenge-summit-2027",
+      "series_title": "Diamond Challenge 2027",
+      "series_role": "child",
+      "calendar_stage": "finalist announcement",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:diamond-challenge-2027-finalists",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Entrepreneurship",
+        "Social Innovation",
+        "Business Innovation"
+      ],
+      "participation_unit": "selected team",
+      "access_route": "selection from advancing teams",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary"
+      ],
+      "age_range": {
+        "min": 14,
+        "max": 18
+      }
+    },
+    {
+      "id": "diamond-challenge-summit-2027",
+      "identity_key": "36efa57c278096637c84",
+      "date": "2027-04-29T00:00:00-04:00",
+      "end_date": "2027-04-30T23:59:00-04:00",
+      "title": "Diamond Challenge Summit 2027",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "University of Delaware Horn Entrepreneurship",
+      "organizer": "University of Delaware Horn Entrepreneurship",
+      "venue": "University of Delaware",
+      "source_url": "https://diamondchallenge.org/competition/",
+      "source_id": "university-of-delaware-horn-entrepreneurship",
+      "source_name": "University of Delaware Horn Entrepreneurship",
+      "description": "Final summit for selected global high-school entrepreneurship teams.",
+      "age_band": "Selected ages 14-18 teams",
+      "subjects": [
+        "Interdisciplinary",
+        "Entrepreneurship",
+        "Social Innovation",
+        "Business Innovation"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "entrepreneurship",
+        "social innovation",
+        "business innovation"
+      ],
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "series_title": "Diamond Challenge 2027",
+      "series_role": "parent",
+      "calendar_stage": "summit and final",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Newark",
+      "province": "",
+      "country": "United States",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:diamond-challenge-summit-2027",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Entrepreneurship",
+        "Social Innovation",
+        "Business Innovation"
+      ],
+      "participation_unit": "finalist team",
+      "access_route": "selection through competition",
+      "prize_form": "awards, mentoring, and recognition",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary"
+      ],
+      "age_range": {
+        "min": 14,
+        "max": 18
+      }
+    },
+    {
+      "id": "conrad-challenge-2026-27-activation-start",
+      "identity_key": "f88c199a6ccaeea9c719",
+      "date": "2026-08-27T00:00:00-04:00",
+      "title": "Conrad Challenge 2026–27 Activation Stage begins",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Conrad Foundation",
+      "organizer": "Conrad Foundation",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://www.conradchallenge.org/participate",
+      "source_id": "conrad-foundation",
+      "source_name": "Conrad Foundation",
+      "description": "Beginning of the Activation Stage for the 2026–27 innovation challenge.",
+      "age_band": "Eligible secondary-school students under current rules",
+      "subjects": [
+        "Interdisciplinary",
+        "Innovation",
+        "Entrepreneurship",
+        "STEM",
+        "Social Impact"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "innovation",
+        "entrepreneurship",
+        "stem",
+        "social impact"
+      ],
+      "opportunity_kind": "youth innovation competition",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "conrad-innovation-summit-2027",
+      "series_title": "Conrad Challenge 2026–27",
+      "series_role": "child",
+      "calendar_stage": "activation stage opening",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_inconsistency": "The official source contains stale 2025–26 sub-lines alongside the 2026–27 timeline.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:conrad-challenge-2026-27-activation-start",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Innovation",
+        "Entrepreneurship",
+        "STEM",
+        "Social Impact"
+      ],
+      "participation_unit": "student team",
+      "access_route": "team registration",
+      "registration_url": "https://www.conradchallenge.org/participate",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary"
+      ]
+    },
+    {
+      "id": "conrad-challenge-2026-27-activation-deadline",
+      "identity_key": "4a86cd97a51a348aab27",
+      "date": "2026-10-30T00:00:00-04:00",
+      "title": "Conrad Challenge 2026–27 Activation Stage deadline",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Conrad Foundation",
+      "organizer": "Conrad Foundation",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://www.conradchallenge.org/participate",
+      "source_id": "conrad-foundation",
+      "source_name": "Conrad Foundation",
+      "description": "End of the Activation Stage and transition into the Innovation Stage.",
+      "age_band": "Eligible secondary-school students under current rules",
+      "subjects": [
+        "Interdisciplinary",
+        "Innovation",
+        "Entrepreneurship",
+        "STEM",
+        "Social Impact"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "innovation",
+        "entrepreneurship",
+        "stem",
+        "social impact"
+      ],
+      "opportunity_kind": "youth innovation competition",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "conrad-innovation-summit-2027",
+      "series_title": "Conrad Challenge 2026–27",
+      "series_role": "child",
+      "calendar_stage": "activation stage closing",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_inconsistency": "The official source contains stale 2025–26 sub-lines alongside the 2026–27 timeline.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:conrad-challenge-2026-27-activation-deadline",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Innovation",
+        "Entrepreneurship",
+        "STEM",
+        "Social Impact"
+      ],
+      "participation_unit": "student team",
+      "access_route": "team registration and stage completion",
+      "registration_url": "https://www.conradchallenge.org/participate",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary"
+      ]
+    },
+    {
+      "id": "conrad-challenge-2027-innovation-stage-deadline",
+      "identity_key": "0cb60a5f41a711d2f594",
+      "date": "2027-01-08T00:00:00-05:00",
+      "title": "Conrad Challenge 2027 Innovation Stage deadline",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Conrad Foundation",
+      "organizer": "Conrad Foundation",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://www.conradchallenge.org/participate",
+      "source_id": "conrad-foundation",
+      "source_name": "Conrad Foundation",
+      "description": "Innovation Stage submission deadline; the current team fee is US$499.",
+      "age_band": "Eligible secondary-school students under current rules",
+      "subjects": [
+        "Interdisciplinary",
+        "Innovation",
+        "Entrepreneurship",
+        "STEM",
+        "Social Impact"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "innovation",
+        "entrepreneurship",
+        "stem",
+        "social impact"
+      ],
+      "opportunity_kind": "youth innovation competition",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "conrad-innovation-summit-2027",
+      "series_title": "Conrad Challenge 2026–27",
+      "series_role": "child",
+      "calendar_stage": "innovation stage closing",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_inconsistency": "The official source contains stale 2025–26 sub-lines alongside the 2026–27 timeline.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:conrad-challenge-2027-innovation-stage-deadline",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Innovation",
+        "Entrepreneurship",
+        "STEM",
+        "Social Impact"
+      ],
+      "participation_unit": "student team",
+      "access_route": "registered-team submission",
+      "prize_form": "summit participation, awards, and recognition",
+      "submission_url": "https://www.conradchallenge.org/participate",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary"
+      ]
+    },
+    {
+      "id": "conrad-challenge-2027-finalists",
+      "identity_key": "2785c2d33089bc5cd54d",
+      "date": "2027-02-26T19:00:00-06:00",
+      "title": "Conrad Challenge 2027 finalist announcement",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Conrad Foundation",
+      "organizer": "Conrad Foundation",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://www.conradchallenge.org/participate",
+      "source_id": "conrad-foundation",
+      "source_name": "Conrad Foundation",
+      "description": "Central Time announcement of finalist teams invited to the Innovation Summit.",
+      "age_band": "Eligible secondary-school teams",
+      "subjects": [
+        "Interdisciplinary",
+        "Innovation",
+        "Entrepreneurship",
+        "STEM",
+        "Social Impact"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "innovation",
+        "entrepreneurship",
+        "stem",
+        "social impact"
+      ],
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "conrad-innovation-summit-2027",
+      "series_title": "Conrad Challenge 2026–27",
+      "series_role": "child",
+      "calendar_stage": "finalist announcement",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_inconsistency": "The official source contains stale 2025–26 sub-lines alongside the 2026–27 timeline.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Chicago",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:conrad-challenge-2027-finalists",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Innovation",
+        "Entrepreneurship",
+        "STEM",
+        "Social Impact"
+      ],
+      "participation_unit": "selected team",
+      "access_route": "selection from Innovation Stage",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary"
+      ]
+    },
+    {
+      "id": "conrad-innovation-summit-2027",
+      "identity_key": "6918276c9d11b7f88864",
+      "date": "2027-04-21T00:00:00-05:00",
+      "end_date": "2027-04-24T23:59:00-05:00",
+      "title": "Conrad Innovation Summit 2027",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Conrad Foundation",
+      "organizer": "Conrad Foundation",
+      "venue": "Space Center Houston",
+      "source_url": "https://www.conradchallenge.org/participate",
+      "source_id": "conrad-foundation",
+      "source_name": "Conrad Foundation",
+      "description": "Finalist summit at Space Center Houston. Current participant pricing is US$499 per attendee by invitation.",
+      "age_band": "Invited finalist teams",
+      "subjects": [
+        "Interdisciplinary",
+        "Innovation",
+        "Entrepreneurship",
+        "STEM",
+        "Social Impact"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "innovation",
+        "entrepreneurship",
+        "stem",
+        "social impact"
+      ],
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "series_title": "Conrad Challenge 2026–27",
+      "series_role": "parent",
+      "calendar_stage": "summit and final",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_inconsistency": "The official source contains stale 2025–26 sub-lines alongside the 2026–27 timeline.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Houston",
+      "province": "",
+      "country": "United States",
+      "corridor_zone": "unknown",
+      "timezone": "America/Chicago",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:conrad-innovation-summit-2027",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Innovation",
+        "Entrepreneurship",
+        "STEM",
+        "Social Impact"
+      ],
+      "participation_unit": "finalist team",
+      "access_route": "invitation after selection",
+      "prize_form": "awards, recognition, and summit participation",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary"
+      ]
+    },
+    {
+      "id": "earth-prize-2027-deadline-watch",
+      "identity_key": "8e8f73a221d79fafbc37",
+      "date": "2027-01-01T00:00:00-05:00",
+      "title": "The Earth Prize 2027 deadline watch",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "The Earth Foundation",
+      "organizer": "The Earth Foundation",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://www.theearthprize.org/",
+      "source_id": "the-earth-foundation",
+      "source_name": "The Earth Foundation",
+      "description": "Registration for the 2027 global environmental-sustainability competition is open to ages 13–19, but the detailed official timeline still shows the prior cycle and no dependable 2027 deadline is yet published. The displayed date is a monitoring marker, not a confirmed deadline or event date.",
+      "age_band": "Ages 13-19 worldwide",
+      "subjects": [
+        "Interdisciplinary",
+        "Environmental Innovation",
+        "Sustainability",
+        "Youth Research"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "environmental innovation",
+        "sustainability",
+        "youth research"
+      ],
+      "opportunity_kind": "youth sustainability competition",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 78,
+      "record_kind": "opportunity",
+      "date_precision": "estimated",
+      "time_precision": "unknown",
+      "deadline_confidence": "annual-watch-date-unannounced",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_inconsistency": "The official site announces 2027 registration while its detailed timeline still describes the 2026 cycle.",
+      "recurrence_note": "Annual global sustainability competition.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "current-edition-unconfirmed",
+        "date-unconfirmed",
+        "time-unconfirmed"
+      ],
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:earth-prize-2027-deadline-watch",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Environmental Innovation",
+        "Sustainability",
+        "Youth Research"
+      ],
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary"
+      ],
+      "age_range": {
+        "min": 13,
+        "max": 19
+      }
+    },
+    {
+      "id": "technovation-student-ambassador-2026-27-deadline",
+      "identity_key": "a1fd8e3694320d94f3da",
+      "date": "2026-09-06T23:59:00-04:00",
+      "title": "Technovation Student Ambassador 2026–27 application deadline",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Technovation",
+      "organizer": "Technovation",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://technovationchallenge.org/get-involved/student-ambassadors/",
+      "source_id": "technovation",
+      "source_name": "Technovation",
+      "description": "Worldwide deadline for Technovation alumnae ages 13–18 who completed at least one project and can serve one to two hours weekly from October through May.",
+      "age_band": "Ages 13-18; Technovation alumnae worldwide",
+      "subjects": [
+        "Interdisciplinary",
+        "Technology",
+        "Leadership",
+        "Community Building",
+        "Youth Entrepreneurship"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "technology",
+        "leadership",
+        "community building",
+        "youth entrepreneurship"
+      ],
+      "opportunity_kind": "student leadership program",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "calendar_stage": "application closing",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:technovation-student-ambassador-2026-27-deadline",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Technology",
+        "Leadership",
+        "Community Building",
+        "Youth Entrepreneurship"
+      ],
+      "participation_unit": "individual applicant",
+      "access_route": "alumna application",
+      "institutional_restriction": "Applicant must have completed a Technovation project in a prior season.",
+      "application_url": "https://technovationchallenge.org/get-involved/student-ambassadors/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary"
+      ],
+      "age_range": {
+        "min": 13,
+        "max": 18
+      }
+    },
+    {
+      "id": "technovation-girls-2026-27-season-watch",
+      "identity_key": "708cd3052037214fa474",
+      "date": "2026-08-14T00:00:00-04:00",
+      "title": "Technovation Girls 2026–27 competition watch",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Technovation",
+      "organizer": "Technovation",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://technovationchallenge.org/competition/",
+      "source_id": "technovation",
+      "source_name": "Technovation",
+      "description": "The organizer is preparing the 2026–27 global technology-and-entrepreneurship season, but the public competition page still lists 2025–26 registration and submission dates. The displayed date is a monitoring marker, not a confirmed deadline or event date.",
+      "age_band": "Girls and eligible gender-diverse participants ages 8-18 worldwide",
+      "subjects": [
+        "Interdisciplinary",
+        "Technology",
+        "Entrepreneurship",
+        "Community Problem Solving",
+        "Youth Innovation"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "technology",
+        "entrepreneurship",
+        "community problem solving",
+        "youth innovation"
+      ],
+      "opportunity_kind": "global youth technology competition",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 78,
+      "record_kind": "opportunity",
+      "date_precision": "estimated",
+      "time_precision": "unknown",
+      "deadline_confidence": "annual-watch-date-unannounced",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_inconsistency": "The official competition page still displays the 2025–26 timeline while the organization advertises the coming 2026–27 season.",
+      "recurrence_note": "Annual global program.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "current-edition-unconfirmed",
+        "date-unconfirmed",
+        "time-unconfirmed"
+      ],
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:technovation-girls-2026-27-season-watch",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Technology",
+        "Entrepreneurship",
+        "Community Problem Solving",
+        "Youth Innovation"
+      ],
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "elementary",
+        "secondary"
+      ],
+      "age_range": {
+        "min": 8,
+        "max": 18
+      }
+    },
+    {
+      "id": "wharton-global-investment-competition-2026-27-registration",
+      "identity_key": "750defe5fa1f53c301ad",
+      "date": "2026-09-11T17:00:00-04:00",
+      "title": "Wharton Global High School Investment Competition 2026–27 registration deadline",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Wharton Global Youth Program",
+      "organizer": "Wharton Global Youth Program",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://globalyouth.wharton.upenn.edu/investment-competition/",
+      "source_id": "wharton-global-youth-program",
+      "source_name": "Wharton Global Youth Program",
+      "description": "Main registration-page deadline for secondary-school investment teams. An FAQ snippet gives 4 p.m. while the main registration page gives 5 p.m.; the conflict is preserved.",
+      "age_band": "Eligible secondary-school teams worldwide",
+      "subjects": [
+        "Interdisciplinary",
+        "Finance",
+        "Investment",
+        "Team Strategy",
+        "Applied Economics"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "finance",
+        "investment",
+        "team strategy",
+        "applied economics"
+      ],
+      "opportunity_kind": "high-school investment competition",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "calendar_stage": "registration closing",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_inconsistency": "Official surfaces conflict between 4:00 p.m. and 5:00 p.m. Eastern; the main registration page states 5:00 p.m.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:wharton-global-investment-competition-2026-27-registration",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Finance",
+        "Investment",
+        "Team Strategy",
+        "Applied Economics"
+      ],
+      "participation_unit": "school-based team",
+      "access_route": "adviser-led team registration",
+      "registration_url": "https://globalyouth.wharton.upenn.edu/investment-competition/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "secondary"
+      ]
+    },
+    {
+      "id": "canada-wide-science-fair-2027",
+      "identity_key": "6b9b0f24d1db38c38f86",
+      "date": "2027-05-29T00:00:00-04:00",
+      "end_date": "2027-06-05T23:59:00-04:00",
+      "title": "Canada-Wide Science Fair 2027",
+      "type": "festival",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Youth Science Canada",
+      "organizer": "Youth Science Canada",
+      "venue": "Hamilton venue",
+      "source_url": "https://youthscience.ca/science-fairs/canada-wide-science-fair/",
+      "source_id": "youth-science-canada",
+      "source_name": "Youth Science Canada",
+      "description": "National fair in Hamilton for students qualifying through regional science fairs.",
+      "age_band": "Grades 7-12 and CEGEP through regional qualification",
+      "subjects": [
+        "Interdisciplinary",
+        "Student Research",
+        "Science Fair",
+        "Innovation",
+        "Public Exhibition"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "student research",
+        "science fair",
+        "innovation",
+        "public exhibition"
+      ],
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "series_title": "Canada-Wide Science Fair 2027",
+      "series_role": "parent",
+      "calendar_stage": "fair run",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Hamilton",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:canada-wide-science-fair-2027",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Student Research",
+        "Science Fair",
+        "Innovation",
+        "Public Exhibition"
+      ],
+      "participation_unit": "qualified student or team",
+      "access_route": "regional fair qualification",
+      "prize_form": "awards, scholarships, and national recognition",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "exact_grades": [
+        "Grade 7",
+        "Grade 8",
+        "Grade 9",
+        "Grade 10",
+        "Grade 11",
+        "Grade 12"
+      ],
+      "education_levels": [
+        "secondary",
+        "CEGEP"
+      ],
+      "grade_min": 7,
+      "grade_max": 12
+    },
+    {
+      "id": "canada-wide-science-fair-2027-public-viewing-may30",
+      "identity_key": "812521729aefd0fad05e",
+      "date": "2027-05-30T00:00:00-04:00",
+      "title": "Canada-Wide Science Fair 2027 public viewing — May 30",
+      "type": "exhibition",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Youth Science Canada",
+      "organizer": "Youth Science Canada",
+      "venue": "Hamilton venue",
+      "source_url": "https://youthscience.ca/science-fairs/canada-wide-science-fair/",
+      "source_id": "youth-science-canada",
+      "source_name": "Youth Science Canada",
+      "description": "First listed public-viewing day for CWSF 2027.",
+      "age_band": "Public audience",
+      "subjects": [
+        "Interdisciplinary",
+        "Student Research",
+        "Science Fair",
+        "Public Exhibition"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "student research",
+        "science fair",
+        "public exhibition"
+      ],
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "canada-wide-science-fair-2027",
+      "series_title": "Canada-Wide Science Fair 2027",
+      "series_role": "child",
+      "calendar_stage": "public viewing",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Hamilton",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:canada-wide-science-fair-2027-public-viewing-may30",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Student Research",
+        "Science Fair",
+        "Public Exhibition"
+      ],
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "open"
+      ]
+    },
+    {
+      "id": "canada-wide-science-fair-2027-public-viewing-june",
+      "identity_key": "6dcc19ca69b335d90b60",
+      "date": "2027-06-03T00:00:00-04:00",
+      "end_date": "2027-06-04T23:59:00-04:00",
+      "title": "Canada-Wide Science Fair 2027 public viewing — June 3–4",
+      "type": "exhibition",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Youth Science Canada",
+      "organizer": "Youth Science Canada",
+      "venue": "Hamilton venue",
+      "source_url": "https://youthscience.ca/science-fairs/canada-wide-science-fair/",
+      "source_id": "youth-science-canada",
+      "source_name": "Youth Science Canada",
+      "description": "Additional listed public-viewing period for CWSF 2027.",
+      "age_band": "Public audience",
+      "subjects": [
+        "Interdisciplinary",
+        "Student Research",
+        "Science Fair",
+        "Public Exhibition"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "student research",
+        "science fair",
+        "public exhibition"
+      ],
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "canada-wide-science-fair-2027",
+      "series_title": "Canada-Wide Science Fair 2027",
+      "series_role": "child",
+      "calendar_stage": "public viewing",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Hamilton",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:canada-wide-science-fair-2027-public-viewing-june",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Student Research",
+        "Science Fair",
+        "Public Exhibition"
+      ],
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "open"
+      ]
+    },
+    {
+      "id": "ncur-2027-submissions-open",
+      "identity_key": "767625d5df9f22d81f41",
+      "date": "2026-09-09T00:00:00-04:00",
+      "title": "NCUR 2027 submissions open",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Council on Undergraduate Research",
+      "organizer": "Council on Undergraduate Research",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://www.cur.org/events-services/ncur/",
+      "source_id": "council-on-undergraduate-research",
+      "source_name": "Council on Undergraduate Research",
+      "description": "Opening of student presentation submissions for the 2027 National Conference on Undergraduate Research.",
+      "age_band": "Undergraduate researchers",
+      "subjects": [
+        "Interdisciplinary",
+        "Undergraduate Research",
+        "Research Communication",
+        "Academic Conference"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "undergraduate research",
+        "research communication",
+        "academic conference"
+      ],
+      "opportunity_kind": "undergraduate conference submission",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "ncur-2027-conference",
+      "series_title": "NCUR 2027",
+      "series_role": "child",
+      "calendar_stage": "submissions opening",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:ncur-2027-submissions-open",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Undergraduate Research",
+        "Research Communication",
+        "Academic Conference"
+      ],
+      "participation_unit": "individual or research team",
+      "access_route": "abstract submission",
+      "submission_url": "https://www.cur.org/events-services/ncur/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "undergraduate"
+      ]
+    },
+    {
+      "id": "ncur-2027-submission-deadline",
+      "identity_key": "c03062712b6ecc33ee13",
+      "date": "2026-12-04T00:00:00-05:00",
+      "title": "NCUR 2027 submission deadline",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Council on Undergraduate Research",
+      "organizer": "Council on Undergraduate Research",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://www.cur.org/events-services/ncur/",
+      "source_id": "council-on-undergraduate-research",
+      "source_name": "Council on Undergraduate Research",
+      "description": "Closing date for student presentation submissions to NCUR 2027.",
+      "age_band": "Undergraduate researchers",
+      "subjects": [
+        "Interdisciplinary",
+        "Undergraduate Research",
+        "Research Communication",
+        "Academic Conference"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "undergraduate research",
+        "research communication",
+        "academic conference"
+      ],
+      "opportunity_kind": "undergraduate conference submission",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "ncur-2027-conference",
+      "series_title": "NCUR 2027",
+      "series_role": "child",
+      "calendar_stage": "submission closing",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:ncur-2027-submission-deadline",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Undergraduate Research",
+        "Research Communication",
+        "Academic Conference"
+      ],
+      "participation_unit": "individual or research team",
+      "access_route": "abstract submission",
+      "submission_url": "https://www.cur.org/events-services/ncur/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "undergraduate"
+      ]
+    },
+    {
+      "id": "ncur-2027-decisions-and-registration",
+      "identity_key": "f887dfb01391a3653606",
+      "date": "2027-01-13T00:00:00-05:00",
+      "title": "NCUR 2027 decisions and registration open",
+      "type": "conference",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Council on Undergraduate Research",
+      "organizer": "Council on Undergraduate Research",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://www.cur.org/events-services/ncur/",
+      "source_id": "council-on-undergraduate-research",
+      "source_name": "Council on Undergraduate Research",
+      "description": "Scheduled notification and registration-opening stage for NCUR 2027.",
+      "age_band": "Submitting undergraduate researchers and advisers",
+      "subjects": [
+        "Interdisciplinary",
+        "Undergraduate Research",
+        "Research Communication",
+        "Academic Conference"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "undergraduate research",
+        "research communication",
+        "academic conference"
+      ],
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "ncur-2027-conference",
+      "series_title": "NCUR 2027",
+      "series_role": "child",
+      "calendar_stage": "decisions and registration opening",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:ncur-2027-decisions-and-registration",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Undergraduate Research",
+        "Research Communication",
+        "Academic Conference"
+      ],
+      "participation_unit": "accepted presenter or attendee",
+      "access_route": "selection or conference registration",
+      "registration_url": "https://www.cur.org/events-services/ncur/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "undergraduate",
+        "educator"
+      ]
+    },
+    {
+      "id": "ncur-2027-early-bird-registration",
+      "identity_key": "4a3941b6dc44aabd6274",
+      "date": "2027-01-29T00:00:00-05:00",
+      "title": "NCUR 2027 early-bird registration deadline",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Council on Undergraduate Research",
+      "organizer": "Council on Undergraduate Research",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://www.cur.org/events-services/ncur/",
+      "source_id": "council-on-undergraduate-research",
+      "source_name": "Council on Undergraduate Research",
+      "description": "Early-bird registration deadline for NCUR 2027.",
+      "age_band": "Accepted presenters, advisers, and attendees",
+      "subjects": [
+        "Interdisciplinary",
+        "Undergraduate Research",
+        "Research Communication",
+        "Academic Conference"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "undergraduate research",
+        "research communication",
+        "academic conference"
+      ],
+      "opportunity_kind": "conference registration",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "ncur-2027-conference",
+      "series_title": "NCUR 2027",
+      "series_role": "child",
+      "calendar_stage": "early-bird registration closing",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:ncur-2027-early-bird-registration",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Undergraduate Research",
+        "Research Communication",
+        "Academic Conference"
+      ],
+      "participation_unit": "individual registrant",
+      "access_route": "conference registration",
+      "registration_url": "https://www.cur.org/events-services/ncur/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "undergraduate",
+        "educator"
+      ]
+    },
+    {
+      "id": "ncur-2027-conference",
+      "identity_key": "b7d313fbfe45eee4e4b8",
+      "date": "2027-04-12T00:00:00-04:00",
+      "end_date": "2027-04-14T23:59:00-04:00",
+      "title": "National Conference on Undergraduate Research 2027",
+      "type": "conference",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Council on Undergraduate Research",
+      "organizer": "Council on Undergraduate Research",
+      "venue": "DeVos Place Convention Center",
+      "source_url": "https://www.cur.org/events-services/ncur/",
+      "source_id": "council-on-undergraduate-research",
+      "source_name": "Council on Undergraduate Research",
+      "description": "NCUR 2027 at DeVos Place in Grand Rapids, Michigan.",
+      "age_band": "Undergraduate researchers, advisers, and academic audience",
+      "subjects": [
+        "Interdisciplinary",
+        "Undergraduate Research",
+        "Research Communication",
+        "Academic Conference"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "undergraduate research",
+        "research communication",
+        "academic conference"
+      ],
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "series_title": "NCUR 2027",
+      "series_role": "parent",
+      "calendar_stage": "conference",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Grand Rapids",
+      "province": "",
+      "country": "United States",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:ncur-2027-conference",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Undergraduate Research",
+        "Research Communication",
+        "Academic Conference"
+      ],
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "undergraduate",
+        "educator",
+        "professional"
+      ]
+    },
+    {
+      "id": "connectur-2027-submissions-open",
+      "identity_key": "0d421b8e760e91d5e23d",
+      "date": "2026-11-04T00:00:00-05:00",
+      "title": "ConnectUR 2027 submissions open",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Council on Undergraduate Research",
+      "organizer": "Council on Undergraduate Research",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://www.cur.org/events-services/connectur/",
+      "source_id": "council-on-undergraduate-research",
+      "source_name": "Council on Undergraduate Research",
+      "description": "Opening of proposal submissions for ConnectUR 2027 professional-development programming.",
+      "age_band": "Faculty, staff, administrators, and undergraduate-research professionals",
+      "subjects": [
+        "Interdisciplinary",
+        "Undergraduate Research",
+        "Faculty Development",
+        "Academic Conference"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "undergraduate research",
+        "faculty development",
+        "academic conference"
+      ],
+      "opportunity_kind": "conference proposal",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "connectur-2027-onsite",
+      "series_title": "ConnectUR 2027",
+      "series_role": "child",
+      "calendar_stage": "submissions opening",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:connectur-2027-submissions-open",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Undergraduate Research",
+        "Faculty Development",
+        "Academic Conference"
+      ],
+      "participation_unit": "individual or group",
+      "access_route": "proposal submission",
+      "submission_url": "https://www.cur.org/events-services/connectur/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "educator",
+        "professional"
+      ]
+    },
+    {
+      "id": "connectur-2027-submission-deadline",
+      "identity_key": "3ea72a91a9abb36e120b",
+      "date": "2027-01-15T00:00:00-05:00",
+      "title": "ConnectUR 2027 submission deadline",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Council on Undergraduate Research",
+      "organizer": "Council on Undergraduate Research",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://www.cur.org/events-services/connectur/",
+      "source_id": "council-on-undergraduate-research",
+      "source_name": "Council on Undergraduate Research",
+      "description": "Proposal deadline for ConnectUR 2027.",
+      "age_band": "Faculty, staff, administrators, and undergraduate-research professionals",
+      "subjects": [
+        "Interdisciplinary",
+        "Undergraduate Research",
+        "Faculty Development",
+        "Academic Conference"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "undergraduate research",
+        "faculty development",
+        "academic conference"
+      ],
+      "opportunity_kind": "conference proposal",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "connectur-2027-onsite",
+      "series_title": "ConnectUR 2027",
+      "series_role": "child",
+      "calendar_stage": "submission closing",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "opportunity",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:connectur-2027-submission-deadline",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Undergraduate Research",
+        "Faculty Development",
+        "Academic Conference"
+      ],
+      "participation_unit": "individual or group",
+      "access_route": "proposal submission",
+      "submission_url": "https://www.cur.org/events-services/connectur/",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "educator",
+        "professional"
+      ]
+    },
+    {
+      "id": "connectur-2027-online",
+      "identity_key": "9e2e8ae5f24c9e77531a",
+      "date": "2027-06-22T00:00:00-04:00",
+      "end_date": "2027-06-23T23:59:00-04:00",
+      "title": "ConnectUR 2027 online conference",
+      "type": "conference",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Council on Undergraduate Research",
+      "organizer": "Council on Undergraduate Research",
+      "venue": "Online",
+      "source_url": "https://www.cur.org/events-services/connectur/",
+      "source_id": "council-on-undergraduate-research",
+      "source_name": "Council on Undergraduate Research",
+      "description": "Online component of ConnectUR 2027.",
+      "age_band": "Faculty, staff, administrators, and undergraduate-research professionals",
+      "subjects": [
+        "Interdisciplinary",
+        "Undergraduate Research",
+        "Faculty Development",
+        "Academic Conference"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "undergraduate research",
+        "faculty development",
+        "academic conference"
+      ],
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "parent_id": "connectur-2027-onsite",
+      "series_title": "ConnectUR 2027",
+      "series_role": "child",
+      "calendar_stage": "online conference",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:connectur-2027-online",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Undergraduate Research",
+        "Faculty Development",
+        "Academic Conference"
+      ],
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "educator",
+        "professional"
+      ]
+    },
+    {
+      "id": "connectur-2027-onsite",
+      "identity_key": "93c6895a92763ce2f756",
+      "date": "2027-06-28T00:00:00-04:00",
+      "end_date": "2027-06-30T23:59:00-04:00",
+      "title": "ConnectUR 2027 in Providence",
+      "type": "conference",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Council on Undergraduate Research",
+      "organizer": "Council on Undergraduate Research",
+      "venue": "Providence conference venue",
+      "source_url": "https://www.cur.org/events-services/connectur/",
+      "source_id": "council-on-undergraduate-research",
+      "source_name": "Council on Undergraduate Research",
+      "description": "Onsite ConnectUR 2027 in Providence, Rhode Island.",
+      "age_band": "Faculty, staff, administrators, and undergraduate-research professionals",
+      "subjects": [
+        "Interdisciplinary",
+        "Undergraduate Research",
+        "Faculty Development",
+        "Academic Conference"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "undergraduate research",
+        "faculty development",
+        "academic conference"
+      ],
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "series_title": "ConnectUR 2027",
+      "series_role": "parent",
+      "calendar_stage": "onsite conference",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Providence",
+      "province": "",
+      "country": "United States",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:connectur-2027-onsite",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Undergraduate Research",
+        "Faculty Development",
+        "Academic Conference"
+      ],
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "educator",
+        "professional"
+      ]
+    },
+    {
+      "id": "cur-grant-dialogues-2027",
+      "identity_key": "5150b22b3a75aa17aa69",
+      "date": "2027-02-09T10:00:00-05:00",
+      "end_date": "2027-02-10T16:00:00-05:00",
+      "title": "CUR Grant Dialogues 2027",
+      "type": "conference",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Council on Undergraduate Research",
+      "organizer": "Council on Undergraduate Research",
+      "venue": "Online",
+      "source_url": "https://www.cur.org/events-services/dialogues/",
+      "source_id": "council-on-undergraduate-research",
+      "source_name": "Council on Undergraduate Research",
+      "description": "Virtual professional-development event on grant planning and undergraduate research, scheduled 10 a.m.–4 p.m. Eastern each day.",
+      "age_band": "Faculty, staff, administrators, and research-development professionals",
+      "subjects": [
+        "Interdisciplinary",
+        "Research Funding",
+        "Faculty Development",
+        "Undergraduate Research"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "research funding",
+        "faculty development",
+        "undergraduate research"
+      ],
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "calendar_stage": "virtual event",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:cur-grant-dialogues-2027",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Research Funding",
+        "Faculty Development",
+        "Undergraduate Research"
+      ],
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "educator",
+        "professional"
+      ]
+    },
+    {
+      "id": "undergraduate-research-week-2027",
+      "identity_key": "b12c3dc09114894b3642",
+      "date": "2027-04-19T00:00:00-04:00",
+      "end_date": "2027-04-23T23:59:00-04:00",
+      "title": "Undergraduate Research Week 2027",
+      "type": "festival",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Council on Undergraduate Research",
+      "organizer": "Council on Undergraduate Research",
+      "venue": "Participating institutions and online",
+      "source_url": "https://www.cur.org/events-services/undergraduate-research-week/",
+      "source_id": "council-on-undergraduate-research",
+      "source_name": "Council on Undergraduate Research",
+      "description": "Annual week recognizing undergraduate research and creative activity across disciplines.",
+      "age_band": "Undergraduate researchers, institutions, educators, and public audiences",
+      "subjects": [
+        "Interdisciplinary",
+        "Undergraduate Research",
+        "Research Communication",
+        "Campus Events"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "undergraduate research",
+        "research communication",
+        "campus events"
+      ],
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "calendar_stage": "observance week",
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "unknown",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:undergraduate-research-week-2027",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Undergraduate Research",
+        "Research Communication",
+        "Campus Events"
+      ],
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "undergraduate",
+        "educator",
+        "professional",
+        "open"
+      ]
+    },
+    {
+      "id": "global-undergraduate-awards-2027-watch",
+      "identity_key": "ae6b4809a60ab7290814",
+      "date": "2027-05-01T00:00:00-04:00",
+      "title": "Global Undergraduate Awards 2027 watch",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "The Global Undergraduate Awards",
+      "organizer": "The Global Undergraduate Awards",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://undergraduateawards.com/",
+      "source_id": "the-global-undergraduate-awards",
+      "source_name": "The Global Undergraduate Awards",
+      "description": "The next worldwide undergraduate research and essay award cycle is legitimate, but its exact 2027 deadline is not yet published. The displayed date is a monitoring marker, not a confirmed deadline or event date.",
+      "age_band": "Eligible undergraduate students and recent graduates under current rules",
+      "subjects": [
+        "Interdisciplinary",
+        "Undergraduate Research",
+        "Academic Writing",
+        "International Awards"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "undergraduate research",
+        "academic writing",
+        "international awards"
+      ],
+      "opportunity_kind": "undergraduate academic award",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 78,
+      "record_kind": "opportunity",
+      "date_precision": "estimated",
+      "time_precision": "unknown",
+      "deadline_confidence": "annual-watch-date-unannounced",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "recurrence_note": "Annual global awards cycle.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "current-edition-unconfirmed",
+        "date-unconfirmed",
+        "time-unconfirmed"
+      ],
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:global-undergraduate-awards-2027-watch",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Undergraduate Research",
+        "Academic Writing",
+        "International Awards"
+      ],
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "undergraduate"
+      ]
+    },
+    {
+      "id": "sshrc-storytellers-challenge-2027-watch",
+      "identity_key": "902bd576c41ab3af0383",
+      "date": "2027-01-01T00:00:00-05:00",
+      "title": "SSHRC Storytellers Challenge 2027 watch",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Social Sciences and Humanities Research Council",
+      "organizer": "Social Sciences and Humanities Research Council",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://www.sshrc-crsh.gc.ca/society-societe/storytellers-jai_une_histoire_a_raconter/index-eng.aspx",
+      "source_id": "social-sciences-and-humanities-research-council",
+      "source_name": "Social Sciences and Humanities Research Council",
+      "description": "The next Canadian research-communication challenge is not yet officially dated. The displayed date is a monitoring marker, not a confirmed deadline or event date.",
+      "age_band": "Eligible Canadian postsecondary students",
+      "subjects": [
+        "Interdisciplinary",
+        "Research Communication",
+        "Social Sciences and Humanities",
+        "Public Scholarship"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "research communication",
+        "social sciences and humanities",
+        "public scholarship"
+      ],
+      "opportunity_kind": "student research-communication competition",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 78,
+      "record_kind": "opportunity",
+      "date_precision": "estimated",
+      "time_precision": "unknown",
+      "deadline_confidence": "annual-watch-date-unannounced",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "recurrence_note": "Annual bilingual Canadian challenge.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "current-edition-unconfirmed",
+        "date-unconfirmed",
+        "time-unconfirmed"
+      ],
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:sshrc-storytellers-challenge-2027-watch",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Research Communication",
+        "Social Sciences and Humanities",
+        "Public Scholarship"
+      ],
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "undergraduate",
+        "graduate"
+      ]
+    },
+    {
+      "id": "hult-prize-2027-watch",
+      "identity_key": "e8b4382ca0ee74956eaf",
+      "date": "2026-09-01T00:00:00-04:00",
+      "title": "Hult Prize 2027 cycle watch",
+      "type": "contest",
+      "secondary_types": [
+        "interdisciplinary"
+      ],
+      "speaker_or_director": "Hult Prize Foundation",
+      "organizer": "Hult Prize Foundation",
+      "venue": "Online / organizer-defined",
+      "source_url": "https://www.hultprize.org/",
+      "source_id": "hult-prize-foundation",
+      "source_name": "Hult Prize Foundation",
+      "description": "The next global student social-enterprise competition cycle is not yet fully dated on the official surface. The displayed date is a monitoring marker, not a confirmed deadline or event date.",
+      "age_band": "Eligible university and college students under current rules",
+      "subjects": [
+        "Interdisciplinary",
+        "Social Entrepreneurship",
+        "Business Innovation",
+        "Global Challenges"
+      ],
+      "topics": [
+        "interdisciplinary",
+        "social entrepreneurship",
+        "business innovation",
+        "global challenges"
+      ],
+      "opportunity_kind": "student social-enterprise competition",
+      "tags": [
+        "Set 6",
+        "interdisciplinary"
+      ],
+      "is_parent_festival": false,
+      "attendance_confirmed": true,
+      "confidence": 78,
+      "record_kind": "opportunity",
+      "date_precision": "estimated",
+      "time_precision": "unknown",
+      "deadline_confidence": "annual-watch-date-unannounced",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 6 on 2026-08-13.",
+      "recurrence_note": "Annual global competition.",
+      "source_quality": "official-or-institutional",
+      "source_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "source_language_method": "source-declared",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "",
+      "country": "Global",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "current-edition-unconfirmed",
+        "date-unconfirmed",
+        "time-unconfirmed"
+      ],
+      "missing_count": 0,
+      "research_id": "manual-polymythcal-interdisciplinary-set6-2026-08-13:hult-prize-2027-watch",
+      "research_source_ref": "6-Interdisciplinary-General",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "research_batch": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "research_set": "6-Interdisciplinary-General",
+      "interdisciplinary_domains": [
+        "Social Entrepreneurship",
+        "Business Innovation",
+        "Global Challenges"
+      ],
+      "participation_unit": "student team",
+      "_upsert_batches": [
+        "manual-polymythcal-interdisciplinary-set6-2026-08-13"
+      ],
+      "entry_family": "interdisciplinary",
+      "_src": "manual-polymythcal-interdisciplinary-set6-2026-08-13",
+      "education_levels": [
+        "college",
+        "undergraduate",
+        "graduate"
+      ]
+    }
+  ],
+  "exclusions": [
+    {
+      "title": "TD, Shad, Earth Prize, Global Undergraduate Awards, SSHRC Storytellers, and Hult dates not yet announced",
+      "reason": "Retained as qualified watches rather than assigned projected deadlines."
+    },
+    {
+      "title": "Technovation main 2026–27 deadline",
+      "reason": "The official competition surface still displays the prior cycle; only the confirmed Student Ambassador deadline is dated."
+    },
+    {
+      "title": "Narrow single-discipline awards",
+      "reason": "Left in their governing subject set unless the program genuinely crosses multiple fields or is broadly general."
+    },
+    {
+      "title": "Existing Set 5 interdisciplinary media opportunities",
+      "reason": "Cross-tagged without changing their stable IDs, original source identity, or provenance."
+    }
+  ],
+  "notes": [
+    "Broad scholarships, leadership programs, research dissemination, innovation, entrepreneurship, and public-impact challenges are indexed independently.",
+    "Application openings, deadlines, selection stages, summits, conferences, and award periods remain linked but distinct.",
+    "Exact grade, age, citizenship, nomination, institutional, and team requirements remain visible.",
+    "Unannounced annual cycles remain qualified watches; stale current-cycle text is not rolled forward as fact."
+  ]
+}

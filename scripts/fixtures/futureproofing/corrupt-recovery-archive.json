@@ -1,0 +1,4 @@
+{
+  "scenario": "A complete handoff archive is truncated after packaging.",
+  "expected": "verify-disaster-recovery.py rejects the archive before extraction"
+}

@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Seminar Schools//Polymythcal//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:3ae23a607263ec6b6616@seminarschools.com
+DTSTAMP:20260814T000800Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261003
+SUMMARY:2026 Distinguished Lecture Series in Statistical Sciences: Daniel
+ a Witten
+LOCATION:University of Toronto St. George Campus
+DESCRIPTION:Two-day distinguished lecture series by Daniela Witten\; each
+  announced lecture day is retained as its own child occurrence.
+URL:https://seminarschools.com/polymythseminars/events/utoronto-daniela-w
+ itten-distinguished-lecture-series-2026/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

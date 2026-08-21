@@ -18,6 +18,7 @@
 const fs = require('fs');
 const path = require('path');
 const {parseSeedWithAddenda} = require('./lib/parse-seed-with-addenda');
+const {generatedAt} = require('./lib/deterministic-timestamp');
 
 const argv = process.argv.slice(2);
 const dryRun = argv.includes('--dry-run');
@@ -148,7 +149,7 @@ console.log('\nConcordance index: ' + terms.length + ' terms, ' + totalRefs + ' 
 const OUTPUT_PATH = path.join(projectRoot, 'polymyth/concordance/concordance-index.json');
 
 const output = {
-  generated: new Date().toISOString(),
+  generated: generatedAt(),
   totalTerms: terms.length,
   totalReferences: totalRefs,
   totalEntries: totalEntries,

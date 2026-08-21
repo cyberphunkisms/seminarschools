@@ -19,6 +19,14 @@ const PRUNED_DIRECTORIES = new Set([
   '.mypy_cache', '.ruff_cache', '.tox', '.nox', 'htmlcov',
   '.public-build-staging', '.public-build-previous', '.public-build-lock',
 ]);
+// These two reports are intentionally self-referential release evidence. FP-02
+// validates their schemas and writers with versioned policy tokens, and the
+// final archive receipt binds their exact shipped bytes. All other durable
+// generated output remains inside this immediate fixed-point comparison.
+const SELF_UPDATING_GENERATED_EVIDENCE = new Set([
+  'scripts/reports/audit49-build-packaging-efficiency.json',
+  'scripts/reports/release-gate-report.json',
+]);
 
 function shouldSkipFile(name) {
   return name.endsWith('.pyc')
@@ -46,6 +54,7 @@ function snapshot(directory = ROOT) {
         if (!PRUNED_DIRECTORIES.has(entry.name)) walk(absolute);
       } else if (entry.isFile() && !shouldSkipFile(entry.name)) {
         const relative = path.relative(ROOT, absolute).replace(/\\/g, '/');
+        if (SELF_UPDATING_GENERATED_EVIDENCE.has(relative)) continue;
         rows.set(relative, String(fs.statSync(absolute).size) + ':' + digest(absolute));
       }
     }

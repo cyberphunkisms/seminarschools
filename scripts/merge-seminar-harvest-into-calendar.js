@@ -144,7 +144,10 @@ for (const incoming of preparedHarvest) {
 let added = 0, refreshed = 0, preservedManual = 0;
 for (const incomingRaw of preparedHarvest) {
   const incoming = { ...incomingRaw, _src: incomingRaw._src || 'seminar-harvest' };
-  let existingIndex = events.findIndex(existing => sameOccurrence(existing, incoming));
+  let existingIndex = incoming.id
+    ? events.findIndex(existing => String(existing.id || '') === String(incoming.id))
+    : -1;
+  if (existingIndex < 0) existingIndex = events.findIndex(existing => sameOccurrence(existing, incoming));
   let rescheduled = false;
   if (existingIndex === -1) {
     const aliasMatches = events
@@ -173,7 +176,7 @@ for (const incomingRaw of preparedHarvest) {
       if (incoming.is_parent_festival) old.is_parent_festival = true;
       preservedManual++;
     } else {
-      const previousDates = [...(old.previous_dates || [])];
+      const previousDates = [...(old.previous_dates || []), ...(incoming.previous_dates || [])];
       if (rescheduled && old.date && old.date !== incoming.date) previousDates.push(old.date);
       events[existingIndex] = {
         ...old,

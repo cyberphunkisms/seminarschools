@@ -13,19 +13,5 @@
       "tags": "array of topic tags"
     }
   },
-  "posts": [
-    {
-      "id": "marginalia-example-review",
-      "title": "Example review",
-      "date": "2026-05-06",
-      "sectionId": "marginalia",
-      "sectionLabel": "Marginalia",
-      "sectionUrl": "/marginalia/",
-      "postUrl": "/marginalia/example-review/",
-      "excerpt": "A stub. Replace this file with a lecture review. Or delete it.",
-      "tags": [
-        "lecture-review"
-      ]
-    }
-  ]
+  "posts": []
 }

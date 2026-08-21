@@ -1,8 +1,25 @@
 import { createHash } from "node:crypto";
+import { createRequire } from "node:module";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const checkout = resolve(import.meta.dirname, "..");
+const require = createRequire(import.meta.url);
+const {
+  assertDestination,
+  polymythCommonsDestination,
+} = require("./lib/external-destination-contracts.js");
+const {
+  assertCurrentDatasetVersion,
+  currentVersion,
+} = require("./lib/versioned-data-migrations.js");
+const {
+  assertGeometryVersionScheme,
+  geometryAssetVersion,
+} = require("./lib/geometry-asset-version.js");
+const geometryContracts = require("../data/geometry-route-contracts.json");
+assertGeometryVersionScheme(geometryContracts);
+const geometryVersion = geometryAssetVersion(checkout);
 const isManagedCheckout = existsSync(resolve(checkout, "app/globals.css"));
 const packagedInput = resolve(
   checkout,
@@ -464,7 +481,7 @@ const countsByTier = Object.fromEntries(
 );
 
 const payload = {
-  schemaVersion: "1.0.0",
+  schemaVersion: currentVersion("polymyth-commons"),
   release: "2026-07-28.g0.3",
   generated: "2026-07-28",
   title: "Polymyth Commons — Ostrom Book Backbone",
@@ -524,6 +541,7 @@ const payload = {
       "Add a new public-facing record when an official source establishes a qualifying relationship and the entity itself offers a commons, library, directory, repository, archive, portal, journal, collaboratory, preservation network, learning commons, civic information commons, or shared knowledge infrastructure. Keep generic news, individual content items, and unrelated departments as evidence endpoints rather than projects.",
   },
 };
+assertCurrentDatasetVersion("polymyth-commons", payload);
 
 const directoryProjects = projects.map((project) => ({
   id: project.id,
@@ -763,7 +781,16 @@ function visibleUrl(value) {
 }
 
 function statusLabel(value) {
-  if (!value || value === "STATUS_UNRESOLVED") return "Current review pending";
+  const labels = {
+    STATUS_UNRESOLVED: "Current status not yet reviewed",
+    BOOK_ONLY_HISTORICAL: "Historical project",
+    ACTIVE_AT_NEW_URL: "Active at a new website",
+    ACTIVE: "Active",
+    ARCHIVED_READ_ONLY: "Archived, read-only",
+    ABSORBED: "Continued elsewhere",
+  };
+  if (!value) return "Current status not yet reviewed";
+  if (labels[value]) return labels[value];
   const text = value
     .replace(/^STATUS_/, "")
     .replaceAll("_", " ")
@@ -771,8 +798,74 @@ function statusLabel(value) {
   return `${text.charAt(0).toUpperCase()}${text.slice(1)}`;
 }
 
+function scopeLabel(value) {
+  return (
+    {
+      "Commons Projects": "Commons project",
+      "Supporting Ecosystem": "Supporting organization or system",
+      "Concepts and Comparisons": "Example or comparison",
+    }[value] ?? value
+  );
+}
+
+function tierLabel(value) {
+  return (
+    {
+      "Core candidate": "Main directory record",
+      "Example candidate": "Example record",
+      "Support node": "Supporting record",
+      "Context / analogy": "Context or comparison",
+    }[value] ?? value
+  );
+}
+
+function relationLabel(value) {
+  return (
+    {
+      direct: "Direct subject",
+      enabler: "Supporting work",
+      analogy: "Comparison",
+      example: "Example",
+    }[value] ?? value
+  );
+}
+
+function confidenceLabel(value) {
+  return (
+    {
+      HIGH: "High confidence",
+      MEDIUM_HIGH: "Medium-high confidence",
+      MEDIUM: "Medium confidence",
+    }[value] ?? "Confidence not stated"
+  );
+}
+
+function evidenceLocationLabel(value) {
+  return (
+    {
+      "front matter": "listed in the front matter",
+      narrative: "described in the main text",
+      reference: "listed in the references",
+      note: "described in a note",
+    }[value] ?? value
+  );
+}
+
 function endpointPresentation(project) {
-  if (!project.verified || !project.currentCanonicalUrl) return null;
+  const destination = assertDestination(
+    polymythCommonsDestination(project),
+    `Polymyth Commons project ${project.id}`,
+  );
+  if (destination.status === "unavailable") return null;
+  if (!project.verified || !project.currentCanonicalUrl) {
+    return {
+          action: "Open website listed in the book ↗",
+          heading: "Website listed in the 2007 book",
+          signal: "Website listed in the book",
+          href: destination.href,
+          historical: true,
+        };
+  }
   if (
     project.currentStatusGroup === "ACTIVE" ||
     project.currentStatusGroup === "ACTIVE_AT_NEW_URL"
@@ -780,34 +873,39 @@ function endpointPresentation(project) {
     return {
       action: "Visit current site ↗",
       heading: "Current home",
-      signal: "Current home URL",
+      signal: "Current website",
+      href: destination.href,
     };
   }
   if (project.currentStatusGroup === "ABSORBED") {
     return {
       action: "Visit continuing service ↗",
       heading: "Continuing service",
-      signal: "Continuing-service URL",
+      signal: "Website for the continuing service",
+      href: destination.href,
     };
   }
   if (project.currentStatusGroup === "ARCHIVED_READ_ONLY") {
     return {
       action: "Open surviving archive ↗",
       heading: "Surviving archive",
-      signal: "Surviving archive URL",
+      signal: "Archive link",
+      href: destination.href,
     };
   }
   if (project.currentStatusGroup === "BOOK_ONLY_HISTORICAL") {
     return {
       action: "Open surviving documentation ↗",
       heading: "Surviving documentation",
-      signal: "Surviving-documentation URL",
+      signal: "Surviving documentation link",
+      href: destination.href,
     };
   }
   return {
     action: "Open reviewed destination ↗",
     heading: "Reviewed destination",
-    signal: "Reviewed destination URL",
+    signal: "Reviewed website",
+    href: destination.href,
   };
 }
 
@@ -830,12 +928,12 @@ function entityPage(project) {
     .join(" ")
     .match(/\b(archiv|preserv|repository|deposit|library)\b/i);
   const signals = [
-    ["Book entity and page evidence", true],
-    ["Book-printed pointer", Boolean(project.bookPrintedUrls.length)],
-    [endpoint?.signal ?? "Reviewed destination URL", Boolean(endpoint)],
-    ["Current-state review", Boolean(project.verified)],
-    ["Current operator or parent", Boolean(project.currentOperator)],
-    ["Current verification sources", Boolean(project.verificationSourceUrls.length)],
+    ["Book description and page reference", true],
+    ["Link printed in the book", Boolean(project.bookPrintedUrls.length)],
+    [endpoint?.signal ?? "Current website", Boolean(endpoint && !endpoint.historical)],
+    ["Present-day status last checked", Boolean(project.verified)],
+    ["Responsible organization", Boolean(project.currentOperator)],
+    ["Sources for present-day information", Boolean(project.verificationSourceUrls.length)],
   ];
 
   const categories = project.bookCategories
@@ -843,8 +941,12 @@ function entityPage(project) {
     .join("");
   const actions = endpoint
     ? `<a class="button primary" href="${htmlEscape(
-        externalHref(currentUrl),
-      )}" rel="noreferrer">${htmlEscape(endpoint.action)}</a>`
+        externalHref(endpoint.href),
+      )}" target="_blank" rel="noopener noreferrer">${htmlEscape(endpoint.action)}</a>${
+        endpoint.historical
+          ? '<span class="destination-note">Historical link from the source book; current status has not been reviewed.</span>'
+          : ''
+      }`
     : "";
   const currentState = project.verified
     ? `<p><strong>${htmlEscape(
@@ -856,21 +958,27 @@ function entityPage(project) {
       )}</p>${
         endpoint
           ? `<h3>${htmlEscape(endpoint.heading)}</h3><p><a href="${htmlEscape(
-              externalHref(currentUrl),
-            )}" rel="noreferrer">${htmlEscape(visibleUrl(currentUrl))} ↗</a></p>`
+              externalHref(endpoint.href),
+            )}" target="_blank" rel="noopener noreferrer">${htmlEscape(visibleUrl(endpoint.href))} ↗</a></p>`
           : ""
       }${
         project.currentOperator
-          ? `<h3>Operator or parent</h3><p>${htmlEscape(
+          ? `<h3>Responsible organization</h3><p>${htmlEscape(
               project.currentOperator,
             )}</p>`
           : ""
-      }<p class="source-note">Verification basis · ${htmlEscape(
-        project.confidence || "confidence not set",
-      )} · checked ${htmlEscape(project.verified)}</p>`
-    : `<p>Current status has not yet been verified. The historical book evidence remains available below.</p><a class="button small" href="/polymythlib/contribute/?record=${encodeURIComponent(
+      }<p class="source-note">Last checked ${htmlEscape(
+        project.verified,
+      )} · ${htmlEscape(confidenceLabel(project.confidence))}</p>`
+    : `<p>Current status has not yet been reviewed. The book description and citation remain available below.</p>${
+        endpoint
+          ? `<h3>${htmlEscape(endpoint.heading)}</h3><p><a href="${htmlEscape(
+              externalHref(endpoint.href),
+            )}" target="_blank" rel="noopener noreferrer">${htmlEscape(visibleUrl(endpoint.href))} ↗</a></p>`
+          : ''
+      }<a class="button small" href="/polymythlib/contribute/?record=${encodeURIComponent(
         project.id,
-      )}&amp;kind=status">Propose current evidence</a>`;
+      )}&amp;kind=status">Suggest an update</a>`;
   const mentionsHtml = project.mentions.length
     ? project.mentions
         .map(
@@ -881,20 +989,20 @@ function entityPage(project) {
               mention.sourceGroundedRole,
             )}</p><p class="source-note">Printed pages ${htmlEscape(
               mention.printedPages,
-            )} · ${htmlEscape(mention.relation)} · ${htmlEscape(
+            )} · ${htmlEscape(relationLabel(mention.relation))} · ${htmlEscape(
               mention.category,
-            )} · evidence in ${htmlEscape(
-              mention.evidenceLocation,
+            )} · ${htmlEscape(
+              evidenceLocationLabel(mention.evidenceLocation),
             )}</p></article>`,
         )
         .join("")
     : `<p>The consolidated project index records this entity at ${htmlEscape(
-        project.printedPageReferences,
-      )}.</p>`;
+      project.printedPageReferences,
+    )}.</p>`;
   const sourcesHtml = [
     `<li><a href="${htmlEscape(payload.source.bookUrl)}">${htmlEscape(
       payload.source.shortCitation,
-    )} ↗</a><span class="source-note">Generation-0 source · ${htmlEscape(
+    )} ↗</a><span class="source-note">Book source · ${htmlEscape(
       project.printedPageReferences,
     )}</span></li>`,
     ...project.bookPrintedUrls.map(
@@ -903,7 +1011,7 @@ function entityPage(project) {
           externalHref(url),
         )}" rel="noreferrer">${htmlEscape(
           visibleUrl(url),
-        )} ↗</a><span class="source-note">Exact book-printed pointer. Historical layer.</span></li>`,
+        )} ↗</a><span class="source-note">Link printed in the book.</span></li>`,
     ),
     ...project.verificationSourceUrls.map(
       (url) =>
@@ -911,7 +1019,7 @@ function entityPage(project) {
           externalHref(url),
         )}" rel="noreferrer">${htmlEscape(
           visibleUrl(url),
-        )} ↗</a><span class="source-note">Current verification source · checked ${htmlEscape(
+        )} ↗</a><span class="source-note">Source for present-day information · checked ${htmlEscape(
           project.verified,
         )}</span></li>`,
     ),
@@ -925,20 +1033,20 @@ function entityPage(project) {
             )}/">${htmlEscape(
               candidate.canonicalName,
             )}</a><span>${htmlEscape(candidate.id)} · ${htmlEscape(
-              candidate.scope,
+              scopeLabel(candidate.scope),
             )} · shared type ${htmlEscape(primaryCategory)}</span></li>`,
         )
         .join("")}</ul>`
-    : "<p>No related entries are recorded yet.</p>";
+    : "<p>No related records are listed yet.</p>";
   const signalHtml = signals
     .map(
       ([label, on]) =>
-        `<li class="signal ${on ? "on" : "off"}"><strong>${on ? "Recorded" : "Open field"}</strong><span>${htmlEscape(label)}</span></li>`,
+        `<li class="signal ${on ? "on" : "off"}"><strong>${on ? "Included" : "Still needed"}</strong><span>${htmlEscape(label)}</span></li>`,
     )
     .join("");
   const metadataDescription = `${project.canonicalName}: ${
     project.sourceGroundedRoles[0] ||
-    "a named record in the Polymyth Commons Ostrom book backbone."
+    "a project or organization named in the 2007 source book."
   }`;
 
   return `<!doctype html>
@@ -963,13 +1071,13 @@ function entityPage(project) {
   )}/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/css/polymyth-commons.css?v=20260728-g0-3">
-  <link rel="stylesheet" href="/css/alive.css?v=20260806-front-facing-geometry">
+  <link rel="stylesheet" href="/css/alive.css?v=${geometryVersion}">
   <link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
   <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.070" data-route-type="commons-record" data-geometry-role="relation return">
+<body data-geometry="indra-web" data-indra-intensity="0.110" data-route-type="commons-record" data-geometry-role="relation return" data-front-facing="general-audience">
   <a class="skip-link" href="#main-content">Skip to main content</a>
-  <header class="site-header"><div class="site-header-inner"><a class="site-brand" href="/polymythcommons/"><span class="brand-seal" aria-hidden="true"></span><span>Polymyth <i>Commons</i></span></a><nav class="primary-nav" aria-label="Polymyth Commons"><a href="/polymythlib/">Directory</a><a href="/polymythlib/collections/">Collections</a><a href="/polymythlib/book-backbone/">Book backbone</a><a href="/polymythlib/method/">Method</a><a href="/polymythlib/contribute/">Contribute</a></nav><a class="seminar-link" href="/">Seminar Schools ↗</a></div></header>
+  <header class="site-header"><div class="site-header-inner"><a class="site-brand" href="/polymythcommons/"><span class="brand-seal" aria-hidden="true"></span><span>Polymyth <i>Commons</i></span></a><nav class="primary-nav" aria-label="Polymyth Commons"><a href="/polymythlib/">Directory</a><a href="/polymythlib/collections/">Browse by topic</a><a href="/polymythlib/book-backbone/">Source book index</a><a href="/polymythlib/method/">How records are checked</a><a href="/polymythlib/contribute/">Suggest an update</a></nav><a class="seminar-link" href="/">Seminar Schools ↗</a></div></header>
   <main class="page entity-page" id="main-content">
     <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/polymythcommons/">Polymyth Commons</a><span>/</span><a href="/polymythlib/">Polymythlib</a><span>/</span><span aria-current="page">${htmlEscape(
       project.id,
@@ -977,12 +1085,12 @@ function entityPage(project) {
     <header class="entity-hero">
       <div><p class="record-id">${htmlEscape(
         project.id,
-      )} · ${htmlEscape(project.scope)}</p><h1>${htmlEscape(
+      )} · ${htmlEscape(scopeLabel(project.scope))}</p><h1>${htmlEscape(
         project.canonicalName,
       )}</h1><p class="entity-summary">${htmlEscape(
         project.sourceGroundedRoles[0] ||
-          "A named record in the Hess and Ostrom knowledge-commons backbone.",
-      )}</p><div class="badges">${categories}<span class="badge book">Book evidence</span>${
+          "A project or organization named in the 2007 source book.",
+      )}</p><div class="badges">${categories}<span class="badge book">Documented in the book</span>${
         project.verified
           ? `<span class="badge verified">Checked ${htmlEscape(
               project.verified,
@@ -995,64 +1103,62 @@ function entityPage(project) {
     </header>
     <div class="entity-grid">
       <div>
-        <section class="entity-section" id="at-a-glance"><h2>At a glance</h2><dl class="fact-grid">
-          <div class="fact"><dt>Directory scope</dt><dd>${htmlEscape(
-            project.scope,
-          )}</dd></div><div class="fact"><dt>Candidate tier</dt><dd>${htmlEscape(
-            project.candidateTier,
-          )}</dd></div><div class="fact"><dt>Role in the book</dt><dd>${htmlEscape(
-            project.bookRelations.join(", ") || "Named record",
-          )}</dd></div><div class="fact"><dt>Book portrayal</dt><dd>${htmlEscape(
+        <section class="entity-section" id="at-a-glance"><h2>About this project</h2><dl class="fact-grid">
+          <div class="fact"><dt>Directory status</dt><dd>${htmlEscape(
+            tierLabel(project.candidateTier),
+          )}</dd></div><div class="fact"><dt>How the book uses it</dt><dd>${htmlEscape(
+            project.bookRelations.map(relationLabel).join(", ") || "Named record",
+          )}</dd></div><div class="fact"><dt>Status in the book</dt><dd>${htmlEscape(
             project.bookPortrayal || "See chapter evidence",
-          )}</dd></div><div class="fact"><dt>Book evidence</dt><dd>${htmlEscape(
+          )}</dd></div><div class="fact"><dt>Book citation</dt><dd>${htmlEscape(
             project.printedPageReferences,
-          )}</dd></div><div class="fact"><dt>Current verification</dt><dd>${
+          )}</dd></div><div class="fact"><dt>Last checked</dt><dd>${
             project.verified
               ? `${htmlEscape(
                   statusLabel(project.currentStatusGroup),
-                )} · checked ${htmlEscape(project.verified)}`
-              : "Book evidence only · current review pending"
+                )} · ${htmlEscape(project.verified)}`
+              : "Current status not yet reviewed"
           }</dd></div>
         </dl></section>
-        <section class="entity-section" id="current-state"><h2>Current evidence state</h2>${currentState}</section>
-        <section class="entity-section" id="commons-anatomy"><h2>Commons anatomy</h2><h3>What kind of work is this?</h3><p>${htmlEscape(
+        <section class="entity-section" id="current-state"><h2>Current status</h2>${currentState}</section>
+        <section class="entity-section" id="commons-anatomy"><h2>What this record includes</h2><h3>Type of project</h3><p>${htmlEscape(
           project.bookCategories.join(", ") ||
             "The book names the project without a more specific normalized type.",
-        )}</p><h3>What did it provide?</h3><p>${htmlEscape(
+        )}</p><h3>Work described in the book</h3><p>${htmlEscape(
           project.sourceGroundedRoles.join(" ") ||
-            "The book evidence establishes the named record; its service description remains to be expanded.",
-        )}</p><h3>Governance and sustainability</h3><p>${
+            "The book names this project, but its services still need a fuller description.",
+        )}</p><h3>Responsible organization</h3><p>${
           project.currentOperator
             ? `${htmlEscape(
                 project.currentOperator,
-              )} is recorded as the current operator or parent.`
-            : "Current organization, funding, and governance details have not yet been verified."
-        }</p><h3>Preservation</h3><p>${
+              )}`
+            : "The responsible organization, funding, and governance still need review."
+        }</p><h3>Long-term access</h3><p>${
           preservationLanguage
-            ? "The book record contains archive, library, repository, or preservation language. No current preservation endpoint has been verified."
-            : "No current preservation information has been verified. Historical access links remain below."
+            ? "The book describes archive, library, repository, or preservation work. A present-day preservation link has not yet been confirmed."
+            : "Present-day preservation information has not yet been reviewed. Historical links remain below."
         }</p></section>
-        <section class="entity-section" id="book"><h2>As documented in the book</h2><p>This section presents source-grounded summaries with the book’s chapter and pagination. Present-day status appears in its own evidence layer.</p>${mentionsHtml}</section>
-        <section class="entity-section" id="sources"><h2>Sources and pointers</h2><ul class="source-list">${sourcesHtml}</ul></section>
-        <section class="entity-section" id="connections"><h2>Related by book type</h2><p>These entries share the book type <strong>${htmlEscape(
+        <section class="entity-section" id="book"><h2>Book source</h2><p>This section summarizes what the book says and gives its chapter and printed pages. Present-day updates appear separately above.</p>${mentionsHtml}</section>
+        <section class="entity-section" id="sources"><h2>Sources and links</h2><ul class="source-list">${sourcesHtml}</ul></section>
+        <section class="entity-section" id="connections"><h2>Related records</h2><p>These records share the book type <strong>${htmlEscape(
           primaryCategory || "unclassified",
-        )}</strong>. No direct relationship has been verified.</p>${relatedHtml}</section>
+        )}</strong>. This connection supports browsing. It does not show that the projects worked together.</p>${relatedHtml}</section>
       </div>
-      <aside class="record-aside"><section class="record-card"><h2>Record signals</h2><p>These describe Polymyth’s evidence and review coverage for this record.</p><ul class="signal-list">${signalHtml}</ul></section><section class="record-card"><h2>Record history</h2><ol class="timeline"><li><strong>2007 book layer</strong><span>Named at ${htmlEscape(
+      <aside class="record-aside"><section class="record-card"><h2>Included / Still needed</h2><p>What this page already documents and what still needs research.</p><ul class="signal-list">${signalHtml}</ul></section><section class="record-card"><h2>Updates</h2><ol class="timeline"><li><strong>2007 book</strong><span>Named at ${htmlEscape(
         project.printedPageReferences || "the cited pages",
-      )}.</span></li><li><strong>28 July 2026</strong><span>Book record published.</span></li>${
+      )}.</span></li><li><strong>28 July 2026</strong><span>Record added to the directory.</span></li>${
         project.verified
           ? `<li><strong>${htmlEscape(
               project.verified,
-            )}</strong><span>Current-state seed check recorded.</span></li>`
+            )}</strong><span>Present-day information last checked.</span></li>`
           : ""
       }</ol></section></aside>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-grid"><div><p class="footer-name">Polymyth Commons</p><p>A directory of libraries, commons projects, and the systems that help shared knowledge live.</p></div><nav aria-label="Commons sections"><a href="/polymythlib/">Polymythlib</a><a href="/polymythlib/book-backbone/">Book backbone</a><a href="/polymythlib/method/">Method and governance</a><a href="/polymythlib/contribute/">Suggest or correct a record</a></nav><nav aria-label="Seminar Schools collections"><a href="/teacherresources/">Teacher Resources ↗</a><a href="/polymythseminars/">Polymythcal ↗</a><a href="/polymyth/">polymorphousmythology ↗</a></nav></div><div class="footer-base"><span>Published 28 July 2026</span><span>Facts, verification, and curation remain separate.</span></div></footer>
+  <footer class="site-footer"><div class="footer-grid"><div><p class="footer-name">Polymyth Commons</p><p>A directory of libraries, commons projects, and the systems that help shared knowledge live.</p></div><nav aria-label="Commons sections"><a href="/polymythlib/">Polymythlib</a><a href="/polymythlib/book-backbone/">Source book index</a><a href="/polymythlib/method/">How records are checked</a><a href="/polymythlib/contribute/">Suggest or correct a record</a></nav><nav aria-label="Seminar Schools collections"><a href="/teacherresources/">Teacher Resources ↗</a><a href="/polymythseminars/">Polymythcal ↗</a><a href="/polymyth/">polymorphousmythology ↗</a></nav></div><div class="footer-base"><span>Published 28 July 2026</span><span>Book history and present-day updates are kept separate.</span></div></footer>
   <script src="/js/site-keyboard-enhancements.js?v=20260725-audit45" defer></script>
-  <script src="/js/mandala.js?v=20260806-front-facing-geometry" defer></script>
-  <script src="/js/indra.js?v=20260806-front-facing-geometry" defer></script>
+  <script src="/js/mandala.js?v=${geometryVersion}" defer></script>
+  <script src="/js/indra.js?v=${geometryVersion}" defer></script>
 </body>
 </html>
 `;

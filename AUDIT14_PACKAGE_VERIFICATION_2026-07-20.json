@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-28T21:45:00-04:00",
+  "generated_at": "2026-08-15T18:00:00-04:00",
   "audit": "Polymythcal Audit 14 completion verification",
   "checks": [
     {
       "name": "Every automated source has a crawl URL and every exception is explicit",
       "passed": true,
       "details": {
-        "sources": 422,
-        "crawlSources": 418,
+        "sources": 779,
+        "crawlSources": 775,
         "explicitExceptions": 4
       }
     },
@@ -81,26 +81,34 @@
       "details": {}
     },
     {
+      "name": "Canonical event inventory meets the verified floor",
+      "passed": true,
+      "details": {
+        "events": 2088,
+        "floor": 2088
+      }
+    },
+    {
       "name": "Canonical event data is internally complete",
       "passed": true,
       "details": {
-        "events": 833,
-        "declared": 833,
-        "count": 833
+        "events": 2088,
+        "declared": 2088,
+        "count": 2088
       }
     },
     {
       "name": "Every event has stable identity and lifecycle fields",
       "passed": true,
       "details": {
-        "events": 833
+        "events": 2088
       }
     },
     {
       "name": "Event IDs and identity keys are unique",
       "passed": true,
       "details": {
-        "events": 833
+        "events": 2088
       }
     },
     {
@@ -174,16 +182,39 @@
       }
     },
     {
-      "name": "833 stable event pages, generated redirects, and 12 explicit legacy ICS aliases are synchronized",
+      "name": "Canonical manifest exactly owns stable English event routes, redirects, and legacy ICS aliases",
       "passed": true,
       "details": {
-        "canonicalPages": 833,
-        "aliasPages": 857,
-        "expectedAliases": 857,
-        "explicitLegacyAliases": 12,
-        "icsCount": 845,
-        "events": 833,
+        "canonicalPages": 2088,
+        "aliasPages": 2144,
+        "expectedAliases": 2144,
+        "explicitLegacyAliases": 28,
+        "icsCount": 2116,
+        "events": 2088,
         "exactIcsSet": true,
+        "englishRouteSet": {
+          "exact": true,
+          "missing": [],
+          "unexpected": []
+        },
+        "publicEnglishRouteSet": {
+          "exact": true,
+          "missing": [],
+          "unexpected": []
+        },
+        "missingEnglishIndexes": [],
+        "missingPublicEnglishIndexes": [],
+        "icsSet": {
+          "exact": true,
+          "missing": [],
+          "unexpected": []
+        },
+        "publicIcsSet": {
+          "exact": true,
+          "missing": [],
+          "unexpected": []
+        },
+        "publicIcsMismatches": [],
         "legacyIcsMismatches": [],
         "aliasConflicts": [],
         "missingOrWrongAliases": []
@@ -193,11 +224,23 @@
       "name": "Audit 45 English/French event routes preserve organizer text and source-language boundaries",
       "passed": true,
       "details": {
-        "events": 833,
+        "events": 2088,
         "interfaceLocales": 2,
-        "eventRoutesPerLocale": 833,
-        "frenchLegacyAliases": 12,
+        "eventRoutesPerLocale": 2088,
+        "frenchLegacyAliases": 28,
         "exactFrenchRouteTree": true,
+        "frenchRouteSet": {
+          "exact": true,
+          "missing": [],
+          "unexpected": []
+        },
+        "publicFrenchRouteSet": {
+          "exact": true,
+          "missing": [],
+          "unexpected": []
+        },
+        "missingFrenchIndexes": [],
+        "missingPublicFrenchIndexes": [],
         "failures": []
       }
     },
@@ -253,10 +296,10 @@
       "details": {}
     }
   ],
-  "passed": 28,
+  "passed": 29,
   "failed": 0,
   "metrics": {
-    "registered_sources": 422,
+    "registered_sources": 779,
     "dedicated_adapter_sources": 167,
     "adapter_profile_counts": {
       "municipal": 4,
@@ -266,10 +309,10 @@
       "french-language": 1,
       "civic-action": 13
     },
-    "canonical_events": 833,
-    "canonical_event_pages": 833,
-    "legacy_redirect_aliases": 857,
-    "event_ics_files": 845,
+    "canonical_events": 2088,
+    "canonical_event_pages": 2088,
+    "legacy_redirect_aliases": 2144,
+    "event_ics_files": 2116,
     "focused_feed_pairs": 11,
     "browser_wcag_checks_passed": 42,
     "browser_wcag_checks_failed": 0,
