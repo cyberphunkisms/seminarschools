@@ -32,12 +32,23 @@ def validate_editable_masters(delivery_root: Path, policy: dict) -> tuple[list[s
     return failures, verified_count
 
 
-def validate_boundary(policy: dict, delivery_root: Path, public_root: Path | None = None) -> tuple[list[str], dict]:
+def validate_boundary(
+    policy: dict,
+    delivery_root: Path,
+    public_root: Path | None = None,
+    *,
+    site_only: bool = False,
+) -> tuple[list[str], dict]:
     failures: list[str] = []
     if policy.get("schema") != "seminar-schools-public-private-boundary-v1":
         failures.append("unsupported public/private boundary schema")
     delivery_root = delivery_root.resolve()
-    public_root = (public_root or delivery_root / str(policy.get("public_root") or "")).resolve()
+    default_public_root = (
+        delivery_root / "public"
+        if site_only
+        else delivery_root / str(policy.get("public_root") or "")
+    )
+    public_root = (public_root or default_public_root).resolve()
     try:
         public_root.relative_to(delivery_root)
     except ValueError:
@@ -85,30 +96,32 @@ def validate_boundary(policy: dict, delivery_root: Path, public_root: Path | Non
                     failures.append(f"secret-shaped content reached public deploy: {relative}")
                     break
 
-    for relative in policy.get("private_roots") or []:
-        private = delivery_root / relative
-        if not private.exists():
-            failures.append(f"declared private root is missing: {relative}")
-    for root_name in policy.get("complete_package_required_roots") or []:
-        if not (delivery_root / root_name).exists():
-            failures.append(f"complete-handoff root is missing: {root_name}")
-
-    editable_failures, editable_count = validate_editable_masters(delivery_root, policy)
-    failures.extend(editable_failures)
-
-    package_manifest_path = delivery_root / "PACKAGE_CONTENTS_SHA256.json"
+    editable_count = 0
     manifested_roots: set[str] = set()
-    if not package_manifest_path.is_file():
-        failures.append("complete package manifest is missing")
-    else:
-        package_manifest = json.loads(package_manifest_path.read_text(encoding="utf-8"))
-        for row in package_manifest.get("files") or []:
-            path = str(row.get("path") or "")
-            if path:
-                manifested_roots.add(path.split("/", 1)[0])
+    if not site_only:
+        for relative in policy.get("private_roots") or []:
+            private = delivery_root / relative
+            if not private.exists():
+                failures.append(f"declared private root is missing: {relative}")
         for root_name in policy.get("complete_package_required_roots") or []:
-            if root_name not in manifested_roots:
-                failures.append(f"complete package manifest omits required root: {root_name}")
+            if not (delivery_root / root_name).exists():
+                failures.append(f"complete-handoff root is missing: {root_name}")
+
+        editable_failures, editable_count = validate_editable_masters(delivery_root, policy)
+        failures.extend(editable_failures)
+
+        package_manifest_path = delivery_root / "PACKAGE_CONTENTS_SHA256.json"
+        if not package_manifest_path.is_file():
+            failures.append("complete package manifest is missing")
+        else:
+            package_manifest = json.loads(package_manifest_path.read_text(encoding="utf-8"))
+            for row in package_manifest.get("files") or []:
+                path = str(row.get("path") or "")
+                if path:
+                    manifested_roots.add(path.split("/", 1)[0])
+            for root_name in policy.get("complete_package_required_roots") or []:
+                if root_name not in manifested_roots:
+                    failures.append(f"complete package manifest omits required root: {root_name}")
 
     return failures, {
         "public_root": public_root.as_posix(),
@@ -123,9 +136,16 @@ def main() -> None:
     parser.add_argument("--policy", type=Path, default=DEFAULT_POLICY)
     parser.add_argument("--delivery-root", type=Path, default=DELIVERY_ROOT)
     parser.add_argument("--public-root", type=Path)
+    parser.add_argument("--site-only", action="store_true")
     args = parser.parse_args()
     policy = json.loads(args.policy.read_text(encoding="utf-8"))
-    failures, evidence = validate_boundary(policy, args.delivery_root, args.public_root)
+    root = SITE_ROOT if args.site_only else args.delivery_root
+    failures, evidence = validate_boundary(
+        policy,
+        root,
+        args.public_root,
+        site_only=args.site_only,
+    )
     if failures:
         print("PUBLIC/PRIVATE BOUNDARY FAILED")
         for failure in failures:
@@ -134,7 +154,11 @@ def main() -> None:
     print(
         "PUBLIC/PRIVATE BOUNDARY PASSED — "
         f"{evidence['public_files_scanned']} public files scanned; "
-        f"{evidence['editable_masters_verified']} editable masters retained only in the complete handoff."
+        + (
+            "repository-only deploy boundary verified without private handoff inputs."
+            if args.site_only
+            else f"{evidence['editable_masters_verified']} editable masters retained only in the complete handoff."
+        )
     )
 
 

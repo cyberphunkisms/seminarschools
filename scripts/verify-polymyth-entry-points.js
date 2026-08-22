@@ -5,7 +5,13 @@ const path = require('path');
 const crypto = require('crypto');
 const {spawnSync} = require('child_process');
 const ROOT = path.resolve(__dirname, '..');
-const coherenceOnly = process.argv.includes('--coherence-only');
+const siteOnly = process.argv.includes('--site-only');
+const coherenceOnly = process.argv.includes('--coherence-only') || siteOnly;
+const unknownArguments = process.argv.slice(2).filter(argument => !['--coherence-only', '--site-only'].includes(argument));
+if (unknownArguments.length) {
+  console.error('POLYMYTH ENTRY POINTS FAILED — unsupported argument(s): ' + unknownArguments.join(', '));
+  process.exit(1);
+}
 const rootPage = path.join(ROOT, 'polymyth', 'index.html');
 const publicPage = path.join(ROOT, 'public', 'polymyth', 'index.html');
 const petAsset = path.join(ROOT, 'polymyth', 'img', 'mephistodata-waving.png');
@@ -16,10 +22,15 @@ const coherencePage = path.join(ROOT, 'polymyth', 'coherence', 'index.html');
 const coherenceWorkbook = path.join(ROOT, 'polymyth', 'coherence', 'Polymyth_Coherence_Assessment_Instrument_V5.1.2.xlsx');
 const coherenceProtocol = path.join(ROOT, 'polymyth', 'coherence', 'Polymyth_Coherence_AI_Application_Protocol_V5.1.2.md');
 const coherenceSchema = path.join(ROOT, 'polymyth', 'coherence', 'Polymyth_Coherence_Assessment_Schema_V5.1.2.json');
+const publicCoherencePage = path.join(ROOT, 'public', 'polymyth', 'coherence', 'index.html');
+const publicCoherenceWorkbook = path.join(ROOT, 'public', 'polymyth', 'coherence', 'Polymyth_Coherence_Assessment_Instrument_V5.1.2.xlsx');
+const publicCoherenceProtocol = path.join(ROOT, 'public', 'polymyth', 'coherence', 'Polymyth_Coherence_AI_Application_Protocol_V5.1.2.md');
+const publicCoherenceSchema = path.join(ROOT, 'public', 'polymyth', 'coherence', 'Polymyth_Coherence_Assessment_Schema_V5.1.2.json');
 const editableCoherenceInstrument = path.join(ROOT, '..', 'EDITABLE_MASTERS', '07_POLYMYTH_COHERENCE', 'Polymyth_Coherence_Assessment_Instrument.xlsx');
 const editableCoherenceApplications = path.join(ROOT, '..', 'EDITABLE_MASTERS', '07_POLYMYTH_COHERENCE', 'Polymyth_Coherence_Worked_Applications.xlsx');
 const editableCoherenceReadme = path.join(ROOT, '..', 'EDITABLE_MASTERS', '07_POLYMYTH_COHERENCE', 'README.md');
 const coherenceAddendum = path.join(ROOT, 'polymyth', 'methodologylist', 'polymyth-coherence-routing-addendum.js');
+const publicCoherenceAddendum = path.join(ROOT, 'public', 'polymyth', 'methodologylist', 'polymyth-coherence-routing-addendum.js');
 const coherenceHash = '0624c76e0ae1351dcfe6a9d2cabf6e4e581820b63a0fc40e5ad755bbd1d93550';
 const required = [
   'href="methodologylist/"',
@@ -56,11 +67,26 @@ const petRequired = [
 function fail(msg){ console.error('POLYMYTH ENTRY POINTS FAILED — ' + msg); process.exit(1); }
 for (const file of [
   coherencePage, coherenceWorkbook, coherenceProtocol, coherenceSchema,
-  editableCoherenceInstrument, editableCoherenceApplications,
-  editableCoherenceReadme, coherenceAddendum,
+  coherenceAddendum,
+  ...(siteOnly
+    ? [publicCoherencePage, publicCoherenceWorkbook, publicCoherenceProtocol, publicCoherenceSchema, publicCoherenceAddendum]
+    : [editableCoherenceInstrument, editableCoherenceApplications, editableCoherenceReadme]),
   ...(!coherenceOnly ? [rootPage, publicPage, activation, hfActivation, petAsset, publicPetAsset] : []),
 ]) {
   if (!fs.existsSync(file)) fail('missing ' + path.relative(ROOT, file));
+}
+if (siteOnly) {
+  for (const [sourceFile, publicFile] of [
+    [coherencePage, publicCoherencePage],
+    [coherenceWorkbook, publicCoherenceWorkbook],
+    [coherenceProtocol, publicCoherenceProtocol],
+    [coherenceSchema, publicCoherenceSchema],
+    [coherenceAddendum, publicCoherenceAddendum],
+  ]) {
+    if (!fs.readFileSync(sourceFile).equals(fs.readFileSync(publicFile))) {
+      fail(`source/public Coherence asset differs: ${path.relative(ROOT, sourceFile)}`);
+    }
+  }
 }
 if (!coherenceOnly) {
   for (const file of [rootPage, publicPage]) {
@@ -80,7 +106,10 @@ if (coherenceHtml.includes('V5.1.1') || coherenceHtml.includes('Polymyth_Coheren
 function sha256(file) {
   return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 }
-for (const file of [coherenceWorkbook, editableCoherenceInstrument]) {
+const coherenceWorkbooks = siteOnly
+  ? [coherenceWorkbook, publicCoherenceWorkbook]
+  : [coherenceWorkbook, editableCoherenceInstrument];
+for (const file of coherenceWorkbooks) {
   if (sha256(file) !== coherenceHash) {
     fail(`${path.relative(ROOT, file)} is not the byte-exact blank canonical V5.1.2 workbook`);
   }
@@ -95,7 +124,7 @@ function findNamedFiles(directory, basename, found = []) {
   }
   return found;
 }
-const leakedApplications = findNamedFiles(ROOT, path.basename(editableCoherenceApplications));
+const leakedApplications = findNamedFiles(ROOT, 'Polymyth_Coherence_Worked_Applications.xlsx');
 if (leakedApplications.length) {
   fail(`worked applications workbook entered SITE_PACKAGE: ${leakedApplications.map(file => path.relative(ROOT, file)).join(', ')}`);
 }
@@ -206,16 +235,21 @@ if (!malformedErrors.some(error => error.includes('expected string|null'))
     || !malformedErrors.some(error => error.includes('unexpected answerKey'))) {
   fail(`operative JSON schema accepted a malformed case: ${malformedErrors.join('; ') || 'no errors'}`);
 }
-for (const obsolete of [
+const obsoleteWorkbooks = [
   path.join(ROOT, 'polymyth', 'coherence', 'Polymyth_Coherence_V5.1.1.xlsx'),
   path.join(ROOT, 'public', 'polymyth', 'coherence', 'Polymyth_Coherence_V5.1.1.xlsx'),
-  path.join(ROOT, '..', 'EDITABLE_MASTERS', '07_POLYMYTH_COHERENCE', 'Polymyth_Coherence.xlsx'),
-]) {
+];
+if (!siteOnly) {
+  obsoleteWorkbooks.push(path.join(ROOT, '..', 'EDITABLE_MASTERS', '07_POLYMYTH_COHERENCE', 'Polymyth_Coherence.xlsx'));
+}
+for (const obsolete of obsoleteWorkbooks) {
   if (fs.existsSync(obsolete)) fail(`obsolete Coherence workbook remains: ${path.relative(ROOT, obsolete)}`);
 }
 const workbookVerifier = path.join(__dirname, 'verify-polymyth-coherence-workbook.py');
 const pythonRunner = path.join(__dirname, 'run-python.js');
-const workbookResult = spawnSync(process.execPath, [pythonRunner, workbookVerifier], {
+const workbookArguments = [pythonRunner, workbookVerifier];
+if (siteOnly) workbookArguments.push('--site-only');
+const workbookResult = spawnSync(process.execPath, workbookArguments, {
   cwd: ROOT,
   stdio: 'inherit',
 });
@@ -233,6 +267,8 @@ if (!coherenceOnly) {
     fail('public activation file is stale');
   }
 }
-console.log(coherenceOnly
-  ? 'POLYMYTH COHERENCE ENTRY POINTS PASSED — blank V5.1.2 instrument/protocol, operative answer-free schema, and structurally locked editable applications verified without reading generated public mirrors.'
-  : 'POLYMYTH ENTRY POINTS PASSED — activation routes, pet share card, blank Polymyth Coherence V5.1.2 instrument/protocol, operative answer-free schema, structurally locked editable applications, synchronized assets, and activation file verified.');
+console.log(siteOnly
+  ? 'POLYMYTH COHERENCE ENTRY POINTS SITE-ONLY PASSED — source/public deploy parity, blank V5.1.2 instrument/protocol, operative answer-free schema, routing addendum, and no worked-applications leak verified without private release masters.'
+  : coherenceOnly
+    ? 'POLYMYTH COHERENCE ENTRY POINTS PASSED — blank V5.1.2 instrument/protocol, operative answer-free schema, and structurally locked editable applications verified without reading generated public mirrors.'
+    : 'POLYMYTH ENTRY POINTS PASSED — activation routes, pet share card, blank Polymyth Coherence V5.1.2 instrument/protocol, operative answer-free schema, structurally locked editable applications, synchronized assets, and activation file verified.');

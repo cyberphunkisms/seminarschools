@@ -78,6 +78,14 @@ jobs:
         with:
           node-version: "24.14.0"
           cache: npm
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.13"
+          cache: pip
+          cache-dependency-path: requirements-audit.lock
+      - name: Install audit dependencies
+        run: python -m pip install --disable-pip-version-check --require-hashes --requirement requirements-audit.lock
       - name: Generate public once
         run: npm run build:public-deploy
       - name: Reproduce legacy repository state
@@ -119,7 +127,7 @@ jobs:
       - name: Production build
         run: npm run build
       - name: Full repository verifier
-        run: npm run verify:all:built
+        run: npm run verify:repository:built
       - name: Verify current Audit 48 live-harvest evidence
         run: npm run verify:audit48-live-harvest:current
       - name: Audit 45 translation browser matrix

@@ -119,6 +119,8 @@ for (const [name, source] of [['deployer', deployer], ['source', sourcePackager]
 for (const token of [
   'require_release_build_lock(DELIVERY_ROOT)',
   '[npm, "run", "build"]',
+  '[npm, "run", "sync:editable-masters:locked"]',
+  'verify_netlify_repository_checkout(npm)',
   '[npm, "run", "verify:all:built"]',
   'verify_editable_masters(EDITABLE_ROOT)',
   'package-front-facing-mephistodata-release.py',
@@ -164,6 +166,7 @@ for (const token of [
   'prepare_audit_python_dependencies(',
   '[npm, "ci"]',
   '[npm, "run", "build"]',
+  '[npm, "run", "sync:editable-masters:locked"]',
   '[npm, "run", "verify:all:built"]',
   'verify_editable_masters(DELIVERY_ROOT / "EDITABLE_MASTERS")',
   'package-front-facing-mephistodata-release.py',
@@ -184,11 +187,13 @@ for (const token of [
   check(auditPythonDependencies.includes(token), `pinned Python audit dependency helper misses ${token}`);
 }
 check(
-  (predeployWorkflow.match(/cache-dependency-path: requirements-audit\.lock/g) || []).length === 2
-    && (predeployWorkflow.match(/--require-hashes --requirement requirements-audit\.lock/g) || []).length === 2,
-  'predeploy must install the hash-locked Python audit runtime in both jobs',
+  (predeployWorkflow.match(/cache-dependency-path: requirements-audit\.lock/g) || []).length === 3
+    && (predeployWorkflow.match(/--require-hashes --requirement requirements-audit\.lock/g) || []).length === 3,
+  'predeploy must install the hash-locked Python audit runtime in every build job',
 );
 const completeBuildIndex = completePackager.indexOf('run([npm, "run", "build"])');
+const completeSyncIndex = completePackager.indexOf('run([npm, "run", "sync:editable-masters:locked"])');
+const completeRepositoryIndex = completePackager.indexOf('verify_netlify_repository_checkout(npm)');
 const completeVerifyIndex = completePackager.indexOf('run([npm, "run", "verify:all:built"])');
 const completeEditableIndex = completePackager.lastIndexOf('\n    verify_editable_masters(EDITABLE_ROOT)');
 const completeArchiveIndex = completePackager.lastIndexOf('package-front-facing-mephistodata-release.py');
@@ -198,7 +203,9 @@ const completeReceiptIndex = completePackager.lastIndexOf('create-artifact-audit
 const completeReceiptVerifyIndex = completePackager.lastIndexOf('verify-artifact-audit-receipt.py');
 check(
   completeBuildIndex >= 0
-    && completeBuildIndex < completeVerifyIndex
+    && completeBuildIndex < completeSyncIndex
+    && completeSyncIndex < completeRepositoryIndex
+    && completeRepositoryIndex < completeVerifyIndex
     && completeVerifyIndex < completeEditableIndex
     && completeEditableIndex < completeArchiveIndex
     && completeArchiveIndex < completeCleanRoomIndex
@@ -297,13 +304,16 @@ for (const token of ['require_complete_validation_ranges', 'N7:N42', 'P7:P292'])
 }
 check(lock.version === '1.0.6' && lock.packages?.['']?.version === '1.0.6', 'package-lock version is not 1.0.6');
 for (const [name, command] of Object.entries({
-  'verify:all': 'node scripts/run-python.js scripts/run-with-build-lock.py -- node scripts/verify-all-runner.js',
-  'verify:all:built': 'node scripts/run-python.js scripts/run-with-build-lock.py -- node scripts/verify-all-runner.js --reuse-build',
+  'verify:all': 'node scripts/run-python.js scripts/run-with-build-lock.py --delivery-root .. -- node scripts/verify-all-runner.js',
+  'verify:all:built': 'node scripts/run-python.js scripts/run-with-build-lock.py --delivery-root .. -- node scripts/verify-all-runner.js --reuse-build',
+  'verify:repository': 'node scripts/run-python.js scripts/run-with-build-lock.py -- node scripts/verify-all-runner.js --site-only',
+  'verify:repository:built': 'node scripts/run-python.js scripts/run-with-build-lock.py -- node scripts/verify-all-runner.js --reuse-build --site-only',
   'verify:build-idempotence': 'node scripts/verify-build-idempotence.js',
-  'verify:all:serial': 'node scripts/run-python.js scripts/run-with-build-lock.py -- node scripts/verify-all-runner.js --concurrency=1',
-  'verify:release': 'node scripts/run-python.js scripts/run-with-build-lock.py -- node scripts/verify-all-runner.js',
+  'verify:all:serial': 'node scripts/run-python.js scripts/run-with-build-lock.py --delivery-root .. -- node scripts/verify-all-runner.js --concurrency=1',
+  'verify:release': 'node scripts/run-python.js scripts/run-with-build-lock.py --delivery-root .. -- node scripts/verify-all-runner.js',
   'test:futureproofing': 'npm run test:futureproofing:core-fixtures && npm run test:futureproofing:article-body && npm run test:futureproofing:gate-defects && npm run test:futureproofing:browser-tiers && npm run test:futureproofing:live-evidence && npm run test:futureproofing:source-anomalies && npm run test:futureproofing:external-destinations && npm run test:futureproofing:route-tombstones && npm run test:futureproofing:data-migrations',
-  'verify:futureproofing': 'node scripts/run-python.js scripts/run-with-build-lock.py -- node scripts/run-python.js scripts/verify-futureproofing-contract.py --run-source --report scripts/reports/futureproofing-gate-report.json',
+  'verify:futureproofing': 'node scripts/run-python.js scripts/run-with-build-lock.py --delivery-root .. -- node scripts/run-python.js scripts/verify-futureproofing-contract.py --run-source --report scripts/reports/futureproofing-gate-report.json',
+  'verify:futureproofing:site': 'node scripts/run-python.js scripts/run-with-build-lock.py -- node scripts/run-python.js scripts/verify-futureproofing-contract.py --run-source --site-only --report scripts/reports/futureproofing-gate-report.json',
   'verify:ml-dialectical-hardening': 'node scripts/verify-ml-dialectical-hardening.js',
   'verify:frozen-audit43': 'node scripts/verify-frozen-audit43.js',
   'build:audit45-language-model': 'node scripts/run-python.js scripts/apply-audit45-language-model.py',
@@ -345,7 +355,9 @@ for (const [name, command] of Object.entries({
   'verify:front-facing-boundary': 'node scripts/verify-front-facing-boundary.js',
   'update:release-asset-identity': 'node scripts/update-release-asset-identity.js',
   'verify:release-asset-identity': 'node scripts/verify-release-asset-identity.js',
-  'package:complete-current': 'node scripts/run-python.js scripts/run-with-build-lock.py -- node scripts/run-python.js scripts/package-complete-current.py',
+  'package:complete-current': 'node scripts/run-python.js scripts/run-with-build-lock.py --delivery-root .. -- node scripts/run-python.js scripts/package-complete-current.py',
+  'sync:editable-masters': 'node scripts/run-python.js scripts/run-with-build-lock.py --delivery-root .. -- npm run sync:editable-masters:locked',
+  'sync:editable-masters:locked': 'node scripts/run-python.js scripts/assert-build-lock.py && node scripts/run-python.js scripts/update-polymythcal-editable-master-set9-2026-08-13.py && node scripts/run-python.js scripts/update-polymythcal-editable-master-sets10-11-2026-08-14.py && node scripts/run-python.js scripts/update-polymythcal-editable-master-set12-2026-08-14.py && node scripts/run-python.js scripts/update-polymythcal-editable-master-set14-2026-08-15.py && node scripts/run-python.js scripts/update-polymythcal-editable-master-sets13-15-2026-08-15.py',
   'build:asset-report': 'node scripts/build-asset-weight-report.js',
   'verify:asset-weights': 'node scripts/verify-asset-weights.js',
   'verify:visible-geometry-browser': 'node scripts/verify-visible-geometry-browser.mjs',
@@ -416,7 +428,6 @@ const buildOrder = [
   'verify-public-deploy-parity.js',
   'verify-release-asset-identity.js',
   'verify-front-facing-boundary.js',
-  'verify-polymyth-coherence-workbook.py',
   'verify-polymyth-entry-points.js',
   'verify-visible-geometry.js',
   'verify-meaningful-geometry.js',
@@ -457,8 +468,9 @@ for (const gate of ['verify-geometry.js', 'verify-visible-geometry.js', 'verify-
 }
 for (const command of ['npm run test:futureproofing', 'npm run verify:futureproofing']) {
   const escaped = command.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const exactSuffix = command === 'npm run verify:futureproofing' ? '(?!:site)' : '';
   check(
-    (runner.match(new RegExp(escaped, 'g')) || []).length === 1,
+    (runner.match(new RegExp(escaped + exactSuffix, 'g')) || []).length === 1,
     `full release runner must execute ${command} exactly once`,
   );
 }
@@ -491,10 +503,9 @@ check(
   'release-gate evidence writer is not lock-asserting and atomic',
 );
 check(runner.includes('node scripts/run-python.js scripts/verify-polymyth-coherence-workbook.py'), 'full release runner lacks Coherence workbook verification');
-const reusedPreparationSection = runner.slice(
-  runner.indexOf('const reusedBuildPreparation = ['),
-  runner.indexOf('const sequential = ['),
-);
+const reusedPreparationStart = runner.indexOf('const reusedBuildPreparation = [');
+const reusedPreparationEnd = runner.indexOf('\n];', reusedPreparationStart) + 3;
+const reusedPreparationSection = runner.slice(reusedPreparationStart, reusedPreparationEnd);
 for (const command of [
   'node scripts/run-python.js scripts/verify-polymyth-coherence-workbook.py',
   'node scripts/verify-polymyth-entry-points.js',
@@ -568,7 +579,7 @@ check((runner.match(/node scripts\/verify-asset-weights\.js/g) || []).length ===
 check((build.match(/verify-front-facing-boundary\.js/g) || []).length === 1, 'canonical build must enforce the static front-facing boundary once after deploy parity');
 check(
   build.indexOf('verify-front-facing-boundary.js') > build.indexOf('verify-public-deploy-parity.js')
-    && build.indexOf('verify-front-facing-boundary.js') < build.indexOf('verify-polymyth-coherence-workbook.py'),
+    && build.indexOf('verify-front-facing-boundary.js') < build.indexOf('verify-polymyth-entry-points.js --site-only'),
   'canonical build must enforce the front-facing boundary immediately after public parity and before artifact checks',
 );
 check(
@@ -581,8 +592,9 @@ check(
   runner.includes('reusedBuildPreparation.filter(command => checks.includes(command))'),
   'reuse-build covered checks must be derived from the commands that actually run',
 );
-check((build.match(/verify-polymyth-coherence-workbook\.py/g) || []).length === 1, 'canonical build must verify the Coherence workbook once after deploy parity');
-check((build.match(/verify-polymyth-entry-points\.js/g) || []).length === 1, 'canonical build must verify Coherence entry points once after deploy parity');
+check(!build.includes('update-polymythcal-editable-master-'), 'canonical deploy build must not mutate private editable masters');
+check((build.match(/verify-polymyth-coherence-workbook\.py/g) || []).length === 0, 'canonical deploy build must delegate workbook checks through the site-only entry-point verifier');
+check((build.match(/node scripts\/verify-polymyth-entry-points\.js --site-only/g) || []).length === 1, 'canonical build must verify site-only Coherence entry points once after deploy parity');
 check(!build.includes('build-audit43-continuity-inventory.js'), 'canonical build mutates frozen Audit 43 inventory');
 
 for (const token of [

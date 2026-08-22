@@ -19,6 +19,7 @@ class BuildLockEntrypointTests(unittest.TestCase):
     def independent_environment() -> dict[str, str]:
         environment = dict(os.environ)
         environment.pop("SS_RELEASE_BUILD_LOCK_TOKEN", None)
+        environment.pop("SS_RELEASE_BUILD_LOCK_ROOT", None)
         return environment
 
     def test_unlocked_writer_fails_and_locked_writer_passes(self) -> None:
@@ -55,6 +56,105 @@ class BuildLockEntrypointTests(unittest.TestCase):
             self.assertEqual(locked.returncode, 0, locked.stderr)
             self.assertIn("RELEASE BUILD LOCK VERIFIED", locked.stdout)
             self.assertFalse((delivery / ".seminar-schools-build.lock").exists())
+
+    def test_plain_repository_wrapper_defaults_to_site_root(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            site = Path(temporary).resolve() / "repo"
+            copied_scripts = site / "scripts"
+            copied_scripts.mkdir(parents=True)
+            for filename in (
+                "build_lock.py",
+                "run-with-build-lock.py",
+                "assert-build-lock.py",
+            ):
+                shutil.copy2(SCRIPTS / filename, copied_scripts / filename)
+            plain = subprocess.run(
+                [
+                    sys.executable,
+                    str(copied_scripts / "run-with-build-lock.py"),
+                    "--",
+                    sys.executable,
+                    str(copied_scripts / "assert-build-lock.py"),
+                ],
+                cwd=site,
+                env=self.independent_environment(),
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(plain.returncode, 0, plain.stderr)
+            self.assertIn(f"owns {site}", plain.stdout)
+            self.assertFalse((site / ".seminar-schools-build.lock").exists())
+            self.assertTrue((site / ".seminar-schools-build.lease").is_file())
+
+    def test_nested_wrapper_inherits_outer_delivery_root(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            delivery = Path(temporary).resolve()
+            nested = subprocess.run(
+                [
+                    sys.executable,
+                    str(SCRIPTS / "run-with-build-lock.py"),
+                    "--delivery-root",
+                    str(delivery),
+                    "--",
+                    sys.executable,
+                    str(SCRIPTS / "run-with-build-lock.py"),
+                    "--",
+                    sys.executable,
+                    str(SCRIPTS / "assert-build-lock.py"),
+                ],
+                cwd=SCRIPTS.parent,
+                env=self.independent_environment(),
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(nested.returncode, 0, nested.stderr)
+            self.assertIn(f"owns {delivery}", nested.stdout)
+            self.assertFalse((delivery / ".seminar-schools-build.lock").exists())
+
+    def test_partial_inherited_environment_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            delivery = Path(temporary).resolve()
+            for only_name, only_value in (
+                ("SS_RELEASE_BUILD_LOCK_TOKEN", "orphan-token"),
+                ("SS_RELEASE_BUILD_LOCK_ROOT", str(delivery)),
+            ):
+                with self.subTest(only_name=only_name):
+                    environment = self.independent_environment()
+                    environment[only_name] = only_value
+                    result = subprocess.run(
+                        [sys.executable, str(SCRIPTS / "assert-build-lock.py")],
+                        cwd=SCRIPTS.parent,
+                        env=environment,
+                        capture_output=True,
+                        text=True,
+                    )
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertIn("must be set together", result.stderr)
+
+    def test_inherited_root_mismatch_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            delivery = Path(temporary).resolve()
+            different = delivery / "different"
+            different.mkdir()
+            mismatch = subprocess.run(
+                [
+                    sys.executable,
+                    str(SCRIPTS / "run-with-build-lock.py"),
+                    "--delivery-root",
+                    str(delivery),
+                    "--",
+                    sys.executable,
+                    str(SCRIPTS / "assert-build-lock.py"),
+                    "--delivery-root",
+                    str(different),
+                ],
+                cwd=SCRIPTS.parent,
+                env=self.independent_environment(),
+                capture_output=True,
+                text=True,
+            )
+            self.assertNotEqual(mismatch.returncode, 0)
+            self.assertIn("root does not match", mismatch.stderr)
 
     def test_outer_wrapper_holds_lease_for_entire_child_lifetime(self) -> None:
         node = shutil.which("node")

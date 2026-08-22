@@ -46,7 +46,13 @@ def patterns_overlap(left: str, right: str) -> bool:
     return False
 
 
-def validate_ownership(document: dict, delivery_root: Path, *, require_writers: bool = True) -> list[str]:
+def validate_ownership(
+    document: dict,
+    delivery_root: Path,
+    *,
+    require_writers: bool = True,
+    site_only: bool = False,
+) -> list[str]:
     failures: list[str] = []
     if document.get("schema") != "seminar-schools-canonical-ownership-map-v1":
         failures.append("unsupported canonical ownership schema")
@@ -63,8 +69,12 @@ def validate_ownership(document: dict, delivery_root: Path, *, require_writers: 
         writer = str(owner.get("writer") or "")
         if not writer:
             failures.append(f"{owner_id} has no writer")
-        elif require_writers and not (delivery_root / writer).is_file():
-            failures.append(f"{owner_id} writer does not exist: {writer}")
+        elif require_writers:
+            writer_path = delivery_root / writer
+            if site_only and writer.startswith("SITE_PACKAGE/"):
+                writer_path = SITE_ROOT / writer.removeprefix("SITE_PACKAGE/")
+            if not writer_path.is_file():
+                failures.append(f"{owner_id} writer does not exist: {writer}")
         outputs = owner.get("outputs")
         if not isinstance(outputs, list) or not outputs:
             failures.append(f"{owner_id} has no governed outputs")
@@ -104,9 +114,11 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--map", type=Path, default=DEFAULT_MAP)
     parser.add_argument("--delivery-root", type=Path, default=DELIVERY_ROOT)
+    parser.add_argument("--site-only", action="store_true")
     args = parser.parse_args()
     document = json.loads(args.map.read_text(encoding="utf-8"))
-    failures = validate_ownership(document, args.delivery_root.resolve())
+    root = SITE_ROOT if args.site_only else args.delivery_root.resolve()
+    failures = validate_ownership(document, root, site_only=args.site_only)
     if failures:
         print("CANONICAL OWNERSHIP MAP FAILED")
         for failure in failures:

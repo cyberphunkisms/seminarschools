@@ -3,10 +3,12 @@
 from __future__ import annotations
 
 import copy
-import fcntl
+from contextlib import nullcontext
 import json
 from pathlib import Path
 from urllib.parse import urlsplit
+
+from build_lock import inherited_release_build_root, require_release_build_lock
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,7 +20,6 @@ SRC = "manual-polymythcal-courses-multi-session-programs-set15-2026-08-15"
 SET = "15-Courses-and-Multi-Session-Programs"
 META_KEY = "polymythcal_courses_multi_session_programs_set15_update_2026_08_15"
 SOURCES_META_KEY = "polymythcal_courses_multi_session_programs_set15_2026_08_15"
-LOCK_PATH = Path("/tmp/polymythcal-set15-import-2026-08-15.lock")
 
 LOCKED_FIELDS = {
     "course_program_formats", "program_stage", "schedule_model", "session_count",
@@ -68,8 +69,10 @@ def validate_ledger(ledger: dict) -> None:
 
 
 def main() -> int:
-    with LOCK_PATH.open("w", encoding="utf-8") as lock:
-        fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+    require_release_build_lock(inherited_release_build_root(ROOT))
+    # The canonical cross-platform release lease already serializes this
+    # writer. Keep the block shape without a second POSIX-only /tmp lock.
+    with nullcontext():
         ledger = json.loads(LEDGER_PATH.read_text(encoding="utf-8"))
         if ledger != json.loads(RESEARCH_LEDGER_PATH.read_text(encoding="utf-8")):
             raise ValueError("Set 15 canonical and research ledgers differ")

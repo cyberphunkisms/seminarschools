@@ -184,7 +184,8 @@ for (const [name, command] of Object.entries({
   'build:public-deploy': 'node scripts/run-python.js scripts/run-with-build-lock.py -- npm run build:public-deploy:locked',
   'build:public-deploy:locked': 'node scripts/run-python.js scripts/assert-build-lock.py && node scripts/build-public-deploy.js',
   'verify:public-parity': 'node scripts/verify-public-deploy-parity.js',
-  'verify:all:built': 'node scripts/run-python.js scripts/run-with-build-lock.py -- node scripts/verify-all-runner.js --reuse-build',
+  'verify:all:built': 'node scripts/run-python.js scripts/run-with-build-lock.py --delivery-root .. -- node scripts/verify-all-runner.js --reuse-build',
+  'verify:repository:built': 'node scripts/run-python.js scripts/run-with-build-lock.py -- node scripts/verify-all-runner.js --reuse-build --site-only',
   'verify:build-idempotence': 'node scripts/verify-build-idempotence.js',
   'verify:ml-dialectical-hardening': 'node scripts/verify-ml-dialectical-hardening.js',
   'verify:frozen-audit43': 'node scripts/verify-frozen-audit43.js',
@@ -324,7 +325,7 @@ for (const token of [
   'fail-fast: true',
   'needs: clean-build',
   'npm run build',
-  'npm run verify:all:built',
+  'npm run verify:repository:built',
   'npm run verify:frozen-audit43',
   'npm run verify:audit45-translations',
   'npm run test:polymythcal-audit47',
@@ -365,7 +366,7 @@ const chromiumInstall = 'npx playwright install --with-deps chromium';
 check(
   (predeploy.match(/npx playwright install --with-deps chromium/g) || []).length === 1
     && predeploy.indexOf(chromiumInstall) > predeploy.indexOf('npm ci')
-    && predeploy.indexOf(chromiumInstall) < predeploy.indexOf('npm run verify:all:built'),
+    && predeploy.indexOf(chromiumInstall) < predeploy.indexOf('npm run verify:repository:built'),
   'Chromium must be installed exactly once before the full runner executes its browser geometry gate',
 );
 check(

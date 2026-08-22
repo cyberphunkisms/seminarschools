@@ -133,7 +133,8 @@ for(const marker of ['Civic, legal, and labour formats','Participation route','L
 for(const marker of ['civic_legal_labour_formats','public_input_status','publication_restriction','civic_evidence']) assert(browser.includes(marker),`Browser payload missing ${marker}`);
 
 const build=String(pkg.scripts?.['build:locked']||'');
-for(const marker of ['import-polymythcal-civic-political-legal-labour-set12-2026-08-14.py','normalize-polymythcal-manual-identities.py','normalize-polymythcal-evidence-model.py','node scripts/upsert-manual-calendar-events.js','update-polymythcal-editable-master-set12-2026-08-14.py','verify-polymythcal-civic-political-legal-labour-set12-2026-08-14.js']) assert(build.includes(marker),`build:locked missing ${marker}`);
+for(const marker of ['import-polymythcal-civic-political-legal-labour-set12-2026-08-14.py','normalize-polymythcal-manual-identities.py','normalize-polymythcal-evidence-model.py','node scripts/upsert-manual-calendar-events.js','verify-polymythcal-civic-political-legal-labour-set12-2026-08-14.js']) assert(build.includes(marker),`build:locked missing ${marker}`);
+assert(!build.includes('update-polymythcal-editable-master-'),'build:locked must not mutate private editable masters during a repository-only deploy');
 assert((build.match(/(?:^| && )node scripts\/upsert-manual-calendar-events\.js(?= && |$)/g)||[]).length===1,'build:locked must contain exactly one unfiltered manual-event upsert');
 assert(!/node scripts\/upsert-manual-calendar-events\.js\s+--/.test(build),'build:locked must not restore a filtered manual-event upsert');
 assert(pkg.scripts['import:polymythcal-civic-political-legal-labour-set12-2026-08-14'],'Missing Set 12 import alias');

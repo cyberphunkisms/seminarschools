@@ -13,6 +13,8 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import tomllib
+import venv
 
 from audit_python_dependencies import prepare_audit_python_dependencies
 from build_lock import require_release_build_lock
@@ -40,6 +42,10 @@ CORE_ACCESS_QUERY = (
     "Mephistodata Devil's Diary activation dispatch canonical locator evidence first "
     "Ask your favourite AI no planted conclusion BB no training"
 )
+EXPECTED_NETLIFY_COMMAND = (
+    "python3 -m pip install --disable-pip-version-check --no-input "
+    "--require-hashes --requirement requirements-audit.lock && npm run build"
+)
 
 
 def sha256(path: Path) -> str:
@@ -52,6 +58,80 @@ def sha256(path: Path) -> str:
 
 def run(command: list[str]) -> None:
     subprocess.run(command, cwd=SITE_ROOT, check=True)
+
+
+def tree_sha256(root: Path) -> str:
+    digest = hashlib.sha256()
+    for target in sorted(path for path in root.rglob("*") if path.is_file()):
+        relative = target.relative_to(root).as_posix().encode("utf-8")
+        digest.update(len(relative).to_bytes(4, "big"))
+        digest.update(relative)
+        digest.update(target.read_bytes())
+    return digest.hexdigest()
+
+
+def verify_netlify_repository_checkout(npm: str) -> None:
+    """Build exactly the Git/Netlify topology, without handoff siblings.
+
+    The complete-archive clean room intentionally contains EDITABLE_MASTERS;
+    this separate gate starts from SITE_PACKAGE source only, removes ignored
+    generated public output, installs the pinned runtimes, and builds twice in
+    an otherwise empty parent. It catches parent-path dependencies and
+    non-idempotent deploy output before the final ZIP can be issued.
+    """
+    configured = tomllib.loads((SITE_ROOT / "netlify.toml").read_text(encoding="utf-8"))
+    if configured.get("build", {}).get("command") != EXPECTED_NETLIFY_COMMAND:
+        raise SystemExit("Netlify repository gate is not bound to the configured build command.")
+
+    with tempfile.TemporaryDirectory(prefix="ss-netlify-repository-checkout-") as temporary:
+        audit_root = Path(temporary)
+        repository = audit_root / "repo"
+        environment_root = audit_root / "venv"
+        copy_clean_source(SITE_ROOT, repository)
+        shutil.rmtree(repository / "public", ignore_errors=True)
+        for name in (".seminar-schools-build.lock", ".seminar-schools-build.lease"):
+            target = repository / name
+            if target.is_dir():
+                shutil.rmtree(target)
+            else:
+                target.unlink(missing_ok=True)
+
+        venv.EnvBuilder(with_pip=True, clear=True).create(environment_root)
+        python = environment_root / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+        environment = os.environ.copy()
+        environment.pop("SS_RELEASE_BUILD_LOCK_TOKEN", None)
+        environment.pop("SS_RELEASE_BUILD_LOCK_ROOT", None)
+        environment["PATH"] = str(python.parent) + os.pathsep + environment.get("PATH", "")
+        environment["PYTHON_BIN"] = str(python)
+        environment["NETLIFY"] = "true"
+        environment["CI"] = "true"
+        environment["NPM_CONFIG_CACHE"] = str(audit_root / "npm-cache")
+
+        subprocess.run([npm, "ci", "--no-audit", "--no-fund"], cwd=repository, env=environment, check=True)
+        parent_entries = {path.name for path in audit_root.iterdir()}
+        public_hashes: list[str] = []
+        pip_command = [
+            str(python), "-m", "pip", "install", "--disable-pip-version-check",
+            "--no-input", "--require-hashes", "--requirement", "requirements-audit.lock",
+        ]
+        for _ in range(2):
+            subprocess.run(pip_command, cwd=repository, env=environment, check=True)
+            subprocess.run([npm, "run", "build"], cwd=repository, env=environment, check=True)
+            public_hashes.append(tree_sha256(repository / "public"))
+
+        if public_hashes[0] != public_hashes[1]:
+            raise SystemExit("Netlify repository build is not a byte-exact fixed point.")
+        if {path.name for path in audit_root.iterdir()} != parent_entries:
+            raise SystemExit("Netlify repository build wrote outside its repository root.")
+        for relative in ("index.html", "_headers", "_redirects", "site-release.json"):
+            if not (repository / "public" / relative).is_file():
+                raise SystemExit(f"Netlify repository build omitted public/{relative}.")
+        if (audit_root / "EDITABLE_MASTERS").exists():
+            raise SystemExit("Netlify repository build manufactured or required private masters.")
+        print(
+            "NETLIFY REPOSITORY CHECKOUT PASSED — two exact isolated builds, "
+            f"public tree {public_hashes[-1]}, unchanged parent boundary."
+        )
 
 
 def main() -> None:
@@ -97,6 +177,11 @@ def main() -> None:
     run([npm, "run", "build:ai-access-pack", "--", "--query", CORE_ACCESS_QUERY])
     run([npm, "run", "verify:ai-access-pack"])
     run([npm, "run", "build"])
+    # Private editable masters are complete-handoff artifacts, never inputs to
+    # the public Git/Netlify build. Refresh them only while the explicit outer
+    # delivery-root lock is held, after canonical site data has been rebuilt.
+    run([npm, "run", "sync:editable-masters:locked"])
+    verify_netlify_repository_checkout(npm)
     # The clean-room verifier owns these fixed values.  Use the same values for
     # the primary gate so its packaged release report is reproducible byte for
     # byte instead of recording a caller-dependent timeout or concurrency.

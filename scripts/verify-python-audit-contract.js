@@ -134,7 +134,7 @@ check(
 );
 
 const workflow = read('.github/workflows/predeploy.yml');
-const portableVerification = 'npm run verify:all:built';
+const portableVerification = 'npm run verify:repository:built';
 const lockedInstall = 'npm ci --no-audit --no-fund';
 check(
   workflow.includes('npm run verify:audit48-calendar-clients'),
@@ -142,9 +142,9 @@ check(
 );
 check(workflow.includes(lockedInstall), `predeploy omits ${lockedInstall}`);
 check(
-  (workflow.match(/cache-dependency-path: requirements-audit\.lock/g) || []).length === 2
-    && (workflow.match(/--require-hashes --requirement requirements-audit\.lock/g) || []).length === 2,
-  'predeploy does not use the complete hash-locked Python audit runtime in both jobs',
+  (workflow.match(/cache-dependency-path: requirements-audit\.lock/g) || []).length === 3
+    && (workflow.match(/--require-hashes --requirement requirements-audit\.lock/g) || []).length === 3,
+  'predeploy does not use the complete hash-locked Python audit runtime in all three jobs',
 );
 check(
   workflow.indexOf(lockedInstall) < workflow.indexOf(portableVerification),

@@ -6,16 +6,19 @@ import argparse
 from pathlib import Path
 import subprocess
 
-from build_lock import ReleaseBuildLock
+from build_lock import ReleaseBuildLock, inherited_release_build_root
 
 
 SITE_ROOT = Path(__file__).resolve().parents[1]
-DELIVERY_ROOT = SITE_ROOT.parent
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--delivery-root", type=Path, default=DELIVERY_ROOT)
+    parser.add_argument(
+        "--delivery-root",
+        type=Path,
+        default=inherited_release_build_root(SITE_ROOT),
+    )
     parser.add_argument("command", nargs=argparse.REMAINDER)
     args = parser.parse_args()
     command = list(args.command)

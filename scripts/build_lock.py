@@ -16,6 +16,43 @@ LOCK_DIRECTORY_NAME = ".seminar-schools-build.lock"
 OWNER_FILE_NAME = "owner.json"
 LEASE_FILE_NAME = ".seminar-schools-build.lease"
 INHERITED_TOKEN_ENV = "SS_RELEASE_BUILD_LOCK_TOKEN"
+INHERITED_ROOT_ENV = "SS_RELEASE_BUILD_LOCK_ROOT"
+
+
+def _inherited_lock_environment() -> tuple[str, Path] | None:
+    """Return the complete inherited-lock identity, rejecting unsafe state.
+
+    The token alone is not enough to identify a lock: nested repository builds
+    also need to know which delivery root owns its advisory lease.  Requiring a
+    canonical absolute root prevents an inherited token from being silently
+    reinterpreted against a different checkout or working directory.
+    """
+    token = os.environ.get(INHERITED_TOKEN_ENV)
+    root_value = os.environ.get(INHERITED_ROOT_ENV)
+    if (token is None) != (root_value is None):
+        raise RuntimeError(
+            "inherited release-build lock environment is incomplete; "
+            f"{INHERITED_TOKEN_ENV} and {INHERITED_ROOT_ENV} must be set together"
+        )
+    if token is None:
+        return None
+    if not token or not root_value:
+        raise RuntimeError("inherited release-build lock token and root must be non-empty")
+    inherited_root = Path(root_value)
+    resolved_root = inherited_root.resolve()
+    if not inherited_root.is_absolute() or inherited_root != resolved_root:
+        raise RuntimeError(
+            f"{INHERITED_ROOT_ENV} must be a canonical absolute path"
+        )
+    return token, resolved_root
+
+
+def inherited_release_build_root(default: Path) -> Path:
+    """Use an outer lock root when nested, otherwise the caller's safe default."""
+    inherited = _inherited_lock_environment()
+    if inherited is None:
+        return Path(default).resolve()
+    return inherited[1]
 
 
 def advisory_lease_backend() -> str:
@@ -88,12 +125,19 @@ def release_build_lease_is_held(delivery_root: Path) -> bool:
 
 def require_release_build_lock(delivery_root: Path) -> dict:
     """Return diagnostics only when the inherited token has a live OS lease."""
-    token = os.environ.get(INHERITED_TOKEN_ENV)
-    if not token:
+    inherited = _inherited_lock_environment()
+    if inherited is None:
         raise RuntimeError(
             "canonical writers must run through scripts/run-with-build-lock.py"
         )
-    owner_path = Path(delivery_root).resolve() / LOCK_DIRECTORY_NAME / OWNER_FILE_NAME
+    token, inherited_root = inherited
+    required_root = Path(delivery_root).resolve()
+    if inherited_root != required_root:
+        raise RuntimeError(
+            "inherited release-build lock root does not match the required root "
+            f"({inherited_root} != {required_root})"
+        )
+    owner_path = required_root / LOCK_DIRECTORY_NAME / OWNER_FILE_NAME
     try:
         owner = json.loads(owner_path.read_text(encoding="utf-8"))
     except (OSError, ValueError, TypeError) as error:
@@ -103,7 +147,7 @@ def require_release_build_lock(delivery_root: Path) -> dict:
     if owner.get("scope") != "release_build":
         raise RuntimeError("release-build lock has the wrong scope")
     try:
-        lease_is_held = release_build_lease_is_held(delivery_root)
+        lease_is_held = release_build_lease_is_held(required_root)
     except OSError as error:
         raise RuntimeError("release-build advisory lease could not be inspected") from error
     if not lease_is_held:
@@ -201,6 +245,7 @@ class ReleaseBuildLock(AbstractContextManager["ReleaseBuildLock"]):
         self.acquired = False
         self.inherited = False
         self.previous_environment_token: str | None = None
+        self.previous_environment_root: str | None = None
         self.lease_descriptor: int | None = None
 
     def _read_owner(self) -> dict:
@@ -291,10 +336,10 @@ class ReleaseBuildLock(AbstractContextManager["ReleaseBuildLock"]):
         )
 
     def acquire(self) -> "ReleaseBuildLock":
-        inherited_token = os.environ.get(INHERITED_TOKEN_ENV)
-        if inherited_token:
+        inherited = _inherited_lock_environment()
+        if inherited is not None:
             require_release_build_lock(self.delivery_root)
-            self.token = inherited_token
+            self.token = inherited[0]
             self.inherited = True
             return self
         self._acquire_advisory_lease()
@@ -310,7 +355,9 @@ class ReleaseBuildLock(AbstractContextManager["ReleaseBuildLock"]):
             raise
         self.acquired = True
         self.previous_environment_token = os.environ.get(INHERITED_TOKEN_ENV)
+        self.previous_environment_root = os.environ.get(INHERITED_ROOT_ENV)
         os.environ[INHERITED_TOKEN_ENV] = self.token
+        os.environ[INHERITED_ROOT_ENV] = str(self.delivery_root)
         return self
 
     def release(self) -> None:
@@ -328,6 +375,10 @@ class ReleaseBuildLock(AbstractContextManager["ReleaseBuildLock"]):
                 os.environ.pop(INHERITED_TOKEN_ENV, None)
             else:
                 os.environ[INHERITED_TOKEN_ENV] = self.previous_environment_token
+            if self.previous_environment_root is None:
+                os.environ.pop(INHERITED_ROOT_ENV, None)
+            else:
+                os.environ[INHERITED_ROOT_ENV] = self.previous_environment_root
             self.acquired = False
         finally:
             self._release_advisory_lease()

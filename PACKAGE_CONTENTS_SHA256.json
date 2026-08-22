@@ -27,9 +27,9 @@
       "sha256": "ee623f36dde4e6701ddef192460f011504f8eafbd3d26b7fa96ab090f8b0ca7b"
     },
     {
-      "bytes": 2293,
+      "bytes": 3145,
       "path": ".github/workflows/browser-assurance.yml",
-      "sha256": "ac4f32db14cf06e0e1bc5483a48b27eba8e03045d0bd797109b8f14798df6af7"
+      "sha256": "18d67f3ac3fdd5e9fb73743d4717e3b4c19bb866817658bc5a4f60f247b2c318"
     },
     {
       "bytes": 1712,
@@ -37,9 +37,9 @@
       "sha256": "03f717ae4b676710069537ae0b99dcbff552ec08f00957bb9f79f73fd8595f7e"
     },
     {
-      "bytes": 5685,
+      "bytes": 6044,
       "path": ".github/workflows/predeploy.yml",
-      "sha256": "1841ec2f250a83469d75db6c28e74d265b6684724c853752a8a494a0faecf06d"
+      "sha256": "c244b0ad606ba5a42c89b3a035f21f8766fac40694e3e3f962c69cbf86e0e6df"
     },
     {
       "bytes": 3003,
@@ -2842,9 +2842,9 @@
       "sha256": "b3a7ea9410497a631da12a265e9101db9ac5953a6da245f0ac3ba432bfac6d2d"
     },
     {
-      "bytes": 371024,
+      "bytes": 371757,
       "path": "data/futureproofing/approved-change-deletion-ledger.json",
-      "sha256": "746cb91ca9b358bf85e1572508705583bcd00ad605e95749294d8fe3f08d56a8"
+      "sha256": "4839baacf850c98506a4eea0ce8b010cac1706fb485b4fa4890e45fdb0485950"
     },
     {
       "bytes": 3484,
@@ -4282,9 +4282,9 @@
       "sha256": "b707390603b09c3d27795114269a226d2a28df340e9f23aeb50aac3cbfa6cc64"
     },
     {
-      "bytes": 15680,
+      "bytes": 16257,
       "path": "netlify.toml",
-      "sha256": "4cf6dc2915afc2480c856ac0371ee46f2094d50d2104db5cba73fa7e6373d03d"
+      "sha256": "c80e69207bd468708ced94e5e426faa0a57f4a9e6cf810c0b02285d53373ce61"
     },
     {
       "bytes": 4234,
@@ -4342,9 +4342,9 @@
       "sha256": "15c4efc25d5bbcf749bad731b93d6427deadb85a7c02c3f1513e094d1293a9a9"
     },
     {
-      "bytes": 37694,
+      "bytes": 38527,
       "path": "package.json",
-      "sha256": "d18715efdd9540b9a37fb5a07692a8f4db7968eea71af80c7a41cbab82370990"
+      "sha256": "d2587b5d0b6e1d8a1ccc3833513fa899b274ba44db1608187896995b6c874e96"
     },
     {
       "bytes": 81123,
@@ -100007,14 +100007,14 @@
       "sha256": "3fb95b10056a70460eb841017d18aefbbe7f8787ba99e8a6303c83397ba9de23"
     },
     {
-      "bytes": 825,
+      "bytes": 879,
       "path": "scripts/assert-build-lock.py",
-      "sha256": "ea1ba897cf46555b19476ebb18ca1f31102647222fd97a1b081a3e88b6ef97c9"
+      "sha256": "3087eb6dd373fe36332f3195e4f687f2fb461d350f3d8b4a002250415c90c9ed"
     },
     {
-      "bytes": 1007,
+      "bytes": 3215,
       "path": "scripts/assert-canonical-build-delegation.js",
-      "sha256": "fdae4c5819b81d76ab3d20c0063869c7971cbbc9ce3c6b7a9e6b1ae9a963bacd"
+      "sha256": "2aea2403566d61fd85350661cb7f556793e771637d189aefe6a7bf0514436911"
     },
     {
       "bytes": 746,
@@ -100382,9 +100382,9 @@
       "sha256": "63f7ce2e3814b5ed923cbf78a173f6741ac7353525f44cd01fed958371b951e8"
     },
     {
-      "bytes": 3914,
+      "bytes": 4006,
       "path": "scripts/build-clean-room-release.py",
-      "sha256": "e65751d7c3e9a2685d098daa74243f0e7b6051a5d420f47af5cfd48a3b29c675"
+      "sha256": "796fb28ad4d805a3c0de45f4ba989210db59b7953e3839c3de1103e3e1383bd7"
     },
     {
       "bytes": 270,
@@ -100487,9 +100487,9 @@
       "sha256": "6ed50af10c14d5a2b73a6e44aeb523a443b98befd6bee8fd19defa8a973309c2"
     },
     {
-      "bytes": 12138,
+      "bytes": 14418,
       "path": "scripts/build_lock.py",
-      "sha256": "3e995b9d656c87434838b65b12b0fd1e27f8b8c2be5bab8a470c04f61198b750"
+      "sha256": "def3f77c16845983ba184e2bfb1447139f31bd5d95f94e9ff3b7f6e3c14c5f6b"
     },
     {
       "bytes": 9605,
@@ -100877,9 +100877,9 @@
       "sha256": "00787c4c492ce24e4591f4c40de7ea25637a4c5684497cf6949c809005da6511"
     },
     {
-      "bytes": 10847,
+      "bytes": 11016,
       "path": "scripts/import-polymythcal-courses-multi-session-programs-set15-2026-08-15.py",
-      "sha256": "ce8763b904bcebf7920fd44fc5a16f2515fc10b7ab04c3595bbef9f8e48b7269"
+      "sha256": "0a8c776fd69d9f829475abfa6dcc08ebea67415b1c0041f7297a07c29642deb6"
     },
     {
       "bytes": 43244,
@@ -101077,9 +101077,9 @@
       "sha256": "da60cb697608570acc2fadda642c35c6d53c126d1e87575dbcc977c673801b91"
     },
     {
-      "bytes": 7454,
+      "bytes": 11945,
       "path": "scripts/package-complete-current.py",
-      "sha256": "707a0895328d354414e317247647229b7daee139bd36a1521f8454518544e09f"
+      "sha256": "5023891222952a908ed31b849c7d6497808458ad11e6a45e79e00523f993b27b"
     },
     {
       "bytes": 18620,
@@ -101414,7 +101414,7 @@
     {
       "bytes": 2480,
       "path": "scripts/reports/audit49-build-packaging-efficiency.json",
-      "sha256": "2faeb9a43624122a2660a0ac08df162db77ada0062744ae7070e345edeed3b8e"
+      "sha256": "6edbb41715fecf8d6164a79f14b073f9029a2dcc9804027b5efae4032b4a9cb6"
     },
     {
       "bytes": 9573,
@@ -101429,7 +101429,7 @@
     {
       "bytes": 13432,
       "path": "scripts/reports/audit49-technical-efficiency.json",
-      "sha256": "0d3787b79b3e303d3224436ed0a5bcfc3f3123b0f75ef237207baab783f528c1"
+      "sha256": "4a8f5ea473ede7c216b41b0648722d3cd456a9f4d466405f1b7c81225f77f1ea"
     },
     {
       "bytes": 31938,
@@ -101477,9 +101477,9 @@
       "sha256": "4259ddfc3fbc7759487c1e006b7801110ecc66d849e11fb651f6ad4e51d586c4"
     },
     {
-      "bytes": 1084,
+      "bytes": 1101,
       "path": "scripts/reports/release-gate-report.json",
-      "sha256": "5e74a67be2539782bd0fb88d8899fb143b5bdf55a52f9a9b6d9ef557fc4340fc"
+      "sha256": "2b6acf3d40f658acbc0610d7b9da772e00d9a00ba60f1e6340bc41ff453969ad"
     },
     {
       "bytes": 722,
@@ -101582,9 +101582,9 @@
       "sha256": "111e9dd52bd9e7dd3310e5bb14dc3e0cc77909cfe640bd4a010dcfbc3b773686"
     },
     {
-      "bytes": 918,
+      "bytes": 972,
       "path": "scripts/run-with-build-lock.py",
-      "sha256": "bcecb6659eea9a1fb0714a4cf88f3b719e8be9184e95a34d185c46dea2b52348"
+      "sha256": "e1f09781f462406d451b07f909e589901d32b16c926bac36a9abcf5442d010da"
     },
     {
       "bytes": 3719,
@@ -101707,9 +101707,9 @@
       "sha256": "baf77c30ab788ec627a6f90b3d34a8fc6615de7349ea6b5501dd1f0d46601d9d"
     },
     {
-      "bytes": 6049,
+      "bytes": 10375,
       "path": "scripts/test_build_lock_entrypoints.py",
-      "sha256": "9808391eb32e993680c6cc0b358a9445ca3f107e36c09a126326f4886427f8ee"
+      "sha256": "3565dcb7cca8705bd83f62790485ea169c65c7e8fac920f78ecdd827096f2c66"
     },
     {
       "bytes": 30005,
@@ -101727,9 +101727,9 @@
       "sha256": "4d5de77d82d5ba59a872100702c8c58272abdb771952ac0ff2467c3bd26752de"
     },
     {
-      "bytes": 57161,
+      "bytes": 59919,
       "path": "scripts/test_futureproofing_contracts.py",
-      "sha256": "7995000660dcc7e4cbf0dedd19c20f35c255abbb6435506d759ed88450116a8e"
+      "sha256": "7a3a3d4bd0e6c62e88bea2ac67a164fbeb128421a6e291c5f020d9cc9e80b65a"
     },
     {
       "bytes": 11299,
@@ -101902,9 +101902,9 @@
       "sha256": "7b8464015be43fee6585e3db649feb23068d401f01e277732c95fe460fbf7518"
     },
     {
-      "bytes": 21875,
+      "bytes": 22702,
       "path": "scripts/verify-all-runner.js",
-      "sha256": "4f33408c7bb74fb9b68289a6f0c73db389cf1a80d3e2ce31f2d1c3917dbd7bfe"
+      "sha256": "2c70f952a4a0bd2f7f29b1a0d7da1761e2fae8217e2c70fed1a728a68949c8f9"
     },
     {
       "bytes": 2571,
@@ -102212,9 +102212,9 @@
       "sha256": "201cd3c0ea8a3a4f26eb8fd4e3f7650b25f4ecb94a6bcf7cea40ae6cc3029a11"
     },
     {
-      "bytes": 18453,
+      "bytes": 18513,
       "path": "scripts/verify-audit49-build-packaging-efficiency.js",
-      "sha256": "7fb44e8628fa312fe1e8c5ef6a969f69eb49ebeea3194a52053b98b3fc33b69b"
+      "sha256": "7c6448fb14f8fdb42ecda27abaabcdf34f8bb204fca443b11c25a8beeb1d72d7"
     },
     {
       "bytes": 22998,
@@ -102242,9 +102242,9 @@
       "sha256": "763e0a70b6bc7a90541946ca58671eb7c0755245737cb3e03d220a7e9e01ce2d"
     },
     {
-      "bytes": 20096,
+      "bytes": 20116,
       "path": "scripts/verify-audit53-base-preservation.py",
-      "sha256": "942a650a318f793bc8756b0c78862a022cf7e4e718e6c3cfed39cce6533d5869"
+      "sha256": "776b3db4a0953a1cc05a4ef1b8f7839d9f5804044a7b2298c38a33ff4abc9b62"
     },
     {
       "bytes": 8659,
@@ -102322,9 +102322,9 @@
       "sha256": "5f7453ec61acb1cc30cc7b3298e8e986022954a1440ff0c95acc4fb3e3291cef"
     },
     {
-      "bytes": 5171,
+      "bytes": 5550,
       "path": "scripts/verify-canonical-ownership.py",
-      "sha256": "97a1145a192ca36bb40a8d101be6922526690603fb8c82975c2c61901606816f"
+      "sha256": "5f2724155818af148de91dcdb04806b256079e8128483381875b47488e7e52d7"
     },
     {
       "bytes": 24343,
@@ -102347,9 +102347,9 @@
       "sha256": "75b76a867b55713972390c8617df029233099d646e741055b1a2291e7c15cc31"
     },
     {
-      "bytes": 32513,
+      "bytes": 32599,
       "path": "scripts/verify-core-coreplus-alignment.js",
-      "sha256": "b8daa2788e5f4ad92085a96b88f1a6c798379fd978d254a2d664390d11a70666"
+      "sha256": "b5471dc6da2413ed9df2407d8b7a05deb3c3dfcd4c976eef691363225b8fb61c"
     },
     {
       "bytes": 4542,
@@ -102482,9 +102482,9 @@
       "sha256": "ce73a920f5add484c17b86c6fab6e53ab7517e7ddefb2cbd348249e4d20f6718"
     },
     {
-      "bytes": 7138,
+      "bytes": 7423,
       "path": "scripts/verify-futureproofing-contract.py",
-      "sha256": "f8d87d9cba109b53ab56bb31667601f7675f94f8c2242ae26802f8a63dfd395f"
+      "sha256": "59b3d18da58c7af3e41da2a28356cd8726e13c5b16432f266ec3bf98807998a7"
     },
     {
       "bytes": 2324,
@@ -102542,9 +102542,9 @@
       "sha256": "e619abdd79680230635187cceb00ca852a8a20c1823271f6b52f7a2c9e9addb8"
     },
     {
-      "bytes": 5605,
+      "bytes": 5788,
       "path": "scripts/verify-leizu-pipeline.js",
-      "sha256": "8b6c76b8ba0caadb02c91f7d9349354f4ef62016eea3228de545876588e6add0"
+      "sha256": "ca6d8f616fc884e4d4034ae19a18a1a6f77cad9e03b1192c7a8c20754b230155"
     },
     {
       "bytes": 3656,
@@ -102677,9 +102677,9 @@
       "sha256": "3926ecd3195523be8cda73b850a08338e0ee9493d060e2b4188100a4c6ef3c32"
     },
     {
-      "bytes": 14745,
+      "bytes": 21080,
       "path": "scripts/verify-polymyth-coherence-workbook.py",
-      "sha256": "fce67c3aef684ade7fd5691ba1e17ba5d980afa11d8d2847cf296cc531f77c9d"
+      "sha256": "765188bfe9adc11e733edcc0f3662c12bf79ec655ffdd9adad8e2ef5a613105e"
     },
     {
       "bytes": 19361,
@@ -102692,9 +102692,9 @@
       "sha256": "4f00656a95e7ba4fb6be373bce794e3f98a7959e79ea631259d97c20acb56000"
     },
     {
-      "bytes": 12864,
+      "bytes": 15042,
       "path": "scripts/verify-polymyth-entry-points.js",
-      "sha256": "9d85e1ddc268887a7c2401aac399dfc46b1fce804d86649b215f2362c45db45c"
+      "sha256": "92f104c33b957974568f26aff798dab63eb1bedafa9dfb09252d3bc6497b9958"
     },
     {
       "bytes": 9114,
@@ -102707,9 +102707,9 @@
       "sha256": "e26cb43ef72d6101edc5d2845f21a00390320ec10007c19a35a363e7e61590cb"
     },
     {
-      "bytes": 28246,
+      "bytes": 28253,
       "path": "scripts/verify-polymythcal-audit14.js",
-      "sha256": "ed2db7e2f3a474b7774cb476da8299fba4334e0cf47e6cb67041705f7d5b77aa"
+      "sha256": "92ac62431edb6e1389b737f3589799ed6fb7e1d5d27a2697f1832319defdb406"
     },
     {
       "bytes": 1071,
@@ -102722,9 +102722,9 @@
       "sha256": "122e1947569dab65003e07dde36bf9855ae95b2a54918c958c25bd0d68444727"
     },
     {
-      "bytes": 19966,
+      "bytes": 19605,
       "path": "scripts/verify-polymythcal-build-efficiency.js",
-      "sha256": "6de5b26f4bd7b96461a61ec427c788b513ce7c6ffad8aa23eafc8bb12c10fe53"
+      "sha256": "76c23ce5a9afcc698f48f711e3026dd554cd4b8555d7e0a704242805b45516b5"
     },
     {
       "bytes": 5960,
@@ -102732,9 +102732,9 @@
       "sha256": "210f328401f10e173361cc825429825eec3be241b404fce10f5ba5e1835577e2"
     },
     {
-      "bytes": 13150,
+      "bytes": 13245,
       "path": "scripts/verify-polymythcal-civic-political-legal-labour-set12-2026-08-14.js",
-      "sha256": "a60157d791fd529b32f37f760066cd9bdfdd9cc4de3c00413748f3a050d0e28c"
+      "sha256": "322349e266b150789e235ab40116678861de513807da8d7c6a335c42708d7945"
     },
     {
       "bytes": 15513,
@@ -102857,9 +102857,9 @@
       "sha256": "ee453d9704641df1a7edefcf061bce9c0aaed6058ee9711b37b5620906df17a7"
     },
     {
-      "bytes": 23125,
+      "bytes": 23760,
       "path": "scripts/verify-predeploy-automation.js",
-      "sha256": "17d5589a0d26fe579196d72fa79ac563fbeeb97e885e671487d955b8f4b898ce"
+      "sha256": "a6482b70e6e40ffaa1ce0f543ba06473e89685bc9c2f2642cd63996e7822a089"
     },
     {
       "bytes": 869,
@@ -102877,9 +102877,9 @@
       "sha256": "39ead440d488eb21e802429de71acb1782c865feeaa3c215a97a20d4b78acdbd"
     },
     {
-      "bytes": 4735,
+      "bytes": 4920,
       "path": "scripts/verify-public-artifact-blocks.js",
-      "sha256": "af8b9043216471f7923faf09ab1bc3bc517be08a07b643cb83baea7b19865d1f"
+      "sha256": "8083e964c668d59597a2580f74aaeec87829ed1a25c2783ff2332ba3331663ec"
     },
     {
       "bytes": 5595,
@@ -102887,14 +102887,14 @@
       "sha256": "ea3bbfb517e8626292bb0599d6f8f98cc3b1a33f126c5df5b34da6e3cbf403f3"
     },
     {
-      "bytes": 6346,
+      "bytes": 6969,
       "path": "scripts/verify-public-private-boundary.py",
-      "sha256": "56570db38e1d1fb05b834c3fe471228c60f7a87f95366a3f2fceb49f24301109"
+      "sha256": "822b6dd74873ee05b5e44d188bcf0d7e861c23f62daa5f9ea77ded694868e635"
     },
     {
-      "bytes": 7658,
+      "bytes": 9445,
       "path": "scripts/verify-python-audit-contract.js",
-      "sha256": "e249175242cb791dabc71ccf254e039bad71fb42bfab4e9ccc9b77ff7c653157"
+      "sha256": "e0ab02e0d131d5fa536a49fd4fb20fb8db2ab8bce4f9e7873a22928972e3cd0e"
     },
     {
       "bytes": 2421,
@@ -102917,9 +102917,9 @@
       "sha256": "d8742b78d6dfdb7beee5864aaa00746d8ee99bcb0c3b8ab32949649243b6794e"
     },
     {
-      "bytes": 43235,
+      "bytes": 45413,
       "path": "scripts/verify-release-gates.js",
-      "sha256": "39cd1be1b72f89ee4130b5a469a0653dbb8b95cce0caa0f79f8d947110458541"
+      "sha256": "a7f3a076dcaaa60ceb403b61f698032fd8838ebf2190bd2cd061c50d8c1b6680"
     },
     {
       "bytes": 1692,
@@ -106736,5 +106736,5 @@
   "package_kind": "seminar-schools-complete-editable-site-source",
   "release_id": "core-coreplus-mephistodata-bb-polymythcal-sets1-15-sitewide-fixes-synthesized-2026-08-15",
   "schema": "seminar-schools-package-contents-v1",
-  "total_uncompressed_bytes": 498794400
+  "total_uncompressed_bytes": 498829705
 }

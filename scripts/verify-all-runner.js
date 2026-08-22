@@ -12,6 +12,7 @@ const path = require('path');
 
 const argv = new Set(process.argv.slice(2));
 const reuseBuild = argv.has('--reuse-build');
+const siteOnly = argv.has('--site-only');
 const concurrencyArg = process.argv.slice(2).find(arg => arg.startsWith('--concurrency='));
 const requestedConcurrency = concurrencyArg
   ? Number(concurrencyArg.split('=')[1])
@@ -39,8 +40,6 @@ function assertLiveReleaseLock() {
     [
       path.join(__dirname, 'run-python.js'),
       path.join(__dirname, 'assert-build-lock.py'),
-      '--delivery-root',
-      path.resolve(process.cwd(), '..'),
     ],
     { cwd: process.cwd(), encoding: 'utf8' },
   );
@@ -92,6 +91,22 @@ const reusedBuildPreparation = [
   'node scripts/verify-audit49-runtime-efficiency.js',
   'node scripts/verify-audit49-build-packaging-efficiency.js'
 ];
+const fullCoherenceCommands = [
+  'node scripts/run-python.js scripts/verify-polymyth-coherence-workbook.py',
+  'node scripts/verify-polymyth-entry-points.js',
+];
+const siteCoherenceCommand = 'node scripts/verify-polymyth-entry-points.js --site-only';
+function selectSiteCoherence(commands) {
+  if (!siteOnly) return commands;
+  const first = commands.indexOf(fullCoherenceCommands[0]);
+  const second = commands.indexOf(fullCoherenceCommands[1]);
+  if (first < 0 || second !== first + 1) {
+    throw new Error('site-only runner cannot locate the complete Coherence command pair');
+  }
+  commands.splice(first, 2, siteCoherenceCommand);
+  return commands;
+}
+selectSiteCoherence(reusedBuildPreparation);
 const sequential = [
   ...(reuseBuild ? reusedBuildPreparation : fullBuildPreparation),
   // A passing build is not enough: the immediately repeated build must be a
@@ -101,7 +116,9 @@ const sequential = [
   // contract. Keep these out of the parallel pool so no report/build writer
   // can race the counts, hashes, or package-facing mirrors they inspect.
   'node scripts/verify-methodologylist-manifest.js',
-  'node scripts/verify-core-coreplus-alignment.js',
+  siteOnly
+    ? 'node scripts/verify-core-coreplus-alignment.js --site-only'
+    : 'node scripts/verify-core-coreplus-alignment.js',
   'node scripts/verify-meaninglib-dataset.js',
   'node scripts/verify-meaninglib-search.js',
   'node scripts/verify-ai-access-pack.js',
@@ -133,7 +150,7 @@ const finalSequential = [
   'node scripts/verify-audit49-build-packaging-efficiency.js',
   'node scripts/verify-audit49-technical-efficiency.js',
   'npm run test:futureproofing',
-  'npm run verify:futureproofing',
+  siteOnly ? 'npm run verify:futureproofing:site' : 'npm run verify:futureproofing',
 ];
 
 const checks = [
@@ -291,6 +308,7 @@ const checks = [
   'node scripts/verify-typography-controls.js',
   'node scripts/verify-bookwormcard-gate.js'
 ];
+selectSiteCoherence(checks);
 // The canonical build already executes these release blockers. Do not repeat
 // them in the full runner. Reuse mode refreshes the same blockers in its own
 // preparation before the current external and aggregate release checks.
@@ -303,8 +321,7 @@ const canonicalBuildCoveredChecks = new Set([
   'node scripts/verify-polymythcal-browser-payload.js',
   'node scripts/verify-polymythcal-build-efficiency.js',
   'node scripts/verify-steady-ui.js',
-  'node scripts/run-python.js scripts/verify-polymyth-coherence-workbook.py',
-  'node scripts/verify-polymyth-entry-points.js',
+  'node scripts/verify-polymyth-entry-points.js --site-only',
   'node scripts/run-python.js scripts/verify-audit45-translations.py',
   'node scripts/verify-audit49-metadata-surface.js',
   'node scripts/verify-audit49-runtime-efficiency.js',
@@ -395,7 +412,7 @@ function writeGateReport(status, started, passedCommands, failures) {
     duration_ms: null,
     duration_note: 'Runtime duration is printed to the console and intentionally omitted from committed evidence.',
     command_timeout_ms: commandTimeoutMs,
-    execution_mode: reuseBuild ? 'reuse-build' : 'canonical-build',
+    execution_mode: `${reuseBuild ? 'reuse-build' : 'canonical-build'}${siteOnly ? '-site-only' : '-complete-handoff'}`,
     preparation_covered_checks: [...preparationCoveredChecks].filter(command => checks.includes(command)),
     rule: 'Every active command and every preparation-covered command in scripts/verify-all-runner.js is a release blocker.'
   };

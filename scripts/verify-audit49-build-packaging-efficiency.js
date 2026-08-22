@@ -276,6 +276,7 @@ if (process.platform !== 'win32') {
       `site = ${JSON.stringify(site)}`,
       `command = [${JSON.stringify(process.execPath)}, ${JSON.stringify(path.join(ROOT, 'scripts', 'verify-all-runner.js'))}, '--reuse-build', '--timeout-ms=5000']`,
       "os.environ.pop('SS_RELEASE_BUILD_LOCK_TOKEN', None)",
+      "os.environ.pop('SS_RELEASE_BUILD_LOCK_ROOT', None)",
       'with ReleaseBuildLock(delivery):',
       '    completed = subprocess.run(command, cwd=site, env=os.environ.copy())',
       'raise SystemExit(completed.returncode)',

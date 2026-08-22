@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import re
 import sys
 from pathlib import Path
@@ -17,13 +18,32 @@ except ImportError as exc:  # pragma: no cover - environment failure
 
 
 ROOT = Path(__file__).resolve().parent.parent
+SITE_ONLY = "--site-only" in sys.argv[1:]
+UNKNOWN_ARGUMENTS = [argument for argument in sys.argv[1:] if argument != "--site-only"]
+if UNKNOWN_ARGUMENTS:
+    raise SystemExit(
+        "POLYMYTH COHERENCE WORKBOOK FAILED — unsupported argument(s): "
+        + ", ".join(UNKNOWN_ARGUMENTS)
+    )
+
 PACKAGE_ROOT = ROOT.parent
 COHERENCE_DIR = ROOT / "polymyth" / "coherence"
+PUBLIC_COHERENCE_DIR = ROOT / "public" / "polymyth" / "coherence"
 EDITABLE_DIR = PACKAGE_ROOT / "EDITABLE_MASTERS" / "07_POLYMYTH_COHERENCE"
 
 INSTRUMENT = COHERENCE_DIR / "Polymyth_Coherence_Assessment_Instrument_V5.1.2.xlsx"
+PUBLIC_INSTRUMENT = PUBLIC_COHERENCE_DIR / "Polymyth_Coherence_Assessment_Instrument_V5.1.2.xlsx"
+PROTOCOL = COHERENCE_DIR / "Polymyth_Coherence_AI_Application_Protocol_V5.1.2.md"
+PUBLIC_PROTOCOL = PUBLIC_COHERENCE_DIR / "Polymyth_Coherence_AI_Application_Protocol_V5.1.2.md"
+SCHEMA = COHERENCE_DIR / "Polymyth_Coherence_Assessment_Schema_V5.1.2.json"
+PUBLIC_SCHEMA = PUBLIC_COHERENCE_DIR / "Polymyth_Coherence_Assessment_Schema_V5.1.2.json"
+COHERENCE_PAGE = COHERENCE_DIR / "index.html"
+PUBLIC_COHERENCE_PAGE = PUBLIC_COHERENCE_DIR / "index.html"
+COHERENCE_ADDENDUM = ROOT / "polymyth" / "methodologylist" / "polymyth-coherence-routing-addendum.js"
+PUBLIC_COHERENCE_ADDENDUM = ROOT / "public" / "polymyth" / "methodologylist" / "polymyth-coherence-routing-addendum.js"
 EDITABLE_INSTRUMENT = EDITABLE_DIR / "Polymyth_Coherence_Assessment_Instrument.xlsx"
 WORKED_APPLICATIONS = EDITABLE_DIR / "Polymyth_Coherence_Worked_Applications.xlsx"
+WORKED_APPLICATIONS_NAME = "Polymyth_Coherence_Worked_Applications.xlsx"
 
 EXPECTED_FILE_SHA256 = "0624c76e0ae1351dcfe6a9d2cabf6e4e581820b63a0fc40e5ad755bbd1d93550"
 EXPECTED_FORMULA_COUNT = 85768
@@ -119,24 +139,126 @@ def row_by_id(workbook, sheet_name: str, row_id: str):
     fail(f"{sheet_name} is missing {row_id}")
 
 
-for workbook_path in (INSTRUMENT, EDITABLE_INSTRUMENT):
+def require_text_tokens(path: Path, tokens: tuple[str, ...]) -> str:
+    text = path.read_text(encoding="utf-8")
+    for token in tokens:
+        require(token in text, f"{path.relative_to(ROOT)} is missing {token}")
+    return text
+
+
+def is_blank_case_value(value: object) -> bool:
+    if value is None:
+        return True
+    if isinstance(value, list):
+        return not value
+    if isinstance(value, dict):
+        return all(is_blank_case_value(item) for item in value.values())
+    return False
+
+
+if SITE_ONLY:
+    # A hosted build has only SITE_PACKAGE. Every byte read in this branch is
+    # deliberately rooted at ROOT; private release masters are not consulted.
+    deploy_pairs = (
+        (COHERENCE_PAGE, PUBLIC_COHERENCE_PAGE),
+        (INSTRUMENT, PUBLIC_INSTRUMENT),
+        (PROTOCOL, PUBLIC_PROTOCOL),
+        (SCHEMA, PUBLIC_SCHEMA),
+        (COHERENCE_ADDENDUM, PUBLIC_COHERENCE_ADDENDUM),
+    )
+    for source_path, public_path in deploy_pairs:
+        require(source_path.is_file(), f"missing {source_path.relative_to(ROOT)}")
+        require(public_path.is_file(), f"missing {public_path.relative_to(ROOT)}")
+        require(
+            source_path.read_bytes() == public_path.read_bytes(),
+            f"source/public Coherence asset differs: {source_path.relative_to(ROOT)}",
+        )
+
+    coherence_html = require_text_tokens(
+        COHERENCE_PAGE,
+        (
+            "https://seminarschools.com/polymyth/coherence/",
+            'data-route-type="archive"',
+            'data-geometry-role="relation movement"',
+            "Polymyth_Coherence_Assessment_Instrument_V5.1.2.xlsx",
+            "Polymyth_Coherence_AI_Application_Protocol_V5.1.2.md",
+            "Polymyth_Coherence_Assessment_Schema_V5.1.2.json",
+            "Download the blank instrument",
+            "There are no completed case audits in these downloads.",
+            "Applicable with Adaptation",
+            "Outside Protocol Scope",
+            "Screening can locate candidates and defects",
+            "AI assists; people decide.",
+            "genuinely different independent reviewer",
+            "Internal is the absolute gate.",
+            "Looking for the wider method?",
+        ),
+    )
+    require(
+        "V5.1.1" not in coherence_html
+        and "Polymyth_Coherence_V5.1.1.xlsx" not in coherence_html,
+        "source Polymyth Coherence page still exposes V5.1.1",
+    )
+    require_text_tokens(
+        PROTOCOL,
+        (
+            "no completed case audit",
+            "Applicable with Adaptation",
+            "Outside Protocol Scope",
+            "Screening may locate candidates",
+            "Never use `Polymyth_Coherence_Worked_Applications.xlsx` or a prior case result as an answer key.",
+            "A human adjudicator must verify the evidence",
+            "genuinely different independent reviewer",
+            "Automated output alone cannot establish",
+        ),
+    )
+    try:
+        schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        fail(f"{SCHEMA.relative_to(ROOT)} is invalid JSON: {exc}")
+    require(schema.get("$schema") == "https://json-schema.org/draft/2020-12/schema", "blank JSON schema does not declare Draft 2020-12")
+    require(
+        schema.get("$ref") == "#/$defs/caseHandoff"
+        and isinstance(schema.get("$defs", {}).get("caseHandoff"), dict),
+        "blank JSON schema does not expose its case handoff through top-level $ref/$defs",
+    )
+    instrument_meta = schema.get("x-instrument", {})
+    require(instrument_meta.get("version") == "V5.1.2", "blank JSON schema has the wrong instrument version")
+    require(instrument_meta.get("sha256") == EXPECTED_FILE_SHA256, "blank JSON schema has the wrong workbook hash")
+    blank_state = schema.get("x-blankState", {})
+    require(blank_state.get("completedCaseCount") == 0, "blank JSON schema claims a completed case")
+    require(blank_state.get("templateIsACompletedCase") is False, "blank JSON schema treats TEMPLATE-001 as completed")
+    examples = schema.get("examples")
+    blank_case = examples[0] if isinstance(examples, list) and examples else None
+    require(
+        isinstance(blank_case, dict)
+        and all(is_blank_case_value(value) for value in blank_case.values()),
+        "blank JSON schema contains a case answer",
+    )
+
+
+workbook_paths = (INSTRUMENT,) if SITE_ONLY else (INSTRUMENT, EDITABLE_INSTRUMENT)
+for workbook_path in workbook_paths:
     require(workbook_path.is_file(), f"missing {workbook_path.relative_to(PACKAGE_ROOT)}")
     actual_hash = file_sha256(workbook_path)
     require(
         actual_hash == EXPECTED_FILE_SHA256,
         f"{workbook_path.relative_to(PACKAGE_ROOT)} hash is {actual_hash}, expected {EXPECTED_FILE_SHA256}",
     )
-require(WORKED_APPLICATIONS.is_file(), f"missing {WORKED_APPLICATIONS.relative_to(PACKAGE_ROOT)}")
+if not SITE_ONLY:
+    require(WORKED_APPLICATIONS.is_file(), f"missing {WORKED_APPLICATIONS.relative_to(PACKAGE_ROOT)}")
 require(
-    not any(ROOT.rglob(WORKED_APPLICATIONS.name)),
+    not any(ROOT.rglob(WORKED_APPLICATIONS_NAME)),
     "worked applications workbook must remain outside SITE_PACKAGE and its public deploy tree",
 )
 
-for obsolete in (
+obsolete_paths = [
     COHERENCE_DIR / "Polymyth_Coherence_V5.1.1.xlsx",
     ROOT / "public" / "polymyth" / "coherence" / "Polymyth_Coherence_V5.1.1.xlsx",
-    EDITABLE_DIR / "Polymyth_Coherence.xlsx",
-):
+]
+if not SITE_ONLY:
+    obsolete_paths.append(EDITABLE_DIR / "Polymyth_Coherence.xlsx")
+for obsolete in obsolete_paths:
     require(not obsolete.exists(), f"obsolete workbook remains: {obsolete.relative_to(PACKAGE_ROOT)}")
 
 workbook = load_workbook(INSTRUMENT, read_only=False, data_only=False)
@@ -184,10 +306,6 @@ def populated_cell_records(worksheet, max_row: int | None = None) -> list[tuple[
     return records
 
 
-worked = load_workbook(WORKED_APPLICATIONS, read_only=False, data_only=False)
-require(worked.sheetnames == EXPECTED_SHEETS, "worked applications sheet order changed")
-
-
 def require_complete_validation_ranges(candidate, label: str) -> None:
     external_validation = {
         str(item.sqref) for item in candidate["EXTERNAL"].data_validations.dataValidation
@@ -206,39 +324,45 @@ def require_complete_validation_ranges(candidate, label: str) -> None:
 
 
 require_complete_validation_ranges(workbook, "canonical instrument")
-require_complete_validation_ranges(worked, "worked applications")
+if not SITE_ONLY:
+    worked = load_workbook(WORKED_APPLICATIONS, read_only=False, data_only=False)
+    require(
+        worked.sheetnames == EXPECTED_SHEETS,
+        "worked applications sheet order changed",
+    )
+    require_complete_validation_ranges(worked, "worked applications")
 
-# A case file may change only case-input values. The complete formula map stays
-# byte-for-byte equivalent at the formula-record level, including application
-# sheets, so a case cannot overwrite or invent calculation logic.
-worked_formula_lines = formula_records(worked)
-require(
-    worked_formula_lines == formula_lines,
-    "worked applications formula coordinates or formulas changed",
-)
+    # A case file may change only case-input values. The complete formula map
+    # stays byte-for-byte equivalent at the formula-record level, including
+    # application sheets, so a case cannot overwrite or invent calculation logic.
+    worked_formula_lines = formula_records(worked)
+    require(
+        worked_formula_lines == formula_lines,
+        "worked applications formula coordinates or formulas changed",
+    )
 
-# Criteria, governance, protocol, reference, and instrument-test sheets remain
-# value-identical to the canonical instrument. Application sheets retain their
-# six-row structural headers and preallocated bounds while rows 7 onward may
-# contain case evidence, rulings, review, and results.
-immutable_sheets = [name for name in EXPECTED_SHEETS if name not in APPLICATION_SHEETS]
-for sheet_name in immutable_sheets:
-    require(
-        populated_cell_records(worked[sheet_name]) == populated_cell_records(workbook[sheet_name]),
-        f"worked applications changed immutable sheet {sheet_name}",
-    )
-for sheet_name in APPLICATION_SHEETS:
-    canonical_sheet = workbook[sheet_name]
-    worked_sheet = worked[sheet_name]
-    require(
-        populated_cell_records(worked_sheet, 6) == populated_cell_records(canonical_sheet, 6),
-        f"worked applications changed the structural header of {sheet_name}",
-    )
-    require(
-        worked_sheet.max_row == canonical_sheet.max_row
-        and worked_sheet.max_column == canonical_sheet.max_column,
-        f"worked applications wrote outside the preallocated bounds of {sheet_name}",
-    )
+    # Criteria, governance, protocol, reference, and instrument-test sheets
+    # remain value-identical to the canonical instrument. Application sheets
+    # retain their six-row structural headers and preallocated bounds while rows
+    # 7 onward may contain case evidence, rulings, review, and results.
+    immutable_sheets = [name for name in EXPECTED_SHEETS if name not in APPLICATION_SHEETS]
+    for sheet_name in immutable_sheets:
+        require(
+            populated_cell_records(worked[sheet_name]) == populated_cell_records(workbook[sheet_name]),
+            f"worked applications changed immutable sheet {sheet_name}",
+        )
+    for sheet_name in APPLICATION_SHEETS:
+        canonical_sheet = workbook[sheet_name]
+        worked_sheet = worked[sheet_name]
+        require(
+            populated_cell_records(worked_sheet, 6) == populated_cell_records(canonical_sheet, 6),
+            f"worked applications changed the structural header of {sheet_name}",
+        )
+        require(
+            worked_sheet.max_row == canonical_sheet.max_row
+            and worked_sheet.max_column == canonical_sheet.max_column,
+            f"worked applications wrote outside the preallocated bounds of {sheet_name}",
+        )
 
 expected_id_sets = {
     "GOVERNING RULES": [f"G-{number:03d}" for number in range(1, 53)],
@@ -360,9 +484,18 @@ for sheet in cached.worksheets:
                 cached_errors.append(f"{sheet.title}!{cell.coordinate}={cell.value}")
 require(not cached_errors, f"cached spreadsheet errors found: {', '.join(cached_errors[:8])}")
 
-print(
-    "POLYMYTH COHERENCE WORKBOOK PASSED — "
-    "two byte-exact blank V5.1.2 instruments plus one structurally locked, editable applications workbook; "
-    "35 sheets, 85,768 formulas, 24 protocol entries, 40 QA checks, 22 regressions, "
-    "and zero completed cases in the public instrument verified."
-)
+if SITE_ONLY:
+    print(
+        "POLYMYTH COHERENCE WORKBOOK SITE-ONLY PASSED — "
+        "source/public deploy parity, byte-exact blank V5.1.2 workbook, protocol, answer-free schema, "
+        "routing addendum, 35 sheets, 85,768 formulas, 24 protocol entries, 40 QA checks, "
+        "22 regressions, zero completed cases, and no worked-applications leak verified "
+        "without private release masters."
+    )
+else:
+    print(
+        "POLYMYTH COHERENCE WORKBOOK PASSED — "
+        "two byte-exact blank V5.1.2 instruments plus one structurally locked, editable applications workbook; "
+        "35 sheets, 85,768 formulas, 24 protocol entries, 40 QA checks, 22 regressions, "
+        "and zero completed cases in the public instrument verified."
+    )

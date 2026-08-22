@@ -8,7 +8,7 @@ from pathlib import Path, PurePosixPath
 import subprocess
 
 from atomic_json import write_json_atomic
-from build_lock import require_release_build_lock
+from build_lock import inherited_release_build_root, require_release_build_lock
 
 
 SITE_ROOT = Path(__file__).resolve().parents[1]
@@ -80,10 +80,11 @@ def main() -> None:
     parser.add_argument("--contract", type=Path, default=DEFAULT_CONTRACT)
     parser.add_argument("--allow-pending", action="store_true")
     parser.add_argument("--run-source", action="store_true")
+    parser.add_argument("--site-only", action="store_true")
     parser.add_argument("--report", type=Path)
     args = parser.parse_args()
     if args.report and args.report.resolve() == (SITE_ROOT / "scripts/reports/futureproofing-gate-report.json").resolve():
-        require_release_build_lock(DELIVERY_ROOT)
+        require_release_build_lock(inherited_release_build_root(SITE_ROOT))
     document = json.loads(args.contract.read_text(encoding="utf-8"))
     failures, items = validate_contract(document, allow_pending=args.allow_pending)
     executed: list[dict] = []
@@ -91,7 +92,9 @@ def main() -> None:
         for item in items:
             if item.get("status") != "implemented" or item.get("stage") != "source":
                 continue
-            command = item["gate_command"]
+            command = list(item["gate_command"])
+            if args.site_only and item["id"] in {"FP-04", "FP-15"}:
+                command.append("--site-only")
             if any("{" in part for part in command):
                 failures.append(f"{item['id']} source command contains unresolved placeholders")
                 continue
@@ -116,7 +119,7 @@ def main() -> None:
     report = {
         "schema": "seminar-schools-futureproofing-gate-report-v1",
         "contract_version": document.get("contract_version"),
-        "scope": "source-stage",
+        "scope": "repository-source-stage" if args.site_only else "source-stage",
         "status": status,
         "contract_total_controls": len(items),
         "implemented_controls": len(implemented),

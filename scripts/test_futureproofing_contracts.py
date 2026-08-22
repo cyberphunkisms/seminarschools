@@ -45,9 +45,11 @@ from audit_python_dependencies import (  # noqa: E402
     prepare_audit_python_dependencies,
 )
 from build_lock import (  # noqa: E402
+    INHERITED_ROOT_ENV,
     INHERITED_TOKEN_ENV,
     LEASE_FILE_NAME,
     ReleaseBuildLock,
+    inherited_release_build_root,
     process_identity,
     require_release_build_lock,
     release_build_lease_is_held,
@@ -643,21 +645,27 @@ class OwnershipTests(unittest.TestCase):
 class BuildLockTests(unittest.TestCase):
     def setUp(self) -> None:
         self.parent_lock_token = os.environ.pop(INHERITED_TOKEN_ENV, None)
+        self.parent_lock_root = os.environ.pop(INHERITED_ROOT_ENV, None)
 
     def tearDown(self) -> None:
         os.environ.pop(INHERITED_TOKEN_ENV, None)
+        os.environ.pop(INHERITED_ROOT_ENV, None)
         if self.parent_lock_token is not None:
             os.environ[INHERITED_TOKEN_ENV] = self.parent_lock_token
+        if self.parent_lock_root is not None:
+            os.environ[INHERITED_ROOT_ENV] = self.parent_lock_root
 
     def test_second_independent_writer_cannot_claim_live_lock(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             first = ReleaseBuildLock(Path(temporary)).acquire()
             inherited = os.environ.pop(INHERITED_TOKEN_ENV)
+            inherited_root = os.environ.pop(INHERITED_ROOT_ENV)
             try:
                 with self.assertRaisesRegex(RuntimeError, "already owned"):
                     ReleaseBuildLock(Path(temporary)).acquire()
             finally:
                 os.environ[INHERITED_TOKEN_ENV] = inherited
+                os.environ[INHERITED_ROOT_ENV] = inherited_root
                 first.release()
             self.assertFalse((Path(temporary) / ".seminar-schools-build.lock").exists())
             self.assertTrue((Path(temporary) / LEASE_FILE_NAME).is_file())
@@ -670,10 +678,53 @@ class BuildLockTests(unittest.TestCase):
                 nested = ReleaseBuildLock(Path(temporary)).acquire()
                 self.assertTrue(nested.inherited)
                 self.assertEqual(nested.token, first.token)
+                self.assertEqual(
+                    inherited_release_build_root(SITE_ROOT),
+                    Path(temporary).resolve(),
+                )
                 nested.release()
                 self.assertTrue(release_build_lease_is_held(Path(temporary)))
             finally:
                 first.release()
+
+    def test_new_lock_exports_and_restores_token_root_pair(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary).resolve()
+            first = ReleaseBuildLock(root).acquire()
+            try:
+                self.assertEqual(os.environ[INHERITED_TOKEN_ENV], first.token)
+                self.assertEqual(os.environ[INHERITED_ROOT_ENV], str(root))
+            finally:
+                first.release()
+            self.assertNotIn(INHERITED_TOKEN_ENV, os.environ)
+            self.assertNotIn(INHERITED_ROOT_ENV, os.environ)
+
+    def test_partial_or_mismatched_inherited_identity_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary).resolve()
+            os.environ[INHERITED_TOKEN_ENV] = "orphan-token"
+            with self.assertRaisesRegex(RuntimeError, "must be set together"):
+                inherited_release_build_root(SITE_ROOT)
+            os.environ.pop(INHERITED_TOKEN_ENV)
+            os.environ[INHERITED_ROOT_ENV] = str(root)
+            with self.assertRaisesRegex(RuntimeError, "must be set together"):
+                inherited_release_build_root(SITE_ROOT)
+            os.environ.pop(INHERITED_ROOT_ENV)
+
+            first = ReleaseBuildLock(root).acquire()
+            try:
+                with self.assertRaisesRegex(RuntimeError, "root does not match"):
+                    require_release_build_lock(root / "other")
+            finally:
+                first.release()
+
+    def test_inherited_root_must_be_canonical(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary).resolve()
+            os.environ[INHERITED_TOKEN_ENV] = "token"
+            os.environ[INHERITED_ROOT_ENV] = str(root / "child" / "..")
+            with self.assertRaisesRegex(RuntimeError, "canonical absolute path"):
+                inherited_release_build_root(SITE_ROOT)
 
     def test_owner_records_pid_namespace_and_process_start_identity(self) -> None:
         identity = process_identity(os.getpid())
@@ -735,15 +786,18 @@ class BuildLockTests(unittest.TestCase):
                 },
             )
             os.environ[INHERITED_TOKEN_ENV] = token
+            os.environ[INHERITED_ROOT_ENV] = str(root)
             with self.assertRaisesRegex(RuntimeError, "no live advisory lease"):
                 require_release_build_lock(root)
             os.environ.pop(INHERITED_TOKEN_ENV, None)
+            os.environ.pop(INHERITED_ROOT_ENV, None)
 
     def test_resurrected_stale_owner_cannot_defeat_active_lease(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             first = ReleaseBuildLock(root).acquire()
             inherited = os.environ.pop(INHERITED_TOKEN_ENV)
+            inherited_root = os.environ.pop(INHERITED_ROOT_ENV)
             write_json(
                 first.owner_path,
                 {
@@ -760,6 +814,7 @@ class BuildLockTests(unittest.TestCase):
                     ReleaseBuildLock(root).acquire()
             finally:
                 os.environ[INHERITED_TOKEN_ENV] = inherited
+                os.environ[INHERITED_ROOT_ENV] = inherited_root
                 first.release()
             replacement = ReleaseBuildLock(root).acquire()
             replacement.release()

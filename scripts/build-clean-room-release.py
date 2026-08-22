@@ -75,6 +75,7 @@ def main() -> None:
     )
     subprocess.run([npm, "run", "verify:ai-access-pack"], cwd=SITE_ROOT, check=True)
     subprocess.run([npm, "run", "build"], cwd=SITE_ROOT, check=True)
+    subprocess.run([npm, "run", "sync:editable-masters:locked"], cwd=SITE_ROOT, check=True)
     subprocess.run([npm, "run", "verify:all:built"], cwd=SITE_ROOT, check=True)
     verify_editable_masters(DELIVERY_ROOT / "EDITABLE_MASTERS")
     subprocess.run(

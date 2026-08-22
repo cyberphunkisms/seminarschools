@@ -400,7 +400,7 @@ add('Scheduled harvests use fast data gates and predeploy retains full adapter, 
     && !/verify:polymythcal-audit14/.test(w);
 }) && /test:polymythcal-adapters/.test(predeployWorkflow)
   && /test:polymythcal-lifecycle/.test(predeployWorkflow)
-  && /npm run verify:all:built/.test(predeployWorkflow)
+  && /npm run verify:repository:built/.test(predeployWorkflow)
   && /verify-polymythcal-audit14\.js/.test(releaseRunner)
   && mergeScripts.every(p => /finalize-polymythcal-publication/.test(read(p))), {
     workflows,

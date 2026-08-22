@@ -9,6 +9,7 @@ const {runCoreLengthGateSelfTest, validateCoreLength} = require('./sync-core-per
 
 const ROOT = path.resolve(__dirname, '..');
 const DELIVERY_ROOT = path.resolve(ROOT, '..');
+const siteOnly = process.argv.includes('--site-only');
 const failures = [];
 const EXPECTED_TOTAL = 1189;
 const EXPECTED_SECTION_COUNTS = Object.freeze({
@@ -149,9 +150,9 @@ const expandedPortableCore = one(
 );
 
 const charter = read('CHARTER.txt');
-const delivered = read('Mephistodata_CORE_Personal_Rules_2026-08-12.md', DELIVERY_ROOT);
+const delivered = siteOnly ? null : read('Mephistodata_CORE_Personal_Rules_2026-08-12.md', DELIVERY_ROOT);
 if (`${core.b}\n` !== charter) failures.push('Methodologylist CORE body and CHARTER.txt are not byte-equal');
-if (delivered !== charter) failures.push('delivered Personal Rules and CHARTER.txt are not byte-equal');
+if (!siteOnly && delivered !== charter) failures.push('delivered Personal Rules and CHARTER.txt are not byte-equal');
 const coreLengthMetrics = Object.freeze({
   utf16Units: charter.length,
   unicodeCodePoints: Array.from(charter).length,
