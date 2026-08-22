@@ -26,7 +26,10 @@ function publishDir() {
 const publish = publishDir();
 if (publish !== 'public') failures.push(`netlify.toml publish directory is "${publish}"; expected "public" so full zip root stays archive/operator and only /public deploys.`);
 const canonicalBuild = `${packageDoc.scripts?.build || ''}\n${packageDoc.scripts?.['build:locked'] || ''}`;
-const netlifyRunsCanonicalBuild = /command\s*=\s*"npm run build"/.test(toml) && /build-public-deploy\.js/.test(canonicalBuild);
+const requiredNetlifyBuild = 'python3 -m pip install --disable-pip-version-check --no-input '
+  + '--require-hashes --requirement requirements-audit.lock && npm run build';
+const netlifyRunsCanonicalBuild = toml.includes(`command = "${requiredNetlifyBuild}"`)
+  && /build-public-deploy\.js/.test(canonicalBuild);
 if (!/build-public-deploy\.js/.test(toml) && !netlifyRunsCanonicalBuild) failures.push('Netlify build does not generate the public publish directory through the canonical package build command.');
 const rootFiles = fs.readdirSync(ROOT, { withFileTypes: true })
   .filter(d => d.isFile())

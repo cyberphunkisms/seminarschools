@@ -80,25 +80,26 @@ PREVIOUS_TRANSITION = {
     ),
 }
 
-APPROVED_SUCCESSOR_ADDITION_COUNT = 473
+APPROVED_SUCCESSOR_ADDITION_COUNT = 474
 APPROVED_SUCCESSOR_ADDITION_PATHS_SHA256 = (
-    "2f87b177d05e9d5285af0791865d6a57fd7f75d41e00d295c6dc31203ad476f0"
+    "8e25cb06b6eec3b576d7e1bc69a58935a731ae7771a248a138b4604528971a1b"
 )
 APPROVED_SUCCESSOR_ADDITION_ROWS_SHA256 = (
-    "57120802f9025b0b673df19a950bebfd4155b57a7064d7abb155982660458d58"
+    "9a91f1c1b6ad2e812bfe267cb2ec5990effa8cd47df4b802a8edcd2e6ca4cc2e"
 )
 APPROVED_SUCCESSOR_ADDITION_CATEGORY_COUNTS = {
     "source_event_ics": 226,
     "source_feeds": 3,
     "public_event_ics": 226,
     "public_feeds": 3,
-    "named": 15,
+    "named": 16,
 }
 APPROVED_SUCCESSOR_NAMED_PATHS = (
     "WEBSITE_CL_2026-07-19.md",
     "data/polymythcal-event-schema-v2.json",
     "data/website-cl.jsonl",
     "docs/WEBSITE_CL_2026-07-19.md",
+    "netlify.toml",
     "scripts/festivals-prompt.md",
     "scripts/polymythcal_adapters.py",
     "scripts/regen-bookwormburrows-txt.js",

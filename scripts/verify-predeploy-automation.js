@@ -252,8 +252,12 @@ check(
 );
 
 const netlify = read('netlify.toml');
-check(/command\s*=\s*"npm run build"/.test(netlify), 'Netlify does not run canonical build');
+const requiredNetlifyBuild = 'python3 -m pip install --disable-pip-version-check --no-input '
+  + '--require-hashes --requirement requirements-audit.lock && npm run build';
+check(netlify.includes(`command = "${requiredNetlifyBuild}"`), 'Netlify does not install the locked Python runtime before the canonical build');
 check(/NODE_VERSION\s*=\s*"24\.14\.0"/.test(netlify), 'Netlify Node version is not pinned to 24.14.0');
+check(/PYTHON_VERSION\s*=\s*"3\.12\.13"/.test(netlify), 'Netlify Python version is not pinned to 3.12.13');
+check(/PYTHON_BIN\s*=\s*"python3"/.test(netlify), 'Netlify Python command is not coupled to scripts/run-python.js');
 check(/publish\s*=\s*"public"/.test(netlify), 'Netlify publish directory is not public');
 check(netlify.includes('node ./scripts/netlify-ignore-build.js'), 'Netlify ignore command changed');
 

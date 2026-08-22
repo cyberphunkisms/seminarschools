@@ -2,7 +2,11 @@
 # seminarschools.com static site
 
 [build]
-  command = "npm run build"
+  # Netlify auto-detects only the conventional requirements.txt name. This
+  # repository's audited Python runtime lives in a fully pinned, hash-locked
+  # custom lockfile, so install that exact runtime before any Python-backed
+  # build step runs.
+  command = "python3 -m pip install --disable-pip-version-check --no-input --require-hashes --requirement requirements-audit.lock && npm run build"
   publish = "public"
   # Credit conservation (June 6 2026): skip the build entirely when a push
   # touches only workflow metadata, historical snapshots, scrape summaries,
@@ -13,6 +17,10 @@
 
 [build.environment]
   NODE_VERSION = "24.14.0"
+  PYTHON_VERSION = "3.12.13"
+  # scripts/run-python.js honors this value, coupling every validator to the
+  # same interpreter whose dependencies were installed by the build command.
+  PYTHON_BIN = "python3"
   NPM_CONFIG_REGISTRY = "https://registry.npmjs.org/"
 
 [functions]

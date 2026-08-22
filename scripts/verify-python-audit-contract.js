@@ -21,6 +21,7 @@ function check(condition, message) {
 
 const requirements = read('requirements-audit.txt');
 const auditLock = read('requirements-audit.lock');
+const polymythcalValidator = read('scripts/validate-polymythcal.py');
 for (const dependency of [
   'beautifulsoup4',
   'icalendar',
@@ -41,6 +42,47 @@ const lockedHashes = [...auditLock.matchAll(/^\s+--hash=sha256:([a-f0-9]{64})(?:
 check(lockedPins.length === 22, `requirements-audit.lock has ${lockedPins.length} resolved pins, expected 22`);
 check(lockedHashes.length === 332, `requirements-audit.lock has ${lockedHashes.length} artifact hashes, expected 332`);
 check(!/(?:^|\n)(?!\s*#)(?!\s*$)(?![A-Za-z0-9_.-]+==[^\s\\]+\s+\\$)(?!\s+--hash=sha256:[a-f0-9]{64}(?:\s+\\)?$).+/m.test(auditLock), 'requirements-audit.lock contains an unsupported unhashed line');
+check(
+  /^jsonschema==4\.24\.0$/m.test(requirements),
+  'requirements-audit.txt does not pin the jsonschema version required by the Polymythcal validator',
+);
+check(
+  /^jsonschema==4\.24\.0\s+\\$/m.test(auditLock),
+  'requirements-audit.lock does not resolve the pinned jsonschema dependency',
+);
+check(
+  /^from jsonschema import Draft202012Validator$/m.test(polymythcalValidator),
+  'the Polymythcal validator no longer exposes the jsonschema dependency covered by this contract',
+);
+
+const netlify = read('netlify.toml');
+const netlifyInstall = 'python3 -m pip install --disable-pip-version-check --no-input '
+  + '--require-hashes --requirement requirements-audit.lock';
+const netlifyBuildCommand = netlify.match(
+  /^\s*command\s*=\s*"([^"]+)"\s*$/m,
+)?.[1];
+check(
+  netlifyBuildCommand === `${netlifyInstall} && npm run build`,
+  'Netlify does not install the hash-locked Python audit runtime before npm run build',
+);
+const netlifyEnvironmentMarker = '[build.environment]';
+const environmentStart = netlify.indexOf(netlifyEnvironmentMarker);
+let netlifyEnvironment = '';
+if (environmentStart >= 0) {
+  const environmentTail = netlify.slice(environmentStart + netlifyEnvironmentMarker.length);
+  const nextSection = environmentTail.search(/^\s*\[/m);
+  netlifyEnvironment = nextSection >= 0
+    ? environmentTail.slice(0, nextSection)
+    : environmentTail;
+}
+check(
+  /^\s*PYTHON_VERSION\s*=\s*"3\.12\.13"\s*$/m.test(netlifyEnvironment),
+  'Netlify is not pinned to the repository-tested Python 3.12.13 runtime',
+);
+check(
+  /^\s*PYTHON_BIN\s*=\s*"python3"\s*$/m.test(netlifyEnvironment),
+  'Netlify does not couple scripts/run-python.js to the interpreter used for dependency installation',
+);
 
 const pkg = JSON.parse(read('package.json'));
 const lock = JSON.parse(read('package-lock.json'));
