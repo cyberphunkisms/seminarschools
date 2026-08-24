@@ -62,8 +62,18 @@
       savedItems: "Saved items",
       officialSource: "Official or institutional source",
       sourceListing: "Source listing",
-      openOrganizer: "Open organizer website",
-      openSource: "Open source website",
+      openEventPage: "Open official event page",
+      openSeriesPage: "Open official series page",
+      openSchedule: "Open official schedule",
+      openEventSourcePage: "Open event source page",
+      openSeriesSourcePage: "Open series source page",
+      openSourceSchedule: "Open source schedule",
+      openRegistration: "Open registration page",
+      openApplication: "Open application page",
+      openSubmission: "Open submission page",
+      openTickets: "Open ticket page",
+      openReview: "Open review page",
+      openResults: "Open results page",
       details: "Details",
       timePending: "Time unpublished",
       placePending: "Location unpublished",
@@ -132,8 +142,18 @@
       savedItems: "Éléments enregistrés",
       officialSource: "Source officielle ou institutionnelle",
       sourceListing: "Fiche source",
-      openOrganizer: "Voir le site de l’organisateur",
-      openSource: "Voir le site source",
+      openEventPage: "Ouvrir la page officielle de l’événement",
+      openSeriesPage: "Ouvrir la page officielle de la série",
+      openSchedule: "Ouvrir l’horaire officiel",
+      openEventSourcePage: "Ouvrir la page source de l’événement",
+      openSeriesSourcePage: "Ouvrir la page source de la série",
+      openSourceSchedule: "Ouvrir l’horaire source",
+      openRegistration: "Ouvrir la page d’inscription",
+      openApplication: "Ouvrir la page de candidature",
+      openSubmission: "Ouvrir la page de soumission",
+      openTickets: "Ouvrir la billetterie",
+      openReview: "Ouvrir la page d’évaluation",
+      openResults: "Ouvrir la page des résultats",
       details: "Voir les détails",
       timePending: "Heure non publiée",
       placePending: "Lieu non publié",
@@ -439,7 +459,7 @@
     "List": "Liste",
     "Calendar": "Calendrier",
     "Show more": "Afficher plus",
-    "Each listing has a direct link to the organizer or source website. Open Details for the verified date, place, calendar download, and correction link. Saved items stay on this device.": "Chaque fiche mène directement au site de l’organisateur ou au site source. Ouvrez les détails pour consulter la date et le lieu vérifiés, télécharger le calendrier ou proposer une correction. Les éléments enregistrés restent sur cet appareil.",
+    "Open Details first for the verified date, place, calendar download, and correction link. When an exact external page is available, it appears as a separate action. Saved items stay on this device.": "Ouvrez d’abord les détails pour consulter la date et le lieu vérifiés, télécharger le calendrier ou proposer une correction. Lorsqu’une page externe exacte est disponible, elle apparaît comme action distincte. Les éléments enregistrés restent sur cet appareil.",
     "Polymythcal needs JavaScript for interactive filtering. You can still use the": "Polymythcal exige JavaScript pour le filtrage interactif. Vous pouvez toujours utiliser les",
     "RSS and calendar feeds": "fils RSS et calendriers",
     "or browse the": "ou consulter le",
@@ -1508,16 +1528,26 @@
     return `<time class="pm-date-box" datetime="${isoDate(date)}" aria-label="${escapeHtml(formatDate(date, { dateStyle: "long" }))}"><span class="pm-date-month">${escapeHtml(formatDate(date, { month: "short" }))}</span><span class="pm-date-day">${date.getDate()}</span><span class="pm-date-year">${date.getFullYear()}</span></time>`;
   }
 
-  function sourceInfo(event) {
-    const label = ["official", "official-or-institutional", "institutional"].includes(String(event.source_quality || "").toLowerCase())
-      ? t.openOrganizer
-      : t.openSource;
+  function destinationInfo(event) {
+    if (!event.destination_url || event.destination_status === "unavailable-specific-page") return null;
+    const sourcePage = String(event.destination_status || "").startsWith("source-");
+    const labels = {
+      schedule: sourcePage ? t.openSourceSchedule : t.openSchedule,
+      registration: t.openRegistration,
+      application: t.openApplication,
+      submission: t.openSubmission,
+      tickets: t.openTickets,
+      review: t.openReview,
+      results: t.openResults
+    };
+    const label = labels[event.destination_kind] || (event.destination_scope === "series"
+      ? (sourcePage ? t.openSeriesSourcePage : t.openSeriesPage)
+      : (sourcePage ? t.openEventSourcePage : t.openEventPage));
     try {
-      const host = new URL(event.source_url).hostname.replace(/^www\./, "");
+      const host = new URL(event.destination_url).hostname.replace(/^www\./, "");
       return { label, host };
     } catch (_) {
-      const sourceId = String(event.source_id || "").trim();
-      return { label, host: sourceId };
+      return null;
     }
   }
 
@@ -1527,7 +1557,7 @@
     const specificKind = kindLabel(event);
     const contentKind = event._content === "apply" ? t.apply : t.attend;
     const kindBadge = normalizeText(specificKind) === normalizeText(contentKind) ? "" : `<span class="pm-badge">${escapeHtml(specificKind)}</span>`;
-    const source = sourceInfo(event);
+    const destination = destinationInfo(event);
     return `
       <article class="pm-event-card" data-event-id="${escapeHtml(event.id)}">
         ${dateBoxHtml(event)}
@@ -1542,8 +1572,8 @@
           ${freshnessHtml(event)}
           ${descriptionText ? `<p class="pm-event-description">${escapeHtml(descriptionText)}</p>` : ""}
           <div class="pm-card-actions">
-            ${event.source_url ? `<a class="pm-action pm-source-action" href="${escapeHtml(event.source_url)}" rel="noopener noreferrer"><span class="pm-source-copy"><span>${escapeHtml(source.label)}</span>${source.host ? `<span class="pm-source-domain" data-allow-word-break="true">${escapeHtml(source.host)}</span>` : ""}</span><span aria-hidden="true">↗</span></a>` : ""}
             <a class="pm-action primary-link" href="${routeFor(event)}">${escapeHtml(t.details)} <span aria-hidden="true">→</span></a>
+            ${destination ? `<a class="pm-action pm-source-action" href="${escapeHtml(event.destination_url)}" rel="noopener noreferrer"><span class="pm-source-copy"><span>${escapeHtml(destination.label)}</span>${destination.host ? `<span class="pm-source-domain" data-allow-word-break="true">${escapeHtml(destination.host)}</span>` : ""}</span><span aria-hidden="true">↗</span></a>` : ""}
             <button type="button" class="pm-action pm-save" data-save-id="${escapeHtml(event.id)}" aria-pressed="${saved}" aria-label="${escapeHtml(saved ? `${t.saved}: ${event.title}` : `${t.save}: ${event.title}`)}">${escapeHtml(saved ? t.saved : t.save)}</button>
           </div>
         </div>

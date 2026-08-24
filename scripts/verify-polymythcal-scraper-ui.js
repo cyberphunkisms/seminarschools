@@ -30,7 +30,7 @@ for (const needle of ['"topics"','"status"','"date_text"','"time_text"','"locati
 const main = read('polymythseminars/index.html');
 const app = read('js/polymythcal-revamp.js');
 for (const needle of ['id="pmSearch"','id="pmFocusedCalendars"','id="pmCalendarTools"','id="pmFilterDrawer"','id="pmEventList"','id="pmCalendar"','id="pmResultsTitle" tabindex="-1"','aria-busy="true"','Application opportunities','Calls for papers and proposals','Fellowships, grants, and residencies','Some details pending']) if (!main.includes(needle)) problems.push(`polymythseminars/index.html must keep ${needle}`);
-for (const needle of ['function eventMatchesSearch','function matchesFilters','event.raw_excerpt','event.topics','event.source_url','class="pm-action pm-source-action"','qualification_reasons','loadMoreCount','official source unconfirmed','data-retry-calendar','window.addEventListener("popstate"','event.time_precision === "exact"']) if (!app.includes(needle)) problems.push(`js/polymythcal-revamp.js must keep ${needle}`);
+for (const needle of ['function eventMatchesSearch','function matchesFilters','event.raw_excerpt','event.topics','function destinationInfo(event)','event.destination_url','event.destination_status === "unavailable-specific-page"','class="pm-action primary-link"','class="pm-action pm-source-action"','qualification_reasons','loadMoreCount','official source unconfirmed','data-retry-calendar','window.addEventListener("popstate"','event.time_precision === "exact"']) if (!app.includes(needle)) problems.push(`js/polymythcal-revamp.js must keep ${needle}`);
 if (!app.includes('if (variant.length < 4) return event._words.includes(variant);')) problems.push('short search variants must use whole-word matching');
 if (main.includes('Leads needing details') || main.includes('watchlistPanel')) problems.push('main Polymythcal should keep qualification leads out of the public results interface');
 if (main.includes('data-focus="deadlines"')) problems.push('main Polymythcal must not restore the ambiguous Deadlines shortcut');
@@ -76,4 +76,4 @@ if (browse) {
 if (!fs.existsSync(path.join(ROOT, 'polymythseminars/watchlist.json'))) problems.push('public watchlist compatibility file is missing');
 if (main.includes('Thank You Ma’am Teaching Activities as a static collection page')) problems.push('polymythseminars/index.html leaked unrelated non-front-facing resource language.');
 if (problems.length) { console.error('POLYMYTHCAL SCRAPER/UI GUARD FAILED\n- ' + problems.join('\n- ')); process.exit(1); }
-console.log('POLYMYTHCAL SCRAPER/UI OK — source recall, native qualified uncertainty, source-first actions, and route-specific entry pages are guarded.');
+console.log('POLYMYTHCAL SCRAPER/UI OK — source recall, native qualified uncertainty, Details-first exact destination actions, and route-specific entry pages are guarded.');

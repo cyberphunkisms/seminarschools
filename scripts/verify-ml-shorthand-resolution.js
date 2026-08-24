@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const {parseSeedWithAddenda} = require('./lib/parse-seed-with-addenda');
 
 const root = path.resolve(__dirname, '..');
 
@@ -117,8 +118,8 @@ for (const [text, label] of controllingBlocks) {
   for (const phrase of requiredDoctrine) requirePhrase(text, phrase, label);
 }
 
-requirePhrase(charter, 'Continuity reference=>retrieval only.', 'portable CORE continuity trigger');
-requirePhrase(charter, 'Before using/revising/claiming existing work: retrieve newest canonical source in context;', 'portable CORE newest-source trigger');
+requirePhrase(charter, 'Continuity reference=>retrieve only.', 'portable CORE continuity trigger');
+requirePhrase(charter, 'Before using/revising/claiming work, retrieve newest canonical source in context;', 'portable CORE newest-source trigger');
 requirePhrase(charter, 'never reconstruct.', 'portable CORE reconstruction boundary');
 requirePhrase(coreplus, 'the current CORE+ map, the active handler, and relevant sibling files', 'CORE+ handler load order');
 
@@ -139,14 +140,22 @@ for (const relativePath of [
   if (source !== deployed) throw new Error(`Public shorthand doctrine mirror is stale: ${relativePath}`);
 }
 
-const commandBody = block(
-  canonical,
-  'VERIFIED COMMANDS (from corpus scan, each lives in its canonical slot):',
-  'RECOGNITION-AND-CORRECTION ALLOWANCE',
-  'canonical Command list',
+const currentCommandOwner = parseSeedWithAddenda(canonical)
+  .find(entry => entry.id === 'method-command-list-current-2026-08-23');
+if (!currentCommandOwner) throw new Error('Current Command list owner is missing.');
+const commandBody = String(currentCommandOwner.b || '');
+requirePhrase(
+  commandBody,
+  'OA / Ouroborosanalyses: load method-ouroborosanalyses-current-2026-08-23 and run its whole-conversation four steps',
+  'current Command list OA route',
 );
-if (resolveExplicitCommand('OA', commandBody) !== 'Ouroborosanalyses') {
-  throw new Error('Non-CL fixture failed: OA did not resolve from its explicit canonical definition.');
+requirePhrase(
+  commandBody,
+  'ouroborossyntheses: run method-ouroborossyntheses-2026-08-23',
+  'current Command list Ouroborossyntheses route',
+);
+if (normalized(commandBody).includes(normalized('review whole conversation, classify content by section'))) {
+  throw new Error('Current Command list retains the superseded whole-conversation update-meaninglib route.');
 }
 if (resolveExplicitCommand('ZXQ-UNDEFINED-90817', commandBody) !== null) {
   throw new Error('Undefined-token fixture failed: an absent synthetic token acquired a meaning.');

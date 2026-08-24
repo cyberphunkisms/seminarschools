@@ -41,6 +41,18 @@ const publicBuilder = read('scripts/build-public-deploy.js');
 const releaseAssetIdentityHelper = read('scripts/lib/release-asset-identity.js');
 const releaseAssetIdentityUpdater = read('scripts/update-release-asset-identity.js');
 const releaseAssetIdentityVerifier = read('scripts/verify-release-asset-identity.js');
+const destinationContractAssets = [
+  'data/external-destination-contracts.json',
+  'data/polymythcal-destination-overrides.json',
+  'scripts/lib/external-destination-contracts.js',
+  'scripts/apply-polymythcal-destination-specificity.js',
+  'scripts/update-polymythcal-destination-contract.js',
+  'scripts/test-external-destination-contracts.js',
+  'scripts/verify-external-destination-contracts.js',
+  'scripts/verify-polymythcal-destination-specificity.js',
+  'scripts/verify-polymythcal-destination-browser.js',
+  'scripts/fixtures/futureproofing/external-destinations/invalid-destinations.json',
+];
 let pkg = {};
 let manifest = {};
 let lock = {};
@@ -115,6 +127,19 @@ check(
 for (const [name, source] of [['deployer', deployer], ['source', sourcePackager]]) {
   check(source.includes('load_current_release_manifest()'), `${name} packager does not reload release metadata after build verification`);
   check(source.includes('Archive metadata does not match the packaged release manifest.'), `${name} packager does not assert packaged release metadata parity`);
+}
+for (const [name, source, prefix] of [
+  ['deployer', deployer, ''],
+  ['Netlify source', sourcePackager, ''],
+  ['complete archive', completeArchivePackager, 'SITE_PACKAGE/'],
+]) {
+  for (const relative of destinationContractAssets) {
+    const requiredPath = `${prefix}${relative}`;
+    check(
+      source.split(requiredPath).length - 1 === 1,
+      `${name} packager must require ${requiredPath} exactly once`,
+    );
+  }
 }
 for (const token of [
   'require_release_build_lock(DELIVERY_ROOT)',
@@ -215,21 +240,21 @@ check(
   'complete outer packager must build, verify, archive, reproduce, restore, receipt, then verify the receipt',
 );
 check(
-  completePackager.includes('PACKAGE_RELEASE_ID = "core-coreplus-mephistodata-bb-polymythcal-sets1-15-sitewide-fixes-synthesized-2026-08-15"')
+  completePackager.includes('PACKAGE_RELEASE_ID = "core-coreplus-mephistodata-bb-polymythcal-sets1-15-ml-current-synthesis-2026-08-23"')
     && completePackager.includes('OUTPUT_BASENAME = (')
     && completePackager.includes('"ss-site-polymythcal-sets1-15-sitewide-fixes-synthesized-"')
-    && completePackager.includes('"complete-2026-08-15.zip"')
+    && completePackager.includes('"complete-ml-current-synthesis-2026-08-23.zip"')
     && completePackager.includes('Complete release output must use the canonical name')
     && !completePackager.includes('parser.add_argument("--release-id"'),
   'complete outer packager exposes arbitrary package release identity',
 );
 check(
-  completePackager.includes('DERIVED_GENERATED_AT = "2026-08-13T04:00:00Z"')
-    && completePackager.includes('RELEASE_GENERATED_AT = "2026-08-15T18:00:00-04:00"')
+  completePackager.includes('DERIVED_GENERATED_AT = "2026-08-24T03:30:00Z"')
+    && completePackager.includes('RELEASE_GENERATED_AT = "2026-08-23T23:30:00-04:00"')
     && completePackager.includes('generated_at = RELEASE_GENERATED_AT')
-    && cleanRoomBuilder.includes('DERIVED_GENERATED_AT = "2026-08-13T04:00:00Z"')
-    && completePackager.includes('os.environ["SITE_BUILD_DATE"] = "2026-08-15"')
-    && cleanRoomBuilder.includes('os.environ["SITE_BUILD_DATE"] = "2026-08-15"'),
+    && cleanRoomBuilder.includes('DERIVED_GENERATED_AT = "2026-08-24T03:30:00Z"')
+    && completePackager.includes('os.environ["SITE_BUILD_DATE"] = "2026-08-23"')
+    && cleanRoomBuilder.includes('os.environ["SITE_BUILD_DATE"] = "2026-08-23"'),
   'primary and clean-room package builds must share the current deterministic release day',
 );
 for (const token of [
@@ -366,6 +391,9 @@ for (const [name, command] of Object.entries({
   'verify:polymyth-entry-points': 'node scripts/verify-polymyth-entry-points.js',
   'verify:cloud-input-runtime': 'node scripts/verify-cloud-input-runtime.js',
   'verify:redirect-coherence': 'node scripts/verify-redirect-policy-coherence.js',
+  'apply:polymythcal-destination-specificity': 'node scripts/apply-polymythcal-destination-specificity.js',
+  'verify:polymythcal-destination-specificity': 'node scripts/verify-polymythcal-destination-specificity.js',
+  'verify:polymythcal-destination-browser': 'node scripts/verify-polymythcal-destination-browser.js',
 })) {
   check(pkg.scripts?.[name] === command, `package ${name} is not the current release contract`);
 }
@@ -409,6 +437,7 @@ check(
   'canonical build must normalize inherited Sets 1-12 once before protected Sets 13-15 cross-tags',
 );
 const buildOrder = [
+  'apply-polymythcal-destination-specificity.js',
   'apply-audit45-language-model.py',
   'build-polymythcal-audit13.py',
   'build-search-pages.js',
@@ -422,6 +451,7 @@ const buildOrder = [
   'build-audit45-localized-routes.py',
   'apply-audit45-translation-ui.js',
   'apply-audit49-metadata-hygiene.js',
+  'update-polymythcal-destination-contract.js',
   'update-release-asset-identity.js',
   'update-polymythcal-build-manifest.js',
   'build-public-deploy.js',
@@ -432,6 +462,7 @@ const buildOrder = [
   'verify-visible-geometry.js',
   'verify-meaningful-geometry.js',
   'verify-geometry.js',
+  'verify-polymythcal-destination-specificity.js',
   'verify-audit45-translations.py',
   'verify-audit49-metadata-surface.js',
   'verify-audit49-runtime-efficiency.js',
@@ -511,6 +542,7 @@ for (const command of [
   'node scripts/verify-polymyth-entry-points.js',
   'node scripts/verify-front-facing-boundary.js',
   'node scripts/verify-release-asset-identity.js',
+  'node scripts/verify-polymythcal-destination-specificity.js',
 ]) {
   const escaped = command.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   check(
@@ -528,6 +560,8 @@ const browserFrontFacingCommand = 'node scripts/verify-front-facing-overlap-brow
 const browserFrontFacingIndex = runner.indexOf(browserFrontFacingCommand);
 const setsBrowserCommand = 'node scripts/verify-polymythcal-sets13-15-browser.js';
 const setsBrowserIndex = runner.indexOf(setsBrowserCommand);
+const destinationBrowserCommand = 'node scripts/verify-polymythcal-destination-browser.js';
+const destinationBrowserIndex = runner.indexOf(destinationBrowserCommand);
 const teacherBrowserIndex = runner.indexOf('node scripts/verify-teacherresources-state-layout-browser.js');
 const homeBrowserIndex = runner.indexOf('node scripts/verify-home-map-browser.js');
 const idempotenceCommand = 'node scripts/verify-build-idempotence.js';
@@ -551,6 +585,13 @@ check(
     && setsBrowserIndex > homeBrowserIndex
     && setsBrowserIndex < browserGeometryIndex,
   'full Sets 13-15 Chromium gate must run exactly once after Teacher Resources/home and before browser geometry',
+);
+check(
+  (runner.match(/node scripts\/verify-polymythcal-destination-browser\.js/g) || []).length === 1
+    && destinationBrowserIndex > setsBrowserIndex
+    && destinationBrowserIndex < browserGeometryIndex
+    && !build.includes('verify-polymythcal-destination-browser.js'),
+  'full destination Chromium gate must run exactly once after Sets 13-15 and outside the production build',
 );
 check(
   (runner.match(/node scripts\/verify-build-idempotence\.js/g) || []).length === 1

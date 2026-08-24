@@ -17,7 +17,13 @@ check('calendar uses the lightweight client shell', cal.includes('id="pmEventLis
 check('calendar avoids an embedded full-corpus fallback', !cal.includes('id="events-fallback"') && cal.length < 100000);
 check('calendar carries the manifest-owned build stamp', cal.includes('name="ss-build"') && cal.includes(`content="${assetVersion}"`));
 check('calendar application fetches the compact public browser path', app.includes('const DATA_URL = "/polymythseminars/browse.json"'));
-check('calendar application renders official source links', app.includes('event.source_url') && app.includes('rel="noopener noreferrer"'));
+check(
+  'calendar application renders only contract-approved exact destination links',
+  app.includes('function destinationInfo(event)')
+    && app.includes('event.destination_url')
+    && app.includes('event.destination_status === "unavailable-specific-page"')
+    && app.includes('rel="noopener noreferrer"'),
+);
 check('calendar has a readable load-failure route', app.includes('loadError') && app.includes('/polymythseminars/subscribe/'));
 check(
   'calendar honours the five-minute HTTP freshness window',
@@ -40,7 +46,11 @@ const feed = read('polymythseminars/feed.xml');
 check('rss feed present with items', feed.includes('<item>'));
 const home = read('about/index.html');
 check('main page fetches the versioned compact featured-events file', home.includes(`/polymythseminars/featured.json?v=${assetVersion}`));
-check('main page wraps titles in source_url links', home.includes('source_url'));
+check(
+  'main page links featured titles to internal Details routes',
+  home.includes("var detailsUrl = '/polymythseminars/events/' + encodeURIComponent(String(e.id)) + '/';")
+    && !home.includes('e.source_url'),
+);
 check('main page uses the fallback loader', home.includes('fetchEventsWithFallback'));
 const ntl = read('netlify.toml');
 check('netlify publishes only the generated public directory', /publish\s*=\s*"public"/.test(ntl));

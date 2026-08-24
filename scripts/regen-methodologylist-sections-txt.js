@@ -82,6 +82,7 @@ const SECTION_LABELS = {
 function renderEntry(e) {
   const role  = e.r || 'both';
   const title = (e.t || '<untitled>').trim();
+  const current = (e.xc || '').trim();
   const body  = (e.b || '').trim();
   const ext   = (e.x || '').trim();
   const tags  = (e.tg || '').trim();
@@ -93,6 +94,7 @@ function renderEntry(e) {
     ...(Array.isArray(e.legacy_anchors) ? e.legacy_anchors : []),
   ];
   if (legacyAnchors.length) lines.push('  legacy-anchors: ' + [...new Set(legacyAnchors)].join(', '));
+  if (current) lines.push(current);
   if (body) lines.push(body);
   if (ext && !body.includes(ext)) { lines.push(''); lines.push(ext); }
   if (tags) lines.push('  tags: ' + tags);

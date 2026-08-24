@@ -92,11 +92,11 @@
       "public_html_documents": 7563,
       "interactive_documents": 5370,
       "redirect_documents": 2193,
-      "indexable_documents": 1950,
-      "noindex_documents": 5613,
-      "sitemap_urls": 1970,
-      "schema_blocks": 3366,
-      "schema_documents": 1978,
+      "indexable_documents": 1848,
+      "noindex_documents": 5715,
+      "sitemap_urls": 1868,
+      "schema_blocks": 3264,
+      "schema_documents": 1876,
       "indexable_documents_without_schema": 1,
       "intentional_schema_exemptions": 1,
       "hreflang_links": 12960,
@@ -115,11 +115,11 @@
       "over_100_kib": 39,
       "over_250_kib": 27,
       "over_500_kib": 8,
-      "largest_bytes": 4135253,
+      "largest_bytes": 4215072,
       "gzip_over_100_kib": 21,
       "gzip_over_250_kib": 4,
       "gzip_over_500_kib": 2,
-      "largest_gzip_bytes": 1264836
+      "largest_gzip_bytes": 1291817
     },
     "runtime": {
       "active_runtime_files": 7260,
@@ -130,7 +130,7 @@
       "public_runtime_mirrors_identical": 10,
       "forced_public_data_revalidation_fetches": 0,
       "bounded_public_data_assets": 24,
-      "bounded_public_data_bytes": 10163778
+      "bounded_public_data_bytes": 10308428
     },
     "cache_policies": {
       "polymyth_text_mirrors": "public, max-age=86400, stale-while-revalidate=604800",
@@ -162,17 +162,17 @@
       "selection": {
         "deployer": {
           "directories_visited": 15289,
-          "files_selected": 21346,
+          "files_selected": 21351,
           "public_files_selected": 9985,
-          "selected_bytes_excluding_generated_reports": 498764157,
+          "selected_bytes_excluding_generated_reports": 501744927,
           "disposable_directory_pruning_enforced": true,
           "broad_post_descent_filtering_avoided": true
         },
         "source": {
           "directories_visited": 7699,
-          "files_selected": 11361,
+          "files_selected": 11366,
           "public_files_selected": 0,
-          "selected_bytes_excluding_generated_reports": 326489375,
+          "selected_bytes_excluding_generated_reports": 328934356,
           "disposable_directory_pruning_enforced": true,
           "broad_post_descent_filtering_avoided": true
         }
@@ -211,7 +211,7 @@
           "fr-CA": 23,
           "mul": 3
         },
-        "methodology_entries": 1189,
+        "methodology_entries": 1207,
         "governed_route_records": 61,
         "event_source_language_counts": {
           "en-CA": 1422,

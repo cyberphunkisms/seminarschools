@@ -10,7 +10,13 @@ const contractPath = path.join(ROOT, 'data', 'external-destination-contracts.jso
 const eventsPath = path.join(ROOT, 'polymythseminars', 'events.json');
 const contract = JSON.parse(fs.readFileSync(contractPath, 'utf8'));
 const events = JSON.parse(fs.readFileSync(eventsPath, 'utf8')).events || [];
-const statuses = {'official-organizer': 0, 'source-page': 0, unavailable: 0};
+const statuses = {
+  'official-event-page': 0,
+  'official-series-page': 0,
+  'source-event-page': 0,
+  'source-series-page': 0,
+  'unavailable-specific-page': 0,
+};
 
 for (const event of events) {
   const result = assertDestination(polymythcalDestination(event), `Polymythcal event ${event.id}`);

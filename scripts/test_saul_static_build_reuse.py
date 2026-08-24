@@ -4,10 +4,12 @@ from __future__ import annotations
 
 import importlib.util
 from pathlib import Path
+import sys
 import unittest
 
 
 SCRIPT = Path(__file__).with_name("build-saul-ultimate-web-cv.py")
+sys.path.insert(0, str(SCRIPT.parent))
 SPEC = importlib.util.spec_from_file_location("build_saul_ultimate_web_cv", SCRIPT)
 assert SPEC and SPEC.loader
 BUILDER = importlib.util.module_from_spec(SPEC)
@@ -40,6 +42,30 @@ class StaticBuildDocumentReuseTests(unittest.TestCase):
         self.assertTrue(
             BUILDER.should_reuse_generated_documents([str(SCRIPT)], {"NETLIFY": "true"})
         )
+
+    def test_retired_routes_emit_the_final_geometry_contract(self) -> None:
+        source = SCRIPT.read_text(encoding="utf-8")
+        self.assertIn('<body {geometry_attributes} data-page-weight="light">', source)
+        self.assertIn("geometry_attributes=geometry_body_attributes(", source)
+        self.assertIn(
+            '<script src="/js/mandala.js?v={geometry_version}" defer></script>',
+            source,
+        )
+        attributes = BUILDER.geometry_body_attributes(
+            BUILDER.ROOT,
+            "saul/cv/general/index.html",
+            "cv-redirect",
+            register="quiet",
+        )
+        for expected in (
+            'data-indra-intensity="0.115"',
+            'data-geometry-key="/saul/cv/general/"',
+            'data-geometry-seed="',
+            'data-geometry-register="quiet"',
+            'data-geometry-profile="single"',
+        ):
+            self.assertIn(expected, attributes)
+        self.assertNotIn('data-indra-intensity="0.095"', attributes)
 
 
 if __name__ == "__main__":

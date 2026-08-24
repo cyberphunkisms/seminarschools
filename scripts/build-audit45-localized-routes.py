@@ -726,9 +726,13 @@ PM_LABELS = {
         "date": "Date", "deadline": "Deadline", "place": "Place", "status": "Status", "about": "About this listing",
         "pending_details": "Details still pending",
         "previous": "Previous date", "related": "Related listings", "checked": "Last checked",
-        "official": "Open organizer website", "source": "Open source website",
+        "event_page": "Open official event page", "series_page": "Open official series page",
+        "schedule_page": "Open official schedule", "registration_page": "Open registration page",
+        "event_source_page": "Open event source page", "series_source_page": "Open series source page", "source_schedule_page": "Open source schedule",
+        "application_page": "Open application page", "submission_page": "Open submission page",
+        "tickets_page": "Open ticket page", "review_page": "Open review page", "results_page": "Open results page",
         "calendar": "Add to calendar", "correct": "Correct this listing",
-        "continue": "Continue on the organizer or source website",
+        "continue": "Listing actions",
         "source_language": "Original listing language",
         "place_pending": "Location details still pending",
     },
@@ -739,9 +743,13 @@ PM_LABELS = {
         "date": "Date", "deadline": "Échéance", "place": "Lieu", "status": "Statut", "about": "À propos de cette fiche",
         "pending_details": "Détails à confirmer",
         "previous": "Date précédente", "related": "Fiches connexes", "checked": "Dernière vérification",
-        "official": "Voir le site de l’organisateur", "source": "Voir le site source",
+        "event_page": "Ouvrir la page officielle de l’événement", "series_page": "Ouvrir la page officielle de la série",
+        "schedule_page": "Ouvrir l’horaire officiel", "registration_page": "Ouvrir la page d’inscription",
+        "event_source_page": "Ouvrir la page source de l’événement", "series_source_page": "Ouvrir la page source de la série", "source_schedule_page": "Ouvrir l’horaire source",
+        "application_page": "Ouvrir la page de candidature", "submission_page": "Ouvrir la page de soumission",
+        "tickets_page": "Ouvrir la billetterie", "review_page": "Ouvrir la page d’évaluation", "results_page": "Ouvrir la page des résultats",
         "calendar": "Ajouter au calendrier", "correct": "Corriger cette fiche",
-        "continue": "Continuer sur le site de l’organisateur ou le site source",
+        "continue": "Actions de la fiche",
         "source_language": "Langue de la fiche originale",
         "place_pending": "Lieu exact à confirmer",
     },
@@ -988,8 +996,23 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
         venue = labels["place_pending"]
     city = str(event.get("city") or "")
     city = "" if city.strip().casefold() in {"", "unknown", "not yet determined"} else city.strip()
-    source_url = str(event.get("source_url") or "")
-    high_source = str(event.get("source_quality") or "").lower() in {"official", "official-or-institutional", "institutional"}
+    destination_url = str(event.get("destination_url") or "")
+    if str(event.get("destination_status") or "") == "unavailable-specific-page":
+        destination_url = ""
+    if destination_url and not destination_url.startswith("https://"):
+        raise RuntimeError(f"Unsafe Polymythcal destination for {event_id}: {destination_url!r}")
+    destination_kind = str(event.get("destination_kind") or "detail")
+    destination_scope = str(event.get("destination_scope") or "event")
+    destination_source = str(event.get("destination_status") or "").startswith("source-")
+    if destination_kind == "schedule" and destination_source:
+        destination_label = labels["source_schedule_page"]
+    else:
+        destination_label = labels.get(f"{destination_kind}_page") or (
+            labels["series_source_page"] if destination_source and destination_scope == "series"
+            else labels["event_source_page"] if destination_source
+            else labels["series_page"] if destination_scope == "series"
+            else labels["event_page"]
+        )
     ended = bool(re.search(r"pm-event-archive", (ROOT / "polymythseminars" / "events" / event_id / "index.html").read_text(encoding="utf-8", errors="ignore")))
     qualification_items = [
         event_qualification_copy(value, lang)
@@ -1020,7 +1043,7 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
         "@context": "https://schema.org", "@type": "Event", "name": title_source,
         "startDate": date_machine, "endDate": end_machine or None,
         "description": description_source or title_source, "url": canonical,
-        "sameAs": source_url or None, "inLanguage": source_schema_language,
+        "sameAs": destination_url or None, "inLanguage": source_schema_language,
         "location": location_schema,
     }
     schema = {key: value for key, value in schema.items() if value not in (None, "")}
@@ -1078,7 +1101,7 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
 <div><dt>{labels["status"]}</dt><dd>{status}</dd></div>
 {f'<div><dt>{labels["source_language"]}</dt><dd>{htmllib.escape(source_label)}</dd></div>' if source_languages else ''}</dl>
 <section class="pm-event-primary-path" aria-label="{labels["continue"]}"><p>{labels["continue"]}</p>
-<div class="pm-event-actions">{f'<a class="pm-event-action primary" href="{meta_escape(source_url)}" rel="noopener noreferrer">{labels["official"] if high_source else labels["source"]} ↗</a>' if source_url else ''}
+<div class="pm-event-actions">{f'<a class="pm-event-action primary" href="{meta_escape(destination_url)}" rel="noopener noreferrer">{destination_label} ↗</a>' if destination_url else ''}
 <a class="pm-event-action" type="text/calendar" href="/polymythseminars/ics/{meta_escape(event_id)}.ics">{labels["calendar"]}</a>
 <a class="pm-event-action" href="/polymythseminars/{'fr/' if french else ''}correct/?event={meta_escape(canonical)}">{labels["correct"]}</a></div></section>
 {f'<section class="pm-event-description"><h2>{labels["about"]}</h2><p lang="{meta_escape(source_lang)}" data-source-language="{meta_escape(source_label)}">{htmllib.escape(description_source)}</p></section>' if description_source else ''}

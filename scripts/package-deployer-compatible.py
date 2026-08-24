@@ -298,6 +298,18 @@ required=[
  'public/saul/fa/index.html',
  'public/teacherresources/index.html',
 ]
+required.extend([
+ 'data/external-destination-contracts.json',
+ 'data/polymythcal-destination-overrides.json',
+ 'scripts/lib/external-destination-contracts.js',
+ 'scripts/apply-polymythcal-destination-specificity.js',
+ 'scripts/update-polymythcal-destination-contract.js',
+ 'scripts/test-external-destination-contracts.js',
+ 'scripts/verify-external-destination-contracts.js',
+ 'scripts/verify-polymythcal-destination-specificity.js',
+ 'scripts/verify-polymythcal-destination-browser.js',
+ 'scripts/fixtures/futureproofing/external-destinations/invalid-destinations.json',
+])
 required.extend(
  f'data/audit43-browser/screenshots/{name}'
  for name in '''

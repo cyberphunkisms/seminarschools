@@ -19,11 +19,13 @@ from editable_masters_integrity import verify_editable_masters
 SITE_ROOT = Path(__file__).resolve().parents[1]
 DELIVERY_ROOT = SITE_ROOT.parent
 CANONICAL_PIPELINE_ID = "npm-ci-build-full-verify-editable-package-v1"
-DERIVED_GENERATED_AT = "2026-08-13T04:00:00Z"
+DERIVED_GENERATED_AT = "2026-08-24T03:30:00Z"
 CORE_ACCESS_QUERY = (
     "portable CORE personal rules follow CORE+ assistant-owned filing task continuity "
     "actual 5000 character ceiling no random artifacts source status anti-Snakelogic "
     "Mephistodata Devil's Diary activation dispatch canonical locator evidence first "
+    "current message scope external subject first Ouroborossyntheses Mearsheimer Mishlove "
+    "Realist Power-Conversion Egregore comparative corpus artifact independence "
     "Ask your favourite AI no planted conclusion BB no training"
 )
 
@@ -55,12 +57,12 @@ def main() -> None:
     os.environ["SOURCE_DATE_EPOCH"] = str(
         int(datetime.fromisoformat(DERIVED_GENERATED_AT.replace("Z", "+00:00")).timestamp())
     )
-    os.environ["SITE_BUILD_DATE"] = "2026-08-15"
+    os.environ["SITE_BUILD_DATE"] = "2026-08-23"
     subprocess.run([npm, "ci"], cwd=SITE_ROOT, check=True)
     subprocess.run([node, "scripts/sync-core-personal-rules.js"], cwd=SITE_ROOT, check=True)
     subprocess.run([npm, "run", "regen:all-txt"], cwd=SITE_ROOT, check=True)
     subprocess.run(
-        [node, "scripts/regen-methodologylist-manifest.js", "2026-08-13"],
+        [node, "scripts/regen-methodologylist-manifest.js", "2026-08-23"],
         cwd=SITE_ROOT,
         check=True,
     )

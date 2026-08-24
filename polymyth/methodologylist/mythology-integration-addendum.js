@@ -197,7 +197,8 @@ FOUR-PART SELF-AUDIT.
 
 LIVE VALIDATION. Apply the scanner to cases with evidence available to an external participant. Record successful diagnoses, altered diagnoses, null results, and abandoned claims.`,
     x: 'Recovered as assistant synthesis from page 7 of the 10-page PDF, then integrated here as an explicit fallibility control under the user’s current instruction to update ML* from all supplied material. Stone-specific and Point-specific imagery from that retrospective remains outside this rule because later manuscript corrections govern those symbols.',
-    tg: 'methodology, scanner-fallibility, anti-self-sealing, inspectable-evidence, contestable, alterable, null-result, model-abandonment, anti-absorption, repetition-no-authority, live-validation, 2026-07-28'
+    tg: 'methodology, scanner-fallibility, anti-self-sealing, inspectable-evidence, contestable, alterable, null-result, model-abandonment, anti-absorption, repetition-no-authority, live-validation, 2026-07-28',
+    xr: ['method-ouroborossyntheses-2026-08-23']
   },
   {
     id: 'mythology-integration-archive-status-taxonomy',

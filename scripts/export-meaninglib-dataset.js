@@ -69,7 +69,7 @@ function routeForSource(rel) {
   if (rel === 'polymyth-file-map.txt') return 'https://seminarschools.com/polymyth-file-map.txt';
   return '';
 }
-function rowBase({ id, star_file, title, body, section, source_txt, source_html = '', canonical_status = 'derived_txt', route = '', tags = [], crossrefs = [], record_type = 'entry', preserve_body = false }) {
+function rowBase({ id, star_file, title, body, section, source_txt, source_html = '', canonical_status = 'derived_txt', current_status = '', route = '', tags = [], crossrefs = [], record_type = 'entry', preserve_body = false }) {
   const originalBody = preserve_body ? String(body || '') : String(body || '').trim();
   const cleanBody = sanitizeForHfExport(originalBody);
   return {
@@ -81,6 +81,7 @@ function rowBase({ id, star_file, title, body, section, source_txt, source_html 
     source_html,
     source_txt,
     canonical_status,
+    current_status: String(current_status || '').trim(),
     route: route || routeForSource(source_txt || source_html || ''),
     tags,
     crossrefs,
@@ -88,7 +89,7 @@ function rowBase({ id, star_file, title, body, section, source_txt, source_html 
     body_redacted: cleanBody !== originalBody,
     source_hash: hash(originalBody),
     exported_at: now,
-    embedding_text: [star_file, section, title, cleanBody].filter(Boolean).join('\n\n').slice(0, 120000)
+    embedding_text: [star_file, section, title, current_status, cleanBody].filter(Boolean).join('\n\n').slice(0, 120000)
   };
 }
 function extractCrossrefs(text) {
@@ -131,11 +132,15 @@ function parseCanonicalMethodologylist() {
       source_txt: exists(sectionMirror) ? sectionMirror : '',
       source_html: canonicalRel,
       canonical_status: 'canonical_html',
+      current_status: entry.xc || '',
       route: canonicalId
         ? `https://seminarschools.com/polymyth/methodologylist/#${canonicalId}`
         : `https://seminarschools.com/polymyth/methodologylist/?section=${encodeURIComponent(section)}`,
       tags: ['ml', section, ...tags],
-      crossrefs: extractCrossrefs(body),
+      crossrefs: [...new Set([
+        ...extractCrossrefs(body),
+        ...(Array.isArray(entry.xr) ? entry.xr.map(value => String(value).trim()).filter(Boolean) : []),
+      ])].sort(),
       preserve_body: true,
     }));
   });
@@ -314,6 +319,7 @@ function main() {
       route: { type: 'string' },
       tags: { type: 'array', items: { type: 'string' } },
       crossrefs: { type: 'array', items: { type: 'string' } },
+      current_status: { type: 'string' },
       record_type: { type: 'string' },
       source_hash: { type: 'string' },
       exported_at: { type: 'string' },

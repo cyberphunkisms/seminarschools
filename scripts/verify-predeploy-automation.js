@@ -92,6 +92,7 @@ check(
 );
 
 const buildOrder = [
+  'apply-polymythcal-destination-specificity.js',
   'apply-audit45-language-model.py',
   'build-polymythcal-audit13.py',
   'build-search-pages.js',
@@ -105,12 +106,14 @@ const buildOrder = [
   'build-audit45-localized-routes.py',
   'apply-audit45-translation-ui.js',
   'apply-audit49-metadata-hygiene.js',
+  'update-polymythcal-destination-contract.js',
   'update-polymythcal-build-manifest.js',
   'build-public-deploy.js',
   'verify-public-deploy-parity.js',
   'verify-visible-geometry.js',
   'verify-meaningful-geometry.js',
   'verify-geometry.js',
+  'verify-polymythcal-destination-specificity.js',
   'verify-audit45-translations.py',
   'verify-audit49-metadata-surface.js',
   'verify-audit49-runtime-efficiency.js',
@@ -143,6 +146,9 @@ const browserGeometryCommand = 'node scripts/verify-visible-geometry-browser.mjs
 const browserGeometryIndex = fullRunner.indexOf(browserGeometryCommand);
 const setsBrowserCommand = 'node scripts/verify-polymythcal-sets13-15-browser.js';
 const setsBrowserIndex = fullRunner.indexOf(setsBrowserCommand);
+const destinationBrowserCommand = 'node scripts/verify-polymythcal-destination-browser.js';
+const destinationBrowserIndex = fullRunner.indexOf(destinationBrowserCommand);
+const destinationSpecificityCommand = 'node scripts/verify-polymythcal-destination-specificity.js';
 const idempotenceCommand = 'node scripts/verify-build-idempotence.js';
 const idempotenceIndex = fullRunner.indexOf(idempotenceCommand);
 check(
@@ -169,6 +175,22 @@ check(
     && setsBrowserIndex > fullRunner.indexOf('node scripts/verify-home-map-browser.js')
     && setsBrowserIndex < browserGeometryIndex,
   'predeploy full runner must run the Sets 13-15 Chromium gate after Teacher Resources/home and before browser geometry',
+);
+check(
+  (fullRunner.match(/node scripts\/verify-polymythcal-destination-browser\.js/g) || []).length === 1
+    && destinationBrowserIndex > setsBrowserIndex
+    && destinationBrowserIndex < browserGeometryIndex
+    && !build.includes('verify-polymythcal-destination-browser.js'),
+  'predeploy full runner must run the destination Chromium gate after Sets 13-15 and outside the production build',
+);
+check(
+  (fullRunner.match(/node scripts\/verify-polymythcal-destination-specificity\.js/g) || []).length === 1
+    && fullRunner.slice(
+      fullRunner.indexOf('const reusedBuildPreparation = ['),
+      fullRunner.indexOf('const sequential = ['),
+    ).includes(destinationSpecificityCommand)
+    && build.includes('verify-polymythcal-destination-specificity.js'),
+  'predeploy must enforce destination specificity once in either a canonical build or reuse-build preparation',
 );
 check(
   idempotenceSource.includes("'scripts/reports/audit49-build-packaging-efficiency.json'")

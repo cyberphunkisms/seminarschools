@@ -12,7 +12,7 @@ for(const route of POLY_ROUTES){
  const h1=(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)||[])[1]||'';if(!h1.replace(/<[^>]+>/g,'').trim()) errors.push(`${rel} visible h1 is empty`);
  if(route==='polymythseminars'){if(!/Polymythcal/i.test(h1)) errors.push(`${rel} main h1 does not identify Polymythcal`);}else if(!html.includes(`data-pm-route="${route}"`)) errors.push(`${rel} lacks route identity`);
  if(!/id="polymythContext"/.test(html)||!/id="polymythDescription"/.test(html)) errors.push(`${rel} missing context/description fields`);
- if(!/id="quickGuideCopy"/.test(html)||!/Each listing has a direct link to the organizer or source website/.test(html)) errors.push(`${rel} missing plain-language source guide`);
+ if(!/id="quickGuideCopy"/.test(html)||!/Open Details first for the verified date/.test(html)||!/exact external page is available/.test(html)) errors.push(`${rel} missing exact-link plain-language guide`);
  if(!/polymythcal-revamp\.js/.test(html)) errors.push(`${rel} does not load the shared Polymythcal interaction controller`);
  if(/onclick="/.test(html)) errors.push(`${rel} contains inline onclick handler`);
  if(/document\.title/.test(html)) errors.push(`${rel} mutates document.title`);

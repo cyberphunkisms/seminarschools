@@ -53,6 +53,9 @@
         "type": "string"
       }
     },
+    "current_status": {
+      "type": "string"
+    },
     "record_type": {
       "type": "string"
     },

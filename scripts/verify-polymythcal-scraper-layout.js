@@ -34,8 +34,10 @@ for (const [rel, needle, label] of [
   ['js/polymythcal-revamp.js','function matchesFilters','single current filter function'],
   ['js/polymythcal-revamp.js','event.raw_excerpt','raw excerpt search'],
   ['js/polymythcal-revamp.js','event.topics','source topic search'],
-  ['js/polymythcal-revamp.js','event.source_url','official source actions'],
-  ['js/polymythcal-revamp.js','class="pm-action pm-source-action"','primary one-click source action']
+  ['js/polymythcal-revamp.js','function destinationInfo(event)','exact external-destination policy'],
+  ['js/polymythcal-revamp.js','event.destination_url','contract-approved external destination'],
+  ['js/polymythcal-revamp.js','class="pm-action primary-link"','primary internal Details action'],
+  ['js/polymythcal-revamp.js','class="pm-action pm-source-action"','separate exact external action']
 ]) need(rel, needle, label);
 forbid('polymythseminars/index.html','id="eventSearch"','duplicate internal search input');
 forbid('polymythseminars/index.html','data-focus="deadlines"','ambiguous Deadlines quick filter');
@@ -57,4 +59,4 @@ if (problems.length) {
   problems.forEach(p => console.error(' - ' + p));
   process.exit(1);
 }
-console.log('POLYMYTHCAL SCRAPER/LAYOUT CHECK PASSED — harvest pipeline, qualified uncertainty, source-first actions, and the simplified list-first interface are guarded.');
+console.log('POLYMYTHCAL SCRAPER/LAYOUT CHECK PASSED — harvest pipeline, qualified uncertainty, Details-first exact destination actions, and the simplified list-first interface are guarded.');

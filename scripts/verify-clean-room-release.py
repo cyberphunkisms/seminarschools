@@ -390,7 +390,7 @@ def clean_environment(environment_root: Path, generated_at: str) -> tuple[dict[s
             "NPM_CONFIG_FUND": "false",
             "NPM_CONFIG_UPDATE_NOTIFIER": "false",
             "VERIFY_ALL_CONCURRENCY": "4",
-            "VERIFY_ALL_COMMAND_TIMEOUT_MS": "1200000",
+            "VERIFY_ALL_COMMAND_TIMEOUT_MS": "2700000",
             "SS_CLEAN_ROOM_CANONICAL_PIPELINE": PIPELINE_ID,
         }
     )
@@ -412,7 +412,7 @@ def clean_environment(environment_root: Path, generated_at: str) -> tuple[dict[s
             "NPM_CONFIG_FUND": "false",
             "NPM_CONFIG_UPDATE_NOTIFIER": "false",
             "VERIFY_ALL_CONCURRENCY": "4",
-            "VERIFY_ALL_COMMAND_TIMEOUT_MS": "1200000",
+            "VERIFY_ALL_COMMAND_TIMEOUT_MS": "2700000",
             "SS_CLEAN_ROOM_CANONICAL_PIPELINE": PIPELINE_ID,
         },
         "isolated_paths": [

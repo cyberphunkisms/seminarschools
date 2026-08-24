@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "1.0.0",
+  "policy": "Only a reviewed exact event, recurring-series, registration, application, submission, review, results, or dedicated event site may appear as an external Polymythcal action. Generic organizer homepages, calendars, directories, and listing indexes remain evidence sources but are not visitor actions.",
+  "reviewedAt": "2026-08-23",
+  "overrides": [
+    {
+      "event_id": "research-ca26383d41b1",
+      "title": "Full Noon Fest",
+      "destination_url": "https://longgonesongs.com/full-noon-fest-26/",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "review": "Exact organizer page for the 2026 Full Noon Fest series; replaces the generic Hamilton events calendar."
+    },
+    {
+      "event_id": "8c0a1af041b0",
+      "title": "OSHEAGA 2026",
+      "destination_url": "https://osheaga.com/en/program/schedule",
+      "destination_scope": "series",
+      "destination_kind": "schedule",
+      "review": "Official 2026 festival schedule."
+    },
+    {
+      "event_id": "049ffd7fa6b9",
+      "title": "VELD Music Festival 2026",
+      "destination_url": "https://downsviewpark.ca/events/veld-music-festival-2026",
+      "destination_scope": "event",
+      "destination_kind": "detail",
+      "review": "Official venue event page with the 2026 dates and location."
+    },
+    {
+      "event_id": "8e72b7b29245",
+      "title": "CNE — Canadian National Exhibition 2026",
+      "destination_url": "https://www.theex.com/",
+      "destination_scope": "event",
+      "destination_kind": "detail",
+      "dedicated_event_site": true,
+      "review": "Reviewed dedicated CNE event site displaying the 2026 edition and dates."
+    },
+    {
+      "event_id": "guelph-jazz-festival-2026-2026-09-11",
+      "title": "Guelph Jazz Festival 2026",
+      "destination_url": "https://guelphjazzfestival.com/schedule/",
+      "destination_scope": "series",
+      "destination_kind": "schedule",
+      "review": "Official 2026 festival schedule."
+    },
+    {
+      "event_id": "supercrawl-2026-17th-edition-2026-09-11",
+      "title": "Supercrawl 2026 (17th edition)",
+      "destination_url": "https://supercrawl.ca/2026/06/2026-festival-reveal/",
+      "destination_scope": "event",
+      "destination_kind": "detail",
+      "review": "Official 2026 festival-program announcement."
+    },
+    {
+      "event_id": "breakthrough-junior-challenge-2026-submission",
+      "title": "Breakthrough Junior Challenge 2026 submission deadline",
+      "destination_url": "https://breakthroughjuniorchallenge.org/enter",
+      "destination_scope": "event",
+      "destination_kind": "submission",
+      "review": "Official 2026 entry and submission instructions."
+    },
+    {
+      "event_id": "breakthrough-junior-challenge-2026-peer-review",
+      "title": "Breakthrough Junior Challenge 2026 peer-review deadline",
+      "destination_url": "https://breakthroughjuniorchallenge.org/judging/peer-to-peer",
+      "destination_scope": "event",
+      "destination_kind": "review",
+      "review": "Official peer-to-peer review instructions and deadline."
+    },
+    {
+      "event_id": "breakthrough-junior-challenge-2026-results",
+      "title": "Breakthrough Junior Challenge 2026 finalist and popular-vote results",
+      "destination_url": "https://breakthroughjuniorchallenge.org/timeline",
+      "destination_scope": "event",
+      "destination_kind": "results",
+      "review": "Official competition timeline for finalist and result milestones."
+    },
+    {
+      "event_id": "games-for-change-student-challenge-2027-watch",
+      "title": "Games for Change Student Challenge 2026–27 watch",
+      "destination_url": "https://learn.gamesforchange.org/student-challenge",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "review": "Exact official Student Challenge program page with the active 2026–27 cycle; replaces a legacy URL that redirects to the general learning portal."
+    },
+    {
+      "event_id": "nspa-2027-convention",
+      "title": "NSPA/JEA Spring National High School Journalism Convention 2027",
+      "destination_url": "https://spring.journalismconvention.org/",
+      "destination_scope": "event",
+      "destination_kind": "detail",
+      "dedicated_event_site": true,
+      "review": "Dedicated official site for the Los Angeles Spring 2027 convention; replaces the organizer's dead conventions URL."
+    },
+    {
+      "event_id": "doors-open-toronto-2026-05-24",
+      "title": "Doors Open Toronto",
+      "destination_url": "https://www.toronto.ca/explore-enjoy/festivals-events/doors-open-toronto/",
+      "destination_scope": "event",
+      "destination_kind": "detail",
+      "review": "Exact City of Toronto event page; replaces the retired /doorsopen route."
+    },
+    {
+      "event_id": "sshrc-storytellers-challenge-2027-watch",
+      "title": "SSHRC Storytellers Challenge 2027 watch",
+      "destination_url": "https://sshrc-crsh.canada.ca/en/research-in-action/storytellers.aspx",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "review": "Exact official Storytellers Challenge program page; replaces the retired legacy SSHRC route."
+    },
+    {
+      "event_id": "nias-fellowships-projected-2027-03-15-604dca3d",
+      "title": "NIAS fellowships, projected",
+      "destination_url": "https://nias.knaw.nl/our-fellowships/",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "review": "Exact current NIAS fellowships program page; replaces a legacy route that redirects to an unrelated COVID-era page."
+    },
+    {
+      "event_id": "folger-shakespeare-library-fellowships-projected-2027-01-15-a45831ec",
+      "title": "Folger Shakespeare Library fellowships, projected",
+      "destination_url": "https://www.folger.edu/research/the-folger-institute/fellowships/",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "review": "Exact current Folger Institute fellowships page; replaces a retired route returning 404."
+    },
+    {
+      "event_id": "apa-eastern-2028-submissions",
+      "title": "APA 2028 Eastern Division submissions",
+      "destination_url": "https://my.apaonline.org/events/event-description?CalendarEventKey=f2546a8a-ab55-4b84-b9d7-019a6ef43466&Home=%2Fevents%2Fcalendar",
+      "destination_scope": "event",
+      "destination_kind": "submission",
+      "review": "Exact official APA submission event for the 2028 Eastern Division meeting; replaces a filtered multi-event listing."
+    },
+    {
+      "event_id": "warburg-institute-fellowships-projected-2026-11-30-af58d79d",
+      "title": "Warburg Institute fellowships, projected",
+      "destination_url": "https://warburg.sas.ac.uk/research-fellowships/fellowships",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "review": "Exact current Warburg Institute fellowships page; replaces a retired route from the site's prior information architecture."
+    }
+  ]
+}

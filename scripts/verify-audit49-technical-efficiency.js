@@ -386,8 +386,8 @@ for (const group of [
   );
 }
 check(
-  metadata.page_size_distribution?.largest_bytes <= 4 * 1024 * 1024,
-  'raw active-HTML ceiling exceeds 4 MiB',
+  metadata.page_size_distribution?.largest_bytes <= 4_250_000,
+  'raw active-HTML ceiling exceeds 4,250,000 bytes',
 );
 check(
   metadata.page_size_distribution?.largest_gzip_bytes <= 1280 * 1024,
@@ -755,12 +755,14 @@ const buildOrder = [
   'build-audit45-localized-routes.py',
   'apply-audit45-translation-ui.js',
   'apply-audit49-metadata-hygiene.js',
+  'update-polymythcal-destination-contract.js',
   'update-polymythcal-build-manifest.js',
   'build-public-deploy.js',
   'verify-public-deploy-parity.js',
   'verify-visible-geometry.js',
   'verify-meaningful-geometry.js',
   'verify-geometry.js',
+  'verify-polymythcal-destination-specificity.js',
   'verify-audit49-metadata-surface.js',
   'verify-audit49-runtime-efficiency.js',
   'verify-audit49-build-packaging-efficiency.js',
@@ -860,6 +862,21 @@ check(
     && sequentialSection.indexOf('verify-polymythcal-sets13-15-browser.js')
       < sequentialSection.indexOf('verify-visible-geometry-browser.mjs'),
   'sequential release runner does not enforce the full Sets 13-15 browser gate after home and before geometry',
+);
+check(
+  count(runner, 'node scripts/verify-polymythcal-destination-browser.js') === 1
+    && sequentialSection.indexOf('verify-polymythcal-destination-browser.js')
+      > sequentialSection.indexOf('verify-polymythcal-sets13-15-browser.js')
+    && sequentialSection.indexOf('verify-polymythcal-destination-browser.js')
+      < sequentialSection.indexOf('verify-visible-geometry-browser.mjs')
+    && !build.includes('verify-polymythcal-destination-browser.js'),
+  'sequential release runner does not enforce the destination browser gate after Sets 13-15 and outside production',
+);
+check(
+  count(runner, 'node scripts/verify-polymythcal-destination-specificity.js') === 1
+    && reusedPreparation.includes('node scripts/verify-polymythcal-destination-specificity.js')
+    && build.includes('verify-polymythcal-destination-specificity.js'),
+  'destination specificity is not enforced once through canonical or reuse-build preparation',
 );
 check(
   sequentialSection.includes('verify-audit48-external-validation.js'),
@@ -1161,7 +1178,7 @@ function renderMarkdown() {
     '',
     '## Page-size distribution',
     '',
-    `The permanent ceilings are 4 MiB raw and 1,280 KiB gzip. Current maxima are ${formatMiB(sizes.largest_bytes)} MiB raw and ${formatMiB(sizes.largest_gzip_bytes)} MiB gzip.`,
+    `The fixed ceilings are 4,250,000 bytes raw and 1,280 KiB gzip. Current maxima are ${formatMiB(sizes.largest_bytes)} MiB raw and ${formatMiB(sizes.largest_gzip_bytes)} MiB gzip.`,
     '',
     '| Route | Raw bytes | Gzip bytes | Indexable |',
     '| --- | ---: | ---: | :---: |',

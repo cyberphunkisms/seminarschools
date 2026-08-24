@@ -88,13 +88,18 @@ requireText(
 );
 requireText(
   canonical,
-  'When an older memory mirror conflicts, this ML* entry wins.',
-  'the current CORE slot 4 authority rule',
+  'THREE DISTINCT MEARSHEIMER ROUTES.',
+  'the current CORE slot 4 route-separation rule',
 );
 requireText(
   canonical,
-  'Material effects may appear inside a case’s gorgonification spiral but are never the required or exclusive power criterion.',
+  "Material effects may occur in a case's gorgonification spiral but are neither the required nor exclusive power criterion.",
   'the spiral/material-effects boundary',
+);
+requireText(
+  canonical,
+  'The phrase “Mearsheimer rule” is resolved from the current task; if more than one route remains materially possible, disclose the ambiguity rather than conflating them.',
+  'the ambiguous-route disclosure rule',
 );
 requireText(
   'polymyth/modulecanon/index.html',

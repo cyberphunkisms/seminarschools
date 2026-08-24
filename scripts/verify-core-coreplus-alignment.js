@@ -11,18 +11,18 @@ const ROOT = path.resolve(__dirname, '..');
 const DELIVERY_ROOT = path.resolve(ROOT, '..');
 const siteOnly = process.argv.includes('--site-only');
 const failures = [];
-const EXPECTED_TOTAL = 1189;
+const EXPECTED_TOTAL = 1207;
 const EXPECTED_SECTION_COUNTS = Object.freeze({
-  analysis: 27, citation: 339, corehistory: 23, coreplus: 47,
+  analysis: 27, citation: 339, corehistory: 28, coreplus: 51,
   degorgonification: 54, 'framework-core': 1, gorgonification: 134,
-  idiomary: 44, learnings: 28, methodology: 373, pending: 18,
+  idiomary: 44, learnings: 28, methodology: 382, pending: 18,
   'pending-user-authorship': 2, polycognate: 24, rainbowsol: 3,
   sabachtan: 34, studylist: 38,
 });
 const EXPECTED_RECORD_SET_SHA256 = Object.freeze({
-  'framework-core': '19662607acaddb951a45dd80f6cff85b3e04063b17a70d045a6b589bda2501f1',
-  coreplus: 'cbc6c499dd2e63c439dfd4abc97153e7c276f80ebd4c1e145f2229c7520a558b',
-  corehistory: 'ad80ee534fce28022e351f7a7c651e0cefdcec2b79f944a204bf515dcd0ea2c5',
+  'framework-core': '3170658895f8879846c57fb44b267ad6bdbe595a4e8ab74c7c75bb678bd742a4',
+  coreplus: '69ef6fb51a720cbf79cea6b5d60de0382a03d6c28746bada0d39377adaa5f35a',
+  corehistory: '05e85a584d0e5a1d95148ba9617c8a5ec7d0fe86513b4cb0c059dba9ecb515df',
 });
 const FORMER_CHARTER_SHA256 = '7bb00b0b11c2b64991cdcf801803a304b8cc34e914f5c286d8d8d34eb944e016';
 const FORMER_PORTABLE_CORE_DOCUMENT_SHA256 = 'd794d0d04edd15f4958c3b5de656f5d7dc478d0ab08a702afed58825d2b058e9';
@@ -33,9 +33,11 @@ const IMMEDIATE_FORMER_PORTABLE_CORE_UTF16_UNITS = 4886;
 const FORMER_4485_PORTABLE_CORE_DOCUMENT_SHA256 = 'a993318cdfbd5b9377bfc95661434f7d08f053e61817c2edd39ed233003139dc';
 const FORMER_4485_PORTABLE_CORE_BODY_SHA256 = '6c289647cf8a14c9101a9a53f4f62f05bc1ee32a24325f19c232b56c147e52d2';
 const FORMER_4485_PORTABLE_CORE_UTF16_UNITS = 4485;
-const EXPECTED_CORE_DOCUMENT_SHA256 = '3260def350d19f201de2186f8fc9cd22ac13c3a5b67a0792a86f1bac98546bc6';
+const PRE_CURRENT_TURN_CORE_DOCUMENT_SHA256 = '3260def350d19f201de2186f8fc9cd22ac13c3a5b67a0792a86f1bac98546bc6';
+const PRE_CURRENT_TURN_CORE_UTF16_UNITS = 4738;
+const EXPECTED_CORE_DOCUMENT_SHA256 = '5b518ceefe15cceff81701f4b011b8e27aa2ea16f503be6e612c7a9155f9e910';
 const CORE_MAX_CHARACTERS = 5000;
-const EXPECTED_CORE_UTF16_UNITS = 4738;
+const EXPECTED_CORE_UTF16_UNITS = 4999;
 const CORE_ID = 'core-personal-rules-current-2026-08-12';
 const DIARY_DISPATCH = "DEVIL'S DIARY DISPATCH. Any task that creates, revises, critiques, audits, or verifies a Devil's Diary entry or explicitly requests Devil's Diary work activates ML* and loads these current owners together: The Devil's Diary method (mephydata diary-entry recipe); Devil Diary and Mephistodata article rules (comprehensive, consolidated June 24 2026); Audience-register separation (conversation-input vs publication-output); Mephistodata Ask your favourite AI mirror criterion; Anti-twisting rules (degorgonification of reformulation); Anti-twisting worked example, psychologism and gorgonwars session, including its SOURCE-STATUS GUARD; and Interpretive pleonexia, the scope-overreach tripwire. For a non-Diary Mephistodata article, load the comprehensive rules, Audience-register separation, both anti-twisting owners including SOURCE-STATUS GUARD, Interpretive pleonexia, and the mirror criterion; load the Diary recipe only for Diary work. The base Diary recipe controls Diary routing, source testing, oracle, artifact discipline, citations, residue, and format. The comprehensive article rules control expanded voice, prose, plot, titles, and ideological constraints. Compatible requirements of both remain active. Later explicit user rulings and dated amendments govern their exact issue.";
 
@@ -112,6 +114,10 @@ const map = one(
   entry => entry.t === 'CORE CURRENT MAP — active slots, load order, and supersession rule (2026-07-11)',
   'current CORE+ map',
 );
+const mapAmendment = one(
+  entry => entry.id === 'coreplus-current-map-amendment-2026-08-23',
+  'current CORE+ map amendment',
+);
 const bootstrap = one(
   entry => entry.t === 'CORE slot 24 mirror — POLYMYTH CORE BOOTSTRAP (current, hardened 2026-07-11)',
   'current project bootstrap handler',
@@ -144,6 +150,10 @@ const former4485PortableCore = one(
   entry => entry.id === 'corehistory-former-portable-core-4485-character-2026-08-13',
   'former 4,485-character portable CORE history record',
 );
+const preCurrentTurnPortableCore = one(
+  entry => entry.id === 'corehistory-portable-core-pre-current-turn-scope-2026-08-23',
+  'former 4,738-unit portable CORE history record',
+);
 const expandedPortableCore = one(
   entry => entry.id === 'coreplus-portable-core-expanded-handler-2026-08-12',
   'active expanded portable CORE handler',
@@ -173,7 +183,15 @@ if (sha256(charter) !== EXPECTED_CORE_DOCUMENT_SHA256) {
 for (const [needle, label] of [
   ['CORE+ FIRST. Follow CORE + newest canonical CORE+ as one system.', 'the first and strongest rule'],
   ['CORE+=all other active rules;', 'complete CORE+ complement'],
-  ['Question/deliberation/review/audit/compare/critique/run-through => answer/one analytical move only.', 'question boundary'],
+  ['STATE/EVIDENCE. Recover goal/corrections/decisions/commitments/verified state.', 'state-and-evidence reconstruction'],
+  ['TURN. Freeze act/target/scope/unit/terms/criteria/output.', 'current-turn freeze'],
+  ['History resolves references only; current message sets task/ML*.', 'current-message activation boundary'],
+  ['External subject first; project lens only if asked.', 'external-subject-first rule'],
+  ['Question/deliberation/bare use/review/audit/compare/critique/run-through => analysis only', 'question and bare-use boundary'],
+  ['explicit mutation verb + named target controls.', 'explicit mutation authority'],
+  ['AI-generated question=>run OA first; received user question/audit alone≠OA.', 'universal question-generation Ouroborosanalyses trigger'],
+  ['Repetition keeps target/scope; adds no authority/presumed defect.', 'repetition scope and no-presumed-defect boundary'],
+  ['File/memory/artifact/publication/deployment/adjacent-object mutation requires explicit target permission.', 'explicit target-specific mutation boundary'],
   ['No authority radiation.', 'object-bound authority'],
   ['Analysis=>response, never a new file.', 'artifact authority gate'],
   ['Main task stays live through correction/audit/rule/support work.', 'main-task continuity trigger'],
@@ -181,8 +199,10 @@ for (const [needle, label] of [
   ["ML* activates only for material/explicit work on Polymyth, Meaninglib, Seminar Schools, Mephistodata, Devil's Diary, named star files, CORE, CORE+;", 'narrow ML activation'],
   ['Canonical ML*: https://seminarschools.com/polymyth/methodologylist/; cold-load CORE+ map: https://seminarschools.com/polymyth/methodologylist-coreplus.txt; full text: https://seminarschools.com/polymyth/methodologylist.txt.', 'stable canonical ML* locators'],
   ['Delivery≠plan/promise.', 'completion gate'],
-  ['Persistent memory mutation requires explicit instruction;', 'explicit memory gate'],
+  ['Memory mutation needs explicit instruction;', 'explicit memory gate'],
   ['no unstated framework or psychological/wellbeing/institutional speculation unless requested/required.', 'no-default-framework rule'],
+  ['CORPORA. Freeze categories/seeds/universe/measures; evidence items; omission-test open searches; never pad; compare/rank/count/graph verified rows only; isolate residue; verify completion.', 'universal corpus-integrity trigger'],
+  ['Lineage: direct/equivalent/analogue/secondary/lead.', 'universal source-lineage trigger'],
   ['from checked primary/canonical sources', 'source-review rule'],
   ['context not automatically publishable.', 'context/publication boundary'],
 ]) requireText(charter, needle, `portable CORE ${label}`);
@@ -218,6 +238,11 @@ for (const needle of [
   'PERSONAL-RULE MIGRATION.', 'Current rules always override history.',
   DIARY_DISPATCH,
 ]) requireText(map.b, needle, 'CORE+ map');
+for (const needle of [
+  'QUESTION-GENERATION DISPATCH.',
+  'Receiving an ordinary user question does not itself activate ML* or Ouroborosanalyses.',
+  'if none survives, ask none and report zero where relevant.',
+]) requireText(mapAmendment.b, needle, 'CORE+ map amendment');
 for (const needle of [
   'Portable CORE governs every turn.',
   "This handler fires only for material or explicit work on Polymyth, Meaninglib, Seminar Schools, Mephistodata, Devil's Diary, a named star file, CORE, or CORE+.",
@@ -422,6 +447,19 @@ if (!former4485PortableCore.b.startsWith(former4485PortablePrefix)) {
     );
   }
 }
+if (preCurrentTurnPortableCore.s !== 'corehistory') {
+  failures.push('former 4,738-unit portable CORE is not in CORE History');
+}
+const preCurrentTurnDocument = `${preCurrentTurnPortableCore.b}\n`;
+if (preCurrentTurnDocument.length !== PRE_CURRENT_TURN_CORE_UTF16_UNITS) {
+  failures.push(
+    `former 4,738-unit portable CORE preserved document is ${preCurrentTurnDocument.length} UTF-16 units; `
+    + `expected ${PRE_CURRENT_TURN_CORE_UTF16_UNITS}`,
+  );
+}
+if (sha256(preCurrentTurnDocument) !== PRE_CURRENT_TURN_CORE_DOCUMENT_SHA256) {
+  failures.push('former 4,738-unit portable CORE preserved document hash drifted');
+}
 const expandedPortablePrefix = 'CURRENT STATUS AND PRECEDENCE. This is the active CORE+ expansion of the clauses compressed out of portable CORE to satisfy the 5,000-character Personal Rules field limit.';
 if (!expandedPortableCore.b.startsWith(expandedPortablePrefix)) {
   failures.push('expanded portable CORE handler lacks its current active precedence preface');
@@ -503,7 +541,15 @@ for (const title of precedencePrefaceTitles) {
   }
 }
 for (const entry of entries.filter(item => item.s === 'corehistory')) {
-  if (!/^(?:RUNTIME STATUS\. HISTORICAL ONLY\.|HISTORICAL SOURCE LAYER\.)/.test(String(entry.b || ''))) {
+  const inactiveBody = /^(?:RUNTIME STATUS\. HISTORICAL ONLY\.|HISTORICAL SOURCE LAYER\.)/.test(String(entry.b || ''));
+  const preservedExactBody = (
+    String(entry.t || '').startsWith('[SUPERSEDED/HISTORICAL]')
+      && String(entry.x || '').startsWith('RUNTIME STATUS. HISTORICAL ONLY.')
+  ) || (
+    String(entry.t || '').startsWith('[HISTORICAL PROVENANCE COPY]')
+      && String(entry.x || '').startsWith('RUNTIME STATUS. INACTIVE PROVENANCE COPY.')
+  );
+  if (!inactiveBody && !preservedExactBody) {
     failures.push(`CORE HISTORY record lacks an inactive-history preface: ${entry.t}`);
   }
 }
@@ -591,4 +637,4 @@ if (failures.length) {
   for (const failure of failures) console.error(` - ${failure}`);
   process.exit(1);
 }
-console.log(`CORE / CORE+ / PERSONAL RULES ALIGNMENT PASSED — portable CORE ${coreLengthMetrics.utf16Units}/${CORE_MAX_CHARACTERS} UTF-16 units; exact mirrors, lossless 14,331-, 4,886-, and 4,485-character histories, active Diary dispatch, active CORE+ expansion, record sets, and canonical HF row verified`);
+console.log(`CORE / CORE+ / PERSONAL RULES ALIGNMENT PASSED — portable CORE ${coreLengthMetrics.utf16Units}/${CORE_MAX_CHARACTERS} UTF-16 units; exact mirrors, lossless 14,331-, 4,886-, 4,485-, and 4,738-unit histories, active Diary dispatch, active CORE+ expansion, record sets, and canonical HF row verified`);

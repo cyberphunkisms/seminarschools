@@ -59,7 +59,9 @@ const requiredFields = [
   'type', 'secondary_types', 'record_kind', 'age_band', 'writing_bands',
   'academic_bands', 'topics', 'tags', 'source_id', 'source_name', 'source_url',
   'source_quality', 'confirmation_status', 'qualification_reasons',
-  'lifecycle_status', 'lifecycle_notes', 'first_seen_at', 'last_checked_at', 'scraped_at'
+  'lifecycle_status', 'lifecycle_notes', 'first_seen_at', 'last_checked_at', 'scraped_at',
+  'destination_url', 'destination_status', 'destination_scope', 'destination_kind',
+  'destination_evidence'
 ];
 for (const field of requiredFields) {
   check(browserFields.has(field), `Generator field list omits browser-required field: ${field}.`);
@@ -79,6 +81,15 @@ for (let index = 0; index < canonical.events.length; index += 1) {
   );
   check(typeof compact.confirmation_status === 'string', `Event ${source.id} lacks its confirmation label.`);
   check(typeof compact.lifecycle_status === 'string', `Event ${source.id} lacks its lifecycle label.`);
+  check(typeof compact.destination_status === 'string', `Event ${source.id} lacks its destination status.`);
+  check(typeof compact.destination_scope === 'string', `Event ${source.id} lacks its destination scope.`);
+  check(typeof compact.destination_kind === 'string', `Event ${source.id} lacks its destination kind.`);
+  check(typeof compact.destination_evidence === 'string', `Event ${source.id} lacks its destination evidence.`);
+  if (compact.destination_status === 'unavailable-specific-page') {
+    check(!Object.hasOwn(compact, 'destination_url'), `Event ${source.id} exposes a URL for an unavailable destination.`);
+  } else {
+    check(/^https:\/\//.test(String(compact.destination_url || '')), `Event ${source.id} lacks an HTTPS exact destination.`);
+  }
   for (const field of BROWSER_EVENT_FIELDS) {
     if (hasBrowserValue(source[field])) {
       check(

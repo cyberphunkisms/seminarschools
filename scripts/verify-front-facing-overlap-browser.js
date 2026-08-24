@@ -1273,10 +1273,11 @@ async function runBrowser(options, inventory) {
   const counters = { pages: 0, readerEntries: 0, scrollProbes: 0, anchors: 0, focusTargets: 0, keyboardTabs: 0 };
   try {
     let nextScenario = 0;
-    // Keep the browser gate reliable on the same constrained headless runtime
-    // used by the release and clean-room pipelines. Coverage is unchanged;
-    // only bounded execution pressure is reduced.
-    const scenarioWorkerCount = Math.min(1, scenarios.length);
+    // Two independent scenario workers keep the complete 50-by-14 matrix
+    // inside the release window without increasing the proven four-page
+    // pressure inside either fresh browser. Coverage and assertions are
+    // unchanged; the bound is deliberately fixed for clean-room stability.
+    const scenarioWorkerCount = Math.min(2, scenarios.length);
     const runScenarioWorker = async () => {
       while (nextScenario < scenarios.length) {
         const scenarioIndex = nextScenario;
@@ -1447,6 +1448,7 @@ async function main() {
 
   const result = await runBrowser(options, inventory);
   if (result.failures.length) {
+    result.failures.sort((left, right) => JSON.stringify(left).localeCompare(JSON.stringify(right)));
     console.error(
       `FRONT-FACING OVERLAP/REFLOW FAILED — ${result.failures.length} grouped failures `
         + `after ${result.counters.pages} page scenarios and `

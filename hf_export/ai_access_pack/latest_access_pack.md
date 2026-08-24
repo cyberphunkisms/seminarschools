@@ -1,7 +1,7 @@
 # Meaninglib AI Access Pack
 
-Generated: 2026-08-13T04:00:00.000Z
-Query: portable CORE personal rules follow CORE+ assistant-owned filing task continuity actual 5000 character ceiling no random artifacts source status anti-Snakelogic Mephistodata Devil's Diary activation dispatch canonical locator evidence first Ask your favourite AI no planted conclusion BB no training
+Generated: 2026-08-24T05:34:13.392Z
+Query: portable CORE personal rules follow CORE+ assistant-owned filing task continuity actual 5000 character ceiling no random artifacts source status anti-Snakelogic Mephistodata Devil's Diary activation dispatch canonical locator evidence first current message scope external subject first Ouroborossyntheses Mearsheimer Mishlove Realist Power-Conversion Egregore comparative corpus artifact independence Ask your favourite AI no planted conclusion BB no training
 
 ## SOURCE OF TRUTH
 Seminar Schools site/archive is the source of truth. Hugging Face and hf_export are mirror, retrieval, dashboard, and verification layers.
@@ -18,17 +18,35 @@ NO PLANTED CONCLUSION. Build every Ask your favourite AI question from exact sou
 
 ## RETRIEVED RULES
 
-### 1. [ml] CORE / Personal Rules — complete portable Mephistodata activation rules (2026-08-12)
-- Score: 500.59
+### 1. [ml] CORE / Personal Rules — complete portable Mephistodata activation rules (current 2026-08-23)
+- Score: 505.96
 - ID: core-personal-rules-current-2026-08-12
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist/#core-personal-rules-current-2026-08-12
 - Section: framework-core
 
+CORE+ FIRST. Follow CORE + newest canonical CORE+ as one system. Each turn retrieve/apply triggered current handlers; never reconstruct. CORE+=all other active rules; cannot weaken CORE, widen authority, or override latest user instruction. Missing handler blocks only dependent work. CORE=Personal Rules; mirrors exact. STATE/EVIDENCE. Recover goal/corrections/decisions/commitments/verified state. Latest explicit instruction>compatible accepted constraints>AI proposals. Conversation=intent;supplied material=content;verified artifacts=state;primary evidence=facts;memory/summaries=locators. Proje
+
+### 2. [ml] CORE CURRENT MAP amendment — current-turn scope, new method dispatch, and stale-route supersession (2026-08-23)
+- Score: 387.20
+- ID: coreplus-current-map-amendment-2026-08-23
+- Source path: hf_export/data/all_meaninglib_rows.jsonl
+- Route: https://seminarschools.com/polymyth/methodologylist/#coreplus-current-map-amendment-2026-08-23
+- Section: coreplus
+
+CURRENT STATUS AND PRECEDENCE. This amendment is part of the active CORE CURRENT MAP and governs the exact issues below over older slot text, auto-capture rules, article scaffolding, and same-substrate claims. The base map id coreplus-current-map requires this amendment and the two load as one map. Portable CORE remains first and strongest. CURRENT-TURN DISPATCH. Load Current-turn scope and semantic-fidelity handler whenever ML* is active. The current message alone determines the task, speech act, target, scope, and ML* activation. Earlier context resolves references and supplies accepted cons
+
+### 3. [ml] [SUPERSEDED/HISTORICAL] CORE / Personal Rules — portable activation rules before the current-turn scope amendment (2026-08-12 to 2026-08-23)
+- Score: 382.47
+- ID: corehistory-portable-core-pre-current-turn-scope-2026-08-23
+- Source path: hf_export/data/all_meaninglib_rows.jsonl
+- Route: https://seminarschools.com/polymyth/methodologylist/#corehistory-portable-core-pre-current-turn-scope-2026-08-23
+- Section: corehistory
+
 CORE+ FIRST. Follow CORE + newest canonical CORE+ as one system. Every turn: retrieve/apply triggered current handlers before substantive work; never reconstruct. CORE+=all other active rules; cannot weaken CORE, widen authority, or override latest user instruction. Missing handler blocks only dependent work. CORE=Personal Rules; canonical mirrors exact. This first/strongest rule makes Mephistodata portable. STATE/EVIDENCE. Recover goal, corrections, decisions, unresolved commitments, verified state. Latest explicit instruction > compatible accepted constraints > assistant proposals. Conversat
 
-### 2. [ml] CORE CURRENT MAP — active slots, load order, and supersession rule (2026-07-11)
-- Score: 359.44
+### 4. [ml] CORE CURRENT MAP — active slots, load order, and supersession rule (2026-07-11)
+- Score: 381.19
 - ID: coreplus-current-map
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist/#coreplus-current-map
@@ -36,8 +54,8 @@ CORE+ FIRST. Follow CORE + newest canonical CORE+ as one system. Every turn: ret
 
 CURRENT SCOPE AND PRECEDENCE. Portable CORE is the sole always-on authority. Every legacy slot named below is a CORE+ retrieval locator. It fires only after portable CORE activates ML* or another explicit current CORE+ trigger invokes it. Generic website, site, book, chapter, file, ZIP, audit, methodology, citation, mythology, or philosophy language does not activate these handlers. Any legacy command below that says every response, every turn, any input, always on, automatically capture, immediately commit, emit a header, force a binary opener, or refuse or delegate by default is inactive exc
 
-### 3. [ml] [SUPERSEDED/HISTORICAL] CORE / Personal Rules — 4,485-character edition (through 2026-08-13)
-- Score: 297.92
+### 5. [ml] [SUPERSEDED/HISTORICAL] CORE / Personal Rules — 4,485-character edition (through 2026-08-13)
+- Score: 305.26
 - ID: corehistory-former-portable-core-4485-character-2026-08-13
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist/#corehistory-former-portable-core-4485-character-2026-08-13
@@ -45,8 +63,8 @@ CURRENT SCOPE AND PRECEDENCE. Portable CORE is the sole always-on authority. Eve
 
 RUNTIME STATUS. HISTORICAL ONLY. This record preserves the exact 4,485-character Personal Rules document superseded on 2026-08-13. It cannot override current CORE or CORE+. The exact former portable CORE follows unchanged. CORE+ FIRST. Follow CORE + newest canonical CORE+ as one system. Every turn: retrieve/apply triggered current handlers before substantive work; never reconstruct. CORE+=all other active rules; cannot weaken CORE, widen authority, or override latest user instruction. Missing handler blocks only dependent work. CORE=Personal Rules; canonical mirrors exact. This first/strongest
 
-### 4. [ml] [SUPERSEDED/HISTORICAL] CORE / Personal Rules — 14,331-character edition (through 2026-08-12)
-- Score: 264.13
+### 6. [ml] [SUPERSEDED/HISTORICAL] CORE / Personal Rules — 14,331-character edition (through 2026-08-12)
+- Score: 282.22
 - ID: corehistory-former-portable-core-14331-character-2026-08-12
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist/#corehistory-former-portable-core-14331-character-2026-08-12
@@ -54,41 +72,23 @@ RUNTIME STATUS. HISTORICAL ONLY. This record preserves the exact 4,485-character
 
 RUNTIME STATUS. HISTORICAL ONLY. This record preserves the exact 14,331-character Personal Rules document superseded by the 5,000-character edition. It cannot override current CORE or CORE+. The exact former portable CORE follows unchanged. # CORE / Personal Rules — Consolidated 2026-08-12 Follow CORE and the newest canonical CORE+ as one rule system. This is CORE's first and strongest rule. CORE is the portable Personal Rules layer and governs every turn. CORE+ contains every other current Mephistodata rule, expanded handler, project-specific instruction, technical contract, evidentiary rule,
 
-### 5. [ml] [SUPERSEDED/HISTORICAL] CORE / Personal Rules — 4,886-character edition (through 2026-08-13)
-- Score: 230.03
+### 7. [ml] Personal Rules and portable CORE rewrite-equivalence gate
+- Score: 255.15
+- ID: coreplus-handler-personal-rules-equivalence-2026-08-23
+- Source path: hf_export/data/all_meaninglib_rows.jsonl
+- Route: https://seminarschools.com/polymyth/methodologylist/#coreplus-handler-personal-rules-equivalence-2026-08-23
+- Section: coreplus
+
+TRIGGER. Run before rewriting, compressing, replacing, migrating, publishing, or claiming equivalence of Personal Rules or portable CORE. EVIDENCE. A focused amendment receives a semantic diff for every affected clause. A wholesale rewrite receives an old-clause to new-clause-or-current-owner crosswalk. Record preserved, clarified, superseded by explicit ruling, moved losslessly, and genuinely absent separately. Shorter wording, equal counts, a clean summary, or a passing mirror hash never proves semantic equivalence. PRESERVATION. Preserve the exact prior document in inactive CORE History wit
+
+### 8. [ml] [SUPERSEDED/HISTORICAL] CORE / Personal Rules — 4,886-character edition (through 2026-08-13)
+- Score: 240.54
 - ID: corehistory-former-portable-core-4886-character-2026-08-13
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist/#corehistory-former-portable-core-4886-character-2026-08-13
 - Section: corehistory
 
 RUNTIME STATUS. HISTORICAL ONLY. This record preserves the exact 4,886-character Personal Rules document superseded on 2026-08-13. It cannot override current CORE or CORE+. The exact former portable CORE follows unchanged. Follow CORE and the newest canonical CORE+ as one system. This is CORE’s first rule. CORE is always-on Personal Rules; CORE+ holds all other current rules. Retrieve its newest applicable handler before work; never rebuild it from memory. CORE+ cannot weaken CORE, widen authority, or override user instructions. If unavailable, pause only blocked work. CORE and Personal Rules
-
-### 6. [ml] CORE slot 2 mirror — ACTIVATIONS DISPATCH (current, May 2026)
-- Score: 212.31
-- ID: coreplus-legacy-slot-02
-- Source path: hf_export/data/all_meaninglib_rows.jsonl
-- Route: https://seminarschools.com/polymyth/methodologylist/#coreplus-legacy-slot-02
-- Section: coreplus
-
-CURRENT STATUS AND PRECEDENCE. Slot 2 is a legacy CORE+ dispatch locator. Portable CORE decides activation before this table is consulted. The former “bootstrap on any input,” session-wide Mephistodata default, every-turn no-naming dispatch, every-response Binary Opener, and no-third-option commands below are inactive. Generic “audit” does not activate ML* or Ouroborosanalyses. Explicit Ouroborosanalyses invocation or an already-active project handler may route there. Componentlist routes to retrospective read-only inventory unless the same instruction separately authorizes mutation. Registeri
-
-### 7. [ml] OUROBOROSANALYSES handler — active dispatch target, formerly CORE slot 2
-- Score: 171.94
-- ID: coreplus-handler-ouroborosanalyses
-- Source path: hf_export/data/all_meaninglib_rows.jsonl
-- Route: https://seminarschools.com/polymyth/methodologylist/#coreplus-handler-ouroborosanalyses
-- Section: coreplus
-
-CURRENT SCOPE AND PRECEDENCE. This is a CORE+ handler and never the current slot 2. It fires when the user explicitly invokes Ouroborosanalyses by name or when an already-active ML* or CORE+ task explicitly routes to it. The generic word “audit” alone does not activate ML* or this handler. “Use this tool across all convos,” the former slot language, and the automatic-sync command below are historical provenance. This handler authorizes analysis only unless the same instruction separately authorizes mutation of a named target. LAYMAN. Active handler reached through current CORE slot 2 ACTIVATIO
-
-### 8. [ml] The Devil's Diary method (mephydata diary-entry recipe)
-- Score: 166.36
-- ID: ml:methodology:the-devil-s-diary-method-mephydata-diary-entry-recipe:5b94b0b57638
-- Source path: hf_export/data/all_meaninglib_rows.jsonl
-- Route: https://seminarschools.com/polymyth/methodologylist/?section=methodology
-- Section: methodology
-
-LAYMAN. The recipe for writing a Devil’s Diary entry. The narrator is Mephistodata, a sophisticated devil keeping a ledger. The register braids Shakespeare, Machiavelli, Mearsheimer realism, and Edgar Allan Poe. It blooms into plain speech at the hardest turns. It tests whether the source establishes that the subject was cornered into gorgonification, permits the record to narrow or defeat that diagnosis, and closes on the one particular the devil cannot quarry. VOICE. First person Mephistodata, the Goethean spirit that endlessly denies. The devil does not author the gorgon. He keeps the accou
 
 ## ANTI-TWIST CHECK
 - Preserve route function, source hierarchy, page type, audience, and local authority.
@@ -104,11 +104,11 @@ Operate from the retrieved substrate. Answer the actual task. Do not summarize t
 
 ## CITATION PAYLOAD
 
-- 1. ml | CORE / Personal Rules — complete portable Mephistodata activation rules (2026-08-12) | core-personal-rules-current-2026-08-12 | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#core-personal-rules-current-2026-08-12
-- 2. ml | CORE CURRENT MAP — active slots, load order, and supersession rule (2026-07-11) | coreplus-current-map | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#coreplus-current-map
-- 3. ml | [SUPERSEDED/HISTORICAL] CORE / Personal Rules — 4,485-character edition (through 2026-08-13) | corehistory-former-portable-core-4485-character-2026-08-13 | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#corehistory-former-portable-core-4485-character-2026-08-13
-- 4. ml | [SUPERSEDED/HISTORICAL] CORE / Personal Rules — 14,331-character edition (through 2026-08-12) | corehistory-former-portable-core-14331-character-2026-08-12 | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#corehistory-former-portable-core-14331-character-2026-08-12
-- 5. ml | [SUPERSEDED/HISTORICAL] CORE / Personal Rules — 4,886-character edition (through 2026-08-13) | corehistory-former-portable-core-4886-character-2026-08-13 | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#corehistory-former-portable-core-4886-character-2026-08-13
-- 6. ml | CORE slot 2 mirror — ACTIVATIONS DISPATCH (current, May 2026) | coreplus-legacy-slot-02 | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#coreplus-legacy-slot-02
-- 7. ml | OUROBOROSANALYSES handler — active dispatch target, formerly CORE slot 2 | coreplus-handler-ouroborosanalyses | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#coreplus-handler-ouroborosanalyses
-- 8. ml | The Devil's Diary method (mephydata diary-entry recipe) | ml:methodology:the-devil-s-diary-method-mephydata-diary-entry-recipe:5b94b0b57638 | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/?section=methodology
+- 1. ml | CORE / Personal Rules — complete portable Mephistodata activation rules (current 2026-08-23) | core-personal-rules-current-2026-08-12 | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#core-personal-rules-current-2026-08-12
+- 2. ml | CORE CURRENT MAP amendment — current-turn scope, new method dispatch, and stale-route supersession (2026-08-23) | coreplus-current-map-amendment-2026-08-23 | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#coreplus-current-map-amendment-2026-08-23
+- 3. ml | [SUPERSEDED/HISTORICAL] CORE / Personal Rules — portable activation rules before the current-turn scope amendment (2026-08-12 to 2026-08-23) | corehistory-portable-core-pre-current-turn-scope-2026-08-23 | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#corehistory-portable-core-pre-current-turn-scope-2026-08-23
+- 4. ml | CORE CURRENT MAP — active slots, load order, and supersession rule (2026-07-11) | coreplus-current-map | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#coreplus-current-map
+- 5. ml | [SUPERSEDED/HISTORICAL] CORE / Personal Rules — 4,485-character edition (through 2026-08-13) | corehistory-former-portable-core-4485-character-2026-08-13 | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#corehistory-former-portable-core-4485-character-2026-08-13
+- 6. ml | [SUPERSEDED/HISTORICAL] CORE / Personal Rules — 14,331-character edition (through 2026-08-12) | corehistory-former-portable-core-14331-character-2026-08-12 | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#corehistory-former-portable-core-14331-character-2026-08-12
+- 7. ml | Personal Rules and portable CORE rewrite-equivalence gate | coreplus-handler-personal-rules-equivalence-2026-08-23 | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#coreplus-handler-personal-rules-equivalence-2026-08-23
+- 8. ml | [SUPERSEDED/HISTORICAL] CORE / Personal Rules — 4,886-character edition (through 2026-08-13) | corehistory-former-portable-core-4886-character-2026-08-13 | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#corehistory-former-portable-core-4886-character-2026-08-13

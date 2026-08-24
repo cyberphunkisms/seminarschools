@@ -119,11 +119,13 @@ for (const e of ml) {
 function renderEntry(e) {
   const role  = e.r || 'both';
   const title = (e.t || '<untitled>').trim();
+  const current = (e.xc || '').trim();
   const body  = (e.b || '').trim();
   const ext   = (e.x || '').trim();
   const tags  = (e.tg || '').trim();
   const lines = [];
   lines.push('[' + role + '] ' + title);
+  if (current) lines.push(current);
   if (body) lines.push(body);
   if (ext && !body.includes(ext)) {
     lines.push('');

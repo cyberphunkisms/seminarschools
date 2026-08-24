@@ -6,6 +6,7 @@
 .catalog-page h1,.catalog-page h2,.catalog-page h3,.resource-row h2,.resource-row h3{overflow-wrap:normal;word-break:normal;hyphens:none}
 .resource-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr))}
 .resource-meta{max-width:100%;overflow-wrap:anywhere;word-break:normal}
+.resource-row .current-status{color:var(--ink);background:#edf1ea;border-left:4px solid var(--accent);padding:.7rem .8rem;margin:.65rem 0}
 .resource-source-link{color:inherit;text-decoration-thickness:1px;text-underline-offset:.18em}
 .resource-source-link:hover,.resource-source-link:focus-visible{color:var(--accent)}
 .resource-actions{display:flex;flex-wrap:wrap;align-items:stretch;gap:.55rem;margin-top:.85rem}

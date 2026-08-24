@@ -12,11 +12,11 @@ const MANIFEST_PATH = path.join(ROOT, 'polymyth/manifest.txt');
 const CONCORDANCE_GENERATOR_PATH = path.join(ROOT, 'scripts/regen-concordance-index.js');
 const MANIFEST_GENERATOR_PATH = path.join(ROOT, 'scripts/regen-methodologylist-manifest.js');
 const SECTION_GENERATOR_PATH = path.join(ROOT, 'scripts/regen-methodologylist-sections-txt.js');
-const EXPECTED_TOTAL = 1189;
+const EXPECTED_TOTAL = 1207;
 const EXPECTED_COUNTS = Object.freeze({
-  analysis: 27, citation: 339, corehistory: 23, coreplus: 47,
+  analysis: 27, citation: 339, corehistory: 28, coreplus: 51,
   degorgonification: 54, 'framework-core': 1, gorgonification: 134,
-  idiomary: 44, learnings: 28, methodology: 373, pending: 18,
+  idiomary: 44, learnings: 28, methodology: 382, pending: 18,
   'pending-user-authorship': 2, polycognate: 24, rainbowsol: 3,
   sabachtan: 34, studylist: 38,
 });

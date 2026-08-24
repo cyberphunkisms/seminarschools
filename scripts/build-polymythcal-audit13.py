@@ -435,7 +435,11 @@ for e in events:
   ROOT,f'polymythseminars/events/{sid}/index.html','calendar-event',register='quiet'
  )
  title_text=str(e.get('title') or 'Untitled listing'); title=html.escape(title_text)
- source_text=str(e.get('source_url') or ''); source=html.escape(source_text,quote=True)
+ destination_text=str(e.get('destination_url') or '')
+ destination_status=str(e.get('destination_status') or '')
+ if destination_status=='unavailable-specific-page':destination_text=''
+ if destination_text and not destination_text.startswith('https://'):raise SystemExit(f'Unsafe external destination for {sid}: {destination_text!r}')
+ destination=html.escape(destination_text,quote=True)
  reasons=' · '.join(labels.get(x,str(x).replace('-',' ').title()) for x in e.get('qualification_reasons',[]))
  qualification_tokens=' '.join(sorted(str(x) for x in e.get('qualification_reasons',[]) if str(x)))
  confirmation=str(e.get('confirmation_status') or 'unconfirmed'); lifecycle=str(e.get('lifecycle_status') or 'active')
@@ -448,11 +452,28 @@ for e in events:
  indexable=confirmation=='confirmed' and e.get('date_precision')=='exact' and e.get('record_kind')!='opportunity' and valid_location(e) and lifecycle not in {'cancelled','missing-on-source','archived'} and not past
  robots='index,follow' if indexable else 'noindex,follow'
  canonical=f'https://seminarschools.com/polymythseminars/events/{urllib.parse.quote(sid)}/'
- schema={'@context':'https://schema.org','@type':'Event','name':title_text,'startDate':e.get('date'),'description':event_meta_description(e,title_text,venue,city),'eventStatus':{'postponed':'https://schema.org/EventPostponed','rescheduled':'https://schema.org/EventRescheduled'}.get(lifecycle,'https://schema.org/EventScheduled'),'url':canonical,'sameAs':source_text or None,'inLanguage':e.get('source_language') or 'en'} if indexable else None
+ schema={'@context':'https://schema.org','@type':'Event','name':title_text,'startDate':e.get('date'),'description':event_meta_description(e,title_text,venue,city),'eventStatus':{'postponed':'https://schema.org/EventPostponed','rescheduled':'https://schema.org/EventRescheduled'}.get(lifecycle,'https://schema.org/EventScheduled'),'url':canonical,'sameAs':destination_text or None,'inLanguage':e.get('source_language') or 'en'} if indexable else None
  if schema and e.get('end_date'):schema['endDate']=e.get('end_date')
  if schema:schema['location']={'@type':'Place','name':venue,'address':city}
  if schema:schema={k:v for k,v in schema.items() if v is not None}
- source_label='Open organizer website · Ouvrir le site de l’organisateur' if str(e.get('source_quality') or '').lower() in {'official','official-or-institutional','institutional'} else 'Open source website · Ouvrir le site source'
+ destination_kind=str(e.get('destination_kind') or 'detail')
+ destination_scope=str(e.get('destination_scope') or 'event')
+ destination_labels={
+  'schedule':'Open official schedule · Ouvrir l’horaire officiel',
+  'registration':'Open registration page · Ouvrir la page d’inscription',
+  'application':'Open application page · Ouvrir la page de candidature',
+  'submission':'Open submission page · Ouvrir la page de soumission',
+  'tickets':'Open ticket page · Ouvrir la billetterie',
+  'review':'Open review page · Ouvrir la page d’évaluation',
+ 'results':'Open results page · Ouvrir la page des résultats',
+ }
+ destination_source=destination_status.startswith('source-')
+ if destination_kind=='schedule' and destination_source:destination_label='Open source schedule · Ouvrir l’horaire source'
+ elif destination_kind in destination_labels:destination_label=destination_labels[destination_kind]
+ elif destination_scope=='series' and destination_source:destination_label='Open series source page · Ouvrir la page source de la série'
+ elif destination_scope=='series':destination_label='Open official series page · Ouvrir la page officielle de la série'
+ elif destination_source:destination_label='Open event source page · Ouvrir la page source de l’événement'
+ else:destination_label='Open official event page · Ouvrir la page officielle de l’événement'
  status_text='Confirmed · Confirmé' if confirmation=='confirmed' else 'Some details pending · Certains détails à confirmer'
  when_text=html.escape(format_when(e))
  date_value=html.escape(str(e.get('date') or '')[:32],quote=True)
@@ -515,8 +536,8 @@ for e in events:
 <div><dt>Place · Lieu</dt><dd><strong>{html.escape(venue)}</strong><span>{html.escape(city)}</span></dd></div>
 <div><dt>Status · Statut</dt><dd>{status_text}</dd></div>
 </dl>
-<section class="pm-event-primary-path" aria-label="Continue on the organizer or source website · Continuer sur le site de l’organisateur ou le site source"><p>Continue on the organizer or source website · Continuer sur le site de l’organisateur ou le site source</p>
-<div class="pm-event-actions">{f'<a class="pm-event-action primary" href="{source}" rel="noopener noreferrer">{source_label} ↗</a>' if source_text else ''}<a class="pm-event-action" type="text/calendar" href="/polymythseminars/ics/{html.escape(sid,quote=True)}.ics">Add to calendar · Ajouter au calendrier</a><a class="pm-event-action" href="/polymythseminars/correct/?event={html.escape(canonical,quote=True)}">Correct this listing · Corriger cette fiche</a></div></section>
+<section class="pm-event-primary-path" aria-label="Listing actions · Actions de la fiche"><p>Listing actions · Actions de la fiche</p>
+<div class="pm-event-actions">{f'<a class="pm-event-action primary" href="{destination}" rel="noopener noreferrer">{destination_label} ↗</a>' if destination_text else ''}<a class="pm-event-action" type="text/calendar" href="/polymythseminars/ics/{html.escape(sid,quote=True)}.ics">Add to calendar · Ajouter au calendrier</a><a class="pm-event-action" href="/polymythseminars/correct/?event={html.escape(canonical,quote=True)}">Correct this listing · Corriger cette fiche</a></div></section>
 {f'<section class="pm-event-description"><h2>About this listing · À propos</h2><p>{html.escape(desc)}</p></section>' if desc else ''}
 {context_html}
 {f'<details class="pm-event-pending" data-qualification-reasons="{html.escape(qualification_tokens,quote=True)}"><summary>Details still pending · Détails à confirmer</summary><p><strong>Qualification · Précision:</strong> {html.escape(reasons)}</p></details>' if reasons else ''}

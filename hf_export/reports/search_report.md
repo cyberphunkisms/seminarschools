@@ -1,10 +1,10 @@
 # Meaninglib search build report
 
-Generated: 2026-08-13T04:00:00.000Z
+Generated: 2026-08-24T05:34:10.929Z
 
 Index: hf_export/search/meaninglib_search_index.json
-Documents: 1970
-Terms: 29117
+Documents: 1988
+Terms: 29194
 
 ## Star-file document counts
 
@@ -14,7 +14,7 @@ Terms: 29117
 - cc: 296
 - manifest: 2
 - mc: 234
-- ml: 1189
+- ml: 1207
 - readme: 1
 
 ## Ontology lock

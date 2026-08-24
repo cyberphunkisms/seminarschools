@@ -1968,6 +1968,7 @@ function fetchEventsWithFallback(){
         var isPast = e.date.slice(0, 10) < todayKey;
         var isNext = idx === firstFutureIdx;
         var cls = 'lecture' + (isPast ? ' past' : '') + (isNext ? ' next' : '');
+        var detailsUrl = '/polymythseminars/events/' + encodeURIComponent(String(e.id)) + '/';
         var titleText = e.title;
         if (e.speaker_or_director && titleText.indexOf(e.speaker_or_director) === -1) {
           titleText = e.speaker_or_director + ': ' + titleText;
@@ -1975,9 +1976,7 @@ function fetchEventsWithFallback(){
         return '<div class="' + cls + '" data-date="' + e.date.slice(0,10) + '">' +
           '<div class="num">' + roman(idx + 1) + '</div>' +
           '<div class="date">' + fmtDate(e.date) + '</div>' +
-          '<div class="title">' + (e.source_url
-            ? '<a href="' + escapeHtml(e.source_url) + '" target="_blank" rel="noopener">' + escapeHtml(titleText) + '</a>'
-            : escapeHtml(titleText)) + '</div>' +
+          '<div class="title"><a href="' + escapeHtml(detailsUrl) + '">' + escapeHtml(titleText) + '</a></div>' +
           '<div class="venue">' + escapeHtml(e.venue || '') + '</div>' +
           '</div>';
       }).join('');

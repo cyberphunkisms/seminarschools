@@ -81,6 +81,13 @@ function exactRouteAlias(query) {
   return null;
 }
 
+const EXACT_CANONICAL_OWNER_ALIASES = new Map([
+  ['t114j', 'method-ouroborossyntheses-2026-08-23'],
+  ['oa', 'coreplus-handler-ouroborosanalyses'],
+  ['ouroborosanalyses', 'method-ouroborosanalyses-current-2026-08-23'],
+  ['egregore', 'method-egregore-current-umbrella-control-2026-08-23'],
+]);
+
 function isReportDoc(doc) {
   return doc.star_file === 'report' || String(doc.source_path || '').includes('/reports/');
 }
@@ -93,6 +100,11 @@ function scoreDoc(doc, tokens, query, idf) {
   const titleNorm = normalizeText(doc.title || '');
   const previewNorm = normalizeText(doc.preview || '');
   const sourceNorm = normalizeText(doc.source_path || '');
+
+  const exactOwnerId = EXACT_CANONICAL_OWNER_ALIASES.get(
+    qnorm.replace(/[^a-z0-9]+/g, ' ').trim(),
+  );
+  if (exactOwnerId && doc.id === exactOwnerId) score += 250;
 
   // Default user queries should retrieve substrate rows, not generated reports.
   if (isReportDoc(doc) && !qnorm.includes('report')) score -= 250;

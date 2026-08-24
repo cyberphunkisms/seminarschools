@@ -1,7 +1,7 @@
 {
   "schema": "external-link-inventory-v1",
   "generatedAt": "2026-08-15T18:00:00-04:00",
-  "totalExternalLinks": 8983,
+  "totalExternalLinks": 6415,
   "topHosts": [
     {
       "host": "forms.gle",
@@ -36,44 +36,28 @@
       "count": 168
     },
     {
-      "host": "seminarschools.com",
-      "count": 129
-    },
-    {
-      "host": "www.concordia.ca",
-      "count": 128
-    },
-    {
       "host": "openstax.org",
       "count": 116
+    },
+    {
+      "host": "seminarschools.com",
+      "count": 113
     },
     {
       "host": "tarragontheatre.com",
       "count": 108
     },
     {
-      "host": "www.toronto.ca",
-      "count": 106
+      "host": "www.concordia.ca",
+      "count": 102
     },
     {
       "host": "jerrywbrown.com",
       "count": 96
     },
     {
-      "host": "www.astro.com",
-      "count": 92
-    },
-    {
       "host": "www.urbandictionary.com",
       "count": 76
-    },
-    {
-      "host": "www.gananoque.ca",
-      "count": 76
-    },
-    {
-      "host": "harbourfrontcentre.com",
-      "count": 74
     },
     {
       "host": "en.wikipedia.org",
@@ -88,22 +72,6 @@
       "count": 64
     },
     {
-      "host": "www.heritagetoronto.org",
-      "count": 60
-    },
-    {
-      "host": "tpl.bibliocommons.com",
-      "count": 58
-    },
-    {
-      "host": "ago.ca",
-      "count": 50
-    },
-    {
-      "host": "montreal.ca",
-      "count": 50
-    },
-    {
       "host": "www.meetup.com",
       "count": 48
     },
@@ -113,6 +81,10 @@
     },
     {
       "host": "docs.google.com",
+      "count": 44
+    },
+    {
+      "host": "www.toronto.ca",
       "count": 44
     },
     {
@@ -128,11 +100,11 @@
       "count": 42
     },
     {
-      "host": "calendly.com",
-      "count": 40
+      "host": "tpl.bibliocommons.com",
+      "count": 42
     },
     {
-      "host": "hotdocs.ca",
+      "host": "calendly.com",
       "count": 40
     },
     {
@@ -140,59 +112,11 @@
       "count": 40
     },
     {
-      "host": "www.southstormont.ca",
-      "count": 40
-    },
-    {
-      "host": "tpl.ca",
-      "count": 38
-    },
-    {
-      "host": "www.mcgill.ca",
-      "count": 38
-    },
-    {
-      "host": "munkschool.utoronto.ca",
-      "count": 36
-    },
-    {
-      "host": "www.humanities.utoronto.ca",
-      "count": 36
-    },
-    {
-      "host": "www.fields.utoronto.ca",
-      "count": 36
-    },
-    {
       "host": "www.imdb.com",
       "count": 34
     },
     {
-      "host": "festivalofauthors.ca",
-      "count": 34
-    },
-    {
-      "host": "www.rom.on.ca",
-      "count": 34
-    },
-    {
-      "host": "www.cambridge.ca",
-      "count": 34
-    },
-    {
-      "host": "science.nasa.gov",
-      "count": 32
-    },
-    {
-      "host": "www.doorsopenontario.on.ca",
-      "count": 32
-    },
-    {
-      "host": "uchv.princeton.edu",
-      "count": 32
-    },
-    {
-      "host": "www.ville.vaudreuil-dorion.qc.ca",
+      "host": "montreal.ca",
       "count": 32
     },
     {
@@ -200,35 +124,15 @@
       "count": 32
     },
     {
-      "host": "agakhanmuseum.org",
-      "count": 30
-    },
-    {
-      "host": "www.apaonline.org",
-      "count": 30
-    },
-    {
-      "host": "www.cca.qc.ca",
-      "count": 30
-    },
-    {
       "host": "improvisationinstitute.ca",
       "count": 30
     },
     {
-      "host": "www.hamilton.ca",
+      "host": "hotdocs.ca",
       "count": 30
     },
     {
-      "host": "tranzac.org",
-      "count": 30
-    },
-    {
-      "host": "philosophy.utoronto.ca",
-      "count": 28
-    },
-    {
-      "host": "www.artsci.utoronto.ca",
+      "host": "harbourfrontcentre.com",
       "count": 28
     },
     {
@@ -242,6 +146,102 @@
     {
       "host": "youtu.be",
       "count": 26
+    },
+    {
+      "host": "munkschool.utoronto.ca",
+      "count": 26
+    },
+    {
+      "host": "learn.utoronto.ca",
+      "count": 26
+    },
+    {
+      "host": "tranzac.org",
+      "count": 26
+    },
+    {
+      "host": "www.heritagetoronto.org",
+      "count": 24
+    },
+    {
+      "host": "www.youtube.com",
+      "count": 23
+    },
+    {
+      "host": "www.earlham.edu",
+      "count": 22
+    },
+    {
+      "host": "baddogtheatre.com",
+      "count": 22
+    },
+    {
+      "host": "www.doorsopenontario.on.ca",
+      "count": 22
+    },
+    {
+      "host": "www.rcmusic.com",
+      "count": 22
+    },
+    {
+      "host": "ibo.org",
+      "count": 21
+    },
+    {
+      "host": "benefitshow.net",
+      "count": 20
+    },
+    {
+      "host": "philevents.org",
+      "count": 20
+    },
+    {
+      "host": "www.readwritethink.org",
+      "count": 20
+    },
+    {
+      "host": "sjsmiddleschool.weebly.com",
+      "count": 20
+    },
+    {
+      "host": "www.alloprof.qc.ca",
+      "count": 20
+    },
+    {
+      "host": "www.veterans.gc.ca",
+      "count": 20
+    },
+    {
+      "host": "education.historicacanada.ca",
+      "count": 20
+    },
+    {
+      "host": "www.docsteach.org",
+      "count": 20
+    },
+    {
+      "host": "indigenousfoundations.arts.ubc.ca",
+      "count": 20
+    },
+    {
+      "host": "www.google.com",
+      "count": 18
+    },
+    {
+      "host": "agakhanmuseum.org",
+      "count": 18
+    },
+    {
+      "host": "www.paricilademocratie.com",
+      "count": 18
+    },
+    {
+      "host": "www.ibo.org",
+      "count": 17
+    },
+    {
+      "host": "www.archives.gov",
+      "count": 17
     }
   ],
   "importantSample": [
@@ -711,64 +711,14 @@
       "host": "calendly.com"
     },
     {
-      "source": "polymythseminars/events/0397c5dce167/index.html",
-      "href": "https://www.toronto.ca/explore-enjoy/festivals-events/pride-month/",
-      "host": "www.toronto.ca"
-    },
-    {
       "source": "polymythseminars/events/049ffd7fa6b9/index.html",
-      "href": "https://veldmusicfestival.com/",
-      "host": "veldmusicfestival.com"
-    },
-    {
-      "source": "polymythseminars/events/056cfc3077e5/index.html",
-      "href": "https://summerworks.ca/",
-      "host": "summerworks.ca"
-    },
-    {
-      "source": "polymythseminars/events/083b2f76f382/index.html",
-      "href": "https://brottmusic.com/la-boheme/",
-      "host": "brottmusic.com"
-    },
-    {
-      "source": "polymythseminars/events/0c9ce6291393/index.html",
-      "href": "https://www.toronto.ca/explore-enjoy/festivals-events/pride-month/",
-      "host": "www.toronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/0cc0dee6936c/index.html",
-      "href": "https://festivalofauthors.ca/",
-      "host": "festivalofauthors.ca"
-    },
-    {
-      "source": "polymythseminars/events/10af63c0cc5e/index.html",
-      "href": "https://www.kingstonwritersfest.ca/sculpted-by-storms/",
-      "host": "www.kingstonwritersfest.ca"
-    },
-    {
-      "source": "polymythseminars/events/119d86af47de/index.html",
-      "href": "https://www.caribanatoronto.com/events/parade",
-      "host": "www.caribanatoronto.com"
+      "href": "https://downsviewpark.ca/events/veld-music-festival-2026",
+      "host": "downsviewpark.ca"
     },
     {
       "source": "polymythseminars/events/11dda066354e/index.html",
       "href": "https://www.toronto.ca/explore-enjoy/festivals-events/indigenous-arts-festival/",
       "host": "www.toronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/13-going-on-30-the-musical-2026-11-24/index.html",
-      "href": "https://www.mirvish.com/whats-on/upcoming-shows",
-      "host": "www.mirvish.com"
-    },
-    {
-      "source": "polymythseminars/events/1c1cf2c43f4a/index.html",
-      "href": "https://tpl.ca/programs-and-classes/featured/salon-series/",
-      "host": "tpl.ca"
-    },
-    {
-      "source": "polymythseminars/events/1c531062baf8/index.html",
-      "href": "https://www.reelasian.com/",
-      "host": "www.reelasian.com"
     },
     {
       "source": "polymythseminars/events/1ce636088711/index.html",
@@ -781,11 +731,6 @@
       "host": "munkschool.utoronto.ca"
     },
     {
-      "source": "polymythseminars/events/2026-old-english-colloquium-multilingualism-old-en-2026-04-15/index.html",
-      "href": "https://www.medieval.utoronto.ca/",
-      "host": "www.medieval.utoronto.ca"
-    },
-    {
       "source": "polymythseminars/events/2026-roseman-lecture-in-practical-ethics-2026-04-16/index.html",
       "href": "https://philosophy.utoronto.ca/event/roseman-lecture-practical-ethics-sally-haslanger-mit/",
       "host": "philosophy.utoronto.ca"
@@ -796,59 +741,14 @@
       "host": "agakhanmuseum.org"
     },
     {
-      "source": "polymythseminars/events/210f97d875ba/index.html",
-      "href": "https://brottmusic.com/",
-      "host": "brottmusic.com"
-    },
-    {
-      "source": "polymythseminars/events/218479b40aa4/index.html",
-      "href": "https://desifest.ca/",
-      "host": "desifest.ca"
-    },
-    {
       "source": "polymythseminars/events/229c166bbbe6/index.html",
       "href": "https://summerworks.ca/show/devising-immersive-site-specific-performance/",
       "host": "summerworks.ca"
     },
     {
-      "source": "polymythseminars/events/246eae77dc33/index.html",
-      "href": "https://www.toronto.ca/explore-enjoy/festivals-events/pride-month/",
-      "host": "www.toronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/2736bd47af82/index.html",
-      "href": "https://luminatofestival.com/",
-      "host": "luminatofestival.com"
-    },
-    {
-      "source": "polymythseminars/events/2757d9fa6cc7/index.html",
-      "href": "https://torontobuskerfest.com/",
-      "host": "torontobuskerfest.com"
-    },
-    {
-      "source": "polymythseminars/events/275a3d6c2cb5/index.html",
-      "href": "https://torontocarnival.ca/",
-      "host": "torontocarnival.ca"
-    },
-    {
-      "source": "polymythseminars/events/285112aa8a67/index.html",
-      "href": "https://www.mcgill.ca/science/channels_item/33",
-      "host": "www.mcgill.ca"
-    },
-    {
       "source": "polymythseminars/events/2c6865c009bf/index.html",
       "href": "https://learn.utoronto.ca/university-lecture-series",
       "host": "learn.utoronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/2d4871c236e5/index.html",
-      "href": "https://www.mcgill.ca/science/channels_item/25",
-      "host": "www.mcgill.ca"
-    },
-    {
-      "source": "polymythseminars/events/2ea6faeee4a4/index.html",
-      "href": "https://montrealjazzfest.com/",
-      "host": "montrealjazzfest.com"
     },
     {
       "source": "polymythseminars/events/2fe410f5efc7/index.html",
@@ -861,24 +761,9 @@
       "host": "www.toronto.ca"
     },
     {
-      "source": "polymythseminars/events/352ebbe81a28/index.html",
-      "href": "https://desifest.ca/",
-      "host": "desifest.ca"
-    },
-    {
       "source": "polymythseminars/events/3830157c28b8/index.html",
       "href": "https://montrealjazzfest.com/en/program/patrick-watson-e007898",
       "host": "montrealjazzfest.com"
-    },
-    {
-      "source": "polymythseminars/events/3ba1802ce467/index.html",
-      "href": "https://torontojazz.com/lineup/",
-      "host": "torontojazz.com"
-    },
-    {
-      "source": "polymythseminars/events/3f6748d638c7/index.html",
-      "href": "https://festivalofauthors.ca/",
-      "host": "festivalofauthors.ca"
     },
     {
       "source": "polymythseminars/events/455d5b079312/index.html",
@@ -886,17 +771,7 @@
       "host": "brottmusic.com"
     },
     {
-      "source": "polymythseminars/events/4630f11e087b/index.html",
-      "href": "https://summerworks.ca/",
-      "host": "summerworks.ca"
-    },
-    {
       "source": "polymythseminars/events/472ca2aa930b/index.html",
-      "href": "https://harbourfrontcentre.com/series/summer-music-in-the-garden/",
-      "host": "harbourfrontcentre.com"
-    },
-    {
-      "source": "polymythseminars/events/48a8baf2050f/index.html",
       "href": "https://harbourfrontcentre.com/series/summer-music-in-the-garden/",
       "host": "harbourfrontcentre.com"
     },
@@ -911,34 +786,9 @@
       "host": "harbourfrontcentre.com"
     },
     {
-      "source": "polymythseminars/events/59fefe289eed/index.html",
-      "href": "https://nxne.com/",
-      "host": "nxne.com"
-    },
-    {
-      "source": "polymythseminars/events/5e82d05f1d39/index.html",
-      "href": "https://polishfestival.ca/",
-      "host": "polishfestival.ca"
-    },
-    {
       "source": "polymythseminars/events/5efce8fea021/index.html",
       "href": "https://summerworks.ca/show/le-concierge/",
       "host": "summerworks.ca"
-    },
-    {
-      "source": "polymythseminars/events/5fd96f93aff6/index.html",
-      "href": "https://luminatofestival.com/",
-      "host": "luminatofestival.com"
-    },
-    {
-      "source": "polymythseminars/events/7241619d213e/index.html",
-      "href": "https://www.mcgill.ca/science/channels_item/33",
-      "host": "www.mcgill.ca"
-    },
-    {
-      "source": "polymythseminars/events/74f79ea5ff35/index.html",
-      "href": "https://carabram.org/",
-      "host": "carabram.org"
     },
     {
       "source": "polymythseminars/events/7a63d8fd5e8c/index.html",
@@ -946,23 +796,8 @@
       "host": "harbourfrontcentre.com"
     },
     {
-      "source": "polymythseminars/events/7d9cc0af58b5/index.html",
-      "href": "https://luminatofestival.com/",
-      "host": "luminatofestival.com"
-    },
-    {
-      "source": "polymythseminars/events/874ad14c70b3/index.html",
-      "href": "https://beachesjazz.com/",
-      "host": "beachesjazz.com"
-    },
-    {
-      "source": "polymythseminars/events/8b8423aafbf6/index.html",
-      "href": "https://torontojazz.com/lineup/",
-      "host": "torontojazz.com"
-    },
-    {
       "source": "polymythseminars/events/8c0a1af041b0/index.html",
-      "href": "https://osheaga.com/",
+      "href": "https://osheaga.com/en/program/schedule",
       "host": "osheaga.com"
     },
     {
@@ -976,59 +811,9 @@
       "host": "www.theex.com"
     },
     {
-      "source": "polymythseminars/events/8th-canadian-conference-on-humanities-social-scien-2026-10-28/index.html",
-      "href": "https://socialsciences.info/",
-      "host": "socialsciences.info"
-    },
-    {
       "source": "polymythseminars/events/91219ec49135/index.html",
       "href": "https://osheaga.com/en/program/tate-mcrae-e007706",
       "host": "osheaga.com"
-    },
-    {
-      "source": "polymythseminars/events/94c6bfc52c0c/index.html",
-      "href": "https://www.reelasian.com/",
-      "host": "www.reelasian.com"
-    },
-    {
-      "source": "polymythseminars/events/97222228bc8e/index.html",
-      "href": "https://www.torontomu.ca/research/news-events/toronto-metropolitan-university-wide-research-events/",
-      "host": "www.torontomu.ca"
-    },
-    {
-      "source": "polymythseminars/events/9ac6d796dcc2/index.html",
-      "href": "https://fanexpohq.com/fanexpocanada",
-      "host": "fanexpohq.com"
-    },
-    {
-      "source": "polymythseminars/events/9ed3d573f427/index.html",
-      "href": "https://torontojazz.com/lineup/",
-      "host": "torontojazz.com"
-    },
-    {
-      "source": "polymythseminars/events/a-j-julius-reconstruction-workshop-2026-06-06/index.html",
-      "href": "https://ethics.utoronto.ca/category/events/",
-      "host": "ethics.utoronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/a-year-with-frog-and-toad-shaw-festival-2026-holid-2026-11-15/index.html",
-      "href": "https://www.shawfest.com/#a-year-with-frog-and-toad-shaw-festival-",
-      "host": "www.shawfest.com"
-    },
-    {
-      "source": "polymythseminars/events/a09c24372419/index.html",
-      "href": "https://fanexpohq.com/fanexpocanada",
-      "host": "fanexpohq.com"
-    },
-    {
-      "source": "polymythseminars/events/a0a5a2cffba5/index.html",
-      "href": "https://luminatofestival.com/",
-      "host": "luminatofestival.com"
-    },
-    {
-      "source": "polymythseminars/events/a28d66f9e65f/index.html",
-      "href": "https://nxne.com/",
-      "host": "nxne.com"
     },
     {
       "source": "polymythseminars/events/a49ab7357b76/index.html",
@@ -1036,29 +821,9 @@
       "host": "harbourfrontcentre.com"
     },
     {
-      "source": "polymythseminars/events/a5bb1b8ad073/index.html",
-      "href": "https://desifest.ca/",
-      "host": "desifest.ca"
-    },
-    {
-      "source": "polymythseminars/events/a82c1caf76cf/index.html",
-      "href": "https://fantasiafestival.com/en/",
-      "host": "fantasiafestival.com"
-    },
-    {
       "source": "polymythseminars/events/a9cf2946cd6e/index.html",
       "href": "https://learn.utoronto.ca/university-lecture-series",
       "host": "learn.utoronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/aar-southeast-region-2027-annual-meeting-2026/index.html",
-      "href": "https://relse.org/call-for-papers",
-      "host": "relse.org"
-    },
-    {
-      "source": "polymythseminars/events/abaa54f489fb/index.html",
-      "href": "https://luminatofestival.com/",
-      "host": "luminatofestival.com"
     },
     {
       "source": "polymythseminars/events/absolutely-interdisciplinary-2026-2026-05-13/index.html",
@@ -1066,109 +831,14 @@
       "host": "www.artsci.utoronto.ca"
     },
     {
-      "source": "polymythseminars/events/accute-graduate-creative-writing-2027-watch/index.html",
-      "href": "https://accute.ca/category/contest/",
-      "host": "accute.ca"
-    },
-    {
-      "source": "polymythseminars/events/acla-2027-houston-meeting/index.html",
-      "href": "https://www.acla.org/annual-meeting/conference-faqs",
-      "host": "www.acla.org"
-    },
-    {
-      "source": "polymythseminars/events/acla-2027-proposals/index.html",
-      "href": "https://www.acla.org/annual-meeting/conference-faqs",
-      "host": "www.acla.org"
-    },
-    {
-      "source": "polymythseminars/events/acla-2027-virtual-meeting/index.html",
-      "href": "https://www.acla.org/annual-meeting/conference-faqs",
-      "host": "www.acla.org"
-    },
-    {
       "source": "polymythseminars/events/acla-annual-meeting-seminar-proposal-deadline-projected-2026-09-30-f04d246c/index.html",
       "href": "https://www.acla.org/annual-meeting",
       "host": "www.acla.org"
     },
     {
-      "source": "polymythseminars/events/acls-dissertation-innovation-fellowship-projected-2026-10-23-073dcfc0/index.html",
-      "href": "https://www.acls.org/competitions/",
-      "host": "www.acls.org"
-    },
-    {
-      "source": "polymythseminars/events/acls-fellowship-competition-projected-2026-09-25-7fb8bbd9/index.html",
-      "href": "https://www.acls.org/competitions/",
-      "host": "www.acls.org"
-    },
-    {
-      "source": "polymythseminars/events/acp-advertising-business-individual-awards-2027-deadline/index.html",
-      "href": "https://studentpress.org/acp/awards/",
-      "host": "studentpress.org"
-    },
-    {
-      "source": "polymythseminars/events/acp-pacemaker-2027-deadline/index.html",
-      "href": "https://studentpress.org/acp/awards/",
-      "host": "studentpress.org"
-    },
-    {
-      "source": "polymythseminars/events/acp-spring-conference-2027/index.html",
-      "href": "https://studentpress.org/acp/conventions/",
-      "host": "studentpress.org"
-    },
-    {
-      "source": "polymythseminars/events/ad7b80663935/index.html",
-      "href": "https://fringetoronto.com/",
-      "host": "fringetoronto.com"
-    },
-    {
       "source": "polymythseminars/events/adina-talve-goodman-fellowship-2026/index.html",
       "href": "https://one-story.com/learn/fellowship/",
       "host": "one-story.com"
-    },
-    {
-      "source": "polymythseminars/events/ae6a414ba572/index.html",
-      "href": "https://imaginenative.org/festival",
-      "host": "imaginenative.org"
-    },
-    {
-      "source": "polymythseminars/events/aed7ce8c9bb6/index.html",
-      "href": "https://www.toronto.ca/explore-enjoy/festivals-events/pride-month/",
-      "host": "www.toronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/afro-black-indigenous-futures-panel-2026-04-15/index.html",
-      "href": "https://www.ocadu.ca/",
-      "host": "www.ocadu.ca"
-    },
-    {
-      "source": "polymythseminars/events/afrofest-2026-2026-08-14/index.html",
-      "href": "https://www.afrofest.ca/",
-      "host": "www.afrofest.ca"
-    },
-    {
-      "source": "polymythseminars/events/aga-khan-museum-artist-talk-and-demonstration-2026-05-16/index.html",
-      "href": "https://agakhanmuseum.org/whats-on/",
-      "host": "agakhanmuseum.org"
-    },
-    {
-      "source": "polymythseminars/events/aga-khan-museum-artist-talk-and-demonstration-2026-05-17/index.html",
-      "href": "https://agakhanmuseum.org/whats-on/",
-      "host": "agakhanmuseum.org"
-    },
-    {
-      "source": "polymythseminars/events/aga-khan-museum-crossing-traditions-cimbalom-and-s-2026-05-12/index.html",
-      "href": "https://agakhanmuseum.org/whats-on/",
-      "host": "agakhanmuseum.org"
-    },
-    {
-      "source": "polymythseminars/events/ago-annual-general-meeting-2026-06-24/index.html",
-      "href": "https://ago.ca/about",
-      "host": "ago.ca"
-    },
-    {
-      "source": "polymythseminars/events/ago-art-bash-2026-09-24/index.html",
-      "href": "https://ago.ca/exhibitions",
-      "host": "ago.ca"
     },
     {
       "source": "polymythseminars/events/ago-introduction-to-everything-fall-2026/index.html",
@@ -1191,101 +861,6 @@
       "host": "ago.ca"
     },
     {
-      "source": "polymythseminars/events/ago-rainbow-adventures-camp-session-5a-2026/index.html",
-      "href": "https://ago.ca/learn/camps/browse-camps",
-      "host": "ago.ca"
-    },
-    {
-      "source": "polymythseminars/events/ago-talk-reliving-beatlemania-with-paul-mccartney--2026-05-02/index.html",
-      "href": "https://ago.ca/events",
-      "host": "ago.ca"
-    },
-    {
-      "source": "polymythseminars/events/ago-talk-the-beatles-never-went-out-of-fashion-2026-04-19/index.html",
-      "href": "https://ago.ca/events",
-      "host": "ago.ca"
-    },
-    {
-      "source": "polymythseminars/events/ago-talk-what-art-can-ask-of-us-why-seeing-is-not--2026-04-18/index.html",
-      "href": "https://ago.ca/events",
-      "host": "ago.ca"
-    },
-    {
-      "source": "polymythseminars/events/ago-teacher-workshop-art-and-indigenous-studies-2026-04-25/index.html",
-      "href": "https://ago.ca/events",
-      "host": "ago.ca"
-    },
-    {
-      "source": "polymythseminars/events/ago-wild-things-camp-session-5b-2026/index.html",
-      "href": "https://ago.ca/learn/camps/browse-camps",
-      "host": "ago.ca"
-    },
-    {
-      "source": "polymythseminars/events/agreenerfuture-bayfront-park-cleanup-2026/index.html",
-      "href": "https://www.agreenerfuture.ca/events-list",
-      "host": "www.agreenerfuture.ca"
-    },
-    {
-      "source": "polymythseminars/events/agreenerfuture-cherry-beach-cleanup-2026/index.html",
-      "href": "https://www.agreenerfuture.ca/events-list",
-      "host": "www.agreenerfuture.ca"
-    },
-    {
-      "source": "polymythseminars/events/agreenerfuture-hamilton-general-cleanup-2026/index.html",
-      "href": "https://www.agreenerfuture.ca/events-list",
-      "host": "www.agreenerfuture.ca"
-    },
-    {
-      "source": "polymythseminars/events/agreenerfuture-harbourfront-world-cleanup-day-cleanup-2026/index.html",
-      "href": "https://www.agreenerfuture.ca/events-list",
-      "host": "www.agreenerfuture.ca"
-    },
-    {
-      "source": "polymythseminars/events/agreenerfuture-heydenshore-cleanup-2026/index.html",
-      "href": "https://www.agreenerfuture.ca/events-list",
-      "host": "www.agreenerfuture.ca"
-    },
-    {
-      "source": "polymythseminars/events/agreenerfuture-high-park-cleanup-2026/index.html",
-      "href": "https://www.agreenerfuture.ca/events-list",
-      "host": "www.agreenerfuture.ca"
-    },
-    {
-      "source": "polymythseminars/events/agreenerfuture-lakefront-promenade-cleanup-2026/index.html",
-      "href": "https://www.agreenerfuture.ca/events-list",
-      "host": "www.agreenerfuture.ca"
-    },
-    {
-      "source": "polymythseminars/events/agreenerfuture-lakefront-west-cleanup-2026/index.html",
-      "href": "https://www.agreenerfuture.ca/events-list",
-      "host": "www.agreenerfuture.ca"
-    },
-    {
-      "source": "polymythseminars/events/agreenerfuture-mississauga-hospital-cleanup-2026/index.html",
-      "href": "https://www.agreenerfuture.ca/events-list",
-      "host": "www.agreenerfuture.ca"
-    },
-    {
-      "source": "polymythseminars/events/agreenerfuture-trinity-bellwoods-cleanup-2026/index.html",
-      "href": "https://www.agreenerfuture.ca/events-list",
-      "host": "www.agreenerfuture.ca"
-    },
-    {
-      "source": "polymythseminars/events/agreenerfuture-unsmoke-butt-blitz-ontario-september-2026/index.html",
-      "href": "https://www.agreenerfuture.ca/events-list",
-      "host": "www.agreenerfuture.ca"
-    },
-    {
-      "source": "polymythseminars/events/aia-field-school-scholarship-2027/index.html",
-      "href": "https://www.archaeological.org/grant/waldbaum-scholarship/",
-      "host": "www.archaeological.org"
-    },
-    {
-      "source": "polymythseminars/events/aia-grants-2027-watch/index.html",
-      "href": "https://www.archaeological.org/programs/professionals/grants-awards/",
-      "host": "www.archaeological.org"
-    },
-    {
       "source": "polymythseminars/events/aia-manglisi-archaeological-field-school-2027/index.html",
       "href": "https://www.archaeological.org/fieldwork/manglisi-archaeological-field-school-georgia/",
       "host": "www.archaeological.org"
@@ -1294,26 +869,6 @@
       "source": "polymythseminars/events/aia-zorreira-archaeological-project-field-school-january-2027/index.html",
       "href": "https://www.archaeological.org/fieldwork/zorreira-archaeological-project/",
       "host": "www.archaeological.org"
-    },
-    {
-      "source": "polymythseminars/events/aies-2027-ai-ethics-and-society-2027/index.html",
-      "href": "https://www.aies-conference.com/",
-      "host": "www.aies-conference.com"
-    },
-    {
-      "source": "polymythseminars/events/alexander-griggs-burr-ma-final-oral-exam-toward-a--2026-05-04/index.html",
-      "href": "https://www.uoguelph.ca/arts/philosophy/events/alexander-griggs-burrs-ma-final-oral-examination",
-      "host": "www.uoguelph.ca"
-    },
-    {
-      "source": "polymythseminars/events/alexander-griggs-burr-ma-final-oral-exam-toward-a--2026-05-06/index.html",
-      "href": "https://www.uoguelph.ca/arts/philosophy/events/alexander-griggs-burrs-ma-final-oral-examination",
-      "host": "www.uoguelph.ca"
-    },
-    {
-      "source": "polymythseminars/events/all-s-well-2026-11-24/index.html",
-      "href": "https://www.soulpepper.ca/performances",
-      "host": "www.soulpepper.ca"
     },
     {
       "source": "polymythseminars/events/allegheny-review-2026/index.html",
@@ -1326,16 +881,6 @@
       "host": "www.classics.utoronto.ca"
     },
     {
-      "source": "polymythseminars/events/amadeus-shaw-festival-2026-2026-05-26/index.html",
-      "href": "https://www.shawfest.com/#amadeus-shaw-festival-2026",
-      "host": "www.shawfest.com"
-    },
-    {
-      "source": "polymythseminars/events/amazon-canada-first-novel-award-youth-short-story-2027/index.html",
-      "href": "https://thewalrus.ca/afna/",
-      "host": "thewalrus.ca"
-    },
-    {
       "source": "polymythseminars/events/american-academy-in-rome-rome-prize-projected-2026-11-01-2894fc00/index.html",
       "href": "https://www.aarome.org/apply/rome-prize",
       "host": "www.aarome.org"
@@ -1344,16 +889,6 @@
       "source": "polymythseminars/events/american-academy-of-religion-2027-annual-meeting-2027/index.html",
       "href": "https://aarweb.org/events/annual-meetings/call-for-papers-proposals/",
       "host": "aarweb.org"
-    },
-    {
-      "source": "polymythseminars/events/american-anthropological-association-2027-annual-meeting-2027/index.html",
-      "href": "https://annualmeeting.americananthro.org/submit/",
-      "host": "annualmeeting.americananthro.org"
-    },
-    {
-      "source": "polymythseminars/events/american-ethnological-society-spring-2027-conference-2027/index.html",
-      "href": "https://americananthro.org/",
-      "host": "americananthro.org"
     },
     {
       "source": "polymythseminars/events/american-historical-association-2028-annual-meeting-2027/index.html",
@@ -1381,78 +916,18 @@
       "host": "www.asanet.org"
     },
     {
-      "source": "polymythseminars/events/an-evening-with-colm-t-ib-n-2026-05-07/index.html",
-      "href": "https://www.artsci.utoronto.ca/events/day/2026-05-07",
-      "host": "www.artsci.utoronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/anakana-schofield-library-of-brothel-2026-05-28/index.html",
-      "href": "https://www.torontopubliclibrary.ca/programs-and-classes/appel-salon/",
-      "host": "www.torontopubliclibrary.ca"
-    },
-    {
-      "source": "polymythseminars/events/anjou-borough-council-fall-2026/index.html",
-      "href": "https://montreal.ca/conseils-decisionnels/conseil-darrondissement-danjou",
-      "host": "montreal.ca"
-    },
-    {
-      "source": "polymythseminars/events/anjou-borough-council-fall-2026-2026-09-01/index.html",
-      "href": "https://montreal.ca/conseils-decisionnels/conseil-darrondissement-danjou",
-      "host": "montreal.ca"
-    },
-    {
-      "source": "polymythseminars/events/anjou-borough-council-fall-2026-2026-10-06/index.html",
-      "href": "https://montreal.ca/conseils-decisionnels/conseil-darrondissement-danjou",
-      "host": "montreal.ca"
-    },
-    {
-      "source": "polymythseminars/events/anjou-borough-council-fall-2026-2026-11-03/index.html",
-      "href": "https://montreal.ca/conseils-decisionnels/conseil-darrondissement-danjou",
-      "host": "montreal.ca"
-    },
-    {
       "source": "polymythseminars/events/annual-toronto-workshop-in-ancient-philosophy-2026-2026-04-24/index.html",
       "href": "https://philosophy.utoronto.ca/event/annual-toronto-workshop-in-ancient-philosophy-2026-ancient-political-thought/",
       "host": "philosophy.utoronto.ca"
     },
     {
-      "source": "polymythseminars/events/annular-solar-eclipse-2026-02-17/index.html",
-      "href": "https://eclipse.gsfc.nasa.gov/OH/OH2026.html",
-      "host": "eclipse.gsfc.nasa.gov"
-    },
-    {
-      "source": "polymythseminars/events/annular-solar-eclipse-2027-02-06/index.html",
-      "href": "https://science.nasa.gov/eclipses/future-eclipses/",
-      "host": "science.nasa.gov"
-    },
-    {
-      "source": "polymythseminars/events/apa-book-prize-2027/index.html",
-      "href": "https://www.apaonline.org/events/eventdetails.aspx?id=1472741",
-      "host": "www.apaonline.org"
-    },
-    {
       "source": "polymythseminars/events/apa-eastern-2028-submissions/index.html",
-      "href": "https://www.apaonline.org/events/event_list.asp?DGPCrPg=1&amp;DGPCrSrt=&amp;group=110424&amp;show=",
-      "host": "www.apaonline.org"
+      "href": "https://my.apaonline.org/events/event-description?CalendarEventKey=f2546a8a-ab55-4b84-b9d7-019a6ef43466&amp;Home=%2Fevents%2Fcalendar",
+      "host": "my.apaonline.org"
     },
     {
       "source": "polymythseminars/events/apa-edinburgh-fellowship-2027-28/index.html",
       "href": "https://www.apaonline.org/page/edinburgh",
-      "host": "www.apaonline.org"
-    },
-    {
-      "source": "polymythseminars/events/apa-frank-chapman-sharp-2027/index.html",
-      "href": "https://www.apaonline.org/events/eventdetails.aspx?id=1472741",
-      "host": "www.apaonline.org"
-    },
-    {
-      "source": "polymythseminars/events/apa-gittler-award-2027/index.html",
-      "href": "https://www.apaonline.org/events/eventdetails.aspx?id=1472741",
-      "host": "www.apaonline.org"
-    },
-    {
-      "source": "polymythseminars/events/apa-latin-american-thought-2027/index.html",
-      "href": "https://www.apaonline.org/events/eventdetails.aspx?id=1472741",
       "host": "www.apaonline.org"
     },
     {
@@ -1466,49 +941,9 @@
       "host": "www.apaonline.org"
     },
     {
-      "source": "polymythseminars/events/apa-pdc-program-prize-2027/index.html",
-      "href": "https://www.apaonline.org/events/eventdetails.aspx?id=1472741",
-      "host": "www.apaonline.org"
-    },
-    {
-      "source": "polymythseminars/events/apa-plantinga-2027/index.html",
-      "href": "https://www.apaonline.org/events/eventdetails.aspx?id=1472741",
-      "host": "www.apaonline.org"
-    },
-    {
-      "source": "polymythseminars/events/apa-public-philosophy-oped-2027/index.html",
-      "href": "https://www.apaonline.org/events/eventdetails.aspx?id=1472741",
-      "host": "www.apaonline.org"
-    },
-    {
-      "source": "polymythseminars/events/apa-routledge-tf-prize-2027/index.html",
-      "href": "https://www.apaonline.org/events/eventdetails.aspx?id=1472741",
-      "host": "www.apaonline.org"
-    },
-    {
-      "source": "polymythseminars/events/apa-teaching-technology-2027/index.html",
-      "href": "https://www.apaonline.org/events/eventdetails.aspx?id=1472741",
-      "host": "www.apaonline.org"
-    },
-    {
-      "source": "polymythseminars/events/aporia-byu-2027-watch/index.html",
-      "href": "https://aporia.byu.edu/site.php?id=submissions",
-      "host": "aporia.byu.edu"
-    },
-    {
-      "source": "polymythseminars/events/aporia-st-andrews-2027-watch/index.html",
-      "href": "https://ojs.st-andrews.ac.uk/index.php/aporia",
-      "host": "ojs.st-andrews.ac.uk"
-    },
-    {
       "source": "polymythseminars/events/applied-philosophy-postdoc-2027/index.html",
       "href": "https://www.appliedphil.org/funding/sap-post-doctoral-fellowship-scheme/",
       "host": "www.appliedphil.org"
-    },
-    {
-      "source": "polymythseminars/events/april-hickox-vantage-point-passing-2026-05-26/index.html",
-      "href": "https://contactphoto.com/festival/30th-edition-may-2026#april-hickox-vantage-point",
-      "host": "contactphoto.com"
     },
     {
       "source": "polymythseminars/events/archaeological-institute-of-america-2027-annual-meeting-2026/index.html",
@@ -1521,59 +956,9 @@
       "host": "www.anthropology.utoronto.ca"
     },
     {
-      "source": "polymythseminars/events/ariadne-auf-naxos-r-strauss-2027-02-04/index.html",
-      "href": "https://www.coc.ca/tickets/2627-season",
-      "host": "www.coc.ca"
-    },
-    {
-      "source": "polymythseminars/events/aristotle-contest-2027-watch/index.html",
-      "href": "https://philosophy.utoronto.ca/the-aristotle-a-high-school-philosophy-essay-contest/",
-      "host": "philosophy.utoronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/aristotle-contest-high-school-philosophy-2026/index.html",
-      "href": "https://philosophy.utoronto.ca/the-aristotle-a-high-school-philosophy-essay-contest/",
-      "host": "philosophy.utoronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/arpa-2026-submissions/index.html",
-      "href": "https://www.acpcpa.ca/cpages/calls",
-      "host": "www.acpcpa.ca"
-    },
-    {
       "source": "polymythseminars/events/asa-midyear-methodology-meeting-2026-04-24/index.html",
       "href": "https://www.sociology.utoronto.ca/events/asa-midyear-methodology-meeting-university-toronto",
       "host": "www.sociology.utoronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/asa-monograph-prize-2027/index.html",
-      "href": "https://aesthetics-online.org/page/MonographPrize",
-      "host": "aesthetics-online.org"
-    },
-    {
-      "source": "polymythseminars/events/asor-annual-meeting-abstract-deadline-projected-2027-02-15-4ec34cf8/index.html",
-      "href": "https://www.asor.org/am/",
-      "host": "www.asor.org"
-    },
-    {
-      "source": "polymythseminars/events/association-for-law-property-and-society-2027-meeting-2026/index.html",
-      "href": "https://alps-law.org/",
-      "host": "alps-law.org"
-    },
-    {
-      "source": "polymythseminars/events/association-of-american-law-schools-2027-annual-meeting-2026/index.html",
-      "href": "https://am.aals.org/",
-      "host": "am.aals.org"
-    },
-    {
-      "source": "polymythseminars/events/awp-intro-journals-2026/index.html",
-      "href": "https://awpwriter.org/AWP/AWP/Contests/Overview.aspx",
-      "host": "awpwriter.org"
-    },
-    {
-      "source": "polymythseminars/events/awp-undergraduate-magazine-prize-2027-watch/index.html",
-      "href": "https://awpwriter.org/AWP/AWP/Contests/Overview.aspx",
-      "host": "awpwriter.org"
     },
     {
       "source": "polymythseminars/events/ayn-rand-essay-contests-watch/index.html",
@@ -1581,34 +966,9 @@
       "host": "aynrand.org"
     },
     {
-      "source": "polymythseminars/events/azrieli-postdoctoral-2027/index.html",
-      "href": "https://azrielifoundation.org/fellows/internationalpostdoctoral/",
-      "host": "azrielifoundation.org"
-    },
-    {
-      "source": "polymythseminars/events/b1d9309e0d0b/index.html",
-      "href": "https://nxne.com/",
-      "host": "nxne.com"
-    },
-    {
       "source": "polymythseminars/events/b36ec2702947/index.html",
       "href": "https://www.kingstonwritersfest.ca/2026-festival/",
       "host": "www.kingstonwritersfest.ca"
-    },
-    {
-      "source": "polymythseminars/events/b55174632dbf/index.html",
-      "href": "https://festivalofauthors.ca/",
-      "host": "festivalofauthors.ca"
-    },
-    {
-      "source": "polymythseminars/events/b62fe9ac2e56/index.html",
-      "href": "https://ago.ca/press-release/ago-announces-2026-exhibition-line-featuring-paul-mccartney-monet-and-melissa-auf-der",
-      "host": "ago.ca"
-    },
-    {
-      "source": "polymythseminars/events/b66a9c340055/index.html",
-      "href": "https://beachesjazz.com/",
-      "host": "beachesjazz.com"
     },
     {
       "source": "polymythseminars/events/backus-war-of-1812-reenactment-2026/index.html",
@@ -1686,11 +1046,6 @@
       "host": "www.banffcentre.ca"
     },
     {
-      "source": "polymythseminars/events/banff-futurisms-residency-2027/index.html",
-      "href": "https://www.banffcentre.ca/programs/literary-arts/futurisms-intensive-writing-residency-2027",
-      "host": "www.banffcentre.ca"
-    },
-    {
       "source": "polymythseminars/events/banff-soundweavings-residency-2027/index.html",
       "href": "https://www.banffcentre.ca/programs/music/soundweavings-2027",
       "host": "www.banffcentre.ca"
@@ -1706,34 +1061,14 @@
       "host": "www.bazoof.com"
     },
     {
-      "source": "polymythseminars/events/bb286cf1491f/index.html",
-      "href": "https://torontojazz.com/lineup/",
-      "host": "torontojazz.com"
-    },
-    {
       "source": "polymythseminars/events/bccampus-indigenous-land-based-learning-flo-2026/index.html",
       "href": "https://bccampus.ca/event/flo-workshop-indigenous-land-based-learning-in-post-secondary-education/",
       "host": "bccampus.ca"
     },
     {
-      "source": "polymythseminars/events/be17416e9fa8/index.html",
-      "href": "https://www.mcgill.ca/science/channels_item/25",
-      "host": "www.mcgill.ca"
-    },
-    {
       "source": "polymythseminars/events/beaverbrook-vimy-prize-2027-watch/index.html",
       "href": "https://vimyfoundation.ca/programs/beaverbrook-vimy-prize",
       "host": "vimyfoundation.ca"
-    },
-    {
-      "source": "polymythseminars/events/bees-a-story-of-survival-2026-05-16/index.html",
-      "href": "https://www.rom.on.ca/whats-on/exhibitions",
-      "host": "www.rom.on.ca"
-    },
-    {
-      "source": "polymythseminars/events/beethoven-s-fifth-angela-hewitt-2026-10-08/index.html",
-      "href": "https://www.tso.ca/concerts-and-events/202627-subscriptions/explore-the-202627-season",
-      "host": "www.tso.ca"
     },
     {
       "source": "polymythseminars/events/bennington-young-writers-awards-2026/index.html",
@@ -1746,39 +1081,14 @@
       "host": "berggruen.org"
     },
     {
-      "source": "polymythseminars/events/berkeley-essay-prize-2026/index.html",
-      "href": "https://www.sas.rochester.edu/phl/about/prize.html",
-      "host": "www.sas.rochester.edu"
-    },
-    {
-      "source": "polymythseminars/events/berkeley-essay-prize-2027-result/index.html",
-      "href": "https://www.sas.rochester.edu/phl/about/prize.html",
-      "host": "www.sas.rochester.edu"
-    },
-    {
       "source": "polymythseminars/events/beyond-earth-a-conversation-on-artemis-leadership--2026-06-24/index.html",
       "href": "https://agakhanmuseum.org/whats-on/beyond-earth-talk/",
       "host": "agakhanmuseum.org"
     },
     {
-      "source": "polymythseminars/events/beyond-the-hype-ai-in-qualitative-and-historical-r-2026-05-12/index.html",
-      "href": "https://munkschool.utoronto.ca/event/beyond-hype-ai-qualitative-and-historical-research",
-      "host": "munkschool.utoronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/beyond-the-hype-ai-in-qualitative-and-historical-r-2026-05-13/index.html",
-      "href": "https://munkschool.utoronto.ca/event/beyond-hype-ai-qualitative-and-historical-research",
-      "host": "munkschool.utoronto.ca"
-    },
-    {
       "source": "polymythseminars/events/blue-marble-review-submissions-2026-2027/index.html",
       "href": "https://bluemarblereview.com/submit/",
       "host": "bluemarblereview.com"
-    },
-    {
-      "source": "polymythseminars/events/bollywoodmonster-mashup-2026-2026-07-24/index.html",
-      "href": "https://bollywoodmashup.ca/",
-      "host": "bollywoodmashup.ca"
     },
     {
       "source": "polymythseminars/events/book-launch-hilary-cunningham-scharper-2026-05-07/index.html",
@@ -1791,49 +1101,24 @@
       "host": "bowseat.org"
     },
     {
-      "source": "polymythseminars/events/bradley-house-engagement-reenactment-2026/index.html",
-      "href": "https://www.fortyfirst.org/events.html",
-      "host": "www.fortyfirst.org"
-    },
-    {
-      "source": "polymythseminars/events/branding-storytelling-workshop-2026-04-22/index.html",
-      "href": "https://www.ocadu.ca/campus-life/events-and-exhibitions",
-      "host": "www.ocadu.ca"
-    },
-    {
-      "source": "polymythseminars/events/breakout-con-2027-watch/index.html",
-      "href": "https://breakoutcon.com/",
-      "host": "breakoutcon.com"
-    },
-    {
       "source": "polymythseminars/events/breakthrough-junior-challenge-2026-peer-review/index.html",
-      "href": "https://breakthroughjuniorchallenge.org/",
+      "href": "https://breakthroughjuniorchallenge.org/judging/peer-to-peer",
       "host": "breakthroughjuniorchallenge.org"
     },
     {
       "source": "polymythseminars/events/breakthrough-junior-challenge-2026-results/index.html",
-      "href": "https://breakthroughjuniorchallenge.org/",
+      "href": "https://breakthroughjuniorchallenge.org/timeline",
       "host": "breakthroughjuniorchallenge.org"
     },
     {
       "source": "polymythseminars/events/breakthrough-junior-challenge-2026-submission/index.html",
-      "href": "https://breakthroughjuniorchallenge.org/",
+      "href": "https://breakthroughjuniorchallenge.org/enter",
       "host": "breakthroughjuniorchallenge.org"
-    },
-    {
-      "source": "polymythseminars/events/brian-groombridge-first-ago-solo-exhibition-2026-09-12/index.html",
-      "href": "https://ago.ca/",
-      "host": "ago.ca"
     },
     {
       "source": "polymythseminars/events/british-legends-hamilton-benefit-2026/index.html",
       "href": "https://benefitshow.net/event/the-british-legends-in-hamilton/",
       "host": "benefitshow.net"
-    },
-    {
-      "source": "polymythseminars/events/british-society-for-ethical-theory-annual-conference-cfp-projected-2027-01-10-e5c5c77c/index.html",
-      "href": "https://bset.org.uk/",
-      "host": "bset.org.uk"
     },
     {
       "source": "polymythseminars/events/british-society-for-the-history-of-philosophy-annual-conference-cfp-projecte-2027-01-31-d40b03c7/index.html",
@@ -1846,19 +1131,9 @@
       "host": "philevents.org"
     },
     {
-      "source": "polymythseminars/events/c68c6b1ad69c/index.html",
-      "href": "https://fanexpohq.com/fanexpocanada",
-      "host": "fanexpohq.com"
-    },
-    {
       "source": "polymythseminars/events/c7eb8ca496f2/index.html",
       "href": "https://www.concordia.ca/cuevents/offices/vprgs/gradproskills/2026/07/08/funding-opportunities-graduate-students-research-programs-within-social-sciences-arts-humanities.html",
       "host": "www.concordia.ca"
-    },
-    {
-      "source": "polymythseminars/events/c99bf4285b72/index.html",
-      "href": "https://torontofolkfestival.com/",
-      "host": "torontofolkfestival.com"
     },
     {
       "source": "polymythseminars/events/c9b230134d30/index.html",
@@ -1871,34 +1146,9 @@
       "host": "canadianarchaeology.com"
     },
     {
-      "source": "polymythseminars/events/cabaret-talkback-2027-02-25/index.html",
-      "href": "https://www.canadianstage.com/show/cabaret",
-      "host": "www.canadianstage.com"
-    },
-    {
       "source": "polymythseminars/events/cahsmun-2027-conference/index.html",
       "href": "https://cahsmun.org/news/2023/01/22/cahsmun-confirms-future-conference-dates",
       "host": "cahsmun.org"
-    },
-    {
-      "source": "polymythseminars/events/cahsmun-2027-registration-watch/index.html",
-      "href": "https://cahsmun.org/",
-      "host": "cahsmun.org"
-    },
-    {
-      "source": "polymythseminars/events/caj-2027-conference/index.html",
-      "href": "https://caj.ca/conference/",
-      "host": "caj.ca"
-    },
-    {
-      "source": "polymythseminars/events/caj-2027-session-proposal-deadline/index.html",
-      "href": "https://caj.ca/conference/",
-      "host": "caj.ca"
-    },
-    {
-      "source": "polymythseminars/events/caj-awards-2027-watch/index.html",
-      "href": "https://caj.ca/awards/",
-      "host": "caj.ca"
     },
     {
       "source": "polymythseminars/events/cambridge-rethink-2027-watch/index.html",
@@ -1906,59 +1156,9 @@
       "host": "cambridge-research.org"
     },
     {
-      "source": "polymythseminars/events/canada-council-circulation-touring-2026/index.html",
-      "href": "https://canadacouncil.ca/funding/grants/deadlines",
-      "host": "canadacouncil.ca"
-    },
-    {
-      "source": "polymythseminars/events/canada-council-composite-activities-2026/index.html",
-      "href": "https://canadacouncil.ca/funding/grants/deadlines",
-      "host": "canadacouncil.ca"
-    },
-    {
-      "source": "polymythseminars/events/canada-council-international-residencies-2026/index.html",
-      "href": "https://canadacouncil.ca/funding/grants/deadlines",
-      "host": "canadacouncil.ca"
-    },
-    {
-      "source": "polymythseminars/events/canada-council-international-translation-2026/index.html",
-      "href": "https://canadacouncil.ca/funding/grants/deadlines",
-      "host": "canadacouncil.ca"
-    },
-    {
-      "source": "polymythseminars/events/canada-council-literary-publishers-2027-watch/index.html",
-      "href": "https://canadacouncil.ca/funding/grants/deadlines",
-      "host": "canadacouncil.ca"
-    },
-    {
-      "source": "polymythseminars/events/canada-council-public-outreach-2026/index.html",
-      "href": "https://canadacouncil.ca/funding/grants/deadlines",
-      "host": "canadacouncil.ca"
-    },
-    {
-      "source": "polymythseminars/events/canada-council-short-term-projects-2026/index.html",
-      "href": "https://canadacouncil.ca/funding/grants/deadlines",
-      "host": "canadacouncil.ca"
-    },
-    {
-      "source": "polymythseminars/events/canada-council-translation-2026/index.html",
-      "href": "https://canadacouncil.ca/funding/grants/deadlines",
-      "host": "canadacouncil.ca"
-    },
-    {
       "source": "polymythseminars/events/canada-japan-literary-awards-2026/index.html",
       "href": "https://canadacouncil.ca/funding/prizes/canada-japan-literary-awards",
       "host": "canadacouncil.ca"
-    },
-    {
-      "source": "polymythseminars/events/canada-milton-seminar-xix-2026-05-08/index.html",
-      "href": "https://globalconference.ca/",
-      "host": "globalconference.ca"
-    },
-    {
-      "source": "polymythseminars/events/canada-postdoctoral-research-award-2026/index.html",
-      "href": "https://www.sshrc-crsh.gc.ca/en/funding/opportunities.aspx",
-      "host": "www.sshrc-crsh.gc.ca"
     },
     {
       "source": "polymythseminars/events/canada-wide-science-fair-2027/index.html",
@@ -1976,26 +1176,6 @@
       "host": "youthscience.ca"
     },
     {
-      "source": "polymythseminars/events/canadas-history-inquiry-program-watch/index.html",
-      "href": "https://www.canadashistory.ca/education/professional-learning",
-      "host": "www.canadashistory.ca"
-    },
-    {
-      "source": "polymythseminars/events/canadian-association-geographers-2027-cfp-watch/index.html",
-      "href": "https://www.cag-acg.ca/",
-      "host": "www.cag-acg.ca"
-    },
-    {
-      "source": "polymythseminars/events/canadian-association-geographers-2027-conference-watch/index.html",
-      "href": "https://www.cag-acg.ca/",
-      "host": "www.cag-acg.ca"
-    },
-    {
-      "source": "polymythseminars/events/canadian-communication-association-2027-watch/index.html",
-      "href": "https://acc-cca.ca/",
-      "host": "acc-cca.ca"
-    },
-    {
       "source": "polymythseminars/events/canadian-economics-association-2027-cfp-watch/index.html",
       "href": "https://www.economics.ca/annual-meeting",
       "host": "www.economics.ca"
@@ -2004,36 +1184,6 @@
       "source": "polymythseminars/events/canadian-economics-association-2027-conference/index.html",
       "href": "https://www.economics.ca/annual-meeting",
       "host": "www.economics.ca"
-    },
-    {
-      "source": "polymythseminars/events/canadian-economics-olympiad-2027-registration-opening-watch/index.html",
-      "href": "https://www.ceo-oec.ca/",
-      "host": "www.ceo-oec.ca"
-    },
-    {
-      "source": "polymythseminars/events/canadian-geographic-challenge-2027-series/index.html",
-      "href": "https://challenge.canadiangeographic.ca/about-the-challenge/rules-and-regulations/",
-      "host": "challenge.canadiangeographic.ca"
-    },
-    {
-      "source": "polymythseminars/events/canadian-geographic-challenge-level-1-2027-watch/index.html",
-      "href": "https://challenge.canadiangeographic.ca/about-the-challenge/rules-and-regulations/",
-      "host": "challenge.canadiangeographic.ca"
-    },
-    {
-      "source": "polymythseminars/events/canadian-geographic-challenge-level-2-2027-watch/index.html",
-      "href": "https://challenge.canadiangeographic.ca/about-the-challenge/rules-and-regulations/",
-      "host": "challenge.canadiangeographic.ca"
-    },
-    {
-      "source": "polymythseminars/events/canadian-geographic-challenge-level-3-2027-watch/index.html",
-      "href": "https://challenge.canadiangeographic.ca/about-the-challenge/rules-and-regulations/",
-      "host": "challenge.canadiangeographic.ca"
-    },
-    {
-      "source": "polymythseminars/events/canadian-innovation-creative-writing-2027-watch/index.html",
-      "href": "https://canadianinnovationcontest.ca/",
-      "host": "canadianinnovationcontest.ca"
     },
     {
       "source": "polymythseminars/events/canadian-life-sciences-networking-reception-2026-05-13/index.html",
@@ -2061,34 +1211,9 @@
       "host": "www.acpcpa.ca"
     },
     {
-      "source": "polymythseminars/events/canadian-sociological-association-2027-cfp-watch/index.html",
-      "href": "https://www.csa-scs.ca/news/conference-news",
-      "host": "www.csa-scs.ca"
-    },
-    {
-      "source": "polymythseminars/events/canadian-sociological-association-2027-conference/index.html",
-      "href": "https://www.csa-scs.ca/news/conference-news",
-      "host": "www.csa-scs.ca"
-    },
-    {
-      "source": "polymythseminars/events/canadian-stage-cabaret-2027/index.html",
-      "href": "https://www.canadianstage.com/show/cabaret",
-      "host": "www.canadianstage.com"
-    },
-    {
-      "source": "polymythseminars/events/canadian-stage-creditors-2027/index.html",
-      "href": "https://www.canadianstage.com/show/creditors",
-      "host": "www.canadianstage.com"
-    },
-    {
       "source": "polymythseminars/events/canadian-stage-sex-in-the-80s-2027/index.html",
       "href": "https://www.canadianstage.com/show/sex-in-the-80s",
       "host": "www.canadianstage.com"
-    },
-    {
-      "source": "polymythseminars/events/canadian-sync-awards-nxne-2026-2026-06-11/index.html",
-      "href": "https://www.nxne.com/",
-      "host": "www.nxne.com"
     },
     {
       "source": "polymythseminars/events/cannes-lions-2027/index.html",
@@ -2106,21 +1231,6 @@
       "host": "actionpatrimoine.ca"
     },
     {
-      "source": "polymythseminars/events/caribana-junior-king-queen-showcase-2026-07-11/index.html",
-      "href": "https://torontocarnival.ca/events/",
-      "host": "torontocarnival.ca"
-    },
-    {
-      "source": "polymythseminars/events/caribana-king-queen-showcase-2026-07-31/index.html",
-      "href": "https://torontocarnival.ca/events/",
-      "host": "torontocarnival.ca"
-    },
-    {
-      "source": "polymythseminars/events/caribana-pan-alive-closing-day-2026-08-02/index.html",
-      "href": "https://torontocarnival.ca/events/",
-      "host": "torontocarnival.ca"
-    },
-    {
       "source": "polymythseminars/events/carkner-labour-history-media-2027-watch/index.html",
       "href": "https://workershistorymuseum.ca/en/about/the-arthur-carkner-labour-history-media-prize-contest/",
       "host": "workershistorymuseum.ca"
@@ -2131,33 +1241,13 @@
       "host": "www.archives.gov"
     },
     {
-      "source": "polymythseminars/events/casbs-fellowship-applications-projected-2026-11-04-949f4dcb/index.html",
-      "href": "https://casbs.stanford.edu/fellowships",
-      "host": "casbs.stanford.edu"
-    },
-    {
       "source": "polymythseminars/events/casca-2027-conference-watch/index.html",
       "href": "https://cas-sca.ca/en/conferences",
       "host": "cas-sca.ca"
     },
     {
-      "source": "polymythseminars/events/cbc-first-page-student-writing-2027-watch/index.html",
-      "href": "https://www.cbc.ca/books/",
-      "host": "www.cbc.ca"
-    },
-    {
       "source": "polymythseminars/events/cbc-first-page-student-writing-challenge-2027/index.html",
       "href": "https://www.cbc.ca/books/the-first-page-student-writing-challenge-is-back-for-the-2025-2026-school-year-1.4269274",
-      "host": "www.cbc.ca"
-    },
-    {
-      "source": "polymythseminars/events/cbc-literary-prizes-2026/index.html",
-      "href": "https://www.cbc.ca/books/literaryprizes",
-      "host": "www.cbc.ca"
-    },
-    {
-      "source": "polymythseminars/events/cbc-literary-prizes-2027-parent-watch/index.html",
-      "href": "https://www.cbc.ca/books/literaryprizes",
       "host": "www.cbc.ca"
     },
     {
@@ -2179,36 +1269,6 @@
       "source": "polymythseminars/events/ccsr-doctoral-fellowship-2027/index.html",
       "href": "https://ccsr.ca/en/doctoral-fellowship-2027/",
       "host": "ccsr.ca"
-    },
-    {
-      "source": "polymythseminars/events/cea-undergraduate-poster-award-2027-watch/index.html",
-      "href": "https://www.economics.ca/",
-      "host": "www.economics.ca"
-    },
-    {
-      "source": "polymythseminars/events/centre-for-ethics-care-for-the-working-class-flora-2026-05-12/index.html",
-      "href": "https://sites.google.com/view/uoftc4e/events/upcoming-events",
-      "host": "sites.google.com"
-    },
-    {
-      "source": "polymythseminars/events/centre-for-ethics-care-for-the-working-class-flora-2026-05-20/index.html",
-      "href": "https://sites.google.com/view/uoftc4e/events/upcoming-events",
-      "host": "sites.google.com"
-    },
-    {
-      "source": "polymythseminars/events/centre-for-ethics-kant-in-practice-workshop-2026-05-19/index.html",
-      "href": "https://sites.google.com/view/uoftc4e/events/upcoming-events",
-      "host": "sites.google.com"
-    },
-    {
-      "source": "polymythseminars/events/centre-for-ethics-why-analytic-political-philosoph-2026-05-12/index.html",
-      "href": "https://sites.google.com/view/uoftc4e/events/upcoming-events",
-      "host": "sites.google.com"
-    },
-    {
-      "source": "polymythseminars/events/centre-for-ethics-why-analytic-political-philosoph-2026-05-21/index.html",
-      "href": "https://sites.google.com/view/uoftc4e/events/upcoming-events",
-      "host": "sites.google.com"
     },
     {
       "source": "polymythseminars/events/cfa-canada-ethics-challenge-institution-2026/index.html",
@@ -2266,29 +1326,9 @@
       "host": "www.atiner.gr"
     },
     {
-      "source": "polymythseminars/events/cfp-international-association-for-philosophy-of-time-eastern-2026-07-03/index.html",
-      "href": "https://www.philtimesociety.com/calls-for-papers/",
-      "host": "www.philtimesociety.com"
-    },
-    {
       "source": "polymythseminars/events/cfp-toronto-workshop-on-moral-psychology-and-moral-2026-07-01/index.html",
       "href": "https://philevents.org/event/show/147097",
       "host": "philevents.org"
-    },
-    {
-      "source": "polymythseminars/events/cfp-university-of-toronto-philosophy-graduate-conf-2026-07-04/index.html",
-      "href": "https://philevents.org/event/show/148365",
-      "host": "philevents.org"
-    },
-    {
-      "source": "polymythseminars/events/cgsp-care-economics-care-peaks-plateaus-and-loops-2026-04-17/index.html",
-      "href": "https://www.sociology.utoronto.ca/events/cgsp-care-economics-context-care-peaks-plateaus-and-loops-narrative-insights-stress-family",
-      "host": "www.sociology.utoronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/cgsp-care-economics-in-context-care-peaks-plateaus-2026-04-17/index.html",
-      "href": "https://www.sociology.utoronto.ca/events/cgsp-care-economics-context-care-peaks-plateaus-and-loops-narrative-insights-stress-family",
-      "host": "www.sociology.utoronto.ca"
     },
     {
       "source": "polymythseminars/events/cha-2027-meeting/index.html",
@@ -2306,11 +1346,6 @@
       "host": "www.chcinetwork.org"
     },
     {
-      "source": "polymythseminars/events/cheryl-misak-on-frank-ramsey-2026-05-02/index.html",
-      "href": "https://seminarschools.com/seminars/",
-      "host": "seminarschools.com"
-    },
-    {
       "source": "polymythseminars/events/cibc-run-for-the-cure-canada-2026/index.html",
       "href": "https://cancer.ca/en/get-involved/our-events/cibc-run-for-the-cure",
       "host": "cancer.ca"
@@ -2326,74 +1361,14 @@
       "host": "www.cigionline.org"
     },
     {
-      "source": "polymythseminars/events/cinderella-holiday-panto-2026-12-05/index.html",
-      "href": "https://www.canadianstage.com/shows-events/26.27-season",
-      "host": "www.canadianstage.com"
-    },
-    {
-      "source": "polymythseminars/events/civix-youth-parliament-canada-2027-watch/index.html",
-      "href": "https://civix.ca/",
-      "host": "civix.ca"
-    },
-    {
-      "source": "polymythseminars/events/cjf-bipoc-student-bursary-2027-watch/index.html",
-      "href": "https://cjf-fjc.ca/awards-fellowships/",
-      "host": "cjf-fjc.ca"
-    },
-    {
       "source": "polymythseminars/events/cjf-emerging-news-voices-2026-deadline/index.html",
       "href": "https://cjf-fjc.ca/emerging-news-voices/",
       "host": "cjf-fjc.ca"
     },
     {
-      "source": "polymythseminars/events/cjf-indigenous-journalism-fellowship-2027-watch/index.html",
-      "href": "https://cjf-fjc.ca/awards-fellowships/",
-      "host": "cjf-fjc.ca"
-    },
-    {
-      "source": "polymythseminars/events/cjf-tom-hanson-photojournalism-2027-watch/index.html",
-      "href": "https://cjf-fjc.ca/awards-fellowships/",
-      "host": "cjf-fjc.ca"
-    },
-    {
-      "source": "polymythseminars/events/claringcon-2027/index.html",
-      "href": "https://claringcon.ca/",
-      "host": "claringcon.ca"
-    },
-    {
-      "source": "polymythseminars/events/clarkson-laureateships-high-table-2026-01-30/index.html",
-      "href": "https://www.masseycollege.ca/calendar/",
-      "host": "www.masseycollege.ca"
-    },
-    {
       "source": "polymythseminars/events/cnib-braille-creative-writing-contest-2027/index.html",
       "href": "https://www.cnib.ca/en/about-contest",
       "host": "www.cnib.ca"
-    },
-    {
-      "source": "polymythseminars/events/coc-centre-stage-ensemble-studio-competition-gala-2026-10-22/index.html",
-      "href": "https://www.coc.ca/tickets/2627-season",
-      "host": "www.coc.ca"
-    },
-    {
-      "source": "polymythseminars/events/codeart-animated-art-2027-deadline/index.html",
-      "href": "https://code-art.com/competitions/",
-      "host": "code-art.com"
-    },
-    {
-      "source": "polymythseminars/events/codeart-changemaker-2027-deadline/index.html",
-      "href": "https://code-art.com/competitions/",
-      "host": "code-art.com"
-    },
-    {
-      "source": "polymythseminars/events/codeart-codeyourself-2027-deadline/index.html",
-      "href": "https://code-art.com/competitions/",
-      "host": "code-art.com"
-    },
-    {
-      "source": "polymythseminars/events/codeart-game-design-2027-deadline/index.html",
-      "href": "https://code-art.com/competitions/",
-      "host": "code-art.com"
     },
     {
       "source": "polymythseminars/events/college-art-association-115th-call-for-participation-2026/index.html",
@@ -2404,11 +1379,6 @@
       "source": "polymythseminars/events/concepcion-teaching-prize-2026/index.html",
       "href": "https://www.apaonline.org/news/732911/Deadline-Extension-2026-David-W.-Concepcin-Prize-for-Excellence-in-Philosophy-Teaching.htm",
       "host": "www.apaonline.org"
-    },
-    {
-      "source": "polymythseminars/events/concord-review-submissions-2026-2027/index.html",
-      "href": "https://tcr.org/submit",
-      "host": "tcr.org"
     },
     {
       "source": "polymythseminars/events/concordia-indigenous-land-based-education-2026/index.html",
@@ -2656,16 +1626,6 @@
       "host": "www.concordia.ca"
     },
     {
-      "source": "polymythseminars/events/concordia-public-thesis-defences-2026-08-14-to-09-25/index.html",
-      "href": "https://www.concordia.ca/events.html?category=examinations%2Fthesis-defenses",
-      "host": "www.concordia.ca"
-    },
-    {
-      "source": "polymythseminars/events/concours-philosopher-2027-watch/index.html",
-      "href": "https://www.concoursphilosopher.org/%C3%A9tudiant-e-s/pour-participer",
-      "host": "www.concoursphilosopher.org"
-    },
-    {
       "source": "polymythseminars/events/congress-humanities-social-sciences-2027/index.html",
       "href": "https://www.federationhss.ca/en/congress/congress-2027",
       "host": "www.federationhss.ca"
@@ -2676,74 +1636,1114 @@
       "host": "connectherfilmfest.org"
     },
     {
-      "source": "polymythseminars/events/connectur-2027-online/index.html",
-      "href": "https://www.cur.org/events-services/connectur/",
-      "host": "www.cur.org"
-    },
-    {
-      "source": "polymythseminars/events/connectur-2027-onsite/index.html",
-      "href": "https://www.cur.org/events-services/connectur/",
-      "host": "www.cur.org"
-    },
-    {
-      "source": "polymythseminars/events/connectur-2027-submission-deadline/index.html",
-      "href": "https://www.cur.org/events-services/connectur/",
-      "host": "www.cur.org"
-    },
-    {
-      "source": "polymythseminars/events/connectur-2027-submissions-open/index.html",
-      "href": "https://www.cur.org/events-services/connectur/",
-      "host": "www.cur.org"
-    },
-    {
-      "source": "polymythseminars/events/conrad-challenge-2026-27-activation-deadline/index.html",
-      "href": "https://www.conradchallenge.org/participate",
-      "host": "www.conradchallenge.org"
-    },
-    {
-      "source": "polymythseminars/events/conrad-challenge-2026-27-activation-start/index.html",
-      "href": "https://www.conradchallenge.org/participate",
-      "host": "www.conradchallenge.org"
-    },
-    {
-      "source": "polymythseminars/events/conrad-challenge-2027-finalists/index.html",
-      "href": "https://www.conradchallenge.org/participate",
-      "host": "www.conradchallenge.org"
-    },
-    {
-      "source": "polymythseminars/events/conrad-challenge-2027-innovation-stage-deadline/index.html",
-      "href": "https://www.conradchallenge.org/participate",
-      "host": "www.conradchallenge.org"
-    },
-    {
-      "source": "polymythseminars/events/conrad-innovation-summit-2027/index.html",
-      "href": "https://www.conradchallenge.org/participate",
-      "host": "www.conradchallenge.org"
-    },
-    {
-      "source": "polymythseminars/events/conversations-across-borders-black-theatre-in-the--2026-05-04/index.html",
-      "href": "https://www.humanities.utoronto.ca/events/conversations-across-borders-black-theatre-us-and-canada",
-      "host": "www.humanities.utoronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/conversations-across-borders-black-theatre-in-the--2026-05-08/index.html",
-      "href": "https://www.humanities.utoronto.ca/events/conversations-across-borders-black-theatre-us-and-canada",
-      "host": "www.humanities.utoronto.ca"
-    },
-    {
-      "source": "polymythseminars/events/cos-fan-tutte-mozart-2026-10-03/index.html",
-      "href": "https://www.coc.ca/tickets/2627-season",
-      "host": "www.coc.ca"
-    },
-    {
-      "source": "polymythseminars/events/counter-strike-2-ewc-2026-digital-broadcast/index.html",
-      "href": "https://esportsworldcup.com/en/news/prize-pool-and-full-game-schedule",
-      "host": "esportsworldcup.com"
-    },
-    {
       "source": "polymythseminars/events/country-greats-brantford-benefit-2026/index.html",
       "href": "https://benefitshow.net/event/country-greats-in-brantford/",
       "host": "benefitshow.net"
+    },
+    {
+      "source": "polymythseminars/events/cpsa-2027-cfp-watch/index.html",
+      "href": "https://cpsa-acsp.ca/2026-conference/",
+      "host": "cpsa-acsp.ca"
+    },
+    {
+      "source": "polymythseminars/events/cpsa-2027-conference/index.html",
+      "href": "https://cpsa-acsp.ca/2026-conference/",
+      "host": "cpsa-acsp.ca"
+    },
+    {
+      "source": "polymythseminars/events/cpsa-vincent-lemieux-prize-2027/index.html",
+      "href": "https://cpsa-acsp.ca/prizes-vincent-lemieux-prize/",
+      "host": "cpsa-acsp.ca"
+    },
+    {
+      "source": "polymythseminars/events/critical-feminist-histories-2026/index.html",
+      "href": "https://niche-canada.org/2026/03/20/call-for-papers-critical-feminist-histories-in-canada/",
+      "host": "niche-canada.org"
+    },
+    {
+      "source": "polymythseminars/events/crystal-jukebox-barrie-benefit-2026/index.html",
+      "href": "https://benefitshow.net/event/crystal-jukebox-in-barrie/",
+      "host": "benefitshow.net"
+    },
+    {
+      "source": "polymythseminars/events/cur-grant-dialogues-2027/index.html",
+      "href": "https://www.cur.org/events-services/dialogues/",
+      "host": "www.cur.org"
+    },
+    {
+      "source": "polymythseminars/events/d01293323905/index.html",
+      "href": "https://www.kingstonwritersfest.ca/advanced-workshop-for-stage-or-screen/",
+      "host": "www.kingstonwritersfest.ca"
+    },
+    {
+      "source": "polymythseminars/events/dae6c0d27ea4/index.html",
+      "href": "https://fantasiafestival.com/en/news/mubi-announces-montreals-fantasia-international-film-festival-as-the-canadian-premiere-for-jane-schoenbruns-teenage-sex-and-death-at-camp-miasma-starring-hannah-einbinder-and-gillian-anderson",
+      "host": "fantasiafestival.com"
+    },
+    {
+      "source": "polymythseminars/events/daily-bread-red-bag-campaign-2026/index.html",
+      "href": "https://www.dailybread.ca/blog/volunteer-for-the-purolator-red-bag-campaign-2026/",
+      "host": "www.dailybread.ca"
+    },
+    {
+      "source": "polymythseminars/events/daily-bread-red-bag-drop-2026-09-19/index.html",
+      "href": "https://www.dailybread.ca/blog/volunteer-for-the-purolator-red-bag-campaign-2026/",
+      "host": "www.dailybread.ca"
+    },
+    {
+      "source": "polymythseminars/events/daily-bread-red-bag-pickup-2026-09-26/index.html",
+      "href": "https://www.dailybread.ca/blog/volunteer-for-the-purolator-red-bag-campaign-2026/",
+      "host": "www.dailybread.ca"
+    },
+    {
+      "source": "polymythseminars/events/dandad-new-blood-awards-2027-watch/index.html",
+      "href": "https://www.dandad.org/en/d-ad-new-blood-awards/",
+      "host": "www.dandad.org"
+    },
+    {
+      "source": "polymythseminars/events/dc-canada-childrens-writing-contest-2026/index.html",
+      "href": "https://dc-canada.ca/blogs/news/writing-contests-past-and-present-the-2026-writing-contest-is-open",
+      "host": "dc-canada.ca"
+    },
+    {
+      "source": "polymythseminars/events/dead-by-daylight-10th-anniversary-twitch-watch-parties-2026-06-14/index.html",
+      "href": "https://meetups.twitch.tv/events/details/twitch-creator-organized-and-powered-by-twitch-presents-official-dead-by-daylight-10-year-anniversary-community-meetup-watch-parties-powered-by-twitch/",
+      "host": "meetups.twitch.tv"
+    },
+    {
+      "source": "polymythseminars/events/dhrupad-vocal-recital-by-pt-uday-bhawalkar-2026-05-30/index.html",
+      "href": "https://agakhanmuseum.org/whats-on/dhrupad-vocal-recital/",
+      "host": "agakhanmuseum.org"
+    },
+    {
+      "source": "polymythseminars/events/digital-humanities-2027-creativity-2026/index.html",
+      "href": "https://adho.org/conference/",
+      "host": "adho.org"
+    },
+    {
+      "source": "polymythseminars/events/does-canada-need-a-foreign-intelligence-agency-2026-04-20/index.html",
+      "href": "https://munkschool.utoronto.ca/event/does-canada-need-foreign-intelligence-agency",
+      "host": "munkschool.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/doors-open-along-the-grand-2026/index.html",
+      "href": "https://www.doorsopenontario.on.ca/pages/events/along-the-grand",
+      "host": "www.doorsopenontario.on.ca"
+    },
+    {
+      "source": "polymythseminars/events/doors-open-belleville-2026/index.html",
+      "href": "https://www.doorsopenontario.on.ca/pages/events/belleville",
+      "host": "www.doorsopenontario.on.ca"
+    },
+    {
+      "source": "polymythseminars/events/doors-open-hamilton-2026/index.html",
+      "href": "https://www.doorsopenontario.on.ca/pages/events/hamilton",
+      "host": "www.doorsopenontario.on.ca"
+    },
+    {
+      "source": "polymythseminars/events/doors-open-kawartha-lakes-2026/index.html",
+      "href": "https://www.doorsopenontario.on.ca/pages/events/kawartha-lakes",
+      "host": "www.doorsopenontario.on.ca"
+    },
+    {
+      "source": "polymythseminars/events/doors-open-peterborough-2026/index.html",
+      "href": "https://www.doorsopenontario.on.ca/pages/events/peterborough",
+      "host": "www.doorsopenontario.on.ca"
+    },
+    {
+      "source": "polymythseminars/events/doors-open-richmond-hill-2026/index.html",
+      "href": "https://www.doorsopenontario.on.ca/pages/events/richmond-hill",
+      "host": "www.doorsopenontario.on.ca"
+    },
+    {
+      "source": "polymythseminars/events/doors-open-sault-ste-marie-2026/index.html",
+      "href": "https://www.doorsopenontario.on.ca/pages/events/sault-ste-marie",
+      "host": "www.doorsopenontario.on.ca"
+    },
+    {
+      "source": "polymythseminars/events/doors-open-simcoe-county-2026/index.html",
+      "href": "https://www.doorsopenontario.on.ca/pages/events/simcoe-county",
+      "host": "www.doorsopenontario.on.ca"
+    },
+    {
+      "source": "polymythseminars/events/doors-open-stratford-2026/index.html",
+      "href": "https://www.doorsopenontario.on.ca/pages/events/stratford",
+      "host": "www.doorsopenontario.on.ca"
+    },
+    {
+      "source": "polymythseminars/events/doors-open-toronto-2026/index.html",
+      "href": "https://www.doorsopenontario.on.ca/pages/events/toronto",
+      "host": "www.doorsopenontario.on.ca"
+    },
+    {
+      "source": "polymythseminars/events/doors-open-toronto-2026-05-24/index.html",
+      "href": "https://www.toronto.ca/explore-enjoy/festivals-events/doors-open-toronto/",
+      "host": "www.toronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/doors-open-toronto-aga-khan-museum-and-ismaili-cen-2026-05-24/index.html",
+      "href": "https://agakhanmuseum.org/whats-on/doors-open-2026/",
+      "host": "agakhanmuseum.org"
+    },
+    {
+      "source": "polymythseminars/events/doors-open-waterloo-region-2026/index.html",
+      "href": "https://www.doorsopenontario.on.ca/pages/events/waterloo-region",
+      "host": "www.doorsopenontario.on.ca"
+    },
+    {
+      "source": "polymythseminars/events/doug-purvis-memorial-prize-2027/index.html",
+      "href": "https://www.economics.ca/doug-purvis-memorial-prize",
+      "host": "www.economics.ca"
+    },
+    {
+      "source": "polymythseminars/events/dreamer-georgetown-benefit-2026/index.html",
+      "href": "https://benefitshow.net/event/dreamer-in-georgetown/",
+      "host": "benefitshow.net"
+    },
+    {
+      "source": "polymythseminars/events/duende-international-flamenco-festival-flamenco-an-2026-11-19/index.html",
+      "href": "https://agakhanmuseum.org/whats-on/duende-2026/",
+      "host": "agakhanmuseum.org"
+    },
+    {
+      "source": "polymythseminars/events/dumbarton-oaks-fellowships-and-awards-projected-2026-11-01-bb66f30b/index.html",
+      "href": "https://www.doaks.org/research/fellowships-and-awards",
+      "host": "www.doaks.org"
+    },
+    {
+      "source": "polymythseminars/events/e1e9fe39df7a/index.html",
+      "href": "https://www.tiff.net/festival",
+      "host": "www.tiff.net"
+    },
+    {
+      "source": "polymythseminars/events/ecfdde06c1f8/index.html",
+      "href": "https://www.kingstonwritersfest.ca/beyond-the-veil-of-things/",
+      "host": "www.kingstonwritersfest.ca"
+    },
+    {
+      "source": "polymythseminars/events/elizabeth-heaton-ma-thesis-defence-the-shaping-of--2026-04-23/index.html",
+      "href": "https://www.uoguelph.ca/arts/history/events/elizabeth-heaton-thesis-defence",
+      "host": "www.uoguelph.ca"
+    },
+    {
+      "source": "polymythseminars/events/esse-young-critics-2027-watch/index.html",
+      "href": "https://esse.ca/en/young-critics-competition/",
+      "host": "esse.ca"
+    },
+    {
+      "source": "polymythseminars/events/f08f93f61ec9/index.html",
+      "href": "https://summerworks.ca/show/bringing-us-together-dance-description-and-access/",
+      "host": "summerworks.ca"
+    },
+    {
+      "source": "polymythseminars/events/f0c0fc6d67a3/index.html",
+      "href": "https://www.queensu.ca/eventscalendar/calendar/events/health-policy-symposium-and-sinclair-lecture-aging-communities",
+      "host": "www.queensu.ca"
+    },
+    {
+      "source": "polymythseminars/events/f82d010848d9/index.html",
+      "href": "https://summerworks.ca/show/transfers/",
+      "host": "summerworks.ca"
+    },
+    {
+      "source": "polymythseminars/events/fdc0f440490c/index.html",
+      "href": "https://www.concordia.ca/cuevents/finearts/fofa/2026/07/10/exhibition-let-down-reflex.html",
+      "host": "www.concordia.ca"
+    },
+    {
+      "source": "polymythseminars/events/fields-academy-complex-manifolds-fall-2026/index.html",
+      "href": "https://www.fields.utoronto.ca/activities/26-27/SGC-manifolds",
+      "host": "www.fields.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/fields-academy-mathematical-computational-finance-fall-2026/index.html",
+      "href": "https://www.fields.utoronto.ca/activities/26-27/SGC-finance",
+      "host": "www.fields.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/fields-medal-student-night-2026/index.html",
+      "href": "https://www.fields.utoronto.ca/activities/26-27/FMS-student",
+      "host": "www.fields.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/fields-medal-symposium-2026/index.html",
+      "href": "https://www.fields.utoronto.ca/activities/26-27/Fields-Medal-Symposium",
+      "host": "www.fields.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/fields-optimal-transport-workshop-2026/index.html",
+      "href": "https://www.fields.utoronto.ca/activities/26-27/optimal-transport-workshop",
+      "host": "www.fields.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/folger-shakespeare-library-fellowships-projected-2027-01-15-a45831ec/index.html",
+      "href": "https://www.folger.edu/research/the-folger-institute/fellowships/",
+      "host": "www.folger.edu"
+    },
+    {
+      "source": "polymythseminars/events/foreign-journey-chatham-benefit-2026/index.html",
+      "href": "https://benefitshow.net/event/foreign-journey-in-chatham/",
+      "host": "benefitshow.net"
+    },
+    {
+      "source": "polymythseminars/events/foreign-journey-milton-benefit-2026/index.html",
+      "href": "https://benefitshow.net/event/foreign-journey-in-milton/",
+      "host": "benefitshow.net"
+    },
+    {
+      "source": "polymythseminars/events/foreign-journey-windsor-benefit-2026/index.html",
+      "href": "https://benefitshow.net/event/foreign-journey-in-windsor/",
+      "host": "benefitshow.net"
+    },
+    {
+      "source": "polymythseminars/events/foreign-jovi-oshawa-benefit-2026/index.html",
+      "href": "https://benefitshow.net/event/foreign-jovi-in-oshawa/",
+      "host": "benefitshow.net"
+    },
+    {
+      "source": "polymythseminars/events/frank-watson-book-prize-lecture-patrons-and-politi-2026-04-23/index.html",
+      "href": "https://www.uoguelph.ca/arts/history/events/patrons-and-politics-making-scottish-history-past-present-and-future",
+      "host": "www.uoguelph.ca"
+    },
+    {
+      "source": "polymythseminars/events/fraser-institute-student-essay-contest-2027/index.html",
+      "href": "https://www.fraserinstitute.org/education-programs/student-essay-contest",
+      "host": "www.fraserinstitute.org"
+    },
+    {
+      "source": "polymythseminars/events/french-for-the-future-essay-2026/index.html",
+      "href": "https://www.french-future.org/programs/essay-contest/rules-and-regulations/",
+      "host": "www.french-future.org"
+    },
+    {
+      "source": "polymythseminars/events/french-for-the-future-national-essay-contest-2026/index.html",
+      "href": "https://french-future.org/programs/essay-contest/",
+      "host": "french-future.org"
+    },
+    {
+      "source": "polymythseminars/events/gallaudet-national-literary-competition-2027/index.html",
+      "href": "https://gallaudet.edu/youth-programs/national-literary-competition/",
+      "host": "gallaudet.edu"
+    },
+    {
+      "source": "polymythseminars/events/games-for-change-student-challenge-2027-watch/index.html",
+      "href": "https://learn.gamesforchange.org/student-challenge",
+      "host": "learn.gamesforchange.org"
+    },
+    {
+      "source": "polymythseminars/events/glengarry-war-of-1812-reenactment-2026/index.html",
+      "href": "https://glengarrypioneermuseum.ca/info-for-1812-re-enactors-2/",
+      "host": "glengarrypioneermuseum.ca"
+    },
+    {
+      "source": "polymythseminars/events/global-game-jam-2027/index.html",
+      "href": "https://globalgamejam.org/news/ggj-2027-dates",
+      "host": "globalgamejam.org"
+    },
+    {
+      "source": "polymythseminars/events/global-game-jam-2027-jammer-registration/index.html",
+      "href": "https://globalgamejam.org/news/ggj-2027-dates",
+      "host": "globalgamejam.org"
+    },
+    {
+      "source": "polymythseminars/events/global-game-jam-2027-site-registration/index.html",
+      "href": "https://globalgamejam.org/news/ggj-2027-dates",
+      "host": "globalgamejam.org"
+    },
+    {
+      "source": "polymythseminars/events/goodnight-desdemona-good-morning-juliet-2026-11-06/index.html",
+      "href": "https://www.canadianstage.com/show/goodnight-desdemona-good-morning-juliet",
+      "host": "www.canadianstage.com"
+    },
+    {
+      "source": "polymythseminars/events/goodnight-desdemona-talkback-2026-11-19/index.html",
+      "href": "https://www.canadianstage.com/show/goodnight-desdemona-good-morning-juliet",
+      "host": "www.canadianstage.com"
+    },
+    {
+      "source": "polymythseminars/events/governor-general-history-awards-parent/index.html",
+      "href": "https://www.canadashistory.ca/awards/governor-general-s-history-awards",
+      "host": "www.canadashistory.ca"
+    },
+    {
+      "source": "polymythseminars/events/grand-evolution-kingston-benefit-2026/index.html",
+      "href": "https://benefitshow.net/event/grand-evolution-in-kingston/",
+      "host": "benefitshow.net"
+    },
+    {
+      "source": "polymythseminars/events/guelph-colloquium-archive-archiving-improvisatory-2026-09-11/index.html",
+      "href": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "host": "improvisationinstitute.ca"
+    },
+    {
+      "source": "polymythseminars/events/guelph-colloquium-archiving-the-scene-panel-2026-09-10/index.html",
+      "href": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "host": "improvisationinstitute.ca"
+    },
+    {
+      "source": "polymythseminars/events/guelph-colloquium-artist-communities-2026-09-11/index.html",
+      "href": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "host": "improvisationinstitute.ca"
+    },
+    {
+      "source": "polymythseminars/events/guelph-colloquium-big-ideas-2026-09-10/index.html",
+      "href": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "host": "improvisationinstitute.ca"
+    },
+    {
+      "source": "polymythseminars/events/guelph-colloquium-improvising-archive-jesse-stewart-2026-09-10/index.html",
+      "href": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "host": "improvisationinstitute.ca"
+    },
+    {
+      "source": "polymythseminars/events/guelph-colloquium-lara-hill-workshop-2026-09-11/index.html",
+      "href": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "host": "improvisationinstitute.ca"
+    },
+    {
+      "source": "polymythseminars/events/guelph-colloquium-mike-hansen-workshop-2026-09-11/index.html",
+      "href": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "host": "improvisationinstitute.ca"
+    },
+    {
+      "source": "polymythseminars/events/guelph-colloquium-on-exhibit-xroads-2026-09-10/index.html",
+      "href": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "host": "improvisationinstitute.ca"
+    },
+    {
+      "source": "polymythseminars/events/guelph-colloquium-radio-active-community-2026-09-10/index.html",
+      "href": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "host": "improvisationinstitute.ca"
+    },
+    {
+      "source": "polymythseminars/events/guelph-colloquium-resonant-bodies-2026-09-11/index.html",
+      "href": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "host": "improvisationinstitute.ca"
+    },
+    {
+      "source": "polymythseminars/events/guelph-colloquium-secret-lives-colour-2026-09-11/index.html",
+      "href": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "host": "improvisationinstitute.ca"
+    },
+    {
+      "source": "polymythseminars/events/guelph-colloquium-statesman-of-piano-2026-09-10/index.html",
+      "href": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "host": "improvisationinstitute.ca"
+    },
+    {
+      "source": "polymythseminars/events/guelph-colloquium-sun-ra-film-2026-09-10/index.html",
+      "href": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "host": "improvisationinstitute.ca"
+    },
+    {
+      "source": "polymythseminars/events/guelph-colloquium-we-are-archives-2026-09-11/index.html",
+      "href": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "host": "improvisationinstitute.ca"
+    },
+    {
+      "source": "polymythseminars/events/guelph-jazz-festival-2026-2026-09-11/index.html",
+      "href": "https://guelphjazzfestival.com/schedule/",
+      "host": "guelphjazzfestival.com"
+    },
+    {
+      "source": "polymythseminars/events/guelph-jazz-festival-colloquium-2026-artists-on-of-2026-09-10/index.html",
+      "href": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "host": "improvisationinstitute.ca"
+    },
+    {
+      "source": "polymythseminars/events/hamilton-power-of-the-pen-2026/index.html",
+      "href": "https://www.hpl.ca/articles/power-pen-creative-writing-contest",
+      "host": "www.hpl.ca"
+    },
+    {
+      "source": "polymythseminars/events/hamilton-public-library-power-of-the-pen-2026/index.html",
+      "href": "https://teens.hpl.ca/articles/power-pen-creative-writing-contest",
+      "host": "teens.hpl.ca"
+    },
+    {
+      "source": "polymythseminars/events/harbourfront-dancing-on-square-2026/index.html",
+      "href": "https://harbourfrontcentre.com/series/dancing-on-the-square/",
+      "host": "harbourfrontcentre.com"
+    },
+    {
+      "source": "polymythseminars/events/harbourfront-dancing-on-square-2026-08-19/index.html",
+      "href": "https://harbourfrontcentre.com/series/dancing-on-the-square/",
+      "host": "harbourfrontcentre.com"
+    },
+    {
+      "source": "polymythseminars/events/harbourfront-dancing-on-square-2026-08-26/index.html",
+      "href": "https://harbourfrontcentre.com/series/dancing-on-the-square/",
+      "host": "harbourfrontcentre.com"
+    },
+    {
+      "source": "polymythseminars/events/harbourfront-dancing-on-square-2026-09-02/index.html",
+      "href": "https://harbourfrontcentre.com/series/dancing-on-the-square/",
+      "host": "harbourfrontcentre.com"
+    },
+    {
+      "source": "polymythseminars/events/harbourfront-super-yummy-night-market-2026-08-15/index.html",
+      "href": "https://harbourfrontcentre.com/event/super-yummy-2026/",
+      "host": "harbourfrontcentre.com"
+    },
+    {
+      "source": "polymythseminars/events/harbourfront-super-yummy-night-market-2026-08-22/index.html",
+      "href": "https://harbourfrontcentre.com/event/super-yummy-2026/",
+      "host": "harbourfrontcentre.com"
+    },
+    {
+      "source": "polymythseminars/events/harbourfront-super-yummy-night-market-2026-08-29/index.html",
+      "href": "https://harbourfrontcentre.com/event/super-yummy-2026/",
+      "host": "harbourfrontcentre.com"
+    },
+    {
+      "source": "polymythseminars/events/harbourfront-super-yummy-night-market-2026-09-05/index.html",
+      "href": "https://harbourfrontcentre.com/event/super-yummy-2026/",
+      "host": "harbourfrontcentre.com"
+    },
+    {
+      "source": "polymythseminars/events/harbourfront-super-yummy-night-market-late-summer-2026/index.html",
+      "href": "https://harbourfrontcentre.com/event/super-yummy-2026/",
+      "host": "harbourfrontcentre.com"
+    },
+    {
+      "source": "polymythseminars/events/hart-house-theatre-film-television-panel-2026-08-17/index.html",
+      "href": "https://harthouse.ca/theatre/workshop/from-theatre-to-film-and-television-panel/",
+      "host": "harthouse.ca"
+    },
+    {
+      "source": "polymythseminars/events/harvard-radcliffe-fellowship-application-deadline-projected-2026-09-10-070c4df8/index.html",
+      "href": "https://www.radcliffe.harvard.edu/radcliffe-fellowship",
+      "host": "www.radcliffe.harvard.edu"
+    },
+    {
+      "source": "polymythseminars/events/heritage-fairs-2027-parent/index.html",
+      "href": "https://www.canadashistory.ca/youth/heritage-fairs-en/heritage-fair-national-showcase/rules-and-criteria",
+      "host": "www.canadashistory.ca"
+    },
+    {
+      "source": "polymythseminars/events/heritage-toronto-bad-girls-tour-2026/index.html",
+      "href": "https://www.heritagetoronto.org/event/bad-girls/",
+      "host": "www.heritagetoronto.org"
+    },
+    {
+      "source": "polymythseminars/events/heritage-toronto-big-city-soccer-dreams-2026/index.html",
+      "href": "https://www.heritagetoronto.org/event/big-city-soccer-dreams/",
+      "host": "www.heritagetoronto.org"
+    },
+    {
+      "source": "polymythseminars/events/heritage-toronto-canary-district-in-motion-2026/index.html",
+      "href": "https://www.heritagetoronto.org/event/canary-district-in-motion/",
+      "host": "www.heritagetoronto.org"
+    },
+    {
+      "source": "polymythseminars/events/heritage-toronto-changing-chinatown-2026/index.html",
+      "href": "https://www.heritagetoronto.org/event/changing-chinatown-2026/",
+      "host": "www.heritagetoronto.org"
+    },
+    {
+      "source": "polymythseminars/events/heritage-toronto-cherry-beach-reborn-2026/index.html",
+      "href": "https://www.heritagetoronto.org/event/cherry-beach-reborn/",
+      "host": "www.heritagetoronto.org"
+    },
+    {
+      "source": "polymythseminars/events/heritage-toronto-flying-with-billy-bishop-2026/index.html",
+      "href": "https://www.heritagetoronto.org/event/flying-with-billy-bishop-august-16/",
+      "host": "www.heritagetoronto.org"
+    },
+    {
+      "source": "polymythseminars/events/heritage-toronto-ghost-signs-toronto-2026/index.html",
+      "href": "https://www.heritagetoronto.org/event/ghost-signs-of-toronto/",
+      "host": "www.heritagetoronto.org"
+    },
+    {
+      "source": "polymythseminars/events/heritage-toronto-little-italy-college-street-2026/index.html",
+      "href": "https://www.heritagetoronto.org/event/little-italy-on-college-street/",
+      "host": "www.heritagetoronto.org"
+    },
+    {
+      "source": "polymythseminars/events/heritage-toronto-making-waves-at-the-beach-2026/index.html",
+      "href": "https://www.heritagetoronto.org/event/making-waves-at-the-beach/",
+      "host": "www.heritagetoronto.org"
+    },
+    {
+      "source": "polymythseminars/events/heritage-toronto-shifting-shoreline-2026/index.html",
+      "href": "https://www.heritagetoronto.org/event/shifting-shoreline/",
+      "host": "www.heritagetoronto.org"
+    },
+    {
+      "source": "polymythseminars/events/heritage-toronto-taste-of-manila-2026/index.html",
+      "href": "https://www.heritagetoronto.org/event/taste-of-manila/",
+      "host": "www.heritagetoronto.org"
+    },
+    {
+      "source": "polymythseminars/events/heritage-toronto-tiny-houses-of-faith-2026/index.html",
+      "href": "https://www.heritagetoronto.org/event/tiny-houses-of-faith/",
+      "host": "www.heritagetoronto.org"
+    },
+    {
+      "source": "polymythseminars/events/historical-association-fiction-2027-watch/index.html",
+      "href": "https://www.history.org.uk/primary/categories/7/news/3452/historical-fiction-competition",
+      "host": "www.history.org.uk"
+    },
+    {
+      "source": "polymythseminars/events/hot-docs-doc-soup-2026-10-07-1900/index.html",
+      "href": "https://hotdocs.ca/whats-on/doc-soup",
+      "host": "hotdocs.ca"
+    },
+    {
+      "source": "polymythseminars/events/hot-docs-doc-soup-2026-10-08-1030/index.html",
+      "href": "https://hotdocs.ca/whats-on/doc-soup",
+      "host": "hotdocs.ca"
+    },
+    {
+      "source": "polymythseminars/events/hot-docs-doc-soup-2026-11-04-1900/index.html",
+      "href": "https://hotdocs.ca/whats-on/doc-soup",
+      "host": "hotdocs.ca"
+    },
+    {
+      "source": "polymythseminars/events/hot-docs-doc-soup-2026-11-05-1030/index.html",
+      "href": "https://hotdocs.ca/whats-on/doc-soup",
+      "host": "hotdocs.ca"
+    },
+    {
+      "source": "polymythseminars/events/hot-docs-doc-soup-2026-12-02-1900/index.html",
+      "href": "https://hotdocs.ca/whats-on/doc-soup",
+      "host": "hotdocs.ca"
+    },
+    {
+      "source": "polymythseminars/events/hot-docs-doc-soup-2026-12-03-1030/index.html",
+      "href": "https://hotdocs.ca/whats-on/doc-soup",
+      "host": "hotdocs.ca"
+    },
+    {
+      "source": "polymythseminars/events/hot-docs-doc-soup-2026-27/index.html",
+      "href": "https://hotdocs.ca/whats-on/doc-soup",
+      "host": "hotdocs.ca"
+    },
+    {
+      "source": "polymythseminars/events/hot-docs-doc-soup-2027-01-13-1900/index.html",
+      "href": "https://hotdocs.ca/whats-on/doc-soup",
+      "host": "hotdocs.ca"
+    },
+    {
+      "source": "polymythseminars/events/hot-docs-doc-soup-2027-01-14-1030/index.html",
+      "href": "https://hotdocs.ca/whats-on/doc-soup",
+      "host": "hotdocs.ca"
+    },
+    {
+      "source": "polymythseminars/events/hot-docs-doc-soup-2027-02-03-1900/index.html",
+      "href": "https://hotdocs.ca/whats-on/doc-soup",
+      "host": "hotdocs.ca"
+    },
+    {
+      "source": "polymythseminars/events/hot-docs-doc-soup-2027-02-04-1030/index.html",
+      "href": "https://hotdocs.ca/whats-on/doc-soup",
+      "host": "hotdocs.ca"
+    },
+    {
+      "source": "polymythseminars/events/hot-docs-doc-soup-2027-03-03-1900/index.html",
+      "href": "https://hotdocs.ca/whats-on/doc-soup",
+      "host": "hotdocs.ca"
+    },
+    {
+      "source": "polymythseminars/events/hot-docs-doc-soup-2027-03-04-1030/index.html",
+      "href": "https://hotdocs.ca/whats-on/doc-soup",
+      "host": "hotdocs.ca"
+    },
+    {
+      "source": "polymythseminars/events/hot-docs-doc-soup-2027-04-07-1900/index.html",
+      "href": "https://hotdocs.ca/whats-on/doc-soup",
+      "host": "hotdocs.ca"
+    },
+    {
+      "source": "polymythseminars/events/hot-docs-doc-soup-2027-04-08-1030/index.html",
+      "href": "https://hotdocs.ca/whats-on/doc-soup",
+      "host": "hotdocs.ca"
+    },
+    {
+      "source": "polymythseminars/events/huntington-library-fellowships-projected-2026-11-15-309085c1/index.html",
+      "href": "https://huntington.org/fellowships",
+      "host": "huntington.org"
+    },
+    {
+      "source": "polymythseminars/events/iia-enterprise-risk-management-virtual-conference-2026-09-08/index.html",
+      "href": "https://www.theiia.org/en/events/conference/virtual-conferences/risk-management/",
+      "host": "www.theiia.org"
+    },
+    {
+      "source": "polymythseminars/events/imagine-a-canada-art-and-essay-stream-2027/index.html",
+      "href": "https://nctr.ca/education/imagine-a-canada/art-and-essay-stream/",
+      "host": "nctr.ca"
+    },
+    {
+      "source": "polymythseminars/events/imaginenative-film-media-arts-festival-2026-in-per-2026-06-02/index.html",
+      "href": "https://imaginenative.org/festival/",
+      "host": "imaginenative.org"
+    },
+    {
+      "source": "polymythseminars/events/immerse-philosophy-essay-2026/index.html",
+      "href": "https://www.immerse.education/essay-competition/",
+      "host": "www.immerse.education"
+    },
+    {
+      "source": "polymythseminars/events/indspire-awards-2027/index.html",
+      "href": "https://indspire.ca/events/indspire-awards/",
+      "host": "indspire.ca"
+    },
+    {
+      "source": "polymythseminars/events/inklings-book-contest-2027/index.html",
+      "href": "https://www.younginklings.org/inklingsbookcontest/",
+      "host": "www.younginklings.org"
+    },
+    {
+      "source": "polymythseminars/events/inquiry-network-workshop-2026-04-27/index.html",
+      "href": "https://philevents.org/event/show/139370",
+      "host": "philevents.org"
+    },
+    {
+      "source": "polymythseminars/events/international-studies-association-2027-convention-2026/index.html",
+      "href": "https://www.isanet.org/Conferences/ISA2027/Call",
+      "host": "www.isanet.org"
+    },
+    {
+      "source": "polymythseminars/events/isa-world-congress-2027-abstract-deadline/index.html",
+      "href": "https://www.isa-sociology.org/isa-events/xxi-world-congress-of-sociology/congress-guidelines/duties-and-deadlines",
+      "host": "www.isa-sociology.org"
+    },
+    {
+      "source": "polymythseminars/events/isa-world-congress-sociology-2027/index.html",
+      "href": "https://www.isa-sociology.org/isa-events/xxi-world-congress-of-sociology",
+      "host": "www.isa-sociology.org"
+    },
+    {
+      "source": "polymythseminars/events/isaac-virtual-conference-aac-everyday-life-2026/index.html",
+      "href": "https://isaac-online.org/english/news/isaac-virtual-conference-2026-call-for-papers/",
+      "host": "isaac-online.org"
+    },
+    {
+      "source": "polymythseminars/events/isee-essay-contest-2027-watch/index.html",
+      "href": "https://iseepi.org/ethics_and_philosophy_essay_co.php",
+      "host": "iseepi.org"
+    },
+    {
+      "source": "polymythseminars/events/islands-as-other-spaces-in-latin-poetry-workshop-2026-04-24/index.html",
+      "href": "https://www.humanities.utoronto.ca/events/islands-%E2%80%98other%E2%80%99-spaces-latin-poetry",
+      "host": "www.humanities.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/jasna-student-essay-2027-watch/index.html",
+      "href": "https://jasna.org/programs/essay-contest/",
+      "host": "jasna.org"
+    },
+    {
+      "source": "polymythseminars/events/jcb-internships-2027-28-applications-open/index.html",
+      "href": "https://www.paricilademocratie.com/participer/980-stages-de-la-fondation-jean-charles-bonenfant",
+      "host": "www.paricilademocratie.com"
+    },
+    {
+      "source": "polymythseminars/events/jcha-submissions-2026-2027/index.html",
+      "href": "https://cha-shc.ca/publications/cha-journal/",
+      "host": "cha-shc.ca"
+    },
+    {
+      "source": "polymythseminars/events/jea-media-poster-2026-deadline/index.html",
+      "href": "https://jea.org/wp/blog/2026/08/03/media-matters-poster-contest/",
+      "host": "jea.org"
+    },
+    {
+      "source": "polymythseminars/events/kids-world-travel-guide-writing-competition-2026/index.html",
+      "href": "https://www.kids-world-travel-guide.com/writing-competition.html",
+      "host": "www.kids-world-travel-guide.com"
+    },
+    {
+      "source": "polymythseminars/events/kids-write-4-kids-2027/index.html",
+      "href": "https://kidswrite4kids.ripplefoundation.ca/kids-write-4-kids-contest-rules/",
+      "host": "kidswrite4kids.ripplefoundation.ca"
+    },
+    {
+      "source": "polymythseminars/events/lance-ton-balado-2027/index.html",
+      "href": "https://slo.qc.ca/prix-et-concours/lance-ton-balado/",
+      "host": "slo.qc.ca"
+    },
+    {
+      "source": "polymythseminars/events/law-and-society-association-2027-international-meeting-2026/index.html",
+      "href": "https://www.lawandsociety.org/annual-meetings/",
+      "host": "www.lawandsociety.org"
+    },
+    {
+      "source": "polymythseminars/events/library-of-congress-national-book-festival-main-stage-livestream-2026-08-22/index.html",
+      "href": "https://www.loc.gov/events/2026-national-book-festival/festival-information/attendee-guides/attend-virtually/",
+      "host": "www.loc.gov"
+    },
+    {
+      "source": "polymythseminars/events/library-of-congress-national-book-festival-opening-livestream-2026-08-21/index.html",
+      "href": "https://www.loc.gov/events/2026-national-book-festival/festival-information/attendee-guides/attend-virtually/",
+      "host": "www.loc.gov"
+    },
+    {
+      "source": "polymythseminars/events/library-of-congress-national-book-festival-virtual-2026/index.html",
+      "href": "https://www.loc.gov/events/2026-national-book-festival/festival-information/attendee-guides/attend-virtually/",
+      "host": "www.loc.gov"
+    },
+    {
+      "source": "polymythseminars/events/lions-peace-essay-2027-watch/index.html",
+      "href": "https://www.lionsclubs.org/en/member-resource-center/marketing-events/events-programs/international-peace-contests/peace-essay-contest",
+      "host": "www.lionsclubs.org"
+    },
+    {
+      "source": "polymythseminars/events/lydia-kinasewich-mrp-defence-got-raw-milk-pasteuri-2026-04-16/index.html",
+      "href": "https://www.uoguelph.ca/arts/history/events/lydia-kinasewich-mrp-defence",
+      "host": "www.uoguelph.ca"
+    },
+    {
+      "source": "polymythseminars/events/massey-alumni-agm-summer-bbq-2026-07-25/index.html",
+      "href": "https://masseycollege.ca/events/massey-college-alumni-association-agm-summer-bbq/",
+      "host": "masseycollege.ca"
+    },
+    {
+      "source": "polymythseminars/events/massey-house-of-anansi-cbc-massey-book-launch-2026-09-09/index.html",
+      "href": "https://masseycollege.ca/events/house-of-anansi-cbc-massey-book-launch/",
+      "host": "masseycollege.ca"
+    },
+    {
+      "source": "polymythseminars/events/massey-ideas-ideals-civic-responsibility-2026-06-18/index.html",
+      "href": "https://masseycollege.ca/events/ideas-ideals-the-ethics-of-civic-responsibility/",
+      "host": "masseycollege.ca"
+    },
+    {
+      "source": "polymythseminars/events/massey-making-amends-historic-wrongs-book-launch-2026-09-14/index.html",
+      "href": "https://masseycollege.ca/events/making-amends-for-historic-wrongs-by-dr-mayo-moran/",
+      "host": "masseycollege.ca"
+    },
+    {
+      "source": "polymythseminars/events/mcgill-fall-convocation-2026/index.html",
+      "href": "https://www.mcgill.ca/graduation/fall-convocation-ceremonies",
+      "host": "www.mcgill.ca"
+    },
+    {
+      "source": "polymythseminars/events/mcgill-fall-convocation-am-2026/index.html",
+      "href": "https://www.mcgill.ca/graduation/fall-convocation-ceremonies",
+      "host": "www.mcgill.ca"
+    },
+    {
+      "source": "polymythseminars/events/mcgill-fall-convocation-pm-2026/index.html",
+      "href": "https://www.mcgill.ca/graduation/fall-convocation-ceremonies",
+      "host": "www.mcgill.ca"
+    },
+    {
+      "source": "polymythseminars/events/mcmaster-philosophy-department-speaker-series-2026-05-04/index.html",
+      "href": "https://philos.humanities.mcmaster.ca/philosophy-department-speaker-series/",
+      "host": "philos.humanities.mcmaster.ca"
+    },
+    {
+      "source": "polymythseminars/events/mcmaster-philosophy-speaker-series-2026-05-08/index.html",
+      "href": "https://philos.humanities.mcmaster.ca/philosophy-department-speaker-series/",
+      "host": "philos.humanities.mcmaster.ca"
+    },
+    {
+      "source": "polymythseminars/events/mcmaster-terri-lynne-defino-author-talk-2026-09-24/index.html",
+      "href": "https://library.mcmaster.ca/events/author-talk-terri-lynne-defino",
+      "host": "library.mcmaster.ca"
+    },
+    {
+      "source": "polymythseminars/events/meta-connect-virtual-livestream-2026/index.html",
+      "href": "https://www.meta.com/connect/",
+      "host": "www.meta.com"
+    },
+    {
+      "source": "polymythseminars/events/metaphysical-society-of-america-2027-meeting-2026/index.html",
+      "href": "https://philevents.org/event/show/148885",
+      "host": "philevents.org"
+    },
+    {
+      "source": "polymythseminars/events/michener-fall-open-house-2026/index.html",
+      "href": "https://michener.ca/announcements-news/michener-fall-open-house-2026/",
+      "host": "michener.ca"
+    },
+    {
+      "source": "polymythseminars/events/michener-orientation-2026/index.html",
+      "href": "https://michener.ca/announcements-news/michener-orientation-2026/",
+      "host": "michener.ca"
+    },
+    {
+      "source": "polymythseminars/events/miles-away-film-screening-and-director-s-panel-2026-04-15/index.html",
+      "href": "https://www.humanities.utoronto.ca/events/miles-away-film-screening-and-directors-panel",
+      "host": "www.humanities.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/mississauga-halal-food-festival-2026-2026-06-12/index.html",
+      "href": "https://halalfoodfest.com/mississauga/",
+      "host": "halalfoodfest.com"
+    },
+    {
+      "source": "polymythseminars/events/mla-2027-convention/index.html",
+      "href": "https://www.mla.org/Events/2027-MLA-Convention",
+      "host": "www.mla.org"
+    },
+    {
+      "source": "polymythseminars/events/mla-2027-convention-just-in-time-sessions-2026/index.html",
+      "href": "https://www.mla.org/Events/Planning-a-Convention-Session/Calls-for-Papers",
+      "host": "www.mla.org"
+    },
+    {
+      "source": "polymythseminars/events/montreal-city-council-fall-2026/index.html",
+      "href": "https://montreal.ca/conseils-decisionnels/conseil-municipal",
+      "host": "montreal.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-city-council-fall-2026-2026-08-24/index.html",
+      "href": "https://montreal.ca/conseils-decisionnels/conseil-municipal",
+      "host": "montreal.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-city-council-fall-2026-2026-08-25/index.html",
+      "href": "https://montreal.ca/conseils-decisionnels/conseil-municipal",
+      "host": "montreal.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-city-council-fall-2026-2026-09-21/index.html",
+      "href": "https://montreal.ca/conseils-decisionnels/conseil-municipal",
+      "host": "montreal.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-city-council-fall-2026-2026-09-22/index.html",
+      "href": "https://montreal.ca/conseils-decisionnels/conseil-municipal",
+      "host": "montreal.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-city-council-fall-2026-2026-10-19/index.html",
+      "href": "https://montreal.ca/conseils-decisionnels/conseil-municipal",
+      "host": "montreal.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-city-council-fall-2026-2026-10-20/index.html",
+      "href": "https://montreal.ca/conseils-decisionnels/conseil-municipal",
+      "host": "montreal.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-city-council-fall-2026-2026-11-16/index.html",
+      "href": "https://montreal.ca/conseils-decisionnels/conseil-municipal",
+      "host": "montreal.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-city-council-fall-2026-2026-11-17/index.html",
+      "href": "https://montreal.ca/conseils-decisionnels/conseil-municipal",
+      "host": "montreal.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-city-council-fall-2026-2026-12-14/index.html",
+      "href": "https://montreal.ca/conseils-decisionnels/conseil-municipal",
+      "host": "montreal.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-city-council-fall-2026-2026-12-15/index.html",
+      "href": "https://montreal.ca/conseils-decisionnels/conseil-municipal",
+      "host": "montreal.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-nord-aga-2026-09-24/index.html",
+      "href": "https://tqmn.ca/nos-evenements/assemblee-generale-annuelle-2026/",
+      "host": "tqmn.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-nord-assemblee-de-quartier-2026-02-05/index.html",
+      "href": "https://tqmn.ca/nos-evenements/assemblee-de-quartier/",
+      "host": "tqmn.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-nord-borough-council-fall-2026/index.html",
+      "href": "https://montreal.ca/conseils-decisionnels/conseil-darrondissement-de-montreal-nord",
+      "host": "montreal.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-nord-borough-council-fall-2026-2026-09-08/index.html",
+      "href": "https://montreal.ca/conseils-decisionnels/conseil-darrondissement-de-montreal-nord",
+      "host": "montreal.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-nord-borough-council-fall-2026-2026-10-06/index.html",
+      "href": "https://montreal.ca/conseils-decisionnels/conseil-darrondissement-de-montreal-nord",
+      "host": "montreal.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-nord-borough-council-fall-2026-2026-11-02/index.html",
+      "href": "https://montreal.ca/conseils-decisionnels/conseil-darrondissement-de-montreal-nord",
+      "host": "montreal.ca"
+    },
+    {
+      "source": "polymythseminars/events/montreal-nord-borough-council-fall-2026-2026-12-07/index.html",
+      "href": "https://montreal.ca/conseils-decisionnels/conseil-darrondissement-de-montreal-nord",
+      "host": "montreal.ca"
+    },
+    {
+      "source": "polymythseminars/events/munk-deterring-russia-baltic-view-2026-09-21/index.html",
+      "href": "https://munkschool.utoronto.ca/event/how-can-europe-and-nato-deter-russia-view-baltic",
+      "host": "munkschool.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/munk-hungarian-history-memory-symposium-2026/index.html",
+      "href": "https://munkschool.utoronto.ca/event/hungarian-history-memory-and-public-culture-symposium",
+      "host": "munkschool.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/munk-symposium-attila-pok-keynote-2026-10-01/index.html",
+      "href": "https://munkschool.utoronto.ca/event/hungarian-history-memory-and-public-culture-symposium",
+      "host": "munkschool.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/munk-symposium-gergely-romsics-keynote-2026-10-02/index.html",
+      "href": "https://munkschool.utoronto.ca/event/hungarian-history-memory-and-public-culture-symposium",
+      "host": "munkschool.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/munk-symposium-susan-papp-book-launch-2026-10-02/index.html",
+      "href": "https://munkschool.utoronto.ca/event/hungarian-history-memory-and-public-culture-symposium",
+      "host": "munkschool.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/munk-symposium-susan-papp-keynote-2026-10-02/index.html",
+      "href": "https://munkschool.utoronto.ca/event/hungarian-history-memory-and-public-culture-symposium",
+      "host": "munkschool.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/munk-symposium-tamas-scheibner-keynote-2026-10-02/index.html",
+      "href": "https://munkschool.utoronto.ca/event/hungarian-history-memory-and-public-culture-symposium",
+      "host": "munkschool.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/munk-symposium-young-rebels-screening-2026-10-02/index.html",
+      "href": "https://munkschool.utoronto.ca/event/hungarian-history-memory-and-public-culture-symposium",
+      "host": "munkschool.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/my-hero-immersive-storytelling-2026-deadline/index.html",
+      "href": "https://myhero.com/immersive-storytelling-award",
+      "host": "myhero.com"
+    },
+    {
+      "source": "polymythseminars/events/my-hero-international-film-festival-2026-deadline/index.html",
+      "href": "https://myhero.com/festival-information",
+      "host": "myhero.com"
+    },
+    {
+      "source": "polymythseminars/events/my-hero-sylvia-earle-ocean-conservation-2027-watch/index.html",
+      "href": "https://myhero.com/sylvia-earle-ocean-conservation-award",
+      "host": "myhero.com"
+    },
+    {
+      "source": "polymythseminars/events/national-archives-fiscal-responsibility-eisenhower-youtube-livestream-2026-09-24/index.html",
+      "href": "https://www.archives.gov/calendar/event/fiscal-responsibility-in-the-eisenhower-years-lunch-learn",
+      "host": "www.archives.gov"
+    },
+    {
+      "source": "polymythseminars/events/national-archives-many-voices-of-war-day-1-2026-09-08/index.html",
+      "href": "https://www.archives.gov/calendar/event/emerging-scholars-the-many-voices-of-war",
+      "host": "www.archives.gov"
+    },
+    {
+      "source": "polymythseminars/events/national-archives-many-voices-of-war-day-2-2026-09-09/index.html",
+      "href": "https://www.archives.gov/calendar/event/emerging-scholars-the-many-voices-of-war",
+      "host": "www.archives.gov"
+    },
+    {
+      "source": "polymythseminars/events/national-archives-many-voices-of-war-virtual-symposium-2026/index.html",
+      "href": "https://www.archives.gov/calendar/event/emerging-scholars-the-many-voices-of-war",
+      "host": "www.archives.gov"
+    },
+    {
+      "source": "polymythseminars/events/national-storytelling-festival-virtual-livestream-2026-10-02/index.html",
+      "href": "https://www.storytellingcenter.net/festival/virtual-festival/",
+      "host": "www.storytellingcenter.net"
+    },
+    {
+      "source": "polymythseminars/events/nbs-block-party-2026/index.html",
+      "href": "https://www.nbs-enb.ca/new-now/nbs-block-party/",
+      "host": "www.nbs-enb.ca"
+    },
+    {
+      "source": "polymythseminars/events/ncc-philippe-lake-public-archaeological-digs-2026/index.html",
+      "href": "https://ncc-ccn.gc.ca/events/public-archaeological-digs",
+      "host": "ncc-ccn.gc.ca"
+    },
+    {
+      "source": "polymythseminars/events/ncc-philippe-lake-public-dig-2026-08-04/index.html",
+      "href": "https://ncc-ccn.gc.ca/events/public-archaeological-digs",
+      "host": "ncc-ccn.gc.ca"
+    },
+    {
+      "source": "polymythseminars/events/ncc-philippe-lake-public-dig-2026-08-05/index.html",
+      "href": "https://ncc-ccn.gc.ca/events/public-archaeological-digs",
+      "host": "ncc-ccn.gc.ca"
+    },
+    {
+      "source": "polymythseminars/events/ncc-philippe-lake-public-dig-2026-08-06/index.html",
+      "href": "https://ncc-ccn.gc.ca/events/public-archaeological-digs",
+      "host": "ncc-ccn.gc.ca"
+    },
+    {
+      "source": "polymythseminars/events/ncc-philippe-lake-public-dig-2026-08-07/index.html",
+      "href": "https://ncc-ccn.gc.ca/events/public-archaeological-digs",
+      "host": "ncc-ccn.gc.ca"
+    },
+    {
+      "source": "polymythseminars/events/ncc-philippe-lake-public-dig-2026-08-08/index.html",
+      "href": "https://ncc-ccn.gc.ca/events/public-archaeological-digs",
+      "host": "ncc-ccn.gc.ca"
+    },
+    {
+      "source": "polymythseminars/events/ncte-achievement-awards-writing-2027/index.html",
+      "href": "https://ncte.org/awards/student-writing-awards/achievement-awards-in-writing/",
+      "host": "ncte.org"
+    },
+    {
+      "source": "polymythseminars/events/ncte-promising-young-writers-2027/index.html",
+      "href": "https://ncte.org/awards/student-writing-awards/promising-young-writers/",
+      "host": "ncte.org"
+    },
+    {
+      "source": "polymythseminars/events/neuroethics-essay-contest-2026/index.html",
+      "href": "https://neuroethicsessaycontest.com/call-for-neuroethics-essays-2026/",
+      "host": "neuroethicsessaycontest.com"
+    },
+    {
+      "source": "polymythseminars/events/new-approaches-to-slaving-and-slave-trading-in-the-2026-04-15/index.html",
+      "href": "https://www.humanities.utoronto.ca/events/new-approaches-slaving-and-slave-trading-ancient-and-medieval-mediterranean-day-1",
+      "host": "www.humanities.utoronto.ca"
+    },
+    {
+      "source": "polymythseminars/events/nfb-alambic-animated-documentary-online-launch-2026/index.html",
+      "href": "https://mediaspace.nfb.ca/comm/alambic-streaming-2026/",
+      "host": "mediaspace.nfb.ca"
+    },
+    {
+      "source": "polymythseminars/events/nfb-ambiguous-losses-online-premiere-2026-08-17/index.html",
+      "href": "https://www.nfb.ca/film/ambiguous-losses/",
+      "host": "www.nfb.ca"
+    },
+    {
+      "source": "polymythseminars/events/nfb-hospital-with-love-online-premiere-2026-08-17/index.html",
+      "href": "https://www.nfb.ca/film/hospital-with-love/",
+      "host": "www.nfb.ca"
+    },
+    {
+      "source": "polymythseminars/events/nfb-matrescence-online-premiere-2026-08-17/index.html",
+      "href": "https://www.nfb.ca/film/matrescence/",
+      "host": "www.nfb.ca"
+    },
+    {
+      "source": "polymythseminars/events/nhc-residential-fellowship-2027-28/index.html",
+      "href": "https://nationalhumanitiescenter.org/residential-fellowships/",
+      "host": "nationalhumanitiescenter.org"
+    },
+    {
+      "source": "polymythseminars/events/nias-fellowships-projected-2027-03-15-604dca3d/index.html",
+      "href": "https://nias.knaw.nl/our-fellowships/",
+      "host": "nias.knaw.nl"
+    },
+    {
+      "source": "polymythseminars/events/north-shore-writers-association-annual-writing-contest-2027/index.html",
+      "href": "https://nswriters.org/annual-writing-contest/",
+      "host": "nswriters.org"
     }
   ]
 }

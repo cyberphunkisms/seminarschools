@@ -83,6 +83,7 @@ function textFromObject(obj) {
   else if (obj.tags) chunks.push(String(obj.tags));
   if (Array.isArray(obj.crossrefs)) chunks.push(obj.crossrefs.join(' '));
   else if (obj.crossrefs) chunks.push(String(obj.crossrefs));
+  if (obj.current_status) chunks.push(String(obj.current_status));
   if (obj.embedding_text) chunks.push(String(obj.embedding_text));
   return chunks.join('\n');
 }

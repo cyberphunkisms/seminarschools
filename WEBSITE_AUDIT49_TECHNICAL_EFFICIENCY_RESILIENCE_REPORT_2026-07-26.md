@@ -16,10 +16,10 @@ This is a code, evidence, and release-orchestration audit. It does not represent
 | Surface | Result | Current evidence |
 | --- | ---: | --- |
 | Active HTML | 7,563 documents | 7,563 byte-identical public mirrors; 5,370 interactive; 2,193 redirects |
-| Crawl/indexing | 1,950 indexable / 5,613 noindex | 1,970 sitemap URLs; 12,960 hreflang links |
-| Structured data | 3,366 JSON-LD blocks | 1,978 documents; 1 declared indexable exemption |
+| Crawl/indexing | 1,848 indexable / 5,715 noindex | 1,868 sitemap URLs; 12,960 hreflang links |
+| Structured data | 3,264 JSON-LD blocks | 1,876 documents; 1 declared indexable exemption |
 | Runtime lifecycle | 10 interval files | 10 bounded routes; 45 bounded startup timer slots |
-| Static-data delivery | 24 assets | 9.69 MiB under explicit bounded cache policies; 0 forced revalidations |
+| Static-data delivery | 24 assets | 9.83 MiB under explicit bounded cache policies; 0 forced revalidations |
 | Package resilience | 15 regressions | 2→1 archive source-read passes; compatible SHA-256 retained |
 | CI/deployer work | 2→1 canonical Linux builds | duplicate deployer parity scans and browser gates reduced to zero |
 | Audit 48 machine evidence | 2,128 calendars / 10,410 parsed VEVENT representations | 24 intended engine scenarios; 0 runtime engine checks honestly recorded |
@@ -41,7 +41,7 @@ Google documents robots directives, canonical signals, localized alternates, sit
 
 - Inventoried every active repeating browser timer. The only remaining intervals are the 10 intentional Leizu ambient-leaf intervals across English, French, Traditional Chinese, Simplified Chinese, and Persian landing/teaching routes.
 - Those intervals stop on hidden pages, navigation, reduced-motion, and calm states; clear pending startup timers and animated nodes; and restart only after an eligible back-forward-cache restoration.
-- Bound 24 large public data assets (9.69 MiB) to explicit browser and edge cache policies, while removing redundant forced revalidation from Florilegium and Polymythcal candidate fetches.
+- Bound 24 large public data assets (9.83 MiB) to explicit browser and edge cache policies, while removing redundant forced revalidation from Florilegium and Polymythcal candidate fetches.
 
 The runtime decisions follow HTTP cache semantics, the Page Visibility lifecycle, and animation-frame scheduling references cited below.
 
@@ -51,25 +51,25 @@ The runtime decisions follow HTTP cache semantics, the Page Visibility lifecycle
 - The public builder and package writer use recoverable exclusive locks. Package inputs reject duplicates, symlinks, escaping paths, output-transaction artifacts, and files that mutate during archive creation.
 - Archive creation moved from 2 source reads per member to 1 while retaining the compatibility SHA-256 `c722e42d278abd6c3f97c3c13907fc62896bea169184c1e72fe03445bae1c3be`.
 - Shared top-down selection enforces dependency and generated-directory pruning before descent; the committed report is independent of whether those disposable directories happen to exist locally.
-- The deployer selection retained 21,346 files; the source package retained 11,361 files.
+- The deployer selection retained 21,351 files; the source package retained 11,366 files.
 - Linux performs the canonical full audit once. Windows and macOS retain portable coverage, and the deployer inherits runner-owned parity/browser gates instead of repeating them.
 - Metadata-aware Audit 49 successors preserve the frozen Audit 36 assertions while excluding inert non-JavaScript script payloads from inline-code analysis.
 
 ## Page-size distribution
 
-The permanent ceilings are 4 MiB raw and 1,280 KiB gzip. Current maxima are 3.94 MiB raw and 1.21 MiB gzip.
+The fixed ceilings are 4,250,000 bytes raw and 1,280 KiB gzip. Current maxima are 4.02 MiB raw and 1.23 MiB gzip.
 
 | Route | Raw bytes | Gzip bytes | Indexable |
 | --- | ---: | ---: | :---: |
-| `/polymyth/methodologylist/` | 4,135,253 | 1,264,836 | yes |
-| `/polymyth/methodologylist/methodology/` | 1,934,675 | 607,105 | yes |
+| `/polymyth/methodologylist/` | 4,215,072 | 1,291,817 | yes |
+| `/polymyth/methodologylist/methodology/` | 1,957,787 | 615,367 | yes |
 | `/aa/` | 1,522,254 | 244,711 | yes |
 | `/aa/cloud/` | 1,331,449 | 290,043 | no |
 | `/polymyth/campaigncodex/` | 1,033,715 | 333,719 | yes |
 | `/teacherresources/` | 704,454 | 68,968 | yes |
 | `/polymyth/bookwormburrows/` | 622,045 | 215,093 | yes |
 | `/polymyth/methodologylist/citation/` | 586,909 | 133,723 | yes |
-| `/polymyth/methodologylist/gorgonification/` | 450,427 | 134,579 | yes |
+| `/polymyth/methodologylist/gorgonification/` | 451,217 | 134,907 | yes |
 | `/polymyth/modulecanon/` | 393,881 | 113,544 | yes |
 
 These are governed outliers, not unexamined omissions. The two Methodology pages remain the strongest future candidates for structural payload splitting, but both remain under the release ceilings.

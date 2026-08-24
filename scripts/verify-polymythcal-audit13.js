@@ -16,7 +16,10 @@ const checks=[
  [
   client.includes('freshnessHtml(event)') &&
     client.includes('officialSource:') &&
-    client.includes('sourceInfo(event)') &&
+    client.includes('destinationInfo(event)') &&
+    client.includes('event.destination_url') &&
+    client.includes('event.destination_status === "unavailable-specific-page"') &&
+    client.includes('class="pm-action primary-link"') &&
     client.includes('pm-source-action') &&
     fs.readdirSync(path.join(root,'polymythseminars/events')).some(id=>{const f=path.join(root,'polymythseminars/events',id,'index.html');return fs.existsSync(f)&&fs.readFileSync(f,'utf8').includes('truth-chip')&&fs.readFileSync(f,'utf8').includes('pm-event-primary-path')}),
   'truth display',

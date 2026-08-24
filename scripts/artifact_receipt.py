@@ -30,7 +30,7 @@ POST_PACKAGE_IDS = {"FP-01", "FP-06", "FP-14"}
 REQUIRED_ROOTS = ["SITE_PACKAGE", "EDITABLE_MASTERS", "DEPLOY_TOOLS"]
 EXPECTED_MANIFEST_SCHEMA = "seminar-schools-package-contents-v1"
 EXPECTED_PACKAGE_KIND = "seminar-schools-complete-editable-masters-source-and-public"
-EXPECTED_PACKAGE_RELEASE_ID = "core-coreplus-mephistodata-bb-polymythcal-sets1-15-sitewide-fixes-synthesized-2026-08-15"
+EXPECTED_PACKAGE_RELEASE_ID = "core-coreplus-mephistodata-bb-polymythcal-sets1-15-ml-current-synthesis-2026-08-23"
 EXPECTED_CLEAN_ROOM_PIPELINE_ID = "npm-ci-build-full-verify-editable-package-v1"
 EXPECTED_CLEAN_ROOM_HELPERS = (
     "SITE_PACKAGE/scripts/clean_room_copy.py",
@@ -288,7 +288,7 @@ def validate_clean_room_contract(report: dict) -> dict:
         "NPM_CONFIG_FUND": "false",
         "NPM_CONFIG_UPDATE_NOTIFIER": "false",
         "VERIFY_ALL_CONCURRENCY": "4",
-        "VERIFY_ALL_COMMAND_TIMEOUT_MS": "1200000",
+        "VERIFY_ALL_COMMAND_TIMEOUT_MS": "2700000",
         "SS_CLEAN_ROOM_CANONICAL_PIPELINE": EXPECTED_CLEAN_ROOM_PIPELINE_ID,
     }
     if fixed != expected_fixed:

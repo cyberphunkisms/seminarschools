@@ -18,6 +18,7 @@ const PREVIOUS_OUT = path.join(ROOT, '.public-build-previous');
 const BUILD_LOCK = path.join(ROOT, '.public-build-lock');
 const BUILD_LOCK_META = path.join(BUILD_LOCK, 'owner.json');
 const BUILD_LOCK_STALE_MS = 6 * 60 * 60 * 1000;
+const LEGACY_LOCK_PID_GRACE_MS = 30 * 60 * 1000;
 const PUBLIC_DIRS = [
   '.well-known', 'agora', 'aitr', 'aa', 'bb', 'bookwormcard', 'campaigns',
   'cfps', 'css', 'fellowships', 'florilegium', 'humanities',
@@ -57,6 +58,26 @@ function removeDir(p){
   });
 }
 let buildLockToken = null;
+function readProcessIdentity(procId = 'self'){
+  try {
+    const stat = fs.readFileSync(`/proc/${procId}/stat`, 'utf8').trim();
+    const firstSpace = stat.indexOf(' ');
+    const closeParen = stat.lastIndexOf(')');
+    if (firstSpace <= 0 || closeParen <= firstSpace) return null;
+    const procPid = Number(stat.slice(0, firstSpace));
+    // Fields after the command name begin at Linux proc-stat field 3;
+    // process start time is field 22, hence index 19 in this suffix.
+    const suffix = stat.slice(closeParen + 2).trim().split(/\s+/);
+    const startTicks = suffix[19];
+    if (!Number.isInteger(procPid) || procPid <= 0 || !/^\d+$/.test(String(startTicks || ''))) return null;
+    return { proc_pid: procPid, start_ticks: String(startTicks) };
+  } catch (_) { return null; }
+}
+function processIdentityAlive(identity){
+  if (!identity || !Number.isInteger(Number(identity.proc_pid)) || !/^\d+$/.test(String(identity.start_ticks || ''))) return false;
+  const current = readProcessIdentity(String(identity.proc_pid));
+  return Boolean(current && current.start_ticks === String(identity.start_ticks));
+}
 function claimBuildLock(hostname){
   buildLockToken = `${hostname}:${process.pid}:${Date.now()}`;
   try {
@@ -64,6 +85,7 @@ function claimBuildLock(hostname){
       token: buildLockToken,
       hostname,
       pid: process.pid,
+      process_identity: readProcessIdentity(),
       created_epoch_ms: Date.now(),
     }) + '\n', { flag: 'wx' });
   } catch (error) {
@@ -97,7 +119,17 @@ function acquireBuildLock(){
       }
       const sameHost = owner.hostname === hostname;
       const unknownHost = !owner.hostname;
-      const activeOwner = sameHost && processAlive(Number(owner.pid));
+      // Namespace-local PIDs are routinely reused across isolated Netlify and
+      // Work-mode subprocesses. New locks bind the host-visible proc PID to
+      // its start tick so a recycled namespace PID cannot impersonate the
+      // previous owner. Legacy locks without that identity receive only a
+      // bounded compatibility grace period before safe reclamation.
+      const hasProcessIdentity = Boolean(owner.process_identity);
+      const activeOwner = sameHost && (
+        hasProcessIdentity
+          ? processIdentityAlive(owner.process_identity)
+          : ageMs < LEGACY_LOCK_PID_GRACE_MS && processAlive(Number(owner.pid))
+      );
       // Artifact workspaces can reconcile an abandoned, metadata-free lock
       // and staging tree from an interrupted build. Quarantine that exact
       // recoverable pair; never weaken a lock with live owner metadata.

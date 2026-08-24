@@ -1,12 +1,12 @@
 {
   "generated_at": "2026-08-15T18:00:00-04:00",
   "status": "passed",
-  "total_checks": 173,
-  "passed_checks": 173,
+  "total_checks": 175,
+  "passed_checks": 175,
   "failed_checks": [],
   "duration_ms": null,
   "duration_note": "Runtime duration is printed to the console and intentionally omitted from committed evidence.",
-  "command_timeout_ms": 1200000,
+  "command_timeout_ms": 2700000,
   "execution_mode": "reuse-build-complete-handoff",
   "preparation_covered_checks": [
     "node scripts/verify-release-asset-identity.js",

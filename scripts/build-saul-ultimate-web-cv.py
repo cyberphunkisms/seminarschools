@@ -13,7 +13,7 @@ import subprocess
 import sys
 import zipfile
 from pathlib import Path
-from geometry_asset_version import geometry_asset_version
+from geometry_asset_version import geometry_asset_version, geometry_body_attributes
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -962,13 +962,13 @@ def retire_focused_routes() -> None:
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 <title>Saul Karim Nassau — Relevant Experience</title>
 </head>
-<body data-geometry="indra-web" data-indra-intensity="0.095" data-page-weight="light" data-route-type="cv-redirect" data-geometry-role="return" data-front-facing="general-audience">
+<body {geometry_attributes} data-page-weight="light">
 <main>
 <h1>Saul Nassau — Relevant Experience</h1>
 <p data-cv-share-status="" aria-atomic="true" aria-live="polite" class="cv-spectrum__status">Opening the <a href="{destination}">selected experience view</a>.</p>
 </main>
-<script defer src="/js/mandala.js?v={geometry_version}"></script>
-<script defer src="/js/indra.js?v={geometry_version}"></script>
+<script src="/js/mandala.js?v={geometry_version}" defer></script>
+<script src="/js/indra.js?v={geometry_version}" defer></script>
 </body>
 </html>
 """
@@ -976,7 +976,14 @@ def retire_focused_routes() -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(
             redirect_template.format(
-                destination=esc(destination), geometry_version=GEOMETRY_VERSION
+                destination=esc(destination),
+                geometry_version=GEOMETRY_VERSION,
+                geometry_attributes=geometry_body_attributes(
+                    ROOT,
+                    path.relative_to(ROOT).as_posix(),
+                    "cv-redirect",
+                    register="quiet",
+                ),
             ),
             encoding="utf-8",
         )

@@ -676,8 +676,10 @@ async function verifyPrintHidden() {
 
 try {
   for (const representative of representatives.values()) {
-    await inspect(representative, { width: 1440, height: 900 }, 'desktop');
-    if (PHONE_TYPES.has(representative.routeType)) await inspect(representative, { width: 390, height: 844 }, 'phone');
+    await inspect(representative, { width: 1440, height: 900 }, 'desktop', 'no-preference');
+    if (PHONE_TYPES.has(representative.routeType)) {
+      await inspect(representative, { width: 390, height: 844 }, 'phone', 'no-preference');
+    }
   }
   for (const representative of representatives.values()) {
     await inspect(representative, { width: 390, height: 844 }, 'reduced-motion', 'reduce');

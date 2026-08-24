@@ -80,19 +80,19 @@ PREVIOUS_TRANSITION = {
     ),
 }
 
-APPROVED_SUCCESSOR_ADDITION_COUNT = 474
+APPROVED_SUCCESSOR_ADDITION_COUNT = 476
 APPROVED_SUCCESSOR_ADDITION_PATHS_SHA256 = (
-    "8e25cb06b6eec3b576d7e1bc69a58935a731ae7771a248a138b4604528971a1b"
+    "4ba9f4b1b584ca01b61e14336ef4ca6995952da2573eda65671d027ee34c335d"
 )
 APPROVED_SUCCESSOR_ADDITION_ROWS_SHA256 = (
-    "9a91f1c1b6ad2e812bfe267cb2ec5990effa8cd47df4b802a8edcd2e6ca4cc2e"
+    "c040e85a1bcf9afadbee41f8ef68782d4cd9ba4286e6a09a4d41b6f9746ae37a"
 )
 APPROVED_SUCCESSOR_ADDITION_CATEGORY_COUNTS = {
     "source_event_ics": 226,
     "source_feeds": 3,
     "public_event_ics": 226,
     "public_feeds": 3,
-    "named": 16,
+    "named": 18,
 }
 APPROVED_SUCCESSOR_NAMED_PATHS = (
     "WEBSITE_CL_2026-07-19.md",
@@ -107,7 +107,9 @@ APPROVED_SUCCESSOR_NAMED_PATHS = (
     "scripts/regen-modulecanon-txt.js",
     "scripts/test_polymythcal_adapters.py",
     "scripts/validate-polymythcal.py",
+    "scripts/verify-critical.js",
     "scripts/verify-festival-parent-taxonomy.js",
+    "scripts/verify-polymythcal-featured.js",
     "scripts/verify-public-deploy-parity.js",
     "scripts/verify-register.js",
     "scripts/verify-repository-walk-policy.js",

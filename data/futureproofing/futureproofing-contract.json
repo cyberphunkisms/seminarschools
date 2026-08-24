@@ -109,9 +109,21 @@
       "status": "implemented",
       "stage": "source",
       "gate_command": ["node", "scripts/verify-external-destination-contracts.js"],
-      "verifier_paths": ["scripts/verify-external-destination-contracts.js"],
+      "verifier_paths": [
+        "scripts/verify-external-destination-contracts.js",
+        "scripts/verify-polymythcal-destination-specificity.js",
+        "scripts/verify-polymythcal-destination-browser.js",
+        "scripts/test-external-destination-contracts.js",
+        "scripts/apply-polymythcal-destination-specificity.js",
+        "scripts/update-polymythcal-destination-contract.js",
+        "scripts/lib/external-destination-contracts.js"
+      ],
       "fixture_paths": ["scripts/fixtures/futureproofing/external-destinations/invalid-destinations.json"],
-      "evidence_fields": ["dataset", "recordCount", "statuses"]
+      "source_paths": [
+        "data/external-destination-contracts.json",
+        "data/polymythcal-destination-overrides.json"
+      ],
+      "evidence_fields": ["dataset", "recordCount", "statuses", "destination_url", "destination_scope", "destination_kind", "destination_evidence"]
     },
     {
       "id": "FP-12",

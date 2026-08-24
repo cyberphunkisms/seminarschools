@@ -71,10 +71,22 @@ AUDIT49_REQUIRED=[
  'scripts/verify-audit49-aitr-resilience.mjs',
  'scripts/package_selection.py',
 ]
+DESTINATION_REQUIRED=[
+ 'data/external-destination-contracts.json',
+ 'data/polymythcal-destination-overrides.json',
+ 'scripts/lib/external-destination-contracts.js',
+ 'scripts/apply-polymythcal-destination-specificity.js',
+ 'scripts/update-polymythcal-destination-contract.js',
+ 'scripts/test-external-destination-contracts.js',
+ 'scripts/verify-external-destination-contracts.js',
+ 'scripts/verify-polymythcal-destination-specificity.js',
+ 'scripts/verify-polymythcal-destination-browser.js',
+ 'scripts/fixtures/futureproofing/external-destinations/invalid-destinations.json',
+]
 
 def main()->None:
  run_release_verification()
- required=[*AUDIT48_REQUIRED,*AUDIT49_REQUIRED]
+ required=[*AUDIT48_REQUIRED,*AUDIT49_REQUIRED,*DESTINATION_REQUIRED]
  missing=[rel for rel in required if not (ROOT/rel).is_file()]
  if missing:raise SystemExit('Missing required current-release source files: '+', '.join(missing))
  files,selection=collect_package_files(ROOT,OUTPUT,excluded_top_level={'public'})

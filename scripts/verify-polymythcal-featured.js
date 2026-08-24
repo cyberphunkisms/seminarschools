@@ -9,7 +9,12 @@ const ROOT = path.resolve(__dirname, '..');
 const EVENT_PATH = path.join(ROOT, 'polymythseminars', 'events.json');
 const FEATURED_PATH = path.join(ROOT, 'polymythseminars', 'featured.json');
 const PUBLIC_FEATURED_PATH = path.join(ROOT, 'public', 'polymythseminars', 'featured.json');
-const FIELDS = ['id', 'date', 'title', 'speaker_or_director', 'venue', 'source_url'];
+const ABOUT_PATH = path.join(ROOT, 'about', 'index.html');
+const FIELDS = [
+  'id', 'date', 'title', 'speaker_or_director', 'venue',
+  'destination_url', 'destination_status', 'destination_scope',
+  'destination_kind', 'destination_evidence',
+];
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -75,6 +80,19 @@ if (!fs.existsSync(PUBLIC_FEATURED_PATH) || !fs.readFileSync(FEATURED_PATH).equa
 }
 if (fs.statSync(FEATURED_PATH).size >= fs.statSync(EVENT_PATH).size) {
   failures.push('featured feed is not compact relative to the full event corpus');
+}
+if ((featured.events || []).some(event => Object.prototype.hasOwnProperty.call(event, 'source_url'))) {
+  failures.push('featured feed exposes raw source_url instead of the destination contract');
+}
+const aboutSource = fs.readFileSync(ABOUT_PATH, 'utf8');
+if (aboutSource.includes('e.source_url')) {
+  failures.push('About teaser still uses raw source_url in visitor-facing rendering');
+}
+if (!aboutSource.includes("var detailsUrl = '/polymythseminars/events/' + encodeURIComponent(String(e.id)) + '/';")) {
+  failures.push('About teaser title links are not built from internal event Details routes');
+}
+if (!aboutSource.includes("'<div class=\"title\"><a href=\"' + escapeHtml(detailsUrl) + '\">'")) {
+  failures.push('About teaser title CTA is not the internal Details link');
 }
 
 if (failures.length) {

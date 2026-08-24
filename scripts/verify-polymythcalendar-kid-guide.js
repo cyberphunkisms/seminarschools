@@ -6,7 +6,7 @@ const ROUTES=['polymythseminars',...Object.keys(ROUTE_CONFIG)];const failures=[]
 for(const route of ROUTES){
  const rel=`${route}/index.html`;const file=path.join(ROOT,rel);if(!fs.existsSync(file)){failures.push(`${rel}: missing file`);continue;}
  const html=fs.readFileSync(file,'utf8');
- for(const needle of ['Search the calendar','Choose any number.','Each listing has a direct link to the organizer or source website.','Open Details for the verified date, place, calendar download, and correction link.','Saved items stay on this device.','aria-describedby="quickGuideCopy"','id="quickGuideCopy"']) if(!html.includes(needle)) failures.push(`${rel}: missing ${needle}`);
+ for(const needle of ['Search the calendar','Choose any number.','Open Details first for the verified date, place, calendar download, and correction link.','When an exact external page is available, it appears as a separate action.','Saved items stay on this device.','aria-describedby="quickGuideCopy"','id="quickGuideCopy"']) if(!html.includes(needle)) failures.push(`${rel}: missing ${needle}`);
  const mode=route==='polymythseminars'?'both':ROUTE_CONFIG[route].defaultContent;
  if(mode==='both'){
   for(const needle of ['Listing type','Include events, application opportunities, or both.']) if(!html.includes(needle)) failures.push(`${rel}: missing ${needle}`);

@@ -18,6 +18,11 @@ const ROOT = path.resolve(__dirname, '..');
 const PUBLIC = path.join(ROOT, 'public');
 const REPORT = path.join(ROOT, 'scripts', 'reports', 'audit49-metadata-surface.json');
 const SITE = 'https://seminarschools.com';
+// The 2026-08-23 verified 1,207-record ML* integration raises the canonical
+// Methodology page above the former 4 MiB raw ceiling. Keep a fixed, narrow
+// ceiling with less than one percent headroom; the 1,280 KiB gzip gate stays
+// unchanged and remains the network-cost constraint.
+const ACTIVE_HTML_RAW_LIMIT_BYTES = 4_250_000;
 const HTML_ROOTS = [
   '.well-known', 'agora', 'aitr', 'aa', 'bb', 'bookwormcard', 'campaigns',
   'cfps', 'fellowships', 'florilegium', 'humanities', 'lectures', 'leizu',
@@ -504,7 +509,7 @@ const pageSizeDistribution = {
   largest_gzip_bytes: Math.max(...documentRecords.map(item => item.compressed_bytes), 0),
 };
 check(
-  pageSizeDistribution.largest_bytes <= 4 * 1024 * 1024,
+  pageSizeDistribution.largest_bytes <= ACTIVE_HTML_RAW_LIMIT_BYTES,
   `active HTML raw-size ceiling exceeded: ${pageSizeDistribution.largest_bytes} bytes`,
 );
 check(

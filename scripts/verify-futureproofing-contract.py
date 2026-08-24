@@ -67,6 +67,12 @@ def validate_contract(document: dict, *, allow_pending: bool = False) -> tuple[l
                         failures.append(f"{item_id} has unsafe {field} path: {relative}")
                     elif not (SITE_ROOT / str(relative)).is_file():
                         failures.append(f"{item_id} {field} path is missing: {relative}")
+            for relative in item.get("source_paths") or []:
+                parsed = PurePosixPath(str(relative))
+                if parsed.is_absolute() or ".." in parsed.parts:
+                    failures.append(f"{item_id} has unsafe source_paths path: {relative}")
+                elif not (SITE_ROOT / str(relative)).is_file():
+                    failures.append(f"{item_id} source_paths path is missing: {relative}")
             command = item.get("gate_command") or []
             if any(not isinstance(part, str) or not part for part in command):
                 failures.append(f"{item_id} gate command must contain non-empty strings")

@@ -27,6 +27,8 @@ const { SITEWIDE_TYPE_ZOOM_VERSION } = require('./lib/sitewide-type-zoom-version
 const { SITEWIDE_KEYBOARD_VERSION } = require('./lib/sitewide-keyboard-version');
 const {
   assertDestination,
+  destinationLabel,
+  polymythcalDestination,
   teacherResourceDestination,
 } = require('./lib/external-destination-contracts');
 const { assertCurrentDatasetVersion } = require('./lib/versioned-data-migrations');
@@ -291,6 +293,7 @@ const RESOURCE_CSS = RESOURCE_CSS_BASE + `
 .catalog-page h1,.catalog-page h2,.catalog-page h3,.resource-row h2,.resource-row h3{overflow-wrap:normal;word-break:normal;hyphens:none}
 .resource-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr))}
 .resource-meta{max-width:100%;overflow-wrap:anywhere;word-break:normal}
+.resource-row .current-status{color:var(--ink);background:#edf1ea;border-left:4px solid var(--accent);padding:.7rem .8rem;margin:.65rem 0}
 .resource-source-link{color:inherit;text-decoration-thickness:1px;text-underline-offset:.18em}
 .resource-source-link:hover,.resource-source-link:focus-visible{color:var(--accent)}
 .resource-actions{display:flex;flex-wrap:wrap;align-items:stretch;gap:.55rem;margin-top:.85rem}
@@ -795,13 +798,14 @@ function generateEventPages(events) {
     const dateLabel=event.end_date ? `${humanDate(event.date)} to ${humanDate(event.end_date)}` : humanDate(event.date);
     const baseDescription=event.description || `${event.title}${event.venue ? ` at ${event.venue}` : ''}.`;
     const desc=cleanSentence(`${event.title}. ${dateLabel}${event.venue ? ` at ${event.venue}.` : ''} ${baseDescription}`, 300);
-    const source = event.source_url ? `<p><a class="button" href="${attr(event.source_url)}" target="_blank" rel="noopener noreferrer">Open the event source</a></p>` : '';
-    const status = eventIndexable(event) ? '' : `<div class="callout"><strong>Calendar status.</strong> This listing remains visible in the calendar, and the source link is provided for final confirmation before attending.</div>`;
+    const destination = assertDestination(polymythcalDestination(event), `Polymythcal event ${event.id}`);
+    const external = destination.href ? `<p><a class="button" href="${attr(destination.href)}" target="_blank" rel="noopener noreferrer">${esc(destinationLabel(destination, 'en'))}</a></p>` : '';
+    const status = eventIndexable(event) ? '' : `<div class="callout"><strong>Calendar status.</strong> This listing remains visible in the calendar. Confirm pending details before attending.</div>`;
     const fields=[['Date',dateLabel],['Format',event.type || 'Event'],['Venue',event.venue || 'Venue to be confirmed'],['Speaker or artist',event.speaker_or_director || 'See source'],['Audience',event.age_band || 'Open / see source']].map(([k,v])=>`<dt>${k}</dt><dd>${esc(v)}</dd>`).join('');
-    const body=`<p class="breadcrumbs"><a href="/">Seminar Schools</a> / <a href="/polymythseminars/">Polymythcal</a> / ${esc(event.title)}</p><p class="eyebrow">Polymythcal · regional public events</p><h1>${esc(event.title)}</h1><div class="definition"><dl>${fields}</dl></div>${event.description ? `<h2>About this listing</h2><p>${esc(event.description)}</p>` : ''}${status}${source}<p><a class="button secondary" href="/polymythseminars/">Back to Polymythcal</a></p>`;
+    const body=`<p class="breadcrumbs"><a href="/">Seminar Schools</a> / <a href="/polymythseminars/">Polymythcal</a> / ${esc(event.title)}</p><p class="eyebrow">Polymythcal · regional public events</p><h1>${esc(event.title)}</h1><div class="definition"><dl>${fields}</dl></div>${event.description ? `<h2>About this listing</h2><p>${esc(event.description)}</p>` : ''}${status}${external}<p><a class="button secondary" href="/polymythseminars/">Back to Polymythcal</a></p>`;
     const schema=[];
     if (eventIndexable(event)) {
-      const eventSchema={'@context':'https://schema.org','@type':'Event','@id':url+'#event',name:event.title,startDate:toIso(event.date),endDate:toIso(event.end_date)||undefined,description:desc,url,location:event.venue?{'@type':'Place',name:event.venue}:undefined,performer:event.speaker_or_director?{'@type':'Person',name:event.speaker_or_director}:undefined,eventAttendanceMode:'https://schema.org/OfflineEventAttendanceMode',eventStatus:'https://schema.org/EventScheduled'};
+      const eventSchema={'@context':'https://schema.org','@type':'Event','@id':url+'#event',name:event.title,startDate:toIso(event.date),endDate:toIso(event.end_date)||undefined,description:desc,url,sameAs:destination.href||undefined,location:event.venue?{'@type':'Place',name:event.venue}:undefined,performer:event.speaker_or_director?{'@type':'Person',name:event.speaker_or_director}:undefined,eventAttendanceMode:'https://schema.org/OfflineEventAttendanceMode',eventStatus:'https://schema.org/EventScheduled'};
       schema.push(Object.fromEntries(Object.entries(eventSchema).filter(([,v])=>v!==undefined&&v!=='')));
       indexable.push({route,url});
     }
@@ -877,7 +881,8 @@ function generateMethodologyPages(seed) {
         .map(alias=>`<span id="${attr(alias)}" class="legacy-anchor-alias" aria-hidden="true"></span>`)
         .join('');
       const tags=entry.tg ? `<div class="resource-meta">${esc(entry.tg)}</div>` : '';
-      return `${aliasMarkup}<article class="resource-row" id="${attr(anchor)}"><h2>${esc(entry.t || 'Untitled entry')}</h2><p>${linkExternalUrls(entry.b || '')}</p>${entry.x ? `<p>${linkExternalUrls(entry.x)}</p>`:''}${tags}<p><a href="#${attr(anchor)}">Permanent link</a></p></article>`;
+      const currentStatus=entry.xc ? `<p class="current-status">${linkExternalUrls(entry.xc)}</p>` : '';
+      return `${aliasMarkup}<article class="resource-row" id="${attr(anchor)}"><h2>${esc(entry.t || 'Untitled entry')}</h2>${currentStatus}<p>${linkExternalUrls(entry.b || '')}</p>${entry.x ? `<p>${linkExternalUrls(entry.x)}</p>`:''}${tags}<p><a href="#${attr(anchor)}">Permanent link</a></p></article>`;
     }).join('\n');
     const desc=`${entries.length} polymyth framework entries in the ${label} section, presented as a static HTML reference edition.`;
     const crumbs=[{name:'Seminar Schools',url:SITE+'/'},{name:'Polymyth Methodologylist',url:SITE+'/polymyth/methodologylist/'},{name:label,url}];

@@ -5705,16 +5705,40 @@
         "semantic_gate": "node scripts/run-python.js scripts/validate-polymythcal.py"
       },
       {
+        "path": "scripts/verify-critical.js",
+        "before_sha256": "52a998ad0e27efcdaca4efce316b115bf8f170b2a328233de66cd6a7ba8920e7",
+        "before_bytes": 3395,
+        "after_sha256": "850c127c71bad564b617913be4a7e118d650a83a73632e7029fd7588a6c25928",
+        "after_bytes": 3708,
+        "approval": "approved_by_successor_release_policy",
+        "decision_id": "FP-02-2026-08-15-471",
+        "classification": "polymythcal_destination_contract_regression",
+        "reason": "The critical deploy gate now binds calendar and home-page links to the reviewed destination contract instead of raw source URLs.",
+        "semantic_gate": "node scripts/verify-critical.js"
+      },
+      {
         "path": "scripts/verify-festival-parent-taxonomy.js",
         "before_sha256": "5c5b09bda936caf371e27a459dc0b0322f825ad6ec04ae0555e6eb3c469518a6",
         "before_bytes": 1131,
         "after_sha256": "8e97accdbe716fe18201ec197f2a72446fa25fa63af2a15b51b1f0c3853766f0",
         "after_bytes": 11320,
         "approval": "approved_by_successor_release_policy",
-        "decision_id": "FP-02-2026-08-15-471",
+        "decision_id": "FP-02-2026-08-15-472",
         "classification": "festival_parent_taxonomy_regression_contract",
         "reason": "The successor release verifies corrected canonical festival parent taxonomy without reintroducing invalid parent URLs.",
         "semantic_gate": "node scripts/verify-festival-parent-taxonomy.js"
+      },
+      {
+        "path": "scripts/verify-polymythcal-featured.js",
+        "before_sha256": "2bf0af21f5eb2d110b8d19a8c368280c52a788bb0c2829be658e7b0aaaba1dfc",
+        "before_bytes": 3453,
+        "after_sha256": "37f6c80e52ec03fd53324a5935f9af58e05f1bd19a8f85fc9c61d2df91367dda",
+        "after_bytes": 4394,
+        "approval": "approved_by_successor_release_policy",
+        "decision_id": "FP-02-2026-08-15-473",
+        "classification": "polymythcal_featured_destination_contract_regression",
+        "reason": "The featured-feed gate now preserves exact destination metadata and rejects raw source URLs across compact data and the About teaser.",
+        "semantic_gate": "node scripts/verify-polymythcal-featured.js"
       },
       {
         "path": "scripts/verify-public-deploy-parity.js",
@@ -5723,7 +5747,7 @@
         "after_sha256": "ea3bbfb517e8626292bb0599d6f8f98cc3b1a33f126c5df5b34da6e3cbf403f3",
         "after_bytes": 5595,
         "approval": "approved_by_successor_release_policy",
-        "decision_id": "FP-02-2026-08-15-472",
+        "decision_id": "FP-02-2026-08-15-474",
         "classification": "transient_sync_public_parity_hardening",
         "reason": "The public parity gate applies the established repository-walk policy so transient .rsync-tmp and .rsync-partial directories cannot be mistaken for deploy files during shared-workspace reconciliation.",
         "semantic_gate": "node scripts/verify-public-deploy-parity.js"
@@ -5735,7 +5759,7 @@
         "after_sha256": "ad52043e9aec6d7f12b440bd355c4ab6e45e64c0f285f8631237143140ac8be7",
         "after_bytes": 6654,
         "approval": "approved_by_successor_release_policy",
-        "decision_id": "FP-02-2026-08-15-473",
+        "decision_id": "FP-02-2026-08-15-475",
         "classification": "register_route_shell_regression_contract",
         "reason": "The successor release verifies the corrected shared register-route shell and exact registration-link behavior.",
         "semantic_gate": "node scripts/verify-register.js"
@@ -5747,17 +5771,17 @@
         "after_sha256": "0cd9f04dace153641be955b76b3054b5843ebb82edfe521c0b9c9db3ddadd0ad",
         "after_bytes": 4642,
         "approval": "approved_by_successor_release_policy",
-        "decision_id": "FP-02-2026-08-15-474",
+        "decision_id": "FP-02-2026-08-15-476",
         "classification": "repository_walker_regression_coverage",
         "reason": "The repository-walk contract now requires the public parity, asset-report, and metadata walkers to share the existing transient synchronization-directory exclusion.",
         "semantic_gate": "node scripts/verify-repository-walk-policy.js"
       }
     ],
-    "retained_previous_paths_current_content_policy_sha256": "5473842ee9d4e0c4831a667fb3e5523f22e852689be26150c9ed8e75d3129af5",
-    "modified_count": 8453,
-    "modified_paths_sha256": "55a4ce56719baf67d317a1e1abef2adc574c703c9cbd4dddb3163d8b63016644",
+    "retained_previous_paths_current_content_policy_sha256": "002d4851552db2bca087056c284acb040c9a7ffda23da6f09c954b21f22d2932",
+    "modified_count": 8455,
+    "modified_paths_sha256": "f1f976d87f20b2d4b1cbe6a94ad82d36a1f2d3df9ea734838137c1bd90a6064a",
     "content_digest_scope": "all modified Audit 52 baseline files are content-hashed except the two exact self-updating generated evidence reports, which contribute versioned policy tokens",
-    "raw_content_hashed_count": 8451,
+    "raw_content_hashed_count": 8453,
     "generated_evidence_content_exclusion_count": 2,
     "generated_evidence_content_exclusions": [
       {
@@ -5777,7 +5801,7 @@
         "reason": "The runner can write its final passing report only after FP-02 has run; its live byte hash is therefore self-referential."
       }
     ],
-    "modified_content_policy_sha256": "f48f3ddd92b8e72975d73f6457d38123206b1569508a1493582ee4c99492285f",
+    "modified_content_policy_sha256": "2877aa0d686f5db2b5f07de9991850bd83c5a11c742a6bf2c59f7d2410e8fece",
     "evidence": [
       "RELEASE_MANIFEST.json",
       "scripts/reports/audit49-build-packaging-efficiency.json",

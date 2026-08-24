@@ -80,6 +80,7 @@ const fullBuildPreparation = [
 const reusedBuildPreparation = [
   'node scripts/verify-public-deploy-parity.js',
   'node scripts/verify-release-asset-identity.js',
+  'node scripts/verify-polymythcal-destination-specificity.js',
   'node scripts/verify-front-facing-boundary.js',
   'node scripts/verify-visible-geometry.js',
   'node scripts/verify-meaningful-geometry.js',
@@ -128,6 +129,7 @@ const sequential = [
   'node scripts/verify-teacherresources-state-layout-browser.js',
   'node scripts/verify-home-map-browser.js',
   'node scripts/verify-polymythcal-sets13-15-browser.js',
+  'node scripts/verify-polymythcal-destination-browser.js',
   'node scripts/verify-visible-geometry-browser.mjs',
   'node scripts/verify-audit48-assistive-technology.js',
   'node scripts/verify-audit48-browser-program.js',
