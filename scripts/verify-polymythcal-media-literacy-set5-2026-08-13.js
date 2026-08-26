@@ -81,9 +81,9 @@ const cids=new Set(consolidated.map(e=>e.id)),pids=new Set(publicEvents.map(e=>e
 for(const e of batch){assert(cids.has(e.id),`${e.id}: absent from consolidated data`);assert(pids.has(e.id),`${e.id}: absent from public data`)}
 assert(consolidated.length===publicEvents.length,'Canonical/public count mismatch');
 for(const f of ['media_literacy_subfields','subjects','topics','research_set','research_set_cross_tags','calendar_stage','series_role']) assert(schema.properties?.[f],`Schema missing ${f}`);
-const ui=readText('polymythseminars/index.html'),revamp=readText('js/polymythcal-revamp.js');
-assert(ui.includes('topics:media-literacy')&&ui.includes('value="media-literacy"'),'UI lacks Media Literacy filter');
-for(const n of ['topics.push("media-literacy")','event.media_literacy_subfields','event.research_set','event.subjects']) assert(revamp.includes(n),`Classifier/search missing ${n}`);
+const taxonomy=readJson('polymythseminars/browse.json').taxonomy,revamp=readText('scripts/lib/polymythcal-discovery-model.js');
+assert(taxonomy?.axes?.topics?.values?.['media-literacy']?.en&&taxonomy?.axes?.topics?.values?.['media-literacy']?.fr,'Bilingual Research taxonomy lacks Media Literacy');
+for(const n of ['media-literacy','subjects','entry_family']) assert(revamp.includes(n),`Discovery classifier/search missing ${n}`);
 const clRows=readText('data/website-cl.jsonl').trim().split(/\n+/).map(JSON.parse),cl=new Map(clRows.map(r=>[r.id,r]));
 for(let n=212;n<=219;n++){const id=`CL-WEB-${n}`;assert(cl.get(id)?.status==='complete',`Component List missing/incomplete ${id}`)}
 for(const rel of ['WEBSITE_CL_2026-07-19.md','docs/WEBSITE_CL_2026-07-19.md']){const t=readText(rel);assert(t.includes('Completed in Polymythcal Set 5 — Media Literacy'),`${rel}: missing Set 5 section`);assert(t.includes('CL-WEB-219'),`${rel}: missing final Set 5 component`)}
@@ -94,3 +94,4 @@ assert(!/node scripts\/upsert-manual-calendar-events\.js\s+--/.test(build),'buil
 assert(pkg.scripts['import:polymythcal-media-literacy-set5-2026-08-13'],'Missing Set 5 import alias');
 assert(pkg.scripts['verify:polymythcal-media-literacy-set5-2026-08-13'],'Missing Set 5 verify alias');
 console.log(JSON.stringify({manual_records:manual.length,consolidated_records:consolidated.length,set5_records:batch.length,confirmed:batch.filter(e=>e.confirmation_status==='confirmed').length,qualified_watches:batch.filter(e=>e.confirmation_status==='unconfirmed').length,sources:sources.length,change_list:'CL-WEB-212 through CL-WEB-219 complete'},null,2));
+

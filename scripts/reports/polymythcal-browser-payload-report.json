@@ -1,17 +1,108 @@
 {
-  "generated_at": "2026-07-21T12:00:00-04:00",
-  "schema": "polymythcal-browser-payload-v1",
-  "canonical_path": "polymythseminars/events.json",
+  "generated_at": "2026-08-26T16:30:00.000Z",
+  "schema": "polymythcal-discovery-v2",
+  "canonical_path": "data/polymyth-seminar-events.json",
   "browser_path": "polymythseminars/browse.json",
-  "record_count": 2088,
-  "canonical_sha256": "4e9bf67ad53b47c1bcad4144f0ec86717f0713266faeb784ab8c716df2f39a66",
-  "browser_sha256": "561cfe79c561861b219b74c8989aae69a5af4ec8bf7237d1fde316b1ec1fdafe",
-  "canonical_raw_bytes": 8526314,
-  "browser_raw_bytes": 4534825,
-  "raw_reduction_percent": 46.81,
-  "canonical_gzip_bytes": 782543,
-  "browser_gzip_bytes": 509940,
-  "gzip_reduction_percent": 34.84,
+  "watchlist_path": "polymythseminars/watchlist.json",
+  "research_path": "polymythseminars/research.json",
+  "publication_surfaces_path": "data/polymythcal-publication-surfaces.json",
+  "canonical_count": 2088,
+  "chronology_count": 1954,
+  "watchlist_count": 134,
+  "explicit_monitoring_marker_count": 134,
+  "series_parent_count": 137,
+  "series_occurrence_count": 560,
+  "canonical_sha256": "c52de1fe55bd1c1a4e22d1bce1fd71beebf0cc2687dda436670ec98451bafd7f",
+  "browser_sha256": "30e73c6fcd802f5b57c588fd8d6cfbffde1dc4a190a31a1a2b10cfc80eb71d7e",
+  "watchlist_sha256": "654c13cd461801375625052ab5e92cbd5139e3fb28c3834b5d0aaa699e159b8d",
+  "research_sha256": "0a6d897141f8f5ad1cbdab79987bcec357b3d70527df244fdd7541a84fd51265",
+  "publication_surfaces_sha256": "e32c8c125b42b340d0df0681980040ee2fee3cc5438b16c9bd8c118984306095",
+  "canonical_raw_bytes": 8526306,
+  "browser_raw_bytes": 3068615,
+  "watchlist_raw_bytes": 220940,
+  "research_raw_bytes": 2231622,
+  "canonical_gzip_bytes": 782541,
+  "browser_gzip_bytes": 305930,
+  "watchlist_gzip_bytes": 19869,
+  "research_gzip_bytes": 208626,
+  "freshness": {
+    "built_at": "2026-08-26T16:30:00.000Z",
+    "content_updated_at": "2026-08-15T22:00:00.000Z",
+    "newest_source_check_at": "2026-08-15T22:00:00.000Z",
+    "schema_version": "2",
+    "content_hash": "d256a97489137e8fe54abaa0c0e005e86cf4fe45f1cf58242c480405be0b09a3"
+  },
+  "raw_reduction_percent": 64.01,
+  "gzip_reduction_percent": 60.91,
   "minimum_gzip_reduction_percent": 25,
-  "full_record_contract_preserved": true
+  "public_projection_allowlisted": true,
+  "complete_editorial_record_public": false,
+  "fielded_unicode_search": true,
+  "persisted_search_groups": [
+    "aliases",
+    "topics",
+    "format"
+  ],
+  "derived_search_groups": [
+    "title",
+    "description",
+    "aliases",
+    "people",
+    "organizer",
+    "place",
+    "topics",
+    "format"
+  ],
+  "publication_partition_complete": true,
+  "typed_action_candidate_fields": [
+    {
+      "field": "registration_url",
+      "kind": "registration"
+    },
+    {
+      "field": "application_url",
+      "kind": "application"
+    },
+    {
+      "field": "submission_url",
+      "kind": "submission"
+    },
+    {
+      "field": "rules_url",
+      "kind": "rules"
+    },
+    {
+      "field": "ticket_url",
+      "kind": "tickets"
+    },
+    {
+      "field": "tickets_url",
+      "kind": "tickets"
+    },
+    {
+      "field": "stream_url",
+      "kind": "stream"
+    },
+    {
+      "field": "livestream_url",
+      "kind": "stream"
+    },
+    {
+      "field": "watch_url",
+      "kind": "stream"
+    }
+  ],
+  "unavailable_with_safe_candidate_count": 108,
+  "typed_action_recovered_unavailable_record_count": 108,
+  "typed_action_recovered_unavailable_by_kind": {
+    "registration": 62,
+    "application": 16,
+    "submission": 30,
+    "rules": 0,
+    "tickets": 0,
+    "stream": 0
+  },
+  "typed_action_total_record_count": 309,
+  "typed_action_total_action_count": 310,
+  "typed_action_recovery_complete": true
 }

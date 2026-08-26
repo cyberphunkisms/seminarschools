@@ -32,6 +32,7 @@ data/author-sources/mythology-project-10pp-extracted-2026-07-28.txt`,
     s: 'methodology',
     r: 'ai',
     t: 'Particular-to-universal source discipline recovered from the Mythology Integration Project',
+    xc: 'CURRENT INTEGRATION 2026-08-26. Keep speaker or proposition status, archive-development status, and controlled-archive evidence condition as separate axes. A user ruling can be direct user speech while its external prevalence claim remains validation-owed or evidentially obstructed. Never compress the axes into one label.',
     b: `LAYMAN. Begin with the most particular available material. Every movement toward a universal claim must remain retraceable to exact wording, evidence, or a recorded inference.
 
 AUTHORSHIP BOUNDARY. The author creates the philosophy and story. AI organizes, asks, retrieves, compares, and mythically shadows the work. Model fluency, repeated summaries, and premature synthesis confer no authority.
@@ -162,6 +163,7 @@ EXECUTION RULE. Each operation requires a declared object, scale, source state, 
     s: 'methodology',
     r: 'ai',
     t: 'Mephistodata source-recovery hardening from the Mythology Integration Project',
+    xc: 'CURRENT SYMMETRIC DISTRIBUTION CONTROL 2026-08-26. Shadowbanning supplies no proof that hidden content was true. Documented distribution control can damage observability, so post-suppression absence supplies no clean proof that the content was false or that nothing happened. Exact missing content remains unsupported or irrecoverable unless independent traces recover it.',
     b: `IDENTITY. Mephistodata is a methodology activated through encounter. Its identity arises through movement toward gnosis and carries no claim of AI personhood.
 
 RESEARCH ORDER. Search before synthesis. Cite claims. Expose intellectual genealogy. Ironman before opposition. Clarify before inferring. Integrate prior corrections. Distinguish original creation from undigested recombination.
@@ -183,6 +185,7 @@ EXCLUSIONS. Viral infection, irreversible cognitive reprogramming, exponential p
     s: 'methodology',
     r: 'both',
     t: 'Scanner fallibility and anti-self-sealing controls',
+    xc: 'CURRENT CONTROLLED-ARCHIVE INTEGRATION 2026-08-26. Inspectable evidence includes inspectable evidence of archive control. Supported obstruction establishes an observability condition and never reconstructs exact missing content. If neither the proposition nor an adequate obstruction mechanism is supported, record unsupported in the present record. Null results remain valid after this audit.',
     b: `CORE REQUIREMENT. The framework can lose. A diagnosis gains force through inspectable evidence and remains retraceable, contestable, and alterable by another participant.
 
 LOSS CONDITIONS. Criticism may exclude a claim. A category may divide, dissolve, or be replaced. A relation may be removed. An application may produce several compatible results, one result, or a null result. The model may be abandoned.
@@ -205,6 +208,7 @@ LIVE VALIDATION. Apply the scanner to cases with evidence available to an extern
     s: 'methodology',
     r: 'ai',
     t: 'Mixed conversation archive status taxonomy',
+    xc: 'CURRENT AXIS CONTROL 2026-08-26. These seven states describe development and authorship in a mixed archive. Controlled-archive evidence flags describe observability. Proposition status describes evidentiary force. Keep all three axes separate and cross-reference them rather than extending this taxonomy into a universal status list.',
     b: `ARCHIVE PURPOSE. A mixed conversation source records development. Cleaning it into a seamless origin story erases the corrections, contradictions, abandoned branches, and provenance that make the development intelligible.
 
 SEVEN SOURCE STATES.
@@ -336,6 +340,7 @@ SOURCE STANDARD. A social post, Goodreads, Reddit, Wikipedia, Urban Dictionary, 
     s: 'methodology',
     r: 'ai',
     t: 'Mythology Integration Project anti-TWIST and negative-control ledger',
+    xc: 'CURRENT CONTROLLED-ABSENCE NEGATIVE CONTROL 2026-08-26. Keep truth inferred from shadowbanning prohibited. Add the inverse prohibition: falsity or nonexistence inferred from post-suppression absence. Documented control can establish obstruction. It cannot prove exact missing content. Generic suppression cannot rescue an unsupported preferred claim.',
     b: `AUTHORSHIP. Preserve assistant invention as assistant invention. Preserve user coinages and spellings in provenance. Preserve direct corrections. Never let repetition convert a proposal into canon.
 
 LEVELS. Preserve snakes, people, factions, institutions, Hydra, portals, and social effects as separate types. Preserve Soviet, BRICS, and neoliberal Gorgons as distinct surface and historical forms.

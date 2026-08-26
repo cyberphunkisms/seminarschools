@@ -8,6 +8,7 @@ const release=JSON.parse(fs.readFileSync(path.join(ROOT,'RELEASE_MANIFEST.json')
 const failures=[];
 const publicPath=path.join(ROOT,'public');
 if(!fs.existsSync(publicPath)) failures.push('missing generated public deploy surface');
+if(fs.existsSync(path.join(publicPath,'polymythseminars','events.json'))) failures.push('private polymythseminars/events.json is present in the public deploy surface');
 if(!fs.existsSync(reportPath)) failures.push('missing scripts/reports/asset-weight-report.json');
 if(!fs.existsSync(budgetPath)) failures.push('missing scripts/reports/asset-weight-budget.json');
 let publicFiles=[];let totalBytes=0;let knownCount=0;
@@ -37,6 +38,20 @@ if(fs.existsSync(budgetPath)){
   if(totalBytes>Number(budget.totalPublicCeilingBytes||0)) failures.push(`public deploy is ${totalBytes} bytes; ceiling ${budget.totalPublicCeilingBytes}`);
   const known=new Map((budget.knownLargeAssets||[]).map(row=>[row.path,row]));
   if(known.size!==(budget.knownLargeAssets||[]).length) failures.push('asset budget contains duplicate known-large paths');
+  const currentContractCeilings=new Map([
+    ['polymyth/methodologylist.txt',4075000],
+    ['js/polymythcal-revamp.js',134000],
+    ['js/polymythcal-discovery.js',90000],
+    ['css/polymythcal-discovery.css',26000],
+    ['polymythseminars/browse.json',2600000],
+    ['polymythseminars/watchlist.json',210000],
+  ]);
+  for(const [rel,ceiling] of currentContractCeilings){
+    const row=known.get(rel); const file=path.join(publicPath,rel);
+    if(!row){ failures.push(`${rel} lacks its narrow current-release budget`); continue; }
+    if(row.ceilingBytes!==ceiling) failures.push(`${rel} ceiling must remain the current narrow ${ceiling} bytes`);
+    if(fs.existsSync(file)&&row.baselineBytes!==fs.statSync(file).size) failures.push(`${rel} baseline is stale: ${row.baselineBytes} != ${fs.statSync(file).size}`);
+  }
   for(const [rel,row] of known){
     const file=path.join(publicPath,rel);
     if(!fs.existsSync(file)){ failures.push(`${rel} known-large asset is missing`); continue; }
@@ -55,3 +70,4 @@ if(fs.existsSync(budgetPath)){
 }
 if(failures.length){ console.error('ASSET WEIGHT CHECK FAILED'); failures.forEach(f=>console.error(' - '+f)); process.exit(1); }
 console.log(`ASSET WEIGHT CHECK PASSED — ${publicFiles.length} deploy files / ${totalBytes} bytes; ${knownCount} intentional large assets have narrow ceilings and all other files meet type budgets.`);
+

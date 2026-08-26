@@ -14,7 +14,7 @@ const manual=list(manualDoc), byId=new Map(manual.filter(e=>e.id).map(e=>[e.id,e
 const batch=manual.filter(e=>e._src===SRC);
 const consolidated=list(readJson('data/polymyth-seminar-events.json'));
 const publicEvents=list(readJson('polymythseminars/events.json'));
-const browserEvents=list(readJson('polymythseminars/browse.json'));
+const browserEvents=[...list(readJson('polymythseminars/browse.json')),...(readJson('polymythseminars/watchlist.json').items||[])];
 const cids=new Set(consolidated.map(e=>e.id)), pids=new Set(publicEvents.map(e=>e.id));
 const consolidatedById=new Map(consolidated.map(e=>[e.id,e]));
 const publicById=new Map(publicEvents.map(e=>[e.id,e]));
@@ -23,6 +23,7 @@ const sourcesDoc=readJson('scripts/sources.json');
 const sourceRows=Array.isArray(sourcesDoc)?sourcesDoc:(sourcesDoc.sources||[]), sourceIds=new Set(sourceRows.map(s=>String(s.id||'')));
 const schema=readJson('data/polymythcal-event-schema-v2.json');
 const schemaFields=['civic_legal_labour_formats','civic_domain','authority_level','public_role','participation_route','public_input_status','legal_access_status','collective_action_type','election_stage','access_restrictions','webcast_status','publication_restriction','public_access_status','registration_required','event_format','alternate_dates','civic_evidence','source_inconsistency','set12_classified_at'];
+const projectedCivicFormats=event=>[...new Set((event.civic_legal_labour_formats||[]).map(value=>value==='union-education'?'union-conference':value))].sort();
 const ledger=readJson('data/polymythcal-research-set-12-civic-political-legal-labour-2026-08-14.json');
 const pkg=readJson('package.json');
 const meta=manualDoc.polymythcal_civic_political_legal_labour_set12_update_2026_08_14;
@@ -59,10 +60,10 @@ for(const e of batch){
   if(!Object.hasOwn(e,field))continue;
   assert(JSON.stringify(canonical?.[field])===JSON.stringify(e[field]),`${e.id}: canonical ${field} differs from manual`);
   assert(JSON.stringify(published?.[field])===JSON.stringify(e[field]),`${e.id}: public ${field} differs from manual`);
-  if(e[field]!==null&&e[field]!==''&&(!Array.isArray(e[field])||e[field].length)){
-   assert(JSON.stringify(compact?.[field])===JSON.stringify(e[field]),`${e.id}: browse ${field} differs from manual`);
-  }
+  if(compact) assert(!Object.hasOwn(compact,field),`${e.id}: private ${field} leaked into a public discovery projection`);
  }
+ assert(compact,`${e.id}: missing from the chronology/watchlist discovery partition`);
+ assert(JSON.stringify([...(compact.facets?.civicFormats||[])].sort())===JSON.stringify(projectedCivicFormats(e)),`${e.id}: safe Civic Research facet differs from the controlled manual projection`);
 }
 const parents=batch.filter(e=>e.series_role==='parent'), children=batch.filter(e=>e.series_role==='child');
 assert(parents.length===14&&children.length===107,'Set 12 series shape drifted');
@@ -110,10 +111,10 @@ for(const id of ledger.cross_tagged_existing_ids){
   if(!Object.hasOwn(e,field))continue;
   assert(JSON.stringify(canonical?.[field])===JSON.stringify(e[field]),`${id}: cross-tag canonical ${field} differs from manual`);
   assert(JSON.stringify(published?.[field])===JSON.stringify(e[field]),`${id}: cross-tag public ${field} differs from manual`);
-  if(e[field]!==null&&e[field]!==''&&(!Array.isArray(e[field])||e[field].length)){
-   assert(JSON.stringify(compact?.[field])===JSON.stringify(e[field]),`${id}: cross-tag browse ${field} differs from manual`);
-  }
+  if(compact) assert(!Object.hasOwn(compact,field),`${id}: cross-tag private ${field} leaked into a public discovery projection`);
  }
+ assert(compact,`${id}: cross-tag is missing from the discovery partition`);
+ assert(JSON.stringify([...(compact.facets?.civicFormats||[])].sort())===JSON.stringify(projectedCivicFormats(e)),`${id}: cross-tag safe Civic facet differs from the controlled manual projection`);
 }
 const medusa=byId.get('soulpepper-medusa-talkback-2026-07-08');
 assert(medusa&&medusa.talkback_status==='confirmed'&&medusa.director_attendance_status==='unconfirmed','Medusa regression failed');
@@ -125,12 +126,12 @@ assert(
 
 for(const f of schemaFields) assert(schema.properties?.[f],`Schema missing ${f}`);
 const allUiFormats=['election-voting','candidate-campaign','council-board-committee','public-hearing-deputation','public-consultation','legislature-parliamentary-sitting','court-tribunal-hearing','inquest-public-inquiry','union-conference','rally-march-counterprotest','picket-strike-labour-action','civic-deadline-compliance'];
-const ui=readText('polymythseminars/index.html'), uiFr=readText('polymythseminars/fr/index.html'), revamp=readText('js/polymythcal-revamp.js'), detail=readText('scripts/build-polymythcal-audit13.py'), browser=readText('scripts/build-polymythcal-browser-payload.js');
-for(const value of allUiFormats){assert(ui.includes(`value="${value}"`),`UI lacks Civic facet ${value}`);assert(uiFr.includes(`value="${value}"`),`French UI lacks Civic facet ${value}`)}
-for(const marker of ['civicFormats','classifyCivicFormats','event._civicFormats','civic_legal_labour_formats','civic-political-legal-labour']) assert(revamp.includes(marker),`Civic runtime missing ${marker}`);
-assert(revamp.includes('event.entry_family === "civic-political-legal-labour" && event.record_kind === "event"'),'Civic deadline event lock missing');
+const taxonomy=readJson('polymythseminars/browse.json').taxonomy, revamp=readText('scripts/lib/polymythcal-discovery-model.js'), detail=readText('scripts/build-polymythcal-audit13.py'), browser=readText('scripts/build-polymythcal-browser-payload.js');
+for(const value of allUiFormats){const label=taxonomy?.axes?.civicFormats?.values?.[value];assert(label?.en,`English Research taxonomy lacks Civic facet ${value}`);assert(label?.fr,`French Research taxonomy lacks Civic facet ${value}`)}
+for(const marker of ['civicFormats','civic_legal_labour_formats','civic-political-legal-labour','allowedDeclared']) assert(revamp.includes(marker),`Civic discovery model missing ${marker}`);
+assert(revamp.includes("family === 'civic-political-legal-labour'")&&revamp.includes("event.record_kind === 'civic-action'"),'Civic event-family classification lock missing');
 for(const marker of ['Civic, legal, and labour formats','Participation route','Legal access','Publication restriction','Civic evidence']) assert(detail.includes(marker),`Civic detail surface missing ${marker}`);
-for(const marker of ['civic_legal_labour_formats','public_input_status','publication_restriction','civic_evidence']) assert(browser.includes(marker),`Browser payload missing ${marker}`);
+for(const marker of ['PUBLIC_EVENT_KEYS','PERSISTED_SEARCH_GROUPS','buildDiscoveryPayloads']) assert(browser.includes(marker),`Browser payload lacks the safe projection contract marker ${marker}`);
 
 const build=String(pkg.scripts?.['build:locked']||'');
 for(const marker of ['import-polymythcal-civic-political-legal-labour-set12-2026-08-14.py','normalize-polymythcal-manual-identities.py','normalize-polymythcal-evidence-model.py','node scripts/upsert-manual-calendar-events.js','verify-polymythcal-civic-political-legal-labour-set12-2026-08-14.js']) assert(build.includes(marker),`build:locked missing ${marker}`);
@@ -144,3 +145,4 @@ for(let n=268;n<=275;n++) assert(cl.get(`CL-WEB-${n}`)?.status==='complete',`CL-
 assert(/142 Set 12 records/.test(cl.get('CL-WEB-274')?.decision||''),'CL-WEB-274 record count drifted');
 for(const rel of ['WEBSITE_CL_2026-07-19.md','docs/WEBSITE_CL_2026-07-19.md']){const text=readText(rel);assert(text.includes('CL-WEB-275'),`${rel}: Set 12 section incomplete`)}
 console.log(JSON.stringify({manual_records:manual.length,consolidated_records:consolidated.length,set12_records:batch.length,parent_records:parents.length,child_occurrences:children.length,confirmed_records:meta.confirmed_records,qualified_records:qualified.length,court_hearings:meta.court_hearings,election_records:meta.election_records,sources:sourceRows.length,change_list:'CL-WEB-268 through CL-WEB-275 complete'},null,2));
+

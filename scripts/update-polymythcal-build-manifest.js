@@ -11,20 +11,37 @@ const sources=JSON.parse(read('scripts/sources.json'));const sourceCount=Array.i
 const hash=r=>crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,r))).digest('hex');
 const writeIfChanged=(file,out)=>{if(!fs.existsSync(file)||fs.readFileSync(file,'utf8')!==out)fs.writeFileSync(file,out);if(fs.statSync(file).mtime<BUILD_MTIME)fs.utimesSync(file,BUILD_MTIME,BUILD_MTIME);};
 const browserPath='polymythseminars/browse.json';const browserBytes=fs.readFileSync(path.join(ROOT,browserPath));
+const watchlistPath='polymythseminars/watchlist.json';const watchlistBytes=fs.readFileSync(path.join(ROOT,watchlistPath));
+const researchPath='polymythseminars/research.json';const researchBytes=fs.readFileSync(path.join(ROOT,researchPath));
+const browseDoc=JSON.parse(browserBytes);const watchlistDoc=JSON.parse(watchlistBytes);const researchDoc=JSON.parse(researchBytes);
 const today=resolveSiteBuildDate({root:ROOT});const horizonText=dateOneYearAfter(today);
 const current=events.filter(e=>String(e.end_date||e.date||'').slice(0,10)>=today&&String(e.date||'').slice(0,10)<=horizonText).length;
 const doc={
   build_id:releaseId.replace(/^\d{4}-\d{2}-\d{2}-polymythcal-/,''),
   release_id:releaseId,
   generated_at:release.generated_at,
+  polymythcal_discovery_release_id:release.polymythcal_discovery_release_id,
+  polymythcal_discovery_built_at:release.polymythcal_discovery_built_at,
+  polymythcal_discovery_asset_version:release.polymythcal_discovery_asset_version,
   canonical_data_sha256:hash('data/polymyth-seminar-events.json'),
   browser_payload_path:browserPath,
   browser_payload_sha256:hash(browserPath),
   browser_payload_raw_bytes:browserBytes.length,
   browser_payload_gzip_bytes:zlib.gzipSync(browserBytes,{level:9}).length,
   browser_payload_minimum_gzip_reduction_percent:25,
+  watchlist_payload_path:watchlistPath,
+  watchlist_payload_sha256:hash(watchlistPath),
+  watchlist_payload_raw_bytes:watchlistBytes.length,
+  watchlist_payload_gzip_bytes:zlib.gzipSync(watchlistBytes,{level:9}).length,
+  research_payload_path:researchPath,
+  research_payload_sha256:hash(researchPath),
+  research_payload_raw_bytes:researchBytes.length,
+  research_payload_gzip_bytes:zlib.gzipSync(researchBytes,{level:9}).length,
   schema_sha256:hash('data/polymythcal-event-schema-v2.json'),
   record_count:events.length,
+  chronology_count:browseDoc.count,
+  watchlist_count:watchlistDoc.count,
+  research_count:researchDoc.count,
   confirmed_count:events.filter(e=>e.confirmation_status==='confirmed').length,
   unconfirmed_count:events.filter(e=>e.confirmation_status!=='confirmed').length,
   source_count:sourceCount,
@@ -32,7 +49,7 @@ const doc={
   interface_release:releaseId,
   polymythcal_asset_version:release.polymythcal_asset_version,
   deployment_contract:'Netlify generates public/ from source; Windows deployer packages may additionally include the same generated public/ tree.',
-  route_shells:['polymythseminars','writingclub','writingkids','writingjuniors','writingteens','writinggrads','university','philosophy','humanities','cfps','lectures','fellowships']
+  route_shells:['polymythseminars','polymythseminars/research','polymythseminars/monitoring','writingclub','writingkids','writingjuniors','writingteens','writinggrads','university','philosophy','humanities','cfps','lectures','fellowships']
 };
 const out=JSON.stringify(doc,null,2)+'\n';const file=path.join(ROOT,'data/polymythcal-build-manifest.json');
 writeIfChanged(file,out);

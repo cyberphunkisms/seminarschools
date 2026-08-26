@@ -50,8 +50,24 @@ def main() -> int:
     transcript = stream.getvalue()
     print(transcript, end="")
 
-    payload = json.loads((ROOT / "polymythseminars/events.json").read_text(encoding="utf-8"))
-    events = payload["events"]
+    payload = json.loads(
+        (ROOT / "data/polymyth-seminar-events.json").read_text(encoding="utf-8")
+    )
+    browse = json.loads(
+        (ROOT / "polymythseminars/browse.json").read_text(encoding="utf-8")
+    )
+    watchlist = json.loads(
+        (ROOT / "polymythseminars/watchlist.json").read_text(encoding="utf-8")
+    )
+    surfaces = json.loads(
+        (ROOT / "data/polymythcal-publication-surfaces.json").read_text(encoding="utf-8")
+    )
+    canonical_events = payload["events"]
+    canonical_by_id = {str(event["id"]): event for event in canonical_events}
+    chronology_ids = [str(value) for value in surfaces["chronology_ids"]]
+    monitoring_ids = [str(value) for value in surfaces["watchlist_ids"]]
+    events = [canonical_by_id[event_id] for event_id in chronology_ids]
+    monitoring_events = [canonical_by_id[event_id] for event_id in monitoring_ids]
     aliases = {
         str(alias): str(event.get("id") or event.get("identity_key"))
         for event in events
@@ -62,6 +78,7 @@ def main() -> int:
     files = event_files + feed_files
     component_count = 0
     max_line_octets = 0
+    feed_uids: set[str] = set()
     for path in files:
         raw = path.read_bytes()
         max_line_octets = max(
@@ -69,9 +86,48 @@ def main() -> int:
             *(len(line) for line in raw.split(b"\r\n")[:-1]),
         )
         calendar = Calendar.from_ical(raw)
-        component_count += sum(
-            component.name == "VEVENT" for component in calendar.walk()
+        components = [component for component in calendar.walk() if component.name == "VEVENT"]
+        component_count += len(components)
+        if path.parent.name == "feeds":
+            feed_uids.update(str(component.get("UID")) for component in components)
+
+    monitoring_ics_ids: set[str] = set(monitoring_ids)
+    monitoring_english_route_ids: set[str] = set()
+    monitoring_french_route_ids: set[str] = set(monitoring_ids)
+    monitoring_uids: set[str] = set()
+    for event in monitoring_events:
+        event_id = str(event["id"])
+        monitoring_uids.add(f'{event.get("identity_key") or event_id}@seminarschools.com')
+        monitoring_english_route_ids.update((event_id, tests.hashed_legacy_alias(event_id)))
+        for alias in event.get("legacy_ids") or []:
+            alias_id = str(alias)
+            monitoring_ics_ids.add(alias_id)
+            monitoring_english_route_ids.update((alias_id, tests.hashed_legacy_alias(alias_id)))
+            monitoring_french_route_ids.add(alias_id)
+    monitoring_ics_leaks = sum(
+        path.exists()
+        for route_id in monitoring_ics_ids
+        for path in (
+            ROOT / f"polymythseminars/ics/{route_id}.ics",
+            ROOT / f"public/polymythseminars/ics/{route_id}.ics",
         )
+    )
+    monitoring_route_leaks = sum(
+        path.exists()
+        for route_id in monitoring_english_route_ids
+        for path in (
+            ROOT / f"polymythseminars/events/{route_id}/index.html",
+            ROOT / f"public/polymythseminars/events/{route_id}/index.html",
+        )
+    ) + sum(
+        path.exists()
+        for route_id in monitoring_french_route_ids
+        for path in (
+            ROOT / f"polymythseminars/fr/events/{route_id}/index.html",
+            ROOT / f"public/polymythseminars/fr/events/{route_id}/index.html",
+        )
+    )
+    monitoring_feed_uid_leaks = len(monitoring_uids & feed_uids)
 
     failed_names = {
         case.id()
@@ -92,7 +148,14 @@ def main() -> int:
         "metrics": {
             "tests_passed": result.testsRun - len(result.failures) - len(result.errors),
             "tests_run": result.testsRun,
-            "canonical_events": len(events),
+            "canonical_events": len(canonical_events),
+            "chronology_events": len(events),
+            "quarantined_monitoring_records": len(monitoring_events),
+            "browse_records": len(browse.get("events", [])),
+            "watchlist_records": len(watchlist.get("items", [])),
+            "monitoring_ics_leaks": monitoring_ics_leaks,
+            "monitoring_detail_or_alias_route_leaks": monitoring_route_leaks,
+            "monitoring_feed_uid_leaks": monitoring_feed_uid_leaks,
             "explicit_legacy_ics_aliases": len(aliases),
             "single_event_ics_files": len(event_files),
             "focused_and_historical_feed_ics_files": len(feed_files),
@@ -138,3 +201,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

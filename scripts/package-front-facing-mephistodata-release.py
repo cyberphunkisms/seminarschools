@@ -18,6 +18,7 @@ MANIFEST_NAME = "PACKAGE_CONTENTS_SHA256.json"
 CORE_MAX_CHARACTERS = 5000
 REQUIRED_DELIVERY_FILES = {
     "README_FIRST.txt",
+    "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_GORGON_FREE_SPEECH_EVIDENCE_CONTROL_2026-08-24.md",
     "Mephistodata_CORE_Personal_Rules_2026-08-12.md",
     "SITE_PACKAGE/CHARTER.txt",
     "SITE_PACKAGE/PACKAGE_CONTENTS_SHA256.json",
@@ -28,6 +29,10 @@ REQUIRED_DELIVERY_FILES = {
     "SITE_PACKAGE/hf_export/data/all_meaninglib_rows.jsonl",
     "SITE_PACKAGE/scripts/sync-core-personal-rules.js",
     "SITE_PACKAGE/scripts/verify-core-coreplus-alignment.js",
+    "SITE_PACKAGE/ML_EXECUTION_AND_CONTROLLED_ARCHIVE_SYNTHESIS_2026-08-26.md",
+    "SITE_PACKAGE/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js",
+    "SITE_PACKAGE/scripts/fixtures/ml-execution-gates/fixtures.json",
+    "SITE_PACKAGE/scripts/verify-ml-execution-gates.js",
     "DEPLOY_TOOLS/SeminarSchools-Deploy-FINAL7-VerifiedPush-StayOpen-NoLocalNpm-ManualRepoPicker-ManualHFSync.cmd",
     "SITE_PACKAGE/polymyth/coherence/Polymyth_Coherence_Assessment_Instrument_V5.1.2.xlsx",
     "SITE_PACKAGE/polymyth/coherence/Polymyth_Coherence_AI_Application_Protocol_V5.1.2.md",
@@ -88,6 +93,7 @@ REQUIRED_DELIVERY_FILES = {
     "SITE_PACKAGE/scripts/package-front-facing-mephistodata-release.py",
     "SITE_PACKAGE/scripts/package_integrity.py",
     "SITE_PACKAGE/scripts/package_selection.py",
+    "SITE_PACKAGE/scripts/test-polymythcal-package-boundary.py",
     "SITE_PACKAGE/scripts/atomic_json.py",
     "SITE_PACKAGE/scripts/lib/external-destination-contracts.js",
     "SITE_PACKAGE/scripts/apply-polymythcal-destination-specificity.js",

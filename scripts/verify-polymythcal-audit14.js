@@ -10,6 +10,7 @@ const {
   expectedPolymythcalEventRoutes,
   inspectEventRouteDirectory,
 } = require('./lib/source-html-inventory');
+const {isMonitoringMarker} = require('./lib/polymythcal-discovery-model');
 
 const ROOT = path.resolve(__dirname, '..');
 const inventory = loadInventoryContract(ROOT);
@@ -21,6 +22,11 @@ const releaseTimestamp = releaseManifest.generated_at || '1970-01-01T00:00:00Z';
 const SITE = 'https://seminarschools.com';
 const checks = [];
 const add = (name, passed, details = {}) => checks.push({name, passed: Boolean(passed), details});
+const EXPECTED_DISCOVERY_COUNTS = Object.freeze({canonical: 2088, chronology: 1954, watchlist: 134});
+const WATCHLIST_REASON = Object.freeze({
+  code: 'monitoring-marker',
+  detail: 'Displayed date is a monitoring marker, not a confirmed event or deadline date.',
+});
 
 function countOccurrences(text, needle) {
   return text.split(needle).length - 1;
@@ -57,6 +63,17 @@ function pythonHtmlEscape(value) {
     .replace(/'/g, '&#x27;');
 }
 
+function sameArray(left, right) {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function exactWatchlistReason(value) {
+  return value
+    && Object.keys(value).length === 2
+    && value.code === WATCHLIST_REASON.code
+    && value.detail === WATCHLIST_REASON.detail;
+}
+
 const sourcesDoc = json('scripts/sources.json');
 const sources = sourcesDoc.sources || [];
 const profiles = ['municipal', 'university', 'library', 'festival', 'french-language', 'civic-action'];
@@ -79,12 +96,78 @@ add('Lifecycle reconciler covers cancellation, disappearance, recurrence, and re
 add('Lifecycle test suite is present', exists('scripts/test_polymythcal_lifecycle.py'), {});
 
 const eventDoc = json('data/polymyth-seminar-events.json');
-const events = eventDoc.events || [];
-const CURRENT_EVENT_COUNT = events.length;
-add('Canonical event inventory meets the verified floor', CURRENT_EVENT_COUNT >= inventory.minimum_canonical_events, {events: CURRENT_EVENT_COUNT, floor: inventory.minimum_canonical_events});
-add('Canonical event data is internally complete', events.length === eventDoc._total_events && events.length === eventDoc.count, {events: events.length, declared: eventDoc._total_events, count: eventDoc.count});
-add('Every event has stable identity and lifecycle fields', events.every(e => e.id && e.identity_key && e.lifecycle_status && Number.isInteger(e.missing_count)), {events: events.length});
-add('Event IDs and identity keys are unique', new Set(events.map(e => e.id)).size === events.length && new Set(events.map(e => e.identity_key)).size === events.length, {events: events.length});
+const browseDoc = json('polymythseminars/browse.json');
+const watchlistDoc = json('polymythseminars/watchlist.json');
+const publicationSurfaces = json('data/polymythcal-publication-surfaces.json');
+const canonicalEvents = eventDoc.events || [];
+const browseEvents = browseDoc.events || [];
+const watchlistItems = watchlistDoc.items || [];
+const canonicalIdsInOrder = canonicalEvents.map(event => String(event.id));
+const browseIds = browseEvents.map(event => String(event.id));
+const watchlistIds = watchlistItems.map(event => String(event.id));
+const canonicalIdSet = new Set(canonicalIdsInOrder);
+const browseIdSet = new Set(browseIds);
+const watchlistIdSet = new Set(watchlistIds);
+const publicPartition = new Set([...browseIds, ...watchlistIds]);
+const events = canonicalEvents.filter(event => browseIdSet.has(String(event.id)));
+const monitoringEvents = canonicalEvents.filter(event => watchlistIdSet.has(String(event.id)));
+const CURRENT_EVENT_COUNT = EXPECTED_DISCOVERY_COUNTS.chronology;
+const CURRENT_CANONICAL_COUNT = EXPECTED_DISCOVERY_COUNTS.canonical;
+add('Canonical event inventory meets the verified floor', canonicalEvents.length >= inventory.minimum_canonical_events, {events: canonicalEvents.length, floor: inventory.minimum_canonical_events});
+add('Canonical event data is internally complete', canonicalEvents.length === eventDoc._total_events && canonicalEvents.length === eventDoc.count, {events: canonicalEvents.length, declared: eventDoc._total_events, count: eventDoc.count});
+add('Every event has stable identity and lifecycle fields', canonicalEvents.every(e => e.id && e.identity_key && e.lifecycle_status && Number.isInteger(e.missing_count)), {events: canonicalEvents.length});
+add('Event IDs and identity keys are unique', new Set(canonicalEvents.map(e => e.id)).size === canonicalEvents.length && new Set(canonicalEvents.map(e => e.identity_key)).size === canonicalEvents.length, {events: canonicalEvents.length});
+const reasonIds = Object.keys(publicationSurfaces.reasons || {});
+const markerIds = canonicalEvents.filter(isMonitoringMarker).map(event => String(event.id));
+const exactPublicationPartition = (
+  canonicalEvents.length === CURRENT_CANONICAL_COUNT
+  && events.length === CURRENT_EVENT_COUNT
+  && monitoringEvents.length === EXPECTED_DISCOVERY_COUNTS.watchlist
+  && canonicalIdSet.size === canonicalEvents.length
+  && browseIdSet.size === browseIds.length
+  && watchlistIdSet.size === watchlistIds.length
+  && !browseIds.some(id => watchlistIdSet.has(id))
+  && publicPartition.size === canonicalIdSet.size
+  && [...publicPartition].every(id => canonicalIdSet.has(id))
+  && publicationSurfaces.schema === 'polymythcal-publication-surfaces-v2'
+  && publicationSurfaces._schema === 'polymythcal-publication-surfaces-v2'
+  && browseDoc._schema === 'polymythcal-discovery-v2'
+  && watchlistDoc._schema === 'polymythcal-watchlist-v2'
+  && publicationSurfaces.canonical_count === canonicalEvents.length
+  && publicationSurfaces.chronology_count === events.length
+  && publicationSurfaces.watchlist_count === monitoringEvents.length
+  && browseDoc.count === browseEvents.length
+  && browseDoc._chronology_count === browseEvents.length
+  && browseDoc._canonical_count === canonicalEvents.length
+  && watchlistDoc.count === watchlistItems.length
+  && watchlistDoc._canonical_count === canonicalEvents.length
+  && sameArray(publicationSurfaces.chronology_ids || [], browseIds)
+  && sameArray(publicationSurfaces.watchlist_ids || [], watchlistIds)
+  && sameArray(reasonIds, watchlistIds)
+  && watchlistIds.every(id => exactWatchlistReason(publicationSurfaces.reasons?.[id]))
+  && sameArray(markerIds, watchlistIds)
+  && watchlistItems.every(item => !('date' in item) && !('end_date' in item) && item.date_status === 'awaiting-confirmed-date')
+);
+add(
+  'Discovery v2 exactly partitions the private canonical corpus into chronology and quarantined monitoring records',
+  exactPublicationPartition,
+  {
+    canonical: canonicalEvents.length,
+    chronology: events.length,
+    watchlist: monitoringEvents.length,
+    partitionUnion: publicPartition.size,
+    reasons: reasonIds.length,
+    markerRecords: markerIds.length,
+  },
+);
+add(
+  'The full canonical corpus remains private build input',
+  !exists('public/polymythseminars/events.json')
+    && fs.readFileSync(path.join(ROOT, 'polymythseminars/events.json')).equals(
+      fs.readFileSync(path.join(ROOT, 'data/polymyth-seminar-events.json')),
+    ),
+  {publicCanonicalPresent: exists('public/polymythseminars/events.json')},
+);
 
 const main = read('polymythseminars/index.html');
 const features = read('js/polymythcal-features.js');
@@ -217,6 +300,49 @@ const publicIcsMismatches = expectedIcsFiles.filter(file => {
   return !fs.existsSync(source) || !fs.existsSync(published)
     || !fs.readFileSync(source).equals(fs.readFileSync(published));
 });
+const monitoringAliasContract = expectedPolymythcalEventRoutes(monitoringEvents);
+const monitoringRouteLeakages = [];
+for (const routeId of monitoringAliasContract.englishRouteIds) {
+  for (const relative of [
+    `polymythseminars/events/${routeId}/index.html`,
+    `public/polymythseminars/events/${routeId}/index.html`,
+  ]) {
+    if (exists(relative)) monitoringRouteLeakages.push(relative);
+  }
+}
+for (const routeId of monitoringAliasContract.frenchRouteIds) {
+  for (const relative of [
+    `polymythseminars/fr/events/${routeId}/index.html`,
+    `public/polymythseminars/fr/events/${routeId}/index.html`,
+  ]) {
+    if (exists(relative)) monitoringRouteLeakages.push(relative);
+  }
+}
+for (const routeId of new Set([
+  ...monitoringAliasContract.canonicalIds,
+  ...monitoringAliasContract.frenchAliases.keys(),
+])) {
+  for (const relative of [
+    `polymythseminars/ics/${routeId}.ics`,
+    `public/polymythseminars/ics/${routeId}.ics`,
+  ]) {
+    if (exists(relative)) monitoringRouteLeakages.push(relative);
+  }
+}
+const sitemap = read('sitemap.xml');
+for (const routeId of monitoringAliasContract.englishRouteIds) {
+  const route = `${SITE}/polymythseminars/events/${encodeURIComponent(routeId)}/`;
+  if (sitemap.includes(`<loc>${route}</loc>`)) monitoringRouteLeakages.push(`sitemap: ${route}`);
+}
+for (const routeId of monitoringAliasContract.frenchRouteIds) {
+  const route = `${SITE}/polymythseminars/fr/events/${encodeURIComponent(routeId)}/`;
+  if (sitemap.includes(`<loc>${route}</loc>`)) monitoringRouteLeakages.push(`sitemap: ${route}`);
+}
+add(
+  'Monitoring-marker records have no chronology routes, aliases, ICS files, or sitemap entries',
+  monitoringRouteLeakages.length === 0,
+  {records: monitoringEvents.length, leakages: monitoringRouteLeakages.slice(0, 30)},
+);
 const legacyIcsMismatches = [];
 for (const [alias, target] of explicitAliases) {
   const aliasFile = path.join(ROOT, 'polymythseminars', 'ics', `${alias}.ics`);
@@ -243,7 +369,7 @@ for (const [alias, target] of expectedAliases) {
   if (!exists(publicRel) || !fs.readFileSync(path.join(ROOT, rel)).equals(fs.readFileSync(path.join(ROOT, publicRel)))) missingOrWrongAliases.push(`${alias}: public mismatch`);
 }
 add(
-  'Canonical manifest exactly owns stable English event routes, redirects, and legacy ICS aliases',
+  'Chronology manifest exactly owns stable English event routes, redirects, and legacy ICS aliases',
   events.length === CURRENT_EVENT_COUNT
     && canonicalPages === CURRENT_EVENT_COUNT
     && aliasPages === expectedAliases.size
@@ -426,7 +552,9 @@ const output = {
     registered_sources: sources.length,
     dedicated_adapter_sources: Object.values(profileCounts).reduce((a, b) => a + b, 0),
     adapter_profile_counts: profileCounts,
-    canonical_events: events.length,
+    canonical_events: canonicalEvents.length,
+    chronology_events: events.length,
+    quarantined_monitoring_records: monitoringEvents.length,
     canonical_event_pages: canonicalPages,
     legacy_redirect_aliases: aliasPages,
     event_ics_files: icsCount,
@@ -455,3 +583,4 @@ if (failed.length) {
   for (const c of failed) console.error(`FAIL: ${c.name} ${JSON.stringify(c.details)}`);
   process.exit(1);
 }
+

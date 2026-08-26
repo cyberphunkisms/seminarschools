@@ -221,20 +221,29 @@ for (const row of tagged) {
 }
 
 if (!sourceOnly) {
-  const browse = list(json('polymythseminars/browse.json'));
-  const browseById = byId(browse);
-  assert(browseById.size === browse.length, 'Browser event IDs are not unique.');
+  const browseDoc = json('polymythseminars/browse.json');
+  const watchlistDoc = json('polymythseminars/watchlist.json');
+  const browse = list(browseDoc);
+  const watchlist = watchlistDoc.items || [];
+  const publicById = byId([...browse, ...watchlist]);
+  const surfaces = json('data/polymythcal-publication-surfaces.json');
+  const chronologyIds = new Set(surfaces.chronology_ids || []);
+  assert(publicById.size === canonical.length, 'Safe public projections are not a complete unique partition.');
   for (const row of tagged) {
-    const compact = browseById.get(row.id);
-    assert(Boolean(compact), `${row.id}: missing from browser payload.`);
-    if (compact) for (const field of CORE_FIELDS) assert(equal(compact[field], row[field]), `${row.id}: browser ${field} differs from manual.`);
+    const compact = publicById.get(row.id);
+    assert(Boolean(compact), `${row.id}: missing from safe public projections.`);
+    if (compact) {
+      assert(equal(compact.facets?.communityFormats || [], row.community_heritage_formats), `${row.id}: public communityFormats facets differ from manual.`);
+      for (const field of CORE_FIELDS) assert(!Object.hasOwn(compact, field), `${row.id}: private research field ${field} leaked into public discovery data.`);
+    }
     const detailRel = `polymythseminars/events/${row.id}/index.html`;
-    assert(exists(detailRel), `${row.id}: generated detail page missing.`);
-    if (exists(detailRel) && row.community_evidence) {
+    assert(exists(detailRel) === chronologyIds.has(row.id), `${row.id}: dated detail-route publication boundary is wrong.`);
+    if (chronologyIds.has(row.id) && exists(detailRel) && row.community_evidence) {
       assert(read(detailRel).toString('utf8').includes('pm-event-context'), `${row.id}: detail page omits Set 13 context/evidence.`);
     }
   }
-  for (const rel of ['polymythseminars/events.json', 'polymythseminars/browse.json']) {
+  assert(!exists('public/polymythseminars/events.json'), 'Private canonical events.json leaked into public/.');
+  for (const rel of ['polymythseminars/browse.json', 'polymythseminars/watchlist.json']) {
     const mirror = `public/${rel}`;
     assert(exists(mirror), `${mirror} missing.`);
     if (exists(mirror)) assert(read(rel).equals(read(mirror)), `${rel} differs from ${mirror}.`);
@@ -262,3 +271,4 @@ console.log(JSON.stringify({
   manual_records: manual.length,
   canonical_records: canonical.length
 }, null, 2));
+

@@ -33,6 +33,8 @@ const metrics = {
   interactive_documents: 0,
   redirect_documents: 0,
   canonical_events: 0,
+  chronology_events: 0,
+  quarantined_monitoring_records: 0,
   explicit_legacy_event_ids: 0,
   expected_english_event_routes: 0,
   expected_french_event_routes: 0,
@@ -50,6 +52,11 @@ const metrics = {
   images: 0,
   buttons: 0,
 };
+const EXPECTED_DISCOVERY_COUNTS = Object.freeze({canonical: 2088, chronology: 1954, watchlist: 134});
+const WATCHLIST_REASON = Object.freeze({
+  code: 'monitoring-marker',
+  detail: 'Displayed date is a monitoring marker, not a confirmed event or deadline date.',
+});
 
 function file(relative) {
   return path.join(ROOT, relative);
@@ -86,6 +93,15 @@ function textAlternative(body) {
     .replace(/&(?:amp|lt|gt|quot|apos|#39);/gi, 'x')
     .replace(/\s+/g, ' ')
     .trim();
+}
+function sameArray(left, right) {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+function exactWatchlistReason(value) {
+  return value
+    && Object.keys(value).length === 2
+    && value.code === WATCHLIST_REASON.code
+    && value.detail === WATCHLIST_REASON.detail;
 }
 const documents = sourceHtmlDocuments(ROOT);
 const documentSet = new Set(documents);
@@ -197,12 +213,98 @@ check(
 );
 
 let currentEvents = [];
+let monitoringEvents = [];
 try {
-  const payload = JSON.parse(read('polymythseminars/events.json'));
-  currentEvents = payload.events || [];
-  check(Array.isArray(payload.events), 'polymythseminars/events.json has no events array');
+  const canonicalPayload = JSON.parse(read('data/polymyth-seminar-events.json'));
+  const privateMirrorPayload = JSON.parse(read('polymythseminars/events.json'));
+  const browsePayload = JSON.parse(read('polymythseminars/browse.json'));
+  const watchlistPayload = JSON.parse(read('polymythseminars/watchlist.json'));
+  const surface = JSON.parse(read('data/polymythcal-publication-surfaces.json'));
+  const canonicalEvents = canonicalPayload.events || [];
+  const browseEvents = browsePayload.events || [];
+  const watchlistItems = watchlistPayload.items || [];
+  const canonicalIds = canonicalEvents.map(event => String(event.id));
+  const browseIds = browseEvents.map(event => String(event.id));
+  const watchlistIds = watchlistItems.map(event => String(event.id));
+  const canonicalSet = new Set(canonicalIds);
+  const browseSet = new Set(browseIds);
+  const watchlistSet = new Set(watchlistIds);
+  const partition = new Set([...browseIds, ...watchlistIds]);
+
+  check(Array.isArray(canonicalPayload.events), 'data/polymyth-seminar-events.json has no events array');
+  check(Array.isArray(privateMirrorPayload.events), 'polymythseminars/events.json has no events array');
+  check(Array.isArray(browsePayload.events), 'polymythseminars/browse.json has no events array');
+  check(Array.isArray(watchlistPayload.items), 'polymythseminars/watchlist.json has no items array');
+  check(
+    JSON.stringify(privateMirrorPayload) === JSON.stringify(canonicalPayload),
+    'private canonical event mirrors differ',
+  );
+  check(
+    !fs.existsSync(file('public/polymythseminars/events.json')),
+    'public/polymythseminars/events.json exposes the private canonical corpus',
+  );
+  check(
+    canonicalEvents.length === EXPECTED_DISCOVERY_COUNTS.canonical
+      && browseEvents.length === EXPECTED_DISCOVERY_COUNTS.chronology
+      && watchlistItems.length === EXPECTED_DISCOVERY_COUNTS.watchlist,
+    `Discovery v2 split differs: ${canonicalEvents.length} canonical, ${browseEvents.length} chronology, ${watchlistItems.length} monitoring`,
+  );
+  check(
+    canonicalSet.size === canonicalIds.length
+      && browseSet.size === browseIds.length
+      && watchlistSet.size === watchlistIds.length,
+    'Discovery v2 canonical, chronology, or monitoring IDs are not unique',
+  );
+  check(
+    !browseIds.some(id => watchlistSet.has(id))
+      && partition.size === canonicalSet.size
+      && [...partition].every(id => canonicalSet.has(id)),
+    'chronology and monitoring records are not a disjoint exact partition of the private canonical corpus',
+  );
+  check(
+    surface.schema === 'polymythcal-publication-surfaces-v2'
+      && surface._schema === 'polymythcal-publication-surfaces-v2'
+      && browsePayload._schema === 'polymythcal-discovery-v2'
+      && watchlistPayload._schema === 'polymythcal-watchlist-v2',
+    'Discovery v2 schemas differ from the governed publication contract',
+  );
+  check(
+    surface.canonical_count === canonicalEvents.length
+      && surface.chronology_count === browseEvents.length
+      && surface.watchlist_count === watchlistItems.length
+      && browsePayload.count === browseEvents.length
+      && browsePayload._chronology_count === browseEvents.length
+      && browsePayload._canonical_count === canonicalEvents.length
+      && watchlistPayload.count === watchlistItems.length
+      && watchlistPayload._canonical_count === canonicalEvents.length,
+    'Discovery v2 declared counts differ from their payloads',
+  );
+  const reasonIds = Object.keys(surface.reasons || {});
+  check(
+    sameArray(surface.chronology_ids || [], browseIds)
+      && sameArray(surface.watchlist_ids || [], watchlistIds)
+      && sameArray(reasonIds, watchlistIds)
+      && watchlistIds.every(id => exactWatchlistReason(surface.reasons?.[id])),
+    'Discovery v2 publication IDs or monitoring reasons differ from the exact contract',
+  );
+  check(
+    watchlistItems.every(item => !('date' in item)
+      && !('end_date' in item)
+      && item.date_status === 'awaiting-confirmed-date'),
+    'monitoring records expose dates or lack awaiting-confirmed-date status',
+  );
+
+  currentEvents = canonicalEvents.filter(event => browseSet.has(String(event.id)));
+  monitoringEvents = canonicalEvents.filter(event => watchlistSet.has(String(event.id)));
+  check(
+    currentEvents.length === browseEvents.length && monitoringEvents.length === watchlistItems.length,
+    'canonical records cannot be resolved through the Discovery v2 publication IDs',
+  );
+  metrics.canonical_events = canonicalEvents.length;
+  metrics.chronology_events = currentEvents.length;
+  metrics.quarantined_monitoring_records = monitoringEvents.length;
 } catch (error) {
-  failures.push(`polymythseminars/events.json is invalid JSON: ${error.message}`);
+  failures.push(`Discovery v2 publication data is invalid JSON: ${error.message}`);
 }
 
 try {
@@ -214,7 +316,6 @@ try {
   const missingFrench = difference(expectedRoutes.frenchRouteIds, frenchRoutes.routeIds);
   const extraFrench = difference(frenchRoutes.routeIds, expectedRoutes.frenchRouteIds);
 
-  metrics.canonical_events = expectedRoutes.canonicalIds.size;
   metrics.explicit_legacy_event_ids = expectedRoutes.explicitLegacyEntries;
   metrics.expected_english_event_routes = expectedRoutes.englishRouteIds.size;
   metrics.expected_french_event_routes = expectedRoutes.frenchRouteIds.size;
@@ -292,6 +393,31 @@ try {
     `event alias documents are not redirects: ${summarizeValues(interactiveAliasDocuments)}`,
   );
   check(metrics.non_event_documents > 0, 'non-event source HTML inventory is empty');
+
+  const monitoringRoutes = expectedPolymythcalEventRoutes(monitoringEvents);
+  const leakedEnglishMonitoringRoutes = [...monitoringRoutes.englishRouteIds]
+    .filter(id => englishRoutes.routeIds.has(id));
+  const leakedFrenchMonitoringRoutes = [...monitoringRoutes.frenchRouteIds]
+    .filter(id => frenchRoutes.routeIds.has(id));
+  check(
+    leakedEnglishMonitoringRoutes.length === 0,
+    `monitoring records have English detail or alias pages: ${summarizeValues(leakedEnglishMonitoringRoutes)}`,
+  );
+  check(
+    leakedFrenchMonitoringRoutes.length === 0,
+    `monitoring records have French detail or alias pages: ${summarizeValues(leakedFrenchMonitoringRoutes)}`,
+  );
+  for (const shell of [
+    'polymythseminars/index.html',
+    'polymythseminars/fr/index.html',
+    'polymythseminars/monitoring/index.html',
+    'polymythseminars/fr/monitoring/index.html',
+    'polymythseminars/research/index.html',
+    'polymythseminars/fr/research/index.html',
+  ]) {
+    check(documentSet.has(shell), `${shell}: published discovery shell is absent from the AT inventory`);
+    check(!redirectSet.has(shell), `${shell}: published discovery shell became a redirect`);
+  }
 } catch (error) {
   failures.push(`Polymythcal event-route inventory is invalid: ${error.message}`);
 }
@@ -374,3 +500,4 @@ console.log(
   + `${metrics.static_aria_id_references} static ARIA references, ${metrics.skip_links} skip links, `
   + `${metrics.images} images, and ${metrics.buttons} buttons checked.`,
 );
+

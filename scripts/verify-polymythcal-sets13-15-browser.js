@@ -2,12 +2,12 @@
 'use strict';
 
 /**
- * Browser/source contract for the Set 13-15 Polymythcal facets.
+ * Discovery-v2 contract and browser regression gate for Sets 13-15.
  *
- * The default mode serves this source tree and exercises Chromium.  Use
- * --dom-only while the authored ledgers are still being assembled: that mode
- * checks the locked schema, both localized shells, and the controller/payload
- * wiring without pretending that a browser run or data-coverage run occurred.
+ * --dom-only verifies the authored shells, safe payloads, taxonomy, controller,
+ * URL/filter semantics, and private/public boundary without claiming a browser
+ * run. The default mode adds real Chromium interaction, responsive layout, and
+ * EN/FR parity checks.
  */
 
 const fs = require('fs');
@@ -16,48 +16,19 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const DOM_ONLY = process.argv.includes('--dom-only');
-const SCHEMA_PATH = 'data/polymythcal-event-schema-v2.json';
-const BROWSE_PATH = 'polymythseminars/browse.json';
-const CONTROLLER_PATH = 'js/polymythcal-revamp.js';
-const BROWSER_BUILDER_PATH = 'scripts/build-polymythcal-browser-payload.js';
-const EXPECTED_GROUP_SIZES = Object.freeze([22, 14, 19]);
-// Rendering and indexing 2,088 bilingual records can exceed the interaction
-// timeout on a cold, resource-contended release runner. Readiness remains a
-// hard requirement; it simply has a separate bounded convergence window.
 const READY_TIMEOUT_MS = 60000;
-
-const GROUP_SPECS = Object.freeze([
-  {
-    set: 13,
-    key: 'communityFormats',
-    field: 'community_heritage_formats',
-    titleId: 'pmCommunityFormatsTitle',
-  },
-  {
-    set: 14,
-    key: 'digitalFormats',
-    field: 'live_digital_formats',
-    titleId: 'pmDigitalFormatsTitle',
-  },
-  {
-    set: 15,
-    key: 'programFormats',
-    field: 'course_program_formats',
-    titleId: 'pmProgramFormatsTitle',
-  },
+const GROUPS = Object.freeze([
+  {set: 13, axis: 'communityFormats', field: 'community_heritage_formats', size: 22},
+  {set: 14, axis: 'digitalFormats', field: 'live_digital_formats', size: 14},
+  {set: 15, axis: 'programFormats', field: 'course_program_formats', size: 19},
 ]);
-
-const LOCALES = Object.freeze([
-  {code: 'en', lang: 'en-CA', route: '/polymythseminars/'},
-  {code: 'fr', lang: 'fr-CA', route: '/polymythseminars/fr/'},
-]);
-
-const LAYOUT_CASES = Object.freeze([
-  {label: 'desktop-1440', width: 1440, height: 1000, touch: false, deviceScaleFactor: 1},
-  {label: 'mobile-375-touch', width: 375, height: 812, touch: true, deviceScaleFactor: 1},
-  // A 640 CSS-pixel viewport at DPR 2 is the layout space available to a
-  // 1280-pixel-wide display at 200% browser zoom.
-  {label: 'desktop-1280-at-200-percent', width: 640, height: 500, touch: false, deviceScaleFactor: 2},
+const SHELLS = Object.freeze([
+  {path: 'polymythseminars/index.html', lang: 'en-CA', surface: 'main', source: '/polymythseminars/browse.json'},
+  {path: 'polymythseminars/fr/index.html', lang: 'fr-CA', surface: 'main', source: '/polymythseminars/browse.json'},
+  {path: 'polymythseminars/research/index.html', lang: 'en-CA', surface: 'research', source: '/polymythseminars/browse.json'},
+  {path: 'polymythseminars/fr/research/index.html', lang: 'fr-CA', surface: 'research', source: '/polymythseminars/browse.json'},
+  {path: 'polymythseminars/monitoring/index.html', lang: 'en-CA', surface: 'monitoring', source: '/polymythseminars/watchlist.json'},
+  {path: 'polymythseminars/fr/monitoring/index.html', lang: 'fr-CA', surface: 'monitoring', source: '/polymythseminars/watchlist.json'},
 ]);
 
 const failures = [];
@@ -69,232 +40,213 @@ function check(condition, label, detail = '') {
 }
 
 function equal(actual, expected, label) {
-  check(
-    actual === expected,
-    label,
-    `expected ${JSON.stringify(expected)}, received ${JSON.stringify(actual)}`,
-  );
+  check(actual === expected, label, `expected ${JSON.stringify(expected)}, received ${JSON.stringify(actual)}`);
 }
 
 function sameValues(actual, expected, label) {
   const left = [...actual].map(String).sort();
   const right = [...expected].map(String).sort();
-  check(
-    JSON.stringify(left) === JSON.stringify(right),
-    label,
-    `expected ${JSON.stringify(right)}, received ${JSON.stringify(left)}`,
-  );
+  check(JSON.stringify(left) === JSON.stringify(right), label, `expected ${JSON.stringify(right)}, received ${JSON.stringify(left)}`);
 }
 
 function read(relativePath) {
-  return fs.readFileSync(path.join(ROOT, relativePath), 'utf8');
+  const absolute = path.join(ROOT, relativePath);
+  if (!fs.existsSync(absolute)) {
+    failures.push(`${relativePath} is missing`);
+    return '';
+  }
+  return fs.readFileSync(absolute, 'utf8');
 }
 
 function json(relativePath) {
-  return JSON.parse(read(relativePath));
-}
-
-function parseAttributes(tag) {
-  const attributes = Object.create(null);
-  const pattern = /([^\s=<>\/]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+)))?/g;
-  let match;
-  while ((match = pattern.exec(tag))) {
-    const name = match[1].toLowerCase();
-    if (name === 'input' || name === 'span' || name === 'label' || name === 'button') continue;
-    attributes[name] = match[2] ?? match[3] ?? match[4] ?? '';
-  }
-  return attributes;
-}
-
-function tagsWithAttribute(html, tagName, attribute) {
-  const pattern = new RegExp(`<${tagName}\\b(?=[^>]*\\b${attribute}(?:\\s*=|\\s|>))[^>]*>`, 'gi');
-  return [...html.matchAll(pattern)].map(match => ({tag: match[0], attributes: parseAttributes(match[0])}));
-}
-
-function schemaGroups() {
-  const schema = json(SCHEMA_PATH);
-  return GROUP_SPECS.map((spec, index) => {
-    const values = schema?.properties?.[spec.field]?.items?.enum;
-    check(Array.isArray(values), `Set ${spec.set} locked schema exposes ${spec.field} enum`);
-    const safeValues = Array.isArray(values) ? values.map(String) : [];
-    equal(
-      safeValues.length,
-      EXPECTED_GROUP_SIZES[index],
-      `Set ${spec.set} locked schema retains its complete facet vocabulary`,
-    );
-    equal(new Set(safeValues).size, safeValues.length, `Set ${spec.set} schema values are unique`);
-    return {...spec, values: safeValues};
-  });
-}
-
-function sourceContract(groups) {
-  const controller = read(CONTROLLER_PATH);
-  const builder = read(BROWSER_BUILDER_PATH);
-  const setKeysMatch = controller.match(/const SET_KEYS\s*=\s*(\[[^;]+\])/);
-  let controllerSetKeys = [];
+  const text = read(relativePath);
   try {
-    controllerSetKeys = setKeysMatch ? JSON.parse(setKeysMatch[1]) : [];
-  } catch (_) {
-    controllerSetKeys = [];
-  }
-  check(setKeysMatch, 'controller exposes an inspectable SET_KEYS contract');
-  for (const group of groups) {
-    check(controllerSetKeys.includes(group.key), `Set ${group.set} belongs to controller SET_KEYS`, group.key);
-    check(
-      controller.includes(`classifyDeclaredFormats(event, "${group.field}"`),
-      `Set ${group.set} classifier reads only its explicit canonical field`,
-      group.field,
-    );
-    check(
-      controller.includes(`if (ignoreKey !== "${group.key}" && !setMatches(state.${group.key}, event._${group.key})) return false;`),
-      `Set ${group.set} participates in result matching`,
-    );
-    check(
-      controller.includes(`if (key === "${group.key}") return event._${group.key}.includes(value);`),
-      `Set ${group.set} participates in facet membership checks`,
-    );
-    check(
-      controller.includes(`: key === "${group.key}" ? event._${group.key}`),
-      `Set ${group.set} participates in live facet counts`,
-    );
-    check(builder.includes(`'${group.field}'`) || builder.includes(`"${group.field}"`), `browse projection retains ${group.field}`);
-  }
-  check(
-    controller.includes('for (const key of SET_KEYS.filter(key => key !== "content")) state[key].clear();'),
-    'Reset all clears every current and future SET_KEYS facet through the shared registry',
-  );
-}
-
-function localizedDomContract(groups) {
-  for (const locale of LOCALES) {
-    const relativePath = locale.code === 'fr' ? 'polymythseminars/fr/index.html' : 'polymythseminars/index.html';
-    const html = read(relativePath);
-    const inputs = tagsWithAttribute(html, 'input', 'data-state-set');
-    const countNodes = tagsWithAttribute(html, 'span', 'data-count-for');
-    const labels = tagsWithAttribute(html, 'label', 'data-label-key');
-    const seenAll = [];
-
-    check(
-      new RegExp(`<html\\b[^>]*\\blang=["']${locale.lang}["']`, 'i').test(html),
-      `${locale.code.toUpperCase()} shell declares ${locale.lang}`,
-    );
-    for (const group of groups) {
-      const facetInputs = inputs.filter(item => item.attributes['data-state-set'] === group.key);
-      const values = facetInputs.map(item => item.attributes.value);
-      equal(
-        facetInputs.length,
-        group.values.length,
-        `${locale.code.toUpperCase()} Set ${group.set} renders every locked control`,
-      );
-      sameValues(values, group.values, `${locale.code.toUpperCase()} Set ${group.set} control IDs match the locked schema`);
-      check(
-        new RegExp(`<section\\b[^>]*aria-labelledby=["']${group.titleId}["'][^>]*>`, 'i').test(html),
-        `${locale.code.toUpperCase()} Set ${group.set} facet has a labelled section`,
-      );
-      check(
-        new RegExp(`<button\\b[^>]*data-clear-section=["']${group.key}["'][^>]*>`, 'i').test(html),
-        `${locale.code.toUpperCase()} Set ${group.set} facet has its own clear control`,
-      );
-      for (const value of group.values) {
-        const contractId = `${group.key}:${value}`;
-        equal(
-          labels.filter(item => item.attributes['data-label-key'] === contractId).length,
-          1,
-          `${locale.code.toUpperCase()} ${contractId} has one interactive label`,
-        );
-        equal(
-          countNodes.filter(item => item.attributes['data-count-for'] === contractId).length,
-          1,
-          `${locale.code.toUpperCase()} ${contractId} has one live count`,
-        );
-        seenAll.push(contractId);
-      }
-    }
-    equal(seenAll.length, 55, `${locale.code.toUpperCase()} shell exposes all 55 Set 13-15 facet IDs`);
-    equal(new Set(seenAll).size, 55, `${locale.code.toUpperCase()} Set 13-15 facet IDs are unique`);
+    return JSON.parse(text);
+  } catch (error) {
+    failures.push(`${relativePath} is not valid JSON — ${error.message}`);
+    return {};
   }
 }
 
-function browseContract(groups, requireCoverage) {
-  const payload = json(BROWSE_PATH);
-  const events = Array.isArray(payload) ? payload : payload.events;
-  check(Array.isArray(events), 'browse payload exposes an events array');
-  if (!Array.isArray(events)) return {payload, events: [], expected: new Map()};
-  const declaredCount = Number.isInteger(payload.count) ? payload.count : events.length;
-  equal(declaredCount, events.length, 'browse payload count matches its dynamic event array length');
-  if (Number.isInteger(payload._canonical_count)) {
-    equal(payload._canonical_count, events.length, 'browse payload canonical count matches its dynamic event array length');
-  }
-  const ids = events.map(event => String(event?.id || ''));
-  check(ids.every(Boolean), 'every browse record has a non-empty ID');
-  equal(new Set(ids).size, ids.length, 'browse record IDs are unique');
+function collection(payload, key) {
+  return Array.isArray(payload?.[key]) ? payload[key] : [];
+}
+
+function taxonomyValues(payload, key) {
+  return Object.keys(payload?.taxonomy?.axes?.[key]?.values || {});
+}
+
+function schemaAndPayloadContract() {
+  const schema = json('data/polymythcal-event-schema-v2.json');
+  const browse = json('polymythseminars/browse.json');
+  const watchlist = json('polymythseminars/watchlist.json');
+  const surfaces = json('data/polymythcal-publication-surfaces.json');
+  const events = collection(browse, 'events');
+  const monitored = collection(watchlist, 'items');
+
+  equal(browse._schema || browse.schema, 'polymythcal-discovery-v2', 'chronology payload uses the discovery-v2 schema');
+  equal(watchlist._schema || watchlist.schema, 'polymythcal-watchlist-v2', 'monitoring payload uses the watchlist-v2 schema');
+  equal(browse.count, events.length, 'chronology payload count is exact');
+  equal(watchlist.count, monitored.length, 'monitoring payload count is exact');
+  check(events.length > 0, 'chronology projection is non-empty');
+  check(monitored.length > 0, 'monitoring projection is non-empty and separate');
+
+  const chronologyIds = events.map(item => String(item?.id || ''));
+  const monitoringIds = monitored.map(item => String(item?.id || ''));
+  const monitoringIdSet = new Set(monitoringIds);
+  check(chronologyIds.every(Boolean), 'every chronology item has an ID');
+  check(monitoringIds.every(Boolean), 'every monitoring item has an ID');
+  equal(new Set(chronologyIds).size, chronologyIds.length, 'chronology IDs are unique');
+  equal(monitoringIdSet.size, monitoringIds.length, 'monitoring IDs are unique');
+  equal(chronologyIds.filter(id => monitoringIdSet.has(id)).length, 0, 'chronology and monitoring IDs are disjoint');
+  equal(surfaces.chronology_count, events.length, 'publication manifest chronology count is exact');
+  equal(surfaces.watchlist_count, monitored.length, 'publication manifest monitoring count is exact');
+  equal(surfaces.canonical_count, events.length + monitored.length, 'publication manifest accounts for the whole internal inventory');
+  sameValues(surfaces.chronology_ids || [], chronologyIds, 'publication manifest chronology IDs are exact');
+  sameValues(surfaces.watchlist_ids || [], monitoringIds, 'publication manifest monitoring IDs are exact');
 
   const expected = new Map();
-  for (const group of groups) {
-    const allowed = new Set(group.values);
-    for (const event of events) {
-      if (!Object.hasOwn(event, group.field)) continue;
-      check(Array.isArray(event[group.field]), `${event.id || '<missing-id>'} keeps ${group.field} as an array`);
-      if (!Array.isArray(event[group.field])) continue;
-      equal(
-        new Set(event[group.field]).size,
-        event[group.field].length,
-        `${event.id} has no duplicate ${group.field} values`,
-      );
-      for (const value of event[group.field]) {
-        check(allowed.has(value), `${event.id} uses a locked ${group.field} value`, String(value));
-      }
+  for (const group of GROUPS) {
+    const schemaValues = schema?.properties?.[group.field]?.items?.enum || [];
+    const browseValues = taxonomyValues(browse, group.axis);
+    const watchValues = taxonomyValues(watchlist, group.axis);
+    equal(schemaValues.length, group.size, `Set ${group.set} schema keeps ${group.size} controlled values`);
+    equal(new Set(schemaValues).size, group.size, `Set ${group.set} schema values are unique`);
+    sameValues(browseValues, schemaValues, `Set ${group.set} chronology taxonomy matches the locked schema`);
+    sameValues(watchValues, schemaValues, `Set ${group.set} monitoring taxonomy matches the locked schema`);
+    for (const value of schemaValues) {
+      const ids = events.filter(item => (item.facets?.[group.axis] || []).includes(value)).map(item => item.id);
+      expected.set(`${group.axis}:${value}`, ids);
     }
-    for (const value of group.values) {
-      const contractId = `${group.key}:${value}`;
-      const matches = events
-        .filter(event => Array.isArray(event[group.field]) && event[group.field].includes(value))
-        .map(event => String(event.id));
-      expected.set(contractId, matches);
-      if (requireCoverage) {
-        check(matches.length > 0, `${contractId} has at least one explicitly classified browse record`);
+  }
+
+  const forbiddenRawFields = GROUPS.map(group => group.field);
+  for (const [name, items, payload] of [['chronology', events, browse], ['monitoring', monitored, watchlist]]) {
+    for (const item of items) {
+      check(item && typeof item.facets === 'object' && !Array.isArray(item.facets), `${name} ${item?.id || '<missing>'} has a safe facet projection`);
+      for (const field of forbiddenRawFields) {
+        check(!Object.hasOwn(item || {}, field), `${name} ${item?.id || '<missing>'} does not expose private raw field ${field}`);
+      }
+      for (const group of GROUPS) {
+        const values = item?.facets?.[group.axis] || [];
+        check(Array.isArray(values), `${name} ${item?.id || '<missing>'} keeps ${group.axis} as an array`);
+        equal(new Set(values).size, values.length, `${name} ${item?.id || '<missing>'} has no duplicate ${group.axis} values`);
+        const allowed = new Set(taxonomyValues(payload, group.axis));
+        for (const value of values) check(allowed.has(value), `${name} ${item.id} uses a controlled ${group.axis} value`, value);
       }
     }
   }
-  return {payload, events, expected};
+  return {browse, watchlist, events, monitored, expected};
+}
+
+function sourceContract() {
+  const app = read('js/polymythcal-discovery.js');
+  const css = read('css/polymythcal-discovery.css');
+  const mustInclude = [
+    ['24-result page size', 'const PAGE_SIZE = 24'],
+    ['specialist family registry', 'const RESEARCH_ORDER'],
+    ['Set 13 research axis', "'communityFormats'"],
+    ['Set 14 research axis', "'digitalFormats'"],
+    ['Set 15 research axis', "'programFormats'"],
+    ['exact facet counts', 'function optionCount(key, value)'],
+    ['selected-zero retention and unselected-zero hiding', "if (count === 0 && !checked) return ''"],
+    ['staged research families', 'function renderResearchFamilies()'],
+    ['lazy research family mounting', 'function mountResearchFamily(details, options = null)'],
+    ['filter finder', 'function filterResearchFamilies()'],
+    ['route restriction', 'function routeMatches(event)'],
+    ['route applied before inclusion', 'if (!routeMatches(event)'],
+    ['focused-route default kind', 'const defaultContent = document.body.dataset.pmDefaultContent'],
+    ['explicit focused-route all override', 'state.kindExplicitAll'],
+    ['focused-route default restoration', "['attend', 'apply'].includes(defaultContent)"],
+    ['focused-route Research handoff', 'routeScope'],
+    ['URL state restoration', 'function readStateFromUrl()'],
+    ['URL state serialization', 'function stateParams(overrides = {}, targetSurface = surface)'],
+    ['history restoration', "window.addEventListener('popstate'"],
+    ['click-only correction branch', "event.target.closest('[data-correction]')"],
+    ['query-only correction authority', 'const suggestions = activeQueryMatchCount ? [] : correctionSuggestions(state.q)'],
+    ['visible match reason', 'class="pmd-match-reason"'],
+    ['explicit sort authority', "return state.q && !state.sortExplicit ? 'relevance' : state.sort"],
+    ['semantic calendar table', 'class="pmd-calendar-table"'],
+    ['small-screen agenda', 'class="pmd-calendar-agenda"'],
+  ];
+  for (const [label, token] of mustInclude) check(app.includes(token), `controller retains ${label}`);
+  const matchStart = app.indexOf('function termMatch(');
+  const matchEnd = app.indexOf('function editDistance(', matchStart);
+  const inclusionLogic = matchStart >= 0 && matchEnd > matchStart ? app.slice(matchStart, matchEnd) : '';
+  check(inclusionLogic.includes('words.includes(term.value)'), 'search inclusion supports exact whole words');
+  check(inclusionLogic.includes('word.startsWith(term.value)'), 'search inclusion supports one-way forward prefixes');
+  check(!/editDistance|levenshtein|fuzzy/i.test(inclusionLogic), 'search inclusion never uses fuzzy distance');
+  check(app.includes('if (![...values].some(value => eventValues.includes(value))) return false;'), 'filters use OR within a facet');
+  check(app.includes('for (const [key, values] of Object.entries(state.facets))'), 'filters use AND across selected facet families');
+  check(/\.pmd-option\s*\{[^}]*min-height:\s*44px/s.test(css), 'facet controls retain 44px-class targets');
+  check(/@media \(max-width:\s*47\.5rem\)[\s\S]*?\.pmd-calendar-table-wrap\s*\{\s*display:\s*none;[\s\S]*?\.pmd-calendar-agenda\s*\{\s*display:\s*block;/s.test(css), 'calendar switches from table to agenda on narrow/high-zoom layouts');
+  try {
+    require('child_process').execFileSync(process.execPath, ['--check', path.join(ROOT, 'js/polymythcal-discovery.js')], {stdio: 'pipe'});
+  } catch (_) {
+    failures.push('js/polymythcal-discovery.js fails node --check');
+  }
+}
+
+function shellContract() {
+  for (const shell of SHELLS) {
+    const html = read(shell.path);
+    check(new RegExp(`<html\\b[^>]*lang=["']${shell.lang}["']`, 'i').test(html), `${shell.path} declares ${shell.lang}`);
+    check(html.includes(`data-pmd-surface="${shell.surface}"`), `${shell.path} declares the ${shell.surface} surface`);
+    check(html.includes(`data-pmd-source="${shell.source}"`), `${shell.path} uses the correct public projection`);
+    check(html.includes('/js/polymythcal-discovery.js'), `${shell.path} loads the discovery-v2 controller`);
+    check(html.includes('/css/polymythcal-discovery.css'), `${shell.path} loads discovery-v2 CSS`);
+    for (const id of ['pmdSearch', 'pmdSearchStatus', 'pmdResults', 'pmdResultsTitle', 'pmdResultsCount', 'pmdSelected', 'pmdLiveStatus', 'pmdList', 'pmdPagination']) {
+      check(html.includes(`id="${id}"`), `${shell.path} exposes #${id}`);
+    }
+    check(html.includes('role="status" aria-live="polite"'), `${shell.path} exposes a polite live status`);
+    check(html.includes('aria-busy="true"'), `${shell.path} declares loading state accessibly`);
+    check(html.includes('hreflang="'), `${shell.path} exposes its language counterpart`);
+    check(!/id="(?:pmQuickStarts|pmJumpResults|eventsContainer|watchlistPanel)"/.test(html), `${shell.path} does not restore legacy UI layers`);
+    check(Buffer.byteLength(html, 'utf8') < 100000, `${shell.path} remains a compact client shell`);
+    if (shell.surface === 'research') {
+      check(html.includes('id="pmdFacetSearch"'), `${shell.path} exposes the research filter finder`);
+      check(html.includes('id="pmdResearchFilters"'), `${shell.path} exposes staged research families`);
+      check(!html.includes('id="pmdFilterDrawer"'), `${shell.path} does not wrap the specialist taxonomy in the common drawer`);
+    } else {
+      check(html.includes('id="pmdFilterDrawer"'), `${shell.path} exposes a collapsed common-filter drawer`);
+      check(!/<details[^>]*id="pmdFilterDrawer"[^>]*\sopen(?:\s|=|>)/i.test(html), `${shell.path} common-filter drawer starts collapsed`);
+    }
+    if (shell.surface === 'monitoring') {
+      check(!html.includes('id="pmdCalendar"'), `${shell.path} does not pretend monitoring markers are calendar dates`);
+    } else {
+      check(html.includes('id="pmdCalendar"'), `${shell.path} exposes the list/calendar view mount`);
+    }
+  }
+
+  const main = read('polymythseminars/index.html');
+  const research = read('polymythseminars/research/index.html');
+  equal((main.match(/id="pmdSearch"/g) || []).length, 1, 'main shell has exactly one search field');
+  check(/<div id="pmdCommonFilters"[^>]*><\/div>/.test(main), 'main shell leaves common filters data-driven instead of embedding a filter wall');
+  check(/<div id="pmdResearchFilters"[^>]*><\/div>/.test(research), 'Research shell stages taxonomy families instead of embedding every option');
+  const focused = [...main.matchAll(/href="\/(writingclub|writingkids|writingjuniors|writingteens|writinggrads|university|philosophy|humanities|cfps|lectures|fellowships)\/"/g)].map(match => match[1]);
+  equal(new Set(focused).size, 11, 'main shell keeps all 11 focused calendars in one disclosure');
+
+  // The DOM-only gate also runs before public/ is rebuilt, so enforce the
+  // public-builder policy here; parity gates inspect the generated tree later.
+  const publicBuilder = read('scripts/build-public-deploy.js');
+  check(publicBuilder.includes("'polymythseminars/events.json'"), 'public builder explicitly quarantines the private canonical corpus');
+  check(/BLOCKED_DIRS[^;]*['"]data['"]/s.test(publicBuilder), 'public builder excludes the private data directory');
+  check(publicBuilder.includes('PUBLICATION_BLOCKLISTS') && publicBuilder.includes('watchlistIds'), 'public builder quarantines monitoring detail routes from the dated chronology');
 }
 
 function mime(file) {
-  return ({
-    '.css': 'text/css; charset=utf-8',
-    '.gif': 'image/gif',
-    '.html': 'text/html; charset=utf-8',
-    '.ico': 'image/x-icon',
-    '.ics': 'text/calendar; charset=utf-8',
-    '.jpg': 'image/jpeg',
-    '.jpeg': 'image/jpeg',
-    '.js': 'text/javascript; charset=utf-8',
-    '.json': 'application/json; charset=utf-8',
-    '.png': 'image/png',
-    '.svg': 'image/svg+xml',
-    '.webmanifest': 'application/manifest+json; charset=utf-8',
-    '.woff': 'font/woff',
-    '.woff2': 'font/woff2',
-    '.xml': 'application/xml; charset=utf-8',
-  })[path.extname(file).toLowerCase()] || 'application/octet-stream';
+  return ({'.css': 'text/css; charset=utf-8', '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.xml': 'application/xml; charset=utf-8'})[path.extname(file).toLowerCase()] || 'application/octet-stream';
 }
 
 function resolveSource(requestUrl) {
   let pathname;
-  try {
-    pathname = decodeURIComponent(new URL(requestUrl, 'http://polymythcal.test').pathname);
-  } catch (_) {
-    return null;
-  }
+  try { pathname = decodeURIComponent(new URL(requestUrl, 'http://polymythcal.test').pathname); } catch (_) { return null; }
   const requested = path.resolve(ROOT, pathname.replace(/^\/+/, ''));
   if (requested !== ROOT && !requested.startsWith(`${ROOT}${path.sep}`)) return null;
   try {
     const stat = fs.statSync(requested);
     if (stat.isFile()) return requested;
-    if (stat.isDirectory()) {
-      const index = path.join(requested, 'index.html');
-      if (fs.existsSync(index)) return index;
-    }
+    if (stat.isDirectory() && fs.existsSync(path.join(requested, 'index.html'))) return path.join(requested, 'index.html');
   } catch (_) {}
   return null;
 }
@@ -302,531 +254,233 @@ function resolveSource(requestUrl) {
 async function startServer() {
   const server = http.createServer((request, response) => {
     const file = resolveSource(request.url || '/');
-    if (!file) {
-      response.writeHead(404, {'content-type': 'text/plain; charset=utf-8'});
-      response.end('Not found');
-      return;
-    }
+    if (!file) { response.writeHead(404, {'content-type': 'text/plain'}); response.end('Not found'); return; }
     response.writeHead(200, {'cache-control': 'no-store', 'content-type': mime(file)});
-    if (request.method === 'HEAD') response.end();
-    else fs.createReadStream(file).pipe(response);
+    if (request.method === 'HEAD') response.end(); else fs.createReadStream(file).pipe(response);
   });
-  await new Promise((resolve, reject) => {
-    server.once('error', reject);
-    server.listen(0, '127.0.0.1', resolve);
-  });
-  return {
-    base: `http://127.0.0.1:${server.address().port}`,
-    close: () => new Promise(resolve => server.close(resolve)),
-  };
+  await new Promise((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve); });
+  return {base: `http://127.0.0.1:${server.address().port}`, close: () => new Promise(resolve => server.close(resolve))};
 }
 
 function chromiumExecutable(chromium) {
-  const candidates = [
-    process.env.CHROME_EXECUTABLE,
-    '/tmp/chromium',
-    chromium.executablePath(),
-  ].filter(Boolean);
-  return candidates.find(candidate => fs.existsSync(candidate)) || '';
+  return [process.env.CHROME_EXECUTABLE, '/tmp/chromium', chromium.executablePath()].filter(Boolean).find(candidate => fs.existsSync(candidate)) || '';
 }
 
-async function newRuntime(browser, base, options = {}) {
+async function runtime(browser, base, options = {}) {
   const context = await browser.newContext({
     viewport: {width: options.width || 1280, height: options.height || 900},
-    hasTouch: Boolean(options.touch),
-    deviceScaleFactor: options.deviceScaleFactor || 1,
-    locale: options.locale === 'fr' ? 'fr-CA' : 'en-CA',
-    reducedMotion: 'reduce',
+    hasTouch: Boolean(options.touch), deviceScaleFactor: options.deviceScaleFactor || 1,
+    locale: options.locale || 'en-CA', reducedMotion: 'reduce',
   });
-  await context.route('**/*', route => {
-    if (route.request().url().startsWith(base)) return route.continue();
-    return route.fulfill({status: 204, body: ''});
-  });
+  await context.route('**/*', route => route.request().url().startsWith(base) ? route.continue() : route.fulfill({status: 204, body: ''}));
   const page = await context.newPage();
-  page.setDefaultTimeout(20000);
+  page.setDefaultTimeout(25000);
   const errors = [];
-  page.on('pageerror', error => errors.push(`pageerror: ${error.stack || error}`));
-  page.on('console', message => {
-    if (message.type() === 'error') errors.push(`console: ${message.text()}`);
-  });
-  page.on('requestfailed', request => {
-    if (request.url().startsWith(base)) errors.push(`requestfailed: ${request.url()} — ${request.failure()?.errorText || 'unknown'}`);
-  });
-  page.on('response', response => {
-    if (response.url().startsWith(base) && response.status() >= 400) {
-      errors.push(`response ${response.status()}: ${response.url()}`);
-    }
-  });
+  page.on('pageerror', error => errors.push(`pageerror: ${error.message}`));
+  page.on('console', message => { if (message.type() === 'error') errors.push(`console: ${message.text()}`); });
+  page.on('requestfailed', request => { if (request.url().startsWith(base)) errors.push(`requestfailed: ${request.url()}`); });
   return {context, page, errors};
-}
-
-async function settle(page) {
-  await page.evaluate(async () => {
-    if (document.fonts?.ready) await document.fonts.ready;
-    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-  });
 }
 
 async function ready(page, url) {
   await page.goto(url, {waitUntil: 'domcontentloaded', timeout: READY_TIMEOUT_MS});
-  await page.waitForFunction(() => (
-    document.getElementById('pmResults')?.getAttribute('aria-busy') === 'false'
-    && /^\s*[\d\s,.\u00a0\u202f]+\s/.test(document.getElementById('pmResultsTitle')?.textContent || '')
-  ), undefined, {timeout: READY_TIMEOUT_MS});
-  await settle(page);
+  await page.waitForFunction(() => document.getElementById('pmdResults')?.getAttribute('aria-busy') === 'false', undefined, {timeout: READY_TIMEOUT_MS});
+  await page.evaluate(async () => { if (document.fonts?.ready) await document.fonts.ready; await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))); });
 }
 
-async function openFilters(page) {
-  await page.locator('#pmFilterDrawer').evaluate(drawer => { drawer.open = true; });
-  await settle(page);
+function integer(text) {
+  const firstNumber = String(text || '').match(/\d[\d\s,.\u00a0\u202f]*/)?.[0] || '';
+  const digits = firstNumber.replace(/\D/g, '');
+  return digits ? Number(digits) : 0;
 }
 
-function integerFromText(text) {
-  const digits = String(text || '').replace(/\D/g, '');
-  return digits ? Number(digits) : Number.NaN;
-}
-
-async function resultCount(page) {
-  return integerFromText(await page.locator('#pmResultsTitle').textContent());
-}
-
-async function waitForResultCount(page, expected) {
+async function waitCount(page, expected) {
   await page.waitForFunction(value => {
-    const digits = (document.getElementById('pmResultsTitle')?.textContent || '').replace(/\D/g, '');
-    return digits && Number(digits) === value;
+    const text = document.getElementById('pmdResultsCount')?.textContent || '';
+    const firstNumber = text.match(/\d[\d\s,.\u00a0\u202f]*/)?.[0] || '';
+    return Number(firstNumber.replace(/\D/g, '')) === value;
   }, expected);
 }
 
-async function collectAllResultIds(page, expectedCount) {
-  await waitForResultCount(page, expectedCount);
-  const loadMore = page.locator('#pmLoadMore');
-  let guard = 0;
-  while (!(await loadMore.evaluate(button => button.hidden))) {
-    const before = await page.locator('.pm-event-card').count();
-    await loadMore.click();
-    await page.waitForFunction(previous => (
-      document.querySelectorAll('.pm-event-card').length > previous
-      || document.getElementById('pmLoadMore')?.hidden
-    ), before);
-    guard += 1;
-    if (guard > 1000) throw new Error('Load-more guard exceeded');
-  }
-  const ids = await page.locator('.pm-event-card').evaluateAll(cards => cards.map(card => card.dataset.eventId));
-  equal(ids.length, expectedCount, 'rendered result-card count matches the dynamic result total');
-  equal(new Set(ids).size, ids.length, 'rendered result cards have unique IDs');
-  return ids;
+function coveredValues(events, axis, amount = 2) {
+  const counts = new Map();
+  for (const event of events) for (const value of event.facets?.[axis] || []) counts.set(value, (counts.get(value) || 0) + 1);
+  return [...counts].filter(([, count]) => count > 0).sort((a, b) => b[1] - a[1]).slice(0, amount).map(([value]) => value);
 }
 
-function expectedUnion(expected, group, values) {
-  const ids = new Set();
-  for (const value of values) {
-    for (const id of expected.get(`${group.key}:${value}`) || []) ids.add(id);
-  }
-  return [...ids];
+async function openFamily(page, axis) {
+  const details = page.locator(`.pmd-research-family[data-axis="${axis}"]`);
+  if (!(await details.evaluate(node => node.open))) await details.locator('summary').click();
+  await page.waitForSelector(`.pmd-research-family[data-axis="${axis}"] input[data-axis="${axis}"]`);
 }
 
-async function assertExactResults(page, ids, label) {
-  const rendered = await collectAllResultIds(page, ids.length);
-  sameValues(rendered, ids, `${label} returns exactly the explicitly declared record IDs`);
-}
-
-function queryUrl(base, locale, params) {
-  const query = params.toString();
-  return `${base}${locale.route}${query ? `?${query}` : ''}`;
-}
-
-async function assertRuntimeErrors(errors, label) {
-  // Give deferred assets and promise handlers one final turn to report errors.
-  await new Promise(resolve => setTimeout(resolve, 0));
-  check(errors.length === 0, `${label} has no console, page, request, or local HTTP errors`, errors.join(' | '));
-}
-
-async function runExactFacetLocale(browser, base, locale, groups, expected) {
-  const runtime = await newRuntime(browser, base, {locale: locale.code, width: 1280, height: 900});
-  const {context, page, errors} = runtime;
-  const label = `${locale.code.toUpperCase()} exact-facet`;
+async function browserLocale(browser, base, code, data) {
+  const prefix = code === 'fr' ? '/polymythseminars/fr/research/' : '/polymythseminars/research/';
+  const expectedLang = code === 'fr' ? 'fr-CA' : 'en-CA';
+  const {context, page, errors} = await runtime(browser, base, {locale: expectedLang});
   try {
-    const params = new URLSearchParams({time: 'all', sort: 'title'});
-    await ready(page, queryUrl(base, locale, params));
-    await openFilters(page);
-    equal(await page.locator('html').getAttribute('lang'), locale.lang, `${label} loads the intended language shell`);
-    equal(
-      await page.locator('[data-state-set="communityFormats"], [data-state-set="digitalFormats"], [data-state-set="programFormats"]').count(),
-      55,
-      `${label} renders all 55 controls`,
-    );
+    await ready(page, `${base}${prefix}?date=all&sort=title`);
+    equal(await page.locator('html').getAttribute('lang'), expectedLang, `${code.toUpperCase()} browser loads the intended Research shell`);
+    equal(await page.locator('.pmd-research-family').count(), 18, `${code.toUpperCase()} browser stages 18 research families`);
+    equal(await page.locator('.pmd-research-family[open]').count(), 0, `${code.toUpperCase()} research families start closed`);
+    equal(await page.locator('.pmd-research-family input').count(), 0, `${code.toUpperCase()} closed research families are lazy`);
 
-    for (const group of groups) {
-      equal(
-        await page.locator(`[data-state-set="${group.key}"]`).count(),
-        group.values.length,
-        `${label} Set ${group.set} renders ${group.values.length} controls`,
-      );
-      for (const value of group.values) {
-        const contractId = `${group.key}:${value}`;
-        const explicitIds = expected.get(contractId) || [];
-        const countText = await page.locator(`[data-count-for="${contractId}"]`).textContent();
-        equal(integerFromText(countText), explicitIds.length, `${label} ${contractId} live count is explicit-field-derived`);
-      }
+    for (const group of GROUPS) {
+      await openFamily(page, group.axis);
+      equal(await page.locator(`.pmd-research-family[data-axis="${group.axis}"] input[data-axis="${group.axis}"]`).count(), group.size, `${code.toUpperCase()} Set ${group.set} mounts all controlled values with nonzero counts`);
+      const value = coveredValues(data.events, group.axis, 1)[0];
+      const expected = data.expected.get(`${group.axis}:${value}`)?.length || 0;
+      const input = page.locator(`input[data-axis="${group.axis}"][data-value="${value}"]`);
+      const shownCount = integer(await input.locator('xpath=..').locator('.pmd-option-count').textContent());
+      equal(shownCount, expected, `${code.toUpperCase()} Set ${group.set} option count is exact`);
+      await input.check();
+      await waitCount(page, expected);
+      equal(new URL(page.url()).searchParams.get(group.axis), value, `${code.toUpperCase()} Set ${group.set} selection is shareable`);
+      equal(await page.locator(`#pmdSelected [data-action="remove-filter"][data-axis="${group.axis}"][data-value="${value}"]`).count(), 1, `${code.toUpperCase()} Set ${group.set} selection is removable`);
+      await page.locator(`#pmdSelected [data-action="remove-filter"][data-axis="${group.axis}"][data-value="${value}"]`).click();
+      await page.waitForFunction(key => !new URLSearchParams(location.search).has(key), group.axis);
     }
 
-    for (const group of groups) {
-      for (const value of group.values) {
-        const contractId = `${group.key}:${value}`;
-        const explicitIds = expected.get(contractId) || [];
-        const input = page.locator(`[data-state-set="${group.key}"][value="${value}"]`);
-        check(!(await input.isDisabled()), `${label} ${contractId} is enabled because it has explicit records`);
-        await input.check();
-        await page.waitForFunction(({key, value}) => (
-          new URLSearchParams(location.search).get(key)?.split(',').includes(value)
-        ), {key: group.key, value});
-        equal(
-          new URL(page.url()).searchParams.get(group.key),
-          value,
-          `${label} ${contractId} serializes into the shareable URL`,
-        );
-        equal(await resultCount(page), explicitIds.length, `${label} ${contractId} result count is exact`);
-        await assertExactResults(page, explicitIds, `${label} ${contractId}`);
-        equal(
-          await page.locator(`[data-remove-filter="${group.key}"][data-remove-value="${value}"]`).count(),
-          1,
-          `${label} ${contractId} exposes one removable active-filter chip`,
-        );
-        // Clear with the keyboard after the pointer-driven check. This still
-        // proves the real checkbox interaction in every one of the 55 exact
-        // facet cases, without relying on a second synthetic pointer action
-        // after the result grid has reflowed and moved the control.
-        await input.press('Space');
-        await page.waitForFunction(({key, value}) => (
-          !document.querySelector(`[data-state-set="${key}"][value="${value}"]`)?.checked
-          && !new URLSearchParams(location.search).has(key)
-        ), {key: group.key, value});
-      }
-    }
+    const group = GROUPS[0];
+    const [left, right] = coveredValues(data.events, group.axis, 2);
+    await openFamily(page, group.axis);
+    await page.locator(`input[data-axis="${group.axis}"][data-value="${left}"]`).check();
+    await page.locator(`input[data-axis="${group.axis}"][data-value="${right}"]`).check();
+    const union = data.events.filter(event => (event.facets?.[group.axis] || []).some(value => value === left || value === right)).length;
+    await waitCount(page, union);
+    equal(new URL(page.url()).searchParams.get(group.axis), [left, right].sort().join(','), `${code.toUpperCase()} Set 13 uses OR within the family`);
 
-    for (const group of groups) {
-      const values = firstCoveredValues(group, expected, 2);
-      equal(values.length, 2, `${label} Set ${group.set} finds two covered values for OR multi-select`);
-      if (values.length < 2) continue;
-      for (const value of values) {
-        await page.locator(`[data-state-set="${group.key}"][value="${value}"]`).check();
-      }
-      const serialized = [...values].sort().join(',');
-      await page.waitForFunction(({key, value}) => new URLSearchParams(location.search).get(key) === value, {
-        key: group.key,
-        value: serialized,
-      });
-      equal(new URL(page.url()).searchParams.get(group.key), serialized, `${label} Set ${group.set} serializes OR multi-select`);
-      await assertExactResults(page, expectedUnion(expected, group, values), `${label} Set ${group.set} OR multi-select`);
-      await page.locator(`[data-clear-section="${group.key}"]`).click();
-      await page.waitForFunction(key => !new URLSearchParams(location.search).has(key), group.key);
-      equal(await page.locator(`[data-state-set="${group.key}"]:checked`).count(), 0, `${label} Set ${group.set} section clear removes its multi-select`);
-    }
-    await assertRuntimeErrors(errors, label);
+    const second = GROUPS[1];
+    const cross = coveredValues(data.events, second.axis, 1)[0];
+    await openFamily(page, second.axis);
+    await page.locator(`input[data-axis="${second.axis}"][data-value="${cross}"]`).check();
+    const intersection = data.events.filter(event => (event.facets?.[group.axis] || []).some(value => value === left || value === right) && (event.facets?.[second.axis] || []).includes(cross)).length;
+    await waitCount(page, intersection);
+    equal(integer(await page.locator('#pmdResultsCount').textContent()), intersection, `${code.toUpperCase()} research filters use AND across families`);
+    check(errors.length === 0, `${code.toUpperCase()} Research run has no browser errors`, errors.join(' | '));
   } finally {
     await context.close();
   }
 }
 
-function firstCoveredValues(group, expected, count) {
-  return group.values.filter(value => (expected.get(`${group.key}:${value}`) || []).length > 0).slice(0, count);
-}
-
-async function runStateHistoryKeyboardLocale(browser, base, locale, groups, expected) {
-  const runtime = await newRuntime(browser, base, {locale: locale.code, width: 1180, height: 900});
-  const {context, page, errors} = runtime;
-  const label = `${locale.code.toUpperCase()} state/history/keyboard`;
+async function browserDiscovery(browser, base, data) {
+  const {context, page, errors} = await runtime(browser, base, {width: 1280, height: 900});
   try {
-    const groupA = groups[0];
-    const valuesA = firstCoveredValues(groupA, expected, 2);
-    equal(valuesA.length, 2, `${label} finds two covered Set 13 values for OR multi-select`);
-    const groupB = groups[1];
-    const valueB = firstCoveredValues(groupB, expected, 1)[0];
-    check(Boolean(valueB), `${label} finds a covered Set 14 value for history state`);
-    if (valuesA.length < 2 || !valueB) return;
+    await ready(page, `${base}/polymythseminars/?date=all&sort=title`);
+    equal(await page.locator('.pm-event-card').count(), 24, 'list view renders exactly one 24-group page');
+    check(await page.locator('#pmdPagination a[data-page="2"]').count() === 1, 'pagination exposes a real second-page link');
+    await page.locator('#pmdPagination a[data-page="2"]').click();
+    await page.waitForFunction(() => new URLSearchParams(location.search).get('page') === '2');
 
-    const baseParams = new URLSearchParams({time: 'all', sort: 'title'});
-    await ready(page, queryUrl(base, locale, baseParams));
-    await openFilters(page);
-
-    const first = page.locator(`[data-state-set="${groupA.key}"][value="${valuesA[0]}"]`);
-    await first.focus();
-    await page.keyboard.press('Space');
-    await page.waitForFunction(({key, value}) => (
-      document.activeElement?.matches(`[data-state-set="${key}"][value="${value}"]`)
-      && document.activeElement.checked
-    ), {key: groupA.key, value: valuesA[0]});
-    check(await first.isChecked(), `${label} Space activates a Set 13 checkbox`);
-    await page.locator(`[data-state-set="${groupA.key}"][value="${valuesA[1]}"]`).check();
-
-    const expectedA = expectedUnion(expected, groupA, valuesA);
-    const serializedA = [...valuesA].sort().join(',');
-    await page.waitForFunction(({key, value}) => new URLSearchParams(location.search).get(key) === value, {
-      key: groupA.key,
-      value: serializedA,
-    });
-    equal(new URL(page.url()).searchParams.get(groupA.key), serializedA, `${label} sorts and serializes OR multi-select values`);
-    await assertExactResults(page, expectedA, `${label} Set 13 OR multi-select`);
-    const selectedUrl = page.url();
-
-    await page.reload({waitUntil: 'domcontentloaded'});
-    await page.waitForFunction(() => document.getElementById('pmResults')?.getAttribute('aria-busy') === 'false');
-    sameValues(
-      await page.locator(`[data-state-set="${groupA.key}"]:checked`).evaluateAll(inputs => inputs.map(input => input.value)),
-      valuesA,
-      `${label} reload restores every selected Set 13 value`,
-    );
-    await assertExactResults(page, expectedA, `${label} reloaded OR multi-select`);
-
-    const stateBParams = new URLSearchParams({time: 'all', sort: 'title'});
-    stateBParams.set(groupB.key, valueB);
-    const stateBRelative = `${locale.route}?${stateBParams.toString()}`;
-    await page.evaluate(relative => {
-      history.pushState({setsBrowserGate: true}, '', relative);
-      dispatchEvent(new PopStateEvent('popstate'));
-    }, stateBRelative);
-    await page.waitForFunction(({key, value}) => (
-      new URLSearchParams(location.search).get(key) === value
-      && document.querySelector(`[data-state-set="${key}"][value="${value}"]`)?.checked
-    ), {key: groupB.key, value: valueB});
-    await assertExactResults(page, expected.get(`${groupB.key}:${valueB}`) || [], `${label} pushed Set 14 state`);
-
-    await page.goBack();
-    await page.waitForFunction(({key, value}) => new URLSearchParams(location.search).get(key) === value, {
-      key: groupA.key,
-      value: serializedA,
-    });
-    equal(page.url(), selectedUrl, `${label} Back restores the prior shareable URL`);
-    await assertExactResults(page, expectedA, `${label} Back-restored Set 13 state`);
-
-    await page.goForward();
-    await page.waitForFunction(({key, value}) => new URLSearchParams(location.search).get(key) === value, {
-      key: groupB.key,
-      value: valueB,
-    });
-    await assertExactResults(page, expected.get(`${groupB.key}:${valueB}`) || [], `${label} Forward-restored Set 14 state`);
-    await assertRuntimeErrors(errors, label);
+    await page.locator('#pmdSearch').fill('celestail');
+    await page.waitForFunction(() => new URLSearchParams(location.search).get('q') === 'celestail');
+    await waitCount(page, 0);
+    equal(await page.locator('.pm-event-card').count(), 0, 'misspelling does not silently add fuzzy results');
+    equal(await page.locator('[data-correction="celestial"]').count(), 1, 'misspelling offers a click-to-apply correction');
+    await page.locator('[data-correction="celestial"]').click();
+    await page.waitForFunction(() => new URLSearchParams(location.search).get('q') === 'celestial');
+    check(integer(await page.locator('#pmdResultsCount').textContent()) > 0, 'chosen correction performs a new exact/prefix search');
+    equal(await page.locator('.pm-event-card:not(:has(.pmd-match-reason))').count(), 0, 'every visible query result explains its match');
+    check(errors.length === 0, 'main discovery run has no browser errors', errors.join(' | '));
   } finally {
     await context.close();
   }
-}
 
-async function runResetLocale(browser, base, locale, groups) {
-  const runtime = await newRuntime(browser, base, {locale: locale.code, width: 1100, height: 900});
-  const {context, page, errors} = runtime;
-  const label = `${locale.code.toUpperCase()} reset-all`;
-  try {
-    await ready(page, `${base}${locale.route}`);
-    const stateSets = await page.locator('[data-state-set]').evaluateAll(inputs => {
-      const byKey = {};
-      for (const input of inputs) {
-        if (!byKey[input.dataset.stateSet]) byKey[input.dataset.stateSet] = [];
-        byKey[input.dataset.stateSet].push(input.value);
-      }
-      return byKey;
-    });
-    const near = await page.locator('#pmNear option').evaluateAll(options => options.map(option => option.value).find(Boolean) || '');
-    const params = new URLSearchParams({
-      q: 'reset-contract-sentinel',
-      time: 'all',
-      sort: near ? 'nearest' : 'latest',
-    });
-    if (near) params.set('near', near);
-    const chosen = {};
-    for (const [key, values] of Object.entries(stateSets)) {
-      chosen[key] = values[0];
-      params.set(key, values[0]);
+  for (const routeCase of [
+    {route: 'writingkids', matches: event => (event.writing_bands || []).includes('kids'), kind: 'apply'},
+    {route: 'cfps', matches: event => (event.academic_bands || []).includes('cfps'), kind: 'apply'},
+  ]) {
+    const routePath = path.join(ROOT, routeCase.route, 'index.html');
+    if (!fs.existsSync(routePath) || !read(`${routeCase.route}/index.html`).includes('/js/polymythcal-discovery.js')) {
+      failures.push(`${routeCase.route} focused route has not been rebuilt onto discovery-v2`);
+      continue;
     }
-    await ready(page, queryUrl(base, locale, params));
-    await openFilters(page);
-    for (const [key, value] of Object.entries(chosen)) {
-      check(
-        await page.locator(`[data-state-set="${key}"][value="${value}"]`).isChecked(),
-        `${label} precondition selects old/new ${key}`,
-      );
+    const routed = await runtime(browser, base, {width: 1100, height: 850});
+    try {
+      await ready(routed.page, `${base}/${routeCase.route}/?date=all&sort=title`);
+      const expected = data.events.filter(event => routeCase.matches(event) && (event.facets?.kind || []).includes(routeCase.kind)).length;
+      await waitCount(routed.page, expected);
+      equal(integer(await routed.page.locator('#pmdResultsCount').textContent()), expected, `${routeCase.route} restricts the corpus and applies its default kind`);
+      equal(new URL(routed.page.url()).searchParams.get('kind'), routeCase.kind, `${routeCase.route} persists its default kind in the shareable URL`);
+      await routed.page.goto(`${base}/${routeCase.route}/?date=all&sort=title&kind=all`, {waitUntil: 'domcontentloaded'});
+      await routed.page.waitForFunction(() => document.getElementById('pmdResults')?.getAttribute('aria-busy') === 'false');
+      const allExpected = data.events.filter(routeCase.matches).length;
+      await waitCount(routed.page, allExpected);
+      equal(integer(await routed.page.locator('#pmdResultsCount').textContent()), allExpected, `${routeCase.route} honors explicit kind=all`);
+      check(routed.errors.length === 0, `${routeCase.route} discovery run has no browser errors`, routed.errors.join(' | '));
+    } finally {
+      await routed.context.close();
     }
-    for (const group of groups) {
-      check(
-        await page.locator(`[data-state-set="${group.key}"]:checked`).count() === 1,
-        `${label} precondition selects Set ${group.set}`,
-      );
-    }
-
-    await page.locator('#pmResetFilters').click();
-    await page.waitForFunction(() => location.search === '');
-    equal(await page.locator('#pmSearch').inputValue(), '', `${label} clears search`);
-    equal(await page.locator('input[name="pm-time"]:checked').getAttribute('value'), 'upcoming', `${label} restores upcoming time`);
-    equal(await page.locator('#pmSort').inputValue(), 'soonest', `${label} restores soonest sorting`);
-    equal(await page.locator('#pmNear').inputValue(), '', `${label} clears the nearby origin`);
-    equal(await page.locator('#pmActiveList').locator(':scope > *').count(), 0, `${label} removes every active-filter chip`);
-    check(await page.locator('#pmResetFilters').isDisabled(), `${label} disables reset after returning to defaults`);
-    equal(await page.locator('[data-state-set="content"]:checked').count(), stateSets.content.length, `${label} restores both default listing types`);
-    for (const [key] of Object.entries(stateSets)) {
-      if (key === 'content') continue;
-      equal(await page.locator(`[data-state-set="${key}"]:checked`).count(), 0, `${label} clears ${key}`);
-    }
-    for (const group of groups) {
-      equal(await page.locator(`[data-state-set="${group.key}"]:checked`).count(), 0, `${label} clears Set ${group.set}`);
-    }
-    equal(await page.evaluate(() => document.activeElement?.id), 'pmSearch', `${label} returns keyboard focus to search`);
-    await assertRuntimeErrors(errors, label);
-  } finally {
-    await context.close();
   }
 }
 
-async function runTouchLocale(browser, base, locale, groups, expected) {
-  const runtime = await newRuntime(browser, base, {locale: locale.code, width: 375, height: 812, touch: true});
-  const {context, page, errors} = runtime;
-  const label = `${locale.code.toUpperCase()} touch`;
-  try {
-    const params = new URLSearchParams({time: 'all', sort: 'title'});
-    await ready(page, queryUrl(base, locale, params));
-    const summary = page.locator('#pmFilterDrawer > summary');
-    await summary.tap();
-    check(await page.locator('#pmFilterDrawer').evaluate(drawer => drawer.open), `${label} opens the filter drawer by touch`);
-    const group = groups[2];
-    const value = firstCoveredValues(group, expected, 1)[0];
-    check(Boolean(value), `${label} finds a covered Set 15 control`);
-    if (!value) return;
-    const contractId = `${group.key}:${value}`;
-    const input = page.locator(`[data-state-set="${group.key}"][value="${value}"]`);
-    const labelControl = page.locator(`[data-label-key="${contractId}"]`);
-    const box = await labelControl.boundingBox();
-    check(Boolean(box && box.height >= 43 && box.width >= 43), `${label} ${contractId} exposes a 44px-class touch target`, box ? `${box.width}×${box.height}` : 'no box');
-    await labelControl.tap();
-    await page.waitForFunction(({key, value}) => (
-      document.querySelector(`[data-state-set="${key}"][value="${value}"]`)?.checked
-      && new URLSearchParams(location.search).get(key) === value
-    ), {key: group.key, value});
-    check(await input.isChecked(), `${label} tap selects ${contractId}`);
-    await assertExactResults(page, expected.get(contractId) || [], `${label} ${contractId}`);
-    await labelControl.tap();
-    await page.waitForFunction(({key, value}) => (
-      !document.querySelector(`[data-state-set="${key}"][value="${value}"]`)?.checked
-      && !new URLSearchParams(location.search).has(key)
-    ), {key: group.key, value});
-    check(!(await input.isChecked()), `${label} second tap clears ${contractId}`);
-    await assertRuntimeErrors(errors, label);
-  } finally {
-    await context.close();
+async function browserResponsive(browser, base) {
+  for (const layout of [
+    {label: 'mobile touch', width: 375, height: 812, touch: true, scale: 1},
+    {label: '200% desktop zoom equivalent', width: 640, height: 600, touch: false, scale: 2},
+  ]) {
+    const {context, page, errors} = await runtime(browser, base, {width: layout.width, height: layout.height, touch: layout.touch, deviceScaleFactor: layout.scale});
+    try {
+      await ready(page, `${base}/polymythseminars/?date=all&view=calendar`);
+      const measurement = await page.evaluate(() => ({
+        overflow: document.scrollingElement.scrollWidth - document.scrollingElement.clientWidth,
+        table: getComputedStyle(document.querySelector('.pmd-calendar-table-wrap')).display,
+        agenda: getComputedStyle(document.querySelector('.pmd-calendar-agenda')).display,
+        undersized: [...document.querySelectorAll('button, .pmd-option, .pmd-mobile-bar a')].filter(node => {
+          const rect = node.getBoundingClientRect();
+          return rect.width > 0 && rect.height > 0 && rect.height < 43;
+        }).length,
+      }));
+      check(measurement.overflow <= 2, `${layout.label} has no horizontal document overflow`, `${measurement.overflow}px`);
+      equal(measurement.table, 'none', `${layout.label} hides the dense calendar table`);
+      check(measurement.agenda !== 'none', `${layout.label} exposes the readable agenda`);
+      equal(measurement.undersized, 0, `${layout.label} keeps interactive controls at 44px-class height`);
+      check(errors.length === 0, `${layout.label} has no browser errors`, errors.join(' | '));
+    } finally {
+      await context.close();
+    }
   }
 }
 
-async function runLayoutCase(browser, base, locale, groups, testCase) {
-  const runtime = await newRuntime(browser, base, {
-    locale: locale.code,
-    width: testCase.width,
-    height: testCase.height,
-    touch: testCase.touch,
-    deviceScaleFactor: testCase.deviceScaleFactor,
-  });
-  const {context, page, errors} = runtime;
-  const label = `${locale.code.toUpperCase()} ${testCase.label} layout`;
-  try {
-    const params = new URLSearchParams({time: 'all'});
-    await ready(page, queryUrl(base, locale, params));
-    await openFilters(page);
-    const measurements = await page.evaluate(keys => {
-      const scrolling = document.scrollingElement;
-      const viewportWidth = document.documentElement.clientWidth;
-      const selector = [
-        '.pm-shell',
-        '#pmFilterDrawer',
-        '.pm-filter-layout',
-        ...keys.map(key => `[data-clear-section="${key}"]`),
-      ].filter(Boolean).join(',');
-      const sections = keys.map(key => document.querySelector(`[data-state-set="${key}"]`)?.closest('.pm-filter-section')).filter(Boolean);
-      const chips = keys.flatMap(key => [...document.querySelectorAll(`[data-state-set="${key}"]`)].map(input => input.closest('.pm-chip'))).filter(Boolean);
-      const nodes = [...new Set([...document.querySelectorAll(selector), ...sections, ...chips])];
-      const outside = nodes.map(node => {
-        const rect = node.getBoundingClientRect();
-        return {
-          node: node.matches('.pm-chip') ? node.dataset.labelKey : node.id || node.className,
-          left: rect.left,
-          right: rect.right,
-          width: rect.width,
-        };
-      }).filter(rect => rect.left < -2 || rect.right > viewportWidth + 2 || rect.width > viewportWidth + 2);
-      const undersized = chips.map(node => {
-        const rect = node.getBoundingClientRect();
-        return {id: node.dataset.labelKey, width: rect.width, height: rect.height};
-      }).filter(rect => rect.width < 43 || rect.height < 43);
-      return {
-        viewportWidth,
-        scrollWidth: scrolling.scrollWidth,
-        overflow: scrolling.scrollWidth - scrolling.clientWidth,
-        outside,
-        undersized,
-        controls: chips.length,
-      };
-    }, groups.map(group => group.key));
-    equal(measurements.controls, 55, `${label} measures all 55 visible new controls`);
-    check(measurements.overflow <= 2, `${label} has no horizontal document overflow`, `${measurements.overflow}px at ${measurements.viewportWidth}px`);
-    check(measurements.outside.length === 0, `${label} keeps every new facet surface inside the viewport`, JSON.stringify(measurements.outside.slice(0, 10)));
-    check(measurements.undersized.length === 0, `${label} keeps all new controls at least 44px-class`, JSON.stringify(measurements.undersized.slice(0, 10)));
-    await assertRuntimeErrors(errors, label);
-  } finally {
-    await context.close();
-  }
-}
-
-async function guarded(label, callback) {
-  try {
-    await callback();
-  } catch (error) {
-    failures.push(`${label} threw — ${error.stack || error}`);
-  }
-}
-
-function reportAndExit(mode) {
+function report(mode) {
   if (failures.length) {
     console.error(`POLYMYTHCAL SETS 13-15 ${mode} CHECK FAILED`);
-    for (const failure of failures.slice(0, 400)) console.error(` - ${failure}`);
-    if (failures.length > 400) console.error(` - … ${failures.length - 400} additional failures`);
+    for (const failure of failures.slice(0, 300)) console.error(` - ${failure}`);
+    if (failures.length > 300) console.error(` - … ${failures.length - 300} more`);
     process.exitCode = 1;
     return;
   }
-  console.log(`POLYMYTHCAL SETS 13-15 ${mode} CHECK PASSED — ${assertions} assertions; locked 22/14/19 facets; EN/FR${DOM_ONLY ? ' DOM/controller/payload wiring only' : ' exact data, URL/history/reset, keyboard/touch, and responsive/200% layout'}.`);
+  console.log(`POLYMYTHCAL SETS 13-15 ${mode} CHECK PASSED — ${assertions} assertions; exact 22/14/19 taxonomy, safe split payloads, compact EN/FR shells${DOM_ONLY ? '' : ', exact browser counts, URL state, pagination, no fuzzy inclusion, route filtering, and responsive accessibility'}.`);
 }
 
 (async () => {
-  const groups = schemaGroups();
-  sourceContract(groups);
-  localizedDomContract(groups);
-  const browse = browseContract(groups, !DOM_ONLY);
-  if (DOM_ONLY) {
-    reportAndExit('DOM-ONLY');
-    return;
-  }
-  if (failures.length) {
-    reportAndExit('BROWSER');
-    return;
-  }
+  const data = schemaAndPayloadContract();
+  sourceContract();
+  shellContract();
+  if (DOM_ONLY) { report('DOM-ONLY'); return; }
+  if (failures.length) { report('BROWSER'); return; }
 
   const {chromium} = require('playwright');
   const server = await startServer();
   let browser;
   try {
-    const launchOptions = {headless: true};
+    const launch = {headless: true};
     const executablePath = chromiumExecutable(chromium);
-    if (executablePath) launchOptions.executablePath = executablePath;
-    browser = await chromium.launch(launchOptions);
-    for (const locale of LOCALES) {
-      await guarded(`${locale.code} exact facets`, () => runExactFacetLocale(browser, server.base, locale, groups, browse.expected));
-      await guarded(`${locale.code} state/history/keyboard`, () => runStateHistoryKeyboardLocale(browser, server.base, locale, groups, browse.expected));
-      await guarded(`${locale.code} reset`, () => runResetLocale(browser, server.base, locale, groups));
-      await guarded(`${locale.code} touch`, () => runTouchLocale(browser, server.base, locale, groups, browse.expected));
-      for (const testCase of LAYOUT_CASES) {
-        await guarded(`${locale.code} ${testCase.label}`, () => runLayoutCase(browser, server.base, locale, groups, testCase));
-      }
-    }
+    if (executablePath) launch.executablePath = executablePath;
+    browser = await chromium.launch(launch);
+    await browserLocale(browser, server.base, 'en', data);
+    await browserLocale(browser, server.base, 'fr', data);
+    await browserDiscovery(browser, server.base, data);
+    await browserResponsive(browser, server.base);
+  } catch (error) {
+    failures.push(`browser execution failed — ${error.stack || error}`);
   } finally {
     if (browser) await browser.close();
     await server.close();
   }
-  reportAndExit('BROWSER');
+  report('BROWSER');
 })().catch(error => {
   console.error(`POLYMYTHCAL SETS 13-15 CHECK FAILED — ${error.stack || error}`);
   process.exit(1);
 });
+

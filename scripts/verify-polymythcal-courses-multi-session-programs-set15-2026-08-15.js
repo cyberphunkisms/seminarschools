@@ -22,7 +22,9 @@ const manualDoc = readJson('data/manual-events.json');
 const manual = list(manualDoc);
 const consolidated = list(readJson('data/polymyth-seminar-events.json'));
 const published = list(readJson('polymythseminars/events.json'));
-const browser = list(readJson('polymythseminars/browse.json'));
+const browseDoc = readJson('polymythseminars/browse.json');
+const watchlistDoc = readJson('polymythseminars/watchlist.json');
+const browser = [...list(browseDoc), ...(watchlistDoc.items || [])];
 const schema = readJson('data/polymythcal-event-schema-v2.json');
 const sourcesDoc = readJson('scripts/sources.json');
 const sources = Array.isArray(sourcesDoc) ? sourcesDoc : (sourcesDoc.sources || []);
@@ -56,13 +58,12 @@ const preservedDetailFields = [
   'program_stage_source_value', 'program_schedule_detail', 'program_start_date',
   'program_end_date', 'eligibility_audience', 'registration_application_route',
 ];
-const browserBuilder = readText('scripts/build-polymythcal-browser-payload.js');
+const browserBuilder = readText('scripts/lib/polymythcal-discovery-model.js');
 const propagationGate = readText('scripts/verify-polymythcal-set-field-propagation.js');
 const detailBuilder = readText('scripts/build-polymythcal-audit13.py');
 for (const field of preservedDetailFields) {
   assert(schema.properties?.[field], `Schema omits preserved Set 15 detail ${field}`);
-  assert(browserBuilder.includes(`'${field}'`), `Browser payload omits preserved Set 15 detail ${field}`);
-  assert(propagationGate.includes(`'${field}'`), `Propagation gate omits preserved Set 15 detail ${field}`);
+  assert(!browserBuilder.includes(`    ${field}: event.${field},`), `Safe discovery payload exposes private Set 15 detail ${field}`);
   assert(detailBuilder.includes(`'${field}'`), `Detail surface omits preserved Set 15 detail ${field}`);
 }
 
@@ -122,8 +123,7 @@ const retainedSet15Fields = [
 const set15Fields = new Set(retainedSet15Fields);
 for (const field of retainedSet15Fields) {
   assert(schema.properties?.[field], `Schema omits retained Set 15 field ${field}`);
-  assert(browserBuilder.includes(`'${field}'`), `Browser payload omits retained Set 15 field ${field}`);
-  assert(propagationGate.includes(`'${field}'`), `Propagation gate omits retained Set 15 field ${field}`);
+  assert(!browserBuilder.includes(`    ${field}: event.${field},`), `Safe discovery payload exposes retained private Set 15 field ${field}`);
 }
 
 for (const record of ledger.records) {
@@ -209,11 +209,9 @@ for (const id of expectedIds) {
     if (!Object.hasOwn(event, field)) continue;
     assert(same(canonical[field], event[field]), `${id}: canonical Set 15 field differs: ${field}`);
     assert(same(publicEvent[field], event[field]), `${id}: public Set 15 field differs: ${field}`);
-    const value = event[field];
-    const hasValue = value !== undefined && value !== null && value !== '' && (!Array.isArray(value) || value.length > 0);
-    if (hasValue) assert(same(compact[field], event[field]), `${id}: browser Set 15 field differs: ${field}`);
-    else assert(!Object.hasOwn(compact, field), `${id}: browser retained empty Set 15 field ${field}`);
+    assert(!Object.hasOwn(compact, field), `${id}: safe discovery data exposes private Set 15 field ${field}`);
   }
+  assert(same(compact.facets?.programFormats || [], event.course_program_formats), `${id}: safe programFormats facets differ from the authored Set 15 values`);
 }
 
 console.log(JSON.stringify({
@@ -231,3 +229,4 @@ console.log(JSON.stringify({
   browser_records: browser.length,
   second_run_additions: meta.records_added_latest_run,
 }, null, 2));
+

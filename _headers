@@ -60,9 +60,16 @@
   Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
 
 /polymythseminars/events.json
-  Cache-Control: public, max-age=300, must-revalidate
+  Cache-Control: no-store, max-age=0
+  X-Robots-Tag: noindex, nofollow
 
 /polymythseminars/browse.json
+  Cache-Control: public, max-age=300, must-revalidate
+
+/polymythseminars/watchlist.json
+  Cache-Control: public, max-age=300, must-revalidate
+
+/polymythseminars/research.json
   Cache-Control: public, max-age=300, must-revalidate
 
 /polymythseminars/featured.json

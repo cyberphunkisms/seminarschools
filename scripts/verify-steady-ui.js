@@ -96,7 +96,7 @@ if (!/reduced \|\| calm/.test(mandala)) errors.push('js/mandala.js does not gate
 if (!/visibilitychange/.test(mandala) || !/cancelAnimationFrame\(raf\)/.test(mandala)) errors.push('js/mandala.js does not pause its settle loop while hidden');
 if (/NEVER sleeps|requestAnimationFrame\(frame\);\s*\n\s*}\s*\n\s*\n\s*window\.addEventListener\(['"]scroll['"], setTargets/.test(mandala)) errors.push('js/mandala.js retains a permanent animation loop');
 
-const poly = read(path.join(ROOT, 'js', 'polymythcal-revamp.js'));
+const poly = read(path.join(ROOT, 'js', 'polymythcal-discovery.js'));
 if (!/const PAGE_SIZE = 24;/.test(poly)) errors.push('Polymythcal initial render is not capped at 24 cards');
 if (/scrollIntoView\(\{\s*behavior:\s*["']smooth/.test(poly)) errors.push('Polymythcal still smooth-scrolls after interaction');
 if (!/setTimeout\(\(\) => \{\s*render\(\)/.test(poly)) warnings.push('Polymythcal search debounce was not detected');
@@ -174,3 +174,4 @@ if (errors.length) {
 }
 console.log(`STEADY UI CHECK PASSED — ${sourceHtml.length} source pages, ${publicHtml.length} public pages, and ${runtimeFiles.length} active HTML/CSS/JS files satisfy the pre-paint, calm-interaction, scroll-geometry, anti-yap, bounded-render, and background-loop contracts.`);
 warnings.forEach(w => console.warn('WARN ' + w));
+

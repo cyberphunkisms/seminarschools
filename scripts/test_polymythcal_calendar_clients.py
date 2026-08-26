@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
+import html
 import json
 import re
 import shutil
@@ -28,6 +30,11 @@ INVENTORY_CONTRACT = json.loads(
 )
 MINIMUM_CANONICAL_EVENTS = int(INVENTORY_CONTRACT["minimum_canonical_events"])
 EXPECTED_FEED_ICS_FILES = 12
+EXPECTED_DISCOVERY_COUNTS = {"canonical": 2_088, "chronology": 1_954, "watchlist": 134}
+WATCHLIST_REASON = {
+    "code": "monitoring-marker",
+    "detail": "Displayed date is a monitoring marker, not a confirmed event or deadline date.",
+}
 ALLOWED_STATUSES = {"CONFIRMED", "TENTATIVE", "CANCELLED"}
 
 
@@ -42,6 +49,13 @@ def explicit_aliases(events):
         for alias in (event.get("legacy_ids") or [])
         if str(alias) != str(event.get("id") or event.get("identity_key"))
     }
+
+
+def hashed_legacy_alias(value):
+    source = html.unescape(str(value or "event")).lower().replace("&", " and ")
+    slug = re.sub(r"[^a-z0-9]+", "-", source).strip("-")[:76] or "event"
+    digest = hashlib.sha1(str(value).encode()).hexdigest()[:8]
+    return f"{slug}-{digest}"
 
 
 def all_ics_files():
@@ -90,8 +104,17 @@ def load_feed_builder():
 class CurrentCalendarCorpusTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.payload = load_json("polymythseminars/events.json")
-        cls.events = cls.payload["events"]
+        cls.payload = load_json("data/polymyth-seminar-events.json")
+        cls.private_mirror = load_json("polymythseminars/events.json")
+        cls.browse = load_json("polymythseminars/browse.json")
+        cls.watchlist = load_json("polymythseminars/watchlist.json")
+        cls.surfaces = load_json("data/polymythcal-publication-surfaces.json")
+        cls.canonical_events = cls.payload["events"]
+        canonical_by_id = {str(event["id"]): event for event in cls.canonical_events}
+        cls.events = [canonical_by_id[event["id"]] for event in cls.browse["events"]]
+        cls.monitoring_events = [
+            canonical_by_id[item["id"]] for item in cls.watchlist["items"]
+        ]
         cls.by_id = {
             str(event.get("id") or event.get("identity_key")): event
             for event in cls.events
@@ -110,7 +133,10 @@ class CurrentCalendarCorpusTests(unittest.TestCase):
             path.stem for path in (ROOT / "polymythseminars" / "feeds").glob("*.ics")
         }
 
-        self.assertGreaterEqual(len(self.events), MINIMUM_CANONICAL_EVENTS)
+        self.assertGreaterEqual(len(self.canonical_events), MINIMUM_CANONICAL_EVENTS)
+        self.assertEqual(len(self.canonical_events), EXPECTED_DISCOVERY_COUNTS["canonical"])
+        self.assertEqual(len(self.events), EXPECTED_DISCOVERY_COUNTS["chronology"])
+        self.assertEqual(len(self.monitoring_events), EXPECTED_DISCOVERY_COUNTS["watchlist"])
         self.assertEqual(actual_event_names, expected_event_names)
         self.assertEqual(len(actual_event_names), len(self.events) + len(self.aliases))
         self.assertEqual(actual_feed_names, expected_feed_names)
@@ -119,6 +145,62 @@ class CurrentCalendarCorpusTests(unittest.TestCase):
             len(all_ics_files()),
             len(self.events) + len(self.aliases) + EXPECTED_FEED_ICS_FILES,
         )
+
+    def test_discovery_partition_and_monitoring_quarantine_are_exact(self):
+        canonical_ids = [str(event["id"]) for event in self.canonical_events]
+        chronology_ids = [str(event["id"]) for event in self.events]
+        monitoring_ids = [str(event["id"]) for event in self.monitoring_events]
+        self.assertEqual(self.private_mirror, self.payload)
+        self.assertFalse((ROOT / "public/polymythseminars/events.json").exists())
+        self.assertFalse(set(chronology_ids) & set(monitoring_ids))
+        self.assertEqual(set(chronology_ids) | set(monitoring_ids), set(canonical_ids))
+        self.assertEqual(self.surfaces["_schema"], "polymythcal-publication-surfaces-v2")
+        self.assertEqual(self.surfaces["schema"], "polymythcal-publication-surfaces-v2")
+        self.assertEqual(self.surfaces["chronology_ids"], chronology_ids)
+        self.assertEqual(self.surfaces["watchlist_ids"], monitoring_ids)
+        self.assertEqual(
+            self.surfaces["reasons"],
+            {event_id: WATCHLIST_REASON for event_id in monitoring_ids},
+        )
+        for item in self.watchlist["items"]:
+            self.assertNotIn("date", item)
+            self.assertNotIn("end_date", item)
+            self.assertEqual(item["date_status"], "awaiting-confirmed-date")
+
+        all_feed_uids = set()
+        for path in (ROOT / "polymythseminars/feeds").glob("*.ics"):
+            _, components = parsed_events(path)
+            all_feed_uids.update(str(component.get("UID")) for component in components)
+
+        for event in self.monitoring_events:
+            event_id = str(event["id"])
+            legacy_ids = [str(value) for value in event.get("legacy_ids", [])]
+            english_route_ids = {event_id, hashed_legacy_alias(event_id)}
+            french_route_ids = {event_id}
+            ics_ids = {event_id}
+            for legacy_id in legacy_ids:
+                english_route_ids.update((legacy_id, hashed_legacy_alias(legacy_id)))
+                french_route_ids.add(legacy_id)
+                ics_ids.add(legacy_id)
+            for route_id in english_route_ids:
+                self.assertFalse(
+                    (ROOT / f"polymythseminars/events/{route_id}/index.html").exists()
+                )
+                self.assertFalse(
+                    (ROOT / f"public/polymythseminars/events/{route_id}/index.html").exists()
+                )
+            for route_id in french_route_ids:
+                self.assertFalse(
+                    (ROOT / f"polymythseminars/fr/events/{route_id}/index.html").exists()
+                )
+                self.assertFalse(
+                    (ROOT / f"public/polymythseminars/fr/events/{route_id}/index.html").exists()
+                )
+            for route_id in ics_ids:
+                self.assertFalse((ROOT / f"polymythseminars/ics/{route_id}.ics").exists())
+                self.assertFalse((ROOT / f"public/polymythseminars/ics/{route_id}.ics").exists())
+            expected_uid = f'{event.get("identity_key") or event_id}@seminarschools.com'
+            self.assertNotIn(expected_uid, all_feed_uids)
 
     def test_every_file_has_strict_rfc5545_transport_framing(self):
         for path in all_ics_files():
@@ -452,6 +534,19 @@ class CalendarBuilderEdgeCaseTests(unittest.TestCase):
                 json.dumps({"events": [timed, all_day]}, ensure_ascii=False),
                 encoding="utf-8",
             )
+            (root / "data/polymythcal-publication-surfaces.json").write_text(
+                json.dumps({
+                    "_schema": "polymythcal-publication-surfaces-v2",
+                    "schema": "polymythcal-publication-surfaces-v2",
+                    "canonical_count": 2,
+                    "chronology_count": 2,
+                    "watchlist_count": 0,
+                    "chronology_ids": ["unicode-dst-event", "all-day-event"],
+                    "watchlist_ids": [],
+                    "reasons": {},
+                }),
+                encoding="utf-8",
+            )
             environment = {"SITE_BUILD_DATE": "2026-07-26"}
             for script in ("build-polymythcal-feeds.py", "build-polymythcal-audit13.py"):
                 subprocess.run(
@@ -492,3 +587,4 @@ def parsed_events_for_root(path: Path):
 
 if __name__ == "__main__":
     unittest.main()
+

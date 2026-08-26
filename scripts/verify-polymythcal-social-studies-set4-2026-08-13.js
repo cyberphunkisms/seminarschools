@@ -155,11 +155,11 @@ for (const field of [
   'social_studies_subfields','calendar_stage','series_role','local_grade_system'
 ]) assert(schema.properties && schema.properties[field], `Schema missing ${field}`);
 
-const ui = readText('polymythseminars/index.html');
-const revamp = readText('js/polymythcal-revamp.js');
-assert(ui.includes('topics:social-studies') && ui.includes('value="social-studies"'), 'Polymythcal UI lacks Social Studies filter');
-for (const needle of ['topics.push("social-studies")','event.social_studies_subfields','event.research_set','event.subjects']) {
-  assert(revamp.includes(needle), `Polymythcal search/classifier missing ${needle}`);
+const taxonomy = readJson('polymythseminars/browse.json').taxonomy;
+const revamp = readText('scripts/lib/polymythcal-discovery-model.js');
+assert(taxonomy?.axes?.topics?.values?.['social-studies']?.en && taxonomy?.axes?.topics?.values?.['social-studies']?.fr, 'Bilingual Research taxonomy lacks Social Studies');
+for (const needle of ['social-studies','subjects','entry_family']) {
+  assert(revamp.includes(needle), `Polymythcal discovery classifier missing ${needle}`);
 }
 
 const clRows = readText('data/website-cl.jsonl').trim().split(/\n+/).map(JSON.parse);
@@ -199,3 +199,4 @@ const summary = {
   change_list: 'CL-WEB-204 through CL-WEB-211 complete'
 };
 console.log(JSON.stringify(summary, null, 2));
+

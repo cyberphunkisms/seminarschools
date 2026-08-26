@@ -43,10 +43,15 @@ const releaseId = read('RELEASE_ID.txt').trim();
 const release = parseJson('RELEASE_MANIFEST.json');
 const buildManifest = parseJson('data/polymythcal-build-manifest.json');
 const eventPayload = parseJson('polymythseminars/events.json');
+const browsePayload = parseJson('polymythseminars/browse.json');
+const watchlistPayload = parseJson('polymythseminars/watchlist.json');
+const publicationSurfaces = parseJson('data/polymythcal-publication-surfaces.json');
 const teacherPayload = parseJson('teacherresources/resources-data.json');
 const pkg = parseJson('package.json');
 const lock = parseJson('package-lock.json');
 const events = Array.isArray(eventPayload.events) ? eventPayload.events : [];
+const chronology = Array.isArray(browsePayload.events) ? browsePayload.events : [];
+const monitoring = Array.isArray(watchlistPayload.items) ? watchlistPayload.items : [];
 const teacherResources = (teacherPayload.groups || []).flatMap(group =>
   (group.categories || []).flatMap(category => category.entries || []),
 );
@@ -67,6 +72,21 @@ check(
     && eventPayload.count === events.length
     && eventPayload._total_events === events.length,
   `Polymythcal inventory or derived-count parity failed (${events.length}; floor ${inventory.minimum_canonical_events})`,
+);
+check(
+  browsePayload._schema === 'polymythcal-discovery-v2'
+    && watchlistPayload._schema === 'polymythcal-watchlist-v2'
+    && publicationSurfaces._schema === 'polymythcal-publication-surfaces-v2'
+    && chronology.length === buildManifest.chronology_count
+    && monitoring.length === buildManifest.monitoring_count
+    && chronology.length + monitoring.length === events.length,
+  'Discovery-v2 chronology and monitoring surfaces do not exactly partition the private canonical inventory',
+);
+check(
+  !exists('public/polymythseminars/events.json')
+    && read('public/polymythseminars/browse.json') === read('polymythseminars/browse.json')
+    && read('public/polymythseminars/watchlist.json') === read('polymythseminars/watchlist.json'),
+  'public deploy must omit the canonical event corpus and mirror only the safe discovery projections',
 );
 check(
   teacherResources.length === 645,
@@ -94,8 +114,19 @@ check(
 const buildOrder = [
   'apply-polymythcal-destination-specificity.js',
   'apply-audit45-language-model.py',
+  'build-polymythcal-browser-payload.js',
   'build-polymythcal-audit13.py',
+  'build-polymythcal-discovery-site.js',
+  'update-polymythcal-listing-counts.js',
   'build-search-pages.js',
+  'apply-polymythcal-set13-15-facets.js',
+  'build-writing-shortcuts.js',
+  'build-academic-shortcuts.js',
+  'build-polymythcal-feeds.py',
+  'apply-visible-geometry.js',
+  'apply-sitewide-type-zoom-link.js',
+  'apply-type-floor.js',
+  'consolidate-google-fonts.js',
   'build-polymythcal-browser-payload.js',
   'build-polymythcal-candidate-surface.py',
   'apply-audit48-approved-ui.js',
@@ -106,14 +137,28 @@ const buildOrder = [
   'build-audit45-localized-routes.py',
   'apply-audit45-translation-ui.js',
   'apply-audit49-metadata-hygiene.js',
+  'build-audit45-localized-routes.py',
+  'apply-audit45-translation-ui.js',
+  'apply-audit49-metadata-hygiene.js',
   'update-polymythcal-destination-contract.js',
+  'apply-sitewide-type-zoom-link.js',
+  'apply-visible-geometry.js',
+  'update-release-asset-identity.js',
   'update-polymythcal-build-manifest.js',
   'build-public-deploy.js',
   'verify-public-deploy-parity.js',
+  'verify-release-asset-identity.js',
+  'verify-front-facing-boundary.js',
+  'verify-polymyth-entry-points.js --site-only',
   'verify-visible-geometry.js',
   'verify-meaningful-geometry.js',
   'verify-geometry.js',
+  'build-asset-weight-report.js',
+  'verify-polymythcal-browser-payload.js',
+  'verify-polymythcal-discovery-v2.js',
   'verify-polymythcal-destination-specificity.js',
+  'verify-polymythcal-build-efficiency.js',
+  'verify-steady-ui.js',
   'verify-audit45-translations.py',
   'verify-audit49-metadata-surface.js',
   'verify-audit49-runtime-efficiency.js',
@@ -122,10 +167,16 @@ const buildOrder = [
 const build = pkg.scripts?.['build:locked'] || '';
 let previous = -1;
 for (const token of buildOrder) {
-  const index = build.indexOf(token);
+  const index = build.indexOf(token, previous + 1);
   check(index > previous, `production build omits or misorders ${token}`);
-  previous = index;
+  if (index > previous) previous = index;
 }
+check(
+  (build.match(/build-polymythcal-browser-payload\.js/g) || []).length === 2
+    && (build.match(/build-polymythcal-discovery-site\.js/g) || []).length === 1
+    && (build.match(/verify-polymythcal-discovery-v2\.js/g) || []).length === 1,
+  'production build must run the two-pass projection build and one discovery-v2 shell/gate cycle',
+);
 const finalGeometryApply = build.lastIndexOf('apply-visible-geometry.js');
 check((build.match(/apply-visible-geometry\.js/g) || []).length === 2, 'production build must apply geometry before and after all page generators');
 check(
@@ -499,3 +550,4 @@ console.log(
   + 'Audit 43 frozen, Audit 48 external-validation evidence active, Audit 49 technical-efficiency gates current, exact weekly workflows, portable gates, '
   + 'fresh Chromium evidence, and both deployment formats aligned.',
 );
+

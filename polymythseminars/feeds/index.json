@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-08-23T16:00:00Z",
+  "generated_at": "2026-08-26T16:00:00Z",
   "feeds": [
     {
       "id": "all",
       "label": "All listings",
       "label_en": "All listings",
       "label_fr": "Toutes les fiches",
-      "count": 2088,
+      "count": 1954,
       "rss": "/polymythseminars/feed.xml",
       "ics": "/polymythseminars/feeds/all.ics"
     },
@@ -24,7 +24,7 @@
       "label": "Unconfirmed listings",
       "label_en": "Unconfirmed listings",
       "label_fr": "Fiches non confirmées",
-      "count": 872,
+      "count": 738,
       "rss": "/polymythseminars/feeds/unconfirmed.xml",
       "ics": "/polymythseminars/feeds/unconfirmed.ics"
     },
@@ -33,7 +33,7 @@
       "label": "Learning, lectures, workshops, and readings",
       "label_en": "Learning, lectures, workshops, and readings",
       "label_fr": "Apprentissage, conférences, ateliers et lectures",
-      "count": 1015,
+      "count": 889,
       "rss": "/polymythseminars/feeds/learning.xml",
       "ics": "/polymythseminars/feeds/learning.ics"
     },
@@ -42,7 +42,7 @@
       "label": "Arts, festivals, exhibitions, performances, and screenings",
       "label_en": "Arts, festivals, exhibitions, performances, and screenings",
       "label_fr": "Arts, festivals, expositions, spectacles et projections",
-      "count": 736,
+      "count": 722,
       "rss": "/polymythseminars/feeds/arts.xml",
       "ics": "/polymythseminars/feeds/arts.ics"
     },
@@ -60,7 +60,7 @@
       "label": "Applications, calls, competitions, fellowships, and funding",
       "label_en": "Applications, calls, competitions, fellowships, and funding",
       "label_fr": "Candidatures, appels, concours, bourses et financement",
-      "count": 532,
+      "count": 398,
       "rss": "/polymythseminars/feeds/opportunities.xml",
       "ics": "/polymythseminars/feeds/opportunities.ics"
     },
@@ -69,7 +69,7 @@
       "label": "Toronto listings",
       "label_en": "Toronto listings",
       "label_fr": "Fiches de Toronto",
-      "count": 622,
+      "count": 613,
       "rss": "/polymythseminars/feeds/toronto.xml",
       "ics": "/polymythseminars/feeds/toronto.ics"
     },
@@ -96,7 +96,7 @@
       "label": "French-language listings",
       "label_en": "French-language listings",
       "label_fr": "Fiches de langue française",
-      "count": 85,
+      "count": 80,
       "rss": "/polymythseminars/feeds/fr.xml",
       "ics": "/polymythseminars/feeds/fr.ics"
     }

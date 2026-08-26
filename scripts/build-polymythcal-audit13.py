@@ -8,6 +8,15 @@ from geometry_asset_version import geometry_asset_version, geometry_body_attribu
 ROOT=Path(__file__).resolve().parents[1]
 payload=json.loads((ROOT/'polymythseminars/events.json').read_text(encoding='utf-8'))
 events=payload.get('events',[])
+browse_payload=json.loads((ROOT/'polymythseminars/browse.json').read_text(encoding='utf-8'))
+watchlist_payload=json.loads((ROOT/'polymythseminars/watchlist.json').read_text(encoding='utf-8'))
+chronology_public={str(event['id']):event for event in browse_payload.get('events',[])}
+watchlist_public={str(event['id']):event for event in watchlist_payload.get('items',[])}
+public_by_id={**chronology_public,**watchlist_public}
+canonical_ids={str(event.get('id') or event.get('identity_key')) for event in events}
+if set(public_by_id)!=canonical_ids or set(chronology_public)&set(watchlist_public):
+ raise SystemExit('Polymythcal detail build requires a complete, disjoint chronology/watchlist projection')
+chronology_events=[event for event in events if str(event.get('id') or event.get('identity_key')) in chronology_public]
 release=json.loads((ROOT/'RELEASE_MANIFEST.json').read_text(encoding='utf-8'))
 ASSET_VERSION=str(release.get('polymythcal_asset_version') or '')
 if not re.fullmatch(r'[0-9]{8}-[a-z0-9-]+',ASSET_VERSION): raise SystemExit('RELEASE_MANIFEST.json has no valid polymythcal_asset_version')
@@ -96,6 +105,9 @@ def calendar_event_signature(value):
  city_match=re.search(r'<span\b[^>]*>([\s\S]*?)</span\s*>',place_fragment,flags=re.I)
  description_fragment=section_fragment('pm-event-description')
  description_match=re.search(r'<p\b[^>]*>([\s\S]*?)</p\s*>',description_fragment,flags=re.I)
+ description_tag=re.search(r'<p\b[^>]*>',description_fragment,flags=re.I)
+ heading=first_tag('h1')
+ official_body=re.search(r'<a\b[^>]*\bclass=["\'][^"\']*\bpm-event-action\b[^"\']*\bprimary\b[^"\']*["\'][^>]*>([\s\S]*?)</a\s*>',value,flags=re.I)
  truth=class_tag('span','truth-chip')
  lifecycle=class_tag('span','pm-lifecycle')
  pending_tag=class_tag('details','pm-event-pending')
@@ -118,12 +130,15 @@ def calendar_event_signature(value):
   'title':visible('h1'),
   'date':visible('time'),
   'description':visible_fragment(description_match.group(1)) if description_match else '',
+  'description_lang':tag_attribute(description_tag.group(0),'lang') if description_tag else '',
+  'title_lang':tag_attribute(heading,'lang'),
   'venue':normalized_place(venue_match.group(1) if venue_match else '','venue'),
   'city':normalized_place(city_match.group(1) if city_match else '','city'),
   'confirmation_status':tag_attribute(body.group(0),'data-confirmation-status') or class_state(truth,'truth-chip'),
   'lifecycle_status':tag_attribute(body.group(0),'data-lifecycle-status') or class_state(lifecycle,'pm-lifecycle') or 'active',
   'robots':tag_attribute(robots,'content').lower(),
   'official_source':tag_attribute(official,'href'),
+  'official_source_label':visible_fragment(official_body.group(1)) if official_body else '',
   'calendar_file':tag_attribute(calendar,'href'),
   'archived':bool(re.search(r'\bdata-event-archive-note\s*=\s*["\']true["\']',value,flags=re.I)),
   'qualification_reasons':pending_reasons,
@@ -134,6 +149,7 @@ def calendar_event_signature(value):
   # value must remain a fixed point of the canonical event generator.
   'context_values':context_values,
   'geometry_role':tag_attribute(body.group(0),'data-geometry-role'),
+  'publication_surface':tag_attribute(body.group(0),'data-publication-surface'),
   'geometry_assets':[
    tag_attribute(alive,'href'),tag_attribute(mandala,'src'),tag_attribute(indra,'src'),
   ],
@@ -182,11 +198,12 @@ def write_if_changed(path:Path,text:str):
    if OUTPUT_MTIME is not None or (prior_mtime is not None and prior_mtime>datetime.datetime.now().timestamp()+60):
     regenerated_mtime=max(OUTPUT_MTIME or 0, (prior_mtime+2) if prior_mtime is not None else 0)
     os.utime(path,(regenerated_mtime,regenerated_mtime))
-def clean_dirs(valid_ids,valid_aliases,valid_ics_aliases=None):
+def clean_dirs(valid_ids,valid_aliases,valid_ics_ids=None,valid_ics_aliases=None):
+ if valid_ics_ids is None:valid_ics_ids=valid_ids
  if valid_ics_aliases is None:
   valid_ics_aliases={
    str(value)
-   for event in events
+   for event in chronology_events
    for value in (event.get('legacy_ids') or [])
    if str(value) and str(value)!=str(event.get('id') or event.get('identity_key'))
   }
@@ -195,7 +212,7 @@ def clean_dirs(valid_ids,valid_aliases,valid_ics_aliases=None):
    if CHECK: check_errors.append(f'stale generated directory: {child.relative_to(ROOT)}')
    else: shutil.rmtree(child)
  for old in icsdir.glob('*.ics'):
-  if old.stem not in valid_ids and old.stem not in valid_ics_aliases:
+  if old.stem not in valid_ics_ids and old.stem not in valid_ics_aliases:
    if CHECK: check_errors.append(f'stale generated file: {old.relative_to(ROOT)}')
    else: old.unlink()
 labels={'time-unconfirmed':'Time unconfirmed · Heure non confirmée','date-unconfirmed':'Date unconfirmed · Date non confirmée','location-unconfirmed':'Location unconfirmed · Lieu non confirmé','current-edition-unconfirmed':'Current edition unconfirmed · Édition actuelle non confirmée','public-access-unconfirmed':'Public access unconfirmed · Accès public non confirmé','registration-unconfirmed':'Registration unconfirmed · Inscription non confirmée','participant-attendance-unconfirmed':'Participant attendance unconfirmed · Présence non confirmée','official-source-unconfirmed':'Official detail page unconfirmed · Source officielle non confirmée','aggregator-only':'Aggregator source only · Source agrégée seulement','private-status-unconfirmed':'Public/private status unconfirmed · Statut public ou privé non confirmé'}
@@ -241,9 +258,44 @@ def fold_ics(line):
   else: current=candidate
  parts.append(current)
  return '\r\n'.join(parts)
-def format_when(e):
- value=str(e.get('date') or '')
- return value[:10] if e.get('time_precision')!='exact' else value.replace('T',' ')[:16]
+def temporal_zone(e,projected):
+ zone_name=str((projected.get('temporal') or {}).get('timezone') or e.get('timezone') or DEFAULT_TZ)
+ try:return ZoneInfo(zone_name)
+ except Exception:return ZoneInfo(DEFAULT_TZ)
+def projected_datetime(e,projected,key='date'):
+ value=e.get(key)
+ parsed=parse_iso(value,e.get('timezone') or DEFAULT_TZ)
+ if not isinstance(parsed,datetime.datetime):return None
+ return parsed.astimezone(temporal_zone(e,projected))
+def public_temporal_value(e,projected,key='date'):
+ temporal_type=str((projected.get('temporal') or {}).get('type') or '')
+ if temporal_type in {'global-instant','local-date-time','deadline','date-range'} and e.get('time_precision')=='exact':
+  moment=projected_datetime(e,projected,key)
+  return moment.isoformat(timespec='minutes') if moment else ''
+ return str(projected.get(key) or '')
+def temporal_presentation(e,projected,is_watch=False):
+ if is_watch:return ('Date awaiting confirmation · Date à confirmer','', 'Date pending')
+ temporal_type=str((projected.get('temporal') or {}).get('type') or '')
+ if e.get('time_precision')=='exact' and e.get('end_date'):
+  start_moment=projected_datetime(e,projected)
+  end_moment=projected_datetime(e,projected,'end_date')
+  if start_moment:
+   start_label=start_moment.strftime('%Y-%m-%d %H:%M %Z')
+   end_label=end_moment.strftime('%Y-%m-%d %H:%M %Z') if end_moment else ''
+   label=f'{start_label} – {end_label}' if end_label else start_label
+   return (label,start_moment.isoformat(timespec='minutes'),start_moment.strftime('%Y-%m-%d'))
+ if temporal_type in {'global-instant','local-date-time','deadline'} and e.get('time_precision')=='exact':
+  moment=projected_datetime(e,projected)
+  if moment:
+   return (moment.strftime('%Y-%m-%d %H:%M %Z'),moment.isoformat(timespec='minutes'),moment.strftime('%Y-%m-%d'))
+ start=str(projected.get('date') or '')[:10]
+ end=str(projected.get('end_date') or '')[:10]
+ if temporal_type=='date-range' and end and end!=start:
+  return (f'{start} – {end}',start,start)
+ if temporal_type=='estimated':
+  return (f'{start} (estimated · date estimée)',start,start)
+ return (start,start,start)
+def format_when(e,projected,is_watch=False):return temporal_presentation(e,projected,is_watch)[0]
 def status_ics(e):
  return 'CANCELLED' if e.get('lifecycle_status')=='cancelled' else ('TENTATIVE' if e.get('confirmation_status')!='confirmed' else 'CONFIRMED')
 def valid_location(e):
@@ -259,11 +311,11 @@ def clean_meta(value,limit=160):
  boundary=max(clip.rfind('. '),clip.rfind('; '),clip.rfind(', '))
  if boundary>=80:clip=clip[:boundary]
  return clip.rstrip(' ,;:.')+'…'
-def event_meta_description(e,title_text,venue,city):
- date_label=str(e.get('date') or '')[:10] or 'Date to be confirmed'
+def event_meta_description(e,title_text,venue,city,projected,is_watch=False,public_desc=''):
+ date_label=temporal_presentation(e,projected,is_watch)[0] or 'Date to be confirmed'
  location=', '.join(value for value in (venue,city) if value and value.lower() not in PLACEHOLDERS)
  facts=date_label+(f' at {location}' if location else '')+'.'
- detail=str(e.get('description') or e.get('raw_excerpt') or '').strip()
+ detail=str(public_desc or '').strip()
  return clean_meta(f'{title_text}. {facts} {detail}',160)
 def context_value(value):
  if value is None:return ''
@@ -390,7 +442,7 @@ def related_events(event):
  event_day=parse_iso(event.get('date'),event.get('timezone') or DEFAULT_TZ)
  event_day=event_day.date() if isinstance(event_day,datetime.datetime) else event_day
  ranked=[]
- for candidate in events:
+ for candidate in chronology_events:
   candidate_id=str(candidate.get('id') or candidate.get('identity_key'))
   if candidate_id==sid or candidate.get('lifecycle_status') in {'cancelled','missing-on-source','archived'}:continue
   candidate_end=event_end_day(candidate)
@@ -423,7 +475,7 @@ for e in events:
   legacy_id=str(value)
   register_alias(legacy_id,sid)
   register_alias(legacy_alias(legacy_id),sid)
-clean_dirs(valid_ids,set(alias_targets))
+clean_dirs(valid_ids,set(alias_targets),set(chronology_public))
 title_date_counts={}
 canonical_ics={}
 for e in events:
@@ -431,58 +483,64 @@ for e in events:
  title_date_counts[title_date_key]=title_date_counts.get(title_date_key,0)+1
 for e in events:
  sid=str(e.get('id') or e.get('identity_key')); folder=out/sid; folder.mkdir(parents=True,exist_ok=True)
+ public_record=public_by_id[sid]
+ is_watch=sid in watchlist_public
  event_geometry_attrs=geometry_body_attributes(
   ROOT,f'polymythseminars/events/{sid}/index.html','calendar-event',register='quiet'
  )
  title_text=str(e.get('title') or 'Untitled listing'); title=html.escape(title_text)
- destination_text=str(e.get('destination_url') or '')
- destination_status=str(e.get('destination_status') or '')
- if destination_status=='unavailable-specific-page':destination_text=''
+ content_language=str(public_record.get('content_language') or '')
+ content_lang_attr=f' lang="{html.escape(content_language,quote=True)}"' if content_language else ''
+ public_actions=[action for action in (public_record.get('actions') or []) if action.get('kind')!='details']
+ preferred_action=next((action for action in public_actions if action.get('kind')!='source'),None) or next(iter(public_actions),{})
+ destination_text=str(preferred_action.get('url') or '')
+ destination_kind=str(preferred_action.get('kind') or 'source')
+ destination_scope=str(preferred_action.get('scope') or 'source')
  if destination_text and not destination_text.startswith('https://'):raise SystemExit(f'Unsafe external destination for {sid}: {destination_text!r}')
  destination=html.escape(destination_text,quote=True)
  reasons=' · '.join(labels.get(x,str(x).replace('-',' ').title()) for x in e.get('qualification_reasons',[]))
  qualification_tokens=' '.join(sorted(str(x) for x in e.get('qualification_reasons',[]) if str(x)))
  confirmation=str(e.get('confirmation_status') or 'unconfirmed'); lifecycle=str(e.get('lifecycle_status') or 'active')
- end_value=parse_iso(e.get('end_date') or e.get('date'),e.get('timezone') or DEFAULT_TZ)
+ end_value=parse_iso(public_temporal_value(e,public_record,'end_date') or public_temporal_value(e,public_record),e.get('timezone') or DEFAULT_TZ)
  end_day=end_value.date() if isinstance(end_value,datetime.datetime) else end_value
- past=bool(end_day and end_day<TODAY)
+ past=bool(not is_watch and end_day and end_day<TODAY)
  city=str(e.get('city') or 'Unknown'); venue=str(e.get('venue') or 'Location unconfirmed · Lieu non confirmé')
- desc=str(e.get('description') or e.get('raw_excerpt') or '')
- context_html=event_context_html(e)
- indexable=confirmation=='confirmed' and e.get('date_precision')=='exact' and e.get('record_kind')!='opportunity' and valid_location(e) and lifecycle not in {'cancelled','missing-on-source','archived'} and not past
+ desc=str(public_record.get('description') or '')
+ context_html=''
+ indexable=not is_watch and confirmation=='confirmed' and (e.get('date_precision')=='exact' or e.get('time_precision')=='exact') and e.get('record_kind')!='opportunity' and valid_location(e) and lifecycle not in {'cancelled','missing-on-source','archived'} and not past
  robots='index,follow' if indexable else 'noindex,follow'
  canonical=f'https://seminarschools.com/polymythseminars/events/{urllib.parse.quote(sid)}/'
- schema={'@context':'https://schema.org','@type':'Event','name':title_text,'startDate':e.get('date'),'description':event_meta_description(e,title_text,venue,city),'eventStatus':{'postponed':'https://schema.org/EventPostponed','rescheduled':'https://schema.org/EventRescheduled'}.get(lifecycle,'https://schema.org/EventScheduled'),'url':canonical,'sameAs':destination_text or None,'inLanguage':e.get('source_language') or 'en'} if indexable else None
- if schema and e.get('end_date'):schema['endDate']=e.get('end_date')
+ schema={'@context':'https://schema.org','@type':'Event','name':title_text,'startDate':public_temporal_value(e,public_record),'description':event_meta_description(e,title_text,venue,city,public_record,is_watch,desc),'eventStatus':{'postponed':'https://schema.org/EventPostponed','rescheduled':'https://schema.org/EventRescheduled'}.get(lifecycle,'https://schema.org/EventScheduled'),'url':canonical,'sameAs':destination_text or None,'inLanguage':content_language or 'en-CA'} if indexable else None
+ if schema and public_record.get('end_date'):schema['endDate']=public_temporal_value(e,public_record,'end_date')
  if schema:schema['location']={'@type':'Place','name':venue,'address':city}
  if schema:schema={k:v for k,v in schema.items() if v is not None}
- destination_kind=str(e.get('destination_kind') or 'detail')
- destination_scope=str(e.get('destination_scope') or 'event')
  destination_labels={
   'schedule':'Open official schedule · Ouvrir l’horaire officiel',
   'registration':'Open registration page · Ouvrir la page d’inscription',
   'application':'Open application page · Ouvrir la page de candidature',
   'submission':'Open submission page · Ouvrir la page de soumission',
+  'rules':'Open rules · Ouvrir le règlement',
   'tickets':'Open ticket page · Ouvrir la billetterie',
+  'stream':'Open stream · Ouvrir la diffusion',
   'review':'Open review page · Ouvrir la page d’évaluation',
  'results':'Open results page · Ouvrir la page des résultats',
  }
- destination_source=destination_status.startswith('source-')
+ destination_source=destination_kind=='source'
  if destination_kind=='schedule' and destination_source:destination_label='Open source schedule · Ouvrir l’horaire source'
  elif destination_kind in destination_labels:destination_label=destination_labels[destination_kind]
  elif destination_scope=='series' and destination_source:destination_label='Open series source page · Ouvrir la page source de la série'
  elif destination_scope=='series':destination_label='Open official series page · Ouvrir la page officielle de la série'
- elif destination_source:destination_label='Open event source page · Ouvrir la page source de l’événement'
+ elif destination_source:destination_label='Open source page · Ouvrir la page source'
  else:destination_label='Open official event page · Ouvrir la page officielle de l’événement'
  status_text='Confirmed · Confirmé' if confirmation=='confirmed' else 'Some details pending · Certains détails à confirmer'
- when_text=html.escape(format_when(e))
- date_value=html.escape(str(e.get('date') or '')[:32],quote=True)
- date_token=str(e.get('date') or '')[:10] or 'Date pending'
+ when_text,date_value_raw,date_token=temporal_presentation(e,public_record,is_watch)
+ when_text=html.escape(when_text)
+ date_value=html.escape(date_value_raw,quote=True)
  page_title_parts=[title_text,date_token]
  if title_date_counts.get((title_text,date_token),0)>1 and city.lower() not in PLACEHOLDERS:page_title_parts.append(city)
  page_title_text=' · '.join(page_title_parts)+' · Polymythcal'
  page_title=html.escape(page_title_text,quote=True)
- meta_description=html.escape(event_meta_description(e,title_text,venue,city),quote=True)
+ meta_description=html.escape(event_meta_description(e,title_text,venue,city,public_record,is_watch,desc),quote=True)
  related_items=[]
  for related in related_events(e):
   related_id=str(related.get('id') or related.get('identity_key'))
@@ -494,6 +552,8 @@ for e in events:
   related_items.append(f'<li><a href="/polymythseminars/events/{urllib.parse.quote(related_id)}/">{related_title}</a>{f" <span>{related_meta}</span>" if related_meta else ""}</li>')
  related_html=f'<nav class="pm-event-related" aria-labelledby="pm-related-title"><h2 id="pm-related-title">Related listings · Fiches connexes</h2><ul>{"".join(related_items)}</ul></nav>' if related_items else ''
  schema_markup=f'<script type="application/ld+json">{json_script(schema)}</script>\n' if schema else ''
+ date_fact_html=when_text if is_watch else f'<time datetime="{date_value}">{when_text}</time>'
+ calendar_action='' if is_watch else f'<a class="pm-event-action" type="text/calendar" href="/polymythseminars/ics/{html.escape(sid,quote=True)}.ics">Add to calendar · Ajouter au calendrier</a>'
  page=f'''<!doctype html>
 <html lang="en-CA">
 <head>
@@ -520,7 +580,7 @@ for e in events:
 {schema_markup}<link rel="stylesheet" href="/css/audit43-approved.css?v={AUDIT43_VERSION}">
 <link rel="stylesheet" href="/css/calm-ux.css?v={STEADY_VERSION}">
 </head>
-<body {event_geometry_attrs} data-event-id="{html.escape(sid,quote=True)}" data-confirmation-status="{html.escape(confirmation,quote=True)}" data-lifecycle-status="{html.escape(lifecycle,quote=True)}">
+<body {event_geometry_attrs} data-event-id="{html.escape(sid,quote=True)}" data-publication-surface="{'watchlist' if is_watch else 'chronology'}" data-confirmation-status="{html.escape(confirmation,quote=True)}" data-lifecycle-status="{html.escape(lifecycle,quote=True)}">
 <a class="skip-link" href="#main-content">Skip to event · Aller à la fiche</a>
 <main id="main-content" class="pm-event-page">
 <nav class="pm-event-nav" aria-label="Event navigation · Navigation de la fiche"><a href="/polymythseminars/">← All listings · Toutes les fiches</a><a href="?lang=fr" hreflang="fr-CA">Français</a></nav>
@@ -528,17 +588,17 @@ for e in events:
 <header class="pm-event-hero">
 <p class="pm-event-kicker">Polymythcal</p>
 <div class="truth-row"><span class="truth-chip {confirmation}">{status_text}</span>{f'<span class="pm-lifecycle {html.escape(lifecycle)}" data-en-label="{html.escape(lifecycle_labels.get(lifecycle,lifecycle))}">{html.escape(lifecycle_labels.get(lifecycle,lifecycle))}</span>' if lifecycle!='active' else ''}</div>
-<h1>{title}</h1>
+<h1{content_lang_attr}>{title}</h1>
 </header>
 {'<div class="callout pm-event-archive" data-event-archive-note="true"><strong>Past event · Événement passé.</strong> This page remains as an archive. Check the source for a current edition.</div>' if past else ''}
 <dl class="pm-event-facts">
-<div><dt>Date · Date</dt><dd><time datetime="{date_value}">{when_text}</time></dd></div>
+<div><dt>Date · Date</dt><dd>{date_fact_html}</dd></div>
 <div><dt>Place · Lieu</dt><dd><strong>{html.escape(venue)}</strong><span>{html.escape(city)}</span></dd></div>
 <div><dt>Status · Statut</dt><dd>{status_text}</dd></div>
 </dl>
 <section class="pm-event-primary-path" aria-label="Listing actions · Actions de la fiche"><p>Listing actions · Actions de la fiche</p>
-<div class="pm-event-actions">{f'<a class="pm-event-action primary" href="{destination}" rel="noopener noreferrer">{destination_label} ↗</a>' if destination_text else ''}<a class="pm-event-action" type="text/calendar" href="/polymythseminars/ics/{html.escape(sid,quote=True)}.ics">Add to calendar · Ajouter au calendrier</a><a class="pm-event-action" href="/polymythseminars/correct/?event={html.escape(canonical,quote=True)}">Correct this listing · Corriger cette fiche</a></div></section>
-{f'<section class="pm-event-description"><h2>About this listing · À propos</h2><p>{html.escape(desc)}</p></section>' if desc else ''}
+<div class="pm-event-actions">{f'<a class="pm-event-action primary" href="{destination}" rel="noopener noreferrer">{destination_label} ↗</a>' if destination_text else ''}{calendar_action}<a class="pm-event-action" href="/polymythseminars/correct/?event={html.escape(canonical,quote=True)}">Correct this listing · Corriger cette fiche</a></div></section>
+{f'<section class="pm-event-description"><h2>About this listing · À propos</h2><p{content_lang_attr}>{html.escape(desc)}</p></section>' if desc else ''}
 {context_html}
 {f'<details class="pm-event-pending" data-qualification-reasons="{html.escape(qualification_tokens,quote=True)}"><summary>Details still pending · Détails à confirmer</summary><p><strong>Qualification · Précision:</strong> {html.escape(reasons)}</p></details>' if reasons else ''}
 {f'<p class="pm-event-previous"><strong>Previous date · Date précédente:</strong> {html.escape(" · ".join(e.get("previous_dates") or []))}</p>' if e.get('previous_dates') else ''}
@@ -557,6 +617,7 @@ for e in events:
 </html>'''
 
  write_if_changed(folder/'index.html',page)
+ if sid not in chronology_public:continue
  lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Seminar Schools//Polymythcal//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',f'UID:{ics_escape(e.get("identity_key") or sid)}@seminarschools.com',f'DTSTAMP:{deterministic_stamp(e)}']
  if e.get('time_precision')=='exact':
   exact_start=parse_iso(e.get('date'),e.get('timezone') or DEFAULT_TZ)
@@ -571,7 +632,7 @@ for e in events:
  ics_text='\r\n'.join(fold_ics(line) for line in lines)
  canonical_ics[sid]=ics_text
  write_if_changed(icsdir/(sid+'.ics'),ics_text)
-for e in events:
+for e in chronology_events:
  sid=str(e.get('id') or e.get('identity_key'))
  for legacy_id in e.get('legacy_ids') or []:
   legacy_id=str(legacy_id)

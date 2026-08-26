@@ -68,8 +68,8 @@ assert(manual.filter(e=>e._src==='manual-polymythcal-social-studies-set4-2026-08
 const cids=new Set(consolidated.map(e=>e.id)),pids=new Set(publicEvents.map(e=>e.id));for(const e of batch){assert(cids.has(e.id),`${e.id}: absent from consolidated data`);assert(pids.has(e.id),`${e.id}: absent from public data`)}
 assert(consolidated.length===publicEvents.length,'Canonical/public count mismatch');
 for(const f of ['interdisciplinary_domains','subjects','topics','research_set','research_set_cross_tags','calendar_stage','series_role']) assert(schema.properties?.[f],`Schema missing ${f}`);
-const ui=readText('polymythseminars/index.html'),revamp=readText('js/polymythcal-revamp.js');assert(ui.includes('topics:interdisciplinary')&&ui.includes('value="interdisciplinary"'),'UI lacks Interdisciplinary filter');
-for(const n of ['topics.push("interdisciplinary")','event.interdisciplinary_domains','event.research_set','event.subjects']) assert(revamp.includes(n),`Classifier/search missing ${n}`);
+const taxonomy=readJson('polymythseminars/browse.json').taxonomy,revamp=readText('scripts/lib/polymythcal-discovery-model.js');assert(taxonomy?.axes?.topics?.values?.interdisciplinary?.en&&taxonomy?.axes?.topics?.values?.interdisciplinary?.fr,'Bilingual Research taxonomy lacks Interdisciplinary');
+for(const n of ['interdisciplinary','subjects','entry_family']) assert(revamp.includes(n),`Discovery classifier/search missing ${n}`);
 const clRows=readText('data/website-cl.jsonl').trim().split(/\n+/).map(JSON.parse),cl=new Map(clRows.map(r=>[r.id,r]));for(let n=220;n<=227;n++){const id=`CL-WEB-${n}`;assert(cl.get(id)?.status==='complete',`Component List missing/incomplete ${id}`)}
 for(const rel of ['WEBSITE_CL_2026-07-19.md','docs/WEBSITE_CL_2026-07-19.md']){const t=readText(rel);assert(t.includes('Completed in Polymythcal Set 6 — Interdisciplinary and General'),`${rel}: missing Set 6 section`);assert(t.includes('CL-WEB-227'),`${rel}: missing final Set 6 component`)}
 const build=String(pkg.scripts?.['build:locked']||'');for(const n of ['import-polymythcal-interdisciplinary-set6-2026-08-13.py','node scripts/upsert-manual-calendar-events.js','verify-polymythcal-interdisciplinary-set6-2026-08-13.js']) assert(build.includes(n),`build:locked missing ${n}`);
@@ -77,3 +77,4 @@ assert((build.match(/(?:^| && )node scripts\/upsert-manual-calendar-events\.js(?
 assert(!/node scripts\/upsert-manual-calendar-events\.js\s+--/.test(build),'build:locked must not restore a filtered manual-event upsert');
 assert(pkg.scripts['import:polymythcal-interdisciplinary-set6-2026-08-13'],'Missing Set 6 import alias');assert(pkg.scripts['verify:polymythcal-interdisciplinary-set6-2026-08-13'],'Missing Set 6 verify alias');
 console.log(JSON.stringify({manual_records:manual.length,consolidated_records:consolidated.length,set6_records:batch.length,confirmed:batch.filter(e=>e.confirmation_status==='confirmed').length,qualified_watches:batch.filter(e=>e.confirmation_status==='unconfirmed').length,sources:sources.length,change_list:'CL-WEB-220 through CL-WEB-227 complete'},null,2));
+

@@ -2,278 +2,71 @@
 'use strict';
 
 /**
- * Build the compact data projection used by the main and focused Polymythcal
- * calendar shells. The canonical events.json remains the complete public
- * record used by feeds, event-detail pages, research, and downstream tools.
+ * Build Polymythcal's public discovery payloads from the complete editorial
+ * master. The browser receives an allowlisted chronology projection and an
+ * independently labelled date-pending watchlist. It never receives the
+ * complete editorial record.
  */
+
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const zlib = require('zlib');
 const {
   assertDestination,
-  polymythcalDestination,
+  polymythcalDestination
 } = require('./lib/external-destination-contracts');
 const { assertCurrentDatasetVersion } = require('./lib/versioned-data-migrations');
+const {
+  EXPECTED_MONITORING_MARKER_COUNT,
+  PERSISTED_SEARCH_GROUPS,
+  PUBLIC_ACTION_CANDIDATE_FIELDS,
+  PUBLIC_EVENT_KEYS,
+  SEARCH_GROUPS,
+  buildDiscoveryPayloads,
+  hasPublicValue,
+  parentId
+} = require('./lib/polymythcal-discovery-model');
 
 const ROOT = path.resolve(__dirname, '..');
-const CANONICAL_PATH = path.join(ROOT, 'polymythseminars', 'events.json');
+const CANONICAL_PATH = path.join(ROOT, 'data', 'polymyth-seminar-events.json');
+const RELEASE_MANIFEST_PATH = path.join(ROOT, 'RELEASE_MANIFEST.json');
 const BROWSER_PATH = path.join(ROOT, 'polymythseminars', 'browse.json');
+const WATCHLIST_PATH = path.join(ROOT, 'polymythseminars', 'watchlist.json');
+const RESEARCH_PATH = path.join(ROOT, 'polymythseminars', 'research.json');
+const SURFACE_MANIFEST_PATH = path.join(ROOT, 'data', 'polymythcal-publication-surfaces.json');
 const REPORT_PATH = path.join(ROOT, 'scripts', 'reports', 'polymythcal-browser-payload-report.json');
+const EXPECTED_CANONICAL_COUNT = 2088;
+const EXPECTED_CHRONOLOGY_COUNT = 1954;
 const MINIMUM_GZIP_REDUCTION = 0.25;
-const BUILD_MTIME = new Date(process.env.SS_BUILD_OUTPUT_MTIME || '2034-01-06T00:00:00Z');
+const BUILD_MTIME = new Date(process.env.SS_BUILD_OUTPUT_MTIME || '2034-01-11T00:00:00Z');
+
 if (Number.isNaN(BUILD_MTIME.getTime())) {
-  throw new Error('SS_BUILD_OUTPUT_MTIME must be a valid timestamp');
+  throw new Error('SS_BUILD_OUTPUT_MTIME must be a valid timestamp.');
 }
 
-// Fixed order keeps byte output deterministic. These are the source fields
-// consumed by hydrate(), search, filters, cards, saved listings, focused-route
-// matching, and lifecycle/qualification labels in polymythcal-revamp.js.
-const BROWSER_EVENT_FIELDS = Object.freeze([
-  'id',
-  'title',
-  'description',
-  'raw_excerpt',
-  'speaker_or_director',
-  'organizer',
-  'venue',
-  'city',
-  'country',
-  'corridor_zone',
-  'latitude',
-  'longitude',
-  'location_precision',
-  'date',
-  'end_date',
-  'date_precision',
-  'time_precision',
-  'type',
-  'secondary_types',
-  'record_kind',
-  'age_band',
-  'writing_bands',
-  'academic_bands',
-  'topics',
-  'tags',
-  'source_id',
-  'source_name',
-  'source_url',
-  'destination_url',
-  'destination_status',
-  'destination_scope',
-  'destination_kind',
-  'destination_evidence',
-  'source_quality',
-  'source_language',
-  'source_languages',
-  'source_language_method',
-  'source_language_review',
-  'confirmation_status',
-  'qualification_reasons',
-  'lifecycle_status',
-  'lifecycle_notes',
-  'first_seen_at',
-  'last_checked_at',
-  'scraped_at',
-  'entry_family',
-  'calendar_systems',
-  'traditions',
-  'ritual_associations',
-  'social_functions',
-  'socio_note',
-  'celestial_system',
-  'astronomy_visibility',
-  'observer_notes',
-  'presence_claims',
-  'participant_presence',
-  'presence_categories',
-  'presence_mode',
-  'event_format',
-  'talkback_time_precision',
-  'director_attendance_status',
-  'talkback_status',
-  'date_conflict',
-  'alternate_date_ranges',
-  'source_inconsistency',
-  'eligibility_status',
-  'grade_levels',
-  'exact_grades',
-  'education_levels',
-  'grade_min',
-  'grade_max',
-  'age_range',
-  'participation_unit',
-  'access_route',
-  'prize_form',
-  'languages',
-  'institutional_restriction',
-  'ideological_sponsorship',
-  'commercial_sponsorship',
-  'ai_rule',
-  'event_year',
-  'deadline_year',
-  'interaction_format',
-  'talkback_confirmed',
-  'tradition_own_account',
-  'social_analysis',
-  'social_analysis_status',
-  'academic_event_forms',
-  'academic_disciplines',
-  'public_intellectual_academic_formats',
-  'arts_event_forms',
-  'arts_disciplines',
-  'arts_occurrence_role',
-  'arts_access_status',
-  'participatory_formats',
-  'participation_mode',
-  'participation_roles',
-  'facilitation_status',
-  'skill_level',
-  'drop_in_status',
-  'participation_required',
-  'participation_evidence',
-  'civic_legal_labour_formats',
-  'civic_domain',
-  'authority_level',
-  'public_role',
-  'participation_route',
-  'public_input_status',
-  'legal_access_status',
-  'public_access_status',
-  'registration_required',
-  'collective_action_type',
-  'election_stage',
-  'access_restrictions',
-  'webcast_status',
-  'publication_restriction',
-  'alternate_dates',
-  'civic_evidence',
-  'set12_classified_at',
-  'community_heritage_formats',
-  'community_participation_roles',
-  'contribution_routes',
-  'beneficiary_or_cause',
-  'place_relation',
-  'community_evidence',
-  'community_heritage_scope',
-  'community_public_access_status',
-  'community_registration_required',
-  'community_participation_mode',
-  'community_date_evidence',
-  'community_access_evidence',
-  'community_participation_evidence',
-  'community_beneficiary_evidence',
-  'community_place_evidence',
-  'community_heritage_evidence',
-  'set13_classified_at',
-  'live_digital_formats',
-  'platform_names',
-  'synchronous_status',
-  'audience_interaction_routes',
-  'recording_availability',
-  'digital_evidence',
-  'set14_classified_at',
-  'online_location',
-  'platform',
-  'platform_notes',
-  'liveness_status',
-  'synchronicity',
-  'audience_interaction',
-  'interaction_status',
-  'interaction_evidence',
-  'access_status',
-  'registration_url',
-  'replay_archive_status',
-  'recording_evidence',
-  'creator_participation_status',
-  'creator_participation_evidence',
-  'occurrence_evidence',
-  'replay_source_field',
-  'course_program_formats',
-  'program_stage',
-  'schedule_model',
-  'program_stage_source_value',
-  'program_schedule_detail',
-  'program_start_date',
-  'program_end_date',
-  'eligibility_audience',
-  'registration_application_route',
-  'program_date_precision',
-  'application_deadline',
-  'registration_deadline',
-  'session_count_status',
-  'parent_id',
-  'child_ids',
-  'series_role',
-  'alternate_sections',
-  'evidence_facts',
-  'evidence',
-  'source_control',
-  'session_count',
-  'program_evidence',
-  'set15_alternate_date_details',
-  'set15_child_ids',
-  'set15_eligibility_audience',
-  'set15_evidence_source_id',
-  'set15_evidence_source_name',
-  'set15_evidence_source_url',
-  'set15_parent_id',
-  'set15_program_start_date',
-  'set15_program_end_date',
-  'set15_program_evidence_facts',
-  'set15_program_stage_source',
-  'set15_registration_application_route',
-  'set15_schedule_model_source',
-  'set15_series_role',
-  'set15_series_role_source',
-  'set15_session_count_status',
-  'set15_source_caveats',
-  'set15_source_formats',
-  'set15_time_precision_source',
-  'set15_classified_at'
-]);
-
-function hasBrowserValue(value) {
-  if (value === undefined || value === null || value === '') return false;
-  if (Array.isArray(value) && value.length === 0) return false;
-  return true;
+function sha256(value) {
+  return crypto.createHash('sha256').update(value).digest('hex');
 }
 
-function compactEvent(event) {
-  const compact = {};
-  for (const field of BROWSER_EVENT_FIELDS) {
-    if (hasBrowserValue(event[field])) compact[field] = event[field];
-  }
-  return compact;
-}
-
-function buildBrowserPayload(canonical) {
-  assertCurrentDatasetVersion('polymythcal-events', canonical);
-  if (!canonical || !Array.isArray(canonical.events)) {
-    throw new Error('Canonical Polymythcal data must contain an events array.');
-  }
-  const ids = new Set();
-  for (const event of canonical.events) {
-    if (!event || typeof event.id !== 'string' || !event.id.trim()) {
-      throw new Error('Every canonical Polymythcal record needs a non-empty string id.');
-    }
-    if (ids.has(event.id)) throw new Error(`Duplicate canonical Polymythcal id: ${event.id}`);
-    ids.add(event.id);
-    assertDestination(polymythcalDestination(event), `Polymythcal event ${event.id}`);
-  }
-  const events = canonical.events.map(compactEvent);
-  return {
-    _schema: 'polymythcal-browser-payload-v1',
-    _comment: 'Compact projection for main and focused calendar browsing. Full records: /polymythseminars/events.json.',
-    _generated_at: canonical._generated_at || null,
-    _canonical_count: events.length,
-    count: events.length,
-    events
-  };
+function gzipSize(value) {
+  return zlib.gzipSync(value, { level: 9 }).length;
 }
 
 function serializeBrowserPayload(payload) {
   return `${JSON.stringify(payload)}\n`;
+}
+
+function serializeWatchlistPayload(payload) {
+  return `${JSON.stringify(payload)}\n`;
+}
+
+function serializeResearchPayload(payload) {
+  return `${JSON.stringify(payload)}\n`;
+}
+
+function serializeSurfaceManifest(payload) {
+  return `${JSON.stringify(payload, null, 2)}\n`;
 }
 
 function writeIfChanged(file, text) {
@@ -287,50 +80,200 @@ function writeIfChanged(file, text) {
   return true;
 }
 
+function assertReleaseInventory(canonical, payloads) {
+  const canonicalCount = canonical.events.length;
+  const chronologyCount = payloads.browse.events.length;
+  const watchlistCount = payloads.watchlist.items.length;
+  if (canonicalCount !== EXPECTED_CANONICAL_COUNT) {
+    throw new Error(`Polymythcal discovery v2 expected ${EXPECTED_CANONICAL_COUNT} canonical records; found ${canonicalCount}.`);
+  }
+  if (watchlistCount !== EXPECTED_MONITORING_MARKER_COUNT) {
+    throw new Error(`Polymythcal discovery v2 expected ${EXPECTED_MONITORING_MARKER_COUNT} explicit monitoring markers; found ${watchlistCount}.`);
+  }
+  if (chronologyCount !== EXPECTED_CHRONOLOGY_COUNT) {
+    throw new Error(`Polymythcal discovery v2 expected ${EXPECTED_CHRONOLOGY_COUNT} chronology records; found ${chronologyCount}.`);
+  }
+  if (chronologyCount + watchlistCount !== canonicalCount) {
+    throw new Error('Polymythcal public surfaces do not partition the canonical inventory.');
+  }
+}
+
+function validateDestinations(canonical) {
+  for (const event of canonical.events) {
+    assertDestination(polymythcalDestination(event), `Polymythcal event ${event.id}`);
+  }
+}
+
+function buildBrowserPayload(canonical) {
+  return buildDiscoveryPayloads(canonical).browse;
+}
+
+function buildReport(canonicalBytes, payloads, outputBytes) {
+  const canonicalGzipBytes = gzipSize(canonicalBytes);
+  const browserGzipBytes = gzipSize(outputBytes.browser);
+  const watchlistGzipBytes = gzipSize(outputBytes.watchlist);
+  const researchGzipBytes = gzipSize(outputBytes.research);
+  const canonical = JSON.parse(canonicalBytes);
+  const seriesParents = new Set();
+  let seriesOccurrences = 0;
+  for (const event of canonical.events) {
+    const id = parentId(event);
+    if (!id) continue;
+    seriesParents.add(id);
+    seriesOccurrences += 1;
+  }
+  const projectedById = new Map([
+    ...payloads.browse.events,
+    ...payloads.watchlist.items
+  ].map(event => [event.id, event]));
+  const typedKinds = new Set(PUBLIC_ACTION_CANDIDATE_FIELDS.map(([, kind]) => kind));
+  const unavailableWithCandidate = canonical.events.filter(event =>
+    event.destination_status === 'unavailable-specific-page'
+    && PUBLIC_ACTION_CANDIDATE_FIELDS.some(([field]) => String(event[field] || '').startsWith('https://'))
+  );
+  const recoveredUnavailable = unavailableWithCandidate.filter(event =>
+    (projectedById.get(event.id)?.actions || []).some(action => typedKinds.has(action.kind))
+  );
+  const typedActions = [...projectedById.values()].flatMap(event =>
+    (event.actions || []).filter(action => typedKinds.has(action.kind))
+  );
+  const typedActionRecords = [...projectedById.values()].filter(event =>
+    (event.actions || []).some(action => typedKinds.has(action.kind))
+  );
+  const recoveredByKind = Object.fromEntries([...typedKinds].map(kind => [
+    kind,
+    recoveredUnavailable.filter(event =>
+      (projectedById.get(event.id)?.actions || []).some(action => action.kind === kind)
+    ).length
+  ]));
+  return {
+    generated_at: payloads.browse._generated_at,
+    schema: payloads.browse._schema,
+    canonical_path: 'data/polymyth-seminar-events.json',
+    browser_path: 'polymythseminars/browse.json',
+    watchlist_path: 'polymythseminars/watchlist.json',
+    research_path: 'polymythseminars/research.json',
+    publication_surfaces_path: 'data/polymythcal-publication-surfaces.json',
+    canonical_count: payloads.browse._canonical_count,
+    chronology_count: payloads.browse.count,
+    watchlist_count: payloads.watchlist.count,
+    explicit_monitoring_marker_count: payloads.watchlist.count,
+    series_parent_count: seriesParents.size,
+    series_occurrence_count: seriesOccurrences,
+    canonical_sha256: sha256(canonicalBytes),
+    browser_sha256: sha256(outputBytes.browser),
+    watchlist_sha256: sha256(outputBytes.watchlist),
+    research_sha256: sha256(outputBytes.research),
+    publication_surfaces_sha256: sha256(outputBytes.manifest),
+    canonical_raw_bytes: canonicalBytes.length,
+    browser_raw_bytes: outputBytes.browser.length,
+    watchlist_raw_bytes: outputBytes.watchlist.length,
+    research_raw_bytes: outputBytes.research.length,
+    canonical_gzip_bytes: canonicalGzipBytes,
+    browser_gzip_bytes: browserGzipBytes,
+    watchlist_gzip_bytes: watchlistGzipBytes,
+    research_gzip_bytes: researchGzipBytes,
+    freshness: payloads.browse.freshness,
+    raw_reduction_percent: Number(((1 - outputBytes.browser.length / canonicalBytes.length) * 100).toFixed(2)),
+    gzip_reduction_percent: Number(((1 - browserGzipBytes / canonicalGzipBytes) * 100).toFixed(2)),
+    minimum_gzip_reduction_percent: MINIMUM_GZIP_REDUCTION * 100,
+    public_projection_allowlisted: true,
+    complete_editorial_record_public: false,
+    fielded_unicode_search: true,
+    persisted_search_groups: PERSISTED_SEARCH_GROUPS,
+    derived_search_groups: SEARCH_GROUPS,
+    publication_partition_complete: true,
+    typed_action_candidate_fields: PUBLIC_ACTION_CANDIDATE_FIELDS.map(([field, kind]) => ({ field, kind })),
+    unavailable_with_safe_candidate_count: unavailableWithCandidate.length,
+    typed_action_recovered_unavailable_record_count: recoveredUnavailable.length,
+    typed_action_recovered_unavailable_by_kind: recoveredByKind,
+    typed_action_total_record_count: typedActionRecords.length,
+    typed_action_total_action_count: typedActions.length,
+    typed_action_recovery_complete: recoveredUnavailable.length === unavailableWithCandidate.length
+  };
+}
+
 function main() {
   const canonicalBytes = fs.readFileSync(CANONICAL_PATH);
   const canonical = JSON.parse(canonicalBytes);
-  const payload = buildBrowserPayload(canonical);
-  const text = serializeBrowserPayload(payload);
-  const browserBytes = Buffer.from(text);
-  const changed = writeIfChanged(BROWSER_PATH, text);
-  const canonicalGzipBytes = zlib.gzipSync(canonicalBytes, { level: 9 }).length;
-  const browserGzipBytes = zlib.gzipSync(browserBytes, { level: 9 }).length;
-  const report = {
-    generated_at: canonical._generated_at || null,
-    schema: payload._schema,
-    canonical_path: 'polymythseminars/events.json',
-    browser_path: 'polymythseminars/browse.json',
-    record_count: payload.count,
-    canonical_sha256: crypto.createHash('sha256').update(canonicalBytes).digest('hex'),
-    browser_sha256: crypto.createHash('sha256').update(browserBytes).digest('hex'),
-    canonical_raw_bytes: canonicalBytes.length,
-    browser_raw_bytes: browserBytes.length,
-    raw_reduction_percent: Number(((1 - browserBytes.length / canonicalBytes.length) * 100).toFixed(2)),
-    canonical_gzip_bytes: canonicalGzipBytes,
-    browser_gzip_bytes: browserGzipBytes,
-    gzip_reduction_percent: Number(((1 - browserGzipBytes / canonicalGzipBytes) * 100).toFixed(2)),
-    minimum_gzip_reduction_percent: MINIMUM_GZIP_REDUCTION * 100,
-    full_record_contract_preserved: true
+  const releaseManifest = JSON.parse(fs.readFileSync(RELEASE_MANIFEST_PATH));
+  assertCurrentDatasetVersion('polymythcal-events', canonical);
+  validateDestinations(canonical);
+
+  const discoveryBuildTimestamp = String(
+    process.env.POLYMYTHCAL_BUILD_AT
+    || process.env.MEPHISTODATA_GENERATED_AT
+    || releaseManifest.polymythcal_discovery_built_at
+    || releaseManifest.generated_at
+    || ''
+  ).trim();
+  if (!Number.isFinite(Date.parse(discoveryBuildTimestamp))) {
+    throw new Error('Polymythcal build timestamp must be a valid ISO-8601 value.');
+  }
+  const payloads = buildDiscoveryPayloads(canonical, { builtAt: discoveryBuildTimestamp });
+  assertReleaseInventory(canonical, payloads);
+
+  const browserText = serializeBrowserPayload(payloads.browse);
+  const watchlistText = serializeWatchlistPayload(payloads.watchlist);
+  const researchText = serializeResearchPayload(payloads.research);
+  const manifestText = serializeSurfaceManifest(payloads.manifest);
+  const outputBytes = {
+    browser: Buffer.from(browserText),
+    watchlist: Buffer.from(watchlistText),
+    research: Buffer.from(researchText),
+    manifest: Buffer.from(manifestText)
+  };
+  const report = buildReport(canonicalBytes, payloads, outputBytes);
+  if (!report.typed_action_recovery_complete) {
+    throw new Error(
+      `Typed action recovery projected ${report.typed_action_recovered_unavailable_record_count} of ` +
+      `${report.unavailable_with_safe_candidate_count} unavailable records with safe candidate routes.`
+    );
+  }
+  if (report.gzip_reduction_percent < MINIMUM_GZIP_REDUCTION * 100) {
+    throw new Error(
+      `Polymythcal discovery payload gzip reduction ${report.gzip_reduction_percent}% ` +
+      `is below the ${MINIMUM_GZIP_REDUCTION * 100}% release floor.`
+    );
+  }
+
+  const changes = {
+    browse: writeIfChanged(BROWSER_PATH, browserText),
+    watchlist: writeIfChanged(WATCHLIST_PATH, watchlistText),
+    research: writeIfChanged(RESEARCH_PATH, researchText),
+    surfaces: writeIfChanged(SURFACE_MANIFEST_PATH, manifestText)
   };
   writeIfChanged(REPORT_PATH, `${JSON.stringify(report, null, 2)}\n`);
+
   console.log(
-    `POLYMYTHCAL BROWSER PAYLOAD — ${payload.count} records, ${browserBytes.length} raw bytes, ` +
-    `${browserGzipBytes} gzip bytes (${report.gzip_reduction_percent}% below canonical), ` +
-    `${changed ? 'updated' : 'already current'}.`
+    `POLYMYTHCAL DISCOVERY V2 — ${report.chronology_count} chronology + ` +
+    `${report.watchlist_count} watchlist = ${report.canonical_count}; ` +
+    `${report.browser_raw_bytes} raw / ${report.browser_gzip_bytes} gzip bytes; ` +
+    `${Object.values(changes).some(Boolean) ? 'updated' : 'already current'}.`
   );
 }
 
 if (require.main === module) main();
 
 module.exports = {
-  BROWSER_EVENT_FIELDS,
-  CANONICAL_PATH,
+  BROWSER_EVENT_FIELDS: PUBLIC_EVENT_KEYS,
   BROWSER_PATH,
-  REPORT_PATH,
+  CANONICAL_PATH,
+  EXPECTED_CANONICAL_COUNT,
+  EXPECTED_CHRONOLOGY_COUNT,
   MINIMUM_GZIP_REDUCTION,
+  PUBLIC_EVENT_KEYS,
+  REPORT_PATH,
+  RESEARCH_PATH,
+  SURFACE_MANIFEST_PATH,
+  WATCHLIST_PATH,
+  assertReleaseInventory,
   buildBrowserPayload,
-  compactEvent,
-  hasBrowserValue,
-  serializeBrowserPayload
+  buildReport,
+  hasBrowserValue: hasPublicValue,
+  serializeBrowserPayload,
+  serializeResearchPayload,
+  serializeSurfaceManifest,
+  serializeWatchlistPayload,
+  writeIfChanged
 };

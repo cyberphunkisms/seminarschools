@@ -161,6 +161,16 @@ const FAMILIES = Object.freeze([
     fixtures: ['/polymythseminars/', '/polymythseminars/fr/'],
   },
   {
+    id: 'polymythseminars-discovery-secondary',
+    match: route => /^\/polymythseminars\/(?:fr\/)?(?:research|monitoring)\/$/.test(route),
+    fixtures: [
+      '/polymythseminars/research/',
+      '/polymythseminars/monitoring/',
+      '/polymythseminars/fr/research/',
+      '/polymythseminars/fr/monitoring/',
+    ],
+  },
+  {
     id: 'polymythseminars-forms',
     match: route => /^\/polymythseminars\/(?:fr\/)?(?:correct|submit|subscribe|thanks)\/$/.test(route),
     fixtures: ['/polymythseminars/submit/'],
@@ -251,6 +261,8 @@ const LANGUAGE_EXPECTATIONS = Object.freeze(new Map([
   ['/leizu/zh-hans/', { lang: /^zh(?:-|$)/i, dir: 'ltr' }],
   ['/leizu/zh-hans/teach/', { lang: /^zh(?:-|$)/i, dir: 'ltr' }],
   ['/polymythseminars/fr/', { lang: /^fr(?:-|$)/i, dir: 'ltr' }],
+  ['/polymythseminars/fr/research/', { lang: /^fr(?:-|$)/i, dir: 'ltr' }],
+  ['/polymythseminars/fr/monitoring/', { lang: /^fr(?:-|$)/i, dir: 'ltr' }],
   ['/polymythseminars/fr/events/0397c5dce167/', { lang: /^fr(?:-|$)/i, dir: 'ltr' }],
   ['/saul/fr/', { lang: /^fr(?:-|$)/i, dir: 'ltr' }],
   ['/saul/fa/', { lang: /^fa(?:-|$)/i, dir: 'rtl' }],
@@ -1483,3 +1495,4 @@ main().catch(error => {
   console.error(`FRONT-FACING OVERLAP/REFLOW ERROR — ${error.stack || error.message}`);
   process.exitCode = 1;
 });
+

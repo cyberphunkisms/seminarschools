@@ -8,6 +8,7 @@ const {spawnSync} = require('child_process');
 const {
   resolveSiteBuildDate,
 } = require('./polymythcal-build-date');
+const {isMonitoringMarker} = require('./lib/polymythcal-discovery-model');
 
 const ROOT = path.resolve(__dirname, '..');
 const SITE = 'https://seminarschools.com';
@@ -19,6 +20,12 @@ const PYTHON = process.env.PYTHON_BIN || 'python3';
 const failures = [];
 const fail = message => failures.push(message);
 const read = rel => fs.readFileSync(path.join(ROOT, rel), 'utf8');
+const json = rel => JSON.parse(read(rel));
+const EXPECTED_COUNTS = Object.freeze({canonical: 2088, chronology: 1954, watchlist: 134});
+const WATCHLIST_REASON = Object.freeze({
+  code: 'monitoring-marker',
+  detail: 'Displayed date is a monitoring marker, not a confirmed event or deadline date.',
+});
 const eventRoute = event => `/polymythseminars/events/${encodeURIComponent(String(event.id || event.identity_key))}/`;
 const eventFile = event => path.join(ROOT, eventRoute(event).replace(/^\/+|\/+$/g, ''), 'index.html');
 const placeholders = new Set([
@@ -54,6 +61,94 @@ function eventIndexable(event, day = TODAY) {
 function dayAfter(day) {
   const [year, month, date] = day.split('-').map(Number);
   return new Date(Date.UTC(year, month - 1, date + 1)).toISOString().slice(0, 10);
+}
+
+function exactReason(value) {
+  return value
+    && Object.keys(value).length === 2
+    && value.code === WATCHLIST_REASON.code
+    && value.detail === WATCHLIST_REASON.detail;
+}
+
+function sameArray(left, right) {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function validateDiscoveryPartition(canonicalDocument, browseDocument, watchlistDocument, surface) {
+  const canonical = canonicalDocument.events || [];
+  const browse = browseDocument.events || [];
+  const watchlist = watchlistDocument.items || [];
+  const canonicalIds = canonical.map(event => String(event.id));
+  const browseIds = browse.map(event => String(event.id));
+  const watchlistIds = watchlist.map(event => String(event.id));
+  const canonicalSet = new Set(canonicalIds);
+  const browseSet = new Set(browseIds);
+  const watchlistSet = new Set(watchlistIds);
+  const union = new Set([...browseIds, ...watchlistIds]);
+
+  if (
+    canonical.length !== EXPECTED_COUNTS.canonical
+    || browse.length !== EXPECTED_COUNTS.chronology
+    || watchlist.length !== EXPECTED_COUNTS.watchlist
+  ) {
+    fail(`Discovery v2 release split differs: ${canonical.length} canonical, ${browse.length} chronology, ${watchlist.length} watchlist`);
+  }
+  if (
+    surface.schema !== 'polymythcal-publication-surfaces-v2'
+    || surface._schema !== 'polymythcal-publication-surfaces-v2'
+  ) {
+    fail('publication surface schema is not polymythcal-publication-surfaces-v2');
+  }
+  if (
+    canonicalSet.size !== canonicalIds.length
+    || browseSet.size !== browseIds.length
+    || watchlistSet.size !== watchlistIds.length
+  ) {
+    fail('Discovery v2 canonical, chronology, or watchlist IDs are not unique');
+  }
+  if (
+    browseIds.some(id => watchlistSet.has(id))
+    || union.size !== canonicalSet.size
+    || [...union].some(id => !canonicalSet.has(id))
+  ) {
+    fail('chronology and watchlist are not a disjoint exact partition of the private canonical corpus');
+  }
+  if (
+    surface.canonical_count !== canonical.length
+    || surface.chronology_count !== browse.length
+    || surface.watchlist_count !== watchlist.length
+    || browseDocument.count !== browse.length
+    || browseDocument._canonical_count !== canonical.length
+    || watchlistDocument.count !== watchlist.length
+    || watchlistDocument._canonical_count !== canonical.length
+  ) {
+    fail('Discovery v2 declared counts do not match their payloads');
+  }
+  if (!sameArray(surface.chronology_ids || [], browseIds)) {
+    fail('publication chronology_ids do not exactly match browse order');
+  }
+  if (!sameArray(surface.watchlist_ids || [], watchlistIds)) {
+    fail('publication watchlist_ids do not exactly match watchlist order');
+  }
+  const reasonIds = Object.keys(surface.reasons || {});
+  if (
+    !sameArray(reasonIds, watchlistIds)
+    || watchlistIds.some(id => !exactReason(surface.reasons?.[id]))
+  ) {
+    fail('publication reasons are not the exact monitoring-marker contract');
+  }
+  const markerIds = canonical.filter(isMonitoringMarker).map(event => String(event.id));
+  if (!sameArray(markerIds, watchlistIds)) {
+    fail('watchlist does not exactly quarantine all explicit monitoring-marker records');
+  }
+  if (watchlist.some(item => 'date' in item || 'end_date' in item || item.date_status !== 'awaiting-confirmed-date')) {
+    fail('watchlist exposes a monitoring date or lacks awaiting-confirmed-date status');
+  }
+
+  return {
+    chronology: canonical.filter(event => browseSet.has(String(event.id))),
+    watchlist: canonical.filter(event => watchlistSet.has(String(event.id))),
+  };
 }
 
 function run(command, args, env = {}) {
@@ -97,7 +192,25 @@ function generatedDigest() {
 }
 
 function main() {
-  const events = JSON.parse(read('polymythseminars/events.json')).events || [];
+  const canonicalDocument = json('data/polymyth-seminar-events.json');
+  const privateMirrorDocument = json('polymythseminars/events.json');
+  const browseDocument = json('polymythseminars/browse.json');
+  const watchlistDocument = json('polymythseminars/watchlist.json');
+  const surface = json('data/polymythcal-publication-surfaces.json');
+  const partition = validateDiscoveryPartition(
+    canonicalDocument,
+    browseDocument,
+    watchlistDocument,
+    surface,
+  );
+  const events = partition.chronology;
+  const watchlistEvents = partition.watchlist;
+  if (JSON.stringify(privateMirrorDocument) !== JSON.stringify(canonicalDocument)) {
+    fail('private canonical event mirrors differ');
+  }
+  if (fs.existsSync(path.join(ROOT, 'public', 'polymythseminars', 'events.json'))) {
+    fail('public/polymythseminars/events.json exposes the private canonical corpus');
+  }
   const sitemap = read('sitemap.xml');
   const sitemapEvents = new Set(
     [...sitemap.matchAll(/<loc>(https:\/\/seminarschools\.com\/polymythseminars\/events\/[^<]+)<\/loc>/g)]
@@ -115,6 +228,32 @@ function main() {
     || [...expectedSitemapEvents].some(url => !sitemapEvents.has(url))
   ) {
     fail(`release-day sitemap event set differs: expected ${expectedSitemapEvents.size}, found ${sitemapEvents.size}`);
+  }
+
+  for (const event of watchlistEvents) {
+    const id = String(event.id || event.identity_key);
+    const encodedId = encodeURIComponent(id);
+    const routeIds = new Set([id, ...(event.legacy_ids || []).map(String)]);
+    for (const routeId of routeIds) {
+      for (const relative of [
+        `polymythseminars/events/${routeId}/index.html`,
+        `polymythseminars/fr/events/${routeId}/index.html`,
+        `polymythseminars/ics/${routeId}.ics`,
+        `public/polymythseminars/events/${routeId}/index.html`,
+        `public/polymythseminars/fr/events/${routeId}/index.html`,
+        `public/polymythseminars/ics/${routeId}.ics`,
+      ]) {
+        if (fs.existsSync(path.join(ROOT, relative))) {
+          fail(`${relative}: monitoring record has a chronology route`);
+        }
+      }
+    }
+    for (const route of [
+      `${SITE}/polymythseminars/events/${encodedId}/`,
+      `${SITE}/polymythseminars/fr/events/${encodedId}/`,
+    ]) {
+      if (sitemapEvents.has(route)) fail(`sitemap exposes monitoring record ${route}`);
+    }
   }
 
   let expired = 0;
@@ -261,7 +400,7 @@ function main() {
   }
 
   console.log(
-    `AUDIT41 EVENT ROLLOVER PASSED — ${events.length} canonical pages, ${expired} archived pages, `
+    `AUDIT41 EVENT ROLLOVER PASSED — ${events.length} chronology pages, ${watchlistEvents.length} monitored records quarantined, ${expired} archived pages, `
     + `${currentIndexable} current indexable pages, ${aliases} noindex aliases, `
     + `${sitemapEvents.size} sitemap events, and a no-write future-date rollover simulation.`
   );
@@ -273,3 +412,4 @@ try {
   console.error('AUDIT41 EVENT ROLLOVER FAILED:', error.stack || error.message);
   process.exit(1);
 }
+

@@ -62,20 +62,25 @@ function main(){
   if(read('scripts/build-search-pages.js').includes('The record keeps subject, level, and source visible')) fail('catalog detail: generic Classroom fit filler remains in the generator');
 
   const calendar=read('polymythseminars/index.html');
-  const events=JSON.parse(read('polymythseminars/events.json')).events||[];
+  const browse=JSON.parse(read('polymythseminars/browse.json'));
+  const events=browse.events||[];
+  const surfaces=JSON.parse(read('data/polymythcal-publication-surfaces.json'));
   const staticEvents=(calendar.match(/<!-- SS_STATIC_EVENTS_START -->([\s\S]*?)<!-- SS_STATIC_EVENTS_END -->/)||[])[1]||'';
   const eventCards=count(/<article class="event"/g,staticEvents);
-  const clientCalendar=/\/js\/polymythcal-revamp\.js/.test(calendar)&&/id="pmEventList"/.test(calendar);
+  const clientCalendar=/\/js\/polymythcal-discovery\.js/.test(calendar)&&/id="pmdList"/.test(calendar);
   if(calendar.includes('data-ssr-events="true"')) {
     if(eventCards!==manifest.upcomingEvents) fail(`calendar: expected ${manifest.upcomingEvents} server-delivered event cards, found ${eventCards}`);
   } else {
     if(!clientCalendar) fail('calendar: missing client calendar controller and result mount');
-    if(!/<noscript>[\s\S]*RSS and calendar feeds[\s\S]*site map/i.test(calendar)) fail('calendar: client shell lacks a useful no-script route');
-    if(!events.length) fail('calendar: public event data is empty');
-    const declared=JSON.parse(read('polymythseminars/events.json'));
-    if(declared.count!==events.length || declared._total_events!==events.length) fail(`calendar: declared totals do not match ${events.length} records`);
+    if(!/<noscript>[\s\S]*calendar feeds[\s\S]*site map/i.test(calendar)) fail('calendar: client shell lacks a useful no-script route');
+    if(!events.length) fail('calendar: chronology projection is empty');
+    if(browse._schema!=='polymythcal-discovery-v2'||browse.count!==events.length) fail(`calendar: chronology projection totals do not match ${events.length} records`);
+    if(!Array.isArray(surfaces.chronology_ids)||events.length!==surfaces.chronology_ids.length) fail('calendar: publication-surface chronology count is stale');
     const missingStable=events.filter(event=>!fs.existsSync(path.join(ROOT,'polymythseminars','events',event.id,'index.html')));
     if(missingStable.length) fail(`calendar: ${missingStable.length} stable event pages are missing`);
+    const leakedMonitoring=(surfaces.watchlist_ids||[]).filter(id=>fs.existsSync(path.join(ROOT,'public','polymythseminars','events',id,'index.html')));
+    if(leakedMonitoring.length) fail(`calendar: ${leakedMonitoring.length} monitoring-marker pages leaked into the public deploy`);
+    if(fs.existsSync(path.join(ROOT,'public','polymythseminars','events.json'))) fail('calendar: private canonical corpus leaked into the public deploy');
   }
   if(/<div class="count-line" id="countLine">Loading events/i.test(calendar)) fail('calendar: initial HTML still says Loading events');
 
@@ -140,6 +145,7 @@ function main(){
   if(/Disallow:\s*\/teacherresources\//i.test(robots)) fail('robots: teacher resource routes are blocked');
 
   if(failures.length){ console.error('SEARCH SURFACE CHECK FAILED'); failures.forEach(x=>console.error(' - '+x)); process.exit(1); }
-  console.log(`SEARCH SURFACE CHECK PASSED — ${expectedResources} catalog resources, ${events.length} public calendar records with stable pages, ${manifest.methodologySections} methodology sections, ${urls.length} sitemap URLs.`);
+  console.log(`SEARCH SURFACE CHECK PASSED — ${expectedResources} catalog resources, ${events.length} chronology records with stable pages, ${manifest.methodologySections} methodology sections, ${urls.length} sitemap URLs.`);
 }
 try{main()}catch(err){console.error('SEARCH SURFACE CHECK FAILED:',err.stack||err.message);process.exit(1)}
+

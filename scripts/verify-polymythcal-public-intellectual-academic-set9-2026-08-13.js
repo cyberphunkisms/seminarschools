@@ -127,11 +127,11 @@ assert(consolidated.length>=1587,`Set 9 baseline requires at least 1,587 consoli
 
 // Schema, UI, builder, build integration, and CL.
 for(const f of ['public_intellectual_academic_formats','academic_event_forms','academic_disciplines','event_format','interaction_format','public_access_status','audience_scope','registration_required','participant_identity_status','source_history']) assert(schema.properties?.[f],`Schema missing ${f}`);
-const ui=readText('polymythseminars/index.html');
-const revamp=readText('js/polymythcal-revamp.js');
+const taxonomy=readJson('polymythseminars/browse.json').taxonomy;
+const revamp=readText('scripts/lib/polymythcal-discovery-model.js');
 const builder=readText('scripts/build-polymythcal-audit13.py');
-for(const value of ['public-lecture','panel-debate-forum','conference-symposium','colloquium-seminar','workshop-webinar','thesis-defence','research-showcase-poster','reading-group-philosophy-cafe','book-talk-launch']) assert(ui.includes(`value="${value}"`),`UI lacks Academic format facet ${value}`);
-for(const marker of ['state.academicForms','classifyAcademicForms','event._academicForms','academic_event_forms','academic_disciplines']) assert(revamp.includes(marker),`Academic format runtime missing ${marker}`);
+for(const value of ['public-lecture','panel-debate-forum','conference-symposium','colloquium-seminar','workshop-webinar','thesis-defence','research-showcase-poster','reading-group-philosophy-cafe','book-talk-launch']) assert(taxonomy?.axes?.academicForms?.values?.[value]?.en&&taxonomy?.axes?.academicForms?.values?.[value]?.fr,`Bilingual Research taxonomy lacks Academic format facet ${value}`);
+for(const marker of ['academicForms','classifyAcademicForms','classifyTopics','public_intellectual_academic_formats']) assert(revamp.includes(marker),`Academic discovery model missing ${marker}`);
 for(const marker of ['Academic event formats','Academic disciplines','Institutional restriction']) assert(builder.includes(marker),`Detail evidence surface missing ${marker}`);
 const build=String(pkg.scripts?.['build:locked']||'');
 for(const marker of ['import-polymythcal-public-intellectual-academic-set9-2026-08-13.py','node scripts/upsert-manual-calendar-events.js','verify-polymythcal-public-intellectual-academic-set9-2026-08-13.js']) assert(build.includes(marker),`build:locked missing ${marker}`);
@@ -147,3 +147,4 @@ for(const rel of ['WEBSITE_CL_2026-07-19.md','docs/WEBSITE_CL_2026-07-19.md']){
 }
 
 console.log(JSON.stringify({manual_records:manual.length,consolidated_records:consolidated.length,set9_records:batch.length,parent_records:parents.length,child_occurrences:children.length,public_thesis_defences:defences.length,practical_philosophy_occurrences:practical.length,proust_reading_occurrences:proust.length,royal_institute_phd_seminars:rip.length,sources:sources.length,change_list:'CL-WEB-244 through CL-WEB-251 complete'},null,2));
+

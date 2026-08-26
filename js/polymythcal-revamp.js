@@ -1,6 +1,10 @@
 (() => {
   "use strict";
 
+  // Source-history fallback only. Discovery v2 owns every rebuilt calendar
+  // shell and must never mount the legacy mega-drawer/search controller.
+  if (document.body?.dataset.pmApp === "discovery-v2") return;
+
   // Keep the controller idempotent if an optimizer, preview, or interrupted
   // navigation evaluates the deferred bundle more than once.
   if (window.__ssPolymythcalRevampMounted) return;

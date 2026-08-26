@@ -934,6 +934,10 @@ class CleanRoomTests(unittest.TestCase):
             regular = source / "SITE_PACKAGE" / "index.html"
             regular.parent.mkdir(parents=True, exist_ok=True)
             regular.write_text("<!doctype html>\n", encoding="utf-8")
+            (regular.parent / ".seminar-schools-build.lease").write_text(
+                "nested lease\n",
+                encoding="utf-8",
+            )
             symlink_supported = True
             try:
                 (source / "linked-file").symlink_to(regular)
@@ -950,6 +954,9 @@ class CleanRoomTests(unittest.TestCase):
                 (destination / "SITE_PACKAGE/saul/downloads/ss-site-legitimate-nested.zip").is_file()
             )
             self.assertTrue((destination / ".env.example").is_file())
+            self.assertFalse(
+                (destination / "SITE_PACKAGE/.seminar-schools-build.lease").exists()
+            )
             for relative in (
                 "ss-site-prior.zip",
                 ".seminar-schools-build.lease",
@@ -1281,3 +1288,4 @@ class PublicPrivateBoundaryTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

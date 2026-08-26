@@ -37,6 +37,10 @@ const ROOT_PUBLIC_FILES = [
 ];
 const ROOT_PUBLIC_PATTERNS = [/^google.*\.html$/i, /^fb[a-f0-9]+\.txt$/i];
 const BLOCKED_EXACT = new Set([
+  'polymythseminars/events.json',
+  // Source-history only: every public Polymythcal surface uses Discovery v2.
+  'js/polymythcal-revamp.js',
+  'css/polymythcal-revamp.css',
   'leizu/LEIZU-PIPELINE-SETUP.md',
   'leizu/STRIPE-SETUP.md',
   'teacherresources/audit-batch-01.json',
@@ -46,6 +50,103 @@ const BLOCKED_EXACT = new Set([
 ]);
 const BLOCKED_DIRS = new Set(['node_modules', '.git', '.github', '.netlify', 'data', 'hf_export', 'netlify', 'scripts', 'public']);
 const OPERATOR_RE = /(?:AUDIT|REPORT|PATCH|VERIFY|OUTPUT|SETUP|DEPLOY|PRIVATE|SECRET|TOKEN|DASHBOARD|CRITIQUE|SUGGESTION|HANDOFF)/i;
+const WATCHLIST_REASON = Object.freeze({
+  code: 'monitoring-marker',
+  detail: 'Displayed date is a monitoring marker, not a confirmed event or deadline date.',
+});
+function canonicalEventId(event){
+  if (!event || Array.isArray(event) || typeof event !== 'object') {
+    throw new Error('polymythseminars/events.json contains a non-object event record');
+  }
+  const value = String(event.id || event.identity_key || '').trim();
+  if (!value || !/^[A-Za-z0-9._~-]+$/.test(value)) {
+    throw new Error(`Canonical event has an unsafe or empty id: ${JSON.stringify(value)}`);
+  }
+  return value;
+}
+function loadPublicationSurfaces(){
+  const canonicalPath = path.join(ROOT, 'polymythseminars', 'events.json');
+  const surfacesPath = path.join(ROOT, 'data', 'polymythcal-publication-surfaces.json');
+  let canonical;
+  let surface;
+  try { canonical = JSON.parse(fs.readFileSync(canonicalPath, 'utf8')); }
+  catch (error) { throw new Error(`Cannot read canonical Polymythcal data: ${error.message}`); }
+  try { surface = JSON.parse(fs.readFileSync(surfacesPath, 'utf8')); }
+  catch (error) { throw new Error(`Cannot read publication surface contract: ${error.message}`); }
+  if (!canonical || !Array.isArray(canonical.events)) {
+    throw new Error('polymythseminars/events.json events must be an array');
+  }
+  if (!surface || Array.isArray(surface) || typeof surface !== 'object') {
+    throw new Error('Publication surface contract must be a JSON object');
+  }
+  if (surface._schema !== 'polymythcal-publication-surfaces-v2') {
+    throw new Error('Publication surface contract must use polymythcal-publication-surfaces-v2');
+  }
+  const eventById = new Map();
+  for (const event of canonical.events) {
+    const id = canonicalEventId(event);
+    if (eventById.has(id)) throw new Error(`Duplicate canonical event id: ${id}`);
+    eventById.set(id, event);
+  }
+  const readIds = name => {
+    const values = surface[name];
+    if (!Array.isArray(values) || values.some(value => typeof value !== 'string' || !value || value.trim() !== value)) {
+      throw new Error(`Publication surface ${name} must be an array of non-empty canonical id strings`);
+    }
+    const ids = new Set(values);
+    if (ids.size !== values.length) throw new Error(`Publication surface ${name} contains duplicate ids`);
+    return ids;
+  };
+  const chronologyIds = readIds('chronology_ids');
+  const watchlistIds = readIds('watchlist_ids');
+  const overlap = [...chronologyIds].filter(id => watchlistIds.has(id));
+  if (overlap.length) throw new Error(`Publication surfaces overlap: ${overlap.slice(0, 10).join(', ')}`);
+  const union = new Set([...chronologyIds, ...watchlistIds]);
+  const missing = [...eventById.keys()].filter(id => !union.has(id));
+  const extra = [...union].filter(id => !eventById.has(id));
+  if (missing.length || extra.length) {
+    throw new Error(`Publication surfaces do not partition canonical ids; missing=${missing.slice(0, 10).join(', ')}, extra=${extra.slice(0, 10).join(', ')}`);
+  }
+  const reasons = surface.reasons;
+  if (!reasons || Array.isArray(reasons) || typeof reasons !== 'object') {
+    throw new Error('Publication surface reasons must be an object keyed exactly by every watchlist id');
+  }
+  const reasonKeys = Object.keys(reasons);
+  if (reasonKeys.length !== watchlistIds.size || reasonKeys.some(id => !watchlistIds.has(id))) {
+    throw new Error('Publication surface reasons must be an object keyed exactly by every watchlist id');
+  }
+  for (const id of watchlistIds) {
+    const reason = reasons[id];
+    if (
+      !reason || Array.isArray(reason) || typeof reason !== 'object'
+      || Object.keys(reason).sort().join(',') !== 'code,detail'
+      || reason.code !== WATCHLIST_REASON.code
+      || reason.detail !== WATCHLIST_REASON.detail
+    ) throw new Error(`Invalid watchlist monitoring-marker reason for ${id}`);
+  }
+  return { eventById, chronologyIds, watchlistIds };
+}
+function publicationBlocklists(boundary){
+  const icsIds = new Set();
+  for (const id of boundary.watchlistIds) {
+    const event = boundary.eventById.get(id);
+    icsIds.add(id);
+    for (const raw of event.legacy_ids || []) {
+      const alias = String(raw || '');
+      if (!alias || alias === id) continue;
+      if (!/^[A-Za-z0-9._~-]+$/.test(alias)) throw new Error(`Unsafe legacy event route id: ${JSON.stringify(alias)}`);
+      icsIds.add(alias);
+    }
+  }
+  return { icsIds };
+}
+const PUBLICATION_BOUNDARY = loadPublicationSurfaces();
+const PUBLICATION_BLOCKLISTS = publicationBlocklists(PUBLICATION_BOUNDARY);
+function publicationPathBlocked(rel){
+  if (rel === 'polymythseminars/events.json') return true;
+  const match = rel.match(/^polymythseminars\/ics\/([^/]+)\.ics$/);
+  return Boolean(match && PUBLICATION_BLOCKLISTS.icsIds.has(match[1]));
+}
 function posix(p){ return p.replace(/\\/g, '/'); }
 function ensureDir(p){ fs.mkdirSync(p, { recursive: true }); }
 function copyFile(src, dst){ ensureDir(path.dirname(dst)); fs.copyFileSync(src, dst); }
@@ -206,8 +307,36 @@ function commitBuildOutput(){
   }
   if (movedCurrent) removeDir(PREVIOUS_OUT);
 }
+function pruneBlockedArtifactsAfterCommit(){
+  // Extracted artifact workspaces may expose an older lower-layer file again
+  // when a complete directory is replaced atomically. Unlink each managed
+  // blocked file from the committed tree as well so the overlay records an
+  // explicit deletion instead of reviving private/stale public artifacts.
+  const removeBlockedFile = rel => {
+    const target = path.join(OUT, rel);
+    const resolved = path.resolve(target);
+    if (!resolved.startsWith(`${path.resolve(OUT)}${path.sep}`)) {
+      throw new Error(`PUBLIC DEPLOY BUILD FAILED — unsafe blocked path ${rel}`);
+    }
+    if (!fs.existsSync(target)) return;
+    const stat = fs.lstatSync(target);
+    if (!stat.isFile() && !stat.isSymbolicLink()) {
+      throw new Error(`PUBLIC DEPLOY BUILD FAILED — blocked path is not a file: public/${rel}`);
+    }
+    fs.unlinkSync(target);
+  };
+  for (const rel of BLOCKED_EXACT) removeBlockedFile(rel);
+  const icsDir = path.join(OUT, 'polymythseminars', 'ics');
+  if (!fs.existsSync(icsDir)) return;
+  for (const entry of fs.readdirSync(icsDir, { withFileTypes: true })) {
+    if (!entry.isFile() && !entry.isSymbolicLink()) continue;
+    const rel = posix(path.join('polymythseminars', 'ics', entry.name));
+    if (publicationPathBlocked(rel)) removeBlockedFile(rel);
+  }
+}
 function shouldSkip(rel, name){
   rel = posix(rel);
+  if (publicationPathBlocked(rel)) return true;
   if (BLOCKED_EXACT.has(rel)) return true;
   if (rel.startsWith('teacherresources/') && /\.md$/i.test(name)) return true;
   if (rel === 'marginalia/posts/example-review.md') return true;
@@ -255,6 +384,9 @@ const release = {
 };
 for (const field of [
   'base_release_id',
+  'polymythcal_discovery_release_id',
+  'polymythcal_discovery_built_at',
+  'polymythcal_discovery_asset_version',
   'geometry_asset_version',
   'teacherresources_asset_versions',
   'asset_digests',
@@ -310,5 +442,6 @@ if (preservedOutputMtime) {
   preserve(BUILD_OUT);
 }
 commitBuildOutput();
+pruneBlockedArtifactsAfterCommit();
 releaseBuildLock();
 console.log(`PUBLIC DEPLOY BUILD PASSED — ${PUBLIC_DIRS.length} public directories copied to /public; full source remains in zip root.`);

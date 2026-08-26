@@ -105,6 +105,7 @@ required=[
  'scripts/verify-audit39-generated-routes.js',
  'scripts/verify-audit39-runtime-ui.mjs',
  'scripts/verify-audit39-cache-coherence.js',
+ 'scripts/current/verify-audit39-cache-coherence.js',
  'scripts/verify-audit39-font-delivery.js',
  'scripts/verify-audit39-methodology-runtime.js',
  'scripts/verify-audit39-package-roundtrip.js',
@@ -436,3 +437,4 @@ def main()->None:
 
 if __name__=='__main__':
  main()
+

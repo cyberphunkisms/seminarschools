@@ -3,6 +3,23 @@
   "base_release_id": "2026-08-14-sitewide-canonical-indra-teacherresources-home-stability-final",
   "generated_at": "2026-08-15T18:00:00-04:00",
   "polymythcal_asset_version": "20260815-sets1-15-synthesis",
+  "polymythcal_discovery_release_id": "2026-08-26-polymythcal-discovery-v2",
+  "polymythcal_discovery_built_at": "2026-08-26T12:30:00-04:00",
+  "polymythcal_discovery_asset_version": "20260826-discovery-v2",
+  "ml_star_update": {
+    "release_id": "2026-08-26-mephistodata-execution-controlled-archive-synthesis",
+    "source": "ML_STAR_UPDATE_SOURCE_GORGON_FREE_SPEECH_EVIDENCE_CONTROL_2026-08-24.md",
+    "source_sha256": "2dde9179d4c4d3f42aef76523fa909310b0f88db27fa879a8730ad6aefa015bb",
+    "canonical_entries": 1218,
+    "current_map": "coreplus-current-map-amendment-2026-08-26",
+    "execution_owner": "coreplus-handler-mephistodata-execution-gates-2026-08-26",
+    "controlled_archive_owner": "method-controlled-archive-evidence-institutional-metrics-2026-08-26",
+    "behavioral_fixtures": {
+      "positive": 20,
+      "negative": 13,
+      "total": 33
+    }
+  },
   "publish_dir": "public",
   "release_type": "Polymythcal Sets 1-15 synthesis with sitewide canonical Indra geometry, Teacher Resources state/layout repair, and stable home project preview",
   "notes": [
@@ -47,11 +64,21 @@
     "teacherresources/finder.css": "9db03c3a1002b01ea78311d649489c2f6b649485c96b4a7de38d02a45d25459c",
     "teacherresources/finder.js": "f6e90cbddf2f7ef97392270a5c7720a65d315f6874e7685ba652f489b97588f4",
     "teacherresources/index.html": "35ad7671c94c3dd05aed1a0c054ae5453e270edeff17d3066c5b229448dd93b6",
-    "data/polymyth-seminar-events.json": "4e9bf67ad53b47c1bcad4144f0ec86717f0713266faeb784ab8c716df2f39a66",
+    "data/polymyth-seminar-events.json": "c52de1fe55bd1c1a4e22d1bce1fd71beebf0cc2687dda436670ec98451bafd7f",
     "data/polymythcal-event-schema-v2.json": "ac055808ae66db101feebad598b4ca74ae91f5957fb522f59eeda3d1e8c80a42",
-    "js/polymythcal-revamp.js": "d2d9ef19ea3c3539fc66d1d822ad74598d297fa245417c284091157857548a3e",
-    "polymythseminars/browse.json": "561cfe79c561861b219b74c8989aae69a5af4ec8bf7237d1fde316b1ec1fdafe",
-    "polymythseminars/index.html": "266fb305bee2bcd99e1855d7dfd69cc3a096e394e21e241cf4671efc75b6e59f",
-    "polymythseminars/fr/index.html": "6029f0b2d2326120a99337948b94df246009472d7089d6c5900940a024d40332"
+    "data/polymythcal-publication-surfaces.json": "e32c8c125b42b340d0df0681980040ee2fee3cc5438b16c9bd8c118984306095",
+    "css/polymythcal-discovery.css": "1a55c87f93a91d62b26d1b19616ef7115b08b9c0bc924cbbdecac5f1c01057c0",
+    "js/polymythcal-discovery-core.js": "67600d616e3cf12bf65e813d4f48c6e3be9cb9393442a4c479189a6e94e62ea4",
+    "js/polymythcal-discovery.js": "b963e8691fe971ff4bbb81cc8bff79a053e134bdacd8543a5518d348bbe70221",
+    "js/polymythcal-revamp.js": "b94357b1158058742e38cd241e0ed3944cb012da34e3b34357a0d43ad71ed2f9",
+    "polymythseminars/browse.json": "30e73c6fcd802f5b57c588fd8d6cfbffde1dc4a190a31a1a2b10cfc80eb71d7e",
+    "polymythseminars/watchlist.json": "654c13cd461801375625052ab5e92cbd5139e3fb28c3834b5d0aaa699e159b8d",
+    "polymythseminars/research.json": "0a6d897141f8f5ad1cbdab79987bcec357b3d70527df244fdd7541a84fd51265",
+    "polymythseminars/index.html": "deef10578f8192a0bce8c1691b50838b35439a7d98d863e0661e7eb6c09d152c",
+    "polymythseminars/fr/index.html": "45565ecf1e554f002bfd4836f42f6cdac4d24cda3812acc8e64a7f886b0e7a7a",
+    "polymythseminars/research/index.html": "952bff9e1370eb4510af60bfab85ad60ab0fa1c884ed2d2f3a60975346a0553f",
+    "polymythseminars/fr/research/index.html": "27687b5461e38ef6c7e42e624aaddb2733f232079c6bd2aa2a1575376ba0e65c",
+    "polymythseminars/monitoring/index.html": "f710bda0ae7aad503670f97fa79fbce8c939157253538195d6cc1516510f2e09",
+    "polymythseminars/fr/monitoring/index.html": "a993734c31ef00e8e41227492edd80b15d540e03cfaedd6439d049c15ed1ac71"
   }
 }

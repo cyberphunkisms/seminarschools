@@ -80,19 +80,24 @@ PREVIOUS_TRANSITION = {
     ),
 }
 
-APPROVED_SUCCESSOR_ADDITION_COUNT = 476
+APPROVED_SUCCESSOR_LEGACY_ADDITION_COUNT = 476
+APPROVED_SUCCESSOR_CURRENT_ADDITION_COUNT = 20
+APPROVED_SUCCESSOR_ADDITION_COUNT = (
+    APPROVED_SUCCESSOR_LEGACY_ADDITION_COUNT
+    + APPROVED_SUCCESSOR_CURRENT_ADDITION_COUNT
+)
 APPROVED_SUCCESSOR_ADDITION_PATHS_SHA256 = (
-    "4ba9f4b1b584ca01b61e14336ef4ca6995952da2573eda65671d027ee34c335d"
+    "2c90294aed295b68ffd70cf428743fd96036489804e33c9ac6ed50c99e204b94"
 )
 APPROVED_SUCCESSOR_ADDITION_ROWS_SHA256 = (
-    "c040e85a1bcf9afadbee41f8ef68782d4cd9ba4286e6a09a4d41b6f9746ae37a"
+    "5f4d7036eb022043b738c362ce7936fc78f5f62dbd5d34dd9a1a41e2cde47454"
 )
 APPROVED_SUCCESSOR_ADDITION_CATEGORY_COUNTS = {
     "source_event_ics": 226,
     "source_feeds": 3,
     "public_event_ics": 226,
     "public_feeds": 3,
-    "named": 18,
+    "named": 38,
 }
 APPROVED_SUCCESSOR_NAMED_PATHS = (
     "WEBSITE_CL_2026-07-19.md",
@@ -113,6 +118,32 @@ APPROVED_SUCCESSOR_NAMED_PATHS = (
     "scripts/verify-public-deploy-parity.js",
     "scripts/verify-register.js",
     "scripts/verify-repository-walk-policy.js",
+    "_headers",
+    "hf_export/schemas/meaninglib_entry.schema.json",
+    "polymyth/methodologylist/mythology-integration-addendum.js",
+    "polymythseminars/watchlist.json",
+    "public/_headers",
+    "public/polymyth/methodologylist/mythology-integration-addendum.js",
+    "public/polymythseminars/watchlist.json",
+    "scripts/build-academic-shortcuts.js",
+    "scripts/build-writing-shortcuts.js",
+    "scripts/query-meaninglib.js",
+    "scripts/update-polymythcal-build-manifest.js",
+    "scripts/verify-calendar-data-parity.js",
+    "scripts/verify-data-hygiene.js",
+    "scripts/verify-heavy-page-resilience.js",
+    "scripts/verify-page-size-budget.js",
+    "scripts/verify-polymythcal-calendar-clients.py",
+    "scripts/verify-polymythcal-freshness-labels.js",
+    "scripts/verify-polymythcalendar-today-scroll.js",
+    "scripts/verify-search-surface.js",
+    "scripts/verify-shortcut-title-uniqueness.js",
+)
+APPROVED_SUCCESSOR_DELETION_PATHS = (
+    "public/polymythseminars/events.json",
+)
+APPROVED_SUCCESSOR_DELETION_PATHS_SHA256 = (
+    "96ef4597296ebde9d2ba0ea9c3752f40cba05d7d54298f8795c4e4ccf3d5c7ab"
 )
 
 
@@ -275,7 +306,14 @@ def validate_approved_successor_additions(
     )
     paths = [row["path"] for row in rows]
     assert len(paths) == len(set(paths)), "duplicate approved successor addition path"
-    assert paths == sorted(paths), "successor additions must use canonical path order"
+    legacy_paths = paths[:APPROVED_SUCCESSOR_LEGACY_ADDITION_COUNT]
+    current_paths = paths[APPROVED_SUCCESSOR_LEGACY_ADDITION_COUNT:]
+    assert legacy_paths == sorted(legacy_paths), (
+        "Aug15 successor additions must retain canonical path order"
+    )
+    assert current_paths == sorted(current_paths), (
+        "current successor additions must use canonical path order"
+    )
     assert aggregate([f"{path}\n" for path in paths]) == (
         APPROVED_SUCCESSOR_ADDITION_PATHS_SHA256
     ), "successor addition path inventory drifted"
@@ -298,7 +336,12 @@ def validate_approved_successor_additions(
     for index, row in enumerate(rows, 1):
         relative = row["path"]
         assert row.get("approval") == "approved_by_successor_release_policy", relative
-        assert row.get("decision_id") == f"FP-02-2026-08-15-{index:03d}", relative
+        if index <= APPROVED_SUCCESSOR_LEGACY_ADDITION_COUNT:
+            expected_decision_id = f"FP-02-2026-08-15-{index:03d}"
+        else:
+            current_index = index - APPROVED_SUCCESSOR_LEGACY_ADDITION_COUNT
+            expected_decision_id = f"FP-02-2026-08-24-{current_index:03d}"
+        assert row.get("decision_id") == expected_decision_id, relative
         assert row.get("classification") and row.get("reason"), relative
         assert row.get("semantic_gate"), relative
         before = baseline_by_path.get(relative)
@@ -317,16 +360,50 @@ def validate_approved_successor_additions(
     assert addition_paths.isdisjoint(GENERATED_EVIDENCE_BY_PATH), (
         "reviewed successor additions must remain raw content-hashed"
     )
-    prior_modified = [row for row in modified if row[0] not in addition_paths]
-    assert len(prior_modified) == prior["modified_count"], (
-        "removing reviewed additions does not reconstruct prior modified count"
+    successor_deletion_paths = transition.get("approved_successor_deletions")
+    assert isinstance(successor_deletion_paths, list), (
+        "successor deletions must be an exact path list"
     )
-    assert aggregate([f"{path}\n" for path, _ in prior_modified]) == (
+    assert tuple(successor_deletion_paths) == APPROVED_SUCCESSOR_DELETION_PATHS, (
+        "successor deletion inventory differs from the code-owned boundary"
+    )
+    assert aggregate([f"{path}\n" for path in successor_deletion_paths]) == (
+        APPROVED_SUCCESSOR_DELETION_PATHS_SHA256
+    ), "successor deletion path inventory drifted"
+    assert addition_paths.isdisjoint(successor_deletion_paths), (
+        "a path cannot be both a successor addition and successor deletion"
+    )
+    assert set(successor_deletion_paths).isdisjoint(GENERATED_EVIDENCE_BY_PATH), (
+        "successor deletions cannot use generated-evidence policy substitutions"
+    )
+    for relative in successor_deletion_paths:
+        assert relative in baseline_by_path, (
+            f"successor deletion is not in Audit 52: {relative}"
+        )
+        assert not (root / relative).exists(), (
+            f"approved successor deletion reappeared: {relative}"
+        )
+
+    prior_modified = [row for row in modified if row[0] not in addition_paths]
+    assert len(prior_modified) == (
+        prior["modified_count"] - len(successor_deletion_paths)
+    ), (
+        "retained prior path count does not account for exact successor deletions"
+    )
+    assert transition.get("retained_previous_path_count") == len(prior_modified), (
+        "retained prior path count differs from the exact transition inventory"
+    )
+    reconstructed_prior_paths = [path for path, _ in prior_modified]
+    reconstructed_prior_paths.extend(successor_deletion_paths)
+    assert len(reconstructed_prior_paths) == prior["modified_count"], (
+        "successor additions and deletions do not reconstruct prior modified count"
+    )
+    assert aggregate([f"{path}\n" for path in reconstructed_prior_paths]) == (
         prior["modified_paths_sha256"]
-    ), "removing reviewed additions does not reconstruct prior modified paths"
+    ), "successor additions and deletions do not reconstruct prior modified paths"
     assert len(prior_modified) - len(GENERATED_EVIDENCE_CONTENT_EXCLUSIONS) == (
-        prior["raw_content_hashed_count"]
-    ), "prior raw content-hash count cannot be reconstructed"
+        prior["raw_content_hashed_count"] - len(successor_deletion_paths)
+    ), "retained prior raw content-hash count cannot be reconstructed"
     assert len(GENERATED_EVIDENCE_CONTENT_EXCLUSIONS) == (
         prior["generated_evidence_content_exclusion_count"]
     ), "prior generated-evidence policy count drifted"
@@ -336,8 +413,10 @@ def validate_approved_successor_additions(
     assert modified_content_policy_digest(prior_modified) == transition.get(
         "retained_previous_paths_current_content_policy_sha256"
     ), "current content on the retained prior path set drifted"
-    assert len(modified) == prior["modified_count"] + len(rows), (
-        "current modified count is not prior state plus exact reviewed additions"
+    assert len(modified) == (
+        prior["modified_count"] + len(rows) - len(successor_deletion_paths)
+    ), (
+        "current modified count is not prior state plus additions minus deletions"
     )
 
 
@@ -448,3 +527,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

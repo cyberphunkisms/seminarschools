@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
+import html
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -38,6 +41,11 @@ CARIBANA_PARENT_EXPECTATIONS = {
     'caribana-king-queen-showcase-2026-07-31': None,
     '119d86af47de': None,
     'caribana-pan-alive-closing-day-2026-08-02': None,
+}
+EXPECTED_DISCOVERY_COUNTS = {'canonical': 2_088, 'chronology': 1_954, 'watchlist': 134}
+WATCHLIST_REASON = {
+    'code': 'monitoring-marker',
+    'detail': 'Displayed date is a monitoring marker, not a confirmed event or deadline date.',
 }
 
 
@@ -240,6 +248,19 @@ class LegacyIcsTests(unittest.TestCase):
                 json.dumps({'events': [event]}),
                 encoding='utf-8',
             )
+            (root / 'data/polymythcal-publication-surfaces.json').write_text(
+                json.dumps({
+                    '_schema': 'polymythcal-publication-surfaces-v2',
+                    'schema': 'polymythcal-publication-surfaces-v2',
+                    'canonical_count': 1,
+                    'chronology_count': 1,
+                    'watchlist_count': 0,
+                    'chronology_ids': ['canonical-event'],
+                    'watchlist_ids': [],
+                    'reasons': {},
+                }),
+                encoding='utf-8',
+            )
             subprocess.run(
                 [sys.executable, str(root / 'scripts/build-polymythcal-audit13.py')],
                 cwd=root,
@@ -254,6 +275,110 @@ class LegacyIcsTests(unittest.TestCase):
                 b'URL:https://seminarschools.com/polymythseminars/events/canonical-event/',
                 legacy.replace(b'\r\n ', b''),
             )
+
+
+class PublicationSurfaceTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.canonical = json.loads(
+            (ROOT / 'data/polymyth-seminar-events.json').read_text(encoding='utf-8')
+        )
+        cls.private_mirror = json.loads(
+            (ROOT / 'polymythseminars/events.json').read_text(encoding='utf-8')
+        )
+        cls.browse = json.loads(
+            (ROOT / 'polymythseminars/browse.json').read_text(encoding='utf-8')
+        )
+        cls.watchlist = json.loads(
+            (ROOT / 'polymythseminars/watchlist.json').read_text(encoding='utf-8')
+        )
+        cls.surfaces = json.loads(
+            (ROOT / 'data/polymythcal-publication-surfaces.json').read_text(encoding='utf-8')
+        )
+
+    def test_discovery_v2_is_an_exact_disjoint_partition(self):
+        canonical_ids = [event['id'] for event in self.canonical['events']]
+        browse_ids = [event['id'] for event in self.browse['events']]
+        watchlist_ids = [event['id'] for event in self.watchlist['items']]
+
+        self.assertEqual(len(canonical_ids), EXPECTED_DISCOVERY_COUNTS['canonical'])
+        self.assertEqual(len(browse_ids), EXPECTED_DISCOVERY_COUNTS['chronology'])
+        self.assertEqual(len(watchlist_ids), EXPECTED_DISCOVERY_COUNTS['watchlist'])
+        self.assertEqual(len(canonical_ids), len(set(canonical_ids)))
+        self.assertEqual(len(browse_ids), len(set(browse_ids)))
+        self.assertEqual(len(watchlist_ids), len(set(watchlist_ids)))
+        self.assertFalse(set(browse_ids) & set(watchlist_ids))
+        self.assertEqual(set(browse_ids) | set(watchlist_ids), set(canonical_ids))
+        self.assertEqual(self.surfaces['_schema'], 'polymythcal-publication-surfaces-v2')
+        self.assertEqual(self.surfaces['schema'], 'polymythcal-publication-surfaces-v2')
+        self.assertEqual(self.surfaces['chronology_ids'], browse_ids)
+        self.assertEqual(self.surfaces['watchlist_ids'], watchlist_ids)
+        self.assertEqual(list(self.surfaces['reasons']), watchlist_ids)
+        self.assertEqual(
+            self.surfaces['reasons'],
+            {event_id: WATCHLIST_REASON for event_id in watchlist_ids},
+        )
+        self.assertEqual(self.browse['count'], len(browse_ids))
+        self.assertEqual(self.browse['_chronology_count'], len(browse_ids))
+        self.assertEqual(self.browse['_canonical_count'], len(canonical_ids))
+        self.assertEqual(self.watchlist['count'], len(watchlist_ids))
+        self.assertEqual(self.watchlist['_canonical_count'], len(canonical_ids))
+
+    def test_watchlist_exactly_matches_explicit_monitoring_markers(self):
+        marker_ids = []
+        for event in self.canonical['events']:
+            evidence = f"{event.get('description', '')} {event.get('raw_excerpt', '')}"
+            if (
+                event.get('date_precision') == 'estimated'
+                and re.search(r'\bmonitoring marker\b', evidence, flags=re.I)
+            ):
+                marker_ids.append(event['id'])
+        watchlist_ids = [event['id'] for event in self.watchlist['items']]
+        self.assertEqual(marker_ids, watchlist_ids)
+        for item in self.watchlist['items']:
+            self.assertNotIn('date', item)
+            self.assertNotIn('end_date', item)
+            self.assertEqual(item['date_status'], 'awaiting-confirmed-date')
+
+    def test_private_corpus_and_monitoring_route_quarantine(self):
+        self.assertEqual(self.private_mirror, self.canonical)
+        self.assertFalse((ROOT / 'public/polymythseminars/events.json').exists())
+        sitemap = (ROOT / 'sitemap.xml').read_text(encoding='utf-8')
+        canonical_by_id = {event['id']: event for event in self.canonical['events']}
+
+        def hashed_alias(value):
+            source = html.unescape(str(value or 'event')).lower().replace('&', ' and ')
+            slug = re.sub(r'[^a-z0-9]+', '-', source).strip('-')[:76] or 'event'
+            digest = hashlib.sha1(str(value).encode()).hexdigest()[:8]
+            return f'{slug}-{digest}'
+
+        for event_id in self.surfaces['watchlist_ids']:
+            event = canonical_by_id[event_id]
+            legacy_ids = [str(value) for value in event.get('legacy_ids', [])]
+            english_ids = {event_id, hashed_alias(event_id)}
+            french_ids = {event_id}
+            ics_ids = {event_id}
+            for legacy_id in legacy_ids:
+                english_ids.update((legacy_id, hashed_alias(legacy_id)))
+                french_ids.add(legacy_id)
+                ics_ids.add(legacy_id)
+            for route_id in english_ids:
+                self.assertFalse((ROOT / f'polymythseminars/events/{route_id}/index.html').exists())
+                self.assertFalse((ROOT / f'public/polymythseminars/events/{route_id}/index.html').exists())
+                self.assertNotIn(
+                    f'<loc>https://seminarschools.com/polymythseminars/events/{route_id}/</loc>',
+                    sitemap,
+                )
+            for route_id in french_ids:
+                self.assertFalse((ROOT / f'polymythseminars/fr/events/{route_id}/index.html').exists())
+                self.assertFalse((ROOT / f'public/polymythseminars/fr/events/{route_id}/index.html').exists())
+                self.assertNotIn(
+                    f'<loc>https://seminarschools.com/polymythseminars/fr/events/{route_id}/</loc>',
+                    sitemap,
+                )
+            for route_id in ics_ids:
+                self.assertFalse((ROOT / f'polymythseminars/ics/{route_id}.ics').exists())
+                self.assertFalse((ROOT / f'public/polymythseminars/ics/{route_id}.ics').exists())
 
 
 class CurrentDataConsolidationTests(unittest.TestCase):
@@ -437,3 +562,4 @@ class CurrentDataConsolidationTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+

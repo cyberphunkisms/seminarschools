@@ -42,7 +42,7 @@ function main(){
     failures.push('missing MEPHISTODATA_ACTIVATION.md');
   } else {
     const activation = fs.readFileSync(activationPath, 'utf8');
-    const activationRequired = ['MEPHISTODATA ACTIVATION','EXACT CORE / PERSONAL RULES','SOURCE OF TRUTH','CONDITIONAL PROJECT LOAD','ONTOLOGY LOCK','OPERATING MODE','TASK-SPECIFIC RETRIEVAL','RESPONSE CONTRACT'];
+    const activationRequired = ['MEPHISTODATA ACTIVATION','EXACT CORE / PERSONAL RULES','SOURCE OF TRUTH','CURRENT EXECUTION LOCK','CONDITIONAL PROJECT LOAD','ONTOLOGY LOCK','OPERATING MODE','TASK-SPECIFIC RETRIEVAL','RESPONSE CONTRACT'];
     for(const r of activationRequired){ if(!activation.includes(r)) failures.push(`activation missing section ${r}`); }
     const core = loadCanonicalCore();
     const embedded = activation.match(/<!-- BEGIN EXACT CORE -->\n([\s\S]*?)\n<!-- END EXACT CORE -->/);
@@ -59,6 +59,10 @@ function main(){
     if(!activation.includes("Mephistodata, Devil's Diary, CORE, or CORE+")) failures.push("activation preamble does not explicitly trigger Mephistodata and Devil's Diary work");
     if(!activation.includes('Canonical CORE+ locator: https://seminarschools.com/polymyth/methodologylist-coreplus.txt')) failures.push('activation missing stable canonical CORE+ locator');
     if(!activation.includes('Canonical full Methodologylist locator: https://seminarschools.com/polymyth/methodologylist.txt')) failures.push('activation missing stable canonical full Methodologylist locator');
+    if(!activation.includes('coreplus-current-map-amendment-2026-08-26')) failures.push('activation missing current August 26 map companion');
+    if(!activation.includes('coreplus-handler-mephistodata-execution-gates-2026-08-26')) failures.push('activation missing current fail-closed execution owner');
+    if(!activation.includes('method-controlled-archive-evidence-institutional-metrics-2026-08-26')) failures.push('activation missing controlled-archive owner');
+    if(!activation.includes('explicit Mephistodata reactivation discards the unsent stale draft')) failures.push('activation missing reactivation reset behavior');
     if(!activation.includes("For Devil's Diary work, load the current CORE+ Devil's Diary dispatch plus the base recipe, comprehensive article rules, Audience-register separation, anti-twisting and SOURCE-STATUS owners, Interpretive pleonexia, and the Mephistodata mirror criterion before drafting.")) failures.push("activation missing exact Devil's Diary handler dispatch");
     if(!/Otherwise apply portable CORE alone/i.test(activation)) failures.push('activation missing conditional ML fallback');
     if(!/Do not make Mephistodata or ML\* session-wide merely because this file was opened/i.test(activation)) failures.push('activation missing no-session-wide-load rule');

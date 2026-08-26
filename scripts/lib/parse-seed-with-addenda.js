@@ -123,6 +123,18 @@ function parsePolymythCoherenceRoutingAddendum() {
   );
 }
 
+function parseMephistodataRuleHardeningAddendum() {
+  const addendumPath = path.resolve(
+    __dirname,
+    '../../polymyth/methodologylist/mephistodata-rule-hardening-addendum.js'
+  );
+  if (!fs.existsSync(addendumPath)) {
+    throw new Error('Missing Mephistodata rule-hardening addendum: ' + addendumPath);
+  }
+  const source = fs.readFileSync(addendumPath, 'utf8');
+  return parseDeclaredArray(source, 'const MEPHISTODATA_RULE_HARDENING_ADDENDUM');
+}
+
 function parseSeedWithAddenda(html) {
   const combined = [
     ...parseDeclaredArray(html, 'const SEED'),
@@ -130,6 +142,7 @@ function parseSeedWithAddenda(html) {
     ...parseMythologyIntegrationAddendum(),
     ...parseRhetoricTaxonomyAddendum(),
     ...parsePolymythCoherenceRoutingAddendum(),
+    ...parseMephistodataRuleHardeningAddendum(),
   ];
   const seenIds = new Map();
   const seenSemanticOwners = new Map();
@@ -156,6 +169,7 @@ function parseSeedWithAddenda(html) {
 
 module.exports = {
   parseDeclaredArray,
+  parseMephistodataRuleHardeningAddendum,
   parseMythologyIntegrationAddendum,
   parsePolymythCoherenceRoutingAddendum,
   parseRhetoricTaxonomyAddendum,

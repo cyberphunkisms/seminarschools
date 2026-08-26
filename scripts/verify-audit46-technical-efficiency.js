@@ -7,6 +7,7 @@ const {
   currentTorontoDate,
   resolveSiteBuildDate,
 } = require('./polymythcal-build-date');
+const {isMonitoringMarker} = require('./lib/polymythcal-discovery-model');
 
 const ROOT = path.resolve(__dirname, '..');
 const PUBLIC = path.join(ROOT, 'public');
@@ -26,7 +27,15 @@ const metrics = {
   predeploy_npm_ci_steps: 0,
   predeploy_npm_install_steps: 0,
   expired_bilingual_event_routes: 0,
+  canonical_calendar_records: 0,
+  chronology_records: 0,
+  quarantined_monitoring_records: 0,
 };
+const EXPECTED_DISCOVERY_COUNTS = Object.freeze({canonical: 2088, chronology: 1954, watchlist: 134});
+const WATCHLIST_REASON = Object.freeze({
+  code: 'monitoring-marker',
+  detail: 'Displayed date is a monitoring marker, not a confirmed event or deadline date.',
+});
 const PUBLIC_ROOTS = [
   '.well-known', 'agora', 'aitr', 'aa', 'bb', 'bookwormcard', 'campaigns',
   'cfps', 'fellowships', 'florilegium', 'humanities', 'lectures', 'leizu',
@@ -149,6 +158,17 @@ function inspectSourcePostprocessorState(files) {
       fail(`source/${relative}: localization, Audit 43, and calm styles are not in canonical order`);
     }
   }
+}
+
+function sameArray(left, right) {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function exactWatchlistReason(value) {
+  return value
+    && Object.keys(value).length === 2
+    && value.code === WATCHLIST_REASON.code
+    && value.detail === WATCHLIST_REASON.detail;
 }
 
 const siteBuildDate = resolveSiteBuildDate({root: ROOT});
@@ -297,9 +317,87 @@ const sourceFiles = sourceHtmlFiles();
 metrics.source_html_files = sourceFiles.length;
 inspectSharedAssets(sourceFiles, ROOT, 'source');
 inspectSourcePostprocessorState(sourceFiles);
-const eventPayload = JSON.parse(read('polymythseminars/events.json'));
+const canonicalPayload = JSON.parse(read('data/polymyth-seminar-events.json'));
+const privateEventPayload = JSON.parse(read('polymythseminars/events.json'));
+const browsePayload = JSON.parse(read('polymythseminars/browse.json'));
+const watchlistPayload = JSON.parse(read('polymythseminars/watchlist.json'));
+const publicationSurfaces = JSON.parse(read('data/polymythcal-publication-surfaces.json'));
+const canonicalEvents = canonicalPayload.events || [];
+const browseEvents = browsePayload.events || [];
+const watchlistItems = watchlistPayload.items || [];
+const canonicalIds = canonicalEvents.map(event => String(event.id));
+const browseIds = browseEvents.map(event => String(event.id));
+const watchlistIds = watchlistItems.map(event => String(event.id));
+const canonicalSet = new Set(canonicalIds);
+const browseSet = new Set(browseIds);
+const watchlistSet = new Set(watchlistIds);
+const union = new Set([...browseIds, ...watchlistIds]);
+metrics.canonical_calendar_records = canonicalEvents.length;
+metrics.chronology_records = browseEvents.length;
+metrics.quarantined_monitoring_records = watchlistItems.length;
+
+if (read('polymythseminars/events.json') !== read('data/polymyth-seminar-events.json')) {
+  fail('private canonical event mirrors differ');
+}
+if (fs.existsSync(path.join(PUBLIC, 'polymythseminars', 'events.json'))) {
+  fail('public/polymythseminars/events.json exposes the private canonical corpus');
+}
+if (
+  canonicalEvents.length !== EXPECTED_DISCOVERY_COUNTS.canonical
+  || browseEvents.length !== EXPECTED_DISCOVERY_COUNTS.chronology
+  || watchlistItems.length !== EXPECTED_DISCOVERY_COUNTS.watchlist
+) {
+  fail(`Discovery v2 split differs: ${canonicalEvents.length} canonical, ${browseEvents.length} chronology, ${watchlistItems.length} watchlist`);
+}
+if (
+  publicationSurfaces.schema !== 'polymythcal-publication-surfaces-v2'
+  || publicationSurfaces._schema !== 'polymythcal-publication-surfaces-v2'
+  || browsePayload._schema !== 'polymythcal-discovery-v2'
+  || watchlistPayload._schema !== 'polymythcal-watchlist-v2'
+) {
+  fail('Discovery v2 publication schemas differ from the governed contract');
+}
+if (
+  canonicalSet.size !== canonicalIds.length
+  || browseSet.size !== browseIds.length
+  || watchlistSet.size !== watchlistIds.length
+  || browseIds.some(id => watchlistSet.has(id))
+  || union.size !== canonicalSet.size
+  || [...union].some(id => !canonicalSet.has(id))
+) {
+  fail('chronology and watchlist are not a unique, disjoint exact partition of the private canonical corpus');
+}
+if (
+  browsePayload.count !== browseEvents.length
+  || browsePayload._chronology_count !== browseEvents.length
+  || browsePayload._canonical_count !== canonicalEvents.length
+  || watchlistPayload.count !== watchlistItems.length
+  || watchlistPayload._canonical_count !== canonicalEvents.length
+  || publicationSurfaces.canonical_count !== canonicalEvents.length
+  || publicationSurfaces.chronology_count !== browseEvents.length
+  || publicationSurfaces.watchlist_count !== watchlistItems.length
+) {
+  fail('Discovery v2 declared counts differ from their payloads');
+}
+const reasonIds = Object.keys(publicationSurfaces.reasons || {});
+if (
+  !sameArray(publicationSurfaces.chronology_ids || [], browseIds)
+  || !sameArray(publicationSurfaces.watchlist_ids || [], watchlistIds)
+  || !sameArray(reasonIds, watchlistIds)
+  || watchlistIds.some(id => !exactWatchlistReason(publicationSurfaces.reasons?.[id]))
+) {
+  fail('Discovery v2 publication IDs or monitoring-marker reasons differ from the exact contract');
+}
+const monitoringMarkerIds = canonicalEvents.filter(isMonitoringMarker).map(event => String(event.id));
+if (!sameArray(monitoringMarkerIds, watchlistIds)) {
+  fail('watchlist does not exactly quarantine every explicit monitoring-marker record');
+}
+if (watchlistItems.some(item => 'date' in item || 'end_date' in item || item.date_status !== 'awaiting-confirmed-date')) {
+  fail('watchlist exposes a monitoring date or lacks awaiting-confirmed-date status');
+}
+
 const sitemap = read('sitemap.xml');
-for (const event of eventPayload.events || []) {
+for (const event of canonicalEvents.filter(event => browseSet.has(String(event.id)))) {
   const end = String(event.end_date || event.date || '').slice(0, 10);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(end) || end >= siteBuildDate) continue;
   const id = String(event.id || event.identity_key);
@@ -325,6 +423,31 @@ for (const event of eventPayload.events || []) {
     `https://seminarschools.com/polymythseminars/fr/events/${encoded}/`,
   ]) {
     if (sitemap.includes(`<loc>${route}</loc>`)) fail(`sitemap retains expired event ${route}`);
+  }
+}
+for (const event of canonicalEvents.filter(event => watchlistSet.has(String(event.id)))) {
+  const id = String(event.id || event.identity_key);
+  const routeIds = new Set([id, ...(event.legacy_ids || []).map(String)]);
+  for (const routeId of routeIds) {
+    for (const relative of [
+      `polymythseminars/events/${routeId}/index.html`,
+      `polymythseminars/fr/events/${routeId}/index.html`,
+      `polymythseminars/ics/${routeId}.ics`,
+      `public/polymythseminars/events/${routeId}/index.html`,
+      `public/polymythseminars/fr/events/${routeId}/index.html`,
+      `public/polymythseminars/ics/${routeId}.ics`,
+    ]) {
+      if (fs.existsSync(path.join(ROOT, relative))) {
+        fail(`${relative}: monitoring record has a chronology route`);
+      }
+    }
+  }
+  const encoded = encodeURIComponent(id);
+  for (const route of [
+    `https://seminarschools.com/polymythseminars/events/${encoded}/`,
+    `https://seminarschools.com/polymythseminars/fr/events/${encoded}/`,
+  ]) {
+    if (sitemap.includes(`<loc>${route}</loc>`)) fail(`sitemap exposes monitoring record ${route}`);
   }
 }
 const publicFiles = publicHtmlFiles();
@@ -361,3 +484,4 @@ console.log(
     + `${metrics.public_html_files} public HTML files, zero duplicate shared requests, `
     + `release-day rollover with a Toronto fallback, one npm install, exact runtimes, and streamed package verification.`,
 );
+

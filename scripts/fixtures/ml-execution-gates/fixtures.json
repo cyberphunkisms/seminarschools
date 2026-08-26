@@ -1,0 +1,270 @@
+[
+  {
+    "id": "quick_yes_stays_quick_pass",
+    "kind": "quick",
+    "draft": "Yes. It converts reciprocal care into a privilege-weighted market.",
+    "expected_prefix": "Yes.",
+    "max_words": 16,
+    "expected_pass": true
+  },
+  {
+    "id": "quick_yes_process_narration_fail",
+    "kind": "quick",
+    "draft": "I will first explain my methodology and then provide a comprehensive framework before answering. Yes.",
+    "expected_prefix": "Yes.",
+    "max_words": 16,
+    "expected_pass": false
+  },
+  {
+    "id": "exact_line_present_pass",
+    "kind": "exact_line",
+    "actual": "This is not only a social rule but also an economic rule.",
+    "quote": "not only a social rule but also an economic rule",
+    "rule_id": "GATE-8",
+    "expected_pass": true
+  },
+  {
+    "id": "exact_line_missing_retract_fail",
+    "kind": "exact_line",
+    "actual": "The culture prices care and rewards privilege.",
+    "quote": "not only a social rule but also an economic rule",
+    "rule_id": "GATE-8",
+    "expected_pass": false
+  },
+  {
+    "id": "dsm5_multicausal_pass",
+    "kind": "semantic",
+    "draft": "DSM-5 was one component in a larger institutional change.",
+    "must_include": ["one component", "larger institutional change"],
+    "must_exclude": ["alone caused", "sole cause"],
+    "expected_pass": true
+  },
+  {
+    "id": "dsm5_monocausal_twist_fail",
+    "kind": "semantic",
+    "draft": "DSM-5 alone caused the change.",
+    "must_include": ["one component"],
+    "must_exclude": ["alone caused"],
+    "expected_pass": false
+  },
+  {
+    "id": "affirmative_action_conformity_pass",
+    "kind": "semantic",
+    "draft": "The user thesis concerns selection for conformity and asks whether dissenters from affirmative-action ideology receive the same preference.",
+    "must_include": ["selection for conformity", "dissenters"],
+    "must_exclude": ["generally reduced competence", "every practitioner"],
+    "expected_pass": true
+  },
+  {
+    "id": "affirmative_action_competence_strawman_fail",
+    "kind": "semantic",
+    "draft": "Affirmative action generally reduced professional competence.",
+    "must_include": ["selection for conformity"],
+    "must_exclude": ["generally reduced professional competence"],
+    "expected_pass": false
+  },
+  {
+    "id": "screenshot_illustration_pass",
+    "kind": "semantic",
+    "draft": "The screenshot establishes the narrator's text and illustrates the proposed mechanism. The absent person's motive and prevalence remain unknown.",
+    "must_include": ["illustrates", "motive", "remain unknown"],
+    "must_exclude": ["proves her motive", "proves prevalence"],
+    "expected_pass": true
+  },
+  {
+    "id": "screenshot_private_motive_fail",
+    "kind": "semantic",
+    "draft": "The screenshot proves her private motive and proves prevalence.",
+    "must_include": ["illustrates"],
+    "must_exclude": ["proves her private motive", "proves prevalence"],
+    "expected_pass": false
+  },
+  {
+    "id": "molyneux_marker_pass",
+    "kind": "semantic",
+    "draft": "Molyneux supplies an earlier explicit neoliberal paradigm marker. The record does not establish direct transmission into therapy.",
+    "must_include": ["paradigm marker", "does not establish direct transmission"],
+    "must_exclude": ["directly transmitted cutoff culture"],
+    "expected_pass": true
+  },
+  {
+    "id": "molyneux_transmission_twist_fail",
+    "kind": "semantic",
+    "draft": "Molyneux directly transmitted cutoff culture into therapy.",
+    "must_include": ["paradigm marker"],
+    "must_exclude": ["directly transmitted cutoff culture"],
+    "expected_pass": false
+  },
+  {
+    "id": "mythic_medusa_pass",
+    "kind": "semantic",
+    "draft": "The video gorgonifies the mythic Medusa figure and its competing textual variants.",
+    "must_include": ["mythic Medusa"],
+    "must_exclude": ["historical Medusa"],
+    "expected_pass": true
+  },
+  {
+    "id": "historical_medusa_category_fail",
+    "kind": "semantic",
+    "draft": "It gorgonifies the historical Medusa.",
+    "must_include": ["mythic Medusa"],
+    "must_exclude": ["historical Medusa"],
+    "expected_pass": false
+  },
+  {
+    "id": "controlled_deletion_no_invention_pass",
+    "kind": "controlled_absence",
+    "control_supported": true,
+    "exact_content_available": false,
+    "conclusion": "Deletion control is supported; exact content is irrecoverable.",
+    "expected_pass": true
+  },
+  {
+    "id": "controlled_deletion_hidden_truth_fail",
+    "kind": "controlled_absence",
+    "control_supported": true,
+    "exact_content_available": false,
+    "conclusion": "Therefore the missing claim was true.",
+    "expected_pass": false
+  },
+  {
+    "id": "clean_unsupported_pass",
+    "kind": "controlled_absence",
+    "control_supported": false,
+    "exact_content_available": false,
+    "conclusion": "Unsupported in the present record.",
+    "expected_pass": true
+  },
+  {
+    "id": "generic_suppression_rescue_fail",
+    "kind": "controlled_absence",
+    "control_supported": false,
+    "exact_content_available": false,
+    "conclusion": "It must be true because the Gorgon suppressed all evidence.",
+    "expected_pass": false
+  },
+  {
+    "id": "actor_responsibility_pass",
+    "kind": "semantic",
+    "draft": "The moderator is responsible for the documented deletion. That act does not prove one coordinator designed the entire formation.",
+    "must_include": ["responsible for the documented deletion", "does not prove one coordinator"],
+    "must_exclude": ["no actor can be responsible", "designed everything"],
+    "expected_pass": true
+  },
+  {
+    "id": "normalization_not_first_occurrence_pass",
+    "kind": "semantic",
+    "draft": "An old estrangement case does not settle the later normalization, moral legitimation, professional recommendation, or command vocabulary of cutoff.",
+    "must_include": ["does not settle", "later normalization"],
+    "must_exclude": ["cutoff culture already existed because"],
+    "expected_pass": true
+  },
+  {
+    "id": "structural_analogy_not_genealogy_pass",
+    "kind": "semantic",
+    "draft": "The ancient and modern forms can be structurally analogous. Continuous genealogy and identical culture require separate evidence.",
+    "must_include": ["structurally analogous", "require separate evidence"],
+    "must_exclude": ["structurally identical proves"],
+    "expected_pass": true
+  },
+  {
+    "id": "endogenous_metric_pass",
+    "kind": "semantic",
+    "draft": "The study reports an association among visible platform-native records. It does not establish substantive quality or successful moderation.",
+    "must_include": ["association among visible", "does not establish substantive quality"],
+    "must_exclude": ["moderation improved quality"],
+    "expected_pass": true
+  },
+  {
+    "id": "retained_population_pass",
+    "kind": "semantic",
+    "draft": "Satisfaction describes retained users. Departure, self-censorship, exclusion, and non-entry remain missing-population questions.",
+    "must_include": ["retained users", "missing-population"],
+    "must_exclude": ["the original community was satisfied"],
+    "expected_pass": true
+  },
+  {
+    "id": "harm_intervention_separation_pass",
+    "kind": "semantic",
+    "draft": "The demeaning conduct is established. The necessity and proportionality of cutoff remain separate questions.",
+    "must_include": ["conduct is established", "remain separate"],
+    "must_exclude": ["therefore every sanction"],
+    "expected_pass": true
+  },
+  {
+    "id": "validation_to_assent_pass",
+    "kind": "semantic",
+    "draft": "Her fear can be acknowledged without ratifying the allegation, diagnosis, causal story, or sanction before assessment.",
+    "must_include": ["acknowledged without ratifying", "before assessment"],
+    "must_exclude": ["therefore her accusation is true"],
+    "expected_pass": true
+  },
+  {
+    "id": "prized_man_exact_claim_pass",
+    "kind": "semantic",
+    "draft": "The user thesis says prized men can juggle partners, pump and dump, receive de facto abuse permission, and price friends out. The poor-men and rich-men-near-divorce distribution remains a user-set prevalence thesis.",
+    "must_include": ["juggle partners", "pump and dump", "de facto abuse permission", "price friends out", "poor-men and rich-men-near-divorce"],
+    "must_exclude": ["receive more latitude", "make everyone else their therapist"],
+    "expected_pass": true
+  },
+  {
+    "id": "prized_man_polite_substitution_fail",
+    "kind": "semantic",
+    "draft": "Dating culture overvalues certain guys and gives them more latitude.",
+    "must_include": ["pump and dump", "de facto abuse permission"],
+    "must_exclude": ["gives them more latitude"],
+    "expected_pass": false
+  },
+  {
+    "id": "banned_not_only_construction_fail",
+    "kind": "prose",
+    "draft": "This is not only social but also economic.",
+    "literal_quote": false,
+    "expected_pass": false
+  },
+  {
+    "id": "quoted_source_title_exemption_pass",
+    "kind": "prose",
+    "draft": "The source title is quoted verbatim: 'Conflict Is Not Abuse.'",
+    "literal_quote": true,
+    "expected_pass": true
+  },
+  {
+    "id": "analysis_only_no_mutation_pass",
+    "kind": "authority",
+    "speech_act": "analysis",
+    "mutations": [],
+    "expected_pass": true
+  },
+  {
+    "id": "analysis_only_mutation_fail",
+    "kind": "authority",
+    "speech_act": "analysis",
+    "mutations": ["created-unrequested-file.md"],
+    "expected_pass": false
+  },
+  {
+    "id": "everything_coverage_pass",
+    "kind": "coverage",
+    "claims_completeness": true,
+    "source_inventory": true,
+    "claim_inventory": true,
+    "coverage_map": true,
+    "exclusions": true,
+    "conflicts": true,
+    "omission_scan": true,
+    "expected_pass": true
+  },
+  {
+    "id": "everything_without_coverage_fail",
+    "kind": "coverage",
+    "claims_completeness": true,
+    "source_inventory": true,
+    "claim_inventory": false,
+    "coverage_map": false,
+    "exclusions": false,
+    "conflicts": false,
+    "omission_scan": false,
+    "expected_pass": false
+  }
+]

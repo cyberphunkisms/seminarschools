@@ -11,18 +11,18 @@ const ROOT = path.resolve(__dirname, '..');
 const DELIVERY_ROOT = path.resolve(ROOT, '..');
 const siteOnly = process.argv.includes('--site-only');
 const failures = [];
-const EXPECTED_TOTAL = 1207;
+const EXPECTED_TOTAL = 1218;
 const EXPECTED_SECTION_COUNTS = Object.freeze({
-  analysis: 27, citation: 339, corehistory: 28, coreplus: 51,
+  analysis: 29, citation: 340, corehistory: 29, coreplus: 53,
   degorgonification: 54, 'framework-core': 1, gorgonification: 134,
-  idiomary: 44, learnings: 28, methodology: 382, pending: 18,
+  idiomary: 44, learnings: 28, methodology: 387, pending: 18,
   'pending-user-authorship': 2, polycognate: 24, rainbowsol: 3,
   sabachtan: 34, studylist: 38,
 });
 const EXPECTED_RECORD_SET_SHA256 = Object.freeze({
   'framework-core': '3170658895f8879846c57fb44b267ad6bdbe595a4e8ab74c7c75bb678bd742a4',
-  coreplus: '69ef6fb51a720cbf79cea6b5d60de0382a03d6c28746bada0d39377adaa5f35a',
-  corehistory: '05e85a584d0e5a1d95148ba9617c8a5ec7d0fe86513b4cb0c059dba9ecb515df',
+  coreplus: 'ac65068d102b191f1fcfa2da17a7bddfef7d39efdce256ac8760a079474fc631',
+  corehistory: '538d7e2bb70b79c160aac58108654a7e33f0378a6edb4641405fe5f7b1d39801',
 });
 const FORMER_CHARTER_SHA256 = '7bb00b0b11c2b64991cdcf801803a304b8cc34e914f5c286d8d8d34eb944e016';
 const FORMER_PORTABLE_CORE_DOCUMENT_SHA256 = 'd794d0d04edd15f4958c3b5de656f5d7dc478d0ab08a702afed58825d2b058e9';
@@ -115,8 +115,16 @@ const map = one(
   'current CORE+ map',
 );
 const mapAmendment = one(
-  entry => entry.id === 'coreplus-current-map-amendment-2026-08-23',
+  entry => entry.id === 'coreplus-current-map-amendment-2026-08-26',
   'current CORE+ map amendment',
+);
+const executionGates = one(
+  entry => entry.id === 'coreplus-handler-mephistodata-execution-gates-2026-08-26',
+  'current Mephistodata execution gates',
+);
+const controlledArchive = one(
+  entry => entry.id === 'method-controlled-archive-evidence-institutional-metrics-2026-08-26',
+  'current controlled-archive method',
 );
 const bootstrap = one(
   entry => entry.t === 'CORE slot 24 mirror — POLYMYTH CORE BOOTSTRAP (current, hardened 2026-07-11)',
@@ -239,10 +247,26 @@ for (const needle of [
   DIARY_DISPATCH,
 ]) requireText(map.b, needle, 'CORE+ map');
 for (const needle of [
-  'QUESTION-GENERATION DISPATCH.',
-  'Receiving an ordinary user question does not itself activate ML* or Ouroborosanalyses.',
-  'if none survives, ask none and report zero where relevant.',
+  'UNIVERSAL ML* EXECUTION DISPATCH.',
+  'AUDIT AND QUESTION DISPATCH.',
+  'Receiving a user question does not by itself invoke Ouroborosanalyses.',
+  'CORPUS, CONTROLLED-ARCHIVE, AND METRIC DISPATCH.',
+  'PM17\'s mandatory opener is inactive',
 ]) requireText(mapAmendment.b, needle, 'CORE+ map amendment');
+for (const needle of [
+  'GATE 1, RESET AND TASK FREEZE.',
+  'GATE 2, QUICK TASK AND ANSWER FIRST.',
+  'GATE 4, SEMANTIC FIDELITY.',
+  'GATE 6, CONTROLLED ARCHIVE.',
+  'GATE 9, EXACT-LINE AUDIT.',
+  'GATE 10, FAIL-CLOSED DELIVERY.',
+]) requireText(executionGates.b, needle, 'Mephistodata execution gates');
+for (const needle of [
+  'OBSERVABILITY GATE.',
+  'EVIDENCE-CONDITION FLAGS.',
+  'INSTITUTIONAL-METRIC RULE.',
+  'SYMMETRIC ABSENCE RULE.',
+]) requireText(controlledArchive.b, needle, 'controlled-archive method');
 for (const needle of [
   'Portable CORE governs every turn.',
   "This handler fires only for material or explicit work on Polymyth, Meaninglib, Seminar Schools, Mephistodata, Devil's Diary, a named star file, CORE, or CORE+.",

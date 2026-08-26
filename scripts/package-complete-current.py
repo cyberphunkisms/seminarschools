@@ -26,21 +26,22 @@ SITE_ROOT = Path(__file__).resolve().parents[1]
 DELIVERY_ROOT = SITE_ROOT.parent
 EDITABLE_ROOT = DELIVERY_ROOT / "EDITABLE_MASTERS"
 REPORT = SITE_ROOT / "WEBSITE_FUTUREPROOFING_CONTRACTS_AUDIT_2026-08-09.md"
-PACKAGE_RELEASE_ID = "core-coreplus-mephistodata-bb-polymythcal-sets1-15-ml-current-synthesis-2026-08-23"
+PACKAGE_RELEASE_ID = "core-coreplus-mephistodata-controlled-archive-polymythcal-v2-2026-08-26"
 OUTPUT_BASENAME = (
-    "ss-site-polymythcal-sets1-15-sitewide-fixes-synthesized-"
-    "complete-ml-current-synthesis-2026-08-23.zip"
+    "seminar-schools-mephistodata-execution-controlled-archive-complete-2026-08-26.zip"
 )
-# Fixed timestamps make the August 23 ML* integration reproducible across the
+# Fixed timestamps make the August 26 Polymythcal Discovery v2 integration reproducible across the
 # primary, repository-checkout, clean-room, and disaster-recovery builds.
-DERIVED_GENERATED_AT = "2026-08-24T03:30:00Z"
-RELEASE_GENERATED_AT = "2026-08-23T23:30:00-04:00"
+DERIVED_GENERATED_AT = "2026-08-26T16:30:00Z"
+RELEASE_GENERATED_AT = "2026-08-26T12:30:00-04:00"
 CORE_ACCESS_QUERY = (
     "portable CORE personal rules follow CORE+ assistant-owned filing task continuity "
     "actual 5000 character ceiling no random artifacts source status anti-Snakelogic "
     "Mephistodata Devil's Diary activation dispatch canonical locator evidence first "
     "current message scope external subject first Ouroborossyntheses Mearsheimer Mishlove "
     "Realist Power-Conversion Egregore comparative corpus artifact independence "
+    "Mephistodata execution gates controlled archive evidence condition retained population "
+    "exact-line audit quick-task reset privilege worship cutoff emotional labor "
     "Ask your favourite AI no planted conclusion BB no training"
 )
 EXPECTED_NETLIFY_COMMAND = (
@@ -156,7 +157,7 @@ def main() -> None:
     os.environ["SOURCE_DATE_EPOCH"] = str(
         int(datetime.fromisoformat(DERIVED_GENERATED_AT.replace("Z", "+00:00")).timestamp())
     )
-    os.environ["SITE_BUILD_DATE"] = "2026-08-23"
+    os.environ["SITE_BUILD_DATE"] = "2026-08-26"
     audit_dependency_holder = tempfile.TemporaryDirectory(
         prefix="ss-release-python-audit-deps-"
     )
@@ -170,7 +171,7 @@ def main() -> None:
     # without regenerating them from a wall clock.
     run([node, "scripts/sync-core-personal-rules.js"])
     run([npm, "run", "regen:all-txt"])
-    run([node, "scripts/regen-methodologylist-manifest.js", "2026-08-23"])
+    run([node, "scripts/regen-methodologylist-manifest.js", "2026-08-26"])
     run([npm, "run", "export:meaninglib-dataset"])
     run([npm, "run", "verify:meaninglib-dataset"])
     run([npm, "run", "build:meaninglib-search"])

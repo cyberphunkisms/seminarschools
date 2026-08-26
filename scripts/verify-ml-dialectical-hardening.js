@@ -377,7 +377,7 @@ for (const [caseId, condition, label] of [
   ['PRB-06', String(entryById('method-comparative-corpus-integrity-2026-08-23').b).includes('Rank together only values measured on a declared common scale.'), 'incomparable popularity measures stay separate'],
   ['PRB-07', String(entryById('coreplus-handler-current-turn-scope-semantic-fidelity-2026-08-23').b).includes('verified direct lexical use, explicit source-defined equivalent, structural analogue, secondary attribution, and unverified or AI-generated discovery lead'), 'thinker and term lineage statuses remain distinct'],
   ['PRB-08', String(entryById('method-human-artifact-ml-independence-2026-08-23').b).includes('Philosophical importance, beauty, or presence in the PDF is insufficient by itself.'), 'PDF presence does not authorize ML admission'],
-  ['PRB-09', String(entryById('coreplus-current-map-amendment-2026-08-23').b).includes('Merely invoking a named analytical method loads that method plus its fidelity and source gates; it does not load publication voice or architecture.'), 'analytical method invocation does not trigger publication scaffolding'],
+  ['PRB-09', String(entryById('coreplus-current-map-amendment-2026-08-26').b).includes('A named analytical method loads that method and its source and fidelity gates.'), 'analytical method invocation does not trigger publication scaffolding'],
   ['PRB-10', String(entryById('coreplus-handler-named-method-output-certification-2026-08-23').b).includes('explicitly requested article, entry, book, page, or other public-facing artifact'), 'named publication request loads its firewall'],
   ['PRB-11', String(entryById(PERSONAL_RULES_CURRENT_ID).b).includes('AI-generated question=>run OA first'), 'assistant-generated questions universally activate Ouroborosanalyses'],
   ['PRB-12', String(entryById(PERSONAL_RULES_CURRENT_ID).b).includes('received user question/audit alone≠OA'), 'received user questions and audits do not falsely activate Ouroborosanalyses'],
@@ -538,7 +538,7 @@ for (const [query, expectedId] of [
 const historicalAudit = entryById('corehistory-audit-auto-capture-auto-zip-2026-05-29');
 if (historicalAudit.s !== 'corehistory') failures.push('stale automatic AUDIT owner remains active');
 const exactCurrentBodyHashes = Object.freeze({
-  'coreplus-current-map-amendment-2026-08-23': '8ad820c2b4d85ad425ce22c0ef823b7e945d7bdf89140a2e5d6e0d3413cab08d',
+  'coreplus-current-map-amendment-2026-08-26': '25113e059ef4466640fa5955a004ad597f4605b44f3ee12ec957095d6af01ec2',
   'coreplus-handler-current-turn-scope-semantic-fidelity-2026-08-23': '9f4d041deab3b943eebae13fcdb4611cf7642ee9e31d0d25652de6618516dee9',
   'method-audit-current-scope-2026-08-23': '942aa8e32a56c9b6116d5edbd48c40679c5fc5af6d64566d9307b5a085d93f40',
   'method-comparative-corpus-integrity-2026-08-23': 'ecb81c7e8005bd8edc58d1062bc0f515c01d40341a5c53a7f6f606cc071c7193',
@@ -600,10 +600,10 @@ for (const [title, needle, label] of [
 }
 
 const baseMap = entryById('coreplus-current-map');
-if (!String(baseMap.xc || '').includes('coreplus-current-map-amendment-2026-08-23')) {
+if (!String(baseMap.xc || '').includes('coreplus-current-map-amendment-2026-08-26')) {
   failures.push('base CORE+ map lacks the mandatory visible amendment route');
 }
-if (!Array.isArray(baseMap.xr) || !baseMap.xr.includes('coreplus-current-map-amendment-2026-08-23')) {
+if (!Array.isArray(baseMap.xr) || !baseMap.xr.includes('coreplus-current-map-amendment-2026-08-26')) {
   failures.push('base CORE+ map lacks the machine-resolvable amendment cross-reference');
 }
 
@@ -624,10 +624,10 @@ for (const id of currentIds) {
   else if (!Array.isArray(row.crossrefs) || row.crossrefs.length === 0) failures.push(`HF methodologylist loses ${id} cross-references`);
 }
 const hfBaseMap = hfById.get('coreplus-current-map') || {};
-if (!String(hfBaseMap.current_status || '').includes('coreplus-current-map-amendment-2026-08-23')) {
+if (!String(hfBaseMap.current_status || '').includes('coreplus-current-map-amendment-2026-08-26')) {
   failures.push('HF methodologylist loses the base-map current-status amendment route');
 }
-if (!Array.isArray(hfBaseMap.crossrefs) || !hfBaseMap.crossrefs.includes('coreplus-current-map-amendment-2026-08-23')) {
+if (!Array.isArray(hfBaseMap.crossrefs) || !hfBaseMap.crossrefs.includes('coreplus-current-map-amendment-2026-08-26')) {
   failures.push('HF methodologylist loses the base-map machine cross-reference');
 }
 

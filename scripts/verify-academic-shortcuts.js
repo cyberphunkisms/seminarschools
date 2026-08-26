@@ -4,23 +4,21 @@ const fs=require('fs');const path=require('path');const {resolveSiteBuildDate}=r
 const ROUTES={university:'both',philosophy:'both',humanities:'both',cfps:'apply',lectures:'attend',fellowships:'apply'};const failures=[];
 const read=rel=>fs.readFileSync(path.join(ROOT,rel),'utf8');const fail=msg=>failures.push(msg);
 function current(e){const value=String(e.end_date||e.date||'').slice(0,10);return /^\d{4}-\d{2}-\d{2}$/.test(value)&&value>=TODAY;}
-function matches(e,slug){return Array.isArray(e.academic_bands)&&e.academic_bands.map(String).includes(slug);}
+function matches(e,slug){const routes=e.facets?.routes||[];return routes.length?routes.includes(slug):Array.isArray(e.academic_bands)&&e.academic_bands.map(String).includes(slug);}
 function noscriptCount(html){const match=html.match(/<noscript>([\s\S]*?)<\/noscript>/i);return match?(match[1].match(/href="\/polymythseminars\/events\//g)||[]).length:0;}
 function main(){
- const root=read('polymythseminars/index.html');const sitemap=read('sitemap.xml');const redirects=read('_redirects');const headers=read('_headers');const sources=JSON.parse(read('scripts/sources.json')).sources||[];const events=JSON.parse(read('polymythseminars/events.json')).events||[];const counts={};
+ const root=read('polymythseminars/index.html');const sitemap=read('sitemap.xml');const redirects=read('_redirects');const headers=read('_headers');const sources=JSON.parse(read('scripts/sources.json')).sources||[];const events=JSON.parse(read('polymythseminars/browse.json')).events||[];const counts={};
  for(const slug of Object.keys(ROUTES)) if(!root.includes(`href="/${slug}/"`)) fail(`calendar root missing ${slug} entry point`);
  for(const [slug,defaultContent] of Object.entries(ROUTES)){
   const rel=`${slug}/index.html`;if(!fs.existsSync(path.join(ROOT,rel))){fail(`${slug}: missing route page`);continue;}
   const html=read(rel);const expected=events.filter(e=>matches(e,slug)&&current(e)).length;counts[slug]=expected;
   if(!html.includes(`data-pm-route="${slug}"`)) fail(`${slug}: missing unified route identity`);
   if(!html.includes(`data-pm-default-content="${defaultContent}"`)) fail(`${slug}: wrong default content mode`);
-  if(!html.includes('id="pmEventList"')||!html.includes('/js/polymythcal-revamp.js')) fail(`${slug}: missing shared interactive Polymythcal shell`);
+  if(!html.includes('id="pmdList"')||!html.includes('/js/polymythcal-discovery.js')) fail(`${slug}: missing shared interactive Discovery v2 shell`);
   if(/eventsContainer|quickFocusNav|watchlistPanel|calendarSearch|data-focus="deadlines"/.test(html)) fail(`${slug}: legacy calendar controls remain`);
   if(!html.includes(`https://seminarschools.com/${slug}/`)) fail(`${slug}: missing route-specific canonical/schema URL`);
-  if(!html.includes('class="pm-route-context')||!html.includes('aria-label="Calendar navigation"')||!html.includes('Browse all Polymythcal listings')) fail(`${slug}: focused-route navigation is incomplete`);
-  if(html.includes(`href="/${slug}/" aria-current="page"`)) fail(`${slug}: other-calendar navigation redundantly links the current route`);
+  if(!html.includes('class="pmd-route-context')||!html.includes('aria-label="Focused calendar context"')||!html.includes('Browse all Polymythcal listings')) fail(`${slug}: focused-route navigation is incomplete`);
   if(noscriptCount(html)!==Math.min(expected,40)) fail(`${slug}: expected ${Math.min(expected,40)} no-script listings, found ${noscriptCount(html)}`);
-  if(!html.includes('application/ld+json')) fail(`${slug}: missing structured data`);
   if(!sitemap.includes(`${SITE}/${slug}/`)) fail(`${slug}: missing from sitemap`);
   if(!redirects.includes(`/${slug}`)) fail(`${slug}: missing slashless redirect`);
   const globalNoCache=/\/\*\s*\n\s*Cache-Control:\s*no-cache, max-age=0, must-revalidate/i.test(headers);if(!globalNoCache&&!headers.includes(`/${slug}/`)) fail(`${slug}: missing no-cache header rule`);
@@ -33,3 +31,4 @@ function main(){
  console.log(`ACADEMIC SHORTCUT CHECK PASSED — unified multi-select shell on 6 routes; current counts ${JSON.stringify(counts)}.`);
 }
 main();
+

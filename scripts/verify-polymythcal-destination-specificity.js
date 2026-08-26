@@ -64,12 +64,14 @@ function expectedFields(destination) {
   };
 }
 function sameDestination(record, expected, context, {compact = false} = {}) {
-  for (const field of FIELDS) {
+  const fields = compact ? FIELDS.filter(field => field !== 'destination_evidence') : FIELDS;
+  for (const field of fields) {
     const actual = compact && field === 'destination_url' && expected[field] === '' && record[field] === undefined
       ? ''
       : record[field];
     check(actual === expected[field], `${context}: ${field} drifted`);
   }
+  if (compact) check(!Object.hasOwn(record, 'destination_evidence'), `${context}: private destination_evidence leaked into the public projection`);
 }
 function verifyDetailPage(relative, destination, lang, id) {
   const file = path.join(ROOT, relative);
@@ -112,11 +114,15 @@ function main() {
   const canonical = readJson('polymythseminars/events.json');
   const mirror = readJson('data/polymyth-seminar-events.json');
   const browse = readJson('polymythseminars/browse.json');
+  const watchlist = readJson('polymythseminars/watchlist.json');
+  const surfaces = readJson('data/polymythcal-publication-surfaces.json');
   const overrideDoc = readJson('data/polymythcal-destination-overrides.json');
   const events = canonical.events || [];
   const byId = new Map(events.map((event) => [String(event.id), event]));
   const mirrorById = new Map((mirror.events || []).map((event) => [String(event.id), event]));
-  const browseById = new Map((browse.events || []).map((event) => [String(event.id), event]));
+  const browseById = new Map([...(browse.events || []), ...(watchlist.items || [])].map((event) => [String(event.id), event]));
+  const chronologyIds = new Set(surfaces.chronology_ids || []);
+  const watchlistIds = new Set(surfaces.watchlist_ids || []);
   const overrides = new Map((overrideDoc.overrides || []).map((value) => [String(value.event_id), value]));
   const groups = new Map();
   for (const event of events) {
@@ -127,7 +133,7 @@ function main() {
   check(events.length === 2088, `canonical record count changed: ${events.length}`);
   check(overrides.size === 17, `reviewed override count changed: ${overrides.size}`);
   check(mirrorById.size === events.length, 'canonical data mirror count changed');
-  check(browseById.size === events.length, 'browser projection count changed');
+  check(browseById.size === events.length, 'chronology/watchlist projection partition count changed');
   const counts = {};
   let available = 0;
   let sharedSeries = 0;
@@ -165,8 +171,14 @@ function main() {
         if (destination.scope === 'series') sharedSeries += 1;
       }
     }
-    verifyDetailPage(`polymythseminars/events/${event.id}/index.html`, destination, 'en', event.id);
-    verifyDetailPage(`polymythseminars/fr/events/${event.id}/index.html`, destination, 'fr', event.id);
+    if (chronologyIds.has(String(event.id))) {
+      verifyDetailPage(`polymythseminars/events/${event.id}/index.html`, destination, 'en', event.id);
+      verifyDetailPage(`polymythseminars/fr/events/${event.id}/index.html`, destination, 'fr', event.id);
+    } else {
+      check(watchlistIds.has(String(event.id)), `${event.id}: absent from the publication-surface partition`);
+      check(!fs.existsSync(path.join(ROOT, `polymythseminars/events/${event.id}/index.html`)), `${event.id}: monitoring marker leaked into an English detail route`);
+      check(!fs.existsSync(path.join(ROOT, `polymythseminars/fr/events/${event.id}/index.html`)), `${event.id}: monitoring marker leaked into a French detail route`);
+    }
   }
   for (const url of GENERIC_URLS) {
     const matches = events.filter((event) => event.source_url === url);
@@ -287,3 +299,4 @@ module.exports = {
   NSPA_URL,
   primaryActions,
 };
+

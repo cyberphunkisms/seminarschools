@@ -30,7 +30,7 @@ POST_PACKAGE_IDS = {"FP-01", "FP-06", "FP-14"}
 REQUIRED_ROOTS = ["SITE_PACKAGE", "EDITABLE_MASTERS", "DEPLOY_TOOLS"]
 EXPECTED_MANIFEST_SCHEMA = "seminar-schools-package-contents-v1"
 EXPECTED_PACKAGE_KIND = "seminar-schools-complete-editable-masters-source-and-public"
-EXPECTED_PACKAGE_RELEASE_ID = "core-coreplus-mephistodata-bb-polymythcal-sets1-15-ml-current-synthesis-2026-08-23"
+EXPECTED_PACKAGE_RELEASE_ID = "core-coreplus-mephistodata-controlled-archive-polymythcal-v2-2026-08-26"
 EXPECTED_CLEAN_ROOM_PIPELINE_ID = "npm-ci-build-full-verify-editable-package-v1"
 EXPECTED_CLEAN_ROOM_HELPERS = (
     "SITE_PACKAGE/scripts/clean_room_copy.py",

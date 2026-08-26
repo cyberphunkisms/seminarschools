@@ -17,6 +17,7 @@ const ROOT = path.resolve(__dirname, '..');
 const PRUNED_DIRECTORIES = new Set([
   '.git', '.netlify', 'node_modules', '__pycache__', '.pytest_cache',
   '.mypy_cache', '.ruff_cache', '.tox', '.nox', 'htmlcov',
+  '.seminar-schools-build.lock',
   '.public-build-staging', '.public-build-previous', '.public-build-lock',
 ]);
 // These two reports are intentionally self-referential release evidence. FP-02
@@ -29,7 +30,8 @@ const SELF_UPDATING_GENERATED_EVIDENCE = new Set([
 ]);
 
 function shouldSkipFile(name) {
-  return name.endsWith('.pyc')
+  return name === '.seminar-schools-build.lease'
+    || name.endsWith('.pyc')
     || name.endsWith('.log')
     || /^\.public-build-/.test(name)
     || /\.lock-\d+$/.test(name)
@@ -104,3 +106,4 @@ console.log(
   'BUILD IDEMPOTENCE CHECK PASSED — immediate canonical rebuild left '
   + before.size + ' durable files byte-identical.'
 );
+

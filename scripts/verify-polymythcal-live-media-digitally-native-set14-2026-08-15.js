@@ -144,44 +144,44 @@ for (const field of SET_FIELDS) assert(schema.properties?.[field], `Schema missi
 assert(equal(schema.properties.live_digital_formats.items.enum, FORMATS), 'Schema Set 14 format enum drifted');
 assert(equal(schema.properties.synchronous_status.enum, SYNCHRONOUS), 'Schema Set 14 synchronous enum drifted');
 
-const ui = readText('polymythseminars/index.html');
-const uiFr = readText('polymythseminars/fr/index.html');
+const taxonomy = readJson('polymythseminars/browse.json').taxonomy;
 for (const format of FORMATS) {
-  assert(ui.includes(`value="${format}"`), `English UI lacks Set 14 facet ${format}`);
-  assert(uiFr.includes(`value="${format}"`), `French UI lacks Set 14 facet ${format}`);
+  const label = taxonomy?.axes?.digitalFormats?.values?.[format];
+  assert(label?.en && label?.fr, `Bilingual Research taxonomy lacks Set 14 facet ${format}`);
 }
-const revamp = readText('js/polymythcal-revamp.js');
-for (const marker of ['digitalFormats', 'classifyDigitalFormats', 'event._digitalFormats', 'live_digital_formats']) assert(revamp.includes(marker), `Set 14 runtime missing ${marker}`);
+const discoveryModel = readText('scripts/lib/polymythcal-discovery-model.js');
+for (const marker of ['digitalFormats', 'live_digital_formats', "allowedDeclared(event, 'live_digital_formats', 'digitalFormats')"]) assert(discoveryModel.includes(marker), `Set 14 discovery model missing ${marker}`);
 const detailBuilder = readText('scripts/build-polymythcal-audit13.py');
 for (const marker of ['Live and digital formats', 'Platform detail', 'Liveness detail', 'Interaction evidence', 'Recording evidence', 'Creator participation evidence', 'Digital occurrence evidence']) assert(detailBuilder.includes(marker), `Set 14 detail surface missing ${marker}`);
 const browserBuilder = readText('scripts/build-polymythcal-browser-payload.js');
-for (const field of SET_FIELDS) assert(browserBuilder.includes(`'${field}'`), `Browser payload contract missing ${field}`);
+assert(browserBuilder.includes('buildDiscoveryPayloads'), 'Browser builder does not use the safe discovery projection');
 
 if (!sourceOnly) {
   const canonical = list(readJson('polymythseminars/events.json'));
-  const published = list(readJson('public/polymythseminars/events.json'));
-  const browser = list(readJson('polymythseminars/browse.json'));
+  const browse = readJson('polymythseminars/browse.json');
+  const watchlist = readJson('polymythseminars/watchlist.json');
+  const browser = [...list(browse), ...(watchlist.items || [])];
   const canonicalById = new Map(canonical.map(event => [event.id, event]));
-  const publishedById = new Map(published.map(event => [event.id, event]));
   const browserById = new Map(browser.map(event => [event.id, event]));
-  assert(canonical.length === published.length && canonical.length === browser.length, 'Set 14 public dataset counts differ');
+  assert(canonical.length === browser.length, 'Set 14 safe public partition count differs');
+  assert(!exists('public/polymythseminars/events.json'), 'Private canonical events.json leaked into public/');
   assert(exists('public/polymythseminars/browse.json'), 'Public browse.json missing');
   assert(fs.readFileSync(path.join(root, 'polymythseminars/browse.json')).equals(fs.readFileSync(path.join(root, 'public/polymythseminars/browse.json'))), 'Browse mirrors differ');
+  assert(fs.readFileSync(path.join(root, 'polymythseminars/watchlist.json')).equals(fs.readFileSync(path.join(root, 'public/polymythseminars/watchlist.json'))), 'Watchlist mirrors differ');
   for (const authored of tagged) {
     const output = canonicalById.get(authored.id);
-    const publicEvent = publishedById.get(authored.id);
     const compact = browserById.get(authored.id);
-    assert(output && publicEvent && compact, `${authored.id}: absent from canonical/public/browser outputs`);
+    assert(output && compact, `${authored.id}: absent from canonical or safe public outputs`);
     for (const field of SET_FIELDS) {
       if (!Object.hasOwn(authored, field)) continue;
       assert(equal(output[field], authored[field]), `${authored.id}: canonical ${field} differs from manual`);
-      assert(equal(publicEvent[field], authored[field]), `${authored.id}: public ${field} differs from manual`);
-      if (hasValue(authored[field])) assert(equal(compact[field], authored[field]), `${authored.id}: browse ${field} differs from manual`);
-      else assert(!Object.hasOwn(compact, field), `${authored.id}: browse retained empty ${field}`);
+      assert(!Object.hasOwn(compact, field), `${authored.id}: safe discovery data exposes private ${field}`);
     }
+    assert(equal(compact.facets?.digitalFormats || [], authored.live_digital_formats), `${authored.id}: public digitalFormats facets differ from manual`);
     const detailRel = `polymythseminars/events/${authored.id}/index.html`;
-    assert(exists(detailRel), `${authored.id}: detail page missing`);
-    assert(readText(detailRel).includes('pm-event-context'), `${authored.id}: detail context missing`);
+    const isChronology = (readJson('data/polymythcal-publication-surfaces.json').chronology_ids || []).includes(authored.id);
+    assert(exists(detailRel) === isChronology, `${authored.id}: dated detail-route publication boundary is wrong`);
+    if (isChronology) assert(readText(detailRel).includes('pm-event-context'), `${authored.id}: detail context missing`);
   }
   const pkg = readJson('package.json');
   const build = String(pkg.scripts?.['build:locked'] || '');
@@ -208,3 +208,4 @@ console.log(JSON.stringify({
   source_records: 22,
   source_only: sourceOnly
 }, null, 2));
+

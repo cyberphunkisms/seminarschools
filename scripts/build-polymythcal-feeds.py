@@ -15,6 +15,8 @@ from geometry_asset_version import geometry_asset_version
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'polymythseminars/events.json'
+PUBLICATION_SURFACES = ROOT / 'data/polymythcal-publication-surfaces.json'
+BROWSE_DATA = ROOT / 'polymythseminars/browse.json'
 OUT = ROOT / 'polymythseminars/feeds'
 RELEASE = ROOT / 'RELEASE_MANIFEST.json'
 BASE = 'https://seminarschools.com/polymythseminars/'
@@ -140,6 +142,67 @@ def read_release_datetime() -> datetime:
 BUILD_DT = read_release_datetime()
 BUILD_ICS_STAMP = BUILD_DT.strftime('%Y%m%dT%H%M%SZ')
 BUILD_RFC_DATE = format_datetime(BUILD_DT)
+
+WATCHLIST_REASON = {
+    'code': 'monitoring-marker',
+    'detail': 'Displayed date is a monitoring marker, not a confirmed event or deadline date.',
+}
+
+
+def event_id(event: dict) -> str:
+    if not isinstance(event, dict):
+        raise SystemExit('polymythseminars/events.json contains a non-object event record')
+    value = str(event.get('id') or event.get('identity_key') or '').strip()
+    if not value or not re.fullmatch(r'[A-Za-z0-9._~-]+', value):
+        raise SystemExit(f'Canonical event has an unsafe or empty id: {value!r}')
+    return value
+
+
+def load_publication_surfaces(all_events: list[dict]) -> tuple[set[str], set[str]]:
+    canonical_list = [event_id(event) for event in all_events]
+    canonical_ids = set(canonical_list)
+    if len(canonical_ids) != len(canonical_list):
+        raise SystemExit('polymythseminars/events.json contains duplicate canonical event ids')
+    try:
+        surface = json.loads(PUBLICATION_SURFACES.read_text(encoding='utf-8'))
+    except (FileNotFoundError, json.JSONDecodeError) as error:
+        raise SystemExit(f'Invalid or missing publication surface contract: {error}') from error
+    if surface.get('_schema') != 'polymythcal-publication-surfaces-v2':
+        raise SystemExit('Publication surface contract must use polymythcal-publication-surfaces-v2')
+
+    def id_set(name: str) -> set[str]:
+        values = surface.get(name)
+        if not isinstance(values, list) or any(not isinstance(value, str) or not value for value in values):
+            raise SystemExit(f'Publication surface {name} must be an array of canonical ids')
+        if len(values) != len(set(values)):
+            raise SystemExit(f'Publication surface {name} contains duplicate ids')
+        return set(values)
+
+    chronology_ids = id_set('chronology_ids')
+    watchlist_ids = id_set('watchlist_ids')
+    if chronology_ids & watchlist_ids or chronology_ids | watchlist_ids != canonical_ids:
+        raise SystemExit('Publication surfaces must be a complete, disjoint canonical-id partition')
+    reasons = surface.get('reasons')
+    if not isinstance(reasons, dict) or set(reasons) != watchlist_ids:
+        raise SystemExit('Publication reasons must be keyed exactly by watchlist id')
+    invalid = [event_id for event_id in watchlist_ids if reasons.get(event_id) != WATCHLIST_REASON]
+    if invalid:
+        raise SystemExit(f'Invalid watchlist monitoring-marker reasons: {sorted(invalid)[:10]}')
+    return chronology_ids, watchlist_ids
+
+
+def load_public_descriptions(chronology_ids: set[str]) -> dict[str, str]:
+    try:
+        browse = json.loads(BROWSE_DATA.read_text(encoding='utf-8'))
+    except (FileNotFoundError, json.JSONDecodeError) as error:
+        raise SystemExit(f'Invalid or missing public browse projection: {error}') from error
+    records = browse.get('events')
+    if not isinstance(records, list):
+        raise SystemExit('Public browse projection must contain an events array')
+    by_id = {event_id(record): str(record.get('description') or '') for record in records}
+    if set(by_id) != chronology_ids:
+        raise SystemExit('Public browse projection does not match chronology publication ids')
+    return by_id
 
 
 def write_text_if_changed(path: Path, value: str) -> bool:
@@ -388,7 +451,17 @@ def main():
     parser.add_argument('--featured-only', action='store_true')
     args = parser.parse_args()
     payload = json.loads(DATA.read_text(encoding='utf-8'))
-    events = sorted(payload.get('events', []), key=lambda event: (str(event.get('date') or ''), str(event.get('title') or '')))
+    canonical_events = payload.get('events', [])
+    chronology_ids, watchlist_ids = load_publication_surfaces(canonical_events)
+    public_descriptions = load_public_descriptions(chronology_ids)
+    events = sorted(
+        (
+            {**event, 'description': public_descriptions[event_id(event)], 'raw_excerpt': ''}
+            for event in canonical_events
+            if event_id(event) in chronology_ids
+        ),
+        key=lambda event: (str(event.get('date') or ''), str(event.get('title') or '')),
+    )
     updated = int(build_featured(events))
     if args.featured_only:
         print(f'Built compact featured feed; {updated} files updated')
@@ -430,7 +503,7 @@ def main():
     }
     updated += int(write_json_if_changed(OUT / 'index.json', index_payload))
     updated += int(write_text_if_changed(ROOT / 'polymythseminars/subscribe/index.html', build_subscribe_page(manifest)))
-    print(f'Built {len(manifest)} focused bilingual RSS/ICS pairs, compact featured feed, and subscription index; {updated} files updated')
+    print(f'Built {len(manifest)} chronology-only bilingual RSS/ICS pairs, compact featured feed, and subscription index; excluded {len(watchlist_ids)} watchlist records; {updated} files updated')
 
 
 if __name__ == '__main__':

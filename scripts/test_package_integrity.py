@@ -394,6 +394,12 @@ class PackageSelectionTests(unittest.TestCase):
                 "stable advisory-lock inode; never package\n",
                 encoding="utf-8",
             )
+            nested_lease = root / "SITE_PACKAGE" / ".seminar-schools-build.lease"
+            nested_lease.parent.mkdir(parents=True)
+            nested_lease.write_text(
+                "nested advisory-lock inode; never package\n",
+                encoding="utf-8",
+            )
             (root / "data" / "polymythcal-audit35").mkdir(parents=True)
             (root / "data" / "polymythcal-audit35" / "evidence.json").write_text(
                 "{}\n",
@@ -433,8 +439,9 @@ class PackageSelectionTests(unittest.TestCase):
             self.assertGreaterEqual(stats["directories_pruned"], 5)
             # Three sibling release-evidence fixtures are considered and then
             # deliberately excluded in addition to the original selection set.
-            self.assertLess(stats["files_considered"], 14)
+            self.assertLess(stats["files_considered"], 15)
 
 
 if __name__ == "__main__":
     unittest.main()
+

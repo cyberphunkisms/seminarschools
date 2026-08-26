@@ -2,6 +2,7 @@
 """Shared, pruned file selection for Seminar Schools release archives."""
 from __future__ import annotations
 
+import json
 import os
 import re
 from pathlib import Path
@@ -44,6 +45,78 @@ GENERATED_RELEASE_EVIDENCE = re.compile(
     r"ss-site-[^/]*\.zip\.(?:audit-receipt|clean-room-report|disaster-recovery-report)\.json$",
     re.IGNORECASE,
 )
+POLYMYTHCAL_SAFE_ID = re.compile(r"^[A-Za-z0-9._~-]+$")
+
+
+def polymythcal_publication_exclusions(root: Path) -> set[str]:
+    """Return retired/private Polymythcal files that can never enter a ZIP.
+
+    The shared artifact workspace may reconcile a deleted baseline file after
+    the public builder has removed it. Package selection therefore derives the
+    exclusion set from the authoritative publication partition instead of
+    trusting deletion state. The same filter applies when *root* is either the
+    site package itself or the complete delivery root that contains it.
+    """
+    root = Path(root).resolve()
+    prefix = Path()
+    surfaces_path = root / "data" / "polymythcal-publication-surfaces.json"
+    canonical_path = root / "data" / "polymyth-seminar-events.json"
+    if not surfaces_path.is_file() or not canonical_path.is_file():
+        prefix = Path("SITE_PACKAGE")
+        surfaces_path = root / prefix / "data" / "polymythcal-publication-surfaces.json"
+        canonical_path = root / prefix / "data" / "polymyth-seminar-events.json"
+    if not surfaces_path.is_file() and not canonical_path.is_file():
+        return set()
+    if not surfaces_path.is_file() or not canonical_path.is_file():
+        raise ValueError("Polymythcal package boundary requires both publication surfaces and canonical data")
+
+    surfaces = json.loads(surfaces_path.read_text(encoding="utf-8"))
+    canonical = json.loads(canonical_path.read_text(encoding="utf-8"))
+    if surfaces.get("_schema") != "polymythcal-publication-surfaces-v2":
+        raise ValueError("Polymythcal package boundary requires publication-surfaces-v2")
+    watchlist_ids = surfaces.get("watchlist_ids")
+    events = canonical.get("events")
+    if not isinstance(watchlist_ids, list) or not isinstance(events, list):
+        raise ValueError("Polymythcal package boundary has malformed canonical arrays")
+    if len(set(watchlist_ids)) != len(watchlist_ids):
+        raise ValueError("Polymythcal package boundary has duplicate watchlist ids")
+
+    event_by_id = {}
+    for event in events:
+        if not isinstance(event, dict):
+            raise ValueError("Polymythcal canonical data contains a non-object event")
+        event_id = str(event.get("id") or event.get("identity_key") or "").strip()
+        if not POLYMYTHCAL_SAFE_ID.fullmatch(event_id) or event_id in event_by_id:
+            raise ValueError(f"Polymythcal canonical data has an unsafe or duplicate id: {event_id!r}")
+        event_by_id[event_id] = event
+
+    retired_ics_ids: set[str] = set()
+    for raw_id in watchlist_ids:
+        event_id = str(raw_id or "").strip()
+        if not POLYMYTHCAL_SAFE_ID.fullmatch(event_id) or event_id not in event_by_id:
+            raise ValueError(f"Polymythcal watchlist has an unsafe or unknown id: {event_id!r}")
+        retired_ics_ids.add(event_id)
+        legacy_ids = event_by_id[event_id].get("legacy_ids") or []
+        if not isinstance(legacy_ids, list):
+            raise ValueError(f"Polymythcal event {event_id} has malformed legacy_ids")
+        for raw_legacy in legacy_ids:
+            legacy_id = str(raw_legacy or "").strip()
+            if not legacy_id:
+                continue
+            if not POLYMYTHCAL_SAFE_ID.fullmatch(legacy_id):
+                raise ValueError(f"Polymythcal event {event_id} has an unsafe legacy id: {legacy_id!r}")
+            retired_ics_ids.add(legacy_id)
+
+    relative = lambda value: (prefix / value).as_posix()
+    excluded = {
+        relative("public/polymythseminars/events.json"),
+        relative("public/js/polymythcal-revamp.js"),
+        relative("public/css/polymythcal-revamp.css"),
+    }
+    for event_id in retired_ics_ids:
+        excluded.add(relative(f"polymythseminars/ics/{event_id}.ics"))
+        excluded.add(relative(f"public/polymythseminars/ics/{event_id}.ics"))
+    return excluded
 
 
 def generated_work_dir(part: str) -> bool:
@@ -112,12 +185,14 @@ def collect_package_files(
     root = root.resolve()
     output = output.resolve()
     excluded_roots = set(excluded_top_level)
+    publication_exclusions = polymythcal_publication_exclusions(root)
     files: list[Path] = []
     stats = {
         "directories_visited": 0,
         "directories_pruned": 0,
         "files_considered": 0,
         "files_selected": 0,
+        "polymythcal_artifacts_pruned": 0,
     }
 
     for current, directory_names, file_names in os.walk(root, topdown=True, followlinks=False):
@@ -146,9 +221,12 @@ def collect_package_files(
                 continue
             relative = candidate.relative_to(root)
             relative_name = relative.as_posix()
+            if relative_name in publication_exclusions:
+                stats["polymythcal_artifacts_pruned"] += 1
+                continue
             if relative_name in EXCLUDED_FILES or relative_name == MANIFEST_NAME:
                 continue
-            if len(relative.parts) == 1 and name == ".seminar-schools-build.lease":
+            if name == ".seminar-schools-build.lease":
                 continue
             if name == ".env" or (name.startswith(".env.") and not name.endswith(".example")):
                 continue

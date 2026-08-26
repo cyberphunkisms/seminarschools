@@ -20,6 +20,11 @@ const EXPECTED_ASSET = '20260815-sets1-15-synthesis';
 const PRESERVED_EVIDENCE_RELEASE =
   '2026-07-26-site-audit49-technical-efficiency-resilience-final';
 const EXPECTED_PACKAGE = '1.0.6';
+const EXPECTED_DISCOVERY_COUNTS = Object.freeze({canonical: 2088, chronology: 1954, watchlist: 134});
+const WATCHLIST_REASON = Object.freeze({
+  code: 'monitoring-marker',
+  detail: 'Displayed date is a monitoring marker, not a confirmed event or deadline date.',
+});
 const failures = [];
 
 function file(relative) {
@@ -47,6 +52,15 @@ function json(relative) {
 function check(condition, message) {
   if (!condition) failures.push(message);
 }
+function sameArray(left, right) {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+function exactWatchlistReason(value) {
+  return value
+    && Object.keys(value).length === 2
+    && value.code === WATCHLIST_REASON.code
+    && value.detail === WATCHLIST_REASON.detail;
+}
 
 const manifest = json('RELEASE_MANIFEST.json');
 const pkg = json('package.json');
@@ -54,7 +68,23 @@ const assistive = json('scripts/reports/audit48-assistive-technology.json');
 const calendar = json('scripts/reports/audit48-calendar-client-interoperability.json');
 const browser = json('data/audit48-browser/cross-engine-preflight.json');
 const live = json('scripts/reports/audit48-live-harvest-endpoints.json');
-const currentEvents = json('polymythseminars/events.json').events || [];
+const canonicalPayload = json('data/polymyth-seminar-events.json');
+const privateMirrorPayload = json('polymythseminars/events.json');
+const browsePayload = json('polymythseminars/browse.json');
+const watchlistPayload = json('polymythseminars/watchlist.json');
+const publicationSurfaces = json('data/polymythcal-publication-surfaces.json');
+const canonicalEvents = canonicalPayload.events || [];
+const browseEvents = browsePayload.events || [];
+const watchlistItems = watchlistPayload.items || [];
+const canonicalIds = canonicalEvents.map(event => String(event.id));
+const chronologyIds = browseEvents.map(event => String(event.id));
+const monitoringIds = watchlistItems.map(event => String(event.id));
+const canonicalSet = new Set(canonicalIds);
+const chronologySet = new Set(chronologyIds);
+const monitoringSet = new Set(monitoringIds);
+const publicPartition = new Set([...chronologyIds, ...monitoringIds]);
+const currentEvents = canonicalEvents.filter(event => chronologySet.has(String(event.id)));
+const monitoringEvents = canonicalEvents.filter(event => monitoringSet.has(String(event.id)));
 const currentFeeds = json('polymythseminars/feeds/index.json').feeds || [];
 const explicitAliases = currentEvents.reduce(
   (count, event) => count + (event.legacy_ids || []).length,
@@ -69,14 +99,61 @@ let sourceInventory = {documents: [], interactive: [], redirects: []};
 let expectedEventRoutes = null;
 let englishEventRoutes = null;
 let frenchEventRoutes = null;
+let expectedMonitoringRoutes = null;
 try {
   sourceInventory = classifySourceHtml(ROOT);
   expectedEventRoutes = expectedPolymythcalEventRoutes(currentEvents);
+  expectedMonitoringRoutes = expectedPolymythcalEventRoutes(monitoringEvents);
   englishEventRoutes = inspectEventRouteDirectory(ROOT, 'polymythseminars/events');
   frenchEventRoutes = inspectEventRouteDirectory(ROOT, 'polymythseminars/fr/events');
 } catch (error) {
   failures.push(`current source inventory cannot be derived: ${error.message}`);
 }
+
+check(
+  canonicalEvents.length === EXPECTED_DISCOVERY_COUNTS.canonical
+    && currentEvents.length === EXPECTED_DISCOVERY_COUNTS.chronology
+    && monitoringEvents.length === EXPECTED_DISCOVERY_COUNTS.watchlist,
+  `Discovery v2 split differs: ${canonicalEvents.length} canonical, ${currentEvents.length} chronology, ${monitoringEvents.length} monitoring`,
+);
+check(
+  canonicalSet.size === canonicalIds.length
+    && chronologySet.size === chronologyIds.length
+    && monitoringSet.size === monitoringIds.length
+    && !chronologyIds.some(id => monitoringSet.has(id))
+    && publicPartition.size === canonicalSet.size
+    && [...publicPartition].every(id => canonicalSet.has(id)),
+  'chronology and monitoring records are not a unique, disjoint exact canonical partition',
+);
+check(
+  publicationSurfaces.schema === 'polymythcal-publication-surfaces-v2'
+    && publicationSurfaces._schema === 'polymythcal-publication-surfaces-v2'
+    && browsePayload._schema === 'polymythcal-discovery-v2'
+    && watchlistPayload._schema === 'polymythcal-watchlist-v2'
+    && publicationSurfaces.canonical_count === canonicalEvents.length
+    && publicationSurfaces.chronology_count === currentEvents.length
+    && publicationSurfaces.watchlist_count === monitoringEvents.length
+    && browsePayload.count === currentEvents.length
+    && browsePayload._canonical_count === canonicalEvents.length
+    && watchlistPayload.count === monitoringEvents.length
+    && watchlistPayload._canonical_count === canonicalEvents.length
+    && sameArray(publicationSurfaces.chronology_ids || [], chronologyIds)
+    && sameArray(publicationSurfaces.watchlist_ids || [], monitoringIds)
+    && sameArray(Object.keys(publicationSurfaces.reasons || {}), monitoringIds)
+    && monitoringIds.every(id => exactWatchlistReason(publicationSurfaces.reasons?.[id])),
+  'Discovery v2 publication IDs, schemas, or monitoring reasons differ from the exact contract',
+);
+check(
+  watchlistItems.every(item => !('date' in item)
+    && !('end_date' in item)
+    && item.date_status === 'awaiting-confirmed-date'),
+  'monitoring records expose dates or lack awaiting-confirmed-date status',
+);
+check(
+  JSON.stringify(privateMirrorPayload) === JSON.stringify(canonicalPayload)
+    && !exists('public/polymythseminars/events.json'),
+  'the full canonical corpus is not confined to private build inputs',
+);
 
 check(read('RELEASE_ID.txt').trim() === EXPECTED_RELEASE, 'RELEASE_ID.txt is not the current release');
 check(manifest.release_id === EXPECTED_RELEASE, 'release manifest is not the current release');
@@ -105,7 +182,7 @@ check(
       === assistive.metrics?.interactive_documents + assistive.metrics?.redirect_documents,
   'assistive-technology source inventory is not an exact current-source partition',
 );
-if (expectedEventRoutes && englishEventRoutes && frenchEventRoutes) {
+if (expectedEventRoutes && expectedMonitoringRoutes && englishEventRoutes && frenchEventRoutes) {
   const missingEnglish = difference(
     expectedEventRoutes.englishRouteIds,
     englishEventRoutes.routeIds,
@@ -127,6 +204,17 @@ if (expectedEventRoutes && englishEventRoutes && frenchEventRoutes) {
     `current English event route inventory differs from the event ledger; missing `
       + `${summarizeValues(missingEnglish)}; extra ${summarizeValues(extraEnglish)}`,
   );
+  const leakedEnglishMonitoringRoutes = [...expectedMonitoringRoutes.englishRouteIds]
+    .filter(id => englishEventRoutes.routeIds.has(id));
+  const leakedFrenchMonitoringRoutes = [...expectedMonitoringRoutes.frenchRouteIds]
+    .filter(id => frenchEventRoutes.routeIds.has(id));
+  check(
+    leakedEnglishMonitoringRoutes.length === 0
+      && leakedFrenchMonitoringRoutes.length === 0,
+    `monitoring records have published detail or alias routes; English `
+      + `${summarizeValues(leakedEnglishMonitoringRoutes)}; French `
+      + `${summarizeValues(leakedFrenchMonitoringRoutes)}`,
+  );
   check(
     missingFrench.length === 0 && extraFrench.length === 0,
     `current French event route inventory differs from the event ledger; missing `
@@ -138,7 +226,9 @@ if (expectedEventRoutes && englishEventRoutes && frenchEventRoutes) {
     'one or more event route directories lack index.html',
   );
   check(
-    assistive.metrics?.canonical_events === expectedEventRoutes.canonicalIds.size
+    assistive.metrics?.canonical_events === canonicalEvents.length
+      && assistive.metrics?.chronology_events === expectedEventRoutes.canonicalIds.size
+      && assistive.metrics?.quarantined_monitoring_records === monitoringEvents.length
       && assistive.metrics?.explicit_legacy_event_ids
         === expectedEventRoutes.explicitLegacyEntries
       && assistive.metrics?.expected_english_event_routes
@@ -182,9 +272,16 @@ check(
   'calendar evidence is not bound to the current rerun',
 );
 check(
-  calendar.metrics?.tests_passed === 9
-    && calendar.metrics?.tests_run === 9
-    && calendar.metrics?.canonical_events === currentEvents.length
+  calendar.metrics?.tests_passed === 10
+    && calendar.metrics?.tests_run === 10
+    && calendar.metrics?.canonical_events === canonicalEvents.length
+    && calendar.metrics?.chronology_events === currentEvents.length
+    && calendar.metrics?.quarantined_monitoring_records === monitoringEvents.length
+    && calendar.metrics?.browse_records === currentEvents.length
+    && calendar.metrics?.watchlist_records === monitoringEvents.length
+    && calendar.metrics?.monitoring_ics_leaks === 0
+    && calendar.metrics?.monitoring_detail_or_alias_route_leaks === 0
+    && calendar.metrics?.monitoring_feed_uid_leaks === 0
     && calendar.metrics?.explicit_legacy_ics_aliases === explicitAliases
     && calendar.metrics?.single_event_ics_files === expectedSingleEventFiles
     && calendar.metrics?.total_ics_files === expectedTotalIcsFiles
@@ -310,6 +407,9 @@ const report = {
     interactive_source_pages: assistive.metrics?.interactive_documents || 0,
     redirect_source_pages: assistive.metrics?.redirect_documents || 0,
     canonical_events: assistive.metrics?.canonical_events || 0,
+    chronology_events: assistive.metrics?.chronology_events || 0,
+    quarantined_monitoring_records:
+      assistive.metrics?.quarantined_monitoring_records || 0,
     english_event_routes: assistive.metrics?.english_event_routes || 0,
     french_event_routes: assistive.metrics?.french_event_routes || 0,
     calendar_tests: calendar.metrics?.tests_passed || 0,
@@ -376,3 +476,4 @@ console.log(
   + `${report.metrics.intended_cross_engine_scenarios} prepared engine scenarios; `
   + 'native and vendor-account rows remain explicitly external.',
 );
+

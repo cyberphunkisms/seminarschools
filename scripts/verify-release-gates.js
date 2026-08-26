@@ -4,6 +4,11 @@
 /** The August 15 Sets 1-15 synthesis is current; earlier audit evidence remains immutable. */
 const fs = require('fs');
 const path = require('path');
+const { spawnSync } = require('child_process');
+const {
+  PUBLIC_RELEASE_ASSET_PATHS,
+  RELEASE_ASSET_PATHS,
+} = require('./lib/release-asset-identity');
 
 const ROOT = path.resolve(__dirname, '..');
 const failures = [];
@@ -41,6 +46,39 @@ const publicBuilder = read('scripts/build-public-deploy.js');
 const releaseAssetIdentityHelper = read('scripts/lib/release-asset-identity.js');
 const releaseAssetIdentityUpdater = read('scripts/update-release-asset-identity.js');
 const releaseAssetIdentityVerifier = read('scripts/verify-release-asset-identity.js');
+const expectedReleaseAssetPaths = Object.freeze([
+  'css/alive.css',
+  'css/calm-ux.css',
+  'css/site-wide-type-zoom.css',
+  'js/mandala.js',
+  'js/indra.js',
+  'index.html',
+  'teacherresources/finder.css',
+  'teacherresources/finder.js',
+  'teacherresources/index.html',
+  'data/polymyth-seminar-events.json',
+  'data/polymythcal-event-schema-v2.json',
+  'data/polymythcal-publication-surfaces.json',
+  'css/polymythcal-discovery.css',
+  'js/polymythcal-discovery-core.js',
+  'js/polymythcal-discovery.js',
+  'js/polymythcal-revamp.js',
+  'polymythseminars/browse.json',
+  'polymythseminars/watchlist.json',
+  'polymythseminars/research.json',
+  'polymythseminars/index.html',
+  'polymythseminars/fr/index.html',
+  'polymythseminars/research/index.html',
+  'polymythseminars/fr/research/index.html',
+  'polymythseminars/monitoring/index.html',
+  'polymythseminars/fr/monitoring/index.html',
+]);
+const privateReleaseAssets = new Set([
+  'data/polymyth-seminar-events.json',
+  'data/polymythcal-event-schema-v2.json',
+  'data/polymythcal-publication-surfaces.json',
+  'js/polymythcal-revamp.js',
+]);
 const destinationContractAssets = [
   'data/external-destination-contracts.json',
   'data/polymythcal-destination-overrides.json',
@@ -70,6 +108,18 @@ const expectedRelease = '2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesi
 check(manifest.release_id === expectedRelease, `current release is ${manifest.release_id}`);
 check(manifest.generated_at === '2026-08-15T18:00:00-04:00', `current release timestamp is ${manifest.generated_at}`);
 check(manifest.polymythcal_asset_version === '20260815-sets1-15-synthesis', `current asset version is ${manifest.polymythcal_asset_version}`);
+check(
+  manifest.polymythcal_discovery_release_id === '2026-08-26-polymythcal-discovery-v2',
+  `current Discovery release is ${manifest.polymythcal_discovery_release_id}`,
+);
+check(
+  manifest.polymythcal_discovery_built_at === '2026-08-26T12:30:00-04:00',
+  `current Discovery build timestamp is ${manifest.polymythcal_discovery_built_at}`,
+);
+check(
+  manifest.polymythcal_discovery_asset_version === '20260826-discovery-v2',
+  `current Discovery asset version is ${manifest.polymythcal_discovery_asset_version}`,
+);
 check(/^sha256-[0-9a-f]{12}$/.test(manifest.geometry_asset_version || ''), 'release manifest lacks a content-derived geometry asset version');
 check(
   manifest.teacherresources_asset_versions
@@ -79,32 +129,72 @@ check(
 );
 check(
   manifest.asset_digests
-    && Object.keys(manifest.asset_digests).length === 15
+    && JSON.stringify(Object.keys(manifest.asset_digests)) === JSON.stringify(expectedReleaseAssetPaths)
     && Object.values(manifest.asset_digests).every(value => /^[0-9a-f]{64}$/.test(value)),
-  'release manifest lacks the 15 sitewide and Polymythcal SHA-256 asset digests',
+  'release manifest lacks the exact 25 sitewide and discovery-v2 SHA-256 asset digests',
 );
-for (const field of ['geometry_asset_version', 'teacherresources_asset_versions', 'asset_digests']) {
+for (const field of [
+  'polymythcal_discovery_release_id',
+  'polymythcal_discovery_built_at',
+  'polymythcal_discovery_asset_version',
+  'geometry_asset_version',
+  'teacherresources_asset_versions',
+  'asset_digests',
+]) {
   check(publicBuilder.includes(`'${field}'`), `public release marker does not pass through ${field}`);
 }
+check(
+  JSON.stringify(RELEASE_ASSET_PATHS) === JSON.stringify(expectedReleaseAssetPaths),
+  'release asset identity helper does not bind the exact 25 discovery-v2 source assets',
+);
+check(
+  Object.keys(PUBLIC_RELEASE_ASSET_PATHS).length === expectedReleaseAssetPaths.length
+    && expectedReleaseAssetPaths.every(relative => (
+      PUBLIC_RELEASE_ASSET_PATHS[relative] === (privateReleaseAssets.has(relative) ? null : relative)
+    )),
+  'release asset identity helper violates the discovery-v2 public/private mirror boundary',
+);
+check(
+  !Object.values(PUBLIC_RELEASE_ASSET_PATHS).includes('polymythseminars/events.json')
+    && !Object.values(PUBLIC_RELEASE_ASSET_PATHS).includes('js/polymythcal-revamp.js')
+    && PUBLIC_RELEASE_ASSET_PATHS['polymythseminars/browse.json'] === 'polymythseminars/browse.json'
+    && PUBLIC_RELEASE_ASSET_PATHS['polymythseminars/watchlist.json'] === 'polymythseminars/watchlist.json'
+    && PUBLIC_RELEASE_ASSET_PATHS['polymythseminars/research.json'] === 'polymythseminars/research.json',
+  'release asset identity helper exposes the canonical corpus instead of the browse/watchlist projections',
+);
 for (const token of [
-  "geometryAssetVersion(root)",
-  "teacherresources_asset_versions",
-  "RELEASE_ASSET_PATHS",
-  "'data/polymyth-seminar-events.json'",
-  "'data/polymythcal-event-schema-v2.json'",
-  "'js/polymythcal-revamp.js'",
-  "'polymythseminars/browse.json'",
-  "'polymythseminars/index.html'",
-  "'polymythseminars/fr/index.html'",
-  "PUBLIC_RELEASE_ASSET_PATHS",
-  "'data/polymyth-seminar-events.json': 'polymythseminars/events.json'",
-  "'data/polymythcal-event-schema-v2.json': null",
+  'geometryAssetVersion(root)',
+  'teacherresources_asset_versions',
+  'RELEASE_ASSET_PATHS',
+  'PUBLIC_RELEASE_ASSET_PATHS',
 ]) check(releaseAssetIdentityHelper.includes(token), `release asset identity helper misses ${token}`);
+for (const token of [
+  'polymythcal_discovery_release_id', 'polymythcal_discovery_built_at',
+  'polymythcal_discovery_asset_version', 'watchlist_payload_sha256', 'research_payload_sha256',
+]) check(read('scripts/update-polymythcal-build-manifest.js').includes(token), `Polymythcal build manifest updater misses ${token}`);
+for (const source of [publicBuilder, read('scripts/verify-public-deploy-parity.js')]) {
+  for (const token of [
+    "'polymythseminars/events.json'",
+    "'polymythcal-publication-surfaces.json'",
+    "'polymythcal-publication-surfaces-v2'",
+    "'chronology_ids'",
+    "'watchlist_ids'",
+    "'monitoring-marker'",
+  ]) check(source.includes(token), `public publication-boundary contract misses ${token}`);
+}
 check(releaseAssetIdentityUpdater.includes('computeReleaseAssetIdentity(ROOT)'), 'release asset updater does not recompute source identity');
 for (const token of ['computeReleaseAssetIdentity(ROOT)', 'public/site-release.json', 'public mirror differs from source']) {
   check(releaseAssetIdentityVerifier.includes(token), `release asset verifier misses ${token}`);
 }
 check(pkg.version === '1.0.6', `package version is ${pkg.version}`);
+check(pkg.scripts?.['test:polymythcal-discovery-core'] === 'node scripts/test-polymythcal-discovery-core.js', 'Discovery core behavioral test is not exposed by package.json');
+check(pkg.scripts?.['test:polymythcal-data-truth'] === 'node scripts/test-polymythcal-data-truth.js', 'Discovery data/truth test is not exposed by package.json');
+check(pkg.scripts?.['test:polymythcal-discovery-shell'] === 'node scripts/test-polymythcal-discovery-shell.js', 'Discovery shell test is not exposed by package.json');
+check(pkg.scripts?.['test:polymythcal-package-boundary'] === 'node scripts/run-python.js scripts/test-polymythcal-package-boundary.py', 'Discovery package-boundary test is not exposed by package.json');
+check(pkg.scripts?.['verify:polymythcal-discovery-v2'] === 'node scripts/verify-polymythcal-discovery-v2.js', 'Discovery v2 gate is not exposed by package.json');
+check(read('scripts/verify-polymythcal-discovery-v2.js').includes("require('./test-polymythcal-discovery-core')"), 'Discovery v2 gate does not invoke its pure behavioral test');
+check(read('scripts/verify-polymythcal-discovery-v2.js').includes("require('./test-polymythcal-data-truth')"), 'Discovery v2 gate does not invoke its data/truth test');
+check(read('scripts/verify-polymythcal-discovery-v2.js').includes("require('./test-polymythcal-discovery-shell')"), 'Discovery v2 gate does not invoke its shell test');
 check(!pkg.scripts?.['package:audit53'], 'obsolete Audit 53 subset packager remains exposed');
 check(
   Array.isArray(futureproof.items)
@@ -123,6 +213,27 @@ check(
     && audit49PackagingVerifier.includes("futureproofing-gate-report.json")
     && !audit49PackagingVerifier.includes('selected_bytes_excluding_this_report'),
   'Audit 49 package-byte evidence is not independent of self-updating generated reports',
+);
+check(
+  packageSelection.includes('def polymythcal_publication_exclusions(root: Path)')
+    && packageSelection.includes('polymythcal-publication-surfaces.json')
+    && packageSelection.includes('watchlist_ids')
+    && packageSelection.includes('legacy_ids')
+    && packageSelection.includes('public/polymythseminars/events.json')
+    && packageSelection.includes('public/js/polymythcal-revamp.js')
+    && packageSelection.includes('public/css/polymythcal-revamp.css')
+    && packageSelection.includes('polymythseminars/ics/')
+    && packageSelection.includes('publication_exclusions = polymythcal_publication_exclusions(root)'),
+  'canonical package selection does not fail closed over private/retired Polymythcal public artifacts',
+);
+const packageBoundaryResult = spawnSync(
+  process.execPath,
+  ['scripts/run-python.js', 'scripts/test-polymythcal-package-boundary.py'],
+  { cwd: ROOT, encoding: 'utf8' },
+);
+check(
+  packageBoundaryResult.status === 0,
+  `Polymythcal package-boundary behavioral test failed: ${(packageBoundaryResult.stderr || packageBoundaryResult.stdout || '').trim()}`,
 );
 for (const [name, source] of [['deployer', deployer], ['source', sourcePackager]]) {
   check(source.includes('load_current_release_manifest()'), `${name} packager does not reload release metadata after build verification`);
@@ -240,21 +351,22 @@ check(
   'complete outer packager must build, verify, archive, reproduce, restore, receipt, then verify the receipt',
 );
 check(
-  completePackager.includes('PACKAGE_RELEASE_ID = "core-coreplus-mephistodata-bb-polymythcal-sets1-15-ml-current-synthesis-2026-08-23"')
+  completePackager.includes('PACKAGE_RELEASE_ID = "core-coreplus-mephistodata-controlled-archive-polymythcal-v2-2026-08-26"')
     && completePackager.includes('OUTPUT_BASENAME = (')
-    && completePackager.includes('"ss-site-polymythcal-sets1-15-sitewide-fixes-synthesized-"')
-    && completePackager.includes('"complete-ml-current-synthesis-2026-08-23.zip"')
+    && completePackager.includes('"seminar-schools-mephistodata-execution-controlled-archive-complete-2026-08-26.zip"')
     && completePackager.includes('Complete release output must use the canonical name')
     && !completePackager.includes('parser.add_argument("--release-id"'),
   'complete outer packager exposes arbitrary package release identity',
 );
 check(
-  completePackager.includes('DERIVED_GENERATED_AT = "2026-08-24T03:30:00Z"')
-    && completePackager.includes('RELEASE_GENERATED_AT = "2026-08-23T23:30:00-04:00"')
+  completePackager.includes('DERIVED_GENERATED_AT = "2026-08-26T16:30:00Z"')
+    && completePackager.includes('RELEASE_GENERATED_AT = "2026-08-26T12:30:00-04:00"')
     && completePackager.includes('generated_at = RELEASE_GENERATED_AT')
-    && cleanRoomBuilder.includes('DERIVED_GENERATED_AT = "2026-08-24T03:30:00Z"')
-    && completePackager.includes('os.environ["SITE_BUILD_DATE"] = "2026-08-23"')
-    && cleanRoomBuilder.includes('os.environ["SITE_BUILD_DATE"] = "2026-08-23"'),
+    && cleanRoomBuilder.includes('DERIVED_GENERATED_AT = "2026-08-26T16:30:00Z"')
+    && completePackager.includes('os.environ["SITE_BUILD_DATE"] = "2026-08-26"')
+    && cleanRoomBuilder.includes('os.environ["SITE_BUILD_DATE"] = "2026-08-26"')
+    && completePackager.includes('[node, "scripts/regen-methodologylist-manifest.js", "2026-08-26"]')
+    && cleanRoomBuilder.includes('[node, "scripts/regen-methodologylist-manifest.js", "2026-08-26"]'),
   'primary and clean-room package builds must share the current deterministic release day',
 );
 for (const token of [
@@ -340,6 +452,7 @@ for (const [name, command] of Object.entries({
   'verify:futureproofing': 'node scripts/run-python.js scripts/run-with-build-lock.py --delivery-root .. -- node scripts/run-python.js scripts/verify-futureproofing-contract.py --run-source --report scripts/reports/futureproofing-gate-report.json',
   'verify:futureproofing:site': 'node scripts/run-python.js scripts/run-with-build-lock.py -- node scripts/run-python.js scripts/verify-futureproofing-contract.py --run-source --site-only --report scripts/reports/futureproofing-gate-report.json',
   'verify:ml-dialectical-hardening': 'node scripts/verify-ml-dialectical-hardening.js',
+  'verify:ml-execution-gates': 'node scripts/verify-ml-execution-gates.js',
   'verify:frozen-audit43': 'node scripts/verify-frozen-audit43.js',
   'build:audit45-language-model': 'node scripts/run-python.js scripts/apply-audit45-language-model.py',
   'build:audit45-leizu-i18n': 'node scripts/build-leizu-i18n-source.js',
@@ -439,8 +552,18 @@ check(
 const buildOrder = [
   'apply-polymythcal-destination-specificity.js',
   'apply-audit45-language-model.py',
+  'build-polymythcal-browser-payload.js',
   'build-polymythcal-audit13.py',
+  'update-polymythcal-listing-counts.js',
   'build-search-pages.js',
+  'apply-polymythcal-set13-15-facets.js',
+  'build-writing-shortcuts.js',
+  'build-academic-shortcuts.js',
+  'build-polymythcal-feeds.py',
+  'apply-visible-geometry.js',
+  'apply-sitewide-type-zoom-link.js',
+  'apply-type-floor.js',
+  'consolidate-google-fonts.js',
   'build-polymythcal-browser-payload.js',
   'build-polymythcal-candidate-surface.py',
   'apply-audit48-approved-ui.js',
@@ -451,18 +574,31 @@ const buildOrder = [
   'build-audit45-localized-routes.py',
   'apply-audit45-translation-ui.js',
   'apply-audit49-metadata-hygiene.js',
+  'build-audit45-localized-routes.py',
+  'apply-audit45-translation-ui.js',
+  'apply-audit49-metadata-hygiene.js',
   'update-polymythcal-destination-contract.js',
+  'apply-sitewide-type-zoom-link.js',
+  'apply-visible-geometry.js',
+  'build-polymythcal-discovery-site.js',
+  'build-writing-shortcuts.js',
+  'build-academic-shortcuts.js',
   'update-release-asset-identity.js',
   'update-polymythcal-build-manifest.js',
   'build-public-deploy.js',
   'verify-public-deploy-parity.js',
   'verify-release-asset-identity.js',
   'verify-front-facing-boundary.js',
-  'verify-polymyth-entry-points.js',
+  'verify-polymyth-entry-points.js --site-only',
   'verify-visible-geometry.js',
   'verify-meaningful-geometry.js',
   'verify-geometry.js',
+  'build-asset-weight-report.js',
+  'verify-polymythcal-browser-payload.js',
+  'verify-polymythcal-discovery-v2.js',
   'verify-polymythcal-destination-specificity.js',
+  'verify-polymythcal-build-efficiency.js',
+  'verify-steady-ui.js',
   'verify-audit45-translations.py',
   'verify-audit49-metadata-surface.js',
   'verify-audit49-runtime-efficiency.js',
@@ -470,10 +606,19 @@ const buildOrder = [
 ];
 let previous = -1;
 for (const token of buildOrder) {
-  const index = build.indexOf(token);
+  const index = build.indexOf(token, previous + 1);
   check(index > previous, `canonical build order omits or misorders ${token}`);
-  previous = index;
+  if (index > previous) previous = index;
 }
+check(
+  (build.match(/build-polymythcal-browser-payload\.js/g) || []).length === 2,
+  'canonical build must generate the discovery-v2 projections before route generation and again after normalizers',
+);
+check(
+  (build.match(/build-polymythcal-discovery-site\.js/g) || []).length === 1
+    && (build.match(/verify-polymythcal-discovery-v2\.js/g) || []).length === 1,
+  'canonical build must generate and verify the discovery-v2 site exactly once',
+);
 const finalGeometryApply = build.lastIndexOf('apply-visible-geometry.js');
 check((build.match(/apply-visible-geometry\.js/g) || []).length === 2, 'canonical build must apply geometry before and after all page generators');
 check(
@@ -553,6 +698,10 @@ for (const command of [
 check(
   (runner.match(/node scripts\/verify-ml-dialectical-hardening\.js/g) || []).length === 1,
   'full release runner must execute the no-jump semantic-authority gate exactly once',
+);
+check(
+  (runner.match(/node scripts\/verify-ml-execution-gates\.js/g) || []).length === 1,
+  'full release runner must execute the Mephistodata execution gate verifier exactly once',
 );
 const browserGeometryCommand = 'node scripts/verify-visible-geometry-browser.mjs';
 const browserGeometryIndex = runner.indexOf(browserGeometryCommand);
@@ -859,6 +1008,6 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(
-  'RELEASE GATE CHECK PASSED — Audit 49 technical-efficiency gates are current, Audit 48 external-validation evidence remains active, '
-  + 'Audit 43 is frozen, and Audit 45 static plus Chromium translation evidence remains shipping-blocking.',
+  'RELEASE GATE CHECK PASSED — 25 discovery-v2 assets are release-bound, the canonical corpus remains private, '
+  + 'Audit 49 technical-efficiency gates are current, and Audit 45 static plus Chromium translation evidence remains shipping-blocking.',
 );

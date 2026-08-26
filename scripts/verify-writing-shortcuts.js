@@ -4,22 +4,21 @@ const fs=require('fs');const path=require('path');const {resolveSiteBuildDate}=r
 const ROUTES={writingclub:'club',writingkids:'kids',writingjuniors:'juniors',writingteens:'teens',writinggrads:'grads'};const failures=[];
 const read=rel=>fs.readFileSync(path.join(ROOT,rel),'utf8');const fail=msg=>failures.push(msg);
 function current(e){const value=String(e.end_date||e.date||'').slice(0,10);return /^\d{4}-\d{2}-\d{2}$/.test(value)&&value>=TODAY;}
-function matches(e,band){const bands=Array.isArray(e.writing_bands)?e.writing_bands.map(String):[];return e.type==='contest'&&(band==='club'?bands.length>0:bands.includes(band));}
+function matches(e,slug,band){const routes=e.facets?.routes||[];if(routes.length)return routes.includes(slug);const bands=Array.isArray(e.writing_bands)?e.writing_bands.map(String):[];return e.type==='contest'&&(band==='club'?bands.length>0:bands.includes(band));}
 function noscriptCount(html){const match=html.match(/<noscript>([\s\S]*?)<\/noscript>/i);return match?(match[1].match(/href="\/polymythseminars\/events\//g)||[]).length:0;}
 function main(){
- const events=JSON.parse(read('polymythseminars/events.json')).events||[];const sitemap=read('sitemap.xml');const redirects=read('_redirects');const root=read('polymythseminars/index.html');
+ const events=JSON.parse(read('polymythseminars/browse.json')).events||[];const sitemap=read('sitemap.xml');const redirects=read('_redirects');const root=read('polymythseminars/index.html');
  for(const slug of Object.keys(ROUTES)) if(!root.includes(`href="/${slug}/"`)) fail(`calendar root missing ${slug} entry point`);
  const counts={};
  for(const [slug,band] of Object.entries(ROUTES)){
   const rel=`${slug}/index.html`;if(!fs.existsSync(path.join(ROOT,rel))){fail(`${slug}: missing route page`);continue;}
-  const html=read(rel);const expected=events.filter(e=>matches(e,band)&&current(e)).length;counts[slug]=expected;
+  const html=read(rel);const expected=events.filter(e=>matches(e,slug,band)&&current(e)).length;counts[slug]=expected;
   if(!html.includes(`data-pm-route="${slug}"`)) fail(`${slug}: missing unified route identity`);
   if(!html.includes('data-pm-default-content="apply"')) fail(`${slug}: writing route must default to opportunities`);
-  if(!html.includes('id="pmEventList"')||!html.includes('/js/polymythcal-revamp.js')) fail(`${slug}: missing shared interactive Polymythcal shell`);
+  if(!html.includes('id="pmdList"')||!html.includes('/js/polymythcal-discovery.js')) fail(`${slug}: missing shared interactive Discovery v2 shell`);
   if(/eventsContainer|quickFocusNav|watchlistPanel|calendarSearch|data-focus="deadlines"/.test(html)) fail(`${slug}: legacy calendar controls remain`);
   if(!html.includes(`https://seminarschools.com/${slug}/`)) fail(`${slug}: missing route-specific canonical/schema URL`);
-  if(!html.includes('class="pm-route-context')||!html.includes('aria-label="Calendar navigation"')||!html.includes('Browse all Polymythcal listings')) fail(`${slug}: focused-route navigation is incomplete`);
-  if(html.includes(`href="/${slug}/" aria-current="page"`)) fail(`${slug}: other-calendar navigation redundantly links the current route`);
+  if(!html.includes('class="pmd-route-context')||!html.includes('aria-label="Focused calendar context"')||!html.includes('Browse all Polymythcal listings')) fail(`${slug}: focused-route navigation is incomplete`);
   if(noscriptCount(html)!==Math.min(expected,40)) fail(`${slug}: expected ${Math.min(expected,40)} no-script listings, found ${noscriptCount(html)}`);
   if(!sitemap.includes(`${SITE}/${slug}/`)) fail(`${slug}: missing from sitemap`);
   if(!redirects.includes(`/${slug}`)) fail(`${slug}: missing slashless redirect`);
@@ -31,3 +30,4 @@ function main(){
  console.log(`WRITING SHORTCUT CHECK PASSED — unified multi-select shell on 5 routes; current counts ${JSON.stringify(counts)}.`);
 }
 main();
+

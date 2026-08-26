@@ -50,7 +50,7 @@ def ignored_copy_path(
             ignored.add(name)
         elif candidate.is_file() and name.endswith((".pyc", ".log")):
             ignored.add(name)
-        elif at_root and name == ".seminar-schools-build.lease":
+        elif name == ".seminar-schools-build.lease":
             ignored.add(name)
         elif at_root and (
             GENERATED_RELEASE_ARCHIVE.fullmatch(name)
@@ -71,3 +71,4 @@ def copy_clean_source(source_root: Path, destination: Path) -> None:
         ),
         copy_function=shutil.copy2,
     )
+
