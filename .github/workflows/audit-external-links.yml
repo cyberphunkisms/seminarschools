@@ -15,9 +15,9 @@ jobs:
       EXTERNAL_LINK_STRICT: "1"
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Setup Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "24.14.0"
       - name: Offline external link inventory
@@ -25,7 +25,7 @@ jobs:
       - name: Verify rotating weekly shard coverage
         run: node scripts/verify-external-link-live-shards.js
       - name: Restore bounded live-check cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: scripts/reports/external-link-live-cache.json
           key: external-link-live-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
@@ -35,7 +35,7 @@ jobs:
         run: node scripts/audit-external-links-live.js
       - name: Save bounded live-check cache
         if: always() && hashFiles('scripts/reports/external-link-live-cache.json') != ''
-        uses: actions/cache/save@v5
+        uses: actions/cache/save@v6
         with:
           path: scripts/reports/external-link-live-cache.json
           key: external-link-live-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
