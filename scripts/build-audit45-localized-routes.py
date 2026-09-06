@@ -16,6 +16,7 @@ import json
 import os
 import re
 import shutil
+import sys
 import time
 import datetime
 from zoneinfo import ZoneInfo
@@ -328,11 +329,15 @@ def statically_localize_polymythcal_shell(text: str, english_url: str) -> str:
                 flags=re.I,
             )
     text = re.sub(
-        r'(<input\b[^>]*\bid=["\']pmSearch["\'][^>]*\bplaceholder=["\'])[^"\']*(["\'])',
+        r'(<input\b[^>]*\bid=["\'](?:pmSearch|pmdSearch)["\'][^>]*\bplaceholder=["\'])[^"\']*(["\'])',
         r"\g<1>Rechercher événements, lieux ou thèmes\g<2>",
         text,
         count=1,
         flags=re.I,
+    )
+    text = text.replace(
+        "Use exact words, quoted phrases, forward prefixes of at least five characters, or a field such as title:, person:, organizer:, place:, topic:, or format:. Similar spellings appear only as suggestions you choose. Press / to focus search.",
+        "Utilisez des mots exacts, des expressions entre guillemets, des préfixes progressifs d’au moins cinq caractères ou un champ comme titre:, personne:, organisme:, lieu:, sujet: ou forme:. Les graphies proches ne paraissent que comme suggestions à choisir. Appuyez sur / pour atteindre la recherche.",
     )
     language_pattern = re.compile(
         r'(<a\b[^>]*\bid=["\']pmLanguageLink["\'][^>]*>)[\s\S]*?(</a>)',
@@ -514,6 +519,12 @@ def clone_leizu_home(governance: list[dict]) -> list[str]:
         text = replace_canonical(text, url)
         text = replace_hreflang_block(text, leizu_links())
         text = add_governance_meta(text, "leizu/index.html", source_sha, "complete-owned-copy")
+        if "/css/audit45-localization.css" not in text:
+            text = text.replace(
+                "</head>",
+                f'<link rel="stylesheet" href="/css/audit45-localization.css?v={AUDIT_VERSION}">\n</head>',
+                1,
+            )
         text = statically_localize_leizu_home(text, segment)
         text = text.replace(
             "</head>",
@@ -948,7 +959,121 @@ def event_context_html(event: dict, lang: str) -> str:
     )
 
 
-def event_page(event: dict, lang: str, related: list[dict], robots: str, source_sha: str) -> str:
+def parse_polymythcal_iso(value: object, timezone_name: str = "America/Toronto") -> datetime.date | datetime.datetime | None:
+    """Parse a canonical instant without losing its declared source zone."""
+    if not value:
+        return None
+    text = str(value).strip()
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", text):
+        return datetime.date.fromisoformat(text)
+    try:
+        moment = datetime.datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if moment.tzinfo is None:
+        try:
+            moment = moment.replace(tzinfo=ZoneInfo(timezone_name or "America/Toronto"))
+        except Exception:
+            moment = moment.replace(tzinfo=ZoneInfo("America/Toronto"))
+    return moment
+
+
+def polymythcal_temporal_zone(event: dict, public_record: dict) -> ZoneInfo:
+    timezone_name = str(
+        (public_record.get("temporal") or {}).get("timezone")
+        or event.get("timezone")
+        or "America/Toronto"
+    )
+    try:
+        return ZoneInfo(timezone_name)
+    except Exception:
+        return ZoneInfo("America/Toronto")
+
+
+def projected_polymythcal_datetime(
+    event: dict,
+    public_record: dict,
+    key: str = "date",
+) -> datetime.datetime | None:
+    parsed = parse_polymythcal_iso(
+        event.get(key), str(event.get("timezone") or "America/Toronto")
+    )
+    if not isinstance(parsed, datetime.datetime):
+        return None
+    return parsed.astimezone(polymythcal_temporal_zone(event, public_record))
+
+
+def public_polymythcal_temporal_value(
+    event: dict,
+    public_record: dict,
+    key: str = "date",
+) -> str:
+    temporal_type = str((public_record.get("temporal") or {}).get("type") or "")
+    if (
+        temporal_type in {"global-instant", "local-date-time", "deadline", "date-range"}
+        and event.get("time_precision") == "exact"
+    ):
+        moment = projected_polymythcal_datetime(event, public_record, key)
+        return moment.isoformat(timespec="minutes") if moment else ""
+    return str(public_record.get(key) or "")
+
+
+def polymythcal_temporal_presentation(
+    event: dict,
+    public_record: dict,
+    *,
+    is_watchlist: bool = False,
+) -> tuple[str, str, str]:
+    """Match the canonical Audit 13 public projection on every localized route."""
+    if is_watchlist:
+        return (
+            "Date awaiting confirmation · Date à confirmer",
+            "",
+            "Date pending",
+        )
+    temporal_type = str((public_record.get("temporal") or {}).get("type") or "")
+    if event.get("time_precision") == "exact" and event.get("end_date"):
+        start_moment = projected_polymythcal_datetime(event, public_record)
+        end_moment = projected_polymythcal_datetime(event, public_record, "end_date")
+        if start_moment:
+            start_label = start_moment.strftime("%Y-%m-%d %H:%M %Z")
+            end_label = end_moment.strftime("%Y-%m-%d %H:%M %Z") if end_moment else ""
+            label = f"{start_label} – {end_label}" if end_label else start_label
+            return (
+                label,
+                start_moment.isoformat(timespec="minutes"),
+                start_moment.strftime("%Y-%m-%d"),
+            )
+    if (
+        temporal_type in {"global-instant", "local-date-time", "deadline"}
+        and event.get("time_precision") == "exact"
+    ):
+        moment = projected_polymythcal_datetime(event, public_record)
+        if moment:
+            return (
+                moment.strftime("%Y-%m-%d %H:%M %Z"),
+                moment.isoformat(timespec="minutes"),
+                moment.strftime("%Y-%m-%d"),
+            )
+    start = str(public_record.get("date") or "")[:10]
+    end = str(public_record.get("end_date") or "")[:10]
+    if temporal_type == "date-range" and end and end != start:
+        return (f"{start} – {end}", start, start)
+    if temporal_type == "estimated":
+        return (f"{start} (estimated · date estimée)", start, start)
+    return (start, start, start)
+
+
+def event_page(
+    event: dict,
+    public_record: dict,
+    lang: str,
+    related: list[dict],
+    robots: str,
+    source_sha: str,
+    *,
+    is_watchlist: bool = False,
+) -> str:
     labels = PM_LABELS[lang]
     event_id = str(event.get("id") or event.get("identity_key"))
     encoded = quote(event_id, safe="")
@@ -969,27 +1094,25 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
     title_source = str(event.get("title") or "Untitled listing")
     description_source = str(event.get("description") or event.get("raw_excerpt") or "")
     source_languages = event_source_languages(event)
-    source_lang = source_languages[0] if len(source_languages) == 1 else "und"
+    source_lang = (
+        source_languages[0]
+        if len(source_languages) == 1
+        else "mul" if len(source_languages) > 1 else "und"
+    )
+    content_language = str(public_record.get("content_language") or source_lang or "und")
     source_label = ", ".join(event_language_label(code, lang) for code in source_languages)
     confirmation = str(event.get("confirmation_status") or "unconfirmed")
     status = labels["confirmed"] if confirmation == "confirmed" else labels["pending"]
-    date = str(event.get("date") or "")
-    date_machine = (
-        date
-        if str(event.get("time_precision") or "") == "exact"
-        else date[:10]
+    # Use the fail-closed public projection for both chronology and watchlist
+    # routes. Canonical UTC instants are rendered in the declared public zone;
+    # editorial watchlist marker dates never leak into event semantics.
+    date_display, date_machine, date_token = polymythcal_temporal_presentation(
+        event, public_record, is_watchlist=is_watchlist
     )
-    end_date = str(event.get("end_date") or "")
     end_machine = (
-        end_date
-        if str(event.get("time_precision") or "") == "exact"
-        else end_date[:10]
+        "" if is_watchlist
+        else public_polymythcal_temporal_value(event, public_record, "end_date")
     )
-    date_display = (
-        date.replace("T", " ")[:16]
-        if str(event.get("time_precision") or "") == "exact"
-        else date[:10]
-    ) or labels["pending"]
     date_label = labels["deadline"] if str(event.get("record_kind") or "") == "opportunity" else labels["date"]
     venue = str(event.get("venue") or "").strip()
     if not venue or venue.casefold().startswith("location unconfirmed"):
@@ -1013,7 +1136,7 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
             else labels["series_page"] if destination_scope == "series"
             else labels["event_page"]
         )
-    ended = bool(re.search(r"pm-event-archive", (ROOT / "polymythseminars" / "events" / event_id / "index.html").read_text(encoding="utf-8", errors="ignore")))
+    ended = not is_watchlist and bool(re.search(r"pm-event-archive", (ROOT / "polymythseminars" / "events" / event_id / "index.html").read_text(encoding="utf-8", errors="ignore")))
     qualification_items = [
         event_qualification_copy(value, lang)
         for value in event.get("qualification_reasons") or []
@@ -1035,7 +1158,6 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
             for item in related
         )
         related_html = f'<nav class="pm-event-related" aria-labelledby="pm-related-title"><h2 id="pm-related-title">{labels["related"]}</h2><ul>{rows}</ul></nav>'
-    source_schema_language: object = source_languages if source_languages else "und"
     location_schema = {"@type": "Place", "name": venue}
     if city:
         location_schema["address"] = city
@@ -1043,21 +1165,22 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
         "@context": "https://schema.org", "@type": "Event", "name": title_source,
         "startDate": date_machine, "endDate": end_machine or None,
         "description": description_source or title_source, "url": canonical,
-        "sameAs": destination_url or None, "inLanguage": source_schema_language,
+        "sameAs": destination_url or None, "inLanguage": content_language,
         "location": location_schema,
     }
     schema = {key: value for key, value in schema.items() if value not in (None, "")}
+    effective_robots = "noindex,follow" if is_watchlist else robots
     schema_markup = (
         f'<script type="application/ld+json">{json.dumps(schema, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")}</script>'
-        if robots.startswith("index") and str(event.get("record_kind") or "") != "opportunity" else ""
+        if not is_watchlist and effective_robots.startswith("index") and str(event.get("record_kind") or "") != "opportunity" else ""
     )
     title_label = (
-        f"{title_source} · {date[:10]} · Polymythcal"
-        if date[:10] else f"{title_source} · Polymythcal"
+        f"{title_source} · {date_token} · Polymythcal"
+        if date_token else f"{title_source} · Polymythcal"
     )
     meta_description = (
         ("Fiche Polymythcal en français. " if french else "Polymythcal event listing. ")
-        + f"{title_source}. {date[:10]}."
+        + f"{title_source}. {date_display}."
         + (f" {city}." if city else "")
     )[:160]
     return f'''<!doctype html>
@@ -1071,7 +1194,7 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
 <meta name="translation-status" content="{translation_status}">
 <title>{htmllib.escape(title_label)}</title>
 <meta name="description" content="{meta_escape(meta_description)}">
-<meta name="robots" content="{robots}">
+<meta name="robots" content="{effective_robots}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Seminar Schools">
 <meta property="og:title" content="{meta_escape(title_label)}">
 <meta property="og:description" content="{meta_escape(meta_description)}">
@@ -1088,23 +1211,23 @@ def event_page(event: dict, lang: str, related: list[dict], robots: str, source_
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 {schema_markup}
 </head>
-<body {geometry_attrs} data-event-id="{meta_escape(event_id)}" data-confirmation-status="{meta_escape(confirmation)}" data-lifecycle-status="{meta_escape(event.get('lifecycle_status') or 'active')}">
+<body {geometry_attrs} data-event-id="{meta_escape(event_id)}" data-confirmation-status="{meta_escape(confirmation)}" data-lifecycle-status="{meta_escape(event.get('lifecycle_status') or 'active')}" data-publication-surface="{'watchlist' if is_watchlist else 'chronology'}">
 <a class="skip-link" href="#main-content">{labels["skip"]}</a>
 <main id="main-content" class="pm-event-page">
 <nav class="pm-event-nav" aria-label="{'Navigation de la fiche' if french else 'Event navigation'}"><a href="/polymythseminars/{'fr/' if french else ''}">{labels["all"]}</a><a href="/polymythcommons/">Polymyth Commons</a><a href="{alternate_path}" hreflang="{'en-CA' if french else 'fr-CA'}">{labels["language"]}</a></nav>
 <article class="pm-event-detail">
 <header class="pm-event-hero"><p class="pm-event-kicker">Polymythcal</p><div class="truth-row"><span class="truth-chip {meta_escape(confirmation)}">{status}</span></div>
-<h1 lang="{meta_escape(source_lang)}" data-source-language="{meta_escape(source_label)}">{htmllib.escape(title_source)}</h1></header>
+<h1 lang="{meta_escape(content_language)}">{htmllib.escape(title_source)}</h1></header>
 {f'<div class="callout pm-event-archive" data-event-archive-note="true"><strong>{labels["past"]}.</strong> {labels["archive"]}</div>' if ended else ''}
-<dl class="pm-event-facts"><div><dt>{date_label}</dt><dd><time datetime="{meta_escape(date_machine)}">{htmllib.escape(date_display)}</time></dd></div>
+<dl class="pm-event-facts"><div><dt>{date_label}</dt><dd>{htmllib.escape(date_display) if is_watchlist else f'<time datetime="{meta_escape(date_machine)}">{htmllib.escape(date_display)}</time>'}</dd></div>
 <div><dt>{labels["place"]}</dt><dd><strong lang="{meta_escape(source_lang)}" data-source-language="{meta_escape(source_label)}">{htmllib.escape(venue)}</strong>{f'<span>{htmllib.escape(city)}</span>' if city else ''}</dd></div>
 <div><dt>{labels["status"]}</dt><dd>{status}</dd></div>
 {f'<div><dt>{labels["source_language"]}</dt><dd>{htmllib.escape(source_label)}</dd></div>' if source_languages else ''}</dl>
 <section class="pm-event-primary-path" aria-label="{labels["continue"]}"><p>{labels["continue"]}</p>
 <div class="pm-event-actions">{f'<a class="pm-event-action primary" href="{meta_escape(destination_url)}" rel="noopener noreferrer">{destination_label} ↗</a>' if destination_url else ''}
-<a class="pm-event-action" type="text/calendar" href="/polymythseminars/ics/{meta_escape(event_id)}.ics">{labels["calendar"]}</a>
+{'' if is_watchlist else f'<a class="pm-event-action" type="text/calendar" href="/polymythseminars/ics/{meta_escape(event_id)}.ics">{labels["calendar"]}</a>'}
 <a class="pm-event-action" href="/polymythseminars/{'fr/' if french else ''}correct/?event={meta_escape(canonical)}">{labels["correct"]}</a></div></section>
-{f'<section class="pm-event-description"><h2>{labels["about"]}</h2><p lang="{meta_escape(source_lang)}" data-source-language="{meta_escape(source_label)}">{htmllib.escape(description_source)}</p></section>' if description_source else ''}
+{f'<section class="pm-event-description"><h2>{labels["about"]}</h2><p lang="{meta_escape(content_language)}">{htmllib.escape(description_source)}</p></section>' if description_source else ''}
 {context_html}
 {f'<details class="pm-event-pending" data-qualification-reasons="{meta_escape(qualification_tokens)}"><summary>{labels["pending_details"]}</summary><ul>{qualification_html}</ul></details>' if qualification_html else ''}
 {f'<p class="pm-event-previous"><strong>{labels["previous"]}:</strong> {htmllib.escape(" · ".join(previous_dates))}</p>' if previous_dates else ''}
@@ -1267,10 +1390,33 @@ def build_polymythcal(governance: list[dict]) -> list[str]:
     payload = json.loads(event_path.read_text(encoding="utf-8"))
     events = payload["events"]
     event_source_sha = sha(event_path)
+    publication_surfaces = json.loads(
+        (ROOT / "data" / "polymythcal-publication-surfaces.json").read_text(encoding="utf-8")
+    )
+    browse_payload = json.loads(
+        (ROOT / "polymythseminars" / "browse.json").read_text(encoding="utf-8")
+    )
+    watchlist_payload = json.loads(
+        (ROOT / "polymythseminars" / "watchlist.json").read_text(encoding="utf-8")
+    )
+    public_records = list(browse_payload.get("events") or []) + list(
+        watchlist_payload.get("items") or []
+    )
+    public_by_id = {
+        str(item.get("id")): item
+        for item in public_records
+        if str(item.get("id") or "")
+    }
+    chronology_ids = {str(value) for value in publication_surfaces.get("chronology_ids") or []}
+    watchlist_ids = {str(value) for value in publication_surfaces.get("watchlist_ids") or []}
     canonical_ids = {
         str(event.get("id") or event.get("identity_key"))
         for event in events
     }
+    if chronology_ids & watchlist_ids or chronology_ids | watchlist_ids != canonical_ids:
+        raise SystemExit("Polymythcal publication surfaces do not exactly partition canonical event IDs")
+    if set(public_by_id) != canonical_ids or len(public_by_id) != len(public_records):
+        raise SystemExit("Polymythcal public projections do not exactly cover canonical event IDs")
     alias_targets: dict[str, str] = {}
     for event in events:
         event_id = str(event.get("id") or event.get("identity_key"))
@@ -1322,7 +1468,7 @@ def build_polymythcal(governance: list[dict]) -> list[str]:
         ranked = []
         for item in events:
             item_id = str(item.get("id") or item.get("identity_key"))
-            if item_id == event_id or item.get("lifecycle_status") in {"cancelled", "missing-on-source", "archived"}:
+            if item_id == event_id or item_id in watchlist_ids or item.get("lifecycle_status") in {"cancelled", "missing-on-source", "archived"}:
                 continue
             item_end = related_day(item, "end_date") or related_day(item)
             if item_end is None or item_end < related_today:
@@ -1343,15 +1489,17 @@ def build_polymythcal(governance: list[dict]) -> list[str]:
     sitemap_urls: list[str] = []
     for event in events:
         event_id = str(event.get("id") or event.get("identity_key"))
+        is_watchlist = event_id in watchlist_ids
         existing = ROOT / "polymythseminars" / "events" / event_id / "index.html"
         old = existing.read_text(encoding="utf-8", errors="ignore")
         robots_match = re.search(r'<meta\s+name="robots"\s+content="([^"]+)"', old, re.I)
         robots = robots_match.group(1) if robots_match else "noindex,follow"
-        related = related_for(event)
-        write(existing, event_page(event, "en", related, robots, event_source_sha))
+        related = [] if is_watchlist else related_for(event)
+        public_record = public_by_id[event_id]
+        write(existing, event_page(event, public_record, "en", related, robots, event_source_sha, is_watchlist=is_watchlist))
         fr_path = ROOT / "polymythseminars" / "fr" / "events" / event_id / "index.html"
-        write(fr_path, event_page(event, "fr", related, robots, event_source_sha))
-        if robots.startswith("index"):
+        write(fr_path, event_page(event, public_record, "fr", related, robots, event_source_sha, is_watchlist=is_watchlist))
+        if not is_watchlist and robots.startswith("index"):
             sitemap_urls.append(f"{SITE}/polymythseminars/fr/events/{quote(event_id, safe='')}/")
     for alias_id, target_id in sorted(alias_targets.items()):
         write(
@@ -1370,10 +1518,6 @@ def build_polymythcal(governance: list[dict]) -> list[str]:
 
     # Main and focused interactive shells.
     main_source = ROOT / "polymythseminars" / "index.html"
-    main = main_source.read_text(encoding="utf-8")
-    main = replace_hreflang_block(main, [("en-CA", f"{SITE}/polymythseminars/"), ("fr-CA", f"{SITE}/polymythseminars/fr/"), ("x-default", f"{SITE}/polymythseminars/")])
-    main = replace_canonical(main, f"{SITE}/polymythseminars/")
-    write(main_source, main)
     shells = [("polymythseminars", main_source)]
     for slug in FOCUSED:
         source = ROOT / slug / "index.html"
@@ -1381,6 +1525,7 @@ def build_polymythcal(governance: list[dict]) -> list[str]:
             shells.append((slug, source))
     for slug, source in shells:
         source_text = source.read_text(encoding="utf-8")
+        source_sha = sha(source)
         english_url = f"{SITE}/{'polymythseminars' if slug == 'polymythseminars' else slug}/"
         french_url = f"{SITE}/polymythseminars/fr/" if slug == "polymythseminars" else f"{SITE}/{slug}/fr/"
         source_text = replace_hreflang_block(source_text, [("en-CA", english_url), ("fr-CA", french_url), ("x-default", english_url)])
@@ -1392,9 +1537,7 @@ def build_polymythcal(governance: list[dict]) -> list[str]:
             count=1,
             flags=re.I,
         )
-        write(source, source_text)
-        source_sha = sha(source)
-        localized = re.sub(r"<html\b[^>]*>", '<html lang="fr-CA" dir="ltr">', source_text, count=1, flags=re.I)
+        localized = re.sub(r"<html\b[^>]*>", '<html lang="fr-CA">', source_text, count=1, flags=re.I)
         localized_title = "Calendrier Polymythcal" if slug == "polymythseminars" else f"{slug} · calendrier Polymythcal"
         localized = replace_title(localized, localized_title)
         localized = replace_or_add_meta(localized, "og:url", french_url, prop=True)
@@ -1402,6 +1545,13 @@ def build_polymythcal(governance: list[dict]) -> list[str]:
         localized = replace_canonical(localized, french_url)
         localized = replace_hreflang_block(localized, [("en-CA", english_url), ("fr-CA", french_url), ("x-default", english_url)])
         localized = statically_localize_polymythcal_shell(localized, english_url)
+        if slug == "polymythseminars":
+            localized = re.sub(
+                r'(href=["\'])/polymythseminars/(research|monitoring)/',
+                r'\1/polymythseminars/fr/\2/',
+                localized,
+                flags=re.I,
+            )
         localized_heading_match = re.search(
             r"<h1\b[^>]*>([\s\S]*?)</h1>", localized, flags=re.I
         )
@@ -1418,6 +1568,12 @@ def build_polymythcal(governance: list[dict]) -> list[str]:
         localized = re.sub(
             r'("url"\s*:\s*)"[^"]*"',
             lambda match: match.group(1) + json.dumps(french_url, ensure_ascii=False),
+            localized,
+            count=1,
+        )
+        localized = re.sub(
+            r'("@id"\s*:\s*)"[^"]*#webpage"',
+            lambda match: match.group(1) + json.dumps(f"{french_url}#webpage", ensure_ascii=False),
             localized,
             count=1,
         )
@@ -1772,6 +1928,16 @@ def update_sitemap(urls: list[str]) -> None:
 
 def main() -> None:
     governance: list[dict] = []
+    if "--polymythcal-only" in sys.argv[1:]:
+        unexpected = [value for value in sys.argv[1:] if value != "--polymythcal-only"]
+        if unexpected:
+            raise SystemExit(f"Unknown arguments: {' '.join(unexpected)}")
+        sitemap_urls = build_polymythcal(governance)
+        print(
+            "AUDIT 45 POLYMYTHCAL ROUTES BUILT — "
+            f"{len(governance)} governed route record, {len(set(sitemap_urls))} sitemap URLs"
+        )
+        return
     sitemap_urls: list[str] = []
     sitemap_urls.extend(clone_leizu_home(governance))
     sitemap_urls.extend(clone_leizu_funnel(governance))

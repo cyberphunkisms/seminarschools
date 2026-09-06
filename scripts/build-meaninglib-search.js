@@ -109,7 +109,11 @@ function buildDocFromObject(obj, file, lineNo) {
   const title = obj.title || obj.name || obj.function || id;
   const text = textFromObject(obj);
   const tokens = tokenize(text);
-  const termFreq = {};
+  // A null-prototype dictionary prevents tokens such as "constructor",
+  // "prototype", and "toString" from resolving inherited Object members.
+  // JSON serialization preserves only the dictionary's own numeric entries;
+  // every reader must still perform its own-property check after JSON.parse.
+  const termFreq = Object.create(null);
   for (const t of tokens) termFreq[t] = (termFreq[t] || 0) + 1;
   return {
     id,
@@ -130,7 +134,7 @@ function buildDocFromMarkdown(file) {
   const titleLine = text.split(/\r?\n/).find(l => l.trim().startsWith('#')) || path.basename(file);
   const title = titleLine.replace(/^#+\s*/, '').trim() || path.basename(file);
   const tokens = tokenize(`${title}\n${text}`);
-  const termFreq = {};
+  const termFreq = Object.create(null);
   for (const t of tokens) termFreq[t] = (termFreq[t] || 0) + 1;
   return {
     id: `file:${rel(file)}`,
@@ -179,12 +183,12 @@ function main() {
 
   if (docs.length < 1900) fail(`too few Meaninglib search docs: ${docs.length}`);
 
-  const df = {};
+  const df = Object.create(null);
   for (const doc of docs) {
     for (const term of Object.keys(doc.termFreq)) df[term] = (df[term] || 0) + 1;
   }
   const totalDocs = docs.length;
-  const idf = {};
+  const idf = Object.create(null);
   for (const [term, count] of Object.entries(df)) {
     idf[term] = Math.log(1 + (totalDocs + 1) / (count + 1));
   }

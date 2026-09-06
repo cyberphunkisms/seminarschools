@@ -117,6 +117,15 @@ def exact_weekly_workflow(relative: str, expected: str) -> None:
 # Data floors and the user-approved cost boundary.
 events_document = json_file("polymythseminars/events.json")
 events = events_document["events"]
+public_events_document = json_file("polymythseminars/browse.json")
+public_watchlist_document = json_file("polymythseminars/watchlist.json")
+public_events_by_id = {
+    str(record["id"]): record
+    for record in (
+        list(public_events_document.get("events") or [])
+        + list(public_watchlist_document.get("items") or [])
+    )
+}
 sources = json_file("scripts/sources.json")["sources"]
 teacher_document = json_file("teacherresources/resources-data.json")
 teacher_entries = [
@@ -349,10 +358,13 @@ for alias_id, target_id in legacy_alias_targets.items():
 for event in events:
     event_id = str(event["id"])
     encoded = quote(event_id, safe="")
-    expected_part_lang = (
-        event["source_languages"][0]
-        if len(event.get("source_languages") or []) == 1
-        else "und"
+    expected_part_lang = str(
+        public_events_by_id.get(event_id, {}).get("content_language")
+        or (
+            event["source_languages"][0]
+            if len(event.get("source_languages") or []) == 1
+            else "und"
+        )
     )
     for locale, prefix, root_lang in (
         ("en", "", "en-CA"),

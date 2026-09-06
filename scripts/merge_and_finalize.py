@@ -53,7 +53,6 @@ FESTIVALS_OUT_PATH = ROOT / "festivals" / "events.json"
 FESTIVALS_RSS_PATH = ROOT / "festivals" / "feed.xml"
 LOG_PATH = ROOT / "data" / "scrape-log.json"
 WATCHLIST_PATH = ROOT / "data" / "event-watchlist.json"
-WATCHLIST_PUBLIC_PATH = ROOT / "polymythseminars" / "watchlist.json"
 PUBLIC_PATH = ROOT / "polymythseminars" / "events.json"
 DATA_MASTER_PATH = ROOT / "data" / "polymyth-seminar-events.json"
 HISTORY_DIR = ROOT / "data" / "history"
@@ -505,8 +504,6 @@ def write_watchlist(harvest_data, final_records=None):
         "items": out_items,
     }
     WATCHLIST_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-    WATCHLIST_PUBLIC_PATH.parent.mkdir(parents=True, exist_ok=True)
-    WATCHLIST_PUBLIC_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
 
 
 def write_log(harvest_data, final_records):

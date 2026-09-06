@@ -60,6 +60,7 @@ def validate_boundary(
 
     forbidden_top = set(policy.get("public_forbidden_top_level") or [])
     forbidden_files = set(policy.get("public_forbidden_files") or [])
+    forbidden_exact_paths = set(policy.get("public_forbidden_exact_paths") or [])
     operator_re = re.compile(str(policy.get("public_forbidden_name_pattern") or r"$^"), re.I)
     secret_res = [re.compile(value) for value in policy.get("secret_patterns") or []]
     exempt_operator_prefixes = ("polymyth/", "aa/", "bb/", "bookwormcard/")
@@ -77,6 +78,8 @@ def validate_boundary(
             continue
         scanned += 1
         relative = target.relative_to(public_root).as_posix()
+        if relative in forbidden_exact_paths:
+            failures.append(f"private/source artifact reached public deploy: {relative}")
         if target.name in forbidden_files:
             failures.append(f"private/operator file reached public deploy: {relative}")
         if (

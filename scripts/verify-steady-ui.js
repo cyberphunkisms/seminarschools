@@ -3,8 +3,16 @@
 const fs = require('fs');
 const path = require('path');
 const { isGeneratedDependencyDirectory } = require('./repository-walk-policy');
+const {
+  assertGeometryVersionScheme,
+  geometryExemptionForRelativeHtmlPath,
+} = require('./lib/geometry-asset-version');
 const ROOT = path.resolve(__dirname, '..');
 const PUBLIC = path.join(ROOT, 'public');
+const GEOMETRY_CONTRACTS = JSON.parse(
+  fs.readFileSync(path.join(ROOT, 'data', 'geometry-route-contracts.json'), 'utf8'),
+);
+assertGeometryVersionScheme(GEOMETRY_CONTRACTS);
 const SOURCE_SKIP = new Set([
   '.git', 'node_modules', '.netlify', 'public', 'fixtures',
   '.public-build-staging', '.public-build-previous',
@@ -33,10 +41,39 @@ function inspectHtml(files, base, label) {
     if (!/<body\b/i.test(html)) continue;
     const redirect = /http-equiv=["']refresh["']/i.test(html) && /location\.replace\(/.test(html);
     if (redirect) continue;
-    for (const required of ['/js/theme-init.js', '/css/alive.css', '/css/calm-ux.css', '/js/mandala.js', '/js/indra.js']) {
+    const exemption = geometryExemptionForRelativeHtmlPath(GEOMETRY_CONTRACTS, r);
+    for (const required of ['/js/theme-init.js', '/css/alive.css', '/css/calm-ux.css']) {
       if (!html.includes(required)) errors.push(`${label}:${r}: missing ${required}`);
     }
-    if (!/<body\b[^>]*data-geometry=["']indra-web["']/i.test(html)) errors.push(`${label}:${r}: missing geometry marker`);
+    if (exemption) {
+      for (const forbidden of ['/js/mandala.js', '/js/indra.js']) {
+        if (html.includes(forbidden)) errors.push(`${label}:${r}: geometry-exempt page retains ${forbidden}`);
+      }
+      const body = (html.match(/<body\b[^>]*>/i) || [''])[0];
+      const escapedExemption = exemption.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      if (!new RegExp(`\\bdata-shared-geometry-exempt=["']${escapedExemption}["']`, 'i').test(body)) {
+        errors.push(`${label}:${r}: missing exact shared-geometry exemption marker ${exemption}`);
+      }
+      const starExemption = exemption === GEOMETRY_CONTRACTS.coverage.star_page_exemption_value;
+      if (starExemption && !/\bdata-star-file-page=["']true["']/i.test(body)) {
+        errors.push(`${label}:${r}: missing star-file compatibility marker`);
+      }
+      if (!starExemption && /\bdata-star-file-page\s*=/i.test(body)) {
+        errors.push(`${label}:${r}: internal control is mislabeled as a star file`);
+      }
+      if (/\bdata-(?:geometry(?:-[\w-]+)?|indra-(?:intensity|fade-source))\s*=/i.test(body)) {
+        errors.push(`${label}:${r}: geometry-exempt page retains geometry body state`);
+      }
+      if (/\bid=["']indraLayer["']/i.test(html)) errors.push(`${label}:${r}: geometry-exempt page hardcodes #indraLayer`);
+    } else {
+      for (const required of ['/js/mandala.js', '/js/indra.js']) {
+        if (!html.includes(required)) errors.push(`${label}:${r}: missing ${required}`);
+      }
+      if (!/<body\b[^>]*data-geometry=["']indra-web["']/i.test(html)) errors.push(`${label}:${r}: missing geometry marker`);
+      if (/<body\b[^>]*(?:data-star-file-page|data-shared-geometry-exempt)\s*=/i.test(html)) {
+        errors.push(`${label}:${r}: ordinary page is marked geometry-exempt`);
+      }
+    }
     const initPos = html.indexOf('/js/theme-init.js');
     const firstStyle = html.search(/<link\b[^>]*rel=["']stylesheet["']/i);
     if (initPos >= 0 && firstStyle >= 0 && initPos > firstStyle) errors.push(`${label}:${r}: theme-init runs after styles`);
@@ -77,8 +114,9 @@ for (const file of runtimeFiles) {
 
 const indra = read(path.join(ROOT, 'js', 'indra.js'));
 if (/setInterval\s*\(/.test(indra)) errors.push('js/indra.js contains an interval');
-if (/pointer(move|down|up|enter|leave)/i.test(indra)) errors.push('js/indra.js follows or reacts to the pointer');
-if (!/addEventListener\(['"]scroll['"],\s*schedule/.test(indra)) errors.push('js/indra.js lacks scroll-triggered scheduling');
+if (/pointerenter|pointerleave/i.test(indra)) errors.push('js/indra.js follows ambient pointer entry/exit');
+if (!/panPointerId === null/.test(indra) || !/panSurface\(event\.target\)/.test(indra)) errors.push('js/indra.js press/drag fallback is not gated to a pan surface');
+if (!/addEventListener\(['"]scroll['"],\s*onWindowScroll/.test(indra)) errors.push('js/indra.js lacks scroll-triggered scheduling');
 if (!/if \(raf \|\| paintFallbackTimer\) return;\s*raf = window\.requestAnimationFrame\(paint\)/.test(indra)) {
   errors.push('js/indra.js lacks one-frame throttling across rAF and its bounded starvation fallback');
 }
@@ -174,4 +212,3 @@ if (errors.length) {
 }
 console.log(`STEADY UI CHECK PASSED — ${sourceHtml.length} source pages, ${publicHtml.length} public pages, and ${runtimeFiles.length} active HTML/CSS/JS files satisfy the pre-paint, calm-interaction, scroll-geometry, anti-yap, bounded-render, and background-loop contracts.`);
 warnings.forEach(w => console.warn('WARN ' + w));
-

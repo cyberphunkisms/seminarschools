@@ -1,22 +1,45 @@
 // ============================================================================
-// INDRA — one canonical Polymyth Mandala, one stable camera per public route.
+// INDRA — the original Polymyth Mandala field on every non-star public route.
 //
 // The SVG is identical everywhere: three phi-scaled Apollonian gaskets,
-// flowers grown from tangencies, and prismatic Indra jewels. A normalized path
-// selects a stable view into that same web. Scroll changes only compositor
-// transforms; it never changes layout or runs an idle animation loop.
+// flowers grown from tangencies, and prismatic Indra jewels. Two independent
+// cameras revisit the old rainbow field from opposite regions. A normalized
+// path selects stable views into that same web; scroll moves both cameras and
+// carries their line colour through the original spectrum. Nothing here
+// changes layout or runs an idle animation loop.
 // ============================================================================
 (function () {
   'use strict';
 
   var root = document.documentElement;
   var body = document.body;
-  if (!body || document.getElementById('indraLayer')) return;
+  if (!body
+      || body.getAttribute('data-geometry') !== 'indra-web'
+      || body.hasAttribute('data-shared-geometry-exempt')
+      || body.getAttribute('data-star-file-page') === 'true'
+      || document.getElementById('indraLayer')) return;
 
   var reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   var canonicalId = window.PolymythMandala && window.PolymythMandala.canonicalId || 'polymyth-mandala-main-v32';
   var MAX_SHAPES_PER_CAMERA = 1400;
   var MAX_MARKUP_BYTES_PER_CAMERA = 240000;
+
+  /* The subdued spectrum is the original /main/ geometry palette. It belongs
+     to the background field alone; foreground page colours and the homepage
+     project constellation remain independently owned. */
+  var RAINBOW_HEX = Object.freeze([
+    '#8a4a32', '#c47a2e', '#a09030', '#3d8a5a',
+    '#4070a8', '#6850a0', '#9050a0', '#a84858'
+  ]);
+  var RAINBOW_PALETTE = Object.freeze(RAINBOW_HEX.map(function (hex) {
+    return Object.freeze([
+      parseInt(hex.slice(1, 3), 16),
+      parseInt(hex.slice(3, 5), 16),
+      parseInt(hex.slice(5, 7), 16)
+    ]);
+  }));
+  var MIN_OPACITY = 0.020;
+  var MAX_OPACITY = 0.200;
 
   var CAMERA_PRIMARY = [
     { x: 120, y: 30, zoom: 7 },
@@ -80,10 +103,19 @@
     return 'standard';
   }
 
-  function routeProfile(path, routeType) {
-    if (path === '/about/') return 'about-dual';
-    if (routeType === 'cv') return 'cv-quiet';
-    return 'single';
+  function routeProfile() {
+    return 'dual-field';
+  }
+
+  function rainbowColor(progress) {
+    var scaled = clamp(progress, 0, 1) * (RAINBOW_PALETTE.length - 1);
+    var index = Math.min(RAINBOW_PALETTE.length - 2, Math.floor(scaled));
+    var local = scaled - index;
+    var start = RAINBOW_PALETTE[index];
+    var end = RAINBOW_PALETTE[index + 1];
+    return 'rgb(' + [0, 1, 2].map(function (channel) {
+      return Math.round(start[channel] + (end[channel] - start[channel]) * local);
+    }).join(',') + ')';
   }
 
   function byteLength(value) {
@@ -119,19 +151,29 @@
   var register = String(body.getAttribute('data-geometry-register') || routeRegister(geometryKey));
   if (!/^(?:quiet|standard|expressive)$/.test(register)) register = routeRegister(geometryKey);
   var profile = String(body.getAttribute('data-geometry-profile') || routeProfile(geometryKey, routeType));
-  if (!/^(?:single|about-dual|cv-quiet)$/.test(profile)) profile = 'single';
+  if (profile !== 'dual-field') profile = 'dual-field';
   var requestedOpacity = parseFloat(body.getAttribute('data-indra-intensity'));
   var registerOpacity = register === 'expressive' ? 0.200 : register === 'quiet' ? 0.115 : 0.135;
-  /* The register contract owns visibility. Stale generated markup must never
-     silently make the canonical field fainter than its page register. */
-  var opacity = Number.isFinite(requestedOpacity) && Math.abs(requestedOpacity - registerOpacity) <= 0.001
-    ? requestedOpacity
-    : registerOpacity;
+  var requestedFadeSource = String(body.getAttribute('data-indra-fade-source') || '');
+  var pageCssOpacity = NaN;
+  if (typeof window.getComputedStyle === 'function') {
+    pageCssOpacity = parseFloat(window.getComputedStyle(body).getPropertyValue('--indra-opacity'));
+  }
+  function validOpacity(value) {
+    return Number.isFinite(value) && value >= MIN_OPACITY && value <= MAX_OPACITY;
+  }
+  var pageRequested = validOpacity(requestedOpacity)
+    && (requestedFadeSource === 'page' || Math.abs(requestedOpacity - registerOpacity) > 0.001);
+  var opacity = validOpacity(pageCssOpacity)
+    ? pageCssOpacity
+    : pageRequested ? requestedOpacity : registerOpacity;
+  var fadeSource = validOpacity(pageCssOpacity) || pageRequested ? 'page' : 'route-register';
 
   body.setAttribute('data-geometry-key', geometryKey);
   body.setAttribute('data-geometry-register', register);
   body.setAttribute('data-geometry-profile', profile);
   body.setAttribute('data-indra-intensity', opacity.toFixed(3));
+  body.setAttribute('data-indra-fade-source', fadeSource);
   body.setAttribute('data-geometry-engine', 'canonical-scroll-camera');
 
   var layer = document.createElement('div');
@@ -143,13 +185,16 @@
   layer.setAttribute('data-geometry-kind', 'shared-background-web');
   layer.setAttribute('data-geometry-source', 'polymyth-mandala-main-v32');
   layer.setAttribute('data-geometry-input', 'normalized-path-scroll');
-  layer.setAttribute('data-geometry-proof', 'all-page-scroll');
+  layer.setAttribute('data-geometry-proof', 'eligible-page-scroll');
   layer.setAttribute('data-geometry-register', register);
   layer.setAttribute('data-geometry-profile', profile);
   layer.setAttribute('data-geometry-key', geometryKey);
   layer.setAttribute('data-geometry-canonical-id', canonicalId);
+  layer.setAttribute('data-geometry-palette', RAINBOW_HEX.join(','));
+  layer.setAttribute('data-geometry-fade-source', fadeSource);
+  layer.setAttribute('data-geometry-motion-source', reduced ? 'reduced-motion' : 'window-scroll');
   layer.style.pointerEvents = 'none';
-  layer.style.setProperty('--indra-opacity', opacity.toFixed(3));
+  layer.style.setProperty('--indra-opacity-resolved', opacity.toFixed(3));
 
   var cameras = [];
   var fallbackReason = '';
@@ -175,22 +220,6 @@
     '<defs><symbol id="indra-canonical-symbol" viewBox="-380 -380 760 760">' + canonicalContents + '</symbol></defs></svg>';
   layer.appendChild(definitionBank);
 
-  /* One route-independent overview guarantees a visible baseline on every
-     surface, even if a seeded detail camera is momentarily inside a large
-     circle. It reuses the same symbol, so it adds no canonical shape DOM. */
-  var coverage = document.createElement('div');
-  coverage.className = 'indra-coverage';
-  coverage.setAttribute('aria-hidden', 'true');
-  coverage.setAttribute('data-geometry-coverage', 'canonical-static-wide');
-  coverage.setAttribute('data-geometry-canonical-id', canonicalId);
-  coverage.setAttribute('data-geometry-instance', 'canonical-use');
-  coverage.innerHTML = '<svg class="polymyth-mandala polymyth-mandala-coverage" data-canonical-web="' + canonicalId + '" ' +
-    'viewBox="-440 -440 880 880" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">' +
-    '<defs><filter id="indra-coverage-edge" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">' +
-    '<feMorphology in="SourceGraphic" operator="dilate" radius="2.8"></feMorphology></filter></defs>' +
-    '<use href="#indra-canonical-symbol" x="-380" y="-380" width="760" height="760" filter="url(#indra-coverage-edge)"></use></svg>';
-  layer.appendChild(coverage);
-
   function mountCamera(name, secondary) {
     var camera = document.createElement('div');
     camera.className = 'indra-camera indra-camera--' + name;
@@ -214,19 +243,20 @@
     } else {
       camera.setAttribute('data-geometry-budget', 'within');
     }
-    if (secondary) camera.style.setProperty('--indra-camera-opacity', '0.42');
+    if (secondary) camera.style.setProperty('--indra-camera-opacity', '0.58');
     layer.appendChild(camera);
     cameras.push({ element: camera, secondary: secondary });
   }
 
   mountCamera('primary', false);
-  if (profile === 'about-dual') mountCamera('secondary', true);
+  mountCamera('secondary', true);
 
   layer.setAttribute('data-geometry-canonical-hash', canonicalMarkupHash);
   layer.setAttribute('data-geometry-shapes', String(canonicalShapes));
   layer.setAttribute('data-geometry-markup-bytes', String(canonicalBytes));
   layer.setAttribute('data-geometry-cameras', String(cameras.length));
-  layer.setAttribute('data-geometry-coverage-surfaces', '1');
+  layer.setAttribute('data-geometry-field', 'fine-line-rainbow-dual');
+  layer.setAttribute('data-geometry-coverage-surfaces', '0');
   layer.setAttribute('data-geometry-camera-signature', [geometryKey, register, profile, seeds.first.toString(16), seeds.second.toString(16)].join(':'));
   if (fallbackReason) layer.setAttribute('data-geometry-fallback', fallbackReason);
   body.appendChild(layer);
@@ -249,7 +279,7 @@
     /* A phone viewport needs a wider camera window than a desktop viewport.
        This is a viewport-wide optical correction, never a route exception:
        all routes keep the same bank, seed, direction, and full canonical web. */
-    var viewportZoom = window.innerWidth < 640 ? 0.55 : window.innerWidth < 900 ? 0.50 : 0.45;
+    var viewportZoom = window.innerWidth < 640 ? 0.40 : window.innerWidth < 900 ? 0.50 : 0.45;
     var zoom = (current.zoom + (next.zoom - current.zoom) * local) * registerZoom * viewportZoom;
     var x = current.x + (next.x - current.x) * local;
     var y = current.y + (next.y - current.y) * local;
@@ -296,6 +326,7 @@
   }
 
   function paintAt(progress) {
+    layer.style.setProperty('--indra-color', rainbowColor(progress));
     for (var index = 0; index < cameras.length; index++) {
       var state = cameraPoint(index, progress);
       cameras[index].element.style.transform = 'translate3d(' + state.x.toFixed(2) + 'px,' + state.y.toFixed(2) + 'px,0) rotate(' +
@@ -306,10 +337,88 @@
     layer.setAttribute('data-geometry-progress', progress.toFixed(4));
   }
 
-  function readProgress() {
-    var scrollTop = window.scrollY || root.scrollTop || 0;
-    var range = Math.max(0, root.scrollHeight - window.innerHeight);
+  /* Most routes scroll the document, but several real projects deliberately
+     keep the document fixed and scroll a panel or pan/zoom a full-screen
+     working surface. Treat the input the visitor actually moves as the camera
+     driver. This remains event-driven: no observer sweep and no idle loop. */
+  var activeScrollElement = null;
+  var virtualProgress = 0.32;
+  var motionSource = 'window-scroll';
+  var panPointerId = null;
+  var panLastX = 0;
+  var panLastY = 0;
+
+  function numeric(value) {
+    var number = Number(value);
+    return Number.isFinite(number) ? number : 0;
+  }
+
+  function elementScrollProgress(element) {
+    if (!element || element === document || element === root || element === body) return null;
+    var verticalRange = Math.max(0, numeric(element.scrollHeight) - numeric(element.clientHeight));
+    if (verticalRange > 1) return clamp(numeric(element.scrollTop) / verticalRange, 0, 1);
+    var horizontalRange = Math.max(0, numeric(element.scrollWidth) - numeric(element.clientWidth));
+    if (horizontalRange > 1) return clamp(numeric(element.scrollLeft) / horizontalRange, 0, 1);
+    return null;
+  }
+
+  function documentScrollProgress() {
+    var scrollTop = numeric(window.scrollY || root.scrollTop || body.scrollTop);
+    var documentHeight = Math.max(numeric(root.scrollHeight), numeric(body.scrollHeight));
+    var range = Math.max(0, documentHeight - numeric(window.innerHeight));
     return range > 1 ? clamp(scrollTop / range, 0, 1) : 0.32;
+  }
+
+  function readProgress() {
+    if (motionSource === 'element-scroll') {
+      var elementProgress = elementScrollProgress(activeScrollElement);
+      if (elementProgress !== null) return elementProgress;
+      activeScrollElement = null;
+      motionSource = 'window-scroll';
+    }
+    if (motionSource === 'wheel' || motionSource === 'pan') return virtualProgress;
+    return documentScrollProgress();
+  }
+
+  function setMotionSource(source) {
+    motionSource = source;
+    layer.setAttribute('data-geometry-motion-source', source);
+  }
+
+  function parentElement(node) {
+    return node && (node.parentElement || node.parentNode) || null;
+  }
+
+  function computedValue(element, property, camelName) {
+    if (!element || typeof window.getComputedStyle !== 'function') return '';
+    var style;
+    try { style = window.getComputedStyle(element); } catch (_) { return ''; }
+    return String((style && style[camelName]) || (style && style.getPropertyValue && style.getPropertyValue(property)) || '');
+  }
+
+  function scrollableAncestor(start) {
+    var element = start;
+    while (element && element !== body && element !== root && element !== document) {
+      var verticalRange = Math.max(0, numeric(element.scrollHeight) - numeric(element.clientHeight));
+      var horizontalRange = Math.max(0, numeric(element.scrollWidth) - numeric(element.clientWidth));
+      var overflowY = computedValue(element, 'overflow-y', 'overflowY');
+      var overflowX = computedValue(element, 'overflow-x', 'overflowX');
+      if ((verticalRange > 1 && /^(?:auto|scroll|overlay)$/.test(overflowY))
+          || (horizontalRange > 1 && /^(?:auto|scroll|overlay)$/.test(overflowX))) return element;
+      element = parentElement(element);
+    }
+    return null;
+  }
+
+  function panSurface(start) {
+    var element = start;
+    while (element && element !== body && element !== root && element !== document) {
+      var touchAction = computedValue(element, 'touch-action', 'touchAction');
+      var cursor = computedValue(element, 'cursor', 'cursor');
+      if (touchAction === 'none' || /^(?:grab|grabbing)$/.test(cursor)) return element;
+      element = parentElement(element);
+    }
+    return null;
   }
 
   var raf = 0;
@@ -339,6 +448,70 @@
     }, SCROLL_PAINT_FALLBACK_MS);
   }
 
+  function onWindowScroll() {
+    activeScrollElement = null;
+    setMotionSource('window-scroll');
+    schedule();
+  }
+
+  function onElementScroll(event) {
+    var target = event && event.target;
+    if (!target || target === document || target === root || target === body) {
+      onWindowScroll();
+      return;
+    }
+    if (elementScrollProgress(target) === null) return;
+    activeScrollElement = target;
+    setMotionSource('element-scroll');
+    schedule();
+  }
+
+  function advanceVirtual(delta, source) {
+    if (!Number.isFinite(delta) || Math.abs(delta) < 0.00001) return;
+    if (motionSource !== 'wheel' && motionSource !== 'pan') virtualProgress = readProgress();
+    virtualProgress = clamp(virtualProgress + delta, 0, 1);
+    activeScrollElement = null;
+    setMotionSource(source);
+    schedule();
+  }
+
+  function onWheel(event) {
+    if (scrollableAncestor(event && event.target)) return;
+    var documentHeight = Math.max(numeric(root.scrollHeight), numeric(body.scrollHeight));
+    var documentRange = Math.max(0, documentHeight - numeric(window.innerHeight));
+    if (documentRange > 1) return;
+    var deltaY = numeric(event && event.deltaY);
+    var deltaX = numeric(event && event.deltaX);
+    var delta = Math.abs(deltaY) >= Math.abs(deltaX) ? deltaY : deltaX;
+    advanceVirtual(delta / Math.max(1200, numeric(window.innerHeight) * 4), 'wheel');
+  }
+
+  function onPointerDown(event) {
+    if (!event || event.isPrimary === false || scrollableAncestor(event.target) || !panSurface(event.target)) return;
+    panPointerId = event.pointerId === undefined ? 0 : event.pointerId;
+    panLastX = numeric(event.clientX);
+    panLastY = numeric(event.clientY);
+    if (motionSource !== 'wheel' && motionSource !== 'pan') virtualProgress = readProgress();
+  }
+
+  function onPointerMove(event) {
+    var pointerId = event && event.pointerId === undefined ? 0 : event && event.pointerId;
+    if (panPointerId === null || !event || pointerId !== panPointerId) return;
+    var nextX = numeric(event.clientX);
+    var nextY = numeric(event.clientY);
+    var deltaX = nextX - panLastX;
+    var deltaY = nextY - panLastY;
+    panLastX = nextX;
+    panLastY = nextY;
+    var delta = Math.abs(deltaY) >= Math.abs(deltaX) ? deltaY : deltaX;
+    advanceVirtual(delta / Math.max(1200, numeric(window.innerHeight) * 3), 'pan');
+  }
+
+  function onPointerEnd(event) {
+    var pointerId = event && event.pointerId === undefined ? 0 : event && event.pointerId;
+    if (panPointerId !== null && pointerId === panPointerId) panPointerId = null;
+  }
+
   if (reduced) {
     /* Path start is already checked for composed visibility on every surface.
        Route seeds still select a distinct bank/direction/rotation; only motion
@@ -346,10 +519,17 @@
     var stillProgress = 0;
     paintAt(stillProgress);
     layer.setAttribute('data-geometry-motion', 'static-reduced');
+    layer.setAttribute('data-geometry-motion-source', 'reduced-motion');
   } else {
     paint();
     layer.setAttribute('data-geometry-motion', 'scroll-responsive');
-    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('scroll', onWindowScroll, { passive: true });
+    document.addEventListener('scroll', onElementScroll, { passive: true, capture: true });
+    document.addEventListener('wheel', onWheel, { passive: true, capture: true });
+    document.addEventListener('pointerdown', onPointerDown, { passive: true, capture: true });
+    document.addEventListener('pointermove', onPointerMove, { passive: true, capture: true });
+    document.addEventListener('pointerup', onPointerEnd, { passive: true, capture: true });
+    document.addEventListener('pointercancel', onPointerEnd, { passive: true, capture: true });
     window.addEventListener('resize', function () {
       lastProgress = -1;
       schedule();
@@ -367,9 +547,11 @@
   root.setAttribute('data-geometry-ready', 'true');
   window.PolymythIndra = Object.freeze({
     canonicalId: canonicalId,
+    palette: RAINBOW_HEX,
     normalizePath: normalizePath,
     seedOf: seedOf,
     cameraAt: function (progress, secondary) { return cameraPoint(secondary ? 1 : 0, progress); },
+    rainbowAt: rainbowColor,
     cameraForKey: function (key, registerName, progress, secondary) {
       var normalized = normalizePath(key);
       var pair = seedPair(normalized, '');

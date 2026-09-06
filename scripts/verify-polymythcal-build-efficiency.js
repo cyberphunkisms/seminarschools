@@ -161,6 +161,30 @@ const expectedEntrypoint = 'node scripts/assert-canonical-build-delegation.js "n
 if (pkg.scripts?.build !== expectedEntrypoint) fail('production build is not routed through the repository-wide writer lock');
 if (build.includes('update-polymythcal-editable-master-')) fail('deploy build mutates private editable masters');
 
+const publicationFinalizer = read('scripts/finalize-polymythcal-publication.py');
+const orderedFinalizerSteps = [
+  'scripts/build-audit45-localized-routes.py',
+  'scripts/apply-audit45-translation-ui.js',
+  'scripts/apply-audit49-metadata-hygiene.js',
+  'scripts/build-polymythcal-discovery-site.js',
+  'scripts/apply-visible-geometry.js',
+  'scripts/update-release-asset-identity.js',
+  'scripts/update-polymythcal-build-manifest.js',
+  'scripts/build-public-deploy.js',
+  'scripts/verify-public-deploy-parity.js',
+  'scripts/verify-release-asset-identity.js',
+];
+const orderedFinalizerIndexes = orderedFinalizerSteps.map(step => publicationFinalizer.indexOf(step));
+if (
+  orderedFinalizerIndexes.some((index, position) => (
+    index < 0
+    || (publicationFinalizer.split(orderedFinalizerSteps[position]).length - 1) !== 1
+    || (position > 0 && index <= orderedFinalizerIndexes[position - 1])
+  ))
+) {
+  fail('Polymythcal publication finalizer omits, duplicates, or misorders the localization/discovery/geometry/identity/public verification sequence');
+}
+
 const app = read('js/polymythcal-discovery.js');
 for (const token of ['const PAGE_SIZE = 24', 'URLSearchParams', "mode === 'push' ? 'pushState' : 'replaceState'", 'pmdResearchFilters', 'pmdCalendar']) {
   if (!app.includes(token)) fail(`Discovery controller lacks ${token}`);

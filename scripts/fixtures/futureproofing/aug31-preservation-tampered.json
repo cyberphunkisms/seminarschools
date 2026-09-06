@@ -1,0 +1,6 @@
+{
+  "schema": "seminar-schools-aug31-preservation-tamper-fixture-v1",
+  "target": "expected_transition.deleted[0].before.sha256",
+  "value": "0000000000000000000000000000000000000000000000000000000000000000",
+  "expected_result": "rejected"
+}

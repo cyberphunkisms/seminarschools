@@ -1,41 +1,41 @@
 {
   "generatedAt": "2026-08-15T18:00:00-04:00",
   "scope": "public",
-  "totalFiles": 9985,
-  "totalBytes": 172802592,
-  "publicTreeSha256": "b503ddcae9826d0510c28815a818ebcd8bcaf9deac22324da6e62a28f6652725",
+  "totalFiles": 9856,
+  "totalBytes": 164090976,
+  "publicTreeSha256": "43e5057f10ab7520929c6f6589240083f89595a72336fcccc39ad171f0be40f9",
   "byExtension": {
     ".pdf": {
       "files": 37,
       "bytes": 39610532
     },
     ".json": {
-      "files": 28,
-      "bytes": 24028820
+      "files": 29,
+      "bytes": 20162361
     },
     ".html": {
-      "files": 7564,
-      "bytes": 67012037
+      "files": 7568,
+      "bytes": 66154171
     },
     ".txt": {
       "files": 47,
-      "bytes": 10551678
+      "bytes": 10803272
     },
     ".xlsx": {
-      "files": 5,
-      "bytes": 14024320
+      "files": 3,
+      "bytes": 10209092
     },
     ".zip": {
       "files": 1,
       "bytes": 1521254
     },
     ".ics": {
-      "files": 2128,
-      "bytes": 5376848
+      "files": 1994,
+      "bytes": 4789016
     },
     ".xml": {
       "files": 16,
-      "bytes": 3930078
+      "bytes": 3699504
     },
     ".jsonl": {
       "files": 2,
@@ -46,12 +46,16 @@
       "bytes": 866270
     },
     ".js": {
-      "files": 48,
-      "bytes": 1257419
+      "files": 50,
+      "bytes": 1370511
     },
     ".docx": {
       "files": 3,
       "bytes": 786155
+    },
+    ".md": {
+      "files": 20,
+      "bytes": 749422
     },
     ".png": {
       "files": 9,
@@ -61,13 +65,9 @@
       "files": 27,
       "bytes": 1669088
     },
-    ".md": {
-      "files": 18,
-      "bytes": 451302
-    },
     ".css": {
       "files": 21,
-      "bytes": 306044
+      "bytes": 289635
     },
     ".woff2": {
       "files": 11,
@@ -75,7 +75,7 @@
     },
     "[none]": {
       "files": 2,
-      "bytes": 22466
+      "bytes": 22658
     },
     ".xsl": {
       "files": 1,
@@ -90,8 +90,8 @@
       "bytes": 546
     },
     ".sha256": {
-      "files": 7,
-      "bytes": 883
+      "files": 5,
+      "bytes": 637
     }
   },
   "largestAssets": [
@@ -108,33 +108,21 @@
       "extension": ".pdf"
     },
     {
-      "path": "polymythseminars/events.json",
-      "size": 8526314,
-      "sha256": "4e9bf67ad53b47c1bcad4144f0ec86717f0713266faeb784ab8c716df2f39a66",
-      "extension": ".json"
-    },
-    {
       "path": "polymyth/concordance/concordance-index.json",
-      "size": 6868389,
-      "sha256": "a3803456a657e1b4c97bace3acb1f750fcedd2ad492d4d047fa8a92f14b9d02e",
-      "extension": ".json"
-    },
-    {
-      "path": "polymythseminars/browse.json",
-      "size": 4534825,
-      "sha256": "561cfe79c561861b219b74c8989aae69a5af4ec8bf7237d1fde316b1ec1fdafe",
+      "size": 10952901,
+      "sha256": "03e9986cc7879d1807749f2381670ca8917b9ad4ff5a204e46a9f0897a058f7c",
       "extension": ".json"
     },
     {
       "path": "polymyth/methodologylist/index.html",
-      "size": 4213010,
-      "sha256": "0030ff4f5a9ee948f9f86586cd7bd0ac18c71a656c7dd06454d1304fc88035ae",
+      "size": 4220023,
+      "sha256": "bf0c36d19f427e8f59baa9d90e2619caa05f0722ea42d670759dd72d992a6e49",
       "extension": ".html"
     },
     {
       "path": "polymyth/methodologylist.txt",
-      "size": 4030506,
-      "sha256": "744c32ac30a4c125f17d89c0c14e1d787182c0ef15714937deea644bb2582022",
+      "size": 4155547,
+      "sha256": "28e26fcb6c0fad44fae4de31ed70d42ec42446f19eef4c21b224a9085f5a343d",
       "extension": ".txt"
     },
     {
@@ -150,10 +138,10 @@
       "extension": ".xlsx"
     },
     {
-      "path": "polymyth/research/metoo-foundational-dissent-full-archive-2026-07-28.xlsx",
-      "size": 3621724,
-      "sha256": "01650f4e594700adba564e0073fb95f3babab65b60b8a1db8678d9fba49c759f",
-      "extension": ".xlsx"
+      "path": "polymythseminars/browse.json",
+      "size": 2954297,
+      "sha256": "f7b82229eca5ad99feb64a1a81e02c388abf7045253b51ac7c7188401f46308e",
+      "extension": ".json"
     },
     {
       "path": "polymyth/coherence/Polymyth_Coherence_Assessment_Instrument_V5.1.2.xlsx",
@@ -162,16 +150,28 @@
       "extension": ".xlsx"
     },
     {
+      "path": "polymyth/methodologylist/methodology/index.html",
+      "size": 1999772,
+      "sha256": "ce9b83432fe07cf5186cbf8bee2755936ba043e965727d01e3888716f2e706fe",
+      "extension": ".html"
+    },
+    {
       "path": "bookwormcard/pdf/bookwormcard.pdf",
       "size": 1994830,
       "sha256": "8f92654c9ba17aeb6b02085902e2c01ff4b410d7e574f632271159b0f7516dfa",
       "extension": ".pdf"
     },
     {
-      "path": "polymyth/methodologylist/methodology/index.html",
-      "size": 1956328,
-      "sha256": "289da57b9b28b15cfe5e823291dea24428e81f9c012a8930e14056e40bd370bb",
-      "extension": ".html"
+      "path": "polymythseminars/research.json",
+      "size": 1915161,
+      "sha256": "da7f74b566289eaa60a11180c5ccf95cef956e3bc405f17f4e54864cace5c473",
+      "extension": ".json"
+    },
+    {
+      "path": "polymyth/methodologylist-methodology.txt",
+      "size": 1875795,
+      "sha256": "fb334ea4ca53872855cc3aac10fbd06f4ac32899a836201d33c9715e57815805",
+      "extension": ".txt"
     },
     {
       "path": "polymythlib/data/polymyth-data.json",
@@ -180,15 +180,9 @@
       "extension": ".json"
     },
     {
-      "path": "polymyth/methodologylist-methodology.txt",
-      "size": 1833980,
-      "sha256": "a74ffc2ef16eced7b08f5037662bb0a315774e704d9ae22a49e689364ccf908c",
-      "extension": ".txt"
-    },
-    {
       "path": "aa/index.html",
-      "size": 1522254,
-      "sha256": "f0c7277d56bff5a10ab4c3758c8a14c68ca6d2fa13f83c2034ce2034363cbe2e",
+      "size": 1521965,
+      "sha256": "65a19f45b4174b69c1fffafd4b7936637980b8b2571d2da1036f295659bdd221",
       "extension": ".html"
     },
     {
@@ -199,44 +193,44 @@
     },
     {
       "path": "aa/cloud/index.html",
-      "size": 1331449,
-      "sha256": "89bec98fd6686983736220b3b2f36d71d400950cadbc073212a4adbf546fadcf",
+      "size": 1331152,
+      "sha256": "13a675d11ad2cfb5a5bf0837ce608e65f2fdbe00b7c982175a18b256517d4a36",
       "extension": ".html"
     },
     {
       "path": "polymyth/campaigncodex/index.html",
-      "size": 1033715,
-      "sha256": "3b8a688668ced772fa4f76e48f2e3c26450dcb30d12df48a1bc7559fd7eb8489",
+      "size": 1033406,
+      "sha256": "d89b27f87703203449636d264a519322a6e29ab07e2ee6b882393cde997294f7",
       "extension": ".html"
-    },
-    {
-      "path": "polymythseminars/feeds/all.ics",
-      "size": 1024344,
-      "sha256": "209c1ae7223f29351029c96e70d532cf107c9f1c8a133e1ef9f8290d5f083416",
-      "extension": ".ics"
     },
     {
       "path": "polymyth/campaigncodex.txt",
       "size": 965531,
-      "sha256": "6e30f1059ba5066031bbe43bb739b7419e081a253de4356e6c8a5ff9c527018d",
+      "sha256": "9dee0ab73fa660db639991851f18b55f1d9da97ba28f7990477bf6cc9d774159",
       "extension": ".txt"
     },
     {
+      "path": "polymythseminars/feeds/all.ics",
+      "size": 919947,
+      "sha256": "87762a250bc2512ba914a9a46a9d2235c9196c2e84c70ed7fdab019f7b77f2b1",
+      "extension": ".ics"
+    },
+    {
       "path": "polymythseminars/feed.xml",
-      "size": 839017,
-      "sha256": "48b70413ef5f48e09cfe92ddf8617a4bef09e0cb2c55d594b3231732fa0b0d9a",
+      "size": 786382,
+      "sha256": "b65b43b2d691098cb491df53cb35b159f188dac16300b10fd8b8ae2171c7dfae",
       "extension": ".xml"
     },
     {
       "path": "polymyth/bookwormburrows.txt",
       "size": 746635,
-      "sha256": "00e7935880c3e120410453b77ddff4e2a1a734b1f5320ff9d297ad9084def104",
+      "sha256": "879c63d2a63086f0e47610bdca3d0bec9698f6e0c9a908635dbad26897099294",
       "extension": ".txt"
     },
     {
       "path": "teacherresources/index.html",
-      "size": 704454,
-      "sha256": "35ad7671c94c3dd05aed1a0c054ae5453e270edeff17d3066c5b229448dd93b6",
+      "size": 704498,
+      "sha256": "6101fb756d9177f31c3fee088389237ebefa96c56cd68327f6c09cdb540412b8",
       "extension": ".html"
     },
     {
@@ -247,74 +241,62 @@
     },
     {
       "path": "polymyth/bookwormburrows/index.html",
-      "size": 622045,
-      "sha256": "dabce96e86cf0a22f8db55d080359c4f29b4c73d9d135df698dcc99654eac08f",
+      "size": 621724,
+      "sha256": "a69e5e37fa1e5613418218f556e62711823c85905b9b0aee3dc683e662f10af4",
+      "extension": ".html"
+    },
+    {
+      "path": "polymyth/methodologylist/citation/index.html",
+      "size": 590618,
+      "sha256": "2d85a27ec2d233ec6d77bf964016ea237b41562d4537d4f5459833670b07a831",
       "extension": ".html"
     },
     {
       "path": "polymythseminars/feeds/confirmed.ics",
-      "size": 589598,
-      "sha256": "7321f8931a8804ad3d3aaa6066c98ccc6665a363a061fbec85bc7d60c3754351",
-      "extension": ".ics"
-    },
-    {
-      "path": "polymyth/methodologylist/citation/index.html",
-      "size": 586909,
-      "sha256": "4f64d0bb00bb17cc8bb2e267e92935a99c52b77591fcae64953745eea02035c6",
-      "extension": ".html"
-    },
-    {
-      "path": "polymythseminars/feeds/learning.ics",
-      "size": 519463,
-      "sha256": "9848b3cf860b095afe51636f1794d1b725fed919ecea6c1e06b34994abd09ccc",
+      "size": 579419,
+      "sha256": "a753a22ed35d639e780dcb39351c239d8495d05dc31e897bc5ff7f759f98aea7",
       "extension": ".ics"
     },
     {
       "path": "polymythseminars/feeds/confirmed.xml",
       "size": 482692,
-      "sha256": "00067d2ff86ef52bd151846169085946eb22643e405c4b37f5ccda7e41db4aca",
+      "sha256": "c4465e4cd08c159eeb86336fd6b324f3a20fd2a393dc9e8af6550bdac3440c26",
       "extension": ".xml"
     },
     {
       "path": "polymyth/methodologylist-citation.txt",
-      "size": 461146,
-      "sha256": "72f56a26cda1e34648b43343295163792c35e50328a15f72eb149f784ff01a3e",
+      "size": 464900,
+      "sha256": "c5252b96cfc2f0eaa34910c55dba4482e60943e2c827f5770116aa2fc5d49177",
       "extension": ".txt"
     },
     {
       "path": "polymyth/methodologylist/gorgonification/index.html",
-      "size": 450778,
-      "sha256": "fd8ef89d39351903b39304ea2b088e7c45a256c0814be35f7494c696f3a375e9",
+      "size": 461217,
+      "sha256": "afb31dd003cecbf7f93b0e38314d09ced8793db18165182a6e36c7b68c369d88",
       "extension": ".html"
     },
     {
-      "path": "polymythseminars/feeds/unconfirmed.ics",
-      "size": 434986,
-      "sha256": "91b74feb686b82d4ca0685b58b3a8b08b6fbfde89cc2179545c17b89816fbd15",
+      "path": "polymythseminars/feeds/learning.ics",
+      "size": 444127,
+      "sha256": "8bd9e0b4b3a2d579e07edb87b0d0f75e7c3aad6c4a2d174a07ed0514a700807d",
       "extension": ".ics"
     },
     {
-      "path": "polymythseminars/feeds/learning.xml",
-      "size": 417886,
-      "sha256": "e75596256e9fb26f0c443c8cf1038ca5222fba841e3a71dd4568d8971f6015c4",
-      "extension": ".xml"
-    },
-    {
       "path": "polymyth/methodologylist-gorgonification.txt",
-      "size": 407224,
-      "sha256": "15fc63347be8ad300a4de39c7b1bd4d97dfe2d4fccd0aa1e5446b16ee47742e7",
+      "size": 417749,
+      "sha256": "d069ddda91fa706929f4925a1086c9cc00ef614b85abbd035a6a48614f647c2e",
       "extension": ".txt"
     },
     {
       "path": "polymyth/modulecanon/index.html",
-      "size": 393881,
-      "sha256": "1ee8a024347782db7cfdc4f0dc5eb61e17984a47f03865aadf306260b638cefc",
+      "size": 393574,
+      "sha256": "942f261cd14c5d1a95741169351856665c0e0cbe4e02574bd63444b9f083d745",
       "extension": ".html"
     },
     {
       "path": "leizu/fa/index.html",
-      "size": 391861,
-      "sha256": "59878ee7be0ef29819738a8d2f38c75fac97250b9db6b9f05603c75b361a0d2a",
+      "size": 391905,
+      "sha256": "f9b273a2691053872b6170e26e57ca0f91f47667f8ce41bd39dda320fbd5a419",
       "extension": ".html"
     },
     {
@@ -325,47 +307,65 @@
     },
     {
       "path": "leizu/fr/index.html",
-      "size": 385315,
-      "sha256": "6b451ccb8b12a780828476be811884d7cf069506c82313a79a3367939b30bf97",
+      "size": 385359,
+      "sha256": "14e2de9561e87621a4291ea35ec4890032e6833e0d99800eb5d2a9a3c747b1ff",
       "extension": ".html"
     },
     {
       "path": "leizu/zh-hans/index.html",
-      "size": 382251,
-      "sha256": "36ca168e92b2a3fe20949ac77ba7b8c98e67d9742cfa241fa351489ae2a88fe5",
+      "size": 382295,
+      "sha256": "fe1af52c534da9f3a833e60afad3cff0d712a2403494b17c37c295010d2b8818",
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/zh-hant/index.html",
+      "size": 382285,
+      "sha256": "afb1cce61812da861e944b4b252bde4b5c420b9584f07c9753085460acefb311",
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/index.html",
+      "size": 382260,
+      "sha256": "4397b82de894866673abd44357f66da06ab372ee9b7c48135f92f72d27b9aa7c",
+      "extension": ".html"
+    },
+    {
+      "path": "leizu/fa/flyer/index.html",
+      "size": 378354,
+      "sha256": "609aa1b67af778cf1924479d04f9ac371b287528cf8c18c8e82e4b03f3d813f7",
       "extension": ".html"
     }
   ],
   "largestRuntimeAssets": [
     {
-      "path": "polymythseminars/events.json",
-      "size": 8526314,
-      "sha256": "4e9bf67ad53b47c1bcad4144f0ec86717f0713266faeb784ab8c716df2f39a66",
-      "extension": ".json"
-    },
-    {
       "path": "polymyth/concordance/concordance-index.json",
-      "size": 6868389,
-      "sha256": "a3803456a657e1b4c97bace3acb1f750fcedd2ad492d4d047fa8a92f14b9d02e",
-      "extension": ".json"
-    },
-    {
-      "path": "polymythseminars/browse.json",
-      "size": 4534825,
-      "sha256": "561cfe79c561861b219b74c8989aae69a5af4ec8bf7237d1fde316b1ec1fdafe",
+      "size": 10952901,
+      "sha256": "03e9986cc7879d1807749f2381670ca8917b9ad4ff5a204e46a9f0897a058f7c",
       "extension": ".json"
     },
     {
       "path": "polymyth/methodologylist/index.html",
-      "size": 4213010,
-      "sha256": "0030ff4f5a9ee948f9f86586cd7bd0ac18c71a656c7dd06454d1304fc88035ae",
+      "size": 4220023,
+      "sha256": "bf0c36d19f427e8f59baa9d90e2619caa05f0722ea42d670759dd72d992a6e49",
       "extension": ".html"
     },
     {
+      "path": "polymythseminars/browse.json",
+      "size": 2954297,
+      "sha256": "f7b82229eca5ad99feb64a1a81e02c388abf7045253b51ac7c7188401f46308e",
+      "extension": ".json"
+    },
+    {
       "path": "polymyth/methodologylist/methodology/index.html",
-      "size": 1956328,
-      "sha256": "289da57b9b28b15cfe5e823291dea24428e81f9c012a8930e14056e40bd370bb",
+      "size": 1999772,
+      "sha256": "ce9b83432fe07cf5186cbf8bee2755936ba043e965727d01e3888716f2e706fe",
       "extension": ".html"
+    },
+    {
+      "path": "polymythseminars/research.json",
+      "size": 1915161,
+      "sha256": "da7f74b566289eaa60a11180c5ccf95cef956e3bc405f17f4e54864cace5c473",
+      "extension": ".json"
     },
     {
       "path": "polymythlib/data/polymyth-data.json",
@@ -375,38 +375,38 @@
     },
     {
       "path": "aa/index.html",
-      "size": 1522254,
-      "sha256": "f0c7277d56bff5a10ab4c3758c8a14c68ca6d2fa13f83c2034ce2034363cbe2e",
+      "size": 1521965,
+      "sha256": "65a19f45b4174b69c1fffafd4b7936637980b8b2571d2da1036f295659bdd221",
       "extension": ".html"
     },
     {
       "path": "aa/cloud/index.html",
-      "size": 1331449,
-      "sha256": "89bec98fd6686983736220b3b2f36d71d400950cadbc073212a4adbf546fadcf",
+      "size": 1331152,
+      "sha256": "13a675d11ad2cfb5a5bf0837ce608e65f2fdbe00b7c982175a18b256517d4a36",
       "extension": ".html"
     },
     {
       "path": "polymyth/campaigncodex/index.html",
-      "size": 1033715,
-      "sha256": "3b8a688668ced772fa4f76e48f2e3c26450dcb30d12df48a1bc7559fd7eb8489",
+      "size": 1033406,
+      "sha256": "d89b27f87703203449636d264a519322a6e29ab07e2ee6b882393cde997294f7",
       "extension": ".html"
     },
     {
       "path": "polymythseminars/feeds/all.ics",
-      "size": 1024344,
-      "sha256": "209c1ae7223f29351029c96e70d532cf107c9f1c8a133e1ef9f8290d5f083416",
+      "size": 919947,
+      "sha256": "87762a250bc2512ba914a9a46a9d2235c9196c2e84c70ed7fdab019f7b77f2b1",
       "extension": ".ics"
     },
     {
       "path": "polymythseminars/feed.xml",
-      "size": 839017,
-      "sha256": "48b70413ef5f48e09cfe92ddf8617a4bef09e0cb2c55d594b3231732fa0b0d9a",
+      "size": 786382,
+      "sha256": "b65b43b2d691098cb491df53cb35b159f188dac16300b10fd8b8ae2171c7dfae",
       "extension": ".xml"
     },
     {
       "path": "teacherresources/index.html",
-      "size": 704454,
-      "sha256": "35ad7671c94c3dd05aed1a0c054ae5453e270edeff17d3066c5b229448dd93b6",
+      "size": 704498,
+      "sha256": "6101fb756d9177f31c3fee088389237ebefa96c56cd68327f6c09cdb540412b8",
       "extension": ".html"
     },
     {
@@ -417,140 +417,128 @@
     },
     {
       "path": "polymyth/bookwormburrows/index.html",
-      "size": 622045,
-      "sha256": "dabce96e86cf0a22f8db55d080359c4f29b4c73d9d135df698dcc99654eac08f",
+      "size": 621724,
+      "sha256": "a69e5e37fa1e5613418218f556e62711823c85905b9b0aee3dc683e662f10af4",
+      "extension": ".html"
+    },
+    {
+      "path": "polymyth/methodologylist/citation/index.html",
+      "size": 590618,
+      "sha256": "2d85a27ec2d233ec6d77bf964016ea237b41562d4537d4f5459833670b07a831",
       "extension": ".html"
     },
     {
       "path": "polymythseminars/feeds/confirmed.ics",
-      "size": 589598,
-      "sha256": "7321f8931a8804ad3d3aaa6066c98ccc6665a363a061fbec85bc7d60c3754351",
-      "extension": ".ics"
-    },
-    {
-      "path": "polymyth/methodologylist/citation/index.html",
-      "size": 586909,
-      "sha256": "4f64d0bb00bb17cc8bb2e267e92935a99c52b77591fcae64953745eea02035c6",
-      "extension": ".html"
-    },
-    {
-      "path": "polymythseminars/feeds/learning.ics",
-      "size": 519463,
-      "sha256": "9848b3cf860b095afe51636f1794d1b725fed919ecea6c1e06b34994abd09ccc",
+      "size": 579419,
+      "sha256": "a753a22ed35d639e780dcb39351c239d8495d05dc31e897bc5ff7f759f98aea7",
       "extension": ".ics"
     },
     {
       "path": "polymythseminars/feeds/confirmed.xml",
       "size": 482692,
-      "sha256": "00067d2ff86ef52bd151846169085946eb22643e405c4b37f5ccda7e41db4aca",
+      "sha256": "c4465e4cd08c159eeb86336fd6b324f3a20fd2a393dc9e8af6550bdac3440c26",
       "extension": ".xml"
     },
     {
       "path": "polymyth/methodologylist/gorgonification/index.html",
-      "size": 450778,
-      "sha256": "fd8ef89d39351903b39304ea2b088e7c45a256c0814be35f7494c696f3a375e9",
+      "size": 461217,
+      "sha256": "afb31dd003cecbf7f93b0e38314d09ced8793db18165182a6e36c7b68c369d88",
       "extension": ".html"
     },
     {
-      "path": "polymythseminars/feeds/unconfirmed.ics",
-      "size": 434986,
-      "sha256": "91b74feb686b82d4ca0685b58b3a8b08b6fbfde89cc2179545c17b89816fbd15",
+      "path": "polymythseminars/feeds/learning.ics",
+      "size": 444127,
+      "sha256": "8bd9e0b4b3a2d579e07edb87b0d0f75e7c3aad6c4a2d174a07ed0514a700807d",
       "extension": ".ics"
     },
     {
-      "path": "polymythseminars/feeds/learning.xml",
-      "size": 417886,
-      "sha256": "e75596256e9fb26f0c443c8cf1038ca5222fba841e3a71dd4568d8971f6015c4",
-      "extension": ".xml"
-    },
-    {
       "path": "polymyth/modulecanon/index.html",
-      "size": 393881,
-      "sha256": "1ee8a024347782db7cfdc4f0dc5eb61e17984a47f03865aadf306260b638cefc",
+      "size": 393574,
+      "sha256": "942f261cd14c5d1a95741169351856665c0e0cbe4e02574bd63444b9f083d745",
       "extension": ".html"
     },
     {
       "path": "leizu/fa/index.html",
-      "size": 391861,
-      "sha256": "59878ee7be0ef29819738a8d2f38c75fac97250b9db6b9f05603c75b361a0d2a",
+      "size": 391905,
+      "sha256": "f9b273a2691053872b6170e26e57ca0f91f47667f8ce41bd39dda320fbd5a419",
       "extension": ".html"
     },
     {
       "path": "leizu/fr/index.html",
-      "size": 385315,
-      "sha256": "6b451ccb8b12a780828476be811884d7cf069506c82313a79a3367939b30bf97",
+      "size": 385359,
+      "sha256": "14e2de9561e87621a4291ea35ec4890032e6833e0d99800eb5d2a9a3c747b1ff",
       "extension": ".html"
     },
     {
       "path": "leizu/zh-hans/index.html",
-      "size": 382251,
-      "sha256": "36ca168e92b2a3fe20949ac77ba7b8c98e67d9742cfa241fa351489ae2a88fe5",
+      "size": 382295,
+      "sha256": "fe1af52c534da9f3a833e60afad3cff0d712a2403494b17c37c295010d2b8818",
       "extension": ".html"
     },
     {
       "path": "leizu/zh-hant/index.html",
-      "size": 382241,
-      "sha256": "c96c7a1fb60c834a68dfabc18a467d90c4e3c7fa7abbf6331409370243fda4cd",
+      "size": 382285,
+      "sha256": "afb1cce61812da861e944b4b252bde4b5c420b9584f07c9753085460acefb311",
       "extension": ".html"
     },
     {
       "path": "leizu/index.html",
-      "size": 382216,
-      "sha256": "444c85ce5a02d5b54eb5d7e1a0621f61fa13598ca2bbbb31bcc218f00b95960e",
+      "size": 382260,
+      "sha256": "4397b82de894866673abd44357f66da06ab372ee9b7c48135f92f72d27b9aa7c",
       "extension": ".html"
     },
     {
       "path": "leizu/fa/flyer/index.html",
-      "size": 378310,
-      "sha256": "fbf1e884eab08e9697c74ac7779432326c51d4a49f41fb9f1e1c57fd04f84746",
+      "size": 378354,
+      "sha256": "609aa1b67af778cf1924479d04f9ac371b287528cf8c18c8e82e4b03f3d813f7",
       "extension": ".html"
     },
     {
       "path": "leizu/fr/flyer/index.html",
-      "size": 378226,
-      "sha256": "d92e009b1ab57d02f318f357cfe176952014140b118817debd6e81a27ef90ac9",
+      "size": 378270,
+      "sha256": "3c1268b5bc24d491f617985f6aca312fa7d5dd0123c3498c3fcfcbf186785f5d",
       "extension": ".html"
     },
     {
       "path": "leizu/zh-hans/flyer/index.html",
-      "size": 378179,
-      "sha256": "3524b1e2b3dca43dc57e7cf5dc648bf857c835ddc976d2e2f362790460b4d1d3",
+      "size": 378223,
+      "sha256": "f13d595c119fe8b0c7d125d7c846feb904697fd1cdaf5f27769ec17c3344a92a",
       "extension": ".html"
     },
     {
       "path": "leizu/zh-hant/flyer/index.html",
-      "size": 378179,
-      "sha256": "5cf090bf0a8d63f341dffe3d7e13990427890c2dded19a9fbeed385a836b8778",
+      "size": 378223,
+      "sha256": "4f8d91eb14c7043c490edb06769fcde9a838b60b8d5817f5d3309a8ebf62da07",
+      "extension": ".html"
+    },
+    {
+      "path": "polymyth/methodologylist/coreplus/index.html",
+      "size": 377734,
+      "sha256": "a8a6c65948a9388a9cf09869ffda083ad37247fbeafffb9eae36e9501444b6cf",
       "extension": ".html"
     },
     {
       "path": "leizu/flyer/index.html",
-      "size": 376717,
-      "sha256": "746ef4bbf194a37c32db24122a2cf7fe0d663ab91a00064b7152dfe7bf5fa70c",
+      "size": 376761,
+      "sha256": "5a8349f55f97405a864b7328382a88b27e95feddece68ee32637999651e5697c",
       "extension": ".html"
     },
     {
-      "path": "polymythseminars/feeds/unconfirmed.xml",
-      "size": 356910,
-      "sha256": "b0f3108582a0dc58bd8de20cd1cc5a09979fdc0d4b7bc7bc4a8aec930188155d",
+      "path": "polymythseminars/feeds/learning.xml",
+      "size": 368421,
+      "sha256": "f2a5e511e471a5aa52561a6186b81d505de9c89cfb2ea8006ea6d32b5d892507",
       "extension": ".xml"
     },
     {
-      "path": "polymythseminars/feeds/arts.ics",
-      "size": 337286,
-      "sha256": "02ab43df5194c9026ab7ce703aa448fa8a6d02478b1b44216d3a90994ffc5a45",
+      "path": "polymythseminars/feeds/unconfirmed.ics",
+      "size": 340768,
+      "sha256": "5bd7ae5c0fd1eb46db5bfe05c7530d04a8765ed13be1501ae40429c54f2a284a",
       "extension": ".ics"
     },
     {
-      "path": "polymyth/methodologylist/coreplus/index.html",
-      "size": 324194,
-      "sha256": "83d6c60df7dec2b9efc507241f61f483ed05ab0c8dd3f1c46644ec3d83fe6dd0",
-      "extension": ".html"
-    },
-    {
-      "path": "polymythseminars/feeds/toronto.ics",
-      "size": 310399,
-      "sha256": "9235449f762a5c553728b1dd19a2c0c80d33915c2ea04d1484da361431e28414",
+      "path": "polymythseminars/feeds/arts.ics",
+      "size": 310912,
+      "sha256": "830a9cd244bd7e3035736dec46048ba2ac5bad4e3084f42d90ce710f2b154078",
       "extension": ".ics"
     },
     {
@@ -560,22 +548,34 @@
       "extension": ".xml"
     },
     {
-      "path": "polymythseminars/feeds/deadlines.ics",
-      "size": 296823,
-      "sha256": "d1112e4f63142aa31f1395754aa4fbc1fa289ff79a6919f79cfee6a68fe25c2c",
-      "extension": ".ics"
+      "path": "polymythseminars/feeds/unconfirmed.xml",
+      "size": 304275,
+      "sha256": "a127d34ed3ae97b0bde29322ebba59c25bad1f1707eb980e6635f4ad5a7424ca",
+      "extension": ".xml"
     },
     {
-      "path": "polymythseminars/feeds/opportunities.ics",
-      "size": 296823,
-      "sha256": "d1112e4f63142aa31f1395754aa4fbc1fa289ff79a6919f79cfee6a68fe25c2c",
+      "path": "sitemap.xml",
+      "size": 301798,
+      "sha256": "d08a4877b8a5e7aecf1a2319b1088782768c934038d17c20f956fc6d3eaedb79",
+      "extension": ".xml"
+    },
+    {
+      "path": "polymythseminars/feeds/toronto.ics",
+      "size": 292297,
+      "sha256": "d4a365c066bbe69b0f5a0211d8f17c4673b74033b8efbc15f6aeb564a8273bc1",
       "extension": ".ics"
     },
     {
       "path": "polymythseminars/feeds/arts.xml",
-      "size": 289413,
-      "sha256": "ba86ade89c7a41688de31e8b26ace8dc4bb2845a277ce96095a940cfcae48117",
+      "size": 284059,
+      "sha256": "b299408ac5c5dd4407c5f0590a49e1b4cd86b9962f5cf9641d4a17a163d54fcd",
       "extension": ".xml"
+    },
+    {
+      "path": "bookwormcard/print/index.html",
+      "size": 284048,
+      "sha256": "2d3a74ad333fd634be3da52026bc2b6096cd860bbb48f8a699d82b9c6404c30e",
+      "extension": ".html"
     }
   ]
 }

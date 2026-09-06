@@ -56,6 +56,7 @@ const headersSource = textFile('_headers');
 const siteBuilderSource = textFile('scripts/build-polymythcal-discovery-site.js');
 const detailBuilderSource = textFile('scripts/build-polymythcal-audit13.py');
 const feedBuilderSource = textFile('scripts/build-polymythcal-feeds.py');
+const sitemapSource = textFile('sitemap.xml');
 
 const chronology = browse.events || [];
 const watched = watchlist.items || [];
@@ -553,6 +554,7 @@ for (const [relative, shellSurface, language, canonicalUrl] of shellSpecs) {
   check(html.includes(`<html lang="${language}">`), `${relative} has the wrong document language.`);
   check(html.includes(`data-pmd-surface="${shellSurface}"`), `${relative} has the wrong discovery surface.`);
   check(html.includes(`<link rel="canonical" href="${canonicalUrl}">`), `${relative} has the wrong canonical URL.`);
+  check(sitemapSource.includes(`<loc>${canonicalUrl}</loc>`), `${relative} is absent from the canonical sitemap.`);
   check(html.includes(`name="ss-build" content="${release.polymythcal_discovery_asset_version}"`), `${relative} is not bound to the Discovery asset version.`);
   const coreAsset = `/js/polymythcal-discovery-core.js?v=${release.polymythcal_discovery_asset_version}`;
   const runtimeAsset = `/js/polymythcal-discovery.js?v=${release.polymythcal_discovery_asset_version}`;
@@ -836,67 +838,74 @@ for (const token of ['chronology_ids, watchlist_ids', 'excluded {len(watchlist_i
 }
 check(controllerSource.includes("String(event.content_language || 'und').trim()") && !controllerSource.includes('source_language'), 'Card language-of-parts does not use only safe content_language.');
 check(controllerSource.includes('lang="${escapeHtml(lang)}"') && controllerSource.includes('lang="${escapeHtml(eventLanguage(representative))}"'), 'Cards/series do not mark source-language content.');
-check(detailBuilderSource.includes("content_language=str(public_record.get('content_language') or '')") && !detailBuilderSource.includes("public_record.get('source_language')"), 'Detail language-of-parts reads an unsafe raw language field.');
+check(detailBuilderSource.includes("content_language=str(public_record.get('content_language') or 'und')") && !detailBuilderSource.includes("public_record.get('source_language')"), 'Detail language-of-parts reads an unsafe raw language field.');
 
-const typedActionKinds = new Set(PUBLIC_ACTION_CANDIDATE_FIELDS.map(([, kind]) => kind));
-const unavailableWithSafeCandidates = [];
-const recoveredUnavailable = [];
-const recoveredUnavailableByKind = Object.fromEntries([...typedActionKinds].map(kind => [kind, 0]));
-let typedActionRecordCount = 0;
-let typedActionCount = 0;
+const suppressedCandidateRecords = [];
+let suppressedCandidateActionCount = 0;
+let exactExternalDestinationCount = 0;
+let unresolvedDestinationCount = 0;
+let publicExternalActionCount = 0;
+let missingExactExternalActionCount = 0;
+let mismatchedExternalActionCount = 0;
+let broadSourceProjectionCount = 0;
 for (const source of canonical.events) {
   const projected = publicById.get(source.id);
   const actions = projected?.actions || [];
   check(Array.isArray(actions) && actions.length > 0, `Public record ${source.id} has no action model.`);
   const urls = actions.map(action => action?.url);
   check(new Set(urls).size === urls.length, `Public record ${source.id} contains duplicate action URLs.`);
-  check(actions.every(action => ['listing', 'event', 'occurrence', 'series', 'organizer', 'source'].includes(action?.scope)), `Public record ${source.id} has a dishonest/unknown action scope.`);
+  check(actions.every(action => ['listing', 'event', 'series'].includes(action?.scope)), `Public record ${source.id} has a dishonest/unknown action scope.`);
   check(actions.every(action => core.safeHttpUrl(action?.url)), `Public record ${source.id} has an unsafe action URL.`);
   check(
     actions.filter(action => action.kind === 'details').length === 1
       && actions.some(action => action.kind === 'details' && action.scope === 'listing' && action.url === projected.route),
     `Public record ${source.id} lacks one exact stable detail action.`
   );
-  check(actions.filter(action => action.kind === 'source').every(action => action.scope === 'source'), `Public record ${source.id} promotes a general source as an exact listing action.`);
-
-  const expectedScope = parentId(source) || source.series_role === 'parent' || source.destination_scope === 'series'
-    ? 'series'
-    : 'listing';
-  const typedCandidates = [];
-  const candidateUrls = new Set();
-  for (const [field, kind] of PUBLIC_ACTION_CANDIDATE_FIELDS) {
-    const url = String(source[field] || '');
-    if (!url.startsWith('https://') || candidateUrls.has(url)) continue;
-    candidateUrls.add(url);
-    typedCandidates.push({ field, kind, url });
-    check(actions.some(action => action.kind === kind && action.url === url && action.scope === expectedScope), `Public record ${source.id} suppresses or mis-scopes safe ${field}.`);
-  }
-  const typed = actions.filter(action => typedActionKinds.has(action.kind));
-  if (typed.length) typedActionRecordCount += 1;
-  typedActionCount += typed.length;
-  if (source.destination_status === 'unavailable-specific-page' && typedCandidates.length) {
-    unavailableWithSafeCandidates.push(source.id);
-    if (typedCandidates.every(candidate => actions.some(action => action.kind === candidate.kind && action.url === candidate.url))) {
-      recoveredUnavailable.push(source.id);
-      for (const kind of new Set(typedCandidates.map(candidate => candidate.kind))) recoveredUnavailableByKind[kind] += 1;
-    }
-  }
-
+  const externalActions = actions.filter(action => String(action?.url || '').startsWith('https://'));
+  publicExternalActionCount += externalActions.length;
   const destinationAvailable = String(source.destination_url || '').startsWith('https://')
     && source.destination_status !== 'unavailable-specific-page';
-  const sourceUrl = String(source.source_url || '');
-  const sourceClaimedElsewhere = destinationAvailable && source.destination_url === sourceUrl
-    || candidateUrls.has(sourceUrl);
-  if (sourceUrl.startsWith('https://') && !sourceClaimedElsewhere) {
-    check(actions.some(action => action.kind === 'source' && action.scope === 'source' && action.url === sourceUrl), `Source-only URL for ${source.id} was suppressed or promoted.`);
+  if (destinationAvailable) {
+    exactExternalDestinationCount += 1;
+    if (!externalActions.some(action => action.url === source.destination_url)) missingExactExternalActionCount += 1;
+    check(externalActions.length === 1, `Public record ${source.id} must expose exactly one external destination action.`);
+    if (externalActions[0]) {
+      check(externalActions[0].url === source.destination_url, `Public record ${source.id} exposed a non-materialized destination.`);
+      check(externalActions[0].kind === source.destination_kind, `Public record ${source.id} destination kind drifted.`);
+      check(externalActions[0].scope === source.destination_scope, `Public record ${source.id} destination scope drifted.`);
+    }
+  } else {
+    unresolvedDestinationCount += 1;
+    check(externalActions.length === 0, `Unresolved public record ${source.id} exposed an external action.`);
+  }
+  mismatchedExternalActionCount += externalActions
+    .filter(action => !destinationAvailable || action.url !== source.destination_url).length;
+
+  const candidateUrls = new Set();
+  for (const [field] of PUBLIC_ACTION_CANDIDATE_FIELDS) {
+    const url = String(source[field] || '');
+    if (!url.startsWith('https://') || url === source.destination_url || candidateUrls.has(url)) continue;
+    candidateUrls.add(url);
+    check(!externalActions.some(action => action.url === url), `Public record ${source.id} exposed unverified candidate ${field}.`);
+  }
+  if (candidateUrls.size) suppressedCandidateRecords.push(source.id);
+  suppressedCandidateActionCount += candidateUrls.size;
+
+  const researchSources = researchById.get(source.id)?.sources || [];
+  for (const researchSource of researchSources) {
+    const exactSource = destinationAvailable
+      && researchSource.url === source.destination_url
+      && researchSource.url === source.source_url;
+    if (!exactSource) broadSourceProjectionCount += 1;
+    check(exactSource, `Research record ${source.id} exposed a broad or replacement source as original evidence.`);
   }
 }
-check(unavailableWithSafeCandidates.length === 108, `Safe unavailable-destination candidate inventory changed (${unavailableWithSafeCandidates.length}/108).`);
-check(recoveredUnavailable.length === unavailableWithSafeCandidates.length, `Only ${recoveredUnavailable.length}/${unavailableWithSafeCandidates.length} safe unavailable-destination candidates were recovered.`);
-check(
-  JSON.stringify(recoveredUnavailableByKind) === JSON.stringify({ registration: 62, application: 16, submission: 30, rules: 0, tickets: 0, stream: 0 }),
-  `Recovered typed-action kinds changed: ${JSON.stringify(recoveredUnavailableByKind)}.`
-);
+check(exactExternalDestinationCount === 804, `Exact external destination inventory changed (${exactExternalDestinationCount}/804).`);
+check(unresolvedDestinationCount === 1284, `Unresolved destination inventory changed (${unresolvedDestinationCount}/1284).`);
+check(publicExternalActionCount === exactExternalDestinationCount, `Public external actions do not map one-to-one to exact destinations (${publicExternalActionCount}/${exactExternalDestinationCount}).`);
+check(missingExactExternalActionCount === 0, `${missingExactExternalActionCount} exact destinations are missing from public actions.`);
+check(mismatchedExternalActionCount === 0, `${mismatchedExternalActionCount} non-materialized external actions leaked.`);
+check(broadSourceProjectionCount === 0, `${broadSourceProjectionCount} broad Research sources leaked.`);
 for (const label of ['registration: \'Register\'', 'application: \'Apply\'', 'submission: \'Submit\'', 'rules: \'Rules\'', 'source: \'Source record\'']) {
   check(controllerSource.includes(label), `English typed-action label is missing: ${label}.`);
 }
@@ -927,16 +936,16 @@ check(report.research_raw_bytes === researchBytes.length, 'Discovery report Rese
 check(report.research_gzip_bytes === researchGzipBytes, 'Discovery report Research gzip size is stale.');
 check(JSON.stringify(report.persisted_search_groups) === JSON.stringify(PERSISTED_SEARCH_GROUPS), 'Discovery report persisted search groups are stale.');
 check(JSON.stringify(report.derived_search_groups) === JSON.stringify(SEARCH_GROUPS), 'Discovery report derived search groups are stale.');
-check(
-  JSON.stringify(report.typed_action_candidate_fields) === JSON.stringify(PUBLIC_ACTION_CANDIDATE_FIELDS.map(([field, kind]) => ({ field, kind }))),
-  'Discovery report typed-action candidate allowlist is stale.'
-);
-check(report.unavailable_with_safe_candidate_count === unavailableWithSafeCandidates.length, 'Discovery report unavailable candidate count is stale.');
-check(report.typed_action_recovered_unavailable_record_count === recoveredUnavailable.length, 'Discovery report recovered candidate count is stale.');
-check(JSON.stringify(report.typed_action_recovered_unavailable_by_kind) === JSON.stringify(recoveredUnavailableByKind), 'Discovery report recovered candidate kinds are stale.');
-check(report.typed_action_total_record_count === typedActionRecordCount, 'Discovery report typed-action record count is stale.');
-check(report.typed_action_total_action_count === typedActionCount, 'Discovery report typed-action total is stale.');
-check(report.typed_action_recovery_complete === true, 'Discovery report does not certify complete typed-action recovery.');
+check(report.destination_policy === 'materialized-exact-destination-only', 'Discovery report destination policy is stale.');
+check(report.exact_external_destination_count === exactExternalDestinationCount, 'Discovery report exact destination count is stale.');
+check(report.unresolved_destination_count === unresolvedDestinationCount, 'Discovery report unresolved destination count is stale.');
+check(report.suppressed_broad_destination_count === unresolvedDestinationCount, 'Discovery report suppressed broad destination count is stale.');
+check(report.public_external_action_count === publicExternalActionCount, 'Discovery report public external action count is stale.');
+check(report.missing_exact_external_action_count === missingExactExternalActionCount, 'Discovery report missing exact action count is stale.');
+check(report.mismatched_external_action_count === mismatchedExternalActionCount, 'Discovery report mismatched action count is stale.');
+check(report.broad_source_projection_count === broadSourceProjectionCount, 'Discovery report broad Research source count is stale.');
+check(report.suppressed_unverified_candidate_record_count === suppressedCandidateRecords.length, 'Discovery report suppressed candidate record count is stale.');
+check(report.suppressed_unverified_candidate_action_count === suppressedCandidateActionCount, 'Discovery report suppressed candidate action count is stale.');
 
 if (failures.length) {
   console.error('POLYMYTHCAL DISCOVERY V2 CHECK FAILED');

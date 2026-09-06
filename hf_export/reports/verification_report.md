@@ -1,6 +1,6 @@
 # Meaninglib dataset verification report
 
-Generated: 2026-08-15T18:00:00-04:00
+Generated: 2026-09-05T20:15:00.000Z
 
 Failures: 0
 Warnings: 0
@@ -14,10 +14,30 @@ Warnings: 0
 - PASS: found hf_export/data/relations/crossrefs.jsonl
 - PASS: found hf_export/reports/latest_export_report.md
 - PASS: found hf_export/schemas/meaninglib_entry.schema.json
-- PASS: total rows: 1998
-- PASS: all export rows share one timestamp: 2026-08-26T13:47:41.848Z
-- PASS: ML row count exactly matches canonical: 1218
-- PASS: all_meaninglib_rows contains exactly 1218 canonical ML rows
+- PASS: total rows: 2004
+- PASS: all export rows share one timestamp: 2026-09-05T20:15:00.000Z
+- PASS: export timestamp matches deterministic build timestamp 2026-09-05T20:15:00.000Z
+- PASS: ML row count exactly matches canonical: 1224
+- PASS: all_meaninglib_rows contains exactly 1224 canonical ML rows
+- PASS: main methodologylist JSONL exactly matches 1224 canonical ML rows
+- PASS: all_meaninglib_rows ML subset exactly matches 1224 canonical ML rows
+- PASS: ML section JSONL file set exactly matches all 16 canonical sections
+- PASS: section JSONL analysis exactly matches 29 canonical ML rows
+- PASS: section JSONL citation exactly matches 341 canonical ML rows
+- PASS: section JSONL corehistory exactly matches 30 canonical ML rows
+- PASS: section JSONL coreplus exactly matches 54 canonical ML rows
+- PASS: section JSONL degorgonification exactly matches 54 canonical ML rows
+- PASS: section JSONL framework-core exactly matches 1 canonical ML rows
+- PASS: section JSONL gorgonification exactly matches 134 canonical ML rows
+- PASS: section JSONL idiomary exactly matches 44 canonical ML rows
+- PASS: section JSONL learnings exactly matches 28 canonical ML rows
+- PASS: section JSONL methodology exactly matches 390 canonical ML rows
+- PASS: section JSONL pending exactly matches 18 canonical ML rows
+- PASS: section JSONL pending-user-authorship exactly matches 2 canonical ML rows
+- PASS: section JSONL polycognate exactly matches 24 canonical ML rows
+- PASS: section JSONL rainbowsol exactly matches 3 canonical ML rows
+- PASS: section JSONL sabachtan exactly matches 34 canonical ML rows
+- PASS: section JSONL studylist exactly matches 38 canonical ML rows
 - PASS: bb row count 246
 - PASS: mc row count 234
 - PASS: cc row count 296

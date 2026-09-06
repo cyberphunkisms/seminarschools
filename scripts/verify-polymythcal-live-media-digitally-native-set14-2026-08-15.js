@@ -144,7 +144,7 @@ for (const field of SET_FIELDS) assert(schema.properties?.[field], `Schema missi
 assert(equal(schema.properties.live_digital_formats.items.enum, FORMATS), 'Schema Set 14 format enum drifted');
 assert(equal(schema.properties.synchronous_status.enum, SYNCHRONOUS), 'Schema Set 14 synchronous enum drifted');
 
-const taxonomy = readJson('polymythseminars/browse.json').taxonomy;
+const taxonomy = readJson('polymythseminars/research.json').taxonomy;
 for (const format of FORMATS) {
   const label = taxonomy?.axes?.digitalFormats?.values?.[format];
   assert(label?.en && label?.fr, `Bilingual Research taxonomy lacks Set 14 facet ${format}`);
@@ -160,28 +160,42 @@ if (!sourceOnly) {
   const canonical = list(readJson('polymythseminars/events.json'));
   const browse = readJson('polymythseminars/browse.json');
   const watchlist = readJson('polymythseminars/watchlist.json');
+  const research = readJson('polymythseminars/research.json');
+  const surfaces = readJson('data/polymythcal-publication-surfaces.json');
   const browser = [...list(browse), ...(watchlist.items || [])];
   const canonicalById = new Map(canonical.map(event => [event.id, event]));
   const browserById = new Map(browser.map(event => [event.id, event]));
+  const researchById = new Map((research.records || []).map(event => [event.id, event]));
+  const chronologyIds = new Set(surfaces.chronology_ids || []);
+  const watchlistIds = new Set(surfaces.watchlist_ids || []);
   assert(canonical.length === browser.length, 'Set 14 safe public partition count differs');
   assert(!exists('public/polymythseminars/events.json'), 'Private canonical events.json leaked into public/');
   assert(exists('public/polymythseminars/browse.json'), 'Public browse.json missing');
   assert(fs.readFileSync(path.join(root, 'polymythseminars/browse.json')).equals(fs.readFileSync(path.join(root, 'public/polymythseminars/browse.json'))), 'Browse mirrors differ');
   assert(fs.readFileSync(path.join(root, 'polymythseminars/watchlist.json')).equals(fs.readFileSync(path.join(root, 'public/polymythseminars/watchlist.json'))), 'Watchlist mirrors differ');
+  assert(fs.readFileSync(path.join(root, 'polymythseminars/research.json')).equals(fs.readFileSync(path.join(root, 'public/polymythseminars/research.json'))), 'Research mirrors differ');
   for (const authored of tagged) {
     const output = canonicalById.get(authored.id);
     const compact = browserById.get(authored.id);
+    const specialist = researchById.get(authored.id);
     assert(output && compact, `${authored.id}: absent from canonical or safe public outputs`);
     for (const field of SET_FIELDS) {
       if (!Object.hasOwn(authored, field)) continue;
       assert(equal(output[field], authored[field]), `${authored.id}: canonical ${field} differs from manual`);
       assert(!Object.hasOwn(compact, field), `${authored.id}: safe discovery data exposes private ${field}`);
     }
-    assert(equal(compact.facets?.digitalFormats || [], authored.live_digital_formats), `${authored.id}: public digitalFormats facets differ from manual`);
+    if (chronologyIds.has(authored.id)) {
+      assert(specialist, `${authored.id}: absent from the lazy Research projection`);
+      assert(equal(specialist?.facets?.digitalFormats || [], authored.live_digital_formats), `${authored.id}: Research digitalFormats facets differ from manual`);
+      for (const field of SET_FIELDS) assert(!Object.hasOwn(specialist || {}, field), `${authored.id}: Research projection exposes private ${field}`);
+    } else {
+      assert(watchlistIds.has(authored.id), `${authored.id}: missing from the chronology/watchlist publication partition`);
+      assert(!specialist, `${authored.id}: monitoring record leaked into the chronology-only Research projection`);
+    }
     const detailRel = `polymythseminars/events/${authored.id}/index.html`;
-    const isChronology = (readJson('data/polymythcal-publication-surfaces.json').chronology_ids || []).includes(authored.id);
-    assert(exists(detailRel) === isChronology, `${authored.id}: dated detail-route publication boundary is wrong`);
-    if (isChronology) assert(readText(detailRel).includes('pm-event-context'), `${authored.id}: detail context missing`);
+    const detailFrRel = `polymythseminars/fr/events/${authored.id}/index.html`;
+    assert(exists(detailRel) && exists(detailFrRel), `${authored.id}: stable EN/FR detail-route pair is missing`);
+    if (exists(detailRel)) assert(readText(detailRel).includes('pm-event-context'), `${authored.id}: detail context missing`);
   }
   const pkg = readJson('package.json');
   const build = String(pkg.scripts?.['build:locked'] || '');
@@ -208,4 +222,3 @@ console.log(JSON.stringify({
   source_records: 22,
   source_only: sourceOnly
 }, null, 2));
-

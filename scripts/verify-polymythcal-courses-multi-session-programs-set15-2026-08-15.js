@@ -7,6 +7,7 @@ const path = require('path');
 const root = path.resolve(__dirname, '..');
 const readJson = rel => JSON.parse(fs.readFileSync(path.join(root, rel), 'utf8'));
 const readText = rel => fs.readFileSync(path.join(root, rel), 'utf8');
+const exists = rel => fs.existsSync(path.join(root, rel));
 const assert = (ok, message) => { if (!ok) throw new Error(message); };
 const list = value => Array.isArray(value) ? value : (value.events || []);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
@@ -24,6 +25,8 @@ const consolidated = list(readJson('data/polymyth-seminar-events.json'));
 const published = list(readJson('polymythseminars/events.json'));
 const browseDoc = readJson('polymythseminars/browse.json');
 const watchlistDoc = readJson('polymythseminars/watchlist.json');
+const researchDoc = readJson('polymythseminars/research.json');
+const surfaces = readJson('data/polymythcal-publication-surfaces.json');
 const browser = [...list(browseDoc), ...(watchlistDoc.items || [])];
 const schema = readJson('data/polymythcal-event-schema-v2.json');
 const sourcesDoc = readJson('scripts/sources.json');
@@ -71,6 +74,9 @@ const byId = new Map(manual.map(event => [event.id, event]));
 const consolidatedById = new Map(consolidated.map(event => [event.id, event]));
 const publishedById = new Map(published.map(event => [event.id, event]));
 const browserById = new Map(browser.map(event => [event.id, event]));
+const researchById = new Map((researchDoc.records || []).map(event => [event.id, event]));
+const chronologyIds = new Set(surfaces.chronology_ids || []);
+const watchlistIds = new Set(surfaces.watchlist_ids || []);
 const idCounts = new Map();
 const identityOwners = new Map();
 const signatureOwners = new Map();
@@ -204,6 +210,7 @@ for (const id of expectedIds) {
   const canonical = consolidatedById.get(id);
   const publicEvent = publishedById.get(id);
   const compact = browserById.get(id);
+  const specialist = researchById.get(id);
   assert(canonical && publicEvent && compact, `${id}: missing from canonical, public, or browser calendar after build`);
   for (const field of set15Fields) {
     if (!Object.hasOwn(event, field)) continue;
@@ -211,8 +218,22 @@ for (const id of expectedIds) {
     assert(same(publicEvent[field], event[field]), `${id}: public Set 15 field differs: ${field}`);
     assert(!Object.hasOwn(compact, field), `${id}: safe discovery data exposes private Set 15 field ${field}`);
   }
-  assert(same(compact.facets?.programFormats || [], event.course_program_formats), `${id}: safe programFormats facets differ from the authored Set 15 values`);
+  if (chronologyIds.has(id)) {
+    assert(specialist, `${id}: missing from the lazy Research projection`);
+    assert(same(specialist?.facets?.programFormats || [], event.course_program_formats), `${id}: Research programFormats facets differ from the authored Set 15 values`);
+    for (const field of set15Fields) assert(!Object.hasOwn(specialist || {}, field), `${id}: Research projection exposes private Set 15 field ${field}`);
+  } else {
+    assert(watchlistIds.has(id), `${id}: missing from the chronology/watchlist publication partition`);
+    assert(!specialist, `${id}: monitoring record leaked into the chronology-only Research projection`);
+  }
+  assert(
+    exists(`polymythseminars/events/${id}/index.html`) && exists(`polymythseminars/fr/events/${id}/index.html`),
+    `${id}: stable EN/FR detail-route pair is missing`,
+  );
 }
+
+assert(exists('public/polymythseminars/research.json'), 'Public Research projection is missing');
+assert(fs.readFileSync(path.join(root, 'polymythseminars/research.json')).equals(fs.readFileSync(path.join(root, 'public/polymythseminars/research.json'))), 'Research mirrors differ');
 
 console.log(JSON.stringify({
   status: 'pass',
@@ -229,4 +250,3 @@ console.log(JSON.stringify({
   browser_records: browser.length,
   second_run_additions: meta.records_added_latest_run,
 }, null, 2));
-

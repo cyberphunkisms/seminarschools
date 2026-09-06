@@ -1,0 +1,47 @@
+{
+  "schema": "seminar-schools-ielts-rubric-release-verification-v1",
+  "checked_on": "2026-09-05",
+  "route": "https://seminarschools.com/teacherresources/ieltsrubric/",
+  "pdf": {
+    "source_path": "teacherresources/ieltsrubric/ielts-band-guide-and-assessment-rubric.pdf",
+    "public_path": "public/teacherresources/ieltsrubric/ielts-band-guide-and-assessment-rubric.pdf",
+    "sha256": "fdc89250261d011cfb9eed74f0ff3f24c52a23e8f7adc7c6d5efeb6002a35f04",
+    "bytes": 1275044,
+    "pages": 64,
+    "section_count": 15,
+    "footer_text": "seminarschools.com/teacherresources/ieltsrubric",
+    "footer_link_target": "https://seminarschools.com/teacherresources/ieltsrubric",
+    "footer_text_pages": 64,
+    "footer_link_pages": 64,
+    "accessibility_audit": {
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    }
+  },
+  "site": {
+    "source_public_parity": "passed",
+    "release_asset_identity": "passed",
+    "teacher_resource_finder": "passed",
+    "visible_geometry_static": "passed",
+    "front_facing_boundary": "passed",
+    "front_facing_route_inventory": "passed",
+    "site_integrity": "passed",
+    "seo": "passed",
+    "sitemap_entry": "passed",
+    "fixed_point_scope": "complete public deployment tree",
+    "fixed_point_digest_before": "a6e5b3c13a563e99ae89074b87b76da5eb648e220e8a7968aa68809341ce3e70",
+    "fixed_point_digest_after": "a6e5b3c13a563e99ae89074b87b76da5eb648e220e8a7968aa68809341ce3e70"
+  },
+  "editable_bundle": {
+    "path": "../EDITABLE_MASTERS/08_IELTS_RUBRIC",
+    "payload_files": 7,
+    "manifest_check": "passed",
+    "public_pdf_byte_identity": "passed"
+  },
+  "browser_gate": {
+    "status": "not_run",
+    "reason": "No compatible Chromium executable was present and the Playwright Chromium download timed out. Static route inventory, responsive CSS inspection, geometry, integrity, SEO, and source-public parity checks passed."
+  },
+  "certification_scope": "Verified IELTS successor package. No claim of a complete historical clean-room rebuild or full browser certification."
+}

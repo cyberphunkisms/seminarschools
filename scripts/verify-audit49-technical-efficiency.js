@@ -813,7 +813,13 @@ const reusedPreparation = section(
   'const reusedBuildPreparation = [',
   'const sequential = [',
 );
-const sequentialSection = section(runner, 'const sequential = [', 'const checks = [');
+const sequentialSection = section(runner, 'const sequential = [', 'const concurrentReadOnlySweeps = [');
+const concurrentSweepSection = section(
+  runner,
+  'const concurrentReadOnlySweeps = [',
+  'const finalSequential = [',
+);
+const finalSequentialSection = section(runner, 'const finalSequential = [', 'const checks = [');
 const checksSection = section(
   runner,
   'const checks = [',
@@ -849,28 +855,26 @@ for (const token of [
   );
 }
 check(
-  sequentialSection.includes('verify-build-idempotence.js')
-    && sequentialSection.indexOf('verify-build-idempotence.js')
-      < sequentialSection.indexOf('verify-visible-geometry-browser.mjs'),
-  'sequential runner does not enforce a fixed-point build before browser verification',
-);
-check(
-  count(runner, 'node scripts/verify-polymythcal-sets13-15-browser.js') === 1
+  [
+    'verify-front-facing-overlap-browser.js',
+    'verify-visible-geometry-browser.mjs',
+    'verify-teacherresources-state-layout-browser.js',
+    'verify-home-map-browser.js',
+    'verify-polymythcal-sets13-15-browser.js',
+    'verify-polymythcal-destination-browser.js',
+  ].every(token => concurrentSweepSection.includes(token))
+    && count(runner, 'node scripts/verify-build-idempotence.js') === 1
+    && sequentialSection.includes('node scripts/verify-build-idempotence.js')
+    && !concurrentSweepSection.includes('node scripts/verify-build-idempotence.js')
+    && count(runner, 'node scripts/verify-front-facing-overlap-browser.js') === 1
+    && count(runner, 'node scripts/verify-visible-geometry-browser.mjs') === 1
+    && count(runner, 'node scripts/verify-polymythcal-sets13-15-browser.js') === 1
+    && count(runner, 'node scripts/verify-polymythcal-destination-browser.js') === 1
     && !runner.includes('node scripts/verify-polymythcal-sets13-15-browser.js --dom-only')
-    && sequentialSection.indexOf('verify-polymythcal-sets13-15-browser.js')
-      > sequentialSection.indexOf('verify-home-map-browser.js')
-    && sequentialSection.indexOf('verify-polymythcal-sets13-15-browser.js')
-      < sequentialSection.indexOf('verify-visible-geometry-browser.mjs'),
-  'sequential release runner does not enforce the full Sets 13-15 browser gate after home and before geometry',
-);
-check(
-  count(runner, 'node scripts/verify-polymythcal-destination-browser.js') === 1
-    && sequentialSection.indexOf('verify-polymythcal-destination-browser.js')
-      > sequentialSection.indexOf('verify-polymythcal-sets13-15-browser.js')
-    && sequentialSection.indexOf('verify-polymythcal-destination-browser.js')
-      < sequentialSection.indexOf('verify-visible-geometry-browser.mjs')
+    && runner.includes('Math.min(concurrency, 3, concurrentReadOnlySweeps.length)')
+    && runner.includes('await Promise.all(Array.from({ length: sweepConcurrency }, sweepWorker))')
     && !build.includes('verify-polymythcal-destination-browser.js'),
-  'sequential release runner does not enforce the destination browser gate after Sets 13-15 and outside production',
+  'runner does not serialize idempotence before the complete bounded browser sweep pool',
 );
 check(
   count(runner, 'node scripts/verify-polymythcal-destination-specificity.js') === 1
@@ -883,12 +887,14 @@ check(
   'sequential runner does not refresh Audit 48 external evidence',
 );
 check(
-  sequentialSection.includes('verify-audit49-technical-efficiency.js'),
-  'sequential runner does not execute the Audit 49 aggregate',
+  finalSequentialSection.includes('verify-audit49-technical-efficiency.js'),
+  'final sequential runner does not execute the Audit 49 aggregate',
 );
 check(
-  sequentialSection.indexOf('verify-audit49-technical-efficiency.js')
-    > sequentialSection.indexOf('verify-audit48-external-validation.js'),
+  runner.indexOf('const finalSequential = [') > runner.indexOf('const sequential = [')
+    && runner.indexOf("for (const cmd of finalSequential)")
+      > runner.indexOf('await Promise.all(Array.from({ length: Math.max(1, concurrency) }, worker))')
+    && sequentialSection.includes('verify-audit48-external-validation.js'),
   'Audit 49 aggregate executes before Audit 48 external evidence',
 );
 check(

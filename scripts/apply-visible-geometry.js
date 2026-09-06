@@ -12,11 +12,15 @@ const {
   assertGeometryVersionScheme,
   geometryBodyAttributes,
   geometryAssetVersion,
+  geometryExemptionForRelativeHtmlPath,
   geometryKeyForRelativeHtmlPath,
   geometryProfileFor,
   geometryRegisterForKey,
   geometrySeedForKey,
+  isStarPageRelativeHtmlPath,
+  validGeometryOpacity,
 } = require('./lib/geometry-asset-version');
+const { refreshTranslationGovernanceForSources } = require('./lib/translation-governance');
 const ROOT = path.resolve(__dirname, '..');
 const GEOMETRY_CONTRACTS = JSON.parse(
   fs.readFileSync(path.join(ROOT, 'data', 'geometry-route-contracts.json'), 'utf8'),
@@ -122,16 +126,34 @@ function ensureHead(html) {
   html = html.replace(/<\/head>/i, `<link rel="stylesheet" href="/css/calm-ux.css?v=${STEADY_VERSION}">\n</head>`);
   return html;
 }
-function ensureBody(html, r, routeType) {
+function ensureBody(html, r, routeType, pageOwnedIntensity) {
   return html.replace(/<body\b([^>]*)>/i, (m, attrs) => {
     let a = attrs || '';
-    for (const attribute of ['data-route-type', 'data-geometry', 'data-indra-intensity', 'data-geometry-role', 'data-geometry-key', 'data-geometry-seed', 'data-geometry-register', 'data-geometry-profile', 'data-geometry-surface', 'data-front-facing']) {
+    for (const attribute of ['data-route-type', 'data-geometry', 'data-indra-intensity', 'data-indra-fade-source', 'data-geometry-role', 'data-geometry-key', 'data-geometry-seed', 'data-geometry-register', 'data-geometry-profile', 'data-geometry-surface', 'data-geometry-engine', 'data-star-file-page', 'data-shared-geometry-exempt', 'data-front-facing']) {
       const pattern = new RegExp(`\\s+${attribute}\\s*=\\s*(["'])[^"']*\\1`, 'ig');
       a = a.replace(pattern, '');
     }
-    const geometry = ` ${geometryBodyAttributes(GEOMETRY_CONTRACTS, r, routeType)}`;
+    const geometry = ` ${geometryBodyAttributes(GEOMETRY_CONTRACTS, r, routeType, { pageOwnedIntensity })}`;
     return `<body${geometry}${a}>`;
   });
+}
+
+function ensureExemptBody(html, exemption) {
+  return html.replace(/<body\b([^>]*)>/i, (m, attrs) => {
+    let a = attrs || '';
+    a = a.replace(/\s+data-(?:geometry(?:-[\w-]+)?|indra-(?:intensity|fade-source)|star-file-page|shared-geometry-exempt)\s*=\s*(["'])[^"']*\1/ig, '');
+    const starMarker = exemption === GEOMETRY_CONTRACTS.coverage.star_page_exemption_value
+      ? ' data-star-file-page="true"'
+      : '';
+    return `<body data-shared-geometry-exempt="${exemption}"${starMarker}${a}>`;
+  });
+}
+
+function removeGeometryScripts(html) {
+  return html.replace(
+    /<script\b(?=[^>]*\bsrc=["'][^"']*\/js\/(?:mandala|indra)\.js(?:\?[^"']*)?["'])[^>]*>\s*<\/script>[ \t]*(?:\r?\n)?/ig,
+    '',
+  );
 }
 function ensureScripts(html) {
   if (!/<\/body>/i.test(html)) return html;
@@ -151,27 +173,90 @@ function ensureScripts(html) {
   return html;
 }
 
-function removeLegacyLayerOpacity(html) {
-  /* Page-local opacity ownership predates the register contract and can use
-     !important to defeat the canonical level. Remove only that declaration;
-     unrelated historic inline styling remains byte-stable. */
-  return html.replace(/#indraLayer\s*\{([^{}]*)\}/gi, (rule, declarations) => {
-    const kept = declarations.replace(/(?:^|;)\s*opacity\s*:\s*[^;}]+\s*(?=;|$);?/gi, ';');
-    return kept.replace(/[;\s]+/g, '') ? `#indraLayer {${kept}}` : '';
+function normalizePageOwnedLayerOpacity(html) {
+  const property = GEOMETRY_CONTRACTS.presentation.page_owned_opacity_property;
+  if (property !== '--indra-opacity') {
+    throw new Error('geometry page-owned opacity property must be --indra-opacity');
+  }
+  let pageOwnedIntensity = null;
+  const remember = value => {
+    const opacity = validGeometryOpacity(GEOMETRY_CONTRACTS, value);
+    if (opacity !== null) pageOwnedIntensity = opacity;
+  };
+  const declarationPattern = /--indra-opacity\s*:\s*([+]?(?:\d+(?:\.\d*)?|\.\d+))(?:\s*!important)?\s*(?:;|$)/ig;
+
+  /* Older page owners wrote a numeric opacity directly on #indraLayer. Alive
+     loads last, so translate only valid numeric declarations to the inherited
+     custom property instead of deleting the page's design decision. */
+  html = html.replace(/(<style\b[^>]*>)([\s\S]*?)(<\/style>)/ig, (whole, open, css, close) => {
+    const normalizedCss = css.replace(/#indraLayer\s*\{([^{}]*)\}/gi, (rule, declarations) => {
+      const normalizedDeclarations = declarations.replace(
+        /(^|;)\s*opacity\s*:\s*([+]?(?:\d+(?:\.\d*)?|\.\d+))(\s*!important)?\s*(?=;|$)/ig,
+        (declaration, separator, value, important) => {
+          const opacity = validGeometryOpacity(GEOMETRY_CONTRACTS, value);
+          if (opacity === null) return declaration;
+          remember(opacity);
+          return `${separator}${property}:${opacity.toFixed(3)}${important || ''}`;
+        },
+      );
+      return `#indraLayer {${normalizedDeclarations}}`;
+    });
+    for (const match of normalizedCss.matchAll(declarationPattern)) remember(match[1]);
+    return open + normalizedCss + close;
   });
+
+  const body = /<body\b[^>]*>/i.exec(html);
+  if (body) {
+    const inlineStyle = /\bstyle\s*=\s*(["'])([\s\S]*?)\1/i.exec(body[0]);
+    if (inlineStyle) {
+      for (const match of inlineStyle[2].matchAll(declarationPattern)) remember(match[1]);
+    }
+  }
+  return { html, pageOwnedIntensity };
+}
+
+function removeLegacyLayerOpacity(html) {
+  return normalizePageOwnedLayerOpacity(html).html;
+}
+
+function existingBodyIntensity(html, r) {
+  const body = /<body\b[^>]*>/i.exec(html);
+  if (!body) return null;
+  const match = /\bdata-indra-intensity\s*=\s*(["'])([^"']+)\1/i.exec(body[0]);
+  const intensity = validGeometryOpacity(GEOMETRY_CONTRACTS, match && match[2]);
+  if (intensity === null) return null;
+  const register = geometryRegisterForKey(geometryKeyFor(r));
+  const registerIntensity = Number(GEOMETRY_CONTRACTS.registers[register].default_intensity);
+  return Math.abs(intensity - registerIntensity) > 0.0005 ? intensity : null;
 }
 
 function applyGeometryToHtml(html, r) {
+  const exemption = geometryExemptionForRelativeHtmlPath(GEOMETRY_CONTRACTS, r);
+  if (exemption) {
+    html = ensureHead(html);
+    html = ensureExemptBody(html, exemption);
+    html = removeGeometryScripts(html);
+    return html;
+  }
   const routeType = routeTypeFor(r, html);
-  html = removeLegacyLayerOpacity(html);
+  const existingIntensity = existingBodyIntensity(html, r);
+  const normalizedOpacity = normalizePageOwnedLayerOpacity(html);
+  html = normalizedOpacity.html;
+  const pageOwnedIntensity = normalizedOpacity.pageOwnedIntensity === null
+    ? existingIntensity
+    : normalizedOpacity.pageOwnedIntensity;
   html = ensureHead(html);
-  html = ensureBody(html, r, routeType);
+  html = ensureBody(html, r, routeType, pageOwnedIntensity);
   html = ensureScripts(html);
   return html;
 }
 
 function applyAllSourcePages() {
   let changed = 0;
+  const changedSources = new Set();
+  let geometryPages = 0;
+  let starPages = 0;
+  let controlPages = 0;
   const files = walk(ROOT);
   for (const file of files) {
     const r = rel(file);
@@ -181,11 +266,16 @@ function applyAllSourcePages() {
       if (html !== GOOGLE_TOKEN_TEXT) throw new Error(`${GOOGLE_TOKEN}: verification token bytes changed`);
       continue;
     }
+    const exemption = geometryExemptionForRelativeHtmlPath(GEOMETRY_CONTRACTS, r);
+    if (exemption === GEOMETRY_CONTRACTS.coverage.star_page_exemption_value) starPages += 1;
+    else if (exemption === GEOMETRY_CONTRACTS.coverage.control_page_exemption_value) controlPages += 1;
+    else geometryPages += 1;
     const old = html;
     html = applyGeometryToHtml(html, r);
     if (html !== old) {
       fs.writeFileSync(file, html, 'utf8');
       changed += 1;
+      changedSources.add(r);
     }
     // Artifact workspaces may restore an older extracted copy when a rewrite
     // falls back from its future release-stamp mtime to wall-clock time. Keep a
@@ -200,18 +290,33 @@ function applyAllSourcePages() {
       fs.utimesSync(file, preserved, preserved);
     }
   }
-  console.log(`STEADY GEOMETRY APPLY — ${changed} of ${files.length} source HTML files updated with ${GEOMETRY_VERSION}.`);
+  if (starPages !== Number(GEOMETRY_CONTRACTS.coverage.expected_current_star_pages)) {
+    throw new Error(`expected ${GEOMETRY_CONTRACTS.coverage.expected_current_star_pages} canonical star pages, found ${starPages}`);
+  }
+  if (controlPages !== Number(GEOMETRY_CONTRACTS.coverage.expected_current_control_pages_source)) {
+    throw new Error(`expected ${GEOMETRY_CONTRACTS.coverage.expected_current_control_pages_source} source-only control pages, found ${controlPages}`);
+  }
+  /* Geometry rewrites only presentation metadata/assets, never localized
+     prose. Keep the translation ledger aligned with those exact mechanical
+     rewrites so a final geometry pass cannot invalidate an otherwise clean
+     release. Arbitrary content writers remain responsible for rebuilding
+     translations instead of calling this source-scoped helper. */
+  refreshTranslationGovernanceForSources(ROOT, changedSources);
+  console.log(`STEADY GEOMETRY APPLY — ${changed} of ${files.length} source HTML files updated; ${geometryPages} ordinary pages carry ${GEOMETRY_VERSION}, ${starPages} canonical star pages and ${controlPages} source-only controls remain shared-geometry-free.`);
 }
 
 module.exports = {
   GEOMETRY_VERSION,
   applyGeometryToHtml,
+  geometryExemptionForRelativeHtmlPath: r => geometryExemptionForRelativeHtmlPath(GEOMETRY_CONTRACTS, r),
   removeLegacyLayerOpacity,
+  normalizePageOwnedLayerOpacity,
   geometryKeyFor,
   profileFor,
   registerFor,
   routeTypeFor,
   seedFor,
+  isStarPageRelativeHtmlPath: r => isStarPageRelativeHtmlPath(GEOMETRY_CONTRACTS, r),
 };
 
 if (require.main === module) applyAllSourcePages();

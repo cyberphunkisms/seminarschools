@@ -3,12 +3,16 @@ const fs = require('fs');
 const path = require('path');
 const {resolveSiteBuildDate} = require('./polymythcal-build-date');
 const {geometryBodyAttributes} = require('./lib/geometry-asset-version');
+const {refreshTranslationGovernance} = require('./lib/translation-governance');
 const ROOT = path.resolve(__dirname, '..');
 const SITE = 'https://seminarschools.com';
 const TODAY = resolveSiteBuildDate({root:ROOT});
 const GEOMETRY_CONTRACTS = JSON.parse(
   fs.readFileSync(path.join(ROOT, 'data', 'geometry-route-contracts.json'), 'utf8'),
 );
+const outputMtimeText=String(process.env.SS_BUILD_OUTPUT_MTIME||'').trim();
+const outputMtime=outputMtimeText?new Date(outputMtimeText):null;
+if(outputMtime&&Number.isNaN(outputMtime.getTime())) throw new Error('SS_BUILD_OUTPUT_MTIME must be a valid timestamp');
 const ROUTES = {
   writingclub: {group:'writing', band:'club', defaultContent:'apply', navLabel:'Writing Club', heading:'All writing opportunities', description:'Writing contests, prizes, publications, and submission opportunities for young writers.'},
   writingkids: {group:'writing', band:'kids', defaultContent:'apply', navLabel:'Writing Kids', heading:'Writing opportunities for kids', description:'Elementary-friendly writing contests and publication opportunities.'},
@@ -40,7 +44,13 @@ function write(rel,text,check){
   const file=path.join(ROOT,rel); const old=fs.existsSync(file)?fs.readFileSync(file,'utf8'):'';
   if(old===text) return false;
   if(check) throw new Error(`stale generated Polymythcal entry page: ${rel}`);
-  fs.mkdirSync(path.dirname(file),{recursive:true}); fs.writeFileSync(file,text,'utf8'); return true;
+  const priorMtime=fs.existsSync(file)?fs.statSync(file).mtimeMs:0;
+  fs.mkdirSync(path.dirname(file),{recursive:true}); fs.writeFileSync(file,text,'utf8');
+  const futurePrior=priorMtime>Date.now()+60_000?priorMtime+2_000:0;
+  const requested=outputMtime?outputMtime.getTime():0;
+  const preserved=Math.max(futurePrior,requested);
+  if(preserved) fs.utimesSync(file,preserved/1000,preserved/1000);
+  return true;
 }
 function esc(value){ return String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function contentLang(event){
@@ -133,7 +143,7 @@ function buildRoutePage(slug, payload, locale='en'){
        Polymythcal shell's key/seed made every generated shortcut depend on the
        source page's camera until the later catch-all finalizer repaired it. */
     let preserved=attrs || '';
-    for(const attribute of ['data-route-type','data-geometry','data-indra-intensity','data-geometry-role','data-geometry-key','data-geometry-seed','data-geometry-register','data-geometry-profile','data-geometry-surface','data-front-facing']){
+    for(const attribute of ['data-route-type','data-geometry','data-indra-intensity','data-indra-fade-source','data-geometry-role','data-geometry-key','data-geometry-seed','data-geometry-register','data-geometry-profile','data-geometry-surface','data-front-facing']){
       preserved=preserved.replace(new RegExp(`\\s+${attribute}\\s*=\\s*(["'])[^"']*\\1`,'ig'),'');
     }
     const geometry=geometryBodyAttributes(GEOMETRY_CONTRACTS,`${slug}/${french?'fr/':''}index.html`,'calendar');
@@ -153,7 +163,7 @@ function buildRoutePage(slug, payload, locale='en'){
   html=replaceStateLink(html,'research',`/polymythseminars/${french?'fr/':''}research/?route=${slug}`);
   html=replaceStateLink(html,'monitoring',`/polymythseminars/${french?'fr/':''}monitoring/?route=${slug}`);
   html=html.replace(/<details class="pmd-focused"[\s\S]*?<\/details>/i,focusedRouteNavigation(slug,locale));
-  html=html.replace(/<h2 id="(?:pmd|pm)ResultsTitle"(?:\s+tabindex="-1")?>[\s\S]*?<\/h2>/i,`<h2 id="pmdResultsTitle" tabindex="-1">${esc(copy.heading)}${french?' — fiches':' listings'}</h2>`);
+  html=html.replace(/<h2 id="(?:pmd|pm)ResultsTitle"(?:\s+tabindex="-1")?>[\s\S]*?<\/h2>/i,`<h2 id="pmdResultsTitle" tabindex="-1">${esc(copy.heading)}${french?' : fiches':' listings'}</h2>`);
   const events=(payload.events||[]).filter(e=>matchesRoute(e,slug)).filter(currentEvent).slice(0,40);
   const noScript=`<noscript><section class="pmd-noscript"><h2>${esc(copy.heading)}</h2><p>${french?'Ces fiches courantes sont accessibles sans JavaScript.':'These current listings are available without JavaScript.'}</p><!-- SS_STATIC_EVENTS_START --><ul>${events.map(e=>`<li><a href="/polymythseminars/${french?'fr/':''}events/${encodeURIComponent(e.id)}/"${contentLang(e)}>${esc(e.title)}</a> <span>${esc(String(e.start||e.date||'').slice(0,10))}</span></li>`).join('')}</ul><!-- SS_STATIC_EVENTS_END --><p><a href="/polymythseminars/${french?'fr/':''}subscribe/">${french?'Fils RSS et calendriers':'RSS and calendar feeds'}</a> · <a href="/sitemap/">${french?'Plan du site':'Site map'}</a></p></section></noscript>`;
   html=html.replace(/<noscript>[\s\S]*?<\/noscript>/i,noScript);
@@ -165,11 +175,14 @@ function buildRoutePage(slug, payload, locale='en'){
 }
 function buildGroup(group, check=false){
   const payload=JSON.parse(read('polymythseminars/browse.json')); let writes=0;
+  const governedRoutes=[];
   for(const [slug,cfg] of Object.entries(ROUTES)) {
     if(cfg.group!==group) continue;
+    governedRoutes.push(`/${slug}/fr/`);
     if(write(`${slug}/index.html`,buildRoutePage(slug,payload),check)) writes++;
     if(write(`${slug}/fr/index.html`,buildRoutePage(slug,payload,'fr'),check)) writes++;
   }
+  refreshTranslationGovernance(ROOT,governedRoutes,{check});
   return writes;
 }
 module.exports={ROUTES,matchesRoute,buildRoutePage,buildGroup};

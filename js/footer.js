@@ -3,8 +3,33 @@
  * consistently on any page's palette. Authored contextual footers stay in
  * place; this navigation is appended once as the site-wide wayfinding layer. */
 (function () {
+  function pageOwnsLockedViewport() {
+    var body = document.body;
+    var root = document.documentElement;
+    if (!body || !root || !window.getComputedStyle) return false;
+    var bodyStyle = window.getComputedStyle(body);
+    var rootStyle = window.getComputedStyle(root);
+    var locked = [bodyStyle.overflowY, rootStyle.overflowY].some(function (value) {
+      return value === 'hidden' || value === 'clip';
+    });
+    if (!locked) return false;
+    var viewportHeight = window.innerHeight || root.clientHeight || 0;
+    if (!viewportHeight) return false;
+    var bodyHeight = body.getBoundingClientRect().height;
+    var rootHeight = root.getBoundingClientRect().height;
+    return Math.abs(bodyHeight - viewportHeight) <= 2
+      || Math.abs(rootHeight - viewportHeight) <= 2;
+  }
+
   function build() {
     if (document.querySelector('.ss-foot')) return;
+    /* Fullscreen tools own the viewport and their internal scroll regions.
+       A normal-flow global footer collapses flex canvases and creates a fake
+       document range, so fail closed before adding either styles or markup. */
+    if (pageOwnsLockedViewport()) {
+      document.body.setAttribute('data-site-footer-state', 'omitted-viewport-lock');
+      return;
+    }
 
     if (!document.getElementById('ss-foot-css')) {
       var s = document.createElement('style');

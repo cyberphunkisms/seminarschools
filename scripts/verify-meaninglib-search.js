@@ -6,7 +6,7 @@ const { search } = require('./query-meaninglib.js');
 const {generatedAt} = require('./lib/deterministic-timestamp');
 
 const root = process.cwd();
-const releaseTimestamp = JSON.parse(fs.readFileSync(path.join(root, 'RELEASE_MANIFEST.json'), 'utf8')).generated_at || '1970-01-01T00:00:00Z';
+const reportTimestamp = generatedAt();
 const indexPath = path.join(root, 'hf_export', 'search', 'meaninglib_search_index.json');
 const reportsDir = path.join(root, 'hf_export', 'reports');
 const reportPath = path.join(reportsDir, 'meaninglib_search_verify_report.md');
@@ -75,6 +75,14 @@ function main() {
       check: results => topResult(results, r => r.doc.star_file === 'ml' && resultText(r).includes('ai prose tells'))
     },
     {
+      name: 'Degorgonified feminism exact label retrieves stable Gorgonwars owner at top',
+      query: 'degorgonified feminism',
+      check: results => topResult(results, r => (
+        r.doc.id === 'ml:gorgonification:gorgonwars:ddd5443ed9cc'
+        && r.doc.title === 'Gorgonwars'
+      ))
+    },
+    {
       name: 'Bookwormburrows identity query retrieves bb* identity at top',
       query: 'bookwormburrows',
       check: results => topResult(results, r => isIdentityMap(r, 'bb', 'bookwormburrows') || (r.doc.star_file === 'bb' && resultText(r).includes('bookwormburrows')))
@@ -98,13 +106,43 @@ function main() {
       name: 'HTML txt mirror query retrieves dual-write sync rule',
       query: 'HTML txt mirror',
       check: results => topThree(results, r => r.doc.star_file === 'ml' && /dual[-\s]?write/.test(resultText(r)) && resultText(r).includes('html'))
+    },
+    {
+      name: 'Constructor token cannot enter scores through Object prototype inheritance',
+      query: 'constructor project',
+      check: results => results.length >= 3 && results.every(result => Number.isFinite(result.score))
+    },
+    {
+      name: 'Current non-strawman adjudication query retrieves the current-position substrate',
+      query: 'current non-strawman project comparison Polycognate genealogy always-already boundaries',
+      check: results => topThree(results, result => /non[-\s]?strawman|strongest actual claim|user ruling|current[-\s]?position/.test(resultText(result)))
+    },
+    {
+      name: 'Polycognate examples query retrieves structural-position explanation',
+      query: 'individual Polycognate claims examples structural position same operation',
+      check: results => topThree(results, result => resultText(result).includes('polycognate') && /structural position|same operation|complex axiom/.test(resultText(result)))
+    },
+    {
+      name: 'Boundary genealogy query retrieves the historical-scope control',
+      query: 'boundaries historical genealogy structural analogy direct transmission',
+      check: results => results.slice(0, 5).some(result => resultText(result).includes('boundaries-as-therapeutic-in-group-gating'))
+    },
+    {
+      name: 'Detienne query retrieves the always-already supporting adjudication',
+      query: 'Detienne comparison point in favor always-already',
+      check: results => topThree(results, result => resultText(result).includes('detienne') && /always[-\s]?already|point in favor/.test(resultText(result)))
+    },
+    {
+      name: 'Clastres source query ranks the cited source rather than a handler',
+      query: 'Clastres Society Against the State source project',
+      check: results => topResult(results, result => result.doc.section === 'citation' && resultText(result).includes('clastres') && resultText(result).includes('society against the state'))
     }
   ];
 
   const report = [
     '# Meaninglib search verification report',
     '',
-    `Generated: ${releaseTimestamp}`,
+    `Generated: ${reportTimestamp}`,
     '',
     `Index: hf_export/search/meaninglib_search_index.json`,
     `Documents: ${index.total_docs}`,

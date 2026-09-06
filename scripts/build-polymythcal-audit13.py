@@ -80,7 +80,11 @@ def calendar_event_signature(value):
   normalized=visible_fragment(text)
   pending={
    'venue':{'','location unconfirmed','location unconfirmed · lieu non confirmé','location details still pending','lieu exact à confirmer','lieu non confirmé'},
-   'city':{'','unknown','not yet determined'},
+   # Raw storage enums are never acceptable display values.  Keeping only the
+   # bilingual public fallback here makes --check detect and replace legacy
+   # <span>Unknown</span> and blank city fields instead of normalizing them as
+   # equivalent to the corrected front-facing copy.
+   'city':{'','not yet determined','city not confirmed · ville à confirmer'},
   }
   return '__pending__' if normalized.casefold() in pending[kind] else normalized
  def section_fragment(class_name,tag_name='section'):
@@ -148,7 +152,15 @@ def calendar_event_signature(value):
   # Localized route generation owns translated labels, but every researched
   # value must remain a fixed point of the canonical event generator.
   'context_values':context_values,
+  'geometry':tag_attribute(body.group(0),'data-geometry'),
+  'geometry_intensity':tag_attribute(body.group(0),'data-indra-intensity'),
+  'geometry_fade_source':tag_attribute(body.group(0),'data-indra-fade-source'),
   'geometry_role':tag_attribute(body.group(0),'data-geometry-role'),
+  'geometry_key':tag_attribute(body.group(0),'data-geometry-key'),
+  'geometry_seed':tag_attribute(body.group(0),'data-geometry-seed'),
+  'geometry_register':tag_attribute(body.group(0),'data-geometry-register'),
+  'geometry_profile':tag_attribute(body.group(0),'data-geometry-profile'),
+  'front_facing':tag_attribute(body.group(0),'data-front-facing'),
   'publication_surface':tag_attribute(body.group(0),'data-publication-surface'),
   'geometry_assets':[
    tag_attribute(alive,'href'),tag_attribute(mandala,'src'),tag_attribute(indra,'src'),
@@ -489,14 +501,14 @@ for e in events:
   ROOT,f'polymythseminars/events/{sid}/index.html','calendar-event',register='quiet'
  )
  title_text=str(e.get('title') or 'Untitled listing'); title=html.escape(title_text)
- content_language=str(public_record.get('content_language') or '')
+ content_language=str(public_record.get('content_language') or 'und')
  content_lang_attr=f' lang="{html.escape(content_language,quote=True)}"' if content_language else ''
- public_actions=[action for action in (public_record.get('actions') or []) if action.get('kind')!='details']
- preferred_action=next((action for action in public_actions if action.get('kind')!='source'),None) or next(iter(public_actions),{})
- destination_text=str(preferred_action.get('url') or '')
- destination_kind=str(preferred_action.get('kind') or 'source')
- destination_scope=str(preferred_action.get('scope') or 'source')
+ destination_status=str(e.get('destination_status') or '')
+ destination_text='' if destination_status=='unavailable-specific-page' else str(e.get('destination_url') or '')
+ destination_kind=str(e.get('destination_kind') or 'detail')
+ destination_scope=str(e.get('destination_scope') or 'event')
  if destination_text and not destination_text.startswith('https://'):raise SystemExit(f'Unsafe external destination for {sid}: {destination_text!r}')
+ if destination_text and destination_scope not in {'event','series'}:raise SystemExit(f'Invalid destination scope for {sid}: {destination_scope!r}')
  destination=html.escape(destination_text,quote=True)
  reasons=' · '.join(labels.get(x,str(x).replace('-',' ').title()) for x in e.get('qualification_reasons',[]))
  qualification_tokens=' '.join(sorted(str(x) for x in e.get('qualification_reasons',[]) if str(x)))
@@ -504,9 +516,14 @@ for e in events:
  end_value=parse_iso(public_temporal_value(e,public_record,'end_date') or public_temporal_value(e,public_record),e.get('timezone') or DEFAULT_TZ)
  end_day=end_value.date() if isinstance(end_value,datetime.datetime) else end_value
  past=bool(not is_watch and end_day and end_day<TODAY)
- city=str(e.get('city') or 'Unknown'); venue=str(e.get('venue') or 'Location unconfirmed · Lieu non confirmé')
- desc=str(public_record.get('description') or '')
- context_html=''
+ city=str(e.get('city') or '').strip(); venue=str(e.get('venue') or 'Location unconfirmed · Lieu non confirmé')
+ city_display=city if city.lower() not in PLACEHOLDERS else 'City not confirmed · Ville à confirmer'
+ # Audit 45 owns localized interface copy, but organizer/research text comes
+ # from the unchanged canonical record on both language routes. Emit that
+ # final English content here too so the canonical generator is already the
+ # fixed point before localization and the geometry finalizer run.
+ desc=str(e.get('description') or e.get('raw_excerpt') or '')
+ context_html=event_context_html(e)
  indexable=not is_watch and confirmation=='confirmed' and (e.get('date_precision')=='exact' or e.get('time_precision')=='exact') and e.get('record_kind')!='opportunity' and valid_location(e) and lifecycle not in {'cancelled','missing-on-source','archived'} and not past
  robots='index,follow' if indexable else 'noindex,follow'
  canonical=f'https://seminarschools.com/polymythseminars/events/{urllib.parse.quote(sid)}/'
@@ -515,23 +532,21 @@ for e in events:
  if schema:schema['location']={'@type':'Place','name':venue,'address':city}
  if schema:schema={k:v for k,v in schema.items() if v is not None}
  destination_labels={
-  'schedule':'Open official schedule · Ouvrir l’horaire officiel',
-  'registration':'Open registration page · Ouvrir la page d’inscription',
-  'application':'Open application page · Ouvrir la page de candidature',
-  'submission':'Open submission page · Ouvrir la page de soumission',
-  'rules':'Open rules · Ouvrir le règlement',
-  'tickets':'Open ticket page · Ouvrir la billetterie',
-  'stream':'Open stream · Ouvrir la diffusion',
-  'review':'Open review page · Ouvrir la page d’évaluation',
- 'results':'Open results page · Ouvrir la page des résultats',
+  'schedule':'Open official schedule',
+  'registration':'Open registration page',
+  'application':'Open application page',
+  'submission':'Open submission page',
+  'tickets':'Open ticket page',
+  'review':'Open review page',
+  'results':'Open results page',
  }
- destination_source=destination_kind=='source'
- if destination_kind=='schedule' and destination_source:destination_label='Open source schedule · Ouvrir l’horaire source'
+ destination_source=destination_status.startswith('source-')
+ if destination_kind=='schedule' and destination_source:destination_label='Open source schedule'
  elif destination_kind in destination_labels:destination_label=destination_labels[destination_kind]
- elif destination_scope=='series' and destination_source:destination_label='Open series source page · Ouvrir la page source de la série'
- elif destination_scope=='series':destination_label='Open official series page · Ouvrir la page officielle de la série'
- elif destination_source:destination_label='Open source page · Ouvrir la page source'
- else:destination_label='Open official event page · Ouvrir la page officielle de l’événement'
+ elif destination_scope=='series' and destination_source:destination_label='Open series source page'
+ elif destination_scope=='series':destination_label='Open official series page'
+ elif destination_source:destination_label='Open event source page'
+ else:destination_label='Open official event page'
  status_text='Confirmed · Confirmé' if confirmation=='confirmed' else 'Some details pending · Certains détails à confirmer'
  when_text,date_value_raw,date_token=temporal_presentation(e,public_record,is_watch)
  when_text=html.escape(when_text)
@@ -542,7 +557,11 @@ for e in events:
  page_title=html.escape(page_title_text,quote=True)
  meta_description=html.escape(event_meta_description(e,title_text,venue,city,public_record,is_watch,desc),quote=True)
  related_items=[]
- for related in related_events(e):
+ # Watchlist markers are stable monitoring records rather than dated
+ # chronology entries.  Audit 45 intentionally leaves their related-listing
+ # navigation empty; emit that final state here as well so this canonical
+ # generator remains a fixed point after localization/finalization.
+ for related in ([] if is_watch else related_events(e)):
   related_id=str(related.get('id') or related.get('identity_key'))
   related_title=html.escape(str(related.get('title') or 'Untitled listing'))
   related_date=html.escape(str(related.get('date') or '')[:10])
@@ -593,7 +612,7 @@ for e in events:
 {'<div class="callout pm-event-archive" data-event-archive-note="true"><strong>Past event · Événement passé.</strong> This page remains as an archive. Check the source for a current edition.</div>' if past else ''}
 <dl class="pm-event-facts">
 <div><dt>Date · Date</dt><dd>{date_fact_html}</dd></div>
-<div><dt>Place · Lieu</dt><dd><strong>{html.escape(venue)}</strong><span>{html.escape(city)}</span></dd></div>
+<div><dt>Place · Lieu</dt><dd><strong>{html.escape(venue)}</strong><span>{html.escape(city_display)}</span></dd></div>
 <div><dt>Status · Statut</dt><dd>{status_text}</dd></div>
 </dl>
 <section class="pm-event-primary-path" aria-label="Listing actions · Actions de la fiche"><p>Listing actions · Actions de la fiche</p>

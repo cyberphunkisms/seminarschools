@@ -126,26 +126,40 @@ function buildReport(canonicalBytes, payloads, outputBytes) {
     ...payloads.browse.events,
     ...payloads.watchlist.items
   ].map(event => [event.id, event]));
-  const typedKinds = new Set(PUBLIC_ACTION_CANDIDATE_FIELDS.map(([, kind]) => kind));
-  const unavailableWithCandidate = canonical.events.filter(event =>
+  const researchById = new Map((payloads.research.records || []).map(event => [event.id, event]));
+  const exactRecords = canonical.events.filter(event =>
+    event.destination_status !== 'unavailable-specific-page'
+    && String(event.destination_url || '').startsWith('https://')
+  );
+  const unresolvedRecords = canonical.events.filter(event =>
     event.destination_status === 'unavailable-specific-page'
-    && PUBLIC_ACTION_CANDIDATE_FIELDS.some(([field]) => String(event[field] || '').startsWith('https://'))
   );
-  const recoveredUnavailable = unavailableWithCandidate.filter(event =>
-    (projectedById.get(event.id)?.actions || []).some(action => typedKinds.has(action.kind))
-  );
-  const typedActions = [...projectedById.values()].flatMap(event =>
-    (event.actions || []).filter(action => typedKinds.has(action.kind))
-  );
-  const typedActionRecords = [...projectedById.values()].filter(event =>
-    (event.actions || []).some(action => typedKinds.has(action.kind))
-  );
-  const recoveredByKind = Object.fromEntries([...typedKinds].map(kind => [
-    kind,
-    recoveredUnavailable.filter(event =>
-      (projectedById.get(event.id)?.actions || []).some(action => action.kind === kind)
-    ).length
-  ]));
+  const candidateUrlsByEvent = new Map();
+  for (const event of canonical.events) {
+    const urls = new Set();
+    for (const [field] of PUBLIC_ACTION_CANDIDATE_FIELDS) {
+      const value = String(event[field] || '');
+      if (value.startsWith('https://') && value !== event.destination_url) urls.add(value);
+    }
+    candidateUrlsByEvent.set(event.id, urls);
+  }
+  let publicExternalActionCount = 0;
+  let missingExactActionCount = 0;
+  let mismatchedExternalActionCount = 0;
+  let broadSourceProjectionCount = 0;
+  for (const event of canonical.events) {
+    const projected = projectedById.get(event.id);
+    const external = (projected?.actions || []).filter(action => String(action?.url || '').startsWith('https://'));
+    publicExternalActionCount += external.length;
+    const expected = event.destination_status === 'unavailable-specific-page' ? '' : String(event.destination_url || '');
+    if (expected && !external.some(action => action.url === expected)) missingExactActionCount += 1;
+    mismatchedExternalActionCount += external.filter(action => !expected || action.url !== expected).length;
+    broadSourceProjectionCount += (researchById.get(event.id)?.sources || [])
+      .filter(source => !expected || source.url !== expected || source.url !== event.source_url).length;
+  }
+  const suppressedCandidateRecords = canonical.events.filter(event => candidateUrlsByEvent.get(event.id).size > 0);
+  const suppressedCandidateActionCount = suppressedCandidateRecords
+    .reduce((count, event) => count + candidateUrlsByEvent.get(event.id).size, 0);
   return {
     generated_at: payloads.browse._generated_at,
     schema: payloads.browse._schema,
@@ -183,13 +197,16 @@ function buildReport(canonicalBytes, payloads, outputBytes) {
     persisted_search_groups: PERSISTED_SEARCH_GROUPS,
     derived_search_groups: SEARCH_GROUPS,
     publication_partition_complete: true,
-    typed_action_candidate_fields: PUBLIC_ACTION_CANDIDATE_FIELDS.map(([field, kind]) => ({ field, kind })),
-    unavailable_with_safe_candidate_count: unavailableWithCandidate.length,
-    typed_action_recovered_unavailable_record_count: recoveredUnavailable.length,
-    typed_action_recovered_unavailable_by_kind: recoveredByKind,
-    typed_action_total_record_count: typedActionRecords.length,
-    typed_action_total_action_count: typedActions.length,
-    typed_action_recovery_complete: recoveredUnavailable.length === unavailableWithCandidate.length
+    destination_policy: 'materialized-exact-destination-only',
+    exact_external_destination_count: exactRecords.length,
+    unresolved_destination_count: unresolvedRecords.length,
+    suppressed_broad_destination_count: unresolvedRecords.length,
+    public_external_action_count: publicExternalActionCount,
+    missing_exact_external_action_count: missingExactActionCount,
+    mismatched_external_action_count: mismatchedExternalActionCount,
+    broad_source_projection_count: broadSourceProjectionCount,
+    suppressed_unverified_candidate_record_count: suppressedCandidateRecords.length,
+    suppressed_unverified_candidate_action_count: suppressedCandidateActionCount
   };
 }
 
@@ -202,8 +219,8 @@ function main() {
 
   const discoveryBuildTimestamp = String(
     process.env.POLYMYTHCAL_BUILD_AT
-    || process.env.MEPHISTODATA_GENERATED_AT
     || releaseManifest.polymythcal_discovery_built_at
+    || process.env.MEPHISTODATA_GENERATED_AT
     || releaseManifest.generated_at
     || ''
   ).trim();
@@ -224,10 +241,13 @@ function main() {
     manifest: Buffer.from(manifestText)
   };
   const report = buildReport(canonicalBytes, payloads, outputBytes);
-  if (!report.typed_action_recovery_complete) {
+  if (report.missing_exact_external_action_count
+      || report.mismatched_external_action_count
+      || report.broad_source_projection_count) {
     throw new Error(
-      `Typed action recovery projected ${report.typed_action_recovered_unavailable_record_count} of ` +
-      `${report.unavailable_with_safe_candidate_count} unavailable records with safe candidate routes.`
+      `Destination projection failed closed: ${report.missing_exact_external_action_count} exact destinations missing; ` +
+      `${report.mismatched_external_action_count} mismatched external actions; ` +
+      `${report.broad_source_projection_count} broad Research sources.`
     );
   }
   if (report.gzip_reduction_percent < MINIMUM_GZIP_REDUCTION * 100) {

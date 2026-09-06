@@ -47,7 +47,7 @@ const cids=new Set(consolidated.map(e=>e.id)),pids=new Set(publicEvents.map(e=>e
 for(const e of batch){assert(cids.has(e.id),`${e.id}: absent from consolidated data`);assert(pids.has(e.id),`${e.id}: absent from public data`)}
 assert(consolidated.length===publicEvents.length,'Canonical/public count mismatch');
 for(const f of ['presence_claims','presence_categories','presence_mode','event_format','talkback_time_precision','source_history']) assert(schema.properties?.[f],`Schema missing ${f}`);
-const taxonomy=readJson('polymythseminars/browse.json').taxonomy,revamp=readText('scripts/lib/polymythcal-discovery-model.js');
+const taxonomy=readJson('polymythseminars/research.json').taxonomy,revamp=readText('scripts/lib/polymythcal-discovery-model.js');
 assert(taxonomy?.axes?.presence?.values?.['director-filmmaker']?.en&&taxonomy?.axes?.presence?.values?.['director-filmmaker']?.fr,'Bilingual Research taxonomy lacks first-class director/filmmaker presence');
 for(const n of ['classifyPresence','presence_categories','production-credit']) assert(revamp.includes(n),`Presence classifier missing ${n}`);
 const build=String(pkg.scripts?.['build:locked']||'');
@@ -60,4 +60,3 @@ const clRows=readText('data/website-cl.jsonl').trim().split(/\n+/).map(JSON.pars
 for(let n=228;n<=235;n++){const id=`CL-WEB-${n}`;assert(cl.get(id)?.status==='complete',`Component List missing/incomplete ${id}`)}
 for(const rel of ['WEBSITE_CL_2026-07-19.md','docs/WEBSITE_CL_2026-07-19.md']){const t=readText(rel);assert(t.includes('Completed in Polymythcal Set 7 — Director and Filmmaker Present'),`${rel}: missing Set 7 section`);assert(t.includes('CL-WEB-235'),`${rel}: missing final Set 7 component`)}
 console.log(JSON.stringify({manual_records:manual.length,consolidated_records:consolidated.length,set7_records:batch.length,named_director_occurrences:namedDirectorEvents.length,sources:sources.length,change_list:'CL-WEB-228 through CL-WEB-235 complete'},null,2));
-

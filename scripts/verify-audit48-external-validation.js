@@ -102,7 +102,7 @@ let frenchEventRoutes = null;
 let expectedMonitoringRoutes = null;
 try {
   sourceInventory = classifySourceHtml(ROOT);
-  expectedEventRoutes = expectedPolymythcalEventRoutes(currentEvents);
+  expectedEventRoutes = expectedPolymythcalEventRoutes(canonicalEvents);
   expectedMonitoringRoutes = expectedPolymythcalEventRoutes(monitoringEvents);
   englishEventRoutes = inspectEventRouteDirectory(ROOT, 'polymythseminars/events');
   frenchEventRoutes = inspectEventRouteDirectory(ROOT, 'polymythseminars/fr/events');
@@ -204,16 +204,20 @@ if (expectedEventRoutes && expectedMonitoringRoutes && englishEventRoutes && fre
     `current English event route inventory differs from the event ledger; missing `
       + `${summarizeValues(missingEnglish)}; extra ${summarizeValues(extraEnglish)}`,
   );
-  const leakedEnglishMonitoringRoutes = [...expectedMonitoringRoutes.englishRouteIds]
-    .filter(id => englishEventRoutes.routeIds.has(id));
-  const leakedFrenchMonitoringRoutes = [...expectedMonitoringRoutes.frenchRouteIds]
-    .filter(id => frenchEventRoutes.routeIds.has(id));
+  const missingEnglishMonitoringRoutes = difference(
+    expectedMonitoringRoutes.englishRouteIds,
+    englishEventRoutes.routeIds,
+  );
+  const missingFrenchMonitoringRoutes = difference(
+    expectedMonitoringRoutes.frenchRouteIds,
+    frenchEventRoutes.routeIds,
+  );
   check(
-    leakedEnglishMonitoringRoutes.length === 0
-      && leakedFrenchMonitoringRoutes.length === 0,
-    `monitoring records have published detail or alias routes; English `
-      + `${summarizeValues(leakedEnglishMonitoringRoutes)}; French `
-      + `${summarizeValues(leakedFrenchMonitoringRoutes)}`,
+    missingEnglishMonitoringRoutes.length === 0
+      && missingFrenchMonitoringRoutes.length === 0,
+    `monitoring records lack stable detail or alias routes; English `
+      + `${summarizeValues(missingEnglishMonitoringRoutes)}; French `
+      + `${summarizeValues(missingFrenchMonitoringRoutes)}`,
   );
   check(
     missingFrench.length === 0 && extraFrench.length === 0,
@@ -227,7 +231,7 @@ if (expectedEventRoutes && expectedMonitoringRoutes && englishEventRoutes && fre
   );
   check(
     assistive.metrics?.canonical_events === canonicalEvents.length
-      && assistive.metrics?.chronology_events === expectedEventRoutes.canonicalIds.size
+      && assistive.metrics?.chronology_events === currentEvents.length
       && assistive.metrics?.quarantined_monitoring_records === monitoringEvents.length
       && assistive.metrics?.explicit_legacy_event_ids
         === expectedEventRoutes.explicitLegacyEntries
@@ -280,7 +284,14 @@ check(
     && calendar.metrics?.browse_records === currentEvents.length
     && calendar.metrics?.watchlist_records === monitoringEvents.length
     && calendar.metrics?.monitoring_ics_leaks === 0
-    && calendar.metrics?.monitoring_detail_or_alias_route_leaks === 0
+    && calendar.metrics?.monitoring_detail_or_alias_routes_expected
+      === 2 * (
+        expectedMonitoringRoutes.englishRouteIds.size
+        + expectedMonitoringRoutes.frenchRouteIds.size
+      )
+    && calendar.metrics?.monitoring_detail_or_alias_routes_missing === 0
+    && calendar.metrics?.monitoring_detail_public_mismatches === 0
+    && calendar.metrics?.monitoring_unsafe_canonical_details === 0
     && calendar.metrics?.monitoring_feed_uid_leaks === 0
     && calendar.metrics?.explicit_legacy_ics_aliases === explicitAliases
     && calendar.metrics?.single_event_ics_files === expectedSingleEventFiles
@@ -476,4 +487,3 @@ console.log(
   + `${report.metrics.intended_cross_engine_scenarios} prepared engine scenarios; `
   + 'native and vendor-account rows remain explicitly external.',
 );
-

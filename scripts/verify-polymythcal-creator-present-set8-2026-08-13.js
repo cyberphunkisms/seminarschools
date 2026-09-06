@@ -70,7 +70,7 @@ for(const e of batch){assert(cids.has(e.id),`${e.id}: absent from consolidated d
 for(const id of meta.existing_parent_ids){assert(cids.has(id)&&pids.has(id),`${id}: enriched parent absent from generated data`)}
 assert(consolidated.length===publicEvents.length,'Canonical/public count mismatch');
 for(const f of ['presence_claims','presence_categories','presence_mode','event_format','talkback_time_precision','source_history']) assert(schema.properties?.[f],`Schema missing ${f}`);
-const taxonomy=readJson('polymythseminars/browse.json').taxonomy,revamp=readText('scripts/lib/polymythcal-discovery-model.js');
+const taxonomy=readJson('polymythseminars/research.json').taxonomy,revamp=readText('scripts/lib/polymythcal-discovery-model.js');
 for(const value of ['author-writer','artist-curator','scholar-expert','production-participants','community-witness-elder','identity-pending']) assert(taxonomy?.axes?.presence?.values?.[value]?.en&&taxonomy?.axes?.presence?.values?.[value]?.fr,`Bilingual Research taxonomy lacks presence facet ${value}`);
 for(const n of ['classifyPresence','presence_categories','presence_claims']) assert(revamp.includes(n),`Presence discovery model missing ${n}`);
 const build=String(pkg.scripts?.['build:locked']||'');
@@ -83,4 +83,3 @@ const clRows=readText('data/website-cl.jsonl').trim().split(/\n+/).map(JSON.pars
 for(let n=236;n<=243;n++){const id=`CL-WEB-${n}`;assert(cl.get(id)?.status==='complete',`Component List missing/incomplete ${id}`)}
 for(const rel of ['WEBSITE_CL_2026-07-19.md','docs/WEBSITE_CL_2026-07-19.md']){const t=readText(rel);assert(t.includes('Completed in Polymythcal Set 8 — Creator, Participant, Witness, and Community Present'),`${rel}: missing Set 8 section`);assert(t.includes('CL-WEB-243'),`${rel}: missing final Set 8 component`)}
 console.log(JSON.stringify({manual_records:manual.length,consolidated_records:consolidated.length,set8_records:batch.length,parent_records:set8Parents.length,child_occurrences:set8Children.length,tarragon_talkbacks:tarragonChildren.length,doc_soup_occurrences:docSoup.length,sources:sources.length,change_list:'CL-WEB-236 through CL-WEB-243 complete'},null,2));
-

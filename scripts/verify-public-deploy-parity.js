@@ -4,12 +4,52 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const {spawnSync} = require('child_process');
 const {
   isGeneratedDependencyDirectory,
 } = require('./repository-walk-policy');
+const {PublicBuildLock} = require('./lib/public-build-lock');
 
 const ROOT = path.resolve(__dirname, '..');
 const PUBLIC = path.join(ROOT, 'public');
+const PUBLIC_BUILD_STAGING = path.join(ROOT, '.public-build-staging');
+const PUBLIC_BUILD_PREVIOUS = path.join(ROOT, '.public-build-previous');
+
+function authorizePostBuildOverlayReconciliation() {
+  const assertion = spawnSync(
+    process.execPath,
+    [
+      path.join(ROOT, 'scripts', 'run-python.js'),
+      path.join(ROOT, 'scripts', 'assert-build-lock.py'),
+    ],
+    {cwd: ROOT, env: process.env, encoding: 'utf8', windowsHide: true},
+  );
+  if (assertion.error || assertion.status !== 0) {
+    const detail = String(assertion.stderr || assertion.stdout || assertion.error?.message || '').trim();
+    throw new Error(
+      `PUBLIC DEPLOY PARITY FAILED — post-build overlay reconciliation lacks the live release-build lease${detail ? `: ${detail}` : ''}`,
+    );
+  }
+  return true;
+}
+
+const postBuildProbe = new PublicBuildLock({
+  root: ROOT,
+  buildOut: PUBLIC_BUILD_STAGING,
+  previousOut: PUBLIC_BUILD_PREVIOUS,
+  authorizeEmptyOverlayRecovery: authorizePostBuildOverlayReconciliation,
+});
+const reconciliation = postBuildProbe.reconcilePostBuildOverlayResidue();
+const postReconciliationState = postBuildProbe.inspectTransientState();
+const postReconciliationIsClean = postReconciliationState.present.length === 0
+  ? postReconciliationState.action === 'retry'
+  : postReconciliationState.present.length === postReconciliationState.tombstones.length
+      && postReconciliationState.action === 'reclaim-overlay-tombstones'
+    || postReconciliationState.present.length === postReconciliationState.directory_overlays.length
+      && postReconciliationState.action === 'reclaim-directory-overlay';
+if (!postReconciliationIsClean) {
+  throw new Error('PUBLIC DEPLOY PARITY FAILED — public-build transient state survived reconciliation');
+}
 const PUBLIC_DIRS = [
   '.well-known', 'agora', 'aitr', 'aa', 'bb', 'bookwormcard', 'campaigns',
   'cfps', 'css', 'fellowships', 'florilegium', 'humanities', 'img', 'js',
@@ -37,6 +77,10 @@ const BLOCKED_EXACT = new Set([
   'teacherresources/audit-methodology.md',
   'teacherresources/resources-data.json',
   'teacherresources/submission-strategy.md',
+  'polymyth/research/metoo-foundational-dissent-full-archive-2026-07-28.xlsx',
+  'polymyth/research/metoo-foundational-dissent-full-archive-2026-07-28.xlsx.sha256',
+  'polymyth/research/metoo-foundational-dissent-research-audit-2026-07-27.xlsx',
+  'polymyth/research/metoo-foundational-dissent-research-audit-2026-07-27.xlsx.sha256',
 ]);
 const BLOCKED_DIRS = new Set([
   'node_modules', '.git', '.github', '.netlify', 'data', 'hf_export',

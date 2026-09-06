@@ -111,9 +111,23 @@ function selectSiteCoherence(commands) {
 selectSiteCoherence(reusedBuildPreparation);
 const sequential = [
   ...(reuseBuild ? reusedBuildPreparation : fullBuildPreparation),
-  // A passing build is not enough: the immediately repeated build must be a
-  // byte-for-byte fixed point across source, deploy, data, and current reports.
-  'node scripts/verify-build-idempotence.js',
+  // Fail a stale or exceeded heavy-page budget before any multi-minute
+  // isolated rebuild or browser sweep. This remains one of the same 184
+  // release blockers; only its diagnostic order changes.
+  'node scripts/verify-page-size-budget.js',
+  'node scripts/verify-asset-weights.js',
+  'node scripts/verify-bookwormcard-gate.js',
+  // The portable CORE is a package-wide control surface. Reject a stale
+  // shorthand contract before any multi-minute rebuild or browser sweep.
+  'node scripts/verify-ml-shorthand-resolution.js',
+  // Current ML* authority, named-method form, register binding, and runtime
+  // enforcement are cheap package-wide contracts. Fail them before the
+  // expensive fixed-point rebuild and browser sweeps.
+  'node scripts/verify-ml-dialectical-hardening.js',
+  'node scripts/verify-ml-execution-gates.js',
+  'node scripts/verify-mephistodata-runtime-gate.js',
+  'node scripts/verify-ml-active-form-conflicts.js',
+  'node scripts/verify-ml-project-adjudication-v2.js',
   // Canonical CORE and its generated retrieval surfaces are a single ordered
   // contract. Keep these out of the parallel pool so no report/build writer
   // can race the counts, hashes, or package-facing mirrors they inspect.
@@ -124,26 +138,36 @@ const sequential = [
   'node scripts/verify-meaninglib-dataset.js',
   'node scripts/verify-meaninglib-search.js',
   'node scripts/verify-ai-access-pack.js',
-  // Rendered audience/reflow and geometry proof are deliberately outside the
-  // Netlify production build, but remain sequential release blockers.
-  'node scripts/verify-front-facing-overlap-browser.js',
-  'node scripts/verify-teacherresources-state-layout-browser.js',
-  'node scripts/verify-home-map-browser.js',
-  'node scripts/verify-polymythcal-sets13-15-browser.js',
-  'node scripts/verify-polymythcal-destination-browser.js',
-  'node scripts/verify-visible-geometry-browser.mjs',
   'node scripts/verify-audit48-assistive-technology.js',
   'node scripts/verify-audit48-browser-program.js',
   'node scripts/run-python.js scripts/verify-polymythcal-calendar-clients.py',
   'node scripts/run-python.js -m unittest scripts/test_audit48_live_harvest.py',
   'node scripts/run-python.js scripts/verify_audit48_live_harvest.py',
   'node scripts/verify-audit48-external-validation.js',
+  // This probe snapshots and compares the complete durable tree. Keep it
+  // quiescent and serialized before Chromium consumes CPU, memory, or any
+  // package-facing evidence, even though its rebuild occurs in an isolated
+  // copy and its canonical-root guard remains active.
+  'node scripts/verify-build-idempotence.js',
+];
+
+// These browser release blockers are read-only, own fresh Chromium profiles,
+// and bind their HTTP servers to independent ephemeral ports. A cap of three
+// workers keeps CPU and memory bounded while shortening the critical path for
+// constrained release and clean-room environments.
+const concurrentReadOnlySweeps = [
+  'node scripts/verify-front-facing-overlap-browser.js',
+  'node scripts/verify-visible-geometry-browser.mjs',
+  'node scripts/verify-teacherresources-state-layout-browser.js',
+  'node scripts/verify-home-map-browser.js',
+  'node scripts/verify-polymythcal-sets13-15-browser.js',
+  'node scripts/verify-polymythcal-destination-browser.js',
 ];
 
 // Preservation hashes must observe a quiescent tree. Keep the deliberate
 // failure tests and the source-stage FP-01..FP-15 aggregate after every
 // parallel report writer has finished, otherwise an atomic report replacement
-// can race FP-02's successor digest.
+// can race FP-02's exact August 26 to August 27 transition digest.
 const finalSequential = [
   // Refresh byte-selection evidence only after every parallel report writer is
   // quiescent, then refresh its raw-hashed aggregate consumer. The component
@@ -173,6 +197,7 @@ const checks = [
   'node scripts/verify-audit36-graph-resilience.mjs',
   'node scripts/verify-audit36-animation-lifecycle.mjs',
   'node scripts/verify-audit36-artifact-atomicity.js',
+  'node scripts/verify-public-build-lock-recovery.js',
   'node scripts/verify-audit49-aa-dialog.mjs',
   'node scripts/verify-audit49-aitr-resilience.mjs',
   'node scripts/verify-aa-saul-runtime-smoothness.mjs',
@@ -253,7 +278,6 @@ const checks = [
   'node scripts/verify-route-doctrine.js',
   'node scripts/verify-page-type-contracts.js',
   'node scripts/verify-pathfinder-nav.js',
-  'node scripts/verify-page-size-budget.js',
   'node scripts/verify-heavy-page-resilience.js',
   'node scripts/verify-generated-route-indexing.js',
   'node scripts/verify-sitemap-classification.js',
@@ -270,7 +294,6 @@ const checks = [
   'node scripts/verify-visible-input-labels.js',
   'node scripts/audit-external-links.js',
   'node scripts/verify-dense-anchors.js',
-  'node scripts/verify-asset-weights.js',
   'node scripts/verify-runtime-delivery-resilience.js',
   'node scripts/verify-payments.js',
   'node scripts/verify-leizu-pipeline.js',
@@ -301,17 +324,16 @@ const checks = [
   'node scripts/verify-ml-stop-psychologism.js',
   'node scripts/verify-ml-ai-prose-tells.js',
   'node scripts/verify-ml-antibacktracking.js',
-  'node scripts/verify-ml-shorthand-resolution.js',
   'node scripts/verify-ml-gorgonwars-premise-split.js',
   'node scripts/verify-ml-power-scope.js',
-  'node scripts/verify-ml-dialectical-hardening.js',
-  'node scripts/verify-ml-execution-gates.js',
+  'npm run verify:baseline-morality-amendment-scope',
+  'node scripts/verify-ml-writing-rules.js',
+  'node scripts/verify-mephistodata-articles.js',
   'node scripts/verify-ml-geometry-hardening.js',
   'node scripts/verify-site-integrity.js',
   'node scripts/verify-professional-readiness.js',
   'node scripts/verify-seo.js',
   'node scripts/verify-typography-controls.js',
-  'node scripts/verify-bookwormcard-gate.js'
 ];
 selectSiteCoherence(checks);
 // The canonical build already executes these release blockers. Do not repeat
@@ -406,7 +428,8 @@ function writeGateReport(status, started, passedCommands, failures) {
   assertLiveReleaseLock();
   const reportDir = path.join(process.cwd(), 'scripts', 'reports');
   fs.mkdirSync(reportDir, { recursive: true });
-  const total = activeChecks.length + sequential.length + finalSequential.length;
+  const total = activeChecks.length + sequential.length
+    + concurrentReadOnlySweeps.length + finalSequential.length;
   const report = {
     generated_at: releaseTimestamp,
     status,
@@ -446,7 +469,8 @@ async function main() {
   const started = Date.now();
   const passedCommands = [];
   const mode = reuseBuild ? 'reuse verified canonical build' : 'self-build public surface';
-  const totalChecks = activeChecks.length + sequential.length + finalSequential.length;
+  const totalChecks = activeChecks.length + sequential.length
+    + concurrentReadOnlySweeps.length + finalSequential.length;
   console.log(`VERIFY ALL FAST — ${totalChecks} checks, concurrency ${concurrency}, timeout ${commandTimeoutMs}ms, mode: ${mode}`);
   for (const cmd of sequential) {
     try {
@@ -459,6 +483,33 @@ async function main() {
       process.exitCode = 1;
       return;
     }
+  }
+  let sweepIndex = 0;
+  const sweepFailures = [];
+  async function sweepWorker() {
+    while (true) {
+      const i = sweepIndex++;
+      if (i >= concurrentReadOnlySweeps.length || sweepFailures.length) return;
+      const cmd = concurrentReadOnlySweeps[i];
+      try {
+        const r = await run(cmd, { quiet: true });
+        passedCommands.push(cmd);
+        console.log(`PASS ${String(r.ms).padStart(6)}ms  ${cmd}`);
+      } catch (error) {
+        sweepFailures.push(error);
+      }
+    }
+  }
+  const sweepConcurrency = Math.max(
+    1,
+    Math.min(concurrency, 3, concurrentReadOnlySweeps.length),
+  );
+  await Promise.all(Array.from({ length: sweepConcurrency }, sweepWorker));
+  if (sweepFailures.length) {
+    writeGateReport('failed', started, passedCommands, sweepFailures);
+    printFailures(sweepFailures);
+    process.exitCode = 1;
+    return;
   }
   let index = 0, passed = 0;
   const failures = [];

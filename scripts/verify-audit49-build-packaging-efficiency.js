@@ -5,12 +5,20 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const {spawnSync} = require('child_process');
+const {PublicBuildLock} = require('./lib/public-build-lock');
 
 const ROOT = path.resolve(__dirname, '..');
 const REPORT = path.join(ROOT, 'scripts', 'reports', 'audit49-build-packaging-efficiency.json');
 const failures = [];
 const read = relative => fs.readFileSync(path.join(ROOT, relative), 'utf8');
 const check = (condition, message) => { if (!condition) failures.push(message); };
+function lstatIfPresent(candidate) {
+  try { return fs.lstatSync(candidate); }
+  catch (error) {
+    if (error.code === 'ENOENT') return null;
+    throw error;
+  }
+}
 
 const runner = read('scripts/verify-all-runner.js');
 const pkg = JSON.parse(read('package.json'));
@@ -19,6 +27,9 @@ const selector = read('scripts/package_selection.py');
 const deployer = read('scripts/package-deployer-compatible.py');
 const sourcePackager = read('scripts/package-netlify-source.py');
 const publicBuilder = read('scripts/build-public-deploy.js');
+const publicParity = read('scripts/verify-public-deploy-parity.js');
+const completePackager = read('scripts/package-complete-current.py');
+const cleanRoomVerifier = read('scripts/verify-clean-room-release.py');
 const technicalAggregate = read('scripts/verify-audit49-technical-efficiency.js');
 const packageTests = read('scripts/test_package_integrity.py');
 const workflow = read('.github/workflows/predeploy.yml');
@@ -35,6 +46,28 @@ for (const marker of [
   'process.exitCode = 1',
   'failed_checks: failures',
 ]) check(runner.includes(marker), `full runner lacks ${marker}`);
+for (const marker of [
+  'const concurrentReadOnlySweeps = [',
+  "'node scripts/verify-front-facing-overlap-browser.js'",
+  "'node scripts/verify-visible-geometry-browser.mjs'",
+  "'node scripts/verify-teacherresources-state-layout-browser.js'",
+  "'node scripts/verify-home-map-browser.js'",
+  "'node scripts/verify-polymythcal-sets13-15-browser.js'",
+  "'node scripts/verify-polymythcal-destination-browser.js'",
+  'Math.min(concurrency, 3, concurrentReadOnlySweeps.length)',
+  'await Promise.all(Array.from({ length: sweepConcurrency }, sweepWorker))',
+  '+ concurrentReadOnlySweeps.length + finalSequential.length',
+]) check(runner.includes(marker), `full runner lacks bounded exhaustive-browser concurrency marker ${marker}`);
+const sequentialStart = runner.indexOf('const sequential = [');
+const concurrentSweepStart = runner.indexOf('const concurrentReadOnlySweeps = [');
+check(
+  (runner.match(/node scripts\/verify-build-idempotence\.js/g) || []).length === 1
+    && sequentialStart >= 0
+    && concurrentSweepStart > sequentialStart
+    && runner.slice(sequentialStart, concurrentSweepStart)
+      .includes("'node scripts/verify-build-idempotence.js'"),
+  'full runner must serialize idempotence before the bounded browser pool',
+);
 check(
   runner.indexOf("writeGateReport('failed', started, passedCommands, [error])")
     < runner.indexOf('let index = 0, passed = 0'),
@@ -112,43 +145,69 @@ check(
 );
 check(runner.includes('node scripts/verify-audit45-browser-evidence.js'), 'full runner lacks inherited Audit 45 evidence gate');
 check(runner.includes('node scripts/verify-public-deploy-parity.js'), 'reuse runner lacks public parity');
+check(
+  completePackager.includes('os.environ["SS_PUBLIC_OUTPUT_MTIME"] = DERIVED_GENERATED_AT'),
+  'complete packager does not pin public output reconciliation to the release timestamp',
+);
+check(
+  cleanRoomVerifier.includes('"SS_PUBLIC_OUTPUT_MTIME": generated_at'),
+  'clean-room environment does not pin public output reconciliation to its verified timestamp',
+);
 
 for (const marker of [
-  "const BUILD_LOCK = path.join(ROOT, '.public-build-lock');",
+  'const publicBuildLock = new PublicBuildLock({',
+  'authorizeEmptyOverlayRecovery,',
   'function acquireBuildLock()',
   'function releaseBuildLock()',
   'activeOwner',
   'acquireBuildLock();',
   'releaseBuildLock();',
 ]) check(publicBuilder.includes(marker), `public builder lacks ${marker}`);
-let reconciledProbePair = false;
+for (const marker of [
+  'authorizePostBuildOverlayReconciliation()',
+  'reconcilePostBuildOverlayResidue()',
+  'postReconciliationState.present.length',
+]) check(publicParity.includes(marker), `public parity lacks post-build reconciliation marker ${marker}`);
 const reconciledLock = path.join(ROOT, '.public-build-lock');
 const reconciledStaging = path.join(ROOT, '.public-build-staging');
-const reconciledOwner = path.join(reconciledLock, 'owner.json');
-reconciledProbePair = fs.existsSync(reconciledLock)
-  && fs.existsSync(reconciledStaging)
-  && !fs.existsSync(reconciledOwner);
-function isEmptyTransientDirectory(candidate) {
-  if (!fs.existsSync(candidate)) return false;
-  const stats = fs.lstatSync(candidate);
-  if (!stats.isDirectory() || stats.isSymbolicLink()) return false;
-  return fs.readdirSync(candidate, { withFileTypes: true }).every(entry => (
-    entry.isDirectory()
-      && !entry.isSymbolicLink()
-      && isEmptyTransientDirectory(path.join(candidate, entry.name))
-  ));
-}
+const reconciledPrevious = path.join(ROOT, '.public-build-previous');
+const publicTransientState = new PublicBuildLock({
+  root: ROOT,
+  buildOut: reconciledStaging,
+  previousOut: reconciledPrevious,
+}).inspectTransientState();
 for (const transient of ['.public-build-lock', '.public-build-staging', '.public-build-previous']) {
   const transientPath = path.join(ROOT, transient);
-  const reconciledProbeArtifact = reconciledProbePair
-    && (transient === '.public-build-lock' || transient === '.public-build-staging');
+  const label = transient === '.public-build-lock'
+    ? 'lock'
+    : transient === '.public-build-staging' ? 'staging' : 'previous';
   check(
-    !fs.existsSync(transientPath)
-      || isEmptyTransientDirectory(transientPath)
-      || reconciledProbeArtifact,
+    !lstatIfPresent(transientPath)
+      || publicTransientState.tombstones.includes(label)
+      || publicTransientState.directory_overlays.includes(label),
     `public build left ${transient}`,
   );
 }
+const publicTransientIsClean = publicTransientState.present.length === 0
+  ? publicTransientState.action === 'retry'
+  : publicTransientState.present.length === publicTransientState.tombstones.length
+      && publicTransientState.action === 'reclaim-overlay-tombstones'
+    || publicTransientState.present.length === publicTransientState.directory_overlays.length
+      && publicTransientState.action === 'reclaim-directory-overlay'
+    || publicTransientState.present.every(label => (
+      publicTransientState.tombstones.includes(label)
+        || publicTransientState.directory_overlays.includes(label)
+    )) && publicTransientState.action === 'reclaim-post-build-overlays';
+check(
+  publicTransientIsClean,
+  'public transient classification bypassed the centralized lock decision',
+);
+check(
+  !read('scripts/verify-audit49-build-packaging-efficiency.js').includes(
+    ['isEmpty', 'TransientDirectory'].join(''),
+  ),
+  'Audit 49 restored a divergent recursive-empty transient classifier',
+);
 
 const matrix = workflow.match(/matrix:\s*\n\s*#(?:.|\n)*?\n\s*os:\s*\[([^\]]+)\]/)?.[1] || '';
 check(matrix.includes('windows-latest') && matrix.includes('macos-latest'), 'portable matrix lacks Windows or macOS');

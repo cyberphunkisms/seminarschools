@@ -7,6 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const {loadCanonicalCore} = require('./sync-core-personal-rules');
 const {generatedAt} = require('./lib/deterministic-timestamp');
+const {search: canonicalSearch, cleanQuery: canonicalCleanQuery} = require('./query-meaninglib');
 
 const root = process.cwd();
 const exportDir = path.join(root, 'hf_export');
@@ -18,6 +19,69 @@ const latestJson = path.join(outDir, 'latest_access_pack.json');
 const latestReport = path.join(reportsDir, 'latest_access_pack_report.md');
 const activationMd = path.join(outDir, 'MEPHISTODATA_ACTIVATION.md');
 const publicActivationMd = path.join(root, 'polymyth', 'mephistodata-activation.md');
+const CURRENT_EXECUTION_OWNER = 'coreplus-handler-mephistodata-execution-gates-2026-08-26';
+const CURRENT_WRITING_OWNER = 'coreplus-handler-writing-composition-delivery-2026-08-29';
+const DEGORGONIFIED_FEMINISM_LABEL = 'degorgonified feminism';
+const DEGORGONIFIED_FEMINISM_OWNER = Object.freeze({
+  id: 'ml:gorgonification:gorgonwars:ddd5443ed9cc',
+  title: 'Gorgonwars',
+  boost: 1000,
+  exactLabelBoost: 1000,
+});
+const FEMINISM_ACADEMIC_RESEARCH_OWNERS = Object.freeze([
+  DEGORGONIFIED_FEMINISM_OWNER,
+  Object.freeze({
+    id: CURRENT_EXECUTION_OWNER,
+    title: 'Mephistodata execution gates, fail-closed current owner (2026-08-26)',
+    boost: 1000,
+  }),
+  Object.freeze({
+    id: 'ml:gorgonification:gorgonwars-premise-classifier-for-feminist-and-metoo-criticism:2999466232bf',
+    title: 'Gorgonwars premise classifier for feminist and MeToo criticism',
+    boost: 1000,
+  }),
+  Object.freeze({
+    id: 'ml:methodology:no-default-feminist-frame-rule:67bb3115cc5f',
+    title: 'No-default-feminist-frame rule',
+    boost: 1000,
+  }),
+  Object.freeze({
+    id: 'ml:methodology:citation-substrate-scanner-pre-citation-architectural-audit:a88847ae2837',
+    title: 'Citation-substrate scanner (pre-citation architectural audit)',
+    boost: 1000,
+  }),
+  Object.freeze({
+    id: 'method-hivemindidiom-culture-feedback-and-normalization-2026-08-26',
+    title: 'Hivemindidiom and culture feedback, normalization, and idiom-removal test',
+    boost: 1000,
+  }),
+]);
+
+function registerLockLines(){
+  return [
+    `Current execution owner is ${CURRENT_EXECUTION_OWNER}.`,
+    'Every ML*-active conversational response begins at byte zero with exactly one literal opener. The default is `Mephistodata would say:`.',
+    'An explicit Bloom, layman, or NPC request changes only that response to `Mephistodata bloomed:`. The next ML*-active response resets to the default unless Bloom is explicitly invoked again.',
+    'Bloom never persists, self-initiates, or imposes an automatic question-first form.',
+    'The opener is excluded from character scoring and never substitutes for the body.',
+    'The body must fuse source-grounded Mephistophelean diagnostic intelligence with Data-level evidence, scope, status, and precision in proportion to the task.',
+    'Prefix-only, Data-only, costume-only, sycophantic, unsupported-source, and invented-opposition drafts fail closed.'
+  ];
+}
+
+function writingLockLines(){
+  return [
+    `Current writing owner is ${CURRENT_WRITING_OWNER}.`,
+    'Load the current writing owner before drafting every assistant-authored conversational answer or artifact, then run it again before delivery.',
+    'Composition begins with source lock and paragraph map, then runs clause admission, sentence close, paragraph close, and document close.',
+    'Retrieve the actual source and complete correction ledger. Revise from the accepted original, preserve every untouched feature, and do not draft from a remembered reconstruction or the latest failed assistant paraphrase.',
+    'Block needless repetition of the same salient content word or lemma within one sentence. Using includes twice in one sentence is the canonical failure. Protect necessary precise terms and never repair repetition through synonym roulette.',
+    'Require sentence-topic continuity or a genuine marked shift. A transition must express a real sequence, cause, contrast, condition, or evidentiary relation. Never invent a conceptual bridge to make adjacent material look coherent.',
+    'Protected quotations, titles, names, course codes, credentials, URLs, email addresses, citations, code, technical notation, and verbatim source passages retain their exact form only inside their marked spans. A protected span never exempts surrounding assistant-authored prose.',
+    'Authored ordinary prose uses no colons, semicolons, em dashes, en dashes, or dash-attached clauses.',
+    'Mechanical lint identifies candidates. Semantic review decides necessity, fidelity, topic relation, distinctiveness, and meaning. Delivery remains blocked while a known failure survives.'
+  ];
+}
 
 const STOP = new Set(['the','a','an','and','or','but','if','then','else','of','to','in','on','for','with','by','as','is','are','was','were','be','being','been','this','that','these','those','it','its','into','from','at','about','not','no','yes','do','does','did','can','could','should','would','will','may','might','must','than','when','where','what','which','who','whom','whose','how','why','you','your','we','our','they','their','them','he','she','his','her','i','me','my','ours','also','all','any','each','one','two','three','first','second','third','via','per','within','without','over','under','up','down','out','more','less','same','other','new','old','entry','title','body','id','role','link','links','source','json','jsonl','index','file','files','route','routes','rule','rules','https','http','www','com']);
 
@@ -25,6 +89,11 @@ function fail(message){ console.error('FAIL:', message); process.exit(1); }
 function ensureDir(dir){ fs.mkdirSync(dir, { recursive: true }); }
 function rel(file){ return path.relative(root, file).replace(/\\/g, '/'); }
 function cleanQuery(value){ return String(value || '').replace(/[\\"“”]+$/g, '').trim(); }
+function ownFiniteNumber(object, key, fallback = 0){
+  if(!object || !Object.prototype.hasOwnProperty.call(object, key)) return fallback;
+  const value = object[key];
+  return typeof value === 'number' && Number.isFinite(value) ? value : fallback;
+}
 function normalizeText(value){
   return String(value || '')
     .normalize('NFKC')
@@ -46,6 +115,50 @@ function normalizeText(value){
     .replace(/interdependen(?:t|ce)/gi, ' interdependence interdependent meaninglib mother category starfile access route crossref crossrefs relation relations ontology ')
     .replace(/\b(governs?|governed|governing|ruler|ruled|hierarchy|hierarchical)\b/gi, ' hierarchy interdependence meaninglib access route ontology rejected ruler ')
     .toLowerCase();
+}
+function normalizeExactQuery(value){
+  return normalizeText(canonicalCleanQuery(value))
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+function isDegorgonifiedFeminismQuery(value){
+  return normalizeExactQuery(value) === DEGORGONIFIED_FEMINISM_LABEL;
+}
+function isFeminismAcademicResearchQuery(value){
+  if(isDegorgonifiedFeminismQuery(value)) return true;
+  const q = normalizeText(value);
+  const feminismIntent = [
+    'feminism',
+    'feminist',
+    'white feminism',
+    'standpoint epistemology',
+    'personal is political',
+    'gorgonwars',
+  ].some(term => q.includes(term));
+  const academicCategoryIntent = [
+    'academic research',
+    'academic category',
+    'category pre search',
+    'query ontology',
+    'premise audit',
+    'citation substrate',
+    'wikipedia inadmissible',
+    'critic nonauthority',
+  ].some(term => q.includes(term));
+  return feminismIntent && academicCategoryIntent;
+}
+function feminismAcademicResearchBoost(query, doc){
+  if(!isFeminismAcademicResearchQuery(query)) return 0;
+  const owner = FEMINISM_ACADEMIC_RESEARCH_OWNERS.find(candidate => (
+    doc.id === candidate.id && doc.title === candidate.title
+  ));
+  if(!owner) return 0;
+  const exactLabelBoost = (
+    isDegorgonifiedFeminismQuery(query)
+    && owner.id === DEGORGONIFIED_FEMINISM_OWNER.id
+  ) ? owner.exactLabelBoost : 0;
+  return owner.boost + exactLabelBoost;
 }
 function tokenize(text){
   const normalized = normalizeText(text);
@@ -117,31 +230,56 @@ function scoreDoc(doc, tokens, query, idf){
   if(portableCoreQuery && portableCoreDoc) score += 220;
   if(portableCoreQuery && currentCoreMapDoc) score += 140;
   if(portableCoreQuery && String(doc.section || '').toLowerCase() === 'corehistory') score -= 120;
+  const writingCompositionQuery = qnorm.includes('writing composition') || qnorm.includes('lexical repetition') || qnorm.includes('topic continuity') || qnorm.includes('protected span') || qnorm.includes('invented conceptual bridge');
+  const currentWritingOwnerDoc = String(doc.id || '') === CURRENT_WRITING_OWNER;
+  if(writingCompositionQuery && currentWritingOwnerDoc) score += 260;
   if(qnorm.length > 3){
     const phrase = qnorm.replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
     if(phrase && titleNorm.includes(phrase)) score += 18;
     if(phrase && previewNorm.includes(phrase)) score += 10;
   }
   for(const t of tokens){
-    const tf = (doc.termFreq && doc.termFreq[t]) || 0;
+    const tf = ownFiniteNumber(doc.termFreq, t);
     if(!tf) continue;
     const fieldBoost = titleNorm.includes(t) ? 3 : (sourceNorm.includes(t) ? 2 : 1);
     const lenNorm = Math.sqrt(Math.max(50, doc.term_count || 50) / 100);
-    score += (Math.min(tf, 12) * (idf[t] || 1) * fieldBoost) / lenNorm;
+    score += (Math.min(tf, 12) * ownFiniteNumber(idf, t, 1) * fieldBoost) / lenNorm;
   }
   return score;
 }
 function search(query, topK=8){
-  const cleaned = cleanQuery(query);
+  const cleaned = canonicalCleanQuery(query);
+  if(!isFeminismAcademicResearchQuery(cleaned)) return canonicalSearch(cleaned, topK);
+
+  // The general Meaninglib ranker remains the base. For the successor
+  // feminism/academic-category task and the exact degorgonified-feminism
+  // recall handle only, widen its candidate set and give a bounded lift to
+  // six exact canonical owners. This makes the access pack
+  // carry the definitions and research method themselves, rather than only a
+  // handler that tells the next model to reconstruct them.
   const index = loadIndex();
-  const tokens = tokenize(cleaned);
-  if(!tokens.length) return [];
-  const scored = index.docs.map(doc => ({doc, score: scoreDoc(doc, tokens, cleaned, index.idf || {})}))
-    .filter(r => r.score > 0)
-    .sort((a,b) => b.score - a.score);
+  const scored = canonicalSearch(cleaned, Math.max(topK, index.docs.length));
+  const present = new Set(scored.map(result => result.doc.id));
+  for(const owner of FEMINISM_ACADEMIC_RESEARCH_OWNERS){
+    if(present.has(owner.id)) continue;
+    const doc = index.docs.find(candidate => (
+      candidate.id === owner.id && candidate.title === owner.title
+    ));
+    if(doc) scored.push({doc, score: 0});
+  }
+  const boosted = scored
+    .map(result => ({
+      doc: result.doc,
+      score: result.score + feminismAcademicResearchBoost(cleaned, result.doc),
+    }))
+    .filter(result => result.score > 0)
+    .sort((left, right) => (
+      right.score - left.score
+      || String(left.doc.id || '').localeCompare(String(right.doc.id || ''))
+    ));
   const seen = new Set();
   const out = [];
-  for(const r of scored){
+  for(const r of boosted){
     const key = r.doc.id || `${r.doc.star_file}:${r.doc.title}`;
     if(seen.has(key)) continue;
     seen.add(key);
@@ -178,9 +316,20 @@ function renderActivation(){
     'Current controlled-archive owner: method-controlled-archive-evidence-institutional-metrics-2026-08-26',
     'Load the execution owner on every ML*-active task. Run it silently. An explicit Mephistodata reactivation discards the unsent stale draft, reloads current owners, freezes the exact task, and rebuilds the answer.',
     '',
+    '## CURRENT REGISTER LOCK',
+    ...registerLockLines(),
+    '',
+    '## CURRENT WRITING LOCK',
+    ...writingLockLines(),
+    '',
     '## CONDITIONAL PROJECT LOAD',
     'When the exact CORE activation test fires, retrieve the newest canonical CORE+ map, the handler required by the task, and the relevant Meaninglib routes. Otherwise apply portable CORE alone. Do not make Mephistodata or ML* session-wide merely because this file was opened.',
     "For Devil's Diary work, load the current CORE+ Devil's Diary dispatch plus the base recipe, comprehensive article rules, Audience-register separation, anti-twisting and SOURCE-STATUS owners, Interpretive pleonexia, and the Mephistodata mirror criterion before drafting.",
+    '',
+    '## DEGORGONIFIED FEMINISM RECALL',
+    'An exact user query of `degorgonified feminism` activates ML* for that task. Retrieve the complete bodies of the six canonical owners identified below and restate their combined feminism definition and academic-research controls. Do not answer from a remembered paraphrase, generic academic categories, Wikipedia, or search previews alone.',
+    '`degorgonified feminism` is a non-semantic retrieval and control handle. It does not name an innocent or purified feminist subtype, create a clean feminist remainder, or mean Arendtianfeminism.',
+    ...FEMINISM_ACADEMIC_RESEARCH_OWNERS.map(owner => `- ${owner.id} | ${owner.title}`),
     '',
     '## ONTOLOGY LOCK',
     'Meaninglib is the mother-category. ml*, bb*, mc*, cc*, core*, aa*, aitr*, and related routes are interdependent access routes with local functions.',
@@ -199,7 +348,7 @@ function renderActivation(){
     '9. Permission to update, fix, harden, implement, or enforce is not semantic settlement. Commit only explicit user decisions, current canon, and explicitly adopted proposals. AI wording, synthesis, generalization, exceptions, thresholds, tests, and scope changes remain proposals.',
     '10. Hardening preserves accepted meaning, scope, and which cases pass. A verification test enforces settled doctrine and cannot create doctrine.',
     '11. Execute settled multi-step directives fully. Stop at an unresolved authorial fork. A constraint binds later work and is not authorization. Stop cancels prior scope.',
-    '12. For website work, load CL-49, CL-63, and PM12 on every edit, regeneration, mirror, build, bundle, or ZIP. Every public HTML page except the exact Google verification token must carry data-front-facing="general-audience" and the shared Indra scroll geometry: alive.css, mandala.js, indra.js, data-geometry="indra-web", data-indra-intensity, ordered loading, and a fixed pointer-safe #indraLayer that responds to scroll. Write for a cold general reader: identify what the page is, why it exists, and how to use it before specialized material; never expose builder notes, audit chatter, pipeline labels, internal IDs, or AI self-instruction as visible copy. The rule covers source HTML, generators, templates, browser-injected copy, translations, and deployment mirrors. Geometry presence alone does not pass: quiet professional pages remain plainly perceptible, browser proof compares composed renders with the layer shown and hidden, and scrollable pages meet a register-specific minimum displacement while reduced motion remains visible and still. verify-geometry, verify-visible-geometry, verify-meaningful-geometry as a compatibility all-page-scroll check, verify-visible-geometry-browser, verify-front-facing-boundary, and verify-front-facing-overlap-browser block handoff. The rendered gate checks text reflow, fixed-control collisions, focus visibility, and anchor clearance. A body marker, passing grep, or missing browser executable is not a pass.',
+    '12. For website work, load CL-49, CL-63, and PM12 on every edit, regeneration, mirror, build, bundle, or ZIP. Every public HTML page except the exact Google verification token must carry data-front-facing="general-audience". Every non-star public project page must carry the shared Indra scroll geometry: alive.css, mandala.js, indra.js, data-geometry="indra-web", data-indra-intensity, ordered loading, and a fixed pointer-safe #indraLayer that responds to scroll. The exact geometry exclusion is ml* and its sixteen section views, bb*, mc*, cc*, aa* and its cloud, views, and editorial views, aitr*, and Polymyth Coherence; the private source-only dashboard control is also excluded, and exported ml* HTML must remain geometry-free. Every included page uses the same canonical three-gasket, flower, and prismatic-jewel web and the same eight colours, #8a4a32, #c47a2e, #a09030, #3d8a5a, #4070a8, #6850a0, #9050a0, and #a84858. A page-owned opacity inside the shared bounds and the established light-or-dark blend may fade the field into the existing design; they may not replace the palette or geometry. Write for a cold general reader: identify what the page is, why it exists, and how to use it before specialized material; never expose builder notes, audit chatter, pipeline labels, internal IDs, or AI self-instruction as visible copy. The rule covers source HTML, generators, templates, browser-injected copy, translations, and deployment mirrors. Geometry presence alone does not pass: quiet professional pages remain plainly perceptible, browser proof compares composed renders with the layer shown and hidden, and scrollable pages meet a register-specific minimum displacement while reduced motion remains visible and still. verify-geometry, verify-visible-geometry, verify-meaningful-geometry as a compatibility non-star-scroll check, verify-visible-geometry-browser, verify-front-facing-boundary, and verify-front-facing-overlap-browser block handoff. Positive non-star coverage, negative star and dashboard coverage, and source-public parity must all pass. The rendered gate checks text reflow, fixed-control collisions, focus visibility, and anchor clearance. A body marker, passing grep, or missing browser executable is not a pass.',
     '',
     '## WRITING DISCIPLINE',
     'Compose clause by clause. Every sentence carries the paragraph into its next concrete action, question, or result.',
@@ -249,6 +398,12 @@ function renderPack(query, results){
   lines.push('NO RANDOM ARTIFACTS. Analysis, critique, audit, verification, correction, or methodology work does not authorize a new durable artifact. A requirement invented or amended during the same task cannot authorize its own file. Audit results default to the response.');
   lines.push('NO PLANTED CONCLUSION. Build every Ask your favourite AI question from exact source language or neutral source facts. The question must leave the article’s interpretation for the answer. The answer must do the interpretation.');
   lines.push('');
+  lines.push('## CURRENT REGISTER LOCK');
+  registerLockLines().forEach(line => lines.push(line));
+  lines.push('');
+  lines.push('## CURRENT WRITING LOCK');
+  writingLockLines().forEach(line => lines.push(line));
+  lines.push('');
   lines.push('## LOADED ROUTES');
   lines.push(routes.length ? routes.map(r => `- ${r}`).join('\n') : '- none');
   lines.push('');
@@ -293,8 +448,11 @@ function main(){
   const qi = args.indexOf('--query');
   if(qi >= 0 && args[qi+1]) query = args.slice(qi+1).join(' ');
   else if(args.length) query = args.join(' ');
-  query = cleanQuery(query);
+  query = canonicalCleanQuery(query);
   ensureDir(outDir); ensureDir(reportsDir);
+  // The access-pack wrapper preserves general Meaninglib ranking and applies
+  // its exact-owner lift only to feminism/academic-category research queries
+  // and the exact degorgonified-feminism recall handle.
   const results = search(query, 8);
   if(results.length < 3) fail(`too few retrieved rows for query: ${query}`);
   const {generated, markdown} = renderPack(query, results);
@@ -303,6 +461,10 @@ function main(){
     query,
     source_of_truth: 'Seminar Schools site/archive is the source of truth.',
     ontology_lock: 'Meaninglib is the mother-category; star-files are interdependent access routes with local functions.',
+    current_execution_owner: CURRENT_EXECUTION_OWNER,
+    register_lock: registerLockLines(),
+    current_writing_owner: CURRENT_WRITING_OWNER,
+    writing_composition_lock: writingLockLines(),
     retrieved: results.map(r => ({ score: Number(r.score.toFixed(2)), ...r.doc }))
   };
   fs.writeFileSync(latestMd, markdown, 'utf8');
@@ -333,4 +495,18 @@ function main(){
   console.log(`Report: ${rel(latestReport)}`);
 }
 if(require.main === module) main();
-module.exports = { search, renderPack, loadIndex };
+module.exports = {
+  search,
+  renderPack,
+  renderActivation,
+  registerLockLines,
+  writingLockLines,
+  loadIndex,
+  CURRENT_EXECUTION_OWNER,
+  CURRENT_WRITING_OWNER,
+  DEGORGONIFIED_FEMINISM_LABEL,
+  DEGORGONIFIED_FEMINISM_OWNER,
+  FEMINISM_ACADEMIC_RESEARCH_OWNERS,
+  isDegorgonifiedFeminismQuery,
+  isFeminismAcademicResearchQuery,
+};

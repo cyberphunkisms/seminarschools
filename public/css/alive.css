@@ -1,7 +1,7 @@
 /* =========================================================================
    ALIVE — steady site-wide interaction + scroll geometry (2026-07-23)
 
-   The visual system keeps the shared Indra geometry on every page while
+   The visual system keeps the shared Indra geometry on every non-star page while
    removing layout-moving microinteractions. Scroll movement is transform-only
    and driven by /js/indra.js. Clickable things respond through colour, border,
    underline, and focus — never by jumping away from the pointer.
@@ -22,22 +22,22 @@ body[data-geometry="indra-web"] {
   isolation: isolate;
 }
 
-/* VISIBLE_GEOMETRY_CONTRACT — one fixed, noninteractive watermark carries the
-   exact canonical Polymyth Mandala. Thousands of historic pages paint opaque
-   local wrappers, so the compositor must sit above those wrappers to remain a
-   visible visual background. Its calibrated opacity, aria-hidden ownership,
-   and pointer isolation keep content readable and fully interactive. */
+/* VISIBLE_GEOMETRY_CONTRACT — one fixed, noninteractive field carries the
+   exact original Polymyth Mandala through two scroll cameras. Thousands of
+   historic pages paint opaque local wrappers, so the compositor sits above
+   those wrappers while low opacity keeps it perceptually in the background. */
 #indraLayer {
   position: fixed;
   inset: 0;
   z-index: 2147483000;
   pointer-events: none;
   user-select: none;
-  color: var(--geo-ink, var(--accent, currentColor));
-  opacity: var(--indra-opacity, .110);
+  color: var(--indra-color, var(--geo-ink, var(--accent, currentColor)));
+  opacity: var(--indra-opacity-resolved, var(--indra-opacity, .110)) !important;
+  filter: none !important;
   contain: layout paint style;
   overflow: hidden;
-  mix-blend-mode: normal;
+  mix-blend-mode: normal !important;
   -webkit-mask-image: none;
   mask-image: none;
 }
@@ -50,23 +50,6 @@ body[data-geometry="indra-web"] {
   opacity: var(--indra-camera-opacity, 1);
   transform-origin: 50% 50%;
   will-change: transform;
-}
-#indraLayer .indra-coverage {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  opacity: .82;
-  filter: drop-shadow(0 0 .25px currentColor);
-  transform: none;
-}
-#indraLayer .indra-coverage svg {
-  inline-size: min(180vmax, 1500px);
-  block-size: min(180vmax, 1500px);
-  max-inline-size: none;
-  max-block-size: none;
-  display: block;
-  overflow: visible;
 }
 #indraLayer .indra-definition-bank {
   position: absolute;
@@ -85,11 +68,8 @@ body[data-geometry="indra-web"] {
 }
 #indraLayer .geo-stroke {
   stroke: currentColor;
-}
-
-:root[data-theme="dark"] #indraLayer { mix-blend-mode: screen; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) #indraLayer { mix-blend-mode: screen; }
+  fill: none;
+  vector-effect: non-scaling-stroke;
 }
 
 /* Calm, legible interaction feedback. */

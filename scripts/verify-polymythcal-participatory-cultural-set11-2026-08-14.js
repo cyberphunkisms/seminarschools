@@ -76,7 +76,7 @@ const medusa=byId.get('soulpepper-medusa-talkback-2026-07-08');
 assert(medusa&&medusa.talkback_status==='confirmed'&&medusa.director_attendance_status==='unconfirmed','Medusa regression failed');
 assert(consolidated.length===publicEvents.length&&consolidated.length>=1700,`Set 11 baseline requires at least 1,700 canonical/public records; found ${consolidated.length}/${publicEvents.length}`);
 for(const f of ['participatory_formats','participation_mode','participation_roles','facilitation_status','skill_level','drop_in_status','participation_required','participation_evidence']) assert(schema.properties?.[f],`Schema missing ${f}`);
-const taxonomy=readJson('polymythseminars/browse.json').taxonomy, revamp=readText('scripts/lib/polymythcal-discovery-model.js'), detail=readText('scripts/build-polymythcal-audit13.py');
+const taxonomy=readJson('polymythseminars/research.json').taxonomy, revamp=readText('scripts/lib/polymythcal-discovery-model.js'), detail=readText('scripts/build-polymythcal-audit13.py');
 for(const value of requiredFormats) assert(taxonomy?.axes?.participationFormats?.values?.[value]?.en&&taxonomy?.axes?.participationFormats?.values?.[value]?.fr,`Bilingual Research taxonomy lacks Participation facet ${value}`);
 for(const marker of ['participationFormats','participatory_formats','participation_mode']) assert(revamp.includes(marker),`Participation discovery model missing ${marker}`);
 for(const marker of ['Participation formats','Participation mode','Participation roles','Participation evidence']) assert(detail.includes(marker),`Participation detail surface missing ${marker}`);
@@ -91,4 +91,3 @@ for(let n=260;n<=267;n++) assert(cl.get(`CL-WEB-${n}`)?.status==='complete',`CL-
 assert(/113 Set 11 records/.test(cl.get('CL-WEB-266')?.decision||''),'CL-WEB-266 record count drifted');
 for(const rel of ['WEBSITE_CL_2026-07-19.md','docs/WEBSITE_CL_2026-07-19.md']){const t=readText(rel);assert(t.includes('CL-WEB-267'),`${rel}: Set 11 section incomplete`)}
 console.log(JSON.stringify({manual_records:manual.length,consolidated_records:consolidated.length,set11_records:batch.length,parent_records:parents.length,child_occurrences:children.length,confirmed_records:meta.confirmed_records,qualified_watches:watches.length,sources:sourceRows.length,change_list:'CL-WEB-260 through CL-WEB-267 complete'},null,2));
-

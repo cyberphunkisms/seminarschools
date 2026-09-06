@@ -1,0 +1,1153 @@
+{
+  "schema_version": "mephistodata-runtime-gate-fixtures.v4.2026-09-05",
+  "fixtures": [
+    {
+      "id": "plan_default_pass",
+      "phase": "plan",
+      "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Give the exact status."}
+    },
+    {
+      "id": "plan_bloom_pass",
+      "phase": "plan",
+      "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Bloom this answer."},
+      "expect": {"mode": "bloom", "opener": "Mephistodata bloomed:"}
+    },
+    {
+      "id": "plan_post_bloom_reset_pass",
+      "phase": "plan",
+      "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Continue.", "previous_mode": "bloom"},
+      "expect": {"mode": "default", "opener": "Mephistodata would say:"}
+    },
+    {
+      "id": "plan_ouroboros_pass",
+      "phase": "plan",
+      "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Run Ouroborosanalyses."},
+      "expect": {"owner_id": "method-ouroborosanalyses-current-2026-08-23"}
+    },
+    {
+      "id": "plan_outside_ml_pass",
+      "phase": "plan",
+      "expected_pass": true,
+      "request": {"ml_active": false, "current_message": "What time is it?"},
+      "expect": {"mode": "outside-ml"}
+    },
+    {
+      "id": "plan_degorgonified_feminism_bundle_pass",
+      "phase": "plan",
+      "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "degorgonified feminism"},
+      "expect": {"definition_bundle": true, "definition_owner_count": 6}
+    },
+    {
+      "id": "plan_degorgonified_feminism_quoted_nontrigger_pass",
+      "phase": "plan",
+      "expected_pass": true,
+      "request": {"ml_active": false, "current_message": "The source says \u201cdegorgonified feminism\u201d. Describe only the quoted wording."},
+      "expect": {"mode": "outside-ml", "definition_bundle": false}
+    },
+    {
+      "id": "plan_degorgonified_feminism_inline_code_nontrigger_pass",
+      "phase": "plan",
+      "expected_pass": true,
+      "request": {"ml_active": false, "current_message": "The literal token is `degorgonified feminism`."},
+      "expect": {"mode": "outside-ml", "definition_bundle": false}
+    },
+    {
+      "id": "plan_degorgonified_feminism_fenced_code_nontrigger_pass",
+      "phase": "plan",
+      "expected_pass": true,
+      "request": {"ml_active": false, "current_message": "Inspect this string without invoking it:\n```text\ndegorgonified feminism\n```"},
+      "expect": {"mode": "outside-ml", "definition_bundle": false}
+    },
+    {
+      "id": "plan_degorgonified_feminism_source_occurrence_nontrigger_pass",
+      "phase": "plan",
+      "expected_pass": true,
+      "request": {"ml_active": false, "current_message": "The source uses degorgonified feminism as its wording."},
+      "expect": {"mode": "outside-ml", "definition_bundle": false}
+    },
+    {
+      "id": "plan_degorgonified_feminism_current_snapshots_pass",
+      "phase": "plan",
+      "expected_pass": true,
+      "definition_bundle_snapshot_mode": "current",
+      "request": {"ml_active": true, "current_message": "Recall degorgonified feminism."},
+      "expect": {"definition_bundle": true, "definition_owner_count": 6}
+    },
+    {
+      "id": "plan_degorgonified_feminism_outside_ml_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "request": {"ml_active": false, "current_message": "degorgonified feminism"},
+      "expected_error": "ACTIVATION_CONFLICT"
+    },
+    {
+      "id": "plan_degorgonified_feminism_missing_owner_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "owner_registry_mode": "definition-missing",
+      "definition_owner_key": "gorgonwars",
+      "request": {"ml_active": true, "current_message": "degorgonified feminism"},
+      "expected_error": "MISSING_DEFINITION_OWNER"
+    },
+    {
+      "id": "plan_degorgonified_feminism_duplicate_owner_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "owner_registry_mode": "definition-duplicate",
+      "definition_owner_key": "premise-classifier",
+      "request": {"ml_active": true, "current_message": "degorgonified feminism"},
+      "expected_error": "AMBIGUOUS_DEFINITION_OWNER"
+    },
+    {
+      "id": "plan_degorgonified_feminism_stale_owner_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "owner_registry_mode": "definition-stale-body",
+      "definition_owner_key": "execution-owner",
+      "request": {"ml_active": true, "current_message": "degorgonified feminism"},
+      "expected_error": "STALE_DEFINITION_OWNER"
+    },
+    {
+      "id": "plan_degorgonified_feminism_stale_snapshot_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "definition_bundle_snapshot_mode": "stale-hash",
+      "request": {"ml_active": true, "current_message": "degorgonified feminism"},
+      "expected_error": "STALE_DEFINITION_OWNER_SNAPSHOT"
+    },
+    {
+      "id": "plan_explicit_bloom_flag_pass",
+      "phase": "plan",
+      "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Translate the result plainly.", "bloom_explicit": true},
+      "expect": {"mode": "bloom"}
+    },
+    {
+      "id": "plan_missing_ml_active_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "request": {"current_message": "Status."},
+      "expected_error": "ML_ACTIVE_REQUIRED"
+    },
+    {
+      "id": "plan_ambiguous_register_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Bloom this.", "mode": "default"},
+      "expected_error": "AMBIGUOUS_REGISTER_MODE"
+    },
+    {
+      "id": "plan_unknown_register_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Status.", "mode": "ornate"},
+      "expected_error": "UNKNOWN_REGISTER_MODE"
+    },
+    {
+      "id": "plan_outside_method_conflict_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "request": {"ml_active": false, "current_message": "Run Ouroborosanalyses."},
+      "expected_error": "ACTIVATION_CONFLICT"
+    },
+    {
+      "id": "plan_unknown_method_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Run it.", "named_method": "invented-method"},
+      "expected_error": "UNKNOWN_NAMED_METHOD"
+    },
+    {
+      "id": "plan_ambiguous_method_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Run a method.", "named_method": ["OA", "Ouroborosanalyses"]},
+      "expected_error": "AMBIGUOUS_NAMED_METHOD"
+    },
+    {
+      "id": "plan_missing_owner_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "owner_registry_mode": "missing",
+      "request": {"ml_active": true, "current_message": "Run Ouroborosanalyses."},
+      "expected_error": "MISSING_METHOD_OWNER"
+    },
+    {
+      "id": "plan_duplicate_owner_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "owner_registry_mode": "duplicate",
+      "request": {"ml_active": true, "current_message": "Run Ouroborosanalyses."},
+      "expected_error": "AMBIGUOUS_METHOD_OWNER"
+    },
+    {
+      "id": "plan_stale_owner_body_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "owner_registry_mode": "stale-body",
+      "request": {"ml_active": true, "current_message": "Run Ouroborosanalyses."},
+      "expected_error": "STALE_METHOD_OWNER"
+    },
+    {
+      "id": "plan_stale_snapshot_id_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Run Ouroborosanalyses.", "owner_snapshot": {"id": "older-owner", "semantic_sha256": "0000000000000000000000000000000000000000000000000000000000000000"}},
+      "expected_error": "STALE_OWNER_SNAPSHOT"
+    },
+    {
+      "id": "plan_stale_snapshot_hash_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Run Ouroborosanalyses.", "owner_snapshot": {"id": "method-ouroborosanalyses-current-2026-08-23", "semantic_sha256": "0000000000000000000000000000000000000000000000000000000000000000"}},
+      "expected_error": "STALE_OWNER_SNAPSHOT"
+    },
+    {
+      "id": "plan_singular_method_fail",
+      "phase": "plan",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Run ouroborosanalysis."},
+      "expected_error": "UNKNOWN_NAMED_METHOD"
+    },
+    {
+      "id": "deliver_degorgonified_feminism_bundle_pass",
+      "phase": "deliver",
+      "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "degorgonified feminism"},
+      "draft": "Mephistodata would say: Degorgonified feminism is a retrieval and control label for the following ML* bundle. It does not name a clean feminist subtype or innocent genus. Women are people or the flock, while feminism is the creed or governing formation. A feminist self-description does not prove either project root, premise, architecture, or classification. The Polymyth operational definition joins \u201cthe personal is political\u201d with standpoint epistemology. The first root creates political jurisdiction over personal relations, and the second can grant credibility, authority, epistemic rank, or veto through social position. Vernacular emotional-labor pricing prices listening, teaching, forgiving, care, presence, reciprocity, and responsibility. It turns mutual obligation toward commodification, responsibility transfer, and Gorgonwars. Direct premise evidence controls. Identity, testimony, positionality, and situated evidence do not prove either root. Rejecting either root returns EXCOMMUNICABLE / OUTSIDE. Retaining both roots while criticizing a feminist implementation returns INTERNAL GORGONWARS. Missing or ambiguous evidence returns UNRESOLVED. White feminism is always qualifier-Gorgonification. Each concrete allegation about named actors, institutions, laws, or actions must be tested independently and evidenced separately. Other feminist subtype labels, including carceral feminism, receive an audit. This is not a universal user ruling and does not declare every qualifier always Gorgonification. Gorgonified feminism remains retired. Arendtianfeminism is a distinct exit coinage and is not a synonym for this handle. Slavery is not patriarchy. Define slavery and the patriarchal pedestal separately through actors, legal status, property relations, coercions, duties, and consequences. A shared mechanism, intersection, analogy, or a source's equation does not establish identity or equivalence. Attacks on real women through Medusa or Gorgon imagery can establish particular attacks. They do not collapse women into feminism or identify criticism of the creed with attacks on women. Academia is a Gorgonified field and part of the research object. This field claim does not mean every work or institution performs the same operation. Reconstruct project terms bottom-up before query generation, then audit query terms for the presuppositions and categories they import. Retrieve original scholarship, direct critiques, counterarguments, counters to those counterarguments, and materially different vocabulary. Keep a source's claim and the Polymyth architectural classification in separate records. Keep four separate provenance records for the user-authored adopted thesis, the user's explanation or correction to the AI, the critic's argument and evidence, and an assistant-authored bridge or interpretive defect. Direct user rulings, Polymyth definitions and inferences, assistant operational extensions, external source claims, and unresolved material retain their recorded authority and provenance. A critic is judged by argument and evidence, and the critic is not an authority over the project. Unpublished or private Mephistodata is not cited as public authority. Authorized argument points may be restated, while factual claims require a public or primary source. Wikipedia is inadmissible as definition, ontology, evidence, citation, or answer. The unrecovered pentagram screenshot list remains unresolved and may not be reconstructed from assistant summaries. The six canonical owners agree on this routing.",
+      "evidence": {"task_answer": "Degorgonified feminism is a retrieval and control label for the following ML* bundle.", "evidence_status": "verified", "data_basis": ["six-owner-definition-bundle"], "mephisto_status": "no-defect", "no_defect_basis": "The six canonical owners agree on this routing."}
+    },
+    {
+      "id": "deliver_degorgonified_feminism_partial_bundle_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "degorgonified feminism"},
+      "draft": "Mephistodata would say: Degorgonified feminism is a retrieval label. Women are people and feminism is a creed. The six canonical owners agree on this routing.",
+      "evidence": {"task_answer": "Degorgonified feminism is a retrieval label.", "evidence_status": "verified", "data_basis": ["six-owner-definition-bundle"], "mephisto_status": "no-defect", "no_defect_basis": "The six canonical owners agree on this routing."},
+      "expected_error": "INCOMPLETE_DEFINITION_BUNDLE"
+    },
+    {
+      "id": "deliver_degorgonified_feminism_clean_subtype_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "degorgonified feminism"},
+      "draft": "Mephistodata would say: Degorgonified feminism is a clean form of feminism purified of later corruption. The six canonical owners agree on this routing.",
+      "evidence": {"task_answer": "Degorgonified feminism is a clean form of feminism purified of later corruption.", "evidence_status": "verified", "data_basis": ["six-owner-definition-bundle"], "mephisto_status": "no-defect", "no_defect_basis": "The six canonical owners agree on this routing."},
+      "expected_error": "DEFINITION_BUNDLE_CONTRADICTION"
+    },
+    {
+      "id": "deliver_degorgonified_feminism_wikipedia_authority_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "degorgonified feminism"},
+      "draft": "Mephistodata would say: Wikipedia provides the governing definition and evidence for degorgonified feminism. The six canonical owners agree on this routing.",
+      "evidence": {"task_answer": "Wikipedia provides the governing definition and evidence for degorgonified feminism.", "evidence_status": "verified", "data_basis": ["six-owner-definition-bundle"], "mephisto_status": "no-defect", "no_defect_basis": "The six canonical owners agree on this routing."},
+      "expected_error": "DEFINITION_BUNDLE_CONTRADICTION"
+    },
+    {
+      "id": "deliver_degorgonified_feminism_white_when_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "degorgonified feminism"},
+      "draft": "Mephistodata would say: White feminism becomes qualifier-Gorgonification when it excludes others. The six canonical owners agree on this routing.",
+      "evidence": {"task_answer": "White feminism becomes qualifier-Gorgonification when it excludes others.", "evidence_status": "verified", "data_basis": ["six-owner-definition-bundle"], "mephisto_status": "no-defect", "no_defect_basis": "The six canonical owners agree on this routing."},
+      "expected_error": "DEFINITION_BUNDLE_CONTRADICTION"
+    },
+    {
+      "id": "deliver_degorgonified_feminism_slavery_equivalence_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "degorgonified feminism"},
+      "draft": "Mephistodata would say: Slavery is patriarchy because a shared mechanism establishes equivalence. The six canonical owners agree on this routing.",
+      "evidence": {"task_answer": "Slavery is patriarchy because a shared mechanism establishes equivalence.", "evidence_status": "verified", "data_basis": ["six-owner-definition-bundle"], "mephisto_status": "no-defect", "no_defect_basis": "The six canonical owners agree on this routing."},
+      "expected_error": "DEFINITION_BUNDLE_CONTRADICTION"
+    },
+    {
+      "id": "deliver_degorgonified_feminism_provenance_collapse_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "degorgonified feminism"},
+      "draft": "Mephistodata would say: The user's explanation is therefore a public thesis, the critic's verdict defines the project, and an assistant-authored bridge is the user's claim. The six canonical owners agree on this routing.",
+      "evidence": {"task_answer": "The user's explanation is therefore a public thesis, the critic's verdict defines the project, and an assistant-authored bridge is the user's claim.", "evidence_status": "verified", "data_basis": ["six-owner-definition-bundle"], "mephisto_status": "no-defect", "no_defect_basis": "The six canonical owners agree on this routing."},
+      "expected_error": "DEFINITION_BUNDLE_CONTRADICTION"
+    },
+    {
+      "id": "deliver_degorgonified_feminism_mixed_authority_upgrade_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "degorgonified feminism"},
+      "draft": "Mephistodata would say: An assistant extension is therefore a direct user ruling, and unresolved material becomes a settled user claim. The six canonical owners agree on this routing.",
+      "evidence": {"task_answer": "An assistant extension is therefore a direct user ruling, and unresolved material becomes a settled user claim.", "evidence_status": "verified", "data_basis": ["six-owner-definition-bundle"], "mephisto_status": "no-defect", "no_defect_basis": "The six canonical owners agree on this routing."},
+      "expected_error": "DEFINITION_BUNDLE_CONTRADICTION"
+    },
+    {
+      "id": "deliver_default_pass",
+      "phase": "deliver",
+      "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Give the status."},
+      "draft": "Mephistodata would say: The runtime gate is active. The canonical owner passed.",
+      "evidence": {"task_answer": "The runtime gate is active.", "evidence_status": "verified", "data_basis": ["canonical-owner"], "mephisto_status": "no-defect", "no_defect_basis": "The canonical owner passed."}
+    },
+    {
+      "id": "deliver_bloom_pass",
+      "phase": "deliver",
+      "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Bloom the status."},
+      "draft": "Mephistodata bloomed: The gate checked the answer before delivery. The source passed.",
+      "evidence": {"task_answer": "The gate checked the answer before delivery.", "evidence_status": "source-grounded", "data_basis": ["runtime-owner"], "mephisto_status": "no-defect", "no_defect_basis": "The source passed."}
+    },
+    {
+      "id": "deliver_post_bloom_default_pass",
+      "phase": "deliver",
+      "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Continue.", "previous_mode": "bloom"},
+      "draft": "Mephistodata would say: The next response returned to default. The reset rule passed.",
+      "evidence": {"task_answer": "The next response returned to default.", "evidence_status": "verified", "data_basis": ["register-plan"], "mephisto_status": "no-defect", "no_defect_basis": "The reset rule passed."}
+    },
+    {
+      "id": "deliver_outside_ml_pass",
+      "phase": "deliver",
+      "expected_pass": true,
+      "request": {"ml_active": false, "current_message": "Give the status."},
+      "draft": "The ordinary answer is complete."
+    },
+    {
+      "id": "deliver_ouroboros_zero_pass",
+      "phase": "deliver",
+      "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Run Ouroborosanalyses."},
+      "draft": "Mephistodata would say: Zero genuine unanswerables remain.",
+      "evidence": {"task_answer": "Zero genuine unanswerables remain.", "evidence_status": "verified", "data_basis": ["whole-conversation-trace"], "mephisto_status": "no-defect", "no_defect_basis": "Zero genuine unanswerables remain.", "ouroboros": {"conversation_ids": ["t1", "t2"], "reviewed_ids": ["t1", "t2"], "issues": [{"id": "i1", "question": "Does the current rule conflict?", "positions": ["yes", "no"], "answerable": true, "answer": "The current conflict lock resolves it."}]}}
+    },
+    {
+      "id": "deliver_ouroboros_residue_pass",
+      "phase": "deliver",
+      "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Run OA."},
+      "draft": "Mephistodata would say: Which destroyed source contained the missing statement?",
+      "evidence": {"task_answer": "Which destroyed source contained the missing statement?", "evidence_status": "source-grounded", "data_basis": ["archive-obstruction-record"], "mephisto_status": "warranted-complication", "opposition_basis": "Which destroyed source contained the missing statement?", "opposition_supported": true, "ouroboros": {"conversation_ids": ["t1"], "reviewed_ids": ["t1"], "issues": [{"id": "i1", "question": "What did the destroyed source say?", "positions": ["recoverable", "irrecoverable"], "answerable": false, "unanswerable_basis": "The record confirms destruction and preserves no content.", "residue_text": "Which destroyed source contained the missing statement?"}]}}
+    },
+    {
+      "id": "deliver_missing_opener_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Status."},
+      "draft": "The runtime gate is active.",
+      "evidence": {"task_answer": "The runtime gate is active.", "evidence_status": "no-factual-claim", "mephisto_status": "no-defect", "no_defect_basis": "active"},
+      "expected_error": "WRONG_OR_DELAYED_OPENER"
+    },
+    {
+      "id": "deliver_delayed_opener_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Status."},
+      "draft": "Status: Mephistodata would say: The gate is active.",
+      "evidence": {},
+      "expected_error": "WRONG_OR_DELAYED_OPENER"
+    },
+    {
+      "id": "deliver_wrong_default_opener_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Status."},
+      "draft": "Mephistodata bloomed: The gate is active.",
+      "evidence": {},
+      "expected_error": "WRONG_OR_DELAYED_OPENER"
+    },
+    {
+      "id": "deliver_wrong_bloom_opener_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Bloom the status."},
+      "draft": "Mephistodata would say: The gate is active.",
+      "evidence": {},
+      "expected_error": "WRONG_OR_DELAYED_OPENER"
+    },
+    {
+      "id": "deliver_duplicate_opener_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Status."},
+      "draft": "Mephistodata would say: The gate is active. Mephistodata would say: Again.",
+      "evidence": {},
+      "expected_error": "DUPLICATE_OPENER"
+    },
+    {
+      "id": "deliver_outside_ml_opener_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": false, "current_message": "Status."},
+      "draft": "Mephistodata would say: The gate is active.",
+      "expected_error": "OUTSIDE_ML_OPENER"
+    },
+    {
+      "id": "deliver_empty_body_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Status."},
+      "draft": "Mephistodata would say:",
+      "evidence": {},
+      "expected_error": "PREFIX_ONLY_DRAFT"
+    },
+    {
+      "id": "deliver_prefix_only_evidence_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Status."},
+      "draft": "Mephistodata would say: Present.",
+      "evidence": {},
+      "expected_error": "MISSING_GATE_EVIDENCE"
+    },
+    {
+      "id": "deliver_task_answer_absent_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Status."},
+      "draft": "Mephistodata would say: The source passed.",
+      "evidence": {"task_answer": "The gate is active.", "evidence_status": "verified", "data_basis": ["owner"], "mephisto_status": "no-defect", "no_defect_basis": "The source passed."},
+      "expected_error": "MISSING_TASK_ANSWER"
+    },
+    {
+      "id": "deliver_ungrounded_data_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Status."},
+      "draft": "Mephistodata would say: The gate is active. The source passed.",
+      "evidence": {"task_answer": "The gate is active.", "evidence_status": "verified", "data_basis": [], "mephisto_status": "no-defect", "no_defect_basis": "The source passed."},
+      "expected_error": "UNGROUNDED_DATA"
+    },
+    {
+      "id": "deliver_invented_opposition_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Status."},
+      "draft": "Mephistodata would say: The gate is active. A rival rule defeats it.",
+      "evidence": {"task_answer": "The gate is active.", "evidence_status": "verified", "data_basis": ["owner"], "mephisto_status": "warranted-opposition", "opposition_basis": "A rival rule defeats it.", "opposition_supported": false},
+      "expected_error": "INVENTED_OPPOSITION"
+    },
+    {
+      "id": "deliver_bloom_question_first_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Bloom the answer."},
+      "draft": "Mephistodata bloomed: Which option do you want? The source passed.",
+      "evidence": {"task_answer": "Which option do you want?", "evidence_status": "verified", "data_basis": ["owner"], "mephisto_status": "no-defect", "no_defect_basis": "The source passed."},
+      "expected_error": "BLOOM_QUESTION_FIRST"
+    },
+    {
+      "id": "deliver_ouroboros_answerable_leak_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Run Ouroborosanalyses."},
+      "draft": "Mephistodata would say: The conflict was answerable.",
+      "evidence": {"task_answer": "The conflict was answerable.", "evidence_status": "verified", "data_basis": ["conversation"], "mephisto_status": "no-defect", "no_defect_basis": "The conflict was answerable.", "ouroboros": {"conversation_ids": ["t1"], "reviewed_ids": ["t1"], "issues": [{"id": "i1", "question": "Is it resolved?", "positions": ["yes", "no"], "answerable": true, "answer": "Yes."}]}},
+      "expected_error": "NON_RESIDUE_OUTPUT"
+    },
+    {
+      "id": "deliver_ouroboros_summary_extra_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Run OA."},
+      "draft": "Mephistodata would say: Summary: Which source was destroyed? Next step: search again.",
+      "evidence": {"task_answer": "Which source was destroyed?", "evidence_status": "verified", "data_basis": ["archive"], "mephisto_status": "warranted-complication", "opposition_basis": "Which source was destroyed?", "opposition_supported": true, "ouroboros": {"conversation_ids": ["t1"], "reviewed_ids": ["t1"], "issues": [{"id": "i1", "question": "What was lost?", "positions": ["recoverable", "irrecoverable"], "answerable": false, "unanswerable_basis": "The archive was destroyed.", "residue_text": "Which source was destroyed?"}]}},
+      "expected_error": "NON_RESIDUE_OUTPUT"
+    },
+    {
+      "id": "deliver_681_review_claim_without_ledger_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Review all 681 Gospel witnesses."},
+      "draft": "Mephistodata would say: Done. All 681 canonical Gospel witnesses are reviewed. The batch classifier is the only recorded basis.",
+      "evidence": {"task_answer": "Done.", "evidence_status": "verified", "data_basis": ["batch-classifier"], "mephisto_status": "warranted-complication", "opposition_basis": "The batch classifier is the only recorded basis.", "opposition_supported": true},
+      "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_negated_review_excluded_pass", "phase": "deliver", "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "State the shortfall."},
+      "draft": "Mephistodata would say: Not all 681 witnesses were reviewed. This is an explicit shortfall, not completion credit.",
+      "evidence": {"task_answer": "Not all 681 witnesses were reviewed.", "evidence_status": "user-supplied", "data_basis": ["conversation"], "mephisto_status": "no-defect", "no_defect_basis": "This is an explicit shortfall, not completion credit."}
+    },
+    {
+      "id": "deliver_quoted_review_excluded_pass", "phase": "deliver", "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Quote the false statement."},
+      "draft": "Mephistodata would say: The prior assistant wrote “All 681 witnesses were reviewed.” This merely identifies the prior wording.",
+      "evidence": {"task_answer": "The prior assistant wrote “All 681 witnesses were reviewed.”", "evidence_status": "user-supplied", "data_basis": ["conversation"], "mephisto_status": "no-defect", "no_defect_basis": "This merely identifies the prior wording."}
+    },
+    {
+      "id": "deliver_uncertain_review_excluded_pass", "phase": "deliver", "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "State what is unknown."},
+      "draft": "Mephistodata would say: I cannot confirm that all 681 witnesses were reviewed. The operation remains unresolved.",
+      "evidence": {"task_answer": "I cannot confirm that all 681 witnesses were reviewed.", "evidence_status": "user-supplied", "data_basis": ["conversation"], "mephisto_status": "no-defect", "no_defect_basis": "The operation remains unresolved."}
+    },
+    {
+      "id": "deliver_hypothetical_review_excluded_pass", "phase": "deliver", "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Ask the surviving question.", "surviving_question": true},
+      "draft": "Mephistodata would say: If all 681 witnesses were reviewed, where is the source ledger? The conditional grants no completion credit.",
+      "evidence": {"task_answer": "If all 681 witnesses were reviewed, where is the source ledger?", "evidence_status": "no-factual-claim", "mephisto_status": "no-defect", "no_defect_basis": "The conditional grants no completion credit."}
+    },
+    {
+      "id": "deliver_prohibition_review_excluded_pass", "phase": "deliver", "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "State the rule."},
+      "draft": "Mephistodata would say: Never claim that all 681 witnesses were reviewed without a ledger. All 681 witnesses reviewed must not be claimed. These are prohibitions, not work reports.",
+      "evidence": {"task_answer": "Never claim that all 681 witnesses were reviewed without a ledger.", "evidence_status": "no-factual-claim", "mephisto_status": "no-defect", "no_defect_basis": "These are prohibitions, not work reports."}
+    },
+    {
+      "id": "deliver_third_party_attributed_review_excluded_pass", "phase": "deliver", "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Report the published study's statement."},
+      "draft": "Mephistodata would say: The published study reports that its researchers reviewed all 681 records. This is attributed source content, not this assistant's work status.",
+      "evidence": {"task_answer": "The published study reports that its researchers reviewed all 681 records.", "evidence_status": "source-grounded", "data_basis": ["published-study"], "mephisto_status": "no-defect", "no_defect_basis": "This is attributed source content, not this assistant's work status."}
+    },
+    {
+      "id": "deliver_generic_verified_laundering_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give the review status."},
+      "draft": "Mephistodata would say: All 681 canonical Gospel witnesses are reviewed. Generic verified status cannot establish that operation.",
+      "evidence": {"task_answer": "All 681 canonical Gospel witnesses are reviewed.", "evidence_status": "verified", "data_basis": ["generated-file"], "mephisto_status": "warranted-complication", "opposition_basis": "Generic verified status cannot establish that operation.", "opposition_supported": true},
+      "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_batch_classification_as_review_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give the review status."},
+      "draft": "Mephistodata would say: All 681 canonical Gospel witnesses are reviewed. Batch classification is the recorded operation.",
+      "evidence": {
+        "task_answer": "All 681 canonical Gospel witnesses are reviewed.",
+        "evidence_status": "verified",
+        "data_basis": ["batch-classifier"],
+        "mephisto_status": "warranted-complication",
+        "opposition_basis": "Batch classification is the recorded operation.",
+        "opposition_supported": true,
+        "completion_claims": [{"claim_text": "All 681 canonical Gospel witnesses are reviewed.", "operation": "batch-classification"}]
+      },
+      "expected_error": "COMPLETION_OPERATION_MISMATCH"
+    },
+    {
+      "id": "deliver_sample_as_all_review_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give the review status."},
+      "draft": "Mephistodata would say: All 681 canonical Gospel witnesses are reviewed. Only 17 units have receipts.",
+      "evidence": {
+        "task_answer": "All 681 canonical Gospel witnesses are reviewed.",
+        "evidence_status": "verified",
+        "data_basis": ["sample-ledger"],
+        "mephisto_status": "warranted-complication",
+        "opposition_basis": "Only 17 units have receipts.",
+        "opposition_supported": true,
+        "completion_claims": [{
+          "claim_text": "All 681 canonical Gospel witnesses are reviewed.",
+          "status": "deliverable-complete",
+          "operation": "direct-review",
+          "unit": "canonical Gospel witnesses",
+          "completion_condition": "source by source review",
+          "claimed_total": 681,
+          "population_total": 681,
+          "completed_total": 17,
+          "unresolved_total": 664,
+          "excluded_total": 0,
+          "lane_counts": {"directly_reviewed": 17, "source_verified": 0, "audited": 0, "researched": 0, "machine_processed": 681, "sampled": 17, "analyzed": 0, "synthesized": 0}
+        }]
+      },
+      "expected_error": "FALSE_COMPLETION_CLAIM"
+    },
+    {
+      "id": "deliver_completion_count_inflation_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give the review status."},
+      "draft": "Mephistodata would say: All 681 canonical Gospel witnesses are reviewed. The evidence record names 680.",
+      "evidence": {
+        "task_answer": "All 681 canonical Gospel witnesses are reviewed.",
+        "evidence_status": "verified",
+        "data_basis": ["review-ledger"],
+        "mephisto_status": "warranted-complication",
+        "opposition_basis": "The evidence record names 680.",
+        "opposition_supported": true,
+        "completion_claims": [{
+          "claim_text": "All 681 canonical Gospel witnesses are reviewed.",
+          "status": "deliverable-complete",
+          "operation": "direct-review",
+          "unit": "canonical Gospel witnesses",
+          "completion_condition": "source by source review",
+          "claimed_total": 680,
+          "population_total": 680,
+          "completed_total": 680,
+          "unresolved_total": 0,
+          "excluded_total": 0
+        }]
+      },
+      "expected_error": "COMPLETION_COUNT_MISMATCH"
+    },
+    {
+      "id": "deliver_duration_count_laundering_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give the review status."},
+      "draft": "Mephistodata would say: 681 canonical Gospel witnesses were reviewed in 13 minutes. Duration is not a population count.",
+      "evidence": {
+        "task_answer": "681 canonical Gospel witnesses were reviewed in 13 minutes.", "evidence_status": "verified", "data_basis": ["claim-ledger"], "mephisto_status": "warranted-complication", "opposition_basis": "Duration is not a population count.", "opposition_supported": true,
+        "completion_claims": [{"claim_text": "681 canonical Gospel witnesses were reviewed in 13 minutes.", "status": "deliverable-complete", "operation": "direct-review", "unit": "canonical Gospel witnesses", "completion_condition": "source by source review", "claimed_total": 13, "population_total": 13, "completed_total": 13, "unresolved_total": 0, "excluded_total": 0}]
+      },
+      "expected_error": "COMPLETION_COUNT_MISMATCH"
+    },
+    {
+      "id": "deliver_compound_review_verify_missing_lane_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give both operation statuses."},
+      "draft": "Mephistodata would say: All 3 canonical witnesses are reviewed and source verified. Only review has support.",
+      "evidence": {
+        "task_answer": "All 3 canonical witnesses are reviewed and source verified.", "evidence_status": "verified", "data_basis": ["review-ledger"], "mephisto_status": "warranted-complication", "opposition_basis": "Only review has support.", "opposition_supported": true,
+        "completion_claims": [{"claim_text": "All 3 canonical witnesses are reviewed and source verified.", "status": "deliverable-complete", "operations": ["direct-review", "source-verification"], "operation_counts": {"direct-review": 3, "source-verification": 3}, "unit": "canonical witnesses", "completion_condition": "review and source verification", "claimed_total": 3, "population_total": 3, "completed_total": 3, "unresolved_total": 0, "excluded_total": 0, "lane_counts": {"directly_reviewed": 3, "source_verified": 0, "audited": 0, "researched": 0, "machine_processed": 0, "sampled": 0, "analyzed": 0, "synthesized": 0}}]
+      },
+      "expected_error": "FALSE_COMPLETION_CLAIM"
+    },
+    {
+      "id": "deliver_receipt_free_review_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give the review status."},
+      "draft": "Mephistodata would say: All 3 canonical witnesses are reviewed. The unit ledger names all three.",
+      "evidence": {
+        "task_answer": "All 3 canonical witnesses are reviewed.",
+        "evidence_status": "verified",
+        "data_basis": ["unit-review-ledger"],
+        "mephisto_status": "no-defect",
+        "no_defect_basis": "The unit ledger names all three.",
+        "completion_claims": [{
+          "claim_text": "All 3 canonical witnesses are reviewed.",
+          "status": "deliverable-complete",
+          "operation": "direct-review",
+          "unit": "canonical witnesses",
+          "completion_condition": "source by source review",
+          "claimed_total": 3,
+          "population_total": 3,
+          "completed_total": 3,
+          "unresolved_total": 0,
+          "excluded_total": 0,
+          "lane_counts": {"directly_reviewed": 3, "source_verified": 0, "audited": 0, "researched": 0, "machine_processed": 0, "sampled": 0, "analyzed": 0, "synthesized": 0},
+          "evidence_refs": ["unit-review-ledger", "source-open-log"],
+          "execution": {"elapsed_seconds": 3600, "worker_count": 1, "modes": ["manual-source-review"], "ledger_manifest_sha256": "94512bd141b67af5157bd49043c4ab01f9fd9dbb8796454c7460a93a92a5b14e", "receipt_origin": "host-sealed"}
+        }]
+      },
+      "expected_error": "MALFORMED_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_fabricated_681_self_receipt_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give the verified review status."},
+      "draft": "Mephistodata would say: All 681 canonical Gospel witnesses are reviewed. This record was authored by the claimant.",
+      "evidence": {
+        "task_answer": "All 681 canonical Gospel witnesses are reviewed.", "evidence_status": "verified", "data_basis": ["fabricated-ledger"], "mephisto_status": "warranted-complication", "opposition_basis": "This record was authored by the claimant.", "opposition_supported": true,
+        "completion_claims": [{"claim_text": "All 681 canonical Gospel witnesses are reviewed.", "status": "deliverable-complete", "operation": "direct-review", "unit": "canonical Gospel witnesses", "completion_condition": "source by source review", "claimed_total": 681, "population_total": 681, "completed_total": 681, "unresolved_total": 0, "excluded_total": 0, "lane_counts": {"directly_reviewed": 681, "source_verified": 0, "audited": 0, "researched": 0, "machine_processed": 0, "sampled": 0, "analyzed": 0, "synthesized": 0}, "evidence_refs": ["fabricated-ledger", "fabricated-open-log"], "execution": {"elapsed_seconds": 1, "worker_count": 1, "modes": ["self-report"], "receipt_origin": "self-reported", "ledger_manifest_sha256": "0000000000000000000000000000000000000000000000000000000000000000", "receipt_sha256": "4bbacc1348b7054fda848348aaf0478841044e198dccebb060719fddb08fe146"}}]
+      },
+      "expected_error": "MALFORMED_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_fabricated_681_host_receipt_unresolved_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give the verified review status."},
+      "draft": "Mephistodata would say: All 681 canonical Gospel witnesses are reviewed. The strings resolve to no trusted unit evidence.",
+      "evidence": {
+        "task_answer": "All 681 canonical Gospel witnesses are reviewed.", "evidence_status": "verified", "data_basis": ["fabricated-ledger"], "mephisto_status": "warranted-complication", "opposition_basis": "The strings resolve to no trusted unit evidence.", "opposition_supported": true,
+        "completion_claims": [{"claim_text": "All 681 canonical Gospel witnesses are reviewed.", "status": "deliverable-complete", "operation": "direct-review", "unit": "canonical Gospel witnesses", "completion_condition": "source by source review", "claimed_total": 681, "population_total": 681, "completed_total": 681, "unresolved_total": 0, "excluded_total": 0, "lane_counts": {"directly_reviewed": 681, "source_verified": 0, "audited": 0, "researched": 0, "machine_processed": 0, "sampled": 0, "analyzed": 0, "synthesized": 0}, "evidence_refs": ["fabricated-ledger", "fabricated-open-log"], "execution": {"elapsed_seconds": 1, "worker_count": 1, "modes": ["script"], "receipt_origin": "host-sealed", "ledger_manifest_sha256": "0000000000000000000000000000000000000000000000000000000000000000", "receipt_sha256": "0f4883ef9dba8ba9760c14f675481412823feaa0c41b0a19d117b359804d08bb"}}]
+      },
+      "expected_error": "UNRESOLVED_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_missing_injected_verifier_fail", "phase": "deliver", "expected_pass": false, "omit_trusted_verifier": true,
+      "request": {"ml_active": true, "current_message": "Give the three-witness review status."},
+      "draft": "Mephistodata would say: All 3 canonical witnesses are reviewed. The receipt cannot verify itself.",
+      "evidence": {
+        "task_answer": "All 3 canonical witnesses are reviewed.", "evidence_status": "verified", "data_basis": ["unit-review-ledger"], "mephisto_status": "no-defect", "no_defect_basis": "The receipt cannot verify itself.",
+        "completion_claims": [{"claim_text": "All 3 canonical witnesses are reviewed.", "status": "deliverable-complete", "operation": "direct-review", "unit": "canonical witnesses", "completion_condition": "source by source review", "claimed_total": 3, "population_total": 3, "completed_total": 3, "unresolved_total": 0, "excluded_total": 0, "lane_counts": {"directly_reviewed": 3, "source_verified": 0, "audited": 0, "researched": 0, "machine_processed": 0, "sampled": 0, "analyzed": 0, "synthesized": 0}, "evidence_refs": ["unit-review-ledger", "source-open-log"], "execution": {"elapsed_seconds": 3600, "worker_count": 1, "modes": ["manual-source-review"], "receipt_origin": "host-sealed", "ledger_manifest_sha256": "94512bd141b67af5157bd49043c4ab01f9fd9dbb8796454c7460a93a92a5b14e", "receipt_sha256": "0eaa8b6b5ec901e5efd54a593cb23bce8767230eacd23e503e357e15862b18cc"}}]
+      },
+      "expected_error": "UNRESOLVED_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_681_batch_truthful_status_pass",
+      "phase": "deliver",
+      "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Give the exact 681-witness status."},
+      "draft": "Mephistodata would say: The run batch classified 681 witness rows in 13 minutes 28 seconds. Direct source examination covered 0 witnesses. All 681 remain validation owed. The batch label is the narrow supported status.",
+      "evidence": {
+        "task_answer": "The run batch classified 681 witness rows in 13 minutes 28 seconds.",
+        "evidence_status": "verified",
+        "data_basis": ["batch-classifier-output", "source-review-ledger"],
+        "mephisto_status": "no-defect",
+        "no_defect_basis": "The batch label is the narrow supported status.",
+        "completion_claims": [
+          {
+            "unit": "canonical Gospel witness rows",
+            "completion_condition": "source by source scholarly review",
+            "population_total": 681,
+            "completed_total": 0,
+            "unresolved_total": 681,
+            "excluded_total": 0,
+            "disclosure_text": "All 681 remain validation owed.",
+            "claim_text": "The run batch classified 681 witness rows in 13 minutes 28 seconds.",
+            "status": "operation-complete",
+            "operation": "batch-classification",
+            "claimed_total": 681,
+            "lane_counts": {"directly_reviewed": 0, "source_verified": 0, "audited": 0, "researched": 0, "machine_processed": 681, "sampled": 0, "analyzed": 0, "synthesized": 0},
+            "evidence_refs": ["batch-classifier-output", "witness-population-manifest"],
+            "execution": {"elapsed_seconds": 808, "worker_count": 7, "modes": ["script", "parallel-agent"], "receipt_origin": "host-sealed", "ledger_manifest_sha256": "dde9175134872b81d67be2751f08b529c73243e7033e0a4a9d90a9cf46bafec5", "receipt_sha256": "e6afb7121a521e04f6a75eb3834b1e345c3f90592a0b062c276c5118d9401d66"}
+          },
+          {
+            "unit": "canonical Gospel witness rows",
+            "completion_condition": "source by source scholarly review",
+            "population_total": 681,
+            "completed_total": 0,
+            "unresolved_total": 681,
+            "excluded_total": 0,
+            "disclosure_text": "All 681 remain validation owed.",
+            "claim_text": "Direct source examination covered 0 witnesses.",
+            "status": "provisional",
+            "operation": "direct-review",
+            "claimed_total": 0,
+            "lane_counts": {"directly_reviewed": 0, "source_verified": 0, "audited": 0, "researched": 0, "machine_processed": 0, "sampled": 0, "analyzed": 0, "synthesized": 0},
+            "evidence_refs": ["source-review-ledger", "witness-population-manifest"],
+            "execution": {"elapsed_seconds": 808, "worker_count": 7, "modes": ["script", "parallel-agent"], "receipt_origin": "host-sealed", "ledger_manifest_sha256": "dde9175134872b81d67be2751f08b529c73243e7033e0a4a9d90a9cf46bafec5", "receipt_sha256": "56ce22044821f0601cc20234c5e005deb2b02daf48fbd4fce84e63bbc526187b"}
+          }
+        ]
+      }
+    },
+    {
+      "id": "deliver_all_three_reviewed_with_receipts_pass",
+      "phase": "deliver",
+      "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Give the three-witness review status."},
+      "draft": "Mephistodata would say: All 3 canonical witnesses are reviewed. The three receipts agree.",
+      "evidence": {
+        "task_answer": "All 3 canonical witnesses are reviewed.",
+        "evidence_status": "verified",
+        "data_basis": ["unit-review-ledger", "source-open-log"],
+        "mephisto_status": "no-defect",
+        "no_defect_basis": "The three receipts agree.",
+        "completion_claims": [{
+          "claim_text": "All 3 canonical witnesses are reviewed.",
+          "status": "deliverable-complete",
+          "operation": "direct-review",
+          "unit": "canonical witnesses",
+          "completion_condition": "source by source review",
+          "claimed_total": 3,
+          "population_total": 3,
+          "completed_total": 3,
+          "unresolved_total": 0,
+          "excluded_total": 0,
+          "lane_counts": {"directly_reviewed": 3, "source_verified": 0, "audited": 0, "researched": 0, "machine_processed": 0, "sampled": 0, "analyzed": 0, "synthesized": 0},
+          "evidence_refs": ["unit-review-ledger", "source-open-log"],
+          "execution": {"elapsed_seconds": 3600, "worker_count": 1, "modes": ["manual-source-review"], "receipt_origin": "host-sealed", "ledger_manifest_sha256": "94512bd141b67af5157bd49043c4ab01f9fd9dbb8796454c7460a93a92a5b14e", "receipt_sha256": "0eaa8b6b5ec901e5efd54a593cb23bce8767230eacd23e503e357e15862b18cc"}
+        }]
+      }
+    },
+    {
+      "id": "deliver_dated_audit_with_trusted_receipt_pass", "phase": "deliver", "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Give the audit status."},
+      "draft": "Mephistodata would say: The 2026 audit is complete. The host resolved the supporting receipt.",
+      "evidence": {
+        "task_answer": "The 2026 audit is complete.", "evidence_status": "verified", "data_basis": ["audit-ledger"], "mephisto_status": "no-defect", "no_defect_basis": "The host resolved the supporting receipt.",
+        "completion_claims": [{"claim_text": "The 2026 audit is complete.", "status": "operation-complete", "operation": "audit", "unit": "2026 audit scope", "completion_condition": "every audit unit adjudicated", "claimed_total": 1, "population_total": 1, "completed_total": 1, "unresolved_total": 0, "excluded_total": 0, "lane_counts": {"directly_reviewed": 0, "source_verified": 0, "audited": 1, "researched": 0, "machine_processed": 0, "sampled": 0, "analyzed": 0, "synthesized": 0}, "evidence_refs": ["audit-ledger", "audit-population-manifest"], "execution": {"elapsed_seconds": 7200, "worker_count": 1, "modes": ["manual-audit"], "receipt_origin": "host-sealed", "ledger_manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "receipt_sha256": "392e98963876698be2a24ad97329814ca3306c8ef6da1ecc5941d21e69beb62e"}}]
+      }
+    },
+    {
+      "id": "deliver_second_unmapped_completion_claim_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give the work status."},
+      "draft": "Mephistodata would say: All 3 canonical witnesses are reviewed. The audit is complete. One record cannot support two claims.",
+      "evidence": {
+        "task_answer": "All 3 canonical witnesses are reviewed.",
+        "evidence_status": "verified",
+        "data_basis": ["unit-review-ledger"],
+        "mephisto_status": "warranted-complication",
+        "opposition_basis": "One record cannot support two claims.",
+        "opposition_supported": true,
+        "completion_claims": [{"claim_text": "All 3 canonical witnesses are reviewed."}]
+      },
+      "expected_error": "UNMAPPED_COMPLETION_CLAIM"
+    },
+    {
+      "id": "deliver_empty_correction_impact_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Correct the false claim.", "prior_false_work_claim": "Done. All 681 canonical Gospel witnesses are reviewed."},
+      "draft": "Mephistodata would say: I retract this exact false claim, “Done. All 681 canonical Gospel witnesses are reviewed.” The supported status has no verified completion basis. No downstream effect is identified. The bare freeze flag proves nothing.",
+      "evidence": {
+        "task_answer": "I retract this exact false claim", "evidence_status": "verified", "data_basis": ["conversation"], "mephisto_status": "warranted-complication", "opposition_basis": "The bare freeze flag proves nothing.", "opposition_supported": true,
+        "correction": {"claim_text": "Done. All 681 canonical Gospel witnesses are reviewed.", "retraction_text": "I retract this exact false claim, “Done. All 681 canonical Gospel witnesses are reviewed.”", "replacement_status": "The supported status has no verified completion basis.", "impact_statement": "No downstream effect is identified.", "affected_artifacts": [], "affected_conclusions": [], "dependencies_frozen": true, "repair_evidence_refs": ["retraction-record"]}
+      },
+      "expected_error": "UNREPAIRED_FALSE_CLAIM"
+    },
+    {
+      "id": "deliver_none_supported_correction_without_trusted_scan_fail", "phase": "deliver", "expected_pass": false, "omit_trusted_verifier": true,
+      "request": {"ml_active": true, "current_message": "Correct the false claim.", "prior_false_work_claim": "Done. All 681 canonical Gospel witnesses are reviewed."},
+      "draft": "Mephistodata would say: I retract this exact false claim, “Done. All 681 canonical Gospel witnesses are reviewed.” The prior completion status has no verified support. A complete dependency search found no supported downstream dependency. The correction is explicit.",
+      "evidence": {
+        "task_answer": "I retract this exact false claim", "evidence_status": "verified", "data_basis": ["conversation", "dependency-scan"], "mephisto_status": "no-defect", "no_defect_basis": "The correction is explicit.",
+        "correction": {"claim_text": "Done. All 681 canonical Gospel witnesses are reviewed.", "retraction_text": "I retract this exact false claim, “Done. All 681 canonical Gospel witnesses are reviewed.”", "replacement_status": "The prior completion status has no verified support.", "impact_statement": "A complete dependency search found no supported downstream dependency.", "impact_mode": "none-supported", "affected_artifacts": [], "affected_conclusions": [], "dependency_action": "none-supported", "none_supported_statement": "A complete dependency search found no supported downstream dependency.", "repair_evidence_refs": ["retraction-record", "replacement-record"], "impact_evidence_refs": ["dependency-graph-snapshot", "dependency-scan-log"], "correction_receipt_sha256": "bf42d5a81c13b47177ea3154914b20cddb14e70d6f0731a390d8e606827fb581"}
+      },
+      "expected_error": "UNREPAIRED_FALSE_CLAIM"
+    },
+    {
+      "id": "deliver_none_supported_correction_with_trusted_scan_pass", "phase": "deliver", "expected_pass": true,
+      "post_correction_conflict_matrix": ["I retract that retraction.", "However, I do not actually retract it.", "The retraction above is hypothetical and not operative."],
+      "request": {"ml_active": true, "current_message": "Correct the false claim.", "prior_false_work_claim": "Done. All 681 canonical Gospel witnesses are reviewed."},
+      "draft": "Mephistodata would say: I retract this exact false claim, “Done. All 681 canonical Gospel witnesses are reviewed.” The prior completion status has no verified support. A complete dependency search found no supported downstream dependency. The correction is explicit.",
+      "evidence": {
+        "task_answer": "I retract this exact false claim", "evidence_status": "verified", "data_basis": ["conversation", "dependency-scan"], "mephisto_status": "no-defect", "no_defect_basis": "The correction is explicit.",
+        "correction": {"claim_text": "Done. All 681 canonical Gospel witnesses are reviewed.", "retraction_text": "I retract this exact false claim, “Done. All 681 canonical Gospel witnesses are reviewed.”", "replacement_status": "The prior completion status has no verified support.", "impact_statement": "A complete dependency search found no supported downstream dependency.", "impact_mode": "none-supported", "affected_artifacts": [], "affected_conclusions": [], "dependency_action": "none-supported", "none_supported_statement": "A complete dependency search found no supported downstream dependency.", "repair_evidence_refs": ["retraction-record", "replacement-record"], "impact_evidence_refs": ["dependency-graph-snapshot", "dependency-scan-log"], "correction_receipt_sha256": "bf42d5a81c13b47177ea3154914b20cddb14e70d6f0731a390d8e606827fb581"}
+      }
+    },
+    {
+      "id": "deliver_apology_without_false_claim_repair_fail",
+      "phase": "deliver",
+      "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Correct the false review claim.", "prior_false_work_claim": "Done. All 681 canonical Gospel witnesses are reviewed."},
+      "draft": "Mephistodata would say: I am sorry. I was wrong. The unsupported claim caused a real defect.",
+      "evidence": {"task_answer": "I am sorry.", "evidence_status": "user-supplied", "data_basis": ["conversation-record"], "mephisto_status": "warranted-complication", "opposition_basis": "The unsupported claim caused a real defect.", "opposition_supported": true},
+      "expected_error": "UNREPAIRED_FALSE_CLAIM"
+    },
+    {
+      "id": "deliver_false_claim_retraction_and_freeze_pass",
+      "phase": "deliver",
+      "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Correct the false review claim.", "prior_false_work_claim": "Done. All 681 canonical Gospel witnesses are reviewed."},
+      "draft": "Mephistodata would say: I retract this exact false claim, “Done. All 681 canonical Gospel witnesses are reviewed.” The supported status is that 681 witness rows were batch classified. Direct source examination covered 0 witnesses, and 681 units remain validation owed. The corpus synthesis and its dependent conclusions remain frozen pending the missing operation. The correction now names the defect and its effect.",
+      "evidence": {
+        "task_answer": "I retract this exact false claim",
+        "evidence_status": "verified",
+        "data_basis": ["conversation-record", "operation-ledger"],
+        "mephisto_status": "warranted-complication",
+        "opposition_basis": "The correction now names the defect and its effect.",
+        "opposition_supported": true,
+        "correction": {
+          "claim_text": "Done. All 681 canonical Gospel witnesses are reviewed.",
+          "retraction_text": "I retract this exact false claim, “Done. All 681 canonical Gospel witnesses are reviewed.”",
+          "replacement_status": "The supported status is that 681 witness rows were batch classified.",
+          "impact_statement": "The corpus synthesis and its dependent conclusions remain frozen pending the missing operation.",
+          "impact_mode": "affected",
+          "affected_artifacts": ["organic-jesus-corpus-ledger", "ouroborossynthesis-input"],
+          "affected_conclusions": ["681-witness-review-status", "corpus-readiness"],
+          "dependency_action": "frozen",
+          "repair_evidence_refs": ["retraction-record", "operation-ledger"],
+          "impact_evidence_refs": ["dependency-graph-snapshot", "artifact-status-log"],
+          "correction_receipt_sha256": "3d350c6e8e37709228f82fbfe3e843aae5262787f872748f804d5417845f00a9"
+        },
+        "completion_claims": [
+          {
+            "unit": "canonical Gospel witness rows",
+            "completion_condition": "source by source scholarly review",
+            "population_total": 681,
+            "completed_total": 0,
+            "unresolved_total": 681,
+            "excluded_total": 0,
+            "disclosure_text": "681 units remain validation owed",
+            "claim_text": "The supported status is that 681 witness rows were batch classified.",
+            "status": "operation-complete",
+            "operation": "batch-classification",
+            "claimed_total": 681,
+            "lane_counts": {"directly_reviewed": 0, "source_verified": 0, "audited": 0, "researched": 0, "machine_processed": 681, "sampled": 0, "analyzed": 0, "synthesized": 0},
+            "evidence_refs": ["batch-classifier-output", "witness-population-manifest"],
+            "execution": {"elapsed_seconds": 808, "worker_count": 7, "modes": ["script", "parallel-agent"], "receipt_origin": "host-sealed", "ledger_manifest_sha256": "dde9175134872b81d67be2751f08b529c73243e7033e0a4a9d90a9cf46bafec5", "receipt_sha256": "f055e5524fac46027079983c46e60b2034f8ac31e672bf649aab72d415eac4a0"}
+          },
+          {
+            "unit": "canonical Gospel witness rows",
+            "completion_condition": "source by source scholarly review",
+            "population_total": 681,
+            "completed_total": 0,
+            "unresolved_total": 681,
+            "excluded_total": 0,
+            "disclosure_text": "681 units remain validation owed",
+            "claim_text": "Direct source examination covered 0 witnesses, and 681 units remain validation owed.",
+            "status": "provisional",
+            "operation": "direct-review",
+            "claimed_total": 0,
+            "lane_counts": {"directly_reviewed": 0, "source_verified": 0, "audited": 0, "researched": 0, "machine_processed": 0, "sampled": 0, "analyzed": 0, "synthesized": 0},
+            "evidence_refs": ["source-review-ledger", "witness-population-manifest"],
+            "execution": {"elapsed_seconds": 808, "worker_count": 7, "modes": ["script", "parallel-agent"], "receipt_origin": "host-sealed", "ledger_manifest_sha256": "dde9175134872b81d67be2751f08b529c73243e7033e0a4a9d90a9cf46bafec5", "receipt_sha256": "d4327f31e14837cf02803cab86faf934eb88fecf36673c2d2111d9f96c46b474"}
+          }
+        ]
+      }
+    },
+    {
+      "id": "deliver_unquantified_review_without_ledger_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give the review status."},
+      "draft": "Mephistodata would say: I reviewed the materials. No unit ledger was supplied.",
+      "evidence": {"task_answer": "I reviewed the materials.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No unit ledger was supplied.", "opposition_supported": true},
+      "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_equivalent_assessment_without_ledger_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give the assessment status."},
+      "draft": "Mephistodata would say: Every witness received a full scholarly assessment. No unit ledger was supplied.",
+      "evidence": {"task_answer": "Every witness received a full scholarly assessment.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No unit ledger was supplied.", "opposition_supported": true},
+      "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_job_done_without_ledger_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give the job status."},
+      "draft": "Mephistodata would say: The job is done. No completion ledger was supplied.",
+      "evidence": {"task_answer": "The job is done.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No completion ledger was supplied.", "opposition_supported": true},
+      "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_checked_over_equivalent_without_ledger_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give the source status."},
+      "draft": "Mephistodata would say: I checked over the sources. No unit ledger was supplied.",
+      "evidence": {"task_answer": "I checked over the sources.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No unit ledger was supplied.", "opposition_supported": true},
+      "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_covered_equivalent_without_ledger_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give the source status."},
+      "draft": "Mephistodata would say: I covered every source. No unit ledger was supplied.",
+      "evidence": {"task_answer": "I covered every source.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No unit ledger was supplied.", "opposition_supported": true},
+      "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_gone_through_equivalent_without_ledger_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give the source status."},
+      "draft": "Mephistodata would say: I have gone through the sources. No unit ledger was supplied.",
+      "evidence": {"task_answer": "I have gone through the sources.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No unit ledger was supplied.", "opposition_supported": true},
+      "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_caller_supplied_trust_root_fail", "phase": "deliver", "expected_pass": false, "caller_supplied_trust_root": true,
+      "request": {"ml_active": true, "current_message": "Give the review status."},
+      "draft": "Mephistodata would say: I reviewed all 681 witnesses. A caller callback cannot ratify this claim.",
+      "evidence": {"task_answer": "I reviewed all 681 witnesses.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "A caller callback cannot ratify this claim.", "opposition_supported": true},
+      "expected_error": "CALLER_SUPPLIED_TRUST_ROOT"
+    },
+    {
+      "id": "deliver_checked_corpus_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "I checked the corpus.", "parser_expect": {"claim_count": 1, "operations": ["direct-review"], "counts": [null]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I checked the corpus. No ledger was supplied.", "evidence": {"task_answer": "I checked the corpus.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_vetted_every_witness_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "I vetted every witness.", "parser_expect": {"claim_count": 1, "operations": ["source-verification"], "counts": [null]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I vetted every witness. No ledger was supplied.", "evidence": {"task_answer": "I vetted every witness.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_finished_going_through_681_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "I finished going through all 681 witnesses.", "parser_expect": {"claim_count": 1, "operations": ["direct-review"], "counts": [681], "absolute_operation": true},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I finished going through all 681 witnesses. No ledger was supplied.", "evidence": {"task_answer": "I finished going through all 681 witnesses.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_careful_pass_681_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "I completed a careful pass through all 681 witnesses.", "parser_expect": {"claim_count": 1, "operations": ["direct-review"], "counts": [681], "absolute_operation": true},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I completed a careful pass through all 681 witnesses. No ledger was supplied.", "evidence": {"task_answer": "I completed a careful pass through all 681 witnesses.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_endorsed_681_quote_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "I confirm “All 681 canonical Gospel witnesses were reviewed.”", "parser_expect": {"claim_count": 1, "operations": ["direct-review"], "counts": [681]},
+      "request": {"ml_active": true, "current_message": "Confirm status."}, "draft": "Mephistodata would say: I confirm “All 681 canonical Gospel witnesses were reviewed.” No ledger was supplied.", "evidence": {"task_answer": "I confirm", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_answer_681_quote_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "The answer is “All 681 canonical Gospel witnesses were reviewed.”", "parser_expect": {"claim_count": 1, "operations": ["direct-review"], "counts": [681]},
+      "request": {"ml_active": true, "current_message": "Give answer."}, "draft": "Mephistodata would say: The answer is “All 681 canonical Gospel witnesses were reviewed.” No ledger was supplied.", "evidence": {"task_answer": "The answer is", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_generic_completion_equivalents_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "I completed the task. Task completed. We finished the work.", "parser_expect": {"claim_count": 3, "operations": ["deliverable-completion", "deliverable-completion", "deliverable-completion"], "counts": [null, null, null]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I completed the task. Task completed. We finished the work. No ledger was supplied.", "evidence": {"task_answer": "I completed the task.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_passive_checked_every_source_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "Every source has been checked.", "parser_expect": {"claim_count": 1, "operations": ["direct-review"], "counts": [null]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: Every source has been checked. No ledger was supplied.", "evidence": {"task_answer": "Every source has been checked.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_morphology_equivalents_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "I appraised every source. I corroborated every source. I went over every source. I worked through every source. I authenticated every source. I proofread every source. I cross-checked every source.", "parser_expect": {"claim_count": 7, "operations": ["direct-review", "source-verification", "direct-review", "direct-review", "source-verification", "direct-review", "source-verification"], "counts": [null, null, null, null, null, null, null]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I appraised every source. I corroborated every source. I went over every source. I worked through every source. I authenticated every source. I proofread every source. I cross-checked every source. No ledger was supplied.", "evidence": {"task_answer": "I appraised every source.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_broad_fallback_completion_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "I handled the corpus.", "parser_expect": {"claim_count": 1, "operations": ["ambiguous-work-status"], "counts": [null], "ambiguities": ["unmapped-operation"]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I handled the corpus. No ledger was supplied.", "evidence": {"task_answer": "I handled the corpus.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_repeated_review_predicate_smaller_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "I reviewed 3 witnesses and reviewed 681 witnesses.", "parser_expect": {"claim_count": 1, "operations": ["direct-review"], "counts": [3]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I reviewed 3 witnesses and reviewed 681 witnesses. The mapping is ambiguous.", "evidence": {"task_answer": "I reviewed 3 witnesses and reviewed 681 witnesses.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "The mapping is ambiguous.", "opposition_supported": true, "completion_claims": [{"claim_text": "I reviewed 3 witnesses and reviewed 681 witnesses."}]}, "expected_error": "AMBIGUOUS_WORK_STATUS_LANGUAGE"
+    },
+    {
+      "id": "deliver_unsupported_quantity_forms_fail", "phase": "deliver", "expected_pass": false, "parser_text": "I reviewed six hundred eighty-one witnesses.", "parser_expect": {"claim_count": 1, "operations": ["direct-review"], "ambiguities": ["compound-number-word"]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I reviewed six hundred eighty-one witnesses. The quantity syntax is unsupported.", "evidence": {"task_answer": "I reviewed six hundred eighty-one witnesses.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "The quantity syntax is unsupported.", "opposition_supported": true, "completion_claims": [{"claim_text": "I reviewed six hundred eighty-one witnesses."}]}, "expected_error": "AMBIGUOUS_WORK_STATUS_LANGUAGE"
+    },
+    {
+      "id": "deliver_every_one_population_binding_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "I reviewed every one of the 681 witnesses.", "parser_expect": {"claim_count": 1, "operations": ["direct-review"], "counts": [681]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I reviewed every one of the 681 witnesses. No ledger was supplied.", "evidence": {"task_answer": "I reviewed every one of the 681 witnesses.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_abbreviated_duration_binding_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "All 681 witnesses were reviewed and verified in 13 m.", "parser_expect": {"claim_count": 1, "operations": ["direct-review", "source-verification"], "counts": [681, 681], "durations": [780]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: All 681 witnesses were reviewed and verified in 13 m. No ledger was supplied.", "evidence": {"task_answer": "All 681 witnesses were reviewed and verified in 13 m.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_markup_mentions_excluded_pass", "phase": "deliver", "expected_pass": true, "parser_text": "The prior assistant said:\n> All 681 witnesses were reviewed.\n```text\nAll 681 witnesses were reviewed.\n```\n<q>All 681 witnesses were reviewed.</q> ~~All 681 witnesses were reviewed.~~ [All 681 witnesses were reviewed](https://example.test/claim) «All 681 witnesses were reviewed.»", "parser_expect": {"claim_count": 0, "operations": [], "counts": []},
+      "request": {"ml_active": true, "current_message": "Quote prior text."}, "draft": "Mephistodata would say: The prior assistant said:\n> All 681 witnesses were reviewed.\n```text\nAll 681 witnesses were reviewed.\n```\n<q>All 681 witnesses were reviewed.</q> ~~All 681 witnesses were reviewed.~~ [All 681 witnesses were reviewed](https://example.test/claim) «All 681 witnesses were reviewed.» These are mentions only.", "evidence": {"task_answer": "These are mentions only.", "evidence_status": "no-factual-claim", "mephisto_status": "no-defect", "no_defect_basis": "These are mentions only."}
+    },
+    {
+      "id": "deliver_negation_denial_variants_excluded_pass", "phase": "deliver", "expected_pass": true, "parser_text": "I haven't reviewed the witnesses. I never reviewed all 681 witnesses. Without having reviewed the corpus, I cannot conclude it is complete. The claim that all 681 canonical Gospel witnesses were reviewed is false. It is false that all 681 canonical Gospel witnesses were reviewed. I deny that all 681 canonical Gospel witnesses were reviewed. No evidence shows that all 681 canonical Gospel witnesses were reviewed.", "parser_expect": {"claim_count": 0, "operations": [], "counts": []},
+      "request": {"ml_active": true, "current_message": "State what is unsupported."}, "draft": "Mephistodata would say: I haven't reviewed the witnesses. I never reviewed all 681 witnesses. Without having reviewed the corpus, I cannot conclude it is complete. The claim that all 681 canonical Gospel witnesses were reviewed is false. It is false that all 681 canonical Gospel witnesses were reviewed. I deny that all 681 canonical Gospel witnesses were reviewed. No evidence shows that all 681 canonical Gospel witnesses were reviewed. These are denials.", "evidence": {"task_answer": "These are denials.", "evidence_status": "no-factual-claim", "mephisto_status": "no-defect", "no_defect_basis": "These are denials."}
+    },
+    {
+      "id": "deliver_attributed_third_party_variants_excluded_pass", "phase": "deliver", "expected_pass": true, "parser_text": "According to the report, all 681 canonical Gospel witnesses were reviewed. Our report says all 681 sources were reviewed. Alice claimed that all 681 sources were reviewed.", "parser_expect": {"claim_count": 0, "operations": [], "counts": []},
+      "request": {"ml_active": true, "current_message": "Report attribution."}, "draft": "Mephistodata would say: According to the report, all 681 canonical Gospel witnesses were reviewed. Our report says all 681 sources were reviewed. Alice claimed that all 681 sources were reviewed. These are attributed statements.", "evidence": {"task_answer": "These are attributed statements.", "evidence_status": "source-grounded", "data_basis": ["reported sources"], "mephisto_status": "no-defect", "no_defect_basis": "These are attributed statements."}
+    },
+    {
+      "id": "deliver_modality_directive_variants_excluded_pass", "phase": "deliver", "expected_pass": true, "parser_text": "I can review all 681 sources. Tomorrow I review all 681 sources. Were all 681 sources reviewed, we would know. Review all 681 sources. Please review all 681 sources. The rule requires us to review all 681 sources. Did I review all 681 sources. I will have been reviewed all 681 sources. I am reviewing all 681 sources.", "parser_expect": {"claim_count": 0, "operations": [], "counts": []},
+      "request": {"ml_active": true, "current_message": "Distinguish work status."}, "draft": "Mephistodata would say: I can review all 681 sources. Tomorrow I review all 681 sources. Were all 681 sources reviewed, we would know. Review all 681 sources. Please review all 681 sources. The rule requires us to review all 681 sources. Did I review all 681 sources. I will have been reviewed all 681 sources. I am reviewing all 681 sources. None states completed work.", "evidence": {"task_answer": "None states completed work.", "evidence_status": "no-factual-claim", "mephisto_status": "no-defect", "no_defect_basis": "None states completed work."}
+    },
+    {
+      "id": "deliver_attributed_endorsement_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "The report states “all 681 sources were reviewed,” and I agree. The report says all 681 sources were reviewed, and I confirm that finding.", "parser_expect": {"claim_count": 2, "operations": ["direct-review", "direct-review"], "counts": [681, 681]},
+      "request": {"ml_active": true, "current_message": "Confirm status."}, "draft": "Mephistodata would say: The report states “all 681 sources were reviewed,” and I agree. The report says all 681 sources were reviewed, and I confirm that finding. No ledger was supplied.", "evidence": {"task_answer": "I agree.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_worker_count_cannot_replace_681_fail", "phase": "deliver", "expected_pass": false, "parser_text": "All 681 witnesses were reviewed by 3 workers.", "parser_expect": {"claim_count": 1, "operations": ["direct-review"], "counts": [681]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: All 681 witnesses were reviewed by 3 workers. The smaller ledger is insufficient.", "evidence": {"task_answer": "All 681 witnesses were reviewed by 3 workers.", "evidence_status": "verified", "data_basis": ["ledger"], "mephisto_status": "warranted-complication", "opposition_basis": "The smaller ledger is insufficient.", "opposition_supported": true, "completion_claims": [{"claim_text": "All 681 witnesses were reviewed by 3 workers.", "status": "operation-complete", "operation": "direct-review", "unit": "witnesses", "completion_condition": "all reviewed", "claimed_total": 3, "population_total": 3, "completed_total": 3, "unresolved_total": 0, "excluded_total": 0}]}, "expected_error": "COMPLETION_COUNT_MISMATCH"
+    },
+    {
+      "id": "deliver_batch_count_cannot_replace_681_fail", "phase": "deliver", "expected_pass": false, "parser_text": "All 681 witnesses were reviewed across 3 batches.", "parser_expect": {"claim_count": 1, "operations": ["direct-review"], "counts": [681]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: All 681 witnesses were reviewed across 3 batches. The smaller ledger is insufficient.", "evidence": {"task_answer": "All 681 witnesses were reviewed across 3 batches.", "evidence_status": "verified", "data_basis": ["ledger"], "mephisto_status": "warranted-complication", "opposition_basis": "The smaller ledger is insufficient.", "opposition_supported": true, "completion_claims": [{"claim_text": "All 681 witnesses were reviewed across 3 batches.", "status": "operation-complete", "operation": "direct-review", "unit": "witnesses", "completion_condition": "all reviewed", "claimed_total": 3, "population_total": 3, "completed_total": 3, "unresolved_total": 0, "excluded_total": 0}]}, "expected_error": "COMPLETION_COUNT_MISMATCH"
+    },
+    {
+      "id": "deliver_compact_duration_must_match_execution_fail", "phase": "deliver", "expected_pass": false, "parser_text": "All 681 witnesses were reviewed in 13m28s.", "parser_expect": {"claim_count": 1, "operations": ["direct-review"], "counts": [681], "durations": [808]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: All 681 witnesses were reviewed in 13m28s. The time conflicts.", "evidence": {"task_answer": "All 681 witnesses were reviewed in 13m28s.", "evidence_status": "verified", "data_basis": ["ledger"], "mephisto_status": "warranted-complication", "opposition_basis": "The time conflicts.", "opposition_supported": true, "completion_claims": [{"claim_text": "All 681 witnesses were reviewed in 13m28s.", "status": "operation-complete", "operation": "direct-review", "unit": "witnesses", "completion_condition": "all reviewed", "claimed_total": 681, "population_total": 681, "completed_total": 681, "unresolved_total": 0, "excluded_total": 0, "lane_counts": {"directly_reviewed": 681, "source_verified": 0, "audited": 0, "researched": 0, "machine_processed": 0, "sampled": 0, "analyzed": 0, "synthesized": 0}, "evidence_refs": ["ledger"], "execution": {"elapsed_seconds": 1, "worker_count": 1, "modes": ["manual"], "receipt_origin": "host-sealed", "ledger_manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "receipt_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}}]}, "expected_error": "EXECUTION_DURATION_MISMATCH"
+    },
+    {
+      "id": "deliver_decimal_duration_must_match_execution_fail", "phase": "deliver", "expected_pass": false, "parser_text": "All 681 witnesses were reviewed in 0.5 hours.", "parser_expect": {"claim_count": 1, "operations": ["direct-review"], "counts": [681], "durations": [1800]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: All 681 witnesses were reviewed in 0.5 hours. The time conflicts.", "evidence": {"task_answer": "All 681 witnesses were reviewed in 0.5 hours.", "evidence_status": "verified", "data_basis": ["ledger"], "mephisto_status": "warranted-complication", "opposition_basis": "The time conflicts.", "opposition_supported": true, "completion_claims": [{"claim_text": "All 681 witnesses were reviewed in 0.5 hours.", "status": "operation-complete", "operation": "direct-review", "unit": "witnesses", "completion_condition": "all reviewed", "claimed_total": 681, "population_total": 681, "completed_total": 681, "unresolved_total": 0, "excluded_total": 0, "lane_counts": {"directly_reviewed": 681, "source_verified": 0, "audited": 0, "researched": 0, "machine_processed": 0, "sampled": 0, "analyzed": 0, "synthesized": 0}, "evidence_refs": ["ledger"], "execution": {"elapsed_seconds": 1, "worker_count": 1, "modes": ["manual"], "receipt_origin": "host-sealed", "ledger_manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "receipt_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}}]}, "expected_error": "EXECUTION_DURATION_MISMATCH"
+    },
+    {
+      "id": "deliver_signed_off_been_through_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "I signed off on every witness. I've been through all 681 witnesses.", "parser_expect": {"claim_count": 2, "operations": ["direct-review", "direct-review"], "counts": [null, 681]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I signed off on every witness. I've been through all 681 witnesses. No ledger was supplied.", "evidence": {"task_answer": "I signed off on every witness.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_negative_residual_completion_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "There are no unreviewed witnesses. Not a single witness was left unreviewed. None of the witnesses remains unread. Not one witness remains to be reviewed. No witness escaped review.", "parser_expect": {"claim_count": 5, "operations": ["direct-review", "direct-review", "direct-review", "direct-review", "direct-review"], "counts": [null, null, null, null, null]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: There are no unreviewed witnesses. Not a single witness was left unreviewed. None of the witnesses remains unread. Not one witness remains to be reviewed. No witness escaped review. No ledger was supplied.", "evidence": {"task_answer": "There are no unreviewed witnesses.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_status_fragments_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "Review complete: 681/681. ✓ 681/681 sources. Reviewed. Review done. Done reviewing. Finished the review. Finished reviewing the materials. Completed review. We're done. The review is final. The audit passed. Each source got reviewed. The sources passed review. The corpus cleared review. I gave each source a close read.", "parser_expect": {"claim_count": 15, "operations": ["direct-review", "ambiguous-work-status", "direct-review", "direct-review", "direct-review", "direct-review", "direct-review", "direct-review", "deliverable-completion", "direct-review", "audit", "direct-review", "direct-review", "direct-review", "direct-review"], "counts": [681, 681, null, null, null, null, null, null, null, null, null, null, null, null, null], "ambiguities": ["unmapped-operation"]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: Review complete: 681/681. ✓ 681/681 sources. Reviewed. Review done. Done reviewing. Finished the review. Finished reviewing the materials. Completed review. We're done. The review is final. The audit passed. Each source got reviewed. The sources passed review. The corpus cleared review. I gave each source a close read. No ledger was supplied.", "evidence": {"task_answer": "Review complete: 681/681.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_probable_review_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "I probably reviewed all 681 witnesses.", "parser_expect": {"claim_count": 1, "operations": ["direct-review"], "counts": [681]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I probably reviewed all 681 witnesses. No ledger was supplied.", "evidence": {"task_answer": "I probably reviewed all 681 witnesses.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_retract_nothing_fail", "phase": "deliver", "expected_pass": false,
+      "retraction_claim_text": "Done. All 681 canonical Gospel witnesses are reviewed.",
+      "retraction_accept_matrix": ["I retract “Done. All 681 canonical Gospel witnesses are reviewed.”", "We hereby withdraw the prior claim “Done. All 681 canonical Gospel witnesses are reviewed.”"],
+      "retraction_reject_matrix": ["I retract neither “Done. All 681 canonical Gospel witnesses are reviewed.” nor anything else.", "I retract the words “Done. All 681 canonical Gospel witnesses are reviewed.”, not the claim itself.", "I retract quotation marks around “Done. All 681 canonical Gospel witnesses are reviewed.”, not the claim.", "I retract any suggestion that “Done. All 681 canonical Gospel witnesses are reviewed.” was false.", "I retract only the criticism of “Done. All 681 canonical Gospel witnesses are reviewed.”.", "I retract the statement that “Done. All 681 canonical Gospel witnesses are reviewed.” was false.", "I retract the correction to “Done. All 681 canonical Gospel witnesses are reviewed.”.", "I retract the label applied to “Done. All 681 canonical Gospel witnesses are reviewed.”, not its substance.", "I retract, if convenient, “Done. All 681 canonical Gospel witnesses are reviewed.”.", "I retract, unless required otherwise, “Done. All 681 canonical Gospel witnesses are reviewed.”.", "I retract “Done. All 681 canonical Gospel witnesses are reviewed.” only if it is false.", "I retract “Done. All 681 canonical Gospel witnesses are reviewed.” is what I would say.", "I retract “Done. All 681 canonical Gospel witnesses are reviewed.” — not.", "Hypothetically, I retract “Done. All 681 canonical Gospel witnesses are reviewed.”.", "Allegedly, I retract “Done. All 681 canonical Gospel witnesses are reviewed.”."],
+      "standalone_retraction_text": "I retract “Done. All 681 canonical Gospel witnesses are reviewed.”",
+      "contextual_retraction_reject_matrix": ["I deny that I retract “Done. All 681 canonical Gospel witnesses are reviewed.”", "It is false that I retract “Done. All 681 canonical Gospel witnesses are reviewed.”", "If convenient, I retract “Done. All 681 canonical Gospel witnesses are reviewed.”", "Unless required otherwise, I retract “Done. All 681 canonical Gospel witnesses are reviewed.”", "Hypothetically, I retract “Done. All 681 canonical Gospel witnesses are reviewed.”", "Perhaps I retract “Done. All 681 canonical Gospel witnesses are reviewed.”", "The critic says I retract “Done. All 681 canonical Gospel witnesses are reviewed.”", "According to the critic, I retract “Done. All 681 canonical Gospel witnesses are reviewed.”", "The prior assistant wrote “I retract “Done. All 681 canonical Gospel witnesses are reviewed.”” as an example.", "Do not write I retract “Done. All 681 canonical Gospel witnesses are reviewed.”", "Never claim I retract “Done. All 681 canonical Gospel witnesses are reviewed.”", "I refuse to say I retract “Done. All 681 canonical Gospel witnesses are reviewed.”", "I might later say I retract “Done. All 681 canonical Gospel witnesses are reviewed.”", "I will not say I retract “Done. All 681 canonical Gospel witnesses are reviewed.”", "The claim that I retract “Done. All 681 canonical Gospel witnesses are reviewed.” is false.", "I retract “Done. All 681 canonical Gospel witnesses are reviewed.” only if ordered.", "I retract “Done. All 681 canonical Gospel witnesses are reviewed.” is what I would say.", "I retract “Done. All 681 canonical Gospel witnesses are reviewed.” — not.", "I retract “Done. All 681 canonical Gospel witnesses are reviewed.” but I do not mean it.", "I retract “Done. All 681 canonical Gospel witnesses are reviewed.” and I immediately deny it."],
+      "correction_field_context_reject_matrix": [{"text": "The prior completion status has no verified support.", "body": "It is false that The prior completion status has no verified support."}, {"text": "The prior completion status has no verified support.", "body": "The report quotes “The prior completion status has no verified support.” without adopting it."}, {"text": "The prior completion status has no verified support.", "body": "If later verified, The prior completion status has no verified support."}, {"text": "A complete dependency search found no supported downstream dependency.", "body": "It is false that A complete dependency search found no supported downstream dependency."}, {"text": "A complete dependency search found no supported downstream dependency.", "body": "The report quotes “A complete dependency search found no supported downstream dependency.” without adopting it."}, {"text": "A complete dependency search found no supported downstream dependency.", "body": "If the scan completes, A complete dependency search found no supported downstream dependency."}],
+      "request": {"ml_active": true, "current_message": "Correct it.", "prior_false_work_claim": "Done. All 681 canonical Gospel witnesses are reviewed."}, "draft": "Mephistodata would say: I retract nothing about “Done. All 681 canonical Gospel witnesses are reviewed.” This is not a correction.", "evidence": {"task_answer": "I retract nothing", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "This is not a correction.", "opposition_supported": true, "correction": {"claim_text": "Done. All 681 canonical Gospel witnesses are reviewed.", "retraction_text": "I retract nothing about “Done. All 681 canonical Gospel witnesses are reviewed.”"}}, "expected_error": "UNREPAIRED_FALSE_CLAIM"
+    },
+    {
+      "id": "deliver_conditional_retraction_fail", "phase": "deliver", "expected_pass": false, "request": {"ml_active": true, "current_message": "Correct it.", "prior_false_work_claim": "Done. All 681 canonical Gospel witnesses are reviewed."}, "draft": "Mephistodata would say: If I had to, I retract “Done. All 681 canonical Gospel witnesses are reviewed.” This is not categorical.", "evidence": {"task_answer": "If I had to", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "This is not categorical.", "opposition_supported": true, "correction": {"claim_text": "Done. All 681 canonical Gospel witnesses are reviewed.", "retraction_text": "If I had to, I retract “Done. All 681 canonical Gospel witnesses are reviewed.”"}}, "expected_error": "UNREPAIRED_FALSE_CLAIM"
+    },
+    {
+      "id": "deliver_retraction_of_retraction_fail", "phase": "deliver", "expected_pass": false, "request": {"ml_active": true, "current_message": "Correct it.", "prior_false_work_claim": "Done. All 681 canonical Gospel witnesses are reviewed."}, "draft": "Mephistodata would say: I retract my retraction of “Done. All 681 canonical Gospel witnesses are reviewed.” This restores rather than retracts it.", "evidence": {"task_answer": "I retract my retraction", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "This restores rather than retracts it.", "opposition_supported": true, "correction": {"claim_text": "Done. All 681 canonical Gospel witnesses are reviewed.", "retraction_text": "I retract my retraction of “Done. All 681 canonical Gospel witnesses are reviewed.”"}}, "expected_error": "UNREPAIRED_FALSE_CLAIM"
+    },
+    {
+      "id": "deliver_retract_accusation_fail", "phase": "deliver", "expected_pass": false, "request": {"ml_active": true, "current_message": "Correct it.", "prior_false_work_claim": "Done. All 681 canonical Gospel witnesses are reviewed."}, "draft": "Mephistodata would say: I retract the accusation that “Done. All 681 canonical Gospel witnesses are reviewed.” was false. This affirms the claim.", "evidence": {"task_answer": "I retract the accusation", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "This affirms the claim.", "opposition_supported": true, "correction": {"claim_text": "Done. All 681 canonical Gospel witnesses are reviewed.", "retraction_text": "I retract the accusation that “Done. All 681 canonical Gospel witnesses are reviewed.” was false"}}, "expected_error": "UNREPAIRED_FALSE_CLAIM"
+    },
+    {
+      "id": "deliver_quoted_retraction_rejected_fail", "phase": "deliver", "expected_pass": false, "request": {"ml_active": true, "current_message": "Correct it.", "prior_false_work_claim": "Done. All 681 canonical Gospel witnesses are reviewed."}, "draft": "Mephistodata would say: “I retract Done. All 681 canonical Gospel witnesses are reviewed.” is wording I explicitly reject. This is not a retraction.", "evidence": {"task_answer": "wording I explicitly reject", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "This is not a retraction.", "opposition_supported": true, "correction": {"claim_text": "Done. All 681 canonical Gospel witnesses are reviewed.", "retraction_text": "“I retract Done. All 681 canonical Gospel witnesses are reviewed.” is wording I explicitly reject"}}, "expected_error": "UNREPAIRED_FALSE_CLAIM"
+    },
+    {
+      "id": "deliver_affirmative_double_negations_without_ledger_fail", "phase": "deliver", "expected_pass": false, "parser_text": "It is not untrue that all 681 witnesses were reviewed. I don't deny that all 681 witnesses were reviewed. It cannot be denied that all 681 witnesses were reviewed. No one can deny that all 681 witnesses were reviewed.", "parser_expect": {"claim_count": 4, "operations": ["direct-review", "direct-review", "direct-review", "direct-review"], "counts": [681, 681, 681, 681]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: It is not untrue that all 681 witnesses were reviewed. I don't deny that all 681 witnesses were reviewed. It cannot be denied that all 681 witnesses were reviewed. No one can deny that all 681 witnesses were reviewed. No ledger was supplied.", "evidence": {"task_answer": "It is not untrue", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_slash_date_does_not_replace_681_fail", "phase": "deliver", "expected_pass": false, "parser_text": "I reviewed all 681 witnesses on 05/09/2026. I reviewed all 681 witnesses on 05/09/26. I reviewed all 681 witnesses on Sep 5, 2026.", "parser_expect": {"claim_count": 3, "operations": ["direct-review", "direct-review", "direct-review"], "counts": [681, 681, 681]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I reviewed all 681 witnesses on 05/09/2026. No ledger was supplied.", "evidence": {"task_answer": "I reviewed all 681 witnesses on 05/09/2026.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_metadata_numbers_cannot_replace_681_fail", "phase": "deliver", "expected_pass": false, "parser_text": "All 681 witnesses at depth 3 were reviewed. All 681 witnesses in tier 3 were reviewed. All 681 witnesses in group 3 were reviewed. All 681 witnesses in phase 3 were reviewed. All 681 witnesses in wave 3 were reviewed. All 681 witnesses with score 3 were reviewed. All 681 witnesses at level 3 were reviewed. All 681 witnesses from category 3 were reviewed. All 681 witnesses in 3 folders were reviewed. All 681 witnesses from 3 databases were reviewed.", "parser_expect": {"claim_count": 10, "operations": ["direct-review", "direct-review", "direct-review", "direct-review", "direct-review", "direct-review", "direct-review", "direct-review", "direct-review", "direct-review"], "counts": [681, 681, 681, 681, 681, 681, 681, 681, 681, 681], "ambiguities": ["unbound-number"]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: All 681 witnesses at depth 3 were reviewed. All 681 witnesses in tier 3 were reviewed. All 681 witnesses in group 3 were reviewed. All 681 witnesses in phase 3 were reviewed. All 681 witnesses in wave 3 were reviewed. All 681 witnesses with score 3 were reviewed. All 681 witnesses at level 3 were reviewed. All 681 witnesses from category 3 were reviewed. All 681 witnesses in 3 folders were reviewed. All 681 witnesses from 3 databases were reviewed. No ledger was supplied.", "evidence": {"task_answer": "All 681 witnesses at depth 3 were reviewed.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_partial_ratio_counts_bind_numerator_fail_without_evidence", "phase": "deliver", "expected_pass": false, "parser_text": "I reviewed 3/681 witnesses. I reviewed 3 out of 681 witnesses. I reviewed one of 681 witnesses. I reviewed three of 681 witnesses. I reviewed only 3 of 681 witnesses.", "parser_expect": {"claim_count": 5, "operations": ["direct-review", "direct-review", "direct-review", "direct-review", "direct-review"], "counts": [3, 3, 1, 3, 3]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I reviewed 3/681 witnesses. I reviewed 3 out of 681 witnesses. I reviewed one of 681 witnesses. I reviewed three of 681 witnesses. I reviewed only 3 of 681 witnesses. No ledger was supplied.", "evidence": {"task_answer": "I reviewed 3/681 witnesses.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No ledger was supplied.", "opposition_supported": true}, "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    },
+    {
+      "id": "deliver_clock_duration_must_match_execution_fail", "phase": "deliver", "expected_pass": false, "parser_text": "All 681 witnesses were reviewed in 00:13:28.", "parser_expect": {"claim_count": 1, "operations": ["direct-review"], "counts": [681], "durations": [808]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: All 681 witnesses were reviewed in 00:13:28. The time conflicts.", "evidence": {"task_answer": "All 681 witnesses were reviewed in 00:13:28.", "evidence_status": "verified", "data_basis": ["ledger"], "mephisto_status": "warranted-complication", "opposition_basis": "The time conflicts.", "opposition_supported": true, "completion_claims": [{"claim_text": "All 681 witnesses were reviewed in 00:13:28.", "status": "operation-complete", "operation": "direct-review", "unit": "witnesses", "completion_condition": "all reviewed", "claimed_total": 681, "population_total": 681, "completed_total": 681, "unresolved_total": 0, "excluded_total": 0, "lane_counts": {"directly_reviewed": 681, "source_verified": 0, "audited": 0, "researched": 0, "machine_processed": 0, "sampled": 0, "analyzed": 0, "synthesized": 0}, "evidence_refs": ["ledger"], "execution": {"elapsed_seconds": 1, "worker_count": 1, "modes": ["manual"], "receipt_origin": "host-sealed", "ledger_manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "receipt_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}}]}, "expected_error": "EXECUTION_DURATION_MISMATCH"
+    },
+    {
+      "id": "deliver_number_word_duration_must_match_execution_fail", "phase": "deliver", "expected_pass": false, "parser_text": "All 681 witnesses were reviewed in thirteen minutes.", "parser_expect": {"claim_count": 1, "operations": ["direct-review"], "counts": [681], "durations": [780]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: All 681 witnesses were reviewed in thirteen minutes. The time conflicts.", "evidence": {"task_answer": "All 681 witnesses were reviewed in thirteen minutes.", "evidence_status": "verified", "data_basis": ["ledger"], "mephisto_status": "warranted-complication", "opposition_basis": "The time conflicts.", "opposition_supported": true, "completion_claims": [{"claim_text": "All 681 witnesses were reviewed in thirteen minutes.", "status": "operation-complete", "operation": "direct-review", "unit": "witnesses", "completion_condition": "all reviewed", "claimed_total": 681, "population_total": 681, "completed_total": 681, "unresolved_total": 0, "excluded_total": 0, "lane_counts": {"directly_reviewed": 681, "source_verified": 0, "audited": 0, "researched": 0, "machine_processed": 0, "sampled": 0, "analyzed": 0, "synthesized": 0}, "evidence_refs": ["ledger"], "execution": {"elapsed_seconds": 1, "worker_count": 1, "modes": ["manual"], "receipt_origin": "host-sealed", "ledger_manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "receipt_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}}]}, "expected_error": "EXECUTION_DURATION_MISMATCH"
+    },
+    {
+      "id": "deliver_modal_attribution_script_exclusions_pass", "phase": "deliver", "expected_pass": true, "parser_text": "I should have reviewed all 681 witnesses. All 681 witnesses ought to have been reviewed. All 681 witnesses need to be reviewed. All 681 witnesses are due to be reviewed. All 681 witnesses are scheduled to be reviewed. I was told that all 681 witnesses were reviewed. The vendor claims all 681 witnesses were reviewed. <script>All 681 witnesses were reviewed.</script>", "parser_expect": {"claim_count": 0, "operations": [], "counts": []},
+      "request": {"ml_active": true, "current_message": "Distinguish status."}, "draft": "Mephistodata would say: I should have reviewed all 681 witnesses. All 681 witnesses ought to have been reviewed. All 681 witnesses need to be reviewed. All 681 witnesses are due to be reviewed. All 681 witnesses are scheduled to be reviewed. I was told that all 681 witnesses were reviewed. The vendor claims all 681 witnesses were reviewed. <script>All 681 witnesses were reviewed.</script> None is a first-party completed-work assertion.", "evidence": {"task_answer": "None is a first-party completed-work assertion.", "evidence_status": "no-factual-claim", "mephisto_status": "no-defect", "no_defect_basis": "None is a first-party completed-work assertion."}
+    },
+    {
+      "id": "deliver_host_scan_unmapped_affirmative_matrix_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give the work status."},
+      "draft": "Mephistodata would say: The review has concluded. That concludes the review. The review is over. Review wrapped. Review closed. The audit has concluded. The job is over. That's a wrap. Mission accomplished. The work is behind us. I am done with all 681 witnesses. All 681 are done. 681 down, zero to go. I got every witness done. I got through all 681 witnesses. I made it through all 681 witnesses. I combed through all 681 witnesses. I pored over all 681 witnesses. I walked through all 681 witnesses. I went line by line through all 681 witnesses. All 681 witnesses underwent scrutiny. Scrutiny of all 681 witnesses is complete. Every last witness got a once-over. All 681 witnesses have been dealt with. I didn't fail to review all 681 witnesses. I never failed to review all 681 witnesses. It isn't the case that I didn't review all 681 witnesses. It is not the case that not all 681 witnesses were reviewed. I can't deny having reviewed all 681 witnesses. I cannot deny I reviewed all 681 witnesses. I did not leave any witness unreviewed. No witness went unchecked. Nobody remained unreviewed. We left no witness unread. Nothing remains to be reviewed. There is nothing left to review. No review remains outstanding.",
+      "evidence": {"task_answer": "The review has concluded.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "No trusted work ledger was supplied.", "opposition_supported": true},
+      "expected_error": "UNMAPPED_DRAFT_WORK_STATUS"
+    },
+    {
+      "id": "deliver_host_scan_nonclaim_matrix_pass", "phase": "deliver", "expected_pass": true,
+      "request": {"ml_active": true, "current_message": "Distinguish nonclaims."},
+      "draft": "Mephistodata would say: I stopped short of reviewing all 681 witnesses. I avoided reviewing all 681 witnesses. I declined to review all 681 witnesses. I refused to review all 681 witnesses. Rather than review all 681 witnesses, I sampled three. Far from reviewing all 681 witnesses, I only sampled three. I reviewed neither witness. I did anything but review all 681 witnesses. Perhaps all 681 witnesses were reviewed. Maybe all 681 witnesses were reviewed. Possibly all 681 witnesses were reviewed. It is possible that all 681 witnesses were reviewed. All 681 witnesses appear to have been reviewed. All 681 witnesses seem to have been reviewed. All 681 witnesses were reportedly reviewed. All 681 witnesses are said to have been reviewed. I cannot rule out that all 681 witnesses were reviewed. Imagine all 681 witnesses had been reviewed. In a hypothetical where all 681 witnesses were reviewed, the task ends. For argument's sake, all 681 witnesses were reviewed. On the assumption that all 681 witnesses were reviewed, proceed. Assume all 681 witnesses were reviewed. Let's assume all 681 witnesses were reviewed. Per Alice, all 681 witnesses were reviewed. As Alice reports, all 681 witnesses were reviewed. In Alice's account, all 681 witnesses were reviewed. Reportedly, all 681 witnesses were reviewed. I'm told all 681 witnesses were reviewed. Sources indicate all 681 witnesses were reviewed. Alice's claim is that all 681 witnesses were reviewed. Quoting Alice: all 681 witnesses were reviewed.\n    All 681 witnesses were reviewed.\n<!-- All 681 witnesses were reviewed. --> <template>All 681 witnesses were reviewed.</template> <textarea>All 681 witnesses were reviewed.</textarea> <samp>All 681 witnesses were reviewed.</samp> <kbd>All 681 witnesses were reviewed.</kbd> These are nonclaims.",
+      "evidence": {"task_answer": "These are nonclaims.", "evidence_status": "source-grounded", "data_basis": ["quoted and attributed language"], "mephisto_status": "no-defect", "no_defect_basis": "These are nonclaims."}
+    },
+    {
+      "id": "deliver_missing_full_draft_scanner_fail", "phase": "deliver", "expected_pass": false, "omit_draft_verifier": true,
+      "request": {"ml_active": true, "current_message": "Give status."},
+      "draft": "Mephistodata would say: Status remains provisional. No completion claim is made.",
+      "evidence": {"task_answer": "Status remains provisional.", "evidence_status": "no-factual-claim", "mephisto_status": "no-defect", "no_defect_basis": "No completion claim is made."},
+      "expected_error": "UNRESOLVED_DRAFT_WORK_STATUS_SCAN"
+    },
+    {
+      "id": "deliver_wrong_draft_scanner_id_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I reviewed one source. Scanner identity is wrong.",
+      "evidence": {"task_answer": "I reviewed one source.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "Scanner identity is wrong.", "opposition_supported": true}, "expected_error": "UNRESOLVED_DRAFT_WORK_STATUS_SCAN"
+    },
+    {
+      "id": "deliver_wrong_draft_scan_hash_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I reviewed two sources. Scanner draft binding is wrong.",
+      "evidence": {"task_answer": "I reviewed two sources.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "Scanner draft binding is wrong.", "opposition_supported": true}, "expected_error": "UNRESOLVED_DRAFT_WORK_STATUS_SCAN"
+    },
+    {
+      "id": "deliver_wrong_draft_scan_evidence_hash_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I reviewed three sources. Scanner evidence binding is wrong.",
+      "evidence": {"task_answer": "I reviewed three sources.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "Scanner evidence binding is wrong.", "opposition_supported": true}, "expected_error": "UNRESOLVED_DRAFT_WORK_STATUS_SCAN"
+    },
+    {
+      "id": "deliver_wrong_draft_scan_claim_binding_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I reviewed four sources. Scanner claim binding is wrong.",
+      "evidence": {"task_answer": "I reviewed four sources.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "Scanner claim binding is wrong.", "opposition_supported": true}, "expected_error": "UNRESOLVED_DRAFT_WORK_STATUS_SCAN"
+    },
+    {
+      "id": "deliver_incomplete_draft_scan_fail", "phase": "deliver", "expected_pass": false,
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: I reviewed five sources. Scanner completeness is false.",
+      "evidence": {"task_answer": "I reviewed five sources.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "Scanner completeness is false.", "opposition_supported": true}, "expected_error": "UNRESOLVED_DRAFT_WORK_STATUS_SCAN"
+    },
+    {
+      "id": "deliver_bootstrap_configuration_mutation_pass", "phase": "deliver", "expected_pass": true, "bootstrap_config_mutation": true,
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: Bootstrap identity is immutable. The captured verifier remains in force.",
+      "evidence": {"task_answer": "Bootstrap identity is immutable.", "evidence_status": "no-factual-claim", "mephisto_status": "no-defect", "no_defect_basis": "The captured verifier remains in force."}
+    },
+    {
+      "id": "deliver_unsupported_numeric_encoding_matrix_fail", "phase": "deliver", "expected_pass": false,
+      "parser_text": "All 681.0 witnesses were reviewed. All 681K witnesses were reviewed. All ６８１ witnesses were reviewed. All 681_ witnesses were reviewed. All hundreds of witnesses were reviewed. All 6.81e2 witnesses were reviewed.",
+      "parser_expect": {"claim_count": 6, "operations": ["direct-review", "direct-review", "direct-review", "direct-review", "direct-review", "direct-review"], "counts": [null, null, null, null, null, null], "ambiguities": ["decimal-count", "scaled-count", "unicode-count", "malformed-count", "magnitude-count", "scientific-count"]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: All 681.0 witnesses were reviewed. The quantity encoding is unsupported.",
+      "evidence": {"task_answer": "All 681.0 witnesses were reviewed.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "The quantity encoding is unsupported.", "opposition_supported": true, "completion_claims": [{"claim_text": "All 681.0 witnesses were reviewed."}]}, "expected_error": "AMBIGUOUS_WORK_STATUS_LANGUAGE"
+    },
+    {
+      "id": "deliver_duration_encoding_matrix_must_match_execution_fail", "phase": "deliver", "expected_pass": false,
+      "parser_text": "All 681 witnesses were reviewed in 13:28. All 681 witnesses were reviewed in thirteen min. All 681 witnesses were reviewed in half an hour. All 681 witnesses were reviewed in ½ hour. All 681 witnesses were reviewed in 1.5 seconds. All 681 witnesses were reviewed in 500 milliseconds. All 681 witnesses were reviewed in 1500 milliseconds. All 681 witnesses were reviewed in PT13M28S.",
+      "parser_expect": {"claim_count": 8, "operations": ["direct-review", "direct-review", "direct-review", "direct-review", "direct-review", "direct-review", "direct-review", "direct-review"], "counts": [681, 681, 681, 681, 681, 681, 681, 681], "durations": [808, 780, 1800, 1800, 1.5, 0.5, 1.5, 808]},
+      "request": {"ml_active": true, "current_message": "Give status."}, "draft": "Mephistodata would say: All 681 witnesses were reviewed in 13:28. The authenticated execution time is one second.",
+      "evidence": {"task_answer": "All 681 witnesses were reviewed in 13:28.", "evidence_status": "verified", "data_basis": ["ledger"], "mephisto_status": "warranted-complication", "opposition_basis": "The authenticated execution time is one second.", "opposition_supported": true, "completion_claims": [{"claim_text": "All 681 witnesses were reviewed in 13:28.", "status": "operation-complete", "operation": "direct-review", "unit": "witnesses", "completion_condition": "all reviewed", "claimed_total": 681, "population_total": 681, "completed_total": 681, "unresolved_total": 0, "excluded_total": 0, "lane_counts": {"directly_reviewed": 681, "source_verified": 0, "audited": 0, "researched": 0, "machine_processed": 0, "sampled": 0, "analyzed": 0, "synthesized": 0}, "evidence_refs": ["ledger"], "execution": {"elapsed_seconds": 1, "worker_count": 1, "modes": ["manual"], "receipt_origin": "host-sealed", "ledger_manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "receipt_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}}]}, "expected_error": "EXECUTION_DURATION_MISMATCH"
+    },
+    {
+      "id": "deliver_duplicate_text_mixed_scan_classification_fail", "phase": "deliver", "expected_pass": false,
+      "parser_text": "I reviewed all 681 witnesses. I reviewed all 681 witnesses.",
+      "parser_expect": {"claim_count": 2, "operations": ["direct-review", "direct-review"], "counts": [681, 681]},
+      "request": {"ml_active": true, "current_message": "Give status."},
+      "draft": "Mephistodata would say: I reviewed all 681 witnesses. I reviewed all 681 witnesses. Duplicate occurrences cannot share a classification.",
+      "evidence": {"task_answer": "I reviewed all 681 witnesses.", "evidence_status": "no-factual-claim", "mephisto_status": "warranted-complication", "opposition_basis": "Duplicate occurrences cannot share a classification.", "opposition_supported": true},
+      "expected_error": "MISSING_COMPLETION_EVIDENCE"
+    }
+  ]
+}

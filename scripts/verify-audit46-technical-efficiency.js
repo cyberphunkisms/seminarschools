@@ -8,6 +8,7 @@ const {
   resolveSiteBuildDate,
 } = require('./polymythcal-build-date');
 const {isMonitoringMarker} = require('./lib/polymythcal-discovery-model');
+const {expectedPolymythcalEventRoutes} = require('./lib/source-html-inventory');
 
 const ROOT = path.resolve(__dirname, '..');
 const PUBLIC = path.join(ROOT, 'public');
@@ -425,30 +426,62 @@ for (const event of canonicalEvents.filter(event => browseSet.has(String(event.i
     if (sitemap.includes(`<loc>${route}</loc>`)) fail(`sitemap retains expired event ${route}`);
   }
 }
-for (const event of canonicalEvents.filter(event => watchlistSet.has(String(event.id)))) {
-  const id = String(event.id || event.identity_key);
-  const routeIds = new Set([id, ...(event.legacy_ids || []).map(String)]);
+const allRouteContract = expectedPolymythcalEventRoutes(canonicalEvents);
+const monitoringEvents = canonicalEvents.filter(event => watchlistSet.has(String(event.id)));
+const monitoringRouteContract = expectedPolymythcalEventRoutes(monitoringEvents);
+for (const [localePath, routeIds] of [
+  ['events', allRouteContract.englishRouteIds],
+  ['fr/events', allRouteContract.frenchRouteIds],
+]) {
   for (const routeId of routeIds) {
-    for (const relative of [
-      `polymythseminars/events/${routeId}/index.html`,
-      `polymythseminars/fr/events/${routeId}/index.html`,
-      `polymythseminars/ics/${routeId}.ics`,
-      `public/polymythseminars/events/${routeId}/index.html`,
-      `public/polymythseminars/fr/events/${routeId}/index.html`,
-      `public/polymythseminars/ics/${routeId}.ics`,
-    ]) {
-      if (fs.existsSync(path.join(ROOT, relative))) {
-        fail(`${relative}: monitoring record has a chronology route`);
-      }
+    const sourceRelative = `polymythseminars/${localePath}/${routeId}/index.html`;
+    const publicRelative = `public/${sourceRelative}`;
+    if (!fs.existsSync(path.join(ROOT, sourceRelative))) fail(`${sourceRelative}: stable event route is missing`);
+    if (!fs.existsSync(path.join(ROOT, publicRelative))) fail(`${publicRelative}: stable event route is missing`);
+  }
+}
+for (const event of monitoringEvents) {
+  const id = String(event.id || event.identity_key);
+  for (const localePath of ['events', 'fr/events']) {
+    const sourceRelative = `polymythseminars/${localePath}/${id}/index.html`;
+    const publicRelative = `public/${sourceRelative}`;
+    if (!fs.existsSync(path.join(ROOT, sourceRelative))) continue;
+    const html = read(sourceRelative);
+    if (
+      !/<meta\b(?=[^>]*name=["']robots["'])(?=[^>]*content=["']noindex,follow["'])[^>]*>/i.test(html)
+      || /<time\b[^>]*\bdatetime\s*=/i.test(html)
+      || /<script\b[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?["']@type["']\s*:\s*["']Event["']/i.test(html)
+    ) {
+      fail(`${sourceRelative}: watchlist detail is not noindex, undated, and free of Event JSON-LD`);
+    }
+    if (
+      fs.existsSync(path.join(ROOT, publicRelative))
+      && !fs.readFileSync(path.join(ROOT, sourceRelative)).equals(fs.readFileSync(path.join(ROOT, publicRelative)))
+    ) {
+      fail(`${publicRelative}: published watchlist detail differs from source`);
     }
   }
-  const encoded = encodeURIComponent(id);
-  for (const route of [
-    `https://seminarschools.com/polymythseminars/events/${encoded}/`,
-    `https://seminarschools.com/polymythseminars/fr/events/${encoded}/`,
+}
+for (const routeId of new Set([
+  ...monitoringRouteContract.canonicalIds,
+  ...monitoringRouteContract.frenchAliases.keys(),
+])) {
+  for (const relative of [
+    `polymythseminars/ics/${routeId}.ics`,
+    `public/polymythseminars/ics/${routeId}.ics`,
   ]) {
-    if (sitemap.includes(`<loc>${route}</loc>`)) fail(`sitemap exposes monitoring record ${route}`);
+    if (fs.existsSync(path.join(ROOT, relative))) {
+      fail(`${relative}: watchlist record has an ICS chronology route`);
+    }
   }
+}
+for (const routeId of monitoringRouteContract.englishRouteIds) {
+  const route = `https://seminarschools.com/polymythseminars/events/${encodeURIComponent(routeId)}/`;
+  if (sitemap.includes(`<loc>${route}</loc>`)) fail(`sitemap exposes watchlist route ${route}`);
+}
+for (const routeId of monitoringRouteContract.frenchRouteIds) {
+  const route = `https://seminarschools.com/polymythseminars/fr/events/${encodeURIComponent(routeId)}/`;
+  if (sitemap.includes(`<loc>${route}</loc>`)) fail(`sitemap exposes watchlist route ${route}`);
 }
 const publicFiles = publicHtmlFiles();
 metrics.public_html_files = publicFiles.length;
@@ -484,4 +517,3 @@ console.log(
     + `${metrics.public_html_files} public HTML files, zero duplicate shared requests, `
     + `release-day rollover with a Toronto fallback, one npm install, exact runtimes, and streamed package verification.`,
 );
-

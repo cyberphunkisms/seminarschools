@@ -6,19 +6,63 @@
  * site files are copied into /public for deployment.
  */
 const fs = require('fs');
-const os = require('os');
+const crypto = require('crypto');
 const path = require('path');
+const util = require('util');
+const {spawnSync} = require('child_process');
 const {
   isGeneratedDependencyDirectory,
 } = require('./repository-walk-policy');
+const {
+  PublicBuildLock,
+  STAGE_MARKER_NAME,
+} = require('./lib/public-build-lock');
+const {
+  PUBLIC_RELEASE_ASSET_PATHS,
+  computeReleaseAssetIdentity,
+  pickReleaseAssetIdentity,
+} = require('./lib/release-asset-identity');
 const ROOT = path.resolve(__dirname, '..');
 const OUT = path.join(ROOT, 'public');
 const BUILD_OUT = path.join(ROOT, '.public-build-staging');
 const PREVIOUS_OUT = path.join(ROOT, '.public-build-previous');
-const BUILD_LOCK = path.join(ROOT, '.public-build-lock');
-const BUILD_LOCK_META = path.join(BUILD_LOCK, 'owner.json');
-const BUILD_LOCK_STALE_MS = 6 * 60 * 60 * 1000;
-const LEGACY_LOCK_PID_GRACE_MS = 30 * 60 * 1000;
+const RELEASE_LOCK_TOKEN_ENV = 'SS_RELEASE_BUILD_LOCK_TOKEN';
+const RELEASE_LOCK_ROOT_ENV = 'SS_RELEASE_BUILD_LOCK_ROOT';
+
+function delegateToReleaseBuildLockWhenNeeded(){
+  const inheritedToken = process.env[RELEASE_LOCK_TOKEN_ENV];
+  const inheritedRoot = process.env[RELEASE_LOCK_ROOT_ENV];
+  if (inheritedToken !== undefined && inheritedRoot !== undefined) return;
+  if ((inheritedToken === undefined) !== (inheritedRoot === undefined)) {
+    throw new Error('PUBLIC DEPLOY BUILD FAILED — inherited release-build lock environment is incomplete');
+  }
+  const delegated = spawnSync(
+    process.execPath,
+    [
+      path.join(ROOT, 'scripts', 'run-python.js'),
+      path.join(ROOT, 'scripts', 'run-with-build-lock.py'),
+      '--',
+      process.execPath,
+      __filename,
+      ...process.argv.slice(2),
+    ],
+    {
+      cwd: ROOT,
+      env: process.env,
+      stdio: 'inherit',
+      windowsHide: true,
+    },
+  );
+  if (delegated.error) {
+    throw new Error(`PUBLIC DEPLOY BUILD FAILED — release-build lock delegation failed: ${delegated.error.message}`);
+  }
+  if (!Number.isInteger(delegated.status)) {
+    throw new Error('PUBLIC DEPLOY BUILD FAILED — release-build lock delegation returned no exit status');
+  }
+  process.exit(delegated.status);
+}
+
+delegateToReleaseBuildLockWhenNeeded();
 const PUBLIC_DIRS = [
   '.well-known', 'agora', 'aitr', 'aa', 'bb', 'bookwormcard', 'campaigns',
   'cfps', 'css', 'fellowships', 'florilegium', 'humanities',
@@ -46,7 +90,11 @@ const BLOCKED_EXACT = new Set([
   'teacherresources/audit-batch-01.json',
   'teacherresources/audit-methodology.md',
   'teacherresources/resources-data.json',
-  'teacherresources/submission-strategy.md'
+  'teacherresources/submission-strategy.md',
+  'polymyth/research/metoo-foundational-dissent-full-archive-2026-07-28.xlsx',
+  'polymyth/research/metoo-foundational-dissent-full-archive-2026-07-28.xlsx.sha256',
+  'polymyth/research/metoo-foundational-dissent-research-audit-2026-07-27.xlsx',
+  'polymyth/research/metoo-foundational-dissent-research-audit-2026-07-27.xlsx.sha256'
 ]);
 const BLOCKED_DIRS = new Set(['node_modules', '.git', '.github', '.netlify', 'data', 'hf_export', 'netlify', 'scripts', 'public']);
 const OPERATOR_RE = /(?:AUDIT|REPORT|PATCH|VERIFY|OUTPUT|SETUP|DEPLOY|PRIVATE|SECRET|TOKEN|DASHBOARD|CRITIQUE|SUGGESTION|HANDOFF)/i;
@@ -158,154 +206,72 @@ function removeDir(p){
     retryDelay: 100,
   });
 }
-let buildLockToken = null;
-function readProcessIdentity(procId = 'self'){
-  try {
-    const stat = fs.readFileSync(`/proc/${procId}/stat`, 'utf8').trim();
-    const firstSpace = stat.indexOf(' ');
-    const closeParen = stat.lastIndexOf(')');
-    if (firstSpace <= 0 || closeParen <= firstSpace) return null;
-    const procPid = Number(stat.slice(0, firstSpace));
-    // Fields after the command name begin at Linux proc-stat field 3;
-    // process start time is field 22, hence index 19 in this suffix.
-    const suffix = stat.slice(closeParen + 2).trim().split(/\s+/);
-    const startTicks = suffix[19];
-    if (!Number.isInteger(procPid) || procPid <= 0 || !/^\d+$/.test(String(startTicks || ''))) return null;
-    return { proc_pid: procPid, start_ticks: String(startTicks) };
-  } catch (_) { return null; }
-}
-function processIdentityAlive(identity){
-  if (!identity || !Number.isInteger(Number(identity.proc_pid)) || !/^\d+$/.test(String(identity.start_ticks || ''))) return false;
-  const current = readProcessIdentity(String(identity.proc_pid));
-  return Boolean(current && current.start_ticks === String(identity.start_ticks));
-}
-function claimBuildLock(hostname){
-  buildLockToken = `${hostname}:${process.pid}:${Date.now()}`;
-  try {
-    fs.writeFileSync(BUILD_LOCK_META, JSON.stringify({
-      token: buildLockToken,
-      hostname,
-      pid: process.pid,
-      process_identity: readProcessIdentity(),
-      created_epoch_ms: Date.now(),
-    }) + '\n', { flag: 'wx' });
-  } catch (error) {
-    buildLockToken = null;
-    throw error;
+function authorizeEmptyOverlayRecovery(){
+  const assertion = spawnSync(
+    process.execPath,
+    [
+      path.join(ROOT, 'scripts', 'run-python.js'),
+      path.join(ROOT, 'scripts', 'assert-build-lock.py'),
+    ],
+    {
+      cwd: ROOT,
+      env: process.env,
+      encoding: 'utf8',
+      windowsHide: true,
+    },
+  );
+  if (assertion.error || assertion.status !== 0) {
+    const detail = String(assertion.stderr || assertion.stdout || assertion.error?.message || '').trim();
+    throw new Error(
+      `PUBLIC DEPLOY BUILD FAILED — empty overlay recovery lacks the live release-build lease${detail ? `: ${detail}` : ''}`,
+    );
   }
-  process.once('exit', releaseBuildLock);
+  return true;
 }
-function processAlive(pid){
-  if (!Number.isInteger(pid) || pid <= 0) return false;
-  try { process.kill(pid, 0); return true; }
-  catch (error) { return error.code === 'EPERM'; }
-}
+const publicBuildLock = new PublicBuildLock({
+  root: ROOT,
+  buildOut: BUILD_OUT,
+  previousOut: PREVIOUS_OUT,
+  authorizeEmptyOverlayRecovery,
+});
+let activeOwner = null;
 function acquireBuildLock(){
-  const hostname = os.hostname();
-  for (let attempt = 0; attempt < 2; attempt += 1) {
-    try {
-      fs.mkdirSync(BUILD_LOCK);
-    } catch (error) {
-      if (error.code !== 'EEXIST') throw error;
-      let owner = {};
-      try { owner = JSON.parse(fs.readFileSync(BUILD_LOCK_META, 'utf8')); }
-      catch (_) { owner = {}; }
-      let ageMs = 0;
-      try {
-        const created = Number(owner.created_epoch_ms || fs.statSync(BUILD_LOCK).mtimeMs);
-        ageMs = Math.max(0, Date.now() - created);
-      } catch (statError) {
-        if (statError.code === 'ENOENT') continue;
-        throw statError;
-      }
-      const sameHost = owner.hostname === hostname;
-      const unknownHost = !owner.hostname;
-      // Namespace-local PIDs are routinely reused across isolated Netlify and
-      // Work-mode subprocesses. New locks bind the host-visible proc PID to
-      // its start tick so a recycled namespace PID cannot impersonate the
-      // previous owner. Legacy locks without that identity receive only a
-      // bounded compatibility grace period before safe reclamation.
-      const hasProcessIdentity = Boolean(owner.process_identity);
-      const activeOwner = sameHost && (
-        hasProcessIdentity
-          ? processIdentityAlive(owner.process_identity)
-          : ageMs < LEGACY_LOCK_PID_GRACE_MS && processAlive(Number(owner.pid))
-      );
-      // Artifact workspaces can reconcile an abandoned, metadata-free lock
-      // and staging tree from an interrupted build. Quarantine that exact
-      // recoverable pair; never weaken a lock with live owner metadata.
-      if (
-        !owner.token
-        && fs.existsSync(BUILD_OUT)
-      ) {
-        const workspaceRoot = path.dirname(path.dirname(ROOT));
-        const quarantine = fs.mkdtempSync(path.join(workspaceRoot, '.ss-public-build-abandoned-'));
-        fs.renameSync(BUILD_LOCK, path.join(quarantine, 'lock'));
-        fs.renameSync(BUILD_OUT, path.join(quarantine, 'staging'));
-        continue;
-      }
-      // Some extracted artifact workspaces recreate an old empty lock
-      // directory between subprocesses. Once it is safely beyond the brief
-      // mkdir-to-owner-file window, claim that empty directory atomically
-      // instead of treating it as a live build or deleting broad state.
-      if (!owner.token && fs.readdirSync(BUILD_LOCK).length === 0 && ageMs > 2_000) {
-        try {
-          claimBuildLock(hostname);
-          return;
-        } catch (claimError) {
-          if (claimError.code === 'EEXIST') continue;
-          throw claimError;
-        }
-      }
-      if (activeOwner || ((unknownHost || !sameHost) && ageMs < BUILD_LOCK_STALE_MS)) {
-        throw new Error(`PUBLIC DEPLOY BUILD FAILED — another build owns ${BUILD_LOCK}`);
-      }
-      removeDir(BUILD_LOCK);
-      continue;
-    }
-    claimBuildLock(hostname);
-    return;
-  }
-  throw new Error(`PUBLIC DEPLOY BUILD FAILED — could not acquire ${BUILD_LOCK}`);
+  activeOwner = publicBuildLock.acquire();
+  return activeOwner;
 }
 function releaseBuildLock(){
-  if (!buildLockToken) return;
-  let owner = {};
-  try { owner = JSON.parse(fs.readFileSync(BUILD_LOCK_META, 'utf8')); }
-  catch (_) { owner = {}; }
-  if (owner.token === buildLockToken) removeDir(BUILD_LOCK);
-  buildLockToken = null;
+  publicBuildLock.release();
+  activeOwner = null;
 }
 function prepareBuildOutput(){
-  // Recover a complete prior public tree if a process was interrupted during
-  // the two-rename commit, then construct this build away from the live path.
-  if (fs.existsSync(PREVIOUS_OUT)) {
-    if (!fs.existsSync(OUT)) fs.renameSync(PREVIOUS_OUT, OUT);
-    else removeDir(PREVIOUS_OUT);
-  }
-  removeDir(BUILD_OUT);
+  // Unowned staging and rollback paths are ambiguous and fail closed. The
+  // lock module has already quarantined the one recoverable dead-owner pair.
+  publicBuildLock.assertNoUnownedTransientState();
   ensureDir(BUILD_OUT);
+  publicBuildLock.bindStaging();
 }
 function commitBuildOutput(){
   let movedCurrent = false;
+  let ownedPrevious = null;
+  publicBuildLock.assertNoRollbackState();
   if (fs.existsSync(OUT)) {
-    // Reconciled artifact workspaces can recreate an empty directory skeleton
-    // after prepareBuildOutput() removes it. This is the fixed transient
-    // destination owned by the current build lease, so clear it again at the
-    // atomic commit boundary before renaming the live tree.
-    if (fs.existsSync(PREVIOUS_OUT)) removeDir(PREVIOUS_OUT);
     fs.renameSync(OUT, PREVIOUS_OUT);
     movedCurrent = true;
+    ownedPrevious = publicBuildLock.captureOwnedRollbackState();
   }
   try {
     fs.renameSync(BUILD_OUT, OUT);
   } catch (error) {
-    if (!fs.existsSync(OUT) && movedCurrent && fs.existsSync(PREVIOUS_OUT)) {
+    if (!fs.existsSync(OUT) && movedCurrent) {
+      publicBuildLock.assertOwnedRollbackState(ownedPrevious);
       fs.renameSync(PREVIOUS_OUT, OUT);
     }
     throw error;
   }
-  if (movedCurrent) removeDir(PREVIOUS_OUT);
+  if (movedCurrent) {
+    publicBuildLock.assertOwnedRollbackState(ownedPrevious);
+    removeDir(PREVIOUS_OUT);
+  }
 }
 function pruneBlockedArtifactsAfterCommit(){
   // Extracted artifact workspaces may expose an older lower-layer file again
@@ -376,6 +342,13 @@ for (const dir of PUBLIC_DIRS) {
 // Release marker for humans checking a deployed build.
 const releaseManifestPath = path.join(ROOT, 'RELEASE_MANIFEST.json');
 const releaseManifest = fs.existsSync(releaseManifestPath) ? JSON.parse(fs.readFileSync(releaseManifestPath, 'utf8')) : {};
+const releaseAssetIdentity = computeReleaseAssetIdentity(ROOT);
+if (!util.isDeepStrictEqual(pickReleaseAssetIdentity(releaseManifest), releaseAssetIdentity)) {
+  throw new Error(
+    'PUBLIC DEPLOY BUILD FAILED — RELEASE_MANIFEST.json asset identity is stale; '
+      + 'run node scripts/update-release-asset-identity.js after the final source generator',
+  );
+}
 const release = {
   release_id: fs.existsSync(path.join(ROOT, 'RELEASE_ID.txt')) ? fs.readFileSync(path.join(ROOT, 'RELEASE_ID.txt'), 'utf8').trim() : 'local-dev',
   publish_dir: 'public',
@@ -387,15 +360,18 @@ for (const field of [
   'polymythcal_discovery_release_id',
   'polymythcal_discovery_built_at',
   'polymythcal_discovery_asset_version',
-  'geometry_asset_version',
-  'teacherresources_asset_versions',
-  'asset_digests',
 ]) {
   if (Object.prototype.hasOwnProperty.call(releaseManifest, field)) {
     release[field] = releaseManifest[field];
   }
 }
-fs.writeFileSync(path.join(BUILD_OUT, 'site-release.json'), JSON.stringify(release, null, 2) + '\n');
+Object.assign(release, {
+  'geometry_asset_version': releaseAssetIdentity.geometry_asset_version,
+  'teacherresources_asset_versions': releaseAssetIdentity.teacherresources_asset_versions,
+  'asset_digests': releaseAssetIdentity.asset_digests,
+});
+const releaseMarkerContents = JSON.stringify(release, null, 2) + '\n';
+fs.writeFileSync(path.join(BUILD_OUT, 'site-release.json'), releaseMarkerContents);
 // Hygiene check: the deploy dir must not contain tool/operator roots.
 const failures = [];
 for (const p of ['scripts', 'data', 'dashboard', 'hf_export', 'netlify', '.github', 'node_modules', '.git', '.netlify', 'package.json', 'package-lock.json', 'netlify.toml']) {
@@ -409,6 +385,7 @@ function walkCheck(dir){
   for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, ent.name);
     const rel = posix(path.relative(BUILD_OUT, full));
+    if (rel === STAGE_MARKER_NAME) continue;
     if (ent.isDirectory()) walkCheck(full);
     else if (ent.isFile() && !rel.startsWith('polymyth/') && !rel.startsWith('aa/') && !rel.startsWith('bb/') && !rel.startsWith('bookwormcard/')) {
       if (OPERATOR_RE.test(ent.name) && /\.(?:md|json|txt|log|csv)$/i.test(ent.name)) failures.push(`public/${rel}`);
@@ -425,9 +402,10 @@ if (failures.length) {
 // boundary. Let release tooling preserve a just-built public tree until it is
 // verified and packaged, without changing normal local or Netlify builds.
 const preservedOutputMtime = process.env.SS_PUBLIC_OUTPUT_MTIME;
+let preservedOutputTimestamp = null;
 if (preservedOutputMtime) {
-  const timestamp = new Date(preservedOutputMtime);
-  if (Number.isNaN(timestamp.getTime())) {
+  preservedOutputTimestamp = new Date(preservedOutputMtime);
+  if (Number.isNaN(preservedOutputTimestamp.getTime())) {
     console.error('PUBLIC DEPLOY BUILD FAILED — SS_PUBLIC_OUTPUT_MTIME is not a valid timestamp.');
     process.exit(1);
   }
@@ -435,13 +413,179 @@ if (preservedOutputMtime) {
     for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
       const full = path.join(dir, ent.name);
       if (ent.isDirectory()) preserve(full);
-      else if (ent.isFile()) fs.utimesSync(full, timestamp, timestamp);
+      else if (ent.isFile()) fs.utimesSync(full, preservedOutputTimestamp, preservedOutputTimestamp);
     }
-    fs.utimesSync(dir, timestamp, timestamp);
+    fs.utimesSync(dir, preservedOutputTimestamp, preservedOutputTimestamp);
   };
   preserve(BUILD_OUT);
 }
-commitBuildOutput();
+const priorPublicMtimeByRelative = new Map();
+function capturePriorPublicMtimes(){
+  if (!fs.existsSync(OUT)) return;
+  const visit = (directory, prefix = '') => {
+    for (const entry of fs.readdirSync(directory, {withFileTypes: true})) {
+      const target = path.join(directory, entry.name);
+      const relative = posix(path.join(prefix, entry.name));
+      if (entry.isDirectory()) visit(target, relative);
+      else if (entry.isFile()) {
+        priorPublicMtimeByRelative.set(relative, fs.statSync(target).mtimeMs);
+      }
+    }
+  };
+  visit(OUT);
+}
+function durableOutputTimestamp(sourcePath, publicRelative){
+  if (!preservedOutputTimestamp) return null;
+  // Never make a newly committed mirror older than its canonical source.
+  // Otherwise an extracted workspace can resurrect an older lower-layer file
+  // whose mtime is newer than the fixed release timestamp.
+  const priorMtime = priorPublicMtimeByRelative.get(publicRelative) || 0;
+  return new Date(Math.max(
+    preservedOutputTimestamp.getTime(),
+    fs.statSync(sourcePath).mtimeMs,
+    priorMtime + 1000,
+  ));
+}
+function writeCommittedReleaseMarker(){
+  // public/ is committed by an atomic directory rename. Some extracted
+  // artifact workspaces can expose the older lower-layer marker again at the
+  // next process boundary unless the generated file is also replaced at its
+  // final live path. The source manifest remains owned by the identity
+  // updater; this post-commit write owns only the derived public marker.
+  const markerPath = path.join(OUT, 'site-release.json');
+  const temporary = `${markerPath}.tmp-${process.pid}`;
+  const markerTimestamp = durableOutputTimestamp(releaseManifestPath, 'site-release.json');
+  try {
+    fs.writeFileSync(temporary, releaseMarkerContents, {encoding: 'utf8', flag: 'wx'});
+    if (markerTimestamp) {
+      fs.utimesSync(temporary, markerTimestamp, markerTimestamp);
+    }
+    fs.renameSync(temporary, markerPath);
+    if (markerTimestamp) {
+      fs.utimesSync(OUT, markerTimestamp, markerTimestamp);
+    }
+  } finally {
+    try { fs.rmSync(temporary, {force: true}); } catch (_) { /* best effort */ }
+  }
+  if (fs.readFileSync(markerPath, 'utf8') !== releaseMarkerContents) {
+    throw new Error('PUBLIC DEPLOY BUILD FAILED — committed public/site-release.json failed exact readback');
+  }
+}
+function writeCommittedReleaseAssets(){
+  // The atomic public/ directory swap is not, by itself, durable in extracted
+  // overlay workspaces: an older lower-layer file can reappear at a later
+  // process boundary. Replace every governed runtime mirror at its final live
+  // path while the public-build and release-build locks are still held.
+  for (const [sourceRelative, publicRelative] of Object.entries(PUBLIC_RELEASE_ASSET_PATHS)) {
+    if (!publicRelative) continue;
+    const sourcePath = path.join(ROOT, sourceRelative);
+    const targetPath = path.join(OUT, publicRelative);
+    const temporary = `${targetPath}.tmp-${process.pid}`;
+    const contents = fs.readFileSync(sourcePath);
+    const assetTimestamp = durableOutputTimestamp(sourcePath, publicRelative);
+    try {
+      fs.writeFileSync(temporary, contents, {flag: 'wx'});
+      if (assetTimestamp) {
+        fs.utimesSync(temporary, assetTimestamp, assetTimestamp);
+      }
+      fs.renameSync(temporary, targetPath);
+    } finally {
+      try { fs.rmSync(temporary, {force: true}); } catch (_) { /* best effort */ }
+    }
+    if (!fs.readFileSync(targetPath).equals(contents)) {
+      throw new Error(`PUBLIC DEPLOY BUILD FAILED — committed public/${publicRelative} failed exact readback`);
+    }
+  }
+}
+function fileSha256(file){
+  return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+}
+function snapshotCommittedPublicTree(){
+  // Freeze the intended file set while the short public-build lock is still
+  // held. The later durability pass must not enumerate the live tree:
+  // overlay-backed atomic replacements can briefly expose hidden sibling
+  // files after that lock is released.
+  const files = [];
+  const visit = (directory, prefix = '') => {
+    for (const entry of fs.readdirSync(directory, {withFileTypes: true})) {
+      const target = path.join(directory, entry.name);
+      const relative = posix(path.join(prefix, entry.name));
+      if (entry.isDirectory()) {
+        visit(target, relative);
+        continue;
+      }
+      if (!entry.isFile()) {
+        throw new Error(`PUBLIC DEPLOY BUILD FAILED — committed public path is not a regular file: ${relative}`);
+      }
+      files.push({relative, sha256: fileSha256(target)});
+    }
+  };
+  visit(OUT);
+  return files.sort((left, right) => left.relative.localeCompare(right.relative));
+}
+function writeCommittedPublicTree(committedFiles){
+  // An atomic directory replacement is sufficient on ordinary filesystems,
+  // but extracted artifact workspaces can restore the lower-layer directory
+  // after a child verifier exits. Materialize each committed file at its final
+  // path so the complete deploy tree survives subsequent process boundaries.
+  // Iterate only the file set captured under the public-build lock so a
+  // post-release atomic shadow cannot enter this pass.
+  let sequence = 0;
+  for (const expected of committedFiles) {
+    const {relative} = expected;
+    const target = path.join(OUT, ...relative.split('/'));
+    const resolved = path.resolve(target);
+    if (!resolved.startsWith(`${path.resolve(OUT)}${path.sep}`)) {
+      throw new Error(`PUBLIC DEPLOY BUILD FAILED — unsafe committed public path: ${relative}`);
+    }
+    const stat = fs.lstatSync(target);
+    if (!stat.isFile()) {
+      throw new Error(`PUBLIC DEPLOY BUILD FAILED — committed public path is no longer a regular file: ${relative}`);
+    }
+    const contents = fs.readFileSync(target);
+    const actualSha256 = crypto.createHash('sha256').update(contents).digest('hex');
+    if (actualSha256 !== expected.sha256) {
+      throw new Error(`PUBLIC DEPLOY BUILD FAILED — committed public/${relative} changed after the locked snapshot`);
+    }
+    const temporary = `${target}.tmp-durable-${process.pid}-${sequence++}`;
+    const timestamp = durableOutputTimestamp(target, relative);
+    try {
+      fs.writeFileSync(temporary, contents, {flag: 'wx'});
+      if (timestamp) fs.utimesSync(temporary, timestamp, timestamp);
+      fs.renameSync(temporary, target);
+    } finally {
+      try { fs.rmSync(temporary, {force: true}); } catch (_) { /* best effort */ }
+    }
+    if (!fs.readFileSync(target).equals(contents)) {
+      throw new Error(`PUBLIC DEPLOY BUILD FAILED — committed public/${relative} failed durable readback`);
+    }
+  }
+}
+capturePriorPublicMtimes();
+publicBuildLock.unbindStaging();
+try {
+  commitBuildOutput();
+} catch (error) {
+  // If the atomic rename fails before staging becomes public, restore the
+  // exact owner marker so exit cleanup can remove only this build's tree.
+  if (fs.existsSync(BUILD_OUT)) publicBuildLock.bindStaging();
+  throw error;
+}
 pruneBlockedArtifactsAfterCommit();
+writeCommittedReleaseAssets();
+writeCommittedReleaseMarker();
+const committedPublicFiles = snapshotCommittedPublicTree();
+// Acquisition already proved the live outer release-build lease. Capture that
+// fact while this exact short-lock owner still exists. A fresh child-process
+// probe after release can replay an extracted lower-layer public tree before
+// the durability pass has replaced its files at their final paths.
+const durabilityPassAuthorized = publicBuildLock.assertCurrentAcquisitionHasAuthorizedRecovery();
 releaseBuildLock();
+// The repository-wide release lock still excludes every competing writer.
+// Release the short-lived public swap lock before the full durability pass so
+// an extracted workspace cannot revive an empty staging skeleton mid-cleanup.
+if (durabilityPassAuthorized !== true) {
+  throw new Error('PUBLIC DEPLOY BUILD FAILED — durability pass lacks captured release-build authorization');
+}
+writeCommittedPublicTree(committedPublicFiles);
 console.log(`PUBLIC DEPLOY BUILD PASSED — ${PUBLIC_DIRS.length} public directories copied to /public; full source remains in zip root.`);

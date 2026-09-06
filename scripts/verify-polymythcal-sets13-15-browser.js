@@ -15,12 +15,18 @@ const http = require('http');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
+const CORE = require(path.join(ROOT, 'js/polymythcal-discovery-core.js'));
 const DOM_ONLY = process.argv.includes('--dom-only');
 const READY_TIMEOUT_MS = 60000;
 const GROUPS = Object.freeze([
   {set: 13, axis: 'communityFormats', field: 'community_heritage_formats', size: 22},
   {set: 14, axis: 'digitalFormats', field: 'live_digital_formats', size: 14},
   {set: 15, axis: 'programFormats', field: 'course_program_formats', size: 19},
+]);
+const RESEARCH_COMMON_AXES = Object.freeze(['kind', 'date', 'places', 'topics', 'audiences', 'formats']);
+const RESEARCH_SPECIALIST_AXES = Object.freeze([
+  'what', 'celestialKinds', 'presence', 'academicForms', 'artsFormats', 'participationFormats',
+  'civicFormats', 'communityFormats', 'digitalFormats', 'programFormats', 'grades', 'statuses',
 ]);
 const SHELLS = Object.freeze([
   {path: 'polymythseminars/index.html', lang: 'en-CA', surface: 'main', source: '/polymythseminars/browse.json'},
@@ -80,12 +86,15 @@ function schemaAndPayloadContract() {
   const schema = json('data/polymythcal-event-schema-v2.json');
   const browse = json('polymythseminars/browse.json');
   const watchlist = json('polymythseminars/watchlist.json');
+  const research = json('polymythseminars/research.json');
   const surfaces = json('data/polymythcal-publication-surfaces.json');
   const events = collection(browse, 'events');
   const monitored = collection(watchlist, 'items');
+  const researchRecords = collection(research, 'records');
 
   equal(browse._schema || browse.schema, 'polymythcal-discovery-v2', 'chronology payload uses the discovery-v2 schema');
   equal(watchlist._schema || watchlist.schema, 'polymythcal-watchlist-v2', 'monitoring payload uses the watchlist-v2 schema');
+  equal(research._schema || research.schema, 'polymythcal-research-v1', 'Research payload uses the research-v1 schema');
   equal(browse.count, events.length, 'chronology payload count is exact');
   equal(watchlist.count, monitored.length, 'monitoring payload count is exact');
   check(events.length > 0, 'chronology projection is non-empty');
@@ -104,43 +113,56 @@ function schemaAndPayloadContract() {
   equal(surfaces.canonical_count, events.length + monitored.length, 'publication manifest accounts for the whole internal inventory');
   sameValues(surfaces.chronology_ids || [], chronologyIds, 'publication manifest chronology IDs are exact');
   sameValues(surfaces.watchlist_ids || [], monitoringIds, 'publication manifest monitoring IDs are exact');
+  equal(research.count, researchRecords.length, 'Research payload count is exact');
+  equal(researchRecords.length, events.length, 'Research projection covers the chronology exactly');
+  sameValues(researchRecords.map(item => item.id), chronologyIds, 'Research projection IDs exactly match chronology IDs');
 
   const expected = new Map();
   for (const group of GROUPS) {
     const schemaValues = schema?.properties?.[group.field]?.items?.enum || [];
-    const browseValues = taxonomyValues(browse, group.axis);
-    const watchValues = taxonomyValues(watchlist, group.axis);
+    const researchValues = taxonomyValues(research, group.axis);
     equal(schemaValues.length, group.size, `Set ${group.set} schema keeps ${group.size} controlled values`);
     equal(new Set(schemaValues).size, group.size, `Set ${group.set} schema values are unique`);
-    sameValues(browseValues, schemaValues, `Set ${group.set} chronology taxonomy matches the locked schema`);
-    sameValues(watchValues, schemaValues, `Set ${group.set} monitoring taxonomy matches the locked schema`);
+    sameValues(researchValues, schemaValues, `Set ${group.set} lazy Research taxonomy matches the locked schema`);
+    equal(taxonomyValues(browse, group.axis).length, 0, `Set ${group.set} specialist taxonomy stays out of the main payload`);
+    equal(taxonomyValues(watchlist, group.axis).length, 0, `Set ${group.set} specialist taxonomy stays out of the monitoring payload`);
     for (const value of schemaValues) {
-      const ids = events.filter(item => (item.facets?.[group.axis] || []).includes(value)).map(item => item.id);
+      const ids = researchRecords.filter(item => (item.facets?.[group.axis] || []).includes(value)).map(item => item.id);
       expected.set(`${group.axis}:${value}`, ids);
     }
   }
 
   const forbiddenRawFields = GROUPS.map(group => group.field);
-  for (const [name, items, payload] of [['chronology', events, browse], ['monitoring', monitored, watchlist]]) {
+  for (const [name, items] of [['chronology', events], ['monitoring', monitored]]) {
     for (const item of items) {
       check(item && typeof item.facets === 'object' && !Array.isArray(item.facets), `${name} ${item?.id || '<missing>'} has a safe facet projection`);
       for (const field of forbiddenRawFields) {
         check(!Object.hasOwn(item || {}, field), `${name} ${item?.id || '<missing>'} does not expose private raw field ${field}`);
       }
       for (const group of GROUPS) {
-        const values = item?.facets?.[group.axis] || [];
-        check(Array.isArray(values), `${name} ${item?.id || '<missing>'} keeps ${group.axis} as an array`);
-        equal(new Set(values).size, values.length, `${name} ${item?.id || '<missing>'} has no duplicate ${group.axis} values`);
-        const allowed = new Set(taxonomyValues(payload, group.axis));
-        for (const value of values) check(allowed.has(value), `${name} ${item.id} uses a controlled ${group.axis} value`, value);
+        const values = item?.facets?.[group.axis];
+        check(values === undefined || (Array.isArray(values) && values.length === 0), `${name} ${item?.id || '<missing>'} keeps specialist ${group.axis} out of the base payload`);
       }
     }
   }
-  return {browse, watchlist, events, monitored, expected};
+  for (const item of researchRecords) {
+    check(item && (item.facets === undefined || (typeof item.facets === 'object' && !Array.isArray(item.facets))), `Research ${item?.id || '<missing>'} has an optional safe specialist facet projection`);
+    for (const field of forbiddenRawFields) check(!Object.hasOwn(item || {}, field), `Research ${item?.id || '<missing>'} does not expose private raw field ${field}`);
+    for (const group of GROUPS) {
+      const values = item?.facets?.[group.axis] || [];
+      check(Array.isArray(values), `Research ${item?.id || '<missing>'} keeps ${group.axis} as an array`);
+      equal(new Set(values).size, values.length, `Research ${item?.id || '<missing>'} has no duplicate ${group.axis} values`);
+      const allowed = new Set(taxonomyValues(research, group.axis));
+      for (const value of values) check(allowed.has(value), `Research ${item.id} uses a controlled ${group.axis} value`, value);
+    }
+  }
+  const merged = CORE.mergeResearchProjection(browse, research);
+  return {browse, watchlist, research, events: merged.events || [], baseEvents: events, monitored, expected};
 }
 
 function sourceContract() {
   const app = read('js/polymythcal-discovery.js');
+  const core = read('js/polymythcal-discovery-core.js');
   const css = read('css/polymythcal-discovery.css');
   const mustInclude = [
     ['24-result page size', 'const PAGE_SIZE = 24'],
@@ -170,14 +192,24 @@ function sourceContract() {
     ['small-screen agenda', 'class="pmd-calendar-agenda"'],
   ];
   for (const [label, token] of mustInclude) check(app.includes(token), `controller retains ${label}`);
-  const matchStart = app.indexOf('function termMatch(');
-  const matchEnd = app.indexOf('function editDistance(', matchStart);
-  const inclusionLogic = matchStart >= 0 && matchEnd > matchStart ? app.slice(matchStart, matchEnd) : '';
+  const matchStart = core.indexOf('function termMatchNormalized(');
+  const matchEnd = core.indexOf('function termMatch(', matchStart);
+  const inclusionLogic = matchStart >= 0 && matchEnd > matchStart ? core.slice(matchStart, matchEnd) : '';
   check(inclusionLogic.includes('words.includes(term.value)'), 'search inclusion supports exact whole words');
   check(inclusionLogic.includes('word.startsWith(term.value)'), 'search inclusion supports one-way forward prefixes');
   check(!/editDistance|levenshtein|fuzzy/i.test(inclusionLogic), 'search inclusion never uses fuzzy distance');
-  check(app.includes('if (![...values].some(value => eventValues.includes(value))) return false;'), 'filters use OR within a facet');
-  check(app.includes('for (const [key, values] of Object.entries(state.facets))'), 'filters use AND across selected facet families');
+  const facetFixture = {facets: {topics: ['astronomy'], places: ['toronto-gta']}};
+  check(
+    CORE.matchesFacets(facetFixture, {topics: new Set(['history', 'astronomy'])}),
+    'filters use OR within a facet',
+  );
+  check(
+    !CORE.matchesFacets(facetFixture, {
+      topics: new Set(['astronomy']),
+      places: new Set(['montreal']),
+    }),
+    'filters use AND across selected facet families',
+  );
   check(/\.pmd-option\s*\{[^}]*min-height:\s*44px/s.test(css), 'facet controls retain 44px-class targets');
   check(/@media \(max-width:\s*47\.5rem\)[\s\S]*?\.pmd-calendar-table-wrap\s*\{\s*display:\s*none;[\s\S]*?\.pmd-calendar-agenda\s*\{\s*display:\s*block;/s.test(css), 'calendar switches from table to agenda on narrow/high-zoom layouts');
   try {
@@ -204,6 +236,7 @@ function shellContract() {
     check(!/id="(?:pmQuickStarts|pmJumpResults|eventsContainer|watchlistPanel)"/.test(html), `${shell.path} does not restore legacy UI layers`);
     check(Buffer.byteLength(html, 'utf8') < 100000, `${shell.path} remains a compact client shell`);
     if (shell.surface === 'research') {
+      check(html.includes('data-pmd-research-source="/polymythseminars/research.json"'), `${shell.path} declares its lazy Research projection`);
       check(html.includes('id="pmdFacetSearch"'), `${shell.path} exposes the research filter finder`);
       check(html.includes('id="pmdResearchFilters"'), `${shell.path} exposes staged research families`);
       check(!html.includes('id="pmdFilterDrawer"'), `${shell.path} does not wrap the specialist taxonomy in the common drawer`);
@@ -231,7 +264,7 @@ function shellContract() {
   const publicBuilder = read('scripts/build-public-deploy.js');
   check(publicBuilder.includes("'polymythseminars/events.json'"), 'public builder explicitly quarantines the private canonical corpus');
   check(/BLOCKED_DIRS[^;]*['"]data['"]/s.test(publicBuilder), 'public builder excludes the private data directory');
-  check(publicBuilder.includes('PUBLICATION_BLOCKLISTS') && publicBuilder.includes('watchlistIds'), 'public builder quarantines monitoring detail routes from the dated chronology');
+  check(publicBuilder.includes('PUBLICATION_BLOCKLISTS') && publicBuilder.includes('watchlistIds'), 'public builder quarantines monitoring ICS files while retaining stable detail routes');
 }
 
 function mime(file) {
@@ -321,7 +354,13 @@ async function browserLocale(browser, base, code, data) {
   try {
     await ready(page, `${base}${prefix}?date=all&sort=title`);
     equal(await page.locator('html').getAttribute('lang'), expectedLang, `${code.toUpperCase()} browser loads the intended Research shell`);
-    equal(await page.locator('.pmd-research-family').count(), 18, `${code.toUpperCase()} browser stages 18 research families`);
+    const stagedResearchAxes = await page.evaluate(() => ({
+      common: [...new Set([...document.querySelectorAll('#pmdResearchCommonFilters input[data-axis]')].map(input => input.dataset.axis))],
+      specialist: [...document.querySelectorAll('.pmd-research-family')].map(details => details.dataset.axis),
+    }));
+    sameValues(stagedResearchAxes.common, RESEARCH_COMMON_AXES, `${code.toUpperCase()} browser stages all six common Research axes`);
+    sameValues(stagedResearchAxes.specialist, RESEARCH_SPECIALIST_AXES, `${code.toUpperCase()} browser stages all twelve specialist Research families`);
+    equal(new Set([...stagedResearchAxes.common, ...stagedResearchAxes.specialist]).size, 18, `${code.toUpperCase()} browser stages 18 distinct Research axes`);
     equal(await page.locator('.pmd-research-family[open]').count(), 0, `${code.toUpperCase()} research families start closed`);
     equal(await page.locator('.pmd-research-family input').count(), 0, `${code.toUpperCase()} closed research families are lazy`);
 
@@ -339,10 +378,14 @@ async function browserLocale(browser, base, code, data) {
       equal(await page.locator(`#pmdSelected [data-action="remove-filter"][data-axis="${group.axis}"][data-value="${value}"]`).count(), 1, `${code.toUpperCase()} Set ${group.set} selection is removable`);
       await page.locator(`#pmdSelected [data-action="remove-filter"][data-axis="${group.axis}"][data-value="${value}"]`).click();
       await page.waitForFunction(key => !new URLSearchParams(location.search).has(key), group.axis);
+      await page.waitForFunction(expected => document.querySelectorAll('.pmd-research-family').length === expected, RESEARCH_SPECIALIST_AXES.length);
     }
 
     const group = GROUPS[0];
-    const [left, right] = coveredValues(data.events, group.axis, 2);
+    const crossAxis = 'statuses';
+    const crossableEvents = data.events.filter(event => (event.facets?.[crossAxis] || []).length > 0);
+    const [left, right] = coveredValues(crossableEvents, group.axis, 2);
+    check(Boolean(left && right), `${code.toUpperCase()} OR fixture has two Set 13 values compatible with the cross-family status test`);
     await openFamily(page, group.axis);
     await page.locator(`input[data-axis="${group.axis}"][data-value="${left}"]`).check();
     await page.locator(`input[data-axis="${group.axis}"][data-value="${right}"]`).check();
@@ -350,11 +393,14 @@ async function browserLocale(browser, base, code, data) {
     await waitCount(page, union);
     equal(new URL(page.url()).searchParams.get(group.axis), [left, right].sort().join(','), `${code.toUpperCase()} Set 13 uses OR within the family`);
 
-    const second = GROUPS[1];
-    const cross = coveredValues(data.events, second.axis, 1)[0];
-    await openFamily(page, second.axis);
-    await page.locator(`input[data-axis="${second.axis}"][data-value="${cross}"]`).check();
-    const intersection = data.events.filter(event => (event.facets?.[group.axis] || []).some(value => value === left || value === right) && (event.facets?.[second.axis] || []).includes(cross)).length;
+    const unionEvents = data.events.filter(event => (
+      event.facets?.[group.axis] || []
+    ).some(value => value === left || value === right));
+    const cross = coveredValues(unionEvents, crossAxis, 1)[0];
+    check(Boolean(cross), `${code.toUpperCase()} cross-family fixture has a compatible status value`);
+    await openFamily(page, crossAxis);
+    await page.locator(`input[data-axis="${crossAxis}"][data-value="${cross}"]`).check();
+    const intersection = unionEvents.filter(event => (event.facets?.[crossAxis] || []).includes(cross)).length;
     await waitCount(page, intersection);
     equal(integer(await page.locator('#pmdResultsCount').textContent()), intersection, `${code.toUpperCase()} research filters use AND across families`);
     check(errors.length === 0, `${code.toUpperCase()} Research run has no browser errors`, errors.join(' | '));
@@ -368,8 +414,9 @@ async function browserDiscovery(browser, base, data) {
   try {
     await ready(page, `${base}/polymythseminars/?date=all&sort=title`);
     equal(await page.locator('.pm-event-card').count(), 24, 'list view renders exactly one 24-group page');
-    check(await page.locator('#pmdPagination a[data-page="2"]').count() === 1, 'pagination exposes a real second-page link');
-    await page.locator('#pmdPagination a[data-page="2"]').click();
+    const secondPageLink = page.locator('#pmdPagination a[data-page="2"]:not([rel])');
+    check(await secondPageLink.count() === 1, 'pagination exposes one numbered second-page link alongside navigation controls');
+    await secondPageLink.click();
     await page.waitForFunction(() => new URLSearchParams(location.search).get('page') === '2');
 
     await page.locator('#pmdSearch').fill('celestail');
@@ -483,4 +530,3 @@ function report(mode) {
   console.error(`POLYMYTHCAL SETS 13-15 CHECK FAILED — ${error.stack || error}`);
   process.exit(1);
 });
-

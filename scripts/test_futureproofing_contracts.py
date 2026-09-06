@@ -70,6 +70,32 @@ boundary = load_hyphen_module("futureproof_boundary", "verify-public-private-bou
 clean_room = load_hyphen_module("futureproof_clean_room", "verify-clean-room-release.py")
 recovery = load_hyphen_module("futureproof_recovery", "verify-disaster-recovery.py")
 audit53 = load_hyphen_module("futureproof_audit53", "verify-audit53-base-preservation.py")
+audit53_historical = load_hyphen_module(
+    "futureproof_audit53_historical", "verify-audit53-historical-provenance.py"
+)
+aug27_preservation = load_hyphen_module(
+    "futureproof_aug27_preservation", "verify-aug27-base-preservation.py"
+)
+aug31_preservation = load_hyphen_module(
+    "futureproof_aug31_preservation", "verify-aug31-base-preservation.py"
+)
+sep3_preservation = load_hyphen_module(
+    "futureproof_sep3_preservation", "verify-sep3-base-preservation.py"
+)
+sep5_preservation = load_hyphen_module(
+    "futureproof_sep5_preservation", "verify-sep5-base-preservation.py"
+)
+sep5_feminism_preservation = load_hyphen_module(
+    "futureproof_sep5_feminism_preservation",
+    "verify-sep5-feminism-base-preservation.py",
+)
+sep5_degorgonified_feminism_preservation = load_hyphen_module(
+    "futureproof_sep5_degorgonified_feminism_preservation",
+    "verify-sep5-degorgonified-feminism-base-preservation.py",
+)
+current_base_preservation = load_hyphen_module(
+    "futureproof_current_base_preservation", "verify-futureproofing-base-preservation.py"
+)
 
 
 def digest(value: bytes) -> str:
@@ -514,60 +540,144 @@ class ApprovedDeletionTests(unittest.TestCase):
             audit53.modified_content_policy_digest(authored_changed),
         )
 
-    def test_sets1_15_successor_inventory_reconstructs_aug14_path_set(self) -> None:
-        baseline = json.loads(
-            (SITE_ROOT / "scripts/reports/audit52-package-baseline.json").read_text(
-                encoding="utf-8"
-            )
-        )
-        ledger = json.loads(
-            (SITE_ROOT / "data/futureproofing/approved-change-deletion-ledger.json").read_text(
-                encoding="utf-8"
-            )
-        )
-        modified = []
-        for row in baseline["files"]:
-            current = SITE_ROOT / row["path"]
-            if current.is_file():
-                current_sha = audit53.sha256(current)
-                if current_sha != row["sha256"]:
-                    modified.append((row["path"], current_sha))
-        transition = ledger["approved_transition"]
-        rows = transition["approved_successor_additions"]
-        self.assertEqual(len(rows), audit53.APPROVED_SUCCESSOR_ADDITION_COUNT)
-        self.assertEqual(
-            audit53.approved_successor_rows_digest(rows),
-            audit53.APPROVED_SUCCESSOR_ADDITION_ROWS_SHA256,
+    def test_audit53_aug15_ledger_remains_historical_provenance(self) -> None:
+        result = audit53_historical.validate_historical_provenance()
+        self.assertEqual(result, {"approved_deletions": 5, "successor_additions": 476})
+
+    def test_aug27_transition_evidence_remains_byte_exact_historical(self) -> None:
+        current_base_preservation.verify_historical_bytes()
+        contract = json.loads(
+            (SITE_ROOT / "data/futureproofing/aug26-aug27-preservation-contract.json")
+            .read_text(encoding="utf-8")
         )
         self.assertEqual(
-            audit53.aggregate([f"{row['path']}\n" for row in rows]),
-            audit53.APPROVED_SUCCESSOR_ADDITION_PATHS_SHA256,
+            contract["schema"],
+            "seminar-schools-aug26-aug27-preservation-v1",
         )
-        categories = collections.Counter(
-            audit53.successor_addition_category(row["path"]) for row in rows
+        self.assertEqual(contract["historical_audit53_status"], "historical_provenance_only")
+
+    def test_aug31_transition_is_exact_historical_and_tamper_detecting(self) -> None:
+        sep3_preservation.verify_historical_bytes()
+        contract = json.loads(
+            (SITE_ROOT / "data/futureproofing/aug30-aug31-preservation-contract.json")
+            .read_text(encoding="utf-8")
+        )
+        self.assertEqual(contract["schema"], "seminar-schools-aug30-aug31-preservation-v1")
+        self.assertEqual(
+            aug31_preservation.sha256(
+                SITE_ROOT / "data/futureproofing/aug30-aug31-preservation-contract.json"
+            ),
+            "b0f5029666b20407e15e9a94f5bd3bc5b10fcc37653ecce44212a204daaac6d4",
+        )
+        fixture = json.loads(
+            (SITE_ROOT / "scripts/fixtures/futureproofing/aug31-preservation-tampered.json")
+            .read_text(encoding="utf-8")
         )
         self.assertEqual(
-            dict(categories), audit53.APPROVED_SUCCESSOR_ADDITION_CATEGORY_COUNTS
+            fixture["target"],
+            "expected_transition.deleted[0].before.sha256",
         )
-        audit53.validate_approved_successor_additions(
-            baseline, modified, transition, SITE_ROOT
+        self.assertEqual(fixture["expected_result"], "rejected")
+
+    def test_sep3_transition_remains_exact_historical_evidence(self) -> None:
+        sep5_preservation.verify_historical_bytes()
+        contract_path = (
+            SITE_ROOT / "data/futureproofing/aug31-sep3-preservation-contract.json"
         )
-        mutations = []
-        removed = json.loads(json.dumps(transition))
-        removed["approved_successor_additions"].pop()
-        mutations.append(removed)
-        content_tampered = json.loads(json.dumps(transition))
-        content_tampered["approved_successor_additions"][0]["after_sha256"] = "0" * 64
-        mutations.append(content_tampered)
-        wildcarded = json.loads(json.dumps(transition))
-        wildcarded["approved_successor_additions"][0]["path"] = "polymythseminars/ics/*.ics"
-        mutations.append(wildcarded)
-        for mutation in mutations:
-            with self.subTest(mutation=mutation["approved_successor_additions"][0]):
-                with self.assertRaises(AssertionError):
-                    audit53.validate_approved_successor_additions(
-                        baseline, modified, mutation, SITE_ROOT
-                    )
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        self.assertEqual(
+            contract["schema"],
+            "seminar-schools-aug31-sep3-preservation-v1",
+        )
+        self.assertEqual(
+            sep5_preservation.sha256(contract_path),
+            "7341f4ebd776ef7c6cb20b2c3bf5ee9c3de998fa5d1d4f8d8b0e492873b807f6",
+        )
+        fixture_path = (
+            SITE_ROOT / "scripts/fixtures/futureproofing/sep3-preservation-tampered.json"
+        )
+        fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+        self.assertEqual(fixture["target"], "expected_transition.changed_paths_sha256")
+        self.assertEqual(fixture["expected_result"], "rejected")
+        self.assertEqual(
+            sep5_preservation.sha256(fixture_path),
+            "5c7bd59e7254b8cd9366b51bed815c385b911c78cb2220b2fc6590dd6f9bc667",
+        )
+
+    def test_sep5_transition_remains_exact_historical_evidence(self) -> None:
+        sep5_feminism_preservation.verify_historical_bytes()
+        contract_path = (
+            SITE_ROOT / "data/futureproofing/sep3-sep5-preservation-contract.json"
+        )
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        self.assertEqual(
+            contract["schema"],
+            "seminar-schools-sep3-sep5-preservation-v1",
+        )
+        self.assertEqual(
+            sep5_feminism_preservation.sha256(contract_path),
+            "8e15244a861a1e70db708238d9c6eff3648f658ad0f5542709a0c88c65ab79e9",
+        )
+        fixture_path = (
+            SITE_ROOT / "scripts/fixtures/futureproofing/sep5-preservation-tampered.json"
+        )
+        fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+        self.assertEqual(
+            fixture["target"],
+            "expected_transition.outer_delivery.changed_paths_sha256",
+        )
+        self.assertEqual(fixture["expected_result"], "rejected")
+        self.assertEqual(
+            sep5_feminism_preservation.sha256(fixture_path),
+            "4ea72424b38a14bde7cf5b58a8978dd1ed75e439ad72d42cc55ecced6f367237",
+        )
+
+    def test_sep5_feminism_transition_remains_exact_historical_evidence(self) -> None:
+        sep5_degorgonified_feminism_preservation.verify_historical_bytes()
+        contract_path = (
+            SITE_ROOT
+            / "data/futureproofing/sep5-truthful-sep5-feminism-preservation-contract.json"
+        )
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        self.assertEqual(contract["schema"], "seminar-schools-sep5-feminism-preservation-v1")
+        self.assertEqual(
+            sep5_degorgonified_feminism_preservation.sha256(contract_path),
+            "4f367119680181f2386d8ea00349618f9fef7fbbc2312e7ce4d0d3d32f7d3fdc",
+        )
+        fixture_path = (
+            SITE_ROOT
+            / "scripts/fixtures/futureproofing/sep5-feminism-preservation-tampered.json"
+        )
+        fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+        self.assertEqual(
+            fixture["target"],
+            "expected_transition.outer_delivery.changed_paths_sha256",
+        )
+        self.assertEqual(
+            sep5_degorgonified_feminism_preservation.sha256(fixture_path),
+            "df680c57b93af68acfa5d3ff2cbdb5646c5d58476217899b625011283f0a8825",
+        )
+
+    def test_sep5_degorgonified_feminism_transition_is_exact_and_tamper_detecting(self) -> None:
+        observed = sep5_degorgonified_feminism_preservation.observed_transition()
+        contract = json.loads(
+            (
+                SITE_ROOT
+                / "data/futureproofing/sep5-feminism-sep5-degorgonified-feminism-preservation-contract.json"
+            ).read_text(encoding="utf-8")
+        )
+        sep5_degorgonified_feminism_preservation.validate_expected(observed, contract)
+        fixture = json.loads(
+            (
+                SITE_ROOT
+                / "scripts/fixtures/futureproofing/sep5-degorgonified-feminism-preservation-tampered.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(fixture["target"], "expected_transition.changed_paths_sha256")
+        tampered = json.loads(json.dumps(contract))
+        tampered["expected_transition"]["changed_paths_sha256"] = fixture["value"]
+        with self.assertRaises(AssertionError):
+            sep5_degorgonified_feminism_preservation.validate_expected(observed, tampered)
 
     def test_protest_harvest_fixtures_remain_historical_bytes(self) -> None:
         baseline = json.loads(
@@ -1043,8 +1153,15 @@ class CleanRoomTests(unittest.TestCase):
             self.assertEqual(environment["PIP_FIND_LINKS"], "/verified/wheelhouse")
             self.assertNotIn("UNRELATED_SECRET", environment)
             self.assertEqual(environment["SOURCE_DATE_EPOCH"], "1786233600")
+            self.assertEqual(
+                environment["SS_PUBLIC_OUTPUT_MTIME"], "2026-08-09T00:00:00Z"
+            )
             self.assertEqual(evidence["fixed_values"]["TZ"], "UTC")
             self.assertEqual(evidence["fixed_values"]["PYTHONHASHSEED"], "0")
+            self.assertEqual(
+                evidence["fixed_values"]["SS_PUBLIC_OUTPUT_MTIME"],
+                "2026-08-09T00:00:00Z",
+            )
 
     def test_reference_report_binds_manifest_metadata_and_pipeline_evidence(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -1288,4 +1405,3 @@ class PublicPrivateBoundaryTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

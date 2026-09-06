@@ -3,16 +3,16 @@
   "release_id": "2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final",
   "status": "passed",
   "metrics": {
-    "html_files": 7564,
-    "mitigated_external_font_stylesheets": 134,
+    "html_files": 7568,
+    "mitigated_external_font_stylesheets": 110,
     "deferred_external_scripts": 0,
     "lazy_external_iframes": 5,
     "lazy_external_images": 2,
-    "bounded_local_code_assets": 60,
-    "bounded_local_code_references": 83690,
+    "bounded_local_code_assets": 59,
+    "bounded_local_code_references": 83695,
     "bounded_runtime_json_assets": 2,
     "bounded_runtime_data_assets": 24,
-    "bounded_runtime_data_bytes": 10163778
+    "bounded_runtime_data_bytes": 10485100
   },
   "failures": [],
   "policy": "Third-party render dependencies must be preconnected/non-blocking or lazy; local static assets and the large concordance index use bounded caching while calendar data revalidates quickly."

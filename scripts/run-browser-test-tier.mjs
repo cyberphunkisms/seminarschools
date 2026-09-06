@@ -10,8 +10,14 @@ import { fileURLToPath } from 'node:url';
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
 const selector = require('./lib/browser-test-tiers.js');
+const {
+  geometryExemptionForRelativeHtmlPath,
+  geometryOpacityBounds,
+} = require('./lib/geometry-asset-version');
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const contract = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/browser-test-tiers.json'), 'utf8'));
+const geometryContract = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/geometry-route-contracts.json'), 'utf8'));
+const geometryOpacityMinimum = geometryOpacityBounds(geometryContract).minimum;
 const PUBLIC = path.join(ROOT, contract.public_root);
 
 function option(name, fallback = '') {
@@ -103,8 +109,14 @@ for (const candidate of selected) {
   page.on('pageerror', onPageError);
   page.on('console', onConsole);
   try {
+    const expectedGeometryExemption = geometryExemptionForRelativeHtmlPath(
+      geometryContract,
+      candidate.relative,
+    );
     await page.goto(origin + candidate.route, { waitUntil: 'domcontentloaded', timeout: 15000 });
-    await page.waitForFunction(() => document.documentElement.getAttribute('data-geometry-ready') === 'true', null, { timeout: 6000 });
+    if (!expectedGeometryExemption) {
+      await page.waitForFunction(() => document.documentElement.getAttribute('data-geometry-ready') === 'true', null, { timeout: 6000 });
+    }
     const state = await page.evaluate(() => {
       const layer = document.getElementById('indraLayer');
       const style = layer ? getComputedStyle(layer) : null;
@@ -112,6 +124,7 @@ for (const candidate of selected) {
       return {
         routeType: document.body.getAttribute('data-route-type') || '',
         frontFacing: document.body.getAttribute('data-front-facing') || '',
+        geometryExemption: document.body.getAttribute('data-shared-geometry-exempt') || '',
         overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
         geometry: Boolean(layer),
         display: style && style.display,
@@ -121,20 +134,30 @@ for (const candidate of selected) {
         pointerEvents: style && style.pointerEvents,
         width: rect && rect.width,
         height: rect && rect.height,
-        viewportWidth: innerWidth,
-        viewportHeight: innerHeight
+        viewportWidth: document.documentElement.clientWidth,
+        viewportHeight: document.documentElement.clientHeight
       };
     });
     const image = await page.screenshot({ type: 'png', fullPage: contract.tiers[tier].full_page === true, animations: 'disabled' });
     const prefix = `${candidate.routeType}:${candidate.route}`;
     if (state.routeType !== candidate.routeType) failures.push(`${prefix}: rendered route type changed`);
     if (state.frontFacing !== 'general-audience') failures.push(`${prefix}: general-audience marker missing`);
-    if (!state.geometry || state.display === 'none' || state.visibility === 'hidden' || state.opacity < 0.09) failures.push(`${prefix}: geometry is absent or invisible`);
-    if (state.position !== 'fixed' || state.pointerEvents !== 'none' || state.width < state.viewportWidth || state.height < state.viewportHeight) failures.push(`${prefix}: geometry is not viewport-covering and pointer-safe`);
+    if (expectedGeometryExemption) {
+      if (state.geometryExemption !== expectedGeometryExemption) failures.push(`${prefix}: canonical geometry exemption marker changed`);
+      if (state.geometry) failures.push(`${prefix}: shared geometry entered an exempt canonical star page`);
+    } else {
+      if (state.geometryExemption) failures.push(`${prefix}: ordinary page claims a geometry exemption`);
+      if (!state.geometry || state.display === 'none' || state.visibility === 'hidden' || state.opacity < geometryOpacityMinimum - 0.001) failures.push(`${prefix}: geometry is absent or invisible`);
+      if (state.position !== 'fixed' || state.pointerEvents !== 'none' || state.width + 24 < state.viewportWidth || state.height + 24 < state.viewportHeight) failures.push(`${prefix}: geometry is not viewport-covering and pointer-safe`);
+    }
     if (state.overflow > 1) failures.push(`${prefix}: ${state.overflow}px horizontal overflow`);
     if (image.length < 1000) failures.push(`${prefix}: rendered screenshot is unexpectedly empty`);
     if (runtimeErrors.length) failures.push(`${prefix}: runtime errors: ${runtimeErrors.slice(0, 3).join(' | ')}`);
-    results.push({ route: candidate.route, route_type: candidate.routeType, screenshot_bytes: image.length, full_page: contract.tiers[tier].full_page === true });
+    // PNG byte length can vary across otherwise identical Chromium renders
+    // (for example, font rasterization can alter compression by a few bytes).
+    // Keep the real screenshot/nonempty assertion above, but persist only the
+    // stable fact that the rendered artifact passed that threshold.
+    results.push({ route: candidate.route, route_type: candidate.routeType, screenshot_nonempty: image.length >= 1000, full_page: contract.tiers[tier].full_page === true });
   } catch (error) {
     failures.push(`${candidate.routeType}:${candidate.route}: ${error.message}`);
   } finally {

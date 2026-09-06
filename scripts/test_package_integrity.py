@@ -17,7 +17,11 @@ from scripts.package_integrity import (
     verify_file_member,
     write_verified_archive,
 )
-from scripts.package_selection import collect_package_files, selected_bytes_excluding
+from scripts.package_selection import (
+    collect_package_files,
+    is_reconstruction_duplicate,
+    selected_bytes_excluding,
+)
 
 
 def load_package_release_module():
@@ -304,6 +308,53 @@ class PackageIntegrityTests(unittest.TestCase):
 
 
 class PackageSelectionTests(unittest.TestCase):
+    def test_selector_prunes_mixed_case_detienne_recovery_duplicates(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            output = root / "release.zip"
+            canonical = (
+                root
+                / "UPDATE_SOURCES"
+                / "DETIENNE_CHAPTER_LEDGERS_2026-08-27"
+                / "README.md"
+            )
+            canonical.parent.mkdir(parents=True)
+            canonical.write_text("canonical\n", encoding="utf-8")
+            duplicate_paths = (
+                root
+                / "UPDATE_SOURCES"
+                / "Detienne_Comparing_the_Incomparable_Polymyth_Master_Notes_2026-08-27.md",
+                root
+                / "UPDATE_SOURCES"
+                / "Detienne_Evidence_Ledgers_2026-08-27"
+                / "README.md",
+                root
+                / "SITE_PACKAGE"
+                / "UPDATE_SOURCES"
+                / "Detienne_Comparing_the_Incomparable_Polymyth_Master_Notes_2026-08-27.md",
+                root
+                / "SITE_PACKAGE"
+                / "UPDATE_SOURCES"
+                / "Detienne_Evidence_Ledgers_2026-08-27"
+                / "detienne_ch2.md",
+            )
+            for duplicate in duplicate_paths:
+                duplicate.parent.mkdir(parents=True, exist_ok=True)
+                duplicate.write_text("transient duplicate\n", encoding="utf-8")
+
+            files, stats = collect_package_files(root, output)
+            selected = [path.relative_to(root).as_posix() for path in files]
+
+            self.assertEqual(
+                selected,
+                ["UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/README.md"],
+            )
+            self.assertEqual(stats["reconstruction_duplicates_pruned"], 4)
+            for duplicate in duplicate_paths:
+                self.assertTrue(
+                    is_reconstruction_duplicate(duplicate.relative_to(root).as_posix())
+                )
+
     def test_generated_report_byte_metric_is_status_independent(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
@@ -394,6 +445,31 @@ class PackageSelectionTests(unittest.TestCase):
                 "stable advisory-lock inode; never package\n",
                 encoding="utf-8",
             )
+            for transient_name in (
+                ".cache",
+                "cache",
+                ".locks",
+                "locks",
+                ".logs",
+                "logs",
+                ".log",
+                "log",
+                ".staging",
+                "staging",
+                ".temp",
+                "temp",
+                ".tmp",
+                "tmp",
+                "__pycache__",
+                "custom-build.lock",
+            ):
+                transient = root / transient_name
+                transient.mkdir()
+                (transient / "discard.txt").write_text(
+                    "transient\n",
+                    encoding="utf-8",
+                )
+            (root / "discard.pyc").write_bytes(b"python bytecode")
             nested_lease = root / "SITE_PACKAGE" / ".seminar-schools-build.lease"
             nested_lease.parent.mkdir(parents=True)
             nested_lease.write_text(
@@ -409,6 +485,15 @@ class PackageSelectionTests(unittest.TestCase):
             (root / "public" / "index.html").write_text("public\n", encoding="utf-8")
             (root / "downloads").mkdir()
             (root / "downloads" / "lesson.zip").write_bytes(b"intentional download")
+            for tombstone in (
+                ".public-build-lock",
+                ".public-build-staging",
+                ".public-build-previous",
+            ):
+                (root / tombstone).write_text(
+                    '{"schema":"seminar-schools-public-build-overlay-tombstone-v1"}\n',
+                    encoding="utf-8",
+                )
             output.write_bytes(b"prior package")
             Path(str(output) + ".sha256").write_text("prior digest\n", encoding="utf-8")
             (root / ".ss-site-audit49-final.zip.part-123").write_bytes(b"partial")
@@ -437,11 +522,11 @@ class PackageSelectionTests(unittest.TestCase):
             )
             self.assertEqual(stats["files_selected"], 4)
             self.assertGreaterEqual(stats["directories_pruned"], 5)
-            # Three sibling release-evidence fixtures are considered and then
-            # deliberately excluded in addition to the original selection set.
-            self.assertLess(stats["files_considered"], 15)
+            # Three sibling release-evidence fixtures and three exact overlay
+            # tombstones are considered and deliberately excluded in addition
+            # to the original selection set.
+            self.assertLessEqual(stats["files_considered"], 18)
 
 
 if __name__ == "__main__":
     unittest.main()
-

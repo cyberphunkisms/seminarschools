@@ -1,6 +1,6 @@
 # Meaninglib Hugging Face export report
 
-Exported: 2026-08-26T13:47:41.848Z
+Exported: 2026-09-05T20:15:00.000Z
 
 Target repo: SeminarSchools/meaninglib
 
@@ -12,23 +12,23 @@ Target repo: SeminarSchools/meaninglib
 - cc: 296
 - manifest: 2
 - mc: 234
-- ml: 1218
+- ml: 1224
 
-Total rows: 1998
-Canonical Methodologylist rows: 1218
+Total rows: 2004
+Canonical Methodologylist rows: 1224
 
 ## Methodologylist sections
 
 - analysis: 29
-- citation: 340
-- corehistory: 29
-- coreplus: 53
+- citation: 341
+- corehistory: 30
+- coreplus: 54
 - degorgonification: 54
 - framework-core: 1
 - gorgonification: 134
 - idiomary: 44
 - learnings: 28
-- methodology: 387
+- methodology: 390
 - pending: 18
 - pending-user-authorship: 2
 - polycognate: 24

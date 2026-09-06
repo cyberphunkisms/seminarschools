@@ -1,11 +1,11 @@
 {
   "contract_total_controls": 15,
-  "contract_version": "2026-08-14.1",
+  "contract_version": "2026-09-03.1",
   "executed": [
     {
       "command": [
         "python3",
-        "scripts/verify-audit53-base-preservation.py"
+        "scripts/verify-sep3-base-preservation.py"
       ],
       "exit_code": 0,
       "id": "FP-02"

@@ -63,7 +63,9 @@ function main(){
 
   const calendar=read('polymythseminars/index.html');
   const browse=JSON.parse(read('polymythseminars/browse.json'));
+  const watchlist=JSON.parse(read('polymythseminars/watchlist.json'));
   const events=browse.events||[];
+  const monitored=watchlist.items||[];
   const surfaces=JSON.parse(read('data/polymythcal-publication-surfaces.json'));
   const staticEvents=(calendar.match(/<!-- SS_STATIC_EVENTS_START -->([\s\S]*?)<!-- SS_STATIC_EVENTS_END -->/)||[])[1]||'';
   const eventCards=count(/<article class="event"/g,staticEvents);
@@ -76,10 +78,21 @@ function main(){
     if(!events.length) fail('calendar: chronology projection is empty');
     if(browse._schema!=='polymythcal-discovery-v2'||browse.count!==events.length) fail(`calendar: chronology projection totals do not match ${events.length} records`);
     if(!Array.isArray(surfaces.chronology_ids)||events.length!==surfaces.chronology_ids.length) fail('calendar: publication-surface chronology count is stale');
-    const missingStable=events.filter(event=>!fs.existsSync(path.join(ROOT,'polymythseminars','events',event.id,'index.html')));
-    if(missingStable.length) fail(`calendar: ${missingStable.length} stable event pages are missing`);
-    const leakedMonitoring=(surfaces.watchlist_ids||[]).filter(id=>fs.existsSync(path.join(ROOT,'public','polymythseminars','events',id,'index.html')));
-    if(leakedMonitoring.length) fail(`calendar: ${leakedMonitoring.length} monitoring-marker pages leaked into the public deploy`);
+    const stableRecords=[...events,...monitored];
+    const missingStable=stableRecords.filter(event=>[
+      path.join(ROOT,'polymythseminars','events',event.id,'index.html'),
+      path.join(ROOT,'polymythseminars','fr','events',event.id,'index.html'),
+      path.join(ROOT,'public','polymythseminars','events',event.id,'index.html'),
+      path.join(ROOT,'public','polymythseminars','fr','events',event.id,'index.html'),
+    ].some(relative=>!fs.existsSync(relative)));
+    if(missingStable.length) fail(`calendar: ${missingStable.length} records are missing a stable EN/FR source/public detail-route set`);
+    const invalidMonitoring=monitored.filter(event=>{
+      const detail=path.join(ROOT,'public','polymythseminars','events',event.id,'index.html');
+      if(!fs.existsSync(detail)) return true;
+      const html=fs.readFileSync(detail,'utf8');
+      return !html.includes('data-publication-surface="watchlist"') || /<time\s+datetime=/i.test(html) || /"@type"\s*:\s*"Event"/.test(html);
+    });
+    if(invalidMonitoring.length) fail(`calendar: ${invalidMonitoring.length} monitoring detail pages violate the undated stable-route contract`);
     if(fs.existsSync(path.join(ROOT,'public','polymythseminars','events.json'))) fail('calendar: private canonical corpus leaked into the public deploy');
   }
   if(/<div class="count-line" id="countLine">Loading events/i.test(calendar)) fail('calendar: initial HTML still says Loading events');
@@ -108,6 +121,7 @@ function main(){
   for(const url of manifest.methodologyPrefixes||[]){
     const rel=sourcePath(url);
     if(!read(rel).includes('data-page-weight="heavy"')) fail(`methodology archive: heavy-page rendering contract missing in ${rel}`);
+    if(!read(rel).includes('data-route-type="archive"')) fail(`methodology archive: route type missing in ${rel}`);
   }
   const pendingAuthorship=read('polymyth/methodologylist/pending-user-authorship/index.html');
   if(!pendingAuthorship.includes('<h1>Pending User Authorship</h1>')) fail('methodology list: pending-user-authorship generated page lacks a human-readable H1');
@@ -148,4 +162,3 @@ function main(){
   console.log(`SEARCH SURFACE CHECK PASSED — ${expectedResources} catalog resources, ${events.length} chronology records with stable pages, ${manifest.methodologySections} methodology sections, ${urls.length} sitemap URLs.`);
 }
 try{main()}catch(err){console.error('SEARCH SURFACE CHECK FAILED:',err.stack||err.message);process.exit(1)}
-

@@ -105,6 +105,17 @@ function apply(relativePath, language) {
   const target = path.join(ROOT, relativePath);
   const original = fs.readFileSync(target, 'utf8');
   const withoutOwned = original.replace(new RegExp(`\\n?${START}[\\s\\S]*?${END}\\n?`, 'g'), '\n');
+  // Discovery v2 builds these governed facet families from browse/research
+  // payload axes. Static chip injection belongs only to the retired shell and
+  // would duplicate or contradict the current responsive filter controller.
+  if (/\bdata-pm-app=["']discovery-v2["']/.test(withoutOwned)
+      && withoutOwned.includes('id="pmdList"')
+      && /\/js\/polymythcal-discovery\.js/.test(withoutOwned)) {
+    if (withoutOwned === original) return false;
+    if (CHECK) throw new Error(`${relativePath}: retired static Set 13-15 facets remain in Discovery v2`);
+    fs.writeFileSync(target, withoutOwned);
+    return true;
+  }
   const boundary = /\n<\/div><\/div>\n<\/details><section aria-label="(?:Current filter choices|Choix de filtres actuels)"/;
   if (!boundary.test(withoutOwned)) throw new Error(`${relativePath}: advanced-filter insertion boundary missing`);
   const owned = `${START}\n${groups.map(group => renderSection(group, language)).join('\n')}\n${END}`;

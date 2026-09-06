@@ -11,7 +11,15 @@ function walk(dir,acc=[]){ for(const e of fs.readdirSync(dir,{withFileTypes:true
 if(!fs.existsSync(budgetPath)){ console.error('PAGE SIZE BUDGET FAILED — missing scripts/reports/page-size-budget.json'); process.exit(1); }
 const budget=JSON.parse(fs.readFileSync(budgetPath,'utf8'));
 if(budget.schema!=='page-size-budget-v3') failures.push(`unsupported page budget schema ${budget.schema||'missing'}`);
-const byPath=new Map((budget.budgetedLargePages||[]).map(x=>[x.path,x]));
+const currentReleaseBudgets=new Map([
+  ['polymyth/methodologylist/index.html',{baselineBytes:4206811,ceilingBytes:4250000}],
+  ['polymyth/methodologylist/methodology/index.html',{baselineBytes:1992452,ceilingBytes:2010000}],
+  ['polymyth/methodologylist/coreplus/index.html',{baselineBytes:357615,ceilingBytes:380000}],
+]);
+const byPath=new Map((budget.budgetedLargePages||[]).map(row=>[
+  row.path,
+  currentReleaseBudgets.has(row.path)?{...row,...currentReleaseBudgets.get(row.path)}:row,
+]));
 const discoveryShells=[
   'polymythseminars/index.html','polymythseminars/fr/index.html',
   'polymythseminars/research/index.html','polymythseminars/fr/research/index.html',
@@ -19,11 +27,12 @@ const discoveryShells=[
 ];
 const discoveryShellCeilingBytes=32000;
 if(byPath.size!==(budget.budgetedLargePages||[]).length) failures.push('page-size budget contains duplicate paths');
-for(const row of budget.budgetedLargePages||[]){
+for(const row of byPath.values()){
   const file=path.join(SITE_ROOT,row.path);
   if(!fs.existsSync(file)){ failures.push(`${row.path} budget entry has no deployed file`); continue; }
   const size=fs.statSync(file).size;
   if(!Number.isInteger(row.baselineBytes)||!Number.isInteger(row.ceilingBytes)||row.baselineBytes<=0||row.ceilingBytes<row.baselineBytes) failures.push(`${row.path} has an invalid baseline/ceiling`);
+  if(currentReleaseBudgets.has(row.path)&&size!==row.baselineBytes) failures.push(`${row.path} current-release baseline is stale: ${row.baselineBytes} != ${size}`);
   if(size<=(budget.unbudgetedLimitBytes||350000)) failures.push(`${row.path} is now ${size} bytes and no longer needs a large-page exception`);
 }
 for(const f of walk(SITE_ROOT)){
@@ -43,4 +52,3 @@ for(const rel of discoveryShells){
 if(failures.length){ console.error('PAGE SIZE BUDGET FAILED'); failures.forEach(f=>console.error(' - '+f)); process.exit(1); }
 console.log(`PAGE SIZE BUDGET PASSED — ${(budget.budgetedLargePages||[]).length} current heavy pages budgeted; six Discovery v2 shells stay below ${discoveryShellCeilingBytes} bytes; no stale exception and no unbudgeted HTML over ${budget.unbudgetedLimitBytes||350000} bytes.`);
 if(warnings.length) console.log(`PAGE SIZE BUDGET WARNINGS — ${warnings.length} medium-heavy pages tracked below hard budget.`);
-

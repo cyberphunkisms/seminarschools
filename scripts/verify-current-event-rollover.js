@@ -9,6 +9,7 @@ const {
   resolveSiteBuildDate,
 } = require('./polymythcal-build-date');
 const {isMonitoringMarker} = require('./lib/polymythcal-discovery-model');
+const {expectedPolymythcalEventRoutes} = require('./lib/source-html-inventory');
 
 const ROOT = path.resolve(__dirname, '..');
 const SITE = 'https://seminarschools.com';
@@ -50,7 +51,7 @@ function eventIndexable(event, day = TODAY) {
   const end = eventEnd(event);
   return event.record_kind !== 'opportunity'
     && event.confirmation_status === 'confirmed'
-    && event.date_precision === 'exact'
+    && (event.date_precision === 'exact' || event.time_precision === 'exact')
     && !placeholders.has(city)
     && !placeholders.has(venue)
     && !['cancelled', 'missing-on-source', 'archived'].includes(event.lifecycle_status)
@@ -205,6 +206,7 @@ function main() {
   );
   const events = partition.chronology;
   const watchlistEvents = partition.watchlist;
+  const canonicalEvents = canonicalDocument.events || [];
   if (JSON.stringify(privateMirrorDocument) !== JSON.stringify(canonicalDocument)) {
     fail('private canonical event mirrors differ');
   }
@@ -230,30 +232,63 @@ function main() {
     fail(`release-day sitemap event set differs: expected ${expectedSitemapEvents.size}, found ${sitemapEvents.size}`);
   }
 
-  for (const event of watchlistEvents) {
-    const id = String(event.id || event.identity_key);
-    const encodedId = encodeURIComponent(id);
-    const routeIds = new Set([id, ...(event.legacy_ids || []).map(String)]);
+  const allRouteContract = expectedPolymythcalEventRoutes(canonicalEvents);
+  const monitoringRouteContract = expectedPolymythcalEventRoutes(watchlistEvents);
+  for (const [localePath, routeIds] of [
+    ['events', allRouteContract.englishRouteIds],
+    ['fr/events', allRouteContract.frenchRouteIds],
+  ]) {
     for (const routeId of routeIds) {
       for (const relative of [
-        `polymythseminars/events/${routeId}/index.html`,
-        `polymythseminars/fr/events/${routeId}/index.html`,
-        `polymythseminars/ics/${routeId}.ics`,
-        `public/polymythseminars/events/${routeId}/index.html`,
-        `public/polymythseminars/fr/events/${routeId}/index.html`,
-        `public/polymythseminars/ics/${routeId}.ics`,
+        `polymythseminars/${localePath}/${routeId}/index.html`,
+        `public/polymythseminars/${localePath}/${routeId}/index.html`,
       ]) {
-        if (fs.existsSync(path.join(ROOT, relative))) {
-          fail(`${relative}: monitoring record has a chronology route`);
+        if (!fs.existsSync(path.join(ROOT, relative))) {
+          fail(`${relative}: stable event detail or alias route is missing`);
         }
       }
     }
-    for (const route of [
-      `${SITE}/polymythseminars/events/${encodedId}/`,
-      `${SITE}/polymythseminars/fr/events/${encodedId}/`,
-    ]) {
-      if (sitemapEvents.has(route)) fail(`sitemap exposes monitoring record ${route}`);
+  }
+  for (const event of watchlistEvents) {
+    const id = String(event.id || event.identity_key);
+    for (const localePath of ['events', 'fr/events']) {
+      const sourceRelative = `polymythseminars/${localePath}/${id}/index.html`;
+      const publicRelative = `public/${sourceRelative}`;
+      if (!fs.existsSync(path.join(ROOT, sourceRelative))) continue;
+      const html = read(sourceRelative);
+      if (robotsOf(html) !== 'noindex,follow') fail(`${sourceRelative}: watchlist detail is indexable`);
+      if (/<time\b[^>]*\bdatetime\s*=/i.test(html)) fail(`${sourceRelative}: watchlist detail exposes a date`);
+      if (/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?["']@type["']\s*:\s*["']Event["']/i.test(html)) {
+        fail(`${sourceRelative}: watchlist detail exposes Event JSON-LD`);
+      }
+      if (
+        fs.existsSync(path.join(ROOT, publicRelative))
+        && !fs.readFileSync(path.join(ROOT, sourceRelative)).equals(fs.readFileSync(path.join(ROOT, publicRelative)))
+      ) {
+        fail(`${publicRelative}: published watchlist detail differs from source`);
+      }
     }
+  }
+  for (const routeId of new Set([
+    ...monitoringRouteContract.canonicalIds,
+    ...monitoringRouteContract.frenchAliases.keys(),
+  ])) {
+    for (const relative of [
+      `polymythseminars/ics/${routeId}.ics`,
+      `public/polymythseminars/ics/${routeId}.ics`,
+    ]) {
+      if (fs.existsSync(path.join(ROOT, relative))) {
+        fail(`${relative}: watchlist record has an ICS chronology route`);
+      }
+    }
+  }
+  for (const routeId of monitoringRouteContract.englishRouteIds) {
+    const route = `${SITE}/polymythseminars/events/${encodeURIComponent(routeId)}/`;
+    if (sitemapEvents.has(route)) fail(`sitemap exposes watchlist route ${route}`);
+  }
+  for (const routeId of monitoringRouteContract.frenchRouteIds) {
+    const route = `${SITE}/polymythseminars/fr/events/${encodeURIComponent(routeId)}/`;
+    if (sitemapEvents.has(route)) fail(`sitemap exposes watchlist route ${route}`);
   }
 
   let expired = 0;
@@ -279,7 +314,7 @@ function main() {
     }
   }
 
-  const eventIds = new Set(events.map(event => String(event.id || event.identity_key)));
+  const eventIds = new Set(canonicalEvents.map(event => String(event.id || event.identity_key)));
   const eventDir = path.join(ROOT, 'polymythseminars', 'events');
   let aliases = 0;
   for (const entry of fs.readdirSync(eventDir, {withFileTypes: true})) {
@@ -328,6 +363,7 @@ function main() {
     'canonical event page is stale for expired listing',
     'run scripts/build-polymythcal-audit13.py before scripts/build-search-pages.js',
     'archiveExpiredStableEventPages(events);',
+    "if (POLYMYTHCAL_WATCHLIST_IDS.has(String(event.id || event.identity_key || ''))) return false;",
   ]) {
     if (!searchSource.includes(marker)) fail(`static rollover contract is missing: ${marker}`);
   }
@@ -336,7 +372,7 @@ function main() {
     'def resolve_site_build_day():',
     'TODAY=resolve_site_build_day()',
     'and not past',
-    'clean_dirs(valid_ids,set(alias_targets))',
+    'clean_dirs(valid_ids,set(alias_targets),set(chronology_public))',
     'shutil.rmtree(child)',
     'old.unlink()',
   ]) {
@@ -400,7 +436,7 @@ function main() {
   }
 
   console.log(
-    `AUDIT41 EVENT ROLLOVER PASSED — ${events.length} chronology pages, ${watchlistEvents.length} monitored records quarantined, ${expired} archived pages, `
+    `AUDIT41 EVENT ROLLOVER PASSED — ${canonicalEvents.length} stable bilingual detail records (${events.length} chronology + ${watchlistEvents.length} watchlist), ${expired} archived pages, `
     + `${currentIndexable} current indexable pages, ${aliases} noindex aliases, `
     + `${sitemapEvents.size} sitemap events, and a no-write future-date rollover simulation.`
   );
@@ -412,4 +448,3 @@ try {
   console.error('AUDIT41 EVENT ROLLOVER FAILED:', error.stack || error.message);
   process.exit(1);
 }
-

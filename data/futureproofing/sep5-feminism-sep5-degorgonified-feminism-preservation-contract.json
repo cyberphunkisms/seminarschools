@@ -1,0 +1,1254 @@
+{
+  "authorized_public_deletions": [],
+  "baseline_manifest_sha256": "b864199055b37a1bcfedc0ad879a28795c10233b7cc5f8983db65af79f3bfc20",
+  "contract_version": "2026-09-05.3",
+  "expected_transition": {
+    "added": [
+      {
+        "bytes": 8368,
+        "path": "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md",
+        "sha256": "2a1c6999efaf472f70d12aedeabf5eaccab130ce2c5b123fa4553921373746a8"
+      },
+      {
+        "bytes": 4657242,
+        "path": "data/futureproofing/sep5-feminism-package-contents-baseline.json",
+        "sha256": "b864199055b37a1bcfedc0ad879a28795c10233b7cc5f8983db65af79f3bfc20"
+      },
+      {
+        "bytes": 261,
+        "path": "scripts/fixtures/futureproofing/sep5-degorgonified-feminism-preservation-tampered.json",
+        "sha256": "8e6a0d3b78ca852c2911c82238ccd86e8e118a90e5c3cd43c05d5f368860dd53"
+      },
+      {
+        "bytes": 29596,
+        "path": "scripts/verify-sep5-degorgonified-feminism-base-preservation.py",
+        "sha256": "463081bca39908cff33d9c32e818e991f7b2f245c25ddba24d76586fd323922f"
+      }
+    ],
+    "added_policy": [
+      {
+        "after": {
+          "binding": "versioned_semantic_policy",
+          "policy_sha256": "849f11056c49977a891cc8541cc001633e2d103800c0d04e173d22fdd9756b55"
+        },
+        "path": "data/futureproofing/sep5-feminism-sep5-degorgonified-feminism-preservation-contract.json"
+      }
+    ],
+    "baseline_manifest": {
+      "excluded_predecessors": [
+        {
+          "bytes": 77,
+          "path": ".public-build-lock",
+          "reason": "package-only overlay tombstone pruned from the governed site-source selection",
+          "sha256": "9ff05cd96c2cc0088c2c4419e0d31a8b2c203e3b958e4759f0655dedf4bf00c2"
+        },
+        {
+          "bytes": 80,
+          "path": ".public-build-staging",
+          "reason": "package-only overlay tombstone pruned from the governed site-source selection",
+          "sha256": "472d654cf918aba4f431bee50abceb2ecece3f9479c8f2eb54741c70d6a02d97"
+        },
+        {
+          "bytes": 4376294,
+          "path": "PACKAGE_CONTENTS_SHA256.json",
+          "reason": "regenerated after source verification and bound by final package integrity",
+          "sha256": "0a509cb9fbb4d6c74062cc3f1538c05867eda6b854222fd2b049c1fba891d0a8"
+        }
+      ],
+      "full_package_file_count": 21209,
+      "governed_site_predecessor_count": 21182,
+      "path": "data/futureproofing/sep5-feminism-package-contents-baseline.json",
+      "release_id": "core-coreplus-mephistodata-feminism-academic-research-gate-complete-2026-09-05",
+      "sha256": "b864199055b37a1bcfedc0ad879a28795c10233b7cc5f8983db65af79f3bfc20"
+    },
+    "changed_paths_sha256": "ddb174431b51226a8b31ca64fd90f6407b538d32b0f968f7780ea9dc7e269767",
+    "current_selected_count": 21187,
+    "deleted": [],
+    "event_data": [
+      {
+        "bytes": 8526306,
+        "path": "data/polymyth-seminar-events.json",
+        "sha256": "c52de1fe55bd1c1a4e22d1bce1fd71beebf0cc2687dda436670ec98451bafd7f",
+        "unchanged_from_sep5_feminism_gate": true
+      },
+      {
+        "bytes": 8526306,
+        "path": "polymythseminars/events.json",
+        "sha256": "c52de1fe55bd1c1a4e22d1bce1fd71beebf0cc2687dda436670ec98451bafd7f",
+        "unchanged_from_sep5_feminism_gate": true
+      },
+      {
+        "bytes": 117692,
+        "path": "data/polymythcal-publication-surfaces.json",
+        "sha256": "e32c8c125b42b340d0df0681980040ee2fee3cc5438b16c9bd8c118984306095",
+        "unchanged_from_sep5_feminism_gate": true
+      },
+      {
+        "bytes": 2954297,
+        "path": "polymythseminars/browse.json",
+        "sha256": "f7b82229eca5ad99feb64a1a81e02c388abf7045253b51ac7c7188401f46308e",
+        "unchanged_from_sep5_feminism_gate": true
+      },
+      {
+        "bytes": 213174,
+        "path": "polymythseminars/watchlist.json",
+        "sha256": "eff46db0ccf086142a1d8a94c827cf9705919cc969dbf5bc8789fe062e8d5ef8",
+        "unchanged_from_sep5_feminism_gate": true
+      },
+      {
+        "bytes": 1915161,
+        "path": "polymythseminars/research.json",
+        "sha256": "da7f74b566289eaa60a11180c5ccf95cef956e3bc405f17f4e54864cace5c473",
+        "unchanged_from_sep5_feminism_gate": true
+      }
+    ],
+    "modified": [
+      {
+        "after": {
+          "bytes": 5012,
+          "sha256": "f34b4de5dbef3526b1ae54dc31941325322e85c3d720efd50e092e6687360bc0"
+        },
+        "before": {
+          "bytes": 5008,
+          "sha256": "c082e0e7be9ad2619f5c706239c908248e8e4882cf10de8e4b793599fafd186c"
+        },
+        "path": "CHARTER.txt"
+      },
+      {
+        "after": {
+          "bytes": 22288,
+          "sha256": "f5f232ed4a4e22cc0485f8d2a398b146b0a7fb7409e91056b22fd4b9d8dbc197"
+        },
+        "before": {
+          "bytes": 18536,
+          "sha256": "3b5e0db6a23529cd88baed3f2fe6d70c8b9e1207f627c555a599168be92f11f7"
+        },
+        "path": "ML_EXECUTION_AND_CONTROLLED_ARCHIVE_SYNTHESIS_2026-08-26.md"
+      },
+      {
+        "after": {
+          "bytes": 16750,
+          "sha256": "254716d38ec605751d265ff1aaae216fa9ea177fd4c98d879a05263d8450f1d5"
+        },
+        "before": {
+          "bytes": 15435,
+          "sha256": "5a57cb285608c73dae4418a30c0de1df37f9d1fadfb26ef02d2908abb335f681"
+        },
+        "path": "hf_export/ai_access_pack/MEPHISTODATA_ACTIVATION.md"
+      },
+      {
+        "after": {
+          "bytes": 125836,
+          "sha256": "edbdca055abccf5db4dfa3b4be7ec3dff96afb94dd0f1c83019dc009258c5c14"
+        },
+        "before": {
+          "bytes": 124880,
+          "sha256": "1681c6930e51a8bda3f79a201557389de1ccf3ce3df36d3dfaa4adcc66403853"
+        },
+        "path": "hf_export/ai_access_pack/latest_access_pack.json"
+      },
+      {
+        "after": {
+          "bytes": 16292,
+          "sha256": "c9ddbb909d02edd0f048106cc5d8ce2a82c9a5010c41d0616f45d744b7d7aad9"
+        },
+        "before": {
+          "bytes": 15991,
+          "sha256": "8d05cda44f11cbd5b067ef7d40b7c4f5e92d6daa430ca4fdec2b70a0dee7cc04"
+        },
+        "path": "hf_export/ai_access_pack/latest_access_pack.md"
+      },
+      {
+        "after": {
+          "bytes": 9728,
+          "sha256": "0b4f014a073f76709ae34bcc28e6ac6bf72cdc5e5d831ce427454815bf9669c2"
+        },
+        "before": {
+          "bytes": 9048,
+          "sha256": "3625bfcbd9aa3c6c615c0b1a74b37817858b3d6b997ae36bd3551e792836b3a4"
+        },
+        "path": "hf_export/ai_access_pack/reports/ai_access_pack_verification_report.md"
+      },
+      {
+        "after": {
+          "bytes": 2398,
+          "sha256": "dbbb2918f86023eb944c0d50f2962bea9a2cb2216c43cc6bf4389d8407ec49a4"
+        },
+        "before": {
+          "bytes": 2159,
+          "sha256": "e47646329e78dfe83b1695f5e7c8d775f15041c72fe2b055e447ce4cc445a781"
+        },
+        "path": "hf_export/ai_access_pack/reports/latest_access_pack_report.md"
+      },
+      {
+        "after": {
+          "bytes": 3414,
+          "sha256": "4f20bfaf57ffe22dc44f8809ed0baac9bde7891688c6f0d3b91b49cb63be5c40"
+        },
+        "before": {
+          "bytes": 3414,
+          "sha256": "d3fd74a195865c0d89771a7eb5e7b706ac25704ddeb69009ab5cab8ea5c6ea17"
+        },
+        "path": "hf_export/data/aa/archetype_archive_route.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 4816,
+          "sha256": "91155a6fc93cd18291f71d65f2067e30bacbba663422bcbb009e6ffa651d1cde"
+        },
+        "before": {
+          "bytes": 4816,
+          "sha256": "1ee15e6508a775eb4fff56a95f3326e933d5d8661ae85afc8900cdcc02c3e1d1"
+        },
+        "path": "hf_export/data/aitr/ai_teacher_resources_route.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 12782517,
+          "sha256": "46869e63b952125dd49c01358c421b067651fe852f01a962ef5d5e63d3dafcbc"
+        },
+        "before": {
+          "bytes": 12764875,
+          "sha256": "84332d037ed453869a501a8bd24d229f8011ca334a1320cc5e878e074b0bc2bf"
+        },
+        "path": "hf_export/data/all_meaninglib_rows.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 1626759,
+          "sha256": "e3f1a6a81ed40f26c65dca5bd1067a8b93e9e754310673b50203f8fefb64a7f6"
+        },
+        "before": {
+          "bytes": 1626759,
+          "sha256": "dfd55fc5529dd4069e4d50e86cf42c7399fd1f444a67f227ac4efe988cc96a7b"
+        },
+        "path": "hf_export/data/bb/bookwormburrows.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 2105049,
+          "sha256": "aa6566114f217d318f30357b8e03a9414aa464b198a41c0d95bedabce77101fd"
+        },
+        "before": {
+          "bytes": 2105049,
+          "sha256": "79e1c57e300162544b408b8fb2b286f0d47a8af459147c92dc574db964f51e01"
+        },
+        "path": "hf_export/data/cc/campaigncodex.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 9233,
+          "sha256": "9dc06a418466b87ceb04d828e36b6d50792244a5b6ee19257a4b31dfb337c90e"
+        },
+        "before": {
+          "bytes": 9233,
+          "sha256": "420cc44c98966560fa436ab206810e7f7b1405465ebfd0b9f3bdc70676e1cd7f"
+        },
+        "path": "hf_export/data/manifest/manifest.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 21693,
+          "sha256": "4ee073ce70a8d4cb2883ee98767fbd1e8483b82dbf60603f964ce3efc313cb62"
+        },
+        "before": {
+          "bytes": 21693,
+          "sha256": "6ba5ae91d67c52ee2a8f89df0bcb190a8652a8c0430569058d4efcb482f9c2c5"
+        },
+        "path": "hf_export/data/manifest/polymyth-file-map.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 780464,
+          "sha256": "121d7f04bf5b1e631fa542859e172c47813e7feb638586420c95a8cce7dd10d7"
+        },
+        "before": {
+          "bytes": 780464,
+          "sha256": "8330163e59670091756641363a6c114cd598750324d76f251bc61594ed375c96"
+        },
+        "path": "hf_export/data/mc/modulecanon.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 8231089,
+          "sha256": "044335ac630a494d544f6c4244ed236310b65be2db2dc5a14b869f758e611b07"
+        },
+        "before": {
+          "bytes": 8213447,
+          "sha256": "781ccef835c33417ecd1f8c367e377b039cec6c855649d24a0304189a2a57711"
+        },
+        "path": "hf_export/data/ml/methodologylist.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 186366,
+          "sha256": "06d27b726906354359abac700016b76e2f9232c342c6a6ccd742ba466c3610aa"
+        },
+        "before": {
+          "bytes": 186366,
+          "sha256": "0bda12f9d5a7b65356a2f2e66af32d8c747ad8140572eb3f413d6b7c574895da"
+        },
+        "path": "hf_export/data/ml/sections/analysis.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 1034714,
+          "sha256": "e69450b091ce49ab00673459fa686a5b6678f128a560028ba8de03e0678bb0bc"
+        },
+        "before": {
+          "bytes": 1034714,
+          "sha256": "8db3694f059944ee2c2bbfb383f17859b38f30e3aafd3d9d36d9e17442133b31"
+        },
+        "path": "hf_export/data/ml/sections/citation.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 200140,
+          "sha256": "5e20ef5194c43610f07ca84475b8d986d4071eafd185aaf62c202324e65f4edc"
+        },
+        "before": {
+          "bytes": 200140,
+          "sha256": "3e5610b64c4fd152ee4c3859396519012820b97d531c53e0712aadf260179200"
+        },
+        "path": "hf_export/data/ml/sections/corehistory.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 689270,
+          "sha256": "9c9526fb39293632778fab28039650c4c7021778bf6c3a4b64bd8198a256d2a9"
+        },
+        "before": {
+          "bytes": 680533,
+          "sha256": "d4033992be263290e91833cf9dffd88390caae97aca06e050faf9cc4bf2c1c14"
+        },
+        "path": "hf_export/data/ml/sections/coreplus.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 327487,
+          "sha256": "f9126fdec4528a2869516c14a0a7354cdb0aa99616cbd832c0d16b894f7f6742"
+        },
+        "before": {
+          "bytes": 327487,
+          "sha256": "c90c2cf6148d84ed0364bd38f9d4938c897430e463cc9a0dd73f7e44ff136539"
+        },
+        "path": "hf_export/data/ml/sections/degorgonification.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 11271,
+          "sha256": "3d31a6f8799e3e2f7b46679cf8095b3607eeab3cde18ea34c30ad675b2a22120"
+        },
+        "before": {
+          "bytes": 11194,
+          "sha256": "18008f6460665def75b9838bb10df7a2a2bd833f4f43d5988e8ded5a0546e925"
+        },
+        "path": "hf_export/data/ml/sections/framework-core.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 803200,
+          "sha256": "d272adc8d5f8dfffdfc541c937e0466dcdd43bb6ea66fdbb65f83bc1be513adf"
+        },
+        "before": {
+          "bytes": 794372,
+          "sha256": "d4e527551a4cc881a97b42998e93ca1511ee6fdafcf966d17ab3f713b2e0f695"
+        },
+        "path": "hf_export/data/ml/sections/gorgonification.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 260404,
+          "sha256": "ce32ea76db38cdb778bf98b7d55c537187cb2c6868ab359b9742b61ffae49671"
+        },
+        "before": {
+          "bytes": 260404,
+          "sha256": "e2ad9d71c9908ca45a87d135be70213cc586c687c9888a67288c17ea85bccde1"
+        },
+        "path": "hf_export/data/ml/sections/idiomary.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 140682,
+          "sha256": "91ef167e23de4f0cd340c888a05aff54aaecb945b57d5b5fded4109a3cd27837"
+        },
+        "before": {
+          "bytes": 140682,
+          "sha256": "0d6b16b177a8491451190df6039d12de826fbfecee1c615768e09252dd416265"
+        },
+        "path": "hf_export/data/ml/sections/learnings.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 3635314,
+          "sha256": "29b17fe4569a721f6e4ee69774b6724a30ef79a9751f6f881ba2660667758523"
+        },
+        "before": {
+          "bytes": 3635314,
+          "sha256": "763d9122566c588093e7c253c70887bbbcf70b0401594d89b3aabb829e12340e"
+        },
+        "path": "hf_export/data/ml/sections/methodology.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 52385,
+          "sha256": "aa58fb0475849770f03955ab86d2988669858de0c91ac5d3cc4a9a8608aa4e54"
+        },
+        "before": {
+          "bytes": 52385,
+          "sha256": "bd83e87b23c0979b09c650093f20f9beefbd944ee62e4c33267443a09d3c224b"
+        },
+        "path": "hf_export/data/ml/sections/pending-user-authorship.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 213591,
+          "sha256": "17f8da50c7b1795f5dc56fa231ffe0e6bddc9a4b5c7121c7e2131d085e9e338f"
+        },
+        "before": {
+          "bytes": 213591,
+          "sha256": "b777217f95b0c0b9d91f2cabd7c99dc860a99bfdb91db54d61007dd8a45feef4"
+        },
+        "path": "hf_export/data/ml/sections/pending.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 236924,
+          "sha256": "813c3c02bea645433608649b46f788390754b7efb037bca70e9e14e52451bcb6"
+        },
+        "before": {
+          "bytes": 236924,
+          "sha256": "7eb8294b1b1ab8f2a7636e07c651343928372204cf6bbdb5f3f420564eebcf03"
+        },
+        "path": "hf_export/data/ml/sections/polycognate.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 44057,
+          "sha256": "10d65cf7bcba1a33829d05bd64ce89482add827d76dbce0a71ebfb9b4ed0cfed"
+        },
+        "before": {
+          "bytes": 44057,
+          "sha256": "312371727b65482921bb9428c031e85d66023e8f19a00912bbc2b4361b2bcd33"
+        },
+        "path": "hf_export/data/ml/sections/rainbowsol.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 133575,
+          "sha256": "c211d422946231b8f285f3f9f79165cbedb22773530bda8d6d91fe40337dc940"
+        },
+        "before": {
+          "bytes": 133575,
+          "sha256": "61997b57791ee736c4aeb20a5baf5b70cbf0b9d3615c5f0b2ec00b2a853111a7"
+        },
+        "path": "hf_export/data/ml/sections/sabachtan.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 261709,
+          "sha256": "49c844547e7ad8da907362d7ad78beadcad8d2948f21e742c60226173c99b9f3"
+        },
+        "before": {
+          "bytes": 261709,
+          "sha256": "bda18ceee9b5ec0560d1f26a1c245a3b20a4db5c709eb432fc95b1d0a09ed675"
+        },
+        "path": "hf_export/data/ml/sections/studylist.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 358973,
+          "sha256": "b13cda1567f7606ac1a43762fa988542f8cc203236cf6f35e2f966aea3ec5c7a"
+        },
+        "before": {
+          "bytes": 358008,
+          "sha256": "9bb40b9a059dd4b4866e394a220c71b840832afc6a7d82539fc43e5f4a0bdf1b"
+        },
+        "path": "hf_export/data/relations/crossrefs.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 2756,
+          "sha256": "97773f41a9f8718892e0000e30591a7a1efc562982de841f51f5aa3bee9daf09"
+        },
+        "before": {
+          "bytes": 2756,
+          "sha256": "c7f971b70923a4b457d4e3dec0629791da88f10980c81ed15a9cf8cb65b89005"
+        },
+        "path": "hf_export/data/relations/star_file_map.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 823,
+          "sha256": "58218f8b4b41b3ba65435eed4a53115968ffa90d7fdb30cd1b8d599c608c57ce"
+        },
+        "before": {
+          "bytes": 823,
+          "sha256": "e3e1c6a4d80d2675c04413788b084ada82bde0f3e2cfa4814bed1850e1e20ff3"
+        },
+        "path": "hf_export/reports/latest_export_report.md"
+      },
+      {
+        "after": {
+          "bytes": 12767,
+          "sha256": "5b4fbba4d12c0da15ce5e078c30c9ecf8fbeda214603be3765d8d284c1f31731"
+        },
+        "before": {
+          "bytes": 11994,
+          "sha256": "34c5d813801b72fe1f487fbb7544c70c40c76e061fe9a7e462fa57591f05f928"
+        },
+        "path": "hf_export/reports/meaninglib_search_verify_report.md"
+      },
+      {
+        "after": {
+          "bytes": 715,
+          "sha256": "b28539e00c9e7f8d2a796e87c927401fdbf4e26745e1ab6d6bfea18bc57b423d"
+        },
+        "before": {
+          "bytes": 715,
+          "sha256": "665bc24c0e4c7de5747dc47741a692be584e1930ff7902d3da31f2fb2201eebb"
+        },
+        "path": "hf_export/reports/search_report.md"
+      },
+      {
+        "after": {
+          "bytes": 2829,
+          "sha256": "08ec175cd35caa62723ae1db32f63555221bc25164418bb461ccbfdd034471cc"
+        },
+        "before": {
+          "bytes": 2829,
+          "sha256": "70ce6d26ed50c4723ccdc96154ee6a77e6f5e89579be86369c7453c8c82852c7"
+        },
+        "path": "hf_export/reports/verification_report.md"
+      },
+      {
+        "after": {
+          "bytes": 11305828,
+          "sha256": "5b14a2d3761e9698b1de7f7e9c86deb64bdf8be4b78d123a7c1387f1134d9adc"
+        },
+        "before": {
+          "bytes": 11299632,
+          "sha256": "0d513e24446103cccc6e4403130162af0f6bffcc5e59525c33b27391146a8edf"
+        },
+        "path": "hf_export/search/meaninglib_search_index.json"
+      },
+      {
+        "after": {
+          "bytes": 15537,
+          "sha256": "5e80412efd98d657bc6da6a2f1db4584d7289b9677c2e786bc8bd47f0ad6d194"
+        },
+        "before": {
+          "bytes": 15537,
+          "sha256": "15c4efc25d5bbcf749bad731b93d6427deadb85a7c02c3f1513e094d1293a9a9"
+        },
+        "path": "package-lock.json"
+      },
+      {
+        "after": {
+          "bytes": 40583,
+          "sha256": "f5cd0c2e33742e9948c23644b2b8b7bcb26c3c7a42c9b904c33a293296dae198"
+        },
+        "before": {
+          "bytes": 40569,
+          "sha256": "4b906157e16e7a0b3f89a440ebd7548a8e8a3adb922d6761b63a118deae56093"
+        },
+        "path": "package.json"
+      },
+      {
+        "after": {
+          "bytes": 10952901,
+          "sha256": "03e9986cc7879d1807749f2381670ca8917b9ad4ff5a204e46a9f0897a058f7c"
+        },
+        "before": {
+          "bytes": 10941740,
+          "sha256": "c2ccc1226eea1ee6778848c4a52f5ee3f3efcd8b01ed682b322a2bf1fb45dfed"
+        },
+        "path": "polymyth/concordance/concordance-index.json"
+      },
+      {
+        "after": {
+          "bytes": 4264,
+          "sha256": "ca6ef44f348bbf0d26361b24764abd33abebc98e03ad651c71cf9ea82ba02882"
+        },
+        "before": {
+          "bytes": 4264,
+          "sha256": "54462e42f430442f07755de2da37cd89814bd2dc9969e64253425f9024518b4a"
+        },
+        "path": "polymyth/manifest.txt"
+      },
+      {
+        "after": {
+          "bytes": 16750,
+          "sha256": "254716d38ec605751d265ff1aaae216fa9ea177fd4c98d879a05263d8450f1d5"
+        },
+        "before": {
+          "bytes": 15435,
+          "sha256": "5a57cb285608c73dae4418a30c0de1df37f9d1fadfb26ef02d2908abb335f681"
+        },
+        "path": "polymyth/mephistodata-activation.md"
+      },
+      {
+        "after": {
+          "bytes": 359104,
+          "sha256": "ce74c7848ba9cadc22ff71036f47d7cb64940c626e78d2b673dde2011dd0e15b"
+        },
+        "before": {
+          "bytes": 354411,
+          "sha256": "8007ca9ab1d90c22a94492e5ca2eb43e27461fc1925ee039836217a7efd9f87c"
+        },
+        "path": "polymyth/methodologylist-coreplus.txt"
+      },
+      {
+        "after": {
+          "bytes": 417749,
+          "sha256": "d069ddda91fa706929f4925a1086c9cc00ef614b85abbd035a6a48614f647c2e"
+        },
+        "before": {
+          "bytes": 413268,
+          "sha256": "26e74d15f254c326d7c7523a798d62cf3a7c88172c462b3e5fb9aa449aa29dbe"
+        },
+        "path": "polymyth/methodologylist-gorgonification.txt"
+      },
+      {
+        "after": {
+          "bytes": 4155547,
+          "sha256": "28e26fcb6c0fad44fae4de31ed70d42ec42446f19eef4c21b224a9085f5a343d"
+        },
+        "before": {
+          "bytes": 4146228,
+          "sha256": "38fedecc561fab3f973dc6c37ad9f7bd097a578bb159ee99a5fcccb2dae366fb"
+        },
+        "path": "polymyth/methodologylist.txt"
+      },
+      {
+        "after": {
+          "bytes": 377734,
+          "sha256": "a8a6c65948a9388a9cf09869ffda083ad37247fbeafffb9eae36e9501444b6cf"
+        },
+        "before": {
+          "bytes": 373045,
+          "sha256": "3a07ac10dfc4b0b3f041cecaa17fb109c84ffe9afdf80021d964fcec9ecb69e3"
+        },
+        "path": "polymyth/methodologylist/coreplus/index.html"
+      },
+      {
+        "after": {
+          "bytes": 12550,
+          "sha256": "f6c293fc0dd6e2de0755ed4c210e10b2192e7a0c7df977c0ac4935f8195721a4"
+        },
+        "before": {
+          "bytes": 12402,
+          "sha256": "1932e5fa93177a61d8c0c3d50bfd8ef6f3eb21d4b06b7b71d495e87d0527ed19"
+        },
+        "path": "polymyth/methodologylist/framework-core/index.html"
+      },
+      {
+        "after": {
+          "bytes": 461217,
+          "sha256": "afb31dd003cecbf7f93b0e38314d09ced8793db18165182a6e36c7b68c369d88"
+        },
+        "before": {
+          "bytes": 456707,
+          "sha256": "806d8019b461eb1813181fbb632eb1fd0255d0958f90ef351accf626803aa54e"
+        },
+        "path": "polymyth/methodologylist/gorgonification/index.html"
+      },
+      {
+        "after": {
+          "bytes": 4220023,
+          "sha256": "bf0c36d19f427e8f59baa9d90e2619caa05f0722ea42d670759dd72d992a6e49"
+        },
+        "before": {
+          "bytes": 4215378,
+          "sha256": "9ac4a45eaa66f61cf48434f158dc54a7379fdcce30bc2b9306a18edb7c646eb1"
+        },
+        "path": "polymyth/methodologylist/index.html"
+      },
+      {
+        "after": {
+          "bytes": 29179,
+          "sha256": "fddbfd52dee03117c53a82bbba4c714a2d3b8b5a98e877a5b8265af8676c1a9d"
+        },
+        "before": {
+          "bytes": 28585,
+          "sha256": "8c0e3d0b3219dc6e6d9e9616323a169bed98d2421949cc390831013506864698"
+        },
+        "path": "polymyth/methodologylist/mephistodata-register-fixtures.json"
+      },
+      {
+        "after": {
+          "bytes": 121616,
+          "sha256": "74edacebdd3f8caccc25b71ba5536c38c899ba12ee6cae27a753a0cd12f6ae8b"
+        },
+        "before": {
+          "bytes": 116779,
+          "sha256": "74d85eeda03b686693417e7caccce43dfd79458ddd8810fffe5bfbb7a5356f6f"
+        },
+        "path": "polymyth/methodologylist/mephistodata-rule-hardening-addendum.js"
+      },
+      {
+        "after": {
+          "bytes": 10952901,
+          "sha256": "03e9986cc7879d1807749f2381670ca8917b9ad4ff5a204e46a9f0897a058f7c"
+        },
+        "before": {
+          "bytes": 10941740,
+          "sha256": "c2ccc1226eea1ee6778848c4a52f5ee3f3efcd8b01ed682b322a2bf1fb45dfed"
+        },
+        "path": "public/polymyth/concordance/concordance-index.json"
+      },
+      {
+        "after": {
+          "bytes": 4264,
+          "sha256": "ca6ef44f348bbf0d26361b24764abd33abebc98e03ad651c71cf9ea82ba02882"
+        },
+        "before": {
+          "bytes": 4264,
+          "sha256": "54462e42f430442f07755de2da37cd89814bd2dc9969e64253425f9024518b4a"
+        },
+        "path": "public/polymyth/manifest.txt"
+      },
+      {
+        "after": {
+          "bytes": 16750,
+          "sha256": "254716d38ec605751d265ff1aaae216fa9ea177fd4c98d879a05263d8450f1d5"
+        },
+        "before": {
+          "bytes": 15435,
+          "sha256": "5a57cb285608c73dae4418a30c0de1df37f9d1fadfb26ef02d2908abb335f681"
+        },
+        "path": "public/polymyth/mephistodata-activation.md"
+      },
+      {
+        "after": {
+          "bytes": 359104,
+          "sha256": "ce74c7848ba9cadc22ff71036f47d7cb64940c626e78d2b673dde2011dd0e15b"
+        },
+        "before": {
+          "bytes": 354411,
+          "sha256": "8007ca9ab1d90c22a94492e5ca2eb43e27461fc1925ee039836217a7efd9f87c"
+        },
+        "path": "public/polymyth/methodologylist-coreplus.txt"
+      },
+      {
+        "after": {
+          "bytes": 417749,
+          "sha256": "d069ddda91fa706929f4925a1086c9cc00ef614b85abbd035a6a48614f647c2e"
+        },
+        "before": {
+          "bytes": 413268,
+          "sha256": "26e74d15f254c326d7c7523a798d62cf3a7c88172c462b3e5fb9aa449aa29dbe"
+        },
+        "path": "public/polymyth/methodologylist-gorgonification.txt"
+      },
+      {
+        "after": {
+          "bytes": 4155547,
+          "sha256": "28e26fcb6c0fad44fae4de31ed70d42ec42446f19eef4c21b224a9085f5a343d"
+        },
+        "before": {
+          "bytes": 4146228,
+          "sha256": "38fedecc561fab3f973dc6c37ad9f7bd097a578bb159ee99a5fcccb2dae366fb"
+        },
+        "path": "public/polymyth/methodologylist.txt"
+      },
+      {
+        "after": {
+          "bytes": 377734,
+          "sha256": "a8a6c65948a9388a9cf09869ffda083ad37247fbeafffb9eae36e9501444b6cf"
+        },
+        "before": {
+          "bytes": 373045,
+          "sha256": "3a07ac10dfc4b0b3f041cecaa17fb109c84ffe9afdf80021d964fcec9ecb69e3"
+        },
+        "path": "public/polymyth/methodologylist/coreplus/index.html"
+      },
+      {
+        "after": {
+          "bytes": 12550,
+          "sha256": "f6c293fc0dd6e2de0755ed4c210e10b2192e7a0c7df977c0ac4935f8195721a4"
+        },
+        "before": {
+          "bytes": 12402,
+          "sha256": "1932e5fa93177a61d8c0c3d50bfd8ef6f3eb21d4b06b7b71d495e87d0527ed19"
+        },
+        "path": "public/polymyth/methodologylist/framework-core/index.html"
+      },
+      {
+        "after": {
+          "bytes": 461217,
+          "sha256": "afb31dd003cecbf7f93b0e38314d09ced8793db18165182a6e36c7b68c369d88"
+        },
+        "before": {
+          "bytes": 456707,
+          "sha256": "806d8019b461eb1813181fbb632eb1fd0255d0958f90ef351accf626803aa54e"
+        },
+        "path": "public/polymyth/methodologylist/gorgonification/index.html"
+      },
+      {
+        "after": {
+          "bytes": 4220023,
+          "sha256": "bf0c36d19f427e8f59baa9d90e2619caa05f0722ea42d670759dd72d992a6e49"
+        },
+        "before": {
+          "bytes": 4215378,
+          "sha256": "9ac4a45eaa66f61cf48434f158dc54a7379fdcce30bc2b9306a18edb7c646eb1"
+        },
+        "path": "public/polymyth/methodologylist/index.html"
+      },
+      {
+        "after": {
+          "bytes": 29179,
+          "sha256": "fddbfd52dee03117c53a82bbba4c714a2d3b8b5a98e877a5b8265af8676c1a9d"
+        },
+        "before": {
+          "bytes": 28585,
+          "sha256": "8c0e3d0b3219dc6e6d9e9616323a169bed98d2421949cc390831013506864698"
+        },
+        "path": "public/polymyth/methodologylist/mephistodata-register-fixtures.json"
+      },
+      {
+        "after": {
+          "bytes": 121616,
+          "sha256": "74edacebdd3f8caccc25b71ba5536c38c899ba12ee6cae27a753a0cd12f6ae8b"
+        },
+        "before": {
+          "bytes": 116779,
+          "sha256": "74d85eeda03b686693417e7caccce43dfd79458ddd8810fffe5bfbb7a5356f6f"
+        },
+        "path": "public/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js"
+      },
+      {
+        "after": {
+          "bytes": 59656,
+          "sha256": "d57f186972136f34e6b38e5d941e71d00b72ad82c2cc324ea7f8624a51e73574"
+        },
+        "before": {
+          "bytes": 59039,
+          "sha256": "ac18bfa1bfff90d2b13478b883c049965b207bef9efae27eab9b5dac0a937920"
+        },
+        "path": "scripts/artifact_receipt.py"
+      },
+      {
+        "after": {
+          "bytes": 33472,
+          "sha256": "f68f9d39664889f515793d7bfaaf7b18d2984118c54629ad8e6ea6215375fdd6"
+        },
+        "before": {
+          "bytes": 31691,
+          "sha256": "7b474008603c4427642ce413a965b37faa89f6faecc923f1d4b626c05d5b9d07"
+        },
+        "path": "scripts/build-ai-access-pack.js"
+      },
+      {
+        "after": {
+          "bytes": 6279,
+          "sha256": "0ec852d5b244aff428b779e187aa219a4c34f384b788aae3f4028e905d72def6"
+        },
+        "before": {
+          "bytes": 6019,
+          "sha256": "e8f78acab25b97065b9c96b566de9ce760b922198b6dd6473d25bead03ae2baa"
+        },
+        "path": "scripts/build-clean-room-release.py"
+      },
+      {
+        "after": {
+          "bytes": 37104,
+          "sha256": "c416308ce5b807433dda46bcd7a168a2baab961724f15e77eb92f67889d041ce"
+        },
+        "before": {
+          "bytes": 25454,
+          "sha256": "626d10e2dd03b51579d563d2331602ba1673371066080b85214e8a3f70efb11d"
+        },
+        "path": "scripts/fixtures/ml-execution-gates/fixtures.json"
+      },
+      {
+        "after": {
+          "bytes": 72428,
+          "sha256": "2867860296c65f572386b5b4651b4d5cd80bda0f703cc625756a337c1eaece42"
+        },
+        "before": {
+          "bytes": 60778,
+          "sha256": "a102f4b4a1173336fc1a414dcd3110a7c0cd4e29e8b5dceacb32d22ad7994fdb"
+        },
+        "path": "scripts/fixtures/ml-execution-gates/internal-writing-fixtures.json"
+      },
+      {
+        "after": {
+          "bytes": 123486,
+          "sha256": "1e210ae10aa32b6ddefb34e90601abf3f0834104977be6c35bb86c025a5fd7bc"
+        },
+        "before": {
+          "bytes": 110400,
+          "sha256": "b8e94502adfb84f6878d3ebbecbe2f5969ef184e41148163fe5a6637284f9d09"
+        },
+        "path": "scripts/fixtures/ml-execution-gates/mephistodata-runtime-gate-hostile-fixtures.json"
+      },
+      {
+        "after": {
+          "bytes": 96837,
+          "sha256": "967791bbdc485e96c8ac15b01fc36c4dbc9f3d663de7a5a3593600936f634874"
+        },
+        "before": {
+          "bytes": 78869,
+          "sha256": "318311bf0ef89106c4087015b70d3d47da30b2e3fa741fd29b415c1195e818e3"
+        },
+        "path": "scripts/lib/mephistodata-runtime-gate.js"
+      },
+      {
+        "after": {
+          "bytes": 15568,
+          "sha256": "f61b3b1ef48cff605f23454a174fa2aa0f3261774034151f575286ed92ff7217"
+        },
+        "before": {
+          "bytes": 15273,
+          "sha256": "b37b777d09f9b7bd1c8cd21cf3f788e52da8aa4bbb21867f41c28a473ce763e2"
+        },
+        "path": "scripts/package-complete-current.py"
+      },
+      {
+        "after": {
+          "bytes": 25255,
+          "sha256": "3d0752deb11fb00183072fd91874d36446bd4aca9a52c0c2c2c4d2c072b03900"
+        },
+        "before": {
+          "bytes": 24550,
+          "sha256": "d1c0bcbfba2f0d0624b4eb93c969c5241b92df72248b138955bbbbfe0d28bc60"
+        },
+        "path": "scripts/package-front-facing-mephistodata-release.py"
+      },
+      {
+        "after": {
+          "bytes": 17543,
+          "sha256": "96327a0ea27f412476c6dafde98720476820f5fac27f722837bf09e593ec5dc3"
+        },
+        "before": {
+          "bytes": 17467,
+          "sha256": "d19a4e8e30995e493b3a22864ef2356f6be1bfe6e09cad9ceaa33e19323d3733"
+        },
+        "path": "scripts/query-meaninglib.js"
+      },
+      {
+        "after": {
+          "bytes": 17518,
+          "sha256": "671c56d02e6a121f0360cf530f4bf1cb5e787cfda33f406e8a75aad88d2a9fd0"
+        },
+        "before": {
+          "bytes": 17518,
+          "sha256": "990d18018ea26b97e5df49734d61b3c347f0a280b07cfcf8fa2fb3e918930e1d"
+        },
+        "path": "scripts/reports/asset-weight-report.json"
+      },
+      {
+        "after": {
+          "bytes": 9569,
+          "sha256": "1bb903c310d9f7faf3f9b65f718691a489e5e9001cef3ed5226ac9f13223aee3"
+        },
+        "before": {
+          "bytes": 9567,
+          "sha256": "b32d2e64e57dc8de013823356d29987320b7242e8b544e77abaece990e37d38c"
+        },
+        "path": "scripts/reports/audit49-metadata-surface.json"
+      },
+      {
+        "after": {
+          "bytes": 1574,
+          "sha256": "dc52c97b6aad31293b9033240899c26716c57d2c9f89852525e2e1b20046239d"
+        },
+        "before": {
+          "bytes": 1574,
+          "sha256": "82adcbb7b57d95c505e329c102fac30d694a71077e0eff7cfb01d31ea32b5929"
+        },
+        "path": "scripts/reports/audit49-runtime-efficiency.json"
+      },
+      {
+        "after": {
+          "bytes": 65493,
+          "sha256": "65871d6180bddcda71d542eeff1e945573d34d505e09a11f99b84ec3d43023e0"
+        },
+        "before": {
+          "bytes": 64096,
+          "sha256": "7431591bdce8c8a1fec81abcafe1a228d5b2b422162c9e06c3b1d08c68a32e87"
+        },
+        "path": "scripts/test_futureproofing_contracts.py"
+      },
+      {
+        "after": {
+          "bytes": 22410,
+          "sha256": "975f012f1f64a9ed1c74fe53807eb719d9f237acd06c1655f21dc251f329260b"
+        },
+        "before": {
+          "bytes": 20091,
+          "sha256": "a7acfc29d84a6de0fdd05640e23fc91028d56b0aa2a1c8525c71ce33e2124784"
+        },
+        "path": "scripts/verify-ai-access-pack.js"
+      },
+      {
+        "after": {
+          "bytes": 30624,
+          "sha256": "66e9160a46d50345cd7d9d2a5d82d02842112329551c8ac511e85e3e89c00823"
+        },
+        "before": {
+          "bytes": 30007,
+          "sha256": "c872bb4cd012a58d85fcd37ca65fb2d65775f4b2e9ad6ebb34121423df7f7779"
+        },
+        "path": "scripts/verify-complete-archive-classes.py"
+      },
+      {
+        "after": {
+          "bytes": 39678,
+          "sha256": "8f27fb0243793b5e7702f690b4ff84937910d672cf7b6f820413950bb6373c0e"
+        },
+        "before": {
+          "bytes": 39542,
+          "sha256": "f74b87a4c7f6e03b4543dbe33367c066e1558867680bd6f2253102b1dfbd4d53"
+        },
+        "path": "scripts/verify-core-coreplus-alignment.js"
+      },
+      {
+        "after": {
+          "bytes": 8647,
+          "sha256": "19951738c674657d4e0d388cda82d3dfed9934b9221380afeafe85afc05d8934"
+        },
+        "before": {
+          "bytes": 8339,
+          "sha256": "43cd644f249d64edf4e4291d66d5316dbd05202a84e2f5ffbff3f9137bb40682"
+        },
+        "path": "scripts/verify-meaninglib-search.js"
+      },
+      {
+        "after": {
+          "bytes": 31041,
+          "sha256": "6a1c38e960313807997cd454d85423f4e06f677d5c840d9c40a0c9f853d5ba4c"
+        },
+        "before": {
+          "bytes": 25729,
+          "sha256": "8cfc5cc0a4e36f5b08a1a7eb359afa1d7e15ba699f8ff695a3cd5978dab8a9de"
+        },
+        "path": "scripts/verify-mephistodata-runtime-gate.js"
+      },
+      {
+        "after": {
+          "bytes": 86579,
+          "sha256": "94a27f8444c6a27ee79a52a996d4c1f857bd43bc4ad86c066224962cd9b3cd0d"
+        },
+        "before": {
+          "bytes": 75137,
+          "sha256": "e611a21f6dc27022933c9be6516f076ec9ef4f6fb723be0f91e07a4c8a148b8e"
+        },
+        "path": "scripts/verify-ml-execution-gates.js"
+      },
+      {
+        "after": {
+          "bytes": 93942,
+          "sha256": "87a1d803d25e17cf081e769cc50cc53e7ad49b5940f722f7122215692f4ebbe1"
+        },
+        "before": {
+          "bytes": 90082,
+          "sha256": "6228f055a93c45e1aa9e4704b59868b41f8f2fca65808c8d0b3bcb81cad2220f"
+        },
+        "path": "scripts/verify-release-gates.js"
+      }
+    ],
+    "modified_policy": [
+      {
+        "after": {
+          "binding": "versioned_semantic_policy",
+          "policy_sha256": "e9a59300646e3885afa90876d4bcbc16570804f3847a0996cb138e63b18711a3"
+        },
+        "before": {
+          "bytes": 41102,
+          "sha256": "344a8d2c74dc486e00cc686f549b479b673da2b3f97cd6d00626f1b3eb4fb2fc"
+        },
+        "path": "RELEASE_MANIFEST.json"
+      },
+      {
+        "after": {
+          "binding": "versioned_semantic_policy",
+          "policy_sha256": "af1cf6ced1cbb6bc242552eaebbe0995be091c65760f6b5a09d36425c7eae8c5"
+        },
+        "before": {
+          "bytes": 10597,
+          "sha256": "5d78b17e059220e41caa2cd4bdcb97ca4e609868d045419953b34e3d691f2d2e"
+        },
+        "path": "WEBSITE_AUDIT49_TECHNICAL_EFFICIENCY_RESILIENCE_REPORT_2026-07-26.md"
+      },
+      {
+        "after": {
+          "binding": "versioned_semantic_policy",
+          "policy_sha256": "221d76a17b945de348947782df86f279da302522f36270fb817ded89ffc3d48c"
+        },
+        "before": {
+          "bytes": 2660,
+          "sha256": "f82d8a6ef4f9c01300ad89ea9d9129c001e30f681a39f93a48a2632a35ed4478"
+        },
+        "path": "scripts/reports/audit49-build-packaging-efficiency.json"
+      },
+      {
+        "after": {
+          "binding": "versioned_semantic_policy",
+          "policy_sha256": "d4217a9779c84155f192bd538a36934bb902fcb9fd855ea7ccd50e836fedb590"
+        },
+        "before": {
+          "bytes": 13698,
+          "sha256": "31d61b2a73619c594e5db14b64b9ea947db54f76ee02bac4ade2921999dd11e1"
+        },
+        "path": "scripts/reports/audit49-technical-efficiency.json"
+      },
+      {
+        "after": {
+          "binding": "versioned_semantic_policy",
+          "policy_sha256": "51c70f48b33f4432733061a72f3066576e0199aef5fac28734f1b72f7210cef9"
+        },
+        "before": {
+          "bytes": 6668,
+          "sha256": "2777afdf1846a43e4c2128fe9f6565917e3bd6266aaec1be69f5f8f8931404a1"
+        },
+        "path": "scripts/reports/futureproofing-browser-family-report.json"
+      },
+      {
+        "after": {
+          "binding": "versioned_semantic_policy",
+          "policy_sha256": "43016f7ed044f67332970dec7355f87fe12d289e5f16f60e8dfd4b7d89742978"
+        },
+        "before": {
+          "bytes": 2653,
+          "sha256": "c5a11ff60a8a681f74949c002d2b596af096f60749be4093f39b07c2a6ad76a1"
+        },
+        "path": "scripts/reports/futureproofing-gate-report.json"
+      },
+      {
+        "after": {
+          "binding": "versioned_semantic_policy",
+          "policy_sha256": "e468194d513837832a93b9abecc2ed755361848162d79146020d6f5b02702e42"
+        },
+        "before": {
+          "bytes": 1156,
+          "sha256": "4c0260b569b23888afc82afb17e3f9889c66200ce4a42b8823a8c173b6bcfd8b"
+        },
+        "path": "scripts/reports/release-gate-report.json"
+      }
+    ],
+    "outer_delivery": {
+      "added": [
+        {
+          "bytes": 8368,
+          "path": "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md",
+          "sha256": "2a1c6999efaf472f70d12aedeabf5eaccab130ce2c5b123fa4553921373746a8"
+        }
+      ],
+      "changed_paths_sha256": "83106dc7037a272041f1b5a0b20573fdb5c1de3511c0610ba1072a7ffea0c526",
+      "current_selected_count": 25,
+      "deleted": [],
+      "modified": [
+        {
+          "after": {
+            "bytes": 3640,
+            "sha256": "36205d57e625d3ae76fbe5ce6528f0fe131a4d93e801671247aa58ff865b9e1d"
+          },
+          "before": {
+            "bytes": 1562,
+            "sha256": "d9cd9d80c5752002878b255ef8f3d179cf6be5bbdbd0a24353bdff41c0dd6bf8"
+          },
+          "path": "DEPLOY_TOOLS/README_NEXT_DEPLOY.txt"
+        },
+        {
+          "after": {
+            "bytes": 5012,
+            "sha256": "f34b4de5dbef3526b1ae54dc31941325322e85c3d720efd50e092e6687360bc0"
+          },
+          "before": {
+            "bytes": 5008,
+            "sha256": "c082e0e7be9ad2619f5c706239c908248e8e4882cf10de8e4b793599fafd186c"
+          },
+          "path": "Mephistodata_CORE_Personal_Rules_2026-08-12.md"
+        },
+        {
+          "after": {
+            "bytes": 40619,
+            "sha256": "c715b988968a16d1054842695a8b64c85cf4edddad77b4549d6afc1eb286cf75"
+          },
+          "before": {
+            "bytes": 37349,
+            "sha256": "3884533b1b01c7e7a89f71c2c822d5af810871266450f41d54654fb8e372c15f"
+          },
+          "path": "README_FIRST.txt"
+        }
+      ],
+      "predecessor_count": 24,
+      "unchanged": {
+        "bytes": 30166859,
+        "content_sha256": "035810efe82379c3ed41b5c27df227eaf12a42b29142ff58bfa8a7bff92d8ccc",
+        "count": 21,
+        "paths_sha256": "8ac49b4aef82260dfe74d21ab127f64130dda811349f6af09a3044b1b5d5cf37"
+      }
+    },
+    "policy_rows": [
+      {
+        "classification": "predecessor_release_manifest_fixed_point",
+        "path": "RELEASE_MANIFEST.json",
+        "semantic_gate": "node scripts/verify-release-gates.js plus final artifact receipt verification",
+        "writer": "reviewed release manifest update plus canonical package pipeline"
+      },
+      {
+        "classification": "predecessor_generated_report",
+        "path": "scripts/reports/audit49-build-packaging-efficiency.json",
+        "semantic_gate": "node scripts/verify-audit49-build-packaging-efficiency.js",
+        "writer": "scripts/verify-audit49-build-packaging-efficiency.js"
+      },
+      {
+        "classification": "predecessor_generated_report",
+        "path": "scripts/reports/audit49-technical-efficiency.json",
+        "semantic_gate": "node scripts/verify-audit49-technical-efficiency.js",
+        "writer": "scripts/verify-audit49-technical-efficiency.js"
+      },
+      {
+        "classification": "predecessor_generated_report",
+        "path": "WEBSITE_AUDIT49_TECHNICAL_EFFICIENCY_RESILIENCE_REPORT_2026-07-26.md",
+        "semantic_gate": "node scripts/verify-audit49-technical-efficiency.js",
+        "writer": "scripts/verify-audit49-technical-efficiency.js"
+      },
+      {
+        "classification": "predecessor_generated_report",
+        "path": "scripts/reports/futureproofing-browser-family-report.json",
+        "semantic_gate": "node scripts/run-browser-test-tier.mjs --tier family plus final artifact receipt verification",
+        "writer": "scripts/run-browser-test-tier.mjs --tier family"
+      },
+      {
+        "classification": "predecessor_generated_report",
+        "path": "scripts/reports/release-gate-report.json",
+        "semantic_gate": "scripts/verify-all-runner.js plus final artifact receipt verification",
+        "writer": "scripts/verify-all-runner.js"
+      },
+      {
+        "classification": "predecessor_generated_report",
+        "path": "scripts/reports/futureproofing-gate-report.json",
+        "semantic_gate": "python3 scripts/verify-futureproofing-contract.py --run-source plus final artifact receipt verification",
+        "writer": "scripts/verify-futureproofing-contract.py"
+      },
+      {
+        "classification": "successor_contract_self_reference",
+        "path": "data/futureproofing/sep5-feminism-sep5-degorgonified-feminism-preservation-contract.json",
+        "semantic_gate": "python3 scripts/verify-sep5-degorgonified-feminism-base-preservation.py",
+        "writer": "reviewed September 5 degorgonified-feminism retrieval transition seal"
+      }
+    ],
+    "selection_stats": {
+      "files_selected": 21187,
+      "polymythcal_artifacts_pruned": 0,
+      "reconstruction_duplicates_pruned": 0
+    },
+    "transition_id": "sep5-feminism-to-sep5-degorgonified-feminism-retrieval-enforcement",
+    "unchanged": {
+      "bytes": 442469539,
+      "content_sha256": "e83e2f591516372c0f809a3c37e43b8d25f63713c1e7d0da0bf0ef8e603e46ad",
+      "count": 21089,
+      "paths_sha256": "f3e21dfcfbd612b8d84f3714aa621a2a0ddb79c292164cfeeab3e8094ae9e4b7"
+    }
+  },
+  "predecessor_release_id": "core-coreplus-mephistodata-feminism-academic-research-gate-complete-2026-09-05",
+  "rule": "Every governed September 5 feminism academic-research-gate SITE_PACKAGE and outer delivery path remains byte-identical unless its exact before/after hashes appear here; no predecessor path may be deleted; generated report fixed points use closed policy tokens; the Polymythcal event corpus remains byte-identical.",
+  "schema": "seminar-schools-sep5-degorgonified-feminism-preservation-v1",
+  "status": "sealed",
+  "transition_id": "sep5-feminism-to-sep5-degorgonified-feminism-retrieval-enforcement"
+}

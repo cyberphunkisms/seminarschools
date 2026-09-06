@@ -30,6 +30,22 @@ FIXED_GENERATED_DIRECTORIES = {
     ".public-build-lock",
     ".seminar-schools-build.lock",
 }
+TRANSIENT_DIRECTORY_NAMES = {
+    ".cache",
+    "cache",
+    ".locks",
+    "locks",
+    ".logs",
+    "logs",
+    ".log",
+    "log",
+    ".staging",
+    "staging",
+    ".temp",
+    "temp",
+    ".tmp",
+    "tmp",
+}
 EXCLUDED_FILES = {
     "cv-modular-onepage-samples-2026-07-09.zip",
     "cv-modular-onepage-samples-final-2026-07-09.zip",
@@ -46,6 +62,22 @@ GENERATED_RELEASE_EVIDENCE = re.compile(
     re.IGNORECASE,
 )
 POLYMYTHCAL_SAFE_ID = re.compile(r"^[A-Za-z0-9._~-]+$")
+DUPLICATE_RECONSTRUCTION_FILES = {
+    "UPDATE_SOURCES/Detienne_Comparing_the_Incomparable_Polymyth_Master_Notes_2026-08-27.md",
+    "SITE_PACKAGE/UPDATE_SOURCES/Detienne_Comparing_the_Incomparable_Polymyth_Master_Notes_2026-08-27.md",
+}
+DUPLICATE_RECONSTRUCTION_PREFIXES = (
+    "UPDATE_SOURCES/Detienne_Evidence_Ledgers_2026-08-27/",
+    "SITE_PACKAGE/UPDATE_SOURCES/Detienne_Evidence_Ledgers_2026-08-27/",
+)
+
+
+def is_reconstruction_duplicate(relative_name: str) -> bool:
+    """Identify transient mixed-case Detienne copies from interrupted recovery."""
+    return (
+        relative_name in DUPLICATE_RECONSTRUCTION_FILES
+        or relative_name.startswith(DUPLICATE_RECONSTRUCTION_PREFIXES)
+    )
 
 
 def polymythcal_publication_exclusions(root: Path) -> set[str]:
@@ -193,6 +225,7 @@ def collect_package_files(
         "files_considered": 0,
         "files_selected": 0,
         "polymythcal_artifacts_pruned": 0,
+        "reconstruction_duplicates_pruned": 0,
     }
 
     for current, directory_names, file_names in os.walk(root, topdown=True, followlinks=False):
@@ -205,6 +238,8 @@ def collect_package_files(
             should_prune = (
                 candidate.is_symlink()
                 or name in FIXED_GENERATED_DIRECTORIES
+                or name.lower() in TRANSIENT_DIRECTORY_NAMES
+                or name.lower().endswith(".lock")
                 or generated_dependency_dir(name)
                 or (at_root and (name in excluded_roots or generated_work_dir(name)))
             )
@@ -221,6 +256,11 @@ def collect_package_files(
                 continue
             relative = candidate.relative_to(root)
             relative_name = relative.as_posix()
+            if len(relative.parts) == 1 and name in FIXED_GENERATED_DIRECTORIES:
+                continue
+            if is_reconstruction_duplicate(relative_name):
+                stats["reconstruction_duplicates_pruned"] += 1
+                continue
             if relative_name in publication_exclusions:
                 stats["polymythcal_artifacts_pruned"] += 1
                 continue

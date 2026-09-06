@@ -280,11 +280,11 @@ const personalRulesCrosswalk = Object.freeze([
   ['PR28', 'Existing contract requires only its exact file within authorized operation.', PERSONAL_RULES_CURRENT_ID, 'Existing contract applies only to exact file in authorized operation.', 'clarified'],
   ['PR29', 'Main task stays live through correction/audit/rule/support work.', PERSONAL_RULES_CURRENT_ID, 'Main task stays live through correction/audit/rule/support work.', 'preserved'],
   ['PR30', 'Continuity reference=>retrieval only.', PERSONAL_RULES_CURRENT_ID, 'Continuity reference=>retrieve only.', 'clarified'],
-  ['PR31', 'Before using/revising/claiming existing work: retrieve newest canonical source in context', PERSONAL_RULES_CURRENT_ID, 'Before using/revising/claiming work, retrieve newest canonical source in context', 'clarified'],
+  ['PR31', 'Before using/revising/claiming existing work: retrieve newest canonical source in context', PERSONAL_RULES_CURRENT_ID, 'Before use/revision/claim, retrieve newest canonical source', 'clarified'],
   ['PR32', 'search exact/rare terms', PERSONAL_RULES_CURRENT_ID, 'search exact/rare terms', 'preserved'],
   ['PR33', 'Fragment/one failed search proves neither completeness nor absence.', PERSONAL_RULES_CURRENT_ID, 'Fragment/failed search proves neither completeness nor absence.', 'clarified'],
   ['PR34', 'Preserve unresolved shorthand; ask only if blocked.', PERSONAL_RULES_CURRENT_ID, 'Preserve unresolved shorthand; ask only if blocked.', 'preserved'],
-  ['PR35', 'Activate applicable CORE+ handlers each turn.', PERSONAL_RULES_CURRENT_ID, 'Activate applicable CORE+ handlers each turn.', 'preserved'],
+  ['PR35', 'Activate applicable CORE+ handlers each turn.', PERSONAL_RULES_CURRENT_ID, 'Each turn retrieve/apply triggered current handlers', 'clarified', [[PERSONAL_RULES_EXPANDED_ID, 'Before every substantive response, silently classify the request and activate the applicable scope, retrieval, CORE+ project-handler']]],
   ['PR36', 'ML* activates only for material/explicit work on Polymyth, Meaninglib, Seminar Schools, Mephistodata, Devil\'s Diary, named star files, CORE, CORE+', PERSONAL_RULES_CURRENT_ID, 'ML* activates only for material/explicit work on Polymyth, Meaninglib, Seminar Schools, Mephistodata, Devil\'s Diary, named star files, CORE, CORE+', 'preserved'],
   ['PR37', 'generic project/site/book/file/ZIP/audit/methodology/citation/mythology/philosophy mentions do not activate', PERSONAL_RULES_CURRENT_ID, 'generic project/site/book/file/ZIP/audit/methodology/citation/mythology/philosophy mentions do not activate', 'preserved'],
   ['PR38', 'Canonical ML*: https://seminarschools.com/polymyth/methodologylist/; cold-load CORE+ map: https://seminarschools.com/polymyth/methodologylist-coreplus.txt; full text: https://seminarschools.com/polymyth/methodologylist.txt.', PERSONAL_RULES_CURRENT_ID, 'Canonical ML*: https://seminarschools.com/polymyth/methodologylist/; cold-load CORE+ map: https://seminarschools.com/polymyth/methodologylist-coreplus.txt; full text: https://seminarschools.com/polymyth/methodologylist.txt.', 'preserved'],
@@ -299,7 +299,7 @@ const personalRulesCrosswalk = Object.freeze([
   ['PR47', 'verify actual failing surface/constraint first', PERSONAL_RULES_CURRENT_ID, 'verify failing surface/constraint first', 'clarified'],
   ['PR48', 'Changed methodology=>canonical ML* owner', PERSONAL_RULES_CURRENT_ID, 'Changed methodology=>canonical ML* owner', 'preserved'],
   ['PR49', 'no random durable file', PERSONAL_RULES_CURRENT_ID, 'no random durable file', 'preserved'],
-  ['PR50', 'Follow user method; deliberation tentative.', PERSONAL_RULES_CURRENT_ID, 'Follow user method; deliberation tentative.', 'preserved'],
+  ['PR50', 'Follow user method; deliberation tentative.', PERSONAL_RULES_CURRENT_ID, 'Follow user method.', 'strengthened', [[PERSONAL_RULES_CURRENT_ID, 'Named method/ML*-active register=>load current owner; owner sets form.'], [PERSONAL_RULES_CURRENT_ID, 'Deliberation tentative.']]],
   ['PR51', 'Ask only if missing authority, irreducible contradiction, authorship, costly default, or genuine choice blocks work', PERSONAL_RULES_CURRENT_ID, 'Ask only if authority/irreducible contradiction/authorship/costly default/genuine choice blocks', 'clarified'],
   ['PR52', 'exhaust fixes', PERSONAL_RULES_CURRENT_ID, 'exhaust fixes', 'preserved'],
   ['PR53', 'Ordinary meaning; no ambiguity/evasion.', PERSONAL_RULES_CURRENT_ID, 'Ordinary meaning; no ambiguity/evasion.', 'preserved'],
@@ -359,7 +359,7 @@ for (const [rowId, priorNeedle, currentId, currentNeedle, status, additional = [
   }
 }
 const personalRulesCrosswalkHash = sha256(JSON.stringify(personalRulesCrosswalk));
-if (personalRulesCrosswalkHash !== '6ec9203fbf90b5e03969d7754aa5e70f557da1dcc57be0b1323a4dbcdb76608b') failures.push(`Personal Rules crosswalk hash drifted (${personalRulesCrosswalkHash})`);
+if (personalRulesCrosswalkHash !== '16b89e3aa3137113b0cd1bb290a60e9dee1b0b5ebdc90c8ca7d517269eee27ad') failures.push(`Personal Rules crosswalk hash drifted (${personalRulesCrosswalkHash})`);
 
 // Compression-sensitive unions and the two universal safeguards recovered by
 // this conversation receive explicit behavioral locks beyond row presence.
@@ -367,6 +367,7 @@ requireIdText(PERSONAL_RULES_MAP_ID, 'b', 'CORE+ is every other current Mephisto
 requireIdText(PERSONAL_RULES_EXPANDED_ID, 'b', 'unresolved contradictions or tensions', 'the unresolved-tension preservation for PR71');
 requireIdText(PERSONAL_RULES_CURRENT_ID, 'b', 'bare use/review/audit/compare/critique/run-through => analysis only', 'the universal bare-use analysis-only trigger');
 requireIdText(PERSONAL_RULES_CURRENT_ID, 'b', 'Repetition keeps target/scope; adds no authority/presumed defect.', 'the universal repeated-audit scope and no-presumed-defect trigger');
+requireIdText(PERSONAL_RULES_CURRENT_ID, 'b', 'Named method/ML*-active register=>load current owner; owner sets form.', 'the fail-closed named-method and ML*-active register owner trigger');
 
 for (const [caseId, condition, label] of [
   ['PRB-01', String(entryById(PERSONAL_RULES_CURRENT_ID).b).includes('generic project/site/book/file/ZIP/audit/methodology/citation/mythology/philosophy mentions do not activate'), 'generic philosophy and audit language leaves ML* inactive'],
@@ -377,7 +378,7 @@ for (const [caseId, condition, label] of [
   ['PRB-06', String(entryById('method-comparative-corpus-integrity-2026-08-23').b).includes('Rank together only values measured on a declared common scale.'), 'incomparable popularity measures stay separate'],
   ['PRB-07', String(entryById('coreplus-handler-current-turn-scope-semantic-fidelity-2026-08-23').b).includes('verified direct lexical use, explicit source-defined equivalent, structural analogue, secondary attribution, and unverified or AI-generated discovery lead'), 'thinker and term lineage statuses remain distinct'],
   ['PRB-08', String(entryById('method-human-artifact-ml-independence-2026-08-23').b).includes('Philosophical importance, beauty, or presence in the PDF is insufficient by itself.'), 'PDF presence does not authorize ML admission'],
-  ['PRB-09', String(entryById('coreplus-current-map-amendment-2026-08-26').b).includes('A named analytical method loads that method and its source and fidelity gates.'), 'analytical method invocation does not trigger publication scaffolding'],
+  ['PRB-09', String(entryById('coreplus-current-map-amendment-2026-08-26').b).includes('A named analytical method retrieves its exact current canonical owner before drafting; failed retrieval blocks the dependent answer.'), 'analytical method invocation retrieves its exact owner and does not trigger publication scaffolding'],
   ['PRB-10', String(entryById('coreplus-handler-named-method-output-certification-2026-08-23').b).includes('explicitly requested article, entry, book, page, or other public-facing artifact'), 'named publication request loads its firewall'],
   ['PRB-11', String(entryById(PERSONAL_RULES_CURRENT_ID).b).includes('AI-generated question=>run OA first'), 'assistant-generated questions universally activate Ouroborosanalyses'],
   ['PRB-12', String(entryById(PERSONAL_RULES_CURRENT_ID).b).includes('received user question/audit alone≠OA'), 'received user questions and audits do not falsely activate Ouroborosanalyses'],
@@ -454,16 +455,18 @@ const integrationContracts = [
   ['coreplus-handler-ouroborosanalyses', 'b', 'Receiving an ordinary user question and generic audit do not activate it.', 'user-question and generic-audit negative OA trigger'],
   ['coreplus-handler-ouroborosanalyses', 'b', 'the assistant is about to generate or ask a question', 'question-generation positive OA trigger'],
   ['coreplus-handler-ouroborosanalyses', 'b', 'report zero when none survive', 'zero-residue OA dispatch'],
+  ['coreplus-handler-ouroborosanalyses', 'b', 'the exact four-paragraph current owner governs', 'exact current OA dispatch'],
+  ['coreplus-handler-ouroborosanalyses', 'b', 'The exact May 2026 body remains unchanged only at corehistory-ouroborosanalyses-whole-conversation-paradox-hijack-2026-05.', 'history-only May OA preservation'],
   ['coreplus-handler-ouroborosanalyses', 'xc', 'its internal Step-2 questions do not start nested runs', 'active-run non-reentrancy guard'],
   ['coreplus-handler-ouroborosanalyses', 'xc', 'Outside an active run, an assistant-generated question activates exactly one Ouroborosanalyses run.', 'inactive question starts exactly one OA run'],
   ['coreplus-handler-ouroborosanalyses', 'xc', 'Receiving a user question or a generic audit activates none.', 'received-question and generic-audit zero-run guard'],
-  ['method-ouroborosanalyses-current-2026-08-23', 'b', 'review the whole conversation, not just the current turn', 'whole-conversation scope'],
-  ['method-ouroborosanalyses-current-2026-08-23', 'b', 'The genuine-unanswerable IS the terminus.', 'genuine-unanswerables terminus'],
-  ['method-ouroborosanalyses-current-2026-08-23', 'b', 'Good ouroborosanalyses terminate in paradox', 'paradox terminus'],
-  ['method-ouroborosanalyses-current-2026-08-23', 'b', 'ALL GENERATED QUESTIONS ARE / SHOULD INHERENTLY BE OUROBOROSANALYSES', 'question-generation hijack'],
-  ['method-ouroborosanalyses-current-2026-08-23', 'b', 'The plural form ouroborosanalyses is mandatory', 'plural-only terminology'],
-  ['method-ouroborosanalyses-current-2026-08-23', 'xc', 'if none survive, report zero and manufacture no paradox or unresolved residue', 'later zero-residue integration control'],
-  ['method-ouroborosanalyses-current-2026-08-23', 'xc', 'A nonempty good remainder ends in a real paradox rather than a patchable contradiction.', 'conditional paradox integration control'],
+  ['method-ouroborosanalyses-current-2026-08-23', 'b', 'First, review the whole conversation.', 'whole-conversation scope'],
+  ['method-ouroborosanalyses-current-2026-08-23', 'b', 'Fourth, return only the genuinely unanswerable residue.', 'genuine-unanswerables terminus'],
+  ['method-ouroborosanalyses-current-2026-08-23', 'b', 'Zero residue is valid and is delivered as: Zero genuine unanswerables remain.', 'zero-residue terminus'],
+  ['method-ouroborosanalyses-current-2026-08-23', 'b', 'QUESTION-GENERATION HIJACK.', 'question-generation hijack'],
+  ['method-ouroborosanalyses-current-2026-08-23', 'b', 'The plural form Ouroborosanalyses is mandatory', 'plural-only terminology'],
+  ['method-ouroborosanalyses-current-2026-08-23', 'xc', 'The four-paragraph body is the exact current operational form.', 'current-form integration control'],
+  ['method-ouroborosanalyses-current-2026-08-23', 'xc', 'If the user asks about the method, audit the method before its product.', 'method-first integration control'],
   ['method-ouroboros-depth-escalation-current-2026-08-23', 'b', 'A repeated generic audit goes deeper into the same frozen target and scope.', 'generic-audit depth without target shift'],
   ['method-ouroboros-depth-escalation-current-2026-08-23', 'b', 'A repeated Ouroborosanalyses reruns its exact whole-conversation four steps.', 'OA repeat preserves whole conversation'],
   ['method-command-list-current-2026-08-23', 'b', 'update only the currently named ML* target from the current authorized source scope', 'scoped Meaninglib command'],
@@ -538,10 +541,10 @@ for (const [query, expectedId] of [
 const historicalAudit = entryById('corehistory-audit-auto-capture-auto-zip-2026-05-29');
 if (historicalAudit.s !== 'corehistory') failures.push('stale automatic AUDIT owner remains active');
 const exactCurrentBodyHashes = Object.freeze({
-  'coreplus-current-map-amendment-2026-08-26': '25113e059ef4466640fa5955a004ad597f4605b44f3ee12ec957095d6af01ec2',
-  'coreplus-handler-current-turn-scope-semantic-fidelity-2026-08-23': '9f4d041deab3b943eebae13fcdb4611cf7642ee9e31d0d25652de6618516dee9',
+  'coreplus-current-map-amendment-2026-08-26': 'a4d84f7b5d0e78e2e0e9cc4390643f1fc8f2f5b536983b4052025d6f157d36cc',
+  'coreplus-handler-current-turn-scope-semantic-fidelity-2026-08-23': '405374e547301d0be0fb7327e0358c2158168e5ec7ca2784e4ec45c868c287b0',
   'method-audit-current-scope-2026-08-23': '942aa8e32a56c9b6116d5edbd48c40679c5fc5af6d64566d9307b5a085d93f40',
-  'method-comparative-corpus-integrity-2026-08-23': 'ecb81c7e8005bd8edc58d1062bc0f515c01d40341a5c53a7f6f606cc071c7193',
+  'method-comparative-corpus-integrity-2026-08-23': '87428139d0832f21e246a3933071c30a3a595c3e3b0ae8f308bdf692c6333f0b',
   'coreplus-handler-named-method-output-certification-2026-08-23': 'afe6bf10971441f41325b1b019f44fec508706816fa885e70deb68670e5cd7e9',
   'method-human-artifact-ml-independence-2026-08-23': '995c9d80b5ac65a8a88a78c1cda122e68427b4656e664b53687259fe82584d60',
   'method-ouroborossyntheses-2026-08-23': 'a0e0d26de1c70897156bc8bb4789f9bca441d4f415d9ea6fc3ede1f4e617c880',
@@ -551,8 +554,8 @@ const exactCurrentBodyHashes = Object.freeze({
   'method-selection-architecture-operational-extraction-2026-08-23': '8c9e09013fa6e827021412bf596a3f8ddc41200b18cc7ca97ae0dc06cd034561',
   'method-expulsive-absorptive-predatory-loops-2026-08-23': '45c858e162965d56f94ad1f289a0b26400de135efa36a3b967fb6096c29252cc',
   'method-connected-seminar-collective-process-control-2026-08-23': '8e612bd91b27ff789e322014aade4fa866a2aea5e8eb38cd8279ac993ba45045',
-  'coreplus-handler-ouroborosanalyses': 'c913057f252d1279db486472c9a26c948e29c54a9ac85d1843d420b351c20d18',
-  'method-ouroborosanalyses-current-2026-08-23': '26ca1b7dd32608be71c3cf23711fdf49d05971514a172ede3acdf9e36e0e3d91',
+  'coreplus-handler-ouroborosanalyses': '148fb541673e0725826a3ac8ad5fb96e68044c98bb74994fe032e88cc814672a',
+  'method-ouroborosanalyses-current-2026-08-23': '24868fe6f70cef95fb8a871331253a7d27f3796884cb4397e3f9b740844ee3f5',
   'method-ouroboros-depth-escalation-current-2026-08-23': '1a124de466c0fe953a7530d26cbb47b09b53c4ae066212adcc34b23c52d499ed',
   'method-command-list-current-2026-08-23': '72736f97e4a6023313c4285d9badb819242195da05ca7f5b6242ec7e7c7d1594',
   'coreplus-handler-personal-rules-equivalence-2026-08-23': '37b7ce38bba3d7bb98841a8e2c86f17323bedcb0a8eab1a4aaaa63ba732d2ce5',
@@ -644,8 +647,8 @@ for (const relative of [
 requireText('polymyth/methodologylist-coreplus.txt', 'Mearsheimer–Mishlove distinction', 'the generated Mearsheimer–Mishlove dispatch');
 requireText('polymyth/methodologylist-coreplus.txt', 'Personal Rules and portable CORE rewrite-equivalence gate', 'the generated Personal Rules equivalence gate');
 requireText('polymyth/methodologylist-corehistory.txt', 'ALL GENERATED QUESTIONS ARE / SHOULD INHERENTLY BE OUROBOROSANALYSES', 'the preserved historical question-hijack body');
-requireText('polymyth/methodologylist-degorgonification.txt', 'Good ouroborosanalyses terminate in paradox', 'the generated exact current Ouroborosanalyses owner');
-requireText('polymyth/methodologylist-degorgonification.txt', 'ALL GENERATED QUESTIONS ARE / SHOULD INHERENTLY BE OUROBOROSANALYSES', 'the generated exact current question-hijack rule');
+requireText('polymyth/methodologylist-degorgonification.txt', 'FOUR STEPS. First, review the whole conversation.', 'the generated exact current Ouroborosanalyses owner');
+requireText('polymyth/methodologylist-degorgonification.txt', 'QUESTION-GENERATION HIJACK. Before the assistant generates or asks a question outside an active run', 'the generated exact current question-hijack rule');
 for (const relative of [
   'polymyth/methodologylist/methodology/index.html',
   'public/polymyth/methodologylist/methodology/index.html',

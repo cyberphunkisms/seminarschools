@@ -248,6 +248,14 @@ class LegacyIcsTests(unittest.TestCase):
                 json.dumps({'events': [event]}),
                 encoding='utf-8',
             )
+            (root / 'polymythseminars/browse.json').write_text(
+                json.dumps({'events': [event]}),
+                encoding='utf-8',
+            )
+            (root / 'polymythseminars/watchlist.json').write_text(
+                json.dumps({'items': []}),
+                encoding='utf-8',
+            )
             (root / 'data/polymythcal-publication-surfaces.json').write_text(
                 json.dumps({
                     '_schema': 'polymythcal-publication-surfaces-v2',
@@ -340,7 +348,7 @@ class PublicationSurfaceTests(unittest.TestCase):
             self.assertNotIn('end_date', item)
             self.assertEqual(item['date_status'], 'awaiting-confirmed-date')
 
-    def test_private_corpus_and_monitoring_route_quarantine(self):
+    def test_private_corpus_stable_watchlist_details_and_calendar_quarantine(self):
         self.assertEqual(self.private_mirror, self.canonical)
         self.assertFalse((ROOT / 'public/polymythseminars/events.json').exists())
         sitemap = (ROOT / 'sitemap.xml').read_text(encoding='utf-8')
@@ -363,18 +371,41 @@ class PublicationSurfaceTests(unittest.TestCase):
                 french_ids.add(legacy_id)
                 ics_ids.add(legacy_id)
             for route_id in english_ids:
-                self.assertFalse((ROOT / f'polymythseminars/events/{route_id}/index.html').exists())
-                self.assertFalse((ROOT / f'public/polymythseminars/events/{route_id}/index.html').exists())
+                source = ROOT / f'polymythseminars/events/{route_id}/index.html'
+                published = ROOT / f'public/polymythseminars/events/{route_id}/index.html'
+                self.assertTrue(source.exists())
+                self.assertTrue(published.exists())
+                self.assertEqual(source.read_bytes(), published.read_bytes())
                 self.assertNotIn(
                     f'<loc>https://seminarschools.com/polymythseminars/events/{route_id}/</loc>',
                     sitemap,
                 )
             for route_id in french_ids:
-                self.assertFalse((ROOT / f'polymythseminars/fr/events/{route_id}/index.html').exists())
-                self.assertFalse((ROOT / f'public/polymythseminars/fr/events/{route_id}/index.html').exists())
+                source = ROOT / f'polymythseminars/fr/events/{route_id}/index.html'
+                published = ROOT / f'public/polymythseminars/fr/events/{route_id}/index.html'
+                self.assertTrue(source.exists())
+                self.assertTrue(published.exists())
+                self.assertEqual(source.read_bytes(), published.read_bytes())
                 self.assertNotIn(
                     f'<loc>https://seminarschools.com/polymythseminars/fr/events/{route_id}/</loc>',
                     sitemap,
+                )
+            for locale_path in ('events', 'fr/events'):
+                detail = (
+                    ROOT / f'polymythseminars/{locale_path}/{event_id}/index.html'
+                ).read_text(encoding='utf-8')
+                self.assertRegex(
+                    detail,
+                    r'<meta\b(?=[^>]*name=["\']robots["\'])(?=[^>]*content=["\']noindex,follow["\'])[^>]*>',
+                )
+                self.assertIsNone(re.search(r'<time\b[^>]*\bdatetime\s*=', detail, flags=re.I))
+                self.assertIsNone(
+                    re.search(
+                        r'<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>'
+                        r'[\s\S]*?["\']@type["\']\s*:\s*["\']Event["\']',
+                        detail,
+                        flags=re.I,
+                    )
                 )
             for route_id in ics_ids:
                 self.assertFalse((ROOT / f'polymythseminars/ics/{route_id}.ics').exists())
@@ -562,4 +593,3 @@ class CurrentDataConsolidationTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

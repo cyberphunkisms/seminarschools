@@ -6,7 +6,7 @@ const {parseSeedWithAddenda} = require('./lib/parse-seed-with-addenda');
 const {generatedAt} = require('./lib/deterministic-timestamp');
 
 const ROOT = process.cwd();
-const releaseTimestamp = JSON.parse(fs.readFileSync(path.join(ROOT, 'RELEASE_MANIFEST.json'), 'utf8')).generated_at || '1970-01-01T00:00:00Z';
+const reportTimestamp = generatedAt();
 const OUT = path.join(ROOT, 'hf_export');
 const reportLines = [];
 let failures = 0;
@@ -56,6 +56,62 @@ function canonicalMlId(entry) {
   const title = String(entry.t || '<untitled>').trim();
   return String(entry.id || '').trim() || `ml:${section}:${slugify(title)}:${hash(`${section}\0${title}`).slice(0, 12)}`;
 }
+function extractCrossrefs(text) {
+  const refs = new Set();
+  const re = /\b(ml|bb|mc|cc|aa|core|aitr|cx)\*/gi;
+  let match;
+  while ((match = re.exec(String(text || '')))) refs.add(match[0].toLowerCase());
+  return [...refs].sort();
+}
+function canonicalMlRow(entry, exportedAt) {
+  const section = String(entry.s || 'unknown').trim();
+  const title = String(entry.t || '<untitled>').trim();
+  const canonicalId = String(entry.id || '').trim();
+  const id = canonicalId || `ml:${section}:${slugify(title)}:${hash(`${section}\0${title}`).slice(0, 12)}`;
+  const originalBody = String(entry.b || '');
+  const body = sanitizeForHfExport(originalBody);
+  const sectionMirror = `polymyth/methodologylist-${section}.txt`;
+  const currentStatus = String(entry.xc || '').trim();
+  const tags = String(entry.tg || '').split(',').map(value => value.trim()).filter(Boolean);
+  const crossrefs = [...new Set([
+    ...extractCrossrefs(originalBody),
+    ...(Array.isArray(entry.xr) ? entry.xr.map(value => String(value).trim()).filter(Boolean) : []),
+  ])].sort();
+  return {
+    id,
+    star_file: 'ml',
+    title,
+    body,
+    section,
+    source_html: 'polymyth/methodologylist/index.html',
+    source_txt: exists(sectionMirror) ? sectionMirror : '',
+    canonical_status: 'canonical_html',
+    current_status: currentStatus,
+    route: canonicalId
+      ? `https://seminarschools.com/polymyth/methodologylist/#${canonicalId}`
+      : `https://seminarschools.com/polymyth/methodologylist/?section=${encodeURIComponent(section)}`,
+    tags: ['ml', section, ...tags],
+    crossrefs,
+    record_type: 'entry',
+    body_redacted: body !== originalBody,
+    source_hash: hash(originalBody),
+    exported_at: exportedAt,
+    embedding_text: ['ml', section, title, currentStatus, body].filter(Boolean).join('\n\n').slice(0, 120000),
+  };
+}
+function exactRows(label, actual, expected) {
+  if (actual.length !== expected.length) {
+    fail(`${label} row count ${actual.length} differs from expected ${expected.length}`);
+    return;
+  }
+  for (let index = 0; index < expected.length; index += 1) {
+    if (JSON.stringify(actual[index]) !== JSON.stringify(expected[index])) {
+      fail(`${label} row ${index + 1} differs from canonical export object (${expected[index].id})`);
+      return;
+    }
+  }
+  pass(`${label} exactly matches ${expected.length} canonical ML rows`);
+}
 
 function main() {
   const required = [
@@ -90,6 +146,28 @@ function main() {
   else pass(`ML row count exactly matches canonical: ${mlRows.length}`);
   if ((counts.ml || 0) !== canonicalEntries.length) fail(`all_meaninglib_rows ML count ${counts.ml || 0} differs from canonical ${canonicalEntries.length}`);
   else pass(`all_meaninglib_rows contains exactly ${canonicalEntries.length} canonical ML rows`);
+
+  const mlTimestamps = new Set(mlRows.map(row => row.exported_at));
+  if (mlTimestamps.size !== 1) {
+    fail(`canonical ML rows use ${mlTimestamps.size} different export timestamps`);
+  } else {
+    const expectedMlRows = canonicalEntries.map(entry => canonicalMlRow(entry, [...mlTimestamps][0]));
+    exactRows('main methodologylist JSONL', mlRows, expectedMlRows);
+    exactRows('all_meaninglib_rows ML subset', all.filter(row => row.star_file === 'ml'), expectedMlRows);
+
+    const expectedSections = [...new Set(expectedMlRows.map(row => row.section))].sort();
+    const sectionFiles = listJsonl('hf_export/data/ml/sections');
+    const expectedSectionFiles = expectedSections.map(section => `hf_export/data/ml/sections/${section}.jsonl`).sort();
+    if (JSON.stringify(sectionFiles) !== JSON.stringify(expectedSectionFiles)) {
+      fail(`ML section JSONL file set differs from canonical sections: ${sectionFiles.join(', ')}`);
+    } else {
+      pass(`ML section JSONL file set exactly matches all ${expectedSections.length} canonical sections`);
+    }
+    for (const section of expectedSections) {
+      const sectionRows = readJsonl(`hf_export/data/ml/sections/${section}.jsonl`);
+      exactRows(`section JSONL ${section}`, sectionRows, expectedMlRows.filter(row => row.section === section));
+    }
+  }
   for (const [star, min] of Object.entries({ bb: 150, mc: 150, cc: 200 })) {
     if ((counts[star] || 0) < min) fail(`${star} row count too low: ${counts[star] || 0} < ${min}`);
     else pass(`${star} row count ${counts[star]}`);
@@ -108,9 +186,15 @@ function main() {
     fail(`ML section counts differ from canonical: ${JSON.stringify(exportedCounts)}`);
   } else pass('ML section counts exactly match canonical Methodologylist');
 
+  const mlRowsById = new Map();
+  for (const row of mlRows) {
+    const bucket = mlRowsById.get(row.id) || [];
+    bucket.push(row);
+    mlRowsById.set(row.id, bucket);
+  }
   for (const entry of canonicalEntries) {
     const expectedId = canonicalMlId(entry);
-    const matches = mlRows.filter(row => row.id === expectedId);
+    const matches = mlRowsById.get(expectedId) || [];
     const section = entry.s || 'unknown';
     const sectionMirror = `polymyth/methodologylist-${section}.txt`;
     const expectedTxt = exists(sectionMirror) ? sectionMirror : '';
@@ -193,7 +277,7 @@ function main() {
 
   const reportPath = path.join(ROOT, 'hf_export/reports/verification_report.md');
   fs.mkdirSync(path.dirname(reportPath), { recursive: true });
-  fs.writeFileSync(reportPath, `# Meaninglib dataset verification report\n\nGenerated: ${releaseTimestamp}\n\nFailures: ${failures}\nWarnings: ${warnings}\n\n${reportLines.map(line => `- ${line}`).join('\n')}\n`, 'utf8');
+  fs.writeFileSync(reportPath, `# Meaninglib dataset verification report\n\nGenerated: ${reportTimestamp}\n\nFailures: ${failures}\nWarnings: ${warnings}\n\n${reportLines.map(line => `- ${line}`).join('\n')}\n`, 'utf8');
 
   if (failures) {
     console.error(`Meaninglib dataset verification failed with ${failures} failure(s).`);

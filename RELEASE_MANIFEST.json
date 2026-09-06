@@ -8,22 +8,667 @@
   "polymythcal_discovery_asset_version": "20260826-discovery-v2",
   "ml_star_update": {
     "release_id": "2026-08-26-mephistodata-execution-controlled-archive-synthesis",
+    "amended_at": "2026-09-05",
+    "amendment": "degorgonified-feminism-retrieval-enforcement",
+    "amendment_release_id": "core-coreplus-mephistodata-degorgonified-feminism-retrieval-enforcement-complete-2026-09-05",
+    "amendment_generated_at": "2026-09-05T20:15:00Z",
+    "prior_amendments": [
+      "internal-material-retrieval-boundary",
+      "writing-composition-and-lexical-repetition-hardening",
+      "non-strawman-current-position-correction",
+      "nonstrawman-writing-and-article-synthesis",
+      "deliverable-accounting-anti-waste",
+      "mephistodata-activation-register-hardening",
+      "mephistodata-activation-enforcement",
+      "bottom-up-definition-defect-provenance-internal-retrieval",
+      "truthful-work-claims-and-false-completion-correction",
+      "feminism-academic-research-gorgonification-gate"
+    ],
     "source": "ML_STAR_UPDATE_SOURCE_GORGON_FREE_SPEECH_EVIDENCE_CONTROL_2026-08-24.md",
     "source_sha256": "2dde9179d4c4d3f42aef76523fa909310b0f88db27fa879a8730ad6aefa015bb",
-    "canonical_entries": 1218,
+    "canonical_entries": 1224,
+    "corehistory_entries": 30,
+    "register_recovery_source": "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_RECOVERY_2026-08-30.md",
+    "register_recovery_source_sha256": "663970ac0b0a08ae775039e9e6bfa9cbdfa18905cd72c9098d4f35a38b64e1a2",
+    "deliverable_accounting_source": "ML_STAR_UPDATE_SOURCE_DELIVERABLE_ACCOUNTING_ANTI_WASTE_2026-08-29.md",
+    "deliverable_accounting_source_sha256": "405065c7c0549743f2bef012243030a7480b6cbd3f6f2d87aba3fc2128a30730",
+    "bottom_up_definition_source": "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_BOTTOM_UP_DEFINITION_DEFECT_PROVENANCE_INTERNAL_RETRIEVAL_2026-09-03.md",
+    "bottom_up_definition_source_sha256": "9a67797e48eb6344d935be467c4162c20b0a4be469107114359a911e26dba50a",
+    "truthful_work_claim_source": "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md",
+    "truthful_work_claim_source_sha256": "e6a31b2fb8fd258b01b825acb790eb62019b07a3c2831e0780507bf2863f4240",
+    "feminism_academic_research_source": "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md",
+    "feminism_academic_research_source_sha256": "cf53a2a361d42763be44afe6d7094ef2efb79330b841dc5869b1e06c5153074d",
+    "degorgonified_feminism_source": "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md",
+    "degorgonified_feminism_source_sha256": "2a1c6999efaf472f70d12aedeabf5eaccab130ce2c5b123fa4553921373746a8",
+    "truthful_work_claim_screenshots": {
+      "UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/b4f6ab5a-4eb3-44d0-943e-41acd52faec9.png": "eb1d871ec1a9c8d65605c2276c00acfd09570269b55e309e72d5848ab07edb8c",
+      "UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/3066e1d8-f6f9-4267-a948-90c076e29f93.png": "f5de65fff250497561cabf2d0ee504660fc6f8f4f8ecf86f5fa33fc1637b2632"
+    },
     "current_map": "coreplus-current-map-amendment-2026-08-26",
     "execution_owner": "coreplus-handler-mephistodata-execution-gates-2026-08-26",
+    "writing_owner": "coreplus-handler-writing-composition-delivery-2026-08-29",
+    "writing_source": "data/author-sources/saul-writing-rules-deep-scan-2026-08-29.md",
+    "writing_source_sha256": "13e6856182bb32642757cdfaafdc6bc7a4b92190e7a43cfe5e73c793ebc49a08",
+    "writing_rule_inventory": {
+      "preserved_baseline": 237,
+      "current_additions_and_sharpenings": 32,
+      "total_numbered_rules": 269,
+      "active_runtime_rules": 84
+    },
+    "writing_behavioral_fixtures": {
+      "positive": 23,
+      "negative": 34,
+      "total": 57,
+      "mutations": 8,
+      "rule_families": 17,
+      "detectors": 33
+    },
     "controlled_archive_owner": "method-controlled-archive-evidence-institutional-metrics-2026-08-26",
     "behavioral_fixtures": {
-      "positive": 20,
-      "negative": 13,
-      "total": 33
+      "positive": 52,
+      "negative": 87,
+      "total": 139
+    },
+    "project_adjudication_behavioral_fixtures": {
+      "positive": 71,
+      "negative": 144,
+      "total": 215,
+      "adjudication_v2_total": 151,
+      "inherited_base_total": 64
+    },
+    "register_behavioral_fixtures": {
+      "positive": 7,
+      "negative": 26,
+      "total": 33,
+      "source_binding": 6,
+      "register_fusion": 16,
+      "ouroboros_trace": 11,
+      "hostile_mutations": 17
+    },
+    "register_contract": {
+      "default_opener": "Mephistodata would say:",
+      "explicit_one_response_bloom_opener": "Mephistodata bloomed:",
+      "next_response_resets_to_default": true,
+      "requires_pm15_mephisto_data_fusion": true,
+      "named_method_retrieval_fail_closed": true,
+      "ouroboros_owner": "method-ouroborosanalyses-current-2026-08-23",
+      "ouroboros_final_form": "genuine-unanswerable-residue-only; zero-valid"
+    },
+    "portable_core": {
+      "id": "core-personal-rules-current-2026-08-12",
+      "utf16_units": 5000,
+      "sha256": "f34b4de5dbef3526b1ae54dc31941325322e85c3d720efd50e092e6687360bc0"
+    },
+    "public_build_lock": {
+      "owner_schema": "seminar-schools-public-build-lock-v2",
+      "stage_schema": "seminar-schools-public-build-stage-v1",
+      "recovery": "same-host cryptographic owner/stage pair with conclusively dead process only",
+      "rejected_states": [
+        "live",
+        "foreign",
+        "malformed",
+        "legacy",
+        "unverifiable",
+        "symlinked",
+        "mismatched",
+        "fresh",
+        "lockless-stage",
+        "rollback-present",
+        "future-dated"
+      ]
+    },
+    "artifact_sha256": {
+      "ML_EXECUTION_AND_CONTROLLED_ARCHIVE_SYNTHESIS_2026-08-26.md": "f5f232ed4a4e22cc0485f8d2a398b146b0a7fb7409e91056b22fd4b9d8dbc197",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_RECOVERY_2026-08-30.md": "663970ac0b0a08ae775039e9e6bfa9cbdfa18905cd72c9098d4f35a38b64e1a2",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/04648eb9-885c-43c7-ad53-ca6af390fa0c.png": "c266adc33a5ed2e26b9070827813513f44a4c99f5179a2ca87c259807a7ba649",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/097d5008-8e7c-4b24-822f-88a04fd1e7e7.png": "8bbdaafb7b8cac5a363f2f405883987b6527727d952224c903a305eae197b3db",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/0fd75220-92bf-4df1-89e9-a90893430fdc.png": "c28eedccb18fd7927b3a99ba981623ac4bc0dd083f75dd940868d00fce41fb03",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/13912ef0-3924-4d11-bae9-6bab8d294b93.png": "e72acb6b49c89fbbf94bc541fec9382cf5178d1cca38eae887c469372709c7e5",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/a9c4d9d2-16e6-4995-9064-4db5bc5d484e.png": "8b52e0a003f4d0700f7eb280c3f61b748c374323159bf931ff982c947bcd4761",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/b2726035-3129-4117-99ad-76d4ae8c12de.png": "8a91abf20cb69ad749f4b2ad7dc125840289bcba812e1bda5cfd3dc5d1cef51e",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/ca5c05c1-5e8f-4997-9409-0a83f3bbf302.png": "2bdbc33c10c4f3d888d051ffa8a51417a7b3247d6a4da6903fda72060b46a40a",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/d1557ac1-79e1-4038-8521-edba929b8e29.png": "040dd0b4513c2d05b75b0e4d08c05629aa0e5903eacbe9b9e1b026c3afb9028c",
+      "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_BOTTOM_UP_DEFINITION_DEFECT_PROVENANCE_INTERNAL_RETRIEVAL_2026-09-03.md": "9a67797e48eb6344d935be467c4162c20b0a4be469107114359a911e26dba50a",
+      "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md": "cf53a2a361d42763be44afe6d7094ef2efb79330b841dc5869b1e06c5153074d",
+      "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md": "2a1c6999efaf472f70d12aedeabf5eaccab130ce2c5b123fa4553921373746a8",
+      "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md": "e6a31b2fb8fd258b01b825acb790eb62019b07a3c2831e0780507bf2863f4240",
+      "UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/3066e1d8-f6f9-4267-a948-90c076e29f93.png": "f5de65fff250497561cabf2d0ee504660fc6f8f4f8ecf86f5fa33fc1637b2632",
+      "UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/b4f6ab5a-4eb3-44d0-943e-41acd52faec9.png": "eb1d871ec1a9c8d65605c2276c00acfd09570269b55e309e72d5848ab07edb8c",
+      "data/baseline-morality-amendment-scope-contract.json": "45597f78a0bf70d04370cb4fff6b2cb450aa7c932a3fec646a6457489674acc9",
+      "data/futureproofing/aug30-aug31-preservation-contract.json": "b0f5029666b20407e15e9a94f5bd3bc5b10fcc37653ecce44212a204daaac6d4",
+      "data/futureproofing/aug30-package-contents-baseline.json": "42f2ab9667f2d74726eca346d6dd68c63ba15771b2f4eef60582fbe2ca323fd2",
+      "data/futureproofing/aug31-package-contents-baseline.json": "40e0f94e5bf88486d6d16c003ed6e01132e22a366675243b5b8fbe84b260773a",
+      "data/futureproofing/aug31-sep3-preservation-contract.json": "7341f4ebd776ef7c6cb20b2c3bf5ee9c3de998fa5d1d4f8d8b0e492873b807f6",
+      "data/futureproofing/futureproofing-contract.json": "2ef02cab5b135b7e6de41ef68f6bdd5fc469d1a52e12cb4f911cc53c656927c0",
+      "data/futureproofing/public-private-boundary.json": "ba7820bd111848549fe3b290b4f304d611683a37b1b0fd43587211691861f520",
+      "data/futureproofing/sep3-package-contents-baseline.json": "61284f8a2d095599d502c350bc8f8cb12c50776327b86be95783f4dd55aa5a13",
+      "data/futureproofing/sep3-sep5-preservation-contract.json": "8e15244a861a1e70db708238d9c6eff3648f658ad0f5542709a0c88c65ab79e9",
+      "data/futureproofing/sep5-package-contents-baseline.json": "5595b80acf723af19b5ec019f55390d39571940eeb1bb9feffdb3c48ee803b64",
+      "data/futureproofing/sep5-truthful-sep5-feminism-preservation-contract.json": "4f367119680181f2386d8ea00349618f9fef7fbbc2312e7ce4d0d3d32f7d3fdc",
+      "data/futureproofing/sep5-feminism-package-contents-baseline.json": "b864199055b37a1bcfedc0ad879a28795c10233b7cc5f8983db65af79f3bfc20",
+      "data/futureproofing/sep5-feminism-sep5-degorgonified-feminism-preservation-contract.json": "e745bb824070de84da105c35706086940ab439191a179c1b8d4f5649cceeb4ac",
+      "package.json": "f5cd0c2e33742e9948c23644b2b8b7bcb26c3c7a42c9b904c33a293296dae198",
+      "package-lock.json": "5e80412efd98d657bc6da6a2f1db4584d7289b9677c2e786bc8bd47f0ad6d194",
+      "polymyth/methodologylist/index.html": "bf0c36d19f427e8f59baa9d90e2619caa05f0722ea42d670759dd72d992a6e49",
+      "polymyth/methodologylist/mephistodata-register-fixtures.json": "fddbfd52dee03117c53a82bbba4c714a2d3b8b5a98e877a5b8265af8676c1a9d",
+      "polymyth/methodologylist/mephistodata-rule-hardening-addendum.js": "74edacebdd3f8caccc25b71ba5536c38c899ba12ee6cae27a753a0cd12f6ae8b",
+      "polymyth/methodologylist/mythology-integration-addendum.js": "dc35a25e5443f7ae05539b5a740d12ba883ea58d9a53e04f6863041cc48a909a",
+      "scripts/artifact_receipt.py": "d57f186972136f34e6b38e5d941e71d00b72ad82c2cc324ea7f8624a51e73574",
+      "scripts/build-ai-access-pack.js": "f68f9d39664889f515793d7bfaaf7b18d2984118c54629ad8e6ea6215375fdd6",
+      "scripts/build-clean-room-release.py": "0ec852d5b244aff428b779e187aa219a4c34f384b788aae3f4028e905d72def6",
+      "scripts/build-public-deploy.js": "cf76a8d047ddb67138d20c15d65078a8650f6bfdedf34a4893e16e467fb366e2",
+      "scripts/fixtures/futureproofing/aug31-preservation-tampered.json": "afe13de568330252fc45a30e14c7797b5d3f3e5d27d74834233717e88cb62113",
+      "scripts/fixtures/futureproofing/sep3-preservation-tampered.json": "5c7bd59e7254b8cd9366b51bed815c385b911c78cb2220b2fc6590dd6f9bc667",
+      "scripts/fixtures/futureproofing/sep5-feminism-preservation-tampered.json": "df680c57b93af68acfa5d3ff2cbdb5646c5d58476217899b625011283f0a8825",
+      "scripts/fixtures/futureproofing/sep5-degorgonified-feminism-preservation-tampered.json": "8e6a0d3b78ca852c2911c82238ccd86e8e118a90e5c3cd43c05d5f368860dd53",
+      "scripts/fixtures/futureproofing/sep5-preservation-tampered.json": "4ea72424b38a14bde7cf5b58a8978dd1ed75e439ad72d42cc55ecced6f367237",
+      "scripts/fixtures/ml-execution-gates/fixtures.json": "c416308ce5b807433dda46bcd7a168a2baab961724f15e77eb92f67889d041ce",
+      "scripts/fixtures/ml-execution-gates/internal-writing-fixtures.json": "2867860296c65f572386b5b4651b4d5cd80bda0f703cc625756a337c1eaece42",
+      "scripts/fixtures/ml-execution-gates/mephistodata-runtime-gate-hostile-fixtures.json": "1e210ae10aa32b6ddefb34e90601abf3f0834104977be6c35bb86c025a5fd7bc",
+      "scripts/lib/mephistodata-runtime-gate.js": "967791bbdc485e96c8ac15b01fc36c4dbc9f3d663de7a5a3593600936f634874",
+      "scripts/lib/public-build-lock.js": "2b2a766a04e43c681e6c144499c13c2463f06e2c2194a55a82b8dd78b4b82ea9",
+      "scripts/package-complete-current.py": "f61b3b1ef48cff605f23454a174fa2aa0f3261774034151f575286ed92ff7217",
+      "scripts/package-front-facing-mephistodata-release.py": "3d0752deb11fb00183072fd91874d36446bd4aca9a52c0c2c2c4d2c072b03900",
+      "scripts/query-meaninglib.js": "96327a0ea27f412476c6dafde98720476820f5fac27f722837bf09e593ec5dc3",
+      "scripts/test-baseline-morality-amendment-scope.js": "a7720606734888725524fb50de7e88e7200b56f6023d71d91dc540db56c270d0",
+      "scripts/test_futureproofing_contracts.py": "65871d6180bddcda71d542eeff1e945573d34d505e09a11f99b84ec3d43023e0",
+      "scripts/verify-asset-weights.js": "c96fe03186e9220eda160d79bddbecc58e079ca176b85154c79bf50943025ac4",
+      "scripts/verify-audit36-artifact-atomicity.js": "f5cdbab171562957043a97f7a33f0276c16a4f2f4e559846731312323dbdb7a5",
+      "scripts/verify-audit49-build-packaging-efficiency.js": "c5b4223e51477c66ad6fd925ec4ec88561d0b9f6e2d508c72b61b3c9be371115",
+      "scripts/verify-aug31-base-preservation.py": "3fb0d4cfd23731c5100bd6f06e6cc5687b77fb3ec598b131187b41598d561a3d",
+      "scripts/verify-ai-access-pack.js": "975f012f1f64a9ed1c74fe53807eb719d9f237acd06c1655f21dc251f329260b",
+      "scripts/verify-baseline-morality-amendment-scope.js": "ce08d18bd59e6638368855ae5d5d5a3bc2465de3f11577e1ecb1b8703739e027",
+      "scripts/verify-build-idempotence.js": "dc8af9179524a3c2a8de1d0be60a8ccb2b250e3fc1eb943a3a07bfbcb0628272",
+      "scripts/verify-clean-room-release.py": "bc8643872d9f58de0adbfd30a369fb0fd7cd761077fe5c414aef096920fdad6c",
+      "scripts/verify-complete-archive-classes.py": "66e9160a46d50345cd7d9d2a5d82d02842112329551c8ac511e85e3e89c00823",
+      "scripts/verify-futureproofing-base-preservation.py": "0d203281b5a74472f152ee7054e84fee9d1d7e8cd07914611ad0710f14bd54ea",
+      "scripts/verify-meaninglib-search.js": "19951738c674657d4e0d388cda82d3dfed9934b9221380afeafe85afc05d8934",
+      "scripts/verify-mephistodata-runtime-gate.js": "6a1c38e960313807997cd454d85423f4e06f677d5c840d9c40a0c9f853d5ba4c",
+      "scripts/verify-ml-active-form-conflicts.js": "1597fb12a2a2a6257391195393cf8c036ce307e9dbf2e2baa8062797b8c5c462",
+      "scripts/verify-ml-dialectical-hardening.js": "d1660892b6ee807f26b850a9aef87cb6cb81afcd88d19c6b7793c860771198d4",
+      "scripts/verify-ml-execution-gates.js": "94a27f8444c6a27ee79a52a996d4c1f857bd43bc4ad86c066224962cd9b3cd0d",
+      "scripts/verify-ml-project-adjudication-v2.js": "2a3ebbaac09b07a4f2feda6f6b16bcee173d8d7d3bcf3f2acbdba55c307c24fb",
+      "scripts/verify-ml-rhetoric-taxonomy.js": "e7d85d42588a8cd6b8884fd6e219604a0c0f2bc1daa6da1ab51feb3251606341",
+      "scripts/verify-page-size-budget.js": "dc1a1597cfa4d548b1f1d457d846105bf42f9714f348cbf25739c7f6c33538b4",
+      "scripts/verify-predeploy-automation.js": "470c873aa9555bc629b9586673bafd5ad3294191f906b34e112e22b3a7f89a34",
+      "scripts/verify-public-build-lock-recovery.js": "8f5082058d9a7cd7d61bcb923d445e73b1855e94247c826b8448a99773652b6e",
+      "scripts/verify-public-deploy-parity.js": "a75c73ae89d7d253036e9dec9f9145afb5079ee090c3939e1315d43f81888da3",
+      "scripts/verify-public-private-boundary.py": "c8471f7354780041660576f5b536c8fa23d1720cdcacc0b0257d00493ba5309e",
+      "scripts/verify-release-gates.js": "87a1d803d25e17cf081e769cc50cc53e7ad49b5940f722f7122215692f4ebbe1",
+      "scripts/verify-sep3-base-preservation.py": "a76596b29981eba3a9a9f440298db068b66e6566eeb2ff2be8ce9b887d446c10",
+      "scripts/verify-sep5-base-preservation.py": "df8ae8b362fa9369703523d4d955da55f09805497a6162e45d27ed8a97c62fe6",
+      "scripts/verify-sep5-feminism-base-preservation.py": "149169dfbfd67dd45ec964cd0049deaddec5cd3184e250f1623363d18bf8e618",
+      "scripts/verify-sep5-degorgonified-feminism-base-preservation.py": "463081bca39908cff33d9c32e818e991f7b2f245c25ddba24d76586fd323922f"
+    },
+    "prior_provenance_sha256": {
+      "ml_star_update_prior_2026_08_29": "93b8ca00ecafdf11d34194b493bc137b8a0cb6f123614793dab0c4b3c57fdf4e",
+      "non_strawman_current_position_update": "d1ac3e250228688fc614ab560f76ceb99af5756fbce25170c42bc95d88001ba2",
+      "mephistodata_articles_synthesis": "af5dbf22d720e088b602f0337fa0ea12c213a7189b72d8e885e4a74d94646944",
+      "ml_star_update_prior_2026_08_30": "05fbbbcc411aba795c7e71153dbc3a8c5d1eb90f9fc8f07c75bb9658de9225f8",
+      "ml_star_update_prior_2026_09_05": "747537a73dd3ea04d5dd28954767187e012be5f6a764b69ffb0ec042da7b43b2"
+    },
+    "explicit_exclusions": [
+      "Substantive Baseline Morality content is withdrawn and is not introduced by this amendment."
+    ],
+    "deployment": "No deployment performed.",
+    "runtime_gate_behavioral_fixtures": {
+      "positive": 37,
+      "negative": 104,
+      "total": 141
+    },
+    "active_form_conflict_fixtures": {
+      "total": 38
+    },
+    "baseline_morality_amendment_scope": {
+      "inherited_records": 11,
+      "authorization": "sha256-bound-direct-user-authorization"
+    },
+    "public_private_repair": {
+      "forbidden_public_research_paths_removed": 4,
+      "private_source_and_editable_copies_retained": true
+    },
+    "source_baseline_archive": {
+      "name": "seminar-schools-mephistodata-articles-synthesized-complete-2026-08-29.zip",
+      "release_id": "core-coreplus-mephistodata-articles-synthesized-complete-2026-08-29",
+      "sha256": "0a89e165473e26b365a2f12551997667c0fefaefb1c3f63c99a13e6fed381cbe",
+      "bytes": 243941412,
+      "zip_members": 21167
+    },
+    "prior_package_archive": {
+      "name": "seminar-schools-mephistodata-feminism-academic-research-gate-complete-2026-09-05.zip",
+      "release_id": "core-coreplus-mephistodata-feminism-academic-research-gate-complete-2026-09-05",
+      "sha256": "30554bc3ecdc417c0543f6fc181889bdf8d00d40ba6b8c67e091555751fcb285",
+      "bytes": 248013232,
+      "zip_members": 21210
+    },
+    "runtime_gate_host_boundary": {
+      "factory": "createRuntimeGate",
+      "trust_configuration_scope": "host-bootstrap-only",
+      "pre_generation_call": "planRequest",
+      "pre_delivery_call": "configuredGate.assertDeliverable",
+      "draft_scan_verifier_field": "verifyDraftWorkStatusAttestation",
+      "draft_scan_verifier_id_field": "draftVerifierId",
+      "full_draft_scan_required_for_every_delivery": true,
+      "draft_scan_binds_plan_draft_evidence_and_occurrence_claim_ir": true,
+      "local_parser_is_natural_language_completeness_boundary": false,
+      "work_verifier_field": "verifyWorkAttestation",
+      "correction_verifier_field": "verifyCorrectionAttestation",
+      "work_verifier_id_field": "workVerifierId",
+      "correction_verifier_id_field": "correctionVerifierId",
+      "per_delivery_trust_root_injection_allowed": false,
+      "default_export_has_trusted_verifier": false,
+      "self_reported_receipts_are_trusted": false,
+      "caller_selected_trust_labels_are_trusted": false,
+      "verifier_ids_are_cryptographically_authenticated": false,
+      "host_controls_bootstrap_required": true,
+      "host_must_invoke_gate": true,
+      "file_presence_alone_is_host_enforcement": false
     }
+  },
+  "ml_star_update_prior_2026_09_05": {
+    "release_id": "2026-08-26-mephistodata-execution-controlled-archive-synthesis",
+    "amended_at": "2026-09-05",
+    "amendment": "feminism-academic-research-gorgonification-gate",
+    "amendment_release_id": "core-coreplus-mephistodata-feminism-academic-research-gate-complete-2026-09-05",
+    "amendment_generated_at": "2026-09-05T18:45:00Z",
+    "prior_amendments": [
+      "internal-material-retrieval-boundary",
+      "writing-composition-and-lexical-repetition-hardening",
+      "non-strawman-current-position-correction",
+      "nonstrawman-writing-and-article-synthesis",
+      "deliverable-accounting-anti-waste",
+      "mephistodata-activation-register-hardening",
+      "mephistodata-activation-enforcement",
+      "bottom-up-definition-defect-provenance-internal-retrieval",
+      "truthful-work-claims-and-false-completion-correction"
+    ],
+    "source": "ML_STAR_UPDATE_SOURCE_GORGON_FREE_SPEECH_EVIDENCE_CONTROL_2026-08-24.md",
+    "source_sha256": "2dde9179d4c4d3f42aef76523fa909310b0f88db27fa879a8730ad6aefa015bb",
+    "canonical_entries": 1224,
+    "corehistory_entries": 30,
+    "register_recovery_source": "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_RECOVERY_2026-08-30.md",
+    "register_recovery_source_sha256": "663970ac0b0a08ae775039e9e6bfa9cbdfa18905cd72c9098d4f35a38b64e1a2",
+    "deliverable_accounting_source": "ML_STAR_UPDATE_SOURCE_DELIVERABLE_ACCOUNTING_ANTI_WASTE_2026-08-29.md",
+    "deliverable_accounting_source_sha256": "405065c7c0549743f2bef012243030a7480b6cbd3f6f2d87aba3fc2128a30730",
+    "bottom_up_definition_source": "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_BOTTOM_UP_DEFINITION_DEFECT_PROVENANCE_INTERNAL_RETRIEVAL_2026-09-03.md",
+    "bottom_up_definition_source_sha256": "9a67797e48eb6344d935be467c4162c20b0a4be469107114359a911e26dba50a",
+    "truthful_work_claim_source": "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md",
+    "truthful_work_claim_source_sha256": "e6a31b2fb8fd258b01b825acb790eb62019b07a3c2831e0780507bf2863f4240",
+    "feminism_academic_research_source": "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md",
+    "feminism_academic_research_source_sha256": "cf53a2a361d42763be44afe6d7094ef2efb79330b841dc5869b1e06c5153074d",
+    "truthful_work_claim_screenshots": {
+      "UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/b4f6ab5a-4eb3-44d0-943e-41acd52faec9.png": "eb1d871ec1a9c8d65605c2276c00acfd09570269b55e309e72d5848ab07edb8c",
+      "UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/3066e1d8-f6f9-4267-a948-90c076e29f93.png": "f5de65fff250497561cabf2d0ee504660fc6f8f4f8ecf86f5fa33fc1637b2632"
+    },
+    "current_map": "coreplus-current-map-amendment-2026-08-26",
+    "execution_owner": "coreplus-handler-mephistodata-execution-gates-2026-08-26",
+    "writing_owner": "coreplus-handler-writing-composition-delivery-2026-08-29",
+    "writing_source": "data/author-sources/saul-writing-rules-deep-scan-2026-08-29.md",
+    "writing_source_sha256": "13e6856182bb32642757cdfaafdc6bc7a4b92190e7a43cfe5e73c793ebc49a08",
+    "writing_rule_inventory": {
+      "preserved_baseline": 237,
+      "current_additions_and_sharpenings": 32,
+      "total_numbered_rules": 269,
+      "active_runtime_rules": 84
+    },
+    "writing_behavioral_fixtures": {
+      "positive": 23,
+      "negative": 34,
+      "total": 57,
+      "mutations": 8,
+      "rule_families": 17,
+      "detectors": 33
+    },
+    "controlled_archive_owner": "method-controlled-archive-evidence-institutional-metrics-2026-08-26",
+    "behavioral_fixtures": {
+      "positive": 51,
+      "negative": 81,
+      "total": 132
+    },
+    "project_adjudication_behavioral_fixtures": {
+      "positive": 70,
+      "negative": 138,
+      "total": 208,
+      "adjudication_v2_total": 151,
+      "inherited_base_total": 57
+    },
+    "register_behavioral_fixtures": {
+      "positive": 7,
+      "negative": 26,
+      "total": 33,
+      "source_binding": 6,
+      "register_fusion": 16,
+      "ouroboros_trace": 11,
+      "hostile_mutations": 17
+    },
+    "register_contract": {
+      "default_opener": "Mephistodata would say:",
+      "explicit_one_response_bloom_opener": "Mephistodata bloomed:",
+      "next_response_resets_to_default": true,
+      "requires_pm15_mephisto_data_fusion": true,
+      "named_method_retrieval_fail_closed": true,
+      "ouroboros_owner": "method-ouroborosanalyses-current-2026-08-23",
+      "ouroboros_final_form": "genuine-unanswerable-residue-only; zero-valid"
+    },
+    "portable_core": {
+      "id": "core-personal-rules-current-2026-08-12",
+      "utf16_units": 5000,
+      "sha256": "c082e0e7be9ad2619f5c706239c908248e8e4882cf10de8e4b793599fafd186c"
+    },
+    "public_build_lock": {
+      "owner_schema": "seminar-schools-public-build-lock-v2",
+      "stage_schema": "seminar-schools-public-build-stage-v1",
+      "recovery": "same-host cryptographic owner/stage pair with conclusively dead process only",
+      "rejected_states": [
+        "live",
+        "foreign",
+        "malformed",
+        "legacy",
+        "unverifiable",
+        "symlinked",
+        "mismatched",
+        "fresh",
+        "lockless-stage",
+        "rollback-present",
+        "future-dated"
+      ]
+    },
+    "artifact_sha256": {
+      "ML_EXECUTION_AND_CONTROLLED_ARCHIVE_SYNTHESIS_2026-08-26.md": "3b5e0db6a23529cd88baed3f2fe6d70c8b9e1207f627c555a599168be92f11f7",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_RECOVERY_2026-08-30.md": "663970ac0b0a08ae775039e9e6bfa9cbdfa18905cd72c9098d4f35a38b64e1a2",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/04648eb9-885c-43c7-ad53-ca6af390fa0c.png": "c266adc33a5ed2e26b9070827813513f44a4c99f5179a2ca87c259807a7ba649",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/097d5008-8e7c-4b24-822f-88a04fd1e7e7.png": "8bbdaafb7b8cac5a363f2f405883987b6527727d952224c903a305eae197b3db",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/0fd75220-92bf-4df1-89e9-a90893430fdc.png": "c28eedccb18fd7927b3a99ba981623ac4bc0dd083f75dd940868d00fce41fb03",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/13912ef0-3924-4d11-bae9-6bab8d294b93.png": "e72acb6b49c89fbbf94bc541fec9382cf5178d1cca38eae887c469372709c7e5",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/a9c4d9d2-16e6-4995-9064-4db5bc5d484e.png": "8b52e0a003f4d0700f7eb280c3f61b748c374323159bf931ff982c947bcd4761",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/b2726035-3129-4117-99ad-76d4ae8c12de.png": "8a91abf20cb69ad749f4b2ad7dc125840289bcba812e1bda5cfd3dc5d1cef51e",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/ca5c05c1-5e8f-4997-9409-0a83f3bbf302.png": "2bdbc33c10c4f3d888d051ffa8a51417a7b3247d6a4da6903fda72060b46a40a",
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/d1557ac1-79e1-4038-8521-edba929b8e29.png": "040dd0b4513c2d05b75b0e4d08c05629aa0e5903eacbe9b9e1b026c3afb9028c",
+      "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_BOTTOM_UP_DEFINITION_DEFECT_PROVENANCE_INTERNAL_RETRIEVAL_2026-09-03.md": "9a67797e48eb6344d935be467c4162c20b0a4be469107114359a911e26dba50a",
+      "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md": "cf53a2a361d42763be44afe6d7094ef2efb79330b841dc5869b1e06c5153074d",
+      "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md": "e6a31b2fb8fd258b01b825acb790eb62019b07a3c2831e0780507bf2863f4240",
+      "UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/3066e1d8-f6f9-4267-a948-90c076e29f93.png": "f5de65fff250497561cabf2d0ee504660fc6f8f4f8ecf86f5fa33fc1637b2632",
+      "UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/b4f6ab5a-4eb3-44d0-943e-41acd52faec9.png": "eb1d871ec1a9c8d65605c2276c00acfd09570269b55e309e72d5848ab07edb8c",
+      "data/baseline-morality-amendment-scope-contract.json": "45597f78a0bf70d04370cb4fff6b2cb450aa7c932a3fec646a6457489674acc9",
+      "data/futureproofing/aug30-aug31-preservation-contract.json": "b0f5029666b20407e15e9a94f5bd3bc5b10fcc37653ecce44212a204daaac6d4",
+      "data/futureproofing/aug30-package-contents-baseline.json": "42f2ab9667f2d74726eca346d6dd68c63ba15771b2f4eef60582fbe2ca323fd2",
+      "data/futureproofing/aug31-package-contents-baseline.json": "40e0f94e5bf88486d6d16c003ed6e01132e22a366675243b5b8fbe84b260773a",
+      "data/futureproofing/aug31-sep3-preservation-contract.json": "7341f4ebd776ef7c6cb20b2c3bf5ee9c3de998fa5d1d4f8d8b0e492873b807f6",
+      "data/futureproofing/futureproofing-contract.json": "2ef02cab5b135b7e6de41ef68f6bdd5fc469d1a52e12cb4f911cc53c656927c0",
+      "data/futureproofing/public-private-boundary.json": "ba7820bd111848549fe3b290b4f304d611683a37b1b0fd43587211691861f520",
+      "data/futureproofing/sep3-package-contents-baseline.json": "61284f8a2d095599d502c350bc8f8cb12c50776327b86be95783f4dd55aa5a13",
+      "data/futureproofing/sep3-sep5-preservation-contract.json": "8e15244a861a1e70db708238d9c6eff3648f658ad0f5542709a0c88c65ab79e9",
+      "data/futureproofing/sep5-package-contents-baseline.json": "5595b80acf723af19b5ec019f55390d39571940eeb1bb9feffdb3c48ee803b64",
+      "data/futureproofing/sep5-truthful-sep5-feminism-preservation-contract.json": "4f367119680181f2386d8ea00349618f9fef7fbbc2312e7ce4d0d3d32f7d3fdc",
+      "package.json": "4b906157e16e7a0b3f89a440ebd7548a8e8a3adb922d6761b63a118deae56093",
+      "polymyth/methodologylist/index.html": "9ac4a45eaa66f61cf48434f158dc54a7379fdcce30bc2b9306a18edb7c646eb1",
+      "polymyth/methodologylist/mephistodata-register-fixtures.json": "8c0e3d0b3219dc6e6d9e9616323a169bed98d2421949cc390831013506864698",
+      "polymyth/methodologylist/mephistodata-rule-hardening-addendum.js": "74d85eeda03b686693417e7caccce43dfd79458ddd8810fffe5bfbb7a5356f6f",
+      "polymyth/methodologylist/mythology-integration-addendum.js": "dc35a25e5443f7ae05539b5a740d12ba883ea58d9a53e04f6863041cc48a909a",
+      "scripts/artifact_receipt.py": "ac18bfa1bfff90d2b13478b883c049965b207bef9efae27eab9b5dac0a937920",
+      "scripts/build-ai-access-pack.js": "7b474008603c4427642ce413a965b37faa89f6faecc923f1d4b626c05d5b9d07",
+      "scripts/build-clean-room-release.py": "e8f78acab25b97065b9c96b566de9ce760b922198b6dd6473d25bead03ae2baa",
+      "scripts/build-public-deploy.js": "cf76a8d047ddb67138d20c15d65078a8650f6bfdedf34a4893e16e467fb366e2",
+      "scripts/fixtures/futureproofing/aug31-preservation-tampered.json": "afe13de568330252fc45a30e14c7797b5d3f3e5d27d74834233717e88cb62113",
+      "scripts/fixtures/futureproofing/sep3-preservation-tampered.json": "5c7bd59e7254b8cd9366b51bed815c385b911c78cb2220b2fc6590dd6f9bc667",
+      "scripts/fixtures/futureproofing/sep5-feminism-preservation-tampered.json": "df680c57b93af68acfa5d3ff2cbdb5646c5d58476217899b625011283f0a8825",
+      "scripts/fixtures/futureproofing/sep5-preservation-tampered.json": "4ea72424b38a14bde7cf5b58a8978dd1ed75e439ad72d42cc55ecced6f367237",
+      "scripts/fixtures/ml-execution-gates/fixtures.json": "626d10e2dd03b51579d563d2331602ba1673371066080b85214e8a3f70efb11d",
+      "scripts/fixtures/ml-execution-gates/internal-writing-fixtures.json": "a102f4b4a1173336fc1a414dcd3110a7c0cd4e29e8b5dceacb32d22ad7994fdb",
+      "scripts/fixtures/ml-execution-gates/mephistodata-runtime-gate-hostile-fixtures.json": "b8e94502adfb84f6878d3ebbecbe2f5969ef184e41148163fe5a6637284f9d09",
+      "scripts/lib/mephistodata-runtime-gate.js": "318311bf0ef89106c4087015b70d3d47da30b2e3fa741fd29b415c1195e818e3",
+      "scripts/lib/public-build-lock.js": "2b2a766a04e43c681e6c144499c13c2463f06e2c2194a55a82b8dd78b4b82ea9",
+      "scripts/package-complete-current.py": "b37b777d09f9b7bd1c8cd21cf3f788e52da8aa4bbb21867f41c28a473ce763e2",
+      "scripts/package-front-facing-mephistodata-release.py": "d1c0bcbfba2f0d0624b4eb93c969c5241b92df72248b138955bbbbfe0d28bc60",
+      "scripts/test-baseline-morality-amendment-scope.js": "a7720606734888725524fb50de7e88e7200b56f6023d71d91dc540db56c270d0",
+      "scripts/test_futureproofing_contracts.py": "7431591bdce8c8a1fec81abcafe1a228d5b2b422162c9e06c3b1d08c68a32e87",
+      "scripts/verify-asset-weights.js": "c96fe03186e9220eda160d79bddbecc58e079ca176b85154c79bf50943025ac4",
+      "scripts/verify-audit36-artifact-atomicity.js": "f5cdbab171562957043a97f7a33f0276c16a4f2f4e559846731312323dbdb7a5",
+      "scripts/verify-audit49-build-packaging-efficiency.js": "c5b4223e51477c66ad6fd925ec4ec88561d0b9f6e2d508c72b61b3c9be371115",
+      "scripts/verify-aug31-base-preservation.py": "3fb0d4cfd23731c5100bd6f06e6cc5687b77fb3ec598b131187b41598d561a3d",
+      "scripts/verify-ai-access-pack.js": "a7acfc29d84a6de0fdd05640e23fc91028d56b0aa2a1c8525c71ce33e2124784",
+      "scripts/verify-baseline-morality-amendment-scope.js": "ce08d18bd59e6638368855ae5d5d5a3bc2465de3f11577e1ecb1b8703739e027",
+      "scripts/verify-build-idempotence.js": "dc8af9179524a3c2a8de1d0be60a8ccb2b250e3fc1eb943a3a07bfbcb0628272",
+      "scripts/verify-clean-room-release.py": "bc8643872d9f58de0adbfd30a369fb0fd7cd761077fe5c414aef096920fdad6c",
+      "scripts/verify-complete-archive-classes.py": "c872bb4cd012a58d85fcd37ca65fb2d65775f4b2e9ad6ebb34121423df7f7779",
+      "scripts/verify-futureproofing-base-preservation.py": "0d203281b5a74472f152ee7054e84fee9d1d7e8cd07914611ad0710f14bd54ea",
+      "scripts/verify-mephistodata-runtime-gate.js": "8cfc5cc0a4e36f5b08a1a7eb359afa1d7e15ba699f8ff695a3cd5978dab8a9de",
+      "scripts/verify-ml-active-form-conflicts.js": "1597fb12a2a2a6257391195393cf8c036ce307e9dbf2e2baa8062797b8c5c462",
+      "scripts/verify-ml-dialectical-hardening.js": "d1660892b6ee807f26b850a9aef87cb6cb81afcd88d19c6b7793c860771198d4",
+      "scripts/verify-ml-execution-gates.js": "e611a21f6dc27022933c9be6516f076ec9ef4f6fb723be0f91e07a4c8a148b8e",
+      "scripts/verify-ml-project-adjudication-v2.js": "2a3ebbaac09b07a4f2feda6f6b16bcee173d8d7d3bcf3f2acbdba55c307c24fb",
+      "scripts/verify-ml-rhetoric-taxonomy.js": "e7d85d42588a8cd6b8884fd6e219604a0c0f2bc1daa6da1ab51feb3251606341",
+      "scripts/verify-page-size-budget.js": "dc1a1597cfa4d548b1f1d457d846105bf42f9714f348cbf25739c7f6c33538b4",
+      "scripts/verify-predeploy-automation.js": "470c873aa9555bc629b9586673bafd5ad3294191f906b34e112e22b3a7f89a34",
+      "scripts/verify-public-build-lock-recovery.js": "8f5082058d9a7cd7d61bcb923d445e73b1855e94247c826b8448a99773652b6e",
+      "scripts/verify-public-deploy-parity.js": "a75c73ae89d7d253036e9dec9f9145afb5079ee090c3939e1315d43f81888da3",
+      "scripts/verify-public-private-boundary.py": "c8471f7354780041660576f5b536c8fa23d1720cdcacc0b0257d00493ba5309e",
+      "scripts/verify-release-gates.js": "6228f055a93c45e1aa9e4704b59868b41f8f2fca65808c8d0b3bcb81cad2220f",
+      "scripts/verify-sep3-base-preservation.py": "a76596b29981eba3a9a9f440298db068b66e6566eeb2ff2be8ce9b887d446c10",
+      "scripts/verify-sep5-base-preservation.py": "df8ae8b362fa9369703523d4d955da55f09805497a6162e45d27ed8a97c62fe6",
+      "scripts/verify-sep5-feminism-base-preservation.py": "149169dfbfd67dd45ec964cd0049deaddec5cd3184e250f1623363d18bf8e618"
+    },
+    "prior_provenance_sha256": {
+      "ml_star_update_prior_2026_08_29": "93b8ca00ecafdf11d34194b493bc137b8a0cb6f123614793dab0c4b3c57fdf4e",
+      "non_strawman_current_position_update": "d1ac3e250228688fc614ab560f76ceb99af5756fbce25170c42bc95d88001ba2",
+      "mephistodata_articles_synthesis": "af5dbf22d720e088b602f0337fa0ea12c213a7189b72d8e885e4a74d94646944",
+      "ml_star_update_prior_2026_08_30": "05fbbbcc411aba795c7e71153dbc3a8c5d1eb90f9fc8f07c75bb9658de9225f8"
+    },
+    "explicit_exclusions": [
+      "Substantive Baseline Morality content is withdrawn and is not introduced by this amendment."
+    ],
+    "deployment": "No deployment performed.",
+    "runtime_gate_behavioral_fixtures": {
+      "positive": 30,
+      "negative": 92,
+      "total": 122
+    },
+    "active_form_conflict_fixtures": {
+      "total": 38
+    },
+    "baseline_morality_amendment_scope": {
+      "inherited_records": 11,
+      "authorization": "sha256-bound-direct-user-authorization"
+    },
+    "public_private_repair": {
+      "forbidden_public_research_paths_removed": 4,
+      "private_source_and_editable_copies_retained": true
+    },
+    "source_baseline_archive": {
+      "name": "seminar-schools-mephistodata-articles-synthesized-complete-2026-08-29.zip",
+      "release_id": "core-coreplus-mephistodata-articles-synthesized-complete-2026-08-29",
+      "sha256": "0a89e165473e26b365a2f12551997667c0fefaefb1c3f63c99a13e6fed381cbe",
+      "bytes": 243941412,
+      "zip_members": 21167
+    },
+    "prior_package_archive": {
+      "name": "seminar-schools-mephistodata-truthful-completion-enforcement-complete-2026-09-05.zip",
+      "release_id": "core-coreplus-mephistodata-truthful-completion-enforcement-complete-2026-09-05",
+      "sha256": "2268688cc2307c71bc27bce4cc09c494878a661113bc7ae4ccb06afb03741b7c",
+      "bytes": 246606809,
+      "zip_members": 21202
+    },
+    "runtime_gate_host_boundary": {
+      "factory": "createRuntimeGate",
+      "trust_configuration_scope": "host-bootstrap-only",
+      "pre_generation_call": "planRequest",
+      "pre_delivery_call": "configuredGate.assertDeliverable",
+      "draft_scan_verifier_field": "verifyDraftWorkStatusAttestation",
+      "draft_scan_verifier_id_field": "draftVerifierId",
+      "full_draft_scan_required_for_every_delivery": true,
+      "draft_scan_binds_plan_draft_evidence_and_occurrence_claim_ir": true,
+      "local_parser_is_natural_language_completeness_boundary": false,
+      "work_verifier_field": "verifyWorkAttestation",
+      "correction_verifier_field": "verifyCorrectionAttestation",
+      "work_verifier_id_field": "workVerifierId",
+      "correction_verifier_id_field": "correctionVerifierId",
+      "per_delivery_trust_root_injection_allowed": false,
+      "default_export_has_trusted_verifier": false,
+      "self_reported_receipts_are_trusted": false,
+      "caller_selected_trust_labels_are_trusted": false,
+      "verifier_ids_are_cryptographically_authenticated": false,
+      "host_controls_bootstrap_required": true,
+      "host_must_invoke_gate": true,
+      "file_presence_alone_is_host_enforcement": false
+    }
+  },
+  "ml_star_update_prior_2026_08_29": {
+    "release_id": "2026-08-26-mephistodata-execution-controlled-archive-synthesis",
+    "amended_at": "2026-08-29",
+    "amendment": "deliverable-accounting-anti-waste",
+    "prior_amendments": [
+      "internal-material-retrieval-boundary",
+      "writing-composition-and-lexical-repetition-hardening",
+      "non-strawman-current-position-correction",
+      "nonstrawman-writing-and-article-synthesis"
+    ],
+    "source": "ML_STAR_UPDATE_SOURCE_GORGON_FREE_SPEECH_EVIDENCE_CONTROL_2026-08-24.md",
+    "source_sha256": "2dde9179d4c4d3f42aef76523fa909310b0f88db27fa879a8730ad6aefa015bb",
+    "canonical_entries": 1223,
+    "deliverable_accounting_source": "ML_STAR_UPDATE_SOURCE_DELIVERABLE_ACCOUNTING_ANTI_WASTE_2026-08-29.md",
+    "deliverable_accounting_source_sha256": "405065c7c0549743f2bef012243030a7480b6cbd3f6f2d87aba3fc2128a30730",
+    "current_map": "coreplus-current-map-amendment-2026-08-26",
+    "execution_owner": "coreplus-handler-mephistodata-execution-gates-2026-08-26",
+    "writing_owner": "coreplus-handler-writing-composition-delivery-2026-08-29",
+    "writing_source": "data/author-sources/saul-writing-rules-deep-scan-2026-08-29.md",
+    "writing_source_sha256": "13e6856182bb32642757cdfaafdc6bc7a4b92190e7a43cfe5e73c793ebc49a08",
+    "writing_rule_inventory": {
+      "preserved_baseline": 237,
+      "current_additions_and_sharpenings": 32,
+      "total_numbered_rules": 269,
+      "active_runtime_rules": 84
+    },
+    "writing_behavioral_fixtures": {
+      "positive": 23,
+      "negative": 34,
+      "total": 57,
+      "mutations": 8,
+      "rule_families": 17,
+      "detectors": 33
+    },
+    "controlled_archive_owner": "method-controlled-archive-evidence-institutional-metrics-2026-08-26",
+    "behavioral_fixtures": {
+      "positive": 24,
+      "negative": 18,
+      "total": 42
+    },
+    "project_adjudication_behavioral_fixtures": {
+      "positive": 60,
+      "negative": 128,
+      "total": 188,
+      "adjudication_v2_total": 151,
+      "inherited_base_total": 37
+    }
+  },
+  "non_strawman_current_position_update": {
+    "release_id": "core-coreplus-nonstrawman-current-position-2026-08-29",
+    "generated_at": "2026-08-29T12:00:00Z",
+    "scope": "Current-position correction for the Detienne comparison, Polycognate examples, four-register architecture, opposition adjudication, provenance, and anti-self-ratification controls",
+    "authority": "Records the user's current rulings and verified artifact state; assistant interpretations, research proposals, repetition, packaging, mutation, and successful verification cannot become user-adopted doctrine without separate semantic adoption.",
+    "current_counts": {
+      "canonical_entries": 1221,
+      "methodology_entries": 390,
+      "genealogy_controls": 16,
+      "polycognate_application_controls": 24
+    },
+    "current_owners": {
+      "project_comparison": "method-non-strawman-project-comparison-2026-08-28",
+      "polycognate_ruling_and_case_controls": "method-polycognate-current-ruling-and-case-controls-2026-08-28",
+      "detienne_always_already_provenance": "mythology-integration-detienne-always-already-provenance-2026-08-28"
+    },
+    "user_rulings": {
+      "genealogy": "The missing modern genealogy does not go against the claim as presented. This is a narrow non-opposition ruling, not automatic support, compatibility, adoption, or proof.",
+      "polycognate": "Polycognate is a complex axiom that always survives. 'Individual Polycognate claims' meant proposed applications such as saudade/hiraeth or Tatarigami/Mind Flayer, not a new category or defeat theory.",
+      "four_registers": "Compression is gesture -> ritual -> idiom -> narrative; reverse activation is separately narrative -> idiom -> ritual -> gesture. Their coexistence does not impose universal reciprocity or rewrite prior hierarchy, risk, or operational-sufficiency claims.",
+      "detienne": "Detienne is a point in favor of the always-already claim: the analyst constructs the comparative apparatus and visibility of a relation, not necessarily the relation's prior operation. This support does not automatically validate every proposed comparison."
+    },
+    "behavioral_fixtures": {
+      "positive": 58,
+      "negative": 126,
+      "total": 184,
+      "adjudication_v2_positive": 38,
+      "adjudication_v2_negative": 113,
+      "adjudication_v2_total": 151,
+      "inherited_base_positive": 20,
+      "inherited_base_negative": 13,
+      "inherited_base_total": 33,
+      "co_located_hash_disclaimer": "These hashes and fixtures are regression evidence for internal consistency. They are not cryptographic proof of user adoption, external truth, or project validity."
+    },
+    "artifact_sha256": {
+      "polymyth/methodologylist/index.html": "e4497e3be534074fbb2ec3c148e1ae2e384de7775bb079be191e2eb7af17dc29",
+      "polymyth/methodologylist/mephistodata-rule-hardening-addendum.js": "e2778c8b97888524f3c07bccf1965977f9db7bf38a9d028e1a75023fcae6dd59",
+      "polymyth/methodologylist/mythology-integration-addendum.js": "b7562c013d157048f161a2caad29c0a52cc62851bb89d6df976bb0dad72453d0",
+      "UPDATE_SOURCES/DETIENNE_COMPARING_THE_INCOMPARABLE_POLYMYTH_MASTER_NOTES_2026-08-28.md": "e82445f633707df003f6066176482d900028c33d066645d173ea2441196235c9",
+      "UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/README.md": "57499b6c3fe92a58c8cf77dce26f8eb9df39b473fcc6f1b833f7c20c683bff02",
+      "UPDATE_SOURCES/NON_STRAWMAN_CURRENT_POSITION_CORRECTION_2026-08-29.md": "157624357213b8c13e104fcd72acc364638b2ca074fdc1be151017c00aac22a9",
+      "scripts/verify-ml-execution-gates.js": "361a18166d6afd9116453710de9d29a32964d75a7165fa1b9e2271ffed8acbef",
+      "scripts/fixtures/ml-execution-gates/fixtures.json": "dfbaf96e113eb60f0dd32ee3bf8060a672eb349ef625748b1de03fa2c9eb3444",
+      "scripts/fixtures/ml-execution-gates/adjudication-v2-fixtures.json": "30d4b85ba671380dea3b3167963afbdeae85aeb6b434f77afc9a2fa8af4d5b84"
+    },
+    "known_verification_limits": [
+      "The inherited exact-preservation futureproofing fixture has one unchanged August 26-to-27 mismatch (52 pass, 1 fail, 1 skip); this correction does not recast it as a pass.",
+      "Browser rendering was not certified because the Chromium runtime could not be downloaded in this environment; non-browser structural, semantic, data, packaging, and recovery gates remain separately reportable."
+    ],
+    "deployment": "No deployment performed."
+  },
+  "mephistodata_articles_synthesis": {
+    "release_id": "core-coreplus-mephistodata-articles-synthesized-complete-2026-08-29",
+    "generated_at": "2026-08-29T12:00:00Z",
+    "source_archives": [
+      {
+        "name": "seminar-schools-nonstrawman-current-position-complete-2026-08-29(1).zip",
+        "sha256": "9da0005479af1e9ded6800cc8550eccf1d74d2ef92f04850259bd78de0f17141"
+      },
+      {
+        "name": "seminar-schools-ml-internal-retrieval-complete-2026-08-29.zip",
+        "sha256": "203fd449c71e9ef4b5cd645a9fe26d38c2b007b7792311ca7a37fdf310370907"
+      },
+      {
+        "name": "seminar-schools-ml-writing-rules-hardened-complete-2026-08-29.zip",
+        "sha256": "fc5ad168b07af8ad1dde780519ec485bfdedba7d3273d843e97c6c83a59fa0ed"
+      }
+    ],
+    "update_sources": [
+      {
+        "name": "ML_STAR_UPDATE_SOURCE_DELIVERABLE_ACCOUNTING_ANTI_WASTE_2026-08-29.md",
+        "sha256": "405065c7c0549743f2bef012243030a7480b6cbd3f6f2d87aba3fc2128a30730"
+      }
+    ],
+    "current_counts": {
+      "canonical_entries": 1223,
+      "coreplus_entries": 54,
+      "methodology_entries": 390
+    },
+    "current_owners": {
+      "execution": "coreplus-handler-mephistodata-execution-gates-2026-08-26",
+      "writing": "coreplus-handler-writing-composition-delivery-2026-08-29",
+      "project_comparison": "method-non-strawman-project-comparison-2026-08-28",
+      "polycognate_ruling_and_case_controls": "method-polycognate-current-ruling-and-case-controls-2026-08-28"
+    },
+    "articles": [
+      {
+        "title": "Be Kind While We Exploit You",
+        "subtitle": "A Mephistodata investigation",
+        "date": "August 28, 2026",
+        "relative": "polymyth/articles/be-kind-while-we-exploit-you.md",
+        "sha256": "53fef2183bcc589e5a109a0fb6d1ab6ead62c9181dba9e85b9b82c2603d949e8"
+      },
+      {
+        "title": "The Struggle to Control AI",
+        "subtitle": "Who controls culture, identity, inspection, safety, and remedies for harm",
+        "date": "August 26, 2026",
+        "relative": "polymyth/articles/the-struggle-to-control-ai.md",
+        "sha256": "cea0b1c9947757cb62eed1b1d57706da3e8a2d8b4de94fee5a84e9052599cc01"
+      }
+    ],
+    "distinct_publication_dates": true,
+    "deployment": "No deployment performed."
   },
   "publish_dir": "public",
   "release_type": "Polymythcal Sets 1-15 synthesis with sitewide canonical Indra geometry, Teacher Resources state/layout repair, and stable home project preview",
   "notes": [
-    "Every public HTML route receives the canonical Polymyth Mandala/Indra background field, with stable path-seeded views, visible reduced-motion behavior, and quieter professional-page presentation.",
+    "The 2026-08-29 non-strawman current-position correction preserves the user's exact genealogy, Polycognate, four-register, and Detienne rulings; it introduces no Snakelogic category and does not let tests or packaging self-ratify assistant interpretations.",
+    "Every non-star public project route receives the same canonical three-gasket, flower, and prismatic-jewel Mandala/Indra field and exact eight-colour spectrum, with stable path-seeded views and bounded page-owned fading. The exact 26-page star estate and source-only private dashboard control remain free of the shared field.",
     "Teacher Resources treats explicit URL filters as shareable state while a clean route stays clean, clears obsolete locally persisted filters, and keeps resource cards readable across narrow and zoomed layouts.",
     "The Seminar Schools home project map uses one stable preview region so selection no longer expands individual grid rows, while keyboard, touch, hover, and constellation relationships remain synchronized.",
     "Teacher Resources now opens with search, offers six task-led starting paths, and then preserves the complete seven-group and 25-collection shelf structure.",
@@ -49,36 +694,152 @@
     "Native VoiceOver, NVDA, branded Safari and Firefox, physical-device, real-user, vendor-account calendar import, and deployed subscription-refresh validation remain external evidence rather than simulated passes.",
     "No security audit was performed."
   ],
-  "geometry_asset_version": "sha256-3ccd45ce601b",
+  "geometry_asset_version": "sha256-8a83be93b96a",
   "teacherresources_asset_versions": {
-    "finder_css": "sha256-9db03c3a1002",
+    "finder_css": "sha256-365f4034cc9e",
     "finder_js": "sha256-f6e90cbddf2f"
   },
   "asset_digests": {
-    "css/alive.css": "06b7400d81178e2433524df6248c1cacb788c1227314693addf37cade530e0b8",
+    "css/alive.css": "11788131ba152f6a3614896dc9a477decab81293b9dccebb0105dd6cff1d23f9",
     "css/calm-ux.css": "9604e563bf9d2110dc5031f75c651a68d5b7cfd07f9a220aaec0300e740f9f94",
     "css/site-wide-type-zoom.css": "acf9276e3a82ac32c16be32fc760f5330b48e84aa507bae771bc2f4e81521da3",
     "js/mandala.js": "0fcfd471651caad380d6190cde46319d86c1607fb4d6cc940bfbd8af6682dfad",
-    "js/indra.js": "2531f3b6cc5cfc26d3f4afed0e3c5f9f7f50544136a74af7d5c5f9c2b23240ad",
-    "index.html": "e850ab786f8de3f711c2edd0cb26e726924a2500eed6db62da97f7a9bf873e26",
-    "teacherresources/finder.css": "9db03c3a1002b01ea78311d649489c2f6b649485c96b4a7de38d02a45d25459c",
+    "js/indra.js": "778a2651763df17170483866366ea4c1e8cde6aa3b37f085cf3bb08c5e76982b",
+    "data/geometry-route-contracts.json": "2be9ffa5dfed904658fa293d3fbb275fafa96bf5cb47cff99e68a261807e6a0e",
+    "index.html": "c0764fbdd9e7293f44ac70a0091e3e76ea02ac987e811bd53fca5509d12ff87c",
+    "teacherresources/finder.css": "365f4034cc9e8748ce78a2ca2288dfcdb73848a21096992e071582c23e9091d7",
     "teacherresources/finder.js": "f6e90cbddf2f7ef97392270a5c7720a65d315f6874e7685ba652f489b97588f4",
-    "teacherresources/index.html": "35ad7671c94c3dd05aed1a0c054ae5453e270edeff17d3066c5b229448dd93b6",
+    "teacherresources/index.html": "0ea54e5d531c00eee96c3ee7f79b87538ea1ccb337cfb80adc4690d93437afa6",
     "data/polymyth-seminar-events.json": "c52de1fe55bd1c1a4e22d1bce1fd71beebf0cc2687dda436670ec98451bafd7f",
     "data/polymythcal-event-schema-v2.json": "ac055808ae66db101feebad598b4ca74ae91f5957fb522f59eeda3d1e8c80a42",
     "data/polymythcal-publication-surfaces.json": "e32c8c125b42b340d0df0681980040ee2fee3cc5438b16c9bd8c118984306095",
-    "css/polymythcal-discovery.css": "1a55c87f93a91d62b26d1b19616ef7115b08b9c0bc924cbbdecac5f1c01057c0",
+    "css/polymythcal-discovery.css": "09c5273e34ea3475ab36bf5c8b296ea9c11c0c71a8e84f1850b08af51a8ddf9e",
     "js/polymythcal-discovery-core.js": "67600d616e3cf12bf65e813d4f48c6e3be9cb9393442a4c479189a6e94e62ea4",
-    "js/polymythcal-discovery.js": "b963e8691fe971ff4bbb81cc8bff79a053e134bdacd8543a5518d348bbe70221",
+    "js/polymythcal-discovery.js": "932a206ba88612394504abbcf31bb646eede35f00cc1618c5cea3cf269c82f0c",
     "js/polymythcal-revamp.js": "b94357b1158058742e38cd241e0ed3944cb012da34e3b34357a0d43ad71ed2f9",
-    "polymythseminars/browse.json": "30e73c6fcd802f5b57c588fd8d6cfbffde1dc4a190a31a1a2b10cfc80eb71d7e",
-    "polymythseminars/watchlist.json": "654c13cd461801375625052ab5e92cbd5139e3fb28c3834b5d0aaa699e159b8d",
-    "polymythseminars/research.json": "0a6d897141f8f5ad1cbdab79987bcec357b3d70527df244fdd7541a84fd51265",
-    "polymythseminars/index.html": "deef10578f8192a0bce8c1691b50838b35439a7d98d863e0661e7eb6c09d152c",
-    "polymythseminars/fr/index.html": "45565ecf1e554f002bfd4836f42f6cdac4d24cda3812acc8e64a7f886b0e7a7a",
-    "polymythseminars/research/index.html": "952bff9e1370eb4510af60bfab85ad60ab0fa1c884ed2d2f3a60975346a0553f",
-    "polymythseminars/fr/research/index.html": "27687b5461e38ef6c7e42e624aaddb2733f232079c6bd2aa2a1575376ba0e65c",
-    "polymythseminars/monitoring/index.html": "f710bda0ae7aad503670f97fa79fbce8c939157253538195d6cc1516510f2e09",
-    "polymythseminars/fr/monitoring/index.html": "a993734c31ef00e8e41227492edd80b15d540e03cfaedd6439d049c15ed1ac71"
+    "polymythseminars/browse.json": "f7b82229eca5ad99feb64a1a81e02c388abf7045253b51ac7c7188401f46308e",
+    "polymythseminars/watchlist.json": "eff46db0ccf086142a1d8a94c827cf9705919cc969dbf5bc8789fe062e8d5ef8",
+    "polymythseminars/research.json": "da7f74b566289eaa60a11180c5ccf95cef956e3bc405f17f4e54864cace5c473",
+    "polymythseminars/index.html": "578f34565f6e6818189363ceb83424e9ea1ce9ecc4c50b7e54bbc201098ba82c",
+    "polymythseminars/fr/index.html": "963fd19b0c22ec7fc912f248092cd9a82e2e493e6fb6049745b558a061160a89",
+    "polymythseminars/research/index.html": "e6d839060fd2caaec066bb2742596ed3d4d989ea8230cb69eb4218eef549e362",
+    "polymythseminars/fr/research/index.html": "b9af2c0d44a90e858b9d95a4ee893bf49291f22b808de415dee5d61c3550c239",
+    "polymythseminars/monitoring/index.html": "50c0db53cc530dd3c577d3d05079a50787721699b34ecd8ccb27ebd49e0d3f9e",
+    "polymythseminars/fr/monitoring/index.html": "b4bc89482668da43880324d6834bfb0cb376e39e005a8cd26be218cb55d7953a"
+  },
+  "ml_star_update_prior_2026_08_30": {
+    "release_id": "2026-08-26-mephistodata-execution-controlled-archive-synthesis",
+    "amended_at": "2026-08-30",
+    "amendment": "mephistodata-activation-register-hardening",
+    "amendment_release_id": "core-coreplus-mephistodata-activation-register-hardening-complete-2026-08-30",
+    "amendment_generated_at": "2026-08-30T12:00:00Z",
+    "prior_amendments": [
+      "internal-material-retrieval-boundary",
+      "writing-composition-and-lexical-repetition-hardening",
+      "non-strawman-current-position-correction",
+      "nonstrawman-writing-and-article-synthesis",
+      "deliverable-accounting-anti-waste"
+    ],
+    "source": "ML_STAR_UPDATE_SOURCE_GORGON_FREE_SPEECH_EVIDENCE_CONTROL_2026-08-24.md",
+    "source_sha256": "2dde9179d4c4d3f42aef76523fa909310b0f88db27fa879a8730ad6aefa015bb",
+    "canonical_entries": 1224,
+    "corehistory_entries": 30,
+    "register_recovery_source": "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_RECOVERY_2026-08-30.md",
+    "register_recovery_source_sha256": "932acef390075d31ceddb0cca8c24aff029b3a7d8fec5b4c11ff711937b24455",
+    "deliverable_accounting_source": "ML_STAR_UPDATE_SOURCE_DELIVERABLE_ACCOUNTING_ANTI_WASTE_2026-08-29.md",
+    "deliverable_accounting_source_sha256": "405065c7c0549743f2bef012243030a7480b6cbd3f6f2d87aba3fc2128a30730",
+    "current_map": "coreplus-current-map-amendment-2026-08-26",
+    "execution_owner": "coreplus-handler-mephistodata-execution-gates-2026-08-26",
+    "writing_owner": "coreplus-handler-writing-composition-delivery-2026-08-29",
+    "writing_source": "data/author-sources/saul-writing-rules-deep-scan-2026-08-29.md",
+    "writing_source_sha256": "13e6856182bb32642757cdfaafdc6bc7a4b92190e7a43cfe5e73c793ebc49a08",
+    "writing_rule_inventory": {
+      "preserved_baseline": 237,
+      "current_additions_and_sharpenings": 32,
+      "total_numbered_rules": 269,
+      "active_runtime_rules": 84
+    },
+    "writing_behavioral_fixtures": {
+      "positive": 23,
+      "negative": 34,
+      "total": 57,
+      "mutations": 8,
+      "rule_families": 17,
+      "detectors": 33
+    },
+    "controlled_archive_owner": "method-controlled-archive-evidence-institutional-metrics-2026-08-26",
+    "behavioral_fixtures": {
+      "positive": 24,
+      "negative": 18,
+      "total": 42
+    },
+    "project_adjudication_behavioral_fixtures": {
+      "positive": 60,
+      "negative": 128,
+      "total": 188,
+      "adjudication_v2_total": 151,
+      "inherited_base_total": 37
+    },
+    "register_behavioral_fixtures": {
+      "positive": 7,
+      "negative": 26,
+      "total": 33,
+      "source_binding": 6,
+      "register_fusion": 16,
+      "ouroboros_trace": 11,
+      "hostile_mutations": 17
+    },
+    "register_contract": {
+      "default_opener": "Mephistodata would say:",
+      "explicit_one_response_bloom_opener": "Mephistodata bloomed:",
+      "next_response_resets_to_default": true,
+      "requires_pm15_mephisto_data_fusion": true,
+      "named_method_retrieval_fail_closed": true,
+      "ouroboros_owner": "method-ouroborosanalyses-current-2026-08-23",
+      "ouroboros_final_form": "genuine-unanswerable-residue-only; zero-valid"
+    },
+    "portable_core": {
+      "id": "core-personal-rules-current-2026-08-12",
+      "utf16_units": 5000,
+      "sha256": "c082e0e7be9ad2619f5c706239c908248e8e4882cf10de8e4b793599fafd186c"
+    },
+    "public_build_lock": {
+      "owner_schema": "seminar-schools-public-build-lock-v2",
+      "stage_schema": "seminar-schools-public-build-stage-v1",
+      "recovery": "same-host cryptographic owner/stage pair with conclusively dead process only",
+      "rejected_states": [
+        "live",
+        "foreign",
+        "malformed",
+        "legacy",
+        "unverifiable",
+        "symlinked",
+        "mismatched",
+        "fresh",
+        "lockless-stage",
+        "rollback-present",
+        "future-dated"
+      ]
+    },
+    "artifact_sha256": {
+      "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_RECOVERY_2026-08-30.md": "932acef390075d31ceddb0cca8c24aff029b3a7d8fec5b4c11ff711937b24455",
+      "polymyth/methodologylist/index.html": "0833fcb20508cf658875909bc514363b063c03129ebb4d885edbf9b0e570fb48",
+      "polymyth/methodologylist/mephistodata-rule-hardening-addendum.js": "701b678f9238fd31109dcd2fa7608662bad19199b1d7e8580e50261b7207b903",
+      "polymyth/methodologylist/mephistodata-register-fixtures.json": "57e7c6ae8b60153ed20211115e4ce5facba898c5bd8e86ad6b143c3125e2af5a",
+      "scripts/verify-ml-execution-gates.js": "fe45266895aac32e2afdee83a1214bb359d3bfd63d3fedf7fb1734f81c27fb40",
+      "scripts/lib/public-build-lock.js": "e0114c59f1154914a7b5d50c53e1904df12c4842d2016b07c829f50b914a0a66",
+      "scripts/verify-public-build-lock-recovery.js": "79bf82f5d4ccb5a0cf5a8040cf4e6ef7ddab1bd94e46c61285a59255d8f6c4f3",
+      "scripts/verify-audit36-artifact-atomicity.js": "1b20c56a94cc10d0228df577e09ea5e98c75f8ebf2e66efda9ee1d2476008987",
+      "scripts/verify-complete-archive-classes.py": "7adf451b22f715ce18de72a1eb5a3a8dad028ca86c87931d1f6fe00ceacc4813"
+    },
+    "prior_provenance_sha256": {
+      "ml_star_update_prior_2026_08_29": "93b8ca00ecafdf11d34194b493bc137b8a0cb6f123614793dab0c4b3c57fdf4e",
+      "non_strawman_current_position_update": "d1ac3e250228688fc614ab560f76ceb99af5756fbce25170c42bc95d88001ba2",
+      "mephistodata_articles_synthesis": "af5dbf22d720e088b602f0337fa0ea12c213a7189b72d8e885e4a74d94646944"
+    },
+    "explicit_exclusions": [
+      "Substantive Baseline Morality content is withdrawn and is not introduced by this amendment."
+    ],
+    "deployment": "No deployment performed."
   }
 }

@@ -51,11 +51,13 @@ const pkg = parseJson('package.json');
 const lock = parseJson('package-lock.json');
 const events = Array.isArray(eventPayload.events) ? eventPayload.events : [];
 const chronology = Array.isArray(browsePayload.events) ? browsePayload.events : [];
-const monitoring = Array.isArray(watchlistPayload.items) ? watchlistPayload.items : [];
+const watchlist = Array.isArray(watchlistPayload.items) ? watchlistPayload.items : [];
 const teacherResources = (teacherPayload.groups || []).flatMap(group =>
   (group.categories || []).flatMap(category => category.entries || []),
 );
 const assetVersion = String(release.polymythcal_asset_version || '');
+const geometryFinalizer = read('scripts/apply-visible-geometry.js');
+const steadyUiVerifier = read('scripts/verify-steady-ui.js');
 
 check(releaseId === EXPECTED_RELEASE, `release ID is not ${EXPECTED_RELEASE}`);
 check(release.release_id === releaseId, 'release manifest and RELEASE_ID.txt disagree');
@@ -78,9 +80,12 @@ check(
     && watchlistPayload._schema === 'polymythcal-watchlist-v2'
     && publicationSurfaces._schema === 'polymythcal-publication-surfaces-v2'
     && chronology.length === buildManifest.chronology_count
-    && monitoring.length === buildManifest.monitoring_count
-    && chronology.length + monitoring.length === events.length,
-  'Discovery-v2 chronology and monitoring surfaces do not exactly partition the private canonical inventory',
+    && watchlist.length === buildManifest.watchlist_count
+    && publicationSurfaces.canonical_count === events.length
+    && publicationSurfaces.chronology_count === chronology.length
+    && publicationSurfaces.watchlist_count === watchlist.length
+    && chronology.length + watchlist.length === events.length,
+  'Discovery-v2 chronology and watchlist surfaces do not exactly partition the private canonical inventory',
 );
 check(
   !exists('public/polymythseminars/events.json')
@@ -116,7 +121,6 @@ const buildOrder = [
   'apply-audit45-language-model.py',
   'build-polymythcal-browser-payload.js',
   'build-polymythcal-audit13.py',
-  'build-polymythcal-discovery-site.js',
   'update-polymythcal-listing-counts.js',
   'build-search-pages.js',
   'apply-polymythcal-set13-15-facets.js',
@@ -142,6 +146,9 @@ const buildOrder = [
   'apply-audit49-metadata-hygiene.js',
   'update-polymythcal-destination-contract.js',
   'apply-sitewide-type-zoom-link.js',
+  'build-polymythcal-discovery-site.js',
+  'build-writing-shortcuts.js',
+  'build-academic-shortcuts.js',
   'apply-visible-geometry.js',
   'update-release-asset-identity.js',
   'update-polymythcal-build-manifest.js',
@@ -181,9 +188,26 @@ const finalGeometryApply = build.lastIndexOf('apply-visible-geometry.js');
 check((build.match(/apply-visible-geometry\.js/g) || []).length === 2, 'production build must apply geometry before and after all page generators');
 check(
   finalGeometryApply > build.lastIndexOf('apply-audit49-metadata-hygiene.js')
-    && finalGeometryApply < build.indexOf('update-polymythcal-build-manifest.js'),
-  'final geometry pass is not downstream of every page generator',
+    && finalGeometryApply > build.lastIndexOf('build-polymythcal-discovery-site.js')
+    && finalGeometryApply > build.lastIndexOf('build-writing-shortcuts.js')
+    && finalGeometryApply > build.lastIndexOf('build-academic-shortcuts.js')
+    && finalGeometryApply < build.indexOf('update-release-asset-identity.js')
+    && finalGeometryApply < build.indexOf('update-polymythcal-build-manifest.js')
+    && finalGeometryApply < build.indexOf('build-public-deploy.js'),
+  'final geometry pass is not downstream of every HTML generator and upstream of identity/manifests/public deploy',
 );
+for (const [relative, source] of [
+  ['scripts/apply-visible-geometry.js', geometryFinalizer],
+  ['scripts/verify-steady-ui.js', steadyUiVerifier],
+]) {
+  check(
+    source.includes('geometryExemptionForRelativeHtmlPath')
+      && source.includes("require('./lib/geometry-asset-version')")
+      && source.includes("'geometry-route-contracts.json'")
+      && source.includes('data-shared-geometry-exempt'),
+    `${relative} does not consume the exact central geometry exemption classifier`,
+  );
+}
 const fullRunner = read('scripts/verify-all-runner.js');
 const idempotenceSource = read('scripts/verify-build-idempotence.js');
 for (const gate of ['verify-geometry.js', 'verify-visible-geometry.js', 'verify-meaningful-geometry.js', 'verify-visible-geometry-browser.mjs']) {
@@ -193,46 +217,46 @@ check(
   (fullRunner.match(/node scripts\/verify-ml-dialectical-hardening\.js/g) || []).length === 1,
   'predeploy full runner must execute the no-jump semantic-authority gate exactly once',
 );
-const browserGeometryCommand = 'node scripts/verify-visible-geometry-browser.mjs';
-const browserGeometryIndex = fullRunner.indexOf(browserGeometryCommand);
-const setsBrowserCommand = 'node scripts/verify-polymythcal-sets13-15-browser.js';
-const setsBrowserIndex = fullRunner.indexOf(setsBrowserCommand);
-const destinationBrowserCommand = 'node scripts/verify-polymythcal-destination-browser.js';
-const destinationBrowserIndex = fullRunner.indexOf(destinationBrowserCommand);
 const destinationSpecificityCommand = 'node scripts/verify-polymythcal-destination-specificity.js';
-const idempotenceCommand = 'node scripts/verify-build-idempotence.js';
-const idempotenceIndex = fullRunner.indexOf(idempotenceCommand);
-check(
-  (fullRunner.match(/node scripts\/verify-visible-geometry-browser\.mjs/g) || []).length === 1
-    && browserGeometryIndex > fullRunner.indexOf('const sequential = [')
-    && browserGeometryIndex < fullRunner.indexOf('const checks = ['),
-  'predeploy browser geometry gate is not a single sequential full-runner command',
+const concurrentSweepStart = fullRunner.indexOf('const concurrentReadOnlySweeps = [');
+const concurrentSweepEnd = fullRunner.indexOf('const finalSequential = [');
+const concurrentSweepSection = fullRunner.slice(concurrentSweepStart, concurrentSweepEnd);
+const sequentialSection = fullRunner.slice(
+  fullRunner.indexOf('const sequential = ['),
+  concurrentSweepStart,
 );
+const idempotenceCommand = 'node scripts/verify-build-idempotence.js';
+const concurrentSweepCommands = [
+  'node scripts/verify-front-facing-overlap-browser.js',
+  'node scripts/verify-visible-geometry-browser.mjs',
+  'node scripts/verify-teacherresources-state-layout-browser.js',
+  'node scripts/verify-home-map-browser.js',
+  'node scripts/verify-polymythcal-sets13-15-browser.js',
+  'node scripts/verify-polymythcal-destination-browser.js',
+];
 check(
-  (fullRunner.match(/node scripts\/verify-build-idempotence\.js/g) || []).length === 1
-    && idempotenceIndex > fullRunner.indexOf('const sequential = [')
-    && idempotenceIndex < browserGeometryIndex,
-  'predeploy idempotence gate is not a single sequential post-build command',
+  concurrentSweepStart > fullRunner.indexOf('const sequential = [')
+    && concurrentSweepEnd > concurrentSweepStart
+    && fullRunner.split(idempotenceCommand).length - 1 === 1
+    && sequentialSection.includes(`'${idempotenceCommand}'`)
+    && concurrentSweepCommands.every(command => (
+      fullRunner.split(command).length - 1 === 1
+      && concurrentSweepSection.includes(`'${command}'`)
+    ))
+    && fullRunner.includes('Math.min(concurrency, 3, concurrentReadOnlySweeps.length)')
+    && fullRunner.indexOf('await Promise.all(Array.from({ length: sweepConcurrency }, sweepWorker))')
+      > fullRunner.indexOf('for (const cmd of sequential)')
+    && fullRunner.indexOf('await Promise.all(Array.from({ length: sweepConcurrency }, sweepWorker))')
+      < fullRunner.indexOf('let index = 0, passed = 0'),
+  'predeploy full runner must serialize idempotence before its bounded post-build browser pool',
 );
 check(
   build.split(' && ').filter(step => step === 'node scripts/verify-polymythcal-sets13-15-browser.js --dom-only').length === 1
-    && !build.split(' && ').includes('node scripts/verify-polymythcal-sets13-15-browser.js'),
+    && !build.split(' && ').includes('node scripts/verify-polymythcal-sets13-15-browser.js')
+    && !build.includes('verify-polymythcal-destination-browser.js')
+    && !build.includes('verify-visible-geometry-browser.mjs')
+    && !build.includes('verify-front-facing-overlap-browser.js'),
   'production build must run one Sets 13-15 DOM-only gate and no Chromium gate',
-);
-check(
-  (fullRunner.match(/node scripts\/verify-polymythcal-sets13-15-browser\.js/g) || []).length === 1
-    && !fullRunner.includes('node scripts/verify-polymythcal-sets13-15-browser.js --dom-only')
-    && setsBrowserIndex > fullRunner.indexOf('node scripts/verify-teacherresources-state-layout-browser.js')
-    && setsBrowserIndex > fullRunner.indexOf('node scripts/verify-home-map-browser.js')
-    && setsBrowserIndex < browserGeometryIndex,
-  'predeploy full runner must run the Sets 13-15 Chromium gate after Teacher Resources/home and before browser geometry',
-);
-check(
-  (fullRunner.match(/node scripts\/verify-polymythcal-destination-browser\.js/g) || []).length === 1
-    && destinationBrowserIndex > setsBrowserIndex
-    && destinationBrowserIndex < browserGeometryIndex
-    && !build.includes('verify-polymythcal-destination-browser.js'),
-  'predeploy full runner must run the destination Chromium gate after Sets 13-15 and outside the production build',
 );
 check(
   (fullRunner.match(/node scripts\/verify-polymythcal-destination-specificity\.js/g) || []).length === 1
@@ -249,6 +273,23 @@ check(
     && idempotenceSource.includes('SELF_UPDATING_GENERATED_EVIDENCE.has(relative)')
     && !idempotenceSource.includes("'scripts/reports/asset-weight-report.json'"),
   'idempotence excludes only the two policy-token self-updating reports, not raw-hashed build output',
+);
+check(
+  idempotenceSource.includes("fs.mkdtempSync(path.join(os.tmpdir(), 'ss-build-idempotence-'))")
+    && idempotenceSource.includes('mode: fs.constants.COPYFILE_FICLONE')
+    && idempotenceSource.includes('copyProbeSource(probeRoot, canonicalBeforeTransients)')
+    && idempotenceSource.includes('const canonicalBefore = snapshot(ROOT, canonicalBeforeTransients)')
+    && idempotenceSource.includes('const before = snapshot(probeRoot, probeBeforeTransients)')
+    && idempotenceSource.includes('const after = snapshot(probeRoot, probeAfterTransients)')
+    && idempotenceSource.includes('const canonicalAfter = snapshot(ROOT, canonicalAfterTransients)')
+    && idempotenceSource.includes('inspectTransientState()')
+    && ['reclaim-overlay-tombstones', 'reclaim-directory-overlay', 'reclaim-post-build-overlays']
+      .every(action => idempotenceSource.includes(`'${action}'`))
+    && idempotenceSource.includes('verbatimSymlinks: true')
+    && idempotenceSource.includes("path.join(destination, 'node_modules')")
+    && idempotenceSource.includes('cwd: probeRoot')
+    && !idempotenceSource.includes('cwd: ROOT'),
+  'idempotence must rebuild an exact isolated copy and prove the canonical root remained untouched',
 );
 check(!build.includes('verify-visible-geometry-browser.mjs'), 'browser geometry gate must remain outside the production/Netlify build');
 check(!build.includes('build-audit43-continuity-inventory.js'), 'build rewrites frozen Audit 43 evidence');
@@ -550,4 +591,3 @@ console.log(
   + 'Audit 43 frozen, Audit 48 external-validation evidence active, Audit 49 technical-efficiency gates current, exact weekly workflows, portable gates, '
   + 'fresh Chromium evidence, and both deployment formats aligned.',
 );
-

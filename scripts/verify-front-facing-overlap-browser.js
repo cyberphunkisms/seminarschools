@@ -204,7 +204,7 @@ const FAMILIES = Object.freeze([
   {
     id: 'teacher-subject',
     match: route => /^\/teacherresources\/[^/]+\/$/.test(route),
-    fixtures: ['/teacherresources/ela/'],
+    fixtures: ['/teacherresources/ela/', '/teacherresources/ieltsrubric/'],
   },
   {
     id: 'teacher-collection',
@@ -1495,4 +1495,3 @@ main().catch(error => {
   console.error(`FRONT-FACING OVERLAP/REFLOW ERROR — ${error.stack || error.message}`);
   process.exitCode = 1;
 });
-

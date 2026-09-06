@@ -35,80 +35,129 @@
     "id": "dsm5_multicausal_pass",
     "kind": "semantic",
     "draft": "DSM-5 was one component in a larger institutional change.",
-    "must_include": ["one component", "larger institutional change"],
-    "must_exclude": ["alone caused", "sole cause"],
+    "must_include": [
+      "one component",
+      "larger institutional change"
+    ],
+    "must_exclude": [
+      "alone caused",
+      "sole cause"
+    ],
     "expected_pass": true
   },
   {
     "id": "dsm5_monocausal_twist_fail",
     "kind": "semantic",
     "draft": "DSM-5 alone caused the change.",
-    "must_include": ["one component"],
-    "must_exclude": ["alone caused"],
+    "must_include": [
+      "one component"
+    ],
+    "must_exclude": [
+      "alone caused"
+    ],
     "expected_pass": false
   },
   {
     "id": "affirmative_action_conformity_pass",
     "kind": "semantic",
     "draft": "The user thesis concerns selection for conformity and asks whether dissenters from affirmative-action ideology receive the same preference.",
-    "must_include": ["selection for conformity", "dissenters"],
-    "must_exclude": ["generally reduced competence", "every practitioner"],
+    "must_include": [
+      "selection for conformity",
+      "dissenters"
+    ],
+    "must_exclude": [
+      "generally reduced competence",
+      "every practitioner"
+    ],
     "expected_pass": true
   },
   {
     "id": "affirmative_action_competence_strawman_fail",
     "kind": "semantic",
     "draft": "Affirmative action generally reduced professional competence.",
-    "must_include": ["selection for conformity"],
-    "must_exclude": ["generally reduced professional competence"],
+    "must_include": [
+      "selection for conformity"
+    ],
+    "must_exclude": [
+      "generally reduced professional competence"
+    ],
     "expected_pass": false
   },
   {
     "id": "screenshot_illustration_pass",
     "kind": "semantic",
     "draft": "The screenshot establishes the narrator's text and illustrates the proposed mechanism. The absent person's motive and prevalence remain unknown.",
-    "must_include": ["illustrates", "motive", "remain unknown"],
-    "must_exclude": ["proves her motive", "proves prevalence"],
+    "must_include": [
+      "illustrates",
+      "motive",
+      "remain unknown"
+    ],
+    "must_exclude": [
+      "proves her motive",
+      "proves prevalence"
+    ],
     "expected_pass": true
   },
   {
     "id": "screenshot_private_motive_fail",
     "kind": "semantic",
     "draft": "The screenshot proves her private motive and proves prevalence.",
-    "must_include": ["illustrates"],
-    "must_exclude": ["proves her private motive", "proves prevalence"],
+    "must_include": [
+      "illustrates"
+    ],
+    "must_exclude": [
+      "proves her private motive",
+      "proves prevalence"
+    ],
     "expected_pass": false
   },
   {
     "id": "molyneux_marker_pass",
     "kind": "semantic",
     "draft": "Molyneux supplies an earlier explicit neoliberal paradigm marker. The record does not establish direct transmission into therapy.",
-    "must_include": ["paradigm marker", "does not establish direct transmission"],
-    "must_exclude": ["directly transmitted cutoff culture"],
+    "must_include": [
+      "paradigm marker",
+      "does not establish direct transmission"
+    ],
+    "must_exclude": [
+      "directly transmitted cutoff culture"
+    ],
     "expected_pass": true
   },
   {
     "id": "molyneux_transmission_twist_fail",
     "kind": "semantic",
     "draft": "Molyneux directly transmitted cutoff culture into therapy.",
-    "must_include": ["paradigm marker"],
-    "must_exclude": ["directly transmitted cutoff culture"],
+    "must_include": [
+      "paradigm marker"
+    ],
+    "must_exclude": [
+      "directly transmitted cutoff culture"
+    ],
     "expected_pass": false
   },
   {
     "id": "mythic_medusa_pass",
     "kind": "semantic",
     "draft": "The video gorgonifies the mythic Medusa figure and its competing textual variants.",
-    "must_include": ["mythic Medusa"],
-    "must_exclude": ["historical Medusa"],
+    "must_include": [
+      "mythic Medusa"
+    ],
+    "must_exclude": [
+      "historical Medusa"
+    ],
     "expected_pass": true
   },
   {
     "id": "historical_medusa_category_fail",
     "kind": "semantic",
     "draft": "It gorgonifies the historical Medusa.",
-    "must_include": ["mythic Medusa"],
-    "must_exclude": ["historical Medusa"],
+    "must_include": [
+      "mythic Medusa"
+    ],
+    "must_exclude": [
+      "historical Medusa"
+    ],
     "expected_pass": false
   },
   {
@@ -147,72 +196,122 @@
     "id": "actor_responsibility_pass",
     "kind": "semantic",
     "draft": "The moderator is responsible for the documented deletion. That act does not prove one coordinator designed the entire formation.",
-    "must_include": ["responsible for the documented deletion", "does not prove one coordinator"],
-    "must_exclude": ["no actor can be responsible", "designed everything"],
+    "must_include": [
+      "responsible for the documented deletion",
+      "does not prove one coordinator"
+    ],
+    "must_exclude": [
+      "no actor can be responsible",
+      "designed everything"
+    ],
     "expected_pass": true
   },
   {
     "id": "normalization_not_first_occurrence_pass",
     "kind": "semantic",
     "draft": "An old estrangement case does not settle the later normalization, moral legitimation, professional recommendation, or command vocabulary of cutoff.",
-    "must_include": ["does not settle", "later normalization"],
-    "must_exclude": ["cutoff culture already existed because"],
+    "must_include": [
+      "does not settle",
+      "later normalization"
+    ],
+    "must_exclude": [
+      "cutoff culture already existed because"
+    ],
     "expected_pass": true
   },
   {
     "id": "structural_analogy_not_genealogy_pass",
     "kind": "semantic",
     "draft": "The ancient and modern forms can be structurally analogous. Continuous genealogy and identical culture require separate evidence.",
-    "must_include": ["structurally analogous", "require separate evidence"],
-    "must_exclude": ["structurally identical proves"],
+    "must_include": [
+      "structurally analogous",
+      "require separate evidence"
+    ],
+    "must_exclude": [
+      "structurally identical proves"
+    ],
     "expected_pass": true
   },
   {
     "id": "endogenous_metric_pass",
     "kind": "semantic",
     "draft": "The study reports an association among visible platform-native records. It does not establish substantive quality or successful moderation.",
-    "must_include": ["association among visible", "does not establish substantive quality"],
-    "must_exclude": ["moderation improved quality"],
+    "must_include": [
+      "association among visible",
+      "does not establish substantive quality"
+    ],
+    "must_exclude": [
+      "moderation improved quality"
+    ],
     "expected_pass": true
   },
   {
     "id": "retained_population_pass",
     "kind": "semantic",
     "draft": "Satisfaction describes retained users. Departure, self-censorship, exclusion, and non-entry remain missing-population questions.",
-    "must_include": ["retained users", "missing-population"],
-    "must_exclude": ["the original community was satisfied"],
+    "must_include": [
+      "retained users",
+      "missing-population"
+    ],
+    "must_exclude": [
+      "the original community was satisfied"
+    ],
     "expected_pass": true
   },
   {
     "id": "harm_intervention_separation_pass",
     "kind": "semantic",
     "draft": "The demeaning conduct is established. The necessity and proportionality of cutoff remain separate questions.",
-    "must_include": ["conduct is established", "remain separate"],
-    "must_exclude": ["therefore every sanction"],
+    "must_include": [
+      "conduct is established",
+      "remain separate"
+    ],
+    "must_exclude": [
+      "therefore every sanction"
+    ],
     "expected_pass": true
   },
   {
     "id": "validation_to_assent_pass",
     "kind": "semantic",
     "draft": "Her fear can be acknowledged without ratifying the allegation, diagnosis, causal story, or sanction before assessment.",
-    "must_include": ["acknowledged without ratifying", "before assessment"],
-    "must_exclude": ["therefore her accusation is true"],
+    "must_include": [
+      "acknowledged without ratifying",
+      "before assessment"
+    ],
+    "must_exclude": [
+      "therefore her accusation is true"
+    ],
     "expected_pass": true
   },
   {
     "id": "prized_man_exact_claim_pass",
     "kind": "semantic",
     "draft": "The user thesis says prized men can juggle partners, pump and dump, receive de facto abuse permission, and price friends out. The poor-men and rich-men-near-divorce distribution remains a user-set prevalence thesis.",
-    "must_include": ["juggle partners", "pump and dump", "de facto abuse permission", "price friends out", "poor-men and rich-men-near-divorce"],
-    "must_exclude": ["receive more latitude", "make everyone else their therapist"],
+    "must_include": [
+      "juggle partners",
+      "pump and dump",
+      "de facto abuse permission",
+      "price friends out",
+      "poor-men and rich-men-near-divorce"
+    ],
+    "must_exclude": [
+      "receive more latitude",
+      "make everyone else their therapist"
+    ],
     "expected_pass": true
   },
   {
     "id": "prized_man_polite_substitution_fail",
     "kind": "semantic",
     "draft": "Dating culture overvalues certain guys and gives them more latitude.",
-    "must_include": ["pump and dump", "de facto abuse permission"],
-    "must_exclude": ["gives them more latitude"],
+    "must_include": [
+      "pump and dump",
+      "de facto abuse permission"
+    ],
+    "must_exclude": [
+      "gives them more latitude"
+    ],
     "expected_pass": false
   },
   {
@@ -240,7 +339,9 @@
     "id": "analysis_only_mutation_fail",
     "kind": "authority",
     "speech_act": "analysis",
-    "mutations": ["created-unrequested-file.md"],
+    "mutations": [
+      "created-unrequested-file.md"
+    ],
     "expected_pass": false
   },
   {
@@ -265,6 +366,521 @@
     "exclusions": false,
     "conflicts": false,
     "omission_scan": false,
+    "expected_pass": false
+  },
+  {
+    "id": "deliverable_full_265_ranked_pass",
+    "kind": "deliverable",
+    "requested": 265,
+    "substantive_completed": 265,
+    "unresolved": 0,
+    "support_count": 111,
+    "continuation_kept_unit": true,
+    "shortfall_disclosed_before_cost": true,
+    "labelled_final": true,
+    "provisional_allowed": false,
+    "confidence_separate": true,
+    "expected_pass": true
+  },
+  {
+    "id": "deliverable_17_ranked_248_unranked_final_fail",
+    "kind": "deliverable",
+    "requested": 265,
+    "substantive_completed": 17,
+    "unresolved": 248,
+    "support_count": 111,
+    "continuation_kept_unit": true,
+    "shortfall_disclosed_before_cost": false,
+    "labelled_final": true,
+    "provisional_allowed": false,
+    "confidence_separate": false,
+    "expected_pass": false
+  },
+  {
+    "id": "deliverable_undisclosed_continuation_shortfall_fail",
+    "kind": "deliverable",
+    "requested": 265,
+    "substantive_completed": 17,
+    "unresolved": 248,
+    "support_count": 248,
+    "continuation_kept_unit": false,
+    "shortfall_disclosed_before_cost": false,
+    "labelled_final": false,
+    "provisional_allowed": false,
+    "confidence_separate": true,
+    "expected_pass": false
+  },
+  {
+    "id": "deliverable_provisional_confidence_separation_pass",
+    "kind": "deliverable",
+    "requested": 265,
+    "substantive_completed": 265,
+    "unresolved": 0,
+    "support_count": 17,
+    "continuation_kept_unit": true,
+    "shortfall_disclosed_before_cost": true,
+    "labelled_final": true,
+    "provisional_allowed": true,
+    "confidence_separate": true,
+    "expected_pass": true
+  },
+  {
+    "id": "bottom_up_local_definition_pass",
+    "kind": "semantic",
+    "draft": "Emotional-labor commodification names the recoding of mutual obligation as labor, cost, transaction, or cost-benefit karma across many neoliberal forms. Hochschild's workplace concept may enter afterward as a historically distinct comparison.",
+    "must_include": [
+      "recoding of mutual obligation",
+      "enter afterward",
+      "historically distinct comparison"
+    ],
+    "must_exclude": [
+      "Hochschild defines the user's concept",
+      "the user means Hochschild"
+    ],
+    "expected_pass": true
+  },
+  {
+    "id": "external_genealogy_subsumption_fail",
+    "kind": "semantic",
+    "draft": "Hochschild defines the user's concept, so emotional-labor commodification means her workplace category.",
+    "must_include": [
+      "recoding of mutual obligation",
+      "enter afterward"
+    ],
+    "must_exclude": [
+      "Hochschild defines the user's concept",
+      "means her workplace category"
+    ],
+    "expected_pass": false
+  },
+  {
+    "id": "critic_defect_provenance_pass",
+    "kind": "semantic",
+    "draft": "The critic defeats an assistant-authored bridge, so this is an assistant interpretive defect. The objection becomes substantive only if it survives against the strongest user-authored or adopted claim.",
+    "must_include": [
+      "assistant interpretive defect",
+      "only if it survives",
+      "user-authored or adopted claim"
+    ],
+    "must_exclude": [
+      "substantive flaw in the project"
+    ],
+    "expected_pass": true
+  },
+  {
+    "id": "critic_draft_defect_misattributed_fail",
+    "kind": "semantic",
+    "draft": "The critic found a substantive flaw in the project, although the attacked premise appeared only in the assistant's draft.",
+    "must_include": [
+      "assistant interpretive defect",
+      "user-authored or adopted claim"
+    ],
+    "must_exclude": [
+      "substantive flaw in the project"
+    ],
+    "expected_pass": false
+  },
+  {
+    "id": "internal_chat_recovery_without_signin_pass",
+    "kind": "semantic",
+    "draft": "Search the current thread, conversation corpus, attachments, workspace, and Library. State any retrieval residue and continue every unblocked part without asking the user to sign in.",
+    "must_include": [
+      "conversation corpus",
+      "without asking the user to sign in",
+      "continue every unblocked part"
+    ],
+    "must_exclude": [
+      "sign in to ChatGPT"
+    ],
+    "expected_pass": true
+  },
+  {
+    "id": "internal_chat_signin_request_fail",
+    "kind": "semantic",
+    "draft": "Please sign in to ChatGPT so I can recover the conversation.",
+    "must_include": [
+      "conversation corpus",
+      "continue every unblocked part"
+    ],
+    "must_exclude": [
+      "sign in to ChatGPT"
+    ],
+    "expected_pass": false
+  },
+  {
+    "id": "academic_category_audit_before_search_pass",
+    "kind": "semantic",
+    "draft": "Treat 'white feminism' first as an academic claim with a history and political operation. Audit who uses it, against whom, what conduct it groups, what contradictions it exports, and what material relations it obscures before using it as search vocabulary or classification. Preserve it afterward only as quoted source vocabulary or an explicitly Gorgonified object of analysis.",
+    "must_include": [
+      "Audit who uses it",
+      "what contradictions it exports",
+      "before using it as search vocabulary or classification",
+      "quoted source vocabulary or an explicitly Gorgonified object of analysis"
+    ],
+    "must_exclude": [
+      "neutral scholarly category",
+      "Wikipedia defines the project",
+      "tested category"
+    ],
+    "expected_pass": true
+  },
+  {
+    "id": "neutral_white_feminism_wikipedia_frame_fail",
+    "kind": "semantic",
+    "draft": "White feminism is a neutral scholarly category. Wikipedia defines the project object, so I will use that definition as the search vocabulary and classification scheme.",
+    "must_include": [
+      "Audit who uses it",
+      "before using it as search vocabulary or classification"
+    ],
+    "must_exclude": [
+      "neutral scholarly category",
+      "Wikipedia defines the project object"
+    ],
+    "expected_pass": false
+  },
+  {
+    "id": "concrete_actors_material_relations_pass",
+    "kind": "semantic",
+    "draft": "Trace named actors, institutions, laws, property relations, labor relations, funding flows, enforcement mechanisms, and documented acts before invoking patriarchy, feminism, or intersectionality as an explanation. A category label cannot replace the causal chain.",
+    "must_include": [
+      "named actors, institutions, laws",
+      "property relations, labor relations, funding flows",
+      "A category label cannot replace the causal chain"
+    ],
+    "must_exclude": [
+      "the category itself proves the cause"
+    ],
+    "expected_pass": true
+  },
+  {
+    "id": "critic_as_authority_academic_frame_fail",
+    "kind": "semantic",
+    "draft": "The critic calls the thesis reductive and the academic literature agrees, so that verdict is a substantive defect in the project and supplies the governing framework.",
+    "must_include": [
+      "trace the attacked claim to its author",
+      "survives against the strongest user-authored or adopted claim"
+    ],
+    "must_exclude": [
+      "that verdict is a substantive defect in the project",
+      "supplies the governing framework"
+    ],
+    "expected_pass": false
+  },
+  {
+    "id": "feminism_two_roots_flock_creed_pass",
+    "kind": "semantic",
+    "draft": "At the Polymyth project layer, feminism is the creed or governing formation that retains both “the personal is political” and standpoint epistemology. Women are the flock, not the creed. Classify an argument from direct premise evidence, not self-description.",
+    "must_include": [
+      "feminism is the creed or governing formation",
+      "“the personal is political” and standpoint epistemology",
+      "Women are the flock, not the creed",
+      "direct premise evidence"
+    ],
+    "must_exclude": [
+      "women are feminism",
+      "self-description proves premise membership"
+    ],
+    "expected_pass": true
+  },
+  {
+    "id": "feminism_identity_without_roots_fail",
+    "kind": "semantic",
+    "draft": "Women are feminism, and self-description proves premise membership. Feminism has no project roots that need direct evidence.",
+    "must_include": [
+      "feminism is the creed or governing formation",
+      "“the personal is political” and standpoint epistemology",
+      "Women are the flock, not the creed",
+      "direct premise evidence"
+    ],
+    "must_exclude": [
+      "women are feminism",
+      "self-description proves premise membership"
+    ],
+    "expected_pass": false
+  },
+  {
+    "id": "academia_gorgonified_field_scope_pass",
+    "kind": "semantic",
+    "draft": "Under the project ruling, academia itself is Gorgonified and must be researched as part of the object rather than treated as a neutral court. This is a structural field claim, not proof that every work or institution performs the same operation. Each work still requires a work-specific architectural and evidentiary audit.",
+    "must_include": [
+      "academia itself is Gorgonified",
+      "researched as part of the object rather than treated as a neutral court",
+      "structural field claim, not proof that every work or institution performs the same operation",
+      "work-specific architectural and evidentiary audit"
+    ],
+    "must_exclude": [
+      "academia is a neutral authority",
+      "every academic work is the same Gorgonification"
+    ],
+    "expected_pass": true
+  },
+  {
+    "id": "academia_neutral_or_universalized_fail",
+    "kind": "semantic",
+    "draft": "Academia is a neutral authority. Alternatively, if academia is Gorgonified, every academic work is the same Gorgonification.",
+    "must_include": [
+      "academia itself is Gorgonified",
+      "researched as part of the object rather than treated as a neutral court",
+      "structural field claim, not proof that every work or institution performs the same operation",
+      "work-specific architectural and evidentiary audit"
+    ],
+    "must_exclude": [
+      "academia is a neutral authority",
+      "every academic work is the same Gorgonification"
+    ],
+    "expected_pass": false
+  },
+  {
+    "id": "slavery_not_patriarchy_non_equivalence_pass",
+    "kind": "semantic",
+    "draft": "Slavery is not patriarchy. Define slavery and the patriarchal pedestal separately through their actors, legal statuses, property relations, coercions, duties, and consequences. A shared mechanism does not establish equivalence, and a source's equation proves only that the source made that claim.",
+    "must_include": [
+      "Slavery is not patriarchy",
+      "Define slavery and the patriarchal pedestal separately",
+      "A shared mechanism does not establish equivalence",
+      "a source's equation proves only that the source made that claim"
+    ],
+    "must_exclude": [
+      "shared mechanism establishes equivalence",
+      "source equates them, so they are equivalent"
+    ],
+    "expected_pass": true
+  },
+  {
+    "id": "slavery_shared_mechanism_equivalence_fail",
+    "kind": "semantic",
+    "draft": "Slavery and patriarchy share a mechanism, so the shared mechanism establishes equivalence. A source equates them, so they are equivalent.",
+    "must_include": [
+      "Slavery is not patriarchy",
+      "Define slavery and the patriarchal pedestal separately",
+      "A shared mechanism does not establish equivalence",
+      "a source's equation proves only that the source made that claim"
+    ],
+    "must_exclude": [
+      "shared mechanism establishes equivalence",
+      "source equates them, so they are equivalent"
+    ],
+    "expected_pass": false
+  },
+  {
+    "id": "mixed_provenance_four_way_pass",
+    "kind": "semantic",
+    "draft": "Ledger 1 records the actual user-authored or expressly adopted thesis. Ledger 2 records the user's explanation to the assistant as metacommunicative guidance, not automatically as public essay thesis. Ledger 3 records the critic's argument and evidence without granting authority. Ledger 4 records an assistant-authored bridge as an assistant interpretive defect if criticism defeats only that bridge.",
+    "must_include": [
+      "actual user-authored or expressly adopted thesis",
+      "user's explanation to the assistant as metacommunicative guidance",
+      "not automatically as public essay thesis",
+      "critic's argument and evidence without granting authority",
+      "assistant-authored bridge as an assistant interpretive defect"
+    ],
+    "must_exclude": [
+      "user explained it, so it is a public thesis",
+      "critic's verdict defines the project",
+      "assistant bridge is the user's claim"
+    ],
+    "expected_pass": true
+  },
+  {
+    "id": "mixed_provenance_collapse_fail",
+    "kind": "semantic",
+    "draft": "The user explained it, so it is a public thesis. The critic's verdict defines the project. The assistant bridge is the user's claim.",
+    "must_include": [
+      "actual user-authored or expressly adopted thesis",
+      "user's explanation to the assistant as metacommunicative guidance",
+      "not automatically as public essay thesis",
+      "critic's argument and evidence without granting authority",
+      "assistant-authored bridge as an assistant interpretive defect"
+    ],
+    "must_exclude": [
+      "user explained it, so it is a public thesis",
+      "critic's verdict defines the project",
+      "assistant bridge is the user's claim"
+    ],
+    "expected_pass": false
+  },
+  {
+    "id": "private_mephistodata_argument_public_evidence_pass",
+    "kind": "semantic",
+    "draft": "The public essay does not cite the unpublished or private Mephistodata text. It may state an authorized argument from that material in the essay's own body without presenting the private text as authority. Every factual claim must be supported by a public primary source or another appropriate checked public source.",
+    "must_include": [
+      "does not cite the unpublished or private Mephistodata text",
+      "state an authorized argument",
+      "in the essay's own body",
+      "Every factual claim must be supported by a public primary source",
+      "appropriate checked public source"
+    ],
+    "must_exclude": [
+      "cite the private Mephistodata text",
+      "private text verifies the factual claim"
+    ],
+    "expected_pass": true
+  },
+  {
+    "id": "private_mephistodata_citation_as_authority_fail",
+    "kind": "semantic",
+    "draft": "The public essay should cite the private Mephistodata text because the private text verifies the factual claim; paraphrasing it is enough evidence.",
+    "must_include": [
+      "does not cite the unpublished or private Mephistodata text",
+      "state an authorized argument",
+      "in the essay's own body",
+      "Every factual claim must be supported by a public primary source",
+      "appropriate checked public source"
+    ],
+    "must_exclude": [
+      "cite the private Mephistodata text",
+      "private text verifies the factual claim"
+    ],
+    "expected_pass": false
+  },
+  {
+    "id": "degorgonified_feminism_full_bundle_recall_pass",
+    "kind": "semantic",
+    "draft": "“Degorgonified feminism” is the operator-authorized exact ML* activation and retrieval handle for this complete definition bundle. Its words are not interpreted compositionally: it is not a feminist subtype, a purified or innocent feminist remainder, a historical school, a premise classification, an achieved ideological condition, or a synonym for Arendtianfeminism. A source quotation containing the words does not validate the handle. The handle groups records with different authority statuses and does not convert Polymyth inferences, assistant operational extensions, private drafting instructions, or unresolved material into direct user-authored public claims. Women are people. Feminism is a creed, movement, discourse, or governing architecture. The flock is not the creed. “Feminist” as a self-description or source label proves neither project root. At the project layer, feminism is the Gorgon architecture formed by the conjunction of “the personal is political” and standpoint epistemology. Situated evidence, testimony, positionality, unequal access, first-person narrative, and identity-conditioned data do not by themselves establish standpoint rank. Direct premise evidence controls classification: rejecting either root is OUTSIDE/EXCOMMUNICABLE, retaining both roots while criticizing a faction or implementation is INTERNAL GORGONWARS, and missing or ambiguous root evidence is UNRESOLVED. The conjunction can price listening, teaching, forgiving, remaining in conflict, care, presence, reciprocity, and responsibility as emotional labor and transfer responsibility. “White feminism” is always qualifier-Gorgonification, with no “when it” qualification; concrete allegations about named actors, institutions, laws, property relations, and actions still require separate evidence. The broader subtype audit is a Polymyth/assistant operational extension, not a universal user ruling that every subtype term is always Gorgonification. “Gorgonified feminism” remains a retired qualifier that invents a clean genus. Arendtianfeminism remains a separate exit coinage, not a verified historical school. Slavery is not patriarchy. Define slavery and the patriarchal pedestal separately through actors, institutions, legal statuses, property relations, coercions, duties, and consequences. Analogy, intersection, comparison, shared consequences, shared mechanisms, and source equations do not establish identity or equivalence. Evidence that real women have been attacked through Medusa or Gorgon imagery establishes an attack on women. It does not collapse women into feminism or automatically turn criticism of a creed into an immutable-group slur. Academia itself is Gorgonified as a structural field claim, not proof that every academic work or institution performs the same operation. Research begins with bottom-up reconstruction, audits academic query terms, and traces named actors, institutions, laws, property relations, actions, and material mechanisms. It retrieves primary works, direct critiques of claims and categories, counterarguments, counters to those counterarguments, and outside vocabulary. Wikipedia is inadmissible as definition, ontology, evidence, citation, or answer. The critic is not the authority. Keep the actual user-authored or expressly adopted thesis, the user's explanation or correction to the AI, the critic's argument and evidence, and the assistant's bridge or rhetorical defect in separate provenance records. Authorized points from private or unpublished Mephistodata material may be argued in public prose, but the private text is not cited as authority and factual claims require appropriate public or primary evidence. The unrecovered pentagram screenshot list remains UNRESOLVED and cannot be reconstructed from assistant summaries.",
+    "must_include": [
+      "operator-authorized exact ML* activation and retrieval handle",
+      "it is not a feminist subtype, a purified or innocent feminist remainder, a historical school, a premise classification, an achieved ideological condition, or a synonym for Arendtianfeminism",
+      "groups records with different authority statuses",
+      "does not convert Polymyth inferences, assistant operational extensions, private drafting instructions, or unresolved material into direct user-authored public claims",
+      "Women are people",
+      "The flock is not the creed",
+      "self-description or source label proves neither project root",
+      "conjunction of “the personal is political” and standpoint epistemology",
+      "do not by themselves establish standpoint rank",
+      "Direct premise evidence controls classification",
+      "OUTSIDE/EXCOMMUNICABLE",
+      "INTERNAL GORGONWARS",
+      "UNRESOLVED",
+      "price listening, teaching, forgiving, remaining in conflict, care, presence, reciprocity, and responsibility as emotional labor",
+      "“White feminism” is always qualifier-Gorgonification, with no “when it” qualification",
+      "concrete allegations about named actors, institutions, laws, property relations, and actions still require separate evidence",
+      "broader subtype audit is a Polymyth/assistant operational extension, not a universal user ruling",
+      "“Gorgonified feminism” remains a retired qualifier",
+      "Arendtianfeminism remains a separate exit coinage, not a verified historical school",
+      "Slavery is not patriarchy",
+      "do not establish identity or equivalence",
+      "real women have been attacked through Medusa or Gorgon imagery establishes an attack on women",
+      "does not collapse women into feminism or automatically turn criticism of a creed into an immutable-group slur",
+      "Academia itself is Gorgonified as a structural field claim, not proof that every academic work or institution performs the same operation",
+      "bottom-up reconstruction",
+      "primary works, direct critiques of claims and categories, counterarguments, counters to those counterarguments, and outside vocabulary",
+      "Wikipedia is inadmissible as definition, ontology, evidence, citation, or answer",
+      "The critic is not the authority",
+      "actual user-authored or expressly adopted thesis",
+      "user's explanation or correction to the AI",
+      "critic's argument and evidence",
+      "assistant's bridge or rhetorical defect",
+      "private text is not cited as authority",
+      "factual claims require appropriate public or primary evidence",
+      "unrecovered pentagram screenshot list remains UNRESOLVED and cannot be reconstructed from assistant summaries"
+    ],
+    "must_exclude": [
+      "names a clean feminist subtype",
+      "Wikipedia may define",
+      "White feminism is Gorgonification when it",
+      "shared mechanism establishes equivalence",
+      "critic's verdict defines the project",
+      "private Mephistodata text verifies factual claims"
+    ],
+    "expected_pass": true
+  },
+  {
+    "id": "degorgonified_feminism_partial_recall_fail",
+    "kind": "semantic",
+    "draft": "“Degorgonified feminism” recalls that women are people, feminism is a creed, and the project roots are “the personal is political” and standpoint epistemology.",
+    "must_include": [
+      "operator-authorized exact ML* activation and retrieval handle",
+      "OUTSIDE/EXCOMMUNICABLE",
+      "INTERNAL GORGONWARS",
+      "UNRESOLVED",
+      "“White feminism” is always qualifier-Gorgonification",
+      "Slavery is not patriarchy",
+      "real women have been attacked through Medusa or Gorgon imagery establishes an attack on women",
+      "Wikipedia is inadmissible as definition, ontology, evidence, citation, or answer",
+      "groups records with different authority statuses",
+      "unrecovered pentagram screenshot list remains UNRESOLVED and cannot be reconstructed from assistant summaries"
+    ],
+    "must_exclude": [
+      "names a clean feminist subtype"
+    ],
+    "expected_pass": false
+  },
+  {
+    "id": "degorgonified_feminism_clean_subtype_neutralization_fail",
+    "kind": "semantic",
+    "draft": "“Degorgonified feminism” names a clean feminist subtype, an innocent feminist remainder that has repaired the defects of ordinary feminism and can serve as a synonym for Arendtianfeminism.",
+    "must_include": [
+      "operator-authorized exact ML* activation and retrieval handle",
+      "not a feminist subtype, a purified or innocent feminist remainder",
+      "not a verified historical school"
+    ],
+    "must_exclude": [
+      "names a clean feminist subtype",
+      "innocent feminist remainder that has repaired",
+      "synonym for Arendtianfeminism"
+    ],
+    "expected_pass": false
+  },
+  {
+    "id": "degorgonified_feminism_wikipedia_frame_fail",
+    "kind": "semantic",
+    "draft": "Under “degorgonified feminism,” Wikipedia may define the research object and ontology, provide evidence and citations, and supply the answer frame before academic research begins.",
+    "must_include": [
+      "Wikipedia is inadmissible as definition, ontology, evidence, citation, or answer"
+    ],
+    "must_exclude": [
+      "Wikipedia may define the research object and ontology",
+      "supply the answer frame"
+    ],
+    "expected_pass": false
+  },
+  {
+    "id": "degorgonified_feminism_white_feminism_when_it_fail",
+    "kind": "semantic",
+    "draft": "Under “degorgonified feminism,” White feminism is Gorgonification when it exports a contradiction; otherwise it is a neutral feminist subtype after audit.",
+    "must_include": [
+      "“White feminism” is always qualifier-Gorgonification, with no “when it” qualification"
+    ],
+    "must_exclude": [
+      "White feminism is Gorgonification when it",
+      "neutral feminist subtype after audit"
+    ],
+    "expected_pass": false
+  },
+  {
+    "id": "degorgonified_feminism_slavery_equivalence_fail",
+    "kind": "semantic",
+    "draft": "Under “degorgonified feminism,” slavery and patriarchy share a mechanism, so the shared mechanism establishes equivalence; a source's equation establishes their identity.",
+    "must_include": [
+      "Slavery is not patriarchy",
+      "Define slavery and the patriarchal pedestal separately",
+      "do not establish identity or equivalence"
+    ],
+    "must_exclude": [
+      "shared mechanism establishes equivalence",
+      "source's equation establishes their identity"
+    ],
+    "expected_pass": false
+  },
+  {
+    "id": "degorgonified_feminism_provenance_collapse_fail",
+    "kind": "semantic",
+    "draft": "Under “degorgonified feminism,” the user explained it, so it is a public thesis; the critic's verdict defines the project; the assistant bridge is the user's claim; and private Mephistodata text verifies factual claims because every record grouped by the handle has the same authority status.",
+    "must_include": [
+      "actual user-authored or expressly adopted thesis",
+      "user's explanation or correction to the AI",
+      "critic's argument and evidence",
+      "assistant's bridge or rhetorical defect",
+      "groups records with different authority statuses",
+      "private text is not cited as authority",
+      "factual claims require appropriate public or primary evidence"
+    ],
+    "must_exclude": [
+      "user explained it, so it is a public thesis",
+      "critic's verdict defines the project",
+      "assistant bridge is the user's claim",
+      "private Mephistodata text verifies factual claims",
+      "every record grouped by the handle has the same authority status"
+    ],
     "expected_pass": false
   }
 ]

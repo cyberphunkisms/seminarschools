@@ -37,6 +37,8 @@ data/author-sources/mythology-project-10pp-extracted-2026-07-28.txt`,
 
 AUTHORSHIP BOUNDARY. The author creates the philosophy and story. AI organizes, asks, retrieves, compares, and mythically shadows the work. Model fluency, repeated summaries, and premature synthesis confer no authority.
 
+DEFINITIONAL DIRECTION. Definitions arise bottom-up from a term's actual uses, examples, contrasts, corrections, relations, and effects. External theories and genealogies may enter afterward as comparisons. Lexical overlap never authorizes subsuming the local concept under an established category or thinker.
+
 SOURCE STATES. Every proposition receives one state before integration. User statement. Adopted proposal. Assistant-only proposal. Correction. Rejection. Unresolved question. Later work may change the state through an explicit recorded decision.
 
 THREE LEDGERS. The correction ledger protects settled facts from silent reversion. The exclusion ledger protects rejected terms and interpretations from re-entering as canon. The question ledger preserves genuine gaps without completing them through guesswork.
@@ -46,8 +48,8 @@ PRE-INTEGRATION PASS. Reread the relevant framework and source corpus. Identify 
 CRITIQUE STANDARD. Ironman the position. Name the substantive defect. Distinguish productive friction from automatic agreement and performed disagreement. When an interlocutor reports confusion, ask what is unclear. When source access fails, report the failure immediately.
 
 CITATION FUNCTION. Citation records factual support, intellectual genealogy, and accountability. It also distinguishes repetition from creation.`,
-    x: 'Recovered principally from the user-supplied selected ledger, PDF pages 3, 9, 19-20, 25, 30-31, 40, 43, 76, 84, 112, 121, 140, 153, 168, 173, 207-208, 221-225, 228-247. Cross-reference PM7 Deduction-first methodology, Why some material is recorded verbatim, User-claim citation and source-trace rule, STOP-BACKTRACKING, Correction defaults gate, Ironman before research.',
-    tg: 'methodology, particular-to-universal, close-reading, authorship-boundary, correction-ledger, exclusion-ledger, question-ledger, source-states, model-fluency-hazard, citation-genealogy, anti-backtracking, mythology-integration-project, 2026-07-28'
+    x: 'Recovered principally from the user-supplied selected ledger, PDF pages 3, 9, 19-20, 25, 30-31, 40, 43, 76, 84, 112, 121, 140, 153, 168, 173, 207-208, 221-225, 228-247. The September 3, 2026 definition correction is preserved in UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_BOTTOM_UP_DEFINITION_DEFECT_PROVENANCE_INTERNAL_RETRIEVAL_2026-09-03.md. Cross-reference PM7 Deduction-first methodology, Why some material is recorded verbatim, User-claim citation and source-trace rule, STOP-BACKTRACKING, Correction defaults gate, Ironman before research.',
+    tg: 'methodology, particular-to-universal, bottom-up-definition, definition-direction, local-use-first, anti-subsumption, close-reading, authorship-boundary, correction-ledger, exclusion-ledger, question-ledger, source-states, model-fluency-hazard, citation-genealogy, anti-backtracking, mythology-integration-project, amended-2026-09-03'
   },
   {
     id: 'mythology-integration-register-scale-variant-chronology-discipline',
@@ -199,7 +201,7 @@ FOUR-PART SELF-AUDIT.
 4. Did a compelling image, geometry, or narrative form substitute for proof?
 
 LIVE VALIDATION. Apply the scanner to cases with evidence available to an external participant. Record successful diagnoses, altered diagnoses, null results, and abandoned claims.`,
-    x: 'Recovered as assistant synthesis from page 7 of the 10-page PDF, then integrated here as an explicit fallibility control under the user’s current instruction to update ML* from all supplied material. Stone-specific and Point-specific imagery from that retrospective remains outside this rule because later manuscript corrections govern those symbols.',
+    x: 'Recovered as assistant synthesis from page 7 of the 10-page PDF and retained as an assistant-origin fallibility safeguard. The user instruction authorized filing and integration work. It did not by itself ratify the synthesis as user-authored semantic canon. Stone-specific and Point-specific imagery from that retrospective remains outside this safeguard because later manuscript corrections govern those symbols.',
     tg: 'methodology, scanner-fallibility, anti-self-sealing, inspectable-evidence, contestable, alterable, null-result, model-abandonment, anti-absorption, repetition-no-authority, live-validation, 2026-07-28',
     xr: ['method-ouroborossyntheses-2026-08-23']
   },
@@ -225,7 +227,7 @@ ADDITIONAL FLAGS. Provisional name. Unresolved guess. Assistant hallucination. P
 AUTHORITY RULE. Model repetition supplies no authority. Examination, evidence, and explicit authorial ratification change source status.
 
 ARCHAEOLOGY RULE. Early Gorgonwars material remains archaeological substrate. It may explain development and recover forgotten authorial discoveries. It never overrides current definitions automatically.`,
-    x: 'Recovered from pages 7-10 of the 10-page PDF. The status taxonomy is assistant synthesis and is adopted as an AI filing rule under the current instruction. Cross-reference Raw note preservation gate, User-claim citation and source-trace rule, and the source-corpus entry.',
+    x: 'Recovered from pages 7-10 of the 10-page PDF. The status taxonomy remains an assistant-origin filing safeguard and proposal. The instruction to update ML* authorized the filing operation and did not constitute semantic adoption. Cross-reference Raw note preservation gate, User-claim citation and source-trace rule, and the source-corpus entry.',
     tg: 'methodology, archive-status, conversation-archaeology, source-states, model-repetition-no-authority, authorial-ratification, abandoned-branch, useful-trace, gorgonwars-archaeology, 2026-07-28'
   },
   {
@@ -340,7 +342,7 @@ SOURCE STANDARD. A social post, Goodreads, Reddit, Wikipedia, Urban Dictionary, 
     s: 'methodology',
     r: 'ai',
     t: 'Mythology Integration Project anti-TWIST and negative-control ledger',
-    xc: 'CURRENT CONTROLLED-ABSENCE NEGATIVE CONTROL 2026-08-26. Keep truth inferred from shadowbanning prohibited. Add the inverse prohibition: falsity or nonexistence inferred from post-suppression absence. Documented control can establish obstruction. It cannot prove exact missing content. Generic suppression cannot rescue an unsupported preferred claim.',
+    xc: 'CURRENT NON-STRAWMAN CONTROL 2026-08-28. Keep truth inferred from shadowbanning prohibited. Keep falsity or nonexistence inferred from post-suppression absence prohibited. Preserve user language, project rulings, source claims, assistant proposals, and current file architecture as separate provenance. Authority to update a rule never lets the assistant ratify its own interpretation. A source can oppose a scoped independence or genealogy claim without erasing a surviving structural comparison. Detienne is an explicit point in favor of the project\'s always-already account because the user ruled it so. The narrower genealogy concern remains nonopposition as presented and is not silently promoted into support, adoption, or a new project rule.',
     b: `AUTHORSHIP. Preserve assistant invention as assistant invention. Preserve user coinages and spellings in provenance. Preserve direct corrections. Never let repetition convert a proposal into canon.
 
 LEVELS. Preserve snakes, people, factions, institutions, Hydra, portals, and social effects as separate types. Preserve Soviet, BRICS, and neoliberal Gorgons as distinct surface and historical forms.
@@ -358,6 +360,32 @@ REJECTED RETURNS. The Desert cybernetics origin. Wormhole name 11. Remote Janito
 SOURCE ACCESS. Inaccessible Twitter, Carrd, or other web material remains inaccessible. Assistant-reported citation counts remain unverified. The missing publication-cycle image and unidentified police-duty precedents remain evidence debts.`,
     x: 'This compressed active ledger preserves all 74 X items in the full selected ledger. Complete wording and page references: https://seminarschools.com/polymyth/research/mythology-integration-project-selected-ledger-2026-07-28.txt.',
     tg: 'methodology, anti-twist, negative-controls, authorship, typed-levels, category-conditions, mezo, unresolved-mappings, chronology, tradition-separation, rejected-returns, source-access, evidence-debt, 2026-07-28'
+  },
+  {
+    id: 'mythology-integration-detienne-always-already-provenance-2026-08-28',
+    s: 'methodology',
+    r: 'both',
+    t: 'Detienne comparison provenance and the always-already user ruling',
+    b: `USER RULING. Detienne's account of constructing comparables across traditions is a point in favor of the project's always-already claim. That ruling is preserved as user-authored. It is neither softened to mere compatibility nor upgraded into a claim that Detienne anticipated, authored, or adopted Polymyth.
+
+WHAT THE SUPPORT IS. Comparing reveals relations that were available before the present comparison named them. The comparison does not need a shared inherited label, a direct transmission chain, or institutional permission before it can expose a structural position. This is the exact axis on which Detienne supports the always-already account.
+
+WHAT THE SUPPORT DOES NOT SAY. Detienne does not establish every Polycognate comparison, prove the project's categories exhaustive, supply a direct genealogy for unrelated figures, or create a new admission, correction, or defeat rule for proposed pairs or applications. His method supports the possibility and legitimacy of constructed comparison while requiring the compared particulars to remain visible.
+
+NARROW GENEALOGY CONCERN. The concern that a proposed independent arrival may instead have a documented relay does not go against the project as presented. It can oppose the scoped independence claim when evidence establishes the relay. It does not erase the structural comparison, convert the whole source into opposition, or settle any other claim. This is nonopposition as presented. It is not automatically support, compatibility, or adoption.
+
+CURRENT FOUR-REGISTER UPDATE. Preserve the settled compression movement gesture → ritual → idiom → narrative. Preserve the separate reverse activation movement narrative → idiom → ritual → gesture. The two movements do not establish universal reciprocity, choose ritual versus idiom priority, or ratify or reject any older hierarchy, risk, or operational-sufficiency claim. Current Polycognate rules continue to govern relation type, scale, and bidirectional recognition. This correction neither alters nor reopens those rules.
+
+SEPARATE CONTROL AXES. Source provenance, native register, structural position, and project status remain useful comparison controls. They are not the four-register update and must not replace either movement above.`,
+    x: 'Current provenance owner for the Detienne conversation. It preserves the user corrections that the genealogy concern does not oppose the project and that Detienne positively supports the always-already account, without manufacturing total agreement or self-ratifying assistant safeguards.',
+    tg: 'methodology, detienne, comparing-the-incomparable, always-already, point-in-favor, user-ruling, genealogy, documented-relay, scoped-opposition, structural-comparison-survives, provenance-separation, gesture-ritual-idiom-narrative, narrative-idiom-ritual-gesture, current-rules-preserved, non-strawman, 2026-08-28',
+    xr: [
+      'mythology-integration-particular-to-universal-source-discipline',
+      'mythology-integration-register-scale-variant-chronology-discipline',
+      'mythology-integration-anti-twist-negative-controls',
+      'method-non-strawman-project-comparison-2026-08-28',
+      'method-polycognate-current-ruling-and-case-controls-2026-08-28'
+    ]
   },
   {
     id: 'mythology-integration-cave-desert-archaeology',

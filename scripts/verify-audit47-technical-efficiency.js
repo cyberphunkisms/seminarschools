@@ -105,6 +105,9 @@ check((release.notes || []).includes('No security audit was performed.'), 'relea
 const eventPayload = json('polymythseminars/events.json');
 const events = Array.isArray(eventPayload.events) ? eventPayload.events : [];
 const ids = new Set(events.map(event => String(event.id)));
+const publicationSurfaces = json('data/polymythcal-publication-surfaces.json');
+const chronologyIds = new Set((publicationSurfaces.chronology_ids || []).map(String));
+const watchlistIds = new Set((publicationSurfaces.watchlist_ids || []).map(String));
 const sources = json('scripts/sources.json').sources || [];
 metrics.canonical_events = events.length;
 metrics.event_types = new Set(events.map(event => event.type)).size;
@@ -114,6 +117,13 @@ check(ids.size === events.length, `canonical event IDs are ${ids.size}/${events.
 check(metrics.event_types >= inventory.minimum_event_types, `event type inventory fell below ${inventory.minimum_event_types}: ${metrics.event_types}`);
 check(sources.length >= inventory.minimum_sources, `source inventory fell below ${inventory.minimum_sources}: ${sources.length}`);
 check(byteEqual('polymythseminars/events.json', 'data/polymyth-seminar-events.json'), 'canonical event payloads are not byte-identical');
+check(chronologyIds.size === 1954 && watchlistIds.size === 134, 'Discovery v2 chronology/watchlist counts changed');
+check(
+  chronologyIds.size + watchlistIds.size === ids.size
+    && [...ids].every(id => chronologyIds.has(id) || watchlistIds.has(id))
+    && ![...chronologyIds].some(id => watchlistIds.has(id)),
+  'Discovery v2 chronology/watchlist IDs do not exactly partition the canonical ledger',
+);
 
 const lifecycle = json('data/polymythcal-lifecycle-state.json').events || [];
 check(lifecycle.length === events.length, `lifecycle inventory is ${lifecycle.length}/${events.length}`);
@@ -148,10 +158,39 @@ for (const event of events) {
 }
 
 for (const [alias, target] of aliasTargets) {
-  check(
-    byteEqual(`polymythseminars/ics/${alias}.ics`, `polymythseminars/ics/${target}.ics`),
-    `${alias}: legacy ICS is not byte-identical to ${target}`,
-  );
+  if (chronologyIds.has(target)) {
+    check(
+      byteEqual(`polymythseminars/ics/${alias}.ics`, `polymythseminars/ics/${target}.ics`),
+      `${alias}: chronology legacy ICS is not byte-identical to ${target}`,
+    );
+  } else {
+    check(!exists(`polymythseminars/ics/${alias}.ics`), `${alias}: watchlist alias has source ICS`);
+    check(!exists(`public/polymythseminars/ics/${alias}.ics`), `${alias}: watchlist alias has public ICS`);
+  }
+}
+for (const event of events) {
+  const id = String(event.id);
+  for (const localePath of ['events', 'fr/events']) {
+    const source = `polymythseminars/${localePath}/${id}/index.html`;
+    const published = `public/${source}`;
+    check(exists(source), `${source}: canonical detail is missing`);
+    check(byteEqual(source, published), `${published}: canonical detail is missing or differs from source`);
+    if (watchlistIds.has(id) && exists(source)) {
+      const html = read(source);
+      check(meta(html, 'robots') === 'noindex,follow', `${source}: watchlist detail is indexable`);
+      check(!/<time\b[^>]*\bdatetime\s*=/i.test(html), `${source}: watchlist detail exposes a date`);
+      check(
+        !/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?["']@type["']\s*:\s*["']Event["']/i.test(html),
+        `${source}: watchlist detail exposes Event JSON-LD`,
+      );
+    }
+  }
+  if (chronologyIds.has(id)) {
+    check(byteEqual(`polymythseminars/ics/${id}.ics`, `public/polymythseminars/ics/${id}.ics`), `${id}: chronology ICS is missing or differs in public`);
+  } else {
+    check(!exists(`polymythseminars/ics/${id}.ics`), `${id}: watchlist record has source ICS`);
+    check(!exists(`public/polymythseminars/ics/${id}.ics`), `${id}: watchlist record has public ICS`);
+  }
 }
 const englishEventDirectories = directories('polymythseminars/events');
 metrics.generated_english_alias_routes = englishEventDirectories.filter(id => !ids.has(id)).length;
@@ -176,14 +215,22 @@ for (const [alias, target] of aliasTargets) {
 metrics.french_alias_routes = directories('polymythseminars/fr/events').filter(id => !ids.has(id)).length;
 check(metrics.french_alias_routes === aliasTargets.size, `French alias routes are ${metrics.french_alias_routes}/${aliasTargets.size}`);
 
-const app = read('js/polymythcal-revamp.js');
+const discoveryController = read('js/polymythcal-discovery.js');
+const discoveryCore = read('js/polymythcal-discovery-core.js');
 for (const marker of [
-  'cache: "default"',
-  'const ARTS_TOPIC_RE =',
-  'const payloadVersion = String(payload?._generated_at || "");',
-  'existing?.headers.get("X-Polymythcal-Version") === payloadVersion',
-]) check(app.includes(marker), `calendar runtime lacks ${marker}`);
-check(!app.includes('cache: "no-cache"'), 'calendar runtime still forces conditional revalidation');
+  "cache: 'default'",
+  "'/polymythseminars/browse.json'",
+  "'/polymythseminars/watchlist.json'",
+  "'/polymythseminars/research.json'",
+  'CORE.mergeResearchProjection(candidate, researchCandidate)',
+  "addAction(detailHref(event), COPY.details, 'primary-link');",
+]) check(discoveryController.includes(marker), `Discovery controller lacks ${marker}`);
+for (const marker of [
+  'function mergeResearchProjection(discovery, research)',
+  "function safeHttpUrl(value, base = 'https://seminarschools.com')",
+]) check(discoveryCore.includes(marker), `Discovery core lacks ${marker}`);
+check(!discoveryController.includes("cache: 'no-cache'"), 'Discovery controller still forces conditional revalidation');
+check(!discoveryController.includes('polymythcal-revamp'), 'Discovery controller depends on the retired raw-canonical runtime');
 const feedBuilder = read('scripts/build-polymythcal-feeds.py');
 check(feedBuilder.includes('ARTS_TEXT_RE'), 'feed builder lacks bounded arts classification');
 check(!feedBuilder.includes("event_text(event) + ' ' + event.get('city'"), 'French feed still infers language from city text');
@@ -317,7 +364,9 @@ metrics.source_html_files = fs.readdirSync(ROOT, {withFileTypes: true})
   );
 metrics.public_html_files = countFiles('public', target => target.endsWith('.html'));
 for (const relative of [
-  'js/polymythcal-revamp.js',
+  'js/polymythcal-discovery-core.js',
+  'js/polymythcal-discovery.js',
+  'css/polymythcal-discovery.css',
   'polymyth/methodologylist/index.html',
   'polymyth/campaigncodex/index.html',
   '_headers',
@@ -334,7 +383,7 @@ const report = {
     'canonical-legacy-ics-parity',
     'bounded-dst-safe-recurrence',
     'declared-language-and-bounded-topic-classification',
-    'http-and-cache-storage-reuse',
+    'http-cache-reuse-on-current-discovery-runtime',
     'methodology-and-campaigncodex-search-efficiency',
     'localized-main-landmark-repair',
     'dependency-install-and-public-walk-efficiency',

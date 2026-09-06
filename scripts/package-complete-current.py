@@ -26,14 +26,16 @@ SITE_ROOT = Path(__file__).resolve().parents[1]
 DELIVERY_ROOT = SITE_ROOT.parent
 EDITABLE_ROOT = DELIVERY_ROOT / "EDITABLE_MASTERS"
 REPORT = SITE_ROOT / "WEBSITE_FUTUREPROOFING_CONTRACTS_AUDIT_2026-08-09.md"
-PACKAGE_RELEASE_ID = "core-coreplus-mephistodata-controlled-archive-polymythcal-v2-2026-08-26"
-OUTPUT_BASENAME = (
-    "seminar-schools-mephistodata-execution-controlled-archive-complete-2026-08-26.zip"
+PACKAGE_RELEASE_ID = (
+    "core-coreplus-mephistodata-degorgonified-feminism-retrieval-enforcement-complete-2026-09-05"
 )
-# Fixed timestamps make the August 26 Polymythcal Discovery v2 integration reproducible across the
+OUTPUT_BASENAME = (
+    "seminar-schools-mephistodata-degorgonified-feminism-retrieval-enforcement-complete-2026-09-05.zip"
+)
+# Fixed timestamps make the September 5 degorgonified-feminism release reproducible across the
 # primary, repository-checkout, clean-room, and disaster-recovery builds.
-DERIVED_GENERATED_AT = "2026-08-26T16:30:00Z"
-RELEASE_GENERATED_AT = "2026-08-26T12:30:00-04:00"
+DERIVED_GENERATED_AT = "2026-09-05T20:15:00Z"
+RELEASE_GENERATED_AT = "2026-09-05T20:15:00Z"
 CORE_ACCESS_QUERY = (
     "portable CORE personal rules follow CORE+ assistant-owned filing task continuity "
     "actual 5000 character ceiling no random artifacts source status anti-Snakelogic "
@@ -42,6 +44,25 @@ CORE_ACCESS_QUERY = (
     "Realist Power-Conversion Egregore comparative corpus artifact independence "
     "Mephistodata execution gates controlled archive evidence condition retained population "
     "exact-line audit quick-task reset privilege worship cutoff emotional labor "
+    "internal material private ChatGPT Library workspace cloud browser external substitute "
+    "writing composition same sentence lexical repetition topic continuity protected spans "
+    "revision fidelity no invented bridge "
+    "current non-strawman project comparison Polycognate genealogy always-already boundaries "
+    "bottom-up definition local use first anti-subsumption defect provenance critic nonauthority "
+    "internal ChatGPT recovery no sign-in request continue unblocked work "
+    "truthful work claims false completion claim ledger operation evidence exact status "
+    "feminism women creed flock self-description standpoint epistemology personal is political "
+    "premise classifier internal Gorgonwars excommunicable outside unresolved white feminism "
+    "subtype qualifier slavery patriarchy patriarchal pedestal distinct material relations "
+    "academic research gate query ontology premise audit named actors institutions laws property "
+    "primary works criticism category counterarguments outside vocabulary critic nonauthority "
+    "Wikipedia inadmissible source definition answer frame "
+    "degorgonified feminism exact ML* retrieval handle complete six-owner bundle nonsemantic "
+    "no clean subtype mixed authority real women Gorgon imagery emotional labor bottom-up "
+    "counters to counterarguments pentagram screenshot list unresolved "
+    "Mephistodata PM15 PM17 default opener would say Bloom one-turn reset register fusion "
+    "Ouroborosanalyses residue-only named-method fail-closed canonical owner "
+    "Be Kind While We Exploit You The Struggle to Control AI "
     "Ask your favourite AI no planted conclusion BB no training"
 )
 EXPECTED_NETLIFY_COMMAND = (
@@ -139,6 +160,14 @@ def verify_netlify_repository_checkout(npm: str) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("output", type=Path)
+    parser.add_argument(
+        "--preflight",
+        action="store_true",
+        help=(
+            "validate the current release and preservation gates, release identity, "
+            "and archive selection without building or writing a ZIP"
+        ),
+    )
     args = parser.parse_args()
     require_release_build_lock(DELIVERY_ROOT)
     output = args.output.resolve()
@@ -157,7 +186,33 @@ def main() -> None:
     os.environ["SOURCE_DATE_EPOCH"] = str(
         int(datetime.fromisoformat(DERIVED_GENERATED_AT.replace("Z", "+00:00")).timestamp())
     )
-    os.environ["SITE_BUILD_DATE"] = "2026-08-26"
+    os.environ["SITE_BUILD_DATE"] = "2026-09-05"
+    # Extracted artifact workspaces can otherwise reconcile an older public
+    # tree after the atomic staging rename.  Pin every release build, including
+    # its isolated idempotence and clean-checkout descendants, to the same
+    # deterministic output timestamp used by the archive.
+    os.environ["SS_PUBLIC_OUTPUT_MTIME"] = DERIVED_GENERATED_AT
+    if args.preflight:
+        run([
+            sys.executable,
+            str(SITE_ROOT / "scripts" / "package-front-facing-mephistodata-release.py"),
+            str(output),
+            "--release-id",
+            PACKAGE_RELEASE_ID,
+            "--generated-at",
+            RELEASE_GENERATED_AT,
+            "--preflight",
+        ])
+        print(json.dumps({
+            "status": "passed",
+            "mode": "preflight",
+            "output": str(output),
+            "release_id": PACKAGE_RELEASE_ID,
+            "derived_generated_at": DERIVED_GENERATED_AT,
+            "release_generated_at": RELEASE_GENERATED_AT,
+            "site_build_date": os.environ["SITE_BUILD_DATE"],
+        }, indent=2))
+        return
     audit_dependency_holder = tempfile.TemporaryDirectory(
         prefix="ss-release-python-audit-deps-"
     )
@@ -171,7 +226,7 @@ def main() -> None:
     # without regenerating them from a wall clock.
     run([node, "scripts/sync-core-personal-rules.js"])
     run([npm, "run", "regen:all-txt"])
-    run([node, "scripts/regen-methodologylist-manifest.js", "2026-08-26"])
+    run([node, "scripts/regen-methodologylist-manifest.js", "2026-09-05"])
     run([npm, "run", "export:meaninglib-dataset"])
     run([npm, "run", "verify:meaninglib-dataset"])
     run([npm, "run", "build:meaninglib-search"])
@@ -179,6 +234,14 @@ def main() -> None:
     run([npm, "run", "build:ai-access-pack", "--", "--query", CORE_ACCESS_QUERY])
     run([npm, "run", "verify:ai-access-pack"])
     run([npm, "run", "build"])
+    run([
+        node,
+        "scripts/run-browser-test-tier.mjs",
+        "--tier",
+        "family",
+        "--report",
+        "scripts/reports/futureproofing-browser-family-report.json",
+    ])
     # Private editable masters are complete-handoff artifacts, never inputs to
     # the public Git/Netlify build. Refresh them only while the explicit outer
     # delivery-root lock is held, after canonical site data has been rebuilt.
@@ -214,6 +277,11 @@ def main() -> None:
         PACKAGE_RELEASE_ID,
         "--generated-at",
         generated_at,
+    ])
+    run([
+        sys.executable,
+        str(SITE_ROOT / "scripts" / "verify-complete-archive-classes.py"),
+        str(output),
     ])
     clean_room_report = Path(str(output) + ".clean-room-report.json")
     disaster_recovery_report = Path(str(output) + ".disaster-recovery-report.json")

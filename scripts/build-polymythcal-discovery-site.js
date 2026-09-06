@@ -4,6 +4,8 @@
 const fs = require('fs');
 const path = require('path');
 const { geometryBodyAttributes, geometryAssetVersion } = require('./lib/geometry-asset-version');
+const { refreshTranslationGovernance } = require('./lib/translation-governance');
+const { SITEWIDE_TYPE_ZOOM_VERSION } = require('./lib/sitewide-type-zoom-version');
 
 const ROOT = path.resolve(__dirname, '..');
 const SITE = 'https://seminarschools.com';
@@ -12,6 +14,7 @@ const geometryContracts = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'ge
 const siteAssetVersion = String(release.polymythcal_asset_version || '20260815-sets1-15-synthesis');
 const discoveryAssetVersion = String(release.polymythcal_discovery_asset_version || siteAssetVersion);
 const geometryVersion = geometryAssetVersion(ROOT);
+const localizationStyle = '<link rel="stylesheet" href="/css/audit45-localization.css?v=20260725-audit45" data-audit45-localization="true">';
 const outputMtimeText = String(process.env.SS_BUILD_OUTPUT_MTIME || '').trim();
 const outputMtime = outputMtimeText ? new Date(outputMtimeText) : null;
 if (outputMtime && Number.isNaN(outputMtime.getTime())) {
@@ -231,14 +234,14 @@ function page(surface, locale) {
 <link rel="alternate" hreflang="fr-CA" href="${SITE}${surfaces[surface].fr.path}">
 <link rel="alternate" hreflang="x-default" href="${SITE}${surfaces[surface].en.path}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Seminar Schools">
-<meta property="og:url" content="${SITE}${cfg.path}"><meta property="og:title" content="${esc(cfg.title)}"><meta property="og:description" content="${esc(cfg.description)}"><meta property="og:image" content="${SITE}/og-image.png">
+<meta property="og:url" content="${SITE}${cfg.path}"><meta property="og:title" content="${esc(cfg.title)}"><meta property="og:description" content="${esc(cfg.description)}"><meta property="og:image" content="${SITE}/og-image.png"><meta property="og:locale" content="${locale === 'fr' ? 'fr_CA' : 'en_CA'}">
 <script type="application/ld+json">${schema}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/css/theme.css?v=${esc(siteAssetVersion)}">
 <link rel="stylesheet" href="/css/alive.css?v=${esc(geometryVersion)}">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=${esc(siteAssetVersion)}" data-site-wide-type-zoom="${esc(siteAssetVersion)}">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=${esc(SITEWIDE_TYPE_ZOOM_VERSION)}" data-site-wide-type-zoom="${esc(SITEWIDE_TYPE_ZOOM_VERSION)}">
 <link rel="stylesheet" href="/css/polymythcal-discovery.css?v=${esc(discoveryAssetVersion)}">
-<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+${locale === 'fr' ? `${localizationStyle}\n` : ''}<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
 <body ${geometry} data-page-weight="light" data-pm-app="discovery-v2" data-pmd-surface="${surface}" data-pmd-source="${dataUrl}"${surface === 'research' ? ' data-pmd-research-source="/polymythseminars/research.json"' : ''}>
@@ -260,8 +263,8 @@ ${utilityTools(surface, locale)}
 <script defer src="/js/polymythcal-discovery-core.js?v=${esc(discoveryAssetVersion)}"></script>
 <script defer src="/js/polymythcal-discovery.js?v=${esc(discoveryAssetVersion)}"></script>
 <script defer src="/js/theme.js?v=cl91"></script>
-<script defer src="/js/mandala.js?v=${esc(geometryVersion)}"></script>
-<script defer src="/js/indra.js?v=${esc(geometryVersion)}"></script>
+<script src="/js/mandala.js?v=${esc(geometryVersion)}" defer></script>
+<script src="/js/indra.js?v=${esc(geometryVersion)}" defer></script>
 <script defer src="/js/footer.js?v=20260805-predeploy-audit"></script>
 <script defer src="/js/site-keyboard-enhancements.js?v=${esc(siteAssetVersion)}"></script>
 </body>
@@ -277,5 +280,7 @@ for (const surface of Object.keys(surfaces)) {
     changed += Number(writeOutput(target, output));
   }
 }
+
+refreshTranslationGovernance(ROOT, ['/polymythseminars/fr/']);
 
 console.log(`POLYMYTHCAL DISCOVERY SITE BUILT — ${Object.keys(surfaces).length * 2} bilingual routes, ${changed} changed.`);

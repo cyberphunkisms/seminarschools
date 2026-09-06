@@ -16,13 +16,14 @@ for (const [relative, token, label] of [
   ['scripts/scrape_seminars.py', 'def fetch_generic_event_source', 'generic HTML source fetcher'],
   ['scripts/scrape_seminars.py', 'event-watchlist.json', 'internal review watchlist output'],
   ['scripts/scrape_seminars.py', 'extract_topics', 'topic extraction'],
-  ['scripts/merge_and_finalize.py', 'WATCHLIST_PUBLIC_PATH', 'watchlist projection target'],
-  ['scripts/sync-calendar-data.js', 'WATCHLIST_PUBLIC', 'watchlist sync'],
+  ['scripts/merge_and_finalize.py', 'WATCHLIST_PATH = ROOT / "data" / "event-watchlist.json"', 'private review-watchlist target'],
+  ['scripts/sync-calendar-data.js', 'private, build-only compatibility mirror', 'private canonical sync boundary'],
   ['scripts/verify-harvest-pipeline.js', 'findaprotest-toronto', 'harvest source guard'],
   ['scripts/build-polymythcal-browser-payload.js', 'polymythcal-publication-surfaces.json', 'publication-boundary input'],
   ['scripts/lib/polymythcal-discovery-model.js', 'polymythcal-discovery-v2', 'chronology schema'],
   ['scripts/lib/polymythcal-discovery-model.js', 'polymythcal-watchlist-v2', 'monitoring schema'],
 ]) need(relative, token, label);
+forbid('scripts/merge_and_finalize.py', /WATCHLIST_PUBLIC_PATH|polymythseminars["']?\s*\/\s*["']watchlist\.json/, 'a direct public watchlist writer');
 
 const shellSpecs = [
   ['polymythseminars/index.html', 'main', '/polymythseminars/browse.json'],
@@ -80,7 +81,7 @@ for (const [token, label] of [
   ['routeScope', 'focused-route Research handoff'],
   ['class="pmd-match-reason"', 'match explanation'],
   ['function eventActions(event)', 'destination action policy'],
-  ["if (surface !== 'monitoring') actions.push", 'monitoring detail-link quarantine'],
+  ["addAction(detailHref(event), COPY.details, 'primary-link')", 'universal stable detail link'],
 ]) if (!app.includes(token)) problems.push(`discovery controller missing ${label}`);
 if ((app.match(/function searchMatch\(/g) || []).length !== 1) problems.push('discovery controller must define searchMatch exactly once');
 if ((app.match(/function applyFiltersAndSort\(/g) || []).length !== 1) problems.push('discovery controller must define the result pipeline exactly once');
@@ -116,4 +117,3 @@ if (problems.length) {
   process.exit(1);
 }
 console.log(`POLYMYTHCAL SCRAPER/LAYOUT CHECK PASSED — search-first compact layout, staged Research, separate monitoring, ${chronology.length} chronology records, and ${monitored.length} quarantined markers are guarded.`);
-

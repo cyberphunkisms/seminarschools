@@ -223,27 +223,41 @@ for (const row of tagged) {
 if (!sourceOnly) {
   const browseDoc = json('polymythseminars/browse.json');
   const watchlistDoc = json('polymythseminars/watchlist.json');
+  const researchDoc = json('polymythseminars/research.json');
   const browse = list(browseDoc);
   const watchlist = watchlistDoc.items || [];
   const publicById = byId([...browse, ...watchlist]);
+  const researchById = byId(researchDoc.records || []);
   const surfaces = json('data/polymythcal-publication-surfaces.json');
   const chronologyIds = new Set(surfaces.chronology_ids || []);
+  const watchlistIds = new Set(surfaces.watchlist_ids || []);
   assert(publicById.size === canonical.length, 'Safe public projections are not a complete unique partition.');
   for (const row of tagged) {
     const compact = publicById.get(row.id);
+    const specialist = researchById.get(row.id);
     assert(Boolean(compact), `${row.id}: missing from safe public projections.`);
     if (compact) {
-      assert(equal(compact.facets?.communityFormats || [], row.community_heritage_formats), `${row.id}: public communityFormats facets differ from manual.`);
       for (const field of CORE_FIELDS) assert(!Object.hasOwn(compact, field), `${row.id}: private research field ${field} leaked into public discovery data.`);
     }
+    if (chronologyIds.has(row.id)) {
+      assert(Boolean(specialist), `${row.id}: missing from the lazy Research projection.`);
+      if (specialist) {
+        assert(equal(specialist.facets?.communityFormats || [], row.community_heritage_formats), `${row.id}: Research communityFormats facets differ from manual.`);
+        for (const field of CORE_FIELDS) assert(!Object.hasOwn(specialist, field), `${row.id}: private research field ${field} leaked into the Research projection.`);
+      }
+    } else {
+      assert(watchlistIds.has(row.id), `${row.id}: missing from the chronology/watchlist publication partition.`);
+      assert(!specialist, `${row.id}: monitoring record leaked into the chronology-only Research projection.`);
+    }
     const detailRel = `polymythseminars/events/${row.id}/index.html`;
-    assert(exists(detailRel) === chronologyIds.has(row.id), `${row.id}: dated detail-route publication boundary is wrong.`);
-    if (chronologyIds.has(row.id) && exists(detailRel) && row.community_evidence) {
+    const detailFrRel = `polymythseminars/fr/events/${row.id}/index.html`;
+    assert(exists(detailRel) && exists(detailFrRel), `${row.id}: stable EN/FR detail-route pair is missing.`);
+    if (exists(detailRel) && row.community_evidence) {
       assert(read(detailRel).toString('utf8').includes('pm-event-context'), `${row.id}: detail page omits Set 13 context/evidence.`);
     }
   }
   assert(!exists('public/polymythseminars/events.json'), 'Private canonical events.json leaked into public/.');
-  for (const rel of ['polymythseminars/browse.json', 'polymythseminars/watchlist.json']) {
+  for (const rel of ['polymythseminars/browse.json', 'polymythseminars/watchlist.json', 'polymythseminars/research.json']) {
     const mirror = `public/${rel}`;
     assert(exists(mirror), `${mirror} missing.`);
     if (exists(mirror)) assert(read(rel).equals(read(mirror)), `${rel} differs from ${mirror}.`);
@@ -271,4 +285,3 @@ console.log(JSON.stringify({
   manual_records: manual.length,
   canonical_records: canonical.length
 }, null, 2));
-

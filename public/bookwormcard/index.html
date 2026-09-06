@@ -35,7 +35,7 @@
     --glow:0 0 7px rgba(255,62,224,0.55);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:var(--bg);color:var(--fg);font-family:'VT323',monospace;font-size:20px;line-height:1.4;min-height:100svh;overflow-x:hidden;overflow-y:auto}
+  html,body{background:var(--bg);color:var(--fg);font-family:'VT323',monospace;font-size:20px;line-height:1.4;height:100svh;min-height:0;overflow-x:hidden;overflow-y:hidden}
   body{
     background:
       linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.15) 50%) 0 0/100% 3px,
@@ -100,6 +100,7 @@
   }
   /* CL-11: PRINT styles, clean B&W layout for paper */
   @media print{
+    html,body{height:auto;min-height:0;overflow:visible}
     body{background:#fff;color:#000;font-family:'Courier New',monospace;font-size:11pt;text-shadow:none}
     body::after,body::before,#rain-canvas,#toggles,#animal-cinematic,#tier-cinematic,.keys-hint,#student-start-card,#touch-bar{display:none !important}
     .layout{display:block;height:auto}
@@ -138,9 +139,9 @@
   a{color:var(--fg);text-decoration:none;border-bottom:1px dotted var(--fg-dim)}
   a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 
-  .layout{display:flex;min-height:100svh;max-width:1400px;margin:0 auto}
-  .terminal{flex:1;padding:1.5rem 1.5rem 0.5rem;display:flex;flex-direction:column;min-width:0;min-height:100svh;overflow:hidden}
-  .preview{width:380px;border-left:1px solid var(--line);padding:1.5rem;display:flex;flex-direction:column;background:rgba(0,0,0,0.3);min-height:100svh;overflow:hidden}
+  .layout{display:flex;height:100svh;min-height:0;max-width:1400px;margin:0 auto}
+  .terminal{flex:1;height:100svh;padding:1.5rem 1.5rem 0.5rem;display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden}
+  .preview{width:380px;height:100svh;border-left:1px solid var(--line);padding:1.5rem;display:flex;flex-direction:column;background:rgba(0,0,0,0.3);min-height:0;overflow:hidden}
 
   /* ============================================================
      BYPASS-MODE, empty terminal aesthetic for the intro screen.
@@ -851,7 +852,7 @@
   @media (max-width:900px){#static-bookwormcard-context{margin:1rem;padding:1.1rem}.layout{min-height:auto}.terminal,.preview{min-height:auto}}
 </style>
 <link rel="stylesheet" href="/mobile-slim.css?v=cl91" media="screen and (max-width:640px)">
-<link rel="stylesheet" href="/css/alive.css?v=sha256-3ccd45ce601b">
+<link rel="stylesheet" href="/css/alive.css?v=sha256-8a83be93b96a">
 <link rel="stylesheet" href="/css/theme.css?v=20260725-audit45">
 <style id="final8-linklike-button">.linklike-button{appearance:none;border:0;background:none;color:inherit;font:inherit;padding:0;text-decoration:underline;text-underline-offset:.18em;cursor:pointer}</style>
 <link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260814-reader-word-integrity" data-site-wide-type-zoom="20260814-reader-word-integrity">
@@ -899,7 +900,7 @@ html.bookwormcard-js .bookwormcard-runtime-title{display:block!important}
 <link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 </head>
-<body data-route-type="game-tool" data-geometry="indra-web" data-indra-intensity="0.200" data-geometry-role="relation movement" data-geometry-key="/bookwormcard/" data-geometry-seed="caae1014dc7b529f" data-geometry-register="expressive" data-geometry-profile="single" data-front-facing="general-audience" class="bypass-mode bookwormcard-page" data-page-weight="heavy">
+<body data-route-type="game-tool" data-geometry="indra-web" data-indra-intensity="0.200" data-indra-fade-source="route-register" data-geometry-role="relation movement" data-geometry-key="/bookwormcard/" data-geometry-seed="caae1014dc7b529f" data-geometry-register="expressive" data-geometry-profile="dual-field" data-front-facing="general-audience" class="bypass-mode bookwormcard-page" data-page-weight="heavy">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <style id="ss-fz-style">.ss-fz{position:fixed;top:.9rem;right:3.3rem;z-index:1000;display:none;gap:.25rem;align-items:center}.ss-fz button{width:30px;height:30px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.7;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}.ss-fz button:hover{opacity:1;transform:scale(1.05)}.ss-fz button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}@media print{.ss-fz{display:none!important}}</style><div class="ss-fz" aria-label="Adjust text size"><button type="button" data-fz="down" title="Decrease text size">A-</button><button type="button" data-fz="up" title="Increase text size">A+</button><button type="button" data-fz="reset" class="reset" title="Reset text size" style="display:none">&#8634;</button></div>
 <!-- bb* QR logo -->
@@ -5131,8 +5132,8 @@ document.getElementById('input-area')?.addEventListener('click', function(e){
 </script>
 <script src="/js/bookworm-rain.js?v=20260724-rain-lifecycle" defer></script>
 <script src="/js/theme.js?v=cl91" defer></script>
-<script src="/js/mandala.js?v=sha256-3ccd45ce601b" defer></script>
-<script src="/js/indra.js?v=sha256-3ccd45ce601b" defer></script>
+<script src="/js/mandala.js?v=sha256-8a83be93b96a" defer></script>
+<script src="/js/indra.js?v=sha256-8a83be93b96a" defer></script>
 <script src="/js/footer.js?v=20260805-predeploy-audit" defer></script>
 <script src="/js/autolink.js?v=cl91" defer></script>
 <script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>

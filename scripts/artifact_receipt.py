@@ -28,9 +28,110 @@ SOURCE_STAGE_IDS = {
 }
 POST_PACKAGE_IDS = {"FP-01", "FP-06", "FP-14"}
 REQUIRED_ROOTS = ["SITE_PACKAGE", "EDITABLE_MASTERS", "DEPLOY_TOOLS"]
+EXPECTED_CURRENT_RELEASE_PATHS = {
+    "README_FIRST.txt",
+    "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md",
+    "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md",
+    "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md",
+    "SITE_PACKAGE/UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md",
+    "SITE_PACKAGE/UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md",
+    "SITE_PACKAGE/UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_BOTTOM_UP_DEFINITION_DEFECT_PROVENANCE_INTERNAL_RETRIEVAL_2026-09-03.md",
+    "SITE_PACKAGE/UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md",
+    "SITE_PACKAGE/UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/b4f6ab5a-4eb3-44d0-943e-41acd52faec9.png",
+    "SITE_PACKAGE/UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/3066e1d8-f6f9-4267-a948-90c076e29f93.png",
+    "SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_RECOVERY_2026-08-30.md",
+    "SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/04648eb9-885c-43c7-ad53-ca6af390fa0c.png",
+    "SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/13912ef0-3924-4d11-bae9-6bab8d294b93.png",
+    "SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/0fd75220-92bf-4df1-89e9-a90893430fdc.png",
+    "SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/a9c4d9d2-16e6-4995-9064-4db5bc5d484e.png",
+    "SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/097d5008-8e7c-4b24-822f-88a04fd1e7e7.png",
+    "SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/d1557ac1-79e1-4038-8521-edba929b8e29.png",
+    "SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/ca5c05c1-5e8f-4997-9409-0a83f3bbf302.png",
+    "SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/b2726035-3129-4117-99ad-76d4ae8c12de.png",
+    "SITE_PACKAGE/UPDATE_SOURCES/NON_STRAWMAN_CURRENT_POSITION_CORRECTION_2026-08-29.md",
+    "SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_COMPARING_THE_INCOMPARABLE_POLYMYTH_MASTER_NOTES_2026-08-28.md",
+    "SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/README.md",
+    "SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/01_FOREWORD_AND_CHAPTER_1.md",
+    "SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/02_CONSTRUCTING_COMPARABLES.md",
+    "SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/03_REGIMES_OF_HISTORICITY.md",
+    "SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/04_POLYTHEISMS.md",
+    "SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/05_ASSEMBLY_AND_POLITICS.md",
+    "SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/06_ENDNOTES_AND_SOURCE_LINEAGE.md",
+    "SITE_PACKAGE/scripts/fixtures/ml-execution-gates/adjudication-v2-fixtures.json",
+    "SITE_PACKAGE/ML_EXECUTION_AND_CONTROLLED_ARCHIVE_SYNTHESIS_2026-08-26.md",
+    "SITE_PACKAGE/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js",
+    "SITE_PACKAGE/public/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js",
+    "SITE_PACKAGE/scripts/verify-ml-execution-gates.js",
+    "SITE_PACKAGE/scripts/lib/mephistodata-runtime-gate.js",
+    "SITE_PACKAGE/scripts/fixtures/ml-execution-gates/mephistodata-runtime-gate-hostile-fixtures.json",
+    "SITE_PACKAGE/scripts/verify-mephistodata-runtime-gate.js",
+    "SITE_PACKAGE/scripts/verify-ml-active-form-conflicts.js",
+    "SITE_PACKAGE/data/baseline-morality-amendment-scope-contract.json",
+    "SITE_PACKAGE/scripts/verify-baseline-morality-amendment-scope.js",
+    "SITE_PACKAGE/scripts/test-baseline-morality-amendment-scope.js",
+    "SITE_PACKAGE/scripts/build-public-deploy.js",
+    "SITE_PACKAGE/scripts/verify-public-deploy-parity.js",
+    "SITE_PACKAGE/data/futureproofing/public-private-boundary.json",
+    "SITE_PACKAGE/scripts/verify-public-private-boundary.py",
+    "SITE_PACKAGE/data/futureproofing/aug30-package-contents-baseline.json",
+    "SITE_PACKAGE/data/futureproofing/aug30-aug31-preservation-contract.json",
+    "SITE_PACKAGE/data/futureproofing/aug31-package-contents-baseline.json",
+    "SITE_PACKAGE/data/futureproofing/aug31-sep3-preservation-contract.json",
+    "SITE_PACKAGE/data/futureproofing/sep3-package-contents-baseline.json",
+    "SITE_PACKAGE/data/futureproofing/sep3-sep5-preservation-contract.json",
+    "SITE_PACKAGE/data/futureproofing/sep5-package-contents-baseline.json",
+    "SITE_PACKAGE/data/futureproofing/sep5-truthful-sep5-feminism-preservation-contract.json",
+    "SITE_PACKAGE/data/futureproofing/sep5-feminism-package-contents-baseline.json",
+    "SITE_PACKAGE/data/futureproofing/sep5-feminism-sep5-degorgonified-feminism-preservation-contract.json",
+    "SITE_PACKAGE/data/futureproofing/futureproofing-contract.json",
+    "SITE_PACKAGE/scripts/verify-futureproofing-contract.py",
+    "SITE_PACKAGE/scripts/verify-futureproofing-base-preservation.py",
+    "SITE_PACKAGE/scripts/verify-aug31-base-preservation.py",
+    "SITE_PACKAGE/scripts/verify-sep3-base-preservation.py",
+    "SITE_PACKAGE/scripts/verify-sep5-base-preservation.py",
+    "SITE_PACKAGE/scripts/verify-sep5-feminism-base-preservation.py",
+    "SITE_PACKAGE/scripts/verify-sep5-degorgonified-feminism-base-preservation.py",
+    "SITE_PACKAGE/scripts/fixtures/futureproofing/aug31-preservation-tampered.json",
+    "SITE_PACKAGE/scripts/fixtures/futureproofing/sep3-preservation-tampered.json",
+    "SITE_PACKAGE/scripts/fixtures/futureproofing/sep5-preservation-tampered.json",
+    "SITE_PACKAGE/scripts/fixtures/futureproofing/sep5-feminism-preservation-tampered.json",
+    "SITE_PACKAGE/scripts/fixtures/futureproofing/sep5-degorgonified-feminism-preservation-tampered.json",
+    "SITE_PACKAGE/scripts/test_futureproofing_contracts.py",
+    "SITE_PACKAGE/scripts/verify-ml-project-adjudication-v2.js",
+    "SITE_PACKAGE/scripts/fixtures/ml-execution-gates/fixtures.json",
+    "SITE_PACKAGE/scripts/fixtures/ml-execution-gates/internal-writing-fixtures.json",
+    "SITE_PACKAGE/scripts/verify-ml-writing-rules.js",
+    "SITE_PACKAGE/scripts/fixtures/ml-writing-rules/fixtures.json",
+    "SITE_PACKAGE/polymyth/methodologylist/mephistodata-register-fixtures.json",
+    "SITE_PACKAGE/polymyth/methodologylist/mythology-integration-addendum.js",
+    "SITE_PACKAGE/scripts/lib/public-build-lock.js",
+    "SITE_PACKAGE/scripts/verify-public-build-lock-recovery.js",
+    "SITE_PACKAGE/scripts/verify-build-idempotence.js",
+    "SITE_PACKAGE/scripts/verify-predeploy-automation.js",
+    "SITE_PACKAGE/scripts/verify-audit49-build-packaging-efficiency.js",
+    "SITE_PACKAGE/scripts/verify-release-gates.js",
+    "SITE_PACKAGE/scripts/verify-complete-archive-classes.py",
+    "SITE_PACKAGE/scripts/package-complete-current.py",
+    "SITE_PACKAGE/scripts/package-front-facing-mephistodata-release.py",
+    "SITE_PACKAGE/scripts/build-clean-room-release.py",
+    "SITE_PACKAGE/scripts/artifact_receipt.py",
+    "SITE_PACKAGE/polymyth/articles/be-kind-while-we-exploit-you.md",
+    "SITE_PACKAGE/public/polymyth/articles/be-kind-while-we-exploit-you.md",
+    "SITE_PACKAGE/polymyth/articles/the-struggle-to-control-ai.md",
+    "SITE_PACKAGE/public/polymyth/articles/the-struggle-to-control-ai.md",
+}
+FORBIDDEN_TRANSIENT_RELEASE_PATHS = {
+    "SITE_PACKAGE/UPDATE_SOURCES/Detienne_Comparing_the_Incomparable_Polymyth_Master_Notes_2026-08-27.md",
+}
+FORBIDDEN_TRANSIENT_RELEASE_PREFIXES = (
+    "SITE_PACKAGE/UPDATE_SOURCES/Detienne_Evidence_Ledgers_2026-08-27/",
+)
 EXPECTED_MANIFEST_SCHEMA = "seminar-schools-package-contents-v1"
 EXPECTED_PACKAGE_KIND = "seminar-schools-complete-editable-masters-source-and-public"
-EXPECTED_PACKAGE_RELEASE_ID = "core-coreplus-mephistodata-controlled-archive-polymythcal-v2-2026-08-26"
+EXPECTED_PACKAGE_RELEASE_ID = (
+    "core-coreplus-mephistodata-degorgonified-feminism-retrieval-enforcement-complete-2026-09-05"
+)
+EXPECTED_PACKAGE_GENERATED_AT = "2026-09-05T20:15:00Z"
 EXPECTED_CLEAN_ROOM_PIPELINE_ID = "npm-ci-build-full-verify-editable-package-v1"
 EXPECTED_CLEAN_ROOM_HELPERS = (
     "SITE_PACKAGE/scripts/clean_room_copy.py",
@@ -283,6 +384,7 @@ def validate_clean_room_contract(report: dict) -> dict:
         "LANG": "C",
         "PYTHONHASHSEED": "0",
         "SOURCE_DATE_EPOCH": str(int(stamp.timestamp())),
+        "SS_PUBLIC_OUTPUT_MTIME": generated_at,
         "CI": "1",
         "NPM_CONFIG_AUDIT": "false",
         "NPM_CONFIG_FUND": "false",
@@ -504,6 +606,26 @@ def manifested_archive_evidence(zipped: zipfile.ZipFile, embedded: dict) -> dict
     roots = {PurePosixPath(name).parts[0] for name in by_path}
     if not set(REQUIRED_ROOTS).issubset(roots):
         raise ValueError("archive omits one or more required complete-handoff roots")
+    if (
+        embedded.get("release_id") == EXPECTED_PACKAGE_RELEASE_ID
+        and embedded.get("generated_at") == EXPECTED_PACKAGE_GENERATED_AT
+    ):
+        missing_current = sorted(EXPECTED_CURRENT_RELEASE_PATHS - set(by_path))
+        if missing_current:
+            raise ValueError(
+                "archive omits current feminism academic-research-gate evidence: "
+                + ", ".join(missing_current)
+            )
+        transient_duplicates = sorted(
+            name for name in by_path
+            if name in FORBIDDEN_TRANSIENT_RELEASE_PATHS
+            or name.startswith(FORBIDDEN_TRANSIENT_RELEASE_PREFIXES)
+        )
+        if transient_duplicates:
+            raise ValueError(
+                "archive contains transient mixed-case Detienne duplicates: "
+                + ", ".join(transient_duplicates)
+            )
     editable_name = "EDITABLE_MASTERS/EDITABLE_MASTERS_MANIFEST.json"
     editable = json.loads(zipped.read(editable_name))
     editable_rows = editable.get("files") or []

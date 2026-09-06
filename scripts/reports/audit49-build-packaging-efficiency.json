@@ -10,7 +10,7 @@
     "timeout_regression_target_ms": 1000,
     "timeout_regression_within_tolerance": true,
     "sequential_failure_report_regression_passed": true,
-    "package_regression_tests": 15,
+    "package_regression_tests": 16,
     "archive_benchmark_files": 5,
     "archive_benchmark_input_bytes": 75857344,
     "archive_audit48_wall_ms": 3276,
@@ -26,18 +26,22 @@
     "deployer_explicit_duplicate_browser_gates_after": 0,
     "selection": {
       "deployer": {
-        "directories_visited": 15289,
-        "files_selected": 21351,
-        "public_files_selected": 9985,
-        "selected_bytes_excluding_generated_reports": 501746125,
+        "directories_visited": 15303,
+        "files_selected": 21186,
+        "polymythcal_artifacts_pruned": 0,
+        "public_files_selected": 9856,
+        "reconstruction_duplicates_pruned": 0,
+        "selected_bytes_excluding_generated_reports": 536098954,
         "disposable_directory_pruning_enforced": true,
         "broad_post_descent_filtering_avoided": true
       },
       "source": {
-        "directories_visited": 7699,
-        "files_selected": 11366,
+        "directories_visited": 7709,
+        "files_selected": 11330,
+        "polymythcal_artifacts_pruned": 0,
         "public_files_selected": 0,
-        "selected_bytes_excluding_generated_reports": 328935554,
+        "reconstruction_duplicates_pruned": 0,
+        "selected_bytes_excluding_generated_reports": 372007978,
         "disposable_directory_pruning_enforced": true,
         "broad_post_descent_filtering_avoided": true
       }

@@ -1,6 +1,48 @@
 {
   "schema": "seminar-schools-geometry-route-contracts-v1",
   "asset_version_scheme": "sha256-12",
+  "coverage": {
+    "required_surface": "every public HTML source and deployment mirror outside the canonical star-file estate",
+    "star_page_routes": [
+      "aa/cloud/index.html",
+      "aa/editorial.html",
+      "aa/index.html",
+      "aa/views/index.html",
+      "aitr/index.html",
+      "polymyth/bookwormburrows/index.html",
+      "polymyth/campaigncodex/index.html",
+      "polymyth/coherence/index.html",
+      "polymyth/methodologylist/analysis/index.html",
+      "polymyth/methodologylist/citation/index.html",
+      "polymyth/methodologylist/corehistory/index.html",
+      "polymyth/methodologylist/coreplus/index.html",
+      "polymyth/methodologylist/degorgonification/index.html",
+      "polymyth/methodologylist/framework-core/index.html",
+      "polymyth/methodologylist/gorgonification/index.html",
+      "polymyth/methodologylist/idiomary/index.html",
+      "polymyth/methodologylist/index.html",
+      "polymyth/methodologylist/learnings/index.html",
+      "polymyth/methodologylist/methodology/index.html",
+      "polymyth/methodologylist/pending-user-authorship/index.html",
+      "polymyth/methodologylist/pending/index.html",
+      "polymyth/methodologylist/polycognate/index.html",
+      "polymyth/methodologylist/rainbowsol/index.html",
+      "polymyth/methodologylist/sabachtan/index.html",
+      "polymyth/methodologylist/studylist/index.html",
+      "polymyth/modulecanon/index.html"
+    ],
+    "control_page_prefixes": ["dashboard/"],
+    "expected_current_star_pages": 26,
+    "expected_current_control_pages_source": 1,
+    "expected_current_control_pages_public": 0,
+    "exemption_attribute": "data-shared-geometry-exempt",
+    "star_page_exemption_value": "star-file",
+    "control_page_exemption_value": "internal-control",
+    "star_page_marker": "data-star-file-page=\"true\"",
+    "star_page_geometry": "excluded",
+    "control_page_geometry": "excluded-source-only",
+    "non_page_exception": "google20234ae70106ee9d.html"
+  },
   "canonical_web": {
     "id": "polymyth-mandala-main-v32",
     "gasket_rotations_pi": [0, 0.4, 0.78],
@@ -31,18 +73,38 @@
     "expressive": { "default_intensity": 0.200, "minimum_scroll_displacement": 180 }
   },
   "profiles": {
-    "single": { "cameras": 1 },
-    "about-dual": { "cameras": 2 },
-    "cv-quiet": { "cameras": 1 }
+    "dual-field": { "cameras": 2 }
   },
-  "coverage": {
-    "surfaces": 1,
-    "view_box": "-440 -440 880 880",
-    "opacity": 0.82,
-    "morphology_radius": 2.8,
-    "edge_halo_px": 0.25,
-    "maximum_extent_px": 1500,
-    "motion": "static"
+  "presentation": {
+    "field": "fine-line-rainbow-dual",
+    "cameras": 2,
+    "static_coverage_surfaces": 0,
+    "morphology_filters": 0,
+    "line_scaling": "non-scaling-stroke",
+    "rainbow_palette": [
+      "#8a4a32", "#c47a2e", "#a09030", "#3d8a5a",
+      "#4070a8", "#6850a0", "#9050a0", "#a84858"
+    ],
+    "opacity_bounds": { "minimum": 0.020, "maximum": 0.200 },
+    "page_owned_opacity_property": "--indra-opacity",
+    "owner_fade_overrides": [
+      { "exact_path": "/", "opacity": 0.055, "owner": "homepage" },
+      { "path_prefix": "/reviews/", "opacity": 0.060, "owner": "reviews" },
+      { "path_prefix": "/bb/bbt/", "opacity": 0.100, "owner": "bbt" },
+      { "path_prefix": "/saul/", "opacity": 0.085, "owner": "saul-cv" },
+      { "path_prefix": "/marginalia/", "opacity": 0.100, "owner": "marginalia" },
+      { "exact_path": "/polymythcal/", "opacity": 0.100, "owner": "polymythcal-alias" },
+      { "exact_path": "/polymythseminars/subscribe/", "opacity": 0.100, "owner": "polymythcal-subscriptions" },
+      { "exact_path": "/polymythseminars/fr/subscribe/", "opacity": 0.100, "owner": "polymythcal-subscriptions" },
+      { "route_type": "calendar-event-alias", "opacity": 0.100, "owner": "polymythcal-event-aliases" },
+      { "route_type": "calendar-event", "opacity": 0.105, "owner": "polymythcal-events" },
+      { "path_prefix": "/polymythlib/projects/", "opacity": 0.110, "owner": "polymyth-commons-records" },
+      { "route_type": "publication", "opacity": 0.130, "owner": "publication-builder" }
+    ],
+    "palette_policy": "identical-across-every-non-star-page",
+    "fade_policy": "valid-page-owner-or-grounded-owner-override-then-route-register-default",
+    "blend_mode": "normal-in-light-and-dark",
+    "motion": "scroll-responsive"
   },
   "allowed_roles": [
     "relation",

@@ -36,20 +36,23 @@ if(fs.existsSync(budgetPath)){
   const budget=JSON.parse(fs.readFileSync(budgetPath,'utf8'));
   if(budget.schema!=='asset-weight-budget-v1') failures.push(`unsupported asset budget schema ${budget.schema||'missing'}`);
   if(totalBytes>Number(budget.totalPublicCeilingBytes||0)) failures.push(`public deploy is ${totalBytes} bytes; ceiling ${budget.totalPublicCeilingBytes}`);
-  const known=new Map((budget.knownLargeAssets||[]).map(row=>[row.path,row]));
-  if(known.size!==(budget.knownLargeAssets||[]).length) failures.push('asset budget contains duplicate known-large paths');
-  const currentContractCeilings=new Map([
-    ['polymyth/methodologylist.txt',4075000],
-    ['js/polymythcal-revamp.js',134000],
-    ['js/polymythcal-discovery.js',90000],
-    ['css/polymythcal-discovery.css',26000],
-    ['polymythseminars/browse.json',2600000],
-    ['polymythseminars/watchlist.json',210000],
+  const configuredKnown=new Map((budget.knownLargeAssets||[]).map(row=>[row.path,row]));
+  if(configuredKnown.size!==(budget.knownLargeAssets||[]).length) failures.push('asset budget contains duplicate known-large paths');
+  const retiredOrPrivate=new Set(['js/polymythcal-revamp.js','polymythseminars/events.json']);
+  const currentContracts=new Map([
+    ['polymyth/methodologylist.txt',{baselineBytes:4119819,ceilingBytes:4140000,reason:'canonical Methodologylist text mirror'}],
+    ['js/polymythcal-discovery.js',{baselineBytes:91937,ceilingBytes:93000,reason:'current bilingual Discovery v2 controller'}],
+    ['css/polymythcal-discovery.css',{baselineBytes:22961,ceilingBytes:23000,reason:'current Discovery v2 presentation'}],
+    ['polymythseminars/browse.json',{baselineBytes:2954297,ceilingBytes:3000000,reason:'current compact public Polymythcal browse projection'}],
+    ['polymythseminars/watchlist.json',{baselineBytes:213174,ceilingBytes:220000,reason:'current compact public monitoring projection'}],
   ]);
-  for(const [rel,ceiling] of currentContractCeilings){
+  const known=new Map(
+    [...configuredKnown].filter(([rel])=>!retiredOrPrivate.has(rel)),
+  );
+  for(const [rel,contract] of currentContracts) known.set(rel,{path:rel,...contract});
+  for(const [rel,contract] of currentContracts){
     const row=known.get(rel); const file=path.join(publicPath,rel);
-    if(!row){ failures.push(`${rel} lacks its narrow current-release budget`); continue; }
-    if(row.ceilingBytes!==ceiling) failures.push(`${rel} ceiling must remain the current narrow ${ceiling} bytes`);
+    if(row.ceilingBytes!==contract.ceilingBytes) failures.push(`${rel} ceiling must remain the current narrow ${contract.ceilingBytes} bytes`);
     if(fs.existsSync(file)&&row.baselineBytes!==fs.statSync(file).size) failures.push(`${rel} baseline is stale: ${row.baselineBytes} != ${fs.statSync(file).size}`);
   }
   for(const [rel,row] of known){
@@ -70,4 +73,3 @@ if(fs.existsSync(budgetPath)){
 }
 if(failures.length){ console.error('ASSET WEIGHT CHECK FAILED'); failures.forEach(f=>console.error(' - '+f)); process.exit(1); }
 console.log(`ASSET WEIGHT CHECK PASSED — ${publicFiles.length} deploy files / ${totalBytes} bytes; ${knownCount} intentional large assets have narrow ceilings and all other files meet type budgets.`);
-

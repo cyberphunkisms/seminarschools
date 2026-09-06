@@ -23,6 +23,7 @@ const routes = [
   ]),
 ];
 let changed = 0;
+let discoveryShells = 0;
 for (const relative of routes) {
   const file = path.join(ROOT, relative);
   if (!fs.existsSync(file)) continue;
@@ -33,6 +34,14 @@ for (const relative of routes) {
   );
   if (after === before) {
     if (!/\bid=["']pmListingCount["']/.test(before)) {
+      // Discovery v2 owns its live result count in the browser payload and
+      // controller. These shells intentionally no longer carry the retired
+      // static <dt id="pmListingCount"> marker, so the legacy count updater
+      // must leave them alone instead of making the canonical build fail.
+      if (/\bdata-pm-app=["']discovery-v2["']/.test(before)) {
+        discoveryShells += 1;
+        continue;
+      }
       throw new Error(`${relative} is missing pmListingCount.`);
     }
     continue;
@@ -40,4 +49,7 @@ for (const relative of routes) {
   fs.writeFileSync(file, after);
   changed += 1;
 }
-console.log(`POLYMYTHCAL LISTING COUNTS — ${events.length} canonical records; ${changed} route shells updated.`);
+console.log(
+  `POLYMYTHCAL LISTING COUNTS — ${events.length} canonical records; ${changed} legacy route shells updated; `
+  + `${discoveryShells} Discovery v2 shells use live payload counts.`,
+);

@@ -119,7 +119,7 @@ for (const [text, label] of controllingBlocks) {
 }
 
 requirePhrase(charter, 'Continuity reference=>retrieve only.', 'portable CORE continuity trigger');
-requirePhrase(charter, 'Before using/revising/claiming work, retrieve newest canonical source in context;', 'portable CORE newest-source trigger');
+requirePhrase(charter, 'Before use/revision/claim, retrieve newest canonical source;', 'portable CORE newest-source trigger');
 requirePhrase(charter, 'never reconstruct.', 'portable CORE reconstruction boundary');
 requirePhrase(coreplus, 'the current CORE+ map, the active handler, and relevant sibling files', 'CORE+ handler load order');
 

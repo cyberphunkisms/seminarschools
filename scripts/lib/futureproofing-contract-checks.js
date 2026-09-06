@@ -5,6 +5,7 @@ const path = require('path');
 const {
   assertGeometryVersionScheme,
   geometryAssetVersion,
+  geometryExemptionForRelativeHtmlPath,
 } = require('./geometry-asset-version');
 
 const ROOT = path.resolve(__dirname, '..', '..');
@@ -40,11 +41,39 @@ function assetCount(html, asset) {
   return (String(html).match(new RegExp(`<[^>]+${escaped}[^>]*>`, 'ig')) || []).length;
 }
 
-function geometryDocumentDefects(html) {
+function geometryDocumentDefects(html, relativeHtmlPath = 'fixtures/included/index.html') {
   const failures = [];
   const source = String(html);
   const body = bodyTag(source);
   if (!body) failures.push('geometry-body-missing');
+  const exemption = geometryExemptionForRelativeHtmlPath(GEOMETRY_CONTRACTS, relativeHtmlPath);
+  if (exemption) {
+    const aliveCount = assetCount(source, '/css/alive.css');
+    if (aliveCount !== 1) failures.push(`geometry-exempt-shared-css-count:/css/alive.css:${aliveCount}`);
+    if (!new RegExp(`/css/alive\\.css\\?v=${GEOMETRY_VERSION}(?:["'])`, 'i').test(source)) {
+      failures.push('geometry-exempt-shared-css-version:/css/alive.css');
+    }
+    for (const asset of ['/js/mandala.js', '/js/indra.js']) {
+      const count = assetCount(source, asset);
+      if (count !== 0) failures.push(`geometry-exempt-runtime-asset:${asset}:${count}`);
+    }
+    const escapedExemption = exemption.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    if (!new RegExp(`\\bdata-shared-geometry-exempt=["']${escapedExemption}["']`, 'i').test(body)) {
+      failures.push('geometry-exempt-body-marker');
+    }
+    const starExemption = exemption === GEOMETRY_CONTRACTS.coverage.star_page_exemption_value;
+    if (starExemption && !/\bdata-star-file-page=["']true["']/i.test(body)) {
+      failures.push('geometry-star-compatibility-marker');
+    }
+    if (!starExemption && /\bdata-star-file-page\s*=/i.test(body)) {
+      failures.push('geometry-control-star-marker');
+    }
+    if (/\bdata-(?:geometry(?:-[\w-]+)?|indra-(?:intensity|fade-source))\s*=/i.test(body)) {
+      failures.push('geometry-exempt-body-state');
+    }
+    if (/\bid=["']indraLayer["']/i.test(source)) failures.push('geometry-exempt-runtime-layer');
+    return failures;
+  }
   for (const asset of ['/css/alive.css', '/js/mandala.js', '/js/indra.js']) {
     const count = assetCount(source, asset);
     if (count !== 1) failures.push(`geometry-asset-count:${asset}:${count}`);
@@ -66,6 +95,9 @@ function geometryDocumentDefects(html) {
     if (!new RegExp(`\\b${name}=["'][^"']+["']`, 'i').test(body)) {
       failures.push(`geometry-body-marker:${name}`);
     }
+  }
+  if (/\b(?:data-star-file-page|data-shared-geometry-exempt)\s*=/i.test(body)) {
+    failures.push('geometry-included-exemption-marker');
   }
   const mandala = source.search(/<script\b[^>]*\/js\/mandala\.js/i);
   const indra = source.search(/<script\b[^>]*\/js\/indra\.js/i);

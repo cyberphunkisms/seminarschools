@@ -11,18 +11,18 @@ const ROOT = path.resolve(__dirname, '..');
 const DELIVERY_ROOT = path.resolve(ROOT, '..');
 const siteOnly = process.argv.includes('--site-only');
 const failures = [];
-const EXPECTED_TOTAL = 1218;
+const EXPECTED_TOTAL = 1224;
 const EXPECTED_SECTION_COUNTS = Object.freeze({
-  analysis: 29, citation: 340, corehistory: 29, coreplus: 53,
+  analysis: 29, citation: 341, corehistory: 30, coreplus: 54,
   degorgonification: 54, 'framework-core': 1, gorgonification: 134,
-  idiomary: 44, learnings: 28, methodology: 387, pending: 18,
+  idiomary: 44, learnings: 28, methodology: 390, pending: 18,
   'pending-user-authorship': 2, polycognate: 24, rainbowsol: 3,
   sabachtan: 34, studylist: 38,
 });
 const EXPECTED_RECORD_SET_SHA256 = Object.freeze({
-  'framework-core': '3170658895f8879846c57fb44b267ad6bdbe595a4e8ab74c7c75bb678bd742a4',
-  coreplus: 'ac65068d102b191f1fcfa2da17a7bddfef7d39efdce256ac8760a079474fc631',
-  corehistory: '538d7e2bb70b79c160aac58108654a7e33f0378a6edb4641405fe5f7b1d39801',
+  'framework-core': 'df39985a3dff6fcc6bf1464ad7ea98c2262e4ce69cd6f501360ffde732ed7b48',
+  coreplus: '198b3e82d9d66f9bc078f8b30a98f94526dca4274dc508882aaeecbb75fef55b',
+  corehistory: '475c56bee8de76a96f34cfe908f5476e78b03c71666bcdcd9c582f05ef775256',
 });
 const FORMER_CHARTER_SHA256 = '7bb00b0b11c2b64991cdcf801803a304b8cc34e914f5c286d8d8d34eb944e016';
 const FORMER_PORTABLE_CORE_DOCUMENT_SHA256 = 'd794d0d04edd15f4958c3b5de656f5d7dc478d0ab08a702afed58825d2b058e9';
@@ -35,9 +35,12 @@ const FORMER_4485_PORTABLE_CORE_BODY_SHA256 = '6c289647cf8a14c9101a9a53f4f62f05b
 const FORMER_4485_PORTABLE_CORE_UTF16_UNITS = 4485;
 const PRE_CURRENT_TURN_CORE_DOCUMENT_SHA256 = '3260def350d19f201de2186f8fc9cd22ac13c3a5b67a0792a86f1bac98546bc6';
 const PRE_CURRENT_TURN_CORE_UTF16_UNITS = 4738;
-const EXPECTED_CORE_DOCUMENT_SHA256 = '5b518ceefe15cceff81701f4b011b8e27aa2ea16f503be6e612c7a9155f9e910';
+const PRE_REGISTER_CORE_DOCUMENT_SHA256 = 'c26d13b98ff8a4b731c189b7bef72122742a95d4ff9fb95b7329f61d036bf8d1';
+const PRE_REGISTER_CORE_BODY_SHA256 = '6e63e5f5f1ec3f689bf94ede708a141c128a4795c877c4588441bfd910085d9c';
+const PRE_REGISTER_CORE_UTF16_UNITS = 4996;
+const EXPECTED_CORE_DOCUMENT_SHA256 = 'f34b4de5dbef3526b1ae54dc31941325322e85c3d720efd50e092e6687360bc0';
 const CORE_MAX_CHARACTERS = 5000;
-const EXPECTED_CORE_UTF16_UNITS = 4999;
+const EXPECTED_CORE_UTF16_UNITS = 5000;
 const CORE_ID = 'core-personal-rules-current-2026-08-12';
 const DIARY_DISPATCH = "DEVIL'S DIARY DISPATCH. Any task that creates, revises, critiques, audits, or verifies a Devil's Diary entry or explicitly requests Devil's Diary work activates ML* and loads these current owners together: The Devil's Diary method (mephydata diary-entry recipe); Devil Diary and Mephistodata article rules (comprehensive, consolidated June 24 2026); Audience-register separation (conversation-input vs publication-output); Mephistodata Ask your favourite AI mirror criterion; Anti-twisting rules (degorgonification of reformulation); Anti-twisting worked example, psychologism and gorgonwars session, including its SOURCE-STATUS GUARD; and Interpretive pleonexia, the scope-overreach tripwire. For a non-Diary Mephistodata article, load the comprehensive rules, Audience-register separation, both anti-twisting owners including SOURCE-STATUS GUARD, Interpretive pleonexia, and the mirror criterion; load the Diary recipe only for Diary work. The base Diary recipe controls Diary routing, source testing, oracle, artifact discipline, citations, residue, and format. The comprehensive article rules control expanded voice, prose, plot, titles, and ideological constraints. Compatible requirements of both remain active. Later explicit user rulings and dated amendments govern their exact issue.";
 
@@ -122,6 +125,10 @@ const executionGates = one(
   entry => entry.id === 'coreplus-handler-mephistodata-execution-gates-2026-08-26',
   'current Mephistodata execution gates',
 );
+const writingComposition = one(
+  entry => entry.id === 'coreplus-handler-writing-composition-delivery-2026-08-29',
+  'current writing composition and delivery owner',
+);
 const controlledArchive = one(
   entry => entry.id === 'method-controlled-archive-evidence-institutional-metrics-2026-08-26',
   'current controlled-archive method',
@@ -161,6 +168,10 @@ const former4485PortableCore = one(
 const preCurrentTurnPortableCore = one(
   entry => entry.id === 'corehistory-portable-core-pre-current-turn-scope-2026-08-23',
   'former 4,738-unit portable CORE history record',
+);
+const preRegisterPortableCore = one(
+  entry => entry.id === 'corehistory-portable-core-pre-register-dispatch-2026-08-30',
+  'former 4,996-unit portable CORE history record',
 );
 const expandedPortableCore = one(
   entry => entry.id === 'coreplus-portable-core-expanded-handler-2026-08-12',
@@ -203,6 +214,8 @@ for (const [needle, label] of [
   ['No authority radiation.', 'object-bound authority'],
   ['Analysis=>response, never a new file.', 'artifact authority gate'],
   ['Main task stays live through correction/audit/rule/support work.', 'main-task continuity trigger'],
+  ['Named method/register=>current owner/form.', 'named-method and ML*-active register owner trigger'],
+  ['“degorgonified feminism”=>ML*+complete bundle.', 'degorgonified-feminism complete-bundle trigger'],
   ['AI decides routine format/IDs/organization/CORE-vs-CORE+ placement; user override.', 'AI-owned CORE / CORE+ routing trigger'],
   ["ML* activates only for material/explicit work on Polymyth, Meaninglib, Seminar Schools, Mephistodata, Devil's Diary, named star files, CORE, CORE+;", 'narrow ML activation'],
   ['Canonical ML*: https://seminarschools.com/polymyth/methodologylist/; cold-load CORE+ map: https://seminarschools.com/polymyth/methodologylist-coreplus.txt; full text: https://seminarschools.com/polymyth/methodologylist.txt.', 'stable canonical ML* locators'],
@@ -210,12 +223,14 @@ for (const [needle, label] of [
   ['Memory mutation needs explicit instruction;', 'explicit memory gate'],
   ['no unstated framework or psychological/wellbeing/institutional speculation unless requested/required.', 'no-default-framework rule'],
   ['CORPORA. Freeze categories/seeds/universe/measures; evidence items; omission-test open searches; never pad; compare/rank/count/graph verified rows only; isolate residue; verify completion.', 'universal corpus-integrity trigger'],
+  ['Ledger result; continue=unit; support≠result; disclose shortfall; partial≠final.', 'universal deliverable-accounting trigger'],
   ['Lineage: direct/equivalent/analogue/secondary/lead.', 'universal source-lineage trigger'],
   ['from checked primary/canonical sources', 'source-review rule'],
   ['context not automatically publishable.', 'context/publication boundary'],
 ]) requireText(charter, needle, `portable CORE ${label}`);
 const portableActivationNeedles = [
   "ML* activates only for material/explicit work on Polymyth, Meaninglib, Seminar Schools, Mephistodata, Devil's Diary, named star files, CORE, CORE+;",
+  '“degorgonified feminism”=>ML*+complete bundle.',
   'Canonical ML*: https://seminarschools.com/polymyth/methodologylist/;',
   'cold-load CORE+ map: https://seminarschools.com/polymyth/methodologylist-coreplus.txt;',
   'full text: https://seminarschools.com/polymyth/methodologylist.txt.',
@@ -248,10 +263,12 @@ for (const needle of [
 ]) requireText(map.b, needle, 'CORE+ map');
 for (const needle of [
   'UNIVERSAL ML* EXECUTION DISPATCH.',
+  'REGISTER DISPATCH.',
   'AUDIT AND QUESTION DISPATCH.',
   'Receiving a user question does not by itself invoke Ouroborosanalyses.',
   'CORPUS, CONTROLLED-ARCHIVE, AND METRIC DISPATCH.',
-  'PM17\'s mandatory opener is inactive',
+  'PM15, PM17, Mephistodata-default, and explicit one-response Bloom govern the active register through that owner.',
+  'The owner controls the method’s steps, scope, and output form.',
 ]) requireText(mapAmendment.b, needle, 'CORE+ map amendment');
 for (const needle of [
   'GATE 1, RESET AND TASK FREEZE.',
@@ -261,6 +278,20 @@ for (const needle of [
   'GATE 9, EXACT-LINE AUDIT.',
   'GATE 10, FAIL-CLOSED DELIVERY.',
 ]) requireText(executionGates.b, needle, 'Mephistodata execution gates');
+for (const needle of [
+  'STATUS. ACTIVE CURRENT WRITING OWNER.',
+  'COMPOSITION STATE 1, PARAGRAPH MAP.',
+  'COMPOSITION STATE 2, CLAUSE ADMISSION.',
+  'COMPOSITION STATE 3, SENTENCE CLOSE.',
+  'COMPOSITION STATE 4, PARAGRAPH CLOSE.',
+  'COMPOSITION STATE 5, DOCUMENT CLOSE.',
+  'W24 blocks needless repetition of the same salient content word or lemma within one sentence.',
+  'W33 requires sentence-topic continuity or a genuine marked shift.',
+  'Protection applies only to the exact span.',
+  'W37 blocks invented conceptual bridges.',
+  'Revise from the accepted original and the full correction ledger',
+  'PASS CONDITION.',
+]) requireText(writingComposition.b, needle, 'writing composition and delivery owner');
 for (const needle of [
   'OBSERVABILITY GATE.',
   'EVIDENCE-CONDITION FLAGS.',
@@ -484,6 +515,32 @@ if (preCurrentTurnDocument.length !== PRE_CURRENT_TURN_CORE_UTF16_UNITS) {
 if (sha256(preCurrentTurnDocument) !== PRE_CURRENT_TURN_CORE_DOCUMENT_SHA256) {
   failures.push('former 4,738-unit portable CORE preserved document hash drifted');
 }
+if (preRegisterPortableCore.s !== 'corehistory') {
+  failures.push('former 4,996-unit portable CORE is not in CORE History');
+}
+const preRegisterDocument = `${preRegisterPortableCore.b}\n`;
+if (preRegisterDocument.length !== PRE_REGISTER_CORE_UTF16_UNITS) {
+  failures.push(
+    `former 4,996-unit portable CORE preserved document is ${preRegisterDocument.length} UTF-16 units; `
+    + `expected ${PRE_REGISTER_CORE_UTF16_UNITS}`,
+  );
+}
+if (sha256(preRegisterPortableCore.b) !== PRE_REGISTER_CORE_BODY_SHA256) {
+  failures.push('former 4,996-unit portable CORE preserved body hash drifted');
+}
+if (sha256(preRegisterDocument) !== PRE_REGISTER_CORE_DOCUMENT_SHA256) {
+  failures.push('former 4,996-unit portable CORE preserved document hash drifted');
+}
+requireText(
+  preRegisterPortableCore.x || '',
+  `Document SHA-256 with final newline ${PRE_REGISTER_CORE_DOCUMENT_SHA256}`,
+  'former 4,996-unit portable CORE provenance',
+);
+requireText(
+  preRegisterPortableCore.xc || '',
+  'RUNTIME STATUS. HISTORICAL ONLY.',
+  'former 4,996-unit portable CORE runtime status',
+);
 const expandedPortablePrefix = 'CURRENT STATUS AND PRECEDENCE. This is the active CORE+ expansion of the clauses compressed out of portable CORE to satisfy the 5,000-character Personal Rules field limit.';
 if (!expandedPortableCore.b.startsWith(expandedPortablePrefix)) {
   failures.push('expanded portable CORE handler lacks its current active precedence preface');
@@ -572,6 +629,9 @@ for (const entry of entries.filter(item => item.s === 'corehistory')) {
   ) || (
     String(entry.t || '').startsWith('[HISTORICAL PROVENANCE COPY]')
       && String(entry.x || '').startsWith('RUNTIME STATUS. INACTIVE PROVENANCE COPY.')
+  ) || (
+    entry.id === 'corehistory-portable-core-pre-register-dispatch-2026-08-30'
+      && String(entry.xc || '').startsWith('RUNTIME STATUS. HISTORICAL ONLY.')
   );
   if (!inactiveBody && !preservedExactBody) {
     failures.push(`CORE HISTORY record lacks an inactive-history preface: ${entry.t}`);
@@ -661,4 +721,4 @@ if (failures.length) {
   for (const failure of failures) console.error(` - ${failure}`);
   process.exit(1);
 }
-console.log(`CORE / CORE+ / PERSONAL RULES ALIGNMENT PASSED — portable CORE ${coreLengthMetrics.utf16Units}/${CORE_MAX_CHARACTERS} UTF-16 units; exact mirrors, lossless 14,331-, 4,886-, 4,485-, and 4,738-unit histories, active Diary dispatch, active CORE+ expansion, record sets, and canonical HF row verified`);
+console.log(`CORE / CORE+ / PERSONAL RULES ALIGNMENT PASSED — portable CORE ${coreLengthMetrics.utf16Units}/${CORE_MAX_CHARACTERS} UTF-16 units; exact mirrors, lossless 14,331-, 4,886-, 4,485-, 4,738-, and 4,996-unit histories, active Diary dispatch, active CORE+ expansion, record sets, and canonical HF row verified`);

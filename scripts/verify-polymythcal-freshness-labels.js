@@ -13,7 +13,7 @@ const app = fs.readFileSync(path.join(ROOT, 'js', 'polymythcal-discovery.js'), '
 const css = fs.readFileSync(path.join(ROOT, 'css', 'polymythcal-discovery.css'), 'utf8');
 
 const statuses = browse.taxonomy?.axes?.statuses;
-if (statuses?.label?.en !== 'Listing status' || statuses?.label?.fr !== 'État de la fiche') {
+if (statuses?.label?.en !== 'Details' || statuses?.label?.fr !== 'Renseignements') {
   failures.push('browse taxonomy lacks bilingual listing-status labels');
 }
 if (statuses?.values?.confirmed?.en !== 'Confirmed details' || statuses?.values?.confirmed?.fr !== 'Renseignements confirmés') {
@@ -25,7 +25,7 @@ if (statuses?.values?.pending?.en !== 'Some details pending' || statuses?.values
 
 for (const event of browse.events || []) {
   const label = event.id || event.title || '(unknown chronology item)';
-  if (!event.last_checked_at) failures.push(`${label}: chronology item lacks last_checked_at`);
+  if (!event.checked_on) failures.push(`${label}: chronology item lacks checked_on`);
   if (!['confirmed', 'unconfirmed'].includes(event.confirmation_status)) failures.push(`${label}: invalid confirmation_status`);
   if (!/^\d{4}-\d{2}-\d{2}/.test(String(event.date || ''))) failures.push(`${label}: chronology item lacks a publishable date`);
   const expected = event.confirmation_status === 'confirmed' ? 'confirmed' : 'pending';
@@ -35,7 +35,7 @@ for (const event of browse.events || []) {
 }
 for (const item of watchlist.items || []) {
   const label = item.id || item.title || '(unknown monitoring item)';
-  if (!item.last_checked_at) failures.push(`${label}: monitoring item lacks last_checked_at`);
+  if (!item.checked_on) failures.push(`${label}: monitoring item lacks checked_on`);
   if (item.date_status !== 'awaiting-confirmed-date') failures.push(`${label}: monitoring item has a publishable-date status`);
   if (item.confirmation_status !== 'unconfirmed') failures.push(`${label}: monitoring item is not explicitly unconfirmed`);
 }
@@ -44,7 +44,7 @@ for (const needle of [
   'function trustLine(event)',
   'event.confirmation_status',
   'event.destination_status',
-  'event.last_checked_at',
+  'event.checked_on || event.last_checked_at',
   'COPY.checked',
   'COPY.datePending',
   "surface === 'monitoring'",
@@ -85,5 +85,4 @@ if (failures.length) {
   if (failures.length > 80) console.error(` - ${failures.length - 80} additional failures omitted`);
   process.exit(1);
 }
-console.log(`POLYMYTHCAL FRESHNESS CHECK PASSED — ${browse.events.length} dated chronology listings expose confirmation and last-check trust signals; ${watchlist.items.length} date-free monitoring records remain explicitly unconfirmed across EN/FR Discovery surfaces.`);
-
+console.log(`POLYMYTHCAL FRESHNESS CHECK PASSED — ${browse.events.length} dated chronology listings expose confirmation and compact checked-on trust signals; ${watchlist.items.length} date-free monitoring records remain explicitly unconfirmed across EN/FR Discovery surfaces.`);

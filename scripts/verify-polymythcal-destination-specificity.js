@@ -115,12 +115,14 @@ function main() {
   const mirror = readJson('data/polymyth-seminar-events.json');
   const browse = readJson('polymythseminars/browse.json');
   const watchlist = readJson('polymythseminars/watchlist.json');
+  const research = readJson('polymythseminars/research.json');
   const surfaces = readJson('data/polymythcal-publication-surfaces.json');
   const overrideDoc = readJson('data/polymythcal-destination-overrides.json');
   const events = canonical.events || [];
   const byId = new Map(events.map((event) => [String(event.id), event]));
   const mirrorById = new Map((mirror.events || []).map((event) => [String(event.id), event]));
   const browseById = new Map([...(browse.events || []), ...(watchlist.items || [])].map((event) => [String(event.id), event]));
+  const researchById = new Map((research.records || []).map((event) => [String(event.id), event]));
   const chronologyIds = new Set(surfaces.chronology_ids || []);
   const watchlistIds = new Set(surfaces.watchlist_ids || []);
   const overrides = new Map((overrideDoc.overrides || []).map((value) => [String(value.event_id), value]));
@@ -137,6 +139,8 @@ function main() {
   const counts = {};
   let available = 0;
   let sharedSeries = 0;
+  let suppressedBroad = 0;
+  let correctedUrls = 0;
   for (const event of events) {
     const destination = assertDestination(resolvePolymythcalDestination(event, {
       override: overrides.get(String(event.id)),
@@ -149,10 +153,38 @@ function main() {
     if (mirrorEvent) sameDestination(mirrorEvent, expected, `${event.id} mirror`);
     const browseEvent = browseById.get(String(event.id));
     check(Boolean(browseEvent), `${event.id}: missing browser record`);
-    if (browseEvent) sameDestination(browseEvent, expected, `${event.id} browse`, {compact: true});
+    if (browseEvent) {
+      const actions = Array.isArray(browseEvent.actions) ? browseEvent.actions : [];
+      const detailActions = actions.filter(action => action?.kind === 'details');
+      const externalActions = actions.filter(action => /^https:\/\//.test(String(action?.url || '')));
+      check(
+        detailActions.length === 1 && detailActions[0].url === browseEvent.route,
+        `${event.id}: browser projection lost its one stable internal event page`,
+      );
+      if (destination.href) {
+        check(externalActions.length === 1, `${event.id}: browser projection must expose exactly one exact external action`);
+        if (externalActions[0]) {
+          check(externalActions[0].url === destination.href, `${event.id}: browser projection exposed a non-materialized external URL`);
+          check(externalActions[0].kind === destination.kind, `${event.id}: browser projection destination kind drifted`);
+          check(externalActions[0].scope === destination.scope, `${event.id}: browser projection destination scope drifted`);
+        }
+      } else {
+        check(externalActions.length === 0, `${event.id}: unresolved browser projection exposed an external action`);
+      }
+    }
+    const researchEvent = researchById.get(String(event.id));
+    if (chronologyIds.has(String(event.id))) {
+      check(Boolean(researchEvent), `${event.id}: missing Research projection record`);
+      for (const source of researchEvent?.sources || []) {
+        check(Boolean(destination.href), `${event.id}: unresolved source leaked into the Research projection`);
+        check(source.url === destination.href, `${event.id}: Research source differs from the exact materialized destination`);
+        check(source.url === event.source_url, `${event.id}: replacement destination was mislabeled as the original source`);
+      }
+    }
     counts[destination.status] = (counts[destination.status] || 0) + 1;
     if (destination.href) {
       available += 1;
+      if (canonicalSourceUrl(destination.href) !== canonicalSourceUrl(event.source_url)) correctedUrls += 1;
       check(destination.href.startsWith('https://'), `${event.id}: external action is not HTTPS`);
       check(destination.href !== event.source_url || destination.evidence !== 'fail-closed', `${event.id}: invalid destination evidence`);
       if ((groups.get(canonicalSourceUrl(event.source_url)) || []).length > 1) {
@@ -171,14 +203,13 @@ function main() {
         if (destination.scope === 'series') sharedSeries += 1;
       }
     }
-    if (chronologyIds.has(String(event.id))) {
-      verifyDetailPage(`polymythseminars/events/${event.id}/index.html`, destination, 'en', event.id);
-      verifyDetailPage(`polymythseminars/fr/events/${event.id}/index.html`, destination, 'fr', event.id);
-    } else {
-      check(watchlistIds.has(String(event.id)), `${event.id}: absent from the publication-surface partition`);
-      check(!fs.existsSync(path.join(ROOT, `polymythseminars/events/${event.id}/index.html`)), `${event.id}: monitoring marker leaked into an English detail route`);
-      check(!fs.existsSync(path.join(ROOT, `polymythseminars/fr/events/${event.id}/index.html`)), `${event.id}: monitoring marker leaked into a French detail route`);
-    }
+    if (!destination.href) suppressedBroad += 1;
+    check(
+      chronologyIds.has(String(event.id)) || watchlistIds.has(String(event.id)),
+      `${event.id}: absent from the publication-surface partition`,
+    );
+    verifyDetailPage(`polymythseminars/events/${event.id}/index.html`, destination, 'en', event.id);
+    verifyDetailPage(`polymythseminars/fr/events/${event.id}/index.html`, destination, 'fr', event.id);
   }
   for (const url of GENERIC_URLS) {
     const matches = events.filter((event) => event.source_url === url);
@@ -269,6 +300,7 @@ function main() {
     check((counts[status] || 0) === expected, `${status} count changed: ${counts[status] || 0}/${expected}`);
   }
   check(available === EXPECTED_AVAILABLE, `exact external action count changed: ${available}/${EXPECTED_AVAILABLE}`);
+  check(suppressedBroad === EXPECTED_STATUS_COUNTS['unavailable-specific-page'], `suppressed broad destination count changed: ${suppressedBroad}/${EXPECTED_STATUS_COUNTS['unavailable-specific-page']}`);
   check(sharedSeries === EXPECTED_SHARED_SERIES, `shared-series record count changed: ${sharedSeries}/${EXPECTED_SHARED_SERIES}`);
   const digest = crypto.createHash('sha256').update(events.map((event) => FIELDS.map((field) => event[field] || '').join('\t')).join('\n')).digest('hex');
   check(digest === EXPECTED_DIGEST, `materialized destination digest changed: ${digest}/${EXPECTED_DIGEST}`);
@@ -280,6 +312,7 @@ function main() {
   }
   console.log(
     `POLYMYTHCAL DESTINATION SPECIFICITY PASSED — ${events.length} records; ${available} exact external actions; `
+    + `${suppressedBroad} broad destinations suppressed; ${correctedUrls} reviewed/reconciled URL replacements; `
     + `${sharedSeries} shared-series records; ${Object.entries(counts).sort().map(([key, value]) => `${key} ${value}`).join('; ')}; digest ${digest}.`,
   );
 }
@@ -299,4 +332,3 @@ module.exports = {
   NSPA_URL,
   primaryActions,
 };
-

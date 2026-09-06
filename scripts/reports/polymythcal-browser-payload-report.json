@@ -13,27 +13,27 @@
   "series_parent_count": 137,
   "series_occurrence_count": 560,
   "canonical_sha256": "c52de1fe55bd1c1a4e22d1bce1fd71beebf0cc2687dda436670ec98451bafd7f",
-  "browser_sha256": "30e73c6fcd802f5b57c588fd8d6cfbffde1dc4a190a31a1a2b10cfc80eb71d7e",
-  "watchlist_sha256": "654c13cd461801375625052ab5e92cbd5139e3fb28c3834b5d0aaa699e159b8d",
-  "research_sha256": "0a6d897141f8f5ad1cbdab79987bcec357b3d70527df244fdd7541a84fd51265",
+  "browser_sha256": "f7b82229eca5ad99feb64a1a81e02c388abf7045253b51ac7c7188401f46308e",
+  "watchlist_sha256": "eff46db0ccf086142a1d8a94c827cf9705919cc969dbf5bc8789fe062e8d5ef8",
+  "research_sha256": "da7f74b566289eaa60a11180c5ccf95cef956e3bc405f17f4e54864cace5c473",
   "publication_surfaces_sha256": "e32c8c125b42b340d0df0681980040ee2fee3cc5438b16c9bd8c118984306095",
   "canonical_raw_bytes": 8526306,
-  "browser_raw_bytes": 3068615,
-  "watchlist_raw_bytes": 220940,
-  "research_raw_bytes": 2231622,
+  "browser_raw_bytes": 2954297,
+  "watchlist_raw_bytes": 213174,
+  "research_raw_bytes": 1915161,
   "canonical_gzip_bytes": 782541,
-  "browser_gzip_bytes": 305930,
-  "watchlist_gzip_bytes": 19869,
-  "research_gzip_bytes": 208626,
+  "browser_gzip_bytes": 287979,
+  "watchlist_gzip_bytes": 18616,
+  "research_gzip_bytes": 178097,
   "freshness": {
     "built_at": "2026-08-26T16:30:00.000Z",
     "content_updated_at": "2026-08-15T22:00:00.000Z",
     "newest_source_check_at": "2026-08-15T22:00:00.000Z",
     "schema_version": "2",
-    "content_hash": "d256a97489137e8fe54abaa0c0e005e86cf4fe45f1cf58242c480405be0b09a3"
+    "content_hash": "32bb6687f243bd9a490f9b92c01fa965f11fa225778329e8a637a6ed14761f34"
   },
-  "raw_reduction_percent": 64.01,
-  "gzip_reduction_percent": 60.91,
+  "raw_reduction_percent": 65.35,
+  "gzip_reduction_percent": 63.2,
   "minimum_gzip_reduction_percent": 25,
   "public_projection_allowlisted": true,
   "complete_editorial_record_public": false,
@@ -54,55 +54,14 @@
     "format"
   ],
   "publication_partition_complete": true,
-  "typed_action_candidate_fields": [
-    {
-      "field": "registration_url",
-      "kind": "registration"
-    },
-    {
-      "field": "application_url",
-      "kind": "application"
-    },
-    {
-      "field": "submission_url",
-      "kind": "submission"
-    },
-    {
-      "field": "rules_url",
-      "kind": "rules"
-    },
-    {
-      "field": "ticket_url",
-      "kind": "tickets"
-    },
-    {
-      "field": "tickets_url",
-      "kind": "tickets"
-    },
-    {
-      "field": "stream_url",
-      "kind": "stream"
-    },
-    {
-      "field": "livestream_url",
-      "kind": "stream"
-    },
-    {
-      "field": "watch_url",
-      "kind": "stream"
-    }
-  ],
-  "unavailable_with_safe_candidate_count": 108,
-  "typed_action_recovered_unavailable_record_count": 108,
-  "typed_action_recovered_unavailable_by_kind": {
-    "registration": 62,
-    "application": 16,
-    "submission": 30,
-    "rules": 0,
-    "tickets": 0,
-    "stream": 0
-  },
-  "typed_action_total_record_count": 309,
-  "typed_action_total_action_count": 310,
-  "typed_action_recovery_complete": true
+  "destination_policy": "materialized-exact-destination-only",
+  "exact_external_destination_count": 804,
+  "unresolved_destination_count": 1284,
+  "suppressed_broad_destination_count": 1284,
+  "public_external_action_count": 804,
+  "missing_exact_external_action_count": 0,
+  "mismatched_external_action_count": 0,
+  "broad_source_projection_count": 0,
+  "suppressed_unverified_candidate_record_count": 109,
+  "suppressed_unverified_candidate_action_count": 109
 }

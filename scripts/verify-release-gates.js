@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 'use strict';
 
-/** The August 15 Sets 1-15 synthesis is current; earlier audit evidence remains immutable. */
+/** The September 5 degorgonified-feminism retrieval gate is current; earlier evidence remains immutable. */
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { spawnSync } = require('child_process');
 const {
   PUBLIC_RELEASE_ASSET_PATHS,
@@ -27,6 +28,19 @@ function exists(relative) {
 function check(condition, message) {
   if (!condition) failures.push(message);
 }
+function sha256(value) {
+  return crypto.createHash('sha256').update(value).digest('hex');
+}
+function canonicalObjectSha(value) {
+  return sha256(JSON.stringify(value));
+}
+function fileSha(relative) {
+  try {
+    return sha256(fs.readFileSync(path.join(ROOT, relative)));
+  } catch {
+    return '';
+  }
+}
 
 const runner = read('scripts/verify-all-runner.js');
 const deployer = read('scripts/package-deployer-compatible.py');
@@ -43,15 +57,21 @@ const artifactReceipt = read('scripts/artifact_receipt.py');
 const packageSelection = read('scripts/package_selection.py');
 const audit49PackagingVerifier = read('scripts/verify-audit49-build-packaging-efficiency.js');
 const publicBuilder = read('scripts/build-public-deploy.js');
+const publicBuildLock = read('scripts/lib/public-build-lock.js');
+const publicBuildLockVerifier = read('scripts/verify-public-build-lock-recovery.js');
+const completeArchiveClassVerifier = read('scripts/verify-complete-archive-classes.py');
 const releaseAssetIdentityHelper = read('scripts/lib/release-asset-identity.js');
 const releaseAssetIdentityUpdater = read('scripts/update-release-asset-identity.js');
 const releaseAssetIdentityVerifier = read('scripts/verify-release-asset-identity.js');
+const geometryFinalizer = read('scripts/apply-visible-geometry.js');
+const steadyUiVerifier = read('scripts/verify-steady-ui.js');
 const expectedReleaseAssetPaths = Object.freeze([
   'css/alive.css',
   'css/calm-ux.css',
   'css/site-wide-type-zoom.css',
   'js/mandala.js',
   'js/indra.js',
+  'data/geometry-route-contracts.json',
   'index.html',
   'teacherresources/finder.css',
   'teacherresources/finder.js',
@@ -77,6 +97,7 @@ const privateReleaseAssets = new Set([
   'data/polymyth-seminar-events.json',
   'data/polymythcal-event-schema-v2.json',
   'data/polymythcal-publication-surfaces.json',
+  'data/geometry-route-contracts.json',
   'js/polymythcal-revamp.js',
 ]);
 const destinationContractAssets = [
@@ -91,15 +112,78 @@ const destinationContractAssets = [
   'scripts/verify-polymythcal-destination-browser.js',
   'scripts/fixtures/futureproofing/external-destinations/invalid-destinations.json',
 ];
+const currentRequiredDeliveryPaths = Object.freeze([
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md',
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md',
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/b4f6ab5a-4eb3-44d0-943e-41acd52faec9.png',
+  'SITE_PACKAGE/UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/3066e1d8-f6f9-4267-a948-90c076e29f93.png',
+  'SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/04648eb9-885c-43c7-ad53-ca6af390fa0c.png',
+  'SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/13912ef0-3924-4d11-bae9-6bab8d294b93.png',
+  'SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/0fd75220-92bf-4df1-89e9-a90893430fdc.png',
+  'SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/a9c4d9d2-16e6-4995-9064-4db5bc5d484e.png',
+  'SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/097d5008-8e7c-4b24-822f-88a04fd1e7e7.png',
+  'SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/d1557ac1-79e1-4038-8521-edba929b8e29.png',
+  'SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/ca5c05c1-5e8f-4997-9409-0a83f3bbf302.png',
+  'SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_SCREENSHOTS_2026-08-30/b2726035-3129-4117-99ad-76d4ae8c12de.png',
+  'SITE_PACKAGE/scripts/lib/mephistodata-runtime-gate.js',
+  'SITE_PACKAGE/scripts/fixtures/ml-execution-gates/mephistodata-runtime-gate-hostile-fixtures.json',
+  'SITE_PACKAGE/scripts/verify-mephistodata-runtime-gate.js',
+  'SITE_PACKAGE/scripts/verify-ml-active-form-conflicts.js',
+  'SITE_PACKAGE/ML_EXECUTION_AND_CONTROLLED_ARCHIVE_SYNTHESIS_2026-08-26.md',
+  'SITE_PACKAGE/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js',
+  'SITE_PACKAGE/public/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js',
+  'SITE_PACKAGE/data/baseline-morality-amendment-scope-contract.json',
+  'SITE_PACKAGE/scripts/verify-baseline-morality-amendment-scope.js',
+  'SITE_PACKAGE/scripts/test-baseline-morality-amendment-scope.js',
+  'SITE_PACKAGE/scripts/build-public-deploy.js',
+  'SITE_PACKAGE/scripts/verify-public-deploy-parity.js',
+  'SITE_PACKAGE/data/futureproofing/public-private-boundary.json',
+  'SITE_PACKAGE/scripts/verify-public-private-boundary.py',
+  'SITE_PACKAGE/data/futureproofing/aug30-package-contents-baseline.json',
+  'SITE_PACKAGE/data/futureproofing/aug30-aug31-preservation-contract.json',
+  'SITE_PACKAGE/data/futureproofing/aug31-package-contents-baseline.json',
+  'SITE_PACKAGE/data/futureproofing/aug31-sep3-preservation-contract.json',
+  'SITE_PACKAGE/data/futureproofing/sep3-package-contents-baseline.json',
+  'SITE_PACKAGE/data/futureproofing/sep3-sep5-preservation-contract.json',
+  'SITE_PACKAGE/data/futureproofing/sep5-package-contents-baseline.json',
+  'SITE_PACKAGE/data/futureproofing/sep5-truthful-sep5-feminism-preservation-contract.json',
+  'SITE_PACKAGE/data/futureproofing/sep5-feminism-package-contents-baseline.json',
+  'SITE_PACKAGE/data/futureproofing/sep5-feminism-sep5-degorgonified-feminism-preservation-contract.json',
+  'SITE_PACKAGE/scripts/verify-futureproofing-contract.py',
+  'SITE_PACKAGE/scripts/verify-futureproofing-base-preservation.py',
+  'SITE_PACKAGE/scripts/verify-aug31-base-preservation.py',
+  'SITE_PACKAGE/scripts/verify-sep3-base-preservation.py',
+  'SITE_PACKAGE/scripts/verify-sep5-base-preservation.py',
+  'SITE_PACKAGE/scripts/verify-sep5-feminism-base-preservation.py',
+  'SITE_PACKAGE/scripts/verify-sep5-degorgonified-feminism-base-preservation.py',
+  'SITE_PACKAGE/scripts/fixtures/futureproofing/aug31-preservation-tampered.json',
+  'SITE_PACKAGE/scripts/fixtures/futureproofing/sep3-preservation-tampered.json',
+  'SITE_PACKAGE/scripts/fixtures/futureproofing/sep5-preservation-tampered.json',
+  'SITE_PACKAGE/scripts/fixtures/futureproofing/sep5-feminism-preservation-tampered.json',
+  'SITE_PACKAGE/scripts/fixtures/futureproofing/sep5-degorgonified-feminism-preservation-tampered.json',
+  'SITE_PACKAGE/scripts/test_futureproofing_contracts.py',
+  'SITE_PACKAGE/scripts/package-complete-current.py',
+  'SITE_PACKAGE/scripts/package-front-facing-mephistodata-release.py',
+  'SITE_PACKAGE/scripts/artifact_receipt.py',
+  'SITE_PACKAGE/scripts/verify-release-gates.js',
+]);
 let pkg = {};
 let manifest = {};
 let lock = {};
 let futureproof = {};
+let sep5DegorgonifiedFeminismPreservation = {};
 try {
   pkg = JSON.parse(read('package.json'));
   manifest = JSON.parse(read('RELEASE_MANIFEST.json'));
   lock = JSON.parse(read('package-lock.json'));
   futureproof = JSON.parse(futureproofContract);
+  sep5DegorgonifiedFeminismPreservation = JSON.parse(
+    read('data/futureproofing/sep5-feminism-sep5-degorgonified-feminism-preservation-contract.json'),
+  );
 } catch (error) {
   failures.push(`release JSON is invalid: ${error.message}`);
 }
@@ -107,6 +191,378 @@ try {
 const expectedRelease = '2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final';
 check(manifest.release_id === expectedRelease, `current release is ${manifest.release_id}`);
 check(manifest.generated_at === '2026-08-15T18:00:00-04:00', `current release timestamp is ${manifest.generated_at}`);
+const currentMlStar = manifest.ml_star_update || {};
+check(
+  currentMlStar.release_id === '2026-08-26-mephistodata-execution-controlled-archive-synthesis'
+    && currentMlStar.amended_at === '2026-09-05'
+    && currentMlStar.amendment === 'degorgonified-feminism-retrieval-enforcement'
+    && currentMlStar.amendment_release_id === 'core-coreplus-mephistodata-degorgonified-feminism-retrieval-enforcement-complete-2026-09-05'
+    && currentMlStar.amendment_generated_at === '2026-09-05T20:15:00Z'
+    && JSON.stringify(currentMlStar.prior_amendments) === JSON.stringify([
+      'internal-material-retrieval-boundary',
+      'writing-composition-and-lexical-repetition-hardening',
+      'non-strawman-current-position-correction',
+      'nonstrawman-writing-and-article-synthesis',
+      'deliverable-accounting-anti-waste',
+      'mephistodata-activation-register-hardening',
+      'mephistodata-activation-enforcement',
+      'bottom-up-definition-defect-provenance-internal-retrieval',
+      'truthful-work-claims-and-false-completion-correction',
+      'feminism-academic-research-gorgonification-gate',
+    ])
+    && currentMlStar.source_sha256 === '2dde9179d4c4d3f42aef76523fa909310b0f88db27fa879a8730ad6aefa015bb'
+    && currentMlStar.canonical_entries === 1224
+    && currentMlStar.corehistory_entries === 30
+    && currentMlStar.register_recovery_source === 'UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_RECOVERY_2026-08-30.md'
+    && currentMlStar.register_recovery_source_sha256 === '663970ac0b0a08ae775039e9e6bfa9cbdfa18905cd72c9098d4f35a38b64e1a2'
+    && currentMlStar.current_map === 'coreplus-current-map-amendment-2026-08-26'
+    && currentMlStar.execution_owner === 'coreplus-handler-mephistodata-execution-gates-2026-08-26'
+    && currentMlStar.writing_owner === 'coreplus-handler-writing-composition-delivery-2026-08-29'
+    && currentMlStar.controlled_archive_owner === 'method-controlled-archive-evidence-institutional-metrics-2026-08-26'
+    && currentMlStar.deliverable_accounting_source_sha256 === '405065c7c0549743f2bef012243030a7480b6cbd3f6f2d87aba3fc2128a30730'
+    && currentMlStar.bottom_up_definition_source === 'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_BOTTOM_UP_DEFINITION_DEFECT_PROVENANCE_INTERNAL_RETRIEVAL_2026-09-03.md'
+    && currentMlStar.bottom_up_definition_source_sha256 === '9a67797e48eb6344d935be467c4162c20b0a4be469107114359a911e26dba50a'
+    && currentMlStar.truthful_work_claim_source === 'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md'
+    && currentMlStar.truthful_work_claim_source_sha256 === 'e6a31b2fb8fd258b01b825acb790eb62019b07a3c2831e0780507bf2863f4240'
+    && currentMlStar.feminism_academic_research_source
+      === 'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md'
+    && currentMlStar.feminism_academic_research_source_sha256
+      === 'cf53a2a361d42763be44afe6d7094ef2efb79330b841dc5869b1e06c5153074d'
+    && currentMlStar.degorgonified_feminism_source
+      === 'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md'
+    && currentMlStar.degorgonified_feminism_source_sha256
+      === '2a1c6999efaf472f70d12aedeabf5eaccab130ce2c5b123fa4553921373746a8'
+    && currentMlStar.truthful_work_claim_screenshots
+    && currentMlStar.truthful_work_claim_screenshots['UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/b4f6ab5a-4eb3-44d0-943e-41acd52faec9.png'] === 'eb1d871ec1a9c8d65605c2276c00acfd09570269b55e309e72d5848ab07edb8c'
+    && currentMlStar.truthful_work_claim_screenshots['UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/3066e1d8-f6f9-4267-a948-90c076e29f93.png'] === 'f5de65fff250497561cabf2d0ee504660fc6f8f4f8ecf86f5fa33fc1637b2632'
+    && Object.keys(currentMlStar.truthful_work_claim_screenshots).length === 2
+    && JSON.stringify(currentMlStar.behavioral_fixtures) === JSON.stringify({positive:52,negative:87,total:139})
+    && JSON.stringify(currentMlStar.project_adjudication_behavioral_fixtures) === JSON.stringify({
+      positive:71,negative:144,total:215,adjudication_v2_total:151,inherited_base_total:64,
+    })
+    && JSON.stringify(currentMlStar.register_behavioral_fixtures) === JSON.stringify({
+      positive:7,negative:26,total:33,source_binding:6,register_fusion:16,ouroboros_trace:11,hostile_mutations:17,
+    })
+    && JSON.stringify(currentMlStar.runtime_gate_behavioral_fixtures) === JSON.stringify({positive:37,negative:104,total:141})
+    && JSON.stringify(currentMlStar.active_form_conflict_fixtures) === JSON.stringify({total:38})
+    && JSON.stringify(currentMlStar.runtime_gate_host_boundary) === JSON.stringify({
+      factory:'createRuntimeGate',
+      trust_configuration_scope:'host-bootstrap-only',
+      pre_generation_call:'planRequest',
+      pre_delivery_call:'configuredGate.assertDeliverable',
+      draft_scan_verifier_field:'verifyDraftWorkStatusAttestation',
+      draft_scan_verifier_id_field:'draftVerifierId',
+      full_draft_scan_required_for_every_delivery:true,
+      draft_scan_binds_plan_draft_evidence_and_occurrence_claim_ir:true,
+      local_parser_is_natural_language_completeness_boundary:false,
+      work_verifier_field:'verifyWorkAttestation',
+      correction_verifier_field:'verifyCorrectionAttestation',
+      work_verifier_id_field:'workVerifierId',
+      correction_verifier_id_field:'correctionVerifierId',
+      per_delivery_trust_root_injection_allowed:false,
+      default_export_has_trusted_verifier:false,
+      self_reported_receipts_are_trusted:false,
+      caller_selected_trust_labels_are_trusted:false,
+      verifier_ids_are_cryptographically_authenticated:false,
+      host_controls_bootstrap_required:true,
+      host_must_invoke_gate:true,
+      file_presence_alone_is_host_enforcement:false,
+    })
+    && JSON.stringify(currentMlStar.baseline_morality_amendment_scope) === JSON.stringify({
+      inherited_records:11,authorization:'sha256-bound-direct-user-authorization',
+    })
+    && JSON.stringify(currentMlStar.public_private_repair) === JSON.stringify({
+      forbidden_public_research_paths_removed:4,private_source_and_editable_copies_retained:true,
+    })
+    && JSON.stringify(currentMlStar.source_baseline_archive) === JSON.stringify({
+      name:'seminar-schools-mephistodata-articles-synthesized-complete-2026-08-29.zip',
+      release_id:'core-coreplus-mephistodata-articles-synthesized-complete-2026-08-29',
+      sha256:'0a89e165473e26b365a2f12551997667c0fefaefb1c3f63c99a13e6fed381cbe',
+      bytes:243941412,zip_members:21167,
+    })
+    && JSON.stringify(currentMlStar.prior_package_archive) === JSON.stringify({
+      name:'seminar-schools-mephistodata-feminism-academic-research-gate-complete-2026-09-05.zip',
+      release_id:'core-coreplus-mephistodata-feminism-academic-research-gate-complete-2026-09-05',
+      sha256:'30554bc3ecdc417c0543f6fc181889bdf8d00d40ba6b8c67e091555751fcb285',
+      bytes:248013232,zip_members:21210,
+    })
+    && JSON.stringify(currentMlStar.portable_core) === JSON.stringify({
+      id:'core-personal-rules-current-2026-08-12',utf16_units:5000,
+      sha256:'f34b4de5dbef3526b1ae54dc31941325322e85c3d720efd50e092e6687360bc0',
+    })
+    && currentMlStar.deployment === 'No deployment performed.',
+  'current ML* synthesis identity, owners, counts, or fixture evidence drifted',
+);
+const priorSep5MlStar = manifest.ml_star_update_prior_2026_09_05 || {};
+const priorSep5MlStarSha256 = '747537a73dd3ea04d5dd28954767187e012be5f6a764b69ffb0ec042da7b43b2';
+check(
+  canonicalObjectSha(priorSep5MlStar) === priorSep5MlStarSha256,
+  'immutable September 5 feminism-research ML* update provenance drifted',
+);
+const priorMlStar = manifest.ml_star_update_prior_2026_08_30 || {};
+check(
+  canonicalObjectSha(priorMlStar) === '05fbbbcc411aba795c7e71153dbc3a8c5d1eb90f9fc8f07c75bb9658de9225f8',
+  'immutable Aug30 ML* update provenance drifted',
+);
+check(
+  canonicalObjectSha(manifest.non_strawman_current_position_update || {})
+    === 'd1ac3e250228688fc614ab560f76ceb99af5756fbce25170c42bc95d88001ba2'
+    && canonicalObjectSha(manifest.mephistodata_articles_synthesis || {})
+      === 'af5dbf22d720e088b602f0337fa0ea12c213a7189b72d8e885e4a74d94646944',
+  'immutable Aug29 non-strawman or article-synthesis provenance drifted',
+);
+const currentArtifactHashes = currentMlStar.artifact_sha256 || {};
+const requiredSep5ArtifactPaths = Object.freeze([
+  'ML_EXECUTION_AND_CONTROLLED_ARCHIVE_SYNTHESIS_2026-08-26.md',
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md',
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md',
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md',
+  'polymyth/methodologylist/index.html',
+  'polymyth/methodologylist/mephistodata-register-fixtures.json',
+  'polymyth/methodologylist/mephistodata-rule-hardening-addendum.js',
+  'scripts/build-ai-access-pack.js',
+  'scripts/lib/mephistodata-runtime-gate.js',
+  'scripts/fixtures/ml-execution-gates/fixtures.json',
+  'scripts/fixtures/ml-execution-gates/mephistodata-runtime-gate-hostile-fixtures.json',
+  'scripts/verify-ai-access-pack.js',
+  'scripts/verify-mephistodata-runtime-gate.js',
+  'scripts/fixtures/ml-execution-gates/internal-writing-fixtures.json',
+  'scripts/verify-ml-execution-gates.js',
+  'data/futureproofing/sep3-package-contents-baseline.json',
+  'data/futureproofing/sep3-sep5-preservation-contract.json',
+  'data/futureproofing/sep5-package-contents-baseline.json',
+  'data/futureproofing/sep5-truthful-sep5-feminism-preservation-contract.json',
+  'data/futureproofing/sep5-feminism-package-contents-baseline.json',
+  'data/futureproofing/sep5-feminism-sep5-degorgonified-feminism-preservation-contract.json',
+  'data/futureproofing/futureproofing-contract.json',
+  'scripts/verify-sep5-base-preservation.py',
+  'scripts/verify-sep5-feminism-base-preservation.py',
+  'scripts/verify-sep5-degorgonified-feminism-base-preservation.py',
+  'scripts/fixtures/futureproofing/sep5-preservation-tampered.json',
+  'scripts/fixtures/futureproofing/sep5-feminism-preservation-tampered.json',
+  'scripts/fixtures/futureproofing/sep5-degorgonified-feminism-preservation-tampered.json',
+  'scripts/test_futureproofing_contracts.py',
+  'scripts/package-front-facing-mephistodata-release.py',
+  'scripts/package-complete-current.py',
+  'scripts/artifact_receipt.py',
+  'scripts/verify-complete-archive-classes.py',
+  'scripts/build-clean-room-release.py',
+  'scripts/verify-release-gates.js',
+]);
+check(
+  Object.keys(currentArtifactHashes).length >= 49
+    && Object.entries(currentArtifactHashes).every(([relative, expected]) => (
+      /^[0-9a-f]{64}$/.test(expected) && fileSha(relative) === expected
+    ))
+    && requiredSep5ArtifactPaths.every(relative => (
+      currentArtifactHashes[relative] === fileSha(relative)
+    )),
+  'current September 5 ML* artifacts are not exactly hash-bound',
+);
+check(
+  sep5DegorgonifiedFeminismPreservation.schema
+      === 'seminar-schools-sep5-degorgonified-feminism-preservation-v1'
+    && sep5DegorgonifiedFeminismPreservation.contract_version === '2026-09-05.3'
+    && sep5DegorgonifiedFeminismPreservation.status === 'sealed'
+    && sep5DegorgonifiedFeminismPreservation.transition_id
+      === 'sep5-feminism-to-sep5-degorgonified-feminism-retrieval-enforcement'
+    && sep5DegorgonifiedFeminismPreservation.predecessor_release_id
+      === 'core-coreplus-mephistodata-feminism-academic-research-gate-complete-2026-09-05'
+    && sep5DegorgonifiedFeminismPreservation.expected_transition
+    && sep5DegorgonifiedFeminismPreservation.expected_transition.outer_delivery
+    && Array.isArray(sep5DegorgonifiedFeminismPreservation.expected_transition.outer_delivery.deleted)
+    && sep5DegorgonifiedFeminismPreservation.expected_transition.outer_delivery.deleted.length === 0,
+  'September 5 degorgonified-feminism preservation contract is absent, malformed, or unsealed',
+);
+const archiveStateGateIndex = completeArchivePackager.lastIndexOf(
+  '\n    verify_current_release_state()\n',
+);
+const archiveSelectionIndex = completeArchivePackager.indexOf(
+  'core_bytes, core_sha256 = require_portable_core_equality()',
+);
+check(
+  completeArchivePackager.includes('def verify_current_release_state()')
+    && completeArchivePackager.includes('verify-sep5-degorgonified-feminism-base-preservation.py')
+    && completeArchivePackager.includes('verify-release-gates.js')
+    && completeArchivePackager.includes('subprocess.run(command, cwd=SITE_ROOT, check=False)')
+    && archiveStateGateIndex >= 0
+    && archiveSelectionIndex > archiveStateGateIndex,
+  'complete archive preflight and writer do not fail closed through current preservation and release gates',
+);
+check(
+  completeArchivePackager.includes(
+    'EXPECTED_PACKAGE_RELEASE_ID = (\n    "core-coreplus-mephistodata-degorgonified-feminism-retrieval-enforcement-complete-2026-09-05"',
+  )
+    && completeArchivePackager.includes(
+      'EXPECTED_PACKAGE_GENERATED_AT = "2026-09-05T20:15:00Z"',
+    )
+    && completeArchivePackager.includes('if release != {')
+    && completeArchivePackager.includes('"release_id": EXPECTED_PACKAGE_RELEASE_ID')
+    && completeArchivePackager.includes('"generated_at": EXPECTED_PACKAGE_GENERATED_AT'),
+  'complete archive preflight and writer accept caller-selected release identity',
+);
+check(
+  currentMlStar.prior_provenance_sha256
+    && currentMlStar.prior_provenance_sha256.ml_star_update_prior_2026_09_05
+      === priorSep5MlStarSha256
+    && currentMlStar.prior_provenance_sha256.ml_star_update_prior_2026_09_05
+      === canonicalObjectSha(priorSep5MlStar)
+    && currentMlStar.prior_provenance_sha256.ml_star_update_prior_2026_08_30
+      === canonicalObjectSha(priorMlStar)
+    && currentMlStar.prior_provenance_sha256.non_strawman_current_position_update
+      === canonicalObjectSha(manifest.non_strawman_current_position_update || {})
+    && currentMlStar.prior_provenance_sha256.mephistodata_articles_synthesis
+      === canonicalObjectSha(manifest.mephistodata_articles_synthesis || {}),
+  'current release does not bind all immutable September 5/Aug30/Aug29 provenance objects',
+);
+for (const token of [
+  'core-coreplus-mephistodata-degorgonified-feminism-retrieval-enforcement-complete-2026-09-05',
+  'seminar-schools-mephistodata-degorgonified-feminism-retrieval-enforcement-complete-2026-09-05.zip',
+  '2026-09-05T20:15:00Z',
+  'SITE_BUILD_DATE"] = "2026-09-05"',
+  'regen-methodologylist-manifest.js", "2026-09-05"',
+  'run-browser-test-tier.mjs',
+  'futureproofing-browser-family-report.json',
+  'verify-complete-archive-classes.py',
+]) check(completePackager.includes(token), `complete September 5 packager misses ${token}`);
+for (const token of [
+  'SITE_BUILD_DATE"] = "2026-09-05"',
+  'regen-methodologylist-manifest.js", "2026-09-05"',
+  'DERIVED_GENERATED_AT = "2026-09-05T20:15:00Z"',
+  'run-browser-test-tier.mjs',
+  'futureproofing-browser-family-report.json',
+]) check(cleanRoomBuilder.includes(token), `clean-room September 5 builder misses ${token}`);
+for (const relative of [
+  'SITE_PACKAGE/UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_RECOVERY_2026-08-30.md',
+  'SITE_PACKAGE/polymyth/methodologylist/mephistodata-register-fixtures.json',
+  'SITE_PACKAGE/scripts/lib/public-build-lock.js',
+  'SITE_PACKAGE/scripts/verify-public-build-lock-recovery.js',
+  'SITE_PACKAGE/scripts/verify-complete-archive-classes.py',
+  ...currentRequiredDeliveryPaths,
+]) {
+  check(completeArchivePackager.includes(relative), `complete handoff selector misses ${relative}`);
+  check(artifactReceipt.includes(relative), `artifact receipt misses ${relative}`);
+}
+for (const token of [
+  'seminar-schools-public-build-lock-v2',
+  'seminar-schools-public-build-stage-v1',
+  'const CLAIM_DIRECTORY_PREFIX',
+  '_prepareClaim()',
+  '_installPreparedClaim(prepared)',
+  "return {action: 'reclaim-empty-overlay'}",
+  '_requireEmptyOverlayAuthorization()',
+  'crypto.randomBytes(32)',
+  'owner process identity is unverifiable',
+  'staging tree exists without a verified owner',
+  'unverifiable rollback tree is present',
+  'discardOwnedStaging',
+]) check(publicBuildLock.includes(token), `public-build lock owner misses ${token}`);
+for (const token of [
+  'unowned staging without lock',
+  'rollback tree without lock',
+  'verifyAuthorizedEmptyOverlayRecovery',
+  'verifyAuthorizedLocklessEmptyOverlayRecovery',
+  'verifyControlledFailureDoesNotDeadlockNextBuild',
+  'verifyRecoverableDeadOwner',
+  'symlink',
+  'foreign',
+  'unverifiable',
+]) check(publicBuildLockVerifier.includes(token), `public-build lock regression misses ${token}`);
+for (const token of [
+  'function authorizeEmptyOverlayRecovery()',
+  "path.join(ROOT, 'scripts', 'assert-build-lock.py')",
+  'authorizeEmptyOverlayRecovery,',
+]) check(publicBuilder.includes(token), `public builder lacks lease-authorized empty-overlay recovery: ${token}`);
+for (const token of [
+  'seminar-schools-complete-editable-masters-source-and-public',
+  'core-coreplus-mephistodata-degorgonified-feminism-retrieval-enforcement-complete-2026-09-05',
+  '2026-09-05T20:15:00Z',
+  'f34b4de5dbef3526b1ae54dc31941325322e85c3d720efd50e092e6687360bc0',
+  'verify_ooxml_payload',
+  'verify_portable_core',
+  'PACKAGE_CONTENTS_SHA256.json',
+]) check(completeArchiveClassVerifier.includes(token), `complete archive-class verifier misses ${token}`);
+const nonStrawman = manifest.non_strawman_current_position_update || {};
+check(
+  nonStrawman.release_id === 'core-coreplus-nonstrawman-current-position-2026-08-29'
+    && nonStrawman.generated_at === '2026-08-29T12:00:00Z',
+  'Aug29 non-strawman outer package identity or timestamp drifted',
+);
+const expectedNonStrawmanCounts = {
+  canonical_entries: 1221,
+  methodology_entries: 390,
+  genealogy_controls: 16,
+  polycognate_application_controls: 24,
+};
+check(
+  JSON.stringify(nonStrawman.current_counts) === JSON.stringify(expectedNonStrawmanCounts),
+  'Aug29 non-strawman canonical, methodology, genealogy, or Polycognate counts drifted',
+);
+const expectedNonStrawmanFixtures = {
+  positive: 58,
+  negative: 126,
+  total: 184,
+  adjudication_v2_positive: 38,
+  adjudication_v2_negative: 113,
+  adjudication_v2_total: 151,
+  inherited_base_positive: 20,
+  inherited_base_negative: 13,
+  inherited_base_total: 33,
+  co_located_hash_disclaimer: 'These hashes and fixtures are regression evidence for internal consistency. They are not cryptographic proof of user adoption, external truth, or project validity.',
+};
+check(
+  JSON.stringify(nonStrawman.behavioral_fixtures) === JSON.stringify(expectedNonStrawmanFixtures),
+  'Aug29 non-strawman execution fixture counts or evidence disclaimer drifted',
+);
+const expectedNonStrawmanHashes = {
+  'polymyth/methodologylist/index.html': 'e4497e3be534074fbb2ec3c148e1ae2e384de7775bb079be191e2eb7af17dc29',
+  'polymyth/methodologylist/mephistodata-rule-hardening-addendum.js': 'e2778c8b97888524f3c07bccf1965977f9db7bf38a9d028e1a75023fcae6dd59',
+  'polymyth/methodologylist/mythology-integration-addendum.js': 'b7562c013d157048f161a2caad29c0a52cc62851bb89d6df976bb0dad72453d0',
+  'UPDATE_SOURCES/DETIENNE_COMPARING_THE_INCOMPARABLE_POLYMYTH_MASTER_NOTES_2026-08-28.md': 'e82445f633707df003f6066176482d900028c33d066645d173ea2441196235c9',
+  'UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/README.md': '57499b6c3fe92a58c8cf77dce26f8eb9df39b473fcc6f1b833f7c20c683bff02',
+  'UPDATE_SOURCES/NON_STRAWMAN_CURRENT_POSITION_CORRECTION_2026-08-29.md': '157624357213b8c13e104fcd72acc364638b2ca074fdc1be151017c00aac22a9',
+  'scripts/verify-ml-execution-gates.js': '361a18166d6afd9116453710de9d29a32964d75a7165fa1b9e2271ffed8acbef',
+  'scripts/fixtures/ml-execution-gates/fixtures.json': 'dfbaf96e113eb60f0dd32ee3bf8060a672eb349ef625748b1de03fa2c9eb3444',
+  'scripts/fixtures/ml-execution-gates/adjudication-v2-fixtures.json': '30d4b85ba671380dea3b3167963afbdeae85aeb6b434f77afc9a2fa8af4d5b84',
+};
+check(
+  JSON.stringify(nonStrawman.artifact_sha256) === JSON.stringify(expectedNonStrawmanHashes),
+  'Aug29 non-strawman artifact hash registry drifted',
+);
+check(
+  Object.values(expectedNonStrawmanHashes).every(value => /^[0-9a-f]{64}$/.test(value)),
+  'Aug29 non-strawman historical snapshot contains an invalid artifact digest',
+);
+check(
+  nonStrawman.deployment === 'No deployment performed.',
+  'Aug29 non-strawman release must retain the exact no-deployment statement',
+);
+const articleSynthesis = manifest.mephistodata_articles_synthesis || {};
+const expectedSynthesisArchives = [
+  {
+    name: 'seminar-schools-nonstrawman-current-position-complete-2026-08-29(1).zip',
+    sha256: '9da0005479af1e9ded6800cc8550eccf1d74d2ef92f04850259bd78de0f17141',
+  },
+  {
+    name: 'seminar-schools-ml-internal-retrieval-complete-2026-08-29.zip',
+    sha256: '203fd449c71e9ef4b5cd645a9fe26d38c2b007b7792311ca7a37fdf310370907',
+  },
+  {
+    name: 'seminar-schools-ml-writing-rules-hardened-complete-2026-08-29.zip',
+    sha256: 'fc5ad168b07af8ad1dde780519ec485bfdedba7d3273d843e97c6c83a59fa0ed',
+  },
+];
+check(
+  articleSynthesis.release_id === 'core-coreplus-mephistodata-articles-synthesized-complete-2026-08-29'
+    && articleSynthesis.generated_at === '2026-08-29T12:00:00Z'
+    && JSON.stringify(articleSynthesis.source_archives) === JSON.stringify(expectedSynthesisArchives)
+    && JSON.stringify(articleSynthesis.current_counts) === JSON.stringify({
+      canonical_entries:1223,coreplus_entries:54,methodology_entries:390,
+    })
+    && articleSynthesis.distinct_publication_dates === true
+    && articleSynthesis.deployment === 'No deployment performed.',
+  'Aug29 archive and article synthesis identity, sources, counts, or status drifted',
+);
 check(manifest.polymythcal_asset_version === '20260815-sets1-15-synthesis', `current asset version is ${manifest.polymythcal_asset_version}`);
 check(
   manifest.polymythcal_discovery_release_id === '2026-08-26-polymythcal-discovery-v2',
@@ -131,7 +587,7 @@ check(
   manifest.asset_digests
     && JSON.stringify(Object.keys(manifest.asset_digests)) === JSON.stringify(expectedReleaseAssetPaths)
     && Object.values(manifest.asset_digests).every(value => /^[0-9a-f]{64}$/.test(value)),
-  'release manifest lacks the exact 25 sitewide and discovery-v2 SHA-256 asset digests',
+  'release manifest lacks the exact sitewide, geometry-scope, and discovery-v2 SHA-256 asset digests',
 );
 for (const field of [
   'polymythcal_discovery_release_id',
@@ -145,7 +601,7 @@ for (const field of [
 }
 check(
   JSON.stringify(RELEASE_ASSET_PATHS) === JSON.stringify(expectedReleaseAssetPaths),
-  'release asset identity helper does not bind the exact 25 discovery-v2 source assets',
+  'release asset identity helper does not bind the exact discovery-v2 and geometry-scope source assets',
 );
 check(
   Object.keys(PUBLIC_RELEASE_ASSET_PATHS).length === expectedReleaseAssetPaths.length
@@ -168,6 +624,18 @@ for (const token of [
   'RELEASE_ASSET_PATHS',
   'PUBLIC_RELEASE_ASSET_PATHS',
 ]) check(releaseAssetIdentityHelper.includes(token), `release asset identity helper misses ${token}`);
+for (const [relative, source] of [
+  ['scripts/apply-visible-geometry.js', geometryFinalizer],
+  ['scripts/verify-steady-ui.js', steadyUiVerifier],
+]) {
+  check(
+    source.includes('geometryExemptionForRelativeHtmlPath')
+      && source.includes("require('./lib/geometry-asset-version')")
+      && source.includes("'geometry-route-contracts.json'")
+      && source.includes('data-shared-geometry-exempt'),
+    `${relative} does not consume the exact central geometry exemption classifier`,
+  );
+}
 for (const token of [
   'polymythcal_discovery_release_id', 'polymythcal_discovery_built_at',
   'polymythcal_discovery_asset_version', 'watchlist_payload_sha256', 'research_payload_sha256',
@@ -186,7 +654,39 @@ check(releaseAssetIdentityUpdater.includes('computeReleaseAssetIdentity(ROOT)'),
 for (const token of ['computeReleaseAssetIdentity(ROOT)', 'public/site-release.json', 'public mirror differs from source']) {
   check(releaseAssetIdentityVerifier.includes(token), `release asset verifier misses ${token}`);
 }
-check(pkg.version === '1.0.6', `package version is ${pkg.version}`);
+check(
+  publicBuilder.includes('const releaseAssetIdentity = computeReleaseAssetIdentity(ROOT)')
+    && publicBuilder.includes('pickReleaseAssetIdentity(releaseManifest)')
+    && publicBuilder.includes("'asset_digests': releaseAssetIdentity.asset_digests")
+    && publicBuilder.includes('function writeCommittedReleaseMarker()')
+    && publicBuilder.includes('function writeCommittedReleaseAssets()')
+    && publicBuilder.includes('Object.entries(PUBLIC_RELEASE_ASSET_PATHS)')
+    && publicBuilder.includes('function snapshotCommittedPublicTree()')
+    && publicBuilder.includes('const committedPublicFiles = snapshotCommittedPublicTree();')
+    && publicBuilder.includes('writeCommittedPublicTree(committedPublicFiles);')
+    && publicBuilder.includes('const durabilityPassAuthorized = publicBuildLock.assertCurrentAcquisitionHasAuthorizedRecovery();')
+    && publicBuilder.includes('if (durabilityPassAuthorized !== true)')
+    && publicBuilder.indexOf('writeCommittedReleaseMarker();') < publicBuilder.indexOf('const committedPublicFiles = snapshotCommittedPublicTree();')
+    && publicBuilder.indexOf('const committedPublicFiles = snapshotCommittedPublicTree();') < publicBuilder.indexOf('const durabilityPassAuthorized = publicBuildLock.assertCurrentAcquisitionHasAuthorizedRecovery();')
+    && publicBuilder.indexOf('const durabilityPassAuthorized = publicBuildLock.assertCurrentAcquisitionHasAuthorizedRecovery();') < publicBuilder.indexOf('releaseBuildLock();')
+    && publicBuilder.indexOf('releaseBuildLock();') < publicBuilder.indexOf('writeCommittedPublicTree(committedPublicFiles);')
+    && !publicBuilder.slice(publicBuilder.indexOf('releaseBuildLock();')).includes('authorizeEmptyOverlayRecovery();')
+    && publicBuilder.includes('function capturePriorPublicMtimes()')
+    && publicBuilder.includes('function durableOutputTimestamp(sourcePath, publicRelative)')
+    && publicBuilder.includes('priorMtime + 1000')
+    && publicBuilder.indexOf('capturePriorPublicMtimes();') < publicBuilder.indexOf('commitBuildOutput();')
+    && publicBuilder.includes('fs.renameSync(temporary, targetPath)')
+    && publicBuilder.includes('fs.readFileSync(targetPath).equals(contents)')
+    && publicBuilder.includes("fs.renameSync(temporary, markerPath)")
+    && publicBuilder.includes("fs.utimesSync(OUT, markerTimestamp, markerTimestamp)")
+    && publicBuilder.includes("fs.readFileSync(markerPath, 'utf8') !== releaseMarkerContents")
+    && publicBuilder.indexOf('writeCommittedReleaseMarker();') > publicBuilder.indexOf('commitBuildOutput();')
+    && publicBuilder.indexOf('writeCommittedReleaseAssets();') > publicBuilder.indexOf('commitBuildOutput();')
+    && publicBuilder.indexOf('writeCommittedReleaseAssets();') < publicBuilder.indexOf('releaseBuildLock();')
+    && publicBuilder.indexOf('writeCommittedReleaseMarker();') < publicBuilder.indexOf('releaseBuildLock();'),
+  'public builder must bind a freshly computed identity and atomically read back governed live assets and the release marker under its lock',
+);
+check(pkg.version === '1.0.7', `package version is ${pkg.version}`);
 check(pkg.scripts?.['test:polymythcal-discovery-core'] === 'node scripts/test-polymythcal-discovery-core.js', 'Discovery core behavioral test is not exposed by package.json');
 check(pkg.scripts?.['test:polymythcal-data-truth'] === 'node scripts/test-polymythcal-data-truth.js', 'Discovery data/truth test is not exposed by package.json');
 check(pkg.scripts?.['test:polymythcal-discovery-shell'] === 'node scripts/test-polymythcal-discovery-shell.js', 'Discovery shell test is not exposed by package.json');
@@ -255,6 +755,8 @@ for (const [name, source, prefix] of [
 for (const token of [
   'require_release_build_lock(DELIVERY_ROOT)',
   '[npm, "run", "build"]',
+  'scripts/run-browser-test-tier.mjs',
+  'scripts/reports/futureproofing-browser-family-report.json',
   '[npm, "run", "sync:editable-masters:locked"]',
   'verify_netlify_repository_checkout(npm)',
   '[npm, "run", "verify:all:built"]',
@@ -270,7 +772,7 @@ for (const token of [
 }
 const verifiedTreeIndex = completePackager.indexOf('[npm, "run", "verify:all:built"]');
 const deliverySnapshotIndex = completePackager.indexOf('copy_clean_source(DELIVERY_ROOT, source_snapshot)');
-const archiveWriteIndex = completePackager.indexOf('package-front-facing-mephistodata-release.py');
+const archiveWriteIndex = completePackager.lastIndexOf('package-front-facing-mephistodata-release.py');
 check(
   verifiedTreeIndex >= 0
     && deliverySnapshotIndex > verifiedTreeIndex
@@ -302,6 +804,8 @@ for (const token of [
   'prepare_audit_python_dependencies(',
   '[npm, "ci"]',
   '[npm, "run", "build"]',
+  'scripts/run-browser-test-tier.mjs',
+  'scripts/reports/futureproofing-browser-family-report.json',
   '[npm, "run", "sync:editable-masters:locked"]',
   '[npm, "run", "verify:all:built"]',
   'verify_editable_masters(DELIVERY_ROOT / "EDITABLE_MASTERS")',
@@ -328,6 +832,7 @@ check(
   'predeploy must install the hash-locked Python audit runtime in every build job',
 );
 const completeBuildIndex = completePackager.indexOf('run([npm, "run", "build"])');
+const completeBrowserIndex = completePackager.indexOf('"scripts/run-browser-test-tier.mjs"');
 const completeSyncIndex = completePackager.indexOf('run([npm, "run", "sync:editable-masters:locked"])');
 const completeRepositoryIndex = completePackager.indexOf('verify_netlify_repository_checkout(npm)');
 const completeVerifyIndex = completePackager.indexOf('run([npm, "run", "verify:all:built"])');
@@ -339,7 +844,8 @@ const completeReceiptIndex = completePackager.lastIndexOf('create-artifact-audit
 const completeReceiptVerifyIndex = completePackager.lastIndexOf('verify-artifact-audit-receipt.py');
 check(
   completeBuildIndex >= 0
-    && completeBuildIndex < completeSyncIndex
+    && completeBuildIndex < completeBrowserIndex
+    && completeBrowserIndex < completeSyncIndex
     && completeSyncIndex < completeRepositoryIndex
     && completeRepositoryIndex < completeVerifyIndex
     && completeVerifyIndex < completeEditableIndex
@@ -348,29 +854,99 @@ check(
     && completeCleanRoomIndex < completeRecoveryIndex
     && completeRecoveryIndex < completeReceiptIndex
     && completeReceiptIndex < completeReceiptVerifyIndex,
-  'complete outer packager must build, verify, archive, reproduce, restore, receipt, then verify the receipt',
+  'complete outer packager must build, refresh browser-family evidence, verify, archive, reproduce, restore, receipt, then verify the receipt',
+);
+const cleanRoomBuildIndex = cleanRoomBuilder.indexOf('[npm, "run", "build"]');
+const cleanRoomBrowserIndex = cleanRoomBuilder.indexOf('"scripts/run-browser-test-tier.mjs"');
+const cleanRoomVerifyIndex = cleanRoomBuilder.indexOf('[npm, "run", "verify:all:built"]');
+check(
+  cleanRoomBuildIndex >= 0
+    && cleanRoomBuildIndex < cleanRoomBrowserIndex
+    && cleanRoomBrowserIndex < cleanRoomVerifyIndex,
+  'clean-room builder must refresh browser-family evidence after build and before aggregate verification',
 );
 check(
-  completePackager.includes('PACKAGE_RELEASE_ID = "core-coreplus-mephistodata-controlled-archive-polymythcal-v2-2026-08-26"')
+  completePackager.includes('PACKAGE_RELEASE_ID = (\n    "core-coreplus-mephistodata-degorgonified-feminism-retrieval-enforcement-complete-2026-09-05"')
     && completePackager.includes('OUTPUT_BASENAME = (')
-    && completePackager.includes('"seminar-schools-mephistodata-execution-controlled-archive-complete-2026-08-26.zip"')
+    && completePackager.includes('"seminar-schools-mephistodata-degorgonified-feminism-retrieval-enforcement-complete-2026-09-05.zip"')
     && completePackager.includes('Complete release output must use the canonical name')
-    && !completePackager.includes('parser.add_argument("--release-id"'),
+    && !completePackager.includes('parser.add_argument("--release-id"')
+    && completePackager.includes('"--preflight"'),
   'complete outer packager exposes arbitrary package release identity',
 );
+for (const token of [
+  'writing composition',
+  'same sentence lexical repetition',
+  'topic continuity',
+  'protected spans',
+  'revision fidelity',
+  'no invented bridge',
+  'bottom-up definition',
+  'defect provenance',
+  'no sign-in request',
+  'truthful work claims',
+  'false completion',
+  'claim ledger',
+  'operation evidence',
+  'feminism women creed flock',
+  'standpoint epistemology personal is political',
+  'white feminism',
+  'slavery patriarchy patriarchal pedestal',
+  'academic research gate query ontology premise audit',
+  'critic nonauthority',
+  'Wikipedia inadmissible',
+  'degorgonified feminism exact ML* retrieval handle',
+  'complete six-owner bundle nonsemantic',
+  'no clean subtype mixed authority',
+  'real women Gorgon imagery',
+  'counters to counterarguments pentagram screenshot list unresolved',
+]) {
+  check(completePackager.includes(token), `complete archive CORE access query misses ${token}`);
+}
 check(
-  completePackager.includes('DERIVED_GENERATED_AT = "2026-08-26T16:30:00Z"')
-    && completePackager.includes('RELEASE_GENERATED_AT = "2026-08-26T12:30:00-04:00"')
+  completePackager.includes('DERIVED_GENERATED_AT = "2026-09-05T20:15:00Z"')
+    && completePackager.includes('RELEASE_GENERATED_AT = "2026-09-05T20:15:00Z"')
     && completePackager.includes('generated_at = RELEASE_GENERATED_AT')
-    && cleanRoomBuilder.includes('DERIVED_GENERATED_AT = "2026-08-26T16:30:00Z"')
-    && completePackager.includes('os.environ["SITE_BUILD_DATE"] = "2026-08-26"')
-    && cleanRoomBuilder.includes('os.environ["SITE_BUILD_DATE"] = "2026-08-26"')
-    && completePackager.includes('[node, "scripts/regen-methodologylist-manifest.js", "2026-08-26"]')
-    && cleanRoomBuilder.includes('[node, "scripts/regen-methodologylist-manifest.js", "2026-08-26"]'),
+    && cleanRoomBuilder.includes('DERIVED_GENERATED_AT = "2026-09-05T20:15:00Z"')
+    && completePackager.includes('os.environ["SITE_BUILD_DATE"] = "2026-09-05"')
+    && cleanRoomBuilder.includes('os.environ["SITE_BUILD_DATE"] = "2026-09-05"')
+    && completePackager.includes('[node, "scripts/regen-methodologylist-manifest.js", "2026-09-05"]')
+    && cleanRoomBuilder.includes('[node, "scripts/regen-methodologylist-manifest.js", "2026-09-05"]')
+    && completePackager.includes('"current non-strawman project comparison Polycognate genealogy always-already boundaries "')
+    && cleanRoomBuilder.includes('"current non-strawman project comparison Polycognate genealogy always-already boundaries "')
+    && completePackager.includes('"Be Kind While We Exploit You The Struggle to Control AI "')
+    && cleanRoomBuilder.includes('"Be Kind While We Exploit You The Struggle to Control AI "'),
   'primary and clean-room package builds must share the current deterministic release day',
 );
 for (const token of [
   'README_FIRST.txt',
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md',
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md',
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/NON_STRAWMAN_CURRENT_POSITION_CORRECTION_2026-08-29.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_BOTTOM_UP_DEFINITION_DEFECT_PROVENANCE_INTERNAL_RETRIEVAL_2026-09-03.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/b4f6ab5a-4eb3-44d0-943e-41acd52faec9.png',
+  'SITE_PACKAGE/UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/3066e1d8-f6f9-4267-a948-90c076e29f93.png',
+  'SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_COMPARING_THE_INCOMPARABLE_POLYMYTH_MASTER_NOTES_2026-08-28.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/README.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/01_FOREWORD_AND_CHAPTER_1.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/02_CONSTRUCTING_COMPARABLES.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/03_REGIMES_OF_HISTORICITY.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/04_POLYTHEISMS.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/05_ASSEMBLY_AND_POLITICS.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/06_ENDNOTES_AND_SOURCE_LINEAGE.md',
+  'SITE_PACKAGE/scripts/fixtures/ml-execution-gates/adjudication-v2-fixtures.json',
+  'SITE_PACKAGE/scripts/fixtures/ml-execution-gates/internal-writing-fixtures.json',
+  'SITE_PACKAGE/ML_EXECUTION_AND_CONTROLLED_ARCHIVE_SYNTHESIS_2026-08-26.md',
+  'SITE_PACKAGE/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js',
+  'SITE_PACKAGE/scripts/verify-ml-project-adjudication-v2.js',
+  'SITE_PACKAGE/scripts/verify-ml-writing-rules.js',
+  'SITE_PACKAGE/scripts/verify-mephistodata-articles.js',
+  'SITE_PACKAGE/polymyth/articles/be-kind-while-we-exploit-you.md',
+  'SITE_PACKAGE/polymyth/articles/the-struggle-to-control-ai.md',
   'SeminarSchools-Deploy-FINAL7-VerifiedPush-StayOpen-NoLocalNpm-ManualRepoPicker-ManualHFSync.cmd',
   'Polymyth_Coherence_Assessment_Instrument_V5.1.2.xlsx',
   'Polymyth_Coherence_AI_Application_Protocol_V5.1.2.md',
@@ -380,10 +956,14 @@ for (const token of [
   'WEBSITE_FUTUREPROOFING_CONTRACTS_AUDIT_2026-08-09.md',
   'FUTUREPROOFING_RELEASE_CONTRACT_2026-08-09.md',
   'data/futureproofing/futureproofing-contract.json',
+  'SITE_PACKAGE/data/futureproofing/sep5-feminism-package-contents-baseline.json',
+  'SITE_PACKAGE/data/futureproofing/sep5-feminism-sep5-degorgonified-feminism-preservation-contract.json',
   'data/browser-test-tiers.json',
   'data/live-evidence-policy.json',
   'data/harvest-source-history.json',
   'verify-futureproofing-contract.py',
+  'SITE_PACKAGE/scripts/verify-sep5-degorgonified-feminism-base-preservation.py',
+  'SITE_PACKAGE/scripts/fixtures/futureproofing/sep5-degorgonified-feminism-preservation-tampered.json',
   'scripts/build_lock.py',
   'create-artifact-audit-receipt.py',
   'verify-disaster-recovery.py',
@@ -404,6 +984,34 @@ for (const token of [
   'EDITABLE_MASTERS/README_FIRST.md',
 ]) {
   check(completeArchivePackager.includes(token), `complete archive selection contract misses ${token}`);
+}
+for (const token of [
+  'EXPECTED_PACKAGE_RELEASE_ID = (',
+  'core-coreplus-mephistodata-degorgonified-feminism-retrieval-enforcement-complete-2026-09-05',
+  'EXPECTED_PACKAGE_GENERATED_AT = "2026-09-05T20:15:00Z"',
+  'EXPECTED_CURRENT_RELEASE_PATHS',
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md',
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md',
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md',
+  'SITE_PACKAGE/data/futureproofing/sep5-feminism-package-contents-baseline.json',
+  'SITE_PACKAGE/data/futureproofing/sep5-feminism-sep5-degorgonified-feminism-preservation-contract.json',
+  'SITE_PACKAGE/scripts/verify-sep5-degorgonified-feminism-base-preservation.py',
+  'SITE_PACKAGE/scripts/fixtures/futureproofing/sep5-degorgonified-feminism-preservation-tampered.json',
+  'SITE_PACKAGE/UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/b4f6ab5a-4eb3-44d0-943e-41acd52faec9.png',
+  'SITE_PACKAGE/UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/3066e1d8-f6f9-4267-a948-90c076e29f93.png',
+  'SITE_PACKAGE/UPDATE_SOURCES/NON_STRAWMAN_CURRENT_POSITION_CORRECTION_2026-08-29.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_COMPARING_THE_INCOMPARABLE_POLYMYTH_MASTER_NOTES_2026-08-28.md',
+  'SITE_PACKAGE/UPDATE_SOURCES/DETIENNE_CHAPTER_LEDGERS_2026-08-27/README.md',
+  'SITE_PACKAGE/scripts/fixtures/ml-execution-gates/adjudication-v2-fixtures.json',
+  'SITE_PACKAGE/scripts/fixtures/ml-execution-gates/internal-writing-fixtures.json',
+  'SITE_PACKAGE/polymyth/articles/be-kind-while-we-exploit-you.md',
+  'SITE_PACKAGE/polymyth/articles/the-struggle-to-control-ai.md',
+  'FORBIDDEN_TRANSIENT_RELEASE_PATHS',
+  'Detienne_Evidence_Ledgers_2026-08-27/',
+]) {
+  check(artifactReceipt.includes(token), `artifact receipt current-release contract misses ${token}`);
 }
 check(
   completeArchivePackager.includes('require_release_build_lock(DELIVERY_ROOT)'),
@@ -439,7 +1047,7 @@ check(exists('scripts/repair-polymyth-coherence-validation-ranges.py'), 'Coheren
 for (const token of ['require_complete_validation_ranges', 'N7:N42', 'P7:P292']) {
   check(coherenceWorkbookVerifier.includes(token), `Coherence workbook verifier misses ${token}`);
 }
-check(lock.version === '1.0.6' && lock.packages?.['']?.version === '1.0.6', 'package-lock version is not 1.0.6');
+check(lock.version === '1.0.7' && lock.packages?.['']?.version === '1.0.7', 'package-lock version is not 1.0.7');
 for (const [name, command] of Object.entries({
   'verify:all': 'node scripts/run-python.js scripts/run-with-build-lock.py --delivery-root .. -- node scripts/verify-all-runner.js',
   'verify:all:built': 'node scripts/run-python.js scripts/run-with-build-lock.py --delivery-root .. -- node scripts/verify-all-runner.js --reuse-build',
@@ -451,8 +1059,12 @@ for (const [name, command] of Object.entries({
   'test:futureproofing': 'npm run test:futureproofing:core-fixtures && npm run test:futureproofing:article-body && npm run test:futureproofing:gate-defects && npm run test:futureproofing:browser-tiers && npm run test:futureproofing:live-evidence && npm run test:futureproofing:source-anomalies && npm run test:futureproofing:external-destinations && npm run test:futureproofing:route-tombstones && npm run test:futureproofing:data-migrations',
   'verify:futureproofing': 'node scripts/run-python.js scripts/run-with-build-lock.py --delivery-root .. -- node scripts/run-python.js scripts/verify-futureproofing-contract.py --run-source --report scripts/reports/futureproofing-gate-report.json',
   'verify:futureproofing:site': 'node scripts/run-python.js scripts/run-with-build-lock.py -- node scripts/run-python.js scripts/verify-futureproofing-contract.py --run-source --site-only --report scripts/reports/futureproofing-gate-report.json',
+  'verify:futureproofing:base-preservation': 'node scripts/run-python.js scripts/verify-sep5-degorgonified-feminism-base-preservation.py',
   'verify:ml-dialectical-hardening': 'node scripts/verify-ml-dialectical-hardening.js',
   'verify:ml-execution-gates': 'node scripts/verify-ml-execution-gates.js',
+  'verify:mephistodata-runtime-gate': 'node scripts/verify-mephistodata-runtime-gate.js',
+  'verify:ml-active-form-conflicts': 'node scripts/verify-ml-active-form-conflicts.js',
+  'verify:baseline-morality-amendment-scope': 'node scripts/verify-baseline-morality-amendment-scope.js && node scripts/test-baseline-morality-amendment-scope.js',
   'verify:frozen-audit43': 'node scripts/verify-frozen-audit43.js',
   'build:audit45-language-model': 'node scripts/run-python.js scripts/apply-audit45-language-model.py',
   'build:audit45-leizu-i18n': 'node scripts/build-leizu-i18n-source.js',
@@ -579,10 +1191,10 @@ const buildOrder = [
   'apply-audit49-metadata-hygiene.js',
   'update-polymythcal-destination-contract.js',
   'apply-sitewide-type-zoom-link.js',
-  'apply-visible-geometry.js',
   'build-polymythcal-discovery-site.js',
   'build-writing-shortcuts.js',
   'build-academic-shortcuts.js',
+  'apply-visible-geometry.js',
   'update-release-asset-identity.js',
   'update-polymythcal-build-manifest.js',
   'build-public-deploy.js',
@@ -623,8 +1235,11 @@ const finalGeometryApply = build.lastIndexOf('apply-visible-geometry.js');
 check((build.match(/apply-visible-geometry\.js/g) || []).length === 2, 'canonical build must apply geometry before and after all page generators');
 check(
   finalGeometryApply > build.lastIndexOf('apply-audit49-metadata-hygiene.js')
+    && finalGeometryApply > build.lastIndexOf('build-polymythcal-discovery-site.js')
+    && finalGeometryApply > build.lastIndexOf('build-writing-shortcuts.js')
+    && finalGeometryApply > build.lastIndexOf('build-academic-shortcuts.js')
     && finalGeometryApply < build.indexOf('update-release-asset-identity.js'),
-  'final geometry pass is not immediately downstream of page generation',
+  'final geometry pass is not downstream of every HTML generator and upstream of release identity',
 );
 check((build.match(/update-release-asset-identity\.js/g) || []).length === 1, 'canonical build must update repaired-asset identity exactly once');
 check((build.match(/verify-release-asset-identity\.js/g) || []).length === 1, 'canonical build must verify repaired-asset identity exactly once');
@@ -703,53 +1318,48 @@ check(
   (runner.match(/node scripts\/verify-ml-execution-gates\.js/g) || []).length === 1,
   'full release runner must execute the Mephistodata execution gate verifier exactly once',
 );
-const browserGeometryCommand = 'node scripts/verify-visible-geometry-browser.mjs';
-const browserGeometryIndex = runner.indexOf(browserGeometryCommand);
-const browserFrontFacingCommand = 'node scripts/verify-front-facing-overlap-browser.js';
-const browserFrontFacingIndex = runner.indexOf(browserFrontFacingCommand);
-const setsBrowserCommand = 'node scripts/verify-polymythcal-sets13-15-browser.js';
-const setsBrowserIndex = runner.indexOf(setsBrowserCommand);
-const destinationBrowserCommand = 'node scripts/verify-polymythcal-destination-browser.js';
-const destinationBrowserIndex = runner.indexOf(destinationBrowserCommand);
-const teacherBrowserIndex = runner.indexOf('node scripts/verify-teacherresources-state-layout-browser.js');
-const homeBrowserIndex = runner.indexOf('node scripts/verify-home-map-browser.js');
-const idempotenceCommand = 'node scripts/verify-build-idempotence.js';
-const idempotenceIndex = runner.indexOf(idempotenceCommand);
 check(
-  (runner.match(/node scripts\/verify-visible-geometry-browser\.mjs/g) || []).length === 1
-    && browserGeometryIndex > runner.indexOf('const sequential = [')
-    && browserGeometryIndex < runner.indexOf('const checks = ['),
-  'browser geometry gate must run exactly once in the full runner sequential phase',
+  pkg.scripts
+    && pkg.scripts['verify:public-build-lock-recovery'] === 'node scripts/verify-public-build-lock-recovery.js'
+    && (runner.match(/node scripts\/verify-public-build-lock-recovery\.js/g) || []).length === 1,
+  'full release runner must execute the public-build lock recovery verifier exactly once',
 );
-check(
-  (runner.match(/node scripts\/verify-front-facing-overlap-browser\.js/g) || []).length === 1
-    && browserFrontFacingIndex > runner.indexOf('const sequential = [')
-    && browserFrontFacingIndex < browserGeometryIndex,
-  'rendered front-facing/overlap gate must run exactly once after idempotence and before browser geometry',
+const concurrentSweepStart = runner.indexOf('const concurrentReadOnlySweeps = [');
+const concurrentSweepEnd = runner.indexOf('const finalSequential = [');
+const concurrentSweepSection = runner.slice(concurrentSweepStart, concurrentSweepEnd);
+const sequentialSweepPrerequisites = runner.slice(
+  runner.indexOf('const sequential = ['),
+  concurrentSweepStart,
 );
+const idempotenceSweepCommand = 'node scripts/verify-build-idempotence.js';
+const concurrentSweepCommands = [
+  'node scripts/verify-front-facing-overlap-browser.js',
+  'node scripts/verify-visible-geometry-browser.mjs',
+  'node scripts/verify-teacherresources-state-layout-browser.js',
+  'node scripts/verify-home-map-browser.js',
+  'node scripts/verify-polymythcal-sets13-15-browser.js',
+  'node scripts/verify-polymythcal-destination-browser.js',
+];
 check(
-  (runner.match(/node scripts\/verify-polymythcal-sets13-15-browser\.js/g) || []).length === 1
+  concurrentSweepStart > runner.indexOf('const sequential = [')
+    && concurrentSweepEnd > concurrentSweepStart
+    && runner.split(idempotenceSweepCommand).length - 1 === 1
+    && sequentialSweepPrerequisites.includes(`'${idempotenceSweepCommand}'`)
+    && concurrentSweepCommands.every(command => (
+      runner.split(command).length - 1 === 1
+      && concurrentSweepSection.includes(`'${command}'`)
+    ))
     && !runner.includes('node scripts/verify-polymythcal-sets13-15-browser.js --dom-only')
-    && setsBrowserIndex > teacherBrowserIndex
-    && setsBrowserIndex > homeBrowserIndex
-    && setsBrowserIndex < browserGeometryIndex,
-  'full Sets 13-15 Chromium gate must run exactly once after Teacher Resources/home and before browser geometry',
-);
-check(
-  (runner.match(/node scripts\/verify-polymythcal-destination-browser\.js/g) || []).length === 1
-    && destinationBrowserIndex > setsBrowserIndex
-    && destinationBrowserIndex < browserGeometryIndex
-    && !build.includes('verify-polymythcal-destination-browser.js'),
-  'full destination Chromium gate must run exactly once after Sets 13-15 and outside the production build',
-);
-check(
-  (runner.match(/node scripts\/verify-build-idempotence\.js/g) || []).length === 1
-    && idempotenceIndex > runner.indexOf('const sequential = [')
-    && idempotenceIndex < browserFrontFacingIndex,
-  'build idempotence must run exactly once after preparation and before browser verification',
+    && runner.includes('Math.min(concurrency, 3, concurrentReadOnlySweeps.length)')
+    && runner.indexOf('await Promise.all(Array.from({ length: sweepConcurrency }, sweepWorker))')
+      > runner.indexOf('for (const cmd of sequential)')
+    && runner.indexOf('await Promise.all(Array.from({ length: sweepConcurrency }, sweepWorker))')
+      < runner.indexOf('let index = 0, passed = 0'),
+  'full runner must serialize idempotence before executing each browser sweep once in its bounded post-build pool',
 );
 check(!build.includes('verify-visible-geometry-browser.mjs'), 'browser geometry gate must remain outside the production/Netlify build');
 check(!build.includes('verify-front-facing-overlap-browser.js'), 'rendered front-facing/overlap gate must remain outside the production/Netlify build');
+check(!build.includes('verify-polymythcal-destination-browser.js'), 'destination Chromium gate must remain outside the production/Netlify build');
 const wrappingCommand = 'node scripts/apply-sitewide-type-zoom-link.js';
 const firstWrappingIndex = build.indexOf(wrappingCommand);
 const finalWrappingIndex = build.lastIndexOf(wrappingCommand);

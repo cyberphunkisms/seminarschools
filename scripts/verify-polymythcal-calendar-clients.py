@@ -5,6 +5,7 @@ from __future__ import annotations
 import io
 import json
 import os
+import re
 import sys
 import unittest
 from datetime import datetime, timezone
@@ -112,21 +113,60 @@ def main() -> int:
             ROOT / f"public/polymythseminars/ics/{route_id}.ics",
         )
     )
-    monitoring_route_leaks = sum(
-        path.exists()
+    monitoring_route_missing = sum(
+        not path.exists()
         for route_id in monitoring_english_route_ids
         for path in (
             ROOT / f"polymythseminars/events/{route_id}/index.html",
             ROOT / f"public/polymythseminars/events/{route_id}/index.html",
         )
     ) + sum(
-        path.exists()
+        not path.exists()
         for route_id in monitoring_french_route_ids
         for path in (
             ROOT / f"polymythseminars/fr/events/{route_id}/index.html",
             ROOT / f"public/polymythseminars/fr/events/{route_id}/index.html",
         )
     )
+    monitoring_public_mismatches = sum(
+        not source.exists()
+        or not published.exists()
+        or source.read_bytes() != published.read_bytes()
+        for route_ids, locale_path in (
+            (monitoring_english_route_ids, "events"),
+            (monitoring_french_route_ids, "fr/events"),
+        )
+        for route_id in route_ids
+        for source, published in ((
+            ROOT / f"polymythseminars/{locale_path}/{route_id}/index.html",
+            ROOT / f"public/polymythseminars/{locale_path}/{route_id}/index.html",
+        ),)
+    )
+    monitoring_unsafe_details = 0
+    for event_id in monitoring_ids:
+        for locale_path in ("events", "fr/events"):
+            detail_path = ROOT / f"polymythseminars/{locale_path}/{event_id}/index.html"
+            if not detail_path.exists():
+                monitoring_unsafe_details += 1
+                continue
+            detail = detail_path.read_text(encoding="utf-8")
+            safe = (
+                re.search(
+                    r'<meta\b(?=[^>]*name=["\']robots["\'])'
+                    r'(?=[^>]*content=["\']noindex,follow["\'])[^>]*>',
+                    detail,
+                    flags=re.I,
+                )
+                and not re.search(r"<time\b[^>]*\bdatetime\s*=", detail, flags=re.I)
+                and not re.search(
+                    r'<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>'
+                    r'[\s\S]*?["\']@type["\']\s*:\s*["\']Event["\']',
+                    detail,
+                    flags=re.I,
+                )
+            )
+            if not safe:
+                monitoring_unsafe_details += 1
     monitoring_feed_uid_leaks = len(monitoring_uids & feed_uids)
 
     failed_names = {
@@ -154,7 +194,12 @@ def main() -> int:
             "browse_records": len(browse.get("events", [])),
             "watchlist_records": len(watchlist.get("items", [])),
             "monitoring_ics_leaks": monitoring_ics_leaks,
-            "monitoring_detail_or_alias_route_leaks": monitoring_route_leaks,
+            "monitoring_detail_or_alias_routes_expected": 2 * (
+                len(monitoring_english_route_ids) + len(monitoring_french_route_ids)
+            ),
+            "monitoring_detail_or_alias_routes_missing": monitoring_route_missing,
+            "monitoring_detail_public_mismatches": monitoring_public_mismatches,
+            "monitoring_unsafe_canonical_details": monitoring_unsafe_details,
             "monitoring_feed_uid_leaks": monitoring_feed_uid_leaks,
             "explicit_legacy_ics_aliases": len(aliases),
             "single_event_ics_files": len(event_files),
@@ -201,4 +246,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

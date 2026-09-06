@@ -206,20 +206,47 @@ assert(!watchDetail.includes('type="text/calendar"'));
 const deployedWatchIcs = path.join(ROOT, 'public', 'polymythseminars', 'ics', `${watchId}.ics`);
 if (process.env.VERIFY_PUBLIC_DEPLOY === '1') assert(!fs.existsSync(deployedWatchIcs));
 
-assert.strictEqual(payloadReport.unavailable_with_safe_candidate_count, 108);
-assert.strictEqual(payloadReport.typed_action_recovered_unavailable_record_count, 108);
-assert.strictEqual(payloadReport.typed_action_recovery_complete, true);
-const actionFixtures = {
-  'hot-docs-2027-submissions-open': ['submission', 'series'],
-  'mccall-macbain-2027-international-deadline': ['application', 'series'],
-  'igf-2027-submission-deadline': ['submission', 'series'],
-  'ncur-2027-decisions-and-registration': ['registration', 'series'],
-};
-for (const [id, [kind, scope]] of Object.entries(actionFixtures)) {
-  const action = browseById.get(id).actions.find(candidate => candidate.kind === kind);
-  assert(action, `${id} is missing recovered ${kind} action`);
-  assert.strictEqual(action.scope, scope, `${id} candidate scope`);
+const publicById = new Map(
+  [...browse.events, ...watchlist.items].map(record => [record.id, record]),
+);
+let exactExternalCount = 0;
+let unresolvedCount = 0;
+for (const event of canonical.events) {
+  const record = publicById.get(event.id);
+  assert(record, `${event.id} is missing its public projection`);
+  const internalActions = (record.actions || []).filter(action => action.url.startsWith('/'));
+  const externalActions = (record.actions || []).filter(action => action.url.startsWith('https://'));
+  assert.deepStrictEqual(
+    internalActions,
+    [{ kind: 'details', url: `/polymythseminars/events/${event.id}/`, scope: 'listing' }],
+    `${event.id} must expose exactly one stable internal details action`,
+  );
+  assert(externalActions.length <= 1, `${event.id} exposes multiple external destinations`);
+  const exactDestination = (
+    typeof event.destination_url === 'string'
+    && event.destination_url.startsWith('https://')
+    && event.destination_status !== 'unavailable-specific-page'
+  );
+  if (exactDestination) {
+    exactExternalCount += 1;
+    assert.strictEqual(externalActions.length, 1, `${event.id} suppresses a materialized exact destination`);
+    assert.strictEqual(externalActions[0].url, event.destination_url, `${event.id} destination drift`);
+    assert.strictEqual(externalActions[0].kind, event.destination_kind, `${event.id} destination kind drift`);
+    assert.strictEqual(externalActions[0].scope, event.destination_scope, `${event.id} destination scope drift`);
+  } else {
+    unresolvedCount += 1;
+    assert.strictEqual(externalActions.length, 0, `${event.id} leaks a broad or unverified destination`);
+  }
 }
+assert.strictEqual(payloadReport.destination_policy, 'materialized-exact-destination-only');
+assert.strictEqual(payloadReport.exact_external_destination_count, exactExternalCount);
+assert.strictEqual(payloadReport.public_external_action_count, exactExternalCount);
+assert.strictEqual(payloadReport.unresolved_destination_count, unresolvedCount);
+assert.strictEqual(payloadReport.suppressed_broad_destination_count, unresolvedCount);
+assert.strictEqual(payloadReport.missing_exact_external_action_count, 0);
+assert.strictEqual(payloadReport.mismatched_external_action_count, 0);
+assert.strictEqual(payloadReport.broad_source_projection_count, 0);
+assert.strictEqual(payloadReport.suppressed_unverified_candidate_action_count, payloadReport.suppressed_unverified_candidate_record_count);
 
 for (const freshness of [browse.freshness, watchlist.freshness, research.freshness, surfaces.freshness]) {
   assert(Date.parse(freshness.built_at) >= Date.parse(freshness.newest_source_check_at));

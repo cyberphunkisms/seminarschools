@@ -22,6 +22,7 @@ const {
   assertGeometryVersionScheme,
   geometryBodyAttributes,
   geometryAssetVersion,
+  geometryExemptionForRelativeHtmlPath,
 } = require('./lib/geometry-asset-version');
 const { SITEWIDE_TYPE_ZOOM_VERSION } = require('./lib/sitewide-type-zoom-version');
 const { SITEWIDE_KEYBOARD_VERSION } = require('./lib/sitewide-keyboard-version');
@@ -39,6 +40,24 @@ const {
 
 const ROOT = path.resolve(__dirname, '..');
 const SITE = 'https://seminarschools.com';
+// These connected discovery shells are emitted later in the canonical build,
+// but they are stable, indexable routes owned by Polymythcal. Register them in
+// the canonical sitemap set here so build order cannot leave a real surface
+// uncrawlable.
+const POLYMYTHCAL_DISCOVERY_ROUTES = [
+  '/polymythseminars/',
+  '/polymythseminars/fr/',
+  '/polymythseminars/research/',
+  '/polymythseminars/fr/research/',
+  '/polymythseminars/monitoring/',
+  '/polymythseminars/fr/monitoring/',
+].map(route => SITE + route);
+const POLYMYTHCAL_PUBLICATION_SURFACES = JSON.parse(
+  fs.readFileSync(path.join(ROOT, 'data', 'polymythcal-publication-surfaces.json'), 'utf8'),
+);
+const POLYMYTHCAL_WATCHLIST_IDS = new Set(
+  POLYMYTHCAL_PUBLICATION_SURFACES.watchlist_ids || [],
+);
 const GEOMETRY_CONTRACTS = JSON.parse(
   fs.readFileSync(path.join(ROOT, 'data', 'geometry-route-contracts.json'), 'utf8'),
 );
@@ -107,6 +126,8 @@ function write(rel, content) {
     return;
   }
   fs.mkdirSync(path.dirname(file), { recursive: true });
+  const priorMtimeMs = fs.existsSync(file) ? fs.statSync(file).mtimeMs : null;
+  let updated = false;
   if (
     !fs.existsSync(file)
     || comparableGeneratedContent(rel, fs.readFileSync(file, 'utf8'))
@@ -114,8 +135,18 @@ function write(rel, content) {
   ) {
     fs.writeFileSync(file, content, 'utf8');
     writes++;
+    updated = true;
   }
-  if (OUTPUT_MTIME) fs.utimesSync(file, OUTPUT_MTIME, OUTPUT_MTIME);
+  if (OUTPUT_MTIME) {
+    fs.utimesSync(file, OUTPUT_MTIME, OUTPUT_MTIME);
+  } else if (updated && priorMtimeMs !== null && priorMtimeMs > Date.now() + 60_000) {
+    // Extracted release workspaces may carry deterministic future mtimes.
+    // Keep a regenerated output newer than the prior staged copy so the
+    // workspace reconciler cannot restore stale sitemap/manifest bytes after
+    // an otherwise successful build.
+    const preserved = new Date(priorMtimeMs + 2_000);
+    fs.utimesSync(file, preserved, preserved);
+  }
 }
 function esc(value) {
   return String(value == null ? '' : value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -210,11 +241,13 @@ function visibleBreadcrumb(items) {
 function htmlPage({title, description, canonical, crumbs, body, schema = [], robots, css, routeType, pageWeight}) {
   const typeAttr = routeType || (canonical.includes('/polymyth/methodologylist/') ? 'archive' : canonical.includes('/teacherresources/') ? 'resource-catalog' : canonical.includes('/polymythseminars/events/') ? 'calendar' : 'archive');
   const canonicalPath = new URL(canonical).pathname;
-  const geometryAttrs = geometryBodyAttributes(
-    GEOMETRY_CONTRACTS,
-    sourcePathFor(canonicalPath),
-    typeAttr,
-  );
+  const sourcePath = sourcePathFor(canonicalPath);
+  const geometryExemption = geometryExemptionForRelativeHtmlPath(GEOMETRY_CONTRACTS, sourcePath);
+  const geometryAttrs = geometryExemption
+    ? `data-shared-geometry-exempt="${geometryExemption}"${geometryExemption === GEOMETRY_CONTRACTS.coverage.star_page_exemption_value ? ' data-star-file-page="true"' : ''} data-route-type="${attr(typeAttr)}" data-front-facing="general-audience"`
+    : geometryBodyAttributes(GEOMETRY_CONTRACTS, sourcePath, typeAttr);
+  const geometryScripts = geometryExemption ? '' : `<script src="/js/mandala.js?v=${GEOMETRY_VERSION}" defer></script>
+<script src="/js/indra.js?v=${GEOMETRY_VERSION}" defer></script>`;
   const weightAttr = pageWeight ? ` data-page-weight="${attr(pageWeight)}"` : '';
   const wordBreakAttr = canonical.includes('/polymyth/methodologylist/')
     ? ' data-allow-word-break="true"'
@@ -233,8 +266,7 @@ ${body}
 </main>
 <footer class="catalog-footer"><a href="/teacherresources/">Teacher Resources</a> · <a href="/polymythcommons/">Polymyth Commons</a> · <a href="https://forms.gle/tqciJxYKNR5x2CtU7">Suggest or correct a resource</a> · <a href="/">Seminar Schools</a> · Toronto</footer>
 <script src="/js/site-keyboard-enhancements.js?v=${SITEWIDE_KEYBOARD_VERSION}" defer></script>
-<script src="/js/mandala.js?v=${GEOMETRY_VERSION}" defer></script>
-<script src="/js/indra.js?v=${GEOMETRY_VERSION}" defer></script>
+${geometryScripts}
 </body>
 </html>\n`;
 }
@@ -688,23 +720,28 @@ function staticEventCard(event) {
   return `<article class="event" data-date="${attr(event.date || '')}" data-type="${attr(event.type || 'other')}"><div class="date-col"><span class="day">${esc(new Intl.DateTimeFormat('en-CA',{day:'2-digit',timeZone:'America/Toronto'}).format(new Date(event.date)))}</span><span class="mon">${esc(new Intl.DateTimeFormat('en-CA',{month:'short',timeZone:'America/Toronto'}).format(new Date(event.date)))}</span></div><div class="body-col"><h2 class="title"><a href="${route}">${esc(event.title)}</a></h2>${by}<div class="event-meta">${esc(date)}${event.venue ? ` · ${esc(event.venue)}` : ''}</div>${event.description ? `<p class="event-desc">${esc(cleanSentence(event.description,260))}</p>` : ''}</div></article>`;
 }
 function eventEligible(event) {
+  if (POLYMYTHCAL_WATCHLIST_IDS.has(String(event.id || event.identity_key || ''))) return false;
   const start = String(event.date || '').slice(0, 10);
   const end = String(event.end_date || event.date || '').slice(0, 10);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(start) || !/^\d{4}-\d{2}-\d{2}$/.test(end) || end < TODAY) return false;
   return start <= dateOneYearAfter(TODAY);
 }
 function eventExpired(event) {
+  if (POLYMYTHCAL_WATCHLIST_IDS.has(String(event.id || event.identity_key || ''))) return false;
   const end = String(event.end_date || event.date || '').slice(0, 10);
   return /^\d{4}-\d{2}-\d{2}$/.test(end) && end < TODAY;
 }
 function eventIndexable(event) {
   // Event-detail ownership belongs to build-polymythcal-audit13.py. Keep the
   // sitemap contract aligned with that canonical builder's robots policy.
+  // Watchlist records retain stable noindex detail pages, but are never
+  // chronology documents and must never enter this sitemap projection.
+  if (POLYMYTHCAL_WATCHLIST_IDS.has(String(event.id || event.identity_key || ''))) return false;
   const city=String(event.city || '').trim().toLowerCase();
   const venue=String(event.venue || '').trim().toLowerCase();
   const placeholders=new Set(['','unknown','location unconfirmed','location unconfirmed · lieu non confirmé','lieu non confirmé']);
   return event.confirmation_status === 'confirmed'
-    && event.date_precision === 'exact'
+    && (event.date_precision === 'exact' || event.time_precision === 'exact')
     && event.record_kind !== 'opportunity'
     && !placeholders.has(city)
     && !placeholders.has(venue)
@@ -731,7 +768,11 @@ function injectEventRoot(events) {
   const clientShell = html.includes('id="pmEventList"')
     && /\/js\/polymythcal-revamp\.js/.test(html)
     && /<noscript>[\s\S]*RSS and calendar feeds[\s\S]*site map/i.test(html);
-  if (clientShell) {
+  const discoveryV2Shell = /\bdata-pm-app=["']discovery-v2["']/.test(html)
+    && html.includes('id="pmdList"')
+    && /\/js\/polymythcal-discovery\.js/.test(html)
+    && /<noscript>[\s\S]*calendar feeds[\s\S]*site map/i.test(html);
+  if (clientShell || discoveryV2Shell) {
     // Remove stale legacy payloads if an older generated page was merged into the
     // new shell. The live controller fetches the canonical JSON data instead.
     html=html.replace(/<!-- SS_STATIC_EVENTS_START -->[\s\S]*?<!-- SS_STATIC_EVENTS_END -->/g, '');
@@ -739,7 +780,7 @@ function injectEventRoot(events) {
     return current;
   }
 
-  throw new Error('Calendar root supports neither the legacy #eventsContainer mount nor the Polymythcal client-shell contract');
+  throw new Error('Calendar root supports neither the legacy #eventsContainer mount nor a governed Polymythcal client-shell contract');
 }
 function archiveGeneratedEventPage(ix) {
   if (!fs.existsSync(ix)) return;
@@ -927,7 +968,7 @@ function generateSitemap(generated, previousManifest = {}) {
     item.url,
     item.url.replace('/polymythseminars/events/','/polymythseminars/fr/events/'),
   ]);
-  const all=[...new Set([...keep, SITE+'/teacherresources/', SITE+'/polymythseminars/subscribe/', ...generated.resources.map(x=>x.url), ...bilingualEvents, ...generated.methodology.map(x=>x.url)])].sort((a,b)=>a.localeCompare(b));
+  const all=[...new Set([...keep, SITE+'/teacherresources/', SITE+'/polymythseminars/subscribe/', ...POLYMYTHCAL_DISCOVERY_ROUTES, ...generated.resources.map(x=>x.url), ...bilingualEvents, ...generated.methodology.map(x=>x.url)])].sort((a,b)=>a.localeCompare(b));
   const xml=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'];
   for(const url of all) xml.push(`  <url><loc>${escapeXml(url)}</loc><lastmod>${TODAY}</lastmod></url>`);
   xml.push('</urlset>','');

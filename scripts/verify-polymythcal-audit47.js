@@ -5,11 +5,15 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const source = fs.readFileSync(path.join(ROOT, 'js/polymythcal-revamp.js'), 'utf8');
-const match = source.match(/const ARTS_TOPIC_RE = \/(.+)\/;/);
-if (!match) throw new Error('Polymythcal arts topic classifier is missing its audited bounded vocabulary.');
+const source = fs.readFileSync(path.join(ROOT, 'scripts/build-polymythcal-feeds.py'), 'utf8');
+const match = source.match(/ARTS_TEXT_RE\s*=\s*re\.compile\(\s*([\s\S]*?)\n\)/);
+if (!match || !source.includes('ARTS_TEXT_RE.search(text(event))')) {
+  throw new Error('Canonical Polymythcal feed builder is missing its audited bounded arts classifier.');
+}
+const patternParts = [...match[1].matchAll(/r(['"])([\s\S]*?)\1/g)].map(part => part[2]);
+if (!patternParts.length) throw new Error('Unable to read the canonical feed builder arts vocabulary.');
 
-const arts = new RegExp(match[1]);
+const arts = new RegExp(patternParts.join(''));
 const falseCases = [
   'philosophy department talk',
   'royal tea party',
@@ -30,4 +34,4 @@ for (const value of trueCases) {
   if (!arts.test(value)) throw new Error(`Arts topic false negative: ${value}`);
 }
 
-console.log(`AUDIT47 POLYMYTHCAL TOPIC CHECK PASSED — ${falseCases.length} false-positive and ${trueCases.length} positive fixtures.`);
+console.log(`AUDIT47 POLYMYTHCAL TOPIC CHECK PASSED — canonical feed builder passed ${falseCases.length} false-positive and ${trueCases.length} positive fixtures.`);

@@ -17,6 +17,8 @@ MANUAL = SITE_ROOT / "data" / "manual-events.json"
 CANONICAL = SITE_ROOT / "data" / "polymyth-seminar-events.json"
 PUBLISHED = SITE_ROOT / "polymythseminars" / "events.json"
 BROWSE = SITE_ROOT / "polymythseminars" / "browse.json"
+WATCHLIST = SITE_ROOT / "polymythseminars" / "watchlist.json"
+RESEARCH = SITE_ROOT / "polymythseminars" / "research.json"
 SOURCES = SITE_ROOT / "scripts" / "sources.json"
 
 SET13_LEDGER = SITE_ROOT / "data" / "polymythcal-research-set-13-community-charity-mutual-aid-heritage-place-2026-08-15.json"
@@ -84,11 +86,24 @@ def has_browser_value(value) -> bool:
 
 
 def assert_propagation(
-    tagged: list[dict], fields: list[str], canonical: list[dict], published: list[dict], browse: list[dict]
+    tagged: list[dict],
+    fields: list[str],
+    canonical: list[dict],
+    published: list[dict],
+    chronology: list[dict],
+    monitoring: list[dict],
+    research: dict,
+    facet_axis: str,
 ) -> None:
     canonical_map = {row["id"]: row for row in canonical}
     published_map = {row["id"]: row for row in published}
-    browse_map = {row["id"]: row for row in browse}
+    chronology_map = {row["id"]: row for row in chronology}
+    monitoring_map = {row["id"]: row for row in monitoring}
+    public_map = {**chronology_map, **monitoring_map}
+    research_map = {row["id"]: row for row in research.get("records", [])}
+    allowed_facets = set(
+        (research.get("taxonomy", {}).get("axes", {}).get(facet_axis, {}).get("values", {}))
+    )
     for authored in tagged:
         for output_map in (canonical_map, published_map):
             output = output_map.get(authored["id"])
@@ -97,17 +112,28 @@ def assert_propagation(
             for field in fields:
                 if field in authored and not equal(output.get(field), authored[field]):
                     raise SystemExit(f"{authored['id']}: {field} changed before editable-master update")
-        compact = browse_map.get(authored["id"])
+        compact = public_map.get(authored["id"])
         if compact is None:
-            raise SystemExit(f"{authored['id']}: missing from the browser proof surface")
+            raise SystemExit(f"{authored['id']}: missing from both public browser projections")
+        specialist = research_map.get(authored["id"])
         for field in fields:
-            if field not in authored:
-                continue
-            value = authored[field]
-            if has_browser_value(value) and not equal(compact.get(field), value):
-                raise SystemExit(f"{authored['id']}: {field} changed in the browser proof surface")
-            if not has_browser_value(value) and field in compact:
-                raise SystemExit(f"{authored['id']}: empty {field} leaked into the browser proof surface")
+            if field in compact or (specialist is not None and field in specialist):
+                raise SystemExit(f"{authored['id']}: private {field} leaked into a browser projection")
+
+        expected_facets = list(dict.fromkeys(
+            value for value in authored.get(fields[0], []) if value in allowed_facets
+        ))
+        if authored["id"] in chronology_map:
+            if specialist is None:
+                raise SystemExit(f"{authored['id']}: missing from the chronology Research projection")
+            actual_facets = specialist.get("facets", {}).get(facet_axis, [])
+            if not equal(actual_facets, expected_facets):
+                raise SystemExit(f"{authored['id']}: exact {facet_axis} facets changed in Research")
+        elif authored["id"] in monitoring_map:
+            if specialist is not None:
+                raise SystemExit(f"{authored['id']}: monitoring record leaked into chronology Research")
+        else:
+            raise SystemExit(f"{authored['id']}: missing from the chronology/watchlist partition")
 
 
 def update_manifest() -> None:
@@ -146,6 +172,9 @@ def main() -> int:
     canonical = events(load(CANONICAL))
     published = events(load(PUBLISHED))
     browse = events(load(BROWSE))
+    watchlist = load(WATCHLIST).get("items", [])
+    research = load(RESEARCH)
+    browser_records = [*browse, *watchlist]
     source_doc = load(SOURCES)
     sources = source_doc if isinstance(source_doc, list) else source_doc.get("sources", [])
     set13_ledger = load(SET13_LEDGER)
@@ -153,12 +182,18 @@ def main() -> int:
     set15_ledger = load(SET15_LEDGER)
     set15_exclusions = load(SET15_EXCLUSIONS)
 
-    if (len(manual), len(canonical), len(published), len(browse), len(sources)) != (1798, 2088, 2088, 2088, 779):
+    if (
+        len(manual), len(canonical), len(published), len(browse), len(watchlist), len(sources)
+    ) != (1798, 2088, 2088, 1954, 134, 779):
         raise SystemExit(
-            "Refusing editable-master update: expected final manual/canonical/public/browse/source "
-            f"inventory 1798/2088/2088/2088/779; found {len(manual)}/{len(canonical)}/"
-            f"{len(published)}/{len(browse)}/{len(sources)}"
+            "Refusing editable-master update: expected final manual/canonical/public/"
+            "chronology/watchlist/source inventory 1798/2088/2088/1954/134/779; found "
+            f"{len(manual)}/{len(canonical)}/{len(published)}/{len(browse)}/"
+            f"{len(watchlist)}/{len(sources)}"
         )
+    browser_ids = [str(row.get("id") or "") for row in browser_records]
+    if not all(browser_ids) or len(browser_ids) != len(set(browser_ids)) or len(browser_ids) != len(canonical):
+        raise SystemExit("Refusing editable-master update: chronology/watchlist is not a unique complete partition")
     ids = [str(row.get("id") or "") for row in manual]
     if not all(ids) or len(ids) != len(set(ids)):
         raise SystemExit("Refusing editable-master update: manual event IDs are missing or duplicated")
@@ -179,7 +214,9 @@ def main() -> int:
         raise SystemExit("Refusing editable-master update: Set 13 idempotency/structure/evidence drifted")
     if len(set13_exclusions) != 9 and set13_exclusions.get("exclusion_count") != 9:
         raise SystemExit("Refusing editable-master update: Set 13 exclusions drifted")
-    assert_propagation(set13_tagged, SET13_FIELDS, canonical, published, browse)
+    assert_propagation(
+        set13_tagged, SET13_FIELDS, canonical, published, browse, watchlist, research, "communityFormats"
+    )
 
     set15_batch = [row for row in manual if row.get("_src") == SET15_SRC]
     set15_tagged = [row for row in manual if row.get("course_program_formats")]
@@ -197,7 +234,9 @@ def main() -> int:
         raise SystemExit("Refusing editable-master update: Set 15 idempotency/structure/evidence drifted")
     if len(set15_exclusions) != 12:
         raise SystemExit("Refusing editable-master update: Set 15 exclusions drifted")
-    assert_propagation(set15_tagged, SET15_FIELDS, canonical, published, browse)
+    assert_propagation(
+        set15_tagged, SET15_FIELDS, canonical, published, browse, watchlist, research, "programFormats"
+    )
 
     source_ids = {str(row.get("id") or "") for row in sources}
     set13_source_ids = {str(row.get("id") or "") for row in set13_ledger.get("sources") or []}
@@ -247,7 +286,8 @@ def main() -> int:
         ],
         "verification": {
             "manual_records": len(manual), "consolidated_records": len(canonical),
-            "public_records": len(published), "browser_records": len(browse),
+            "public_records": len(published), "browser_records": len(browser_records),
+            "chronology_records": len(browse), "monitoring_records": len(watchlist),
             "sources": len(sources), "set13_new_cross_tagged_total": "120/50/170", "status": "pass",
         },
         "deployment_status": "updated_deployable_source_and_public_mirror_not_live_deployed",
@@ -294,7 +334,8 @@ def main() -> int:
         ],
         "verification": {
             "manual_records": len(manual), "consolidated_records": len(canonical),
-            "public_records": len(published), "browser_records": len(browse),
+            "public_records": len(published), "browser_records": len(browser_records),
+            "chronology_records": len(browse), "monitoring_records": len(watchlist),
             "sources": len(sources), "set15_new_cross_tagged_total": "72/9/81", "status": "pass",
         },
         "deployment_status": "updated_deployable_source_and_public_mirror_not_live_deployed",

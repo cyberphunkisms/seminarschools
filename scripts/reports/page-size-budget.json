@@ -1,21 +1,28 @@
 {
   "schema": "page-size-budget-v3",
-  "updated": "2026-08-13",
-  "policy": "The predeployment audit budgets the current deploy surface after approved methodology, CORE/CORE+ activation and history, rhetoric-taxonomy, and source-first discovery growth. Large canonical reference pages, the complete server-rendered Teacher Resources finder, and full localized Leizu compositions retain narrow explicit ceilings; obsolete calendar-shell exceptions remain removed. Any new HTML above 350 KB requires a documented budget entry.",
+  "updated": "2026-08-29",
+  "policy": "The predeployment audit budgets the verified August 29 synthesis deploy surface. The canonical Methodologylist, methodology section, and CORE+ section use measured August 29 baselines with narrow headroom for deliberate edits. Other large canonical reference pages, the complete server-rendered Teacher Resources finder, and full localized Leizu compositions retain their existing explicit ceilings. Any new HTML above 350 KB requires a documented budget entry.",
   "budgetedLargePages": [
     {
       "path": "polymyth/methodologylist/index.html",
-      "baselineBytes": 4135124,
-      "ceilingBytes": 4176000,
+      "baselineBytes": 4225403,
+      "ceilingBytes": 4250000,
       "route": "/polymyth/methodologylist/",
       "status": "canonical long-form reference; narrow ceiling blocks accidental corpus duplication"
     },
     {
       "path": "polymyth/methodologylist/methodology/index.html",
-      "baselineBytes": 1913157,
-      "ceilingBytes": 1945000,
+      "baselineBytes": 1989635,
+      "ceilingBytes": 2010000,
       "route": "/polymyth/methodologylist/methodology/",
       "status": "canonical methodology section; explicit long-form exception"
+    },
+    {
+      "path": "polymyth/methodologylist/coreplus/index.html",
+      "baselineBytes": 360580,
+      "ceilingBytes": 380000,
+      "route": "/polymyth/methodologylist/coreplus/",
+      "status": "canonical CORE+ section after the writing-owner synthesis; narrow ceiling blocks accidental rule duplication"
     },
     {
       "path": "aa/index.html",

@@ -179,7 +179,8 @@ if SITE_ONLY:
         (
             "https://seminarschools.com/polymyth/coherence/",
             'data-route-type="archive"',
-            'data-geometry-role="relation movement"',
+            'data-shared-geometry-exempt="star-file"',
+            'data-star-file-page="true"',
             "Polymyth_Coherence_Assessment_Instrument_V5.1.2.xlsx",
             "Polymyth_Coherence_AI_Application_Protocol_V5.1.2.md",
             "Polymyth_Coherence_Assessment_Schema_V5.1.2.json",

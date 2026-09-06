@@ -5,6 +5,12 @@
 const fs = require('fs');
 const path = require('path');
 const {loadInventoryContract} = require('./lib/polymythcal-inventory-contract');
+const {
+  PUBLIC_EVENT_KEYS,
+  PUBLIC_WATCHLIST_KEYS,
+  PERSISTED_SEARCH_GROUPS,
+  TEMPORAL_TYPES,
+} = require('./lib/polymythcal-discovery-model');
 
 const ROOT = path.resolve(__dirname, '..');
 const inventory = loadInventoryContract(ROOT);
@@ -30,7 +36,9 @@ for (const token of [
   'def fetch_findaprotest_toronto', 'needs-time-place', 'event-watchlist.json',
   'confirmation_status', 'qualification_reasons', 'timedelta',
 ]) need('scripts/scrape_seminars.py', token);
-for (const token of ['WATCHLIST_PUBLIC_PATH', 'polymythseminars', 'watchlist.json', 'DETERMINISTIC_PROTEST_PATH', 'DETERMINISTIC_STRUCTURED_PATH']) need('scripts/merge_and_finalize.py', token);
+for (const token of ['WATCHLIST_PATH', 'data', 'event-watchlist.json', 'DETERMINISTIC_PROTEST_PATH', 'DETERMINISTIC_STRUCTURED_PATH']) need('scripts/merge_and_finalize.py', token);
+if (/WATCHLIST_PUBLIC_PATH|polymythseminars["']?\s*\/\s*["']watchlist\.json/.test(read('scripts/merge_and_finalize.py'))) problems.push('merge_and_finalize.py must not write the public Discovery watchlist projection');
+for (const token of ['WATCHLIST_PATH', 'buildDiscoveryPayloads']) need('scripts/build-polymythcal-browser-payload.js', token, 'exclusive public watchlist projection owner');
 for (const token of ['Find a Protest source rule', 'qualification_reasons', 'FIFA', 'football', 'Palestine', 'Human Rights', 'time-unconfirmed', 'location-unconfirmed', 'aggregator-only']) need('scripts/seminars-prompt.md', token);
 for (const token of ['"topics"', '"status"', '"date_text"', '"time_text"', '"location_text"']) need('data/seminars-schema.json', token);
 
@@ -64,18 +72,36 @@ for (const id of monitoredIds) {
   if (reason?.code !== 'monitoring-marker' || reason?.detail !== exactReason) problems.push(`${id} lacks the exact monitoring-marker reason`);
 }
 
-const allowedChronology = new Set(['id', 'title', 'description', 'speaker_or_director', 'organizer', 'venue', 'city', 'country', 'type', 'record_kind', 'source_name', 'source_url', 'last_checked_at', 'destination_url', 'destination_status', 'destination_scope', 'destination_kind', 'confirmation_status', 'writing_bands', 'academic_bands', 'facets', 'search', 'series', 'date', 'end_date', 'date_precision', 'time_precision']);
-const allowedMonitoring = new Set(['id', 'title', 'description', 'speaker_or_director', 'organizer', 'venue', 'city', 'country', 'type', 'record_kind', 'source_name', 'source_url', 'last_checked_at', 'destination_url', 'destination_status', 'destination_scope', 'destination_kind', 'confirmation_status', 'writing_bands', 'academic_bands', 'facets', 'search', 'series', 'date_status']);
-const privateRawFields = new Set(['raw_excerpt', 'qualification_reasons', 'presence_claims', 'eligibility_rules', 'community_heritage_formats', 'live_digital_formats', 'course_program_formats']);
+const allowedChronology = new Set(PUBLIC_EVENT_KEYS);
+const allowedMonitoring = new Set(PUBLIC_WATCHLIST_KEYS);
+const canonicalById = new Map(canonicalItems.map(item => [String(item.id || ''), item]));
+const privateRawFields = new Set([
+  'raw_excerpt', 'qualification_reasons', 'presence_claims', 'eligibility_rules',
+  'community_heritage_formats', 'live_digital_formats', 'course_program_formats',
+  'source_url', 'source_name', 'destination_url', 'destination_status',
+  'destination_scope', 'destination_kind', 'registration_url', 'application_url',
+  'submission_url', 'rules_url', 'ticket_url', 'tickets_url', 'stream_url',
+  'livestream_url', 'watch_url',
+]);
 for (const [name, items, allowed] of [['chronology', chronologyItems, allowedChronology], ['monitoring', monitoredItems, allowedMonitoring]]) {
   for (const item of items) {
     const extra = Object.keys(item).filter(key => !allowed.has(key));
     if (extra.length) problems.push(`${name} ${item.id} exposes non-allowlisted fields: ${extra.join(', ')}`);
     for (const key of privateRawFields) if (Object.hasOwn(item, key)) problems.push(`${name} ${item.id} exposes private raw field ${key}`);
-    if (!item.source_url) problems.push(`${name} ${item.id} lost source provenance`);
+    if (item.route !== `/polymythseminars/events/${encodeURIComponent(String(item.id || ''))}/`) problems.push(`${name} ${item.id} has no exact stable internal route`);
+    const actions = Array.isArray(item.actions) ? item.actions : [];
+    const detailActions = actions.filter(action => action?.kind === 'details');
+    const externalActions = actions.filter(action => /^https:\/\//.test(String(action?.url || '')));
+    if (detailActions.length !== 1 || detailActions[0].url !== item.route || detailActions[0].scope !== 'listing') problems.push(`${name} ${item.id} lacks exactly one stable internal details action`);
+    if (externalActions.length > 1) problems.push(`${name} ${item.id} exposes more than one external action`);
+    const canonical = canonicalById.get(String(item.id || ''));
+    const expectedExternal = canonical?.destination_url && canonical.destination_status !== 'unavailable-specific-page'
+      ? String(canonical.destination_url) : '';
+    if ((externalActions[0]?.url || '') !== expectedExternal) problems.push(`${name} ${item.id} external action bypasses the materialized exact destination`);
     if (!item.facets || typeof item.facets !== 'object' || Array.isArray(item.facets)) problems.push(`${name} ${item.id} lacks its safe facet projection`);
     const searchKeys = Object.keys(item.search || {}).sort();
-    if (searchKeys.join(',') !== 'format,topics') problems.push(`${name} ${item.id} persists search fields outside bilingual topics/format: ${searchKeys.join(',')}`);
+    if (searchKeys.join(',') !== [...PERSISTED_SEARCH_GROUPS].sort().join(',')) problems.push(`${name} ${item.id} persists search fields outside the controlled bilingual groups: ${searchKeys.join(',')}`);
+    if (!TEMPORAL_TYPES.includes(item.temporal?.type)) problems.push(`${name} ${item.id} has no controlled temporal projection`);
   }
 }
 for (const item of monitoredItems) {
@@ -84,17 +110,25 @@ for (const item of monitoredItems) {
 }
 
 let missingChronologyDetails = 0;
-let leakedMonitoringDetails = 0;
+let missingMonitoringDetails = 0;
+let invalidMonitoringDetails = 0;
 for (const id of chronologyIds) {
   if (!fs.existsSync(path.join(ROOT, 'polymythseminars', 'events', id, 'index.html'))) missingChronologyDetails += 1;
   if (!fs.existsSync(path.join(ROOT, 'polymythseminars', 'fr', 'events', id, 'index.html'))) missingChronologyDetails += 1;
 }
 for (const id of monitoredIds) {
-  if (fs.existsSync(path.join(ROOT, 'polymythseminars', 'events', id, 'index.html'))) leakedMonitoringDetails += 1;
-  if (fs.existsSync(path.join(ROOT, 'polymythseminars', 'fr', 'events', id, 'index.html'))) leakedMonitoringDetails += 1;
+  const en = path.join(ROOT, 'polymythseminars', 'events', id, 'index.html');
+  const fr = path.join(ROOT, 'polymythseminars', 'fr', 'events', id, 'index.html');
+  if (!fs.existsSync(en)) missingMonitoringDetails += 1;
+  if (!fs.existsSync(fr)) missingMonitoringDetails += 1;
+  if (fs.existsSync(en)) {
+    const detail = fs.readFileSync(en, 'utf8');
+    if (!detail.includes('data-publication-surface="watchlist"') || /<time\s+datetime=/i.test(detail) || /"@type"\s*:\s*"Event"/.test(detail)) invalidMonitoringDetails += 1;
+  }
 }
 if (missingChronologyDetails) problems.push(`${missingChronologyDetails} chronology detail-language routes are missing`);
-if (leakedMonitoringDetails) problems.push(`${leakedMonitoringDetails} monitoring detail-language routes leaked into the dated calendar`);
+if (missingMonitoringDetails) problems.push(`${missingMonitoringDetails} stable monitoring detail-language routes are missing`);
+if (invalidMonitoringDetails) problems.push(`${invalidMonitoringDetails} monitoring detail routes expose dated-event semantics`);
 
 const main = read('polymythseminars/index.html');
 const monitoring = read('polymythseminars/monitoring/index.html');
@@ -125,9 +159,9 @@ for (const [token, label] of [
   ["event.target.closest('[data-correction]')", 'click-to-apply correction'],
   ['class="pmd-match-reason"', 'visible match explanations'],
   ['function safeUrl(rawUrl)', 'safe destination URL validation'],
-  ['class="pm-action primary-link"', 'internal chronology Details action'],
+  ["addAction(detailHref(event), COPY.details, 'primary-link')", 'universal stable internal Details action'],
   ['pm-source-action', 'separate exact destination action'],
-  ["surface !== 'monitoring'", 'monitoring protection from nonexistent internal detail links'],
+  ["kind === 'details' ? detailHref(event) : action.url", 'payload/internal Details de-duplication'],
 ]) if (!app.includes(token)) problems.push(`discovery controller lacks ${label}`);
 const derivedSearch = app.match(/const derivedSearch = \{[\s\S]*?\n    \};/)?.[0] || '';
 for (const forbidden of ['raw_excerpt', 'qualification_reasons', 'source_url', 'destination_url']) if (derivedSearch.includes(forbidden)) problems.push(`search index includes unsafe/private ${forbidden}`);
@@ -145,5 +179,4 @@ if (problems.length) {
   if (problems.length > 250) console.error(` - … ${problems.length - 250} more`);
   process.exit(1);
 }
-console.log(`POLYMYTHCAL SCRAPER/UI OK — source recall, ${chronologyItems.length} dated listings, ${monitoredItems.length} quarantined monitoring markers, safe public search/facets, chronology-only details, and exact destination actions are guarded.`);
-
+console.log(`POLYMYTHCAL SCRAPER/UI OK — source recall, ${chronologyItems.length} dated listings, ${monitoredItems.length} undated monitoring records, safe public search/facets, universal stable details, and exact destination actions are guarded.`);

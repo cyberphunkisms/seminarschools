@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const { evaluateLiveContent } = require('../live-content-integrity');
 const { isMonitoringMarker } = require('../lib/polymythcal-discovery-model');
+const { expectedPolymythcalEventRoutes } = require('../lib/source-html-inventory');
 
 const ROOT = path.resolve(__dirname, '../..');
 const CURRENT_THRESHOLDS = Object.freeze({ teacherResources: 645 });
@@ -165,17 +166,58 @@ function evaluateCurrentIntegrity({
   }
 
   if (root) {
-    for (const id of watchlistIds) {
+    const routeContract = expectedPolymythcalEventRoutes(canonical);
+    const monitoringEvents = canonical.filter(event => watchlistSet.has(String(event.id)));
+    const monitoringContract = expectedPolymythcalEventRoutes(monitoringEvents);
+    for (const [localePath, routeIds] of [
+      ['events', routeContract.englishRouteIds],
+      ['fr/events', routeContract.frenchRouteIds],
+    ]) {
+      for (const id of routeIds) {
+        const sourceRelative = `polymythseminars/${localePath}/${id}/index.html`;
+        const publicRelative = `public/${sourceRelative}`;
+        if (!fs.existsSync(path.join(root, sourceRelative))) {
+          failures.push(`${sourceRelative}: stable event detail or alias route is missing`);
+        }
+        if (!fs.existsSync(path.join(root, publicRelative))) {
+          failures.push(`${publicRelative}: stable event detail or alias route is missing`);
+        }
+      }
+    }
+    for (const event of monitoringEvents) {
+      const id = String(event.id);
+      for (const localePath of ['events', 'fr/events']) {
+        const sourceRelative = `polymythseminars/${localePath}/${id}/index.html`;
+        const publicRelative = `public/${sourceRelative}`;
+        if (!fs.existsSync(path.join(root, sourceRelative))) continue;
+        const html = fs.readFileSync(path.join(root, sourceRelative), 'utf8');
+        if (!/<meta\b(?=[^>]*\bname=["']robots["'])(?=[^>]*\bcontent=["']noindex,follow["'])[^>]*>/i.test(html)) {
+          failures.push(`${sourceRelative}: watchlist detail route is not noindex,follow`);
+        }
+        if (/<time\b[^>]*\bdatetime\s*=/i.test(html)) {
+          failures.push(`${sourceRelative}: watchlist detail route exposes a date`);
+        }
+        if (/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?["']@type["']\s*:\s*["']Event["']/i.test(html)) {
+          failures.push(`${sourceRelative}: watchlist detail route exposes Event JSON-LD`);
+        }
+        if (
+          fs.existsSync(path.join(root, publicRelative))
+          && !fs.readFileSync(path.join(root, sourceRelative)).equals(fs.readFileSync(path.join(root, publicRelative)))
+        ) {
+          failures.push(`${publicRelative}: published watchlist detail differs from source`);
+        }
+      }
+    }
+    for (const id of new Set([
+      ...monitoringContract.canonicalIds,
+      ...monitoringContract.frenchAliases.keys(),
+    ])) {
       for (const relative of [
-        `polymythseminars/events/${id}/index.html`,
-        `polymythseminars/fr/events/${id}/index.html`,
         `polymythseminars/ics/${id}.ics`,
-        `public/polymythseminars/events/${id}/index.html`,
-        `public/polymythseminars/fr/events/${id}/index.html`,
         `public/polymythseminars/ics/${id}.ics`,
       ]) {
         if (fs.existsSync(path.join(root, relative))) {
-          failures.push(`${relative}: monitoring record has a public chronology route`);
+          failures.push(`${relative}: watchlist record has an ICS chronology route`);
         }
       }
     }
@@ -222,7 +264,7 @@ function main() {
       + `${metrics.everyRunDeterministicSources} every-run + `
       + `${metrics.rotatingDeterministicSources} rotating deterministic sources, `
       + `${metrics.teacherResources}/${metrics.teacherCollections}/${metrics.teacherGroups} `
-      + 'Teacher Resources. Exact partition, uniqueness, completeness, route quarantine, and '
+      + 'Teacher Resources. Exact partition, uniqueness, complete stable details, watchlist calendar quarantine, and '
       + 'anti-collapse floors remain enforced.',
   );
 }
@@ -234,4 +276,3 @@ module.exports = {
   WATCHLIST_REASON,
   evaluateCurrentIntegrity,
 };
-

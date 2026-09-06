@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
+const {generatedAt} = require('./lib/deterministic-timestamp');
 
 const root = process.cwd();
 const indexPath = path.join(root, 'hf_export', 'search', 'meaninglib_search_index.json');
@@ -86,10 +87,69 @@ const EXACT_CANONICAL_OWNER_ALIASES = new Map([
   ['oa', 'coreplus-handler-ouroborosanalyses'],
   ['ouroborosanalyses', 'method-ouroborosanalyses-current-2026-08-23'],
   ['egregore', 'method-egregore-current-umbrella-control-2026-08-23'],
+  ['degorgonified feminism', 'ml:gorgonification:gorgonwars:ddd5443ed9cc'],
 ]);
 
 function isReportDoc(doc) {
   return doc.star_file === 'report' || String(doc.source_path || '').includes('/reports/');
+}
+
+function ownFiniteNumber(object, key, fallback = 0) {
+  if (!object || !Object.prototype.hasOwnProperty.call(object, key)) return fallback;
+  const value = object[key];
+  return typeof value === 'number' && Number.isFinite(value) ? value : fallback;
+}
+
+function semanticFields(doc) {
+  return {
+    identity: normalizeText([doc.id, doc.title, doc.section].filter(Boolean).join(' ')),
+    substance: normalizeText([
+      doc.preview,
+      Array.isArray(doc.tags) ? doc.tags.join(' ') : doc.tags,
+      doc.route,
+      doc.source_path,
+    ].filter(Boolean).join(' ')),
+  };
+}
+
+function includesAny(text, alternatives) {
+  return alternatives.some(value => text.includes(value));
+}
+
+/**
+ * Give a bounded lift to the current adjudication cluster without keying the
+ * result to one exact title.  A candidate must carry evidence in its identity
+ * fields and in its substantive preview/tags/route.  This keeps a handler that
+ * merely names a query from outranking the row that actually explains it.
+ */
+function focusedAdjudicationBoost(qnorm, doc) {
+  const queryIntents = [
+    includesAny(qnorm, ['non strawman', 'non-strawman', 'strawman']),
+    qnorm.includes('polycognate'),
+    includesAny(qnorm, ['genealogy', 'genealogical']),
+    includesAny(qnorm, ['always already', 'always-already']),
+    includesAny(qnorm, ['boundaries', 'boundary']),
+    includesAny(qnorm, ['comparison', 'compare', 'adjudicat']),
+  ];
+  if (queryIntents.filter(Boolean).length < 2) return 0;
+
+  const fields = semanticFields(doc);
+  const candidateIntents = [
+    includesAny(fields.identity, ['non strawman', 'non-strawman', 'strawman'])
+      && includesAny(fields.substance, ['current position', 'user ruling', 'user authored', 'authorship', 'external source', 'strongest actual claim', 'ironman']),
+    fields.identity.includes('polycognate')
+      && includesAny(fields.substance, ['complex axiom', 'structural position', 'same operation', 'always survives']),
+    includesAny(fields.identity, ['genealogy', 'genealogical', 'historical scope'])
+      && includesAny(fields.substance, ['structural analogy', 'direct transmission', 'independent', 'provenance']),
+    includesAny(fields.identity, ['always already', 'always-already'])
+      && includesAny(fields.substance, ['already firing', 'operation', 'supports', 'point in favor']),
+    includesAny(fields.identity, ['boundaries', 'boundary'])
+      && includesAny(fields.substance, ['genealogy', 'historical', 'structural analogy', 'normalization']),
+    includesAny(fields.identity, ['comparison', 'compare', 'adjudicat', 'relation'])
+      && includesAny(fields.substance, ['support', 'opposition', 'neutral', 'adequate test', 'current claim']),
+  ];
+  const matched = candidateIntents.filter(Boolean).length;
+  return matched ? Math.min(180, 42 * matched) : 0;
 }
 
 function scoreDoc(doc, tokens, query, idf) {
@@ -100,6 +160,21 @@ function scoreDoc(doc, tokens, query, idf) {
   const titleNorm = normalizeText(doc.title || '');
   const previewNorm = normalizeText(doc.preview || '');
   const sourceNorm = normalizeText(doc.source_path || '');
+
+  score += focusedAdjudicationBoost(qnorm, doc);
+
+  // Source-name queries must retrieve the source record, not a method handler
+  // that happens to discuss source handling.  Keep this evidence based: the
+  // record must contain both the author and work phrase in its searchable
+  // identity/substance, and citation/source rows get the strongest lift.
+  const clastresQuery = qnorm.includes('clastres') && qnorm.includes('society against the state');
+  if (clastresQuery) {
+    const fields = semanticFields(doc);
+    const candidateText = `${fields.identity} ${fields.substance}`;
+    const isClastresSource = candidateText.includes('clastres') && candidateText.includes('society against the state');
+    if (isClastresSource) score += String(doc.section || '').toLowerCase() === 'citation' ? 280 : 110;
+    else score -= 20;
+  }
 
   const exactOwnerId = EXACT_CANONICAL_OWNER_ALIASES.get(
     qnorm.replace(/[^a-z0-9]+/g, ' ').trim(),
@@ -136,6 +211,22 @@ function scoreDoc(doc, tokens, query, idf) {
   if (htmlTxtQuery && htmlTxtDoc) score += 120;
   if (htmlTxtQuery && doc.star_file === 'ml') score += 12;
 
+  const mephistodataQuery = qnorm.includes('mephistodata') || qnorm.includes('mephydata');
+  const activationQuery = qnorm.includes('activate') || qnorm.includes('activation') || qnorm.includes('access pack') || qnorm.includes('hugging face') || qnorm.includes('another ai');
+  const mephistodataDoc = titleNorm.includes('mephistodata') || previewNorm.includes('mephistodata');
+  const accessDoc = doc.star_file === 'readme' || sourceNorm.includes('hf_export/readme') || previewNorm.includes('hugging face') || previewNorm.includes('source of truth') || previewNorm.includes('mirror') || previewNorm.includes('retrieval') || titleNorm.includes('meaninglib');
+  if (mephistodataQuery && mephistodataDoc) score += 45;
+  if (mephistodataQuery && String(doc.section || '').toLowerCase() === 'pending') score -= 35;
+  if (activationQuery && accessDoc) score += 60;
+  if (activationQuery && ontologyDoc) score += 45;
+
+  const portableCoreQuery = qnorm.includes('personal rules') || qnorm.includes('portable core') || qnorm.includes('follow core+');
+  const portableCoreDoc = titleNorm.includes('core / personal rules') || String(doc.id || '').includes('core-personal-rules-current');
+  const currentCoreMapDoc = titleNorm.includes('core current map');
+  if (portableCoreQuery && portableCoreDoc) score += 220;
+  if (portableCoreQuery && currentCoreMapDoc) score += 140;
+  if (portableCoreQuery && String(doc.section || '').toLowerCase() === 'corehistory') score -= 120;
+
   if (qnorm.length > 3) {
     const shortPhrase = qnorm.replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
     if (shortPhrase && titleNorm.includes(shortPhrase)) score += 18;
@@ -146,11 +237,11 @@ function scoreDoc(doc, tokens, query, idf) {
   if (String(doc.source_path || '').includes('/sections/')) score += 1;
 
   for (const t of tokens) {
-    const tf = doc.termFreq[t] || 0;
+    const tf = ownFiniteNumber(doc.termFreq, t);
     if (!tf) continue;
     const fieldBoost = titleNorm.includes(t) ? 3 : (sourceNorm.includes(t) ? 2 : 1);
     const lenNorm = Math.sqrt(Math.max(50, doc.term_count || 50) / 100);
-    score += (Math.min(tf, 12) * (idf[t] || 1) * fieldBoost) / lenNorm;
+    score += (Math.min(tf, 12) * ownFiniteNumber(idf, t, 1) * fieldBoost) / lenNorm;
   }
 
   const safetyPhrases = ['interdependent', 'interdependence', 'mother-category', 'mother category', 'access route', 'star-file', 'star file', 'hierarchy', 'psychologism', 'anti-twist', 'antitwist', 'ai prose', 'law review', 'setupnpcs', 'improvnpcs', 'dual write', 'txt html', 'html txt', 'text mirror'];
@@ -211,7 +302,7 @@ function writeLastReport(rawQuery, results) {
   const lines = [
     '# Last Meaninglib query report',
     '',
-    `Generated: ${new Date().toISOString()}`,
+    `Generated: ${generatedAt()}`,
     `Query: ${query}`,
     '',
     '## Results',

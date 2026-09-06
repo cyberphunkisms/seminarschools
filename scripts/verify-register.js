@@ -16,7 +16,8 @@
 
    STRUCTURAL checks run on every real page.
 
-     BORNALIVE  mandala.js and indra.js and alive.css all present
+     BORNALIVE  mandala.js, indra.js, and alive.css present on every included
+                page; exact star files and source controls omit shared runtime
      OG         og:title present
 
    A hit is suppressed only if its path is exempt or its (file,type) sits
@@ -27,9 +28,15 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+const {
+  assertGeometryVersionScheme,
+  geometryExemptionForRelativeHtmlPath,
+} = require('./lib/geometry-asset-version');
 
 const ROOT = path.resolve(__dirname, '..');
 const readL1 = (p) => fs.readFileSync(p, 'latin1');
+const geometryContracts = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'geometry-route-contracts.json'), 'utf8'));
+assertGeometryVersionScheme(geometryContracts);
 function walk(dir){ let o=[]; for(const e of fs.readdirSync(dir,{withFileTypes:true})){ if(e.name==='node_modules'||e.name==='public'||e.name.startsWith('.')||path.relative(ROOT,path.join(dir,e.name)).replace(/\\/g,'/').startsWith('scripts/fixtures'))continue; const fp=path.join(dir,e.name); if(e.isDirectory())o=o.concat(walk(fp)); else if(e.name.endsWith('.html'))o.push(path.relative(ROOT,fp).replace(/\\/g,'/')); } return o; }
 
 let allow = { proseExemptPrefixes:[], ogExempt:[], bornAliveExempt:[], snippetAllow:[] };
@@ -37,6 +44,8 @@ try { allow = Object.assign(allow, JSON.parse(readL1(path.join(__dirname,'regist
 
 const underAny = (f, prefixes) => prefixes.some(p => f === p || f.startsWith(p.replace(/\/?$/,'/')) || f.startsWith(p));
 const snippetAllowed = (f, type, count) => allow.snippetAllow.some(s => s.file === f && s.type === type && count <= (s.max || 0));
+const escapeRegex = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const hasAssetTag = (html, asset) => new RegExp(`<[^>]+${escapeRegex(asset)}(?:\\?[^"']*)?["'][^>]*>`, 'i').test(html);
 
 // strip scripts, styles, comments, then tags -> visible text (latin1-safe)
 function visibleText(s){
@@ -91,6 +100,7 @@ function flag(f, type, count, detail){
 for (const f of files){
   const s = readL1(path.join(ROOT, f));
   const real = isRealPage(f, s);
+  const geometryExemption = geometryExemptionForRelativeHtmlPath(geometryContracts, f);
   const generatedSearchSurface = s.includes('Seminar Schools Static Search Surface');
   // Catalog/event cards contain third-party titles and source descriptions. Exclude
   // only those generated blocks from authored-prose checks; retain the surrounding page.
@@ -118,8 +128,15 @@ for (const f of files){
   }
 
   if (real){
-    if (!generatedSearchSurface && !underAny(f, allow.bornAliveExempt)){
-      const missing = ['mandala.js','indra.js','alive.css'].filter(a => !s.includes(a));
+    if (geometryExemption){
+      const forbidden = ['/js/mandala.js','/js/indra.js'].filter(a => hasAssetTag(s, a));
+      if (forbidden.length) flag(f, 'BORNALIVE', 1, geometryExemption + ' page loads excluded ' + forbidden.join(', '));
+      const body = (s.match(/<body\b[^>]*>/i) || [''])[0];
+      if (!body.includes(`${geometryContracts.coverage.exemption_attribute}="${geometryExemption}"`)) {
+        flag(f, 'BORNALIVE', 1, 'missing exact shared-geometry exemption marker');
+      }
+    } else if (!underAny(f, allow.bornAliveExempt)){
+      const missing = ['/js/mandala.js','/js/indra.js','/css/alive.css'].filter(a => !hasAssetTag(s, a));
       if (missing.length) flag(f, 'BORNALIVE', 1, 'missing ' + missing.join(', '));
     }
     if (!underAny(f, allow.ogExempt)){

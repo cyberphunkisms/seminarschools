@@ -58,6 +58,12 @@ for (const [relative, route, language, kind] of surfaces) {
 
 const runtime = read('js/polymythcal-discovery.js');
 for (const call of ['CORE.matchesFacets', 'CORE.facetCounts', 'CORE.sortRecords', 'CORE.compareRecords', 'CORE.groupSeries', 'CORE.paginate']) assert.match(runtime, new RegExp(call.replace('.', '\\.')));
+assert.doesNotMatch(runtime, /\.map\(axisMarkup\)/, 'Array.map index must not enter axisMarkup as visibleOptions');
+assert.equal(
+  (runtime.match(/\.map\(key => axisMarkup\(key\)\)/g) || []).length,
+  2,
+  'main and Research common filters must call axisMarkup through unary wrappers',
+);
 assert.match(runtime, /urlNeedsResearchProjection\(\)/);
 assert.match(runtime, /event\.key !== '\/'/);
 assert.doesNotMatch(runtime, /ArrowLeft|ArrowRight/);

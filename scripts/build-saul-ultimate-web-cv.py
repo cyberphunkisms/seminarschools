@@ -957,7 +957,7 @@ def retire_focused_routes() -> None:
 <link href="https://seminarschools.com{destination}" rel="canonical">
 <script src="/js/theme-init.js?v=20260723-steady"></script>
 <link rel="stylesheet" href="/css/alive.css?v={geometry_version}">
-<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260725-audit45" data-site-wide-type-zoom="20260725-audit45">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260814-reader-word-integrity" data-site-wide-type-zoom="20260814-reader-word-integrity">
 <link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
 <title>Saul Karim Nassau — Relevant Experience</title>

@@ -1,0 +1,144 @@
+{
+  "schema": "seminar-schools-aug26-aug27-preservation-v1",
+  "historical_audit53_status": "historical_provenance_only",
+  "rule": "The August 27 release is permitted to differ from the authenticated August 26 input only by the exact code-owned path and content-policy transition; Polymythcal canonical and safe projection data remain byte-identical.",
+  "expected_transition": {
+    "added": {
+      "raw_content_bytes": 4368955,
+      "content_policy_sha256": "016cd494c24e76f2fd8efaa64362698c34d1b050e5a3a50fd439326366a33636",
+      "count": 9,
+      "paths": [
+        "data/futureproofing/aug26-aug27-preservation-contract.json",
+        "data/futureproofing/aug26-package-contents-baseline.json",
+        "scripts/fixtures/futureproofing/aug27-preservation-tampered.json",
+        "scripts/fixtures/futureproofing/geometry-control-valid.html",
+        "scripts/fixtures/futureproofing/geometry-included-valid.html",
+        "scripts/fixtures/futureproofing/geometry-star-valid.html",
+        "scripts/fixtures/futureproofing/geometry-star-with-background.html",
+        "scripts/verify-audit53-historical-provenance.py",
+        "scripts/verify-aug27-base-preservation.py"
+      ],
+      "paths_sha256": "ae74cee61b2b030db3f736bf85e04b5873631f8473932711f12036e3277ec42e",
+      "policy_token_count": 2,
+      "raw_content_hashed_count": 7
+    },
+    "baseline_file_count": 21111,
+    "baseline_manifest_sha256": "18305c5dae0a951ce7486737cf3914eae16d986900fbaf6c3681956402c4d1c1",
+    "changed_paths_sha256": "49242becb52f7a0d24124d12dd01c4d8974be1a6a576d44093377ccc07fb06e6",
+    "content_policy_rows": [
+      {
+        "path": "data/futureproofing/aug26-aug27-preservation-contract.json",
+        "semantic_gate": "python3 scripts/verify-aug27-base-preservation.py",
+        "writer": "reviewed release transition"
+      },
+      {
+        "path": "scripts/verify-aug27-base-preservation.py",
+        "semantic_gate": "python3 scripts/verify-aug27-base-preservation.py",
+        "writer": "reviewed release transition"
+      },
+      {
+        "path": "scripts/reports/audit49-build-packaging-efficiency.json",
+        "semantic_gate": "node scripts/verify-audit49-build-packaging-efficiency.js",
+        "writer": "scripts/verify-audit49-build-packaging-efficiency.js"
+      },
+      {
+        "path": "scripts/reports/release-gate-report.json",
+        "semantic_gate": "scripts/verify-all-runner.js plus final artifact receipt verification",
+        "writer": "scripts/verify-all-runner.js"
+      },
+      {
+        "path": "scripts/reports/futureproofing-gate-report.json",
+        "semantic_gate": "python3 scripts/verify-futureproofing-contract.py --run-source plus final artifact receipt verification",
+        "writer": "scripts/verify-futureproofing-contract.py"
+      }
+    ],
+    "current_file_count": 21120,
+    "current_selected": {
+      "raw_content_bytes": 496659133,
+      "content_policy_sha256": "263a3b25caaeb028ff897f1541f470bd659ababa5a9c0487519a8299e20b0c20",
+      "count": 21120,
+      "paths_sha256": "dcf25c74687af57502f69e1c68c6d4d8d879687eb1969ae84d2ecd319747adba",
+      "policy_token_count": 5,
+      "raw_content_hashed_count": 21115
+    },
+    "deleted": {
+      "raw_content_bytes": 0,
+      "content_policy_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "count": 0,
+      "paths": [],
+      "paths_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "policy_token_count": 0,
+      "raw_content_hashed_count": 0
+    },
+    "event_data": [
+      {
+        "bytes": 8526306,
+        "path": "data/polymyth-seminar-events.json",
+        "sha256": "c52de1fe55bd1c1a4e22d1bce1fd71beebf0cc2687dda436670ec98451bafd7f",
+        "unchanged_from_aug26": true
+      },
+      {
+        "bytes": 8526306,
+        "path": "polymythseminars/events.json",
+        "sha256": "c52de1fe55bd1c1a4e22d1bce1fd71beebf0cc2687dda436670ec98451bafd7f",
+        "unchanged_from_aug26": true
+      },
+      {
+        "bytes": 117692,
+        "path": "data/polymythcal-publication-surfaces.json",
+        "sha256": "e32c8c125b42b340d0df0681980040ee2fee3cc5438b16c9bd8c118984306095",
+        "unchanged_from_aug26": true
+      },
+      {
+        "bytes": 2954297,
+        "path": "polymythseminars/browse.json",
+        "sha256": "f7b82229eca5ad99feb64a1a81e02c388abf7045253b51ac7c7188401f46308e",
+        "unchanged_from_aug26": true
+      },
+      {
+        "bytes": 213174,
+        "path": "polymythseminars/watchlist.json",
+        "sha256": "eff46db0ccf086142a1d8a94c827cf9705919cc969dbf5bc8789fe062e8d5ef8",
+        "unchanged_from_aug26": true
+      },
+      {
+        "bytes": 1915161,
+        "path": "polymythseminars/research.json",
+        "sha256": "da7f74b566289eaa60a11180c5ccf95cef956e3bc405f17f4e54864cace5c473",
+        "unchanged_from_aug26": true
+      }
+    ],
+    "input_archive_sha256": "2212b569d13a19842cb67b890e1d3cc432cd44d345c6dc03139784327aaacd21",
+    "modified_generated_or_governed": {
+      "raw_content_bytes": 80627187,
+      "content_policy_sha256": "bf7355c22430df59b20ceaba7ccbb0838a2c50ed530af5fedee334d525b6f25b",
+      "count": 1056,
+      "paths_sha256": "c15446d62fbe134716e1bdc9d2fb26f9e3ad494dd3cd9e9651889476bc48c0fe",
+      "policy_token_count": 3,
+      "raw_content_hashed_count": 1053
+    },
+    "modified_geometry_html": {
+      "raw_content_bytes": 132192872,
+      "content_policy_sha256": "64458d1f2bdb0bf63c38a3b914272ac0e49af72789c32a6ebcfbf404f0f5d9e3",
+      "count": 15135,
+      "paths_sha256": "20e19afc725d1b813ad48f78d93ba452a55e67f53e0c367999cdd1ba2986e755",
+      "policy_token_count": 0,
+      "raw_content_hashed_count": 15135
+    },
+    "post_package_manifest_boundary": {
+      "path": "PACKAGE_CONTENTS_SHA256.json",
+      "selected_by_source_transition": false,
+      "verification": "embedded/external manifest equality plus final artifact receipt",
+      "writer": "scripts/package_integrity.py via scripts/package-front-facing-mephistodata-release.py"
+    },
+    "transition_id": "aug26-to-aug27-rainbow-geometry-star-exclusion",
+    "unchanged": {
+      "raw_content_bytes": 279470119,
+      "content_policy_sha256": "502bf5ba2914d8ca927fb52dc867cb10ea4900a428fc3eab7ca5a577ab8587d8",
+      "count": 4920,
+      "paths_sha256": "fb8c664946a8034f30b7f1a894ce11a00a7785e07876e677231ed02ec89ace11",
+      "policy_token_count": 0,
+      "raw_content_hashed_count": 4920
+    }
+  }
+}

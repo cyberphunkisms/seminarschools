@@ -1,6 +1,6 @@
 {
   "schema": "seminar-schools-futureproofing-contract-v1",
-  "contract_version": "2026-08-14.1",
+  "contract_version": "2026-09-05.2",
   "rule": "A release is blocked unless every FP-01 through FP-15 entry is implemented, names an executable verifier, names deliberate failure evidence, and records the evidence fields that bind its result.",
   "items": [
     {
@@ -18,10 +18,10 @@
       "name": "approved_change_deletion_ledger",
       "status": "implemented",
       "stage": "source",
-      "gate_command": ["python3", "scripts/verify-audit53-base-preservation.py"],
-      "verifier_paths": ["scripts/verify-audit53-base-preservation.py"],
-      "fixture_paths": ["scripts/fixtures/futureproofing/unapproved-deletion-ledger.json"],
-      "evidence_fields": ["baseline.sha256", "approved_deletions[].before_sha256", "approved_transition.previous_transition", "approved_transition.approved_successor_additions[].before_sha256", "approved_transition.approved_successor_additions[].after_sha256", "approved_transition.retained_previous_paths_current_content_policy_sha256", "approved_transition.modified_paths_sha256", "approved_transition.modified_content_policy_sha256", "approved_transition.raw_content_hashed_count", "approved_transition.generated_evidence_content_exclusions"]
+      "gate_command": ["python3", "scripts/verify-sep5-feminism-base-preservation.py"],
+      "verifier_paths": ["scripts/verify-sep5-feminism-base-preservation.py", "scripts/verify-sep5-base-preservation.py", "scripts/verify-sep3-base-preservation.py", "scripts/verify-futureproofing-base-preservation.py", "scripts/verify-aug31-base-preservation.py", "scripts/verify-aug27-base-preservation.py", "scripts/verify-audit53-historical-provenance.py"],
+      "fixture_paths": ["scripts/fixtures/futureproofing/sep5-feminism-preservation-tampered.json", "scripts/fixtures/futureproofing/sep5-preservation-tampered.json", "scripts/fixtures/futureproofing/sep3-preservation-tampered.json", "scripts/fixtures/futureproofing/aug31-preservation-tampered.json", "scripts/fixtures/futureproofing/aug27-preservation-tampered.json"],
+      "evidence_fields": ["baseline_manifest.sha256", "baseline_manifest.release_id", "baseline_manifest.governed_site_predecessor_count", "baseline_manifest.excluded_predecessor", "changed_paths_sha256", "unchanged.paths_sha256", "unchanged.content_sha256", "modified[].before.sha256", "modified[].after.sha256", "modified_policy[].before.sha256", "modified_policy[].after.policy_sha256", "added[].sha256", "added_policy[].after.policy_sha256", "deleted[].before.sha256", "event_data[].sha256", "outer_delivery.predecessor_count", "outer_delivery.current_selected_count", "outer_delivery.changed_paths_sha256", "outer_delivery.unchanged.paths_sha256", "outer_delivery.unchanged.content_sha256", "outer_delivery.modified[].before.sha256", "outer_delivery.modified[].after.sha256", "outer_delivery.added[].sha256", "outer_delivery.deleted[].before.sha256", "policy_rows"]
     },
     {
       "id": "FP-03",

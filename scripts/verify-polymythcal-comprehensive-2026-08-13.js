@@ -98,12 +98,16 @@ const requiredSchemaFields = [
 ];
 for (const field of requiredSchemaFields) assert(schema.properties && schema.properties[field], `Schema missing ${field}`);
 
-const taxonomy = readJson('polymythseminars/browse.json').taxonomy;
+const browseTaxonomy = readJson('polymythseminars/browse.json').taxonomy;
+const researchTaxonomy = readJson('polymythseminars/research.json').taxonomy;
 const revamp = readText('scripts/lib/polymythcal-discovery-model.js');
 for (const [axis, value] of [
   ['what','event:celestial-occurrence'], ['what','event:ritual-observance'],
   ['topics','history'], ['presence','director-filmmaker'], ['grades','g4'], ['grades','undergraduate']
-]) assert(taxonomy?.axes?.[axis]?.values?.[value]?.en && taxonomy?.axes?.[axis]?.values?.[value]?.fr, `Bilingual Research taxonomy missing ${axis}:${value}`);
+]) {
+  const definition = browseTaxonomy?.axes?.[axis] || researchTaxonomy?.axes?.[axis];
+  assert(definition?.values?.[value]?.en && definition?.values?.[value]?.fr, `Bilingual Research taxonomy missing ${axis}:${value}`);
+}
 for (const needle of ['event.entry_family', 'event.presence_claims', 'classifyPresence', 'classifyWhat', 'classifyGrades', "add('history')"]) {
   assert(revamp.includes(needle), `Polymythcal discovery classifier missing ${needle}`);
 }
@@ -138,4 +142,3 @@ const summary = {
   ui_discovery: 'pass'
 };
 console.log(JSON.stringify(summary, null, 2));
-

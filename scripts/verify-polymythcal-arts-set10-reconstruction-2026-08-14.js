@@ -77,7 +77,7 @@ assert((medusa.arts_event_forms||[]).includes('talkback-discussion'),'Medusa Set
 assert(consolidated.length===publicEvents.length,'Canonical/public count mismatch');
 assert(consolidated.length>=1700,`Set 10 baseline requires at least 1,700 public records; found ${consolidated.length}`);
 for(const f of ['arts_event_forms','arts_disciplines','arts_occurrence_role','arts_access_status','set10_classified_at']) assert(schema.properties?.[f],`Schema missing ${f}`);
-const taxonomy=readJson('polymythseminars/browse.json').taxonomy;
+const taxonomy=readJson('polymythseminars/research.json').taxonomy;
 const revamp=readText('scripts/lib/polymythcal-discovery-model.js');
 const detail=readText('scripts/build-polymythcal-audit13.py');
 for(const value of requiredForms) assert(taxonomy?.axes?.artsFormats?.values?.[value]?.en&&taxonomy?.axes?.artsFormats?.values?.[value]?.fr,`Bilingual Research taxonomy lacks Arts facet ${value}`);
@@ -96,4 +96,3 @@ for(const rel of ['WEBSITE_CL_2026-07-19.md','docs/WEBSITE_CL_2026-07-19.md']){
  const t=readText(rel); assert(t.includes('CL-WEB-259'),`${rel}: Set 10 section incomplete`);
 }
 console.log(JSON.stringify({manual_records:manual.length,consolidated_records:consolidated.length,set10_ledger_records:ledger.record_count,set10_upsert_records:batch.length,stable_ids_backfilled:meta.stable_public_ids_backfilled,duplicate_holdouts:ledger.canonical_duplicates_not_upserted.length,change_list:'CL-WEB-252 through CL-WEB-259 complete'},null,2));
-

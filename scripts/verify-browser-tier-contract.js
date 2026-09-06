@@ -22,7 +22,7 @@ check(policy.exact_exceptions.length === 1 && policy.exact_exceptions[0] === 'go
 for (const token of ['pull_request:', 'push:', 'workflow_dispatch:', 'schedule:', '--tier changed', '--tier family', '--tier full', 'fail-fast: false', 'shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]', '--shard-count 16']) {
   check(workflow.includes(token), `browser workflow misses ${token}`);
 }
-for (const token of ["fullPage: contract.tiers[tier].full_page === true", "data-geometry-ready", "frontFacing !== 'general-audience'", "state.overflow > 1", "runtimeErrors.length", "pointerEvents !== 'none'", "value === 'Failed to load resource: net::ERR_FAILED'", "runtimeErrors.push(value)"]) {
+for (const token of ["fullPage: contract.tiers[tier].full_page === true", "data-geometry-ready", "geometryExemptionForRelativeHtmlPath", "geometryOpacityBounds", "document.documentElement.clientWidth", "frontFacing !== 'general-audience'", "state.overflow > 1", "runtimeErrors.length", "pointerEvents !== 'none'", "value === 'Failed to load resource: net::ERR_FAILED'", "runtimeErrors.push(value)"]) {
   check(runner.includes(token), `browser runner misses ${token}`);
 }
 for (const token of ['familyRepresentatives(pages)', "tier === 'full'", 'index % shardCount === shardIndex', 'hasSharedImpact(changedFiles)']) {

@@ -5,6 +5,7 @@ const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 const {
+  GEOMETRY_VERSION,
   frontFacingDocumentDefects,
   geometryDocumentDefects,
   preservationDefects,
@@ -14,11 +15,39 @@ const {
 
 const FIXTURES = path.join(__dirname, 'fixtures', 'futureproofing');
 const read = name => fs.readFileSync(path.join(FIXTURES, name), 'utf8');
+const geometryFixture = name => read(name).replaceAll('__GEOMETRY_VERSION__', GEOMETRY_VERSION);
 
-const geometry = geometryDocumentDefects(read('geometry-missing-indra.html'));
+const includedGeometry = geometryDocumentDefects(
+  geometryFixture('geometry-included-valid.html'),
+  'about/index.html',
+);
+assert.deepStrictEqual(includedGeometry, []);
+
+const geometry = geometryDocumentDefects(read('geometry-missing-indra.html'), 'about/index.html');
 assert(geometry.includes('geometry-asset-count:/js/indra.js:0'));
 assert(geometry.includes('geometry-asset-version:/js/indra.js'));
 assert(geometry.includes('geometry-script-order'));
+
+const starGeometry = geometryDocumentDefects(
+  geometryFixture('geometry-star-valid.html'),
+  'polymyth/methodologylist/index.html',
+);
+assert.deepStrictEqual(starGeometry, []);
+
+const controlGeometry = geometryDocumentDefects(
+  geometryFixture('geometry-control-valid.html'),
+  'dashboard/index.html',
+);
+assert.deepStrictEqual(controlGeometry, []);
+
+const invalidStarGeometry = geometryDocumentDefects(
+  geometryFixture('geometry-star-with-background.html'),
+  'polymyth/methodologylist/index.html',
+);
+assert(invalidStarGeometry.includes('geometry-exempt-runtime-asset:/js/mandala.js:1'));
+assert(invalidStarGeometry.includes('geometry-exempt-runtime-asset:/js/indra.js:1'));
+assert(invalidStarGeometry.includes('geometry-exempt-body-state'));
+assert(invalidStarGeometry.includes('geometry-exempt-runtime-layer'));
 
 const frontFacing = frontFacingDocumentDefects(read('front-facing-internal-copy.html'));
 assert(frontFacing.some(item => item.startsWith('front-facing-internal-copy:Selected evidence')));

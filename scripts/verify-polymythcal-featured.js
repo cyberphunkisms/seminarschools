@@ -7,6 +7,8 @@ const {resolveSiteBuildDate} = require('./polymythcal-build-date');
 
 const ROOT = path.resolve(__dirname, '..');
 const EVENT_PATH = path.join(ROOT, 'polymythseminars', 'events.json');
+const BROWSE_PATH = path.join(ROOT, 'polymythseminars', 'browse.json');
+const SURFACES_PATH = path.join(ROOT, 'data', 'polymythcal-publication-surfaces.json');
 const FEATURED_PATH = path.join(ROOT, 'polymythseminars', 'featured.json');
 const PUBLIC_FEATURED_PATH = path.join(ROOT, 'public', 'polymythseminars', 'featured.json');
 const ABOUT_PATH = path.join(ROOT, 'about', 'index.html');
@@ -33,9 +35,13 @@ function torontoDay(value) {
 
 const failures = [];
 let eventsDoc;
+let browse;
+let surfaces;
 let featured;
 try {
   eventsDoc = readJson(EVENT_PATH);
+  browse = readJson(BROWSE_PATH);
+  surfaces = readJson(SURFACES_PATH);
   featured = readJson(FEATURED_PATH);
 } catch (error) {
   console.error(`POLYMYTHCAL FEATURED FEED CHECK FAILED\n - ${error.message}`);
@@ -48,7 +54,38 @@ const codepointCompare = (a, b) => {
   const right = String(b || '');
   return left < right ? -1 : left > right ? 1 : 0;
 };
-const expected = [...(eventsDoc.events || [])]
+const canonicalEvents = Array.isArray(eventsDoc.events) ? eventsDoc.events : [];
+const canonicalIds = canonicalEvents.map(event => String(event.id || ''));
+const chronologyIds = Array.isArray(surfaces.chronology_ids) ? surfaces.chronology_ids.map(String) : [];
+const watchlistIds = Array.isArray(surfaces.watchlist_ids) ? surfaces.watchlist_ids.map(String) : [];
+const browseIds = Array.isArray(browse.events) ? browse.events.map(event => String(event.id || '')) : [];
+const chronologyIdSet = new Set(chronologyIds);
+const watchlistIdSet = new Set(watchlistIds);
+
+if (surfaces._schema !== 'polymythcal-publication-surfaces-v2') {
+  failures.push('publication surfaces do not use the current chronology/watchlist contract');
+}
+if (browse._schema !== 'polymythcal-discovery-v2') {
+  failures.push('browse.json is not the current chronology projection');
+}
+if (chronologyIdSet.size !== chronologyIds.length || watchlistIdSet.size !== watchlistIds.length) {
+  failures.push('publication surfaces contain duplicate IDs');
+}
+if (chronologyIds.some(id => watchlistIdSet.has(id))) {
+  failures.push('chronology and watchlist publication surfaces overlap');
+}
+if (
+  canonicalIds.length !== chronologyIds.length + watchlistIds.length
+  || canonicalIds.some(id => !chronologyIdSet.has(id) && !watchlistIdSet.has(id))
+) {
+  failures.push('chronology and watchlist do not form the complete canonical partition');
+}
+if (JSON.stringify(browseIds) !== JSON.stringify(chronologyIds)) {
+  failures.push('browse chronology IDs differ from the publication surface contract');
+}
+
+const expected = canonicalEvents
+  .filter(event => chronologyIdSet.has(String(event.id || '')))
   .sort((a, b) => codepointCompare(a.date, b.date) || codepointCompare(a.title, b.title))
   .filter(event => /^\d{4}-\d{2}-\d{2}/.test(String(event.date || '')) && String(event.date).slice(0, 10) >= buildDay)
   .slice(0, 64)
@@ -58,7 +95,10 @@ if (featured.count !== expected.length || !Array.isArray(featured.events) || fea
   failures.push(`declared/actual count does not match expected ${expected.length}`);
 }
 if (JSON.stringify(featured.events || []) !== JSON.stringify(expected)) {
-  failures.push('featured events are not the exact next canonical subset');
+  failures.push('featured events are not the exact next chronology subset');
+}
+if ((featured.events || []).some(event => watchlistIdSet.has(String(event.id || '')))) {
+  failures.push('featured feed contains a watchlist monitoring marker');
 }
 const featuredMoment = new Date(featured.generated_at);
 const featuredHour = Number.isNaN(featuredMoment.getTime())
@@ -100,4 +140,4 @@ if (failures.length) {
   failures.forEach(failure => console.error(` - ${failure}`));
   process.exit(1);
 }
-console.log(`POLYMYTHCAL FEATURED FEED CHECK PASSED — ${expected.length} canonical upcoming records from ${buildDay}, build-date-aligned and public-identical.`);
+console.log(`POLYMYTHCAL FEATURED FEED CHECK PASSED — ${expected.length} chronology-only upcoming records from ${buildDay}, build-date-aligned, watchlist-free, and public-identical.`);

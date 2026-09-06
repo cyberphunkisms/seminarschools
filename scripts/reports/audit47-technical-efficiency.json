@@ -11,18 +11,18 @@
     "generated_english_alias_routes": 2144,
     "french_alias_routes": 28,
     "methodology_archive_sections": 16,
-    "methodology_archive_rows": 1189,
+    "methodology_archive_rows": 1224,
     "localized_leizu_secondary_routes": 36,
     "predeploy_npm_dependency_installs": 1,
-    "source_html_files": 7212,
-    "public_html_files": 7564
+    "source_html_files": 7216,
+    "public_html_files": 7568
   },
   "fixes": [
     "deduplicated-calendar-identity-continuity",
     "canonical-legacy-ics-parity",
     "bounded-dst-safe-recurrence",
     "declared-language-and-bounded-topic-classification",
-    "http-and-cache-storage-reuse",
+    "http-cache-reuse-on-current-discovery-runtime",
     "methodology-and-campaigncodex-search-efficiency",
     "localized-main-landmark-repair",
     "dependency-install-and-public-walk-efficiency",

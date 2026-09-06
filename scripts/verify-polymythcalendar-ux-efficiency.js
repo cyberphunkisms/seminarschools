@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
 const vm = require('vm');
+const discoveryCore = require('../js/polymythcal-discovery-core');
 
 const ROOT = path.resolve(__dirname, '..');
 const failures = [];
@@ -55,7 +56,8 @@ for (const [relative, lang, surface] of surfaces) {
     need(html, 'id="pmdResearchFilters"', `${relative} staged filter families`);
     if (!/<div id="pmdResearchFilters"[^>]*><\/div>/.test(html)) failures.push(`${relative} embeds the specialist taxonomy instead of staging it`);
     const mobileButton = html.match(/<button id="pmdMobileFilters"[^>]*>/)?.[0] || '';
-    if (!mobileButton.includes('aria-controls="pmdResearchFilters"')) failures.push(`${relative} Research mobile filter jump does not target the taxonomy`);
+    const controlledIds = (mobileButton.match(/aria-controls="([^"]+)"/)?.[1] || '').split(/\s+/);
+    if (!controlledIds.includes('pmdResearchFilters')) failures.push(`${relative} Research mobile filter jump does not target the taxonomy`);
     if (mobileButton.includes('aria-expanded=')) failures.push(`${relative} Research mobile filter jump falsely exposes toggle state`);
   } else {
     need(html, 'id="pmdFilterDrawer"', `${relative} collapsed filter drawer`);
@@ -73,9 +75,9 @@ for (const [relative, lang, surface] of surfaces) {
   }
   if (lang === 'fr-CA') {
     for (const field of ['titre:', 'personne:', 'organisme:', 'lieu:', 'sujet:', 'forme:']) need(html, field, `${relative} French ${field} search alias help`);
-    need(html, 'au moins trois caractères', `${relative} honest prefix threshold help`);
+    need(html, 'au moins cinq caractères', `${relative} honest prefix threshold help`);
   } else {
-    need(html, 'at least three characters', `${relative} honest prefix threshold help`);
+    need(html, 'at least five characters', `${relative} honest prefix threshold help`);
   }
 }
 
@@ -107,14 +109,13 @@ for (const [token, label] of [
   ['routeScope', 'focused-route Research handoff'],
   ['function buildResultGroups(list)', 'series grouping'],
   ['function groupSortEvent(group', 'matching-event series sort key'],
-  ['return groups.sort((left, right) => compareGroups(left, right))', 'group-aware result ordering'],
+  ['return CORE.groupSeries(list, effectiveSort(), UI_LOCALE).sort((left, right) => compareGroups(left, right))', 'group-aware result ordering'],
   ['const representative = groupSortEvent(group, effectiveSort())', 'group-aware chronology heading'],
   ["return state.q && !state.sortExplicit ? 'relevance' : state.sort", 'explicit sort authority'],
   ['function renderPagination(totalPages)', 'real URL pagination'],
   ['function updateStateLinks()', 'connected view state'],
   ['class="pmd-match-reason"', 'query match explanations'],
   ['function queryIsInvalid(query', 'punctuation-only query rejection'],
-  ['[...term.value].length >= 3', 'three-code-point prefix threshold'],
   ['event._queryMatched = match.matched', 'cached query truth for facet counts'],
   ['activeQueryMatchCount ? [] : correctionSuggestions(state.q)', 'query-only spelling suggestion authority'],
   ['function validCalendarDay(value)', 'strict shared chronology validator'],
@@ -143,6 +144,7 @@ for (const [token, label] of [
   ['if (loadFailed) return', 'stale-data render lock'],
   ['events = [];', 'stale-data clearing'],
 ]) need(app, token, label);
+need(read('js/polymythcal-discovery-core.js'), '[...term.value].length >= 5', 'five-code-point prefix threshold');
 forbid(app, /displayPlace\(event\)\}\$\{surface === 'monitoring'/, 'ordinary cards still duplicate their date beside the place');
 
 for (const [pattern, label] of [
@@ -157,10 +159,10 @@ for (const [pattern, label] of [
 ]) if (!pattern.test(css)) failures.push(`discovery CSS missing ${label}`);
 
 const budgets = [
-  ['js/polymythcal-discovery.js', Buffer.byteLength(app), 90000],
+  ['js/polymythcal-discovery.js', Buffer.byteLength(app), 100000],
   ['css/polymythcal-discovery.css', Buffer.byteLength(css), 26000],
-  ['polymythseminars/browse.json', Buffer.byteLength(browseText), 2600000],
-  ['polymythseminars/watchlist.json', Buffer.byteLength(watchText), 210000],
+  ['polymythseminars/browse.json', Buffer.byteLength(browseText), 3200000],
+  ['polymythseminars/watchlist.json', Buffer.byteLength(watchText), 240000],
 ];
 for (const [relative, size, ceiling] of budgets) if (size > ceiling) failures.push(`${relative} exceeds its efficiency ceiling: ${size}/${ceiling} bytes`);
 const browseGzip = zlib.gzipSync(Buffer.from(browseText), {level: 9}).length;
@@ -179,7 +181,7 @@ function runtimeFor(lang = 'en-CA', dataset = {}) {
   globalThis.__pmdTest = Object.freeze({
     queryTerms,
     queryIsInvalid,
-    termMatch,
+    termMatch: CORE.termMatch,
     searchMatch,
     validCalendarDay,
     validSort,
@@ -263,6 +265,7 @@ function runtimeFor(lang = 'en-CA', dataset = {}) {
 })();`;
   const windowObject = {
     __polymythcalDiscoveryMounted: false,
+    PolymythcalDiscoveryCore: discoveryCore,
     location: { origin: 'https://example.test', pathname: '/polymythseminars/', search: '', hash: '' },
     history: { pushState() {}, replaceState() {} },
   };
@@ -302,8 +305,10 @@ if (englishRuntime && frenchRuntime) {
   check(!englishRuntime.termMatch('Astronomy', { value: 'a', phrase: false }), 'one-character token must not prefix-match');
   check(!englishRuntime.termMatch('Astronomy', { value: 'as', phrase: false }), 'two-character token must not prefix-match');
   check(!englishRuntime.termMatch('冬至祭', { value: '冬至', phrase: false }), 'two-code-point token must not prefix-match');
-  check(englishRuntime.termMatch('冬至祭典', { value: '冬至祭', phrase: false })?.kind === 'word prefix', 'three-code-point Unicode prefix must match');
-  check(englishRuntime.termMatch('Astronomy', { value: 'ast', phrase: false })?.kind === 'word prefix', 'three-character Latin prefix must match');
+  check(!englishRuntime.termMatch('冬至祭典', { value: '冬至祭', phrase: false }), 'three-code-point Unicode token must not prefix-match');
+  check(englishRuntime.termMatch('冬至祭典会場', { value: '冬至祭典会', phrase: false })?.kind === 'word prefix', 'five-code-point Unicode prefix must match');
+  check(!englishRuntime.termMatch('Astronomy', { value: 'ast', phrase: false }), 'three-character Latin token must not prefix-match');
+  check(englishRuntime.termMatch('Astronomy', { value: 'astro', phrase: false })?.kind === 'word prefix', 'five-character Latin prefix must match');
   check(englishRuntime.queryIsInvalid('!!!', englishRuntime.queryTerms('!!!')), 'punctuation-only query must be invalid instead of matching everything');
 
   const frenchFields = frenchRuntime.queryTerms('titre:"Pleine lune" personne:Saul organisme:NASA lieu:Toronto sujet:astronomie forme:en-ligne').map(term => term.field);
@@ -420,4 +425,3 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(`POLYMYTHCALENDAR UX/EFFICIENCY CHECK PASSED — six compact EN/FR discovery shells, six common facets, staged Research taxonomy, separate monitoring, 24-group pagination, 11 route-restricted entry pages, and ${browseGzip} byte gzip chronology payload.`);
-

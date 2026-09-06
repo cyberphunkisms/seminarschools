@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 const { ROUTES } = require('./polymythcal-route-shell');
+const discoveryCore = require('../js/polymythcal-discovery-core');
 
 const ROOT = path.resolve(__dirname, '..');
 const failures = [];
@@ -30,6 +31,7 @@ function runtimeFor(lang = 'en-CA') {
 })();`;
   const windowObject = {
     __polymythcalDiscoveryMounted: false,
+    PolymythcalDiscoveryCore: discoveryCore,
     location: { origin: 'https://example.test', pathname: '/polymythseminars/', search: '', hash: '' },
     history: { pushState() {}, replaceState() {} },
   };
@@ -105,15 +107,21 @@ if (englishRuntime && frenchRuntime) {
   );
   const englishGuidance = englishRuntime.guidance('astro');
   const frenchGuidance = frenchRuntime.guidance('astro');
-  check(/exact words/i.test(englishGuidance.search) && /phrases/i.test(englishGuidance.search) && /at least three characters/i.test(englishGuidance.search), 'English live search status does not explain the actual matching rules');
+  check(/exact words/i.test(englishGuidance.search) && /phrases/i.test(englishGuidance.search) && /at least five characters/i.test(englishGuidance.search), 'English live search status does not explain the actual matching rules');
   check(/never change or add results/i.test(englishGuidance.suggestions) && /choose/i.test(englishGuidance.suggestions), 'English suggestion guidance does not disclose click-to-apply behavior');
-  check(/mots exacts/i.test(frenchGuidance.search) && /expressions/i.test(frenchGuidance.search) && /au moins trois caractères/i.test(frenchGuidance.search), 'French live search status does not explain the actual matching rules');
+  check(/mots exacts/i.test(frenchGuidance.search) && /expressions/i.test(frenchGuidance.search) && /au moins cinq caractères/i.test(frenchGuidance.search), 'French live search status does not explain the actual matching rules');
   check(/ne changent ni n’ajoutent de résultats/i.test(frenchGuidance.suggestions), 'French suggestion guidance does not disclose click-to-apply behavior');
   check(englishRuntime.detail('a/b') === '/polymythseminars/events/a%2Fb/', 'English detail links do not safely encode listing IDs');
   check(frenchRuntime.detail('a/b') === '/polymythseminars/fr/events/a%2Fb/', 'French detail links do not use the localized route');
-  const safeActions = englishRuntime.actions({ id: 'astronomy-night', title: 'Astronomy Night', destination_url: 'https://example.test/official' });
+  const safeActions = englishRuntime.actions({ id: 'astronomy-night', title: 'Astronomy Night', actions: [
+    { kind: 'details', url: '/polymythseminars/events/astronomy-night/', scope: 'listing' },
+    { kind: 'detail', url: 'https://example.test/official', scope: 'event' },
+  ] });
   check(safeActions.includes('https://example.test/official') && safeActions.includes('/polymythseminars/events/astronomy-night/'), 'Result actions do not expose verified and local detail paths');
-  const unsafeActions = runtimeFor('en-CA')?.actions({ id: 'unsafe', title: 'Unsafe', destination_url: 'javascript:alert(1)', source_url: 'data:text/plain,test' }) || '';
+  const unsafeActions = runtimeFor('en-CA')?.actions({ id: 'unsafe', title: 'Unsafe', actions: [
+    { kind: 'detail', url: 'javascript:alert(1)', scope: 'event' },
+    { kind: 'source', url: 'data:text/plain,test', scope: 'event' },
+  ] }) || '';
   check(!unsafeActions.includes('javascript:') && !unsafeActions.includes('data:text'), 'Unsafe result-action URL schemes are not suppressed');
   check(new URL(englishRuntime.researchUrl(), 'https://example.test').pathname === '/polymythseminars/research/', 'Research handoff does not target the connected specialist view');
 }
@@ -177,4 +185,3 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(`POLYMYTHCALENDAR DISCOVERY GUIDANCE CHECK PASSED — ${pages.length} EN/FR entry routes expose one labelled search path, concise exact-match guidance, accessible status/results regions, and focused-calendar escape/Research paths.`);
-

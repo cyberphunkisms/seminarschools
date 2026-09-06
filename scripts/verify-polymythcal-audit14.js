@@ -245,18 +245,19 @@ for (const feed of feeds) {
 }
 add('Dedicated English and French subscription indexes exactly expose the governed feed labels', subscriptionFailures.length === 0, {feeds: feeds.length, routes: 2, failures: subscriptionFailures});
 
-// The canonical event manifest owns the alias contract. The shared contract
-// mirrors the two generators exactly: English receives deterministic hashed
-// aliases plus explicit legacy IDs, while French and ICS receive only the
-// explicit legacy IDs declared by each canonical event.
-const aliasContract = expectedPolymythcalEventRoutes(events);
-const canonicalIds = aliasContract.canonicalIds;
-const expectedAliases = aliasContract.englishAliases;
-const explicitAliases = aliasContract.frenchAliases;
+// The full canonical manifest owns permanent HTML details and aliases. Only
+// the chronology partition owns per-event ICS files and feed/sitemap exposure.
+const htmlRouteContract = expectedPolymythcalEventRoutes(canonicalEvents);
+const chronologyIcsContract = expectedPolymythcalEventRoutes(events);
+const canonicalIds = htmlRouteContract.canonicalIds;
+const expectedAliases = htmlRouteContract.englishAliases;
+const explicitAliases = htmlRouteContract.frenchAliases;
+const chronologyCanonicalIds = chronologyIcsContract.canonicalIds;
+const chronologyExplicitAliases = chronologyIcsContract.frenchAliases;
 const aliasConflicts = [];
-if (aliasContract.explicitLegacyEntries !== explicitAliases.size) {
+if (htmlRouteContract.explicitLegacyEntries !== explicitAliases.size) {
   aliasConflicts.push(
-    `canonical manifest declares ${aliasContract.explicitLegacyEntries} explicit legacy entries but only ${explicitAliases.size} unique route IDs`,
+    `canonical manifest declares ${htmlRouteContract.explicitLegacyEntries} explicit legacy entries but only ${explicitAliases.size} unique route IDs`,
   );
 }
 
@@ -268,12 +269,12 @@ function exactSetContract(actual, expected) {
 
 const englishRoutes = inspectEventRouteDirectory(ROOT, 'polymythseminars/events');
 const publicEnglishRoutes = inspectEventRouteDirectory(ROOT, 'public/polymythseminars/events');
-const englishRouteSet = exactSetContract(englishRoutes.routeIds, aliasContract.englishRouteIds);
-const publicEnglishRouteSet = exactSetContract(publicEnglishRoutes.routeIds, aliasContract.englishRouteIds);
+const englishRouteSet = exactSetContract(englishRoutes.routeIds, htmlRouteContract.englishRouteIds);
+const publicEnglishRouteSet = exactSetContract(publicEnglishRoutes.routeIds, htmlRouteContract.englishRouteIds);
 const frenchRoutes = inspectEventRouteDirectory(ROOT, 'polymythseminars/fr/events');
 const publicFrenchRoutes = inspectEventRouteDirectory(ROOT, 'public/polymythseminars/fr/events');
-const frenchRouteSet = exactSetContract(frenchRoutes.routeIds, aliasContract.frenchRouteIds);
-const publicFrenchRouteSet = exactSetContract(publicFrenchRoutes.routeIds, aliasContract.frenchRouteIds);
+const frenchRouteSet = exactSetContract(frenchRoutes.routeIds, htmlRouteContract.frenchRouteIds);
+const publicFrenchRouteSet = exactSetContract(publicFrenchRoutes.routeIds, htmlRouteContract.frenchRouteIds);
 
 let canonicalPages = 0;
 let aliasPages = 0;
@@ -286,7 +287,7 @@ for (const d of englishRoutes.routeIds) {
 }
 const icsFiles = fs.readdirSync(path.join(ROOT, 'polymythseminars/ics')).filter(f => f.endsWith('.ics')).sort();
 const icsCount = icsFiles.length;
-const expectedIcsFiles = [...canonicalIds, ...explicitAliases.keys()].map(id => `${id}.ics`).sort();
+const expectedIcsFiles = [...chronologyCanonicalIds, ...chronologyExplicitAliases.keys()].map(id => `${id}.ics`).sort();
 const expectedIcsIds = new Set(expectedIcsFiles.map(file => file.slice(0, -4)));
 const icsIds = new Set(icsFiles.map(file => file.slice(0, -4)));
 const icsSet = exactSetContract(icsIds, expectedIcsIds);
@@ -301,21 +302,30 @@ const publicIcsMismatches = expectedIcsFiles.filter(file => {
     || !fs.readFileSync(source).equals(fs.readFileSync(published));
 });
 const monitoringAliasContract = expectedPolymythcalEventRoutes(monitoringEvents);
-const monitoringRouteLeakages = [];
-for (const routeId of monitoringAliasContract.englishRouteIds) {
-  for (const relative of [
-    `polymythseminars/events/${routeId}/index.html`,
-    `public/polymythseminars/events/${routeId}/index.html`,
-  ]) {
-    if (exists(relative)) monitoringRouteLeakages.push(relative);
-  }
-}
-for (const routeId of monitoringAliasContract.frenchRouteIds) {
-  for (const relative of [
-    `polymythseminars/fr/events/${routeId}/index.html`,
-    `public/polymythseminars/fr/events/${routeId}/index.html`,
-  ]) {
-    if (exists(relative)) monitoringRouteLeakages.push(relative);
+const monitoringSurfaceFailures = [];
+for (const event of monitoringEvents) {
+  const eventId = String(event.id || event.identity_key);
+  for (const localePath of ['events', 'fr/events']) {
+    const relative = `polymythseminars/${localePath}/${eventId}/index.html`;
+    const publicRelative = `public/${relative}`;
+    if (!exists(relative)) {
+      monitoringSurfaceFailures.push(`${relative}: missing stable watchlist detail`);
+      continue;
+    }
+    const html = read(relative);
+    if (metaContent(html, 'robots') !== 'noindex,follow') {
+      monitoringSurfaceFailures.push(`${relative}: watchlist detail is indexable`);
+    }
+    if (/<time\b[^>]*\bdatetime\s*=/i.test(html)) {
+      monitoringSurfaceFailures.push(`${relative}: watchlist detail exposes a date`);
+    }
+    if (/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?["']@type["']\s*:\s*["']Event["']/i.test(html)) {
+      monitoringSurfaceFailures.push(`${relative}: watchlist detail exposes Event JSON-LD`);
+    }
+    if (!exists(publicRelative)
+        || !fs.readFileSync(path.join(ROOT, relative)).equals(fs.readFileSync(path.join(ROOT, publicRelative)))) {
+      monitoringSurfaceFailures.push(`${publicRelative}: missing or differs from source watchlist detail`);
+    }
   }
 }
 for (const routeId of new Set([
@@ -326,25 +336,25 @@ for (const routeId of new Set([
     `polymythseminars/ics/${routeId}.ics`,
     `public/polymythseminars/ics/${routeId}.ics`,
   ]) {
-    if (exists(relative)) monitoringRouteLeakages.push(relative);
+    if (exists(relative)) monitoringSurfaceFailures.push(relative);
   }
 }
 const sitemap = read('sitemap.xml');
 for (const routeId of monitoringAliasContract.englishRouteIds) {
   const route = `${SITE}/polymythseminars/events/${encodeURIComponent(routeId)}/`;
-  if (sitemap.includes(`<loc>${route}</loc>`)) monitoringRouteLeakages.push(`sitemap: ${route}`);
+  if (sitemap.includes(`<loc>${route}</loc>`)) monitoringSurfaceFailures.push(`sitemap: ${route}`);
 }
 for (const routeId of monitoringAliasContract.frenchRouteIds) {
   const route = `${SITE}/polymythseminars/fr/events/${encodeURIComponent(routeId)}/`;
-  if (sitemap.includes(`<loc>${route}</loc>`)) monitoringRouteLeakages.push(`sitemap: ${route}`);
+  if (sitemap.includes(`<loc>${route}</loc>`)) monitoringSurfaceFailures.push(`sitemap: ${route}`);
 }
 add(
-  'Monitoring-marker records have no chronology routes, aliases, ICS files, or sitemap entries',
-  monitoringRouteLeakages.length === 0,
-  {records: monitoringEvents.length, leakages: monitoringRouteLeakages.slice(0, 30)},
+  'Monitoring-marker records retain stable noindex undated details while remaining absent from ICS and sitemap',
+  monitoringSurfaceFailures.length === 0,
+  {records: monitoringEvents.length, failures: monitoringSurfaceFailures.slice(0, 30)},
 );
 const legacyIcsMismatches = [];
-for (const [alias, target] of explicitAliases) {
+for (const [alias, target] of chronologyExplicitAliases) {
   const aliasFile = path.join(ROOT, 'polymythseminars', 'ics', `${alias}.ics`);
   const targetFile = path.join(ROOT, 'polymythseminars', 'ics', `${target}.ics`);
   if (!fs.existsSync(aliasFile) || !fs.existsSync(targetFile) || !fs.readFileSync(aliasFile).equals(fs.readFileSync(targetFile))) {
@@ -369,9 +379,10 @@ for (const [alias, target] of expectedAliases) {
   if (!exists(publicRel) || !fs.readFileSync(path.join(ROOT, rel)).equals(fs.readFileSync(path.join(ROOT, publicRel)))) missingOrWrongAliases.push(`${alias}: public mismatch`);
 }
 add(
-  'Chronology manifest exactly owns stable English event routes, redirects, and legacy ICS aliases',
-  events.length === CURRENT_EVENT_COUNT
-    && canonicalPages === CURRENT_EVENT_COUNT
+  'Canonical manifest owns stable HTML details and aliases while chronology alone owns ICS',
+  canonicalEvents.length === CURRENT_CANONICAL_COUNT
+    && events.length === CURRENT_EVENT_COUNT
+    && canonicalPages === CURRENT_CANONICAL_COUNT
     && aliasPages === expectedAliases.size
     && englishRouteSet.exact
     && publicEnglishRouteSet.exact
@@ -389,7 +400,8 @@ add(
     expectedAliases: expectedAliases.size,
     explicitLegacyAliases: explicitAliases.size,
     icsCount,
-    events: events.length,
+    canonicalEvents: canonicalEvents.length,
+    chronologyEvents: events.length,
     exactIcsSet,
     englishRouteSet,
     publicEnglishRouteSet,
@@ -411,7 +423,7 @@ const localizedRouteFailures = [];
 if (!fs.readFileSync(path.join(ROOT, 'polymythseminars/events.json')).equals(fs.readFileSync(path.join(ROOT, 'data/polymyth-seminar-events.json')))) {
   localizedRouteFailures.push('canonical event data copies differ');
 }
-for (const event of events) {
+for (const event of canonicalEvents) {
   const eventId = String(event.id || event.identity_key);
   const encodedId = encodeURIComponent(eventId);
   const title = pythonHtmlEscape(String(event.title || 'Untitled listing').trim().replace(/\s+/g, ' '));
@@ -420,7 +432,11 @@ for (const event of events) {
     localizedRouteFailures.push(`${eventId}: source_languages is not an array`);
     continue;
   }
-  const sourcePartLanguage = sourceLanguages.length === 1 ? sourceLanguages[0] : 'und';
+  // A source with several declared languages has a real multilingual
+  // boundary; `und` is reserved for genuinely undetermined source text.
+  const sourcePartLanguage = sourceLanguages.length === 1
+    ? sourceLanguages[0]
+    : sourceLanguages.length > 1 ? 'mul' : 'und';
   if (event.source_language === 'und' && event.source_language_review !== 'required') {
     localizedRouteFailures.push(`${eventId}: unknown source language lost its review requirement`);
   }
@@ -481,16 +497,16 @@ const exactFrenchRouteTree = frenchRouteSet.exact
 const governanceCounts = translationGovernance.counts || {};
 add(
   'Audit 45 English/French event routes preserve organizer text and source-language boundaries',
-  events.length === CURRENT_EVENT_COUNT
+  canonicalEvents.length === CURRENT_CANONICAL_COUNT
     && translationGovernance.english_source_of_truth === true
     && translationGovernance.organizer_text_policy === 'preserve verbatim; mark source language; never silently translate'
     && governanceCounts.polymythcal_interface_locales === 2
-    && governanceCounts.polymythcal_event_routes_per_locale === CURRENT_EVENT_COUNT
+    && governanceCounts.polymythcal_event_routes_per_locale === CURRENT_CANONICAL_COUNT
     && governanceCounts.polymythcal_french_legacy_alias_routes === explicitAliases.size
     && exactFrenchRouteTree
     && localizedRouteFailures.length === 0,
   {
-    events: events.length,
+    events: canonicalEvents.length,
     interfaceLocales: governanceCounts.polymythcal_interface_locales,
     eventRoutesPerLocale: governanceCounts.polymythcal_event_routes_per_locale,
     frenchLegacyAliases: governanceCounts.polymythcal_french_legacy_alias_routes,
@@ -583,4 +599,3 @@ if (failed.length) {
   for (const c of failed) console.error(`FAIL: ${c.name} ${JSON.stringify(c.details)}`);
   process.exit(1);
 }
-

@@ -18,6 +18,10 @@
       "passed": true
     },
     {
+      "name": "test_discovery_partition_and_monitoring_quarantine_are_exact",
+      "passed": true
+    },
+    {
       "name": "test_every_file_has_strict_rfc5545_transport_framing",
       "passed": true
     },
@@ -43,14 +47,24 @@
     }
   ],
   "metrics": {
-    "tests_passed": 9,
-    "tests_run": 9,
+    "tests_passed": 10,
+    "tests_run": 10,
     "canonical_events": 2088,
+    "chronology_events": 1954,
+    "quarantined_monitoring_records": 134,
+    "browse_records": 1954,
+    "watchlist_records": 134,
+    "monitoring_ics_leaks": 0,
+    "monitoring_detail_or_alias_routes_expected": 804,
+    "monitoring_detail_or_alias_routes_missing": 0,
+    "monitoring_detail_public_mismatches": 0,
+    "monitoring_unsafe_canonical_details": 0,
+    "monitoring_feed_uid_leaks": 0,
     "explicit_legacy_ics_aliases": 28,
-    "single_event_ics_files": 2116,
+    "single_event_ics_files": 1982,
     "focused_and_historical_feed_ics_files": 12,
-    "total_ics_files": 2128,
-    "independently_parsed_vevent_components": 10410,
+    "total_ics_files": 1994,
+    "independently_parsed_vevent_components": 9586,
     "maximum_physical_line_octets": 75,
     "independent_parser": "icalendar 7.2.0"
   },

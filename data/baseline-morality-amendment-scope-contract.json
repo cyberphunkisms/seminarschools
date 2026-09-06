@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "contract_id": "baseline-morality-amendment-scope-2026-08-31",
+  "status": "active_fail_closed",
+  "canonical_source": "polymyth/methodologylist/index.html",
+  "canonical_parser": "scripts/lib/parse-seed-with-addenda.js#parseSeedWithAddenda",
+  "scope": {
+    "expected_inherited_record_count": 11,
+    "match_terms": [
+      "Baseline Morality",
+      "Baselinemorality"
+    ],
+    "record_id_rule": "Use the canonical id when present. Otherwise use legacy:<section>:<first 24 hex characters of SHA-256(section + NUL + title)>.",
+    "default_amendment_policy": "deny_add_change_delete"
+  },
+  "authorization_policy": {
+    "allowed_actions": [
+      "add",
+      "change",
+      "delete"
+    ],
+    "required_source_type": "direct_user_message",
+    "required_bindings": [
+      "caller-supplied SHA-256 of the complete authorization envelope",
+      "SHA-256 of the verbatim user directive",
+      "literal action name in the verbatim user directive",
+      "record id and exact before/after semantic hashes in each mutation binding"
+    ],
+    "authorization_absence": "Every detected add, change, or delete fails closed. General project, build, audit, recovery, or packaging authorization is insufficient."
+  },
+  "recovery_source": {
+    "path": "UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_RECOVERY_2026-08-30.md",
+    "sha256": "663970ac0b0a08ae775039e9e6bfa9cbdfa18905cd72c9098d4f35a38b64e1a2",
+    "baseline_morality_authority": "exclusion_and_provenance_only",
+    "required_exclusion_paragraph": "Substantive Baseline Morality content is withdrawn from this correction. The prior retrieval failure may remain only as a form and activation regression case. No substantive Baseline Morality claim is introduced by this source.",
+    "required_provenance_heading": "## Screenshot provenance"
+  },
+  "frozen_records": [
+    {
+      "record_id": "legacy:degorgonification:f0d7bcae28a3156ebfcb7f51",
+      "canonical_id": null,
+      "section": "degorgonification",
+      "title": "Mephistodata pedagogy (Rainbowsol-study deployment)",
+      "body_sha256": "d828445230d9a173d2932968a08ce8f1d57cb7568ef2f3a105b5d5f1aaf43626"
+    },
+    {
+      "record_id": "legacy:gorgonification:7709a599fd6ff1a340bdc4b5",
+      "canonical_id": null,
+      "section": "gorgonification",
+      "title": "Neoliberal commodified ethics baselines",
+      "body_sha256": "7ac4f857f7c1bb6d185897a275cee579f0b678cfae712522ff771622249ff771"
+    },
+    {
+      "record_id": "legacy:sabachtan:574cf8060b5e51c28b897902",
+      "canonical_id": null,
+      "section": "sabachtan",
+      "title": "Baselinemorality",
+      "body_sha256": "6aaee5341bae55af3d601a21446aae7dd08dd9eda754f61bcdff3b90bbca6737"
+    },
+    {
+      "record_id": "legacy:idiomary:931d5cea9ce74aa75210f26f",
+      "canonical_id": null,
+      "section": "idiomary",
+      "title": "Archetypes subsection — Medusa-imagery and parseltongue framing",
+      "body_sha256": "21c9bf081fca9c8bda160988800b4871dfcee1dcf09466b16465ff98cf16d470"
+    },
+    {
+      "record_id": "legacy:studylist:fb542cc219bf084ec30ba993",
+      "canonical_id": null,
+      "section": "studylist",
+      "title": "Pentagram book 4 of 5 — WORKING TITLE: GORGONWARS: ARENDTIANFEMINISM, HEGELIANEGIRLS & FAUSTIANECHICKS ASSEMBLING THE HEGELIANEKITTY ASSEMBLAGE AGAINST THE GORGON HORDE",
+      "body_sha256": "f3349b4caaf20a4eca99a8655e8e3a9a750f2e7d76effab4f2a0fdc1b6aff589"
+    },
+    {
+      "record_id": "coreplus-legacy-slot-17",
+      "canonical_id": "coreplus-legacy-slot-17",
+      "section": "coreplus",
+      "title": "CORE slot 17 mirror — SELF-NAMING EXCEPTION to PSYCHOLOGISM AUDIT",
+      "body_sha256": "613282a47a7173d125858e2de23586d80403baccf40593963fc420916a8dfbbc"
+    },
+    {
+      "record_id": "legacy:pending:9c8c4b2eb0a756b5f34307f8",
+      "canonical_id": null,
+      "section": "pending",
+      "title": "the author — pending action list",
+      "body_sha256": "27476967e6660fcb45a67243cc55944d044825d90c500a09fdd79af18fa9c3b0"
+    },
+    {
+      "record_id": "legacy:idiomary:1bc3c1ce46c9a293eada9fa1",
+      "canonical_id": null,
+      "section": "idiomary",
+      "title": "Transactional solidarity",
+      "body_sha256": "893714db179164cef11d7be8850dd9ad680cdb222814a1a8d1f6e27af11d02fe"
+    },
+    {
+      "record_id": "legacy:gorgonification:178ede7c29113e9010e95b8c",
+      "canonical_id": null,
+      "section": "gorgonification",
+      "title": "Commodifiedempathy (market logic applied to care)",
+      "body_sha256": "abd29c2fa14b8f6ac95c9853f10e67c631cda2a06c84d80b65903ad97fa05436"
+    },
+    {
+      "record_id": "rhetoric-taxonomy-baselinemorality-four-stage-chain-2026-07-29",
+      "canonical_id": "rhetoric-taxonomy-baselinemorality-four-stage-chain-2026-07-29",
+      "section": "gorgonification",
+      "title": "Baselinemorality, the four-stage chain from commodification to enforcement",
+      "body_sha256": "3472a10b4b6ab759bfe02f50cc39bd1736ad9c090559c665f862fbbaf51366ed"
+    },
+    {
+      "record_id": "rhetoric-taxonomy-operator-candidate-ledger-2026-07-29",
+      "canonical_id": "rhetoric-taxonomy-operator-candidate-ledger-2026-07-29",
+      "section": "pending",
+      "title": "Rhetorical operator and axis candidate ledger after Siren, Jester, Troll, Sophist, and Gorgon",
+      "body_sha256": "ae9116b830eb296441a6d41d36da537a3d5323f21edd62e6b360ab7581426df9"
+    }
+  ]
+}

@@ -4,16 +4,67 @@
 const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
+const { isGeneratedDependencyDirectory } = require('./repository-walk-policy');
+const {
+  assertGeometryVersionScheme,
+  geometryExemptionForRelativeHtmlPath,
+} = require('./lib/geometry-asset-version');
 const root = path.resolve(__dirname, '..');
 const home = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const footer = fs.readFileSync(path.join(root, 'js', 'footer.js'), 'utf8');
 const indra = fs.readFileSync(path.join(root, 'js', 'indra.js'), 'utf8');
+const geometryContracts = JSON.parse(fs.readFileSync(path.join(root, 'data', 'geometry-route-contracts.json'), 'utf8'));
+assertGeometryVersionScheme(geometryContracts);
 const failures = [];
 
 function check(ok, label) {
   process.stdout.write((ok ? 'PASS  ' : 'FAIL  ') + label + '\n');
   if (!ok) failures.push(label);
 }
+
+function walkHtml(dir, out = []) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name === 'public' || entry.name === 'fixtures' || entry.name.startsWith('.')
+        || isGeneratedDependencyDirectory(entry.name)) continue;
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) walkHtml(full, out);
+    else if (entry.isFile() && entry.name.endsWith('.html')) out.push(full);
+  }
+  return out;
+}
+
+const escapeAsset = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const hasAssetTag = (html, asset) => new RegExp(`<[^>]+${escapeAsset(asset)}(?:\\?[^"']*)?["'][^>]*>`, 'i').test(html);
+const geometryScopeDefects = [];
+const geometryScopeStats = { included: 0, star: 0, control: 0 };
+for (const file of walkHtml(root)) {
+  const relative = path.relative(root, file).replace(/\\/g, '/');
+  if (relative === geometryContracts.coverage.non_page_exception) continue;
+  const html = fs.readFileSync(file, 'utf8');
+  const body = (html.match(/<body\b[^>]*>/i) || [''])[0];
+  const exemption = geometryExemptionForRelativeHtmlPath(geometryContracts, relative);
+  if (exemption) {
+    const expectedMarker = `${geometryContracts.coverage.exemption_attribute}="${exemption}"`;
+    if (!body.includes(expectedMarker)) geometryScopeDefects.push(`${relative}: missing ${expectedMarker}`);
+    if (/\bdata-(?:geometry(?:-[\w-]+)?|indra-(?:intensity|fade-source))\s*=/i.test(body)) geometryScopeDefects.push(`${relative}: exempt body retains shared geometry`);
+    for (const asset of ['/js/mandala.js', '/js/indra.js']) {
+      if (hasAssetTag(html, asset)) geometryScopeDefects.push(`${relative}: exempt page loads ${asset}`);
+    }
+    if (exemption === geometryContracts.coverage.star_page_exemption_value) geometryScopeStats.star += 1;
+    else if (exemption === geometryContracts.coverage.control_page_exemption_value) geometryScopeStats.control += 1;
+  } else {
+    geometryScopeStats.included += 1;
+    if (body.includes(geometryContracts.coverage.exemption_attribute)) geometryScopeDefects.push(`${relative}: included page is marked exempt`);
+    if (!/\bdata-geometry=["']indra-web["']/.test(body)) geometryScopeDefects.push(`${relative}: included page lacks data-geometry`);
+    for (const asset of ['/css/alive.css', '/js/mandala.js', '/js/indra.js']) {
+      if (!hasAssetTag(html, asset)) geometryScopeDefects.push(`${relative}: included page lacks ${asset}`);
+    }
+  }
+}
+if (geometryScopeStats.star !== Number(geometryContracts.coverage.expected_current_star_pages)) geometryScopeDefects.push(`expected ${geometryContracts.coverage.expected_current_star_pages} star pages, found ${geometryScopeStats.star}`);
+if (geometryScopeStats.control !== Number(geometryContracts.coverage.expected_current_control_pages_source)) geometryScopeDefects.push(`expected ${geometryContracts.coverage.expected_current_control_pages_source} source controls, found ${geometryScopeStats.control}`);
+check(geometryScopeDefects.length === 0, `central geometry scope covers ${geometryScopeStats.included} included pages and exempts exactly ${geometryScopeStats.star} star pages plus ${geometryScopeStats.control} source control`);
+if (geometryScopeDefects.length) geometryScopeDefects.slice(0, 20).forEach(defect => console.error('      ' + defect));
 
 const cardStart = home.indexOf('<header class="business-card"');
 const cardEnd = home.indexOf('</header>', cardStart);
@@ -131,8 +182,13 @@ for (let index = 0; index < inlineScripts.length; index += 1) {
 }
 check(!failures.some(item => item.startsWith('inline script')), 'homepage inline JavaScript parses');
 
-check(indra.includes('data-indra-intensity') && indra.includes("layer.style.setProperty('--indra-opacity'"), 'Indra accepts page-specific intensity');
-check(!/setInterval\s*\(/.test(indra) && !/pointer(move|down|up)/i.test(indra), 'Indra has no idle or pointer animation loop');
+check(
+  indra.includes('data-indra-intensity')
+    && indra.includes("getPropertyValue('--indra-opacity')")
+    && indra.includes("layer.style.setProperty('--indra-opacity-resolved'"),
+  'Indra accepts bounded page-specific intensity',
+);
+check(!/setInterval\s*\(/.test(indra) && /panPointerId === null/.test(indra) && /panSurface\(event\.target\)/.test(indra), 'Indra has no idle or ambient pointer animation loop; pressed pan surfaces remain responsive');
 
 const publicHome = path.join(root, 'public', 'index.html');
 if (fs.existsSync(publicHome)) {

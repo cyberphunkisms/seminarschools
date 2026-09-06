@@ -7,6 +7,7 @@ const vm = require('vm');
 const ROOT = path.resolve(__dirname, '..');
 const SITE = 'https://seminarschools.com';
 const { ROUTES, buildRoutePage } = require('./polymythcal-route-shell');
+const discoveryCore = require(path.join(ROOT, 'js', 'polymythcal-discovery-core.js'));
 const rels = Object.keys(ROUTES);
 const expectedModes = {
   writingclub: 'apply',
@@ -50,10 +51,10 @@ for (const [dir, title] of titles) {
 }
 
 const shell = fs.readFileSync(path.join(ROOT, 'scripts', 'polymythcal-route-shell.js'), 'utf8');
-if (!/const title=`\$\{cfg\.heading\} \| Polymythcal \| Seminar Schools`/.test(shell) || !shell.includes("replaceMeta(html,'title',title)")) {
+if (!/const title=`\$\{copy\.heading\} \| Polymythcal \| Seminar Schools`/.test(shell) || !shell.includes("replaceMeta(html,'title',title)")) {
   failures.push('polymythcal-route-shell.js lacks centralized title generation logic');
 }
-for (const needle of ['focusedRouteNavigation(slug)', 'pmd-route-context', 'aria-current="page"', '?route=${slug}']) {
+for (const needle of ['focusedRouteNavigation(slug,locale)', 'pmd-route-context', 'aria-current="page"', '?route=${slug}']) {
   if (!shell.includes(needle)) failures.push(`polymythcal-route-shell.js lacks focused-shell contract ${needle}`);
 }
 for (const script of ['build-writing-shortcuts.js', 'build-academic-shortcuts.js']) {
@@ -92,6 +93,7 @@ function runtimeFor({ lang = 'en-CA', dataset = {}, pathname = '/polymythseminar
 })();`;
   const windowObject = {
     __polymythcalDiscoveryMounted: false,
+    PolymythcalDiscoveryCore: discoveryCore,
     location: { origin: 'https://example.test', pathname, search: '', hash: '' },
     history: { pushState() {}, replaceState() {} },
   };
@@ -235,4 +237,3 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(`SHORTCUT TITLE UNIQUENESS PASSED — ${titles.length} shortcut titles are unique and ${rels.length} EN/FR focused routes preserve compact Discovery scope/defaults, metadata, active navigation, and route-aware Research handoff.`);
-

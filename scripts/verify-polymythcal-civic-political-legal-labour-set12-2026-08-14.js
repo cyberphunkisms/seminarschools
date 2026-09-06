@@ -14,16 +14,35 @@ const manual=list(manualDoc), byId=new Map(manual.filter(e=>e.id).map(e=>[e.id,e
 const batch=manual.filter(e=>e._src===SRC);
 const consolidated=list(readJson('data/polymyth-seminar-events.json'));
 const publicEvents=list(readJson('polymythseminars/events.json'));
-const browserEvents=[...list(readJson('polymythseminars/browse.json')),...(readJson('polymythseminars/watchlist.json').items||[])];
+const browseDoc=readJson('polymythseminars/browse.json');
+const watchlistDoc=readJson('polymythseminars/watchlist.json');
+const researchEvents=readJson('polymythseminars/research.json').records||[];
+const surfaces=readJson('data/polymythcal-publication-surfaces.json');
+const browserEvents=[...list(browseDoc),...(watchlistDoc.items||[])];
 const cids=new Set(consolidated.map(e=>e.id)), pids=new Set(publicEvents.map(e=>e.id));
 const consolidatedById=new Map(consolidated.map(e=>[e.id,e]));
 const publicById=new Map(publicEvents.map(e=>[e.id,e]));
 const browserById=new Map(browserEvents.map(e=>[e.id,e]));
+const researchById=new Map(researchEvents.map(e=>[e.id,e]));
+const chronologyIds=new Set(surfaces.chronology_ids||[]);
+const watchlistIds=new Set(surfaces.watchlist_ids||[]);
 const sourcesDoc=readJson('scripts/sources.json');
 const sourceRows=Array.isArray(sourcesDoc)?sourcesDoc:(sourcesDoc.sources||[]), sourceIds=new Set(sourceRows.map(s=>String(s.id||'')));
 const schema=readJson('data/polymythcal-event-schema-v2.json');
 const schemaFields=['civic_legal_labour_formats','civic_domain','authority_level','public_role','participation_route','public_input_status','legal_access_status','collective_action_type','election_stage','access_restrictions','webcast_status','publication_restriction','public_access_status','registration_required','event_format','alternate_dates','civic_evidence','source_inconsistency','set12_classified_at'];
 const projectedCivicFormats=event=>[...new Set((event.civic_legal_labour_formats||[]).map(value=>value==='union-education'?'union-conference':value))].sort();
+const assertSpecialistProjection=(event,label='')=>{
+ const prefix=label?`${label} `:'';
+ const specialist=researchById.get(event.id);
+ if(chronologyIds.has(event.id)){
+  assert(specialist,`${event.id}: ${prefix}missing from the lazy Research projection`);
+  assert(JSON.stringify([...(specialist?.facets?.civicFormats||[])].sort())===JSON.stringify(projectedCivicFormats(event)),`${event.id}: ${prefix}safe Civic Research facet differs from the controlled manual projection`);
+  for(const field of schemaFields) assert(!Object.hasOwn(specialist||{},field),`${event.id}: ${prefix}private ${field} leaked into the Research projection`);
+ }else{
+  assert(watchlistIds.has(event.id),`${event.id}: ${prefix}missing from the chronology/watchlist publication partition`);
+  assert(!specialist,`${event.id}: ${prefix}monitoring record leaked into the chronology-only Research projection`);
+ }
+};
 const ledger=readJson('data/polymythcal-research-set-12-civic-political-legal-labour-2026-08-14.json');
 const pkg=readJson('package.json');
 const meta=manualDoc.polymythcal_civic_political_legal_labour_set12_update_2026_08_14;
@@ -63,7 +82,7 @@ for(const e of batch){
   if(compact) assert(!Object.hasOwn(compact,field),`${e.id}: private ${field} leaked into a public discovery projection`);
  }
  assert(compact,`${e.id}: missing from the chronology/watchlist discovery partition`);
- assert(JSON.stringify([...(compact.facets?.civicFormats||[])].sort())===JSON.stringify(projectedCivicFormats(e)),`${e.id}: safe Civic Research facet differs from the controlled manual projection`);
+ assertSpecialistProjection(e);
 }
 const parents=batch.filter(e=>e.series_role==='parent'), children=batch.filter(e=>e.series_role==='child');
 assert(parents.length===14&&children.length===107,'Set 12 series shape drifted');
@@ -114,7 +133,7 @@ for(const id of ledger.cross_tagged_existing_ids){
   if(compact) assert(!Object.hasOwn(compact,field),`${id}: cross-tag private ${field} leaked into a public discovery projection`);
  }
  assert(compact,`${id}: cross-tag is missing from the discovery partition`);
- assert(JSON.stringify([...(compact.facets?.civicFormats||[])].sort())===JSON.stringify(projectedCivicFormats(e)),`${id}: cross-tag safe Civic facet differs from the controlled manual projection`);
+ assertSpecialistProjection(e,'cross-tag');
 }
 const medusa=byId.get('soulpepper-medusa-talkback-2026-07-08');
 assert(medusa&&medusa.talkback_status==='confirmed'&&medusa.director_attendance_status==='unconfirmed','Medusa regression failed');
@@ -126,7 +145,7 @@ assert(
 
 for(const f of schemaFields) assert(schema.properties?.[f],`Schema missing ${f}`);
 const allUiFormats=['election-voting','candidate-campaign','council-board-committee','public-hearing-deputation','public-consultation','legislature-parliamentary-sitting','court-tribunal-hearing','inquest-public-inquiry','union-conference','rally-march-counterprotest','picket-strike-labour-action','civic-deadline-compliance'];
-const taxonomy=readJson('polymythseminars/browse.json').taxonomy, revamp=readText('scripts/lib/polymythcal-discovery-model.js'), detail=readText('scripts/build-polymythcal-audit13.py'), browser=readText('scripts/build-polymythcal-browser-payload.js');
+const taxonomy=readJson('polymythseminars/research.json').taxonomy, revamp=readText('scripts/lib/polymythcal-discovery-model.js'), detail=readText('scripts/build-polymythcal-audit13.py'), browser=readText('scripts/build-polymythcal-browser-payload.js');
 for(const value of allUiFormats){const label=taxonomy?.axes?.civicFormats?.values?.[value];assert(label?.en,`English Research taxonomy lacks Civic facet ${value}`);assert(label?.fr,`French Research taxonomy lacks Civic facet ${value}`)}
 for(const marker of ['civicFormats','civic_legal_labour_formats','civic-political-legal-labour','allowedDeclared']) assert(revamp.includes(marker),`Civic discovery model missing ${marker}`);
 assert(revamp.includes("family === 'civic-political-legal-labour'")&&revamp.includes("event.record_kind === 'civic-action'"),'Civic event-family classification lock missing');
@@ -145,4 +164,3 @@ for(let n=268;n<=275;n++) assert(cl.get(`CL-WEB-${n}`)?.status==='complete',`CL-
 assert(/142 Set 12 records/.test(cl.get('CL-WEB-274')?.decision||''),'CL-WEB-274 record count drifted');
 for(const rel of ['WEBSITE_CL_2026-07-19.md','docs/WEBSITE_CL_2026-07-19.md']){const text=readText(rel);assert(text.includes('CL-WEB-275'),`${rel}: Set 12 section incomplete`)}
 console.log(JSON.stringify({manual_records:manual.length,consolidated_records:consolidated.length,set12_records:batch.length,parent_records:parents.length,child_occurrences:children.length,confirmed_records:meta.confirmed_records,qualified_records:qualified.length,court_hearings:meta.court_hearings,election_records:meta.election_records,sources:sourceRows.length,change_list:'CL-WEB-268 through CL-WEB-275 complete'},null,2));
-

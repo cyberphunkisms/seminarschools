@@ -522,12 +522,19 @@ function publicRoute(event) {
 
 function sourceProjection(event) {
   const sources = [];
-  if (safePublicUrl(event.source_url)) {
+  const destinationAvailable = safePublicUrl(event.destination_url)
+    && event.destination_status !== 'unavailable-specific-page';
+  // Source URLs remain in the canonical editorial record as provenance, but
+  // the public Research projection may expose one only when the destination
+  // contract independently certifies that same URL as an exact event/series
+  // page. A generic calendar, organizer homepage, directory, or source index
+  // must never re-enter the visitor surface through the Research payload.
+  if (destinationAvailable && event.source_url === event.destination_url) {
     sources.push(compactObject({
       kind: 'source',
       name: event.source_name || event.organizer,
-      url: event.source_url,
-      scope: 'listing',
+      url: event.destination_url,
+      scope: event.destination_scope,
       quality: event.source_quality
     }));
   }
@@ -540,32 +547,18 @@ function actionProjection(event) {
     url: publicRoute(event),
     scope: 'listing'
   }];
-  const emittedUrls = new Set([publicRoute(event)]);
   const destinationAvailable = safePublicUrl(event.destination_url)
     && event.destination_status !== 'unavailable-specific-page';
-  const candidateScope = parentId(event) || event.series_role === 'parent' || event.destination_scope === 'series'
-    ? 'series'
-    : 'listing';
-  for (const [field, kind] of PUBLIC_ACTION_CANDIDATE_FIELDS) {
-    const url = event[field];
-    if (!safePublicUrl(url) || emittedUrls.has(url)) continue;
-    actions.push({ kind, url, scope: candidateScope });
-    emittedUrls.add(url);
-  }
-  if (destinationAvailable && !emittedUrls.has(event.destination_url)) {
+  // The canonical materialized destination is the sole authority for an
+  // external visitor action. Raw source/action candidates are retained in the
+  // editorial record for provenance and later review; they do not bypass the
+  // destination-specificity contract merely because they are valid HTTPS.
+  if (destinationAvailable) {
     actions.push(compactObject({
       kind: event.destination_kind || 'official-details',
       url: event.destination_url,
-      scope: event.destination_scope || 'listing'
+      scope: event.destination_scope || 'event'
     }));
-    emittedUrls.add(event.destination_url);
-  }
-  if (safePublicUrl(event.source_url) && !emittedUrls.has(event.source_url)) {
-    actions.push({
-      kind: 'source',
-      url: event.source_url,
-      scope: 'source'
-    });
   }
   return actions;
 }

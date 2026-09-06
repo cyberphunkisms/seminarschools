@@ -16,6 +16,7 @@ const monitoring = read('polymythseminars/monitoring/index.html');
 const core = read('js/polymythcal-discovery-core.js');
 const app = read('js/polymythcal-discovery.js');
 const discoveryModel = read('scripts/lib/polymythcal-discovery-model.js');
+const destinationContracts = read('scripts/lib/external-destination-contracts.js');
 const publicBuilder = read('scripts/build-public-deploy.js');
 const publicParity = read('scripts/verify-public-deploy-parity.js');
 const headers = read('_headers');
@@ -28,6 +29,28 @@ const researchData = json('polymythseminars/research.json');
 const surfaces = json('data/polymythcal-publication-surfaces.json');
 const siteAssetVersion = String(release?.polymythcal_asset_version || '');
 const discoveryAssetVersion = String(release?.polymythcal_discovery_asset_version || '');
+
+function projectedDestinationsFailClosed() {
+  if (!Array.isArray(canonical?.events) || !Array.isArray(browse?.events) || !Array.isArray(watchlist?.items)) {
+    return false;
+  }
+  const canonicalById = new Map(canonical.events.map(event => [event.id, event]));
+  const projected = [...browse.events, ...watchlist.items];
+  if (projected.length !== canonical.events.length) return false;
+  return projected.every(record => {
+    const event = canonicalById.get(record.id);
+    if (!event) return false;
+    const externalActions = (Array.isArray(record.actions) ? record.actions : [])
+      .filter(action => action?.scope !== 'listing');
+    const available = event.destination_status !== 'unavailable-specific-page'
+      && /^https?:\/\//.test(String(event.destination_url || ''));
+    return available
+      ? externalActions.length === 1
+        && externalActions[0].url === event.destination_url
+        && externalActions[0].scope === event.destination_scope
+      : externalActions.length === 0;
+  });
+}
 
 check('release manifest preserves the frozen site asset version', /^[0-9]{8}-[a-z0-9-]+$/.test(siteAssetVersion));
 check(
@@ -59,10 +82,17 @@ check(
 );
 check(
   'calendar application fails closed for unavailable exact destinations',
-  discoveryModel.includes("const destinationAvailable = safePublicUrl(event.destination_url)")
-    && discoveryModel.includes("event.destination_status !== 'unavailable-specific-page'")
-    && discoveryModel.includes('for (const [field, kind] of PUBLIC_ACTION_CANDIDATE_FIELDS)')
-    && discoveryModel.includes("kind: 'source'")
+  (discoveryModel.match(/const destinationAvailable = safePublicUrl\(event\.destination_url\)/g) || []).length === 2
+    && discoveryModel.includes('if (destinationAvailable && event.source_url === event.destination_url)')
+    && discoveryModel.includes('The canonical materialized destination is the sole authority')
+    && !discoveryModel.includes('for (const [field, kind] of PUBLIC_ACTION_CANDIDATE_FIELDS)')
+    && destinationContracts.includes('function unavailableDestination()')
+    && destinationContracts.includes("status: 'unavailable-specific-page', href: ''")
+    && destinationContracts.includes("evidence: 'fail-closed'")
+    && destinationContracts.includes('function materializedPolymythcalDestination(event)')
+    && destinationContracts.includes("if (status === 'unavailable-specific-page')")
+    && destinationContracts.includes("if (rawHref || scope !== 'unavailable' || kind !== 'unavailable')")
+    && projectedDestinationsFailClosed()
     && app.includes('return CORE.safeHttpUrl(rawUrl, window.location.origin)')
     && app.includes('for (const action of asArray(event.actions))')
     && !app.includes('safeUrl(event.destination_url)')

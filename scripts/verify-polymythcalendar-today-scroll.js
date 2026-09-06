@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 const { ROUTES } = require('./polymythcal-route-shell');
+const discoveryCore = require('../js/polymythcal-discovery-core');
 
 const ROOT = path.resolve(__dirname, '..');
 const failures = [];
@@ -55,6 +56,7 @@ function runtimeFor(dataset = {}, fixedNow = '') {
   RuntimeIntl.DateTimeFormat = RuntimeDateTimeFormat;
   const windowObject = {
     __polymythcalDiscoveryMounted: false,
+    PolymythcalDiscoveryCore: discoveryCore,
     location: { origin: 'https://example.test', pathname: '/polymythseminars/', search: '', hash: '' },
     history: { pushState() {}, replaceState() {} },
   };
@@ -179,4 +181,3 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(`POLYMYTHCALENDAR TODAY/UPCOMING CHECK PASSED — ${pages.length} EN/FR calendar routes use Toronto-aware upcoming chronology, soonest-first Discovery results, and no auto-scroll wall.`);
-

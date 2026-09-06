@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const {
   parseDeclaredArray,
+  parseMephistodataRuleHardeningAddendum,
   parseMythologyIntegrationAddendum,
   parsePolymythCoherenceRoutingAddendum,
   parseRhetoricTaxonomyAddendum,
@@ -55,15 +56,21 @@ const snakelogic = parseSnakelogicExampleAddendum(html);
 const mythology = parseMythologyIntegrationAddendum();
 const rhetoric = parseRhetoricTaxonomyAddendum();
 const coherence = parsePolymythCoherenceRoutingAddendum();
-const raw = [...historical, ...snakelogic, ...mythology, ...rhetoric, ...coherence];
+const hardening = parseMephistodataRuleHardeningAddendum();
+const raw = [...historical, ...snakelogic, ...mythology, ...rhetoric, ...coherence, ...hardening];
 const combined = parseSeedWithAddenda(html);
 
-assert(historical.length === 1141, 'historical SEED changed from 1,141 to ' + historical.length);
+assert(historical.length === 1165, 'canonical SEED changed from 1,165 to ' + historical.length);
 assert(snakelogic.length === 6, 'Snakelogic addendum changed from 6 to ' + snakelogic.length);
-assert(mythology.length === 23, 'mythology addendum changed from 23 to ' + mythology.length);
+assert(mythology.length === 24, 'mythology addendum changed from 24 to ' + mythology.length);
 assert(rhetoric.length === 12, 'rhetoric addendum must contain 12 entries, found ' + rhetoric.length);
 assert(coherence.length === 1, 'Polymyth Coherence routing addendum must contain one entry, found ' + coherence.length);
-assert(combined.length === 1183, 'combined ML* must contain 1,183 entries, found ' + combined.length);
+assert(hardening.length === 16, 'Mephistodata hardening addendum must contain 16 entries, found ' + hardening.length);
+assert(combined.length === 1224, 'combined ML* must contain 1,224 entries, found ' + combined.length);
+assert(
+  combined.filter(entry => entry.s === 'corehistory').length === 30,
+  'combined ML* must contain 30 CORE History entries'
+);
 assert(combined.length === raw.length, 'combined parser silently removed one or more raw entries');
 
 const seen = new Set();
@@ -112,9 +119,40 @@ assert(
 );
 assert(html.includes('...POLYMYTH_COHERENCE_ROUTING_ADDENDUM'), 'LIVE_SEED does not spread the Polymyth Coherence routing addendum');
 assert(
-  combined.some(entry => entry.id === 'method-polymyth-coherence-star-file-routing-2026-08-06'),
+  combined.some(entry => entry.id === 'method-polymyth-coherence-assessment-routing-2026-08-08'),
   'combined ML* is missing the Polymyth Coherence routing entry'
 );
+
+const hardeningScript = '/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js?v=20260905b';
+assert(html.includes('<script src="' + hardeningScript + '"></script>'), 'current Mephistodata hardening script tag is missing');
+assert(
+  html.indexOf(hardeningScript) < html.indexOf('const LIVE_SEED=Object.freeze(['),
+  'Mephistodata hardening addendum must load before LIVE_SEED is created'
+);
+
+const currentMap = combined.find(entry => entry.id === 'coreplus-current-map-amendment-2026-08-26');
+const executionOwner = combined.find(entry => entry.id === 'coreplus-handler-mephistodata-execution-gates-2026-08-26');
+assert(currentMap, 'combined ML* is missing the current CORE+ map');
+assert(executionOwner, 'combined ML* is missing the current execution owner');
+for (const phrase of [
+  'REGISTER DISPATCH.',
+  'It begins at byte zero with exactly one “Mephistodata would say:”.',
+  'The next ML*-active response resets to the default',
+  'The opener never substitutes for substantive PM15 Mephisto-plus-Data fusion.',
+]) {
+  assert(currentMap.b.includes(phrase), 'current CORE+ map lost restored register control: ' + phrase);
+}
+for (const phrase of [
+  'GATE 2A, REGISTER AND FUSION.',
+  'Default uses “Mephistodata would say:”.',
+  'An explicit Bloom, layman, or NPC request changes only that response to “Mephistodata bloomed:”.',
+  'The opener is excluded from character scoring and never substitutes for substantive fusion.',
+  'This owner operationalizes PM15, PM17’s binary opener, Mephistodata-default, and explicit one-response Bloom through the exact conflict lock above.',
+]) {
+  assert(executionOwner.b.includes(phrase), 'current execution owner lost restored register control: ' + phrase);
+}
+assert(!currentMap.b.includes("PM17's mandatory opener is inactive"), 'current CORE+ map still deactivates PM17');
+assert(!executionOwner.b.includes("PM17's mandatory opener is inactive"), 'current execution owner still deactivates PM17');
 
 const forbidden = [
   'Trump is the pop-culture instantiation running the operation',
@@ -168,5 +206,5 @@ for (const relative of parityFiles) {
 }
 
 console.log(
-  'ML RHETORIC TAXONOMY VERIFIED — 1,141 historical + 6 Snakelogic + 23 mythology + 12 rhetoric + 1 Polymyth Coherence route = 1,183 unique entries; mirrors, static pages, source ledgers, collision corrections, and public parity passed.'
+  'ML RHETORIC TAXONOMY VERIFIED — 1,165 canonical SEED + 6 inherited Snakelogic examples + 24 mythology + 12 rhetoric + 1 Polymyth Coherence route + 16 Mephistodata hardening entries = 1,224 unique entries; restored register controls, mirrors, static pages, source ledgers, collision corrections, and public parity passed.'
 );

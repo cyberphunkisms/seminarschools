@@ -40,7 +40,7 @@ if (chronology.length !== browse.count || monitored.length !== watchlist.count) 
 if (surfaces.canonical_count !== combined.length || surfaces.chronology_count !== chronology.length || surfaces.watchlist_count !== monitored.length) failures.push('publication manifest counts are inconsistent');
 if (new Set(chronology.map(item => item.type)).size < inventory.minimum_event_types) failures.push(`chronology type inventory fell below ${inventory.minimum_event_types}`);
 if (!Number.isInteger(buildManifest.source_count) || buildManifest.source_count < inventory.minimum_sources) failures.push(`source inventory fell below ${inventory.minimum_sources}`);
-if (buildManifest.chronology_count !== chronology.length || buildManifest.monitoring_count !== monitored.length || buildManifest.record_count !== combined.length) failures.push('build manifest does not retain the discovery-v2 partition');
+if (buildManifest.chronology_count !== chronology.length || buildManifest.watchlist_count !== monitored.length || buildManifest.record_count !== combined.length) failures.push('build manifest does not retain the discovery-v2 partition');
 
 for (const item of chronology) {
   if (!item.date) failures.push(`chronology ${item.id} has no date`);
@@ -63,7 +63,7 @@ for (const [token, label] of [
   ['Array.isArray(values)', 'facet-array validation'],
   ['function validCalendarDay(value)', 'strict calendar-date validation'],
   ["item.end_date", 'end-date validation'],
-  ['async function fetchPayload(generation)', 'bounded fetch controller'],
+  ['async function fetchPayload(url, generation)', 'bounded fetch controller'],
   ['for (let attempt = 1; attempt <= FETCH_ATTEMPTS; attempt += 1)', 'bounded retry loop'],
   ['const controller = new AbortController()', 'per-attempt abort controller'],
   ['window.setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS)', 'request timeout abort'],
@@ -142,4 +142,3 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(`PROJECT FAILURE RESILIENCE CHECK PASSED — bounded retry/timeout/abort, strict payload/date/facet validation, accessible recovery, ${chronology.length}+${monitored.length} split listings, ${buildManifest.source_count} sources, and 645/25/7 Teacher inventory preserved.`);
-

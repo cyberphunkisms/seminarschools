@@ -112,6 +112,25 @@
       }
     },
     {
+      "name": "Discovery v2 exactly partitions the private canonical corpus into chronology and quarantined monitoring records",
+      "passed": true,
+      "details": {
+        "canonical": 2088,
+        "chronology": 1954,
+        "watchlist": 134,
+        "partitionUnion": 2088,
+        "reasons": 134,
+        "markerRecords": 134
+      }
+    },
+    {
+      "name": "The full canonical corpus remains private build input",
+      "passed": true,
+      "details": {
+        "publicCanonicalPresent": false
+      }
+    },
+    {
       "name": "Bilingual typo-tolerant search is wired",
       "passed": true,
       "details": {}
@@ -182,15 +201,24 @@
       }
     },
     {
-      "name": "Canonical manifest exactly owns stable English event routes, redirects, and legacy ICS aliases",
+      "name": "Monitoring-marker records retain stable noindex undated details while remaining absent from ICS and sitemap",
+      "passed": true,
+      "details": {
+        "records": 134,
+        "failures": []
+      }
+    },
+    {
+      "name": "Canonical manifest owns stable HTML details and aliases while chronology alone owns ICS",
       "passed": true,
       "details": {
         "canonicalPages": 2088,
         "aliasPages": 2144,
         "expectedAliases": 2144,
         "explicitLegacyAliases": 28,
-        "icsCount": 2116,
-        "events": 2088,
+        "icsCount": 1982,
+        "canonicalEvents": 2088,
+        "chronologyEvents": 1954,
         "exactIcsSet": true,
         "englishRouteSet": {
           "exact": true,
@@ -296,7 +324,7 @@
       "details": {}
     }
   ],
-  "passed": 29,
+  "passed": 32,
   "failed": 0,
   "metrics": {
     "registered_sources": 779,
@@ -310,9 +338,11 @@
       "civic-action": 13
     },
     "canonical_events": 2088,
+    "chronology_events": 1954,
+    "quarantined_monitoring_records": 134,
     "canonical_event_pages": 2088,
     "legacy_redirect_aliases": 2144,
-    "event_ics_files": 2116,
+    "event_ics_files": 1982,
     "focused_feed_pairs": 11,
     "browser_wcag_checks_passed": 42,
     "browser_wcag_checks_failed": 0,

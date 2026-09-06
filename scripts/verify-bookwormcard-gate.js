@@ -27,7 +27,13 @@ must('ESL mode adds plain-language helper copy', /function eslExplanationFor/.te
 must('Theme button exists and uses direct Bookwormcard light\/dark toggle', /id="t-theme"/.test(html) && /function toggleTheme/.test(html) && /body\.light-mode/.test(html) && /data-bw-theme/.test(html));
 must('High-contrast control remains separate from theme', /id="t-contrast"/.test(html) && /<span>HC<\/span>/.test(html) && /function toggleContrast/.test(html));
 must('Text-size buttons are present and bound', /id="t-fontminus"/.test(html) && /id="t-fontplus"/.test(html) && /bumpFontSize\(-1\)/.test(html) && /bumpFontSize\(1\)/.test(html));
-must('App shell avoids global 100vh overflow trap', /html,body\{[^}]*min-height:100svh[^}]*overflow-y:auto/.test(html) && !/html,body\{[^}]*height:100vh;overflow:hidden/.test(html));
+must(
+  'App shell uses an owned 100svh viewport with mobile and short-screen escape paths',
+  /html,body\{[^}]*height:100svh;min-height:0;overflow-x:hidden;overflow-y:hidden/.test(html)
+    && /html,body\{height:auto;min-height:100vh;overflow:auto\}/.test(html)
+    && /html,body\{overflow:auto;height:auto\}/.test(html)
+    && !/html,body\{[^}]*height:100vh;overflow:hidden/.test(html)
+);
 must('Card preview no longer says only building', /your wormcard preview will build here/.test(html) && !/<span class="empty">building\.\.\.<\/span>/.test(html));
 must('Input label is contextual', /aria-label="Bookwormcard response/.test(html) && /setAttribute\('aria-label', 'Bookwormcard response'/.test(html));
 must('Structured data marks the page as educational WebApplication and part of BB', /"@type":"WebApplication"/.test(html) && /"isPartOf":\{"@type":"CreativeWork","name":"BookwormBurrows"/.test(html));

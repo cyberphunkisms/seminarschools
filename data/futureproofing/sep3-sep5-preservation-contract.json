@@ -1,0 +1,4550 @@
+{
+  "authorized_public_deletions": [],
+  "baseline_manifest_sha256": "61284f8a2d095599d502c350bc8f8cb12c50776327b86be95783f4dd55aa5a13",
+  "contract_version": "2026-09-05.1",
+  "expected_transition": {
+    "added": [
+      {
+        "bytes": 5232,
+        "path": "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md",
+        "sha256": "e6a31b2fb8fd258b01b825acb790eb62019b07a3c2831e0780507bf2863f4240"
+      },
+      {
+        "bytes": 44258,
+        "path": "UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/3066e1d8-f6f9-4267-a948-90c076e29f93.png",
+        "sha256": "f5de65fff250497561cabf2d0ee504660fc6f8f4f8ecf86f5fa33fc1637b2632"
+      },
+      {
+        "bytes": 16247,
+        "path": "UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/b4f6ab5a-4eb3-44d0-943e-41acd52faec9.png",
+        "sha256": "eb1d871ec1a9c8d65605c2276c00acfd09570269b55e309e72d5848ab07edb8c"
+      },
+      {
+        "bytes": 4653859,
+        "path": "data/futureproofing/sep3-package-contents-baseline.json",
+        "sha256": "61284f8a2d095599d502c350bc8f8cb12c50776327b86be95783f4dd55aa5a13"
+      },
+      {
+        "bytes": 253,
+        "path": "scripts/fixtures/futureproofing/sep5-preservation-tampered.json",
+        "sha256": "4ea72424b38a14bde7cf5b58a8978dd1ed75e439ad72d42cc55ecced6f367237"
+      },
+      {
+        "bytes": 26848,
+        "path": "scripts/verify-sep5-base-preservation.py",
+        "sha256": "df8ae8b362fa9369703523d4d955da55f09805497a6162e45d27ed8a97c62fe6"
+      }
+    ],
+    "added_policy": [
+      {
+        "after": {
+          "binding": "versioned_semantic_policy",
+          "policy_sha256": "54742821b90d23bb1203e30e41532b92d8af46adfae2a692851318fdf165f1b0"
+        },
+        "path": "data/futureproofing/sep3-sep5-preservation-contract.json"
+      }
+    ],
+    "baseline_manifest": {
+      "excluded_predecessor": {
+        "bytes": 4373833,
+        "path": "PACKAGE_CONTENTS_SHA256.json",
+        "reason": "regenerated after source verification and bound by final package integrity",
+        "sha256": "b700338854c6212d22e5b488494bd8379eac8db53d2c4fa598b2dd5952f0279b"
+      },
+      "full_package_file_count": 21193,
+      "governed_site_predecessor_count": 21170,
+      "path": "data/futureproofing/sep3-package-contents-baseline.json",
+      "release_id": "core-coreplus-mephistodata-bottom-up-definition-enforcement-complete-2026-09-03",
+      "sha256": "61284f8a2d095599d502c350bc8f8cb12c50776327b86be95783f4dd55aa5a13"
+    },
+    "changed_paths_sha256": "4cd5df983968b478bdcc536505eb9e9f9a9442a895facd24b417812188a3871c",
+    "current_selected_count": 21177,
+    "deleted": [],
+    "event_data": [
+      {
+        "bytes": 8526306,
+        "path": "data/polymyth-seminar-events.json",
+        "sha256": "c52de1fe55bd1c1a4e22d1bce1fd71beebf0cc2687dda436670ec98451bafd7f",
+        "unchanged_from_sep3": true
+      },
+      {
+        "bytes": 8526306,
+        "path": "polymythseminars/events.json",
+        "sha256": "c52de1fe55bd1c1a4e22d1bce1fd71beebf0cc2687dda436670ec98451bafd7f",
+        "unchanged_from_sep3": true
+      },
+      {
+        "bytes": 117692,
+        "path": "data/polymythcal-publication-surfaces.json",
+        "sha256": "e32c8c125b42b340d0df0681980040ee2fee3cc5438b16c9bd8c118984306095",
+        "unchanged_from_sep3": true
+      },
+      {
+        "bytes": 2954297,
+        "path": "polymythseminars/browse.json",
+        "sha256": "f7b82229eca5ad99feb64a1a81e02c388abf7045253b51ac7c7188401f46308e",
+        "unchanged_from_sep3": true
+      },
+      {
+        "bytes": 213174,
+        "path": "polymythseminars/watchlist.json",
+        "sha256": "eff46db0ccf086142a1d8a94c827cf9705919cc969dbf5bc8789fe062e8d5ef8",
+        "unchanged_from_sep3": true
+      },
+      {
+        "bytes": 1915161,
+        "path": "polymythseminars/research.json",
+        "sha256": "da7f74b566289eaa60a11180c5ccf95cef956e3bc405f17f4e54864cace5c473",
+        "unchanged_from_sep3": true
+      }
+    ],
+    "modified": [
+      {
+        "after": {
+          "bytes": 13424,
+          "sha256": "e79d879d160dea3c415a53c41269d4ce894fc32468166f1ec442bcbd41d91868"
+        },
+        "before": {
+          "bytes": 9047,
+          "sha256": "953bbb95959639c1595467069a4e5fc19b09d3a6ceb97cece4b40d118869b1bd"
+        },
+        "path": "ML_EXECUTION_AND_CONTROLLED_ARCHIVE_SYNTHESIS_2026-08-26.md"
+      },
+      {
+        "after": {
+          "bytes": 12686,
+          "sha256": "7b2cc6e3374e1532e756d65b5739865b7724f4d4e9144f1194ae7080cf6b31d3"
+        },
+        "before": {
+          "bytes": 12215,
+          "sha256": "9422fc2dbe11596ee21b473700cd350b693813f5ae313d6992d6a15baeb04b53"
+        },
+        "path": "data/futureproofing/futureproofing-contract.json"
+      },
+      {
+        "after": {
+          "bytes": 69735,
+          "sha256": "a97db350cbd49cd1cba39391039be4122b98c189d14d76b8dd2f1048d1eec7ac"
+        },
+        "before": {
+          "bytes": 102665,
+          "sha256": "6d8aa3935213ea82091358f7f3c2fc27d4ccc7aff18550f93218d445effd7b31"
+        },
+        "path": "hf_export/ai_access_pack/latest_access_pack.json"
+      },
+      {
+        "after": {
+          "bytes": 13652,
+          "sha256": "a16d1074658794afd57e9a1e56d58b39fb7497c2c71e2612fe8478ecbf6deb9d"
+        },
+        "before": {
+          "bytes": 15854,
+          "sha256": "033c758a6b881b7f6986335d6223d2a1df890cacc10644de33501e16efdfee75"
+        },
+        "path": "hf_export/ai_access_pack/latest_access_pack.md"
+      },
+      {
+        "after": {
+          "bytes": 8600,
+          "sha256": "34cd5b02fe370d99d1c1974be41731a388d55b0fe08f1d79c6ae9565ec12d5b4"
+        },
+        "before": {
+          "bytes": 8600,
+          "sha256": "f943f356af77ca4abd72faa24314a14da194871e7274d3fac398ee3a24acbff6"
+        },
+        "path": "hf_export/ai_access_pack/reports/ai_access_pack_verification_report.md"
+      },
+      {
+        "after": {
+          "bytes": 354,
+          "sha256": "8f4bbaedd870c6ce63420cad8011e013387e0bc7e78235b46e0f06715531123e"
+        },
+        "before": {
+          "bytes": 1577,
+          "sha256": "5c2e45c1185106911770eda955e6d4142c96e3142c04c5d3dba2a08cc3d959e9"
+        },
+        "path": "hf_export/ai_access_pack/reports/latest_access_pack_report.md"
+      },
+      {
+        "after": {
+          "bytes": 3414,
+          "sha256": "0b10a740c7eac7958c7d472e4f1971b56fc8d6a926ddae29388a0e2c5516c0e0"
+        },
+        "before": {
+          "bytes": 3414,
+          "sha256": "c7bf3212816035016402c9493e2aedce94a68ea42db8dc08d606f6d0d944e7bb"
+        },
+        "path": "hf_export/data/aa/archetype_archive_route.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 4816,
+          "sha256": "c8dee13c14a97956e11b2220a38dc1bb569142810afac6fbca7720883171f8f7"
+        },
+        "before": {
+          "bytes": 4816,
+          "sha256": "0778b0da615d9161831eb2eef815dc6e5fde3eaf2067a62926a037d7d066ce65"
+        },
+        "path": "hf_export/data/aitr/ai_teacher_resources_route.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 12725083,
+          "sha256": "c3fb685342ed6bb16edc16f892873bab00f773574724517485d3fa2f7f3bf068"
+        },
+        "before": {
+          "bytes": 12715063,
+          "sha256": "c4f3c947e5cf64d37c0a20c3358f96f19db5d97b128c19e61f58814961f5b861"
+        },
+        "path": "hf_export/data/all_meaninglib_rows.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 1626759,
+          "sha256": "06afb9ae27be8796bb7323245398776d8d24f1193593c81aae2369ba64de4028"
+        },
+        "before": {
+          "bytes": 1626759,
+          "sha256": "e856cbbc6050e69eaa94f5ddf6281bb0eba0b2bd370f9be242b3be9fe364342a"
+        },
+        "path": "hf_export/data/bb/bookwormburrows.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 2105049,
+          "sha256": "addf4a791c00eba2a0903d63b3c40513ad3a142fba906f5faac6d82795282e1c"
+        },
+        "before": {
+          "bytes": 2105049,
+          "sha256": "7548cc639772654d575cdf054bbb5a52cc59978ecfbe2309274b0919f5cdf802"
+        },
+        "path": "hf_export/data/cc/campaigncodex.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 9233,
+          "sha256": "9e494f699655df7747f0ed5206bc472960e278faf3e7ae4cde0490691374c3c0"
+        },
+        "before": {
+          "bytes": 9233,
+          "sha256": "daa13ea6b1b3b23fffd2b761e80fe26d9ccc1b991959e60da73b1f1fd945ad90"
+        },
+        "path": "hf_export/data/manifest/manifest.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 21693,
+          "sha256": "7eaa6dac92addd7eead95f9bc4e478cae0030dcddf01ffc27211f40b9bbc5a8d"
+        },
+        "before": {
+          "bytes": 21693,
+          "sha256": "907299c4e8cf2e662c377e18a84bcf743ba80bc05b5984abbcd495f65384dbe6"
+        },
+        "path": "hf_export/data/manifest/polymyth-file-map.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 780464,
+          "sha256": "16451e8fb1c1721bd06d63b546a1aea1712b91a692a1175d955fa54fe159fc62"
+        },
+        "before": {
+          "bytes": 780464,
+          "sha256": "4be8d81d2a8206848ddff37fb51c8db64b64020ae1db5df83bfcc4f0294f06f6"
+        },
+        "path": "hf_export/data/mc/modulecanon.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 8173655,
+          "sha256": "47657da34a52c2fde73de1d4433c3087a9ba64bee4d81341bf1004e6e4f670b9"
+        },
+        "before": {
+          "bytes": 8163635,
+          "sha256": "9477852addd157effba0d72aee9114585693801f854c020d3b324cdd0ce3d6df"
+        },
+        "path": "hf_export/data/ml/methodologylist.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 186366,
+          "sha256": "78a210361311c94d2b12d25a38027449f91650f2eea55ebfbd1e8fde2a39a187"
+        },
+        "before": {
+          "bytes": 186366,
+          "sha256": "f891135a356ccf4701ddb2c9f3f9aa43cf6211ba31f628e31c801cedc14bbce5"
+        },
+        "path": "hf_export/data/ml/sections/analysis.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 1034714,
+          "sha256": "beb4e525d04ad688e38ce626537560c11850c2e9ee2439eb4272d845533dd4f5"
+        },
+        "before": {
+          "bytes": 1034714,
+          "sha256": "2495f55aecd31a3b8f4ea614b6c64e0ec773ad80f893f0cca6ef81a23b9aef0e"
+        },
+        "path": "hf_export/data/ml/sections/citation.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 200140,
+          "sha256": "cd3260d3654da7f02ba6b937c4528307248230d990e442f3005858346e491248"
+        },
+        "before": {
+          "bytes": 200140,
+          "sha256": "c8bc3efe3b74a1badbba6ac6989c8b1e2088e1dd59cedab48c68a013727079c4"
+        },
+        "path": "hf_export/data/ml/sections/corehistory.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 661788,
+          "sha256": "64842af5d82c3cb71072d373735044207f01f95d5afead85a9caabc53299b5b7"
+        },
+        "before": {
+          "bytes": 651768,
+          "sha256": "d63fa19b25296af76b0c7b8ea227feb1883ad4394b295036f96d512cbf4489ef"
+        },
+        "path": "hf_export/data/ml/sections/coreplus.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 327487,
+          "sha256": "0d4d7465cb60de58507de113792169ca6665ee076b40b2e0ccf6dd3e5a116e1e"
+        },
+        "before": {
+          "bytes": 327487,
+          "sha256": "89961015fd2cb44f85cad48f6fd23a78efd60ba9e64110841f432e40ef30198a"
+        },
+        "path": "hf_export/data/ml/sections/degorgonification.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 11194,
+          "sha256": "0e3af0d9e4221af80c15504cdf2e387298d9002d9e58f024bdc7f96050b4ed6c"
+        },
+        "before": {
+          "bytes": 11194,
+          "sha256": "42e0a47a45d5f1f8cd6756b75e7b50cf05f203a7f090b78eccab630ec364953d"
+        },
+        "path": "hf_export/data/ml/sections/framework-core.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 787073,
+          "sha256": "44cca13154ae01049f4eb85c03bb8d1583d5d21e828b8dda1cdb94cf74520882"
+        },
+        "before": {
+          "bytes": 787073,
+          "sha256": "96ab91cf10e51e45f3ce9bb18c84a3a893576767365f1250c2fafea30c2b4864"
+        },
+        "path": "hf_export/data/ml/sections/gorgonification.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 260404,
+          "sha256": "45565555709404cf128e456d8611464d6f7d719d4eb59963152a191d8c80937a"
+        },
+        "before": {
+          "bytes": 260404,
+          "sha256": "e2df7780c7c8e3b0b6a45338724f3954cde2d4f2cb3f5cf69e32c0b56b87dac2"
+        },
+        "path": "hf_export/data/ml/sections/idiomary.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 140682,
+          "sha256": "0ff911e3439fa6e1beeda69f1996040f7dc478f5803cfc20fc3a455024d42392"
+        },
+        "before": {
+          "bytes": 140682,
+          "sha256": "882603cd0ab04ad94550b5338b2c401f0e0136bed883907dc89616234217d8da"
+        },
+        "path": "hf_export/data/ml/sections/learnings.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 3621566,
+          "sha256": "99b850e12c1b307ae9fc0a56b4565e315fc4a79d5af7c1d32e05d030dcd384f7"
+        },
+        "before": {
+          "bytes": 3621566,
+          "sha256": "159e23fde6e6cba96ed511657960b2536f81007c75426ef25acdc8c68f0e5985"
+        },
+        "path": "hf_export/data/ml/sections/methodology.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 52385,
+          "sha256": "f76426cf24e207fe046eaf4743cca1a68bd9cb58e6ebc57589d2ae9c8d7337b6"
+        },
+        "before": {
+          "bytes": 52385,
+          "sha256": "a143d893dce203433c9b9380936d313089eb523643b101771ae153d899f4438c"
+        },
+        "path": "hf_export/data/ml/sections/pending-user-authorship.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 213591,
+          "sha256": "a1e517bc29cf89caaaa5509f19bcf0e1f5b77123702bb8e03148639bafa48087"
+        },
+        "before": {
+          "bytes": 213591,
+          "sha256": "0edde26e5ec90b1fea87c08f8b52fffc214ff9c2769b9674f0d66ffad5545f75"
+        },
+        "path": "hf_export/data/ml/sections/pending.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 236924,
+          "sha256": "4b6c05c269d509485d7d6be7d88aebdc42a4d49930d4b18c2030d323a8230baf"
+        },
+        "before": {
+          "bytes": 236924,
+          "sha256": "94db841f3badd01023f1744da19793b43f36da2c2cf5f1e96094ebe1dbfdf0c2"
+        },
+        "path": "hf_export/data/ml/sections/polycognate.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 44057,
+          "sha256": "98fd9e8d45b7b55751a6043f7187b7d517a1ad591dc63768efbaf62872cc12d4"
+        },
+        "before": {
+          "bytes": 44057,
+          "sha256": "2f846612d493a06214efb98702f12fc6c984c9a5509b45fce4bbaeef20b606be"
+        },
+        "path": "hf_export/data/ml/sections/rainbowsol.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 133575,
+          "sha256": "bb88ddb36418c2b66d20198ffe6314d4f7cc3945351fd7c5040f9cdf09b611d6"
+        },
+        "before": {
+          "bytes": 133575,
+          "sha256": "e6fc9855ec7f70ecaf31e137739940909191ba386d861631392ff10b71aec215"
+        },
+        "path": "hf_export/data/ml/sections/sabachtan.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 261709,
+          "sha256": "dc8c1cf0647a96f37594ccb0f581075646cbcf3a1b28c7e197fd571c9c47787a"
+        },
+        "before": {
+          "bytes": 261709,
+          "sha256": "33568a6a53446a022f4c0a63008d276189b009eb75566cbe6941dbfadc376285"
+        },
+        "path": "hf_export/data/ml/sections/studylist.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 355094,
+          "sha256": "fdaca84d09b4df36c5af2421430f754fa2c45a051dc95427cfb8a7bcfc1bfc10"
+        },
+        "before": {
+          "bytes": 355094,
+          "sha256": "a8b5f3cb63ed9f21f3aa719b9e583d807a1a76ef6f9b3852206349c6febe0c43"
+        },
+        "path": "hf_export/data/relations/crossrefs.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 2756,
+          "sha256": "f19e2b30d03ccb528db1f12d095ecad3ed2ee916f6d20a30fd031505ae56211f"
+        },
+        "before": {
+          "bytes": 2756,
+          "sha256": "b829210ed59a23d31ae8f264d744c2b06d2157c918193ff99f75510c41e9e9e8"
+        },
+        "path": "hf_export/data/relations/star_file_map.jsonl"
+      },
+      {
+        "after": {
+          "bytes": 823,
+          "sha256": "0631928ec0a45914db428a3ceee6ac4a18abe78c2689f213e09cfdc64d305303"
+        },
+        "before": {
+          "bytes": 823,
+          "sha256": "1dc3368c3b68d6baf9cd27ef87ef6f09aaba7bda665d3226e08ceeff30a2a240"
+        },
+        "path": "hf_export/reports/latest_export_report.md"
+      },
+      {
+        "after": {
+          "bytes": 11994,
+          "sha256": "4ee0151ebacff52331fb77bf8f243d6b5879554b312dca7e827ff878ab6afde3"
+        },
+        "before": {
+          "bytes": 11994,
+          "sha256": "811f744155d109f70e032ca1dfcc371b853eed1cac875e22767fb1765e7f43d7"
+        },
+        "path": "hf_export/reports/meaninglib_search_verify_report.md"
+      },
+      {
+        "after": {
+          "bytes": 715,
+          "sha256": "70d4c121e454cf8e9fa6ffbfa489e215f6761f9f36c4c0dbc9379bf3998b149d"
+        },
+        "before": {
+          "bytes": 715,
+          "sha256": "8502afc80f52a6dc1df5b3edaadd94342b6b44096d0c7dbbe1a7cacca0f2f285"
+        },
+        "path": "hf_export/reports/search_report.md"
+      },
+      {
+        "after": {
+          "bytes": 2829,
+          "sha256": "fb2d1aa9344b6e21081792364e410e4b9e998275392f6ade8fceb6c6ab0f173a"
+        },
+        "before": {
+          "bytes": 2829,
+          "sha256": "829d0580f107845244578ba330449486c5a9b038f975202763691896228b16e3"
+        },
+        "path": "hf_export/reports/verification_report.md"
+      },
+      {
+        "after": {
+          "bytes": 11277534,
+          "sha256": "8c422504eb70840fdb4ebc3d7150f6211ff84c9220f102a3d93f33646dd4f730"
+        },
+        "before": {
+          "bytes": 11271319,
+          "sha256": "f3ac1037f212bd25b053b096b5f3957c7bba316aca8cc4a7457d79823e29c6c1"
+        },
+        "path": "hf_export/search/meaninglib_search_index.json"
+      },
+      {
+        "after": {
+          "bytes": 40560,
+          "sha256": "524f0fd5b58e0e8654ac1ac86d75694fa2f93fd9230ba3489895bd93d4768c81"
+        },
+        "before": {
+          "bytes": 40560,
+          "sha256": "e73d22386d41f1fd621c4d719bf22c68106eeaff6af0ed1d6a96fd9086f02046"
+        },
+        "path": "package.json"
+      },
+      {
+        "after": {
+          "bytes": 746635,
+          "sha256": "879c63d2a63086f0e47610bdca3d0bec9698f6e0c9a908635dbad26897099294"
+        },
+        "before": {
+          "bytes": 746635,
+          "sha256": "3bb32f33d54b69b4d0de8dad62918a52a959208d56879cd9cb6d42c7d0dc51c6"
+        },
+        "path": "polymyth/bookwormburrows.txt"
+      },
+      {
+        "after": {
+          "bytes": 965531,
+          "sha256": "9dee0ab73fa660db639991851f18b55f1d9da97ba28f7990477bf6cc9d774159"
+        },
+        "before": {
+          "bytes": 965531,
+          "sha256": "42e1b8280d9b5883ab3440a130f9b70746f3e830964bf818de56d68fae3215e1"
+        },
+        "path": "polymyth/campaigncodex.txt"
+      },
+      {
+        "after": {
+          "bytes": 10923230,
+          "sha256": "7ddba0e01857789c131dcdf92a41f6436a50ca8c389c7e5de17f6cf14bf8b57c"
+        },
+        "before": {
+          "bytes": 10921318,
+          "sha256": "4ffd98730fe22d80b79a1e8dcbee577c442cf7d52cd50283990a7ba00c8378b3"
+        },
+        "path": "polymyth/concordance/concordance-index.json"
+      },
+      {
+        "after": {
+          "bytes": 4264,
+          "sha256": "d78876bc450862d4fe351d94c690c39e3b7d5f30143c83421b5775946f85e177"
+        },
+        "before": {
+          "bytes": 4264,
+          "sha256": "a5001b8aa8d285248831102cd29350c9b90fb8f57925ceaa186a2bb53f509781"
+        },
+        "path": "polymyth/manifest.txt"
+      },
+      {
+        "after": {
+          "bytes": 92490,
+          "sha256": "2af43e01b86f53ce60caec1bededba8cdf816693d45405ab3578b388ef441070"
+        },
+        "before": {
+          "bytes": 92490,
+          "sha256": "40e33f1cf19221a8a0b8a1026b5084952ac4e1d26588b594cd054bc9ffaa3f80"
+        },
+        "path": "polymyth/methodologylist-analysis.txt"
+      },
+      {
+        "after": {
+          "bytes": 464900,
+          "sha256": "c5252b96cfc2f0eaa34910c55dba4482e60943e2c827f5770116aa2fc5d49177"
+        },
+        "before": {
+          "bytes": 464900,
+          "sha256": "5eb7282669ff8952f1778686e0e7adad7304a7fbbf60aff2443405332e9d4bc5"
+        },
+        "path": "polymyth/methodologylist-citation.txt"
+      },
+      {
+        "after": {
+          "bytes": 101946,
+          "sha256": "962f00bbe4d4b3814f8dffa5bf86e6da3af8ce664f856c81c2f20ce70a5ce395"
+        },
+        "before": {
+          "bytes": 101946,
+          "sha256": "c368456a91249ab902a02c45b3299d3a7fa1d4ba908216b21cf1cc25e846ce45"
+        },
+        "path": "polymyth/methodologylist-corehistory.txt"
+      },
+      {
+        "after": {
+          "bytes": 343625,
+          "sha256": "e6387056c08c4d62a289d1de972275b6939471eb29edf5815158426758496dda"
+        },
+        "before": {
+          "bytes": 339025,
+          "sha256": "10aeb8031558404f9bf64b5380b30bce342d22e81afb5f46174269c8f0f86915"
+        },
+        "path": "polymyth/methodologylist-coreplus.txt"
+      },
+      {
+        "after": {
+          "bytes": 174083,
+          "sha256": "ef539db152d4da42112ba2e94640af4751d718dba0ee27366ee3cfc94bf73356"
+        },
+        "before": {
+          "bytes": 174083,
+          "sha256": "a0370762b3b187c7623ef80f2d233e59f289149418a3d58b1d78e558992e504a"
+        },
+        "path": "polymyth/methodologylist-degorgonification.txt"
+      },
+      {
+        "after": {
+          "bytes": 409571,
+          "sha256": "4521882dde40b3b007b233297587445750187c3b9d932bfa6b2cf7e2dcd526ca"
+        },
+        "before": {
+          "bytes": 409571,
+          "sha256": "0d3682813639327d57f952e96c3af8e7efc2c07191bec96e9f65100fc19a3934"
+        },
+        "path": "polymyth/methodologylist-gorgonification.txt"
+      },
+      {
+        "after": {
+          "bytes": 141676,
+          "sha256": "311c6a0df83d0e9e1cf6c48bf4b5306819666bf2c074a8af2c0350afbc54f962"
+        },
+        "before": {
+          "bytes": 141676,
+          "sha256": "a2dbeb7846dac27289a231878fc114f006ca2f6bd401c012028dc086fdec2173"
+        },
+        "path": "polymyth/methodologylist-idiomary.txt"
+      },
+      {
+        "after": {
+          "bytes": 72905,
+          "sha256": "a77a03dc95faf5355ff35dffe04f8bd43d7877b3b076fe03b7c1c7443de81969"
+        },
+        "before": {
+          "bytes": 72905,
+          "sha256": "5c30514f67ee28eed7a1b854c48a88540312d55c6e7f6f882f2f7ea9f1d79c46"
+        },
+        "path": "polymyth/methodologylist-learnings.txt"
+      },
+      {
+        "after": {
+          "bytes": 1868469,
+          "sha256": "cb932d01edb7140892bf77764833fa91a39c012dbdf65e32a387b51d81c5f1db"
+        },
+        "before": {
+          "bytes": 1868469,
+          "sha256": "07486d921377fcabce0599145e04eb918fd806e17583a7a5c679faed2c6e4e9f"
+        },
+        "path": "polymyth/methodologylist-methodology.txt"
+      },
+      {
+        "after": {
+          "bytes": 26351,
+          "sha256": "ec4856a12510982f90147e9dd3447fc2b34e59c6d0326040b4efa7ec3bade1a2"
+        },
+        "before": {
+          "bytes": 26351,
+          "sha256": "db9308dd974ee694961b6f6c6725e93380cb2583008a65c5d9431ae51a06dc25"
+        },
+        "path": "polymyth/methodologylist-pending-user-authorship.txt"
+      },
+      {
+        "after": {
+          "bytes": 106273,
+          "sha256": "91b856852cefe2b6501dcbe05d5261522bb9623a5dc6cd9b414a0127b172540a"
+        },
+        "before": {
+          "bytes": 106273,
+          "sha256": "215aff2b7073733e2abe34250d7c1ac7f7b2dd2bd001816ddb7f94beed2b43ac"
+        },
+        "path": "polymyth/methodologylist-pending.txt"
+      },
+      {
+        "after": {
+          "bytes": 120772,
+          "sha256": "a4118cc8e430462f570dfa3fea28855b28397b7c01cd2ebdca9431a925e5740a"
+        },
+        "before": {
+          "bytes": 120772,
+          "sha256": "73fe3d7896f8fe6cb9dd4ff5ed31866f6ddea160e015468d6aa39468d7ce4d51"
+        },
+        "path": "polymyth/methodologylist-polycognate.txt"
+      },
+      {
+        "after": {
+          "bytes": 22524,
+          "sha256": "425e40b51a4e75e9d04c20cb07f3e28dc8332f93b9f078bb47b14315f4784b6e"
+        },
+        "before": {
+          "bytes": 22524,
+          "sha256": "e0ef8e8069673c1082717dacf12fdc5791d263449e0e0f02a5043b81892b6a08"
+        },
+        "path": "polymyth/methodologylist-rainbowsol.txt"
+      },
+      {
+        "after": {
+          "bytes": 67493,
+          "sha256": "dc6605d830a98f778b5b2bbb6cce6d88f8019284b68a53dab012994300437e51"
+        },
+        "before": {
+          "bytes": 67493,
+          "sha256": "36b5d3203bb9cdd698da4947d2fa867c3ecebf7523e4b9d9576f95f7bc348268"
+        },
+        "path": "polymyth/methodologylist-sabachtan.txt"
+      },
+      {
+        "after": {
+          "bytes": 126705,
+          "sha256": "fed79471d175cf0d5363e76ffbead96e7c984cba37f539e3c2cbedf3f9962035"
+        },
+        "before": {
+          "bytes": 126705,
+          "sha256": "b65fab509b46085b2df98b360487dcd81f5a744ee6c233ef430b8f07fa4f23e5"
+        },
+        "path": "polymyth/methodologylist-studylist.txt"
+      },
+      {
+        "after": {
+          "bytes": 4124419,
+          "sha256": "b990b2ea391ec69d7ccc15cacfc4286b989824e307095b91f249a92305c3a693"
+        },
+        "before": {
+          "bytes": 4119819,
+          "sha256": "e243b5fc3b5a26baaf5975673098477187449b0e0866ca7ac58b93ebcc6a009b"
+        },
+        "path": "polymyth/methodologylist.txt"
+      },
+      {
+        "after": {
+          "bytes": 363309,
+          "sha256": "5ac743d1d50d3758d15ac433516c270e2b8cced9ec0817eda6564af7103f012b"
+        },
+        "before": {
+          "bytes": 357615,
+          "sha256": "f7a8c59d33dd1f8521d6f705624592d64edb2be1861ea51a8c5b9e6c68dac819"
+        },
+        "path": "polymyth/methodologylist/coreplus/index.html"
+      },
+      {
+        "after": {
+          "bytes": 4206811,
+          "sha256": "e84ca80314e96940414b7fa4887f1bfaa1ab82b7028546b50860c081f310a902"
+        },
+        "before": {
+          "bytes": 4206811,
+          "sha256": "97187e81f57393963a3d16e32ddc2dd64e9d2ab536516cd1f9d3ad3260547a67"
+        },
+        "path": "polymyth/methodologylist/index.html"
+      },
+      {
+        "after": {
+          "bytes": 28267,
+          "sha256": "ec3740f9c4613cb05ebcf0d7f000eb8c270ea2eba0e44247d270c2fa38968c8e"
+        },
+        "before": {
+          "bytes": 28267,
+          "sha256": "1928d457b24d1a861c01c104feba94d635198e6aefc45ba434e7d6e4d6aa7910"
+        },
+        "path": "polymyth/methodologylist/mephistodata-register-fixtures.json"
+      },
+      {
+        "after": {
+          "bytes": 104112,
+          "sha256": "4ef48e329ecd0243b50ba24d23f1c1cec88abff87c594079e3875495d2f50421"
+        },
+        "before": {
+          "bytes": 98430,
+          "sha256": "950d319a75aaa20dfb5da88c2af8e1bedd22284472e7f06208b14969aa2d1e7c"
+        },
+        "path": "polymyth/methodologylist/mephistodata-rule-hardening-addendum.js"
+      },
+      {
+        "after": {
+          "bytes": 332448,
+          "sha256": "9a321d6a06384cd8edd3926d8b90f8fdb1277701d959b095046141ce1d888111"
+        },
+        "before": {
+          "bytes": 332448,
+          "sha256": "cd3bc1ba655f6c9812b0b83a7b657c33173e56a2abec70fd82603de8ac25f7de"
+        },
+        "path": "polymyth/modulecanon.txt"
+      },
+      {
+        "after": {
+          "bytes": 6347,
+          "sha256": "945ff2b9b08a381f7f7bcb50dbf021ee990990eee1903ab3327d9cb620c036d0"
+        },
+        "before": {
+          "bytes": 6309,
+          "sha256": "d9339aaf70eb635a61b706245753e026fd5ca077e012d1ee1fe059982d6ff43d"
+        },
+        "path": "polymythseminars/events/91219ec49135/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6014,
+          "sha256": "cbd3fe6c779b6ed77a23c103bf43daf1668c610cd2f7eb9b46aa21910d0ae578"
+        },
+        "before": {
+          "bytes": 6078,
+          "sha256": "0dd9db94a0b04eda671f041dc2b31cfe7b4a508258931ab9ac949713371ad749"
+        },
+        "path": "polymythseminars/events/a09c24372419/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7228,
+          "sha256": "9283fca551fa480b9071c2144205aa5163a18054fd994f2d6b7300ed6fdce10a"
+        },
+        "before": {
+          "bytes": 7188,
+          "sha256": "d4179cab199d6f0dd4f833cf52998b82e7492ac91501176006e6c494b3c2794d"
+        },
+        "path": "polymythseminars/events/ago-rainbow-adventures-camp-session-5a-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7184,
+          "sha256": "5880350ad27970f07450f1464a32f398a13d0bf36c765411067b24697f053c02"
+        },
+        "before": {
+          "bytes": 7440,
+          "sha256": "bb8efc427ea599a1180f35615a09b3ebc0db4c439e9d408af5a0ac83dfb1462a"
+        },
+        "path": "polymythseminars/events/ago-wild-things-camp-session-5b-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8414,
+          "sha256": "a0dae65735674d8d116907aedd7d0b7dc9bd5213df2af7af312fcd06edaaf30d"
+        },
+        "before": {
+          "bytes": 8468,
+          "sha256": "69f6a65fdbe36da137c15ccb48d246e33e5cff2ca7f84d0cb5000450a995e629"
+        },
+        "path": "polymythseminars/events/agreenerfuture-trinity-bellwoods-cleanup-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 9102,
+          "sha256": "5c47b9e40ab147d0078682fcb611389910db6b92037011b31ad38971ae2d91fb"
+        },
+        "before": {
+          "bytes": 8722,
+          "sha256": "05313fa9fe52d16f0372ede488d1c7d2defe3caf21615f309844da06d62b8ed7"
+        },
+        "path": "polymythseminars/events/agreenerfuture-unsmoke-butt-blitz-ontario-september-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7766,
+          "sha256": "617851cfe0ff27d08cd5375c91ae4cdc9c026cb1a3bdb3f99dbc1c211708a919"
+        },
+        "before": {
+          "bytes": 7605,
+          "sha256": "408a1577973b49d893a15836d33a7fe2fb9cdcfeb70cb5c9a9fde901d21b55b7"
+        },
+        "path": "polymythseminars/events/bad-dog-improv-drop-in-2026-08-15/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7766,
+          "sha256": "52a3359daab8d5b1ec760ae14d2a2f2d80bbedf4cfbe77d2517ad01d73cd9e39"
+        },
+        "before": {
+          "bytes": 7605,
+          "sha256": "47af88074b2ab2f188c02f14a41b0a142843dba581ab2c5b9fd8fa1b830e8f3a"
+        },
+        "path": "polymythseminars/events/bad-dog-improv-drop-in-2026-08-17/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7766,
+          "sha256": "fda7c5d40803425e973a974b59fe1d1c8cd480e263ddbcf41c8fc46cdf575a7d"
+        },
+        "before": {
+          "bytes": 7605,
+          "sha256": "d584f99f0376ad98323c13335f9010aafba327cd7895c62551c9d80ca8f608f6"
+        },
+        "path": "polymythseminars/events/bad-dog-improv-drop-in-2026-08-24/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7780,
+          "sha256": "92e46534303de1ce8b71eeebf1d9545f5f40efd4a0fe8913b33450ed1335169f"
+        },
+        "before": {
+          "bytes": 7581,
+          "sha256": "5b5458631c597f856456fa00d65d6ac81f46a6996db328c4c4ccb3cd7336c36c"
+        },
+        "path": "polymythseminars/events/bad-dog-improv-drop-in-2026-08-29/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8358,
+          "sha256": "994e653d6dfd603e38ac574553d7a21940c4513e62603f789a90cd510c266e13"
+        },
+        "before": {
+          "bytes": 8121,
+          "sha256": "03495f695fa9b8a52859ff1ecab32f76c4ca416cf9736c02dcad531328eacd17"
+        },
+        "path": "polymythseminars/events/bad-dog-improv-drop-ins-fall-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7509,
+          "sha256": "89cfc540015ee23020cb842cb2c2a7d1a8618890176733ba80e25bd744df0037"
+        },
+        "before": {
+          "bytes": 7490,
+          "sha256": "69df59ec0153893c2dcfbfb40f7a6a466999df69ca333a542f0610d1c1e72754"
+        },
+        "path": "polymythseminars/events/concordia-ma-zachary-yuzda-2026-08-28/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7568,
+          "sha256": "28556732a3e139b683e34ee4ba3d076958621319dc419c3da158cf2bcdcf247c"
+        },
+        "before": {
+          "bytes": 7633,
+          "sha256": "46c66dfb3d595b2838ab3a7202cbd1d02bcb35ea5deb93d798e5ec51bbc451f1"
+        },
+        "path": "polymythseminars/events/concordia-phd-alex-chartrand-2026-08-14/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7502,
+          "sha256": "87d448b012a6c19a255208a439b4e9087e0b4eec4feffdee2d94eb2511b1223d"
+        },
+        "before": {
+          "bytes": 7553,
+          "sha256": "8b780ce1d3e85d231ed78c907bbe32d5fe0a74a093d6e8af6902322886eb8c3e"
+        },
+        "path": "polymythseminars/events/concordia-phd-alexis-hotte-kilburn-2026-08-27/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7624,
+          "sha256": "1999b18df6263dee90d902c0f8869fc22a615da4779b2a2d18d9788397f2ad48"
+        },
+        "before": {
+          "bytes": 7685,
+          "sha256": "e80b0d1875eb7d297a7a2e73dd3f8beb59ee55f03f1ec450f762944e96dbf81e"
+        },
+        "path": "polymythseminars/events/concordia-phd-ali-asghar-sedighi-2026-08-25/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7756,
+          "sha256": "24e6bf52fd93f4430c823ebe2b3f9530eff48f5fbde90b0c6774e624c9c45de1"
+        },
+        "before": {
+          "bytes": 7828,
+          "sha256": "2c7484993e8c58318d8f301a9e9ee5b5ace87816ff8455c702e470be1e214836"
+        },
+        "path": "polymythseminars/events/concordia-phd-alina-gutierrez-mejia-2026-08-21/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7488,
+          "sha256": "43c52d54294d9e82778545c564e3614e57e271f9bbf279755872db5da130de10"
+        },
+        "before": {
+          "bytes": 7545,
+          "sha256": "5e9e20767c80c0ecfc8e9fb7b2f4f9f717f96ad75c0d8f44eec12227074af889"
+        },
+        "path": "polymythseminars/events/concordia-phd-amin-saber-2026-08-20/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7718,
+          "sha256": "2045fd2bce54ba904ee7518173b340993b5eba2a6003a4ab8b74ff9cc6e71ea8"
+        },
+        "before": {
+          "bytes": 7787,
+          "sha256": "fbbea315b89593f33d8f6b100030b221a18ddafddd9e0c804cd245e1d27a093e"
+        },
+        "path": "polymythseminars/events/concordia-phd-antonio-cavalcante-pereira-2026-08-19/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7646,
+          "sha256": "9dbbb1f8a424f777e41e9018c284f0a6c8844c9c2ea12728859031abd326e3e7"
+        },
+        "before": {
+          "bytes": 7703,
+          "sha256": "def7da3e24d739ccee620464451f0239ae2441cfb14bfeca19e3e59063d89df5"
+        },
+        "path": "polymythseminars/events/concordia-phd-ariel-patricia-boyle-2026-08-20/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7741,
+          "sha256": "3dc087c8c24d789c7a0f3d6bd3b020be20b1a0fb89f8fdb29e18705d08fbefee"
+        },
+        "before": {
+          "bytes": 8428,
+          "sha256": "ea97e232095eede39c70ff007109bd62181603fbe786c4425dae100b26712d0e"
+        },
+        "path": "polymythseminars/events/concordia-phd-bernardine-france-anougue-tonfack-2026-09-03/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7588,
+          "sha256": "a3e0e6cdecb0d3ad9faa0c0038b10cef0f405ed74588e616524b49d29e00ff73"
+        },
+        "before": {
+          "bytes": 7651,
+          "sha256": "233a12ff660e54523489292bc6bb2e3e9d971044bcc9c7fd53bc4ea18d933cc5"
+        },
+        "path": "polymythseminars/events/concordia-phd-criscent-birungi-2026-08-26/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7491,
+          "sha256": "5680aee3590bbc0dc679b94f51a91fb0daa7d63c226a3067f9aa358f1e5093dc"
+        },
+        "before": {
+          "bytes": 7547,
+          "sha256": "4374808650426a3ae72d26739bffcbb3f8e3f061dd3e6fabe25b83b2aee51a65"
+        },
+        "path": "polymythseminars/events/concordia-phd-diane-roberts-2026-08-25/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7477,
+          "sha256": "27a058c0735d742b52ee50385b8cacc52d712746300e30598a0b27e832e853da"
+        },
+        "before": {
+          "bytes": 7528,
+          "sha256": "3f5fd893fd3f9b2c68fbf797bcdaff2691c2500372784809bbcf8e612558628b"
+        },
+        "path": "polymythseminars/events/concordia-phd-edward-griffiths-2026-08-24/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7507,
+          "sha256": "93bb2a3964fa2888eff46eb6d80c43a753da311acb9a692bc8175643e7c7b424"
+        },
+        "before": {
+          "bytes": 7566,
+          "sha256": "39adeef22ced748bd106dd5f1e6d3160ae1e5ef7de523a6753e154c81357b19d"
+        },
+        "path": "polymythseminars/events/concordia-phd-egor-shmonin-2026-08-24/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7509,
+          "sha256": "913e6e6e003eb16819748e4a44b97b206a1aa0eaae9f2351230a211b22a3383b"
+        },
+        "before": {
+          "bytes": 7564,
+          "sha256": "bad312bc71c25e3fba27ab1930981c6a3f65a9d7883b1a883279dac00591e6c7"
+        },
+        "path": "polymythseminars/events/concordia-phd-hussein-atia-2026-08-21/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7721,
+          "sha256": "905322e598fc810e366255bdf133944836ffd555a602c35be11558660aa3c7e2"
+        },
+        "before": {
+          "bytes": 7786,
+          "sha256": "9fa16394c729f1869771e77fee9524add838418d59892fe0a383dec3f1da5c9a"
+        },
+        "path": "polymythseminars/events/concordia-phd-ishfaq-bashir-sofi-2026-08-20/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7531,
+          "sha256": "7073ba6b5de90d49900254473f92c639cbb274543b218dfb443d1a35e99258c1"
+        },
+        "before": {
+          "bytes": 8162,
+          "sha256": "39f3177bf2d9fec1a897f7174e4876bf1e592b1f6ab5f894226c511cb5d4f71e"
+        },
+        "path": "polymythseminars/events/concordia-phd-jasmine-latendresse-2026-09-03/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7457,
+          "sha256": "13bc52a0f45baa3a3d13d10f7dec3c07ce5a8a724f44aafcdad9da9a5ed6716c"
+        },
+        "before": {
+          "bytes": 7511,
+          "sha256": "24c53555fdaffa4dddf29f170dad2d0088924fb73fa768a860037d6c4181f622"
+        },
+        "path": "polymythseminars/events/concordia-phd-jedidat-matoush-2026-08-26/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7592,
+          "sha256": "333753a19f48057c357c0e5ef8cc4b3cb515466ba3d696d3153168de8369550a"
+        },
+        "before": {
+          "bytes": 7665,
+          "sha256": "773bb6d37ba68efcecf825ce949d7b93875c04dcd6a7402c2220c5bb9a0f95a9"
+        },
+        "path": "polymythseminars/events/concordia-phd-jose-luis-cortes-santander-2026-08-14/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7439,
+          "sha256": "17a9b0c2bf4dc30361a2dae321b718ce2290f55b9f0daecf9c3aa0a0fc9fc284"
+        },
+        "before": {
+          "bytes": 7482,
+          "sha256": "045a1e9fc2fcfc3dcd5fa97681c6544b986265709f619ac620d6cddcb9ec5762"
+        },
+        "path": "polymythseminars/events/concordia-phd-joseph-trani-2026-08-25/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7510,
+          "sha256": "e095ede8e5d617e709d05a229549c42e0e176c28b42896d44a57fa5fe6723153"
+        },
+        "before": {
+          "bytes": 7576,
+          "sha256": "92d8e1ee1e385d717fe27c5045ae79b5157db13ad7b642b4bb5e30f455365a0d"
+        },
+        "path": "polymythseminars/events/concordia-phd-juanwei-chen-2026-08-31/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7553,
+          "sha256": "60e95049411c70ea4ec40d63b692850c7867fc6af43ff72bdcb014e24a43047b"
+        },
+        "before": {
+          "bytes": 7611,
+          "sha256": "285e4c86aed75326239f3ec1fe5f82445f6dfc42fbeb202e66f25ef0c0780342"
+        },
+        "path": "polymythseminars/events/concordia-phd-juliet-mackie-2026-08-26/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7527,
+          "sha256": "863edae930ee372478fc3263850bbe7a91bccdac0ae1614eaf5e5164d8ad39f1"
+        },
+        "before": {
+          "bytes": 7544,
+          "sha256": "45a94324b57e8efbb25b177d12b5cf3dc56020eee76794591dbc3d1b0ca7516e"
+        },
+        "path": "polymythseminars/events/concordia-phd-kristina-coulter-2026-08-24/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7461,
+          "sha256": "2a8932b8d736dcc3f1b913f1267c7a9fea7c4a9f8d81411b06ca1ebcbfd98bce"
+        },
+        "before": {
+          "bytes": 7516,
+          "sha256": "e2ef132affa6ea2ffa5631d5109ccf7dc879e6ec62531904ed0e72f08171a3c1"
+        },
+        "path": "polymythseminars/events/concordia-phd-mahdieh-adib-2026-08-20/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7605,
+          "sha256": "c2a46499f7a5babde0209945dc8643deba1b33e20e3e05066828c063098be066"
+        },
+        "before": {
+          "bytes": 7667,
+          "sha256": "e60f270a948c25577fb4561cace65d658c36f35265cbf6aac542b374d47c2a07"
+        },
+        "path": "polymythseminars/events/concordia-phd-mahmoud-abdelrahman-2026-08-19/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7487,
+          "sha256": "3dc61fa6d427b160ff56bbfcb5421bb8532c6447534ab5bda3f95e5dddb8fc7e"
+        },
+        "before": {
+          "bytes": 7524,
+          "sha256": "76c111ae94c128a42f8ebcede723c08ae2b08d013dea2b1afcd97e8978457fec"
+        },
+        "path": "polymythseminars/events/concordia-phd-majid-maleki-2026-08-24/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7722,
+          "sha256": "6b5da91b9bb68aec50455ed04fde4e2387703a8191bb05dc6e4b4dd71964ca2e"
+        },
+        "before": {
+          "bytes": 7793,
+          "sha256": "26791826e71b6b7f730831fd0db80ddb2b81592924c99626611b9cd79ec09f4b"
+        },
+        "path": "polymythseminars/events/concordia-phd-maryam-jabbari-khasraghi-2026-08-25/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7732,
+          "sha256": "ea7ab4e3f439a002bbfa95a86005437ee78de60563c12d76ab2e5e3ea8283454"
+        },
+        "before": {
+          "bytes": 7755,
+          "sha256": "2442bdcd355d58622ee517d4a7b27393d11d0ce9b8143d4ef7ed66a06cc1e672"
+        },
+        "path": "polymythseminars/events/concordia-phd-masoud-valinejadshoubi-2026-08-19/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7437,
+          "sha256": "fc834120bb99431c5aba380a28c2e4ba300fefc23221fd065ef6445aff619a83"
+        },
+        "before": {
+          "bytes": 7463,
+          "sha256": "6362c45e4e8ced0a2d2d67698e71700d03ff13d6d15d11af282cce31bbfcfaa7"
+        },
+        "path": "polymythseminars/events/concordia-phd-maurice-jones-2026-08-28/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7398,
+          "sha256": "3affff104f5f47f2b6f71485ae2c53ec970eb45a055c9f0d526b8fcde2df30bc"
+        },
+        "before": {
+          "bytes": 7441,
+          "sha256": "983574b785a84554e59f158ac4a097c6aae66042e953e861c568fa608a7e430e"
+        },
+        "path": "polymythseminars/events/concordia-phd-milad-ezzati-2026-08-27/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7497,
+          "sha256": "bc68a9253fe965a8a985bea52a5c79f956b28413ac8c2ed66d3e99650a38ab0a"
+        },
+        "before": {
+          "bytes": 7564,
+          "sha256": "0ebc534d49c239c0456fb584dbeb82d3d14b53687c35284282cb0824adee12be"
+        },
+        "path": "polymythseminars/events/concordia-phd-mohammadreza-amini-2026-08-26/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7439,
+          "sha256": "a4ff0cce96aad3faa1ac7cd3559594aaace20bce42018f32394afde493adcf4a"
+        },
+        "before": {
+          "bytes": 7501,
+          "sha256": "387c5ec88bd2226775487ebb0612d1ea837affe9cc518a7d6642f8e89d6c216d"
+        },
+        "path": "polymythseminars/events/concordia-phd-narjes-tahaei-2026-08-25/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7650,
+          "sha256": "1729411f61ee7f15b4c52fd6b5f6bb5860a62401d5bfe86a7a9ac4c958b00b1d"
+        },
+        "before": {
+          "bytes": 7718,
+          "sha256": "e7427437680744b89d65b00b680552d5683207f9fc2e2e47c6fb85489e8b8e06"
+        },
+        "path": "polymythseminars/events/concordia-phd-negarsadat-rahimi-2026-08-14/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7993,
+          "sha256": "2bb881f6f7dd8a3f295f48e1b7b1814dfe50dbf035a7c3fea50e41e40b1d20c7"
+        },
+        "before": {
+          "bytes": 8035,
+          "sha256": "2f39833a4b6bb783c65e456608ae8b82605b8c4a01c73920b764e5d0bc3bc250"
+        },
+        "path": "polymythseminars/events/concordia-phd-ranya-essmat-saad-2026-09-11/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8009,
+          "sha256": "0fb70174ee2640287ff98d9ba8138d09a9869714e52c4b60c36193dff26338e1"
+        },
+        "before": {
+          "bytes": 8071,
+          "sha256": "acfa46949d2b1ebf4748df45841e987ddccbaef3184043c254b58a01938dccd2"
+        },
+        "path": "polymythseminars/events/concordia-phd-rewan-toubar-2026-09-10/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7696,
+          "sha256": "60902ed59d2e133bac1b815b2e0485923e061b1f840203c1d33cd82d007719ce"
+        },
+        "before": {
+          "bytes": 7759,
+          "sha256": "05035d932e0d165a0bee96f0cf0fc5c1cdf03c5d94f734c5384a6065285109fb"
+        },
+        "path": "polymythseminars/events/concordia-phd-rosanne-villemaire-krajden-2026-08-17/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7617,
+          "sha256": "e41d53b0a4f016cf07378ab309624b4cce26178f8ee015ec5a5ce2a1822d6f4a"
+        },
+        "before": {
+          "bytes": 7638,
+          "sha256": "14ed49cee11e9554f6f044d23141c523c3c2fed592eeed29d1ddf43485babce4"
+        },
+        "path": "polymythseminars/events/concordia-phd-saeed-fathollahzadeh-2026-08-21/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7473,
+          "sha256": "5fa4830fa3218bd29c63297b5e8a97bfe7c20843ad7df433ac06a4cd5ecaf405"
+        },
+        "before": {
+          "bytes": 7534,
+          "sha256": "0753bbc0226842c3e89f3369d7ff3df72ed6c694445447bdf518cc2dfaa50e1a"
+        },
+        "path": "polymythseminars/events/concordia-phd-salma-elhankouri-2026-08-20/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7968,
+          "sha256": "390f0edc12a3ab5e24d0f2a241302da08ec611cdbe7e3ea4eb40487bfb3a194d"
+        },
+        "before": {
+          "bytes": 8067,
+          "sha256": "3449720c4b18a4613ea3ca36e19f2257aed171fe6ff658440dea94d0408c93f3"
+        },
+        "path": "polymythseminars/events/concordia-phd-scott-dejong-2026-09-11/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7777,
+          "sha256": "6eab598062d62aac866a626ab4a236e860c4330cd8bc2da8b245fcffcfdb7b9d"
+        },
+        "before": {
+          "bytes": 7852,
+          "sha256": "00e0ce8fdc94ae178fb0993e8a0f5231856e14d0c75ea570b909632d06f99633"
+        },
+        "path": "polymythseminars/events/concordia-phd-sean-francis-connolly-boutin-2026-08-21/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7443,
+          "sha256": "68ee26feeb1f34b6dd259132c9f45ec734ebd74589d443b71907af2d2bb78887"
+        },
+        "before": {
+          "bytes": 7502,
+          "sha256": "87a65b14a11122a2d2fec111d6f52cf02cf8f08ce4db288183cb1fec66a42913"
+        },
+        "path": "polymythseminars/events/concordia-phd-shima-jalili-2026-08-21/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7420,
+          "sha256": "0feaf448698a45f7f89a53982610cf491a99dd468c93929f1fd7d3d1f608d5fa"
+        },
+        "before": {
+          "bytes": 7480,
+          "sha256": "6f889089183d1b86176409180eb197c13bd502e84031eaee84fb5b7d88186915"
+        },
+        "path": "polymythseminars/events/concordia-phd-shuyan-wan-2026-08-31/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7526,
+          "sha256": "62bfa9ef698da9f5c2fac469c1c8d958900004508d657a86487a387f1343af9d"
+        },
+        "before": {
+          "bytes": 7590,
+          "sha256": "0038577923f177619c7aa1d0fea1683e5d90c97bdc061e48963ce25db20fda5c"
+        },
+        "path": "polymythseminars/events/concordia-phd-sneha-paul-2026-09-01/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7804,
+          "sha256": "271c1233cac6462be32895f5e2eb28ebca1874d7c2f9aa639d0f675387b94413"
+        },
+        "before": {
+          "bytes": 7719,
+          "sha256": "46ef7146a3bdcad88bebf88b73a0e7a81e5a7edd61a33264a9d24058d15e6adc"
+        },
+        "path": "polymythseminars/events/concordia-phd-soorena-salari-2026-08-28/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7701,
+          "sha256": "3012e0714661d2112176820a7d100c317f5465d8cb7f26dc97257eb65e34e557"
+        },
+        "before": {
+          "bytes": 7734,
+          "sha256": "e1b8a08e1bf451c63541cb986b0c0d9a3a4f5726dbce96659a2beebb209497aa"
+        },
+        "path": "polymythseminars/events/concordia-phd-soroush-shahsafi-2026-08-25/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7477,
+          "sha256": "8b49fa1847bacac8cb1ea2a5c7339bcf414f6188387c4f241f4bfdda98ed6fde"
+        },
+        "before": {
+          "bytes": 7489,
+          "sha256": "c248dafaaca30b6b65804e65a06d2bc7c64bf5c5fa4a4037c1663beab37dab19"
+        },
+        "path": "polymythseminars/events/concordia-phd-tianhao-xie-2026-08-27/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7587,
+          "sha256": "eb0b7efbdcf4ad80f2b5dd055e9cd7afd72643a1a89383daedc703c7c1e52749"
+        },
+        "before": {
+          "bytes": 7649,
+          "sha256": "bac23a0a7f82b01cab39a821bdadd02fd2651b5fa49356aee3e094c451772fe6"
+        },
+        "path": "polymythseminars/events/concordia-phd-wissam-abdallah-2026-08-24/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7477,
+          "sha256": "044ddde27dcf3bbdaca8cec9b4da6ab9e9b437cc6ee851395c1077c85ce3f19d"
+        },
+        "before": {
+          "bytes": 7532,
+          "sha256": "3a247b2441623ecc7f6a81b157d4d2d93d40000043764895e5c2c3666b156705"
+        },
+        "path": "polymythseminars/events/concordia-phd-xingnan-zhou-2026-08-18/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7821,
+          "sha256": "b7316553f992fc1ee570af9097856a44912fad6ea8107660987c1b1d48067db3"
+        },
+        "before": {
+          "bytes": 7935,
+          "sha256": "e08be9946496ec8dd239523497de6baafa8f947078bae44283e754030175ad20"
+        },
+        "path": "polymythseminars/events/concordia-public-thesis-defences-2026-08-14-to-09-25/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7538,
+          "sha256": "6e444cb327f6051d1538dd5eccb026a5c7b394579c63eba36d8241f3d70b5d8e"
+        },
+        "before": {
+          "bytes": 7319,
+          "sha256": "b5fbce02260a163ccfcb8f911b3468de1044a222ce51c7fd66418aadee58c1ca"
+        },
+        "path": "polymythseminars/events/harbourfront-ceramic-planters-2026-08-20/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7508,
+          "sha256": "de768eb7ef664271e830cb02c0e6d391910551398314fc42763e0f8322bfa72d"
+        },
+        "before": {
+          "bytes": 7365,
+          "sha256": "4d421a104ba908d29d9a190ac2e32ab4e6b0073fc887bda84cbba1a9a3a61b40"
+        },
+        "path": "polymythseminars/events/harbourfront-ceramic-planters-2026-08-29/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7527,
+          "sha256": "c924dd2e54e86866874be0217a6de5186682df332641cd381d9b6c50833b5d09"
+        },
+        "before": {
+          "bytes": 7309,
+          "sha256": "82dad696c043ae0ff6a3ac3e85adbb6f7dd0e422535f4beb9919abf22d36d9e5"
+        },
+        "path": "polymythseminars/events/harbourfront-copperware-making-2026-08-17/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7535,
+          "sha256": "5dfb554d9c1b59649dc1dc94ab09b229d194518445bf5e5711c615582f55471e"
+        },
+        "before": {
+          "bytes": 7314,
+          "sha256": "3a10194539d6b51f80806388b37af37e31c1836a4d96951138410e19a3ba72ed"
+        },
+        "path": "polymythseminars/events/harbourfront-embroidery-101-2026-08-19/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7596,
+          "sha256": "92fa079452b0d9f8550295b422d2a470beffe189d41cd0f84d1d01f5835b6830"
+        },
+        "before": {
+          "bytes": 7345,
+          "sha256": "6a1ccb1262eb9efdebd3d6ae130878d6d54da3457fa048fd8e6fbc4fecc40609"
+        },
+        "path": "polymythseminars/events/harbourfront-glass-blowing-weekend-2026-08-28/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7563,
+          "sha256": "89293a4a5bba404c7ed494767b4959e22f122e6029288c541707c5aec90a414f"
+        },
+        "before": {
+          "bytes": 7768,
+          "sha256": "055b58098412071e56c20c94b3c6c0934549c8806f43d58e78b174120d37e72a"
+        },
+        "path": "polymythseminars/events/harbourfront-glass-blowing-weekend-2026-09-04/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7447,
+          "sha256": "35be5c5103ca268cd24d12daae22205eb6df2cff093e8f2ec3368935ab5eb4b1"
+        },
+        "before": {
+          "bytes": 7190,
+          "sha256": "642bc3650e483c3c0a4e91a86e91b382812ad87f80926a16e5eed5d292db87f7"
+        },
+        "path": "polymythseminars/events/harbourfront-glass-fusing-101-2026-08-29/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7561,
+          "sha256": "0af2c1511a31304383ab69e5d06131a4b7accd5faf88e4ebeaa75ec0552b01dc"
+        },
+        "before": {
+          "bytes": 7344,
+          "sha256": "f962326079b88f81f3162d5f464ede4011d5845b01ab093e37362fe037f373f6"
+        },
+        "path": "polymythseminars/events/harbourfront-shibori-silk-scarf-2026-08-16/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7494,
+          "sha256": "746fa63c46cd7fa354ec7adb279a54af17b3902e5299bf0b8efa8c25a92e0ed0"
+        },
+        "before": {
+          "bytes": 7274,
+          "sha256": "d2ce46b9a1bdb552969c3b51fe725933b9cce3a920f3496af7cf87f3a635b7c5"
+        },
+        "path": "polymythseminars/events/harbourfront-summer-ornament-2026-08-18/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7564,
+          "sha256": "c1bd42bd581010db51e237cb3b2a956d9e58ecd3f1d9958bee1a937ecacfe76e"
+        },
+        "before": {
+          "bytes": 7344,
+          "sha256": "ae13b0517b2bdbda8c8b4e547798a763cd050d22152d51a039ec33204e83942c"
+        },
+        "path": "polymythseminars/events/harbourfront-summer-ornament-2026-08-20/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7564,
+          "sha256": "fffa3c366ebc224ccc7f478ca1a5d28bc6af5cc0634e7bec572529b0320fcda1"
+        },
+        "before": {
+          "bytes": 7316,
+          "sha256": "5388bcb31d567dd2f004b84f4033ba6e2fd5e0869eec6f6f987a43b1464bdabd"
+        },
+        "path": "polymythseminars/events/harbourfront-summer-ornament-2026-08-25/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8831,
+          "sha256": "d002bdd947671e124a226e8151597e56f8a2bda2101131878ff1b4078443b0e3"
+        },
+        "before": {
+          "bytes": 8498,
+          "sha256": "de25bb147f13a48317aceb25a473d9df10601362cd67c4f16f7ae426b1f90ef4"
+        },
+        "path": "polymythseminars/events/harbourfront-super-yummy-night-market-2026-08-29/index.html"
+      },
+      {
+        "after": {
+          "bytes": 9254,
+          "sha256": "8774abc544e356a98242184fd670adf356bf447cca3902722f2fa525183084c5"
+        },
+        "before": {
+          "bytes": 8869,
+          "sha256": "c9b370776ea53301a32a263831db7d35db3eafb0ea1855bf53b0281f275fa506"
+        },
+        "path": "polymythseminars/events/harbourfront-super-yummy-night-market-2026-09-05/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8773,
+          "sha256": "ec730068d9545517f8f27777dad354220063f9fd396201df6cba35a7a92a9d1d"
+        },
+        "before": {
+          "bytes": 8425,
+          "sha256": "62f0c9c9536bdc469abb1f1658c6bae9f08e8bcb5d2ecf44b26bc78f729e814e"
+        },
+        "path": "polymythseminars/events/heritage-toronto-best-pictures-toronto-aug30-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 9245,
+          "sha256": "dcd85e446d439f409ec0e0080b1b96bacd002a8f7d1b4f3ae6ea8259b96719e1"
+        },
+        "before": {
+          "bytes": 8916,
+          "sha256": "2e5789ab5155aa73c97dae47f98625e58c44096ae87b33838682fd52a89ac5b7"
+        },
+        "path": "polymythseminars/events/heritage-toronto-canary-district-in-motion-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8792,
+          "sha256": "2c415e22d84e457f3b0e50966fd960a86e1d01a4933c2d16cff58dee1877accf"
+        },
+        "before": {
+          "bytes": 8452,
+          "sha256": "df89a67e684f9dc7cbcc9da0a41388f94fbd825a89f4432be4a0fe41da948e50"
+        },
+        "path": "polymythseminars/events/heritage-toronto-hidden-histories-uoft-sep02-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8624,
+          "sha256": "cd7db5b2e97d35486f71785cac05bf39a8bba50db9dcb15898935548f3449ea3"
+        },
+        "before": {
+          "bytes": 8271,
+          "sha256": "d0e0cdf11f058f03a32a58df685586e30ffe98133faa8a3a89df650391d560d4"
+        },
+        "path": "polymythseminars/events/heritage-toronto-uptown-uncovered-aug30-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8380,
+          "sha256": "ca94b3a8beca3de3e0c07443b8d114285285c0be5b1955e62e500a69b77deca7"
+        },
+        "before": {
+          "bytes": 8047,
+          "sha256": "5053df7006d3e29d8968bb94720419a2ecff6e1e3307c0aeb94f0e46e4bd523b"
+        },
+        "path": "polymythseminars/events/high-park-weedy-wednesday-2026-09-02/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6691,
+          "sha256": "47006672bb4f3407b458becdd05dc828313fed3152191c37ec28e2cce6c8fcdf"
+        },
+        "before": {
+          "bytes": 7165,
+          "sha256": "df8702e4a1eaeaf70231400f460d6dc9d64f44a98633da691f41089bcc91b318"
+        },
+        "path": "polymythseminars/events/hot-docs-ian-brown-seventy-author-talk-2026-09-03/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6579,
+          "sha256": "9b6cce26984e7172638aeb5ef10537d2b54ec6e81485e21c092c1884546bd095"
+        },
+        "before": {
+          "bytes": 6698,
+          "sha256": "c8c95471f657832b87b6aeade8ec84d98d52262d75dc8fa230def2e5135c0e0d"
+        },
+        "path": "polymythseminars/events/karolina-krzy-anowska-on-experimental-epistemology-2026-05-27/index.html"
+      },
+      {
+        "after": {
+          "bytes": 5446,
+          "sha256": "d7002c43aaeedbf4878c52255d143274ce197b20ec695035fe35979ded4995c7"
+        },
+        "before": {
+          "bytes": 5655,
+          "sha256": "dd44b6e281c43be1f00db6c899f43cb7178b4b4b4fc40b08b5b645b23b342887"
+        },
+        "path": "polymythseminars/events/king-queen-showcase-caribana-2026-07-30/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8132,
+          "sha256": "a2172eb84d338229d2c6e0db36d3c9c156ea7fc308f97a610b8b8587e4843ed6"
+        },
+        "before": {
+          "bytes": 8004,
+          "sha256": "708e7494a2677664539812ebbb03b811cd240a4f1eed9cc08f379f1ba940d523"
+        },
+        "path": "polymythseminars/events/massey-house-of-anansi-cbc-massey-book-launch-2026-09-09/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8507,
+          "sha256": "9cc58a1e3fbef53c0b287783d02297b498d6496d66cd03cbcf5eb1ed81e69686"
+        },
+        "before": {
+          "bytes": 8419,
+          "sha256": "fabab9abd388529787d940d36f1f5b0eb458585d21c07a9339bb1e87a76f4ee2"
+        },
+        "path": "polymythseminars/events/massey-making-amends-historic-wrongs-book-launch-2026-09-14/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7464,
+          "sha256": "d8325e9bef55b46b104e281e74d1b3b678207d182825084eedfd3db69ce73a0e"
+        },
+        "before": {
+          "bytes": 7785,
+          "sha256": "243434c869f1512ec9eff153acdaa6ce6b713101db35740f07246af5c0b1561c"
+        },
+        "path": "polymythseminars/events/michener-orientation-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 5256,
+          "sha256": "524b695ce547e73d3615e7dd00abfe2eb191d65ba154a8f983ffc9fbdcfdc68c"
+        },
+        "before": {
+          "bytes": 5430,
+          "sha256": "f54a86e043b4350846dd4b1d484e9b38c71ab5274adab1ae55cb80e00ad0a7a1"
+        },
+        "path": "polymythseminars/events/pan-in-d-park-2026-08-02/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7615,
+          "sha256": "338bf3ce84afa3c01ddfd2a8fb7264c8fd3c3b01ca97c3f963c72ab745a2af34"
+        },
+        "before": {
+          "bytes": 7562,
+          "sha256": "a6cf10ecb148e9ce0203138b59b833dbae3e0c2253e80b0f41b9a24d2c95b811"
+        },
+        "path": "polymythseminars/events/rcm-summer-piano-festival-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7605,
+          "sha256": "7260c4822a4510bae097e7a859f998569e3c86d4a0bc373aae02e8bc94bb5f5c"
+        },
+        "before": {
+          "bytes": 7593,
+          "sha256": "b87c2cb03b2b12578c2cdba74f4c4493f40e712774e93daaf31bfaeb183977c5"
+        },
+        "path": "polymythseminars/events/rcm-summer-piano-masterclass-alexander-panizza-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7541,
+          "sha256": "89f98898adc398416cc86845ba2d8109eb851cec2eca5af660ddad6be65bc42f"
+        },
+        "before": {
+          "bytes": 7502,
+          "sha256": "a33d826826da56a882700a085b647a1681db49145512e4a9bc8d9efa88c49fb3"
+        },
+        "path": "polymythseminars/events/rcm-summer-piano-masterclass-corey-hamm-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7541,
+          "sha256": "1862290c291c56baf6c2c408703583ead33cf0ae10ab398b133650d570d8fcb7"
+        },
+        "before": {
+          "bytes": 7525,
+          "sha256": "3d1552a85d629179700b01f6847925f434da10fe36bf4704bb1ace20285b03a6"
+        },
+        "path": "polymythseminars/events/rcm-summer-piano-masterclass-dianne-werner-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7541,
+          "sha256": "0976723bf22882bbc8f6f4f5d88a75c9f41de83f77bcef98ec03158babf10881"
+        },
+        "before": {
+          "bytes": 7525,
+          "sha256": "bd16f6c3aaef46cbc2b327275fd5e29e546d09e5984a3e2942ffdd5bc4bc92dc"
+        },
+        "path": "polymythseminars/events/rcm-summer-piano-masterclass-lang-ning-liu-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7477,
+          "sha256": "83b17a51b057787ddcee2345f7ae7371632e24ff7a21986e6f19f3572285cb62"
+        },
+        "before": {
+          "bytes": 7457,
+          "sha256": "2aeb68191b55738f19ed64a182d0a5d18fd3a82251418f3de7ac9007ae03ba6b"
+        },
+        "path": "polymythseminars/events/rcm-summer-piano-masterclass-micah-yui-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7653,
+          "sha256": "587df482b2852332ec94d907eec059bd2fd1a12906abb49337751ce4246fa27b"
+        },
+        "before": {
+          "bytes": 7621,
+          "sha256": "1cde92889fea220fd0c687d5adb515ba09925a6e5757e152483928e11fbbf8ca"
+        },
+        "path": "polymythseminars/events/rcm-summer-piano-masterclass-michael-berkovsky-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7589,
+          "sha256": "3208da5c33b7e4e7defad0e58f7adedfda52ff9312317c65db41ceb3a9c3a3e0"
+        },
+        "before": {
+          "bytes": 7576,
+          "sha256": "9471593e2f680327c54ae33381fbe1a048b84b6da5ab739533f327aeb3980fb2"
+        },
+        "path": "polymythseminars/events/rcm-summer-piano-masterclass-stewart-goodyear-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 10197,
+          "sha256": "54db33a4302e580cf00f5922b355cc43c51ce4a11456c90a44e9d980d433f9d8"
+        },
+        "before": {
+          "bytes": 9620,
+          "sha256": "ff2a69d0a9b3e558d7acf268ded57caaa226615969ebe5893c02e519bee143f0"
+        },
+        "path": "polymythseminars/events/repair-cafe-creative-reuse-2026-08-16/index.html"
+      },
+      {
+        "after": {
+          "bytes": 10197,
+          "sha256": "6bd8f84b0c34bd8cfd2c8d470b4639a3252f8306859c0cb3b35f88a4bdf843f5"
+        },
+        "before": {
+          "bytes": 9620,
+          "sha256": "484403a6a6c3e1d344af1138f662b4c9b8a6863255b05efbbb996dce13d7d63e"
+        },
+        "path": "polymythseminars/events/repair-cafe-creative-reuse-2026-08-23/index.html"
+      },
+      {
+        "after": {
+          "bytes": 10211,
+          "sha256": "44eb11576c7244d39edd361411254d117f5407c69f3f463c562c0fe847bc2e3c"
+        },
+        "before": {
+          "bytes": 9596,
+          "sha256": "840d7e6476c006f5e8ea7a4e2939688cbf17efa0e73361724e6a0790b354d388"
+        },
+        "path": "polymythseminars/events/repair-cafe-creative-reuse-2026-08-30/index.html"
+      },
+      {
+        "after": {
+          "bytes": 10869,
+          "sha256": "cd85a5b3800361087c360fe4c419cd4241a65779dab0ed88def6531c81558227"
+        },
+        "before": {
+          "bytes": 10221,
+          "sha256": "af3e9cee8eaa1b53b65d9cd168f975d471a7ef0515d61635df0997c0ba17fa54"
+        },
+        "path": "polymythseminars/events/repair-cafe-creative-reuse-fall-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 5923,
+          "sha256": "86b2c15a40e302970e9960c4fcfb6d7d5f37007d04a227b07e4d44e7a3ec1950"
+        },
+        "before": {
+          "bytes": 6079,
+          "sha256": "ff44377ba37ffb2bfb4cf474ae67212e9ed0e3f79116a1d0051d1c22d8697c6e"
+        },
+        "path": "polymythseminars/events/research-015cf38c2ae3/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6107,
+          "sha256": "791a3653151b7110cc2652f6028b95cf84e8238b0cd003964164fb3e37395fbc"
+        },
+        "before": {
+          "bytes": 6176,
+          "sha256": "cac8da3939d52928d65beb2cce9880466fb7f0c0d702ab0e3035e842dabb76f5"
+        },
+        "path": "polymythseminars/events/research-0210052c3257/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6184,
+          "sha256": "36e2bc066e21b5cb4c9331065b5d2a45316556dc36e5247a412fa987c128ce67"
+        },
+        "before": {
+          "bytes": 6271,
+          "sha256": "48f127733f8b0c8817f6372fe8c6be388c9a50bac890e2fbdcaefe86675b2ce6"
+        },
+        "path": "polymythseminars/events/research-243e93510489/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6108,
+          "sha256": "c6a2fd4c07a7019af1ae7bbfc260b78504ec5e27bed158735dbb94429c3414d0"
+        },
+        "before": {
+          "bytes": 6111,
+          "sha256": "e24eac58e9251accc3c969ca481b37ddd8b285ff65118dc78c977a8bb6a0ab82"
+        },
+        "path": "polymythseminars/events/research-355d8b29de66/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6259,
+          "sha256": "8b8cfc0086a5ca430ba846c1e1672f7866355cab652b7fcc1e267a0283c3de84"
+        },
+        "before": {
+          "bytes": 6254,
+          "sha256": "1a5abaa00478574996a32fd7962e48612fdb865f4c117154d5c347d1fb58e233"
+        },
+        "path": "polymythseminars/events/research-39f98ca21ecd/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6089,
+          "sha256": "ffc53a4a28016b05bcdd432fae33f21ddeaaad193ea6c086c57b286269ddfa7e"
+        },
+        "before": {
+          "bytes": 6093,
+          "sha256": "f9acb211b0bd900699e0d5f8d20072d1027c74886b8493541aa676e96410b005"
+        },
+        "path": "polymythseminars/events/research-3f99a31574ba/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6306,
+          "sha256": "1bf0585402e3c1a887730b9e97aca0e2776fa5f77fac8067140ffe19d237f894"
+        },
+        "before": {
+          "bytes": 6254,
+          "sha256": "c4e8d25a3c5f8869e374c9758ac81dbb255e10b08f8d418149f5936450129a15"
+        },
+        "path": "polymythseminars/events/research-43a504c99d62/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6324,
+          "sha256": "c390b4e4a5ab81dd4ce916da697a066c51b3e817f3dbd80fa4d5abaccc68d281"
+        },
+        "before": {
+          "bytes": 6288,
+          "sha256": "fcd6b85411eb3b3fe3f505c78eb6035b64facf476e5cb067dde1a7e814c71be1"
+        },
+        "path": "polymythseminars/events/research-4accdf396a7d/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6194,
+          "sha256": "21d2f88e68d2b7560f1984c9d856629d5236f2ef53de5424652584dd32ba98b6"
+        },
+        "before": {
+          "bytes": 6274,
+          "sha256": "9a0e2bd4ffcecd9de3ccfd42c589efec5293e5a60cc5175ae2c16835347b7169"
+        },
+        "path": "polymythseminars/events/research-61b69555ccad/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6152,
+          "sha256": "c213ad546cf85d32860e06da78d1d890f129614081ae5e2c86b19e80246855d1"
+        },
+        "before": {
+          "bytes": 6247,
+          "sha256": "70474f9b06d3e68f81ba449d4e76b9ebdc92f951b7bf5317ee57d7a00b9e0b7b"
+        },
+        "path": "polymythseminars/events/research-67687582fe92/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6191,
+          "sha256": "ac759b776836e3fdefdb0f556fad5b4a866060da2695488814cfd4e5490f1746"
+        },
+        "before": {
+          "bytes": 6236,
+          "sha256": "a7c906e93f12004228d0f0d6357a696e782392d5ed4eba423715ea8908ca4482"
+        },
+        "path": "polymythseminars/events/research-68362a5bacb8/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6169,
+          "sha256": "4a90642a0ba62d65d0d292df65a5e719f0f0f782727a08542a12b09932a71afa"
+        },
+        "before": {
+          "bytes": 6153,
+          "sha256": "9d997f661669b47f394aac67678b5cfaf4da9932ef41550f8d78bd554b3380f6"
+        },
+        "path": "polymythseminars/events/research-6c186fad28d3/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6342,
+          "sha256": "df7f7996d1ec03d70691d404b491c59e953f1656eb1b8826b4d0c146acdcc38a"
+        },
+        "before": {
+          "bytes": 6300,
+          "sha256": "bf3d950e0e48078f75490b6aa949f7d85924df22a805a1edd2ff0c87262390ca"
+        },
+        "path": "polymythseminars/events/research-731312a2d2f4/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6108,
+          "sha256": "1ac8f7a9b0b3a1d779cd4f2694fa9bd234c6ef69d87067649d2d9480c74070e4"
+        },
+        "before": {
+          "bytes": 6111,
+          "sha256": "a480538270b4e2140ef5ddb19bea05da3b19291ebc539f95b61b384c790d61a5"
+        },
+        "path": "polymythseminars/events/research-77850f27225a/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6065,
+          "sha256": "04d363fbd1de64cf20b85ecd2374244929adc8ab6cbfc2ec1156edc4ef9928e3"
+        },
+        "before": {
+          "bytes": 6086,
+          "sha256": "00776dc9f1444d66976be7f2d9cf4f9139aebb1f4cc0aa9bdbb7ca65c8a3403a"
+        },
+        "path": "polymythseminars/events/research-83fe33c16ad5/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6030,
+          "sha256": "a5e3b7a941c470b7cfb609163e9c1beac614971173dfc5a771a13fdd1a082548"
+        },
+        "before": {
+          "bytes": 6128,
+          "sha256": "9c530fd1652e79bdf64faeccfd71550d382d8a22c5d0a9cde800938d3d0513ec"
+        },
+        "path": "polymythseminars/events/research-8fbe2de8f271/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6228,
+          "sha256": "62e7d70764000dca9c67a1485e3ae97c71b4ef09fbb96826db7ca72e11453ac0"
+        },
+        "before": {
+          "bytes": 6201,
+          "sha256": "b65695f938d308d5f81ea344b5e2726b5998098a4eb7beaaff3cabfa8fc8e055"
+        },
+        "path": "polymythseminars/events/research-a732230682b8/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6189,
+          "sha256": "2119c73644dc4ab704162c5cf59ed1d4a7dac0040f0d050466d954b8edb00471"
+        },
+        "before": {
+          "bytes": 6124,
+          "sha256": "4bdfea31c957ff2ec18a716acbed5775b5eefe16c9db6342c984de815c087d1f"
+        },
+        "path": "polymythseminars/events/research-b358691fdd5f/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6041,
+          "sha256": "be070a741523a3e11ee6fefc2093fd0ed3d4f0dfc435f504f636ae926665420a"
+        },
+        "before": {
+          "bytes": 6068,
+          "sha256": "f50f10661b86af81a490aad400a3bc5c636ca2057f77db9d96a4b666e37668bb"
+        },
+        "path": "polymythseminars/events/research-bcd31cf9f379/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6253,
+          "sha256": "04b21566fcefda131ea30d7ed662d4b5bf651a172552cbd6d6aa962e1e7a594a"
+        },
+        "before": {
+          "bytes": 6302,
+          "sha256": "acd52ec913541c9cc76ef95e83387d52bb8717975f0c470a92f8b83379d7bfe7"
+        },
+        "path": "polymythseminars/events/research-c691b6fadcb0/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6220,
+          "sha256": "9d2fd746c0e2c82b7f7e5b0bb41374fb7418a5cefe6f631072c96fb34215c691"
+        },
+        "before": {
+          "bytes": 6208,
+          "sha256": "d8c7ae4ea56040445dca4e707e1cff689bd5fe7dbe98823f87b367e89043ea11"
+        },
+        "path": "polymythseminars/events/research-ca26383d41b1/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6254,
+          "sha256": "edba050524258f18c9f79e1d61511f9c53f986cb4e62df9d329b32fa3e77257c"
+        },
+        "before": {
+          "bytes": 6221,
+          "sha256": "d379eb862a1b3e48b36041e6886ad480cb9254de2122782a8f2553ad441cbb66"
+        },
+        "path": "polymythseminars/events/research-cb30deafe2db/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6213,
+          "sha256": "51def7f174f03721dae0b336c1c88356695133c7bdeaa87f8313a1136bcb1a3d"
+        },
+        "before": {
+          "bytes": 6037,
+          "sha256": "9eba31c09f774e7c9aec8a0fccf50c9aaf9adedcb8b1ea15892f114787a397d9"
+        },
+        "path": "polymythseminars/events/research-d79327e16a52/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6065,
+          "sha256": "18b7195ecf8e115047f4cc77f61140320cc9d0788b1e0db28070781764a9a1e7"
+        },
+        "before": {
+          "bytes": 6075,
+          "sha256": "26a8b95b961041abb0f1a46dd451be2ed79f7cdd113d418212d55f44c7206ce8"
+        },
+        "path": "polymythseminars/events/research-dd0dbec0ba0a/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6100,
+          "sha256": "30d5a449af2d2316314e106ee79df8cf4c46635e0056a714b0a4b545964c275d"
+        },
+        "before": {
+          "bytes": 6171,
+          "sha256": "312476d1accf91873ab92aa6841cd2beb7c0d32560b5b9a0e7184a5cfb591e3b"
+        },
+        "path": "polymythseminars/events/research-e1c02cc3ce22/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6353,
+          "sha256": "6ea803ff687859e2f8ad4a6a1a55103215c95dc906c76b17c969656d4acc6d65"
+        },
+        "before": {
+          "bytes": 6302,
+          "sha256": "ad77597bc3aa539dbd8030884ccafe5939ff86e8bc9a18cae90d08365755a360"
+        },
+        "path": "polymythseminars/events/research-e91d49b9af13/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6137,
+          "sha256": "b824b543f7f5ee1e96deeab0da7b226168caeec3d7048d5e1b0ce20c8121ff4e"
+        },
+        "before": {
+          "bytes": 6140,
+          "sha256": "c62b0809abdca24f7cb8b17fe0ac9faa1a49fd1da61a32406323a99d9f3fa25b"
+        },
+        "path": "polymythseminars/events/research-faa55b846e84/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8060,
+          "sha256": "d5c39c679695e71cd537fd75cbeaa86860ad986c4685341c81bfed81ad6ccbf7"
+        },
+        "before": {
+          "bytes": 8048,
+          "sha256": "f26ee85c2943e686fac870b90614045f1e7e646c2ec6ba48e6d078ee481eed74"
+        },
+        "path": "polymythseminars/events/rom-shokkan-curator-coffee-chat-afternoon-2026-08-28/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7753,
+          "sha256": "4b2dc6a81aad349d721760d5c110206a17c78842c8752f87c2de584f57a179b4"
+        },
+        "before": {
+          "bytes": 7768,
+          "sha256": "6c5006a36c05b23fdcf0ec45e2be3033d534e899eec33774945fa724bc4ff038"
+        },
+        "path": "polymythseminars/events/rom-shokkan-curator-coffee-chat-morning-2026-08-28/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7612,
+          "sha256": "bf8f58121c656f6c668ebe015b60aab0745c52bfdacaeb86bc002827702935bc"
+        },
+        "before": {
+          "bytes": 7517,
+          "sha256": "11b3517e56dddeeea647148e29ff0fc3a4d475d6f3c53bcd3e361305939d0229"
+        },
+        "path": "polymythseminars/events/rom-summer-club-naturequest-session-5-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6256,
+          "sha256": "c63f2a50c940253c16f0133466faf94822bd5699eee27b9f0d49ddf1fe37e4c0"
+        },
+        "before": {
+          "bytes": 6385,
+          "sha256": "fba3de9270d0b3aefb15a763b86c3739c9e50dc0bf9091f289784c1c2b30e344"
+        },
+        "path": "polymythseminars/events/sarah-thornton-book-talk-tits-up-the-top-half-of-w-2026-04-22/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6096,
+          "sha256": "3b5029b4a416faf28b230bef69b4be3db106e7da6953a6745a386ad2c51ceccf"
+        },
+        "before": {
+          "bytes": 6214,
+          "sha256": "c2f5860c227d86e3d69bdace1f092d9161eb8850e673bbd28b2ab955b43d8b4b"
+        },
+        "path": "polymythseminars/events/sri-presents-paolo-granata-generative-knowledge-2026-05-13/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7377,
+          "sha256": "93e14f0942c305a0a8476dbaacd54863dfe6ed3d5b98f7540dd4f5555aeb50bb"
+        },
+        "before": {
+          "bytes": 7049,
+          "sha256": "feb40097c8911a5b1ac7055a043244e1d377ca1644cbdeb9e796c7160e84b7ed"
+        },
+        "path": "polymythseminars/events/ubc-gradstart-welcome-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7395,
+          "sha256": "7dc7dfad4a4be3dcb53e462e5cb88f5791b9543dc81fb118c05dbb664e8fdfbe"
+        },
+        "before": {
+          "bytes": 7076,
+          "sha256": "3feda089880193372d5d9f157d8352739be7f96692741e767ccae2e317696be4"
+        },
+        "path": "polymythseminars/events/ubc-imagine-day-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7594,
+          "sha256": "0e18d665d421906ff5427ba7d4a579ea21264cbe936f6f7f9f484f4bd60af110"
+        },
+        "before": {
+          "bytes": 7292,
+          "sha256": "2b6985066d10ead22700f50e8dd8ecc3f0a1f582621c142db453f5d561ff864a"
+        },
+        "path": "polymythseminars/events/ubc-okanagan-jump-start-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7762,
+          "sha256": "c70b0a24e3eebca0021e24717f856d0c58ec938f88318ea83537f7829589ed61"
+        },
+        "before": {
+          "bytes": 8164,
+          "sha256": "789104be773d2c6f3c1afac68e5c9bfb44205ce50521ce8e268330e870c2e8d3"
+        },
+        "path": "polymythseminars/events/ubc-teacher-education-orientation-week-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7407,
+          "sha256": "1c4b40837f16d2d02ac6099533cbd454ee6ba578308ef7d0c6257c73e0cd5364"
+        },
+        "before": {
+          "bytes": 7639,
+          "sha256": "5ecdcff95c78d5b0a38d160e6508f0d732de252f5c2aa79f3aa3f8612bed6940"
+        },
+        "path": "polymythseminars/events/ubc-vancouver-jump-start-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7086,
+          "sha256": "7a647caa19cd6956535a1a3e97316d969e17528bc5b5501c3bd5ffd76b36dde4"
+        },
+        "before": {
+          "bytes": 7125,
+          "sha256": "e35179b0a1f35116ee7fdbfb7e963d31903e85bf1bb1835136f72dc5f5d94158"
+        },
+        "path": "polymythseminars/events/utoronto-courtesy-of-phenomenology-2026-08-26/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7190,
+          "sha256": "39646287e1bd21b18f7614e6fc88801cdb7ad93d8d327a0d47af55775770be9f"
+        },
+        "before": {
+          "bytes": 7203,
+          "sha256": "c0b8d26002d86ed6c2ca5462c709623c7e7de28d95509157cb58b14e9fc32cf2"
+        },
+        "path": "polymythseminars/events/utoronto-fifty-key-performance-artists-book-launch-2026-09-11/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7822,
+          "sha256": "2ca7962c9884a654c308b0442ccef53296c03684f326128ac207e54d01c6aaa7"
+        },
+        "before": {
+          "bytes": 7702,
+          "sha256": "c71d6d772d8e63e13897eb51d2744c5872dc470775b6e440883adc40de099351"
+        },
+        "path": "polymythseminars/events/utoronto-hegels-sole-idea-workshop-2026-09-05/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7145,
+          "sha256": "14507457ad17087a737235a8b2585328d54efa894d272443c9a2264f276c1da1"
+        },
+        "before": {
+          "bytes": 7583,
+          "sha256": "98ceab0720b7590fd3d314841b4281e5361f7674e1317088d213a27cde8664aa"
+        },
+        "path": "polymythseminars/events/utoronto-idea-is-truth-alznauer-2026-09-04/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7511,
+          "sha256": "2ad54dddb9c188c1fd90f91819f0827fd87395ac57de8839ae469a797881dc15"
+        },
+        "before": {
+          "bytes": 7469,
+          "sha256": "c9f30c85d7cf6b5178fe512c5e19b59b5134042c8aa7fd717d105e5cfa94023b"
+        },
+        "path": "polymythseminars/events/utoronto-indigenous-land-acknowledgments-workshop-2026-08-26/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7553,
+          "sha256": "5e647d0256c0bc73ca90357dd8e2b75603685e2978902ddfa52d23cb7258db0c"
+        },
+        "before": {
+          "bytes": 7547,
+          "sha256": "80ae3225b843a22b45e52c21b5d392615ac0a6cdcbed72528cdd4fd2e6e31d8d"
+        },
+        "path": "polymythseminars/events/utoronto-speaking-our-truths-reconciliation-2026-08-19/index.html"
+      },
+      {
+        "after": {
+          "bytes": 746635,
+          "sha256": "879c63d2a63086f0e47610bdca3d0bec9698f6e0c9a908635dbad26897099294"
+        },
+        "before": {
+          "bytes": 746635,
+          "sha256": "3bb32f33d54b69b4d0de8dad62918a52a959208d56879cd9cb6d42c7d0dc51c6"
+        },
+        "path": "public/polymyth/bookwormburrows.txt"
+      },
+      {
+        "after": {
+          "bytes": 965531,
+          "sha256": "9dee0ab73fa660db639991851f18b55f1d9da97ba28f7990477bf6cc9d774159"
+        },
+        "before": {
+          "bytes": 965531,
+          "sha256": "42e1b8280d9b5883ab3440a130f9b70746f3e830964bf818de56d68fae3215e1"
+        },
+        "path": "public/polymyth/campaigncodex.txt"
+      },
+      {
+        "after": {
+          "bytes": 10923230,
+          "sha256": "7ddba0e01857789c131dcdf92a41f6436a50ca8c389c7e5de17f6cf14bf8b57c"
+        },
+        "before": {
+          "bytes": 10921318,
+          "sha256": "4ffd98730fe22d80b79a1e8dcbee577c442cf7d52cd50283990a7ba00c8378b3"
+        },
+        "path": "public/polymyth/concordance/concordance-index.json"
+      },
+      {
+        "after": {
+          "bytes": 4264,
+          "sha256": "d78876bc450862d4fe351d94c690c39e3b7d5f30143c83421b5775946f85e177"
+        },
+        "before": {
+          "bytes": 4264,
+          "sha256": "a5001b8aa8d285248831102cd29350c9b90fb8f57925ceaa186a2bb53f509781"
+        },
+        "path": "public/polymyth/manifest.txt"
+      },
+      {
+        "after": {
+          "bytes": 92490,
+          "sha256": "2af43e01b86f53ce60caec1bededba8cdf816693d45405ab3578b388ef441070"
+        },
+        "before": {
+          "bytes": 92490,
+          "sha256": "40e33f1cf19221a8a0b8a1026b5084952ac4e1d26588b594cd054bc9ffaa3f80"
+        },
+        "path": "public/polymyth/methodologylist-analysis.txt"
+      },
+      {
+        "after": {
+          "bytes": 464900,
+          "sha256": "c5252b96cfc2f0eaa34910c55dba4482e60943e2c827f5770116aa2fc5d49177"
+        },
+        "before": {
+          "bytes": 464900,
+          "sha256": "5eb7282669ff8952f1778686e0e7adad7304a7fbbf60aff2443405332e9d4bc5"
+        },
+        "path": "public/polymyth/methodologylist-citation.txt"
+      },
+      {
+        "after": {
+          "bytes": 101946,
+          "sha256": "962f00bbe4d4b3814f8dffa5bf86e6da3af8ce664f856c81c2f20ce70a5ce395"
+        },
+        "before": {
+          "bytes": 101946,
+          "sha256": "c368456a91249ab902a02c45b3299d3a7fa1d4ba908216b21cf1cc25e846ce45"
+        },
+        "path": "public/polymyth/methodologylist-corehistory.txt"
+      },
+      {
+        "after": {
+          "bytes": 343625,
+          "sha256": "e6387056c08c4d62a289d1de972275b6939471eb29edf5815158426758496dda"
+        },
+        "before": {
+          "bytes": 339025,
+          "sha256": "10aeb8031558404f9bf64b5380b30bce342d22e81afb5f46174269c8f0f86915"
+        },
+        "path": "public/polymyth/methodologylist-coreplus.txt"
+      },
+      {
+        "after": {
+          "bytes": 174083,
+          "sha256": "ef539db152d4da42112ba2e94640af4751d718dba0ee27366ee3cfc94bf73356"
+        },
+        "before": {
+          "bytes": 174083,
+          "sha256": "a0370762b3b187c7623ef80f2d233e59f289149418a3d58b1d78e558992e504a"
+        },
+        "path": "public/polymyth/methodologylist-degorgonification.txt"
+      },
+      {
+        "after": {
+          "bytes": 409571,
+          "sha256": "4521882dde40b3b007b233297587445750187c3b9d932bfa6b2cf7e2dcd526ca"
+        },
+        "before": {
+          "bytes": 409571,
+          "sha256": "0d3682813639327d57f952e96c3af8e7efc2c07191bec96e9f65100fc19a3934"
+        },
+        "path": "public/polymyth/methodologylist-gorgonification.txt"
+      },
+      {
+        "after": {
+          "bytes": 141676,
+          "sha256": "311c6a0df83d0e9e1cf6c48bf4b5306819666bf2c074a8af2c0350afbc54f962"
+        },
+        "before": {
+          "bytes": 141676,
+          "sha256": "a2dbeb7846dac27289a231878fc114f006ca2f6bd401c012028dc086fdec2173"
+        },
+        "path": "public/polymyth/methodologylist-idiomary.txt"
+      },
+      {
+        "after": {
+          "bytes": 72905,
+          "sha256": "a77a03dc95faf5355ff35dffe04f8bd43d7877b3b076fe03b7c1c7443de81969"
+        },
+        "before": {
+          "bytes": 72905,
+          "sha256": "5c30514f67ee28eed7a1b854c48a88540312d55c6e7f6f882f2f7ea9f1d79c46"
+        },
+        "path": "public/polymyth/methodologylist-learnings.txt"
+      },
+      {
+        "after": {
+          "bytes": 1868469,
+          "sha256": "cb932d01edb7140892bf77764833fa91a39c012dbdf65e32a387b51d81c5f1db"
+        },
+        "before": {
+          "bytes": 1868469,
+          "sha256": "07486d921377fcabce0599145e04eb918fd806e17583a7a5c679faed2c6e4e9f"
+        },
+        "path": "public/polymyth/methodologylist-methodology.txt"
+      },
+      {
+        "after": {
+          "bytes": 26351,
+          "sha256": "ec4856a12510982f90147e9dd3447fc2b34e59c6d0326040b4efa7ec3bade1a2"
+        },
+        "before": {
+          "bytes": 26351,
+          "sha256": "db9308dd974ee694961b6f6c6725e93380cb2583008a65c5d9431ae51a06dc25"
+        },
+        "path": "public/polymyth/methodologylist-pending-user-authorship.txt"
+      },
+      {
+        "after": {
+          "bytes": 106273,
+          "sha256": "91b856852cefe2b6501dcbe05d5261522bb9623a5dc6cd9b414a0127b172540a"
+        },
+        "before": {
+          "bytes": 106273,
+          "sha256": "215aff2b7073733e2abe34250d7c1ac7f7b2dd2bd001816ddb7f94beed2b43ac"
+        },
+        "path": "public/polymyth/methodologylist-pending.txt"
+      },
+      {
+        "after": {
+          "bytes": 120772,
+          "sha256": "a4118cc8e430462f570dfa3fea28855b28397b7c01cd2ebdca9431a925e5740a"
+        },
+        "before": {
+          "bytes": 120772,
+          "sha256": "73fe3d7896f8fe6cb9dd4ff5ed31866f6ddea160e015468d6aa39468d7ce4d51"
+        },
+        "path": "public/polymyth/methodologylist-polycognate.txt"
+      },
+      {
+        "after": {
+          "bytes": 22524,
+          "sha256": "425e40b51a4e75e9d04c20cb07f3e28dc8332f93b9f078bb47b14315f4784b6e"
+        },
+        "before": {
+          "bytes": 22524,
+          "sha256": "e0ef8e8069673c1082717dacf12fdc5791d263449e0e0f02a5043b81892b6a08"
+        },
+        "path": "public/polymyth/methodologylist-rainbowsol.txt"
+      },
+      {
+        "after": {
+          "bytes": 67493,
+          "sha256": "dc6605d830a98f778b5b2bbb6cce6d88f8019284b68a53dab012994300437e51"
+        },
+        "before": {
+          "bytes": 67493,
+          "sha256": "36b5d3203bb9cdd698da4947d2fa867c3ecebf7523e4b9d9576f95f7bc348268"
+        },
+        "path": "public/polymyth/methodologylist-sabachtan.txt"
+      },
+      {
+        "after": {
+          "bytes": 126705,
+          "sha256": "fed79471d175cf0d5363e76ffbead96e7c984cba37f539e3c2cbedf3f9962035"
+        },
+        "before": {
+          "bytes": 126705,
+          "sha256": "b65fab509b46085b2df98b360487dcd81f5a744ee6c233ef430b8f07fa4f23e5"
+        },
+        "path": "public/polymyth/methodologylist-studylist.txt"
+      },
+      {
+        "after": {
+          "bytes": 4124419,
+          "sha256": "b990b2ea391ec69d7ccc15cacfc4286b989824e307095b91f249a92305c3a693"
+        },
+        "before": {
+          "bytes": 4119819,
+          "sha256": "e243b5fc3b5a26baaf5975673098477187449b0e0866ca7ac58b93ebcc6a009b"
+        },
+        "path": "public/polymyth/methodologylist.txt"
+      },
+      {
+        "after": {
+          "bytes": 363309,
+          "sha256": "5ac743d1d50d3758d15ac433516c270e2b8cced9ec0817eda6564af7103f012b"
+        },
+        "before": {
+          "bytes": 357615,
+          "sha256": "f7a8c59d33dd1f8521d6f705624592d64edb2be1861ea51a8c5b9e6c68dac819"
+        },
+        "path": "public/polymyth/methodologylist/coreplus/index.html"
+      },
+      {
+        "after": {
+          "bytes": 4206811,
+          "sha256": "e84ca80314e96940414b7fa4887f1bfaa1ab82b7028546b50860c081f310a902"
+        },
+        "before": {
+          "bytes": 4206811,
+          "sha256": "97187e81f57393963a3d16e32ddc2dd64e9d2ab536516cd1f9d3ad3260547a67"
+        },
+        "path": "public/polymyth/methodologylist/index.html"
+      },
+      {
+        "after": {
+          "bytes": 28267,
+          "sha256": "ec3740f9c4613cb05ebcf0d7f000eb8c270ea2eba0e44247d270c2fa38968c8e"
+        },
+        "before": {
+          "bytes": 28267,
+          "sha256": "1928d457b24d1a861c01c104feba94d635198e6aefc45ba434e7d6e4d6aa7910"
+        },
+        "path": "public/polymyth/methodologylist/mephistodata-register-fixtures.json"
+      },
+      {
+        "after": {
+          "bytes": 104112,
+          "sha256": "4ef48e329ecd0243b50ba24d23f1c1cec88abff87c594079e3875495d2f50421"
+        },
+        "before": {
+          "bytes": 98430,
+          "sha256": "950d319a75aaa20dfb5da88c2af8e1bedd22284472e7f06208b14969aa2d1e7c"
+        },
+        "path": "public/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js"
+      },
+      {
+        "after": {
+          "bytes": 332448,
+          "sha256": "9a321d6a06384cd8edd3926d8b90f8fdb1277701d959b095046141ce1d888111"
+        },
+        "before": {
+          "bytes": 332448,
+          "sha256": "cd3bc1ba655f6c9812b0b83a7b657c33173e56a2abec70fd82603de8ac25f7de"
+        },
+        "path": "public/polymyth/modulecanon.txt"
+      },
+      {
+        "after": {
+          "bytes": 6347,
+          "sha256": "945ff2b9b08a381f7f7bcb50dbf021ee990990eee1903ab3327d9cb620c036d0"
+        },
+        "before": {
+          "bytes": 6309,
+          "sha256": "d9339aaf70eb635a61b706245753e026fd5ca077e012d1ee1fe059982d6ff43d"
+        },
+        "path": "public/polymythseminars/events/91219ec49135/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6014,
+          "sha256": "cbd3fe6c779b6ed77a23c103bf43daf1668c610cd2f7eb9b46aa21910d0ae578"
+        },
+        "before": {
+          "bytes": 6078,
+          "sha256": "0dd9db94a0b04eda671f041dc2b31cfe7b4a508258931ab9ac949713371ad749"
+        },
+        "path": "public/polymythseminars/events/a09c24372419/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7228,
+          "sha256": "9283fca551fa480b9071c2144205aa5163a18054fd994f2d6b7300ed6fdce10a"
+        },
+        "before": {
+          "bytes": 7188,
+          "sha256": "d4179cab199d6f0dd4f833cf52998b82e7492ac91501176006e6c494b3c2794d"
+        },
+        "path": "public/polymythseminars/events/ago-rainbow-adventures-camp-session-5a-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7184,
+          "sha256": "5880350ad27970f07450f1464a32f398a13d0bf36c765411067b24697f053c02"
+        },
+        "before": {
+          "bytes": 7440,
+          "sha256": "bb8efc427ea599a1180f35615a09b3ebc0db4c439e9d408af5a0ac83dfb1462a"
+        },
+        "path": "public/polymythseminars/events/ago-wild-things-camp-session-5b-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8414,
+          "sha256": "a0dae65735674d8d116907aedd7d0b7dc9bd5213df2af7af312fcd06edaaf30d"
+        },
+        "before": {
+          "bytes": 8468,
+          "sha256": "69f6a65fdbe36da137c15ccb48d246e33e5cff2ca7f84d0cb5000450a995e629"
+        },
+        "path": "public/polymythseminars/events/agreenerfuture-trinity-bellwoods-cleanup-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 9102,
+          "sha256": "5c47b9e40ab147d0078682fcb611389910db6b92037011b31ad38971ae2d91fb"
+        },
+        "before": {
+          "bytes": 8722,
+          "sha256": "05313fa9fe52d16f0372ede488d1c7d2defe3caf21615f309844da06d62b8ed7"
+        },
+        "path": "public/polymythseminars/events/agreenerfuture-unsmoke-butt-blitz-ontario-september-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7766,
+          "sha256": "617851cfe0ff27d08cd5375c91ae4cdc9c026cb1a3bdb3f99dbc1c211708a919"
+        },
+        "before": {
+          "bytes": 7605,
+          "sha256": "408a1577973b49d893a15836d33a7fe2fb9cdcfeb70cb5c9a9fde901d21b55b7"
+        },
+        "path": "public/polymythseminars/events/bad-dog-improv-drop-in-2026-08-15/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7766,
+          "sha256": "52a3359daab8d5b1ec760ae14d2a2f2d80bbedf4cfbe77d2517ad01d73cd9e39"
+        },
+        "before": {
+          "bytes": 7605,
+          "sha256": "47af88074b2ab2f188c02f14a41b0a142843dba581ab2c5b9fd8fa1b830e8f3a"
+        },
+        "path": "public/polymythseminars/events/bad-dog-improv-drop-in-2026-08-17/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7766,
+          "sha256": "fda7c5d40803425e973a974b59fe1d1c8cd480e263ddbcf41c8fc46cdf575a7d"
+        },
+        "before": {
+          "bytes": 7605,
+          "sha256": "d584f99f0376ad98323c13335f9010aafba327cd7895c62551c9d80ca8f608f6"
+        },
+        "path": "public/polymythseminars/events/bad-dog-improv-drop-in-2026-08-24/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7780,
+          "sha256": "92e46534303de1ce8b71eeebf1d9545f5f40efd4a0fe8913b33450ed1335169f"
+        },
+        "before": {
+          "bytes": 7581,
+          "sha256": "5b5458631c597f856456fa00d65d6ac81f46a6996db328c4c4ccb3cd7336c36c"
+        },
+        "path": "public/polymythseminars/events/bad-dog-improv-drop-in-2026-08-29/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8358,
+          "sha256": "994e653d6dfd603e38ac574553d7a21940c4513e62603f789a90cd510c266e13"
+        },
+        "before": {
+          "bytes": 8121,
+          "sha256": "03495f695fa9b8a52859ff1ecab32f76c4ca416cf9736c02dcad531328eacd17"
+        },
+        "path": "public/polymythseminars/events/bad-dog-improv-drop-ins-fall-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7509,
+          "sha256": "89cfc540015ee23020cb842cb2c2a7d1a8618890176733ba80e25bd744df0037"
+        },
+        "before": {
+          "bytes": 7490,
+          "sha256": "69df59ec0153893c2dcfbfb40f7a6a466999df69ca333a542f0610d1c1e72754"
+        },
+        "path": "public/polymythseminars/events/concordia-ma-zachary-yuzda-2026-08-28/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7568,
+          "sha256": "28556732a3e139b683e34ee4ba3d076958621319dc419c3da158cf2bcdcf247c"
+        },
+        "before": {
+          "bytes": 7633,
+          "sha256": "46c66dfb3d595b2838ab3a7202cbd1d02bcb35ea5deb93d798e5ec51bbc451f1"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-alex-chartrand-2026-08-14/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7502,
+          "sha256": "87d448b012a6c19a255208a439b4e9087e0b4eec4feffdee2d94eb2511b1223d"
+        },
+        "before": {
+          "bytes": 7553,
+          "sha256": "8b780ce1d3e85d231ed78c907bbe32d5fe0a74a093d6e8af6902322886eb8c3e"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-alexis-hotte-kilburn-2026-08-27/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7624,
+          "sha256": "1999b18df6263dee90d902c0f8869fc22a615da4779b2a2d18d9788397f2ad48"
+        },
+        "before": {
+          "bytes": 7685,
+          "sha256": "e80b0d1875eb7d297a7a2e73dd3f8beb59ee55f03f1ec450f762944e96dbf81e"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-ali-asghar-sedighi-2026-08-25/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7756,
+          "sha256": "24e6bf52fd93f4430c823ebe2b3f9530eff48f5fbde90b0c6774e624c9c45de1"
+        },
+        "before": {
+          "bytes": 7828,
+          "sha256": "2c7484993e8c58318d8f301a9e9ee5b5ace87816ff8455c702e470be1e214836"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-alina-gutierrez-mejia-2026-08-21/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7488,
+          "sha256": "43c52d54294d9e82778545c564e3614e57e271f9bbf279755872db5da130de10"
+        },
+        "before": {
+          "bytes": 7545,
+          "sha256": "5e9e20767c80c0ecfc8e9fb7b2f4f9f717f96ad75c0d8f44eec12227074af889"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-amin-saber-2026-08-20/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7718,
+          "sha256": "2045fd2bce54ba904ee7518173b340993b5eba2a6003a4ab8b74ff9cc6e71ea8"
+        },
+        "before": {
+          "bytes": 7787,
+          "sha256": "fbbea315b89593f33d8f6b100030b221a18ddafddd9e0c804cd245e1d27a093e"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-antonio-cavalcante-pereira-2026-08-19/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7646,
+          "sha256": "9dbbb1f8a424f777e41e9018c284f0a6c8844c9c2ea12728859031abd326e3e7"
+        },
+        "before": {
+          "bytes": 7703,
+          "sha256": "def7da3e24d739ccee620464451f0239ae2441cfb14bfeca19e3e59063d89df5"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-ariel-patricia-boyle-2026-08-20/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7741,
+          "sha256": "3dc087c8c24d789c7a0f3d6bd3b020be20b1a0fb89f8fdb29e18705d08fbefee"
+        },
+        "before": {
+          "bytes": 8428,
+          "sha256": "ea97e232095eede39c70ff007109bd62181603fbe786c4425dae100b26712d0e"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-bernardine-france-anougue-tonfack-2026-09-03/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7588,
+          "sha256": "a3e0e6cdecb0d3ad9faa0c0038b10cef0f405ed74588e616524b49d29e00ff73"
+        },
+        "before": {
+          "bytes": 7651,
+          "sha256": "233a12ff660e54523489292bc6bb2e3e9d971044bcc9c7fd53bc4ea18d933cc5"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-criscent-birungi-2026-08-26/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7491,
+          "sha256": "5680aee3590bbc0dc679b94f51a91fb0daa7d63c226a3067f9aa358f1e5093dc"
+        },
+        "before": {
+          "bytes": 7547,
+          "sha256": "4374808650426a3ae72d26739bffcbb3f8e3f061dd3e6fabe25b83b2aee51a65"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-diane-roberts-2026-08-25/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7477,
+          "sha256": "27a058c0735d742b52ee50385b8cacc52d712746300e30598a0b27e832e853da"
+        },
+        "before": {
+          "bytes": 7528,
+          "sha256": "3f5fd893fd3f9b2c68fbf797bcdaff2691c2500372784809bbcf8e612558628b"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-edward-griffiths-2026-08-24/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7507,
+          "sha256": "93bb2a3964fa2888eff46eb6d80c43a753da311acb9a692bc8175643e7c7b424"
+        },
+        "before": {
+          "bytes": 7566,
+          "sha256": "39adeef22ced748bd106dd5f1e6d3160ae1e5ef7de523a6753e154c81357b19d"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-egor-shmonin-2026-08-24/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7509,
+          "sha256": "913e6e6e003eb16819748e4a44b97b206a1aa0eaae9f2351230a211b22a3383b"
+        },
+        "before": {
+          "bytes": 7564,
+          "sha256": "bad312bc71c25e3fba27ab1930981c6a3f65a9d7883b1a883279dac00591e6c7"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-hussein-atia-2026-08-21/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7721,
+          "sha256": "905322e598fc810e366255bdf133944836ffd555a602c35be11558660aa3c7e2"
+        },
+        "before": {
+          "bytes": 7786,
+          "sha256": "9fa16394c729f1869771e77fee9524add838418d59892fe0a383dec3f1da5c9a"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-ishfaq-bashir-sofi-2026-08-20/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7531,
+          "sha256": "7073ba6b5de90d49900254473f92c639cbb274543b218dfb443d1a35e99258c1"
+        },
+        "before": {
+          "bytes": 8162,
+          "sha256": "39f3177bf2d9fec1a897f7174e4876bf1e592b1f6ab5f894226c511cb5d4f71e"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-jasmine-latendresse-2026-09-03/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7457,
+          "sha256": "13bc52a0f45baa3a3d13d10f7dec3c07ce5a8a724f44aafcdad9da9a5ed6716c"
+        },
+        "before": {
+          "bytes": 7511,
+          "sha256": "24c53555fdaffa4dddf29f170dad2d0088924fb73fa768a860037d6c4181f622"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-jedidat-matoush-2026-08-26/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7592,
+          "sha256": "333753a19f48057c357c0e5ef8cc4b3cb515466ba3d696d3153168de8369550a"
+        },
+        "before": {
+          "bytes": 7665,
+          "sha256": "773bb6d37ba68efcecf825ce949d7b93875c04dcd6a7402c2220c5bb9a0f95a9"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-jose-luis-cortes-santander-2026-08-14/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7439,
+          "sha256": "17a9b0c2bf4dc30361a2dae321b718ce2290f55b9f0daecf9c3aa0a0fc9fc284"
+        },
+        "before": {
+          "bytes": 7482,
+          "sha256": "045a1e9fc2fcfc3dcd5fa97681c6544b986265709f619ac620d6cddcb9ec5762"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-joseph-trani-2026-08-25/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7510,
+          "sha256": "e095ede8e5d617e709d05a229549c42e0e176c28b42896d44a57fa5fe6723153"
+        },
+        "before": {
+          "bytes": 7576,
+          "sha256": "92d8e1ee1e385d717fe27c5045ae79b5157db13ad7b642b4bb5e30f455365a0d"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-juanwei-chen-2026-08-31/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7553,
+          "sha256": "60e95049411c70ea4ec40d63b692850c7867fc6af43ff72bdcb014e24a43047b"
+        },
+        "before": {
+          "bytes": 7611,
+          "sha256": "285e4c86aed75326239f3ec1fe5f82445f6dfc42fbeb202e66f25ef0c0780342"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-juliet-mackie-2026-08-26/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7527,
+          "sha256": "863edae930ee372478fc3263850bbe7a91bccdac0ae1614eaf5e5164d8ad39f1"
+        },
+        "before": {
+          "bytes": 7544,
+          "sha256": "45a94324b57e8efbb25b177d12b5cf3dc56020eee76794591dbc3d1b0ca7516e"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-kristina-coulter-2026-08-24/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7461,
+          "sha256": "2a8932b8d736dcc3f1b913f1267c7a9fea7c4a9f8d81411b06ca1ebcbfd98bce"
+        },
+        "before": {
+          "bytes": 7516,
+          "sha256": "e2ef132affa6ea2ffa5631d5109ccf7dc879e6ec62531904ed0e72f08171a3c1"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-mahdieh-adib-2026-08-20/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7605,
+          "sha256": "c2a46499f7a5babde0209945dc8643deba1b33e20e3e05066828c063098be066"
+        },
+        "before": {
+          "bytes": 7667,
+          "sha256": "e60f270a948c25577fb4561cace65d658c36f35265cbf6aac542b374d47c2a07"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-mahmoud-abdelrahman-2026-08-19/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7487,
+          "sha256": "3dc61fa6d427b160ff56bbfcb5421bb8532c6447534ab5bda3f95e5dddb8fc7e"
+        },
+        "before": {
+          "bytes": 7524,
+          "sha256": "76c111ae94c128a42f8ebcede723c08ae2b08d013dea2b1afcd97e8978457fec"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-majid-maleki-2026-08-24/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7722,
+          "sha256": "6b5da91b9bb68aec50455ed04fde4e2387703a8191bb05dc6e4b4dd71964ca2e"
+        },
+        "before": {
+          "bytes": 7793,
+          "sha256": "26791826e71b6b7f730831fd0db80ddb2b81592924c99626611b9cd79ec09f4b"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-maryam-jabbari-khasraghi-2026-08-25/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7732,
+          "sha256": "ea7ab4e3f439a002bbfa95a86005437ee78de60563c12d76ab2e5e3ea8283454"
+        },
+        "before": {
+          "bytes": 7755,
+          "sha256": "2442bdcd355d58622ee517d4a7b27393d11d0ce9b8143d4ef7ed66a06cc1e672"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-masoud-valinejadshoubi-2026-08-19/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7437,
+          "sha256": "fc834120bb99431c5aba380a28c2e4ba300fefc23221fd065ef6445aff619a83"
+        },
+        "before": {
+          "bytes": 7463,
+          "sha256": "6362c45e4e8ced0a2d2d67698e71700d03ff13d6d15d11af282cce31bbfcfaa7"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-maurice-jones-2026-08-28/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7398,
+          "sha256": "3affff104f5f47f2b6f71485ae2c53ec970eb45a055c9f0d526b8fcde2df30bc"
+        },
+        "before": {
+          "bytes": 7441,
+          "sha256": "983574b785a84554e59f158ac4a097c6aae66042e953e861c568fa608a7e430e"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-milad-ezzati-2026-08-27/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7497,
+          "sha256": "bc68a9253fe965a8a985bea52a5c79f956b28413ac8c2ed66d3e99650a38ab0a"
+        },
+        "before": {
+          "bytes": 7564,
+          "sha256": "0ebc534d49c239c0456fb584dbeb82d3d14b53687c35284282cb0824adee12be"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-mohammadreza-amini-2026-08-26/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7439,
+          "sha256": "a4ff0cce96aad3faa1ac7cd3559594aaace20bce42018f32394afde493adcf4a"
+        },
+        "before": {
+          "bytes": 7501,
+          "sha256": "387c5ec88bd2226775487ebb0612d1ea837affe9cc518a7d6642f8e89d6c216d"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-narjes-tahaei-2026-08-25/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7650,
+          "sha256": "1729411f61ee7f15b4c52fd6b5f6bb5860a62401d5bfe86a7a9ac4c958b00b1d"
+        },
+        "before": {
+          "bytes": 7718,
+          "sha256": "e7427437680744b89d65b00b680552d5683207f9fc2e2e47c6fb85489e8b8e06"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-negarsadat-rahimi-2026-08-14/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7993,
+          "sha256": "2bb881f6f7dd8a3f295f48e1b7b1814dfe50dbf035a7c3fea50e41e40b1d20c7"
+        },
+        "before": {
+          "bytes": 8035,
+          "sha256": "2f39833a4b6bb783c65e456608ae8b82605b8c4a01c73920b764e5d0bc3bc250"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-ranya-essmat-saad-2026-09-11/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8009,
+          "sha256": "0fb70174ee2640287ff98d9ba8138d09a9869714e52c4b60c36193dff26338e1"
+        },
+        "before": {
+          "bytes": 8071,
+          "sha256": "acfa46949d2b1ebf4748df45841e987ddccbaef3184043c254b58a01938dccd2"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-rewan-toubar-2026-09-10/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7696,
+          "sha256": "60902ed59d2e133bac1b815b2e0485923e061b1f840203c1d33cd82d007719ce"
+        },
+        "before": {
+          "bytes": 7759,
+          "sha256": "05035d932e0d165a0bee96f0cf0fc5c1cdf03c5d94f734c5384a6065285109fb"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-rosanne-villemaire-krajden-2026-08-17/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7617,
+          "sha256": "e41d53b0a4f016cf07378ab309624b4cce26178f8ee015ec5a5ce2a1822d6f4a"
+        },
+        "before": {
+          "bytes": 7638,
+          "sha256": "14ed49cee11e9554f6f044d23141c523c3c2fed592eeed29d1ddf43485babce4"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-saeed-fathollahzadeh-2026-08-21/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7473,
+          "sha256": "5fa4830fa3218bd29c63297b5e8a97bfe7c20843ad7df433ac06a4cd5ecaf405"
+        },
+        "before": {
+          "bytes": 7534,
+          "sha256": "0753bbc0226842c3e89f3369d7ff3df72ed6c694445447bdf518cc2dfaa50e1a"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-salma-elhankouri-2026-08-20/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7968,
+          "sha256": "390f0edc12a3ab5e24d0f2a241302da08ec611cdbe7e3ea4eb40487bfb3a194d"
+        },
+        "before": {
+          "bytes": 8067,
+          "sha256": "3449720c4b18a4613ea3ca36e19f2257aed171fe6ff658440dea94d0408c93f3"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-scott-dejong-2026-09-11/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7777,
+          "sha256": "6eab598062d62aac866a626ab4a236e860c4330cd8bc2da8b245fcffcfdb7b9d"
+        },
+        "before": {
+          "bytes": 7852,
+          "sha256": "00e0ce8fdc94ae178fb0993e8a0f5231856e14d0c75ea570b909632d06f99633"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-sean-francis-connolly-boutin-2026-08-21/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7443,
+          "sha256": "68ee26feeb1f34b6dd259132c9f45ec734ebd74589d443b71907af2d2bb78887"
+        },
+        "before": {
+          "bytes": 7502,
+          "sha256": "87a65b14a11122a2d2fec111d6f52cf02cf8f08ce4db288183cb1fec66a42913"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-shima-jalili-2026-08-21/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7420,
+          "sha256": "0feaf448698a45f7f89a53982610cf491a99dd468c93929f1fd7d3d1f608d5fa"
+        },
+        "before": {
+          "bytes": 7480,
+          "sha256": "6f889089183d1b86176409180eb197c13bd502e84031eaee84fb5b7d88186915"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-shuyan-wan-2026-08-31/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7526,
+          "sha256": "62bfa9ef698da9f5c2fac469c1c8d958900004508d657a86487a387f1343af9d"
+        },
+        "before": {
+          "bytes": 7590,
+          "sha256": "0038577923f177619c7aa1d0fea1683e5d90c97bdc061e48963ce25db20fda5c"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-sneha-paul-2026-09-01/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7804,
+          "sha256": "271c1233cac6462be32895f5e2eb28ebca1874d7c2f9aa639d0f675387b94413"
+        },
+        "before": {
+          "bytes": 7719,
+          "sha256": "46ef7146a3bdcad88bebf88b73a0e7a81e5a7edd61a33264a9d24058d15e6adc"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-soorena-salari-2026-08-28/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7701,
+          "sha256": "3012e0714661d2112176820a7d100c317f5465d8cb7f26dc97257eb65e34e557"
+        },
+        "before": {
+          "bytes": 7734,
+          "sha256": "e1b8a08e1bf451c63541cb986b0c0d9a3a4f5726dbce96659a2beebb209497aa"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-soroush-shahsafi-2026-08-25/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7477,
+          "sha256": "8b49fa1847bacac8cb1ea2a5c7339bcf414f6188387c4f241f4bfdda98ed6fde"
+        },
+        "before": {
+          "bytes": 7489,
+          "sha256": "c248dafaaca30b6b65804e65a06d2bc7c64bf5c5fa4a4037c1663beab37dab19"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-tianhao-xie-2026-08-27/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7587,
+          "sha256": "eb0b7efbdcf4ad80f2b5dd055e9cd7afd72643a1a89383daedc703c7c1e52749"
+        },
+        "before": {
+          "bytes": 7649,
+          "sha256": "bac23a0a7f82b01cab39a821bdadd02fd2651b5fa49356aee3e094c451772fe6"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-wissam-abdallah-2026-08-24/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7477,
+          "sha256": "044ddde27dcf3bbdaca8cec9b4da6ab9e9b437cc6ee851395c1077c85ce3f19d"
+        },
+        "before": {
+          "bytes": 7532,
+          "sha256": "3a247b2441623ecc7f6a81b157d4d2d93d40000043764895e5c2c3666b156705"
+        },
+        "path": "public/polymythseminars/events/concordia-phd-xingnan-zhou-2026-08-18/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7821,
+          "sha256": "b7316553f992fc1ee570af9097856a44912fad6ea8107660987c1b1d48067db3"
+        },
+        "before": {
+          "bytes": 7935,
+          "sha256": "e08be9946496ec8dd239523497de6baafa8f947078bae44283e754030175ad20"
+        },
+        "path": "public/polymythseminars/events/concordia-public-thesis-defences-2026-08-14-to-09-25/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7538,
+          "sha256": "6e444cb327f6051d1538dd5eccb026a5c7b394579c63eba36d8241f3d70b5d8e"
+        },
+        "before": {
+          "bytes": 7319,
+          "sha256": "b5fbce02260a163ccfcb8f911b3468de1044a222ce51c7fd66418aadee58c1ca"
+        },
+        "path": "public/polymythseminars/events/harbourfront-ceramic-planters-2026-08-20/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7508,
+          "sha256": "de768eb7ef664271e830cb02c0e6d391910551398314fc42763e0f8322bfa72d"
+        },
+        "before": {
+          "bytes": 7365,
+          "sha256": "4d421a104ba908d29d9a190ac2e32ab4e6b0073fc887bda84cbba1a9a3a61b40"
+        },
+        "path": "public/polymythseminars/events/harbourfront-ceramic-planters-2026-08-29/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7527,
+          "sha256": "c924dd2e54e86866874be0217a6de5186682df332641cd381d9b6c50833b5d09"
+        },
+        "before": {
+          "bytes": 7309,
+          "sha256": "82dad696c043ae0ff6a3ac3e85adbb6f7dd0e422535f4beb9919abf22d36d9e5"
+        },
+        "path": "public/polymythseminars/events/harbourfront-copperware-making-2026-08-17/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7535,
+          "sha256": "5dfb554d9c1b59649dc1dc94ab09b229d194518445bf5e5711c615582f55471e"
+        },
+        "before": {
+          "bytes": 7314,
+          "sha256": "3a10194539d6b51f80806388b37af37e31c1836a4d96951138410e19a3ba72ed"
+        },
+        "path": "public/polymythseminars/events/harbourfront-embroidery-101-2026-08-19/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7596,
+          "sha256": "92fa079452b0d9f8550295b422d2a470beffe189d41cd0f84d1d01f5835b6830"
+        },
+        "before": {
+          "bytes": 7345,
+          "sha256": "6a1ccb1262eb9efdebd3d6ae130878d6d54da3457fa048fd8e6fbc4fecc40609"
+        },
+        "path": "public/polymythseminars/events/harbourfront-glass-blowing-weekend-2026-08-28/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7563,
+          "sha256": "89293a4a5bba404c7ed494767b4959e22f122e6029288c541707c5aec90a414f"
+        },
+        "before": {
+          "bytes": 7768,
+          "sha256": "055b58098412071e56c20c94b3c6c0934549c8806f43d58e78b174120d37e72a"
+        },
+        "path": "public/polymythseminars/events/harbourfront-glass-blowing-weekend-2026-09-04/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7447,
+          "sha256": "35be5c5103ca268cd24d12daae22205eb6df2cff093e8f2ec3368935ab5eb4b1"
+        },
+        "before": {
+          "bytes": 7190,
+          "sha256": "642bc3650e483c3c0a4e91a86e91b382812ad87f80926a16e5eed5d292db87f7"
+        },
+        "path": "public/polymythseminars/events/harbourfront-glass-fusing-101-2026-08-29/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7561,
+          "sha256": "0af2c1511a31304383ab69e5d06131a4b7accd5faf88e4ebeaa75ec0552b01dc"
+        },
+        "before": {
+          "bytes": 7344,
+          "sha256": "f962326079b88f81f3162d5f464ede4011d5845b01ab093e37362fe037f373f6"
+        },
+        "path": "public/polymythseminars/events/harbourfront-shibori-silk-scarf-2026-08-16/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7494,
+          "sha256": "746fa63c46cd7fa354ec7adb279a54af17b3902e5299bf0b8efa8c25a92e0ed0"
+        },
+        "before": {
+          "bytes": 7274,
+          "sha256": "d2ce46b9a1bdb552969c3b51fe725933b9cce3a920f3496af7cf87f3a635b7c5"
+        },
+        "path": "public/polymythseminars/events/harbourfront-summer-ornament-2026-08-18/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7564,
+          "sha256": "c1bd42bd581010db51e237cb3b2a956d9e58ecd3f1d9958bee1a937ecacfe76e"
+        },
+        "before": {
+          "bytes": 7344,
+          "sha256": "ae13b0517b2bdbda8c8b4e547798a763cd050d22152d51a039ec33204e83942c"
+        },
+        "path": "public/polymythseminars/events/harbourfront-summer-ornament-2026-08-20/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7564,
+          "sha256": "fffa3c366ebc224ccc7f478ca1a5d28bc6af5cc0634e7bec572529b0320fcda1"
+        },
+        "before": {
+          "bytes": 7316,
+          "sha256": "5388bcb31d567dd2f004b84f4033ba6e2fd5e0869eec6f6f987a43b1464bdabd"
+        },
+        "path": "public/polymythseminars/events/harbourfront-summer-ornament-2026-08-25/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8831,
+          "sha256": "d002bdd947671e124a226e8151597e56f8a2bda2101131878ff1b4078443b0e3"
+        },
+        "before": {
+          "bytes": 8498,
+          "sha256": "de25bb147f13a48317aceb25a473d9df10601362cd67c4f16f7ae426b1f90ef4"
+        },
+        "path": "public/polymythseminars/events/harbourfront-super-yummy-night-market-2026-08-29/index.html"
+      },
+      {
+        "after": {
+          "bytes": 9254,
+          "sha256": "8774abc544e356a98242184fd670adf356bf447cca3902722f2fa525183084c5"
+        },
+        "before": {
+          "bytes": 8869,
+          "sha256": "c9b370776ea53301a32a263831db7d35db3eafb0ea1855bf53b0281f275fa506"
+        },
+        "path": "public/polymythseminars/events/harbourfront-super-yummy-night-market-2026-09-05/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8773,
+          "sha256": "ec730068d9545517f8f27777dad354220063f9fd396201df6cba35a7a92a9d1d"
+        },
+        "before": {
+          "bytes": 8425,
+          "sha256": "62f0c9c9536bdc469abb1f1658c6bae9f08e8bcb5d2ecf44b26bc78f729e814e"
+        },
+        "path": "public/polymythseminars/events/heritage-toronto-best-pictures-toronto-aug30-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 9245,
+          "sha256": "dcd85e446d439f409ec0e0080b1b96bacd002a8f7d1b4f3ae6ea8259b96719e1"
+        },
+        "before": {
+          "bytes": 8916,
+          "sha256": "2e5789ab5155aa73c97dae47f98625e58c44096ae87b33838682fd52a89ac5b7"
+        },
+        "path": "public/polymythseminars/events/heritage-toronto-canary-district-in-motion-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8792,
+          "sha256": "2c415e22d84e457f3b0e50966fd960a86e1d01a4933c2d16cff58dee1877accf"
+        },
+        "before": {
+          "bytes": 8452,
+          "sha256": "df89a67e684f9dc7cbcc9da0a41388f94fbd825a89f4432be4a0fe41da948e50"
+        },
+        "path": "public/polymythseminars/events/heritage-toronto-hidden-histories-uoft-sep02-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8624,
+          "sha256": "cd7db5b2e97d35486f71785cac05bf39a8bba50db9dcb15898935548f3449ea3"
+        },
+        "before": {
+          "bytes": 8271,
+          "sha256": "d0e0cdf11f058f03a32a58df685586e30ffe98133faa8a3a89df650391d560d4"
+        },
+        "path": "public/polymythseminars/events/heritage-toronto-uptown-uncovered-aug30-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8380,
+          "sha256": "ca94b3a8beca3de3e0c07443b8d114285285c0be5b1955e62e500a69b77deca7"
+        },
+        "before": {
+          "bytes": 8047,
+          "sha256": "5053df7006d3e29d8968bb94720419a2ecff6e1e3307c0aeb94f0e46e4bd523b"
+        },
+        "path": "public/polymythseminars/events/high-park-weedy-wednesday-2026-09-02/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6691,
+          "sha256": "47006672bb4f3407b458becdd05dc828313fed3152191c37ec28e2cce6c8fcdf"
+        },
+        "before": {
+          "bytes": 7165,
+          "sha256": "df8702e4a1eaeaf70231400f460d6dc9d64f44a98633da691f41089bcc91b318"
+        },
+        "path": "public/polymythseminars/events/hot-docs-ian-brown-seventy-author-talk-2026-09-03/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6579,
+          "sha256": "9b6cce26984e7172638aeb5ef10537d2b54ec6e81485e21c092c1884546bd095"
+        },
+        "before": {
+          "bytes": 6698,
+          "sha256": "c8c95471f657832b87b6aeade8ec84d98d52262d75dc8fa230def2e5135c0e0d"
+        },
+        "path": "public/polymythseminars/events/karolina-krzy-anowska-on-experimental-epistemology-2026-05-27/index.html"
+      },
+      {
+        "after": {
+          "bytes": 5446,
+          "sha256": "d7002c43aaeedbf4878c52255d143274ce197b20ec695035fe35979ded4995c7"
+        },
+        "before": {
+          "bytes": 5655,
+          "sha256": "dd44b6e281c43be1f00db6c899f43cb7178b4b4b4fc40b08b5b645b23b342887"
+        },
+        "path": "public/polymythseminars/events/king-queen-showcase-caribana-2026-07-30/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8132,
+          "sha256": "a2172eb84d338229d2c6e0db36d3c9c156ea7fc308f97a610b8b8587e4843ed6"
+        },
+        "before": {
+          "bytes": 8004,
+          "sha256": "708e7494a2677664539812ebbb03b811cd240a4f1eed9cc08f379f1ba940d523"
+        },
+        "path": "public/polymythseminars/events/massey-house-of-anansi-cbc-massey-book-launch-2026-09-09/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8507,
+          "sha256": "9cc58a1e3fbef53c0b287783d02297b498d6496d66cd03cbcf5eb1ed81e69686"
+        },
+        "before": {
+          "bytes": 8419,
+          "sha256": "fabab9abd388529787d940d36f1f5b0eb458585d21c07a9339bb1e87a76f4ee2"
+        },
+        "path": "public/polymythseminars/events/massey-making-amends-historic-wrongs-book-launch-2026-09-14/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7464,
+          "sha256": "d8325e9bef55b46b104e281e74d1b3b678207d182825084eedfd3db69ce73a0e"
+        },
+        "before": {
+          "bytes": 7785,
+          "sha256": "243434c869f1512ec9eff153acdaa6ce6b713101db35740f07246af5c0b1561c"
+        },
+        "path": "public/polymythseminars/events/michener-orientation-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 5256,
+          "sha256": "524b695ce547e73d3615e7dd00abfe2eb191d65ba154a8f983ffc9fbdcfdc68c"
+        },
+        "before": {
+          "bytes": 5430,
+          "sha256": "f54a86e043b4350846dd4b1d484e9b38c71ab5274adab1ae55cb80e00ad0a7a1"
+        },
+        "path": "public/polymythseminars/events/pan-in-d-park-2026-08-02/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7615,
+          "sha256": "338bf3ce84afa3c01ddfd2a8fb7264c8fd3c3b01ca97c3f963c72ab745a2af34"
+        },
+        "before": {
+          "bytes": 7562,
+          "sha256": "a6cf10ecb148e9ce0203138b59b833dbae3e0c2253e80b0f41b9a24d2c95b811"
+        },
+        "path": "public/polymythseminars/events/rcm-summer-piano-festival-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7605,
+          "sha256": "7260c4822a4510bae097e7a859f998569e3c86d4a0bc373aae02e8bc94bb5f5c"
+        },
+        "before": {
+          "bytes": 7593,
+          "sha256": "b87c2cb03b2b12578c2cdba74f4c4493f40e712774e93daaf31bfaeb183977c5"
+        },
+        "path": "public/polymythseminars/events/rcm-summer-piano-masterclass-alexander-panizza-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7541,
+          "sha256": "89f98898adc398416cc86845ba2d8109eb851cec2eca5af660ddad6be65bc42f"
+        },
+        "before": {
+          "bytes": 7502,
+          "sha256": "a33d826826da56a882700a085b647a1681db49145512e4a9bc8d9efa88c49fb3"
+        },
+        "path": "public/polymythseminars/events/rcm-summer-piano-masterclass-corey-hamm-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7541,
+          "sha256": "1862290c291c56baf6c2c408703583ead33cf0ae10ab398b133650d570d8fcb7"
+        },
+        "before": {
+          "bytes": 7525,
+          "sha256": "3d1552a85d629179700b01f6847925f434da10fe36bf4704bb1ace20285b03a6"
+        },
+        "path": "public/polymythseminars/events/rcm-summer-piano-masterclass-dianne-werner-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7541,
+          "sha256": "0976723bf22882bbc8f6f4f5d88a75c9f41de83f77bcef98ec03158babf10881"
+        },
+        "before": {
+          "bytes": 7525,
+          "sha256": "bd16f6c3aaef46cbc2b327275fd5e29e546d09e5984a3e2942ffdd5bc4bc92dc"
+        },
+        "path": "public/polymythseminars/events/rcm-summer-piano-masterclass-lang-ning-liu-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7477,
+          "sha256": "83b17a51b057787ddcee2345f7ae7371632e24ff7a21986e6f19f3572285cb62"
+        },
+        "before": {
+          "bytes": 7457,
+          "sha256": "2aeb68191b55738f19ed64a182d0a5d18fd3a82251418f3de7ac9007ae03ba6b"
+        },
+        "path": "public/polymythseminars/events/rcm-summer-piano-masterclass-micah-yui-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7653,
+          "sha256": "587df482b2852332ec94d907eec059bd2fd1a12906abb49337751ce4246fa27b"
+        },
+        "before": {
+          "bytes": 7621,
+          "sha256": "1cde92889fea220fd0c687d5adb515ba09925a6e5757e152483928e11fbbf8ca"
+        },
+        "path": "public/polymythseminars/events/rcm-summer-piano-masterclass-michael-berkovsky-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7589,
+          "sha256": "3208da5c33b7e4e7defad0e58f7adedfda52ff9312317c65db41ceb3a9c3a3e0"
+        },
+        "before": {
+          "bytes": 7576,
+          "sha256": "9471593e2f680327c54ae33381fbe1a048b84b6da5ab739533f327aeb3980fb2"
+        },
+        "path": "public/polymythseminars/events/rcm-summer-piano-masterclass-stewart-goodyear-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 10197,
+          "sha256": "54db33a4302e580cf00f5922b355cc43c51ce4a11456c90a44e9d980d433f9d8"
+        },
+        "before": {
+          "bytes": 9620,
+          "sha256": "ff2a69d0a9b3e558d7acf268ded57caaa226615969ebe5893c02e519bee143f0"
+        },
+        "path": "public/polymythseminars/events/repair-cafe-creative-reuse-2026-08-16/index.html"
+      },
+      {
+        "after": {
+          "bytes": 10197,
+          "sha256": "6bd8f84b0c34bd8cfd2c8d470b4639a3252f8306859c0cb3b35f88a4bdf843f5"
+        },
+        "before": {
+          "bytes": 9620,
+          "sha256": "484403a6a6c3e1d344af1138f662b4c9b8a6863255b05efbbb996dce13d7d63e"
+        },
+        "path": "public/polymythseminars/events/repair-cafe-creative-reuse-2026-08-23/index.html"
+      },
+      {
+        "after": {
+          "bytes": 10211,
+          "sha256": "44eb11576c7244d39edd361411254d117f5407c69f3f463c562c0fe847bc2e3c"
+        },
+        "before": {
+          "bytes": 9596,
+          "sha256": "840d7e6476c006f5e8ea7a4e2939688cbf17efa0e73361724e6a0790b354d388"
+        },
+        "path": "public/polymythseminars/events/repair-cafe-creative-reuse-2026-08-30/index.html"
+      },
+      {
+        "after": {
+          "bytes": 10869,
+          "sha256": "cd85a5b3800361087c360fe4c419cd4241a65779dab0ed88def6531c81558227"
+        },
+        "before": {
+          "bytes": 10221,
+          "sha256": "af3e9cee8eaa1b53b65d9cd168f975d471a7ef0515d61635df0997c0ba17fa54"
+        },
+        "path": "public/polymythseminars/events/repair-cafe-creative-reuse-fall-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 5923,
+          "sha256": "86b2c15a40e302970e9960c4fcfb6d7d5f37007d04a227b07e4d44e7a3ec1950"
+        },
+        "before": {
+          "bytes": 6079,
+          "sha256": "ff44377ba37ffb2bfb4cf474ae67212e9ed0e3f79116a1d0051d1c22d8697c6e"
+        },
+        "path": "public/polymythseminars/events/research-015cf38c2ae3/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6107,
+          "sha256": "791a3653151b7110cc2652f6028b95cf84e8238b0cd003964164fb3e37395fbc"
+        },
+        "before": {
+          "bytes": 6176,
+          "sha256": "cac8da3939d52928d65beb2cce9880466fb7f0c0d702ab0e3035e842dabb76f5"
+        },
+        "path": "public/polymythseminars/events/research-0210052c3257/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6184,
+          "sha256": "36e2bc066e21b5cb4c9331065b5d2a45316556dc36e5247a412fa987c128ce67"
+        },
+        "before": {
+          "bytes": 6271,
+          "sha256": "48f127733f8b0c8817f6372fe8c6be388c9a50bac890e2fbdcaefe86675b2ce6"
+        },
+        "path": "public/polymythseminars/events/research-243e93510489/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6108,
+          "sha256": "c6a2fd4c07a7019af1ae7bbfc260b78504ec5e27bed158735dbb94429c3414d0"
+        },
+        "before": {
+          "bytes": 6111,
+          "sha256": "e24eac58e9251accc3c969ca481b37ddd8b285ff65118dc78c977a8bb6a0ab82"
+        },
+        "path": "public/polymythseminars/events/research-355d8b29de66/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6259,
+          "sha256": "8b8cfc0086a5ca430ba846c1e1672f7866355cab652b7fcc1e267a0283c3de84"
+        },
+        "before": {
+          "bytes": 6254,
+          "sha256": "1a5abaa00478574996a32fd7962e48612fdb865f4c117154d5c347d1fb58e233"
+        },
+        "path": "public/polymythseminars/events/research-39f98ca21ecd/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6089,
+          "sha256": "ffc53a4a28016b05bcdd432fae33f21ddeaaad193ea6c086c57b286269ddfa7e"
+        },
+        "before": {
+          "bytes": 6093,
+          "sha256": "f9acb211b0bd900699e0d5f8d20072d1027c74886b8493541aa676e96410b005"
+        },
+        "path": "public/polymythseminars/events/research-3f99a31574ba/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6306,
+          "sha256": "1bf0585402e3c1a887730b9e97aca0e2776fa5f77fac8067140ffe19d237f894"
+        },
+        "before": {
+          "bytes": 6254,
+          "sha256": "c4e8d25a3c5f8869e374c9758ac81dbb255e10b08f8d418149f5936450129a15"
+        },
+        "path": "public/polymythseminars/events/research-43a504c99d62/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6324,
+          "sha256": "c390b4e4a5ab81dd4ce916da697a066c51b3e817f3dbd80fa4d5abaccc68d281"
+        },
+        "before": {
+          "bytes": 6288,
+          "sha256": "fcd6b85411eb3b3fe3f505c78eb6035b64facf476e5cb067dde1a7e814c71be1"
+        },
+        "path": "public/polymythseminars/events/research-4accdf396a7d/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6194,
+          "sha256": "21d2f88e68d2b7560f1984c9d856629d5236f2ef53de5424652584dd32ba98b6"
+        },
+        "before": {
+          "bytes": 6274,
+          "sha256": "9a0e2bd4ffcecd9de3ccfd42c589efec5293e5a60cc5175ae2c16835347b7169"
+        },
+        "path": "public/polymythseminars/events/research-61b69555ccad/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6152,
+          "sha256": "c213ad546cf85d32860e06da78d1d890f129614081ae5e2c86b19e80246855d1"
+        },
+        "before": {
+          "bytes": 6247,
+          "sha256": "70474f9b06d3e68f81ba449d4e76b9ebdc92f951b7bf5317ee57d7a00b9e0b7b"
+        },
+        "path": "public/polymythseminars/events/research-67687582fe92/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6191,
+          "sha256": "ac759b776836e3fdefdb0f556fad5b4a866060da2695488814cfd4e5490f1746"
+        },
+        "before": {
+          "bytes": 6236,
+          "sha256": "a7c906e93f12004228d0f0d6357a696e782392d5ed4eba423715ea8908ca4482"
+        },
+        "path": "public/polymythseminars/events/research-68362a5bacb8/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6169,
+          "sha256": "4a90642a0ba62d65d0d292df65a5e719f0f0f782727a08542a12b09932a71afa"
+        },
+        "before": {
+          "bytes": 6153,
+          "sha256": "9d997f661669b47f394aac67678b5cfaf4da9932ef41550f8d78bd554b3380f6"
+        },
+        "path": "public/polymythseminars/events/research-6c186fad28d3/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6342,
+          "sha256": "df7f7996d1ec03d70691d404b491c59e953f1656eb1b8826b4d0c146acdcc38a"
+        },
+        "before": {
+          "bytes": 6300,
+          "sha256": "bf3d950e0e48078f75490b6aa949f7d85924df22a805a1edd2ff0c87262390ca"
+        },
+        "path": "public/polymythseminars/events/research-731312a2d2f4/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6108,
+          "sha256": "1ac8f7a9b0b3a1d779cd4f2694fa9bd234c6ef69d87067649d2d9480c74070e4"
+        },
+        "before": {
+          "bytes": 6111,
+          "sha256": "a480538270b4e2140ef5ddb19bea05da3b19291ebc539f95b61b384c790d61a5"
+        },
+        "path": "public/polymythseminars/events/research-77850f27225a/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6065,
+          "sha256": "04d363fbd1de64cf20b85ecd2374244929adc8ab6cbfc2ec1156edc4ef9928e3"
+        },
+        "before": {
+          "bytes": 6086,
+          "sha256": "00776dc9f1444d66976be7f2d9cf4f9139aebb1f4cc0aa9bdbb7ca65c8a3403a"
+        },
+        "path": "public/polymythseminars/events/research-83fe33c16ad5/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6030,
+          "sha256": "a5e3b7a941c470b7cfb609163e9c1beac614971173dfc5a771a13fdd1a082548"
+        },
+        "before": {
+          "bytes": 6128,
+          "sha256": "9c530fd1652e79bdf64faeccfd71550d382d8a22c5d0a9cde800938d3d0513ec"
+        },
+        "path": "public/polymythseminars/events/research-8fbe2de8f271/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6228,
+          "sha256": "62e7d70764000dca9c67a1485e3ae97c71b4ef09fbb96826db7ca72e11453ac0"
+        },
+        "before": {
+          "bytes": 6201,
+          "sha256": "b65695f938d308d5f81ea344b5e2726b5998098a4eb7beaaff3cabfa8fc8e055"
+        },
+        "path": "public/polymythseminars/events/research-a732230682b8/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6189,
+          "sha256": "2119c73644dc4ab704162c5cf59ed1d4a7dac0040f0d050466d954b8edb00471"
+        },
+        "before": {
+          "bytes": 6124,
+          "sha256": "4bdfea31c957ff2ec18a716acbed5775b5eefe16c9db6342c984de815c087d1f"
+        },
+        "path": "public/polymythseminars/events/research-b358691fdd5f/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6041,
+          "sha256": "be070a741523a3e11ee6fefc2093fd0ed3d4f0dfc435f504f636ae926665420a"
+        },
+        "before": {
+          "bytes": 6068,
+          "sha256": "f50f10661b86af81a490aad400a3bc5c636ca2057f77db9d96a4b666e37668bb"
+        },
+        "path": "public/polymythseminars/events/research-bcd31cf9f379/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6253,
+          "sha256": "04b21566fcefda131ea30d7ed662d4b5bf651a172552cbd6d6aa962e1e7a594a"
+        },
+        "before": {
+          "bytes": 6302,
+          "sha256": "acd52ec913541c9cc76ef95e83387d52bb8717975f0c470a92f8b83379d7bfe7"
+        },
+        "path": "public/polymythseminars/events/research-c691b6fadcb0/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6220,
+          "sha256": "9d2fd746c0e2c82b7f7e5b0bb41374fb7418a5cefe6f631072c96fb34215c691"
+        },
+        "before": {
+          "bytes": 6208,
+          "sha256": "d8c7ae4ea56040445dca4e707e1cff689bd5fe7dbe98823f87b367e89043ea11"
+        },
+        "path": "public/polymythseminars/events/research-ca26383d41b1/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6254,
+          "sha256": "edba050524258f18c9f79e1d61511f9c53f986cb4e62df9d329b32fa3e77257c"
+        },
+        "before": {
+          "bytes": 6221,
+          "sha256": "d379eb862a1b3e48b36041e6886ad480cb9254de2122782a8f2553ad441cbb66"
+        },
+        "path": "public/polymythseminars/events/research-cb30deafe2db/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6213,
+          "sha256": "51def7f174f03721dae0b336c1c88356695133c7bdeaa87f8313a1136bcb1a3d"
+        },
+        "before": {
+          "bytes": 6037,
+          "sha256": "9eba31c09f774e7c9aec8a0fccf50c9aaf9adedcb8b1ea15892f114787a397d9"
+        },
+        "path": "public/polymythseminars/events/research-d79327e16a52/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6065,
+          "sha256": "18b7195ecf8e115047f4cc77f61140320cc9d0788b1e0db28070781764a9a1e7"
+        },
+        "before": {
+          "bytes": 6075,
+          "sha256": "26a8b95b961041abb0f1a46dd451be2ed79f7cdd113d418212d55f44c7206ce8"
+        },
+        "path": "public/polymythseminars/events/research-dd0dbec0ba0a/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6100,
+          "sha256": "30d5a449af2d2316314e106ee79df8cf4c46635e0056a714b0a4b545964c275d"
+        },
+        "before": {
+          "bytes": 6171,
+          "sha256": "312476d1accf91873ab92aa6841cd2beb7c0d32560b5b9a0e7184a5cfb591e3b"
+        },
+        "path": "public/polymythseminars/events/research-e1c02cc3ce22/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6353,
+          "sha256": "6ea803ff687859e2f8ad4a6a1a55103215c95dc906c76b17c969656d4acc6d65"
+        },
+        "before": {
+          "bytes": 6302,
+          "sha256": "ad77597bc3aa539dbd8030884ccafe5939ff86e8bc9a18cae90d08365755a360"
+        },
+        "path": "public/polymythseminars/events/research-e91d49b9af13/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6137,
+          "sha256": "b824b543f7f5ee1e96deeab0da7b226168caeec3d7048d5e1b0ce20c8121ff4e"
+        },
+        "before": {
+          "bytes": 6140,
+          "sha256": "c62b0809abdca24f7cb8b17fe0ac9faa1a49fd1da61a32406323a99d9f3fa25b"
+        },
+        "path": "public/polymythseminars/events/research-faa55b846e84/index.html"
+      },
+      {
+        "after": {
+          "bytes": 8060,
+          "sha256": "d5c39c679695e71cd537fd75cbeaa86860ad986c4685341c81bfed81ad6ccbf7"
+        },
+        "before": {
+          "bytes": 8048,
+          "sha256": "f26ee85c2943e686fac870b90614045f1e7e646c2ec6ba48e6d078ee481eed74"
+        },
+        "path": "public/polymythseminars/events/rom-shokkan-curator-coffee-chat-afternoon-2026-08-28/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7753,
+          "sha256": "4b2dc6a81aad349d721760d5c110206a17c78842c8752f87c2de584f57a179b4"
+        },
+        "before": {
+          "bytes": 7768,
+          "sha256": "6c5006a36c05b23fdcf0ec45e2be3033d534e899eec33774945fa724bc4ff038"
+        },
+        "path": "public/polymythseminars/events/rom-shokkan-curator-coffee-chat-morning-2026-08-28/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7612,
+          "sha256": "bf8f58121c656f6c668ebe015b60aab0745c52bfdacaeb86bc002827702935bc"
+        },
+        "before": {
+          "bytes": 7517,
+          "sha256": "11b3517e56dddeeea647148e29ff0fc3a4d475d6f3c53bcd3e361305939d0229"
+        },
+        "path": "public/polymythseminars/events/rom-summer-club-naturequest-session-5-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6256,
+          "sha256": "c63f2a50c940253c16f0133466faf94822bd5699eee27b9f0d49ddf1fe37e4c0"
+        },
+        "before": {
+          "bytes": 6385,
+          "sha256": "fba3de9270d0b3aefb15a763b86c3739c9e50dc0bf9091f289784c1c2b30e344"
+        },
+        "path": "public/polymythseminars/events/sarah-thornton-book-talk-tits-up-the-top-half-of-w-2026-04-22/index.html"
+      },
+      {
+        "after": {
+          "bytes": 6096,
+          "sha256": "3b5029b4a416faf28b230bef69b4be3db106e7da6953a6745a386ad2c51ceccf"
+        },
+        "before": {
+          "bytes": 6214,
+          "sha256": "c2f5860c227d86e3d69bdace1f092d9161eb8850e673bbd28b2ab955b43d8b4b"
+        },
+        "path": "public/polymythseminars/events/sri-presents-paolo-granata-generative-knowledge-2026-05-13/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7377,
+          "sha256": "93e14f0942c305a0a8476dbaacd54863dfe6ed3d5b98f7540dd4f5555aeb50bb"
+        },
+        "before": {
+          "bytes": 7049,
+          "sha256": "feb40097c8911a5b1ac7055a043244e1d377ca1644cbdeb9e796c7160e84b7ed"
+        },
+        "path": "public/polymythseminars/events/ubc-gradstart-welcome-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7395,
+          "sha256": "7dc7dfad4a4be3dcb53e462e5cb88f5791b9543dc81fb118c05dbb664e8fdfbe"
+        },
+        "before": {
+          "bytes": 7076,
+          "sha256": "3feda089880193372d5d9f157d8352739be7f96692741e767ccae2e317696be4"
+        },
+        "path": "public/polymythseminars/events/ubc-imagine-day-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7594,
+          "sha256": "0e18d665d421906ff5427ba7d4a579ea21264cbe936f6f7f9f484f4bd60af110"
+        },
+        "before": {
+          "bytes": 7292,
+          "sha256": "2b6985066d10ead22700f50e8dd8ecc3f0a1f582621c142db453f5d561ff864a"
+        },
+        "path": "public/polymythseminars/events/ubc-okanagan-jump-start-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7762,
+          "sha256": "c70b0a24e3eebca0021e24717f856d0c58ec938f88318ea83537f7829589ed61"
+        },
+        "before": {
+          "bytes": 8164,
+          "sha256": "789104be773d2c6f3c1afac68e5c9bfb44205ce50521ce8e268330e870c2e8d3"
+        },
+        "path": "public/polymythseminars/events/ubc-teacher-education-orientation-week-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7407,
+          "sha256": "1c4b40837f16d2d02ac6099533cbd454ee6ba578308ef7d0c6257c73e0cd5364"
+        },
+        "before": {
+          "bytes": 7639,
+          "sha256": "5ecdcff95c78d5b0a38d160e6508f0d732de252f5c2aa79f3aa3f8612bed6940"
+        },
+        "path": "public/polymythseminars/events/ubc-vancouver-jump-start-2026/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7086,
+          "sha256": "7a647caa19cd6956535a1a3e97316d969e17528bc5b5501c3bd5ffd76b36dde4"
+        },
+        "before": {
+          "bytes": 7125,
+          "sha256": "e35179b0a1f35116ee7fdbfb7e963d31903e85bf1bb1835136f72dc5f5d94158"
+        },
+        "path": "public/polymythseminars/events/utoronto-courtesy-of-phenomenology-2026-08-26/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7190,
+          "sha256": "39646287e1bd21b18f7614e6fc88801cdb7ad93d8d327a0d47af55775770be9f"
+        },
+        "before": {
+          "bytes": 7203,
+          "sha256": "c0b8d26002d86ed6c2ca5462c709623c7e7de28d95509157cb58b14e9fc32cf2"
+        },
+        "path": "public/polymythseminars/events/utoronto-fifty-key-performance-artists-book-launch-2026-09-11/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7822,
+          "sha256": "2ca7962c9884a654c308b0442ccef53296c03684f326128ac207e54d01c6aaa7"
+        },
+        "before": {
+          "bytes": 7702,
+          "sha256": "c71d6d772d8e63e13897eb51d2744c5872dc470775b6e440883adc40de099351"
+        },
+        "path": "public/polymythseminars/events/utoronto-hegels-sole-idea-workshop-2026-09-05/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7145,
+          "sha256": "14507457ad17087a737235a8b2585328d54efa894d272443c9a2264f276c1da1"
+        },
+        "before": {
+          "bytes": 7583,
+          "sha256": "98ceab0720b7590fd3d314841b4281e5361f7674e1317088d213a27cde8664aa"
+        },
+        "path": "public/polymythseminars/events/utoronto-idea-is-truth-alznauer-2026-09-04/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7511,
+          "sha256": "2ad54dddb9c188c1fd90f91819f0827fd87395ac57de8839ae469a797881dc15"
+        },
+        "before": {
+          "bytes": 7469,
+          "sha256": "c9f30c85d7cf6b5178fe512c5e19b59b5134042c8aa7fd717d105e5cfa94023b"
+        },
+        "path": "public/polymythseminars/events/utoronto-indigenous-land-acknowledgments-workshop-2026-08-26/index.html"
+      },
+      {
+        "after": {
+          "bytes": 7553,
+          "sha256": "5e647d0256c0bc73ca90357dd8e2b75603685e2978902ddfa52d23cb7258db0c"
+        },
+        "before": {
+          "bytes": 7547,
+          "sha256": "80ae3225b843a22b45e52c21b5d392615ac0a6cdcbed72528cdd4fd2e6e31d8d"
+        },
+        "path": "public/polymythseminars/events/utoronto-speaking-our-truths-reconciliation-2026-08-19/index.html"
+      },
+      {
+        "after": {
+          "bytes": 301732,
+          "sha256": "dded82a8da2877a74f8d1c153abcc5878564b537a3633d2caf4d841ae28ed3bc"
+        },
+        "before": {
+          "bytes": 304780,
+          "sha256": "6ae9db80f7274e109685cf753db2b9b9839a778e0e9148149baca35628d779a0"
+        },
+        "path": "public/sitemap.xml"
+      },
+      {
+        "after": {
+          "bytes": 58478,
+          "sha256": "b80e48732ad4fc8ad40219f20b8541525f18accdd5a195945ac5b596c581dedd"
+        },
+        "before": {
+          "bytes": 57155,
+          "sha256": "893b7d6c14c10cea0aa5d808fb6cb3975ea3793b1530fc77e8f7965c70807957"
+        },
+        "path": "scripts/artifact_receipt.py"
+      },
+      {
+        "after": {
+          "bytes": 5478,
+          "sha256": "73a72f5d34340205224ce40167051f1cc28d470b7b98fb7587e401217cc9d80a"
+        },
+        "before": {
+          "bytes": 5388,
+          "sha256": "003d91b504d3ac2fc3d2c248eaaf3639ede0e5c95995de887f62ec38e912a2e3"
+        },
+        "path": "scripts/build-clean-room-release.py"
+      },
+      {
+        "after": {
+          "bytes": 26558,
+          "sha256": "cf76a8d047ddb67138d20c15d65078a8650f6bfdedf34a4893e16e467fb366e2"
+        },
+        "before": {
+          "bytes": 26035,
+          "sha256": "4f7ff529449a665df03ea45364b20e64979b8ccad8156693fdd9348d1c35eb3f"
+        },
+        "path": "scripts/build-public-deploy.js"
+      },
+      {
+        "after": {
+          "bytes": 51086,
+          "sha256": "148791319dd53ff7333926c1eac5873a0214db3696ebae99d9ddd352fbb7c899"
+        },
+        "before": {
+          "bytes": 16480,
+          "sha256": "00b9a2adf805f1629a145db55465e12fdd04107a7962fb5e82db8e93336d5815"
+        },
+        "path": "scripts/fixtures/ml-execution-gates/internal-writing-fixtures.json"
+      },
+      {
+        "after": {
+          "bytes": 110400,
+          "sha256": "b8e94502adfb84f6878d3ebbecbe2f5969ef184e41148163fe5a6637284f9d09"
+        },
+        "before": {
+          "bytes": 14622,
+          "sha256": "61371d211980a3140aa23a654a5d06afcd8f6f4bdd02cc457f667eb53b191b7e"
+        },
+        "path": "scripts/fixtures/ml-execution-gates/mephistodata-runtime-gate-hostile-fixtures.json"
+      },
+      {
+        "after": {
+          "bytes": 78869,
+          "sha256": "318311bf0ef89106c4087015b70d3d47da30b2e3fa741fd29b415c1195e818e3"
+        },
+        "before": {
+          "bytes": 13258,
+          "sha256": "b6f8f37059dd1614d224a032797e9088b5614970e6a6201b20e56b999aa0f0d5"
+        },
+        "path": "scripts/lib/mephistodata-runtime-gate.js"
+      },
+      {
+        "after": {
+          "bytes": 43474,
+          "sha256": "2b2a766a04e43c681e6c144499c13c2463f06e2c2194a55a82b8dd78b4b82ea9"
+        },
+        "before": {
+          "bytes": 43110,
+          "sha256": "e43e2a9519aef7bfab12f173d2fd02753ac3b83fde9c92cd1bcc34ae9abed6b0"
+        },
+        "path": "scripts/lib/public-build-lock.js"
+      },
+      {
+        "after": {
+          "bytes": 14722,
+          "sha256": "0ac67c8c1ea692701a7617b479eb8bd640e41b6eae559367c83e6e3c70fa7763"
+        },
+        "before": {
+          "bytes": 14550,
+          "sha256": "9fb0e4ce0f7b6bb668ba7bf96bf1ae6cb4257cf58e50863979caa6ba5db394f0"
+        },
+        "path": "scripts/package-complete-current.py"
+      },
+      {
+        "after": {
+          "bytes": 23884,
+          "sha256": "27048c7f3ad86e77f643883c570f6999bedf8a3f101493d7c2b4b4b20dd7d942"
+        },
+        "before": {
+          "bytes": 21432,
+          "sha256": "547d2311a512b0259944c706cc6ef8e0c6432ab47f1653760035e54819d28f6f"
+        },
+        "path": "scripts/package-front-facing-mephistodata-release.py"
+      },
+      {
+        "after": {
+          "bytes": 1836,
+          "sha256": "56510a810849eca9a3c12dfca15e6a5b1d8e25d0783b2360fc81bd2d0a105dd5"
+        },
+        "before": {
+          "bytes": 1836,
+          "sha256": "73b19491af873a7c4a651a8776cd51c75652cb3e33a3ffd1959e0a9529988c69"
+        },
+        "path": "scripts/search-surface-manifest.json"
+      },
+      {
+        "after": {
+          "bytes": 62610,
+          "sha256": "ba26d8b404c86c37087ad1b0847ed908eeab6679f6451305a73a40b94a4f462a"
+        },
+        "before": {
+          "bytes": 61269,
+          "sha256": "4aef23e7e105cf10f43dca17eebc89a10d421e3f22918b7465946aaa7430dfec"
+        },
+        "path": "scripts/test_futureproofing_contracts.py"
+      },
+      {
+        "after": {
+          "bytes": 29458,
+          "sha256": "ef9475d64bd00ba95d133c69480d65f2eabed623f97fb2e5575fc0c82d1d9601"
+        },
+        "before": {
+          "bytes": 27721,
+          "sha256": "195b0d25a77e09b6bc3d00fc8d6f55f6f300a9c77e8ca58209f83926ed92b5d1"
+        },
+        "path": "scripts/verify-complete-archive-classes.py"
+      },
+      {
+        "after": {
+          "bytes": 25729,
+          "sha256": "8cfc5cc0a4e36f5b08a1a7eb359afa1d7e15ba699f8ff695a3cd5978dab8a9de"
+        },
+        "before": {
+          "bytes": 4829,
+          "sha256": "98f45ec2f39db45e0b0610c39d9d34916b72f382d8822e0b173f4d8f47c06248"
+        },
+        "path": "scripts/verify-mephistodata-runtime-gate.js"
+      },
+      {
+        "after": {
+          "bytes": 64407,
+          "sha256": "711605b45655b34ae60d0a572ade9430ee5fc2344233dfea23ed87a7c5f929fc"
+        },
+        "before": {
+          "bytes": 44983,
+          "sha256": "3e0faeaabb6486a3d62af9c315c5c402f69515ea8a4e1b3c57dfd6bb289a4068"
+        },
+        "path": "scripts/verify-ml-execution-gates.js"
+      },
+      {
+        "after": {
+          "bytes": 28999,
+          "sha256": "3b22b466d6b5875eb69140f1d179ffec8adeba93aafa910b88fd0cd538bf69bc"
+        },
+        "before": {
+          "bytes": 28999,
+          "sha256": "d7218840a45280f53841280e6f45fe614b9aa367393747a8625cfa49fe569fed"
+        },
+        "path": "scripts/verify-ml-project-adjudication-v2.js"
+      },
+      {
+        "after": {
+          "bytes": 10481,
+          "sha256": "b02824fd23cf2202d1364d6e0d21423151bd069eb85ce201cb087944bd6ff647"
+        },
+        "before": {
+          "bytes": 10481,
+          "sha256": "85778cd66a067bd9b617110604d1babbf6dde97f609fdd00388f58fa902bc76f"
+        },
+        "path": "scripts/verify-ml-rhetoric-taxonomy.js"
+      },
+      {
+        "after": {
+          "bytes": 39061,
+          "sha256": "8f5082058d9a7cd7d61bcb923d445e73b1855e94247c826b8448a99773652b6e"
+        },
+        "before": {
+          "bytes": 39008,
+          "sha256": "6d4d47b52a88f4304c05a5c8e32fed49c8f916d3bba8add21a75beb3cfb7eb8b"
+        },
+        "path": "scripts/verify-public-build-lock-recovery.js"
+      },
+      {
+        "after": {
+          "bytes": 87862,
+          "sha256": "c0f1e0b08b441087ee42023ecc6c8f2f2da2049fdafe2a651e599f3bd3b2b69c"
+        },
+        "before": {
+          "bytes": 79447,
+          "sha256": "2cca99488333fd861b7039999796479a7d456c3f2c0917d9ec59129aeae0cffe"
+        },
+        "path": "scripts/verify-release-gates.js"
+      },
+      {
+        "after": {
+          "bytes": 301732,
+          "sha256": "dded82a8da2877a74f8d1c153abcc5878564b537a3633d2caf4d841ae28ed3bc"
+        },
+        "before": {
+          "bytes": 304780,
+          "sha256": "6ae9db80f7274e109685cf753db2b9b9839a778e0e9148149baca35628d779a0"
+        },
+        "path": "sitemap.xml"
+      }
+    ],
+    "modified_policy": [
+      {
+        "after": {
+          "binding": "versioned_semantic_policy",
+          "policy_sha256": "cb8b8e61675633d56f5f0666bfc8a7cd6a7a74e8b2b2dde7fd45672f804dda08"
+        },
+        "before": {
+          "bytes": 36888,
+          "sha256": "795f9e084b8485454ab9298d4d44d9abb427639ffc97bc3863d85525f6d5fe53"
+        },
+        "path": "RELEASE_MANIFEST.json"
+      },
+      {
+        "after": {
+          "binding": "versioned_semantic_policy",
+          "policy_sha256": "13514deddd29e64c759d6ba0fd52b822d379c78aab2ba463ae0ea12805112783"
+        },
+        "before": {
+          "bytes": 10597,
+          "sha256": "5d78b17e059220e41caa2cd4bdcb97ca4e609868d045419953b34e3d691f2d2e"
+        },
+        "path": "WEBSITE_AUDIT49_TECHNICAL_EFFICIENCY_RESILIENCE_REPORT_2026-07-26.md"
+      },
+      {
+        "after": {
+          "binding": "versioned_semantic_policy",
+          "policy_sha256": "5c6e131d4fc99cc4b0fce9f7feffbe5997163ca50c9bc83b60730ea0857bd4b8"
+        },
+        "before": {
+          "bytes": 2660,
+          "sha256": "69347f6418bd9139579a78f075c82a3b0923d7c9d7e2edb1c8cff85cbb0e802d"
+        },
+        "path": "scripts/reports/audit49-build-packaging-efficiency.json"
+      },
+      {
+        "after": {
+          "binding": "versioned_semantic_policy",
+          "policy_sha256": "9326cf60c64ac441b1aec032a65ad0fd282979ce7a17423346ca91597017a769"
+        },
+        "before": {
+          "bytes": 13698,
+          "sha256": "31d61b2a73619c594e5db14b64b9ea947db54f76ee02bac4ade2921999dd11e1"
+        },
+        "path": "scripts/reports/audit49-technical-efficiency.json"
+      },
+      {
+        "after": {
+          "binding": "versioned_semantic_policy",
+          "policy_sha256": "9f3082592bf81fab71966f241fa7b8cd94b6bba6434fe5ab434ef752ad014cd9"
+        },
+        "before": {
+          "bytes": 6668,
+          "sha256": "2777afdf1846a43e4c2128fe9f6565917e3bd6266aaec1be69f5f8f8931404a1"
+        },
+        "path": "scripts/reports/futureproofing-browser-family-report.json"
+      },
+      {
+        "after": {
+          "binding": "versioned_semantic_policy",
+          "policy_sha256": "912fa72c90857b700f2ce1b9988fd90645cb6ceb27dd10f4207d712e6b5840db"
+        },
+        "before": {
+          "bytes": 2653,
+          "sha256": "c5a11ff60a8a681f74949c002d2b596af096f60749be4093f39b07c2a6ad76a1"
+        },
+        "path": "scripts/reports/futureproofing-gate-report.json"
+      },
+      {
+        "after": {
+          "binding": "versioned_semantic_policy",
+          "policy_sha256": "5b05cd6248b0abfcbb4ea0813903c4ab5a673fba12658055d9a9f292c116a92f"
+        },
+        "before": {
+          "bytes": 1156,
+          "sha256": "4c0260b569b23888afc82afb17e3f9889c66200ce4a42b8823a8c173b6bcfd8b"
+        },
+        "path": "scripts/reports/release-gate-report.json"
+      }
+    ],
+    "outer_delivery": {
+      "added": [
+        {
+          "bytes": 5245,
+          "path": "UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md",
+          "sha256": "9e7308501ca061d349e661b4d93fe6bddfddea95af48d4ee64bb35d363d1ef18"
+        }
+      ],
+      "changed_paths_sha256": "eac3f9339f7d9ed75215e7c90404176732a0061c2f56d334f02ecbaeea7fd1dd",
+      "current_selected_count": 23,
+      "deleted": [],
+      "modified": [
+        {
+          "after": {
+            "bytes": 1562,
+            "sha256": "e6523bf37b64c4cae5671982ce33660eb529f401394da3b677e8933ed3dccf4b"
+          },
+          "before": {
+            "bytes": 1563,
+            "sha256": "41cb3034174d5b5a41aa3d3c019a8461dc63abf01f9b106838df2c9cefc1b24e"
+          },
+          "path": "DEPLOY_TOOLS/README_NEXT_DEPLOY.txt"
+        },
+        {
+          "after": {
+            "bytes": 34755,
+            "sha256": "7620e3c7bf90f59ebaeb8a1f5d51870737d5fe4f29ff1d87f63e11278136a51f"
+          },
+          "before": {
+            "bytes": 30624,
+            "sha256": "26ab0cfed24010270d236cc49fbb1831058ad8880f5852c18d7130c3d82474c2"
+          },
+          "path": "README_FIRST.txt"
+        }
+      ],
+      "predecessor_count": 22,
+      "unchanged": {
+        "bytes": 30154934,
+        "content_sha256": "8ded9f32cd9ad159b19d03783b00ff2d2bbf7922d2e53881df8b1925da44d57d",
+        "count": 20,
+        "paths_sha256": "f39b3e61e505a9c8387853b37e9c0989d72bab4aced1af606720fd5fc85b866d"
+      }
+    },
+    "policy_rows": [
+      {
+        "classification": "predecessor_release_manifest_fixed_point",
+        "path": "RELEASE_MANIFEST.json",
+        "semantic_gate": "node scripts/verify-release-gates.js plus final artifact receipt verification",
+        "writer": "reviewed release manifest update plus canonical package pipeline"
+      },
+      {
+        "classification": "predecessor_generated_report",
+        "path": "scripts/reports/audit49-build-packaging-efficiency.json",
+        "semantic_gate": "node scripts/verify-audit49-build-packaging-efficiency.js",
+        "writer": "scripts/verify-audit49-build-packaging-efficiency.js"
+      },
+      {
+        "classification": "predecessor_generated_report",
+        "path": "scripts/reports/audit49-technical-efficiency.json",
+        "semantic_gate": "node scripts/verify-audit49-technical-efficiency.js",
+        "writer": "scripts/verify-audit49-technical-efficiency.js"
+      },
+      {
+        "classification": "predecessor_generated_report",
+        "path": "WEBSITE_AUDIT49_TECHNICAL_EFFICIENCY_RESILIENCE_REPORT_2026-07-26.md",
+        "semantic_gate": "node scripts/verify-audit49-technical-efficiency.js",
+        "writer": "scripts/verify-audit49-technical-efficiency.js"
+      },
+      {
+        "classification": "predecessor_generated_report",
+        "path": "scripts/reports/futureproofing-browser-family-report.json",
+        "semantic_gate": "node scripts/run-browser-test-tier.mjs --tier family plus final artifact receipt verification",
+        "writer": "scripts/run-browser-test-tier.mjs --tier family"
+      },
+      {
+        "classification": "predecessor_generated_report",
+        "path": "scripts/reports/release-gate-report.json",
+        "semantic_gate": "scripts/verify-all-runner.js plus final artifact receipt verification",
+        "writer": "scripts/verify-all-runner.js"
+      },
+      {
+        "classification": "predecessor_generated_report",
+        "path": "scripts/reports/futureproofing-gate-report.json",
+        "semantic_gate": "python3 scripts/verify-futureproofing-contract.py --run-source plus final artifact receipt verification",
+        "writer": "scripts/verify-futureproofing-contract.py"
+      },
+      {
+        "classification": "successor_contract_self_reference",
+        "path": "data/futureproofing/sep3-sep5-preservation-contract.json",
+        "semantic_gate": "python3 scripts/verify-sep5-base-preservation.py",
+        "writer": "reviewed September 3 to September 5 transition seal"
+      }
+    ],
+    "selection_stats": {
+      "files_selected": 21177,
+      "polymythcal_artifacts_pruned": 0,
+      "reconstruction_duplicates_pruned": 0
+    },
+    "transition_id": "sep3-to-sep5-truthful-completion-enforcement",
+    "unchanged": {
+      "bytes": 420048504,
+      "content_sha256": "9ed7bd732ab1d322fbfb87bea01fe6db1eaa592828238a0415294b861579a9eb",
+      "count": 20776,
+      "paths_sha256": "785319511830ab8ab1ef3e61546e006c1387129e967a719e19fcde7816df7fdd"
+    }
+  },
+  "predecessor_release_id": "core-coreplus-mephistodata-bottom-up-definition-enforcement-complete-2026-09-03",
+  "rule": "Every governed September 3 SITE_PACKAGE and outer delivery path remains byte-identical unless its exact before/after hashes appear here; no predecessor path may be deleted; generated report fixed points use closed policy tokens; the Polymythcal event corpus remains byte-identical.",
+  "schema": "seminar-schools-sep3-sep5-preservation-v1",
+  "status": "sealed",
+  "transition_id": "sep3-to-sep5-truthful-completion-enforcement"
+}

@@ -212,6 +212,7 @@ check(
   'interactive and redirect inventories do not partition source HTML exactly',
 );
 
+let canonicalEvents = [];
 let currentEvents = [];
 let monitoringEvents = [];
 try {
@@ -220,7 +221,7 @@ try {
   const browsePayload = JSON.parse(read('polymythseminars/browse.json'));
   const watchlistPayload = JSON.parse(read('polymythseminars/watchlist.json'));
   const surface = JSON.parse(read('data/polymythcal-publication-surfaces.json'));
-  const canonicalEvents = canonicalPayload.events || [];
+  canonicalEvents = canonicalPayload.events || [];
   const browseEvents = browsePayload.events || [];
   const watchlistItems = watchlistPayload.items || [];
   const canonicalIds = canonicalEvents.map(event => String(event.id));
@@ -308,7 +309,7 @@ try {
 }
 
 try {
-  const expectedRoutes = expectedPolymythcalEventRoutes(currentEvents);
+  const expectedRoutes = expectedPolymythcalEventRoutes(canonicalEvents);
   const englishRoutes = inspectEventRouteDirectory(ROOT, 'polymythseminars/events');
   const frenchRoutes = inspectEventRouteDirectory(ROOT, 'polymythseminars/fr/events');
   const missingEnglish = difference(expectedRoutes.englishRouteIds, englishRoutes.routeIds);
@@ -394,19 +395,33 @@ try {
   );
   check(metrics.non_event_documents > 0, 'non-event source HTML inventory is empty');
 
-  const monitoringRoutes = expectedPolymythcalEventRoutes(monitoringEvents);
-  const leakedEnglishMonitoringRoutes = [...monitoringRoutes.englishRouteIds]
-    .filter(id => englishRoutes.routeIds.has(id));
-  const leakedFrenchMonitoringRoutes = [...monitoringRoutes.frenchRouteIds]
-    .filter(id => frenchRoutes.routeIds.has(id));
-  check(
-    leakedEnglishMonitoringRoutes.length === 0,
-    `monitoring records have English detail or alias pages: ${summarizeValues(leakedEnglishMonitoringRoutes)}`,
-  );
-  check(
-    leakedFrenchMonitoringRoutes.length === 0,
-    `monitoring records have French detail or alias pages: ${summarizeValues(leakedFrenchMonitoringRoutes)}`,
-  );
+  for (const event of monitoringEvents) {
+    const eventId = String(event.id || event.identity_key);
+    for (const localePath of ['events', 'fr/events']) {
+      const relative = `polymythseminars/${localePath}/${eventId}/index.html`;
+      const publicRelative = `public/${relative}`;
+      const html = read(relative);
+      check(
+        /<meta\b(?=[^>]*name=["']robots["'])(?=[^>]*content=["']noindex,follow["'])[^>]*>/i.test(html),
+        `${relative}: watchlist detail is indexable`,
+      );
+      check(
+        !/<time\b[^>]*\bdatetime\s*=/i.test(html),
+        `${relative}: watchlist detail exposes a date`,
+      );
+      check(
+        !/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?["']@type["']\s*:\s*["']Event["']/i.test(html),
+        `${relative}: watchlist detail exposes Event JSON-LD`,
+      );
+      const sourceExists = fs.existsSync(file(relative));
+      const publicExists = fs.existsSync(file(publicRelative));
+      check(
+        sourceExists && publicExists
+          && fs.readFileSync(file(relative)).equals(fs.readFileSync(file(publicRelative))),
+        `${publicRelative}: missing or differs from source watchlist detail`,
+      );
+    }
+  }
   for (const shell of [
     'polymythseminars/index.html',
     'polymythseminars/fr/index.html',
@@ -500,4 +515,3 @@ console.log(
   + `${metrics.static_aria_id_references} static ARIA references, ${metrics.skip_links} skip links, `
   + `${metrics.images} images, and ${metrics.buttons} buttons checked.`,
 );
-

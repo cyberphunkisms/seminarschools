@@ -48,7 +48,7 @@ function createServer() {
 }
 
 async function waitForCalendar(page) {
-  await page.waitForFunction(() => document.getElementById('pmResults')?.getAttribute('aria-busy') === 'false', undefined, {timeout:READY_TIMEOUT});
+  await page.waitForFunction(() => document.getElementById('pmdResults')?.getAttribute('aria-busy') === 'false', undefined, {timeout:READY_TIMEOUT});
 }
 
 async function verifyLocale(browser, base, locale) {
@@ -75,10 +75,11 @@ async function verifyLocale(browser, base, locale) {
     const actions = card.locator('.pm-card-actions > a');
     equal(await actions.count(), 2, `${locale}: Full Noon card has Details plus one exact external action`);
     check((await actions.nth(0).getAttribute('class') || '').split(/\s+/).includes('primary-link'), `${locale}: Details is the first card action`);
-    equal(await actions.nth(0).getAttribute('href'), `${prefix}events/${FULL_NOON_ID}/`, `${locale}: first action targets localized internal Details`);
-    check((await actions.nth(1).getAttribute('class') || '').split(/\s+/).includes('pm-source-action'), `${locale}: exact external page is a separate second action`);
+    equal(new URL(await actions.nth(0).getAttribute('href')).pathname, `${prefix}events/${FULL_NOON_ID}/`, `${locale}: first action targets localized internal Details`);
+    check(!(await actions.nth(1).getAttribute('class') || '').split(/\s+/).includes('primary-link'), `${locale}: exact external page is a separate non-primary second action`);
     equal(await actions.nth(1).getAttribute('href'), FULL_NOON_URL, `${locale}: Full Noon external action uses the exact reviewed URL`);
-    check((await actions.nth(1).innerText()).includes(french ? 'page officielle de la série' : 'official series page'), `${locale}: Full Noon action identifies recurring-series scope`);
+    check((await actions.nth(1).getAttribute('rel') || '').split(/\s+/).includes('noreferrer'), `${locale}: Full Noon external action retains safe relationship metadata`);
+    check((await actions.nth(1).innerText()).toLocaleLowerCase(french ? 'fr-CA' : 'en-CA').includes(french ? 'page officielle de la série' : 'official series page'), `${locale}: Full Noon action identifies recurring-series scope`);
 
     const detailUrl = `${base}${prefix}events/${FULL_NOON_ID}/`;
     await page.goto(detailUrl, {waitUntil:'domcontentloaded',timeout:READY_TIMEOUT});
@@ -91,7 +92,7 @@ async function verifyLocale(browser, base, locale) {
     await waitForCalendar(page);
     const genericCard = page.locator(`[data-event-id="${GENERIC_ID}"]`);
     equal(await genericCard.count(), 1, `${locale}: generic-source regression card rendered once`);
-    equal(await genericCard.locator('.pm-source-action').count(), 0, `${locale}: generic opportunities index is not surfaced on its card`);
+    equal(await genericCard.locator('.pm-card-actions > a').count(), 1, `${locale}: generic opportunities index is not surfaced as a second card action`);
     check((await genericCard.locator('.pm-card-actions > a').first().getAttribute('class') || '').split(/\s+/).includes('primary-link'), `${locale}: generic-source card still starts with internal Details`);
     await page.goto(`${base}${prefix}events/${GENERIC_ID}/`, {waitUntil:'domcontentloaded',timeout:READY_TIMEOUT});
     equal(await page.locator('.pm-event-action.primary').count(), 0, `${locale}: generic-source detail page has no external CTA`);

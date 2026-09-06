@@ -1,0 +1,709 @@
+{
+  "schema_version": "mephistodata-register-fixtures.v1.2026-08-30",
+  "source": {
+    "allowed_root": "polymyth/methodologylist",
+    "path": "polymyth/methodologylist/mephistodata-rule-hardening-addendum.js",
+    "sha256": "74edacebdd3f8caccc25b71ba5536c38c899ba12ee6cae27a753a0cd12f6ae8b",
+    "spans": [
+      {
+        "id": "default_opener",
+        "text": "Every ML*-active conversational response begins at byte zero with exactly one literal control opener.",
+        "sha256": "5a33759570d06b345c127a7d07a6f9e064baaeb763b2c57923fe633cf68b98ee"
+      },
+      {
+        "id": "one_response_bloom",
+        "text": "An explicit Bloom, layman, or NPC request changes only that response to “Mephistodata bloomed:”.",
+        "sha256": "8c073c0185cf58f35399fb2e5b0d0658bc81852b35328dcc3f43123fb9675288"
+      },
+      {
+        "id": "opener_not_character",
+        "text": "The opener is excluded from character scoring and never substitutes for substantive fusion.",
+        "sha256": "73f15e040841a4a1c373672f1438762ce749f42a8db773a3a22257b866b813a5"
+      },
+      {
+        "id": "mephisto_half",
+        "text": "Mephisto supplies source-grounded sardonic or adversarial diagnostic intelligence, a warranted complication, counterthesis, irony, or an explicit no-defect result when the evidence supports none.",
+        "sha256": "8960317bde61f8d157242aae6971996b68145f347b81ff1f9c6816155a0a7e6d"
+      },
+      {
+        "id": "data_half",
+        "text": "Data supplies evidentiary precision, exact scope and status, and source-checking at every factual hinge.",
+        "sha256": "99d43b193cbda0cc861930029afeab48ca8bb1fc759067e4097fbfb075f59d35"
+      },
+      {
+        "id": "named_method_retrieval",
+        "text": "An explicitly named method must resolve and retrieve its exact current canonical owner before drafting.",
+        "sha256": "ca56e83e325dd94b3143e72fa447298006d22660bbc45e7bf51adb06574b6c34"
+      },
+      {
+        "id": "academic_category_presearch",
+        "text": "A failure to retrieve any owner blocks query generation rather than licensing reconstruction from memory or a generic academic taxonomy.",
+        "sha256": "29aed92ea5ee2266bee904deb07178da196894c661f1924d868b087dadc10c47"
+      },
+      {
+        "id": "degorgonified_feminism_activation",
+        "text": "An exact unquoted operator use of the phrase “degorgonified feminism” activates ML* even when the request contains no other project token.",
+        "sha256": "701bf9f507a57187227b3cf09447561df6259f9ef0a339e28e39114c74f93a69"
+      },
+      {
+        "id": "degorgonified_feminism_complete_recall",
+        "text": "A cross-reference, a partial summary, one selected rule, or a remembered reconstruction does not satisfy the recall.",
+        "sha256": "f87a6d936867074bd1a7940f523c2713e1d9099e7488ac23cbf1a262668b9fcd"
+      },
+      {
+        "id": "ouroboros_exact_form",
+        "text": "An explicit Ouroborosanalyses request retrieves method-ouroborosanalyses-current-2026-08-23 and runs its exact whole-conversation four-step form: review the whole conversation; ask the strongest critical questions of every position while ironmanning all sides; answer every answerable question; return only genuinely unanswerable residue.",
+        "sha256": "6bd3f9b735d4e5ea7075e5249d68ebc27cf70f94c8972b43d87f4cdd15da3f29"
+      },
+      {
+        "id": "ouroboros_residue_only",
+        "text": "Settled findings, general summaries, recommendations, next steps, improvised method stages, and answerable questions never appear in the final residue.",
+        "sha256": "20a85320089c0cedff74d7529262986e42dc4ebd05b8132631992c9ab664a877"
+      }
+    ]
+  },
+  "owners": [
+    {
+      "id": "coreplus-handler-mephistodata-execution-gates-2026-08-26",
+      "semantic_sha256": "3721e4296d129c4cb347838328e68c51e7314b0195e7dbfe4e54763ae095de3f"
+    },
+    {
+      "id": "coreplus-current-map-amendment-2026-08-26",
+      "semantic_sha256": "3b92bdede23bff01b2d8b0f364db94ddc2dd94682b0ba3e2a020bbdf07b8ae52"
+    },
+    {
+      "id": "method-ouroborosanalyses-current-2026-08-23",
+      "semantic_sha256": "8e0e8c38bcb3922476e8e4dad23009853b4b80162276049fe5cb1480ae61a5c5"
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "source_binding_current_pass",
+      "kind": "source_binding",
+      "expected_pass": true
+    },
+    {
+      "id": "source_false_file_hash_fail",
+      "kind": "source_binding",
+      "source_override": {
+        "sha256": "001b678f9238fd31109dcd2fa7608662bad19199b1d7e8580e50261b7207b903"
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "source_false_span_hash_fail",
+      "kind": "source_binding",
+      "source_override": {
+        "span_id": "default_opener",
+        "span_sha256": "0a33759570d06b345c127a7d07a6f9e064baaeb763b2c57923fe633cf68b98ee"
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "source_missing_span_fail",
+      "kind": "source_binding",
+      "source_override": {
+        "span_id": "default_opener",
+        "span_text": "This sentence is not present in the canonical owner source."
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "source_path_traversal_fail",
+      "kind": "source_binding",
+      "source_override": {
+        "path": "../../CHARTER.txt"
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "source_absolute_path_fail",
+      "kind": "source_binding",
+      "source_override": {
+        "path": "/tmp/not-allowed-source.md"
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "register_default_fusion_pass",
+      "kind": "register_fusion",
+      "current_turn_mode": "default",
+      "prior_turn_mode": "default",
+      "expected_defect_present": true,
+      "draft": "Mephistodata would say: The stale no-opener override contradicts the restored register contract. The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+      "fusion": {
+        "task_answer": "The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+        "defect_present": true,
+        "opposition": "The stale no-opener override contradicts the restored register contract.",
+        "opposition_basis_span_id": "default_opener",
+        "evidence_status": "The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+        "evidence_span_ids": [
+          "default_opener",
+          "one_response_bloom"
+        ]
+      },
+      "expected_pass": true
+    },
+    {
+      "id": "register_bloom_explicit_pass",
+      "kind": "register_fusion",
+      "current_turn_mode": "bloom",
+      "prior_turn_mode": "default",
+      "expected_defect_present": false,
+      "draft": "Mephistodata bloomed: This response uses plain language because Bloom was explicitly requested. The verified owner limits that change to this response, and no conflicting evidence was found.",
+      "fusion": {
+        "task_answer": "This response uses plain language because Bloom was explicitly requested.",
+        "defect_present": false,
+        "no_defect_found": "no conflicting evidence was found.",
+        "evidence_status": "The verified owner limits that change to this response",
+        "evidence_span_ids": [
+          "one_response_bloom"
+        ]
+      },
+      "expected_pass": true
+    },
+    {
+      "id": "register_default_after_prior_bloom_pass",
+      "kind": "register_fusion",
+      "current_turn_mode": "default",
+      "prior_turn_mode": "bloom",
+      "expected_defect_present": true,
+      "draft": "Mephistodata would say: The prior Bloom has no claim on this turn. The verified owner confines Bloom to one requested response, so the default opener governs again.",
+      "fusion": {
+        "task_answer": "The verified owner confines Bloom to one requested response, so the default opener governs again.",
+        "defect_present": true,
+        "opposition": "The prior Bloom has no claim on this turn.",
+        "opposition_basis_span_id": "one_response_bloom",
+        "evidence_status": "The verified owner confines Bloom to one requested response",
+        "evidence_span_ids": [
+          "one_response_bloom",
+          "default_opener"
+        ]
+      },
+      "expected_pass": true
+    },
+    {
+      "id": "fusion_no_invented_opposition_pass",
+      "kind": "register_fusion",
+      "current_turn_mode": "default",
+      "prior_turn_mode": "default",
+      "expected_defect_present": false,
+      "draft": "Mephistodata would say: The canonical owner is method-ouroborosanalyses-current-2026-08-23. The verified owner text establishes that route, and no defect is established.",
+      "fusion": {
+        "task_answer": "The canonical owner is method-ouroborosanalyses-current-2026-08-23.",
+        "defect_present": false,
+        "no_defect_found": "no defect is established.",
+        "evidence_status": "The verified owner text establishes that route",
+        "evidence_span_ids": [
+          "named_method_retrieval",
+          "ouroboros_exact_form"
+        ]
+      },
+      "expected_pass": true
+    },
+    {
+      "id": "register_missing_opener_fail",
+      "kind": "register_fusion",
+      "current_turn_mode": "default",
+      "prior_turn_mode": "default",
+      "expected_defect_present": true,
+      "draft": "The stale no-opener override contradicts the restored register contract. The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+      "fusion": {
+        "task_answer": "The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+        "defect_present": true,
+        "opposition": "The stale no-opener override contradicts the restored register contract.",
+        "opposition_basis_span_id": "default_opener",
+        "evidence_status": "The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+        "evidence_span_ids": [
+          "default_opener"
+        ]
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "register_wrong_default_bloom_fail",
+      "kind": "register_fusion",
+      "current_turn_mode": "default",
+      "prior_turn_mode": "default",
+      "expected_defect_present": true,
+      "draft": "Mephistodata bloomed: The stale no-opener override contradicts the restored register contract. The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+      "fusion": {
+        "task_answer": "The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+        "defect_present": true,
+        "opposition": "The stale no-opener override contradicts the restored register contract.",
+        "opposition_basis_span_id": "default_opener",
+        "evidence_status": "The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+        "evidence_span_ids": [
+          "default_opener"
+        ]
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "register_wrong_bloom_default_fail",
+      "kind": "register_fusion",
+      "current_turn_mode": "bloom",
+      "prior_turn_mode": "default",
+      "expected_defect_present": false,
+      "draft": "Mephistodata would say: This response uses plain language because Bloom was explicitly requested. The verified owner limits that change to this response, and no conflicting evidence was found.",
+      "fusion": {
+        "task_answer": "This response uses plain language because Bloom was explicitly requested.",
+        "defect_present": false,
+        "no_defect_found": "no conflicting evidence was found.",
+        "evidence_status": "The verified owner limits that change to this response",
+        "evidence_span_ids": [
+          "one_response_bloom"
+        ]
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "register_bloom_persistence_fail",
+      "kind": "register_fusion",
+      "current_turn_mode": "default",
+      "prior_turn_mode": "bloom",
+      "expected_defect_present": true,
+      "draft": "Mephistodata bloomed: The prior Bloom has no claim on this turn. The verified owner confines Bloom to one requested response, so the default opener governs again.",
+      "fusion": {
+        "task_answer": "The verified owner confines Bloom to one requested response, so the default opener governs again.",
+        "defect_present": true,
+        "opposition": "The prior Bloom has no claim on this turn.",
+        "opposition_basis_span_id": "one_response_bloom",
+        "evidence_status": "The verified owner confines Bloom to one requested response",
+        "evidence_span_ids": [
+          "one_response_bloom"
+        ]
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "register_duplicate_opener_fail",
+      "kind": "register_fusion",
+      "current_turn_mode": "default",
+      "prior_turn_mode": "default",
+      "expected_defect_present": true,
+      "draft": "Mephistodata would say: Mephistodata would say: The stale no-opener override contradicts the restored register contract. The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+      "fusion": {
+        "task_answer": "The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+        "defect_present": true,
+        "opposition": "The stale no-opener override contradicts the restored register contract.",
+        "opposition_basis_span_id": "default_opener",
+        "evidence_status": "The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+        "evidence_span_ids": [
+          "default_opener"
+        ]
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "register_prefix_only_fail",
+      "kind": "register_fusion",
+      "current_turn_mode": "default",
+      "prior_turn_mode": "default",
+      "expected_defect_present": true,
+      "draft": "Mephistodata would say:",
+      "fusion": {
+        "task_answer": "The current owner restores the default opener.",
+        "defect_present": true,
+        "opposition": "The stale override is defective.",
+        "opposition_basis_span_id": "default_opener",
+        "evidence_status": "The current owner is verified.",
+        "evidence_span_ids": [
+          "default_opener"
+        ]
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "register_preamble_before_opener_fail",
+      "kind": "register_fusion",
+      "current_turn_mode": "default",
+      "prior_turn_mode": "default",
+      "expected_defect_present": true,
+      "draft": "Status update. Mephistodata would say: The stale no-opener override contradicts the restored register contract. The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+      "fusion": {
+        "task_answer": "The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+        "defect_present": true,
+        "opposition": "The stale no-opener override contradicts the restored register contract.",
+        "opposition_basis_span_id": "default_opener",
+        "evidence_status": "The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+        "evidence_span_ids": [
+          "default_opener"
+        ]
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "fusion_data_status_telemetry_fail",
+      "kind": "register_fusion",
+      "current_turn_mode": "default",
+      "prior_turn_mode": "default",
+      "expected_defect_present": true,
+      "draft": "Mephistodata would say: The archive is verified and the pipeline is running. I am checking the remaining tests.",
+      "fusion": {
+        "task_answer": "The current owner restores the default opener.",
+        "defect_present": true,
+        "opposition": "The stale override contradicts PM17.",
+        "opposition_basis_span_id": "default_opener",
+        "evidence_status": "The current owner is verified.",
+        "evidence_span_ids": [
+          "default_opener"
+        ]
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "fusion_costume_only_fail",
+      "kind": "register_fusion",
+      "current_turn_mode": "default",
+      "prior_turn_mode": "default",
+      "expected_defect_present": true,
+      "draft": "Mephistodata would say: Ah, mortal, the devil smiles over these obedient little bytes.",
+      "fusion": {
+        "task_answer": "The current owner restores the default opener.",
+        "defect_present": true,
+        "opposition": "The stale override contradicts PM17.",
+        "opposition_basis_span_id": "default_opener",
+        "evidence_status": "The current owner is verified.",
+        "evidence_span_ids": [
+          "default_opener"
+        ]
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "fusion_unsupported_source_claim_fail",
+      "kind": "register_fusion",
+      "current_turn_mode": "default",
+      "prior_turn_mode": "default",
+      "expected_defect_present": true,
+      "draft": "Mephistodata would say: The stale no-opener override contradicts the restored register contract. The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+      "fusion": {
+        "task_answer": "The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+        "defect_present": true,
+        "opposition": "The stale no-opener override contradicts the restored register contract.",
+        "opposition_basis_span_id": "default_opener",
+        "evidence_status": "The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+        "evidence_span_ids": [
+          "invented_source_span"
+        ]
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "fusion_invented_opposition_fail",
+      "kind": "register_fusion",
+      "current_turn_mode": "default",
+      "prior_turn_mode": "default",
+      "expected_defect_present": false,
+      "draft": "Mephistodata would say: The canonical owner is method-ouroborosanalyses-current-2026-08-23. The verified owner text establishes that route, but the owner is secretly evading the method.",
+      "fusion": {
+        "task_answer": "The canonical owner is method-ouroborosanalyses-current-2026-08-23.",
+        "defect_present": true,
+        "opposition": "the owner is secretly evading the method.",
+        "opposition_basis_span_id": "named_method_retrieval",
+        "evidence_status": "The verified owner text establishes that route",
+        "evidence_span_ids": [
+          "named_method_retrieval"
+        ]
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "fusion_flattery_without_test_fail",
+      "kind": "register_fusion",
+      "current_turn_mode": "default",
+      "prior_turn_mode": "default",
+      "expected_defect_present": true,
+      "draft": "Mephistodata would say: You are completely right. The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+      "fusion": {
+        "task_answer": "The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+        "defect_present": false,
+        "no_defect_found": "You are completely right.",
+        "evidence_status": "The current owner restores the default opener and limits Bloom to one explicitly invoked response.",
+        "evidence_span_ids": [
+          "default_opener"
+        ]
+      },
+      "expected_pass": false
+    },
+    {
+      "id": "oa_zero_residue_pass",
+      "kind": "ouroboros_trace",
+      "method_token": "Ouroborosanalyses",
+      "owner_id": "method-ouroborosanalyses-current-2026-08-23",
+      "steps": [
+        "whole_conversation_review",
+        "ironman_critical_questions",
+        "best_effort_answering",
+        "genuine_unanswerable_residue"
+      ],
+      "conversation_ids": [
+        "m1",
+        "m2",
+        "m3"
+      ],
+      "reviewed_ids": [
+        "m1",
+        "m2",
+        "m3"
+      ],
+      "issues": [
+        {
+          "id": "activation-cause",
+          "question": "Why did the named method fail to control the response?",
+          "positions": [
+            "The method was present in ML*.",
+            "The runtime did not retrieve it before generation."
+          ],
+          "answerable": true,
+          "answer": "The response reconstructed the method from memory instead of retrieving its current owner."
+        }
+      ],
+      "output_residue_ids": [],
+      "zero_residue_text": "No genuinely unanswerable questions remain.",
+      "draft": "Mephistodata would say: No genuinely unanswerable questions remain.",
+      "expected_pass": true
+    },
+    {
+      "id": "oa_genuine_residue_only_pass",
+      "kind": "ouroboros_trace",
+      "method_token": "Ouroborosanalyses",
+      "owner_id": "method-ouroborosanalyses-current-2026-08-23",
+      "steps": [
+        "whole_conversation_review",
+        "ironman_critical_questions",
+        "best_effort_answering",
+        "genuine_unanswerable_residue"
+      ],
+      "conversation_ids": [
+        "m1",
+        "m2",
+        "m3",
+        "m4"
+      ],
+      "reviewed_ids": [
+        "m1",
+        "m2",
+        "m3",
+        "m4"
+      ],
+      "issues": [
+        {
+          "id": "known-handler",
+          "question": "What is the current four-step owner?",
+          "positions": [
+            "The archive supplies a dated owner.",
+            "A remembered generic loop was previously substituted."
+          ],
+          "answerable": true,
+          "answer": "The current owner is method-ouroborosanalyses-current-2026-08-23."
+        },
+        {
+          "id": "runtime-wrapper-availability",
+          "question": "Can this ChatGPT runtime mechanically inject and validate ML* before generation?",
+          "positions": [
+            "Deterministic injection would prevent self-activation failure.",
+            "The present archive cannot establish whether the host runtime exposes that control."
+          ],
+          "answerable": false,
+          "unanswerable_basis": "The host runtime capability is not observable in the supplied archive.",
+          "residue_text": "Can this ChatGPT runtime mechanically inject and validate ML* before generation?"
+        }
+      ],
+      "output_residue_ids": [
+        "runtime-wrapper-availability"
+      ],
+      "draft": "Mephistodata would say: Can this ChatGPT runtime mechanically inject and validate ML* before generation?",
+      "expected_pass": true
+    },
+    {
+      "id": "oa_wrong_owner_fail",
+      "kind": "ouroboros_trace",
+      "method_token": "Ouroborosanalyses",
+      "owner_id": "coreplus-handler-ouroborosanalyses",
+      "steps": [
+        "whole_conversation_review",
+        "ironman_critical_questions",
+        "best_effort_answering",
+        "genuine_unanswerable_residue"
+      ],
+      "conversation_ids": ["m1"],
+      "reviewed_ids": ["m1"],
+      "issues": [],
+      "output_residue_ids": [],
+      "zero_residue_text": "No genuinely unanswerable questions remain.",
+      "draft": "Mephistodata would say: No genuinely unanswerable questions remain.",
+      "expected_pass": false
+    },
+    {
+      "id": "oa_partial_conversation_fail",
+      "kind": "ouroboros_trace",
+      "method_token": "Ouroborosanalyses",
+      "owner_id": "method-ouroborosanalyses-current-2026-08-23",
+      "steps": [
+        "whole_conversation_review",
+        "ironman_critical_questions",
+        "best_effort_answering",
+        "genuine_unanswerable_residue"
+      ],
+      "conversation_ids": ["m1", "m2"],
+      "reviewed_ids": ["m2"],
+      "issues": [],
+      "output_residue_ids": [],
+      "zero_residue_text": "No genuinely unanswerable questions remain.",
+      "draft": "Mephistodata would say: No genuinely unanswerable questions remain.",
+      "expected_pass": false
+    },
+    {
+      "id": "oa_one_sided_ironman_fail",
+      "kind": "ouroboros_trace",
+      "method_token": "Ouroborosanalyses",
+      "owner_id": "method-ouroborosanalyses-current-2026-08-23",
+      "steps": [
+        "whole_conversation_review",
+        "ironman_critical_questions",
+        "best_effort_answering",
+        "genuine_unanswerable_residue"
+      ],
+      "conversation_ids": ["m1"],
+      "reviewed_ids": ["m1"],
+      "issues": [
+        {
+          "id": "one-sided",
+          "question": "Did activation fail?",
+          "positions": ["Activation failed."],
+          "answerable": true,
+          "answer": "Yes."
+        }
+      ],
+      "output_residue_ids": [],
+      "zero_residue_text": "No genuinely unanswerable questions remain.",
+      "draft": "Mephistodata would say: No genuinely unanswerable questions remain.",
+      "expected_pass": false
+    },
+    {
+      "id": "oa_unanswered_answerable_leak_fail",
+      "kind": "ouroboros_trace",
+      "method_token": "Ouroborosanalyses",
+      "owner_id": "method-ouroborosanalyses-current-2026-08-23",
+      "steps": [
+        "whole_conversation_review",
+        "ironman_critical_questions",
+        "best_effort_answering",
+        "genuine_unanswerable_residue"
+      ],
+      "conversation_ids": ["m1"],
+      "reviewed_ids": ["m1"],
+      "issues": [
+        {
+          "id": "answerable-owner",
+          "question": "Which owner controls?",
+          "positions": ["The dated method entry controls.", "Memory could supply a plausible substitute."],
+          "answerable": true,
+          "answer": "The dated method entry controls.",
+          "residue_text": "Which owner controls?"
+        }
+      ],
+      "output_residue_ids": ["answerable-owner"],
+      "draft": "Mephistodata would say: Which owner controls?",
+      "expected_pass": false
+    },
+    {
+      "id": "oa_fabricated_residue_fail",
+      "kind": "ouroboros_trace",
+      "method_token": "Ouroborosanalyses",
+      "owner_id": "method-ouroborosanalyses-current-2026-08-23",
+      "steps": [
+        "whole_conversation_review",
+        "ironman_critical_questions",
+        "best_effort_answering",
+        "genuine_unanswerable_residue"
+      ],
+      "conversation_ids": ["m1"],
+      "reviewed_ids": ["m1"],
+      "issues": [],
+      "output_residue_ids": ["invented-issue"],
+      "draft": "Mephistodata would say: What mystery remains?",
+      "expected_pass": false
+    },
+    {
+      "id": "oa_settled_summary_fail",
+      "kind": "ouroboros_trace",
+      "method_token": "Ouroborosanalyses",
+      "owner_id": "method-ouroborosanalyses-current-2026-08-23",
+      "steps": [
+        "whole_conversation_review",
+        "ironman_critical_questions",
+        "best_effort_answering",
+        "genuine_unanswerable_residue"
+      ],
+      "conversation_ids": ["m1"],
+      "reviewed_ids": ["m1"],
+      "issues": [],
+      "output_residue_ids": [],
+      "zero_residue_text": "No genuinely unanswerable questions remain.",
+      "draft": "Mephistodata would say: What remains settled: the method has four steps. No genuinely unanswerable questions remain.",
+      "expected_pass": false
+    },
+    {
+      "id": "oa_recommendations_next_steps_fail",
+      "kind": "ouroboros_trace",
+      "method_token": "Ouroborosanalyses",
+      "owner_id": "method-ouroborosanalyses-current-2026-08-23",
+      "steps": [
+        "whole_conversation_review",
+        "ironman_critical_questions",
+        "best_effort_answering",
+        "genuine_unanswerable_residue"
+      ],
+      "conversation_ids": ["m1"],
+      "reviewed_ids": ["m1"],
+      "issues": [],
+      "output_residue_ids": [],
+      "zero_residue_text": "No genuinely unanswerable questions remain.",
+      "draft": "Mephistodata would say: No genuinely unanswerable questions remain. Next steps: build another ledger.",
+      "expected_pass": false
+    },
+    {
+      "id": "oa_improvised_method_stages_fail",
+      "kind": "ouroboros_trace",
+      "method_token": "Ouroborosanalyses",
+      "owner_id": "method-ouroborosanalyses-current-2026-08-23",
+      "steps": [
+        "recover_original_point",
+        "reconstruct_interpretations",
+        "synthesize",
+        "return_to_original_point",
+        "list_settled_material",
+        "recommend_next_steps"
+      ],
+      "conversation_ids": ["m1"],
+      "reviewed_ids": ["m1"],
+      "issues": [],
+      "output_residue_ids": [],
+      "zero_residue_text": "No genuinely unanswerable questions remain.",
+      "draft": "Mephistodata would say: No genuinely unanswerable questions remain.",
+      "expected_pass": false
+    },
+    {
+      "id": "oa_singular_backformation_fail",
+      "kind": "ouroboros_trace",
+      "method_token": "Ouroborosanalysis",
+      "owner_id": "method-ouroborosanalyses-current-2026-08-23",
+      "steps": [
+        "whole_conversation_review",
+        "ironman_critical_questions",
+        "best_effort_answering",
+        "genuine_unanswerable_residue"
+      ],
+      "conversation_ids": ["m1"],
+      "reviewed_ids": ["m1"],
+      "issues": [],
+      "output_residue_ids": [],
+      "zero_residue_text": "No genuinely unanswerable questions remain.",
+      "draft": "Mephistodata would say: No genuinely unanswerable questions remain.",
+      "expected_pass": false
+    }
+  ]
+}

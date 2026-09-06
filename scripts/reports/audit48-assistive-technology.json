@@ -5,10 +5,12 @@
   "status": "passed",
   "scope": "repository-wide static assistive-technology prerequisites",
   "metrics": {
-    "source_html_documents": 7563,
-    "interactive_documents": 5370,
+    "source_html_documents": 7567,
+    "interactive_documents": 5374,
     "redirect_documents": 2193,
     "canonical_events": 2088,
+    "chronology_events": 1954,
+    "quarantined_monitoring_records": 134,
     "explicit_legacy_event_ids": 28,
     "expected_english_event_routes": 4232,
     "expected_french_event_routes": 2116,
@@ -18,13 +20,13 @@
     "french_event_routes": 2116,
     "canonical_event_documents": 4176,
     "event_redirect_documents": 2172,
-    "non_event_documents": 1215,
+    "non_event_documents": 1219,
     "documents_with_two_progressive_h1_variants": 1,
-    "static_ids": 20946,
-    "static_aria_id_references": 5416,
-    "skip_links": 5367,
+    "static_ids": 20149,
+    "static_aria_id_references": 4830,
+    "skip_links": 5371,
     "images": 27,
-    "buttons": 1234
+    "buttons": 838
   },
   "machine_validated_contracts": [
     "declared-document-language",
