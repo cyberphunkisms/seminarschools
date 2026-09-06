@@ -274,9 +274,11 @@ class PublicBuildLock {
     this.lockDir = path.join(this.root, LOCK_DIRECTORY_NAME);
     this.ownerPath = path.join(this.lockDir, OWNER_FILE_NAME);
     this.stageMarkerPath = path.join(this.buildOut, STAGE_MARKER_NAME);
-    this.quarantineRoot = path.resolve(
-      quarantineRoot || path.dirname(path.dirname(this.root)),
-    );
+    // Keep default claims inside the repository. Netlify guarantees the
+    // checkout is writable, while ancestors such as /opt are read-only. The
+    // repository-local path also preserves the same-filesystem atomic renames
+    // required by the ownership and recovery protocol.
+    this.quarantineRoot = path.resolve(quarantineRoot || this.root);
     this.authorizeEmptyOverlayRecovery = typeof authorizeEmptyOverlayRecovery === 'function'
       ? authorizeEmptyOverlayRecovery
       : null;

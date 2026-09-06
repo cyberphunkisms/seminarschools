@@ -151,6 +151,34 @@ function assertNoPublicTransients(root, label) {
   assert.deepStrictEqual(present, [], `${label} left public-build transients: ${present.join(', ')}`);
 }
 
+function verifyDefaultQuarantineIsRepositoryLocal() {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-netlify-default-'));
+  try {
+    const root = path.join(tempRoot, 'opt', 'build', 'repo');
+    const buildOut = path.join(root, '.public-build-staging');
+    const previousOut = path.join(root, '.public-build-previous');
+    fs.mkdirSync(root, {recursive: true});
+    const lock = new PublicBuildLock({
+      root,
+      buildOut,
+      previousOut,
+      authorizeEmptyOverlayRecovery: () => true,
+    });
+    assert.strictEqual(
+      lock.quarantineRoot,
+      path.resolve(root),
+      'default quarantine root must stay inside the writable repository checkout',
+    );
+    lock.acquire();
+    assertNoPreparedClaims(root);
+    lock.release();
+    assertNoPreparedClaims(root);
+    assertNoPublicTransients(root, 'repository-local default quarantine lifecycle');
+  } finally {
+    fs.rmSync(tempRoot, {recursive: true, force: true});
+  }
+}
+
 function rejectedCase(name, mutate, expected) {
   const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-reject-'));
   try {
@@ -850,6 +878,7 @@ for (const forbidden of [
   assert(!builderSource.includes(forbidden), `public builder retains unsafe lock recovery: ${forbidden}`);
 }
 
+verifyDefaultQuarantineIsRepositoryLocal();
 verifyFreshLifecycle();
 verifyRecoverableDeadOwner();
 verifyRecoverableDeadOwnerDirectoryOverlay();
@@ -988,7 +1017,7 @@ rejectedCase('stage-marker symlink', paths => {
 }, /stage marker must be a non-symlink regular file/);
 
 console.log(
-  'PUBLIC BUILD LOCK RECOVERY PASSED — atomic prepared ownership, authorized exact-empty overlay recovery, '
+  'PUBLIC BUILD LOCK RECOVERY PASSED — repository-local Netlify-safe claims, atomic prepared ownership, authorized exact-empty overlay recovery, '
   + 'fresh lifecycle, contention exclusion, and same-host cryptographically bound dead-owner recovery; '
   + 'unauthorized, non-directory, live, foreign, malformed, legacy, non-cryptographic, unverifiable, mismatched, rollback, future, fresh, and symlink states fail closed.',
 );

@@ -37,6 +37,12 @@ const GENERATED_FAMILIES = {
   event_en: /^polymythseminars\/events\/[^/]+\/index\.html$/,
   event_fr: /^polymythseminars\/fr\/events\/[^/]+\/index\.html$/,
 };
+// Dedicated, independently authored resources still receive the complete
+// metadata audit, but they are not outputs of build-search-pages.js and must
+// not be required to claim that generator's ownership marker.
+const INDEPENDENT_TEACHER_RESOURCES = new Set([
+  'teacherresources/ieltsrubric/index.html',
+]);
 const failures = [];
 const issues = {
   duplicate_tags: [],
@@ -200,7 +206,10 @@ function classifyGenerator(relative, html, redirect) {
       addIssue('generator_ownership', relative, 'teacher-resource catalog ownership markers are missing');
     }
   }
-  if (GENERATED_FAMILIES.teacher_resource.test(relative)) {
+  if (
+    GENERATED_FAMILIES.teacher_resource.test(relative)
+    && !INDEPENDENT_TEACHER_RESOURCES.has(relative)
+  ) {
     metrics.generated_teacher_resource_documents += 1;
     const marker = metaTags(
       html.match(/<head\b[^>]*>([\s\S]*?)<\/head\s*>/i)?.[1] || '',
