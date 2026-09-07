@@ -357,10 +357,10 @@
     "verify:steady-ui": "node scripts/verify-steady-ui.js"
   },
   "dependencies": {
-    "@netlify/blobs": "10.1.0"
+    "@netlify/blobs": "11.0.3"
   },
   "devDependencies": {
-    "playwright": "1.61.1"
+    "playwright": "1.62.1"
   },
   "engines": {
     "node": "24.14.0",
