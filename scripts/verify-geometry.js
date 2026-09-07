@@ -112,6 +112,12 @@ if (mandala && typeof mandala.buildCanonical === 'function') {
   const normalizedDigest = crypto.createHash('sha256').update(normalizeIds(canonicalA)).digest('hex');
   check(normalizedDigest === contracts.canonical_web.normalized_sha256, 'mandala: normalized old /main/ geometry digest drifted');
   check(semanticGeometryDigest(canonicalA) === contracts.canonical_web.semantic_sha256, 'mandala: old /main/ semantic geometry digest drifted');
+  const lineShapes = [...canonicalA.matchAll(/<(?:circle|path)\b[^>]*class="geo-stroke\b[^>]*>/g)].map(match => match[0]);
+  check(lineShapes.length === contracts.canonical_web.gasket_circles + contracts.canonical_web.flower_paths,
+    'mandala: canonical line count is incomplete');
+  check(lineShapes.every(shape => /\bstroke="currentColor"/.test(shape)
+    && /\bvector-effect="non-scaling-stroke"/.test(shape)),
+    'mandala: line paint must survive SVG use instances without ancestor CSS');
 }
 
 function makeStyle() {

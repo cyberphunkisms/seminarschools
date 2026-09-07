@@ -22,7 +22,7 @@
   var reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   var canonicalId = window.PolymythMandala && window.PolymythMandala.canonicalId || 'polymyth-mandala-main-v32';
   var MAX_SHAPES_PER_CAMERA = 1400;
-  var MAX_MARKUP_BYTES_PER_CAMERA = 240000;
+  var MAX_MARKUP_BYTES_PER_CAMERA = 265000;
 
   /* The subdued spectrum is the original /main/ geometry palette. It belongs
      to the background field alone; foreground page colours and the homepage

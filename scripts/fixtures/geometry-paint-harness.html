@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Geometry paint verification</title>
+<style>body{margin:0;background:#ddd;color:#111;font:14px monospace}nav{display:flex;flex-wrap:wrap;gap:6px;padding:8px}button,input,select{font:inherit;padding:6px}iframe{display:block;border:0;background:white}output{display:block;white-space:pre-wrap;padding:8px;height:64px;box-sizing:border-box;overflow:hidden}</style></head>
+<body><nav aria-label="Verification controls">
+<label>Route <input id="route" value="/polymyth/alwaysalready/" size="36"></label>
+<button id="load">Load route</button><button id="desktop">Desktop viewport</button><button id="phone">Phone viewport</button>
+<button data-position="0">Top</button><button data-position="0.5">Middle</button><button data-position="1">Bottom</button>
+<button data-paint="full">Full geometry</button><button data-paint="lines">Lines only</button><button data-paint="flowers">Flowers only</button><button data-paint="hidden">Geometry hidden</button><button data-paint="negative">Missing stroke control</button>
+<button data-camera="both">Both cameras</button><button data-camera="primary">Primary camera</button><button data-camera="secondary">Secondary camera</button>
+</nav><output id="state">Loading</output><iframe id="page" title="Page under test" width="1280" height="800"></iframe>
+<script>
+'use strict';
+const frame=document.getElementById('page'),state=document.getElementById('state');
+let paint='full',camera='both';
+function report(){const d=frame.contentDocument,w=frame.contentWindow,l=d.getElementById('indraLayer');state.textContent=JSON.stringify({route:document.getElementById('route').value,viewport:[w.innerWidth,w.innerHeight],paint,camera,progress:l?.dataset.geometryProgress,scrollY:w.scrollY,overflow:d.documentElement.scrollWidth>w.innerWidth,layer:!!l,cameras:[...d.querySelectorAll('.indra-camera')].map(n=>({name:n.dataset.geometryCamera,transform:n.style.transform})),pointerEvents:l&&getComputedStyle(l).pointerEvents});}
+function settle(){state.dataset.ready='false';const w=frame.contentWindow;w.requestAnimationFrame(()=>w.requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{report();state.dataset.ready='true';}))));}
+function setPaint(mode){paint=mode;const d=frame.contentDocument,l=d.getElementById('indraLayer');if(!l){report();return;}l.style.display=mode==='hidden'?'none':'';
+for(const n of l.querySelectorAll('.geo-stroke,.geo-flower-center,.geo-jewel')){n.removeAttribute('display');if(n.classList.contains('geo-stroke'))n.setAttribute('stroke',mode==='negative'?'none':'currentColor');if((mode==='lines'||mode==='negative')&&!n.classList.contains('geo-stroke'))n.setAttribute('display','none');if(mode==='flowers'&&!n.classList.contains('geo-flower'))n.setAttribute('display','none');}settle();}
+frame.addEventListener('load',async()=>{await frame.contentDocument.fonts.ready;paint='full';camera='both';settle();});
+function load(){state.dataset.ready='false';state.textContent='Loading';frame.src=document.getElementById('route').value;}
+document.getElementById('load').onclick=load;
+document.getElementById('desktop').onclick=()=>{frame.width='1280';frame.height='800';settle();};
+document.getElementById('phone').onclick=()=>{frame.width='390';frame.height='720';settle();};
+for(const b of document.querySelectorAll('[data-position]'))b.onclick=()=>{const d=frame.contentDocument;frame.contentWindow.scrollTo(0,(d.documentElement.scrollHeight-frame.clientHeight)*Number(b.dataset.position));settle();};
+for(const b of document.querySelectorAll('[data-paint]'))b.onclick=()=>setPaint(b.dataset.paint);
+for(const b of document.querySelectorAll('[data-camera]'))b.onclick=()=>{camera=b.dataset.camera;for(const c of frame.contentDocument.querySelectorAll('.indra-camera'))c.style.display=camera==='both'||c.dataset.geometryCamera===camera?'':'none';settle();};
+load();
+</script></body></html>

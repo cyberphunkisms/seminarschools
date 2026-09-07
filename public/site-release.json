@@ -7,7 +7,7 @@
   "polymythcal_discovery_release_id": "2026-08-26-polymythcal-discovery-v2",
   "polymythcal_discovery_built_at": "2026-08-26T12:30:00-04:00",
   "polymythcal_discovery_asset_version": "20260826-discovery-v2",
-  "geometry_asset_version": "sha256-8a83be93b96a",
+  "geometry_asset_version": "sha256-f13c77634dc2",
   "teacherresources_asset_versions": {
     "finder_css": "sha256-365f4034cc9e",
     "finder_js": "sha256-f6e90cbddf2f"
@@ -16,13 +16,13 @@
     "css/alive.css": "11788131ba152f6a3614896dc9a477decab81293b9dccebb0105dd6cff1d23f9",
     "css/calm-ux.css": "9604e563bf9d2110dc5031f75c651a68d5b7cfd07f9a220aaec0300e740f9f94",
     "css/site-wide-type-zoom.css": "acf9276e3a82ac32c16be32fc760f5330b48e84aa507bae771bc2f4e81521da3",
-    "js/mandala.js": "0fcfd471651caad380d6190cde46319d86c1607fb4d6cc940bfbd8af6682dfad",
-    "js/indra.js": "778a2651763df17170483866366ea4c1e8cde6aa3b37f085cf3bb08c5e76982b",
-    "data/geometry-route-contracts.json": "2be9ffa5dfed904658fa293d3fbb275fafa96bf5cb47cff99e68a261807e6a0e",
-    "index.html": "c0764fbdd9e7293f44ac70a0091e3e76ea02ac987e811bd53fca5509d12ff87c",
+    "js/mandala.js": "385644d98014c11f3b63d8bda8b25f981a6b4f44476592907a74b0cb0e1d1e13",
+    "js/indra.js": "2912bd7277d020c6cb10fa8036a346ec96a494c41a03ec65f93cb88f7fb8ce53",
+    "data/geometry-route-contracts.json": "44925d53048311af93799e5d19b1fab6bd1618e7a910bdc2ca358129ecdf876f",
+    "index.html": "ea51f9c2924ef690cbaee1c128339a7e3fe58f2c20171c740bd37bc2497db430",
     "teacherresources/finder.css": "365f4034cc9e8748ce78a2ca2288dfcdb73848a21096992e071582c23e9091d7",
     "teacherresources/finder.js": "f6e90cbddf2f7ef97392270a5c7720a65d315f6874e7685ba652f489b97588f4",
-    "teacherresources/index.html": "0ea54e5d531c00eee96c3ee7f79b87538ea1ccb337cfb80adc4690d93437afa6",
+    "teacherresources/index.html": "a858de1453cef9f039071c2c30f00dcf5ca81252618aaac6a2ea2f6183a3e482",
     "data/polymyth-seminar-events.json": "c52de1fe55bd1c1a4e22d1bce1fd71beebf0cc2687dda436670ec98451bafd7f",
     "data/polymythcal-event-schema-v2.json": "ac055808ae66db101feebad598b4ca74ae91f5957fb522f59eeda3d1e8c80a42",
     "data/polymythcal-publication-surfaces.json": "e32c8c125b42b340d0df0681980040ee2fee3cc5438b16c9bd8c118984306095",
@@ -33,11 +33,11 @@
     "polymythseminars/browse.json": "f7b82229eca5ad99feb64a1a81e02c388abf7045253b51ac7c7188401f46308e",
     "polymythseminars/watchlist.json": "eff46db0ccf086142a1d8a94c827cf9705919cc969dbf5bc8789fe062e8d5ef8",
     "polymythseminars/research.json": "da7f74b566289eaa60a11180c5ccf95cef956e3bc405f17f4e54864cace5c473",
-    "polymythseminars/index.html": "578f34565f6e6818189363ceb83424e9ea1ce9ecc4c50b7e54bbc201098ba82c",
-    "polymythseminars/fr/index.html": "963fd19b0c22ec7fc912f248092cd9a82e2e493e6fb6049745b558a061160a89",
-    "polymythseminars/research/index.html": "e6d839060fd2caaec066bb2742596ed3d4d989ea8230cb69eb4218eef549e362",
-    "polymythseminars/fr/research/index.html": "b9af2c0d44a90e858b9d95a4ee893bf49291f22b808de415dee5d61c3550c239",
-    "polymythseminars/monitoring/index.html": "50c0db53cc530dd3c577d3d05079a50787721699b34ecd8ccb27ebd49e0d3f9e",
-    "polymythseminars/fr/monitoring/index.html": "b4bc89482668da43880324d6834bfb0cb376e39e005a8cd26be218cb55d7953a"
+    "polymythseminars/index.html": "fa9aa634a30178001e6c637c7f9fb686e839ffb837a5a8454b5fb75f424a0b07",
+    "polymythseminars/fr/index.html": "c777db9dc34d6c88c608c9ba6ba34b78f73a6a38a874fb36457de68f5a245f27",
+    "polymythseminars/research/index.html": "7b908ac7b8bd3c41cbe2cbe60500409af3521b667a7ec14df0f9fefa29ee23ca",
+    "polymythseminars/fr/research/index.html": "c3d13c22f8dedf9a0d503334a6bdf039aa39bd8d5d26819b0e980356d2551b0e",
+    "polymythseminars/monitoring/index.html": "41b0c48e8086c13aa46d49464f7c4d11504d60e0c84b6452b6519553710f9d16",
+    "polymythseminars/fr/monitoring/index.html": "3b1a3b97ac145b2c030896fef5aaa640278a63e28a95e0c4fcc46cf4638336e1"
   }
 }

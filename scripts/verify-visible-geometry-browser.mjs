@@ -327,7 +327,8 @@ for (const file of allHtmlFiles) {
   }
   if (!routeType) continue;
   if (focusedFiles && !focusedFiles.has(file)) continue;
-  const signature = FOCUSED_ROUTES.length ? routeFor(file) : surfaceSignature(html);
+  const signature = FOCUSED_ROUTES.length || routeFor(file) === '/polymyth/alwaysalready/'
+    ? routeFor(file) : surfaceSignature(html);
   if (!representatives.has(signature)) representatives.set(signature, {
     file, html, relative, route: routeFor(file), routeType,
   });
@@ -1160,6 +1161,30 @@ async function inspect(representative, viewport, label, reducedMotion = 'no-pref
         const pixels = pixelDifference(shown, hidden);
         if (thresholds && (pixels.meanChanged < thresholds.mean || pixels.changedPercent < thresholds.changedPercent || pixels.activeCells < thresholds.activeCells)) {
           errors.push(`${prefix}:${sampleLabel}: composed geometry is too faint or sparse (${pixels.meanChanged.toFixed(4)} mean, ${pixels.changedPercent.toFixed(3)}%, ${pixels.activeCells}/9 active cells; requires ${thresholds.mean.toFixed(3)}, ${thresholds.changedPercent.toFixed(2)}%, ${thresholds.activeCells}/9; layer ${result.color} on body ${result.bodyBackground})`);
+        }
+        // Causal paint proof through the actual production <symbol>/<use>.
+        // Bright filled jewels cannot stand in for missing gasket/flower lines.
+        const priorFills = await page.locator('#indraLayer').evaluate(layer => {
+          return [...layer.querySelectorAll('.geo-flower-center, .geo-jewel')].map(node => {
+            const prior = node.getAttribute('display');
+            node.setAttribute('display', 'none');
+            return prior;
+          });
+        });
+        await waitForLayerPaint(page);
+        const lines = await page.screenshot({ type: 'png', animations: 'disabled', timeout: SCREENSHOT_TIMEOUT_MS });
+        await page.locator('#indraLayer').evaluate((layer, priors) => {
+          [...layer.querySelectorAll('.geo-flower-center, .geo-jewel')].forEach((node, index) => {
+            if (priors[index] === null) node.removeAttribute('display');
+            else node.setAttribute('display', priors[index]);
+          });
+        }, priorFills);
+        await waitForLayerPaint(page);
+        const linePixels = pixelDifference(lines, hidden);
+        if (thresholds && (linePixels.meanChanged < thresholds.mean
+            || linePixels.changedPercent < thresholds.changedPercent
+            || linePixels.activeCells < thresholds.activeCells)) {
+          errors.push(`${prefix}:${sampleLabel}: rendered line-only geometry failed; filled bubbles cannot satisfy the web (${linePixels.meanChanged.toFixed(4)} mean, ${linePixels.changedPercent.toFixed(3)}%, ${linePixels.activeCells}/9 cells)`);
         }
         return { cameras, hitProbe, color, progress: visualState.progress };
       }

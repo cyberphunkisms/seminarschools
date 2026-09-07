@@ -310,7 +310,15 @@
     // rotation pivots on the SVG origin, not each group's bounding box.
     const groupA = `<g class="spin-a" style="transform-box:view-box;transform-origin:0 0;transform:rotate(var(--spin-a,0deg));">${geomCW}</g>`;
     const groupB = `<g class="spin-b" style="transform-box:view-box;transform-origin:0 0;transform:rotate(var(--spin-b,0deg));">${geomCCW}</g>`;
-    return `<svg class="polymyth-mandala" data-canonical-web="${CANONICAL_ID}" viewBox="-380 -380 760 760" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">${groupA}${groupB}${geom}</svg>`;
+    // SVG <use> instances do not retain the definition bank's HTML ancestors.
+    // Paint must travel with each path, rather than depend on #indraLayer's
+    // descendant selector crossing that instance boundary. Coordinates, widths,
+    // opacities and topology remain the original canonical web.
+    const painted = `${groupA}${groupB}${geom}`.replace(
+      /class="geo-stroke\b/g,
+      'stroke="currentColor" vector-effect="non-scaling-stroke" class="geo-stroke'
+    );
+    return `<svg class="polymyth-mandala" data-canonical-web="${CANONICAL_ID}" viewBox="-380 -380 760 760" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">${painted}</svg>`;
   }
 
   function buildCanonical(options) {
