@@ -145,6 +145,17 @@ function geometryProfileFor(relativeHtmlPath, routeType) {
   return 'dual-field';
 }
 
+function geometryMotionPresetFor(contracts, key, routeType) {
+  for (const rule of contracts.motion_preset_rules || []) {
+    if (rule.exact_path === key || (rule.path_prefixes || []).some(prefix => key.startsWith(prefix))
+        || (rule.route_types || []).includes(routeType)) {
+      if (!contracts.motion_presets[rule.preset]) throw new Error('Unknown geometry motion preset ' + rule.preset);
+      return rule.preset;
+    }
+  }
+  return 'flow';
+}
+
 function geometrySeedForKey(key) {
   return crypto.createHash('sha256').update(key).digest('hex').slice(0, 16);
 }
@@ -194,6 +205,7 @@ function geometryBodyAttributes(contracts, relativeHtmlPath, routeType, options 
     + ` data-geometry-seed="${geometrySeedForKey(key)}"`
     + ` data-geometry-register="${register}"`
     + ` data-geometry-profile="${profile}"`
+    + ` data-geometry-motion-preset="${geometryMotionPresetFor(contracts, key, routeType)}"`
     + ' data-front-facing="general-audience"';
 }
 
@@ -208,6 +220,7 @@ module.exports = {
   geometryOpacityBounds,
   geometryOwnerOpacityForKey,
   geometryProfileFor,
+  geometryMotionPresetFor,
   geometryRegisterForKey,
   geometrySeedForKey,
   isGeometryExemptRelativeHtmlPath,

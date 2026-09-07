@@ -164,6 +164,15 @@ def geometry_body_attributes(
         if owner_intensity is not None or page_intensity is not None
         else "route-register"
     )
+    motion_preset = "flow"
+    for rule in contracts.get("motion_preset_rules", []):
+        if (rule.get("exact_path") == key
+                or any(key.startswith(prefix) for prefix in rule.get("path_prefixes", []))
+                or route_type in rule.get("route_types", [])):
+            motion_preset = rule["preset"]
+            if motion_preset not in contracts["motion_presets"]:
+                raise ValueError(f"Unknown geometry motion preset: {motion_preset}")
+            break
     return (
         f'data-route-type="{route_type}"'
         ' data-geometry="indra-web"'
@@ -174,5 +183,6 @@ def geometry_body_attributes(
         f' data-geometry-seed="{seed}"'
         f' data-geometry-register="{register}"'
         f' data-geometry-profile="{profile}"'
+        f' data-geometry-motion-preset="{motion_preset}"'
         ' data-front-facing="general-audience"'
     )

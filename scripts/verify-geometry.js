@@ -122,9 +122,11 @@ if (mandala && typeof mandala.buildCanonical === 'function') {
 
 function makeStyle() {
   const values = Object.create(null);
+  const writes = Object.create(null);
   return {
     transform: '',
-    setProperty(name, value) { values[name] = String(value); },
+    propertyWrites: writes,
+    setProperty(name, value) { values[name] = String(value); writes[name] = (writes[name] || 0) + 1; },
     getPropertyValue(name) { return values[name] || ''; }
   };
 }
@@ -180,6 +182,9 @@ function execute(options = {}) {
   const documentHandlers = Object.create(null);
   const frameQueue = [];
   let nextFrame = 1;
+  const timers = new Map();
+  let nextTimer = 1;
+  let now = 1000;
   const root = makeNode('html', byId);
   root.scrollHeight = options.rootScrollHeight === undefined ? 4000 : Number(options.rootScrollHeight);
   root.clientHeight = 800;
@@ -195,6 +200,7 @@ function execute(options = {}) {
     body.setAttribute('data-geometry-key', options.key || options.pathname || '/proof/');
     body.setAttribute('data-geometry-register', options.register || 'standard');
     body.setAttribute('data-geometry-profile', options.profile || 'dual-field');
+    body.setAttribute('data-geometry-motion-preset', options.motionPreset || 'flow');
     body.setAttribute('data-indra-intensity', options.intensity || '0.120');
     body.setAttribute('data-geometry-role', options.roles || 'relation movement');
   }
@@ -208,6 +214,9 @@ function execute(options = {}) {
     documentElement: root,
     body,
     hidden: false,
+    selectionActive: false,
+    querySelector() { return this.selectionActive ? body : null; },
+    querySelectorAll() { return (options.sectionTops || []).map(top => ({ getBoundingClientRect: () => ({ top: top - window.scrollY }) })); },
     createElement: tag => makeNode(tag, byId),
     getElementById: id => byId[id] || null,
     addEventListener(type, handler) { (documentHandlers[type] ||= []).push(handler); }
@@ -217,14 +226,15 @@ function execute(options = {}) {
     window: null,
     PolymythMandala: mandala,
     location: { pathname: options.pathname || '/proof/', search: options.search || '', hash: options.hash || '' },
-    innerHeight: 800,
-    innerWidth: 1200,
+    innerHeight: options.height || 800,
+    innerWidth: options.width || 1200,
     scrollY: 0,
     matchMedia: query => ({ matches: !!options.reduced && /prefers-reduced-motion/.test(query) }),
     requestAnimationFrame(handler) { const id = nextFrame++; frameQueue.push({ id, handler }); return id; },
     cancelAnimationFrame(id) { const item = frameQueue.find(frame => frame.id === id); if (item) item.cancelled = true; },
-    setTimeout() { return 1; },
-    clearTimeout() {},
+    performance: { now: () => now },
+    setTimeout(handler, delay) { const id = nextTimer++; timers.set(id, { handler, time: now + delay }); return id; },
+    clearTimeout(id) { timers.delete(id); },
     addEventListener(type, handler) { (windowHandlers[type] ||= []).push(handler); }
   };
   function getComputedStyle(node) {
@@ -237,25 +247,31 @@ function execute(options = {}) {
   }
   window.getComputedStyle = getComputedStyle;
   window.window = window;
-  function flushFrames() {
-    while (frameQueue.length) {
-      const frame = frameQueue.shift();
-      if (!frame.cancelled) frame.handler(16.67);
+  function advance(ms = 1000 / 60, runFrames = true) {
+    now += ms;
+    if (runFrames) for (const frame of frameQueue.splice(0)) if (!frame.cancelled) frame.handler(now);
+    for (const [id, timer] of [...timers]) if (timer.time <= now && timers.has(id)) {
+      timers.delete(id); timer.handler();
     }
+  }
+  function flushFrames() {
+    let count = 0;
+    while ((frameQueue.length || timers.size) && count++ < 200) advance();
+    if (count >= 200) throw new Error('geometry did not settle within bounded frame budget');
   }
   const context = vm.createContext({
     window, document, console, Math, Number, Object, String, RegExp, Array,
     TextEncoder, decodeURI, encodeURIComponent, unescape, getComputedStyle
   });
   let error = null;
-  try { vm.runInContext(indraSource, context); flushFrames(); } catch (caught) { error = caught; }
+  try { vm.runInContext(options.source || indraSource, context); flushFrames(); } catch (caught) { error = caught; }
   function fireWindow(type, event = {}) {
     for (const handler of windowHandlers[type] || []) handler({ type, target: window, ...event });
-    flushFrames();
+    if (!options.manualFrames) flushFrames();
   }
   function fireDocument(type, event = {}) {
     for (const handler of documentHandlers[type] || []) handler({ type, target: document, ...event });
-    flushFrames();
+    if (!options.manualFrames) flushFrames();
   }
   function signatures() {
     const layer = byId.indraLayer;
@@ -265,6 +281,13 @@ function execute(options = {}) {
   }
   return {
     error,
+    window,
+    document,
+    advance,
+    flushFrames,
+    fireWindow,
+    fireDocument,
+    pending: () => frameQueue.filter(frame => !frame.cancelled).length + timers.size,
     body,
     root,
     layer: byId.indraLayer || null,
@@ -580,6 +603,101 @@ if (standard.api && typeof standard.api.cameraForSeed === 'function') {
   }
 }
 
+// A controlled clock proves behavior instead of equating timer syntax with smoothness.
+function progressOf(run) { return Number(run.layer.getAttribute('data-geometry-progress')); }
+const smooth60 = execute({ manualFrames: true });
+smooth60.scrollTo(1600);
+smooth60.advance(0);
+check(smooth60.pending() > 0, 'motion: same-timestamp RAF stranded unfinished motion');
+smooth60.advance(1000 / 60);
+check(progressOf(smooth60) > 0 && progressOf(smooth60) < 0.5, 'motion: scroll must pass through an intermediate state');
+for (let i = 1; i < 6; i++) smooth60.advance(1000 / 60);
+const smooth120 = execute({ manualFrames: true });
+smooth120.scrollTo(1600);
+for (let i = 0; i < 12; i++) smooth120.advance(1000 / 120);
+check(Math.abs(progressOf(smooth60) - progressOf(smooth120)) < 0.0003, 'motion: response depends on refresh rate');
+smooth60.scrollTo(0);
+smooth60.flushFrames();
+check(progressOf(smooth60) === 0 && smooth60.pending() === 0, 'motion: reversal must settle exactly with no idle work');
+smooth120.flushFrames();
+check(progressOf(smooth120) === 0.5 && smooth120.pending() === 0, 'motion: target must settle exactly with no idle work');
+const fallbackMotion = execute({ manualFrames: true });
+fallbackMotion.scrollTo(1600);
+for (let i = 0; i < 10; i++) fallbackMotion.advance(48, false);
+check(progressOf(fallbackMotion) === 0.5 && fallbackMotion.pending() === 0, 'motion: withheld RAF must settle through bounded fallback without duplicates');
+const hiddenMotion = execute({ manualFrames: true });
+hiddenMotion.scrollTo(1600); hiddenMotion.advance();
+hiddenMotion.document.hidden = true; hiddenMotion.fireDocument('visibilitychange');
+const hiddenProgress = progressOf(hiddenMotion);
+hiddenMotion.advance(1000, false);
+check(progressOf(hiddenMotion) === hiddenProgress && hiddenMotion.pending() === 0, 'motion: hidden page retained work or painted');
+hiddenMotion.document.hidden = false; hiddenMotion.fireDocument('visibilitychange'); hiddenMotion.flushFrames();
+check(progressOf(hiddenMotion) === 0.5 && hiddenMotion.pending() === 0, 'motion: showing page failed to restore current input');
+hiddenMotion.scrollTo(0); hiddenMotion.fireWindow('pagehide');
+check(hiddenMotion.pending() === 0, 'motion: pagehide must cancel all work');
+const phoneMotion = execute({ width: 390, height: 720 });
+phoneMotion.scrollTo(1000);
+const phoneBefore = phoneMotion.signatures().join('|');
+const phoneProgress = progressOf(phoneMotion);
+const phoneCamera = phoneMotion.layer.children.find(node => /indra-camera/.test(node.className));
+const phoneHeight = phoneCamera.style.height;
+phoneMotion.window.innerHeight = 640; phoneMotion.fireWindow('resize');
+check(progressOf(phoneMotion) === phoneProgress && phoneMotion.signatures().join('|') === phoneBefore
+  && phoneCamera.style.height === phoneHeight, 'motion: height-only phone resize changed framing or progress');
+phoneMotion.window.innerWidth = 720; phoneMotion.window.innerHeight = 390; phoneMotion.fireWindow('resize');
+check(phoneCamera.style.height !== phoneHeight && phoneMotion.signatures().join('|') !== phoneBefore, 'motion: orientation change failed to update framing');
+const expandedPhone = execute({ width: 390, height: 720 });
+expandedPhone.window.innerHeight = 800; expandedPhone.fireWindow('resize'); expandedPhone.scrollTo(3200);
+check(progressOf(expandedPhone) === 1, 'motion: browser-bar expansion made bottom endpoint unreachable');
+const reducedPhone = execute({ width: 390, height: 720, reduced: true });
+const stillBefore = reducedPhone.signatures().join('|');
+reducedPhone.window.innerWidth = 720; reducedPhone.window.innerHeight = 390; reducedPhone.fireWindow('resize');
+check(reducedPhone.signatures().join('|') !== stillBefore && progressOf(reducedPhone) === 0 && reducedPhone.pending() === 0, 'motion: reduced-motion orientation must reframe a visible still');
+const fixedPhone = execute({ width: 390, height: 720, rootScrollHeight: 720 });
+fixedPhone.window.innerHeight = 800; fixedPhone.root.scrollHeight = 800; fixedPhone.fireWindow('resize');
+fixedPhone.wheel(fixedPhone.body, 600);
+check(progressOf(fixedPhone) > 0.32, 'motion: cached height disabled native fixed-surface wheel input');
+const outlineMotion = execute({ motionPreset: 'study', sectionTops: [400, 800, 2400] });
+outlineMotion.scrollTo(800);
+check(progressOf(outlineMotion) > 0.25 && progressOf(outlineMotion) < 0.4, 'motion: actual study headings did not influence bounded pacing');
+const selectionMotion = execute({ motionPreset: 'overview' });
+const unselectedSignature = selectionMotion.signatures().join('|');
+selectionMotion.document.selectionActive = true; selectionMotion.fireDocument('click');
+check(selectionMotion.signatures().join('|') !== unselectedSignature && selectionMotion.pending() === 0, 'motion: existing selection failed to reframe overview');
+selectionMotion.document.selectionActive = false; selectionMotion.fireDocument('click');
+check(selectionMotion.signatures().join('|') === unselectedSignature, 'motion: clearing selection failed to restore overview');
+const collapsedOwner = execute();
+const collapsedPanel = collapsedOwner.makeElement({ scrollHeight: 2000, clientHeight: 500, overflowY: 'auto' });
+collapsedOwner.scrollElement(collapsedPanel, 1000); collapsedPanel.scrollHeight = 500; collapsedOwner.fireDocument('change');
+check(collapsedOwner.layer.getAttribute('data-geometry-motion-source') === 'window-scroll', 'motion: collapsed panel left stale input ownership');
+for (const preset of Object.keys(contracts.motion_presets)) {
+  const run = execute({ motionPreset: preset });
+  check(run.layer.getAttribute('data-geometry-motion-preset') === preset && run.signatures().length === 2, `motion: preset ${preset} failed`);
+}
+const approvedMotionSource = read('scripts/fixtures/geometry-motion-baseline.js');
+function simulateMotion(source, coarse) {
+  const run = execute({ source, manualFrames: true, width: 390, height: 720 });
+  let prior = [0, 0], maxStep = 0;
+  for (let frame = 0; frame < 150; frame++) {
+    if (frame < 108 && (coarse ? frame % 6 === 0 : true)) run.scrollTo(coarse ? frame / 6 * 150 : frame * 2);
+    run.advance();
+    const position = run.signatures()[0].match(/translate3d\(([-.\d]+)px,\s*([-.\d]+)px/).slice(1).map(Number);
+    if (frame) maxStep = Math.max(maxStep, Math.hypot(position[0] - prior[0], position[1] - prior[1]));
+    prior = position;
+  }
+  run.flushFrames();
+  return { colorWrites: run.layer.style.propertyWrites['--indra-color'], maxStep, pending: run.pending(), final: progressOf(run) };
+}
+const motionComparison = {
+  evidence: 'controlled 60 Hz clock and DOM stub, not browser FPS or physical-device performance',
+  coarse: { baseline: simulateMotion(approvedMotionSource, true), current: simulateMotion(indraSource, true) },
+  fine: { baseline: simulateMotion(approvedMotionSource, false), current: simulateMotion(indraSource, false) }
+};
+check(motionComparison.coarse.current.maxStep < motionComparison.coarse.baseline.maxStep * 0.6, 'motion: coarse-input camera steps did not improve');
+check(motionComparison.coarse.current.colorWrites <= motionComparison.coarse.baseline.colorWrites, 'motion: camera interpolation added SVG recolour work');
+check(motionComparison.fine.current.colorWrites < motionComparison.fine.baseline.colorWrites, 'motion: fine-input colour writes did not decrease');
+check(motionComparison.coarse.current.final === motionComparison.coarse.baseline.final, 'motion: smoothing changed the final scroll target');
+console.log('MOTION COMPARISON ' + JSON.stringify(motionComparison));
 check(!/pageStructureFacts|structure\.links|structure\.headings/.test(indraSource), 'engine: DOM structure still changes geometry/camera identity');
 check(!/flowers\s*:\s*false/.test(indraSource), 'engine: universal runtime still suppresses flowers');
 check(!/indra-coverage|canonical-static-wide|feMorphology/.test(indraSource), 'engine: rejected static square/bubble coverage returned');

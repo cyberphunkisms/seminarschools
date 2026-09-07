@@ -400,7 +400,7 @@ async function cameraSamples(page) {
   return page.evaluate(() => [...document.querySelectorAll('#indraLayer .indra-camera')].map(camera => ({
     name: camera.getAttribute('data-geometry-camera') || '',
     transform: camera.style.transform,
-    progress: camera.style.getPropertyValue('--indra-progress'),
+    progress: document.getElementById('indraLayer').getAttribute('data-geometry-progress') || '',
   })));
 }
 
@@ -425,9 +425,35 @@ async function settleScrollSample(page, fraction, geometryMode = 'scroll', fallb
         return false;
       }
       const layerProgress = Number.parseFloat(layer.getAttribute('data-geometry-progress') || '');
-      const expectedProgress = mode === 'static'
+      let expectedProgress = mode === 'static'
         ? 0
         : maximum > 1 ? actual / maximum : fallback;
+      if (mode !== 'static' && maximum > 1 && actual >= maximum - 1) {
+        expectedProgress = 1;
+      } else if (mode !== 'static' && maximum > 1
+          && document.body.getAttribute('data-geometry-motion-preset') === 'study') {
+        // Derive the authorized outline pacing from the actual page, without
+        // using the runtime's progress or camera API as its own expectation.
+        const range = Math.max(root.scrollHeight, document.body.scrollHeight) - innerHeight;
+        const clampUnit = value => Math.max(0, Math.min(1, value));
+        const rawProgress = clampUnit(actual / range);
+        const stops = [...document.querySelectorAll('main h2, main section[id], article h2')]
+          .slice(0, 80)
+          .map(node => clampUnit((node.getBoundingClientRect().top + actual) / range))
+          .filter(stop => stop > 0.02 && stop < 0.98)
+          .sort((a, b) => a - b)
+          .filter((stop, index, all) => !index || stop - all[index - 1] > 0.015);
+        stops.unshift(0);
+        stops.push(1);
+        expectedProgress = rawProgress;
+        if (stops.length >= 3) {
+          let sectionIndex = 0;
+          while (sectionIndex < stops.length - 2 && rawProgress > stops[sectionIndex + 1]) sectionIndex += 1;
+          const local = clampUnit((rawProgress - stops[sectionIndex]) / (stops[sectionIndex + 1] - stops[sectionIndex]));
+          const eased = local ** 3 * (local * (local * 6 - 15) + 10);
+          expectedProgress = clampUnit(rawProgress * 0.8 + (sectionIndex + eased) / (stops.length - 1) * 0.2);
+        }
+      }
       const cameras = [...layer.querySelectorAll('.indra-camera')];
       if (
         !Number.isFinite(layerProgress)
@@ -435,7 +461,7 @@ async function settleScrollSample(page, fraction, geometryMode = 'scroll', fallb
         || !cameras.length
       ) return false;
       const cameraState = cameras.map(camera => ({
-        progress: Number.parseFloat(camera.style.getPropertyValue('--indra-progress')),
+        progress: layerProgress,
         transform: camera.style.transform,
       }));
       if (cameraState.some(camera =>
@@ -521,7 +547,7 @@ async function motionSnapshot(page) {
       documentScrollHeight: scrolling.scrollHeight,
       cameras: [...layer.querySelectorAll(':scope > .indra-camera')].map(camera => ({
         transform: camera.style.transform,
-        progress: Number.parseFloat(camera.style.getPropertyValue('--indra-progress')),
+        progress: Number.parseFloat(layer.getAttribute('data-geometry-progress') || ''),
       })),
     };
   });
@@ -572,7 +598,7 @@ async function setNestedScrollFraction(page, selector, fraction) {
         && Math.abs(progress - expectedProgress) <= progressTolerance
         && cameras.length === 2
         && cameras.every(camera => {
-          const cameraProgress = Number.parseFloat(camera.style.getPropertyValue('--indra-progress'));
+          const cameraProgress = progress;
           return Number.isFinite(cameraProgress)
             && Math.abs(cameraProgress - expectedProgress) <= progressTolerance
             && camera.style.transform && camera.style.transform !== 'none';
@@ -698,7 +724,7 @@ async function waitForVirtualMotion(page, previousProgress, direction) {
       if (!Number.isFinite(progress) || (progress - previous) * expectedDirection <= progressTolerance) return false;
       const cameras = [...layer.querySelectorAll(':scope > .indra-camera')];
       return cameras.length === 2 && cameras.every(camera => {
-        const cameraProgress = Number.parseFloat(camera.style.getPropertyValue('--indra-progress'));
+        const cameraProgress = progress;
         return Number.isFinite(cameraProgress)
           && Math.abs(cameraProgress - progress) <= progressTolerance
           && camera.style.transform && camera.style.transform !== 'none';

@@ -1,6 +1,6 @@
 # Meaninglib dataset verification report
 
-Generated: 2026-09-07T02:30:00.000Z
+Generated: 2026-09-07T04:00:00.000Z
 
 Failures: 0
 Warnings: 0
@@ -15,8 +15,8 @@ Warnings: 0
 - PASS: found hf_export/reports/latest_export_report.md
 - PASS: found hf_export/schemas/meaninglib_entry.schema.json
 - PASS: total rows: 2013
-- PASS: all export rows share one timestamp: 2026-09-07T02:30:00.000Z
-- PASS: export timestamp matches deterministic build timestamp 2026-09-07T02:30:00.000Z
+- PASS: all export rows share one timestamp: 2026-09-07T04:00:00.000Z
+- PASS: export timestamp matches deterministic build timestamp 2026-09-07T04:00:00.000Z
 - PASS: ML row count exactly matches canonical: 1233
 - PASS: all_meaninglib_rows contains exactly 1233 canonical ML rows
 - PASS: main methodologylist JSONL exactly matches 1233 canonical ML rows

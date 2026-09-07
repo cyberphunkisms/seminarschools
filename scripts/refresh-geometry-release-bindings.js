@@ -29,5 +29,16 @@ manifest.geometry_paint_repair={
   palette_or_camera_or_input_changed:false,
   deployment:'No deployment performed.'
 };
+manifest.geometry_motion_update={
+  release_id:'seminar-schools-geometry-motion-complete-2026-09-07',
+  predecessor_archive:'seminar-schools-geometry-restored-complete-2026-09-07.zip',
+  predecessor_sha256:'a953aa8f3d70bc2aa8ab7e462ce57d551488a4b63ae3240042aaa2557096db2b',
+  canonical_id:'polymyth-mandala-main-v32',
+  semantic_sha256:'4ee88632a9eb1bb4d0062b0509163d822210f7c8acf055d4712b3ae7c5191ddc',
+  changes:['finite time-based camera smoothing','input-only deduplicated colour writes','stable phone camera framing with native endpoints','hidden/pagehide cancellation','five route-owned motion presets'],
+  canonical_drawing_and_palette_changed:false,
+  physical_phone_performance:'Unverified; cloud phone-size rendering and deterministic runtime tests are separately recorded.',
+  deployment:'No deployment performed.'
+};
 const next=JSON.stringify(manifest,null,2)+'\n';if(fs.readFileSync(file,'utf8')!==next)fs.writeFileSync(file,next);
 console.log('GEOMETRY RELEASE BINDINGS UPDATED — '+count+' current artifact hashes; provenance retained.');

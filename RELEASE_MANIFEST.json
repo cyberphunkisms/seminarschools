@@ -161,7 +161,7 @@
       "data/futureproofing/sep5-feminism-sep5-degorgonified-feminism-preservation-contract.json": "e745bb824070de84da105c35706086940ab439191a179c1b8d4f5649cceeb4ac",
       "package.json": "e6b1621ba2318ee5bec773e6d51b9295655e179482f344a258196119e66af493",
       "package-lock.json": "5e80412efd98d657bc6da6a2f1db4584d7289b9677c2e786bc8bd47f0ad6d194",
-      "polymyth/methodologylist/index.html": "57180080561bbcfa9aa47db89bb0555031fe44097aa9aca829fd840622fba8fb",
+      "polymyth/methodologylist/index.html": "20b674d8ce15d69b62174cf94aa45005eb2a46e1f378979f525de7d3df5a6458",
       "polymyth/methodologylist/mephistodata-register-fixtures.json": "9f93fb25138af996978e1187145ada15b48de84c4785b9bd8d192f25b7791ddd",
       "polymyth/methodologylist/mephistodata-rule-hardening-addendum.js": "68cfec1be870f1276813cdee4fe588cf174f728245d7672bb90c84f2a949c4cd",
       "polymyth/methodologylist/mythology-integration-addendum.js": "dc35a25e5443f7ae05539b5a740d12ba883ea58d9a53e04f6863041cc48a909a",
@@ -336,14 +336,14 @@
       "UPDATE_SOURCES/SCREENPUFF_MATT_LEBLANC_JOEY_TRANSCRIPT_USER_SUPPLIED_2026-09-06.md": "d65e610a02d0864703cb4d58e89a149b15db8dd172e5ea30293801ca524c96ef",
       "package.json": "e6b1621ba2318ee5bec773e6d51b9295655e179482f344a258196119e66af493",
       "polymyth/alwaysalready/img/2026-09-06_youtube_matt-leblanc-joey-actor-as-vessel.png": "7e5dac48e66054e423a07469a7be68e3e4611a6ca0528ebf8269e67dbf48eef6",
-      "polymyth/alwaysalready/index.html": "76a50de8f11231acde50d2b9546649ca5be977dc7cc30ca2c3467494581f7826",
+      "polymyth/alwaysalready/index.html": "03051a6c9feb68ceb2ce74f02ef7e7af0c954e3ff053dcc8ec3b31dc4aadc50b",
       "polymyth/alwaysalready/specimens.json": "ad6979bc073494d019c30e1a433d54eb982c3032fd6c7757a5b0ad59fdaebab9",
       "polymyth/methodologylist/assistant-twisting-alwaysalready-addendum.js": "629d684dc60ccfdcc909bfc09e781b0a7698b980c5ebca1ee890baeb0a13403f",
-      "polymyth/methodologylist/index.html": "57180080561bbcfa9aa47db89bb0555031fe44097aa9aca829fd840622fba8fb",
+      "polymyth/methodologylist/index.html": "20b674d8ce15d69b62174cf94aa45005eb2a46e1f378979f525de7d3df5a6458",
       "scripts/lib/parse-seed-with-addenda.js": "1b854fb0b4a760fd7870e39a7b7a8e9c86ce09ad0f0ef4b35d92dafc37e2bbff",
       "scripts/package-alwaysalready-ml-successor.py": "0e14f8a4fd7a955a2b33d69ca08fc7199cb9b73392ef4928ac1948bd96bbae54",
       "scripts/reports/asset-weight-budget.json": "b95cabed3efc59421bfb668c0f9da4727a2898a28f577240804ebb22bc08aa3d",
-      "scripts/reports/asset-weight-report.json": "6943782f73120ab4aaf69b05a11b0b91dbcc39852d8958edb7760460b8ff1ed2",
+      "scripts/reports/asset-weight-report.json": "64762a911295105fc5f29d18acf81feb4c68f7c6478e09b9fe2dfd263f2129dc",
       "scripts/verify-alwaysalready-ml-archive.py": "cd7dff85cfdfab605b4f142bfbe490eb8e48071cb77e439c2d227c7a2d396fe7",
       "scripts/verify-alwaysalready-page.js": "d6080aedd8719a525e05cf80f8b19349ab08a5231de512feda57c12a673c1627",
       "scripts/verify-assistant-twisting-alwaysalready.js": "e5fad419186abfa7124ea8ef460f897fad248d3e48ab7effb269ff455a5bf103",
@@ -804,22 +804,22 @@
     "Native VoiceOver, NVDA, branded Safari and Firefox, physical-device, real-user, vendor-account calendar import, and deployed subscription-refresh validation remain external evidence rather than simulated passes.",
     "No security audit was performed."
   ],
-  "geometry_asset_version": "sha256-f13c77634dc2",
+  "geometry_asset_version": "sha256-e70943fea3e7",
   "teacherresources_asset_versions": {
     "finder_css": "sha256-365f4034cc9e",
     "finder_js": "sha256-f6e90cbddf2f"
   },
   "asset_digests": {
-    "css/alive.css": "11788131ba152f6a3614896dc9a477decab81293b9dccebb0105dd6cff1d23f9",
+    "css/alive.css": "315ec3180618de265a80fbe662959374c92d868b2156981cf79fae8bd79afde8",
     "css/calm-ux.css": "9604e563bf9d2110dc5031f75c651a68d5b7cfd07f9a220aaec0300e740f9f94",
     "css/site-wide-type-zoom.css": "acf9276e3a82ac32c16be32fc760f5330b48e84aa507bae771bc2f4e81521da3",
     "js/mandala.js": "385644d98014c11f3b63d8bda8b25f981a6b4f44476592907a74b0cb0e1d1e13",
-    "js/indra.js": "2912bd7277d020c6cb10fa8036a346ec96a494c41a03ec65f93cb88f7fb8ce53",
-    "data/geometry-route-contracts.json": "44925d53048311af93799e5d19b1fab6bd1618e7a910bdc2ca358129ecdf876f",
-    "index.html": "ea51f9c2924ef690cbaee1c128339a7e3fe58f2c20171c740bd37bc2497db430",
+    "js/indra.js": "e58d722f189b4eb4e1fde2b8a92fd244f2c368d9ab3e233d4456dff08e1448f7",
+    "data/geometry-route-contracts.json": "01f21fe56acb650df0bf2f5dc518b2526aa2838c8def78894d78b8ecfc40c000",
+    "index.html": "9bd52e5fc3b99e0c30abf7a3d9ba630ee0adfdfeb390fef4ff39c66d39703f6a",
     "teacherresources/finder.css": "365f4034cc9e8748ce78a2ca2288dfcdb73848a21096992e071582c23e9091d7",
     "teacherresources/finder.js": "f6e90cbddf2f7ef97392270a5c7720a65d315f6874e7685ba652f489b97588f4",
-    "teacherresources/index.html": "a858de1453cef9f039071c2c30f00dcf5ca81252618aaac6a2ea2f6183a3e482",
+    "teacherresources/index.html": "fcab3eee8e204892a1c5a284529217ee1fc6de4a91d25391b49b6d4978c7631e",
     "data/polymyth-seminar-events.json": "c52de1fe55bd1c1a4e22d1bce1fd71beebf0cc2687dda436670ec98451bafd7f",
     "data/polymythcal-event-schema-v2.json": "ac055808ae66db101feebad598b4ca74ae91f5957fb522f59eeda3d1e8c80a42",
     "data/polymythcal-publication-surfaces.json": "e32c8c125b42b340d0df0681980040ee2fee3cc5438b16c9bd8c118984306095",
@@ -830,12 +830,12 @@
     "polymythseminars/browse.json": "f7b82229eca5ad99feb64a1a81e02c388abf7045253b51ac7c7188401f46308e",
     "polymythseminars/watchlist.json": "eff46db0ccf086142a1d8a94c827cf9705919cc969dbf5bc8789fe062e8d5ef8",
     "polymythseminars/research.json": "da7f74b566289eaa60a11180c5ccf95cef956e3bc405f17f4e54864cace5c473",
-    "polymythseminars/index.html": "fa9aa634a30178001e6c637c7f9fb686e839ffb837a5a8454b5fb75f424a0b07",
-    "polymythseminars/fr/index.html": "c777db9dc34d6c88c608c9ba6ba34b78f73a6a38a874fb36457de68f5a245f27",
-    "polymythseminars/research/index.html": "7b908ac7b8bd3c41cbe2cbe60500409af3521b667a7ec14df0f9fefa29ee23ca",
-    "polymythseminars/fr/research/index.html": "c3d13c22f8dedf9a0d503334a6bdf039aa39bd8d5d26819b0e980356d2551b0e",
-    "polymythseminars/monitoring/index.html": "41b0c48e8086c13aa46d49464f7c4d11504d60e0c84b6452b6519553710f9d16",
-    "polymythseminars/fr/monitoring/index.html": "3b1a3b97ac145b2c030896fef5aaa640278a63e28a95e0c4fcc46cf4638336e1"
+    "polymythseminars/index.html": "c5b9d1529dc4a4ba21c02526ae826b4c1d5c69b78719f2a7ec0ab7e5a28b35bd",
+    "polymythseminars/fr/index.html": "44d0d4a416e5685ed85f3238e460a4506df46a333e0c5e982092ad92ccf8bb31",
+    "polymythseminars/research/index.html": "ac451d30004061a83be55d1be322141aaf5cdc179295546bb96f248a284b90cb",
+    "polymythseminars/fr/research/index.html": "1eb4e0461cd07e28ddc35c0eded092ac46bbe54ffa145c8f05157e49b8fa5e5b",
+    "polymythseminars/monitoring/index.html": "c2c9a4b912d759090b3f92a4dfeb03539ff938dfdae66af8e64c5ad6b1078f07",
+    "polymythseminars/fr/monitoring/index.html": "f1ff38d93bef7c95094363e0e8aba5d0fee349db10a13c8d0e754263c2f22672"
   },
   "ml_star_update_prior_2026_08_30": {
     "release_id": "2026-08-26-mephistodata-execution-controlled-archive-synthesis",
@@ -961,6 +961,23 @@
     "change": "Explicit currentColor stroke and non-scaling-stroke travel with every SVG line through symbol/use instances.",
     "geometry_coordinates_changed": false,
     "palette_or_camera_or_input_changed": false,
+    "deployment": "No deployment performed."
+  },
+  "geometry_motion_update": {
+    "release_id": "seminar-schools-geometry-motion-complete-2026-09-07",
+    "predecessor_archive": "seminar-schools-geometry-restored-complete-2026-09-07.zip",
+    "predecessor_sha256": "a953aa8f3d70bc2aa8ab7e462ce57d551488a4b63ae3240042aaa2557096db2b",
+    "canonical_id": "polymyth-mandala-main-v32",
+    "semantic_sha256": "4ee88632a9eb1bb4d0062b0509163d822210f7c8acf055d4712b3ae7c5191ddc",
+    "changes": [
+      "finite time-based camera smoothing",
+      "input-only deduplicated colour writes",
+      "stable phone camera framing with native endpoints",
+      "hidden/pagehide cancellation",
+      "five route-owned motion presets"
+    ],
+    "canonical_drawing_and_palette_changed": false,
+    "physical_phone_performance": "Unverified; cloud phone-size rendering and deterministic runtime tests are separately recorded.",
     "deployment": "No deployment performed."
   }
 }

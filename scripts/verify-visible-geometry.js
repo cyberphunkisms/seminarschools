@@ -316,7 +316,9 @@ for (const token of ['shared-background-web', 'normalized-path-scroll', 'indra-d
 }
 if (/indra-coverage|canonical-static-wide|feMorphology|operator=\\?"dilate\\?"/.test(indra)) errors.push('js/indra.js reintroduces the square/bubble coverage renderer');
 if (!/mountCamera\('primary', false\);[\s\S]{0,100}mountCamera\('secondary', true\);/.test(indra)) errors.push('js/indra.js must mount the two independent original field cameras on every included page');
-if (!/setProperty\('--indra-color', rainbowColor\(progress\)\)/.test(indra)) errors.push('js/indra.js must move the original spectrum with scroll progress');
+if (!/rainbowColor\(colorProgress === undefined \? progress : colorProgress\)/.test(indra)
+    || !/if \(color !== lastColor\)/.test(indra)
+    || !/paintAt\(progress, targetProgress\)/.test(indra)) errors.push('js/indra.js must retain input-driven canonical colour while avoiding duplicate recolour work');
 const paletteMatch = indra.match(/var RAINBOW_HEX\s*=\s*Object\.freeze\(\s*(\[[\s\S]*?\])\s*\);/);
 let runtimePalette = null;
 try { runtimePalette = paletteMatch ? JSON.parse(paletteMatch[1].replace(/'/g, '"')) : null; } catch (_) {}
@@ -330,7 +332,12 @@ for (const [register, registerContract] of Object.entries(CONTRACTS.registers)) 
   }
 }
 if (!/SCROLL_PAINT_FALLBACK_MS\s*=\s*48/.test(indra) || !/cancelAnimationFrame\(raf\)/.test(indra)) errors.push('js/indra.js must retain its bounded 48ms scroll paint fallback');
-if (/pageStructureFacts|querySelectorAll\([^)]*(?:main|section|article|h1)|location\.(?:search|hash)/.test(indra)) errors.push('js/indra.js may not derive geometry from DOM structure, query, or hash');
+if (/pageStructureFacts|location\.(?:search|hash)/.test(indra)) errors.push('js/indra.js may not derive geometry identity from DOM structure, query, or hash');
+// The approved motion pass allows actual headings to pace the camera. The
+// canonical drawing and route-seeded bank must remain independent of them.
+const canonicalCamera = indra.slice(indra.indexOf('function cameraPointFor('), indra.indexOf('function cameraPoint(which'));
+if (/querySelector|sectionStops|selectionAmount/.test(canonicalCamera)
+    || !/buildCanonical\(\{ idPrefix: 'indra-shared' \}\)/.test(indra)) errors.push('js/indra.js lets page structure alter canonical geometry or camera identity');
 if (/setInterval\s*\(/.test(indra)) errors.push('js/indra.js may not use permanent interval animation');
 if (!/document\.addEventListener\('scroll', onElementScroll, \{ passive: true, capture: true \}\)/.test(indra)) errors.push('js/indra.js does not listen to the visitor-owned nested scroll surface');
 if (!/document\.addEventListener\('wheel', onWheel, \{ passive: true, capture: true \}\)/.test(indra)) errors.push('js/indra.js lacks the full-screen wheel fallback');

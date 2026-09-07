@@ -152,6 +152,13 @@
   if (!/^(?:quiet|standard|expressive)$/.test(register)) register = routeRegister(geometryKey);
   var profile = String(body.getAttribute('data-geometry-profile') || routeProfile(geometryKey, routeType));
   if (profile !== 'dual-field') profile = 'dual-field';
+  // Presets change the journey through the shared drawing, never its shapes.
+  var motionPreset = String(body.getAttribute('data-geometry-motion-preset') || 'flow');
+  if (!/^(?:flow|reading|study|overview|recurrence)$/.test(motionPreset)) motionPreset = 'flow';
+  var viewportWidth = window.innerWidth;
+  var viewportHeight = window.innerHeight;
+  var coarsePointer = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+  var compactViewport = coarsePointer || viewportWidth < 640;
   var requestedOpacity = parseFloat(body.getAttribute('data-indra-intensity'));
   var registerOpacity = register === 'expressive' ? 0.200 : register === 'quiet' ? 0.115 : 0.135;
   var requestedFadeSource = String(body.getAttribute('data-indra-fade-source') || '');
@@ -188,6 +195,7 @@
   layer.setAttribute('data-geometry-proof', 'eligible-page-scroll');
   layer.setAttribute('data-geometry-register', register);
   layer.setAttribute('data-geometry-profile', profile);
+  layer.setAttribute('data-geometry-motion-preset', motionPreset);
   layer.setAttribute('data-geometry-key', geometryKey);
   layer.setAttribute('data-geometry-canonical-id', canonicalId);
   layer.setAttribute('data-geometry-palette', RAINBOW_HEX.join(','));
@@ -251,6 +259,20 @@
   mountCamera('primary', false);
   mountCamera('secondary', true);
 
+  function frameViewport() {
+    // Freeze the camera rectangle during phone browser-bar/keyboard changes.
+    // The enclosing field still clips to the actual viewport.
+    var overscan = Math.max(viewportWidth, viewportHeight) * (viewportWidth <= 760 ? 0.24 : 0.18);
+    cameras.forEach(function (camera) {
+      camera.element.style.inset = 'auto';
+      camera.element.style.left = camera.element.style.top = -overscan + 'px';
+      var contentWidth = Math.min(viewportWidth, numeric(root.clientWidth) || viewportWidth);
+      camera.element.style.width = (contentWidth + 2 * overscan) + 'px';
+      camera.element.style.height = (viewportHeight + 2 * overscan) + 'px';
+    });
+  }
+  frameViewport();
+
   layer.setAttribute('data-geometry-canonical-hash', canonicalMarkupHash);
   layer.setAttribute('data-geometry-shapes', String(canonicalShapes));
   layer.setAttribute('data-geometry-markup-bytes', String(canonicalBytes));
@@ -279,7 +301,7 @@
     /* A phone viewport needs a wider camera window than a desktop viewport.
        This is a viewport-wide optical correction, never a route exception:
        all routes keep the same bank, seed, direction, and full canonical web. */
-    var viewportZoom = window.innerWidth < 640 ? 0.40 : window.innerWidth < 900 ? 0.50 : 0.45;
+    var viewportZoom = viewportWidth < 640 ? 0.40 : viewportWidth < 900 ? 0.50 : 0.45;
     var zoom = (current.zoom + (next.zoom - current.zoom) * local) * registerZoom * viewportZoom;
     var x = current.x + (next.x - current.x) * local;
     var y = current.y + (next.y - current.y) * local;
@@ -315,24 +337,45 @@
 
   function cameraPoint(which, progress) {
     var secondary = which > 0;
-    return cameraPointFor(
+    var journey = progress;
+    if (motionPreset === 'recurrence' && secondary) {
+      journey = clamp(progress + 0.075 * Math.sin(progress * Math.PI * 6) * Math.sin(progress * Math.PI), 0, 1);
+    } else if (motionPreset === 'reading') {
+      journey = progress * 0.7 + smoothstep(progress) * 0.3;
+    }
+    var state = cameraPointFor(
       secondary ? CAMERA_SECONDARY : CAMERA_PRIMARY,
       secondary ? seeds.second : seeds.first,
       secondary ? seeds.first : seeds.second,
       register,
       secondary,
-      progress
+      journey
     );
+    if (motionPreset === 'overview') state.zoom *= 0.94;
+    return state;
   }
 
-  function paintAt(progress) {
-    layer.style.setProperty('--indra-color', rainbowColor(progress));
+  var lastColor = '';
+  var lastTransforms = [];
+  var selectionAmount = 0;
+  var selectionTarget = 0;
+  function paintAt(progress, colorProgress) {
+    // Colour follows input; interpolating the camera must not repaint all SVG
+    // lines on every catch-up frame. Identical RGB steps are written once.
+    var color = rainbowColor(colorProgress === undefined ? progress : colorProgress);
+    if (color !== lastColor) {
+      layer.style.setProperty('--indra-color', color);
+      lastColor = color;
+    }
     for (var index = 0; index < cameras.length; index++) {
       var state = cameraPoint(index, progress);
-      cameras[index].element.style.transform = 'translate3d(' + state.x.toFixed(2) + 'px,' + state.y.toFixed(2) + 'px,0) rotate(' +
+      if (motionPreset === 'overview') state.zoom *= 1 + selectionAmount * 0.06;
+      var transform = 'translate3d(' + state.x.toFixed(2) + 'px,' + state.y.toFixed(2) + 'px,0) rotate(' +
         state.rotation.toFixed(3) + 'deg) scale(' + state.zoom.toFixed(4) + ')';
-      cameras[index].element.style.setProperty('--indra-progress', progress.toFixed(4));
-      cameras[index].element.style.setProperty('--indra-travel', state.travel.toFixed(2));
+      if (transform !== lastTransforms[index]) {
+        cameras[index].element.style.transform = transform;
+        lastTransforms[index] = transform;
+      }
     }
     layer.setAttribute('data-geometry-progress', progress.toFixed(4));
   }
@@ -347,6 +390,33 @@
   var panPointerId = null;
   var panLastX = 0;
   var panLastY = 0;
+  var sectionStops = [];
+
+  function measureSections() {
+    sectionStops = [];
+    if (motionPreset !== 'study' || !document.querySelectorAll) return;
+    var range = Math.max(0, Math.max(numeric(root.scrollHeight), numeric(body.scrollHeight)) - viewportHeight);
+    if (range < 1) return;
+    var nodes = document.querySelectorAll('main h2, main section[id], article h2');
+    for (var i = 0; i < nodes.length && i < 80; i++) {
+      var top = nodes[i].getBoundingClientRect().top + numeric(window.scrollY);
+      var stop = clamp(top / range, 0, 1);
+      if (stop > 0.02 && stop < 0.98) sectionStops.push(stop);
+    }
+    sectionStops.sort(function (a, b) { return a - b; });
+    sectionStops = sectionStops.filter(function (value, index, all) { return !index || value - all[index - 1] > 0.015; });
+    sectionStops.unshift(0);
+    sectionStops.push(1);
+  }
+
+  function sectionProgress(progress) {
+    if (sectionStops.length < 3) return progress;
+    var index = 0;
+    while (index < sectionStops.length - 2 && progress > sectionStops[index + 1]) index++;
+    var local = (progress - sectionStops[index]) / (sectionStops[index + 1] - sectionStops[index]);
+    var section = (index + smoothstep(local)) / (sectionStops.length - 1);
+    return clamp(progress * 0.8 + section * 0.2, 0, 1);
+  }
 
   function numeric(value) {
     var number = Number(value);
@@ -365,8 +435,10 @@
   function documentScrollProgress() {
     var scrollTop = numeric(window.scrollY || root.scrollTop || body.scrollTop);
     var documentHeight = Math.max(numeric(root.scrollHeight), numeric(body.scrollHeight));
-    var range = Math.max(0, documentHeight - numeric(window.innerHeight));
-    return range > 1 ? clamp(scrollTop / range, 0, 1) : 0.32;
+    if (documentHeight - numeric(window.innerHeight) <= 1) return 0.32;
+    if (scrollTop >= documentHeight - numeric(window.innerHeight) - 1) return 1;
+    var range = Math.max(0, documentHeight - viewportHeight);
+    return range > 1 ? sectionProgress(clamp(scrollTop / range, 0, 1)) : 0.32;
   }
 
   function readProgress() {
@@ -374,13 +446,14 @@
       var elementProgress = elementScrollProgress(activeScrollElement);
       if (elementProgress !== null) return elementProgress;
       activeScrollElement = null;
-      motionSource = 'window-scroll';
+      setMotionSource('window-scroll');
     }
     if (motionSource === 'wheel' || motionSource === 'pan') return virtualProgress;
     return documentScrollProgress();
   }
 
   function setMotionSource(source) {
+    if (source === motionSource) return;
     motionSource = source;
     layer.setAttribute('data-geometry-motion-source', source);
   }
@@ -425,26 +498,59 @@
   var paintFallbackTimer = 0;
   var SCROLL_PAINT_FALLBACK_MS = 48;
   var lastProgress = -1;
-  function paint() {
+  var targetProgress = -1;
+  var lastFrameTime = 0;
+  var settlingSince = 0;
+  var inputDirty = true;
+  var MOTION_SETTLE_MS = 360;
+  var MOTION_RESPONSE_MS = 65;
+  function clock() {
+    return window.performance && typeof window.performance.now === 'function' ? window.performance.now() : Date.now();
+  }
+  function paint(timestamp) {
     if (paintFallbackTimer) {
       window.clearTimeout(paintFallbackTimer);
       paintFallbackTimer = 0;
     }
     raf = 0;
-    var progress = readProgress();
-    if (lastProgress >= 0 && Math.abs(progress - lastProgress) < 0.0002) return;
+    if (document.hidden) return;
+    var now = Number.isFinite(timestamp) ? timestamp : clock();
+    if (inputDirty || targetProgress < 0) {
+      var nextTarget = readProgress();
+      if (Math.abs(nextTarget - targetProgress) > 0.000001) settlingSince = now;
+      targetProgress = nextTarget;
+      inputDirty = false;
+    }
+    var elapsed = lastFrameTime ? Math.max(0, now - lastFrameTime) : 16.667;
+    lastFrameTime = now;
+    var progress = lastProgress < 0 ? targetProgress
+      : lastProgress + (targetProgress - lastProgress) * (1 - Math.exp(-elapsed / MOTION_RESPONSE_MS));
+    var priorSelection = selectionAmount;
+    selectionAmount += (selectionTarget - selectionAmount) * (1 - Math.exp(-elapsed / MOTION_RESPONSE_MS));
+    var settled = (Math.abs(targetProgress - progress) < 0.00002 && Math.abs(selectionTarget - selectionAmount) < 0.00002)
+      || now - settlingSince >= MOTION_SETTLE_MS;
+    if (settled) progress = targetProgress;
+    if (settled) selectionAmount = selectionTarget;
+    if (lastProgress === progress && priorSelection === selectionAmount) {
+      if (!settled) schedule(false);
+      return;
+    }
     lastProgress = progress;
-    paintAt(progress);
+    paintAt(progress, targetProgress);
+    if (!settled) schedule(false);
   }
 
-  function schedule() {
+  function schedule(markDirty) {
+    if (markDirty !== false) inputDirty = true;
+    if (document.hidden) return;
     if (raf || paintFallbackTimer) return;
+    if (markDirty !== false || !lastFrameTime) lastFrameTime = clock();
     raf = window.requestAnimationFrame(paint);
     paintFallbackTimer = window.setTimeout(function () {
       if (raf) window.cancelAnimationFrame(raf);
       raf = 0;
       paintFallbackTimer = 0;
-      paint();
+      paint(clock());
     }, SCROLL_PAINT_FALLBACK_MS);
   }
 
@@ -478,12 +584,14 @@
   function onWheel(event) {
     if (scrollableAncestor(event && event.target)) return;
     var documentHeight = Math.max(numeric(root.scrollHeight), numeric(body.scrollHeight));
+    // Eligibility follows the actual native scroll range, even while the
+    // optical camera viewport is intentionally held stable.
     var documentRange = Math.max(0, documentHeight - numeric(window.innerHeight));
     if (documentRange > 1) return;
     var deltaY = numeric(event && event.deltaY);
     var deltaX = numeric(event && event.deltaX);
     var delta = Math.abs(deltaY) >= Math.abs(deltaX) ? deltaY : deltaX;
-    advanceVirtual(delta / Math.max(1200, numeric(window.innerHeight) * 4), 'wheel');
+    advanceVirtual(delta / Math.max(1200, viewportHeight * 4), 'wheel');
   }
 
   function onPointerDown(event) {
@@ -504,7 +612,7 @@
     panLastX = nextX;
     panLastY = nextY;
     var delta = Math.abs(deltaY) >= Math.abs(deltaX) ? deltaY : deltaX;
-    advanceVirtual(delta / Math.max(1200, numeric(window.innerHeight) * 3), 'pan');
+    advanceVirtual(delta / Math.max(1200, viewportHeight * 3), 'pan');
   }
 
   function onPointerEnd(event) {
@@ -512,6 +620,43 @@
     if (panPointerId !== null && pointerId === panPointerId) panPointerId = null;
   }
 
+  measureSections();
+  function cancelMotion() {
+    if (raf) window.cancelAnimationFrame(raf);
+    if (paintFallbackTimer) window.clearTimeout(paintFallbackTimer);
+    raf = paintFallbackTimer = 0;
+    lastFrameTime = 0;
+    panPointerId = null;
+  }
+  function onContentInteraction() {
+    measureSections();
+    if (motionPreset === 'overview' && document.querySelector) {
+      var selected = document.querySelector('.project-list-item button[aria-pressed="true"], [data-quick][aria-pressed="true"]');
+      var next = selected ? 1 : 0;
+      if (next !== selectionTarget) {
+        selectionTarget = next;
+        settlingSince = clock();
+      }
+    }
+    schedule();
+  }
+  function onViewportResize() {
+    var widthChanged = window.innerWidth !== viewportWidth;
+    if (!widthChanged && compactViewport) {
+      var nativeRange = Math.max(numeric(root.scrollHeight), numeric(body.scrollHeight)) - numeric(window.innerHeight);
+      if (!reduced && nativeRange > 1 && numeric(window.scrollY) >= nativeRange - 1) schedule();
+      return;
+    }
+    viewportWidth = window.innerWidth;
+    viewportHeight = window.innerHeight;
+    compactViewport = coarsePointer || viewportWidth < 640;
+    frameViewport();
+    measureSections();
+    lastTransforms = [];
+    if (reduced) paintAt(0);
+    else { lastProgress = -1; schedule(); }
+  }
+  window.addEventListener('resize', onViewportResize, { passive: true });
   if (reduced) {
     /* Path start is already checked for composed visibility on every surface.
        Route seeds still select a distinct bank/direction/rotation; only motion
@@ -530,17 +675,16 @@
     document.addEventListener('pointermove', onPointerMove, { passive: true, capture: true });
     document.addEventListener('pointerup', onPointerEnd, { passive: true, capture: true });
     document.addEventListener('pointercancel', onPointerEnd, { passive: true, capture: true });
-    window.addEventListener('resize', function () {
-      lastProgress = -1;
-      schedule();
-    }, { passive: true });
+    window.addEventListener('load', function () { measureSections(); schedule(); }, { once: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measureSections(); schedule(); });
+    document.addEventListener('toggle', onContentInteraction, { passive: true, capture: true });
+    document.addEventListener('change', onContentInteraction, { passive: true });
+    if (motionPreset === 'overview') document.addEventListener('click', onContentInteraction, { passive: true });
+    window.addEventListener('pagehide', cancelMotion);
     window.addEventListener('pageshow', schedule, { passive: true });
     document.addEventListener('visibilitychange', function () {
       if (!document.hidden) schedule();
-      else if (raf) {
-        window.cancelAnimationFrame(raf);
-        raf = 0;
-      }
+      else cancelMotion();
     });
   }
 

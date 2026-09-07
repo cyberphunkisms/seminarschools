@@ -75,6 +75,23 @@
   "profiles": {
     "dual-field": { "cameras": 2 }
   },
+  "motion_presets": {
+    "flow": "Existing path-stable camera journey with finite input smoothing.",
+    "reading": "Gentle progression through the unchanged camera bank.",
+    "study": "Bounded pacing from actual section headings.",
+    "overview": "A slightly wider shared view that closes in on existing project or topic selections.",
+    "recurrence": "The secondary camera briefly returns through familiar formations."
+  },
+  "motion_preset_rules": [
+    { "exact_path": "/polymyth/alwaysalready/", "preset": "recurrence" },
+    { "exact_path": "/", "preset": "overview" },
+    { "exact_path": "/polymyth/", "preset": "overview" },
+    { "exact_path": "/teacherresources/", "preset": "overview" },
+    { "path_prefixes": ["/about/", "/saul/", "/reviews/", "/marginalia/"], "preset": "reading" },
+    { "path_prefixes": ["/teacherresources/", "/seminars/", "/writingclub/", "/writingkids/", "/writingjuniors/", "/writingteens/", "/writinggrads/", "/university/", "/philosophy/", "/humanities/"], "preset": "study" },
+    { "route_types": ["publication", "cv", "cv-reviews", "service-policy", "game-research", "game-research-localized", "teacher-manual", "teacher-rule-library"], "preset": "reading" },
+    { "route_types": ["home", "project", "commons-home", "commons-directory", "resource-catalog", "map", "archive-map", "archive-index"], "preset": "overview" }
+  ],
   "presentation": {
     "field": "fine-line-rainbow-dual",
     "cameras": 2,

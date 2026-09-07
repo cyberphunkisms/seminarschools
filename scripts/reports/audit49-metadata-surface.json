@@ -80,7 +80,7 @@
     "gzip_over_100_kib": 21,
     "gzip_over_250_kib": 4,
     "gzip_over_500_kib": 2,
-    "largest_gzip_bytes": 1294687
+    "largest_gzip_bytes": 1294686
   },
   "top_page_size_outliers": [
     {
@@ -88,7 +88,7 @@
       "route": "/polymyth/methodologylist/",
       "bytes": 4223608,
       "kibibytes": 4124.6,
-      "gzip_bytes": 1294687,
+      "gzip_bytes": 1294686,
       "gzip_kibibytes": 1264.3,
       "indexable": true,
       "redirect": false
@@ -98,7 +98,7 @@
       "route": "/polymyth/methodologylist/methodology/",
       "bytes": 2016237,
       "kibibytes": 1969,
-      "gzip_bytes": 634002,
+      "gzip_bytes": 634001,
       "gzip_kibibytes": 619.1,
       "indexable": true,
       "redirect": false
@@ -136,9 +136,9 @@
     {
       "file": "teacherresources/index.html",
       "route": "/teacherresources/",
-      "bytes": 704933,
+      "bytes": 704972,
       "kibibytes": 688.4,
-      "gzip_bytes": 69136,
+      "gzip_bytes": 69150,
       "gzip_kibibytes": 67.5,
       "indexable": true,
       "redirect": false
@@ -148,7 +148,7 @@
       "route": "/polymyth/bookwormburrows/",
       "bytes": 621724,
       "kibibytes": 607.2,
-      "gzip_bytes": 214985,
+      "gzip_bytes": 214984,
       "gzip_kibibytes": 209.9,
       "indexable": true,
       "redirect": false
@@ -158,7 +158,7 @@
       "route": "/polymyth/methodologylist/citation/",
       "bytes": 594809,
       "kibibytes": 580.9,
-      "gzip_bytes": 136648,
+      "gzip_bytes": 136647,
       "gzip_kibibytes": 133.4,
       "indexable": true,
       "redirect": false
@@ -168,7 +168,7 @@
       "route": "/polymyth/methodologylist/gorgonification/",
       "bytes": 461217,
       "kibibytes": 450.4,
-      "gzip_bytes": 138430,
+      "gzip_bytes": 138429,
       "gzip_kibibytes": 135.2,
       "indexable": true,
       "redirect": false
@@ -186,9 +186,9 @@
     {
       "file": "leizu/fa/index.html",
       "route": "/leizu/fa/",
-      "bytes": 391905,
-      "kibibytes": 382.7,
-      "gzip_bytes": 115578,
+      "bytes": 391940,
+      "kibibytes": 382.8,
+      "gzip_bytes": 115588,
       "gzip_kibibytes": 112.9,
       "indexable": true,
       "redirect": false
@@ -196,9 +196,9 @@
     {
       "file": "leizu/fr/index.html",
       "route": "/leizu/fr/",
-      "bytes": 385359,
-      "kibibytes": 376.3,
-      "gzip_bytes": 114167,
+      "bytes": 385394,
+      "kibibytes": 376.4,
+      "gzip_bytes": 114179,
       "gzip_kibibytes": 111.5,
       "indexable": true,
       "redirect": false
@@ -208,7 +208,7 @@
       "route": "/polymyth/methodologylist/coreplus/",
       "bytes": 385357,
       "kibibytes": 376.3,
-      "gzip_bytes": 127148,
+      "gzip_bytes": 127147,
       "gzip_kibibytes": 124.2,
       "indexable": true,
       "redirect": false
@@ -216,19 +216,19 @@
     {
       "file": "leizu/zh-hans/index.html",
       "route": "/leizu/zh-hans/",
-      "bytes": 382295,
-      "kibibytes": 373.3,
-      "gzip_bytes": 114020,
-      "gzip_kibibytes": 111.3,
+      "bytes": 382330,
+      "kibibytes": 373.4,
+      "gzip_bytes": 114028,
+      "gzip_kibibytes": 111.4,
       "indexable": true,
       "redirect": false
     },
     {
       "file": "leizu/zh-hant/index.html",
       "route": "/leizu/zh-hant/",
-      "bytes": 382285,
-      "kibibytes": 373.3,
-      "gzip_bytes": 112897,
+      "bytes": 382320,
+      "kibibytes": 373.4,
+      "gzip_bytes": 112907,
       "gzip_kibibytes": 110.3,
       "indexable": true,
       "redirect": false
@@ -236,9 +236,9 @@
     {
       "file": "leizu/index.html",
       "route": "/leizu/",
-      "bytes": 382260,
+      "bytes": 382295,
       "kibibytes": 373.3,
-      "gzip_bytes": 110606,
+      "gzip_bytes": 110617,
       "gzip_kibibytes": 108,
       "indexable": true,
       "redirect": false
@@ -246,9 +246,9 @@
     {
       "file": "leizu/fa/flyer/index.html",
       "route": "/leizu/fa/flyer/",
-      "bytes": 378354,
+      "bytes": 378389,
       "kibibytes": 369.5,
-      "gzip_bytes": 121365,
+      "gzip_bytes": 121375,
       "gzip_kibibytes": 118.5,
       "indexable": false,
       "redirect": false
@@ -256,9 +256,9 @@
     {
       "file": "leizu/fr/flyer/index.html",
       "route": "/leizu/fr/flyer/",
-      "bytes": 378270,
+      "bytes": 378305,
       "kibibytes": 369.4,
-      "gzip_bytes": 121225,
+      "gzip_bytes": 121235,
       "gzip_kibibytes": 118.4,
       "indexable": false,
       "redirect": false
@@ -266,9 +266,9 @@
     {
       "file": "leizu/zh-hans/flyer/index.html",
       "route": "/leizu/zh-hans/flyer/",
-      "bytes": 378223,
+      "bytes": 378258,
       "kibibytes": 369.4,
-      "gzip_bytes": 121341,
+      "gzip_bytes": 121351,
       "gzip_kibibytes": 118.5,
       "indexable": false,
       "redirect": false
@@ -276,9 +276,9 @@
     {
       "file": "leizu/zh-hant/flyer/index.html",
       "route": "/leizu/zh-hant/flyer/",
-      "bytes": 378223,
+      "bytes": 378258,
       "kibibytes": 369.4,
-      "gzip_bytes": 121339,
+      "gzip_bytes": 121348,
       "gzip_kibibytes": 118.5,
       "indexable": false,
       "redirect": false
@@ -286,9 +286,9 @@
     {
       "file": "leizu/flyer/index.html",
       "route": "/leizu/flyer/",
-      "bytes": 376761,
-      "kibibytes": 367.9,
-      "gzip_bytes": 120656,
+      "bytes": 376796,
+      "kibibytes": 368,
+      "gzip_bytes": 120668,
       "gzip_kibibytes": 117.8,
       "indexable": true,
       "redirect": false
@@ -296,9 +296,9 @@
     {
       "file": "bookwormcard/print/index.html",
       "route": "/bookwormcard/print/",
-      "bytes": 284048,
+      "bytes": 284083,
       "kibibytes": 277.4,
-      "gzip_bytes": 154966,
+      "gzip_bytes": 154977,
       "gzip_kibibytes": 151.3,
       "indexable": false,
       "redirect": false
@@ -306,9 +306,9 @@
     {
       "file": "saul/fa/index.html",
       "route": "/saul/fa/",
-      "bytes": 274604,
+      "bytes": 274642,
       "kibibytes": 268.2,
-      "gzip_bytes": 76767,
+      "gzip_bytes": 76771,
       "gzip_kibibytes": 75,
       "indexable": true,
       "redirect": false
@@ -316,9 +316,9 @@
     {
       "file": "saul/index.html",
       "route": "/saul/",
-      "bytes": 274599,
+      "bytes": 274637,
       "kibibytes": 268.2,
-      "gzip_bytes": 76595,
+      "gzip_bytes": 76605,
       "gzip_kibibytes": 74.8,
       "indexable": true,
       "redirect": false
@@ -326,10 +326,10 @@
     {
       "file": "saul/fr/index.html",
       "route": "/saul/fr/",
-      "bytes": 274523,
+      "bytes": 274561,
       "kibibytes": 268.1,
-      "gzip_bytes": 76742,
-      "gzip_kibibytes": 74.9,
+      "gzip_bytes": 76749,
+      "gzip_kibibytes": 75,
       "indexable": true,
       "redirect": false
     }

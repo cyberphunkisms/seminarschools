@@ -129,7 +129,7 @@ function ensureHead(html) {
 function ensureBody(html, r, routeType, pageOwnedIntensity) {
   return html.replace(/<body\b([^>]*)>/i, (m, attrs) => {
     let a = attrs || '';
-    for (const attribute of ['data-route-type', 'data-geometry', 'data-indra-intensity', 'data-indra-fade-source', 'data-geometry-role', 'data-geometry-key', 'data-geometry-seed', 'data-geometry-register', 'data-geometry-profile', 'data-geometry-surface', 'data-geometry-engine', 'data-star-file-page', 'data-shared-geometry-exempt', 'data-front-facing']) {
+    for (const attribute of ['data-route-type', 'data-geometry', 'data-indra-intensity', 'data-indra-fade-source', 'data-geometry-role', 'data-geometry-key', 'data-geometry-seed', 'data-geometry-register', 'data-geometry-profile', 'data-geometry-motion-preset', 'data-geometry-surface', 'data-geometry-engine', 'data-star-file-page', 'data-shared-geometry-exempt', 'data-front-facing']) {
       const pattern = new RegExp(`\\s+${attribute}\\s*=\\s*(["'])[^"']*\\1`, 'ig');
       a = a.replace(pattern, '');
     }

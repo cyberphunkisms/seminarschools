@@ -117,7 +117,9 @@ if (/setInterval\s*\(/.test(indra)) errors.push('js/indra.js contains an interva
 if (/pointerenter|pointerleave/i.test(indra)) errors.push('js/indra.js follows ambient pointer entry/exit');
 if (!/panPointerId === null/.test(indra) || !/panSurface\(event\.target\)/.test(indra)) errors.push('js/indra.js press/drag fallback is not gated to a pan surface');
 if (!/addEventListener\(['"]scroll['"],\s*onWindowScroll/.test(indra)) errors.push('js/indra.js lacks scroll-triggered scheduling');
-if (!/if \(raf \|\| paintFallbackTimer\) return;\s*raf = window\.requestAnimationFrame\(paint\)/.test(indra)) {
+// Finite smoothing resets its clock after the shared pending-work guard.
+// Only that non-scheduling statement may precede the single rAF allocation.
+if (!/if \(raf \|\| paintFallbackTimer\) return;\s*(?:if \(markDirty !== false \|\| !lastFrameTime\) lastFrameTime = clock\(\);\s*)?raf = window\.requestAnimationFrame\(paint\)/.test(indra)) {
   errors.push('js/indra.js lacks one-frame throttling across rAF and its bounded starvation fallback');
 }
 if (/requestAnimationFrame\([^)]*\)[\s\S]{0,120}requestAnimationFrame\(/.test(indra)) warnings.push('js/indra.js contains multiple rAF calls; manually confirm they are event-triggered');

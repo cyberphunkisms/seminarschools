@@ -13,6 +13,7 @@ const {
   geometryKeyForRelativeHtmlPath,
   geometryOwnerOpacityForKey,
   geometryProfileFor,
+  geometryMotionPresetFor,
   geometryRegisterForKey,
   geometrySeedForKey,
 } = require('./lib/geometry-asset-version');
@@ -103,6 +104,7 @@ function inspect(files, base, label, errors, stats) {
     const expectedRegister = geometryRegisterForKey(key);
     if (attr(body, 'data-geometry-register') !== expectedRegister) errors.push(`${label}:${route}: expected ${expectedRegister} geometry register`);
     if (attr(body, 'data-geometry-profile') !== expectedProfile(route, routeType)) errors.push(`${label}:${route}: invalid geometry profile`);
+    if (attr(body, 'data-geometry-motion-preset') !== geometryMotionPresetFor(CONTRACTS, key, routeType)) errors.push(`${label}:${route}: invalid thematic motion preset`);
     const intensity = Number(attr(body, 'data-indra-intensity'));
     if (!Number.isFinite(intensity) || intensity < OPACITY_MINIMUM || intensity > OPACITY_MAXIMUM) {
       errors.push(`${label}:${route}: fade must remain within ${OPACITY_MINIMUM.toFixed(3)}–${OPACITY_MAXIMUM.toFixed(3)}`);

@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Geometry motion comparison</title>
+<style>body{margin:0;font:14px monospace;background:#eee;color:#111}nav{display:flex;flex-wrap:wrap;gap:8px;padding:8px}button,input,select{font:inherit;padding:6px}iframe{border:0;display:block}pre{white-space:pre-wrap;max-height:240px;overflow:auto;padding:8px}</style></head><body>
+<nav><label>Route <input id="route" value="/polymyth/alwaysalready/" size="32"></label><label>Version <select id="version"><option value="current">Current</option><option value="baseline">Approved baseline</option></select></label><button id="load">Load</button><button id="phone">Phone size</button><button id="desktop">Desktop size</button><button id="middle">Middle</button><button id="bottom">Bottom</button><button id="height">Height change</button><button id="lines">Lines only</button><button id="full">Full drawing</button><button id="run">Measure coarse scroll</button><button id="slow">Measure fine scroll</button></nav>
+<pre id="result" role="status">Loading</pre><iframe id="page" title="Rendered page" width="390" height="720"></iframe>
+<script>
+'use strict';
+const frame=document.getElementById('page'),result=document.getElementById('result');
+let runId=0;
+const records=[];
+function state(){const d=frame.contentDocument,w=frame.contentWindow,l=d.getElementById('indraLayer');return {route:document.getElementById('route').value,version:document.getElementById('version').value,viewport:[w.innerWidth,w.innerHeight],visibility:d.visibilityState,preset:l?.dataset.geometryMotionPreset,progress:Number(l?.dataset.geometryProgress),scroll:w.scrollY,overflow:d.documentElement.scrollWidth>w.innerWidth,lines:l?.querySelectorAll('.geo-stroke').length,cameras:[...d.querySelectorAll('.indra-camera')].map(n=>({transform:n.style.transform,inline:n.getAttribute('style'),layoutWidth:w.getComputedStyle(n).width,layoutHeight:w.getComputedStyle(n).height,maxWidth:w.getComputedStyle(n).maxWidth,width:n.getBoundingClientRect().width,height:n.getBoundingClientRect().height})),layer:!!l};}
+function settled(){setTimeout(()=>{result.textContent=JSON.stringify(state(),null,2);result.dataset.ready='true';},600);}
+async function load(){runId++;result.dataset.ready='false';result.textContent='Loading';const route=document.getElementById('route').value;let html=await (await fetch(route)).text();html=html.replace(/<head([^>]*)>/i,'<head$1><base href="'+route+'">');if(document.getElementById('version').value==='baseline')html=html.replace(/\/js\/indra\.js(?:\?[^"']*)?/g,'/scripts/fixtures/geometry-motion-baseline.js');frame.srcdoc=html;}
+frame.onload=async()=>{await frame.contentDocument.fonts.ready;settled();};
+document.getElementById('load').onclick=load;
+document.getElementById('phone').onclick=()=>{frame.width=390;frame.height=720;settled();};
+document.getElementById('desktop').onclick=()=>{frame.width=1280;frame.height=800;settled();};
+document.getElementById('height').onclick=()=>{frame.height=Number(frame.height)===720?640:720;settled();};
+function position(p){const w=frame.contentWindow,d=frame.contentDocument;w.scrollTo({top:p*(d.documentElement.scrollHeight-w.innerHeight),behavior:'instant'});settled();}
+document.getElementById('middle').onclick=()=>position(.5);document.getElementById('bottom').onclick=()=>position(1);
+for(const mode of ['lines','full'])document.getElementById(mode).onclick=()=>{for(const n of frame.contentDocument.querySelectorAll('.geo-flower-center,.geo-jewel'))n.setAttribute('display',mode==='lines'?'none':'');settled();};
+function measure(fine){const id=++runId,w=frame.contentWindow,d=frame.contentDocument,l=d.getElementById('indraLayer');if(!l)return;result.dataset.ready='false';result.textContent='Measuring';w.scrollTo({top:0,behavior:'instant'});setTimeout(()=>{if(id!==runId)return;
+const samples=[],writes={color:0,cameraStyle:0},observer=new MutationObserver(rows=>{for(const row of rows){if(row.target===l)writes.color++;else writes.cameraStyle++;}});observer.observe(l,{attributes:true,attributeFilter:['style']});for(const n of l.querySelectorAll('.indra-camera'))observer.observe(n,{attributes:true,attributeFilter:['style']});
+let first=0,lastInput=-1;const range=d.documentElement.scrollHeight-w.innerHeight;
+function tick(t){if(id!==runId){observer.disconnect();return;}if(!first)first=t;const elapsed=t-first,bucket=Math.floor(elapsed/(fine?16.667:100));if(elapsed<=1800&&bucket!==lastInput){lastInput=bucket;w.scrollTo({top:(fine?Math.min(90,bucket)*2:Math.min(18,bucket)*Math.min(150,range/20)),behavior:'instant'});}
+const c=l.querySelector('.indra-camera'),m=new DOMMatrix(getComputedStyle(c).transform);samples.push({t,progress:Number(l.dataset.geometryProgress),x:m.m41,y:m.m42});if(elapsed<2400){w.requestAnimationFrame(tick);return;}
+observer.disconnect();const intervals=samples.slice(1).map((s,i)=>s.t-samples[i].t).sort((a,b)=>a-b),steps=samples.slice(1).map((s,i)=>Math.hypot(s.x-samples[i].x,s.y-samples[i].y));const record={...state(),mode:fine?'fine':'coarse',frames:samples.length,p95FrameMs:intervals[Math.floor(intervals.length*.95)],maxFrameMs:Math.max(...intervals),maxCameraStepPx:Math.max(...steps),writes,settledProgress:samples.at(-1).progress};records.push(record);result.textContent=JSON.stringify({latest:record,records},null,2);result.dataset.ready='true';}
+w.requestAnimationFrame(tick);},650);}
+document.getElementById('run').onclick=()=>measure(false);document.getElementById('slow').onclick=()=>measure(true);load();
+</script></body></html>

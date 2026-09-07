@@ -50,6 +50,8 @@ body[data-geometry="indra-web"] {
   opacity: var(--indra-camera-opacity, 1);
   transform-origin: 50% 50%;
   will-change: transform;
+  max-width: none;
+  max-height: none;
 }
 #indraLayer .indra-definition-bank {
   position: absolute;
