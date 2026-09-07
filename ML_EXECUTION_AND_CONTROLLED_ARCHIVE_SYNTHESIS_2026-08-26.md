@@ -49,11 +49,29 @@ The phrase is non-semantic. It names neither a feminist subtype, innocent remain
 
 The successor keeps the canonical corpus at 1,224 entries because it strengthens existing owners rather than adding a duplicate definition row. The current internal behavioral suite contains 139 cases, with 52 expected passes and 87 expected failures. Project adjudication contains 215 cases, with 71 expected passes and 144 expected failures. The runtime gate contains 141 cases, comprising 37 permits and 104 required rejections. The successor release identity is `core-coreplus-mephistodata-degorgonified-feminism-retrieval-enforcement-complete-2026-09-05`, its canonical archive name is `seminar-schools-mephistodata-degorgonified-feminism-retrieval-enforcement-complete-2026-09-05.zip`, and its deterministic generated time is `2026-09-05T20:15:00Z`.
 
+## 2026-09-06 paginated-document-continuity amendment
+
+The direct operator source `UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DOCUMENT_CONTINUITY_2026-09-06.md` is integrated under SHA-256 `5d6f0ddc0a895f99d847497896c9b7ef6d4769a430e0912d3014303a39aa5a87`. Its current owner is `coreplus-handler-paginated-document-continuity-2026-09-06`. The owner also rejects annotation-only PDF link checks and requires standard link actions, resolved destinations, visible hitboxes, copyable source fallbacks, and multi-parser final-file verification.
+
+Every user-facing paginated document or slide artifact must now pass a final-render continuity gate. The gate rejects clipped or overflowing content, orphan headings, split rows, broken labels, short tables or forms divided across pages, one-row continuation fragments, tiny contextless continuations, and footer/body collisions. A short logical unit that fits on a fresh page moves intact. A genuinely long table may continue only when its header repeats, its rows remain intact, and each side contains at least two data rows when the material permits; the heading, header, and first two rows stay together, as do the final two rows.
+
+The final deliverable—not only its source—is rendered and every page or slide is inspected at readable scale. Layout controls precede type reduction or content deletion. If any defect cannot be resolved, delivery fails closed and the exact page and defect must be disclosed. Twelve hostile fixtures encode three valid cases and nine required rejections, including sampling-only review, source-only review, missing render output, clipping, orphan headings, split rows, one-row continuations, broken citation labels, and footer collisions.
+
+## 2026-09-06 assistant-twisting and Always Already amendment
+
+The direct operator source `UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_ASSISTANT_TWISTING_ALWAYSALREADY_2026-09-06.md` is integrated under SHA-256 `81fe6ed881c7049e1b4366d47d3d1042624ba8eb279c228f1ac62b36f7ab15d0`. Seven records establish one organized assistant-twisting examples index, the Medusa agent-exemption incident, a record-on-every-twist rule, the universal front-facing Platformstrawmanculture rule, a bound update source, the Matt LeBlanc / Joey case analysis, and the reciprocal Always Already public-evidence archive owner.
+
+The existing `Anti-twisting worked example, psychologism and gorgonwars session` remains the organizational anchor under record identifier `ml:methodology:anti-twisting-worked-example-psychologism-and-gorgonwars-session:9d1aaf3836d8`. Each distinct incident must retain the original wording and context, the assistant substitution, the exact semantic alteration, its consequence, the user's correction, a recoverable locator, a status that separates acknowledged error from verified repair of the affected output, and links to governing rules and related incidents. The Medusa record documents a change from the user's inclusion of the advocates—“these are the gorgon we are attacking”—to an unauthorized categorical exemption for the people advancing the argument. The conversation-level error is acknowledged; correction of every affected document remains pending until inspected.
+
+Every front-facing output must now pass the Platformstrawmanculture fidelity rule. It applies to favorable and hostile portrayals in articles, essays, reports, presentations, webpages, teaching materials, public summaries, and other audience-facing work. The strongest relevant argument must be recovered from its actual content. Source statement, interpretation, and multi-source reconstruction retain distinct attribution. Ironmanning cannot invent premises, concessions, or a more acceptable position and assign them to the source. This rule links to and preserves `ml:gorgonification:platformstrawmanculture:b1e10aeffc03`; it is not confined to cherry-picked social-media posts.
+
+The public archive at `https://seminarschools.com/polymyth/alwaysalready/` now has six screenshot captures across five contexts and six separately identified sightings. Its new ScreenPuff example is connected to Actor-as-vessel and Always Already as observed operations. Frankenstein conscription remains a candidate because the source shows prestige being recruited into a role narrative but does not by itself establish coercive appropriation. Actor-role-arc remains not established because a single actor/role reflection does not build a cross-filmography world. The Polycognate and Indra link is structural rather than genealogical: several different frameworks meet around a shared actor/role recursion while keeping their own provenance and evidentiary status.
+
 ## Result
 
 This update converts the recent Mephistodata lessons into one fail-closed execution layer and one controlled-archive evidence method. It preserves the August 24 source as provenance, keeps user claims and verified findings in separate statuses, gives each current rule one dated owner, retains superseded language in history, and tests behavior through positive and negative fixtures.
 
-The canonical ML* corpus now contains 1,224 entries across 16 sections. The original 2026-08-26 layer added 11 records. Later amendments strengthen the existing semantic owners without creating duplicate definitions.
+The canonical ML* corpus now contains 1,233 entries across 16 sections. The original 2026-08-26 layer added 11 records. The 2026-09-06 continuity amendment added one bound source record and one current technical owner. The assistant-twisting and Always Already amendment adds seven separately identifiable records while preserving the established anti-twisting and Platformstrawmanculture record identities.
 
 ## Current execution architecture
 
@@ -62,9 +80,12 @@ The canonical ML* corpus now contains 1,224 entries across 16 sections. The orig
 3. Every ML*-active task loads `coreplus-handler-mephistodata-execution-gates-2026-08-26`.
 4. Claims affected by access control, deletion, ranking, chilling, departure, retained populations, or institution-produced metrics load `method-controlled-archive-evidence-institutional-metrics-2026-08-26`.
 5. Triggered specialist owners supply content and case-specific procedure.
-6. Delivery remains blocked until every applicable gate passes.
+6. Every identified twist is entered in the organized assistant-twisting examples section with its exact wording, semantic alteration, correction, provenance, and affected-output verification status.
+7. Every front-facing representation loads the Platformstrawmanculture fidelity rule and preserves source, interpretation, and reconstruction boundaries.
+8. Every paginated or slide artifact loads `coreplus-handler-paginated-document-continuity-2026-09-06` and audits its complete final render.
+9. Delivery remains blocked until every applicable gate passes.
 
-The current execution owner enforces authority and version locking, activation reset, exact task freezing, quick-task sizing, answer-first form, target-specific dispatch, semantic-fidelity comparison, house-vocabulary integrity, source-status preservation, controlled-archive analysis, Ouroboros completion, mechanical prose lint, semantic lint, exact-line self-audit evidence, and fail-closed delivery.
+The current execution owner enforces authority and version locking, activation reset, exact task freezing, quick-task sizing, answer-first form, target-specific dispatch, semantic-fidelity comparison, house-vocabulary integrity, source-status preservation, controlled-archive analysis, Ouroboros completion, document-continuity dispatch, mechanical prose lint, semantic lint, exact-line self-audit evidence, and fail-closed delivery.
 
 ## Controlled-archive evidence method
 

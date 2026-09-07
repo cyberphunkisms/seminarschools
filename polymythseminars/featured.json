@@ -1,41 +1,7 @@
 {
-  "generated_at": "2026-09-05T16:00:00Z",
+  "generated_at": "2026-09-06T16:00:00Z",
   "count": 64,
   "events": [
-    {
-      "id": "utoronto-hegels-sole-idea-workshop-2026-09-05",
-      "date": "2026-09-05T09:00-04:00",
-      "title": "Workshop on Hegel’s Sole Idea with Mark Alznauer",
-      "speaker_or_director": "University of Toronto Department of Philosophy",
-      "venue": "Jackman Humanities Building",
-      "destination_url": "https://philosophy.utoronto.ca/event/workshop-on-hegels-sole-idea-with-mark-alznauer/",
-      "destination_status": "official-event-page",
-      "destination_scope": "event",
-      "destination_kind": "detail",
-      "destination_evidence": "specific-source-url"
-    },
-    {
-      "id": "heritage-toronto-canary-district-in-motion-2026",
-      "date": "2026-09-05T11:00-04:00",
-      "title": "Canary District in Motion",
-      "venue": "Official tour meeting point",
-      "destination_url": "https://www.heritagetoronto.org/event/canary-district-in-motion/",
-      "destination_status": "official-event-page",
-      "destination_scope": "event",
-      "destination_kind": "detail",
-      "destination_evidence": "specific-source-url"
-    },
-    {
-      "id": "harbourfront-super-yummy-night-market-2026-09-05",
-      "date": "2026-09-05T17:00-04:00",
-      "title": "Super Yummy Night Market — 2026-09-05",
-      "venue": "Harbourfront Centre",
-      "destination_url": "https://harbourfrontcentre.com/event/super-yummy-2026/",
-      "destination_status": "official-series-page",
-      "destination_scope": "series",
-      "destination_kind": "detail",
-      "destination_evidence": "specific-source-series"
-    },
     {
       "id": "concepcion-teaching-prize-2026",
       "date": "2026-09-06T00:00-04:00",
@@ -723,6 +689,42 @@
       "destination_scope": "unavailable",
       "destination_kind": "unavailable",
       "destination_evidence": "fail-closed"
+    },
+    {
+      "id": "guelph-colloquium-lara-hill-workshop-2026-09-11",
+      "date": "2026-09-11T09:00-04:00",
+      "title": "Parallel Workshop: Lara Hill",
+      "speaker_or_director": "International Institute for Critical Studies in Improvisation",
+      "venue": "IICSI House",
+      "destination_url": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
+    },
+    {
+      "id": "guelph-colloquium-mike-hansen-workshop-2026-09-11",
+      "date": "2026-09-11T09:00-04:00",
+      "title": "Parallel Workshop: Mike Hansen",
+      "speaker_or_director": "International Institute for Critical Studies in Improvisation",
+      "venue": "IICSI House",
+      "destination_url": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
+    },
+    {
+      "id": "guelph-colloquium-secret-lives-colour-2026-09-11",
+      "date": "2026-09-11T09:55-04:00",
+      "title": "The Secret Lives of Colour",
+      "speaker_or_director": "International Institute for Critical Studies in Improvisation",
+      "venue": "IICSI House",
+      "destination_url": "https://improvisationinstitute.ca/workshops-conferences/guelph-jazz-festival-colloquium/",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
     }
   ]
 }

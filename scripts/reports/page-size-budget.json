@@ -1,26 +1,26 @@
 {
   "schema": "page-size-budget-v3",
-  "updated": "2026-08-29",
-  "policy": "The predeployment audit budgets the verified August 29 synthesis deploy surface. The canonical Methodologylist, methodology section, and CORE+ section use measured August 29 baselines with narrow headroom for deliberate edits. Other large canonical reference pages, the complete server-rendered Teacher Resources finder, and full localized Leizu compositions retain their existing explicit ceilings. Any new HTML above 350 KB requires a documented budget entry.",
+  "updated": "2026-09-06",
+  "policy": "The predeployment audit budgets the verified September 6 deploy surface. The canonical Methodologylist, methodology section, CORE+ section, and gorgonification section use measured September 6 baselines with narrow headroom for deliberate edits. Other large canonical reference pages, the complete server-rendered Teacher Resources finder, and full localized Leizu compositions retain their existing explicit ceilings. Any new HTML above 350 KB requires a documented budget entry.",
   "budgetedLargePages": [
     {
       "path": "polymyth/methodologylist/index.html",
-      "baselineBytes": 4225403,
+      "baselineBytes": 4220042,
       "ceilingBytes": 4250000,
       "route": "/polymyth/methodologylist/",
       "status": "canonical long-form reference; narrow ceiling blocks accidental corpus duplication"
     },
     {
       "path": "polymyth/methodologylist/methodology/index.html",
-      "baselineBytes": 1989635,
+      "baselineBytes": 1999772,
       "ceilingBytes": 2010000,
       "route": "/polymyth/methodologylist/methodology/",
       "status": "canonical methodology section; explicit long-form exception"
     },
     {
       "path": "polymyth/methodologylist/coreplus/index.html",
-      "baselineBytes": 360580,
-      "ceilingBytes": 380000,
+      "baselineBytes": 385357,
+      "ceilingBytes": 395000,
       "route": "/polymyth/methodologylist/coreplus/",
       "status": "canonical CORE+ section after the writing-owner synthesis; narrow ceiling blocks accidental rule duplication"
     },
@@ -124,8 +124,8 @@
     },
     {
       "path": "polymyth/methodologylist/gorgonification/index.html",
-      "baselineBytes": 442233,
-      "ceilingBytes": 455000,
+      "baselineBytes": 461217,
+      "ceilingBytes": 470000,
       "route": "/polymyth/methodologylist/gorgonification/",
       "status": "canonical methodology section; updated for the verified July 28 mythology-source integration and provenance controls"
     },

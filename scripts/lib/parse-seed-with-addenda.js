@@ -135,6 +135,21 @@ function parseMephistodataRuleHardeningAddendum() {
   return parseDeclaredArray(source, 'const MEPHISTODATA_RULE_HARDENING_ADDENDUM');
 }
 
+function parseAssistantTwistingAlwaysAlreadyAddendum() {
+  const addendumPath = path.resolve(
+    __dirname,
+    '../../polymyth/methodologylist/assistant-twisting-alwaysalready-addendum.js'
+  );
+  if (!fs.existsSync(addendumPath)) {
+    throw new Error('Missing assistant-twisting / Always Already addendum: ' + addendumPath);
+  }
+  const source = fs.readFileSync(addendumPath, 'utf8');
+  return parseDeclaredArray(
+    source,
+    'const ASSISTANT_TWISTING_ALWAYSALREADY_ADDENDUM'
+  );
+}
+
 function parseSeedWithAddenda(html) {
   const combined = [
     ...parseDeclaredArray(html, 'const SEED'),
@@ -143,6 +158,7 @@ function parseSeedWithAddenda(html) {
     ...parseRhetoricTaxonomyAddendum(),
     ...parsePolymythCoherenceRoutingAddendum(),
     ...parseMephistodataRuleHardeningAddendum(),
+    ...parseAssistantTwistingAlwaysAlreadyAddendum(),
   ];
   const seenIds = new Map();
   const seenSemanticOwners = new Map();
@@ -169,6 +185,7 @@ function parseSeedWithAddenda(html) {
 
 module.exports = {
   parseDeclaredArray,
+  parseAssistantTwistingAlwaysAlreadyAddendum,
   parseMephistodataRuleHardeningAddendum,
   parseMythologyIntegrationAddendum,
   parsePolymythCoherenceRoutingAddendum,

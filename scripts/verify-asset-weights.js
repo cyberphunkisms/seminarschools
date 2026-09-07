@@ -40,7 +40,10 @@ if(fs.existsSync(budgetPath)){
   if(configuredKnown.size!==(budget.knownLargeAssets||[]).length) failures.push('asset budget contains duplicate known-large paths');
   const retiredOrPrivate=new Set(['js/polymythcal-revamp.js','polymythseminars/events.json']);
   const currentContracts=new Map([
-    ['polymyth/methodologylist.txt',{baselineBytes:4119819,ceilingBytes:4140000,reason:'canonical Methodologylist text mirror'}],
+    ['polymyth/methodologylist.txt',{baselineBytes:4188931,ceilingBytes:4230000,reason:'canonical Methodologylist text mirror'}],
+    ['polymyth/concordance/concordance-index.json',{baselineBytes:11007984,ceilingBytes:11100000,reason:'complete exact public concordance for the current methodology corpus'}],
+    ['polymyth/alwaysalready/img/2026-09-06_youtube_matt-leblanc-joey-actor-as-vessel.png',{baselineBytes:875659,ceilingBytes:900000,reason:'user-supplied full-resolution Always Already evidence capture'}],
+    ['polymyth/methodologylist/mephistodata-rule-hardening-addendum.js',{baselineBytes:131907,ceilingBytes:134000,reason:'canonical Mephistodata rule-hardening addendum'}],
     ['js/polymythcal-discovery.js',{baselineBytes:91937,ceilingBytes:93000,reason:'current bilingual Discovery v2 controller'}],
     ['css/polymythcal-discovery.css',{baselineBytes:22961,ceilingBytes:23000,reason:'current Discovery v2 presentation'}],
     ['polymythseminars/browse.json',{baselineBytes:2954297,ceilingBytes:3000000,reason:'current compact public Polymythcal browse projection'}],

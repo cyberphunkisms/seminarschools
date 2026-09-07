@@ -1,7 +1,7 @@
 {
   "schema": "asset-weight-budget-v1",
-  "updated": "2026-08-29",
-  "policy": "This budget constrains the generated August 29 synthesis public deploy. The 167,773,082-byte aggregate ceiling leaves 50,000 bytes above the verified 9,859-file, 167,723,082-byte deploy after adding both dated Mephistodata articles and the merged current rule surfaces. The expanded Methodologylist text mirror and exact complete concordance retain narrow measured exceptions. Existing archival sources, research workbooks, pinned graph engine, compact Polymythcal datasets, localization routes, and other documented large assets retain their prior narrow ceilings. All other runtime and media assets use the extension limits below.",
+  "updated": "2026-09-06",
+  "policy": "This budget constrains the generated September 6 public deploy. The aggregate ceiling remains above the verified deploy while the Methodologylist text mirror, its rule-hardening addendum, the exact complete concordance, and the user-supplied full-resolution Always Already evidence capture retain narrow measured exceptions. Existing archival sources, research workbooks, pinned graph engine, compact Polymythcal datasets, localization routes, and other documented large assets retain their prior narrow ceilings. All other runtime and media assets use the extension limits below.",
   "totalPublicCeilingBytes": 167773082,
   "limitsByExtension": {
     ".css": 50000,
@@ -37,15 +37,27 @@
     },
     {
       "path": "polymyth/concordance/concordance-index.json",
-      "baselineBytes": 10932872,
-      "ceilingBytes": 11000000,
-      "reason": "complete exact public concordance for the non-strawman current-position methodology corpus"
+      "baselineBytes": 11007984,
+      "ceilingBytes": 11100000,
+      "reason": "complete exact public concordance for the current methodology corpus"
     },
     {
       "path": "polymyth/methodologylist.txt",
-      "baselineBytes": 4119053,
-      "ceilingBytes": 4120000,
-      "reason": "canonical Methodologylist text mirror for the August 29 synthesized corpus"
+      "baselineBytes": 4188931,
+      "ceilingBytes": 4230000,
+      "reason": "canonical Methodologylist text mirror for the September 6 corpus"
+    },
+    {
+      "path": "polymyth/alwaysalready/img/2026-09-06_youtube_matt-leblanc-joey-actor-as-vessel.png",
+      "baselineBytes": 875659,
+      "ceilingBytes": 900000,
+      "reason": "user-supplied full-resolution Always Already evidence capture"
+    },
+    {
+      "path": "polymyth/methodologylist/mephistodata-rule-hardening-addendum.js",
+      "baselineBytes": 131907,
+      "ceilingBytes": 134000,
+      "reason": "canonical Mephistodata rule-hardening addendum"
     },
     {
       "path": "polymyth/research/metoo-critical-academic-premise-audit-2026-07-27.xlsx",

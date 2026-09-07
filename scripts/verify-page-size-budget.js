@@ -12,9 +12,9 @@ if(!fs.existsSync(budgetPath)){ console.error('PAGE SIZE BUDGET FAILED — missi
 const budget=JSON.parse(fs.readFileSync(budgetPath,'utf8'));
 if(budget.schema!=='page-size-budget-v3') failures.push(`unsupported page budget schema ${budget.schema||'missing'}`);
 const currentReleaseBudgets=new Map([
-  ['polymyth/methodologylist/index.html',{baselineBytes:4206811,ceilingBytes:4250000}],
-  ['polymyth/methodologylist/methodology/index.html',{baselineBytes:1992452,ceilingBytes:2010000}],
-  ['polymyth/methodologylist/coreplus/index.html',{baselineBytes:357615,ceilingBytes:380000}],
+  ['polymyth/methodologylist/index.html',{baselineBytes:4223608,ceilingBytes:4250000}],
+  ['polymyth/methodologylist/methodology/index.html',{baselineBytes:2016237,ceilingBytes:2050000}],
+  ['polymyth/methodologylist/coreplus/index.html',{baselineBytes:385357,ceilingBytes:395000}],
 ]);
 const byPath=new Map((budget.budgetedLargePages||[]).map(row=>[
   row.path,

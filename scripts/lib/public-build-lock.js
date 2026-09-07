@@ -18,6 +18,22 @@ const CLOCK_FUTURE_TOLERANCE_MS = 1_000;
 const TOKEN_PATTERN = /^[a-f0-9]{64}$/;
 const CLAIM_DIRECTORY_PREFIX = '.ss-public-build-claim-';
 const OVERLAY_TOMBSTONE_SCHEMA = 'seminar-schools-public-build-overlay-tombstone-v1';
+const QUARANTINE_DIRECTORY_NAME = '.public-build-quarantine';
+const POST_BUILD_INSPECTION_RETRY_MS = 50;
+const WORKSPACE_SYNC_METADATA_RELATIVES = new Set([
+  '.rsync-tmp/owner.json',
+  `.rsync-tmp/${STAGE_MARKER_NAME}`,
+]);
+const WORKSPACE_SYNC_OWNER_MAX_BYTES = 4_096;
+
+function pauseForPostBuildOverlayReconciliation(delayMs = POST_BUILD_INSPECTION_RETRY_MS) {
+  // Extracted workspaces can briefly insert their own sync metadata while an
+  // overlay skeleton is being quarantined. Never delete that metadata or
+  // classify it as safe: restore the tree, wait once, and inspect it again.
+  // Persistent files still fail closed on the final bounded pass.
+  const signal = new Int32Array(new SharedArrayBuffer(4));
+  Atomics.wait(signal, 0, 0, delayMs);
+}
 
 function isPlainObject(value) {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
@@ -57,9 +73,43 @@ function sameDirectorySkeleton(left, right) {
 
 function inspectDirectoryOnlySkeleton(candidate) {
   const rows = [];
+  const transientFiles = [];
   function visit(current, relative) {
     const stat = lstatIfPresent(current);
     if (!stat) return {kind: 'unsafe', reason: `${relative} disappeared`};
+    if (
+      WORKSPACE_SYNC_METADATA_RELATIVES.has(relative)
+      && !stat.isSymbolicLink()
+      && stat.isFile()
+      && stat.size <= WORKSPACE_SYNC_OWNER_MAX_BYTES
+    ) {
+      transientFiles.push({
+        kind: 'workspace-sync-owner',
+        relative,
+        dev: stat.dev,
+        ino: stat.ino,
+        mode: stat.mode,
+        size: stat.size,
+      });
+      return null;
+    }
+    if (
+      relative === STAGE_MARKER_NAME
+      && !stat.isSymbolicLink()
+      && stat.isFile()
+      && stat.size <= WORKSPACE_SYNC_OWNER_MAX_BYTES
+      && validDeadStageOverlayMarker(current)
+    ) {
+      transientFiles.push({
+        kind: 'dead-stage-marker',
+        relative,
+        dev: stat.dev,
+        ino: stat.ino,
+        mode: stat.mode,
+        size: stat.size,
+      });
+      return null;
+    }
     if (stat.isSymbolicLink() || !stat.isDirectory()) {
       return {kind: 'unsafe', reason: `${relative} is not a non-symlink directory`};
     }
@@ -75,7 +125,7 @@ function inspectDirectoryOnlySkeleton(candidate) {
     return null;
   }
   const failure = visit(candidate, '.');
-  return failure || {kind: 'directory-only-skeleton', rows};
+  return failure || {kind: 'directory-only-skeleton', rows, transient_files: transientFiles};
 }
 
 function removeVerifiedDirectoryOnlySkeleton(candidate, expected) {
@@ -83,13 +133,57 @@ function removeVerifiedDirectoryOnlySkeleton(candidate, expected) {
   if (
     current.kind !== 'directory-only-skeleton'
     || JSON.stringify(current.rows) !== JSON.stringify(expected.rows)
+    || JSON.stringify(current.transient_files) !== JSON.stringify(expected.transient_files)
   ) {
     throw new Error('directory-only overlay skeleton changed before removal');
+  }
+  for (const metadata of current.transient_files) {
+    const metadataPath = path.join(candidate, ...metadata.relative.split('/'));
+    try {
+      fs.unlinkSync(metadataPath);
+    } catch (error) {
+      if (error.code === 'ENOENT') {
+        throw new Error('directory-only overlay skeleton changed before removal');
+      }
+      throw error;
+    }
   }
   const paths = current.rows
     .map(row => row.relative === '.' ? candidate : path.join(candidate, ...row.relative.split('/')))
     .sort((left, right) => right.split(path.sep).length - left.split(path.sep).length);
-  for (const directory of paths) fs.rmdirSync(directory);
+  for (const directory of paths) {
+    try {
+      fs.rmdirSync(directory);
+    } catch (error) {
+      if (error.code === 'ENOENT' || error.code === 'ENOTEMPTY' || error.code === 'EEXIST') {
+        throw new Error('directory-only overlay skeleton changed before removal');
+      }
+      throw error;
+    }
+  }
+}
+
+function removeDirectoryOnlySkeletonWithRetry(candidate, label, maxPasses = 4) {
+  for (let pass = 1; pass <= maxPasses; pass += 1) {
+    const inspection = inspectDirectoryOnlySkeleton(candidate);
+    if (inspection.kind !== 'directory-only-skeleton') {
+      if (pass < maxPasses) {
+        pauseForPostBuildOverlayReconciliation();
+        continue;
+      }
+      throw new Error(`${label} contains non-directory state: ${inspection.reason}`);
+    }
+    try {
+      removeVerifiedDirectoryOnlySkeleton(candidate, inspection);
+      return;
+    } catch (error) {
+      if (
+        error.message !== 'directory-only overlay skeleton changed before removal'
+        || pass === maxPasses
+      ) throw error;
+      pauseForPostBuildOverlayReconciliation();
+    }
+  }
 }
 
 function overlayTombstoneContent(label) {
@@ -242,15 +336,45 @@ function sameIdentity(left, right) {
 }
 
 function markerMatchesOwner(marker, owner) {
-  return isPlainObject(marker)
-    && Object.keys(marker).sort().join(',')
-      === 'created_epoch_ms,hostname,pid,process_identity,schema,token'
-    && marker.schema === STAGE_SCHEMA
+  return validStageMarkerShape(marker)
     && marker.token === owner.token
     && marker.hostname === owner.hostname
     && marker.pid === owner.pid
     && marker.created_epoch_ms === owner.created_epoch_ms
     && sameIdentity(marker.process_identity, owner.process_identity);
+}
+
+function validStageMarkerShape(marker) {
+  return isPlainObject(marker)
+    && Object.keys(marker).sort().join(',')
+      === 'created_epoch_ms,hostname,pid,process_identity,schema,token'
+    && marker.schema === STAGE_SCHEMA
+    && TOKEN_PATTERN.test(String(marker.token || ''))
+    && typeof marker.hostname === 'string'
+    && marker.hostname.length > 0
+    && Number.isInteger(marker.pid)
+    && marker.pid > 0
+    && Number.isInteger(marker.created_epoch_ms)
+    && marker.created_epoch_ms > 0
+    && isPlainObject(marker.process_identity)
+    && (
+      marker.process_identity.schema === UNAVAILABLE_IDENTITY_SCHEMA
+      || validLinuxIdentity(marker.process_identity)
+    );
+}
+
+function validDeadStageOverlayMarker(candidate) {
+  let markerRecord;
+  try { markerRecord = readRegularJson(candidate, 'post-build stage marker'); }
+  catch (_) { return false; }
+  const marker = markerRecord.value;
+  if (
+    !validStageMarkerShape(marker)
+    || marker.hostname !== os.hostname()
+    || marker.created_epoch_ms > Date.now() + CLOCK_FUTURE_TOLERANCE_MS
+    || !validLinuxIdentity(marker.process_identity)
+  ) return false;
+  return inspectRecordedProcess(marker.process_identity) === 'dead';
 }
 
 function pathTimestampIsFuture(stat, now) {
@@ -274,11 +398,14 @@ class PublicBuildLock {
     this.lockDir = path.join(this.root, LOCK_DIRECTORY_NAME);
     this.ownerPath = path.join(this.lockDir, OWNER_FILE_NAME);
     this.stageMarkerPath = path.join(this.buildOut, STAGE_MARKER_NAME);
-    // Keep default claims inside the repository. Netlify guarantees the
-    // checkout is writable, while ancestors such as /opt are read-only. The
-    // repository-local path also preserves the same-filesystem atomic renames
-    // required by the ownership and recovery protocol.
-    this.quarantineRoot = path.resolve(quarantineRoot || this.root);
+    // Keep default claims in one excluded directory inside the repository.
+    // Netlify guarantees the checkout is writable, while ancestors such as
+    // /opt are read-only. The repository-local path also preserves the
+    // same-filesystem atomic renames required by ownership and recovery, and
+    // quarantined evidence cannot be mistaken for live website source.
+    this.quarantineRoot = path.resolve(
+      quarantineRoot || path.join(this.root, QUARANTINE_DIRECTORY_NAME),
+    );
     this.authorizeEmptyOverlayRecovery = typeof authorizeEmptyOverlayRecovery === 'function'
       ? authorizeEmptyOverlayRecovery
       : null;
@@ -537,7 +664,11 @@ class PublicBuildLock {
             directory_overlays: verifiedDirectoryOverlays.map(([label]) => label),
           };
         }
-        return {action: 'block', reason: 'overlay tombstone is mixed with unverifiable transient state'};
+        return {
+          action: 'reclaim-overlay-tombstones',
+          tombstones: validTombstones.map(([label]) => label),
+          preserved_unverified: nonTombstoneCandidates.map(([label]) => label),
+        };
       }
       return {
         action: 'reclaim-overlay-tombstones',
@@ -576,6 +707,45 @@ class PublicBuildLock {
         && recoverableSkeleton(previousSkeleton)
       ) {
         return {action: 'reclaim-empty-overlay'};
+      }
+      const stageStat = lstatIfPresent(this.buildOut);
+      const previousStat = lstatIfPresent(this.previousOut);
+      if (
+        stageStat
+        && !stageStat.isSymbolicLink()
+        && stageStat.isDirectory()
+        && !previousStat
+      ) {
+        let markerRecord;
+        try {
+          markerRecord = readRegularJson(this.stageMarkerPath, 'public-build stage marker');
+        } catch (_) {
+          return {action: 'retry'};
+        }
+        const marker = markerRecord.value;
+        if (!validStageMarkerShape(marker)) {
+          return {action: 'block', reason: 'lockless staging owner is malformed or legacy'};
+        }
+        if (marker.hostname !== this.hostname) {
+          return {action: 'block', reason: 'lockless staging owner belongs to another host'};
+        }
+        for (const stat of [stageStat, markerRecord.stat]) {
+          if (pathTimestampIsFuture(stat, now)) {
+            return {action: 'block', reason: 'lockless staging timestamp is in a rollback/future state'};
+          }
+        }
+        const newestTransientMtime = Math.max(stageStat.mtimeMs, markerRecord.stat.mtimeMs);
+        if (now - newestTransientMtime < RECOVERY_MIN_AGE_MS) {
+          return {action: 'block', reason: 'lockless dead-owner staging tree is not yet stale'};
+        }
+        const processStatus = inspectRecordedProcess(marker.process_identity);
+        if (processStatus === 'live') {
+          return {action: 'block', reason: 'lockless staging owner process is live'};
+        }
+        if (processStatus !== 'dead') {
+          return {action: 'block', reason: 'lockless staging owner identity is unverifiable'};
+        }
+        return {action: 'recover-lockless-dead-staging', marker};
       }
       return {action: 'retry'};
     }
@@ -619,10 +789,32 @@ class PublicBuildLock {
     }
 
     const previousStat = lstatIfPresent(this.previousOut);
-    if (previousStat) return {action: 'block', reason: 'rollback tree is present'};
+    if (previousStat) {
+      const previousInspection = inspectDirectoryOnlySkeleton(this.previousOut);
+      if (previousInspection.kind === 'directory-only-skeleton') {
+        return {action: 'reclaim-previous-directory-overlay'};
+      }
+      return {action: 'block', reason: 'rollback tree is present'};
+    }
 
     const stageStat = lstatIfPresent(this.buildOut);
-    if (!stageStat) return {action: 'block', reason: 'staging tree is missing'};
+    if (!stageStat) {
+      for (const stat of [lockStat, ownerRecord.stat]) {
+        if (pathTimestampIsFuture(stat, now)) {
+          return {action: 'block', reason: 'orphan owner timestamp is in a rollback/future state'};
+        }
+      }
+      const newestTransientMtime = Math.max(lockStat.mtimeMs, ownerRecord.stat.mtimeMs);
+      if (now - newestTransientMtime < RECOVERY_MIN_AGE_MS) {
+        return {action: 'block', reason: 'orphan dead owner is not yet stale'};
+      }
+      const processStatus = inspectRecordedProcess(owner.process_identity);
+      if (processStatus === 'live') return {action: 'block', reason: 'orphan owner process is live'};
+      if (processStatus !== 'dead') {
+        return {action: 'block', reason: 'orphan owner identity is unverifiable'};
+      }
+      return {action: 'recover-orphan-dead-owner', owner};
+    }
     if (stageStat.isSymbolicLink() || !stageStat.isDirectory()) {
       return {action: 'block', reason: 'staging path is not a non-symlink directory'};
     }
@@ -662,7 +854,36 @@ class PublicBuildLock {
       return {action: 'block', reason: error.message};
     }
     if (!markerMatchesOwner(markerRecord.value, owner)) {
-      return {action: 'block', reason: 'stage marker does not match its owner'};
+      const marker = markerRecord.value;
+      if (!validStageMarkerShape(marker)) {
+        return {action: 'block', reason: 'stage marker does not match its owner'};
+      }
+      if (marker.hostname !== this.hostname) {
+        return {action: 'block', reason: 'mismatched stage marker belongs to another host'};
+      }
+      for (const stat of [lockStat, ownerRecord.stat, stageStat, markerRecord.stat]) {
+        if (pathTimestampIsFuture(stat, now)) {
+          return {action: 'block', reason: 'mismatched dead-overlay timestamp is in a rollback/future state'};
+        }
+      }
+      const newestTransientMtime = Math.max(
+        lockStat.mtimeMs,
+        ownerRecord.stat.mtimeMs,
+        stageStat.mtimeMs,
+        markerRecord.stat.mtimeMs,
+      );
+      if (now - newestTransientMtime < RECOVERY_MIN_AGE_MS) {
+        return {action: 'block', reason: 'mismatched dead-overlay pair is not yet stale'};
+      }
+      const ownerStatus = inspectRecordedProcess(owner.process_identity);
+      const markerStatus = inspectRecordedProcess(marker.process_identity);
+      if (ownerStatus === 'live' || markerStatus === 'live') {
+        return {action: 'block', reason: 'mismatched overlay records include a live process'};
+      }
+      if (ownerStatus !== 'dead' || markerStatus !== 'dead') {
+        return {action: 'block', reason: 'mismatched overlay identity is unverifiable'};
+      }
+      return {action: 'recover-mismatched-dead-overlays', owner, marker};
     }
 
     for (const stat of [lockStat, ownerRecord.stat, stageStat, markerRecord.stat]) {
@@ -717,7 +938,339 @@ class PublicBuildLock {
     return {...decision, present, tombstones, directory_overlays: directoryOverlays};
   }
 
-  reconcilePostBuildOverlayResidue({maxPasses = 4} = {}) {
+  _reconcileDeadOwnerDirectoryOverlay(expectedOwner) {
+    this._requireEmptyOverlayAuthorization();
+    const decision = this._inspectExisting();
+    if (
+      decision.action !== 'recover-dead-owner-directory-overlay'
+      || JSON.stringify(decision.owner) !== JSON.stringify(expectedOwner)
+    ) {
+      throw new Error('post-build dead-owner directory overlay changed before reconciliation');
+    }
+    const quarantine = this._quarantineRecoverablePair();
+    const quarantinedLock = path.join(quarantine, 'lock');
+    const quarantinedStage = path.join(quarantine, 'staging');
+    const quarantinedOwner = path.join(quarantinedLock, OWNER_FILE_NAME);
+    try {
+      const lockEntries = fs.readdirSync(quarantinedLock);
+      if (lockEntries.length !== 1 || lockEntries[0] !== OWNER_FILE_NAME) {
+        throw new Error('post-build dead-owner lock contains unexpected state');
+      }
+      const ownerRecord = readRegularJson(quarantinedOwner, 'post-build dead owner');
+      if (
+        !validOwner(ownerRecord.value)
+        || JSON.stringify(ownerRecord.value) !== JSON.stringify(expectedOwner)
+        || inspectRecordedProcess(ownerRecord.value.process_identity) !== 'dead'
+      ) {
+        throw new Error('post-build dead-owner identity is no longer recoverable');
+      }
+      const stageInspection = inspectDirectoryOnlySkeleton(quarantinedStage);
+      if (stageInspection.kind !== 'directory-only-skeleton') {
+        throw new Error(
+          `post-build dead-owner staging residue is not directory-only: ${stageInspection.reason}`,
+        );
+      }
+      writeOverlayTombstone(this.lockDir, 'lock');
+      writeOverlayTombstone(this.buildOut, 'staging');
+      fsyncDirectory(this.root);
+      removeDirectoryOnlySkeletonWithRetry(
+        quarantinedStage,
+        'post-build dead-owner staging residue',
+      );
+      const finalOwner = readRegularJson(quarantinedOwner, 'post-build dead owner');
+      if (JSON.stringify(finalOwner.value) !== JSON.stringify(expectedOwner)) {
+        throw new Error('post-build dead-owner identity changed before removal');
+      }
+      fs.unlinkSync(quarantinedOwner);
+      fs.rmdirSync(quarantinedLock);
+      fs.rmdirSync(quarantine);
+      return 2;
+    } catch (error) {
+      const rollbackFailures = [];
+      for (const [label, candidate, destination] of [
+        ['staging', this.buildOut, quarantinedStage],
+        ['lock', this.lockDir, quarantinedLock],
+      ]) {
+        try {
+          if (isValidOverlayTombstone(candidate, label)) fs.unlinkSync(candidate);
+          if (lstatIfPresent(destination) && !lstatIfPresent(candidate)) {
+            fs.renameSync(destination, candidate);
+          }
+        } catch (rollbackError) {
+          rollbackFailures.push(`${label}: ${rollbackError.message}`);
+        }
+      }
+      try { fs.rmdirSync(quarantine); } catch (_) {}
+      if (rollbackFailures.length) {
+        throw new Error(
+          `${error.message}; dead-owner overlay rollback failed: ${rollbackFailures.join('; ')}`,
+        );
+      }
+      throw error;
+    }
+  }
+
+  _quarantineRecoverableLocklessStaging(expectedMarker, {writeTombstone = false} = {}) {
+    this._requireEmptyOverlayAuthorization();
+    const decision = this._inspectExisting();
+    if (
+      decision.action !== 'recover-lockless-dead-staging'
+      || JSON.stringify(decision.marker) !== JSON.stringify(expectedMarker)
+    ) {
+      throw new Error('lockless dead-owner staging tree changed before quarantine');
+    }
+    fs.mkdirSync(this.quarantineRoot, {recursive: true, mode: 0o700});
+    const quarantine = fs.mkdtempSync(
+      path.join(this.quarantineRoot, '.ss-public-build-abandoned-'),
+    );
+    const destination = path.join(quarantine, 'staging');
+    fs.renameSync(this.buildOut, destination);
+    try {
+      const markerRecord = readRegularJson(
+        path.join(destination, STAGE_MARKER_NAME),
+        'quarantined lockless stage marker',
+      );
+      if (
+        !validStageMarkerShape(markerRecord.value)
+        || JSON.stringify(markerRecord.value) !== JSON.stringify(expectedMarker)
+        || inspectRecordedProcess(markerRecord.value.process_identity) !== 'dead'
+      ) {
+        throw new Error('quarantined lockless stage marker changed or is no longer dead');
+      }
+      if (writeTombstone) {
+        writeOverlayTombstone(this.buildOut, 'staging');
+        fsyncDirectory(this.root);
+      }
+      return quarantine;
+    } catch (error) {
+      try {
+        if (isValidOverlayTombstone(this.buildOut, 'staging')) fs.unlinkSync(this.buildOut);
+        if (!lstatIfPresent(this.buildOut)) fs.renameSync(destination, this.buildOut);
+        fs.rmdirSync(quarantine);
+      } catch (rollbackError) {
+        throw new Error(`${error.message}; lockless staging rollback failed: ${rollbackError.message}`);
+      }
+      throw error;
+    }
+  }
+
+  _quarantineRecoverablePairForPostBuild(expectedOwner) {
+    this._requireEmptyOverlayAuthorization();
+    const decision = this._inspectExisting();
+    if (
+      decision.action !== 'recover'
+      || JSON.stringify(decision.owner) !== JSON.stringify(expectedOwner)
+    ) {
+      throw new Error('post-build dead-owner staging pair changed before quarantine');
+    }
+    const quarantine = this._quarantineRecoverablePair();
+    const quarantinedLock = path.join(quarantine, 'lock');
+    const quarantinedStage = path.join(quarantine, 'staging');
+    try {
+      const ownerRecord = readRegularJson(
+        path.join(quarantinedLock, OWNER_FILE_NAME),
+        'quarantined post-build owner',
+      );
+      const markerRecord = readRegularJson(
+        path.join(quarantinedStage, STAGE_MARKER_NAME),
+        'quarantined post-build stage marker',
+      );
+      if (
+        !validOwner(ownerRecord.value)
+        || JSON.stringify(ownerRecord.value) !== JSON.stringify(expectedOwner)
+        || !markerMatchesOwner(markerRecord.value, ownerRecord.value)
+        || inspectRecordedProcess(ownerRecord.value.process_identity) !== 'dead'
+      ) {
+        throw new Error('quarantined post-build owner pair changed or is no longer dead');
+      }
+      writeOverlayTombstone(this.lockDir, 'lock');
+      writeOverlayTombstone(this.buildOut, 'staging');
+      fsyncDirectory(this.root);
+      return quarantine;
+    } catch (error) {
+      try {
+        if (isValidOverlayTombstone(this.buildOut, 'staging')) fs.unlinkSync(this.buildOut);
+        if (isValidOverlayTombstone(this.lockDir, 'lock')) fs.unlinkSync(this.lockDir);
+        if (!lstatIfPresent(this.buildOut)) fs.renameSync(quarantinedStage, this.buildOut);
+        if (!lstatIfPresent(this.lockDir)) fs.renameSync(quarantinedLock, this.lockDir);
+        fs.rmdirSync(quarantine);
+      } catch (rollbackError) {
+        throw new Error(`${error.message}; post-build owner-pair rollback failed: ${rollbackError.message}`);
+      }
+      throw error;
+    }
+  }
+
+  _quarantineMismatchedDeadOverlayPair(
+    expectedOwner,
+    expectedMarker,
+    {writeTombstone = false} = {},
+  ) {
+    this._requireEmptyOverlayAuthorization();
+    const decision = this._inspectExisting();
+    if (
+      decision.action !== 'recover-mismatched-dead-overlays'
+      || JSON.stringify(decision.owner) !== JSON.stringify(expectedOwner)
+      || JSON.stringify(decision.marker) !== JSON.stringify(expectedMarker)
+    ) {
+      throw new Error('mismatched dead-overlay pair changed before quarantine');
+    }
+    const quarantine = this._quarantineRecoverablePair();
+    const quarantinedLock = path.join(quarantine, 'lock');
+    const quarantinedStage = path.join(quarantine, 'staging');
+    try {
+      const ownerRecord = readRegularJson(
+        path.join(quarantinedLock, OWNER_FILE_NAME),
+        'quarantined mismatched owner',
+      );
+      const markerRecord = readRegularJson(
+        path.join(quarantinedStage, STAGE_MARKER_NAME),
+        'quarantined mismatched stage marker',
+      );
+      if (
+        !validOwner(ownerRecord.value)
+        || !validStageMarkerShape(markerRecord.value)
+        || JSON.stringify(ownerRecord.value) !== JSON.stringify(expectedOwner)
+        || JSON.stringify(markerRecord.value) !== JSON.stringify(expectedMarker)
+        || inspectRecordedProcess(ownerRecord.value.process_identity) !== 'dead'
+        || inspectRecordedProcess(markerRecord.value.process_identity) !== 'dead'
+      ) {
+        throw new Error('quarantined mismatched overlay pair changed or is no longer dead');
+      }
+      if (writeTombstone) {
+        writeOverlayTombstone(this.lockDir, 'lock');
+        writeOverlayTombstone(this.buildOut, 'staging');
+        fsyncDirectory(this.root);
+      }
+      return quarantine;
+    } catch (error) {
+      try {
+        if (isValidOverlayTombstone(this.buildOut, 'staging')) fs.unlinkSync(this.buildOut);
+        if (isValidOverlayTombstone(this.lockDir, 'lock')) fs.unlinkSync(this.lockDir);
+        if (!lstatIfPresent(this.buildOut)) fs.renameSync(quarantinedStage, this.buildOut);
+        if (!lstatIfPresent(this.lockDir)) fs.renameSync(quarantinedLock, this.lockDir);
+        fs.rmdirSync(quarantine);
+      } catch (rollbackError) {
+        throw new Error(`${error.message}; mismatched overlay rollback failed: ${rollbackError.message}`);
+      }
+      throw error;
+    }
+  }
+
+  _quarantineOwnedCommittedStagingOverlay() {
+    if (!this.owned || !this.owner || !this.stagingUnboundForCommit) {
+      throw new Error('owned committed-staging quarantine requires the current unbound owner');
+    }
+    this._requireEmptyOverlayAuthorization();
+    const stageStat = lstatIfPresent(this.buildOut);
+    if (!stageStat || stageStat.isSymbolicLink() || !stageStat.isDirectory()) {
+      throw new Error('owned committed-staging residue must be a non-symlink directory');
+    }
+    fs.mkdirSync(this.quarantineRoot, {recursive: true, mode: 0o700});
+    const quarantine = fs.mkdtempSync(
+      path.join(this.quarantineRoot, '.ss-public-build-abandoned-'),
+    );
+    const destination = path.join(quarantine, 'staging');
+    fs.renameSync(this.buildOut, destination);
+    try {
+      writeOverlayTombstone(this.buildOut, 'staging');
+      fsyncDirectory(this.root);
+      return quarantine;
+    } catch (error) {
+      try {
+        if (isValidOverlayTombstone(this.buildOut, 'staging')) fs.unlinkSync(this.buildOut);
+        if (!lstatIfPresent(this.buildOut)) fs.renameSync(destination, this.buildOut);
+        fs.rmdirSync(quarantine);
+      } catch (rollbackError) {
+        throw new Error(`${error.message}; owned staging-overlay rollback failed: ${rollbackError.message}`);
+      }
+      throw error;
+    }
+  }
+
+  _reconcilePreviousDirectoryOverlay({writeTombstone = false} = {}) {
+    this._requireEmptyOverlayAuthorization();
+    const inspection = inspectDirectoryOnlySkeleton(this.previousOut);
+    if (inspection.kind !== 'directory-only-skeleton') {
+      throw new Error('rollback overlay contains non-directory state');
+    }
+    fs.mkdirSync(this.quarantineRoot, {recursive: true, mode: 0o700});
+    const quarantine = fs.mkdtempSync(
+      path.join(this.quarantineRoot, '.ss-public-build-postprocess-'),
+    );
+    const destination = path.join(quarantine, 'previous');
+    fs.renameSync(this.previousOut, destination);
+    try {
+      const movedInspection = inspectDirectoryOnlySkeleton(destination);
+      if (movedInspection.kind !== 'directory-only-skeleton') {
+        throw new Error(`rollback overlay changed during quarantine: ${movedInspection.reason}`);
+      }
+      if (writeTombstone) {
+        writeOverlayTombstone(this.previousOut, 'previous');
+        fsyncDirectory(this.root);
+      }
+      removeDirectoryOnlySkeletonWithRetry(destination, 'rollback overlay');
+      fs.rmdirSync(quarantine);
+      return true;
+    } catch (error) {
+      try {
+        if (isValidOverlayTombstone(this.previousOut, 'previous')) fs.unlinkSync(this.previousOut);
+        if (lstatIfPresent(destination) && !lstatIfPresent(this.previousOut)) {
+          fs.renameSync(destination, this.previousOut);
+        }
+        fs.rmdirSync(quarantine);
+      } catch (rollbackError) {
+        throw new Error(`${error.message}; rollback-overlay restoration failed: ${rollbackError.message}`);
+      }
+      throw error;
+    }
+  }
+
+  _quarantineOrphanDeadOwner(expectedOwner, {writeTombstone = false} = {}) {
+    this._requireEmptyOverlayAuthorization();
+    const decision = this._inspectExisting();
+    if (
+      decision.action !== 'recover-orphan-dead-owner'
+      || JSON.stringify(decision.owner) !== JSON.stringify(expectedOwner)
+    ) {
+      throw new Error('orphan dead owner changed before quarantine');
+    }
+    fs.mkdirSync(this.quarantineRoot, {recursive: true, mode: 0o700});
+    const quarantine = fs.mkdtempSync(
+      path.join(this.quarantineRoot, '.ss-public-build-abandoned-'),
+    );
+    const destination = path.join(quarantine, 'lock');
+    fs.renameSync(this.lockDir, destination);
+    try {
+      const ownerRecord = readRegularJson(
+        path.join(destination, OWNER_FILE_NAME),
+        'quarantined orphan owner',
+      );
+      if (
+        !validOwner(ownerRecord.value)
+        || JSON.stringify(ownerRecord.value) !== JSON.stringify(expectedOwner)
+        || inspectRecordedProcess(ownerRecord.value.process_identity) !== 'dead'
+      ) {
+        throw new Error('quarantined orphan owner changed or is no longer dead');
+      }
+      if (writeTombstone) {
+        writeOverlayTombstone(this.lockDir, 'lock');
+        fsyncDirectory(this.root);
+      }
+      return quarantine;
+    } catch (error) {
+      try {
+        if (isValidOverlayTombstone(this.lockDir, 'lock')) fs.unlinkSync(this.lockDir);
+        if (!lstatIfPresent(this.lockDir)) fs.renameSync(destination, this.lockDir);
+        fs.rmdirSync(quarantine);
+      } catch (rollbackError) {
+        throw new Error(`${error.message}; orphan-owner rollback failed: ${rollbackError.message}`);
+      }
+      throw error;
+    }
+  }
+
+  reconcilePostBuildOverlayResidue({maxPasses = 16} = {}) {
     if (this.owned) throw new Error('post-build overlay reconciliation requires an unowned lock probe');
     if (!Number.isInteger(maxPasses) || maxPasses < 1 || maxPasses > 16) {
       throw new TypeError('post-build overlay reconciliation maxPasses must be an integer from 1 through 16');
@@ -735,6 +1288,68 @@ class PublicBuildLock {
       const stateBefore = this.inspectTransientState();
       if (!present.length && stateBefore.present.length === stateBefore.tombstones.length) {
         return {reconciled: reconciledRoots > 0, reconciled_roots: reconciledRoots, passes: pass - 1};
+      }
+      if (
+        stateBefore.action === 'reclaim-overlay-tombstones'
+        && Array.isArray(stateBefore.preserved_unverified)
+        && stateBefore.preserved_unverified.length
+      ) {
+        this._discardOverlayTombstonesForOwnership();
+        continue;
+      }
+      if (
+        stateBefore.action === 'block'
+        && (
+          stateBefore.reason === 'dead-owner directory overlay is not yet stale'
+          || stateBefore.reason === 'dead-owner staging tree is not yet stale'
+          || stateBefore.reason === 'lockless dead-owner staging tree is not yet stale'
+          || stateBefore.reason === 'mismatched dead-overlay pair is not yet stale'
+          || stateBefore.reason === 'orphan dead owner is not yet stale'
+        )
+        && pass < maxPasses
+      ) {
+        this._requireEmptyOverlayAuthorization();
+        pauseForPostBuildOverlayReconciliation(RECOVERY_MIN_AGE_MS + CLOCK_FUTURE_TOLERANCE_MS);
+        continue;
+      }
+      if (stateBefore.action === 'recover-dead-owner-directory-overlay') {
+        reconciledRoots += this._reconcileDeadOwnerDirectoryOverlay(stateBefore.owner);
+        continue;
+      }
+      if (stateBefore.action === 'recover-lockless-dead-staging') {
+        this._quarantineRecoverableLocklessStaging(
+          stateBefore.marker,
+          {writeTombstone: true},
+        );
+        reconciledRoots += 1;
+        continue;
+      }
+      if (stateBefore.action === 'recover') {
+        this._quarantineRecoverablePairForPostBuild(stateBefore.owner);
+        reconciledRoots += 2;
+        continue;
+      }
+      if (stateBefore.action === 'recover-mismatched-dead-overlays') {
+        this._quarantineMismatchedDeadOverlayPair(
+          stateBefore.owner,
+          stateBefore.marker,
+          {writeTombstone: true},
+        );
+        reconciledRoots += 2;
+        continue;
+      }
+      if (stateBefore.action === 'reclaim-previous-directory-overlay') {
+        this._reconcilePreviousDirectoryOverlay({writeTombstone: true});
+        reconciledRoots += 1;
+        continue;
+      }
+      if (stateBefore.action === 'recover-orphan-dead-owner') {
+        this._quarantineOrphanDeadOwner(
+          stateBefore.owner,
+          {writeTombstone: true},
+        );
+        reconciledRoots += 1;
+        continue;
       }
       this._requireEmptyOverlayAuthorization();
       fs.mkdirSync(this.quarantineRoot, {recursive: true, mode: 0o700});
@@ -789,11 +1404,17 @@ class PublicBuildLock {
         }
         fsyncDirectory(this.root);
         for (const item of moved) {
-          removeVerifiedDirectoryOnlySkeleton(item.destination, item.inspection);
+          removeDirectoryOnlySkeletonWithRetry(
+            item.destination,
+            `post-build ${item.label} residue`,
+          );
           reconciledRoots += 1;
         }
         fs.rmdirSync(quarantine);
       } catch (error) {
+        const retryableInspectionFailure = /^post-build (?:lock|staging|previous) residue is not directory-only:/.test(
+          String(error && error.message),
+        );
         const rollbackFailures = [];
         for (const item of moved.reverse()) {
           try {
@@ -814,10 +1435,24 @@ class PublicBuildLock {
             `${error.message}; post-build overlay rollback failed: ${rollbackFailures.join('; ')}`,
           );
         }
+        if (retryableInspectionFailure && pass < maxPasses) {
+          pauseForPostBuildOverlayReconciliation();
+          continue;
+        }
         throw error;
       }
     }
     const residual = this.inspectTransientState();
+    if (
+      residual.present.length
+      && residual.present.length === residual.tombstones.length
+    ) {
+      return {
+        reconciled: reconciledRoots > 0,
+        reconciled_roots: reconciledRoots,
+        passes: maxPasses,
+      };
+    }
     throw new Error(
       `post-build overlay residue reappeared after ${maxPasses} passes (${residual.present.join(', ')}; ${residual.action})`,
     );
@@ -927,6 +1562,22 @@ class PublicBuildLock {
         if (decision.action === 'recover-dead-owner-directory-overlay') {
           this._requireEmptyOverlayAuthorization();
           this._quarantineRecoverablePair();
+          continue;
+        }
+        if (decision.action === 'recover-lockless-dead-staging') {
+          this._quarantineRecoverableLocklessStaging(decision.marker);
+          continue;
+        }
+        if (decision.action === 'recover-mismatched-dead-overlays') {
+          this._quarantineMismatchedDeadOverlayPair(decision.owner, decision.marker);
+          continue;
+        }
+        if (decision.action === 'reclaim-previous-directory-overlay') {
+          this._reconcilePreviousDirectoryOverlay();
+          continue;
+        }
+        if (decision.action === 'recover-orphan-dead-owner') {
+          this._quarantineOrphanDeadOwner(decision.owner);
           continue;
         }
         if (decision.action === 'reclaim-empty-overlay') {
@@ -1049,12 +1700,19 @@ class PublicBuildLock {
     }
     if (!this.owned || !this.owner) throw new Error('public-build lock is not owned');
     if (this.stagingUnboundForCommit) {
-      const inspection = inspectDirectoryOnlySkeleton(this.buildOut);
-      if (inspection.kind !== 'directory-only-skeleton') {
-        throw new Error('committed staging overlay contains non-directory state');
-      }
       this._requireEmptyOverlayAuthorization();
-      removeVerifiedDirectoryOnlySkeleton(this.buildOut, inspection);
+      try {
+        removeDirectoryOnlySkeletonWithRetry(
+          this.buildOut,
+          'committed staging overlay',
+        );
+      } catch (error) {
+        if (
+          !/^(?:committed staging overlay contains non-directory state|directory-only overlay skeleton changed before removal)/
+            .test(String(error && error.message))
+        ) throw error;
+        this._quarantineOwnedCommittedStagingOverlay();
+      }
       return true;
     }
     const markerRecord = readRegularJson(this.stageMarkerPath, 'public-build stage marker');
@@ -1085,7 +1743,9 @@ class PublicBuildLock {
       fs.unlinkSync(this.ownerPath);
       fs.rmdirSync(this.lockDir);
       const residual = this.inspectTransientState();
-      if (residual.present.length) {
+      const onlyTombstonesRemain = residual.present.length
+        && residual.present.length === residual.tombstones.length;
+      if (residual.present.length && !onlyTombstonesRemain) {
         throw new Error(
           `public-build release left transient state (${residual.present.join(', ')}; ${residual.action})`,
         );

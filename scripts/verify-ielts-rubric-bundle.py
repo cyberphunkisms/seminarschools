@@ -30,7 +30,7 @@ def sha256(path: Path) -> str:
 manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
 rows = manifest.get("files") or []
 assert manifest.get("schema") == "seminar-schools-ielts-rubric-bundle-v1"
-assert manifest.get("payload_file_count") == len(rows) == 7
+assert manifest.get("payload_file_count") == len(rows) == 8
 
 row_paths = {str(row["path"]) for row in rows}
 actual_paths = {
@@ -51,7 +51,6 @@ assert sha256(bundle_pdf) == sha256(PUBLIC_PDF)
 assert bundle_pdf.read_bytes() == PUBLIC_PDF.read_bytes()
 
 print(
-    "IELTS RUBRIC BUNDLE CHECK PASSED — 7 payload files and the public PDF "
+    "IELTS RUBRIC BUNDLE CHECK PASSED — 8 payload files and the public PDF "
     "mirror are byte-exact and SHA-256 verified."
 )
-

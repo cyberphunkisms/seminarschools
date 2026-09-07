@@ -24,6 +24,9 @@ const shouldSkip = [
   '.rsync-tmp',
   '.rsync-partial',
   '.public-build-lock',
+  '.public-build-quarantine',
+  '.ss-public-build-abandoned-fixture',
+  '.ss-public-build-claim-fixture',
 ];
 const shouldKeep = ['events', 'environment', 'vendor-notes', 'teacherresources'];
 for (const name of shouldSkip) {

@@ -1,0 +1,111 @@
+{
+  "schema": "polymyth-alwaysalready-specimens-v1",
+  "updated_utc": "2026-09-06",
+  "counts": {
+    "screenshots": 6,
+    "public_contexts": 5,
+    "sightings": 6,
+    "observed": 5,
+    "candidate": 1
+  },
+  "screenshots": [
+    {
+      "file": "img/2026-07-09_reddit_mirror-shadow-realm.png",
+      "sha256": "bf54b14a63b9efb4244e0fca5f023baff00245cb41245ff1d3d28e250f8c1a28",
+      "role": "canonical"
+    },
+    {
+      "file": "img/2026-08-14_youtube_star-trek-vs-hunger-games.png",
+      "sha256": "3ad43586540e4de1af0925003571c94fe1346239bfe27009e96ed51ee6e7707b",
+      "role": "canonical"
+    },
+    {
+      "file": "img/2026-08-30_youtube_christianity-fandom-discourse.png",
+      "sha256": "d5d55840f7a120f0875fdbd24b41e7792d0f8ddb553dd5607a320ccc8acd441b",
+      "role": "canonical"
+    },
+    {
+      "file": "img/2026-09-06_youtube_psychedelic-comments_full.png",
+      "sha256": "b01f959f9b9c44c82fe33089a1b3d012f384223acca4665dc54c14d744a6d1a5",
+      "role": "canonical"
+    },
+    {
+      "file": "img/2026-09-06_youtube_psychedelic-comments_crop.png",
+      "sha256": "055c8ded7f2314a0e0cf272eb8db939db88a043cae7dcfc2ace915759bf93e73",
+      "role": "supporting-earlier-capture"
+    },
+    {
+      "file": "img/2026-09-06_youtube_matt-leblanc-joey-actor-as-vessel.png",
+      "sha256": "7e5dac48e66054e423a07469a7be68e3e4611a6ca0528ebf8269e67dbf48eef6",
+      "role": "canonical"
+    }
+  ],
+  "sightings": [
+    {
+      "observed_date_utc": "2026-07-09",
+      "platform": "Reddit",
+      "context": "The light and it's reflection are different colours",
+      "speaker": "MrPBH",
+      "visible_text": "No that's just the shadow realm OP. Try climbing through the mirror. Don't be scared.",
+      "status": "observed",
+      "image": "img/2026-07-09_reddit_mirror-shadow-realm.png"
+    },
+    {
+      "observed_date_utc": "2026-08-14",
+      "platform": "YouTube listing",
+      "context": "The Future Is Chinese - Here's Why | Steve Keen",
+      "speaker": "Thumbnail framing",
+      "visible_text": "STARS TREK vs HUNGER GAMES?",
+      "status": "candidate",
+      "image": "img/2026-08-14_youtube_star-trek-vs-hunger-games.png"
+    },
+    {
+      "observed_date_utc": "2026-08-30",
+      "platform": "YouTube comments",
+      "context": "where the f*ck did christianity come from? (bonnetthoughts)",
+      "speaker": "@InevitableGoodEnding",
+      "visible_text": "Can't believe how old fandom discourse is",
+      "status": "observed",
+      "image": "img/2026-08-30_youtube_christianity-fandom-discourse.png"
+    },
+    {
+      "observed_date_utc": "2026-09-06",
+      "platform": "YouTube comments",
+      "context": "This Psychedelic Therapy Just Cured Depression and Is Going Mainstream",
+      "speaker": "@DrBenMiles",
+      "visible_text": "Kissing frogs continues to be backbone of medical miracles",
+      "status": "observed",
+      "image": "img/2026-09-06_youtube_psychedelic-comments_full.png",
+      "supporting_image": "img/2026-09-06_youtube_psychedelic-comments_crop.png"
+    },
+    {
+      "observed_date_utc": "2026-09-06",
+      "platform": "YouTube comments",
+      "context": "This Psychedelic Therapy Just Cured Depression and Is Going Mainstream",
+      "speaker": "@MrHodoAstartes",
+      "visible_text": "One spray makes you larger\nAnd one spray makes you small\nAnd the ones we gave the c-group\ndon't do anything at all",
+      "status": "observed",
+      "image": "img/2026-09-06_youtube_psychedelic-comments_full.png"
+    },
+    {
+      "observed_date_utc": "2026-09-06",
+      "source_published_date": "2026-09-05",
+      "platform": "YouTube video and transcript",
+      "context": "When the actor is a little too good at playing dumb (ScreenPuff)",
+      "speaker": "ScreenPuff, with Matt LeBlanc and Friends production excerpts",
+      "visible_text": "his legacy will mostly be defined by playing Joey",
+      "transcript_excerpt": "You become like him, right? Or he becomes more like you.",
+      "status": "observed",
+      "image": "img/2026-09-06_youtube_matt-leblanc-joey-actor-as-vessel.png",
+      "source_url": "https://www.youtube.com/watch?v=T_XfSdNYySc",
+      "source_transcript": "UPDATE_SOURCES/SCREENPUFF_MATT_LEBLANC_JOEY_TRANSCRIPT_USER_SUPPLIED_2026-09-06.md",
+      "framework_status": {
+        "always_already": "observed",
+        "actor_as_vessel": "observed",
+        "frankenstein_conscription": "candidate",
+        "actor_role_arc": "not-established"
+      },
+      "ml_record": "analysis-always-already-leblanc-joey-actor-vessel-2026-09-06"
+    }
+  ]
+}

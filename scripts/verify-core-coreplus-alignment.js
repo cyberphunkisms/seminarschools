@@ -11,17 +11,17 @@ const ROOT = path.resolve(__dirname, '..');
 const DELIVERY_ROOT = path.resolve(ROOT, '..');
 const siteOnly = process.argv.includes('--site-only');
 const failures = [];
-const EXPECTED_TOTAL = 1224;
+const EXPECTED_TOTAL = 1233;
 const EXPECTED_SECTION_COUNTS = Object.freeze({
-  analysis: 29, citation: 341, corehistory: 30, coreplus: 54,
+  analysis: 30, citation: 343, corehistory: 30, coreplus: 55,
   degorgonification: 54, 'framework-core': 1, gorgonification: 134,
-  idiomary: 44, learnings: 28, methodology: 390, pending: 18,
+  idiomary: 44, learnings: 28, methodology: 394, pending: 18,
   'pending-user-authorship': 2, polycognate: 24, rainbowsol: 3,
-  sabachtan: 34, studylist: 38,
+  sabachtan: 35, studylist: 38,
 });
 const EXPECTED_RECORD_SET_SHA256 = Object.freeze({
   'framework-core': 'df39985a3dff6fcc6bf1464ad7ea98c2262e4ce69cd6f501360ffde732ed7b48',
-  coreplus: '198b3e82d9d66f9bc078f8b30a98f94526dca4274dc508882aaeecbb75fef55b',
+  coreplus: '7902a4020c83eef9529d4de5351c50acb755ccd97d435906b034bfc33405b989',
   corehistory: '475c56bee8de76a96f34cfe908f5476e78b03c71666bcdcd9c582f05ef775256',
 });
 const FORMER_CHARTER_SHA256 = '7bb00b0b11c2b64991cdcf801803a304b8cc34e914f5c286d8d8d34eb944e016';

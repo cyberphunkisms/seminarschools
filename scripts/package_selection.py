@@ -154,7 +154,11 @@ def polymythcal_publication_exclusions(root: Path) -> set[str]:
 def generated_work_dir(part: str) -> bool:
     return bool(
         re.fullmatch(r"(?:polymythcal[-_])?audit\d+(?:[-_].*)?", part, re.IGNORECASE)
-        or re.fullmatch(r"\.ss-public-build-abandoned(?:-.*)?", part, re.IGNORECASE)
+        or re.fullmatch(
+            r"\.ss-public-build-(?:claim|empty-overlay|postprocess|tombstones|abandoned)(?:-.*)?",
+            part,
+            re.IGNORECASE,
+        )
         or re.fullmatch(r".*[-_]work", part, re.IGNORECASE)
         or re.fullmatch(r".*[-_]packaged[-_]test", part, re.IGNORECASE)
     )
@@ -164,7 +168,15 @@ def generated_dependency_dir(part: str) -> bool:
     value = part.lower()
     return bool(
         re.fullmatch(r"\.?venv(?:[-_].+)?", value)
-        or value in {"env", ".env", "pip-wheel-metadata", ".rsync-tmp", ".rsync-partial"}
+        or value
+        in {
+            "env",
+            ".env",
+            "pip-wheel-metadata",
+            ".rsync-tmp",
+            ".rsync-partial",
+            ".public-build-quarantine",
+        }
     )
 
 

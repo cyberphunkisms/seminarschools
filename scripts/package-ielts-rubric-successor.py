@@ -16,16 +16,25 @@ from package_selection import collect_package_files
 
 SITE_ROOT = Path(__file__).resolve().parents[1]
 DELIVERY_ROOT = SITE_ROOT.parent
-OUTPUT_NAME = "seminar-schools-ielts-rubric-complete-2026-09-05.zip"
+OUTPUT_NAME = "seminar-schools-ielts-rubric-complete-2026-09-06.zip"
 RELEASE = {
-    "release_id": "seminar-schools-ielts-rubric-complete-2026-09-05",
-    "generated_at": "2026-09-05T23:57:14Z",
+    "release_id": "seminar-schools-ielts-rubric-complete-2026-09-06",
+    "generated_at": "2026-09-06T10:30:00Z",
 }
 MANIFEST_NAME = "PACKAGE_CONTENTS_SHA256.json"
 
 
 def run(command: list[str]) -> None:
     subprocess.run(command, cwd=SITE_ROOT, check=True)
+
+
+def run_with_build_lock(command: list[str]) -> None:
+    run([
+        sys.executable,
+        "scripts/run-with-build-lock.py",
+        "--",
+        *command,
+    ])
 
 
 def render_manifest(root: Path, files: list[Path], package_kind: str) -> dict:
@@ -70,6 +79,7 @@ def main() -> None:
     run([node, "scripts/verify-ielts-rubric-release.js"])
     run([sys.executable, "scripts/verify-ielts-rubric-bundle.py"])
     for verifier in (
+        "verify-public-build-lock-recovery.js",
         "verify-public-deploy-parity.js",
         "verify-release-asset-identity.js",
         "verify-visible-geometry.js",
@@ -77,8 +87,15 @@ def main() -> None:
         "verify-teacherresources-finder.js",
         "verify-site-integrity.js",
         "verify-seo.js",
+        "verify-audit49-metadata-surface.js",
+        "verify-audit49-runtime-efficiency.js",
+        "verify-audit49-build-packaging-efficiency.js",
     ):
-        run([node, f"scripts/{verifier}"])
+        command = [node, f"scripts/{verifier}"]
+        if verifier == "verify-public-deploy-parity.js":
+            run_with_build_lock(command)
+        else:
+            run(command)
 
     site_probe = output.parent / ".ielts-site-manifest-probe.zip"
     site_files, site_selection = collect_package_files(
@@ -95,10 +112,12 @@ def main() -> None:
 
     delivery_files, delivery_selection = collect_package_files(DELIVERY_ROOT, output)
     required = {
-        "IELTS_RUBRIC_RELEASE_NOTES_2026-09-05.md",
+        "IELTS_RUBRIC_RELEASE_NOTES_2026-09-06.md",
         "EDITABLE_MASTERS/08_IELTS_RUBRIC/BUNDLE_MANIFEST.json",
+        "EDITABLE_MASTERS/08_IELTS_RUBRIC/DESIGN_CONTINUITY_AUDIT_2026-09-06.md",
         "EDITABLE_MASTERS/08_IELTS_RUBRIC/Seminar_Schools_IELTS_Band_Guide_and_Rubric_Final.docx",
-        "SITE_PACKAGE/IELTS_RUBRIC_RELEASE_VERIFICATION_2026-09-05.json",
+        "EDITABLE_MASTERS/08_IELTS_RUBRIC/verify_document_continuity.py",
+        "SITE_PACKAGE/IELTS_RUBRIC_RELEASE_VERIFICATION_2026-09-06.json",
         "SITE_PACKAGE/teacherresources/ieltsrubric/index.html",
         "SITE_PACKAGE/teacherresources/ieltsrubric/ielts-band-guide-and-assessment-rubric.pdf",
         "SITE_PACKAGE/public/teacherresources/ieltsrubric/index.html",

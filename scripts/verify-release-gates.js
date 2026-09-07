@@ -211,7 +211,7 @@ check(
       'feminism-academic-research-gorgonification-gate',
     ])
     && currentMlStar.source_sha256 === '2dde9179d4c4d3f42aef76523fa909310b0f88db27fa879a8730ad6aefa015bb'
-    && currentMlStar.canonical_entries === 1224
+    && currentMlStar.canonical_entries === 1226
     && currentMlStar.corehistory_entries === 30
     && currentMlStar.register_recovery_source === 'UPDATE_SOURCES/MEPHISTODATA_REGISTER_ACTIVATION_RECOVERY_2026-08-30.md'
     && currentMlStar.register_recovery_source_sha256 === '663970ac0b0a08ae775039e9e6bfa9cbdfa18905cd72c9098d4f35a38b64e1a2'
@@ -232,6 +232,17 @@ check(
       === 'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md'
     && currentMlStar.degorgonified_feminism_source_sha256
       === '2a1c6999efaf472f70d12aedeabf5eaccab130ce2c5b123fa4553921373746a8'
+    && JSON.stringify(currentMlStar.later_amendments) === JSON.stringify([
+      'paginated-document-continuity',
+    ])
+    && currentMlStar.document_continuity_source
+      === 'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DOCUMENT_CONTINUITY_2026-09-06.md'
+    && currentMlStar.document_continuity_source_sha256
+      === '5d6f0ddc0a895f99d847497896c9b7ef6d4769a430e0912d3014303a39aa5a87'
+    && currentMlStar.document_continuity_owner
+      === 'coreplus-handler-paginated-document-continuity-2026-09-06'
+    && JSON.stringify(currentMlStar.document_continuity_behavioral_fixtures)
+      === JSON.stringify({positive:4,negative:13,total:17})
     && currentMlStar.truthful_work_claim_screenshots
     && currentMlStar.truthful_work_claim_screenshots['UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/b4f6ab5a-4eb3-44d0-943e-41acd52faec9.png'] === 'eb1d871ec1a9c8d65605c2276c00acfd09570269b55e309e72d5848ab07edb8c'
     && currentMlStar.truthful_work_claim_screenshots['UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/3066e1d8-f6f9-4267-a948-90c076e29f93.png'] === 'f5de65fff250497561cabf2d0ee504660fc6f8f4f8ecf86f5fa33fc1637b2632'
@@ -317,6 +328,7 @@ const requiredSep5ArtifactPaths = Object.freeze([
   'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md',
   'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md',
   'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md',
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DOCUMENT_CONTINUITY_2026-09-06.md',
   'polymyth/methodologylist/index.html',
   'polymyth/methodologylist/mephistodata-register-fixtures.json',
   'polymyth/methodologylist/mephistodata-rule-hardening-addendum.js',
@@ -328,6 +340,8 @@ const requiredSep5ArtifactPaths = Object.freeze([
   'scripts/verify-mephistodata-runtime-gate.js',
   'scripts/fixtures/ml-execution-gates/internal-writing-fixtures.json',
   'scripts/verify-ml-execution-gates.js',
+  'scripts/fixtures/ml-document-continuity/fixtures.json',
+  'scripts/verify-ml-document-continuity.js',
   'data/futureproofing/sep3-package-contents-baseline.json',
   'data/futureproofing/sep3-sep5-preservation-contract.json',
   'data/futureproofing/sep5-package-contents-baseline.json',
@@ -350,14 +364,63 @@ const requiredSep5ArtifactPaths = Object.freeze([
   'scripts/verify-release-gates.js',
 ]);
 check(
-  Object.keys(currentArtifactHashes).length >= 49
+  Object.keys(currentArtifactHashes).length >= 84
     && Object.entries(currentArtifactHashes).every(([relative, expected]) => (
       /^[0-9a-f]{64}$/.test(expected) && fileSha(relative) === expected
     ))
     && requiredSep5ArtifactPaths.every(relative => (
       currentArtifactHashes[relative] === fileSha(relative)
     )),
-  'current September 5 ML* artifacts are not exactly hash-bound',
+  'current ML* artifacts through the September 6 document-continuity amendment are not exactly hash-bound',
+);
+const documentContinuityUpdate = manifest.document_continuity_update || {};
+check(
+  documentContinuityUpdate.schema === 'seminar-schools-ml-document-continuity-update-v1'
+    && documentContinuityUpdate.updated_on === '2026-09-06'
+    && documentContinuityUpdate.release_id
+      === 'core-coreplus-mephistodata-document-continuity-complete-2026-09-06'
+    && documentContinuityUpdate.source
+      === 'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DOCUMENT_CONTINUITY_2026-09-06.md'
+    && documentContinuityUpdate.source_sha256
+      === '5d6f0ddc0a895f99d847497896c9b7ef6d4769a430e0912d3014303a39aa5a87'
+    && documentContinuityUpdate.owner
+      === 'coreplus-handler-paginated-document-continuity-2026-09-06'
+    && documentContinuityUpdate.canonical_entries === 1226
+    && JSON.stringify(documentContinuityUpdate.behavioral_fixtures)
+      === JSON.stringify({positive:4,negative:13,total:17})
+    && documentContinuityUpdate.example_audit
+      === 'EDITABLE_MASTERS/08_IELTS_RUBRIC/DESIGN_CONTINUITY_AUDIT_2026-09-06.md'
+    && documentContinuityUpdate.deployment === 'No deployment performed.',
+  'September 6 document-continuity release record is missing or stale',
+);
+const assistantTwistingAlwaysAlreadyUpdate = manifest.assistant_twisting_alwaysalready_update || {};
+const assistantTwistingAlwaysAlreadyArtifacts = assistantTwistingAlwaysAlreadyUpdate.artifact_sha256 || {};
+check(
+  assistantTwistingAlwaysAlreadyUpdate.schema
+      === 'seminar-schools-ml-assistant-twisting-alwaysalready-update-v1'
+    && assistantTwistingAlwaysAlreadyUpdate.updated_on === '2026-09-06'
+    && assistantTwistingAlwaysAlreadyUpdate.release_id
+      === 'seminar-schools-alwaysalready-ml-complete-2026-09-06'
+    && assistantTwistingAlwaysAlreadyUpdate.predecessor_sha256
+      === 'af450e9bb65977514d9d8a04865fdc3d0035414900a0b947876eb58456eb2019'
+    && assistantTwistingAlwaysAlreadyUpdate.canonical_entries === 1233
+    && assistantTwistingAlwaysAlreadyUpdate.new_records === 7
+    && assistantTwistingAlwaysAlreadyUpdate.medusa_correction_status
+      === 'ACKNOWLEDGED ERROR; AFFECTED-OUTPUT VERIFICATION PENDING'
+    && JSON.stringify(assistantTwistingAlwaysAlreadyUpdate.alwaysalready_counts)
+      === JSON.stringify({screenshots:6,public_contexts:5,sightings:6,observed:5,candidate:1})
+    && Array.isArray(assistantTwistingAlwaysAlreadyUpdate.preserved_record_identifiers)
+    && assistantTwistingAlwaysAlreadyUpdate.preserved_record_identifiers.includes(
+      'ml:methodology:anti-twisting-worked-example-psychologism-and-gorgonwars-session:9d1aaf3836d8',
+    )
+    && assistantTwistingAlwaysAlreadyUpdate.preserved_record_identifiers.includes(
+      'ml:gorgonification:platformstrawmanculture:b1e10aeffc03',
+    )
+    && Object.keys(assistantTwistingAlwaysAlreadyArtifacts).length >= 14
+    && Object.entries(assistantTwistingAlwaysAlreadyArtifacts).every(([relative, expected]) => (
+      /^[0-9a-f]{64}$/.test(expected) && fileSha(relative) === expected
+    )),
+  'September 6 assistant-twisting / Always Already release record is missing or stale',
 );
 check(
   sep5DegorgonifiedFeminismPreservation.schema

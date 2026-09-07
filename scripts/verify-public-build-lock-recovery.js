@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const {spawnSync} = require('child_process');
+const {spawn, spawnSync} = require('child_process');
 
 const {
   LOCK_DIRECTORY_NAME,
@@ -166,8 +166,8 @@ function verifyDefaultQuarantineIsRepositoryLocal() {
     });
     assert.strictEqual(
       lock.quarantineRoot,
-      path.resolve(root),
-      'default quarantine root must stay inside the writable repository checkout',
+      path.resolve(root, '.public-build-quarantine'),
+      'default quarantine root must stay inside its excluded writable repository directory',
     );
     lock.acquire();
     assertNoPreparedClaims(root);
@@ -319,6 +319,114 @@ function verifyRecoverableDeadOwnerDirectoryOverlay() {
     assert.strictEqual(fs.existsSync(path.join(quarantine, 'staging', 'nested', 'directory', 'skeleton')), true);
     lock.release();
     assertNoPublicTransients(paths.root, 'dead-owner directory-overlay replacement release');
+  } finally {
+    fs.rmSync(tempRoot, {recursive: true, force: true});
+  }
+}
+
+function verifyRecoverableLocklessDeadStagingTree() {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-lockless-dead-stage-'));
+  try {
+    const root = path.join(tempRoot, 'site');
+    const buildOut = path.join(root, '.public-build-staging');
+    const previousOut = path.join(root, '.public-build-previous');
+    const quarantineRoot = path.join(tempRoot, 'quarantine');
+    fs.mkdirSync(path.join(buildOut, 'nested'), {recursive: true});
+    const marker = {
+      schema: STAGE_SCHEMA,
+      token: crypto.randomBytes(32).toString('hex'),
+      hostname: os.hostname(),
+      pid: 987654321,
+      process_identity: deadProcessIdentity(),
+      created_epoch_ms: Date.now() - 60_000,
+    };
+    writeJson(path.join(buildOut, STAGE_MARKER_NAME), marker);
+    fs.writeFileSync(path.join(buildOut, 'nested', 'payload.html'), 'preserved\n');
+    const old = new Date(Date.now() - RECOVERY_MIN_AGE_MS - 5_000);
+    fs.utimesSync(path.join(buildOut, STAGE_MARKER_NAME), old, old);
+    fs.utimesSync(buildOut, old, old);
+    const lock = new PublicBuildLock({
+      root,
+      buildOut,
+      previousOut,
+      quarantineRoot,
+      authorizeEmptyOverlayRecovery: () => true,
+    });
+    assert.strictEqual(lock.inspectExisting().action, 'recover-lockless-dead-staging');
+    lock.acquire();
+    const quarantines = fs.readdirSync(quarantineRoot);
+    assert.strictEqual(quarantines.length, 1);
+    assert.strictEqual(
+      fs.readFileSync(path.join(quarantineRoot, quarantines[0], 'staging', 'nested', 'payload.html'), 'utf8'),
+      'preserved\n',
+    );
+    lock.release();
+    assertNoPublicTransients(root, 'lockless dead-stage replacement release');
+  } finally {
+    fs.rmSync(tempRoot, {recursive: true, force: true});
+  }
+}
+
+function verifyRecoverableMismatchedDeadOverlayPair() {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-mismatched-dead-pair-'));
+  try {
+    const paths = fixture(tempRoot);
+    const marker = {
+      ...paths.marker,
+      token: crypto.randomBytes(32).toString('hex'),
+      process_identity: deadProcessIdentity(),
+    };
+    writeJson(paths.markerPath, marker);
+    ageTransient(paths);
+    const lock = lockFor(paths);
+    assert.strictEqual(lock.inspectExisting().action, 'recover-mismatched-dead-overlays');
+    const result = lock.reconcilePostBuildOverlayResidue();
+    assert.strictEqual(result.reconciled, true);
+    assert.strictEqual(isValidOverlayTombstone(paths.lockDir, 'lock'), true);
+    assert.strictEqual(isValidOverlayTombstone(paths.buildOut, 'staging'), true);
+    const quarantines = fs.readdirSync(paths.quarantineRoot);
+    assert.strictEqual(quarantines.length, 1);
+    assert.strictEqual(
+      fs.readFileSync(path.join(paths.quarantineRoot, quarantines[0], 'staging', 'partial.html'), 'utf8'),
+      'stale-stage\n',
+    );
+  } finally {
+    fs.rmSync(tempRoot, {recursive: true, force: true});
+  }
+}
+
+function verifyDirectoryOnlyRollbackOverlayIsReclaimedFirst() {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-rollback-overlay-'));
+  try {
+    const paths = fixture(tempRoot);
+    fs.mkdirSync(path.join(paths.previousOut, 'nested', 'directory'), {recursive: true});
+    const lock = lockFor(paths);
+    assert.strictEqual(lock.inspectExisting().action, 'reclaim-previous-directory-overlay');
+    lock.acquire();
+    assert.strictEqual(lstatIfPresent(paths.previousOut), null);
+    lock.release();
+    assertNoPublicTransients(paths.root, 'directory-only rollback-overlay recovery');
+  } finally {
+    fs.rmSync(tempRoot, {recursive: true, force: true});
+  }
+}
+
+function verifyRecoverableOrphanDeadOwner() {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-orphan-dead-owner-'));
+  try {
+    const paths = fixture(tempRoot);
+    fs.rmSync(paths.buildOut, {recursive: true, force: false});
+    const lock = lockFor(paths);
+    assert.strictEqual(lock.inspectExisting().action, 'recover-orphan-dead-owner');
+    const result = lock.reconcilePostBuildOverlayResidue();
+    assert.strictEqual(result.reconciled, true);
+    assert.strictEqual(isValidOverlayTombstone(paths.lockDir, 'lock'), true);
+    const quarantines = fs.readdirSync(paths.quarantineRoot);
+    assert.strictEqual(quarantines.length, 1);
+    assert.strictEqual(
+      fs.existsSync(path.join(paths.quarantineRoot, quarantines[0], 'lock', OWNER_FILE_NAME)),
+      true,
+    );
   } finally {
     fs.rmSync(tempRoot, {recursive: true, force: true});
   }
@@ -542,6 +650,306 @@ function verifyAuthorizedPostBuildOverlayReconciliation() {
     successor.acquire();
     successor.release();
     assertNoPublicTransients(root, 'successor after overlay tombstones');
+  } finally {
+    fs.rmSync(tempRoot, {recursive: true, force: true});
+  }
+}
+
+function verifyPostBuildReconciliationAcceptsFinalPassTombstones() {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-postprocess-final-pass-'));
+  try {
+    const root = path.join(tempRoot, 'site');
+    const buildOut = path.join(root, '.public-build-staging');
+    const previousOut = path.join(root, '.public-build-previous');
+    fs.mkdirSync(path.join(buildOut, 'nested'), {recursive: true});
+    const lock = new PublicBuildLock({
+      root,
+      buildOut,
+      previousOut,
+      quarantineRoot: tempRoot,
+      authorizeEmptyOverlayRecovery: () => true,
+    });
+    const result = lock.reconcilePostBuildOverlayResidue({maxPasses: 1});
+    assert.strictEqual(result.reconciled, true);
+    assert.strictEqual(result.passes, 1);
+    assert.strictEqual(isValidOverlayTombstone(buildOut, 'staging'), true);
+  } finally {
+    fs.rmSync(tempRoot, {recursive: true, force: true});
+  }
+}
+
+function verifyDeadStageMarkerOverlayReconciliation() {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-postprocess-dead-stage-'));
+  try {
+    const root = path.join(tempRoot, 'site');
+    const buildOut = path.join(root, '.public-build-staging');
+    const previousOut = path.join(root, '.public-build-previous');
+    fs.mkdirSync(path.join(buildOut, 'nested'), {recursive: true});
+    writeJson(path.join(buildOut, STAGE_MARKER_NAME), {
+      schema: STAGE_SCHEMA,
+      token: crypto.randomBytes(32).toString('hex'),
+      hostname: os.hostname(),
+      pid: 987654321,
+      process_identity: deadProcessIdentity(),
+      created_epoch_ms: Date.now() - 60_000,
+    });
+    const lock = new PublicBuildLock({
+      root,
+      buildOut,
+      previousOut,
+      quarantineRoot: tempRoot,
+      authorizeEmptyOverlayRecovery: () => true,
+    });
+    const result = lock.reconcilePostBuildOverlayResidue();
+    assert.strictEqual(result.reconciled, true);
+    assert.strictEqual(isValidOverlayTombstone(buildOut, 'staging'), true);
+  } finally {
+    fs.rmSync(tempRoot, {recursive: true, force: true});
+  }
+}
+
+function verifyLiveStageMarkerOverlayIsPreserved() {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-postprocess-live-stage-'));
+  try {
+    const root = path.join(tempRoot, 'site');
+    const buildOut = path.join(root, '.public-build-staging');
+    const previousOut = path.join(root, '.public-build-previous');
+    fs.mkdirSync(buildOut, {recursive: true});
+    writeJson(path.join(buildOut, STAGE_MARKER_NAME), {
+      schema: STAGE_SCHEMA,
+      token: crypto.randomBytes(32).toString('hex'),
+      hostname: os.hostname(),
+      pid: process.pid,
+      process_identity: readCurrentProcessIdentity(),
+      created_epoch_ms: Date.now(),
+    });
+    const before = snapshotTree(root);
+    const lock = new PublicBuildLock({
+      root,
+      buildOut,
+      previousOut,
+      quarantineRoot: tempRoot,
+      authorizeEmptyOverlayRecovery: () => true,
+    });
+    assert.throws(
+      () => lock.reconcilePostBuildOverlayResidue(),
+      /residue is not directory-only/,
+    );
+    assert.deepStrictEqual(snapshotTree(root), before, 'live stage marker was not preserved');
+  } finally {
+    fs.rmSync(tempRoot, {recursive: true, force: true});
+  }
+}
+
+function verifyAuthorizedDeadOwnerOverlayPostBuildReconciliation() {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-postprocess-dead-owner-'));
+  try {
+    const paths = fixture(tempRoot);
+    fs.unlinkSync(paths.markerPath);
+    fs.unlinkSync(path.join(paths.buildOut, 'partial.html'));
+    fs.mkdirSync(path.join(paths.buildOut, 'nested', 'directory', 'skeleton'), {recursive: true});
+    const old = new Date(Date.now() - RECOVERY_MIN_AGE_MS - 5_000);
+    for (const candidate of [paths.ownerPath, paths.buildOut, paths.lockDir]) {
+      fs.utimesSync(candidate, old, old);
+    }
+    const lock = lockFor(paths);
+    assert.strictEqual(lock.inspectExisting().action, 'recover-dead-owner-directory-overlay');
+    const result = lock.reconcilePostBuildOverlayResidue();
+    assert.strictEqual(result.reconciled, true);
+    assert.strictEqual(result.reconciled_roots, 2);
+    assert.strictEqual(isValidOverlayTombstone(paths.lockDir, 'lock'), true);
+    assert.strictEqual(isValidOverlayTombstone(paths.buildOut, 'staging'), true);
+    assert.deepStrictEqual(fs.readdirSync(paths.quarantineRoot), []);
+  } finally {
+    fs.rmSync(tempRoot, {recursive: true, force: true});
+  }
+}
+
+function verifyAuthorizedDeadOwnerPairPostBuildReconciliation() {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-postprocess-dead-pair-'));
+  try {
+    const paths = fixture(tempRoot);
+    const lock = lockFor(paths);
+    assert.strictEqual(lock.inspectExisting().action, 'recover');
+    const result = lock.reconcilePostBuildOverlayResidue();
+    assert.strictEqual(result.reconciled, true);
+    assert.strictEqual(result.reconciled_roots, 2);
+    assert.strictEqual(isValidOverlayTombstone(paths.lockDir, 'lock'), true);
+    assert.strictEqual(isValidOverlayTombstone(paths.buildOut, 'staging'), true);
+    const quarantines = fs.readdirSync(paths.quarantineRoot);
+    assert.strictEqual(quarantines.length, 1);
+    assert.strictEqual(
+      fs.readFileSync(path.join(paths.quarantineRoot, quarantines[0], 'staging', 'partial.html'), 'utf8'),
+      'stale-stage\n',
+    );
+  } finally {
+    fs.rmSync(tempRoot, {recursive: true, force: true});
+  }
+}
+
+function verifyReservedWorkspaceSyncMetadataIsReconciled() {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-postprocess-sync-race-'));
+  try {
+    const root = path.join(tempRoot, 'site');
+    const buildOut = path.join(root, '.public-build-staging');
+    const previousOut = path.join(root, '.public-build-previous');
+    const syncOwner = path.join(buildOut, '.rsync-tmp', STAGE_MARKER_NAME);
+    fs.mkdirSync(path.dirname(syncOwner), {recursive: true});
+    fs.writeFileSync(syncOwner, '{"workspace_sync":true}\n');
+    const remover = spawn(
+      process.execPath,
+      ['-e', `setTimeout(() => require('fs').rmSync(${JSON.stringify(syncOwner)}, {force: true}), 25)`],
+      {stdio: 'ignore'},
+    );
+    const lock = new PublicBuildLock({
+      root,
+      buildOut,
+      previousOut,
+      quarantineRoot: tempRoot,
+      authorizeEmptyOverlayRecovery: () => true,
+    });
+    const result = lock.reconcilePostBuildOverlayResidue();
+    assert.strictEqual(result.reconciled, true);
+    assert.strictEqual(isValidOverlayTombstone(buildOut, 'staging'), true);
+    assert.strictEqual(
+      fs.readdirSync(tempRoot).some(name => name.startsWith('.ss-public-build-postprocess-')),
+      false,
+      'transient sync-metadata retry left its quarantine behind',
+    );
+    remover.unref();
+  } finally {
+    fs.rmSync(tempRoot, {recursive: true, force: true});
+  }
+}
+
+function verifyWorkspaceSyncMetadataExceptionIsExact() {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-postprocess-sync-shape-'));
+  try {
+    const root = path.join(tempRoot, 'site');
+    const buildOut = path.join(root, '.public-build-staging');
+    const previousOut = path.join(root, '.public-build-previous');
+    fs.mkdirSync(path.join(buildOut, '.rsync-tmp'), {recursive: true});
+    fs.writeFileSync(path.join(buildOut, '.rsync-tmp', 'owner.json'), '{"workspace_sync":true}\n');
+    fs.writeFileSync(path.join(buildOut, '.rsync-tmp', 'unexpected.bin'), 'preserve\n');
+    const before = snapshotTree(root);
+    const lock = new PublicBuildLock({
+      root,
+      buildOut,
+      previousOut,
+      quarantineRoot: tempRoot,
+      authorizeEmptyOverlayRecovery: () => true,
+    });
+    assert.throws(
+      () => lock.reconcilePostBuildOverlayResidue(),
+      /residue is not directory-only/,
+    );
+    assert.deepStrictEqual(
+      snapshotTree(root),
+      before,
+      'workspace-sync exception accepted an additional file',
+    );
+  } finally {
+    fs.rmSync(tempRoot, {recursive: true, force: true});
+  }
+}
+
+function verifyMixedTombstonePeelPreservesUnknownState() {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-mixed-tombstone-'));
+  try {
+    const root = path.join(tempRoot, 'site');
+    const buildOut = path.join(root, '.public-build-staging');
+    const previousOut = path.join(root, '.public-build-previous');
+    const lockDir = path.join(root, LOCK_DIRECTORY_NAME);
+    fs.mkdirSync(root, {recursive: true});
+    fs.writeFileSync(
+      lockDir,
+      `${JSON.stringify({schema: 'seminar-schools-public-build-overlay-tombstone-v1', path: 'lock'})}\n`,
+    );
+    fs.mkdirSync(buildOut, {recursive: true});
+    fs.writeFileSync(path.join(buildOut, 'unknown.txt'), 'preserve\n');
+    const lock = new PublicBuildLock({
+      root,
+      buildOut,
+      previousOut,
+      quarantineRoot: tempRoot,
+      authorizeEmptyOverlayRecovery: () => true,
+    });
+    const decision = lock.inspectExisting();
+    assert.strictEqual(decision.action, 'reclaim-overlay-tombstones');
+    assert.deepStrictEqual(decision.preserved_unverified, ['staging']);
+    assert.throws(() => lock.acquire(), /staging tree exists without a verified owner/);
+    assert.strictEqual(fs.readFileSync(path.join(buildOut, 'unknown.txt'), 'utf8'), 'preserve\n');
+  } finally {
+    fs.rmSync(tempRoot, {recursive: true, force: true});
+  }
+}
+
+function verifyCommittedStagingTransientSyncMetadataIsRetried() {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-release-sync-race-'));
+  try {
+    const root = path.join(tempRoot, 'site');
+    const buildOut = path.join(root, '.public-build-staging');
+    const previousOut = path.join(root, '.public-build-previous');
+    fs.mkdirSync(root, {recursive: true});
+    const lock = new PublicBuildLock({
+      root,
+      buildOut,
+      previousOut,
+      quarantineRoot: tempRoot,
+      authorizeEmptyOverlayRecovery: () => true,
+    });
+    lock.acquire();
+    fs.mkdirSync(path.join(buildOut, 'nested'), {recursive: true});
+    lock.bindStaging();
+    lock.unbindStaging();
+    const syncOwner = path.join(buildOut, '.rsync-tmp', 'owner.json');
+    fs.mkdirSync(path.dirname(syncOwner), {recursive: true});
+    fs.writeFileSync(syncOwner, '{"workspace_sync":true}\n');
+    const remover = spawn(
+      process.execPath,
+      ['-e', `setTimeout(() => require('fs').rmSync(${JSON.stringify(syncOwner)}, {force: true}), 25)`],
+      {stdio: 'ignore'},
+    );
+    lock.release();
+    assertNoPublicTransients(root, 'committed staging after transient sync metadata');
+    remover.unref();
+  } finally {
+    fs.rmSync(tempRoot, {recursive: true, force: true});
+  }
+}
+
+function verifyOwnedCommittedStagingFilesAreQuarantined() {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-owned-commit-overlay-'));
+  try {
+    const root = path.join(tempRoot, 'site');
+    const buildOut = path.join(root, '.public-build-staging');
+    const previousOut = path.join(root, '.public-build-previous');
+    const quarantineRoot = path.join(tempRoot, 'quarantine');
+    fs.mkdirSync(root, {recursive: true});
+    const lock = new PublicBuildLock({
+      root,
+      buildOut,
+      previousOut,
+      quarantineRoot,
+      authorizeEmptyOverlayRecovery: () => true,
+    });
+    lock.acquire();
+    fs.mkdirSync(path.join(buildOut, 'nested'), {recursive: true});
+    lock.bindStaging();
+    lock.unbindStaging();
+    fs.writeFileSync(path.join(buildOut, 'nested', 'restored-public.html'), 'preserve\n');
+    lock.release();
+    assert.strictEqual(lstatIfPresent(lock.lockDir), null);
+    assert.strictEqual(isValidOverlayTombstone(buildOut, 'staging'), true);
+    const quarantines = fs.readdirSync(quarantineRoot);
+    assert.strictEqual(quarantines.length, 1);
+    assert.strictEqual(
+      fs.readFileSync(
+        path.join(quarantineRoot, quarantines[0], 'staging', 'nested', 'restored-public.html'),
+        'utf8',
+      ),
+      'preserve\n',
+    );
   } finally {
     fs.rmSync(tempRoot, {recursive: true, force: true});
   }
@@ -853,9 +1261,9 @@ for (const marker of [
   'this.exitHandler = () => this.release({bestEffort: true});',
   'release({bestEffort = false} = {})',
   'if (!bestEffort) throw error;',
-  'reconcilePostBuildOverlayResidue({maxPasses = 4} = {})',
+  'reconcilePostBuildOverlayResidue({maxPasses = 16} = {})',
   'inspectDirectoryOnlySkeleton(candidate)',
-  'removeVerifiedDirectoryOnlySkeleton(item.destination, item.inspection)',
+  'removeDirectoryOnlySkeletonWithRetry(',
   "const OVERLAY_TOMBSTONE_SCHEMA = 'seminar-schools-public-build-overlay-tombstone-v1';",
   "action: 'reclaim-overlay-tombstones'",
   'writeOverlayTombstone(item.candidate, item.label)',
@@ -882,6 +1290,10 @@ verifyDefaultQuarantineIsRepositoryLocal();
 verifyFreshLifecycle();
 verifyRecoverableDeadOwner();
 verifyRecoverableDeadOwnerDirectoryOverlay();
+verifyRecoverableLocklessDeadStagingTree();
+verifyRecoverableMismatchedDeadOverlayPair();
+verifyDirectoryOnlyRollbackOverlayIsReclaimedFirst();
+verifyRecoverableOrphanDeadOwner();
 verifyUnauthorizedDeadOwnerDirectoryOverlayIsPreserved();
 verifyControlledFailureDoesNotDeadlockNextBuild();
 verifyCommittedDirectoryOverlayDoesNotDeadlockRelease();
@@ -889,6 +1301,16 @@ verifyExplicitReleaseIsStrictAndRetainsExitFallback();
 verifyExitCleanupRemainsBestEffort();
 verifyExplicitReleaseRejectsRollbackResidue();
 verifyAuthorizedPostBuildOverlayReconciliation();
+verifyPostBuildReconciliationAcceptsFinalPassTombstones();
+verifyDeadStageMarkerOverlayReconciliation();
+verifyLiveStageMarkerOverlayIsPreserved();
+verifyAuthorizedDeadOwnerOverlayPostBuildReconciliation();
+verifyAuthorizedDeadOwnerPairPostBuildReconciliation();
+verifyReservedWorkspaceSyncMetadataIsReconciled();
+verifyWorkspaceSyncMetadataExceptionIsExact();
+verifyMixedTombstonePeelPreservesUnknownState();
+verifyCommittedStagingTransientSyncMetadataIsRetried();
+verifyOwnedCommittedStagingFilesAreQuarantined();
 verifyUnsafePostBuildOverlayResidueIsPreserved();
 verifyUnauthorizedPostBuildOverlayResidueIsPreserved();
 verifyAuthorizedEmptyOverlayRecovery();
@@ -962,10 +1384,12 @@ rejectedCase('unverifiable process identity', paths => {
   writeJson(paths.markerPath, paths.marker);
 }, /identity is unverifiable/);
 
-rejectedCase('mismatched stage token', paths => {
+rejectedCase('mismatched stage token with live marker', paths => {
   paths.marker.token = crypto.randomBytes(32).toString('hex');
+  paths.marker.pid = process.pid;
+  paths.marker.process_identity = readCurrentProcessIdentity();
   writeJson(paths.markerPath, paths.marker);
-}, /does not match/);
+}, /include a live process/);
 
 rejectedCase('rollback tree', paths => {
   fs.mkdirSync(paths.previousOut);
@@ -1019,5 +1443,5 @@ rejectedCase('stage-marker symlink', paths => {
 console.log(
   'PUBLIC BUILD LOCK RECOVERY PASSED — repository-local Netlify-safe claims, atomic prepared ownership, authorized exact-empty overlay recovery, '
   + 'fresh lifecycle, contention exclusion, and same-host cryptographically bound dead-owner recovery; '
-  + 'unauthorized, non-directory, live, foreign, malformed, legacy, non-cryptographic, unverifiable, mismatched, rollback, future, fresh, and symlink states fail closed.',
+  + 'unauthorized, non-directory, live, foreign, malformed, legacy, non-cryptographic, unverifiable, live-mismatched, rollback, future, fresh, and symlink states fail closed.',
 );

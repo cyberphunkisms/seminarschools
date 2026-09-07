@@ -13,6 +13,7 @@ const FIXED_GENERATED_DIRECTORIES = new Set([
   '.public-build-staging',
   '.public-build-previous',
   '.public-build-lock',
+  '.public-build-quarantine',
   '.rsync-tmp',
   '.rsync-partial',
 ]);
@@ -21,6 +22,7 @@ function isGeneratedDependencyDirectory(name) {
   const value = String(name || '').toLowerCase();
   return (
     FIXED_GENERATED_DIRECTORIES.has(value)
+    || /^\.ss-public-build-(?:claim|empty-overlay|postprocess|tombstones|abandoned)-/.test(value)
     || /^\.?venv(?:[-_].+)?$/.test(value)
     || value === 'env'
     || value === '.env'

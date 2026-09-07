@@ -125,6 +125,7 @@ const sequential = [
   // expensive fixed-point rebuild and browser sweeps.
   'node scripts/verify-ml-dialectical-hardening.js',
   'node scripts/verify-ml-execution-gates.js',
+  'node scripts/verify-ml-document-continuity.js',
   'node scripts/verify-mephistodata-runtime-gate.js',
   'node scripts/verify-ml-active-form-conflicts.js',
   'node scripts/verify-ml-project-adjudication-v2.js',
@@ -182,6 +183,8 @@ const finalSequential = [
 
 const checks = [
   'node scripts/verify-critical.js',
+  'node scripts/verify-alwaysalready-page.js',
+  'node scripts/verify-assistant-twisting-alwaysalready.js',
   'node scripts/verify-predeploy-automation.js',
   'node scripts/verify-repository-walk-policy.js',
   'node scripts/verify-regen-safety.js',

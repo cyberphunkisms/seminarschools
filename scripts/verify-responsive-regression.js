@@ -24,7 +24,7 @@ if(!/\.pm-search-clear\s*\{[\s\S]*?width:\s*44px;[\s\S]*?height:\s*44px;/.test(p
 if(!/@media\s*\(pointer:\s*coarse\)[\s\S]*?\.pm-calendar-more[\s\S]*?min-height:\s*44px;/.test(polyCss)) failures.push('Polymythcal calendar more control lacks the coarse-pointer target floor');
 const saul=fs.readFileSync(path.join(ROOT,'saul','index.html'),'utf8');
 if(!/\.fz-controls button\s*\{[\s\S]*?width:\s*44px;[\s\S]*?height:\s*44px;/.test(saul)) failures.push('Saul text-size controls are not 44px circles');
-const smoke=['index.html','about/index.html','saul/index.html','bb/index.html','bookwormcard/index.html','polymythseminars/index.html','teacherresources/index.html','aa/index.html','polymyth/index.html'];
+const smoke=['index.html','about/index.html','saul/index.html','bb/index.html','bookwormcard/index.html','polymythseminars/index.html','teacherresources/index.html','aa/index.html','polymyth/index.html','polymyth/alwaysalready/index.html'];
 for(const rel of smoke){ const full=path.join(ROOT,rel); if(!fs.existsSync(full)) continue; const html=fs.readFileSync(full,'utf8'); if(!/<meta[^>]+name=["']viewport["']/i.test(html)) failures.push(`${rel} missing viewport meta`); if(/user-scalable\s*=\s*no|maximum-scale\s*=\s*1/i.test(html)) failures.push(`${rel} disables user zoom`); if(!/alive\.css/.test(html)) failures.push(`${rel} missing alive.css`); }
 if(failures.length){ console.error('RESPONSIVE REGRESSION CHECK FAILED'); failures.forEach(f=>console.error(' - '+f)); process.exit(1); }
 console.log('RESPONSIVE REGRESSION CHECK PASSED — 200 percent zoom and mobile source contracts are present on smoke routes.');

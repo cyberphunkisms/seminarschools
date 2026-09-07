@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/js/theme-init.js?v=20260723-steady"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Always Already · Polymyth in the Wild</title>
+<meta name="description" content="Six public sightings of people using inherited stories, characters, and mythic forms to interpret the world before needing the word Polymyth.">
+<link rel="canonical" href="https://seminarschools.com/polymyth/alwaysalready/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seminarschools.com/polymyth/alwaysalready/">
+<meta property="og:title" content="Always Already · Polymyth in the Wild">
+<meta property="og:description" content="A growing archive of Polymyth already operating in public speech.">
+<meta property="og:image" content="https://seminarschools.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0A0908">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#0a0908;
+  --surface:#141210;
+  --surface-raised:#1b1814;
+  --line:#342f28;
+  --line-strong:#55483b;
+  --text:#ece4d7;
+  --text-soft:#b6aa9a;
+  --text-faint:#8f8375;
+  --fire:#df7b22;
+  --fire-bright:#f2a146;
+  --moss:#82a894;
+  --candidate:#d6ad5d;
+  --serif:'EB Garamond',Georgia,serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+html{-webkit-text-size-adjust:100%}
+body{
+  min-height:100vh;
+  margin:0;
+  background:
+    radial-gradient(circle at 86% 4%,rgba(217,117,21,.09),transparent 28rem),
+    var(--bg);
+  color:var(--text);
+  font-family:var(--serif);
+  font-size:18px;
+  line-height:1.65;
+}
+a{color:var(--fire-bright);text-underline-offset:.2em}
+a:hover{color:var(--text)}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--fire-bright);outline-offset:4px}
+.skip-link{
+  position:fixed;
+  z-index:1000;
+  top:.75rem;
+  left:.75rem;
+  translate:0 -180%;
+  padding:.65rem 1rem;
+  border-radius:2px;
+  background:var(--text);
+  color:var(--bg);
+  font-family:var(--mono);
+  font-size:.78rem;
+}
+.skip-link:focus{translate:0}
+.route-note{
+  width:min(calc(100% - 2rem),1120px);
+  margin:0 auto;
+  padding:1rem 0;
+  border-bottom:1px solid var(--line);
+  color:var(--text-faint);
+  font-family:var(--mono);
+  font-size:.75rem;
+  letter-spacing:.03em;
+}
+.route-note strong{
+  margin-right:.65rem;
+  color:var(--fire);
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.shell{width:min(calc(100% - 2rem),1120px);margin:0 auto}
+.masthead{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(15rem,23rem);
+  gap:clamp(2rem,7vw,6rem);
+  align-items:end;
+  padding:clamp(3.5rem,8vw,7rem) 0 clamp(3rem,6vw,5rem);
+  border-bottom:1px solid var(--line-strong);
+}
+.eyebrow{
+  margin:0 0 1rem;
+  color:var(--fire);
+  font-family:var(--mono);
+  font-size:.76rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+h1{
+  max-width:8ch;
+  margin:0;
+  font-size:clamp(4rem,10vw,8rem);
+  font-weight:500;
+  letter-spacing:-.055em;
+  line-height:.82;
+}
+.lede{
+  max-width:36rem;
+  margin:1.8rem 0 0;
+  color:var(--text-soft);
+  font-size:clamp(1.15rem,2.2vw,1.42rem);
+  line-height:1.5;
+}
+.summary-panel{padding:1.2rem 0 .25rem}
+.counts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin:0 0 1.5rem;background:var(--line)}
+.count{min-width:0;padding:1rem .8rem;background:var(--surface)}
+.count strong{display:block;color:var(--text);font-size:1.35rem;font-weight:500;line-height:1}
+.count span{display:block;margin-top:.38rem;color:var(--text-faint);font-family:var(--mono);font-size:.72rem;line-height:1.35;text-transform:uppercase}
+.status-key{margin:0;color:var(--text-soft);font-size:.96rem}
+.framework-link{
+  display:inline-flex;
+  min-height:44px;
+  align-items:center;
+  margin-top:1.35rem;
+  padding:.62rem .9rem;
+  border:1px solid var(--fire);
+  border-radius:2px;
+  color:var(--text);
+  font-family:var(--mono);
+  font-size:.78rem;
+  line-height:1.35;
+  text-decoration:none;
+}
+.framework-link:hover{background:rgba(217,117,21,.13);color:var(--text)}
+.ledger{counter-reset:sighting}
+.specimen{
+  display:grid;
+  grid-template-columns:10rem minmax(0,1fr);
+  gap:clamp(1.5rem,5vw,4.5rem);
+  padding:clamp(3.5rem,7vw,6.5rem) 0;
+  border-bottom:1px solid var(--line-strong);
+}
+.specimen-meta{align-self:start}
+.number{
+  display:block;
+  margin-bottom:1.2rem;
+  color:var(--fire);
+  font-family:var(--mono);
+  font-size:1.55rem;
+  letter-spacing:-.03em;
+}
+.badge{
+  display:inline-flex;
+  min-height:30px;
+  align-items:center;
+  padding:.25rem .55rem;
+  border:1px solid var(--moss);
+  border-radius:999px;
+  color:var(--moss);
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.badge.candidate{border-color:var(--candidate);color:var(--candidate)}
+.meta-line{margin:1rem 0 0;color:var(--text-faint);font-family:var(--mono);font-size:.75rem;line-height:1.55}
+.specimen-copy{min-width:0}
+.specimen h2{
+  max-width:22ch;
+  margin:0;
+  font-size:clamp(2rem,4.5vw,3.4rem);
+  font-weight:500;
+  letter-spacing:-.025em;
+  line-height:1.03;
+}
+.context{max-width:42rem;margin:.85rem 0 2rem;color:var(--text-soft);font-size:1.05rem}
+.capture{
+  width:100%;
+  margin:0 0 1.6rem;
+  padding:clamp(.4rem,1.2vw,.8rem);
+  border:1px solid var(--line);
+  background:#050505;
+  box-shadow:0 22px 65px rgba(0,0,0,.25);
+}
+.capture--portrait{max-width:27rem}
+.capture a{display:block}
+.capture img{display:block;width:100%;height:auto;margin:0 auto;background:#050505}
+.capture figcaption{
+  margin:.72rem .25rem .1rem;
+  color:var(--text-faint);
+  font-family:var(--mono);
+  font-size:.74rem;
+  line-height:1.5;
+}
+.capture figcaption span{color:var(--fire-bright)}
+blockquote{
+  max-width:46rem;
+  margin:1.8rem 0;
+  padding:.2rem 0 .2rem 1.35rem;
+  border-left:2px solid var(--fire);
+  color:var(--text);
+  font-size:clamp(1.2rem,2.4vw,1.55rem);
+  line-height:1.45;
+}
+blockquote p{margin:0}
+blockquote cite{display:block;margin-top:.65rem;color:var(--text-faint);font-family:var(--mono);font-size:.72rem;font-style:normal}
+.reading{max-width:45rem;margin:0;color:var(--text-soft)}
+.boundary{
+  max-width:45rem;
+  margin:1.5rem 0 0;
+  padding:1rem 1.05rem;
+  border:1px solid var(--line);
+  background:var(--surface);
+  color:var(--text-soft);
+  font-size:.93rem;
+}
+.boundary strong{
+  display:block;
+  margin-bottom:.25rem;
+  color:var(--fire);
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.paired-readings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.8rem 0}
+.connection-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.8rem 0}
+.reading-card{padding:1.2rem;border:1px solid var(--line);background:var(--surface)}
+.reading-card h3{margin:0 0 .7rem;color:var(--fire-bright);font-family:var(--mono);font-size:.8rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.reading-card blockquote{margin:.75rem 0 1rem;font-size:1.12rem}
+.reading-card p:last-child{margin-bottom:0;color:var(--text-soft);font-size:.95rem}
+.connection-status{display:block;margin:-.35rem 0 .75rem;color:var(--moss);font-family:var(--mono);font-size:.69rem;letter-spacing:.08em;text-transform:uppercase}
+.connection-status.candidate{color:var(--candidate)}
+.connection-status.boundary-status{color:var(--text-faint)}
+.source-row{display:flex;flex-wrap:wrap;gap:.65rem 1rem;align-items:center;max-width:45rem;margin:1.3rem 0 0;font-family:var(--mono);font-size:.76rem}
+.source-row span{color:var(--text-faint)}
+.supporting{margin-top:2rem}
+.supporting h3{
+  margin:0 0 1rem;
+  color:var(--fire-bright);
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:500;
+  letter-spacing:.08em;
+  line-height:1.5;
+  text-transform:uppercase;
+}
+.supporting .capture{margin-bottom:0}
+.archive-close{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2rem;align-items:start;padding:3.5rem 0 5rem}
+.archive-close p{max-width:42rem;margin:0;color:var(--text-soft)}
+.return-links{display:flex;flex-direction:column;align-items:flex-start;gap:.65rem;font-family:var(--mono);font-size:.78rem}
+@media(max-width:760px){
+  .masthead{grid-template-columns:1fr;gap:2rem;align-items:start}
+  h1{max-width:none;font-size:clamp(3.6rem,18vw,6rem)}
+  .summary-panel{max-width:34rem}
+  .specimen{grid-template-columns:1fr;gap:1.4rem}
+  .specimen-meta{display:grid;grid-template-columns:auto auto 1fr;gap:.75rem;align-items:center}
+  .number{margin:0}
+  .meta-line{grid-column:1/-1;margin:.15rem 0 0}
+  .paired-readings,.connection-grid{grid-template-columns:1fr}
+  .archive-close{grid-template-columns:1fr}
+}
+@media(max-width:440px){
+  body{font-size:17px}
+  .shell,.route-note{width:min(calc(100% - 1.25rem),1120px)}
+  .counts{grid-template-columns:1fr}
+  .count{display:grid;grid-template-columns:2.5rem 1fr;align-items:center;gap:.4rem}
+  .count span{margin:0}
+  .capture{margin-inline:0}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
+@media(forced-colors:active){.badge,.boundary,.reading-card,.capture,.framework-link{border-color:CanvasText}.framework-link{color:LinkText}}
+</style>
+<link rel="stylesheet" href="/css/alive.css?v=sha256-8a83be93b96a">
+<link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=20260814-reader-word-integrity" data-site-wide-type-zoom="20260814-reader-word-integrity">
+<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
+<link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://seminarschools.com/polymyth/alwaysalready/#webpage","url":"https://seminarschools.com/polymyth/alwaysalready/","name":"Always Already · Polymyth in the Wild","description":"Six public sightings of people using inherited stories, characters, and mythic forms to interpret the world before needing the word Polymyth.","inLanguage":"en","isPartOf":{"@id":"https://seminarschools.com/polymyth/#webpage"}}</script>
+</head>
+<body data-route-type="archive" data-geometry="indra-web" data-indra-intensity="0.160" data-indra-fade-source="page" data-geometry-role="relation movement" data-geometry-key="/polymyth/alwaysalready/" data-geometry-seed="351348dffd863423" data-geometry-register="expressive" data-geometry-profile="dual-field" data-front-facing="general-audience" data-reader-eligible="true">
+<a class="skip-link" href="#main-content">Skip to the sightings</a>
+<!-- CL_SELF_ROUTE_NOTE -->
+<div class="route-note" role="note"><strong>Public archive</strong>Polymyth found already operating in ordinary speech.</div>
+
+<main id="main-content" class="shell">
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Polymyth in the wild</p>
+      <h1>Always Already</h1>
+      <p class="lede">People reach for stories, characters, myths, and familiar forms to understand what is happening around them. These captures preserve moments when that work was already underway, before anyone needed the word Polymyth.</p>
+    </div>
+    <div class="summary-panel" aria-label="Archive summary">
+      <div class="counts">
+        <div class="count"><strong>6</strong><span>captures</span></div>
+        <div class="count"><strong>5</strong><span>public contexts</span></div>
+        <div class="count"><strong>6</strong><span>sightings</span></div>
+      </div>
+      <p class="status-key"><strong>Observed</strong> means the comparison is visible in the capture. <strong>Candidate</strong> means the capture records the framing while the larger source remains unaudited.</p>
+      <a class="framework-link" href="/polymyth/methodologylist/sabachtan/#sabachtan-always-already-true-operating-mode-dadd2846">Read the ML* account of always already&nbsp;→</a>
+    </div>
+  </header>
+
+  <div class="ledger">
+    <article class="specimen" aria-labelledby="sighting-one">
+      <aside class="specimen-meta">
+        <span class="number" aria-hidden="true">01</span>
+        <span class="badge">Observed</span>
+        <p class="meta-line"><time datetime="2026-07-09">9 July 2026</time><br>Reddit comments</p>
+      </aside>
+      <div class="specimen-copy">
+        <h2 id="sighting-one">The mirror opens onto the shadow realm</h2>
+        <p class="context">A post in r/mildlyinteresting shows a light and its reflection appearing in different colours.</p>
+        <figure class="capture capture--portrait">
+          <a href="img/2026-07-09_reddit_mirror-shadow-realm.png" target="_blank" rel="noopener">
+            <img src="img/2026-07-09_reddit_mirror-shadow-realm.png" width="387" height="876" loading="eager" decoding="async" alt="Reddit screenshot showing a comment that calls a differently coloured mirror reflection the shadow realm, followed by a reply containing manga panels at a mirror.">
+          </a>
+          <figcaption><span>Open the full-size capture.</span> The comment and manga reply share the same portal frame.</figcaption>
+        </figure>
+        <blockquote>
+          <p>No that's just the shadow realm OP. Try climbing through the mirror. Don't be scared.</p>
+          <cite>MrPBH</cite>
+        </blockquote>
+        <p class="reading">A mundane optical anomaly is interpreted through shadow-realm and mirror-portal story logic. The manga reply continues the frame without stopping to explain it.</p>
+        <p class="boundary"><strong>Evidence limit</strong>The capture establishes the spontaneous portal comparison. It does not assign the exchange a formal Polymyth Coherence score.</p>
+      </div>
+    </article>
+
+    <article class="specimen" aria-labelledby="sighting-two">
+      <aside class="specimen-meta">
+        <span class="number" aria-hidden="true">02</span>
+        <span class="badge candidate">Candidate</span>
+        <p class="meta-line"><time datetime="2026-08-14">14 August 2026</time><br>YouTube listing</p>
+      </aside>
+      <div class="specimen-copy">
+        <h2 id="sighting-two">Two futures become two storyworlds</h2>
+        <p class="context">A thumbnail for “The Future Is Chinese — Here's Why” compresses competing social futures into two familiar fictional worlds.</p>
+        <figure class="capture">
+          <a href="img/2026-08-14_youtube_star-trek-vs-hunger-games.png" target="_blank" rel="noopener">
+            <img src="img/2026-08-14_youtube_star-trek-vs-hunger-games.png" width="499" height="172" loading="lazy" decoding="async" alt="YouTube listing screenshot with a thumbnail reading STARS TREK vs HUNGER GAMES.">
+          </a>
+          <figcaption><span>Open the full-size capture.</span> The thumbnail supplies the comparison before the video is opened.</figcaption>
+        </figure>
+        <blockquote>
+          <p>STARS TREK vs HUNGER GAMES?</p>
+          <cite>Visible thumbnail wording preserved</cite>
+        </blockquote>
+        <p class="reading"><em>Star Trek</em> and <em>The Hunger Games</em> function as ready-made models for rival political or social futures.</p>
+        <p class="boundary"><strong>Evidence limit</strong>The capture proves the public comparative framing. The video itself has not been audited.</p>
+      </div>
+    </article>
+
+    <article class="specimen" aria-labelledby="sighting-three">
+      <aside class="specimen-meta">
+        <span class="number" aria-hidden="true">03</span>
+        <span class="badge">Observed</span>
+        <p class="meta-line"><time datetime="2026-08-30">30 August 2026</time><br>YouTube comments</p>
+      </aside>
+      <div class="specimen-copy">
+        <h2 id="sighting-three">Ancient religion becomes fandom discourse</h2>
+        <p class="context">A video asks whether Christianity combines Sumerian myths, Persian dualism, and Greek philosophy. A commenter recognizes the dispute through a modern relational form.</p>
+        <figure class="capture">
+          <a href="img/2026-08-30_youtube_christianity-fandom-discourse.png" target="_blank" rel="noopener">
+            <img src="img/2026-08-30_youtube_christianity-fandom-discourse.png" width="1318" height="742" loading="lazy" decoding="async" alt="YouTube comments screenshot showing the comment Can't believe how old fandom discourse is beneath a video about the origins of Christianity.">
+          </a>
+          <figcaption><span>Open the full-size capture.</span> The comment is the sighting. The creator's pinned comment supplies context.</figcaption>
+        </figure>
+        <blockquote>
+          <p>Can't believe how old fandom discourse is</p>
+          <cite>@InevitableGoodEnding</cite>
+        </blockquote>
+        <p class="reading">Ancient religious synthesis and conflict are recognized through the contemporary category of fandom discourse.</p>
+        <p class="boundary"><strong>Evidence limit</strong>The comment establishes the framing. It does not verify the video's historical genealogy or every proposed source relation.</p>
+      </div>
+    </article>
+
+    <article class="specimen" aria-labelledby="sighting-four">
+      <aside class="specimen-meta">
+        <span class="number" aria-hidden="true">04–05</span>
+        <span class="badge">Observed</span>
+        <p class="meta-line"><time datetime="2026-09-06">6 September 2026</time><br>YouTube comments<br>Two sightings</p>
+      </aside>
+      <div class="specimen-copy">
+        <h2 id="sighting-four">Kissing frogs and spraying Alice</h2>
+        <p class="context">Two comments beneath a video about psychedelic therapy remap inherited story forms onto toad venom, nasal spray, and a clinical control group.</p>
+        <figure class="capture">
+          <a href="img/2026-09-06_youtube_psychedelic-comments_full.png" target="_blank" rel="noopener">
+            <img src="img/2026-09-06_youtube_psychedelic-comments_full.png" width="1177" height="529" loading="lazy" decoding="async" alt="YouTube comments screenshot showing a frog-kissing medical miracle comment and a second comment parodying Alice size changes through clinical-trial sprays.">
+          </a>
+          <figcaption><span>Open the full-size capture.</span> One view preserves both comments in their public context.</figcaption>
+        </figure>
+
+        <div class="paired-readings">
+          <section class="reading-card" aria-labelledby="frog-reading">
+            <h3 id="frog-reading">The frog</h3>
+            <blockquote>
+              <p>Kissing frogs continues to be backbone of medical miracles</p>
+              <cite>@DrBenMiles</cite>
+            </blockquote>
+            <p>The inherited frog-kissing fairy tale is overlaid onto a contemporary psychedelic and toad-venom medical story.</p>
+          </section>
+          <section class="reading-card" aria-labelledby="alice-reading">
+            <h3 id="alice-reading">Alice</h3>
+            <blockquote>
+              <p>One spray makes you larger<br>And one spray makes you small<br>And the ones we gave the c-group<br>don't do anything at all</p>
+              <cite>@MrHodoAstartes</cite>
+            </blockquote>
+            <p>The Alice size-change motif, carried through the familiar “White Rabbit” lyric form, is remapped onto sprays and a clinical control group.</p>
+          </section>
+        </div>
+
+        <section class="supporting" aria-labelledby="earlier-capture">
+          <h3 id="earlier-capture">Earlier capture of the frog comment</h3>
+          <figure class="capture">
+            <a href="img/2026-09-06_youtube_psychedelic-comments_crop.png" target="_blank" rel="noopener">
+              <img src="img/2026-09-06_youtube_psychedelic-comments_crop.png" width="838" height="361" loading="lazy" decoding="async" alt="Earlier cropped YouTube screenshot preserving the pinned frog-kissing comment beneath the psychedelic therapy video.">
+            </a>
+            <figcaption><span>Open the full-size capture.</span> This earlier state remains part of the archive while the wider view is the canonical evidence image.</figcaption>
+          </figure>
+        </section>
+        <p class="boundary"><strong>Evidence limit</strong>The comments establish the visible allusions. They do not verify medical claims or trial outcomes.</p>
+      </div>
+    </article>
+
+    <article class="specimen" aria-labelledby="sighting-six">
+      <aside class="specimen-meta">
+        <span class="number" aria-hidden="true">06</span>
+        <span class="badge">Observed</span>
+        <p class="meta-line"><time datetime="2026-09-06">6 September 2026</time><br>YouTube video and transcript<br>Published 5 September</p>
+      </aside>
+      <div class="specimen-copy">
+        <h2 id="sighting-six">Joey and LeBlanc become each other</h2>
+        <p class="context">A ScreenPuff video about Matt LeBlanc’s performance as Joey Tribbiani makes the actor–character loop explicit, then performs it again in its title and legacy framing.</p>
+        <figure class="capture">
+          <a href="img/2026-09-06_youtube_matt-leblanc-joey-actor-as-vessel.png" target="_blank" rel="noopener">
+            <img src="img/2026-09-06_youtube_matt-leblanc-joey-actor-as-vessel.png" width="1848" height="820" loading="lazy" decoding="async" alt="YouTube screenshot of a ScreenPuff video about Matt LeBlanc as Joey, with the transcript panel open and the closing statement that his legacy will mostly be defined by playing Joey highlighted.">
+          </a>
+          <figcaption><span>Open the full-size capture.</span> The screenshot preserves the video title, channel, frame, publication display, and transcript panel.</figcaption>
+        </figure>
+
+        <blockquote>
+          <p>You become like him, right? Or he becomes more like you.</p>
+          <cite>User-supplied transcript, 00:10</cite>
+        </blockquote>
+
+        <p class="reading"><strong>What the source says.</strong> The supplied transcript reports a reciprocal process: LeBlanc’s delivery made the lines work, the writers reshaped Joey around his aptitude, and LeBlanc’s sincerity entered the character. The visible closing transcript then says his legacy will mostly be defined by playing Joey. These are claims preserved from the source; the ML* classification begins below.</p>
+
+        <div class="connection-grid" aria-label="ML star connections and statuses">
+          <section class="reading-card" aria-labelledby="vessel-connection">
+            <h3 id="vessel-connection"><a href="/polymyth/methodologylist/methodology/#methodology-actor-as-vessel-involuntary-polymyth-7180aea1">Actor-as-vessel</a></h3>
+            <span class="connection-status">Observed</span>
+            <p>LeBlanc gives timing and heart to Joey; the rewritten Joey then becomes the frame through which LeBlanc is publicly recognized. The same body carries both directions of the mythology. The vessel participates in making the role and later carries what the role made.</p>
+          </section>
+          <section class="reading-card" aria-labelledby="always-connection">
+            <h3 id="always-connection"><a href="/polymyth/methodologylist/sabachtan/#sabachtan-always-already-true-operating-mode-dadd2846">Always Already</a></h3>
+            <span class="connection-status">Observed</span>
+            <p>The video describes and performs the actor–role fusion without Polymyth vocabulary. The operation appears before the label, recurs independently in the Cranston/White and Wilson/Schrute cases, and survives the <a href="/polymyth/methodologylist/methodology/#methodology-always-already-boundary-gate-operation-without-annexation-92b31b12">boundary gate</a>. ScreenPuff remains ScreenPuff; Polymyth identifies rather than annexes the operation.</p>
+          </section>
+          <section class="reading-card" aria-labelledby="frankenstein-connection">
+            <h3 id="frankenstein-connection"><a href="/polymyth/methodologylist/analysis/#analysis-frankenstein-conscription-prestige-asymmetric-vessel-tax-c66ed8bb">Frankenstein conscription</a></h3>
+            <span class="connection-status candidate">Candidate</span>
+            <p>The low-prestige trait in “playing dumb” returns from Joey toward the actor, and LeBlanc distinguishes himself from Joey’s intelligence. But this source gives no measured tax, repeated stranger-conscription, or refusal-of-shape comparable to Wilson’s 80/20 account. It suggests the edge without proving the cost.</p>
+          </section>
+          <section class="reading-card" aria-labelledby="arc-connection">
+            <h3 id="arc-connection"><a href="/polymyth/methodologylist/methodology/#methodology-actor-role-arc-as-polymyth-dream-each-actor-lifetime-of-roles-as-one-dream-w-132f0da2">Actor-role-arc</a></h3>
+            <span class="connection-status boundary-status">Not established</span>
+            <p>Actor-role-arc requires several roles across a career to become one world in which all remain true. This source covers LeBlanc and one defining role. It establishes the vessel relation, not a cross-filmography polymyth-dream.</p>
+          </section>
+        </div>
+
+        <p class="reading"><strong>Polycognate and Indra relation.</strong> LeBlanc/Joey is a separate node reflecting Cranston/White and Wilson/Schrute: the same actor–role recognition operation appears through different performers, productions, evidence, and prestige distributions. That is a structural polycognate, not a claim of influence or genealogy. Keeping the differences visible is what makes the connection informative.</p>
+        <p class="boundary"><strong>Evidence limit</strong>The screenshot and supplied transcript support the reciprocal actor–role reading at the stated scope. They do not establish audience-wide universality, LeBlanc’s private self-concept, measurable career harm, or an arc across all his roles.</p>
+        <p class="source-row"><a href="https://www.youtube.com/watch?v=T_XfSdNYySc" target="_blank" rel="noopener noreferrer">Open the ScreenPuff source ↗</a><a href="/polymyth/methodologylist/analysis/#analysis-always-already-leblanc-joey-actor-vessel-2026-09-06">Read the full ML* case record</a><span>Screenshot and transcript supplied 6 September 2026.</span></p>
+      </div>
+    </article>
+  </div>
+
+  <footer class="archive-close">
+    <p>New sightings will be added with their date, exact visible wording, status, and evidence limit so the growing archive preserves what each capture establishes.</p>
+    <nav class="return-links" aria-label="Related Polymyth pages">
+      <a href="/polymyth/methodologylist/sabachtan/#sabachtan-always-already-true-operating-mode-dadd2846">Always already in ML*</a>
+      <a href="/polymyth/methodologylist/sabachtan/#sabachtan-alwaysalready-public-evidence-archive-2026-09-06">ML* archive record</a>
+      <a href="/polymyth/methodologylist/analysis/#analysis-always-already-leblanc-joey-actor-vessel-2026-09-06">LeBlanc / Joey case record</a>
+      <a href="/polymyth/">polymorphousmythology</a>
+      <a href="/">Seminar Schools</a>
+    </nav>
+  </footer>
+</main>
+
+<script defer src="/js/site-keyboard-enhancements.js?v=20260725-audit45"></script>
+<script src="/js/mandala.js?v=sha256-8a83be93b96a" defer></script>
+<script src="/js/indra.js?v=sha256-8a83be93b96a" defer></script>
+</body>
+</html>

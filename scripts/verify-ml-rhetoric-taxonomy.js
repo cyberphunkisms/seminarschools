@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const {
   parseDeclaredArray,
+  parseAssistantTwistingAlwaysAlreadyAddendum,
   parseMephistodataRuleHardeningAddendum,
   parseMythologyIntegrationAddendum,
   parsePolymythCoherenceRoutingAddendum,
@@ -57,7 +58,8 @@ const mythology = parseMythologyIntegrationAddendum();
 const rhetoric = parseRhetoricTaxonomyAddendum();
 const coherence = parsePolymythCoherenceRoutingAddendum();
 const hardening = parseMephistodataRuleHardeningAddendum();
-const raw = [...historical, ...snakelogic, ...mythology, ...rhetoric, ...coherence, ...hardening];
+const assistantTwistingAlwaysAlready = parseAssistantTwistingAlwaysAlreadyAddendum();
+const raw = [...historical, ...snakelogic, ...mythology, ...rhetoric, ...coherence, ...hardening, ...assistantTwistingAlwaysAlready];
 const combined = parseSeedWithAddenda(html);
 
 assert(historical.length === 1165, 'canonical SEED changed from 1,165 to ' + historical.length);
@@ -65,8 +67,9 @@ assert(snakelogic.length === 6, 'Snakelogic addendum changed from 6 to ' + snake
 assert(mythology.length === 24, 'mythology addendum changed from 24 to ' + mythology.length);
 assert(rhetoric.length === 12, 'rhetoric addendum must contain 12 entries, found ' + rhetoric.length);
 assert(coherence.length === 1, 'Polymyth Coherence routing addendum must contain one entry, found ' + coherence.length);
-assert(hardening.length === 16, 'Mephistodata hardening addendum must contain 16 entries, found ' + hardening.length);
-assert(combined.length === 1224, 'combined ML* must contain 1,224 entries, found ' + combined.length);
+assert(hardening.length === 18, 'Mephistodata hardening addendum must contain 18 entries, found ' + hardening.length);
+assert(assistantTwistingAlwaysAlready.length === 7, 'assistant-twisting / Always Already addendum must contain 7 entries, found ' + assistantTwistingAlwaysAlready.length);
+assert(combined.length === 1233, 'combined ML* must contain 1,233 entries, found ' + combined.length);
 assert(
   combined.filter(entry => entry.s === 'corehistory').length === 30,
   'combined ML* must contain 30 CORE History entries'
@@ -123,7 +126,7 @@ assert(
   'combined ML* is missing the Polymyth Coherence routing entry'
 );
 
-const hardeningScript = '/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js?v=20260905b';
+const hardeningScript = '/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js?v=20260906-document-continuity';
 assert(html.includes('<script src="' + hardeningScript + '"></script>'), 'current Mephistodata hardening script tag is missing');
 assert(
   html.indexOf(hardeningScript) < html.indexOf('const LIVE_SEED=Object.freeze(['),
@@ -206,5 +209,5 @@ for (const relative of parityFiles) {
 }
 
 console.log(
-  'ML RHETORIC TAXONOMY VERIFIED — 1,165 canonical SEED + 6 inherited Snakelogic examples + 24 mythology + 12 rhetoric + 1 Polymyth Coherence route + 16 Mephistodata hardening entries = 1,224 unique entries; restored register controls, mirrors, static pages, source ledgers, collision corrections, and public parity passed.'
+  'ML RHETORIC TAXONOMY VERIFIED — 1,165 canonical SEED + 6 inherited Snakelogic examples + 24 mythology + 12 rhetoric + 1 Polymyth Coherence route + 18 Mephistodata hardening + 7 assistant-twisting / Always Already entries = 1,233 unique entries; restored register controls, document-continuity control, organized anti-twisting examples, reciprocal evidence links, mirrors, static pages, source ledgers, collision corrections, and public parity passed.'
 );

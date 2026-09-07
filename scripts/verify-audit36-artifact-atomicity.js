@@ -72,7 +72,7 @@ for (const [token, message] of [
   ['this.exitHandler = () => this.release({bestEffort: true});', 'only process-exit cleanup may be best-effort'],
   ['release({bestEffort = false} = {})', 'explicit public-build release must be strict'],
   ['if (!bestEffort) throw error;', 'explicit release must propagate cleanup failure'],
-  ['reconcilePostBuildOverlayResidue({maxPasses = 4} = {})', 'central lock must own post-process overlay reconciliation'],
+  ['reconcilePostBuildOverlayResidue({maxPasses = 16} = {})', 'central lock must own bounded post-process overlay reconciliation'],
   ['inspectDirectoryOnlySkeleton(candidate)', 'post-process reconciliation must reject files and symlinks'],
   ["const OVERLAY_TOMBSTONE_SCHEMA = 'seminar-schools-public-build-overlay-tombstone-v1';", 'overlay hiding must use an exact versioned tombstone'],
   ["action: 'reclaim-overlay-tombstones'", 'acquisition must centrally classify exact overlay tombstones'],

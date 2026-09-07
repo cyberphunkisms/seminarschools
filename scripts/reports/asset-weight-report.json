@@ -1,25 +1,25 @@
 {
   "generatedAt": "2026-08-15T18:00:00-04:00",
   "scope": "public",
-  "totalFiles": 9856,
-  "totalBytes": 164090976,
-  "publicTreeSha256": "43e5057f10ab7520929c6f6589240083f89595a72336fcccc39ad171f0be40f9",
+  "totalFiles": 9867,
+  "totalBytes": 167099814,
+  "publicTreeSha256": "610e40bebd469853776f73dfb41c2e0b10d5d5edf752682faae70ef31b3f954e",
   "byExtension": {
     ".pdf": {
-      "files": 37,
-      "bytes": 39610532
+      "files": 38,
+      "bytes": 40788944
     },
     ".json": {
-      "files": 29,
-      "bytes": 20162361
+      "files": 30,
+      "bytes": 20222195
     },
     ".html": {
-      "files": 7568,
-      "bytes": 66154171
+      "files": 7570,
+      "bytes": 66230480
     },
     ".txt": {
       "files": 47,
-      "bytes": 10803272
+      "bytes": 10870956
     },
     ".xlsx": {
       "files": 3,
@@ -33,9 +33,13 @@
       "files": 1994,
       "bytes": 4789016
     },
+    ".png": {
+      "files": 15,
+      "bytes": 2222687
+    },
     ".xml": {
       "files": 16,
-      "bytes": 3699504
+      "bytes": 3698470
     },
     ".jsonl": {
       "files": 2,
@@ -46,8 +50,8 @@
       "bytes": 866270
     },
     ".js": {
-      "files": 50,
-      "bytes": 1370511
+      "files": 51,
+      "bytes": 1406929
     },
     ".docx": {
       "files": 3,
@@ -57,17 +61,13 @@
       "files": 20,
       "bytes": 749422
     },
-    ".png": {
-      "files": 9,
-      "bytes": 632680
-    },
     ".jpg": {
       "files": 27,
       "bytes": 1669088
     },
     ".css": {
       "files": 21,
-      "bytes": 289635
+      "bytes": 290843
     },
     ".woff2": {
       "files": 11,
@@ -109,20 +109,20 @@
     },
     {
       "path": "polymyth/concordance/concordance-index.json",
-      "size": 10952901,
-      "sha256": "03e9986cc7879d1807749f2381670ca8917b9ad4ff5a204e46a9f0897a058f7c",
+      "size": 11007984,
+      "sha256": "77555c09852eda3cbbba194511859ef52904ee43f22631f5c65d17d2262b833a",
       "extension": ".json"
     },
     {
       "path": "polymyth/methodologylist/index.html",
-      "size": 4220023,
-      "sha256": "bf0c36d19f427e8f59baa9d90e2619caa05f0722ea42d670759dd72d992a6e49",
+      "size": 4223608,
+      "sha256": "b838e662ca139e68eb3b277de5b5a2c4b296a258473d32d74f66430fcebc3c28",
       "extension": ".html"
     },
     {
       "path": "polymyth/methodologylist.txt",
-      "size": 4155547,
-      "sha256": "28e26fcb6c0fad44fae4de31ed70d42ec42446f19eef4c21b224a9085f5a343d",
+      "size": 4188931,
+      "sha256": "71ff642565d2161eb0e5655e7a5786321767843ccf4c90d2492caf6635bc2413",
       "extension": ".txt"
     },
     {
@@ -151,8 +151,8 @@
     },
     {
       "path": "polymyth/methodologylist/methodology/index.html",
-      "size": 1999772,
-      "sha256": "ce9b83432fe07cf5186cbf8bee2755936ba043e965727d01e3888716f2e706fe",
+      "size": 2016237,
+      "sha256": "66e575e8b5756ca4c78648acff6248e9ecbc85bd43e4d2a454a50785e03d7a7c",
       "extension": ".html"
     },
     {
@@ -169,8 +169,8 @@
     },
     {
       "path": "polymyth/methodologylist-methodology.txt",
-      "size": 1875795,
-      "sha256": "fb334ea4ca53872855cc3aac10fbd06f4ac32899a836201d33c9715e57815805",
+      "size": 1891169,
+      "sha256": "36953cf515b1d573bdc0ea98488c94f37e78ad06bf629aa1e43469605f7df1ad",
       "extension": ".txt"
     },
     {
@@ -198,6 +198,12 @@
       "extension": ".html"
     },
     {
+      "path": "teacherresources/ieltsrubric/ielts-band-guide-and-assessment-rubric.pdf",
+      "size": 1178412,
+      "sha256": "8c7d99ed748c68be9c019e0a96b86571229a31b9399661311f92fd5ad7ada4d8",
+      "extension": ".pdf"
+    },
+    {
       "path": "polymyth/campaigncodex/index.html",
       "size": 1033406,
       "sha256": "d89b27f87703203449636d264a519322a6e29ab07e2ee6b882393cde997294f7",
@@ -206,7 +212,7 @@
     {
       "path": "polymyth/campaigncodex.txt",
       "size": 965531,
-      "sha256": "9dee0ab73fa660db639991851f18b55f1d9da97ba28f7990477bf6cc9d774159",
+      "sha256": "8ff14042d11d316f26ef068434973cd529d422d940c0cd183b3545ca28d007c6",
       "extension": ".txt"
     },
     {
@@ -216,21 +222,27 @@
       "extension": ".ics"
     },
     {
+      "path": "polymyth/alwaysalready/img/2026-09-06_youtube_matt-leblanc-joey-actor-as-vessel.png",
+      "size": 875659,
+      "sha256": "7e5dac48e66054e423a07469a7be68e3e4611a6ca0528ebf8269e67dbf48eef6",
+      "extension": ".png"
+    },
+    {
       "path": "polymythseminars/feed.xml",
       "size": 786382,
-      "sha256": "b65b43b2d691098cb491df53cb35b159f188dac16300b10fd8b8ae2171c7dfae",
+      "sha256": "fb7e8c3885046583d7917ba5db29358328cc80d91a62a925b1bf6074794e99cb",
       "extension": ".xml"
     },
     {
       "path": "polymyth/bookwormburrows.txt",
       "size": 746635,
-      "sha256": "879c63d2a63086f0e47610bdca3d0bec9698f6e0c9a908635dbad26897099294",
+      "sha256": "6d96ab22502c7092185bddfb3041fc06661d713acbbe373b8d719b4638ad7d53",
       "extension": ".txt"
     },
     {
       "path": "teacherresources/index.html",
-      "size": 704498,
-      "sha256": "6101fb756d9177f31c3fee088389237ebefa96c56cd68327f6c09cdb540412b8",
+      "size": 704933,
+      "sha256": "0ea54e5d531c00eee96c3ee7f79b87538ea1ccb337cfb80adc4690d93437afa6",
       "extension": ".html"
     },
     {
@@ -247,8 +259,8 @@
     },
     {
       "path": "polymyth/methodologylist/citation/index.html",
-      "size": 590618,
-      "sha256": "2d85a27ec2d233ec6d77bf964016ea237b41562d4537d4f5459833670b07a831",
+      "size": 594809,
+      "sha256": "0c8955d93deeef74f7a2d8884bf6944ccfc97e036bfeb2fd6091bcfaab84dd90",
       "extension": ".html"
     },
     {
@@ -260,13 +272,13 @@
     {
       "path": "polymythseminars/feeds/confirmed.xml",
       "size": 482692,
-      "sha256": "c4465e4cd08c159eeb86336fd6b324f3a20fd2a393dc9e8af6550bdac3440c26",
+      "sha256": "fe1a3e2652c9408fcac535ddaa1840ca603c50d6f0b3f15c691abd16b103d83a",
       "extension": ".xml"
     },
     {
       "path": "polymyth/methodologylist-citation.txt",
-      "size": 464900,
-      "sha256": "c5252b96cfc2f0eaa34910c55dba4482e60943e2c827f5770116aa2fc5d49177",
+      "size": 468662,
+      "sha256": "716a2657b34390561c85b991b481bb883862ab1c1c6e291ac6e02b264ebff205",
       "extension": ".txt"
     },
     {
@@ -284,7 +296,7 @@
     {
       "path": "polymyth/methodologylist-gorgonification.txt",
       "size": 417749,
-      "sha256": "d069ddda91fa706929f4925a1086c9cc00ef614b85abbd035a6a48614f647c2e",
+      "sha256": "85e003d32813eab7fcd44ec125e28cb8674c2342642c4345c53bc43befed6f5b",
       "extension": ".txt"
     },
     {
@@ -312,41 +324,29 @@
       "extension": ".html"
     },
     {
+      "path": "polymyth/methodologylist/coreplus/index.html",
+      "size": 385357,
+      "sha256": "66501905d4441b303d0c1ea82bb95b81b8a811d7feb4dc2683983e5e32b12204",
+      "extension": ".html"
+    },
+    {
       "path": "leizu/zh-hans/index.html",
       "size": 382295,
       "sha256": "fe1af52c534da9f3a833e60afad3cff0d712a2403494b17c37c295010d2b8818",
-      "extension": ".html"
-    },
-    {
-      "path": "leizu/zh-hant/index.html",
-      "size": 382285,
-      "sha256": "afb1cce61812da861e944b4b252bde4b5c420b9584f07c9753085460acefb311",
-      "extension": ".html"
-    },
-    {
-      "path": "leizu/index.html",
-      "size": 382260,
-      "sha256": "4397b82de894866673abd44357f66da06ab372ee9b7c48135f92f72d27b9aa7c",
-      "extension": ".html"
-    },
-    {
-      "path": "leizu/fa/flyer/index.html",
-      "size": 378354,
-      "sha256": "609aa1b67af778cf1924479d04f9ac371b287528cf8c18c8e82e4b03f3d813f7",
       "extension": ".html"
     }
   ],
   "largestRuntimeAssets": [
     {
       "path": "polymyth/concordance/concordance-index.json",
-      "size": 10952901,
-      "sha256": "03e9986cc7879d1807749f2381670ca8917b9ad4ff5a204e46a9f0897a058f7c",
+      "size": 11007984,
+      "sha256": "77555c09852eda3cbbba194511859ef52904ee43f22631f5c65d17d2262b833a",
       "extension": ".json"
     },
     {
       "path": "polymyth/methodologylist/index.html",
-      "size": 4220023,
-      "sha256": "bf0c36d19f427e8f59baa9d90e2619caa05f0722ea42d670759dd72d992a6e49",
+      "size": 4223608,
+      "sha256": "b838e662ca139e68eb3b277de5b5a2c4b296a258473d32d74f66430fcebc3c28",
       "extension": ".html"
     },
     {
@@ -357,8 +357,8 @@
     },
     {
       "path": "polymyth/methodologylist/methodology/index.html",
-      "size": 1999772,
-      "sha256": "ce9b83432fe07cf5186cbf8bee2755936ba043e965727d01e3888716f2e706fe",
+      "size": 2016237,
+      "sha256": "66e575e8b5756ca4c78648acff6248e9ecbc85bd43e4d2a454a50785e03d7a7c",
       "extension": ".html"
     },
     {
@@ -398,15 +398,21 @@
       "extension": ".ics"
     },
     {
+      "path": "polymyth/alwaysalready/img/2026-09-06_youtube_matt-leblanc-joey-actor-as-vessel.png",
+      "size": 875659,
+      "sha256": "7e5dac48e66054e423a07469a7be68e3e4611a6ca0528ebf8269e67dbf48eef6",
+      "extension": ".png"
+    },
+    {
       "path": "polymythseminars/feed.xml",
       "size": 786382,
-      "sha256": "b65b43b2d691098cb491df53cb35b159f188dac16300b10fd8b8ae2171c7dfae",
+      "sha256": "fb7e8c3885046583d7917ba5db29358328cc80d91a62a925b1bf6074794e99cb",
       "extension": ".xml"
     },
     {
       "path": "teacherresources/index.html",
-      "size": 704498,
-      "sha256": "6101fb756d9177f31c3fee088389237ebefa96c56cd68327f6c09cdb540412b8",
+      "size": 704933,
+      "sha256": "0ea54e5d531c00eee96c3ee7f79b87538ea1ccb337cfb80adc4690d93437afa6",
       "extension": ".html"
     },
     {
@@ -423,8 +429,8 @@
     },
     {
       "path": "polymyth/methodologylist/citation/index.html",
-      "size": 590618,
-      "sha256": "2d85a27ec2d233ec6d77bf964016ea237b41562d4537d4f5459833670b07a831",
+      "size": 594809,
+      "sha256": "0c8955d93deeef74f7a2d8884bf6944ccfc97e036bfeb2fd6091bcfaab84dd90",
       "extension": ".html"
     },
     {
@@ -436,7 +442,7 @@
     {
       "path": "polymythseminars/feeds/confirmed.xml",
       "size": 482692,
-      "sha256": "c4465e4cd08c159eeb86336fd6b324f3a20fd2a393dc9e8af6550bdac3440c26",
+      "sha256": "fe1a3e2652c9408fcac535ddaa1840ca603c50d6f0b3f15c691abd16b103d83a",
       "extension": ".xml"
     },
     {
@@ -467,6 +473,12 @@
       "path": "leizu/fr/index.html",
       "size": 385359,
       "sha256": "14e2de9561e87621a4291ea35ec4890032e6833e0d99800eb5d2a9a3c747b1ff",
+      "extension": ".html"
+    },
+    {
+      "path": "polymyth/methodologylist/coreplus/index.html",
+      "size": 385357,
+      "sha256": "66501905d4441b303d0c1ea82bb95b81b8a811d7feb4dc2683983e5e32b12204",
       "extension": ".html"
     },
     {
@@ -512,12 +524,6 @@
       "extension": ".html"
     },
     {
-      "path": "polymyth/methodologylist/coreplus/index.html",
-      "size": 377734,
-      "sha256": "a8a6c65948a9388a9cf09869ffda083ad37247fbeafffb9eae36e9501444b6cf",
-      "extension": ".html"
-    },
-    {
       "path": "leizu/flyer/index.html",
       "size": 376761,
       "sha256": "5a8349f55f97405a864b7328382a88b27e95feddece68ee32637999651e5697c",
@@ -526,7 +532,7 @@
     {
       "path": "polymythseminars/feeds/learning.xml",
       "size": 368421,
-      "sha256": "f2a5e511e471a5aa52561a6186b81d505de9c89cfb2ea8006ea6d32b5d892507",
+      "sha256": "5268454587a276d363bab8e49277faf1afdef1f1f82cc08104337fe6ce1380fe",
       "extension": ".xml"
     },
     {
@@ -550,13 +556,13 @@
     {
       "path": "polymythseminars/feeds/unconfirmed.xml",
       "size": 304275,
-      "sha256": "a127d34ed3ae97b0bde29322ebba59c25bad1f1707eb980e6635f4ad5a7424ca",
+      "sha256": "13009240419ff41d4b0804a206644c2e0cf6156880a4a5e175f8788631c0d2a1",
       "extension": ".xml"
     },
     {
       "path": "sitemap.xml",
-      "size": 301798,
-      "sha256": "d08a4877b8a5e7aecf1a2319b1088782768c934038d17c20f956fc6d3eaedb79",
+      "size": 300764,
+      "sha256": "3c6f53124eb94d387f048d2626b99eaa6d8d3defec405cfdf1cbcabe976ed1ec",
       "extension": ".xml"
     },
     {
@@ -568,14 +574,8 @@
     {
       "path": "polymythseminars/feeds/arts.xml",
       "size": 284059,
-      "sha256": "b299408ac5c5dd4407c5f0590a49e1b4cd86b9962f5cf9641d4a17a163d54fcd",
+      "sha256": "4129f84d4c659acea51656bc3535f4339087e4268c8eb30ca825e0737a5cb7c7",
       "extension": ".xml"
-    },
-    {
-      "path": "bookwormcard/print/index.html",
-      "size": 284048,
-      "sha256": "2d3a74ad333fd634be3da52026bc2b6096cd860bbb48f8a699d82b9c6404c30e",
-      "extension": ".html"
     }
   ]
 }

@@ -9,7 +9,7 @@ const ROOT = path.resolve(__dirname, '..');
 const ROUTE = 'teacherresources/ieltsrubric/index.html';
 const PDF = 'teacherresources/ieltsrubric/ielts-band-guide-and-assessment-rubric.pdf';
 const PAGE_URL = 'https://seminarschools.com/teacherresources/ieltsrubric/';
-const EXPECTED_PDF_SHA256 = 'fdc89250261d011cfb9eed74f0ff3f24c52a23e8f7adc7c6d5efeb6002a35f04';
+const EXPECTED_PDF_SHA256 = '8c7d99ed748c68be9c019e0a96b86571229a31b9399661311f92fd5ad7ada4d8';
 const failures = [];
 
 function read(relative) {
@@ -45,8 +45,10 @@ if (!failures.length) {
     '/js/indra.js',
     '/js/footer.js',
     '/teacherresources/ieltsrubric/ielts-band-guide-and-assessment-rubric.pdf',
-    '64</strong><span>Pages',
-    '45</strong><span>Named sources',
+    '35</strong><span>Pages',
+    '303</strong><span>Cited points',
+    '100</strong><span>Band-to-action rows',
+    '25</strong><span>Full source URLs',
     'seminarschools.com/teacherresources/ieltsrubric',
   ];
   for (const token of requiredHtml) {
@@ -81,4 +83,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`IELTS RUBRIC RELEASE CHECK PASSED — ${ROUTE}, 64-page PDF, source/public parity, discovery links, and SHA-256 verified.`);
+console.log(`IELTS RUBRIC RELEASE CHECK PASSED — ${ROUTE}, 35-page PDF, 303 cited points, 100 band-to-action rows, source/public parity, discovery links, and SHA-256 verified.`);

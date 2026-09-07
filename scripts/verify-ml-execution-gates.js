@@ -480,28 +480,28 @@ try {
 }
 
 const expectedCounts = {
-  analysis: 29,
-  citation: 341,
+  analysis: 30,
+  citation: 343,
   corehistory: 30,
-  coreplus: 54,
+  coreplus: 55,
   degorgonification: 54,
   'framework-core': 1,
   gorgonification: 134,
   idiomary: 44,
   learnings: 28,
-  methodology: 390,
+  methodology: 394,
   pending: 18,
   'pending-user-authorship': 2,
   polycognate: 24,
   rainbowsol: 3,
-  sabachtan: 34,
+  sabachtan: 35,
   studylist: 38,
 };
 const actualCounts = Object.fromEntries(
   [...entries.reduce((map, entry) => map.set(entry.s, (map.get(entry.s) || 0) + 1), new Map())]
     .sort(([left], [right]) => left.localeCompare(right)),
 );
-if (entries.length !== 1224) fail(`expected 1224 canonical entries and found ${entries.length}`);
+if (entries.length !== 1233) fail(`expected 1233 canonical entries and found ${entries.length}`);
 if (JSON.stringify(actualCounts) !== JSON.stringify(expectedCounts)) {
   fail(`section counts drifted: ${JSON.stringify(actualCounts)}`);
 }
@@ -750,7 +750,7 @@ for (const [id, needles] of Object.entries({
   requireNeedles(one(entries, id).xc, needles, `${id} current integration`);
 }
 
-if (!html.includes('/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js?v=20260905b')) {
+if (!html.includes('/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js?v=20260906-document-continuity')) {
   fail('canonical HTML does not load the rule-hardening addendum');
 }
 if (!html.includes('...MEPHISTODATA_RULE_HARDENING_ADDENDUM')) {
@@ -1389,7 +1389,8 @@ if (validOuroborosFixture) {
   const inventedMethod = {...validOuroborosFixture, steps: ['recover', 'synthesize', 'summarize']};
   if (evaluateRegisterContractFixture(inventedMethod)) fail('hostile improvised-method Ouroboros mutation was accepted');
 }
-if (verifySourceBinding(registerSuite.source, {sha256: `0${registerSuite.source.sha256.slice(1)}`})) {
+const hostileSourceSha = `${registerSuite.source.sha256.startsWith('0') ? '1' : '0'}${registerSuite.source.sha256.slice(1)}`;
+if (verifySourceBinding(registerSuite.source, {sha256: hostileSourceSha})) {
   fail('hostile false source hash mutation was accepted');
 }
 if (verifySourceBinding(registerSuite.source, {path: '../../CHARTER.txt'})) {
@@ -1398,7 +1399,9 @@ if (verifySourceBinding(registerSuite.source, {path: '../../CHARTER.txt'})) {
 if (verifySourceBinding(registerSuite.source, {path: '/tmp/not-allowed-source.md'})) {
   fail('hostile absolute source mutation was accepted');
 }
-if (verifySourceBinding(registerSuite.source, {span_id: 'default_opener', span_sha256: `0${registerSuite.source.spans[0].sha256.slice(1)}`})) {
+const firstSpanSha = registerSuite.source.spans[0].sha256;
+const hostileSpanSha = `${firstSpanSha.startsWith('0') ? '1' : '0'}${firstSpanSha.slice(1)}`;
+if (verifySourceBinding(registerSuite.source, {span_id: 'default_opener', span_sha256: hostileSpanSha})) {
   fail('hostile false span hash mutation was accepted');
 }
 
@@ -1472,7 +1475,7 @@ if (!Array.isArray(mlStarUpdate.prior_amendments)
     || !mlStarUpdate.prior_amendments.includes('feminism-academic-research-gorgonification-gate')) {
   fail('release manifest does not preserve every merged amendment');
 }
-if (mlStarUpdate.canonical_entries !== 1224 || mlStarUpdate.corehistory_entries !== 30) {
+if (mlStarUpdate.canonical_entries !== 1226 || mlStarUpdate.corehistory_entries !== 30) {
   fail('release manifest current canonical or CORE History count is stale');
 }
 if (mlStarUpdate.register_recovery_source_sha256 !== '663970ac0b0a08ae775039e9e6bfa9cbdfa18905cd72c9098d4f35a38b64e1a2') {
@@ -1497,6 +1500,16 @@ if (mlStarUpdate.degorgonified_feminism_source !== 'UPDATE_SOURCES/ML_STAR_UPDAT
     || mlStarUpdate.degorgonified_feminism_source_sha256 !== '2a1c6999efaf472f70d12aedeabf5eaccab130ce2c5b123fa4553921373746a8'
     || mlStarUpdate.degorgonified_feminism_source_sha256 !== sha256(read(mlStarUpdate.degorgonified_feminism_source))) {
   fail('release manifest lacks the September 5 degorgonified-feminism retrieval source binding');
+}
+if (!Array.isArray(mlStarUpdate.later_amendments)
+    || !mlStarUpdate.later_amendments.includes('paginated-document-continuity')
+    || mlStarUpdate.document_continuity_source !== 'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DOCUMENT_CONTINUITY_2026-09-06.md'
+    || mlStarUpdate.document_continuity_source_sha256 !== '5d6f0ddc0a895f99d847497896c9b7ef6d4769a430e0912d3014303a39aa5a87'
+    || mlStarUpdate.document_continuity_source_sha256 !== sha256(read(mlStarUpdate.document_continuity_source))
+    || mlStarUpdate.document_continuity_owner !== 'coreplus-handler-paginated-document-continuity-2026-09-06'
+    || JSON.stringify(mlStarUpdate.document_continuity_behavioral_fixtures)
+      !== JSON.stringify({positive: 4, negative: 13, total: 17})) {
+  fail('release manifest lacks the September 6 paginated-document-continuity binding');
 }
 for (const [relative, expected] of Object.entries(mlStarUpdate.truthful_work_claim_screenshots || {})) {
   if (sha256(readBuffer(relative)) !== expected) fail(`truthful-work-claim screenshot hash drifted: ${relative}`);
@@ -1623,6 +1636,12 @@ if (registerArtifacts['polymyth/methodologylist/mephistodata-register-fixtures.j
       !== sha256(read('UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md'))
     || registerArtifacts['UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md']
       !== sha256(read('UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md'))
+    || registerArtifacts['UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DOCUMENT_CONTINUITY_2026-09-06.md']
+      !== sha256(read('UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DOCUMENT_CONTINUITY_2026-09-06.md'))
+    || registerArtifacts['scripts/fixtures/ml-document-continuity/fixtures.json']
+      !== sha256(read('scripts/fixtures/ml-document-continuity/fixtures.json'))
+    || registerArtifacts['scripts/verify-ml-document-continuity.js']
+      !== sha256(read('scripts/verify-ml-document-continuity.js'))
     || registerArtifacts['UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/b4f6ab5a-4eb3-44d0-943e-41acd52faec9.png']
       !== sha256(readBuffer('UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/b4f6ab5a-4eb3-44d0-943e-41acd52faec9.png'))
     || registerArtifacts['UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/3066e1d8-f6f9-4267-a948-90c076e29f93.png']
@@ -1645,8 +1664,8 @@ if (registerArtifacts['polymyth/methodologylist/mephistodata-register-fixtures.j
       !== sha256(read('scripts/verify-sep5-degorgonified-feminism-base-preservation.py'))
     || registerArtifacts['scripts/fixtures/futureproofing/sep5-degorgonified-feminism-preservation-tampered.json']
       !== sha256(read('scripts/fixtures/futureproofing/sep5-degorgonified-feminism-preservation-tampered.json'))
-    || Object.keys(registerArtifacts).length < 49) {
-  fail('release manifest does not bind the complete September 5 degorgonified-feminism retrieval-enforcement artifact set');
+    || Object.keys(registerArtifacts).length < 84) {
+  fail('release manifest does not bind the complete current ML* artifact set through the September 6 document-continuity amendment');
 }
 
 const mutatedExecution = {...execution, b: execution.b.replace('GATE 9, EXACT-LINE AUDIT.', '')};

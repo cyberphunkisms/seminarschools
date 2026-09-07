@@ -1,0 +1,306 @@
+{
+  "schema": "ml-document-continuity-fixtures-v2",
+  "owner_id": "coreplus-handler-paginated-document-continuity-2026-09-06",
+  "cases": [
+    {
+      "id": "compact-table-kept-whole",
+      "expected": true,
+      "artifact": {
+        "page_count": 8,
+        "rendered_page_count": 8,
+        "inspected_page_count": 8,
+        "actual_final_render": true,
+        "defects": [],
+        "content_cut": false,
+        "blocks": [
+          {"kind": "table", "fits_fresh_page": true, "split": false, "heading_kept": true}
+        ]
+      }
+    },
+    {
+      "id": "necessary-long-table-balanced",
+      "expected": true,
+      "artifact": {
+        "page_count": 12,
+        "rendered_page_count": 12,
+        "inspected_page_count": 12,
+        "actual_final_render": true,
+        "defects": [],
+        "content_cut": false,
+        "blocks": [
+          {"kind": "table", "fits_fresh_page": false, "split": true, "heading_kept": true, "repeated_header": true, "rows_intact": true, "segment_data_rows": [6, 4]}
+        ]
+      }
+    },
+    {
+      "id": "short-list-kept-whole",
+      "expected": true,
+      "artifact": {
+        "page_count": 4,
+        "rendered_page_count": 4,
+        "inspected_page_count": 4,
+        "actual_final_render": true,
+        "defects": [],
+        "content_cut": false,
+        "blocks": [
+          {"kind": "list", "fits_fresh_page": true, "split": false, "heading_kept": true}
+        ]
+      }
+    },
+    {
+      "id": "one-row-opening-fragment",
+      "expected": false,
+      "artifact": {
+        "page_count": 12,
+        "rendered_page_count": 12,
+        "inspected_page_count": 12,
+        "actual_final_render": true,
+        "defects": ["one-row-table-fragment"],
+        "content_cut": false,
+        "blocks": [
+          {"kind": "table", "fits_fresh_page": true, "split": true, "heading_kept": true, "repeated_header": true, "rows_intact": true, "segment_data_rows": [1, 8]}
+        ]
+      }
+    },
+    {
+      "id": "lone-final-row",
+      "expected": false,
+      "artifact": {
+        "page_count": 6,
+        "rendered_page_count": 6,
+        "inspected_page_count": 6,
+        "actual_final_render": true,
+        "defects": ["one-row-table-fragment"],
+        "content_cut": false,
+        "blocks": [
+          {"kind": "table", "fits_fresh_page": false, "split": true, "heading_kept": true, "repeated_header": true, "rows_intact": true, "segment_data_rows": [8, 1]}
+        ]
+      }
+    },
+    {
+      "id": "orphan-heading",
+      "expected": false,
+      "artifact": {
+        "page_count": 3,
+        "rendered_page_count": 3,
+        "inspected_page_count": 3,
+        "actual_final_render": true,
+        "defects": ["orphan-heading"],
+        "content_cut": false,
+        "blocks": [
+          {"kind": "section", "fits_fresh_page": true, "split": true, "heading_kept": false}
+        ]
+      }
+    },
+    {
+      "id": "split-table-row",
+      "expected": false,
+      "artifact": {
+        "page_count": 7,
+        "rendered_page_count": 7,
+        "inspected_page_count": 7,
+        "actual_final_render": true,
+        "defects": ["split-row"],
+        "content_cut": false,
+        "blocks": [
+          {"kind": "table", "fits_fresh_page": false, "split": true, "heading_kept": true, "repeated_header": true, "rows_intact": false, "segment_data_rows": [4, 4]}
+        ]
+      }
+    },
+    {
+      "id": "missing-repeated-header",
+      "expected": false,
+      "artifact": {
+        "page_count": 7,
+        "rendered_page_count": 7,
+        "inspected_page_count": 7,
+        "actual_final_render": true,
+        "defects": ["missing-continuation-context"],
+        "content_cut": false,
+        "blocks": [
+          {"kind": "table", "fits_fresh_page": false, "split": true, "heading_kept": true, "repeated_header": false, "rows_intact": true, "segment_data_rows": [4, 4]}
+        ]
+      }
+    },
+    {
+      "id": "spot-check-only",
+      "expected": false,
+      "artifact": {
+        "page_count": 30,
+        "rendered_page_count": 30,
+        "inspected_page_count": 3,
+        "actual_final_render": true,
+        "defects": [],
+        "content_cut": false,
+        "blocks": []
+      }
+    },
+    {
+      "id": "source-only-no-render",
+      "expected": false,
+      "artifact": {
+        "page_count": 30,
+        "rendered_page_count": 0,
+        "inspected_page_count": 0,
+        "actual_final_render": false,
+        "defects": [],
+        "content_cut": false,
+        "blocks": []
+      }
+    },
+    {
+      "id": "clipped-content",
+      "expected": false,
+      "artifact": {
+        "page_count": 5,
+        "rendered_page_count": 5,
+        "inspected_page_count": 5,
+        "actual_final_render": true,
+        "defects": ["clipping"],
+        "content_cut": false,
+        "blocks": []
+      }
+    },
+    {
+      "id": "unauthorised-content-cut",
+      "expected": false,
+      "artifact": {
+        "page_count": 5,
+        "rendered_page_count": 5,
+        "inspected_page_count": 5,
+        "actual_final_render": true,
+        "defects": [],
+        "content_cut": true,
+        "content_cut_authorised": false,
+        "layout_controls_exhausted": false,
+        "blocks": []
+      }
+    },
+    {
+      "id": "functional-pdf-links-with-visible-fallbacks",
+      "expected": true,
+      "artifact": {
+        "page_count": 35,
+        "rendered_page_count": 35,
+        "inspected_page_count": 35,
+        "actual_final_render": true,
+        "defects": [],
+        "content_cut": false,
+        "blocks": [],
+        "links": {
+          "total_annotations": 574,
+          "external_annotations": 565,
+          "internal_annotations": 9,
+          "standard_uri_actions": 565,
+          "tested_uri_actions": 565,
+          "resolved_internal_destinations": 9,
+          "empty_hitboxes": 0,
+          "displaced_hitboxes": 0,
+          "source_list_urls": 25,
+          "visible_copyable_source_urls": 25,
+          "independent_parsers": ["pypdf", "pymupdf", "poppler"],
+          "delivery_reader_available": false
+        }
+      }
+    },
+    {
+      "id": "annotation-presence-only",
+      "expected": false,
+      "artifact": {
+        "page_count": 2,
+        "rendered_page_count": 2,
+        "inspected_page_count": 2,
+        "actual_final_render": true,
+        "defects": [],
+        "content_cut": false,
+        "blocks": [],
+        "links": {
+          "total_annotations": 4,
+          "external_annotations": 4,
+          "internal_annotations": 0
+        }
+      }
+    },
+    {
+      "id": "displaced-link-hitbox",
+      "expected": false,
+      "artifact": {
+        "page_count": 2,
+        "rendered_page_count": 2,
+        "inspected_page_count": 2,
+        "actual_final_render": true,
+        "defects": [],
+        "content_cut": false,
+        "blocks": [],
+        "links": {
+          "total_annotations": 4,
+          "external_annotations": 4,
+          "internal_annotations": 0,
+          "standard_uri_actions": 4,
+          "tested_uri_actions": 4,
+          "resolved_internal_destinations": 0,
+          "empty_hitboxes": 0,
+          "displaced_hitboxes": 1,
+          "source_list_urls": 0,
+          "visible_copyable_source_urls": 0,
+          "independent_parsers": ["pypdf", "poppler"],
+          "delivery_reader_available": false
+        }
+      }
+    },
+    {
+      "id": "unresolved-internal-destination",
+      "expected": false,
+      "artifact": {
+        "page_count": 6,
+        "rendered_page_count": 6,
+        "inspected_page_count": 6,
+        "actual_final_render": true,
+        "defects": [],
+        "content_cut": false,
+        "blocks": [],
+        "links": {
+          "total_annotations": 3,
+          "external_annotations": 1,
+          "internal_annotations": 2,
+          "standard_uri_actions": 1,
+          "tested_uri_actions": 1,
+          "resolved_internal_destinations": 1,
+          "empty_hitboxes": 0,
+          "displaced_hitboxes": 0,
+          "source_list_urls": 0,
+          "visible_copyable_source_urls": 0,
+          "independent_parsers": ["pypdf", "pymupdf"],
+          "delivery_reader_available": false
+        }
+      }
+    },
+    {
+      "id": "missing-copyable-source-fallback",
+      "expected": false,
+      "artifact": {
+        "page_count": 4,
+        "rendered_page_count": 4,
+        "inspected_page_count": 4,
+        "actual_final_render": true,
+        "defects": [],
+        "content_cut": false,
+        "blocks": [],
+        "links": {
+          "total_annotations": 5,
+          "external_annotations": 5,
+          "internal_annotations": 0,
+          "standard_uri_actions": 5,
+          "tested_uri_actions": 5,
+          "resolved_internal_destinations": 0,
+          "empty_hitboxes": 0,
+          "displaced_hitboxes": 0,
+          "source_list_urls": 5,
+          "visible_copyable_source_urls": 0,
+          "independent_parsers": ["pypdf", "pymupdf"],
+          "delivery_reader_available": false
+        }
+      }
+    }
+  ]
+}

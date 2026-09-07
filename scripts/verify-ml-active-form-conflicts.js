@@ -46,9 +46,12 @@ const ouroborosHandler = oneById('coreplus-handler-ouroborosanalyses');
 const execution = oneById('coreplus-handler-mephistodata-execution-gates-2026-08-26');
 const generation = oneById('coreplus-registry-generation-time-gates');
 
-check('canonical entry count remains 1224', entries.length === 1224);
-check('static methodology count is 390', html.includes('id="secCt">390</span>'));
-check('static citation count is 341', html.includes('id="ct-citation">341</span>'));
+check('canonical entry count is 1233', entries.length === 1233);
+check('static methodology count is 394', html.includes('id="secCt">394</span>'));
+check('static analysis count is 30', html.includes('id="ct-analysis">30</span>'));
+check('static sabachtan count is 35', html.includes('id="ct-sabachtan">35</span>'));
+check('static citation count is 343', html.includes('id="ct-citation">343</span>'));
+check('static coreplus count is 55', html.includes('id="ct-coreplus">55</span>'));
 check('PM17 names the exact default opener', pm17.b.includes("'Mephistodata would say:'"));
 check('PM17 names the exact Bloom opener', pm17.b.includes("'Mephistodata bloomed:'"));
 check('PM17 retains the mandatory opener gate', pm17.b.includes('The opener is mandatory'));
@@ -86,8 +89,8 @@ check('execution owner exposes both host runtime boundaries', execution.b.includ
 check('legacy gate and fixture routes carry August 31 host boundary', generation.xc.includes('CURRENT EXECUTION CONTROL 2026-08-31.') && generation.xc.includes('file presence alone proves no host integration') && addendum.includes('polymyth/methodologylist/mephistodata-register-fixtures.json'));
 
 const failed = checks.filter(result => !result.condition);
-if (checks.length !== 38) {
-  console.error(`ML ACTIVE FORM CONFLICT VERIFICATION FAILED — expected 38 checks and built ${checks.length}`);
+if (checks.length !== 41) {
+  console.error(`ML ACTIVE FORM CONFLICT VERIFICATION FAILED — expected 41 checks and built ${checks.length}`);
   process.exit(1);
 }
 if (failed.length) {
