@@ -1,0 +1,23 @@
+{
+  "stream": "festivals",
+  "run_id": "20260908T135228Z",
+  "date_utc": "2026-09-08",
+  "status": "skipped",
+  "exit_code": 1,
+  "stage": "agent",
+  "failure_kind": "agent-nonzero",
+  "publication_status": "unchanged",
+  "agent_exit_code": 1,
+  "agent_failure_kind": "agent-nonzero",
+  "message": "claude -p exited 1 after 1 attempt(s); automated festivals harvest skipped this run.",
+  "attempt": 1,
+  "attempts": 1,
+  "log_file": "data/harvest-runs/festivals-20260908T135228Z.log",
+  "max_turns": 90,
+  "max_budget_usd": 10.0,
+  "timeout_seconds": 1500,
+  "shard_count": 7,
+  "strict_harvest_failures": false,
+  "harvest_strict": false,
+  "model": "claude-sonnet-4-6"
+}
