@@ -27,14 +27,14 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Setup Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "24.14.0"
           cache: npm
       - name: Setup Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12.13"
           cache: pip
@@ -42,7 +42,7 @@ jobs:
       - name: Install calendar dependencies
         run: python3 -m pip install --disable-pip-version-check --requirement requirements-harvest.txt
       - name: Restore retained parsed-response cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: data/polymythcal-http-cache.json
           key: polymythcal-parsed-http-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
@@ -90,7 +90,7 @@ jobs:
           npm run verify:calendar-data
       - name: Create publication pull request
         if: success()
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: automation/polymythcal-seminars
@@ -118,7 +118,7 @@ jobs:
         run: bash scripts/summarize-harvest-diagnostics.sh seminars
       - name: Save retained parsed-response cache
         if: always() && hashFiles('data/polymythcal-http-cache.json') != ''
-        uses: actions/cache/save@v5
+        uses: actions/cache/save@v6
         with:
           path: data/polymythcal-http-cache.json
           key: polymythcal-parsed-http-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
